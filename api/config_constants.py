@@ -1,5 +1,5 @@
 """
-Application-wide constants for ShowDog Analysis Platform.
+Application-wide constants for VetDict Analysis Platform.
 
 All hardcoded values should be defined here to centralise configuration.
 """

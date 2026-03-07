@@ -179,6 +179,7 @@ a:hover{text-decoration:underline}
       <a class="active" data-view="checker">Symptom Checker</a>
       <a data-view="database">Disease Database</a>
       <a data-view="chat">Diagnostic Chat</a>
+      <a data-view="drugs">Drug Dictionary</a>
     </nav>
   </div>
 </header>
@@ -190,6 +191,7 @@ a:hover{text-decoration:underline}
     <div class="hero-stat"><span class="num" id="statDiseases">0</span><span class="label">疾患数</span></div>
     <div class="hero-stat"><span class="num" id="statSpecies">20</span><span class="label">対応動物種</span></div>
     <div class="hero-stat"><span class="num" id="statSymptoms">0</span><span class="label">症状項目</span></div>
+    <div class="hero-stat"><span class="num" id="statDrugs">84</span><span class="label">薬品数</span></div>
   </div>
 </section>
 
@@ -264,6 +266,27 @@ a:hover{text-decoration:underline}
       </div>
     </div>
   </div>
+
+  <div id="viewDrugs" class="hidden">
+    <div class="card" style="margin-top:24px">
+      <div class="card-header">&#128138; 薬品辞書 / Drug Dictionary</div>
+      <div class="card-body">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+          <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
+            <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)"/>
+          </div>
+          <select id="drugCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;min-width:160px">
+            <option value="">全カテゴリ / All Categories</option>
+          </select>
+          <select id="drugSpeciesFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;min-width:140px">
+            <option value="">全動物種 / All Species</option>
+          </select>
+        </div>
+        <div id="drugCount" style="font-size:.78rem;color:var(--gray-500);margin-bottom:8px"></div>
+        <div id="drugList" class="disease-db-list" style="max-height:600px"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ===== References ===== -->
@@ -305,7 +328,7 @@ a:hover{text-decoration:underline}
 <script>
 const SPECIES = [
   {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:277},
-  {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:200},
+  {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:153},
   {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:531},
   {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:87},
   {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:81},
@@ -315,7 +338,7 @@ const SPECIES = [
   {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:77},
   {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43F}\uFE0F",diseases:64},
   {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F42D}",diseases:57},
-  {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:100},
+  {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:123},
   {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:93},
   {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:93},
   {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:87},
@@ -602,6 +625,8 @@ function setupNavigation(){
       document.getElementById("viewChecker").classList.toggle("hidden", view !== "checker");
       document.getElementById("viewDatabase").classList.toggle("hidden", view !== "database");
       document.getElementById("viewChat").classList.toggle("hidden", view !== "chat");
+      document.getElementById("viewDrugs").classList.toggle("hidden", view !== "drugs");
+      if(view === "drugs" && !drugsLoaded) loadDrugDictionary();
     });
   });
 }
@@ -639,6 +664,104 @@ function addChatMsg(text, type){
   div.innerHTML = text.replace(/\n/g, "<br/>");
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Drug Dictionary
+// ═══════════════════════════════════════════════════════════════
+let drugsLoaded = false;
+let allDrugs = [];
+let drugCategories = {};
+
+function loadDrugDictionary(){
+  const list = document.getElementById("drugList");
+  list.innerHTML = '<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
+  Promise.all([
+    fetch("/api/drugs").then(r=>r.json()),
+    fetch("/api/drug-categories").then(r=>r.json())
+  ]).then(([drugsData, catData]) => {
+    allDrugs = drugsData.drugs || [];
+    drugCategories = drugsData.categories || {};
+    document.getElementById("statDrugs").textContent = allDrugs.length;
+    // Populate category filter
+    const catSelect = document.getElementById("drugCategoryFilter");
+    catSelect.innerHTML = '<option value="">\u5168\u30AB\u30C6\u30B4\u30EA / All</option>';
+    (catData.categories||[]).forEach(c => {
+      if(c.count > 0) catSelect.innerHTML += `<option value="${c.id}">${c.name_ja} (${c.count})</option>`;
+    });
+    // Populate species filter
+    const spSelect = document.getElementById("drugSpeciesFilter");
+    spSelect.innerHTML = '<option value="">\u5168\u52D5\u7269\u7A2E / All</option>';
+    SPECIES.forEach(sp => {
+      spSelect.innerHTML += `<option value="${sp.id}">${sp.name} ${sp.nameEn}</option>`;
+    });
+    drugsLoaded = true;
+    renderDrugList();
+  }).catch(() => {
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--gray-500)">\u8AAD\u307F\u8FBC\u307F\u306B\u5931\u6557\u3057\u307E\u3057\u305F</div>';
+  });
+  document.getElementById("drugSearch").addEventListener("input", renderDrugList);
+  document.getElementById("drugCategoryFilter").addEventListener("change", renderDrugList);
+  document.getElementById("drugSpeciesFilter").addEventListener("change", renderDrugList);
+}
+
+function renderDrugList(){
+  const list = document.getElementById("drugList");
+  const search = (document.getElementById("drugSearch").value||"").toLowerCase();
+  const cat = document.getElementById("drugCategoryFilter").value;
+  const species = document.getElementById("drugSpeciesFilter").value;
+  let filtered = allDrugs;
+  if(cat) filtered = filtered.filter(d => d.category === cat);
+  if(species) filtered = filtered.filter(d => d.species_info && d.species_info[species]);
+  if(search) filtered = filtered.filter(d =>
+    (d.name||"").toLowerCase().includes(search) ||
+    (d.name_ja||"").toLowerCase().includes(search) ||
+    (d.category_ja||"").toLowerCase().includes(search)
+  );
+  document.getElementById("drugCount").textContent = `${filtered.length} / ${allDrugs.length} \u4EF6\u8868\u793A`;
+  if(filtered.length === 0){
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--gray-500)">\u8A72\u5F53\u3059\u308B\u85AC\u54C1\u304C\u3042\u308A\u307E\u305B\u3093</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(d => {
+    const speciesFilter = document.getElementById("drugSpeciesFilter").value;
+    let dosageHtml = "";
+    if(speciesFilter && d.species_info && d.species_info[speciesFilter]){
+      const si = d.species_info[speciesFilter];
+      const safeLabel = si.safe ? '<span style="color:var(--green);font-weight:700">\u2713 \u5B89\u5168</span>' : '<span style="color:var(--red);font-weight:700">\u2717 \u7981\u5FCC</span>';
+      dosageHtml = `<div style="margin-top:4px;font-size:.82rem;padding:6px 10px;background:${si.safe?'#f0fdf4':'#fef2f2'};border-radius:4px">
+        ${safeLabel} | \u6295\u4E0E\u91CF: ${si.dosage_ja||si.dosage||"N/A"}<br/>
+        <span style="color:var(--gray-500)">${si.notes_ja||si.notes||""}</span>
+      </div>`;
+    }
+    const catLabel = drugCategories[d.category] ? drugCategories[d.category].ja : d.category_ja || d.category;
+    return `
+    <div class="disease-db-item" onclick="this.querySelector('.disease-detail')&&this.querySelector('.disease-detail').classList.toggle('open')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="d-name">${d.name} <span class="d-name-ja">${d.name_ja}</span></div>
+        <span style="font-size:.72rem;padding:2px 8px;background:var(--primary-light);color:var(--primary-dark);border-radius:10px">${catLabel}</span>
+      </div>
+      ${dosageHtml}
+      <div class="disease-detail">
+        <dl>
+          <dt>\u7981\u5FCC\u4E8B\u9805</dt><dd>${d.contraindications_ja||""}</dd>
+        </dl>
+        <div style="margin-top:8px">
+          <strong style="font-size:.82rem">\u52D5\u7269\u7A2E\u5225\u60C5\u5831:</strong>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:6px;margin-top:4px">
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{
+              const spName = SPECIES.find(s=>s.id===sp);
+              const label = spName ? spName.name : sp;
+              return `<div style="font-size:.78rem;padding:4px 8px;background:${info.safe?'#f0fdf4':'#fef2f2'};border-radius:4px;border:1px solid ${info.safe?'#bbf7d0':'#fecaca'}">
+                <strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${info.dosage_ja||info.dosage||""}
+                ${info.notes_ja?'<br/><span style="color:var(--gray-500)">'+info.notes_ja+'</span>':''}
+              </div>`;
+            }).join("")}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
 }
 </script>
 </body>
