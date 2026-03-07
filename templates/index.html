@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>RECO2 Dashboard</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="wrap">
+    <header class="top">
+      <div>
+        <h1>RECO2 Dashboard</h1>
+        <p class="muted">k / η / deviation / logs</p>
+      </div>
+      <nav class="nav">
+        <a class="btn" href="/r3">RECO3へ</a>
+      </nav>
+    </header>
+
+    <section class="grid4" id="metrics"></section>
+
+    <section class="card">
+      <h2>API Tester</h2>
+      <div class="row">
+        <textarea id="evalJson" class="ta" rows="10"></textarea>
+        <div class="col">
+          <button class="btn primary" onclick="doEvaluate()">Evaluate</button>
+          <button class="btn" onclick="doPatrol()">Patrol</button>
+          <div class="muted small">feedbackはログ行から session_id を選んで送信</div>
+          <div class="row">
+            <input id="fbSession" class="inp" placeholder="session_id" />
+            <input id="fbDomain" class="inp" placeholder="domain" value="general" />
+            <select id="fbType" class="inp">
+              <option value="good">good</option>
+              <option value="recalculate">recalculate</option>
+              <option value="bad">bad</option>
+            </select>
+          </div>
+          <button class="btn" onclick="doFeedback()">Send Feedback</button>
+        </div>
+      </div>
+      <pre id="apiOut" class="pre"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Session Logs (latest 20)</h2>
+      <div class="tableWrap">
+        <table class="tbl" id="logsTbl">
+          <thead><tr><th>ts</th><th>domain</th><th>D</th><th>T</th><th>ψ</th><th>verdict</th><th>session_id</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+[project]
+name = "reco3"
+version = "3.0.0"
+description = "AI Integrity Control Layer"
+requires-python = ">=3.9"
+dependencies = ["flask>=3.0"]
+
+[project.scripts]
+reco3-app = "app:main"
+reco3-agent = "reco3_agent.cli:main"
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort (import ordering)
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+]
+ignore = [
+    "E501",   # line too long (handled gradually)
+    "E741",   # ambiguous variable name
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["api"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

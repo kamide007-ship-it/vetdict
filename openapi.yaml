@@ -1,0 +1,1015 @@
+openapi: 3.1.0
+info:
+  title: ShowDog Analysis Platform API
+  description: |
+    犬の体型評価・健康管理プラットフォーム API。
+    AI写真/動画解析、5軸スコアリング、遺伝子解析、症状チェック、受診記録管理等を提供。
+  version: 4.1.0
+  contact:
+    url: https://showdog.net
+servers:
+  - url: https://showdog.net
+    description: Production
+  - url: http://localhost:5001
+    description: Development
+
+security:
+  - BearerAuth: []
+  - ApiKeyAuth: []
+
+tags:
+  - name: System
+    description: ヘルスチェック・システム情報
+  - name: Auth
+    description: ユーザー認証・アカウント管理
+  - name: Dogs
+    description: 犬の個体データ管理
+  - name: Analysis
+    description: AI写真/動画解析・スコアリング
+  - name: Health
+    description: 症状チェック・健康管理
+  - name: Genetics
+    description: 遺伝子解析・交配適合性
+  - name: Medical Records
+    description: 受診記録・医療データ
+  - name: PDF Generation
+    description: PDF生成（パスポート・レポート）
+  - name: Stripe
+    description: 決済・サブスクリプション管理
+  - name: Breeds & Diseases
+    description: 犬種・疾患データベース
+  - name: Advanced
+    description: 姿勢推定・ファインチューニング・審査員検証
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Session token from /api/auth/login
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "認証が必要です"
+    Dog:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        breed_id: { type: string }
+        breed_name: { type: string }
+        birth_date: { type: string, format: date }
+        sex: { type: string, enum: [male, female] }
+        weight_kg: { type: number }
+        color: { type: string }
+    AxisScores:
+      type: object
+      properties:
+        skeletal: { type: number, minimum: 0, maximum: 100 }
+        gait: { type: number, minimum: 0, maximum: 100 }
+        muscle: { type: number, minimum: 0, maximum: 100 }
+        coat: { type: number, minimum: 0, maximum: 100 }
+        temperament: { type: number, minimum: 0, maximum: 100 }
+    AnalysisResult:
+      type: object
+      properties:
+        final_score: { type: number }
+        grade: { type: string, enum: [S, A+, A, B+, B, C] }
+        axis_scores:
+          $ref: '#/components/schemas/AxisScores'
+        algorithm_version: { type: string }
+        deterministic: { type: boolean }
+
+  responses:
+    Unauthorized:
+      description: 認証エラー
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    RateLimited:
+      description: レート制限超過
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error: { type: string, example: "Rate limit exceeded" }
+    ServerError:
+      description: サーバーエラー
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+paths:
+  # ── System ──
+  /api/health:
+    get:
+      tags: [System]
+      summary: ヘルスチェック
+      security: []
+      responses:
+        "200":
+          description: システム状態
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: "healthy" }
+                  version: { type: string }
+                  algorithm: { type: object }
+                  ai_providers: { type: object }
+                  db_enabled: { type: boolean }
+                  features: { type: object }
+
+  /api/algorithm:
+    get:
+      tags: [System]
+      summary: アルゴリズム情報取得
+      security: []
+      responses:
+        "200":
+          description: 5軸評価アルゴリズムの詳細
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version: { type: string }
+                  axes: { type: array, items: { type: object } }
+                  weights: { type: object }
+                  grade_thresholds: { type: object }
+
+  /api/validation/run:
+    get:
+      tags: [System]
+      summary: 決定論的スコアリング検証
+      responses:
+        "200":
+          description: 検証結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  passed: { type: boolean }
+                  tests: { type: array, items: { type: object } }
+
+  # ── Auth ──
+  /api/auth/register:
+    post:
+      tags: [Auth]
+      summary: ユーザー登録
+      description: "Rate limit: 3/hour"
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, name]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string, minLength: 8 }
+                name: { type: string }
+                security_question: { type: string }
+                security_answer: { type: string }
+      responses:
+        "200":
+          description: 登録成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  token: { type: string }
+                  user: { type: object }
+        "400": { $ref: '#/components/responses/Unauthorized' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/auth/login:
+    post:
+      tags: [Auth]
+      summary: ログイン
+      description: "Rate limit: 10/hour"
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        "200":
+          description: ログイン成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  token: { type: string }
+                  user: { type: object }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/auth/logout:
+    post:
+      tags: [Auth]
+      summary: ログアウト
+      responses:
+        "200":
+          description: ログアウト成功
+
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: 現在のユーザー情報取得
+      responses:
+        "200":
+          description: ユーザー情報
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user: { type: object }
+                  subscription_plan: { type: string }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+
+  /api/auth/forgot-password:
+    post:
+      tags: [Auth]
+      summary: パスワードリセットリクエスト
+      description: "Rate limit: 3/hour"
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+      responses:
+        "200": { description: セキュリティ質問を返却 }
+
+  /api/auth/security-question:
+    post:
+      tags: [Auth]
+      summary: セキュリティ質問の回答検証
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                answer: { type: string }
+      responses:
+        "200": { description: 検証結果 }
+
+  /api/auth/reset-password:
+    post:
+      tags: [Auth]
+      summary: パスワードリセット実行
+      description: "Rate limit: 3/hour"
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                new_password: { type: string, minLength: 8 }
+      responses:
+        "200": { description: リセット成功 }
+
+  # ── Dogs ──
+  /api/dogs:
+    get:
+      tags: [Dogs]
+      summary: 登録犬一覧取得
+      responses:
+        "200":
+          description: 犬一覧
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dogs:
+                    type: array
+                    items: { $ref: '#/components/schemas/Dog' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Dogs]
+      summary: 犬の新規登録
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, breed_id]
+              properties:
+                name: { type: string }
+                breed_id: { type: string }
+                birth_date: { type: string, format: date }
+                sex: { type: string, enum: [male, female] }
+                weight_kg: { type: number }
+                color: { type: string }
+      responses:
+        "200":
+          description: 登録成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  dog: { $ref: '#/components/schemas/Dog' }
+
+  /api/dogs/{dog_id}:
+    get:
+      tags: [Dogs]
+      summary: 犬の詳細取得
+      parameters:
+        - name: dog_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: 犬の詳細
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Dog' }
+    put:
+      tags: [Dogs]
+      summary: 犬の情報更新
+      parameters:
+        - name: dog_id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Dog' }
+      responses:
+        "200": { description: 更新成功 }
+    delete:
+      tags: [Dogs]
+      summary: 犬の削除
+      parameters:
+        - name: dog_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: 削除成功 }
+
+  /api/dogs/{dog_id}/analyses:
+    get:
+      tags: [Dogs]
+      summary: 犬の解析履歴取得
+      parameters:
+        - name: dog_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: 解析一覧
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  analyses: { type: array, items: { type: object } }
+
+  # ── Analysis ──
+  /api/pre-analyze-photo:
+    post:
+      tags: [Analysis]
+      summary: 写真プレ解析
+      description: "写真をアップロードして事前解析。Rate limit: 20/hour"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: JPEG/PNG/WebP/HEIC (max 10MB)
+      responses:
+        "200":
+          description: プレ解析結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  pre_analysis: { type: object }
+        "400": { description: ファイル形式エラー }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/pre-analyze-video:
+    post:
+      tags: [Analysis]
+      summary: 動画プレ解析
+      description: "動画をアップロードして事前解析。Rate limit: 10/hour"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                video:
+                  type: string
+                  format: binary
+                  description: MP4/WebM/AVI (max 50MB)
+      responses:
+        "200":
+          description: プレ解析結果
+        "400": { description: ファイル形式エラー }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/analyze-comprehensive:
+    post:
+      tags: [Analysis]
+      summary: 総合解析（5軸スコアリング）
+      description: |
+        写真/動画のプレ解析結果と犬の情報を使って5軸総合スコアリングを実行。
+        Algorithm-first: 決定論的アルゴリズムが先にスコアを算出し、AIが補正。
+        Rate limit: 10/hour
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [breed_id, age_years]
+              properties:
+                breed_id: { type: string, example: "labrador_retriever" }
+                age_years: { type: number, example: 3.5 }
+                sex: { type: string, enum: [male, female] }
+                weight_kg: { type: number }
+                photo_analysis: { type: object }
+                video_analysis: { type: object }
+                dog_id: { type: integer }
+      responses:
+        "200":
+          description: 総合解析結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  result: { $ref: '#/components/schemas/AnalysisResult' }
+                  analysis_id: { type: integer }
+        "429": { $ref: '#/components/responses/RateLimited' }
+
+  /api/analyze-comprehensive-stream:
+    post:
+      tags: [Analysis]
+      summary: 総合解析（SSEストリーミング）
+      description: Server-Sent Events でリアルタイムに解析進捗を配信
+      responses:
+        "200":
+          description: SSE stream
+          content:
+            text/event-stream: {}
+
+  /api/analyze-with-image:
+    post:
+      tags: [Analysis]
+      summary: 画像付き簡易解析
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image: { type: string, format: binary }
+                breed_id: { type: string }
+                age_years: { type: number }
+      responses:
+        "200": { description: 解析結果 }
+
+  /api/hybrid-score:
+    post:
+      tags: [Analysis]
+      summary: ハイブリッドスコアリング
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200": { description: ハイブリッドスコア結果 }
+
+  /api/analyses/{analysis_id}:
+    get:
+      tags: [Analysis]
+      summary: 解析結果詳細取得
+      parameters:
+        - name: analysis_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: 解析詳細 }
+
+  /api/analyses/recent:
+    get:
+      tags: [Analysis]
+      summary: 最近の解析一覧
+      responses:
+        "200": { description: 最近の解析リスト }
+
+  # ── Health ──
+  /api/analyze-symptoms:
+    post:
+      tags: [Health]
+      summary: 症状解析（類症鑑別）
+      description: "42+症状から43疾患の鑑別候補を算出。Rate limit: 20/hour"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                symptoms:
+                  type: array
+                  items: { type: string }
+                  example: ["vomiting", "lethargy", "loss_of_appetite"]
+                breed_id: { type: string }
+                age_years: { type: number }
+      responses:
+        "200":
+          description: 鑑別結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  candidates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        disease_name: { type: string }
+                        score: { type: number }
+                        severity: { type: string }
+
+  # ── Genetics ──
+  /api/genetic-scoring/breeding-compatibility:
+    post:
+      tags: [Genetics]
+      summary: 交配適合性評価
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sire_breed: { type: string }
+                dam_breed: { type: string }
+                sire_health: { type: object }
+                dam_health: { type: object }
+      responses:
+        "200": { description: 適合性スコア }
+
+  /api/genetic-scoring/coi:
+    post:
+      tags: [Genetics]
+      summary: 近交係数（COI）計算
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pedigree: { type: object }
+      responses:
+        "200": { description: COI計算結果 }
+
+  /api/genetic-test/analyze:
+    post:
+      tags: [Genetics]
+      summary: 遺伝子検査結果解析
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                test_results: { type: object }
+                breed_id: { type: string }
+      responses:
+        "200": { description: 遺伝子解析結果 }
+
+  # ── Medical Records ──
+  /api/save-medical-visit:
+    post:
+      tags: [Medical Records]
+      summary: 受診記録保存（60+フィールド）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dog_id: { type: integer }
+                visit_date: { type: string, format: date }
+                chief_complaint: { type: string }
+                temperature: { type: number }
+                weight_kg: { type: number }
+                heart_rate: { type: integer }
+                respiratory_rate: { type: integer }
+      responses:
+        "200": { description: 保存成功 }
+
+  /api/medical-visits/{dog_id}:
+    get:
+      tags: [Medical Records]
+      summary: 犬の受診記録一覧
+      parameters:
+        - name: dog_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: 受診記録一覧 }
+
+  /api/medical-visit/{visit_id}:
+    get:
+      tags: [Medical Records]
+      summary: 受診記録詳細
+      parameters:
+        - name: visit_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: 受診記録詳細 }
+
+  /api/medical-visit/{visit_id}/pdf:
+    get:
+      tags: [Medical Records]
+      summary: 受診記録PDF生成
+      parameters:
+        - name: visit_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: PDFファイル
+          content:
+            application/pdf: {}
+
+  /api/medical-visit/{visit_id}/preview:
+    get:
+      tags: [Medical Records]
+      summary: 受診記録プレビュー
+      parameters:
+        - name: visit_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: HTMLプレビュー }
+
+  # ── PDF Generation ──
+  /api/generate-passport-pdf:
+    post:
+      tags: [PDF Generation]
+      summary: 国際ペットパスポートPDF生成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dog_id: { type: integer }
+                owner_info: { type: object }
+                vaccinations: { type: array, items: { type: object } }
+      responses:
+        "200":
+          description: PDFファイル
+          content:
+            application/pdf: {}
+
+  /api/generate-maff-export-pdf:
+    post:
+      tags: [PDF Generation]
+      summary: 農水省輸出検疫PDF生成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200":
+          content:
+            application/pdf: {}
+
+  /api/generate-health-report-pdf:
+    post:
+      tags: [PDF Generation]
+      summary: 健康レポートPDF生成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200":
+          content:
+            application/pdf: {}
+
+  # ── Stripe ──
+  /api/stripe/create-checkout-session:
+    post:
+      tags: [Stripe]
+      summary: Stripeチェックアウトセッション作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [plan]
+              properties:
+                plan: { type: string, enum: [standard, pro, max] }
+                region: { type: string, enum: [JP, US], default: JP }
+      responses:
+        "200":
+          description: チェックアウトURL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  checkout_url: { type: string, format: uri }
+        "503": { description: Stripe未設定 }
+
+  /api/stripe/webhook:
+    post:
+      tags: [Stripe]
+      summary: Stripe Webhook受信
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200": { description: 処理成功 }
+
+  /api/stripe/subscription-status:
+    get:
+      tags: [Stripe]
+      summary: サブスクリプション状態取得
+      responses:
+        "200":
+          description: 現在のプラン
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plan: { type: string, enum: [free, standard, pro, max] }
+                  stripe_available: { type: boolean }
+
+  # ── Breeds & Diseases ──
+  /api/breeds:
+    get:
+      tags: [Breeds & Diseases]
+      summary: 犬種一覧取得
+      security: []
+      responses:
+        "200":
+          description: 犬種一覧
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  breeds: { type: array, items: { type: object } }
+
+  /api/breeds/{breed_id}:
+    get:
+      tags: [Breeds & Diseases]
+      summary: 犬種詳細取得
+      security: []
+      parameters:
+        - name: breed_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: 犬種詳細 }
+
+  /api/diseases:
+    get:
+      tags: [Breeds & Diseases]
+      summary: 疾患一覧取得
+      security: []
+      responses:
+        "200":
+          description: 疾患データベース
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  diseases: { type: array, items: { type: object } }
+
+  # ── Advanced ──
+  /api/judge-validation/compute:
+    post:
+      tags: [Advanced]
+      summary: 審査員検証スコア計算
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200": { description: 検証スコア }
+
+  /api/growth-prediction/predict:
+    post:
+      tags: [Advanced]
+      summary: 成長予測（3モデル）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                breed_id: { type: string }
+                current_age_months: { type: integer }
+                current_weight_kg: { type: number }
+                sex: { type: string }
+      responses:
+        "200": { description: 成長予測結果 }
+
+  /api/pose-estimation/analyze:
+    post:
+      tags: [Advanced]
+      summary: 3D姿勢推定（17キーポイント）
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image: { type: string, format: binary }
+      responses:
+        "200": { description: 骨格解析結果 }
+
+  /api/pose-estimation/analyze-gait:
+    post:
+      tags: [Advanced]
+      summary: 歩様解析
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                video: { type: string, format: binary }
+      responses:
+        "200": { description: 歩様解析結果 }
+
+  /api/finetuning/models:
+    get:
+      tags: [Advanced]
+      summary: ファインチューニングモデル一覧
+      responses:
+        "200": { description: モデル一覧 }
+
+  /api/finetuning/evaluate:
+    post:
+      tags: [Advanced]
+      summary: モデル評価
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200": { description: 評価結果 }
+
+  /api/cycle/status:
+    get:
+      tags: [System]
+      summary: キャリブレーションサイクル状態
+      responses:
+        "200": { description: サイクル状態 }
+
+  /api/cycle/run:
+    post:
+      tags: [System]
+      summary: キャリブレーション実行
+      responses:
+        "200": { description: 実行結果 }
+
+  /api/cycle/calibration:
+    get:
+      tags: [System]
+      summary: キャリブレーション情報取得
+      responses:
+        "200": { description: キャリブレーション情報 }
+
+  /api/cycle/disease-risk/{breed_id}:
+    get:
+      tags: [System]
+      summary: 犬種別疾患リスク取得
+      parameters:
+        - name: breed_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: 疾患リスク情報 }
+
+  # ── RECO2/RECO3 Internal ──
+  /api/evaluate:
+    post:
+      tags: [System]
+      summary: RECO2 ペイロード評価（内部）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200": { description: 評価結果 }
+
+  /api/feedback:
+    post:
+      tags: [System]
+      summary: RECO2 フィードバック記録（内部）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200": { description: 記録成功 }
+
+  /api/r3/chat:
+    post:
+      tags: [System]
+      summary: RECO3 チャット（内部）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt: { type: string }
+                domain: { type: string }
+                max_tokens: { type: integer, default: 1024 }
+      responses:
+        "200": { description: チャット応答 }
