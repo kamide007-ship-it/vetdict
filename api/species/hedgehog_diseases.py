@@ -1,68 +1,906 @@
-"""hedgehog_diseases.py – ハリネズミの一般的な疾患と鑑別診断
+"""hedgehog_diseases.py – ハリネズミの疾患データベースと鑑別診断
 
-このモジュールではハリネズミに多く見られる代表的な疾患を少数サンプルとして示し、
-与えられた症状から鑑別診断を行う簡易エンジンを提供します。実際の診断は獣医師の
-判断を必要とし、本データは教育目的の参考情報です。
-
-各疾患は症状リストと推奨検査を持ち、`analyze_symptoms` 関数を通じて症状リスト
-から一致度に基づいた候補リストを返します。詳細な評価ロジックは `helpers.py` に
-定義された `analyze_symptoms_generic` を使用しています。
+ハリネズミに多く見られる60以上の疾患を網羅し、与えられた症状から鑑別診断を行う
+簡易エンジンを提供します。実際の診断は獣医師の判断を必要とし、本データは教育
+目的の参考情報です。
 """
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
-from .helpers import analyze_symptoms_generic, ADVICE
+from .helpers import ADVICE, analyze_symptoms_generic
 
 
-# シンボリック症状名の定義
-SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
-    "anorexia": {"ja": "食欲不振", "en": "Anorexia"},
-    "diarrhea": {"ja": "下痢", "en": "Diarrhea"},
-    "weight_loss": {"ja": "体重減少", "en": "Weight loss"},
-    "drooling": {"ja": "流涎", "en": "Drooling"},
-    "lethargy": {"ja": "無気力", "en": "Lethargy"},
-    "weakness": {"ja": "衰弱", "en": "Weakness"},
-}
-
-# 疾患データベース
-DISEASES: List[Dict] = [
+DISEASES: List[Dict[str, Any]] = [
+    # ──────────────────────────────────────────────
+    # Dermatological
+    # ──────────────────────────────────────────────
     {
-        "name": "サルモネラ症",
-        "name_en": "Salmonellosis",
-        "symptoms": ["anorexia", "diarrhea", "lethargy"],
-        "description": "細菌感染による消化器症状と全身状態の悪化を引き起こす感染症。",
-        "severity": "moderate",
-        "recommended_tests": ["糞便培養", "血液検査"],
-        # 共通フォーマットに合わせた追加情報
-        "name_ja": "サルモネラ症",
-        "description_ja": "細菌感染による消化器症状と全身状態の悪化を引き起こす感染症。",
-        "urgency": "medium",
+        "name": "Mite Infestation (Caparinia)",
+        "name_ja": "疥癬ダニ感染症（カパリニア）",
+        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability"},
+        "description": "Caparinia tripilis mites are the most common ectoparasite in hedgehogs, causing intense itching and quill loss.",
+        "description_ja": "ハリネズミに最も多い外部寄生虫であるカパリニアダニによる感染症で、強い痒みと針の脱落を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["skin_scraping", "microscopy", "physical_exam"],
     },
     {
-        "name": "口内炎",
-        "name_en": "Stomatitis",
-        "symptoms": ["drooling", "anorexia", "weight_loss"],
-        "description": "口腔内の炎症により摂食不良や体重減少を招く疾患。",
-        "severity": "mild",
-        "recommended_tests": ["口腔内検査", "血液検査"],
-        "name_ja": "口内炎",
-        "description_ja": "口腔内の炎症により摂食不良や体重減少を招く疾患。",
+        "name": "Quilling (Physiological)",
+        "name_ja": "クイリング（生理的針交換）",
+        "symptoms": {"quill_loss", "new_quill_growth", "irritability"},
+        "description": "Normal shedding and replacement of juvenile quills in young hedgehogs, typically occurring at 6-12 weeks of age.",
+        "description_ja": "幼若ハリネズミに見られる正常な針の生え変わりで、通常生後6〜12週に起こります。",
         "urgency": "low",
+        "recommended_tests": ["physical_exam"],
+    },
+    {
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症",
+        "symptoms": {"quill_loss", "flaky_skin", "crusting", "skin_lesions", "alopecia"},
+        "description": "Fungal infection caused by Trichophyton or Microsporum species, producing crusty skin lesions and quill loss.",
+        "description_ja": "トリコフィトンやミクロスポルムによる真菌感染症で、痂皮を伴う皮膚病変と針の脱落を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["fungal_culture", "skin_scraping", "woods_lamp"],
+    },
+    {
+        "name": "Dry Skin",
+        "name_ja": "乾燥性皮膚炎",
+        "symptoms": {"flaky_skin", "scratching", "dull_quills"},
+        "description": "Common condition often caused by low humidity, excessive bathing, or poor diet.",
+        "description_ja": "低湿度、過度な入浴、不適切な食事などにより起こる一般的な皮膚の乾燥です。",
+        "urgency": "low",
+        "recommended_tests": ["physical_exam", "husbandry_review"],
+    },
+    {
+        "name": "Skin Abscess",
+        "name_ja": "皮膚膿瘍",
+        "symptoms": {"swelling", "pain", "discharge", "lethargy", "fever"},
+        "description": "Localized bacterial infection forming a pocket of pus, often from bite wounds or quill injuries.",
+        "description_ja": "咬傷や針の損傷から生じることが多い、膿の溜まった限局性の細菌感染症です。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "culture_sensitivity", "cytology"],
+    },
+    {
+        "name": "Cutaneous Squamous Cell Carcinoma",
+        "name_ja": "皮膚扁平上皮癌",
+        "symptoms": {"skin_mass", "ulcerated_lesion", "quill_loss", "weight_loss"},
+        "description": "Malignant skin tumor that can appear as an ulcerated or raised mass on the skin surface.",
+        "description_ja": "皮膚表面に潰瘍性またな隆起性の腫瘤として現れる悪性皮膚腫瘍です。",
+        "urgency": "high",
+        "recommended_tests": ["biopsy", "histopathology", "radiography"],
+    },
+    {
+        "name": "Dermatitis (Bacterial)",
+        "name_ja": "細菌性皮膚炎",
+        "symptoms": {"skin_lesions", "redness", "discharge", "scratching", "crusting"},
+        "description": "Bacterial skin infection causing inflammation, often secondary to mite infestation or trauma.",
+        "description_ja": "ダニ感染や外傷に続発することが多い、細菌による皮膚の炎症です。",
+        "urgency": "moderate",
+        "recommended_tests": ["skin_scraping", "culture_sensitivity", "cytology"],
+    },
+    # ──────────────────────────────────────────────
+    # Oncological
+    # ──────────────────────────────────────────────
+    {
+        "name": "Oral Squamous Cell Carcinoma",
+        "name_ja": "口腔扁平上皮癌",
+        "symptoms": {"oral_mass", "drooling", "appetite_loss", "weight_loss", "bloody_mouth", "facial_swelling"},
+        "description": "Highly prevalent malignant tumor of the oral cavity in hedgehogs, causing difficulty eating and drooling.",
+        "description_ja": "ハリネズミに非常に多い口腔内の悪性腫瘍で、摂食困難や流涎を引き起こします。",
+        "urgency": "high",
+        "recommended_tests": ["oral_exam", "biopsy", "radiography", "ct_scan"],
+    },
+    {
+        "name": "Mammary Gland Tumor",
+        "name_ja": "乳腺腫瘍",
+        "symptoms": {"mammary_mass", "mammary_discharge", "swelling", "weight_loss", "lethargy"},
+        "description": "Common neoplasia in female hedgehogs; can be benign or malignant with potential for metastasis.",
+        "description_ja": "雌のハリネズミに多い腫瘍で、良性・悪性の両方があり転移の可能性があります。",
+        "urgency": "high",
+        "recommended_tests": ["fine_needle_aspirate", "biopsy", "radiography", "ultrasound"],
+    },
+    {
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "symptoms": {"weight_loss", "appetite_loss", "lethargy", "lymph_node_enlargement", "splenomegaly"},
+        "description": "Systemic cancer of the lymphatic system; one of the more common neoplasias in hedgehogs.",
+        "description_ja": "リンパ系の全身性腫瘍で、ハリネズミに比較的多く見られる腫瘍の一つです。",
+        "urgency": "high",
+        "recommended_tests": ["blood_work", "fine_needle_aspirate", "biopsy", "radiography", "ultrasound"],
+    },
+    {
+        "name": "Uterine Adenocarcinoma",
+        "name_ja": "子宮腺癌",
+        "symptoms": {"vaginal_bleeding", "abdominal_distension", "weight_loss", "lethargy", "appetite_loss"},
+        "description": "Malignant tumor of the uterus, very common in intact female hedgehogs over 3 years old.",
+        "description_ja": "子宮の悪性腫瘍で、3歳以上の未避妊の雌ハリネズミに非常に多く見られます。",
+        "urgency": "high",
+        "recommended_tests": ["ultrasound", "radiography", "blood_work", "histopathology"],
+    },
+    {
+        "name": "Fibrosarcoma",
+        "name_ja": "線維肉腫",
+        "symptoms": {"skin_mass", "rapid_growth", "weight_loss", "lethargy"},
+        "description": "Aggressive malignant tumor arising from connective tissue, often on the limbs or body wall.",
+        "description_ja": "結合組織から発生する悪性腫瘍で、四肢や体壁に多く見られます。",
+        "urgency": "high",
+        "recommended_tests": ["biopsy", "histopathology", "radiography"],
+    },
+    {
+        "name": "Mast Cell Tumor",
+        "name_ja": "肥満細胞腫",
+        "symptoms": {"skin_mass", "swelling", "redness", "ulcerated_lesion"},
+        "description": "Neoplasia of mast cells that can present as cutaneous nodules; may be locally aggressive.",
+        "description_ja": "皮膚の結節として現れる肥満細胞の腫瘍で、局所的に悪性化することがあります。",
+        "urgency": "high",
+        "recommended_tests": ["fine_needle_aspirate", "biopsy", "histopathology"],
+    },
+    {
+        "name": "Hemangiosarcoma",
+        "name_ja": "血管肉腫",
+        "symptoms": {"lethargy", "weakness", "pale_mucous_membranes", "abdominal_distension", "collapse"},
+        "description": "Aggressive vascular tumor that can cause internal bleeding; often affects the spleen or liver.",
+        "description_ja": "脾臓や肝臓に多い血管由来の悪性腫瘍で、内出血を引き起こすことがあります。",
+        "urgency": "emergency",
+        "recommended_tests": ["ultrasound", "blood_work", "radiography", "histopathology"],
+    },
+    {
+        "name": "Sebaceous Gland Adenoma",
+        "name_ja": "皮脂腺腫",
+        "symptoms": {"skin_mass", "slow_growth"},
+        "description": "Benign tumor of the sebaceous glands presenting as a small, slow-growing cutaneous mass.",
+        "description_ja": "皮脂腺から発生する良性腫瘍で、小さくゆっくりと成長する皮膚腫瘤です。",
+        "urgency": "low",
+        "recommended_tests": ["fine_needle_aspirate", "biopsy"],
+    },
+    # ──────────────────────────────────────────────
+    # Gastrointestinal
+    # ──────────────────────────────────────────────
+    {
+        "name": "Obesity",
+        "name_ja": "肥満",
+        "symptoms": {"weight_gain", "inability_to_curl", "decreased_activity", "fatty_deposits"},
+        "description": "Extremely common in captive hedgehogs due to overfeeding and insufficient exercise; predisposes to hepatic lipidosis.",
+        "description_ja": "過食と運動不足による飼育下のハリネズミに非常に多い状態で、肝リピドーシスの素因となります。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "blood_work", "dietary_review"],
+    },
+    {
+        "name": "Diarrhea (Non-specific)",
+        "name_ja": "下痢（非特異的）",
+        "symptoms": {"diarrhea", "dehydration", "appetite_loss", "lethargy"},
+        "description": "Loose or watery stools caused by dietary changes, stress, infection, or parasites.",
+        "description_ja": "食事の変更、ストレス、感染症、寄生虫などによる軟便や水様便です。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_exam", "fecal_culture", "blood_work"],
+    },
+    {
+        "name": "Gastrointestinal Foreign Body",
+        "name_ja": "消化管内異物",
+        "symptoms": {"vomiting", "appetite_loss", "lethargy", "abdominal_pain", "constipation"},
+        "description": "Ingestion of indigestible material causing obstruction; hedgehogs may chew on cage bedding or rubber items.",
+        "description_ja": "ケージの床材やゴム製品を噛むことで起こる消化管閉塞です。",
+        "urgency": "high",
+        "recommended_tests": ["radiography", "ultrasound", "physical_exam"],
+    },
+    {
+        "name": "Hepatic Lipidosis",
+        "name_ja": "肝リピドーシス（脂肪肝）",
+        "symptoms": {"appetite_loss", "lethargy", "jaundice", "weight_loss", "hepatomegaly"},
+        "description": "Fatty liver disease common in obese hedgehogs or those that stop eating; can be life-threatening.",
+        "description_ja": "肥満や食欲不振のハリネズミに多い脂肪肝で、致死的になることがあります。",
+        "urgency": "high",
+        "recommended_tests": ["blood_work", "liver_enzymes", "ultrasound", "liver_biopsy"],
+    },
+    {
+        "name": "Enteritis",
+        "name_ja": "腸炎",
+        "symptoms": {"diarrhea", "bloody_stool", "appetite_loss", "dehydration", "abdominal_pain", "lethargy"},
+        "description": "Inflammation of the intestinal tract caused by bacteria, viruses, or parasites.",
+        "description_ja": "細菌、ウイルス、寄生虫による腸管の炎症です。",
+        "urgency": "high",
+        "recommended_tests": ["fecal_exam", "fecal_culture", "blood_work", "radiography"],
+    },
+    {
+        "name": "Colitis",
+        "name_ja": "大腸炎",
+        "symptoms": {"diarrhea", "mucoid_stool", "straining_to_defecate", "bloody_stool"},
+        "description": "Inflammation of the large intestine causing mucoid or bloody diarrhea.",
+        "description_ja": "粘液性または血液性の下痢を引き起こす大腸の炎症です。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_exam", "fecal_culture", "blood_work"],
+    },
+    {
+        "name": "Rectal Prolapse",
+        "name_ja": "直腸脱",
+        "symptoms": {"tissue_protruding_from_anus", "straining_to_defecate", "bloody_stool", "lethargy"},
+        "description": "Protrusion of rectal tissue through the anus, often associated with enteritis or straining.",
+        "description_ja": "腸炎やいきみに伴う直腸組織の肛門からの脱出です。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "fecal_exam", "radiography"],
+    },
+    # ──────────────────────────────────────────────
+    # Dental
+    # ──────────────────────────────────────────────
+    {
+        "name": "Periodontal Disease",
+        "name_ja": "歯周病",
+        "symptoms": {"bad_breath", "drooling", "appetite_loss", "tartar_buildup", "tooth_loss", "facial_swelling"},
+        "description": "Very common in hedgehogs over 2 years old; accumulation of plaque and tartar leading to gum disease and tooth loss.",
+        "description_ja": "2歳以上のハリネズミに非常に多く、歯垢・歯石の蓄積により歯肉炎や歯の脱落を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["oral_exam", "dental_radiography", "blood_work"],
+    },
+    {
+        "name": "Gingivitis",
+        "name_ja": "歯肉炎",
+        "symptoms": {"red_gums", "bad_breath", "drooling", "appetite_loss"},
+        "description": "Inflammation of the gums, often an early sign of periodontal disease.",
+        "description_ja": "歯肉の炎症で、歯周病の初期症状であることが多いです。",
+        "urgency": "moderate",
+        "recommended_tests": ["oral_exam", "dental_radiography"],
+    },
+    {
+        "name": "Tooth Root Abscess",
+        "name_ja": "歯根膿瘍",
+        "symptoms": {"facial_swelling", "appetite_loss", "drooling", "pain", "bad_breath"},
+        "description": "Infection at the root of a tooth causing facial swelling and pain.",
+        "description_ja": "歯根部の感染症で、顔面の腫脹と疼痛を引き起こします。",
+        "urgency": "high",
+        "recommended_tests": ["oral_exam", "dental_radiography", "culture_sensitivity"],
+    },
+    {
+        "name": "Dental Tartar",
+        "name_ja": "歯石",
+        "symptoms": {"tartar_buildup", "bad_breath", "red_gums"},
+        "description": "Accumulation of hardened plaque on teeth; very common in pet hedgehogs fed soft diets.",
+        "description_ja": "歯面への�ite硬化した歯垢の蓄積で、軟らかい食事を与えられたハリネズミに多いです。",
+        "urgency": "low",
+        "recommended_tests": ["oral_exam", "dental_radiography"],
+    },
+    # ──────────────────────────────────────────────
+    # Respiratory
+    # ──────────────────────────────────────────────
+    {
+        "name": "Pneumonia",
+        "name_ja": "肺炎",
+        "symptoms": {"nasal_discharge", "labored_breathing", "lethargy", "appetite_loss", "sneezing", "coughing"},
+        "description": "Bacterial or fungal infection of the lungs; can be life-threatening if untreated.",
+        "description_ja": "細菌または真菌による肺の感染症で、未治療では致命的になりえます。",
+        "urgency": "high",
+        "recommended_tests": ["radiography", "blood_work", "culture_sensitivity", "tracheal_wash"],
+    },
+    {
+        "name": "Upper Respiratory Infection",
+        "name_ja": "上部気道感染症",
+        "symptoms": {"nasal_discharge", "sneezing", "labored_breathing", "lethargy", "appetite_loss"},
+        "description": "Infection of the nasal passages and upper airways, often bacterial in origin.",
+        "description_ja": "鼻腔および上気道の感染症で、多くは細菌性です。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "radiography", "nasal_culture"],
+    },
+    {
+        "name": "Mycobacteriosis (Pulmonary)",
+        "name_ja": "マイコバクテリア症（肺型）",
+        "symptoms": {"weight_loss", "labored_breathing", "coughing", "lethargy", "appetite_loss"},
+        "description": "Mycobacterial infection that can affect the lungs and other organs; zoonotic potential.",
+        "description_ja": "肺や他臓器に影響するマイコバクテリア感染症で、人獣共通感染症の可能性があります。",
+        "urgency": "high",
+        "recommended_tests": ["radiography", "acid_fast_staining", "pcr", "biopsy"],
+    },
+    # ──────────────────────────────────────────────
+    # Neurological
+    # ──────────────────────────────────────────────
+    {
+        "name": "Wobbly Hedgehog Syndrome (WHS)",
+        "name_ja": "ふらつき症候群（WHS）",
+        "symptoms": {"ataxia", "hindlimb_weakness", "muscle_wasting", "falling_over", "progressive_paralysis", "weight_loss"},
+        "description": "Progressive demyelinating disease unique to hedgehogs causing progressive paralysis; genetic in origin with no cure.",
+        "description_ja": "ハリネズミ特有の進行性脱髄疾患で、後肢の麻痺から全身へ進行します。遺伝性で治療法はありません。",
+        "urgency": "high",
+        "recommended_tests": ["neurological_exam", "physical_exam", "histopathology_postmortem"],
+    },
+    {
+        "name": "Vestibular Disease",
+        "name_ja": "前庭疾患",
+        "symptoms": {"head_tilt", "circling", "ataxia", "nystagmus", "falling_over"},
+        "description": "Inner ear or central nervous system disorder causing loss of balance and head tilt.",
+        "description_ja": "内耳または中枢神経系の障害により平衡感覚の喪失と斜頸を引き起こします。",
+        "urgency": "high",
+        "recommended_tests": ["neurological_exam", "otoscopic_exam", "radiography", "ct_scan"],
+    },
+    {
+        "name": "Seizures",
+        "name_ja": "てんかん発作",
+        "symptoms": {"seizures", "collapse", "disorientation", "paddling", "lethargy"},
+        "description": "Involuntary neurological episodes that can result from toxins, metabolic disease, brain tumors, or WHS.",
+        "description_ja": "毒素、代謝性疾患、脳腫瘍、WHSなどが原因で起こる不随意的な神経学的発作です。",
+        "urgency": "emergency",
+        "recommended_tests": ["blood_work", "neurological_exam", "radiography", "ct_scan"],
+    },
+    {
+        "name": "Brain Tumor",
+        "name_ja": "脳腫瘍",
+        "symptoms": {"seizures", "circling", "head_tilt", "behavioral_changes", "ataxia", "appetite_loss"},
+        "description": "Intracranial neoplasia causing progressive neurological signs.",
+        "description_ja": "進行性の神経学的兆候を引き起こす頭蓋内腫瘍です。",
+        "urgency": "high",
+        "recommended_tests": ["neurological_exam", "ct_scan", "mri"],
+    },
+    # ──────────────────────────────────────────────
+    # Cardiac
+    # ──────────────────────────────────────────────
+    {
+        "name": "Dilated Cardiomyopathy",
+        "name_ja": "拡張型心筋症",
+        "symptoms": {"labored_breathing", "lethargy", "weakness", "exercise_intolerance", "coughing", "collapse"},
+        "description": "Enlargement and weakening of the heart muscle, reducing its ability to pump blood effectively.",
+        "description_ja": "心筋の拡張と弱化により、心臓のポンプ機能が低下する疾患です。",
+        "urgency": "high",
+        "recommended_tests": ["echocardiography", "radiography", "electrocardiogram"],
+    },
+    {
+        "name": "Cardiomyopathy (General)",
+        "name_ja": "心筋症",
+        "symptoms": {"lethargy", "labored_breathing", "weakness", "ascites", "exercise_intolerance"},
+        "description": "Disease of the heart muscle that is relatively common in older hedgehogs.",
+        "description_ja": "高齢のハリネズミに比較的多い心筋の疾患です。",
+        "urgency": "high",
+        "recommended_tests": ["echocardiography", "radiography", "blood_work", "electrocardiogram"],
+    },
+    {
+        "name": "Congestive Heart Failure",
+        "name_ja": "うっ血性心不全",
+        "symptoms": {"labored_breathing", "lethargy", "ascites", "coughing", "weakness", "collapse", "cyanosis"},
+        "description": "End-stage cardiac disease where the heart can no longer meet the body's circulatory needs.",
+        "description_ja": "心臓が身体の循環需要を満たせなくなる末期の心疾患です。",
+        "urgency": "emergency",
+        "recommended_tests": ["echocardiography", "radiography", "blood_work", "electrocardiogram"],
+    },
+    # ──────────────────────────────────────────────
+    # Musculoskeletal
+    # ──────────────────────────────────────────────
+    {
+        "name": "Limb Fracture",
+        "name_ja": "四肢骨折",
+        "symptoms": {"lameness", "swelling", "pain", "limb_not_bearing_weight", "crying"},
+        "description": "Broken bone in the legs, often caused by falls, entrapment in cage accessories, or running wheel injuries.",
+        "description_ja": "ケージの器具への挟み込みや回し車による事故で起こる四肢の骨折です。",
+        "urgency": "high",
+        "recommended_tests": ["radiography", "physical_exam"],
+    },
+    {
+        "name": "Osteoarthritis",
+        "name_ja": "変形性関節症",
+        "symptoms": {"lameness", "stiffness", "decreased_activity", "pain", "reluctance_to_curl"},
+        "description": "Degenerative joint disease common in older or obese hedgehogs.",
+        "description_ja": "高齢や肥満のハリネズミに多い変性性関節疾患です。",
+        "urgency": "moderate",
+        "recommended_tests": ["radiography", "physical_exam"],
+    },
+    {
+        "name": "Leg Injury (Soft Tissue)",
+        "name_ja": "脚の軟部組織損傷",
+        "symptoms": {"lameness", "swelling", "pain", "decreased_activity"},
+        "description": "Sprains, strains, or bruising of leg soft tissues from cage injuries or falls.",
+        "description_ja": "ケージ内での事故や落下による脚の捻挫、筋肉損傷、打撲です。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "radiography"],
+    },
+    {
+        "name": "Toe Loss / Necrosis",
+        "name_ja": "趾壊死・趾脱落",
+        "symptoms": {"swollen_foot", "discolored_toes", "lameness", "fiber_constriction"},
+        "description": "Thread or fiber wrapped around toes cutting off blood supply; common cage hazard for hedgehogs.",
+        "description_ja": "繊維が趾に巻きつき血流を遮断する状態で、ハリネズミに多いケージ内の事故です。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "radiography"],
+    },
+    # ──────────────────────────────────────────────
+    # Ophthalmological
+    # ──────────────────────────────────────────────
+    {
+        "name": "Proptosis (Eye Protrusion)",
+        "name_ja": "眼球突出",
+        "symptoms": {"eye_bulging", "eye_discharge", "pain", "swelling"},
+        "description": "Forward displacement of the eyeball, often caused by retrobulbar abscess or trauma.",
+        "description_ja": "眼球後部の膿瘍や外傷により眼球が前方に突出する状態です。",
+        "urgency": "emergency",
+        "recommended_tests": ["ophthalmic_exam", "radiography", "ultrasound"],
+    },
+    {
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎",
+        "symptoms": {"eye_discharge", "eye_redness", "eye_squinting", "swelling"},
+        "description": "Inflammation of the conjunctiva due to infection, irritation, or allergies.",
+        "description_ja": "感染、刺激、アレルギーによる結膜の炎症です。",
+        "urgency": "moderate",
+        "recommended_tests": ["ophthalmic_exam", "culture_sensitivity", "fluorescein_stain"],
+    },
+    {
+        "name": "Corneal Ulcer",
+        "name_ja": "角膜潰瘍",
+        "symptoms": {"eye_squinting", "eye_discharge", "eye_cloudiness", "pain", "eye_redness"},
+        "description": "Defect in the corneal surface, often from trauma or bedding irritation.",
+        "description_ja": "外傷や床材の刺激による角膜表面の欠損です。",
+        "urgency": "high",
+        "recommended_tests": ["fluorescein_stain", "ophthalmic_exam", "culture_sensitivity"],
+    },
+    {
+        "name": "Retrobulbar Abscess",
+        "name_ja": "眼球後膿瘍",
+        "symptoms": {"eye_bulging", "pain", "appetite_loss", "facial_swelling", "fever"},
+        "description": "Bacterial abscess behind the eye causing proptosis; often related to tooth root infection.",
+        "description_ja": "歯根感染に関連することが多い眼球後部の細菌性膿瘍です。",
+        "urgency": "high",
+        "recommended_tests": ["ophthalmic_exam", "radiography", "ct_scan", "culture_sensitivity"],
+    },
+    {
+        "name": "Cataracts",
+        "name_ja": "白内障",
+        "symptoms": {"eye_cloudiness", "vision_loss", "bumping_into_objects"},
+        "description": "Opacification of the lens; may be age-related or secondary to other disease.",
+        "description_ja": "加齢や他の疾患に続発する水晶体の混濁です。",
+        "urgency": "low",
+        "recommended_tests": ["ophthalmic_exam"],
+    },
+    # ──────────────────────────────────────────────
+    # Urinary
+    # ──────────────────────────────────────────────
+    {
+        "name": "Chronic Kidney Disease",
+        "name_ja": "慢性腎臓病",
+        "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "appetite_loss", "lethargy", "dehydration"},
+        "description": "Progressive loss of kidney function; common in older hedgehogs.",
+        "description_ja": "高齢のハリネズミに多い、進行性の腎機能低下です。",
+        "urgency": "high",
+        "recommended_tests": ["blood_work", "urinalysis", "ultrasound"],
+    },
+    {
+        "name": "Cystitis",
+        "name_ja": "膀胱炎",
+        "symptoms": {"bloody_urine", "frequent_urination", "straining_to_urinate", "pain"},
+        "description": "Bacterial infection or inflammation of the urinary bladder.",
+        "description_ja": "細菌感染や炎症による膀胱の疾患です。",
+        "urgency": "moderate",
+        "recommended_tests": ["urinalysis", "urine_culture", "ultrasound"],
+    },
+    {
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症",
+        "symptoms": {"bloody_urine", "straining_to_urinate", "frequent_urination", "pain", "appetite_loss"},
+        "description": "Formation of mineral stones in the urinary tract causing obstruction and discomfort.",
+        "description_ja": "尿路内に鉱物性の結石が形成され、閉塞や不快感を引き起こす疾患です。",
+        "urgency": "high",
+        "recommended_tests": ["radiography", "ultrasound", "urinalysis", "urine_culture"],
+    },
+    {
+        "name": "Urinary Tract Infection",
+        "name_ja": "尿路感染症",
+        "symptoms": {"frequent_urination", "bloody_urine", "straining_to_urinate", "lethargy", "fever"},
+        "description": "Bacterial infection of the urinary tract causing inflammation and discomfort.",
+        "description_ja": "細菌による尿路の感染症で、炎症や不快感を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["urinalysis", "urine_culture", "blood_work"],
+    },
+    # ──────────────────────────────────────────────
+    # Reproductive
+    # ──────────────────────────────────────────────
+    {
+        "name": "Pyometra",
+        "name_ja": "子宮蓄膿症",
+        "symptoms": {"vaginal_discharge", "abdominal_distension", "lethargy", "appetite_loss", "excessive_thirst", "fever"},
+        "description": "Life-threatening uterine infection with pus accumulation; requires emergency surgery.",
+        "description_ja": "子宮内に膿が蓄積する致命的な感染症で、緊急手術が必要です。",
+        "urgency": "emergency",
+        "recommended_tests": ["ultrasound", "blood_work", "radiography"],
+    },
+    {
+        "name": "Dystocia",
+        "name_ja": "難産",
+        "symptoms": {"straining", "lethargy", "vaginal_discharge", "abdominal_pain", "distress"},
+        "description": "Difficulty giving birth; hedgehog litters can become stuck due to large fetal size or uterine inertia.",
+        "description_ja": "胎子のサイズが大きい場合や子宮無力症により出産困難になる状態です。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiography", "ultrasound", "physical_exam"],
+    },
+    {
+        "name": "Mastitis",
+        "name_ja": "乳腺炎",
+        "symptoms": {"mammary_swelling", "mammary_redness", "pain", "fever", "appetite_loss", "lethargy"},
+        "description": "Bacterial infection of the mammary glands in nursing females.",
+        "description_ja": "授乳中の雌に起こる乳腺の細菌感染症です。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "culture_sensitivity", "blood_work"],
+    },
+    {
+        "name": "Uterine Polyps",
+        "name_ja": "子宮ポリープ",
+        "symptoms": {"vaginal_bleeding", "vaginal_discharge", "lethargy"},
+        "description": "Benign growths in the uterine lining that can cause intermittent bleeding.",
+        "description_ja": "子宮内膜の良性増殖で、間欠的な出血を引き起こすことがあります。",
+        "urgency": "moderate",
+        "recommended_tests": ["ultrasound", "blood_work", "histopathology"],
+    },
+    # ──────────────────────────────────────────────
+    # Metabolic
+    # ──────────────────────────────────────────────
+    {
+        "name": "Hypothermia / Hibernation Attempt",
+        "name_ja": "低体温症・冬眠兆候",
+        "symptoms": {"lethargy", "cold_body", "unresponsiveness", "curled_tightly", "decreased_activity"},
+        "description": "African pygmy hedgehogs cannot truly hibernate; temperatures below 20C can trigger torpor which is life-threatening.",
+        "description_ja": "ヨツユビハリネズミは冬眠できず、20度以下の温度で致命的な低体温状態に陥ります。",
+        "urgency": "emergency",
+        "recommended_tests": ["physical_exam", "temperature_check", "blood_work"],
+    },
+    {
+        "name": "Heatstroke",
+        "name_ja": "熱中症",
+        "symptoms": {"panting", "lethargy", "unresponsiveness", "drooling", "collapse", "hot_body"},
+        "description": "Overheating from ambient temperatures above 30C; hedgehogs are very heat-sensitive.",
+        "description_ja": "30度以上の環境温度による過熱状態で、ハリネズミは暑さに非常に弱いです。",
+        "urgency": "emergency",
+        "recommended_tests": ["physical_exam", "temperature_check", "blood_work"],
+    },
+    {
+        "name": "Fatty Liver Disease (Non-obese)",
+        "name_ja": "脂肪肝（非肥満型）",
+        "symptoms": {"appetite_loss", "jaundice", "lethargy", "weight_loss"},
+        "description": "Hepatic lipidosis that can occur in non-obese hedgehogs due to anorexia from other illnesses.",
+        "description_ja": "他の疾患による食欲不振から発症する脂肪肝で、肥満でなくても起こりえます。",
+        "urgency": "high",
+        "recommended_tests": ["blood_work", "liver_enzymes", "ultrasound"],
+    },
+    # ──────────────────────────────────────────────
+    # Infectious
+    # ──────────────────────────────────────────────
+    {
+        "name": "Salmonellosis",
+        "name_ja": "サルモネラ症",
+        "symptoms": {"diarrhea", "lethargy", "appetite_loss", "weight_loss", "dehydration"},
+        "description": "Bacterial infection by Salmonella species; zoonotic risk to owners through fecal-oral route.",
+        "description_ja": "サルモネラ菌による細菌感染症で、糞口経路で飼い主への感染リスクがあります。",
+        "urgency": "high",
+        "recommended_tests": ["fecal_culture", "blood_work", "fecal_exam"],
+    },
+    {
+        "name": "Mycobacteriosis (Disseminated)",
+        "name_ja": "マイコバクテリア症（播種型）",
+        "symptoms": {"weight_loss", "lethargy", "skin_lesions", "lymph_node_enlargement", "appetite_loss"},
+        "description": "Systemic mycobacterial infection affecting multiple organs; hedgehogs are particularly susceptible.",
+        "description_ja": "複数の臓器に影響する全身性のマイコバクテリア感染症で、ハリネズミは特に感受性が高いです。",
+        "urgency": "high",
+        "recommended_tests": ["acid_fast_staining", "pcr", "biopsy", "blood_work", "radiography"],
+    },
+    {
+        "name": "Herpesvirus Infection",
+        "name_ja": "ヘルペスウイルス感染症",
+        "symptoms": {"nasal_discharge", "appetite_loss", "lethargy", "weight_loss", "labored_breathing"},
+        "description": "Viral infection that can cause respiratory and systemic signs in hedgehogs.",
+        "description_ja": "ハリネズミに呼吸器症状や全身症状を引き起こすウイルス感染症です。",
+        "urgency": "high",
+        "recommended_tests": ["pcr", "blood_work", "radiography"],
+    },
+    # ──────────────────────────────────────────────
+    # Parasitic
+    # ──────────────────────────────────────────────
+    {
+        "name": "Tick Infestation",
+        "name_ja": "マダニ寄生",
+        "symptoms": {"visible_parasites", "scratching", "lethargy", "anemia"},
+        "description": "Tick attachment, more common in wild or outdoor hedgehogs; can transmit diseases.",
+        "description_ja": "野生や屋外飼育のハリネズミに多いマダニの寄生で、疾病を媒介することがあります。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "blood_work"],
+    },
+    {
+        "name": "Flea Infestation",
+        "name_ja": "ノミ寄生",
+        "symptoms": {"scratching", "visible_parasites", "flaky_skin", "irritability", "alopecia"},
+        "description": "Flea parasitism causing skin irritation and pruritus.",
+        "description_ja": "ノミの寄生により皮膚の刺激と掻痒を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "flea_comb_exam"],
+    },
+    {
+        "name": "Internal Parasites (Intestinal Worms)",
+        "name_ja": "腸内寄生虫症",
+        "symptoms": {"diarrhea", "weight_loss", "appetite_loss", "bloating", "visible_worms_in_stool"},
+        "description": "Intestinal helminth infections including roundworms and tapeworms.",
+        "description_ja": "回虫や条虫などの腸管内寄生虫感染症です。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_flotation", "fecal_exam"],
+    },
+    {
+        "name": "Lungworm Infection",
+        "name_ja": "肺虫感染症",
+        "symptoms": {"coughing", "labored_breathing", "nasal_discharge", "weight_loss", "lethargy"},
+        "description": "Crenosoma striatum and other lungworm species infect hedgehog airways; common in wild hedgehogs.",
+        "description_ja": "クレノソーマなどの肺虫がハリネズミの気道に感染する疾患で、野生個体に多いです。",
+        "urgency": "high",
+        "recommended_tests": ["fecal_exam_baermann", "radiography", "tracheal_wash"],
+    },
+    {
+        "name": "Coccidia Infection",
+        "name_ja": "コクシジウム感染症",
+        "symptoms": {"diarrhea", "bloody_stool", "dehydration", "weight_loss", "lethargy"},
+        "description": "Protozoal infection of the intestinal tract causing diarrhea, especially in young or stressed hedgehogs.",
+        "description_ja": "若齢やストレス下のハリネズミに多い腸管の原虫感染症で、下痢を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_flotation", "fecal_exam"],
+    },
+    {
+        "name": "Ear Mites",
+        "name_ja": "耳ダニ症",
+        "symptoms": {"ear_scratching", "head_shaking", "ear_discharge", "crusting"},
+        "description": "Mite infestation of the ear canal causing irritation and waxy discharge.",
+        "description_ja": "耳道内のダニ寄生により刺激と蝋状の分泌物を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["otoscopic_exam", "ear_swab_microscopy"],
+    },
+    # ──────────────────────────────────────────────
+    # Additional Oncological
+    # ──────────────────────────────────────────────
+    {
+        "name": "Intestinal Adenocarcinoma",
+        "name_ja": "腸腺癌",
+        "symptoms": {"weight_loss", "diarrhea", "bloody_stool", "appetite_loss", "lethargy", "abdominal_distension"},
+        "description": "Malignant tumor of the intestinal lining; hedgehogs are predisposed to GI neoplasia.",
+        "description_ja": "腸管粘膜の悪性腫瘍で、ハリネズミは消化管腫瘍になりやすいです。",
+        "urgency": "high",
+        "recommended_tests": ["ultrasound", "radiography", "biopsy", "blood_work"],
+    },
+    {
+        "name": "Hepatocellular Carcinoma",
+        "name_ja": "肝細胞癌",
+        "symptoms": {"appetite_loss", "weight_loss", "jaundice", "hepatomegaly", "lethargy", "abdominal_distension"},
+        "description": "Primary liver cancer; may develop from chronic hepatic lipidosis or other liver diseases.",
+        "description_ja": "原発性の肝臓癌で、慢性肝リピドーシスや他の肝疾患から発展することがあります。",
+        "urgency": "high",
+        "recommended_tests": ["blood_work", "ultrasound", "biopsy", "liver_enzymes"],
+    },
+    {
+        "name": "Ovarian Tumor",
+        "name_ja": "卵巣腫瘍",
+        "symptoms": {"abdominal_distension", "lethargy", "appetite_loss", "weight_loss", "vaginal_discharge"},
+        "description": "Neoplasia of the ovary; can cause hormonal imbalances and abdominal enlargement.",
+        "description_ja": "卵巣の腫瘍で、ホルモン異常や腹部膨満を引き起こすことがあります。",
+        "urgency": "high",
+        "recommended_tests": ["ultrasound", "blood_work", "radiography", "histopathology"],
+    },
+    # ──────────────────────────────────────────────
+    # Additional conditions
+    # ──────────────────────────────────────────────
+    {
+        "name": "Self-anointing (Normal Behavior)",
+        "name_ja": "唾液塗布行動（正常行動）",
+        "symptoms": {"foaming_at_mouth", "contorting_body", "spreading_saliva"},
+        "description": "Normal hedgehog behavior where they produce frothy saliva and spread it on their quills when encountering new scents.",
+        "description_ja": "新しい匂いに接した際に泡状の唾液を産生し針に塗布する正常な行動です。",
+        "urgency": "low",
+        "recommended_tests": ["physical_exam"],
+    },
+    {
+        "name": "Balloon Syndrome",
+        "name_ja": "バルーン症候群",
+        "symptoms": {"subcutaneous_emphysema", "swelling", "distension", "lethargy"},
+        "description": "Subcutaneous emphysema causing the hedgehog to inflate like a balloon; caused by air leaking under the skin from respiratory damage.",
+        "description_ja": "呼吸器の損傷により皮下に空気が漏れ、風船のように膨張する皮下気腫です。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiography", "physical_exam", "blood_work"],
+    },
+    {
+        "name": "Ear Infection (Otitis)",
+        "name_ja": "耳感染症（外耳炎）",
+        "symptoms": {"ear_scratching", "head_shaking", "ear_discharge", "pain", "head_tilt"},
+        "description": "Bacterial or fungal infection of the ear canal causing pain and discharge.",
+        "description_ja": "細菌または真菌による耳道の感染症で、疼痛と分泌物を引き起こします。",
+        "urgency": "moderate",
+        "recommended_tests": ["otoscopic_exam", "culture_sensitivity", "cytology"],
+    },
+    {
+        "name": "Adrenal Disease",
+        "name_ja": "副腎疾患",
+        "symptoms": {"alopecia", "weight_loss", "lethargy", "excessive_thirst", "muscle_wasting"},
+        "description": "Adrenal gland dysfunction causing hormonal imbalances; can be neoplastic or hyperplastic.",
+        "description_ja": "副腎機能障害によるホルモン異常で、腫瘍性または過形成性のことがあります。",
+        "urgency": "moderate",
+        "recommended_tests": ["blood_work", "hormone_panel", "ultrasound"],
+    },
+    {
+        "name": "Penile Prolapse / Paraphimosis",
+        "name_ja": "陰茎脱出・嵌頓包茎",
+        "symptoms": {"penile_protrusion", "swelling", "pain", "licking_genital_area", "distress"},
+        "description": "Inability to retract the penis; can occur from fiber constriction, trauma, or infection.",
+        "description_ja": "繊維の絡みつき、外傷、感染により陰茎が陥頓する状態です。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "culture_sensitivity"],
+    },
+    {
+        "name": "Green Stool (Stress/Diet)",
+        "name_ja": "緑色便（ストレス・食事性）",
+        "symptoms": {"green_stool", "appetite_loss", "behavioral_changes"},
+        "description": "Green-colored feces caused by stress, diet change, or rapid GI transit; very common in newly acquired hedgehogs.",
+        "description_ja": "ストレス、食事変更、消化管通過の促進による緑色便で、新規導入個体に非常に多いです。",
+        "urgency": "low",
+        "recommended_tests": ["fecal_exam", "husbandry_review"],
+    },
+    {
+        "name": "Anemia",
+        "name_ja": "貧血",
+        "symptoms": {"pale_mucous_membranes", "lethargy", "weakness", "appetite_loss", "labored_breathing"},
+        "description": "Reduced red blood cell count from parasites, chronic disease, blood loss, or bone marrow disease.",
+        "description_ja": "寄生虫、慢性疾患、出血、骨髄疾患などによる赤血球の減少です。",
+        "urgency": "high",
+        "recommended_tests": ["blood_work", "fecal_exam", "blood_smear"],
+    },
+    {
+        "name": "Intervertebral Disc Disease",
+        "name_ja": "椎間板疾患",
+        "symptoms": {"hindlimb_weakness", "pain", "ataxia", "reluctance_to_curl", "crying"},
+        "description": "Disc degeneration or herniation causing spinal cord compression and pain.",
+        "description_ja": "椎間板の変性やヘルニアにより脊髄圧迫と疼痛を引き起こす疾患です。",
+        "urgency": "high",
+        "recommended_tests": ["radiography", "neurological_exam", "ct_scan", "mri"],
+    },
+    {
+        "name": "Splenic Disease",
+        "name_ja": "脾臓疾患",
+        "symptoms": {"splenomegaly", "lethargy", "abdominal_distension", "weight_loss", "appetite_loss"},
+        "description": "Splenic enlargement from various causes including neoplasia, infection, or extramedullary hematopoiesis.",
+        "description_ja": "腫瘍、感染、髄外造血などさまざまな原因による脾臓の腫大です。",
+        "urgency": "high",
+        "recommended_tests": ["ultrasound", "blood_work", "fine_needle_aspirate"],
     },
 ]
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str | None = None) -> Dict:
+SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
+    # Dermatological symptoms
+    "quill_loss": {"ja": "針の脱落", "en": "Quill loss"},
+    "new_quill_growth": {"ja": "新しい針の成長", "en": "New quill growth"},
+    "scratching": {"ja": "掻痒・引っ掻き", "en": "Scratching"},
+    "flaky_skin": {"ja": "皮膚の剥離・フケ", "en": "Flaky skin"},
+    "crusting": {"ja": "痂皮形成", "en": "Crusting"},
+    "skin_lesions": {"ja": "皮膚病変", "en": "Skin lesions"},
+    "skin_mass": {"ja": "皮膚の腫瘤", "en": "Skin mass"},
+    "ulcerated_lesion": {"ja": "潰瘍性病変", "en": "Ulcerated lesion"},
+    "redness": {"ja": "発赤", "en": "Redness"},
+    "alopecia": {"ja": "脱毛", "en": "Hair / quill loss (alopecia)"},
+    "dull_quills": {"ja": "針のつやの喪失", "en": "Dull quills"},
+    "irritability": {"ja": "易刺激性", "en": "Irritability"},
+    # General / systemic
+    "lethargy": {"ja": "無気力", "en": "Lethargy"},
+    "weakness": {"ja": "衰弱", "en": "Weakness"},
+    "appetite_loss": {"ja": "食欲不振", "en": "Appetite loss"},
+    "weight_loss": {"ja": "体重減少", "en": "Weight loss"},
+    "weight_gain": {"ja": "体重増加", "en": "Weight gain"},
+    "fever": {"ja": "発熱", "en": "Fever"},
+    "dehydration": {"ja": "脱水", "en": "Dehydration"},
+    "pain": {"ja": "疼痛", "en": "Pain"},
+    "swelling": {"ja": "腫脹", "en": "Swelling"},
+    "discharge": {"ja": "分泌物", "en": "Discharge"},
+    "collapse": {"ja": "虚脱", "en": "Collapse"},
+    "distress": {"ja": "苦悶", "en": "Distress"},
+    "crying": {"ja": "鳴き声（痛み）", "en": "Crying / vocalizing in pain"},
+    "decreased_activity": {"ja": "活動性の低下", "en": "Decreased activity"},
+    # GI symptoms
+    "diarrhea": {"ja": "下痢", "en": "Diarrhea"},
+    "vomiting": {"ja": "嘔吐", "en": "Vomiting"},
+    "constipation": {"ja": "便秘", "en": "Constipation"},
+    "bloody_stool": {"ja": "血便", "en": "Bloody stool"},
+    "mucoid_stool": {"ja": "粘液便", "en": "Mucoid stool"},
+    "green_stool": {"ja": "緑色便", "en": "Green stool"},
+    "visible_worms_in_stool": {"ja": "便中の虫体", "en": "Visible worms in stool"},
+    "bloating": {"ja": "腹部膨満", "en": "Bloating"},
+    "abdominal_pain": {"ja": "腹痛", "en": "Abdominal pain"},
+    "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
+    "straining_to_defecate": {"ja": "排便時のいきみ", "en": "Straining to defecate"},
+    "tissue_protruding_from_anus": {"ja": "肛門からの組織脱出", "en": "Tissue protruding from anus"},
+    "jaundice": {"ja": "黄疸", "en": "Jaundice"},
+    "hepatomegaly": {"ja": "肝腫大", "en": "Hepatomegaly"},
+    # Oral / dental
+    "drooling": {"ja": "流涎", "en": "Drooling"},
+    "bad_breath": {"ja": "口臭", "en": "Bad breath"},
+    "tartar_buildup": {"ja": "歯石の蓄積", "en": "Tartar buildup"},
+    "tooth_loss": {"ja": "歯の脱落", "en": "Tooth loss"},
+    "red_gums": {"ja": "歯肉の発赤", "en": "Red gums"},
+    "oral_mass": {"ja": "口腔内の腫瘤", "en": "Oral mass"},
+    "bloody_mouth": {"ja": "口腔内出血", "en": "Bloody mouth"},
+    "facial_swelling": {"ja": "顔面の腫脹", "en": "Facial swelling"},
+    # Respiratory
+    "nasal_discharge": {"ja": "鼻汁", "en": "Nasal discharge"},
+    "sneezing": {"ja": "くしゃみ", "en": "Sneezing"},
+    "coughing": {"ja": "咳", "en": "Coughing"},
+    "labored_breathing": {"ja": "呼吸困難", "en": "Labored breathing"},
+    "panting": {"ja": "パンティング", "en": "Panting"},
+    "cyanosis": {"ja": "チアノーゼ", "en": "Cyanosis"},
+    # Neurological
+    "ataxia": {"ja": "運動失調", "en": "Ataxia"},
+    "hindlimb_weakness": {"ja": "後肢の脱力", "en": "Hindlimb weakness"},
+    "muscle_wasting": {"ja": "筋萎縮", "en": "Muscle wasting"},
+    "falling_over": {"ja": "転倒", "en": "Falling over"},
+    "progressive_paralysis": {"ja": "進行性麻痺", "en": "Progressive paralysis"},
+    "head_tilt": {"ja": "斜頸", "en": "Head tilt"},
+    "circling": {"ja": "旋回運動", "en": "Circling"},
+    "nystagmus": {"ja": "眼振", "en": "Nystagmus"},
+    "seizures": {"ja": "てんかん発作", "en": "Seizures"},
+    "disorientation": {"ja": "失見当識", "en": "Disorientation"},
+    "paddling": {"ja": "遊泳運動", "en": "Paddling"},
+    "behavioral_changes": {"ja": "行動変化", "en": "Behavioral changes"},
+    # Cardiac
+    "exercise_intolerance": {"ja": "運動不耐性", "en": "Exercise intolerance"},
+    "ascites": {"ja": "腹水", "en": "Ascites"},
+    # Musculoskeletal
+    "lameness": {"ja": "跛行", "en": "Lameness"},
+    "stiffness": {"ja": "硬直", "en": "Stiffness"},
+    "limb_not_bearing_weight": {"ja": "患肢の免荷", "en": "Not bearing weight on limb"},
+    "reluctance_to_curl": {"ja": "丸まることへの抵抗", "en": "Reluctance to curl"},
+    "inability_to_curl": {"ja": "丸まれない", "en": "Inability to curl into a ball"},
+    "swollen_foot": {"ja": "足の腫脹", "en": "Swollen foot"},
+    "discolored_toes": {"ja": "趾の変色", "en": "Discolored toes"},
+    "fiber_constriction": {"ja": "繊維の絞扼", "en": "Fiber / thread constriction"},
+    # Ophthalmological
+    "eye_bulging": {"ja": "眼球突出", "en": "Eye bulging / proptosis"},
+    "eye_discharge": {"ja": "眼脂", "en": "Eye discharge"},
+    "eye_redness": {"ja": "眼の充血", "en": "Eye redness"},
+    "eye_squinting": {"ja": "眼の細め", "en": "Eye squinting"},
+    "eye_cloudiness": {"ja": "眼の白濁", "en": "Eye cloudiness"},
+    "vision_loss": {"ja": "視力低下", "en": "Vision loss"},
+    "bumping_into_objects": {"ja": "物にぶつかる", "en": "Bumping into objects"},
+    # Urinary
+    "excessive_thirst": {"ja": "多飲", "en": "Excessive thirst"},
+    "excessive_urination": {"ja": "多尿", "en": "Excessive urination"},
+    "bloody_urine": {"ja": "血尿", "en": "Bloody urine"},
+    "frequent_urination": {"ja": "頻尿", "en": "Frequent urination"},
+    "straining_to_urinate": {"ja": "排尿時のいきみ", "en": "Straining to urinate"},
+    # Reproductive
+    "vaginal_bleeding": {"ja": "膣出血", "en": "Vaginal bleeding"},
+    "vaginal_discharge": {"ja": "膣分泌物", "en": "Vaginal discharge"},
+    "mammary_mass": {"ja": "乳腺の腫瘤", "en": "Mammary mass"},
+    "mammary_discharge": {"ja": "乳腺からの分泌物", "en": "Mammary discharge"},
+    "mammary_swelling": {"ja": "乳腺の腫脹", "en": "Mammary swelling"},
+    "mammary_redness": {"ja": "乳腺の発赤", "en": "Mammary redness"},
+    "straining": {"ja": "いきみ", "en": "Straining"},
+    "penile_protrusion": {"ja": "陰茎突出", "en": "Penile protrusion"},
+    "licking_genital_area": {"ja": "陰部を舐める", "en": "Licking genital area"},
+    # Metabolic
+    "cold_body": {"ja": "体の冷え", "en": "Cold body"},
+    "hot_body": {"ja": "体の過熱", "en": "Hot body"},
+    "unresponsiveness": {"ja": "無反応", "en": "Unresponsiveness"},
+    "curled_tightly": {"ja": "強く丸まっている", "en": "Curled up tightly"},
+    "fatty_deposits": {"ja": "脂肪の蓄積", "en": "Fatty deposits"},
+    # Parasitic
+    "visible_parasites": {"ja": "目に見える寄生虫", "en": "Visible parasites"},
+    "anemia": {"ja": "貧血", "en": "Anemia"},
+    "ear_scratching": {"ja": "耳を掻く", "en": "Ear scratching"},
+    "head_shaking": {"ja": "頭を振る", "en": "Head shaking"},
+    "ear_discharge": {"ja": "耳漏", "en": "Ear discharge"},
+    # Other
+    "lymph_node_enlargement": {"ja": "リンパ節腫大", "en": "Lymph node enlargement"},
+    "splenomegaly": {"ja": "脾腫", "en": "Splenomegaly"},
+    "pale_mucous_membranes": {"ja": "粘膜の蒼白", "en": "Pale mucous membranes"},
+    "rapid_growth": {"ja": "急速な成長", "en": "Rapid growth"},
+    "slow_growth": {"ja": "緩徐な成長", "en": "Slow growth"},
+    "foaming_at_mouth": {"ja": "口の泡立ち", "en": "Foaming at mouth"},
+    "contorting_body": {"ja": "体をねじる", "en": "Contorting body"},
+    "spreading_saliva": {"ja": "唾液を塗る", "en": "Spreading saliva on quills"},
+    "subcutaneous_emphysema": {"ja": "皮下気腫", "en": "Subcutaneous emphysema"},
+    "distension": {"ja": "膨張", "en": "Distension"},
+}
+
+
+def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None) -> Dict[str, Any]:
     """ハリネズミ用の鑑別診断エンジン。
 
-    与えられた症状リストに基づいて `helpers.analyze_symptoms_generic` を呼び出し、
-    候補疾患と推奨検査を返します。
+    与えられた症状リストに基づいて候補疾患と推奨検査を返します。
 
     Args:
         symptoms: ユーザーが報告した症状のリスト
-        age_stage: 任意の年齢層情報（未使用だがインターフェース整合性のため）
+        age_stage: 任意の年齢層情報
+        breed: 品種情報（ハリネズミでは通常未使用）
 
     Returns:
         辞書形式の分析結果

@@ -1,53 +1,682 @@
-"""degu_diseases.py – デグーの疾患データと鑑別診断
+"""Degu disease dictionary and symptom analysis module.
 
-デグーは小型齧歯類の一種で、特有の健康問題を持ちます。このモジュールでは
-デグーに一般的な疾患をいくつか示し、症状から簡易的な鑑別診断を行える関数
-を提供します。
+Degus (Octodon degus) are small rodents native to Chile with unique health
+concerns.  They are notably unable to metabolize sugar, making diabetes
+mellitus and secondary cataracts extremely common.  This module catalogues
+50+ diseases across endocrine, dental, dermatological, respiratory,
+gastrointestinal, musculoskeletal, neurological, ophthalmological, renal,
+hepatic, reproductive, and neoplastic categories.
 """
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
-from .helpers import analyze_symptoms_generic, ADVICE
+from .helpers import ADVICE, analyze_symptoms_generic
 
+# ---------------------------------------------------------------------------
+# Disease database
+# ---------------------------------------------------------------------------
 
-SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
-    "polyuria": {"ja": "多尿", "en": "Polyuria"},
-    "polydipsia": {"ja": "多飲", "en": "Polydipsia"},
-    "cataract": {"ja": "白内障", "en": "Cataract"},
-    "weight_loss": {"ja": "体重減少", "en": "Weight loss"},
-    "dental_malocclusion": {"ja": "不正咬合", "en": "Malocclusion"},
-    "drooling": {"ja": "流涎", "en": "Drooling"},
-    "anorexia": {"ja": "食欲不振", "en": "Anorexia"},
-}
-
-DISEASES: List[Dict] = [
+DISEASES: List[Dict[str, Any]] = [
+    # ── Endocrine / Metabolic ──────────────────────────────────────────────
     {
-        "name": "糖尿病",
-        "name_en": "Diabetes Mellitus",
-        "symptoms": ["polyuria", "polydipsia", "weight_loss", "cataract"],
-        "description": "血糖コントロールの障害により多飲多尿や体重減少が起こる代謝性疾患。",
-        "severity": "moderate",
-        "recommended_tests": ["血糖検査", "尿検査"],
+        "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
-        "description_ja": "血糖コントロールの障害により多飲多尿や体重減少が起こる代謝性疾患。",
-        "urgency": "medium",
+        "symptoms": {"polyuria", "polydipsia", "weight_loss", "lethargy", "hyperglycemia"},
+        "description": "Degus cannot metabolize sugar; diabetes is extremely common and causes increased thirst, urination, and weight loss.",
+        "description_ja": "デグーは糖を代謝できず、糖尿病は非常に多い。多飲多尿や体重減少を引き起こす。",
+        "urgency": "high",
+        "recommended_tests": ["blood_glucose", "urinalysis", "fructosamine"],
     },
     {
-        "name": "歯科疾患",
-        "name_en": "Dental Disease",
-        "symptoms": ["dental_malocclusion", "drooling", "anorexia", "weight_loss"],
-        "description": "歯の過成長や不正咬合により食欲が低下する疾患。",
-        "severity": "mild",
-        "recommended_tests": ["口腔内検査", "頭部X線検査"],
-        "name_ja": "歯科疾患",
-        "description_ja": "歯の過成長や不正咬合により食欲が低下する疾患。",
+        "name": "Diabetic Ketoacidosis",
+        "name_ja": "糖尿病性ケトアシドーシス",
+        "symptoms": {"lethargy", "vomiting", "dehydration", "rapid_breathing", "collapse"},
+        "description": "Life-threatening complication of uncontrolled diabetes with ketone accumulation.",
+        "description_ja": "未治療の糖尿病が悪化しケトン体が蓄積する致命的な合併症。",
+        "urgency": "emergency",
+        "recommended_tests": ["blood_glucose", "blood_gas", "ketone_test", "urinalysis"],
+    },
+    {
+        "name": "Insulin Resistance",
+        "name_ja": "インスリン抵抗性",
+        "symptoms": {"obesity", "polyuria", "polydipsia", "hyperglycemia"},
+        "description": "Chronic insulin resistance leading to persistent hyperglycemia despite normal insulin levels.",
+        "description_ja": "慢性的なインスリン抵抗性により、正常なインスリン値にもかかわらず持続的な高血糖が起こる。",
+        "urgency": "moderate",
+        "recommended_tests": ["blood_glucose", "insulin_level", "fructosamine"],
+    },
+    {
+        "name": "Obesity",
+        "name_ja": "肥満",
+        "symptoms": {"weight_gain", "lethargy", "reduced_activity", "obesity"},
+        "description": "Excessive body weight from overfeeding or high-sugar diet, predisposing to diabetes.",
+        "description_ja": "過食や高糖質食による体重過多。糖尿病の素因となる。",
+        "urgency": "moderate",
+        "recommended_tests": ["body_condition_score", "blood_glucose"],
+    },
+    {
+        "name": "Heat Stroke",
+        "name_ja": "熱中症",
+        "symptoms": {"rapid_breathing", "lethargy", "collapse", "drooling", "seizures"},
+        "description": "Degus are sensitive to heat; temperatures above 30°C can cause heat stroke.",
+        "description_ja": "デグーは暑さに弱く、30℃以上で熱中症を起こしやすい。",
+        "urgency": "emergency",
+        "recommended_tests": ["body_temperature", "physical_exam", "blood_work"],
+    },
+    {
+        "name": "Hypothermia",
+        "name_ja": "低体温症",
+        "symptoms": {"lethargy", "shivering", "cold_extremities", "collapse"},
+        "description": "Dangerously low body temperature from cold exposure or severe illness.",
+        "description_ja": "低温環境や重篤な疾患による危険な低体温。",
+        "urgency": "high",
+        "recommended_tests": ["body_temperature", "blood_glucose", "physical_exam"],
+    },
+
+    # ── Ophthalmological ───────────────────────────────────────────────────
+    {
+        "name": "Diabetic Cataracts",
+        "name_ja": "糖尿病性白内障",
+        "symptoms": {"cloudy_eyes", "vision_loss", "bumping_into_objects", "hyperglycemia"},
+        "description": "Lens opacification secondary to chronic hyperglycemia; extremely common in degus.",
+        "description_ja": "慢性的な高血糖に続発する水晶体の混濁。デグーでは非常に多い。",
+        "urgency": "moderate",
+        "recommended_tests": ["ophthalmic_exam", "blood_glucose", "slit_lamp_exam"],
+    },
+    {
+        "name": "Senile Cataracts",
+        "name_ja": "老年性白内障",
+        "symptoms": {"cloudy_eyes", "vision_loss", "bumping_into_objects"},
+        "description": "Age-related lens opacity unrelated to diabetes, seen in older degus.",
+        "description_ja": "加齢に伴う水晶体の混濁で、糖尿病とは無関係に高齢デグーに見られる。",
         "urgency": "low",
+        "recommended_tests": ["ophthalmic_exam", "slit_lamp_exam"],
+    },
+    {
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎",
+        "symptoms": {"eye_discharge", "eye_redness", "squinting", "eye_swelling"},
+        "description": "Inflammation of the conjunctiva from irritants, bedding dust, or infection.",
+        "description_ja": "刺激物、床材の粉塵、感染による結膜の炎症。",
+        "urgency": "moderate",
+        "recommended_tests": ["ophthalmic_exam", "bacterial_culture", "fluorescein_stain"],
+    },
+    {
+        "name": "Corneal Ulcer",
+        "name_ja": "角膜潰瘍",
+        "symptoms": {"squinting", "eye_discharge", "eye_redness", "cloudy_eyes", "pawing_at_eye"},
+        "description": "Erosion of the corneal surface from trauma or infection.",
+        "description_ja": "外傷や感染による角膜表面の損傷。",
+        "urgency": "high",
+        "recommended_tests": ["fluorescein_stain", "ophthalmic_exam"],
+    },
+
+    # ── Dental ─────────────────────────────────────────────────────────────
+    {
+        "name": "Dental Malocclusion",
+        "name_ja": "不正咬合",
+        "symptoms": {"drooling", "appetite_loss", "weight_loss", "facial_swelling", "teeth_grinding"},
+        "description": "Misalignment of constantly growing teeth causing pain and inability to eat.",
+        "description_ja": "常生歯の噛み合わせ不良により痛みや摂食困難を生じる。",
+        "urgency": "high",
+        "recommended_tests": ["oral_exam", "skull_radiographs"],
+    },
+    {
+        "name": "Incisor Overgrowth",
+        "name_ja": "切歯過長",
+        "symptoms": {"drooling", "appetite_loss", "visible_tooth_overgrowth", "weight_loss"},
+        "description": "Excessive growth of incisors preventing normal food prehension.",
+        "description_ja": "切歯の過度な伸長により正常な食物の把持ができなくなる。",
+        "urgency": "moderate",
+        "recommended_tests": ["oral_exam", "skull_radiographs"],
+    },
+    {
+        "name": "Molar Spurs",
+        "name_ja": "臼歯棘",
+        "symptoms": {"drooling", "appetite_loss", "weight_loss", "head_tilt", "facial_swelling"},
+        "description": "Sharp points on molars that lacerate tongue or cheeks.",
+        "description_ja": "臼歯にできる鋭い突起が舌や頬を傷つける。",
+        "urgency": "high",
+        "recommended_tests": ["oral_exam", "skull_radiographs", "endoscopy"],
+    },
+    {
+        "name": "Tooth Root Abscess",
+        "name_ja": "歯根膿瘍",
+        "symptoms": {"facial_swelling", "appetite_loss", "eye_discharge", "nasal_discharge", "weight_loss"},
+        "description": "Infection at the tooth root causing swelling and potential sinus involvement.",
+        "description_ja": "歯根の感染により腫脹し、副鼻腔に波及することがある。",
+        "urgency": "high",
+        "recommended_tests": ["skull_radiographs", "CT_scan", "bacterial_culture"],
+    },
+
+    # ── Dermatological ─────────────────────────────────────────────────────
+    {
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症",
+        "symptoms": {"hair_loss", "crusty_skin", "itching", "circular_lesions"},
+        "description": "Fungal skin infection causing circular patches of hair loss.",
+        "description_ja": "真菌による皮膚感染症で、円形の脱毛斑が生じる。",
+        "urgency": "moderate",
+        "recommended_tests": ["fungal_culture", "skin_scraping", "wood_lamp"],
+    },
+    {
+        "name": "Fur Mites (Demodex / Notoedres)",
+        "name_ja": "毛包虫症",
+        "symptoms": {"itching", "hair_loss", "crusty_skin", "scaly_skin", "scratching"},
+        "description": "Ectoparasitic infestation causing intense itching and hair loss.",
+        "description_ja": "外部寄生虫による激しいかゆみと脱毛。",
+        "urgency": "moderate",
+        "recommended_tests": ["skin_scraping", "microscopy"],
+    },
+    {
+        "name": "Tail Degloving Injury",
+        "name_ja": "尾部脱皮損傷",
+        "symptoms": {"tail_injury", "bleeding", "exposed_bone", "pain"},
+        "description": "The tail skin slips off when grabbed; degus shed tail skin as a defense mechanism.",
+        "description_ja": "尻尾を掴まれると皮膚が剥がれる。デグーの防御機構だが、再生しない。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "radiographs"],
+    },
+    {
+        "name": "Barbering (Over-grooming)",
+        "name_ja": "バーバリング（過剰毛繕い）",
+        "symptoms": {"hair_loss", "patchy_fur", "stress_behavior"},
+        "description": "Excessive grooming of self or cage-mates due to stress or boredom.",
+        "description_ja": "ストレスや退屈による過度な毛繕いで、自身や同居個体の毛が薄くなる。",
+        "urgency": "low",
+        "recommended_tests": ["behavioral_assessment", "skin_scraping"],
+    },
+    {
+        "name": "Bite Wounds / Abscess",
+        "name_ja": "咬傷・膿瘍",
+        "symptoms": {"swelling", "pain", "discharge", "lethargy", "fever"},
+        "description": "Wounds from cage-mate aggression that become infected and form abscesses.",
+        "description_ja": "同居個体との争いによる咬傷が感染し膿瘍を形成する。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "bacterial_culture", "cytology"],
+    },
+    {
+        "name": "Contact Dermatitis",
+        "name_ja": "接触性皮膚炎",
+        "symptoms": {"skin_redness", "itching", "hair_loss", "crusty_skin"},
+        "description": "Skin irritation from contact with bedding, cleaning products, or other irritants.",
+        "description_ja": "床材や洗浄剤などとの接触による皮膚の炎症。",
+        "urgency": "low",
+        "recommended_tests": ["physical_exam", "skin_scraping", "allergy_testing"],
+    },
+
+    # ── Musculoskeletal ────────────────────────────────────────────────────
+    {
+        "name": "Bumblefoot (Pododermatitis)",
+        "name_ja": "趾瘤症（バンブルフット）",
+        "symptoms": {"swollen_feet", "lameness", "foot_sores", "reluctance_to_move"},
+        "description": "Infection and inflammation of the footpad from wire flooring or unsanitary conditions.",
+        "description_ja": "金網の床や不衛生な環境による足底の感染と炎症。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "radiographs", "bacterial_culture"],
+    },
+    {
+        "name": "Limb Fracture",
+        "name_ja": "四肢骨折",
+        "symptoms": {"lameness", "swelling", "pain", "limb_deformity", "reluctance_to_move"},
+        "description": "Broken bones from falls, wheel injuries, or cage entrapment.",
+        "description_ja": "落下、回し車の事故、ケージへの挟まりによる骨折。",
+        "urgency": "high",
+        "recommended_tests": ["radiographs", "physical_exam"],
+    },
+    {
+        "name": "Spinal Fracture",
+        "name_ja": "脊椎骨折",
+        "symptoms": {"hind_leg_paralysis", "pain", "incontinence", "reluctance_to_move"},
+        "description": "Fracture of the vertebral column from falls or trauma causing paralysis.",
+        "description_ja": "落下や外傷による脊椎の骨折で麻痺を引き起こす。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiographs", "neurological_exam"],
+    },
+    {
+        "name": "Osteoarthritis",
+        "name_ja": "変形性関節症",
+        "symptoms": {"lameness", "reduced_activity", "stiffness", "reluctance_to_move"},
+        "description": "Degenerative joint disease common in aging degus.",
+        "description_ja": "加齢に伴う関節の変性疾患。",
+        "urgency": "low",
+        "recommended_tests": ["radiographs", "physical_exam"],
+    },
+
+    # ── Respiratory ────────────────────────────────────────────────────────
+    {
+        "name": "Upper Respiratory Infection",
+        "name_ja": "上部気道感染症",
+        "symptoms": {"sneezing", "nasal_discharge", "lethargy", "appetite_loss"},
+        "description": "Bacterial or viral infection of the upper airways.",
+        "description_ja": "細菌またはウイルスによる上部気道の感染症。",
+        "urgency": "moderate",
+        "recommended_tests": ["nasal_culture", "physical_exam", "radiographs"],
+    },
+    {
+        "name": "Pneumonia",
+        "name_ja": "肺炎",
+        "symptoms": {"labored_breathing", "nasal_discharge", "lethargy", "appetite_loss", "cyanosis"},
+        "description": "Infection or inflammation of the lungs, often secondary to URI.",
+        "description_ja": "肺の感染または炎症で、しばしば上部気道感染に続発する。",
+        "urgency": "high",
+        "recommended_tests": ["chest_radiographs", "blood_work", "bacterial_culture"],
+    },
+    {
+        "name": "Aspiration Pneumonia",
+        "name_ja": "誤嚥性肺炎",
+        "symptoms": {"labored_breathing", "coughing", "lethargy", "fever", "nasal_discharge"},
+        "description": "Lung infection from inhaling food or fluid, often due to improper syringe feeding.",
+        "description_ja": "食物や液体の誤嚥による肺感染。不適切なシリンジ給餌が原因になりやすい。",
+        "urgency": "emergency",
+        "recommended_tests": ["chest_radiographs", "blood_work"],
+    },
+
+    # ── Gastrointestinal ───────────────────────────────────────────────────
+    {
+        "name": "Gastrointestinal Stasis",
+        "name_ja": "消化管うっ滞",
+        "symptoms": {"appetite_loss", "bloating", "reduced_fecal_output", "lethargy", "teeth_grinding"},
+        "description": "Slowing or cessation of gut motility from stress, diet, or pain.",
+        "description_ja": "ストレスや食事、痛みによる腸管運動の低下または停止。",
+        "urgency": "high",
+        "recommended_tests": ["abdominal_radiographs", "physical_exam"],
+    },
+    {
+        "name": "Bloat (Gastric Dilation)",
+        "name_ja": "鼓脹症",
+        "symptoms": {"bloating", "pain", "lethargy", "rapid_breathing", "appetite_loss"},
+        "description": "Gas accumulation in the stomach causing distension and pain.",
+        "description_ja": "胃内のガス蓄積により膨満と痛みが生じる。",
+        "urgency": "emergency",
+        "recommended_tests": ["abdominal_radiographs", "physical_exam"],
+    },
+    {
+        "name": "Diarrhea (Non-specific)",
+        "name_ja": "下痢（非特異的）",
+        "symptoms": {"diarrhea", "dehydration", "lethargy", "appetite_loss"},
+        "description": "Loose stools from dietary changes, stress, or infection.",
+        "description_ja": "食事の変更、ストレス、感染による軟便。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_exam", "fecal_culture", "physical_exam"],
+    },
+    {
+        "name": "Constipation",
+        "name_ja": "便秘",
+        "symptoms": {"reduced_fecal_output", "straining", "bloating", "appetite_loss"},
+        "description": "Difficulty passing stools due to dehydration, low fiber, or obstruction.",
+        "description_ja": "脱水、低繊維食、閉塞による排便困難。",
+        "urgency": "moderate",
+        "recommended_tests": ["abdominal_radiographs", "physical_exam"],
+    },
+    {
+        "name": "Intestinal Parasites",
+        "name_ja": "腸内寄生虫症",
+        "symptoms": {"diarrhea", "weight_loss", "bloating", "rough_coat"},
+        "description": "Infestation with protozoa or helminths causing diarrhea and poor condition.",
+        "description_ja": "原虫や蠕虫の寄生により下痢や状態悪化を引き起こす。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_flotation", "fecal_smear"],
+    },
+    {
+        "name": "Giardiasis",
+        "name_ja": "ジアルジア症",
+        "symptoms": {"diarrhea", "weight_loss", "bloating", "dehydration"},
+        "description": "Protozoal infection of the intestine causing chronic watery diarrhea.",
+        "description_ja": "ジアルジア原虫による腸管感染で慢性的な水様下痢を引き起こす。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_flotation", "giardia_antigen_test"],
+    },
+    {
+        "name": "Intestinal Obstruction",
+        "name_ja": "腸閉塞",
+        "symptoms": {"appetite_loss", "bloating", "pain", "lethargy", "reduced_fecal_output"},
+        "description": "Foreign body or mass blocking the intestinal lumen.",
+        "description_ja": "異物や腫瘤による腸管の閉塞。",
+        "urgency": "emergency",
+        "recommended_tests": ["abdominal_radiographs", "ultrasound"],
+    },
+
+    # ── Hepatic ────────────────────────────────────────────────────────────
+    {
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）",
+        "symptoms": {"appetite_loss", "lethargy", "weight_loss", "jaundice", "distended_abdomen"},
+        "description": "Excessive fat accumulation in the liver, often linked to obesity or anorexia.",
+        "description_ja": "肝臓への過度な脂肪蓄積。肥満や食欲不振と関連することが多い。",
+        "urgency": "high",
+        "recommended_tests": ["blood_chemistry", "liver_enzymes", "ultrasound"],
+    },
+    {
+        "name": "Liver Disease (Chronic)",
+        "name_ja": "慢性肝疾患",
+        "symptoms": {"jaundice", "weight_loss", "lethargy", "distended_abdomen", "appetite_loss"},
+        "description": "Progressive liver dysfunction from toxins, infection, or metabolic disease.",
+        "description_ja": "毒素、感染、代謝性疾患による進行性の肝機能障害。",
+        "urgency": "high",
+        "recommended_tests": ["blood_chemistry", "liver_enzymes", "ultrasound", "biopsy"],
+    },
+
+    # ── Renal ──────────────────────────────────────────────────────────────
+    {
+        "name": "Chronic Kidney Disease",
+        "name_ja": "慢性腎臓病",
+        "symptoms": {"polyuria", "polydipsia", "weight_loss", "lethargy", "dehydration"},
+        "description": "Progressive loss of kidney function common in aging degus.",
+        "description_ja": "加齢に伴う進行性の腎機能低下。",
+        "urgency": "high",
+        "recommended_tests": ["blood_chemistry", "urinalysis", "ultrasound"],
+    },
+    {
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症",
+        "symptoms": {"straining", "blood_in_urine", "frequent_urination", "pain"},
+        "description": "Formation of mineral stones in the urinary tract.",
+        "description_ja": "尿路内でのミネラル結石の形成。",
+        "urgency": "high",
+        "recommended_tests": ["urinalysis", "radiographs", "ultrasound"],
+    },
+    {
+        "name": "Urinary Tract Infection",
+        "name_ja": "尿路感染症",
+        "symptoms": {"frequent_urination", "blood_in_urine", "straining", "lethargy"},
+        "description": "Bacterial infection of the bladder or urethra.",
+        "description_ja": "膀胱または尿道の細菌感染。",
+        "urgency": "moderate",
+        "recommended_tests": ["urinalysis", "urine_culture"],
+    },
+
+    # ── Neoplasia ──────────────────────────────────────────────────────────
+    {
+        "name": "Mammary Tumor",
+        "name_ja": "乳腺腫瘍",
+        "symptoms": {"mammary_mass", "swelling", "weight_loss", "lethargy"},
+        "description": "Benign or malignant growth in the mammary tissue.",
+        "description_ja": "乳腺組織の良性または悪性腫瘍。",
+        "urgency": "high",
+        "recommended_tests": ["fine_needle_aspirate", "radiographs", "histopathology"],
+    },
+    {
+        "name": "Skin Tumor",
+        "name_ja": "皮膚腫瘍",
+        "symptoms": {"skin_mass", "ulceration", "hair_loss", "swelling"},
+        "description": "Neoplastic growth on the skin surface or subcutaneous tissue.",
+        "description_ja": "皮膚表面や皮下組織の腫瘍性増殖。",
+        "urgency": "moderate",
+        "recommended_tests": ["fine_needle_aspirate", "histopathology"],
+    },
+    {
+        "name": "Abdominal Tumor",
+        "name_ja": "腹腔内腫瘍",
+        "symptoms": {"distended_abdomen", "weight_loss", "appetite_loss", "lethargy"},
+        "description": "Internal neoplasia causing abdominal distension and systemic decline.",
+        "description_ja": "腹腔内の腫瘍により腹部膨満と全身状態の悪化が生じる。",
+        "urgency": "high",
+        "recommended_tests": ["ultrasound", "radiographs", "blood_work", "biopsy"],
+    },
+
+    # ── Reproductive ───────────────────────────────────────────────────────
+    {
+        "name": "Pyometra",
+        "name_ja": "子宮蓄膿症",
+        "symptoms": {"vaginal_discharge", "lethargy", "appetite_loss", "distended_abdomen", "polydipsia"},
+        "description": "Uterine infection with pus accumulation; life-threatening in intact females.",
+        "description_ja": "子宮内に膿が蓄積する感染症。未避妊の雌で致命的になりうる。",
+        "urgency": "emergency",
+        "recommended_tests": ["ultrasound", "blood_work", "radiographs"],
+    },
+    {
+        "name": "Dystocia",
+        "name_ja": "難産",
+        "symptoms": {"straining", "lethargy", "vaginal_discharge", "pain", "restlessness"},
+        "description": "Difficulty giving birth due to fetal malpresentation or maternal factors.",
+        "description_ja": "胎児の位置異常や母体要因による分娩困難。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiographs", "ultrasound", "physical_exam"],
+    },
+    {
+        "name": "Testicular Tumor",
+        "name_ja": "精巣腫瘍",
+        "symptoms": {"testicular_swelling", "asymmetric_testes", "lethargy"},
+        "description": "Neoplastic growth in one or both testes.",
+        "description_ja": "片側または両側の精巣に生じる腫瘍。",
+        "urgency": "moderate",
+        "recommended_tests": ["ultrasound", "fine_needle_aspirate", "histopathology"],
+    },
+
+    # ── Neurological ───────────────────────────────────────────────────────
+    {
+        "name": "Seizures (Epilepsy)",
+        "name_ja": "てんかん発作",
+        "symptoms": {"seizures", "collapse", "disorientation", "drooling"},
+        "description": "Recurrent seizure activity that may be idiopathic or secondary to metabolic disease.",
+        "description_ja": "特発性または代謝性疾患に続発する反復性のてんかん発作。",
+        "urgency": "high",
+        "recommended_tests": ["blood_work", "blood_glucose", "neurological_exam"],
+    },
+    {
+        "name": "Stroke (Cerebrovascular Accident)",
+        "name_ja": "脳卒中",
+        "symptoms": {"head_tilt", "circling", "loss_of_balance", "seizures", "disorientation"},
+        "description": "Vascular event in the brain causing acute neurological deficits.",
+        "description_ja": "脳内の血管障害により急性の神経症状が出現する。",
+        "urgency": "emergency",
+        "recommended_tests": ["neurological_exam", "blood_work", "MRI"],
+    },
+    {
+        "name": "Vestibular Disease",
+        "name_ja": "前庭疾患",
+        "symptoms": {"head_tilt", "loss_of_balance", "circling", "nystagmus"},
+        "description": "Dysfunction of the vestibular system causing balance problems.",
+        "description_ja": "前庭系の機能障害によるバランス異常。",
+        "urgency": "moderate",
+        "recommended_tests": ["neurological_exam", "otoscopic_exam", "radiographs"],
+    },
+    {
+        "name": "Hind Limb Paralysis",
+        "name_ja": "後肢麻痺",
+        "symptoms": {"hind_leg_paralysis", "incontinence", "dragging_legs", "pain"},
+        "description": "Loss of hind limb function from spinal injury, stroke, or disc disease.",
+        "description_ja": "脊髄損傷、脳卒中、椎間板疾患による後肢機能の喪失。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiographs", "neurological_exam", "MRI"],
+    },
+
+    # ── Cardiac ────────────────────────────────────────────────────────────
+    {
+        "name": "Congestive Heart Failure",
+        "name_ja": "うっ血性心不全",
+        "symptoms": {"labored_breathing", "lethargy", "cyanosis", "reduced_activity", "collapse"},
+        "description": "Heart unable to pump effectively, leading to fluid buildup.",
+        "description_ja": "心臓のポンプ機能低下による体液貯留。",
+        "urgency": "emergency",
+        "recommended_tests": ["chest_radiographs", "echocardiography", "blood_work"],
+    },
+    {
+        "name": "Cardiomyopathy",
+        "name_ja": "心筋症",
+        "symptoms": {"labored_breathing", "lethargy", "reduced_activity", "collapse"},
+        "description": "Disease of the heart muscle leading to impaired cardiac function.",
+        "description_ja": "心筋の疾患により心機能が障害される。",
+        "urgency": "high",
+        "recommended_tests": ["echocardiography", "chest_radiographs", "ECG"],
+    },
+
+    # ── Additional conditions ──────────────────────────────────────────────
+    {
+        "name": "Ear Infection (Otitis)",
+        "name_ja": "耳感染症（外耳炎）",
+        "symptoms": {"head_tilt", "scratching_ear", "ear_discharge", "loss_of_balance"},
+        "description": "Infection of the outer or middle ear from bacteria or mites.",
+        "description_ja": "細菌やダニによる外耳または中耳の感染。",
+        "urgency": "moderate",
+        "recommended_tests": ["otoscopic_exam", "ear_cytology", "bacterial_culture"],
+    },
+    {
+        "name": "Vitamin C Deficiency (Scurvy)",
+        "name_ja": "ビタミンC欠乏症（壊血病）",
+        "symptoms": {"lethargy", "swollen_joints", "lameness", "rough_coat", "bleeding_gums"},
+        "description": "Degus may develop scurvy when dietary vitamin C is insufficient.",
+        "description_ja": "食事中のビタミンC不足により壊血病を発症することがある。",
+        "urgency": "moderate",
+        "recommended_tests": ["blood_work", "physical_exam"],
+    },
+    {
+        "name": "Septicemia",
+        "name_ja": "敗血症",
+        "symptoms": {"fever", "lethargy", "rapid_breathing", "collapse", "dehydration"},
+        "description": "Systemic bacterial infection with bloodstream involvement.",
+        "description_ja": "血流への細菌侵入を伴う全身性の細菌感染。",
+        "urgency": "emergency",
+        "recommended_tests": ["blood_culture", "blood_work", "physical_exam"],
+    },
+    {
+        "name": "Dehydration",
+        "name_ja": "脱水症",
+        "symptoms": {"dehydration", "lethargy", "sunken_eyes", "reduced_activity"},
+        "description": "Insufficient fluid intake or excessive fluid loss from illness.",
+        "description_ja": "水分摂取不足や疾病による過度な水分喪失。",
+        "urgency": "moderate",
+        "recommended_tests": ["skin_turgor_test", "blood_work", "physical_exam"],
+    },
+    {
+        "name": "Rectal Prolapse",
+        "name_ja": "直腸脱",
+        "symptoms": {"tissue_protrusion_anus", "straining", "bloody_stool", "lethargy"},
+        "description": "Protrusion of the rectal lining through the anus, often from straining or parasites.",
+        "description_ja": "いきみや寄生虫により直腸粘膜が肛門から突出する。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "fecal_exam"],
+    },
+    {
+        "name": "Diabetes-related Neuropathy",
+        "name_ja": "糖尿病性神経障害",
+        "symptoms": {"hind_leg_paralysis", "dragging_legs", "loss_of_balance", "hyperglycemia"},
+        "description": "Nerve damage from chronic hyperglycemia causing weakness in the hind limbs.",
+        "description_ja": "慢性的な高血糖による神経障害で後肢の衰弱が生じる。",
+        "urgency": "high",
+        "recommended_tests": ["blood_glucose", "neurological_exam"],
     },
 ]
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str | None = None) -> Dict:
-    """デグー用の鑑別診断関数。"""
+# ---------------------------------------------------------------------------
+# Symptom name lookup
+# ---------------------------------------------------------------------------
+
+SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
+    # Endocrine / Metabolic
+    "polyuria": {"ja": "多尿", "en": "Polyuria"},
+    "polydipsia": {"ja": "多飲", "en": "Polydipsia"},
+    "hyperglycemia": {"ja": "高血糖", "en": "Hyperglycemia"},
+    "weight_loss": {"ja": "体重減少", "en": "Weight Loss"},
+    "weight_gain": {"ja": "体重増加", "en": "Weight Gain"},
+    "obesity": {"ja": "肥満", "en": "Obesity"},
+    "lethargy": {"ja": "無気力・元気消失", "en": "Lethargy"},
+    "dehydration": {"ja": "脱水", "en": "Dehydration"},
+    "fever": {"ja": "発熱", "en": "Fever"},
+    "shivering": {"ja": "震え", "en": "Shivering"},
+    "cold_extremities": {"ja": "四肢の冷感", "en": "Cold Extremities"},
+    # Ophthalmological
+    "cloudy_eyes": {"ja": "眼の白濁", "en": "Cloudy Eyes"},
+    "vision_loss": {"ja": "視力低下", "en": "Vision Loss"},
+    "bumping_into_objects": {"ja": "物にぶつかる", "en": "Bumping into Objects"},
+    "eye_discharge": {"ja": "眼脂・目やに", "en": "Eye Discharge"},
+    "eye_redness": {"ja": "眼の充血", "en": "Eye Redness"},
+    "eye_swelling": {"ja": "眼の腫脹", "en": "Eye Swelling"},
+    "squinting": {"ja": "眼を細める", "en": "Squinting"},
+    "pawing_at_eye": {"ja": "眼を前足で掻く", "en": "Pawing at Eye"},
+    "sunken_eyes": {"ja": "眼の陥没", "en": "Sunken Eyes"},
+    # Dental
+    "drooling": {"ja": "流涎・よだれ", "en": "Drooling"},
+    "appetite_loss": {"ja": "食欲不振", "en": "Appetite Loss"},
+    "teeth_grinding": {"ja": "歯ぎしり", "en": "Teeth Grinding"},
+    "visible_tooth_overgrowth": {"ja": "歯の過長が目視できる", "en": "Visible Tooth Overgrowth"},
+    "facial_swelling": {"ja": "顔面の腫脹", "en": "Facial Swelling"},
+    "bleeding_gums": {"ja": "歯肉出血", "en": "Bleeding Gums"},
+    # Dermatological
+    "hair_loss": {"ja": "脱毛", "en": "Hair Loss"},
+    "crusty_skin": {"ja": "痂皮形成", "en": "Crusty Skin"},
+    "scaly_skin": {"ja": "鱗屑", "en": "Scaly Skin"},
+    "itching": {"ja": "かゆみ", "en": "Itching"},
+    "scratching": {"ja": "引っ掻き行動", "en": "Scratching"},
+    "circular_lesions": {"ja": "円形の病変", "en": "Circular Lesions"},
+    "patchy_fur": {"ja": "まだらな被毛", "en": "Patchy Fur"},
+    "skin_redness": {"ja": "皮膚の発赤", "en": "Skin Redness"},
+    "skin_mass": {"ja": "皮膚の腫瘤", "en": "Skin Mass"},
+    "ulceration": {"ja": "潰瘍", "en": "Ulceration"},
+    "stress_behavior": {"ja": "ストレス行動", "en": "Stress Behavior"},
+    # Tail
+    "tail_injury": {"ja": "尾部の損傷", "en": "Tail Injury"},
+    "bleeding": {"ja": "出血", "en": "Bleeding"},
+    "exposed_bone": {"ja": "骨の露出", "en": "Exposed Bone"},
+    # Musculoskeletal
+    "swollen_feet": {"ja": "足の腫脹", "en": "Swollen Feet"},
+    "foot_sores": {"ja": "足底の傷", "en": "Foot Sores"},
+    "lameness": {"ja": "跛行", "en": "Lameness"},
+    "limb_deformity": {"ja": "四肢の変形", "en": "Limb Deformity"},
+    "reluctance_to_move": {"ja": "動きたがらない", "en": "Reluctance to Move"},
+    "stiffness": {"ja": "硬直・こわばり", "en": "Stiffness"},
+    "swollen_joints": {"ja": "関節の腫脹", "en": "Swollen Joints"},
+    "hind_leg_paralysis": {"ja": "後肢麻痺", "en": "Hind Leg Paralysis"},
+    "dragging_legs": {"ja": "後肢を引きずる", "en": "Dragging Hind Legs"},
+    # Respiratory
+    "sneezing": {"ja": "くしゃみ", "en": "Sneezing"},
+    "nasal_discharge": {"ja": "鼻汁", "en": "Nasal Discharge"},
+    "labored_breathing": {"ja": "努力性呼吸", "en": "Labored Breathing"},
+    "rapid_breathing": {"ja": "頻呼吸", "en": "Rapid Breathing"},
+    "coughing": {"ja": "咳", "en": "Coughing"},
+    "cyanosis": {"ja": "チアノーゼ", "en": "Cyanosis"},
+    # Gastrointestinal
+    "diarrhea": {"ja": "下痢", "en": "Diarrhea"},
+    "bloating": {"ja": "膨満", "en": "Bloating"},
+    "reduced_fecal_output": {"ja": "排便量の減少", "en": "Reduced Fecal Output"},
+    "straining": {"ja": "いきみ・排便困難", "en": "Straining"},
+    "rough_coat": {"ja": "被毛の荒れ", "en": "Rough Coat"},
+    "vomiting": {"ja": "嘔吐", "en": "Vomiting"},
+    "bloody_stool": {"ja": "血便", "en": "Bloody Stool"},
+    "tissue_protrusion_anus": {"ja": "肛門からの組織突出", "en": "Tissue Protrusion from Anus"},
+    # General
+    "pain": {"ja": "疼痛", "en": "Pain"},
+    "swelling": {"ja": "腫脹", "en": "Swelling"},
+    "discharge": {"ja": "分泌物・排膿", "en": "Discharge"},
+    "collapse": {"ja": "虚脱", "en": "Collapse"},
+    "reduced_activity": {"ja": "活動量の低下", "en": "Reduced Activity"},
+    "restlessness": {"ja": "落ち着きのなさ", "en": "Restlessness"},
+    "distended_abdomen": {"ja": "腹部膨満", "en": "Distended Abdomen"},
+    "jaundice": {"ja": "黄疸", "en": "Jaundice"},
+    "incontinence": {"ja": "失禁", "en": "Incontinence"},
+    # Urinary
+    "blood_in_urine": {"ja": "血尿", "en": "Blood in Urine"},
+    "frequent_urination": {"ja": "頻尿", "en": "Frequent Urination"},
+    # Reproductive
+    "vaginal_discharge": {"ja": "膣分泌物", "en": "Vaginal Discharge"},
+    "mammary_mass": {"ja": "乳腺の腫瘤", "en": "Mammary Mass"},
+    "testicular_swelling": {"ja": "精巣の腫脹", "en": "Testicular Swelling"},
+    "asymmetric_testes": {"ja": "精巣の左右差", "en": "Asymmetric Testes"},
+    # Neurological
+    "seizures": {"ja": "痙攣・発作", "en": "Seizures"},
+    "disorientation": {"ja": "見当識障害", "en": "Disorientation"},
+    "head_tilt": {"ja": "斜頸", "en": "Head Tilt"},
+    "circling": {"ja": "旋回運動", "en": "Circling"},
+    "loss_of_balance": {"ja": "平衡感覚の喪失", "en": "Loss of Balance"},
+    "nystagmus": {"ja": "眼振", "en": "Nystagmus"},
+    # Ear
+    "scratching_ear": {"ja": "耳を掻く", "en": "Scratching Ear"},
+    "ear_discharge": {"ja": "耳漏", "en": "Ear Discharge"},
+}
+
+
+# ---------------------------------------------------------------------------
+# Public analysis function
+# ---------------------------------------------------------------------------
+
+def analyze_symptoms(
+    symptoms: List[str],
+    age_stage: str = "",
+    breed: str | None = None,
+) -> Dict[str, Any]:
+    """Run differential diagnosis for degus based on reported symptoms."""
     return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE)
