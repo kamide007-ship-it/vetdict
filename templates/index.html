@@ -191,7 +191,7 @@ a:hover{text-decoration:underline}
     <div class="hero-stat"><span class="num" id="statDiseases">0</span><span class="label">疾患数</span></div>
     <div class="hero-stat"><span class="num" id="statSpecies">20</span><span class="label">対応動物種</span></div>
     <div class="hero-stat"><span class="num" id="statSymptoms">0</span><span class="label">症状項目</span></div>
-    <div class="hero-stat"><span class="num" id="statDrugs">84</span><span class="label">薬品数</span></div>
+    <div class="hero-stat"><span class="num" id="statDrugs">169</span><span class="label">薬品数</span></div>
   </div>
 </section>
 
@@ -326,6 +326,24 @@ a:hover{text-decoration:underline}
   </ul>
 </section>
 
+<!-- ===== Sponsor ===== -->
+<section style="max-width:1200px;margin:0 auto;padding:24px 20px">
+  <div style="background:linear-gradient(135deg,#f0f9ff,#e8f4fd);border:2px solid var(--primary);border-radius:var(--radius);padding:24px;text-align:center">
+    <p style="font-size:.72rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Sponsored by</p>
+    <h3 style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px">
+      <a href="https://www.caninevet.jp/" target="_blank" style="color:var(--accent);text-decoration:none">Equine &amp; Canine Vet Nutrition</a>
+    </h3>
+    <p style="font-size:.88rem;color:var(--gray-700);margin-bottom:12px">
+      獣医師が考案・国内製造のペット用サプリメント<br/>
+      競走馬理化学研究所の検査合格 — あらゆるステージの馬・犬に安心して給餌できます
+    </p>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:12px">
+      <a href="https://www.evet-nutrition.com/" target="_blank" style="display:inline-block;padding:8px 20px;background:var(--primary);color:var(--white);border-radius:20px;font-size:.85rem;font-weight:600;text-decoration:none">馬用サプリメント (evet-nutrition.com)</a>
+      <a href="https://www.caninevet.jp/" target="_blank" style="display:inline-block;padding:8px 20px;background:var(--accent);color:var(--white);border-radius:20px;font-size:.85rem;font-weight:600;text-decoration:none">犬用サプリメント (caninevet.jp)</a>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <p>VetDict v5.0 — 獣医学疾患データベース / Veterinary Disease Dictionary</p>
   <p style="margin-top:4px">※ 本サービスは参考情報の提供を目的としており、獣医師による診断・治療に代わるものではありません。</p>
@@ -343,7 +361,7 @@ a:hover{text-decoration:underline}
 <script>
 const SPECIES = [
   {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:277},
-  {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:153},
+  {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:227},
   {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:531},
   {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:87},
   {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:81},
