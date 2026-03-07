@@ -1,5 +1,5 @@
 """
-Symptom Checker Module for ShowDog App.
+Symptom Checker Module for VetDict.
 
 Maps dog symptoms to suspected diseases and recommended diagnostic tests.
 Provides structured analysis output with severity assessment, Japanese

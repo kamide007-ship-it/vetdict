@@ -12,7 +12,10 @@ root = Path(__file__).resolve().parent
 if str(root) not in sys.path:
     sys.path.insert(0, str(root))
 
-from api.showdog_api import app
+try:
+    from api.vetdict_api import app
+except ImportError:
+    from api.showdog_api import app
 
 if __name__ == "__main__":
     app.run(debug=os.getenv('FLASK_DEBUG', '0') == '1')

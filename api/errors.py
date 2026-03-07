@@ -1,5 +1,5 @@
 """
-Custom exception classes for the ShowDog analysis platform.
+Custom exception classes for the VetDict analysis platform.
 
 Provides explicit error types to disambiguate between:
   - Library/dependency unavailability (AnalysisUnavailableError)
