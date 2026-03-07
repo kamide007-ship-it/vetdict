@@ -289,33 +289,41 @@ a:hover{text-decoration:underline}
 </section>
 
 <footer class="footer">
-  <p>VetDict v5.0 — Multi-Species Veterinary Diagnostic Platform</p>
+  <p>VetDict v5.0 — 獣医学疾患データベース / Veterinary Disease Dictionary</p>
   <p style="margin-top:4px">※ 本サービスは参考情報の提供を目的としており、獣医師による診断・治療に代わるものではありません。</p>
-  <p style="margin-top:4px">Veterinary Supervision: Kentaro Kaimide, DVM / 南相馬動物病院</p>
+  <p style="margin-top:8px;font-size:.85rem;color:var(--white)">
+    開発者: <a href="https://www.minamisoma-vet.com/" target="_blank" style="color:var(--primary)">南相馬アニマルクリニック</a>
+    獣医師 上手 健太郎 (Kentaro Kamide, DVM)
+  </p>
+  <p style="margin-top:4px">
+    <a href="https://www.minamisoma-vet.com/" target="_blank" style="color:var(--primary)">minamisoma-vet.com</a>
+    &nbsp;|&nbsp;
+    <a href="https://www.instagram.com/k.kamide.canine_vet_nutrition/?hl=ja" target="_blank" style="color:var(--primary)">Instagram</a>
+  </p>
 </footer>
 
 <script>
 const SPECIES = [
   {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:277},
-  {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:2},
+  {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:200},
   {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:531},
-  {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:2},
-  {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:2},
-  {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F439}",diseases:2},
-  {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43F}\uFE0F",diseases:2},
-  {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F9A1}",diseases:2},
-  {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:2},
-  {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43F}\uFE0F",diseases:2},
-  {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F42D}",diseases:2},
-  {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:2},
-  {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:2},
-  {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:2},
-  {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:2},
-  {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:2},
-  {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:2},
-  {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:2},
-  {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:2},
-  {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:2},
+  {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:87},
+  {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:81},
+  {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F439}",diseases:68},
+  {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43F}\uFE0F",diseases:71},
+  {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F9A1}",diseases:89},
+  {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:77},
+  {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43F}\uFE0F",diseases:64},
+  {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F42D}",diseases:57},
+  {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:100},
+  {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:93},
+  {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:93},
+  {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:87},
+  {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:70},
+  {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:68},
+  {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:75},
+  {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:56},
+  {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:58},
 ];
 
 let currentSpecies = null;
@@ -496,6 +504,11 @@ function renderResults(data){
       <div class="disease-detail">
         <dl>
           <dt>\u8AAC\u660E</dt><dd>${desc}</dd>
+          ${d.pathophysiology_ja || d.pathophysiology ? `<dt>\u75C5\u614B\u751F\u7406</dt><dd>${d.pathophysiology_ja || d.pathophysiology}</dd>` : ""}
+          ${d.causes_ja || d.causes ? `<dt>\u539F\u56E0</dt><dd>${d.causes_ja || d.causes}</dd>` : ""}
+          ${d.prevention_ja || d.prevention ? `<dt>\u4E88\u9632</dt><dd>${d.prevention_ja || d.prevention}</dd>` : ""}
+          ${d.treatment_ja || d.treatment ? `<dt>\u6CBB\u7642</dt><dd>${d.treatment_ja || d.treatment}</dd>` : ""}
+          ${d.prognosis_ja || d.prognosis ? `<dt>\u4E88\u5F8C</dt><dd>${d.prognosis_ja || d.prognosis}</dd>` : ""}
           ${matchSymptoms.length ? `<dt>\u4E00\u81F4\u3057\u305F\u75C7\u72B6</dt><dd>${matchSymptoms.join(", ")}</dd>` : ""}
           ${recTests.length ? `<dt>\u63A8\u5968\u691C\u67FB</dt><dd>${recTests.join(", ")}</dd>` : ""}
         </dl>
@@ -566,6 +579,11 @@ function renderDiseaseDb(){
       <div class="disease-detail">
         <dl>
           <dt>\u8AAC\u660E</dt><dd>${d.description_ja || d.description || ""}</dd>
+          ${d.pathophysiology_ja || d.pathophysiology ? `<dt>\u75C5\u614B\u751F\u7406</dt><dd>${d.pathophysiology_ja || d.pathophysiology}</dd>` : ""}
+          ${d.causes_ja || d.causes ? `<dt>\u539F\u56E0</dt><dd>${d.causes_ja || d.causes}</dd>` : ""}
+          ${d.prevention_ja || d.prevention ? `<dt>\u4E88\u9632</dt><dd>${d.prevention_ja || d.prevention}</dd>` : ""}
+          ${d.treatment_ja || d.treatment ? `<dt>\u6CBB\u7642</dt><dd>${d.treatment_ja || d.treatment}</dd>` : ""}
+          ${d.prognosis_ja || d.prognosis ? `<dt>\u4E88\u5F8C</dt><dd>${d.prognosis_ja || d.prognosis}</dd>` : ""}
           ${d.symptoms ? `<dt>\u75C7\u72B6</dt><dd>${Array.isArray(d.symptoms) ? d.symptoms.join(", ") : (typeof d.symptoms === "object" ? Object.keys(d.symptoms).join(", ") : d.symptoms)}</dd>` : ""}
           ${d.recommended_tests ? `<dt>\u63A8\u5968\u691C\u67FB</dt><dd>${d.recommended_tests.join(", ")}</dd>` : ""}
         </dl>
