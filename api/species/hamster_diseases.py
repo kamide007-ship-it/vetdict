@@ -72,6 +72,24 @@ DISEASES: List[Dict[str, Any]] = [
         "recommended_tests": ["fecal_float", "fecal_smear"],
     },
     {
+        "name": "Tapeworm Infection (Hymenolepis)",
+        "name_ja": "条虫症（膜様条虫）",
+        "symptoms": {"weight_loss", "visible_worms_in_stool", "appetite_loss", "rough_coat", "perianal_irritation"},
+        "description": "Infection by Hymenolepis species tapeworms, potentially zoonotic, causing weight loss and poor coat condition.",
+        "description_ja": "膜様条虫（ヒメノレピス属）による感染症で、人獣共通感染の可能性があり、体重減少や被毛の悪化を引き起こす。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_float", "fecal_smear"],
+    },
+    {
+        "name": "Pinworm Infection (Syphacia)",
+        "name_ja": "蟯虫症",
+        "symptoms": {"perianal_irritation", "visible_worms_in_stool", "rough_coat", "weight_loss"},
+        "description": "Infection by Syphacia obvelata pinworms, usually subclinical but may cause perianal itching and restlessness.",
+        "description_ja": "蟯虫（シファシア属）による感染症で、通常は無症状だが肛門周囲の掻痒を生じることがある。",
+        "urgency": "low",
+        "recommended_tests": ["fecal_float", "tape_test"],
+    },
+    {
         "name": "Clostridiosis",
         "name_ja": "クロストリジウム感染症",
         "symptoms": {"diarrhea", "abdominal_distension", "sudden_death", "appetite_loss"},
@@ -364,6 +382,15 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "過食と運動不足による過体重。",
         "urgency": "low",
         "recommended_tests": ["weight_assessment", "dietary_review"],
+    },
+    {
+        "name": "Anorexia (Non-specific)",
+        "name_ja": "食欲不振（非特異的）",
+        "symptoms": {"appetite_loss", "weight_loss", "lethargy", "dehydration"},
+        "description": "Refusal to eat from pain, stress, dental issues, systemic illness, or environmental changes.",
+        "description_ja": "疼痛、ストレス、歯科疾患、全身疾患、環境変化などによる採食拒否。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "blood_chemistry", "oral_exam"],
     },
     {
         "name": "Amyloidosis",
@@ -861,6 +888,8 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "dark_skin_lesion": {"ja": "暗色皮膚病変", "en": "Dark skin lesion"},
     "ear_crusting": {"ja": "耳の痂皮", "en": "Ear crusting"},
     "cold_intolerance": {"ja": "寒さに弱い", "en": "Cold intolerance"},
+    "visible_worms_in_stool": {"ja": "便中の虫体", "en": "Visible worms in stool"},
+    "perianal_irritation": {"ja": "肛門周囲の刺激", "en": "Perianal irritation"},
 }
 
 
