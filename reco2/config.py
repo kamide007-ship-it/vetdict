@@ -4,7 +4,11 @@ import os
 import secrets
 from typing import Any, Dict
 
-from reco3_agent.constants import RECO3_PROXY_BIND_DEFAULT, RECO3_PROXY_PORT_DEFAULT
+try:
+    from reco3_agent.constants import RECO3_PROXY_BIND_DEFAULT, RECO3_PROXY_PORT_DEFAULT
+except ImportError:
+    RECO3_PROXY_BIND_DEFAULT = "127.0.0.1"
+    RECO3_PROXY_PORT_DEFAULT = 8080
 
 
 def _project_root() -> str:
