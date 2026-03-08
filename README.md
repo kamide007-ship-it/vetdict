@@ -31,6 +31,11 @@ The world's largest open veterinary differential diagnosis platform — **4,100+
 ### Drug Dictionary
 - 175+ drugs with species-specific dosage, safety, routes, formulations, and drug interactions
 
+### Bilingual Mode (JP / EN)
+- One-click language toggle (JP ↔ EN) in the header
+- All UI labels, placeholders, error messages, and data fields switch between Japanese and English
+- Language preference saved in localStorage
+
 ### Health Checker UI
 - Checkbox-based symptom selection with breed-specific risk analysis
 - Interactive single-page application with responsive design
