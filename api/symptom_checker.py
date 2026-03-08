@@ -896,7 +896,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "prognosis_ja": "早期の積極的治療で生存率85〜95%。無治療では致死率91%以上。白血球数<1,000/μLや低アルブミン血症は予後不良因子。",
         "prevention_ja": "コアワクチン（MLV）を6〜8週齢から2〜4週間隔で16週齢以降まで接種。年1回の追加接種。"
                          "感染環境の次亜塩素酸ナトリウム消毒（1:30希釈）。",
-        "urgency": "normal",
+        "urgency": "emergency",
     },
     {
         "name": "Canine Distemper",
@@ -920,7 +920,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
                         "回復しても永続的な神経後遺症（ミオクローヌス、エナメル質低形成）が残ることがある。",
         "prevention_ja": "コアワクチン（MLVジステンパーワクチン）を子犬期に3回接種後、年1回追加接種。"
                          "感染犬との接触回避。",
-        "urgency": "normal",
+        "urgency": "high",
     },
     {
         "name": "Kennel Cough (Bordetella)",
@@ -948,7 +948,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "name": "Gastric Dilatation-Volvulus (GDV/Bloat)",
         "name_ja": "胃拡張胃捻転症候群（GDV）",
         "symptoms": {"bloated_abdomen", "vomiting", "excessive_panting",
-                      "lethargy", "anxiety"},
+                      "lethargy", "anxiety", "collapse", "drooling"},
         "description": "A life-threatening condition where the stomach fills "
                        "with gas and rotates, cutting off blood supply. "
                        "Requires immediate emergency surgery.",
@@ -992,7 +992,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "prognosis_ja": "軽症〜中等症：適切な治療で回復良好（生存率90%以上）。"
                         "重症壊死性膵炎：致死率30〜40%。DIC・MOF合併は予後不良因子。再発率は高い。",
         "prevention_ja": "低脂肪食の維持、テーブルフードの禁止、肥満防止、原疾患（高脂血症等）の管理。",
-        "urgency": "normal",
+        "urgency": "high",
     },
     {
         "name": "Hypothyroidism",
@@ -1030,7 +1030,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "name": "Cushing's Disease",
         "name_ja": "クッシング症候群（副腎皮質機能亢進症）",
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_gain",
-                      "hair_loss", "lethargy", "excessive_panting"},
+                      "hair_loss", "lethargy", "excessive_panting", "appetite_increase"},
         "description": "Overproduction of cortisol by the adrenal glands, "
                        "leading to a range of systemic effects.",
         "description_ja": "コルチゾールの慢性的過剰産生による多臓器障害。中高齢犬（8歳以上）に好発。"
@@ -1076,7 +1076,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
                         "アジソンクリーゼは早期治療で回復可能だが、診断遅延は致死的。",
         "prevention_ja": "確立された予防法なし。好発品種では消化器症状の間欠的な発現に注意。"
                          "ステロイド長期投与からの離脱は必ず漸減で行う。",
-        "urgency": "normal",
+        "urgency": "high",
     },
     {
         "name": "Diabetes Mellitus",
@@ -1460,7 +1460,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "prevention_ja": "月1回の予防薬投与（イベルメクチン、ミルベマイシン、モキシデクチン等）が最も有効。"
                          "年1回の抗原検査。蚊の発生する4月〜12月（日本）に通年投与が推奨。"
                          "投与開始前のフィラリア検査が必須。",
-        "urgency": "normal",
+        "urgency": "high",
     },
     {
         "name": "Lyme Disease",
@@ -1565,7 +1565,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
                         "DIC・PTE合併は予後不良。再発率は30〜50%。"
                         "免疫抑制剤の長期投与が必要な場合が多い。",
         "prevention_ja": "確立された予防法なし。既往犬ではワクチン接種のリスク/ベネフィット評価が必要。",
-        "urgency": "normal",
+        "urgency": "emergency",
     },
     {
         "name": "Gastroenteritis",
@@ -2068,11 +2068,11 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "name": "Myasthenia Gravis",
         "name_ja": "重症筋無力症",
         "symptoms": {"lethargy", "reluctance_move", "difficulty_breathing",
-                      "vomiting"},
+                      "regurgitation"},
         "description": "An autoimmune neuromuscular disease causing muscle "
                        "weakness, often associated with megaesophagus.",
         "description_ja": "筋力低下を引き起こす自己免疫性神経筋疾患で、巨大食道症を伴うことが多いです。",
-        "urgency": "normal",
+        "urgency": "high",
     },
     {
         "name": "Granulomatous Meningoencephalitis (GME)",
@@ -2088,7 +2088,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
     {
         "name": "Cryptorchidism",
         "name_ja": "停留精巣（陰睾）",
-        "symptoms": {"genital_discharge"},
+        "symptoms": {"swelling", "abdominal_pain"},
         "description": "Failure of one or both testicles to descend into the "
                        "scrotum, increasing cancer risk.",
         "description_ja": "片方または両方の精巣が陰嚢に下降しない疾患で、腫瘍リスクが上昇します。",
@@ -2350,7 +2350,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
     {
         "name": "Osteosarcoma",
         "name_ja": "骨肉腫（OSA）",
-        "symptoms": {"limping_fl", "limping_fr", "swollen_joints",
+        "symptoms": {*_ANY_LIMPING, "swollen_joints",
                       "pain_on_touch", "reluctance_move"},
         "description": "An aggressive bone cancer primarily affecting large "
                        "and giant breed dogs, usually in the limbs.",
@@ -2768,7 +2768,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
     {
         "name": "Nuclear Sclerosis",
         "name_ja": "核硬化症",
-        "symptoms": {"squinting"},
+        "symptoms": {"eye_discharge"},
         "description": "Normal age-related hardening of the lens causing a bluish haze, often mistaken for cataracts.",
         "description_ja": "加齢による水晶体の硬化で青みがかった曇りが生じ、白内障と間違われやすいです。",
         "urgency": "normal",
