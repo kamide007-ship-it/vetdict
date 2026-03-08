@@ -590,7 +590,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intussusception",
         "name_ja": "腸重積",
-        "symptoms": {"abdominal_pain", "lethargy", "appetite_loss", "bloody_stool", "vomiting", "abdominal_distension"},
+        "symptoms": {"abdominal_pain", "lethargy", "appetite_loss", "bloody_stool", "abdominal_distension"},
         "description": "Telescoping of one segment of intestine into another causing obstruction and ischemia.",
         "description_ja": "腸管の一部が他の部分に陥入して閉塞と虚血を引き起こす疾患です。",
         "urgency": "emergency",
@@ -806,7 +806,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Parasites (Giardia)",
         "name_ja": "腸管寄生虫症（ジアルジア）",
-        "symptoms": {"diarrhea", "poor_coat", "soft_stool", "weight_loss"},
+        "symptoms": {"appetite_loss", "dehydration", "diarrhea", "loose_stool", "poor_coat", "soft_stool", "weight_loss"},
         "description": "Giardia lamblia infection causing chronic intermittent diarrhea and malabsorption in chinchillas.",
         "description_ja": "ジアルジア・ランブリア感染による慢性間欠性下痢と吸収不良です。",
         "urgency": "moderate",
@@ -878,7 +878,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Acute Renal Failure",
         "name_ja": "急性腎不全",
-        "symptoms": {"appetite_loss", "dehydration", "lethargy", "reduced_urine_output", "vomiting"},
+        "symptoms": {"appetite_loss", "dehydration", "lethargy", "reduced_urine_output"},
         "description": "Sudden loss of kidney function from toxins, infection, or urinary obstruction causing azotaemia and electrolyte imbalance.",
         "description_ja": "毒素、感染、尿路閉塞による突然の腎機能喪失で、高窒素血症と電解質不均衡を引き起こします。",
         "urgency": "emergency",
@@ -1506,15 +1506,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["skull_radiographs", "ct_scan", "oral_exam"],
     },
-    {
-        "name": "Intestinal Parasites (Giardia)",
-        "name_ja": "腸管寄生虫症（ジアルジア）",
-        "symptoms": {"loose_stool", "weight_loss", "appetite_loss", "dehydration"},
-        "description": "Giardia lamblia infection causing chronic intermittent diarrhea and weight loss.",
-        "description_ja": "ランブル鞭毛虫感染による慢性間欠性下痢と体重減少。",
-        "urgency": "moderate",
-        "recommended_tests": ["fecal_exam", "giardia_antigen_test"],
-    },
+    # Duplicate "Intestinal Parasites (Giardia)" removed (merged into earlier entry at line 807)
     {
         "name": "Alopecia - Post-partum",
         "name_ja": "脱毛（産後）",
@@ -1524,15 +1516,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "low",
         "recommended_tests": ["physical_exam", "blood_panel", "dietary_review"],
     },
-    {
-        "name": "Hepatic Coccidiosis",
-        "name_ja": "肝コクシジウム症",
-        "symptoms": {"jaundice", "weight_loss", "appetite_loss", "lethargy", "abdominal_distension"},
-        "description": "Eimeria chinchillae infection of the liver causing bile duct hyperplasia and hepatic dysfunction.",
-        "description_ja": "アイメリア・チンチレの肝感染で、胆管過形成と肝機能障害を引き起こす。",
-        "urgency": "high",
-        "recommended_tests": ["fecal_flotation", "blood_panel", "liver_ultrasound"],
-    },
+    # Duplicate "Hepatic Coccidiosis" removed (same symptoms as earlier entry at line 834)
     {
         "name": "Congenital Megacolon",
         "name_ja": "先天性巨大結腸",

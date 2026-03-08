@@ -88,7 +88,7 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
         {"id": "rabbit_mixed", "name": "Mixed Breed", "name_ja": "雑種（ミックス）",
          "risk": {}},
         {"id": "rabbit_netherland_dwarf", "name": "Netherland Dwarf", "name_ja": "ネザーランドドワーフ",
-         "risk": {"Malocclusion": 2.5, "Gastrointestinal Stasis": 1.5, "Pasteurellosis": 1.3}},
+         "risk": {"Malocclusion": 2.5, "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5, "Pasteurellosis": 1.3}},
         {"id": "rabbit_holland_lop", "name": "Holland Lop", "name_ja": "ホーランドロップ",
          "risk": {"Otitis Media / Interna": 2.0, "Malocclusion": 1.8, "Gastrointestinal Stasis": 1.3}},
         {"id": "rabbit_mini_rex", "name": "Mini Rex", "name_ja": "ミニレッキス",
@@ -253,12 +253,12 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     frozenset({"vomiting", "bloating"}): {
         "Gastric Dilatation-Volvulus (GDV/Bloat)": 2.0,
         "Intestinal Obstruction": 1.5,
-        "Gastrointestinal Stasis": 1.5,
+        "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5,
     },
     frozenset({"vomiting", "bloated_abdomen"}): {
         "Gastric Dilatation-Volvulus (GDV/Bloat)": 2.0,
         "Intestinal Obstruction": 1.5,
-        "Gastrointestinal Stasis": 1.5,
+        "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5,
     },
     # 多飲 + 頻尿 → 腎臓病・糖尿 (犬は excessive_urination, 他種は frequent_urination)
     frozenset({"excessive_thirst", "frequent_urination"}): {
@@ -278,7 +278,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 咳 + 呼吸困難 → 心不全・肺炎 (犬は difficulty_breathing, 他種は labored_breathing)
     frozenset({"coughing", "labored_breathing"}): {
-        "Heart Disease/CHF": 1.8,
+        "Heart Disease/CHF": 1.8, "Congestive Heart Failure": 1.8,
         "Feline Hypertrophic Cardiomyopathy (HCM)": 1.8,
         "Pneumonia": 1.8,
         "Feline Pneumonia": 1.8,
@@ -286,7 +286,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Feline Asthma": 1.5,
     },
     frozenset({"coughing", "difficulty_breathing"}): {
-        "Heart Disease/CHF": 1.8,
+        "Heart Disease/CHF": 1.8, "Congestive Heart Failure": 1.8,
         "Pneumonia": 1.8,
         "Pleural Effusion": 1.5,
     },
@@ -366,7 +366,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 失神 + 運動不耐性 → 心臓病
     frozenset({"fainting", "exercise_intolerance"}): {
-        "Heart Disease/CHF": 2.5,
+        "Heart Disease/CHF": 2.5, "Congestive Heart Failure": 2.5,
         "Feline Hypertrophic Cardiomyopathy (HCM)": 2.0,
         "Aortic Stenosis": 2.0,
         "Pulmonic Stenosis": 1.8,
@@ -375,7 +375,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 失神/虚脱 + 呼吸困難 → 心臓病 (犬用: collapse + difficulty_breathing)
     frozenset({"collapse", "difficulty_breathing"}): {
-        "Heart Disease/CHF": 2.0,
+        "Heart Disease/CHF": 2.0, "Congestive Heart Failure": 2.0,
         "Pneumothorax": 2.0,
         "Pericardial Effusion": 1.8,
     },
@@ -413,7 +413,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 咳 + 運動不耐性 → 心臓病・気管虚脱
     frozenset({"coughing", "exercise_intolerance"}): {
-        "Heart Disease/CHF": 2.0,
+        "Heart Disease/CHF": 2.0, "Congestive Heart Failure": 2.0,
         "Tracheal Collapse": 2.0,
         "Heartworm Disease": 1.8,
     },
@@ -740,7 +740,7 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     # --- 腎機能 --- [27] Polzin (2011)
     ("bun", "high"): {
         "Chronic Kidney Disease (CKD)": 1.8,
-        "Acute Kidney Injury": 2.0,
+        "Acute Kidney Injury": 2.0, "Acute Renal Failure": 2.0,
         "Urinary Obstruction": 1.5,
         "Urethral Obstruction": 1.5,
         "Dehydration": 1.3,
@@ -749,14 +749,14 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     },
     ("creatinine", "high"): {
         "Chronic Kidney Disease (CKD)": 2.0,
-        "Acute Kidney Injury": 2.0,
+        "Acute Kidney Injury": 2.0, "Acute Renal Failure": 2.0,
         "Urinary Obstruction": 1.8,
         "Urethral Obstruction": 1.8,
         "Leptospirosis": 1.5,
     },
     ("sdma", "high"): {
         "Chronic Kidney Disease (CKD)": 2.0,  # [27] SDMA rises before Cre
-        "Acute Kidney Injury": 1.8,
+        "Acute Kidney Injury": 1.8, "Acute Renal Failure": 1.8,
     },
 
     # --- 肝機能 --- [2] Ettinger Ch.296–300
@@ -844,7 +844,7 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     # --- 電解質 --- [2] Ettinger Ch.55–58
     ("potassium", "high"): {
         "Addison's Disease (Hypoadrenocorticism)": 2.0,
-        "Acute Kidney Injury": 1.8,
+        "Acute Kidney Injury": 1.8, "Acute Renal Failure": 1.8,
         "Urinary Obstruction": 1.8,
         "Urethral Obstruction": 1.8,
     },
@@ -877,7 +877,7 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     },
     ("phosphorus", "high"): {
         "Chronic Kidney Disease (CKD)": 1.8,
-        "Acute Kidney Injury": 1.5,
+        "Acute Kidney Injury": 1.5, "Acute Renal Failure": 1.5,
         "Hypoparathyroidism": 1.5,
     },
 
