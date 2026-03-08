@@ -237,6 +237,8 @@ class TestAnalyzeSymptoms:
             "age_applied",
             "age_years",
             "age_stage",
+            "lab_boost_applied",
+            "lab_values",
             "symptom_names",
         }
         assert set(result.keys()) == expected_keys
@@ -564,18 +566,24 @@ class TestComputeSeverity:
         ]
         assert _compute_severity(suspected) == "high"
 
+    def test_returns_high_for_high_urgency_moderate_likelihood(self):
+        suspected = [
+            {"_urgency": "high", "likelihood": "moderate"},
+        ]
+        assert _compute_severity(suspected) == "high"
+
     def test_returns_emergency_for_emergency_high_likelihood(self):
         suspected = [
             {"_urgency": "emergency", "likelihood": "high"},
         ]
         assert _compute_severity(suspected) == "emergency"
 
-    def test_emergency_urgency_moderate_likelihood_not_emergency(self):
-        """Emergency disease at moderate likelihood should NOT trigger emergency."""
+    def test_emergency_urgency_moderate_likelihood_is_high(self):
+        """Emergency disease at moderate likelihood should still trigger high severity."""
         suspected = [
             {"_urgency": "emergency", "likelihood": "moderate"},
         ]
-        assert _compute_severity(suspected) == "low"
+        assert _compute_severity(suspected) == "high"
 
     def test_emergency_urgency_low_likelihood_is_low(self):
         suspected = [
@@ -778,7 +786,7 @@ class TestDataIntegrity:
             )
 
     def test_disease_urgency_values(self):
-        valid_urgency = {"normal", "urgent", "emergency"}
+        valid_urgency = {"low", "moderate", "normal", "high", "urgent", "emergency"}
         for disease in _DISEASE_DB:
             assert disease["urgency"] in valid_urgency, (
                 f"Disease '{disease['name']}' has invalid urgency: "
