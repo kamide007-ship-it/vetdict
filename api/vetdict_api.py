@@ -42,7 +42,7 @@ CORS(app)
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
-STATIC_DIR = str(ROOT_DIR / 'templates')
+STATIC_DIR = str(ROOT_DIR / 'static')
 
 # ---------------------------------------------------------------------------
 # Module imports — graceful degradation
@@ -199,7 +199,18 @@ def favicon():
     try:
         return send_from_directory(STATIC_DIR, 'favicon.ico')
     except (FileNotFoundError, WerkzeugNotFound):
-        return '', 204
+        try:
+            return send_from_directory(TEMPLATES_DIR, 'favicon.ico')
+        except (FileNotFoundError, WerkzeugNotFound):
+            return '', 204
+
+
+@app.route('/static/<path:filename>')
+def static_assets(filename):
+    try:
+        return send_from_directory(STATIC_DIR, filename)
+    except (FileNotFoundError, WerkzeugNotFound):
+        return jsonify({'error': f'{filename} not found'}), 404
 
 
 @app.route('/<path:filename>')
@@ -207,7 +218,10 @@ def static_files(filename):
     try:
         return send_from_directory(STATIC_DIR, filename)
     except (FileNotFoundError, WerkzeugNotFound):
-        return jsonify({'error': f'{filename} not found'}), 404
+        try:
+            return send_from_directory(TEMPLATES_DIR, filename)
+        except (FileNotFoundError, WerkzeugNotFound):
+            return jsonify({'error': f'{filename} not found'}), 404
 
 
 # =============================================================================
