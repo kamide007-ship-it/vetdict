@@ -6002,6 +6002,20 @@ _TEST_DB: list[dict[str, Any]] = [
 ]
 
 # ---------------------------------------------------------------------------
+# Merge enrichment data (detailed clinical info) into _DISEASE_DB
+# ---------------------------------------------------------------------------
+try:
+    from api.dog_disease_enrichment import DOG_ENRICHMENT as _DOG_ENRICH
+
+    _enrich_index = {d["name"]: d for d in _DISEASE_DB}
+    for _name, _data in _DOG_ENRICH.items():
+        if _name in _enrich_index:
+            _enrich_index[_name].update(_data)
+    del _enrich_index, _DOG_ENRICH
+except ImportError:
+    pass  # enrichment file not yet available
+
+# ---------------------------------------------------------------------------
 # Breed-specific disease risk multipliers
 # ---------------------------------------------------------------------------
 # Maps breed IDs to diseases they are predisposed to, with risk multipliers.
@@ -6906,6 +6920,16 @@ def analyze_symptoms(
             "color_class": color_class,
             "description": disease["description"],
             "description_ja": disease.get("description_ja", ""),
+            "pathophysiology": disease.get("pathophysiology", ""),
+            "pathophysiology_ja": disease.get("pathophysiology_ja", ""),
+            "causes": disease.get("causes", ""),
+            "causes_ja": disease.get("causes_ja", ""),
+            "prevention": disease.get("prevention", ""),
+            "prevention_ja": disease.get("prevention_ja", ""),
+            "treatment": disease.get("treatment", ""),
+            "treatment_ja": disease.get("treatment_ja", ""),
+            "prognosis": disease.get("prognosis", ""),
+            "prognosis_ja": disease.get("prognosis_ja", ""),
             "matching_symptoms": sorted(matching),
             "match_count": match_count,
             "total_symptoms": total,
