@@ -1417,10 +1417,64 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "swollen_femoral_pores": {"ja": "大腿孔の腫脹", "en": "Swollen femoral pores"},
     "limb_swelling": {"ja": "四肢の腫脹", "en": "Limb swelling"},
     "granulomatous_lesions": {"ja": "肉芽腫性病変", "en": "Granulomatous lesions"},
+
+    # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
+    "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
+    "anemia": {"ja": "貧血", "en": "Anemia"},
+    "ataxia": {"ja": "Ataxia", "en": "Ataxia"},
+    "bone_swelling": {"ja": "骨腫脹", "en": "Bone swelling"},
+    "bone_weakness": {"ja": "骨脆弱", "en": "Bone weakness"},
+    "cloudy_eye": {"ja": "Cloudy Eye", "en": "Cloudy Eye"},
+    "crusty_nodules": {"ja": "Crusty Nodules", "en": "Crusty Nodules"},
+    "crusty_scales": {"ja": "Crusty Scales", "en": "Crusty Scales"},
+    "dark_skin_masses": {"ja": "暗色皮膚腫瘤", "en": "Dark skin masses"},
+    "dermatitis": {"ja": "皮膚炎", "en": "Dermatitis"},
+    "discoloration": {"ja": "Discoloration", "en": "Discoloration"},
+    "generalized_swelling": {"ja": "Generalized Swelling", "en": "Generalized Swelling"},
+    "hind_limb_swelling": {"ja": "Hind Limb Swelling", "en": "Hind Limb Swelling"},
+    "hind_limb_weakness": {"ja": "後肢の衰弱", "en": "Hind limb weakness"},
+    "immunosuppression": {"ja": "免疫抑制", "en": "Immunosuppression"},
+    "inability_to_use_limb": {"ja": "四肢使用不能", "en": "Inability to use limb"},
+    "intestinal_obstruction": {"ja": "腸閉塞", "en": "Intestinal obstruction"},
+    "joint_swelling": {"ja": "関節腫脹", "en": "Joint swelling"},
+    "loss_of_tail_function": {"ja": "Loss Of Tail Function", "en": "Loss Of Tail Function"},
+    "mouth_rot": {"ja": "Mouth Rot", "en": "Mouth Rot"},
+    "muscle_wasting": {"ja": "筋萎縮", "en": "Muscle wasting"},
+    "muscle_weakness": {"ja": "筋力低下", "en": "Muscle weakness"},
+    "oral_mucus": {"ja": "Oral Mucus", "en": "Oral Mucus"},
+    "orange_red_clusters": {"ja": "Orange Red Clusters", "en": "Orange Red Clusters"},
+    "pain": {"ja": "疼痛", "en": "Pain"},
+    "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
+    "palpable_mass": {"ja": "Palpable Mass", "en": "Palpable Mass"},
+    "papular_dermatitis": {"ja": "Papular Dermatitis", "en": "Papular Dermatitis"},
+    "pneumonia": {"ja": "Pneumonia", "en": "Pneumonia"},
+    "poor_appetite": {"ja": "食欲減退", "en": "Poor appetite"},
+    "poor_wound_healing": {"ja": "Poor Wound Healing", "en": "Poor Wound Healing"},
+    "rapid_growth": {"ja": "Rapid Growth", "en": "Rapid Growth"},
+    "segments_in_stool": {"ja": "Segments In Stool", "en": "Segments In Stool"},
+    "septicemia": {"ja": "敗血症", "en": "Septicemia"},
+    "skin_blistering": {"ja": "Skin Blistering", "en": "Skin Blistering"},
+    "skin_color_changes": {"ja": "Skin Color Changes", "en": "Skin Color Changes"},
+    "skin_discoloration": {"ja": "皮膚変色", "en": "Skin discoloration"},
+    "skin_masses": {"ja": "皮膚腫瘤", "en": "Skin masses"},
+    "skin_nodules": {"ja": "皮膚結節", "en": "Skin nodules"},
+    "skin_papillomas": {"ja": "皮膚乳頭腫", "en": "Skin papillomas"},
+    "skin_ulceration": {"ja": "皮膚潰瘍化", "en": "Skin ulceration"},
+    "soft_mass": {"ja": "Soft Mass", "en": "Soft Mass"},
+    "swelling_at_fracture": {"ja": "Swelling At Fracture", "en": "Swelling At Fracture"},
+    "swelling_behind_jaw": {"ja": "Swelling Behind Jaw", "en": "Swelling Behind Jaw"},
+    "tissue_protruding_from_cloaca": {"ja": "Tissue Protruding From Cloaca", "en": "Tissue Protruding From Cloaca"},
+    "ulcerated_masses": {"ja": "Ulcerated Masses", "en": "Ulcerated Masses"},
+    "ulceration": {"ja": "潰瘍形成", "en": "Ulceration"},
+    "unconsciousness": {"ja": "Unconsciousness", "en": "Unconsciousness"},
+    "vestibular_signs": {"ja": "Vestibular Signs", "en": "Vestibular Signs"},
+    "visible_leeches": {"ja": "Visible Leeches", "en": "Visible Leeches"},
+    "wart_like_growths": {"ja": "疣贅様増殖", "en": "Wart-like growths"},
+    "white_corneal_deposits": {"ja": "White Corneal Deposits", "en": "White Corneal Deposits"},
 }
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None) -> Dict[str, Any]:
+def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None) -> Dict[str, Any]:
     """Analyze lizard symptoms and return suspected diseases.
 
     Parameters
@@ -1437,4 +1491,4 @@ def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None
     dict
         Analysis result in the standard differential diagnosis format.
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species)
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values)

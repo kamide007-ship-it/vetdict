@@ -350,6 +350,7 @@ def api_analyze_symptoms():
     breed = data.get('breed')
     onset = data.get('onset')  # "acute" | "subacute" | "chronic"
     age_years = data.get('age_years')  # numeric age in years
+    lab_values_raw = data.get('lab_values')  # {item_id: numeric_value}
 
     # Validate onset
     if onset and onset not in ('acute', 'subacute', 'chronic'):
@@ -362,10 +363,23 @@ def api_analyze_symptoms():
         except (ValueError, TypeError):
             return {'error': 'age_years must be a number'}, 400
 
+    # Coerce lab_values to {str: float}
+    lab_values = None
+    if lab_values_raw and isinstance(lab_values_raw, dict):
+        lab_values = {}
+        for k, v in lab_values_raw.items():
+            try:
+                lab_values[str(k)] = float(v)
+            except (ValueError, TypeError):
+                continue
+        if not lab_values:
+            lab_values = None
+
     try:
         if species == 'dog' or species is None:
             result = analyze_symptoms(
                 symptoms, breed=breed, onset=onset, age_years=age_years,
+                lab_values=lab_values,
             )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
@@ -373,6 +387,7 @@ def api_analyze_symptoms():
             result = analyze_species_symptoms(
                 species, symptoms, age_stage,
                 breed=breed, onset=onset, age_years=age_years,
+                lab_values=lab_values,
             )
         return result
     except ValueError as ve:

@@ -1,6 +1,6 @@
 # VetDict - Veterinary Differential Diagnosis Platform
 
-The world's largest open veterinary differential diagnosis platform — **4,100+ diseases** across **20 animal species**, **175+ drugs** with species-specific safety data, and an AI integrity control layer (RECO2/RECO3).
+The world's largest open veterinary differential diagnosis platform — **4,800+ diseases** across **20 animal species**, **175+ drugs** with species-specific safety data, and an AI integrity control layer (RECO2/RECO3).
 
 > Built by a practicing veterinarian. Bilingual (Japanese / English).
 
@@ -11,7 +11,7 @@ The world's largest open veterinary differential diagnosis platform — **4,100+
 | Metric | Value |
 |--------|-------|
 | Animal Species | 20 |
-| Diseases | 4,100+ |
+| Diseases | 4,800+ |
 | Drugs | 175+ |
 | Symptoms | 52 |
 | Breeds (cat) | 15 |
@@ -25,14 +25,14 @@ The world's largest open veterinary differential diagnosis platform — **4,100+
 - Real-time animated disease counts on the landing page
 
 ### Disease Database
-- 4,100+ diseases with Japanese / English bilingual descriptions
-- 20 species: Dog, Cat, Horse, Rabbit, Hamster, Guinea Pig, Chinchilla, Ferret, Hedgehog, Sugar Glider, Degu, Bird, Parakeet, Parrot, Reptile, Tortoise, Snake, Lizard, Amphibian, Exotic Other
+- 4,800+ diseases with Japanese / English bilingual descriptions
+- 20 species: Dog (577), Cat (516), Horse (736), Rabbit (271), Bird (308), Parakeet (251), Guinea Pig (200), Hamster (190), Chinchilla (169), Reptile (161), Tortoise (161), Ferret (160), Parrot (160), Exotic Other (151), Snake (141), Lizard (141), Hedgehog (140), Amphibian (131), Sugar Glider (130), Degu (120)
 
 ### Drug Dictionary
 - 175+ drugs with species-specific dosage, safety, routes, formulations, and drug interactions
 
 ### Bilingual Mode (JP / EN)
-- One-click language toggle (JP ↔ EN) in the header
+- One-click language toggle (JP / EN) in the header
 - All UI labels, placeholders, error messages, and data fields switch between Japanese and English
 - Language preference saved in localStorage
 
@@ -46,7 +46,7 @@ The world's largest open veterinary differential diagnosis platform — **4,100+
 ### AI Integrity Control (RECO2 / RECO3)
 - **Input Gate** — Detects ambiguity, overconfident assertions, emotional language, and unrealistic expectations
 - **Output Gate** — Checks for unsupported claims, missing evidence, contradictions, and inappropriate content
-- **Orchestrator** — Temperature-controlled generation with automatic regeneration when confidence (ψ) falls below threshold
+- **Orchestrator** — Temperature-controlled generation with automatic regeneration when confidence (psi) falls below threshold
 
 ## Accessibility & UI/UX
 
@@ -70,7 +70,7 @@ vetdict/
 │   ├── drug_dictionary.py  # Drug database
 │   └── species/            # 20 species disease modules
 ├── reco2/                  # AI integrity control layer
-│   ├── engine.py           # Evaluation algorithm (ψ scoring)
+│   ├── engine.py           # Evaluation algorithm (psi scoring)
 │   ├── input_gate.py       # Input risk analysis
 │   ├── output_gate.py      # Output quality checks
 │   ├── orchestrator.py     # Full pipeline orchestration

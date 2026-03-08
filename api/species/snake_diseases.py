@@ -1403,10 +1403,73 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "slow_reflexes": {"ja": "反射低下", "en": "Slow reflexes"},
     "pain_response": {"ja": "疼痛反応", "en": "Pain response"},
     "granulomatous_lesions": {"ja": "肉芽腫性病変", "en": "Granulomatous lesions"},
+
+    # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
+    "bone_deformity": {"ja": "骨変形", "en": "Bone deformity"},
+    "bone_weakness": {"ja": "骨脆弱", "en": "Bone weakness"},
+    "crusty_nodules": {"ja": "Crusty Nodules", "en": "Crusty Nodules"},
+    "crusty_scales": {"ja": "Crusty Scales", "en": "Crusty Scales"},
+    "cyanosis": {"ja": "チアノーゼ", "en": "Cyanosis"},
+    "dark_skin_masses": {"ja": "暗色皮膚腫瘤", "en": "Dark skin masses"},
+    "dermatitis": {"ja": "皮膚炎", "en": "Dermatitis"},
+    "discoloration": {"ja": "Discoloration", "en": "Discoloration"},
+    "eye_opacity": {"ja": "Eye Opacity", "en": "Eye Opacity"},
+    "fractures": {"ja": "骨折", "en": "Fractures"},
+    "generalized_swelling": {"ja": "Generalized Swelling", "en": "Generalized Swelling"},
+    "head_swelling": {"ja": "Head Swelling", "en": "Head Swelling"},
+    "immunosuppression": {"ja": "免疫抑制", "en": "Immunosuppression"},
+    "intestinal_obstruction": {"ja": "腸閉塞", "en": "Intestinal obstruction"},
+    "jaw_softening": {"ja": "顎軟化", "en": "Jaw softening"},
+    "kidney_enlargement": {"ja": "Kidney Enlargement", "en": "Kidney Enlargement"},
+    "kinking_of_body": {"ja": "Kinking Of Body", "en": "Kinking Of Body"},
+    "liver_enlargement": {"ja": "肝臓腫大", "en": "Liver enlargement"},
+    "loss_of_movement_posterior": {"ja": "Loss Of Movement Posterior", "en": "Loss Of Movement Posterior"},
+    "mouth_rot": {"ja": "Mouth Rot", "en": "Mouth Rot"},
+    "muscle_twitching": {"ja": "Muscle Twitching", "en": "Muscle Twitching"},
+    "muscle_wasting": {"ja": "筋萎縮", "en": "Muscle wasting"},
+    "muscle_weakness": {"ja": "筋力低下", "en": "Muscle weakness"},
+    "oral_lesions": {"ja": "口腔内病変", "en": "Oral lesions"},
+    "oral_mucus": {"ja": "Oral Mucus", "en": "Oral Mucus"},
+    "orange_red_clusters": {"ja": "Orange Red Clusters", "en": "Orange Red Clusters"},
+    "organ_failure": {"ja": "Organ Failure", "en": "Organ Failure"},
+    "pain_on_handling": {"ja": "Pain On Handling", "en": "Pain On Handling"},
+    "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
+    "papular_dermatitis": {"ja": "Papular Dermatitis", "en": "Papular Dermatitis"},
+    "pneumonia": {"ja": "Pneumonia", "en": "Pneumonia"},
+    "poor_appetite": {"ja": "食欲減退", "en": "Poor appetite"},
+    "poor_feeding_response": {"ja": "Poor Feeding Response", "en": "Poor Feeding Response"},
+    "poor_wound_healing": {"ja": "Poor Wound Healing", "en": "Poor Wound Healing"},
+    "posterior_body_swelling": {"ja": "Posterior Body Swelling", "en": "Posterior Body Swelling"},
+    "pruritus": {"ja": "Pruritus", "en": "Pruritus"},
+    "reproductive_failure": {"ja": "Reproductive Failure", "en": "Reproductive Failure"},
+    "segments_in_stool": {"ja": "Segments In Stool", "en": "Segments In Stool"},
+    "septicemia": {"ja": "敗血症", "en": "Septicemia"},
+    "skin_blistering": {"ja": "Skin Blistering", "en": "Skin Blistering"},
+    "skin_color_changes": {"ja": "Skin Color Changes", "en": "Skin Color Changes"},
+    "skin_discoloration": {"ja": "皮膚変色", "en": "Skin discoloration"},
+    "skin_masses": {"ja": "皮膚腫瘤", "en": "Skin masses"},
+    "skin_nodules": {"ja": "皮膚結節", "en": "Skin nodules"},
+    "skin_papillomas": {"ja": "皮膚乳頭腫", "en": "Skin papillomas"},
+    "skin_sloughing": {"ja": "Skin Sloughing", "en": "Skin Sloughing"},
+    "skin_ulceration": {"ja": "皮膚潰瘍化", "en": "Skin ulceration"},
+    "soft_mass": {"ja": "Soft Mass", "en": "Soft Mass"},
+    "star_gazing": {"ja": "Star Gazing", "en": "Star Gazing"},
+    "swelling_at_site": {"ja": "Swelling At Site", "en": "Swelling At Site"},
+    "tail_necrosis": {"ja": "Tail Necrosis", "en": "Tail Necrosis"},
+    "tissue_calcification": {"ja": "Tissue Calcification", "en": "Tissue Calcification"},
+    "tissue_discoloration": {"ja": "Tissue Discoloration", "en": "Tissue Discoloration"},
+    "tissue_protruding_from_cloaca": {"ja": "Tissue Protruding From Cloaca", "en": "Tissue Protruding From Cloaca"},
+    "ulcerated_masses": {"ja": "Ulcerated Masses", "en": "Ulcerated Masses"},
+    "unconsciousness": {"ja": "Unconsciousness", "en": "Unconsciousness"},
+    "upper_respiratory_signs": {"ja": "Upper Respiratory Signs", "en": "Upper Respiratory Signs"},
+    "vestibular_signs": {"ja": "Vestibular Signs", "en": "Vestibular Signs"},
+    "visible_leeches": {"ja": "Visible Leeches", "en": "Visible Leeches"},
+    "wart_like_growths": {"ja": "疣贅様増殖", "en": "Wart-like growths"},
+    "yellow_skin_lesions": {"ja": "Yellow Skin Lesions", "en": "Yellow Skin Lesions"},
 }
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None) -> Dict[str, Any]:
+def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None) -> Dict[str, Any]:
     """Analyze snake symptoms and return suspected diseases.
 
     Parameters
@@ -1423,4 +1486,4 @@ def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None
     dict
         Analysis result in the standard differential diagnosis format.
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species)
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values)

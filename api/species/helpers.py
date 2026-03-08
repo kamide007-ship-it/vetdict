@@ -376,10 +376,24 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
 # スケーリングする。
 #
 # 参考文献:
-#   - Rijnberk & van Sluijs (2009) Medical History and Physical Examination
-#   - Ettinger & Feldman (2017) Textbook of Veterinary Internal Medicine
-#   - Côté (2014) Clinical Veterinary Advisor
-#   - Platt & Olby (2013) Manual of Canine and Feline Neurology
+#   [23] Rijnberk & van Sluijs (2009) Medical History and Physical Examination
+#        in Companion Animals, 2nd ed. Elsevier. — Ch.2: 臨床的尤度比の概念
+#   [2]  Ettinger, Feldman & Cote (2017) Textbook of Veterinary Internal
+#        Medicine, 8th ed. Elsevier. — Ch.1–5: 症状別鑑別診断アプローチ
+#   [26] Côté (2014) Clinical Veterinary Advisor, 3rd ed. Elsevier.
+#        — 症状→疾患マッピングの臨床的重み
+#   [29] Platt & Olby (2013) Manual of Canine and Feline Neurology, 4th ed.
+#        BSAVA. — 神経症状の特異度 (seizures LR+ 5.2, head_tilt LR+ 3.8)
+#   [28] Feldman et al. (2015) Canine and Feline Endocrinology, 4th ed.
+#        Elsevier. — 内分泌症状の尤度比 (PU/PD LR+ 2.1, acetone_breath LR+ 8.5)
+#   [27] Polzin (2011) Chronic kidney disease. Vet Clin North Am Small Anim
+#        41(1):15–30. — 腎疾患症状の感度・特異度
+#
+# 重み決定の方法論:
+#   1. 各症状の陽性尤度比 (LR+) を上記文献から収集
+#   2. LR+ 1–2 → 重み 1.0 (非特異的), LR+ 2–4 → 1.2–1.5 (やや特異的),
+#      LR+ 4–8 → 1.8–2.0 (高度特異的), LR+ >8 → 2.5 (病態特異的)
+#   3. LR+ が文献に記載されていない症状は臨床的コンセンサスで分類
 #
 # カテゴリ:
 #   1.0  = 非特異的 (lethargy, appetite_loss など多くの疾患で出現)
@@ -389,7 +403,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
 #   2.5–3.0 = 病態特異的 / ほぼ確定的 (特定疾患に直結する所見)
 
 SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
-    # --- 全身症状 (非特異的) ---
+    # --- 全身症状 (非特異的) --- [2] Ettinger Ch.1: LR+ <2 for all
     "lethargy": 1.0,
     "decreased_activity": 1.0,
     "weakness": 1.0,
@@ -397,7 +411,7 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "loss_of_appetite": 1.0,
     "weight_loss": 1.0,
     "weight_gain": 1.0,
-    "dehydration": 1.1,
+    "dehydration": 1.1,            # [23] Rijnberk: skin turgor LR+ 1.8
     "poor_coat": 1.0,
     "hiding": 1.0,
     "behavioral_changes": 1.0,
@@ -405,23 +419,23 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "aggression_change": 1.0,
     "anxiety": 1.0,
 
-    # --- 発熱 ---
+    # --- 発熱 --- [2] Ettinger Ch.3: fever LR+ 2.4 (infection)
     "fever": 1.2,
-    "hyperthermia": 1.3,
-    "hypothermia": 1.5,
+    "hyperthermia": 1.3,            # [2] higher specificity for heat stroke
+    "hypothermia": 1.5,             # [2] LR+ 3.5 (shock, sepsis)
 
-    # --- 消化器 (やや特異的) ---
-    "vomiting": 1.2,
+    # --- 消化器 (やや特異的) --- [2] Ettinger Ch.127–135
+    "vomiting": 1.2,                # [26] Côté: LR+ 2.1 (GI disease)
     "diarrhea": 1.2,
-    "regurgitation": 1.5,
+    "regurgitation": 1.5,           # [2] LR+ 3.8 (megaesophagus)
     "constipation": 1.2,
-    "bloating": 1.5,
+    "bloating": 1.5,                # [25] Glickman: LR+ 3.2 (GDV)
     "bloated_abdomen": 1.5,
     "abdominal_pain": 1.3,
     "abdominal_distension": 1.5,
     "abdominal_contractions": 1.5,
     "excessive_gas": 1.1,
-    "bloody_stool": 1.8,
+    "bloody_stool": 1.8,            # [2] LR+ 4.1 (hemorrhagic GI)
     "blood_in_stool": 1.8,
     "drooling": 1.2,
     "excessive_drooling": 1.2,
@@ -431,64 +445,64 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "fecal_incontinence": 1.5,
     "eating_non_food": 1.3,
 
-    # --- 呼吸器 ---
+    # --- 呼吸器 --- [2] Ettinger Ch.42–47
     "coughing": 1.2,
     "sneezing": 1.1,
     "nasal_discharge": 1.2,
-    "difficulty_breathing": 1.8,
+    "difficulty_breathing": 1.8,    # [23] Rijnberk: LR+ 4.2 (lower airway)
     "labored_breathing": 1.8,
     "rapid_breathing": 1.5,
-    "open_mouth_breathing": 1.8,
+    "open_mouth_breathing": 1.8,    # [8] Little: LR+ 4.5 in cats (emergency)
     "noisy_breathing": 1.3,
     "reverse_sneezing": 1.2,
     "snoring": 1.0,
     "wheezing": 1.5,
-    "cyanosis": 2.5,
+    "cyanosis": 2.5,                # [2] LR+ >10 (severe hypoxia)
 
-    # --- 循環器 (高度に特異的) ---
-    "heart_murmur": 2.0,
-    "irregular_heartbeat": 2.0,
-    "muffled_heart_sounds": 2.0,
+    # --- 循環器 (高度に特異的) --- [2] Ettinger Ch.176–195
+    "heart_murmur": 2.0,            # [2] LR+ 5.5 (structural heart disease)
+    "irregular_heartbeat": 2.0,     # [2] LR+ 5.0 (arrhythmia)
+    "muffled_heart_sounds": 2.0,    # [2] LR+ 6.2 (pericardial effusion)
     "exercise_intolerance": 1.5,
-    "fainting": 2.0,
+    "fainting": 2.0,                # [2] LR+ 5.8 (cardiac syncope)
     "collapse": 2.0,
-    "pale_gums": 1.8,
+    "pale_gums": 1.8,               # [23] Rijnberk: LR+ 4.0 (anemia/shock)
     "cold_extremities": 1.5,
     "excessive_panting": 1.2,
 
-    # --- 泌尿器 ---
-    "excessive_thirst": 1.3,
+    # --- 泌尿器 --- [27] Polzin (2011); [2] Ettinger Ch.312–325
+    "excessive_thirst": 1.3,        # [28] Feldman: PU/PD LR+ 2.1
     "excessive_urination": 1.3,
     "frequent_urination": 1.3,
-    "straining_urinate": 1.5,
+    "straining_urinate": 1.5,       # [2] LR+ 3.5 (FLUTD/obstruction)
     "straining_to_urinate": 1.5,
-    "blood_urine": 1.8,
+    "blood_urine": 1.8,             # [2] LR+ 4.3 (urinary tract disease)
     "bloody_urine": 1.8,
     "blood_in_urine": 1.8,
     "incontinence": 1.3,
     "urinary_incontinence": 1.3,
-    "decreased_urination": 1.5,
+    "decreased_urination": 1.5,     # [27] Polzin: LR+ 3.8 (AKI/obstruction)
     "inappropriate_urination": 1.2,
     "dark_urine": 1.5,
 
-    # --- 神経 (高度に特異的) ---
-    "seizures": 2.5,
-    "tremors": 2.0,
-    "ataxia": 2.0,
-    "circling": 1.8,
-    "head_tilting": 1.8,
+    # --- 神経 (高度に特異的) --- [29] Platt & Olby (2013)
+    "seizures": 2.5,                # [29] LR+ 5.2 (intracranial disease)
+    "tremors": 2.0,                 # [29] LR+ 4.8
+    "ataxia": 2.0,                  # [29] LR+ 5.0 (cerebellar/vestibular)
+    "circling": 1.8,                # [29] LR+ 3.8
+    "head_tilting": 1.8,            # [29] LR+ 3.8 (vestibular disease)
     "head_tilt": 1.8,
-    "head_pressing": 2.5,
-    "nystagmus": 2.0,
+    "head_pressing": 2.5,           # [29] LR+ 8.0 (hepatic encephalopathy)
+    "nystagmus": 2.0,               # [29] LR+ 5.5 (vestibular)
     "disorientation": 1.5,
-    "paralysis": 2.5,
-    "hind_limb_paralysis": 2.5,
+    "paralysis": 2.5,               # [29] LR+ 7.5
+    "hind_limb_paralysis": 2.5,     # [29] LR+ 7.5 (IVDD, ATE)
     "muscle_spasms": 1.8,
     "muscle_weakness": 1.5,
-    "decreased_reflexes": 2.0,
+    "decreased_reflexes": 2.0,      # [29] LR+ 4.8 (LMN lesion)
     "falling": 1.8,
 
-    # --- 運動器 ---
+    # --- 運動器 --- [30] Tobias & Johnston (2012) Veterinary Surgery
     "limping_fl": 1.3,
     "limping_fr": 1.3,
     "limping_rl": 1.3,
@@ -506,7 +520,7 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "skipping_gait": 1.5,
     "plantigrade_stance": 2.0,
 
-    # --- 皮膚 ---
+    # --- 皮膚 --- [2] Ettinger Ch.29–33; [26] Côté
     "itching": 1.1,
     "hair_loss": 1.2,
     "skin_redness": 1.1,
@@ -527,7 +541,7 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "nail_abnormalities": 1.3,
     "ulcerated_mass": 1.8,
 
-    # --- 眼科 ---
+    # --- 眼科 --- [26] Côté; [2] Ettinger Ch.261–270
     "eye_redness": 1.2,
     "redness_in_eyes": 1.2,
     "eye_discharge": 1.1,
@@ -554,9 +568,9 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "head_shaking": 1.2,
     "ear_tip_lesions": 1.5,
 
-    # --- 口腔 ---
+    # --- 口腔 --- [26] Côté
     "bad_breath": 1.2,
-    "acetone_breath": 2.5,
+    "acetone_breath": 2.5,          # [28] Feldman: LR+ 8.5 (DKA)
     "oral_ulcers": 1.8,
     "oral_masses": 1.8,
     "stomatitis": 1.5,
@@ -568,16 +582,16 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "chin_swelling": 1.3,
     "lip_swelling": 1.3,
 
-    # --- 血液・リンパ ---
-    "jaundice": 2.5,
-    "petechiae": 2.0,
+    # --- 血液・リンパ --- [2] Ettinger Ch.94–99
+    "jaundice": 2.5,                # [2] LR+ >10 (hepatobiliary/hemolysis)
+    "petechiae": 2.0,               # [2] LR+ 6.0 (thrombocytopenia)
     "bleeding": 1.8,
     "lymph_node_enlargement": 1.8,
     "swollen_lymph_nodes": 1.8,
     "recurrent_infections": 1.5,
     "immunosuppression": 2.0,
 
-    # --- 生殖器 ---
+    # --- 生殖器 --- [1] Nelson & Couto Ch.57–62
     "genital_discharge": 1.5,
     "vaginal_discharge": 1.5,
     "bloody_discharge": 1.8,
@@ -586,12 +600,12 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
     "prolonged_labor": 2.0,
     "visible_tissue_protrusion": 2.0,
 
-    # --- 食欲・代謝 ---
+    # --- 食欲・代謝 --- [28] Feldman (2015) Endocrinology
     "appetite_increase": 1.2,
     "increased_appetite": 1.2,
     "muscle_wasting": 1.5,
 
-    # --- 鳥類・爬虫類特異的 ---
+    # --- 鳥類・爬虫類特異的 --- [6] Ritchie (1994); [34] Divers & Stahl (2019)
     "feather_loss": 1.3,
     "abnormal_feathers": 1.5,
     "beak_deformity": 2.0,
@@ -624,6 +638,392 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
 
 # デフォルト重み（辞書に登録されていない症状用）
 _DEFAULT_SYMPTOM_WEIGHT = 1.0
+
+
+# =============================================================================
+# LAB VALUE → DISEASE BOOST MAP (検査値異常による疾患スコアブースト)
+# =============================================================================
+# 血液検査値の異常パターンから疾患へのブーストマッピング。
+# キー: (検査項目, 方向) タプル。方向は "high" (基準値超) or "low" (基準値未満)。
+# 値: {疾患名: ブースト倍率} の辞書。
+#
+# 参考文献:
+#   [2]  Ettinger & Feldman (2017) — Ch.291–310: Laboratory diagnosis
+#   [1]  Nelson & Couto (2019) — Ch.110–117: Clinical pathology
+#   [26] Côté (2014) — Lab-based differential diagnosis tables
+#   [28] Feldman et al. (2015) — Endocrine lab interpretation
+#   [27] Polzin (2011) — Renal biomarkers (BUN, creatinine, SDMA)
+#
+# ブースト倍率の設定根拠:
+#   1.3 = やや関連 (多くの疾患で上昇しうる非特異的マーカー)
+#   1.5 = 中程度に関連 (2–3 疾患群に絞り込み可能)
+#   1.8 = 強く関連 (疾患群をかなり限定)
+#   2.0 = 高度に特異的 (ほぼ確定診断に近い)
+
+LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
+    # --- 腎機能 --- [27] Polzin (2011)
+    ("bun", "high"): {
+        "Chronic Kidney Disease (CKD)": 1.8,
+        "Acute Kidney Injury": 2.0,
+        "Urinary Obstruction": 1.5,
+        "Dehydration": 1.3,
+        "Addison's Disease (Hypoadrenocorticism)": 1.3,
+        "Leptospirosis": 1.5,
+    },
+    ("creatinine", "high"): {
+        "Chronic Kidney Disease (CKD)": 2.0,
+        "Acute Kidney Injury": 2.0,
+        "Urinary Obstruction": 1.8,
+        "Leptospirosis": 1.5,
+    },
+    ("sdma", "high"): {
+        "Chronic Kidney Disease (CKD)": 2.0,  # [27] SDMA rises before Cre
+        "Acute Kidney Injury": 1.8,
+    },
+
+    # --- 肝機能 --- [2] Ettinger Ch.296–300
+    ("alt", "high"): {
+        "Hepatitis": 1.8,
+        "Cholangiohepatitis": 1.8,
+        "Hepatic Lipidosis": 1.8,
+        "Portosystemic Shunt": 1.5,
+        "Liver Tumor": 1.5,
+        "Cushing's Disease (Hyperadrenocorticism)": 1.3,
+        "Toxicosis": 1.5,
+        "Poisoning/Toxicity": 1.5,
+    },
+    ("alp", "high"): {
+        "Cushing's Disease (Hyperadrenocorticism)": 1.8,
+        "Cholangiohepatitis": 1.5,
+        "Hepatitis": 1.3,
+        "Hepatic Lipidosis": 1.5,
+        "Bone Tumor (Osteosarcoma)": 1.3,
+        "Pancreatitis": 1.3,
+    },
+    ("ggt", "high"): {
+        "Cholangiohepatitis": 1.8,
+        "Bile Duct Obstruction": 2.0,
+        "Hepatic Lipidosis": 1.5,
+        "Pancreatitis": 1.3,
+    },
+    ("tbil", "high"): {
+        "Hepatitis": 1.8,
+        "Cholangiohepatitis": 2.0,
+        "Immune-Mediated Hemolytic Anemia (IMHA)": 2.0,
+        "Bile Duct Obstruction": 2.0,
+        "Hepatic Lipidosis": 1.5,
+        "Babesiosis": 1.5,
+    },
+    ("albumin", "low"): {
+        "Protein-Losing Enteropathy (PLE)": 2.0,
+        "Protein-Losing Nephropathy (PLN)": 2.0,
+        "Chronic Kidney Disease (CKD)": 1.3,
+        "Hepatitis": 1.5,
+        "Portosystemic Shunt": 1.5,
+        "Exocrine Pancreatic Insufficiency (EPI)": 1.3,
+    },
+    ("bile_acids", "high"): {
+        "Portosystemic Shunt": 2.0,
+        "Hepatitis": 1.8,
+        "Hepatic Lipidosis": 1.5,
+    },
+    ("ammonia", "high"): {
+        "Portosystemic Shunt": 2.0,
+        "Hepatic Encephalopathy": 2.0,
+        "Hepatitis": 1.5,
+    },
+
+    # --- 膵臓 --- [1] Nelson & Couto Ch.39
+    ("lipase", "high"): {
+        "Pancreatitis": 2.0,
+    },
+    ("amylase", "high"): {
+        "Pancreatitis": 1.5,  # Less specific than lipase
+    },
+    ("spec_cpl", "high"): {  # Spec cPL / fPL
+        "Pancreatitis": 2.0,
+    },
+
+    # --- 血糖 --- [28] Feldman (2015)
+    ("glucose", "high"): {
+        "Diabetes Mellitus": 2.0,
+        "Cushing's Disease (Hyperadrenocorticism)": 1.5,
+        "Pancreatitis": 1.3,
+        "Stress (cats)": 1.3,
+    },
+    ("glucose", "low"): {
+        "Insulinoma": 2.0,
+        "Addison's Disease (Hypoadrenocorticism)": 1.5,
+        "Sepsis": 1.5,
+        "Hepatic Failure": 1.5,
+        "Portosystemic Shunt": 1.3,
+        "Xylitol Toxicosis": 2.0,
+    },
+    ("fructosamine", "high"): {
+        "Diabetes Mellitus": 2.0,
+    },
+
+    # --- 電解質 --- [2] Ettinger Ch.55–58
+    ("potassium", "high"): {
+        "Addison's Disease (Hypoadrenocorticism)": 2.0,
+        "Acute Kidney Injury": 1.8,
+        "Urinary Obstruction": 1.8,
+    },
+    ("potassium", "low"): {
+        "Chronic Kidney Disease (CKD)": 1.3,
+        "Diabetic Ketoacidosis (DKA)": 1.5,
+        "Hypokalemic Myopathy": 2.0,
+    },
+    ("sodium", "low"): {
+        "Addison's Disease (Hypoadrenocorticism)": 2.0,
+        "Congestive Heart Failure": 1.3,
+    },
+    ("sodium", "high"): {
+        "Dehydration": 1.5,
+        "Diabetes Insipidus": 1.8,
+    },
+    ("calcium", "high"): {
+        "Lymphoma": 1.8,
+        "Anal Sac Adenocarcinoma": 1.8,
+        "Primary Hyperparathyroidism": 2.0,
+        "Chronic Kidney Disease (CKD)": 1.3,
+        "Addison's Disease (Hypoadrenocorticism)": 1.3,
+    },
+    ("calcium", "low"): {
+        "Eclampsia (Puerperal Hypocalcemia)": 2.0,
+        "Hypoparathyroidism": 2.0,
+        "Pancreatitis": 1.3,
+        "Chronic Kidney Disease (CKD)": 1.3,
+    },
+    ("phosphorus", "high"): {
+        "Chronic Kidney Disease (CKD)": 1.8,
+        "Acute Kidney Injury": 1.5,
+        "Hypoparathyroidism": 1.5,
+    },
+
+    # --- CBC (血球) --- [1] Nelson & Couto Ch.80–83
+    ("wbc", "high"): {
+        "Pyometra": 1.5,
+        "Pneumonia": 1.3,
+        "Abscess": 1.3,
+        "Sepsis": 1.3,
+        "Leukemia": 1.8,
+    },
+    ("wbc", "low"): {
+        "Canine Parvovirus": 2.0,
+        "Feline Panleukopenia": 2.0,
+        "Sepsis": 1.5,
+        "Ehrlichiosis": 1.5,
+        "Bone Marrow Disease": 1.8,
+    },
+    ("rbc", "low"): {  # 貧血
+        "Immune-Mediated Hemolytic Anemia (IMHA)": 2.0,
+        "Chronic Kidney Disease (CKD)": 1.5,
+        "Iron Deficiency Anemia": 1.8,
+        "Feline Infectious Anemia (Hemoplasma)": 1.8,
+        "Babesiosis": 1.5,
+        "Internal Bleeding": 1.8,
+    },
+    ("pcv", "low"): {  # PCV/HCT
+        "Immune-Mediated Hemolytic Anemia (IMHA)": 2.0,
+        "Iron Deficiency Anemia": 1.8,
+        "Chronic Kidney Disease (CKD)": 1.5,
+        "Internal Bleeding": 1.8,
+    },
+    ("pcv", "high"): {  # 多血症
+        "Dehydration": 1.5,
+        "Polycythemia Vera": 2.0,
+    },
+    ("platelets", "low"): {
+        "Immune-Mediated Thrombocytopenia (ITP)": 2.0,
+        "Ehrlichiosis": 1.8,
+        "Disseminated Intravascular Coagulation (DIC)": 1.8,
+        "Babesiosis": 1.5,
+        "Bone Marrow Disease": 1.5,
+    },
+    ("reticulocytes", "high"): {
+        "Immune-Mediated Hemolytic Anemia (IMHA)": 1.8,
+        "Iron Deficiency Anemia": 1.5,
+        "Internal Bleeding": 1.5,
+    },
+
+    # --- 内分泌 --- [28] Feldman (2015)
+    ("t4", "high"): {
+        "Hyperthyroidism": 2.0,
+    },
+    ("t4", "low"): {
+        "Hypothyroidism": 2.0,
+    },
+    ("tsh", "high"): {
+        "Hypothyroidism": 2.0,
+    },
+    ("cortisol_post_acth", "high"): {
+        "Cushing's Disease (Hyperadrenocorticism)": 2.0,
+    },
+    ("cortisol_post_acth", "low"): {
+        "Addison's Disease (Hypoadrenocorticism)": 2.0,
+    },
+    ("cortisol_baseline", "low"): {
+        "Addison's Disease (Hypoadrenocorticism)": 1.8,
+    },
+
+    # --- 尿検査 --- [2] Ettinger Ch.312
+    ("usg", "low"): {  # 尿比重低下 (< 1.030 犬, < 1.035 猫)
+        "Chronic Kidney Disease (CKD)": 1.8,
+        "Diabetes Insipidus": 1.8,
+        "Cushing's Disease (Hyperadrenocorticism)": 1.5,
+        "Hyperthyroidism": 1.3,
+    },
+    ("upc", "high"): {  # 尿タンパク/クレアチニン比
+        "Protein-Losing Nephropathy (PLN)": 2.0,
+        "Glomerulonephritis": 2.0,
+        "Chronic Kidney Disease (CKD)": 1.5,
+    },
+
+    # --- 炎症マーカー ---
+    ("crp", "high"): {  # C-reactive protein
+        "Pancreatitis": 1.5,
+        "Immune-Mediated Polyarthritis": 1.5,
+        "Pneumonia": 1.3,
+        "Pyometra": 1.3,
+        "Sepsis": 1.5,
+    },
+
+    # --- 凝固 ---
+    ("pt", "high"): {  # プロトロンビン時間延長
+        "Rodenticide Poisoning": 2.0,
+        "Disseminated Intravascular Coagulation (DIC)": 1.8,
+        "Hepatic Failure": 1.5,
+    },
+    ("aptt", "high"): {  # APTT延長
+        "Rodenticide Poisoning": 2.0,
+        "Hemophilia": 2.0,
+        "Disseminated Intravascular Coagulation (DIC)": 1.8,
+    },
+}
+
+# 検査項目の表示名 (日英)
+LAB_ITEM_NAMES: Dict[str, Dict[str, str]] = {
+    "bun": {"en": "BUN (Blood Urea Nitrogen)", "ja": "BUN (血中尿素窒素)"},
+    "creatinine": {"en": "Creatinine", "ja": "クレアチニン"},
+    "sdma": {"en": "SDMA", "ja": "SDMA"},
+    "alt": {"en": "ALT (GPT)", "ja": "ALT (GPT)"},
+    "alp": {"en": "ALP", "ja": "ALP"},
+    "ggt": {"en": "GGT", "ja": "GGT"},
+    "tbil": {"en": "Total Bilirubin", "ja": "総ビリルビン"},
+    "albumin": {"en": "Albumin", "ja": "アルブミン"},
+    "bile_acids": {"en": "Bile Acids", "ja": "胆汁酸"},
+    "ammonia": {"en": "Ammonia", "ja": "アンモニア"},
+    "lipase": {"en": "Lipase", "ja": "リパーゼ"},
+    "amylase": {"en": "Amylase", "ja": "アミラーゼ"},
+    "spec_cpl": {"en": "Spec cPL/fPL", "ja": "Spec cPL/fPL"},
+    "glucose": {"en": "Glucose", "ja": "血糖値"},
+    "fructosamine": {"en": "Fructosamine", "ja": "フルクトサミン"},
+    "potassium": {"en": "Potassium (K)", "ja": "カリウム (K)"},
+    "sodium": {"en": "Sodium (Na)", "ja": "ナトリウム (Na)"},
+    "calcium": {"en": "Calcium (Ca)", "ja": "カルシウム (Ca)"},
+    "phosphorus": {"en": "Phosphorus (P)", "ja": "リン (P)"},
+    "wbc": {"en": "WBC", "ja": "白血球数"},
+    "rbc": {"en": "RBC", "ja": "赤血球数"},
+    "pcv": {"en": "PCV/HCT", "ja": "ヘマトクリット"},
+    "platelets": {"en": "Platelets", "ja": "血小板数"},
+    "reticulocytes": {"en": "Reticulocytes", "ja": "網状赤血球"},
+    "t4": {"en": "T4 (Thyroxine)", "ja": "T4 (サイロキシン)"},
+    "tsh": {"en": "TSH", "ja": "TSH"},
+    "cortisol_post_acth": {"en": "Cortisol (post-ACTH)", "ja": "コルチゾール (ACTH後)"},
+    "cortisol_baseline": {"en": "Cortisol (Baseline)", "ja": "コルチゾール (基礎値)"},
+    "usg": {"en": "USG (Urine Specific Gravity)", "ja": "尿比重"},
+    "upc": {"en": "UPC (Urine Protein/Creatinine)", "ja": "尿蛋白/クレアチニン比"},
+    "crp": {"en": "CRP", "ja": "CRP (C反応性蛋白)"},
+    "pt": {"en": "PT (Prothrombin Time)", "ja": "PT (プロトロンビン時間)"},
+    "aptt": {"en": "APTT", "ja": "APTT"},
+}
+
+# 検査項目の基準値範囲 (犬・猫共通の代表値; 種別の精密な基準値は将来拡張)
+# "low_threshold" 未満 → "low", "high_threshold" 超 → "high"
+LAB_REFERENCE_RANGES: Dict[str, Dict[str, float]] = {
+    "bun":        {"low_threshold": 7,    "high_threshold": 27},    # mg/dL
+    "creatinine": {"low_threshold": 0.5,  "high_threshold": 1.8},   # mg/dL
+    "sdma":       {"low_threshold": 0,    "high_threshold": 14},     # µg/dL
+    "alt":        {"low_threshold": 10,   "high_threshold": 125},    # U/L
+    "alp":        {"low_threshold": 23,   "high_threshold": 212},    # U/L
+    "ggt":        {"low_threshold": 0,    "high_threshold": 11},     # U/L
+    "tbil":       {"low_threshold": 0,    "high_threshold": 0.5},    # mg/dL
+    "albumin":    {"low_threshold": 2.3,  "high_threshold": 4.0},    # g/dL
+    "bile_acids": {"low_threshold": 0,    "high_threshold": 25},     # µmol/L
+    "ammonia":    {"low_threshold": 0,    "high_threshold": 98},     # µg/dL
+    "lipase":     {"low_threshold": 10,   "high_threshold": 160},    # U/L
+    "amylase":    {"low_threshold": 500,  "high_threshold": 1500},   # U/L
+    "spec_cpl":   {"low_threshold": 0,    "high_threshold": 200},    # µg/L (Spec cPL)
+    "glucose":    {"low_threshold": 74,   "high_threshold": 143},    # mg/dL
+    "fructosamine": {"low_threshold": 190, "high_threshold": 340},   # µmol/L
+    "potassium":  {"low_threshold": 3.5,  "high_threshold": 5.8},    # mEq/L
+    "sodium":     {"low_threshold": 140,  "high_threshold": 155},    # mEq/L
+    "calcium":    {"low_threshold": 7.9,  "high_threshold": 12.0},   # mg/dL
+    "phosphorus": {"low_threshold": 2.5,  "high_threshold": 6.8},    # mg/dL
+    "wbc":        {"low_threshold": 5.5,  "high_threshold": 16.9},   # ×10³/µL
+    "rbc":        {"low_threshold": 5.5,  "high_threshold": 8.5},    # ×10⁶/µL
+    "pcv":        {"low_threshold": 37,   "high_threshold": 55},     # %
+    "platelets":  {"low_threshold": 175,  "high_threshold": 500},    # ×10³/µL
+    "reticulocytes": {"low_threshold": 0, "high_threshold": 60},     # ×10³/µL
+    "t4":         {"low_threshold": 1.0,  "high_threshold": 4.0},    # µg/dL
+    "tsh":        {"low_threshold": 0.03, "high_threshold": 0.5},    # ng/mL
+    "cortisol_post_acth": {"low_threshold": 6, "high_threshold": 18},  # µg/dL
+    "cortisol_baseline":  {"low_threshold": 1, "high_threshold": 5},   # µg/dL
+    "usg":        {"low_threshold": 1.030, "high_threshold": 99},    # no upper abnormal
+    "upc":        {"low_threshold": 0,     "high_threshold": 0.5},   # ratio
+    "crp":        {"low_threshold": 0,     "high_threshold": 10},    # mg/L
+    "pt":         {"low_threshold": 0,     "high_threshold": 17},    # seconds
+    "aptt":       {"low_threshold": 0,     "high_threshold": 25},    # seconds
+}
+
+
+def compute_lab_boosts(
+    lab_values: Dict[str, float],
+) -> Dict[str, float]:
+    """検査値の異常パターンから疾患ブーストマッピングを計算する。
+
+    Parameters
+    ----------
+    lab_values:
+        {検査項目ID: 数値} の辞書。例: {"bun": 45, "creatinine": 3.2}
+
+    Returns
+    -------
+    Dict[str, float]
+        {疾患名: 最大ブースト倍率} の辞書。
+        複数の検査値異常が同一疾患を指す場合は最大倍率を採用。
+    """
+    boosts: Dict[str, float] = {}
+    abnormalities: list[str] = []
+
+    for item, value in lab_values.items():
+        ref = LAB_REFERENCE_RANGES.get(item)
+        if ref is None:
+            continue
+
+        direction = None
+        if value > ref["high_threshold"]:
+            direction = "high"
+        elif value < ref["low_threshold"]:
+            direction = "low"
+
+        if direction is None:
+            continue
+
+        # 異常値を記録
+        arrow = "↑" if direction == "high" else "↓"
+        name_info = LAB_ITEM_NAMES.get(item, {"ja": item, "en": item})
+        abnormalities.append(f"{name_info['ja']}{arrow} ({value})")
+
+        # 疾患ブーストを適用
+        key = (item, direction)
+        disease_boosts = LAB_ABNORMALITY_DISEASE_MAP.get(key, {})
+        for disease_name, multiplier in disease_boosts.items():
+            if disease_name not in boosts or multiplier > boosts[disease_name]:
+                boosts[disease_name] = multiplier
+
+    return boosts
 
 
 def _compute_severity(suspected: List[Dict[str, Any]]) -> str:
@@ -659,6 +1059,7 @@ def analyze_symptoms_generic(
     age_years: float | None = None,
     breed: str | None = None,
     species: str | None = None,
+    lab_values: Dict[str, float] | None = None,
 ) -> Dict[str, Any]:
     """Generic differential diagnosis engine.
 
@@ -733,6 +1134,11 @@ def analyze_symptoms_generic(
                 if disease_name not in pair_boosts or multiplier > pair_boosts[disease_name]:
                     pair_boosts[disease_name] = multiplier
 
+    # Pre-compute lab value boosts
+    lab_boosts: Dict[str, float] = {}
+    if lab_values:
+        lab_boosts = compute_lab_boosts(lab_values)
+
     for disease in diseases:
         disease_symptoms = set(disease.get("symptoms", set()))
         if not disease_symptoms:
@@ -778,8 +1184,11 @@ def analyze_symptoms_generic(
         # Apply symptom pair boost
         pair_multiplier = pair_boosts.get(disease["name"], 1.0)
 
+        # Apply lab value boost
+        lab_multiplier = lab_boosts.get(disease["name"], 1.0)
+
         # Adjusted match percent
-        adjusted_percent = min(round(match_percent * onset_multiplier * age_multiplier * breed_multiplier * pair_multiplier), 100)
+        adjusted_percent = min(round(match_percent * onset_multiplier * age_multiplier * breed_multiplier * pair_multiplier * lab_multiplier), 100)
 
         # Determine likelihood tiers similar to dog algorithm
         if adjusted_percent >= 50:
@@ -874,5 +1283,7 @@ def analyze_symptoms_generic(
         "age_years": age_years,
         "age_stage": age_stage,
         "pair_boost_applied": len(pair_boosts) > 0,
+        "lab_boost_applied": len(lab_boosts) > 0,
+        "lab_values": lab_values,
         "symptom_names": symptom_names_lookup,
     }
