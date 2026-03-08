@@ -249,13 +249,18 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
 # suggest specific diagnoses.
 
 SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
-    # 嘔吐 + 腹部膨満 → GDV (犬・全種共通で適用)
+    # 嘔吐 + 腹部膨満 → GDV (犬は bloated_abdomen, 他種は bloating)
     frozenset({"vomiting", "bloating"}): {
         "Gastric Dilatation-Volvulus (GDV/Bloat)": 2.0,
         "Intestinal Obstruction": 1.5,
         "Gastrointestinal Stasis": 1.5,
     },
-    # 多飲 + 頻尿 → 腎臓病・糖尿
+    frozenset({"vomiting", "bloated_abdomen"}): {
+        "Gastric Dilatation-Volvulus (GDV/Bloat)": 2.0,
+        "Intestinal Obstruction": 1.5,
+        "Gastrointestinal Stasis": 1.5,
+    },
+    # 多飲 + 頻尿 → 腎臓病・糖尿 (犬は excessive_urination, 他種は frequent_urination)
     frozenset({"excessive_thirst", "frequent_urination"}): {
         "Kidney Disease (CKD)": 2.0,
         "Feline Chronic Kidney Disease (CKD)": 2.0,
@@ -264,7 +269,14 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Hyperthyroidism": 1.5,
         "Pyometra": 1.5,
     },
-    # 咳 + 呼吸困難 → 心不全・肺炎
+    frozenset({"excessive_thirst", "excessive_urination"}): {
+        "Kidney Disease (CKD)": 2.0,
+        "Diabetes Mellitus": 2.0,
+        "Cushing's Disease": 1.5,
+        "Hyperthyroidism": 1.5,
+        "Pyometra": 1.5,
+    },
+    # 咳 + 呼吸困難 → 心不全・肺炎 (犬は difficulty_breathing, 他種は labored_breathing)
     frozenset({"coughing", "labored_breathing"}): {
         "Heart Disease/CHF": 1.8,
         "Feline Hypertrophic Cardiomyopathy (HCM)": 1.8,
@@ -273,7 +285,12 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Pleural Effusion": 1.5,
         "Feline Asthma": 1.5,
     },
-    # 嘔吐 + 血便 → パルボ・出血性胃腸炎
+    frozenset({"coughing", "difficulty_breathing"}): {
+        "Heart Disease/CHF": 1.8,
+        "Pneumonia": 1.8,
+        "Pleural Effusion": 1.5,
+    },
+    # 嘔吐 + 血便 → パルボ・出血性胃腸炎 (犬は bloody_stool, 他種は blood_in_stool)
     frozenset({"vomiting", "blood_in_stool"}): {
         "Parvovirus Infection": 2.0,
         "Hemorrhagic Gastroenteritis (HGE)": 2.0,
@@ -281,20 +298,36 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Intestinal Parasites": 1.5,
         "Inflammatory Bowel Disease (IBD)": 1.5,
     },
-    # けいれん + よだれ → 中毒・てんかん
+    frozenset({"vomiting", "bloody_stool"}): {
+        "Canine Parvovirus": 2.0,
+        "Hemorrhagic Gastroenteritis (HGE)": 2.0,
+        "Intestinal Parasites": 1.5,
+        "Inflammatory Bowel Disease (IBD)": 1.5,
+    },
+    # けいれん + よだれ → 中毒・てんかん (犬は drooling, 他種は excessive_drooling)
     frozenset({"seizures", "excessive_drooling"}): {
         "Poisoning/Toxicity": 2.0,
         "Epilepsy": 1.8,
         "Organophosphate Toxicity": 2.0,
         "Rabies": 1.5,
     },
-    # 黄疸 + 食欲不振 → 肝臓病
+    frozenset({"seizures", "drooling"}): {
+        "Poisoning/Toxicity": 2.0,
+        "Epilepsy": 1.8,
+        "Rabies": 1.5,
+    },
+    # 黄疸 + 食欲不振 → 肝臓病 (犬は appetite_loss, 他種は loss_of_appetite もあり)
     frozenset({"jaundice", "loss_of_appetite"}): {
         "Liver Disease": 2.0,
         "Feline Hepatic Lipidosis": 2.5,
         "Leptospirosis": 1.8,
         "Immune-Mediated Hemolytic Anemia": 1.8,
         "Cholangitis": 1.8,
+    },
+    frozenset({"jaundice", "appetite_loss"}): {
+        "Liver Disease": 2.0,
+        "Leptospirosis": 1.8,
+        "Immune-Mediated Hemolytic Anemia": 1.8,
     },
     # 体重減少 + 食欲不振 → がん・CKD
     frozenset({"weight_loss", "loss_of_appetite"}): {
@@ -305,12 +338,28 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Inflammatory Bowel Disease (IBD)": 1.5,
         "Feline Infectious Peritonitis (FIP)": 1.5,
     },
-    # 血尿 + 排尿困難 → 尿路結石・FLUTD
+    frozenset({"weight_loss", "appetite_loss"}): {
+        "Cancer/Neoplasia": 1.8,
+        "Kidney Disease (CKD)": 1.5,
+        "Hyperthyroidism": 1.5,
+        "Inflammatory Bowel Disease (IBD)": 1.5,
+    },
+    # 血尿 + 排尿困難 → 尿路結石・FLUTD (犬は blood_urine/straining_urinate)
     frozenset({"blood_in_urine", "straining_to_urinate"}): {
         "Bladder Stones": 2.0,
         "Feline Lower Urinary Tract Disease (FLUTD)": 2.5,
         "Urinary Tract Infection": 1.8,
         "Urethral Obstruction": 2.0,
+    },
+    frozenset({"bloody_urine", "straining_to_urinate"}): {
+        "Bladder Stones": 2.0,
+        "Feline Lower Urinary Tract Disease (FLUTD)": 2.5,
+        "Urinary Tract Infection": 1.8,
+        "Urethral Obstruction": 2.0,
+    },
+    frozenset({"blood_urine", "straining_urinate"}): {
+        "Bladder Stones": 2.0,
+        "Urinary Tract Infection": 1.8,
     },
     # 失神 + 運動不耐性 → 心臓病
     frozenset({"fainting", "exercise_intolerance"}): {
@@ -320,6 +369,12 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Pulmonic Stenosis": 1.8,
         "Cardiac Arrhythmia": 2.0,
     },
+    # 失神/虚脱 + 呼吸困難 → 心臓病 (犬用: collapse + difficulty_breathing)
+    frozenset({"collapse", "difficulty_breathing"}): {
+        "Heart Disease/CHF": 2.0,
+        "Pneumothorax": 2.0,
+        "Pericardial Effusion": 1.8,
+    },
     # 発熱 + リンパ節腫脹 → 感染症・リンパ腫
     frozenset({"fever", "swollen_lymph_nodes"}): {
         "Lymphoma": 2.0,
@@ -328,14 +383,21 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Feline Immunodeficiency Virus (FIV)": 1.5,
         "Ehrlichiosis": 1.8,
     },
+    frozenset({"fever", "swelling"}): {
+        "Lymphoma": 1.5,
+        "Abscess": 1.5,
+    },
     # 下痢 + 嘔吐 → 急性胃腸炎・中毒
     frozenset({"diarrhea", "vomiting"}): {
         "Acute Gastroenteritis": 1.8,
+        "Gastroenteritis": 1.8,
         "Pancreatitis": 1.8,
         "Poisoning/Toxicity": 1.5,
         "Foreign Body Ingestion": 1.5,
+        "Foreign Body Obstruction": 1.5,
         "Feline Panleukopenia": 1.5,
         "Parvovirus Infection": 1.5,
+        "Canine Parvovirus": 1.5,
     },
     # 蒼白 + 無気力 → 貧血
     frozenset({"pale_gums", "lethargy"}): {
@@ -351,19 +413,29 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Tracheal Collapse": 2.0,
         "Heartworm Disease": 1.8,
     },
-    # 目の白濁 + 目の充血 → 緑内障
+    # 目の白濁 + 目の充血 → 緑内障 (犬は eye_redness)
     frozenset({"cloudiness_in_eyes", "redness_in_eyes"}): {
         "Glaucoma": 2.5,
         "Uveitis": 2.0,
         "Corneal Ulcer": 1.5,
     },
-    # 跛行 + 関節痛 → 関節疾患
+    frozenset({"squinting", "eye_redness"}): {
+        "Glaucoma": 2.0,
+        "Uveitis": 2.0,
+        "Corneal Ulcer": 1.5,
+    },
+    # 跛行 + 関節痛 → 関節疾患 (犬は swollen_joints + limping_*)
     frozenset({"lameness_or_limping", "joint_pain_or_stiffness"}): {
         "Osteoarthritis": 2.0,
         "Hip Dysplasia": 1.8,
         "Cruciate Ligament Injury": 1.8,
         "Lyme Disease": 1.5,
         "Immune-Mediated Polyarthritis": 1.8,
+    },
+    frozenset({"swollen_joints", "stiffness"}): {
+        "Osteoarthritis": 2.0,
+        "Immune-Mediated Polyarthritis": 1.8,
+        "Lyme Disease": 1.5,
     },
 }
 
