@@ -229,6 +229,11 @@ a:hover{text-decoration:underline}
   *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
 }
 
+/* --- Landing Chat --- */
+.landing-chat{padding:0 20px 30px;margin-top:-10px}
+.landing-chat .card{box-shadow:var(--shadow-md);border:2px solid var(--navy)}
+.landing-chat .card-header{font-size:.92rem;font-weight:700;border-radius:var(--radius) var(--radius) 0 0}
+
 /* Tablet breakpoint */
 @media(max-width:1024px){
   .panels{grid-template-columns:1fr}
@@ -315,6 +320,21 @@ a:hover{text-decoration:underline}
     </div>
   </a>
 </div>
+
+<section class="landing-chat" id="landingChat">
+  <div class="card" style="max-width:680px;margin:0 auto">
+    <div class="card-header" style="background:var(--navy);color:var(--white)">&#128172; <span data-i18n="landingChatTitle">症状をすぐに相談</span></div>
+    <div class="card-body" style="padding:0">
+      <div class="chat-messages" id="landingChatMessages" style="height:160px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px">
+        <div class="chat-msg bot" data-i18n-html="landingChatHint">症状を入力すると、考えられる疾患をお伝えします。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「犬が嘔吐して元気がない」「cat vomiting and lethargic」</span></div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="landingChatInput" placeholder="症状を入力してください..." data-i18n-ph="chatInputPh" aria-label="症状を入力"/>
+        <button id="landingChatSend" data-i18n="chatSend">送信</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="species-section" id="speciesSection">
   <h3 class="section-title" data-i18n="selectSpecies">動物種を選択</h3>
@@ -617,6 +637,8 @@ const I18N={
     skipLink:"メインコンテンツへスキップ",
     logoSub:"多動物種対応 獣医学疾患データベース",
     navChecker:"症状チェッカー",navDatabase:"疾患データベース",navChat:"症状相談",navDrugs:"薬品辞書",
+    landingChatTitle:"症状をすぐに相談",
+    landingChatHint:'症状を入力すると、考えられる疾患をお伝えします。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「犬が嘔吐して元気がない」「cat vomiting and lethargic」</span>',
     heroBadge:"獣医師が開発 &mdash; 臨床現場をサポート",
     heroLead:"症状から鑑別疾患リストを即座に表示。<br/>疾患データベース・薬品辞書を搭載した獣医学総合プラットフォーム。",
     heroCta:"動物種を選んで始める",
@@ -682,6 +704,8 @@ const I18N={
     skipLink:"Skip to main content",
     logoSub:"Multi-Species Veterinary Disease Database",
     navChecker:"Symptom Checker",navDatabase:"Disease Database",navChat:"Symptom Chat",navDrugs:"Drug Dictionary",
+    landingChatTitle:"Quick Symptom Chat",
+    landingChatHint:'Describe symptoms and we\'ll suggest possible conditions.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "my dog is vomiting and lethargic" "cat not eating for 2 days"</span>',
     heroBadge:"Developed by a veterinarian &mdash; Supporting clinical practice",
     heroLead:"Instantly display differential diagnosis lists from symptoms.<br/>A comprehensive veterinary platform with disease database &amp; drug dictionary.",
     heroCta:"Select a species to start",
@@ -1132,12 +1156,24 @@ function setupNavigation(){
 function setupChat(){
   document.getElementById("chatSend").addEventListener("click",()=>sendChatMessage());
   document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChatMessage();});
+  document.getElementById("landingChatSend").addEventListener("click",()=>sendLandingChat());
+  document.getElementById("landingChatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendLandingChat();});
+}
+function sendLandingChat(){
+  const input=document.getElementById("landingChatInput"),text=input.value.trim();if(!text)return;input.value="";
+  const msgs=document.getElementById("landingChatMessages");
+  const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
+  const species=currentSpecies||"dog";
+  const loading=document.createElement("div");loading.className="chat-msg bot";loading.innerHTML='<span class="spinner" style="width:16px;height:16px"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
+  .then(r=>r.json()).then(data=>{loading.innerHTML=(data.response||data.message||data.error||t("noResponse")).replace(/\n/g,"<br/>");msgs.scrollTop=msgs.scrollHeight;})
+  .catch(()=>{loading.innerHTML=t("commError");msgs.scrollTop=msgs.scrollHeight;});
 }
 
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
   addChatMsg(text,"user");const species=currentSpecies||"dog";
-  fetch("/api/diagnostic-chat/message",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
+  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
   .then(r=>r.json()).then(data=>{addChatMsg(data.response||data.message||data.error||t("noResponse"),"bot");})
   .catch(()=>addChatMsg(t("commError"),"bot"));
 }
