@@ -1049,6 +1049,32 @@ def _compute_severity(suspected: List[Dict[str, Any]]) -> str:
     return "low"
 
 
+def _fuzzy_boost_lookup(
+    disease_name: str,
+    boost_dict: Dict[str, float],
+) -> float:
+    """疾患名の部分一致でブースト辞書を検索する。
+
+    完全一致を優先し、見つからない場合はブースト辞書のキーが疾患名に含まれるか、
+    またはその逆で一致するものを探す。括弧内の追加情報を除いた基本名でも照合する。
+    """
+    # 1. 完全一致
+    if disease_name in boost_dict:
+        return boost_dict[disease_name]
+
+    # 2. 基本名（括弧前）の照合
+    base_name = disease_name.split("(")[0].strip().lower()
+    best_multiplier = 1.0
+    for boost_name, multiplier in boost_dict.items():
+        boost_base = boost_name.split("(")[0].strip().lower()
+        # 基本名の部分一致（どちらかが相手に含まれる）
+        if (base_name and boost_base and
+            (base_name in boost_base or boost_base in base_name)):
+            if multiplier > best_multiplier:
+                best_multiplier = multiplier
+    return best_multiplier
+
+
 def analyze_symptoms_generic(
     symptoms: List[str],
     diseases: List[Dict[str, Any]],
@@ -1146,6 +1172,10 @@ def analyze_symptoms_generic(
         matching = symptom_set & disease_symptoms
         if not matching:
             continue
+
+        match_count = len(matching)
+        total_count = len(disease_symptoms)
+
         # Weighted coverage: 臨床的重要度で重み付けしたカバー率
         # 病態特異的な症状（seizures=2.5, jaundice=2.5 等）が一致すると
         # 非特異的な症状（lethargy=1.0）より大きくスコアに寄与する
@@ -1156,39 +1186,63 @@ def analyze_symptoms_generic(
             SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) for s in disease_symptoms
         )
         coverage = matching_weight / total_weight
-        match_percent = round(coverage * 100)
 
-        # Apply onset multiplier
+        # 症状数による補正: 疾患の定義症状が少ない場合、カバー率が過大に
+        # なるためペナルティを適用。定義症状が多い疾患は特異性が高いため
+        # ボーナスを付与する。
+        if total_count <= 2:
+            symptom_count_factor = 0.75
+        elif total_count <= 4:
+            symptom_count_factor = 0.9
+        elif total_count >= 8:
+            symptom_count_factor = 1.1
+        else:
+            symptom_count_factor = 1.0
+
+        # 一致症状が1つだけの場合はスコアを抑制（ノイズ除去）
+        if match_count == 1:
+            symptom_count_factor *= 0.6
+
+        match_percent = round(coverage * symptom_count_factor * 100)
+
+        # Apply onset multiplier (緩和: ペナルティを軽減)
         onset_multiplier = 1.0
         if onset:
             disease_onsets = disease.get("onset_pattern")
             if disease_onsets:
                 if onset in disease_onsets:
-                    onset_multiplier = 1.3
+                    onset_multiplier = 1.15
                 else:
-                    onset_multiplier = 0.7
+                    onset_multiplier = 0.85
 
-        # Apply age multiplier
+        # Apply age multiplier (緩和: ペナルティを軽減)
         age_multiplier = 1.0
         if age_stage:
             age_predisposition = disease.get("age_predisposition")
             if age_predisposition:
                 if age_stage in age_predisposition:
-                    age_multiplier = 1.25
+                    age_multiplier = 1.15
                 else:
-                    age_multiplier = 0.75
+                    age_multiplier = 0.85
 
-        # Apply breed risk multiplier
-        breed_multiplier = breed_risk.get(disease["name"], 1.0)
+        # Apply breed risk multiplier (上限を制限、部分一致)
+        breed_multiplier = min(_fuzzy_boost_lookup(disease["name"], breed_risk), 1.8)
 
-        # Apply symptom pair boost
-        pair_multiplier = pair_boosts.get(disease["name"], 1.0)
+        # Apply symptom pair boost (上限を制限、部分一致)
+        pair_multiplier = min(_fuzzy_boost_lookup(disease["name"], pair_boosts), 1.5)
 
-        # Apply lab value boost
-        lab_multiplier = lab_boosts.get(disease["name"], 1.0)
+        # Apply lab value boost (上限を制限、部分一致)
+        lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
+
+        # 複合ブースト倍率の上限を設定（過度なインフレ防止）
+        combined_boost = onset_multiplier * age_multiplier * breed_multiplier * pair_multiplier * lab_multiplier
+        combined_boost = min(combined_boost, 2.5)  # 最大2.5倍
+        if combined_boost < 1.0:
+            # ペナルティの下限: 0.6（40%以上は削らない）
+            combined_boost = max(combined_boost, 0.6)
 
         # Adjusted match percent
-        adjusted_percent = min(round(match_percent * onset_multiplier * age_multiplier * breed_multiplier * pair_multiplier * lab_multiplier), 100)
+        adjusted_percent = min(round(match_percent * combined_boost), 100)
 
         # Determine likelihood tiers similar to dog algorithm
         if adjusted_percent >= 50:
