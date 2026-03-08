@@ -132,6 +132,7 @@ def soften(text: str) -> str:
 def _apply_case_pattern(source: str, replacement: str) -> str:
     if source.isupper():
         return replacement.upper()
-    if source[:1].isupper() and source[1:].islower():
+    is_title_case = source[:1].isupper() and (source[1:].islower() if len(source) > 1 else True)
+    if is_title_case:
         return replacement.capitalize()
     return replacement

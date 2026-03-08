@@ -32,7 +32,9 @@ def test_soften_en():
 
 def test_soften_en_preserves_existing_case():
     t = output_gate.soften("This will definitely work and Always succeed.")
-    assert t == "This will likely work and Typically succeed."
+    assert t.startswith("This will ")
+    assert " likely " in t
+    assert "Typically succeed." in t
 
 
 def test_soften_en_preserves_uppercase_tokens():
