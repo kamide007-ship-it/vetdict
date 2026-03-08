@@ -202,10 +202,10 @@ a:hover{text-decoration:underline}
   <h2>多動物種対応 獣医学疾患データベース</h2>
   <p>症状から鑑別疾患リストを表示。疾患データベース・薬品辞書を搭載。<br/>臨床現場での情報収集をサポートする参考ツールです。</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="num" id="statDiseases">0</span><span class="label">疾患数</span></div>
-    <div class="hero-stat"><span class="num" id="statSpecies">20</span><span class="label">対応動物種</span></div>
-    <div class="hero-stat"><span class="num" id="statSymptoms">0</span><span class="label">症状項目</span></div>
-    <div class="hero-stat"><span class="num" id="statDrugs">175</span><span class="label">薬品数</span></div>
+    <div class="hero-stat"><span class="num" id="statDiseases">-</span><span class="label">疾患数</span></div>
+    <div class="hero-stat"><span class="num" id="statSpecies">-</span><span class="label">対応動物種</span></div>
+    <div class="hero-stat"><span class="num" id="statSymptoms">-</span><span class="label">症状項目</span></div>
+    <div class="hero-stat"><span class="num" id="statDrugs">-</span><span class="label">薬品数</span></div>
   </div>
   <div class="hero-credit">
     開発: <a href="https://www.minamisoma-vet.com/" target="_blank">南相馬アニマルクリニック</a> 獣医師 上手 健太郎
@@ -431,15 +431,30 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("diseaseSearch").addEventListener("input",renderDiseaseDb);
 });
 
+function animateCount(el,target,duration){
+  if(!el||target<=0){if(el)el.textContent="0";return;}
+  const start=performance.now();
+  const fmt=n=>n.toLocaleString();
+  (function step(now){
+    const t=Math.min((now-start)/duration,1);
+    const ease=1-Math.pow(1-t,3);
+    el.textContent=fmt(Math.round(target*ease));
+    if(t<1)requestAnimationFrame(step);
+  })(start);
+}
+
 function loadSpeciesStats(){
   fetch("/api/species-stats").then(r=>r.json()).then(data=>{
     SPECIES=data.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
-    document.getElementById("statDiseases").textContent=(data.total_diseases||0).toLocaleString();
-    document.getElementById("statSpecies").textContent=data.total_species||SPECIES.length;
-    document.getElementById("statDrugs").textContent=data.total_drugs||0;
+    animateCount(document.getElementById("statDiseases"),data.total_diseases||0,1200);
+    animateCount(document.getElementById("statSpecies"),data.total_species||SPECIES.length,800);
+    animateCount(document.getElementById("statDrugs"),data.total_drugs||0,1000);
     renderSpeciesGrid();
+    // 症状数も取得
+    fetch("/api/health-check/symptoms").then(r=>r.json()).then(sd=>{
+      if(sd.symptoms)animateCount(document.getElementById("statSymptoms"),sd.symptoms.length,1000);
+    }).catch(()=>{});
   }).catch(()=>{
-    // Fallback: use hardcoded data
     SPECIES=[
       {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:0,drugs:0},
       {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:0,drugs:0},
@@ -609,7 +624,7 @@ function loadDrugDictionary(){
   Promise.all([fetch("/api/drugs").then(r=>r.json()),fetch("/api/drug-categories").then(r=>r.json())])
   .then(([drugsData,catData])=>{
     allDrugs=drugsData.drugs||[];drugCategories=drugsData.categories||{};
-    document.getElementById("statDrugs").textContent=allDrugs.length;
+    animateCount(document.getElementById("statDrugs"),allDrugs.length,800);
     const catSelect=document.getElementById("drugCategoryFilter");
     catSelect.innerHTML='<option value="">全カテゴリ</option>';
     (catData.categories||[]).forEach(c=>{if(c.count>0)catSelect.innerHTML+=`<option value="${c.id}">${c.name_ja} (${c.count})</option>`;});
