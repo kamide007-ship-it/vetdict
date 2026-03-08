@@ -2305,6 +2305,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 }
 
 
-def analyze_symptoms(symptoms, age_stage="", breed=None):
+def analyze_symptoms(symptoms, age_stage="", breed=None, *, onset=None, age_years=None, species=None):
     """猫の症状から鑑別診断候補を算出する。"""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE)
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species)

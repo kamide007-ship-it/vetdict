@@ -242,6 +242,12 @@ a:hover{text-decoration:underline}
         <div class="card">
           <div class="card-header">&#9745; 症状を選択</div>
           <div class="card-body">
+            <div id="breedSelectArea" class="hidden" style="margin-bottom:12px">
+              <label style="font-size:.82rem;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">品種を選択（任意）</label>
+              <select id="breedSelect" style="width:100%;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;background:var(--white)">
+                <option value="">品種を選択しない</option>
+              </select>
+            </div>
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
               <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)"/>
@@ -442,7 +448,7 @@ const SPECIES = [
   {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:58},
 ];
 
-let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="";
+let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
 
 document.addEventListener("DOMContentLoaded",()=>{
   renderSpeciesGrid();setupNavigation();setupChat();updateStats();
@@ -467,10 +473,24 @@ function renderSpeciesGrid(){
 }
 
 function selectSpecies(id){
-  currentSpecies=id;selectedSymptoms.clear();
+  currentSpecies=id;selectedSymptoms.clear();currentBreed="";
   document.querySelectorAll(".species-card").forEach(c=>c.classList.toggle("selected",c.dataset.species===id));
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
   document.getElementById("resultsArea").innerHTML='<div class="results-empty"><span class="big-icon">\u{1F50D}</span><p>症状を選択してください</p></div>';
+}
+
+function loadBreeds(species){
+  const area=document.getElementById("breedSelectArea");
+  const select=document.getElementById("breedSelect");
+  select.innerHTML='<option value="">品種を選択しない</option>';
+  currentBreed="";
+  fetch("/api/breeds/"+species).then(r=>r.json()).then(data=>{
+    if(data.breeds&&data.breeds.length>0){
+      data.breeds.forEach(b=>{select.innerHTML+=`<option value="${b.id}">${b.name_ja} (${b.name})</option>`;});
+      area.classList.remove("hidden");
+    }else{area.classList.add("hidden");}
+  }).catch(()=>{area.classList.add("hidden");});
+  select.onchange=function(){currentBreed=this.value;};
 }
 
 function loadSymptoms(species){
@@ -507,7 +527,9 @@ function renderSelectedSymptoms(){
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML='<span class="spinner"></span> 解析中...';
-  fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({species:currentSpecies,symptoms:[...selectedSymptoms]})})
+  const payload={species:currentSpecies,symptoms:[...selectedSymptoms]};
+  if(currentBreed)payload.breed=currentBreed;
+  fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>r.json()).then(data=>renderResults(data))
   .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">エラー: ${err.message}</div>`;})
   .finally(()=>{btn.disabled=false;btn.textContent="鑑別疾患を検索";});

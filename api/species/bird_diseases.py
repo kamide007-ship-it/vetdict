@@ -1303,7 +1303,8 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 
 
 def analyze_symptoms(
-    symptoms: List[str], age_stage: str = "", breed: str | None = None
+    symptoms: List[str], age_stage: str = "", breed: str | None = None,
+    *, onset: str | None = None, age_years: float | None = None, species: str | None = None,
 ) -> Dict[str, Any]:
     """鳥類用の鑑別診断関数。"""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE)
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species)

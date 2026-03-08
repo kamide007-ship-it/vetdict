@@ -290,7 +290,10 @@ def api_analyze_symptoms():
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
                 return {'error': 'Species analyzer module not available'}, 500
-            result = analyze_species_symptoms(species, symptoms, age_stage)
+            result = analyze_species_symptoms(
+                species, symptoms, age_stage,
+                breed=breed, onset=onset, age_years=age_years,
+            )
         return result
     except ValueError as ve:
         logger.error(f"Symptom analysis error: {ve}", exc_info=True)
@@ -298,6 +301,25 @@ def api_analyze_symptoms():
     except Exception as e:
         logger.error(f"Symptom analysis error: {e}", exc_info=True)
         return {'error': '症状解析に失敗しました'}, 500
+
+
+# =============================================================================
+# API: Species Breeds
+# =============================================================================
+
+@app.route('/api/breeds/<species>', methods=['GET'])
+@ensure_json_response
+def api_get_breeds(species):
+    """Return available breeds for a given species."""
+    try:
+        from api.species.helpers import SPECIES_BREEDS
+    except ImportError:
+        from species.helpers import SPECIES_BREEDS
+    breeds = SPECIES_BREEDS.get(species, [])
+    return {
+        "species": species,
+        "breeds": [{"id": b["id"], "name": b["name"], "name_ja": b["name_ja"]} for b in breeds],
+    }
 
 
 # =============================================================================
