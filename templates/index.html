@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>VetDict — 獣医学疾患情報データベース</title>
+<title>Vet Dict — 多動物種対応 獣医学疾患データベース</title>
 <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -28,6 +28,7 @@ a:hover{text-decoration:underline}
 .header{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}
 .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 20px;gap:12px}
 .header-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-img{height:44px;width:auto}
 .logo-text{font-size:1.4rem;font-weight:800;letter-spacing:-.5px}
 .logo-vet{color:var(--navy)}
 .logo-dict{color:var(--green)}
@@ -183,9 +184,10 @@ a:hover{text-decoration:underline}
 <header class="header">
   <div class="header-inner">
     <a href="/" class="header-logo">
+      <img src="/static/logo.svg" alt="Vet Dict" class="logo-img"/>
       <div>
         <div class="logo-text"><span class="logo-vet">Vet</span><span class="logo-dict">Dict</span></div>
-        <span class="logo-sub">Veterinary Diagnostic Database</span>
+        <span class="logo-sub">多動物種対応 獣医学疾患データベース</span>
       </div>
     </a>
     <nav class="header-nav">
