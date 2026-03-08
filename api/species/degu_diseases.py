@@ -71,7 +71,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "shivering", "cold_extremities", "collapse"},
         "description": "Dangerously low body temperature from cold exposure or severe illness.",
         "description_ja": "低温環境や重篤な疾患による危険な低体温。",
-        "urgency": "high",
+        "urgency": "emergency",
         "recommended_tests": ["body_temperature", "blood_glucose", "physical_exam"],
     },
 
@@ -129,13 +129,13 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"drooling", "appetite_loss", "visible_tooth_overgrowth", "weight_loss"},
         "description": "Excessive growth of incisors preventing normal food prehension.",
         "description_ja": "切歯の過度な伸長により正常な食物の把持ができなくなる。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["oral_exam", "skull_radiographs"],
     },
     {
         "name": "Molar Spurs",
         "name_ja": "臼歯棘",
-        "symptoms": {"drooling", "appetite_loss", "weight_loss", "head_tilt", "facial_swelling"},
+        "symptoms": {"drooling", "appetite_loss", "weight_loss", "facial_swelling"},
         "description": "Sharp points on molars that lacerate tongue or cheeks.",
         "description_ja": "臼歯にできる鋭い突起が舌や頬を傷つける。",
         "urgency": "high",
@@ -574,7 +574,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "obesity", "polydipsia", "polyuria", "poor_coat"},
         "description": "Non-insulin dependent diabetes from high-sugar diet. Degus are extremely sensitive to dietary sugar and develop diabetes readily.",
         "description_ja": "高糖質食による非インスリン依存性糖尿病。デグーは食事中の糖に非常に敏感で、容易に糖尿病を発症します。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["blood_glucose", "fructosamine", "diet_review"],
     },
     {

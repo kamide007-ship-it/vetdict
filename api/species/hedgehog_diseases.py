@@ -805,7 +805,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"abdominal_distension", "hair_loss", "lethargy", "vaginal_discharge"},
         "description": "Hormone-producing ovarian tumour causing endometrial changes and potentially abdominal effusion.",
         "description_ja": "ホルモン産生性卵巣腫瘍で、子宮内膜変化と腹水の可能性があります。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["abdominal_ultrasound", "hormone_panel", "physical_exam"],
     },
     {
@@ -823,7 +823,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"pruritus", "skin_masses", "skin_redness", "ulceration"},
         "description": "Mast cell neoplasia of the skin, which may release histamine causing local and systemic effects.",
         "description_ja": "皮膚の肥満細胞腫瘍で、ヒスタミンを放出し局所的・全身的影響を引き起こすことがあります。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["fine_needle_aspirate", "biopsy", "histopathology"],
     },
     {

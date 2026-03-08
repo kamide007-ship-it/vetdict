@@ -345,7 +345,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"drooling", "poor_appetite", "weight_loss", "teeth_grinding"},
         "description": "Misalignment of teeth preventing normal eating.",
         "description_ja": "歯の噛み合わせ不良により正常な摂食ができなくなる。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["oral_exam", "skull_radiographs"],
     },
 
@@ -837,10 +837,10 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
-        "symptoms": {"cataracts", "lethargy", "polydipsia", "polyuria", "weight_loss"},
+        "symptoms": {"cloudy_eyes", "lethargy", "polydipsia", "polyuria", "weight_loss"},
         "description": "Insulin deficiency or resistance causing hyperglycaemia. Often associated with high-sugar diets.",
         "description_ja": "インスリン欠乏または抵抗性による高血糖。しばしば高糖質食と関連します。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["blood_glucose", "fructosamine", "urinalysis"],
     },
     {
@@ -912,7 +912,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "lethargy", "nasal_discharge", "respiratory_distress", "weight_loss"},
         "description": "Chronic respiratory infection by Mycoplasma species, difficult to eradicate.",
         "description_ja": "マイコプラズマ属による慢性呼吸器感染で、根絶が困難です。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["pcr_testing", "chest_xray", "tracheal_wash"],
     },
     {
