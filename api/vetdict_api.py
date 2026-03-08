@@ -247,6 +247,86 @@ def health():
 
 
 # =============================================================================
+# API: Species Stats (dynamic disease/drug counts)
+# =============================================================================
+
+@app.route('/api/species-stats', methods=['GET'])
+@ensure_json_response
+def api_species_stats():
+    """各動物種の疾患数・薬品数を動的に返す。"""
+    stats = []
+    species_modules = {
+        "dog": ("犬", "Dog", "symptom_checker"),
+        "cat": ("猫", "Cat", "cat_diseases"),
+        "horse": ("馬", "Horse", "equine_diseases"),
+        "rabbit": ("うさぎ", "Rabbit", "rabbit_diseases"),
+        "hamster": ("ハムスター", "Hamster", "hamster_diseases"),
+        "guinea_pig": ("モルモット", "Guinea Pig", "guinea_pig_diseases"),
+        "chinchilla": ("チンチラ", "Chinchilla", "chinchilla_diseases"),
+        "ferret": ("フェレット", "Ferret", "ferret_diseases"),
+        "hedgehog": ("ハリネズミ", "Hedgehog", "hedgehog_diseases"),
+        "sugar_glider": ("フクロモモンガ", "Sugar Glider", "sugar_glider_diseases"),
+        "degu": ("デグー", "Degu", "degu_diseases"),
+        "bird": ("鳥", "Bird", "bird_diseases"),
+        "parakeet": ("インコ", "Parakeet", "parakeet_diseases"),
+        "parrot": ("オウム", "Parrot", "parrot_diseases"),
+        "reptile": ("爬虫類", "Reptile", "reptile_diseases"),
+        "tortoise": ("リクガメ", "Tortoise", "tortoise_diseases"),
+        "snake": ("ヘビ", "Snake", "snake_diseases"),
+        "lizard": ("トカゲ", "Lizard", "lizard_diseases"),
+        "amphibian": ("両生類", "Amphibian", "amphibian_diseases"),
+        "exotic_other": ("その他エキゾチック", "Exotic Other", "exotic_other_diseases"),
+    }
+
+    drug_counts = {}
+    try:
+        from api.drug_dictionary import DRUGS
+        for d in DRUGS:
+            for sp in (d.get("species_info") or {}):
+                drug_counts[sp] = drug_counts.get(sp, 0) + 1
+    except Exception:
+        pass
+
+    for sp_id, (name_ja, name_en, module_name) in species_modules.items():
+        disease_count = 0
+        try:
+            if sp_id == "dog":
+                from api.symptom_checker import _DISEASE_DB as dog_diseases
+                disease_count = len(dog_diseases)
+            elif sp_id == "horse":
+                from api.species.equine_diseases import DISEASE_DATABASE
+                disease_count = len(DISEASE_DATABASE)
+            else:
+                import importlib
+                mod = importlib.import_module(f"api.species.{module_name}")
+                disease_count = len(getattr(mod, "DISEASES", []))
+        except Exception:
+            pass
+        stats.append({
+            "id": sp_id,
+            "name": name_ja,
+            "nameEn": name_en,
+            "diseases": disease_count,
+            "drugs": drug_counts.get(sp_id, 0),
+        })
+
+    total_diseases = sum(s["diseases"] for s in stats)
+    total_drugs = 0
+    try:
+        from api.drug_dictionary import DRUGS
+        total_drugs = len(DRUGS)
+    except Exception:
+        pass
+
+    return {
+        "species": stats,
+        "total_diseases": total_diseases,
+        "total_drugs": total_drugs,
+        "total_species": len(stats),
+    }
+
+
+# =============================================================================
 # API: Symptom Analysis (multi-species)
 # =============================================================================
 
