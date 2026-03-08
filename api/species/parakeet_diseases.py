@@ -172,7 +172,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Oral Candidiasis (Thrush)",
         "name_ja": "口腔カンジダ症",
-        "symptoms": {"white_plaques_in_mouth", "decreased_appetite", "regurgitation", "beak_deformity"},
+        "symptoms": {"white_plaques_in_mouth", "decreased_appetite", "regurgitation", "crop_stasis"},
         "description": "Candida infection of the oral cavity causing white plaques and difficulty eating.",
         "description_ja": "口腔内のカンジダ感染症で、白色プラークと摂食困難を引き起こす。",
         "urgency": "moderate",
@@ -285,7 +285,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"joint_swelling", "lameness", "white_deposits_on_joints", "lethargy", "decreased_appetite"},
         "description": "Uric acid crystal deposition in joints causing painful swelling and lameness.",
         "description_ja": "関節への尿酸結晶沈着により、有痛性の腫脹と跛行を引き起こす。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["blood uric acid levels", "radiography", "joint aspirate"],
     },
     {
@@ -626,7 +626,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"crop_stasis", "regurgitation", "decreased_appetite", "foul_smelling_breath", "lethargy"},
         "description": "Delayed crop emptying from infection, foreign body, or poor husbandry causing fermentation.",
         "description_ja": "感染、異物、不適切な飼養管理によるそ嚢排出遅延で発酵を引き起こす。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["crop wash cytology", "radiography"],
     },
     {
