@@ -1049,7 +1049,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"muscle_twitching", "seizures", "tremors", "weakness"},
         "description": "Low blood calcium causing neuromuscular dysfunction.",
         "description_ja": "低血中カルシウムによる神経筋機能障害。",
-        "urgency": "high",
+        "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "ionized_calcium"],
     },
     {
