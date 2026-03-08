@@ -7655,8 +7655,8 @@ def _compute_severity(suspected: list[dict[str, Any]]) -> str:
 
     Rules (evaluated in order, first match wins):
     - Any EMERGENCY disease at "high" likelihood -> "emergency"
-    - Any URGENT / HIGH / EMERGENCY disease at "high" or "moderate"
-      likelihood -> "high"
+    - Any URGENT / HIGH disease at "high" or "moderate" likelihood,
+      or any EMERGENCY disease at "moderate" likelihood -> "high"
     - Any disease at "high" likelihood -> "moderate"
     - Otherwise -> "low"
     """
