@@ -37,7 +37,7 @@ VALID_SYMPTOMS: set[str] = {
     "reluctance_move", "swollen_joints", "pain_on_touch",
     # Behavioral
     "aggression_change", "anxiety", "excessive_panting", "hiding",
-    "circling", "seizures",
+    "circling", "scratching", "seizures",
     # Urinary / Reproductive
     "straining_urinate", "blood_urine", "incontinence",
     "genital_discharge",
@@ -99,6 +99,7 @@ _SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "excessive_panting": {"ja": "過度のパンティング", "en": "Excessive Panting"},
     "hiding": {"ja": "隠れる", "en": "Hiding"},
     "circling": {"ja": "旋回行動", "en": "Circling"},
+    "scratching": {"ja": "掻く動作", "en": "Scratching"},
     "seizures": {"ja": "痙攣", "en": "Seizures"},
     "straining_urinate": {"ja": "排尿困難", "en": "Straining to Urinate"},
     "blood_urine": {"ja": "血尿", "en": "Blood in Urine"},
@@ -7450,7 +7451,8 @@ def analyze_symptoms(
         Analysis result containing ``suspected_diseases``,
         ``recommended_tests``, ``severity``, ``general_advice``,
         ``general_advice_ja``, ``breed_genetic_tests``,
-        ``breed_risk_applied``, ``onset_applied``, and ``age_applied``.
+        ``breed_risk_applied``, ``onset_applied``, ``age_applied``,
+        ``lab_boost_applied``, and ``lab_values``.
     """
     symptom_set: set[str] = set(symptoms) & VALID_SYMPTOMS
 
@@ -7653,7 +7655,8 @@ def _compute_severity(suspected: list[dict[str, Any]]) -> str:
 
     Rules (evaluated in order, first match wins):
     - Any EMERGENCY disease at "high" likelihood -> "emergency"
-    - Any URGENT disease at "high" or "moderate" likelihood -> "high"
+    - Any URGENT / HIGH / EMERGENCY disease at "high" or "moderate"
+      likelihood -> "high"
     - Any disease at "high" likelihood -> "moderate"
     - Otherwise -> "low"
     """
@@ -7664,7 +7667,7 @@ def _compute_severity(suspected: list[dict[str, Any]]) -> str:
 
         if urgency == "emergency" and likelihood == "high":
             return "emergency"
-        if urgency == "urgent" and likelihood in ("high", "moderate"):
+        if urgency in ("urgent", "high", "emergency") and likelihood in ("high", "moderate"):
             return "high"
         if likelihood == "high":
             has_high = True
