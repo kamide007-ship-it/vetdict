@@ -567,7 +567,7 @@ function renderResults(data){
 function loadDiseaseDb(species){
   const list=document.getElementById("diseaseDbList");
   list.innerHTML='<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
-  fetch("/api/health-check/diseases").then(r=>r.json()).then(data=>{if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
+  fetch(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
   .catch(()=>{list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">読み込みに失敗しました</div>';});
 }
 
