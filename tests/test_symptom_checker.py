@@ -304,10 +304,39 @@ class TestAnalyzeSymptoms:
             assert "color_class" in entry
             assert "description" in entry
             assert "description_ja" in entry
+            assert "pathophysiology" in entry
+            assert "pathophysiology_ja" in entry
+            assert "causes" in entry
+            assert "causes_ja" in entry
+            assert "treatment" in entry
+            assert "treatment_ja" in entry
+            assert "prognosis" in entry
+            assert "prognosis_ja" in entry
+            assert "prevention" in entry
+            assert "prevention_ja" in entry
             assert "matching_symptoms" in entry
             assert isinstance(entry["matching_symptoms"], list)
             assert "match_count" in entry
             assert "total_symptoms" in entry
+
+    def test_disease_detail_fields_default_to_strings(self):
+        result = analyze_symptoms(["vomiting", "lethargy", "diarrhea"])
+        detail_fields = (
+            "pathophysiology",
+            "pathophysiology_ja",
+            "causes",
+            "causes_ja",
+            "treatment",
+            "treatment_ja",
+            "prognosis",
+            "prognosis_ja",
+            "prevention",
+            "prevention_ja",
+        )
+
+        for entry in result["suspected_diseases"]:
+            for field in detail_fields:
+                assert isinstance(entry[field], str)
 
     def test_internal_fields_removed(self):
         """_urgency and _match_ratio must not appear in output."""
