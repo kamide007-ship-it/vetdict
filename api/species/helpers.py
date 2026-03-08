@@ -88,7 +88,7 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
         {"id": "rabbit_mixed", "name": "Mixed Breed", "name_ja": "雑種（ミックス）",
          "risk": {}},
         {"id": "rabbit_netherland_dwarf", "name": "Netherland Dwarf", "name_ja": "ネザーランドドワーフ",
-         "risk": {"Malocclusion": 2.5, "Gastrointestinal Stasis": 1.5, "Pasteurellosis": 1.3}},
+         "risk": {"Malocclusion": 2.5, "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5, "Pasteurellosis": 1.3}},
         {"id": "rabbit_holland_lop", "name": "Holland Lop", "name_ja": "ホーランドロップ",
          "risk": {"Otitis Media / Interna": 2.0, "Malocclusion": 1.8, "Gastrointestinal Stasis": 1.3}},
         {"id": "rabbit_mini_rex", "name": "Mini Rex", "name_ja": "ミニレッキス",
@@ -96,11 +96,11 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
         {"id": "rabbit_lionhead", "name": "Lionhead", "name_ja": "ライオンヘッド",
          "risk": {"Malocclusion": 1.8, "Wool Block/Trichobezoar": 2.0}},
         {"id": "rabbit_flemish_giant", "name": "Flemish Giant", "name_ja": "フレミッシュジャイアント",
-         "risk": {"Pododermatitis (Sore Hocks)": 2.0, "Spondylosis": 1.8, "Heart Disease": 1.5}},
+         "risk": {"Pododermatitis (Sore Hocks)": 2.0, "Spondylosis": 1.8, "Heart Disease": 1.5, "Congestive Heart Failure": 1.5}},
         {"id": "rabbit_rex", "name": "Rex", "name_ja": "レッキス",
          "risk": {"Pododermatitis (Sore Hocks)": 2.5, "Gastrointestinal Stasis": 1.3}},
         {"id": "rabbit_lop_eared", "name": "Lop Eared (General)", "name_ja": "ロップイヤー（一般）",
-         "risk": {"Otitis Media / Interna": 2.5, "Ear Mites": 1.5, "Dental Disease": 1.3}},
+         "risk": {"Otitis Media / Interna": 2.5, "Ear Mites": 1.5, "Dental Disease": 1.3, "Dental Malocclusion": 1.3}},
     ],
     "hamster": [
         {"id": "hamster_golden", "name": "Golden (Syrian)", "name_ja": "ゴールデン（シリアン）",
@@ -118,7 +118,7 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
         {"id": "ferret_marshall", "name": "Marshall Ferret", "name_ja": "マーシャルフェレット",
          "risk": {"Adrenal Disease": 2.0, "Insulinoma": 1.8, "Lymphoma": 1.5}},
         {"id": "ferret_angora", "name": "Angora", "name_ja": "アンゴラ",
-         "risk": {"Adrenal Disease": 1.5, "Hairball/GI Obstruction": 1.8}},
+         "risk": {"Adrenal Disease": 1.5, "Hairball/GI Obstruction": 1.8, "Gastrointestinal Foreign Body / Obstruction": 1.8}},
     ],
     "guinea_pig": [
         {"id": "guinea_pig_american", "name": "American (Short Hair)", "name_ja": "アメリカン（短毛）",
@@ -126,11 +126,11 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
         {"id": "guinea_pig_abyssinian", "name": "Abyssinian", "name_ja": "アビシニアン",
          "risk": {"Ovarian Cysts": 1.5, "Diabetes Mellitus": 1.3}},
         {"id": "guinea_pig_peruvian", "name": "Peruvian", "name_ja": "ペルビアン",
-         "risk": {"Dermatophytosis (Ringworm)": 1.8, "Heat Stroke": 1.5}},
+         "risk": {"Dermatophytosis (Ringworm)": 1.8, "Ringworm (Trichophyton mentagrophytes)": 1.8, "Heat Stroke": 1.5}},
         {"id": "guinea_pig_skinny", "name": "Skinny Pig", "name_ja": "スキニーギニアピッグ",
          "risk": {"Hypothermia": 2.0, "Skin Infections": 1.8, "Sunburn": 2.0}},
         {"id": "guinea_pig_teddy", "name": "Teddy", "name_ja": "テディ",
-         "risk": {"Ear Wax Buildup": 1.5, "Dermatophytosis (Ringworm)": 1.3}},
+         "risk": {"Ear Wax Buildup": 1.5, "Dermatophytosis (Ringworm)": 1.3, "Ringworm (Trichophyton mentagrophytes)": 1.3}},
     ],
     "chinchilla": [
         {"id": "chinchilla_standard", "name": "Standard Grey", "name_ja": "スタンダードグレー",
@@ -170,7 +170,7 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
                   "Psittacine Beak and Feather Disease (PBFD)": 1.5}},
         {"id": "parrot_amazon", "name": "Amazon Parrot", "name_ja": "アマゾン",
          "risk": {"Fatty Liver Disease (Hepatic Lipidosis)": 2.5, "Obesity": 2.0,
-                  "Foot Necrosis (Bumblefoot)": 1.5}},
+                  "Foot Necrosis (Bumblefoot)": 1.5, "Bumblefoot (Pododermatitis)": 1.5}},
         {"id": "parrot_macaw", "name": "Macaw", "name_ja": "コンゴウインコ",
          "risk": {"Proventricular Dilatation Disease (PDD)": 2.0, "Feather Plucking": 1.8,
                   "Psittacine Beak and Feather Disease (PBFD)": 1.5}},
@@ -184,13 +184,13 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
     ],
     "tortoise": [
         {"id": "tortoise_russian", "name": "Russian Tortoise", "name_ja": "ロシアリクガメ",
-         "risk": {"Respiratory Infection": 1.5, "Shell Rot": 1.3}},
+         "risk": {"Respiratory Infection": 1.5, "Upper Respiratory Tract Infection (URTI)": 1.5, "Shell Rot": 1.3}},
         {"id": "tortoise_hermann", "name": "Hermann's Tortoise", "name_ja": "ヘルマンリクガメ",
          "risk": {"Metabolic Bone Disease": 1.5, "Herpesvirus": 1.5}},
         {"id": "tortoise_sulcata", "name": "Sulcata Tortoise", "name_ja": "ケヅメリクガメ",
          "risk": {"Pyramiding": 2.0, "Bladder Stones": 1.8, "Metabolic Bone Disease": 1.5}},
         {"id": "tortoise_leopard", "name": "Leopard Tortoise", "name_ja": "ヒョウモンガメ",
-         "risk": {"Respiratory Infection": 1.8, "Parasitic Infection": 1.5}},
+         "risk": {"Respiratory Infection": 1.8, "Upper Respiratory Tract Infection (URTI)": 1.8, "Parasitic Infection": 1.5}},
     ],
     "snake": [
         {"id": "snake_ball_python", "name": "Ball Python", "name_ja": "ボールパイソン",
@@ -212,22 +212,22 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
          "risk": {"Metabolic Bone Disease": 2.0, "Adenovirus Infection": 2.0,
                   "Yellow Fungus Disease": 1.8, "Impaction": 1.5, "Parasitic Infection": 1.5}},
         {"id": "lizard_crested_gecko", "name": "Crested Gecko", "name_ja": "クレステッドゲッコー",
-         "risk": {"Metabolic Bone Disease": 1.5, "Tail Drop (Autotomy)": 1.3}},
+         "risk": {"Metabolic Bone Disease": 1.5, "Tail Drop (Autotomy)": 1.3, "Tail Autotomy Infection": 1.3}},
         {"id": "lizard_chameleon", "name": "Chameleon", "name_ja": "カメレオン",
          "risk": {"Metabolic Bone Disease": 2.5, "Dehydration": 2.0,
                   "Respiratory Infection": 1.8, "Egg Binding": 1.8}},
         {"id": "lizard_iguana", "name": "Green Iguana", "name_ja": "グリーンイグアナ",
-         "risk": {"Metabolic Bone Disease": 2.0, "Kidney Disease": 1.8,
+         "risk": {"Metabolic Bone Disease": 2.0, "Kidney Disease": 1.8, "Renal Failure (Chronic Kidney Disease)": 1.8,
                   "Bladder Stones": 1.5}},
     ],
     "amphibian": [
         {"id": "amphibian_axolotl", "name": "Axolotl", "name_ja": "ウーパールーパー",
-         "risk": {"Fungal Infection": 2.0, "Gill Damage": 1.8, "Impaction": 1.5,
+         "risk": {"Fungal Infection": 2.0, "Gill Damage": 1.8, "Gill Necrosis (Larval)": 1.8, "Impaction": 1.5,
                   "Ammonia Poisoning": 1.5}},
         {"id": "amphibian_pacman_frog", "name": "Pacman Frog", "name_ja": "ベルツノガエル",
          "risk": {"Impaction": 2.0, "Obesity": 1.8, "Bacterial Dermatitis": 1.5}},
         {"id": "amphibian_tree_frog", "name": "Tree Frog", "name_ja": "アマガエル",
-         "risk": {"Chytrid Fungus (Bd)": 2.0, "Red Leg Syndrome": 1.8}},
+         "risk": {"Chytrid Fungus (Bd)": 2.0, "Chytridiomycosis (Bd)": 2.0, "Red Leg Syndrome": 1.8}},
     ],
     "sugar_glider": [
         {"id": "sugar_glider_standard", "name": "Standard Grey", "name_ja": "スタンダードグレー",
@@ -235,7 +235,7 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
     ],
     "degu": [
         {"id": "degu_standard", "name": "Standard (Agouti)", "name_ja": "スタンダード（アグーチ）",
-         "risk": {"Diabetes Mellitus": 2.5, "Cataracts": 2.0, "Dental Disease": 2.0}},
+         "risk": {"Diabetes Mellitus": 2.5, "Cataracts": 2.0, "Dental Disease": 2.0, "Dental Malocclusion": 2.0}},
     ],
 }
 
@@ -253,12 +253,12 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     frozenset({"vomiting", "bloating"}): {
         "Gastric Dilatation-Volvulus (GDV/Bloat)": 2.0,
         "Intestinal Obstruction": 1.5,
-        "Gastrointestinal Stasis": 1.5,
+        "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5,
     },
     frozenset({"vomiting", "bloated_abdomen"}): {
         "Gastric Dilatation-Volvulus (GDV/Bloat)": 2.0,
         "Intestinal Obstruction": 1.5,
-        "Gastrointestinal Stasis": 1.5,
+        "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5,
     },
     # 多飲 + 頻尿 → 腎臓病・糖尿 (犬は excessive_urination, 他種は frequent_urination)
     frozenset({"excessive_thirst", "frequent_urination"}): {
@@ -278,7 +278,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 咳 + 呼吸困難 → 心不全・肺炎 (犬は difficulty_breathing, 他種は labored_breathing)
     frozenset({"coughing", "labored_breathing"}): {
-        "Heart Disease/CHF": 1.8,
+        "Heart Disease/CHF": 1.8, "Congestive Heart Failure": 1.8,
         "Feline Hypertrophic Cardiomyopathy (HCM)": 1.8,
         "Pneumonia": 1.8,
         "Feline Pneumonia": 1.8,
@@ -286,7 +286,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Feline Asthma": 1.5,
     },
     frozenset({"coughing", "difficulty_breathing"}): {
-        "Heart Disease/CHF": 1.8,
+        "Heart Disease/CHF": 1.8, "Congestive Heart Failure": 1.8,
         "Pneumonia": 1.8,
         "Pleural Effusion": 1.5,
     },
@@ -366,7 +366,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 失神 + 運動不耐性 → 心臓病
     frozenset({"fainting", "exercise_intolerance"}): {
-        "Heart Disease/CHF": 2.5,
+        "Heart Disease/CHF": 2.5, "Congestive Heart Failure": 2.5,
         "Feline Hypertrophic Cardiomyopathy (HCM)": 2.0,
         "Aortic Stenosis": 2.0,
         "Pulmonic Stenosis": 1.8,
@@ -375,7 +375,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 失神/虚脱 + 呼吸困難 → 心臓病 (犬用: collapse + difficulty_breathing)
     frozenset({"collapse", "difficulty_breathing"}): {
-        "Heart Disease/CHF": 2.0,
+        "Heart Disease/CHF": 2.0, "Congestive Heart Failure": 2.0,
         "Pneumothorax": 2.0,
         "Pericardial Effusion": 1.8,
     },
@@ -413,7 +413,7 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
     },
     # 咳 + 運動不耐性 → 心臓病・気管虚脱
     frozenset({"coughing", "exercise_intolerance"}): {
-        "Heart Disease/CHF": 2.0,
+        "Heart Disease/CHF": 2.0, "Congestive Heart Failure": 2.0,
         "Tracheal Collapse": 2.0,
         "Heartworm Disease": 1.8,
     },
@@ -740,7 +740,7 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     # --- 腎機能 --- [27] Polzin (2011)
     ("bun", "high"): {
         "Chronic Kidney Disease (CKD)": 1.8,
-        "Acute Kidney Injury": 2.0,
+        "Acute Kidney Injury": 2.0, "Acute Renal Failure": 2.0,
         "Urinary Obstruction": 1.5,
         "Urethral Obstruction": 1.5,
         "Dehydration": 1.3,
@@ -749,14 +749,14 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     },
     ("creatinine", "high"): {
         "Chronic Kidney Disease (CKD)": 2.0,
-        "Acute Kidney Injury": 2.0,
+        "Acute Kidney Injury": 2.0, "Acute Renal Failure": 2.0,
         "Urinary Obstruction": 1.8,
         "Urethral Obstruction": 1.8,
         "Leptospirosis": 1.5,
     },
     ("sdma", "high"): {
         "Chronic Kidney Disease (CKD)": 2.0,  # [27] SDMA rises before Cre
-        "Acute Kidney Injury": 1.8,
+        "Acute Kidney Injury": 1.8, "Acute Renal Failure": 1.8,
     },
 
     # --- 肝機能 --- [2] Ettinger Ch.296–300
@@ -844,7 +844,7 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     # --- 電解質 --- [2] Ettinger Ch.55–58
     ("potassium", "high"): {
         "Addison's Disease (Hypoadrenocorticism)": 2.0,
-        "Acute Kidney Injury": 1.8,
+        "Acute Kidney Injury": 1.8, "Acute Renal Failure": 1.8,
         "Urinary Obstruction": 1.8,
         "Urethral Obstruction": 1.8,
     },
@@ -877,7 +877,7 @@ LAB_ABNORMALITY_DISEASE_MAP: Dict[tuple, Dict[str, float]] = {
     },
     ("phosphorus", "high"): {
         "Chronic Kidney Disease (CKD)": 1.8,
-        "Acute Kidney Injury": 1.5,
+        "Acute Kidney Injury": 1.5, "Acute Renal Failure": 1.5,
         "Hypoparathyroidism": 1.5,
     },
 
@@ -1142,16 +1142,30 @@ def _fuzzy_boost_lookup(
     if disease_name in boost_dict:
         return boost_dict[disease_name]
 
-    # 2. 基本名（括弧前）の照合
+    # 2. 正規化名での照合
+    disease_lower = disease_name.lower()
     base_name = disease_name.split("(")[0].strip().lower()
     best_multiplier = 1.0
     for boost_name, multiplier in boost_dict.items():
+        boost_lower = boost_name.lower()
         boost_base = boost_name.split("(")[0].strip().lower()
         # 基本名の部分一致（どちらかが相手に含まれる）
         if (base_name and boost_base and
             (base_name in boost_base or boost_base in base_name)):
             if multiplier > best_multiplier:
                 best_multiplier = multiplier
+            continue
+        # 全文部分一致（括弧内含む、例: "Brachycephalic" in "Saddle Nose (Brachycephalic ...)"）
+        if boost_lower in disease_lower or disease_lower in boost_lower:
+            if multiplier > best_multiplier:
+                best_multiplier = multiplier
+            continue
+        # スラッシュ区切りの各部分で照合（例: "Tumors/Neoplasia" → ["tumors", "neoplasia"]）
+        if "/" in boost_name:
+            parts = [p.strip().lower() for p in boost_name.split("/")]
+            if any(p in disease_lower for p in parts if len(p) > 3):
+                if multiplier > best_multiplier:
+                    best_multiplier = multiplier
     return best_multiplier
 
 

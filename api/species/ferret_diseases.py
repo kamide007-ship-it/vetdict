@@ -36,7 +36,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
-        "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "lethargy", "cataracts"},
+        "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "lethargy"},
         "description": "Rare endocrine disorder with impaired insulin production or resistance, causing hyperglycemia.",
         "description_ja": "インスリン分泌不全や抵抗性により高血糖となる内分泌疾患です。フェレットではまれです。",
         "urgency": "moderate",
@@ -167,7 +167,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"heart_murmur", "lethargy", "coughing", "exercise_intolerance", "difficulty_breathing"},
         "description": "Degeneration of heart valves causing regurgitation and progressive heart failure.",
         "description_ja": "心臓弁の変性により逆流が起こり、進行性の心不全を引き起こします。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["echocardiography", "chest_xray"],
     },
     {
@@ -204,7 +204,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"sneezing", "nasal_discharge", "watery_eyes", "lethargy", "appetite_loss"},
         "description": "Viral or bacterial infection of the upper airways causing sneezing and discharge.",
         "description_ja": "ウイルスまたは細菌による上気道の感染で、くしゃみや鼻汁がみられます。",
-        "urgency": "low",
+        "urgency": "moderate",
         "recommended_tests": ["physical_exam", "nasal_swab"],
     },
     {
@@ -753,7 +753,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pancreatic Exocrine Insufficiency",
         "name_ja": "膵外分泌不全",
-        "symptoms": {"diarrhea", "weight_loss", "large_fatty_stool", "appetite_increase"},
+        "symptoms": {"appetite_increase", "diarrhea", "large_fatty_stool", "poor_coat", "voluminous_stool", "weight_loss"},
         "description": "Insufficient digestive enzyme production leading to maldigestion and nutrient malabsorption.",
         "description_ja": "消化酵素の産生不足により消化不良と栄養吸収障害が起こります。",
         "urgency": "moderate",
@@ -1119,15 +1119,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["liver_ultrasound", "blood_chemistry", "fine_needle_aspirate"],
     },
-    {
-        "name": "Pancreatic Exocrine Insufficiency",
-        "name_ja": "膵外分泌不全",
-        "symptoms": {"appetite_increase", "poor_coat", "voluminous_stool", "weight_loss"},
-        "description": "Inadequate production of digestive enzymes causing malabsorption and weight loss despite normal appetite.",
-        "description_ja": "消化酵素の不十分な産生で、正常な食欲にもかかわらず吸収不良と体重減少を引き起こします。",
-        "urgency": "moderate",
-        "recommended_tests": ["fecal_tli", "blood_chemistry", "fecal_exam"],
-    },
+    # Duplicate "Pancreatic Exocrine Insufficiency" removed (merged into earlier entry at line 754)
     {
         "name": "Adrenal Cortical Carcinoma",
         "name_ja": "副腎皮質癌",

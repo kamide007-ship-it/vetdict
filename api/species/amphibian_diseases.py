@@ -534,7 +534,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"cloacal_prolapse", "lethargy", "anorexia", "hemorrhage", "swelling"},
         "description": "Protrusion of cloacal tissue, often due to straining, parasites, or reproductive issues.",
         "description_ja": "いきみ、寄生虫、生殖器の問題などによる総排泄腔組織の脱出。",
-        "urgency": "high",
+        "urgency": "emergency",
         "recommended_tests": ["身体検査", "糞便検査", "X線検査"],
     },
     {
@@ -804,7 +804,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"anorexia", "diarrhea", "lethargy", "weight_loss"},
         "description": "Salmonella spp. infection; zoonotic concern.",
         "description_ja": "サルモネラ属感染症。人獣共通感染症の懸念あり。",
-        "urgency": "high",
+        "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "PCR_salmonella"],
     },
     {

@@ -650,7 +650,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Arenavirus Infection",
         "name_ja": "アレナウイルス感染症",
-        "symptoms": {"anorexia", "neurological_signs", "regurgitation", "star_gazing", "weight_loss"},
+        "symptoms": {"anorexia", "neurological_signs", "regurgitation", "stargazing", "weight_loss"},
         "description": "Arenavirus associated with inclusion body disease-like syndrome in boid snakes.",
         "description_ja": "ボア科ヘビの封入体病様症候群に関連するアレナウイルス。",
         "urgency": "high",
@@ -1049,7 +1049,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"muscle_twitching", "seizures", "tremors", "weakness"},
         "description": "Low blood calcium causing neuromuscular dysfunction.",
         "description_ja": "低血中カルシウムによる神経筋機能障害。",
-        "urgency": "high",
+        "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "ionized_calcium"],
     },
     {
@@ -1082,7 +1082,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Thiamine Deficiency",
         "name_ja": "チアミン欠乏症",
-        "symptoms": {"neurological_signs", "seizures", "star_gazing", "tremors"},
+        "symptoms": {"neurological_signs", "seizures", "stargazing", "tremors"},
         "description": "Thiamine (B1) deficiency from feeding thiaminase-containing fish.",
         "description_ja": "チアミナーゼ含有魚の給餌によるチアミン（B1）欠乏症。",
         "urgency": "high",
@@ -1453,7 +1453,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "skin_sloughing": {"ja": "Skin Sloughing", "en": "Skin Sloughing"},
     "skin_ulceration": {"ja": "皮膚潰瘍化", "en": "Skin ulceration"},
     "soft_mass": {"ja": "Soft Mass", "en": "Soft Mass"},
-    "star_gazing": {"ja": "Star Gazing", "en": "Star Gazing"},
+
     "swelling_at_site": {"ja": "Swelling At Site", "en": "Swelling At Site"},
     "tail_necrosis": {"ja": "Tail Necrosis", "en": "Tail Necrosis"},
     "tissue_calcification": {"ja": "Tissue Calcification", "en": "Tissue Calcification"},

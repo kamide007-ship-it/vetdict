@@ -56,7 +56,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "crusty_lesions_on_face", "oral_plaques", "respiratory_distress", "conjunctivitis"},
         "description": "Poxvirus causing dry (cutaneous) or wet (diphtheritic) forms; spread by mosquitoes and direct contact.",
         "description_ja": "ポックスウイルスによる乾燥型（皮膚型）または湿潤型（ジフテリア型）の病変。蚊や直接接触で伝播。",
-        "urgency": "moderate",
+        "urgency": "high",
         "recommended_tests": ["skin biopsy", "histopathology", "PCR"],
     },
     {
@@ -614,7 +614,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Xanthoma",
         "name_ja": "黄色腫",
-        "symptoms": {"skin_lesions", "lipomas", "feather_loss"},
+        "symptoms": {"skin_lesions", "skin_masses", "feather_loss"},
         "description": "Yellow fatty skin masses associated with hyperlipidemia; common on wing tips and keel.",
         "description_ja": "高脂血症に関連する黄色の脂肪性皮膚腫瘤。翼端と竜骨に多い。",
         "urgency": "low",

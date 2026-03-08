@@ -915,7 +915,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Cysts - Serous",
         "name_ja": "卵巣嚢胞 - 漿液性",
-        "symptoms": {"abdominal_distension", "aggressive_behavior", "bilateral_hair_loss", "crusty_nipples", "mounting_behavior"},
+        "symptoms": {"abdominal_distension", "aggressive_behavior", "bilateral_hair_loss", "bloated_abdomen", "crusty_nipples", "hormonal_behavior", "lethargy", "mounting_behavior"},
         "description": "Serous fluid-filled ovarian cysts extremely common in intact female guinea pigs over 2 years, causing hormonal signs and flank alopecia.",
         "description_ja": "2歳以上の未避妊雌モルモットに非常に多い漿液性卵巣嚢胞で、ホルモン症状と側腹部脱毛を引き起こします。",
         "urgency": "moderate",
@@ -960,7 +960,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cervical Lymphadenitis (Streptococcus zooepidemicus)",
         "name_ja": "頸部リンパ節炎（ストレプトコッカス・ズーエピデミカス）",
-        "symptoms": {"abscess", "appetite_loss", "cervical_swelling", "fever", "lethargy"},
+        "symptoms": {"abscess", "appetite_loss", "cervical_swelling", "facial_swelling", "fever", "lethargy", "swollen_lymph_nodes"},
         "description": "Bacterial infection causing abscesses in cervical lymph nodes, commonly called 'lumps'. Can progress to septicaemia.",
         "description_ja": "頸部リンパ節に膿瘍を形成する細菌感染で、通称「しこり」。敗血症に進行することがあります。",
         "urgency": "high",
@@ -990,7 +990,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"appetite_loss", "lethargy", "nasal_discharge", "pneumonia", "sudden_death"},
         "description": "Viral respiratory infection that can cause fatal pneumonia in guinea pigs, particularly in young or immunocompromised animals.",
         "description_ja": "モルモットに致死的な肺炎を引き起こすウイルス性呼吸器感染で、特に若齢や免疫不全の個体に多いです。",
-        "urgency": "high",
+        "urgency": "emergency",
         "recommended_tests": ["pcr_testing", "chest_xray", "blood_chemistry"],
     },
     {
@@ -1035,7 +1035,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "lethargy", "lymph_node_swelling", "sudden_death", "weight_loss"},
         "description": "Bacterial infection causing caseous lymphadenitis and granulomatous lesions in multiple organs. Zoonotic potential.",
         "description_ja": "複数臓器に乾酪性リンパ節炎と肉芽腫性病変を引き起こす細菌感染。人獣共通感染症の可能性があります。",
-        "urgency": "high",
+        "urgency": "emergency",
         "recommended_tests": ["blood_culture", "fecal_culture", "necropsy"],
     },
     {
@@ -1239,7 +1239,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "symptoms": {"appetite_loss", "back_pain", "fever", "lethargy", "polydipsia"},
+        "symptoms": {"appetite_loss", "back_pain", "blood_in_urine", "fever", "lethargy", "polydipsia", "weight_loss"},
         "description": "Ascending bacterial infection of the kidney, often secondary to lower urinary tract disease.",
         "description_ja": "下部尿路疾患に続発することが多い腎臓の上行性細菌感染です。",
         "urgency": "high",
@@ -1365,7 +1365,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Interstitial Pneumonia",
         "name_ja": "間質性肺炎",
-        "symptoms": {"coughing", "exercise_intolerance", "lethargy", "respiratory_distress", "weight_loss"},
+        "symptoms": {"appetite_loss", "coughing", "exercise_intolerance", "labored_breathing", "lethargy", "respiratory_distress", "weight_loss"},
         "description": "Chronic inflammation of the lung interstitium causing progressive respiratory compromise.",
         "description_ja": "肺間質の慢性炎症で、進行性の呼吸機能障害を引き起こします。",
         "urgency": "high",
@@ -1480,15 +1480,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "complete_blood_count", "coagulation_panel"],
     },
-    {
-        "name": "Cervical Lymphadenitis (Streptococcus zooepidemicus)",
-        "name_ja": "頸部リンパ節炎（動物連鎖球菌）",
-        "symptoms": {"swollen_lymph_nodes", "facial_swelling", "appetite_loss", "lethargy", "fever"},
-        "description": "Streptococcus zooepidemicus infection causing abscessed cervical lymph nodes ('lumps').",
-        "description_ja": "動物連鎖球菌による頸部リンパ節の膿瘍化（'しこり'）。",
-        "urgency": "high",
-        "recommended_tests": ["fine_needle_aspirate", "culture_sensitivity", "blood_work"],
-    },
+    # Duplicate "Cervical Lymphadenitis" removed (merged into earlier entry at line 961)
     {
         "name": "Cervical Lymphadenitis (Streptobacillus)",
         "name_ja": "頸部リンパ節炎（ストレプトバチルス）",
@@ -1552,15 +1544,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["radiographs", "physical_exam", "ultrasound"],
     },
-    {
-        "name": "Ovarian Cysts - Serous",
-        "name_ja": "卵巣嚢胞（漿液性）",
-        "symptoms": {"bilateral_hair_loss", "bloated_abdomen", "hormonal_behavior", "lethargy"},
-        "description": "Fluid-filled serous ovarian cysts causing bilateral flank alopecia, very common in sows over 2 years.",
-        "description_ja": "漿液性の卵巣嚢胞により両側側腹部の脱毛が起こり、2歳以上の雌に非常に多い。",
-        "urgency": "moderate",
-        "recommended_tests": ["ultrasound", "hormone_panel", "radiographs"],
-    },
+    # Duplicate "Ovarian Cysts - Serous" removed (merged into earlier entry at line 916)
     {
         "name": "Ovarian Cysts - Functional",
         "name_ja": "卵巣嚢胞（機能性）",
@@ -1642,15 +1626,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "ophthalmic_exam", "dietary_review"],
     },
-    {
-        "name": "Interstitial Pneumonia",
-        "name_ja": "間質性肺炎",
-        "symptoms": {"labored_breathing", "lethargy", "appetite_loss", "weight_loss"},
-        "description": "Non-infectious interstitial lung disease from chronic vitamin C deficiency or viral exposure.",
-        "description_ja": "慢性ビタミンC欠乏やウイルス曝露による非感染性の間質性肺疾患。",
-        "urgency": "high",
-        "recommended_tests": ["chest_x_ray", "blood_work", "blood_chemistry"],
-    },
+    # Duplicate "Interstitial Pneumonia" removed (merged into earlier entry at line 1366)
     {
         "name": "Urinary Sludge (Calcium Deposits)",
         "name_ja": "尿泥（カルシウム沈着）",
@@ -1660,15 +1636,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["abdominal_x_ray", "urinalysis", "blood_work"],
     },
-    {
-        "name": "Pyelonephritis",
-        "name_ja": "腎盂腎炎",
-        "symptoms": {"fever", "appetite_loss", "lethargy", "blood_in_urine", "weight_loss"},
-        "description": "Ascending bacterial infection of the renal pelvis and kidney parenchyma.",
-        "description_ja": "腎盂と腎実質への上行性細菌感染。",
-        "urgency": "high",
-        "recommended_tests": ["urinalysis", "blood_work", "ultrasound", "urine_culture"],
-    },
+    # Duplicate "Pyelonephritis" removed (merged into earlier entry at line 1240)
     {
         "name": "Metastatic Calcification - Soft Tissue",
         "name_ja": "転移性石灰化（軟部組織）",
