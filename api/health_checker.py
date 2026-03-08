@@ -3202,31 +3202,71 @@ def get_symptoms():
 
 @health_bp.route("/diseases", methods=["GET"])
 def get_diseases():
-    """Return all 43 diseases in the database."""
-    severity = request.args.get("severity")
-    filtered = [d for d in DISEASES if d["severity"] == severity] if severity else DISEASES
+    """Return diseases from the full database, optionally filtered by species."""
+    species = request.args.get("species", "dog")
 
     output = []
-    for d in filtered:
-        output.append(
-            {
-                "id": d["id"],
-                "name_ja": d["name_ja"],
-                "name_en": d["name_en"],
-                "description_ja": d.get("description_ja", ""),
-                "description_en": d.get("description_en", ""),
-                "severity": d["severity"],
-                "symptom_count": len(d["symptoms"]),
-                "symptoms": d["symptoms"],
-                "recommended_tests": d["recommended_tests"],
-                "breed_risk_count": len(d["breed_risks"]),
-            }
-        )
+    if species == "dog" or species is None:
+        try:
+            from api.symptom_checker import _DISEASE_DB
+        except ImportError:
+            from symptom_checker import _DISEASE_DB
+        for d in _DISEASE_DB:
+            symptoms = d.get("symptoms", set())
+            if isinstance(symptoms, set):
+                symptoms = sorted(symptoms)
+            output.append(
+                {
+                    "name": d.get("name", ""),
+                    "name_ja": d.get("name_ja", ""),
+                    "description": d.get("description", ""),
+                    "description_ja": d.get("description_ja", ""),
+                    "severity": d.get("urgency", d.get("severity", "")),
+                    "symptoms": symptoms,
+                }
+            )
+    elif species == "horse":
+        try:
+            from api.species.equine_diseases import DISEASE_DATABASE
+        except ImportError:
+            from species.equine_diseases import DISEASE_DATABASE
+        for d in DISEASE_DATABASE:
+            findings = getattr(d, "associated_findings", []) if not isinstance(d, dict) else d.get("associated_findings", [])
+            output.append(
+                {
+                    "name": getattr(d, "name_en", "") if not isinstance(d, dict) else d.get("name_en", ""),
+                    "name_ja": getattr(d, "name_ja", "") if not isinstance(d, dict) else d.get("name_ja", ""),
+                    "description": "",
+                    "description_ja": getattr(d, "description_ja", "") if not isinstance(d, dict) else d.get("description_ja", ""),
+                    "severity": getattr(d, "severity", "") if not isinstance(d, dict) else d.get("severity", ""),
+                    "symptoms": findings,
+                }
+            )
+    else:
+        import importlib
+        try:
+            mod = importlib.import_module(f"api.species.{species}_diseases")
+        except ImportError:
+            mod = importlib.import_module(f"species.{species}_diseases")
+        diseases = getattr(mod, "DISEASES", [])
+        for d in diseases:
+            symptoms = d.get("symptoms", [])
+            if isinstance(symptoms, set):
+                symptoms = sorted(symptoms)
+            output.append(
+                {
+                    "name": d.get("name", d.get("name_en", "")),
+                    "name_ja": d.get("name_ja", ""),
+                    "description": d.get("description", d.get("description_en", "")),
+                    "description_ja": d.get("description_ja", ""),
+                    "severity": d.get("severity", ""),
+                    "symptoms": symptoms,
+                }
+            )
 
     return jsonify(
         {
             "total": len(output),
-            "severity_levels": list(SEVERITY_WEIGHTS.keys()),
             "diseases": output,
         }
     )
