@@ -579,7 +579,7 @@ class TestComputeSeverity:
         assert _compute_severity(suspected) == "emergency"
 
     def test_emergency_urgency_moderate_likelihood_is_high(self):
-        """Emergency disease at moderate likelihood should still trigger high severity."""
+        """Emergency disease at moderate likelihood triggers high severity."""
         suspected = [
             {"_urgency": "emergency", "likelihood": "moderate"},
         ]
@@ -786,8 +786,10 @@ class TestDataIntegrity:
             )
 
     def test_disease_urgency_values(self):
-        # The dataset currently contains both triage-style urgency labels and
-        # severity-like legacy labels; the checker must tolerate both forms.
+        # The dataset currently contains both triage-style urgency labels
+        # {"normal", "urgent", "emergency"} and legacy severity-like labels
+        # {"low", "moderate", "high"}; the checker must tolerate both forms
+        # until the disease data is normalized onto a single label scheme.
         valid_urgency = {"low", "moderate", "normal", "high", "urgent", "emergency"}
         for disease in _DISEASE_DB:
             assert disease["urgency"] in valid_urgency, (
