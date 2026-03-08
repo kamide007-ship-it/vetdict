@@ -4934,9 +4934,10 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "weight_loss": {"ja": "体重減少", "en": "Weight Loss"},
     "wheezing": {"ja": "喘鳴", "en": "Wheezing"},
     "wool_sucking": {"ja": "ウール吸い", "en": "Wool Sucking"},
+    "pleural_effusion": {"ja": "胸水", "en": "Pleural effusion"},
 }
 
 
-def analyze_symptoms(symptoms, age_stage="", breed=None, *, onset=None, age_years=None, species=None):
+def analyze_symptoms(symptoms, age_stage="", breed=None, *, onset=None, age_years=None, species=None, lab_values: dict | None = None):
     """猫の症状から鑑別診断候補を算出する。"""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species)
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values)
