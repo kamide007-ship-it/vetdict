@@ -1,4 +1,5 @@
 import math
+import re
 from typing import Any, Dict, List
 
 _CONTRADICTION_PAIRS = [
@@ -118,10 +119,20 @@ def soften(text: str) -> str:
     out = text
     for a, b in _SOFTEN_JA:
         out = out.replace(a, b)
-    # simple case-insensitive for EN tokens
-    low = out.lower()
     for a, b in _SOFTEN_EN:
-        low = low.replace(a, b)
-    # Merge: keep JP/other chars from out, but apply EN replacements by diffing lowercase.
-    # For simplicity (and tests), returning low is acceptable.
-    return low
+        out = re.sub(
+            re.escape(a),
+            lambda match, replacement=b: _apply_case_pattern(match.group(0), replacement),
+            out,
+            flags=re.IGNORECASE,
+        )
+    return out
+
+
+def _apply_case_pattern(source: str, replacement: str) -> str:
+    if source.isupper():
+        return replacement.upper()
+    is_title_case = source[:1].isupper() and (source[1:].islower() if len(source) > 1 else True)
+    if is_title_case:
+        return replacement.capitalize()
+    return replacement

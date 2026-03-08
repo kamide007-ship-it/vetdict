@@ -1,5 +1,7 @@
 """Drug dictionary batch 1 - additional drugs for VetDict"""
+
 from __future__ import annotations
+
 from typing import Any, Dict, List
 
 DRUGS_BATCH_1: List[Dict[str, Any]] = [
@@ -29,3 +31,4 @@ DRUGS_BATCH_1: List[Dict[str, Any]] = [
         "contraindications": "Hypersensitivity to cephalosporins or penicillins (cross-reactivity possible). Caution with renal impairment.",
         "contraindications_ja": "セファロスポリンまたはペニシリン過敏症（交差反応の可能性）。腎機能障害には注意。",
     },
+]

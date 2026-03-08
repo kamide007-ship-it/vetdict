@@ -28,3 +28,16 @@ def test_soften_ja():
 def test_soften_en():
     t = output_gate.soften("This will definitely work and always succeed.")
     assert "likely" in t.lower() or "typically" in t.lower()
+
+
+def test_soften_en_preserves_existing_case():
+    t = output_gate.soften("This will definitely work and Always succeed.")
+    assert t.startswith("This will ")
+    assert " likely " in t
+    assert "Typically succeed." in t
+
+
+def test_soften_en_preserves_uppercase_tokens():
+    t = output_gate.soften("DEFINITELY possible, NEVER certain.")
+    assert "LIKELY" in t
+    assert "RARELY" in t
