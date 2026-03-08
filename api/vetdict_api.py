@@ -268,10 +268,25 @@ def api_analyze_symptoms():
     species = data.get('species', 'dog')
     age_stage = data.get('age_stage')
     breed = data.get('breed')
+    onset = data.get('onset')  # "acute" | "subacute" | "chronic"
+    age_years = data.get('age_years')  # numeric age in years
+
+    # Validate onset
+    if onset and onset not in ('acute', 'subacute', 'chronic'):
+        return {'error': "onset must be 'acute', 'subacute', or 'chronic'"}, 400
+
+    # Coerce age_years to float
+    if age_years is not None:
+        try:
+            age_years = float(age_years)
+        except (ValueError, TypeError):
+            return {'error': 'age_years must be a number'}, 400
 
     try:
         if species == 'dog' or species is None:
-            result = analyze_symptoms(symptoms, breed=breed)
+            result = analyze_symptoms(
+                symptoms, breed=breed, onset=onset, age_years=age_years,
+            )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
                 return {'error': 'Species analyzer module not available'}, 500

@@ -61,6 +61,9 @@ def analyze_symptoms_generic(
     diseases: List[Dict[str, Any]],
     symptom_names: Dict[str, Dict[str, str]],
     advice: Dict[str, Dict[str, str]] | None = None,
+    *,
+    onset: str | None = None,
+    age_years: float | None = None,
 ) -> Dict[str, Any]:
     """Generic differential diagnosis engine.
 
@@ -73,12 +76,18 @@ def analyze_symptoms_generic(
         include the keys: ``name``, ``name_ja``, ``symptoms`` (a set of
         identifiers), ``description``, ``description_ja``, ``urgency``, and
         ``recommended_tests`` (list of strings).
+        Optionally: ``onset_pattern`` (set of "acute"/"subacute"/"chronic")
+        and ``age_predisposition`` (set of "puppy"/"young"/"adult"/"senior").
     symptom_names:
         A mapping from symptom identifiers to their bilingual names. Only
         identifiers present in this mapping will be included in the output.
     advice:
         Optional advice dictionary overriding the global ADVICE. Must follow
         the same structure as ADVICE if provided.
+    onset:
+        Optional time-course: "acute", "subacute", or "chronic".
+    age_years:
+        Optional age of the animal in years.
 
     Returns
     -------
@@ -86,10 +95,23 @@ def analyze_symptoms_generic(
         A dictionary with the same structure as the dog symptom checker
         response: ``suspected_diseases``, ``recommended_tests``, ``severity``,
         ``general_advice``, ``general_advice_ja``, ``breed_genetic_tests``,
-        ``breed_risk_applied``, and ``symptom_names``.
+        ``breed_risk_applied``, ``onset_applied``, ``age_applied``,
+        and ``symptom_names``.
     """
     symptom_set: Set[str] = set(symptoms)
     suspected: List[Dict[str, Any]] = []
+
+    # Resolve age stage
+    age_stage: str | None = None
+    if age_years is not None:
+        if age_years < 1.0:
+            age_stage = "puppy"
+        elif age_years < 3.0:
+            age_stage = "young"
+        elif age_years < 7.0:
+            age_stage = "adult"
+        else:
+            age_stage = "senior"
 
     for disease in diseases:
         disease_symptoms = set(disease.get("symptoms", set()))
@@ -100,19 +122,43 @@ def analyze_symptoms_generic(
             continue
         coverage = len(matching) / len(disease_symptoms)
         match_percent = round(coverage * 100)
+
+        # Apply onset multiplier
+        onset_multiplier = 1.0
+        if onset:
+            disease_onsets = disease.get("onset_pattern")
+            if disease_onsets:
+                if onset in disease_onsets:
+                    onset_multiplier = 1.3
+                else:
+                    onset_multiplier = 0.7
+
+        # Apply age multiplier
+        age_multiplier = 1.0
+        if age_stage:
+            age_predisposition = disease.get("age_predisposition")
+            if age_predisposition:
+                if age_stage in age_predisposition:
+                    age_multiplier = 1.25
+                else:
+                    age_multiplier = 0.75
+
+        # Adjusted match percent
+        adjusted_percent = min(round(match_percent * onset_multiplier * age_multiplier), 100)
+
         # Determine likelihood tiers similar to dog algorithm
-        if coverage >= 0.5:
+        if adjusted_percent >= 50:
             likelihood = "high"
-        elif coverage >= 0.3:
+        elif adjusted_percent >= 30:
             likelihood = "moderate"
         else:
             likelihood = "low"
         # Map coverage percentage to a simple color class
-        if match_percent >= 70:
+        if adjusted_percent >= 70:
             color_class = "score-high"
-        elif match_percent >= 45:
+        elif adjusted_percent >= 45:
             color_class = "score-moderate"
-        elif match_percent >= 25:
+        elif adjusted_percent >= 25:
             color_class = "score-low"
         else:
             color_class = "score-minimal"
@@ -120,7 +166,7 @@ def analyze_symptoms_generic(
             "name": disease["name"],
             "name_ja": disease["name_ja"],
             "likelihood": likelihood,
-            "match_percent": match_percent,
+            "match_percent": adjusted_percent,
             "color_class": color_class,
             "description": disease.get("description", ""),
             "description_ja": disease.get("description_ja", ""),
@@ -186,5 +232,10 @@ def analyze_symptoms_generic(
         "general_advice_ja": advice_pair["ja"],
         "breed_genetic_tests": [],
         "breed_risk_applied": False,
+        "onset_applied": onset is not None,
+        "onset": onset,
+        "age_applied": age_years is not None,
+        "age_years": age_years,
+        "age_stage": age_stage,
         "symptom_names": symptom_names_lookup,
     }
