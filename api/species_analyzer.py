@@ -98,8 +98,9 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
 
 
 # それぞれの動物種コードに対応する解析関数
+# 注: 犬は analyze_species_symptoms 内で直接呼び出すため lambda 不要
 SPECIES_HANDLERS: Dict[str, Callable[[List[str], str | None], Dict]] = {
-    "dog": lambda symptoms, age_stage=None: analyze_dog(symptoms, breed=None),
+    "dog": None,  # handled specially in analyze_species_symptoms
     "cat": analyze_cat,
     "rabbit": analyze_rabbit,
     "hamster": analyze_hamster,
@@ -150,15 +151,22 @@ def analyze_species_symptoms(
         ValueError: 未対応の種が指定された場合
     """
     species_key = (species or "dog").lower()
-    handler = SPECIES_HANDLERS.get(species_key)
-    if not handler:
+    if species_key not in SPECIES_HANDLERS:
         raise ValueError(f"Unsupported species: {species}")
-    # 犬のみ第2引数が breed なので age_stage を無視
+    # 犬: 全パラメータ（breed, onset, age_years, lab_values）を渡す
     if species_key == "dog":
-        return handler(symptoms, None)
+        return analyze_dog(
+            symptoms,
+            breed=breed,
+            onset=onset,
+            age_years=age_years,
+            lab_values=lab_values,
+        )
     elif species_key == "horse":
+        handler = SPECIES_HANDLERS[species_key]
         return handler(symptoms, age_stage)
     else:
+        handler = SPECIES_HANDLERS[species_key]
         return handler(
             symptoms, age_stage,
             breed=breed, onset=onset, age_years=age_years,

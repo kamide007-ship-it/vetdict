@@ -7462,7 +7462,7 @@ def analyze_symptoms(
         age_stage = _age_years_to_stage(age_years)
 
     # Pre-compute symptom pair boosts and import clinical weights
-    from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT, compute_lab_boosts
+    from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT, compute_lab_boosts, _fuzzy_boost_lookup
     pair_boosts: dict[str, float] = {}
     for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
         if pair.issubset(symptom_set):
@@ -7500,52 +7500,69 @@ def analyze_symptoms(
         # Composite score (same formula used in the frontend)
         raw_score: float = (jaccard * 0.4 + coverage * 0.6) * 100
 
-        # Apply breed-specific risk multiplier
+        # 症状数による補正: 疾患の定義症状が少ない場合、カバー率が過大に
+        # なるためペナルティを適用。定義症状が多い疾患は特異性が高いため
+        # ボーナスを付与する。
+        if total <= 2:
+            symptom_count_factor = 0.75
+        elif total <= 4:
+            symptom_count_factor = 0.9
+        elif total >= 8:
+            symptom_count_factor = 1.1
+        else:
+            symptom_count_factor = 1.0
+
+        # 一致症状が1つだけの場合はスコアを抑制（ノイズ除去）
+        if match_count == 1:
+            symptom_count_factor *= 0.6
+
+        raw_score *= symptom_count_factor
+
+        # Apply breed-specific risk multiplier (上限を制限)
         breed_multiplier = 1.0
         if breed and breed in _BREED_DISEASE_RISK:
-            breed_multiplier = _BREED_DISEASE_RISK[breed].get(disease["name"], 1.0)
-        adjusted_score = min(raw_score * breed_multiplier, 100.0)
+            breed_multiplier = min(_BREED_DISEASE_RISK[breed].get(disease["name"], 1.0), 1.8)
 
-        # Apply onset (time-course) multiplier
+        # Apply onset (time-course) multiplier (緩和: ペナルティを軽減)
         onset_multiplier = 1.0
         if onset:
             disease_onsets = _DISEASE_ONSET.get(disease["name"])
             if disease_onsets:
                 if onset in disease_onsets:
-                    # Matching onset pattern -> boost
-                    onset_multiplier = 1.3
+                    onset_multiplier = 1.15
                 else:
-                    # Mismatch -> penalize
-                    onset_multiplier = 0.7
+                    onset_multiplier = 0.85
             # If disease has no onset data, leave multiplier at 1.0
-        adjusted_score = min(adjusted_score * onset_multiplier, 100.0)
 
-        # Apply age predisposition multiplier
+        # Apply age predisposition multiplier (緩和: ペナルティを軽減)
         age_multiplier = 1.0
         if age_stage:
             age_predisposition = _DISEASE_AGE_PREDISPOSITION.get(disease["name"])
             if age_predisposition:
                 if age_stage in age_predisposition:
-                    # Age group matches -> boost
-                    age_multiplier = 1.25
+                    age_multiplier = 1.15
                 else:
-                    # Age mismatch -> penalize
-                    age_multiplier = 0.75
+                    age_multiplier = 0.85
             # If disease has no age predisposition data, leave at 1.0
-        adjusted_score = min(adjusted_score * age_multiplier, 100.0)
 
-        # Apply symptom pair boost
-        pair_multiplier = pair_boosts.get(disease["name"], 1.0)
-        adjusted_score = min(adjusted_score * pair_multiplier, 100.0)
+        # Apply symptom pair boost (上限を制限、部分一致)
+        pair_multiplier = min(_fuzzy_boost_lookup(disease["name"], pair_boosts), 1.5)
 
-        # Apply lab value boost
-        lab_multiplier = lab_boosts.get(disease["name"], 1.0)
-        adjusted_score = min(adjusted_score * lab_multiplier, 100.0)
+        # Apply lab value boost (上限を制限、部分一致)
+        lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
 
         # Apply prevalence (base rate) multiplier — 有病率ベイズ補正
         prevalence_cat = _DISEASE_PREVALENCE.get(disease["name"])
         prevalence_multiplier = _PREVALENCE_MULTIPLIER.get(prevalence_cat, 1.0) if prevalence_cat else 1.0
-        adjusted_score = min(adjusted_score * prevalence_multiplier, 100.0)
+
+        # 複合ブースト倍率の上限を設定（過度なインフレ防止）
+        combined_boost = (breed_multiplier * onset_multiplier * age_multiplier
+                         * pair_multiplier * lab_multiplier * prevalence_multiplier)
+        combined_boost = min(combined_boost, 2.5)  # 最大2.5倍
+        if combined_boost < 1.0:
+            combined_boost = max(combined_boost, 0.6)  # ペナルティ下限0.6
+
+        adjusted_score = min(raw_score * combined_boost, 100.0)
 
         # Determine likelihood from adjusted score
         if adjusted_score >= 55 or match_count >= 4:
