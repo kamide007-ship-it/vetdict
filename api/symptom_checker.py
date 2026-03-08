@@ -5970,6 +5970,15 @@ def analyze_symptoms(
     if age_years is not None:
         age_stage = _age_years_to_stage(age_years)
 
+    # Pre-compute symptom pair boosts from the shared dictionary
+    from api.species.helpers import SYMPTOM_PAIR_BOOST
+    pair_boosts: dict[str, float] = {}
+    for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
+        if pair.issubset(symptom_set):
+            for disease_name, multiplier in disease_boosts.items():
+                if disease_name not in pair_boosts or multiplier > pair_boosts[disease_name]:
+                    pair_boosts[disease_name] = multiplier
+
     # -- 1. Score diseases --------------------------------------------------
     suspected: list[dict[str, Any]] = []
     for disease in _DISEASE_DB:
@@ -6022,6 +6031,10 @@ def analyze_symptoms(
                     age_multiplier = 0.75
             # If disease has no age predisposition data, leave at 1.0
         adjusted_score = min(adjusted_score * age_multiplier, 100.0)
+
+        # Apply symptom pair boost
+        pair_multiplier = pair_boosts.get(disease["name"], 1.0)
+        adjusted_score = min(adjusted_score * pair_multiplier, 100.0)
 
         # Determine likelihood from adjusted score
         if adjusted_score >= 55 or match_count >= 4:
