@@ -130,6 +130,7 @@ def analyze_species_symptoms(
     breed: str | None = None,
     onset: str | None = None,
     age_years: float | None = None,
+    lab_values: dict | None = None,
 ) -> Dict:
     """動物種に応じて適切な鑑別診断関数を呼び出すユーティリティ。
 
@@ -140,6 +141,7 @@ def analyze_species_symptoms(
         breed: 品種コード（任意）
         onset: 発症経過 "acute"/"subacute"/"chronic"（任意）
         age_years: 年齢（年単位の数値、任意）
+        lab_values: 検査値 {項目ID: 数値} の辞書（任意）
 
     Returns:
         辞書形式の分析結果
@@ -161,4 +163,5 @@ def analyze_species_symptoms(
             symptoms, age_stage,
             breed=breed, onset=onset, age_years=age_years,
             species=species_key,
+            lab_values=lab_values,
         )

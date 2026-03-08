@@ -6757,6 +6757,7 @@ def analyze_symptoms(
     breed: str | None = None,
     onset: str | None = None,
     age_years: float | None = None,
+    lab_values: dict[str, float] | None = None,
 ) -> dict:
     """Analyze a list of symptom IDs and return suspected diseases, tests,
     severity assessment, and general advice.
@@ -6796,13 +6797,18 @@ def analyze_symptoms(
         age_stage = _age_years_to_stage(age_years)
 
     # Pre-compute symptom pair boosts and import clinical weights
-    from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT
+    from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT, compute_lab_boosts
     pair_boosts: dict[str, float] = {}
     for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
         if pair.issubset(symptom_set):
             for disease_name, multiplier in disease_boosts.items():
                 if disease_name not in pair_boosts or multiplier > pair_boosts[disease_name]:
                     pair_boosts[disease_name] = multiplier
+
+    # Pre-compute lab value boosts
+    lab_boosts: dict[str, float] = {}
+    if lab_values:
+        lab_boosts = compute_lab_boosts(lab_values)
 
     # -- 1. Score diseases --------------------------------------------------
     suspected: list[dict[str, Any]] = []
@@ -6866,6 +6872,10 @@ def analyze_symptoms(
         # Apply symptom pair boost
         pair_multiplier = pair_boosts.get(disease["name"], 1.0)
         adjusted_score = min(adjusted_score * pair_multiplier, 100.0)
+
+        # Apply lab value boost
+        lab_multiplier = lab_boosts.get(disease["name"], 1.0)
+        adjusted_score = min(adjusted_score * lab_multiplier, 100.0)
 
         # Determine likelihood from adjusted score
         if adjusted_score >= 55 or match_count >= 4:
@@ -6950,6 +6960,8 @@ def analyze_symptoms(
         "age_applied": age_years is not None,
         "age_years": age_years,
         "age_stage": age_stage,
+        "lab_boost_applied": len(lab_boosts) > 0,
+        "lab_values": lab_values,
         "symptom_names": symptom_names_lookup,
     }
 
