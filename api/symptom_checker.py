@@ -741,6 +741,127 @@ def _age_years_to_stage(age_years: float) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Disease prevalence (有病率ベースの重み付け)
+# ---------------------------------------------------------------------------
+# 臨床的に一般的な疾患を上位に、稀な疾患を下位にランクさせるためのベイズ的事前確率。
+# "very_common" (1.4x) > "common" (1.2x) > "uncommon" (0.9x) > "rare" (0.7x)
+# デフォルト(未登録疾患) = 1.0 (neutral)
+#
+# 参考: Ettinger & Feldman (2017), Nelson & Couto (2019), 日本小動物獣医学会統計
+_PREVALENCE_MULTIPLIER: dict[str, float] = {
+    "very_common": 1.4,
+    "common": 1.2,
+    "uncommon": 0.9,
+    "rare": 0.7,
+}
+
+_DISEASE_PREVALENCE: dict[str, str] = {
+    # ===== VERY COMMON (日常的に遭遇する疾患) =====
+    # -- 消化器 --
+    "Gastroenteritis":                           "very_common",
+    "Intestinal Parasites":                      "very_common",
+    "Hemorrhagic Gastroenteritis (HGE)":         "very_common",
+    "Pancreatitis":                              "very_common",
+    "Foreign Body Obstruction":                  "very_common",
+    "Gastric Foreign Body":                      "very_common",
+    "Colitis":                                   "very_common",
+    # -- 皮膚 --
+    "Allergic Dermatitis":                       "very_common",
+    "Flea Allergy Dermatitis":                   "very_common",
+    "Pyoderma":                                  "very_common",
+    "Ear Infection (Otitis)":                    "very_common",
+    # -- 整形外科 --
+    "Patellar Luxation":                         "very_common",
+    "Cranial Cruciate Ligament Rupture":         "very_common",
+    "Hip Dysplasia":                             "very_common",
+    # -- 感染症 --
+    "Canine Parvovirus":                         "very_common",
+    "Kennel Cough (Bordetella)":                 "very_common",
+    # -- その他 --
+    "Periodontal Disease":                       "very_common",
+    "Urinary Tract Infection":                   "very_common",
+    "Anal Sac Disease":                          "very_common",
+
+    # ===== COMMON (頻繁に遭遇する疾患) =====
+    # -- 内科 --
+    "Hypothyroidism":                            "common",
+    "Cushing's Disease":                         "common",
+    "Diabetes Mellitus":                         "common",
+    "Addison's Disease":                         "common",
+    "Kidney Disease (CKD)":                      "common",
+    "Liver Disease":                             "common",
+    "Chronic Hepatitis":                         "common",
+    "Heart Disease/CHF":                         "common",
+    "Mitral Valve Disease (MMVD)":               "common",
+    "Dilated Cardiomyopathy (DCM)":              "common",
+    "Immune-Mediated Hemolytic Anemia":          "common",
+    "Epilepsy":                                  "common",
+    # -- 腫瘍 --
+    "Mast Cell Tumor":                           "common",
+    "Lymphoma":                                  "common",
+    "Hemangiosarcoma":                           "common",
+    "Mammary Tumor":                             "common",
+    "Lipoma":                                    "common",
+    "Osteosarcoma":                              "common",
+    "Oral Melanoma":                             "common",
+    "Melanoma":                                  "common",
+    # -- 感染症 --
+    "Canine Distemper":                           "common",
+    "Leptospirosis":                             "common",
+    "Giardiasis":                                "common",
+    "Babesiosis":                                "common",
+    # -- 整形外科 --
+    "Intervertebral Disc Disease (IVDD)":        "common",
+    "Elbow Dysplasia":                           "common",
+    "Osteochondritis Dissecans (OCD)":           "common",
+    # -- 眼科 --
+    "Keratoconjunctivitis Sicca (Dry Eye)":      "common",
+    "Corneal Ulcer":                             "common",
+    "Cherry Eye":                                "common",
+    "Cataracts":                                 "common",
+    # -- 皮膚 --
+    "Sarcoptic Mange (Scabies)":                 "common",
+    "Fungal Infection (Ringworm)":               "common",
+    "Seborrhea":                                 "common",
+    # -- 泌尿器 --
+    "Bladder Stones":                            "common",
+    "Pyometra":                                  "common",
+
+    # ===== UNCOMMON (時折遭遇する疾患) =====
+    "Megaesophagus":                             "uncommon",
+    "Myasthenia Gravis":                         "uncommon",
+    "Pemphigus":                                 "uncommon",
+    "Systemic Lupus Erythematosus (SLE)":        "uncommon",
+    "Portosystemic Shunt (Liver Shunt)":         "uncommon",
+    "Copper Storage Disease":                    "uncommon",
+    "Wobbler Syndrome":                          "uncommon",
+    "Pericardial Effusion":                      "uncommon",
+    "Chylothorax":                               "uncommon",
+    "Exocrine Pancreatic Insufficiency (EPI)":   "uncommon",
+    "Histiocytic Sarcoma":                       "uncommon",
+    "Transitional Cell Carcinoma":               "uncommon",
+    "Insulinoma":                                "uncommon",
+    "Pheochromocytoma":                          "uncommon",
+
+    # ===== RARE (稀に遭遇する疾患) =====
+    "Hepatic Microvascular Dysplasia":           "rare",
+    "Mucopolysaccharidosis":                     "rare",
+    "Glycogen Storage Disease":                  "rare",
+    "Malignant Hyperthermia":                    "rare",
+    "Alopecia X":                                "rare",
+    "Chemodectoma (Heart Base Tumor)":           "rare",
+    "Plasmacytoma":                              "rare",
+    "Hepatozoonosis":                            "rare",
+    "Sick Sinus Syndrome":                       "rare",
+    "Sebaceous Adenitis":                        "rare",
+    "Infective Endocarditis":                    "rare",
+    "Pulmonary Fibrosis":                        "rare",
+    "Dermatomyositis":                           "rare",
+    "Juvenile Cellulitis (Puppy Strangles)":     "rare",
+}
+
+
+# ---------------------------------------------------------------------------
 # Disease database
 # ---------------------------------------------------------------------------
 # Each entry:
@@ -753,64 +874,144 @@ def _age_years_to_stage(age_years: float) -> str:
 _DISEASE_DB: list[dict[str, Any]] = [
     {
         "name": "Canine Parvovirus",
-        "name_ja": "\u72ac\u30d1\u30eb\u30dc\u30a6\u30a4\u30eb\u30b9\u611f\u67d3\u75c7",
+        "name_ja": "犬パルボウイルス感染症",
         "symptoms": {"vomiting", "bloody_stool", "lethargy", "appetite_loss",
                       "fever", "diarrhea"},
         "description": "A highly contagious and potentially fatal viral illness "
                        "that attacks the gastrointestinal tract, most dangerous "
                        "in puppies.",
-        "description_ja": "消化管を攻撃する致死率の高い伝染性ウイルス疾患で、特に子犬に危険です。",
+        "description_ja": "犬パルボウイルス2型（CPV-2）による高伝染性のウイルス疾患。腸管上皮の急速に分裂する細胞を標的とし、"
+                          "重度の出血性腸炎を引き起こす。ワクチン未接種の子犬（6週〜6ヶ月齢）で最も致死率が高い。"
+                          "ロットワイラー、ドーベルマン、ジャーマンシェパード等が好発品種。",
+        "pathophysiology_ja": "経口感染後、ウイルスはまずリンパ組織で増殖し、ウイルス血症を経て腸管陰窩上皮細胞に到達する。"
+                              "陰窩上皮の壊死により絨毛が崩壊し、吸収障害・出血性下痢・細菌の二次感染（敗血症）を引き起こす。"
+                              "同時に骨髄の造血前駆細胞も攻撃され、白血球減少症（特にリンパ球減少）を伴う。",
+        "causes_ja": "犬パルボウイルス2型（CPV-2a, 2b, 2c亜型）。糞口経路で感染し、環境中で数ヶ月〜1年以上生存可能。"
+                     "ワクチン未接種、母体移行抗体の低下期、免疫抑制状態がリスク因子。",
+        "treatment_ja": "特異的抗ウイルス薬はなく、支持療法が主体。(1)積極的な輸液療法（乳酸リンゲル液、晶質液＋膠質液）、"
+                        "(2)制吐薬（マロピタント0.1mg/kg IV q24h）、(3)広域抗菌薬（アンピシリン＋エンロフロキサシン等）で二次感染予防、"
+                        "(4)栄養サポート（早期経腸栄養が推奨）。重症例ではFFP輸血や抗エンドトキシン抗体も検討。",
+        "prognosis_ja": "早期の積極的治療で生存率85〜95%。無治療では致死率91%以上。白血球数<1,000/μLや低アルブミン血症は予後不良因子。",
+        "prevention_ja": "コアワクチン（MLV）を6〜8週齢から2〜4週間隔で16週齢以降まで接種。年1回の追加接種。"
+                         "感染環境の次亜塩素酸ナトリウム消毒（1:30希釈）。",
         "urgency": "normal",
     },
     {
         "name": "Canine Distemper",
-        "name_ja": "\u72ac\u30b8\u30b9\u30c6\u30f3\u30d1\u30fc",
+        "name_ja": "犬ジステンパー",
         "symptoms": {"fever", "nasal_discharge", "eye_discharge", "coughing",
                       "lethargy", "seizures", "vomiting"},
         "description": "A serious viral disease affecting the respiratory, "
                        "gastrointestinal, and nervous systems.",
-        "description_ja": "呼吸器・消化器・神経系を侵す重篤なウイルス疾患です。",
+        "description_ja": "犬ジステンパーウイルス（CDV、パラミクソウイルス科モルビリウイルス属）による多臓器感染症。"
+                          "呼吸器→消化器→神経系と段階的に進行し、特にワクチン未接種の若齢犬で致死率が高い。"
+                          "二相性発熱（初期発熱→一時解熱→再発熱）が特徴的。",
+        "pathophysiology_ja": "エアロゾル感染後、上気道リンパ組織で初期増殖→ウイルス血症→全身のリンパ組織、上皮組織、中枢神経系へ播種。"
+                              "リンパ球融解によるリンパ球減少→免疫抑制→日和見感染の併発。晩期には脱髄性脳脊髄炎を引き起こし、"
+                              "ミオクローヌス（チューインガム発作）や痙攣が出現。ハードパッド病（足底角化）も特徴的。",
+        "causes_ja": "犬ジステンパーウイルス（CDV）。飛沫感染・直接接触で伝播。"
+                     "ワクチン未接種犬、免疫不全犬、3〜6ヶ月齢の子犬が高リスク。フェレット等の野生動物も感受性あり。",
+        "treatment_ja": "特異的治療薬なし。支持療法が主体：(1)広域抗菌薬で二次細菌感染の制御、(2)輸液・栄養管理、"
+                        "(3)抗痙攣薬（ジアゼパム、フェノバルビタール）で神経症状の管理。"
+                        "インターフェロン投与の報告もあるが、エビデンスは限定的。",
+        "prognosis_ja": "神経症状出現前の呼吸器型では回復の可能性あり。神経型に進行した場合は予後不良で致死率50%以上。"
+                        "回復しても永続的な神経後遺症（ミオクローヌス、エナメル質低形成）が残ることがある。",
+        "prevention_ja": "コアワクチン（MLVジステンパーワクチン）を子犬期に3回接種後、年1回追加接種。"
+                         "感染犬との接触回避。",
         "urgency": "normal",
     },
     {
         "name": "Kennel Cough (Bordetella)",
-        "name_ja": "\u30b1\u30f3\u30cd\u30eb\u30b3\u30d5\uff08\u30dc\u30eb\u30c7\u30c6\u30e9\u611f\u67d3\u75c7\uff09",
+        "name_ja": "ケンネルコフ（犬伝染性気管気管支炎）",
         "symptoms": {"coughing", "sneezing", "nasal_discharge",
                       "reverse_sneezing", "lethargy"},
         "description": "A highly contagious respiratory infection causing a "
                        "persistent, forceful cough.",
-        "description_ja": "持続的な強い咳を引き起こす高伝染性の呼吸器感染症です。",
+        "description_ja": "Bordetella bronchisepticaを主な原因菌とする犬の急性伝染性気管気管支炎。"
+                          "犬アデノウイルス2型、犬パラインフルエンザウイルス等との混合感染が多い。"
+                          "ペットホテルやドッグランなど多頭飼育環境で発生しやすい。",
+        "pathophysiology_ja": "飛沫・エアロゾル感染により気道上皮に付着→線毛運動障害と粘膜炎症→"
+                              "乾性〜湿性の発作的な咳（ガチョウ様咳嗽）。気管圧迫で誘発される特徴的な咳反射。"
+                              "通常は上気道に限局するが、免疫不全犬では気管支肺炎に進展する場合がある。",
+        "causes_ja": "Bordetella bronchiseptica（最主要）、犬パラインフルエンザウイルス、犬アデノウイルス2型、"
+                     "犬呼吸器コロナウイルス、マイコプラズマ等の混合感染。多頭飼育、ストレス、換気不良がリスク因子。",
+        "treatment_ja": "軽症例：自然回復（1〜3週間）、鎮咳薬（ブトルファノール）、環境整備（加湿・安静）。"
+                        "重症例・二次感染：ドキシサイクリン(5mg/kg BID 10〜14日)またはアジスロマイシン。"
+                        "ネブライザー療法も有効。気管支肺炎への進展時は入院管理。",
+        "prognosis_ja": "免疫正常犬では1〜3週間で自然回復し予後良好。子犬や免疫不全犬では気管支肺炎への進展に注意。",
+        "prevention_ja": "ワクチン（注射型または経鼻型）接種。多頭飼育環境の換気改善。感染犬の隔離。",
         "urgency": "normal",
     },
     {
         "name": "Gastric Dilatation-Volvulus (GDV/Bloat)",
-        "name_ja": "\u80c3\u62e1\u5f35\u80c3\u6355\u8ee2\u75c7\u5019\u7fa4\uff08GDV\uff09",
+        "name_ja": "胃拡張胃捻転症候群（GDV）",
         "symptoms": {"bloated_abdomen", "vomiting", "excessive_panting",
                       "lethargy", "anxiety"},
         "description": "A life-threatening condition where the stomach fills "
                        "with gas and rotates, cutting off blood supply. "
                        "Requires immediate emergency surgery.",
-        "description_ja": "胃がガスで膨張し捻転する致命的な緊急疾患です。直ちに外科手術が必要です。",
+        "description_ja": "胃がガスで急速に拡張し、時計方向に180〜360°捻転する致死的緊急疾患。"
+                          "大型〜超大型犬（グレートデン、セントバーナード、ジャーマンシェパード等）の深胸種に好発。"
+                          "食後の運動、一日一回の大量給餌、ストレスがリスク因子。",
+        "pathophysiology_ja": "胃の捻転により噴門・幽門が閉塞→胃内ガス蓄積→胃壁の虚血壊死。"
+                              "脾臓を巻き込み脾捻転を併発。後大静脈の圧迫による静脈還流障害→心拍出量低下→"
+                              "分布性ショック。再灌流障害によりDIC、心室性不整脈（再灌流性不整脈）を合併。",
+        "causes_ja": "明確な単一原因は不明。リスク因子：大型深胸種、一日一食の大量給餌、食後直後の運動、"
+                     "早食い、エアロファジア（空気嚥下）、加齢、GDVの家族歴、ストレス・不安気質。",
+        "treatment_ja": "【超緊急】(1)ショック治療：大量輸液（晶質液60-90mL/kg/hr）、(2)胃減圧（経口胃管または経皮的穿刺脱気）、"
+                        "(3)安定化後に緊急開腹手術→胃の整復＋胃固定術（gastropexy）、壊死組織の切除、脾摘（必要時）。"
+                        "(4)術後：心電図モニター（再灌流性心室性不整脈にリドカイン）、電解質補正。",
+        "prognosis_ja": "早期手術で生存率85〜90%。胃壁壊死やDIC合併例では致死率30〜50%。"
+                        "胃固定術を行えば再発率3〜5%（未実施では80%再発）。",
+        "prevention_ja": "予防的胃固定術（高リスク犬種で推奨、避妊去勢手術時に同時実施可）。"
+                         "一日2〜3回の分割給餌。食後1時間の安静。ストレス軽減。",
         "urgency": "emergency",
     },
     {
         "name": "Pancreatitis",
-        "name_ja": "\u81b5\u708e",
+        "name_ja": "膵炎",
         "symptoms": {"vomiting", "appetite_loss", "lethargy", "pain_on_touch",
                       "diarrhea", "fever"},
         "description": "Inflammation of the pancreas causing severe abdominal "
                        "pain and digestive disturbance.",
-        "description_ja": "膵臓の炎症により、激しい腹痛と消化障害を引き起こします。",
+        "description_ja": "膵臓の自己消化による急性または慢性の炎症性疾患。犬では急性壊死性膵炎が多く、"
+                          "中年〜高齢の肥満犬、ミニチュアシュナウザー、コッカースパニエルに好発。"
+                          "高脂肪食の摂取後や副腎皮質機能亢進症の併発例で発症リスクが上昇する。",
+        "pathophysiology_ja": "膵腺房細胞内でトリプシノーゲンが異常活性化→膵実質の自己消化→局所炎症→"
+                              "全身性炎症反応症候群（SIRS）。重症例ではDIC、多臓器不全（MOF）に進展。"
+                              "慢性例では膵線維化→外分泌機能不全（EPI）や糖尿病の原因となる。",
+        "causes_ja": "高脂肪食・ゴミ漁り（最多）、副腎皮質機能亢進症、甲状腺機能低下症、高脂血症、"
+                     "薬物（アザチオプリン、L-アスパラギナーゼ、臭化カリウム等）、膵管閉塞、外傷。"
+                     "多くは特発性。",
+        "treatment_ja": "(1)絶食→早期経腸栄養（24〜48時間以内に少量から開始が推奨）、"
+                        "(2)積極的輸液療法、(3)鎮痛：マロピタント（制吐＋内臓痛緩和）、ブプレノルフィン、"
+                        "フェンタニルCRI、(4)制吐薬：マロピタント＋オンダンセトロン（難治例）、"
+                        "(5)抗菌薬は感染合併時のみ。慢性例では低脂肪食＋膵酵素補充。",
+        "prognosis_ja": "軽症〜中等症：適切な治療で回復良好（生存率90%以上）。"
+                        "重症壊死性膵炎：致死率30〜40%。DIC・MOF合併は予後不良因子。再発率は高い。",
+        "prevention_ja": "低脂肪食の維持、テーブルフードの禁止、肥満防止、原疾患（高脂血症等）の管理。",
         "urgency": "normal",
     },
     {
         "name": "Hypothyroidism",
-        "name_ja": "\u7532\u72b6\u817a\u6a5f\u80fd\u4f4e\u4e0b\u75c7",
+        "name_ja": "甲状腺機能低下症",
         "symptoms": {"weight_gain", "lethargy", "hair_loss", "dry_skin",
                       "stiffness"},
         "description": "An endocrine disorder where the thyroid gland produces "
                        "insufficient hormones, slowing metabolism.",
-        "description_ja": "甲状腺ホルモンの不足により代謝が低下する内分泌疾患です。",
+        "description_ja": "犬で最も一般的な内分泌疾患の一つ。甲状腺ホルモン（T4）の産生低下により全身の代謝率が低下する。"
+                          "中年〜高齢犬（4〜10歳）に好発。ゴールデンレトリバー、ドーベルマン、"
+                          "アイリッシュセッター、グレートデン等の中〜大型犬に多い。",
+        "pathophysiology_ja": "95%以上がリンパ球性甲状腺炎（自己免疫性）または特発性甲状腺萎縮により甲状腺が破壊される原発性。"
+                              "T4低下→TSH上昇（負のフィードバック）。代謝率低下により体重増加、皮膚代謝異常（脱毛・角化異常）、"
+                              "神経伝導速度低下（末梢神経障害）、心拍出量低下を引き起こす。",
+        "causes_ja": "リンパ球性甲状腺炎（自己免疫性、最多）、特発性甲状腺萎縮、"
+                     "稀に甲状腺腫瘍、医原性（放射性ヨード治療後、抗甲状腺薬）。遺伝的素因あり。",
+        "treatment_ja": "レボチロキシン（L-T4）0.02mg/kg BID経口投与（生涯投与）。"
+                        "投与開始4〜8週後にT4値を再検査し用量調整。活動性改善は1〜2週間、"
+                        "皮膚・被毛改善は4〜6ヶ月かかる。定期的な甲状腺機能モニタリング（6ヶ月〜1年毎）。",
+        "prognosis_ja": "適切な補充療法で予後は極めて良好。生活の質は正常に近い状態まで回復する。治療は生涯必要。",
+        "prevention_ja": "確立された予防法はないが、好発品種では中年期以降の定期的な甲状腺機能検査を推奨。",
         "urgency": "normal",
     },
     {
@@ -825,42 +1026,103 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Cushing's Disease",
-        "name_ja": "\u30af\u30c3\u30b7\u30f3\u30b0\u75c7\u5019\u7fa4",
+        "name_ja": "クッシング症候群（副腎皮質機能亢進症）",
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_gain",
                       "hair_loss", "lethargy", "excessive_panting"},
         "description": "Overproduction of cortisol by the adrenal glands, "
                        "leading to a range of systemic effects.",
-        "description_ja": "副腎からのコルチゾール過剰産生により、全身に様々な症状が現れます。",
+        "description_ja": "コルチゾールの慢性的過剰産生による多臓器障害。中高齢犬（8歳以上）に好発。"
+                          "下垂体依存性（PDH、85%）と副腎腫瘍性（AT、15%）に分類。"
+                          "プードル、ダックスフント、ビーグル、ボストンテリアに多い。",
+        "pathophysiology_ja": "PDH：下垂体腺腫→ACTH過剰分泌→両側副腎皮質過形成→コルチゾール過剰。"
+                              "AT：副腎皮質腫瘍（腺腫or腺癌）から自律的にコルチゾール分泌。"
+                              "慢性的高コルチゾール血症→肝臓のグリコーゲン蓄積（ステロイド肝症）、筋萎縮、"
+                              "皮膚菲薄化、免疫抑制、インスリン抵抗性（二次性糖尿病リスク）。",
+        "causes_ja": "下垂体微小腺腫（PDH、最多）、副腎皮質腫瘍（腺腫・腺癌）、"
+                     "医原性（長期ステロイド投与）。",
+        "treatment_ja": "PDH：トリロスタン（2〜5mg/kg SID〜BID、第一選択）でコルチゾール合成阻害。"
+                        "ACTH刺激試験で用量調整。代替薬：ミトタン（o,p'-DDD）。"
+                        "AT：外科的副腎摘出（可能であれば根治的）。転移例にはミトタン。"
+                        "医原性：ステロイドの漸減中止。全例で定期的なACTH刺激試験モニタリング必須。",
+        "prognosis_ja": "PDH：トリロスタン治療で中央生存期間約2年。QOLは大きく改善。"
+                        "AT腺腫：外科切除で予後良好。AT腺癌：転移例は予後不良。"
+                        "無治療では糖尿病、肺血栓塞栓症、尿路感染症の合併リスクが高い。",
+        "prevention_ja": "確立された予防法なし。好発品種では多飲多尿・腹部膨満等の初期症状に注意し早期診断を推奨。",
         "urgency": "normal",
     },
     {
         "name": "Addison's Disease",
-        "name_ja": "\u30a2\u30b8\u30bd\u30f3\u75c5",
+        "name_ja": "アジソン病（副腎皮質機能低下症）",
         "symptoms": {"lethargy", "appetite_loss", "vomiting", "diarrhea",
                       "weight_loss", "dehydration", "collapse"},
         "description": "Insufficient production of adrenal hormones, causing "
                        "weakness, dehydration, and episodic collapse.",
-        "description_ja": "副腎ホルモンの不足により、脱力感や消化器症状を引き起こします。",
+        "description_ja": "副腎皮質からのグルココルチコイドおよびミネラルコルチコイドの分泌不全。"
+                          "「偉大なる模倣者（Great Pretender）」と呼ばれ、非特異的症状のため見逃されやすい。"
+                          "若齢〜中年の雌犬に好発。スタンダードプードル、ポルトガルウォータードッグ等に遺伝的素因。",
+        "pathophysiology_ja": "免疫介在性副腎皮質破壊（最多）→コルチゾール・アルドステロン欠乏。"
+                              "アルドステロン欠乏→Na喪失・K貯留→高K血症による徐脈・不整脈（致死的）。"
+                              "コルチゾール欠乏→ストレス耐性低下、低血糖、消化器症状。"
+                              "アジソンクリーゼ：急性副腎不全による循環虚脱・低血圧性ショック。",
+        "causes_ja": "免疫介在性副腎皮質炎（原発性、最多）、医原性（長期ステロイド投与の急な中止）、"
+                     "肉芽腫性疾患（真菌症等）、副腎出血、転移性腫瘍。稀に下垂体性（二次性）。",
+        "treatment_ja": "【急性クリーゼ】大量生理食塩水輸液、デキサメタゾン0.5〜2mg/kg IV、高K血症の補正。"
+                        "【維持療法】フルドロコルチゾン（0.01〜0.02mg/kg/日）またはDOCP（2.2mg/kg SC q25日）"
+                        "＋プレドニゾロン（0.1〜0.2mg/kg/日）。電解質の定期モニタリング。"
+                        "ストレス時（手術・旅行等）はステロイド増量。",
+        "prognosis_ja": "適切な補充療法で予後は良好〜極めて良好。正常な生活が可能。治療は生涯必要。"
+                        "アジソンクリーゼは早期治療で回復可能だが、診断遅延は致死的。",
+        "prevention_ja": "確立された予防法なし。好発品種では消化器症状の間欠的な発現に注意。"
+                         "ステロイド長期投与からの離脱は必ず漸減で行う。",
         "urgency": "normal",
     },
     {
         "name": "Diabetes Mellitus",
-        "name_ja": "\u7cd6\u5c3f\u75c5",
+        "name_ja": "糖尿病",
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss",
                       "appetite_increase", "lethargy"},
         "description": "A metabolic disorder where the body cannot properly "
                        "regulate blood sugar levels.",
-        "description_ja": "血糖値を適切に調節できなくなる代謝疾患です。",
+        "description_ja": "インスリン分泌不全または作用不全による持続性高血糖。犬では1型（インスリン依存性）が多い。"
+                          "中高齢の未避妊雌犬に好発。サモエド、オーストラリアンテリア、ミニチュアシュナウザー等に多い。",
+        "pathophysiology_ja": "膵β細胞の免疫介在性破壊→絶対的インスリン欠乏→高血糖。"
+                              "腎糖排泄閾値（約180mg/dL）超過→浸透圧利尿（多尿）→代償性多飲。"
+                              "脂肪分解亢進→ケトン体産生→糖尿病性ケトアシドーシス（DKA、致死的合併症）。"
+                              "長期的に白内障（犬で非常に多い）、糖尿病性神経障害を合併。",
+        "causes_ja": "免疫介在性膵β細胞破壊（犬の1型DM、最多）、慢性膵炎による二次性、"
+                     "発情後の黄体期プロゲステロン→GH過剰（未避妊雌犬）、"
+                     "副腎皮質機能亢進症、長期ステロイド投与。肥満はリスク因子。",
+        "treatment_ja": "インスリン療法（生涯）：中間型インスリン（NPH、Vetsulin/Caninsulin）0.25〜0.5IU/kg BID SC。"
+                        "血糖曲線で用量調整。食事管理：高繊維・低脂肪食、一定時間・一定量の給餌。"
+                        "未避妊雌犬は避妊手術（プロゲステロンによるインスリン抵抗性解除）。"
+                        "DKA：入院管理、レギュラーインスリンCRI、輸液、電解質補正。",
+        "prognosis_ja": "適切なインスリン管理と食事管理で中央生存期間2〜3年以上。多くの犬で良好なQOLを維持。"
+                        "白内障は高頻度（75%以上）に発生するが、白内障手術で視力回復可能。DKAは致死率20〜40%。",
+        "prevention_ja": "肥満予防、未避妊雌犬の早期避妊手術（プロゲステロン性DM予防）。"
+                         "好発品種では血糖・フルクトサミン値の定期検査。",
         "urgency": "normal",
     },
     {
         "name": "Urinary Tract Infection",
-        "name_ja": "\u5c3f\u8def\u611f\u67d3\u75c7",
+        "name_ja": "尿路感染症（UTI）",
         "symptoms": {"straining_urinate", "blood_urine",
                       "excessive_urination", "fever", "lethargy"},
         "description": "A bacterial infection of the urinary tract causing "
                        "pain, frequent urination, and sometimes blood in urine.",
-        "description_ja": "尿路の細菌感染により、痛み・頻尿・血尿を引き起こします。",
+        "description_ja": "下部尿路（膀胱）の細菌感染が最も多い。雌犬に好発（解剖学的に尿道が短い）。"
+                          "単純性UTIと、基礎疾患（糖尿病、クッシング、尿石症等）に伴う複雑性UTIに分類。",
+        "pathophysiology_ja": "上行性感染（会陰部の常在菌→尿道→膀胱）が主経路。"
+                              "E. coli（最多、約50%）、Staphylococcus、Proteus等が原因菌。"
+                              "膀胱粘膜の炎症→頻尿・血尿・排尿痛。上部尿路への波及で腎盂腎炎を合併する場合がある。",
+        "causes_ja": "大腸菌（最多）、ブドウ球菌、プロテウス、クレブシエラ等の上行性感染。"
+                     "リスク因子：雌犬、免疫抑制（糖尿病、クッシング、ステロイド投与）、尿石症、解剖学的異常。",
+        "treatment_ja": "尿培養＋感受性試験に基づく抗菌薬選択が理想。経験的治療：アモキシシリン/クラブラン酸"
+                        "（12.5〜25mg/kg BID）7〜14日間。複雑性UTIは4〜6週間投与。"
+                        "治療終了1週間後に尿培養で陰性確認。基礎疾患の同時管理が重要。",
+        "prognosis_ja": "単純性UTI：適切な抗菌薬治療で完治率95%以上。"
+                        "複雑性UTI：基礎疾患の管理が不十分だと再発を繰り返す。",
+        "prevention_ja": "十分な飲水量の確保、定期的な排尿機会、基礎疾患の管理。"
+                         "再発性UTIではクランベリーサプリメントの有効性を示す報告もある。",
         "urgency": "normal",
     },
     {
@@ -875,52 +1137,141 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Kidney Disease (CKD)",
-        "name_ja": "\u6162\u6027\u814e\u81d3\u75c5",
+        "name_ja": "慢性腎臓病（CKD）",
         "symptoms": {"excessive_thirst", "excessive_urination", "appetite_loss",
                       "vomiting", "weight_loss", "lethargy"},
         "description": "Progressive loss of kidney function leading to waste "
                        "build-up and systemic illness.",
-        "description_ja": "腎機能が進行性に低下し、老廃物の蓄積と全身性疾患を引き起こします。",
+        "description_ja": "不可逆的なネフロン喪失による進行性の腎機能低下。IRIS分類でStage 1〜4に病期分類。"
+                          "高齢犬に多いが、先天性腎疾患（腎異形成等）で若齢犬にも発生する。"
+                          "症状が顕在化するのは腎機能の75%以上が失われた時点（Stage 3以降）。",
+        "pathophysiology_ja": "原因を問わず、ネフロンの進行性喪失→残存ネフロンの代償性過濾過→"
+                              "糸球体硬化→さらなるネフロン喪失の悪循環。BUN・クレアチニン上昇、"
+                              "リン貯留→二次性上皮小体機能亢進症→腎性骨異栄養症。"
+                              "尿濃縮能低下→多尿→代償性多飲。末期には尿毒症性消化器症状・貧血。",
+        "causes_ja": "加齢性変化（最多）、慢性糸球体腎炎、腎アミロイドーシス、先天性腎異形成、"
+                     "慢性腎盂腎炎、腎結石、NSAID等の腎毒性薬物、レプトスピラ症後遺症。"
+                     "コッカースパニエル、シーズー、ブルテリアに遺伝的素因。",
+        "treatment_ja": "根治療法なし。進行抑制と症状管理が目標。"
+                        "(1)腎臓療法食（低リン・低タンパク・高品質タンパク）—Stage 2以降で推奨、"
+                        "(2)リン吸着剤（水酸化アルミニウム、炭酸ランタン）、"
+                        "(3)ACE阻害薬（ベナゼプリル0.25〜0.5mg/kg SID）—タンパク尿軽減、"
+                        "(4)制吐薬・胃粘膜保護薬、(5)皮下輸液（在宅）、"
+                        "(6)エリスロポエチン（腎性貧血に対して）。SDMA値で早期診断可能。",
+        "prognosis_ja": "IRIS Stage 2：中央生存期間1,000日以上。Stage 3：約300〜500日。"
+                        "Stage 4：約100〜200日。腎臓療法食による生存期間延長のエビデンスあり。"
+                        "タンパク尿の程度が最も重要な予後因子。",
+        "prevention_ja": "7歳以降の定期的な血液検査（BUN、Cre、SDMA）＋尿検査（UPC比）。"
+                         "腎毒性薬物の回避。十分な飲水量の確保。",
         "urgency": "normal",
     },
     {
         "name": "Liver Disease",
-        "name_ja": "\u809d\u81d3\u75c5",
+        "name_ja": "肝臓病（肝障害）",
         "symptoms": {"appetite_loss", "vomiting", "lethargy", "weight_loss",
                       "excessive_thirst", "bloated_abdomen"},
         "description": "Impaired liver function affecting digestion, "
                        "detoxification, and metabolism.",
-        "description_ja": "肝機能の低下により、消化・解毒・代謝に影響を及ぼします。",
+        "description_ja": "急性または慢性の肝細胞障害による消化・解毒・合成機能の低下。"
+                          "慢性肝炎はコッカースパニエル、ドーベルマン、ラブラドール、ベドリントンテリアに好発。"
+                          "黄疸、腹水、肝性脳症が進行した肝不全の三大徴候。",
+        "pathophysiology_ja": "肝細胞障害→ALT・AST上昇。胆汁うっ滞→ALP・GGT上昇・高ビリルビン血症（黄疸）。"
+                              "合成機能低下→低アルブミン血症→腹水・浮腫。凝固因子合成低下→出血傾向。"
+                              "アンモニア代謝障害→高アンモニア血症→肝性脳症（神経症状）。"
+                              "慢性肝炎→線維化→肝硬変への進行。",
+        "causes_ja": "慢性肝炎（免疫介在性、銅蓄積性、特発性）、急性肝障害（薬物性、中毒性）、"
+                     "門脈体循環シャント（先天性/後天性）、肝腫瘍、胆管疾患、感染症（レプトスピラ等）。"
+                     "ベドリントンテリアの銅蓄積症は常染色体劣性遺伝。",
+        "treatment_ja": "原因に応じた治療。慢性肝炎：免疫抑制療法（プレドニゾロン±アザチオプリン）、"
+                        "ウルソデオキシコール酸（15mg/kg/日、肝保護・利胆）、SAMe（肝細胞保護）、"
+                        "銅蓄積症にはD-ペニシラミン＋低銅食。"
+                        "肝性脳症：低タンパク食、ラクツロース（高アンモニア血症軽減）、メトロニダゾール。"
+                        "腹水：フロセミド＋スピロノラクトン、ナトリウム制限。",
+        "prognosis_ja": "慢性肝炎：早期治療で数年の生存が可能。肝硬変に進行した場合は予後不良。"
+                        "急性肝障害：原因除去と支持療法で回復可能な場合がある。"
+                        "銅蓄積症：キレート療法で進行抑制可能。",
+        "prevention_ja": "肝毒性薬物の注意深い使用、中毒物質への暴露回避、好発品種での定期的肝機能検査。",
         "urgency": "normal",
     },
     {
         "name": "Heart Disease/CHF",
-        "name_ja": "\u5fc3\u81d3\u75c5\uff0f\u3046\u3063\u8840\u6027\u5fc3\u4e0d\u5168",
+        "name_ja": "うっ血性心不全（CHF）",
         "symptoms": {"coughing", "difficulty_breathing", "lethargy",
                       "excessive_panting", "bloated_abdomen"},
         "description": "Deterioration of heart function leading to fluid "
                        "build-up and reduced exercise tolerance.",
-        "description_ja": "心機能の悪化により、体液貯留と運動耐性の低下を引き起こします。",
+        "description_ja": "心臓のポンプ機能不全により全身のうっ血と体液貯留を来す症候群。"
+                          "犬では僧帽弁粘液腫様変性（MMVD、小型犬）と拡張型心筋症（DCM、大型犬）が二大原因。"
+                          "ACVIM分類でStage A〜Dに病期分類。",
+        "pathophysiology_ja": "左心不全：僧帽弁逆流→左房圧上昇→肺静脈うっ血→肺水腫（咳、呼吸困難）。"
+                              "右心不全：三尖弁逆流or肺高血圧→全身静脈うっ血→腹水、頸静脈怒張。"
+                              "神経体液性代償機構（RAAS活性化、交感神経亢進）→Na・水貯留→さらなる前負荷増大の悪循環。"
+                              "心房拡大→心房細動リスク上昇。",
+        "causes_ja": "僧帽弁粘液腫様変性（MMVD/MVD、小型犬で最多）、拡張型心筋症（DCM、大型犬）、"
+                     "心膜疾患、先天性心疾患（PDA、PS、SAS等）、心筋炎、フィラリア症。"
+                     "キャバリア、チワワ、マルチーズ等にMMVD好発。ドーベルマン、ボクサーにDCM好発。",
+        "treatment_ja": "Stage B2（無症候性だが心拡大あり）：ピモベンダン(0.25mg/kg BID)で心不全発症を遅延。"
+                        "Stage C（症候性CHF）：フロセミド(2〜4mg/kg BID〜TID)＋ピモベンダン＋ACE阻害薬(ベナゼプリル)。"
+                        "Stage D（難治性）：利尿薬の増量、スピロノラクトン追加、ヒドララジン追加。"
+                        "肺水腫急性期：酸素療法＋フロセミドIV bolus。心房細動にはジルチアゼム。"
+                        "安静＋低ナトリウム食。",
+        "prognosis_ja": "MMVD Stage B2：ピモベンダン投与で心不全発症までの中央期間約1,228日。"
+                        "Stage C：中央生存期間約9〜12ヶ月（治療下）。DCMはより予後不良（中央生存期間6〜12ヶ月）。",
+        "prevention_ja": "好発品種では定期的な心臓聴診＋胸部X線＋心エコー検査。"
+                         "DCM好発犬種ではタウリン・L-カルニチン含有食。フィラリア予防。",
         "urgency": "normal",
     },
     {
         "name": "Allergic Dermatitis",
-        "name_ja": "\u30a2\u30ec\u30eb\u30ae\u30fc\u6027\u76ae\u819a\u708e",
+        "name_ja": "犬アトピー性皮膚炎（CAD）",
         "symptoms": {"itching", "skin_redness", "hair_loss", "ear_scratching",
                       "hot_spots"},
         "description": "An inflammatory skin condition triggered by "
                        "environmental or food allergens.",
-        "description_ja": "環境アレルゲンや食物アレルゲンにより引き起こされる炎症性皮膚疾患です。",
+        "description_ja": "遺伝的素因を持つ犬がIgE介在性に環境アレルゲンに反応する慢性掻痒性皮膚疾患。"
+                          "犬の皮膚疾患で最も多い原因の一つ。1〜3歳で発症が多い。"
+                          "柴犬、フレンチブルドッグ、シーズー、ゴールデンレトリバー、ウエストハイランドホワイトテリアに好発。",
+        "pathophysiology_ja": "皮膚バリア機能の先天的異常（フィラグリン等の構造タンパク異常）→経皮的アレルゲン侵入→"
+                              "Th2優位の免疫応答→IgE産生→マスト細胞脱顆粒→ヒスタミン・サイトカイン放出→"
+                              "掻痒・紅斑。慢性化すると苔癬化・色素沈着。二次感染（ブドウ球菌・マラセチア）が併発しやすい。",
+        "causes_ja": "環境アレルゲン（ハウスダストマイト、花粉、カビ胞子等）が主因。"
+                     "食物アレルゲン（牛肉、鶏肉、小麦、乳製品等）との併発も多い（30%）。"
+                     "遺伝的素因、皮膚バリア機能障害がベース。",
+        "treatment_ja": "多角的アプローチ：(1)アレルゲン回避（環境整備）、"
+                        "(2)薬物療法—オクラシチニブ（アポキル0.4〜0.6mg/kg BID→SID）、"
+                        "ロキベトマブ（サイトポイント2mg/kg SC月1回）が第一選択。重症急性期のみ短期プレドニゾロン。"
+                        "(3)スキンケア—セラミド配合シャンプー・保湿（週1〜2回）、"
+                        "(4)二次感染管理—抗菌薬・抗真菌薬、"
+                        "(5)減感作療法（ASIT）—唯一の根治的アプローチ（成功率60〜70%）。",
+        "prognosis_ja": "完治は困難だが、適切な管理で良好なQOLを維持可能。"
+                        "生涯にわたる管理が必要。二次感染のコントロールが重要。",
+        "prevention_ja": "好発品種の繁殖選択、早期からのスキンケア。"
+                         "完全な予防は困難だが、皮膚バリア機能の維持が発症抑制に寄与する可能性。",
         "urgency": "normal",
     },
     {
         "name": "Ear Infection (Otitis)",
-        "name_ja": "\u5916\u8033\u708e",
+        "name_ja": "外耳炎",
         "symptoms": {"ear_scratching", "ear_odor", "head_tilting",
                       "pain_on_touch"},
         "description": "Infection or inflammation of the ear canal, often "
                        "bacterial or yeast-related.",
-        "description_ja": "外耳道の感染または炎症で、細菌性またはマラセチア関連が多いです。",
+        "description_ja": "外耳道の炎症で、犬の受診理由の上位を占める。垂れ耳犬種（コッカースパニエル、"
+                          "ラブラドール、ゴールデンレトリバー等）や耳道が狭い犬種（シャーペイ、フレンチブルドッグ等）に好発。"
+                          "基礎疾患としてアトピー性皮膚炎が75%以上に併存。",
+        "pathophysiology_ja": "一次因子（アレルギー、異物、角化異常）→耳道環境変化→二次感染因子の増殖"
+                              "（マラセチア、ブドウ球菌、緑膿菌）→炎症・浮腫→耳道狭窄→換気不良→さらなる感染の悪循環。"
+                              "慢性化すると耳道の線維化・石灰化（end-stage ear）、中耳炎への進展。",
+        "causes_ja": "一次因子：アトピー性皮膚炎（最多）、食物アレルギー、耳ダニ（Otodectes cynotis）、異物（草の実）。"
+                     "素因：垂れ耳、多毛耳道、狭窄耳道、水泳。二次感染：マラセチア、ブドウ球菌、緑膿菌。",
+        "treatment_ja": "耳細胞診（cytology）で原因菌同定→適切な点耳薬選択。"
+                        "マラセチア性：ミコナゾール/クロトリマゾール含有点耳薬。"
+                        "細菌性：フルオロキノロン含有点耳薬。緑膿菌：トリスEDTA洗浄＋フルオロキノロン。"
+                        "耳洗浄（クロルヘキシジン含有洗浄液）。重症例：全身性抗菌薬＋ステロイド。"
+                        "End-stage ear：全耳道切除術（TECA-LBO）。基礎疾患（アトピー等）の同時管理が必須。",
+        "prognosis_ja": "急性外耳炎：適切な治療で良好。慢性・再発性外耳炎：基礎疾患の管理が鍵。"
+                        "耳道石灰化（end-stage）では外科的介入が必要。",
+        "prevention_ja": "耳の定期清掃（過剰清掃は禁忌）、水泳後の耳乾燥、基礎アレルギーの管理。",
         "urgency": "normal",
     },
     {
@@ -963,41 +1314,109 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Hip Dysplasia",
-        "name_ja": "\u80a1\u95a2\u7bc0\u5f62\u6210\u4e0d\u5168",
+        "name_ja": "股関節形成不全",
         "symptoms": {"limping_rl", "limping_rr", "stiffness",
                       "reluctance_move", "pain_on_touch"},
         "description": "A genetic skeletal condition where the hip joint "
                        "develops abnormally, leading to arthritis and pain.",
-        "description_ja": "股関節の遺伝性骨格疾患で、関節炎や痛みを引き起こします。",
+        "description_ja": "股関節の不安定性と亜脱臼を伴う遺伝性の発達性骨格疾患。"
+                          "大型〜超大型犬（ジャーマンシェパード、ラブラドール、ゴールデンレトリバー、"
+                          "セントバーナード等）に好発。多因子遺伝で環境因子（成長速度、栄養、運動）も関与。",
+        "pathophysiology_ja": "寛骨臼と大腿骨頭の適合性不良→関節弛緩→亜脱臼→関節軟骨の摩耗→"
+                              "二次性変形性関節症（OA）。成長期の急速な体重増加と不適切な運動が悪化因子。"
+                              "関節包の炎症と骨棘形成が慢性疼痛の原因。",
+        "causes_ja": "多因子遺伝（遺伝率0.2〜0.6）。環境因子：急速な成長、過剰カロリー摂取、"
+                     "成長期の過度な運動。大型犬種に圧倒的に多い。",
+        "treatment_ja": "保存療法：体重管理（最重要）、適度な運動（水泳推奨）、NSAIDs（カルプロフェン、メロキシカム）、"
+                        "関節サプリメント（グルコサミン＋コンドロイチン）、理学療法。"
+                        "外科：若齢犬—JPS、DPO/TPO、FHO。成犬—人工股関節全置換術（THR、根治的）、FHO。",
+        "prognosis_ja": "軽症例：保存療法で良好なQOLを維持可能。"
+                        "重症例：THRで機能的に正常に近い回復が期待できる。体重管理が予後を大きく左右する。",
+        "prevention_ja": "罹患犬の繁殖制限、PennHIP/OFA評価による繁殖適性判定。"
+                         "大型犬の成長期のカロリー制限（成長曲線に沿った適正体重管理）。",
         "urgency": "normal",
     },
     {
         "name": "Intervertebral Disc Disease (IVDD)",
-        "name_ja": "\u690e\u9593\u677f\u30d8\u30eb\u30cb\u30a2",
+        "name_ja": "椎間板ヘルニア（IVDD）",
         "symptoms": {"pain_on_touch", "reluctance_move", *_ANY_LIMPING,
                       "stiffness", "anxiety"},
         "description": "Degeneration or herniation of spinal discs causing "
                        "pain, nerve damage, and potential paralysis.",
-        "description_ja": "椎間板の変性やヘルニアにより、痛み・神経障害・麻痺を引き起こします。",
+        "description_ja": "椎間板の変性・脱出による脊髄圧迫。Hansen I型（急性、軟骨異栄養性犬種）と"
+                          "Hansen II型（慢性、大型犬）に分類。ダックスフント（発生率10〜25倍）、"
+                          "コーギー、ビーグル、フレンチブルドッグ、ペキニーズに好発。",
+        "pathophysiology_ja": "Hansen I型：髄核の軟骨様変性→急性に線維輪を破って脊柱管内へ脱出→脊髄の急性圧迫・挫傷。"
+                              "Hansen II型：線維輪の慢性変性・膨隆→脊髄の緩徐な圧迫。"
+                              "胸腰部（T11〜L3）が最好発部位。脊髄圧迫の程度によりGrade I（疼痛のみ）〜"
+                              "Grade V（深部痛覚消失＋麻痺）に分類。",
+        "causes_ja": "軟骨異栄養性犬種の遺伝的素因（Hansen I型）。加齢性変性（Hansen II型）。"
+                     "肥満、階段昇降、ジャンプ等の物理的負荷が誘発因子。",
+        "treatment_ja": "Grade I〜II（疼痛・歩行可能）：ケージレスト4〜6週間、NSAIDs、ガバペンチン、筋弛緩薬。"
+                        "Grade III〜V（麻痺・深部痛覚消失）：緊急外科手術（片側椎弓切除術/腹側減圧術）→"
+                        "術後リハビリテーション（水中トレッドミル、理学療法）。"
+                        "Grade V（深部痛覚消失48時間以上）：手術の成功率は低い（<5%）。",
+        "prognosis_ja": "Grade I〜III：保存療法で80〜90%が改善。外科手術で95%以上。"
+                        "Grade IV：外科手術で85〜90%。Grade V（深部痛覚消失<48h）：約60%。"
+                        "Grade V（>48h）：予後不良（<5%）。再発率は保存療法で30〜50%。",
+        "prevention_ja": "体重管理（最重要）、階段やジャンプの制限（スロープ使用）、"
+                         "適度な運動による背筋強化。軟骨異栄養性犬種の飼い主への啓蒙。",
         "urgency": "urgent",
     },
     {
         "name": "Epilepsy",
-        "name_ja": "\u3066\u3093\u304b\u3093",
+        "name_ja": "特発性てんかん",
         "symptoms": {"seizures", "circling", "anxiety", "lethargy"},
         "description": "A neurological disorder causing recurrent seizures "
                        "due to abnormal brain activity.",
-        "description_ja": "脳の異常な電気活動により、反復性のけいれん発作を引き起こす神経疾患です。",
+        "description_ja": "6ヶ月〜6歳で初発する反復性けいれん発作を特徴とする脳の機能性障害。"
+                          "構造的・代謝的原因が除外された場合に診断。犬のてんかんの約60%を占める。"
+                          "ボーダーコリー、ジャーマンシェパード、ラブラドール、ビーグル、ゴールデンレトリバーに好発。",
+        "pathophysiology_ja": "大脳皮質ニューロンの過剰同期性発火→発作。興奮性（グルタミン酸）と"
+                              "抑制性（GABA）の神経伝達物質のバランス異常が基盤。"
+                              "全般性発作（意識消失・全身強直間代性）と焦点性発作（局所的筋攣縮、意識変容）に分類。"
+                              "発作後期（postictal phase）に一時的な失明、徘徊、攻撃性が見られることがある。",
+        "causes_ja": "特発性（遺伝性、最多）：多くの犬種で遺伝的背景が示唆されている。"
+                     "構造的原因（脳腫瘍、脳炎、外傷、水頭症）や代謝性原因（低血糖、肝性脳症、"
+                     "電解質異常）を除外した上で診断。",
+        "treatment_ja": "抗てんかん薬による生涯管理：フェノバルビタール（2.5〜5mg/kg BID、第一選択）、"
+                        "臭化カリウム（20〜40mg/kg/日、単独or併用）、レベチラセタム（20mg/kg TID、新規薬）。"
+                        "血中薬物濃度モニタリング（フェノバルビタール15〜40μg/mL）。"
+                        "重積発作：ジアゼパム0.5〜1mg/kg IV/IR→レベチラセタム負荷→"
+                        "フェノバルビタールCRI（必要時）。肝機能の定期検査（フェノバルビタール使用時）。",
+        "prognosis_ja": "適切な抗てんかん薬で60〜70%の犬が発作の良好なコントロールを達成。"
+                        "薬剤抵抗性てんかん（30〜40%）は予後が劣る。"
+                        "重積発作や群発発作の反復は予後不良因子。中央生存期間は治療反応犬で2〜5年。",
+        "prevention_ja": "確立された予防法なし。好発品種での遺伝的スクリーニングの研究が進行中。"
+                         "発作の誘発因子（ストレス、睡眠不足、過度の興奮）の回避。",
         "urgency": "normal",
     },
     {
         "name": "Vestibular Disease",
-        "name_ja": "\u524d\u5ead\u75be\u60a3",
+        "name_ja": "前庭疾患",
         "symptoms": {"head_tilting", "circling", "vomiting", "anxiety",
                       "lethargy"},
         "description": "A condition affecting the inner ear or brainstem, "
                        "causing loss of balance and disorientation.",
-        "description_ja": "内耳や脳幹に影響を与え、平衡感覚の喪失や方向感覚障害を引き起こします。",
+        "description_ja": "末梢性（内耳/前庭神経）または中枢性（脳幹/小脳）の前庭系障害。"
+                          "特発性（老齢性）前庭疾患が最も多く、高齢犬に突然発症する。"
+                          "斜頸、眼振、運動失調、嘔吐が特徴的。脳卒中と間違われやすい。",
+        "pathophysiology_ja": "末梢性：内耳の前庭器官または前庭神経の障害→一側性の斜頸・水平眼振（患側向き速相）。"
+                              "特発性：原因不明の急性一側性前庭機能障害（ウイルス性前庭神経炎が推測されている）。"
+                              "中枢性：脳幹の前庭核障害→垂直眼振・方向変換眼振・固有位置感覚障害→意識レベル変化。"
+                              "末梢性と中枢性の鑑別が臨床的に極めて重要。",
+        "causes_ja": "末梢性：特発性（老齢犬、最多）、中耳炎/内耳炎、甲状腺機能低下症、耳毒性薬物。"
+                     "中枢性：脳腫瘍、脳炎（GME等）、脳血管障害（脳梗塞・出血）、外傷。"
+                     "特発性前庭疾患は高齢犬（12歳以上）に好発。",
+        "treatment_ja": "特発性前庭疾患：対症療法（制吐薬マロピタント、ジアゼパム短期間で過度の不安に対して）。"
+                        "多くは2〜3週間で自然改善。支持療法（補助歩行、スリップ防止マット、給餌補助）。"
+                        "中耳炎性：抗菌薬長期投与（4〜6週間）±手術（TECA-LBO）。"
+                        "中枢性：原因に応じた治療（脳腫瘍→ステロイド/化学療法/放射線、脳炎→免疫抑制療法）。",
+        "prognosis_ja": "特発性前庭疾患：予後良好。72時間で改善開始、2〜3週間でほぼ回復。"
+                        "軽度の恒常的斜頸が残る場合があるが、QOLへの影響は少ない。"
+                        "中枢性：原因による。脳腫瘍の場合は予後不良。",
+        "prevention_ja": "特発性は予防法なし。中耳炎予防のための耳の定期管理。"
+                         "甲状腺機能低下症の適切な管理。",
         "urgency": "normal",
     },
     {
@@ -1012,12 +1431,33 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Heartworm Disease",
-        "name_ja": "\u30d5\u30a3\u30e9\u30ea\u30a2\u75c7\uff08\u72ac\u7cf8\u72b6\u866b\u75c7\uff09",
+        "name_ja": "フィラリア症（犬糸状虫症）",
         "symptoms": {"coughing", "lethargy", "difficulty_breathing",
                       "weight_loss", "bloated_abdomen", "excessive_panting"},
         "description": "Parasitic worms residing in the heart and pulmonary "
                        "arteries, causing progressive organ damage.",
-        "description_ja": "心臓や肺動脈に寄生する寄生虫で、進行性の臓器障害を引き起こします。",
+        "description_ja": "Dirofilaria immitisが犬の肺動脈と右心室に寄生する致死的寄生虫疾患。"
+                          "蚊を介して感染し、成虫は体長15〜30cmに達する。感染から症状発現まで"
+                          "6〜7ヶ月の潜伏期間。日本を含む温暖な地域で広く分布。",
+        "pathophysiology_ja": "感染性L3幼虫（蚊刺咬）→皮下・筋肉で発育→L5幼虫→血流経由で肺動脈に到達→成虫化。"
+                              "肺動脈内膜の機械的損傷→増殖性動脈内膜炎→肺高血圧→右心不全。"
+                              "大量寄生時：後大静脈症候群（Caval syndrome）→溶血性貧血、DIC、ショック。"
+                              "死滅虫体による肺動脈血栓塞栓症も重大な合併症。",
+        "causes_ja": "Dirofilaria immitis。蚊（Aedes, Culex, Anopheles等）が中間宿主。"
+                     "感染犬の血液中のミクロフィラリア→蚊体内でL3に発育→新たな犬への感染。"
+                     "屋外飼育犬、予防薬未投与犬がハイリスク。",
+        "treatment_ja": "【成虫駆除】メラルソミン（イミティサイド）2.5mg/kg 深部筋注×3回（AHSプロトコール）。"
+                        "駆除前：ドキシサイクリン（10mg/kg BID 4週間、共生菌Wolbachia駆除）"
+                        "＋予防薬開始（ミクロフィラリア対策）。"
+                        "成虫駆除後6〜8週間の厳格な運動制限（死滅虫体による肺血栓塞栓症予防）。"
+                        "Caval syndrome：外科的虫体摘出（経頸静脈法）。"
+                        "Slow kill法（予防薬のみ長期投与）は耐性形成リスクがあり非推奨。",
+        "prognosis_ja": "クラス1〜2（軽症〜中等症）：メラルソミン治療で良好（成功率98%）。"
+                        "クラス3（重症）：治療リスクは高いが多くは回復可能。"
+                        "Caval syndrome：緊急手術で50〜80%生存。無治療では致死的。",
+        "prevention_ja": "月1回の予防薬投与（イベルメクチン、ミルベマイシン、モキシデクチン等）が最も有効。"
+                         "年1回の抗原検査。蚊の発生する4月〜12月（日本）に通年投与が推奨。"
+                         "投与開始前のフィラリア検査が必須。",
         "urgency": "normal",
     },
     {
@@ -1032,12 +1472,31 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Pyometra",
-        "name_ja": "\u5b50\u5bae\u84c4\u81bf\u75c7",
+        "name_ja": "子宮蓄膿症",
         "symptoms": {"genital_discharge", "excessive_thirst", "lethargy",
                       "fever", "bloated_abdomen", "vomiting"},
         "description": "A serious uterine infection in unspayed females "
                        "requiring emergency surgical intervention.",
-        "description_ja": "未避妊の雌犬に発生する重篤な子宮感染症で、緊急手術が必要です。",
+        "description_ja": "未避妊の中高齢雌犬に発生する子宮内膜の化膿性感染症。発情後期（黄体期）に発生し、"
+                          "開放型（膣からの排膿あり）と閉鎖型（排膿なし→より危険）に分類。"
+                          "6歳以上の未避妊雌犬の約25%が発症するとされる。",
+        "pathophysiology_ja": "反復する発情周期→プロゲステロンの影響で子宮内膜の嚢胞性過形成（CEH）→"
+                              "細菌（主にE. coli）の上行性感染→子宮内膿貯留。"
+                              "閉鎖型：膿の排出なし→子宮内圧上昇→菌血症・敗血症・エンドトキシン血症→"
+                              "敗血症性ショック。腎障害（内毒素によるADH抵抗性→多飲多尿）を合併。",
+        "causes_ja": "プロゲステロンの慢性的子宮内膜刺激（CEH）＋E. coliの上行性感染（最多）。"
+                     "外因性プロゲステロン製剤、エストロゲン投与（交配後避妊）がリスク因子。"
+                     "未避妊の中高齢雌犬（特に未経産犬）に好発。",
+        "treatment_ja": "【第一選択】卵巣子宮摘出術（OHE）→緊急手術。術前に循環安定化（輸液、広域抗菌薬）。"
+                        "抗菌薬：アンピシリン＋エンロフロキサシン（E. coli対策）。"
+                        "【内科的治療】繁殖温存が必要な場合のみ：アグレプリストン（抗プロゲステロン薬）"
+                        "＋プロスタグランジンF2α＋抗菌薬。ただし再発率70%以上。"
+                        "閉鎖型は子宮破裂リスクがあり外科が強く推奨。",
+        "prognosis_ja": "外科治療：生存率95%以上（敗血症合併がなければ）。"
+                        "内科治療：繁殖犬では次の発情での妊娠率50〜60%。再発率が非常に高い。"
+                        "敗血症・DIC合併例は予後不良。",
+        "prevention_ja": "若齢での避妊手術（OHE）が最も確実な予防法。"
+                         "外因性ホルモン投与の回避。繁殖計画終了後の早期避妊。",
         "urgency": "emergency",
     },
     {
@@ -1080,30 +1539,80 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Immune-Mediated Hemolytic Anemia",
-        "name_ja": "\u514d\u75ab\u4ecb\u5728\u6027\u6eb6\u8840\u6027\u8ca7\u8840",
+        "name_ja": "免疫介在性溶血性貧血（IMHA）",
         "symptoms": {"lethargy", "rapid_breathing", "appetite_loss", "fever"},
         "description": "The immune system destroys the body's own red blood "
                        "cells, causing severe anemia.",
-        "description_ja": "免疫系が自身の赤血球を破壊し、重度の貧血を引き起こします。",
+        "description_ja": "自己免疫機序により赤血球が破壊される重篤な貧血。犬の免疫介在性疾患で最も多い。"
+                          "中年の雌犬に好発。コッカースパニエル、スプリンガースパニエル、プードル、"
+                          "アイリッシュセッターに多い。致死率20〜40%の緊急疾患。",
+        "pathophysiology_ja": "IgGまたはIgM自己抗体が赤血球膜に結合→脾臓・肝臓のマクロファージによる"
+                              "血管外溶血（主要）、または補体活性化による血管内溶血。"
+                              "球状赤血球の出現が特徴的。重症例では播種性血管内凝固（DIC）、"
+                              "肺血栓塞栓症（PTE）を合併し致死的。赤血球自己凝集が診断的。",
+        "causes_ja": "原発性（特発性、70%）：自己免疫の異常活性化。"
+                     "二次性（30%）：薬物（セファロスポリン等）、感染症（バベシア、エーリキア）、"
+                     "腫瘍（リンパ腫）、ワクチン接種後、蜂刺症。"
+                     "免疫介在性血小板減少症（ITP）との併発=エバンス症候群。",
+        "treatment_ja": "免疫抑制療法：プレドニゾロン（2mg/kg/日→漸減、4〜6ヶ月かけて減量）。"
+                        "難治例：ミコフェノール酸モフェチル、シクロスポリン、アザチオプリンを併用。"
+                        "支持療法：輸血（PCV<15%）、酸素療法、輸液。"
+                        "血栓予防：クロピドグレル＋低用量アスピリン。DIC時はヘパリン。"
+                        "脾摘：薬物抵抗性の場合に検討。",
+        "prognosis_ja": "初回発症の生存率60〜80%（適切な治療下）。致死率20〜40%。"
+                        "DIC・PTE合併は予後不良。再発率は30〜50%。"
+                        "免疫抑制剤の長期投与が必要な場合が多い。",
+        "prevention_ja": "確立された予防法なし。既往犬ではワクチン接種のリスク/ベネフィット評価が必要。",
         "urgency": "normal",
     },
     {
         "name": "Gastroenteritis",
-        "name_ja": "\u80c3\u8178\u708e",
+        "name_ja": "急性胃腸炎",
         "symptoms": {"vomiting", "diarrhea", "appetite_loss", "lethargy", "dehydration", "abdominal_pain"},
         "description": "Inflammation of the stomach and intestines, commonly "
                        "from dietary indiscretion or infection.",
-        "description_ja": "食事の不摂生や感染により起こる胃腸の炎症です。",
+        "description_ja": "胃・小腸粘膜の急性炎症で、犬の消化器疾患で最も多い。"
+                          "食餌性（ゴミ漁り、食べ慣れないもの）が最も一般的な原因。"
+                          "全犬種・全年齢で発生するが、若齢犬に多い。",
+        "pathophysiology_ja": "有害物質・病原体による胃腸粘膜の直接障害→粘膜炎症→"
+                              "消化吸収障害（下痢）、胃粘膜刺激（嘔吐）→脱水・電解質異常。"
+                              "重症例（出血性胃腸炎/HGE/AHDS）では腸管透過性亢進→菌血症・エンドトキシン血症。",
+        "causes_ja": "食餌性（ゴミ漁り、食事変更、過食、腐敗食）が最多。"
+                     "感染性（パルボウイルス、コロナウイルス、サルモネラ、カンピロバクター、ジアルジア）。"
+                     "ストレス性、薬物性（NSAIDs、抗菌薬）。",
+        "treatment_ja": "軽症例：24時間の消化管安静→消化の良い低脂肪食（茹で鶏肉＋白米）で再開。"
+                        "中等症以上：制吐薬（マロピタント）、皮下or静脈輸液、"
+                        "下痢止め（スメクタイト等の吸着薬）。抗菌薬は細菌感染が確認された場合のみ。"
+                        "HGE/AHDSでは積極的輸液＋抗菌薬（アンピシリン）。",
+        "prognosis_ja": "食餌性の単純な胃腸炎：2〜3日で自然回復し予後良好。"
+                        "HGE/AHDS：積極的治療で90%以上が回復。脱水放置は危険。",
+        "prevention_ja": "ゴミ漁り防止、急な食事変更を避ける（5〜7日かけて移行）、"
+                         "テーブルフードや高脂肪食の制限。",
         "urgency": "normal",
     },
     {
         "name": "Brachycephalic Airway Syndrome",
-        "name_ja": "\u77ed\u982d\u7a2e\u6c17\u9053\u75c7\u5019\u7fa4",
+        "name_ja": "短頭種気道症候群（BAS）",
         "symptoms": {"difficulty_breathing", "snoring", "excessive_panting",
                       "reverse_sneezing", "coughing"},
         "description": "A set of upper airway abnormalities common in "
                        "short-nosed breeds, causing breathing difficulties.",
-        "description_ja": "短頭種に多い上気道の構造異常で、呼吸困難を引き起こします。",
+        "description_ja": "短頭種犬（フレンチブルドッグ、パグ、ブルドッグ、ペキニーズ等）に見られる"
+                          "複数の上気道狭窄の複合病態。外鼻孔狭窄、軟口蓋過長、喉頭小嚢外転、"
+                          "気管低形成を特徴とする。暑熱・興奮・運動時に呼吸困難が悪化。",
+        "pathophysiology_ja": "頭蓋骨の短縮→上気道の解剖学的スペース不足→一次的異常（外鼻孔狭窄、軟口蓋過長、"
+                              "気管低形成）→呼吸抵抗増大→代償的な強吸気→二次的変化（喉頭小嚢外転、喉頭虚脱）。"
+                              "悪化の悪循環により最終的に喉頭虚脱→致死的上気道閉塞。肥満が大きな悪化因子。",
+        "causes_ja": "遺伝的に決定された頭蓋骨構造の短縮。短頭種犬全般に見られる。"
+                     "重症度は品種と個体により異なる。肥満、高温多湿環境、過度の興奮が症状を増悪させる。",
+        "treatment_ja": "外科矯正（若齢時に推奨）：外鼻孔拡大術（alaeplasty）、軟口蓋切除術（staphylectomy）、"
+                        "喉頭小嚢切除術。二次的喉頭虚脱（Stage III）では永久気管切開が必要な場合も。"
+                        "内科管理：体重管理（最重要）、涼しい環境、興奮回避、短時間の散歩。"
+                        "急性呼吸困難：酸素療法、鎮静、ステロイド（気道浮腫軽減）、緊急挿管。",
+        "prognosis_ja": "早期外科矯正で良好〜極めて良好。術後呼吸状態の著明な改善が期待できる。"
+                        "喉頭虚脱に進行した場合は予後が劣る。体重管理が長期予後を大きく左右。",
+        "prevention_ja": "繁殖選択による極端な短頭化の回避。体重管理。高温多湿環境の回避。"
+                         "外鼻孔狭窄は避妊去勢手術時の同時矯正が推奨。",
         "urgency": "normal",
     },
     # ===========================================================================
@@ -1127,7 +1636,24 @@ _DISEASE_DB: list[dict[str, Any]] = [
                       "appetite_loss", "excessive_urination"},
         "description": "A bacterial zoonotic disease spread through contaminated "
                        "water, affecting kidneys and liver.",
-        "description_ja": "汚染水を介して伝播する人獣共通細菌感染症で、腎臓と肝臓を侵します。",
+        "description_ja": "Leptospira interrogansを原因とする人獣共通感染症。急性腎不全および肝不全を引き起こす。"
+                          "野生動物の尿に汚染された水や土壌との接触で感染。秋〜冬の降雨後に多い。"
+                          "都市部でも増加傾向にあり、公衆衛生上も重要。",
+        "pathophysiology_ja": "経皮・経粘膜感染→レプトスピラ血症→腎尿細管上皮への定着→間質性腎炎→急性腎障害（AKI）。"
+                              "肝臓では肝細胞の腫大・胆汁うっ滞→黄疸。血管内皮障害→出血傾向、肺出血。"
+                              "感染犬は回復後も数ヶ月間尿中にレプトスピラを排菌し、感染源となる。",
+        "causes_ja": "Leptospira interrogans（L. canicola, L. icterohaemorrhagiae, L. pomona, L. grippotyphosa等）。"
+                     "感染動物（ネズミ、野生動物）の尿に汚染された水・土壌との接触。"
+                     "外飼い犬、狩猟犬、水辺活動犬がハイリスク。人にも感染する（人獣共通感染症）。",
+        "treatment_ja": "急性期：ペニシリン系（アンピシリン20mg/kg IV TID）で菌血症を制御→"
+                        "その後ドキシサイクリン（5mg/kg BID 2〜3週間）で腎排菌を停止。"
+                        "支持療法：AKIに対する積極的輸液（乏尿期の管理が重要）、電解質補正、"
+                        "制吐薬、必要時に透析。肝障害に対する支持療法。"
+                        "飼い主への感染リスク説明（手洗い、尿の取り扱い注意）。",
+        "prognosis_ja": "早期治療で生存率80〜90%。乏尿性AKI合併例は予後が劣る（透析が必要な場合あり）。"
+                        "肺出血型（LPHS）は致死率が高い。腎機能の完全回復は症例による。",
+        "prevention_ja": "ワクチン接種（4価レプトスピラワクチン、年1回）。"
+                         "汚染水域への暴露回避。野生動物との接触制限。",
         "urgency": "urgent",
     },
     {
@@ -1242,12 +1768,29 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Hemorrhagic Gastroenteritis (HGE)",
-        "name_ja": "出血性胃腸炎（HGE）",
+        "name_ja": "急性出血性下痢症候群（AHDS/HGE）",
         "symptoms": {"bloody_stool", "vomiting", "diarrhea", "lethargy",
                       "appetite_loss"},
         "description": "Acute hemorrhagic diarrhea syndrome with sudden onset "
                        "of bloody stool and rapid dehydration.",
-        "description_ja": "血便の突然の発症と急速な脱水を伴う急性出血性下痢症候群です。",
+        "description_ja": "突然発症のジャム状〜ケチャップ様血便と急速な脱水を特徴とする急性症候群。"
+                          "小型犬（ミニチュアシュナウザー、トイプードル、ヨークシャーテリア等）に好発。"
+                          "現在はAHDS（Acute Hemorrhagic Diarrhea Syndrome）と呼称。",
+        "pathophysiology_ja": "正確な機序は不明だが、Clostridium perfringens（netF毒素産生株）が"
+                              "主要な病因として示唆されている。腸管粘膜の急性壊死性障害→"
+                              "大量の血液・タンパク質の腸管内喪失→急速な血液濃縮（PCV 60〜80%）→"
+                              "粘度上昇→DIC・血栓塞栓症のリスク。敗血症の合併もあり。",
+        "causes_ja": "Clostridium perfringens（netF毒素陽性株）が最も有力な原因菌。"
+                     "ストレス、食餌性因子、免疫学的要因も関与。明確な原因は不明で特発性とされることが多い。"
+                     "小型犬に好発（体質的要因の関与を示唆）。",
+        "treatment_ja": "【緊急】(1)積極的静脈輸液（晶質液＋膠質液）→循環血液量回復が最優先、"
+                        "(2)制吐薬（マロピタント）、(3)広域抗菌薬（アンピシリン＋メトロニダゾール）で"
+                        "菌血症予防、(4)早期経腸栄養（可能な限り早期に開始）。"
+                        "輸血はPCV低下時に検討（血液濃縮が解除された後に貧血が顕在化する場合がある）。",
+        "prognosis_ja": "積極的な輸液療法で生存率95%以上。多くは2〜3日で劇的に改善。"
+                        "DIC合併や治療遅延は致死的。再発率は比較的低い（約10〜15%）。",
+        "prevention_ja": "確実な予防法はないが、ストレス回避、良質な食事管理、"
+                         "プロバイオティクスの投与が有用である可能性。",
         "urgency": "emergency",
     },
     {
@@ -1679,7 +2222,24 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "description": "A condition where the kneecap dislocates from its "
                        "normal position. Common in small breeds, graded 1–4. "
                        "Surgical correction may be needed.",
-        "description_ja": "膝蓋骨が正常な位置からずれる疾患です。小型犬に多く、グレード1〜4で分類されます。",
+        "description_ja": "膝蓋骨が滑車溝から内側（MPL、小型犬に多い）または外側（LPL、大型犬に多い）に脱臼する疾患。"
+                          "小型犬で最も多い整形外科疾患の一つ。チワワ、ポメラニアン、トイプードル、"
+                          "ヨークシャーテリア、マルチーズに好発。Grade 1〜4に分類。",
+        "pathophysiology_ja": "大腿骨滑車溝の浅小化→膝蓋骨の不安定性→脱臼の反復。"
+                              "脱臼に伴い大腿四頭筋のアライメント異常→脛骨内旋→"
+                              "さらなる脱臼の促進と関節軟骨の摩耗→二次性変形性関節症。"
+                              "Grade 3〜4では恒常的脱臼→持続的跛行・骨変形。前十字靭帯断裂の併発リスクも高い。",
+        "causes_ja": "先天性・発達性（多因子遺伝、最多）。稀に外傷性。"
+                     "内側脱臼（MPL）が小型犬の90%を占め、両側性が50%。"
+                     "外側脱臼（LPL）は大型犬に多い。",
+        "treatment_ja": "Grade 1：保存療法（体重管理、関節サプリメント、適度な運動）で経過観察。"
+                        "Grade 2〜4：外科矯正が推奨。術式：滑車溝形成術（溝深化術）＋"
+                        "内側関節包縫縮＋脛骨粗面転位術の組み合わせ。"
+                        "重度の骨変形：矯正骨切り術。術後リハビリテーション6〜8週間。",
+        "prognosis_ja": "Grade 1〜2の外科矯正：成功率90%以上、長期予後良好。"
+                        "Grade 3〜4：外科矯正で機能改善するが再脱臼率は10〜15%。"
+                        "前十字靭帯断裂の併発例ではTPLO等の追加手術が必要。",
+        "prevention_ja": "罹患犬の繁殖制限。体重管理。成長期の過度なジャンプ・滑りやすい床面を避ける。",
         "urgency": "normal",
     },
     {
@@ -1735,13 +2295,27 @@ _DISEASE_DB: list[dict[str, Any]] = [
     # ---- Tumors / Oncology ----
     {
         "name": "Hemangiosarcoma",
-        "name_ja": "血管肉腫",
+        "name_ja": "血管肉腫（HSA）",
         "symptoms": {"lethargy", "bloated_abdomen", "weight_loss",
                       "appetite_loss", "rapid_breathing"},
         "description": "An aggressive malignant tumor of blood vessel walls, "
                        "most common in the spleen and heart. Often presents "
                        "with sudden internal bleeding.",
-        "description_ja": "血管壁の悪性腫瘍で、脾臓と心臓に最も多いです。突然の内出血で発見されることが多いです。",
+        "description_ja": "血管内皮由来の高悪性度肉腫。脾臓（最多）、右心房、肝臓、皮下に好発。"
+                          "ジャーマンシェパード、ゴールデンレトリバー、ラブラドールの中高齢犬に多い。"
+                          "脾臓HSAの50%以上は腫瘍破裂による急性腹腔内出血で発見される。",
+        "pathophysiology_ja": "血管内皮細胞の悪性形質転換→血管腔を形成する腫瘍増殖→脆弱な腫瘍血管の破裂→"
+                              "大量内出血（血腹、心タンポナーデ）。高い転移率（診断時にはほぼ転移あり）。"
+                              "DICの併発が多い。右心房HSAでは心タンポナーデ→心原性ショック。",
+        "causes_ja": "明確な原因は不明。遺伝的素因（犬種好発性）、慢性的な抗原刺激、"
+                     "紫外線暴露（皮膚型HSA）が示唆されている。",
+        "treatment_ja": "脾臓HSA：緊急脾摘→術後化学療法（ドキソルビシンベース、5〜6サイクル）。"
+                        "心臓HSA：心膜穿刺（緊急）→心膜切除±化学療法。"
+                        "化学療法：ドキソルビシン(30mg/m² IV q3w)±シクロフォスファミド or ビンクリスチン。"
+                        "メトロノミック化学療法も報告あり。出血ショック時は輸血＋大量輸液。",
+        "prognosis_ja": "予後不良。脾摘のみ：中央生存期間1〜3ヶ月。脾摘＋化学療法：中央生存期間4〜6ヶ月。"
+                        "1年生存率10〜20%。皮膚型（真皮限局）のみ手術で根治の可能性あり。",
+        "prevention_ja": "確立された予防法なし。好発品種の中高齢犬では腹部超音波検査の定期実施が推奨。",
         "urgency": "emergency",
     },
     {
@@ -1751,27 +2325,78 @@ _DISEASE_DB: list[dict[str, Any]] = [
                       "excessive_thirst"},
         "description": "A common cancer of the lymphatic system, presenting "
                        "as enlarged lymph nodes throughout the body.",
-        "description_ja": "リンパ系の悪性腫瘍で、全身のリンパ節腫大として現れます。",
+        "description_ja": "リンパ球由来の悪性腫瘍で犬の腫瘍の中で最も多い疾患の一つ。"
+                          "多中心型（全身リンパ節腫大、80%）が最多。ゴールデンレトリバー、"
+                          "ボクサー、バーニーズマウンテンドッグに好発。中高齢犬（6〜9歳）に多い。",
+        "pathophysiology_ja": "リンパ球（主にB細胞またはT細胞）のクローナルな悪性増殖。"
+                              "多中心型：全身のリンパ節に浸潤→無痛性のリンパ節腫大（顎下、前肩甲、膝窩等）。"
+                              "消化器型：腸管浸潤→吸収障害・下痢。縦隔型：前縦隔リンパ節→呼吸困難。"
+                              "WHO分類でStage I〜Vに病期分類。サブステージa（無症候性）vs b（症候性）。",
+        "causes_ja": "明確な原因は不明。遺伝的素因、免疫抑制、環境因子（除草剤2,4-D暴露との疫学的関連報告）。"
+                     "T細胞型はB細胞型より予後不良。",
+        "treatment_ja": "多剤併用化学療法が標準：CHOPプロトコール（シクロフォスファミド、ドキソルビシン、"
+                        "ビンクリスチン、プレドニゾロン）19〜25週。寛解率80〜90%。"
+                        "単剤プレドニゾロン：化学療法非実施の場合（中央生存期間1〜2ヶ月）。"
+                        "再発時：レスキュープロトコール（CCNU、ラバムスチン等）。"
+                        "消化器型：外科切除±化学療法。",
+        "prognosis_ja": "CHOP化学療法：第1寛解の中央生存期間12〜14ヶ月。1年生存率50%、2年生存率20%。"
+                        "B細胞型はT細胞型より予後良好。Stage a（無症候性）はbより予後良好。"
+                        "無治療の場合：中央生存期間4〜6週間。",
+        "prevention_ja": "確立された予防法なし。好発品種での定期的なリンパ節触診。",
         "urgency": "normal",
     },
     {
         "name": "Osteosarcoma",
-        "name_ja": "骨肉腫",
+        "name_ja": "骨肉腫（OSA）",
         "symptoms": {"limping_fl", "limping_fr", "swollen_joints",
                       "pain_on_touch", "reluctance_move"},
         "description": "An aggressive bone cancer primarily affecting large "
                        "and giant breed dogs, usually in the limbs.",
-        "description_ja": "大型・超大型犬に多い悪性骨腫瘍で、主に四肢に発生します。",
+        "description_ja": "犬の骨原発性悪性腫瘍の85%を占める。大型〜超大型犬（体重>40kg）の中高齢犬に好発。"
+                          "前肢の橈骨遠位端と上腕骨近位端（away from the elbow）に好発。"
+                          "グレートデン、セントバーナード、アイリッシュウルフハウンド、ロットワイラーに多い。",
+        "pathophysiology_ja": "骨芽細胞由来の悪性腫瘍→骨破壊性と骨増殖性の混合病変→病的骨折。"
+                              "診断時に90%以上の症例で微小転移（主に肺）が存在。"
+                              "腫瘍による骨膜挙上→激しい疼痛。アルカリフォスファターゼ（ALP）高値は予後不良因子。",
+        "causes_ja": "明確な原因は不明。大型犬の急速な骨成長、骨内固定材の存在、慢性骨炎、"
+                     "放射線照射後が報告されている。遺伝的素因あり。",
+        "treatment_ja": "標準治療：患肢切断＋術後化学療法（カルボプラチン30mg/m² IV q3w×4〜6回、"
+                        "またはドキソルビシン＋カルボプラチン交互投与）。"
+                        "四肢温存手術（limb-sparing surgery）：切断を望まない場合。"
+                        "疼痛管理：NSAIDs、ガバペンチン、トラマドール、ビスフォスフォネート。"
+                        "緩和的放射線療法（疼痛緩和、切断非実施の場合）。",
+        "prognosis_ja": "切断のみ：中央生存期間4〜5ヶ月。切断＋化学療法：中央生存期間10〜12ヶ月。"
+                        "2年生存率15〜20%。ALP正常値の方が予後良好。"
+                        "無治療：激しい疼痛により早期安楽死が多い。",
+        "prevention_ja": "確立された予防法なし。大型犬種の跛行が持続する場合はX線検査での早期発見。",
         "urgency": "urgent",
     },
     {
         "name": "Mast Cell Tumor",
-        "name_ja": "肥満細胞腫",
+        "name_ja": "肥満細胞腫（MCT）",
         "symptoms": {"lumps", "itching", "vomiting", "lethargy",
                       "appetite_loss"},
         "description": "The most common malignant skin tumor in dogs, "
                        "varying from benign to highly aggressive forms.",
-        "description_ja": "犬で最も多い悪性皮膚腫瘍で、良性から高悪性度まで様々な形態があります。",
+        "description_ja": "犬の皮膚腫瘍で最も多い悪性腫瘍（全皮膚腫瘍の16〜21%）。"
+                          "Patnaik分類（Grade I〜III）またはKiupel分類（低悪性度/高悪性度）で組織学的に分類。"
+                          "ボクサー、パグ、ボストンテリア、ラブラドール、ゴールデンレトリバーに好発。",
+        "pathophysiology_ja": "肥満細胞（マスト細胞）の腫瘍性増殖。顆粒内にヒスタミン、ヘパリン、"
+                              "プロテアーゼ等のメディエーターを含有→脱顆粒により局所の紅斑・浮腫（Darier徴候）、"
+                              "全身性ヒスタミン放出（消化管潰瘍、低血圧、アナフィラキシー様反応）。"
+                              "c-KIT変異がある場合、チロシンキナーゼ阻害薬の標的となる。",
+        "causes_ja": "明確な原因は不明。c-KIT遺伝子変異（特に内部タンデム重複、ITD）が約30%で検出。"
+                     "遺伝的素因（犬種好発性）。慢性炎症との関連も示唆。",
+        "treatment_ja": "低悪性度（Kiupel Low grade）：外科切除（2cmマージン＋深部筋膜一層）が第一選択。"
+                        "マージン不十分：追加切除または放射線療法。"
+                        "高悪性度/転移陽性：外科＋補助化学療法（ビンブラスチン＋プレドニゾロン）。"
+                        "チロシンキナーゼ阻害薬：トセラニブ（パラディア）—c-KIT変異陽性例や切除不能例に有効。"
+                        "H1/H2ブロッカー（ジフェンヒドラミン＋ファモチジン）で脱顆粒症状管理。",
+        "prognosis_ja": "Low grade：完全切除で中央生存期間>2年、多くは根治可能。"
+                        "High grade：中央生存期間4〜6ヶ月（治療下）。転移率高い。"
+                        "c-KIT変異陽性例はTKI治療に反応良好。",
+        "prevention_ja": "確立された予防法なし。皮膚のしこりを発見したら早期にFNA（細胞診）で評価。"
+                         "MCTは細胞診での診断精度が高い（90%以上）。",
         "urgency": "normal",
     },
     {
@@ -2589,10 +3214,29 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Onion/Garlic Toxicosis",
-        "name_ja": "タマネギ・ニンニク中毒",
+        "name_ja": "タマネギ・ニンニク中毒（ネギ属中毒）",
         "symptoms": {"vomiting", "diarrhea", "lethargy", "rapid_breathing"},
         "description": "Heinz body anemia from allium family vegetables destroying red blood cells.",
-        "description_ja": "ネギ属の野菜による赤血球破壊（ハインツ小体貧血）です。",
+        "description_ja": "ネギ属植物（タマネギ、ニンニク、ニラ、ネギ、エシャロット等）に含まれる"
+                          "有機チオ硫酸化合物による酸化的赤血球障害。犬の体重1kgあたりタマネギ15〜30g（約0.5%体重）で"
+                          "中毒量に達する。加工食品中のオニオンパウダーは特に高濃度で危険。",
+        "pathophysiology_ja": "有機チオ硫酸化合物（n-propyl disulfide等）→ヘモグロビンの酸化→"
+                              "ハインツ小体（変性ヘモグロビン凝集体）形成→赤血球膜の脆弱化→"
+                              "脾臓での偏心細胞・球状赤血球除去→溶血性貧血。"
+                              "摂取後1〜5日の潜伏期を経て貧血症状が発現（遅発性）。"
+                              "メトヘモグロビン血症も併発→チアノーゼ・チョコレート色血液。",
+        "causes_ja": "ネギ属植物の摂取：生・加熱・乾燥いずれの形態でも毒性あり。"
+                     "オニオンスープ、ハンバーグ、すき焼き等の料理、ベビーフード（オニオンパウダー含有）。"
+                     "ニンニクはタマネギの3〜5倍の毒性。秋田犬・柴犬は品種感受性が高い。",
+        "treatment_ja": "摂取2時間以内：催吐（3%過酸化水素1〜2mL/kg PO）＋活性炭。"
+                        "すでに貧血発症後：輸血（PCV<15%）、酸素療法、輸液。"
+                        "メトヘモグロビン血症：N-アセチルシステイン（初回140mg/kg→70mg/kg q6h）。"
+                        "特異的解毒薬なし。支持療法が主体。血液検査でPCV・ハインツ小体を経時的にモニター。",
+        "prognosis_ja": "軽度摂取（<0.5%体重）：支持療法で回復良好。"
+                        "大量摂取：重度の溶血性貧血→致死的となりうる。早期の催吐処置が予後を改善。"
+                        "赤血球の再生には2〜4週間かかる。",
+        "prevention_ja": "ネギ属植物を含む全ての食品へのアクセス制限。"
+                         "テーブルフードの禁止。加工食品の成分確認。ガーリックサプリメントの禁止。",
         "urgency": "urgent",
     },
     {
@@ -4629,14 +5273,7 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "description_ja": "ナメクジ駆除剤による中毒で痙攣重積を引き起こします。",
         "urgency": "emergency",
     },
-    {
-        "name": "Onion and Garlic Toxicosis",
-        "name_ja": "タマネギ・ニンニク中毒",
-        "symptoms": {"vomiting", "diarrhea", "lethargy", "appetite_loss"},
-        "description": "Poisoning causing oxidative damage to red blood cells.",
-        "description_ja": "赤血球の酸化的損傷と溶血性貧血を引き起こす中毒です。",
-        "urgency": "urgent",
-    },
+    # REMOVED: duplicate of "Onion/Garlic Toxicosis" (line ~2591)
     {
         "name": "Esophageal Foreign Body",
         "name_ja": "食道異物",
@@ -5618,10 +6255,23 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Hepatic Microvascular Dysplasia",
-        "name_ja": "肝微小血管異形成",
+        "name_ja": "肝微小血管異形成（MVD）",
         "symptoms": {"vomiting", "diarrhea", "lethargy", "weight_loss"},
         "description": "Microscopic portal vascular malformation without macroscopic shunt causing mild hepatic dysfunction.",
-        "description_ja": "肉眼的シャントを伴わない微小門脈血管奇形で、軽度の肝機能障害を引き起こします。",
+        "description_ja": "肉眼的な門脈体循環シャント（PSS）を伴わない微小な肝内門脈血管の先天的異常。"
+                          "ヨークシャーテリア、ケアンテリア、マルチーズ等に好発。"
+                          "多くは無症候性で胆汁酸値の軽度上昇のみ。PSSとの鑑別が重要。",
+        "pathophysiology_ja": "肝内の微小門脈分枝の先天的低形成→門脈血の一部が肝類洞を迂回→"
+                              "軽度の肝機能低下。PSSほど重度ではなく、アンモニア代謝能は部分的に保たれる。"
+                              "胆汁酸値は軽度〜中等度上昇するが、アンモニア値は正常〜軽度上昇。",
+        "causes_ja": "先天的な肝内微小血管の発達異常。遺伝的素因（小型テリア犬種）。"
+                     "PSSの修復術後に残存する微小シャントとしても見られることがある。",
+        "treatment_ja": "多くは治療不要（無症候性の場合）。症候性の場合：肝臓サポート食（低〜中タンパク・高品質タンパク）、"
+                        "ウルソデオキシコール酸、SAMe、ラクツロース（高アンモニア血症時）。"
+                        "外科適応なし（微小血管の異常であり手術で矯正不可）。PSSとの鑑別診断が最も重要。",
+        "prognosis_ja": "予後良好〜極めて良好。多くの症例で正常な寿命を全うする。"
+                        "臨床症状が出ることは稀であり、偶発的に発見されることが多い。",
+        "prevention_ja": "罹患犬の繁殖制限。好発品種では胆汁酸検査によるスクリーニング。",
         "urgency": "low",
         "recommended_tests": ["blood_chemistry", "bile_acids_test", "abdominal_ultrasound"],
     },
@@ -6877,6 +7527,11 @@ def analyze_symptoms(
         lab_multiplier = lab_boosts.get(disease["name"], 1.0)
         adjusted_score = min(adjusted_score * lab_multiplier, 100.0)
 
+        # Apply prevalence (base rate) multiplier — 有病率ベイズ補正
+        prevalence_cat = _DISEASE_PREVALENCE.get(disease["name"])
+        prevalence_multiplier = _PREVALENCE_MULTIPLIER.get(prevalence_cat, 1.0) if prevalence_cat else 1.0
+        adjusted_score = min(adjusted_score * prevalence_multiplier, 100.0)
+
         # Determine likelihood from adjusted score
         if adjusted_score >= 55 or match_count >= 4:
             likelihood = "high"
@@ -6906,6 +7561,11 @@ def analyze_symptoms(
             "color_class": color_class,
             "description": disease["description"],
             "description_ja": disease.get("description_ja", ""),
+            "pathophysiology_ja": disease.get("pathophysiology_ja", ""),
+            "causes_ja": disease.get("causes_ja", ""),
+            "treatment_ja": disease.get("treatment_ja", ""),
+            "prognosis_ja": disease.get("prognosis_ja", ""),
+            "prevention_ja": disease.get("prevention_ja", ""),
             "matching_symptoms": sorted(matching),
             "match_count": match_count,
             "total_symptoms": total,
