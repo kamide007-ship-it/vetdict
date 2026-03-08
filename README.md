@@ -1,13 +1,14 @@
 # VetDict - Veterinary Disease Dictionary
 
-The world's largest veterinary differential diagnosis platform with 2,400+ diseases across 20 animal species and 175+ drugs with species-specific safety data.
+The world's largest veterinary differential diagnosis platform with 4,800+ diseases across 20 animal species and 175+ drugs with species-specific safety data.
 
 ## Features
 
-- **Differential Diagnosis Engine** - Symptom-based analysis for 20 animal species
-- **Disease Database** - 2,400+ diseases with Japanese/English bilingual support
+- **Differential Diagnosis Engine** - Symptom-based analysis for 20 animal species via checkbox and chat
+- **Disease Database** - 4,800+ diseases with Japanese/English bilingual support
+- **Symptom Chat** - Natural language symptom input in Japanese/English for all 20 species
 - **Drug Dictionary** - 175+ drugs with species-specific dosage, safety, routes, formulations, and drug interactions (VetGeni-style)
-- **Multi-Species** - Dog, Cat, Horse, Rabbit, Hamster, Guinea Pig, Chinchilla, Ferret, Hedgehog, Sugar Glider, Degu, Bird, Parakeet, Parrot, Reptile, Tortoise, Snake, Lizard, Amphibian, Exotic Other
+- **Multi-Species** - Dog (577), Cat (516), Horse (736), Rabbit (271), Bird (308), Parakeet (251), Guinea Pig (200), Hamster (190), Chinchilla (169), Reptile (161), Tortoise (161), Ferret (160), Parrot (160), Exotic Other (151), Snake (141), Lizard (141), Hedgehog (140), Amphibian (131), Sugar Glider (130), Degu (120)
 
 ## Tech Stack
 
