@@ -197,6 +197,12 @@ a:hover{text-decoration:underline}
 .sponsor-product p{font-size:.78rem;color:var(--gray-600);line-height:1.5}
 .sponsor-product .sp-species{font-size:.72rem;color:var(--navy);margin-top:6px;font-weight:600}
 
+/* --- Language toggle --- */
+.lang-toggle{display:flex;align-items:center;gap:0;border:2px solid var(--gray-200);border-radius:20px;overflow:hidden;flex-shrink:0;margin-left:8px}
+.lang-toggle button{border:none;background:transparent;padding:5px 12px;font-size:.76rem;font-weight:700;cursor:pointer;transition:background .2s,color .2s;font-family:var(--font);color:var(--gray-600)}
+.lang-toggle button.active{background:var(--navy);color:var(--white)}
+.lang-toggle button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
+
 /* --- Footer --- */
 .footer{background:var(--navy-dark);color:rgba(255,255,255,.7);text-align:center;padding:24px 20px;font-size:.78rem}
 .footer a{color:var(--green)}
@@ -235,42 +241,46 @@ a:hover{text-decoration:underline}
 </head>
 <body>
 
-<a href="#speciesSection" class="skip-link">メインコンテンツへスキップ</a>
+<a href="#speciesSection" class="skip-link" data-i18n="skipLink">メインコンテンツへスキップ</a>
 
 <header class="header">
   <div class="header-inner">
     <a href="/" class="header-logo" aria-label="VetDict ホーム">
       <div>
         <div class="logo-text"><span class="logo-vet">Vet</span><span class="logo-dict">Dict</span></div>
-        <span class="logo-sub">多動物種対応 獣医学疾患データベース</span>
+        <span class="logo-sub" data-i18n="logoSub">多動物種対応 獣医学疾患データベース</span>
       </div>
     </a>
     <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mainNav" id="hamburgerBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <nav class="header-nav" id="mainNav" role="tablist" aria-label="メインナビゲーション">
-      <button role="tab" aria-selected="true" data-view="checker" id="tab-checker" aria-controls="viewChecker">症状チェッカー</button>
-      <button role="tab" aria-selected="false" data-view="database" id="tab-database" aria-controls="viewDatabase">疾患データベース</button>
-      <button role="tab" aria-selected="false" data-view="chat" id="tab-chat" aria-controls="viewChat">症状相談</button>
-      <button role="tab" aria-selected="false" data-view="drugs" id="tab-drugs" aria-controls="viewDrugs">薬品辞書</button>
+      <button role="tab" aria-selected="true" data-view="checker" id="tab-checker" aria-controls="viewChecker" data-i18n="navChecker">症状チェッカー</button>
+      <button role="tab" aria-selected="false" data-view="database" id="tab-database" aria-controls="viewDatabase" data-i18n="navDatabase">疾患データベース</button>
+      <button role="tab" aria-selected="false" data-view="chat" id="tab-chat" aria-controls="viewChat" data-i18n="navChat">症状相談</button>
+      <button role="tab" aria-selected="false" data-view="drugs" id="tab-drugs" aria-controls="viewDrugs" data-i18n="navDrugs">薬品辞書</button>
     </nav>
+    <div class="lang-toggle" role="radiogroup" aria-label="Language">
+      <button class="active" data-lang="ja" role="radio" aria-checked="true">JP</button>
+      <button data-lang="en" role="radio" aria-checked="false">EN</button>
+    </div>
   </div>
 </header>
 
 <section class="hero">
-  <div class="hero-badge">獣医師が開発 &mdash; 臨床現場をサポート</div>
+  <div class="hero-badge" data-i18n="heroBadge">獣医師が開発 &mdash; 臨床現場をサポート</div>
   <h1 class="hero-title"><span class="hero-vet">Vet</span> <span class="hero-dict">Dict</span></h1>
-  <p class="hero-lead">症状から鑑別疾患リストを即座に表示。<br/>疾患データベース・薬品辞書を搭載した獣医学総合プラットフォーム。</p>
+  <p class="hero-lead" data-i18n="heroLead">症状から鑑別疾患リストを即座に表示。<br/>疾患データベース・薬品辞書を搭載した獣医学総合プラットフォーム。</p>
   <div class="hero-cta">
-    <a href="#speciesSection" class="hero-btn primary">動物種を選んで始める</a>
+    <a href="#speciesSection" class="hero-btn primary" data-i18n="heroCta">動物種を選んで始める</a>
   </div>
   <div class="hero-stats" aria-live="polite" aria-label="データベース統計">
-    <div class="hero-stat"><span class="num" id="statDiseases" aria-label="疾患数">-</span><span class="label">疾患数</span></div>
-    <div class="hero-stat"><span class="num" id="statSpecies" aria-label="対応動物種">-</span><span class="label">対応動物種</span></div>
-    <div class="hero-stat"><span class="num" id="statSymptoms" aria-label="症状項目">-</span><span class="label">症状項目</span></div>
-    <div class="hero-stat"><span class="num" id="statDrugs" aria-label="薬品数">-</span><span class="label">薬品数</span></div>
+    <div class="hero-stat"><span class="num" id="statDiseases" aria-label="疾患数">-</span><span class="label" data-i18n="statDiseases">疾患数</span></div>
+    <div class="hero-stat"><span class="num" id="statSpecies" aria-label="対応動物種">-</span><span class="label" data-i18n="statSpecies">対応動物種</span></div>
+    <div class="hero-stat"><span class="num" id="statSymptoms" aria-label="症状項目">-</span><span class="label" data-i18n="statSymptoms">症状項目</span></div>
+    <div class="hero-stat"><span class="num" id="statDrugs" aria-label="薬品数">-</span><span class="label" data-i18n="statDrugs">薬品数</span></div>
   </div>
-  <div class="hero-credit">
+  <div class="hero-credit" data-i18n-html="heroCredit">
     開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎
   </div>
 </section>
@@ -281,20 +291,20 @@ a:hover{text-decoration:underline}
       <div>
         <div class="sponsor-label">Sponsor</div>
         <div class="sponsor-name">Equine &amp; Canine Vet Nutrition</div>
-        <div class="sponsor-desc">獣医師考案・国内製造・競走馬理化学研究所検査合格</div>
+        <div class="sponsor-desc" data-i18n="sponsorDesc">獣医師考案・国内製造・競走馬理化学研究所検査合格</div>
       </div>
       <div class="sponsor-tags">
         <span class="sponsor-tag">NMN-ミトコンドリアアシスト</span>
         <span class="sponsor-tag">Amino Complete</span>
         <span class="sponsor-tag">For Joint</span>
       </div>
-      <div class="sponsor-cta">詳細 &rarr;</div>
+      <div class="sponsor-cta" data-i18n="sponsorCta">詳細 &rarr;</div>
     </div>
   </a>
 </div>
 
 <section class="species-section" id="speciesSection">
-  <h3 class="section-title">動物種を選択</h3>
+  <h3 class="section-title" data-i18n="selectSpecies">動物種を選択</h3>
   <div class="species-grid" id="speciesGrid" role="group" aria-label="動物種を選択"></div>
 </section>
 
@@ -303,31 +313,31 @@ a:hover{text-decoration:underline}
     <div class="panels">
       <div>
         <div class="card">
-          <div class="card-header">&#9745; 症状を選択</div>
+          <div class="card-header" data-i18n-html="cardSymptoms">&#9745; 症状を選択</div>
           <div class="card-body">
             <div id="breedSelectArea" class="hidden" style="margin-bottom:12px">
-              <label style="font-size:.82rem;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">品種を選択（任意）</label>
+              <label style="font-size:.82rem;font-weight:600;color:var(--navy);display:block;margin-bottom:4px" data-i18n="breedLabel">品種を選択（任意）</label>
               <select id="breedSelect" style="width:100%;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;background:var(--white)">
-                <option value="">品種を選択しない</option>
+                <option value="" data-i18n="breedNone">品種を選択しない</option>
               </select>
             </div>
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
-              <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)"/>
+              <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh"/>
             </div>
             <div class="symptom-list" id="symptomList"></div>
-            <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px">鑑別疾患を検索</button>
+            <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px" data-i18n="analyzeBtn">鑑別疾患を検索</button>
           </div>
         </div>
       </div>
       <div>
         <div class="card">
-          <div class="card-header accent">&#128202; 検索結果</div>
+          <div class="card-header accent" data-i18n-html="cardResults">&#128202; 検索結果</div>
           <div class="card-body">
             <div id="resultsArea">
               <div class="results-empty">
                 <span class="big-icon">&#128269;</span>
-                <p>動物種を選択し、症状にチェックを入れて<br/>「鑑別疾患を検索」を押してください</p>
+                <p data-i18n-html="resultsEmpty">動物種を選択し、症状にチェックを入れて<br/>「鑑別疾患を検索」を押してください</p>
               </div>
             </div>
           </div>
@@ -338,10 +348,10 @@ a:hover{text-decoration:underline}
 
   <div id="viewDatabase" class="hidden" role="tabpanel" aria-labelledby="tab-database">
     <div class="card" style="margin-top:20px">
-      <div class="card-header">&#128218; 疾患データベース</div>
+      <div class="card-header" data-i18n-html="cardDiseaseDb">&#128218; 疾患データベース</div>
       <div class="card-body">
         <div class="symptom-search" style="margin-bottom:12px">
-          <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)"/>
+          <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)" data-i18n-ph="diseaseSearchPh"/>
         </div>
         <div class="az-nav" id="azNav"></div>
         <div id="diseaseDbCount" style="font-size:.76rem;color:var(--gray-500);margin-bottom:8px"></div>
@@ -352,18 +362,18 @@ a:hover{text-decoration:underline}
 
   <div id="viewChat" class="hidden" role="tabpanel" aria-labelledby="tab-chat">
     <div class="card" style="margin-top:20px">
-      <div class="card-header">&#128172; 症状相談</div>
+      <div class="card-header" data-i18n-html="cardChat">&#128172; 症状相談</div>
       <div class="chat-container">
         <div class="chat-messages" id="chatMessages">
-          <div class="chat-msg bot">
+          <div class="chat-msg bot" id="chatWelcome" data-i18n-html="chatWelcome">
             こんにちは。気になる症状を日本語または英語で入力してください。<br/>
             例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/>
             <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>
           </div>
         </div>
         <div class="chat-input-row">
-          <input type="text" id="chatInput" placeholder="症状を入力してください..."/>
-          <button id="chatSend">送信</button>
+          <input type="text" id="chatInput" placeholder="症状を入力してください..." data-i18n-ph="chatInputPh"/>
+          <button id="chatSend" data-i18n="chatSend">送信</button>
         </div>
       </div>
     </div>
@@ -371,17 +381,17 @@ a:hover{text-decoration:underline}
 
   <div id="viewDrugs" class="hidden" role="tabpanel" aria-labelledby="tab-drugs">
     <div class="card" style="margin-top:20px">
-      <div class="card-header">&#128138; 薬品辞書</div>
+      <div class="card-header" data-i18n-html="cardDrugs">&#128138; 薬品辞書</div>
       <div class="card-body">
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
-            <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)"/>
+            <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh"/>
           </div>
           <select id="drugCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">
-            <option value="">全カテゴリ</option>
+            <option value="" data-i18n="allCategories">全カテゴリ</option>
           </select>
           <select id="drugSpeciesFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:130px;background:var(--white)">
-            <option value="">全動物種</option>
+            <option value="" data-i18n="allSpecies">全動物種</option>
           </select>
         </div>
         <div id="drugCount" style="font-size:.76rem;color:var(--gray-500);margin-bottom:8px"></div>
@@ -438,7 +448,7 @@ a:hover{text-decoration:underline}
 </section>
 
 <section class="references">
-  <h3>引用文献・参考資料 ― 疾患データベース</h3>
+  <h3 data-i18n="refTitle1">引用文献・参考資料 ― 疾患データベース</h3>
   <ul>
     <li><span class="ref-num">[1]</span>Nelson, R.W. &amp; Couto, C.G. (2019). <em>Small Animal Internal Medicine</em>, 6th ed. Elsevier.</li>
     <li><span class="ref-num">[2]</span>Ettinger, S.J., Feldman, E.C. &amp; Cote, E. (2017). <em>Textbook of Veterinary Internal Medicine</em>, 8th ed. Elsevier.</li>
@@ -456,7 +466,7 @@ a:hover{text-decoration:underline}
     <li><span class="ref-num">[14]</span>HorseDVM (2024). <a href="https://horsedvm.com/" target="_blank">horsedvm.com</a></li>
     <li><span class="ref-num">[15]</span>犬と猫の治療薬ガイド EduOne (2024). <a href="https://search.eduone.jp/" target="_blank">search.eduone.jp</a></li>
   </ul>
-  <h3 style="margin-top:20px">品種疾患リスク・遺伝疾患</h3>
+  <h3 style="margin-top:20px" data-i18n="refTitle2">品種疾患リスク・遺伝疾患</h3>
   <ul>
     <li><span class="ref-num">[16]</span>Gough, A., Thomas, A. &amp; O'Neill, D. (2018). <em>Breed Predispositions to Disease in Dogs and Cats</em>, 3rd ed. Wiley-Blackwell.</li>
     <li><span class="ref-num">[17]</span>Bell, J.S., Cavanagh, K.E., Tilley, L.P. &amp; Smith, F.W.K. (2012). <em>Veterinary Medical Guide to Dog and Cat Breeds</em>. Teton NewMedia.</li>
@@ -466,7 +476,7 @@ a:hover{text-decoration:underline}
     <li><span class="ref-num">[21]</span>Lyons, L.A. (2015). DNA mutations of the cat: The good, the bad and the ugly. <em>Journal of Feline Medicine and Surgery</em>, 17(3):203–219.</li>
     <li><span class="ref-num">[22]</span>Donner, J. et al. (2018). Breed-specific genetic testing for canine hereditary diseases. <em>PLoS ONE</em>, 13(6):e0197711.</li>
   </ul>
-  <h3 style="margin-top:20px">症状の臨床的重み付け・尤度比</h3>
+  <h3 style="margin-top:20px" data-i18n="refTitle3">症状の臨床的重み付け・尤度比</h3>
   <ul>
     <li><span class="ref-num">[23]</span>Rijnberk, A. &amp; van Sluijs, F.J. (2009). <em>Medical History and Physical Examination in Companion Animals</em>, 2nd ed. Elsevier.</li>
     <li><span class="ref-num">[24]</span>Ettinger, S.J. &amp; Feldman, E.C. (2017). Clinical signs approach to differential diagnosis. In: <em>Textbook of Veterinary Internal Medicine</em>, Ch. 1–5. Elsevier.</li>
@@ -477,7 +487,7 @@ a:hover{text-decoration:underline}
     <li><span class="ref-num">[29]</span>Platt, S.R. &amp; Olby, N.J. (2013). <em>Manual of Canine and Feline Neurology</em>, 4th ed. BSAVA.</li>
     <li><span class="ref-num">[30]</span>Tobias, K.M. &amp; Johnston, S.A. (2012). <em>Veterinary Surgery: Small Animal</em>. Elsevier.</li>
   </ul>
-  <h3 style="margin-top:20px">エキゾチック動物・鳥類・爬虫類</h3>
+  <h3 style="margin-top:20px" data-i18n="refTitle4">エキゾチック動物・鳥類・爬虫類</h3>
   <ul>
     <li><span class="ref-num">[31]</span>Heatley, J.J. &amp; Russell, K.E. (2019). Hedgehog health and disease. <em>Veterinary Clinics: Exotic Animal Practice</em>, 22(1):1–134.</li>
     <li><span class="ref-num">[32]</span>Meredith, A. &amp; Johnson-Delaney, C. (2010). <em>BSAVA Manual of Exotic Pets</em>, 5th ed. BSAVA.</li>
@@ -487,7 +497,7 @@ a:hover{text-decoration:underline}
     <li><span class="ref-num">[36]</span>Pignon, C. &amp; Mayer, J. (2011). Guinea pigs. In: Quesenberry &amp; Carpenter, <em>Ferrets, Rabbits, and Rodents</em>, Ch. 20. Elsevier.</li>
     <li><span class="ref-num">[37]</span>Mans, C. &amp; Donnelly, T.M. (2014). Chinchillas. In: Quesenberry &amp; Carpenter, <em>Ferrets, Rabbits, and Rodents</em>, Ch. 22. Elsevier.</li>
   </ul>
-  <h3 style="margin-top:20px">馬疾患データベース</h3>
+  <h3 style="margin-top:20px" data-i18n="refTitle5">馬疾患データベース</h3>
   <ul>
     <li><span class="ref-num">[38]</span>Auer, J.A. &amp; Stick, J.A. (2019). <em>Equine Surgery</em>, 5th ed. Elsevier.</li>
     <li><span class="ref-num">[39]</span>Robinson, N.E. &amp; Sprayberry, K.A. (2015). <em>Robinson's Current Therapy in Equine Medicine</em>, 7th ed. Elsevier.</li>
@@ -495,7 +505,7 @@ a:hover{text-decoration:underline}
     <li><span class="ref-num">[41]</span>Ross, M.W. &amp; Dyson, S.J. (2011). <em>Diagnosis and Management of Lameness in the Horse</em>, 2nd ed. Elsevier.</li>
     <li><span class="ref-num">[42]</span>McAuliffe, S.B. &amp; Slovis, N.M. (2014). <em>Color Atlas of Diseases and Disorders of the Foal</em>. Elsevier.</li>
   </ul>
-  <h3 style="margin-top:20px">薬品辞書</h3>
+  <h3 style="margin-top:20px" data-i18n="refTitle7">薬品辞書</h3>
   <ul>
     <li><span class="ref-num">[43]</span>Plumb, D.C. (2018). <em>Plumb's Veterinary Drug Handbook</em>, 9th ed. Wiley-Blackwell.</li>
     <li><span class="ref-num">[44]</span>Riviere, J.E. &amp; Papich, M.G. (2018). <em>Veterinary Pharmacology and Therapeutics</em>, 10th ed. Wiley-Blackwell.</li>
@@ -504,7 +514,7 @@ a:hover{text-decoration:underline}
     <li><span class="ref-num">[47]</span>犬と猫の治療薬ガイド EduOne (2024). <a href="https://search.eduone.jp/" target="_blank">search.eduone.jp</a></li>
     <li><span class="ref-num">[48]</span>Forney, B.C. (2007). <em>Equine Medications</em>, Revised ed. Blood-Horse Publications.</li>
   </ul>
-  <h3 style="margin-top:20px">関連サービス・データベース</h3>
+  <h3 style="margin-top:20px" data-i18n="refTitle6">関連サービス・データベース</h3>
   <ul>
     <li><span class="ref-num">[49]</span>Standards&#8482; &#8212; 鑑別診断リスト <a href="https://standards.vet/features/differential-diagnosis-lists/" target="_blank">standards.vet</a></li>
     <li><span class="ref-num">[50]</span>Cornell CONSULTANT <a href="http://consultant.vet.cornell.edu/" target="_blank">consultant.vet.cornell.edu</a></li>
@@ -521,8 +531,8 @@ a:hover{text-decoration:underline}
 
 <footer class="footer">
   <p style="font-size:.92rem;color:rgba(255,255,255,.8)"><span style="font-weight:800"><span style="color:#fff">Vet</span><span style="color:var(--green)">Dict</span></span></p>
-  <p style="margin-top:6px">※ 本サービスは疾患に関する参考情報の提供を目的としています。診断・治療は必ず獣医師にご相談ください。</p>
-  <p style="margin-top:8px">
+  <p style="margin-top:6px" data-i18n="footerDisclaimer">※ 本サービスは疾患に関する参考情報の提供を目的としています。診断・治療は必ず獣医師にご相談ください。</p>
+  <p style="margin-top:8px" data-i18n-html="footerCredit">
     開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a>
     獣医師 上手 健太郎 (Kentaro Kamide, DVM)
   </p>
@@ -537,12 +547,197 @@ a:hover{text-decoration:underline}
 
 <script>
 const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",exotic_other:"\u{1F999}"};
+
+/* ===== Bilingual i18n system ===== */
+let currentLang="ja";
+const I18N={
+  ja:{
+    skipLink:"メインコンテンツへスキップ",
+    logoSub:"多動物種対応 獣医学疾患データベース",
+    navChecker:"症状チェッカー",navDatabase:"疾患データベース",navChat:"症状相談",navDrugs:"薬品辞書",
+    heroBadge:"獣医師が開発 &mdash; 臨床現場をサポート",
+    heroLead:"症状から鑑別疾患リストを即座に表示。<br/>疾患データベース・薬品辞書を搭載した獣医学総合プラットフォーム。",
+    heroCta:"動物種を選んで始める",
+    statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",
+    heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
+    sponsorDesc:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
+    sponsorCta:"詳細 &rarr;",
+    selectSpecies:"動物種を選択",
+    cardSymptoms:"&#9745; 症状を選択",cardResults:"&#128202; 検索結果",
+    breedLabel:"品種を選択（任意）",breedNone:"品種を選択しない",
+    symptomSearchPh:"症状を検索... (例: 咳, vomiting, 下痢)",
+    analyzeBtn:"鑑別疾患を検索",
+    resultsEmpty:'動物種を選択し、症状にチェックを入れて<br/>「鑑別疾患を検索」を押してください',
+    resultsSelectSymptom:"症状を選択してください",
+    cardDiseaseDb:"&#128218; 疾患データベース",
+    diseaseSearchPh:"疾患名で検索... (例: 腎臓, colic, 感染)",
+    cardChat:"&#128172; 症状相談",
+    chatWelcome:'こんにちは。気になる症状を日本語または英語で入力してください。<br/>例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>',
+    chatInputPh:"症状を入力してください...",chatSend:"送信",
+    cardDrugs:"&#128138; 薬品辞書",
+    drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
+    allCategories:"全カテゴリ",allSpecies:"全動物種",
+    sponsorTagline:"獣医師が考案・国内製造 &mdash; 競走馬理化学研究所の検査合格",
+    sponsorSpecies:"対応動物種: 馬・犬・猫",
+    sponsorEquine:"馬用サプリメント",sponsorCanine:"犬用サプリメント",
+    footerDisclaimer:"※ 本サービスは疾患に関する参考情報の提供を目的としています。診断・治療は必ず獣医師にご相談ください。",
+    footerCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎 (Kentaro Kamide, DVM)',
+    refTitle1:"引用文献・参考資料 ― 疾患データベース",
+    refTitle2:"品種疾患リスク・遺伝疾患",
+    refTitle3:"症状の臨床的重み付け・尤度比",
+    refTitle4:"エキゾチック動物・鳥類・爬虫類",
+    refTitle5:"馬疾患データベース",
+    refTitle6:"関連サービス・データベース",refTitle7:"薬品辞書",
+    // Dynamic UI strings
+    analyzing:"解析中...",
+    noSymptomData:"症状データを読み込めませんでした",
+    noMatchingSymptom:"該当する症状がありません",
+    noSymptomsSelected:"症状が選択されていません",
+    noDiseasesFound:"一致する疾患は見つかりませんでした",
+    loadFailed:"読み込みに失敗しました",
+    noDiseaseMatch:"該当する疾患がありません",
+    noDrugMatch:"該当する薬品がありません",
+    errorPrefix:"エラー: ",
+    overallAssessment:"総合評価: ",
+    commError:"通信エラーが発生しました。",
+    noResponse:"応答を取得できませんでした",
+    diseaseCount:"%filtered% / %total% 件表示",
+    catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",behavioral:"行動",general:"全身",other:"その他"},
+    sevLabels:{low:"軽度",moderate:"中等度",high:"重度",emergency:"緊急"},
+    dtDescription:"説明",dtPathophysiology:"病態生理",dtCauses:"原因",dtPrevention:"予防",dtTreatment:"治療",dtPrognosis:"予後",
+    dtMatchedSymptoms:"一致した症状",dtRecommendedTests:"推奨検査",dtRecTestList:"推奨検査一覧:",
+    dtSymptoms:"症状",
+    dtContraindications:"禁忌事項",dtRoutes:"投与経路",dtFormulations:"製剤",dtInteractions:"薬物相互作用",dtSpeciesInfo:"動物種別情報:",
+    safe:"安全",contraindicated:"禁忌",dosageLabel:"投与量: ",
+    sponsorVetLabel:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
+    productDetails:"製品詳細 &rarr;",
+    speciesCardDisease:"疾患",speciesCardDrug:"薬品",
+    menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
+    removeLabel:"%s%を削除",
+    metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
+  },
+  en:{
+    skipLink:"Skip to main content",
+    logoSub:"Multi-Species Veterinary Disease Database",
+    navChecker:"Symptom Checker",navDatabase:"Disease Database",navChat:"Symptom Chat",navDrugs:"Drug Dictionary",
+    heroBadge:"Developed by a veterinarian &mdash; Supporting clinical practice",
+    heroLead:"Instantly display differential diagnosis lists from symptoms.<br/>A comprehensive veterinary platform with disease database &amp; drug dictionary.",
+    heroCta:"Select a species to start",
+    statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",
+    heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
+    sponsorDesc:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
+    sponsorCta:"Details &rarr;",
+    selectSpecies:"Select Species",
+    cardSymptoms:"&#9745; Select Symptoms",cardResults:"&#128202; Results",
+    breedLabel:"Select breed (optional)",breedNone:"No breed selected",
+    symptomSearchPh:"Search symptoms... (e.g. cough, vomiting, diarrhea)",
+    analyzeBtn:"Search Differential Diagnoses",
+    resultsEmpty:'Select a species, check symptoms, and<br/>press "Search Differential Diagnoses"',
+    resultsSelectSymptom:"Please select symptoms",
+    cardDiseaseDb:"&#128218; Disease Database",
+    diseaseSearchPh:"Search diseases... (e.g. renal, colic, infection)",
+    cardChat:"&#128172; Symptom Chat",
+    chatWelcome:'Hello! Please describe the symptoms in Japanese or English.<br/>Examples: "my cat is vomiting and has no appetite" "my dog is limping and has a fever"<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">Note: This tool provides reference information about diseases. Always consult a veterinarian for diagnosis and treatment.</em>',
+    chatInputPh:"Describe symptoms...",chatSend:"Send",
+    cardDrugs:"&#128138; Drug Dictionary",
+    drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
+    allCategories:"All Categories",allSpecies:"All Species",
+    sponsorTagline:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
+    sponsorSpecies:"Supported species: Horse, Dog, Cat",
+    sponsorEquine:"Equine Supplements",sponsorCanine:"Canine Supplements",
+    footerDisclaimer:"Note: This service provides reference information about diseases. Always consult a veterinarian for diagnosis and treatment.",
+    footerCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
+    refTitle1:"References — Disease Database",
+    refTitle2:"Breed Disease Risks & Genetic Disorders",
+    refTitle3:"Clinical Symptom Weighting & Likelihood Ratios",
+    refTitle4:"Exotic Animals, Birds & Reptiles",
+    refTitle5:"Equine Disease Database",
+    refTitle6:"Related Services & Databases",refTitle7:"Drug Dictionary",
+    analyzing:"Analyzing...",
+    noSymptomData:"Failed to load symptom data",
+    noMatchingSymptom:"No matching symptoms",
+    noSymptomsSelected:"No symptoms selected",
+    noDiseasesFound:"No matching diseases found",
+    loadFailed:"Failed to load",
+    noDiseaseMatch:"No matching diseases",
+    noDrugMatch:"No matching drugs",
+    errorPrefix:"Error: ",
+    overallAssessment:"Overall: ",
+    commError:"A communication error occurred.",
+    noResponse:"Could not retrieve response",
+    diseaseCount:"%filtered% / %total% shown",
+    catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",behavioral:"Behavioral",general:"General",other:"Other"},
+    sevLabels:{low:"Mild",moderate:"Moderate",high:"Severe",emergency:"Emergency"},
+    dtDescription:"Description",dtPathophysiology:"Pathophysiology",dtCauses:"Causes",dtPrevention:"Prevention",dtTreatment:"Treatment",dtPrognosis:"Prognosis",
+    dtMatchedSymptoms:"Matched Symptoms",dtRecommendedTests:"Recommended Tests",dtRecTestList:"Recommended Tests:",
+    dtSymptoms:"Symptoms",
+    dtContraindications:"Contraindications",dtRoutes:"Routes",dtFormulations:"Formulations",dtInteractions:"Drug Interactions",dtSpeciesInfo:"Species Information:",
+    safe:"Safe",contraindicated:"Contraindicated",dosageLabel:"Dosage: ",
+    sponsorVetLabel:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
+    productDetails:"Product details &rarr;",
+    speciesCardDisease:"diseases",speciesCardDrug:"drugs",
+    menuOpen:"Open menu",menuClose:"Close menu",
+    removeLabel:"Remove %s%",
+    metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
+  }
+};
+
+function t(key){return (I18N[currentLang]&&I18N[currentLang][key])||key;}
+
+function applyLanguage(){
+  document.documentElement.lang=currentLang;
+  document.title=currentLang==="ja"?"Vet Dict — 多動物種対応 獣医学疾患データベース":"Vet Dict — Multi-Species Veterinary Disease Database";
+  // Update data-i18n (textContent)
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key=el.getAttribute("data-i18n");
+    const val=t(key);
+    if(val&&val!==key)el.textContent=val;
+  });
+  // Update data-i18n-html (innerHTML)
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const key=el.getAttribute("data-i18n-html");
+    const val=t(key);
+    if(val&&val!==key)el.innerHTML=val;
+  });
+  // Update data-i18n-ph (placeholder)
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    const key=el.getAttribute("data-i18n-ph");
+    const val=t(key);
+    if(val&&val!==key)el.placeholder=val;
+  });
+  // Update lang toggle active state
+  document.querySelectorAll(".lang-toggle button").forEach(b=>{
+    const isActive=b.dataset.lang===currentLang;
+    b.classList.toggle("active",isActive);
+    b.setAttribute("aria-checked",isActive);
+  });
+  // Re-render dynamic content
+  renderSpeciesGrid();
+  if(symptomData.length)renderSymptomList(symptomData);
+  renderSelectedSymptoms();
+  if(allDiseases.length)renderDiseaseDb();
+  if(drugsLoaded)renderDrugList();
+}
+
+function setupLanguageToggle(){
+  document.querySelector(".lang-toggle").addEventListener("click",e=>{
+    const btn=e.target.closest("[data-lang]");
+    if(!btn||btn.dataset.lang===currentLang)return;
+    currentLang=btn.dataset.lang;
+    try{localStorage.setItem("vetdict-lang",currentLang);}catch(e){}
+    applyLanguage();
+  });
+  // Restore saved language preference
+  try{const saved=localStorage.getItem("vetdict-lang");if(saved&&I18N[saved]){currentLang=saved;applyLanguage();}}catch(e){}
+}
+/* ===== End i18n system ===== */
+
 let SPECIES=[];
 
 let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
 
 document.addEventListener("DOMContentLoaded",()=>{
-  loadSpeciesStats();setupNavigation();setupChat();setupHamburger();
+  loadSpeciesStats();setupNavigation();setupChat();setupHamburger();setupLanguageToggle();
   document.getElementById("symptomSearch").addEventListener("input",()=>renderSymptomList(symptomData));
   document.getElementById("analyzeBtn").addEventListener("click",doAnalyze);
   document.getElementById("diseaseSearch").addEventListener("input",renderDiseaseDb);
@@ -558,7 +753,7 @@ function setupHamburger(){
   btn.addEventListener("click",()=>{
     const open=nav.classList.toggle("open");
     btn.setAttribute("aria-expanded",open);
-    btn.setAttribute("aria-label",open?"メニューを閉じる":"メニューを開く");
+    btn.setAttribute("aria-label",open?t("menuClose"):t("menuOpen"));
   });
   // Close on tab selection (mobile)
   nav.addEventListener("click",e=>{if(e.target.closest("[role=tab]")){nav.classList.remove("open");btn.setAttribute("aria-expanded","false");}});
@@ -638,13 +833,16 @@ function loadSpeciesStats(){
 }
 
 function renderSpeciesGrid(){
-  document.getElementById("speciesGrid").innerHTML=SPECIES.map(sp=>`
-    <div class="species-card" role="button" tabindex="0" aria-pressed="false" data-species="${sp.id}">
+  document.getElementById("speciesGrid").innerHTML=SPECIES.map(sp=>{
+    const primary=currentLang==="ja"?sp.name:sp.nameEn;
+    const secondary=currentLang==="ja"?sp.nameEn:sp.name;
+    const dLabel=t("speciesCardDisease"),drLabel=t("speciesCardDrug");
+    return`<div class="species-card" role="button" tabindex="0" aria-pressed="${currentSpecies===sp.id}" data-species="${sp.id}">
       <span class="icon" aria-hidden="true">${sp.icon}</span>
-      <div class="name">${sp.name}</div>
-      <div class="count">${sp.nameEn}</div>
-      <div class="count" style="margin-top:2px">${sp.diseases}疾患${sp.drugs?' · '+sp.drugs+'薬品':''}</div>
-    </div>`).join("");
+      <div class="name">${primary}</div>
+      <div class="count">${secondary}</div>
+      <div class="count" style="margin-top:2px">${sp.diseases}${dLabel}${sp.drugs?' · '+sp.drugs+drLabel:''}</div>
+    </div>`}).join("");
   // Event delegation for species cards
   document.getElementById("speciesGrid").addEventListener("click",e=>{
     const card=e.target.closest(".species-card");
@@ -663,13 +861,13 @@ function selectSpecies(id){
     c.setAttribute("aria-pressed",sel);
   });
   renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
-  document.getElementById("resultsArea").innerHTML='<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>症状を選択してください</p></div>';
+  document.getElementById("resultsArea").innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>`;
 }
 
 function loadBreeds(species){
   const area=document.getElementById("breedSelectArea");
   const select=document.getElementById("breedSelect");
-  select.innerHTML='<option value="">品種を選択しない</option>';
+  select.innerHTML=`<option value="">${t("breedNone")}</option>`;
   currentBreed="";
   fetch("/api/breeds/"+species).then(r=>r.json()).then(data=>{
     if(data.breeds&&data.breeds.length>0){
@@ -683,7 +881,7 @@ function loadBreeds(species){
 function loadSymptoms(species){
   fetch("/api/health-check/symptoms").then(r=>r.json()).then(data=>{
     if(data.symptoms){symptomData=data.symptoms;renderSymptomList(symptomData);}
-  }).catch(()=>{document.getElementById("symptomList").innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">症状データを読み込めませんでした</div>';});
+  }).catch(()=>{document.getElementById("symptomList").innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noSymptomData")}</div>`;});
 }
 
 function renderSymptomList(symptoms){
@@ -691,15 +889,15 @@ function renderSymptomList(symptoms){
   const list=document.getElementById("symptomList");
   const categories={};
   symptoms.forEach(s=>{const cat=s.category||"other";if(!categories[cat])categories[cat]=[];categories[cat].push(s);});
-  const catLabels={respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",behavioral:"行動",general:"全身",other:"その他"};
+  const catLabels=t("catLabels");
   let html="";
   for(const[cat,items]of Object.entries(categories)){
     const filtered=items.filter(s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);});
     if(!filtered.length)continue;
     html+=`<div class="symptom-cat" role="heading" aria-level="4">${catLabels[cat]||cat}</div>`;
-    for(const s of filtered){const sel=selectedSymptoms.has(s.id);html+=`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${s.name_ja} <span style="color:var(--gray-600)">${s.name_en}</span></span></div>`;}
+    for(const s of filtered){const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?s.name_ja:s.name_en;const secondary=currentLang==="ja"?s.name_en:s.name_ja;html+=`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;}
   }
-  list.innerHTML=html||'<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する症状がありません</div>';
+  list.innerHTML=html||`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noMatchingSymptom")}</div>`;
   // Event delegation for symptom items
   list.onclick=e=>{const item=e.target.closest(".symptom-item");if(item)toggleSymptom(item.dataset.id);};
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
@@ -709,21 +907,21 @@ function toggleSymptom(id){if(selectedSymptoms.has(id))selectedSymptoms.delete(i
 
 function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
-  if(selectedSymptoms.size===0){area.innerHTML='<span style="color:var(--gray-500);font-size:.78rem">症状が選択されていません</span>';btn.disabled=true;return;}
+  if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;return;}
   btn.disabled=false;
-  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?sym.name_ja:id;return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${label}を削除" data-id="${id}">&times;</button></span>`;}).join("");
+  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?sym.name_ja:sym.name_en):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
 }
 
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
-  const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML='<span class="spinner"></span> 解析中...';
+  const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
   const payload={species:currentSpecies,symptoms:[...selectedSymptoms]};
   if(currentBreed)payload.breed=currentBreed;
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>r.json()).then(data=>renderResults(data))
-  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">エラー: ${err.message}</div>`;})
-  .finally(()=>{btn.disabled=false;btn.textContent="鑑別疾患を検索";});
+  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${t("errorPrefix")}${err.message}</div>`;})
+  .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");});
 }
 
 function renderResults(data){
@@ -732,18 +930,21 @@ function renderResults(data){
   const tests=data.recommended_tests||[];
   const severity=data.severity||"low";
   const adviceJa=data.general_advice_ja||"";
-  if(diseases.length===0){area.innerHTML='<div class="results-empty"><span class="big-icon">\u2705</span><p>一致する疾患は見つかりませんでした</p></div>';return;}
-  const sevLabels={low:"軽度",moderate:"中等度",high:"重度",emergency:"緊急"};
-  let html=`<div class="severity-bar ${severity}">総合評価: ${sevLabels[severity]||severity}</div>`;
-  if(adviceJa)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceJa}</div>`;
+  if(diseases.length===0){area.innerHTML=`<div class="results-empty"><span class="big-icon">\u2705</span><p>${t("noDiseasesFound")}</p></div>`;return;}
+  const sevLabels=t("sevLabels");
+  let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
+  const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
+  if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
   diseases.forEach(d=>{
     const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
     const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
-    const desc=d.description_ja||d.description||"";
+    const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
     const matchSymptoms=d.matching_symptoms||[],recTests=d.recommended_tests||[];
-    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}</div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>説明</dt><dd>${desc}</dd>${d.pathophysiology_ja||d.pathophysiology?`<dt>病態生理</dt><dd>${d.pathophysiology_ja||d.pathophysiology}</dd>`:""} ${d.causes_ja||d.causes?`<dt>原因</dt><dd>${d.causes_ja||d.causes}</dd>`:""} ${d.prevention_ja||d.prevention?`<dt>予防</dt><dd>${d.prevention_ja||d.prevention}</dd>`:""} ${d.treatment_ja||d.treatment?`<dt>治療</dt><dd>${d.treatment_ja||d.treatment}</dd>`:""} ${d.prognosis_ja||d.prognosis?`<dt>予後</dt><dd>${d.prognosis_ja||d.prognosis}</dd>`:""} ${matchSymptoms.length?`<dt>一致した症状</dt><dd>${matchSymptoms.join(", ")}</dd>`:""} ${recTests.length?`<dt>推奨検査</dt><dd>${recTests.join(", ")}</dd>`:""}</dl></div></div>`;
+    const lf=currentLang==="ja"?"_ja":"";const lf2=currentLang==="ja"?"":"_ja";
+    const pick=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
+    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}</div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc}</dd>${pick(d.pathophysiology_ja,d.pathophysiology)?`<dt>${t("dtPathophysiology")}</dt><dd>${pick(d.pathophysiology_ja,d.pathophysiology)}</dd>`:""} ${pick(d.causes_ja,d.causes)?`<dt>${t("dtCauses")}</dt><dd>${pick(d.causes_ja,d.causes)}</dd>`:""} ${pick(d.prevention_ja,d.prevention)?`<dt>${t("dtPrevention")}</dt><dd>${pick(d.prevention_ja,d.prevention)}</dd>`:""} ${pick(d.treatment_ja,d.treatment)?`<dt>${t("dtTreatment")}</dt><dd>${pick(d.treatment_ja,d.treatment)}</dd>`:""} ${pick(d.prognosis_ja,d.prognosis)?`<dt>${t("dtPrognosis")}</dt><dd>${pick(d.prognosis_ja,d.prognosis)}</dd>`:""} ${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchSymptoms.join(", ")}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl></div></div>`;
   });
-  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">推奨検査一覧:</strong><ul class="test-list">${tests.map(t=>`<li>\u{1F52C} ${t}</li>`).join("")}</ul></div>`;}
+  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>`<li>\u{1F52C} ${x}</li>`).join("")}</ul></div>`;}
   area.innerHTML=html;
 }
 
@@ -751,7 +952,7 @@ function loadDiseaseDb(species){
   const list=document.getElementById("diseaseDbList");
   list.innerHTML='<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
   fetch(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
-  .catch(()=>{list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">読み込みに失敗しました</div>';});
+  .catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
 function renderAzNav(){
@@ -770,23 +971,25 @@ function renderDiseaseDb(){
   let filtered=allDiseases;
   if(diseaseFilter)filtered=filtered.filter(d=>(d.name||"").toUpperCase().startsWith(diseaseFilter));
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
-  document.getElementById("diseaseDbCount").textContent=`${filtered.length} / ${allDiseases.length} 件表示`;
-  if(filtered.length===0){list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する疾患がありません</div>';return;}
-  list.innerHTML=filtered.slice(0,100).map(d=>`
-    <div class="disease-db-item" onclick="this.querySelector('.disease-detail').classList.toggle('open')">
+  document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDiseases.length);
+  if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
+  const pk=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
+  list.innerHTML=filtered.slice(0,100).map(d=>{
+    const desc=pk(d.description_ja,d.description);
+    return`<div class="disease-db-item" onclick="this.querySelector('.disease-detail').classList.toggle('open')">
       <div class="d-name">${d.name||""} <span class="d-name-ja">${d.name_ja||""}</span></div>
-      <div class="d-desc">${(d.description_ja||d.description||"").substring(0,80)}${(d.description_ja||d.description||"").length>80?"...":""}</div>
+      <div class="d-desc">${desc.substring(0,80)}${desc.length>80?"...":""}</div>
       <div class="disease-detail"><dl>
-        <dt>説明</dt><dd>${d.description_ja||d.description||""}</dd>
-        ${d.pathophysiology_ja||d.pathophysiology?`<dt>病態生理</dt><dd>${d.pathophysiology_ja||d.pathophysiology}</dd>`:""}
-        ${d.causes_ja||d.causes?`<dt>原因</dt><dd>${d.causes_ja||d.causes}</dd>`:""}
-        ${d.prevention_ja||d.prevention?`<dt>予防</dt><dd>${d.prevention_ja||d.prevention}</dd>`:""}
-        ${d.treatment_ja||d.treatment?`<dt>治療</dt><dd>${d.treatment_ja||d.treatment}</dd>`:""}
-        ${d.prognosis_ja||d.prognosis?`<dt>予後</dt><dd>${d.prognosis_ja||d.prognosis}</dd>`:""}
-        ${d.symptoms?`<dt>症状</dt><dd>${Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):d.symptoms)}</dd>`:""}
-        ${d.recommended_tests?`<dt>推奨検査</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
+        <dt>${t("dtDescription")}</dt><dd>${desc}</dd>
+        ${pk(d.pathophysiology_ja,d.pathophysiology)?`<dt>${t("dtPathophysiology")}</dt><dd>${pk(d.pathophysiology_ja,d.pathophysiology)}</dd>`:""}
+        ${pk(d.causes_ja,d.causes)?`<dt>${t("dtCauses")}</dt><dd>${pk(d.causes_ja,d.causes)}</dd>`:""}
+        ${pk(d.prevention_ja,d.prevention)?`<dt>${t("dtPrevention")}</dt><dd>${pk(d.prevention_ja,d.prevention)}</dd>`:""}
+        ${pk(d.treatment_ja,d.treatment)?`<dt>${t("dtTreatment")}</dt><dd>${pk(d.treatment_ja,d.treatment)}</dd>`:""}
+        ${pk(d.prognosis_ja,d.prognosis)?`<dt>${t("dtPrognosis")}</dt><dd>${pk(d.prognosis_ja,d.prognosis)}</dd>`:""}
+        ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):d.symptoms)}</dd>`:""}
+        ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
       </dl></div>
-    </div>`).join("");
+    </div>`}).join("");
 }
 
 function switchView(view){
@@ -833,8 +1036,8 @@ function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   fetch("/api/diagnostic-chat/message",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
-  .then(r=>r.json()).then(data=>{addChatMsg(data.response||data.message||data.error||"応答を取得できませんでした","bot");})
-  .catch(()=>addChatMsg("通信エラーが発生しました。","bot"));
+  .then(r=>r.json()).then(data=>{addChatMsg(data.response||data.message||data.error||t("noResponse"),"bot");})
+  .catch(()=>addChatMsg(t("commError"),"bot"));
 }
 
 function addChatMsg(text,type){
@@ -853,13 +1056,13 @@ function loadDrugDictionary(){
     allDrugs=drugsData.drugs||[];drugCategories=drugsData.categories||{};
     pendingStats.drugs=allDrugs.length;animateCount(document.getElementById("statDrugs"),allDrugs.length,800);
     const catSelect=document.getElementById("drugCategoryFilter");
-    catSelect.innerHTML='<option value="">全カテゴリ</option>';
-    (catData.categories||[]).forEach(c=>{if(c.count>0)catSelect.innerHTML+=`<option value="${c.id}">${c.name_ja} (${c.count})</option>`;});
+    catSelect.innerHTML=`<option value="">${t("allCategories")}</option>`;
+    (catData.categories||[]).forEach(c=>{if(c.count>0){const cName=currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja);catSelect.innerHTML+=`<option value="${c.id}">${cName} (${c.count})</option>`;}});
     const spSelect=document.getElementById("drugSpeciesFilter");
-    spSelect.innerHTML='<option value="">全動物種</option>';
-    SPECIES.forEach(sp=>{spSelect.innerHTML+=`<option value="${sp.id}">${sp.name} ${sp.nameEn}</option>`;});
+    spSelect.innerHTML=`<option value="">${t("allSpecies")}</option>`;
+    SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.innerHTML+=`<option value="${sp.id}">${primary} ${secondary}</option>`;});
     drugsLoaded=true;renderDrugList();
-  }).catch(()=>{list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">読み込みに失敗しました</div>';});
+  }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
   document.getElementById("drugSearch").addEventListener("input",renderDrugList);
   document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
   document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
@@ -874,33 +1077,35 @@ function renderDrugList(){
   if(cat)filtered=filtered.filter(d=>d.category===cat);
   if(species)filtered=filtered.filter(d=>d.species_info&&d.species_info[species]);
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.category_ja||"").toLowerCase().includes(search));
-  document.getElementById("drugCount").textContent=`${filtered.length} / ${allDrugs.length} 件表示`;
-  if(filtered.length===0){list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する薬品がありません</div>';return;}
+  document.getElementById("drugCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDrugs.length);
+  if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDrugMatch")}</div>`;return;}
   filtered=[...filtered].sort((a,b)=>(b.sponsor?1:0)-(a.sponsor?1:0));
   list.innerHTML=filtered.map(d=>{
     const speciesFilter=document.getElementById("drugSpeciesFilter").value;
     let dosageHtml="";
     if(speciesFilter&&d.species_info&&d.species_info[speciesFilter]){
       const si=d.species_info[speciesFilter];
-      const safeLabel=si.safe?'<span style="color:var(--green);font-weight:700">\u2713 安全</span>':'<span style="color:var(--red);font-weight:700">\u2717 禁忌</span>';
-      dosageHtml=`<div style="margin-top:4px;font-size:.8rem;padding:6px 10px;background:${si.safe?'#f0fdf4':'#fef2f2'};border-radius:6px">${safeLabel} | 投与量: ${si.dosage_ja||si.dosage||"N/A"}<br/><span style="color:var(--gray-500)">${si.notes_ja||si.notes||""}</span></div>`;
+      const safeLabel=si.safe?`<span style="color:var(--green);font-weight:700">\u2713 ${t("safe")}</span>`:`<span style="color:var(--red);font-weight:700">\u2717 ${t("contraindicated")}</span>`;
+      const doseText=currentLang==="ja"?(si.dosage_ja||si.dosage||"N/A"):(si.dosage||si.dosage_ja||"N/A");
+      const noteText=currentLang==="ja"?(si.notes_ja||si.notes||""):(si.notes||si.notes_ja||"");
+      dosageHtml=`<div style="margin-top:4px;font-size:.8rem;padding:6px 10px;background:${si.safe?'#f0fdf4':'#fef2f2'};border-radius:6px">${safeLabel} | ${t("dosageLabel")}${doseText}<br/><span style="color:var(--gray-500)">${noteText}</span></div>`;
     }
-    const catLabel=drugCategories[d.category]?drugCategories[d.category].ja:d.category_ja||d.category;
+    const catLabel=drugCategories[d.category]?(currentLang==="ja"?(drugCategories[d.category].ja||drugCategories[d.category].en):(drugCategories[d.category].en||drugCategories[d.category].ja)):(currentLang==="ja"?(d.category_ja||d.category):(d.category||d.category_ja));
     const sponsorBadge=d.sponsor?'<span style="font-size:.65rem;padding:2px 8px;background:var(--green);color:#fff;border-radius:10px;margin-left:6px;font-weight:600">Sponsor</span>':"";
-    const sponsorLink=d.sponsor?`<div style="margin-top:8px;padding:8px 12px;background:var(--green-light);border:1px solid rgba(34,168,79,.3);border-radius:6px;font-size:.8rem"><strong style="color:var(--green-dark)">${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/><span style="color:var(--gray-600)">獣医師考案・国内製造・競走馬理化学研究所検査合格</span><br/><a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" style="color:var(--navy);font-weight:600">製品詳細 &rarr;</a></div>`:"";
+    const sponsorLink=d.sponsor?`<div style="margin-top:8px;padding:8px 12px;background:var(--green-light);border:1px solid rgba(34,168,79,.3);border-radius:6px;font-size:.8rem"><strong style="color:var(--green-dark)">${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/><span style="color:var(--gray-600)">${t("sponsorVetLabel")}</span><br/><a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" style="color:var(--navy);font-weight:600">${t("productDetails")}</a></div>`:"";
     return`<div class="disease-db-item" onclick="this.querySelector('.disease-detail')&&this.querySelector('.disease-detail').classList.toggle('open')" style="${d.sponsor?'border-left:3px solid var(--green)':''}">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
         <div class="d-name">${d.name} <span class="d-name-ja">${d.name_ja}</span>${sponsorBadge}</div>
         <span style="font-size:.7rem;padding:2px 8px;background:var(--gray-100);color:var(--navy);border-radius:10px;font-weight:600">${catLabel}</span>
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
-        <dl><dt>禁忌事項</dt><dd>${d.contraindications_ja||""}</dd></dl>
-        ${d.routes_ja?`<dl><dt>投与経路</dt><dd>${(d.routes_ja||[]).join(", ")} (${(d.routes||[]).join(", ")})</dd></dl>`:""}
-        ${d.formulations_ja?`<dl><dt>製剤</dt><dd>${(d.formulations_ja||[]).join(", ")}</dd></dl>`:""}
-        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>薬物相互作用</dt><dd>${d.drug_interactions.map(di=>`<span style="display:inline-block;margin:2px 4px 2px 0;padding:2px 6px;background:#fef2f2;border-radius:4px;font-size:.76rem">${di.drug}: ${di.effect_ja||di.effect}</span>`).join("")}</dd></dl>`:""}
-        <div style="margin-top:8px"><strong style="font-size:.8rem">動物種別情報:</strong>
+        <dl><dt>${t("dtContraindications")}</dt><dd>${currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||"")}</dd></dl>
+        ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", ")}</dd></dl>`:""}
+        ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", ")}</dd></dl>`:""}
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span style="display:inline-block;margin:2px 4px 2px 0;padding:2px 6px;background:#fef2f2;border-radius:4px;font-size:.76rem">${di.drug}: ${currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja)}</span>`).join("")}</dd></dl>`:""}
+        <div style="margin-top:8px"><strong style="font-size:.8rem">${t("dtSpeciesInfo")}</strong>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;margin-top:4px">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?spName.name:sp;return`<div style="font-size:.76rem;padding:4px 8px;background:${info.safe?'#f0fdf4':'#fef2f2'};border-radius:4px;border:1px solid ${info.safe?'#bbf7d0':'#fecaca'}"><strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${info.dosage_ja||info.dosage||""}${info.notes_ja?'<br/><span style="color:var(--gray-500)">'+info.notes_ja+'</span>':''}</div>`;}).join("")}
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div style="font-size:.76rem;padding:4px 8px;background:${info.safe?'#f0fdf4':'#fef2f2'};border-radius:4px;border:1px solid ${info.safe?'#bbf7d0':'#fecaca'}"><strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${dose}${note?'<br/><span style="color:var(--gray-500)">'+note+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
       </div>
