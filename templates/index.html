@@ -3,170 +3,178 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>VetDict — 獣医学鑑別診断プラットフォーム</title>
+<title>VetDict — 獣医学鑑別診断データベース</title>
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --primary:#03a9f4;--primary-dark:#0288d1;--primary-light:#e1f5fe;
-  --accent:#1F1F26;--white:#fff;--bg:#f8f9fa;
-  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
-  --gray-500:#6b7280;--gray-700:#374151;--gray-900:#111827;
-  --red:#ef4444;--orange:#f97316;--green:#22c55e;
-  --radius:8px;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
-  --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.05);
+  --navy:#1a3068;--navy-dark:#0f1d42;--navy-light:#2a4a8f;
+  --green:#22a84f;--green-dark:#1a8a3e;--green-light:#e8f8ee;
+  --white:#fff;--bg:#f5f6fa;
+  --gray-50:#f8f9fc;--gray-100:#eef0f5;--gray-200:#dde1ea;--gray-300:#c5cbd8;
+  --gray-500:#6b7490;--gray-600:#4e5570;--gray-700:#363c52;--gray-900:#1a1d2e;
+  --red:#dc3545;--orange:#f0850e;
+  --radius:10px;--radius-lg:16px;
+  --shadow:0 1px 3px rgba(26,48,104,.08),0 1px 2px rgba(26,48,104,.04);
+  --shadow-md:0 4px 12px rgba(26,48,104,.1);
+  --shadow-lg:0 12px 32px rgba(26,48,104,.12);
+  --font:'Hiragino Sans','Noto Sans JP','Segoe UI',system-ui,sans-serif;
 }
 html{font-size:15px;scroll-behavior:smooth}
-body{font-family:'Hiragino Sans','Noto Sans JP','Droid Sans',system-ui,sans-serif;
-  background:var(--bg);color:var(--gray-900);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
+body{font-family:var(--font);background:var(--bg);color:var(--gray-900);line-height:1.65}
+a{color:var(--navy-light);text-decoration:none}
 a:hover{text-decoration:underline}
 
-.header{background:var(--accent);color:var(--white);padding:0}
-.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;
-  justify-content:space-between;padding:12px 20px}
-.header h1{font-size:1.3rem;font-weight:700;letter-spacing:.5px}
-.header h1 span{color:var(--primary);font-weight:400}
-.header-nav{display:flex;gap:6px;flex-wrap:wrap}
-.header-nav a{color:var(--gray-300);font-size:.82rem;padding:6px 12px;
-  border-radius:4px;transition:all .2s;cursor:pointer}
-.header-nav a:hover,.header-nav a.active{background:var(--primary);
-  color:var(--white);text-decoration:none}
+.header{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 20px;gap:12px}
+.header-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.4rem;font-weight:800;letter-spacing:-.5px}
+.logo-vet{color:var(--navy)}
+.logo-dict{color:var(--green)}
+.logo-sub{display:block;font-size:.62rem;font-weight:500;color:var(--gray-500);letter-spacing:.5px;margin-top:-2px}
+.header-nav{display:flex;gap:4px;flex-wrap:wrap}
+.header-nav a{color:var(--gray-600);font-size:.82rem;padding:7px 14px;border-radius:8px;transition:all .2s;cursor:pointer;font-weight:500}
+.header-nav a:hover{background:var(--gray-100);color:var(--navy);text-decoration:none}
+.header-nav a.active{background:var(--navy);color:var(--white)}
 
-.hero{background:linear-gradient(135deg,var(--primary-dark),#0277bd);
-  color:var(--white);text-align:center;padding:48px 20px 40px}
-.hero h2{font-size:1.8rem;font-weight:700;margin-bottom:8px}
-.hero p{font-size:1rem;opacity:.9;max-width:640px;margin:0 auto 20px}
-.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:16px}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 60%,#0d1a38 100%);color:var(--white);text-align:center;padding:52px 20px 44px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(34,168,79,.12) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-block;background:rgba(34,168,79,.2);border:1px solid rgba(34,168,79,.4);color:var(--green-light);padding:4px 16px;border-radius:20px;font-size:.75rem;font-weight:600;letter-spacing:.5px;margin-bottom:16px}
+.hero h2{font-size:1.9rem;font-weight:800;margin-bottom:10px;letter-spacing:-.5px}
+.hero p{font-size:.95rem;opacity:.8;max-width:580px;margin:0 auto 24px;line-height:1.7}
+.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
 .hero-stat{text-align:center}
-.hero-stat .num{font-size:2rem;font-weight:800;display:block}
-.hero-stat .label{font-size:.78rem;opacity:.8}
+.hero-stat .num{font-size:2.2rem;font-weight:800;display:block}
+.hero-stat .label{font-size:.72rem;opacity:.6;letter-spacing:.5px}
+.hero-credit{margin-top:20px;font-size:.75rem;opacity:.5}
+.hero-credit a{color:var(--green-light);opacity:1}
 
-.species-section{max-width:1200px;margin:0 auto;padding:32px 20px}
-.species-section h3{font-size:1.1rem;font-weight:700;color:var(--accent);
-  text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;
-  padding-bottom:8px;border-bottom:3px solid var(--primary)}
-.species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
-.species-card{background:var(--white);border:2px solid var(--gray-200);
-  border-radius:var(--radius);padding:16px 12px;text-align:center;cursor:pointer;
-  transition:all .2s;position:relative}
-.species-card:hover{border-color:var(--primary);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
-.species-card.selected{border-color:var(--primary);background:var(--primary-light)}
-.species-card .icon{font-size:2rem;margin-bottom:6px;display:block}
-.species-card .name{font-size:.85rem;font-weight:600;color:var(--gray-700)}
-.species-card .count{font-size:.72rem;color:var(--gray-500);margin-top:2px}
+.sponsor-banner{max-width:1200px;margin:0 auto;padding:12px 20px 0}
+.sponsor-banner a{text-decoration:none;display:block}
+.sponsor-banner-inner{background:var(--white);border:1px solid var(--gray-200);border-left:4px solid var(--green);border-radius:var(--radius);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;transition:box-shadow .2s}
+.sponsor-banner-inner:hover{box-shadow:var(--shadow-md)}
+.sponsor-label{font-size:.65rem;color:var(--green-dark);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.sponsor-name{font-size:.9rem;color:var(--navy);font-weight:700;margin-top:1px}
+.sponsor-desc{font-size:.75rem;color:var(--gray-500)}
+.sponsor-tags{display:flex;gap:6px;flex-wrap:wrap}
+.sponsor-tag{background:var(--green-light);color:var(--green-dark);padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:600}
+.sponsor-cta{color:var(--green);font-size:.82rem;font-weight:700;white-space:nowrap}
+
+.species-section{max-width:1200px;margin:0 auto;padding:28px 20px 12px}
+.section-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:'';width:4px;height:18px;background:var(--green);border-radius:2px;display:inline-block}
+.species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.species-card{background:var(--white);border:2px solid var(--gray-200);border-radius:var(--radius);padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s}
+.species-card:hover{border-color:var(--navy-light);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.species-card.selected{border-color:var(--navy);background:linear-gradient(135deg,#eef1fa,#e8edf8)}
+.species-card .icon{font-size:1.8rem;margin-bottom:4px;display:block}
+.species-card .name{font-size:.82rem;font-weight:700;color:var(--gray-700)}
+.species-card .count{font-size:.68rem;color:var(--gray-500);margin-top:2px}
 
 .main-content{max-width:1200px;margin:0 auto;padding:0 20px 48px}
-.panels{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
 @media(max-width:768px){.panels{grid-template-columns:1fr}}
 
-.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.card-header{background:var(--primary);color:var(--white);padding:12px 16px;
-  font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.5px;
-  display:flex;align-items:center;gap:8px}
-.card-header.dark{background:var(--accent)}
+.card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--gray-200)}
+.card-header{padding:14px 18px;font-weight:700;font-size:.88rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--gray-200);background:var(--gray-50);color:var(--navy)}
+.card-header.accent{background:var(--navy);color:var(--white)}
 .card-body{padding:16px}
 
 .symptom-search{position:relative;margin-bottom:12px}
-.symptom-search input{width:100%;padding:10px 14px;border:2px solid var(--gray-200);
-  border-radius:var(--radius);font-size:.9rem;outline:none;transition:border-color .2s}
-.symptom-search input:focus{border-color:var(--primary)}
+.symptom-search input{width:100%;padding:10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;outline:none;transition:border-color .2s;background:var(--white)}
+.symptom-search input:focus{border-color:var(--navy-light)}
 .symptom-list{max-height:360px;overflow-y:auto;border:1px solid var(--gray-200);border-radius:var(--radius)}
-.symptom-item{display:flex;align-items:center;gap:10px;padding:8px 12px;
-  border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s;font-size:.85rem}
-.symptom-item:hover{background:var(--primary-light)}
+.symptom-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s;font-size:.84rem}
+.symptom-item:hover{background:var(--green-light)}
 .symptom-item.selected{background:#dbeafe;font-weight:600}
-.symptom-item .sym-icon{width:20px;height:20px;border-radius:50%;border:2px solid var(--gray-300);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;transition:all .2s}
-.symptom-item.selected .sym-icon{background:var(--primary);border-color:var(--primary);color:var(--white)}
-.symptom-cat{background:var(--gray-50);padding:6px 12px;font-size:.75rem;font-weight:700;
-  color:var(--gray-500);text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;z-index:1}
+.symptom-item .sym-icon{width:20px;height:20px;border-radius:50%;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;transition:all .2s}
+.symptom-item.selected .sym-icon{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.symptom-cat{background:var(--gray-50);padding:6px 12px;font-size:.72rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;z-index:1}
 
 .selected-symptoms{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;min-height:32px}
-.selected-tag{display:inline-flex;align-items:center;gap:4px;background:var(--primary);
-  color:var(--white);padding:4px 10px;border-radius:20px;font-size:.78rem;font-weight:500}
+.selected-tag{display:inline-flex;align-items:center;gap:4px;background:var(--navy);color:var(--white);padding:4px 10px;border-radius:20px;font-size:.76rem;font-weight:500}
 .selected-tag .remove{cursor:pointer;opacity:.7;font-weight:700}
 .selected-tag .remove:hover{opacity:1}
 
 .results-empty{text-align:center;padding:40px 20px;color:var(--gray-500)}
-.results-empty .big-icon{font-size:3rem;margin-bottom:8px;display:block}
-.disease-result{border:1px solid var(--gray-200);border-radius:var(--radius);
-  margin-bottom:10px;overflow:hidden;transition:box-shadow .2s}
+.results-empty .big-icon{font-size:2.5rem;margin-bottom:8px;display:block;opacity:.5}
+.disease-result{border:1px solid var(--gray-200);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:box-shadow .2s}
 .disease-result:hover{box-shadow:var(--shadow)}
-.disease-head{display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;cursor:pointer;gap:8px}
-.disease-head .disease-name{font-weight:600;font-size:.88rem;flex:1}
-.disease-head .disease-name-ja{font-size:.78rem;color:var(--gray-500);margin-left:6px}
-.match-badge{padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:700;flex-shrink:0}
+.disease-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;gap:8px}
+.disease-head .disease-name{font-weight:600;font-size:.86rem;flex:1}
+.disease-head .disease-name-ja{font-size:.76rem;color:var(--gray-500);margin-left:6px}
+.match-badge{padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:700;flex-shrink:0}
 .match-badge.high{background:#dcfce7;color:#166534}
 .match-badge.moderate{background:#fef3c7;color:#92400e}
 .match-badge.low{background:#fee2e2;color:#991b1b}
-.disease-detail{display:none;padding:10px 14px;border-top:1px solid var(--gray-100);
-  background:var(--gray-50);font-size:.82rem;line-height:1.7}
+.disease-detail{display:none;padding:12px 14px;border-top:1px solid var(--gray-100);background:var(--gray-50);font-size:.82rem;line-height:1.7}
 .disease-detail.open{display:block}
-.disease-detail dt{font-weight:700;color:var(--gray-700);margin-top:6px}
+.disease-detail dt{font-weight:700;color:var(--navy);margin-top:6px;font-size:.78rem}
 .disease-detail dd{margin-left:0;color:var(--gray-700)}
-.severity-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;
-  border-radius:var(--radius);margin-bottom:12px;font-size:.82rem;font-weight:600}
+.severity-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius);margin-bottom:12px;font-size:.82rem;font-weight:600}
 .severity-bar.low{background:#f0fdf4;color:#166534}
 .severity-bar.moderate{background:#fffbeb;color:#92400e}
 .severity-bar.high{background:#fef2f2;color:#991b1b}
 .severity-bar.emergency{background:#991b1b;color:var(--white)}
 
-.analyze-btn{width:100%;padding:12px;background:var(--primary);color:var(--white);
-  border:none;border-radius:var(--radius);font-size:1rem;font-weight:700;
-  cursor:pointer;transition:all .2s;letter-spacing:.5px}
-.analyze-btn:hover{background:var(--primary-dark)}
+.analyze-btn{width:100%;padding:12px;background:var(--green);color:var(--white);border:none;border-radius:var(--radius);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s}
+.analyze-btn:hover{background:var(--green-dark)}
 .analyze-btn:disabled{background:var(--gray-300);cursor:not-allowed}
 
 .test-list{list-style:none;padding:0}
-.test-list li{padding:6px 0;border-bottom:1px solid var(--gray-100);font-size:.82rem;
-  display:flex;align-items:center;gap:6px}
+.test-list li{padding:6px 0;border-bottom:1px solid var(--gray-100);font-size:.82rem;display:flex;align-items:center;gap:6px}
 
-.az-nav{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px;justify-content:center}
-.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:4px 8px;
-  border-radius:4px;font-size:.75rem;cursor:pointer;min-width:28px;transition:all .15s;font-weight:600}
-.az-nav button:hover,.az-nav button.active{background:var(--primary);color:var(--white);border-color:var(--primary)}
+.az-nav{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:14px;justify-content:center}
+.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:4px 7px;border-radius:4px;font-size:.72rem;cursor:pointer;min-width:26px;transition:all .15s;font-weight:600}
+.az-nav button:hover,.az-nav button.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
 
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
-.disease-db-item:hover{background:var(--primary-light)}
-.disease-db-item .d-name{font-weight:600;font-size:.88rem}
-.disease-db-item .d-name-ja{color:var(--gray-500);font-size:.8rem;margin-left:6px}
-.disease-db-item .d-desc{font-size:.78rem;color:var(--gray-500);margin-top:2px}
+.disease-db-item:hover{background:var(--green-light)}
+.disease-db-item .d-name{font-weight:600;font-size:.86rem}
+.disease-db-item .d-name-ja{color:var(--gray-500);font-size:.78rem;margin-left:6px}
+.disease-db-item .d-desc{font-size:.76rem;color:var(--gray-500);margin-top:2px}
 .disease-db-list{max-height:500px;overflow-y:auto}
 
 .chat-container{display:flex;flex-direction:column;height:460px}
 .chat-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.chat-msg{max-width:85%;padding:10px 14px;border-radius:12px;font-size:.85rem;line-height:1.5}
+.chat-msg{max-width:85%;padding:10px 14px;border-radius:12px;font-size:.84rem;line-height:1.5}
 .chat-msg.bot{background:var(--gray-100);align-self:flex-start;border-bottom-left-radius:4px}
-.chat-msg.user{background:var(--primary);color:var(--white);align-self:flex-end;border-bottom-right-radius:4px}
+.chat-msg.user{background:var(--navy);color:var(--white);align-self:flex-end;border-bottom-right-radius:4px}
 .chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--gray-200)}
-.chat-input-row input{flex:1;padding:10px 14px;border:2px solid var(--gray-200);
-  border-radius:20px;font-size:.88rem;outline:none}
-.chat-input-row input:focus{border-color:var(--primary)}
-.chat-input-row button{padding:10px 20px;background:var(--primary);color:var(--white);
-  border:none;border-radius:20px;font-weight:600;cursor:pointer}
+.chat-input-row input{flex:1;padding:10px 14px;border:2px solid var(--gray-200);border-radius:20px;font-size:.86rem;outline:none}
+.chat-input-row input:focus{border-color:var(--navy-light)}
+.chat-input-row button{padding:10px 20px;background:var(--navy);color:var(--white);border:none;border-radius:20px;font-weight:600;cursor:pointer}
+.chat-input-row button:hover{background:var(--navy-dark)}
 
 .references{max-width:1200px;margin:0 auto;padding:24px 20px}
-.references h3{font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:12px;
-  padding-bottom:6px;border-bottom:2px solid var(--gray-200)}
+.references h3{font-size:.92rem;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--gray-200)}
 .references ul{list-style:none;padding:0}
-.references li{font-size:.78rem;color:var(--gray-700);padding:4px 0;line-height:1.5;
-  border-bottom:1px solid var(--gray-100)}
-.references li span.ref-num{font-weight:700;color:var(--primary);margin-right:6px}
+.references li{font-size:.76rem;color:var(--gray-700);padding:4px 0;line-height:1.5;border-bottom:1px solid var(--gray-100)}
+.references li span.ref-num{font-weight:700;color:var(--navy);margin-right:6px}
 
-.footer{background:var(--accent);color:var(--gray-300);text-align:center;padding:20px;font-size:.78rem}
-.footer a{color:var(--primary)}
+.sponsor-section{max-width:1200px;margin:0 auto;padding:20px 20px 8px}
+.sponsor-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;overflow:hidden}
+.sponsor-products{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-bottom:20px}
+.sponsor-product{background:var(--gray-50);border-radius:var(--radius);padding:14px;border:1px solid var(--gray-200);transition:box-shadow .2s}
+.sponsor-product:hover{box-shadow:var(--shadow)}
+.sponsor-product .sp-cat{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.sponsor-product h4{font-size:.88rem;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+.sponsor-product p{font-size:.76rem;color:var(--gray-600);line-height:1.5}
+.sponsor-product .sp-species{font-size:.7rem;color:var(--navy);margin-top:6px;font-weight:600}
+
+.footer{background:var(--navy-dark);color:rgba(255,255,255,.6);text-align:center;padding:24px 20px;font-size:.76rem}
+.footer a{color:var(--green)}
 
 .hidden{display:none!important}
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--gray-300);
-  border-top-color:var(--primary);border-radius:50%;animation:spin .6s linear infinite}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--gray-300);border-top-color:var(--navy);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media(max-width:600px){
-  .header-inner{flex-direction:column;gap:8px}
-  .hero h2{font-size:1.3rem}
-  .hero-stats{gap:16px}
+  .header-inner{flex-direction:column;gap:6px}
+  .hero h2{font-size:1.35rem}
+  .hero-stats{gap:20px}
   .species-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+  .sponsor-banner-inner{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -174,51 +182,56 @@ a:hover{text-decoration:underline}
 
 <header class="header">
   <div class="header-inner">
-    <h1>VetDict <span>Veterinary Dictionary</span></h1>
+    <a href="/" class="header-logo">
+      <div>
+        <div class="logo-text"><span class="logo-vet">Vet</span><span class="logo-dict">Dict</span></div>
+        <span class="logo-sub">Veterinary Diagnostic Database</span>
+      </div>
+    </a>
     <nav class="header-nav">
-      <a class="active" data-view="checker">Symptom Checker</a>
-      <a data-view="database">Disease Database</a>
-      <a data-view="chat">Diagnostic Chat</a>
-      <a data-view="drugs">Drug Dictionary</a>
+      <a class="active" data-view="checker">症状チェッカー</a>
+      <a data-view="database">疾患データベース</a>
+      <a data-view="chat">診断チャット</a>
+      <a data-view="drugs">薬品辞書</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
-  <h2>獣医学鑑別診断プラットフォーム</h2>
-  <p>最新のエビデンスに基づく多動物種対応の症状チェッカー・疾患データベース・鑑別診断ツール</p>
+  <div class="hero-badge">獣医師が開発した鑑別診断データベース</div>
+  <h2>多動物種対応の鑑別診断プラットフォーム</h2>
+  <p>症状から鑑別診断リストを生成。疾患データベース・薬品辞書を搭載。<br/>臨床現場での迅速な意思決定をサポートします。</p>
   <div class="hero-stats">
     <div class="hero-stat"><span class="num" id="statDiseases">0</span><span class="label">疾患数</span></div>
     <div class="hero-stat"><span class="num" id="statSpecies">20</span><span class="label">対応動物種</span></div>
     <div class="hero-stat"><span class="num" id="statSymptoms">0</span><span class="label">症状項目</span></div>
     <div class="hero-stat"><span class="num" id="statDrugs">175</span><span class="label">薬品数</span></div>
   </div>
+  <div class="hero-credit">
+    開発: <a href="https://www.minamisoma-vet.com/" target="_blank">南相馬アニマルクリニック</a> 獣医師 上手 健太郎
+  </div>
 </section>
 
-<!-- ===== Sponsor Banner (Top) ===== -->
-<section style="max-width:1200px;margin:0 auto;padding:8px 20px 0">
-  <a href="https://www.caninevet.jp/" target="_blank" style="text-decoration:none;display:block">
-    <div style="background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#1e40af 100%);border-radius:var(--radius);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 4px 12px rgba(37,99,235,.25)">
-      <div style="display:flex;align-items:center;gap:16px;flex:1;min-width:200px">
-        <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:8px 12px;font-size:1.4rem">🐴🐕</div>
-        <div>
-          <div style="color:#fbbf24;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase">Official Sponsor</div>
-          <div style="color:#fff;font-size:1rem;font-weight:700;margin-top:2px">Equine & Canine Vet Nutrition</div>
-          <div style="color:#93c5fd;font-size:.82rem;margin-top:2px">獣医師考案 × 国内製造 × 競走馬理化学研究所検査合格</div>
-        </div>
+<div class="sponsor-banner">
+  <a href="https://www.caninevet.jp/" target="_blank">
+    <div class="sponsor-banner-inner">
+      <div>
+        <div class="sponsor-label">Sponsor</div>
+        <div class="sponsor-name">Equine &amp; Canine Vet Nutrition</div>
+        <div class="sponsor-desc">獣医師考案・国内製造・競走馬理化学研究所検査合格</div>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <span style="background:rgba(255,255,255,.12);color:#e0f2fe;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;border:1px solid rgba(255,255,255,.2)">NMN-ミトコンドリアアシスト</span>
-        <span style="background:rgba(255,255,255,.12);color:#e0f2fe;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;border:1px solid rgba(255,255,255,.2)">アミノコンプリート(BCAA)</span>
-        <span style="background:rgba(255,255,255,.12);color:#e0f2fe;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;border:1px solid rgba(255,255,255,.2)">For Joint</span>
+      <div class="sponsor-tags">
+        <span class="sponsor-tag">NMN-ミトコンドリアアシスト</span>
+        <span class="sponsor-tag">Amino Complete</span>
+        <span class="sponsor-tag">For Joint</span>
       </div>
-      <div style="color:#fbbf24;font-size:.85rem;font-weight:700;white-space:nowrap">製品を見る →</div>
+      <div class="sponsor-cta">詳細 &rarr;</div>
     </div>
   </a>
-</section>
+</div>
 
 <section class="species-section">
-  <h3>動物種を選択 / Select Species</h3>
+  <div class="section-title">動物種を選択</div>
   <div class="species-grid" id="speciesGrid"></div>
 </section>
 
@@ -227,22 +240,20 @@ a:hover{text-decoration:underline}
     <div class="panels">
       <div>
         <div class="card">
-          <div class="card-header">&#9745; 症状を選択 / Select Symptoms</div>
+          <div class="card-header">&#9745; 症状を選択</div>
           <div class="card-body">
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
               <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)"/>
             </div>
             <div class="symptom-list" id="symptomList"></div>
-            <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px">
-              鑑別診断を実行 / Analyze
-            </button>
+            <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px">鑑別診断を実行</button>
           </div>
         </div>
       </div>
       <div>
         <div class="card">
-          <div class="card-header dark">&#128202; 鑑別診断結果 / Results</div>
+          <div class="card-header accent">&#128202; 鑑別診断結果</div>
           <div class="card-body">
             <div id="resultsArea">
               <div class="results-empty">
@@ -257,28 +268,28 @@ a:hover{text-decoration:underline}
   </div>
 
   <div id="viewDatabase" class="hidden">
-    <div class="card" style="margin-top:24px">
-      <div class="card-header">&#128218; 疾患データベース / Disease Database</div>
+    <div class="card" style="margin-top:20px">
+      <div class="card-header">&#128218; 疾患データベース</div>
       <div class="card-body">
         <div class="symptom-search" style="margin-bottom:12px">
           <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)"/>
         </div>
         <div class="az-nav" id="azNav"></div>
-        <div id="diseaseDbCount" style="font-size:.78rem;color:var(--gray-500);margin-bottom:8px"></div>
+        <div id="diseaseDbCount" style="font-size:.76rem;color:var(--gray-500);margin-bottom:8px"></div>
         <div class="disease-db-list" id="diseaseDbList"></div>
       </div>
     </div>
   </div>
 
   <div id="viewChat" class="hidden">
-    <div class="card" style="margin-top:24px">
-      <div class="card-header">&#128172; 症状チャット / Diagnostic Chat</div>
+    <div class="card" style="margin-top:20px">
+      <div class="card-header">&#128172; 症状チャット</div>
       <div class="chat-container">
         <div class="chat-messages" id="chatMessages">
           <div class="chat-msg bot">
             こんにちは。気になる症状を日本語または英語で入力してください。<br/>
             例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/>
-            <em style="font-size:.78rem;color:var(--gray-500)">※ 本ツールは参考情報です。獣医師の診断に代わるものではありません。</em>
+            <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは参考情報です。獣医師の診断に代わるものではありません。</em>
           </div>
         </div>
         <div class="chat-input-row">
@@ -290,130 +301,120 @@ a:hover{text-decoration:underline}
   </div>
 
   <div id="viewDrugs" class="hidden">
-    <div class="card" style="margin-top:24px">
-      <div class="card-header">&#128138; 薬品辞書 / Drug Dictionary</div>
+    <div class="card" style="margin-top:20px">
+      <div class="card-header">&#128138; 薬品辞書</div>
       <div class="card-body">
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)"/>
           </div>
-          <select id="drugCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;min-width:160px">
-            <option value="">全カテゴリ / All Categories</option>
+          <select id="drugCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">
+            <option value="">全カテゴリ</option>
           </select>
-          <select id="drugSpeciesFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;min-width:140px">
-            <option value="">全動物種 / All Species</option>
+          <select id="drugSpeciesFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:130px;background:var(--white)">
+            <option value="">全動物種</option>
           </select>
         </div>
-        <div id="drugCount" style="font-size:.78rem;color:var(--gray-500);margin-bottom:8px"></div>
+        <div id="drugCount" style="font-size:.76rem;color:var(--gray-500);margin-bottom:8px"></div>
         <div id="drugList" class="disease-db-list" style="max-height:600px"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== References ===== -->
 <section class="references">
-  <h3>引用文献・参考資料 / References</h3>
+  <h3>引用文献・参考資料</h3>
   <ul>
     <li><span class="ref-num">[1]</span>Nelson, R.W. &amp; Couto, C.G. (2019). <em>Small Animal Internal Medicine</em>, 6th ed. Elsevier.</li>
     <li><span class="ref-num">[2]</span>Ettinger, S.J., Feldman, E.C. &amp; Cote, E. (2017). <em>Textbook of Veterinary Internal Medicine</em>, 8th ed. Elsevier.</li>
     <li><span class="ref-num">[3]</span>Reed, S.M., Bayly, W.M. &amp; Sellon, D.C. (2018). <em>Equine Internal Medicine</em>, 4th ed. Elsevier.</li>
-    <li><span class="ref-num">[4]</span>Quesenberry, K.E. &amp; Carpenter, J.W. (2020). <em>Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery</em>, 4th ed. Elsevier.</li>
+    <li><span class="ref-num">[4]</span>Quesenberry, K.E. &amp; Carpenter, J.W. (2020). <em>Ferrets, Rabbits, and Rodents</em>, 4th ed. Elsevier.</li>
     <li><span class="ref-num">[5]</span>Mader, D.R. (2019). <em>Reptile and Amphibian Medicine and Surgery</em>, 3rd ed. Elsevier.</li>
-    <li><span class="ref-num">[6]</span>Ritchie, B.W., Harrison, G.J. &amp; Harrison, L.R. (1994). <em>Avian Medicine: Principles and Application</em>. Wingers Publishing.</li>
-    <li><span class="ref-num">[7]</span>Merck Veterinary Manual (2023). Merck &amp; Co. <a href="https://www.merckvetmanual.com/" target="_blank">merckvetmanual.com</a></li>
+    <li><span class="ref-num">[6]</span>Ritchie, B.W. et al. (1994). <em>Avian Medicine</em>. Wingers Publishing.</li>
+    <li><span class="ref-num">[7]</span>Merck Veterinary Manual (2023). <a href="https://www.merckvetmanual.com/" target="_blank">merckvetmanual.com</a></li>
     <li><span class="ref-num">[8]</span>Little, S.E. (2016). <em>The Cat: Clinical Medicine and Management</em>. Elsevier.</li>
     <li><span class="ref-num">[9]</span>Harcourt-Brown, F. (2002). <em>Textbook of Rabbit Medicine</em>. Butterworth-Heinemann.</li>
-    <li><span class="ref-num">[10]</span>Johnson-Delaney, C.A. (2006). <em>Exotic Companion Medicine Handbook for Veterinarians</em>. Zoological Education Network.</li>
+    <li><span class="ref-num">[10]</span>Johnson-Delaney, C.A. (2006). <em>Exotic Companion Medicine Handbook</em>. ZEN.</li>
     <li><span class="ref-num">[11]</span>Smith, B.P. (2015). <em>Large Animal Internal Medicine</em>, 5th ed. Elsevier.</li>
     <li><span class="ref-num">[12]</span>Plumb, D.C. (2018). <em>Plumb's Veterinary Drug Handbook</em>, 9th ed. <a href="https://www.wiley.com/en-us/Plumb%27s+Veterinary+Drug+Handbook-p-9781119344452" target="_blank">Wiley-Blackwell</a>.</li>
-    <li><span class="ref-num">[13]</span>WSAVA Global Nutrition Guidelines (2020). <a href="https://wsava.org/global-guidelines/global-nutrition-guidelines/" target="_blank">World Small Animal Veterinary Association</a>.</li>
-    <li><span class="ref-num">[14]</span>HorseDVM (2024). Equine Health Resource. <a href="https://horsedvm.com/" target="_blank">horsedvm.com</a></li>
+    <li><span class="ref-num">[13]</span>WSAVA Global Nutrition Guidelines (2020). <a href="https://wsava.org/global-guidelines/global-nutrition-guidelines/" target="_blank">wsava.org</a></li>
+    <li><span class="ref-num">[14]</span>HorseDVM (2024). <a href="https://horsedvm.com/" target="_blank">horsedvm.com</a></li>
     <li><span class="ref-num">[15]</span>犬と猫の治療薬ガイド EduOne (2024). <a href="https://search.eduone.jp/" target="_blank">search.eduone.jp</a></li>
   </ul>
-  <h3 style="margin-top:24px">関連サービス・データベース / Related Services &amp; Databases</h3>
+  <h3 style="margin-top:20px">関連サービス・データベース</h3>
   <ul>
-    <li><span class="ref-num">&#9670;</span><strong>疾患データベース・鑑別診断ツール / Disease Databases &amp; DDx Tools</strong></li>
-    <li><span class="ref-num">[16]</span>Standards™ (旧 Plumb's Pro) — 200+の鑑別診断リスト、臨床症状・検査結果から検索可能 <a href="https://standards.vet/features/differential-diagnosis-lists/" target="_blank">standards.vet</a></li>
-    <li><span class="ref-num">[17]</span>Cornell CONSULTANT — コーネル大学獣医学部 診断支援システム <a href="http://consultant.vet.cornell.edu/" target="_blank">consultant.vet.cornell.edu</a></li>
-    <li><span class="ref-num">[18]</span>DDx in Small Animal Medicine — 小動物鑑別診断アプリ (iOS) <a href="https://apps.apple.com/us/app/ddx-in-small-animal-medicine/id1204472783" target="_blank">App Store</a></li>
-    <li><span class="ref-num">[19]</span>LafeberVet — エキゾチック動物の鑑別診断リスト（ウサギ、フェレット、ハリネズミ等） <a href="https://lafeber.com/vet/content_types/differential-diagnosis-list/" target="_blank">lafeber.com/vet</a></li>
-    <li><span class="ref-num">[20]</span>Clinician's Brief — 鑑別診断リスト作成ガイド <a href="https://www.cliniciansbrief.com/article/veterinary-differential-diagnosis-symptoms-disease" target="_blank">cliniciansbrief.com</a></li>
-    <li><span class="ref-num">&#9670;</span><strong>薬品データベース / Drug Databases</strong></li>
-    <li><span class="ref-num">[21]</span>VetGeni — AI搭載獣医薬品データベース（739薬品、種別投薬量対応） <a href="https://www.vetgeni.com/veterinary-drug-database" target="_blank">vetgeni.com</a></li>
-    <li><span class="ref-num">[22]</span>Drugs.com Veterinary — 5,000+薬品モノグラフ <a href="https://www.drugs.com/vet/" target="_blank">drugs.com/vet</a></li>
-    <li><span class="ref-num">[23]</span>Animal Drugs @ FDA (Green Book) — FDA承認動物用医薬品データベース <a href="https://animaldrugsatfda.fda.gov/adafda/views/" target="_blank">animaldrugsatfda.fda.gov</a></li>
-    <li><span class="ref-num">[24]</span>VIN Veterinary Partner — 動物用医薬品情報 <a href="https://veterinarypartner.vin.com/" target="_blank">veterinarypartner.vin.com</a></li>
-    <li><span class="ref-num">[25]</span>World Veterinary Association — Essential Veterinary Medicines List <a href="https://worldvet.org/evml/" target="_blank">worldvet.org</a></li>
+    <li><span class="ref-num">[16]</span>Standards&#8482; &#8212; 鑑別診断リスト <a href="https://standards.vet/features/differential-diagnosis-lists/" target="_blank">standards.vet</a></li>
+    <li><span class="ref-num">[17]</span>Cornell CONSULTANT <a href="http://consultant.vet.cornell.edu/" target="_blank">consultant.vet.cornell.edu</a></li>
+    <li><span class="ref-num">[18]</span>DDx in Small Animal Medicine <a href="https://apps.apple.com/us/app/ddx-in-small-animal-medicine/id1204472783" target="_blank">App Store</a></li>
+    <li><span class="ref-num">[19]</span>LafeberVet <a href="https://lafeber.com/vet/content_types/differential-diagnosis-list/" target="_blank">lafeber.com/vet</a></li>
+    <li><span class="ref-num">[20]</span>Clinician's Brief <a href="https://www.cliniciansbrief.com/article/veterinary-differential-diagnosis-symptoms-disease" target="_blank">cliniciansbrief.com</a></li>
+    <li><span class="ref-num">[21]</span>VetGeni <a href="https://www.vetgeni.com/veterinary-drug-database" target="_blank">vetgeni.com</a></li>
+    <li><span class="ref-num">[22]</span>Drugs.com Veterinary <a href="https://www.drugs.com/vet/" target="_blank">drugs.com/vet</a></li>
+    <li><span class="ref-num">[23]</span>Animal Drugs @ FDA <a href="https://animaldrugsatfda.fda.gov/adafda/views/" target="_blank">animaldrugsatfda.fda.gov</a></li>
+    <li><span class="ref-num">[24]</span>VIN Veterinary Partner <a href="https://veterinarypartner.vin.com/" target="_blank">veterinarypartner.vin.com</a></li>
+    <li><span class="ref-num">[25]</span>World Veterinary Association <a href="https://worldvet.org/evml/" target="_blank">worldvet.org</a></li>
   </ul>
 </section>
 
-<!-- ===== Sponsor ===== -->
-<section style="max-width:1200px;margin:0 auto;padding:24px 20px" id="sponsorSection">
-  <div style="background:linear-gradient(135deg,#f0f9ff,#e8f4fd);border:2px solid var(--primary);border-radius:var(--radius);padding:28px;overflow:hidden">
+<section class="sponsor-section" id="sponsorSection">
+  <div class="sponsor-card">
     <div style="text-align:center;margin-bottom:20px">
-      <p style="font-size:.72rem;color:#d97706;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;font-weight:700">★ Official Sponsor ★</p>
-      <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent);margin-bottom:6px">
-        <a href="https://www.caninevet.jp/" target="_blank" style="color:var(--accent);text-decoration:none">Equine &amp; Canine Vet Nutrition</a>
+      <div class="sponsor-label" style="margin-bottom:4px">Sponsor</div>
+      <h3 style="font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:4px">
+        <a href="https://www.caninevet.jp/" target="_blank" style="color:var(--navy)">Equine &amp; Canine Vet Nutrition</a>
       </h3>
-      <p style="font-size:.88rem;color:var(--gray-700);margin-bottom:4px">
-        獣医師が考案・国内製造のペット用サプリメント<br/>
-        競走馬理化学研究所の検査合格 — あらゆるステージの馬・犬に安心して給餌できます
-      </p>
-      <p style="font-size:.82rem;color:var(--primary);font-weight:600;margin-top:8px">
-        🐴 馬 &nbsp;🐕 犬 &nbsp;🐈 猫 — 複数の動物種に対応したサプリメント
-      </p>
+      <p style="font-size:.84rem;color:var(--gray-600)">獣医師が考案・国内製造 &mdash; 競走馬理化学研究所の検査合格</p>
+      <p style="font-size:.78rem;color:var(--navy);font-weight:600;margin-top:6px">対応動物種: 馬・犬・猫</p>
     </div>
-
-    <!-- Product Cards -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:20px">
-      <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,.08)">
-        <div style="font-size:.72rem;color:#d97706;font-weight:700;margin-bottom:4px">BEST SELLER</div>
-        <h4 style="font-size:.92rem;font-weight:700;color:var(--gray-900);margin-bottom:6px">NMN-ミトコンドリアアシスト</h4>
-        <p style="font-size:.78rem;color:var(--gray-600);line-height:1.5">NMN 5000mg + システイン 10500mg + α-リポ酸配合。サーチュイン（長寿遺伝子）を活性化し、ミトコンドリア機能と代謝をサポート。</p>
-        <p style="font-size:.72rem;color:var(--primary);margin-top:6px;font-weight:600">対応: 犬・馬</p>
+    <div class="sponsor-products">
+      <div class="sponsor-product">
+        <div class="sp-cat" style="color:var(--orange)">代謝サポート</div>
+        <h4>NMN-ミトコンドリアアシスト</h4>
+        <p>NMN 5000mg + システイン 10500mg + &alpha;-リポ酸配合。NAD+産生をサポート。</p>
+        <div class="sp-species">馬・犬</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,.08)">
-        <div style="font-size:.72rem;color:#059669;font-weight:700;margin-bottom:4px">アミノ酸製品</div>
-        <h4 style="font-size:.92rem;font-weight:700;color:var(--gray-900);margin-bottom:6px">Amino Complete (BCAA)</h4>
-        <p style="font-size:.78rem;color:var(--gray-600);line-height:1.5">エビデンスに基づくBCAA最大量配合。全必須アミノ酸+カルニチン+シトルリン+グルタミン+ビタミンC。筋肉回復・肝臓・腎臓をサポート。</p>
-        <p style="font-size:.72rem;color:var(--primary);margin-top:6px;font-weight:600">対応: 馬・犬</p>
+      <div class="sponsor-product">
+        <div class="sp-cat" style="color:var(--green)">アミノ酸</div>
+        <h4>Amino Complete (BCAA)</h4>
+        <p>BCAA + 全必須アミノ酸 + カルニチン + シトルリン + グルタミン + ビタミンC配合。</p>
+        <div class="sp-species">馬・犬</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,.08)">
-        <div style="font-size:.72rem;color:#7c3aed;font-weight:700;margin-bottom:4px">消化管サポート</div>
-        <h4 style="font-size:.92rem;font-weight:700;color:var(--gray-900);margin-bottom:6px">CP Powder / Prebiotics</h4>
-        <p style="font-size:.78rem;color:var(--gray-600);line-height:1.5">サイリウム+プレバイオティクス+プロバイオティクス配合。砂疝・便秘疝の緩和。腸内環境を整え消化管運動をサポート。</p>
-        <p style="font-size:.72rem;color:var(--primary);margin-top:6px;font-weight:600">対応: 馬・犬</p>
+      <div class="sponsor-product">
+        <div class="sp-cat" style="color:#7c3aed">消化管サポート</div>
+        <h4>CP Powder / Prebiotics</h4>
+        <p>サイリウム + プレバイオティクス + プロバイオティクス配合。</p>
+        <div class="sp-species">馬・犬</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,.08)">
-        <div style="font-size:.72rem;color:#dc2626;font-weight:700;margin-bottom:4px">関節・運動器</div>
-        <h4 style="font-size:.92rem;font-weight:700;color:var(--gray-900);margin-bottom:6px">For Joint / MSM+Amino</h4>
-        <p style="font-size:.78rem;color:var(--gray-600);line-height:1.5">高容量MSM配合の関節・筋肉・腱サポート。変形性関節症・形成不全・術後回復・シニア犬/競技馬に。</p>
-        <p style="font-size:.72rem;color:var(--primary);margin-top:6px;font-weight:600">対応: 馬・犬</p>
+      <div class="sponsor-product">
+        <div class="sp-cat" style="color:var(--red)">関節・運動器</div>
+        <h4>For Joint / MSM+Amino</h4>
+        <p>高容量MSM配合。関節・筋肉・腱のサポートに。</p>
+        <div class="sp-species">馬・犬</div>
       </div>
     </div>
-
-    <div style="text-align:center;border-top:1px solid #cbd5e1;padding-top:16px">
-      <p style="font-size:.82rem;color:var(--gray-600);margin-bottom:12px">その他: For Antioxidant (アスタキサンチン+メロンSOD+VitE) / Canine Vet Relax&amp;CBD / Canine Vet Protain / No Pain Quick Stop (止血パウダー)</p>
-      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
-        <a href="https://www.evet-nutrition.com/" target="_blank" style="display:inline-block;padding:10px 24px;background:var(--primary);color:var(--white);border-radius:20px;font-size:.88rem;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(37,99,235,.3)">🐴 馬用サプリメント</a>
-        <a href="https://www.caninevet.jp/" target="_blank" style="display:inline-block;padding:10px 24px;background:var(--accent);color:var(--white);border-radius:20px;font-size:.88rem;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(220,38,38,.3)">🐕 犬用サプリメント</a>
+    <div style="text-align:center;border-top:1px solid var(--gray-200);padding-top:16px">
+      <p style="font-size:.78rem;color:var(--gray-500);margin-bottom:12px">その他: For Antioxidant / Canine Vet Relax&amp;CBD / Canine Vet Protain / No Pain Quick Stop</p>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+        <a href="https://www.evet-nutrition.com/" target="_blank" style="display:inline-block;padding:10px 24px;background:var(--navy);color:var(--white);border-radius:var(--radius);font-size:.84rem;font-weight:600;text-decoration:none">馬用サプリメント</a>
+        <a href="https://www.caninevet.jp/" target="_blank" style="display:inline-block;padding:10px 24px;background:var(--green);color:var(--white);border-radius:var(--radius);font-size:.84rem;font-weight:600;text-decoration:none">犬用サプリメント</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <p>VetDict v5.0 — 獣医学疾患データベース / Veterinary Disease Dictionary</p>
-  <p style="margin-top:4px">※ 本サービスは参考情報の提供を目的としており、獣医師による診断・治療に代わるものではありません。</p>
-  <p style="margin-top:8px;font-size:.85rem;color:var(--white)">
-    開発者: <a href="https://www.minamisoma-vet.com/" target="_blank" style="color:var(--primary)">南相馬アニマルクリニック</a>
+  <p style="font-size:.92rem;color:rgba(255,255,255,.8)"><span style="font-weight:800"><span style="color:#fff">Vet</span><span style="color:var(--green)">Dict</span></span></p>
+  <p style="margin-top:6px">※ 本サービスは参考情報の提供を目的としており、獣医師による診断・治療に代わるものではありません。</p>
+  <p style="margin-top:8px">
+    開発: <a href="https://www.minamisoma-vet.com/" target="_blank">南相馬アニマルクリニック</a>
     獣医師 上手 健太郎 (Kentaro Kamide, DVM)
   </p>
   <p style="margin-top:4px">
-    <a href="https://www.minamisoma-vet.com/" target="_blank" style="color:var(--primary)">minamisoma-vet.com</a>
+    <a href="https://www.minamisoma-vet.com/" target="_blank">minamisoma-vet.com</a>
     &nbsp;|&nbsp;
-    <a href="https://www.instagram.com/k.kamide.canine_vet_nutrition/?hl=ja" target="_blank" style="color:var(--primary)">Instagram</a>
+    <a href="https://www.instagram.com/k.kamide.canine_vet_nutrition/?hl=ja" target="_blank">Instagram</a>
+    &nbsp;|&nbsp;
+    <a href="https://www.caninevet.jp/" target="_blank">caninevet.jp</a>
   </p>
 </footer>
 
@@ -441,424 +442,230 @@ const SPECIES = [
   {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:58},
 ];
 
-let currentSpecies = null;
-let selectedSymptoms = new Set();
-let symptomData = [];
-let allDiseases = [];
-let diseaseFilter = "";
+let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="";
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderSpeciesGrid();
-  setupNavigation();
-  setupChat();
-  updateStats();
-  document.getElementById("symptomSearch").addEventListener("input", () => renderSymptomList(symptomData));
-  document.getElementById("analyzeBtn").addEventListener("click", doAnalyze);
-  document.getElementById("diseaseSearch").addEventListener("input", renderDiseaseDb);
+document.addEventListener("DOMContentLoaded",()=>{
+  renderSpeciesGrid();setupNavigation();setupChat();updateStats();
+  document.getElementById("symptomSearch").addEventListener("input",()=>renderSymptomList(symptomData));
+  document.getElementById("analyzeBtn").addEventListener("click",doAnalyze);
+  document.getElementById("diseaseSearch").addEventListener("input",renderDiseaseDb);
 });
 
 function updateStats(){
-  const total = SPECIES.reduce((s,sp)=>s+sp.diseases,0);
-  document.getElementById("statDiseases").textContent = total.toLocaleString();
-  document.getElementById("statSpecies").textContent = SPECIES.length;
+  const total=SPECIES.reduce((s,sp)=>s+sp.diseases,0);
+  document.getElementById("statDiseases").textContent=total.toLocaleString();
+  document.getElementById("statSpecies").textContent=SPECIES.length;
 }
 
 function renderSpeciesGrid(){
-  const grid = document.getElementById("speciesGrid");
-  grid.innerHTML = SPECIES.map(sp => `
+  document.getElementById("speciesGrid").innerHTML=SPECIES.map(sp=>`
     <div class="species-card" data-species="${sp.id}" onclick="selectSpecies('${sp.id}')">
       <span class="icon">${sp.icon}</span>
       <div class="name">${sp.name}</div>
       <div class="count">${sp.nameEn} \u00B7 ${sp.diseases}\u75BE\u60A3</div>
-    </div>
-  `).join("");
+    </div>`).join("");
 }
 
 function selectSpecies(id){
-  currentSpecies = id;
-  selectedSymptoms.clear();
-  document.querySelectorAll(".species-card").forEach(c => {
-    c.classList.toggle("selected", c.dataset.species === id);
-  });
-  renderSelectedSymptoms();
-  loadSymptoms(id);
-  loadDiseaseDb(id);
-  document.getElementById("resultsArea").innerHTML =
-    '<div class="results-empty"><span class="big-icon">\u{1F50D}</span><p>症状を選択してください</p></div>';
+  currentSpecies=id;selectedSymptoms.clear();
+  document.querySelectorAll(".species-card").forEach(c=>c.classList.toggle("selected",c.dataset.species===id));
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);
+  document.getElementById("resultsArea").innerHTML='<div class="results-empty"><span class="big-icon">\u{1F50D}</span><p>症状を選択してください</p></div>';
 }
 
 function loadSymptoms(species){
-  fetch("/api/health-check/symptoms")
-    .then(r => r.json())
-    .then(data => {
-      if(data.symptoms){
-        symptomData = data.symptoms;
-        renderSymptomList(symptomData);
-        document.getElementById("statSymptoms").textContent = symptomData.length;
-      }
-    })
-    .catch(() => {
-      document.getElementById("symptomList").innerHTML =
-        '<div style="padding:20px;text-align:center;color:var(--gray-500)">症状データを読み込めませんでした</div>';
-    });
+  fetch("/api/health-check/symptoms").then(r=>r.json()).then(data=>{
+    if(data.symptoms){symptomData=data.symptoms;renderSymptomList(symptomData);document.getElementById("statSymptoms").textContent=symptomData.length;}
+  }).catch(()=>{document.getElementById("symptomList").innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">症状データを読み込めませんでした</div>';});
 }
 
 function renderSymptomList(symptoms){
-  const search = (document.getElementById("symptomSearch").value || "").toLowerCase();
-  const list = document.getElementById("symptomList");
-  const categories = {};
-  symptoms.forEach(s => {
-    const cat = s.category || "other";
-    if(!categories[cat]) categories[cat] = [];
-    categories[cat].push(s);
-  });
-  const catLabels = {
-    respiratory:"\u547C\u5438\u5668 Respiratory", digestive:"\u6D88\u5316\u5668 Digestive",
-    neurological:"\u795E\u7D4C Neurological", musculoskeletal:"\u904B\u52D5\u5668 Musculoskeletal",
-    dermatological:"\u76AE\u819A Dermatological", urinary:"\u6CCC\u5C3F\u5668 Urinary",
-    ophthalmological:"\u773C Ophthalmological", cardiovascular:"\u5FAA\u74B0\u5668 Cardiovascular",
-    behavioral:"\u884C\u52D5 Behavioral", general:"\u5168\u8EAB General", other:"\u305D\u306E\u4ED6 Other"
-  };
-  let html = "";
-  for(const [cat, items] of Object.entries(categories)){
-    const filtered = items.filter(s => {
-      if(!search) return true;
-      return (s.name_ja||"").toLowerCase().includes(search) ||
-             (s.name_en||"").toLowerCase().includes(search) ||
-             (s.id||"").toLowerCase().includes(search);
-    });
-    if(filtered.length === 0) continue;
-    html += `<div class="symptom-cat">${catLabels[cat] || cat}</div>`;
-    for(const s of filtered){
-      const sel = selectedSymptoms.has(s.id);
-      html += `<div class="symptom-item${sel ? " selected" : ""}" data-id="${s.id}" onclick="toggleSymptom('${s.id}')">
-        <span class="sym-icon">${sel ? "\u2713" : "+"}</span>
-        <span>${s.name_ja} <span style="color:var(--gray-500)">${s.name_en}</span></span>
-      </div>`;
-    }
+  const search=(document.getElementById("symptomSearch").value||"").toLowerCase();
+  const list=document.getElementById("symptomList");
+  const categories={};
+  symptoms.forEach(s=>{const cat=s.category||"other";if(!categories[cat])categories[cat]=[];categories[cat].push(s);});
+  const catLabels={respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",behavioral:"行動",general:"全身",other:"その他"};
+  let html="";
+  for(const[cat,items]of Object.entries(categories)){
+    const filtered=items.filter(s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);});
+    if(filtered.length===0)continue;
+    html+=`<div class="symptom-cat">${catLabels[cat]||cat}</div>`;
+    for(const s of filtered){const sel=selectedSymptoms.has(s.id);html+=`<div class="symptom-item${sel?" selected":""}" data-id="${s.id}" onclick="toggleSymptom('${s.id}')"><span class="sym-icon">${sel?"\u2713":"+"}</span><span>${s.name_ja} <span style="color:var(--gray-500)">${s.name_en}</span></span></div>`;}
   }
-  list.innerHTML = html || '<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する症状がありません</div>';
+  list.innerHTML=html||'<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する症状がありません</div>';
 }
 
-function toggleSymptom(id){
-  if(selectedSymptoms.has(id)) selectedSymptoms.delete(id);
-  else selectedSymptoms.add(id);
-  renderSelectedSymptoms();
-  renderSymptomList(symptomData);
-}
+function toggleSymptom(id){if(selectedSymptoms.has(id))selectedSymptoms.delete(id);else selectedSymptoms.add(id);renderSelectedSymptoms();renderSymptomList(symptomData);}
 
 function renderSelectedSymptoms(){
-  const area = document.getElementById("selectedSymptoms");
-  const btn = document.getElementById("analyzeBtn");
-  if(selectedSymptoms.size === 0){
-    area.innerHTML = '<span style="color:var(--gray-500);font-size:.8rem">症状が選択されていません</span>';
-    btn.disabled = true;
-    return;
-  }
-  btn.disabled = false;
-  const tags = [...selectedSymptoms].map(id => {
-    const sym = symptomData.find(s => s.id === id);
-    const label = sym ? sym.name_ja : id;
-    return `<span class="selected-tag">${label} <span class="remove" onclick="event.stopPropagation();toggleSymptom('${id}')">&times;</span></span>`;
-  });
-  area.innerHTML = tags.join("");
+  const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
+  if(selectedSymptoms.size===0){area.innerHTML='<span style="color:var(--gray-500);font-size:.78rem">症状が選択されていません</span>';btn.disabled=true;return;}
+  btn.disabled=false;
+  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?sym.name_ja:id;return`<span class="selected-tag">${label} <span class="remove" onclick="event.stopPropagation();toggleSymptom('${id}')">&times;</span></span>`;}).join("");
 }
 
 function doAnalyze(){
-  if(!currentSpecies || selectedSymptoms.size === 0) return;
-  const btn = document.getElementById("analyzeBtn");
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> \u89E3\u6790\u4E2D...';
-  fetch("/api/analyze-symptoms", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({species: currentSpecies, symptoms: [...selectedSymptoms]}),
-  })
-  .then(r => r.json())
-  .then(data => renderResults(data))
-  .catch(err => {
-    document.getElementById("resultsArea").innerHTML =
-      `<div class="severity-bar high">\u30A8\u30E9\u30FC: ${err.message}</div>`;
-  })
-  .finally(() => {
-    btn.disabled = false;
-    btn.textContent = "\u9451\u5225\u8A3A\u65AD\u3092\u5B9F\u884C / Analyze";
-  });
+  if(!currentSpecies||selectedSymptoms.size===0)return;
+  const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML='<span class="spinner"></span> 解析中...';
+  fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({species:currentSpecies,symptoms:[...selectedSymptoms]})})
+  .then(r=>r.json()).then(data=>renderResults(data))
+  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">エラー: ${err.message}</div>`;})
+  .finally(()=>{btn.disabled=false;btn.textContent="鑑別診断を実行";});
 }
 
 function renderResults(data){
-  const area = document.getElementById("resultsArea");
-  const diseases = data.suspected_diseases || data.possible_conditions || [];
-  const tests = data.recommended_tests || [];
-  const severity = data.severity || "low";
-  const adviceJa = data.general_advice_ja || "";
-
-  if(diseases.length === 0){
-    area.innerHTML = '<div class="results-empty"><span class="big-icon">\u2705</span><p>一致する疾患は見つかりませんでした</p></div>';
-    return;
-  }
-
-  const sevLabels = {low:"\u8EFD\u5EA6 Low",moderate:"\u4E2D\u7B49\u5EA6 Moderate",high:"\u91CD\u5EA6 High",emergency:"\u7DCA\u6025 Emergency"};
-  let html = `<div class="severity-bar ${severity}">\u7DCF\u5408\u8A55\u4FA1: ${sevLabels[severity] || severity}</div>`;
-  if(adviceJa) html += `<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceJa}</div>`;
-
-  diseases.forEach(d => {
-    const name = d.name || d.name_ja || "";
-    const nameJa = d.name_ja || "";
-    const pct = d.match_percent || d.confidence || 0;
-    const likelihood = d.likelihood || (pct >= 50 ? "high" : pct >= 30 ? "moderate" : "low");
-    const desc = d.description_ja || d.description || "";
-    const matchSymptoms = d.matching_symptoms || [];
-    const recTests = d.recommended_tests || [];
-    html += `
-    <div class="disease-result">
-      <div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div><span class="disease-name">${name}</span>${nameJa && nameJa !== name ? `<span class="disease-name-ja">${nameJa}</span>` : ""}</div>
-        <span class="match-badge ${likelihood}">${pct}% match</span>
-      </div>
-      <div class="disease-detail">
-        <dl>
-          <dt>\u8AAC\u660E</dt><dd>${desc}</dd>
-          ${d.pathophysiology_ja || d.pathophysiology ? `<dt>\u75C5\u614B\u751F\u7406</dt><dd>${d.pathophysiology_ja || d.pathophysiology}</dd>` : ""}
-          ${d.causes_ja || d.causes ? `<dt>\u539F\u56E0</dt><dd>${d.causes_ja || d.causes}</dd>` : ""}
-          ${d.prevention_ja || d.prevention ? `<dt>\u4E88\u9632</dt><dd>${d.prevention_ja || d.prevention}</dd>` : ""}
-          ${d.treatment_ja || d.treatment ? `<dt>\u6CBB\u7642</dt><dd>${d.treatment_ja || d.treatment}</dd>` : ""}
-          ${d.prognosis_ja || d.prognosis ? `<dt>\u4E88\u5F8C</dt><dd>${d.prognosis_ja || d.prognosis}</dd>` : ""}
-          ${matchSymptoms.length ? `<dt>\u4E00\u81F4\u3057\u305F\u75C7\u72B6</dt><dd>${matchSymptoms.join(", ")}</dd>` : ""}
-          ${recTests.length ? `<dt>\u63A8\u5968\u691C\u67FB</dt><dd>${recTests.join(", ")}</dd>` : ""}
-        </dl>
-      </div>
-    </div>`;
+  const area=document.getElementById("resultsArea");
+  const diseases=data.suspected_diseases||data.possible_conditions||[];
+  const tests=data.recommended_tests||[];
+  const severity=data.severity||"low";
+  const adviceJa=data.general_advice_ja||"";
+  if(diseases.length===0){area.innerHTML='<div class="results-empty"><span class="big-icon">\u2705</span><p>一致する疾患は見つかりませんでした</p></div>';return;}
+  const sevLabels={low:"軽度",moderate:"中等度",high:"重度",emergency:"緊急"};
+  let html=`<div class="severity-bar ${severity}">総合評価: ${sevLabels[severity]||severity}</div>`;
+  if(adviceJa)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceJa}</div>`;
+  diseases.forEach(d=>{
+    const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
+    const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
+    const desc=d.description_ja||d.description||"";
+    const matchSymptoms=d.matching_symptoms||[],recTests=d.recommended_tests||[];
+    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}</div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>説明</dt><dd>${desc}</dd>${d.pathophysiology_ja||d.pathophysiology?`<dt>病態生理</dt><dd>${d.pathophysiology_ja||d.pathophysiology}</dd>`:""} ${d.causes_ja||d.causes?`<dt>原因</dt><dd>${d.causes_ja||d.causes}</dd>`:""} ${d.prevention_ja||d.prevention?`<dt>予防</dt><dd>${d.prevention_ja||d.prevention}</dd>`:""} ${d.treatment_ja||d.treatment?`<dt>治療</dt><dd>${d.treatment_ja||d.treatment}</dd>`:""} ${d.prognosis_ja||d.prognosis?`<dt>予後</dt><dd>${d.prognosis_ja||d.prognosis}</dd>`:""} ${matchSymptoms.length?`<dt>一致した症状</dt><dd>${matchSymptoms.join(", ")}</dd>`:""} ${recTests.length?`<dt>推奨検査</dt><dd>${recTests.join(", ")}</dd>`:""}</dl></div></div>`;
   });
-
-  if(tests.length){
-    html += `<div style="margin-top:16px"><strong style="font-size:.88rem">\u63A8\u5968\u691C\u67FB\u4E00\u89A7:</strong><ul class="test-list">`;
-    tests.forEach(t => { html += `<li>\u{1F52C} ${t}</li>`; });
-    html += `</ul></div>`;
-  }
-  area.innerHTML = html;
+  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">推奨検査一覧:</strong><ul class="test-list">${tests.map(t=>`<li>\u{1F52C} ${t}</li>`).join("")}</ul></div>`;}
+  area.innerHTML=html;
 }
 
 function loadDiseaseDb(species){
-  const list = document.getElementById("diseaseDbList");
-  list.innerHTML = '<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
-  fetch("/api/health-check/diseases")
-    .then(r => r.json())
-    .then(data => {
-      if(data.diseases){
-        allDiseases = data.diseases;
-        renderAzNav();
-        renderDiseaseDb();
-      }
-    })
-    .catch(() => {
-      list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--gray-500)">読み込みに失敗しました</div>';
-    });
+  const list=document.getElementById("diseaseDbList");
+  list.innerHTML='<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
+  fetch("/api/health-check/diseases").then(r=>r.json()).then(data=>{if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
+  .catch(()=>{list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">読み込みに失敗しました</div>';});
 }
 
 function renderAzNav(){
-  const nav = document.getElementById("azNav");
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  nav.innerHTML = `<button class="active" onclick="filterDiseaseDb('')">ALL</button>` +
-    letters.map(l => `<button onclick="filterDiseaseDb('${l}')">${l}</button>`).join("");
+  document.getElementById("azNav").innerHTML=`<button class="active" onclick="filterDiseaseDb('')">ALL</button>`+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l=>`<button onclick="filterDiseaseDb('${l}')">${l}</button>`).join("");
 }
 
 function filterDiseaseDb(letter){
-  diseaseFilter = letter;
-  document.querySelectorAll(".az-nav button").forEach(b => {
-    b.classList.toggle("active", b.textContent === letter || (letter === "" && b.textContent === "ALL"));
-  });
+  diseaseFilter=letter;
+  document.querySelectorAll(".az-nav button").forEach(b=>b.classList.toggle("active",b.textContent===letter||(letter===""&&b.textContent==="ALL")));
   renderDiseaseDb();
 }
 
 function renderDiseaseDb(){
-  const list = document.getElementById("diseaseDbList");
-  const search = (document.getElementById("diseaseSearch").value || "").toLowerCase();
-  let filtered = allDiseases;
-  if(diseaseFilter) filtered = filtered.filter(d => (d.name || "").toUpperCase().startsWith(diseaseFilter));
-  if(search) filtered = filtered.filter(d =>
-    (d.name || "").toLowerCase().includes(search) ||
-    (d.name_ja || "").toLowerCase().includes(search) ||
-    (d.description || "").toLowerCase().includes(search) ||
-    (d.description_ja || "").toLowerCase().includes(search)
-  );
-  document.getElementById("diseaseDbCount").textContent = `${filtered.length} / ${allDiseases.length} \u4EF6\u8868\u793A`;
-  if(filtered.length === 0){
-    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する疾患がありません</div>';
-    return;
-  }
-  list.innerHTML = filtered.slice(0, 100).map(d => `
+  const list=document.getElementById("diseaseDbList");
+  const search=(document.getElementById("diseaseSearch").value||"").toLowerCase();
+  let filtered=allDiseases;
+  if(diseaseFilter)filtered=filtered.filter(d=>(d.name||"").toUpperCase().startsWith(diseaseFilter));
+  if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
+  document.getElementById("diseaseDbCount").textContent=`${filtered.length} / ${allDiseases.length} 件表示`;
+  if(filtered.length===0){list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する疾患がありません</div>';return;}
+  list.innerHTML=filtered.slice(0,100).map(d=>`
     <div class="disease-db-item" onclick="this.querySelector('.disease-detail').classList.toggle('open')">
-      <div class="d-name">${d.name || ""} <span class="d-name-ja">${d.name_ja || ""}</span></div>
-      <div class="d-desc">${(d.description_ja || d.description || "").substring(0, 80)}${(d.description_ja || d.description || "").length > 80 ? "..." : ""}</div>
-      <div class="disease-detail">
-        <dl>
-          <dt>\u8AAC\u660E</dt><dd>${d.description_ja || d.description || ""}</dd>
-          ${d.pathophysiology_ja || d.pathophysiology ? `<dt>\u75C5\u614B\u751F\u7406</dt><dd>${d.pathophysiology_ja || d.pathophysiology}</dd>` : ""}
-          ${d.causes_ja || d.causes ? `<dt>\u539F\u56E0</dt><dd>${d.causes_ja || d.causes}</dd>` : ""}
-          ${d.prevention_ja || d.prevention ? `<dt>\u4E88\u9632</dt><dd>${d.prevention_ja || d.prevention}</dd>` : ""}
-          ${d.treatment_ja || d.treatment ? `<dt>\u6CBB\u7642</dt><dd>${d.treatment_ja || d.treatment}</dd>` : ""}
-          ${d.prognosis_ja || d.prognosis ? `<dt>\u4E88\u5F8C</dt><dd>${d.prognosis_ja || d.prognosis}</dd>` : ""}
-          ${d.symptoms ? `<dt>\u75C7\u72B6</dt><dd>${Array.isArray(d.symptoms) ? d.symptoms.join(", ") : (typeof d.symptoms === "object" ? Object.keys(d.symptoms).join(", ") : d.symptoms)}</dd>` : ""}
-          ${d.recommended_tests ? `<dt>\u63A8\u5968\u691C\u67FB</dt><dd>${d.recommended_tests.join(", ")}</dd>` : ""}
-        </dl>
-      </div>
-    </div>
-  `).join("");
+      <div class="d-name">${d.name||""} <span class="d-name-ja">${d.name_ja||""}</span></div>
+      <div class="d-desc">${(d.description_ja||d.description||"").substring(0,80)}${(d.description_ja||d.description||"").length>80?"...":""}</div>
+      <div class="disease-detail"><dl>
+        <dt>説明</dt><dd>${d.description_ja||d.description||""}</dd>
+        ${d.pathophysiology_ja||d.pathophysiology?`<dt>病態生理</dt><dd>${d.pathophysiology_ja||d.pathophysiology}</dd>`:""}
+        ${d.causes_ja||d.causes?`<dt>原因</dt><dd>${d.causes_ja||d.causes}</dd>`:""}
+        ${d.prevention_ja||d.prevention?`<dt>予防</dt><dd>${d.prevention_ja||d.prevention}</dd>`:""}
+        ${d.treatment_ja||d.treatment?`<dt>治療</dt><dd>${d.treatment_ja||d.treatment}</dd>`:""}
+        ${d.prognosis_ja||d.prognosis?`<dt>予後</dt><dd>${d.prognosis_ja||d.prognosis}</dd>`:""}
+        ${d.symptoms?`<dt>症状</dt><dd>${Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):d.symptoms)}</dd>`:""}
+        ${d.recommended_tests?`<dt>推奨検査</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
+      </dl></div>
+    </div>`).join("");
 }
 
 function setupNavigation(){
-  document.querySelectorAll(".header-nav a").forEach(a => {
-    a.addEventListener("click", e => {
-      e.preventDefault();
-      const view = a.dataset.view;
-      document.querySelectorAll(".header-nav a").forEach(x => x.classList.remove("active"));
-      a.classList.add("active");
-      document.getElementById("viewChecker").classList.toggle("hidden", view !== "checker");
-      document.getElementById("viewDatabase").classList.toggle("hidden", view !== "database");
-      document.getElementById("viewChat").classList.toggle("hidden", view !== "chat");
-      document.getElementById("viewDrugs").classList.toggle("hidden", view !== "drugs");
-      if(view === "drugs" && !drugsLoaded) loadDrugDictionary();
+  document.querySelectorAll(".header-nav a").forEach(a=>{
+    a.addEventListener("click",e=>{e.preventDefault();const view=a.dataset.view;
+      document.querySelectorAll(".header-nav a").forEach(x=>x.classList.remove("active"));a.classList.add("active");
+      document.getElementById("viewChecker").classList.toggle("hidden",view!=="checker");
+      document.getElementById("viewDatabase").classList.toggle("hidden",view!=="database");
+      document.getElementById("viewChat").classList.toggle("hidden",view!=="chat");
+      document.getElementById("viewDrugs").classList.toggle("hidden",view!=="drugs");
+      if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
     });
   });
 }
 
 function setupChat(){
-  const input = document.getElementById("chatInput");
-  document.getElementById("chatSend").addEventListener("click", () => sendChatMessage());
-  input.addEventListener("keydown", e => { if(e.key === "Enter") sendChatMessage(); });
+  document.getElementById("chatSend").addEventListener("click",()=>sendChatMessage());
+  document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChatMessage();});
 }
 
 function sendChatMessage(){
-  const input = document.getElementById("chatInput");
-  const text = input.value.trim();
-  if(!text) return;
-  input.value = "";
-  addChatMsg(text, "user");
-  const species = currentSpecies || "dog";
-  fetch("/api/diagnostic-chat/message", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({message: text, species: species}),
-  })
-  .then(r => r.json())
-  .then(data => {
-    const reply = data.response || data.message || data.error || "\u5FDC\u7B54\u3092\u53D6\u5F97\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F";
-    addChatMsg(reply, "bot");
-  })
-  .catch(() => addChatMsg("\u901A\u4FE1\u30A8\u30E9\u30FC\u304C\u767A\u751F\u3057\u307E\u3057\u305F\u3002", "bot"));
+  const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
+  addChatMsg(text,"user");const species=currentSpecies||"dog";
+  fetch("/api/diagnostic-chat/message",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
+  .then(r=>r.json()).then(data=>{addChatMsg(data.response||data.message||data.error||"応答を取得できませんでした","bot");})
+  .catch(()=>addChatMsg("通信エラーが発生しました。","bot"));
 }
 
-function addChatMsg(text, type){
-  const msgs = document.getElementById("chatMessages");
-  const div = document.createElement("div");
-  div.className = `chat-msg ${type}`;
-  div.innerHTML = text.replace(/\n/g, "<br/>");
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+function addChatMsg(text,type){
+  const msgs=document.getElementById("chatMessages"),div=document.createElement("div");
+  div.className=`chat-msg ${type}`;div.innerHTML=text.replace(/\n/g,"<br/>");
+  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// Drug Dictionary
-// ═══════════════════════════════════════════════════════════════
-let drugsLoaded = false;
-let allDrugs = [];
-let drugCategories = {};
+let drugsLoaded=false,allDrugs=[],drugCategories={};
 
 function loadDrugDictionary(){
-  const list = document.getElementById("drugList");
-  list.innerHTML = '<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
-  Promise.all([
-    fetch("/api/drugs").then(r=>r.json()),
-    fetch("/api/drug-categories").then(r=>r.json())
-  ]).then(([drugsData, catData]) => {
-    allDrugs = drugsData.drugs || [];
-    drugCategories = drugsData.categories || {};
-    document.getElementById("statDrugs").textContent = allDrugs.length;
-    // Populate category filter
-    const catSelect = document.getElementById("drugCategoryFilter");
-    catSelect.innerHTML = '<option value="">\u5168\u30AB\u30C6\u30B4\u30EA / All</option>';
-    (catData.categories||[]).forEach(c => {
-      if(c.count > 0) catSelect.innerHTML += `<option value="${c.id}">${c.name_ja} (${c.count})</option>`;
-    });
-    // Populate species filter
-    const spSelect = document.getElementById("drugSpeciesFilter");
-    spSelect.innerHTML = '<option value="">\u5168\u52D5\u7269\u7A2E / All</option>';
-    SPECIES.forEach(sp => {
-      spSelect.innerHTML += `<option value="${sp.id}">${sp.name} ${sp.nameEn}</option>`;
-    });
-    drugsLoaded = true;
-    renderDrugList();
-  }).catch(() => {
-    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--gray-500)">\u8AAD\u307F\u8FBC\u307F\u306B\u5931\u6557\u3057\u307E\u3057\u305F</div>';
-  });
-  document.getElementById("drugSearch").addEventListener("input", renderDrugList);
-  document.getElementById("drugCategoryFilter").addEventListener("change", renderDrugList);
-  document.getElementById("drugSpeciesFilter").addEventListener("change", renderDrugList);
+  const list=document.getElementById("drugList");
+  list.innerHTML='<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
+  Promise.all([fetch("/api/drugs").then(r=>r.json()),fetch("/api/drug-categories").then(r=>r.json())])
+  .then(([drugsData,catData])=>{
+    allDrugs=drugsData.drugs||[];drugCategories=drugsData.categories||{};
+    document.getElementById("statDrugs").textContent=allDrugs.length;
+    const catSelect=document.getElementById("drugCategoryFilter");
+    catSelect.innerHTML='<option value="">全カテゴリ</option>';
+    (catData.categories||[]).forEach(c=>{if(c.count>0)catSelect.innerHTML+=`<option value="${c.id}">${c.name_ja} (${c.count})</option>`;});
+    const spSelect=document.getElementById("drugSpeciesFilter");
+    spSelect.innerHTML='<option value="">全動物種</option>';
+    SPECIES.forEach(sp=>{spSelect.innerHTML+=`<option value="${sp.id}">${sp.name} ${sp.nameEn}</option>`;});
+    drugsLoaded=true;renderDrugList();
+  }).catch(()=>{list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">読み込みに失敗しました</div>';});
+  document.getElementById("drugSearch").addEventListener("input",renderDrugList);
+  document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
+  document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
 }
 
 function renderDrugList(){
-  const list = document.getElementById("drugList");
-  const search = (document.getElementById("drugSearch").value||"").toLowerCase();
-  const cat = document.getElementById("drugCategoryFilter").value;
-  const species = document.getElementById("drugSpeciesFilter").value;
-  let filtered = allDrugs;
-  if(cat) filtered = filtered.filter(d => d.category === cat);
-  if(species) filtered = filtered.filter(d => d.species_info && d.species_info[species]);
-  if(search) filtered = filtered.filter(d =>
-    (d.name||"").toLowerCase().includes(search) ||
-    (d.name_ja||"").toLowerCase().includes(search) ||
-    (d.category_ja||"").toLowerCase().includes(search)
-  );
-  document.getElementById("drugCount").textContent = `${filtered.length} / ${allDrugs.length} \u4EF6\u8868\u793A`;
-  if(filtered.length === 0){
-    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--gray-500)">\u8A72\u5F53\u3059\u308B\u85AC\u54C1\u304C\u3042\u308A\u307E\u305B\u3093</div>';
-    return;
-  }
-  list.innerHTML = filtered.map(d => {
-    const speciesFilter = document.getElementById("drugSpeciesFilter").value;
-    let dosageHtml = "";
-    if(speciesFilter && d.species_info && d.species_info[speciesFilter]){
-      const si = d.species_info[speciesFilter];
-      const safeLabel = si.safe ? '<span style="color:var(--green);font-weight:700">\u2713 \u5B89\u5168</span>' : '<span style="color:var(--red);font-weight:700">\u2717 \u7981\u5FCC</span>';
-      dosageHtml = `<div style="margin-top:4px;font-size:.82rem;padding:6px 10px;background:${si.safe?'#f0fdf4':'#fef2f2'};border-radius:4px">
-        ${safeLabel} | \u6295\u4E0E\u91CF: ${si.dosage_ja||si.dosage||"N/A"}<br/>
-        <span style="color:var(--gray-500)">${si.notes_ja||si.notes||""}</span>
-      </div>`;
+  const list=document.getElementById("drugList");
+  const search=(document.getElementById("drugSearch").value||"").toLowerCase();
+  const cat=document.getElementById("drugCategoryFilter").value;
+  const species=document.getElementById("drugSpeciesFilter").value;
+  let filtered=allDrugs;
+  if(cat)filtered=filtered.filter(d=>d.category===cat);
+  if(species)filtered=filtered.filter(d=>d.species_info&&d.species_info[species]);
+  if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.category_ja||"").toLowerCase().includes(search));
+  document.getElementById("drugCount").textContent=`${filtered.length} / ${allDrugs.length} 件表示`;
+  if(filtered.length===0){list.innerHTML='<div style="padding:20px;text-align:center;color:var(--gray-500)">該当する薬品がありません</div>';return;}
+  filtered=[...filtered].sort((a,b)=>(b.sponsor?1:0)-(a.sponsor?1:0));
+  list.innerHTML=filtered.map(d=>{
+    const speciesFilter=document.getElementById("drugSpeciesFilter").value;
+    let dosageHtml="";
+    if(speciesFilter&&d.species_info&&d.species_info[speciesFilter]){
+      const si=d.species_info[speciesFilter];
+      const safeLabel=si.safe?'<span style="color:var(--green);font-weight:700">\u2713 安全</span>':'<span style="color:var(--red);font-weight:700">\u2717 禁忌</span>';
+      dosageHtml=`<div style="margin-top:4px;font-size:.8rem;padding:6px 10px;background:${si.safe?'#f0fdf4':'#fef2f2'};border-radius:6px">${safeLabel} | 投与量: ${si.dosage_ja||si.dosage||"N/A"}<br/><span style="color:var(--gray-500)">${si.notes_ja||si.notes||""}</span></div>`;
     }
-    const catLabel = drugCategories[d.category] ? drugCategories[d.category].ja : d.category_ja || d.category;
-    const sponsorBadge = d.sponsor ? '<span style="font-size:.68rem;padding:2px 8px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border-radius:10px;margin-left:6px;font-weight:700">★ Sponsor</span>' : '';
-    const sponsorLink = d.sponsor ? `<div style="margin-top:8px;padding:8px 12px;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1px solid #f59e0b;border-radius:6px;font-size:.82rem">
-      <strong style="color:#d97706">★ ${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/>
-      <span style="color:var(--gray-600)">獣医師考案・国内製造・競走馬理化学研究所検査合格</span><br/>
-      <a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" style="color:#2563eb;font-weight:600;text-decoration:underline">製品詳細を見る →</a>
-    </div>` : '';
-    return `
-    <div class="disease-db-item" onclick="this.querySelector('.disease-detail')&&this.querySelector('.disease-detail').classList.toggle('open')" style="${d.sponsor?'border-left:3px solid #f59e0b':''}">
+    const catLabel=drugCategories[d.category]?drugCategories[d.category].ja:d.category_ja||d.category;
+    const sponsorBadge=d.sponsor?'<span style="font-size:.65rem;padding:2px 8px;background:var(--green);color:#fff;border-radius:10px;margin-left:6px;font-weight:600">Sponsor</span>':"";
+    const sponsorLink=d.sponsor?`<div style="margin-top:8px;padding:8px 12px;background:var(--green-light);border:1px solid rgba(34,168,79,.3);border-radius:6px;font-size:.8rem"><strong style="color:var(--green-dark)">${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/><span style="color:var(--gray-600)">獣医師考案・国内製造・競走馬理化学研究所検査合格</span><br/><a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" style="color:var(--navy);font-weight:600">製品詳細 &rarr;</a></div>`:"";
+    return`<div class="disease-db-item" onclick="this.querySelector('.disease-detail')&&this.querySelector('.disease-detail').classList.toggle('open')" style="${d.sponsor?'border-left:3px solid var(--green)':''}">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
         <div class="d-name">${d.name} <span class="d-name-ja">${d.name_ja}</span>${sponsorBadge}</div>
-        <span style="font-size:.72rem;padding:2px 8px;background:var(--primary-light);color:var(--primary-dark);border-radius:10px">${catLabel}</span>
-      </div>
-      ${dosageHtml}
-      <div class="disease-detail">
-        ${sponsorLink}
-        <dl>
-          <dt>\u7981\u5FCC\u4E8B\u9805</dt><dd>${d.contraindications_ja||""}</dd>
-        </dl>
-        ${d.routes_ja ? `<dl><dt>投与経路</dt><dd>${(d.routes_ja||[]).join(", ")} (${(d.routes||[]).join(", ")})</dd></dl>` : ''}
-        ${d.formulations_ja ? `<dl><dt>製剤</dt><dd>${(d.formulations_ja||[]).join(", ")}</dd></dl>` : ''}
-        ${d.drug_interactions && d.drug_interactions.length ? `<dl><dt>薬物相互作用</dt><dd>${d.drug_interactions.map(di=>`<span style="display:inline-block;margin:2px 4px 2px 0;padding:2px 6px;background:#fef2f2;border-radius:3px;font-size:.78rem">${di.drug}: ${di.effect_ja||di.effect}</span>`).join("")}</dd></dl>` : ''}
-        <div style="margin-top:8px">
-          <strong style="font-size:.82rem">\u52D5\u7269\u7A2E\u5225\u60C5\u5831:</strong>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:6px;margin-top:4px">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{
-              const spName = SPECIES.find(s=>s.id===sp);
-              const label = spName ? spName.name : sp;
-              return `<div style="font-size:.78rem;padding:4px 8px;background:${info.safe?'#f0fdf4':'#fef2f2'};border-radius:4px;border:1px solid ${info.safe?'#bbf7d0':'#fecaca'}">
-                <strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${info.dosage_ja||info.dosage||""}
-                ${info.notes_ja?'<br/><span style="color:var(--gray-500)">'+info.notes_ja+'</span>':''}
-              </div>`;
-            }).join("")}
+        <span style="font-size:.7rem;padding:2px 8px;background:var(--gray-100);color:var(--navy);border-radius:10px;font-weight:600">${catLabel}</span>
+      </div>${dosageHtml}
+      <div class="disease-detail">${sponsorLink}
+        <dl><dt>禁忌事項</dt><dd>${d.contraindications_ja||""}</dd></dl>
+        ${d.routes_ja?`<dl><dt>投与経路</dt><dd>${(d.routes_ja||[]).join(", ")} (${(d.routes||[]).join(", ")})</dd></dl>`:""}
+        ${d.formulations_ja?`<dl><dt>製剤</dt><dd>${(d.formulations_ja||[]).join(", ")}</dd></dl>`:""}
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>薬物相互作用</dt><dd>${d.drug_interactions.map(di=>`<span style="display:inline-block;margin:2px 4px 2px 0;padding:2px 6px;background:#fef2f2;border-radius:4px;font-size:.76rem">${di.drug}: ${di.effect_ja||di.effect}</span>`).join("")}</dd></dl>`:""}
+        <div style="margin-top:8px"><strong style="font-size:.8rem">動物種別情報:</strong>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;margin-top:4px">
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?spName.name:sp;return`<div style="font-size:.76rem;padding:4px 8px;background:${info.safe?'#f0fdf4':'#fef2f2'};border-radius:4px;border:1px solid ${info.safe?'#bbf7d0':'#fecaca'}"><strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${info.dosage_ja||info.dosage||""}${info.notes_ja?'<br/><span style="color:var(--gray-500)">'+info.notes_ja+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
       </div>
