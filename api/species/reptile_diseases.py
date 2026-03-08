@@ -868,7 +868,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Arenavirus Infection",
         "name_ja": "アレナウイルス感染症",
-        "symptoms": {"anorexia", "neurological_signs", "regurgitation", "star_gazing", "weight_loss"},
+        "symptoms": {"anorexia", "neurological_signs", "regurgitation", "stargazing", "weight_loss"},
         "description": "Arenavirus causing inclusion body disease-like syndrome in boid snakes.",
         "description_ja": "ボア科ヘビに封入体病様症候群を引き起こすアレナウイルス。",
         "urgency": "high",
@@ -1662,7 +1662,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "skin_ulceration": {"ja": "皮膚潰瘍化", "en": "Skin ulceration"},
     "slow_growth": {"ja": "Slow Growth", "en": "Slow Growth"},
     "soft_mass": {"ja": "Soft Mass", "en": "Soft Mass"},
-    "star_gazing": {"ja": "Star Gazing", "en": "Star Gazing"},
+
     "swelling_behind_jaw": {"ja": "Swelling Behind Jaw", "en": "Swelling Behind Jaw"},
     "swelling_near_ear": {"ja": "Swelling Near Ear", "en": "Swelling Near Ear"},
     "tail_discoloration": {"ja": "Tail Discoloration", "en": "Tail Discoloration"},

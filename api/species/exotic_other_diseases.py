@@ -243,7 +243,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "skin_hemorrhage": {"ja": "皮膚出血", "en": "Skin hemorrhage"},
     "skin_rash": {"ja": "Skin Rash", "en": "Skin Rash"},
     "splenomegaly": {"ja": "脾腫", "en": "Splenomegaly"},
-    "star_gazing": {"ja": "Star Gazing", "en": "Star Gazing"},
+    "stargazing": {"ja": "Star Gazing", "en": "Star Gazing"},
     "stillbirths": {"ja": "Stillbirths", "en": "Stillbirths"},
     "straining": {"ja": "いきみ", "en": "Straining"},
     "straining_to_urinate": {"ja": "排尿困難", "en": "Straining to urinate"},
@@ -1388,7 +1388,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Polioencephalomalacia (Goat)",
         "name_ja": "ヤギ多発性脳軟化症",
-        "symptoms": {"ataxia", "blindness", "opisthotonus", "seizures", "star_gazing"},
+        "symptoms": {"ataxia", "blindness", "opisthotonus", "seizures", "stargazing"},
         "description": "Thiamine deficiency or sulfur toxicity causing cerebrocortical necrosis.",
         "description_ja": "チアミン欠乏や硫黄中毒による大脳皮質壊死。",
         "urgency": "emergency",

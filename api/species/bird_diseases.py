@@ -764,7 +764,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Star-Gazing (Opisthotonus)",
         "name_ja": "スターゲイジング（後弓反張）",
-        "symptoms": {"star_gazing", "torticollis", "neurological_signs", "ataxia", "tremors", "inability_to_perch"},
+        "symptoms": {"stargazing", "torticollis", "neurological_signs", "ataxia", "tremors", "inability_to_perch"},
         "description": "Dorsal neck extension posture indicating CNS disease from infection, toxins, or nutritional deficiency.",
         "description_ja": "感染、毒素、栄養欠乏による中枢神経疾患を示す背側頸部伸展姿勢。",
         "urgency": "high",
@@ -2935,7 +2935,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "sour_crop_odor": {"ja": "嗉嚢の酸臭", "en": "Sour crop odor"},
     "splay_legs": {"ja": "開脚", "en": "Splay legs"},
     "splenomegaly": {"ja": "脾腫", "en": "Splenomegaly"},
-    "star_gazing": {"ja": "スターゲイジング", "en": "Star-gazing"},
+    "stargazing": {"ja": "スターゲイジング", "en": "Star-gazing"},
     "stereotypic_behavior": {"ja": "常同行動", "en": "Stereotypic behavior"},
     "straining": {"ja": "いきみ", "en": "Straining"},
     "stress_bars_on_feathers": {"ja": "羽毛のストレスバー", "en": "Stress bars on feathers"},
