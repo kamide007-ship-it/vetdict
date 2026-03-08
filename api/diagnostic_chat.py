@@ -50,6 +50,29 @@ except ImportError:
         EQUINE_HEALTH_CHECK_ITEMS = {}
         EQUINE_AVAILABLE = False
 
+# Import generic species modules for multi-species chat support
+import importlib as _importlib
+
+_GENERIC_SPECIES = [
+    "cat", "rabbit", "hamster", "chinchilla", "guinea_pig", "ferret",
+    "hedgehog", "sugar_glider", "degu", "bird", "parakeet", "parrot",
+    "reptile", "tortoise", "snake", "lizard", "amphibian", "exotic_other",
+]
+_SPECIES_DATA: dict = {}  # {species: {"diseases": [...], "symptom_names": {...}}}
+
+for _sp in _GENERIC_SPECIES:
+    try:
+        _mod = _importlib.import_module(f"api.species.{_sp}_diseases")
+    except ImportError:
+        try:
+            _mod = _importlib.import_module(f"species.{_sp}_diseases")
+        except ImportError:
+            continue
+    _SPECIES_DATA[_sp] = {
+        "diseases": _mod.DISEASES,
+        "symptom_names": _mod.SYMPTOM_NAMES,
+    }
+
 # =============================================================================
 # SYMPTOM ALIASES (natural language matching)
 # =============================================================================
@@ -720,6 +743,71 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
                     f"{ja} ({en})" for _, ja, en in disease.recommended_exams
                 ],
             })
+
+    matches.sort(key=lambda m: m["similarity_score"], reverse=True)
+    return matches
+
+
+def _extract_species_symptoms(text: str, species: str) -> list[str]:
+    """Extract symptom IDs from text using species-specific SYMPTOM_NAMES."""
+    sp_data = _SPECIES_DATA.get(species)
+    if not sp_data:
+        return []
+
+    text_lower = text.lower()
+    matched: set[str] = set()
+    symptom_names = sp_data["symptom_names"]
+
+    # Match by Japanese and English symptom names
+    for sym_id, names in symptom_names.items():
+        ja = names.get("ja", "").lower()
+        en = names.get("en", "").lower()
+        if (ja and ja in text_lower) or (en and en in text_lower):
+            matched.add(sym_id)
+
+    # Also try dog aliases — many symptom IDs are shared
+    for alias, symptom_id in SYMPTOM_ALIASES.items():
+        if alias in text_lower and symptom_id in symptom_names:
+            matched.add(symptom_id)
+
+    return list(matched)
+
+
+def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) -> list[dict]:
+    """Match symptom IDs to species-specific diseases using Jaccard similarity."""
+    sp_data = _SPECIES_DATA.get(species)
+    if not sp_data or not symptom_ids:
+        return []
+
+    symptom_set = set(symptom_ids)
+    matches = []
+
+    for disease in sp_data["diseases"]:
+        disease_symptoms = set(disease.get("symptoms", set()))
+        if not disease_symptoms:
+            continue
+
+        intersection = len(symptom_set & disease_symptoms)
+        if intersection == 0:
+            continue
+
+        union = len(symptom_set | disease_symptoms)
+        similarity = intersection / union
+
+        matches.append({
+            "disease_id": disease.get("name", ""),
+            "name_ja": disease.get("name_ja", ""),
+            "name_en": disease.get("name", ""),
+            "severity": disease.get("urgency", "low"),
+            "similarity_score": round(similarity, 3),
+            "matched_symptoms": list(symptom_set & disease_symptoms),
+            "unmatched_user_symptoms": list(symptom_set - disease_symptoms),
+            "additional_disease_symptoms": list(disease_symptoms - symptom_set),
+            "description": disease.get("description", ""),
+            "description_ja": disease.get("description_ja", ""),
+            "description_en": disease.get("description", ""),
+            "recommended_tests": disease.get("recommended_tests", []),
+        })
 
     matches.sort(key=lambda m: m["similarity_score"], reverse=True)
     return matches
@@ -1834,6 +1922,20 @@ def diagnostic_chat():
             }
             for sid in all_symptoms
         ]
+    elif species in _SPECIES_DATA:
+        extracted = _extract_species_symptoms(message, species)
+        all_symptoms = list(set(extracted + previous_symptoms))
+        disease_matches = _match_species_symptoms_to_diseases(all_symptoms, species)
+        sp_names = _SPECIES_DATA[species]["symptom_names"]
+        symptom_details = [
+            {
+                "id": sid,
+                "name_ja": sp_names.get(sid, {}).get("ja", sid),
+                "name_en": sp_names.get(sid, {}).get("en", sid),
+                "category": "",
+            }
+            for sid in all_symptoms
+        ]
     else:
         extracted = extract_symptoms_from_text(message)
         all_symptoms = list(set(extracted + previous_symptoms))
@@ -1864,11 +1966,11 @@ def diagnostic_chat():
             ]
         }
 
-        if species == "horse":
+        if species == "dog":
+            treatments = get_treatment_recommendations_for_disease(disease["disease_id"], breed_id, age_years)
+        else:
             treatments = {"supplements": [], "primary_care_plan_ja": "獣医師にご相談ください。",
                           "recommended_tests": disease.get("recommended_tests", [])}
-        else:
-            treatments = get_treatment_recommendations_for_disease(disease["disease_id"], breed_id, age_years)
 
         enhanced_candidates.append({
             **disease,
