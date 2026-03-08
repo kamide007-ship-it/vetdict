@@ -419,42 +419,34 @@ a:hover{text-decoration:underline}
 </footer>
 
 <script>
-const SPECIES = [
-  {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:277},
-  {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:227},
-  {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:531},
-  {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:87},
-  {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:81},
-  {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F439}",diseases:68},
-  {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43F}\uFE0F",diseases:71},
-  {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F9A1}",diseases:89},
-  {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:77},
-  {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43F}\uFE0F",diseases:64},
-  {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F42D}",diseases:57},
-  {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:123},
-  {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:93},
-  {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:93},
-  {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:87},
-  {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:70},
-  {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:68},
-  {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:75},
-  {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:56},
-  {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:58},
-];
+const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",exotic_other:"\u{1F999}"};
+let SPECIES=[];
 
 let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="";
 
 document.addEventListener("DOMContentLoaded",()=>{
-  renderSpeciesGrid();setupNavigation();setupChat();updateStats();
+  loadSpeciesStats();setupNavigation();setupChat();
   document.getElementById("symptomSearch").addEventListener("input",()=>renderSymptomList(symptomData));
   document.getElementById("analyzeBtn").addEventListener("click",doAnalyze);
   document.getElementById("diseaseSearch").addEventListener("input",renderDiseaseDb);
 });
 
-function updateStats(){
-  const total=SPECIES.reduce((s,sp)=>s+sp.diseases,0);
-  document.getElementById("statDiseases").textContent=total.toLocaleString();
-  document.getElementById("statSpecies").textContent=SPECIES.length;
+function loadSpeciesStats(){
+  fetch("/api/species-stats").then(r=>r.json()).then(data=>{
+    SPECIES=data.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
+    document.getElementById("statDiseases").textContent=(data.total_diseases||0).toLocaleString();
+    document.getElementById("statSpecies").textContent=data.total_species||SPECIES.length;
+    document.getElementById("statDrugs").textContent=data.total_drugs||0;
+    renderSpeciesGrid();
+  }).catch(()=>{
+    // Fallback: use hardcoded data
+    SPECIES=[
+      {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:0,drugs:0},
+      {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:0,drugs:0},
+      {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:0,drugs:0},
+    ];
+    renderSpeciesGrid();
+  });
 }
 
 function renderSpeciesGrid(){
@@ -462,7 +454,8 @@ function renderSpeciesGrid(){
     <div class="species-card" data-species="${sp.id}" onclick="selectSpecies('${sp.id}')">
       <span class="icon">${sp.icon}</span>
       <div class="name">${sp.name}</div>
-      <div class="count">${sp.nameEn} \u00B7 ${sp.diseases}\u75BE\u60A3</div>
+      <div class="count">${sp.nameEn}</div>
+      <div class="count" style="margin-top:2px">${sp.diseases}疾患${sp.drugs?' · '+sp.drugs+'薬品':''}</div>
     </div>`).join("");
 }
 
