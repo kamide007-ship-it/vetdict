@@ -4722,7 +4722,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "coccidioidomycosis+horses",
     ),
     # ═══════════════════════════════════════════════════════════
-    # Wave 2 拡充: 追加 ~245 疾患 → 合計 530+
+    # Wave 2 拡充: 追加 ~245 疾患
     # ═══════════════════════════════════════════════════════════
     # ── Musculoskeletal (ms) 追加 20 ──
     Disease(
@@ -7245,7 +7245,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "foreign+body+foot+horses",
     ),
     # ═══════════════════════════════════════════════════════════
-    # Wave 3: 追加 ~40 疾患 → 合計 530+
+    # Wave 3: 追加 ~40 疾患
     # ═══════════════════════════════════════════════════════════
     # ── Additional Musculoskeletal ──
     Disease(
@@ -7633,7 +7633,7 @@ DISEASE_DATABASE: list[Disease] = [
         recommended_exams=[(1, "BAL", "Bronchoalveolar Lavage"), (2, "肺機能検査", "Pulmonary Function Test")],
         merck_url=_MERCK + "recurrent+airway+obstruction+horses",
     ),
-    # ── Final additions (530+) ──
+    # ── Final additions (Wave 3) ──
     Disease(
         "if_japanese_encephalitis",
         "日本脳炎",
