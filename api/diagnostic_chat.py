@@ -25,11 +25,30 @@ from flask import Blueprint, jsonify, request
 
 diagnostic_bp = Blueprint("diagnostic_bp", __name__, url_prefix="/api/diagnostic-chat")
 
-# Import health checker data
+# Import health checker data (dog - default)
 try:
     from api.health_checker import DISEASES, SYMPTOM_IDS, SYMPTOMS
 except ImportError:
     from health_checker import DISEASES, SYMPTOM_IDS, SYMPTOMS
+
+# Import equine data for horse chat support
+try:
+    from api.species.equine_diseases import (
+        DISEASE_DATABASE as EQUINE_DISEASES,
+        HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
+    )
+    EQUINE_AVAILABLE = True
+except ImportError:
+    try:
+        from species.equine_diseases import (
+            DISEASE_DATABASE as EQUINE_DISEASES,
+            HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
+        )
+        EQUINE_AVAILABLE = True
+    except ImportError:
+        EQUINE_DISEASES = []
+        EQUINE_HEALTH_CHECK_ITEMS = {}
+        EQUINE_AVAILABLE = False
 
 # =============================================================================
 # SYMPTOM ALIASES (natural language matching)
@@ -487,6 +506,223 @@ SYMPTOM_ALIASES = {
     "すぐバテる": "exercise_intolerance",
     "息切れ": "exercise_intolerance",
 }
+
+
+# =============================================================================
+# EQUINE SYMPTOM ALIASES (natural language → equine finding keys)
+# =============================================================================
+
+EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
+    # -- General --
+    "fever": "gen_fever", "発熱": "gen_fever", "熱がある": "gen_fever", "高熱": "gen_fever",
+    "lethargy": "gen_lethargy", "元気がない": "gen_lethargy", "ぐったり": "gen_lethargy",
+    "元気ない": "gen_lethargy", "沈鬱": "gen_lethargy", "depression": "gen_lethargy",
+    "weight loss": "gen_weight_loss", "体重減少": "gen_weight_loss", "痩せた": "gen_weight_loss",
+    "痩せてきた": "gen_weight_loss", "losing weight": "gen_weight_loss",
+    "poor appetite": "gen_poor_appetite", "食欲不振": "gen_poor_appetite",
+    "食欲がない": "gen_poor_appetite", "食べない": "gen_poor_appetite",
+    "not eating": "gen_poor_appetite", "anorexia": "gen_poor_appetite",
+    "dehydration": "gen_dehydration", "脱水": "gen_dehydration",
+    "swollen lymph nodes": "gen_swollen_lymph", "リンパ節腫脹": "gen_swollen_lymph",
+    "sweating": "gen_sweating", "発汗": "gen_sweating", "汗をかく": "gen_sweating",
+    "recumbent": "gen_recumbent", "立てない": "gen_recumbent", "横臥": "gen_recumbent",
+    "起き上がれない": "gen_recumbent", "can't stand": "gen_recumbent",
+    "polydipsia": "gen_polydipsia", "多飲": "gen_polydipsia", "水をよく飲む": "gen_polydipsia",
+    "polyuria": "gen_polyuria", "多尿": "gen_polyuria",
+    "jaundice": "gen_icterus", "黄疸": "gen_icterus", "icterus": "gen_icterus",
+    "pale gums": "gen_pale_mucosa", "歯ぐき白い": "gen_pale_mucosa",
+    "pale mucous membranes": "gen_pale_mucosa", "蒼白": "gen_pale_mucosa",
+    "tachycardia": "gen_tachycardia", "頻脈": "gen_tachycardia", "心拍が速い": "gen_tachycardia",
+    "tachypnea": "gen_tachypnea", "頻呼吸": "gen_tachypnea", "呼吸が速い": "gen_tachypnea",
+    # -- Body --
+    "back pain": "body_back_pain", "背中痛い": "body_back_pain", "背部痛": "body_back_pain",
+    "muscle atrophy": "body_muscle_atrophy", "筋萎縮": "body_muscle_atrophy",
+    "swelling": "body_swelling", "腫れ": "body_swelling",
+    "edema": "body_edema", "むくみ": "body_edema", "浮腫": "body_edema",
+    "poor coat": "body_poor_coat", "毛づやが悪い": "body_poor_coat",
+    "dark urine": "body_dark_urine", "尿が濃い": "body_dark_urine", "茶色い尿": "body_dark_urine",
+    "abdominal distension": "body_abdominal_distension", "お腹が張る": "body_abdominal_distension",
+    "muscle fasciculation": "body_muscle_fasciculation", "筋肉がピクピク": "body_muscle_fasciculation",
+    "hirsutism": "body_hirsutism", "多毛": "body_hirsutism", "毛が長い": "body_hirsutism",
+    "stiffness": "body_stiffness", "こわばり": "body_stiffness", "硬い": "body_stiffness",
+    "ventral edema": "body_ventral_edema", "下腹部むくみ": "body_ventral_edema",
+    "neck crest": "body_neck_crest", "首が太い": "body_neck_crest",
+    "fat deposits": "body_fat_deposits", "脂肪が異常": "body_fat_deposits",
+    "emaciation": "body_rib_visible", "痩せすぎ": "body_rib_visible",
+    # -- Limb --
+    "forelimb lameness": "limb_lameness_fore", "前肢跛行": "limb_lameness_fore",
+    "前脚びっこ": "limb_lameness_fore", "前脚かばう": "limb_lameness_fore",
+    "hindlimb lameness": "limb_lameness_hind", "後肢跛行": "limb_lameness_hind",
+    "後脚びっこ": "limb_lameness_hind", "後脚かばう": "limb_lameness_hind",
+    "lameness": "limb_lameness_fore", "跛行": "limb_lameness_fore",
+    "びっこ": "limb_lameness_fore", "limping": "limb_lameness_fore",
+    "joint swelling": "limb_joint_swelling", "関節腫脹": "limb_joint_swelling",
+    "関節が腫れ": "limb_joint_swelling",
+    "tendon heat": "limb_tendon_heat", "腱が熱い": "limb_tendon_heat",
+    "tendon swelling": "limb_tendon_swelling", "腱が腫れ": "limb_tendon_swelling",
+    "windpuffs": "limb_windpuffs", "ウインドパフ": "limb_windpuffs",
+    "splints": "limb_splints", "ソエ": "limb_splints",
+    "digital pulse": "limb_digital_pulse", "蹄脈が強い": "limb_digital_pulse",
+    "upward fixation": "limb_upward_fixation", "膝蓋骨固定": "limb_upward_fixation",
+    # -- Hoof --
+    "laminitis": "hoof_laminitis_signs", "蹄葉炎": "hoof_laminitis_signs",
+    "hoof abscess": "hoof_abscess", "蹄膿瘍": "hoof_abscess",
+    "hoof heat": "hoof_heat", "蹄が熱い": "hoof_heat",
+    "thrush": "hoof_thrush", "蹄叉腐爛": "hoof_thrush",
+    "hoof crack": "hoof_crack", "蹄の亀裂": "hoof_crack", "裂蹄": "hoof_crack",
+    "white line disease": "hoof_white_line", "白線病": "hoof_white_line",
+    "hoof foul odor": "hoof_foul_odor", "蹄が臭い": "hoof_foul_odor",
+    "navicular": "hoof_navicular", "舟状骨": "hoof_navicular",
+    # -- Respiratory --
+    "cough": "resp_cough", "咳": "resp_cough", "せき": "resp_cough", "coughing": "resp_cough",
+    "nasal discharge": "resp_nasal_discharge", "鼻水": "resp_nasal_discharge",
+    "鼻汁": "resp_nasal_discharge",
+    "epistaxis": "resp_epistaxis", "鼻血": "resp_epistaxis", "鼻出血": "resp_epistaxis",
+    "labored breathing": "resp_labored_breathing", "呼吸困難": "resp_labored_breathing",
+    "息が荒い": "resp_labored_breathing", "呼吸が辛そう": "resp_labored_breathing",
+    "stridor": "resp_stridor", "喘鳴": "resp_stridor", "異常呼吸音": "resp_stridor",
+    "exercise intolerance": "resp_exercise_intolerance", "運動不耐性": "resp_exercise_intolerance",
+    "すぐバテる": "resp_exercise_intolerance", "パフォーマンス低下": "resp_exercise_intolerance",
+    # -- Digestive --
+    "colic": "dig_colic_signs", "疝痛": "dig_colic_signs", "お腹痛い": "dig_colic_signs",
+    "腹痛": "dig_colic_signs",
+    "diarrhea": "dig_diarrhea", "下痢": "dig_diarrhea",
+    "constipation": "dig_constipation", "便秘": "dig_constipation",
+    "bloat": "dig_bloat", "鼓脹": "dig_bloat",
+    "bloody stool": "dig_bloody_stool", "血便": "dig_bloody_stool",
+    "drooling": "dig_salivation", "流涎": "dig_salivation", "よだれ": "dig_salivation",
+    "gastric reflux": "dig_gastric_reflux", "胃液逆流": "dig_gastric_reflux",
+    "teeth grinding": "dig_bruxism", "歯ぎしり": "dig_bruxism", "bruxism": "dig_bruxism",
+    "reduced gut sounds": "dig_reduced_gut", "腸音減少": "dig_reduced_gut",
+    # -- Skin --
+    "hair loss": "skin_hair_loss", "脱毛": "skin_hair_loss", "毛が抜ける": "skin_hair_loss",
+    "itching": "skin_itching", "痒い": "skin_itching", "掻いてる": "skin_itching",
+    "hives": "skin_hives", "蕁麻疹": "skin_hives", "urticaria": "skin_hives",
+    "skin lesions": "skin_lesions", "皮膚病変": "skin_lesions",
+    "crusting": "skin_crusting", "痂皮": "skin_crusting", "かさぶた": "skin_crusting",
+    "photosensitivity": "skin_photosensitivity", "光線過敏": "skin_photosensitivity",
+    "sarcoid": "skin_sarcoid", "サルコイド": "skin_sarcoid",
+    "wound": "skin_wound", "傷": "skin_wound", "外傷": "skin_wound",
+    # -- Eye --
+    "eye discharge": "eye_discharge", "目やに": "eye_discharge",
+    "squinting": "eye_squinting", "目を細める": "eye_squinting",
+    "tearing": "eye_tearing", "涙目": "eye_tearing", "流涙": "eye_tearing",
+    "cloudy eye": "eye_cloudiness", "目が白い": "eye_cloudiness", "目の白濁": "eye_cloudiness",
+    "eye swelling": "eye_swelling", "目の腫れ": "eye_swelling",
+    "uveitis": "eye_uveitis_signs", "ぶどう膜炎": "eye_uveitis_signs",
+    # -- Neuro --
+    "ataxia": "neuro_ataxia", "運動失調": "neuro_ataxia", "ふらふら": "neuro_ataxia",
+    "seizure": "neuro_seizure", "発作": "neuro_seizure", "けいれん": "neuro_seizure",
+    "tremor": "neuro_tremor", "振戦": "neuro_tremor", "震え": "neuro_tremor",
+    "head tilt": "neuro_head_tilt", "首が傾く": "neuro_head_tilt",
+    "circling": "neuro_circling", "旋回": "neuro_circling",
+    "behavior change": "neuro_behavior_change", "行動変化": "neuro_behavior_change",
+    "aggression": "neuro_aggression", "攻撃的": "neuro_aggression",
+    "hyperesthesia": "neuro_hyperesthesia", "過敏": "neuro_hyperesthesia",
+    "tail paralysis": "neuro_tail_paralysis", "尾の麻痺": "neuro_tail_paralysis",
+    # -- Cardio --
+    "heart murmur": "cardio_murmur", "心雑音": "cardio_murmur",
+    "irregular rhythm": "cardio_irregular_rhythm", "不整脈": "cardio_irregular_rhythm",
+    "syncope": "cardio_syncope", "失神": "cardio_syncope",
+    "jugular pulse": "cardio_jugular_pulse", "頚静脈怒張": "cardio_jugular_pulse",
+    # -- Reproductive --
+    "vulvar discharge": "repro_vulvar_discharge", "陰部排出物": "repro_vulvar_discharge",
+    "abortion": "repro_abortion", "流産": "repro_abortion",
+    "dystocia": "repro_dystocia", "難産": "repro_dystocia",
+    "retained placenta": "repro_placenta_retained", "胎盤停滞": "repro_placenta_retained",
+    "testicular swelling": "repro_testicular_swelling", "精巣腫脹": "repro_testicular_swelling",
+    "udder changes": "repro_udder_changes", "乳房変化": "repro_udder_changes",
+    # -- Dental --
+    "quidding": "dental_quidding", "クイディング": "dental_quidding",
+    "食べこぼし": "dental_quidding",
+    "bad breath": "dental_bad_breath", "口臭": "dental_bad_breath",
+    "facial swelling": "dental_facial_swelling", "顔の腫れ": "dental_facial_swelling",
+    "bit resistance": "dental_bit_resistance", "ハミを嫌がる": "dental_bit_resistance",
+    # -- Foal --
+    "foal diarrhea": "foal_diarrhea", "子馬の下痢": "foal_diarrhea",
+    "foal lethargy": "foal_lethargy", "子馬の元気がない": "foal_lethargy",
+    "foal fever": "foal_fever", "子馬の発熱": "foal_fever",
+    "foal joint swelling": "foal_joint_swelling", "子馬の関節腫脹": "foal_joint_swelling",
+    "foal limb deformity": "foal_limb_deformity", "子馬の肢変形": "foal_limb_deformity",
+    "failure to stand": "foal_failure_stand", "立てない子馬": "foal_failure_stand",
+    "weak suckle": "foal_weak_suckle", "吸啜力低下": "foal_weak_suckle",
+    "umbilical swelling": "foal_umbilical_swelling", "臍が腫れ": "foal_umbilical_swelling",
+    "meconium retention": "foal_meconium_retention", "胎便停滞": "foal_meconium_retention",
+    # -- Urinary --
+    "hematuria": "uri_hematuria", "血尿": "uri_hematuria",
+    "dysuria": "uri_dysuria", "排尿困難": "uri_dysuria",
+    "stranguria": "uri_stranguria", "排尿痛": "uri_stranguria",
+    "discolored urine": "uri_discolored_urine", "尿の色異常": "uri_discolored_urine",
+}
+
+# Build equine finding key set for validation
+_EQUINE_FINDING_KEYS: set[str] = set()
+for _cat, _items in EQUINE_HEALTH_CHECK_ITEMS.items():
+    for _key, _ja, _en in _items:
+        _EQUINE_FINDING_KEYS.add(_key)
+
+# Build equine symptoms list (for direct name matching in chat)
+_EQUINE_SYMPTOMS: list[dict[str, str]] = []
+for _cat, _items in EQUINE_HEALTH_CHECK_ITEMS.items():
+    for _key, _ja, _en in _items:
+        _EQUINE_SYMPTOMS.append({"id": _key, "name_ja": _ja, "name_en": _en, "category": _cat})
+
+
+def _extract_equine_symptoms(text: str) -> list[str]:
+    """Extract equine finding keys from natural language text."""
+    text_lower = text.lower()
+    matched: set[str] = set()
+
+    # Direct name matches from health check items
+    for sym in _EQUINE_SYMPTOMS:
+        if sym["name_ja"].lower() in text_lower or sym["name_en"].lower() in text_lower:
+            matched.add(sym["id"])
+
+    # Alias matches
+    for alias, finding_key in EQUINE_SYMPTOM_ALIASES.items():
+        if alias in text_lower and finding_key in _EQUINE_FINDING_KEYS:
+            matched.add(finding_key)
+
+    return list(matched)
+
+
+def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
+    """Match equine finding keys to equine diseases using Jaccard similarity."""
+    if not finding_keys:
+        return []
+
+    key_set = set(finding_keys)
+    matches = []
+
+    for disease in EQUINE_DISEASES:
+        disease_findings = set(disease.associated_findings)
+        if not disease_findings:
+            continue
+
+        intersection = len(key_set & disease_findings)
+        union = len(key_set | disease_findings)
+
+        if intersection > 0:
+            similarity = intersection / union
+            matches.append({
+                "disease_id": disease.id,
+                "name_ja": disease.name_ja,
+                "name_en": disease.name_en,
+                "severity": disease.severity,
+                "similarity_score": round(similarity, 3),
+                "matched_symptoms": list(key_set & disease_findings),
+                "unmatched_user_symptoms": list(key_set - disease_findings),
+                "additional_disease_symptoms": list(disease_findings - key_set),
+                "description": disease.description_ja,
+                "description_ja": disease.description_ja,
+                "description_en": disease.name_en,
+                "recommended_tests": [
+                    f"{ja} ({en})" for _, ja, en in disease.recommended_exams
+                ],
+            })
+
+    matches.sort(key=lambda m: m["similarity_score"], reverse=True)
+    return matches
 
 
 # =============================================================================
@@ -1573,38 +1809,48 @@ def diagnostic_chat():
     age_years = data.get("age_years")
     onset = data.get("onset")  # explicit onset from client
     previous_symptoms = data.get("previous_symptoms", [])
+    species = data.get("species", "dog")
 
     if not message:
         return jsonify({"error": "Message required"}), 400
 
-    # Extract symptoms from message
-    extracted = extract_symptoms_from_text(message)
-    all_symptoms = list(set(extracted + previous_symptoms))
-
-    # Extract onset from message text if not explicitly provided
+    # Extract onset/age from message text if not explicitly provided
     detected_onset = extract_onset_from_text(message)
     effective_onset = onset or detected_onset
-
-    # Extract age from message text if not explicitly provided
     detected_age = extract_age_from_text(message)
     effective_age = age_years if age_years is not None else detected_age
 
-    # Get disease matches
-    disease_matches = match_symptoms_to_diseases(all_symptoms)
+    # --- Species-aware symptom extraction and disease matching ---
+    if species == "horse" and EQUINE_AVAILABLE:
+        extracted = _extract_equine_symptoms(message)
+        all_symptoms = list(set(extracted + previous_symptoms))
+        disease_matches = _match_equine_symptoms_to_diseases(all_symptoms)
+        symptom_details = [
+            {
+                "id": sid,
+                "name_ja": next((s["name_ja"] for s in _EQUINE_SYMPTOMS if s["id"] == sid), sid),
+                "name_en": next((s["name_en"] for s in _EQUINE_SYMPTOMS if s["id"] == sid), sid),
+                "category": next((s["category"] for s in _EQUINE_SYMPTOMS if s["id"] == sid), ""),
+            }
+            for sid in all_symptoms
+        ]
+    else:
+        extracted = extract_symptoms_from_text(message)
+        all_symptoms = list(set(extracted + previous_symptoms))
+        disease_matches = match_symptoms_to_diseases(all_symptoms)
+        symptom_details = [
+            {
+                "id": sid,
+                "name_ja": next((s["name_ja"] for s in SYMPTOMS if s["id"] == sid), ""),
+                "name_en": next((s["name_en"] for s in SYMPTOMS if s["id"] == sid), ""),
+                "category": next((s["category"] for s in SYMPTOMS if s["id"] == sid), ""),
+            }
+            for sid in all_symptoms
+        ]
 
-    # Enhance disease candidates with reasoning and treatment
+    # Enhance disease candidates with reasoning
     enhanced_candidates = []
     for disease in disease_matches[:10]:  # Top 10
-        disease_record = next((d for d in DISEASES if d["id"] == disease["disease_id"]), {})
-
-        # Generate differential diagnosis reasoning
-        onset_note = ""
-        if effective_onset:
-            onset_labels = {"acute": "急性", "subacute": "亜急性", "chronic": "慢性"}
-            onset_note = f"（{onset_labels.get(effective_onset, effective_onset)}経過）"
-        age_note = ""
-        if effective_age is not None:
-            age_note = f"（{effective_age}歳）"
         reasoning = {
             "why_this_condition_ja": generate_disease_reasoning_ja(disease, all_symptoms),
             "why_this_condition_en": generate_disease_reasoning_en(disease, all_symptoms),
@@ -1618,8 +1864,11 @@ def diagnostic_chat():
             ]
         }
 
-        # Get treatment recommendations
-        treatments = get_treatment_recommendations_for_disease(disease["disease_id"], breed_id, age_years)
+        if species == "horse":
+            treatments = {"supplements": [], "primary_care_plan_ja": "獣医師にご相談ください。",
+                          "recommended_tests": disease.get("recommended_tests", [])}
+        else:
+            treatments = get_treatment_recommendations_for_disease(disease["disease_id"], breed_id, age_years)
 
         enhanced_candidates.append({
             **disease,
@@ -1628,20 +1877,28 @@ def diagnostic_chat():
             "confidence_level": f"{int(disease['similarity_score'] * 100)}%"
         })
 
+    # Build human-readable response text for frontend
+    if enhanced_candidates:
+        top = enhanced_candidates[0]
+        response_text = f"症状から以下の疾患が考えられます：\n\n"
+        for i, c in enumerate(enhanced_candidates[:5], 1):
+            response_text += f"{i}. **{c['name_ja']}** ({c['name_en']}) — 一致度 {c['confidence_level']}\n"
+            if c.get("description_ja") or c.get("description"):
+                response_text += f"   {c.get('description_ja') or c.get('description', '')}\n"
+        response_text += "\n※ こちらは参考情報です。獣医師の診察を受けてください。"
+    elif all_symptoms:
+        response_text = "症状を検出しましたが、該当する疾患が見つかりませんでした。もう少し詳しく症状を教えてください。"
+    else:
+        response_text = "症状を検出できませんでした。具体的な症状を入力してください。\n例: 「咳が出る」「跛行している」「元気がない」"
+
     # Build response
     response = {
+        "response": response_text,
         "user_message": message,
+        "species": species,
         "extracted_symptoms": extracted,
         "accumulated_symptoms": all_symptoms,
-        "symptom_details": [
-            {
-                "id": sid,
-                "name_ja": next((s["name_ja"] for s in SYMPTOMS if s["id"] == sid), ""),
-                "name_en": next((s["name_en"] for s in SYMPTOMS if s["id"] == sid), ""),
-                "category": next((s["category"] for s in SYMPTOMS if s["id"] == sid), ""),
-            }
-            for sid in all_symptoms
-        ],
+        "symptom_details": symptom_details,
         "disease_candidates": enhanced_candidates,
         "total_candidates": len(disease_matches),
         "breed_context": breed_id,
@@ -1652,38 +1909,9 @@ def diagnostic_chat():
         "follow_up_questions": _build_follow_up_questions(
             effective_onset, effective_age, all_symptoms
         ),
-        "analysis_steps": [
-            {
-                "step_id": "symptom_extraction",
-                "step_name_ja": "症状抽出",
-                "step_name_en": "Symptom Extraction",
-                "status": "completed",
-                "completion_percentage": 100
-            },
-            {
-                "step_id": "disease_matching",
-                "step_name_ja": "疾患マッチング",
-                "step_name_en": "Disease Matching",
-                "status": "completed",
-                "completion_percentage": 100
-            },
-            {
-                "step_id": "reasoning_generation",
-                "step_name_ja": "判定根拠生成",
-                "step_name_en": "Reasoning Generation",
-                "status": "completed",
-                "completion_percentage": 100
-            }
-        ],
         "recommendations": {
             "next_step": "This is reference information only. Supervised by Kentaro Kaimide, DVM (Minamisoma Vet Clinic). Please consult a veterinarian for professional evaluation.",
             "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",
-            "navigation": {
-                "dashboard": "/dashboard.html",
-                "health_check": "/health-check.html",
-                "dog_detail": "/dog-detail.html?dog_id=<dog_id>" if not breed_id else None,
-                "breeds": "/breeds.html",
-            }
         }
     }
 

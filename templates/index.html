@@ -690,7 +690,7 @@ function setupChat(){
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
   addChatMsg(text,"user");const species=currentSpecies||"dog";
-  fetch("/api/diagnostic-chat/message",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
+  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
   .then(r=>r.json()).then(data=>{addChatMsg(data.response||data.message||data.error||"応答を取得できませんでした","bot");})
   .catch(()=>addChatMsg("通信エラーが発生しました。","bot"));
 }
