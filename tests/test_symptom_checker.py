@@ -786,6 +786,8 @@ class TestDataIntegrity:
             )
 
     def test_disease_urgency_values(self):
+        # The dataset currently contains both triage-style urgency labels and
+        # severity-like legacy labels; the checker must tolerate both forms.
         valid_urgency = {"low", "moderate", "normal", "high", "urgent", "emergency"}
         for disease in _DISEASE_DB:
             assert disease["urgency"] in valid_urgency, (
