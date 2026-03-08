@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>VetDict — 獣医学鑑別診断データベース</title>
+<title>VetDict — 獣医学疾患情報データベース</title>
 <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -191,16 +191,16 @@ a:hover{text-decoration:underline}
     <nav class="header-nav">
       <a class="active" data-view="checker">症状チェッカー</a>
       <a data-view="database">疾患データベース</a>
-      <a data-view="chat">診断チャット</a>
+      <a data-view="chat">症状相談</a>
       <a data-view="drugs">薬品辞書</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="hero-badge">獣医師が開発した鑑別診断データベース</div>
-  <h2>多動物種対応の鑑別診断プラットフォーム</h2>
-  <p>症状から鑑別診断リストを生成。疾患データベース・薬品辞書を搭載。<br/>臨床現場での迅速な意思決定をサポートします。</p>
+  <div class="hero-badge">獣医師が開発した疾患情報データベース</div>
+  <h2>多動物種対応 獣医学疾患データベース</h2>
+  <p>症状から鑑別疾患リストを表示。疾患データベース・薬品辞書を搭載。<br/>臨床現場での情報収集をサポートする参考ツールです。</p>
   <div class="hero-stats">
     <div class="hero-stat"><span class="num" id="statDiseases">0</span><span class="label">疾患数</span></div>
     <div class="hero-stat"><span class="num" id="statSpecies">20</span><span class="label">対応動物種</span></div>
@@ -247,18 +247,18 @@ a:hover{text-decoration:underline}
               <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)"/>
             </div>
             <div class="symptom-list" id="symptomList"></div>
-            <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px">鑑別診断を実行</button>
+            <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px">鑑別疾患を検索</button>
           </div>
         </div>
       </div>
       <div>
         <div class="card">
-          <div class="card-header accent">&#128202; 鑑別診断結果</div>
+          <div class="card-header accent">&#128202; 検索結果</div>
           <div class="card-body">
             <div id="resultsArea">
               <div class="results-empty">
                 <span class="big-icon">&#128269;</span>
-                <p>動物種を選択し、症状にチェックを入れて<br/>「鑑別診断を実行」を押してください</p>
+                <p>動物種を選択し、症状にチェックを入れて<br/>「鑑別疾患を検索」を押してください</p>
               </div>
             </div>
           </div>
@@ -283,13 +283,13 @@ a:hover{text-decoration:underline}
 
   <div id="viewChat" class="hidden">
     <div class="card" style="margin-top:20px">
-      <div class="card-header">&#128172; 症状チャット</div>
+      <div class="card-header">&#128172; 症状相談</div>
       <div class="chat-container">
         <div class="chat-messages" id="chatMessages">
           <div class="chat-msg bot">
             こんにちは。気になる症状を日本語または英語で入力してください。<br/>
             例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/>
-            <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは参考情報です。獣医師の診断に代わるものではありません。</em>
+            <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>
           </div>
         </div>
         <div class="chat-input-row">
@@ -404,7 +404,7 @@ a:hover{text-decoration:underline}
 
 <footer class="footer">
   <p style="font-size:.92rem;color:rgba(255,255,255,.8)"><span style="font-weight:800"><span style="color:#fff">Vet</span><span style="color:var(--green)">Dict</span></span></p>
-  <p style="margin-top:6px">※ 本サービスは参考情報の提供を目的としており、獣医師による診断・治療に代わるものではありません。</p>
+  <p style="margin-top:6px">※ 本サービスは疾患に関する参考情報の提供を目的としています。診断・治療は必ず獣医師にご相談ください。</p>
   <p style="margin-top:8px">
     開発: <a href="https://www.minamisoma-vet.com/" target="_blank">南相馬アニマルクリニック</a>
     獣医師 上手 健太郎 (Kentaro Kamide, DVM)
@@ -510,7 +510,7 @@ function doAnalyze(){
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({species:currentSpecies,symptoms:[...selectedSymptoms]})})
   .then(r=>r.json()).then(data=>renderResults(data))
   .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">エラー: ${err.message}</div>`;})
-  .finally(()=>{btn.disabled=false;btn.textContent="鑑別診断を実行";});
+  .finally(()=>{btn.disabled=false;btn.textContent="鑑別疾患を検索";});
 }
 
 function renderResults(data){
