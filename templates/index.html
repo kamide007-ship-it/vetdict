@@ -124,11 +124,18 @@ a:hover{text-decoration:underline}
 .severity-bar.high{background:#fef2f2;color:#991b1b}
 .severity-bar.emergency{background:#991b1b;color:var(--white)}
 
-.lab-group{display:flex;flex-direction:column;gap:2px}
+.lab-cat-label{font-size:.72rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 4px;padding-bottom:3px;border-bottom:1px solid var(--gray-200)}
+.lab-cat-label:first-child{margin-top:0}
+.lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media(max-width:600px){.lab-grid{grid-template-columns:1fr}}
+.lab-group{display:flex;flex-direction:column;gap:2px;position:relative}
 .lab-group label{font-size:.76rem;font-weight:600;color:var(--navy)}
-.lab-group input{padding:6px 8px;border:1.5px solid var(--gray-200);border-radius:6px;font-size:.82rem;width:100%;box-sizing:border-box;transition:border-color .2s}
+.lab-unit{color:var(--gray-500);font-size:.68rem;font-weight:400}
+.lab-group input{padding:6px 28px 6px 8px;border:1.5px solid var(--gray-200);border-radius:6px;font-size:.82rem;width:100%;box-sizing:border-box;transition:border-color .2s}
 .lab-group input:focus{border-color:var(--green);outline:none}
-.lab-group input.lab-abnormal{border-color:#e74c3c;background:#fff5f5}
+.lab-group input.lab-high{border-color:#e74c3c;background:#fff5f5}
+.lab-group input.lab-low{border-color:#2980b9;background:#ebf5fb}
+.lab-flag{position:absolute;right:8px;bottom:7px;font-size:.72rem;font-weight:800;pointer-events:none}
 .analyze-btn{width:100%;padding:12px;background:var(--green);color:var(--white);border:none;border-radius:var(--radius);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s}
 .analyze-btn:hover{background:var(--green-dark)}
 .analyze-btn:disabled{background:var(--gray-300);cursor:not-allowed}
@@ -273,29 +280,48 @@ a:hover{text-decoration:underline}
               <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)"/>
             </div>
             <div class="symptom-list" id="symptomList"></div>
-            <details class="lab-values-section" style="margin-top:12px;border:2px solid var(--gray-200);border-radius:var(--radius);padding:0">
-              <summary style="cursor:pointer;padding:10px 14px;font-size:.86rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-radius:var(--radius);user-select:none">&#128300; 検査値を入力（任意）</summary>
-              <div style="padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px" id="labValuesGrid">
-                <div class="lab-group"><label>BUN <span style="color:var(--gray-500);font-size:.72rem">mg/dL</span></label><input type="number" step="any" data-lab="bun" placeholder="7–27"/></div>
-                <div class="lab-group"><label>Cre <span style="color:var(--gray-500);font-size:.72rem">mg/dL</span></label><input type="number" step="any" data-lab="creatinine" placeholder="0.5–1.8"/></div>
-                <div class="lab-group"><label>SDMA <span style="color:var(--gray-500);font-size:.72rem">&micro;g/dL</span></label><input type="number" step="any" data-lab="sdma" placeholder="0–14"/></div>
-                <div class="lab-group"><label>ALT <span style="color:var(--gray-500);font-size:.72rem">U/L</span></label><input type="number" step="any" data-lab="alt" placeholder="10–125"/></div>
-                <div class="lab-group"><label>ALP <span style="color:var(--gray-500);font-size:.72rem">U/L</span></label><input type="number" step="any" data-lab="alp" placeholder="23–212"/></div>
-                <div class="lab-group"><label>GGT <span style="color:var(--gray-500);font-size:.72rem">U/L</span></label><input type="number" step="any" data-lab="ggt" placeholder="0–11"/></div>
-                <div class="lab-group"><label>T-Bil <span style="color:var(--gray-500);font-size:.72rem">mg/dL</span></label><input type="number" step="any" data-lab="tbil" placeholder="0–0.5"/></div>
-                <div class="lab-group"><label>Alb <span style="color:var(--gray-500);font-size:.72rem">g/dL</span></label><input type="number" step="any" data-lab="albumin" placeholder="2.3–4.0"/></div>
-                <div class="lab-group"><label>Glu <span style="color:var(--gray-500);font-size:.72rem">mg/dL</span></label><input type="number" step="any" data-lab="glucose" placeholder="74–143"/></div>
-                <div class="lab-group"><label>Lipase <span style="color:var(--gray-500);font-size:.72rem">U/L</span></label><input type="number" step="any" data-lab="lipase" placeholder="10–160"/></div>
-                <div class="lab-group"><label>K <span style="color:var(--gray-500);font-size:.72rem">mEq/L</span></label><input type="number" step="any" data-lab="potassium" placeholder="3.5–5.8"/></div>
-                <div class="lab-group"><label>Na <span style="color:var(--gray-500);font-size:.72rem">mEq/L</span></label><input type="number" step="any" data-lab="sodium" placeholder="140–155"/></div>
-                <div class="lab-group"><label>Ca <span style="color:var(--gray-500);font-size:.72rem">mg/dL</span></label><input type="number" step="any" data-lab="calcium" placeholder="7.9–12.0"/></div>
-                <div class="lab-group"><label>P <span style="color:var(--gray-500);font-size:.72rem">mg/dL</span></label><input type="number" step="any" data-lab="phosphorus" placeholder="2.5–6.8"/></div>
-                <div class="lab-group"><label>WBC <span style="color:var(--gray-500);font-size:.72rem">&times;10&sup3;/&micro;L</span></label><input type="number" step="any" data-lab="wbc" placeholder="5.5–16.9"/></div>
-                <div class="lab-group"><label>PCV <span style="color:var(--gray-500);font-size:.72rem">%</span></label><input type="number" step="any" data-lab="pcv" placeholder="37–55"/></div>
-                <div class="lab-group"><label>PLT <span style="color:var(--gray-500);font-size:.72rem">&times;10&sup3;/&micro;L</span></label><input type="number" step="any" data-lab="platelets" placeholder="175–500"/></div>
-                <div class="lab-group"><label>T4 <span style="color:var(--gray-500);font-size:.72rem">&micro;g/dL</span></label><input type="number" step="any" data-lab="t4" placeholder="1.0–4.0"/></div>
-                <div class="lab-group"><label>CRP <span style="color:var(--gray-500);font-size:.72rem">mg/L</span></label><input type="number" step="any" data-lab="crp" placeholder="0–10"/></div>
-                <div class="lab-group"><label>USG <span style="color:var(--gray-500);font-size:.72rem">比重</span></label><input type="number" step="any" data-lab="usg" placeholder="1.030+"/></div>
+            <details class="lab-values-section" id="labDetails" style="margin-top:12px;border:2px solid var(--gray-200);border-radius:var(--radius);padding:0">
+              <summary style="cursor:pointer;padding:10px 14px;font-size:.86rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-radius:var(--radius);user-select:none">&#128300; 検査値を入力（任意）<span id="labSummaryBadge" style="display:none;margin-left:8px;font-size:.72rem;font-weight:600;background:var(--green);color:#fff;padding:2px 8px;border-radius:10px"></span></summary>
+              <div style="padding:12px 14px" id="labValuesGrid">
+                <div class="lab-cat-label">腎機能</div>
+                <div class="lab-grid">
+                  <div class="lab-group"><label>BUN <span class="lab-unit">mg/dL</span></label><input type="number" step="any" data-lab="bun" data-lo="7" data-hi="27" placeholder="7–27"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>Cre <span class="lab-unit">mg/dL</span></label><input type="number" step="any" data-lab="creatinine" data-lo="0.5" data-hi="1.8" placeholder="0.5–1.8"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>SDMA <span class="lab-unit">&micro;g/dL</span></label><input type="number" step="any" data-lab="sdma" data-lo="0" data-hi="14" placeholder="0–14"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>P <span class="lab-unit">mg/dL</span></label><input type="number" step="any" data-lab="phosphorus" data-lo="2.5" data-hi="6.8" placeholder="2.5–6.8"/><span class="lab-flag"></span></div>
+                </div>
+                <div class="lab-cat-label">肝機能</div>
+                <div class="lab-grid">
+                  <div class="lab-group"><label>ALT <span class="lab-unit">U/L</span></label><input type="number" step="any" data-lab="alt" data-lo="10" data-hi="125" placeholder="10–125"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>ALP <span class="lab-unit">U/L</span></label><input type="number" step="any" data-lab="alp" data-lo="23" data-hi="212" placeholder="23–212"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>GGT <span class="lab-unit">U/L</span></label><input type="number" step="any" data-lab="ggt" data-lo="0" data-hi="11" placeholder="0–11"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>T-Bil <span class="lab-unit">mg/dL</span></label><input type="number" step="any" data-lab="tbil" data-lo="0" data-hi="0.5" placeholder="0–0.5"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>Alb <span class="lab-unit">g/dL</span></label><input type="number" step="any" data-lab="albumin" data-lo="2.3" data-hi="4.0" placeholder="2.3–4.0"/><span class="lab-flag"></span></div>
+                </div>
+                <div class="lab-cat-label">代謝・膵</div>
+                <div class="lab-grid">
+                  <div class="lab-group"><label>Glu <span class="lab-unit">mg/dL</span></label><input type="number" step="any" data-lab="glucose" data-lo="74" data-hi="143" placeholder="74–143"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>Lipase <span class="lab-unit">U/L</span></label><input type="number" step="any" data-lab="lipase" data-lo="10" data-hi="160" placeholder="10–160"/><span class="lab-flag"></span></div>
+                </div>
+                <div class="lab-cat-label">電解質</div>
+                <div class="lab-grid">
+                  <div class="lab-group"><label>K <span class="lab-unit">mEq/L</span></label><input type="number" step="any" data-lab="potassium" data-lo="3.5" data-hi="5.8" placeholder="3.5–5.8"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>Na <span class="lab-unit">mEq/L</span></label><input type="number" step="any" data-lab="sodium" data-lo="140" data-hi="155" placeholder="140–155"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>Ca <span class="lab-unit">mg/dL</span></label><input type="number" step="any" data-lab="calcium" data-lo="7.9" data-hi="12" placeholder="7.9–12.0"/><span class="lab-flag"></span></div>
+                </div>
+                <div class="lab-cat-label">CBC</div>
+                <div class="lab-grid">
+                  <div class="lab-group"><label>WBC <span class="lab-unit">&times;10&sup3;/&micro;L</span></label><input type="number" step="any" data-lab="wbc" data-lo="5.5" data-hi="16.9" placeholder="5.5–16.9"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>PCV <span class="lab-unit">%</span></label><input type="number" step="any" data-lab="pcv" data-lo="37" data-hi="55" placeholder="37–55"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>PLT <span class="lab-unit">&times;10&sup3;/&micro;L</span></label><input type="number" step="any" data-lab="platelets" data-lo="175" data-hi="500" placeholder="175–500"/><span class="lab-flag"></span></div>
+                </div>
+                <div class="lab-cat-label">内分泌・炎症・尿</div>
+                <div class="lab-grid">
+                  <div class="lab-group"><label>T4 <span class="lab-unit">&micro;g/dL</span></label><input type="number" step="any" data-lab="t4" data-lo="1.0" data-hi="4.0" placeholder="1.0–4.0"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>CRP <span class="lab-unit">mg/L</span></label><input type="number" step="any" data-lab="crp" data-lo="0" data-hi="10" placeholder="0–10"/><span class="lab-flag"></span></div>
+                  <div class="lab-group"><label>USG <span class="lab-unit">比重</span></label><input type="number" step="any" data-lab="usg" data-lo="1.030" data-hi="99" placeholder="1.030+"/><span class="lab-flag"></span></div>
+                </div>
+                <button type="button" onclick="clearLabValues()" style="margin-top:8px;padding:6px 14px;font-size:.78rem;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-300);border-radius:6px;cursor:pointer">検査値をクリア</button>
               </div>
             </details>
             <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px">鑑別疾患を検索</button>
@@ -638,11 +664,24 @@ function collectLabValues(){
   return Object.keys(vals).length>0?vals:null;
 }
 function highlightLabAbnormals(){
-  const ranges={bun:[7,27],creatinine:[0.5,1.8],sdma:[0,14],alt:[10,125],alp:[23,212],ggt:[0,11],tbil:[0,0.5],albumin:[2.3,4.0],glucose:[74,143],lipase:[10,160],potassium:[3.5,5.8],sodium:[140,155],calcium:[7.9,12],phosphorus:[2.5,6.8],wbc:[5.5,16.9],pcv:[37,55],platelets:[175,500],t4:[1,4],crp:[0,10],usg:[1.03,99]};
+  let filled=0,abnormal=0;
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{
-    const v=parseFloat(el.value),r=ranges[el.dataset.lab];
-    el.classList.toggle("lab-abnormal",!isNaN(v)&&r&&(v<r[0]||v>r[1]));
+    const v=parseFloat(el.value),lo=parseFloat(el.dataset.lo),hi=parseFloat(el.dataset.hi);
+    const flag=el.nextElementSibling;
+    el.classList.remove("lab-high","lab-low");
+    if(flag)flag.textContent="";
+    if(isNaN(v)||el.value.trim()==="")return;
+    filled++;
+    if(v>hi){el.classList.add("lab-high");if(flag){flag.textContent="\u2191";flag.style.color="#e74c3c";}abnormal++;}
+    else if(v<lo){el.classList.add("lab-low");if(flag){flag.textContent="\u2193";flag.style.color="#2980b9";}abnormal++;}
   });
+  const badge=document.getElementById("labSummaryBadge");
+  if(filled>0){badge.style.display="inline";badge.textContent=abnormal>0?`${filled}\u9805\u76ee\u5165\u529b / ${abnormal}\u7570\u5e38`:`${filled}\u9805\u76ee\u5165\u529b`;badge.style.background=abnormal>0?"#e74c3c":"var(--green)";}
+  else{badge.style.display="none";}
+}
+function clearLabValues(){
+  document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{el.value="";});
+  highlightLabAbnormals();
 }
 document.addEventListener("input",e=>{if(e.target.matches("#labValuesGrid input"))highlightLabAbnormals();});
 
@@ -668,14 +707,22 @@ function renderResults(data){
   if(diseases.length===0){area.innerHTML='<div class="results-empty"><span class="big-icon">\u2705</span><p>一致する疾患は見つかりませんでした</p></div>';return;}
   const sevLabels={low:"軽度",moderate:"中等度",high:"重度",emergency:"緊急"};
   let html=`<div class="severity-bar ${severity}">総合評価: ${sevLabels[severity]||severity}</div>`;
-  if(data.lab_boost_applied)html+=`<div style="font-size:.8rem;color:#2980b9;margin-bottom:8px;padding:6px 12px;background:#ebf5fb;border-radius:var(--radius)">&#128300; 検査値異常によるスコアブースト適用済み</div>`;
+  if(data.lab_boost_applied){
+    const labNames={bun:"BUN",creatinine:"Cre",sdma:"SDMA",alt:"ALT",alp:"ALP",ggt:"GGT",tbil:"T-Bil",albumin:"Alb",glucose:"Glu",lipase:"Lipase",potassium:"K",sodium:"Na",calcium:"Ca",phosphorus:"P",wbc:"WBC",pcv:"PCV",platelets:"PLT",t4:"T4",crp:"CRP",usg:"USG"};
+    const labRanges={bun:[7,27],creatinine:[0.5,1.8],sdma:[0,14],alt:[10,125],alp:[23,212],ggt:[0,11],tbil:[0,0.5],albumin:[2.3,4],glucose:[74,143],lipase:[10,160],potassium:[3.5,5.8],sodium:[140,155],calcium:[7.9,12],phosphorus:[2.5,6.8],wbc:[5.5,16.9],pcv:[37,55],platelets:[175,500],t4:[1,4],crp:[0,10],usg:[1.03,99]};
+    let abnList=[];
+    if(data.lab_values){for(const[k,v]of Object.entries(data.lab_values)){const r=labRanges[k];if(r){if(v>r[1])abnList.push(`<span style="color:#e74c3c;font-weight:700">${labNames[k]||k} ${v}\u2191</span>`);else if(v<r[0])abnList.push(`<span style="color:#2980b9;font-weight:700">${labNames[k]||k} ${v}\u2193</span>`);}}}
+    html+=`<div style="font-size:.8rem;color:#2980b9;margin-bottom:8px;padding:8px 12px;background:#ebf5fb;border-radius:var(--radius)">&#128300; 検査値異常: ${abnList.length?abnList.join("&ensp;"):"（基準値内）"}</div>`;
+  }
   if(adviceJa)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceJa}</div>`;
   diseases.forEach(d=>{
     const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
     const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
     const desc=d.description_ja||d.description||"";
     const matchSymptoms=d.matching_symptoms||[],recTests=d.recommended_tests||[];
-    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}</div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>説明</dt><dd>${desc}</dd>${d.pathophysiology_ja||d.pathophysiology?`<dt>病態生理</dt><dd>${d.pathophysiology_ja||d.pathophysiology}</dd>`:""} ${d.causes_ja||d.causes?`<dt>原因</dt><dd>${d.causes_ja||d.causes}</dd>`:""} ${d.prevention_ja||d.prevention?`<dt>予防</dt><dd>${d.prevention_ja||d.prevention}</dd>`:""} ${d.treatment_ja||d.treatment?`<dt>治療</dt><dd>${d.treatment_ja||d.treatment}</dd>`:""} ${d.prognosis_ja||d.prognosis?`<dt>予後</dt><dd>${d.prognosis_ja||d.prognosis}</dd>`:""} ${matchSymptoms.length?`<dt>一致した症状</dt><dd>${matchSymptoms.join(", ")}</dd>`:""} ${recTests.length?`<dt>推奨検査</dt><dd>${recTests.join(", ")}</dd>`:""}</dl></div></div>`;
+    const symNames=data.symptom_names||{};
+    const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];return n?`${n.ja} <span style="color:var(--gray-500);font-size:.78rem">${n.en}</span>`:s;}).join("&ensp;|&ensp;");
+    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}</div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>説明</dt><dd>${desc}</dd>${d.pathophysiology_ja||d.pathophysiology?`<dt>病態生理</dt><dd>${d.pathophysiology_ja||d.pathophysiology}</dd>`:""} ${d.causes_ja||d.causes?`<dt>原因</dt><dd>${d.causes_ja||d.causes}</dd>`:""} ${d.prevention_ja||d.prevention?`<dt>予防</dt><dd>${d.prevention_ja||d.prevention}</dd>`:""} ${d.treatment_ja||d.treatment?`<dt>治療</dt><dd>${d.treatment_ja||d.treatment}</dd>`:""} ${d.prognosis_ja||d.prognosis?`<dt>予後</dt><dd>${d.prognosis_ja||d.prognosis}</dd>`:""} ${matchSymptoms.length?`<dt>一致した症状</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>推奨検査</dt><dd>${recTests.join(", ")}</dd>`:""}</dl></div></div>`;
   });
   if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">推奨検査一覧:</strong><ul class="test-list">${tests.map(t=>`<li>\u{1F52C} ${t}</li>`).join("")}</ul></div>`;}
   area.innerHTML=html;
