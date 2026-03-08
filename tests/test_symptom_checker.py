@@ -232,6 +232,11 @@ class TestAnalyzeSymptoms:
             "general_advice_ja",
             "breed_genetic_tests",
             "breed_risk_applied",
+            "onset_applied",
+            "onset",
+            "age_applied",
+            "age_years",
+            "age_stage",
             "symptom_names",
         }
         assert set(result.keys()) == expected_keys

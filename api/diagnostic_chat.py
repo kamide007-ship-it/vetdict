@@ -266,6 +266,84 @@ def extract_symptoms_from_text(text: str) -> list:
     return list(matched_symptoms)
 
 
+# =============================================================================
+# ONSET (TIME-COURSE) EXTRACTION FROM TEXT
+# =============================================================================
+
+_ONSET_ALIASES: dict[str, str] = {
+    # English
+    "sudden": "acute", "suddenly": "acute", "just started": "acute",
+    "today": "acute", "just now": "acute", "this morning": "acute",
+    "last night": "acute", "few hours ago": "acute", "acute": "acute",
+    "few days": "subacute", "several days": "subacute",
+    "a week": "subacute", "this week": "subacute", "subacute": "subacute",
+    "days ago": "subacute", "couple of days": "subacute",
+    "chronic": "chronic", "long time": "chronic", "months": "chronic",
+    "weeks": "chronic", "for a while": "chronic", "ongoing": "chronic",
+    "persistent": "chronic", "keeps coming back": "chronic",
+    "recurring": "chronic", "always": "chronic",
+    # Japanese
+    "突然": "acute", "急に": "acute", "今日から": "acute",
+    "さっきから": "acute", "今朝から": "acute", "昨夜から": "acute",
+    "急性": "acute",
+    "数日前から": "subacute", "2〜3日前から": "subacute",
+    "2～3日前から": "subacute", "2-3日前から": "subacute",
+    "1週間前から": "subacute", "先週から": "subacute",
+    "数日": "subacute", "亜急性": "subacute",
+    "ずっと": "chronic", "以前から": "chronic", "前から": "chronic",
+    "長い間": "chronic", "慢性": "chronic", "何ヶ月も": "chronic",
+    "何週間も": "chronic", "繰り返し": "chronic", "ずっと前から": "chronic",
+    "だいぶ前から": "chronic",
+}
+
+
+def extract_onset_from_text(text: str) -> str | None:
+    """Extract onset (time-course) from natural language text.
+
+    Returns "acute", "subacute", "chronic", or None if not detected.
+    """
+    text_lower = text.lower()
+    for phrase, onset in _ONSET_ALIASES.items():
+        if phrase in text_lower:
+            return onset
+    return None
+
+
+# =============================================================================
+# AGE EXTRACTION FROM TEXT
+# =============================================================================
+
+_AGE_ALIASES: dict[str, float] = {
+    # English
+    "puppy": 0.5, "kitten": 0.3,
+    # Japanese
+    "子犬": 0.5, "子猫": 0.3,
+    "1歳": 1.0, "2歳": 2.0, "3歳": 3.0, "4歳": 4.0, "5歳": 5.0,
+    "6歳": 6.0, "7歳": 7.0, "8歳": 8.0, "9歳": 9.0, "10歳": 10.0,
+    "11歳": 11.0, "12歳": 12.0, "13歳": 13.0, "14歳": 14.0, "15歳": 15.0,
+    "半年": 0.5, "生後3ヶ月": 0.25, "生後6ヶ月": 0.5,
+    "老犬": 10.0, "老猫": 12.0, "シニア": 9.0,
+}
+
+
+def extract_age_from_text(text: str) -> float | None:
+    """Extract approximate age in years from natural language text.
+
+    Returns a float (years) or None if not detected.
+    """
+    text_lower = text.lower()
+    import re
+    # Try patterns like "5 years old", "3 year old"
+    match = re.search(r"(\d+(?:\.\d+)?)\s*(?:years?\s*old|yo\b|yrs?\b)", text_lower)
+    if match:
+        return float(match.group(1))
+    # Try Japanese alias matches (longest match first)
+    for phrase in sorted(_AGE_ALIASES.keys(), key=len, reverse=True):
+        if phrase in text_lower:
+            return _AGE_ALIASES[phrase]
+    return None
+
+
 def generate_disease_reasoning_ja(disease: dict, symptoms: list) -> str:
     """Generate Japanese explanation for why this disease was suggested."""
     matched_count = len(disease.get("matched_symptoms", []))
@@ -1158,6 +1236,57 @@ def match_symptoms_to_diseases(symptom_ids: list) -> list:
 
 
 # =============================================================================
+# FOLLOW-UP QUESTION BUILDER
+# =============================================================================
+
+def _build_follow_up_questions(
+    onset: str | None,
+    age: float | None,
+    symptoms: list,
+) -> list[dict]:
+    """Build context-aware follow-up questions for the chat UI.
+
+    If onset or age information is missing, suggest the user provide it.
+    """
+    questions = []
+
+    if not onset:
+        questions.append({
+            "question_ja": "症状はいつ頃から始まりましたか？",
+            "question_en": "When did the symptoms start?",
+            "type": "onset",
+            "options": [
+                {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
+                {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
+                {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
+            ],
+        })
+
+    if age is None:
+        questions.append({
+            "question_ja": "何歳ですか？（だいたいで構いません）",
+            "question_en": "How old is the animal? (approximate is fine)",
+            "type": "age",
+            "options": [
+                {"value": 0.5, "label_ja": "1歳未満（子犬/子猫）", "label_en": "Under 1 year (puppy/kitten)"},
+                {"value": 2.0, "label_ja": "1〜3歳（若齢）", "label_en": "1–3 years (young)"},
+                {"value": 5.0, "label_ja": "3〜7歳（成犬/成猫）", "label_en": "3–7 years (adult)"},
+                {"value": 10.0, "label_ja": "7歳以上（高齢）", "label_en": "7+ years (senior)"},
+            ],
+        })
+
+    if not symptoms:
+        questions.append({
+            "question_ja": "どのような症状がありますか？",
+            "question_en": "What symptoms are you seeing?",
+            "type": "symptoms",
+            "options": [],
+        })
+
+    return questions
+
+
+# =============================================================================
 # API ENDPOINTS
 # =============================================================================
 
@@ -1185,6 +1314,7 @@ def diagnostic_chat():
     message = data.get("message", "").strip()
     breed_id = data.get("breed_id")
     age_years = data.get("age_years")
+    onset = data.get("onset")  # explicit onset from client
     previous_symptoms = data.get("previous_symptoms", [])
 
     if not message:
@@ -1193,6 +1323,14 @@ def diagnostic_chat():
     # Extract symptoms from message
     extracted = extract_symptoms_from_text(message)
     all_symptoms = list(set(extracted + previous_symptoms))
+
+    # Extract onset from message text if not explicitly provided
+    detected_onset = extract_onset_from_text(message)
+    effective_onset = onset or detected_onset
+
+    # Extract age from message text if not explicitly provided
+    detected_age = extract_age_from_text(message)
+    effective_age = age_years if age_years is not None else detected_age
 
     # Get disease matches
     disease_matches = match_symptoms_to_diseases(all_symptoms)
@@ -1203,13 +1341,23 @@ def diagnostic_chat():
         disease_record = next((d for d in DISEASES if d["id"] == disease["disease_id"]), {})
 
         # Generate differential diagnosis reasoning
+        onset_note = ""
+        if effective_onset:
+            onset_labels = {"acute": "急性", "subacute": "亜急性", "chronic": "慢性"}
+            onset_note = f"（{onset_labels.get(effective_onset, effective_onset)}経過）"
+        age_note = ""
+        if effective_age is not None:
+            age_note = f"（{effective_age}歳）"
         reasoning = {
             "why_this_condition_ja": generate_disease_reasoning_ja(disease, all_symptoms),
             "why_this_condition_en": generate_disease_reasoning_en(disease, all_symptoms),
             "confidence_factors": [
                 {"factor": "symptom_match", "percentage": int(disease["similarity_score"] * 100), "weight": "High"},
                 {"factor": "breed_predisposition", "percentage": 0, "weight": "Medium"},
-                {"factor": "age_relevance", "percentage": 0, "weight": "Low"}
+                {"factor": "onset_match", "percentage": 0, "weight": "Medium",
+                 "onset_detected": effective_onset},
+                {"factor": "age_relevance", "percentage": 0, "weight": "Medium",
+                 "age_detected": effective_age},
             ]
         }
 
@@ -1240,7 +1388,13 @@ def diagnostic_chat():
         "disease_candidates": enhanced_candidates,
         "total_candidates": len(disease_matches),
         "breed_context": breed_id,
-        "age_context": age_years,
+        "age_context": effective_age,
+        "onset_context": effective_onset,
+        "onset_detected_from_text": detected_onset,
+        "age_detected_from_text": detected_age,
+        "follow_up_questions": _build_follow_up_questions(
+            effective_onset, effective_age, all_symptoms
+        ),
         "analysis_steps": [
             {
                 "step_id": "symptom_extraction",

@@ -600,6 +600,78 @@ SEVERITY_WEIGHTS = {
 }
 
 # ---------------------------------------------------------------------------
+# ONSET (TIME-COURSE) BY DISEASE ID
+# ---------------------------------------------------------------------------
+# Maps disease IDs to their typical onset patterns.
+# "acute" = sudden (within 24h), "subacute" = days to ~1 week,
+# "chronic" = weeks/months or persistent.
+
+_DISEASE_ONSET_BY_ID: dict[str, set[str]] = {
+    "brachycephalic_airway_syndrome":   {"chronic"},
+    "canine_parvovirus":                {"acute"},
+    "canine_distemper":                 {"acute", "subacute"},
+    "kennel_cough":                     {"acute", "subacute"},
+    "canine_influenza":                 {"acute"},
+    "gdv_bloat":                        {"acute"},
+    "hip_dysplasia":                    {"chronic"},
+    "elbow_dysplasia":                  {"chronic"},
+    "ivdd":                             {"acute", "chronic"},
+    "degenerative_myelopathy":          {"chronic"},
+    "epilepsy":                         {"acute"},
+    "atopic_dermatitis":                {"subacute", "chronic"},
+    "pyoderma":                         {"acute", "subacute"},
+    "demodex_mange":                    {"subacute", "chronic"},
+    "allergic_dermatitis":              {"subacute", "chronic"},
+    "hypothyroidism":                   {"chronic"},
+    "cushings_disease":                 {"chronic"},
+    "addisons_disease":                 {"acute", "chronic"},
+    "diabetes_mellitus":                {"chronic"},
+    "chronic_kidney_disease":           {"chronic"},
+    "urinary_stones":                   {"subacute", "chronic"},
+    "dcm":                              {"chronic"},
+    "mitral_valve_disease":             {"chronic"},
+    "pda":                              {"chronic"},
+    "cataracts":                        {"chronic"},
+    "glaucoma":                         {"acute", "chronic"},
+    "pra":                              {"chronic"},
+    "cherry_eye":                       {"acute"},
+    "pancreatitis":                     {"acute", "chronic"},
+    "ibd":                              {"chronic"},
+    "liver_disease":                    {"subacute", "chronic"},
+    "hemangiosarcoma":                  {"acute", "chronic"},
+    "lymphoma":                         {"subacute", "chronic"},
+    "osteosarcoma":                     {"subacute", "chronic"},
+    "mast_cell_tumor":                  {"subacute", "chronic"},
+    "patellar_luxation":                {"acute", "chronic"},
+    "cruciate_ligament_rupture":        {"acute"},
+    "laryngeal_paralysis":              {"chronic"},
+    "megaesophagus":                    {"chronic"},
+    "von_willebrand_disease":           {"acute"},
+    "imha":                             {"acute", "subacute"},
+    "portosystemic_shunt":              {"chronic"},
+    "wobbler_syndrome":                 {"subacute", "chronic"},
+    "legg_calve_perthes":               {"subacute", "chronic"},
+    "syringomyelia":                    {"chronic"},
+    "tracheal_collapse":                {"chronic"},
+    "subaortic_stenosis":               {"chronic"},
+    "arvc":                             {"chronic"},
+    "entropion":                        {"chronic"},
+    "ectropion":                        {"chronic"},
+    "lens_luxation":                    {"acute"},
+    "corneal_dystrophy":                {"chronic"},
+    "retinal_dysplasia":                {"chronic"},
+    "collie_eye_anomaly":               {"chronic"},
+    "pug_encephalitis":                 {"acute", "subacute"},
+    "cerebellar_ataxia":                {"chronic"},
+    "epi":                              {"chronic"},
+    "familial_nephropathy":             {"chronic"},
+    "hemolytic_anemia":                 {"acute", "subacute"},
+    "sebaceous_adenitis":               {"chronic"},
+    "dermatomyositis":                  {"subacute", "chronic"},
+    "alopecia_x":                       {"chronic"},
+}
+
+# ---------------------------------------------------------------------------
 # DISEASES DATABASE (43 diseases)
 # ---------------------------------------------------------------------------
 
@@ -3053,14 +3125,20 @@ def _jaccard_similarity(set_a, set_b):
     return len(intersection) / len(union)
 
 
-def _analyze_symptoms(breed_id, symptom_ids, age_years=None):
+def _analyze_symptoms(breed_id, symptom_ids, age_years=None, onset=None):
     """
     Core analysis engine.
 
     - Match symptoms to diseases using Jaccard similarity.
     - Apply breed-specific risk multipliers.
+    - Apply onset (time-course) and age adjustments.
     - Sort by (match_score * breed_risk * severity_weight).
     - Return top matches with confidence percentage.
+
+    Parameters
+    ----------
+    onset:
+        Optional time-course: "acute", "subacute", or "chronic".
     """
     input_symptoms = set(symptom_ids)
     results = []
@@ -3081,6 +3159,16 @@ def _analyze_symptoms(breed_id, symptom_ids, age_years=None):
 
         # Severity weight
         severity_weight = SEVERITY_WEIGHTS.get(disease["severity"], 1.0)
+
+        # Onset (time-course) adjustment
+        onset_factor = 1.0
+        if onset:
+            disease_onsets = _DISEASE_ONSET_BY_ID.get(disease["id"])
+            if disease_onsets:
+                if onset in disease_onsets:
+                    onset_factor = 1.3   # matching onset -> boost
+                else:
+                    onset_factor = 0.7   # mismatch -> penalize
 
         # Age-related adjustment
         age_factor = 1.0
@@ -3135,7 +3223,7 @@ def _analyze_symptoms(breed_id, symptom_ids, age_years=None):
                 age_factor = 1.5
 
         # Composite score
-        composite_score = jaccard * breed_multiplier * severity_weight * age_factor
+        composite_score = jaccard * breed_multiplier * severity_weight * age_factor * onset_factor
 
         # Confidence: Jaccard * 100 capped at 95% (never claim 100% certainty)
         confidence = min(round(jaccard * 100, 1), 95.0)
@@ -3166,6 +3254,7 @@ def _analyze_symptoms(breed_id, symptom_ids, age_years=None):
                 "confidence_percent": confidence,
                 "composite_score": round(composite_score, 4),
                 "breed_risk_multiplier": breed_multiplier,
+                "onset_factor": onset_factor,
                 "age_factor": age_factor,
                 "matched_symptoms": matched,
                 "matched_count": len(matched),
@@ -3198,6 +3287,74 @@ def get_symptoms():
             "symptoms": filtered,
         }
     )
+
+
+@health_bp.route("/onset-options", methods=["GET"])
+def get_onset_options():
+    """Return available onset (time-course) and age-range options for the UI."""
+    return jsonify({
+        "onset": {
+            "label_ja": "発症時期",
+            "label_en": "Onset / Time Course",
+            "description_ja": "症状がいつ頃から始まったかを選択してください",
+            "description_en": "Select when the symptoms started",
+            "options": [
+                {
+                    "id": "acute",
+                    "label_ja": "急性（24時間以内）",
+                    "label_en": "Acute (within 24 hours)",
+                    "description_ja": "突然発症した症状",
+                    "description_en": "Sudden onset symptoms",
+                },
+                {
+                    "id": "subacute",
+                    "label_ja": "亜急性（数日〜1週間）",
+                    "label_en": "Subacute (days to ~1 week)",
+                    "description_ja": "数日かけて徐々に現れた症状",
+                    "description_en": "Symptoms developed over several days",
+                },
+                {
+                    "id": "chronic",
+                    "label_ja": "慢性（2週間以上）",
+                    "label_en": "Chronic (2 weeks or more)",
+                    "description_ja": "長期間にわたり持続している症状",
+                    "description_en": "Persistent symptoms over weeks/months",
+                },
+            ],
+        },
+        "age_range": {
+            "label_ja": "年齢",
+            "label_en": "Age",
+            "description_ja": "動物の年齢を選択してください",
+            "description_en": "Select the animal's age range",
+            "options": [
+                {
+                    "id": "puppy",
+                    "label_ja": "子犬（1歳未満）",
+                    "label_en": "Puppy (under 1 year)",
+                    "age_range": [0, 1],
+                },
+                {
+                    "id": "young",
+                    "label_ja": "若齢（1〜3歳）",
+                    "label_en": "Young (1–3 years)",
+                    "age_range": [1, 3],
+                },
+                {
+                    "id": "adult",
+                    "label_ja": "成犬（3〜7歳）",
+                    "label_en": "Adult (3–7 years)",
+                    "age_range": [3, 7],
+                },
+                {
+                    "id": "senior",
+                    "label_ja": "高齢（7歳以上）",
+                    "label_en": "Senior (7+ years)",
+                    "age_range": [7, 20],
+                },
+            ],
+        },
+    })
 
 
 @health_bp.route("/diseases", methods=["GET"])
@@ -3282,8 +3439,13 @@ def analyze():
         except (ValueError, TypeError):
             return jsonify({"error": "age_years must be a number"}), 400
 
+    # Onset (time-course) parameter
+    onset = data.get("onset")
+    if onset and onset not in ("acute", "subacute", "chronic"):
+        return jsonify({"error": "onset must be 'acute', 'subacute', or 'chronic'"}), 400
+
     # Run analysis
-    matches = _analyze_symptoms(breed_id, symptom_ids, age_years)
+    matches = _analyze_symptoms(breed_id, symptom_ids, age_years, onset=onset)
 
     # Build genetic test info if breed is known
     genetic_info = None
@@ -3315,6 +3477,7 @@ def analyze():
                 "breed_id": breed_id,
                 "symptoms": symptom_ids,
                 "age_years": age_years,
+                "onset": onset,
             },
             "emergency_flag": has_emergency,
             "emergency_message": (
