@@ -1,5 +1,7 @@
 """Drug dictionary batch 2 - additional drugs for VetDict"""
+
 from __future__ import annotations
+
 from typing import Any, Dict, List
 
 DRUGS_BATCH_2: List[Dict[str, Any]] = [
