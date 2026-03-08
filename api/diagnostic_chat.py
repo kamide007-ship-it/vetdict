@@ -186,7 +186,7 @@ SYMPTOM_ALIASES = {
     "yellow gums": "jaundice",
     "yellow skin": "jaundice",
     "icterus": "jaundice",
-    # Japanese entries
+    # Japanese entries - formal/medical
     "咳": "coughing",
     "くしゃみ": "sneezing",
     "鼻水": "nasal_discharge",
@@ -229,6 +229,263 @@ SYMPTOM_ALIASES = {
     "リンパ節腫脹": "swollen_lymph_nodes",
     "歯茎の蒼白": "pale_gums",
     "黄疸": "jaundice",
+    # ---------------------------------------------------------------
+    # 曖昧・口語表現 (colloquial/ambiguous Japanese expressions)
+    # ---------------------------------------------------------------
+    # 全身状態
+    "元気がない": "lethargy",
+    "元気ない": "lethargy",
+    "元気なくなった": "lethargy",
+    "ぐったり": "lethargy",
+    "ぐったりしてる": "lethargy",
+    "ぐたっとしてる": "lethargy",
+    "だるそう": "lethargy",
+    "しんどそう": "lethargy",
+    "動かない": "lethargy",
+    "動きたがらない": "lethargy",
+    "寝てばかり": "lethargy",
+    "寝てばっかり": "lethargy",
+    "起きない": "lethargy",
+    "起きてこない": "lethargy",
+    "おとなしい": "lethargy",
+    "なんか変": "lethargy",
+    "具合悪そう": "lethargy",
+    "具合が悪い": "lethargy",
+    "調子悪い": "lethargy",
+    "調子が悪い": "lethargy",
+    "様子がおかしい": "lethargy",
+    "おかしい": "lethargy",
+    "いつもと違う": "lethargy",
+    "活気がない": "lethargy",
+    "沈鬱": "lethargy",
+    # 食欲
+    "食べない": "loss_of_appetite",
+    "食べなくなった": "loss_of_appetite",
+    "ご飯食べない": "loss_of_appetite",
+    "ごはん食べない": "loss_of_appetite",
+    "ご飯を食べない": "loss_of_appetite",
+    "エサ食べない": "loss_of_appetite",
+    "えさ食べない": "loss_of_appetite",
+    "食が細い": "loss_of_appetite",
+    "食欲がない": "loss_of_appetite",
+    "食欲ない": "loss_of_appetite",
+    "食欲減退": "loss_of_appetite",
+    "食欲なくなった": "loss_of_appetite",
+    "食べる量が減った": "loss_of_appetite",
+    "フードを残す": "loss_of_appetite",
+    "おやつしか食べない": "loss_of_appetite",
+    # 嘔吐
+    "吐いた": "vomiting",
+    "吐く": "vomiting",
+    "吐いてる": "vomiting",
+    "吐き気": "vomiting",
+    "戻した": "vomiting",
+    "もどした": "vomiting",
+    "ゲロ": "vomiting",
+    "げろ": "vomiting",
+    "吐き戻し": "vomiting",
+    "何回も吐く": "vomiting",
+    "何度も吐く": "vomiting",
+    "食べた後吐く": "vomiting",
+    "草食べて吐く": "vomiting",
+    "黄色い液を吐く": "vomiting",
+    "白い泡を吐く": "vomiting",
+    # 下痢
+    "うんちがゆるい": "diarrhea",
+    "軟便": "diarrhea",
+    "水っぽいうんち": "diarrhea",
+    "水様便": "diarrhea",
+    "おなか壊した": "diarrhea",
+    "お腹壊した": "diarrhea",
+    "お腹こわした": "diarrhea",
+    "お腹をこわした": "diarrhea",
+    "ベタベタのうんち": "diarrhea",
+    "ゆるいうんち": "diarrhea",
+    "下痢してる": "diarrhea",
+    "下痢気味": "diarrhea",
+    "うんちの回数が多い": "diarrhea",
+    # 便秘
+    "うんちが出ない": "constipation",
+    "うんちしない": "constipation",
+    "排便しない": "constipation",
+    "うんち出ない": "constipation",
+    "いきんでる": "constipation",
+    "いきんでいる": "constipation",
+    "踏ん張ってる": "constipation",
+    # 血便
+    "うんちに血": "blood_in_stool",
+    "血が混じったうんち": "blood_in_stool",
+    "赤いうんち": "blood_in_stool",
+    "黒いうんち": "blood_in_stool",
+    "タール便": "blood_in_stool",
+    # 咳
+    "咳が出る": "coughing",
+    "咳してる": "coughing",
+    "咳する": "coughing",
+    "せきする": "coughing",
+    "せき": "coughing",
+    "えずく": "coughing",
+    "ケッケッ": "coughing",
+    "ゲホゲホ": "coughing",
+    "ガーガー": "coughing",
+    "変な咳": "coughing",
+    "乾いた咳": "coughing",
+    "湿った咳": "coughing",
+    # 呼吸
+    "息が荒い": "rapid_breathing",
+    "ハアハア": "rapid_breathing",
+    "はあはあ": "rapid_breathing",
+    "ゼーゼー": "wheezing",
+    "ぜーぜー": "wheezing",
+    "息苦しそう": "labored_breathing",
+    "呼吸が辛そう": "labored_breathing",
+    "呼吸がつらそう": "labored_breathing",
+    "呼吸が早い": "rapid_breathing",
+    "口で息してる": "labored_breathing",
+    "口呼吸": "labored_breathing",
+    "開口呼吸": "labored_breathing",
+    # 鼻
+    "鼻が出てる": "nasal_discharge",
+    "鼻が詰まってる": "nasal_discharge",
+    "鼻づまり": "nasal_discharge",
+    "鼻汁": "nasal_discharge",
+    "青っ鼻": "nasal_discharge",
+    # くしゃみ
+    "くしゃみする": "sneezing",
+    "くしゃみが止まらない": "sneezing",
+    "くしゃみが多い": "sneezing",
+    # 水を飲む
+    "水をたくさん飲む": "excessive_thirst",
+    "水ばっかり飲む": "excessive_thirst",
+    "水飲みすぎ": "excessive_thirst",
+    "よく水を飲む": "excessive_thirst",
+    "水をよく飲む": "excessive_thirst",
+    "水がぶ飲み": "excessive_thirst",
+    "多飲多尿": "excessive_thirst",
+    # 排尿
+    "おしっこの回数が多い": "frequent_urination",
+    "おしっこが多い": "frequent_urination",
+    "何度もトイレに行く": "frequent_urination",
+    "トイレが近い": "frequent_urination",
+    "おしっこが出にくい": "straining_to_urinate",
+    "おしっこが出ない": "straining_to_urinate",
+    "おしっこ出ない": "straining_to_urinate",
+    "おしっこに血": "blood_in_urine",
+    "ピンクのおしっこ": "blood_in_urine",
+    "赤いおしっこ": "blood_in_urine",
+    "おしっこ漏れ": "incontinence",
+    "おもらし": "incontinence",
+    # 体重
+    "痩せた": "weight_loss",
+    "痩せてきた": "weight_loss",
+    "やせた": "weight_loss",
+    "やせてきた": "weight_loss",
+    "ガリガリ": "weight_loss",
+    "肋骨が見える": "weight_loss",
+    "あばらが見える": "weight_loss",
+    # 足・歩行
+    "足を引きずる": "lameness_or_limping",
+    "足をひきずる": "lameness_or_limping",
+    "びっこ": "lameness_or_limping",
+    "足をかばう": "lameness_or_limping",
+    "足を上げてる": "lameness_or_limping",
+    "歩き方がおかしい": "lameness_or_limping",
+    "歩けない": "lameness_or_limping",
+    "立てない": "lameness_or_limping",
+    "足が痛そう": "lameness_or_limping",
+    "ふらふら": "tremors",
+    "フラフラ": "tremors",
+    "ふらつき": "tremors",
+    "よろよろ": "tremors",
+    "ヨロヨロ": "tremors",
+    "ふるえてる": "tremors",
+    "震えてる": "tremors",
+    "ブルブル": "tremors",
+    "ぶるぶる": "tremors",
+    "ガクガク": "tremors",
+    # 発作・痙攣
+    "ひきつけ": "seizures",
+    "痙攣": "seizures",
+    "ピクピク": "seizures",
+    "バタバタ": "seizures",
+    "白目向いてる": "seizures",
+    "泡吹いてる": "seizures",
+    "意識がない": "seizures",
+    "意識ない": "seizures",
+    "倒れた": "fainting",
+    "倒れる": "fainting",
+    "気絶": "fainting",
+    # 皮膚
+    "かゆい": "excessive_licking",
+    "痒い": "excessive_licking",
+    "かゆがる": "excessive_licking",
+    "痒がる": "excessive_licking",
+    "掻いてる": "excessive_licking",
+    "かいてる": "excessive_licking",
+    "しきりに舐める": "excessive_licking",
+    "体を掻く": "excessive_licking",
+    "できもの": "lumps_and_bumps",
+    "しこりがある": "lumps_and_bumps",
+    "できものがある": "lumps_and_bumps",
+    "腫瘍": "lumps_and_bumps",
+    "ふくらみ": "lumps_and_bumps",
+    "膨らんでる": "bloating",
+    "腫れてる": "bloating",
+    "お腹が張ってる": "bloating",
+    "おなかが膨れてる": "bloating",
+    "お腹パンパン": "bloating",
+    # 目
+    "目が赤い": "redness_in_eyes",
+    "目が白い": "cloudiness_in_eyes",
+    "目が白くなった": "cloudiness_in_eyes",
+    "目が曇ってる": "cloudiness_in_eyes",
+    "目がしょぼしょぼ": "squinting",
+    "涙が出る": "eye_discharge",
+    "涙が多い": "eye_discharge",
+    "涙目": "eye_discharge",
+    "目が腫れてる": "eye_swelling",
+    "まぶたが腫れてる": "eye_swelling",
+    # よだれ
+    "よだれが多い": "excessive_drooling",
+    "よだれダラダラ": "excessive_drooling",
+    "口からよだれ": "excessive_drooling",
+    "涎": "excessive_drooling",
+    # 発熱
+    "熱がある": "fever",
+    "熱っぽい": "fever",
+    "体が熱い": "fever",
+    "触ると熱い": "fever",
+    "鼻が乾いてる": "fever",
+    "耳が熱い": "fever",
+    # 行動
+    "噛みつく": "aggression",
+    "唸る": "aggression",
+    "怒りっぽい": "aggression",
+    "攻撃的": "aggression",
+    "落ち着かない": "anxiety",
+    "落ち着きがない": "anxiety",
+    "ウロウロ": "anxiety",
+    "うろうろ": "anxiety",
+    "そわそわ": "anxiety",
+    "ソワソワ": "anxiety",
+    "夜鳴き": "anxiety",
+    "夜泣き": "anxiety",
+    "怖がる": "anxiety",
+    # その他
+    "脱水": "excessive_thirst",
+    "肌が黄色い": "jaundice",
+    "白目が黄色い": "jaundice",
+    "歯茎が白い": "pale_gums",
+    "歯茎が蒼白": "pale_gums",
+    "リンパが腫れてる": "swollen_lymph_nodes",
+    "しこりが首にある": "swollen_lymph_nodes",
+    "首が腫れてる": "swollen_lymph_nodes",
+    "すぐ疲れる": "exercise_intolerance",
+    "散歩行きたがらない": "exercise_intolerance",
+    "散歩嫌がる": "exercise_intolerance",
+    "運動嫌がる": "exercise_intolerance",
+    "すぐバテる": "exercise_intolerance",
+    "息切れ": "exercise_intolerance",
 }
 
 
@@ -264,6 +521,84 @@ def extract_symptoms_from_text(text: str) -> list:
             matched_symptoms.add(symptom_id)
 
     return list(matched_symptoms)
+
+
+# =============================================================================
+# ONSET (TIME-COURSE) EXTRACTION FROM TEXT
+# =============================================================================
+
+_ONSET_ALIASES: dict[str, str] = {
+    # English
+    "sudden": "acute", "suddenly": "acute", "just started": "acute",
+    "today": "acute", "just now": "acute", "this morning": "acute",
+    "last night": "acute", "few hours ago": "acute", "acute": "acute",
+    "few days": "subacute", "several days": "subacute",
+    "a week": "subacute", "this week": "subacute", "subacute": "subacute",
+    "days ago": "subacute", "couple of days": "subacute",
+    "chronic": "chronic", "long time": "chronic", "months": "chronic",
+    "weeks": "chronic", "for a while": "chronic", "ongoing": "chronic",
+    "persistent": "chronic", "keeps coming back": "chronic",
+    "recurring": "chronic", "always": "chronic",
+    # Japanese
+    "突然": "acute", "急に": "acute", "今日から": "acute",
+    "さっきから": "acute", "今朝から": "acute", "昨夜から": "acute",
+    "急性": "acute",
+    "数日前から": "subacute", "2〜3日前から": "subacute",
+    "2～3日前から": "subacute", "2-3日前から": "subacute",
+    "1週間前から": "subacute", "先週から": "subacute",
+    "数日": "subacute", "亜急性": "subacute",
+    "ずっと": "chronic", "以前から": "chronic", "前から": "chronic",
+    "長い間": "chronic", "慢性": "chronic", "何ヶ月も": "chronic",
+    "何週間も": "chronic", "繰り返し": "chronic", "ずっと前から": "chronic",
+    "だいぶ前から": "chronic",
+}
+
+
+def extract_onset_from_text(text: str) -> str | None:
+    """Extract onset (time-course) from natural language text.
+
+    Returns "acute", "subacute", "chronic", or None if not detected.
+    """
+    text_lower = text.lower()
+    for phrase, onset in _ONSET_ALIASES.items():
+        if phrase in text_lower:
+            return onset
+    return None
+
+
+# =============================================================================
+# AGE EXTRACTION FROM TEXT
+# =============================================================================
+
+_AGE_ALIASES: dict[str, float] = {
+    # English
+    "puppy": 0.5, "kitten": 0.3,
+    # Japanese
+    "子犬": 0.5, "子猫": 0.3,
+    "1歳": 1.0, "2歳": 2.0, "3歳": 3.0, "4歳": 4.0, "5歳": 5.0,
+    "6歳": 6.0, "7歳": 7.0, "8歳": 8.0, "9歳": 9.0, "10歳": 10.0,
+    "11歳": 11.0, "12歳": 12.0, "13歳": 13.0, "14歳": 14.0, "15歳": 15.0,
+    "半年": 0.5, "生後3ヶ月": 0.25, "生後6ヶ月": 0.5,
+    "老犬": 10.0, "老猫": 12.0, "シニア": 9.0,
+}
+
+
+def extract_age_from_text(text: str) -> float | None:
+    """Extract approximate age in years from natural language text.
+
+    Returns a float (years) or None if not detected.
+    """
+    text_lower = text.lower()
+    import re
+    # Try patterns like "5 years old", "3 year old"
+    match = re.search(r"(\d+(?:\.\d+)?)\s*(?:years?\s*old|yo\b|yrs?\b)", text_lower)
+    if match:
+        return float(match.group(1))
+    # Try Japanese alias matches (longest match first)
+    for phrase in sorted(_AGE_ALIASES.keys(), key=len, reverse=True):
+        if phrase in text_lower:
+            return _AGE_ALIASES[phrase]
+    return None
 
 
 def generate_disease_reasoning_ja(disease: dict, symptoms: list) -> str:
@@ -1158,6 +1493,57 @@ def match_symptoms_to_diseases(symptom_ids: list) -> list:
 
 
 # =============================================================================
+# FOLLOW-UP QUESTION BUILDER
+# =============================================================================
+
+def _build_follow_up_questions(
+    onset: str | None,
+    age: float | None,
+    symptoms: list,
+) -> list[dict]:
+    """Build context-aware follow-up questions for the chat UI.
+
+    If onset or age information is missing, suggest the user provide it.
+    """
+    questions = []
+
+    if not onset:
+        questions.append({
+            "question_ja": "症状はいつ頃から始まりましたか？",
+            "question_en": "When did the symptoms start?",
+            "type": "onset",
+            "options": [
+                {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
+                {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
+                {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
+            ],
+        })
+
+    if age is None:
+        questions.append({
+            "question_ja": "何歳ですか？（だいたいで構いません）",
+            "question_en": "How old is the animal? (approximate is fine)",
+            "type": "age",
+            "options": [
+                {"value": 0.5, "label_ja": "1歳未満（子犬/子猫）", "label_en": "Under 1 year (puppy/kitten)"},
+                {"value": 2.0, "label_ja": "1〜3歳（若齢）", "label_en": "1–3 years (young)"},
+                {"value": 5.0, "label_ja": "3〜7歳（成犬/成猫）", "label_en": "3–7 years (adult)"},
+                {"value": 10.0, "label_ja": "7歳以上（高齢）", "label_en": "7+ years (senior)"},
+            ],
+        })
+
+    if not symptoms:
+        questions.append({
+            "question_ja": "どのような症状がありますか？",
+            "question_en": "What symptoms are you seeing?",
+            "type": "symptoms",
+            "options": [],
+        })
+
+    return questions
+
+
+# =============================================================================
 # API ENDPOINTS
 # =============================================================================
 
@@ -1185,6 +1571,7 @@ def diagnostic_chat():
     message = data.get("message", "").strip()
     breed_id = data.get("breed_id")
     age_years = data.get("age_years")
+    onset = data.get("onset")  # explicit onset from client
     previous_symptoms = data.get("previous_symptoms", [])
 
     if not message:
@@ -1193,6 +1580,14 @@ def diagnostic_chat():
     # Extract symptoms from message
     extracted = extract_symptoms_from_text(message)
     all_symptoms = list(set(extracted + previous_symptoms))
+
+    # Extract onset from message text if not explicitly provided
+    detected_onset = extract_onset_from_text(message)
+    effective_onset = onset or detected_onset
+
+    # Extract age from message text if not explicitly provided
+    detected_age = extract_age_from_text(message)
+    effective_age = age_years if age_years is not None else detected_age
 
     # Get disease matches
     disease_matches = match_symptoms_to_diseases(all_symptoms)
@@ -1203,13 +1598,23 @@ def diagnostic_chat():
         disease_record = next((d for d in DISEASES if d["id"] == disease["disease_id"]), {})
 
         # Generate differential diagnosis reasoning
+        onset_note = ""
+        if effective_onset:
+            onset_labels = {"acute": "急性", "subacute": "亜急性", "chronic": "慢性"}
+            onset_note = f"（{onset_labels.get(effective_onset, effective_onset)}経過）"
+        age_note = ""
+        if effective_age is not None:
+            age_note = f"（{effective_age}歳）"
         reasoning = {
             "why_this_condition_ja": generate_disease_reasoning_ja(disease, all_symptoms),
             "why_this_condition_en": generate_disease_reasoning_en(disease, all_symptoms),
             "confidence_factors": [
                 {"factor": "symptom_match", "percentage": int(disease["similarity_score"] * 100), "weight": "High"},
                 {"factor": "breed_predisposition", "percentage": 0, "weight": "Medium"},
-                {"factor": "age_relevance", "percentage": 0, "weight": "Low"}
+                {"factor": "onset_match", "percentage": 0, "weight": "Medium",
+                 "onset_detected": effective_onset},
+                {"factor": "age_relevance", "percentage": 0, "weight": "Medium",
+                 "age_detected": effective_age},
             ]
         }
 
@@ -1240,7 +1645,13 @@ def diagnostic_chat():
         "disease_candidates": enhanced_candidates,
         "total_candidates": len(disease_matches),
         "breed_context": breed_id,
-        "age_context": age_years,
+        "age_context": effective_age,
+        "onset_context": effective_onset,
+        "onset_detected_from_text": detected_onset,
+        "age_detected_from_text": detected_age,
+        "follow_up_questions": _build_follow_up_questions(
+            effective_onset, effective_age, all_symptoms
+        ),
         "analysis_steps": [
             {
                 "step_id": "symptom_extraction",

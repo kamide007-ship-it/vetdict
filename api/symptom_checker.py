@@ -313,6 +313,434 @@ def map_health_checks_to_symptoms(health_checks: dict[str, list[str]]) -> list[s
     return sorted(symptom_set)
 
 # ---------------------------------------------------------------------------
+# Onset / Time-course & Age-predisposition tables
+# ---------------------------------------------------------------------------
+# onset_pattern: which time-courses are typical for each disease.
+#   "acute"     = sudden onset (within 24 hours)
+#   "subacute"  = develops over days to ~1 week
+#   "chronic"   = gradual onset over weeks/months or persistent condition
+# A disease can have multiple typical patterns (e.g. pancreatitis: acute OR chronic).
+#
+# age_predisposition: which life-stage groups are at higher risk.
+#   "puppy"   = under 1 year
+#   "young"   = 1–3 years
+#   "adult"   = 3–7 years
+#   "senior"  = 7+ years
+# Empty set means no particular age predisposition (all ages equally).
+
+_DISEASE_ONSET: dict[str, set[str]] = {
+    # -- Infectious --
+    "Canine Parvovirus":                        {"acute"},
+    "Canine Distemper":                          {"acute", "subacute"},
+    "Kennel Cough (Bordetella)":                 {"acute", "subacute"},
+    "Canine Influenza (CIV)":                    {"acute"},
+    "Leptospirosis":                             {"acute", "subacute"},
+    "Canine Infectious Hepatitis":               {"acute"},
+    "Canine Coronavirus (Enteric)":              {"acute"},
+    "Rabies":                                    {"acute", "subacute"},
+    "Canine Herpesvirus (CHV)":                  {"acute"},
+    "Canine Papillomatosis":                     {"subacute", "chronic"},
+    "Brucellosis":                               {"subacute", "chronic"},
+    "Rocky Mountain Spotted Fever":              {"acute"},
+    "Tetanus":                                   {"acute", "subacute"},
+    "Nocardiosis":                               {"chronic"},
+    "Actinomycosis":                             {"chronic"},
+    # -- Parasitic --
+    "Giardiasis":                                {"subacute", "chronic"},
+    "Ehrlichiosis":                              {"acute", "chronic"},
+    "Anaplasmosis":                              {"acute"},
+    "Coccidiosis":                               {"acute", "subacute"},
+    "Babesiosis":                                {"acute"},
+    "Intestinal Parasites":                      {"subacute", "chronic"},
+    "Heartworm Disease":                         {"chronic"},
+    "Lyme Disease":                              {"subacute", "chronic"},
+    "Leishmaniasis":                             {"chronic"},
+    "Neosporosis":                               {"acute", "subacute"},
+    "Toxoplasmosis":                             {"subacute"},
+    "Hepatozoonosis":                            {"chronic"},
+    "Roundworm Infection (Toxocara)":            {"subacute", "chronic"},
+    "Hookworm Infection":                        {"subacute", "chronic"},
+    "Whipworm Infection (Trichuris)":            {"chronic"},
+    "Tapeworm Infection (Dipylidium/Echinococcus)": {"chronic"},
+    "Ear Mite Infestation (Otodectes)":          {"subacute", "chronic"},
+    "Flea Allergy Dermatitis":                   {"acute", "chronic"},
+    "Sarcoptic Mange (Scabies)":                 {"subacute"},
+    "Cheyletiellosis (Walking Dandruff)":        {"subacute", "chronic"},
+    # -- Fungal --
+    "Fungal Infection (Ringworm)":               {"subacute", "chronic"},
+    "Blastomycosis":                             {"subacute", "chronic"},
+    "Histoplasmosis":                            {"subacute", "chronic"},
+    "Coccidioidomycosis (Valley Fever)":         {"subacute", "chronic"},
+    "Cryptococcosis":                            {"subacute", "chronic"},
+    "Aspergillosis":                             {"chronic"},
+    "Sporotrichosis":                            {"subacute", "chronic"},
+    # -- GI --
+    "Gastric Dilatation-Volvulus (GDV/Bloat)":   {"acute"},
+    "Pancreatitis":                              {"acute", "chronic"},
+    "Gastroenteritis":                           {"acute"},
+    "Hemorrhagic Gastroenteritis (HGE)":         {"acute"},
+    "Foreign Body Obstruction":                  {"acute"},
+    "Inflammatory Bowel Disease (IBD)":          {"chronic"},
+    "Megaesophagus":                             {"chronic"},
+    "Exocrine Pancreatic Insufficiency (EPI)":   {"chronic"},
+    "Colitis":                                   {"acute", "chronic"},
+    "Portosystemic Shunt (Liver Shunt)":         {"chronic"},
+    "Gastric Ulcer":                             {"acute", "chronic"},
+    "Esophagitis":                               {"acute", "subacute"},
+    "Protein-Losing Enteropathy (PLE)":          {"chronic"},
+    "Mesenteric Volvulus":                       {"acute"},
+    "Rectal Prolapse":                           {"acute", "chronic"},
+    "Anal Sac Disease":                          {"subacute", "chronic"},
+    "Intestinal Intussusception":                {"acute"},
+    "Megacolon":                                 {"chronic"},
+    "Gastric Foreign Body":                      {"acute"},
+    # -- Endocrine --
+    "Hypothyroidism":                            {"chronic"},
+    "Hyperthyroidism":                           {"chronic"},
+    "Cushing's Disease":                         {"chronic"},
+    "Addison's Disease":                         {"acute", "chronic"},
+    "Diabetes Mellitus":                         {"chronic"},
+    "Diabetes Insipidus":                        {"chronic"},
+    "Pheochromocytoma":                          {"acute", "chronic"},
+    "Growth Hormone-Responsive Dermatosis":      {"chronic"},
+    "Insulinoma":                                {"acute", "chronic"},
+    "Hyperparathyroidism":                       {"chronic"},
+    # -- Urinary --
+    "Urinary Tract Infection":                   {"acute", "subacute"},
+    "Bladder Stones":                            {"subacute", "chronic"},
+    "Kidney Disease (CKD)":                      {"chronic"},
+    "Fanconi Syndrome":                          {"chronic"},
+    "Ectopic Ureter":                            {"chronic"},
+    "Glomerulonephritis":                        {"chronic"},
+    "Pyelonephritis":                            {"acute", "subacute"},
+    "Urethral Obstruction":                      {"acute"},
+    "Cystinuria":                                {"chronic"},
+    # -- Hepatic --
+    "Liver Disease":                             {"subacute", "chronic"},
+    "Copper Storage Disease":                    {"chronic"},
+    "Portosystemic Shunt (Congenital)":          {"chronic"},
+    "Hepatocellular Carcinoma":                  {"chronic"},
+    # -- Cardiac --
+    "Heart Disease/CHF":                         {"chronic"},
+    "Dilated Cardiomyopathy (DCM)":              {"chronic"},
+    "Patent Ductus Arteriosus (PDA)":            {"chronic"},
+    "Aortic Stenosis":                           {"chronic"},
+    "Pulmonic Stenosis":                         {"chronic"},
+    "Pericardial Effusion":                      {"acute", "chronic"},
+    "Mitral Valve Disease (MMVD)":               {"chronic"},
+    "Sick Sinus Syndrome":                       {"chronic"},
+    "Ventricular Septal Defect (VSD)":           {"chronic"},
+    "Atrial Fibrillation":                       {"acute", "chronic"},
+    "Infective Endocarditis":                    {"subacute", "chronic"},
+    "Myocarditis":                               {"acute", "subacute"},
+    "Chemodectoma (Heart Base Tumor)":           {"chronic"},
+    # -- Respiratory --
+    "Brachycephalic Airway Syndrome":            {"chronic"},
+    "Tracheal Collapse":                         {"chronic"},
+    "Laryngeal Paralysis":                       {"chronic"},
+    "Pneumonia":                                 {"acute", "subacute"},
+    "Aspiration Pneumonia":                      {"acute"},
+    "Pleural Effusion":                          {"subacute", "chronic"},
+    "Pulmonary Hypertension":                    {"chronic"},
+    "Pulmonary Fibrosis":                        {"chronic"},
+    "Nasal Tumor":                               {"chronic"},
+    "Lung Lobe Torsion":                         {"acute"},
+    "Nasal Adenocarcinoma":                      {"chronic"},
+    "Chylothorax":                               {"subacute", "chronic"},
+    # -- Dermatological --
+    "Allergic Dermatitis":                       {"subacute", "chronic"},
+    "Mange (Demodex/Sarcoptes)":                 {"subacute", "chronic"},
+    "Pyoderma":                                  {"acute", "subacute"},
+    "Sebaceous Adenitis":                        {"chronic"},
+    "Pemphigus":                                 {"subacute", "chronic"},
+    "Alopecia X":                                {"chronic"},
+    "Acral Lick Dermatitis":                     {"chronic"},
+    "Discoid Lupus Erythematosus (DLE)":         {"chronic"},
+    "Follicular Dysplasia":                      {"chronic"},
+    "Dermoid Sinus":                             {"chronic"},
+    "Zinc-Responsive Dermatosis":                {"subacute", "chronic"},
+    "Malassezia Dermatitis":                     {"subacute", "chronic"},
+    "Systemic Lupus Erythematosus (SLE)":        {"subacute", "chronic"},
+    "Interdigital Cyst (Furuncle)":              {"acute", "subacute"},
+    "Seborrhea":                                 {"chronic"},
+    "Cutaneous Histiocytoma":                    {"subacute"},
+    # -- Ophthalmologic --
+    "Eye Infection (Conjunctivitis)":            {"acute", "subacute"},
+    "Glaucoma":                                  {"acute", "chronic"},
+    "Cherry Eye":                                {"acute"},
+    "Keratoconjunctivitis Sicca (Dry Eye)":      {"chronic"},
+    "Entropion":                                 {"chronic"},
+    "Corneal Ulcer":                             {"acute"},
+    "Lens Luxation":                             {"acute"},
+    "Retinal Detachment":                        {"acute"},
+    "Ectropion":                                 {"chronic"},
+    "Distichiasis":                              {"chronic"},
+    "Nuclear Sclerosis":                         {"chronic"},
+    "Retinal Dysplasia":                         {"chronic"},
+    "Pannus (Chronic Superficial Keratitis)":    {"chronic"},
+    "Uveitis":                                   {"acute", "subacute"},
+    "Corneal Dystrophy":                         {"chronic"},
+    "Collie Eye Anomaly (CEA)":                  {"chronic"},
+    "Horner's Syndrome":                         {"acute", "subacute"},
+    "Sudden Acquired Retinal Degeneration (SARDS)": {"acute"},
+    "Progressive Retinal Atrophy (PRA)":         {"chronic"},
+    "Cataracts":                                 {"chronic"},
+    # -- Ear --
+    "Ear Infection (Otitis)":                    {"acute", "subacute", "chronic"},
+    "Foreign Body in Ear":                       {"acute"},
+    "Aural Hematoma":                            {"acute"},
+    # -- Musculoskeletal --
+    "Osteoarthritis":                            {"chronic"},
+    "Cruciate Ligament Injury":                  {"acute"},
+    "Hip Dysplasia":                             {"chronic"},
+    "Intervertebral Disc Disease (IVDD)":        {"acute", "chronic"},
+    "Elbow Dysplasia":                           {"chronic"},
+    "Legg-Calvé-Perthes Disease":                {"subacute", "chronic"},
+    "Osteochondritis Dissecans (OCD)":           {"subacute", "chronic"},
+    "Panosteitis":                               {"subacute"},
+    "Hypertrophic Osteodystrophy (HOD)":         {"acute", "subacute"},
+    "Patellar Luxation":                         {"acute", "chronic"},
+    "Spondylosis Deformans":                     {"chronic"},
+    "Masticatory Muscle Myositis":               {"acute", "subacute"},
+    "Craniomandibular Osteopathy":               {"subacute"},
+    "Immune-Mediated Polyarthritis (IMPA)":      {"acute", "subacute"},
+    "Luxating Shoulder":                         {"acute", "chronic"},
+    "Hypertrophic Osteopathy":                   {"subacute", "chronic"},
+    # -- Neurological --
+    "Epilepsy":                                  {"acute"},
+    "Vestibular Disease":                        {"acute"},
+    "Wobbler Syndrome":                          {"subacute", "chronic"},
+    "Hydrocephalus":                             {"chronic"},
+    "Syringomyelia (Chiari Malformation)":       {"chronic"},
+    "Cognitive Dysfunction Syndrome (CDS)":      {"chronic"},
+    "Myasthenia Gravis":                         {"subacute", "chronic"},
+    "Granulomatous Meningoencephalitis (GME)":   {"acute", "subacute"},
+    "Degenerative Myelopathy (DM)":              {"chronic"},
+    "Cerebellar Hypoplasia":                     {"chronic"},
+    "Tick Paralysis":                            {"acute", "subacute"},
+    "Fibrocartilaginous Embolism (FCE)":         {"acute"},
+    "Canine Distemper Encephalitis":             {"subacute"},
+    "Scotty Cramp":                              {"acute"},
+    "Cauda Equina Syndrome (Lumbosacral Stenosis)": {"chronic"},
+    "Brain Tumor":                               {"subacute", "chronic"},
+    # -- Oncology --
+    "Cancer/Neoplasia":                          {"chronic"},
+    "Hemangiosarcoma":                           {"acute", "chronic"},
+    "Lymphoma":                                  {"subacute", "chronic"},
+    "Osteosarcoma":                              {"subacute", "chronic"},
+    "Mast Cell Tumor":                           {"subacute", "chronic"},
+    "Melanoma":                                  {"chronic"},
+    "Squamous Cell Carcinoma":                   {"chronic"},
+    "Mammary Tumor":                             {"chronic"},
+    "Transitional Cell Carcinoma":               {"chronic"},
+    "Histiocytic Sarcoma":                       {"subacute", "chronic"},
+    "Fibrosarcoma":                              {"chronic"},
+    "Anal Sac Adenocarcinoma":                   {"chronic"},
+    "Insulinoma (Pancreatic Beta Cell Tumor)":   {"subacute", "chronic"},
+    "Thyroid Carcinoma":                         {"chronic"},
+    "Perianal Adenoma":                          {"chronic"},
+    "Soft Tissue Sarcoma":                       {"chronic"},
+    "Lipoma":                                    {"chronic"},
+    "Plasmacytoma":                              {"subacute", "chronic"},
+    "Oral Melanoma":                             {"chronic"},
+    "Epulis (Gingival Mass)":                    {"chronic"},
+    # -- Reproductive --
+    "Pyometra":                                  {"acute", "subacute"},
+    "Prostate Disease":                          {"chronic"},
+    "Cryptorchidism":                            {"chronic"},
+    "Mastitis":                                  {"acute"},
+    "Eclampsia (Milk Fever)":                    {"acute"},
+    "Benign Prostatic Hyperplasia (BPH)":        {"chronic"},
+    "Vaginitis":                                 {"subacute", "chronic"},
+    "Testicular Tumor":                          {"chronic"},
+    "Paraphimosis":                              {"acute"},
+    "Dystocia":                                  {"acute"},
+    # -- Hematological --
+    "Immune-Mediated Hemolytic Anemia":          {"acute", "subacute"},
+    "Thrombocytopenia":                          {"acute", "subacute"},
+    "Hemophilia A":                              {"acute"},
+    "Autoimmune Thrombocytopenia (ITP)":         {"acute", "subacute"},
+    "von Willebrand Disease":                    {"acute"},
+    "Exercise-Induced Collapse (EIC)":           {"acute"},
+    "Disseminated Intravascular Coagulation (DIC)": {"acute"},
+    "Anemia of Chronic Disease":                 {"chronic"},
+    "Evan's Syndrome":                           {"acute", "subacute"},
+    "Hemolytic Uremic Syndrome":                 {"acute"},
+    # -- Toxicology --
+    "Chocolate Toxicosis":                       {"acute"},
+    "Grape/Raisin Toxicosis":                    {"acute"},
+    "Xylitol Poisoning":                         {"acute"},
+    "NSAID Toxicosis":                           {"acute"},
+    "Rodenticide Poisoning":                     {"acute", "subacute"},
+    "Onion/Garlic Toxicosis":                    {"acute", "subacute"},
+    "Ethylene Glycol Poisoning (Antifreeze)":    {"acute"},
+    "Marijuana Toxicosis":                       {"acute"},
+    "Lead Poisoning":                            {"acute", "chronic"},
+    # -- Environmental --
+    "Heat Stroke":                               {"acute"},
+    "Hypothermia":                               {"acute"},
+    "Drowning / Near-Drowning":                  {"acute"},
+    "Snakebite Envenomation":                    {"acute"},
+    "Bee/Wasp Sting Anaphylaxis":                {"acute"},
+    # -- Dental --
+    "Periodontal Disease":                       {"chronic"},
+    "Tooth Abscess":                             {"acute", "subacute"},
+    "Tooth Fracture":                            {"acute"},
+    "Stomatitis":                                {"subacute", "chronic"},
+    "Cleft Palate":                              {"chronic"},
+    # -- Behavioral --
+    "Separation Anxiety":                        {"chronic"},
+    "Compulsive Disorder (Canine OCD)":          {"chronic"},
+    "Noise Phobia":                              {"acute", "chronic"},
+    "Pica":                                      {"chronic"},
+    # -- Congenital --
+    "Congenital Deafness":                       {"chronic"},
+    "Atlantoaxial Instability":                  {"acute", "chronic"},
+    "Persistent Right Aortic Arch (PRAA)":       {"chronic"},
+    "Mucopolysaccharidosis":                     {"chronic"},
+    "Glycogen Storage Disease":                  {"chronic"},
+    "Malignant Hyperthermia":                    {"acute"},
+    "Juvenile Cellulitis (Puppy Strangles)":     {"acute", "subacute"},
+}
+
+
+_DISEASE_AGE_PREDISPOSITION: dict[str, set[str]] = {
+    # -- Puppy / young predispositions --
+    "Canine Parvovirus":                        {"puppy", "young"},
+    "Canine Distemper":                          {"puppy", "young"},
+    "Canine Herpesvirus (CHV)":                 {"puppy"},
+    "Canine Papillomatosis":                    {"puppy", "young"},
+    "Roundworm Infection (Toxocara)":           {"puppy"},
+    "Hookworm Infection":                       {"puppy", "young"},
+    "Coccidiosis":                              {"puppy", "young"},
+    "Giardiasis":                               {"puppy", "young"},
+    "Intestinal Parasites":                     {"puppy", "young"},
+    "Cherry Eye":                               {"puppy", "young"},
+    "Panosteitis":                              {"puppy", "young"},
+    "Hypertrophic Osteodystrophy (HOD)":        {"puppy"},
+    "Legg-Calvé-Perthes Disease":               {"puppy", "young"},
+    "Osteochondritis Dissecans (OCD)":          {"puppy", "young"},
+    "Intestinal Intussusception":               {"puppy", "young"},
+    "Juvenile Cellulitis (Puppy Strangles)":    {"puppy"},
+    "Craniomandibular Osteopathy":              {"puppy"},
+    "Retinal Dysplasia":                        {"puppy"},
+    "Collie Eye Anomaly (CEA)":                 {"puppy"},
+    "Cleft Palate":                             {"puppy"},
+    "Congenital Deafness":                      {"puppy"},
+    "Atlantoaxial Instability":                 {"puppy", "young"},
+    "Persistent Right Aortic Arch (PRAA)":      {"puppy"},
+    "Mucopolysaccharidosis":                    {"puppy"},
+    "Glycogen Storage Disease":                 {"puppy"},
+    "Patent Ductus Arteriosus (PDA)":           {"puppy", "young"},
+    "Ventricular Septal Defect (VSD)":          {"puppy", "young"},
+    "Portosystemic Shunt (Congenital)":         {"puppy", "young"},
+    "Hydrocephalus":                            {"puppy"},
+    "Cerebellar Hypoplasia":                    {"puppy"},
+    "Ectopic Ureter":                           {"puppy", "young"},
+    # -- Young / adult --
+    "Epilepsy":                                 {"young", "adult"},
+    "Allergic Dermatitis":                      {"young", "adult"},
+    "Immune-Mediated Hemolytic Anemia":         {"young", "adult"},
+    "Autoimmune Thrombocytopenia (ITP)":        {"young", "adult"},
+    "Immune-Mediated Polyarthritis (IMPA)":     {"young", "adult"},
+    "Granulomatous Meningoencephalitis (GME)":  {"young", "adult"},
+    "Systemic Lupus Erythematosus (SLE)":       {"young", "adult"},
+    "Evan's Syndrome":                          {"young", "adult"},
+    "Separation Anxiety":                       {"young", "adult"},
+    "Exercise-Induced Collapse (EIC)":          {"young", "adult"},
+    "Cruciate Ligament Injury":                 {"adult"},
+    "Pyometra":                                 {"adult", "senior"},
+    "Mastitis":                                 {"adult"},
+    "Eclampsia (Milk Fever)":                   {"adult"},
+    "Dystocia":                                 {"adult"},
+    "Cutaneous Histiocytoma":                   {"young"},
+    # -- Senior predispositions --
+    "Hypothyroidism":                           {"adult", "senior"},
+    "Cushing's Disease":                        {"adult", "senior"},
+    "Diabetes Mellitus":                        {"adult", "senior"},
+    "Kidney Disease (CKD)":                     {"senior"},
+    "Heart Disease/CHF":                        {"adult", "senior"},
+    "Dilated Cardiomyopathy (DCM)":             {"adult", "senior"},
+    "Mitral Valve Disease (MMVD)":              {"adult", "senior"},
+    "Osteoarthritis":                           {"adult", "senior"},
+    "Cognitive Dysfunction Syndrome (CDS)":     {"senior"},
+    "Degenerative Myelopathy (DM)":             {"adult", "senior"},
+    "Laryngeal Paralysis":                      {"senior"},
+    "Vestibular Disease":                       {"senior"},
+    "Cancer/Neoplasia":                         {"adult", "senior"},
+    "Hemangiosarcoma":                          {"adult", "senior"},
+    "Lymphoma":                                 {"adult", "senior"},
+    "Osteosarcoma":                             {"adult", "senior"},
+    "Mast Cell Tumor":                          {"adult", "senior"},
+    "Melanoma":                                 {"senior"},
+    "Squamous Cell Carcinoma":                  {"adult", "senior"},
+    "Mammary Tumor":                            {"adult", "senior"},
+    "Transitional Cell Carcinoma":              {"senior"},
+    "Histiocytic Sarcoma":                      {"adult", "senior"},
+    "Fibrosarcoma":                             {"adult", "senior"},
+    "Anal Sac Adenocarcinoma":                  {"senior"},
+    "Insulinoma (Pancreatic Beta Cell Tumor)":  {"adult", "senior"},
+    "Thyroid Carcinoma":                        {"adult", "senior"},
+    "Perianal Adenoma":                         {"senior"},
+    "Hepatocellular Carcinoma":                 {"senior"},
+    "Soft Tissue Sarcoma":                      {"adult", "senior"},
+    "Oral Melanoma":                            {"senior"},
+    "Brain Tumor":                              {"adult", "senior"},
+    "Prostate Disease":                         {"adult", "senior"},
+    "Benign Prostatic Hyperplasia (BPH)":       {"adult", "senior"},
+    "Testicular Tumor":                         {"adult", "senior"},
+    "Cataracts":                                {"senior"},
+    "Nuclear Sclerosis":                        {"senior"},
+    "Sudden Acquired Retinal Degeneration (SARDS)": {"adult", "senior"},
+    "Progressive Retinal Atrophy (PRA)":        {"adult", "senior"},
+    "Sick Sinus Syndrome":                      {"senior"},
+    "Atrial Fibrillation":                      {"senior"},
+    "Pulmonary Fibrosis":                       {"senior"},
+    "Nasal Tumor":                              {"senior"},
+    "Nasal Adenocarcinoma":                     {"senior"},
+    "Spondylosis Deformans":                    {"senior"},
+    "Cauda Equina Syndrome (Lumbosacral Stenosis)": {"adult", "senior"},
+    "Tracheal Collapse":                        {"adult", "senior"},
+    "Periodontal Disease":                      {"adult", "senior"},
+    "Hip Dysplasia":                            {"puppy", "young", "adult"},
+    "Elbow Dysplasia":                          {"puppy", "young"},
+    "Patellar Luxation":                        {"young", "adult"},
+    "Intervertebral Disc Disease (IVDD)":       {"adult", "senior"},
+    "Wobbler Syndrome":                         {"young", "senior"},
+    "Brachycephalic Airway Syndrome":           {"young", "adult", "senior"},
+    "Hepatozoonosis":                           {"young", "adult"},
+    "Hyperparathyroidism":                      {"senior"},
+    "Anemia of Chronic Disease":                {"adult", "senior"},
+    "Lipoma":                                   {"adult", "senior"},
+    "Alopecia X":                               {"adult"},
+    "Keratoconjunctivitis Sicca (Dry Eye)":     {"adult", "senior"},
+    "Glaucoma":                                 {"adult", "senior"},
+    "Pericardial Effusion":                     {"adult", "senior"},
+    "Infective Endocarditis":                   {"adult", "senior"},
+    "Chemodectoma (Heart Base Tumor)":          {"senior"},
+    "Chylothorax":                              {"adult", "senior"},
+    "Megacolon":                                {"adult", "senior"},
+    "Copper Storage Disease":                   {"young", "adult"},
+    "Myasthenia Gravis":                        {"young", "adult", "senior"},
+    "Pemphigus":                                {"adult"},
+    "Sebaceous Adenitis":                       {"young", "adult"},
+    "Epulis (Gingival Mass)":                   {"adult", "senior"},
+    "Plasmacytoma":                             {"adult", "senior"},
+}
+
+
+def _age_years_to_stage(age_years: float) -> str:
+    """Convert numeric age to life-stage label."""
+    if age_years < 1.0:
+        return "puppy"
+    if age_years < 3.0:
+        return "young"
+    if age_years < 7.0:
+        return "adult"
+    return "senior"
+
+
+# ---------------------------------------------------------------------------
 # Disease database
 # ---------------------------------------------------------------------------
 # Each entry:
@@ -5498,7 +5926,13 @@ _LIKELIHOOD_TO_PRIORITY: dict[str, str] = {
 # Public API
 # ---------------------------------------------------------------------------
 
-def analyze_symptoms(symptoms: list[str], *, breed: str | None = None) -> dict:
+def analyze_symptoms(
+    symptoms: list[str],
+    *,
+    breed: str | None = None,
+    onset: str | None = None,
+    age_years: float | None = None,
+) -> dict:
     """Analyze a list of symptom IDs and return suspected diseases, tests,
     severity assessment, and general advice.
 
@@ -5511,16 +5945,39 @@ def analyze_symptoms(symptoms: list[str], *, breed: str | None = None) -> dict:
         Optional breed ID string (e.g. ``"101_french_bulldog"``).  When
         provided and present in ``_BREED_DISEASE_RISK``, disease match
         scores are boosted by breed-specific risk multipliers.
+    onset:
+        Optional time-course indicator: ``"acute"`` (within 24h),
+        ``"subacute"`` (days to ~1 week), or ``"chronic"`` (weeks/months).
+        When provided, diseases whose typical onset pattern matches receive
+        a score boost; mismatches receive a penalty.
+    age_years:
+        Optional age of the animal in years.  When provided, diseases with
+        a known age predisposition matching the animal's life stage receive
+        a score boost; clear mismatches receive a penalty.
 
     Returns
     -------
     dict
         Analysis result containing ``suspected_diseases``,
         ``recommended_tests``, ``severity``, ``general_advice``,
-        ``general_advice_ja``, ``breed_genetic_tests``, and
-        ``breed_risk_applied``.
+        ``general_advice_ja``, ``breed_genetic_tests``,
+        ``breed_risk_applied``, ``onset_applied``, and ``age_applied``.
     """
     symptom_set: set[str] = set(symptoms) & VALID_SYMPTOMS
+
+    # Resolve age stage for predisposition lookup
+    age_stage: str | None = None
+    if age_years is not None:
+        age_stage = _age_years_to_stage(age_years)
+
+    # Pre-compute symptom pair boosts and import clinical weights
+    from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT
+    pair_boosts: dict[str, float] = {}
+    for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
+        if pair.issubset(symptom_set):
+            for disease_name, multiplier in disease_boosts.items():
+                if disease_name not in pair_boosts or multiplier > pair_boosts[disease_name]:
+                    pair_boosts[disease_name] = multiplier
 
     # -- 1. Score diseases --------------------------------------------------
     suspected: list[dict[str, Any]] = []
@@ -5533,11 +5990,17 @@ def analyze_symptoms(symptoms: list[str], *, breed: str | None = None) -> dict:
         if total == 0 or match_count == 0:
             continue
 
-        # Coverage: how many of the disease's symptoms did the user check?
-        coverage: float = match_count / total
-        # Jaccard: intersection / union (penalises unrelated extra symptoms)
-        union_size = len(symptom_set | disease_symptoms)
-        jaccard: float = match_count / union_size if union_size > 0 else 0.0
+        # Weighted coverage: 臨床的重要度で重み付け
+        # 病態特異的な症状 (seizures=2.5 etc.) の一致は非特異的な症状より高スコア
+        _w = SYMPTOM_CLINICAL_WEIGHTS
+        _dw = _DEFAULT_SYMPTOM_WEIGHT
+        matching_weight = sum(_w.get(s, _dw) for s in matching)
+        total_weight = sum(_w.get(s, _dw) for s in disease_symptoms)
+        coverage: float = matching_weight / total_weight if total_weight > 0 else 0.0
+        # Weighted Jaccard: weighted intersection / weighted union
+        union_symptoms = symptom_set | disease_symptoms
+        union_weight = sum(_w.get(s, _dw) for s in union_symptoms)
+        jaccard: float = matching_weight / union_weight if union_weight > 0 else 0.0
         # Composite score (same formula used in the frontend)
         raw_score: float = (jaccard * 0.4 + coverage * 0.6) * 100
 
@@ -5546,6 +6009,38 @@ def analyze_symptoms(symptoms: list[str], *, breed: str | None = None) -> dict:
         if breed and breed in _BREED_DISEASE_RISK:
             breed_multiplier = _BREED_DISEASE_RISK[breed].get(disease["name"], 1.0)
         adjusted_score = min(raw_score * breed_multiplier, 100.0)
+
+        # Apply onset (time-course) multiplier
+        onset_multiplier = 1.0
+        if onset:
+            disease_onsets = _DISEASE_ONSET.get(disease["name"])
+            if disease_onsets:
+                if onset in disease_onsets:
+                    # Matching onset pattern -> boost
+                    onset_multiplier = 1.3
+                else:
+                    # Mismatch -> penalize
+                    onset_multiplier = 0.7
+            # If disease has no onset data, leave multiplier at 1.0
+        adjusted_score = min(adjusted_score * onset_multiplier, 100.0)
+
+        # Apply age predisposition multiplier
+        age_multiplier = 1.0
+        if age_stage:
+            age_predisposition = _DISEASE_AGE_PREDISPOSITION.get(disease["name"])
+            if age_predisposition:
+                if age_stage in age_predisposition:
+                    # Age group matches -> boost
+                    age_multiplier = 1.25
+                else:
+                    # Age mismatch -> penalize
+                    age_multiplier = 0.75
+            # If disease has no age predisposition data, leave at 1.0
+        adjusted_score = min(adjusted_score * age_multiplier, 100.0)
+
+        # Apply symptom pair boost
+        pair_multiplier = pair_boosts.get(disease["name"], 1.0)
+        adjusted_score = min(adjusted_score * pair_multiplier, 100.0)
 
         # Determine likelihood from adjusted score
         if adjusted_score >= 55 or match_count >= 4:
@@ -5625,6 +6120,11 @@ def analyze_symptoms(symptoms: list[str], *, breed: str | None = None) -> dict:
         "general_advice_ja": advice_pair["ja"],
         "breed_genetic_tests": genetic_tests,
         "breed_risk_applied": breed is not None and breed in _BREED_DISEASE_RISK,
+        "onset_applied": onset is not None,
+        "onset": onset,
+        "age_applied": age_years is not None,
+        "age_years": age_years,
+        "age_stage": age_stage,
         "symptom_names": symptom_names_lookup,
     }
 

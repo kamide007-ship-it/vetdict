@@ -348,14 +348,32 @@ def api_analyze_symptoms():
     species = data.get('species', 'dog')
     age_stage = data.get('age_stage')
     breed = data.get('breed')
+    onset = data.get('onset')  # "acute" | "subacute" | "chronic"
+    age_years = data.get('age_years')  # numeric age in years
+
+    # Validate onset
+    if onset and onset not in ('acute', 'subacute', 'chronic'):
+        return {'error': "onset must be 'acute', 'subacute', or 'chronic'"}, 400
+
+    # Coerce age_years to float
+    if age_years is not None:
+        try:
+            age_years = float(age_years)
+        except (ValueError, TypeError):
+            return {'error': 'age_years must be a number'}, 400
 
     try:
         if species == 'dog' or species is None:
-            result = analyze_symptoms(symptoms, breed=breed)
+            result = analyze_symptoms(
+                symptoms, breed=breed, onset=onset, age_years=age_years,
+            )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
                 return {'error': 'Species analyzer module not available'}, 500
-            result = analyze_species_symptoms(species, symptoms, age_stage)
+            result = analyze_species_symptoms(
+                species, symptoms, age_stage,
+                breed=breed, onset=onset, age_years=age_years,
+            )
         return result
     except ValueError as ve:
         logger.error(f"Symptom analysis error: {ve}", exc_info=True)
@@ -363,6 +381,25 @@ def api_analyze_symptoms():
     except Exception as e:
         logger.error(f"Symptom analysis error: {e}", exc_info=True)
         return {'error': '症状解析に失敗しました'}, 500
+
+
+# =============================================================================
+# API: Species Breeds
+# =============================================================================
+
+@app.route('/api/breeds/<species>', methods=['GET'])
+@ensure_json_response
+def api_get_breeds(species):
+    """Return available breeds for a given species."""
+    try:
+        from api.species.helpers import SPECIES_BREEDS
+    except ImportError:
+        from species.helpers import SPECIES_BREEDS
+    breeds = SPECIES_BREEDS.get(species, [])
+    return {
+        "species": species,
+        "breeds": [{"id": b["id"], "name": b["name"], "name_ja": b["name_ja"]} for b in breeds],
+    }
 
 
 # =============================================================================

@@ -9,7 +9,7 @@ defined here for consistent messaging across species.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Set, Tuple
 
 # Default advice messages for various severity levels. These are used when
 # species-specific modules do not supply their own advice dictionary.
@@ -31,6 +31,599 @@ ADVICE: Dict[str, Dict[str, str]] = {
         "ja": "緊急: 直ちに獣医師の診察を受けてください。",
     },
 }
+
+
+# =============================================================================
+# BREED DATA PER SPECIES
+# =============================================================================
+# Each species maps breed_id -> {name, name_ja, risk: {disease_name: multiplier}}
+
+SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
+    "cat": [
+        {"id": "cat_mixed", "name": "Mixed Breed", "name_ja": "雑種（ミックス）",
+         "risk": {}},
+        {"id": "cat_persian", "name": "Persian", "name_ja": "ペルシャ",
+         "risk": {"Polycystic Kidney Disease (PKD)": 2.5, "Feline Hypertrophic Cardiomyopathy (HCM)": 1.5,
+                  "Feline Chronic Kidney Disease (CKD)": 1.8, "Brachycephalic Airway Syndrome": 2.0,
+                  "Feline Lower Urinary Tract Disease (FLUTD)": 1.3}},
+        {"id": "cat_scottish_fold", "name": "Scottish Fold", "name_ja": "スコティッシュフォールド",
+         "risk": {"Scottish Fold Osteochondrodysplasia": 3.0, "Feline Hypertrophic Cardiomyopathy (HCM)": 1.8,
+                  "Polycystic Kidney Disease (PKD)": 1.5, "Osteoarthritis (Degenerative Joint Disease)": 2.0}},
+        {"id": "cat_munchkin", "name": "Munchkin", "name_ja": "マンチカン",
+         "risk": {"Osteoarthritis": 2.0, "Intervertebral Disc Disease": 1.8,
+                  "Lordosis": 1.5}},
+        {"id": "cat_american_shorthair", "name": "American Shorthair", "name_ja": "アメリカンショートヘア",
+         "risk": {"Feline Hypertrophic Cardiomyopathy (HCM)": 1.5, "Obesity": 1.3}},
+        {"id": "cat_russian_blue", "name": "Russian Blue", "name_ja": "ロシアンブルー",
+         "risk": {"Feline Lower Urinary Tract Disease (FLUTD)": 1.5, "Obesity": 1.5}},
+        {"id": "cat_norwegian_forest", "name": "Norwegian Forest Cat", "name_ja": "ノルウェージャンフォレストキャット",
+         "risk": {"Feline Hypertrophic Cardiomyopathy (HCM)": 1.8, "Hip Dysplasia": 1.5,
+                  "Glycogen Storage Disease Type IV": 2.0}},
+        {"id": "cat_maine_coon", "name": "Maine Coon", "name_ja": "メインクーン",
+         "risk": {"Feline Hypertrophic Cardiomyopathy (HCM)": 2.5, "Hip Dysplasia": 1.8,
+                  "Spinal Muscular Atrophy": 1.5, "Polycystic Kidney Disease (PKD)": 1.3}},
+        {"id": "cat_ragdoll", "name": "Ragdoll", "name_ja": "ラグドール",
+         "risk": {"Feline Hypertrophic Cardiomyopathy (HCM)": 2.0, "Feline Lower Urinary Tract Disease (FLUTD)": 1.5,
+                  "Bladder Stones": 1.3}},
+        {"id": "cat_bengal", "name": "Bengal", "name_ja": "ベンガル",
+         "risk": {"Feline Hypertrophic Cardiomyopathy (HCM)": 1.5, "Progressive Retinal Atrophy (PRA)": 2.0,
+                  "Feline Infectious Peritonitis (FIP)": 1.3}},
+        {"id": "cat_siamese", "name": "Siamese", "name_ja": "シャム（サイアミーズ）",
+         "risk": {"Feline Asthma": 2.0, "Amyloidosis": 1.8,
+                  "Megaesophagus": 1.5, "Progressive Retinal Atrophy (PRA)": 1.5}},
+        {"id": "cat_abyssinian", "name": "Abyssinian", "name_ja": "アビシニアン",
+         "risk": {"Feline Chronic Kidney Disease (CKD)": 1.8, "Amyloidosis": 2.0,
+                  "Progressive Retinal Atrophy (PRA)": 1.5, "Pyruvate Kinase Deficiency": 2.0}},
+        {"id": "cat_british_shorthair", "name": "British Shorthair", "name_ja": "ブリティッシュショートヘア",
+         "risk": {"Feline Hypertrophic Cardiomyopathy (HCM)": 2.0, "Polycystic Kidney Disease (PKD)": 1.5,
+                  "Obesity": 1.5}},
+        {"id": "cat_sphynx", "name": "Sphynx", "name_ja": "スフィンクス",
+         "risk": {"Feline Hypertrophic Cardiomyopathy (HCM)": 2.5, "Skin Infections": 1.8,
+                  "Urticaria Pigmentosa": 1.5}},
+        {"id": "cat_exotic_shorthair", "name": "Exotic Shorthair", "name_ja": "エキゾチックショートヘア",
+         "risk": {"Polycystic Kidney Disease (PKD)": 2.5, "Brachycephalic Airway Syndrome": 2.0,
+                  "Feline Hypertrophic Cardiomyopathy (HCM)": 1.5}},
+    ],
+    "rabbit": [
+        {"id": "rabbit_mixed", "name": "Mixed Breed", "name_ja": "雑種（ミックス）",
+         "risk": {}},
+        {"id": "rabbit_netherland_dwarf", "name": "Netherland Dwarf", "name_ja": "ネザーランドドワーフ",
+         "risk": {"Malocclusion": 2.5, "Gastrointestinal Stasis": 1.5, "Pasteurellosis": 1.3}},
+        {"id": "rabbit_holland_lop", "name": "Holland Lop", "name_ja": "ホーランドロップ",
+         "risk": {"Otitis Media/Interna": 2.0, "Malocclusion": 1.8, "Gastrointestinal Stasis": 1.3}},
+        {"id": "rabbit_mini_rex", "name": "Mini Rex", "name_ja": "ミニレッキス",
+         "risk": {"Sore Hocks (Pododermatitis)": 2.0, "Gastrointestinal Stasis": 1.3}},
+        {"id": "rabbit_lionhead", "name": "Lionhead", "name_ja": "ライオンヘッド",
+         "risk": {"Malocclusion": 1.8, "Wool Block/Trichobezoar": 2.0}},
+        {"id": "rabbit_flemish_giant", "name": "Flemish Giant", "name_ja": "フレミッシュジャイアント",
+         "risk": {"Sore Hocks (Pododermatitis)": 2.0, "Spondylosis": 1.8, "Heart Disease": 1.5}},
+        {"id": "rabbit_rex", "name": "Rex", "name_ja": "レッキス",
+         "risk": {"Sore Hocks (Pododermatitis)": 2.5, "Gastrointestinal Stasis": 1.3}},
+        {"id": "rabbit_lop_eared", "name": "Lop Eared (General)", "name_ja": "ロップイヤー（一般）",
+         "risk": {"Otitis Media/Interna": 2.5, "Ear Mites": 1.5, "Dental Disease": 1.3}},
+    ],
+    "hamster": [
+        {"id": "hamster_golden", "name": "Golden (Syrian)", "name_ja": "ゴールデン（シリアン）",
+         "risk": {"Wet Tail (Proliferative Ileitis)": 2.0, "Hamster Pyometra": 1.8, "Amyloidosis": 1.5}},
+        {"id": "hamster_djungarian", "name": "Djungarian (Winter White)", "name_ja": "ジャンガリアン",
+         "risk": {"Diabetes Mellitus": 2.5, "Tumors/Neoplasia": 1.5}},
+        {"id": "hamster_campbell", "name": "Campbell's Dwarf", "name_ja": "キャンベル",
+         "risk": {"Diabetes Mellitus": 3.0, "Glaucoma": 1.5}},
+        {"id": "hamster_roborovski", "name": "Roborovski", "name_ja": "ロボロフスキー",
+         "risk": {"Tumors/Neoplasia": 1.3}},
+    ],
+    "ferret": [
+        {"id": "ferret_standard", "name": "Standard", "name_ja": "スタンダード",
+         "risk": {}},
+        {"id": "ferret_marshall", "name": "Marshall Ferret", "name_ja": "マーシャルフェレット",
+         "risk": {"Adrenal Disease": 2.0, "Insulinoma": 1.8, "Lymphoma": 1.5}},
+        {"id": "ferret_angora", "name": "Angora", "name_ja": "アンゴラ",
+         "risk": {"Adrenal Disease": 1.5, "Hairball/GI Obstruction": 1.8}},
+    ],
+    "guinea_pig": [
+        {"id": "guinea_pig_american", "name": "American (Short Hair)", "name_ja": "アメリカン（短毛）",
+         "risk": {}},
+        {"id": "guinea_pig_abyssinian", "name": "Abyssinian", "name_ja": "アビシニアン",
+         "risk": {"Ovarian Cysts": 1.5, "Diabetes Mellitus": 1.3}},
+        {"id": "guinea_pig_peruvian", "name": "Peruvian", "name_ja": "ペルビアン",
+         "risk": {"Dermatophytosis (Ringworm)": 1.8, "Heat Stroke": 1.5}},
+        {"id": "guinea_pig_skinny", "name": "Skinny Pig", "name_ja": "スキニーギニアピッグ",
+         "risk": {"Hypothermia": 2.0, "Skin Infections": 1.8, "Sunburn": 2.0}},
+        {"id": "guinea_pig_teddy", "name": "Teddy", "name_ja": "テディ",
+         "risk": {"Ear Wax Buildup": 1.5, "Dermatophytosis (Ringworm)": 1.3}},
+    ],
+    "chinchilla": [
+        {"id": "chinchilla_standard", "name": "Standard Grey", "name_ja": "スタンダードグレー",
+         "risk": {}},
+        {"id": "chinchilla_velvet", "name": "Black Velvet", "name_ja": "ブラックベルベット",
+         "risk": {"Lethal Gene Issues": 1.5}},
+    ],
+    "hedgehog": [
+        {"id": "hedgehog_four_toed", "name": "Four-toed (African Pygmy)", "name_ja": "ヨツユビハリネズミ",
+         "risk": {"Wobbly Hedgehog Syndrome (WHS)": 2.0, "Tumors/Neoplasia": 2.0,
+                  "Obesity": 1.5, "Mite Infestation": 1.3}},
+    ],
+    "bird": [
+        {"id": "bird_mixed", "name": "Mixed/Other", "name_ja": "その他",
+         "risk": {}},
+        {"id": "bird_canary", "name": "Canary", "name_ja": "カナリア",
+         "risk": {"Air Sac Mites": 2.0, "Avian Pox": 1.5}},
+        {"id": "bird_finch", "name": "Finch", "name_ja": "フィンチ",
+         "risk": {"Air Sac Mites": 2.0, "Coccidiosis": 1.5}},
+        {"id": "bird_java_sparrow", "name": "Java Sparrow", "name_ja": "文鳥",
+         "risk": {"Egg Binding": 1.8, "Obesity": 1.5, "Iron Storage Disease": 1.5}},
+    ],
+    "parakeet": [
+        {"id": "parakeet_budgerigar", "name": "Budgerigar", "name_ja": "セキセイインコ",
+         "risk": {"Budgerigar Fledgling Disease (BFD)": 2.5, "Tumors/Neoplasia": 2.0,
+                  "Scaly Face Mites": 1.8, "Megabacteriosis (AGY)": 2.0, "Goiter": 1.5}},
+        {"id": "parakeet_cockatiel", "name": "Cockatiel", "name_ja": "オカメインコ",
+         "risk": {"Fatty Liver Disease (Hepatic Lipidosis)": 2.0, "Night Frights": 1.5,
+                  "Egg Binding": 1.8, "Chronic Egg Laying": 2.0}},
+        {"id": "parakeet_lovebird", "name": "Lovebird", "name_ja": "コザクラインコ/ボタンインコ",
+         "risk": {"Psittacine Beak and Feather Disease (PBFD)": 1.5, "Feather Plucking": 1.5,
+                  "Chronic Egg Laying": 1.8}},
+    ],
+    "parrot": [
+        {"id": "parrot_african_grey", "name": "African Grey", "name_ja": "ヨウム",
+         "risk": {"Feather Plucking": 2.5, "Hypocalcemia": 2.5, "Aspergillosis": 2.0,
+                  "Psittacine Beak and Feather Disease (PBFD)": 1.5}},
+        {"id": "parrot_amazon", "name": "Amazon Parrot", "name_ja": "アマゾン",
+         "risk": {"Fatty Liver Disease (Hepatic Lipidosis)": 2.5, "Obesity": 2.0,
+                  "Foot Necrosis (Bumblefoot)": 1.5}},
+        {"id": "parrot_macaw", "name": "Macaw", "name_ja": "コンゴウインコ",
+         "risk": {"Proventricular Dilatation Disease (PDD)": 2.0, "Feather Plucking": 1.8,
+                  "Psittacine Beak and Feather Disease (PBFD)": 1.5}},
+        {"id": "parrot_cockatoo", "name": "Cockatoo", "name_ja": "オウム科",
+         "risk": {"Feather Plucking": 3.0, "Psittacine Beak and Feather Disease (PBFD)": 2.0,
+                  "Fatty Liver Disease (Hepatic Lipidosis)": 1.8}},
+    ],
+    "reptile": [
+        {"id": "reptile_general", "name": "General Reptile", "name_ja": "爬虫類（一般）",
+         "risk": {}},
+    ],
+    "tortoise": [
+        {"id": "tortoise_russian", "name": "Russian Tortoise", "name_ja": "ロシアリクガメ",
+         "risk": {"Respiratory Infection": 1.5, "Shell Rot": 1.3}},
+        {"id": "tortoise_hermann", "name": "Hermann's Tortoise", "name_ja": "ヘルマンリクガメ",
+         "risk": {"Metabolic Bone Disease": 1.5, "Herpesvirus": 1.5}},
+        {"id": "tortoise_sulcata", "name": "Sulcata Tortoise", "name_ja": "ケヅメリクガメ",
+         "risk": {"Pyramiding": 2.0, "Bladder Stones": 1.8, "Metabolic Bone Disease": 1.5}},
+        {"id": "tortoise_leopard", "name": "Leopard Tortoise", "name_ja": "ヒョウモンガメ",
+         "risk": {"Respiratory Infection": 1.8, "Parasitic Infection": 1.5}},
+    ],
+    "snake": [
+        {"id": "snake_ball_python", "name": "Ball Python", "name_ja": "ボールパイソン",
+         "risk": {"Respiratory Infection": 1.8, "Inclusion Body Disease (IBD)": 2.0,
+                  "Anorexia/Feeding Refusal": 2.0, "Mite Infestation": 1.5}},
+        {"id": "snake_corn_snake", "name": "Corn Snake", "name_ja": "コーンスネーク",
+         "risk": {"Inclusion Body Disease (IBD)": 1.3, "Dysecdysis (Retained Shed)": 1.5}},
+        {"id": "snake_king_snake", "name": "King Snake", "name_ja": "キングスネーク",
+         "risk": {"Dysecdysis (Retained Shed)": 1.3}},
+        {"id": "snake_boa", "name": "Boa Constrictor", "name_ja": "ボアコンストリクター",
+         "risk": {"Inclusion Body Disease (IBD)": 2.5, "Respiratory Infection": 1.5,
+                  "Mite Infestation": 1.5}},
+    ],
+    "lizard": [
+        {"id": "lizard_leopard_gecko", "name": "Leopard Gecko", "name_ja": "ヒョウモントカゲモドキ",
+         "risk": {"Metabolic Bone Disease": 1.5, "Cryptosporidiosis": 2.0,
+                  "Dysecdysis (Retained Shed)": 1.5, "Impaction": 1.8}},
+        {"id": "lizard_bearded_dragon", "name": "Bearded Dragon", "name_ja": "フトアゴヒゲトカゲ",
+         "risk": {"Metabolic Bone Disease": 2.0, "Adenovirus Infection": 2.0,
+                  "Yellow Fungus Disease": 1.8, "Impaction": 1.5, "Parasitic Infection": 1.5}},
+        {"id": "lizard_crested_gecko", "name": "Crested Gecko", "name_ja": "クレステッドゲッコー",
+         "risk": {"Metabolic Bone Disease": 1.5, "Tail Drop (Autotomy)": 1.3}},
+        {"id": "lizard_chameleon", "name": "Chameleon", "name_ja": "カメレオン",
+         "risk": {"Metabolic Bone Disease": 2.5, "Dehydration": 2.0,
+                  "Respiratory Infection": 1.8, "Egg Binding": 1.8}},
+        {"id": "lizard_iguana", "name": "Green Iguana", "name_ja": "グリーンイグアナ",
+         "risk": {"Metabolic Bone Disease": 2.0, "Kidney Disease": 1.8,
+                  "Bladder Stones": 1.5}},
+    ],
+    "amphibian": [
+        {"id": "amphibian_axolotl", "name": "Axolotl", "name_ja": "ウーパールーパー",
+         "risk": {"Fungal Infection": 2.0, "Gill Damage": 1.8, "Impaction": 1.5,
+                  "Ammonia Poisoning": 1.5}},
+        {"id": "amphibian_pacman_frog", "name": "Pacman Frog", "name_ja": "ベルツノガエル",
+         "risk": {"Impaction": 2.0, "Obesity": 1.8, "Bacterial Dermatitis": 1.5}},
+        {"id": "amphibian_tree_frog", "name": "Tree Frog", "name_ja": "アマガエル",
+         "risk": {"Chytrid Fungus (Bd)": 2.0, "Red Leg Syndrome": 1.8}},
+    ],
+    "sugar_glider": [
+        {"id": "sugar_glider_standard", "name": "Standard Grey", "name_ja": "スタンダードグレー",
+         "risk": {}},
+    ],
+    "degu": [
+        {"id": "degu_standard", "name": "Standard (Agouti)", "name_ja": "スタンダード（アグーチ）",
+         "risk": {"Diabetes Mellitus": 2.5, "Cataracts": 2.0, "Dental Disease": 2.0}},
+    ],
+}
+
+
+# =============================================================================
+# SYMPTOM PAIR BOOST DICTIONARY
+# =============================================================================
+# When two specific symptoms co-occur, boost particular diseases.
+# Format: {frozenset({symptom1, symptom2}): {disease_name: multiplier}}
+# These represent clinically significant symptom combinations that strongly
+# suggest specific diagnoses.
+
+SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
+    # 嘔吐 + 腹部膨満 → GDV (犬・全種共通で適用)
+    frozenset({"vomiting", "bloating"}): {
+        "Gastric Dilatation-Volvulus (GDV/Bloat)": 2.0,
+        "Intestinal Obstruction": 1.5,
+        "Gastrointestinal Stasis": 1.5,
+    },
+    # 多飲 + 頻尿 → 腎臓病・糖尿
+    frozenset({"excessive_thirst", "frequent_urination"}): {
+        "Kidney Disease (CKD)": 2.0,
+        "Feline Chronic Kidney Disease (CKD)": 2.0,
+        "Diabetes Mellitus": 2.0,
+        "Cushing's Disease": 1.5,
+        "Hyperthyroidism": 1.5,
+        "Pyometra": 1.5,
+    },
+    # 咳 + 呼吸困難 → 心不全・肺炎
+    frozenset({"coughing", "labored_breathing"}): {
+        "Heart Disease/CHF": 1.8,
+        "Feline Hypertrophic Cardiomyopathy (HCM)": 1.8,
+        "Pneumonia": 1.8,
+        "Feline Pneumonia": 1.8,
+        "Pleural Effusion": 1.5,
+        "Feline Asthma": 1.5,
+    },
+    # 嘔吐 + 血便 → パルボ・出血性胃腸炎
+    frozenset({"vomiting", "blood_in_stool"}): {
+        "Parvovirus Infection": 2.0,
+        "Hemorrhagic Gastroenteritis (HGE)": 2.0,
+        "Feline Panleukopenia": 2.0,
+        "Intestinal Parasites": 1.5,
+        "Inflammatory Bowel Disease (IBD)": 1.5,
+    },
+    # けいれん + よだれ → 中毒・てんかん
+    frozenset({"seizures", "excessive_drooling"}): {
+        "Poisoning/Toxicity": 2.0,
+        "Epilepsy": 1.8,
+        "Organophosphate Toxicity": 2.0,
+        "Rabies": 1.5,
+    },
+    # 黄疸 + 食欲不振 → 肝臓病
+    frozenset({"jaundice", "loss_of_appetite"}): {
+        "Liver Disease": 2.0,
+        "Feline Hepatic Lipidosis": 2.5,
+        "Leptospirosis": 1.8,
+        "Immune-Mediated Hemolytic Anemia": 1.8,
+        "Cholangitis": 1.8,
+    },
+    # 体重減少 + 食欲不振 → がん・CKD
+    frozenset({"weight_loss", "loss_of_appetite"}): {
+        "Cancer/Neoplasia": 1.8,
+        "Kidney Disease (CKD)": 1.5,
+        "Feline Chronic Kidney Disease (CKD)": 1.5,
+        "Hyperthyroidism": 1.5,
+        "Inflammatory Bowel Disease (IBD)": 1.5,
+        "Feline Infectious Peritonitis (FIP)": 1.5,
+    },
+    # 血尿 + 排尿困難 → 尿路結石・FLUTD
+    frozenset({"blood_in_urine", "straining_to_urinate"}): {
+        "Bladder Stones": 2.0,
+        "Feline Lower Urinary Tract Disease (FLUTD)": 2.5,
+        "Urinary Tract Infection": 1.8,
+        "Urethral Obstruction": 2.0,
+    },
+    # 失神 + 運動不耐性 → 心臓病
+    frozenset({"fainting", "exercise_intolerance"}): {
+        "Heart Disease/CHF": 2.5,
+        "Feline Hypertrophic Cardiomyopathy (HCM)": 2.0,
+        "Aortic Stenosis": 2.0,
+        "Pulmonic Stenosis": 1.8,
+        "Cardiac Arrhythmia": 2.0,
+    },
+    # 発熱 + リンパ節腫脹 → 感染症・リンパ腫
+    frozenset({"fever", "swollen_lymph_nodes"}): {
+        "Lymphoma": 2.0,
+        "Tick-borne Disease": 1.8,
+        "Feline Leukemia Virus (FeLV)": 1.8,
+        "Feline Immunodeficiency Virus (FIV)": 1.5,
+        "Ehrlichiosis": 1.8,
+    },
+    # 下痢 + 嘔吐 → 急性胃腸炎・中毒
+    frozenset({"diarrhea", "vomiting"}): {
+        "Acute Gastroenteritis": 1.8,
+        "Pancreatitis": 1.8,
+        "Poisoning/Toxicity": 1.5,
+        "Foreign Body Ingestion": 1.5,
+        "Feline Panleukopenia": 1.5,
+        "Parvovirus Infection": 1.5,
+    },
+    # 蒼白 + 無気力 → 貧血
+    frozenset({"pale_gums", "lethargy"}): {
+        "Immune-Mediated Hemolytic Anemia": 2.0,
+        "Internal Hemorrhage": 2.0,
+        "Tick-borne Disease": 1.8,
+        "Feline Infectious Anemia (Hemobartonellosis)": 2.0,
+        "Rodenticide Poisoning": 1.8,
+    },
+    # 咳 + 運動不耐性 → 心臓病・気管虚脱
+    frozenset({"coughing", "exercise_intolerance"}): {
+        "Heart Disease/CHF": 2.0,
+        "Tracheal Collapse": 2.0,
+        "Heartworm Disease": 1.8,
+    },
+    # 目の白濁 + 目の充血 → 緑内障
+    frozenset({"cloudiness_in_eyes", "redness_in_eyes"}): {
+        "Glaucoma": 2.5,
+        "Uveitis": 2.0,
+        "Corneal Ulcer": 1.5,
+    },
+    # 跛行 + 関節痛 → 関節疾患
+    frozenset({"lameness_or_limping", "joint_pain_or_stiffness"}): {
+        "Osteoarthritis": 2.0,
+        "Hip Dysplasia": 1.8,
+        "Cruciate Ligament Injury": 1.8,
+        "Lyme Disease": 1.5,
+        "Immune-Mediated Polyarthritis": 1.8,
+    },
+}
+
+
+# =============================================================================
+# SYMPTOM CLINICAL WEIGHTS (尤度比ベース臨床的重み付け)
+# =============================================================================
+# 各症状の臨床的重要度を重み付け。文献ベースの尤度比 (Likelihood Ratio) を
+# 簡易的に反映し、非特異的な症状 (1.0) から病態特異的な症状 (2.0–3.0) まで
+# スケーリングする。
+#
+# 参考文献:
+#   - Rijnberk & van Sluijs (2009) Medical History and Physical Examination
+#   - Ettinger & Feldman (2017) Textbook of Veterinary Internal Medicine
+#   - Côté (2014) Clinical Veterinary Advisor
+#   - Platt & Olby (2013) Manual of Canine and Feline Neurology
+#
+# カテゴリ:
+#   1.0  = 非特異的 (lethargy, appetite_loss など多くの疾患で出現)
+#   1.2  = やや特異的 (fever, vomiting など)
+#   1.5  = 中程度に特異的 (jaundice, blood_in_urine など)
+#   2.0  = 高度に特異的 / 重篤 (seizures, collapse, hind_limb_paralysis)
+#   2.5–3.0 = 病態特異的 / ほぼ確定的 (特定疾患に直結する所見)
+
+SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
+    # --- 全身症状 (非特異的) ---
+    "lethargy": 1.0,
+    "decreased_activity": 1.0,
+    "weakness": 1.0,
+    "appetite_loss": 1.0,
+    "loss_of_appetite": 1.0,
+    "weight_loss": 1.0,
+    "weight_gain": 1.0,
+    "dehydration": 1.1,
+    "poor_coat": 1.0,
+    "hiding": 1.0,
+    "behavioral_changes": 1.0,
+    "aggression": 1.0,
+    "aggression_change": 1.0,
+    "anxiety": 1.0,
+
+    # --- 発熱 ---
+    "fever": 1.2,
+    "hyperthermia": 1.3,
+    "hypothermia": 1.5,
+
+    # --- 消化器 (やや特異的) ---
+    "vomiting": 1.2,
+    "diarrhea": 1.2,
+    "regurgitation": 1.5,
+    "constipation": 1.2,
+    "bloating": 1.5,
+    "bloated_abdomen": 1.5,
+    "abdominal_pain": 1.3,
+    "abdominal_distension": 1.5,
+    "abdominal_contractions": 1.5,
+    "excessive_gas": 1.1,
+    "bloody_stool": 1.8,
+    "blood_in_stool": 1.8,
+    "drooling": 1.2,
+    "excessive_drooling": 1.2,
+    "vomiting_after_drinking": 1.5,
+    "straining_to_defecate": 1.3,
+    "reduced_fecal_output": 1.3,
+    "fecal_incontinence": 1.5,
+    "eating_non_food": 1.3,
+
+    # --- 呼吸器 ---
+    "coughing": 1.2,
+    "sneezing": 1.1,
+    "nasal_discharge": 1.2,
+    "difficulty_breathing": 1.8,
+    "labored_breathing": 1.8,
+    "rapid_breathing": 1.5,
+    "open_mouth_breathing": 1.8,
+    "noisy_breathing": 1.3,
+    "reverse_sneezing": 1.2,
+    "snoring": 1.0,
+    "wheezing": 1.5,
+    "cyanosis": 2.5,
+
+    # --- 循環器 (高度に特異的) ---
+    "heart_murmur": 2.0,
+    "irregular_heartbeat": 2.0,
+    "muffled_heart_sounds": 2.0,
+    "exercise_intolerance": 1.5,
+    "fainting": 2.0,
+    "collapse": 2.0,
+    "pale_gums": 1.8,
+    "cold_extremities": 1.5,
+    "excessive_panting": 1.2,
+
+    # --- 泌尿器 ---
+    "excessive_thirst": 1.3,
+    "excessive_urination": 1.3,
+    "frequent_urination": 1.3,
+    "straining_urinate": 1.5,
+    "straining_to_urinate": 1.5,
+    "blood_urine": 1.8,
+    "bloody_urine": 1.8,
+    "blood_in_urine": 1.8,
+    "incontinence": 1.3,
+    "urinary_incontinence": 1.3,
+    "decreased_urination": 1.5,
+    "inappropriate_urination": 1.2,
+    "dark_urine": 1.5,
+
+    # --- 神経 (高度に特異的) ---
+    "seizures": 2.5,
+    "tremors": 2.0,
+    "ataxia": 2.0,
+    "circling": 1.8,
+    "head_tilting": 1.8,
+    "head_tilt": 1.8,
+    "head_pressing": 2.5,
+    "nystagmus": 2.0,
+    "disorientation": 1.5,
+    "paralysis": 2.5,
+    "hind_limb_paralysis": 2.5,
+    "muscle_spasms": 1.8,
+    "muscle_weakness": 1.5,
+    "decreased_reflexes": 2.0,
+    "falling": 1.8,
+
+    # --- 運動器 ---
+    "limping_fl": 1.3,
+    "limping_fr": 1.3,
+    "limping_rl": 1.3,
+    "limping_rr": 1.3,
+    "lameness": 1.3,
+    "lameness_or_limping": 1.3,
+    "stiffness": 1.2,
+    "reluctance_move": 1.3,
+    "reluctance_to_jump": 1.3,
+    "swollen_joints": 1.5,
+    "joint_pain_or_stiffness": 1.3,
+    "non_weight_bearing": 1.8,
+    "pain_on_touch": 1.3,
+    "pain": 1.2,
+    "skipping_gait": 1.5,
+    "plantigrade_stance": 2.0,
+
+    # --- 皮膚 ---
+    "itching": 1.1,
+    "hair_loss": 1.2,
+    "skin_redness": 1.1,
+    "skin_lesions": 1.2,
+    "lumps": 1.5,
+    "subcutaneous_mass": 1.5,
+    "dry_skin": 1.0,
+    "hot_spots": 1.2,
+    "crusting": 1.2,
+    "scaling": 1.2,
+    "visible_parasites": 1.8,
+    "self_mutilation": 1.5,
+    "skin_fragility": 2.0,
+    "skin_twitching": 1.3,
+    "non_healing_wound": 1.5,
+    "draining_wound": 1.5,
+    "miliary_dermatitis": 1.5,
+    "nail_abnormalities": 1.3,
+    "ulcerated_mass": 1.8,
+
+    # --- 眼科 ---
+    "eye_redness": 1.2,
+    "redness_in_eyes": 1.2,
+    "eye_discharge": 1.1,
+    "squinting": 1.2,
+    "eye_pain": 1.5,
+    "conjunctivitis": 1.3,
+    "corneal_cloudiness": 1.5,
+    "cloudiness_in_eyes": 1.5,
+    "corneal_ulcer": 1.8,
+    "excessive_tearing": 1.1,
+    "blindness": 2.0,
+    "dilated_pupils": 1.8,
+    "iris_color_change": 1.8,
+    "third_eyelid_protrusion": 1.5,
+    "enlarged_eye": 1.8,
+    "eye_changes": 1.2,
+
+    # --- 耳 ---
+    "ear_scratching": 1.1,
+    "scratching_ears": 1.1,
+    "ear_odor": 1.2,
+    "ear_discharge": 1.3,
+    "ear_inflammation": 1.3,
+    "head_shaking": 1.2,
+    "ear_tip_lesions": 1.5,
+
+    # --- 口腔 ---
+    "bad_breath": 1.2,
+    "acetone_breath": 2.5,
+    "oral_ulcers": 1.8,
+    "oral_masses": 1.8,
+    "stomatitis": 1.5,
+    "difficulty_eating": 1.3,
+    "difficulty_swallowing": 1.5,
+    "tooth_loss": 1.5,
+    "jaw_chattering": 1.5,
+    "bleeding_gums": 1.5,
+    "chin_swelling": 1.3,
+    "lip_swelling": 1.3,
+
+    # --- 血液・リンパ ---
+    "jaundice": 2.5,
+    "petechiae": 2.0,
+    "bleeding": 1.8,
+    "lymph_node_enlargement": 1.8,
+    "swollen_lymph_nodes": 1.8,
+    "recurrent_infections": 1.5,
+    "immunosuppression": 2.0,
+
+    # --- 生殖器 ---
+    "genital_discharge": 1.5,
+    "vaginal_discharge": 1.5,
+    "bloody_discharge": 1.8,
+    "mammary_masses": 2.0,
+    "swollen_testicle": 1.8,
+    "prolonged_labor": 2.0,
+    "visible_tissue_protrusion": 2.0,
+
+    # --- 食欲・代謝 ---
+    "appetite_increase": 1.2,
+    "increased_appetite": 1.2,
+    "muscle_wasting": 1.5,
+
+    # --- 鳥類・爬虫類特異的 ---
+    "feather_loss": 1.3,
+    "abnormal_feathers": 1.5,
+    "beak_deformity": 2.0,
+    "tail_bob": 1.5,
+    "fluffed_feathers": 1.0,
+    "shell_abnormalities": 1.5,
+    "dysecdysis": 1.5,
+
+    # --- その他 ---
+    "swelling": 1.3,
+    "facial_swelling": 1.5,
+    "paw_swelling": 1.3,
+    "deformity": 1.8,
+    "stunted_growth": 1.5,
+    "hunched_posture": 1.3,
+    "teeth_grinding": 1.3,
+    "vocalization_changes": 1.2,
+    "voice_change": 1.3,
+    "hyperactivity": 1.0,
+    "night_waking": 1.0,
+    "scooting": 1.3,
+    "itching_around_anus": 1.3,
+    "tail_chasing": 1.0,
+    "wool_sucking": 1.0,
+    "visible_worms": 2.0,
+    "ventroflexion_of_neck": 2.0,
+    "short_thick_tail": 2.0,
+    "prognathia": 1.5,
+}
+
+# デフォルト重み（辞書に登録されていない症状用）
+_DEFAULT_SYMPTOM_WEIGHT = 1.0
 
 
 def _compute_severity(suspected: List[Dict[str, Any]]) -> str:
@@ -61,6 +654,11 @@ def analyze_symptoms_generic(
     diseases: List[Dict[str, Any]],
     symptom_names: Dict[str, Dict[str, str]],
     advice: Dict[str, Dict[str, str]] | None = None,
+    *,
+    onset: str | None = None,
+    age_years: float | None = None,
+    breed: str | None = None,
+    species: str | None = None,
 ) -> Dict[str, Any]:
     """Generic differential diagnosis engine.
 
@@ -73,12 +671,22 @@ def analyze_symptoms_generic(
         include the keys: ``name``, ``name_ja``, ``symptoms`` (a set of
         identifiers), ``description``, ``description_ja``, ``urgency``, and
         ``recommended_tests`` (list of strings).
+        Optionally: ``onset_pattern`` (set of "acute"/"subacute"/"chronic")
+        and ``age_predisposition`` (set of "puppy"/"young"/"adult"/"senior").
     symptom_names:
         A mapping from symptom identifiers to their bilingual names. Only
         identifiers present in this mapping will be included in the output.
     advice:
         Optional advice dictionary overriding the global ADVICE. Must follow
         the same structure as ADVICE if provided.
+    onset:
+        Optional time-course: "acute", "subacute", or "chronic".
+    age_years:
+        Optional age of the animal in years.
+    breed:
+        Optional breed identifier for breed-specific risk adjustment.
+    species:
+        Optional species identifier used to look up breed data.
 
     Returns
     -------
@@ -86,10 +694,44 @@ def analyze_symptoms_generic(
         A dictionary with the same structure as the dog symptom checker
         response: ``suspected_diseases``, ``recommended_tests``, ``severity``,
         ``general_advice``, ``general_advice_ja``, ``breed_genetic_tests``,
-        ``breed_risk_applied``, and ``symptom_names``.
+        ``breed_risk_applied``, ``onset_applied``, ``age_applied``,
+        and ``symptom_names``.
     """
     symptom_set: Set[str] = set(symptoms)
     suspected: List[Dict[str, Any]] = []
+
+    # Resolve age stage
+    age_stage: str | None = None
+    if age_years is not None:
+        if age_years < 1.0:
+            age_stage = "puppy"
+        elif age_years < 3.0:
+            age_stage = "young"
+        elif age_years < 7.0:
+            age_stage = "adult"
+        else:
+            age_stage = "senior"
+
+    # Look up breed risk data
+    breed_risk: Dict[str, float] = {}
+    breed_risk_applied = False
+    if breed and species:
+        breeds_for_species = SPECIES_BREEDS.get(species, [])
+        for b in breeds_for_species:
+            if b["id"] == breed:
+                breed_risk = b.get("risk", {})
+                if breed_risk:
+                    breed_risk_applied = True
+                break
+
+    # Pre-compute symptom pair boosts for current symptom set
+    pair_boosts: Dict[str, float] = {}
+    for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
+        if pair.issubset(symptom_set):
+            for disease_name, multiplier in disease_boosts.items():
+                # Keep highest boost if multiple pairs match same disease
+                if disease_name not in pair_boosts or multiplier > pair_boosts[disease_name]:
+                    pair_boosts[disease_name] = multiplier
 
     for disease in diseases:
         disease_symptoms = set(disease.get("symptoms", set()))
@@ -98,21 +740,60 @@ def analyze_symptoms_generic(
         matching = symptom_set & disease_symptoms
         if not matching:
             continue
-        coverage = len(matching) / len(disease_symptoms)
+        # Weighted coverage: 臨床的重要度で重み付けしたカバー率
+        # 病態特異的な症状（seizures=2.5, jaundice=2.5 等）が一致すると
+        # 非特異的な症状（lethargy=1.0）より大きくスコアに寄与する
+        matching_weight = sum(
+            SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) for s in matching
+        )
+        total_weight = sum(
+            SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) for s in disease_symptoms
+        )
+        coverage = matching_weight / total_weight
         match_percent = round(coverage * 100)
+
+        # Apply onset multiplier
+        onset_multiplier = 1.0
+        if onset:
+            disease_onsets = disease.get("onset_pattern")
+            if disease_onsets:
+                if onset in disease_onsets:
+                    onset_multiplier = 1.3
+                else:
+                    onset_multiplier = 0.7
+
+        # Apply age multiplier
+        age_multiplier = 1.0
+        if age_stage:
+            age_predisposition = disease.get("age_predisposition")
+            if age_predisposition:
+                if age_stage in age_predisposition:
+                    age_multiplier = 1.25
+                else:
+                    age_multiplier = 0.75
+
+        # Apply breed risk multiplier
+        breed_multiplier = breed_risk.get(disease["name"], 1.0)
+
+        # Apply symptom pair boost
+        pair_multiplier = pair_boosts.get(disease["name"], 1.0)
+
+        # Adjusted match percent
+        adjusted_percent = min(round(match_percent * onset_multiplier * age_multiplier * breed_multiplier * pair_multiplier), 100)
+
         # Determine likelihood tiers similar to dog algorithm
-        if coverage >= 0.5:
+        if adjusted_percent >= 50:
             likelihood = "high"
-        elif coverage >= 0.3:
+        elif adjusted_percent >= 30:
             likelihood = "moderate"
         else:
             likelihood = "low"
         # Map coverage percentage to a simple color class
-        if match_percent >= 70:
+        if adjusted_percent >= 70:
             color_class = "score-high"
-        elif match_percent >= 45:
+        elif adjusted_percent >= 45:
             color_class = "score-moderate"
-        elif match_percent >= 25:
+        elif adjusted_percent >= 25:
             color_class = "score-low"
         else:
             color_class = "score-minimal"
@@ -120,7 +801,7 @@ def analyze_symptoms_generic(
             "name": disease["name"],
             "name_ja": disease["name_ja"],
             "likelihood": likelihood,
-            "match_percent": match_percent,
+            "match_percent": adjusted_percent,
             "color_class": color_class,
             "description": disease.get("description", ""),
             "description_ja": disease.get("description_ja", ""),
@@ -185,6 +866,13 @@ def analyze_symptoms_generic(
         "general_advice": advice_pair["en"],
         "general_advice_ja": advice_pair["ja"],
         "breed_genetic_tests": [],
-        "breed_risk_applied": False,
+        "breed_risk_applied": breed_risk_applied,
+        "breed": breed,
+        "onset_applied": onset is not None,
+        "onset": onset,
+        "age_applied": age_years is not None,
+        "age_years": age_years,
+        "age_stage": age_stage,
+        "pair_boost_applied": len(pair_boosts) > 0,
         "symptom_names": symptom_names_lookup,
     }

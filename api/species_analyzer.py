@@ -122,13 +122,24 @@ SPECIES_HANDLERS: Dict[str, Callable[[List[str], str | None], Dict]] = {
 }
 
 
-def analyze_species_symptoms(species: str, symptoms: List[str], age_stage: str | None = None) -> Dict:
+def analyze_species_symptoms(
+    species: str,
+    symptoms: List[str],
+    age_stage: str | None = None,
+    *,
+    breed: str | None = None,
+    onset: str | None = None,
+    age_years: float | None = None,
+) -> Dict:
     """動物種に応じて適切な鑑別診断関数を呼び出すユーティリティ。
 
     Args:
         species: 動物種コード（小文字）
         symptoms: 症状コードのリスト
         age_stage: 任意の年齢カテゴリ（馬用などで使用）
+        breed: 品種コード（任意）
+        onset: 発症経過 "acute"/"subacute"/"chronic"（任意）
+        age_years: 年齢（年単位の数値、任意）
 
     Returns:
         辞書形式の分析結果
@@ -146,4 +157,8 @@ def analyze_species_symptoms(species: str, symptoms: List[str], age_stage: str |
     elif species_key == "horse":
         return handler(symptoms, age_stage)
     else:
-        return handler(symptoms, age_stage)
+        return handler(
+            symptoms, age_stage,
+            breed=breed, onset=onset, age_years=age_years,
+            species=species_key,
+        )
