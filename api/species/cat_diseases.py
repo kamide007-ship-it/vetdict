@@ -1008,7 +1008,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cataracts",
         "name_ja": "白内障",
-        "symptoms": {"blindness", "corneal_cloudiness", "eye_changes", "disorientation"},
+        "symptoms": {"blindness", "cloudiness_in_eyes", "eye_changes", "disorientation"},
         "description": "Opacity of the lens causing vision impairment, less common in cats than dogs.",
         "description_ja": "水晶体の混濁による視力障害で、犬より猫では少ないです。",
         "urgency": "moderate",
@@ -2154,7 +2154,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Hypertrophic Osteodystrophy",
         "name_ja": "猫肥大性骨異栄養症",
-        "symptoms": {"limping", "swelling", "fever", "appetite_loss", "pain"},
+        "symptoms": {"lameness", "swelling", "fever", "appetite_loss", "pain"},
         "description": "Bone developmental disorder causing painful swelling near growth plates in kittens.",
         "description_ja": "成長板付近の痛みを伴う腫脹を引き起こす骨発育障害です。",
         "urgency": "moderate",
@@ -2433,7 +2433,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Calcium Oxalate Urolithiasis",
         "name_ja": "猫シュウ酸カルシウム尿路結石症",
-        "symptoms": {"straining_to_urinate", "blood_in_urine", "frequent_urination", "vocalization_changes", "appetite_loss"},
+        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "vocalization_changes", "appetite_loss"},
         "description": "Formation of calcium oxalate stones in the urinary tract, common in older cats.",
         "description_ja": "尿路にシュウ酸カルシウム結石が形成される疾患で、高齢猫に多いです。",
         "urgency": "high",
@@ -2442,7 +2442,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Struvite Urolithiasis",
         "name_ja": "猫ストルバイト尿路結石症",
-        "symptoms": {"straining_to_urinate", "blood_in_urine", "frequent_urination", "inappropriate_urination"},
+        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "inappropriate_urination"},
         "description": "Formation of magnesium ammonium phosphate stones in the urinary tract.",
         "description_ja": "尿路にリン酸アンモニウムマグネシウム結石が形成される疾患です。",
         "urgency": "high",
@@ -2514,7 +2514,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Fibrosarcoma (Non-Injection Site)",
         "name_ja": "猫線維肉腫（非注射部位）",
-        "symptoms": {"lumps", "swelling", "pain", "limping", "weight_loss"},
+        "symptoms": {"lumps", "swelling", "pain", "lameness", "weight_loss"},
         "description": "Aggressive soft tissue sarcoma arising independent of injection sites.",
         "description_ja": "注射部位とは無関係に発生する侵襲的な軟部組織肉腫です。",
         "urgency": "high",
@@ -2775,7 +2775,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Coccidioidomycosis",
         "name_ja": "猫コクシジオイデス症",
-        "symptoms": {"coughing", "labored_breathing", "fever", "weight_loss", "limping", "skin_lesions"},
+        "symptoms": {"coughing", "labored_breathing", "fever", "weight_loss", "lameness", "skin_lesions"},
         "description": "Systemic fungal infection by Coccidioides immitis (Valley Fever), rare in cats.",
         "description_ja": "Coccidioides immitisによる全身性真菌感染（渓谷熱）で、猫では稀です。",
         "urgency": "high",
@@ -2802,7 +2802,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Mycetoma",
         "name_ja": "猫菌腫",
-        "symptoms": {"subcutaneous_mass", "draining_wound", "swelling", "limping", "pain"},
+        "symptoms": {"subcutaneous_mass", "draining_wound", "swelling", "lameness", "pain"},
         "description": "Chronic subcutaneous infection forming granules and draining sinuses, caused by fungi or bacteria.",
         "description_ja": "真菌や細菌による慢性皮下感染で、顆粒と排膿瘻管を形成します。",
         "urgency": "moderate",
@@ -2829,7 +2829,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Anaplasma Infection",
         "name_ja": "猫アナプラズマ感染症",
-        "symptoms": {"fever", "lethargy", "appetite_loss", "limping", "lymph_node_enlargement"},
+        "symptoms": {"fever", "lethargy", "appetite_loss", "lameness", "lymph_node_enlargement"},
         "description": "Tick-borne rickettsial infection causing fever, joint pain, and thrombocytopenia.",
         "description_ja": "ダニ媒介性リケッチア感染で、発熱、関節痛、血小板減少を引き起こします。",
         "urgency": "moderate",
@@ -2928,7 +2928,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Demodex gatoi Infection",
         "name_ja": "猫ニキビダニ（D. gatoi）症",
-        "symptoms": {"itching", "hair_loss", "overgrooming", "skin_lesions", "miliary_dermatitis"},
+        "symptoms": {"itching", "hair_loss", "excessive_grooming", "skin_lesions", "miliary_dermatitis"},
         "description": "Contagious demodectic mange caused by the surface-dwelling mite Demodex gatoi.",
         "description_ja": "体表寄生性ニキビダニDemodex gatoiによる伝染性毛包虫症です。",
         "urgency": "moderate",
@@ -2946,7 +2946,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Anterior Uveitis",
         "name_ja": "猫前部ぶどう膜炎",
-        "symptoms": {"eye_pain", "eye_redness", "squinting", "excessive_tearing", "corneal_cloudiness", "dilated_pupils"},
+        "symptoms": {"eye_pain", "eye_redness", "squinting", "excessive_tearing", "corneal_cloudiness"},
         "description": "Inflammation of the iris and ciliary body from infection, trauma, or immune-mediated causes.",
         "description_ja": "感染、外傷、または免疫介在性の原因による虹彩と毛様体の炎症です。",
         "urgency": "high",
@@ -3045,7 +3045,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Liposarcoma",
         "name_ja": "猫脂肪肉腫",
-        "symptoms": {"subcutaneous_mass", "swelling", "weight_loss", "limping", "pain"},
+        "symptoms": {"subcutaneous_mass", "swelling", "weight_loss", "lameness", "pain"},
         "description": "Malignant tumor of adipose tissue, locally invasive with potential for metastasis.",
         "description_ja": "脂肪組織の悪性腫瘍で、局所浸潤性で転移の可能性があります。",
         "urgency": "high",
@@ -3108,7 +3108,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline von Willebrand Disease",
         "name_ja": "猫フォンヴィレブランド病",
-        "symptoms": {"bleeding", "bleeding_gums", "petechiae", "bloody_stool", "blood_in_urine"},
+        "symptoms": {"bleeding", "bleeding_gums", "petechiae", "bloody_stool", "bloody_urine"},
         "description": "Inherited bleeding disorder due to deficiency or dysfunction of von Willebrand factor.",
         "description_ja": "フォンヴィレブランド因子の欠乏または機能障害による遺伝性出血性疾患です。",
         "urgency": "moderate",
@@ -3117,7 +3117,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Hemophilia A",
         "name_ja": "猫血友病A",
-        "symptoms": {"bleeding", "swelling", "limping", "petechiae", "lethargy"},
+        "symptoms": {"bleeding", "swelling", "lameness", "petechiae", "lethargy"},
         "description": "X-linked inherited deficiency of clotting factor VIII causing prolonged bleeding.",
         "description_ja": "X連鎖性遺伝による凝固因子VIII欠乏で、遷延性出血を引き起こします。",
         "urgency": "high",
@@ -3153,7 +3153,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Multiple Myeloma",
         "name_ja": "猫多発性骨髄腫",
-        "symptoms": {"limping", "pain", "lethargy", "bleeding", "excessive_thirst", "weight_loss"},
+        "symptoms": {"lameness", "pain", "lethargy", "bleeding", "excessive_thirst", "weight_loss"},
         "description": "Neoplasia of plasma cells producing monoclonal immunoglobulin and causing bone lysis.",
         "description_ja": "形質細胞の腫瘍でモノクローナル免疫グロブリンを産生し骨溶解を引き起こします。",
         "urgency": "high",
@@ -3162,7 +3162,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Histiocytic Sarcoma",
         "name_ja": "猫組織球性肉腫",
-        "symptoms": {"weight_loss", "lethargy", "appetite_loss", "lymph_node_enlargement", "limping", "labored_breathing"},
+        "symptoms": {"weight_loss", "lethargy", "appetite_loss", "lymph_node_enlargement", "lameness", "labored_breathing"},
         "description": "Aggressive neoplasm of histiocytic origin with rapid dissemination and poor prognosis.",
         "description_ja": "組織球由来の攻撃的な腫瘍で、急速な播種と予後不良が特徴です。",
         "urgency": "high",
@@ -3198,7 +3198,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Osteochondroma",
         "name_ja": "猫骨軟骨腫",
-        "symptoms": {"lumps", "limping", "pain", "swelling", "stiffness"},
+        "symptoms": {"lumps", "lameness", "pain", "swelling", "stiffness"},
         "description": "Benign bony growth capped with cartilage, may occur in multiple sites (feline osteochondromatosis).",
         "description_ja": "軟骨で被われた良性骨性腫瘤で、多発することがあります（猫骨軟骨腫症）。",
         "urgency": "moderate",
@@ -3207,7 +3207,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Chondrosarcoma",
         "name_ja": "猫軟骨肉腫",
-        "symptoms": {"swelling", "limping", "pain", "facial_swelling", "nasal_discharge"},
+        "symptoms": {"swelling", "lameness", "pain", "facial_swelling", "nasal_discharge"},
         "description": "Malignant tumor of cartilage, often arising in flat bones or nasal cavity.",
         "description_ja": "軟骨の悪性腫瘍で、扁平骨や鼻腔に好発します。",
         "urgency": "high",
@@ -3225,7 +3225,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Hemangiopericytoma",
         "name_ja": "猫血管周皮腫",
-        "symptoms": {"subcutaneous_mass", "limping", "swelling", "pain"},
+        "symptoms": {"subcutaneous_mass", "lameness", "swelling", "pain"},
         "description": "Soft tissue sarcoma arising from pericytes surrounding blood vessels.",
         "description_ja": "血管周囲の周皮細胞から発生する軟部組織肉腫です。",
         "urgency": "moderate",
@@ -3450,7 +3450,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Organophosphate Toxicosis",
         "name_ja": "猫有機リン中毒",
-        "symptoms": {"drooling", "vomiting", "diarrhea", "muscle_spasms", "seizures", "labored_breathing", "dilated_pupils"},
+        "symptoms": {"drooling", "vomiting", "diarrhea", "muscle_spasms", "seizures", "labored_breathing"},
         "description": "Cholinesterase inhibition from organophosphate insecticide exposure causing cholinergic crisis.",
         "description_ja": "有機リン殺虫剤の暴露によるコリンエステラーゼ阻害でコリン作動性クリーゼを引き起こします。",
         "urgency": "emergency",
@@ -3488,7 +3488,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name_ja": "猫ブロメタリン中毒",
         "symptoms": {"seizures", "tremors", "ataxia", "paralysis", "lethargy", "muscle_spasms"},
         "description": "Neurotoxic rodenticide causing cerebral edema and progressive neurological deterioration.",
-        "description_da": "脳浮腫と進行性神経学的悪化を引き起こす神経毒性殺鼠剤です。",
+        "description_ja": "脳浮腫と進行性神経学的悪化を引き起こす神経毒性殺鼠剤です。",
         "urgency": "emergency",
         "recommended_tests": ["neurological_exam", "mri_brain", "physical_exam", "toxicology_screen"],
     },
@@ -3603,7 +3603,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Infective Endocarditis",
         "name_ja": "猫感染性心内膜炎",
-        "symptoms": {"fever", "heart_murmur", "lethargy", "weight_loss", "limping", "labored_breathing"},
+        "symptoms": {"fever", "heart_murmur", "lethargy", "weight_loss", "lameness", "labored_breathing"},
         "description": "Bacterial infection of the heart valves causing septic emboli and valvular dysfunction.",
         "description_ja": "心臓弁の細菌感染で敗血症性塞栓と弁機能障害を引き起こします。",
         "urgency": "emergency",
@@ -3792,7 +3792,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Horner Syndrome",
         "name_ja": "猫ホルネル症候群",
-        "symptoms": {"dilated_pupils", "third_eyelid_protrusion", "squinting", "eye_changes"},
+        "symptoms": {"squinting", "third_eyelid_protrusion", "eye_changes"},
         "description": "Disruption of sympathetic innervation to the eye causing miosis, enophthalmos, and third eyelid protrusion.",
         "description_ja": "眼への交感神経支配の障害で縮瞳、眼球陥没、第三眼瞼突出を引き起こします。",
         "urgency": "moderate",
@@ -3828,7 +3828,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Chronic Pain Syndrome",
         "name_ja": "猫慢性疼痛症候群",
-        "symptoms": {"hiding", "appetite_loss", "aggression", "vocalization_changes", "reluctance_to_jump", "overgrooming"},
+        "symptoms": {"hiding", "appetite_loss", "aggression", "vocalization_changes", "reluctance_to_jump", "excessive_grooming"},
         "description": "Persistent pain from osteoarthritis, dental disease, or neuropathic causes altering behavior.",
         "description_ja": "変形性関節症、歯科疾患、神経障害性の原因による持続的な疼痛で行動変化を引き起こします。",
         "urgency": "moderate",
@@ -4119,7 +4119,6 @@ DISEASES: List[Dict[str, Any]] = [
         "name_ja": "脾臓肥満細胞腫",
         "symptoms": {"appetite_loss", "weight_loss", "lethargy", "vomiting", "abdominal_distension"},
         "description": "Visceral mast cell tumor of the spleen; second most common splenic tumor in cats after lymphoma.",
-        "description_da": "脾臓の内臓型肥満細胞腫で、猫ではリンパ腫に次いで2番目に多い脾臓腫瘍です。",
         "description_ja": "脾臓の内臓型肥満細胞腫で、猫ではリンパ腫に次いで2番目に多い脾臓腫瘍です。",
         "urgency": "high",
         "recommended_tests": ["abdominal_ultrasound", "cytology", "cbc", "buffy_coat_smear"],
@@ -4349,7 +4348,6 @@ DISEASES: List[Dict[str, Any]] = [
         "name_ja": "猫尿細管性アシドーシス",
         "symptoms": {"lethargy", "appetite_loss", "weight_loss", "excessive_thirst", "muscle_weakness"},
         "description": "Defective renal acid excretion causing metabolic acidosis; may be primary or secondary to chronic kidney disease.",
-        "description_da": "腎臓の酸排泄障害による代謝性アシドーシスで、原発性または慢性腎臓病に続発します。",
         "description_ja": "腎臓の酸排泄障害による代謝性アシドーシスで、原発性または慢性腎臓病に続発します。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "blood_gas", "urinalysis"],
@@ -4411,7 +4409,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Chronic Progressive Polyarthritis",
         "name_ja": "猫慢性進行性多発性関節炎",
-        "symptoms": {"stiffness", "limping", "swelling", "fever", "lethargy", "reluctance_to_jump"},
+        "symptoms": {"stiffness", "lameness", "swelling", "fever", "lethargy", "reluctance_to_jump"},
         "description": "Immune-mediated progressive joint disease in young male cats; may be erosive or non-erosive.",
         "description_ja": "若齢雄猫の免疫介在性進行性関節疾患で、びらん性と非びらん性があります。",
         "urgency": "moderate",
@@ -4775,11 +4773,10 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "behavioral_changes": {"ja": "行動変化", "en": "Behavioral Changes"},
     "bleeding": {"ja": "出血", "en": "Bleeding"},
     "bleeding_gums": {"ja": "歯茎の出血", "en": "Bleeding Gums"},
-    "blood_in_urine": {"ja": "血尿", "en": "Blood in Urine"},
+    "bloody_urine": {"ja": "血尿", "en": "Blood in Urine"},
     "blindness": {"ja": "失明", "en": "Blindness"},
     "bloody_discharge": {"ja": "血性分泌物", "en": "Bloody Discharge"},
     "bloody_stool": {"ja": "血便", "en": "Bloody Stool"},
-    "bloody_urine": {"ja": "血尿", "en": "Bloody Urine"},
     "bradycardia": {"ja": "徐脈", "en": "Bradycardia"},
     "burn_marks": {"ja": "火傷痕", "en": "Burn Marks"},
     "chin_swelling": {"ja": "顎の腫れ", "en": "Chin Swelling"},
@@ -4857,7 +4854,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "lameness": {"ja": "跛行", "en": "Lameness"},
     "lethargy": {"ja": "元気消失", "en": "Lethargy"},
     "limp_tail": {"ja": "尾の弛緩", "en": "Limp Tail"},
-    "limping": {"ja": "跛行（軽度）", "en": "Limping"},
     "lip_swelling": {"ja": "口唇腫脹", "en": "Lip Swelling"},
     "lumps": {"ja": "しこり", "en": "Lumps"},
     "lymph_node_enlargement": {"ja": "リンパ節腫大", "en": "Lymph Node Enlargement"},
@@ -4877,7 +4873,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "nystagmus": {"ja": "眼振", "en": "Nystagmus"},
     "open_mouth_breathing": {"ja": "開口呼吸", "en": "Open Mouth Breathing"},
     "oral_masses": {"ja": "口腔内腫瘤", "en": "Oral Masses"},
-    "overgrooming": {"ja": "過度のグルーミング", "en": "Overgrooming"},
     "oral_ulcers": {"ja": "口腔潰瘍", "en": "Oral Ulcers"},
     "pain": {"ja": "疼痛", "en": "Pain"},
     "pale_gums": {"ja": "歯茎蒼白", "en": "Pale Gums"},
