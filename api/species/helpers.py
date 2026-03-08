@@ -368,6 +368,264 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
 }
 
 
+# =============================================================================
+# SYMPTOM CLINICAL WEIGHTS (尤度比ベース臨床的重み付け)
+# =============================================================================
+# 各症状の臨床的重要度を重み付け。文献ベースの尤度比 (Likelihood Ratio) を
+# 簡易的に反映し、非特異的な症状 (1.0) から病態特異的な症状 (2.0–3.0) まで
+# スケーリングする。
+#
+# 参考文献:
+#   - Rijnberk & van Sluijs (2009) Medical History and Physical Examination
+#   - Ettinger & Feldman (2017) Textbook of Veterinary Internal Medicine
+#   - Côté (2014) Clinical Veterinary Advisor
+#   - Platt & Olby (2013) Manual of Canine and Feline Neurology
+#
+# カテゴリ:
+#   1.0  = 非特異的 (lethargy, appetite_loss など多くの疾患で出現)
+#   1.2  = やや特異的 (fever, vomiting など)
+#   1.5  = 中程度に特異的 (jaundice, blood_in_urine など)
+#   2.0  = 高度に特異的 / 重篤 (seizures, collapse, hind_limb_paralysis)
+#   2.5–3.0 = 病態特異的 / ほぼ確定的 (特定疾患に直結する所見)
+
+SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
+    # --- 全身症状 (非特異的) ---
+    "lethargy": 1.0,
+    "decreased_activity": 1.0,
+    "weakness": 1.0,
+    "appetite_loss": 1.0,
+    "loss_of_appetite": 1.0,
+    "weight_loss": 1.0,
+    "weight_gain": 1.0,
+    "dehydration": 1.1,
+    "poor_coat": 1.0,
+    "hiding": 1.0,
+    "behavioral_changes": 1.0,
+    "aggression": 1.0,
+    "aggression_change": 1.0,
+    "anxiety": 1.0,
+
+    # --- 発熱 ---
+    "fever": 1.2,
+    "hyperthermia": 1.3,
+    "hypothermia": 1.5,
+
+    # --- 消化器 (やや特異的) ---
+    "vomiting": 1.2,
+    "diarrhea": 1.2,
+    "regurgitation": 1.5,
+    "constipation": 1.2,
+    "bloating": 1.5,
+    "bloated_abdomen": 1.5,
+    "abdominal_pain": 1.3,
+    "abdominal_distension": 1.5,
+    "abdominal_contractions": 1.5,
+    "excessive_gas": 1.1,
+    "bloody_stool": 1.8,
+    "blood_in_stool": 1.8,
+    "drooling": 1.2,
+    "excessive_drooling": 1.2,
+    "vomiting_after_drinking": 1.5,
+    "straining_to_defecate": 1.3,
+    "reduced_fecal_output": 1.3,
+    "fecal_incontinence": 1.5,
+    "eating_non_food": 1.3,
+
+    # --- 呼吸器 ---
+    "coughing": 1.2,
+    "sneezing": 1.1,
+    "nasal_discharge": 1.2,
+    "difficulty_breathing": 1.8,
+    "labored_breathing": 1.8,
+    "rapid_breathing": 1.5,
+    "open_mouth_breathing": 1.8,
+    "noisy_breathing": 1.3,
+    "reverse_sneezing": 1.2,
+    "snoring": 1.0,
+    "wheezing": 1.5,
+    "cyanosis": 2.5,
+
+    # --- 循環器 (高度に特異的) ---
+    "heart_murmur": 2.0,
+    "irregular_heartbeat": 2.0,
+    "muffled_heart_sounds": 2.0,
+    "exercise_intolerance": 1.5,
+    "fainting": 2.0,
+    "collapse": 2.0,
+    "pale_gums": 1.8,
+    "cold_extremities": 1.5,
+    "excessive_panting": 1.2,
+
+    # --- 泌尿器 ---
+    "excessive_thirst": 1.3,
+    "excessive_urination": 1.3,
+    "frequent_urination": 1.3,
+    "straining_urinate": 1.5,
+    "straining_to_urinate": 1.5,
+    "blood_urine": 1.8,
+    "bloody_urine": 1.8,
+    "blood_in_urine": 1.8,
+    "incontinence": 1.3,
+    "urinary_incontinence": 1.3,
+    "decreased_urination": 1.5,
+    "inappropriate_urination": 1.2,
+    "dark_urine": 1.5,
+
+    # --- 神経 (高度に特異的) ---
+    "seizures": 2.5,
+    "tremors": 2.0,
+    "ataxia": 2.0,
+    "circling": 1.8,
+    "head_tilting": 1.8,
+    "head_tilt": 1.8,
+    "head_pressing": 2.5,
+    "nystagmus": 2.0,
+    "disorientation": 1.5,
+    "paralysis": 2.5,
+    "hind_limb_paralysis": 2.5,
+    "muscle_spasms": 1.8,
+    "muscle_weakness": 1.5,
+    "decreased_reflexes": 2.0,
+    "falling": 1.8,
+
+    # --- 運動器 ---
+    "limping_fl": 1.3,
+    "limping_fr": 1.3,
+    "limping_rl": 1.3,
+    "limping_rr": 1.3,
+    "lameness": 1.3,
+    "lameness_or_limping": 1.3,
+    "stiffness": 1.2,
+    "reluctance_move": 1.3,
+    "reluctance_to_jump": 1.3,
+    "swollen_joints": 1.5,
+    "joint_pain_or_stiffness": 1.3,
+    "non_weight_bearing": 1.8,
+    "pain_on_touch": 1.3,
+    "pain": 1.2,
+    "skipping_gait": 1.5,
+    "plantigrade_stance": 2.0,
+
+    # --- 皮膚 ---
+    "itching": 1.1,
+    "hair_loss": 1.2,
+    "skin_redness": 1.1,
+    "skin_lesions": 1.2,
+    "lumps": 1.5,
+    "subcutaneous_mass": 1.5,
+    "dry_skin": 1.0,
+    "hot_spots": 1.2,
+    "crusting": 1.2,
+    "scaling": 1.2,
+    "visible_parasites": 1.8,
+    "self_mutilation": 1.5,
+    "skin_fragility": 2.0,
+    "skin_twitching": 1.3,
+    "non_healing_wound": 1.5,
+    "draining_wound": 1.5,
+    "miliary_dermatitis": 1.5,
+    "nail_abnormalities": 1.3,
+    "ulcerated_mass": 1.8,
+
+    # --- 眼科 ---
+    "eye_redness": 1.2,
+    "redness_in_eyes": 1.2,
+    "eye_discharge": 1.1,
+    "squinting": 1.2,
+    "eye_pain": 1.5,
+    "conjunctivitis": 1.3,
+    "corneal_cloudiness": 1.5,
+    "cloudiness_in_eyes": 1.5,
+    "corneal_ulcer": 1.8,
+    "excessive_tearing": 1.1,
+    "blindness": 2.0,
+    "dilated_pupils": 1.8,
+    "iris_color_change": 1.8,
+    "third_eyelid_protrusion": 1.5,
+    "enlarged_eye": 1.8,
+    "eye_changes": 1.2,
+
+    # --- 耳 ---
+    "ear_scratching": 1.1,
+    "scratching_ears": 1.1,
+    "ear_odor": 1.2,
+    "ear_discharge": 1.3,
+    "ear_inflammation": 1.3,
+    "head_shaking": 1.2,
+    "ear_tip_lesions": 1.5,
+
+    # --- 口腔 ---
+    "bad_breath": 1.2,
+    "acetone_breath": 2.5,
+    "oral_ulcers": 1.8,
+    "oral_masses": 1.8,
+    "stomatitis": 1.5,
+    "difficulty_eating": 1.3,
+    "difficulty_swallowing": 1.5,
+    "tooth_loss": 1.5,
+    "jaw_chattering": 1.5,
+    "bleeding_gums": 1.5,
+    "chin_swelling": 1.3,
+    "lip_swelling": 1.3,
+
+    # --- 血液・リンパ ---
+    "jaundice": 2.5,
+    "petechiae": 2.0,
+    "bleeding": 1.8,
+    "lymph_node_enlargement": 1.8,
+    "swollen_lymph_nodes": 1.8,
+    "recurrent_infections": 1.5,
+    "immunosuppression": 2.0,
+
+    # --- 生殖器 ---
+    "genital_discharge": 1.5,
+    "vaginal_discharge": 1.5,
+    "bloody_discharge": 1.8,
+    "mammary_masses": 2.0,
+    "swollen_testicle": 1.8,
+    "prolonged_labor": 2.0,
+    "visible_tissue_protrusion": 2.0,
+
+    # --- 食欲・代謝 ---
+    "appetite_increase": 1.2,
+    "increased_appetite": 1.2,
+    "muscle_wasting": 1.5,
+
+    # --- 鳥類・爬虫類特異的 ---
+    "feather_loss": 1.3,
+    "abnormal_feathers": 1.5,
+    "beak_deformity": 2.0,
+    "tail_bob": 1.5,
+    "fluffed_feathers": 1.0,
+    "shell_abnormalities": 1.5,
+    "dysecdysis": 1.5,
+
+    # --- その他 ---
+    "swelling": 1.3,
+    "facial_swelling": 1.5,
+    "paw_swelling": 1.3,
+    "deformity": 1.8,
+    "stunted_growth": 1.5,
+    "hunched_posture": 1.3,
+    "teeth_grinding": 1.3,
+    "vocalization_changes": 1.2,
+    "voice_change": 1.3,
+    "hyperactivity": 1.0,
+    "night_waking": 1.0,
+    "scooting": 1.3,
+    "itching_around_anus": 1.3,
+    "tail_chasing": 1.0,
+    "wool_sucking": 1.0,
+    "visible_worms": 2.0,
+    "ventroflexion_of_neck": 2.0,
+    "short_thick_tail": 2.0,
+    "prognathia": 1.5,
+}
+
+# デフォルト重み（辞書に登録されていない症状用）
+_DEFAULT_SYMPTOM_WEIGHT = 1.0
+
+
 def _compute_severity(suspected: List[Dict[str, Any]]) -> str:
     """Determine the overall severity level from the list of suspected diseases.
 
@@ -482,7 +740,16 @@ def analyze_symptoms_generic(
         matching = symptom_set & disease_symptoms
         if not matching:
             continue
-        coverage = len(matching) / len(disease_symptoms)
+        # Weighted coverage: 臨床的重要度で重み付けしたカバー率
+        # 病態特異的な症状（seizures=2.5, jaundice=2.5 等）が一致すると
+        # 非特異的な症状（lethargy=1.0）より大きくスコアに寄与する
+        matching_weight = sum(
+            SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) for s in matching
+        )
+        total_weight = sum(
+            SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) for s in disease_symptoms
+        )
+        coverage = matching_weight / total_weight
         match_percent = round(coverage * 100)
 
         # Apply onset multiplier

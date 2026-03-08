@@ -4064,8 +4064,8 @@ def analyze_symptoms(
     if age_years is not None:
         age_stage = _age_years_to_stage(age_years)
 
-    # Pre-compute symptom pair boosts from the shared dictionary
-    from api.species.helpers import SYMPTOM_PAIR_BOOST
+    # Pre-compute symptom pair boosts and import clinical weights
+    from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT
     pair_boosts: dict[str, float] = {}
     for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
         if pair.issubset(symptom_set):
@@ -4084,11 +4084,17 @@ def analyze_symptoms(
         if total == 0 or match_count == 0:
             continue
 
-        # Coverage: how many of the disease's symptoms did the user check?
-        coverage: float = match_count / total
-        # Jaccard: intersection / union (penalises unrelated extra symptoms)
-        union_size = len(symptom_set | disease_symptoms)
-        jaccard: float = match_count / union_size if union_size > 0 else 0.0
+        # Weighted coverage: 臨床的重要度で重み付け
+        # 病態特異的な症状 (seizures=2.5 etc.) の一致は非特異的な症状より高スコア
+        _w = SYMPTOM_CLINICAL_WEIGHTS
+        _dw = _DEFAULT_SYMPTOM_WEIGHT
+        matching_weight = sum(_w.get(s, _dw) for s in matching)
+        total_weight = sum(_w.get(s, _dw) for s in disease_symptoms)
+        coverage: float = matching_weight / total_weight if total_weight > 0 else 0.0
+        # Weighted Jaccard: weighted intersection / weighted union
+        union_symptoms = symptom_set | disease_symptoms
+        union_weight = sum(_w.get(s, _dw) for s in union_symptoms)
+        jaccard: float = matching_weight / union_weight if union_weight > 0 else 0.0
         # Composite score (same formula used in the frontend)
         raw_score: float = (jaccard * 0.4 + coverage * 0.6) * 100
 
