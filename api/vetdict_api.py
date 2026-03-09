@@ -12,6 +12,7 @@ Provides:
 import logging
 import os
 import sys
+import time
 from functools import wraps
 from pathlib import Path
 
@@ -38,7 +39,15 @@ app = Flask(__name__, static_folder=None)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 app.secret_key = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY') or 'dev-key-change-me'
 
-CORS(app)
+ALLOWED_ORIGINS = [o.strip() for o in (os.getenv("ALLOWED_CORS_ORIGINS") or "").split(",") if o.strip()]
+if ALLOWED_ORIGINS:
+    CORS(app, resources={r"/api/*": {"origins": ALLOWED_ORIGINS}})
+else:
+    CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000"]}})
+
+RATE_LIMIT_WINDOW_SEC = int(os.getenv("API_RATE_LIMIT_WINDOW_SEC", "60"))
+RATE_LIMIT_MAX_REQUESTS = int(os.getenv("API_RATE_LIMIT_MAX_REQUESTS", "60"))
+_RATE_LIMIT_BUCKETS = {}
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
@@ -168,6 +177,28 @@ def ensure_json_response(f):
 
 
 # ---------------------------------------------------------------------------
+# Basic API rate limiting
+# ---------------------------------------------------------------------------
+
+@app.before_request
+def basic_rate_limit():
+    path = request.path or ""
+    if not path.startswith("/api/"):
+        return None
+    now = time.time()
+    ip = request.headers.get("X-Forwarded-For", request.remote_addr or "unknown").split(",")[0].strip()
+    key = f"{ip}:{path}"
+    bucket = _RATE_LIMIT_BUCKETS.get(key)
+    if bucket is None or (now - bucket["start"]) >= RATE_LIMIT_WINDOW_SEC:
+        _RATE_LIMIT_BUCKETS[key] = {"start": now, "count": 1}
+        return None
+    bucket["count"] += 1
+    if bucket["count"] > RATE_LIMIT_MAX_REQUESTS:
+        return jsonify({"success": False, "error": "Too many requests", "version": VERSION}), 429
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Security headers
 # ---------------------------------------------------------------------------
 
@@ -177,8 +208,17 @@ def add_headers(response):
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline'; connect-src 'self' https:; frame-ancestors 'self'; base-uri 'self'"
     if os.getenv('RENDER') or os.getenv('PRODUCTION'):
         response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+
+    # Cache policy: HTML/API are always fresh on deploy; static files are revalidated.
+    path = request.path or ''
+    if path.startswith('/api/') or path == '/':
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+        response.headers['Pragma'] = 'no-cache'
+    elif path.startswith('/static/'):
+        response.headers.setdefault('Cache-Control', 'public, max-age=3600, must-revalidate')
     return response
 
 
