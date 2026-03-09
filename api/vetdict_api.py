@@ -80,8 +80,7 @@ try:
     HEALTH_CHECKER_AVAILABLE = True
 except ImportError:
     try:
-        # Fallback import when running outside package context
-        from health_checker import health_bp, SYMPTOMS as ALL_SYMPTOMS  # type: ignore
+        from health_checker import health_bp, SYMPTOMS as ALL_SYMPTOMS
         HEALTH_CHECKER_AVAILABLE = True
     except ImportError:
         health_bp = None
@@ -334,29 +333,8 @@ def api_species_stats():
 @app.route('/api/species/<species>/symptoms', methods=['GET'])
 @ensure_json_response
 def api_species_symptoms(species: str):
-    """Return list of symptoms relevant to the given species.
-
-    For each supported species, aggregate all symptom identifiers from the
-    respective disease database, then map them to human-readable names
-    using the core SYMPTOMS table. This ensures that the checkbox UI only
-    shows symptoms pertinent to the selected animal.
-
-    Parameters
-    ----------
-    species : str
-        Species identifier (e.g., "dog", "cat", "hamster"). Case-insensitive.
-
-    Returns
-    -------
-    dict
-        A JSON object with ``symptoms`` key containing a list of symptom
-        dictionaries. Each dictionary has ``id``, ``name_ja``, ``name_en``,
-        and ``category`` keys. If the species is unsupported or no symptoms
-        are found, returns an empty list.
-    """
+    """Return symptom list relevant to the selected species."""
     species_key = (species or '').lower()
-    # Mapping of species codes to their disease module name. Dogs and horses
-    # are handled separately because they use different structures.
     species_modules = {
         "cat": "cat_diseases",
         "rabbit": "rabbit_diseases",
@@ -380,36 +358,29 @@ def api_species_symptoms(species: str):
     diseases = []
     try:
         if species_key == "dog":
-            from api.symptom_checker import _DISEASE_DB as dog_db  # type: ignore
+            from api.symptom_checker import _DISEASE_DB as dog_db
             diseases = dog_db
         elif species_key == "horse":
-            # Horse uses the equine engine; its database contains objects with .symptoms attribute
-            from api.species.equine_diseases import DISEASE_DATABASE  # type: ignore
+            from api.species.equine_diseases import DISEASE_DATABASE
             diseases = DISEASE_DATABASE
         else:
             mod_name = species_modules.get(species_key)
             if mod_name is None:
-                raise ValueError(f"Unsupported species: {species_key}")
+                return {"symptoms": []}
             import importlib
             mod = importlib.import_module(f"api.species.{mod_name}")
             diseases = getattr(mod, "DISEASES", [])
     except Exception:
-        # Gracefully handle missing modules or other import errors
         return {"symptoms": []}
 
-    # Aggregate all unique symptom identifiers
     unique_syms = set()
     for dis in diseases:
-        # For equine objects, symptoms may be a list/tuple under .symptoms or .observations
-        syms = []
         if isinstance(dis, dict):
             syms = dis.get("symptoms", [])
         else:
-            # Attempt to fetch symptoms attribute for non-dict objects
-            syms = getattr(dis, "symptoms", []) or getattr(dis, "observations", [])
+            syms = getattr(dis, "symptoms", []) or getattr(dis, "observations", []) or getattr(dis, "associated_findings", [])
         if isinstance(syms, (set, list, tuple)):
-            unique_syms.update(list(syms))
-    # Build mapping from id to symptom info using dog SYMPTOMS list; fallback to id
+            unique_syms.update(syms)
     id_to_info = {s["id"]: s for s in ALL_SYMPTOMS}
     result = []
     for sid in sorted(unique_syms):

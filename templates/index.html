@@ -983,9 +983,19 @@ function loadBreeds(species){
 }
 
 function loadSymptoms(species){
-  fetch("/api/health-check/symptoms").then(r=>r.json()).then(data=>{
-    if(data.symptoms){symptomData=data.symptoms;renderSymptomList(symptomData);}
-  }).catch(()=>{document.getElementById("symptomList").innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noSymptomData")}</div>`;});
+  fetch(`/api/species/${species}/symptoms`).then(r=>r.json()).then(data=>{
+    if(data.symptoms&&data.symptoms.length){
+      symptomData=data.symptoms;
+      renderSymptomList(symptomData);
+      return;
+    }
+    return fetch("/api/health-check/symptoms").then(r=>r.json()).then(data=>{
+      symptomData=data.symptoms||[];
+      renderSymptomList(symptomData);
+    });
+  }).catch(()=>{
+    document.getElementById("symptomList").innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noSymptomData")}</div>`;
+  });
 }
 
 function renderSymptomList(symptoms){
