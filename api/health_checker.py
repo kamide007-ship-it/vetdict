@@ -8,6 +8,8 @@ test recommendations based on real veterinary medical knowledge.
 
 from flask import Blueprint, jsonify, request
 
+from api.content_quality import enrich_disease_content
+
 health_bp = Blueprint("health_bp", __name__, url_prefix="/api/health-check")
 
 # ---------------------------------------------------------------------------
@@ -3372,16 +3374,24 @@ def get_diseases():
             symptoms = d.get("symptoms", set())
             if isinstance(symptoms, set):
                 symptoms = sorted(symptoms)
-            output.append(
-                {
+            output.append(enrich_disease_content({
                     "name": d.get("name", ""),
                     "name_ja": d.get("name_ja", ""),
                     "description": d.get("description", ""),
                     "description_ja": d.get("description_ja", ""),
+                    "pathophysiology": d.get("pathophysiology", ""),
+                    "pathophysiology_ja": d.get("pathophysiology_ja", ""),
+                    "causes": d.get("causes", ""),
+                    "causes_ja": d.get("causes_ja", ""),
+                    "prevention": d.get("prevention", ""),
+                    "prevention_ja": d.get("prevention_ja", ""),
+                    "treatment": d.get("treatment", ""),
+                    "treatment_ja": d.get("treatment_ja", ""),
+                    "prognosis": d.get("prognosis", ""),
+                    "prognosis_ja": d.get("prognosis_ja", ""),
                     "severity": d.get("urgency", d.get("severity", "")),
                     "symptoms": symptoms,
-                }
-            )
+                }, "dog"))
     elif species == "horse":
         try:
             from api.species.equine_diseases import DISEASE_DATABASE
@@ -3389,16 +3399,24 @@ def get_diseases():
             from species.equine_diseases import DISEASE_DATABASE
         for d in DISEASE_DATABASE:
             findings = getattr(d, "associated_findings", []) if not isinstance(d, dict) else d.get("associated_findings", [])
-            output.append(
-                {
+            output.append(enrich_disease_content({
                     "name": getattr(d, "name_en", "") if not isinstance(d, dict) else d.get("name_en", ""),
                     "name_ja": getattr(d, "name_ja", "") if not isinstance(d, dict) else d.get("name_ja", ""),
                     "description": "",
                     "description_ja": getattr(d, "description_ja", "") if not isinstance(d, dict) else d.get("description_ja", ""),
+                    "pathophysiology": "",
+                    "pathophysiology_ja": "",
+                    "causes": "",
+                    "causes_ja": "",
+                    "prevention": "",
+                    "prevention_ja": "",
+                    "treatment": "",
+                    "treatment_ja": "",
+                    "prognosis": "",
+                    "prognosis_ja": "",
                     "severity": getattr(d, "severity", "") if not isinstance(d, dict) else d.get("severity", ""),
                     "symptoms": findings,
-                }
-            )
+                }, "horse"))
     else:
         import importlib
         try:
@@ -3410,16 +3428,24 @@ def get_diseases():
             symptoms = d.get("symptoms", [])
             if isinstance(symptoms, set):
                 symptoms = sorted(symptoms)
-            output.append(
-                {
+            output.append(enrich_disease_content({
                     "name": d.get("name", d.get("name_en", "")),
                     "name_ja": d.get("name_ja", ""),
                     "description": d.get("description", d.get("description_en", "")),
                     "description_ja": d.get("description_ja", ""),
+                    "pathophysiology": d.get("pathophysiology", d.get("pathophysiology_en", "")),
+                    "pathophysiology_ja": d.get("pathophysiology_ja", ""),
+                    "causes": d.get("causes", d.get("causes_en", "")),
+                    "causes_ja": d.get("causes_ja", ""),
+                    "prevention": d.get("prevention", d.get("prevention_en", "")),
+                    "prevention_ja": d.get("prevention_ja", ""),
+                    "treatment": d.get("treatment", d.get("treatment_en", "")),
+                    "treatment_ja": d.get("treatment_ja", ""),
+                    "prognosis": d.get("prognosis", d.get("prognosis_en", "")),
+                    "prognosis_ja": d.get("prognosis_ja", ""),
                     "severity": d.get("severity", ""),
                     "symptoms": symptoms,
-                }
-            )
+                }, species))
 
     return jsonify(
         {
@@ -3427,6 +3453,38 @@ def get_diseases():
             "diseases": output,
         }
     )
+
+
+@health_bp.route("/disease-quality-report", methods=["GET"])
+def disease_quality_report():
+    """Return per-species disease content completeness summary."""
+    species = request.args.get("species", "dog")
+    base = get_diseases().get_json()
+    diseases = base.get("diseases", [])
+    total = len(diseases)
+    avg = round(sum(float(d.get("completeness_score", 0)) for d in diseases) / total, 1) if total else 0.0
+    with_missing = [d for d in diseases if d.get("missing_fields")]
+    top_missing = {}
+    reference_covered = 0
+    citation_covered = 0
+    for d in diseases:
+        if d.get("evidence_sources"):
+            reference_covered += 1
+        cmap = d.get("citation_map") or {}
+        if isinstance(cmap, dict) and any(isinstance(v, list) and v for v in cmap.values()):
+            citation_covered += 1
+    for d in with_missing:
+        for f in d.get("missing_fields", []):
+            top_missing[f] = top_missing.get(f, 0) + 1
+    return jsonify({
+        "species": species,
+        "total_diseases": total,
+        "average_completeness": avg,
+        "diseases_with_missing_fields": len(with_missing),
+        "missing_field_counts": dict(sorted(top_missing.items(), key=lambda x: x[1], reverse=True)),
+        "reference_coverage": round((reference_covered / total) * 100, 1) if total else 0.0,
+        "citation_coverage": round((citation_covered / total) * 100, 1) if total else 0.0,
+    })
 
 
 @health_bp.route("/analyze", methods=["POST"])

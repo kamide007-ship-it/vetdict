@@ -60,6 +60,29 @@ _GENERIC_SPECIES = [
 ]
 _SPECIES_DATA: dict = {}  # {species: {"diseases": [...], "symptom_names": {...}}}
 
+SPECIES_LABELS = {
+    "dog": {"ja": "犬", "en": "Dog"},
+    "cat": {"ja": "猫", "en": "Cat"},
+    "horse": {"ja": "馬", "en": "Horse"},
+    "rabbit": {"ja": "ウサギ", "en": "Rabbit"},
+    "hamster": {"ja": "ハムスター", "en": "Hamster"},
+    "chinchilla": {"ja": "チンチラ", "en": "Chinchilla"},
+    "guinea_pig": {"ja": "モルモット", "en": "Guinea Pig"},
+    "ferret": {"ja": "フェレット", "en": "Ferret"},
+    "hedgehog": {"ja": "ハリネズミ", "en": "Hedgehog"},
+    "sugar_glider": {"ja": "フクロモモンガ", "en": "Sugar Glider"},
+    "degu": {"ja": "デグー", "en": "Degu"},
+    "bird": {"ja": "鳥", "en": "Bird"},
+    "parakeet": {"ja": "インコ", "en": "Parakeet"},
+    "parrot": {"ja": "オウム", "en": "Parrot"},
+    "reptile": {"ja": "爬虫類", "en": "Reptile"},
+    "tortoise": {"ja": "リクガメ", "en": "Tortoise"},
+    "snake": {"ja": "ヘビ", "en": "Snake"},
+    "lizard": {"ja": "トカゲ", "en": "Lizard"},
+    "amphibian": {"ja": "両生類", "en": "Amphibian"},
+    "exotic_other": {"ja": "その他エキゾチック", "en": "Other Exotic"},
+}
+
 for _sp in _GENERIC_SPECIES:
     try:
         _mod = _importlib.import_module(f"api.species.{_sp}_diseases")
@@ -1867,6 +1890,20 @@ def _build_follow_up_questions(
     return questions
 
 
+def _species_guidance_line(species: str, symptom_count: int) -> str:
+    """Build a species-specific guidance line for chat users."""
+    labels = SPECIES_LABELS.get(species, {"ja": species, "en": species})
+    if symptom_count == 0:
+        return (
+            f"{labels['ja']}の症状として認識できる情報が不足しています。"
+            f"{labels['ja']}でよく使う症状名（例：食欲不振、呼吸困難、下痢）で再入力してください。"
+        )
+    return (
+        f"{labels['ja']}として解析し、{symptom_count}件の症状から鑑別候補を抽出しました。"
+        "動物種を切り替えると、候補疾患もその種のデータベースに切り替わります。"
+    )
+
+
 # =============================================================================
 # API ENDPOINTS
 # =============================================================================
@@ -1980,18 +2017,27 @@ def diagnostic_chat():
         })
 
     # Build human-readable response text for frontend
+    guidance_line = _species_guidance_line(species, len(all_symptoms))
+
     if enhanced_candidates:
-        top = enhanced_candidates[0]
-        response_text = f"症状から以下の疾患が考えられます：\n\n"
+        response_text = f"{guidance_line}\n\n症状から以下の疾患が考えられます：\n\n"
         for i, c in enumerate(enhanced_candidates[:5], 1):
             response_text += f"{i}. **{c['name_ja']}** ({c['name_en']}) — 一致度 {c['confidence_level']}\n"
             if c.get("description_ja") or c.get("description"):
                 response_text += f"   {c.get('description_ja') or c.get('description', '')}\n"
         response_text += "\n※ こちらは参考情報です。獣医師の診察を受けてください。"
     elif all_symptoms:
-        response_text = "症状を検出しましたが、該当する疾患が見つかりませんでした。もう少し詳しく症状を教えてください。"
+        response_text = (
+            f"{guidance_line}\n"
+            "症状を検出しましたが、該当する疾患が見つかりませんでした。"
+            "もう少し詳しく症状を教えてください。"
+        )
     else:
-        response_text = "症状を検出できませんでした。具体的な症状を入力してください。\n例: 「咳が出る」「跛行している」「元気がない」"
+        response_text = (
+            f"{guidance_line}\n"
+            "症状を検出できませんでした。具体的な症状を入力してください。\n"
+            "例: 「咳が出る」「跛行している」「元気がない」"
+        )
 
     # Build response
     response = {
@@ -2003,6 +2049,7 @@ def diagnostic_chat():
         "symptom_details": symptom_details,
         "disease_candidates": enhanced_candidates,
         "total_candidates": len(disease_matches),
+        "species_guidance": guidance_line,
         "breed_context": breed_id,
         "age_context": effective_age,
         "onset_context": effective_onset,
