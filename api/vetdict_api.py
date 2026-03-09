@@ -9,9 +9,12 @@ Provides:
   - RECO2/RECO3 AI integrity control layer
 """
 
+import hmac
 import logging
 import os
-import sys
+import threading
+import time
+from collections import deque
 from functools import wraps
 from pathlib import Path
 
@@ -30,6 +33,9 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 VERSION = "5.0.0"
 BUILD = "2026-03-07"
+RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
+_RATE_LIMIT_BUCKETS = {}
+_RATE_LIMIT_LOCK = threading.Lock()
 
 # ---------------------------------------------------------------------------
 # Flask App
@@ -76,11 +82,13 @@ except ImportError:
 
 # Health checker blueprint (checkbox UI)
 try:
-    from api.health_checker import health_bp, SYMPTOMS as ALL_SYMPTOMS
+    from api.health_checker import SYMPTOMS as ALL_SYMPTOMS
+    from api.health_checker import health_bp
     HEALTH_CHECKER_AVAILABLE = True
 except ImportError:
     try:
-        from health_checker import health_bp, SYMPTOMS as ALL_SYMPTOMS
+        from health_checker import SYMPTOMS as ALL_SYMPTOMS
+        from health_checker import health_bp
         HEALTH_CHECKER_AVAILABLE = True
     except ImportError:
         health_bp = None
@@ -103,9 +111,13 @@ except ImportError:
 # RECO2/RECO3 AI integrity layer
 try:
     from reco2 import input_gate, output_gate
-    from reco2.config import load_config as load_reco2_config, public_config as public_reco2_config
-    from reco2.engine import evaluate_payload as reco2_evaluate_payload, get_logs as reco2_get_logs
-    from reco2.engine import get_status as reco2_get_status, patrol as reco2_patrol, record_feedback as reco2_record_feedback
+    from reco2.config import load_config as load_reco2_config
+    from reco2.config import public_config as public_reco2_config
+    from reco2.engine import evaluate_payload as reco2_evaluate_payload
+    from reco2.engine import get_logs as reco2_get_logs
+    from reco2.engine import get_status as reco2_get_status
+    from reco2.engine import patrol as reco2_patrol
+    from reco2.engine import record_feedback as reco2_record_feedback
     from reco2.orchestrator import get_orchestrator as reco2_get_orchestrator
     RECO2_AVAILABLE = True
 except ImportError:
@@ -164,6 +176,69 @@ def ensure_json_response(f):
             is_production = os.getenv('RENDER') or os.getenv('PRODUCTION')
             error_msg = 'エラーが発生しました。しばらくしてからもう一度お試しください。' if is_production else str(e)
             return jsonify({'success': False, 'error': error_msg, 'version': VERSION}), 500
+    return wrapper
+
+
+def _parse_positive_int(value, default):
+    try:
+        return max(1, int(value))
+    except (TypeError, ValueError):
+        return default
+
+
+def _get_internal_api_rate_limit_config():
+    limit = _parse_positive_int(os.getenv('INTERNAL_API_RATE_LIMIT_MAX_REQUESTS'), 30)
+    window_seconds = _parse_positive_int(os.getenv('INTERNAL_API_RATE_LIMIT_WINDOW_SECONDS'), 60)
+    return limit, window_seconds
+
+
+def _get_request_ip():
+    return request.remote_addr or 'unknown'
+
+
+def _prune_rate_limit_buckets(cutoff):
+    for key in list(_RATE_LIMIT_BUCKETS):
+        bucket = _RATE_LIMIT_BUCKETS[key]
+        while bucket and bucket[0] <= cutoff:
+            bucket.popleft()
+        if not bucket:
+            _RATE_LIMIT_BUCKETS.pop(key, None)
+
+
+def _is_rate_limited(bucket_key):
+    limit, window_seconds = _get_internal_api_rate_limit_config()
+    now = time.monotonic()
+    cutoff = now - window_seconds
+    with _RATE_LIMIT_LOCK:
+        _prune_rate_limit_buckets(cutoff)
+        bucket = _RATE_LIMIT_BUCKETS.setdefault(bucket_key, deque())
+        if len(bucket) >= limit:
+            return True
+        bucket.append(now)
+        return False
+
+
+def require_internal_api_access(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        expected_token = (os.getenv('INTERNAL_API_TOKEN') or '').strip()
+        auth = (request.headers.get('Authorization') or '').strip()
+        auth_scheme, _, provided_token = auth.partition(' ')
+        is_authorized = (
+            bool(expected_token)
+            and auth_scheme == 'Bearer'
+            and hmac.compare_digest(provided_token, expected_token)
+        )
+        bucket_key = _get_request_ip()
+
+        if _is_rate_limited(bucket_key):
+            return jsonify({'success': False, 'error': RATE_LIMIT_ERROR_MESSAGE, 'version': VERSION}), 429
+
+        if expected_token and not is_authorized:
+            return jsonify({'success': False, 'error': 'Unauthorized', 'version': VERSION}), 401
+
+        return f(*args, **kwargs)
+
     return wrapper
 
 
@@ -497,6 +572,7 @@ def api_get_breeds(species):
 
 @app.route('/api/status', methods=['GET'])
 @ensure_json_response
+@require_internal_api_access
 def reco2_status_route():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -505,6 +581,7 @@ def reco2_status_route():
 
 @app.route('/api/logs', methods=['GET'])
 @ensure_json_response
+@require_internal_api_access
 def reco2_logs_route():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -517,6 +594,7 @@ def reco2_logs_route():
 
 @app.route('/api/evaluate', methods=['POST'])
 @ensure_json_response
+@require_internal_api_access
 def reco2_evaluate_route():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -526,6 +604,7 @@ def reco2_evaluate_route():
 
 @app.route('/api/feedback', methods=['POST'])
 @ensure_json_response
+@require_internal_api_access
 def reco2_feedback_route():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -538,6 +617,7 @@ def reco2_feedback_route():
 
 @app.route('/api/patrol', methods=['POST'])
 @ensure_json_response
+@require_internal_api_access
 def reco2_patrol_route():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -546,6 +626,7 @@ def reco2_patrol_route():
 
 @app.route('/api/r3/analyze_input', methods=['POST'])
 @ensure_json_response
+@require_internal_api_access
 def reco3_analyze_input():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -563,6 +644,7 @@ def reco3_analyze_input():
 
 @app.route('/api/r3/analyze_output', methods=['POST'])
 @ensure_json_response
+@require_internal_api_access
 def reco3_analyze_output():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -580,6 +662,7 @@ def reco3_analyze_output():
 
 @app.route('/api/r3/chat', methods=['POST'])
 @ensure_json_response
+@require_internal_api_access
 def reco3_chat():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -593,6 +676,7 @@ def reco3_chat():
 
 @app.route('/api/r3/config', methods=['GET'])
 @ensure_json_response
+@require_internal_api_access
 def reco3_config():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
@@ -609,7 +693,7 @@ def not_found(e):
 
 @app.errorhandler(429)
 def rate_limited(e):
-    return jsonify({'error': 'リクエスト制限に達しました。', 'version': VERSION}), 429
+    return jsonify({'error': RATE_LIMIT_ERROR_MESSAGE, 'version': VERSION}), 429
 
 @app.errorhandler(500)
 def server_error(e):
