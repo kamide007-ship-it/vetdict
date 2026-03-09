@@ -179,6 +179,14 @@ def add_headers(response):
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     if os.getenv('RENDER') or os.getenv('PRODUCTION'):
         response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+
+    # Cache policy: HTML/API are always fresh on deploy; static files are revalidated.
+    path = request.path or ''
+    if path.startswith('/api/') or path == '/':
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+        response.headers['Pragma'] = 'no-cache'
+    elif path.startswith('/static/'):
+        response.headers.setdefault('Cache-Control', 'public, max-age=3600, must-revalidate')
     return response
 
 
