@@ -207,6 +207,7 @@ a:hover{text-decoration:underline}
 .chat-msg{max-width:85%;padding:10px 14px;border-radius:12px;font-size:.84rem;line-height:1.5;white-space:pre-wrap;word-break:break-word}
 .chat-msg.bot{background:var(--gray-100);align-self:flex-start;border-bottom-left-radius:4px}
 .chat-msg.user{background:var(--navy);color:var(--white);align-self:flex-end;border-bottom-right-radius:4px}
+.species-guidance{font-size:.76rem;color:var(--navy);background:#e6eefb;border:1px solid #c7d8f5;padding:8px 10px;border-radius:8px;margin:6px 0}
 .chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--gray-200)}
 .chat-input-row input{flex:1;padding:10px 14px;border:2px solid var(--gray-200);border-radius:20px;font-size:.86rem;outline:none}
 .chat-input-row input:focus{border-color:var(--navy-light)}
@@ -1087,6 +1088,20 @@ function buildFieldFallback(label,name){
   return `${label}: Review standard veterinary references for ${name} and individualize by clinical assessment.`;
 }
 
+
+function renderReferenceLinks(item){
+  const refs=(item&&Array.isArray(item.evidence_sources))?item.evidence_sources:[];
+  if(!refs.length)return "";
+  return `<div class="missing-note">References: ${refs.map(r=>`<a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.name}</a>`).join(" | ")}</div>`;
+}
+
+function renderCitationMap(item){
+  const cmap=(item&&item.citation_map&&typeof item.citation_map==="object")?item.citation_map:{};
+  const entries=Object.entries(cmap).filter(([,ids])=>Array.isArray(ids)&&ids.length>0);
+  if(!entries.length)return "";
+  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${k} → ${ids.join(", ")}`).join(" / ")}</div>`;
+}
+
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
@@ -1136,7 +1151,7 @@ function renderResults(data){
     const completeness=Number(d.completeness_score||100);
     const missing=(d.missing_fields||[]);
     const qualityClass=completeness>=90?"quality-ok":"quality-warn";
-    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span></div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
+    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span></div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
   });
   if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>`<li>\u{1F52C} ${x}</li>`).join("")}</ul></div>`;}
   area.innerHTML=html;
@@ -1189,7 +1204,7 @@ function renderDiseaseDb(){
         <dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>
         ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):d.symptoms)}</dd>`:""}
         ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
-      </dl>${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">Data needs review: ${d.missing_fields.join(", ")}</div>`:""}</div>
+      </dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">Data needs review: ${d.missing_fields.join(", ")}</div>`:""}</div>
     </div>`}).join("");
 }
 
@@ -1234,6 +1249,22 @@ function setupChat(){
   document.getElementById("landingChatSend").addEventListener("click",()=>sendLandingChat());
   document.getElementById("landingChatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendLandingChat();});
 }
+function stripGuidanceFromResponse(response,guidance){
+  if(!response||!guidance)return response||"";
+  return response.startsWith(guidance)?response.slice(guidance.length).trimStart():response;
+}
+
+function renderSpeciesGuidance(containerId,guidance){
+  if(!guidance)return;
+  const msgs=document.getElementById(containerId);
+  if(!msgs)return;
+  const div=document.createElement("div");
+  div.className="species-guidance";
+  div.textContent=guidance;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
 function sendLandingChat(){
   const input=document.getElementById("landingChatInput"),text=input.value.trim();if(!text)return;input.value="";
   const msgs=document.getElementById("landingChatMessages");
@@ -1241,7 +1272,7 @@ function sendLandingChat(){
   const species=currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot";loading.innerHTML='<span class="spinner" style="width:16px;height:16px"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
-  .then(r=>r.json()).then(data=>{loading.textContent=(data.response||data.message||data.error||t("noResponse"));msgs.scrollTop=msgs.scrollHeight;})
+  .then(r=>r.json()).then(data=>{const base=(data.response||data.message||data.error||t("noResponse"));loading.textContent=stripGuidanceFromResponse(base,data.species_guidance);renderSpeciesGuidance("landingChatMessages",data.species_guidance);msgs.scrollTop=msgs.scrollHeight;})
   .catch(()=>{loading.textContent=t("commError");msgs.scrollTop=msgs.scrollHeight;});
 }
 
@@ -1249,7 +1280,7 @@ function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
-  .then(r=>r.json()).then(data=>{addChatMsg(data.response||data.message||data.error||t("noResponse"),"bot");})
+  .then(r=>r.json()).then(data=>{if(data.species_guidance) addChatMsg(`[Species] ${data.species_guidance}`,"bot");const base=(data.response||data.message||data.error||t("noResponse"));addChatMsg(stripGuidanceFromResponse(base,data.species_guidance),"bot");})
   .catch(()=>addChatMsg(t("commError"),"bot"));
 }
 
