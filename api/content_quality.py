@@ -16,9 +16,9 @@ REQUIRED_FIELDS = [
 ]
 
 REFERENCE_LIBRARY = [
-    {"id": "msd-vet-manual", "name": "MSD Veterinary Manual"},
-    {"id": "merck-manual", "name": "Merck Manuals"},
-    {"id": "aaha-guidelines", "name": "AAHA Guidelines"},
+    {"id": "msd-vet-manual", "name": "MSD Veterinary Manual", "url": "https://www.msdvetmanual.com/searchresults?query={query}"},
+    {"id": "merck-manual", "name": "Merck Manuals", "url": "https://www.merckvetmanual.com/search?query={query}"},
+    {"id": "aaha-guidelines", "name": "AAHA Guidelines", "url": "https://www.aaha.org/publications/guidelines/"},
 ]
 
 
@@ -43,6 +43,27 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
     if len(vals) <= limit:
         return ", ".join(vals)
     return ", ".join(vals[:limit]) + f" (+{len(vals)-limit} more)"
+
+
+def _build_reference_links(name: str) -> List[Dict[str, str]]:
+    q = (name or "").strip().replace(" ", "+")
+    refs: List[Dict[str, str]] = []
+    for r in REFERENCE_LIBRARY:
+        url = r["url"].format(query=q) if "{query}" in r["url"] else r["url"]
+        refs.append({"id": r["id"], "name": r["name"], "url": url})
+    return refs
+
+
+def _default_citation_map() -> Dict[str, List[str]]:
+    return {
+        "pathophysiology": ["msd-vet-manual", "merck-manual"],
+        "causes": ["msd-vet-manual"],
+        "prevention": ["aaha-guidelines"],
+        "treatment": ["msd-vet-manual", "aaha-guidelines"],
+        "prognosis": ["msd-vet-manual"],
+        "description": ["merck-manual"],
+        "symptoms_summary": ["msd-vet-manual"],
+    }
 
 
 def _symptom_summary(name: str, symptoms: str, species: str, lang: str) -> str:
@@ -122,5 +143,6 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         out["content_origin"] = "sourced"
     out["sourced_fields"] = sorted(set(sourced))
     out["review_status"] = "review_required" if unique_missing else "reviewed"
-    out["evidence_sources"] = list(REFERENCE_LIBRARY)
+    out["evidence_sources"] = _build_reference_links(name_en)
+    out["citation_map"] = _default_citation_map()
     return out
