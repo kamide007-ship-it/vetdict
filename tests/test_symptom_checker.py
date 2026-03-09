@@ -324,20 +324,27 @@ class TestAnalyzeSymptoms:
     def test_disease_detail_fields_default_to_strings(self):
         result = analyze_symptoms(["vomiting", "lethargy", "diarrhea"])
         detail_fields = (
+            "description",
             "pathophysiology",
-            "pathophysiology_ja",
             "causes",
-            "causes_ja",
-            "treatment",
-            "treatment_ja",
-            "prognosis",
-            "prognosis_ja",
             "prevention",
+            "treatment",
+            "prognosis",
+        )
+        translated_fields = (
+            "description_ja",
+            "pathophysiology_ja",
+            "causes_ja",
             "prevention_ja",
+            "treatment_ja",
+            "prognosis_ja",
         )
 
         for entry in result["suspected_diseases"]:
             for field in detail_fields:
+                assert entry.get(field), f"{field} should not be empty for {entry['name']}"
+                assert isinstance(entry[field], str)
+            for field in translated_fields:
                 assert isinstance(entry[field], str)
 
     def test_internal_fields_removed(self):

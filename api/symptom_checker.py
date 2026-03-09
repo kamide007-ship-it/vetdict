@@ -7411,6 +7411,28 @@ _LIKELIHOOD_TO_PRIORITY: dict[str, str] = {
 }
 
 
+def _disease_detail_text(
+    disease: dict[str, Any],
+    field: str,
+    *,
+    fallback_description: str = "",
+) -> str:
+    """Return a non-empty disease detail string for API responses."""
+    value = str(disease.get(field) or "").strip()
+    if value:
+        return value
+
+    ja_value = str(disease.get(f"{field}_ja") or "").strip()
+    if ja_value:
+        return f"Japanese reference available: {ja_value}"
+
+    if fallback_description:
+        return fallback_description
+
+    field_label = field.replace("_", " ")
+    return f"Detailed {field_label} information is not yet available."
+
+
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
@@ -7591,17 +7613,21 @@ def analyze_symptoms(
             "likelihood": likelihood,
             "match_percent": match_percent,
             "color_class": color_class,
-            "description": disease["description"],
+            "description": _disease_detail_text(
+                disease,
+                "description",
+                fallback_description="Detailed disease overview is not yet available.",
+            ),
             "description_ja": disease.get("description_ja", ""),
-            "pathophysiology": disease.get("pathophysiology", ""),
+            "pathophysiology": _disease_detail_text(disease, "pathophysiology"),
             "pathophysiology_ja": disease.get("pathophysiology_ja", ""),
-            "causes": disease.get("causes", ""),
+            "causes": _disease_detail_text(disease, "causes"),
             "causes_ja": disease.get("causes_ja", ""),
-            "treatment": disease.get("treatment", ""),
+            "treatment": _disease_detail_text(disease, "treatment"),
             "treatment_ja": disease.get("treatment_ja", ""),
-            "prognosis": disease.get("prognosis", ""),
+            "prognosis": _disease_detail_text(disease, "prognosis"),
             "prognosis_ja": disease.get("prognosis_ja", ""),
-            "prevention": disease.get("prevention", ""),
+            "prevention": _disease_detail_text(disease, "prevention"),
             "prevention_ja": disease.get("prevention_ja", ""),
             "matching_symptoms": sorted(matching),
             "match_count": match_count,
