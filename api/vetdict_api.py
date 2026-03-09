@@ -48,6 +48,10 @@ else:
 RATE_LIMIT_WINDOW_SEC = int(os.getenv("API_RATE_LIMIT_WINDOW_SEC", "60"))
 RATE_LIMIT_MAX_REQUESTS = int(os.getenv("API_RATE_LIMIT_MAX_REQUESTS", "60"))
 _RATE_LIMIT_BUCKETS = {}
+_LAST_RATE_LIMIT_SWEEP = 0.0
+INTERNAL_API_TOKEN = os.getenv("INTERNAL_API_TOKEN", "").strip()
+PROTECTED_API_PATH_PREFIXES = ("/api/r3/",)
+PROTECTED_API_PATHS = {"/api/evaluate", "/api/feedback", "/api/patrol", "/api/logs", "/api/status"}
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
@@ -185,7 +189,22 @@ def basic_rate_limit():
     path = request.path or ""
     if not path.startswith("/api/"):
         return None
+
+    # Optional token auth for internal/control APIs
+    if INTERNAL_API_TOKEN and (path in PROTECTED_API_PATHS or any(path.startswith(p) for p in PROTECTED_API_PATH_PREFIXES)):
+        auth = (request.headers.get("Authorization") or "").strip()
+        expected = f"Bearer {INTERNAL_API_TOKEN}"
+        if auth != expected:
+            return jsonify({"success": False, "error": "Unauthorized", "version": VERSION}), 401
+
     now = time.time()
+    global _LAST_RATE_LIMIT_SWEEP
+    if now - _LAST_RATE_LIMIT_SWEEP > RATE_LIMIT_WINDOW_SEC * 2:
+        stale = [k for k, v in _RATE_LIMIT_BUCKETS.items() if (now - v.get("start", 0)) >= RATE_LIMIT_WINDOW_SEC]
+        for k in stale:
+            _RATE_LIMIT_BUCKETS.pop(k, None)
+        _LAST_RATE_LIMIT_SWEEP = now
+
     ip = request.headers.get("X-Forwarded-For", request.remote_addr or "unknown").split(",")[0].strip()
     key = f"{ip}:{path}"
     bucket = _RATE_LIMIT_BUCKETS.get(key)

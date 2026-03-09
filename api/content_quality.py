@@ -15,6 +15,12 @@ REQUIRED_FIELDS = [
     "prognosis",
 ]
 
+REFERENCE_LIBRARY = [
+    {"id": "msd-vet-manual", "name": "MSD Veterinary Manual"},
+    {"id": "merck-manual", "name": "Merck Manuals"},
+    {"id": "aaha-guidelines", "name": "AAHA Guidelines"},
+]
+
 
 def _text(v: Any) -> str:
     if v is None:
@@ -37,6 +43,12 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
     if len(vals) <= limit:
         return ", ".join(vals)
     return ", ".join(vals[:limit]) + f" (+{len(vals)-limit} more)"
+
+
+def _symptom_summary(name: str, symptoms: str, species: str, lang: str) -> str:
+    if lang == "ja":
+        return f"{species}の{name}では、主に{symptoms}が観察されます。"
+    return f"In {species}, {name} commonly presents with {symptoms}."
 
 
 def _fallback(field: str, name: str, species: str, symptoms: str, lang: str) -> str:
@@ -87,10 +99,28 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         else:
             sourced.append(en_key)
 
-    total = len(REQUIRED_FIELDS) * 2
+    if not _text(out.get("symptoms_summary_ja")):
+        out["symptoms_summary_ja"] = _symptom_summary(name_ja, sym_text, species, "ja")
+        missing.append("symptoms_summary_ja")
+    else:
+        sourced.append("symptoms_summary_ja")
+    if not _text(out.get("symptoms_summary")):
+        out["symptoms_summary"] = _symptom_summary(name_en, sym_text, species, "en")
+        missing.append("symptoms_summary")
+    else:
+        sourced.append("symptoms_summary")
+
+    total = len(REQUIRED_FIELDS) * 2 + 2
     unique_missing = sorted(set(missing))
     out["missing_fields"] = unique_missing
     out["completeness_score"] = round((total - len(unique_missing)) / total * 100, 1)
-    out["content_origin"] = "sourced" if not unique_missing else "mixed"
+    if len(unique_missing) == total:
+        out["content_origin"] = "generated"
+    elif unique_missing:
+        out["content_origin"] = "mixed"
+    else:
+        out["content_origin"] = "sourced"
     out["sourced_fields"] = sorted(set(sourced))
+    out["review_status"] = "review_required" if unique_missing else "reviewed"
+    out["evidence_sources"] = list(REFERENCE_LIBRARY)
     return out

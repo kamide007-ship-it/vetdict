@@ -11,8 +11,10 @@ def test_health_check_diseases_include_quality_fields():
     assert 'completeness_score' in sample
     assert 'missing_fields' in sample
     assert isinstance(sample['missing_fields'], list)
-    assert sample.get('content_origin') in {'sourced', 'mixed'}
-    for key in ['description', 'pathophysiology', 'causes', 'prevention', 'treatment', 'prognosis']:
+    assert sample.get('content_origin') in {'sourced', 'mixed', 'generated'}
+    assert sample.get('review_status') in {'reviewed', 'review_required'}
+    assert isinstance(sample.get('evidence_sources'), list)
+    for key in ['description', 'pathophysiology', 'causes', 'prevention', 'treatment', 'prognosis', 'symptoms_summary']:
         assert sample.get(key), f'{key} should be populated'
 
 

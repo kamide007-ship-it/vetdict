@@ -33,3 +33,21 @@ def test_api_rate_limit_triggers_429():
         vetdict_api.RATE_LIMIT_MAX_REQUESTS = old_max
         vetdict_api.RATE_LIMIT_WINDOW_SEC = old_window
         vetdict_api._RATE_LIMIT_BUCKETS.clear()
+
+
+def test_internal_protected_endpoint_requires_token_when_configured():
+    client = app.test_client()
+    from api import vetdict_api
+
+    old = vetdict_api.INTERNAL_API_TOKEN
+    vetdict_api.INTERNAL_API_TOKEN = 'secret-token'
+    vetdict_api._RATE_LIMIT_BUCKETS.clear()
+    try:
+        unauthorized = client.get('/api/status')
+        assert unauthorized.status_code == 401
+
+        authorized = client.get('/api/status', headers={'Authorization': 'Bearer secret-token'})
+        assert authorized.status_code == 200
+    finally:
+        vetdict_api.INTERNAL_API_TOKEN = old
+        vetdict_api._RATE_LIMIT_BUCKETS.clear()
