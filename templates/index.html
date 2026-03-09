@@ -1089,17 +1089,30 @@ function buildFieldFallback(label,name){
 }
 
 
+function escapeHtml(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+}
+
+function sanitizeUrl(value){
+  try{
+    const url=new URL(String(value??""),window.location.origin);
+    return ["http:","https:"].includes(url.protocol)?url.href:"#";
+  }catch{
+    return "#";
+  }
+}
+
 function renderReferenceLinks(item){
   const refs=(item&&Array.isArray(item.evidence_sources))?item.evidence_sources:[];
   if(!refs.length)return "";
-  return `<div class="missing-note">References: ${refs.map(r=>`<a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.name}</a>`).join(" | ")}</div>`;
+  return `<div class="missing-note">References: ${refs.map(r=>`<a href="${sanitizeUrl(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.name)}</a>`).join(" | ")}</div>`;
 }
 
 function renderCitationMap(item){
   const cmap=(item&&item.citation_map&&typeof item.citation_map==="object")?item.citation_map:{};
   const entries=Object.entries(cmap).filter(([,ids])=>Array.isArray(ids)&&ids.length>0);
   if(!entries.length)return "";
-  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${k} → ${ids.join(", ")}`).join(" / ")}</div>`;
+  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${escapeHtml(k)} → ${ids.map(id=>escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
 }
 
 function doAnalyze(){

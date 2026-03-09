@@ -4,6 +4,7 @@ Provides deterministic enrichment for disease narrative fields and completeness 
 """
 from __future__ import annotations
 
+from urllib.parse import quote_plus
 from typing import Any, Dict, List
 
 REQUIRED_FIELDS = [
@@ -46,7 +47,7 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
 
 
 def _build_reference_links(name: str) -> List[Dict[str, str]]:
-    q = (name or "").strip().replace(" ", "+")
+    q = quote_plus((name or "").strip())
     refs: List[Dict[str, str]] = []
     for r in REFERENCE_LIBRARY:
         url = r["url"].format(query=q) if "{query}" in r["url"] else r["url"]
