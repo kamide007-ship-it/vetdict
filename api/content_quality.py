@@ -47,7 +47,10 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
 
 
 def _build_reference_links(name: str) -> List[Dict[str, str]]:
-    q = quote_plus((name or "").strip())
+    cleaned_name = (name or "").strip()
+    if not cleaned_name:
+        return []
+    q = quote_plus(cleaned_name)
     refs: List[Dict[str, str]] = []
     for r in REFERENCE_LIBRARY:
         url = r["url"].format(query=q) if "{query}" in r["url"] else r["url"]
@@ -132,7 +135,9 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
     else:
         sourced.append("symptoms_summary")
 
-    total = len(REQUIRED_FIELDS) * 2 + 2
+    bilingual_required_fields = len(REQUIRED_FIELDS) * 2
+    summary_fields = 2
+    total = bilingual_required_fields + summary_fields
     unique_missing = sorted(set(missing))
     out["missing_fields"] = unique_missing
     out["completeness_score"] = round((total - len(unique_missing)) / total * 100, 1)

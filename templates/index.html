@@ -1105,7 +1105,7 @@ function sanitizeUrl(value){
 function renderReferenceLinks(item){
   const refs=(item&&Array.isArray(item.evidence_sources))?item.evidence_sources:[];
   if(!refs.length)return "";
-  return `<div class="missing-note">References: ${refs.map(r=>`<a href="${sanitizeUrl(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.name)}</a>`).join(" | ")}</div>`;
+  return `<div class="missing-note">References: ${refs.map(r=>`<a href="${r&&r.url?sanitizeUrl(r.url):"#"}" target="_blank" rel="noopener noreferrer">${escapeHtml(r&&r.name)}</a>`).join(" | ")}</div>`;
 }
 
 function renderCitationMap(item){

@@ -14,7 +14,7 @@ def test_health_check_diseases_include_quality_fields():
     assert sample.get('content_origin') in {'sourced', 'mixed', 'generated'}
     assert sample.get('review_status') in {'reviewed', 'review_required'}
     assert isinstance(sample.get('evidence_sources'), list)
-    assert sample['evidence_sources']
+    assert len(sample['evidence_sources']) > 0
     assert {'id', 'name', 'url'} <= set(sample['evidence_sources'][0].keys())
     assert isinstance(sample.get('citation_map'), dict)
     assert sample['citation_map'].get('treatment')
