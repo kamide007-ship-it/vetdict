@@ -342,8 +342,9 @@ class TestAnalyzeSymptoms:
 
         for entry in result["suspected_diseases"]:
             for field in detail_fields:
-                assert entry.get(field), f"{field} should not be empty for {entry['name']}"
-                assert isinstance(entry[field], str)
+                value = entry.get(field)
+                assert value, f"{field} should not be empty for {entry['name']}"
+                assert isinstance(value, str)
             for field in translated_fields:
                 assert isinstance(entry[field], str)
 

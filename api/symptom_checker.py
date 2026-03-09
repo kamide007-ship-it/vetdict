@@ -7424,7 +7424,7 @@ def _disease_detail_text(
 
     ja_value = str(disease.get(f"{field}_ja") or "").strip()
     if ja_value:
-        return f"Japanese reference available: {ja_value}"
+        return "Detailed information is currently available in Japanese only."
 
     if fallback_description:
         return fallback_description
