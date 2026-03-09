@@ -35,15 +35,17 @@ def test_unauthorized_protected_requests_are_rate_limited(monkeypatch):
     assert first.status_code == 401
     assert second.status_code == 401
     assert third.status_code == 429
-    assert third.get_json()["error"] == "リクエスト制限に達しました。"
+    assert third.get_json()["error"] == vetdict_api.RATE_LIMIT_ERROR_MESSAGE
 
 
 def test_valid_internal_token_allows_protected_request(monkeypatch):
     monkeypatch.setenv("INTERNAL_API_TOKEN", "secret-token")
+    monkeypatch.setattr(vetdict_api, "RECO2_AVAILABLE", False)
     vetdict_api._RATE_LIMIT_BUCKETS.clear()
 
     client = vetdict_api.app.test_client()
     resp = client.get("/api/status", headers=_auth_header("secret-token"))
 
-    assert resp.status_code in {200, 503}
+    assert resp.status_code == 503
+    assert resp.get_json()["error"] == "reco2 not available"
     assert resp.get_json()["version"] == vetdict_api.VERSION

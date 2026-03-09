@@ -12,6 +12,7 @@ Provides:
 import hmac
 import logging
 import os
+import threading
 import time
 from collections import deque
 from functools import wraps
@@ -32,7 +33,9 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 VERSION = "5.0.0"
 BUILD = "2026-03-07"
+RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
 _RATE_LIMIT_BUCKETS = {}
+_RATE_LIMIT_LOCK = threading.Lock()
 
 # ---------------------------------------------------------------------------
 # Flask App
@@ -190,8 +193,7 @@ def _get_internal_api_rate_limit_config():
 
 
 def _get_request_ip():
-    forwarded_for = (request.headers.get('X-Forwarded-For') or '').split(',', 1)[0].strip()
-    return forwarded_for or request.remote_addr or 'unknown'
+    return request.remote_addr or 'unknown'
 
 
 def _prune_rate_limit_buckets(cutoff):
@@ -207,12 +209,13 @@ def _is_rate_limited(bucket_key):
     limit, window_seconds = _get_internal_api_rate_limit_config()
     now = time.monotonic()
     cutoff = now - window_seconds
-    _prune_rate_limit_buckets(cutoff)
-    bucket = _RATE_LIMIT_BUCKETS.setdefault(bucket_key, deque())
-    if len(bucket) >= limit:
-        return True
-    bucket.append(now)
-    return False
+    with _RATE_LIMIT_LOCK:
+        _prune_rate_limit_buckets(cutoff)
+        bucket = _RATE_LIMIT_BUCKETS.setdefault(bucket_key, deque())
+        if len(bucket) >= limit:
+            return True
+        bucket.append(now)
+        return False
 
 
 def require_internal_api_access(f):
@@ -220,12 +223,16 @@ def require_internal_api_access(f):
     def wrapper(*args, **kwargs):
         expected_token = (os.getenv('INTERNAL_API_TOKEN') or '').strip()
         auth = (request.headers.get('Authorization') or '').strip()
-        expected_auth = f'Bearer {expected_token}' if expected_token else ''
-        is_authorized = bool(expected_token) and hmac.compare_digest(auth, expected_auth)
-        bucket_key = (_get_request_ip(), request.path, is_authorized)
+        auth_scheme, _, provided_token = auth.partition(' ')
+        is_authorized = (
+            bool(expected_token)
+            and auth_scheme == 'Bearer'
+            and hmac.compare_digest(provided_token, expected_token)
+        )
+        bucket_key = _get_request_ip()
 
         if _is_rate_limited(bucket_key):
-            return jsonify({'success': False, 'error': 'リクエスト制限に達しました。', 'version': VERSION}), 429
+            return jsonify({'success': False, 'error': RATE_LIMIT_ERROR_MESSAGE, 'version': VERSION}), 429
 
         if expected_token and not is_authorized:
             return jsonify({'success': False, 'error': 'Unauthorized', 'version': VERSION}), 401
@@ -686,7 +693,7 @@ def not_found(e):
 
 @app.errorhandler(429)
 def rate_limited(e):
-    return jsonify({'error': 'リクエスト制限に達しました。', 'version': VERSION}), 429
+    return jsonify({'error': RATE_LIMIT_ERROR_MESSAGE, 'version': VERSION}), 429
 
 @app.errorhandler(500)
 def server_error(e):
