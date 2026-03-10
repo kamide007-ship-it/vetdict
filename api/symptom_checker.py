@@ -11,6 +11,8 @@ from __future__ import annotations
 from importlib.util import find_spec
 from typing import Any
 
+from api.content_quality import enrich_disease_content
+
 # ---------------------------------------------------------------------------
 # Symptom ID catalogue (for reference / validation)
 # ---------------------------------------------------------------------------
@@ -7640,6 +7642,10 @@ def analyze_symptoms(
     # Sort: match_percent desc (primary), then match_count desc (tiebreak)
     suspected.sort(key=lambda d: (d["match_percent"], d["match_count"]),
                    reverse=True)
+
+    # Enrich all suspected diseases with mandatory sections + citations
+    for i, entry in enumerate(suspected):
+        suspected[i] = enrich_disease_content(entry, "dog")
 
     # -- 2. Determine overall severity --------------------------------------
     severity = _compute_severity(suspected)

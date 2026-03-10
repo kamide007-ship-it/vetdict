@@ -28,6 +28,12 @@ The world's largest open veterinary differential diagnosis platform — **4,800+
 - 4,800+ diseases with Japanese / English bilingual descriptions
 - 20 species: Dog (577), Cat (516), Horse (736), Rabbit (271), Bird (308), Parakeet (251), Guinea Pig (200), Hamster (190), Chinchilla (169), Reptile (161), Tortoise (161), Ferret (160), Parrot (160), Exotic Other (151), Snake (141), Lizard (141), Hedgehog (140), Amphibian (131), Sugar Glider (130), Degu (120)
 
+### Evidence-Cited Disease Sections
+- Every disease payload now includes five canonical sections with citation metadata:
+  `pathophysiology`, `prevention`, `treatment`, `etiology` (mapped from causes), and `prognosis`
+- Responses include `sections`, `citation_map`, `reference_catalog`, and `reference_catalog_version`
+- Citation IDs are normalized against a curated veterinary reference catalog ([1]–[42])
+
 ### Drug Dictionary
 - 175+ drugs with species-specific dosage, safety, routes, formulations, and drug interactions
 
@@ -115,6 +121,7 @@ The project includes `render.yaml` for automatic deployment.
 | GET | `/api/health` | Health check & feature availability |
 | GET | `/api/species-stats` | Disease/drug counts per species |
 | POST | `/api/analyze-symptoms` | Differential diagnosis |
+| GET | `/api/health-check/diseases?species=<id>` | Disease database list with quality score and citation metadata |
 | GET | `/api/breeds/<species>` | Breed list for a species |
 | GET | `/api/drugs` | Drug dictionary |
 | POST | `/api/r3/chat` | Diagnostic chat with RECO3 |

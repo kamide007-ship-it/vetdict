@@ -11,6 +11,8 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Set, Tuple
 
+from api.content_quality import enrich_disease_content
+
 # Default advice messages for various severity levels. These are used when
 # species-specific modules do not supply their own advice dictionary.
 ADVICE: Dict[str, Dict[str, str]] = {
@@ -1381,6 +1383,11 @@ def analyze_symptoms_generic(
 
     # Sort results primarily by match_percent then by number of matching symptoms
     suspected.sort(key=lambda d: (d["match_percent"], d["match_count"]), reverse=True)
+
+    # Enrich all suspected diseases with mandatory sections + citations
+    if species:
+        for i, entry in enumerate(suspected):
+            suspected[i] = enrich_disease_content(entry, species)
 
     # Compute overall severity
     severity = _compute_severity(suspected)
