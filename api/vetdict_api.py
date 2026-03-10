@@ -439,6 +439,7 @@ def api_species_symptoms(species: str):
         "exotic_other": "exotic_other_diseases",
     }
     diseases = []
+    species_module = None
     try:
         if species_key == "dog":
             from api.symptom_checker import _DISEASE_DB as dog_db
@@ -451,8 +452,8 @@ def api_species_symptoms(species: str):
             if mod_name is None:
                 return {"symptoms": []}
             import importlib
-            mod = importlib.import_module(f"api.species.{mod_name}")
-            diseases = getattr(mod, "DISEASES", [])
+            species_module = importlib.import_module(f"api.species.{mod_name}")
+            diseases = getattr(species_module, "DISEASES", [])
     except Exception:
         return {"symptoms": []}
 
@@ -482,6 +483,33 @@ def api_species_symptoms(species: str):
                     }
         except Exception:
             pass
+    elif species_key == "dog":
+        try:
+            from api.symptom_checker import _SYMPTOM_NAMES
+
+            for symptom_id, names in _SYMPTOM_NAMES.items():
+                current = id_to_info.get(symptom_id, {"id": symptom_id, "category": "other"})
+                id_to_info[symptom_id] = {
+                    "id": symptom_id,
+                    "name_ja": names.get("ja") or current.get("name_ja") or symptom_id,
+                    "name_en": names.get("en") or current.get("name_en") or symptom_id,
+                    "category": current.get("category") or "other",
+                }
+        except Exception:
+            pass
+    elif species_module is not None:
+        species_symptom_names = getattr(species_module, "SYMPTOM_NAMES", None)
+        if isinstance(species_symptom_names, dict):
+            for symptom_id, names in species_symptom_names.items():
+                if not isinstance(names, dict):
+                    continue
+                current = id_to_info.get(symptom_id, {"id": symptom_id, "category": "other"})
+                id_to_info[symptom_id] = {
+                    "id": symptom_id,
+                    "name_ja": names.get("ja") or current.get("name_ja") or symptom_id,
+                    "name_en": names.get("en") or current.get("name_en") or symptom_id,
+                    "category": current.get("category") or "other",
+                }
 
     result = []
     for sid in sorted(unique_syms):
