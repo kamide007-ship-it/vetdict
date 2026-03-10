@@ -465,6 +465,24 @@ def api_species_symptoms(species: str):
         if isinstance(syms, (set, list, tuple)):
             unique_syms.update(syms)
     id_to_info = {s["id"]: s for s in ALL_SYMPTOMS}
+
+    # Horse has an expanded symptom namespace that is not fully covered by
+    # generic SYMPTOMS. Merge equine labels so UI does not fall back to raw IDs.
+    if species_key == "horse":
+        try:
+            from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+
+            for category, items in HEALTH_CHECK_ITEMS.items():
+                for symptom_id, name_ja, name_en in items:
+                    id_to_info[symptom_id] = {
+                        "id": symptom_id,
+                        "name_ja": name_ja,
+                        "name_en": name_en,
+                        "category": category,
+                    }
+        except Exception:
+            pass
+
     result = []
     for sid in sorted(unique_syms):
         info = id_to_info.get(sid)
