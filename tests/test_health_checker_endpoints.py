@@ -42,3 +42,28 @@ def test_api_cache_control_headers():
     assert resp.status_code == 200
     cc = resp.headers.get('Cache-Control', '')
     assert 'no-store' in cc
+
+
+def test_enrich_preserves_existing_citation_map():
+    from api.content_quality import enrich_disease_content
+
+    disease = {
+        'name': 'Chronic Kidney Disease',
+        'name_ja': '慢性腎臓病',
+        'description': 'CKD',
+        'description_ja': 'CKD',
+        'pathophysiology': 'x',
+        'pathophysiology_ja': 'x',
+        'causes': 'x',
+        'causes_ja': 'x',
+        'prevention': 'x',
+        'prevention_ja': 'x',
+        'treatment': 'x',
+        'treatment_ja': 'x',
+        'prognosis': 'x',
+        'prognosis_ja': 'x',
+        'citation_map': {'treatment': ['custom-ref']},
+    }
+    out = enrich_disease_content(disease, 'cat')
+    assert out['citation_map']['treatment'] == ['custom-ref']
+    assert any('query=Chronic+Kidney+Disease' in r.get('url', '') for r in out.get('evidence_sources', []))

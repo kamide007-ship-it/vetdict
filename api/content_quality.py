@@ -5,6 +5,7 @@ Provides deterministic enrichment for disease narrative fields and completeness 
 from __future__ import annotations
 
 from typing import Any, Dict, List
+from urllib.parse import quote_plus
 
 REQUIRED_FIELDS = [
     "description",
@@ -46,7 +47,7 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
 
 
 def _build_reference_links(name: str) -> List[Dict[str, str]]:
-    q = (name or "").strip().replace(" ", "+")
+    q = quote_plus((name or "").strip())
     refs: List[Dict[str, str]] = []
     for r in REFERENCE_LIBRARY:
         url = r["url"].format(query=q) if "{query}" in r["url"] else r["url"]
@@ -144,5 +145,6 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
     out["sourced_fields"] = sorted(set(sourced))
     out["review_status"] = "review_required" if unique_missing else "reviewed"
     out["evidence_sources"] = _build_reference_links(name_en)
-    out["citation_map"] = _default_citation_map()
+    existing_citation_map = out.get("citation_map")
+    out["citation_map"] = existing_citation_map if isinstance(existing_citation_map, dict) and existing_citation_map else _default_citation_map()
     return out
