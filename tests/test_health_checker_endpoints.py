@@ -39,3 +39,23 @@ def test_api_cache_control_headers():
     assert resp.status_code == 200
     cc = resp.headers.get('Cache-Control', '')
     assert 'no-store' in cc
+
+
+def test_species_symptoms_endpoint_merges_dog_localized_names():
+    client = app.test_client()
+    resp = client.get('/api/species/dog/symptoms')
+    assert resp.status_code == 200
+    payload = resp.get_json()
+    symptoms = {item['id']: item for item in payload['symptoms']}
+    assert symptoms['appetite_loss']['name_ja'] == '食欲不振'
+    assert symptoms['appetite_loss']['name_en'] == 'Appetite Loss'
+
+
+def test_species_symptoms_endpoint_merges_species_localized_names():
+    client = app.test_client()
+    resp = client.get('/api/species/cat/symptoms')
+    assert resp.status_code == 200
+    payload = resp.get_json()
+    symptoms = {item['id']: item for item in payload['symptoms']}
+    assert symptoms['cyanosis']['name_ja'] == 'チアノーゼ'
+    assert symptoms['cyanosis']['name_en'] == 'Cyanosis'
