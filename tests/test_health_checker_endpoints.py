@@ -59,3 +59,14 @@ def test_species_symptoms_endpoint_merges_species_localized_names():
     symptoms = {item['id']: item for item in payload['symptoms']}
     assert symptoms['cyanosis']['name_ja'] == 'チアノーゼ'
     assert symptoms['cyanosis']['name_en'] == 'Cyanosis'
+
+
+def test_species_symptoms_endpoint_merges_horse_localized_names():
+    client = app.test_client()
+    resp = client.get('/api/species/horse/symptoms')
+    assert resp.status_code == 200
+    payload = resp.get_json()
+    symptoms = {item['id']: item for item in payload['symptoms']}
+    assert symptoms['limb_bucked_shin']['name_ja'] == 'すねの前面が腫れている（バックドシン）'
+    assert symptoms['limb_bucked_shin']['name_en'] == 'Bucked Shin'
+    assert symptoms['limb_bucked_shin']['category'] == 'limb'
