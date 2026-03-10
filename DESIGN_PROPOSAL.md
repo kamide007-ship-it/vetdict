@@ -73,7 +73,7 @@
 ### 3-1. データスキーマ（疾患）
 ```json
 {
-  "id": "dog_ckd",
+  "id": "canine_ckd",
   "name": "慢性腎臓病",
   "name_en": "Chronic Kidney Disease",
   "species": "dog",
@@ -130,7 +130,7 @@
 # api/routes/species.py に分離
 species_bp = Blueprint("species", __name__)
 
-@species_bp.route('/api/species-stats', methods=['GET'])
+@species_bp.route('/api/species-stats', methods=['GET'])  # 既存の decorator / auth 条件を維持
 def api_species_stats():
     ...
 
@@ -153,7 +153,8 @@ response.headers['X-App-Build'] = BUILD
 - 修正案:
 ```python
 if not expected_token:
-    return jsonify({'success': False, 'error': 'Server misconfigured', 'version': VERSION}), 503
+    logger.error("INTERNAL_API_TOKEN is not configured")
+    return jsonify({'success': False, 'error': 'Service temporarily unavailable', 'version': VERSION}), 503
 ```
 
 ### 5-4. セキュリティ: **B**
@@ -161,14 +162,21 @@ if not expected_token:
 - 指摘2: 入力バリデーションはエンドポイントごとに強弱がある。
 - 修正案:
 ```python
-CORS(app, resources={r"/api/*": {"origins": os.getenv("CORS_ORIGINS", "https://vetdict.onrender.com").split(",")}})
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": [origin.strip() for origin in os.getenv("CORS_ORIGINS", "https://vetdict.onrender.com").split(",")]
+        }
+    },
+)
 ```
 
 ### 5-5. 例外耐性: **B**
 - 指摘1: 広域 `except Exception: pass` が散見され、原因が埋もれる。
 - 修正案:
 ```python
-except Exception as e:
+except (ImportError, AttributeError) as e:
     logger.warning("species import failed: %s", e)
 ```
 
