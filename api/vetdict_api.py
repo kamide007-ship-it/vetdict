@@ -467,6 +467,20 @@ def api_species_symptoms(species: str):
             unique_syms.update(syms)
     id_to_info = {s["id"]: s for s in ALL_SYMPTOMS}
 
+    def merge_symptom_names(symptom_names):
+        if not isinstance(symptom_names, dict):
+            return
+        for symptom_id, names in symptom_names.items():
+            if not isinstance(names, dict):
+                continue
+            current = id_to_info.get(symptom_id, {"id": symptom_id, "category": "other"})
+            id_to_info[symptom_id] = {
+                "id": symptom_id,
+                "name_ja": names.get("ja") or current.get("name_ja") or symptom_id,
+                "name_en": names.get("en") or current.get("name_en") or symptom_id,
+                "category": current.get("category") or "other",
+            }
+
     # Horse has an expanded symptom namespace that is not fully covered by
     # generic SYMPTOMS. Merge equine labels so UI does not fall back to raw IDs.
     if species_key == "horse":
@@ -487,29 +501,11 @@ def api_species_symptoms(species: str):
         try:
             from api.symptom_checker import _SYMPTOM_NAMES
 
-            for symptom_id, names in _SYMPTOM_NAMES.items():
-                current = id_to_info.get(symptom_id, {"id": symptom_id, "category": "other"})
-                id_to_info[symptom_id] = {
-                    "id": symptom_id,
-                    "name_ja": names.get("ja") or current.get("name_ja") or symptom_id,
-                    "name_en": names.get("en") or current.get("name_en") or symptom_id,
-                    "category": current.get("category") or "other",
-                }
+            merge_symptom_names(_SYMPTOM_NAMES)
         except Exception:
             pass
     elif species_module is not None:
-        species_symptom_names = getattr(species_module, "SYMPTOM_NAMES", None)
-        if isinstance(species_symptom_names, dict):
-            for symptom_id, names in species_symptom_names.items():
-                if not isinstance(names, dict):
-                    continue
-                current = id_to_info.get(symptom_id, {"id": symptom_id, "category": "other"})
-                id_to_info[symptom_id] = {
-                    "id": symptom_id,
-                    "name_ja": names.get("ja") or current.get("name_ja") or symptom_id,
-                    "name_en": names.get("en") or current.get("name_en") or symptom_id,
-                    "category": current.get("category") or "other",
-                }
+        merge_symptom_names(getattr(species_module, "SYMPTOM_NAMES", None))
 
     result = []
     for sid in sorted(unique_syms):
