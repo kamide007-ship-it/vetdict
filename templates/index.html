@@ -1110,9 +1110,20 @@ function renderReferenceLinks(item){
 
 function renderCitationMap(item){
   const cmap=(item&&item.citation_map&&typeof item.citation_map==="object")?item.citation_map:{};
+  const refs=(item&&Array.isArray(item.evidence_sources))?item.evidence_sources:[];
+  const idToNumber={};
+  refs.forEach(ref=>{
+    if(ref&&ref.id){
+      if(ref.number)idToNumber[ref.id]=String(ref.number);
+      else{
+        const m=String(ref.id).match(/^ref-(\d+)$/);
+        if(m)idToNumber[ref.id]=m[1];
+      }
+    }
+  });
   const entries=Object.entries(cmap).filter(([,ids])=>Array.isArray(ids)&&ids.length>0);
   if(!entries.length)return "";
-  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${escapeHtml(k)} → ${ids.map(id=>escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
+  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${escapeHtml(k)} → ${ids.map(id=>idToNumber[id]?`[${escapeHtml(idToNumber[id])}]`:escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
 }
 
 function doAnalyze(){

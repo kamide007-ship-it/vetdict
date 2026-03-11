@@ -4,8 +4,14 @@ Provides deterministic enrichment for disease narrative fields and completeness 
 """
 from __future__ import annotations
 
-from urllib.parse import quote_plus
 from typing import Any, Dict, List
+
+from api.reference_catalog import (
+    FIELD_REFERENCE_NUMBERS,
+    SPECIES_REFERENCE_NUMBERS,
+    build_reference_sources,
+    normalize_reference_numbers,
+)
 
 REQUIRED_FIELDS = [
     "description",
@@ -15,13 +21,6 @@ REQUIRED_FIELDS = [
     "treatment",
     "prognosis",
 ]
-
-REFERENCE_LIBRARY = [
-    {"id": "msd-vet-manual", "name": "MSD Veterinary Manual", "url": "https://www.msdvetmanual.com/searchresults?query={query}"},
-    {"id": "merck-manual", "name": "Merck Manuals", "url": "https://www.merckvetmanual.com/search?query={query}"},
-    {"id": "aaha-guidelines", "name": "AAHA Guidelines", "url": "https://www.aaha.org/publications/guidelines/"},
-]
-
 
 def _text(v: Any) -> str:
     if v is None:
@@ -44,30 +43,6 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
     if len(vals) <= limit:
         return ", ".join(vals)
     return ", ".join(vals[:limit]) + f" (+{len(vals)-limit} more)"
-
-
-def _build_reference_links(name: str) -> List[Dict[str, str]]:
-    cleaned_name = (name or "").strip()
-    if not cleaned_name:
-        return []
-    q = quote_plus(cleaned_name)
-    refs: List[Dict[str, str]] = []
-    for r in REFERENCE_LIBRARY:
-        url = r["url"].format(query=q) if "{query}" in r["url"] else r["url"]
-        refs.append({"id": r["id"], "name": r["name"], "url": url})
-    return refs
-
-
-def _default_citation_map() -> Dict[str, List[str]]:
-    return {
-        "pathophysiology": ["msd-vet-manual", "merck-manual"],
-        "causes": ["msd-vet-manual"],
-        "prevention": ["aaha-guidelines"],
-        "treatment": ["msd-vet-manual", "aaha-guidelines"],
-        "prognosis": ["msd-vet-manual"],
-        "description": ["merck-manual"],
-        "symptoms_summary": ["msd-vet-manual"],
-    }
 
 
 def _symptom_summary(name: str, symptoms: str, species: str, lang: str) -> str:
@@ -96,6 +71,23 @@ def _fallback(field: str, name: str, species: str, symptoms: str, lang: str) -> 
             "prognosis": f"Prognosis for {name} varies by severity, comorbidity burden, and time to treatment initiation.",
         }
     return templates[field]
+
+def _merge_reference_numbers(out: Dict[str, Any], species: str) -> List[int]:
+    raw_numbers = out.get("references") or out.get("reference_numbers") or []
+    numbers = [int(n) for n in raw_numbers if str(n).strip().isdigit()]
+    numbers.extend(SPECIES_REFERENCE_NUMBERS.get(species, [7, 12, 23, 24]))
+    numbers.extend(FIELD_REFERENCE_NUMBERS.get("description", []))
+    return normalize_reference_numbers(numbers)
+
+
+def _field_reference_map(reference_numbers: List[int]) -> Dict[str, List[str]]:
+    available = set(reference_numbers)
+    citation_map: Dict[str, List[str]] = {}
+    for field, refs in FIELD_REFERENCE_NUMBERS.items():
+        valid = [f"ref-{n}" for n in refs if n in available]
+        if valid:
+            citation_map[field] = valid
+    return citation_map
 
 
 def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, Any]:
@@ -149,6 +141,8 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         out["content_origin"] = "sourced"
     out["sourced_fields"] = sorted(set(sourced))
     out["review_status"] = "review_required" if unique_missing else "reviewed"
-    out["evidence_sources"] = _build_reference_links(name_en)
-    out["citation_map"] = _default_citation_map()
+    reference_numbers = _merge_reference_numbers(out, species)
+    out["reference_numbers"] = reference_numbers
+    out["evidence_sources"] = build_reference_sources(reference_numbers)
+    out["citation_map"] = _field_reference_map(reference_numbers)
     return out
