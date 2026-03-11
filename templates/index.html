@@ -1110,9 +1110,20 @@ function renderReferenceLinks(item){
 
 function renderCitationMap(item){
   const cmap=(item&&item.citation_map&&typeof item.citation_map==="object")?item.citation_map:{};
+  const refs=(item&&Array.isArray(item.evidence_sources))?item.evidence_sources:[];
+  const idToNumber={};
+  refs.forEach(ref=>{
+    if(ref&&ref.id){
+      if(ref.number)idToNumber[ref.id]=String(ref.number);
+      else{
+        const m=String(ref.id).match(/^ref-(\d+)$/);
+        if(m)idToNumber[ref.id]=m[1];
+      }
+    }
+  });
   const entries=Object.entries(cmap).filter(([,ids])=>Array.isArray(ids)&&ids.length>0);
   if(!entries.length)return "";
-  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${escapeHtml(k)} → ${ids.map(id=>escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
+  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${escapeHtml(k)} → ${ids.map(id=>idToNumber[id]?`[${escapeHtml(idToNumber[id])}]`:escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
 }
 
 function doAnalyze(){
@@ -1155,6 +1166,7 @@ function renderResults(data){
     const lf=currentLang==="ja"?"_ja":"";const lf2=currentLang==="ja"?"":"_ja";
     const pick=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
     const symNames=data.symptom_names||{};
+    const litSummary=pick(d.literature_summary_ja,d.literature_summary)||"";
     const patho=pick(d.pathophysiology_ja,d.pathophysiology)||buildFieldFallback(t("dtPathophysiology"),diseaseName);
     const causes=pick(d.causes_ja,d.causes)||buildFieldFallback(t("dtCauses"),diseaseName);
     const prevention=pick(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
@@ -1164,7 +1176,7 @@ function renderResults(data){
     const completeness=Number(d.completeness_score||100);
     const missing=(d.missing_fields||[]);
     const qualityClass=completeness>=90?"quality-ok":"quality-warn";
-    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span></div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
+    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span></div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd>${litSummary?`<dt>Literature Summary</dt><dd>${litSummary}</dd>`:""}<dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
   });
   if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>`<li>\u{1F52C} ${x}</li>`).join("")}</ul></div>`;}
   area.innerHTML=html;
@@ -1200,6 +1212,7 @@ function renderDiseaseDb(){
   list.innerHTML=filtered.slice(0,100).map(d=>{
     const diseaseName=d.name_ja||d.name||"Disease";
     const desc=pk(d.description_ja,d.description)||buildFieldFallback(t("dtDescription"),diseaseName);
+    const litSummary=pk(d.literature_summary_ja,d.literature_summary)||"";
     const patho=pk(d.pathophysiology_ja,d.pathophysiology)||buildFieldFallback(t("dtPathophysiology"),diseaseName);
     const causes=pk(d.causes_ja,d.causes)||buildFieldFallback(t("dtCauses"),diseaseName);
     const prevention=pk(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
@@ -1210,6 +1223,7 @@ function renderDiseaseDb(){
       <div class="d-desc">${desc.substring(0,80)}${desc.length>80?"...":""}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${desc}</dd>
+        ${litSummary?`<dt>Literature Summary</dt><dd>${litSummary}</dd>`:""}
         <dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd>
         <dt>${t("dtCauses")}</dt><dd>${causes}</dd>
         <dt>${t("dtPrevention")}</dt><dd>${prevention}</dd>

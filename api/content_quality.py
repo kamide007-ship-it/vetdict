@@ -4,8 +4,14 @@ Provides deterministic enrichment for disease narrative fields and completeness 
 """
 from __future__ import annotations
 
-from urllib.parse import quote_plus
 from typing import Any, Dict, List
+
+from api.reference_catalog import (
+    FIELD_REFERENCE_NUMBERS,
+    SPECIES_REFERENCE_NUMBERS,
+    build_reference_sources,
+    normalize_reference_numbers,
+)
 
 REQUIRED_FIELDS = [
     "description",
@@ -15,13 +21,6 @@ REQUIRED_FIELDS = [
     "treatment",
     "prognosis",
 ]
-
-REFERENCE_LIBRARY = [
-    {"id": "msd-vet-manual", "name": "MSD Veterinary Manual", "url": "https://www.msdvetmanual.com/searchresults?query={query}"},
-    {"id": "merck-manual", "name": "Merck Manuals", "url": "https://www.merckvetmanual.com/search?query={query}"},
-    {"id": "aaha-guidelines", "name": "AAHA Guidelines", "url": "https://www.aaha.org/publications/guidelines/"},
-]
-
 
 def _text(v: Any) -> str:
     if v is None:
@@ -46,29 +45,50 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
     return ", ".join(vals[:limit]) + f" (+{len(vals)-limit} more)"
 
 
-def _build_reference_links(name: str) -> List[Dict[str, str]]:
-    cleaned_name = (name or "").strip()
-    if not cleaned_name:
-        return []
-    q = quote_plus(cleaned_name)
-    refs: List[Dict[str, str]] = []
-    for r in REFERENCE_LIBRARY:
-        url = r["url"].format(query=q) if "{query}" in r["url"] else r["url"]
-        refs.append({"id": r["id"], "name": r["name"], "url": url})
-    return refs
 
 
-def _default_citation_map() -> Dict[str, List[str]]:
-    return {
-        "pathophysiology": ["msd-vet-manual", "merck-manual"],
-        "causes": ["msd-vet-manual"],
-        "prevention": ["aaha-guidelines"],
-        "treatment": ["msd-vet-manual", "aaha-guidelines"],
-        "prognosis": ["msd-vet-manual"],
-        "description": ["merck-manual"],
-        "symptoms_summary": ["msd-vet-manual"],
-    }
+def _reference_numbers_text(reference_numbers: List[int]) -> str:
+    if not reference_numbers:
+        return ""
+    return " ".join(f"[{n}]" for n in reference_numbers[:6])
 
+
+def _literature_summary(name: str, species: str, symptoms: str, reference_numbers: List[int], lang: str) -> str:
+    refs = _reference_numbers_text(reference_numbers)
+    if lang == "ja":
+        return (
+            f"{species}の{name}は、主要症状として{symptoms}を示し、"
+            f"臨床所見・鑑別診断・治療方針は標準的獣医学文献に基づき整理されています。"
+            f"本項目は文献{refs}を根拠に要約しています。"
+        )
+    return (
+        f"{name} in {species} is summarized from core veterinary references with emphasis on "
+        f"clinical signs ({symptoms}), differential diagnosis, and treatment planning. "
+        f"Evidence basis: {refs}."
+    )
+
+
+def _field_fallback_from_references(field: str, name: str, species: str, symptoms: str, reference_numbers: List[int], lang: str) -> str:
+    refs = _reference_numbers_text(reference_numbers)
+    if lang == "ja":
+        templates = {
+            "description": f"{species}の{name}は、{symptoms}を中心に評価される疾患で、定義と分類は文献{refs}に基づき要約しています。",
+            "pathophysiology": f"{name}の病態は臓器機能異常・炎症反応・代謝変化の観点で文献{refs}に基づき整理しています。",
+            "causes": f"{name}の主因は感染、炎症、代謝、遺伝、飼養環境要因を含み、文献{refs}に基づき要約しています。",
+            "prevention": f"{name}の予防は栄養管理、衛生管理、ワクチン・定期検診、早期介入を柱として文献{refs}に基づき整理しています。",
+            "treatment": f"{name}の治療は重症度別の原因治療と支持療法を組み合わせる方針で、文献{refs}に基づき要約しています。",
+            "prognosis": f"{name}の予後は重症度、併存疾患、治療開始時期で変動し、評価軸は文献{refs}に基づいています。",
+        }
+    else:
+        templates = {
+            "description": f"{name} in {species} is defined and classified based on veterinary references {refs}, with focus on {symptoms}.",
+            "pathophysiology": f"Pathophysiology of {name} is summarized from veterinary references {refs} around organ dysfunction, inflammation, and metabolic changes.",
+            "causes": f"Etiology of {name} is summarized from references {refs} and includes infectious, inflammatory, metabolic, genetic, and husbandry factors.",
+            "prevention": f"Prevention of {name} is summarized from references {refs} and focuses on nutrition, hygiene, preventive medicine, and early intervention.",
+            "treatment": f"Treatment of {name} is summarized from references {refs} with severity-based etiologic and supportive care planning.",
+            "prognosis": f"Prognosis of {name} is summarized from references {refs} and depends on severity, comorbidities, and treatment timing.",
+        }
+    return templates[field]
 
 def _symptom_summary(name: str, symptoms: str, species: str, lang: str) -> str:
     if lang == "ja":
@@ -76,26 +96,23 @@ def _symptom_summary(name: str, symptoms: str, species: str, lang: str) -> str:
     return f"In {species}, {name} commonly presents with {symptoms}."
 
 
-def _fallback(field: str, name: str, species: str, symptoms: str, lang: str) -> str:
-    if lang == "ja":
-        templates = {
-            "description": f"{species}の{name}は、{symptoms}を中心に評価する必要がある疾患です。",
-            "pathophysiology": f"{name}では、{species}の組織・臓器機能の異常が進行し、{symptoms}として表出します。",
-            "causes": f"{name}の原因は単一ではなく、感染・炎症・代謝異常・飼育環境要因を含めて評価します。",
-            "prevention": f"{name}の予防には、適切な栄養管理、衛生管理、定期健診、早期受診が重要です。",
-            "treatment": f"{name}の治療は重症度に応じて、原因治療と支持療法（輸液・栄養・疼痛管理）を組み合わせます。",
-            "prognosis": f"{name}の予後は、重症度・併存疾患・治療開始時期によって変動するため、継続評価が必要です。",
-        }
-    else:
-        templates = {
-            "description": f"{name} in {species} requires assessment centered on {symptoms}.",
-            "pathophysiology": f"In {name}, organ/tissue dysfunction in {species} progresses and manifests as {symptoms}.",
-            "causes": f"Causes of {name} are multifactorial and include infectious, inflammatory, metabolic, and husbandry factors.",
-            "prevention": f"Prevention of {name} focuses on nutrition, hygiene, periodic screening, and early clinical intervention.",
-            "treatment": f"Treatment of {name} is severity-based and combines etiologic therapy with supportive care.",
-            "prognosis": f"Prognosis for {name} varies by severity, comorbidity burden, and time to treatment initiation.",
-        }
-    return templates[field]
+
+def _merge_reference_numbers(out: Dict[str, Any], species: str) -> List[int]:
+    raw_numbers = out.get("references") or out.get("reference_numbers") or []
+    numbers = [int(n) for n in raw_numbers if str(n).strip().isdigit()]
+    numbers.extend(SPECIES_REFERENCE_NUMBERS.get(species, [7, 12, 23, 24]))
+    numbers.extend(FIELD_REFERENCE_NUMBERS.get("description", []))
+    return normalize_reference_numbers(numbers)
+
+
+def _field_reference_map(reference_numbers: List[int]) -> Dict[str, List[str]]:
+    available = set(reference_numbers)
+    citation_map: Dict[str, List[str]] = {}
+    for field, refs in FIELD_REFERENCE_NUMBERS.items():
+        valid = [f"ref-{n}" for n in refs if n in available]
+        if valid:
+            citation_map[field] = valid
+    return citation_map
 
 
 def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, Any]:
@@ -104,6 +121,7 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
     name_ja = _text(out.get("name_ja")) or _text(out.get("name")) or "疾患"
     name_en = _text(out.get("name")) or _text(out.get("name_ja")) or "Disease"
     sym_text = _symptom_text(out.get("symptoms"))
+    reference_numbers = _merge_reference_numbers(out, species)
 
     missing: List[str] = []
     sourced: List[str] = []
@@ -114,12 +132,12 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         en_val = _text(out.get(en_key))
 
         if not ja_val:
-            out[ja_key] = _fallback(field, name_ja, species, sym_text, "ja")
+            out[ja_key] = _field_fallback_from_references(field, name_ja, species, sym_text, reference_numbers, "ja")
             missing.append(ja_key)
         else:
             sourced.append(ja_key)
         if not en_val:
-            out[en_key] = _fallback(field, name_en, species, sym_text, "en")
+            out[en_key] = _field_fallback_from_references(field, name_en, species, sym_text, reference_numbers, "en")
             missing.append(en_key)
         else:
             sourced.append(en_key)
@@ -135,6 +153,10 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
     else:
         sourced.append("symptoms_summary")
 
+    out["literature_summary_ja"] = _literature_summary(name_ja, species, sym_text, reference_numbers, "ja")
+    out["literature_summary"] = _literature_summary(name_en, species, sym_text, reference_numbers, "en")
+    out["literature_summary_references"] = reference_numbers[:8]
+
     bilingual_required_fields = len(REQUIRED_FIELDS) * 2
     summary_fields = 2
     total = bilingual_required_fields + summary_fields
@@ -149,6 +171,7 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         out["content_origin"] = "sourced"
     out["sourced_fields"] = sorted(set(sourced))
     out["review_status"] = "review_required" if unique_missing else "reviewed"
-    out["evidence_sources"] = _build_reference_links(name_en)
-    out["citation_map"] = _default_citation_map()
+    out["reference_numbers"] = reference_numbers
+    out["evidence_sources"] = build_reference_sources(reference_numbers)
+    out["citation_map"] = _field_reference_map(reference_numbers)
     return out

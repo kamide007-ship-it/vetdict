@@ -70,3 +70,21 @@ def test_species_symptoms_endpoint_merges_horse_localized_names():
     assert symptoms['limb_bucked_shin']['name_ja'] == 'すねの前面が腫れている（バックドシン）'
     assert symptoms['limb_bucked_shin']['name_en'] == 'Bucked Shin'
     assert symptoms['limb_bucked_shin']['category'] == 'limb'
+
+
+def test_health_check_diseases_all_species_have_literature_summary_and_references():
+    client = app.test_client()
+    species_list = [
+        "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
+        "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
+        "parrot", "reptile", "tortoise", "snake", "lizard", "amphibian", "exotic_other",
+    ]
+    for species in species_list:
+        resp = client.get(f'/api/health-check/diseases?species={species}')
+        assert resp.status_code == 200, species
+        payload = resp.get_json()
+        assert payload['diseases'], species
+        sample = payload['diseases'][0]
+        assert sample.get('literature_summary'), species
+        assert sample.get('literature_summary_ja'), species
+        assert isinstance(sample.get('reference_numbers'), list) and sample.get('reference_numbers'), species
