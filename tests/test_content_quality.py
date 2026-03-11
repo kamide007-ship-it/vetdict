@@ -28,3 +28,14 @@ def test_enrich_disease_content_keeps_custom_reference_numbers():
 
     assert 59 in enriched["reference_numbers"]
     assert any(src.get("number") == "59" for src in enriched["evidence_sources"])
+
+
+def test_enrich_disease_content_always_has_literature_summary_fields():
+    disease = {"name": "Demo", "symptoms": ["fever"]}
+
+    enriched = enrich_disease_content(disease, "dog")
+
+    assert enriched["literature_summary"]
+    assert enriched["literature_summary_ja"]
+    assert isinstance(enriched["literature_summary_references"], list)
+    assert enriched["literature_summary_references"]

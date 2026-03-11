@@ -45,6 +45,27 @@ def _symptom_text(symptoms: Any, limit: int = 5) -> str:
     return ", ".join(vals[:limit]) + f" (+{len(vals)-limit} more)"
 
 
+def _reference_numbers_text(reference_numbers: List[int]) -> str:
+    if not reference_numbers:
+        return ""
+    return " ".join(f"[{n}]" for n in reference_numbers[:6])
+
+
+def _literature_summary(name: str, species: str, symptoms: str, reference_numbers: List[int], lang: str) -> str:
+    refs = _reference_numbers_text(reference_numbers)
+    if lang == "ja":
+        return (
+            f"{species}の{name}は、主要症状として{symptoms}を示し、"
+            f"臨床所見・鑑別診断・治療方針は標準的獣医学文献に基づき整理されています。"
+            f"本項目は文献{refs}を根拠に要約しています。"
+        )
+    return (
+        f"{name} in {species} is summarized from core veterinary references with emphasis on "
+        f"clinical signs ({symptoms}), differential diagnosis, and treatment planning. "
+        f"Evidence basis: {refs}."
+    )
+
+
 def _symptom_summary(name: str, symptoms: str, species: str, lang: str) -> str:
     if lang == "ja":
         return f"{species}の{name}では、主に{symptoms}が観察されます。"
@@ -96,6 +117,7 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
     name_ja = _text(out.get("name_ja")) or _text(out.get("name")) or "疾患"
     name_en = _text(out.get("name")) or _text(out.get("name_ja")) or "Disease"
     sym_text = _symptom_text(out.get("symptoms"))
+    reference_numbers = _merge_reference_numbers(out, species)
 
     missing: List[str] = []
     sourced: List[str] = []
@@ -127,6 +149,10 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
     else:
         sourced.append("symptoms_summary")
 
+    out["literature_summary_ja"] = _literature_summary(name_ja, species, sym_text, reference_numbers, "ja")
+    out["literature_summary"] = _literature_summary(name_en, species, sym_text, reference_numbers, "en")
+    out["literature_summary_references"] = reference_numbers[:8]
+
     bilingual_required_fields = len(REQUIRED_FIELDS) * 2
     summary_fields = 2
     total = bilingual_required_fields + summary_fields
@@ -141,7 +167,6 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         out["content_origin"] = "sourced"
     out["sourced_fields"] = sorted(set(sourced))
     out["review_status"] = "review_required" if unique_missing else "reviewed"
-    reference_numbers = _merge_reference_numbers(out, species)
     out["reference_numbers"] = reference_numbers
     out["evidence_sources"] = build_reference_sources(reference_numbers)
     out["citation_map"] = _field_reference_map(reference_numbers)
