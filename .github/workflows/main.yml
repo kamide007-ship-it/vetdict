@@ -1,0 +1,15 @@
+# 1. リポジトリをクローン
+git clone <repo-url>
+cd vetdict
+
+# 2. APIキーを設定
+export ANTHROPIC_API_KEY=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
+
+# 3. テスト実行                          
+python scripts/test_disease_enrichment.py
+
+# 4. バッチ送信（本運用）                      
+python scripts/run_disease_enrichment.py submit
+
+# 5. 完了後、結果取得                                       
+python scripts/run_disease_enrichment.py retrieve <batch_id>
