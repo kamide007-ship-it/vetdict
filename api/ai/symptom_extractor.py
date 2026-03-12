@@ -1,7 +1,8 @@
 """symptom_extractor.py – Claude-based natural language symptom extraction
 
 Converts natural language symptom descriptions into standardized symptom IDs
-with intelligent fallback to manual alias matching.
+with intelligent fallback to manual alias matching, symptom interactions,
+and patient personalization.
 """
 
 import logging
@@ -10,7 +11,12 @@ import time
 from typing import Any, Dict, List, Optional
 
 from api.ai.cache_manager import SymptomCache
+from api.ai.patient_personalization import (
+    PersonalizationEngine,
+    personalize_extraction_result,
+)
 from api.ai.prompt_manager import build_symptom_extraction_prompt
+from api.ai.symptom_interactions import SymptomInteractionMatrix
 from api.ai.validators import (
     parse_json_response,
     should_fallback,
@@ -33,6 +39,9 @@ class SymptomExtractor:
         confidence_threshold: float = 0.7,
         fallback_enabled: bool = True,
         manual_aliases: Optional[Dict[str, str]] = None,
+        diseases: Optional[List[Dict[str, Any]]] = None,
+        enable_interactions: bool = True,
+        enable_personalization: bool = True,
     ):
         """
         Initialize symptom extractor.
@@ -46,6 +55,9 @@ class SymptomExtractor:
             confidence_threshold: Min confidence for accepting response
             fallback_enabled: Enable fallback to manual aliases
             manual_aliases: Manual alias dict {alias: symptom_id}
+            diseases: Disease list for Phase 2a (interactions, personalization)
+            enable_interactions: Enable symptom interaction analysis (Phase 2a)
+            enable_personalization: Enable patient personalization (Phase 2a)
         """
         self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
         self.model = model
@@ -53,10 +65,20 @@ class SymptomExtractor:
         self.confidence_threshold = confidence_threshold
         self.fallback_enabled = fallback_enabled
         self.manual_aliases = manual_aliases or {}
+        self.enable_interactions = enable_interactions
+        self.enable_personalization = enable_personalization
 
         self._cache = SymptomCache(ttl_seconds=cache_ttl) if cache_enabled else None
         self._llm_adapter = None
         self._symptom_ids_set: set = set()
+
+        # Phase 2a: Symptom interactions and personalization
+        self._interaction_matrix: Optional[SymptomInteractionMatrix] = None
+        if enable_interactions and diseases:
+            try:
+                self._interaction_matrix = SymptomInteractionMatrix(diseases)
+            except Exception as e:
+                logger.warning(f"Failed to initialize SymptomInteractionMatrix: {e}")
 
         # Lazy load LLM adapter on first use
         self._llm_loaded = False
@@ -196,6 +218,9 @@ class SymptomExtractor:
                 self._cache.set(text, result_clean)
             result = result_clean
 
+        # Phase 2a: Add symptom interactions and personalization metadata
+        result = self._enhance_with_phase2a(result, text)
+
         elapsed_ms = int((time.time() - start_time) * 1000)
         result["execution_ms"] = elapsed_ms
         return result
@@ -297,6 +322,51 @@ class SymptomExtractor:
             "_exception": exception,
             "_reason": str(exception) if exception else "No response",
         }
+
+    def _enhance_with_phase2a(self, result: Dict[str, Any], text: str) -> Dict[str, Any]:
+        """
+        Enhance extraction result with Phase 2a data (interactions, personalization).
+
+        Args:
+            result: Extraction result from Phase 1
+            text: Original user input
+
+        Returns:
+            Enhanced result with interactions and personalization metadata
+        """
+        # Phase 2a: Symptom interactions
+        if self.enable_interactions and self._interaction_matrix:
+            symptoms = result.get("symptoms", [])
+            interactions = self._interaction_matrix.find_interactions(
+                symptoms, weight_threshold=0.1
+            )
+
+            if interactions:
+                # Apply confidence boost from strongest interaction
+                original_confidence = result.get("confidence", 0.85)
+                strongest_weight = interactions[0]["weight"]
+                boost = strongest_weight * 0.15  # Max 15% boost
+                result["confidence"] = min(original_confidence + boost, 1.0)
+
+                result["interactions"] = interactions
+            else:
+                result["interactions"] = []
+        else:
+            result["interactions"] = []
+
+        # Phase 2a: Patient personalization
+        if self.enable_personalization:
+            result = personalize_extraction_result(result, text)
+        else:
+            result["personalization"] = {
+                "age_stage": None,
+                "extracted_age_years": None,
+                "severity": "moderate",
+                "extraction_method": "disabled",
+                "confidence": 0.5,
+            }
+
+        return result
 
     def cache_stats(self) -> Dict[str, Any]:
         """Get cache statistics."""

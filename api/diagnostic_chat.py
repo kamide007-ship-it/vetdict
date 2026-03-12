@@ -23,6 +23,7 @@ permitted by the Veterinary Practice Act (獣医師法).
 
 import logging
 import os
+from typing import Any, Dict, Optional
 
 from flask import Blueprint, jsonify, request
 
@@ -51,24 +52,69 @@ def _get_ai_extractor():
                 AI_SYMPTOM_CACHE_TTL,
                 AI_SYMPTOM_CONFIDENCE_THRESHOLD,
                 AI_SYMPTOM_FALLBACK_ENABLED,
-                AI_SYMPTOM_MODEL,
+                AI_SYMPTOM_MODEL as DEFAULT_MODEL,
             )
+            # Environment variable overrides config constant
+            ai_model = os.getenv("AI_SYMPTOM_MODEL", DEFAULT_MODEL)
+            ai_timeout = float(os.getenv("AI_SYMPTOM_TIMEOUT", AI_SYMPTOM_EXTRACTION_TIMEOUT))
+            ai_cache_ttl = int(os.getenv("AI_SYMPTOM_CACHE_TTL", AI_SYMPTOM_CACHE_TTL))
+            ai_confidence = float(os.getenv("AI_SYMPTOM_CONFIDENCE", AI_SYMPTOM_CONFIDENCE_THRESHOLD))
+            ai_fallback = os.getenv("AI_SYMPTOM_FALLBACK", "true").lower() == "true"
+
             _AI_EXTRACTOR = SymptomExtractor(
                 api_key=os.getenv("ANTHROPIC_API_KEY"),
-                model=AI_SYMPTOM_MODEL,
-                timeout=AI_SYMPTOM_EXTRACTION_TIMEOUT,
+                model=ai_model,
+                timeout=ai_timeout,
                 cache_enabled=True,
-                cache_ttl=AI_SYMPTOM_CACHE_TTL,
-                confidence_threshold=AI_SYMPTOM_CONFIDENCE_THRESHOLD,
-                fallback_enabled=AI_SYMPTOM_FALLBACK_ENABLED,
+                cache_ttl=ai_cache_ttl,
+                confidence_threshold=ai_confidence,
+                fallback_enabled=ai_fallback,
                 manual_aliases=SYMPTOM_ALIASES if 'SYMPTOM_ALIASES' in globals() else {},
             )
             _AI_EXTRACTOR.set_valid_symptom_ids(SYMPTOM_IDS)
-            logger.info(f"AI symptom extractor initialized (model={AI_SYMPTOM_MODEL})")
+            logger.info(f"AI symptom extractor initialized (model={ai_model}, timeout={ai_timeout}s)")
         except Exception as e:
             logger.warning(f"Failed to initialize AI extractor: {e}")
             _AI_EXTRACTOR = False  # Sentinel value to avoid retrying
     return _AI_EXTRACTOR if _AI_EXTRACTOR else None
+
+
+def evaluate_with_ai_confidence(
+    inference: Dict[str, float],
+    evidence: Dict[str, Any],
+    context: Dict[str, Any],
+    ai_result: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """
+    Evaluate diagnostic context with optional AI confidence enhancement (Phase 2c).
+
+    This is an optional integration with RECO2 integrity gate that applies
+    AI symptom extraction confidence to enhance verdict generation.
+
+    Args:
+        inference: Disease inference vector (name -> confidence)
+        evidence: Evidence data with median values for each field
+        context: Patient/domain context (domain, confidence, etc.)
+        ai_result: Optional Phase 2b extraction result with personalization metadata
+
+    Returns:
+        RECO2 evaluation result with integrity metrics and AI confidence metadata
+    """
+    try:
+        from reco2 import engine
+
+        return engine.evaluate_payload(
+            {
+                "inference": inference,
+                "evidence": evidence,
+                "context": context,
+            },
+            ai_result=ai_result,
+        )
+    except Exception as e:
+        logger.debug(f"RECO2 evaluation failed, skipping: {e}")
+        # Return None to indicate RECO2 unavailable - caller should continue normally
+        return None
 
 # Import equine data for horse chat support
 try:
