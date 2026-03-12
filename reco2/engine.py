@@ -1,6 +1,7 @@
 import datetime
 import logging
 import math
+import os
 import uuid
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -334,12 +335,81 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
     state["eta"] = eta
     save_state(state)
 
+    # Phase 3: Apply learning-driven tuning (optional enhancement)
+    learning_insights = {}
+    if os.getenv("ENABLE_LEARNING_TUNING", "true").lower() == "true":
+        try:
+            from reco2.learning_store import LearningDataStore
+            from reco2.learning_tuner import LearningTuner
+
+            learning_store = LearningDataStore()
+            tuner = LearningTuner()
+
+            # Get current learning signals
+            learning_data = learning_store._get_state().get("learning_metrics", {})
+            ai_accuracy = {
+                "status": "ready" if learning_data.get("ai_extraction_accuracy") else "no_data",
+                "overall_accuracy": sum(
+                    m.get("correct_extractions", 0) / max(m.get("total_extractions", 1), 1)
+                    for m in learning_data.get("ai_extraction_accuracy", [])
+                ) / max(len(learning_data.get("ai_extraction_accuracy", [])), 1),
+            } if learning_data.get("ai_extraction_accuracy") else {"status": "no_data"}
+
+            # Get tuning suggestions
+            suggestions = tuner.suggest_parameter_adjustments(
+                current_k=k,
+                current_eta=eta,
+                learning_data=learning_data,
+                window_stats={"avgD": avgD, "sumR": sumR, "avgPsi": avgPsi},
+                ai_accuracy=ai_accuracy,
+            )
+
+            # Apply if confident
+            if suggestions.get("confidence_score", 0) > 0.7:
+                old_k, old_eta = k, eta
+                k = suggestions.get("suggested_k", k)
+                eta = suggestions.get("suggested_eta", eta)
+
+                # Re-clamp after learning adjustment
+                k = _clamp(k, float(state.get("k_min", 0.5)), float(state.get("k_max", 5.0)))
+                eta = _clamp(eta, float(state.get("eta_min", 0.001)), float(state.get("eta_max", 0.1)))
+
+                if k != old_k or eta != old_eta:
+                    state["k"] = k
+                    state["eta"] = eta
+                    save_state(state)
+                    adjusted = True
+                    reasons.append(
+                        f"learning_tuning: k {old_k:.2f}→{k:.2f}, "
+                        f"eta {old_eta:.4f}→{eta:.4f}"
+                    )
+
+                learning_insights = {
+                    "learning_applied": True,
+                    "tuning_confidence": suggestions.get("confidence_score", 0),
+                    "reasoning": suggestions.get("reasoning", []),
+                    "affected_domains": suggestions.get("affected_domains", []),
+                }
+            else:
+                learning_insights = {
+                    "learning_applied": False,
+                    "tuning_confidence": suggestions.get("confidence_score", 0),
+                    "reason": "confidence below threshold (0.7)",
+                }
+
+        except Exception as e:
+            # Graceful degradation: learning tuning not critical
+            import logging
+            logging.getLogger(__name__).debug(f"Learning-driven tuning failed: {e}")
+            learning_insights = {"learning_applied": False, "error": str(e)}
+
     return {
         "adjusted": adjusted,
         "reason": "; ".join(reasons) if reasons else "no_change",
         "new_k": round(k, 6), "new_eta": round(eta, 6),
         "window": {"avgD": round(avgD, 6), "sumR": round(sumR, 6), "avgPsi": round(avgPsi, 6), "window_size": len(window)},
         "manual": manual,
+        "learning_insights": learning_insights,
     }
 
 def get_status() -> Dict[str, Any]:

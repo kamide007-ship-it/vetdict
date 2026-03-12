@@ -368,6 +368,44 @@ class SymptomExtractor:
 
         return result
 
+    def extract_with_calibration(
+        self,
+        text: str,
+        language: str = "auto",
+        patient_species: str = "dog",
+        allow_fallback: bool = True,
+    ) -> Dict[str, Any]:
+        """
+        Extract symptoms with Phase 3 confidence calibration.
+
+        Calls extract() and applies automatic confidence calibration based on
+        historical AI accuracy per domain.
+
+        Args:
+            text: User symptom description
+            language: "en", "ja", or "auto"
+            patient_species: Animal species (dog, cat, etc.)
+            allow_fallback: Allow fallback to manual aliases
+
+        Returns:
+            Extraction result with calibrated confidence
+        """
+        # Phase 1-2: Get extraction with interactions and personalization
+        result = self.extract(text, language, patient_species, allow_fallback)
+
+        # Phase 3: Apply confidence calibration
+        try:
+            from api.ai.confidence_calibration import ConfidenceCalibrator
+
+            calibrator = ConfidenceCalibrator()
+            result = calibrator.calibrate_extraction_result(result)
+        except Exception as e:
+            # Graceful degradation: calibration not critical to extraction
+            logger.debug(f"Confidence calibration failed: {e}")
+            # Result already has raw confidence, calibration just wasn't applied
+
+        return result
+
     def cache_stats(self) -> Dict[str, Any]:
         """Get cache statistics."""
         if self._cache is None:
