@@ -9,18 +9,16 @@ Provides:
   - RECO2/RECO3 AI integrity control layer
 """
 
-import hmac
 import logging
 import os
-import threading
-import time
-from collections import deque
 from functools import wraps
 from pathlib import Path
 
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
+
+from api.auth import require_internal_api_access, reset_rate_limiting
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -34,8 +32,6 @@ logger = logging.getLogger(__name__)
 VERSION = "5.0.0"
 BUILD = "2026-03-07"
 RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
-_RATE_LIMIT_BUCKETS = {}
-_RATE_LIMIT_LOCK = threading.Lock()
 
 # ---------------------------------------------------------------------------
 # Flask App
@@ -43,6 +39,7 @@ _RATE_LIMIT_LOCK = threading.Lock()
 app = Flask(__name__, static_folder=None)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 app.secret_key = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY') or 'dev-key-change-me'
+app.VERSION = VERSION  # Make VERSION available to decorators
 
 CORS(app)
 
@@ -193,67 +190,6 @@ def ensure_json_response(f):
     return wrapper
 
 
-def _parse_positive_int(value, default):
-    try:
-        return max(1, int(value))
-    except (TypeError, ValueError):
-        return default
-
-
-def _get_internal_api_rate_limit_config():
-    limit = _parse_positive_int(os.getenv('INTERNAL_API_RATE_LIMIT_MAX_REQUESTS'), 30)
-    window_seconds = _parse_positive_int(os.getenv('INTERNAL_API_RATE_LIMIT_WINDOW_SECONDS'), 60)
-    return limit, window_seconds
-
-
-def _get_request_ip():
-    return request.remote_addr or 'unknown'
-
-
-def _prune_rate_limit_buckets(cutoff):
-    for key in list(_RATE_LIMIT_BUCKETS):
-        bucket = _RATE_LIMIT_BUCKETS[key]
-        while bucket and bucket[0] <= cutoff:
-            bucket.popleft()
-        if not bucket:
-            _RATE_LIMIT_BUCKETS.pop(key, None)
-
-
-def _is_rate_limited(bucket_key):
-    limit, window_seconds = _get_internal_api_rate_limit_config()
-    now = time.monotonic()
-    cutoff = now - window_seconds
-    with _RATE_LIMIT_LOCK:
-        _prune_rate_limit_buckets(cutoff)
-        bucket = _RATE_LIMIT_BUCKETS.setdefault(bucket_key, deque())
-        if len(bucket) >= limit:
-            return True
-        bucket.append(now)
-        return False
-
-
-def require_internal_api_access(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        expected_token = (os.getenv('INTERNAL_API_TOKEN') or '').strip()
-        auth = (request.headers.get('Authorization') or '').strip()
-        auth_scheme, _, provided_token = auth.partition(' ')
-        is_authorized = (
-            bool(expected_token)
-            and auth_scheme == 'Bearer'
-            and hmac.compare_digest(provided_token, expected_token)
-        )
-        bucket_key = _get_request_ip()
-
-        if _is_rate_limited(bucket_key):
-            return jsonify({'success': False, 'error': RATE_LIMIT_ERROR_MESSAGE, 'version': VERSION}), 429
-
-        if expected_token and not is_authorized:
-            return jsonify({'success': False, 'error': 'Unauthorized', 'version': VERSION}), 401
-
-        return f(*args, **kwargs)
-
-    return wrapper
 
 
 # ---------------------------------------------------------------------------
@@ -262,20 +198,42 @@ def require_internal_api_access(f):
 
 @app.after_request
 def add_headers(response):
+    """Add security headers to all responses."""
+    # Content security headers
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
-    if os.getenv('RENDER') or os.getenv('PRODUCTION'):
-        response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
 
-    # Cache policy: HTML/API are always fresh on deploy; static files are revalidated.
+    # Content Security Policy (prevent XSS, clickjacking, etc.)
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline'; "
+        "style-src 'self' 'unsafe-inline'; "
+        "img-src 'self' data: https:; "
+        "font-src 'self'; "
+        "connect-src 'self'; "
+        "frame-ancestors 'none'"
+    )
+
+    # HTTPS enforcement in production
+    is_production = os.getenv('RENDER') or os.getenv('PRODUCTION')
+    if is_production:
+        response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload'
+        response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
+
+    # Remove server version disclosure
+    response.headers.pop('Server', None)
+
+    # Cache policy: API responses are never cached; static files are revalidated
     path = request.path or ''
     if path.startswith('/api/') or path == '/':
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
         response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
     elif path.startswith('/static/'):
         response.headers.setdefault('Cache-Control', 'public, max-age=3600, must-revalidate')
+
     return response
 
 

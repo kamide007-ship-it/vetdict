@@ -1,4 +1,5 @@
 from api import vetdict_api
+from api.auth import reset_rate_limiting
 
 
 def _auth_header(token):
@@ -7,7 +8,7 @@ def _auth_header(token):
 
 def test_protected_endpoints_require_internal_token(monkeypatch):
     monkeypatch.setenv("INTERNAL_API_TOKEN", "secret-token")
-    vetdict_api._RATE_LIMIT_BUCKETS.clear()
+    reset_rate_limiting()
 
     client = vetdict_api.app.test_client()
 
@@ -24,7 +25,7 @@ def test_unauthorized_protected_requests_are_rate_limited(monkeypatch):
     monkeypatch.setenv("INTERNAL_API_TOKEN", "secret-token")
     monkeypatch.setenv("INTERNAL_API_RATE_LIMIT_MAX_REQUESTS", "2")
     monkeypatch.setenv("INTERNAL_API_RATE_LIMIT_WINDOW_SECONDS", "60")
-    vetdict_api._RATE_LIMIT_BUCKETS.clear()
+    reset_rate_limiting()
 
     client = vetdict_api.app.test_client()
 
@@ -41,7 +42,7 @@ def test_unauthorized_protected_requests_are_rate_limited(monkeypatch):
 def test_valid_internal_token_allows_protected_request(monkeypatch):
     monkeypatch.setenv("INTERNAL_API_TOKEN", "secret-token")
     monkeypatch.setattr(vetdict_api, "RECO2_AVAILABLE", False)
-    vetdict_api._RATE_LIMIT_BUCKETS.clear()
+    reset_rate_limiting()
 
     client = vetdict_api.app.test_client()
     resp = client.get("/api/status", headers=_auth_header("secret-token"))
