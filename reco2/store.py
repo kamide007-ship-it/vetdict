@@ -39,6 +39,18 @@ def default_state() -> Dict[str, Any]:
             "feedback_records": [],
             "last_update": _now_iso(),
         },
+        "learning_tuning": {
+            "tuning_history": [],
+            "tuning_config": {
+                "min_samples_for_tuning": 20,
+                "learning_signal_weights": {
+                    "ai_accuracy": 0.4,
+                    "feedback_strength": 0.35,
+                    "patterns": 0.15,
+                    "personalization": 0.1,
+                },
+            },
+        },
         "created_at": _now_iso(),
         "updated_at": _now_iso(),
     }
@@ -69,6 +81,20 @@ def load_state() -> Dict[str, Any]:
             "personalization_impact": [],
             "feedback_records": [],
             "last_update": _now_iso(),
+        }
+
+    if "learning_tuning" not in state:
+        state["learning_tuning"] = {
+            "tuning_history": [],
+            "tuning_config": {
+                "min_samples_for_tuning": 20,
+                "learning_signal_weights": {
+                    "ai_accuracy": 0.4,
+                    "feedback_strength": 0.35,
+                    "patterns": 0.15,
+                    "personalization": 0.1,
+                },
+            },
         }
         save_state(state)
 
