@@ -1,10 +1,10 @@
 {
-  "started_at": "2026-03-12T22:08:35.377828",
+  "started_at": "2026-03-12T22:20:33.263679",
   "batches": {
     "Unknown": {
       "status": "failed",
-      "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
-      "failed_at": "2026-03-12T22:08:35.426924"
+      "error": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYyxuLfpuiyvK6Xhj7ARo'}",
+      "failed_at": "2026-03-12T22:20:33.468949"
     }
   },
   "species_order": [],
