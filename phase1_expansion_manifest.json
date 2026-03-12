@@ -1,0 +1,79 @@
+{
+  "started_at": "2026-03-12T23:01:03.891871",
+  "completed_at": null,
+  "batches": {
+    "Cat": {
+      "batch_ids": [
+        "msgbatch_01T4Wn16qVuoJ3knV9GTK6Tq"
+      ],
+      "submitted_at": "2026-03-12T23:01:04.560034",
+      "status": "processing",
+      "total_requests": 516,
+      "disease_count": 516,
+      "estimated_cost": 12.9
+    },
+    "Horse": {
+      "batch_ids": [
+        "msgbatch_01WmkppaWc2aPwEH2sp3avLZ"
+      ],
+      "submitted_at": "2026-03-12T23:01:06.215714",
+      "status": "processing",
+      "total_requests": 736,
+      "disease_count": 736,
+      "estimated_cost": 18.400000000000002
+    },
+    "Bird": {
+      "batch_ids": [
+        "msgbatch_01XK4kSycmJNSKPePCmwpxe9"
+      ],
+      "submitted_at": "2026-03-12T23:01:07.802043",
+      "status": "processing",
+      "total_requests": 308,
+      "disease_count": 308,
+      "estimated_cost": 7.7
+    },
+    "Rabbit": {
+      "batch_ids": [
+        "msgbatch_01XyYakBdTtuyhj27qnA97yy"
+      ],
+      "submitted_at": "2026-03-12T23:01:09.328730",
+      "status": "processing",
+      "total_requests": 271,
+      "disease_count": 271,
+      "estimated_cost": 6.775
+    },
+    "Parakeet": {
+      "batch_ids": [
+        "msgbatch_01YWa9Cpr5z4YzPhMusahvPb"
+      ],
+      "submitted_at": "2026-03-12T23:01:10.835321",
+      "status": "processing",
+      "total_requests": 251,
+      "disease_count": 251,
+      "estimated_cost": 6.275
+    },
+    "Others": {
+      "batch_ids": [
+        "msgbatch_01BEdeWERan79erHiFEriv4r"
+      ],
+      "submitted_at": "2026-03-12T23:01:12.657410",
+      "status": "processing",
+      "total_requests": 2148,
+      "disease_count": 2148,
+      "estimated_cost": 53.7
+    }
+  },
+  "species_order": [
+    "Cat",
+    "Horse",
+    "Bird",
+    "Rabbit",
+    "Parakeet",
+    "Others"
+  ],
+  "statistics": {
+    "total_diseases": 3230,
+    "total_cost_estimate": 80.75,
+    "total_standard_cost": 161.5
+  }
+}

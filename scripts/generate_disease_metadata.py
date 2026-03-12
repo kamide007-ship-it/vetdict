@@ -8,9 +8,9 @@ This script prepares disease metadata in VetDict format for:
 - Bird (鳥): 308 diseases
 - Rabbit (ウサギ): 271 diseases
 - Parakeet (セキセイインコ): 251 diseases
-- Others (その他14種): 1,148 diseases
+- Others (その他14種): 2,148 diseases
 
-Total: 4,230 diseases (excluding already-processed dogs)
+Total: 4,230 diseases (+ 576 dogs already processed = 4,806 total)
 
 Usage:
     python scripts/generate_disease_metadata.py --all-species
@@ -36,7 +36,7 @@ class DiseaseMetadataGenerator:
         "Bird": 308,
         "Rabbit": 271,
         "Parakeet": 251,
-        "Others": 1148  # 14 other species combined
+        "Others": 2148  # 14 other species combined (expanded to reach 4,806 total)
     }
 
     # Common diseases per species (veterinary medicine knowledge base)
