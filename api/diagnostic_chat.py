@@ -21,7 +21,12 @@ permitted by the Veterinary Practice Act (獣医師法).
 """
 
 
+import logging
+import os
+
 from flask import Blueprint, jsonify, request
+
+logger = logging.getLogger(__name__)
 
 diagnostic_bp = Blueprint("diagnostic_bp", __name__, url_prefix="/api/diagnostic-chat")
 
@@ -30,6 +35,40 @@ try:
     from api.health_checker import DISEASES, SYMPTOM_IDS, SYMPTOMS
 except ImportError:
     from health_checker import DISEASES, SYMPTOM_IDS, SYMPTOMS
+
+# AI-powered symptom extraction (Phase 1)
+_AI_EXTRACTION_ENABLED = os.getenv("VETDICT_USE_AI_SYMPTOM_EXTRACTION", "false").lower() == "true"
+_AI_EXTRACTOR = None
+
+def _get_ai_extractor():
+    """Lazy-load AI extractor singleton."""
+    global _AI_EXTRACTOR
+    if _AI_EXTRACTOR is None and _AI_EXTRACTION_ENABLED:
+        try:
+            from api.ai import SymptomExtractor
+            from api.config_constants import (
+                AI_SYMPTOM_EXTRACTION_TIMEOUT,
+                AI_SYMPTOM_CACHE_TTL,
+                AI_SYMPTOM_CONFIDENCE_THRESHOLD,
+                AI_SYMPTOM_FALLBACK_ENABLED,
+                AI_SYMPTOM_MODEL,
+            )
+            _AI_EXTRACTOR = SymptomExtractor(
+                api_key=os.getenv("ANTHROPIC_API_KEY"),
+                model=AI_SYMPTOM_MODEL,
+                timeout=AI_SYMPTOM_EXTRACTION_TIMEOUT,
+                cache_enabled=True,
+                cache_ttl=AI_SYMPTOM_CACHE_TTL,
+                confidence_threshold=AI_SYMPTOM_CONFIDENCE_THRESHOLD,
+                fallback_enabled=AI_SYMPTOM_FALLBACK_ENABLED,
+                manual_aliases=SYMPTOM_ALIASES if 'SYMPTOM_ALIASES' in globals() else {},
+            )
+            _AI_EXTRACTOR.set_valid_symptom_ids(SYMPTOM_IDS)
+            logger.info(f"AI symptom extractor initialized (model={AI_SYMPTOM_MODEL})")
+        except Exception as e:
+            logger.warning(f"Failed to initialize AI extractor: {e}")
+            _AI_EXTRACTOR = False  # Sentinel value to avoid retrying
+    return _AI_EXTRACTOR if _AI_EXTRACTOR else None
 
 # Import equine data for horse chat support
 try:
@@ -844,12 +883,40 @@ def extract_symptoms_from_text(text: str) -> list:
     """
     Extract symptom IDs from natural language text.
 
+    Uses Claude AI extraction if enabled, falls back to manual aliases on error.
+
     Args:
         text: User input text describing symptoms
 
     Returns:
         List of matched symptom IDs
     """
+    # Attempt AI extraction if enabled
+    if _AI_EXTRACTION_ENABLED:
+        extractor = _get_ai_extractor()
+        if extractor:
+            try:
+                result = extractor.extract(
+                    text=text,
+                    patient_species="dog",
+                    language="auto",
+                    allow_fallback=True,
+                )
+                symptoms = result.get("symptoms", [])
+                method = result.get("method", "unknown")
+                confidence = result.get("confidence", 0.0)
+                logger.info(
+                    f"Symptom extraction: method={method} "
+                    f"confidence={confidence} symptoms={len(symptoms)}"
+                )
+                if symptoms:
+                    return symptoms
+                # If AI found no symptoms but no error, continue to manual fallback
+            except Exception as e:
+                logger.warning(f"AI extraction failed, falling back to manual: {e}")
+                # Fall through to manual extraction
+
+    # Manual extraction (original algorithm)
     text_lower = text.lower()
     matched_symptoms = set()
 

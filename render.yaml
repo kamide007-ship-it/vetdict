@@ -11,3 +11,16 @@ services:
         value: "0"
       - key: PYTHON_VERSION
         value: "3.11.0"
+      # AI Integration Configuration
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: VETDICT_USE_AI_SYMPTOM_EXTRACTION
+        value: "false"
+      - key: AI_SYMPTOM_TIMEOUT
+        value: "30.0"
+      - key: AI_SYMPTOM_CACHE_TTL
+        value: "3600"
+      - key: AI_SYMPTOM_CONFIDENCE
+        value: "0.7"
+      - key: AI_SYMPTOM_FALLBACK
+        value: "true"
