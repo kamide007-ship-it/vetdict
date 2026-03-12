@@ -1,10 +1,14 @@
 {
-  "started_at": "2026-03-12T22:08:35.377828",
+  "started_at": "2026-03-12T22:27:41.475827",
   "batches": {
     "Unknown": {
-      "status": "failed",
-      "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
-      "failed_at": "2026-03-12T22:08:35.426924"
+      "batch_ids": [
+        "msgbatch_01WRDYpQjRnk32cZ9gMUYRGw"
+      ],
+      "submitted_at": "2026-03-12T22:27:42.122229",
+      "status": "processing",
+      "total_requests": 576,
+      "estimated_cost": 14.4
     }
   },
   "species_order": [],
