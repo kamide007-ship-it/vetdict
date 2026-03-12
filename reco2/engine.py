@@ -1,9 +1,16 @@
 import datetime
+import logging
 import math
 import uuid
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
+from reco2.confidence_adapter import (
+    adjust_context_from_ai,
+    scale_confidence_to_psi_multiplier,
+)
 from reco2.store import load_state, save_state
+
+logger = logging.getLogger(__name__)
 
 
 def _euclidean_distance(I: Dict[str, float], P: Dict[str, Dict[str, float]]) -> float:
@@ -56,6 +63,42 @@ def _integrity(T_final: float, alpha: float, beta: float) -> float:
     """ψ = (1/T) * α * β"""
     return (1.0 / T_final) * alpha * beta
 
+
+def _apply_ai_confidence_to_psi(
+    psi: float, ai_result: Optional[Dict[str, Any]]
+) -> Tuple[float, Optional[float]]:
+    """
+    Apply AI confidence multiplier to psi if AI result available.
+
+    Args:
+        psi: Original integrity score
+        ai_result: Optional Phase 2b extraction result with confidence metadata
+
+    Returns:
+        Tuple of (adjusted_psi, multiplier) or (original_psi, None) if no AI result
+    """
+    if not ai_result or not isinstance(ai_result, dict):
+        return psi, None
+
+    # Extract AI confidence from result
+    ai_confidence = ai_result.get("confidence", 0.5)
+    ai_confidence = max(0.0, min(1.0, float(ai_confidence)))
+
+    # Get multiplier from confidence
+    multiplier = scale_confidence_to_psi_multiplier(ai_confidence)
+
+    # Apply multiplier to psi
+    adjusted_psi = psi * multiplier
+    adjusted_psi = max(0.0, adjusted_psi)
+
+    logger.debug(
+        f"Applied AI confidence to psi: "
+        f"base_psi={psi:.3f}, confidence={ai_confidence:.3f}, "
+        f"multiplier={multiplier:.3f}, adjusted_psi={adjusted_psi:.3f}"
+    )
+
+    return adjusted_psi, multiplier
+
 def _verdict_from_psi(psi: float) -> Tuple[str, str]:
     if psi >= 1.2:
         return "reliable", "信頼できる"
@@ -93,7 +136,19 @@ def _append_session_log(state: Dict[str, Any], entry: Dict[str, Any]) -> None:
         logs = logs[-2000:]
     state["session_logs"] = logs
 
-def evaluate_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+def evaluate_payload(
+    payload: Dict[str, Any], ai_result: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """
+    Evaluate payload with optional AI confidence enhancement.
+
+    Args:
+        payload: RECO2 payload with inference, evidence, context
+        ai_result: Optional Phase 2b extraction result with confidence metadata
+
+    Returns:
+        Evaluation result with verdict and integrity metrics
+    """
     if not isinstance(payload, dict):
         raise ValueError("Invalid JSON")
     inference = payload.get("inference", {})
@@ -104,6 +159,10 @@ def evaluate_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
     domain = str(context.get("domain", "")).strip()
     if not domain:
         raise ValueError("context.domain is required")
+
+    # Enhance context with AI confidence if available
+    if ai_result:
+        context = adjust_context_from_ai(context, ai_result)
 
     state = load_state()
     D = _euclidean_distance({k: float(v) for k, v in inference.items()}, evidence)
@@ -117,6 +176,11 @@ def evaluate_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
     beta = _beta(purity)
     T = _temperature(T_base, k, D)
     psi = _integrity(T, alpha, beta)
+
+    # Apply AI confidence multiplier to psi if available
+    psi_multiplier = None
+    if ai_result:
+        psi, psi_multiplier = _apply_ai_confidence_to_psi(psi, ai_result)
 
     base_conf = float(context.get("confidence", 0.0))
     conf_adj = _confidence_adjusted(base_conf, psi)
@@ -139,7 +203,7 @@ def evaluate_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
         patrol(manual=False)
 
     st2 = load_state()
-    return {
+    result = {
         "session_id": session_id,
         "deviation": round(D, 6),
         "temperature": round(T, 6),
@@ -158,6 +222,14 @@ def evaluate_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
             "beta": round(beta, 6),
         }
     }
+
+    # Include AI confidence metadata if present
+    if ai_result and context.get("ai_confidence"):
+        result["ai_confidence"] = context["ai_confidence"]
+        if psi_multiplier is not None:
+            result["meta"]["ai_psi_multiplier"] = round(psi_multiplier, 3)
+
+    return result
 
 def record_feedback(payload: Dict[str, Any]):
     if not isinstance(payload, dict):
