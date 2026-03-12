@@ -42,3 +42,13 @@ DEFAULT_LANGUAGE = 'ja'
 # ---------------------------------------------------------------------------
 DEFAULT_PAGE_SIZE = 20
 MAX_PAGE_SIZE = 100
+
+# ---------------------------------------------------------------------------
+# AI Symptom Extraction (Phase 1)
+# ---------------------------------------------------------------------------
+AI_SYMPTOM_EXTRACTION_ENABLED_DEFAULT = False
+AI_SYMPTOM_EXTRACTION_TIMEOUT = 30.0
+AI_SYMPTOM_CACHE_TTL = 3600  # 1 hour
+AI_SYMPTOM_CONFIDENCE_THRESHOLD = 0.7
+AI_SYMPTOM_FALLBACK_ENABLED = True
+AI_SYMPTOM_MODEL = "claude-opus-4-6"
