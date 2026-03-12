@@ -1,10 +1,14 @@
 {
-  "started_at": "2026-03-12T22:20:33.263679",
+  "started_at": "2026-03-12T22:27:41.475827",
   "batches": {
     "Unknown": {
-      "status": "failed",
-      "error": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYyxuLfpuiyvK6Xhj7ARo'}",
-      "failed_at": "2026-03-12T22:20:33.468949"
+      "batch_ids": [
+        "msgbatch_01WRDYpQjRnk32cZ9gMUYRGw"
+      ],
+      "submitted_at": "2026-03-12T22:27:42.122229",
+      "status": "processing",
+      "total_requests": 576,
+      "estimated_cost": 14.4
     }
   },
   "species_order": [],
