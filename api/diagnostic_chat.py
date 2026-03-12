@@ -23,6 +23,7 @@ permitted by the Veterinary Practice Act (獣医師法).
 
 import logging
 import os
+from typing import Any, Dict, Optional
 
 from flask import Blueprint, jsonify, request
 
@@ -76,6 +77,44 @@ def _get_ai_extractor():
             logger.warning(f"Failed to initialize AI extractor: {e}")
             _AI_EXTRACTOR = False  # Sentinel value to avoid retrying
     return _AI_EXTRACTOR if _AI_EXTRACTOR else None
+
+
+def evaluate_with_ai_confidence(
+    inference: Dict[str, float],
+    evidence: Dict[str, Any],
+    context: Dict[str, Any],
+    ai_result: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """
+    Evaluate diagnostic context with optional AI confidence enhancement (Phase 2c).
+
+    This is an optional integration with RECO2 integrity gate that applies
+    AI symptom extraction confidence to enhance verdict generation.
+
+    Args:
+        inference: Disease inference vector (name -> confidence)
+        evidence: Evidence data with median values for each field
+        context: Patient/domain context (domain, confidence, etc.)
+        ai_result: Optional Phase 2b extraction result with personalization metadata
+
+    Returns:
+        RECO2 evaluation result with integrity metrics and AI confidence metadata
+    """
+    try:
+        from reco2 import engine
+
+        return engine.evaluate_payload(
+            {
+                "inference": inference,
+                "evidence": evidence,
+                "context": context,
+            },
+            ai_result=ai_result,
+        )
+    except Exception as e:
+        logger.debug(f"RECO2 evaluation failed, skipping: {e}")
+        # Return None to indicate RECO2 unavailable - caller should continue normally
+        return None
 
 # Import equine data for horse chat support
 try:
