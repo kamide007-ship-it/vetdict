@@ -268,6 +268,24 @@ def record_feedback(payload: Dict[str, Any]):
                 break
         state["session_logs"] = logs
     save_state(state)
+
+    # Phase 3: Record learning signal for continuous improvement
+    try:
+        from reco2.learning_store import LearningDataStore
+        learning_store = LearningDataStore()
+        learning_store.record_feedback_learning(
+            session_id=session_id,
+            feedback_type=fb,
+            ai_result={},  # Will be populated by diagnostic_chat integration
+            reco2_verdict="",  # Will be populated by integration
+            extracted_symptoms=[],
+            disease_domain=domain,
+        )
+    except Exception as e:
+        # Graceful degradation: learning not critical to feedback recording
+        import logging
+        logging.getLogger(__name__).debug(f"Learning store recording failed: {e}")
+
     return {"status": "recorded", "reward": R, "new_weight": round(W_new, 6), "domain": domain}
 
 def _clamp(x: float, lo: float, hi: float) -> float:

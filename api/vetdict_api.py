@@ -145,6 +145,20 @@ except ImportError:
         DRUG_DICTIONARY_AVAILABLE = False
         logger.warning("Drug dictionary module not available")
 
+# Phase 3 Learning Insights blueprint (Continuous Learning Pipeline)
+try:
+    from api.learning_insights import bp as learning_insights_bp
+    app.register_blueprint(learning_insights_bp)
+    LEARNING_INSIGHTS_AVAILABLE = True
+except ImportError:
+    try:
+        from learning_insights import bp as learning_insights_bp
+        app.register_blueprint(learning_insights_bp)
+        LEARNING_INSIGHTS_AVAILABLE = True
+    except ImportError:
+        LEARNING_INSIGHTS_AVAILABLE = False
+        logger.warning("Learning insights (Phase 3) module not available")
+
 
 # ---------------------------------------------------------------------------
 # Decorators
