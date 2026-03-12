@@ -1,0 +1,35 @@
+name: Disease Data Enrichment
+
+on:
+  workflow_dispatch:  # Manual trigger from GitHub UI
+  # schedule:
+  #   - cron: '0 0 1 * *'  # Monthly on 1st (optional)
+
+jobs:
+  enrich-diseases:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -q anthropic
+
+      - name: Submit enrichment batch
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python scripts/run_disease_enrichment.py submit
+
+      - name: Save batch manifest
+        uses: actions/upload-artifact@v3
+        with:
+          name: enrichment-manifest
+          path: enrichment_manifest.json
+          retention-days: 30

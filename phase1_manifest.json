@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-03-12T22:08:35.377828",
+  "batches": {
+    "Unknown": {
+      "status": "failed",
+      "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+      "failed_at": "2026-03-12T22:08:35.426924"
+    }
+  },
+  "species_order": [],
+  "statistics": {}
+}
