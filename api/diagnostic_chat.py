@@ -51,20 +51,27 @@ def _get_ai_extractor():
                 AI_SYMPTOM_CACHE_TTL,
                 AI_SYMPTOM_CONFIDENCE_THRESHOLD,
                 AI_SYMPTOM_FALLBACK_ENABLED,
-                AI_SYMPTOM_MODEL,
+                AI_SYMPTOM_MODEL as DEFAULT_MODEL,
             )
+            # Environment variable overrides config constant
+            ai_model = os.getenv("AI_SYMPTOM_MODEL", DEFAULT_MODEL)
+            ai_timeout = float(os.getenv("AI_SYMPTOM_TIMEOUT", AI_SYMPTOM_EXTRACTION_TIMEOUT))
+            ai_cache_ttl = int(os.getenv("AI_SYMPTOM_CACHE_TTL", AI_SYMPTOM_CACHE_TTL))
+            ai_confidence = float(os.getenv("AI_SYMPTOM_CONFIDENCE", AI_SYMPTOM_CONFIDENCE_THRESHOLD))
+            ai_fallback = os.getenv("AI_SYMPTOM_FALLBACK", "true").lower() == "true"
+
             _AI_EXTRACTOR = SymptomExtractor(
                 api_key=os.getenv("ANTHROPIC_API_KEY"),
-                model=AI_SYMPTOM_MODEL,
-                timeout=AI_SYMPTOM_EXTRACTION_TIMEOUT,
+                model=ai_model,
+                timeout=ai_timeout,
                 cache_enabled=True,
-                cache_ttl=AI_SYMPTOM_CACHE_TTL,
-                confidence_threshold=AI_SYMPTOM_CONFIDENCE_THRESHOLD,
-                fallback_enabled=AI_SYMPTOM_FALLBACK_ENABLED,
+                cache_ttl=ai_cache_ttl,
+                confidence_threshold=ai_confidence,
+                fallback_enabled=ai_fallback,
                 manual_aliases=SYMPTOM_ALIASES if 'SYMPTOM_ALIASES' in globals() else {},
             )
             _AI_EXTRACTOR.set_valid_symptom_ids(SYMPTOM_IDS)
-            logger.info(f"AI symptom extractor initialized (model={AI_SYMPTOM_MODEL})")
+            logger.info(f"AI symptom extractor initialized (model={ai_model}, timeout={ai_timeout}s)")
         except Exception as e:
             logger.warning(f"Failed to initialize AI extractor: {e}")
             _AI_EXTRACTOR = False  # Sentinel value to avoid retrying

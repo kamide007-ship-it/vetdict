@@ -16,6 +16,8 @@ services:
         sync: false
       - key: VETDICT_USE_AI_SYMPTOM_EXTRACTION
         value: "false"
+      - key: AI_SYMPTOM_MODEL
+        value: "claude-opus-4-6"
       - key: AI_SYMPTOM_TIMEOUT
         value: "30.0"
       - key: AI_SYMPTOM_CACHE_TTL
