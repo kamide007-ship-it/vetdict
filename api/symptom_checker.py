@@ -7445,6 +7445,7 @@ def analyze_symptoms(
     age_years: float | None = None,
     lab_values: dict[str, float] | None = None,
     gender: str | None = None,
+    vaccination_status: str | None = None,
 ) -> dict:
     """Analyze a list of symptom IDs and return suspected diseases, tests,
     severity assessment, and general advice.
@@ -7467,6 +7468,10 @@ def analyze_symptoms(
         Optional age of the animal in years.  When provided, diseases with
         a known age predisposition matching the animal's life stage receive
         a score boost; clear mismatches receive a penalty.
+    vaccination_status:
+        Optional vaccination status: ``"current"`` (up-to-date), ``"outdated"``
+        (lapsed), or ``"none"`` (unvaccinated). When ``"current"``, vaccine-preventable
+        diseases have confidence significantly reduced. Default ``None`` (no adjustment).
 
     Returns
     -------
@@ -7502,6 +7507,12 @@ def analyze_symptoms(
         from api.ai.evidence_calculator import EvidenceScorer
     except ImportError:
         EvidenceScorer = None
+
+    # Load vaccination protection data
+    try:
+        from api.data.vaccination_protection import VaccinationStatusHandler
+    except ImportError:
+        VaccinationStatusHandler = None
 
     pair_boosts: dict[str, float] = {}
     all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
@@ -7761,6 +7772,25 @@ def analyze_symptoms(
             disease["evidence_multiplier"] = round(evidence_multiplier, 3)
             disease["evidence_boost_applied"] = round(evidence_boost_factor, 3)
 
+    # Apply vaccination status adjustment (Phase 4 enhancement)
+    # Reduce confidence for vaccine-preventable diseases if vaccinated
+    if VaccinationStatusHandler and vaccination_status:
+        for disease in suspected:
+            disease_name = disease["name"]
+            original_match_percent = disease["match_percent"]
+
+            # Apply vaccination adjustment
+            adjusted_percent, adjustment_applied = VaccinationStatusHandler.apply_vaccination_adjustment(
+                disease_name, original_match_percent, vaccination_status
+            )
+
+            if adjustment_applied:
+                disease["match_percent_before_vaccination"] = original_match_percent
+                disease["match_percent"] = adjusted_percent
+                disease["vaccination_adjustment_applied"] = True
+            else:
+                disease["vaccination_adjustment_applied"] = False
+
     # Group diseases by prevalence tier for stepwise differential diagnosis
     # Phase 1: Common diseases (very_common + common)
     # Phase 2: Rare diseases (uncommon + rare + unknown)
@@ -7788,6 +7818,8 @@ def analyze_symptoms(
         "age_stage": age_stage,
         "lab_boost_applied": len(lab_boosts) > 0,
         "lab_values": lab_values,
+        "vaccination_status": vaccination_status,
+        "vaccination_adjustment_applied": vaccination_status is not None and vaccination_status == "current",
         "symptom_names": symptom_names_lookup,
     }
 
