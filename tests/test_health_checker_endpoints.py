@@ -1,4 +1,4 @@
-from api import vetdict_api
+import api.vetdict_api as vetdict_api
 from api.vetdict_api import app
 
 
