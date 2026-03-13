@@ -7497,6 +7497,18 @@ def analyze_symptoms(
         EXTENDED_SYMPTOM_PAIR_BOOST = {}
         SYMPTOM_TRIPLE_BOOST = {}
 
+    # Load clinical frequency data (symptom presentation rates by region)
+    try:
+        from api.data.clinical_frequency import (
+            CLINICAL_FREQUENCY,
+            get_clinical_frequency,
+            get_all_regions_frequency,
+        )
+    except ImportError:
+        CLINICAL_FREQUENCY = {}
+        get_clinical_frequency = None
+        get_all_regions_frequency = None
+
     pair_boosts: dict[str, float] = {}
     all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
     for pair, disease_boosts in all_pair_boosts.items():
@@ -7622,13 +7634,36 @@ def analyze_symptoms(
         # Apply lab value boost (上限を制限、部分一致)
         lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
 
+        # Apply clinical frequency boost (症状の臨床頻度データ)
+        # Boost based on how commonly the matching symptoms present in this disease
+        clinical_frequency_multiplier = 1.0
+        if CLINICAL_FREQUENCY and disease["name"] in CLINICAL_FREQUENCY:
+            disease_freq = CLINICAL_FREQUENCY[disease["name"]]
+            frequency_sum = 0.0
+            frequency_count = 0
+            for sym in matching:
+                if sym in disease_freq:
+                    # Get global average frequency for this symptom in this disease
+                    freq_data = disease_freq[sym]
+                    if isinstance(freq_data, dict) and "global_average" in freq_data:
+                        frequency_sum += freq_data["global_average"]
+                        frequency_count += 1
+
+            if frequency_count > 0:
+                avg_frequency = frequency_sum / frequency_count
+                # Boost based on average frequency: 0.5-1.0 frequency -> 1.1-1.4 multiplier
+                # This rewards symptoms that commonly appear with the disease
+                clinical_frequency_multiplier = 1.0 + (avg_frequency * 0.4)
+
+        clinical_frequency_multiplier = min(clinical_frequency_multiplier, 1.5)
+
         # Apply prevalence (base rate) multiplier — 有病率ベイズ補正
         prevalence_cat = _DISEASE_PREVALENCE.get(disease["name"])
         prevalence_multiplier = _PREVALENCE_MULTIPLIER.get(prevalence_cat, 1.0) if prevalence_cat else 1.0
 
         # 複合ブースト倍率の上限を設定（過度なインフレ防止）
         combined_boost = (breed_multiplier * gender_multiplier * onset_multiplier * age_multiplier
-                         * pair_multiplier * triple_multiplier * lab_multiplier * prevalence_multiplier)
+                         * pair_multiplier * triple_multiplier * lab_multiplier * clinical_frequency_multiplier * prevalence_multiplier)
         combined_boost = min(combined_boost, 3.0)  # 最大3.0倍（トリプルで強いブースト可能）
         if combined_boost < 1.0:
             combined_boost = max(combined_boost, 0.6)  # ペナルティ下限0.6
@@ -7659,6 +7694,14 @@ def analyze_symptoms(
         # Get prevalence tier for this disease
         prevalence_tier = _DISEASE_PREVALENCE.get(disease["name"], "unknown")
 
+        # Collect clinical frequency data for matching symptoms
+        clinical_freq_data = {}
+        if CLINICAL_FREQUENCY and disease["name"] in CLINICAL_FREQUENCY:
+            disease_freq = CLINICAL_FREQUENCY[disease["name"]]
+            for sym in matching:
+                if sym in disease_freq:
+                    clinical_freq_data[sym] = disease_freq[sym]
+
         suspected.append({
             "name": disease["name"],
             "name_ja": disease["name_ja"],
@@ -7685,6 +7728,7 @@ def analyze_symptoms(
             "matching_symptoms": sorted(matching),
             "match_count": match_count,
             "total_symptoms": total,
+            "clinical_frequency_data": clinical_freq_data,  # Geographic distribution of symptom frequencies
             # internal fields for later processing
             "_urgency": disease["urgency"],
             "_match_ratio": coverage,
