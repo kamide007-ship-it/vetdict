@@ -7486,12 +7486,33 @@ def analyze_symptoms(
 
     # Pre-compute symptom pair boosts and import clinical weights
     from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT, compute_lab_boosts, _fuzzy_boost_lookup
+
+    # Load extended symptom combinations
+    try:
+        from api.data.symptom_combinations import (
+            EXTENDED_SYMPTOM_PAIR_BOOST,
+            SYMPTOM_TRIPLE_BOOST,
+        )
+    except ImportError:
+        EXTENDED_SYMPTOM_PAIR_BOOST = {}
+        SYMPTOM_TRIPLE_BOOST = {}
+
     pair_boosts: dict[str, float] = {}
-    for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
+    all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
+    for pair, disease_boosts in all_pair_boosts.items():
         if pair.issubset(symptom_set):
             for disease_name, multiplier in disease_boosts.items():
                 if disease_name not in pair_boosts or multiplier > pair_boosts[disease_name]:
                     pair_boosts[disease_name] = multiplier
+
+    # Pre-compute triple boosts
+    triple_boosts: dict[str, float] = {}
+    if len(symptom_set) >= 3 and SYMPTOM_TRIPLE_BOOST:
+        for triple, disease_boosts in SYMPTOM_TRIPLE_BOOST.items():
+            if triple.issubset(symptom_set):
+                for disease_name, multiplier in disease_boosts.items():
+                    if disease_name not in triple_boosts or multiplier > triple_boosts[disease_name]:
+                        triple_boosts[disease_name] = multiplier
 
     # Pre-compute lab value boosts
     lab_boosts: dict[str, float] = {}
@@ -7595,6 +7616,9 @@ def analyze_symptoms(
         # Apply symptom pair boost (上限を制限、部分一致)
         pair_multiplier = min(_fuzzy_boost_lookup(disease["name"], pair_boosts), 1.5)
 
+        # Apply symptom triple boost (上限を制限、部分一致)
+        triple_multiplier = min(_fuzzy_boost_lookup(disease["name"], triple_boosts), 2.0)
+
         # Apply lab value boost (上限を制限、部分一致)
         lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
 
@@ -7604,8 +7628,8 @@ def analyze_symptoms(
 
         # 複合ブースト倍率の上限を設定（過度なインフレ防止）
         combined_boost = (breed_multiplier * gender_multiplier * onset_multiplier * age_multiplier
-                         * pair_multiplier * lab_multiplier * prevalence_multiplier)
-        combined_boost = min(combined_boost, 2.5)  # 最大2.5倍
+                         * pair_multiplier * triple_multiplier * lab_multiplier * prevalence_multiplier)
+        combined_boost = min(combined_boost, 3.0)  # 最大3.0倍（トリプルで強いブースト可能）
         if combined_boost < 1.0:
             combined_boost = max(combined_boost, 0.6)  # ペナルティ下限0.6
 
