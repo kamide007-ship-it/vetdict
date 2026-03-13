@@ -586,6 +586,45 @@ def api_get_breeds(species):
 
 
 # =============================================================================
+# API: Chief Complaints (主訴キーワード)
+# =============================================================================
+
+@app.route('/api/chief-complaints/<species>', methods=['GET'])
+@ensure_json_response
+def api_get_chief_complaints(species):
+    """Return chief complaint keywords for a species."""
+    try:
+        from api.data.chief_complaints import (
+            get_chief_complaints,
+            get_chief_complaint_keywords,
+            get_symptoms_for_complaint,
+            is_emergency_complaint,
+        )
+    except ImportError:
+        return {"error": "Chief complaints module not available"}, 503
+
+    species_key = (species or 'dog').lower()
+    complaints = get_chief_complaints(species_key)
+
+    # Format response with keywords and metadata
+    response = {
+        "species": species_key,
+        "complaints": {}
+    }
+
+    for keyword, data in complaints.items():
+        response["complaints"][keyword] = {
+            "ja": data.get("ja", ""),
+            "en": data.get("en", ""),
+            "symptoms": data.get("common_symptoms", []),
+            "frequency": data.get("frequency", 0.0),
+            "emergency": data.get("emergency", False),
+        }
+
+    return response
+
+
+# =============================================================================
 # API: RECO2 / RECO3 (AI Integrity Control)
 # =============================================================================
 

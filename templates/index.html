@@ -409,6 +409,14 @@ a:hover{text-decoration:underline}
         <div class="card">
           <div class="card-header" data-i18n-html="cardSymptoms">&#9745; 症状を選択</div>
           <div class="card-body">
+            <div class="chief-complaint-section" style="margin-bottom:14px;padding:12px;background:var(--blue-50);border:2px solid var(--blue-200);border-radius:var(--radius)">
+              <label style="font-size:.82rem;font-weight:600;color:var(--navy);display:block;margin-bottom:6px">🎯 主訴キーワード（任意）</label>
+              <div class="chief-complaint-input-group" style="position:relative">
+                <input type="text" id="chiefComplaintInput" placeholder="嘔吐、下痢、咳、元気がない..." data-i18n-ph="chiefComplaintPh" style="width:100%;padding:8px 12px;border:2px solid var(--blue-300);border-radius:var(--radius);font-size:.86rem;background:var(--white)"/>
+                <div class="chief-complaint-suggestions" id="chiefComplaintSuggestions" style="position:absolute;top:100%;left:0;right:0;background:white;border:1px solid var(--gray-300);border-top:none;border-radius:0 0 var(--radius) var(--radius);max-height:200px;overflow-y:auto;z-index:10;display:none;margin-top:-2px"></div>
+              </div>
+              <div id="selectedComplaintBadge" style="margin-top:8px;min-height:20px"></div>
+            </div>
             <div id="breedSelectArea" class="hidden" style="margin-bottom:12px">
               <label style="font-size:.82rem;font-weight:600;color:var(--navy);display:block;margin-bottom:4px" data-i18n="breedLabel">品種を選択（任意）</label>
               <select id="breedSelect" style="width:100%;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;background:var(--white)">
@@ -893,6 +901,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     setupChat();
     setupHamburger();
     setupLanguageToggle();
+    setupChiefComplaints();
     const symptomSearch=document.getElementById("symptomSearch");
     const analyzeBtn=document.getElementById("analyzeBtn");
     const diseaseSearch=document.getElementById("diseaseSearch");
@@ -906,6 +915,64 @@ document.addEventListener("DOMContentLoaded",()=>{
     console.error("Error in DOMContentLoaded:",e);
   }
 });
+
+/* --- Chief Complaints (主訴) autocomplete --- */
+let chiefComplaintsCache={};
+function setupChiefComplaints(){
+  const input=document.getElementById("chiefComplaintInput");
+  const suggestionsBox=document.getElementById("chiefComplaintSuggestions");
+  if(!input||!suggestionsBox){console.warn("Chief complaint elements not found");return;}
+  input.addEventListener("input",()=>showChiefComplaintSuggestions());
+  input.addEventListener("keydown",(e)=>{
+    if(e.key==="Enter"){e.preventDefault();const first=suggestionsBox.querySelector("[data-keyword]");if(first)selectChiefComplaint(first.dataset.keyword);}
+  });
+  document.addEventListener("click",(e)=>{
+    if(!e.target.closest(".chief-complaint-input-group"))suggestionsBox.style.display="none";
+  });
+}
+function showChiefComplaintSuggestions(){
+  const input=document.getElementById("chiefComplaintInput");
+  const suggestionsBox=document.getElementById("chiefComplaintSuggestions");
+  const query=(input.value||"").toLowerCase().trim();
+  if(!query){suggestionsBox.style.display="none";return;}
+  const complaints=chiefComplaintsCache[currentSpecies]||{};
+  const matches=Object.keys(complaints).filter(k=>k.toLowerCase().includes(query)||complaints[k].ja.includes(query)||complaints[k].en.toLowerCase().includes(query)).slice(0,10);
+  if(matches.length===0){suggestionsBox.style.display="none";return;}
+  suggestionsBox.innerHTML=matches.map(keyword=>{const data=complaints[keyword];const display=data.ja||data.en||keyword;return`<div style="padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--gray-200);hover:background-color:var(--gray-50)" data-keyword="${keyword}" onmouseover="this.style.background='var(--gray-50)'" onmouseout="this.style.background='white'" onclick="selectChiefComplaint('${keyword}')">${display} <span style="color:var(--gray-500);font-size:.75rem">(${data.emergency?'🚨 ':''} ${Math.round(data.frequency*100)}%)</span></div>`}).join("");
+  suggestionsBox.style.display="block";
+}
+function selectChiefComplaint(keyword){
+  const complaints=chiefComplaintsCache[currentSpecies]||{};
+  if(!complaints[keyword])return;
+  const data=complaints[keyword];
+  const symptoms=data.symptoms||[];
+  const input=document.getElementById("chiefComplaintInput");
+  const badge=document.getElementById("selectedComplaintBadge");
+  const suggestionsBox=document.getElementById("chiefComplaintSuggestions");
+  suggestionsBox.style.display="none";
+  const display=data.ja||data.en||keyword;
+  input.value=display;
+  const emergencyTag=data.emergency?'<span style="margin-left:6px;padding:2px 6px;background:#ff6b6b;color:white;border-radius:4px;font-size:.7rem;font-weight:bold">🚨 Emergency</span>':"";
+  badge.innerHTML=`<span style="display:inline-block;padding:6px 10px;background:var(--blue-100);border:1px solid var(--blue-300);border-radius:6px;font-size:.82rem">${display} ${emergencyTag}<button style="margin-left:8px;background:none;border:none;cursor:pointer;color:var(--blue-600)" onclick="clearChiefComplaint()">✕</button></span>`;
+  symptoms.forEach(sym=>selectedSymptoms.add(sym));
+  renderSelectedSymptoms();
+  renderSymptomList(symptomData);
+}
+function clearChiefComplaint(){
+  const input=document.getElementById("chiefComplaintInput");
+  const badge=document.getElementById("selectedComplaintBadge");
+  input.value="";
+  badge.innerHTML="";
+}
+async function loadChiefComplaints(){
+  try{
+    const response=await fetch(`/api/chief-complaints/${currentSpecies}`);
+    if(response.ok){
+      const data=await response.json();
+      chiefComplaintsCache[currentSpecies]=data.complaints||{};
+    }
+  }catch(e){console.error("Error loading chief complaints:",e);}
+}
 
 /* --- Hamburger menu --- */
 function setupHamburger(){
@@ -1050,7 +1117,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);loadChiefComplaints();
   resetSpeciesChat(id);
   const resultsArea=document.getElementById("resultsArea");
   if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>`;
