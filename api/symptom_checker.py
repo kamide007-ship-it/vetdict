@@ -7607,12 +7607,16 @@ def analyze_symptoms(
         else:
             color_class = "score-minimal"     # green / grey
 
+        # Get prevalence tier for this disease
+        prevalence_tier = _DISEASE_PREVALENCE.get(disease["name"], "unknown")
+
         suspected.append({
             "name": disease["name"],
             "name_ja": disease["name_ja"],
             "likelihood": likelihood,
             "match_percent": match_percent,
             "color_class": color_class,
+            "prevalence_tier": prevalence_tier,  # 罹患率カテゴリ: very_common, common, uncommon, rare, unknown
             "description": _disease_detail_text(
                 disease,
                 "description",
@@ -7637,9 +7641,17 @@ def analyze_symptoms(
             "_match_ratio": coverage,
         })
 
-    # Sort: match_percent desc (primary), then match_count desc (tiebreak)
-    suspected.sort(key=lambda d: (d["match_percent"], d["match_count"]),
-                   reverse=True)
+    # Sort: Prevalence tier (very_common → common → uncommon → rare → unknown),
+    #       then match_percent desc, then match_count desc
+    # This creates a "stepwise differential diagnosis" aligned with clinical practice
+    prevalence_priority = {"very_common": 0, "common": 1, "uncommon": 2, "rare": 3, "unknown": 4}
+    suspected.sort(
+        key=lambda d: (
+            prevalence_priority.get(d["prevalence_tier"], 5),  # Primary: prevalence (ascending)
+            -d["match_percent"],                                # Secondary: match_percent (descending)
+            -d["match_count"]                                   # Tertiary: match_count (descending)
+        )
+    )
 
     # -- 2. Determine overall severity --------------------------------------
     severity = _compute_severity(suspected)
@@ -7670,8 +7682,18 @@ def analyze_symptoms(
         if sid in _SYMPTOM_NAMES
     }
 
+    # Group diseases by prevalence tier for stepwise differential diagnosis
+    # Phase 1: Common diseases (very_common + common)
+    # Phase 2: Rare diseases (uncommon + rare + unknown)
+    phase1_diseases = [d for d in suspected if d["prevalence_tier"] in ("very_common", "common")]
+    phase2_diseases = [d for d in suspected if d["prevalence_tier"] in ("uncommon", "rare", "unknown")]
+
     return {
-        "suspected_diseases": suspected,
+        "suspected_diseases": suspected,  # All diseases (sorted by prevalence)
+        "suspected_diseases_by_phase": {  # Grouped for stepwise presentation
+            "phase_1_common": phase1_diseases,
+            "phase_2_rare": phase2_diseases,
+        },
         "recommended_tests": recommended_tests,
         "severity": severity,
         "general_advice": advice_pair["en"],

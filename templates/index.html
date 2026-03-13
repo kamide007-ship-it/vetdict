@@ -1180,6 +1180,7 @@ function doAnalyze(){
 function renderResults(data){
   const area=document.getElementById("resultsArea");
   const diseases=data.suspected_diseases||data.possible_conditions||[];
+  const diseasesByPhase=data.suspected_diseases_by_phase||{};
   const tests=data.recommended_tests||[];
   const severity=data.severity||"low";
   const adviceJa=data.general_advice_ja||"";
@@ -1195,7 +1196,28 @@ function renderResults(data){
   }
   const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
   if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
-  diseases.forEach(d=>{
+
+  // Stepwise differential diagnosis: Phase 1 (common) vs Phase 2 (rare)
+  const phase1=diseasesByPhase.phase_1_common||[];
+  const phase2=diseasesByPhase.phase_2_rare||[];
+
+  // Render Phase 1 (Common/Very Common)
+  if(phase1.length>0){
+    html+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--green);padding:8px 12px;background:rgba(34,168,79,.08);border-left:4px solid var(--green);border-radius:var(--radius);margin-bottom:10px">🎯 ${currentLang==="ja"?"最初に検討すべき疾患（よくある疾患）":"Primary Differential (Common diseases)"}</div>`;
+    phase1.forEach(d=>{html+=renderDiseaseCard(d,data);});
+    html+=`</div>`;
+  }
+
+  // Render Phase 2 (Uncommon/Rare)
+  if(phase2.length>0){
+    html+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--orange);padding:8px 12px;background:rgba(240,133,14,.08);border-left:4px solid var(--orange);border-radius:var(--radius);margin-bottom:10px">🔍 ${currentLang==="ja"?"さらに検討すべき疾患（稀な疾患）":"Secondary Differential (Rare/Uncommon diseases)"}</div>`;
+    phase2.forEach(d=>{html+=renderDiseaseCard(d,data);});
+    html+=`</div>`;
+  }
+
+  // Fallback: render all diseases if no phase info
+  if(phase1.length===0&&phase2.length===0){
+    diseases.forEach(d=>{
     const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
     const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
     const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
@@ -1210,14 +1232,37 @@ function renderResults(data){
     const treatment=pick(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
     const prognosis=pick(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
     const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return s;return currentLang==="ja"?`${n.ja} <span style="color:var(--gray-500);font-size:.78rem">${n.en}</span>`:`${n.en} <span style="color:var(--gray-500);font-size:.78rem">${n.ja}</span>`;}).join("&ensp;|&ensp;");
-    const completeness=Number(d.completeness_score||100);
-    const missing=(d.missing_fields||[]);
-    const qualityClass=completeness>=90?"quality-ok":"quality-warn";
-    html+=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span></div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
-  });
+      html+=renderDiseaseCard(d,data);
+    });
+  }
+
   if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>`<li>\u{1F52C} ${x}</li>`).join("")}</ul></div>`;}
   area.innerHTML=html;
 }
+
+function renderDiseaseCard(d,data){
+  const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
+  const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
+  const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
+  const diseaseName=nameJa||name||"Disease";
+  const matchSymptoms=d.matching_symptoms||[],recTests=d.recommended_tests||[];
+  const lf=currentLang==="ja"?"_ja":"";const lf2=currentLang==="ja"?"":"_ja";
+  const pick=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
+  const symNames=data.symptom_names||{};
+  const patho=pick(d.pathophysiology_ja,d.pathophysiology)||buildFieldFallback(t("dtPathophysiology"),diseaseName);
+  const causes=pick(d.causes_ja,d.causes)||buildFieldFallback(t("dtCauses"),diseaseName);
+  const prevention=pick(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
+  const treatment=pick(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
+  const prognosis=pick(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
+  const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return s;return currentLang==="ja"?`${n.ja} <span style="color:var(--gray-500);font-size:.78rem">${n.en}</span>`:`${n.en} <span style="color:var(--gray-500);font-size:.78rem">${n.ja}</span>`;}).join("&ensp;|&ensp;");
+  const completeness=Number(d.completeness_score||100);
+  const missing=(d.missing_fields||[]);
+  const qualityClass=completeness>=90?"quality-ok":"quality-warn";
+  const prevalenceTier=d.prevalence_tier||"unknown";
+  const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
+
+  let html=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span>${prevalenceLabel?`<span style="font-size:.7rem;color:var(--gray-500);margin-left:8px;padding:2px 6px;background:var(--gray-100);border-radius:6px">${prevalenceLabel}</span>`:""}  </div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
+  return html;
 
 function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
