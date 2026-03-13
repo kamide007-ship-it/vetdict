@@ -17,6 +17,16 @@ try:
 except ImportError:
     GENDER_RISK_MULTIPLIERS = {}
 
+# Import extended symptom combinations
+try:
+    from api.data.symptom_combinations import (
+        EXTENDED_SYMPTOM_PAIR_BOOST,
+        SYMPTOM_TRIPLE_BOOST,
+    )
+except ImportError:
+    EXTENDED_SYMPTOM_PAIR_BOOST = {}
+    SYMPTOM_TRIPLE_BOOST = {}
+
 # Default advice messages for various severity levels. These are used when
 # species-specific modules do not supply their own advice dictionary.
 ADVICE: Dict[str, Dict[str, str]] = {
@@ -1266,13 +1276,25 @@ def analyze_symptoms_generic(
             gender_risk_applied = True
 
     # Pre-compute symptom pair boosts for current symptom set
+    # Combine original SYMPTOM_PAIR_BOOST with extended patterns
     pair_boosts: Dict[str, float] = {}
-    for pair, disease_boosts in SYMPTOM_PAIR_BOOST.items():
+    all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
+    for pair, disease_boosts in all_pair_boosts.items():
         if pair.issubset(symptom_set):
             for disease_name, multiplier in disease_boosts.items():
                 # Keep highest boost if multiple pairs match same disease
                 if disease_name not in pair_boosts or multiplier > pair_boosts[disease_name]:
                     pair_boosts[disease_name] = multiplier
+
+    # Pre-compute triple (3-symptom) boosts for current symptom set
+    triple_boosts: Dict[str, float] = {}
+    if len(symptom_set) >= 3 and SYMPTOM_TRIPLE_BOOST:
+        for triple, disease_boosts in SYMPTOM_TRIPLE_BOOST.items():
+            if triple.issubset(symptom_set):
+                for disease_name, multiplier in disease_boosts.items():
+                    # Keep highest boost if multiple triples match same disease
+                    if disease_name not in triple_boosts or multiplier > triple_boosts[disease_name]:
+                        triple_boosts[disease_name] = multiplier
 
     # Pre-compute lab value boosts
     lab_boosts: Dict[str, float] = {}
@@ -1351,12 +1373,15 @@ def analyze_symptoms_generic(
         # Apply symptom pair boost (上限を制限、部分一致)
         pair_multiplier = min(_fuzzy_boost_lookup(disease["name"], pair_boosts), 1.5)
 
+        # Apply symptom triple boost (上限を制限、部分一致)
+        triple_multiplier = min(_fuzzy_boost_lookup(disease["name"], triple_boosts), 2.0)
+
         # Apply lab value boost (上限を制限、部分一致)
         lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
 
         # 複合ブースト倍率の上限を設定（過度なインフレ防止）
-        combined_boost = onset_multiplier * age_multiplier * breed_multiplier * gender_multiplier * pair_multiplier * lab_multiplier
-        combined_boost = min(combined_boost, 2.5)  # 最大2.5倍
+        combined_boost = onset_multiplier * age_multiplier * breed_multiplier * gender_multiplier * pair_multiplier * triple_multiplier * lab_multiplier
+        combined_boost = min(combined_boost, 3.0)  # 最大3.0倍（トリプルで強いブースト可能）
         if combined_boost < 1.0:
             # ペナルティの下限: 0.6（40%以上は削らない）
             combined_boost = max(combined_boost, 0.6)

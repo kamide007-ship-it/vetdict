@@ -2449,3 +2449,57 @@ def record_diagnostic_feedback():
     except Exception as e:
         logger.error(f"Error recording diagnostic feedback: {e}")
         return jsonify({"error": "internal_error"}), 500
+
+
+# =============================================================================
+# API: Next Diagnostic Questions (Phase 3)
+# =============================================================================
+
+@diagnostic_bp.route("/next-questions", methods=["POST"])
+def get_next_diagnostic_questions():
+    """
+    Generate next diagnostic questions based on current disease candidates.
+
+    Request JSON:
+    {
+        "suspected_diseases": [...],  # Current suspected diseases
+        "symptoms": [...],            # Current symptoms
+        "question_limit": 3           # Max questions to return (optional)
+    }
+
+    Returns:
+    {
+        "next_questions": [...],
+        "question_count": int,
+        "current_candidates": int,
+        "estimated_next_questions": int,
+        "recommendation_ja": str,
+        "recommendation_en": str
+    }
+    """
+    from api.ai.diagnostic_questionnaire import build_next_question_response
+
+    try:
+        data = request.get_json() or {}
+        suspected_diseases = data.get("suspected_diseases", [])
+        symptoms = data.get("symptoms", [])
+        question_limit = data.get("question_limit", 3)
+
+        if not suspected_diseases:
+            return jsonify({"error": "suspected_diseases list required"}), 400
+
+        if question_limit > 5:
+            question_limit = 5  # Limit to 5 max questions
+
+        # Generate next questions
+        response = build_next_question_response(
+            suspected_diseases,
+            symptoms,
+            question_limit=question_limit,
+        )
+
+        return jsonify(response), 200
+
+    except Exception as e:
+        logger.error(f"Error generating next questions: {e}", exc_info=True)
+        return jsonify({"error": "failed_to_generate_questions"}), 500
