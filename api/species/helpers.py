@@ -11,6 +11,12 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Set, Tuple
 
+# Import gender risk data
+try:
+    from api.data.gender_prevalence import GENDER_RISK_MULTIPLIERS
+except ImportError:
+    GENDER_RISK_MULTIPLIERS = {}
+
 # Default advice messages for various severity levels. These are used when
 # species-specific modules do not supply their own advice dictionary.
 ADVICE: Dict[str, Dict[str, str]] = {
@@ -1181,6 +1187,7 @@ def analyze_symptoms_generic(
     species: str | None = None,
     lab_values: Dict[str, float] | None = None,
     prevalence_map: Dict[str, str] | None = None,  # New: prevalence tier map
+    gender: str | None = None,  # New: "male" | "female" | None
 ) -> Dict[str, Any]:
     """Generic differential diagnosis engine.
 
@@ -1245,6 +1252,18 @@ def analyze_symptoms_generic(
                 if breed_risk:
                     breed_risk_applied = True
                 break
+
+    # Look up gender risk data
+    gender_risk: Dict[str, float] = {}
+    gender_risk_applied = False
+    if gender and species and GENDER_RISK_MULTIPLIERS:
+        species_genders = GENDER_RISK_MULTIPLIERS.get(species, {})
+        for disease_name, gender_mults in species_genders.items():
+            if gender in gender_mults:
+                mult = gender_mults[gender]
+                gender_risk[disease_name] = mult
+        if gender_risk:
+            gender_risk_applied = True
 
     # Pre-compute symptom pair boosts for current symptom set
     pair_boosts: Dict[str, float] = {}
@@ -1323,6 +1342,12 @@ def analyze_symptoms_generic(
         # Apply breed risk multiplier (上限を制限、部分一致)
         breed_multiplier = min(_fuzzy_boost_lookup(disease["name"], breed_risk), 1.8)
 
+        # Apply gender risk multiplier (上限を制限、部分一致)
+        gender_multiplier = min(_fuzzy_boost_lookup(disease["name"], gender_risk), 1.8)
+        # If gender multiplier is 0, disease doesn't apply to this gender
+        if gender_multiplier == 0.0:
+            continue  # Skip this disease entirely
+
         # Apply symptom pair boost (上限を制限、部分一致)
         pair_multiplier = min(_fuzzy_boost_lookup(disease["name"], pair_boosts), 1.5)
 
@@ -1330,7 +1355,7 @@ def analyze_symptoms_generic(
         lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
 
         # 複合ブースト倍率の上限を設定（過度なインフレ防止）
-        combined_boost = onset_multiplier * age_multiplier * breed_multiplier * pair_multiplier * lab_multiplier
+        combined_boost = onset_multiplier * age_multiplier * breed_multiplier * gender_multiplier * pair_multiplier * lab_multiplier
         combined_boost = min(combined_boost, 2.5)  # 最大2.5倍
         if combined_boost < 1.0:
             # ペナルティの下限: 0.6（40%以上は削らない）
@@ -1449,6 +1474,8 @@ def analyze_symptoms_generic(
         "breed_genetic_tests": [],
         "breed_risk_applied": breed_risk_applied,
         "breed": breed,
+        "gender_risk_applied": gender_risk_applied,
+        "gender": gender,
         "onset_applied": onset is not None,
         "onset": onset,
         "age_applied": age_years is not None,

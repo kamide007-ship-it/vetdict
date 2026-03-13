@@ -1692,4 +1692,4 @@ def analyze_symptoms(
     Returns:
         辞書形式の分析結果
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("exotic_other", {}))
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("exotic_other", {}))
