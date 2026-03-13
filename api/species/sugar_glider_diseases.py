@@ -14,6 +14,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from .helpers import ADVICE, analyze_symptoms_generic
+from . import prevalence_data
 
 # ---------------------------------------------------------------------------
 # Disease database
@@ -1464,4 +1465,4 @@ def analyze_symptoms(
     lab_values: dict | None = None,
 ) -> Dict[str, Any]:
     """Run differential diagnosis for sugar gliders based on reported symptoms."""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values)
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("sugar_glider", {}))
