@@ -70,3 +70,12 @@ def test_species_symptoms_endpoint_merges_horse_localized_names():
     assert symptoms['limb_bucked_shin']['name_ja'] == 'すねの前面が腫れている（バックドシン）'
     assert symptoms['limb_bucked_shin']['name_en'] == 'Bucked Shin'
     assert symptoms['limb_bucked_shin']['category'] == 'limb'
+
+
+def test_index_lab_bun_label_targets_bun_input():
+    client = app.test_client()
+    resp = client.get('/')
+    assert resp.status_code == 200
+    html = resp.get_data(as_text=True)
+    assert '<label for="lab-bun">BUN <span class="lab-unit">mg/dL</span></label>' in html
+    assert 'id="lab-bun"' in html
