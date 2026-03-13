@@ -867,7 +867,9 @@ function applyLanguage(){
 }
 
 function setupLanguageToggle(){
-  document.querySelector(".lang-toggle").addEventListener("click",e=>{
+  const toggle=document.querySelector(".lang-toggle");
+  if(!toggle){console.warn(".lang-toggle element not found");return;}
+  toggle.addEventListener("click",e=>{
     const btn=e.target.closest("[data-lang]");
     if(!btn||btn.dataset.lang===currentLang)return;
     currentLang=btn.dataset.lang;
@@ -885,19 +887,31 @@ let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[]
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 
 document.addEventListener("DOMContentLoaded",()=>{
-  loadSpeciesStats();setupNavigation();setupChat();setupHamburger();setupLanguageToggle();
-  document.getElementById("symptomSearch").addEventListener("input",()=>renderSymptomList(symptomData));
-  document.getElementById("analyzeBtn").addEventListener("click",doAnalyze);
-  document.getElementById("diseaseSearch").addEventListener("input",renderDiseaseDb);
-  // Restore view from URL hash
-  const hash=location.hash.replace("#","");
-  if(hash&&["checker","database","chat","drugs"].includes(hash))switchView(hash);
+  try{
+    loadSpeciesStats();
+    setupNavigation();
+    setupChat();
+    setupHamburger();
+    setupLanguageToggle();
+    const symptomSearch=document.getElementById("symptomSearch");
+    const analyzeBtn=document.getElementById("analyzeBtn");
+    const diseaseSearch=document.getElementById("diseaseSearch");
+    if(symptomSearch)symptomSearch.addEventListener("input",()=>renderSymptomList(symptomData));
+    if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
+    if(diseaseSearch)diseaseSearch.addEventListener("input",renderDiseaseDb);
+    // Restore view from URL hash
+    const hash=location.hash.replace("#","");
+    if(hash&&["checker","database","chat","drugs"].includes(hash))switchView(hash);
+  }catch(e){
+    console.error("Error in DOMContentLoaded:",e);
+  }
 });
 
 /* --- Hamburger menu --- */
 function setupHamburger(){
   const btn=document.getElementById("hamburgerBtn");
   const nav=document.getElementById("mainNav");
+  if(!btn||!nav){console.warn("hamburgerBtn or mainNav not found");return;}
   btn.addEventListener("click",()=>{
     const open=nav.classList.toggle("open");
     btn.setAttribute("aria-expanded",open);
@@ -982,6 +996,7 @@ function loadSpeciesStats(){
 
 function renderSpeciesGrid(){
   const grid=document.getElementById("speciesGrid");
+  if(!grid){console.warn("speciesGrid element not found");return;}
   grid.innerHTML=SPECIES.map(sp=>{
     const primary=currentLang==="ja"?sp.name:sp.nameEn;
     const secondary=currentLang==="ja"?sp.nameEn:sp.name;
@@ -1013,7 +1028,8 @@ function selectSpecies(id){
   });
   renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
   resetSpeciesChat(id);
-  document.getElementById("resultsArea").innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>`;
+  const resultsArea=document.getElementById("resultsArea");
+  if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>`;
 }
 
 function resetSpeciesChat(species){
@@ -1063,8 +1079,10 @@ function loadSymptoms(species){
 }
 
 function renderSymptomList(symptoms){
-  const search=(document.getElementById("symptomSearch").value||"").toLowerCase();
+  const symptomSearch=document.getElementById("symptomSearch");
   const list=document.getElementById("symptomList");
+  if(!list){console.warn("symptomList element not found");return;}
+  const search=(symptomSearch?.value||"").toLowerCase();
   const categories={};
   symptoms.forEach(s=>{const cat=s.category||"other";if(!categories[cat])categories[cat]=[];categories[cat].push(s);});
   const catLabels=t("catLabels");
@@ -1267,13 +1285,16 @@ function renderDiseaseCard(d,data){
 function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
   const list=document.getElementById("diseaseDbList");
+  if(!list){console.warn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
   fetch(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
-  .catch(()=>{if(requestId===diseaseRequestId)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
+  .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
 function renderAzNav(){
-  document.getElementById("azNav").innerHTML=`<button class="active" onclick="filterDiseaseDb('')">ALL</button>`+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l=>`<button onclick="filterDiseaseDb('${l}')">${l}</button>`).join("");
+  const azNav=document.getElementById("azNav");
+  if(!azNav){console.warn("azNav element not found");return;}
+  azNav.innerHTML=`<button class="active" onclick="filterDiseaseDb('')">ALL</button>`+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l=>`<button onclick="filterDiseaseDb('${l}')">${l}</button>`).join("");
 }
 
 function filterDiseaseDb(letter){
@@ -1329,6 +1350,7 @@ function switchView(view){
 
 function setupNavigation(){
   const nav=document.getElementById("mainNav");
+  if(!nav){console.warn("mainNav element not found");return;}
   nav.addEventListener("click",e=>{
     const tab=e.target.closest("[role=tab]");
     if(tab)switchView(tab.dataset.view);
@@ -1351,10 +1373,14 @@ function setupNavigation(){
 }
 
 function setupChat(){
-  document.getElementById("chatSend").addEventListener("click",()=>sendChatMessage());
-  document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChatMessage();});
-  document.getElementById("landingChatSend").addEventListener("click",()=>sendLandingChat());
-  document.getElementById("landingChatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendLandingChat();});
+  const chatSend=document.getElementById("chatSend");
+  const chatInput=document.getElementById("chatInput");
+  const landingChatSend=document.getElementById("landingChatSend");
+  const landingChatInput=document.getElementById("landingChatInput");
+  if(chatSend)chatSend.addEventListener("click",()=>sendChatMessage());
+  if(chatInput)chatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendChatMessage();});
+  if(landingChatSend)landingChatSend.addEventListener("click",()=>sendLandingChat());
+  if(landingChatInput)landingChatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendLandingChat();});
 }
 function stripGuidanceFromResponse(response,guidance){
   if(!response||!guidance)return response||"";
