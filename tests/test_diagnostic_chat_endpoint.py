@@ -33,3 +33,7 @@ def test_chat_species_guidance_differs_by_species():
     assert "猫" in cat_payload["species_guidance"]
     assert "犬" in dog_payload["species_guidance"]
 
+
+def test_multi_disease_endpoint_is_registered():
+    routes = {rule.rule for rule in app.url_map.iter_rules()}
+    assert "/api/diagnostic-chat/multi-disease/analyze" in routes

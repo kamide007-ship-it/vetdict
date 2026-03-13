@@ -4,12 +4,14 @@ Maintains conversation state across multiple question-answer rounds,
 enabling adaptive questioning and progressive disease narrowing.
 """
 
-from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, List, Optional, Set
-from datetime import datetime
 import json
 import logging
+import os
 import uuid
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -160,10 +162,7 @@ class DiagnosticSession:
             return False
 
         # Ask at most 10 questions
-        if self.round_number >= 10:
-            return False
-
-        return True
+        return self.round_number < 10
 
     def get_diagnosis_summary(self) -> Dict[str, Any]:
         """
@@ -220,10 +219,14 @@ class DiagnosticSession:
             "round_number": self.round_number,
             "asked_questions": self.asked_questions,
             "answers": self.answers,
+            "answer_timestamps": self.answer_timestamps,
             "breed": self.breed,
             "age_years": self.age_years,
             "gender": self.gender,
             "vaccination_status": self.vaccination_status,
+            "confidence_threshold": self.confidence_threshold,
+            "initial_candidates": self.initial_candidates,
+            "current_candidates": self.current_candidates,
             "current_candidates_count": len(self.current_candidates),
             "diagnosis_summary": self.get_diagnosis_summary(),
         }
@@ -237,8 +240,7 @@ class DiagnosticSession:
         """
         Deserialize session from JSON.
 
-        Note: full reconstruction requires candidate data from API.
-        This creates a minimal session for display purposes.
+        Restores persisted candidates and answer history when available.
         """
         try:
             data = json.loads(json_str)
@@ -259,6 +261,10 @@ class DiagnosticSession:
             session.round_number = data.get("round_number", 0)
             session.asked_questions = data.get("asked_questions", [])
             session.answers = data.get("answers", {})
+            session.answer_timestamps = data.get("answer_timestamps", {})
+            session.confidence_threshold = data.get("confidence_threshold", 0.7)
+            session.initial_candidates = data.get("initial_candidates", [])
+            session.current_candidates = data.get("current_candidates", [])
             return session
         except Exception as e:
             logger.error(f"Failed to deserialize diagnostic session: {e}")
@@ -270,6 +276,74 @@ class DiagnosticSessionManager:
 
     # In-memory session cache (would use Redis in production)
     _sessions: Dict[str, DiagnosticSession] = {}
+    _storage_dir: Path = Path(
+        os.getenv(
+            "VETDICT_DIAGNOSTIC_SESSION_DIR",
+            str(Path(__file__).resolve().parents[2] / ".diagnostic_sessions"),
+        )
+    )
+
+    @classmethod
+    def _validate_session_id(cls, session_id: str) -> str:
+        """Validate that session IDs are UUIDs."""
+        return str(uuid.UUID(str(session_id).strip()))
+
+    @classmethod
+    def _get_session_file_path(cls, session_id: str) -> Path:
+        """Build a validated, storage-local file path for a session."""
+        validated_session_id = cls._validate_session_id(session_id)
+        storage_dir = cls._storage_dir.resolve()
+        file_path = (storage_dir / f"{validated_session_id}.json").resolve()
+
+        if not file_path.is_relative_to(storage_dir):
+            raise ValueError("Session file path escapes storage directory")
+
+        return file_path
+
+    @classmethod
+    def _save_session(cls, session: DiagnosticSession) -> None:
+        """Persist a session to disk."""
+        file_path = cls._get_session_file_path(session.session_id)
+        directories_to_secure = []
+        current_dir = file_path.parent
+        while not current_dir.exists():
+            directories_to_secure.append(current_dir)
+            current_dir = current_dir.parent
+
+        for directory in reversed(directories_to_secure):
+            directory.mkdir(mode=0o700, exist_ok=True)
+
+        for directory in directories_to_secure or [file_path.parent]:
+            try:
+                directory.chmod(0o700)
+            except OSError:
+                logger.warning("Unable to set diagnostic session directory permissions", exc_info=True)
+
+        temp_path = file_path.with_suffix(f"{file_path.suffix}.tmp")
+        try:
+            temp_fd = os.open(temp_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+            with os.fdopen(temp_fd, "w", encoding="utf-8") as temp_file:
+                temp_file.write(session.to_json())
+            temp_path.replace(file_path)
+        finally:
+            if temp_path.exists():
+                temp_path.unlink()
+
+    @classmethod
+    def _load_session(cls, session_id: str) -> Optional[DiagnosticSession]:
+        """Load a session from disk."""
+        try:
+            file_path = cls._get_session_file_path(session_id)
+        except ValueError:
+            return None
+
+        if not file_path.exists():
+            return None
+
+        session = DiagnosticSession.from_json(file_path.read_text(encoding="utf-8"))
+        if session is not None:
+            cls._sessions[session.session_id] = session
+        return session
 
     @classmethod
     def create_session(
@@ -285,12 +359,22 @@ class DiagnosticSessionManager:
             **kwargs,
         )
         cls._sessions[session.session_id] = session
+        cls._save_session(session)
         return session
 
     @classmethod
     def get_session(cls, session_id: str) -> Optional[DiagnosticSession]:
         """Retrieve a session by ID."""
-        return cls._sessions.get(session_id)
+        try:
+            validated_session_id = cls._validate_session_id(session_id)
+        except ValueError:
+            return None
+
+        session = cls._sessions.get(validated_session_id)
+        if session:
+            return session
+
+        return cls._load_session(validated_session_id)
 
     @classmethod
     def update_session(
@@ -308,13 +392,23 @@ class DiagnosticSessionManager:
         session.add_question_answer(question_id, answer)
         if updated_candidates:
             session.update_candidates(updated_candidates)
+        cls._save_session(session)
 
         return session
 
     @classmethod
     def clear_session(cls, session_id: str) -> None:
         """Delete a session."""
-        cls._sessions.pop(session_id, None)
+        try:
+            validated_session_id = cls._validate_session_id(session_id)
+        except ValueError:
+            return
+
+        cls._sessions.pop(validated_session_id, None)
+
+        file_path = cls._get_session_file_path(validated_session_id)
+        if file_path.exists():
+            file_path.unlink()
 
     @classmethod
     def list_sessions(cls) -> List[str]:
