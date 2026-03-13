@@ -404,6 +404,33 @@ a:hover{text-decoration:underline}
 
 <div class="main-content">
   <div id="viewChecker" role="tabpanel" aria-labelledby="tab-checker">
+    <div class="diagnostic-steps" style="margin-bottom:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:8px">
+      <div class="step-indicator step-1 active" style="padding:10px;background:var(--blue-100);border:2px solid var(--blue-400);border-radius:6px;text-align:center;font-size:.75rem;font-weight:600;color:var(--navy)">
+        <div style="font-size:1.2rem;margin-bottom:4px">🎯</div>
+        <div>Step 1</div>
+        <div style="font-size:.7rem;color:var(--gray-600)">主訴</div>
+      </div>
+      <div class="step-indicator step-2" style="padding:10px;background:var(--gray-100);border:2px solid var(--gray-300);border-radius:6px;text-align:center;font-size:.75rem;font-weight:600;color:var(--gray-700)">
+        <div style="font-size:1.2rem;margin-bottom:4px">💉</div>
+        <div>Step 2</div>
+        <div style="font-size:.7rem;color:var(--gray-600)">ワクチン</div>
+      </div>
+      <div class="step-indicator step-3" style="padding:10px;background:var(--gray-100);border:2px solid var(--gray-300);border-radius:6px;text-align:center;font-size:.75rem;font-weight:600;color:var(--gray-700)">
+        <div style="font-size:1.2rem;margin-bottom:4px">📋</div>
+        <div>Step 3</div>
+        <div style="font-size:.7rem;color:var(--gray-600)">症状</div>
+      </div>
+      <div class="step-indicator step-4" style="padding:10px;background:var(--gray-100);border:2px solid var(--gray-300);border-radius:6px;text-align:center;font-size:.75rem;font-weight:600;color:var(--gray-700)">
+        <div style="font-size:1.2rem;margin-bottom:4px">🧪</div>
+        <div>Step 4</div>
+        <div style="font-size:.7rem;color:var(--gray-600)">検査値</div>
+      </div>
+      <div class="step-indicator step-5" style="padding:10px;background:var(--gray-100);border:2px solid var(--gray-300);border-radius:6px;text-align:center;font-size:.75rem;font-weight:600;color:var(--gray-700)">
+        <div style="font-size:1.2rem;margin-bottom:4px">🔍</div>
+        <div>Step 5</div>
+        <div style="font-size:.7rem;color:var(--gray-600)">検索</div>
+      </div>
+    </div>
     <div class="panels">
       <div>
         <div class="card">
@@ -962,6 +989,7 @@ function selectChiefComplaint(keyword){
   symptoms.forEach(sym=>selectedSymptoms.add(sym));
   renderSelectedSymptoms();
   renderSymptomList(symptomData);
+  updateAllDiagnosticSteps();
 }
 function clearChiefComplaint(){
   const input=document.getElementById("chiefComplaintInput");
@@ -1018,6 +1046,7 @@ function updateVaccineDisplay(){
   const vaccines=vaccinesCache[currentSpecies]||{};
   if(selectedVaccines.size===0){
     badge.innerHTML="";
+    updateDiagnosticStep(2,false);
     return;
   }
   const tags=Array.from(selectedVaccines).map(vid=>{
@@ -1025,6 +1054,30 @@ function updateVaccineDisplay(){
     return`<span style="display:inline-block;padding:4px 8px;background:var(--green-200);border-radius:4px;margin-right:4px;margin-bottom:4px;font-size:.75rem">${v.ja||vid}<button style="margin-left:4px;background:none;border:none;cursor:pointer;color:var(--green-700)" onclick="toggleVaccine('${vid}')">✕</button></span>`;
   }).join("");
   badge.innerHTML=tags;
+  updateDiagnosticStep(2,true);
+}
+
+/* --- Diagnostic Flow Steps --- */
+function updateDiagnosticStep(stepNum,completed){
+  const step=document.querySelector(`.step-${stepNum}`);
+  if(!step)return;
+  if(completed){
+    step.style.background="var(--green-100)";
+    step.style.borderColor="var(--green-400)";
+    step.style.color="var(--green-700)";
+  }else{
+    step.style.background="var(--gray-100)";
+    step.style.borderColor="var(--gray-300)";
+    step.style.color="var(--gray-700)";
+  }
+}
+
+function updateAllDiagnosticSteps(){
+  updateDiagnosticStep(1,selectedSymptoms.size>0);
+  updateDiagnosticStep(2,selectedVaccines.size>0);
+  updateDiagnosticStep(3,selectedSymptoms.size>0);
+  const labVals=collectLabValues();
+  updateDiagnosticStep(4,labVals&&Object.keys(labVals).length>0);
 }
 
 /* --- Hamburger menu --- */
@@ -1243,7 +1296,7 @@ function renderSymptomList(symptoms){
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
 }
 
-function toggleSymptom(id){if(selectedSymptoms.has(id))selectedSymptoms.delete(id);else selectedSymptoms.add(id);renderSelectedSymptoms();renderSymptomList(symptomData);}
+function toggleSymptom(id){if(selectedSymptoms.has(id))selectedSymptoms.delete(id);else selectedSymptoms.add(id);renderSelectedSymptoms();renderSymptomList(symptomData);updateAllDiagnosticSteps();}
 
 function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
@@ -1329,6 +1382,7 @@ function renderCitationMap(item){
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
+  updateDiagnosticStep(5,true);
   const payload={species:currentSpecies,symptoms:[...selectedSymptoms]};
   if(currentBreed)payload.breed=currentBreed;
   if(selectedVaccines.size>0)payload.vaccines=[...selectedVaccines];
