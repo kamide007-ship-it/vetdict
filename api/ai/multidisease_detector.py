@@ -219,6 +219,9 @@ class MultiDiseaseDetector:
         unique_b = list(set(symptoms_b) - shared_set)
 
         # Calculate comorbidity score
+        total_unique_symptoms = len(set(symptoms_a) | set(symptoms_b))
+        symptom_overlap_ratio = len(shared_set) / (total_unique_symptoms + 1) if total_unique_symptoms > 0 else 0.0
+
         combined_conf, breakdown = ComorbidityScorer.score_disease_combination(
             disease_a,
             disease_b,
@@ -227,7 +230,7 @@ class MultiDiseaseDetector:
             age_years,
             severity,
             breed,
-            symptom_overlap_ratio=len(shared_set) / (len(symptoms_a | symptoms_b) + 1),
+            symptom_overlap_ratio=symptom_overlap_ratio,
         )
 
         # Get interaction effect
