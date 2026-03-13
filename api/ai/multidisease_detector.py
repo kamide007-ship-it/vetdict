@@ -13,6 +13,10 @@ logger = logging.getLogger(__name__)
 
 from api.ai.disease_interactions import DiseaseInteractionMatrix
 from api.ai.comorbidity_scorer import ComorbidityScorer
+from api.ai.symptom_context_engine import (
+    SymptomContextualizer,
+    AmbiguitySolver,
+)
 
 
 @dataclass
@@ -33,6 +37,8 @@ class DiseaseCombination:
     confidence_sources: List[str] = field(
         default_factory=list
     )  # ["symptom_overlap", "comorbidity_db", "age_factor"]
+    ambiguity_adjusted: bool = False  # Whether ambiguity analysis was applied
+    ambiguity_adjustment_factor: float = 1.0  # Confidence adjustment from ambiguity analysis
 
     def to_dict(self):
         return {
@@ -378,6 +384,111 @@ class MultiDiseaseDetector:
         # TODO: Implement Bayesian symptom allocation
         # For now, return empty allocation
         return {disease: [] for disease in diseases}
+
+    @classmethod
+    def analyze_symptom_ambiguity(
+        cls,
+        detected_symptoms: List[str],
+        suspected_diseases: List[Dict[str, Any]],
+        disease_database: List[Dict[str, Any]],
+    ) -> Dict[str, Any]:
+        """
+        Analyze symptom ambiguities in multi-disease context.
+
+        Args:
+            detected_symptoms: List of detected symptom IDs
+            suspected_diseases: Current disease candidates
+            disease_database: Complete disease database
+
+        Returns:
+            {
+                "ambiguity_reports": [AmbiguityReport, ...],
+                "adjustment_factor": float,
+                "high_ambiguity_symptoms": [symptom_ids],
+                "recommendations": {symptom_id: recommendation}
+            }
+        """
+        # Get disease names from candidates
+        disease_names = [
+            d.get("name", d.get("name_ja", ""))
+            for d in suspected_diseases[:5]
+        ]
+
+        # Analyze symptom set
+        ambiguity_reports = AmbiguitySolver.analyze_symptom_set(
+            symptom_ids=detected_symptoms,
+            symptom_names=None,
+            disease_candidates=suspected_diseases,
+            disease_database=disease_database,
+        )
+
+        # Calculate overall adjustment factor
+        if ambiguity_reports:
+            adjustment_factors = [
+                report.confidence_adjustment_factor
+                for report in ambiguity_reports
+            ]
+            overall_factor = (
+                sum(adjustment_factors) / len(adjustment_factors)
+            )
+        else:
+            overall_factor = 1.0
+
+        # Identify high-ambiguity symptoms
+        high_ambiguity = [
+            report.symptom_id
+            for report in ambiguity_reports
+            if report.recommendation == "ask_clarification"
+        ]
+
+        # Build recommendations map
+        recommendations = {
+            report.symptom_id: report.recommendation
+            for report in ambiguity_reports
+        }
+
+        return {
+            "ambiguity_reports": ambiguity_reports,
+            "adjustment_factor": overall_factor,
+            "high_ambiguity_symptoms": high_ambiguity,
+            "recommendations": recommendations,
+        }
+
+    @classmethod
+    def apply_ambiguity_adjustment(
+        cls,
+        combination: DiseaseCombination,
+        adjustment_factor: float,
+    ) -> DiseaseCombination:
+        """
+        Apply ambiguity-based confidence adjustment to a combination.
+
+        Args:
+            combination: DiseaseCombination to adjust
+            adjustment_factor: Adjustment multiplier from ambiguity analysis
+
+        Returns:
+            Modified DiseaseCombination with adjusted confidence
+        """
+        adjusted_combination = DiseaseCombination(
+            diseases=combination.diseases,
+            combined_confidence=combination.combined_confidence * adjustment_factor,
+            component_confidences={
+                d: c * adjustment_factor
+                for d, c in combination.component_confidences.items()
+            },
+            interaction_effect=combination.interaction_effect,
+            shared_symptom_count=combination.shared_symptom_count,
+            unique_symptoms_per_disease=combination.unique_symptoms_per_disease,
+            explanation_ja=combination.explanation_ja,
+            explanation_en=combination.explanation_en,
+            mechanism=combination.mechanism,
+            confidence_sources=combination.confidence_sources + ["ambiguity_analysis"],
+            ambiguity_adjusted=True,
+            ambiguity_adjustment_factor=adjustment_factor,
+        )
+
+        return adjusted_combination
 
 
 class MultiDiseaseSession:
