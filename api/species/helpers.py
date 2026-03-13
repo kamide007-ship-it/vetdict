@@ -1180,6 +1180,7 @@ def analyze_symptoms_generic(
     breed: str | None = None,
     species: str | None = None,
     lab_values: Dict[str, float] | None = None,
+    prevalence_map: Dict[str, str] | None = None,  # New: prevalence tier map
 ) -> Dict[str, Any]:
     """Generic differential diagnosis engine.
 
@@ -1354,12 +1355,19 @@ def analyze_symptoms_generic(
             color_class = "score-low"
         else:
             color_class = "score-minimal"
+        # Get prevalence tier if prevalence_map provided
+        prevalence_tier = "unknown"
+        if prevalence_map:
+            disease_name = disease.get("name", "")
+            prevalence_tier = prevalence_map.get(disease_name, "unknown")
+
         suspected.append({
             "name": disease["name"],
             "name_ja": disease["name_ja"],
             "likelihood": likelihood,
             "match_percent": adjusted_percent,
             "color_class": color_class,
+            "prevalence_tier": prevalence_tier,  # New: prevalence classification
             "description": disease.get("description", ""),
             "description_ja": disease.get("description_ja", ""),
             "pathophysiology": disease.get("pathophysiology", ""),
@@ -1379,8 +1387,16 @@ def analyze_symptoms_generic(
             "_match_ratio": coverage,
         })
 
-    # Sort results primarily by match_percent then by number of matching symptoms
-    suspected.sort(key=lambda d: (d["match_percent"], d["match_count"]), reverse=True)
+    # Sort results: Prevalence tier first (if available), then match_percent, then match_count
+    # This creates a stepwise differential diagnosis aligned with clinical practice
+    prevalence_priority = {"very_common": 0, "common": 1, "uncommon": 2, "rare": 3, "unknown": 4}
+    suspected.sort(
+        key=lambda d: (
+            prevalence_priority.get(d.get("prevalence_tier", "unknown"), 5),  # Primary: prevalence (ascending)
+            -d["match_percent"],                                              # Secondary: match_percent (descending)
+            -d["match_count"]                                                 # Tertiary: match_count (descending)
+        )
+    )
 
     # Compute overall severity
     severity = _compute_severity(suspected)
@@ -1416,8 +1432,16 @@ def analyze_symptoms_generic(
         sid: symptom_names[sid] for sid in used_symptoms if sid in symptom_names
     }
 
+    # Group diseases by prevalence tier for stepwise presentation (if prevalence_map provided)
+    phase1_diseases = [d for d in suspected if d.get("prevalence_tier") in ("very_common", "common")]
+    phase2_diseases = [d for d in suspected if d.get("prevalence_tier") in ("uncommon", "rare", "unknown")]
+
     return {
         "suspected_diseases": suspected,
+        "suspected_diseases_by_phase": {  # New: grouped for stepwise presentation
+            "phase_1_common": phase1_diseases,
+            "phase_2_rare": phase2_diseases,
+        },
         "recommended_tests": recommended_tests,
         "severity": severity,
         "general_advice": advice_pair["en"],
