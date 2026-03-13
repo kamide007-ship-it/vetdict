@@ -1344,4 +1344,4 @@ def analyze_symptoms(
     lab_values: dict | None = None,
 ) -> Dict[str, Any]:
     """Run differential diagnosis for degus based on reported symptoms."""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("degu", {}))
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("degu", {}))

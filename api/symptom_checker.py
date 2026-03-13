@@ -7444,6 +7444,7 @@ def analyze_symptoms(
     onset: str | None = None,
     age_years: float | None = None,
     lab_values: dict[str, float] | None = None,
+    gender: str | None = None,
 ) -> dict:
     """Analyze a list of symptom IDs and return suspected diseases, tests,
     severity assessment, and general advice.
@@ -7497,6 +7498,21 @@ def analyze_symptoms(
     if lab_values:
         lab_boosts = compute_lab_boosts(lab_values)
 
+    # Load gender risk data
+    try:
+        from api.data.gender_prevalence import GENDER_RISK_MULTIPLIERS
+    except ImportError:
+        GENDER_RISK_MULTIPLIERS = {}
+
+    # Pre-compute gender risk for dog species
+    gender_risk: dict[str, float] = {}
+    if gender and GENDER_RISK_MULTIPLIERS:
+        species_genders = GENDER_RISK_MULTIPLIERS.get("dog", {})
+        for disease_name, gender_mults in species_genders.items():
+            if gender in gender_mults:
+                mult = gender_mults[gender]
+                gender_risk[disease_name] = mult
+
     # -- 1. Score diseases --------------------------------------------------
     suspected: list[dict[str, Any]] = []
     for disease in _DISEASE_DB:
@@ -7545,6 +7561,15 @@ def analyze_symptoms(
         if breed and breed in _BREED_DISEASE_RISK:
             breed_multiplier = min(_BREED_DISEASE_RISK[breed].get(disease["name"], 1.0), 1.8)
 
+        # Apply gender-specific risk multiplier (上限を制限)
+        gender_multiplier = 1.0
+        if gender and disease["name"] in gender_risk:
+            mult = gender_risk[disease["name"]]
+            # If multiplier is 0, disease doesn't apply to this gender
+            if mult == 0.0:
+                continue  # Skip this disease entirely
+            gender_multiplier = min(mult, 1.8)
+
         # Apply onset (time-course) multiplier (緩和: ペナルティを軽減)
         onset_multiplier = 1.0
         if onset:
@@ -7578,7 +7603,7 @@ def analyze_symptoms(
         prevalence_multiplier = _PREVALENCE_MULTIPLIER.get(prevalence_cat, 1.0) if prevalence_cat else 1.0
 
         # 複合ブースト倍率の上限を設定（過度なインフレ防止）
-        combined_boost = (breed_multiplier * onset_multiplier * age_multiplier
+        combined_boost = (breed_multiplier * gender_multiplier * onset_multiplier * age_multiplier
                          * pair_multiplier * lab_multiplier * prevalence_multiplier)
         combined_boost = min(combined_boost, 2.5)  # 最大2.5倍
         if combined_boost < 1.0:
@@ -7700,6 +7725,8 @@ def analyze_symptoms(
         "general_advice_ja": advice_pair["ja"],
         "breed_genetic_tests": genetic_tests,
         "breed_risk_applied": breed is not None and breed in _BREED_DISEASE_RISK,
+        "gender_risk_applied": len(gender_risk) > 0,
+        "gender": gender,
         "onset_applied": onset is not None,
         "onset": onset,
         "age_applied": age_years is not None,

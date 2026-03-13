@@ -2048,6 +2048,7 @@ def diagnostic_chat():
     onset = data.get("onset")  # explicit onset from client
     previous_symptoms = data.get("previous_symptoms", [])
     species = data.get("species", "dog")
+    gender = data.get("gender")  # "male" | "female" (optional)
 
     if not message:
         return jsonify({"error": "Message required"}), 400

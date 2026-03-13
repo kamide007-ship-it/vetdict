@@ -5024,6 +5024,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 }
 
 
-def analyze_symptoms(symptoms, age_stage="", breed=None, *, onset=None, age_years=None, species=None, lab_values: dict | None = None):
+def analyze_symptoms(symptoms, age_stage="", breed=None, *, onset=None, age_years=None, species=None, lab_values: dict | None = None, gender=None):
     """猫の症状から鑑別診断候補を算出する。"""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("cat", {}))
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("cat", {}))

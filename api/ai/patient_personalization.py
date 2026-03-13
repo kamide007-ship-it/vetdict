@@ -1,7 +1,7 @@
 """patient_personalization.py – Patient demographics extraction and confidence adjustment
 
 Extracts age/severity from symptom text and adjusts disease confidence scores
-based on patient characteristics (age, symptom severity).
+based on patient characteristics (age, symptom severity, gender).
 """
 
 import logging
@@ -10,6 +10,17 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
+
+# Import gender extraction utilities
+try:
+    from api.data.gender_prevalence import (
+        GENDER_RISK_MULTIPLIERS,
+        GenderExtractor,
+    )
+except ImportError:
+    # Fallback if import fails
+    GENDER_RISK_MULTIPLIERS = {}
+    GenderExtractor = None
 
 
 @dataclass
@@ -21,6 +32,8 @@ class PatientContext:
     severity: str = "moderate"  # "mild" | "moderate" | "severe"
     extraction_method: str = "unknown"  # "text_extraction" | "user_input" | "inference"
     confidence: float = 0.5  # How confident we are in extracted values
+    gender: Optional[str] = None  # "male" | "female" | None
+    gender_confidence: float = 0.5  # How confident we are in gender extraction
 
 
 class AgeExtractor:
@@ -206,6 +219,7 @@ class PersonalizationEngine:
         disease_name: str,
         base_confidence: float,
         patient_context: PatientContext,
+        species: str = "dog",
     ) -> float:
         """
         Adjust disease confidence based on patient context.
@@ -214,6 +228,7 @@ class PersonalizationEngine:
             disease_name: Name of the disease
             base_confidence: Base confidence score (0.0-1.0)
             patient_context: PatientContext with extracted demographics
+            species: Species name for gender risk lookup
 
         Returns:
             Adjusted confidence score (0.0-1.0)
@@ -231,6 +246,22 @@ class PersonalizationEngine:
                     f"{base_confidence} * {mult} = {adjusted}"
                 )
 
+        # Apply gender-based multiplier
+        if patient_context.gender and GENDER_RISK_MULTIPLIERS:
+            species_risks = GENDER_RISK_MULTIPLIERS.get(species.lower(), {})
+            disease_genders = species_risks.get(disease_name, {})
+            if patient_context.gender in disease_genders:
+                mult = disease_genders[patient_context.gender]
+                # If multiplier is 0, disease doesn't apply to this gender
+                if mult == 0.0:
+                    adjusted = 0.0
+                else:
+                    adjusted *= mult
+                logger.debug(
+                    f"Gender adjustment for {disease_name} ({patient_context.gender}): "
+                    f"{base_confidence} * {mult} = {adjusted}"
+                )
+
         # Apply severity multiplier
         severity_mult = cls.SEVERITY_MULTIPLIERS.get(patient_context.severity, 1.0)
         adjusted *= severity_mult
@@ -245,6 +276,7 @@ class PersonalizationEngine:
         cls,
         diseases_with_confidence: List[Dict[str, Any]],
         patient_context: PatientContext,
+        species: str = "dog",
     ) -> List[Dict[str, Any]]:
         """
         Apply personalization to multiple diseases.
@@ -252,6 +284,7 @@ class PersonalizationEngine:
         Args:
             diseases_with_confidence: List of dicts with 'name' and 'confidence'
             patient_context: PatientContext for personalization
+            species: Species name for gender risk lookup
 
         Returns:
             List with updated confidence scores
@@ -264,6 +297,7 @@ class PersonalizationEngine:
                 disease.get("name", ""),
                 original_confidence,
                 patient_context,
+                species=species,
             )
             updated["confidence_adjustment"] = updated["confidence"] - original_confidence
             personalized.append(updated)
@@ -290,6 +324,12 @@ class PersonalizationEngine:
         # Infer severity
         severity = SeverityInference.assess(len(symptoms), symptoms)
         context.severity = severity
+
+        # Extract gender if available
+        if GenderExtractor:
+            gender_ctx = GenderExtractor.extract(text)
+            context.gender = gender_ctx.gender
+            context.gender_confidence = gender_ctx.confidence
 
         # Set extraction method
         if context.extraction_method == "unknown":
@@ -325,6 +365,8 @@ def personalize_extraction_result(
         "severity": context.severity,
         "extraction_method": context.extraction_method,
         "confidence": context.confidence,
+        "gender": context.gender,
+        "gender_confidence": context.gender_confidence,
     }
 
     return result
