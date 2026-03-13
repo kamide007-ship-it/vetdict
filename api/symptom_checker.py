@@ -7445,6 +7445,7 @@ def analyze_symptoms(
     age_years: float | None = None,
     lab_values: dict[str, float] | None = None,
     gender: str | None = None,
+    vaccines: list[str] | None = None,
     vaccination_status: str | None = None,
 ) -> dict:
     """Analyze a list of symptom IDs and return suspected diseases, tests,
@@ -7468,6 +7469,10 @@ def analyze_symptoms(
         Optional age of the animal in years.  When provided, diseases with
         a known age predisposition matching the animal's life stage receive
         a score boost; clear mismatches receive a penalty.
+    vaccines:
+        Optional vaccine ID list (e.g. ``["core_5in1", "rabies"]``). When
+        provided, diseases directly covered by those vaccine records are
+        excluded from the differential diagnosis.
     vaccination_status:
         Optional vaccination status: ``"current"`` (up-to-date), ``"outdated"``
         (lapsed), or ``"none"`` (unvaccinated). When ``"current"``, vaccine-preventable
@@ -7483,6 +7488,7 @@ def analyze_symptoms(
         ``lab_boost_applied``, and ``lab_values``.
     """
     symptom_set: set[str] = set(symptoms) & VALID_SYMPTOMS
+    vaccines = [str(vaccine) for vaccine in vaccines or [] if vaccine]
 
     # Resolve age stage for predisposition lookup
     age_stage: str | None = None
@@ -7502,6 +7508,12 @@ def analyze_symptoms(
         EXTENDED_SYMPTOM_PAIR_BOOST = {}
         SYMPTOM_TRIPLE_BOOST = {}
 
+    # Load clinical frequency data (symptom presentation rates by region)
+    try:
+        from api.data.clinical_frequency import CLINICAL_FREQUENCY
+    except ImportError:
+        CLINICAL_FREQUENCY = {}
+
     # Load evidence-based scoring
     try:
         from api.ai.evidence_calculator import EvidenceScorer
@@ -7513,6 +7525,16 @@ def analyze_symptoms(
         from api.data.vaccination_protection import VaccinationStatusHandler
     except ImportError:
         VaccinationStatusHandler = None
+
+    # Load vaccine-preventable diseases mapping
+    vaccine_preventable: set[str] = set()
+    if vaccines:
+        try:
+            from api.data.vaccine_mapping import get_preventable_diseases
+
+            vaccine_preventable = get_preventable_diseases(vaccines)
+        except ImportError:
+            pass
 
     pair_boosts: dict[str, float] = {}
     all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
@@ -7560,6 +7582,9 @@ def analyze_symptoms(
         total: int = len(disease_symptoms)
 
         if total == 0 or match_count == 0:
+            continue
+
+        if disease["name"] in vaccine_preventable:
             continue
 
         # Weighted coverage: 臨床的重要度で重み付け
@@ -7639,13 +7664,29 @@ def analyze_symptoms(
         # Apply lab value boost (上限を制限、部分一致)
         lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
 
+        # Apply clinical frequency boost (matching symptoms that commonly present)
+        clinical_frequency_multiplier = 1.0
+        disease_frequency = CLINICAL_FREQUENCY.get(disease["name"], {})
+        if disease_frequency:
+            frequency_values = [
+                symptom_frequency.get("global_average")
+                for symptom_id, symptom_frequency in disease_frequency.items()
+                if symptom_id in matching
+                and isinstance(symptom_frequency, dict)
+                and isinstance(symptom_frequency.get("global_average"), (int, float))
+            ]
+            if frequency_values:
+                avg_frequency = sum(frequency_values) / len(frequency_values)
+                clinical_frequency_multiplier = min(1.0 + (avg_frequency * 0.4), 1.5)
+
         # Apply prevalence (base rate) multiplier — 有病率ベイズ補正
         prevalence_cat = _DISEASE_PREVALENCE.get(disease["name"])
         prevalence_multiplier = _PREVALENCE_MULTIPLIER.get(prevalence_cat, 1.0) if prevalence_cat else 1.0
 
         # 複合ブースト倍率の上限を設定（過度なインフレ防止）
         combined_boost = (breed_multiplier * gender_multiplier * onset_multiplier * age_multiplier
-                         * pair_multiplier * triple_multiplier * lab_multiplier * prevalence_multiplier)
+                         * pair_multiplier * triple_multiplier * lab_multiplier
+                         * clinical_frequency_multiplier * prevalence_multiplier)
         combined_boost = min(combined_boost, 3.0)  # 最大3.0倍（トリプルで強いブースト可能）
         if combined_boost < 1.0:
             combined_boost = max(combined_boost, 0.6)  # ペナルティ下限0.6
@@ -7676,6 +7717,12 @@ def analyze_symptoms(
         # Get prevalence tier for this disease
         prevalence_tier = _DISEASE_PREVALENCE.get(disease["name"], "unknown")
 
+        clinical_freq_data = {
+            symptom_id: disease_frequency[symptom_id]
+            for symptom_id in sorted(matching)
+            if symptom_id in disease_frequency
+        }
+
         suspected.append({
             "name": disease["name"],
             "name_ja": disease["name_ja"],
@@ -7702,6 +7749,7 @@ def analyze_symptoms(
             "matching_symptoms": sorted(matching),
             "match_count": match_count,
             "total_symptoms": total,
+            "clinical_frequency_data": clinical_freq_data,
             # internal fields for later processing
             "_urgency": disease["urgency"],
             "_match_ratio": coverage,
@@ -7774,6 +7822,7 @@ def analyze_symptoms(
 
     # Apply vaccination status adjustment (Phase 4 enhancement)
     # Reduce confidence for vaccine-preventable diseases if vaccinated
+    vaccination_adjustment_applied = False
     if VaccinationStatusHandler and vaccination_status:
         for disease in suspected:
             disease_name = disease["name"]
@@ -7788,8 +7837,17 @@ def analyze_symptoms(
                 disease["match_percent_before_vaccination"] = original_match_percent
                 disease["match_percent"] = adjusted_percent
                 disease["vaccination_adjustment_applied"] = True
+                vaccination_adjustment_applied = True
             else:
                 disease["vaccination_adjustment_applied"] = False
+
+    suspected.sort(
+        key=lambda d: (
+            prevalence_priority.get(d["prevalence_tier"], 5),
+            -d["match_percent"],
+            -d["match_count"],
+        )
+    )
 
     # Group diseases by prevalence tier for stepwise differential diagnosis
     # Phase 1: Common diseases (very_common + common)
@@ -7818,8 +7876,11 @@ def analyze_symptoms(
         "age_stage": age_stage,
         "lab_boost_applied": len(lab_boosts) > 0,
         "lab_values": lab_values,
+        "vaccines_applied": len(vaccines) > 0,
+        "vaccines": vaccines,
+        "vaccine_preventable_excluded": sorted(vaccine_preventable),
         "vaccination_status": vaccination_status,
-        "vaccination_adjustment_applied": vaccination_status is not None and vaccination_status == "current",
+        "vaccination_adjustment_applied": vaccination_adjustment_applied,
         "symptom_names": symptom_names_lookup,
     }
 

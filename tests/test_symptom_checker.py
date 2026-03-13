@@ -226,12 +226,15 @@ class TestAnalyzeSymptoms:
         result = analyze_symptoms(["vomiting", "lethargy"])
         expected_keys = {
             "suspected_diseases",
+            "suspected_diseases_by_phase",
             "recommended_tests",
             "severity",
             "general_advice",
             "general_advice_ja",
             "breed_genetic_tests",
             "breed_risk_applied",
+            "gender_risk_applied",
+            "gender",
             "onset_applied",
             "onset",
             "age_applied",
@@ -239,6 +242,11 @@ class TestAnalyzeSymptoms:
             "age_stage",
             "lab_boost_applied",
             "lab_values",
+            "vaccines_applied",
+            "vaccines",
+            "vaccine_preventable_excluded",
+            "vaccination_status",
+            "vaccination_adjustment_applied",
             "symptom_names",
         }
         assert set(result.keys()) == expected_keys
@@ -320,6 +328,8 @@ class TestAnalyzeSymptoms:
             assert isinstance(entry["matching_symptoms"], list)
             assert "match_count" in entry
             assert "total_symptoms" in entry
+            assert "clinical_frequency_data" in entry
+            assert isinstance(entry["clinical_frequency_data"], dict)
 
     def test_disease_detail_fields_default_to_strings(self):
         result = analyze_symptoms(["vomiting", "lethargy", "diarrhea"])
@@ -366,18 +376,68 @@ class TestAnalyzeSymptoms:
 
     # -- sorting --------------------------------------------------------
 
-    def test_suspected_diseases_sorted_descending(self):
-        """Results sorted by match_percent desc, match_count desc."""
+    def test_suspected_diseases_sorted_by_prevalence_then_score(self):
+        """Results prioritize prevalence tier, then score, then match_count."""
         result = analyze_symptoms([
             "vomiting", "lethargy", "diarrhea", "appetite_loss", "fever",
         ])
         diseases = result["suspected_diseases"]
+        prevalence_priority = {
+            "very_common": 0,
+            "common": 1,
+            "uncommon": 2,
+            "rare": 3,
+            "unknown": 4,
+        }
         for i in range(len(diseases) - 1):
             a, b = diseases[i], diseases[i + 1]
-            assert (a["match_percent"], a["match_count"]) >= (
-                b["match_percent"],
-                b["match_count"],
+            assert (
+                prevalence_priority.get(a["prevalence_tier"], 5),
+                -a["match_percent"],
+                -a["match_count"],
+            ) <= (
+                prevalence_priority.get(b["prevalence_tier"], 5),
+                -b["match_percent"],
+                -b["match_count"],
             ), "suspected_diseases not sorted correctly"
+
+    def test_vaccines_exclude_preventable_diseases(self):
+        result = analyze_symptoms(
+            ["vomiting", "bloody_stool", "lethargy", "appetite_loss", "fever", "diarrhea"],
+            vaccines=["core_5in1"],
+        )
+
+        names = [d["name"] for d in result["suspected_diseases"]]
+        assert "Canine Parvovirus" not in names
+        assert result["vaccines_applied"] is True
+        assert result["vaccines"] == ["core_5in1"]
+        assert "Canine Parvovirus" in result["vaccine_preventable_excluded"]
+
+    def test_vaccines_and_vaccination_status_can_coexist(self):
+        symptoms = ["vomiting", "bloody_stool", "lethargy", "appetite_loss", "fever", "diarrhea"]
+        status_only = analyze_symptoms(symptoms, vaccination_status="current")
+        merged = analyze_symptoms(
+            symptoms,
+            vaccines=["rabies"],
+            vaccination_status="current",
+        )
+
+        status_only_parvo = next(
+            disease
+            for disease in status_only["suspected_diseases"]
+            if disease["name"] == "Canine Parvovirus"
+        )
+        merged_parvo = next(
+            disease
+            for disease in merged["suspected_diseases"]
+            if disease["name"] == "Canine Parvovirus"
+        )
+
+        assert merged["vaccines"] == ["rabies"]
+        assert merged["vaccination_status"] == "current"
+        assert merged["vaccination_adjustment_applied"] is True
+        assert merged_parvo["match_percent"] == status_only_parvo["match_percent"]
+        assert merged_parvo["vaccination_adjustment_applied"] is True
 
     # -- color_class assignment -----------------------------------------
 
