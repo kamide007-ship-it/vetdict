@@ -112,8 +112,8 @@ def test_analyze_symptoms_endpoint_passes_gender_and_vaccination(monkeypatch):
             'symptoms': ['vomiting'],
             'gender': 'female',
             'vaccination_status': 'current',
-            'age_years': '3',
-            'lab_values': {'crp': '1.5'},
+            'age_years': 3,
+            'lab_values': {'crp': 1.5},
         },
     )
 
