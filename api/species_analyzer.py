@@ -176,6 +176,7 @@ def analyze_species_symptoms(
         return handler(symptoms, age_stage)
     else:
         handler = SPECIES_HANDLERS[species_key]
+        # Non-dog species analyzers do not currently accept vaccination kwargs.
         return handler(
             symptoms, age_stage,
             breed=breed, onset=onset, age_years=age_years,

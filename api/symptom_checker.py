@@ -7488,7 +7488,7 @@ def analyze_symptoms(
         ``lab_boost_applied``, and ``lab_values``.
     """
     symptom_set: set[str] = set(symptoms) & VALID_SYMPTOMS
-    vaccines = [str(vaccine) for vaccine in vaccines or [] if vaccine]
+    vaccine_list = [str(vaccine) for vaccine in vaccines or [] if vaccine]
 
     # Resolve age stage for predisposition lookup
     age_stage: str | None = None
@@ -7528,11 +7528,11 @@ def analyze_symptoms(
 
     # Load vaccine-preventable diseases mapping
     vaccine_preventable: set[str] = set()
-    if vaccines:
+    if vaccine_list:
         try:
             from api.data.vaccine_mapping import get_preventable_diseases
 
-            vaccine_preventable = get_preventable_diseases(vaccines)
+            vaccine_preventable = get_preventable_diseases(vaccine_list)
         except ImportError:
             pass
 
@@ -7581,10 +7581,7 @@ def analyze_symptoms(
         match_count: int = len(matching)
         total: int = len(disease_symptoms)
 
-        if total == 0 or match_count == 0:
-            continue
-
-        if disease["name"] in vaccine_preventable:
+        if total == 0 or match_count == 0 or disease["name"] in vaccine_preventable:
             continue
 
         # Weighted coverage: 臨床的重要度で重み付け
@@ -7876,8 +7873,8 @@ def analyze_symptoms(
         "age_stage": age_stage,
         "lab_boost_applied": len(lab_boosts) > 0,
         "lab_values": lab_values,
-        "vaccines_applied": len(vaccines) > 0,
-        "vaccines": vaccines,
+        "vaccines_applied": len(vaccine_list) > 0,
+        "vaccines": vaccine_list,
         "vaccine_preventable_excluded": sorted(vaccine_preventable),
         "vaccination_status": vaccination_status,
         "vaccination_adjustment_applied": vaccination_adjustment_applied,
