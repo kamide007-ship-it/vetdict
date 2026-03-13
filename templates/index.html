@@ -1282,6 +1282,29 @@ function renderResults(data){
   area.innerHTML=html;
 }
 
+function renderClinicalFrequency(clinicalFreqData,symNames){
+  if(!clinicalFreqData||Object.keys(clinicalFreqData).length===0)return"";
+  const regionFlags={"Japan":"🇯🇵","USA":"🇺🇸","Europe":"🇪🇺","Asia":"🌏","Australia":"🇦🇺"};
+  const regions=["Japan","USA","Europe","Asia","Australia"];
+  let html=`<div style="margin-top:12px;padding:10px;background:var(--gray-50);border-radius:6px;border-left:3px solid var(--accent-color)"><strong style="font-size:.85rem;display:block;margin-bottom:6px">🌍 ${currentLang==="ja"?"臨床頻度（地域別）":"Clinical Frequency (by Region)"}</strong>`;
+  for(const[symptom,freqData]of Object.entries(clinicalFreqData)){
+    if(typeof freqData!=="object")continue;
+    const symName=symNames[symptom];
+    const displayName=symName?`${currentLang==="ja"?symName.ja:symName.en} <span style="color:var(--gray-500);font-size:.75rem">${currentLang==="ja"?symName.en:symName.ja}</span>`:symptom;
+    html+=`<div style="margin:8px 0;font-size:.8rem"><span style="font-weight:500">${displayName}:</span><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
+    for(const region of regions){
+      if(freqData[region]===undefined)continue;
+      const freq=(freqData[region]*100).toFixed(0);
+      const flag=regionFlags[region]||"";
+      const bgColor=freqData[region]>=0.8?"#d4edda":freqData[region]>=0.6?"#fff3cd":"#e2e3e5";
+      html+=`<span style="padding:3px 8px;background:${bgColor};border-radius:4px;white-space:nowrap"><span style="margin-right:3px">${flag}</span>${freq}%</span>`;
+    }
+    html+=`</div></div>`;
+  }
+  html+=`<div style="font-size:.75rem;color:var(--gray-500);margin-top:8px;font-style:italic">${currentLang==="ja"?"症状の臨床的呈示頻度を地域別に表示。":"Symptom presentation frequency by geographic region."}</div></div>`;
+  return html;
+}
+
 function renderDiseaseCard(d,data){
   const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
   const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
@@ -1303,7 +1326,7 @@ function renderDiseaseCard(d,data){
   const prevalenceTier=d.prevalence_tier||"unknown";
   const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
 
-  let html=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span>${prevalenceLabel?`<span style="font-size:.7rem;color:var(--gray-500);margin-left:8px;padding:2px 6px;background:var(--gray-100);border-radius:6px">${prevalenceLabel}</span>`:""}  </div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
+  let html=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span>${prevalenceLabel?`<span style="font-size:.7rem;color:var(--gray-500);margin-left:8px;padding:2px 6px;background:var(--gray-100);border-radius:6px">${prevalenceLabel}</span>`:""}  </div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${renderClinicalFrequency(d.clinical_frequency_data,symNames)}${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
   return html;
 }
 
