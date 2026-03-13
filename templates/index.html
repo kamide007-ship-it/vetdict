@@ -292,7 +292,7 @@ a:hover{text-decoration:underline}
 }
 </style>
 </head>
-<body>
+<body data-version="1773369421">
 
 <a href="#speciesSection" class="skip-link" data-i18n="skipLink">メインコンテンツへスキップ</a>
 
@@ -1379,16 +1379,38 @@ function sendLandingChat(){
   const species=currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot";loading.innerHTML='<span class="spinner" style="width:16px;height:16px"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
-  .then(r=>r.json()).then(data=>{const base=(data.response||data.message||data.error||t("noResponse"));loading.textContent=stripGuidanceFromResponse(base,data.species_guidance);renderSpeciesGuidance("landingChatMessages",data.species_guidance);msgs.scrollTop=msgs.scrollHeight;})
-  .catch(()=>{loading.textContent=t("commError");msgs.scrollTop=msgs.scrollHeight;});
+  .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
+  .then(data=>{
+    if(!data){loading.textContent="No response data";return;}
+    const base=(data.response||data.message||data.error||t("noResponse"));
+    if(!base){loading.textContent="No base response";return;}
+    loading.textContent=stripGuidanceFromResponse(base,data.species_guidance);
+    renderSpeciesGuidance("landingChatMessages",data.species_guidance);
+    msgs.scrollTop=msgs.scrollHeight;
+  })
+  .catch(err=>{
+    console.error("Chat error:",err);
+    loading.textContent=t("commError")+" ("+err.message+")";
+    msgs.scrollTop=msgs.scrollHeight;
+  });
 }
 
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
-  .then(r=>r.json()).then(data=>{if(data.species_guidance) addChatMsg(`[Species] ${data.species_guidance}`,"bot");const base=(data.response||data.message||data.error||t("noResponse"));addChatMsg(stripGuidanceFromResponse(base,data.species_guidance),"bot");})
-  .catch(()=>addChatMsg(t("commError"),"bot"));
+  .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
+  .then(data=>{
+    if(!data){addChatMsg("No response data","bot");return;}
+    if(data.species_guidance) addChatMsg(`[Species] ${data.species_guidance}`,"bot");
+    const base=(data.response||data.message||data.error||t("noResponse"));
+    if(base) addChatMsg(stripGuidanceFromResponse(base,data.species_guidance),"bot");
+    else addChatMsg(t("noResponse"),"bot");
+  })
+  .catch(err=>{
+    console.error("Chat error:",err);
+    addChatMsg(t("commError")+" ("+err.message+")","bot");
+  });
 }
 
 function addChatMsg(text,type){
