@@ -1,0 +1,466 @@
+/* ===== Multi-Disease Diagnostic UI Styles ===== */
+/* Phase 6 Stage 9: Frontend Integration */
+
+/* --- Multi-Disease Mode Badge --- */
+.multidisease-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #2a4a8f 0%, #22a84f 100%);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0 8px;
+  box-shadow: 0 2px 8px rgba(34, 168, 79, 0.25);
+}
+
+/* --- Disease Combinations Display --- */
+.multidisease-combinations {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fc;
+  border: 2px solid #dde1ea;
+  border-radius: 12px;
+  border-left: 4px solid #22a84f;
+}
+
+.combinations-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a3068;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.combinations-title::before {
+  content: '⚕';
+  font-size: 1.2rem;
+}
+
+.combination-item {
+  background: #fff;
+  border: 1px solid #c5cbd8;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.combination-item:hover {
+  border-color: #22a84f;
+  box-shadow: 0 2px 8px rgba(34, 168, 79, 0.15);
+  background: #f0fdf4;
+}
+
+.combination-item.selected {
+  border-color: #22a84f;
+  background: #e8f8ee;
+  box-shadow: inset 0 0 0 2px rgba(34, 168, 79, 0.2);
+}
+
+.combination-diseases {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.disease-badge {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1a3068;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.disease-badge.primary {
+  background: #1a3068;
+  color: #fff;
+}
+
+.combination-connector {
+  color: #6b7490;
+  font-weight: 700;
+  padding: 0 4px;
+}
+
+.combination-confidence {
+  font-size: 0.85rem;
+  color: #363c52;
+  margin-bottom: 6px;
+}
+
+.confidence-bar {
+  width: 100%;
+  height: 6px;
+  background: #dde1ea;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22a84f 0%, #1a8a3e 100%);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.combination-meta {
+  font-size: 0.75rem;
+  color: #6b7490;
+  margin-top: 6px;
+}
+
+/* --- Ambiguity Analysis UI --- */
+.ambiguity-section {
+  margin-top: 16px;
+  padding: 14px;
+  background: #fffbeb;
+  border: 2px solid #fcd34d;
+  border-radius: 10px;
+  border-left: 4px solid #f0850e;
+}
+
+.ambiguity-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ambiguity-title::before {
+  content: '⚠';
+  font-size: 1rem;
+}
+
+.ambiguity-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ambiguous-symptom {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #fde68a;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.78rem;
+  color: #92400e;
+  font-weight: 600;
+  position: relative;
+}
+
+.ambiguity-score {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #f0850e;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(240, 133, 14, 0.3);
+}
+
+/* --- Clarifying Questions UI --- */
+.clarifying-questions {
+  margin-top: 16px;
+  padding: 14px;
+  background: #e6eefb;
+  border: 2px solid #c7d8f5;
+  border-radius: 10px;
+  border-left: 4px solid #2a4a8f;
+}
+
+.questions-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f1d42;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.questions-title::before {
+  content: '❓';
+  font-size: 1.1rem;
+}
+
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.question-item {
+  background: #fff;
+  border: 1px solid #c7d8f5;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.84rem;
+  color: #363c52;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.question-item:hover {
+  border-color: #2a4a8f;
+  background: #f0f4ff;
+  box-shadow: 0 2px 6px rgba(42, 74, 143, 0.1);
+}
+
+.question-item.recommended {
+  border-color: #22a84f;
+  background: #f0fdf4;
+  font-weight: 600;
+}
+
+.question-item.recommended::before {
+  content: '⭐ ';
+  color: #22a84f;
+}
+
+.question-text {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.question-meta {
+  font-size: 0.72rem;
+  color: #6b7490;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.question-score {
+  background: #e0e7ff;
+  color: #2a4a8f;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+/* --- Confidence Breakdown UI --- */
+.confidence-breakdown {
+  margin-top: 16px;
+  padding: 14px;
+  background: #f0fdf4;
+  border: 2px solid #86efac;
+  border-radius: 10px;
+  border-left: 4px solid #22a84f;
+}
+
+.breakdown-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breakdown-title::before {
+  content: '📊';
+  font-size: 1rem;
+}
+
+.breakdown-item {
+  margin-bottom: 10px;
+}
+
+.breakdown-label {
+  font-size: 0.78rem;
+  color: #166534;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.breakdown-percentage {
+  color: #22a84f;
+  font-weight: 700;
+}
+
+.breakdown-bar {
+  width: 100%;
+  height: 8px;
+  background: #d1fae5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.breakdown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22a84f 0%, #16a34a 100%);
+  border-radius: 4px;
+  min-width: 2px;
+}
+
+/* --- User Guidance UI --- */
+.user-guidance {
+  margin-top: 16px;
+  padding: 12px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #363c52;
+  line-height: 1.5;
+}
+
+.guidance-title {
+  font-weight: 700;
+  color: #1a3068;
+  margin-bottom: 6px;
+}
+
+.guidance-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.guidance-icon {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* --- Loading States --- */
+.multidisease-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  color: #6b7490;
+  font-size: 0.85rem;
+}
+
+.multidisease-loading .spinner {
+  width: 16px;
+  height: 16px;
+}
+
+/* --- Error States --- */
+.multidisease-error {
+  padding: 12px;
+  background: #fef2f2;
+  border: 2px solid #fecaca;
+  border-radius: 8px;
+  border-left: 4px solid #dc3545;
+  color: #991b1b;
+  font-size: 0.84rem;
+  margin-top: 12px;
+}
+
+.error-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .multidisease-badge {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
+  .combination-diseases {
+    flex-wrap: wrap;
+  }
+
+  .disease-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+
+  .combinations-title,
+  .ambiguity-title,
+  .questions-title,
+  .breakdown-title {
+    font-size: 0.85rem;
+  }
+
+  .question-item,
+  .combination-item {
+    font-size: 0.78rem;
+  }
+
+  .question-meta {
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multidisease-combinations,
+  .ambiguity-section,
+  .clarifying-questions,
+  .confidence-breakdown {
+    padding: 10px;
+    margin-top: 12px;
+  }
+
+  .combination-item {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .disease-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+  }
+}
+
+/* --- Animation for new items --- */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.combination-item,
+.question-item,
+.ambiguous-symptom {
+  animation: slideDown 0.3s ease;
+}
+
+/* --- Accessibility --- */
+.multidisease-combinations:focus-within,
+.ambiguity-section:focus-within,
+.clarifying-questions:focus-within {
+  box-shadow: 0 0 0 3px rgba(34, 168, 79, 0.1);
+}
+
+button.question-item:focus-visible,
+button.combination-item:focus-visible {
+  outline: 2px solid #2a4a8f;
+  outline-offset: 2px;
+}
