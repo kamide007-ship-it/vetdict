@@ -1,36 +1,68 @@
+from html.parser import HTMLParser
+
 import api.vetdict_api as vetdict_api
 from api.vetdict_api import app
 
 
-def test_index_lab_fields_render_with_matching_label_targets():
+def test_homepage_lab_field_labels_match_inputs():
+    class LabFieldParser(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.labels = {}
+            self.inputs = set()
+            self._active_label_for = None
+            self._active_label_text = []
+
+        def handle_starttag(self, tag, attrs):
+            attr_map = dict(attrs)
+            if tag == 'label':
+                self._active_label_for = attr_map.get('for')
+                self._active_label_text = []
+            elif tag == 'input':
+                field_id = attr_map.get('id')
+                if field_id and field_id.startswith('lab-'):
+                    self.inputs.add(field_id)
+
+        def handle_endtag(self, tag):
+            if tag == 'label' and self._active_label_for:
+                self.labels[self._active_label_for] = ''.join(self._active_label_text).strip()
+                self._active_label_for = None
+                self._active_label_text = []
+
+        def handle_data(self, data):
+            if self._active_label_for:
+                self._active_label_text.append(data)
+
     client = app.test_client()
     resp = client.get('/')
     assert resp.status_code == 200
     html = resp.get_data(as_text=True)
+    parser = LabFieldParser()
+    parser.feed(html)
 
     expected_fields = [
-        ('lab-bun', 'BUN <span class="lab-unit">mg/dL</span>'),
-        ('lab-creatinine', 'Cre <span class="lab-unit">mg/dL</span>'),
-        ('lab-sdma', 'SDMA <span class="lab-unit">&micro;g/dL</span>'),
-        ('lab-phosphorus', 'P <span class="lab-unit">mg/dL</span>'),
-        ('lab-alt', 'ALT <span class="lab-unit">U/L</span>'),
-        ('lab-alp', 'ALP <span class="lab-unit">U/L</span>'),
-        ('lab-ggt', 'GGT <span class="lab-unit">U/L</span>'),
-        ('lab-tbil', 'T-Bil <span class="lab-unit">mg/dL</span>'),
-        ('lab-albumin', 'Alb <span class="lab-unit">g/dL</span>'),
-        ('lab-glucose', 'Glu <span class="lab-unit">mg/dL</span>'),
-        ('lab-lipase', 'Lipase <span class="lab-unit">U/L</span>'),
-        ('lab-potassium', 'K <span class="lab-unit">mEq/L</span>'),
-        ('lab-sodium', 'Na <span class="lab-unit">mEq/L</span>'),
-        ('lab-calcium', 'Ca <span class="lab-unit">mg/dL</span>'),
-        ('lab-wbc', 'WBC <span class="lab-unit">&times;10&sup3;/&micro;L</span>'),
-        ('lab-pcv', 'PCV <span class="lab-unit">%</span>'),
-        ('lab-platelets', 'PLT <span class="lab-unit">&times;10&sup3;/&micro;L</span>'),
+        ('lab-bun', 'BUN mg/dL'),
+        ('lab-creatinine', 'Cre mg/dL'),
+        ('lab-sdma', 'SDMA µg/dL'),
+        ('lab-phosphorus', 'P mg/dL'),
+        ('lab-alt', 'ALT U/L'),
+        ('lab-alp', 'ALP U/L'),
+        ('lab-ggt', 'GGT U/L'),
+        ('lab-tbil', 'T-Bil mg/dL'),
+        ('lab-albumin', 'Alb g/dL'),
+        ('lab-glucose', 'Glu mg/dL'),
+        ('lab-lipase', 'Lipase U/L'),
+        ('lab-potassium', 'K mEq/L'),
+        ('lab-sodium', 'Na mEq/L'),
+        ('lab-calcium', 'Ca mg/dL'),
+        ('lab-wbc', 'WBC ×10³/µL'),
+        ('lab-pcv', 'PCV %'),
+        ('lab-platelets', 'PLT ×10³/µL'),
     ]
 
-    for field_id, label_html in expected_fields:
-        assert f'<label for="{field_id}">{label_html}</label>' in html
-        assert f'id="{field_id}"' in html
+    for field_id, label_text in expected_fields:
+        assert parser.labels.get(field_id) == label_text
+        assert field_id in parser.inputs
 
 
 def test_health_check_diseases_include_quality_fields():
