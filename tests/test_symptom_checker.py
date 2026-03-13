@@ -226,12 +226,15 @@ class TestAnalyzeSymptoms:
         result = analyze_symptoms(["vomiting", "lethargy"])
         expected_keys = {
             "suspected_diseases",
+            "suspected_diseases_by_phase",
             "recommended_tests",
             "severity",
             "general_advice",
             "general_advice_ja",
             "breed_genetic_tests",
             "breed_risk_applied",
+            "gender_risk_applied",
+            "gender",
             "onset_applied",
             "onset",
             "age_applied",
@@ -239,6 +242,8 @@ class TestAnalyzeSymptoms:
             "age_stage",
             "lab_boost_applied",
             "lab_values",
+            "vaccination_status",
+            "vaccination_adjustment_applied",
             "symptom_names",
         }
         assert set(result.keys()) == expected_keys
@@ -367,17 +372,23 @@ class TestAnalyzeSymptoms:
     # -- sorting --------------------------------------------------------
 
     def test_suspected_diseases_sorted_descending(self):
-        """Results sorted by match_percent desc, match_count desc."""
+        """Results keep diseases grouped in prevalence-tier order."""
         result = analyze_symptoms([
             "vomiting", "lethargy", "diarrhea", "appetite_loss", "fever",
         ])
         diseases = result["suspected_diseases"]
+        prevalence_priority = {
+            "very_common": 0,
+            "common": 1,
+            "uncommon": 2,
+            "rare": 3,
+            "unknown": 4,
+        }
         for i in range(len(diseases) - 1):
             a, b = diseases[i], diseases[i + 1]
-            assert (a["match_percent"], a["match_count"]) >= (
-                b["match_percent"],
-                b["match_count"],
-            ), "suspected_diseases not sorted correctly"
+            a_priority = prevalence_priority.get(a["prevalence_tier"], 5)
+            b_priority = prevalence_priority.get(b["prevalence_tier"], 5)
+            assert a_priority <= b_priority, "suspected_diseases not sorted by prevalence tier"
 
     # -- color_class assignment -----------------------------------------
 
