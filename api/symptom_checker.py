@@ -7497,6 +7497,12 @@ def analyze_symptoms(
         EXTENDED_SYMPTOM_PAIR_BOOST = {}
         SYMPTOM_TRIPLE_BOOST = {}
 
+    # Load evidence-based scoring
+    try:
+        from api.ai.evidence_calculator import EvidenceScorer
+    except ImportError:
+        EvidenceScorer = None
+
     pair_boosts: dict[str, float] = {}
     all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
     for pair, disease_boosts in all_pair_boosts.items():
@@ -7730,6 +7736,30 @@ def analyze_symptoms(
         for sid in used_symptoms
         if sid in _SYMPTOM_NAMES
     }
+
+    # Apply evidence-based confidence adjustment (Phase 4)
+    # Use evidence as a direct boost multiplier to the existing match_percent
+    if EvidenceScorer:
+        from api.data.disease_evidence import EvidenceRetriever
+
+        for disease in suspected:
+            disease_name = disease["name"]
+            original_match_percent = disease["match_percent"]
+
+            # Get evidence multiplier for this disease
+            evidence_multiplier = EvidenceRetriever.get_multiplier(disease_name, default=1.0)
+
+            # Apply evidence boost as an additional multiplier (capped at 15% boost max)
+            # This ensures evidence provides meaningful improvement without overwhelming existing scores
+            evidence_boost_factor = 1.0 + (evidence_multiplier - 1.0) * 0.15
+            adjusted_match_percent = int(original_match_percent * evidence_boost_factor)
+            adjusted_match_percent = min(adjusted_match_percent, 100)  # Cap at 100
+
+            # Store original score and evidence adjustment info
+            disease["match_percent_before_evidence"] = original_match_percent
+            disease["match_percent"] = adjusted_match_percent
+            disease["evidence_multiplier"] = round(evidence_multiplier, 3)
+            disease["evidence_boost_applied"] = round(evidence_boost_factor, 3)
 
     # Group diseases by prevalence tier for stepwise differential diagnosis
     # Phase 1: Common diseases (very_common + common)
