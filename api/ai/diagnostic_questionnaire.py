@@ -2,10 +2,13 @@
 
 Generates yes/no follow-up questions to efficiently narrow down differential diagnosis
 candidates based on the current disease matches and symptom set.
+
+Supports both traditional coverage-based ranking and ML-optimized information-theoretic
+ranking for improved question selection (Phase 5).
 """
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 import logging
 
 logger = logging.getLogger(__name__)
@@ -158,14 +161,20 @@ class DiagnosticQuestionnaireEngine:
         suspected_diseases: List[Dict[str, Any]],
         symptoms: List[str],
         limit: int = 3,
+        use_ml: bool = True,
+        previously_asked: Optional[Set[str]] = None,
     ) -> List[DiagnosticQuestion]:
         """
         Generate the next diagnostic questions to narrow down disease list.
+
+        Supports both traditional coverage-based ranking and ML-optimized ranking.
 
         Args:
             suspected_diseases: List of current suspected disease matches
             symptoms: Currently detected symptoms
             limit: Maximum number of questions to return
+            use_ml: Whether to use ML-based ranking (Phase 5)
+            previously_asked: Set of question IDs already asked (for ML ranking)
 
         Returns:
             List of prioritized diagnostic questions
@@ -173,6 +182,36 @@ class DiagnosticQuestionnaireEngine:
         if not suspected_diseases or len(suspected_diseases) <= 1:
             return []
 
+        # Try to use ML ranking if available
+        if use_ml:
+            try:
+                return cls._generate_questions_ml(
+                    suspected_diseases, symptoms, limit, previously_asked or set()
+                )
+            except ImportError:
+                logger.debug("ML ranking unavailable, falling back to coverage-based ranking")
+            except Exception as e:
+                logger.warning(f"ML ranking failed: {e}, falling back to coverage-based")
+
+        # Fall back to traditional coverage-based ranking
+        return cls._generate_questions_traditional(suspected_diseases, limit)
+
+    @classmethod
+    def _generate_questions_traditional(
+        cls,
+        suspected_diseases: List[Dict[str, Any]],
+        limit: int,
+    ) -> List[DiagnosticQuestion]:
+        """
+        Traditional coverage-based question ranking (backward compatible).
+
+        Args:
+            suspected_diseases: List of current suspected disease matches
+            limit: Maximum number of questions to return
+
+        Returns:
+            List of prioritized diagnostic questions
+        """
         # Extract disease names from top candidates
         top_diseases = set(d.get("name", "") for d in suspected_diseases[:5])
 
@@ -214,6 +253,86 @@ class DiagnosticQuestionnaireEngine:
                 disease_targets=q_data["disease_targets"],
                 reasoning_ja=f"この質問は{item['coverage']}個の候補疾患を絞り込むのに役立ちます。",
                 reasoning_en=f"This question helps narrow down {item['coverage']} candidate diseases.",
+            )
+            questions.append(question)
+
+        return questions
+
+    @classmethod
+    def _generate_questions_ml(
+        cls,
+        suspected_diseases: List[Dict[str, Any]],
+        symptoms: List[str],
+        limit: int,
+        previously_asked: Set[str],
+    ) -> List[DiagnosticQuestion]:
+        """
+        ML-based question ranking using information theory (Phase 5).
+
+        Args:
+            suspected_diseases: List of current suspected disease matches
+            symptoms: Currently detected symptoms
+            limit: Maximum number of questions to return
+            previously_asked: Set of question IDs already asked
+
+        Returns:
+            List of prioritized diagnostic questions
+
+        Raises:
+            ImportError: If ML modules not available
+        """
+        from api.ai.adaptive_question_ranker import AdaptiveQuestionRanker
+
+        # Build question metadata for ranking
+        detected_symptoms_set = set(symptoms)
+        questions_with_metadata = []
+
+        for q_id, q_data in cls.QUESTION_TEMPLATES.items():
+            # Map answer options to disease targets
+            answer_types = {}
+            if q_data.get("options"):
+                answer_values = [opt["value"] for opt in q_data["options"]]
+                # For simplicity, assume each answer option targets same diseases
+                for value in answer_values:
+                    answer_types[value] = q_data.get("disease_targets", [])
+
+            questions_with_metadata.append({
+                "id": q_id,
+                "type": q_data.get("question_type", "binary"),
+                "targets": q_data.get("disease_targets", []),
+                "answer_types": answer_types,
+            })
+
+        # Rank questions using ML
+        ranked_questions = AdaptiveQuestionRanker.rank_questions(
+            questions_with_metadata=questions_with_metadata,
+            candidate_diseases=suspected_diseases,
+            detected_symptoms=detected_symptoms_set,
+            previously_asked=previously_asked,
+            use_ml=True,
+        )
+
+        # Build DiagnosticQuestion objects from ranked results
+        questions = []
+        for ranked_q in ranked_questions[:limit]:
+            q_id = ranked_q.question_id
+            if q_id not in cls.QUESTION_TEMPLATES:
+                continue
+
+            q_data = cls.QUESTION_TEMPLATES[q_id]
+            coverage = ranked_q.features.coverage_score if ranked_q.features else 0.0
+            ig_score = ranked_q.information_gain
+
+            question = DiagnosticQuestion(
+                id=q_id,
+                question_ja=q_data["question_ja"],
+                question_en=q_data["question_en"],
+                question_type=q_data["question_type"],
+                priority=int(ranked_q.composite_score * 100),
+                options=q_data["options"],
+                disease_targets=q_data["disease_targets"],
+                reasoning_ja=f"情報利得スコア: {ig_score:.3f}。この質問は約{int(coverage*100)}%の候補疾患を対象とします。",
+                reasoning_en=f"Information gain: {ig_score:.3f}. Targets ~{int(coverage*100)}% of candidates.",
             )
             questions.append(question)
 
