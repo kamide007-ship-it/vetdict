@@ -423,6 +423,11 @@ a:hover{text-decoration:underline}
                 <option value="" data-i18n="breedNone">品種を選択しない</option>
               </select>
             </div>
+            <div class="vaccine-section" style="margin-bottom:12px;padding:10px;background:var(--green-50);border:1px solid var(--green-200);border-radius:var(--radius)">
+              <label style="font-size:.82rem;font-weight:600;color:var(--navy);display:block;margin-bottom:6px">💉 ワクチン接種記録（任意）</label>
+              <div id="vaccineCheckboxes" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
+              <div id="selectedVaccinesBadge" style="margin-top:8px;min-height:20px;font-size:.8rem"></div>
+            </div>
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
               <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh"/>
@@ -974,6 +979,54 @@ async function loadChiefComplaints(){
   }catch(e){console.error("Error loading chief complaints:",e);}
 }
 
+/* --- Vaccine Management --- */
+let vaccinesCache={};
+let selectedVaccines=new Set();
+async function loadVaccines(){
+  try{
+    const response=await fetch(`/api/vaccines/${currentSpecies}`);
+    if(response.ok){
+      const data=await response.json();
+      vaccinesCache[currentSpecies]=data.vaccines||{};
+      renderVaccineCheckboxes();
+    }
+  }catch(e){console.error("Error loading vaccines:",e);}
+}
+function renderVaccineCheckboxes(){
+  const vaccines=vaccinesCache[currentSpecies]||{};
+  const container=document.getElementById("vaccineCheckboxes");
+  if(!container)return;
+  container.innerHTML="";
+  Object.entries(vaccines).forEach(([vaccineId,vaccineData])=>{
+    const coreTag=vaccineData.required?'<span style="font-size:.65rem;color:#fff;background:#dc3545;padding:1px 4px;border-radius:3px;margin-left:4px">推奨</span>':"";
+    const label=document.createElement("label");
+    label.style.cssText="display:flex;align-items:center;cursor:pointer;padding:6px;border-radius:4px;font-size:.8rem";
+    label.innerHTML=`<input type="checkbox" data-vaccine="${vaccineId}" style="margin-right:6px;cursor:pointer" onchange="toggleVaccine('${vaccineId}')"/>${vaccineData.ja}${coreTag}`;
+    container.appendChild(label);
+  });
+}
+function toggleVaccine(vaccineId){
+  if(selectedVaccines.has(vaccineId)){
+    selectedVaccines.delete(vaccineId);
+  }else{
+    selectedVaccines.add(vaccineId);
+  }
+  updateVaccineDisplay();
+}
+function updateVaccineDisplay(){
+  const badge=document.getElementById("selectedVaccinesBadge");
+  const vaccines=vaccinesCache[currentSpecies]||{};
+  if(selectedVaccines.size===0){
+    badge.innerHTML="";
+    return;
+  }
+  const tags=Array.from(selectedVaccines).map(vid=>{
+    const v=vaccines[vid];
+    return`<span style="display:inline-block;padding:4px 8px;background:var(--green-200);border-radius:4px;margin-right:4px;margin-bottom:4px;font-size:.75rem">${v.ja||vid}<button style="margin-left:4px;background:none;border:none;cursor:pointer;color:var(--green-700)" onclick="toggleVaccine('${vid}')">✕</button></span>`;
+  }).join("");
+  badge.innerHTML=tags;
+}
+
 /* --- Hamburger menu --- */
 function setupHamburger(){
   const btn=document.getElementById("hamburgerBtn");
@@ -1112,12 +1165,12 @@ function renderSpeciesGrid(){
 }
 
 function selectSpecies(id){
-  currentSpecies=id;selectedSymptoms.clear();currentBreed="";
+  currentSpecies=id;selectedSymptoms.clear();currentBreed="";selectedVaccines.clear();
   document.querySelectorAll(".species-card").forEach(c=>{
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);loadChiefComplaints();
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);loadChiefComplaints();loadVaccines();
   resetSpeciesChat(id);
   const resultsArea=document.getElementById("resultsArea");
   if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>`;
@@ -1278,6 +1331,7 @@ function doAnalyze(){
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
   const payload={species:currentSpecies,symptoms:[...selectedSymptoms]};
   if(currentBreed)payload.breed=currentBreed;
+  if(selectedVaccines.size>0)payload.vaccines=[...selectedVaccines];
   const labVals=collectLabValues();
   if(labVals)payload.lab_values=labVals;
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
@@ -1305,6 +1359,10 @@ function renderResults(data){
   }
   const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
   if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
+  if(data.vaccines_applied&&data.vaccine_preventable_excluded&&data.vaccine_preventable_excluded.length>0){
+    const excluded=data.vaccine_preventable_excluded.map(d=>`<span style="display:inline-block;padding:3px 6px;background:#d4e6f1;border-radius:3px;margin-right:4px;font-size:.75rem;margin-bottom:4px">${d}</span>`).join("");
+    html+=`<div style="font-size:.8rem;color:#2980b9;margin-bottom:12px;padding:8px 12px;background:#ebf5fb;border-radius:var(--radius);border-left:3px solid #2980b9">✓ ${currentLang==="ja"?"ワクチン接種により除外された疾患":"Diseases excluded by vaccination"}: <div style="margin-top:6px">${excluded}</div></div>`;
+  }
 
   // Stepwise differential diagnosis: Phase 1 (common) vs Phase 2 (rare)
   const phase1=diseasesByPhase.phase_1_common||[];

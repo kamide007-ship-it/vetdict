@@ -7445,6 +7445,7 @@ def analyze_symptoms(
     age_years: float | None = None,
     lab_values: dict[str, float] | None = None,
     gender: str | None = None,
+    vaccines: list[str] | None = None,
 ) -> dict:
     """Analyze a list of symptom IDs and return suspected diseases, tests,
     severity assessment, and general advice.
@@ -7509,6 +7510,15 @@ def analyze_symptoms(
         get_clinical_frequency = None
         get_all_regions_frequency = None
 
+    # Load vaccine-preventable diseases mapping
+    vaccine_preventable: set[str] = set()
+    if vaccines:
+        try:
+            from api.data.vaccine_mapping import get_preventable_diseases
+            vaccine_preventable = get_preventable_diseases(vaccines)
+        except ImportError:
+            pass
+
     pair_boosts: dict[str, float] = {}
     all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
     for pair, disease_boosts in all_pair_boosts.items():
@@ -7556,6 +7566,12 @@ def analyze_symptoms(
 
         if total == 0 or match_count == 0:
             continue
+
+        # Check if disease is vaccine-preventable (and skip if vaccinated)
+        is_vaccine_preventable = disease["name"] in vaccine_preventable
+        if is_vaccine_preventable and vaccines:
+            # Disease is preventable and animal is vaccinated; apply heavy penalty
+            continue  # Skip this disease entirely
 
         # Weighted coverage: 臨床的重要度で重み付け
         # 病態特異的な症状 (seizures=2.5 etc.) の一致は非特異的な症状より高スコア
@@ -7802,6 +7818,9 @@ def analyze_symptoms(
         "age_stage": age_stage,
         "lab_boost_applied": len(lab_boosts) > 0,
         "lab_values": lab_values,
+        "vaccines_applied": len(vaccines) > 0,
+        "vaccines": vaccines,
+        "vaccine_preventable_excluded": list(vaccine_preventable),
         "symptom_names": symptom_names_lookup,
     }
 

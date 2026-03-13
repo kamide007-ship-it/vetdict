@@ -515,6 +515,7 @@ def api_analyze_symptoms():
     age_years = data.get('age_years')  # numeric age in years
     lab_values_raw = data.get('lab_values')  # {item_id: numeric_value}
     gender = data.get('gender')  # "male" | "female"
+    vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
 
     # Validate onset
     if onset and onset not in ('acute', 'subacute', 'chronic'):
@@ -523,6 +524,11 @@ def api_analyze_symptoms():
     # Validate gender
     if gender and gender not in ('male', 'female'):
         return {'error': "gender must be 'male' or 'female'"}, 400
+
+    # Coerce vaccines to list of strings
+    vaccines = []
+    if vaccines_raw and isinstance(vaccines_raw, list):
+        vaccines = [str(v) for v in vaccines_raw if v]
 
     # Coerce age_years to float
     if age_years is not None:
@@ -547,7 +553,7 @@ def api_analyze_symptoms():
         if species == 'dog' or species is None:
             result = analyze_symptoms(
                 symptoms, breed=breed, onset=onset, age_years=age_years,
-                lab_values=lab_values, gender=gender,
+                lab_values=lab_values, gender=gender, vaccines=vaccines,
             )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
@@ -555,7 +561,7 @@ def api_analyze_symptoms():
             result = analyze_species_symptoms(
                 species, symptoms, age_stage,
                 breed=breed, onset=onset, age_years=age_years,
-                lab_values=lab_values, gender=gender,
+                lab_values=lab_values, gender=gender, vaccines=vaccines,
             )
         return result
     except ValueError as ve:
@@ -619,6 +625,45 @@ def api_get_chief_complaints(species):
             "symptoms": data.get("common_symptoms", []),
             "frequency": data.get("frequency", 0.0),
             "emergency": data.get("emergency", False),
+        }
+
+    return response
+
+
+# =============================================================================
+# API: Vaccines (ワクチン記録管理)
+# =============================================================================
+
+@app.route('/api/vaccines/<species>', methods=['GET'])
+@ensure_json_response
+def api_get_vaccines(species):
+    """Return available vaccines for a species."""
+    try:
+        from api.data.vaccine_mapping import (
+            get_vaccines_for_species,
+            is_core_vaccine,
+            get_vaccine_components,
+        )
+    except ImportError:
+        return {"error": "Vaccine mapping module not available"}, 503
+
+    species_key = (species or 'dog').lower()
+    vaccines = get_vaccines_for_species(species_key)
+
+    # Format response with vaccine metadata
+    response = {
+        "species": species_key,
+        "vaccines": {}
+    }
+
+    for vaccine_id, vaccine_data in vaccines.items():
+        response["vaccines"][vaccine_id] = {
+            "ja": vaccine_data.get("ja", ""),
+            "en": vaccine_data.get("en", ""),
+            "components": vaccine_data.get("components", []),
+            "preventable_diseases": vaccine_data.get("preventable_diseases", []),
+            "schedule": vaccine_data.get("schedule", ""),
+            "required": vaccine_data.get("required", False),
         }
 
     return response
