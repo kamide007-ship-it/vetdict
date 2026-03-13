@@ -39,7 +39,16 @@ class DiseaseInteractionMatrix:
     """Matrix of disease comorbidities and interactions."""
 
     # Core comorbidity relationships
+    # Key format: (disease_a, disease_b, species) for multi-species support
+    # Legacy format: (disease_a, disease_b) for backward compatibility (defaults to 'dog')
     COMORBIDITY_DATABASE: Dict[Tuple[str, str], ComorbidityRelation] = {}
+    SPECIES_COMORBIDITY_DATABASE: Dict[Tuple[str, str, str], ComorbidityRelation] = {}
+
+    # Supported species
+    SUPPORTED_SPECIES = {
+        "dog", "cat", "rabbit", "hamster", "guinea_pig", "ferret",
+        "bird", "reptile", "horse", "hedgehog"
+    }
 
     @classmethod
     def initialize(cls):
@@ -252,6 +261,7 @@ class DiseaseInteractionMatrix:
         age_years: Optional[float] = None,
         severity: str = "moderate",
         breed: Optional[str] = None,
+        species: str = "dog",
     ) -> float:
         """
         Get probability that two diseases coexist.
@@ -262,20 +272,36 @@ class DiseaseInteractionMatrix:
             age_years: Patient age (for age adjustment)
             severity: Symptom severity ("mild", "moderate", "severe")
             breed: Patient breed
+            species: Patient species (default "dog" for backward compatibility)
 
         Returns:
             Coexistence probability (0-1)
         """
-        # Look up relationship
-        relation = cls.COMORBIDITY_DATABASE.get((disease_a, disease_b))
+        species_lower = species.lower()
+
+        # Validate species
+        if species_lower not in cls.SUPPORTED_SPECIES:
+            logger.warning(f"Unknown species: {species}, defaulting to 'dog'")
+            species_lower = "dog"
+
+        # Try species-specific relationship first
+        relation = cls.SPECIES_COMORBIDITY_DATABASE.get(
+            (disease_a, disease_b, species_lower)
+        )
+
+        # Fall back to legacy dog database for backward compatibility
+        if not relation:
+            relation = cls.COMORBIDITY_DATABASE.get((disease_a, disease_b))
+
         if not relation:
             return 0.0  # Unknown relationship = no assumed coexistence
 
         probability = relation.base_probability
 
-        # Age adjustment
+        # Age adjustment (species-specific thresholds)
         if age_years is not None:
-            if age_years > 7:  # Senior dogs
+            age_threshold = cls._get_age_threshold(species_lower)
+            if age_years > age_threshold:
                 probability *= relation.age_factor
 
         # Severity adjustment
@@ -284,7 +310,7 @@ class DiseaseInteractionMatrix:
         elif severity == "mild":
             probability *= 0.8
 
-        # Breed adjustment
+        # Breed adjustment (mostly for dogs, but kept generic for future use)
         if breed and relation.breed_predispositions:
             if breed in relation.breed_predispositions:
                 probability *= 1.1
@@ -299,6 +325,7 @@ class DiseaseInteractionMatrix:
         severity: str = "moderate",
         breed: Optional[str] = None,
         threshold: float = 0.30,
+        species: str = "dog",
     ) -> List[Tuple[str, float, str]]:
         """
         Find diseases that likely coexist with a primary disease.
@@ -309,37 +336,88 @@ class DiseaseInteractionMatrix:
             severity: Symptom severity
             breed: Patient breed
             threshold: Minimum probability to include (default 0.30)
+            species: Patient species (default "dog")
 
         Returns:
             List of (disease_name, probability, mechanism) tuples
         """
+        species_lower = species.lower()
         candidates = []
+        seen_diseases = set()
 
-        for (d_a, d_b), relation in cls.COMORBIDITY_DATABASE.items():
-            if d_a == primary_disease:
+        # Check species-specific relationships first
+        for (d_a, d_b, sp), relation in cls.SPECIES_COMORBIDITY_DATABASE.items():
+            if sp == species_lower and d_a == primary_disease:
                 prob = cls.get_comorbidity_probability(
-                    d_a, d_b, age_years, severity, breed
+                    d_a, d_b, age_years, severity, breed, species
+                )
+                if prob >= threshold and d_b not in seen_diseases:
+                    candidates.append((d_b, prob, relation.mechanism))
+                    seen_diseases.add(d_b)
+
+        # Fall back to legacy database for unmapped relationships
+        for (d_a, d_b), relation in cls.COMORBIDITY_DATABASE.items():
+            if d_a == primary_disease and d_b not in seen_diseases:
+                prob = cls.get_comorbidity_probability(
+                    d_a, d_b, age_years, severity, breed, species
                 )
                 if prob >= threshold:
                     candidates.append((d_b, prob, relation.mechanism))
+                    seen_diseases.add(d_b)
 
         # Sort by probability (descending)
         candidates.sort(key=lambda x: x[1], reverse=True)
         return candidates
 
     @classmethod
-    def get_comorbidity_explanation(cls, disease_a: str, disease_b: str) -> str:
+    def _get_age_threshold(cls, species: str) -> float:
+        """
+        Get the age threshold for senior animals by species.
+
+        Args:
+            species: Target species
+
+        Returns:
+            Age in years when an animal is considered senior
+        """
+        # Species-specific senior age thresholds
+        thresholds = {
+            "dog": 7.0,
+            "cat": 7.0,
+            "rabbit": 5.0,
+            "hamster": 2.0,
+            "guinea_pig": 4.0,
+            "ferret": 5.0,
+            "bird": 10.0,
+            "reptile": 10.0,
+            "horse": 15.0,
+            "hedgehog": 4.0,
+        }
+        return thresholds.get(species.lower(), 7.0)
+
+    @classmethod
+    def get_comorbidity_explanation(cls, disease_a: str, disease_b: str, species: str = "dog") -> str:
         """
         Get plain-text explanation of why two diseases coexist.
 
         Args:
             disease_a: First disease
             disease_b: Second disease
+            species: Patient species (default "dog")
 
         Returns:
             Explanation string (Japanese friendly)
         """
-        relation = cls.COMORBIDITY_DATABASE.get((disease_a, disease_b))
+        species_lower = species.lower()
+
+        # Try species-specific explanation first
+        relation = cls.SPECIES_COMORBIDITY_DATABASE.get(
+            (disease_a, disease_b, species_lower)
+        )
+
+        # Fall back to legacy database
+        if not relation:
+            relation = cls.COMORBIDITY_DATABASE.get((disease_a, disease_b))
         if not relation:
             return f"{disease_a}と{disease_b}の関連性は不明です。"
 
