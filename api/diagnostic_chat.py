@@ -2503,3 +2503,87 @@ def get_next_diagnostic_questions():
     except Exception as e:
         logger.error(f"Error generating next questions: {e}", exc_info=True)
         return jsonify({"error": "failed_to_generate_questions"}), 500
+
+
+# =============================================================================
+# API: Multi-Disease Analysis (Phase 6)
+# =============================================================================
+
+@diagnostic_bp.route("/multi-disease/analyze", methods=["POST"])
+def analyze_multidisease():
+    """
+    Analyze symptoms for multiple disease hypothesis scenarios.
+
+    Orchestrates Phase 6 (Stages 3-5) multi-disease analysis:
+    - Stage 3: Symptom ambiguity detection
+    - Stage 4: Combined confidence scoring
+    - Stage 5: Multi-disease question generation
+
+    Request JSON:
+    {
+        "symptom_ids": [...],              # List of detected symptom IDs
+        "symptoms_ja": "...",              # Japanese symptom description
+        "symptoms_en": "...",              # English symptom description
+        "suspected_diseases": [            # Current disease candidates
+            {
+                "name": "Disease A",
+                "match_percent": 75,
+                ...
+            },
+            ...
+        ],
+        "patient_context": {               # Optional patient info
+            "age_years": 7,
+            "species": "dog",
+            "breed": "Labrador",
+            "gender": "male"
+        }
+    }
+
+    Returns:
+    {
+        "multidisease_mode_enabled": bool,
+        "combinations_found": int,
+        "combinations": [...],              # Top disease combinations
+        "ambiguity_analysis": {...},
+        "confidence_breakdown": {...},      # Bayesian breakdown
+        "next_questions": [...],            # Recommended questions
+        "explanation_en": str,
+        "explanation_ja": str
+    }
+    """
+    from api.ai.multidisease_api_handler import MultiDiseaseAnalyzer
+
+    try:
+        data = request.get_json() or {}
+
+        # Validate request
+        is_valid, error_msg = MultiDiseaseAnalyzer.validate_request(data)
+        if not is_valid:
+            return jsonify({"error": error_msg}), 400
+
+        # Extract parameters
+        symptom_ids = data.get("symptom_ids", [])
+        detected_symptoms_ja = data.get("symptoms_ja")
+        detected_symptoms_en = data.get("symptoms_en")
+        suspected_diseases = data.get("suspected_diseases", [])
+        patient_context = data.get("patient_context")
+
+        # Get disease database (dog is default)
+        disease_db = DISEASES if isinstance(DISEASES, list) else []
+
+        # Perform analysis
+        analysis_result = MultiDiseaseAnalyzer.analyze_for_multidisease(
+            symptom_ids=symptom_ids,
+            detected_symptoms_ja=detected_symptoms_ja,
+            detected_symptoms_en=detected_symptoms_en,
+            suspected_diseases=suspected_diseases,
+            disease_database=disease_db,
+            patient_context=patient_context,
+        )
+
+        return jsonify(analysis_result), 200
+
+    except Exception as e:
+        logger.error(f"Error in multi-disease analysis: {e}", exc_info=True)
+        return jsonify({"error": "multidisease_analysis_failed"}), 500
