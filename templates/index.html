@@ -1305,6 +1305,7 @@ function renderDiseaseCard(d,data){
 
   let html=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span>${prevalenceLabel?`<span style="font-size:.7rem;color:var(--gray-500);margin-left:8px;padding:2px 6px;background:var(--gray-100);border-radius:6px">${prevalenceLabel}</span>`:""}  </div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
   return html;
+}
 
 function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
