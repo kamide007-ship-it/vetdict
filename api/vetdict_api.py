@@ -515,6 +515,7 @@ def api_analyze_symptoms():
     age_years = data.get('age_years')  # numeric age in years
     lab_values_raw = data.get('lab_values')  # {item_id: numeric_value}
     gender = data.get('gender')  # "male" | "female"
+    vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
     vaccination_status = data.get('vaccination_status')  # "current" | "outdated" | "none"
 
     # Validate onset
@@ -528,6 +529,11 @@ def api_analyze_symptoms():
     # Validate vaccination_status
     if vaccination_status and vaccination_status not in ('current', 'outdated', 'none'):
         return {'error': "vaccination_status must be 'current', 'outdated', or 'none'"}, 400
+
+    # Coerce vaccines to list of strings
+    vaccines = []
+    if vaccines_raw and isinstance(vaccines_raw, list):
+        vaccines = [str(v) for v in vaccines_raw if v]
 
     # Coerce age_years to float
     if age_years is not None:
@@ -552,7 +558,10 @@ def api_analyze_symptoms():
         if species == 'dog' or species is None:
             result = analyze_symptoms(
                 symptoms, breed=breed, onset=onset, age_years=age_years,
-                lab_values=lab_values, gender=gender, vaccination_status=vaccination_status,
+                lab_values=lab_values,
+                gender=gender,
+                vaccines=vaccines,
+                vaccination_status=vaccination_status,
             )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
@@ -560,7 +569,10 @@ def api_analyze_symptoms():
             result = analyze_species_symptoms(
                 species, symptoms, age_stage,
                 breed=breed, onset=onset, age_years=age_years,
-                lab_values=lab_values, gender=gender, vaccination_status=vaccination_status,
+                lab_values=lab_values,
+                gender=gender,
+                vaccines=vaccines,
+                vaccination_status=vaccination_status,
             )
         return result
     except ValueError as ve:

@@ -133,6 +133,7 @@ def analyze_species_symptoms(
     age_years: float | None = None,
     lab_values: dict | None = None,
     gender: str | None = None,
+    vaccines: list[str] | None = None,
     vaccination_status: str | None = None,
 ) -> Dict:
     """動物種に応じて適切な鑑別診断関数を呼び出すユーティリティ。
@@ -146,6 +147,7 @@ def analyze_species_symptoms(
         age_years: 年齢（年単位の数値、任意）
         lab_values: 検査値 {項目ID: 数値} の辞書（任意）
         gender: 性別 "male" | "female"（任意）
+        vaccines: ワクチンIDのリスト（任意）
         vaccination_status: ワクチン接種状況 "current" | "outdated" | "none"（任意）
 
     Returns:
@@ -157,7 +159,7 @@ def analyze_species_symptoms(
     species_key = (species or "dog").lower()
     if species_key not in SPECIES_HANDLERS:
         raise ValueError(f"Unsupported species: {species}")
-    # 犬: 全パラメータ（breed, onset, age_years, lab_values, gender, vaccination_status）を渡す
+    # 犬: 全パラメータを渡す
     if species_key == "dog":
         return analyze_dog(
             symptoms,
@@ -166,6 +168,7 @@ def analyze_species_symptoms(
             age_years=age_years,
             lab_values=lab_values,
             gender=gender,
+            vaccines=vaccines,
             vaccination_status=vaccination_status,
         )
     elif species_key == "horse":
@@ -173,11 +176,11 @@ def analyze_species_symptoms(
         return handler(symptoms, age_stage)
     else:
         handler = SPECIES_HANDLERS[species_key]
+        # Non-dog species analyzers do not currently accept vaccination kwargs.
         return handler(
             symptoms, age_stage,
             breed=breed, onset=onset, age_years=age_years,
             species=species_key,
             lab_values=lab_values,
             gender=gender,
-            vaccination_status=vaccination_status,
         )
