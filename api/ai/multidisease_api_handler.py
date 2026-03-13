@@ -2,6 +2,8 @@
 
 Orchestrates Stage 3-5 components to provide comprehensive multi-disease
 diagnostic analysis through a single API endpoint.
+
+Includes Stage 8 caching optimizations for performance improvement.
 """
 
 from typing import Any, Dict, List, Optional
@@ -19,6 +21,7 @@ from api.ai.multidisease_question_generator import (
     MultiDiseaseQuestionGenerator,
     DiscriminativeQuestionRanker,
 )
+from api.ai.multidisease_cache_manager import get_global_cache
 
 
 class MultiDiseaseAnalyzer:
@@ -33,11 +36,13 @@ class MultiDiseaseAnalyzer:
         suspected_diseases: Optional[List[Dict[str, Any]]] = None,
         disease_database: Optional[List[Dict[str, Any]]] = None,
         patient_context: Optional[Dict[str, Any]] = None,
+        use_cache: bool = True,
     ) -> Dict[str, Any]:
         """
-        Perform comprehensive multi-disease analysis.
+        Perform comprehensive multi-disease analysis with caching.
 
         Orchestrates Stage 3-5 analysis for multi-disease diagnosis scenarios.
+        Includes Stage 8 caching optimizations for frequently computed values.
 
         Args:
             symptom_ids: List of detected symptom IDs
@@ -46,6 +51,7 @@ class MultiDiseaseAnalyzer:
             suspected_diseases: Current disease candidates with scores
             disease_database: Disease database for context
             patient_context: Patient information (age, species, etc.)
+            use_cache: Enable caching optimizations (default True)
 
         Returns:
             Comprehensive analysis response
@@ -54,6 +60,9 @@ class MultiDiseaseAnalyzer:
             suspected_diseases = []
         if not disease_database:
             disease_database = []
+
+        # Get cache manager if caching is enabled
+        cache = get_global_cache() if use_cache else None
 
         # Stage 1: Check if multi-disease mode should be activated
         should_explore = MultiDiseaseDetector.should_explore_multidisease(
@@ -66,6 +75,7 @@ class MultiDiseaseAnalyzer:
             "multidisease_mode_enabled": should_explore,
             "symptom_count": len(symptom_ids),
             "disease_candidates_count": len(suspected_diseases),
+            "cache_enabled": use_cache and cache is not None,
         }
 
         if not should_explore:
@@ -83,11 +93,27 @@ class MultiDiseaseAnalyzer:
         response["combinations"] = [c.to_dict() for c in combinations[:3]]  # Top 3
 
         # Stage 3: Analyze symptom ambiguities
-        ambiguity_analysis = MultiDiseaseDetector.analyze_symptom_ambiguity(
-            detected_symptoms=symptom_ids,
-            suspected_diseases=suspected_diseases,
-            disease_database=disease_database,
-        )
+        # Check cache for ambiguity analysis if available
+        cached_ambiguity = None
+        if cache:
+            cached_ambiguity = cache.ambiguity_scores.get(symptom_ids)
+
+        if cached_ambiguity:
+            ambiguity_analysis = cached_ambiguity
+            logger.debug(f"Cache hit: ambiguity analysis for {len(symptom_ids)} symptoms")
+        else:
+            ambiguity_analysis = MultiDiseaseDetector.analyze_symptom_ambiguity(
+                detected_symptoms=symptom_ids,
+                suspected_diseases=suspected_diseases,
+                disease_database=disease_database,
+            )
+
+            # Cache the result
+            if cache:
+                cache.ambiguity_scores.put(
+                    symptom_ids,
+                    ambiguity_analysis.get("ambiguity_reports", []),
+                )
 
         response["ambiguity_analysis"] = {
             "high_ambiguity_symptoms": ambiguity_analysis.get("high_ambiguity_symptoms", []),
@@ -106,25 +132,75 @@ class MultiDiseaseAnalyzer:
                 adjustment_factor=ambiguity_analysis.get("adjustment_factor", 1.0),
             )
 
-            # Calculate detailed Bayesian breakdown
-            breakdown = CombinedConfidenceCalculator.calculate_bayesian_combination(
-                diseases=adjusted_combination.diseases,
-                individual_confidences=adjusted_combination.component_confidences,
-                detected_symptoms=symptom_ids,
-                symptom_disease_mapping=cls._build_symptom_mapping(
-                    symptom_ids, adjusted_combination.diseases, disease_database
-                ),
-                patient_context=patient_context,
-            )
+            # Check cache for confidence breakdown
+            cached_confidence = None
+            if cache:
+                cached_confidence = cache.confidence_calcs.get(
+                    adjusted_combination.diseases,
+                    symptom_ids,
+                )
 
-            response["confidence_breakdown"] = breakdown.to_dict()
+            if cached_confidence:
+                breakdown_dict = cached_confidence
+                logger.debug(
+                    f"Cache hit: confidence for {adjusted_combination.diseases}"
+                )
+            else:
+                # Calculate detailed Bayesian breakdown
+                breakdown = CombinedConfidenceCalculator.calculate_bayesian_combination(
+                    diseases=adjusted_combination.diseases,
+                    individual_confidences=adjusted_combination.component_confidences,
+                    detected_symptoms=symptom_ids,
+                    symptom_disease_mapping=cls._build_symptom_mapping(
+                        symptom_ids,
+                        adjusted_combination.diseases,
+                        disease_database,
+                    ),
+                    patient_context=patient_context,
+                )
+
+                breakdown_dict = breakdown.to_dict()
+
+                # Cache the result
+                if cache:
+                    cache.confidence_calcs.put(
+                        adjusted_combination.diseases,
+                        symptom_ids,
+                        breakdown_dict,
+                    )
+
+            response["confidence_breakdown"] = breakdown_dict
 
             # Stage 5: Generate optimized questions
-            questions = MultiDiseaseQuestionGenerator.generate_combination_focused_questions(
-                diseases=adjusted_combination.diseases,
-                detected_symptoms=symptom_ids,
-                disease_database=disease_database,
-            )
+            # Check cache for questions
+            cached_questions = None
+            if cache and len(adjusted_combination.diseases) == 2:
+                disease_a, disease_b = adjusted_combination.diseases
+                cached_questions = cache.question_templates.get_differentiating_questions(
+                    disease_a,
+                    disease_b,
+                )
+
+            if cached_questions:
+                questions = cached_questions
+                logger.debug(
+                    f"Cache hit: questions for {adjusted_combination.diseases}"
+                )
+            else:
+                questions = MultiDiseaseQuestionGenerator.generate_combination_focused_questions(
+                    diseases=adjusted_combination.diseases,
+                    detected_symptoms=symptom_ids,
+                    disease_database=disease_database,
+                )
+
+                # Cache for 2-disease combinations
+                if cache and questions and len(adjusted_combination.diseases) == 2:
+                    disease_a, disease_b = adjusted_combination.diseases
+                    cache.question_templates.cache_questions(
+                        disease_a,
+                        disease_b,
+                        questions,
+                    )
 
             # Rank questions by discriminative value
             if questions:
