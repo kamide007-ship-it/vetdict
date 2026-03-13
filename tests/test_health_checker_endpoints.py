@@ -2,6 +2,37 @@ import api.vetdict_api as vetdict_api
 from api.vetdict_api import app
 
 
+def test_index_lab_fields_render_with_matching_label_targets():
+    client = app.test_client()
+    resp = client.get('/')
+    assert resp.status_code == 200
+    html = resp.get_data(as_text=True)
+
+    expected_fields = [
+        ('lab-bun', 'BUN <span class="lab-unit">mg/dL</span>'),
+        ('lab-creatinine', 'Cre <span class="lab-unit">mg/dL</span>'),
+        ('lab-sdma', 'SDMA <span class="lab-unit">&micro;g/dL</span>'),
+        ('lab-phosphorus', 'P <span class="lab-unit">mg/dL</span>'),
+        ('lab-alt', 'ALT <span class="lab-unit">U/L</span>'),
+        ('lab-alp', 'ALP <span class="lab-unit">U/L</span>'),
+        ('lab-ggt', 'GGT <span class="lab-unit">U/L</span>'),
+        ('lab-tbil', 'T-Bil <span class="lab-unit">mg/dL</span>'),
+        ('lab-albumin', 'Alb <span class="lab-unit">g/dL</span>'),
+        ('lab-glucose', 'Glu <span class="lab-unit">mg/dL</span>'),
+        ('lab-lipase', 'Lipase <span class="lab-unit">U/L</span>'),
+        ('lab-potassium', 'K <span class="lab-unit">mEq/L</span>'),
+        ('lab-sodium', 'Na <span class="lab-unit">mEq/L</span>'),
+        ('lab-calcium', 'Ca <span class="lab-unit">mg/dL</span>'),
+        ('lab-wbc', 'WBC <span class="lab-unit">&times;10&sup3;/&micro;L</span>'),
+        ('lab-pcv', 'PCV <span class="lab-unit">%</span>'),
+        ('lab-platelets', 'PLT <span class="lab-unit">&times;10&sup3;/&micro;L</span>'),
+    ]
+
+    for field_id, label_html in expected_fields:
+        assert f'<label for="{field_id}">{label_html}</label>' in html
+        assert f'id="{field_id}"' in html
+
+
 def test_health_check_diseases_include_quality_fields():
     client = app.test_client()
     resp = client.get('/api/health-check/diseases?species=cat')
