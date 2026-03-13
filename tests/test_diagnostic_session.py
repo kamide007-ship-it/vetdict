@@ -1,6 +1,13 @@
-import uuid
+import pytest
 
 from api.ai.diagnostic_session import DiagnosticSession, DiagnosticSessionManager
+
+
+@pytest.fixture
+def isolated_session_manager(tmp_path, monkeypatch):
+    monkeypatch.setattr(DiagnosticSessionManager, "_storage_dir", tmp_path)
+    monkeypatch.setattr(DiagnosticSessionManager, "_sessions", {})
+    return DiagnosticSessionManager
 
 
 def test_session_json_round_trip_restores_candidates_and_answers():
@@ -27,78 +34,51 @@ def test_session_json_round_trip_restores_candidates_and_answers():
     assert restored.get_diagnosis_summary()["top_disease"] == "Canine Influenza"
 
 
-def test_manager_loads_persisted_session_on_cache_miss(tmp_path):
-    original_storage_dir = DiagnosticSessionManager._storage_dir
-    original_sessions = DiagnosticSessionManager._sessions.copy()
+def test_manager_loads_persisted_session_after_cache_clear(isolated_session_manager):
+    session = isolated_session_manager.create_session(
+        symptoms=["vomiting"],
+        suspected_diseases=[
+            {"name": "Pancreatitis", "name_ja": "膵炎", "match_percent": 81},
+        ],
+        species="dog",
+    )
+    session_id = session.session_id
 
-    try:
-        DiagnosticSessionManager._storage_dir = tmp_path
-        DiagnosticSessionManager._sessions = {}
+    isolated_session_manager._sessions = {}
 
-        session = DiagnosticSessionManager.create_session(
-            symptoms=["vomiting"],
-            suspected_diseases=[
-                {"name": "Pancreatitis", "name_ja": "膵炎", "match_percent": 81},
-            ],
-            species="dog",
-        )
-        session_id = session.session_id
+    reloaded = isolated_session_manager.get_session(session_id)
 
-        DiagnosticSessionManager._sessions = {}
-
-        reloaded = DiagnosticSessionManager.get_session(session_id)
-
-        assert reloaded is not None
-        assert reloaded.session_id == session_id
-        assert reloaded.current_candidates == session.current_candidates
-        assert reloaded.get_diagnosis_summary()["top_disease"] == "Pancreatitis"
-    finally:
-        DiagnosticSessionManager._storage_dir = original_storage_dir
-        DiagnosticSessionManager._sessions = original_sessions
+    assert reloaded is not None
+    assert reloaded.session_id == session_id
+    assert reloaded.current_candidates == session.current_candidates
+    assert reloaded.get_diagnosis_summary()["top_disease"] == "Pancreatitis"
 
 
-def test_manager_rejects_invalid_session_ids_without_touching_files(tmp_path):
-    original_storage_dir = DiagnosticSessionManager._storage_dir
-    original_sessions = DiagnosticSessionManager._sessions.copy()
+def test_manager_rejects_invalid_session_ids_without_touching_files(tmp_path, monkeypatch):
+    monkeypatch.setattr(DiagnosticSessionManager, "_storage_dir", tmp_path / "sessions")
+    monkeypatch.setattr(DiagnosticSessionManager, "_sessions", {})
     outside_file = tmp_path / "outside.json"
     outside_file.write_text("keep", encoding="utf-8")
 
-    try:
-        DiagnosticSessionManager._storage_dir = tmp_path / "sessions"
-        DiagnosticSessionManager._sessions = {}
+    assert DiagnosticSessionManager.get_session("../../outside") is None
+    DiagnosticSessionManager.clear_session("../../outside")
 
-        assert DiagnosticSessionManager.get_session("../../outside") is None
-        DiagnosticSessionManager.clear_session("../../outside")
-
-        assert outside_file.read_text(encoding="utf-8") == "keep"
-        assert not DiagnosticSessionManager._storage_dir.exists()
-    finally:
-        DiagnosticSessionManager._storage_dir = original_storage_dir
-        DiagnosticSessionManager._sessions = original_sessions
+    assert outside_file.read_text(encoding="utf-8") == "keep"
+    assert not DiagnosticSessionManager._storage_dir.exists()
 
 
-def test_manager_clear_session_removes_persisted_file(tmp_path):
-    original_storage_dir = DiagnosticSessionManager._storage_dir
-    original_sessions = DiagnosticSessionManager._sessions.copy()
+def test_manager_clear_session_removes_persisted_file(isolated_session_manager):
+    session = isolated_session_manager.create_session(
+        symptoms=["lethargy"],
+        suspected_diseases=[
+            {"name": "Anemia", "name_ja": "貧血", "match_percent": 55},
+        ],
+    )
 
-    try:
-        DiagnosticSessionManager._storage_dir = tmp_path
-        DiagnosticSessionManager._sessions = {}
+    session_file = isolated_session_manager._get_session_file_path(session.session_id)
+    assert session_file.exists()
 
-        session = DiagnosticSessionManager.create_session(
-            symptoms=["lethargy"],
-            suspected_diseases=[
-                {"name": "Anemia", "name_ja": "貧血", "match_percent": 55},
-            ],
-        )
+    isolated_session_manager.clear_session(session.session_id)
 
-        session_file = tmp_path / f"{uuid.UUID(session.session_id)}.json"
-        assert session_file.exists()
-
-        DiagnosticSessionManager.clear_session(session.session_id)
-
-        assert DiagnosticSessionManager.get_session(session.session_id) is None
-        assert not session_file.exists()
-    finally:
-        DiagnosticSessionManager._storage_dir = original_storage_dir
-        DiagnosticSessionManager._sessions = original_sessions
+    assert isolated_session_manager.get_session(session.session_id) is None
+    assert not session_file.exists()

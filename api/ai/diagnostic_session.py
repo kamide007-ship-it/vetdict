@@ -6,6 +6,7 @@ enabling adaptive questioning and progressive disease narrowing.
 
 import json
 import logging
+import os
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -275,7 +276,12 @@ class DiagnosticSessionManager:
 
     # In-memory session cache (would use Redis in production)
     _sessions: Dict[str, DiagnosticSession] = {}
-    _storage_dir: Path = Path(__file__).resolve().parents[2] / ".diagnostic_sessions"
+    _storage_dir: Path = Path(
+        os.getenv(
+            "VETDICT_DIAGNOSTIC_SESSION_DIR",
+            str(Path(__file__).resolve().parents[2] / ".diagnostic_sessions"),
+        )
+    )
 
     @classmethod
     def _validate_session_id(cls, session_id: str) -> str:
@@ -289,8 +295,8 @@ class DiagnosticSessionManager:
         storage_dir = cls._storage_dir.resolve()
         file_path = (storage_dir / f"{validated_session_id}.json").resolve()
 
-        if storage_dir not in file_path.parents:
-            raise ValueError("Invalid session storage path")
+        if not file_path.is_relative_to(storage_dir):
+            raise ValueError("Session file path escapes storage directory")
 
         return file_path
 
@@ -298,15 +304,37 @@ class DiagnosticSessionManager:
     def _save_session(cls, session: DiagnosticSession) -> None:
         """Persist a session to disk."""
         file_path = cls._get_session_file_path(session.session_id)
-        file_path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-        file_path.write_text(session.to_json(), encoding="utf-8")
+        directories_to_secure = []
+        current_dir = file_path.parent
+        while not current_dir.exists():
+            directories_to_secure.append(current_dir)
+            current_dir = current_dir.parent
+
+        for directory in reversed(directories_to_secure):
+            directory.mkdir(mode=0o700, exist_ok=True)
+
+        for directory in directories_to_secure or [file_path.parent]:
+            try:
+                directory.chmod(0o700)
+            except OSError:
+                logger.warning("Unable to set diagnostic session directory permissions", exc_info=True)
+
+        temp_path = file_path.with_suffix(f"{file_path.suffix}.tmp")
+        try:
+            temp_fd = os.open(temp_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+            with os.fdopen(temp_fd, "w", encoding="utf-8") as temp_file:
+                temp_file.write(session.to_json())
+            temp_path.replace(file_path)
+        finally:
+            if temp_path.exists():
+                temp_path.unlink()
 
     @classmethod
     def _load_session(cls, session_id: str) -> Optional[DiagnosticSession]:
         """Load a session from disk."""
         try:
             file_path = cls._get_session_file_path(session_id)
-        except (ValueError, AttributeError):
+        except ValueError:
             return None
 
         if not file_path.exists():
@@ -339,7 +367,7 @@ class DiagnosticSessionManager:
         """Retrieve a session by ID."""
         try:
             validated_session_id = cls._validate_session_id(session_id)
-        except (ValueError, AttributeError):
+        except ValueError:
             return None
 
         session = cls._sessions.get(validated_session_id)
@@ -373,7 +401,7 @@ class DiagnosticSessionManager:
         """Delete a session."""
         try:
             validated_session_id = cls._validate_session_id(session_id)
-        except (ValueError, AttributeError):
+        except ValueError:
             return
 
         cls._sessions.pop(validated_session_id, None)
