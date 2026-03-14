@@ -1,0 +1,58 @@
+/* Confidence Breakdown Component Styles */
+
+.confidence-breakdown {
+  margin-top: 16px;
+  padding: 14px;
+  background: #f0fdf4;
+  border: 2px solid #86efac;
+  border-radius: 10px;
+  border-left: 4px solid #22a84f;
+}
+
+.breakdown-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breakdown-title::before {
+  content: '\1F4CA';
+  font-size: 1rem;
+}
+
+.breakdown-item {
+  margin-bottom: 10px;
+}
+
+.breakdown-label {
+  font-size: 0.78rem;
+  color: #166534;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.breakdown-percentage {
+  color: #22a84f;
+  font-weight: 700;
+}
+
+.breakdown-bar {
+  width: 100%;
+  height: 8px;
+  background: #d1fae5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.breakdown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22a84f 0%, #16a34a 100%);
+  border-radius: 4px;
+  min-width: 2px;
+}
