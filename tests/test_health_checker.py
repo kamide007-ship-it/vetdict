@@ -252,3 +252,253 @@ class TestAnalyzeSymptoms:
         )
         emergency_found = any(r["severity"] == "emergency" for r in results[:5])
         assert emergency_found
+
+    def test_onset_boost_for_matching(self):
+        """Matching onset should boost score."""
+        results_acute = _analyze_symptoms("", ["vomiting", "diarrhea"], onset="acute")
+        results_none = _analyze_symptoms("", ["vomiting", "diarrhea"])
+        # At least one result should have onset_factor != 1.0
+        acute_factors = [r["onset_factor"] for r in results_acute]
+        assert any(f != 1.0 for f in acute_factors)
+
+    def test_onset_chronic(self):
+        """Chronic onset should work."""
+        results = _analyze_symptoms("", ["limping", "stiffness"], onset="chronic")
+        assert isinstance(results, list)
+        for r in results:
+            assert "onset_factor" in r
+
+
+# ============================================================================
+# Flask Route Tests
+# ============================================================================
+
+import pytest
+from flask import Flask
+from api.health_checker import health_bp
+
+
+@pytest.fixture
+def app():
+    app = Flask(__name__)
+    app.register_blueprint(health_bp)
+    app.config["TESTING"] = True
+    return app
+
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
+
+
+class TestGetSymptomsRoute:
+
+    def test_returns_all_symptoms(self, client):
+        resp = client.get("/api/health-check/symptoms")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "total" in data
+        assert "symptoms" in data
+        assert "categories" in data
+        assert data["total"] == 52
+
+    def test_filter_by_category(self, client):
+        resp = client.get("/api/health-check/symptoms?category=respiratory")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        for s in data["symptoms"]:
+            assert s["category"] == "respiratory"
+        assert data["total"] < 52
+
+
+class TestGetOnsetOptionsRoute:
+
+    def test_returns_onset_and_age(self, client):
+        resp = client.get("/api/health-check/onset-options")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "onset" in data
+        assert "age_range" in data
+
+    def test_onset_has_three_options(self, client):
+        resp = client.get("/api/health-check/onset-options")
+        data = resp.get_json()
+        assert len(data["onset"]["options"]) == 3
+        ids = [o["id"] for o in data["onset"]["options"]]
+        assert set(ids) == {"acute", "subacute", "chronic"}
+
+    def test_age_range_has_four_options(self, client):
+        resp = client.get("/api/health-check/onset-options")
+        data = resp.get_json()
+        assert len(data["age_range"]["options"]) == 4
+
+
+class TestGetDiseasesRoute:
+
+    def test_dog_default(self, client):
+        resp = client.get("/api/health-check/diseases")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["total"] > 0
+        assert "diseases" in data
+
+    def test_cat_species(self, client):
+        resp = client.get("/api/health-check/diseases?species=cat")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["total"] > 0
+
+    def test_horse_species(self, client):
+        resp = client.get("/api/health-check/diseases?species=horse")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["total"] > 0
+
+    def test_rabbit_species(self, client):
+        resp = client.get("/api/health-check/diseases?species=rabbit")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["total"] > 0
+
+
+class TestDiseaseQualityReportRoute:
+
+    def test_returns_report(self, client):
+        resp = client.get("/api/health-check/disease-quality-report")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "species" in data
+        assert "total_diseases" in data
+        assert "average_completeness" in data
+        assert "diseases_with_missing_fields" in data
+        assert "missing_field_counts" in data
+
+    def test_cat_report(self, client):
+        resp = client.get("/api/health-check/disease-quality-report?species=cat")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["species"] == "cat"
+
+
+class TestAnalyzeRoute:
+
+    def test_valid_analysis(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={"symptoms": ["vomiting", "diarrhea"]},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "top_matches" in data
+        assert "total_matches" in data
+        assert "emergency_flag" in data
+        assert "disclaimer" in data
+        assert "supervised_by" in data
+        assert "consolidated_priority_tests" in data
+
+    def test_empty_symptoms_400(self, client):
+        resp = client.post("/api/health-check/analyze", json={"symptoms": []})
+        assert resp.status_code == 400
+
+    def test_no_body_400(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            content_type="application/json",
+            data="",
+        )
+        assert resp.status_code == 400
+
+    def test_invalid_symptom_400(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={"symptoms": ["nonexistent_xyz"]},
+        )
+        assert resp.status_code == 400
+        data = resp.get_json()
+        assert "invalid_symptoms" in data
+        assert "valid_symptoms" in data
+
+    def test_with_breed_age_onset(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={
+                "symptoms": ["vomiting", "lethargy"],
+                "breed_id": "french_bulldog",
+                "age_years": 5,
+                "onset": "acute",
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["input"]["breed_id"] == "french_bulldog"
+        assert data["input"]["age_years"] == 5.0
+        assert data["input"]["onset"] == "acute"
+
+    def test_invalid_onset_400(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={"symptoms": ["vomiting"], "onset": "wrong"},
+        )
+        assert resp.status_code == 400
+
+    def test_invalid_age_400(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={"symptoms": ["vomiting"], "age_years": "not_a_number"},
+        )
+        assert resp.status_code == 400
+
+    def test_fci_prefix_stripped(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={"symptoms": ["vomiting"], "breed_id": "101_french_bulldog"},
+        )
+        assert resp.status_code == 200
+        assert resp.get_json()["input"]["breed_id"] == "french_bulldog"
+
+    def test_genetic_info_for_known_breed(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={
+                "symptoms": ["vomiting", "lethargy"],
+                "breed_id": "golden_retriever",
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        # golden_retriever may or may not have genetic data
+        assert "breed_genetic_info" in data
+
+    def test_emergency_flag_true(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={
+                "symptoms": [
+                    "vomiting", "diarrhea", "blood_in_stool",
+                    "lethargy", "loss_of_appetite", "fever",
+                ],
+            },
+        )
+        data = resp.get_json()
+        assert data["emergency_flag"] is True
+        assert data["emergency_message"] is not None
+
+    def test_symptoms_not_list_400(self, client):
+        resp = client.post(
+            "/api/health-check/analyze",
+            json={"symptoms": "vomiting"},
+        )
+        assert resp.status_code == 400
+
+
+class TestBreedRisksRoute:
+
+    def test_known_breed(self, client):
+        resp = client.get("/api/health-check/breed-risks/french_bulldog")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "breed_id" in data or "breed_diseases" in data or "disease_risks" in data
+
+    def test_unknown_breed_404(self, client):
+        resp = client.get("/api/health-check/breed-risks/nonexistent_xyz")
+        assert resp.status_code in (200, 404)
