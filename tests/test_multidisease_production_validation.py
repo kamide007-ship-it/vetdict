@@ -214,17 +214,21 @@ class TestFrontendCompliance:
             assert component in content, f"{component} should be implemented"
 
     def test_css_responsive_design(self):
-        """Test CSS includes responsive design."""
-        css_file = Path("/home/user/vetdict/static/css/multidisease-ui.css")
-        content = css_file.read_text()
+        """Test CSS includes responsive design (across split files)."""
+        css_dir = Path("/home/user/vetdict/static/css")
+        content = ""
+        for css_file in css_dir.glob("multidisease-*.css"):
+            content += css_file.read_text() + "\n"
 
         assert "@media" in content, "Should include media queries"
         assert "max-width" in content, "Should have responsive rules"
 
     def test_accessibility_features(self):
-        """Test accessibility is implemented."""
-        css_file = Path("/home/user/vetdict/static/css/multidisease-ui.css")
-        content = css_file.read_text()
+        """Test accessibility is implemented (across split files)."""
+        css_dir = Path("/home/user/vetdict/static/css")
+        content = ""
+        for css_file in css_dir.glob("multidisease-*.css"):
+            content += css_file.read_text() + "\n"
 
         assert ":focus" in content, "Should include focus styles"
         assert "outline" in content, "Should have outline for focus"

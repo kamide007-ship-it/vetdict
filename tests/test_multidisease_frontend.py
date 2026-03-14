@@ -7,6 +7,15 @@ import pytest
 from pathlib import Path
 
 
+def _read_all_multidisease_css():
+    """Read all multi-disease CSS files (main + split components)."""
+    css_dir = Path("/home/user/vetdict/static/css")
+    content = ""
+    for css_file in sorted(css_dir.glob("multidisease-*.css")):
+        content += css_file.read_text() + "\n"
+    return content
+
+
 class TestFrontendAssets:
     """Test frontend asset files exist and are valid."""
 
@@ -21,9 +30,8 @@ class TestFrontendAssets:
         assert js_path.exists(), "multidisease-ui.js should exist"
 
     def test_css_contains_required_classes(self):
-        """Test that CSS includes all required UI classes."""
-        css_path = Path("/home/user/vetdict/static/css/multidisease-ui.css")
-        css_content = css_path.read_text()
+        """Test that CSS includes all required UI classes (across split files)."""
+        css_content = _read_all_multidisease_css()
 
         required_classes = [
             ".multidisease-badge",
@@ -98,12 +106,11 @@ class TestHTMLIntegration:
 
 
 class TestCSSValidation:
-    """Test CSS syntax and completeness."""
+    """Test CSS syntax and completeness (across split component files)."""
 
     def test_css_valid_syntax(self):
-        """Test that CSS file has valid syntax."""
-        css_path = Path("/home/user/vetdict/static/css/multidisease-ui.css")
-        css_content = css_path.read_text()
+        """Test that CSS files have valid syntax."""
+        css_content = _read_all_multidisease_css()
 
         # Basic syntax checks
         opening_braces = css_content.count("{")
@@ -112,24 +119,21 @@ class TestCSSValidation:
 
     def test_css_has_media_queries(self):
         """Test that CSS includes responsive design."""
-        css_path = Path("/home/user/vetdict/static/css/multidisease-ui.css")
-        css_content = css_path.read_text()
+        css_content = _read_all_multidisease_css()
 
         assert "@media" in css_content, "CSS should include media queries"
         assert "max-width" in css_content, "CSS should have responsive rules"
 
     def test_css_has_animations(self):
         """Test that CSS includes animations."""
-        css_path = Path("/home/user/vetdict/static/css/multidisease-ui.css")
-        css_content = css_path.read_text()
+        css_content = _read_all_multidisease_css()
 
         assert "@keyframes" in css_content, "CSS should include animations"
         assert "animation:" in css_content, "CSS should use animations"
 
     def test_css_has_accessibility_styles(self):
         """Test that CSS includes accessibility features."""
-        css_path = Path("/home/user/vetdict/static/css/multidisease-ui.css")
-        css_content = css_path.read_text()
+        css_content = _read_all_multidisease_css()
 
         assert ":focus" in css_content, "CSS should include focus styles"
         assert "outline" in css_content, "CSS should include outline for focus"

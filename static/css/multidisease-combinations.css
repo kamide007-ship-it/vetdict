@@ -1,0 +1,103 @@
+/* Disease Combinations Component Styles */
+
+.multidisease-combinations {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fc;
+  border: 2px solid #dde1ea;
+  border-radius: 12px;
+  border-left: 4px solid #22a84f;
+}
+
+.combinations-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a3068;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.combinations-title::before {
+  content: '\2695';
+  font-size: 1.2rem;
+}
+
+.combination-item {
+  background: #fff;
+  border: 1px solid #c5cbd8;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.combination-item:hover {
+  border-color: #22a84f;
+  box-shadow: 0 2px 8px rgba(34, 168, 79, 0.15);
+  background: #f0fdf4;
+}
+
+.combination-item.selected {
+  border-color: #22a84f;
+  background: #e8f8ee;
+  box-shadow: inset 0 0 0 2px rgba(34, 168, 79, 0.2);
+}
+
+.combination-diseases {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.disease-badge {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1a3068;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.disease-badge.primary {
+  background: #1a3068;
+  color: #fff;
+}
+
+.combination-connector {
+  color: #6b7490;
+  font-weight: 700;
+  padding: 0 4px;
+}
+
+.combination-confidence {
+  font-size: 0.85rem;
+  color: #363c52;
+  margin-bottom: 6px;
+}
+
+.confidence-bar {
+  width: 100%;
+  height: 6px;
+  background: #dde1ea;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22a84f 0%, #1a8a3e 100%);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.combination-meta {
+  font-size: 0.75rem;
+  color: #6b7490;
+  margin-top: 6px;
+}
