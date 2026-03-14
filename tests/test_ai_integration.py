@@ -83,8 +83,13 @@ def test_ai_extractor_initialization():
 
 def test_ai_disabled_by_default():
     """Test that AI extraction is disabled by default."""
-    # Don't set VETDICT_USE_AI_SYMPTOM_EXTRACTION
+    import importlib
     import api.diagnostic_chat as dc_module
+
+    # Reload with default env (no VETDICT_USE_AI_SYMPTOM_EXTRACTION set)
+    with patch.dict(os.environ, {}, clear=False):
+        os.environ.pop("VETDICT_USE_AI_SYMPTOM_EXTRACTION", None)
+        importlib.reload(dc_module)
 
     assert dc_module._AI_EXTRACTION_ENABLED is False
 
