@@ -1279,7 +1279,7 @@ function renderResults(data){
     });
   }
 
-  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>`<li>\u{1F52C} ${x}</li>`).join("")}</ul></div>`;}
+  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${x.priority}]</span>`:"";return`<li>\u{1F52C} ${label}${priority}</li>`;}).join("")}</ul></div>`;}
   area.innerHTML=html;
 }
 
