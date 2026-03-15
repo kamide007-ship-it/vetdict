@@ -9,6 +9,8 @@ Provides:
   - RECO2/RECO3 AI integrity control layer
 """
 
+import hashlib
+import json
 import logging
 import os
 from functools import wraps
@@ -19,6 +21,7 @@ from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
 from api.auth import require_internal_api_access, reset_rate_limiting
+from api.ai.cache_manager import SymptomCache
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -46,6 +49,9 @@ CORS(app)
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
 STATIC_DIR = str(ROOT_DIR / 'static')
+
+# Symptom analysis cache (1 hour TTL)
+_SYMPTOM_ANALYSIS_CACHE = SymptomCache(ttl_seconds=3600)
 
 # ---------------------------------------------------------------------------
 # Module imports — graceful degradation
@@ -156,6 +162,21 @@ except ImportError:
         LEARNING_INSIGHTS_AVAILABLE = False
         logger.warning("Learning insights (Phase 3) module not available")
 
+# Pre-computed symptom lookup cache
+_SYMPTOM_ID_CACHE = None
+try:
+    if HEALTH_CHECKER_AVAILABLE:
+        _SYMPTOM_ID_CACHE = {s["id"]: s for s in ALL_SYMPTOMS}
+except Exception as e:
+    logger.warning(f"Failed to pre-compute symptom cache: {e}")
+    _SYMPTOM_ID_CACHE = {}
+
+# Species module import cache
+_SPECIES_MODULE_CACHE = {}
+
+# Species stats cache (24 hour TTL since data changes rarely)
+_SPECIES_STATS_CACHE = {"data": None, "timestamp": 0}
+_SPECIES_STATS_TTL = 24 * 3600  # 24 hours
 
 # ---------------------------------------------------------------------------
 # Decorators
@@ -309,6 +330,14 @@ def health():
 @ensure_json_response
 def api_species_stats():
     """各動物種の疾患数・薬品数を動的に返す。"""
+    import time
+    # Check cache
+    now = time.time()
+    if (_SPECIES_STATS_CACHE["data"] is not None and
+        now - _SPECIES_STATS_CACHE["timestamp"] < _SPECIES_STATS_TTL):
+        logger.debug("Returning cached species stats")
+        return _SPECIES_STATS_CACHE["data"]
+
     stats = []
     species_modules = {
         "dog": ("犬", "Dog", "symptom_checker"),
@@ -333,9 +362,12 @@ def api_species_stats():
         "exotic_other": ("その他エキゾチック", "Exotic Other", "exotic_other_diseases"),
     }
 
+    # Load drug info once
     drug_counts = {}
+    total_drugs = 0
     try:
         from api.drug_dictionary import DRUGS
+        total_drugs = len(DRUGS)
         for d in DRUGS:
             for sp in (d.get("species_info") or {}):
                 drug_counts[sp] = drug_counts.get(sp, 0) + 1
@@ -352,8 +384,12 @@ def api_species_stats():
                 from api.species.equine_diseases import DISEASE_DATABASE
                 disease_count = len(DISEASE_DATABASE)
             else:
-                import importlib
-                mod = importlib.import_module(f"api.species.{module_name}")
+                # Use cached module import
+                module_key = f"api.species.{module_name}"
+                if module_key not in _SPECIES_MODULE_CACHE:
+                    import importlib
+                    _SPECIES_MODULE_CACHE[module_key] = importlib.import_module(module_key)
+                mod = _SPECIES_MODULE_CACHE[module_key]
                 disease_count = len(getattr(mod, "DISEASES", []))
         except Exception:
             pass
@@ -366,19 +402,19 @@ def api_species_stats():
         })
 
     total_diseases = sum(s["diseases"] for s in stats)
-    total_drugs = 0
-    try:
-        from api.drug_dictionary import DRUGS
-        total_drugs = len(DRUGS)
-    except Exception:
-        pass
 
-    return {
+    result = {
         "species": stats,
         "total_diseases": total_diseases,
         "total_drugs": total_drugs,
         "total_species": len(stats),
     }
+
+    # Cache result
+    _SPECIES_STATS_CACHE["data"] = result
+    _SPECIES_STATS_CACHE["timestamp"] = time.time()
+
+    return result
 
 
 # =============================================================================
@@ -437,7 +473,8 @@ def api_species_symptoms(species: str):
             syms = getattr(dis, "symptoms", []) or getattr(dis, "observations", []) or getattr(dis, "associated_findings", [])
         if isinstance(syms, (set, list, tuple)):
             unique_syms.update(syms)
-    id_to_info = {s["id"]: s for s in ALL_SYMPTOMS}
+    # Use pre-computed symptom cache
+    id_to_info = _SYMPTOM_ID_CACHE.copy() if _SYMPTOM_ID_CACHE else {}
 
     def merge_symptom_names(symptom_names):
         if not isinstance(symptom_names, dict):
@@ -548,6 +585,28 @@ def api_analyze_symptoms():
         if not lab_values:
             lab_values = None
 
+    # Create cache key from request parameters
+    cache_key_data = {
+        'symptoms': sorted(symptoms),
+        'species': species,
+        'breed': breed,
+        'onset': onset,
+        'age_years': age_years,
+        'gender': gender,
+        'vaccines': sorted(vaccines),
+        'vaccination_status': vaccination_status,
+        'lab_values': lab_values,
+    }
+    cache_key = hashlib.sha256(
+        json.dumps(cache_key_data, sort_keys=True).encode()
+    ).hexdigest()
+
+    # Check cache
+    cached_result = _SYMPTOM_ANALYSIS_CACHE.get(cache_key)
+    if cached_result is not None:
+        logger.debug(f"Cache hit for symptom analysis: {cache_key[:8]}...")
+        return cached_result
+
     try:
         if species == 'dog' or species is None:
             result = analyze_symptoms(
@@ -562,6 +621,9 @@ def api_analyze_symptoms():
                 breed=breed, onset=onset, age_years=age_years,
                 lab_values=lab_values, gender=gender, vaccination_status=vaccination_status,
             )
+
+        # Cache result
+        _SYMPTOM_ANALYSIS_CACHE.set(cache_key, result)
         return result
     except ValueError as ve:
         logger.error(f"Symptom analysis error: {ve}", exc_info=True)
