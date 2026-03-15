@@ -108,12 +108,13 @@ class Phase1QAValidator:
         ]
 
         for field in ["pathophysiology", "causes", "treatment", "prevention", "prognosis"]:
-            value = disease.get(field, "").lower()
-            if not value:
+            value = disease.get(field)
+            if not value or not isinstance(value, str):
                 continue
 
+            value_lower = value.lower()
             for phrase in generic_phrases:
-                if phrase in value:
+                if phrase in value_lower:
                     issues.append(f"Generic language in {field}: '{phrase}'")
 
         return issues
