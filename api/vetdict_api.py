@@ -121,6 +121,26 @@ except ImportError:
     RECO2_AVAILABLE = False
     logger.warning("RECO2 module not available")
 
+
+def _normalize_string_list(values, field_name, *, singular_name=None, require_non_empty=False):
+    if not isinstance(values, list):
+        return None, {'error': f'{field_name} must be a list of strings'}, 400
+
+    normalized_values = []
+    for value in values:
+        if not isinstance(value, str):
+            return None, {'error': f'{field_name} must contain only strings'}, 400
+        normalized_value = value.strip()
+        if normalized_value:
+            normalized_values.append(normalized_value)
+
+    if require_non_empty and not normalized_values:
+        item_name = singular_name or field_name
+        return None, {'error': f'At least one {item_name} required'}, 400
+
+    return normalized_values, None, None
+
+
 # Register blueprints
 if HEALTH_CHECKER_AVAILABLE and health_bp:
     app.register_blueprint(health_bp)
@@ -504,19 +524,11 @@ def api_analyze_symptoms():
     if not data or 'symptoms' not in data:
         return {'error': 'symptoms list required'}, 400
 
-    symptoms = data['symptoms']
-    if not isinstance(symptoms, list) or len(symptoms) == 0:
-        return {'error': 'At least one symptom required'}, 400
-    normalized_symptoms = []
-    for symptom in symptoms:
-        if not isinstance(symptom, str):
-            return {'error': 'symptoms must contain only strings'}, 400
-        normalized_symptom = symptom.strip()
-        if normalized_symptom:
-            normalized_symptoms.append(normalized_symptom)
-    symptoms = normalized_symptoms
-    if not symptoms:
-        return {'error': 'At least one symptom required'}, 400
+    symptoms, error, status = _normalize_string_list(
+        data['symptoms'], 'symptoms', singular_name='symptom', require_non_empty=True
+    )
+    if error:
+        return error, status
 
     species = data.get('species', 'dog')
     age_stage = data.get('age_stage')
@@ -543,14 +555,9 @@ def api_analyze_symptoms():
     # Coerce vaccines to list of strings
     vaccines = []
     if vaccines_raw is not None:
-        if not isinstance(vaccines_raw, list):
-            return {'error': 'vaccines must be a list of strings'}, 400
-        for vaccine in vaccines_raw:
-            if not isinstance(vaccine, str):
-                return {'error': 'vaccines must contain only strings'}, 400
-            normalized_vaccine = vaccine.strip()
-            if normalized_vaccine:
-                vaccines.append(normalized_vaccine)
+        vaccines, error, status = _normalize_string_list(vaccines_raw, 'vaccines')
+        if error:
+            return error, status
 
     # Coerce age_years to float
     if age_years is not None:
