@@ -329,6 +329,23 @@ class TestAnalyzeSymptomsValidation:
         assert resp.status_code == 400
         assert 'At least one symptom' in resp.get_json()['error']
 
+    def test_blank_symptom_items_are_filtered_before_forwarding(self, monkeypatch, client):
+        captured = {}
+
+        def fake_analyze(symptoms, **kwargs):
+            captured['symptoms'] = symptoms
+            return {'suspected_diseases': [], 'recommended_tests': [],
+                    'severity': 'low', 'general_advice': '', 'general_advice_ja': ''}
+
+        monkeypatch.setattr(vetdict_api, 'SYMPTOM_CHECKER_AVAILABLE', True)
+        monkeypatch.setattr(vetdict_api, 'analyze_symptoms', fake_analyze)
+
+        resp = client.post('/api/analyze-symptoms',
+                           json={'symptoms': [' vomiting ', '   ', 'diarrhea'], 'species': 'dog'})
+
+        assert resp.status_code == 200
+        assert captured['symptoms'] == ['vomiting', 'diarrhea']
+
     def test_invalid_onset_returns_400(self, client):
         resp = client.post('/api/analyze-symptoms',
                            json={'symptoms': ['vomiting'], 'onset': 'immediate'})
