@@ -43,10 +43,20 @@ class Phase1BatchProcessor:
         try:
             results = []
             for result in self.client.messages.batches.results(batch_id):
+                custom_id = result.custom_id
+                content = ""
+                status = "errored"
+
+                # Extract content from successful results
+                if hasattr(result.result, 'message') and result.result.message:
+                    if result.result.message.content:
+                        content = result.result.message.content[0].text
+                        status = "succeeded"
+
                 results.append({
-                    "custom_id": result.result.message.custom_id if hasattr(result.result.message, 'custom_id') else result.custom_id,
-                    "content": result.result.message.content[0].text if result.result.message.content else "",
-                    "status": "succeeded" if result.result.message else "errored"
+                    "custom_id": custom_id,
+                    "content": content,
+                    "status": status
                 })
             return results
         except Exception as e:
@@ -54,30 +64,58 @@ class Phase1BatchProcessor:
             return []
 
     def parse_enrichment_response(self, response_text: str) -> Optional[Dict]:
-        """Parse JSON from Claude response."""
+        """Parse JSON from Claude response, handling truncated responses."""
         try:
             # Try direct JSON parsing
             return json.loads(response_text)
         except json.JSONDecodeError:
-            # Try extracting JSON from markdown code blocks
-            match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', response_text, re.DOTALL)
-            if match:
-                try:
-                    return json.loads(match.group(1))
-                except json.JSONDecodeError:
-                    pass
+            pass
 
-            # Try finding JSON object in response
-            json_match = re.search(r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}', response_text, re.DOTALL)
-            if json_match:
-                try:
-                    return json.loads(json_match.group(0))
-                except json.JSONDecodeError:
-                    pass
+        # Try extracting JSON from markdown code blocks
+        match = re.search(r'```(?:json)?\s*(\{[\s\S]*)', response_text, re.DOTALL)
+        if match:
+            json_text = match.group(1).rstrip()
+            # Remove trailing code block marker if present
+            if json_text.endswith('```'):
+                json_text = json_text[:-3].rstrip()
+        else:
+            # Find JSON object in response
+            start = response_text.find('{')
+            if start == -1:
+                return None
+            json_text = response_text[start:].rstrip()
 
-            return None
+        # Handle truncated/incomplete JSON
+        # Strategy: Remove everything after the last complete value
+        if not json_text.endswith('}'):
+            # Find the last closing quote and comma pattern
+            # Remove everything after the last ', (complete key-value pair)
+            last_comma_quote = -1
+            for i in range(len(json_text) - 1, -1, -1):
+                if i > 0 and json_text[i-1:i+1] == '",':
+                    last_comma_quote = i + 1
+                    break
 
-    def process_batch_results(self, manifest: Dict) -> Dict:
+            if last_comma_quote > 0:
+                # Keep everything up to and including the last complete value
+                json_text = json_text[:last_comma_quote].rstrip()
+                # Remove the trailing comma
+                if json_text.endswith(','):
+                    json_text = json_text[:-1]
+
+            # Add closing braces for any open braces
+            brace_count = json_text.count('{') - json_text.count('}')
+            if brace_count > 0:
+                json_text += '}' * brace_count
+
+        try:
+            return json.loads(json_text)
+        except json.JSONDecodeError:
+            pass
+
+        return None
+
+    def process_batch_results(self, manifest: Dict, diseases: List[Dict]) -> Dict:
         """Process all batch results and collect enriched data."""
         print("\n" + "=" * 70)
         print("PROCESSING BATCH RESULTS")
@@ -88,6 +126,13 @@ class Phase1BatchProcessor:
             "Horse": {}
         }
         error_log = []
+
+        # Build disease ID mappings by species
+        disease_id_mapping = {"Cat": {}, "Horse": {}}
+        for idx, disease in enumerate(diseases):
+            species = disease.get("species")
+            if species in disease_id_mapping:
+                disease_id_mapping[species][idx] = disease.get("id")
 
         for species, species_data in manifest["species"].items():
             print(f"\n{species} Results:")
@@ -103,14 +148,27 @@ class Phase1BatchProcessor:
                 print(f"    Retrieved {len(results)} results")
 
                 for result in results:
-                    if result["status"] == "succeeded" and result["content"]:
+                    # Extract disease index from custom_id (e.g., "disease-0" -> 0)
+                    try:
+                        disease_idx = int(result["custom_id"].split("-")[1])
+                    except (IndexError, ValueError):
+                        disease_idx = None
+
+                    # Map to actual disease ID
+                    actual_disease_id = None
+                    species_disease_ids = [d for d in diseases if d.get("species") == species]
+                    if disease_idx is not None and disease_idx < len(species_disease_ids):
+                        actual_disease_id = species_disease_ids[disease_idx].get("id")
+
+                    if result["status"] == "succeeded" and result["content"] and actual_disease_id:
                         parsed = self.parse_enrichment_response(result["content"])
                         if parsed:
-                            enriched_data[species][result["custom_id"]] = parsed
+                            enriched_data[species][actual_disease_id] = parsed
                             species_succeeded += 1
                         else:
                             error_log.append({
                                 "custom_id": result["custom_id"],
+                                "actual_id": actual_disease_id,
                                 "species": species,
                                 "batch_id": batch_id,
                                 "error": "Failed to parse JSON"
@@ -119,9 +177,10 @@ class Phase1BatchProcessor:
                     else:
                         error_log.append({
                             "custom_id": result["custom_id"],
+                            "actual_id": actual_disease_id,
                             "species": species,
                             "batch_id": batch_id,
-                            "error": "API error or empty response"
+                            "error": "API error or empty response or invalid ID"
                         })
                         species_errored += 1
 
@@ -187,12 +246,12 @@ class Phase1BatchProcessor:
         manifest = self.load_manifest()
         print(f"✓ Found {sum(len(data.get('batch_ids', [])) for data in manifest['species'].values())} batches")
 
-        print("\n[2/4] Retrieving batch results...")
-        results = self.process_batch_results(manifest)
-
-        print("\n[3/4] Loading disease database...")
+        print("\n[2/4] Loading disease database...")
         diseases = self.load_diseases()
         print(f"✓ Loaded {len(diseases)} diseases")
+
+        print("\n[3/4] Retrieving batch results...")
+        results = self.process_batch_results(manifest, diseases)
 
         print("\n[4/4] Integrating enriched data...")
         diseases = self.integrate_enrichment(diseases, results["enriched_data"])

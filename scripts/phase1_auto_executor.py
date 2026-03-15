@@ -104,7 +104,7 @@ class Phase1AutoExecutor:
                         status = batch.processing_status
                         statuses[species] = status
 
-                        if status == "succeeded":
+                        if status in ["succeeded", "ended"]:
                             counts = batch.request_counts
                             print(f"  ✅ {species:10s} - COMPLETED ({counts.succeeded} succeeded, {counts.errored} errors)")
                         elif status == "processing":
