@@ -105,11 +105,11 @@ class TestDiseaseModel:
         from sqlalchemy.exc import IntegrityError
 
         with app.app_context():
-            d1 = Disease(species="dog", name="Parvo", name_ja="パルボ")
+            d1 = Disease(species="dog", disease_key="parvo", name="Parvo", name_ja="パルボ")
             db.session.add(d1)
             db.session.commit()
 
-            d2 = Disease(species="dog", name="Parvo", name_ja="パルボ2")
+            d2 = Disease(species="dog", disease_key="parvo", name="Parvo", name_ja="パルボ2")
             db.session.add(d2)
             with pytest.raises(IntegrityError):
                 db.session.commit()
@@ -120,12 +120,25 @@ class TestDiseaseModel:
         from api.database import Disease
 
         with app.app_context():
-            d1 = Disease(species="dog", name="Pneumonia", name_ja="犬肺炎")
-            d2 = Disease(species="cat", name="Pneumonia", name_ja="猫肺炎")
+            d1 = Disease(species="dog", disease_key="pneumonia", name="Pneumonia", name_ja="犬肺炎")
+            d2 = Disease(species="cat", disease_key="pneumonia", name="Pneumonia", name_ja="猫肺炎")
             db.session.add_all([d1, d2])
             db.session.commit()
 
             assert Disease.query.filter_by(name="Pneumonia").count() == 2
+
+    def test_same_name_different_key(self, app_with_db):
+        """Same disease name with different keys (e.g. equine duplicates) should be allowed."""
+        app, db = app_with_db
+        from api.database import Disease
+
+        with app.app_context():
+            d1 = Disease(species="horse", disease_key="cv_afib", name="Atrial Fibrillation", name_ja="心房細動")
+            d2 = Disease(species="horse", disease_key="cv_atrial_fibrillation", name="Atrial Fibrillation", name_ja="心房細動")
+            db.session.add_all([d1, d2])
+            db.session.commit()
+
+            assert Disease.query.filter_by(species="horse", name="Atrial Fibrillation").count() == 2
 
     def test_to_dict(self, app_with_db):
         app, db = app_with_db
@@ -338,3 +351,40 @@ class TestSeedScript:
             assert first_db["urgency"] == first_py["urgency"]
             assert first_db["symptoms"] == first_py["symptoms"]
             assert first_db["recommended_tests"] == first_py["recommended_tests"]
+
+    def test_seed_equine(self, app_with_db):
+        """Test seeding equine (horse) diseases from dataclass source."""
+        app, db = app_with_db
+        from api.database import Disease
+
+        with app.app_context():
+            from seed_db import seed_equine
+            count = seed_equine()
+            assert count == 736
+
+            horse_diseases = Disease.query.filter_by(species="horse").all()
+            assert len(horse_diseases) == 736
+
+    def test_seed_equine_idempotent(self, app_with_db):
+        """Seeding equine twice should not duplicate data."""
+        app, db = app_with_db
+
+        with app.app_context():
+            from seed_db import seed_equine
+            count1 = seed_equine()
+            count2 = seed_equine()
+            assert count1 == 736
+            assert count2 == 0
+
+    def test_seed_hamster_with_duplicates(self, app_with_db):
+        """Hamster has 3 duplicate disease names; all 190 should be seeded."""
+        app, db = app_with_db
+        from api.database import Disease
+
+        with app.app_context():
+            from seed_db import seed_species
+            count = seed_species("hamster", "api.species.hamster_diseases", "DISEASES")
+            assert count == 190
+
+            hamster_diseases = Disease.query.filter_by(species="hamster").all()
+            assert len(hamster_diseases) == 190

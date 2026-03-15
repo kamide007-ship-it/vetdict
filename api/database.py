@@ -56,8 +56,10 @@ class Disease(db.Model):  # type: ignore[name-defined]
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     species = db.Column(db.String(50), nullable=False, index=True)
+    disease_key = db.Column(db.String(200), nullable=False, default="")
     name = db.Column(db.String(200), nullable=False)
     name_ja = db.Column(db.String(200), nullable=False, default="")
+    category = db.Column(db.String(50), nullable=False, default="")
     description = db.Column(Text, default="")
     description_ja = db.Column(Text, default="")
     causes = db.Column(Text, default="")
@@ -72,9 +74,9 @@ class Disease(db.Model):  # type: ignore[name-defined]
     prognosis_ja = db.Column(Text, default="")
     urgency = db.Column(db.String(20), default="moderate")
 
-    # Unique constraint on (species, name) to prevent duplicates
+    # Unique constraint using disease_key (original source ID) per species
     __table_args__ = (
-        db.UniqueConstraint("species", "name", name="uq_species_disease"),
+        db.UniqueConstraint("species", "disease_key", name="uq_species_disease_key"),
     )
 
     def to_dict(self) -> Dict[str, Any]:
