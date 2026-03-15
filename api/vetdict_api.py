@@ -135,7 +135,7 @@ def _normalize_string_list(values, field_name, *, singular_name=None, require_no
             normalized_values.append(normalized_value)
 
     if require_non_empty and not normalized_values:
-        item_name = singular_name or field_name.rstrip('s')
+        item_name = singular_name or field_name
         return None, {'error': f'At least one {item_name} required'}, 400
 
     return normalized_values, None, None
