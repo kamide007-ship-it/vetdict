@@ -190,6 +190,24 @@ def ensure_json_response(f):
     return wrapper
 
 
+def _normalize_string_list(values, field_name, *, allow_empty=False):
+    """Validate that list fields contain only strings."""
+    if not isinstance(values, list):
+        return None, {'error': f'{field_name} must be a list'}, 400
+
+    normalized = []
+    for value in values:
+        if not value:
+            continue
+        if not isinstance(value, str):
+            return None, {'error': f'{field_name} must contain only strings'}, 400
+        normalized.append(value)
+
+    if not allow_empty and not normalized:
+        singular_name = field_name[:-1] if field_name.endswith('s') else field_name
+        return None, {'error': f'At least one {singular_name} required'}, 400
+
+    return normalized, None, None
 
 
 # ---------------------------------------------------------------------------
@@ -504,9 +522,9 @@ def api_analyze_symptoms():
     if not data or 'symptoms' not in data:
         return {'error': 'symptoms list required'}, 400
 
-    symptoms = data['symptoms']
-    if not isinstance(symptoms, list) or len(symptoms) == 0:
-        return {'error': 'At least one symptom required'}, 400
+    symptoms, error, status = _normalize_string_list(data['symptoms'], 'symptoms')
+    if error:
+        return error, status
 
     species = data.get('species', 'dog')
     age_stage = data.get('age_stage')
@@ -532,8 +550,12 @@ def api_analyze_symptoms():
 
     # Coerce vaccines to list of strings
     vaccines = []
-    if vaccines_raw and isinstance(vaccines_raw, list):
-        vaccines = [str(v) for v in vaccines_raw if v]
+    if vaccines_raw is not None:
+        vaccines, error, status = _normalize_string_list(
+            vaccines_raw, 'vaccines', allow_empty=True
+        )
+        if error:
+            return error, status
 
     # Coerce age_years to float
     if age_years is not None:

@@ -317,6 +317,12 @@ class TestAnalyzeSymptomsValidation:
                            json={'symptoms': 'vomiting', 'species': 'dog'})
         assert resp.status_code == 400
 
+    def test_non_string_symptom_items_return_400(self, client):
+        resp = client.post('/api/analyze-symptoms',
+                           json={'symptoms': ['vomiting', 1], 'species': 'dog'})
+        assert resp.status_code == 400
+        assert 'symptoms' in resp.get_json()['error']
+
     def test_invalid_onset_returns_400(self, client):
         resp = client.post('/api/analyze-symptoms',
                            json={'symptoms': ['vomiting'], 'onset': 'immediate'})
@@ -452,7 +458,7 @@ class TestAnalyzeSymptomsValidation:
                           'lab_values': {'bun': 'bad', 'alt': 'worse'}})
         assert captured['lab_values'] is None
 
-    def test_vaccines_list_coerced_to_strings(self, monkeypatch, client):
+    def test_string_vaccines_forwarded_to_analyzer(self, monkeypatch, client):
         captured = {}
 
         def fake_analyze(symptoms, **kwargs):
@@ -464,8 +470,14 @@ class TestAnalyzeSymptomsValidation:
         monkeypatch.setattr(vetdict_api, 'analyze_symptoms', fake_analyze)
 
         client.post('/api/analyze-symptoms',
-                    json={'symptoms': ['vomiting'], 'vaccines': [1, 'rabies', 2]})
-        assert captured['vaccines'] == ['1', 'rabies', '2']
+                    json={'symptoms': ['vomiting'], 'vaccines': ['rabies', 'dhpp']})
+        assert captured['vaccines'] == ['rabies', 'dhpp']
+
+    def test_non_string_vaccine_items_return_400(self, client):
+        resp = client.post('/api/analyze-symptoms',
+                           json={'symptoms': ['vomiting'], 'vaccines': ['rabies', 2]})
+        assert resp.status_code == 400
+        assert 'vaccines' in resp.get_json()['error']
 
     def test_symptom_checker_unavailable_returns_500(self, monkeypatch, client):
         monkeypatch.setattr(vetdict_api, 'SYMPTOM_CHECKER_AVAILABLE', False)
