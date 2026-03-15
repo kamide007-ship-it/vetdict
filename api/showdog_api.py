@@ -19,6 +19,8 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
+from api.debug_config import is_debug_mode_enabled
+
 # ---------------------------------------------------------------------------
 # Logging
 # ---------------------------------------------------------------------------
@@ -30,10 +32,6 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 VERSION = "5.0.0"
 BUILD = "2026-03-07"
-
-
-def is_debug_mode_enabled():
-    return os.getenv('FLASK_DEBUG', '1').strip().lower() in {'1', 'true', 'yes', 'on'}
 
 # ---------------------------------------------------------------------------
 # Flask App

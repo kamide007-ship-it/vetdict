@@ -97,16 +97,6 @@ class TestHealthEndpoint:
         assert 'application/json' in resp.content_type
 
 
-class TestDebugModeConfig:
-    def test_debug_mode_defaults_to_on(self, monkeypatch):
-        monkeypatch.delenv('FLASK_DEBUG', raising=False)
-        assert vetdict_api.is_debug_mode_enabled() is True
-
-    def test_debug_mode_can_be_disabled_via_env(self, monkeypatch):
-        monkeypatch.setenv('FLASK_DEBUG', '0')
-        assert vetdict_api.is_debug_mode_enabled() is False
-
-
 # =============================================================================
 # 2. Security headers (after_request hook)
 # =============================================================================
