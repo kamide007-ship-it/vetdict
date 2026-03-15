@@ -1,7 +1,7 @@
 """Tests for AI symptom extractor module."""
 
-import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+
 from api.ai.symptom_extractor import SymptomExtractor, extract_symptoms_with_claude
 
 

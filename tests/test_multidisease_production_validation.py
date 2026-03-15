@@ -3,9 +3,14 @@
 Comprehensive tests ensuring production readiness across all components.
 """
 
-import pytest
 from pathlib import Path
-import json
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def repo_path(*parts):
+    """Build an absolute path relative to the repository root."""
+    return ROOT.joinpath(*parts)
 
 
 class TestDocumentationCompleteness:
@@ -13,7 +18,7 @@ class TestDocumentationCompleteness:
 
     def test_api_documentation_exists(self):
         """Test API documentation is complete."""
-        doc_path = Path("/home/user/vetdict/docs/MULTIDISEASE_API.md")
+        doc_path = repo_path("docs", "MULTIDISEASE_API.md")
         assert doc_path.exists(), "API documentation required"
 
         content = doc_path.read_text()
@@ -24,7 +29,7 @@ class TestDocumentationCompleteness:
 
     def test_deployment_guide_exists(self):
         """Test deployment guide is complete."""
-        doc_path = Path("/home/user/vetdict/docs/DEPLOYMENT.md")
+        doc_path = repo_path("docs", "DEPLOYMENT.md")
         assert doc_path.exists(), "Deployment guide required"
 
         content = doc_path.read_text()
@@ -35,7 +40,7 @@ class TestDocumentationCompleteness:
 
     def test_medical_validation_exists(self):
         """Test medical validation documentation exists."""
-        doc_path = Path("/home/user/vetdict/docs/MEDICAL_VALIDATION.md")
+        doc_path = repo_path("docs", "MEDICAL_VALIDATION.md")
         assert doc_path.exists(), "Medical validation required"
 
         content = doc_path.read_text()
@@ -45,7 +50,7 @@ class TestDocumentationCompleteness:
 
     def test_user_guide_exists(self):
         """Test user guide is complete."""
-        doc_path = Path("/home/user/vetdict/docs/USER_GUIDE.md")
+        doc_path = repo_path("docs", "USER_GUIDE.md")
         assert doc_path.exists(), "User guide required"
 
         content = doc_path.read_text()
@@ -55,7 +60,7 @@ class TestDocumentationCompleteness:
 
     def test_security_guide_exists(self):
         """Test security guide is complete."""
-        doc_path = Path("/home/user/vetdict/docs/SECURITY.md")
+        doc_path = repo_path("docs", "SECURITY.md")
         assert doc_path.exists(), "Security guide required"
 
         content = doc_path.read_text()
@@ -79,7 +84,7 @@ class TestSystemArchitecture:
         ]
 
         for module in required_modules:
-            path = Path(f"/home/user/vetdict/{module}")
+            path = repo_path(*module.split("/"))
             assert path.exists(), f"{module} should exist"
 
     def test_frontend_assets_complete(self):
@@ -91,7 +96,7 @@ class TestSystemArchitecture:
         ]
 
         for asset in assets:
-            path = Path(f"/home/user/vetdict/{asset}")
+            path = repo_path(*asset.split("/"))
             assert path.exists(), f"{asset} should exist"
 
     def test_all_test_modules_exist(self):
@@ -103,7 +108,7 @@ class TestSystemArchitecture:
         ]
 
         for test_module in test_modules:
-            path = Path(f"/home/user/vetdict/{test_module}")
+            path = repo_path(*test_module.split("/"))
             assert path.exists(), f"{test_module} should exist"
 
 
@@ -115,7 +120,7 @@ class TestCodeQuality:
         patterns = ["password=", "api_key=", "SECRET_KEY="]
         excluded = [".env", ".env.example", "config.example.py", "tests/"]
 
-        py_files = Path("/home/user/vetdict").rglob("*.py")
+        py_files = ROOT.rglob("*.py")
         for py_file in py_files:
             if any(exc in str(py_file) for exc in excluded):
                 continue
@@ -131,7 +136,7 @@ class TestCodeQuality:
 
     def test_proper_error_handling(self):
         """Test error handling is implemented (try/except or conditional checks)."""
-        api_handler = Path("/home/user/vetdict/api/ai/multidisease_api_handler.py")
+        api_handler = repo_path("api", "ai", "multidisease_api_handler.py")
         content = api_handler.read_text()
 
         # Module should handle errors via try/except or input validation checks
@@ -145,8 +150,8 @@ class TestCodeQuality:
         """Test no SQL injection patterns in source code."""
         # Only check source files, not test files
         src_dirs = [
-            Path("/home/user/vetdict/api"),
-            Path("/home/user/vetdict/reco2"),
+            repo_path("api"),
+            repo_path("reco2"),
         ]
 
         for src_dir in src_dirs:
@@ -164,7 +169,7 @@ class TestAPICompliance:
 
     def test_api_endpoint_exists(self):
         """Test API endpoint is properly defined."""
-        handler = Path("/home/user/vetdict/api/ai/multidisease_api_handler.py")
+        handler = repo_path("api", "ai", "multidisease_api_handler.py")
         content = handler.read_text()
 
         assert "class MultiDiseaseAnalyzer" in content
@@ -172,7 +177,7 @@ class TestAPICompliance:
 
     def test_request_validation_implemented(self):
         """Test request validation is implemented."""
-        handler = Path("/home/user/vetdict/api/ai/multidisease_api_handler.py")
+        handler = repo_path("api", "ai", "multidisease_api_handler.py")
         content = handler.read_text()
 
         assert "def validate_request" in content
@@ -180,7 +185,7 @@ class TestAPICompliance:
 
     def test_response_format_correct(self):
         """Test response format matches specification."""
-        handler = Path("/home/user/vetdict/api/ai/multidisease_api_handler.py")
+        handler = repo_path("api", "ai", "multidisease_api_handler.py")
         content = handler.read_text()
 
         required_fields = [
@@ -200,7 +205,7 @@ class TestFrontendCompliance:
 
     def test_ui_components_present(self):
         """Test all UI components are implemented."""
-        js_file = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_file = repo_path("static", "js", "multidisease-ui.js")
         content = js_file.read_text()
 
         components = [
@@ -215,7 +220,7 @@ class TestFrontendCompliance:
 
     def test_css_responsive_design(self):
         """Test CSS includes responsive design (across split files)."""
-        css_dir = Path("/home/user/vetdict/static/css")
+        css_dir = repo_path("static", "css")
         content = ""
         for css_file in css_dir.glob("multidisease-*.css"):
             content += css_file.read_text() + "\n"
@@ -225,7 +230,7 @@ class TestFrontendCompliance:
 
     def test_accessibility_features(self):
         """Test accessibility is implemented (across split files)."""
-        css_dir = Path("/home/user/vetdict/static/css")
+        css_dir = repo_path("static", "css")
         content = ""
         for css_file in css_dir.glob("multidisease-*.css"):
             content += css_file.read_text() + "\n"
@@ -239,7 +244,7 @@ class TestSecurityCompliance:
 
     def test_input_validation_present(self):
         """Test input validation is implemented."""
-        handler = Path("/home/user/vetdict/api/ai/multidisease_api_handler.py")
+        handler = repo_path("api", "ai", "multidisease_api_handler.py")
         content = handler.read_text()
 
         assert "validate_request" in content
@@ -247,7 +252,7 @@ class TestSecurityCompliance:
 
     def test_error_messages_generic(self):
         """Test error messages don't expose internals."""
-        handler = Path("/home/user/vetdict/api/ai/multidisease_api_handler.py")
+        handler = repo_path("api", "ai", "multidisease_api_handler.py")
         content = handler.read_text()
 
         # Should use generic messages
@@ -262,7 +267,7 @@ class TestSecurityCompliance:
         ]
 
         for config in config_files:
-            path = Path(f"/home/user/vetdict/{config}")
+            path = repo_path(config)
             if path.exists():
                 content = path.read_text()
                 # Ensure debug is not hardcoded to True
@@ -276,7 +281,7 @@ class TestPerformanceRequirements:
 
     def test_caching_implemented(self):
         """Test caching system is implemented."""
-        cache_file = Path("/home/user/vetdict/api/ai/multidisease_cache_manager.py")
+        cache_file = repo_path("api", "ai", "multidisease_cache_manager.py")
         assert cache_file.exists(), "Cache manager should exist"
 
         content = cache_file.read_text()
@@ -285,7 +290,7 @@ class TestPerformanceRequirements:
 
     def test_cache_management_methods(self):
         """Test cache has necessary management methods."""
-        cache_file = Path("/home/user/vetdict/api/ai/multidisease_cache_manager.py")
+        cache_file = repo_path("api", "ai", "multidisease_cache_manager.py")
         content = cache_file.read_text()
 
         methods = [
@@ -311,7 +316,7 @@ class TestTestCoverage:
 
         total_tests = 0
         for test_file in test_files:
-            path = Path(f"/home/user/vetdict/{test_file}")
+            path = repo_path(*test_file.split("/"))
             if path.exists():
                 content = path.read_text()
                 # Count test methods
@@ -323,7 +328,7 @@ class TestTestCoverage:
 
     def test_integration_tests_present(self):
         """Test integration tests are present."""
-        test_file = Path("/home/user/vetdict/tests/test_multidisease_api_cache_integration.py")
+        test_file = repo_path("tests", "test_multidisease_api_cache_integration.py")
         assert test_file.exists(), "Integration tests required"
 
         content = test_file.read_text()
@@ -331,7 +336,7 @@ class TestTestCoverage:
 
     def test_frontend_tests_present(self):
         """Test frontend tests are present."""
-        test_file = Path("/home/user/vetdict/tests/test_multidisease_frontend.py")
+        test_file = repo_path("tests", "test_multidisease_frontend.py")
         assert test_file.exists(), "Frontend tests required"
 
         content = test_file.read_text()
@@ -353,7 +358,7 @@ class TestProductionReadiness:
         ]
 
         for doc in docs:
-            path = Path(f"/home/user/vetdict/{doc}")
+            path = repo_path(*doc.split("/"))
             assert path.exists(), f"{doc} should exist"
             assert path.stat().st_size > 1000, f"{doc} should have content"
 
@@ -366,14 +371,14 @@ class TestProductionReadiness:
 
         # At least one should exist
         found = any(
-            Path(f"/home/user/vetdict/{cfg}").exists()
+            repo_path(cfg).exists()
             for cfg in config_examples
         )
         assert found, "Production config example should exist"
 
     def test_deployment_script_considerations(self):
         """Test deployment considerations documented."""
-        deployment = Path("/home/user/vetdict/docs/DEPLOYMENT.md")
+        deployment = repo_path("docs", "DEPLOYMENT.md")
         content = deployment.read_text()
 
         sections = [
@@ -389,7 +394,7 @@ class TestProductionReadiness:
 
     def test_security_checklist_complete(self):
         """Test security checklist is complete."""
-        security = Path("/home/user/vetdict/docs/SECURITY.md")
+        security = repo_path("docs", "SECURITY.md")
         content = security.read_text()
 
         assert "Security Checklist" in content
@@ -410,7 +415,7 @@ class TestProductionReadiness:
         }
 
         for stage, module in required_modules.items():
-            path = Path(f"/home/user/vetdict").rglob(module)
+            path = ROOT.rglob(module)
             found = any(path)
             assert found, f"{stage}: {module} should exist"
 
@@ -429,7 +434,7 @@ class TestProductionSuccessCriteria:
         ]
 
         for doc in docs:
-            path = Path(f"/home/user/vetdict/{doc}")
+            path = repo_path(*doc.split("/"))
             assert path.exists()
             content = path.read_text()
             # Each doc should have structure
@@ -449,14 +454,14 @@ class TestProductionSuccessCriteria:
         ]
 
         for module in required:
-            path = Path(f"/home/user/vetdict/{module}")
+            path = repo_path(*module.split("/"))
             assert path.exists(), f"{module} should exist"
             assert path.stat().st_size > 1000, f"{module} should have code"
 
     def test_comprehensive_testing(self):
         """Test comprehensive testing is in place."""
         # Should have 150+ tests
-        test_dir = Path("/home/user/vetdict/tests")
+        test_dir = repo_path("tests")
         test_files = list(test_dir.glob("test_multidisease*.py"))
         assert len(test_files) >= 3, "Should have multiple test modules"
 
@@ -468,7 +473,7 @@ class TestProductionSuccessCriteria:
         ]
 
         for asset in frontend_assets:
-            path = Path(f"/home/user/vetdict/{asset}")
+            path = repo_path(*asset.split("/"))
             assert path.exists()
             assert path.stat().st_size > 500, f"{asset} should have content"
 
@@ -487,7 +492,7 @@ class TestProductionSuccessCriteria:
         }
 
         for name, file in checklist.items():
-            path = Path(f"/home/user/vetdict/{file}")
+            path = repo_path(*file.split("/"))
             assert path.exists(), f"{name}: {file} should exist"
 
         print("\n✓ All Production Readiness Criteria Met")
