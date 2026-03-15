@@ -2,6 +2,7 @@ __pycache__/
 .claude/
 instance/
 .coverage
+*.db
 
 # Phase enrichment runtime files
 phase1_enrichment_manifest.json
