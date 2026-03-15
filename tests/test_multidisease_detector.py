@@ -9,6 +9,7 @@ from api.ai.multidisease_detector import (
     DiseaseCombination,
     MultiDiseaseDetector,
     MultiDiseaseSession,
+    _classify_symptom_system,
 )
 
 
@@ -325,3 +326,189 @@ class TestExplanations:
     def test_explanation_en_with_mechanism(self):
         exp = MultiDiseaseDetector._generate_explanation_en("A", "B", None)
         assert "possible" in exp.lower()
+
+
+# ── _classify_symptom_system ─────────────────────────────────────────
+
+class TestClassifySymptomSystem:
+
+    def test_respiratory_symptom(self):
+        systems = _classify_symptom_system("coughing")
+        assert "respiratory" in systems
+
+    def test_gastrointestinal_symptom(self):
+        systems = _classify_symptom_system("vomiting")
+        assert "gastrointestinal" in systems
+
+    def test_musculoskeletal_symptom(self):
+        systems = _classify_symptom_system("limping")
+        assert "musculoskeletal" in systems
+
+    def test_neurological_symptom(self):
+        systems = _classify_symptom_system("seizure_episodes")
+        assert "neurological" in systems
+
+    def test_dermatological_symptom(self):
+        systems = _classify_symptom_system("itching")
+        assert "dermatological" in systems
+
+    def test_urinary_symptom(self):
+        systems = _classify_symptom_system("frequent_urination")
+        assert "urinary" in systems
+
+    def test_cardiac_symptom(self):
+        systems = _classify_symptom_system("heart_murmur")
+        assert "cardiac" in systems
+
+    def test_ophthalmic_symptom(self):
+        systems = _classify_symptom_system("eye_discharge")
+        assert "ophthalmic" in systems
+
+    def test_systemic_symptom(self):
+        systems = _classify_symptom_system("fever")
+        assert "systemic" in systems
+
+    def test_unclassified_symptom(self):
+        systems = _classify_symptom_system("completely_unknown_xyz")
+        assert systems == {"unclassified"}
+
+    def test_multi_system_symptom(self):
+        """Paralysis maps to both musculoskeletal and neurological."""
+        systems = _classify_symptom_system("paralysis")
+        assert "musculoskeletal" in systems
+        assert "neurological" in systems
+
+    def test_hyphen_normalized(self):
+        """Hyphens in symptom IDs are normalized to underscores."""
+        systems = _classify_symptom_system("hair-loss")
+        assert "dermatological" in systems
+
+
+# ── should_explore_multidisease body-system clustering ───────────────
+
+class TestShouldExploreBodySystemClustering:
+
+    def test_multi_system_symptoms_trigger(self):
+        """Symptoms spanning 2+ body systems should trigger multi-disease."""
+        symptoms = [
+            "coughing", "sneezing", "nasal_discharge",  # respiratory
+            "vomiting", "diarrhea",  # gastrointestinal
+        ]
+        diseases = [
+            _disease("DiseaseA", 60),
+            _disease("DiseaseB", 55),
+        ]
+        result = MultiDiseaseDetector.should_explore_multidisease(
+            symptoms, diseases
+        )
+        assert result is True
+
+    def test_single_system_symptoms_no_trigger(self):
+        """Symptoms all in one system should not trigger via clustering."""
+        symptoms = [
+            "coughing", "sneezing", "nasal_discharge",
+            "wheezing", "breathing_difficulty",
+        ]
+        # Two diseases with very different confidence (spread >= 0.15)
+        diseases = [
+            _disease("DiseaseA", 80),
+            _disease("DiseaseB", 30),
+        ]
+        result = MultiDiseaseDetector.should_explore_multidisease(
+            symptoms, diseases
+        )
+        # Single system + wide confidence spread → no trigger
+        assert result is False
+
+    def test_too_few_symptoms_still_rejected(self):
+        """Even multi-system, <5 symptoms is rejected."""
+        symptoms = ["coughing", "vomiting", "limping"]
+        diseases = [_disease("A", 50), _disease("B", 50)]
+        result = MultiDiseaseDetector.should_explore_multidisease(
+            symptoms, diseases
+        )
+        assert result is False
+
+
+# ── estimate_symptom_allocation with disease_symptom_sets ────────────
+
+class TestBayesianSymptomAllocation:
+
+    def test_unique_symptoms_assigned_correctly(self):
+        """Symptoms unique to one disease go to that disease."""
+        alloc = MultiDiseaseDetector.estimate_symptom_allocation(
+            diseases=["Flu", "Arthritis"],
+            detected_symptoms=["coughing", "limping"],
+            disease_symptom_sets={
+                "Flu": {"coughing", "sneezing"},
+                "Arthritis": {"limping", "stiffness"},
+            },
+        )
+        assert "coughing" in alloc["Flu"]
+        assert "limping" in alloc["Arthritis"]
+
+    def test_shared_symptom_goes_to_least_loaded(self):
+        """Shared symptoms go to the disease with fewer allocations."""
+        alloc = MultiDiseaseDetector.estimate_symptom_allocation(
+            diseases=["A", "B"],
+            detected_symptoms=["s1", "s2", "shared"],
+            disease_symptom_sets={
+                "A": {"s1", "shared"},
+                "B": {"s2", "shared"},
+            },
+        )
+        # s1→A, s2→B, shared→either (both have 1 each, so min picks first)
+        assert "s1" in alloc["A"]
+        assert "s2" in alloc["B"]
+        assert "shared" in alloc["A"] or "shared" in alloc["B"]
+
+    def test_unmatched_symptoms_not_allocated(self):
+        """Symptoms not in any disease set are skipped."""
+        alloc = MultiDiseaseDetector.estimate_symptom_allocation(
+            diseases=["A", "B"],
+            detected_symptoms=["unknown_symptom"],
+            disease_symptom_sets={
+                "A": {"s1"},
+                "B": {"s2"},
+            },
+        )
+        assert alloc["A"] == []
+        assert alloc["B"] == []
+
+    def test_no_symptom_sets_returns_empty(self):
+        """Without disease_symptom_sets, returns empty allocation."""
+        alloc = MultiDiseaseDetector.estimate_symptom_allocation(
+            diseases=["A", "B"],
+            detected_symptoms=["s1", "s2"],
+            disease_symptom_sets=None,
+        )
+        assert alloc == {"A": [], "B": []}
+
+    def test_load_balancing_across_diseases(self):
+        """All-shared symptoms are distributed across diseases."""
+        alloc = MultiDiseaseDetector.estimate_symptom_allocation(
+            diseases=["A", "B"],
+            detected_symptoms=["s1", "s2", "s3", "s4"],
+            disease_symptom_sets={
+                "A": {"s1", "s2", "s3", "s4"},
+                "B": {"s1", "s2", "s3", "s4"},
+            },
+        )
+        # Should roughly balance: 2 each
+        assert len(alloc["A"]) == 2
+        assert len(alloc["B"]) == 2
+
+    def test_three_diseases_allocation(self):
+        """Allocation works with 3 diseases."""
+        alloc = MultiDiseaseDetector.estimate_symptom_allocation(
+            diseases=["A", "B", "C"],
+            detected_symptoms=["s1", "s2", "s3"],
+            disease_symptom_sets={
+                "A": {"s1"},
+                "B": {"s2"},
+                "C": {"s3"},
+            },
+        )
+        assert alloc["A"] == ["s1"]
+        assert alloc["B"] == ["s2"]
+        assert alloc["C"] == ["s3"]

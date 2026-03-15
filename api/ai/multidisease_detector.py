@@ -4,12 +4,62 @@ Identifies when multiple diseases likely coexist and generates disease
 combination hypotheses for further investigation.
 """
 
+from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
 import logging
 import math
 
 logger = logging.getLogger(__name__)
+
+# Body-system prefixes/keywords for symptom clustering
+_BODY_SYSTEM_KEYWORDS: Dict[str, List[str]] = {
+    "respiratory": [
+        "cough", "sneez", "wheez", "nasal", "breathing", "dyspnea",
+        "respiratory", "trachea",
+    ],
+    "gastrointestinal": [
+        "vomit", "diarrhea", "constipat", "bloat", "nausea", "anorexia",
+        "stool", "feces", "appetite",
+    ],
+    "musculoskeletal": [
+        "limp", "lame", "stiff", "joint", "pain", "paralysis", "paresis",
+        "swollen_joint", "fracture", "dysplasia",
+    ],
+    "neurological": [
+        "seizure", "tremor", "ataxia", "disorientation", "head_tilt",
+        "circling", "paralysis", "paresis",
+    ],
+    "dermatological": [
+        "itch", "scratch", "rash", "hair_loss", "alopecia", "skin",
+        "lesion", "licking",
+    ],
+    "urinary": [
+        "urin", "incontinence", "straining", "hematuria", "polyuria",
+        "polydipsia", "thirst",
+    ],
+    "cardiac": [
+        "heart", "murmur", "cyanosis", "faint", "syncope", "exercise_intolerance",
+    ],
+    "ophthalmic": [
+        "eye", "squint", "cloudi", "redness", "discharge_eye",
+    ],
+    "systemic": [
+        "fever", "lethargy", "weight", "lymph", "pale_gum", "jaundice",
+    ],
+}
+
+
+def _classify_symptom_system(symptom_id: str) -> Set[str]:
+    """Map a symptom ID to body system(s) using keyword matching."""
+    symptom_lower = symptom_id.lower().replace("-", "_")
+    systems: Set[str] = set()
+    for system, keywords in _BODY_SYSTEM_KEYWORDS.items():
+        for kw in keywords:
+            if kw in symptom_lower:
+                systems.add(system)
+                break
+    return systems if systems else {"unclassified"}
 
 from api.ai.disease_interactions import DiseaseInteractionMatrix
 from api.ai.comorbidity_scorer import ComorbidityScorer
@@ -110,9 +160,17 @@ class MultiDiseaseDetector:
                 # Seniors more likely to have multiple conditions
                 return True
 
-        # Heuristic 4: Symptom divergence check
-        # TODO: Implement clustering to detect symptom groups
-        # For now, use simple heuristic: 7+ symptoms suggests multiple systems
+        # Heuristic 4: Symptom divergence — cluster symptoms by body system
+        involved_systems: Set[str] = set()
+        for symptom in detected_symptoms:
+            involved_systems.update(_classify_symptom_system(symptom))
+        involved_systems.discard("unclassified")
+
+        if len(involved_systems) >= 2:
+            # Symptoms span multiple body systems → likely multi-disease
+            return True
+
+        # Fallback: many symptoms (7+) even within one system
         if len(detected_symptoms) >= 7:
             return True
 
@@ -159,6 +217,14 @@ class MultiDiseaseDetector:
                 if conf_a < cls.MIN_CONFIDENCE_THRESHOLD or conf_b < cls.MIN_CONFIDENCE_THRESHOLD:
                     continue
 
+                # Extract per-disease symptom sets from candidates
+                symptoms_a_set = set(disease_a.get("symptoms", set()))
+                if isinstance(symptoms_a_set, list):
+                    symptoms_a_set = set(symptoms_a_set)
+                symptoms_b_set = set(disease_b.get("symptoms", set()))
+                if isinstance(symptoms_b_set, list):
+                    symptoms_b_set = set(symptoms_b_set)
+
                 # Score this combination
                 combination = cls._score_combination(
                     name_a,
@@ -169,6 +235,8 @@ class MultiDiseaseDetector:
                     age_years,
                     severity,
                     breed,
+                    disease_symptoms_a=symptoms_a_set,
+                    disease_symptoms_b=symptoms_b_set,
                 )
 
                 if combination.combined_confidence >= cls.MIN_COMBINATION_CONFIDENCE:
@@ -190,6 +258,8 @@ class MultiDiseaseDetector:
         age_years: Optional[float],
         severity: str,
         breed: Optional[str],
+        disease_symptoms_a: Optional[Set[str]] = None,
+        disease_symptoms_b: Optional[Set[str]] = None,
     ) -> DiseaseCombination:
         """
         Score a specific disease combination.
@@ -203,14 +273,15 @@ class MultiDiseaseDetector:
             age_years: Patient age
             severity: Symptom severity
             breed: Patient breed
+            disease_symptoms_a: Symptom set for disease A (from DB)
+            disease_symptoms_b: Symptom set for disease B (from DB)
 
         Returns:
             DiseaseCombination with calculated scores
         """
-        # TODO: Get actual symptom lists from disease database
-        # For now, use empty lists
-        symptoms_a = []
-        symptoms_b = []
+        # Use actual symptom sets from disease database when available
+        symptoms_a = list(disease_symptoms_a) if disease_symptoms_a else []
+        symptoms_b = list(disease_symptoms_b) if disease_symptoms_b else []
 
         # Analyze shared symptoms
         shared_set = set(symptoms_a) & set(symptoms_b)
@@ -373,20 +444,50 @@ class MultiDiseaseDetector:
     def estimate_symptom_allocation(
         diseases: List[str],
         detected_symptoms: List[str],
+        disease_symptom_sets: Optional[Dict[str, Set[str]]] = None,
     ) -> Dict[str, List[str]]:
         """
         Estimate which symptoms belong to which disease in combination.
 
+        Uses a Bayesian-inspired greedy allocation: each detected symptom is
+        assigned to the disease whose known symptom set contains it.  When a
+        symptom appears in multiple diseases it is allocated to the disease
+        with the *fewest* other allocated symptoms so far (load-balancing
+        heuristic that favours explanatory diversity).
+
         Args:
             diseases: Disease names in combination
             detected_symptoms: Detected symptoms
+            disease_symptom_sets: Optional {disease_name: set_of_symptom_ids}
 
         Returns:
             {disease_name: [allocated_symptoms]}
         """
-        # TODO: Implement Bayesian symptom allocation
-        # For now, return empty allocation
-        return {disease: [] for disease in diseases}
+        allocation: Dict[str, List[str]] = {d: [] for d in diseases}
+
+        if not disease_symptom_sets:
+            return allocation
+
+        for symptom in detected_symptoms:
+            # Which of our candidate diseases include this symptom?
+            matching = [
+                d for d in diseases
+                if symptom in disease_symptom_sets.get(d, set())
+            ]
+
+            if not matching:
+                continue
+
+            if len(matching) == 1:
+                # Unique to one disease → assign directly
+                allocation[matching[0]].append(symptom)
+            else:
+                # Shared symptom → assign to the disease with fewest
+                # allocated symptoms so far (diversity heuristic)
+                target = min(matching, key=lambda d: len(allocation[d]))
+                allocation[target].append(symptom)
+
+        return allocation
 
     @classmethod
     def analyze_symptom_ambiguity(
