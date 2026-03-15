@@ -185,10 +185,8 @@ Important:
         if not requests:
             raise ValueError("No requests to submit")
 
-        batch = self.client.beta.messages.batches.create(
-            model=self.model,
-            requests=requests,
-            betas=["interleaved-thinking-2025-05-14"]
+        batch = self.client.messages.batches.create(
+            requests=requests
         )
 
         print(f"✓ Submitted batch {batch.id}: {description}")
@@ -206,7 +204,7 @@ Important:
         Returns:
             Batch status dictionary
         """
-        batch = self.client.beta.messages.batches.retrieve(batch_id)
+        batch = self.client.messages.batches.retrieve(batch_id)
 
         return {
             "id": batch.id,
@@ -229,7 +227,7 @@ Important:
         Returns:
             List of result dictionaries with custom_id and parsed content
         """
-        batch = self.client.beta.messages.batches.retrieve(batch_id)
+        batch = self.client.messages.batches.retrieve(batch_id)
 
         if batch.processing_status not in ["ended"]:
             raise ValueError(f"Batch {batch_id} is still processing (status: {batch.processing_status})")
@@ -237,7 +235,7 @@ Important:
         results = []
 
         # Iterate through batch results
-        for result in self.client.beta.messages.batches.results(batch_id):
+        for result in self.client.messages.batches.results(batch_id):
             if result.result.type == "succeeded":
                 # Parse the response content
                 message_content = result.result.message.content[0]
