@@ -507,6 +507,16 @@ def api_analyze_symptoms():
     symptoms = data['symptoms']
     if not isinstance(symptoms, list) or len(symptoms) == 0:
         return {'error': 'At least one symptom required'}, 400
+    normalized_symptoms = []
+    for symptom in symptoms:
+        if not isinstance(symptom, str):
+            return {'error': 'symptoms must contain only strings'}, 400
+        normalized_symptom = symptom.strip()
+        if normalized_symptom:
+            normalized_symptoms.append(normalized_symptom)
+    symptoms = normalized_symptoms
+    if not symptoms:
+        return {'error': 'At least one symptom required'}, 400
 
     species = data.get('species', 'dog')
     age_stage = data.get('age_stage')
@@ -532,8 +542,15 @@ def api_analyze_symptoms():
 
     # Coerce vaccines to list of strings
     vaccines = []
-    if vaccines_raw and isinstance(vaccines_raw, list):
-        vaccines = [str(v) for v in vaccines_raw if v]
+    if vaccines_raw is not None:
+        if not isinstance(vaccines_raw, list):
+            return {'error': 'vaccines must be a list of strings'}, 400
+        for vaccine in vaccines_raw:
+            if not isinstance(vaccine, str):
+                return {'error': 'vaccines must contain only strings'}, 400
+            normalized_vaccine = vaccine.strip()
+            if normalized_vaccine:
+                vaccines.append(normalized_vaccine)
 
     # Coerce age_years to float
     if age_years is not None:
