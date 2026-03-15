@@ -34,6 +34,11 @@ from api.ai.treatment_response_predictor import (
     TreatmentResponse,
     TreatmentKnowledgeBase,
 )
+from api.ai.risk_stratifier import (
+    RiskStratifier,
+    RiskAssessmentFactors,
+    RiskStratificationResult,
+)
 
 
 @dataclass
@@ -74,6 +79,7 @@ class ComprehensiveDiagnosis:
     protective_factors: List[str]
     monitoring_plan: List[str]
     confidence_level: float  # Overall confidence (0-1)
+    risk_stratification: Optional[RiskStratificationResult] = None
     clinical_notes: str = ""
     timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
 
@@ -92,6 +98,10 @@ class ComprehensiveDiagnosis:
             "treatment_recommendations": [
                 t.to_dict() for t in self.treatment_recommendations
             ],
+            "risk_stratification": (
+                self.risk_stratification.to_dict()
+                if self.risk_stratification else None
+            ),
             "risk_factors": self.risk_factors,
             "protective_factors": self.protective_factors,
             "monitoring_plan": self.monitoring_plan,
@@ -119,6 +129,7 @@ class UnifiedClinicalEngine:
     - Stage 2: Adaptive confidence scoring
     - Stage 3: Prognostic prediction
     - Stage 4: Treatment response prediction
+    - Stage 5: Risk stratification
 
     Provides unified API for complete clinical workflows.
     """
@@ -129,6 +140,7 @@ class UnifiedClinicalEngine:
         self.confidence_calculator = AdaptiveConfidenceCalculator()
         self.prognostic_predictor = PrognosticPredictor()
         self.treatment_predictor = TreatmentResponsePredictor()
+        self.risk_stratifier = RiskStratifier()
         self.rule_miner = InteractionRuleMiner(min_support=0.15, min_confidence=0.4)
 
         self.diagnoses: Dict[str, ComprehensiveDiagnosis] = {}
@@ -187,6 +199,19 @@ class UnifiedClinicalEngine:
         )
         prognosis = self.prognostic_predictor.predict_prognosis(prognostic_factors)
 
+        # Step 4b: Risk stratification
+        risk_factors_input = RiskAssessmentFactors(
+            disease=primary_diagnosis,
+            disease_severity=case.disease_severity,
+            patient_age=case.patient_age,
+            patient_species=case.patient_species,
+            comorbidities=case.comorbidities,
+            recovery_probability=prognosis.recovery_probability,
+            complication_risk=prognosis.complication_risk,
+            mortality_risk=prognosis.mortality_risk,
+        )
+        risk_result = self.risk_stratifier.stratify_risk(risk_factors_input)
+
         self._log_workflow(case.case_id, DiagnosticWorkflow.TREATMENT_PLANNING)
 
         # Step 5: Recommend treatments
@@ -220,6 +245,7 @@ class UnifiedClinicalEngine:
             protective_factors=prognosis.protective_factors,
             monitoring_plan=monitoring_plan,
             confidence_level=confidence_level,
+            risk_stratification=risk_result,
         )
 
         self.diagnoses[case.case_id] = diagnosis
