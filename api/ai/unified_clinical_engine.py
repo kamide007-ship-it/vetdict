@@ -39,6 +39,10 @@ from api.ai.risk_stratifier import (
     RiskAssessmentFactors,
     RiskStratificationResult,
 )
+from api.ai.decision_support import (
+    DecisionSupportEngine,
+    DecisionSupportResult,
+)
 
 
 @dataclass
@@ -80,6 +84,7 @@ class ComprehensiveDiagnosis:
     monitoring_plan: List[str]
     confidence_level: float  # Overall confidence (0-1)
     risk_stratification: Optional[RiskStratificationResult] = None
+    decision_support: Optional[DecisionSupportResult] = None
     clinical_notes: str = ""
     timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
 
@@ -101,6 +106,10 @@ class ComprehensiveDiagnosis:
             "risk_stratification": (
                 self.risk_stratification.to_dict()
                 if self.risk_stratification else None
+            ),
+            "decision_support": (
+                self.decision_support.to_dict()
+                if self.decision_support else None
             ),
             "risk_factors": self.risk_factors,
             "protective_factors": self.protective_factors,
@@ -130,6 +139,7 @@ class UnifiedClinicalEngine:
     - Stage 3: Prognostic prediction
     - Stage 4: Treatment response prediction
     - Stage 5: Risk stratification
+    - Stage 6: Advanced decision support
 
     Provides unified API for complete clinical workflows.
     """
@@ -141,6 +151,7 @@ class UnifiedClinicalEngine:
         self.prognostic_predictor = PrognosticPredictor()
         self.treatment_predictor = TreatmentResponsePredictor()
         self.risk_stratifier = RiskStratifier()
+        self.decision_support = DecisionSupportEngine()
         self.rule_miner = InteractionRuleMiner(min_support=0.15, min_confidence=0.4)
 
         self.diagnoses: Dict[str, ComprehensiveDiagnosis] = {}
@@ -229,6 +240,16 @@ class UnifiedClinicalEngine:
             treatments=treatment_recommendations,
         )
 
+        # Step 6b: Advanced decision support
+        decision_result = self.decision_support.generate_decision_support(
+            risk_result=risk_result,
+            prognosis=prognosis,
+            treatments=treatment_recommendations,
+            disease=primary_diagnosis,
+            disease_severity=case.disease_severity,
+            patient_age=case.patient_age,
+        )
+
         # Step 7: Compile comprehensive diagnosis
         confidence_level = self._calculate_overall_confidence(
             adjusted_predictions, prognosis
@@ -246,6 +267,7 @@ class UnifiedClinicalEngine:
             monitoring_plan=monitoring_plan,
             confidence_level=confidence_level,
             risk_stratification=risk_result,
+            decision_support=decision_result,
         )
 
         self.diagnoses[case.case_id] = diagnosis
