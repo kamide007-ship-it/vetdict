@@ -345,7 +345,8 @@ Total estimated time: 8-12 hours of API processing
                     try:
                         api_status = self.enricher.check_batch_status(batch_id)
                         print(f"       API Status: {api_status['status']}")
-                        print(f"       Processed: {api_status['request_counts']['processed']}")
+                        total_processed = api_status['request_counts']['succeeded'] + api_status['request_counts']['errored']
+                        print(f"       Processed: {total_processed}/{batch_info.get('disease_count')}")
                         print(f"       Succeeded: {api_status['request_counts']['succeeded']}")
                         if api_status['request_counts']['errored'] > 0:
                             print(f"       Errored: {api_status['request_counts']['errored']}")
