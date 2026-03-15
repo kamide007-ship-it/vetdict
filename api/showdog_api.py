@@ -19,6 +19,8 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
+from api.debug_config import is_debug_mode_enabled
+
 # ---------------------------------------------------------------------------
 # Logging
 # ---------------------------------------------------------------------------
@@ -35,6 +37,7 @@ BUILD = "2026-03-07"
 # Flask App
 # ---------------------------------------------------------------------------
 app = Flask(__name__, static_folder=None)
+app.config['DEBUG'] = is_debug_mode_enabled()
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 app.secret_key = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY') or 'dev-key-change-me'
 
@@ -409,4 +412,4 @@ if __name__ == '__main__':
     logger.info(f"Health checker: {HEALTH_CHECKER_AVAILABLE}")
     logger.info(f"Diagnostic chat: {DIAGNOSTIC_CHAT_AVAILABLE}")
     logger.info(f"RECO2: {RECO2_AVAILABLE}")
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=is_debug_mode_enabled())

@@ -19,6 +19,7 @@ from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
 from api.auth import require_internal_api_access, reset_rate_limiting
+from api.debug_config import is_debug_mode_enabled
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -37,6 +38,7 @@ RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
 # Flask App
 # ---------------------------------------------------------------------------
 app = Flask(__name__, static_folder=None)
+app.config['DEBUG'] = is_debug_mode_enabled()
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 app.secret_key = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY') or 'dev-key-change-me'
 app.VERSION = VERSION  # Make VERSION available to decorators
@@ -773,4 +775,4 @@ if __name__ == '__main__':
     logger.info(f"Health checker: {HEALTH_CHECKER_AVAILABLE}")
     logger.info(f"Diagnostic chat: {DIAGNOSTIC_CHAT_AVAILABLE}")
     logger.info(f"RECO2: {RECO2_AVAILABLE}")
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=is_debug_mode_enabled())
