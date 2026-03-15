@@ -545,6 +545,10 @@ def api_analyze_symptoms():
     if not isinstance(symptoms, list) or len(symptoms) == 0:
         return {'error': 'At least one symptom required'}, 400
 
+    # Validate all symptom elements are strings
+    if not all(isinstance(s, str) for s in symptoms):
+        return {'error': 'All symptom IDs must be strings'}, 400
+
     species = data.get('species', 'dog')
     age_stage = data.get('age_stage')
     breed = data.get('breed')
