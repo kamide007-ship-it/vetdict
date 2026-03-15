@@ -190,8 +190,8 @@ def ensure_json_response(f):
     return wrapper
 
 
-def _normalize_string_list(values, field_name, *, allow_empty=False):
-    """Validate that list fields contain only strings."""
+def _normalize_string_list(values, field_name, *, allow_empty=False, singular_name=None):
+    """Validate string-list request fields while skipping empty items."""
     if not isinstance(values, list):
         return None, {'error': f'{field_name} must be a list'}, 400
 
@@ -204,8 +204,8 @@ def _normalize_string_list(values, field_name, *, allow_empty=False):
         normalized.append(value)
 
     if not allow_empty and not normalized:
-        singular_name = field_name[:-1] if field_name.endswith('s') else field_name
-        return None, {'error': f'At least one {singular_name} required'}, 400
+        item_name = singular_name or field_name
+        return None, {'error': f'At least one {item_name} required'}, 400
 
     return normalized, None, None
 
@@ -522,7 +522,9 @@ def api_analyze_symptoms():
     if not data or 'symptoms' not in data:
         return {'error': 'symptoms list required'}, 400
 
-    symptoms, error, status = _normalize_string_list(data['symptoms'], 'symptoms')
+    symptoms, error, status = _normalize_string_list(
+        data['symptoms'], 'symptoms', singular_name='symptom'
+    )
     if error:
         return error, status
 
