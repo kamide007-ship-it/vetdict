@@ -206,16 +206,22 @@ Important:
         """
         batch = self.client.messages.batches.retrieve(batch_id)
 
+        # Build request counts - only include attributes that exist
+        request_counts = {
+            "succeeded": getattr(batch.request_counts, 'succeeded', 0),
+            "errored": getattr(batch.request_counts, 'errored', 0)
+        }
+
+        # Add optional fields if they exist
+        if hasattr(batch.request_counts, 'expired'):
+            request_counts["expired"] = batch.request_counts.expired
+        if hasattr(batch.request_counts, 'cancel_requested'):
+            request_counts["cancel_requested"] = batch.request_counts.cancel_requested
+
         return {
             "id": batch.id,
             "status": batch.processing_status,
-            "request_counts": {
-                "processed": batch.request_counts.processed,
-                "errored": batch.request_counts.errored,
-                "expired": batch.request_counts.expired,
-                "cancel_requested": batch.request_counts.cancel_requested,
-                "succeeded": batch.request_counts.succeeded
-            }
+            "request_counts": request_counts
         }
 
     def retrieve_batch_results(self, batch_id: str) -> List[dict]:
