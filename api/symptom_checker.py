@@ -11,6 +11,8 @@ from __future__ import annotations
 from importlib.util import find_spec
 from typing import Any
 
+from api.disease_loader import load_diseases
+
 # ---------------------------------------------------------------------------
 # Symptom ID catalogue (for reference / validation)
 # ---------------------------------------------------------------------------
@@ -7575,7 +7577,7 @@ def analyze_symptoms(
 
     # -- 1. Score diseases --------------------------------------------------
     suspected: list[dict[str, Any]] = []
-    for disease in _DISEASE_DB:
+    for disease in load_diseases("dog", _DISEASE_DB):
         disease_symptoms: set[str] = disease["symptoms"]
         matching: set[str] = symptom_set & disease_symptoms
         match_count: int = len(matching)

@@ -12,6 +12,7 @@ from typing import Any, Dict, List
 
 from .helpers import analyze_symptoms_generic, ADVICE
 from . import prevalence_data
+from api.disease_loader import load_diseases
 
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -1692,4 +1693,4 @@ def analyze_symptoms(
     Returns:
         辞書形式の分析結果
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("exotic_other", {}))
+    return analyze_symptoms_generic(symptoms, load_diseases("exotic_other", DISEASES), SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("exotic_other", {}))

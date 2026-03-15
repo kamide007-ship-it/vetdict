@@ -10,6 +10,7 @@ from typing import Any, Dict, List
 
 from .helpers import ADVICE, analyze_symptoms_generic
 from . import prevalence_data
+from api.disease_loader import load_diseases
 
 DISEASES: List[Dict[str, Any]] = [
     # ── ウイルス性感染症 (Viral Infectious Diseases) ──
@@ -3040,4 +3041,4 @@ def analyze_symptoms(
     lab_values: dict | None = None,
 ) -> Dict[str, Any]:
     """鳥類用の鑑別診断関数。"""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("bird", {}))
+    return analyze_symptoms_generic(symptoms, load_diseases("bird", DISEASES), SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("bird", {}))

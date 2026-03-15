@@ -14,6 +14,7 @@ from typing import Any, Dict, List
 
 from .helpers import ADVICE, analyze_symptoms_generic
 from . import prevalence_data
+from api.disease_loader import load_diseases
 
 # ---------------------------------------------------------------------------
 # Disease database
@@ -1344,4 +1345,4 @@ def analyze_symptoms(
     lab_values: dict | None = None,
 ) -> Dict[str, Any]:
     """Run differential diagnosis for degus based on reported symptoms."""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("degu", {}))
+    return analyze_symptoms_generic(symptoms, load_diseases("degu", DISEASES), SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("degu", {}))

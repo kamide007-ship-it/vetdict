@@ -43,6 +43,16 @@ app.VERSION = VERSION  # Make VERSION available to decorators
 
 CORS(app)
 
+# ---------------------------------------------------------------------------
+# Database initialization
+# ---------------------------------------------------------------------------
+try:
+    from api.database import init_db
+    init_db(app)
+    logger.info("Disease database initialized")
+except Exception as e:
+    logger.warning("Database initialization failed, using Python fallback: %s", e)
+
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
 STATIC_DIR = str(ROOT_DIR / 'static')
