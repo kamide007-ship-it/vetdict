@@ -178,6 +178,15 @@ except ImportError:
         DRUG_DICTIONARY_AVAILABLE = False
         logger.warning("Drug dictionary module not available")
 
+# Admin API blueprint (SQLite data management)
+try:
+    from api.routes.admin_api import admin_bp
+    app.register_blueprint(admin_bp)
+    ADMIN_API_AVAILABLE = True
+except ImportError:
+    ADMIN_API_AVAILABLE = False
+    logger.warning("Admin API module not available")
+
 # Phase 3 Learning Insights blueprint (Continuous Learning Pipeline)
 try:
     from api.learning_insights import bp as learning_insights_bp
