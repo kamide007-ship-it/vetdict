@@ -1,46 +1,70 @@
 #!/usr/bin/env python3
 """
 Web Server for VetDict Frontend
-Serves static HTML/CSS/JS files and proxies API calls to FastAPI backend
+Lightweight HTTP server for static HTML/CSS/JS files
 """
 
-from flask import Flask, render_template, send_from_directory
-from flask_cors import CORS
+import http.server
+import socketserver
 import os
-
-app = Flask(__name__, static_folder='static', static_url_path='/static')
-CORS(app)
-
-# Configuration
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
+from pathlib import Path
 
 
-@app.route('/')
-def index():
-    """Serve the main HTML file"""
-    return send_from_directory(STATIC_DIR, 'index.html')
+class SPAHandler(http.server.SimpleHTTPRequestHandler):
+    """HTTP handler that serves index.html for SPA routing"""
 
+    def do_GET(self):
+        """Handle GET requests with SPA fallback"""
+        # Serve static files from the static directory
+        self.path = f'/static{self.path}' if not self.path.startswith('/static') else self.path
 
-@app.route('/api/<path:subpath>')
-def proxy_api(subpath):
-    """
-    Note: In production, use a proper reverse proxy (nginx) or
-    update frontend to call API directly with CORS headers
-    """
-    return {'error': 'Use API_BASE=http://localhost:8000/api in frontend'}, 400
+        # For any path, try to serve the file
+        try:
+            # Remove /static prefix to get actual file path
+            file_path = self.path.replace('/static/', '').replace('/static', '')
 
+            if file_path.startswith('/'):
+                file_path = file_path[1:]
 
-@app.errorhandler(404)
-def not_found(error):
-    """Serve index.html for all non-API routes (SPA support)"""
-    return send_from_directory(STATIC_DIR, 'index.html')
+            if not file_path:
+                file_path = 'index.html'
+
+            full_path = Path('static') / file_path
+
+            if full_path.exists() and full_path.is_file():
+                # Serve the file
+                return super().do_GET()
+        except:
+            pass
+
+        # For root or non-existent paths, serve index.html
+        self.path = '/static/index.html'
+        return super().do_GET()
+
+    def end_headers(self):
+        """Add CORS headers"""
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.send_header('Cache-Control', 'no-cache')
+        super().end_headers()
+
+    def log_message(self, format, *args):
+        """Custom logging"""
+        print(f"[{self.client_address[0]}] {format % args}")
 
 
 if __name__ == '__main__':
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
     port = int(os.getenv('PORT', 3000))
-    app.run(
-        host='0.0.0.0',
-        port=port,
-        debug=os.getenv('FLASK_DEBUG', '0') == '1'
-    )
+    handler = SPAHandler
+
+    with socketserver.TCPServer(("", port), handler) as httpd:
+        print(f"✓ Web server running at http://0.0.0.0:{port}")
+        print(f"✓ Serving files from: {os.path.abspath('static')}")
+        print(f"✓ API endpoint: http://localhost:8000/api")
+        print(f"\nOpen browser: http://localhost:{port}")
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print("\n✓ Server stopped")
