@@ -7,8 +7,12 @@ services:
     envVars:
       - key: SECRET_KEY
         generateValue: true
+      - key: INTERNAL_API_TOKEN
+        generateValue: true
       - key: FLASK_DEBUG
         value: "0"
+      - key: CORS_ALLOWED_ORIGINS
+        value: ""
       - key: PYTHON_VERSION
         value: "3.11.0"
       # AI Integration Configuration
