@@ -19,14 +19,14 @@ def restore_debug_modules():
 
 
 @pytest.mark.parametrize("module_name", ["api.vetdict_api", "api.showdog_api"])
-def test_debug_mode_defaults_to_on(module_name, monkeypatch):
+def test_debug_mode_defaults_to_off(module_name, monkeypatch):
     monkeypatch.delenv('FLASK_DEBUG', raising=False)
     sys.modules.pop(module_name, None)
 
     module = importlib.import_module(module_name)
 
-    assert module.is_debug_mode_enabled() is True
-    assert module.app.config['DEBUG'] is True
+    assert module.is_debug_mode_enabled() is False
+    assert module.app.config['DEBUG'] is False
 
 
 @pytest.mark.parametrize("module_name", ["api.vetdict_api", "api.showdog_api"])

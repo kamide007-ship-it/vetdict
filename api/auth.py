@@ -256,8 +256,19 @@ def require_internal_api_access(f: Callable) -> Callable:
 
         # Check if token is provided and scheme is correct
         if not current_config.internal_token:
-            # No token configured - allow all requests
-            return f(*args, **kwargs)
+            if os.getenv('FLASK_DEBUG', '0').strip().lower() in ('1', 'true', 'yes', 'on'):
+                logger.warning("INTERNAL_API_TOKEN not set — allowing unauthenticated access (debug mode)")
+                return f(*args, **kwargs)
+            else:
+                logger.error("INTERNAL_API_TOKEN not configured in production")
+                return (
+                    jsonify({
+                        'success': False,
+                        'error': 'Server misconfiguration',
+                        'version': version_str,
+                    }),
+                    500,
+                )
 
         if auth_scheme != 'Bearer':
             _audit_logger.log_auth_attempt(

@@ -40,10 +40,24 @@ RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
 app = Flask(__name__, static_folder=None)
 app.config['DEBUG'] = is_debug_mode_enabled()
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
-app.secret_key = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY') or 'dev-key-change-me'
+_secret = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY')
+if not _secret:
+    if is_debug_mode_enabled():
+        _secret = 'dev-only-insecure-key'
+        logger.warning("SECRET_KEY not set — using insecure default (debug mode only)")
+    else:
+        raise RuntimeError(
+            "SECRET_KEY environment variable is required in production. "
+            "Set SECRET_KEY or FLASK_SECRET_KEY before starting the application."
+        )
+app.secret_key = _secret
 app.VERSION = VERSION  # Make VERSION available to decorators
 
-CORS(app)
+_allowed_origins = os.getenv('CORS_ALLOWED_ORIGINS', '').strip()
+if _allowed_origins:
+    CORS(app, resources={r"/api/*": {"origins": _allowed_origins.split(',')}})
+else:
+    CORS(app)
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
