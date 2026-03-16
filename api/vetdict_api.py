@@ -14,7 +14,7 @@ import os
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
@@ -37,7 +37,7 @@ RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
 # ---------------------------------------------------------------------------
 # Flask App
 # ---------------------------------------------------------------------------
-app = Flask(__name__, static_folder=None)
+app = Flask(__name__, static_folder=None, template_folder=str(Path(__file__).resolve().parent.parent / 'templates'))
 app.config['DEBUG'] = is_debug_mode_enabled()
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 _secret = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY')
@@ -289,8 +289,8 @@ def add_headers(response):
 @app.route('/')
 def index():
     try:
-        return send_from_directory(TEMPLATES_DIR, 'index.html')
-    except (FileNotFoundError, WerkzeugNotFound):
+        return render_template('index.html')
+    except Exception:
         return jsonify({'error': 'index.html not found'}), 404
 
 
