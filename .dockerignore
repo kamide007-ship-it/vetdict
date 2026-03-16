@@ -1,0 +1,10 @@
+.git
+.github
+__pycache__
+tests/
+docs/
+*.pyc
+.env
+.env.example
+.coverage
+instance/
