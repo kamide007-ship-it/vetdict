@@ -13,8 +13,8 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from .helpers import ADVICE, analyze_symptoms_generic
 from . import prevalence_data
+from .helpers import ADVICE, analyze_symptoms_generic
 
 DISEASES: List[Dict[str, Any]] = [
     # ── Viral Diseases ───────────────────────────────────────────────────

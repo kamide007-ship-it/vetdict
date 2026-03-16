@@ -8,8 +8,8 @@ Retrieves completed batch results and integrates them back into the database.
 
 import json
 import os
-import sys
 import re
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -48,8 +48,7 @@ class Phase1BatchProcessor:
                 status = "errored"
 
                 # Extract content from successful results
-                if hasattr(result.result, 'message') and result.result.message:
-                    if result.result.message.content:
+                if hasattr(result.result, 'message') and result.result.message and result.result.message.content:
                         content = result.result.message.content[0].text
                         status = "succeeded"
 
@@ -263,7 +262,7 @@ class Phase1BatchProcessor:
         print("\n" + "=" * 70)
         print("PROCESSING COMPLETE")
         print("=" * 70)
-        print(f"\nResults Summary:")
+        print("\nResults Summary:")
         print(f"  Succeeded: {results['stats']['total_succeeded']}")
         print(f"  Errored: {results['stats']['total_errored']}")
         print(f"  Success rate: {100 * results['stats']['total_succeeded'] / max(results['stats']['total_succeeded'] + results['stats']['total_errored'], 1):.1f}%")
@@ -276,10 +275,10 @@ class Phase1BatchProcessor:
                 print(f"  ... and {len(results['error_log']) - 10} more")
 
         print(f"\nEnriched database: {self.enriched_db_path}")
-        print(f"\nNext steps:")
-        print(f"  1. Review enriched database")
-        print(f"  2. Run QA checks: python3 scripts/phase1_qa_validator.py")
-        print(f"  3. Integrate into main DB: python3 scripts/phase1_integration.py")
+        print("\nNext steps:")
+        print("  1. Review enriched database")
+        print("  2. Run QA checks: python3 scripts/phase1_qa_validator.py")
+        print("  3. Integrate into main DB: python3 scripts/phase1_integration.py")
 
 
 if __name__ == "__main__":

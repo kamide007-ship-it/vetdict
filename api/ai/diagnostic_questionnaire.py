@@ -7,9 +7,9 @@ Supports both traditional coverage-based ranking and ML-optimized information-th
 ranking for improved question selection (Phase 5).
 """
 
+import logging
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Set
-import logging
 
 logger = logging.getLogger(__name__)
 

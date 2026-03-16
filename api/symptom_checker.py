@@ -7496,7 +7496,13 @@ def analyze_symptoms(
         age_stage = _age_years_to_stage(age_years)
 
     # Pre-compute symptom pair boosts and import clinical weights
-    from api.species.helpers import SYMPTOM_PAIR_BOOST, SYMPTOM_CLINICAL_WEIGHTS, _DEFAULT_SYMPTOM_WEIGHT, compute_lab_boosts, _fuzzy_boost_lookup
+    from api.species.helpers import (
+        _DEFAULT_SYMPTOM_WEIGHT,
+        SYMPTOM_CLINICAL_WEIGHTS,
+        SYMPTOM_PAIR_BOOST,
+        _fuzzy_boost_lookup,
+        compute_lab_boosts,
+    )
 
     # Load extended symptom combinations
     try:
@@ -7635,10 +7641,7 @@ def analyze_symptoms(
         if onset:
             disease_onsets = _DISEASE_ONSET.get(disease["name"])
             if disease_onsets:
-                if onset in disease_onsets:
-                    onset_multiplier = 1.15
-                else:
-                    onset_multiplier = 0.85
+                onset_multiplier = 1.15 if onset in disease_onsets else 0.85
             # If disease has no onset data, leave multiplier at 1.0
 
         # Apply age predisposition multiplier (緩和: ペナルティを軽減)
@@ -7646,10 +7649,7 @@ def analyze_symptoms(
         if age_stage:
             age_predisposition = _DISEASE_AGE_PREDISPOSITION.get(disease["name"])
             if age_predisposition:
-                if age_stage in age_predisposition:
-                    age_multiplier = 1.15
-                else:
-                    age_multiplier = 0.85
+                age_multiplier = 1.15 if age_stage in age_predisposition else 0.85
             # If disease has no age predisposition data, leave at 1.0
 
         # Apply symptom pair boost (上限を制限、部分一致)

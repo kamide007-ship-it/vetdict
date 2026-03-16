@@ -5,10 +5,10 @@ significance assessment.
 """
 
 import pytest
+
 from api.ai.symptom_role_classifier import (
-    SymptomRoleAnalyzer,
-    SymptomRoleAnalysis,
     RoleClassifier,
+    SymptomRoleAnalyzer,
 )
 
 
@@ -159,7 +159,7 @@ class TestSymptomRoleAnalyzer:
             assert len(analysis.alternative_roles) <= 2
 
         # All alternatives should have lower confidence
-        for alt_role, alt_conf in analysis.alternative_roles:
+        for _alt_role, alt_conf in analysis.alternative_roles:
             assert alt_conf < analysis.primary_confidence
 
 

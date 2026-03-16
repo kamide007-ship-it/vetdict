@@ -15,31 +15,30 @@ from __future__ import annotations
 
 from typing import Callable, Dict, List
 
-from api.symptom_checker import analyze_symptoms as analyze_dog
+from api.species.amphibian_diseases import analyze_symptoms as analyze_amphibian
+from api.species.bird_diseases import analyze_symptoms as analyze_bird
 
 # 個別の動物種モジュールをインポート
 from api.species.cat_diseases import analyze_symptoms as analyze_cat
-from api.species.rabbit_diseases import analyze_symptoms as analyze_rabbit
-from api.species.hamster_diseases import analyze_symptoms as analyze_hamster
 from api.species.chinchilla_diseases import analyze_symptoms as analyze_chinchilla
-from api.species.guinea_pig_diseases import analyze_symptoms as analyze_guinea_pig
-from api.species.ferret_diseases import analyze_symptoms as analyze_ferret
-from api.species.hedgehog_diseases import analyze_symptoms as analyze_hedgehog
-from api.species.sugar_glider_diseases import analyze_symptoms as analyze_sugar_glider
 from api.species.degu_diseases import analyze_symptoms as analyze_degu
-from api.species.bird_diseases import analyze_symptoms as analyze_bird
-from api.species.parakeet_diseases import analyze_symptoms as analyze_parakeet
-from api.species.parrot_diseases import analyze_symptoms as analyze_parrot
-from api.species.reptile_diseases import analyze_symptoms as analyze_reptile
-from api.species.tortoise_diseases import analyze_symptoms as analyze_tortoise
-from api.species.snake_diseases import analyze_symptoms as analyze_snake
-from api.species.lizard_diseases import analyze_symptoms as analyze_lizard
-from api.species.amphibian_diseases import analyze_symptoms as analyze_amphibian
-from api.species.exotic_other_diseases import analyze_symptoms as analyze_exotic_other
 
 # Equine (horse) は独自の大規模データベースと診断エンジンを持つ
 from api.species.equine_diseases import generate_differential_diagnosis
-from api.species.equine_diseases import DISEASE_DATABASE as EQUINE_DB
+from api.species.exotic_other_diseases import analyze_symptoms as analyze_exotic_other
+from api.species.ferret_diseases import analyze_symptoms as analyze_ferret
+from api.species.guinea_pig_diseases import analyze_symptoms as analyze_guinea_pig
+from api.species.hamster_diseases import analyze_symptoms as analyze_hamster
+from api.species.hedgehog_diseases import analyze_symptoms as analyze_hedgehog
+from api.species.lizard_diseases import analyze_symptoms as analyze_lizard
+from api.species.parakeet_diseases import analyze_symptoms as analyze_parakeet
+from api.species.parrot_diseases import analyze_symptoms as analyze_parrot
+from api.species.rabbit_diseases import analyze_symptoms as analyze_rabbit
+from api.species.reptile_diseases import analyze_symptoms as analyze_reptile
+from api.species.snake_diseases import analyze_symptoms as analyze_snake
+from api.species.sugar_glider_diseases import analyze_symptoms as analyze_sugar_glider
+from api.species.tortoise_diseases import analyze_symptoms as analyze_tortoise
+from api.symptom_checker import analyze_symptoms as analyze_dog
 
 
 def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:

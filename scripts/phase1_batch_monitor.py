@@ -76,7 +76,7 @@ class Phase1BatchMonitor:
         print(f"Monitoring {len(all_batches)} batches...\n")
 
         completed_batches = {}
-        last_update = datetime.now()
+        datetime.now()
 
         while True:
             elapsed = (datetime.now() - start_time).total_seconds()
@@ -119,7 +119,7 @@ class Phase1BatchMonitor:
                 print("✅ ALL BATCHES COMPLETED!")
                 print("=" * 70)
                 print(f"\nCompleted batches: {len(completed_batches)}")
-                for batch_id, info in completed_batches.items():
+                for _batch_id, info in completed_batches.items():
                     counts = info.get("request_counts", {})
                     print(f"  - {info['id'][:40]}...")
                     print(f"    Succeeded: {counts.get('succeeded', 0)}, Errored: {counts.get('errored', 0)}")

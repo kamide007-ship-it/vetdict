@@ -4,10 +4,9 @@ Implements Bayesian statistical methods for calculating combined disease
 confidence scores with transparent confidence breakdowns and interaction effects.
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
 import logging
-import math
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 logger = logging.getLogger(__name__)
 

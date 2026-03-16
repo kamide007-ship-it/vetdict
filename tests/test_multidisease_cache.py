@@ -4,13 +4,14 @@ Tests cache functionality and performance optimization mechanisms.
 """
 
 import pytest
+
 from api.ai.multidisease_cache_manager import (
-    PrecomputedDiseaseMeta,
-    SymptomContextCache,
     AmbiguityScoreCache,
     ConfidenceCalculationCache,
-    QuestionTemplateCache,
     MultiDiseaseAnalysisCache,
+    PrecomputedDiseaseMeta,
+    QuestionTemplateCache,
+    SymptomContextCache,
     get_global_cache,
     initialize_caches,
 )

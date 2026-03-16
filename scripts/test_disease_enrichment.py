@@ -7,7 +7,6 @@ Run this to test the enrichment pipeline locally.
 """
 
 import sys
-import json
 from pathlib import Path
 
 # Add project root to path
@@ -128,8 +127,8 @@ def show_batch_recommendations():
     print("Batch Enrichment Recommendations")
     print("=" * 70)
 
-    from api.symptom_checker import _DISEASE_DB
     from api.disease_batch_enricher import DiseaseBatchEnricher
+    from api.symptom_checker import _DISEASE_DB
 
     enricher = DiseaseBatchEnricher()
     batches = enricher.create_batch_requests(_DISEASE_DB)
@@ -140,7 +139,7 @@ def show_batch_recommendations():
     print(f"  Number of batches: {len(batches)}")
     print(f"  Total API calls:   {total_requests}")
     print(f"  Estimated cost:    ~${total_requests * 0.025:.2f} (50% batch discount)")
-    print(f"  Processing time:   1-6 hours (batches run asynchronously)")
+    print("  Processing time:   1-6 hours (batches run asynchronously)")
     print(f"  vs Standard API:   ~${total_requests * 0.05:.2f} in seconds")
     print(f"\nSavings: ~${total_requests * 0.025:.2f} (50% discount!)")
 

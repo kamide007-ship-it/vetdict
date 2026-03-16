@@ -21,11 +21,11 @@ Usage:
     python scripts/phase1_expansion_batch_scheduler.py plan
 """
 
-import sys
 import json
+import sys
 import time
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, List
 
 # Add project root to path
@@ -107,8 +107,8 @@ class Phase1ExpansionScheduler:
         print(f"\nStandard API cost:     ${sum(self.EXPANSION_SPECIES.values()) * 0.05:.2f}")
         print(f"Batch API cost (50%):  ${total_cost:.2f}")
         print(f"Savings:               ${sum(self.EXPANSION_SPECIES.values()) * 0.05 - total_cost:.2f}")
-        print(f"\nProcessing time:       1-6 hours (all species simultaneous)")
-        print(f"Execution strategy:    Concurrent batch submission")
+        print("\nProcessing time:       1-6 hours (all species simultaneous)")
+        print("Execution strategy:    Concurrent batch submission")
 
     def submit_all_batches(self, interactive=True):
         """Submit enrichment batches for all species simultaneously."""
@@ -146,7 +146,7 @@ class Phase1ExpansionScheduler:
         print("SUBMITTING BATCHES")
         print("=" * 80)
 
-        for species in self.EXPANSION_SPECIES.keys():
+        for species in self.EXPANSION_SPECIES:
             if species not in species_groups:
                 print(f"⊘ {species}: No diseases found in metadata")
                 continue
@@ -207,7 +207,7 @@ class Phase1ExpansionScheduler:
 
         total_cost = sum(
             self.batch_tracking["batches"][sp]["estimated_cost"]
-            for sp in batch_ids_by_species.keys()
+            for sp in batch_ids_by_species
             if sp in self.batch_tracking["batches"]
         )
         print(f"✓ Total cost: ${total_cost:.2f}")
@@ -239,7 +239,6 @@ class Phase1ExpansionScheduler:
             print(f"\n○ {species} ({info.get('disease_count', 0)} diseases)")
             print(f"  Submitted: {info.get('submitted_at', 'N/A')}")
 
-            species_completed = True
             for batch_id in batch_ids:
                 try:
                     batch = self.enricher.client.messages.batches.retrieve(batch_id)
@@ -251,12 +250,10 @@ class Phase1ExpansionScheduler:
                           f"Errored: {batch.request_counts.errored}")
 
                     if batch.processing_status != "ended":
-                        species_completed = False
                         all_completed = False
 
                 except Exception as e:
                     print(f"  ✗ Error: {e}")
-                    species_completed = False
                     all_completed = False
 
         # Summary

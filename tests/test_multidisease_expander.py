@@ -4,20 +4,21 @@ Tests cover combination expansion, interaction modeling, complexity scoring,
 and association rule mining.
 """
 
-import pytest
-from typing import Dict, Tuple
-import sys
 import os
+import sys
+from typing import Dict, Tuple
+
+import pytest
 
 # Add API path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from api.ai.multidisease_expander import (
-    MultiDiseaseExpander,
-    DiseaseInteraction,
     CombinationPattern,
-    InteractionType,
+    DiseaseInteraction,
     InteractionRuleMiner,
+    InteractionType,
+    MultiDiseaseExpander,
 )
 
 

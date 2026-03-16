@@ -4,9 +4,9 @@ Maps vaccines to the diseases they prevent and confidence reduction factors
 when vaccination status is current. Supports species-specific vaccine protocols.
 """
 
+import logging
 from dataclasses import dataclass
 from typing import Dict, List, Optional
-import logging
 
 logger = logging.getLogger(__name__)
 

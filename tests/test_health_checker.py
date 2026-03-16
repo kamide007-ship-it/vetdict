@@ -21,7 +21,6 @@ from api.health_checker import (
     _jaccard_similarity,
 )
 
-
 # ============================================================================
 # Database Integrity
 # ============================================================================
@@ -47,7 +46,7 @@ class TestSymptomDatabase:
     def test_symptom_ids_set_matches(self):
         """SYMPTOM_IDS set must match all symptom id values."""
         expected = {s["id"] for s in SYMPTOMS}
-        assert SYMPTOM_IDS == expected
+        assert expected == SYMPTOM_IDS
 
     def test_all_categories_present(self):
         categories = {s["category"] for s in SYMPTOMS}
@@ -74,7 +73,7 @@ class TestDiseaseDatabase:
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:
-            assert "id" in d, f"Disease missing 'id'"
+            assert "id" in d, "Disease missing 'id'"
             assert "name_ja" in d, f"Disease {d.get('id')} missing 'name_ja'"
             assert "name_en" in d, f"Disease {d.get('id')} missing 'name_en'"
             assert "symptoms" in d, f"Disease {d.get('id')} missing 'symptoms'"
@@ -256,7 +255,7 @@ class TestAnalyzeSymptoms:
     def test_onset_boost_for_matching(self):
         """Matching onset should boost score."""
         results_acute = _analyze_symptoms("", ["vomiting", "diarrhea"], onset="acute")
-        results_none = _analyze_symptoms("", ["vomiting", "diarrhea"])
+        _analyze_symptoms("", ["vomiting", "diarrhea"])
         # At least one result should have onset_factor != 1.0
         acute_factors = [r["onset_factor"] for r in results_acute]
         assert any(f != 1.0 for f in acute_factors)
@@ -275,6 +274,7 @@ class TestAnalyzeSymptoms:
 
 import pytest
 from flask import Flask
+
 from api.health_checker import health_bp
 
 

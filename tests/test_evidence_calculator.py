@@ -1,6 +1,5 @@
 """Tests for evidence_calculator.py - Evidence-based confidence scoring."""
 
-import pytest
 
 from api.ai.evidence_calculator import (
     EvidenceBreakdown,

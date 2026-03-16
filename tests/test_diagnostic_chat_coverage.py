@@ -23,8 +23,11 @@ Targets functions and code paths NOT covered by test_diagnostic_chat.py:
 """
 
 import pytest
-from api.vetdict_api import app as flask_app
+
 from api.diagnostic_chat import (
+    _SPECIES_DATA,
+    EQUINE_AVAILABLE,
+    SPECIES_LABELS,
     _build_follow_up_questions,
     _extract_equine_symptoms,
     _extract_species_symptoms,
@@ -35,11 +38,8 @@ from api.diagnostic_chat import (
     extract_age_from_text,
     extract_onset_from_text,
     get_treatment_recommendations_for_disease,
-    EQUINE_AVAILABLE,
-    SPECIES_LABELS,
-    _SPECIES_DATA,
 )
-
+from api.vetdict_api import app as flask_app
 
 # ---------------------------------------------------------------------------
 # Shared test client fixture

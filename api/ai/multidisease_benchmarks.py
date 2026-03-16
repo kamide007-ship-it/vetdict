@@ -4,21 +4,21 @@ Measures execution time, memory usage, and scalability across different
 dataset sizes and combination complexities.
 """
 
-import time
-import sys
-import os
-from typing import Dict, List, Tuple
-from dataclasses import dataclass
 import json
+import os
+import sys
+import time
+from dataclasses import dataclass
+from typing import Dict, List, Tuple
 
 # Add parent directory to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
 from api.ai.multidisease_expander import (
-    MultiDiseaseExpander,
     DiseaseInteraction,
-    InteractionType,
     InteractionRuleMiner,
+    InteractionType,
+    MultiDiseaseExpander,
 )
 
 
@@ -98,7 +98,7 @@ class BenchmarkSuite:
 
             # Select subset for expansion
             all_diseases = []
-            for (d1, d2) in interactions.keys():
+            for (d1, d2) in interactions:
                 if d1 not in all_diseases:
                     all_diseases.append(d1)
                 if d2 not in all_diseases:
@@ -136,7 +136,7 @@ class BenchmarkSuite:
         # Create test combinations of varying sizes
         sizes = [2, 3, 4, 5, 6]
         all_diseases = list(set(
-            d for pair in interactions.keys()
+            d for pair in interactions
             for d in pair
         ))[:15]
 
@@ -145,7 +145,7 @@ class BenchmarkSuite:
 
             start_time = time.time()
             for combo in test_combos:
-                pattern = expander._score_combination(combo)
+                expander._score_combination(combo)
             elapsed_ms = (time.time() - start_time) * 1000
 
             cps = len(test_combos) / (elapsed_ms / 1000) if elapsed_ms > 0 else 0
@@ -175,7 +175,7 @@ class BenchmarkSuite:
 
             # Generate patterns
             all_diseases = list(set(
-                d for pair in interactions.keys()
+                d for pair in interactions
                 for d in pair
             ))[:12]
 
@@ -246,7 +246,7 @@ class BenchmarkSuite:
 
         # Generate patterns first
         all_diseases = list(set(
-            d for pair in interactions.keys()
+            d for pair in interactions
             for d in pair
         ))[:12]
 

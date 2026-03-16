@@ -8,9 +8,9 @@ Validates enriched content for quality and medical accuracy.
 
 import json
 import random
-from pathlib import Path
 from datetime import datetime
-from typing import List, Dict, Tuple
+from pathlib import Path
+from typing import Dict, List
 
 
 class Phase1QAValidator:
@@ -203,7 +203,7 @@ class Phase1QAValidator:
         sample_results = self.validate_sample(enriched, sample_size=50)
 
         pass_rate = 100 * sample_results["passed"] / sample_results["total_sampled"]
-        print(f"\n✓ Validation complete")
+        print("\n✓ Validation complete")
         print(f"  Passed: {sample_results['passed']}/{sample_results['total_sampled']} ({pass_rate:.1f}%)")
         print(f"  Failed: {sample_results['failed']}/{sample_results['total_sampled']}")
 
@@ -245,8 +245,8 @@ class Phase1QAValidator:
         print("QA VALIDATION SUMMARY")
         print("=" * 70)
         print(f"\nPass Rate: {pass_rate:.1f}%")
-        print(f"Threshold: 95% (PASS)" if pass_rate >= 95 else f"Threshold: 95% (FAIL)")
-        print(f"\nMetrics:")
+        print("Threshold: 95% (PASS)" if pass_rate >= 95 else "Threshold: 95% (FAIL)")
+        print("\nMetrics:")
         print(f"  - Fields Completion: {report['metrics']['fields_completion']:.1f}%")
         print(f"  - Bilingual Coverage: {report['metrics']['bilingual_coverage']:.1f}%")
 
@@ -258,12 +258,12 @@ class Phase1QAValidator:
                     for term_issue in issue['terminology_issues'][:2]:
                         print(f"    • {term_issue}")
 
-        print(f"\nNext steps:")
+        print("\nNext steps:")
         if pass_rate >= 95:
-            print(f"  ✓ Quality acceptable. Proceed with integration:")
-            print(f"    python3 scripts/phase1_integration.py")
+            print("  ✓ Quality acceptable. Proceed with integration:")
+            print("    python3 scripts/phase1_integration.py")
         else:
-            print(f"  ✗ Quality below threshold. Manual review recommended.")
+            print("  ✗ Quality below threshold. Manual review recommended.")
 
     def _generate_recommendations(self, results: Dict) -> List[str]:
         """Generate recommendations based on validation results."""

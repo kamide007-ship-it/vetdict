@@ -4,18 +4,18 @@ Tests cover treatment options, response prediction, outcome recording,
 and treatment statistics.
 """
 
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from api.ai.treatment_response_predictor import (
-    TreatmentResponsePredictor,
-    TreatmentOption,
-    TreatmentResponse,
-    TreatmentModality,
     TreatmentKnowledgeBase,
+    TreatmentModality,
+    TreatmentOption,
+    TreatmentResponsePredictor,
 )
 
 

@@ -48,10 +48,11 @@ def _get_ai_extractor():
         try:
             from api.ai import SymptomExtractor
             from api.config_constants import (
-                AI_SYMPTOM_EXTRACTION_TIMEOUT,
                 AI_SYMPTOM_CACHE_TTL,
                 AI_SYMPTOM_CONFIDENCE_THRESHOLD,
-                AI_SYMPTOM_FALLBACK_ENABLED,
+                AI_SYMPTOM_EXTRACTION_TIMEOUT,
+            )
+            from api.config_constants import (
                 AI_SYMPTOM_MODEL as DEFAULT_MODEL,
             )
             # Environment variable overrides config constant
@@ -120,6 +121,8 @@ def evaluate_with_ai_confidence(
 try:
     from api.species.equine_diseases import (
         DISEASE_DATABASE as EQUINE_DISEASES,
+    )
+    from api.species.equine_diseases import (
         HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
     )
     EQUINE_AVAILABLE = True
@@ -127,6 +130,8 @@ except ImportError:
     try:
         from species.equine_diseases import (
             DISEASE_DATABASE as EQUINE_DISEASES,
+        )
+        from species.equine_diseases import (
             HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
         )
         EQUINE_AVAILABLE = True
@@ -2048,7 +2053,7 @@ def diagnostic_chat():
     onset = data.get("onset")  # explicit onset from client
     previous_symptoms = data.get("previous_symptoms", [])
     species = data.get("species", "dog")
-    gender = data.get("gender")  # "male" | "female" (optional)
+    data.get("gender")  # "male" | "female" (optional)
 
     if not message:
         return jsonify({"error": "Message required"}), 400
@@ -2392,7 +2397,7 @@ def record_diagnostic_feedback():
         domain = data.get("domain", "general").strip()
         ai_result = data.get("ai_result", {})
         correct_symptoms = data.get("correct_symptoms", [])
-        notes = data.get("notes", "").strip()
+        data.get("notes", "").strip()
 
         # Validate required fields
         if not session_id:
@@ -2402,15 +2407,15 @@ def record_diagnostic_feedback():
 
         # Phase 3: Record learning signal
         try:
-            from api.learning_insights import record_feedback as record_learning_feedback
             from api.ai.accuracy_tracker import AIAccuracyTracker
+            from api.learning_insights import record_feedback as record_learning_feedback
 
             # Record to learning store
             response = record_learning_feedback()
             if isinstance(response, tuple):  # (data, status_code)
-                learning_response = response[0]
+                response[0]
             else:
-                learning_response = response
+                pass
 
             # Get accuracy evaluation
             tracker = AIAccuracyTracker()

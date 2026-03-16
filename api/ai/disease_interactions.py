@@ -4,9 +4,9 @@ Identifies which diseases commonly coexist in veterinary practice and models
 their interactions for simultaneous multi-disease diagnosis.
 """
 
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Set, Tuple
 import logging
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -274,9 +274,8 @@ class DiseaseInteractionMatrix:
         probability = relation.base_probability
 
         # Age adjustment
-        if age_years is not None:
-            if age_years > 7:  # Senior dogs
-                probability *= relation.age_factor
+        if age_years is not None and age_years > 7:  # Senior dogs
+            probability *= relation.age_factor
 
         # Severity adjustment
         if severity == "severe":
@@ -285,9 +284,8 @@ class DiseaseInteractionMatrix:
             probability *= 0.8
 
         # Breed adjustment
-        if breed and relation.breed_predispositions:
-            if breed in relation.breed_predispositions:
-                probability *= 1.1
+        if breed and relation.breed_predispositions and breed in relation.breed_predispositions:
+            probability *= 1.1
 
         return min(probability, 1.0)
 

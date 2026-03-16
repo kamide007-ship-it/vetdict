@@ -3,20 +3,21 @@
 Tests complete workflows across all Stage 1-4 components.
 """
 
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from api.ai.unified_clinical_engine import (
-    UnifiedClinicalEngine,
-    ClinicalCase,
-    DiagnosticWorkflow,
-)
 from api.ai.multidisease_expander import (
     DiseaseInteraction,
     InteractionType,
+)
+from api.ai.unified_clinical_engine import (
+    ClinicalCase,
+    DiagnosticWorkflow,
+    UnifiedClinicalEngine,
 )
 
 
@@ -137,7 +138,7 @@ class TestUnifiedClinicalEngine:
         )
 
         initial_predictions = {"Pancreatitis": 0.75, "Gastroenteritis": 0.60}
-        diagnosis = engine.comprehensive_analysis(case, initial_predictions)
+        engine.comprehensive_analysis(case, initial_predictions)
 
         # Record outcome
         engine.record_diagnosis_outcome(
@@ -164,7 +165,7 @@ class TestUnifiedClinicalEngine:
         )
 
         initial_predictions = {"Pancreatitis": 0.75}
-        diagnosis = engine.comprehensive_analysis(case, initial_predictions)
+        engine.comprehensive_analysis(case, initial_predictions)
 
         # Export
         case_data = engine.export_case("case_004")

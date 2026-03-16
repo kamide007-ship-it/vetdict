@@ -4,12 +4,11 @@ Extends 2-disease interactions to 3+ disease combinations with complex interacti
 Implements hierarchical clustering, association rule mining, and temporal progression patterns.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, Tuple
-from itertools import combinations
 import logging
+from dataclasses import dataclass, field
 from enum import Enum
-import math
+from itertools import combinations
+from typing import Dict, List, Optional, Set, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -312,7 +311,7 @@ class MultiDiseaseExpander:
                 disease = max(
                     remaining,
                     key=lambda d: sum(
-                        1 for (d1, d2) in interactions.keys()
+                        1 for (d1, d2) in interactions
                         if d in (d1, d2)
                     )
                 )
@@ -418,7 +417,7 @@ class MultiDiseaseExpander:
         """
         return {
             "total_diseases": len(set(
-                d for combo in self.combination_patterns.keys()
+                d for combo in self.combination_patterns
                 for d in combo
             )),
             "total_combinations": len(self.combination_patterns),

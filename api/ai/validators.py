@@ -126,10 +126,7 @@ def should_fallback(
 
     # If no symptoms extracted, fallback
     symptoms = response.get("extracted_symptoms", [])
-    if not isinstance(symptoms, list) or len(symptoms) == 0:
-        return True
-
-    return False
+    return bool(not isinstance(symptoms, list) or len(symptoms) == 0)
 
 
 def parse_json_response(raw_response: str) -> Optional[Dict[str, Any]]:

@@ -5,13 +5,13 @@ disease prediction confidence scores. Uses Bayesian updating, ensemble methods,
 and personalization for veterinarians and clinics.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
-import logging
-from enum import Enum
-from datetime import datetime
 import json
+import logging
 import math
+from dataclasses import dataclass, field
+from datetime import datetime
+from enum import Enum
+from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -360,7 +360,7 @@ class AdaptiveConfidenceCalculator:
 
         # Calculate calibration adjustment
         if record.initial_predictions:
-            actual_confidence = record.initial_predictions.get(
+            record.initial_predictions.get(
                 record.actual_diagnosis, 0.0
             )
             if record.final_diagnosis_confirmed:

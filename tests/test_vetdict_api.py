@@ -18,10 +18,9 @@ Covers:
 """
 
 import json
-import os
 import sys
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -34,8 +33,8 @@ if str(ROOT) not in sys.path:
 
 import api.vetdict_api as vetdict_api
 from api.auth import reset_rate_limiting
-from api.vetdict_api import VERSION, app as flask_app
-
+from api.vetdict_api import VERSION
+from api.vetdict_api import app as flask_app
 
 # =============================================================================
 # Fixtures
@@ -262,14 +261,13 @@ class TestEnsureJsonResponseDecorator:
         monkeypatch.setenv('RENDER', '1')
 
         # Patch the dict that health() returns into a callable that raises
-        original_health = vetdict_api.health.__wrapped__ if hasattr(vetdict_api.health, '__wrapped__') else None
+        vetdict_api.health.__wrapped__ if hasattr(vetdict_api.health, '__wrapped__') else None
 
         def _raise_health():
             raise RuntimeError("db down")
 
         # Swap the health view function body by patching through the app's view functions map
         with flask_app.test_request_context('/api/health'):
-            import flask
             # Directly test the decorator by constructing a wrapped function
             from api.vetdict_api import ensure_json_response
 
@@ -367,7 +365,7 @@ class TestAnalyzeSymptomsValidation:
         resp = client.post('/api/analyze-symptoms',
                            json={'symptoms': ['vomiting'], 'gender': 'unknown'})
         assert resp.status_code == 400
-        assert "gender must be 'male' or 'female'" == resp.get_json()['error']
+        assert resp.get_json()['error'] == "gender must be 'male' or 'female'"
 
     def test_valid_gender_values_accepted(self, monkeypatch, client):
         fake = MagicMock(return_value={'suspected_diseases': [], 'recommended_tests': [],

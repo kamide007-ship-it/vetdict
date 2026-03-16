@@ -1,7 +1,9 @@
 """Tests for RECO2 engine AI confidence integration (Phase 2c Step 2)."""
 
 import importlib
+
 import pytest
+
 from reco2 import engine
 from reco2.confidence_adapter import create_ai_confidence_context
 

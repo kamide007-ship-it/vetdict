@@ -1,12 +1,10 @@
 """Tests for api/data/vaccination_protection.py."""
 
-import pytest
 from api.data.vaccination_protection import (
-    VaccineProtection,
-    VaccinationStatusHandler,
     VACCINATION_PROTECTION,
+    VaccinationStatusHandler,
+    VaccineProtection,
 )
-
 
 # ===================================================================
 # VaccineProtection dataclass

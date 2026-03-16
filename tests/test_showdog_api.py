@@ -13,8 +13,8 @@ Covers:
 - Module-level constants (VERSION, BUILD)
 """
 
-import sys
 import os
+import sys
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -270,10 +270,7 @@ class TestReco2UnavailableRoutes:
 
     def _assert_503(self, client, method, path, **kwargs):
         with patch(f"{MODULE}.RECO2_AVAILABLE", False):
-            if method == "GET":
-                resp = client.get(path, **kwargs)
-            else:
-                resp = client.post(path, **kwargs)
+            resp = client.get(path, **kwargs) if method == "GET" else client.post(path, **kwargs)
         assert resp.status_code == 503, (
             f"{method} {path} returned {resp.status_code}, expected 503"
         )

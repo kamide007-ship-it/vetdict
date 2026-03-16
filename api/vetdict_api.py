@@ -18,7 +18,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
-from api.auth import require_internal_api_access, reset_rate_limiting
+from api.auth import require_internal_api_access
 from api.debug_config import is_debug_mode_enabled
 
 # ---------------------------------------------------------------------------

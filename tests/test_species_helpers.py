@@ -13,7 +13,6 @@ Covers:
 All tests are pure in-process (no database, no API keys, no network).
 """
 
-import pytest
 
 from api.species.helpers import (
     ADVICE,
@@ -23,7 +22,6 @@ from api.species.helpers import (
     analyze_symptoms_generic,
     compute_lab_boosts,
 )
-
 
 # =============================================================================
 # Shared fixtures / helpers
@@ -406,7 +404,7 @@ class TestAnalyzeSymptomsGeneric:
 
     def test_symptom_names_has_en_and_ja(self):
         result = self._call(["vomiting", "diarrhea", "lethargy"])
-        for sid, names in result["symptom_names"].items():
+        for _sid, names in result["symptom_names"].items():
             assert "en" in names
             assert "ja" in names
 
@@ -615,7 +613,7 @@ class TestAdviceDict:
             assert "ja" in content, f"ADVICE[{level}] missing 'ja' key"
 
     def test_advice_values_are_nonempty_strings(self):
-        for level, content in ADVICE.items():
+        for _level, content in ADVICE.items():
             assert isinstance(content["en"], str) and len(content["en"]) > 0
             assert isinstance(content["ja"], str) and len(content["ja"]) > 0
 
@@ -660,12 +658,12 @@ class TestSpeciesBreeds:
                 )
 
     def test_breed_id_is_nonempty_string(self):
-        for species, breeds in SPECIES_BREEDS.items():
+        for _species, breeds in SPECIES_BREEDS.items():
             for breed in breeds:
                 assert isinstance(breed["id"], str) and len(breed["id"]) > 0
 
     def test_risk_dict_values_are_positive_floats(self):
-        for species, breeds in SPECIES_BREEDS.items():
+        for _species, breeds in SPECIES_BREEDS.items():
             for breed in breeds:
                 for disease, multiplier in breed["risk"].items():
                     assert isinstance(multiplier, (int, float)) and multiplier > 0, (

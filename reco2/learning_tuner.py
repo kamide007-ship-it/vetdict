@@ -6,7 +6,7 @@ from AI accuracy, feedback quality, and symptom-disease patterns.
 """
 
 import logging
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 from .learning_store import LearningDataStore
 
@@ -130,7 +130,7 @@ class LearningTuner:
 
         # Count feedback types
         good_count = sum(1 for f in feedback_records if f.get("feedback_type") == "good")
-        bad_count = sum(1 for f in feedback_records if f.get("feedback_type") == "bad")
+        sum(1 for f in feedback_records if f.get("feedback_type") == "bad")
 
         if len(feedback_records) == 0:
             return {"score": 0, "message": ""}

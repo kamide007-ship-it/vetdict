@@ -6,17 +6,13 @@ calculates AI accuracy metrics, and provides analytics queries.
 """
 
 import logging
-from typing import Any, Dict, List, Optional, Tuple
-from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, List, Optional
 
+from . import store
 from .learning_models import (
-    SymptomDiseaseLearning,
-    AIExtractionAccuracy,
-    PersonalizationImpact,
     FeedbackRecord,
 )
-from . import store
 
 logger = logging.getLogger(__name__)
 

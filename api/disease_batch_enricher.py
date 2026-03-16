@@ -9,7 +9,8 @@ Processes up to 100,000 requests per batch for maximum cost efficiency.
 import json
 import os
 import time
-from typing import Optional, List
+from typing import List
+
 import anthropic
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
 from anthropic.types.messages.batch_create_params import Request
@@ -124,7 +125,7 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
         self, batch_id: str, diseases: List[dict]
     ) -> List[dict]:
         """Process batch results and apply to disease records."""
-        disease_by_id = {d.get("name"): d for d in diseases}
+        {d.get("name"): d for d in diseases}
         updated_count = 0
 
         for result in self.client.messages.batches.results(batch_id):

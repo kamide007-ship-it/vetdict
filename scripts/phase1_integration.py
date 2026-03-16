@@ -9,8 +9,8 @@ Creates backup and validates integration before commit.
 
 import json
 import shutil
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 
 class Phase1Integration:
@@ -30,7 +30,7 @@ class Phase1Integration:
         """Create backup of original database."""
         print(f"Creating backup: {self.backup_path}")
         shutil.copy(self.db_path, self.backup_path)
-        print(f"✓ Backup created")
+        print("✓ Backup created")
 
     def load_databases(self):
         """Load both original and enriched databases."""
@@ -68,11 +68,11 @@ class Phase1Integration:
 
     def validate_merge(self, original, enriched, merged_count):
         """Validate merge integrity."""
-        print(f"\nValidation Checks:")
+        print("\nValidation Checks:")
         print(f"  Original database: {len(original)} diseases")
         print(f"  Enriched database: {len(enriched)} diseases")
         print(f"  Merged count: {merged_count}")
-        print(f"  Size unchanged: {len(original) == len(enriched)} ✓" if len(original) == len(enriched) else f"  Size mismatch: ✗")
+        print(f"  Size unchanged: {len(original) == len(enriched)} ✓" if len(original) == len(enriched) else "  Size mismatch: ✗")
 
         # Check field coverage
         phase1_diseases = [d for d in original if d.get("enrichment_phase") == 1]
@@ -131,14 +131,14 @@ class Phase1Integration:
         print("\n" + "=" * 70)
         print("✅ INTEGRATION COMPLETE")
         print("=" * 70)
-        print(f"\nIntegration Summary:")
+        print("\nIntegration Summary:")
         print(f"  Diseases merged: {merged_count}")
         print(f"  Backup created: {self.backup_path}")
         print(f"  Database updated: {self.db_path}")
-        print(f"\nNext steps:")
-        print(f"  1. Review changes: git diff diseases_all_species.json")
-        print(f"  2. Commit changes: git add diseases_all_species.json && git commit -m '...'")
-        print(f"  3. Push to branch: git push -u origin <branch>")
+        print("\nNext steps:")
+        print("  1. Review changes: git diff diseases_all_species.json")
+        print("  2. Commit changes: git add diseases_all_species.json && git commit -m '...'")
+        print("  3. Push to branch: git push -u origin <branch>")
 
         return True
 

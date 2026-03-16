@@ -4,15 +4,15 @@ Applies medical evidence levels to adjust disease confidence scores
 based on scientific literature support and clinical evidence quality.
 """
 
+import logging
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
-import logging
 
 logger = logging.getLogger(__name__)
 
 # Import evidence data
 try:
-    from api.data.disease_evidence import EvidenceRetriever, DISEASE_EVIDENCE
+    from api.data.disease_evidence import DISEASE_EVIDENCE, EvidenceRetriever
 except ImportError:
     logger.warning("Could not import disease evidence data")
     EvidenceRetriever = None

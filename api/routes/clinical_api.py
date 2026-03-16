@@ -3,9 +3,10 @@
 Provides complete API for diagnosis, prognosis, and treatment planning.
 """
 
-from flask import Blueprint, request, jsonify
-from typing import Dict, List, Optional
 import logging
+from typing import Dict
+
+from flask import Blueprint, request
 
 logger = logging.getLogger(__name__)
 

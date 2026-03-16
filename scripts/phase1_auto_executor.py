@@ -12,11 +12,11 @@ Monitors batch completion and automatically runs subsequent steps:
 
 import json
 import os
-import sys
 import subprocess
+import sys
 import time
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -40,7 +40,7 @@ class Phase1AutoExecutor:
         """Check if all batches are complete."""
         manifest = self.load_manifest()
 
-        for species, data in manifest["species"].items():
+        for _species, data in manifest["species"].items():
             for batch_id in data.get("batch_ids", []):
                 try:
                     batch = self.client.messages.batches.retrieve(batch_id)
@@ -118,7 +118,7 @@ class Phase1AutoExecutor:
                             all_complete = False
 
                 if all_complete:
-                    print(f"\n✅ All batches completed!")
+                    print("\n✅ All batches completed!")
                     break
 
                 if elapsed > max_wait_seconds:

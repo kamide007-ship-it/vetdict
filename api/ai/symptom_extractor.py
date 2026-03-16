@@ -12,7 +12,6 @@ from typing import Any, Dict, List, Optional
 
 from api.ai.cache_manager import SymptomCache
 from api.ai.patient_personalization import (
-    PersonalizationEngine,
     personalize_extraction_result,
 )
 from api.ai.prompt_manager import build_symptom_extraction_prompt
@@ -178,7 +177,7 @@ class SymptomExtractor:
         if self._cache is not None:
             cached = self._cache.get(text)
             if cached is not None:
-                logger.debug(f"Cache hit for symptom extraction")
+                logger.debug("Cache hit for symptom extraction")
                 return {
                     **cached,
                     "cache_hit": True,
@@ -242,7 +241,7 @@ class SymptomExtractor:
         Returns:
             Result dict with internal fields starting with _
         """
-        start_time = time.time()
+        time.time()
 
         # Ensure LLM adapter is available
         if not self._ensure_llm_adapter():

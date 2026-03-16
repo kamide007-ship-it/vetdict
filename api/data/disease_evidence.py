@@ -4,9 +4,9 @@ Maps diseases to evidence levels (1-4) with supporting medical literature.
 Higher evidence levels indicate stronger scientific foundation for diagnosis confidence.
 """
 
+import logging
 from dataclasses import dataclass
 from typing import Dict, List, Optional
-import logging
 
 logger = logging.getLogger(__name__)
 

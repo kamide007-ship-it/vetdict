@@ -6,11 +6,11 @@ Tests confidence score calibration and calibration factor calculation.
 
 import os
 import tempfile
+
 import pytest
 
 from api.ai.confidence_calibration import ConfidenceCalibrator
 from reco2.learning_store import LearningDataStore
-from reco2 import store
 
 
 @pytest.fixture

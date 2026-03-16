@@ -5,9 +5,10 @@ confidence scores with transparent breakdowns.
 """
 
 import pytest
+
 from api.ai.combined_confidence_calculator import (
-    CombinedConfidenceCalculator,
     BayesianDiseaseCombiner,
+    CombinedConfidenceCalculator,
     ConfidenceBreakdown,
 )
 

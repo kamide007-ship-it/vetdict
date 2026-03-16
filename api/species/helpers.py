@@ -9,7 +9,7 @@ defined here for consistent messaging across species.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Set
 
 # Import gender risk data
 try:
@@ -1179,9 +1179,8 @@ def _fuzzy_boost_lookup(
         # スラッシュ区切りの各部分で照合（例: "Tumors/Neoplasia" → ["tumors", "neoplasia"]）
         if "/" in boost_name:
             parts = [p.strip().lower() for p in boost_name.split("/")]
-            if any(p in disease_lower for p in parts if len(p) > 3):
-                if multiplier > best_multiplier:
-                    best_multiplier = multiplier
+            if any(p in disease_lower for p in parts if len(p) > 3) and multiplier > best_multiplier:
+                best_multiplier = multiplier
     return best_multiplier
 
 
@@ -1346,20 +1345,14 @@ def analyze_symptoms_generic(
         if onset:
             disease_onsets = disease.get("onset_pattern")
             if disease_onsets:
-                if onset in disease_onsets:
-                    onset_multiplier = 1.15
-                else:
-                    onset_multiplier = 0.85
+                onset_multiplier = 1.15 if onset in disease_onsets else 0.85
 
         # Apply age multiplier (緩和: ペナルティを軽減)
         age_multiplier = 1.0
         if age_stage:
             age_predisposition = disease.get("age_predisposition")
             if age_predisposition:
-                if age_stage in age_predisposition:
-                    age_multiplier = 1.15
-                else:
-                    age_multiplier = 0.85
+                age_multiplier = 1.15 if age_stage in age_predisposition else 0.85
 
         # Apply breed risk multiplier (上限を制限、部分一致)
         breed_multiplier = min(_fuzzy_boost_lookup(disease["name"], breed_risk), 1.8)

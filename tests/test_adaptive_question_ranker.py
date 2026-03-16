@@ -2,7 +2,7 @@
 
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 
 import pytest
 
@@ -12,7 +12,6 @@ if str(ROOT) not in sys.path:
 
 from api.ai.adaptive_question_ranker import AdaptiveQuestionRanker, RankedQuestion
 from api.ai.question_features import QuestionFeatures
-
 
 # ---------------------------------------------------------------------------
 # Helpers / fixtures
@@ -376,7 +375,7 @@ class TestBuildSymptomImplications:
 
     def test_values_are_lists(self):
         result = AdaptiveQuestionRanker._build_symptom_implications()
-        for key, value in result.items():
+        for _key, value in result.items():
             assert isinstance(value, list)
 
     def test_vaccine_status_empty(self):

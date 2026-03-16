@@ -5,8 +5,8 @@ Test Phase 2 Implementation - Validate basic functionality
 Tests batch enricher, scheduler, processor, and validator modules
 """
 
-import sys
 import json
+import sys
 from pathlib import Path
 
 # Add project root to path
@@ -184,13 +184,13 @@ def test_data_loading():
         prevention_count = sum(1 for d in diseases if d.get("prevention"))
         prognosis_count = sum(1 for d in diseases if d.get("prognosis"))
 
-        print(f"\nCurrent Phase 2 Enrichment Status:")
+        print("\nCurrent Phase 2 Enrichment Status:")
         print(f"  Treatment: {treatment_count}/{len(diseases)} ({100*treatment_count/len(diseases):.1f}%)")
         print(f"  Prevention: {prevention_count}/{len(diseases)} ({100*prevention_count/len(diseases):.1f}%)")
         print(f"  Prognosis: {prognosis_count}/{len(diseases)} ({100*prognosis_count/len(diseases):.1f}%)")
 
         # Sample a few diseases
-        print(f"\nSample disease:")
+        print("\nSample disease:")
         sample = diseases[0]
         print(f"  ID: {sample.get('id')}")
         print(f"  Name: {sample.get('name')}")

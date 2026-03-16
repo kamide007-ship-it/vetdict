@@ -1,12 +1,11 @@
 """Tests for RECO2 confidence adapter module."""
 
-import pytest
 from reco2.confidence_adapter import (
     AIConfidenceContext,
     adjust_context_from_ai,
     calculate_combined_confidence,
-    scale_confidence_to_psi_multiplier,
     create_ai_confidence_context,
+    scale_confidence_to_psi_multiplier,
 )
 
 

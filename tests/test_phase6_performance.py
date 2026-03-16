@@ -4,12 +4,14 @@ Tests to ensure Phase 6 multi-disease diagnosis doesn't introduce
 unacceptable performance regressions.
 """
 
-import pytest
 import time
+
+import pytest
+
+from api.ai.combined_confidence_calculator import CombinedConfidenceCalculator
 from api.ai.multidisease_api_handler import MultiDiseaseAnalyzer
 from api.ai.multidisease_detector import MultiDiseaseDetector
 from api.ai.symptom_context_engine import AmbiguitySolver
-from api.ai.combined_confidence_calculator import CombinedConfidenceCalculator
 
 
 class TestPerformanceBaseline:

@@ -23,12 +23,12 @@ Usage:
     python scripts/phase1_batch_scheduler.py plan
 """
 
-import sys
 import json
+import sys
 import time
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple
+from pathlib import Path
+from typing import Dict, List
 
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent
@@ -142,7 +142,7 @@ class Phase1Scheduler:
         print(f"TOTAL DISEASES TO ENRICH: {total_incomplete}")
         print(f"TOTAL ESTIMATED COST: ${total_cost:.2f} (vs ${total_cost * 2:.2f} standard pricing)")
         print(f"SAVINGS WITH BATCH API: ${total_cost:.2f} (50%)")
-        print(f"PROCESSING TIME: 1-6 hours (batches run asynchronously)")
+        print("PROCESSING TIME: 1-6 hours (batches run asynchronously)")
         print("=" * 80)
 
     def submit_all_batches(self, interactive=True):
@@ -210,7 +210,7 @@ class Phase1Scheduler:
 
                 print(f"✓ {len(batch_ids)} batch(es) submitted")
                 print(f"    Batch IDs: {', '.join(batch_ids[:2])}{'...' if len(batch_ids) > 2 else ''}")
-                print(f"    Track with: python scripts/phase1_batch_scheduler.py status")
+                print("    Track with: python scripts/phase1_batch_scheduler.py status")
 
                 # Small delay between submissions to avoid rate limiting
                 if priority < len(species_to_process):
@@ -295,12 +295,12 @@ class Phase1Scheduler:
                 print("Try again later.")
                 return
 
-            print(f"✓ Batch completed!")
+            print("✓ Batch completed!")
             print(f"  Succeeded: {batch.request_counts.succeeded}")
             print(f"  Errored: {batch.request_counts.errored}")
 
             # Process results
-            print(f"\nProcessing results...")
+            print("\nProcessing results...")
             enriched_diseases = self.enricher.process_batch_results(batch_id, _DISEASE_DB)
 
             # Save enriched data

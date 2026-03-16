@@ -2,9 +2,7 @@
 
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
-
-import pytest
+from typing import Any, Dict
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -15,7 +13,6 @@ from api.ai.diagnostic_questionnaire import (
     DiagnosticQuestionnaireEngine,
     build_next_question_response,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

@@ -1,6 +1,5 @@
 """Tests for AI prompt manager module."""
 
-import pytest
 from api.ai.prompt_manager import PromptManager, build_symptom_extraction_prompt
 
 

@@ -3,7 +3,6 @@
 Tests HTML/CSS/JS integration and API frontend compatibility.
 """
 
-import pytest
 from pathlib import Path
 
 

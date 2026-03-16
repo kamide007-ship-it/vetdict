@@ -14,7 +14,7 @@ Supports batch processing for cost efficiency.
 
 import json
 import os
-from typing import Optional
+
 import anthropic
 
 

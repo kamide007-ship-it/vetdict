@@ -11,7 +11,6 @@ Provides:
 
 import logging
 import os
-import sys
 from functools import wraps
 from pathlib import Path
 
@@ -120,9 +119,13 @@ except ImportError:
 # RECO2/RECO3 AI integrity layer
 try:
     from reco2 import input_gate, output_gate
-    from reco2.config import load_config as load_reco2_config, public_config as public_reco2_config
-    from reco2.engine import evaluate_payload as reco2_evaluate_payload, get_logs as reco2_get_logs
-    from reco2.engine import get_status as reco2_get_status, patrol as reco2_patrol, record_feedback as reco2_record_feedback
+    from reco2.config import load_config as load_reco2_config
+    from reco2.config import public_config as public_reco2_config
+    from reco2.engine import evaluate_payload as reco2_evaluate_payload
+    from reco2.engine import get_logs as reco2_get_logs
+    from reco2.engine import get_status as reco2_get_status
+    from reco2.engine import patrol as reco2_patrol
+    from reco2.engine import record_feedback as reco2_record_feedback
     from reco2.orchestrator import get_orchestrator as reco2_get_orchestrator
     RECO2_AVAILABLE = True
 except ImportError:

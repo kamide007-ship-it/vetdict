@@ -12,7 +12,6 @@ from api.ai.multidisease_detector import (
     _classify_symptom_system,
 )
 
-
 # ── Helper factories ─────────────────────────────────────────────────
 
 def _disease(name, match_percent=50, **kwargs):

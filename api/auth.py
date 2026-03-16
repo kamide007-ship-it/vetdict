@@ -10,14 +10,13 @@ Provides production-grade API authentication including:
 - Support for multiple authentication methods
 """
 
-import hashlib
 import hmac
 import logging
 import os
 import threading
 import time
 from collections import deque
-from datetime import datetime, timedelta
+from datetime import datetime
 from functools import wraps
 from typing import Callable, Dict, Optional, Tuple
 
@@ -120,15 +119,7 @@ class AuditLogger:
         if not self.enabled:
             return
 
-        timestamp = datetime.utcnow().isoformat()
-        log_entry = {
-            'timestamp': timestamp,
-            'success': success,
-            'method': method,
-            'client_ip': client_ip,
-            'reason': reason,
-            'metadata': metadata or {},
-        }
+        datetime.utcnow().isoformat()
 
         log_level = logging.INFO if success else logging.WARNING
         self.auth_log.log(

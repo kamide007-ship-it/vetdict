@@ -39,6 +39,9 @@ select = [
 ignore = [
     "E501",   # line too long (handled gradually)
     "E741",   # ambiguous variable name
+    "E402",   # module-level import not at top (sys.path setup pattern)
+    "SIM103", # needless-bool (readability preference)
+    "SIM108", # if-else-block-instead-of-if-exp (readability preference)
 ]
 
 [tool.ruff.lint.isort]
