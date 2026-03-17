@@ -68,6 +68,7 @@ def invalidate_cache() -> None:
     global _cache_version
     _cache_version += 1
     get_species_stats.cache_clear()
+    get_urgency_stats.cache_clear()
     _get_symptoms_for_species_cached.cache_clear()
 
 
@@ -112,6 +113,65 @@ def get_species_stats() -> dict[str, Any]:
         "total_diseases": sum(s["diseases"] for s in stats),
         "total_drugs": total_drugs,
         "total_species": len(stats),
+    }
+
+
+@lru_cache(maxsize=1)
+def get_urgency_stats() -> dict[str, Any]:
+    """Return disease count by urgency level from SQLite.
+
+    Returns a dict with keys: ``urgency_levels`` (list), ``total_diseases``.
+    """
+    with get_connection() as conn:
+        urgency_rows = conn.execute(
+            "SELECT urgency, COUNT(*) AS cnt FROM diseases "
+            "WHERE urgency IS NOT NULL GROUP BY urgency ORDER BY urgency"
+        ).fetchall()
+
+    urgency_stats = []
+    total_diseases = 0
+    for row in urgency_rows:
+        count = row["cnt"]
+        urgency_stats.append({
+            "urgency": row["urgency"],
+            "count": count,
+        })
+        total_diseases += count
+
+    return {
+        "urgency_levels": urgency_stats,
+        "total_diseases": total_diseases,
+    }
+
+
+def get_urgency_by_species(species: str) -> dict[str, Any]:
+    """Return urgency-level breakdown for a specific species.
+
+    Returns a dict with keys: ``species``, ``urgency_levels`` (list),
+    ``total_diseases``.
+    """
+    with get_connection() as conn:
+        urgency_rows = conn.execute(
+            "SELECT urgency, COUNT(*) AS cnt FROM diseases "
+            "WHERE species = ? AND urgency IS NOT NULL "
+            "GROUP BY urgency ORDER BY urgency",
+            (species,),
+        ).fetchall()
+
+    urgency_stats = []
+    total_diseases = 0
+    for row in urgency_rows:
+        count = row["cnt"]
+        urgency_stats.append({
+            "urgency": row["urgency"],
+            "count": count,
+        })
+        total_diseases += count
+
+    return {
+        "species": species,
+        "urgency_levels": urgency_stats,
+        "total_diseases": total_diseases,
     }
 
 
@@ -227,10 +287,21 @@ def list_diseases(
     offset: int = 0,
     search: str | None = None,
 ) -> dict[str, Any]:
-    """List diseases with optional species filter and search.
+    """List diseases with optional species filter and comprehensive search.
+
+    Search matches against name, description, treatment, prevention, and
+    pathophysiology fields in both English and Japanese.
 
     Returns ``{"diseases": [...], "total": N, "limit": L, "offset": O}``.
     """
+    search_clause = (
+        "(name LIKE ? OR name_ja LIKE ? OR "
+        "description LIKE ? OR description_ja LIKE ? OR "
+        "treatment LIKE ? OR treatment_ja LIKE ? OR "
+        "prevention LIKE ? OR prevention_ja LIKE ? OR "
+        "pathophysiology LIKE ? OR pathophysiology_ja LIKE ?)"
+    )
+
     with get_connection() as conn:
         conditions: list[str] = []
         params: list = []
@@ -239,9 +310,9 @@ def list_diseases(
             conditions.append("species = ?")
             params.append(species)
         if search:
-            conditions.append("(name LIKE ? OR name_ja LIKE ?)")
             like_pattern = "%" + search + "%"
-            params.extend([like_pattern, like_pattern])
+            conditions.append(search_clause)
+            params.extend([like_pattern] * 10)
 
         where = " WHERE " + " AND ".join(conditions) if conditions else ""
 
@@ -270,19 +341,79 @@ def get_disease_detail(disease_id: str) -> dict | None:
 
 
 def search_diseases(query: str, species: str | None = None, limit: int = 50) -> list[dict]:
-    """Search diseases by name (English or Japanese) with optional species filter."""
+    """Search diseases by name, description, treatment, and other fields.
+
+    Searches both English and Japanese fields. Returns results ordered by
+    relevance (name match prioritized) then by species and name.
+    """
     like_pattern = "%" + query + "%"
+    search_clause = (
+        "(name LIKE ? OR name_ja LIKE ? OR "
+        "description LIKE ? OR description_ja LIKE ? OR "
+        "treatment LIKE ? OR treatment_ja LIKE ? OR "
+        "prevention LIKE ? OR prevention_ja LIKE ? OR "
+        "pathophysiology LIKE ? OR pathophysiology_ja LIKE ?)"
+    )
+
+    with get_connection() as conn:
+        # Prepare search parameters (one for each field)
+        search_params = [like_pattern] * 10
+
+        if species:
+            query_str = (
+                "SELECT id, species, name, name_ja, urgency FROM diseases "
+                "WHERE " + search_clause + " AND species = ? ORDER BY name LIMIT ?"
+            )
+            rows = conn.execute(
+                query_str,
+                [*search_params, species, limit],
+            ).fetchall()
+        else:
+            query_str = (
+                "SELECT id, species, name, name_ja, urgency FROM diseases "
+                "WHERE " + search_clause + " ORDER BY species, name LIMIT ?"
+            )
+            rows = conn.execute(
+                query_str,
+                [*search_params, limit],
+            ).fetchall()
+    return [_row_to_disease_summary(r) for r in rows]
+
+
+def get_diseases_by_symptom(
+    symptom_id: str, species: str | None = None, limit: int = 50
+) -> list[dict]:
+    """Return diseases that have a given symptom.
+
+    Searches for diseases with this symptom in their symptoms JSON field.
+    Optionally filters by species.
+    """
     with get_connection() as conn:
         if species:
             rows = conn.execute(
-                "SELECT id, species, name, name_ja, urgency FROM diseases "
-                "WHERE (name LIKE ? OR name_ja LIKE ?) AND species = ? ORDER BY name LIMIT ?",
-                (like_pattern, like_pattern, species, limit),
+                "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
+                "WHERE species = ? AND symptoms IS NOT NULL "
+                "ORDER BY name",
+                (species,),
             ).fetchall()
         else:
             rows = conn.execute(
-                "SELECT id, species, name, name_ja, urgency FROM diseases "
-                "WHERE name LIKE ? OR name_ja LIKE ? ORDER BY species, name LIMIT ?",
-                (like_pattern, like_pattern, limit),
+                "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
+                "WHERE symptoms IS NOT NULL "
+                "ORDER BY species, name",
             ).fetchall()
-    return [_row_to_disease_summary(r) for r in rows]
+
+    # Filter results by checking JSON array membership
+    result = []
+    for row in rows:
+        symptoms_json = row["symptoms"]
+        if symptoms_json:
+            try:
+                symptoms = json.loads(symptoms_json)
+                if symptom_id in symptoms:
+                    result.append(_row_to_disease_summary(row))
+                    if len(result) >= limit:
+                        break
+            except (json.JSONDecodeError, TypeError):
+                continue
+    return result
