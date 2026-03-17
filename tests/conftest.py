@@ -17,6 +17,7 @@ os.environ["VETDICT_DB_PATH"] = _test_db_path
 
 # Initialize test database schema
 from api.database import init_db
+
 init_db(_test_db_path)
 
 
