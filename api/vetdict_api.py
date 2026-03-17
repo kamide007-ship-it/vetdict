@@ -178,6 +178,16 @@ except ImportError:
         DRUG_DICTIONARY_AVAILABLE = False
         logger.warning("Drug dictionary module not available")
 
+# Analytics blueprint (usage statistics)
+try:
+    from api.analytics import analytics_bp, init_analytics
+    app.register_blueprint(analytics_bp)
+    init_analytics()
+    ANALYTICS_AVAILABLE = True
+except ImportError:
+    ANALYTICS_AVAILABLE = False
+    logger.warning("Analytics module not available")
+
 # Admin API blueprint (SQLite data management)
 try:
     from api.routes.admin_api import admin_bp
@@ -286,12 +296,25 @@ def add_headers(response):
 # Static Files
 # =============================================================================
 
+
+
+
 @app.route('/')
 def index():
     try:
         return render_template('index.html')
     except Exception:
         return jsonify({'error': 'index.html not found'}), 404
+
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
 
 
 @app.route('/favicon.ico')
@@ -331,10 +354,37 @@ def static_files(filename):
 @app.route('/api/health', methods=['GET'])
 @ensure_json_response
 def health():
+    import shutil
+    import sqlite3 as _sqlite3
+
+    checks = {}
+
+    # Database connectivity
+    try:
+        from api.database import DB_PATH as _db_path
+        _conn = _sqlite3.connect(_db_path)
+        _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+        _conn.close()
+        checks["database"] = {"status": "ok", "diseases": _count}
+    except Exception as e:
+        checks["database"] = {"status": "error", "detail": str(e)}
+
+    # Disk space
+    try:
+        usage = shutil.disk_usage("/")
+        free_pct = round(usage.free / usage.total * 100, 1)
+        checks["disk"] = {"status": "ok" if free_pct > 5 else "warning", "free_percent": free_pct}
+    except Exception:
+        checks["disk"] = {"status": "unknown"}
+
+    all_ok = all(c.get("status") == "ok" for c in checks.values())
+    status_str = "healthy" if all_ok else "degraded"
+
     return {
-        'status': 'healthy',
+        'status': status_str,
         'version': VERSION,
         'build': BUILD,
+        'checks': checks,
         'features': {
             'symptom_checker': SYMPTOM_CHECKER_AVAILABLE,
             'species_analyzer': SPECIES_ANALYZER_AVAILABLE,
@@ -784,6 +834,19 @@ def rate_limited(e):
 def server_error(e):
     logger.error(f"500: {e}", exc_info=True)
     return jsonify({'error': 'Internal server error', 'version': VERSION}), 500
+
+
+# =============================================================================
+# API v1 aliases — versioned endpoints pointing to existing handlers
+# =============================================================================
+
+app.add_url_rule('/api/v1/health', endpoint='v1_health', view_func=health, methods=['GET'])
+app.add_url_rule('/api/v1/species-stats', endpoint='v1_species_stats', view_func=api_species_stats, methods=['GET'])
+app.add_url_rule('/api/v1/analyze-symptoms', endpoint='v1_analyze_symptoms', view_func=api_analyze_symptoms, methods=['POST'])
+app.add_url_rule('/api/v1/breeds/<species>', endpoint='v1_breeds', view_func=api_get_breeds, methods=['GET'])
+
+if SYMPTOM_CHECKER_AVAILABLE:
+    app.add_url_rule('/api/v1/species/<species>/symptoms', endpoint='v1_species_symptoms', view_func=api_species_symptoms, methods=['GET'])
 
 
 # =============================================================================
