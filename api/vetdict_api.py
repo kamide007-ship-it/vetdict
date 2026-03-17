@@ -95,12 +95,10 @@ except ImportError:
 
 # Health checker blueprint (checkbox UI)
 try:
-    from api.health_checker import SYMPTOMS as ALL_SYMPTOMS
     from api.health_checker import health_bp
     HEALTH_CHECKER_AVAILABLE = True
 except ImportError:
     try:
-        from health_checker import SYMPTOMS as ALL_SYMPTOMS
         from health_checker import health_bp
         HEALTH_CHECKER_AVAILABLE = True
     except ImportError:

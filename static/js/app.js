@@ -277,6 +277,10 @@ function loadSpeciesStats(){
     fetch("/api/health-check/symptoms").then(r=>r.json())
   ]).then(([data,sd])=>{
     try{
+      // Check if API returned an error response
+      if(!data.species||!Array.isArray(data.species)){
+        throw new Error("Invalid species data structure from API");
+      }
       SPECIES=data.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
       pendingStats={
         diseases:data.total_diseases||0,
