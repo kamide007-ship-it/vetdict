@@ -766,6 +766,18 @@ def migrate_equine(conn) -> int:
     return count
 
 
+def migrate_equine_symptoms(conn) -> int:
+    """Migrate horse symptoms from HEALTH_CHECK_ITEMS (category-aware)."""
+    mod = _load_module("api.species.equine_diseases")
+    health_items = getattr(mod, "HEALTH_CHECK_ITEMS", {})
+    count = 0
+    for _category, items in health_items.items():
+        for symptom_id, name_ja, name_en in items:
+            upsert_symptom(conn, f"horse_{symptom_id}", name_en, name_ja, "horse")
+            count += 1
+    return count
+
+
 def main(db_path: str | None = None):
     print("=" * 60)
     print("VetDict Data Migration → SQLite")
@@ -788,6 +800,10 @@ def main(db_path: str | None = None):
         n = migrate_equine(conn)
         print(f"  → {n} diseases")
         total_diseases += n
+
+        ns = migrate_equine_symptoms(conn)
+        print(f"  → {ns} symptoms")
+        total_symptoms += ns
 
         # All other species
         for species_key, module_path in sorted(SPECIES_MODULES.items()):
