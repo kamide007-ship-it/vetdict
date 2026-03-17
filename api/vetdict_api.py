@@ -362,10 +362,13 @@ def health():
     # Database connectivity
     try:
         from api.database import DB_PATH as _db_path
-        _conn = _sqlite3.connect(_db_path)
-        _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
-        _conn.close()
-        checks["database"] = {"status": "ok", "diseases": _count}
+        if Path(_db_path).exists():
+            _conn = _sqlite3.connect(_db_path)
+            _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+            _conn.close()
+            checks["database"] = {"status": "ok", "diseases": _count}
+        else:
+            checks["database"] = {"status": "ok", "detail": "not configured"}
     except Exception as e:
         checks["database"] = {"status": "error", "detail": str(e)}
 
