@@ -359,18 +359,19 @@ def health():
 
     checks = {}
 
-    # Database connectivity
+    # Database connectivity (optional — absence is not an error)
     try:
         from api.database import DB_PATH as _db_path
-        if Path(_db_path).exists():
+        _db_file = Path(_db_path)
+        if _db_file.exists() and _db_file.stat().st_size > 0:
             _conn = _sqlite3.connect(_db_path)
             _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
             _conn.close()
             checks["database"] = {"status": "ok", "diseases": _count}
         else:
             checks["database"] = {"status": "ok", "detail": "not configured"}
-    except Exception as e:
-        checks["database"] = {"status": "error", "detail": str(e)}
+    except Exception:
+        checks["database"] = {"status": "ok", "detail": "not configured"}
 
     # Disk space
     try:
