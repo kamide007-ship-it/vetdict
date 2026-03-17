@@ -4,12 +4,12 @@ Predicts disease outcomes including recovery probability, treatment success rate
 complications risk, and mortality risk with confidence intervals.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
-from enum import Enum
 import logging
-from datetime import datetime
 import math
+from dataclasses import dataclass, field
+from datetime import datetime
+from enum import Enum
+from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -582,7 +582,7 @@ class PrognosticPredictor:
         outcomes = self.outcome_database
 
         correct = 0
-        for disease, outcome, factors_dict in outcomes:
+        for disease, outcome, _factors_dict in outcomes:
             if disease in predictions:
                 pred = predictions[disease]
                 if pred.likely_outcome.value == outcome:

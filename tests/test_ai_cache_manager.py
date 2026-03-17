@@ -1,7 +1,7 @@
 """Tests for AI cache manager module."""
 
 import time
-import pytest
+
 from api.ai.cache_manager import SymptomCache
 
 

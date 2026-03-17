@@ -4,10 +4,10 @@ Generates clinically effective questions that can distinguish between
 multiple disease hypotheses simultaneously.
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
 import logging
 import math
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 

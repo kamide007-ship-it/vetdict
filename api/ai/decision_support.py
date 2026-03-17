@@ -6,16 +6,16 @@ recommendations, follow-up scheduling, alert generation, and clinical
 pathway selection.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
-from enum import Enum
 import logging
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Dict, List, Optional, Tuple
 
+from api.ai.prognostic_predictor import PrognosticPrediction
 from api.ai.risk_stratifier import (
     RiskStratificationResult,
     RiskTier,
 )
-from api.ai.prognostic_predictor import PrognosticPrediction
 from api.ai.treatment_response_predictor import TreatmentResponse
 
 logger = logging.getLogger(__name__)
@@ -373,9 +373,7 @@ class DecisionSupportEngine:
             return True
         if risk_result.hospitalization_risk > 0.65:
             return True
-        if prognosis.mortality_risk > 0.4:
-            return True
-        return False
+        return prognosis.mortality_risk > 0.4
 
     @staticmethod
     def _generate_owner_instructions(

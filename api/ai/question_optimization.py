@@ -5,10 +5,10 @@ based on entropy reduction. This enables efficient differential diagnosis
 through adaptive questioning.
 """
 
+import logging
 import math
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Tuple
-import logging
+from typing import Any, Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
 

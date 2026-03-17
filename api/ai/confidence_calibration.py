@@ -6,7 +6,7 @@ Applies corrections to extract over/underconfident behavior per domain.
 """
 
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 
@@ -56,10 +56,7 @@ class ConfidenceCalibrator:
         # Calculate calibration factor
         # If confidence=0.8 but actual accuracy is 0.7, factor = 0.7/0.8 = 0.875
         # This will adjust future 0.8 confidence to 0.7
-        if raw_confidence > 0:
-            factor = min(1.1, max(0.9, actual_accuracy / raw_confidence))
-        else:
-            factor = 1.0
+        factor = min(1.1, max(0.9, actual_accuracy / raw_confidence)) if raw_confidence > 0 else 1.0
 
         return round(factor, 3)
 

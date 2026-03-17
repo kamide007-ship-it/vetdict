@@ -5,9 +5,8 @@ Prevention フィールド完成スクリプト
 """
 
 import json
-import re
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 # ============================================================================
 # Prevention テンプレートエンジン
@@ -290,16 +289,16 @@ def complete_prevention_fields():
     with open(data_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✅ Prevention 補完完了！")
+    print("\n✅ Prevention 補完完了！")
     print(f"{'='*70}")
-    print(f"📊 補完統計:")
+    print("📊 補完統計:")
     print(f"  Prevention 追加: {stats['prevention_added']}")
     print(f"  Prevention 既存: {stats['prevention_kept']}")
     print(f"  Prevention_ja 追加: {stats['prevention_ja_added']}")
     print(f"  エラー: {stats['errors']}")
 
     # フィールド完成度を確認
-    print(f"\n📋 補完後のフィールド完成度:")
+    print("\n📋 補完後のフィールド完成度:")
     fields = ['treatment', 'prevention', 'prognosis', 'treatment_ja', 'prevention_ja', 'prognosis_ja']
     for field in fields:
         filled = sum(1 for d in data if d.get(field) and str(d.get(field)).strip())
@@ -312,14 +311,14 @@ def complete_prevention_fields():
 
 def verify_prevention(data_file: Path):
     """Prevention の品質を検証"""
-    print(f"\n✔️ Prevention の品質検証中...")
+    print("\n✔️ Prevention の品質検証中...")
     print(f"{'='*70}")
 
     with open(data_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     # サンプル確認
-    print(f"\n📝 サンプル (疾患別):")
+    print("\n📝 サンプル (疾患別):")
 
     # 各カテゴリから 1 件ずつサンプル
     categories = {}
@@ -334,7 +333,7 @@ def verify_prevention(data_file: Path):
         print(f"     Prevention: {disease.get('prevention', 'なし')[:100]}...")
         print(f"     Prevention_ja: {disease.get('prevention_ja', 'なし')[:80]}...")
 
-    print(f"\n✅ Prevention 品質確認完了！")
+    print("\n✅ Prevention 品質確認完了！")
 
 
 if __name__ == '__main__':
@@ -344,5 +343,5 @@ if __name__ == '__main__':
     # 検証
     verify_prevention(data_file)
 
-    print(f"\n✅ Prevention フィールド完成！")
+    print("\n✅ Prevention フィールド完成！")
     print(f"📄 ファイル: {data_file}")

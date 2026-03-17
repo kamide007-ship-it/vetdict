@@ -2,7 +2,6 @@
 
 import json
 import sys
-import os
 from pathlib import Path
 
 import pytest
@@ -12,7 +11,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from api.ai.multidisease_benchmarks import BenchmarkResult, BenchmarkSuite
-
 
 # ---------------------------------------------------------------------------
 # BenchmarkResult tests

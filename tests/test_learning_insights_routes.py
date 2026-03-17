@@ -1,13 +1,14 @@
 """Tests for learning_insights.py Flask route endpoints."""
 
-import pytest
 from unittest.mock import patch
+
+import pytest
 from flask import Flask
 
 from api.learning_insights import (
-    bp,
-    _generate_feedback_recommendations,
     _generate_accuracy_insights,
+    _generate_feedback_recommendations,
+    bp,
 )
 
 

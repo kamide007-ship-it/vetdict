@@ -4,9 +4,9 @@ Classifies the role of symptoms (primary, secondary, complication) in disease
 pathophysiology, enabling more accurate multi-disease diagnosis.
 """
 
-from typing import Any, Dict, List, Optional, Tuple
-from dataclasses import dataclass
 import logging
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -317,11 +317,7 @@ class SymptomRoleAnalyzer:
         """Assess clinical significance of symptom."""
         if primary_role == "primary" and role_confidence > 0.7:
             return "essential"
-        elif primary_role in ["primary", "warning_sign"]:
-            return "important"
-        elif primary_role == "secondary" and role_confidence > 0.6:
-            return "important"
-        elif primary_role == "complication" and disease_severity > 0.6:
+        elif primary_role in ["primary", "warning_sign"] or primary_role == "secondary" and role_confidence > 0.6 or primary_role == "complication" and disease_severity > 0.6:
             return "important"
         else:
             return "minor"
@@ -340,7 +336,7 @@ class SymptomRoleAnalyzer:
 
         # Symptoms at beginning of list typically appear early
         symptom_lower = symptom_name.lower()
-        for i, sym in enumerate(symptoms_list[:3]):  # Check first 3
+        for _i, sym in enumerate(symptoms_list[:3]):  # Check first 3
             if symptom_lower in str(sym).lower():
                 return True
 
@@ -351,11 +347,7 @@ class SymptomRoleAnalyzer:
             "first manifestation", "早期"
         ]
 
-        for keyword in early_keywords:
-            if keyword in patho_lower and symptom_lower in patho_lower:
-                return True
-
-        return False
+        return any(keyword in patho_lower and symptom_lower in patho_lower for keyword in early_keywords)
 
     @staticmethod
     def _check_reversibility(
@@ -398,7 +390,7 @@ class SymptomRoleAnalyzer:
 
         # Extract relevant portion of pathophysiology
         symptom_lower = symptom_name.lower()
-        patho_lower = pathophysiology.lower()
+        pathophysiology.lower()
 
         # Find sentence containing symptom
         sentences = pathophysiology.split(". ")

@@ -8,17 +8,16 @@ Covers:
 - Exception / error-handling paths (expect 500)
 """
 
-import sys
 import os
-from unittest.mock import MagicMock, patch
+import sys
+from unittest.mock import MagicMock
 
 import pytest
 from flask import Flask
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from api.routes.clinical_api import ClinicalAPIHandler, register_clinical_routes, clinical_bp
-
+from api.routes.clinical_api import ClinicalAPIHandler, clinical_bp, register_clinical_routes
 
 # ---------------------------------------------------------------------------
 # Fixtures

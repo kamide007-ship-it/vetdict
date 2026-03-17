@@ -1,9 +1,8 @@
 """Tests for api/ai/question_optimization.py."""
 
-import math
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 import pytest
 
@@ -16,7 +15,6 @@ from api.ai.question_optimization import (
     EntropyMetrics,
     calculate_question_entropy_reduction,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

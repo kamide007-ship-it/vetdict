@@ -1,0 +1,23 @@
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="VetDict ホーム">
+      <div>
+        <div class="logo-text"><span class="logo-vet">Vet</span><span class="logo-dict">Dict</span></div>
+        <span class="logo-sub" data-i18n="logoSub">多動物種対応 獣医学疾患データベース</span>
+      </div>
+    </a>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mainNav" id="hamburgerBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav class="header-nav" id="mainNav" role="tablist" aria-label="メインナビゲーション">
+      <button role="tab" aria-selected="true" data-view="checker" id="tab-checker" aria-controls="viewChecker" data-i18n="navChecker">症状チェッカー</button>
+      <button role="tab" aria-selected="false" data-view="database" id="tab-database" aria-controls="viewDatabase" data-i18n="navDatabase">疾患データベース</button>
+      <button role="tab" aria-selected="false" data-view="chat" id="tab-chat" aria-controls="viewChat" data-i18n="navChat">症状相談</button>
+      <button role="tab" aria-selected="false" data-view="drugs" id="tab-drugs" aria-controls="viewDrugs" data-i18n="navDrugs">薬品辞書</button>
+    </nav>
+    <div class="lang-toggle" role="radiogroup" aria-label="Language">
+      <button class="active" data-lang="ja" role="radio" aria-checked="true">JP</button>
+      <button data-lang="en" role="radio" aria-checked="false">EN</button>
+    </div>
+  </div>
+</header>

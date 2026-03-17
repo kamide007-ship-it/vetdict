@@ -6,11 +6,11 @@ Tests API endpoint logic without Flask dependencies.
 
 import os
 import tempfile
+
 import pytest
 
-from reco2.learning_store import LearningDataStore
 from api.ai.accuracy_tracker import AIAccuracyTracker
-from reco2 import store
+from reco2.learning_store import LearningDataStore
 
 
 @pytest.fixture

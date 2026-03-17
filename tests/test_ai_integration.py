@@ -1,15 +1,16 @@
 """Integration tests for AI symptom extraction with diagnostic_chat."""
 
 import os
-import pytest
 from unittest.mock import patch
+
+import pytest
 
 
 def test_extract_symptoms_backward_compatibility():
     """Test that extract_symptoms_from_text works with AI disabled."""
     # Ensure AI is disabled for this test
     with patch.dict(os.environ, {"VETDICT_USE_AI_SYMPTOM_EXTRACTION": "false"}):
-        from api.diagnostic_chat import extract_symptoms_from_text, SYMPTOM_ALIASES, SYMPTOM_IDS
+        from api.diagnostic_chat import extract_symptoms_from_text
 
         # Test with known alias
         test_input = "coughing"
@@ -22,7 +23,7 @@ def test_extract_symptoms_backward_compatibility():
 def test_extract_symptoms_returns_valid_ids():
     """Test that extracted symptoms are valid IDs."""
     with patch.dict(os.environ, {"VETDICT_USE_AI_SYMPTOM_EXTRACTION": "false"}):
-        from api.diagnostic_chat import extract_symptoms_from_text, SYMPTOM_IDS
+        from api.diagnostic_chat import SYMPTOM_IDS, extract_symptoms_from_text
 
         test_input = "My dog is coughing and has a runny nose"
         result = extract_symptoms_from_text(test_input)
@@ -73,17 +74,19 @@ def test_ai_extractor_initialization():
     with patch.dict(os.environ, {"VETDICT_USE_AI_SYMPTOM_EXTRACTION": "true"}):
         # Reimport to get fresh module state
         import importlib
+
         import api.diagnostic_chat as dc_module
         importlib.reload(dc_module)
 
         # Should not raise an error
-        extractor = dc_module._get_ai_extractor()
+        dc_module._get_ai_extractor()
         # extractor can be None if API key not set, but shouldn't crash
 
 
 def test_ai_disabled_by_default():
     """Test that AI extraction is disabled by default."""
     import importlib
+
     import api.diagnostic_chat as dc_module
 
     # Reload with default env (no VETDICT_USE_AI_SYMPTOM_EXTRACTION set)
@@ -128,6 +131,7 @@ def test_japanese_symptom_extraction():
 def test_ai_extraction_with_real_api():
     """Integration test with real Claude API (requires API key)."""
     import importlib
+
     import api.diagnostic_chat as dc_module
 
     # Reload with AI enabled

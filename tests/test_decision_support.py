@@ -1,22 +1,20 @@
 """Tests for decision_support.py - Advanced Decision Support Engine (Stage 6)."""
 
-import pytest
 
 from api.ai.decision_support import (
+    _OWNER_INSTRUCTIONS,
+    FOLLOW_UP_DEFAULTS,
+    PATHWAY_RULES,
     AlertSeverity,
     ClinicalAlert,
     ClinicalPathway,
     DecisionSupportEngine,
     DecisionSupportResult,
     FollowUpSchedule,
-    FOLLOW_UP_DEFAULTS,
-    PATHWAY_RULES,
-    _OWNER_INSTRUCTIONS,
 )
-from api.ai.risk_stratifier import RiskStratificationResult, RiskTier
 from api.ai.prognostic_predictor import PrognosticPrediction
+from api.ai.risk_stratifier import RiskStratificationResult, RiskTier
 from api.ai.treatment_response_predictor import TreatmentResponse
-
 
 # ── Helpers ──────────────────────────────────────────────────────────
 

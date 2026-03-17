@@ -6,11 +6,11 @@ Tests extraction evaluation, accuracy measurement, and confidence tracking.
 
 import os
 import tempfile
+
 import pytest
 
 from api.ai.accuracy_tracker import AIAccuracyTracker
 from reco2.learning_store import LearningDataStore
-from reco2 import store
 
 
 @pytest.fixture

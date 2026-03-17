@@ -5,13 +5,14 @@ Phase 2.1: Multi-Species Veterinary Disease Database API
 """
 
 import json
-from pathlib import Path
-from typing import Optional, List
 from datetime import datetime
+from pathlib import Path
+from typing import List, Optional
+
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 # ============================================================================

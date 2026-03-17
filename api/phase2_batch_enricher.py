@@ -12,7 +12,8 @@ Uses Claude Batches API for cost-effective bulk processing.
 
 import json
 import os
-from typing import Optional, List, Dict
+from typing import List
+
 import anthropic
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
 from anthropic.types.messages.batch_create_params import Request
@@ -35,7 +36,7 @@ class Phase2BatchEnricher:
         pathophysiology = disease.get("pathophysiology", "")
         causes = disease.get("causes", "")
 
-        context = f"\nPhase 1 Context (if available):\n"
+        context = "\nPhase 1 Context (if available):\n"
         if pathophysiology:
             context += f"- Pathophysiology: {pathophysiology[:300]}...\n"
         if causes:

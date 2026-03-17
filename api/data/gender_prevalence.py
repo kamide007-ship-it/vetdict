@@ -4,10 +4,9 @@ Provides gender-specific risk multipliers for diseases where gender affects
 susceptibility or prevalence. Supports both English and Japanese keywords.
 """
 
+import logging
 from dataclasses import dataclass
 from typing import Dict, Optional
-import logging
-import re
 
 logger = logging.getLogger(__name__)
 

@@ -6,7 +6,7 @@ enabling confidence boost when both symptoms in a pair are detected.
 
 import logging
 from collections import defaultdict
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
 

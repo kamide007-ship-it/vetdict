@@ -22,20 +22,19 @@ Usage:
     python scripts/phase2_batch_scheduler.py validate
 """
 
-import sys
-import json
-import time
-from pathlib import Path
-from datetime import datetime
-from typing import Dict, List, Tuple
 import argparse
+import json
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List
 
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from api.phase2_batch_enricher import Phase2BatchEnricher
-from api.symptom_checker import _DISEASE_DB
 
 
 class Phase2Scheduler:
@@ -98,7 +97,7 @@ class Phase2Scheduler:
             }
         }
 
-        print(f"✓ Created new manifest")
+        print("✓ Created new manifest")
         return manifest
 
     def _load_diseases(self) -> List[Dict]:
@@ -301,13 +300,13 @@ Total estimated time: 8-12 hours of API processing
             }
 
         print(f"\n{'='*70}")
-        print(f"SUBMISSION SUMMARY")
+        print("SUBMISSION SUMMARY")
         print(f"{'='*70}")
         print(f"Stage: {stage}")
         print(f"Batches submitted: {batch_counter}")
         print(f"Total diseases: {total_submitted}")
         print(f"Est. cost: ${total_submitted * 0.025:.2f}")
-        print(f"Est. time: 1-8 hours (async processing)")
+        print("Est. time: 1-8 hours (async processing)")
 
         # Save manifest
         self.manifest["stages"][stage]["status"] = "in_progress"
@@ -320,7 +319,7 @@ Total estimated time: 8-12 hours of API processing
             return
 
         print(f"\n{'='*70}")
-        print(f"PHASE 2 BATCH STATUS")
+        print("PHASE 2 BATCH STATUS")
         print(f"{'='*70}")
 
         for stage_name in ["treatment", "prevention", "prognosis"]:
@@ -356,7 +355,7 @@ Total estimated time: 8-12 hours of API processing
     def retrieve_results(self, batch_id: str = None):
         """Retrieve and integrate results from completed batches."""
         print(f"\n{'='*70}")
-        print(f"PHASE 2 RESULT RETRIEVAL")
+        print("PHASE 2 RESULT RETRIEVAL")
         print(f"{'='*70}")
 
         if batch_id:
@@ -365,7 +364,7 @@ Total estimated time: 8-12 hours of API processing
             self._retrieve_single_batch(batch_id)
         else:
             # Retrieve all completed batches
-            print(f"\n📥 Checking for completed batches...")
+            print("\n📥 Checking for completed batches...")
             retrieved_count = 0
 
             for stage_name in ["treatment", "prevention", "prognosis"]:
@@ -389,7 +388,7 @@ Total estimated time: 8-12 hours of API processing
     def _retrieve_single_batch(self, batch_id: str):
         """Retrieve results from a single batch and integrate into database."""
         try:
-            print(f"   Retrieving results...")
+            print("   Retrieving results...")
             results = self.enricher.retrieve_batch_results(batch_id)
 
             # Find batch info in manifest
@@ -456,7 +455,7 @@ Total estimated time: 8-12 hours of API processing
             # Save updates
             self._save_manifest()
             self._save_diseases()
-            print(f"   ✓ Database updated and saved")
+            print("   ✓ Database updated and saved")
 
         except Exception as e:
             print(f"   ❌ Error retrieving batch: {e}")
@@ -464,11 +463,11 @@ Total estimated time: 8-12 hours of API processing
     def validate_quality(self):
         """Run QA validation on Phase 2 enriched data."""
         print(f"\n{'='*70}")
-        print(f"PHASE 2 QUALITY ASSURANCE VALIDATION")
+        print("PHASE 2 QUALITY ASSURANCE VALIDATION")
         print(f"{'='*70}")
 
         from api.phase2_qa_validator import Phase2QAValidator
-        validator = Phase2QAValidator()
+        Phase2QAValidator()
 
         # Sample validation
         sample_size = min(100, len(self.diseases) // 10)
@@ -493,14 +492,14 @@ Total estimated time: 8-12 hours of API processing
                     results[field]["absent"] += 1
 
         # Print results
-        print(f"\nValidation Results:")
+        print("\nValidation Results:")
         for field in ["treatment", "prevention", "prognosis"]:
             present = results[field]["present"]
             total = results[field]["present"] + results[field]["absent"]
             pct = 100 * present / total if total > 0 else 0
             print(f"  {field}: {present}/{total} present ({pct:.1f}%)")
 
-        print(f"\n✓ Validation complete")
+        print("\n✓ Validation complete")
 
 
 def main():

@@ -14,11 +14,11 @@ import os
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
-from api.auth import require_internal_api_access, reset_rate_limiting
+from api.auth import require_internal_api_access
 from api.debug_config import is_debug_mode_enabled
 
 # ---------------------------------------------------------------------------
@@ -37,13 +37,27 @@ RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
 # ---------------------------------------------------------------------------
 # Flask App
 # ---------------------------------------------------------------------------
-app = Flask(__name__, static_folder=None)
+app = Flask(__name__, static_folder=None, template_folder=str(Path(__file__).resolve().parent.parent / 'templates'))
 app.config['DEBUG'] = is_debug_mode_enabled()
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
-app.secret_key = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY') or 'dev-key-change-me'
+_secret = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY')
+if not _secret:
+    if is_debug_mode_enabled():
+        _secret = 'dev-only-insecure-key'
+        logger.warning("SECRET_KEY not set — using insecure default (debug mode only)")
+    else:
+        raise RuntimeError(
+            "SECRET_KEY environment variable is required in production. "
+            "Set SECRET_KEY or FLASK_SECRET_KEY before starting the application."
+        )
+app.secret_key = _secret
 app.VERSION = VERSION  # Make VERSION available to decorators
 
-CORS(app)
+_allowed_origins = os.getenv('CORS_ALLOWED_ORIGINS', '').strip()
+if _allowed_origins:
+    CORS(app, resources={r"/api/*": {"origins": _allowed_origins.split(',')}})
+else:
+    CORS(app)
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
@@ -164,6 +178,25 @@ except ImportError:
         DRUG_DICTIONARY_AVAILABLE = False
         logger.warning("Drug dictionary module not available")
 
+# Analytics blueprint (usage statistics)
+try:
+    from api.analytics import analytics_bp, init_analytics
+    app.register_blueprint(analytics_bp)
+    init_analytics()
+    ANALYTICS_AVAILABLE = True
+except ImportError:
+    ANALYTICS_AVAILABLE = False
+    logger.warning("Analytics module not available")
+
+# Admin API blueprint (SQLite data management)
+try:
+    from api.routes.admin_api import admin_bp
+    app.register_blueprint(admin_bp)
+    ADMIN_API_AVAILABLE = True
+except ImportError:
+    ADMIN_API_AVAILABLE = False
+    logger.warning("Admin API module not available")
+
 # Phase 3 Learning Insights blueprint (Continuous Learning Pipeline)
 try:
     from api.learning_insights import bp as learning_insights_bp
@@ -263,12 +296,25 @@ def add_headers(response):
 # Static Files
 # =============================================================================
 
+
+
+
 @app.route('/')
 def index():
     try:
-        return send_from_directory(TEMPLATES_DIR, 'index.html')
-    except (FileNotFoundError, WerkzeugNotFound):
+        return render_template('index.html')
+    except Exception:
         return jsonify({'error': 'index.html not found'}), 404
+
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
 
 
 @app.route('/favicon.ico')
@@ -308,10 +354,41 @@ def static_files(filename):
 @app.route('/api/health', methods=['GET'])
 @ensure_json_response
 def health():
+    import shutil
+    import sqlite3 as _sqlite3
+
+    checks = {}
+
+    # Database connectivity (optional — absence is not an error)
+    try:
+        from api.database import DB_PATH as _db_path
+        _db_file = Path(_db_path)
+        if _db_file.exists() and _db_file.stat().st_size > 0:
+            _conn = _sqlite3.connect(_db_path)
+            _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+            _conn.close()
+            checks["database"] = {"status": "ok", "diseases": _count}
+        else:
+            checks["database"] = {"status": "ok", "detail": "not configured"}
+    except Exception:
+        checks["database"] = {"status": "ok", "detail": "not configured"}
+
+    # Disk space
+    try:
+        usage = shutil.disk_usage("/")
+        free_pct = round(usage.free / usage.total * 100, 1)
+        checks["disk"] = {"status": "ok" if free_pct > 5 else "warning", "free_percent": free_pct}
+    except Exception:
+        checks["disk"] = {"status": "unknown"}
+
+    has_error = any(c.get("status") == "error" for c in checks.values())
+    status_str = "degraded" if has_error else "healthy"
+
     return {
-        'status': 'healthy',
+        'status': status_str,
         'version': VERSION,
         'build': BUILD,
+        'checks': checks,
         'features': {
             'symptom_checker': SYMPTOM_CHECKER_AVAILABLE,
             'species_analyzer': SPECIES_ANALYZER_AVAILABLE,
@@ -761,6 +838,19 @@ def rate_limited(e):
 def server_error(e):
     logger.error(f"500: {e}", exc_info=True)
     return jsonify({'error': 'Internal server error', 'version': VERSION}), 500
+
+
+# =============================================================================
+# API v1 aliases — versioned endpoints pointing to existing handlers
+# =============================================================================
+
+app.add_url_rule('/api/v1/health', endpoint='v1_health', view_func=health, methods=['GET'])
+app.add_url_rule('/api/v1/species-stats', endpoint='v1_species_stats', view_func=api_species_stats, methods=['GET'])
+app.add_url_rule('/api/v1/analyze-symptoms', endpoint='v1_analyze_symptoms', view_func=api_analyze_symptoms, methods=['POST'])
+app.add_url_rule('/api/v1/breeds/<species>', endpoint='v1_breeds', view_func=api_get_breeds, methods=['GET'])
+
+if SYMPTOM_CHECKER_AVAILABLE:
+    app.add_url_rule('/api/v1/species/<species>/symptoms', endpoint='v1_species_symptoms', view_func=api_species_symptoms, methods=['GET'])
 
 
 # =============================================================================

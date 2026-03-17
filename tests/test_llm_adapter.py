@@ -1,20 +1,17 @@
 """Tests for reco2/llm_adapter.py – adapter pattern, error handling, mocked HTTP."""
 
 import json
-import os
-from io import BytesIO
-from unittest.mock import MagicMock, patch, PropertyMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
 from reco2.llm_adapter import (
     BaseLLMAdapter,
-    DummyAdapter,
     ClaudeAdapter,
+    DummyAdapter,
     OpenAIAdapter,
     create_adapter,
 )
-
 
 # ===================================================================
 # DummyAdapter
@@ -187,7 +184,7 @@ class TestClaudeAdapter:
             "usage": None,
         }
         mock_resp = self._make_mock_response(response_body)
-        with patch("urllib.request.urlopen", return_value=mock_resp) as mock_urlopen:
+        with patch("urllib.request.urlopen", return_value=mock_resp):
             result = adapter.generate("prompt", system_prompt="Be helpful")
         assert result["text"] == "response"
 
@@ -205,9 +202,8 @@ class TestClaudeAdapter:
 
     def test_generate_network_error_propagates(self):
         adapter = ClaudeAdapter(api_key="test-key")
-        with patch("urllib.request.urlopen", side_effect=Exception("Network error")):
-            with pytest.raises(Exception, match="Network error"):
-                adapter.generate("prompt")
+        with patch("urllib.request.urlopen", side_effect=Exception("Network error")), pytest.raises(Exception, match="Network error"):
+            adapter.generate("prompt")
 
     def test_extra_kwargs_ignored(self):
         adapter = ClaudeAdapter(api_key="key", irrelevant="ignored")
@@ -318,9 +314,8 @@ class TestOpenAIAdapter:
 
     def test_generate_network_error_propagates(self):
         adapter = OpenAIAdapter(api_key="test-key")
-        with patch("urllib.request.urlopen", side_effect=Exception("Connection refused")):
-            with pytest.raises(Exception, match="Connection refused"):
-                adapter.generate("prompt")
+        with patch("urllib.request.urlopen", side_effect=Exception("Connection refused")), pytest.raises(Exception, match="Connection refused"):
+            adapter.generate("prompt")
 
     def test_generate_message_not_dict(self):
         # Edge case: message is not a dict

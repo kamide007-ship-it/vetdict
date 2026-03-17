@@ -4,10 +4,9 @@ Calculates how likely two diseases coexist given patient context and
 applies interaction effects to confidence scores.
 """
 
+import logging
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
-import logging
-import math
 
 logger = logging.getLogger(__name__)
 
@@ -61,8 +60,8 @@ class ComorbidityScorer:
         symptom_overlap_ratio = overlap_size / union_size if union_size > 0 else 0.0
 
         # Determine interaction type
-        a_unique = len(set_a - set_b)
-        b_unique = len(set_b - set_a)
+        len(set_a - set_b)
+        len(set_b - set_a)
         both_in_detected = len((set_a & set_b) & detected_set)
 
         # Scoring logic

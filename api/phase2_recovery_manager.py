@@ -7,9 +7,9 @@ Phase 2 batch processing.
 """
 
 import json
-from pathlib import Path
 from datetime import datetime
-from typing import List, Dict, Optional
+from pathlib import Path
+from typing import Dict, List, Optional
 
 
 class Phase2RecoveryManager:
@@ -235,27 +235,27 @@ class Phase2RecoveryManager:
         print(f"Generated: {report['timestamp']}")
         print(f"Current Status: {report['manifest_status']}")
 
-        print(f"\nBatch Statistics:")
+        print("\nBatch Statistics:")
         print(f"  Submitted: {report['batches_submitted']}")
         print(f"  Completed: {report['batches_completed']}")
         print(f"  Failed: {report['failed_batches']}")
         print(f"  Checkpoints: {report['checkpoints']}")
 
-        print(f"\nStage Status:")
+        print("\nStage Status:")
         for stage_name, stage_status in report["stages_status"].items():
             print(f"  {stage_name:12}: {stage_status['submitted']:3} submitted, "
                   f"{stage_status['completed']:3} completed "
                   f"({stage_status['status']})")
 
         if report["failed_batch_details"]:
-            print(f"\nFailed Batches (Recent):")
+            print("\nFailed Batches (Recent):")
             for failed in report["failed_batch_details"]:
                 print(f"  {failed['batch_id'][:16]}... ({failed['stage']})")
                 print(f"    Retries: {failed['retry_count']}, Error: {failed['error'][:50]}")
 
         last_checkpoint = report.get("last_checkpoint")
         if last_checkpoint:
-            print(f"\nLast Checkpoint:")
+            print("\nLast Checkpoint:")
             print(f"  Stage: {last_checkpoint.get('stage')}")
             print(f"  Batch: {last_checkpoint.get('batch_num')}")
             print(f"  Time: {last_checkpoint.get('timestamp')}")

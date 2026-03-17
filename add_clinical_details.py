@@ -7,7 +7,7 @@ clinical_signs, diagnosis, transmission を 4,230 疾患に追加
 import json
 import random
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 # ============================================================================
 # 臨床詳細生成エンジン
@@ -316,9 +316,9 @@ def complete_clinical_details():
     with open(data_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✅ 臨床詳細フィールド追加完了！")
+    print("\n✅ 臨床詳細フィールド追加完了！")
     print(f"{'='*70}")
-    print(f"📊 統計:")
+    print("📊 統計:")
     print(f"  Clinical Signs (EN): {stats['clinical_signs_added']}")
     print(f"  Diagnosis (EN): {stats['diagnosis_added']}")
     print(f"  Transmission (EN): {stats['transmission_added']}")
@@ -328,7 +328,7 @@ def complete_clinical_details():
     print(f"  エラー: {stats['errors']}")
 
     # フィールド完成度を確認
-    print(f"\n📋 全フィールド完成度:")
+    print("\n📋 全フィールド完成度:")
     fields = [
         'treatment', 'prevention', 'prognosis',
         'clinical_signs', 'diagnosis', 'transmission',
@@ -346,14 +346,14 @@ def complete_clinical_details():
 
 def verify_clinical_details(data_file: Path):
     """臨床詳細の品質を検証"""
-    print(f"\n✔️ 臨床詳細の品質検証中...")
+    print("\n✔️ 臨床詳細の品質検証中...")
     print(f"{'='*70}")
 
     with open(data_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     # サンプル確認
-    print(f"\n📝 サンプル (疾患別):")
+    print("\n📝 サンプル (疾患別):")
 
     # ランダムサンプル
     import random
@@ -365,7 +365,7 @@ def verify_clinical_details(data_file: Path):
         print(f"     Diagnosis: {disease.get('diagnosis', 'なし')[:80]}...")
         print(f"     Transmission: {disease.get('transmission', 'なし')[:80]}...")
 
-    print(f"\n✅ 臨床詳細品質確認完了！")
+    print("\n✅ 臨床詳細品質確認完了！")
 
 
 if __name__ == '__main__':
@@ -375,5 +375,5 @@ if __name__ == '__main__':
     # 検証
     verify_clinical_details(data_file)
 
-    print(f"\n✅ 臨床詳細フィールド追加完了！")
+    print("\n✅ 臨床詳細フィールド追加完了！")
     print(f"📄 ファイル: {data_file}")

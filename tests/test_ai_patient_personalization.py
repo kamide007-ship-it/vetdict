@@ -1,11 +1,10 @@
 """Tests for patient personalization module."""
 
-import pytest
 from api.ai.patient_personalization import (
-    PatientContext,
     AgeExtractor,
-    SeverityInference,
+    PatientContext,
     PersonalizationEngine,
+    SeverityInference,
     personalize_extraction_result,
 )
 

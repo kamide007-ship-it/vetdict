@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>{% block title %}VetDict{% endblock %}</title>
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
+<link rel="stylesheet" href="/static/css/main.css"/>
+<style>
+.legal-page{max-width:800px;margin:0 auto;padding:40px 20px 60px}
+.legal-page h1{font-size:1.8rem;color:var(--navy);margin-bottom:8px}
+.legal-page h2{font-size:1.1rem;color:var(--navy);margin-top:28px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--gray-200)}
+.legal-page p,.legal-page li{font-size:.9rem;line-height:1.8;color:var(--gray-700)}
+.legal-page ul{padding-left:20px;margin:8px 0}
+.legal-page .last-updated{font-size:.82rem;color:var(--gray-500);margin-bottom:24px}
+.legal-back{display:inline-block;margin-bottom:20px;font-size:.88rem;font-weight:600}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="VetDict ホーム">
+      <div>
+        <div class="logo-text"><span class="logo-vet">Vet</span><span class="logo-dict">Dict</span></div>
+      </div>
+    </a>
+  </div>
+</header>
+<main>
+  <a href="/" class="legal-back" style="max-width:800px;margin:20px auto 0;display:block;padding:0 20px">&larr; トップへ戻る</a>
+  {% block content %}{% endblock %}
+</main>
+<footer class="footer">
+  <p>&copy; 2026 VetDict &mdash; <a href="/terms">利用規約</a> | <a href="/privacy">プライバシーポリシー</a></p>
+</footer>
+</body>
+</html>

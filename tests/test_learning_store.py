@@ -4,19 +4,15 @@ Tests for Phase 3 Learning Data Store (STEP 1).
 Tests learning data persistence, analytics queries, and pattern aggregation.
 """
 
-import os
 import json
+import os
 import tempfile
-import pytest
 from datetime import datetime, timedelta, timezone
 
-from reco2.learning_store import LearningDataStore
-from reco2.learning_models import (
-    SymptomDiseaseLearning,
-    AIExtractionAccuracy,
-    FeedbackRecord,
-)
+import pytest
+
 from reco2 import store
+from reco2.learning_store import LearningDataStore
 
 
 @pytest.fixture

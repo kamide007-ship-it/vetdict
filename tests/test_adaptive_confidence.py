@@ -4,19 +4,19 @@ Tests cover feedback collection, feature engineering, model training,
 and confidence adjustment mechanisms.
 """
 
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from api.ai.adaptive_confidence_calculator import (
     AdaptiveConfidenceCalculator,
-    DiagnosisRecord,
-    DiagnosisFeedbackCollector,
-    FeatureEngineer,
-    ModelMetrics,
     BayesianPrior,
+    DiagnosisFeedbackCollector,
+    DiagnosisRecord,
+    FeatureEngineer,
     ModelType,
 )
 

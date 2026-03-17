@@ -5,12 +5,12 @@ hypotheses and ambiguity detection/resolution mechanisms.
 """
 
 import pytest
+
 from api.ai.symptom_context_engine import (
-    SymptomContext,
-    SymptomRole,
-    SymptomContextualizer,
     AmbiguitySolver,
-    AmbiguityReport,
+    SymptomContext,
+    SymptomContextualizer,
+    SymptomRole,
 )
 
 

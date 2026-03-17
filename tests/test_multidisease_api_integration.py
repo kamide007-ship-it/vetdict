@@ -5,6 +5,7 @@ the /api/diagnostic-chat/multi-disease/analyze endpoint.
 """
 
 import pytest
+
 from api.ai.multidisease_api_handler import MultiDiseaseAnalyzer
 
 

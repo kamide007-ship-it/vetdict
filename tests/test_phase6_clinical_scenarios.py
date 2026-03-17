@@ -5,11 +5,10 @@ pipeline (Stages 1-6) using realistic veterinary scenarios.
 """
 
 import pytest
-from api.ai.multidisease_detector import MultiDiseaseDetector
-from api.ai.symptom_context_engine import SymptomContextualizer, AmbiguitySolver
-from api.ai.combined_confidence_calculator import CombinedConfidenceCalculator
-from api.ai.multidisease_question_generator import MultiDiseaseQuestionGenerator
+
 from api.ai.multidisease_api_handler import MultiDiseaseAnalyzer
+from api.ai.multidisease_question_generator import MultiDiseaseQuestionGenerator
+from api.ai.symptom_context_engine import AmbiguitySolver
 
 
 class TestScenario_CanineHipVsArthritis:

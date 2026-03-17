@@ -4,11 +4,9 @@ Identifies when multiple diseases likely coexist and generates disease
 combination hypotheses for further investigation.
 """
 
-from collections import defaultdict
+import logging
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
-import logging
-import math
 
 logger = logging.getLogger(__name__)
 
@@ -61,10 +59,9 @@ def _classify_symptom_system(symptom_id: str) -> Set[str]:
                 break
     return systems if systems else {"unclassified"}
 
-from api.ai.disease_interactions import DiseaseInteractionMatrix
 from api.ai.comorbidity_scorer import ComorbidityScorer
+from api.ai.disease_interactions import DiseaseInteractionMatrix
 from api.ai.symptom_context_engine import (
-    SymptomContextualizer,
     AmbiguitySolver,
 )
 
@@ -171,10 +168,7 @@ class MultiDiseaseDetector:
             return True
 
         # Fallback: many symptoms (7+) even within one system
-        if len(detected_symptoms) >= 7:
-            return True
-
-        return False
+        return len(detected_symptoms) >= 7
 
     @classmethod
     def generate_multidisease_candidates(
@@ -513,7 +507,7 @@ class MultiDiseaseDetector:
             }
         """
         # Get disease names from candidates
-        disease_names = [
+        [
             d.get("name", d.get("name_ja", ""))
             for d in suspected_diseases[:5]
         ]

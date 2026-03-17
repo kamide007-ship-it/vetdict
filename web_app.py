@@ -5,8 +5,8 @@ Lightweight HTTP server for static HTML/CSS/JS files
 """
 
 import http.server
-import socketserver
 import os
+import socketserver
 from pathlib import Path
 
 
@@ -34,7 +34,7 @@ class SPAHandler(http.server.SimpleHTTPRequestHandler):
             if full_path.exists() and full_path.is_file():
                 # Serve the file
                 return super().do_GET()
-        except:
+        except Exception:
             pass
 
         # For root or non-existent paths, serve index.html
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     with socketserver.TCPServer(("", port), handler) as httpd:
         print(f"✓ Web server running at http://0.0.0.0:{port}")
         print(f"✓ Serving files from: {os.path.abspath('static')}")
-        print(f"✓ API endpoint: http://localhost:8000/api")
+        print("✓ API endpoint: http://localhost:8000/api")
         print(f"\nOpen browser: http://localhost:{port}")
         try:
             httpd.serve_forever()

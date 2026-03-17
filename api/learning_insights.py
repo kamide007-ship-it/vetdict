@@ -8,11 +8,11 @@ and continuous learning metrics.
 import logging
 from typing import Any, Dict
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
 
-from reco2.learning_store import LearningDataStore
 from api.ai.accuracy_tracker import AIAccuracyTracker
 from api.ai.confidence_calibration import ConfidenceCalibrator
+from reco2.learning_store import LearningDataStore
 from reco2.learning_tuner import LearningTuner
 
 logger = logging.getLogger(__name__)
@@ -226,11 +226,11 @@ def get_combined_insights():
     Returns health score and actionable recommendations.
     """
     store = _get_store()
-    tracker = AIAccuracyTracker()
+    AIAccuracyTracker()
     calibrator = ConfidenceCalibrator()
 
     stats = store.get_overall_stats()
-    domain_metrics = store.get_ai_accuracy_by_domain()
+    store.get_ai_accuracy_by_domain()
 
     # Calculate health score (0-1)
     accuracy = stats.get("overall_accuracy", 0)

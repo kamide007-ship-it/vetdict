@@ -10,9 +10,9 @@ Validates treatment, prevention, and prognosis enriched content for:
 """
 
 import json
-from typing import List, Dict, Tuple
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Tuple
 
 
 class Phase2QAValidator:
@@ -205,7 +205,7 @@ class Phase2QAValidator:
                 continue
 
             # Check if field mentions species or has specific details
-            has_species_ref = species.lower() in text or any(
+            species.lower() in text or any(
                 indicator in text for indicator in generic_indicators
             )
             # For now, any non-empty field is considered specific enough
@@ -372,7 +372,7 @@ class Phase2QAValidator:
 
             # Show failed samples
             if field_data["failed_samples"]:
-                print(f"    Sample failures:")
+                print("    Sample failures:")
                 for sample in field_data["failed_samples"][:2]:
                     print(f"      - {sample['disease_id']}: {sample['issue']}")
 

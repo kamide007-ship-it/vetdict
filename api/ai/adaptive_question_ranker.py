@@ -4,16 +4,16 @@ Combines information gain, question features, and learning signals to rank
 diagnostic questions for optimal disease differentiation.
 """
 
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Set, Tuple
 import logging
 import os
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Set
 
 logger = logging.getLogger(__name__)
 
 # Import optimization and feature modules
-from api.ai.question_optimization import EntropyCalculator
 from api.ai.question_features import QuestionFeatureExtractor, QuestionFeatures
+from api.ai.question_optimization import EntropyCalculator
 
 
 @dataclass

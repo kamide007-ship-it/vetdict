@@ -5,10 +5,7 @@ Prevention と Prognosis フィールドを生成・補完
 """
 
 import json
-import re
 from pathlib import Path
-from datetime import datetime
-from typing import Optional
 
 # ============================================================================
 # フォールバック生成エンジン
@@ -180,9 +177,9 @@ def repair_phase2_enrichment():
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✅ 修復完了！")
+    print("\n✅ 修復完了！")
     print(f"{'='*70}")
-    print(f"📊 修復統計:")
+    print("📊 修復統計:")
     print(f"  Prevention 追加: {stats['prevention_added']}")
     print(f"  Prognosis 追加: {stats['prognosis_added']}")
     print(f"  Treatment 補完: {stats['treatment_added']}")
@@ -190,7 +187,7 @@ def repair_phase2_enrichment():
     print(f"\n💾 出力ファイル: {output_file}")
 
     # フィールド完成度を再確認
-    print(f"\n📋 修復後のフィールド完成度:")
+    print("\n📋 修復後のフィールド完成度:")
     fields = ['prevention', 'prognosis', 'treatment']
     for field in fields:
         filled = sum(1 for d in data if d.get(field) and str(d.get(field)).strip())
@@ -202,7 +199,7 @@ def repair_phase2_enrichment():
 
 def verify_repair(data_file: Path):
     """修復データを検証"""
-    print(f"\n✔️ 修復データの検証中...")
+    print("\n✔️ 修復データの検証中...")
     print(f"{'='*70}")
 
     with open(data_file, 'r', encoding='utf-8') as f:
@@ -217,7 +214,7 @@ def verify_repair(data_file: Path):
             if not disease.get(field):
                 missing[field] += 1
 
-    print(f"\n必須フィールド検証:")
+    print("\n必須フィールド検証:")
     all_ok = True
     for field, count in missing.items():
         status = "✅" if count == 0 else "⚠️"
@@ -226,15 +223,14 @@ def verify_repair(data_file: Path):
             all_ok = False
 
     if all_ok:
-        print(f"\n✅ すべての必須フィールドが完成しています！")
+        print("\n✅ すべての必須フィールドが完成しています！")
     else:
-        print(f"\n⚠️ いくつかのフィールドが不完全です")
+        print("\n⚠️ いくつかのフィールドが不完全です")
 
     return all_ok
 
 
 if __name__ == '__main__':
-    import sys
 
     # 修復実行
     output_file = repair_phase2_enrichment()
@@ -244,8 +240,8 @@ if __name__ == '__main__':
         verify_repair(output_file)
 
         # 元のファイルを置き換えるか確認
-        print(f"\n❓ 修復されたデータを現在のデータベースとして使用しますか？")
-        print(f"   (元のファイルをバックアップします)")
+        print("\n❓ 修復されたデータを現在のデータベースとして使用しますか？")
+        print("   (元のファイルをバックアップします)")
 
         response = input("\n実行しますか？ (y/n): ").strip().lower()
         if response == 'y':
@@ -266,9 +262,9 @@ if __name__ == '__main__':
 
             with open('diseases_all_species.json', 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
-            print(f"✓ メインデータベースも更新: diseases_all_species.json")
+            print("✓ メインデータベースも更新: diseases_all_species.json")
 
-            print(f"\n✅ Phase 2 修復完了！")
+            print("\n✅ Phase 2 修復完了！")
         else:
-            print(f"\n修復をキャンセルしました")
+            print("\n修復をキャンセルしました")
             print(f"修復ファイル: {output_file}")

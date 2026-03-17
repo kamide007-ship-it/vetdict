@@ -1,6 +1,5 @@
 """Tests for AI validators module."""
 
-import pytest
 from api.ai.validators import (
     is_valid_symptom_id,
     parse_json_response,

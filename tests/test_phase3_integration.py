@@ -6,13 +6,14 @@ Tests the full Phase 3 continuous learning system with all components working to
 
 import os
 import tempfile
+
 import pytest
 
-from reco2.learning_store import LearningDataStore
 from api.ai.accuracy_tracker import AIAccuracyTracker
 from api.ai.confidence_calibration import ConfidenceCalibrator
-from reco2.learning_tuner import LearningTuner
 from reco2 import store
+from reco2.learning_store import LearningDataStore
+from reco2.learning_tuner import LearningTuner
 
 
 @pytest.fixture
@@ -226,7 +227,7 @@ class TestPhase3FullPipeline:
         # Get all metrics
         stats = learning_store.get_overall_stats()
         accuracy_metrics = learning_store.get_ai_accuracy_by_domain()
-        patterns = learning_store.get_symptom_disease_patterns()
+        learning_store.get_symptom_disease_patterns()
 
         # Verify consistency
         assert stats["total_extractions"] == 25

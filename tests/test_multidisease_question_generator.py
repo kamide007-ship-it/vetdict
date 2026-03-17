@@ -5,10 +5,11 @@ multi-disease scenarios.
 """
 
 import pytest
+
 from api.ai.multidisease_question_generator import (
     DiagnosticQuestion,
-    MultiDiseaseQuestionGenerator,
     DiscriminativeQuestionRanker,
+    MultiDiseaseQuestionGenerator,
     QuestionSequenceOptimizer,
 )
 

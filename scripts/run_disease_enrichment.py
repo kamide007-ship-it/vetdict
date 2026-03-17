@@ -16,10 +16,10 @@ Usage:
     python scripts/run_disease_enrichment.py retrieve batch_id
 """
 
-import sys
 import json
-from pathlib import Path
+import sys
 from datetime import datetime
+from pathlib import Path
 
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent
@@ -57,7 +57,7 @@ def cmd_submit():
 
     print(f"✓ {len(batches)} batch(es) created with {total_requests} requests")
     print(f"  Estimated cost: ~${total_requests * 0.025:.2f} (50% batch discount)")
-    print(f"  Processing time: 1-6 hours\n")
+    print("  Processing time: 1-6 hours\n")
 
     # Submit batches
     batch_ids = []
@@ -104,7 +104,7 @@ def cmd_status(*batch_ids):
         print(f"  Errored:      {batch.request_counts.errored}")
 
         if batch.processing_status == "ended":
-            print(f"  ✓ Ready to retrieve results:")
+            print("  ✓ Ready to retrieve results:")
             print(f"    python scripts/run_disease_enrichment.py retrieve {batch_id}")
         print()
 
@@ -125,15 +125,15 @@ def cmd_retrieve(batch_id: str):
 
     if batch.processing_status != "ended":
         print(f"✗ Batch not ready. Status: {batch.processing_status}")
-        print(f"  Try again later.")
+        print("  Try again later.")
         sys.exit(1)
 
-    print(f"\n✓ Batch completed!")
+    print("\n✓ Batch completed!")
     print(f"  Succeeded: {batch.request_counts.succeeded}")
     print(f"  Errored:   {batch.request_counts.errored}")
 
     # Process results
-    print(f"\nProcessing results...")
+    print("\nProcessing results...")
     diseases = enricher.process_batch_results(batch_id, _DISEASE_DB)
 
     # Save enriched database
@@ -170,7 +170,7 @@ def cmd_retrieve(batch_id: str):
     print(f"\n1. Review enriched data in: {output_path}")
     print("\n2. Validate quality by sampling diseases")
     print("\n3. Backup current database")
-    print(f"\n4. Replace api/symptom_checker.py disease data with enriched version")
+    print("\n4. Replace api/symptom_checker.py disease data with enriched version")
     print("\n5. Run tests: pytest tests/")
     print("\n6. Deploy to production")
 

@@ -5,8 +5,8 @@ Defines structures for tracking AI accuracy, learned patterns,
 and personalization effectiveness.
 """
 
-from dataclasses import dataclass, asdict
-from typing import List, Optional
+from dataclasses import asdict, dataclass
+from typing import List
 
 
 @dataclass

@@ -5,11 +5,9 @@ computations and preprocessing of disease database.
 """
 
 import hashlib
-import json
 import logging
+from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
-from functools import lru_cache
-from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 

@@ -6,22 +6,18 @@ diagnostic analysis through a single API endpoint.
 Includes Stage 8 caching optimizations for performance improvement.
 """
 
-from typing import Any, Dict, List, Optional
 import logging
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
-from api.ai.multidisease_detector import MultiDiseaseDetector
-from api.ai.symptom_context_engine import (
-    SymptomContextualizer,
-    AmbiguitySolver,
-)
 from api.ai.combined_confidence_calculator import CombinedConfidenceCalculator
-from api.ai.multidisease_question_generator import (
-    MultiDiseaseQuestionGenerator,
-    DiscriminativeQuestionRanker,
-)
 from api.ai.multidisease_cache_manager import get_global_cache
+from api.ai.multidisease_detector import MultiDiseaseDetector
+from api.ai.multidisease_question_generator import (
+    DiscriminativeQuestionRanker,
+    MultiDiseaseQuestionGenerator,
+)
 
 
 class MultiDiseaseAnalyzer:
@@ -287,8 +283,7 @@ class MultiDiseaseAnalyzer:
             return False, "symptom_ids must be a list"
 
         # Optional: suspected_diseases should be list if present
-        if "suspected_diseases" in request_data:
-            if not isinstance(request_data["suspected_diseases"], list):
-                return False, "suspected_diseases must be a list"
+        if "suspected_diseases" in request_data and not isinstance(request_data["suspected_diseases"], list):
+            return False, "suspected_diseases must be a list"
 
         return True, None

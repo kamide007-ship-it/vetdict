@@ -11,11 +11,10 @@ Provides:
 
 import logging
 import os
-import sys
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
@@ -36,12 +35,26 @@ BUILD = "2026-03-07"
 # ---------------------------------------------------------------------------
 # Flask App
 # ---------------------------------------------------------------------------
-app = Flask(__name__, static_folder=None)
+app = Flask(__name__, static_folder=None, template_folder=str(Path(__file__).resolve().parent.parent / 'templates'))
 app.config['DEBUG'] = is_debug_mode_enabled()
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
-app.secret_key = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY') or 'dev-key-change-me'
+_secret = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY')
+if not _secret:
+    if is_debug_mode_enabled():
+        _secret = 'dev-only-insecure-key'
+        logger.warning("SECRET_KEY not set — using insecure default (debug mode only)")
+    else:
+        raise RuntimeError(
+            "SECRET_KEY environment variable is required in production. "
+            "Set SECRET_KEY or FLASK_SECRET_KEY before starting the application."
+        )
+app.secret_key = _secret
 
-CORS(app)
+_allowed_origins = os.getenv('CORS_ALLOWED_ORIGINS', '').strip()
+if _allowed_origins:
+    CORS(app, resources={r"/api/*": {"origins": _allowed_origins.split(',')}})
+else:
+    CORS(app)
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
@@ -106,9 +119,13 @@ except ImportError:
 # RECO2/RECO3 AI integrity layer
 try:
     from reco2 import input_gate, output_gate
-    from reco2.config import load_config as load_reco2_config, public_config as public_reco2_config
-    from reco2.engine import evaluate_payload as reco2_evaluate_payload, get_logs as reco2_get_logs
-    from reco2.engine import get_status as reco2_get_status, patrol as reco2_patrol, record_feedback as reco2_record_feedback
+    from reco2.config import load_config as load_reco2_config
+    from reco2.config import public_config as public_reco2_config
+    from reco2.engine import evaluate_payload as reco2_evaluate_payload
+    from reco2.engine import get_logs as reco2_get_logs
+    from reco2.engine import get_status as reco2_get_status
+    from reco2.engine import patrol as reco2_patrol
+    from reco2.engine import record_feedback as reco2_record_feedback
     from reco2.orchestrator import get_orchestrator as reco2_get_orchestrator
     RECO2_AVAILABLE = True
 except ImportError:
@@ -192,8 +209,8 @@ def add_headers(response):
 @app.route('/')
 def index():
     try:
-        return send_from_directory(TEMPLATES_DIR, 'index.html')
-    except (FileNotFoundError, WerkzeugNotFound):
+        return render_template('index.html')
+    except Exception:
         return jsonify({'error': 'index.html not found'}), 404
 
 

@@ -1,20 +1,20 @@
 """Tests for equine_diseases.py – DISEASE_DATABASE integrity and generate_differential_diagnosis."""
 
 import pytest
+
 from api.species.equine_diseases import (
-    Disease,
-    DifferentialItem,
-    DISEASE_DATABASE,
-    HEALTH_CHECK_ITEMS,
-    generate_differential_diagnosis,
-    get_disease,
-    get_diseases_by_category,
-    get_all_categories,
-    _confidence_level,
     _FINDING_IDF,
     _FINDING_LABEL_JA,
+    DISEASE_DATABASE,
+    HEALTH_CHECK_ITEMS,
+    DifferentialItem,
+    Disease,
+    _confidence_level,
+    generate_differential_diagnosis,
+    get_all_categories,
+    get_disease,
+    get_diseases_by_category,
 )
-
 
 # ===================================================================
 # DISEASE_DATABASE integrity tests
@@ -110,7 +110,7 @@ class TestHealthCheckItems:
 
     def test_item_keys_are_strings(self):
         for category, items in HEALTH_CHECK_ITEMS.items():
-            for key, ja, en in items:
+            for key, _ja, _en in items:
                 assert isinstance(key, str) and key, f"Bad key in {category}: {key!r}"
 
     def test_no_duplicate_finding_keys(self):

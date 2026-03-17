@@ -5,7 +5,7 @@ import pytest
 # Skip all tests if Flask is not available
 flask_available = True
 try:
-    import flask
+    import flask  # noqa: F401
 except ImportError:
     flask_available = False
 
@@ -180,8 +180,9 @@ class TestPhase2CIntegrationSignatures:
 
     def test_evaluate_with_ai_confidence_signature(self):
         """Test function signature for RECO2 evaluation wrapper."""
-        from api.diagnostic_chat import evaluate_with_ai_confidence
         import inspect
+
+        from api.diagnostic_chat import evaluate_with_ai_confidence
 
         sig = inspect.signature(evaluate_with_ai_confidence)
         params = list(sig.parameters.keys())
@@ -220,11 +221,10 @@ class TestPhase2CConceptualIntegration:
 
         # Verify each component has the necessary functions
         try:
-            from api.ai.symptom_extractor import SymptomExtractor
             from api.ai.patient_personalization import PersonalizationEngine
+            from api.ai.symptom_extractor import SymptomExtractor
+            from reco2 import engine, output_gate
             from reco2.confidence_adapter import adjust_context_from_ai
-            from reco2 import engine
-            from reco2 import output_gate
 
             # All components should be importable
             assert callable(SymptomExtractor)
@@ -240,8 +240,7 @@ class TestPhase2CConceptualIntegration:
         """Test that Phase 2c doesn't break existing functionality."""
         try:
             from api import diagnostic_chat
-            from reco2 import engine
-            from reco2 import output_gate
+            from reco2 import engine, output_gate
 
             # Existing functions should still work without AI
             assert callable(diagnostic_chat.extract_symptoms_from_text)

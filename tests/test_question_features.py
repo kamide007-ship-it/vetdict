@@ -3,7 +3,7 @@
 import sys
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Set
+from typing import Any, Dict
 
 import pytest
 
@@ -12,7 +12,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from api.ai.question_features import QuestionFeatureExtractor, QuestionFeatures
-
 
 # ---------------------------------------------------------------------------
 # Helpers

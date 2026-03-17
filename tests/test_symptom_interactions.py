@@ -2,13 +2,13 @@
 and edge cases not covered by test_ai_symptom_interactions.py."""
 
 import pytest
+
 from api.ai.symptom_interactions import (
-    SymptomInteractionMatrix,
     InteractionScorer,
+    SymptomInteractionMatrix,
     TripleInteractionMatrix,
     analyze_symptom_interactions,
 )
-
 
 # ===================================================================
 # Fixtures

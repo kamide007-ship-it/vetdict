@@ -4,10 +4,10 @@ Extracts discriminative features from questions that enable intelligent
 ranking based on disease differentiation power, coverage, and user burden.
 """
 
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Set
 import logging
 import time
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Set
 
 logger = logging.getLogger(__name__)
 

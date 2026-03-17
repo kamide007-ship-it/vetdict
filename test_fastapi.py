@@ -3,13 +3,9 @@
 Test FastAPI endpoints
 """
 
-import asyncio
-from fastapi_app import (
-    app, load_diseases_data, build_index,
-    list_diseases, get_disease, search_diseases,
-    health_check, list_species, get_statistics
-)
 from fastapi.testclient import TestClient
+
+from fastapi_app import app, load_diseases_data
 
 client = TestClient(app)
 
@@ -96,7 +92,7 @@ def test_search_by_species():
     data = response.json()
     for disease in data["data"]:
         assert disease["species"] == "Cat"
-    print(f"✓ Species filter passed - All results are Cat diseases")
+    print("✓ Species filter passed - All results are Cat diseases")
 
 
 if __name__ == "__main__":

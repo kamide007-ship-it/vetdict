@@ -10,14 +10,13 @@ Provides production-grade API authentication including:
 - Support for multiple authentication methods
 """
 
-import hashlib
 import hmac
 import logging
 import os
 import threading
 import time
 from collections import deque
-from datetime import datetime, timedelta
+from datetime import datetime
 from functools import wraps
 from typing import Callable, Dict, Optional, Tuple
 
@@ -120,15 +119,7 @@ class AuditLogger:
         if not self.enabled:
             return
 
-        timestamp = datetime.utcnow().isoformat()
-        log_entry = {
-            'timestamp': timestamp,
-            'success': success,
-            'method': method,
-            'client_ip': client_ip,
-            'reason': reason,
-            'metadata': metadata or {},
-        }
+        datetime.utcnow().isoformat()
 
         log_level = logging.INFO if success else logging.WARNING
         self.auth_log.log(
@@ -256,8 +247,19 @@ def require_internal_api_access(f: Callable) -> Callable:
 
         # Check if token is provided and scheme is correct
         if not current_config.internal_token:
-            # No token configured - allow all requests
-            return f(*args, **kwargs)
+            if os.getenv('FLASK_DEBUG', '0').strip().lower() in ('1', 'true', 'yes', 'on'):
+                logger.warning("INTERNAL_API_TOKEN not set — allowing unauthenticated access (debug mode)")
+                return f(*args, **kwargs)
+            else:
+                logger.error("INTERNAL_API_TOKEN not configured in production")
+                return (
+                    jsonify({
+                        'success': False,
+                        'error': 'Server misconfiguration',
+                        'version': version_str,
+                    }),
+                    500,
+                )
 
         if auth_scheme != 'Bearer':
             _audit_logger.log_auth_attempt(

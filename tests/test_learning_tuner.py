@@ -6,11 +6,11 @@ Tests parameter tuning logic based on learning signals.
 
 import os
 import tempfile
+
 import pytest
 
-from reco2.learning_tuner import LearningTuner
 from reco2.learning_store import LearningDataStore
-from reco2 import store
+from reco2.learning_tuner import LearningTuner
 
 
 @pytest.fixture
@@ -75,7 +75,7 @@ class TestParameterSuggestions:
         }
 
         from api.ai.accuracy_tracker import AIAccuracyTracker
-        tracker = AIAccuracyTracker()
+        AIAccuracyTracker()
         ai_accuracy = {
             "status": "ready",
             "overall_accuracy": 0.95,

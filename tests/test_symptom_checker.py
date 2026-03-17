@@ -16,24 +16,23 @@ All tests are pure in-process (no database, no API keys).
 import re
 
 from api.symptom_checker import (
+    _ADVICE,
+    _ANY_LIMPING,
+    _BREED_DISEASE_RISK,
+    _BREED_GENETIC_TESTS,
+    _DISEASE_DB,
+    _LIKELIHOOD_TO_PRIORITY,
+    _PRIORITY_RANK,
+    _SYMPTOM_NAMES,
+    _TEST_DB,
     ABNORMAL_KEYWORDS,
     HEALTH_CHECK_CATEGORIES,
     VALID_SYMPTOMS,
-    _compute_severity,
     _collect_tests,
-    _SYMPTOM_NAMES,
-    _DISEASE_DB,
-    _TEST_DB,
-    _BREED_DISEASE_RISK,
-    _BREED_GENETIC_TESTS,
-    _ANY_LIMPING,
-    _ADVICE,
-    _PRIORITY_RANK,
-    _LIKELIHOOD_TO_PRIORITY,
+    _compute_severity,
     analyze_symptoms,
     map_health_checks_to_symptoms,
 )
-
 
 # ============================================================================
 # 1. map_health_checks_to_symptoms
@@ -992,7 +991,7 @@ class TestDataIntegrity:
     # -- Breed genetic tests structure ---------------------------------
 
     def test_breed_genetic_tests_structure(self):
-        for breed_id, tests in _BREED_GENETIC_TESTS.items():
+        for _breed_id, tests in _BREED_GENETIC_TESTS.items():
             assert isinstance(tests, list)
             for test in tests:
                 assert "test" in test
@@ -1012,9 +1011,9 @@ class TestDataIntegrity:
 
     def test_any_limping_has_four_limbs(self):
         assert len(_ANY_LIMPING) == 4
-        assert _ANY_LIMPING == {
+        assert {
             "limping_fl", "limping_fr", "limping_rl", "limping_rr"
-        }
+        } == _ANY_LIMPING
 
     # -- Advice dictionary ---------------------------------------------
 

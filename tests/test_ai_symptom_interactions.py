@@ -1,9 +1,10 @@
 """Tests for symptom interactions module."""
 
 import pytest
+
 from api.ai.symptom_interactions import (
-    SymptomInteractionMatrix,
     InteractionScorer,
+    SymptomInteractionMatrix,
     analyze_symptom_interactions,
 )
 
@@ -42,7 +43,7 @@ def test_interaction_matrix_creation(sample_diseases):
     assert matrix.total_diseases == 4
     assert len(matrix.pair_weights) > 0
     # Verify pairs are frozensets
-    for pair_key in matrix.pair_weights.keys():
+    for pair_key in matrix.pair_weights:
         assert isinstance(pair_key, frozenset)
 
 

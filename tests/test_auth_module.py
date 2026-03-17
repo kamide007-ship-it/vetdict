@@ -11,19 +11,16 @@ Tests the following components:
 - require_internal_api_access decorator
 """
 
-import os
-import pytest
-from unittest.mock import patch, MagicMock
 
 from api.auth import (
-    AuthConfig,
-    RateLimiter,
     AuditLogger,
-    TokenValidator,
+    AuthConfig,
     ClientIP,
-    get_rate_limiter,
-    get_auth_config,
+    RateLimiter,
+    TokenValidator,
     get_audit_logger,
+    get_auth_config,
+    get_rate_limiter,
     reset_rate_limiting,
 )
 
@@ -193,7 +190,6 @@ class TestClientIP:
         """Test getting client IP from direct connection."""
         from flask import Flask
         from werkzeug.test import EnvironBuilder
-        from werkzeug.wrappers import Request
 
         app = Flask(__name__)
         builder = EnvironBuilder(environ_base={'REMOTE_ADDR': '192.168.1.100'})

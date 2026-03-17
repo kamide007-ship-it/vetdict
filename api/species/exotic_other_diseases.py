@@ -10,9 +10,8 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from .helpers import analyze_symptoms_generic, ADVICE
 from . import prevalence_data
-
+from .helpers import ADVICE, analyze_symptoms_generic
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "lethargy": {"ja": "無気力", "en": "Lethargy"},
@@ -1681,6 +1680,7 @@ def analyze_symptoms(
     age_years: float | None = None,
     species: str | None = None,
     lab_values: dict | None = None,
+    gender: str | None = None,
 ) -> Dict[str, Any]:
     """その他エキゾチック動物用の鑑別診断エンジン。
 

@@ -4,44 +4,42 @@ Integrates all Stage 1-4 components into a single coherent system
 for comprehensive multi-disease diagnosis and treatment planning.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
-from enum import Enum
 import logging
+from dataclasses import dataclass, field
 from datetime import datetime
+from enum import Enum
+from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
 # Import all stage components
-from api.ai.multidisease_expander import (
-    MultiDiseaseExpander,
-    DiseaseInteraction,
-    CombinationPattern,
-    InteractionRuleMiner,
-)
 from api.ai.adaptive_confidence_calculator import (
     AdaptiveConfidenceCalculator,
     DiagnosisRecord,
-    FeatureEngineer,
-)
-from api.ai.prognostic_predictor import (
-    PrognosticPredictor,
-    PrognosticFactors,
-    PrognosticPrediction,
-)
-from api.ai.treatment_response_predictor import (
-    TreatmentResponsePredictor,
-    TreatmentResponse,
-    TreatmentKnowledgeBase,
-)
-from api.ai.risk_stratifier import (
-    RiskStratifier,
-    RiskAssessmentFactors,
-    RiskStratificationResult,
 )
 from api.ai.decision_support import (
     DecisionSupportEngine,
     DecisionSupportResult,
+)
+from api.ai.multidisease_expander import (
+    CombinationPattern,
+    DiseaseInteraction,
+    InteractionRuleMiner,
+    MultiDiseaseExpander,
+)
+from api.ai.prognostic_predictor import (
+    PrognosticFactors,
+    PrognosticPrediction,
+    PrognosticPredictor,
+)
+from api.ai.risk_stratifier import (
+    RiskAssessmentFactors,
+    RiskStratificationResult,
+    RiskStratifier,
+)
+from api.ai.treatment_response_predictor import (
+    TreatmentResponse,
+    TreatmentResponsePredictor,
 )
 
 

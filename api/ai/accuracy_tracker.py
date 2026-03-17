@@ -61,7 +61,7 @@ class AIAccuracyTracker:
             # Calculate false positives and negatives
             false_positives = list(extracted_set - correct_set)
             false_negatives = list(correct_set - extracted_set)
-            true_positives = len(extracted_set & correct_set)
+            len(extracted_set & correct_set)
 
             # Accuracy: TP / (TP + FP + FN)
             total_errors = len(false_positives) + len(false_negatives)
@@ -116,10 +116,7 @@ class AIAccuracyTracker:
         store = LearningDataStore()
         store._state = None
 
-        if domain:
-            metrics = store.get_ai_accuracy_by_domain(domain=domain)
-        else:
-            metrics = store.get_ai_accuracy_by_domain()
+        metrics = store.get_ai_accuracy_by_domain(domain=domain) if domain else store.get_ai_accuracy_by_domain()
 
         if not metrics:
             return {

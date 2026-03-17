@@ -6,11 +6,11 @@ Handles result retrieval, parsing, validation, and integration into the
 disease database for treatment, prevention, and prognosis fields.
 """
 
-import sys
 import json
-from pathlib import Path
+import sys
 from datetime import datetime
-from typing import List, Dict, Tuple
+from pathlib import Path
+from typing import Dict, List, Tuple
 
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent
@@ -102,7 +102,7 @@ class Phase2BatchProcessor:
             try:
                 parts = custom_id.split("-")
                 disease_id = "-".join(parts[1:-1])  # Handle IDs with hyphens
-            except:
+            except Exception:
                 error_count += 1
                 continue
 
@@ -218,7 +218,7 @@ class Phase2BatchProcessor:
                 processed_count += 1
 
         print(f"\n{'='*70}")
-        print(f"PROCESSING SUMMARY")
+        print("PROCESSING SUMMARY")
         print(f"{'='*70}")
         print(f"Batches processed: {processed_count}")
         print(f"Total succeeded: {total_succeeded}")
@@ -254,7 +254,7 @@ class Phase2BatchProcessor:
         }
 
         for disease in diseases:
-            for field in enriched_counts.keys():
+            for field in enriched_counts:
                 if disease.get(field) and disease.get(f"{field}_ja"):
                     enriched_counts[field] += 1
 
@@ -264,10 +264,10 @@ class Phase2BatchProcessor:
             print(f"  {field:12}: {count:5} ({pct:5.1f}%)")
 
         # Batch statistics
-        print(f"\nBatch Statistics:")
+        print("\nBatch Statistics:")
         for stage_name in ["treatment", "prevention", "prognosis"]:
             stage_data = manifest.get("stages", {}).get(stage_name, {})
-            batches = stage_data.get("batches", {})
+            stage_data.get("batches", {})
             stats = stage_data.get("stats", {})
 
             print(f"\n  {stage_name.upper()}")

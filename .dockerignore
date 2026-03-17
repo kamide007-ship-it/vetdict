@@ -30,10 +30,10 @@ build/
 .coverage
 htmlcov/
 .tox/
+tests/
 
 # Documentation
 docs/
-README.md
 *.md
 
 # CI/CD
@@ -45,15 +45,15 @@ README.md
 .env
 .env.local
 .env.*.local
+.env.example
 *.log
 tmp/
 temp/
+instance/
 
 # Docker
 docker-compose.override.yml
 Dockerfile.dev
 
 # Other
-.vscode
-.idea
 node_modules/

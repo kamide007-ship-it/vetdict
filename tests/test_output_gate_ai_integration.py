@@ -1,6 +1,5 @@
 """Tests for output_gate AI confidence integration (Phase 2c Step 3)."""
 
-import pytest
 from reco2 import output_gate
 
 

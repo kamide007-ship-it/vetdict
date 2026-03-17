@@ -1,16 +1,15 @@
 """Tests for risk_stratifier.py - Patient risk stratification."""
 
-import pytest
 
 from api.ai.risk_stratifier import (
+    _DEFAULT_RISK_PROFILE,
+    DISEASE_RISK_PROFILES,
+    RISK_THRESHOLDS,
+    TIER_INTERVENTIONS,
     RiskAssessmentFactors,
     RiskStratificationResult,
     RiskStratifier,
     RiskTier,
-    DISEASE_RISK_PROFILES,
-    RISK_THRESHOLDS,
-    TIER_INTERVENTIONS,
-    _DEFAULT_RISK_PROFILE,
 )
 
 

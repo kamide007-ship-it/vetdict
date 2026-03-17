@@ -20,9 +20,9 @@ silently produce no match. Tests account for this.
 """
 
 from api.diagnostic_chat import (
+    _DEFAULT_SUPPLEMENTS,
     DISEASE_SUPPLEMENTS,
     SYMPTOM_ALIASES,
-    _DEFAULT_SUPPLEMENTS,
     extract_symptoms_from_text,
     generate_disease_reasoning_en,
     generate_disease_reasoning_ja,
@@ -1044,7 +1044,7 @@ class TestSymptomAliasesIntegrity:
     def test_known_mismatches_are_exhaustive(self):
         """Verify _KNOWN_ALIAS_MISMATCHES covers all actual mismatches."""
         actual_mismatches = set()
-        for alias, symptom_id in SYMPTOM_ALIASES.items():
+        for _alias, symptom_id in SYMPTOM_ALIASES.items():
             if symptom_id not in SYMPTOM_IDS:
                 actual_mismatches.add(symptom_id)
         assert actual_mismatches == _KNOWN_ALIAS_MISMATCHES, (
@@ -1053,41 +1053,41 @@ class TestSymptomAliasesIntegrity:
         )
 
     def test_all_alias_keys_are_lowercase(self):
-        for alias in SYMPTOM_ALIASES.keys():
+        for alias in SYMPTOM_ALIASES:
             assert alias == alias.lower(), (
                 f"Alias key '{alias}' is not lowercase"
             )
 
     def test_all_alias_values_are_strings(self):
-        for alias, symptom_id in SYMPTOM_ALIASES.items():
+        for _alias, symptom_id in SYMPTOM_ALIASES.items():
             assert isinstance(symptom_id, str)
 
     def test_all_alias_keys_are_strings(self):
-        for alias in SYMPTOM_ALIASES.keys():
+        for alias in SYMPTOM_ALIASES:
             assert isinstance(alias, str)
 
     def test_contains_english_aliases(self):
-        english_aliases = [k for k in SYMPTOM_ALIASES.keys() if k.isascii()]
+        english_aliases = [k for k in SYMPTOM_ALIASES if k.isascii()]
         assert len(english_aliases) > 0
 
     def test_contains_japanese_aliases(self):
         japanese_aliases = [
-            k for k in SYMPTOM_ALIASES.keys() if not k.isascii()
+            k for k in SYMPTOM_ALIASES if not k.isascii()
         ]
         assert len(japanese_aliases) > 0
 
     def test_japanese_alias_count_at_least_20(self):
         japanese_aliases = [
-            k for k in SYMPTOM_ALIASES.keys() if not k.isascii()
+            k for k in SYMPTOM_ALIASES if not k.isascii()
         ]
         assert len(japanese_aliases) >= 20
 
     def test_no_empty_alias_keys(self):
-        for alias in SYMPTOM_ALIASES.keys():
+        for alias in SYMPTOM_ALIASES:
             assert len(alias.strip()) > 0
 
     def test_no_empty_alias_values(self):
-        for alias, symptom_id in SYMPTOM_ALIASES.items():
+        for _alias, symptom_id in SYMPTOM_ALIASES.items():
             assert len(symptom_id.strip()) > 0
 
     def test_common_english_aliases_present(self):
@@ -1118,7 +1118,7 @@ class TestDiseaseSupplementsIntegrity:
         assert len(DISEASE_SUPPLEMENTS) > 0
 
     def test_all_keys_are_strings(self):
-        for key in DISEASE_SUPPLEMENTS.keys():
+        for key in DISEASE_SUPPLEMENTS:
             assert isinstance(key, str)
 
     def test_all_values_are_lists(self):
@@ -1156,7 +1156,7 @@ class TestDiseaseSupplementsIntegrity:
             "mammary_gland_tumor",
             "aortic_stenosis",
         }
-        for disease_id in DISEASE_SUPPLEMENTS.keys():
+        for disease_id in DISEASE_SUPPLEMENTS:
             if disease_id in known_supplement_only:
                 continue
             assert disease_id in known_ids, (
@@ -1219,7 +1219,7 @@ class TestDefaultSupplementsIntegrity:
 
     def test_values_are_non_empty_strings(self):
         for supp in _DEFAULT_SUPPLEMENTS:
-            for key, value in supp.items():
+            for _key, value in supp.items():
                 assert isinstance(value, str) and len(value) > 0
 
 
@@ -1252,7 +1252,7 @@ class TestCrossDataIntegrity:
 
     def test_symptom_ids_set_matches_symptoms_list(self):
         expected = {s["id"] for s in SYMPTOMS}
-        assert SYMPTOM_IDS == expected
+        assert expected == SYMPTOM_IDS
 
 
 # ============================================================================

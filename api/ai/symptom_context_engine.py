@@ -4,11 +4,11 @@ Contextualizes symptoms within the framework of multiple disease hypotheses,
 identifying ambiguous symptoms and their medical significance across diseases.
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
-from enum import Enum
 import logging
 import math
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -433,7 +433,7 @@ class AmbiguitySolver:
 
         # Get competing diseases
         competing = [
-            disease for disease in contexts.keys()
+            disease for disease in contexts
             if disease != predominant
         ]
 
@@ -566,7 +566,7 @@ class AmbiguitySolver:
             reverse=True
         )
 
-        for disease, context in sorted_contexts[:2]:
+        for _disease, context in sorted_contexts[:2]:
             if context.related_findings:
                 finding = context.related_findings[0]
                 questions.append(
@@ -625,7 +625,7 @@ class AmbiguitySolver:
         for report in ambiguity_reports:
             if report.recommendation != "keep_all":
                 # Apply adjustment factor to all diseases with this ambiguous symptom
-                for disease in report.contexts.keys():
+                for disease in report.contexts:
                     if disease in adjusted:
                         adjusted[disease] *= report.confidence_adjustment_factor
 

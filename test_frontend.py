@@ -4,8 +4,6 @@ Frontend Integration Tests
 Tests the HTML/CSS/JS frontend and API integration
 """
 
-import os
-import json
 from pathlib import Path
 
 

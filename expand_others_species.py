@@ -8,7 +8,7 @@ import json
 import random
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 # ============================================================================
 # 種別分類エンジン
@@ -208,14 +208,14 @@ class SpeciesExpander:
 
 def verify_expansion(stats: Dict[str, int]):
     """展開結果を検証"""
-    print(f"\n✅ Others 展開完了！")
+    print("\n✅ Others 展開完了！")
     print(f"{'='*70}")
 
     # 全疾患数
     with open('diseases_all_species.json', 'r') as f:
         data = json.load(f)
 
-    print(f"\n📊 種別別疾患数:")
+    print("\n📊 種別別疾患数:")
     print(f"{'種別':<20} {'疾患数':>8} {'%':>6} {'カテゴリ':<15}")
     print("-" * 55)
 
@@ -235,7 +235,7 @@ def verify_expansion(stats: Dict[str, int]):
     print(f"{'合計':<20} {total:>8} {100.0:>5.1f}%")
 
     # グループ統計
-    print(f"\n📈 カテゴリ別グループ統計:")
+    print("\n📈 カテゴリ別グループ統計:")
     categories = defaultdict(int)
     for disease in data:
         species = disease.get('species', 'Unknown')
@@ -249,13 +249,13 @@ def verify_expansion(stats: Dict[str, int]):
         print(f"  {category:<15} {count:>6} ({pct:>5.1f}%)")
 
     # データの健全性確認
-    print(f"\n✅ データ健全性チェック:")
+    print("\n✅ データ健全性チェック:")
     errors = 0
 
     # Others が残っているか確認
     others_count = sum(1 for d in data if d.get('species') == 'Others')
     if others_count == 0:
-        print(f"  ✅ Others は完全に展開されました")
+        print("  ✅ Others は完全に展開されました")
     else:
         print(f"  ⚠️  {others_count} 件の Others が残っています")
         errors += 1
@@ -263,13 +263,13 @@ def verify_expansion(stats: Dict[str, int]):
     # すべての疾患にスペシーズがあるか確認
     no_species = sum(1 for d in data if not d.get('species') or d.get('species') == 'Unknown')
     if no_species == 0:
-        print(f"  ✅ すべての疾患にスペシーズが割り当てられています")
+        print("  ✅ すべての疾患にスペシーズが割り当てられています")
     else:
         print(f"  ⚠️  {no_species} 件の疾患にスペシーズがありません")
         errors += 1
 
     # フィールド完成度
-    print(f"\n📋 コアフィールド完成度:")
+    print("\n📋 コアフィールド完成度:")
     fields = ['treatment', 'prevention', 'prognosis', 'treatment_ja', 'prevention_ja']
     for field in fields:
         filled = sum(1 for d in data if d.get(field) and str(d.get(field)).strip())
@@ -278,7 +278,7 @@ def verify_expansion(stats: Dict[str, int]):
         print(f"  {status} {field:<20} {filled:>5}/{len(data)} ({completion:>5.1f}%)")
 
     if errors == 0:
-        print(f"\n✅ 展開成功！データは完全です。")
+        print("\n✅ 展開成功！データは完全です。")
     else:
         print(f"\n⚠️  {errors} 件のエラーが見つかりました")
 
@@ -290,7 +290,7 @@ def generate_expansion_report():
     with open('diseases_all_species.json', 'r') as f:
         data = json.load(f)
 
-    print(f"\n📄 種別別サンプル疾患:")
+    print("\n📄 種別別サンプル疾患:")
     print(f"{'='*70}")
 
     samples = {}
@@ -317,4 +317,4 @@ if __name__ == '__main__':
     # レポート
     generate_expansion_report()
 
-    print(f"\n✅ Others カテゴリ展開完了！")
+    print("\n✅ Others カテゴリ展開完了！")

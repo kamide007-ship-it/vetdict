@@ -3,13 +3,14 @@
 Tests HTML/CSS/JS integration and API frontend compatibility.
 """
 
-import pytest
 from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 def _read_all_multidisease_css():
     """Read all multi-disease CSS files (main + split components)."""
-    css_dir = Path("/home/user/vetdict/static/css")
+    css_dir = PROJECT_ROOT / "static" / "css"
     content = ""
     for css_file in sorted(css_dir.glob("multidisease-*.css")):
         content += css_file.read_text() + "\n"
@@ -21,12 +22,12 @@ class TestFrontendAssets:
 
     def test_multidisease_css_exists(self):
         """Test that multi-disease CSS file exists."""
-        css_path = Path("/home/user/vetdict/static/css/multidisease-ui.css")
+        css_path = PROJECT_ROOT / "static" / "css" / "multidisease-ui.css"
         assert css_path.exists(), "multidisease-ui.css should exist"
 
     def test_multidisease_js_exists(self):
         """Test that multi-disease JavaScript file exists."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         assert js_path.exists(), "multidisease-ui.js should exist"
 
     def test_css_contains_required_classes(self):
@@ -47,7 +48,7 @@ class TestFrontendAssets:
 
     def test_js_contains_required_methods(self):
         """Test that JavaScript includes required methods."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         required_methods = [
@@ -70,21 +71,21 @@ class TestHTMLIntegration:
 
     def test_html_includes_multidisease_css(self):
         """Test that index.html includes multi-disease CSS."""
-        html_path = Path("/home/user/vetdict/templates/index.html")
+        html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
         assert "multidisease-ui.css" in html_content, "CSS should be linked in HTML"
 
     def test_html_includes_multidisease_js(self):
         """Test that index.html includes multi-disease JS."""
-        html_path = Path("/home/user/vetdict/templates/index.html")
+        html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
         assert "multidisease-ui.js" in html_content, "JS should be linked in HTML"
 
     def test_css_loaded_before_body_content(self):
         """Test that CSS is loaded in head before body."""
-        html_path = Path("/home/user/vetdict/templates/index.html")
+        html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
         css_index = html_content.find("multidisease-ui.css")
@@ -96,7 +97,7 @@ class TestHTMLIntegration:
 
     def test_js_loaded_at_end_of_body(self):
         """Test that JavaScript is loaded at end of body."""
-        html_path = Path("/home/user/vetdict/templates/index.html")
+        html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
         js_index = html_content.find("multidisease-ui.js")
@@ -144,7 +145,7 @@ class TestJSValidation:
 
     def test_js_valid_javascript_syntax(self):
         """Test that JavaScript has valid syntax."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         # Basic syntax checks
@@ -154,7 +155,7 @@ class TestJSValidation:
 
     def test_js_has_error_handling(self):
         """Test that JavaScript includes error handling."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         assert "catch" in js_content, "JS should include error handling"
@@ -162,14 +163,14 @@ class TestJSValidation:
 
     def test_js_api_endpoint_defined(self):
         """Test that API endpoint is properly defined."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         assert "/api/multidisease/analyze" in js_content, "API endpoint should be defined"
 
     def test_js_event_listeners_setup(self):
         """Test that JavaScript sets up event listeners."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         assert "addEventListener" in js_content, "Should setup event listeners"
@@ -177,7 +178,7 @@ class TestJSValidation:
 
     def test_js_has_initialization_logic(self):
         """Test that JavaScript initializes on page load."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         assert "DOMContentLoaded" in js_content, "Should initialize on DOM ready"
@@ -189,14 +190,14 @@ class TestJavaScriptClasses:
 
     def test_multiDiseaseUIHandler_class_exists(self):
         """Test that MultiDiseaseUIHandler class is defined."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         assert "class MultiDiseaseUIHandler" in js_content
 
     def test_class_has_required_properties(self):
         """Test that class has required properties."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         properties = [
@@ -210,7 +211,7 @@ class TestJavaScriptClasses:
 
     def test_class_has_render_methods(self):
         """Test that class has all rendering methods."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         methods = [
@@ -230,7 +231,7 @@ class TestAPIFrontendIntegration:
 
     def test_api_request_structure(self):
         """Test that API request has correct structure."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         # Check for correct JSON structure
@@ -240,7 +241,7 @@ class TestAPIFrontendIntegration:
 
     def test_api_response_handling(self):
         """Test that API response is properly handled."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         # Check for response parsing
@@ -253,7 +254,7 @@ class TestUIComponents:
 
     def test_all_render_methods_exist(self):
         """Test that all render methods are implemented."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         components = [
@@ -271,7 +272,7 @@ class TestUIComponents:
 
     def test_container_management(self):
         """Test container management methods."""
-        js_path = Path("/home/user/vetdict/static/js/multidisease-ui.js")
+        js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()
 
         methods = [

@@ -3,10 +3,11 @@
 Tests that caching is properly integrated into the multi-disease API handler.
 """
 
+from unittest.mock import patch
+
 import pytest
-from unittest.mock import Mock, patch, MagicMock
+
 from api.ai.multidisease_api_handler import MultiDiseaseAnalyzer
-from api.ai.multidisease_cache_manager import MultiDiseaseAnalysisCache
 
 
 class TestAPIHandlerCacheIntegration:
