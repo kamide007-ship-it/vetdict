@@ -1,10 +1,59 @@
+# Git
 .git
-.github
+.gitignore
+.gitattributes
+
+# Python
 __pycache__
-tests/
-docs/
 *.pyc
-.env
-.env.example
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+dist/
+build/
+.egg
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache
 .coverage
+htmlcov/
+.tox/
+tests/
+
+# Documentation
+docs/
+*.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Development
+.env
+.env.local
+.env.*.local
+.env.example
+*.log
+tmp/
+temp/
 instance/
+
+# Docker
+docker-compose.override.yml
+Dockerfile.dev
+
+# Other
+node_modules/

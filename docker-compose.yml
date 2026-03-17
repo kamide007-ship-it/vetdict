@@ -1,0 +1,97 @@
+version: '3.9'
+
+services:
+  # VetDict API and Web Server
+  vetdict:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vetdict-app
+    ports:
+      - "${API_PORT:-8000}:8000"
+      - "${WEB_PORT:-3000}:3000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - FLASK_ENV=${ENVIRONMENT:-production}
+    volumes:
+      # Development: mount source code for hot reload
+      - .:/app
+      - /app/__pycache__
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - vetdict-network
+    depends_on:
+      - db
+
+  # PostgreSQL Database (Optional, for future enhancements)
+  db:
+    image: postgres:16-alpine
+    container_name: vetdict-db
+    environment:
+      POSTGRES_USER: ${DB_USER:-vetdict}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+      POSTGRES_DB: ${DB_NAME:-vetdict}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-vetdict}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - vetdict-network
+    profiles:
+      - database
+
+  # Redis Cache (Optional, for future enhancements)
+  cache:
+    image: redis:7-alpine
+    container_name: vetdict-cache
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - vetdict-network
+    profiles:
+      - cache
+
+  # Nginx Reverse Proxy (Optional, for production)
+  nginx:
+    image: nginx:alpine
+    container_name: vetdict-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - vetdict
+    restart: unless-stopped
+    networks:
+      - vetdict-network
+    profiles:
+      - nginx
+
+networks:
+  vetdict-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
