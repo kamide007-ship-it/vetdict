@@ -19,11 +19,12 @@ diseases_bp = Blueprint("diseases", __name__, url_prefix="/api")
 
 @diseases_bp.route("/diseases", methods=["GET"])
 def api_list_diseases():
-    """List diseases with optional filtering.
+    """List diseases with optional filtering and comprehensive search.
 
     Query params:
         species: filter by species key (e.g. "cat", "dog")
-        q: search by name (English or Japanese)
+        q: search across disease names, descriptions, treatments, prevention,
+           and pathophysiology (both English and Japanese)
         limit: max results (default 200, max 1000)
         offset: pagination offset (default 0)
     """
