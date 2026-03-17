@@ -380,8 +380,8 @@ def health():
     except Exception:
         checks["disk"] = {"status": "unknown"}
 
-    all_ok = all(c.get("status") == "ok" for c in checks.values())
-    status_str = "healthy" if all_ok else "degraded"
+    has_error = any(c.get("status") == "error" for c in checks.values())
+    status_str = "degraded" if has_error else "healthy"
 
     return {
         'status': status_str,
