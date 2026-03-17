@@ -1,6 +1,5 @@
 """Tests for the disease_store data access layer and diseases API blueprint."""
 
-import json
 import os
 
 import pytest
