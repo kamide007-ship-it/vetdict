@@ -318,3 +318,42 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
                 [*search_params, limit],
             ).fetchall()
     return [_row_to_disease_summary(r) for r in rows]
+
+
+def get_diseases_by_symptom(
+    symptom_id: str, species: str | None = None, limit: int = 50
+) -> list[dict]:
+    """Return diseases that have a given symptom.
+
+    Searches for diseases with this symptom in their symptoms JSON field.
+    Optionally filters by species.
+    """
+    with get_connection() as conn:
+        if species:
+            rows = conn.execute(
+                "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
+                "WHERE species = ? AND symptoms IS NOT NULL "
+                "ORDER BY name",
+                (species,),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
+                "WHERE symptoms IS NOT NULL "
+                "ORDER BY species, name",
+            ).fetchall()
+
+    # Filter results by checking JSON array membership
+    result = []
+    for row in rows:
+        symptoms_json = row["symptoms"]
+        if symptoms_json:
+            try:
+                symptoms = json.loads(symptoms_json)
+                if symptom_id in symptoms:
+                    result.append(_row_to_disease_summary(row))
+                    if len(result) >= limit:
+                        break
+            except (json.JSONDecodeError, TypeError):
+                continue
+    return result

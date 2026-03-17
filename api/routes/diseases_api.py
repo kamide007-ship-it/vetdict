@@ -10,6 +10,7 @@ from flask import Blueprint, jsonify, request
 
 from api.disease_store import (
     get_disease_detail,
+    get_diseases_by_symptom,
     list_diseases,
     search_diseases,
 )
@@ -52,3 +53,18 @@ def api_get_disease(disease_id: str):
     if not disease:
         return jsonify({"success": False, "error": "Disease not found"}), 404
     return jsonify({"success": True, "disease": disease})
+
+
+@diseases_bp.route("/symptoms/<symptom_id>/diseases", methods=["GET"])
+def api_get_diseases_by_symptom(symptom_id: str):
+    """List all diseases associated with a symptom.
+
+    Query params:
+        species: filter by species key (e.g. "cat", "dog")
+        limit: max results (default 50, max 500)
+    """
+    species = request.args.get("species")
+    limit = min(int(request.args.get("limit", 50)), 500)
+
+    diseases = get_diseases_by_symptom(symptom_id, species=species, limit=limit)
+    return jsonify({"success": True, "symptom_id": symptom_id, "diseases": diseases})

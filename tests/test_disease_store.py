@@ -11,6 +11,7 @@ os.environ.setdefault("FLASK_DEBUG", "1")
 from api.database import get_connection, init_db, upsert_disease, upsert_symptom
 from api.disease_store import (
     get_disease_detail,
+    get_diseases_by_symptom,
     get_species_stats,
     get_symptoms_for_species,
     invalidate_cache,
@@ -209,6 +210,30 @@ class TestSearchDiseases:
         assert len(results) == 1
 
 
+class TestGetDiseasesBySymptom:
+    def test_find_diseases_by_symptom(self, db_path):
+        # From test data: "coughing" is a symptom of cat_0001 and cat_0002
+        results = get_diseases_by_symptom("coughing")
+        assert len(results) >= 2
+        names = {d["name"] for d in results}
+        assert "Feline Asthma" in names
+        assert "Feline Pneumonia" in names
+
+    def test_find_diseases_by_symptom_with_species_filter(self, db_path):
+        # Search for "coughing" in dog species (should return 0)
+        results = get_diseases_by_symptom("coughing", species="dog")
+        assert len(results) == 0
+
+    def test_symptom_not_found_returns_empty(self, db_path):
+        results = get_diseases_by_symptom("nonexistent_symptom")
+        assert len(results) == 0
+
+    def test_find_diseases_by_symptom_respects_limit(self, db_path):
+        # Get coughing diseases with limit=1
+        results = get_diseases_by_symptom("coughing", limit=1)
+        assert len(results) == 1
+
+
 class TestCacheInvalidation:
     def test_invalidate_clears_stats(self, db_path):
         stats1 = get_species_stats()
@@ -277,3 +302,28 @@ class TestDiseasesAPI:
         assert resp.status_code == 404
         data = resp.get_json()
         assert data["success"] is False
+
+    def test_get_diseases_by_symptom_endpoint(self, client, db_path):
+        # Get diseases with "coughing" symptom
+        resp = client.get("/api/symptoms/coughing/diseases")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["success"] is True
+        assert data["symptom_id"] == "coughing"
+        assert len(data["diseases"]) >= 1
+        assert any(d["name"] == "Feline Asthma" for d in data["diseases"])
+
+    def test_get_diseases_by_symptom_with_species_filter(self, client, db_path):
+        # Get diseases with "coughing" symptom for dog species (should return 0)
+        resp = client.get("/api/symptoms/coughing/diseases?species=dog")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["success"] is True
+        assert len(data["diseases"]) == 0
+
+    def test_get_diseases_by_nonexistent_symptom(self, client, db_path):
+        resp = client.get("/api/symptoms/nonexistent_symptom_xyz/diseases")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["success"] is True
+        assert len(data["diseases"]) == 0
