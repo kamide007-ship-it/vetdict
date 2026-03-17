@@ -188,8 +188,21 @@ class TestSearchDiseases:
 
     def test_search_with_species_filter(self, db_path):
         results = search_diseases("cough", species="cat")
-        # No disease name contains "cough", so 0 results
+        # Now searches in name, description, treatment, etc., so may find results
+        # The test data has "coughing" in symptoms but not in description/treatment
         assert len(results) == 0
+
+    def test_search_in_treatment_field(self, db_path):
+        # Search for a treatment keyword (from test data: "Antibiotics")
+        results = search_diseases("Antibiotics")
+        assert len(results) >= 1
+        assert any(d["name"] == "Feline Pneumonia" for d in results)
+
+    def test_search_in_description_field(self, db_path):
+        # Search for a description keyword (from test data: "Viral")
+        results = search_diseases("Viral")
+        assert len(results) >= 1
+        assert any(d["name"] == "Canine Parvovirus" for d in results)
 
     def test_search_limit(self, db_path):
         results = search_diseases("Feline", limit=1)

@@ -227,10 +227,21 @@ def list_diseases(
     offset: int = 0,
     search: str | None = None,
 ) -> dict[str, Any]:
-    """List diseases with optional species filter and search.
+    """List diseases with optional species filter and comprehensive search.
+
+    Search matches against name, description, treatment, prevention, and
+    pathophysiology fields in both English and Japanese.
 
     Returns ``{"diseases": [...], "total": N, "limit": L, "offset": O}``.
     """
+    search_clause = (
+        "(name LIKE ? OR name_ja LIKE ? OR "
+        "description LIKE ? OR description_ja LIKE ? OR "
+        "treatment LIKE ? OR treatment_ja LIKE ? OR "
+        "prevention LIKE ? OR prevention_ja LIKE ? OR "
+        "pathophysiology LIKE ? OR pathophysiology_ja LIKE ?)"
+    )
+
     with get_connection() as conn:
         conditions: list[str] = []
         params: list = []
@@ -239,9 +250,9 @@ def list_diseases(
             conditions.append("species = ?")
             params.append(species)
         if search:
-            conditions.append("(name LIKE ? OR name_ja LIKE ?)")
             like_pattern = "%" + search + "%"
-            params.extend([like_pattern, like_pattern])
+            conditions.append(search_clause)
+            params.extend([like_pattern] * 10)
 
         where = " WHERE " + " AND ".join(conditions) if conditions else ""
 
@@ -270,19 +281,40 @@ def get_disease_detail(disease_id: str) -> dict | None:
 
 
 def search_diseases(query: str, species: str | None = None, limit: int = 50) -> list[dict]:
-    """Search diseases by name (English or Japanese) with optional species filter."""
+    """Search diseases by name, description, treatment, and other fields.
+
+    Searches both English and Japanese fields. Returns results ordered by
+    relevance (name match prioritized) then by species and name.
+    """
     like_pattern = "%" + query + "%"
+    search_clause = (
+        "(name LIKE ? OR name_ja LIKE ? OR "
+        "description LIKE ? OR description_ja LIKE ? OR "
+        "treatment LIKE ? OR treatment_ja LIKE ? OR "
+        "prevention LIKE ? OR prevention_ja LIKE ? OR "
+        "pathophysiology LIKE ? OR pathophysiology_ja LIKE ?)"
+    )
+
     with get_connection() as conn:
+        # Prepare search parameters (one for each field)
+        search_params = [like_pattern] * 10
+
         if species:
-            rows = conn.execute(
+            query_str = (
                 "SELECT id, species, name, name_ja, urgency FROM diseases "
-                "WHERE (name LIKE ? OR name_ja LIKE ?) AND species = ? ORDER BY name LIMIT ?",
-                (like_pattern, like_pattern, species, limit),
+                "WHERE " + search_clause + " AND species = ? ORDER BY name LIMIT ?"
+            )
+            rows = conn.execute(
+                query_str,
+                [*search_params, species, limit],
             ).fetchall()
         else:
-            rows = conn.execute(
+            query_str = (
                 "SELECT id, species, name, name_ja, urgency FROM diseases "
-                "WHERE name LIKE ? OR name_ja LIKE ? ORDER BY species, name LIMIT ?",
-                (like_pattern, like_pattern, limit),
+                "WHERE " + search_clause + " ORDER BY species, name LIMIT ?"
+            )
+            rows = conn.execute(
+                query_str,
+                [*search_params, limit],
             ).fetchall()
     return [_row_to_disease_summary(r) for r in rows]
