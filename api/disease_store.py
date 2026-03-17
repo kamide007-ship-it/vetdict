@@ -144,6 +144,37 @@ def get_urgency_stats() -> dict[str, Any]:
     }
 
 
+def get_urgency_by_species(species: str) -> dict[str, Any]:
+    """Return urgency-level breakdown for a specific species.
+
+    Returns a dict with keys: ``species``, ``urgency_levels`` (list),
+    ``total_diseases``.
+    """
+    with get_connection() as conn:
+        urgency_rows = conn.execute(
+            "SELECT urgency, COUNT(*) AS cnt FROM diseases "
+            "WHERE species = ? AND urgency IS NOT NULL "
+            "GROUP BY urgency ORDER BY urgency",
+            (species,),
+        ).fetchall()
+
+    urgency_stats = []
+    total_diseases = 0
+    for row in urgency_rows:
+        count = row["cnt"]
+        urgency_stats.append({
+            "urgency": row["urgency"],
+            "count": count,
+        })
+        total_diseases += count
+
+    return {
+        "species": species,
+        "urgency_levels": urgency_stats,
+        "total_diseases": total_diseases,
+    }
+
+
 # ---------------------------------------------------------------------------
 # Symptoms
 # ---------------------------------------------------------------------------
