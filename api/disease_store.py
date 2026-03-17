@@ -68,6 +68,7 @@ def invalidate_cache() -> None:
     global _cache_version
     _cache_version += 1
     get_species_stats.cache_clear()
+    get_urgency_stats.cache_clear()
     _get_symptoms_for_species_cached.cache_clear()
 
 
@@ -112,6 +113,34 @@ def get_species_stats() -> dict[str, Any]:
         "total_diseases": sum(s["diseases"] for s in stats),
         "total_drugs": total_drugs,
         "total_species": len(stats),
+    }
+
+
+@lru_cache(maxsize=1)
+def get_urgency_stats() -> dict[str, Any]:
+    """Return disease count by urgency level from SQLite.
+
+    Returns a dict with keys: ``urgency_levels`` (list), ``total_diseases``.
+    """
+    with get_connection() as conn:
+        urgency_rows = conn.execute(
+            "SELECT urgency, COUNT(*) AS cnt FROM diseases "
+            "WHERE urgency IS NOT NULL GROUP BY urgency ORDER BY urgency"
+        ).fetchall()
+
+    urgency_stats = []
+    total_diseases = 0
+    for row in urgency_rows:
+        count = row["cnt"]
+        urgency_stats.append({
+            "urgency": row["urgency"],
+            "count": count,
+        })
+        total_diseases += count
+
+    return {
+        "urgency_levels": urgency_stats,
+        "total_diseases": total_diseases,
     }
 
 

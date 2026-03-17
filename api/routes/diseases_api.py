@@ -11,6 +11,7 @@ from flask import Blueprint, jsonify, request
 from api.disease_store import (
     get_disease_detail,
     get_diseases_by_symptom,
+    get_urgency_stats,
     list_diseases,
     search_diseases,
 )
@@ -68,3 +69,10 @@ def api_get_diseases_by_symptom(symptom_id: str):
 
     diseases = get_diseases_by_symptom(symptom_id, species=species, limit=limit)
     return jsonify({"success": True, "symptom_id": symptom_id, "diseases": diseases})
+
+
+@diseases_bp.route("/urgency-stats", methods=["GET"])
+def api_get_urgency_stats():
+    """Get disease statistics grouped by urgency level."""
+    stats = get_urgency_stats()
+    return jsonify({"success": True, **stats})

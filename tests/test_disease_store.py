@@ -14,6 +14,7 @@ from api.disease_store import (
     get_diseases_by_symptom,
     get_species_stats,
     get_symptoms_for_species,
+    get_urgency_stats,
     invalidate_cache,
     list_diseases,
     search_diseases,
@@ -101,6 +102,26 @@ class TestGetSpeciesStats:
         dog_stats = next((s for s in result["species"] if s["id"] == "dog"), None)
         assert dog_stats is not None
         assert dog_stats["diseases"] == 1
+
+
+class TestGetUrgencyStats:
+    def test_returns_urgency_with_counts(self, db_path):
+        result = get_urgency_stats()
+        assert "urgency_levels" in result
+        assert "total_diseases" in result
+        assert result["total_diseases"] == 3
+
+        # From test data: cat_0001 and cat_0002 are "high", dog_0001 is "emergency"
+        urgency_list = result["urgency_levels"]
+        assert len(urgency_list) == 2  # "emergency" and "high"
+
+        emergency = next((u for u in urgency_list if u["urgency"] == "emergency"), None)
+        assert emergency is not None
+        assert emergency["count"] == 1
+
+        high = next((u for u in urgency_list if u["urgency"] == "high"), None)
+        assert high is not None
+        assert high["count"] == 2
 
 
 class TestGetSymptomsForSpecies:
@@ -327,3 +348,13 @@ class TestDiseasesAPI:
         data = resp.get_json()
         assert data["success"] is True
         assert len(data["diseases"]) == 0
+
+    def test_get_urgency_stats_endpoint(self, client, db_path):
+        resp = client.get("/api/urgency-stats")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["success"] is True
+        assert "urgency_levels" in data
+        assert "total_diseases" in data
+        assert data["total_diseases"] == 3
+        assert len(data["urgency_levels"]) == 2
