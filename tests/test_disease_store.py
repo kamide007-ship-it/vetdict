@@ -1,0 +1,266 @@
+"""Tests for the disease_store data access layer and diseases API blueprint."""
+
+import json
+import os
+
+import pytest
+
+os.environ.setdefault("SECRET_KEY", "test-key")
+os.environ.setdefault("FLASK_DEBUG", "1")
+
+from api.database import get_connection, init_db, upsert_disease, upsert_symptom
+from api.disease_store import (
+    get_disease_detail,
+    get_species_stats,
+    get_symptoms_for_species,
+    invalidate_cache,
+    list_diseases,
+    search_diseases,
+)
+
+
+@pytest.fixture()
+def db_path(tmp_path, monkeypatch):
+    """Create a temporary SQLite database with sample data."""
+    path = str(tmp_path / "test_store.db")
+    init_db(path)
+    monkeypatch.setattr("api.disease_store.get_connection", lambda: get_connection.__wrapped__(path))
+    # Patch get_connection to use the temp path via a context manager wrapper
+    import contextlib
+
+    @contextlib.contextmanager
+    def _patched_conn():
+        with get_connection(path) as conn:
+            yield conn
+
+    monkeypatch.setattr("api.disease_store.get_connection", _patched_conn)
+
+    with get_connection(path) as conn:
+        # Insert sample diseases
+        upsert_disease(conn, {
+            "id": "cat_0001",
+            "species": "cat",
+            "name": "Feline Asthma",
+            "name_ja": "猫喘息",
+            "description": "Chronic airway disease",
+            "treatment": "Corticosteroids and bronchodilators",
+            "treatment_ja": "コルチコステロイドと気管支拡張薬",
+            "prevention": "Reduce airborne irritants",
+            "prevention_ja": "空気中の刺激物を減らす",
+            "prognosis": "Manageable long term",
+            "prognosis_ja": "長期管理可能",
+            "urgency": "high",
+            "symptoms": {"coughing", "wheezing"},
+            "recommended_tests": ["chest_xray", "cbc"],
+        })
+        upsert_disease(conn, {
+            "id": "cat_0002",
+            "species": "cat",
+            "name": "Feline Pneumonia",
+            "name_ja": "猫肺炎",
+            "description": "Lung infection",
+            "treatment": "Antibiotics and oxygen therapy",
+            "urgency": "high",
+            "symptoms": {"coughing", "fever"},
+            "recommended_tests": ["chest_xray"],
+        })
+        upsert_disease(conn, {
+            "id": "dog_0001",
+            "species": "dog",
+            "name": "Canine Parvovirus",
+            "name_ja": "犬パルボウイルス感染症",
+            "description": "Viral gastroenteritis",
+            "treatment": "Supportive care",
+            "urgency": "emergency",
+            "symptoms": {"vomiting", "diarrhea"},
+            "recommended_tests": ["parvo_snap"],
+        })
+        # Insert sample symptoms
+        upsert_symptom(conn, "cat_coughing", "Coughing", "咳", "cat")
+        upsert_symptom(conn, "cat_wheezing", "Wheezing", "喘鳴", "cat")
+        upsert_symptom(conn, "cat_fever", "Fever", "発熱", "cat")
+
+    invalidate_cache()
+    return path
+
+
+class TestGetSpeciesStats:
+    def test_returns_species_with_counts(self, db_path):
+        result = get_species_stats()
+        assert "species" in result
+        assert "total_diseases" in result
+        assert result["total_diseases"] == 3
+
+        cat_stats = next((s for s in result["species"] if s["id"] == "cat"), None)
+        assert cat_stats is not None
+        assert cat_stats["diseases"] == 2
+        assert cat_stats["name"] == "猫"
+        assert cat_stats["nameEn"] == "Cat"
+
+        dog_stats = next((s for s in result["species"] if s["id"] == "dog"), None)
+        assert dog_stats is not None
+        assert dog_stats["diseases"] == 1
+
+
+class TestGetSymptomsForSpecies:
+    def test_returns_symptoms_from_symptoms_table(self, db_path):
+        result = get_symptoms_for_species("cat")
+        ids = {s["id"] for s in result}
+        assert "coughing" in ids
+        assert "wheezing" in ids
+        assert "fever" in ids
+
+    def test_returns_symptoms_from_disease_records(self, db_path):
+        """Symptoms referenced in diseases but not in symptoms table are included."""
+        result = get_symptoms_for_species("dog")
+        ids = {s["id"] for s in result}
+        # dog symptoms come from disease records (no explicit symptom table entries)
+        assert "vomiting" in ids
+        assert "diarrhea" in ids
+
+    def test_empty_species_returns_empty(self, db_path):
+        result = get_symptoms_for_species("nonexistent")
+        assert result == []
+
+
+class TestListDiseases:
+    def test_list_all(self, db_path):
+        result = list_diseases()
+        assert result["total"] == 3
+        assert len(result["diseases"]) == 3
+
+    def test_filter_by_species(self, db_path):
+        result = list_diseases(species="cat")
+        assert result["total"] == 2
+        assert all(d["species"] == "cat" for d in result["diseases"])
+
+    def test_search_by_name(self, db_path):
+        result = list_diseases(search="Asthma")
+        assert result["total"] == 1
+        assert result["diseases"][0]["name"] == "Feline Asthma"
+
+    def test_search_by_japanese_name(self, db_path):
+        result = list_diseases(search="喘息")
+        assert result["total"] == 1
+        assert result["diseases"][0]["id"] == "cat_0001"
+
+    def test_pagination(self, db_path):
+        result = list_diseases(limit=1, offset=0)
+        assert result["total"] == 3
+        assert len(result["diseases"]) == 1
+        assert result["limit"] == 1
+        assert result["offset"] == 0
+
+    def test_combined_species_and_search(self, db_path):
+        result = list_diseases(species="cat", search="Pneumonia")
+        assert result["total"] == 1
+        assert result["diseases"][0]["name"] == "Feline Pneumonia"
+
+
+class TestGetDiseaseDetail:
+    def test_returns_full_detail(self, db_path):
+        disease = get_disease_detail("cat_0001")
+        assert disease is not None
+        assert disease["name"] == "Feline Asthma"
+        assert disease["treatment"] == "Corticosteroids and bronchodilators"
+        assert disease["treatment_ja"] == "コルチコステロイドと気管支拡張薬"
+        assert disease["prevention"] == "Reduce airborne irritants"
+        assert disease["prognosis"] == "Manageable long term"
+        assert disease["urgency"] == "high"
+        # JSON fields parsed
+        assert isinstance(disease["symptoms"], list)
+        assert "coughing" in disease["symptoms"]
+        assert isinstance(disease["recommended_tests"], list)
+
+    def test_not_found(self, db_path):
+        assert get_disease_detail("nonexistent") is None
+
+
+class TestSearchDiseases:
+    def test_search_english(self, db_path):
+        results = search_diseases("Parvo")
+        assert len(results) == 1
+        assert results[0]["species"] == "dog"
+
+    def test_search_japanese(self, db_path):
+        results = search_diseases("パルボ")
+        assert len(results) == 1
+
+    def test_search_with_species_filter(self, db_path):
+        results = search_diseases("cough", species="cat")
+        # No disease name contains "cough", so 0 results
+        assert len(results) == 0
+
+    def test_search_limit(self, db_path):
+        results = search_diseases("Feline", limit=1)
+        assert len(results) == 1
+
+
+class TestCacheInvalidation:
+    def test_invalidate_clears_stats(self, db_path):
+        stats1 = get_species_stats()
+        # Add a new disease directly
+        with get_connection(db_path) as conn:
+            upsert_disease(conn, {
+                "id": "cat_9999",
+                "species": "cat",
+                "name": "Test Disease",
+                "name_ja": "テスト疾患",
+                "symptoms": set(),
+            })
+        # Before invalidation, cache returns old data
+        stats_cached = get_species_stats()
+        assert stats_cached["total_diseases"] == stats1["total_diseases"]
+        # After invalidation, new data is returned
+        invalidate_cache()
+        stats2 = get_species_stats()
+        assert stats2["total_diseases"] == stats1["total_diseases"] + 1
+
+
+# ---------------------------------------------------------------------------
+# Diseases API endpoint tests
+# ---------------------------------------------------------------------------
+
+@pytest.fixture()
+def client(db_path):
+    """Create a Flask test client with the diseases blueprint."""
+    from api.vetdict_api import app
+    app.config["TESTING"] = True
+    return app.test_client()
+
+
+class TestDiseasesAPI:
+    def test_list_diseases_endpoint(self, client, db_path):
+        resp = client.get("/api/diseases")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["success"] is True
+        assert data["total"] >= 3
+
+    def test_list_diseases_with_species_filter(self, client, db_path):
+        resp = client.get("/api/diseases?species=cat")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert all(d["species"] == "cat" for d in data["diseases"])
+
+    def test_list_diseases_with_search(self, client, db_path):
+        resp = client.get("/api/diseases?q=Asthma")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["total"] >= 1
+        assert any("Asthma" in d["name"] for d in data["diseases"])
+
+    def test_get_disease_detail_endpoint(self, client, db_path):
+        resp = client.get("/api/diseases/cat_0001")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["success"] is True
+        disease = data["disease"]
+        assert disease["name"] == "Feline Asthma"
+        assert disease["treatment"] is not None
+
+    def test_get_disease_not_found(self, client, db_path):
+        resp = client.get("/api/diseases/nonexistent_999")
+        assert resp.status_code == 404
+        data = resp.get_json()
+        assert data["success"] is False
