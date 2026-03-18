@@ -4,7 +4,6 @@ Generate enriched disease data for all small mammal exotic species.
 Replaces duplicate generic entries with real veterinary diseases.
 Fills in all missing fields (pathophysiology, causes, description_ja, prognosis_ja, etc.)
 """
-import json
 import os
 from datetime import datetime
 

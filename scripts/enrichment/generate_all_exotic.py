@@ -2,7 +2,7 @@
 """Generate enriched disease data for all 17 exotic animal species.
 Template-based approach with species+category specific content generation."""
 
-import json, os, sys
+import json
 from datetime import datetime
 
 TIMESTAMP = datetime.now().isoformat()
@@ -770,7 +770,7 @@ print(f"Guinea Pig final: {len(GUINEA_PIG_DISEASES)}")
 def make_base_small_mammal(species_en, extra_diseases):
     """Create base disease list common to small exotic mammals, plus species-specific extras."""
     base = [
-        ("Pneumonia (Bacterial)",f"細菌性肺炎","bacterial","resp"),
+        ("Pneumonia (Bacterial)","細菌性肺炎","bacterial","resp"),
         ("Upper Respiratory Infection","上部気道感染症","bacterial","resp"),
         ("Rhinitis","鼻炎","inflammatory","resp"),
         ("Aspiration Pneumonia","誤嚥性肺炎","traumatic","resp"),
@@ -2385,7 +2385,6 @@ def generate_pathophysiology(name, species, category, organ):
 def generate_pathophysiology_ja(name, species, category, organ):
     sp = SPECIES_INFO[species]
     org_ja = ORGAN_JA.get(organ, ("多臓器",))[0]
-    cat_ja = CAT_JA.get(category, ("不明",))[0]
     sp_ja = sp["ja"]
 
     templates = {
@@ -2460,24 +2459,22 @@ def generate_description_ja(name, name_ja, species, category, organ):
 
 def generate_prognosis_ja(name, species, category, organ):
     sp = SPECIES_INFO[species]
-    org_ja = ORGAN_JA.get(organ, ("多臓器",))[0]
-    cat_ja = CAT_JA.get(category, ("不明",))[0]
     templates = {
         "viral": f"ウイルス疾患の予後はウイルスの病原性、{sp['ja']}の免疫状態、早期治療介入に依存する。軽症例は支持療法で回復する場合があるが、強毒株や免疫不全個体では予後不良。ワクチンが利用可能な場合は予防が最も効果的。",
-        "bacterial": f"早期の適切な抗菌薬治療で予後は良好な場合が多い。慢性感染や膿瘍は治療抵抗性となりうる。全身感染（敗血症）は予後不良。培養感受性試験に基づく適切な抗菌薬選択が予後改善の鍵。",
+        "bacterial": "早期の適切な抗菌薬治療で予後は良好な場合が多い。慢性感染や膿瘍は治療抵抗性となりうる。全身感染（敗血症）は予後不良。培養感受性試験に基づく適切な抗菌薬選択が予後改善の鍵。",
         "parasitic": f"適切な駆虫薬治療で予後は一般的に良好。重度感染や免疫不全{sp['ja']}では予後不良となりうる。環境消毒と再感染予防が長期的な予後改善に重要。定期的な糞便検査と予防的駆虫が推奨される。",
-        "fungal": f"真菌感染の予後は免疫状態、感染部位、早期治療に依存する。表在性感染は予後良好だが、深在性・全身性感染は予後慎重〜不良。長期の抗真菌薬投与が必要な場合が多い。",
-        "neoplastic": f"腫瘍の予後は腫瘍の種類、ステージ、転移の有無に依存する。良性腫瘍は外科切除で予後良好。悪性腫瘍は早期発見・早期切除が最善。転移性疾患は予後不良で緩和療法が中心となる。",
-        "metabolic": f"代謝疾患の予後は原因の特定と是正の可能性に依存する。食事管理や環境改善で是正可能な場合は予後良好。進行性の臓器障害を伴う場合は予後慎重。早期介入と継続的モニタリングが重要。",
-        "nutritional": f"栄養疾患の予後は欠乏/過剰の程度と是正の速やかさに依存する。早期発見と食事是正で予後良好。重度の栄養障害や不可逆的な組織損傷がある場合は予後慎重。適切な食事指導が再発予防の鍵。",
-        "traumatic": f"外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
-        "congenital": f"先天性疾患の予後は異常の種類と重症度に依存する。軽度の機能的異常は管理可能で予後良好。重度の構造的異常は外科的介入が必要な場合があり、予後は変動的。遺伝性疾患の場合、罹患個体の繁殖は避けるべき。",
-        "degenerative": f"変性疾患の予後は進行速度と管理可能性に依存する。緩徐進行性の場合、適切な対症療法とQOL管理で長期生存が可能。急速進行性の場合は予後不良。定期的な再評価と治療調整が重要。",
-        "autoimmune": f"自己免疫疾患の予後は疾患の重症度と治療反応に依存する。免疫抑制療法に反応する場合は長期管理が可能。治療抵抗性や重篤な臓器障害がある場合は予後不良。再燃のリスクがあり、長期的なモニタリングが必要。",
-        "behavioral": f"行動疾患の予後は原因の特定と環境改善の可能性に依存する。適切な環境エンリッチメントと飼育改善で多くの行動問題は改善する。慢性的な自傷行為や重度のストレス関連疾患は管理が困難。早期介入が予後改善に重要。",
-        "toxic": f"中毒の予後は毒素の種類、曝露量、治療開始までの時間に依存する。早期の除染と支持療法で軽度中毒は予後良好。重度中毒や臓器障害がある場合は予後慎重〜不良。原因毒素の特定と除去が最優先。",
-        "idiopathic": f"特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
-        "inflammatory": f"炎症性疾患の予後は原因の特定と除去、治療反応に依存する。急性炎症は適切な治療で予後良好な場合が多い。慢性炎症は長期管理が必要で、進行性臓器障害のリスクがある。抗炎症療法と原因治療の併用が予後改善に重要。",
+        "fungal": "真菌感染の予後は免疫状態、感染部位、早期治療に依存する。表在性感染は予後良好だが、深在性・全身性感染は予後慎重〜不良。長期の抗真菌薬投与が必要な場合が多い。",
+        "neoplastic": "腫瘍の予後は腫瘍の種類、ステージ、転移の有無に依存する。良性腫瘍は外科切除で予後良好。悪性腫瘍は早期発見・早期切除が最善。転移性疾患は予後不良で緩和療法が中心となる。",
+        "metabolic": "代謝疾患の予後は原因の特定と是正の可能性に依存する。食事管理や環境改善で是正可能な場合は予後良好。進行性の臓器障害を伴う場合は予後慎重。早期介入と継続的モニタリングが重要。",
+        "nutritional": "栄養疾患の予後は欠乏/過剰の程度と是正の速やかさに依存する。早期発見と食事是正で予後良好。重度の栄養障害や不可逆的な組織損傷がある場合は予後慎重。適切な食事指導が再発予防の鍵。",
+        "traumatic": "外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
+        "congenital": "先天性疾患の予後は異常の種類と重症度に依存する。軽度の機能的異常は管理可能で予後良好。重度の構造的異常は外科的介入が必要な場合があり、予後は変動的。遺伝性疾患の場合、罹患個体の繁殖は避けるべき。",
+        "degenerative": "変性疾患の予後は進行速度と管理可能性に依存する。緩徐進行性の場合、適切な対症療法とQOL管理で長期生存が可能。急速進行性の場合は予後不良。定期的な再評価と治療調整が重要。",
+        "autoimmune": "自己免疫疾患の予後は疾患の重症度と治療反応に依存する。免疫抑制療法に反応する場合は長期管理が可能。治療抵抗性や重篤な臓器障害がある場合は予後不良。再燃のリスクがあり、長期的なモニタリングが必要。",
+        "behavioral": "行動疾患の予後は原因の特定と環境改善の可能性に依存する。適切な環境エンリッチメントと飼育改善で多くの行動問題は改善する。慢性的な自傷行為や重度のストレス関連疾患は管理が困難。早期介入が予後改善に重要。",
+        "toxic": "中毒の予後は毒素の種類、曝露量、治療開始までの時間に依存する。早期の除染と支持療法で軽度中毒は予後良好。重度中毒や臓器障害がある場合は予後慎重〜不良。原因毒素の特定と除去が最優先。",
+        "idiopathic": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
+        "inflammatory": "炎症性疾患の予後は原因の特定と除去、治療反応に依存する。急性炎症は適切な治療で予後良好な場合が多い。慢性炎症は長期管理が必要で、進行性臓器障害のリスクがある。抗炎症療法と原因治療の併用が予後改善に重要。",
     }
     return templates.get(category, templates["idiopathic"])
 
@@ -2499,20 +2496,19 @@ def build_disease_entry(idx, name, name_ja, species, category, organ, timestamp)
     prog_ja = generate_prognosis_ja(name, species, category, organ)
 
     org_en = ORGAN_JA.get(organ, ("", "multisystemic"))[1]
-    cat_en = CAT_JA.get(category, ("", "unknown"))[1]
 
     # Generate clinical signs, diagnosis, treatment, prevention, transmission, prognosis
     # based on category and organ
     clinical_signs = f"Clinical signs of {name.lower()} in {species.lower()} vary by severity and stage; common signs include changes in appetite, behavior, and activity level; organ-specific signs referable to {org_en} system involvement; progressive deterioration if untreated"
     clinical_signs_ja = f"{name_ja}の臨床兆候は重症度と病期により異なる；食欲・行動・活動性の変化が一般的；{ORGAN_JA.get(organ, ('多臓器',))[0]}系の臓器特異的徴候；未治療では進行性悪化"
-    diagnosis = f"Thorough history and clinical examination; species-appropriate diagnostic imaging (radiography, ultrasonography); hematology and biochemistry panel; specific diagnostic tests based on suspected etiology; cytology, histopathology, or culture as indicated"
-    diagnosis_ja = f"詳細な病歴聴取と臨床検査；種に適した画像診断（X線・超音波）；血液学・生化学検査；疑われる病因に基づく特異的検査；必要に応じて細胞診・病理組織検査・培養"
-    transmission = f"Transmission depends on etiology: infectious agents via direct contact, aerosol, fecal-oral, or vector-borne routes; non-infectious conditions are not transmissible"
-    transmission_ja = f"伝播は病因による：感染性病原体は直接接触・エアロゾル・糞口・ベクター経由；非感染性疾患は伝播しない"
+    diagnosis = "Thorough history and clinical examination; species-appropriate diagnostic imaging (radiography, ultrasonography); hematology and biochemistry panel; specific diagnostic tests based on suspected etiology; cytology, histopathology, or culture as indicated"
+    diagnosis_ja = "詳細な病歴聴取と臨床検査；種に適した画像診断（X線・超音波）；血液学・生化学検査；疑われる病因に基づく特異的検査；必要に応じて細胞診・病理組織検査・培養"
+    transmission = "Transmission depends on etiology: infectious agents via direct contact, aerosol, fecal-oral, or vector-borne routes; non-infectious conditions are not transmissible"
+    transmission_ja = "伝播は病因による：感染性病原体は直接接触・エアロゾル・糞口・ベクター経由；非感染性疾患は伝播しない"
     treatment = f"Treatment of {name.lower()} in {species.lower()} involves specific therapy directed at the underlying cause combined with supportive care. Fluid therapy, nutritional support, pain management (species-appropriate analgesics), and environmental optimization are fundamental. Specific treatments depend on diagnosis and may include antimicrobials, antiparasitics, antifungals, surgical intervention, or supportive care. Consultation with an exotic animal veterinarian is recommended."
     treatment_ja = f"{sp['ja']}における{name_ja}の治療は、原因に対する特異的療法と支持療法の組み合わせで行う。輸液療法・栄養支持・疼痛管理（種に適した鎮痛薬）・環境最適化が基本。特異的治療は診断に基づき、抗菌薬・駆虫薬・抗真菌薬・外科的介入・支持療法が含まれうる。エキゾチック動物専門獣医師への相談を推奨。"
-    prevention = f"Prevention includes appropriate husbandry (proper diet, clean environment, optimal temperature/humidity); regular veterinary health checks; quarantine of new animals; stress reduction; species-specific preventive measures as indicated"
-    prevention_ja = f"予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる"
+    prevention = "Prevention includes appropriate husbandry (proper diet, clean environment, optimal temperature/humidity); regular veterinary health checks; quarantine of new animals; stress reduction; species-specific preventive measures as indicated"
+    prevention_ja = "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる"
     prognosis = f"Prognosis for {name.lower()} in {species.lower()} depends on early diagnosis, disease severity, and treatment response. Early intervention generally improves outcomes. Chronic or advanced cases carry a more guarded prognosis."
 
     return {
