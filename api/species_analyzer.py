@@ -93,6 +93,17 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
                 "clinical_signs": dis.clinical_signs_detail or "",
                 "risk_factors": dis.risk_factors or "",
                 "recommended_tests": tests,
+                "transmission": "",
+                "transmission_ja": "",
+                "urgency": dis.urgency or "moderate",
+                "pathophysiology_ja": "",
+                "causes_ja": "",
+                "treatment_ja": "",
+                "prevention_ja": "",
+                "prognosis_ja": "",
+                "clinical_signs_ja": "",
+                "diagnosis": "",
+                "diagnosis_ja": "",
             }
         )
     # 重複する検査を除外
