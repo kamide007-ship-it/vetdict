@@ -4876,6 +4876,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "collapse": {"ja": "虚脱", "en": "Collapse"},
     "conjunctivitis": {"ja": "結膜炎", "en": "Conjunctivitis"},
     "constipation": {"ja": "便秘", "en": "Constipation"},
+    "cloudiness_in_eyes": {"ja": "眼の混濁", "en": "Cloudiness in Eyes"},
     "corneal_cloudiness": {"ja": "角膜混濁", "en": "Corneal Cloudiness"},
     "corneal_ulcer": {"ja": "角膜潰瘍", "en": "Corneal Ulcer"},
     "coughing": {"ja": "咳", "en": "Coughing"},
