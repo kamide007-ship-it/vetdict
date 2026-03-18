@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """Generate enriched rabbit disease data (271 diseases)."""
-import json
-from datetime import datetime
 
 SPECIES = "Rabbit"
 SPECIES_JA = "ウサギ"
