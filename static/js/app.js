@@ -315,7 +315,7 @@ function setDefaultStats(){
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:736,drugs:0},
   ];
   pendingStats={
-    diseases:4806,
+    diseases:6376,
     species:20,
     drugs:175,
     symptoms:52
