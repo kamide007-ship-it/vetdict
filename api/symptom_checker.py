@@ -6666,6 +6666,12 @@ if find_spec("api.dog_disease_enrichment") is not None:
     del _enrich_index, _DOG_ENRICH
 
 # ---------------------------------------------------------------------------
+# Enrich dog diseases from diseases_all_species.json (same as exotic species)
+# ---------------------------------------------------------------------------
+from api.species.helpers import enrich_diseases as _enrich_diseases
+_enrich_diseases(_DISEASE_DB, "Dog")
+
+# ---------------------------------------------------------------------------
 # Fill missing content fields with fallback for unenriched dog diseases
 # ---------------------------------------------------------------------------
 for _d in _DISEASE_DB:
