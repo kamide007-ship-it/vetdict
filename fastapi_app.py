@@ -26,28 +26,57 @@ class DiseaseResponse(BaseModel):
     name_ja: Optional[str] = Field(None, description="Disease name in Japanese")
     species: str = Field(..., description="Target species (Cat, Dog, Horse, etc.)")
     description: str = Field(..., description="Disease description and overview")
+    description_ja: Optional[str] = Field(None, description="Disease description in Japanese")
     pathophysiology: Optional[str] = Field(None, description="Disease pathophysiology mechanism")
     pathophysiology_ja: Optional[str] = Field(None, description="Pathophysiology in Japanese")
+    causes: Optional[str] = Field(None, description="Disease causes and etiology")
+    causes_ja: Optional[str] = Field(None, description="Causes in Japanese")
     transmission: Optional[str] = Field(None, description="Disease transmission methods")
+    transmission_ja: Optional[str] = Field(None, description="Transmission in Japanese")
     clinical_signs: Optional[str] = Field(None, description="Clinical signs and symptoms")
+    clinical_signs_ja: Optional[str] = Field(None, description="Clinical signs in Japanese")
     diagnosis: Optional[str] = Field(None, description="Diagnostic procedures and tests")
+    diagnosis_ja: Optional[str] = Field(None, description="Diagnosis in Japanese")
     treatment: Optional[str] = Field(None, description="Treatment options and protocols")
+    treatment_ja: Optional[str] = Field(None, description="Treatment in Japanese")
+    prevention: Optional[str] = Field(None, description="Prevention measures")
+    prevention_ja: Optional[str] = Field(None, description="Prevention in Japanese")
     prognosis: Optional[str] = Field(None, description="Disease prognosis and outcome")
+    prognosis_ja: Optional[str] = Field(None, description="Prognosis in Japanese")
+    urgency: Optional[str] = Field(None, description="Clinical urgency level (emergency, high, moderate, low)")
+    recommended_tests: Optional[List[str]] = Field(None, description="Recommended diagnostic tests (bilingual)")
 
     class Config:
         json_schema_extra = {
             "example": {
                 "id": "cat_0001",
                 "name": "Feline Leukemia Virus (FeLV)",
-                "name_ja": "Feline Leukemia Virus (FeLV)",
+                "name_ja": "猫白血病ウイルス感染症",
                 "species": "Cat",
                 "description": "FeLV is a retrovirus that affects feline immune system...",
+                "description_ja": "猫白血病ウイルス（FeLV）は猫の免疫系に影響を与えるレトロウイルスです...",
                 "pathophysiology": "FeLV integrates into host genome...",
+                "pathophysiology_ja": "FeLVは宿主ゲノムに組み込まれ...",
+                "causes": "Feline leukemia virus (FeLV) retroviral infection",
+                "causes_ja": "猫白血病ウイルス（FeLV）レトロウイルス感染",
                 "transmission": "Primarily through saliva contact, bites, shared food bowls",
+                "transmission_ja": "主に唾液接触、咬傷、食器の共有を通じて伝播",
                 "clinical_signs": "Lethargy, fever, decreased appetite, pale mucous membranes",
+                "clinical_signs_ja": "元気消失、発熱、食欲不振、粘膜蒼白",
                 "diagnosis": "ELISA test, Western blot, IFA test",
+                "diagnosis_ja": "ELISA検査、ウエスタンブロット、IFA検査",
                 "treatment": "Supportive care, antiretroviral therapy, management of secondary infections",
-                "prognosis": "Guarded to poor, median survival 2-3 years after diagnosis"
+                "treatment_ja": "対症療法、抗レトロウイルス療法、二次感染の管理",
+                "prevention": "Vaccination, testing before introduction, indoor housing",
+                "prevention_ja": "ワクチン接種、導入前検査、室内飼育",
+                "prognosis": "Guarded to poor, median survival 2-3 years after diagnosis",
+                "prognosis_ja": "要注意〜不良、診断後の生存期間中央値2〜3年",
+                "urgency": "high",
+                "recommended_tests": [
+                    "ウイルスPCR検査 (Viral PCR)",
+                    "全血球計算 (CBC)",
+                    "血液生化学検査 (Blood Chemistry Panel)",
+                ],
             }
         }
 
@@ -182,14 +211,12 @@ A comprehensive REST API for accessing veterinary disease information across mul
 - **Statistics**: Get database statistics and species breakdown
 - **Bilingual Content**: Support for English and Japanese disease names
 
-## Species Supported
+## Species Supported (26 species)
 
-- Cat (Feline)
-- Dog (Canine)
-- Horse (Equine)
-- Bird (Avian)
-- Rabbit (Lagomorph)
-- Parakeet (Psittacine)
+- Amphibian, Bird (Avian), Cat (Feline), Chinchilla, Degu, Dog (Canine)
+- Exotic Other, Ferret, Guinea Pig, Hamster, Hedgehog, Horse (Equine)
+- Lizard, Parakeet (Psittacine), Parrot, Rabbit (Lagomorph)
+- Reptile, Snake, Sugar Glider, Tortoise
 
 ## Authentication
 
@@ -203,7 +230,7 @@ No rate limiting is currently enforced. Please use responsibly.
 
 All responses are in JSON format with consistent schema structure.
 """,
-    version="2.1.0",
+    version="2.2.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc",
     openapi_url="/api/openapi.json",
@@ -663,7 +690,7 @@ def custom_openapi():
 
     openapi_schema = get_openapi(
         title="VetDict REST API",
-        version="2.1.0",
+        version="2.2.0",
         description=app.description,
         routes=app.routes,
         contact=app.contact,

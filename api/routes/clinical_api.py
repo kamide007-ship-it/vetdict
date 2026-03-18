@@ -117,15 +117,26 @@ class ClinicalAPIHandler:
         Returns: List of (disease, probability) tuples ranked by probability
         """
         try:
-            symptoms = request.args.get('symptoms', '').split(',')
+            symptoms = [s.strip() for s in request.args.get('symptoms', '').split(',') if s.strip()]
             age = float(request.args.get('age', 5.0))
-            species = request.args.get('species', 'dog')
+            species = request.args.get('species', 'dog').lower()
 
-            # Would call diagnostic engine
+            from api.species_analyzer import analyze_species_symptoms
+            result = analyze_species_symptoms(species, symptoms)
+
+            # Extract differentials from species analyzer output
+            diseases = result.get("suspected_diseases") or result.get("possible_conditions", [])
             differentials = [
-                {"disease": "Pancreatitis", "probability": 0.75},
-                {"disease": "Gastroenteritis", "probability": 0.65},
-                {"disease": "Kidney Disease", "probability": 0.45},
+                {
+                    "disease": d.get("name", ""),
+                    "disease_ja": d.get("name_ja", ""),
+                    "probability": d.get("confidence", d.get("match_percent", 0)) / 100
+                        if d.get("confidence", d.get("match_percent", 0)) > 1
+                        else d.get("confidence", 0),
+                    "urgency": d.get("urgency", ""),
+                    "recommended_tests": d.get("recommended_tests", []),
+                }
+                for d in diseases[:20]
             ]
 
             return {
