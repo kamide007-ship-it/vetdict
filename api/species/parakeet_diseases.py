@@ -4,7 +4,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from . import prevalence_data
-from .helpers import ADVICE, analyze_symptoms_generic
+from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 
 DISEASES: List[Dict[str, Any]] = [
     # --- Viral Diseases ---
@@ -2465,6 +2465,10 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "wet_vent": {"ja": "Wet Vent", "en": "Wet Vent"},
     "white_patches_in_mouth": {"ja": "White Patches In Mouth", "en": "White Patches In Mouth"},
 }
+
+
+# Enrich DISEASES with content from diseases_all_species.json
+enrich_diseases(DISEASES, "Parakeet")
 
 
 def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None) -> Dict[str, Any]:

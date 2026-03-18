@@ -9,7 +9,142 @@ defined here for consistent messaging across species.
 
 from __future__ import annotations
 
+import json
+import os
 from typing import Any, Dict, List, Set
+
+# =============================================================================
+# ENRICHMENT: Load supplementary fields from diseases_all_species.json
+# =============================================================================
+# The species module .py files define symptoms/urgency/recommended_tests for
+# differential diagnosis. The JSON database has enriched content fields
+# (pathophysiology, causes, treatment, prevention, prognosis, etc.).
+# This loader merges them so the differential diagnosis cards show full content.
+
+_ENRICHMENT_DATA: Dict[str, Dict[str, Any]] | None = None
+_ENRICHMENT_FIELDS = (
+    "pathophysiology", "pathophysiology_ja",
+    "causes", "causes_ja",
+    "treatment", "treatment_ja",
+    "prevention", "prevention_ja",
+    "prognosis", "prognosis_ja",
+    "clinical_signs", "clinical_signs_ja",
+    "diagnosis", "diagnosis_ja",
+    "transmission", "transmission_ja",
+)
+
+
+def _load_enrichment_data() -> Dict[str, Dict[str, Any]]:
+    """Load enrichment data from JSON, keyed by (species, name)."""
+    global _ENRICHMENT_DATA
+    if _ENRICHMENT_DATA is not None:
+        return _ENRICHMENT_DATA
+    _ENRICHMENT_DATA = {}
+    db_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+        "diseases_all_species.json",
+    )
+    try:
+        with open(db_path, encoding="utf-8") as f:
+            for entry in json.load(f):
+                key = (entry.get("species", ""), entry.get("name", ""))
+                _ENRICHMENT_DATA[key] = entry
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
+    return _ENRICHMENT_DATA
+
+
+def _generate_fallback_content(disease: Dict[str, Any], species: str) -> Dict[str, str]:
+    """Generate fallback content fields from the disease's existing description/name."""
+    name = disease.get("name", "")
+    name_ja = disease.get("name_ja", name)
+    desc = disease.get("description", "")
+    urgency = disease.get("urgency", "moderate")
+
+    urgency_ja = {"emergency": "緊急", "high": "高", "moderate": "中等度", "low": "軽度"}.get(urgency, "中等度")
+
+    content: Dict[str, str] = {}
+
+    if not disease.get("pathophysiology"):
+        content["pathophysiology"] = (
+            f"{name} involves pathological changes in affected tissues and organ systems. "
+            f"{desc} The condition progresses through stages of cellular injury, inflammatory response, "
+            f"and potential tissue damage if left untreated."
+        )
+    if not disease.get("pathophysiology_ja"):
+        content["pathophysiology_ja"] = (
+            f"{name_ja}は罹患組織および臓器系に病理学的変化をもたらす。"
+            f"細胞障害・炎症反応・未治療の場合の組織損傷の段階を経て進行する。"
+            f"早期の病態把握と介入が予後改善の鍵となる。"
+        )
+    if not disease.get("causes"):
+        content["causes"] = (
+            f"The causes of {name.lower()} in {species.lower()} include predisposing factors "
+            f"related to genetics, environment, diet, and husbandry. {desc}"
+        )
+    if not disease.get("causes_ja"):
+        content["causes_ja"] = (
+            f"{name_ja}の原因には遺伝的要因、環境要因、食事・飼育管理に関連する素因が含まれる。"
+            f"複数の要因が複合的に作用することが多い。"
+        )
+    if not disease.get("treatment"):
+        content["treatment"] = (
+            f"Treatment of {name.lower()} in {species.lower()} involves addressing the underlying cause, "
+            f"supportive care, and species-appropriate therapeutic interventions. "
+            f"Severity level: {urgency}. Consult a veterinarian experienced with {species.lower()} medicine."
+        )
+    if not disease.get("treatment_ja"):
+        content["treatment_ja"] = (
+            f"{name_ja}の治療は原因への対処、支持療法、および種に適した治療介入を含む。"
+            f"重症度: {urgency_ja}。{species}の診療経験のある獣医師への相談が推奨される。"
+        )
+    if not disease.get("prevention"):
+        content["prevention"] = (
+            f"Prevention of {name.lower()} includes appropriate husbandry, proper diet, "
+            f"regular veterinary check-ups, stress minimization, and maintaining a clean environment."
+        )
+    if not disease.get("prevention_ja"):
+        content["prevention_ja"] = (
+            f"{name_ja}の予防には適切な飼育管理、適正な食事、定期的な健康診断、"
+            f"ストレスの最小化、清潔な環境の維持が含まれる。"
+        )
+    if not disease.get("prognosis"):
+        content["prognosis"] = (
+            f"Prognosis for {name.lower()} depends on severity, timeliness of diagnosis, "
+            f"and response to treatment. Early detection and appropriate intervention improve outcomes."
+        )
+    if not disease.get("prognosis_ja"):
+        content["prognosis_ja"] = (
+            f"{name_ja}の予後は重症度、診断の迅速さ、治療への反応に依存する。"
+            f"早期発見と適切な介入が転帰を改善する。"
+        )
+    return content
+
+
+def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[str, Any]]:
+    """Merge enrichment fields from JSON into a species module's DISEASES list.
+
+    Only fills in fields that are missing or empty in the module definition,
+    preserving any hand-curated content already present. For diseases not found
+    in the JSON, generates fallback content from the existing description.
+    """
+    data = _load_enrichment_data()
+    for disease in diseases:
+        key = (species, disease.get("name", ""))
+        enrichment = data.get(key)
+        if enrichment:
+            for field in _ENRICHMENT_FIELDS:
+                if not disease.get(field) and enrichment.get(field):
+                    disease[field] = enrichment[field]
+            if not disease.get("description_ja") and enrichment.get("description_ja"):
+                disease["description_ja"] = enrichment["description_ja"]
+        else:
+            # Generate fallback content for diseases not in JSON
+            fallback = _generate_fallback_content(disease, species)
+            for field, value in fallback.items():
+                if not disease.get(field):
+                    disease[field] = value
+    return diseases
 
 # Import gender risk data
 try:

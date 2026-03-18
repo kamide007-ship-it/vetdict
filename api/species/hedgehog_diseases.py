@@ -10,7 +10,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from . import prevalence_data
-from .helpers import ADVICE, analyze_symptoms_generic
+from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 
 DISEASES: List[Dict[str, Any]] = [
     # ──────────────────────────────────────────────
@@ -1543,6 +1543,10 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "vocalization": {"ja": "Vocalization", "en": "Vocalization"},
     "wound_infection": {"ja": "Wound Infection", "en": "Wound Infection"},
 }
+
+
+# Enrich DISEASES with content from diseases_all_species.json
+enrich_diseases(DISEASES, "Hedgehog")
 
 
 def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None) -> Dict[str, Any]:
