@@ -6669,6 +6669,7 @@ if find_spec("api.dog_disease_enrichment") is not None:
 # Enrich dog diseases from diseases_all_species.json (same as exotic species)
 # ---------------------------------------------------------------------------
 from api.species.helpers import enrich_diseases as _enrich_diseases
+
 _enrich_diseases(_DISEASE_DB, "Dog")
 
 # ---------------------------------------------------------------------------

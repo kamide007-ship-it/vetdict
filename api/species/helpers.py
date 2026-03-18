@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Set
 # This loader merges them so the differential diagnosis cards show full content.
 
 _ENRICHMENT_DATA: Dict[str, Dict[str, Any]] | None = None
+_SUPPLEMENTARY_DATA: Dict[str, List[Dict[str, Any]]] | None = None
 _ENRICHMENT_FIELDS = (
     "pathophysiology", "pathophysiology_ja",
     "causes", "causes_ja",
@@ -136,6 +137,30 @@ def _load_enrichment_data() -> Dict[str, Dict[str, Any]]:
     except (FileNotFoundError, json.JSONDecodeError):
         pass
     return _ENRICHMENT_DATA
+
+
+def _load_supplementary_data() -> Dict[str, List[Dict[str, Any]]]:
+    """Load supplementary diseases (JSON-only diseases with inferred symptom sets).
+
+    Returns a dict keyed by species name → list of disease dicts.
+    """
+    global _SUPPLEMENTARY_DATA
+    if _SUPPLEMENTARY_DATA is not None:
+        return _SUPPLEMENTARY_DATA
+    _SUPPLEMENTARY_DATA = {}
+    supp_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "data",
+        "supplementary_diseases.json",
+    )
+    try:
+        with open(supp_path, encoding="utf-8") as f:
+            for entry in json.load(f):
+                sp = entry.get("species", "")
+                _SUPPLEMENTARY_DATA.setdefault(sp, []).append(entry)
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
+    return _SUPPLEMENTARY_DATA
 
 
 def _find_enrichment(species: str, disease_name: str) -> Dict[str, Any] | None:
@@ -262,8 +287,21 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
     preserving any hand-curated content already present.  Uses multi-level
     matching (exact → normalized → cross-species) before falling back to
     generated template content.
+
+    Also appends supplementary diseases (from supplementary_diseases.json) that
+    exist in the JSON database but not yet in the module's DISEASES list, so
+    they can participate in differential diagnosis.
     """
     _load_enrichment_data()  # ensure indices are built
+
+    # Append supplementary diseases that are not already in the module
+    supp = _load_supplementary_data()
+    existing_names: Set[str] = {d.get("name", "").lower() for d in diseases}
+    for sd in supp.get(species, []):
+        if sd.get("name", "").lower() not in existing_names:
+            diseases.append(sd)
+            existing_names.add(sd.get("name", "").lower())
+
     for disease in diseases:
         enrichment = _find_enrichment(species, disease.get("name", ""))
         if enrichment:
