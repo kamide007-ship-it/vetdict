@@ -34,12 +34,87 @@ _ENRICHMENT_FIELDS = (
 )
 
 
+import re as _re
+
+# Species prefix patterns used for normalized matching
+_SPECIES_PREFIXES = (
+    "canine ", "feline ", "equine ", "avian ", "porcine ",
+    "bovine ", "ovine ", "caprine ",
+)
+
+
+def _normalize_disease_name(name: str) -> str:
+    """Normalize a disease name for fuzzy matching.
+
+    Strips parenthetical content, species prefixes, and normalises whitespace/case.
+    """
+    n = name.lower().strip()
+    # Remove parenthetical content: "(Bloat)", "(URI)", "(HCM)" etc.
+    n = _re.sub(r"\s*\([^)]*\)", "", n)
+    # Remove species prefixes
+    for prefix in _SPECIES_PREFIXES:
+        if n.startswith(prefix):
+            n = n[len(prefix):]
+    # Remove slash-separated alternatives: "Shell Fracture / Trauma" -> "shell fracture"
+    if " / " in n:
+        n = n.split(" / ")[0]
+    # Collapse whitespace
+    n = _re.sub(r"\s+", " ", n).strip()
+    return n
+
+
+def _extract_all_name_variants(name: str) -> List[str]:
+    """Generate multiple normalized variants for a disease name.
+
+    Handles parenthetical swaps like 'Ringworm (Dermatophytosis)' producing
+    both 'ringworm' and 'dermatophytosis'.
+    """
+    variants: List[str] = [_normalize_disease_name(name)]
+    lower = name.lower().strip()
+
+    # Extract parenthetical content and use it as an alternative name
+    paren_match = _re.search(r"^([^(]+)\(([^)]+)\)", lower)
+    if paren_match:
+        main_part = paren_match.group(1).strip()
+        paren_part = paren_match.group(2).strip()
+        # Remove species prefixes from both
+        for prefix in _SPECIES_PREFIXES:
+            if main_part.startswith(prefix):
+                main_part = main_part[len(prefix):]
+            if paren_part.startswith(prefix):
+                paren_part = paren_part[len(prefix):]
+        # "Ringworm (Dermatophytosis)" -> also try "dermatophytosis"
+        variants.append(paren_part)
+        # "Ringworm (Dermatophytosis)" -> also try "dermatophytosis (ringworm)"
+        variants.append(f"{paren_part} ({main_part})")
+
+    # Slash alternatives: "Shell Fracture / Trauma" -> also keep full without parens
+    if " / " in lower:
+        parts = lower.split(" / ")
+        for part in parts:
+            part = part.strip()
+            for prefix in _SPECIES_PREFIXES:
+                if part.startswith(prefix):
+                    part = part[len(prefix):]
+            variants.append(part)
+
+    return list(dict.fromkeys(variants))  # dedupe, preserve order
+
+
+# Secondary index for normalized lookups: {(species, normalized_name): entry}
+_ENRICHMENT_NORMALIZED: Dict[str, Dict[str, Any]] | None = None
+# Index for "Multiple"-species entries (cross-species diseases)
+_ENRICHMENT_MULTI: Dict[str, Dict[str, Any]] | None = None
+
+
 def _load_enrichment_data() -> Dict[str, Dict[str, Any]]:
     """Load enrichment data from JSON, keyed by (species, name)."""
-    global _ENRICHMENT_DATA
+    global _ENRICHMENT_DATA, _ENRICHMENT_NORMALIZED, _ENRICHMENT_MULTI
     if _ENRICHMENT_DATA is not None:
         return _ENRICHMENT_DATA
     _ENRICHMENT_DATA = {}
+    _ENRICHMENT_NORMALIZED = {}
+    _ENRICHMENT_MULTI = {}
     db_path = os.path.join(
         os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
         "diseases_all_species.json",
@@ -47,11 +122,70 @@ def _load_enrichment_data() -> Dict[str, Dict[str, Any]]:
     try:
         with open(db_path, encoding="utf-8") as f:
             for entry in json.load(f):
-                key = (entry.get("species", ""), entry.get("name", ""))
-                _ENRICHMENT_DATA[key] = entry
+                sp = entry.get("species", "")
+                nm = entry.get("name", "")
+                _ENRICHMENT_DATA[(sp, nm)] = entry
+                # Build normalized index with all variants
+                for variant in _extract_all_name_variants(nm):
+                    key = (sp, variant)
+                    if key not in _ENRICHMENT_NORMALIZED:
+                        _ENRICHMENT_NORMALIZED[key] = entry
+                    # Index "Multiple" species entries by normalized name
+                    if sp == "Multiple" and variant not in _ENRICHMENT_MULTI:
+                        _ENRICHMENT_MULTI[variant] = entry
     except (FileNotFoundError, json.JSONDecodeError):
         pass
     return _ENRICHMENT_DATA
+
+
+def _find_enrichment(species: str, disease_name: str) -> Dict[str, Any] | None:
+    """Find enrichment data for a disease using multi-level matching.
+
+    Matching order:
+    1. Exact (species, name)
+    2. Normalized (species, normalized_name)
+    3. Cross-species "Multiple" by normalized name
+    """
+    data = _load_enrichment_data()
+
+    # Level 1: exact match
+    entry = data.get((species, disease_name))
+    if entry:
+        return entry
+
+    # Level 2: normalized match within same species (try all variants)
+    if _ENRICHMENT_NORMALIZED is not None:
+        for variant in _extract_all_name_variants(disease_name):
+            entry = _ENRICHMENT_NORMALIZED.get((species, variant))
+            if entry:
+                return entry
+
+    # Level 3: substring / containment match within same species
+    # e.g. "Adrenal Disease" matches "Adrenal Gland Disease"
+    # Require the shorter string to be at least 60% of the longer to avoid spurious matches.
+    if _ENRICHMENT_NORMALIZED is not None:
+        query_variants = _extract_all_name_variants(disease_name)
+        species_entries = [
+            (k[1], v) for k, v in _ENRICHMENT_NORMALIZED.items() if k[0] == species
+        ]
+        for variant in query_variants:
+            if len(variant) < 8:
+                continue  # skip very short variants to avoid false matches
+            for norm_name, entry in species_entries:
+                if len(norm_name) < 8:
+                    continue
+                shorter, longer = (variant, norm_name) if len(variant) <= len(norm_name) else (norm_name, variant)
+                if shorter in longer and len(shorter) / len(longer) >= 0.6:
+                    return entry
+
+    # Level 4: cross-species "Multiple" entries (try all variants)
+    if _ENRICHMENT_MULTI is not None:
+        for variant in _extract_all_name_variants(disease_name):
+            entry = _ENRICHMENT_MULTI.get(variant)
+            if entry:
+                return entry
+
+    return None
 
 
 def _generate_fallback_content(disease: Dict[str, Any], species: str) -> Dict[str, str]:
@@ -125,19 +259,21 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
     """Merge enrichment fields from JSON into a species module's DISEASES list.
 
     Only fills in fields that are missing or empty in the module definition,
-    preserving any hand-curated content already present. For diseases not found
-    in the JSON, generates fallback content from the existing description.
+    preserving any hand-curated content already present.  Uses multi-level
+    matching (exact → normalized → cross-species) before falling back to
+    generated template content.
     """
-    data = _load_enrichment_data()
+    _load_enrichment_data()  # ensure indices are built
     for disease in diseases:
-        key = (species, disease.get("name", ""))
-        enrichment = data.get(key)
+        enrichment = _find_enrichment(species, disease.get("name", ""))
         if enrichment:
             for field in _ENRICHMENT_FIELDS:
                 if not disease.get(field) and enrichment.get(field):
                     disease[field] = enrichment[field]
             if not disease.get("description_ja") and enrichment.get("description_ja"):
                 disease["description_ja"] = enrichment["description_ja"]
+            if not disease.get("name_ja") and enrichment.get("name_ja"):
+                disease["name_ja"] = enrichment["name_ja"]
         else:
             # Generate fallback content for diseases not in JSON
             fallback = _generate_fallback_content(disease, species)
