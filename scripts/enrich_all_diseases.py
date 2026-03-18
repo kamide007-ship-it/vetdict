@@ -8,8 +8,6 @@ prevention, and prognosis content in both English and Japanese.
 
 import json
 import os
-import re
-import sys
 from collections import Counter
 from datetime import datetime
 
@@ -990,7 +988,7 @@ def main():
             skipped_count += 1
 
     print(f"Enriched: {enriched_count}, Skipped (already rich): {skipped_count}")
-    print(f"\nCategory distribution:")
+    print("\nCategory distribution:")
     for cat, cnt in category_counts.most_common():
         print(f"  {cat:<20}: {cnt}")
 
