@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+"""Generate enriched rabbit disease data (271 diseases)."""
+import json
+from datetime import datetime
+
+SPECIES = "Rabbit"
+SPECIES_JA = "ウサギ"
+
+# 271 rabbit diseases organized by organ system
+# Each tuple: (name, name_ja, description, description_ja, pathophysiology, pathophysiology_ja, causes, causes_ja, clinical_signs, clinical_signs_ja, diagnosis, diagnosis_ja, transmission, transmission_ja, treatment, treatment_ja, prevention, prevention_ja, prognosis, prognosis_ja)
+
+DISEASES = [
+    # === VIRAL DISEASES (1-15) ===
+    {
+        "name": "Rabbit Hemorrhagic Disease (RHD)",
+        "name_ja": "ウサギ出血病（RHD）",
+        "description": "A highly contagious and often fatal viral disease caused by a calicivirus, characterized by acute hepatic necrosis and disseminated intravascular coagulation.",
+        "description_ja": "カリシウイルスによる高度伝染性・致死性のウイルス疾患で、急性肝壊死と播種性血管内凝固を特徴とする。",
+        "pathophysiology": "RHD virus (RHDV) targets hepatocytes via histo-blood group antigens on the liver cell surface. Viral replication causes massive hepatocellular necrosis, triggering release of tissue factor and initiating disseminated intravascular coagulation (DIC). Consumption of clotting factors leads to widespread hemorrhage in multiple organs including lungs, kidneys, and spleen. The rapid onset of hepatic failure results in hyperammonemia and hepatic encephalopathy.",
+        "pathophysiology_ja": "RHDウイルス（RHDV）は肝細胞表面の組織血液型抗原を介して肝細胞に侵入する。ウイルスの複製により大規模な肝細胞壊死が引き起こされ、組織因子の放出により播種性血管内凝固（DIC）が開始される。凝固因子の消費により肺、腎臓、脾臓を含む多臓器で広範な出血が生じる。急速な肝不全により高アンモニア血症と肝性脳症が発生する。",
+        "causes": "Caused by Rabbit Hemorrhagic Disease Virus (RHDV), a Lagovirus in the Caliciviridae family. RHDV1 and RHDV2 are the main pathogenic strains. Transmitted via direct contact with infected rabbits, fomites, contaminated feed/water, and insect vectors (flies, mosquitoes). The virus is extremely resistant in the environment, surviving months at room temperature.",
+        "causes_ja": "カリシウイルス科ラゴウイルス属のウサギ出血病ウイルス（RHDV）が原因。RHDV1とRHDV2が主な病原株。感染ウサギとの直接接触、汚染された飼料・水、ハエ・蚊などの昆虫ベクターを介して伝播。ウイルスは環境中で極めて安定で、室温で数ヶ月生存する。",
+        "clinical_signs": "Peracute: sudden death without premonitory signs; Acute: fever (>40.5°C), lethargy, anorexia, dyspnea, epistaxis, bloody nasal discharge, convulsions, opisthotonus; Subacute: jaundice, weight loss, lethargy progressing over 1-2 weeks",
+        "clinical_signs_ja": "超急性型：前駆症状なく突然死；急性型：発熱（>40.5°C）、沈鬱、食欲廃絶、呼吸困難、鼻出血、血性鼻汁、痙攣、後弓反張；亜急性型：黄疸、体重減少、1-2週間にわたる進行性の沈鬱",
+        "diagnosis": "Postmortem examination showing hepatic necrosis and hemorrhage; RT-PCR for RHDV RNA detection; ELISA for viral antigen detection; Histopathology of liver showing coagulative necrosis; Hemagglutination test",
+        "diagnosis_ja": "剖検での肝壊死・出血所見；RHDV RNA検出のためのRT-PCR；ウイルス抗原検出のためのELISA；肝臓の凝固壊死を示す病理組織検査；血球凝集試験",
+        "transmission": "Direct contact with infected or carrier rabbits; Fomite transmission via contaminated cages, food, bedding; Insect vectors (flies, fleas, mosquitoes); Contaminated feed, water, and hay; Aerosol transmission over short distances",
+        "transmission_ja": "感染または保菌ウサギとの直接接触；汚染されたケージ・飼料・敷料を介した媒介物伝播；昆虫ベクター（ハエ、ノミ、蚊）；汚染された飼料・水・牧草；近距離でのエアロゾル伝播",
+        "treatment": "No specific antiviral treatment exists. Supportive care includes aggressive IV fluid therapy (10 mL/kg/hr crystalloids), hepatoprotectants (SAMe 20 mg/kg PO q24h, silymarin 4-8 mg/kg PO q8h), vitamin K1 (1-2 mg/kg SC/IM q12h) for coagulopathy, broad-spectrum antibiotics for secondary infections, and nutritional support via syringe feeding. Plasma transfusion may be considered for severe DIC.",
+        "treatment_ja": "特異的な抗ウイルス療法は存在しない。支持療法として積極的な静脈内輸液（晶質液10 mL/kg/hr）、肝保護剤（SAMe 20 mg/kg 経口 1日1回、シリマリン4-8 mg/kg 経口 8時間毎）、凝固障害に対するビタミンK1（1-2 mg/kg 皮下/筋注 12時間毎）、二次感染予防の広域抗菌薬、シリンジ給餌による栄養補給を行う。重症DICには血漿輸血を検討する。",
+        "prevention": "Vaccination with RHDV1 and RHDV2 vaccines (initial dose at 10 weeks, booster at 12 months, then annually); Strict biosecurity measures including quarantine of new rabbits for 14 days; Insect control; Disinfection with 10% bleach or potassium peroxymonosulfate; Avoid contact with wild rabbits",
+        "prevention_ja": "RHDV1およびRHDV2ワクチン接種（初回10週齢、12ヶ月後に追加接種、以後年1回）；新規ウサギの14日間検疫を含む厳格なバイオセキュリティ対策；昆虫駆除；10%次亜塩素酸ナトリウムまたはペルオキソ一硫酸カリウムによる消毒；野生ウサギとの接触回避",
+        "prognosis": "Peracute and acute forms carry a mortality rate of 70-90% in unvaccinated rabbits. RHDV2 has a somewhat lower mortality (5-70%) but affects a wider age range including kittens. Rabbits that survive acute infection may develop chronic hepatitis. Vaccinated rabbits have excellent prognosis with near-complete protection.",
+        "prognosis_ja": "超急性・急性型では未接種ウサギの死亡率は70-90%。RHDV2はやや低い死亡率（5-70%）だが、子ウサギを含むより広い年齢層に影響する。急性感染を生存したウサギは慢性肝炎を発症する可能性がある。ワクチン接種済みウサギの予後はほぼ完全な防御により良好。"
+    },
+    {
+        "name": "Myxomatosis",
+        "name_ja": "粘液腫症",
+        "description": "A severe viral disease caused by Myxoma virus, characterized by mucinous skin tumors, conjunctivitis, and high mortality in European rabbits.",
+        "description_ja": "粘液腫ウイルスによる重篤なウイルス疾患で、粘液性皮膚腫瘍、結膜炎、ヨーロッパウサギでの高い致死率を特徴とする。",
+        "pathophysiology": "Myxoma virus, a Leporipoxvirus, replicates initially at the inoculation site in dermal cells, then spreads via lymphatics to regional lymph nodes. Viremia disseminates the virus to secondary sites including eyelids, nose, ears, and genitalia. The virus induces proliferation of undifferentiated mesenchymal cells (myxoma cells) with extensive mucinous edema. Immunosuppression via T-lymphocyte depletion facilitates secondary bacterial infections.",
+        "pathophysiology_ja": "レポリポックスウイルスである粘液腫ウイルスは接種部位の真皮細胞で初期複製し、リンパ管を介して所属リンパ節に拡散する。ウイルス血症により眼瞼、鼻、耳、生殖器などの二次部位にウイルスが播種される。未分化間葉系細胞（粘液腫細胞）の増殖と広範な粘液性浮腫を誘導する。Tリンパ球の枯渇による免疫抑制が二次性細菌感染を促進する。",
+        "causes": "Caused by Myxoma virus (genus Leporipoxvirus, family Poxviridae). Transmitted primarily by biting arthropod vectors including mosquitoes (Aedes, Anopheles, Culex spp.) and rabbit fleas (Spilopsyllus cuniculi). Direct contact with infected rabbits and fomites also contribute to spread. Wild rabbits (Sylvilagus spp.) serve as reservoir hosts with minimal disease.",
+        "causes_ja": "粘液腫ウイルス（レポリポックスウイルス属、ポックスウイルス科）が原因。主に蚊（Aedes、Anopheles、Culex属）やウサギノミ（Spilopsyllus cuniculi）などの吸血節足動物ベクターにより伝播。感染ウサギとの直接接触や媒介物も拡散に寄与。野生ウサギ（Sylvilagus属）は最小限の発症で保有宿主となる。",
+        "clinical_signs": "Nodular form: subcutaneous myxomatous swellings on head, ears, eyelids, genitalia; Severe blepharoconjunctivitis with purulent discharge; Periorbital and perinasal edema; Anogenital swelling; Secondary bacterial pneumonia; Anorexia, lethargy, fever (>40°C)",
+        "clinical_signs_ja": "結節型：頭部、耳、眼瞼、生殖器の皮下粘液腫性腫脹；膿性分泌物を伴う重度の眼瞼結膜炎；眼窩周囲・鼻周囲の浮腫；肛門生殖器の腫脹；二次性細菌性肺炎；食欲不振、沈鬱、発熱（>40°C）",
+        "diagnosis": "Clinical presentation with characteristic myxomatous lesions; Electron microscopy showing poxvirus particles; PCR for viral DNA detection; Virus isolation on RK-13 cells; Histopathology showing myxomatous stellate cells in mucinous stroma; Serology (ELISA, complement fixation)",
+        "diagnosis_ja": "特徴的な粘液腫性病変による臨床診断；ポックスウイルス粒子を示す電子顕微鏡検査；ウイルスDNA検出のためのPCR；RK-13細胞でのウイルス分離；粘液性間質中の粘液腫性星状細胞を示す病理組織検査；血清学（ELISA、補体結合反応）",
+        "transmission": "Arthropod vectors: mosquitoes and rabbit fleas (primary route); Direct contact with infected rabbits; Fomite transmission via contaminated objects; Aerosol transmission possible at close range",
+        "transmission_ja": "節足動物ベクター：蚊およびウサギノミ（主要経路）；感染ウサギとの直接接触；汚染物を介した媒介物伝播；近距離でのエアロゾル伝播の可能性",
+        "treatment": "No specific antiviral therapy. Supportive care includes subcutaneous fluids (30-50 mL/kg/day), syringe feeding with Critical Care (10-20 mL/kg q8-12h), broad-spectrum antibiotics (enrofloxacin 5-10 mg/kg PO/SC q12h) for secondary infections, NSAID analgesia (meloxicam 0.3-0.6 mg/kg PO q24h), and topical ophthalmic treatment (fusidic acid eye drops q8-12h). Gentle debridement of crusted lesions.",
+        "treatment_ja": "特異的な抗ウイルス療法はない。支持療法として皮下輸液（30-50 mL/kg/日）、クリティカルケアによるシリンジ給餌（10-20 mL/kg 8-12時間毎）、二次感染に対する広域抗菌薬（エンロフロキサシン5-10 mg/kg 経口/皮下 12時間毎）、NSAID鎮痛（メロキシカム0.3-0.6 mg/kg 経口 1日1回）、局所眼科治療（フシジン酸点眼 8-12時間毎）。痂皮病変の愛護的デブリードマン。",
+        "prevention": "Vaccination with myxomatosis vaccine (Nobivac Myxo-RHD Plus or equivalent; initial dose at 5 weeks, annual boosters); Mosquito and flea control (environmental insecticides, insect-proof housing); Quarantine of new rabbits; Avoid contact with wild rabbits; Use of insect netting on outdoor enclosures",
+        "prevention_ja": "粘液腫症ワクチン接種（Nobivac Myxo-RHD Plus等；初回5週齢、年1回追加接種）；蚊・ノミ駆除（環境殺虫剤、防虫住居）；新規ウサギの検疫；野生ウサギとの接触回避；屋外エンクロージャーへの防虫ネット使用",
+        "prognosis": "Classic virulent strains carry >99% mortality in naive European rabbits. Attenuated strains in endemic areas have 30-50% mortality. Amyxomatous (respiratory) form has near 100% mortality. With intensive supportive care, some rabbits with milder strains may survive. Recovered rabbits develop lifelong immunity.",
+        "prognosis_ja": "古典的強毒株ではナイーブなヨーロッパウサギの死亡率は99%以上。流行地域の弱毒株では死亡率30-50%。無粘液腫型（呼吸器型）はほぼ100%の致死率。集中的な支持療法により軽度の株に感染した一部のウサギは生存可能。回復したウサギは終生免疫を獲得する。"
+    },
+    {
+        "name": "Encephalitozoonosis",
+        "name_ja": "エンセファリトゾーン症",
+        "description": "A chronic microsporidial infection caused by Encephalitozoon cuniculi, affecting the brain, kidneys, and eyes.",
+        "description_ja": "Encephalitozoon cuniculiによる慢性微胞子虫感染症で、脳、腎臓、眼に影響を及ぼす。",
+        "pathophysiology": "E. cuniculi spores are ingested or inhaled, penetrate intestinal epithelium, and disseminate hematogenously to target organs. The organism replicates intracellularly within parasitophorous vacuoles, primarily in renal tubular epithelial cells, brain neurons and glial cells, and lens epithelial cells. Granulomatous inflammation develops around ruptured host cells. In the brain, nonsuppurative meningoencephalitis with perivascular cuffing causes vestibular dysfunction. Chronic renal infection leads to interstitial nephritis and progressive renal fibrosis.",
+        "pathophysiology_ja": "E. cuniculi胞子は経口または吸入により侵入し、腸上皮を貫通して血行性に標的臓器に播種される。寄生体胞内で細胞内増殖し、主に腎尿細管上皮細胞、脳神経細胞・グリア細胞、水晶体上皮細胞を標的とする。破裂した宿主細胞周囲に肉芽腫性炎症が発生する。脳では血管周囲リンパ球浸潤を伴う非化膿性髄膜脳炎が前庭機能障害を引き起こす。慢性腎感染は間質性腎炎と進行性腎線維症をもたらす。",
+        "causes": "Caused by Encephalitozoon cuniculi, an obligate intracellular microsporidian parasite. Transmitted primarily via ingestion of spore-contaminated urine. Transplacental transmission occurs in utero. Spores are shed in urine for up to 3 months post-infection and survive in the environment for weeks. Immunosuppression may reactivate latent infections. Seroprevalence in domestic rabbits ranges from 30-75%.",
+        "causes_ja": "偏性細胞内微胞子虫寄生体であるEncephalitozoon cuniculiが原因。主に胞子汚染尿の経口摂取により伝播。経胎盤感染も子宮内で発生する。胞子は感染後最大3ヶ月間尿中に排泄され、環境中で数週間生存する。免疫抑制により潜伏感染が再活性化する可能性がある。家庭ウサギの血清有病率は30-75%。",
+        "clinical_signs": "Neurological: head tilt, nystagmus (horizontal or rotary), ataxia, circling, rolling; Renal: polyuria, polydipsia, weight loss, urinary incontinence; Ocular: phacoclastic uveitis, lens rupture, hypopyon, cataracts; May be subclinical in immunocompetent rabbits",
+        "clinical_signs_ja": "神経症状：斜頸、眼振（水平性または回転性）、運動失調、旋回、転倒；腎症状：多尿、多飲、体重減少、尿失禁；眼症状：水晶体崩壊性ぶどう膜炎、水晶体破裂、前房蓄膿、白内障；免疫正常ウサギでは無症候性の場合あり",
+        "diagnosis": "Serology (ELISA, IFA) for anti-E. cuniculi IgG and IgM antibodies; PCR of urine for spore DNA detection; Urinalysis showing proteinuria and isosthenuria; MRI showing brain lesions; Postmortem histopathology showing granulomatous inflammation; Carbolfuchsin or Gram staining of urine sediment",
+        "diagnosis_ja": "抗E. cuniculi IgGおよびIgM抗体の血清学検査（ELISA、IFA）；尿中胞子DNA検出のためのPCR；蛋白尿・等張尿を示す尿検査；脳病変を示すMRI；肉芽腫性炎症を示す剖検病理組織検査；尿沈渣のカルボールフクシンまたはグラム染色",
+        "transmission": "Oral ingestion of spore-contaminated urine; Transplacental (vertical) transmission; Inhalation of aerosolized spores; Environmental contamination (spores survive weeks at room temperature)",
+        "transmission_ja": "胞子汚染尿の経口摂取；経胎盤（垂直）感染；エアロゾル化胞子の吸入；環境汚染（胞子は室温で数週間生存）",
+        "treatment": "Fenbendazole 20 mg/kg PO q24h for 28 days (primary antiparasitic); Meloxicam 0.3-0.6 mg/kg PO q24h for inflammation and pain; Meclizine 2-12 mg/kg PO q24h for vestibular signs; Supportive care including assisted feeding, padded enclosure to prevent injury during rolling episodes; For phacoclastic uveitis: topical prednisolone acetate 1% q6-8h and atropine 1% q12-24h; Enucleation for severe lens rupture",
+        "treatment_ja": "フェンベンダゾール20 mg/kg 経口 1日1回 28日間（主要駆虫薬）；メロキシカム0.3-0.6 mg/kg 経口 1日1回（抗炎症・鎮痛）；メクリジン2-12 mg/kg 経口 1日1回（前庭症状）；補助給餌、転倒時の損傷予防のためのパッド付きエンクロージャーなどの支持療法；水晶体崩壊性ぶどう膜炎：プレドニゾロン酢酸エステル1%点眼 6-8時間毎、アトロピン1%点眼 12-24時間毎；重度水晶体破裂には眼球摘出",
+        "prevention": "Hygiene: regular cage cleaning and disinfection (10% bleach effective); Minimize urine contamination of food and water; Quarantine new rabbits and test serology; Reduce stress to prevent reactivation of latent infections; Avoid overcrowding; No vaccine available",
+        "prevention_ja": "衛生管理：定期的なケージ清掃・消毒（10%次亜塩素酸ナトリウムが有効）；飼料・水の尿汚染を最小化；新規ウサギの検疫と血清学検査；潜伏感染の再活性化防止のためストレス軽減；過密飼育の回避；ワクチンは利用不可",
+        "prognosis": "Variable depending on organ involvement and severity. Mild vestibular signs may resolve with treatment over 2-8 weeks, though residual head tilt often persists. Renal disease is progressive and may lead to chronic kidney failure. Phacoclastic uveitis requires lifelong management or enucleation. Early treatment with fenbendazole significantly improves outcomes. Subclinical carriers may never develop disease.",
+        "prognosis_ja": "臓器障害と重症度により変動。軽度の前庭症状は治療により2-8週間で改善する場合があるが、残存する斜頸が持続することが多い。腎疾患は進行性で慢性腎不全に至る可能性がある。水晶体崩壊性ぶどう膜炎は終生管理または眼球摘出が必要。フェンベンダゾールによる早期治療で予後は大幅に改善。無症候性保菌者は発症しない場合がある。"
+    },
+    {
+        "name": "Rabbit Papillomatosis",
+        "name_ja": "ウサギ乳頭腫症",
+        "description": "Viral skin disease caused by Shope papilloma virus (cottontail rabbit papilloma virus), producing keratinous growths on the skin.",
+        "description_ja": "ショープ乳頭腫ウイルス（ワタオウサギ乳頭腫ウイルス）による皮膚ウイルス疾患で、皮膚に角質性増殖物を生じる。",
+        "pathophysiology": "The Shope papilloma virus (Kappapapillomavirus 2) infects basal keratinocytes through skin abrasions. Viral E6 and E7 oncoproteins interfere with p53 and retinoblastoma protein, driving uncontrolled epithelial cell proliferation. This produces raised, keratinous papillomas primarily on ears, eyelids, and face. In cottontail rabbits, lesions may undergo malignant transformation to squamous cell carcinoma through accumulation of chromosomal aberrations.",
+        "pathophysiology_ja": "ショープ乳頭腫ウイルス（カッパパピローマウイルス2）は皮膚の擦過傷を介して基底角化細胞に感染する。ウイルスのE6およびE7オンコプロテインがp53およびRb蛋白質を阻害し、上皮細胞の無制御な増殖を促進する。主に耳、眼瞼、顔面に隆起性の角質性乳頭腫を生じる。ワタオウサギでは染色体異常の蓄積により扁平上皮癌への悪性転化が起こりうる。",
+        "causes": "Caused by Shope papilloma virus (cottontail rabbit papilloma virus, CRPV), a Kappapapillomavirus. Transmitted by biting arthropods (mosquitoes, ticks) and direct contact with infected rabbits through skin abrasions. Cottontail rabbits (Sylvilagus floridanus) are the natural reservoir.",
+        "causes_ja": "ショープ乳頭腫ウイルス（ワタオウサギ乳頭腫ウイルス、CRPV）、カッパパピローマウイルスが原因。吸血節足動物（蚊、ダニ）および皮膚擦過傷を介した感染ウサギとの直接接触により伝播。ワタオウサギ（Sylvilagus floridanus）が自然宿主。",
+        "clinical_signs": "Raised, firm, keratinous wart-like growths on ears, eyelids, neck, and shoulders; Growths may become horn-like (cutaneous horns); Usually painless initially; Large lesions may interfere with vision or feeding; Possible secondary bacterial infection of traumatized papillomas",
+        "clinical_signs_ja": "耳、眼瞼、頸部、肩の隆起性で硬い角質性疣贅様増殖物；増殖物は角状（皮角）になることがある；初期は通常無痛；大きな病変は視覚や摂食を妨げる可能性；外傷を受けた乳頭腫の二次性細菌感染の可能性",
+        "diagnosis": "Clinical appearance of characteristic papillomatous lesions; Histopathology showing papillomatous epidermal hyperplasia with koilocytes; PCR for viral DNA; Electron microscopy showing papillomavirus particles; Immunohistochemistry for papillomavirus antigens",
+        "diagnosis_ja": "特徴的な乳頭腫性病変の臨床的外観；コイロサイトを伴う乳頭腫性表皮過形成を示す病理組織検査；ウイルスDNA検出のためのPCR；パピローマウイルス粒子を示す電子顕微鏡検査；パピローマウイルス抗原の免疫組織化学",
+        "transmission": "Arthropod vectors (mosquitoes, ticks); Direct contact through skin abrasions; Fomite transmission",
+        "transmission_ja": "節足動物ベクター（蚊、ダニ）；皮膚擦過傷を介した直接接触；媒介物伝播",
+        "treatment": "Surgical excision of papillomas under general anesthesia; Cryotherapy with liquid nitrogen for small lesions; Electrocautery; In domestic rabbits, lesions often regress spontaneously within 1-6 months as cell-mediated immunity develops. For large or obstructive lesions, surgical removal is recommended.",
+        "treatment_ja": "全身麻酔下での乳頭腫の外科的切除；小さな病変に対する液体窒素による凍結療法；電気焼灼術；家庭ウサギでは細胞性免疫の発達に伴い1-6ヶ月で自然退縮することが多い。大きなまたは閉塞性の病変には外科的切除が推奨される。",
+        "prevention": "Arthropod vector control; Minimize skin abrasions; Quarantine new rabbits; Avoid contact with wild cottontail rabbits",
+        "prevention_ja": "節足動物ベクター駆除；皮膚擦過傷の最小化；新規ウサギの検疫；野生ワタオウサギとの接触回避",
+        "prognosis": "Good in domestic rabbits as lesions typically regress spontaneously. In cottontail rabbits, risk of malignant transformation to squamous cell carcinoma (up to 25% of cases). Surgically excised lesions rarely recur. Immunocompromised rabbits may develop persistent or progressive lesions.",
+        "prognosis_ja": "家庭ウサギでは病変が通常自然退縮するため予後良好。ワタオウサギでは扁平上皮癌への悪性転化リスクあり（症例の最大25%）。外科的に切除された病変の再発は稀。免疫不全ウサギでは持続性または進行性の病変を発症する可能性がある。"
+    },
+    {
+        "name": "Rabbit Poxvirus Infection",
+        "name_ja": "ウサギポックスウイルス感染症",
+        "description": "A rare poxviral disease of rabbits causing generalized skin lesions and systemic illness.",
+        "description_ja": "ウサギに全身性皮膚病変と全身疾患を引き起こす稀なポックスウイルス疾患。",
+        "pathophysiology": "Rabbit fibroma virus or rabbit poxvirus replicates in dermal fibroblasts at the inoculation site, forming a primary fibroma. Viremia leads to systemic dissemination with secondary skin lesions, lymph node hyperplasia, and potential visceral involvement. The virus produces immunomodulatory proteins that suppress host interferon responses and inhibit complement activation.",
+        "pathophysiology_ja": "ウサギ線維腫ウイルスまたはウサギポックスウイルスが接種部位の真皮線維芽細胞で増殖し、一次線維腫を形成する。ウイルス血症により全身播種が起こり、二次性皮膚病変、リンパ節過形成、内臓障害の可能性がある。ウイルスは宿主のインターフェロン応答を抑制し補体活性化を阻害する免疫調節蛋白質を産生する。",
+        "causes": "Caused by rabbit poxvirus or Shope fibroma virus (Leporipoxvirus). Transmitted via arthropod vectors (mosquitoes) and direct contact. More common in wild rabbits but can affect domestic breeds.",
+        "causes_ja": "ウサギポックスウイルスまたはショープ線維腫ウイルス（レポリポックスウイルス）が原因。節足動物ベクター（蚊）および直接接触により伝播。野生ウサギにより一般的だが家庭品種にも感染しうる。",
+        "clinical_signs": "Raised skin nodules progressing to ulcerated lesions; Subcutaneous fibromas at inoculation site; Generalized papular or nodular eruption; Lymphadenopathy; Fever; Anorexia",
+        "clinical_signs_ja": "潰瘍化する隆起性皮膚結節；接種部位の皮下線維腫；全身性丘疹性または結節性発疹；リンパ節腫脹；発熱；食欲不振",
+        "diagnosis": "Clinical presentation; Histopathology showing fibroma cells with intracytoplasmic inclusions; PCR for viral DNA; Electron microscopy; Virus isolation on rabbit kidney cells",
+        "diagnosis_ja": "臨床所見；細胞質内封入体を伴う線維腫細胞を示す病理組織検査；ウイルスDNA検出のためのPCR；電子顕微鏡検査；ウサギ腎細胞でのウイルス分離",
+        "transmission": "Mosquito and flea vectors; Direct contact with infected rabbits; Fomite transmission",
+        "transmission_ja": "蚊・ノミベクター；感染ウサギとの直接接触；媒介物伝播",
+        "treatment": "Supportive care; Surgical excision of large fibromas; Antibiotics for secondary bacterial infections; NSAID analgesia (meloxicam 0.3-0.6 mg/kg PO q24h). Most lesions are self-limiting in immunocompetent rabbits.",
+        "treatment_ja": "支持療法；大きな線維腫の外科的切除；二次性細菌感染に対する抗菌薬；NSAID鎮痛（メロキシカム0.3-0.6 mg/kg 経口 1日1回）。免疫正常ウサギではほとんどの病変は自己限定性。",
+        "prevention": "Mosquito control; Avoid contact with wild rabbits; Quarantine and screening of new animals",
+        "prevention_ja": "蚊駆除；野生ウサギとの接触回避；新規動物の検疫・スクリーニング",
+        "prognosis": "Generally good in domestic rabbits with self-limiting lesions resolving in 2-4 weeks. Young or immunosuppressed rabbits may develop more severe systemic disease. Shope fibroma in cottontail rabbits is benign and resolves spontaneously.",
+        "prognosis_ja": "家庭ウサギでは2-4週間で自己限定性病変が消退し予後は一般的に良好。幼若または免疫抑制ウサギではより重篤な全身疾患を発症する可能性がある。ワタオウサギのショープ線維腫は良性で自然消退する。"
+    },
+    {
+        "name": "Rotavirus Enteritis",
+        "name_ja": "ロタウイルス腸炎",
+        "description": "Acute diarrheal disease in young rabbits caused by rotavirus infection of intestinal epithelium.",
+        "description_ja": "ロタウイルスによる腸上皮感染に起因する幼若ウサギの急性下痢性疾患。",
+        "pathophysiology": "Rotavirus infects mature enterocytes at the tips of intestinal villi in the small intestine. Viral replication causes cell lysis and villous atrophy, reducing absorptive surface area. The NSP4 viral enterotoxin activates chloride secretion via calcium-dependent signaling pathways, causing secretory diarrhea. Osmotic diarrhea results from malabsorption of nutrients due to loss of brush border enzymes.",
+        "pathophysiology_ja": "ロタウイルスは小腸絨毛先端の成熟腸細胞に感染する。ウイルス複製により細胞溶解と絨毛萎縮が起こり、吸収表面積が減少する。NSP4ウイルスエンテロトキシンがカルシウム依存性シグナル経路を介して塩素分泌を活性化し、分泌性下痢を引き起こす。刷子縁酵素の喪失による栄養素の吸収不良が浸透圧性下痢をもたらす。",
+        "causes": "Caused by rabbit rotavirus (Group A rotavirus). Fecal-oral transmission. Primarily affects weanling rabbits (4-6 weeks old). Stress of weaning and dietary changes predispose to infection.",
+        "causes_ja": "ウサギロタウイルス（A群ロタウイルス）が原因。糞口感染。主に離乳期ウサギ（4-6週齢）が罹患。離乳ストレスと食事変更が感染の素因となる。",
+        "clinical_signs": "Acute watery diarrhea in weanling rabbits; Dehydration; Lethargy; Abdominal distension; Reduced growth rate; Death in severe cases within 24-48 hours",
+        "clinical_signs_ja": "離乳期ウサギの急性水様性下痢；脱水；沈鬱；腹部膨満；発育遅延；重症例では24-48時間以内に死亡",
+        "diagnosis": "Electron microscopy of fecal samples showing rotavirus particles; ELISA for rotavirus antigen in feces; RT-PCR; Histopathology showing villous atrophy and crypt hyperplasia in small intestine",
+        "diagnosis_ja": "ロタウイルス粒子を示す糞便の電子顕微鏡検査；糞便中ロタウイルス抗原のELISA；RT-PCR；小腸の絨毛萎縮と陰窩過形成を示す病理組織検査",
+        "transmission": "Fecal-oral route; Contaminated environment; Fomites",
+        "transmission_ja": "糞口経路；汚染環境；媒介物",
+        "treatment": "Aggressive fluid therapy (SC or IV) to correct dehydration; Oral electrolyte solutions; Syringe feeding with high-fiber recovery diet; Probiotics to restore gut flora; Warmth support for hypothermic kits. No specific antiviral therapy available.",
+        "treatment_ja": "脱水補正のための積極的輸液療法（皮下または静脈内）；経口電解質液；高繊維回復食のシリンジ給餌；腸内細菌叢回復のためのプロバイオティクス；低体温の子ウサギへの保温。特異的な抗ウイルス療法はない。",
+        "prevention": "Gradual weaning over 2-3 weeks; Maintain clean environment; Ensure adequate colostrum intake; Minimize stress during weaning; Proper hygiene and disinfection of breeding facilities",
+        "prevention_ja": "2-3週間かけた段階的離乳；清潔な環境維持；十分な初乳摂取の確保；離乳時のストレス最小化；繁殖施設の適切な衛生管理と消毒",
+        "prognosis": "Mild cases recover within 3-5 days with supportive care. Severe dehydration in neonates can be fatal (mortality 10-30% in outbreaks). Co-infection with other enteric pathogens worsens prognosis. Surviving rabbits develop protective immunity.",
+        "prognosis_ja": "軽症例は支持療法により3-5日で回復する。新生児の重度脱水は致死的となりうる（流行時の死亡率10-30%）。他の腸管病原体との混合感染は予後を悪化させる。生存したウサギは防御免疫を獲得する。"
+    },
+    {
+        "name": "Coronavirus Enteritis",
+        "name_ja": "コロナウイルス腸炎",
+        "description": "Enteric coronavirus infection causing diarrhea and enteritis, particularly in young rabbits.",
+        "description_ja": "コロナウイルスによる腸炎で、特に幼若ウサギに下痢と腸炎を引き起こす。",
+        "pathophysiology": "Rabbit enteric coronavirus infects enterocytes in the small and large intestine, causing villous atrophy, crypt cell hyperplasia, and inflammatory infiltration of the lamina propria. Loss of mature absorptive enterocytes leads to maldigestion and malabsorption. Increased mucosal permeability may allow bacterial translocation and secondary sepsis.",
+        "pathophysiology_ja": "ウサギ腸管コロナウイルスが小腸および大腸の腸細胞に感染し、絨毛萎縮、陰窩細胞過形成、粘膜固有層の炎症細胞浸潤を引き起こす。成熟吸収性腸細胞の喪失により消化・吸収障害が生じる。粘膜透過性の亢進により細菌転座と二次性敗血症が起こりうる。",
+        "causes": "Caused by rabbit enteric coronavirus (RbCoV). Fecal-oral transmission. Stress, overcrowding, and concurrent infections predispose to disease.",
+        "causes_ja": "ウサギ腸管コロナウイルス（RbCoV）が原因。糞口感染。ストレス、過密飼育、併発感染が疾患の素因となる。",
+        "clinical_signs": "Watery to mucoid diarrhea; Anorexia; Lethargy; Dehydration; Abdominal pain; Weight loss; Possible secondary bacterial infection",
+        "clinical_signs_ja": "水様性から粘液性の下痢；食欲不振；沈鬱；脱水；腹痛；体重減少；二次性細菌感染の可能性",
+        "diagnosis": "RT-PCR for coronavirus RNA in feces; Electron microscopy of fecal samples; Histopathology of intestine; Serology for anti-coronavirus antibodies",
+        "diagnosis_ja": "糞便中コロナウイルスRNAのRT-PCR；糞便の電子顕微鏡検査；腸管の病理組織検査；抗コロナウイルス抗体の血清学検査",
+        "transmission": "Fecal-oral route; Direct contact; Contaminated environment",
+        "transmission_ja": "糞口経路；直接接触；汚染環境",
+        "treatment": "Supportive care with fluid therapy, syringe feeding, and warmth; Probiotics; Antibiotics (trimethoprim-sulfamethoxazole 30 mg/kg PO q12h) for secondary bacterial infections; Motility support if indicated.",
+        "treatment_ja": "輸液療法、シリンジ給餌、保温による支持療法；プロバイオティクス；二次性細菌感染に対する抗菌薬（トリメトプリム-スルファメトキサゾール30 mg/kg 経口 12時間毎）；必要に応じて消化管運動支持。",
+        "prevention": "Strict hygiene; Quarantine of new rabbits; Stress reduction; Avoid overcrowding; Regular disinfection",
+        "prevention_ja": "厳格な衛生管理；新規ウサギの検疫；ストレス軽減；過密飼育の回避；定期的消毒",
+        "prognosis": "Most immunocompetent adult rabbits recover within 5-10 days. Young, stressed, or immunocompromised rabbits have higher mortality. Co-infections significantly worsen outcomes.",
+        "prognosis_ja": "ほとんどの免疫正常成体ウサギは5-10日で回復する。幼若、ストレス下、免疫不全ウサギの死亡率は高い。混合感染は予後を著しく悪化させる。"
+    },
+]
+
+# I'll continue building this in the actual generation script
+# For now, let me save this partial data and create a comprehensive generator
+
+print(f"Defined {len(DISEASES)} rabbit diseases so far")
+print("This file will be expanded with the full 271 diseases")
