@@ -11,7 +11,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from . import prevalence_data
-from .helpers import ADVICE, analyze_symptoms_generic
+from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "lethargy": {"ja": "無気力", "en": "Lethargy"},
@@ -1669,6 +1669,10 @@ DISEASES: List[Dict[str, Any]] = [
     },
 
 ]
+
+
+# Enrich DISEASES with content from diseases_all_species.json
+enrich_diseases(DISEASES, "Exotic Other")
 
 
 def analyze_symptoms(

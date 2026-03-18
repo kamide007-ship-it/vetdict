@@ -13,7 +13,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from . import prevalence_data
-from .helpers import ADVICE, analyze_symptoms_generic
+from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 
 # ---------------------------------------------------------------------------
 # Disease database
@@ -1332,6 +1332,10 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 # ---------------------------------------------------------------------------
 # Public analysis function
 # ---------------------------------------------------------------------------
+
+# Enrich DISEASES with content from diseases_all_species.json
+enrich_diseases(DISEASES, "Degu")
+
 
 def analyze_symptoms(
     symptoms: List[str],
