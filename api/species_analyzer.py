@@ -30,6 +30,7 @@ from api.species.ferret_diseases import analyze_symptoms as analyze_ferret
 from api.species.guinea_pig_diseases import analyze_symptoms as analyze_guinea_pig
 from api.species.hamster_diseases import analyze_symptoms as analyze_hamster
 from api.species.hedgehog_diseases import analyze_symptoms as analyze_hedgehog
+from api.species.helpers import _find_enrichment
 from api.species.lizard_diseases import analyze_symptoms as analyze_lizard
 from api.species.parakeet_diseases import analyze_symptoms as analyze_parakeet
 from api.species.parrot_diseases import analyze_symptoms as analyze_parrot
@@ -147,6 +148,7 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
                 "clinical_signs": dis.clinical_signs_detail or "",
                 "risk_factors": dis.risk_factors or "",
                 "recommended_tests": tests,
+                "_name_en": dis.name_en or "",  # enrichment lookup key
                 "transmission": _trans[0],
                 "transmission_ja": _trans[1],
                 "urgency": dis.urgency or "moderate",
@@ -160,6 +162,25 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
                 "diagnosis_ja": _diag_ja,
             }
         )
+
+    # JSON エンリッチメントから日本語フィールドを補完
+    _ja_enrich_fields = (
+        "pathophysiology_ja", "causes_ja", "treatment_ja",
+        "prevention_ja", "prognosis_ja", "clinical_signs_ja",
+        "transmission", "transmission_ja", "diagnosis", "diagnosis_ja",
+    )
+    for cond in possible_conditions:
+        # 英語名で検索（最も確実）→ 日本語名フォールバック
+        enrichment = _find_enrichment("Horse", cond.get("_name_en", ""))
+        if not enrichment:
+            enrichment = _find_enrichment("Horse", cond.get("name_ja", ""))
+        if enrichment:
+            for field in _ja_enrich_fields:
+                if not cond.get(field) and enrichment.get(field):
+                    cond[field] = enrichment[field]
+        # 内部キーを除去
+        cond.pop("_name_en", None)
+
     # 重複する検査を除外
     dedup_tests = []
     for t in recommended_tests:
