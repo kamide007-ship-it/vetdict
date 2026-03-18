@@ -78,10 +78,20 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
         possible_conditions.append(
             {
                 "name": name,
+                "name_ja": dis.name_ja or "",
                 "match_count": item.match_count,
                 "confidence": round(item.confidence_pct, 2),
+                "match_percent": round(item.confidence_pct),
                 "severity": severity_level,
                 "description": dis.description_ja or dis.name_ja,
+                "description_ja": dis.description_ja or "",
+                "pathophysiology": dis.pathophysiology or "",
+                "causes": dis.etiology or "",
+                "treatment": dis.treatment_protocol or dis.general_management or "",
+                "prevention": dis.prevention or "",
+                "prognosis": dis.prognosis or "",
+                "clinical_signs": dis.clinical_signs_detail or "",
+                "risk_factors": dis.risk_factors or "",
                 "recommended_tests": tests,
             }
         )
