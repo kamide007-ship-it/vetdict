@@ -32,6 +32,7 @@ _ENRICHMENT_FIELDS = (
     "clinical_signs", "clinical_signs_ja",
     "diagnosis", "diagnosis_ja",
     "transmission", "transmission_ja",
+    "recommended_tests",
 )
 
 
