@@ -390,6 +390,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="X線検査で確定診断。関節鏡手術による遊離体除去。保存療法（安静・抗炎症薬）も選択肢",
         prognosis="手術成績は一般的に良好（70-80%が正常運動復帰）。多発性の場合はやや注意",
         prevention="成長期の栄養管理（過剰なエネルギー・銅欠乏の回避）、適度な運動",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
     ),
     Disease(
         "ms_chip",
@@ -405,6 +406,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "関節鏡検査（確定診断+治療）", "Arthroscopy (Diagnosis + Treatment)"),
         ],
         merck_url=_MERCK + "chip+fracture+horses+joint",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_bone_cyst",
@@ -422,6 +426,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "核医学検査（シンチグラフィ）", "Nuclear Scintigraphy"),
         ],
         merck_url=_MERCK + "subchondral+bone+cyst+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_tendonitis",
@@ -442,6 +449,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="超音波検査で損傷範囲を評価。急性期は冷却・圧迫・安静。リハビリプログラムに基づく段階的な運動復帰（6-12ヶ月）",
         prognosis="軽度損傷は良好。重度損傷は再発率が高い（40-60%）。PRP・幹細胞療法の研究が進展中",
         prevention="適切なウォーミングアップ、馬場状態の確認、脚部プロテクターの装着",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
     ),
     Disease(
         "ms_suspensory",
@@ -458,6 +466,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "核医学検査（シンチグラフィ）", "Nuclear Scintigraphy"),
         ],
         merck_url=_MERCK + "suspensory+ligament+desmitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_splints",
@@ -474,6 +485,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "超音波検査", "Ultrasonography"),
         ],
         merck_url=_MERCK + "splints+horses+metacarpal",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_sesamoiditis",
@@ -489,6 +503,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "核医学検査（シンチグラフィ）", "Nuclear Scintigraphy"),
         ],
         merck_url=_MERCK + "sesamoiditis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_arthritis",
@@ -506,6 +523,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "超音波検査", "Ultrasonography"),
         ],
         merck_url=_MERCK + "osteoarthritis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_fracture",
@@ -527,6 +547,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="患肢の固定・安静。長管骨骨折は予後判断が重要。中手骨・中足骨は手術適応あり。大腿骨・脛骨骨折は治療困難なことが多い",
         prognosis="骨折部位・種類により大きく異なる。若齢馬の不完全骨折は良好。長管骨粉砕骨折は予後不良",
         prevention="適切なトレーニング負荷管理、定期的なスクリーニングX線検査、十分な栄養・カルシウム補給",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
     ),
     Disease(
         "ms_back_pain",
@@ -544,6 +565,9 @@ DISEASE_DATABASE: list[Disease] = [
             (4, "核医学検査（シンチグラフィ）", "Nuclear Scintigraphy"),
         ],
         merck_url=_MERCK + "back+pain+horses+kissing+spines",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     # ================================================================
     # 蹄 (Hoof) — 7疾患
@@ -584,6 +608,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "X線検査（必要時）", "Radiography (If Needed)"),
         ],
         merck_url=_MERCK + "hoof+abscess+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_thrush",
@@ -614,6 +641,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "X線検査（深部の場合）", "Radiography (If Deep)"),
         ],
         merck_url=_MERCK + "hoof+wall+cracks+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_white_line",
@@ -629,6 +659,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "X線検査", "Radiography"),
         ],
         merck_url=_MERCK + "white+line+disease+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_navicular",
@@ -645,6 +678,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "掌側指神経ブロック", "Palmar Digital Nerve Block"),
         ],
         merck_url=_MERCK + "navicular+syndrome+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_sole_bruise",
@@ -660,6 +696,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "視診", "Visual Inspection"),
         ],
         merck_url=_MERCK + "sole+bruise+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     # ================================================================
     # 消化器 (Digestive) — 4疾患
@@ -727,6 +766,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="胃内視鏡検査で確定診断。酸分泌抑制薬による治療。飼養管理の見直し（牧草中心の給餌、ストレス軽減、給餌回数の増加）",
         prognosis="扁平上皮部潰瘍は薬物療法に良く反応。腺部潰瘍はやや難治性。環境改善なしでは再発率が高い",
         prevention="十分な粗飼料給与、ストレス管理、分割給餌、長時間の絶食回避",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
     ),
     Disease(
         "dg_sand_colic",
@@ -743,6 +783,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "聴診（砂音）", "Auscultation (Sand Sounds)"),
         ],
         merck_url=_MERCK + "sand+colic+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_parasites",
@@ -758,6 +801,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血液検査（CBC）", "Blood Work (CBC)"),
         ],
         merck_url=_MERCK + "internal+parasites+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     # ================================================================
     # 呼吸器 (Respiratory) — 4疾患
@@ -777,6 +823,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "胸部X線検査", "Thoracic Radiography"),
         ],
         merck_url=_MERCK + "equine+asthma+IAD+RAO+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_laryngeal",
@@ -792,6 +841,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "運動時内視鏡検査", "Overground Endoscopy"),
         ],
         merck_url=_MERCK + "laryngeal+hemiplegia+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_ddsp",
@@ -807,6 +859,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "内視鏡検査（安静時）", "Endoscopy (Standing)"),
         ],
         merck_url=_MERCK + "dorsal+displacement+soft+palate+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_eih",
@@ -822,6 +877,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "内視鏡検査", "Endoscopy"),
         ],
         merck_url=_MERCK + "exercise+induced+pulmonary+hemorrhage+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     # ================================================================
     # 感染症 (Infectious) — 5疾患
@@ -841,6 +899,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血液検査", "Blood Work"),
         ],
         merck_url=_MERCK + "equine+influenza",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "rp_strangles",
@@ -873,6 +934,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血液検査（CBC）", "Blood Work (CBC)"),
         ],
         merck_url=_MERCK + "equine+herpesvirus+EHV",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_tetanus",
@@ -894,6 +958,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="ICU管理が理想。暗く静かな環境、抗毒素血清投与、創傷処理、筋弛緩剤、栄養サポート。治療は長期化することが多い",
         prognosis="治療開始が早ければ生存率50-80%。重症例は予後不良。回復には数週間～数ヶ月を要する",
         prevention="定期的な破傷風トキソイドワクチン接種（年1回）。創傷時のブースター接種と抗毒素投与",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
     ),
     Disease(
         "if_piroplamosis",
@@ -911,6 +976,9 @@ DISEASE_DATABASE: list[Disease] = [
             (4, "血液検査（CBC — 貧血確認）", "Blood Work (CBC — Anemia Check)"),
         ],
         merck_url=_MERCK + "piroplasmosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     # ================================================================
     # 皮膚 (Skin) — 7疾患
@@ -935,6 +1003,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="真菌培養で確定診断。全身性抗真菌薬または局所治療。馬具の消毒、感染馬の隔離",
         prognosis="一般的に良好。自然治癒もあるが、治療で回復を早められる",
         prevention="馬具の個別使用と定期消毒、密飼いの回避",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
     ),
     Disease(
         "sk_rain_rot",
@@ -950,6 +1019,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "細菌培養", "Bacterial Culture"),
         ],
         merck_url=_MERCK + "rain+rot+dermatophilosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_urticaria",
@@ -965,6 +1037,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血液検査", "Blood Work"),
         ],
         merck_url=_MERCK + "urticaria+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_sarcoid",
@@ -980,6 +1055,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "病理組織検査", "Histopathology"),
         ],
         merck_url=_MERCK + "equine+sarcoid",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_photosensitization",
@@ -996,6 +1074,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "有毒植物の特定", "Toxic Plant Identification"),
         ],
         merck_url=_MERCK + "photosensitization+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_sweet_itch",
@@ -1012,6 +1093,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "皮膚生検", "Skin Biopsy"),
         ],
         merck_url=_MERCK + "sweet+itch+culicoides+hypersensitivity+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_wound_infection",
@@ -1029,6 +1113,9 @@ DISEASE_DATABASE: list[Disease] = [
             (4, "破傷風ワクチン接種歴確認", "Tetanus Vaccination Status Check"),
         ],
         merck_url=_MERCK + "wound+management+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     # ================================================================
     # 眼 (Eye) — 2疾患
@@ -1048,6 +1135,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "レプトスピラ血清検査", "Leptospira Serology"),
         ],
         merck_url=_MERCK + "equine+recurrent+uveitis",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_corneal_ulcer",
@@ -1064,6 +1154,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "細菌・真菌培養", "Bacterial / Fungal Culture"),
         ],
         merck_url=_MERCK + "corneal+ulcer+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     # ================================================================
     # 神経系 (Neurological) — 3疾患
@@ -1088,6 +1181,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="CSF抗体検査で診断。抗原虫薬（ポナズリル、ジクラズリル）の長期投与。リハビリテーション",
         prognosis="早期治療で60-70%が改善。完全回復は10-25%。再発リスクあり",
         prevention="飼料倉庫の衛生管理（オポッサムの侵入防止）、飼料・水の管理",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
     ),
     Disease(
         "nr_wobbler",
@@ -1105,6 +1199,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CT/MRI検査", "CT / MRI"),
         ],
         merck_url=_MERCK + "cervical+vertebral+stenotic+myelopathy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_vestibular",
@@ -1121,6 +1218,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CT/MRI検査", "CT / MRI"),
         ],
         merck_url=_MERCK + "vestibular+disease+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     # ================================================================
     # 代謝性 (Metabolic) — 3疾患
@@ -1140,6 +1240,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "ACTH検査", "ACTH Test"),
         ],
         merck_url=_MERCK + "equine+metabolic+syndrome",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_ppid",
@@ -1162,6 +1265,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="ACTH測定による確定診断。ペルゴリド投与による長期管理。蹄葉炎予防のための食事管理・矯正装蹄。定期的なACTHモニタリング",
         prognosis="適切な管理で良好なQOLを維持可能。進行性疾患であり治癒はしないが、管理可能な慢性疾患",
         prevention="早期発見のための定期的な血液検査（ACTH）。15歳以上は年1回のスクリーニング推奨",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
     ),
     Disease(
         "mt_rhabdomyolysis",
@@ -1178,6 +1282,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "筋生検", "Muscle Biopsy"),
         ],
         merck_url=_MERCK + "exertional+rhabdomyolysis+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     # ================================================================
     # 循環器 (Cardiovascular) — 3疾患
@@ -1197,6 +1304,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "心エコー検査", "Echocardiography"),
         ],
         merck_url=_MERCK + "atrial+fibrillation+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_vsd",
@@ -1214,6 +1324,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "心電図（ECG）", "Electrocardiography (ECG)"),
         ],
         merck_url=_MERCK + "ventricular+septal+defect+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_endocarditis",
@@ -1241,6 +1354,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血液検査（CBC・生化学）", "Blood Work (CBC / Chemistry)"),
         ],
         merck_url=_MERCK + "endocarditis+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     # ================================================================
     # 生殖器 (Reproductive) — 2疾患
@@ -1260,6 +1376,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "子宮生検", "Uterine Biopsy"),
         ],
         merck_url=_MERCK + "endometritis+mare+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_retained_placenta",
@@ -1276,6 +1395,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血液検査（CBC・生化学）", "Blood Work (CBC / Chemistry)"),
         ],
         merck_url=_MERCK + "retained+fetal+membranes+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     # ================================================================
     # 歯科 (Dental) — 4疾患
@@ -1294,6 +1416,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "歯科矯正（フロート）", "Dental Float"),
         ],
         merck_url=_MERCK + "sharp+enamel+points+horses+dental",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_wave_mouth",
@@ -1310,6 +1435,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "歯科X線検査", "Dental Radiography"),
         ],
         merck_url=_MERCK + "wave+mouth+horses+dental",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_periapical_abscess",
@@ -1326,6 +1454,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CT検査（副鼻腔評価）", "CT Scan (Sinus Evaluation)"),
         ],
         merck_url=_MERCK + "periapical+abscess+horses+dental",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_eotrh",
@@ -1342,6 +1473,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "歯科X線検査", "Dental Radiography"),
         ],
         merck_url=_MERCK + "EOTRH+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     # ================================================================
     # 追加疾患 — 世界的に認知された馬疾患の網羅的拡充
@@ -1362,6 +1496,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CT検査", "CT Scan"),
         ],
         merck_url=_MERCK + "stress+fracture+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_ringbone",
@@ -1378,6 +1515,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "神経ブロック", "Nerve Block"),
         ],
         merck_url=_MERCK + "ringbone+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_sidebone",
@@ -1390,6 +1530,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography")],
         merck_url=_MERCK + "sidebone+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_upward_patella",
@@ -1406,6 +1549,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "超音波検査", "Ultrasonography"),
         ],
         merck_url=_MERCK + "upward+fixation+patella+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_bog_spavin",
@@ -1422,6 +1568,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "超音波検査", "Ultrasonography"),
         ],
         merck_url=_MERCK + "bog+spavin+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_bone_spavin",
@@ -1439,6 +1588,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "関節内麻酔", "Intra-Articular Anesthesia"),
         ],
         merck_url=_MERCK + "bone+spavin+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_bucked_shin",
@@ -1455,6 +1607,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "核医学検査", "Nuclear Scintigraphy"),
         ],
         merck_url=_MERCK + "dorsal+metacarpal+disease+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_curb",
@@ -1470,6 +1625,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "X線検査", "Radiography"),
         ],
         merck_url=_MERCK + "curb+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_thoroughpin",
@@ -1482,6 +1640,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "thoroughpin+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     # ── 蹄 追加 ──
     Disease(
@@ -1498,6 +1659,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "MRI検査", "MRI"),
         ],
         merck_url=_MERCK + "keratoma+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_canker",
@@ -1513,6 +1677,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "生検", "Biopsy"),
         ],
         merck_url=_MERCK + "canker+horses+hoof",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_pedal_osteitis",
@@ -1528,6 +1695,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "蹄検査", "Hoof Examination"),
         ],
         merck_url=_MERCK + "pedal+osteitis+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_quittor",
@@ -1543,6 +1713,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "造影検査", "Contrast Radiography / Fistulography"),
         ],
         merck_url=_MERCK + "quittor+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     # ── 消化器 追加 ──
     Disease(
@@ -1575,6 +1748,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="大量輸液による脱水補正、電解質補正、コロイド輸液、抗菌薬（原因菌に応じて）。蹄葉炎の予防的管理",
         prognosis="早期の積極的治療で生存率60-70%。蹄葉炎を併発すると予後悪化",
         prevention="抗菌薬の適正使用、衛生管理、ストレス軽減",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
     ),
     Disease(
         "dg_displacement",
@@ -1591,6 +1765,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "腹水穿刺", "Abdominocentesis"),
         ],
         merck_url=_MERCK + "large+colon+displacement+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_impaction",
@@ -1606,6 +1783,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "経鼻胃管", "Nasogastric Intubation"),
         ],
         merck_url=_MERCK + "impaction+colic+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_enterolithiasis",
@@ -1621,6 +1801,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "腹部超音波検査", "Abdominal Ultrasound"),
         ],
         merck_url=_MERCK + "enterolithiasis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_liver_disease",
@@ -1645,6 +1828,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "肝生検", "Liver Biopsy"),
         ],
         merck_url=_MERCK + "hepatic+disease+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_choke",
@@ -1660,6 +1846,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "内視鏡検査", "Endoscopy"),
         ],
         merck_url=_MERCK + "esophageal+obstruction+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     # ── 呼吸器 追加 ──
     Disease(
@@ -1684,6 +1873,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CT検査", "CT Scan"),
         ],
         merck_url=_MERCK + "guttural+pouch+disease+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_pleuropneumonia",
@@ -1714,6 +1906,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="抗菌薬の長期投与、胸腔ドレナージ（胸水排液）、支持療法。培養・感受性試験に基づく抗菌薬選択が重要",
         prognosis="早期治療で良好。慢性化や胸膜癒着を起こすと予後注意。元の競走能力への復帰は半数程度",
         prevention="輸送時の頭の位置確保（頭を下げられるように）、輸送時間の制限、事前のワクチン接種",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
     ),
     Disease(
         "rp_sinusitis",
@@ -1730,6 +1923,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CT検査", "CT Scan"),
         ],
         merck_url=_MERCK + "sinusitis+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_ethmoid_hematoma",
@@ -1745,6 +1941,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "CT検査", "CT Scan"),
         ],
         merck_url=_MERCK + "ethmoid+hematoma+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     # ── 感染症 追加 ──
     Disease(
@@ -1768,6 +1967,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "CSF検査", "Cerebrospinal Fluid Analysis"),
         ],
         merck_url=_MERCK + "west+nile+virus+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_eee_wee",
@@ -1783,6 +1985,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "CSF検査", "Cerebrospinal Fluid Analysis"),
         ],
         merck_url=_MERCK + "equine+encephalomyelitis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_eia",
@@ -1827,6 +2032,9 @@ DISEASE_DATABASE: list[Disease] = [
             (1, "蛍光抗体法（FA）— 死後検査", "Fluorescent Antibody Test (Post-Mortem)"),
         ],
         merck_url=_MERCK + "rabies+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_potomac",
@@ -1842,6 +2050,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血液検査", "Blood Work"),
         ],
         merck_url=_MERCK + "potomac+horse+fever",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_rhodococcus",
@@ -1859,6 +2070,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血液検査", "Blood Work"),
         ],
         merck_url=_MERCK + "rhodococcus+equi+foals",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_eve",
@@ -1882,6 +2096,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "ウイルス分離・PCR", "Virus Isolation / PCR"),
         ],
         merck_url=_MERCK + "equine+viral+arteritis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     # ── 皮膚 追加 ──
     Disease(
@@ -1898,6 +2115,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "生検", "Biopsy"),
         ],
         merck_url=_MERCK + "melanoma+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_cellulitis",
@@ -1921,6 +2141,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "超音波検査", "Ultrasonography"),
         ],
         merck_url=_MERCK + "cellulitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_habronemiasis",
@@ -1936,6 +2159,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "皮膚掻爬検査", "Skin Scraping"),
         ],
         merck_url=_MERCK + "habronemiasis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_pemphigus",
@@ -1951,6 +2177,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血液検査", "Blood Work"),
         ],
         merck_url=_MERCK + "pemphigus+foliaceus+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     # ── 眼 追加 ──
     Disease(
@@ -1968,6 +2197,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "眼科検査", "Ophthalmic Examination"),
         ],
         merck_url=_MERCK + "squamous+cell+carcinoma+horses+eye",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_glaucoma",
@@ -1983,6 +2215,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "眼科検査", "Ophthalmic Examination"),
         ],
         merck_url=_MERCK + "glaucoma+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     # ── 神経系 追加 ──
     Disease(
@@ -2001,6 +2236,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CSF検査", "Cerebrospinal Fluid Analysis"),
         ],
         merck_url=_MERCK + "cervical+vertebral+stenotic+myelopathy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_epm_extended",
@@ -2024,6 +2262,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "神経学的検査", "Neurological Examination"),
         ],
         merck_url=_MERCK + "equine+protozoal+myeloencephalitis",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_headshaking",
@@ -2040,6 +2281,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "CT検査", "CT Scan"),
         ],
         merck_url=_MERCK + "headshaking+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     # ── 代謝性 追加 ──
     Disease(
@@ -2063,6 +2307,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血清電解質", "Serum Electrolytes"),
         ],
         merck_url=_MERCK + "hyperkalemic+periodic+paralysis+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_pssm",
@@ -2086,6 +2333,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血清CK", "Serum CK"),
         ],
         merck_url=_MERCK + "polysaccharide+storage+myopathy+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_renal_failure",
@@ -2111,6 +2361,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "腎超音波検査", "Renal Ultrasound"),
         ],
         merck_url=_MERCK + "renal+failure+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     # ── 循環器 追加 ──
     Disease(
@@ -2127,6 +2380,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血液検査", "Blood Work"),
         ],
         merck_url=_MERCK + "aortic+rupture+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_pericarditis",
@@ -2151,6 +2407,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血液検査", "Blood Work"),
         ],
         merck_url=_MERCK + "pericarditis+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     # ── 生殖器 追加 ──
     Disease(
@@ -2167,6 +2426,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血中プロゲステロン", "Serum Progesterone"),
         ],
         merck_url=_MERCK + "placentitis+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_cryptorchidism",
@@ -2182,6 +2444,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "ホルモン検査（hCG刺激試験）", "Hormone Assay (hCG Stimulation)"),
         ],
         merck_url=_MERCK + "cryptorchidism+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "tx_acorn",
@@ -2202,6 +2467,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液検査（BUN/Cr）", "Blood Work (BUN/Cr)"), (2, "尿検査", "Urinalysis")],
         merck_url=_MERCK + "acorn+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_aflatoxicosis",
@@ -2222,6 +2490,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "肝酵素検査", "Liver Enzymes"), (2, "飼料分析", "Feed Analysis")],
         merck_url=_MERCK + "aflatoxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_black_locust",
@@ -2234,6 +2505,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "血液検査", "Blood Work")],
         merck_url=_MERCK + "black+locust+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_black_walnut",
@@ -2246,6 +2520,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "蹄部X線", "Hoof Radiographs"), (2, "血液検査", "Blood Work")],
         merck_url=_MERCK + "black+walnut+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_blister_beetle",
@@ -2267,6 +2544,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "尿検査", "Urinalysis"), (2, "血液検査（Ca/Mg）", "Blood (Ca/Mg)")],
         merck_url=_MERCK + "cantharidin+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_blue_green_algae",
@@ -2286,6 +2566,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "肝酵素検査", "Liver Enzymes"), (2, "水質検査", "Water Analysis")],
         merck_url=_MERCK + "blue+green+algae+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_bracken_fern",
@@ -2298,6 +2581,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中チアミン測定", "Blood Thiamine Level"), (2, "CBC", "Complete Blood Count")],
         merck_url=_MERCK + "bracken+fern+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_cardiac_glycoside",
@@ -2317,6 +2603,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "血清ジゴキシン", "Serum Digitalis Level")],
         merck_url=_MERCK + "cardiac+glycoside+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_castor_bean",
@@ -2329,6 +2618,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液検査", "Blood Work"), (2, "腹部超音波", "Abdominal Ultrasound")],
         merck_url=_MERCK + "castor+bean+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_clover",
@@ -2341,6 +2633,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "肝酵素検査", "Liver Enzymes"), (2, "牧草地調査", "Pasture Survey")],
         merck_url=_MERCK + "clover+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_cyanide",
@@ -2360,6 +2655,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液ガス分析", "Blood Gas Analysis"), (2, "血中シアン", "Blood Cyanide Level")],
         merck_url=_MERCK + "cyanide+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_ergotism",
@@ -2372,6 +2670,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "飼料分析", "Feed Analysis"), (2, "末梢血流検査", "Peripheral Blood Flow")],
         merck_url=_MERCK + "ergotism+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_fescue",
@@ -2391,6 +2692,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "牧草分析", "Forage Analysis"), (2, "プロラクチン測定", "Prolactin Level")],
         merck_url=_MERCK + "fescue+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_hoary_alyssum",
@@ -2403,6 +2707,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "飼料検査", "Hay Analysis"), (2, "血液検査", "Blood Work")],
         merck_url=_MERCK + "hoary+alyssum+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_horse_chestnut",
@@ -2415,6 +2722,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床検査", "Clinical Examination"), (2, "血液検査", "Blood Work")],
         merck_url=_MERCK + "horse+chestnut+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_lead",
@@ -2434,6 +2744,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中鉛濃度", "Blood Lead Level"), (2, "CBC", "Complete Blood Count")],
         merck_url=_MERCK + "lead+poisoning+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_locoweed",
@@ -2453,6 +2766,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床神経検査", "Neurological Exam"), (2, "血清スワインソニン", "Serum Swainsonine")],
         merck_url=_MERCK + "locoism+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_monensin",
@@ -2473,6 +2789,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "心筋トロポニン", "Cardiac Troponin"), (3, "飼料分析", "Feed Analysis")],
         merck_url=_MERCK + "monensin+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_nightshade",
@@ -2485,6 +2804,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "植物同定", "Plant Identification")],
         merck_url=_MERCK + "nightshade+poisoning+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_nitrate",
@@ -2497,6 +2819,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "メトヘモグロビン", "Methemoglobin Level"), (2, "飼料・水質分析", "Feed/Water Analysis")],
         merck_url=_MERCK + "nitrate+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_nsaid",
@@ -2509,6 +2834,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液検査（BUN/Cr/蛋白）", "Blood (BUN/Cr/Protein)"), (2, "胃内視鏡", "Gastroscopy")],
         merck_url=_MERCK + "nsaid+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_oleander",
@@ -2529,6 +2857,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "血清オレアンドリン", "Serum Oleandrin")],
         merck_url=_MERCK + "oleander+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_phalaris",
@@ -2541,6 +2872,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床神経検査", "Neurological Exam"), (2, "牧草同定", "Pasture Identification")],
         merck_url=_MERCK + "phalaris+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_poison_hemlock",
@@ -2560,6 +2894,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "植物同定", "Plant Identification")],
         merck_url=_MERCK + "poison+hemlock+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_pokeweed",
@@ -2572,6 +2909,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "血液検査", "Blood Work")],
         merck_url=_MERCK + "pokeweed+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_pyrrolizidine",
@@ -2591,6 +2931,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "肝酵素・胆汁酸", "Liver Enzymes / Bile Acids"), (2, "肝生検", "Liver Biopsy")],
         merck_url=_MERCK + "pyrrolizidine+alkaloid+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_red_maple",
@@ -2603,6 +2946,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "CBC（ハインツ小体）", "CBC (Heinz Bodies)"), (2, "PCV/TP", "PCV/Total Protein")],
         merck_url=_MERCK + "red+maple+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_selenium_tox",
@@ -2615,6 +2961,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中セレン", "Blood Selenium Level"), (2, "飼料分析", "Feed Analysis")],
         merck_url=_MERCK + "selenium+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_water_hemlock",
@@ -2634,6 +2983,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "植物同定", "Plant Identification")],
         merck_url=_MERCK + "water+hemlock+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_yew",
@@ -2646,6 +2998,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "剖検", "Post-Mortem Exam")],
         merck_url=_MERCK + "yew+toxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_rodenticide",
@@ -2658,6 +3013,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "凝固系検査（PT/APTT）", "Coagulation Panel"), (2, "CBC", "Complete Blood Count")],
         merck_url=_MERCK + "anticoagulant+rodenticide+toxicity",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_mycotoxicosis",
@@ -2670,6 +3028,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "飼料のカビ毒検査", "Mycotoxin Feed Analysis"), (2, "肝酵素", "Liver Enzymes")],
         merck_url=_MERCK + "mycotoxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     # ════════════════════════════════════════
     # INFECTIOUS (26 new diseases)
@@ -2685,6 +3046,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "PCR検査", "PCR"), (2, "CBC（血小板）", "CBC (Platelets)")],
         merck_url=_MERCK + "anaplasmosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_anthrax",
@@ -2697,6 +3061,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液塗抹（桿菌）", "Blood Smear"), (2, "細菌培養", "Bacterial Culture")],
         merck_url=_MERCK + "anthrax+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_botulism",
@@ -2709,6 +3076,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "毒素検出", "Toxin Detection"), (2, "筋電図", "Electromyography")],
         merck_url=_MERCK + "botulism+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_brucellosis",
@@ -2721,6 +3091,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清学検査", "Serology"), (2, "細菌培養", "Culture")],
         merck_url=_MERCK + "brucellosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_cem",
@@ -2733,6 +3106,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "膣スワブ培養", "Vaginal Swab Culture"), (2, "PCR検査", "PCR")],
         merck_url=_MERCK + "contagious+equine+metritis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_dourine",
@@ -2745,6 +3121,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "補体結合反応", "Complement Fixation Test"), (2, "血液検査", "Blood Work")],
         merck_url=_MERCK + "dourine+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_coronavirus",
@@ -2757,6 +3136,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "糞便PCR", "Fecal PCR"), (2, "CBC", "Complete Blood Count")],
         merck_url=_MERCK + "equine+coronavirus",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_getah",
@@ -2769,6 +3151,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "血清学検査", "Serology"), (2, "PCR検査", "PCR")],
         merck_url=_MERCK + "getah+virus+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_glanders",
@@ -2781,6 +3166,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "マレイン検査", "Mallein Test"), (2, "細菌培養", "Culture")],
         merck_url=_MERCK + "glanders",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_hendra",
@@ -2793,6 +3181,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "PCR検査", "PCR"), (2, "血清学検査", "Serology")],
         merck_url=_MERCK + "hendra+virus+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_japanese_enc",
@@ -2805,6 +3196,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血清学検査", "Serology"), (2, "CSF分析", "CSF Analysis")],
         merck_url=_MERCK + "japanese+encephalitis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_leptospirosis",
@@ -2817,6 +3211,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清学検査（MAT）", "MAT Serology"), (2, "PCR（尿）", "Urine PCR")],
         merck_url=_MERCK + "leptospirosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_lyme",
@@ -2839,6 +3236,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "関節液分析", "Synovial Fluid Analysis"),
         ],
         merck_url=_MERCK + "lyme+disease+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_rotavirus",
@@ -2852,6 +3252,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "糞便抗原検査", "Fecal Antigen Test"), (2, "電解質・PCV", "Electrolytes / PCV")],
         merck_url=_MERCK + "rotavirus+foals",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_salmonellosis",
@@ -2864,6 +3267,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "糞便培養", "Fecal Culture"), (2, "CBC", "CBC"), (3, "血液培養", "Blood Culture")],
         merck_url=_MERCK + "salmonellosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_vesicular_stomatitis",
@@ -2876,6 +3282,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "ウイルス分離", "Virus Isolation"), (2, "血清学検査", "Serology")],
         merck_url=_MERCK + "vesicular+stomatitis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_pigeon_fever",
@@ -2888,6 +3297,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "膿瘍穿刺・培養", "Abscess Aspiration / Culture"), (2, "血清学検査", "Serology")],
         merck_url=_MERCK + "pigeon+fever+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_tyzzer",
@@ -2901,6 +3313,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "肝酵素検査", "Liver Enzymes"), (2, "剖検・肝組織", "Post-Mortem / Liver Histology")],
         merck_url=_MERCK + "tyzzer+disease+foals",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_surra",
@@ -2913,6 +3328,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液塗抹", "Blood Smear"), (2, "ELISA", "ELISA")],
         merck_url=_MERCK + "surra+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_coital_exanthema",
@@ -2925,6 +3343,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "PCR検査", "PCR"), (2, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "equine+coital+exanthema",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_stachybotryotoxicosis",
@@ -2937,6 +3358,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CBC", "CBC"), (2, "飼料検査", "Feed Analysis")],
         merck_url=_MERCK + "stachybotryotoxicosis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_borna",
@@ -2949,6 +3373,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清学検査", "Serology"), (2, "CSF分析", "CSF Analysis")],
         merck_url=_MERCK + "borna+disease+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_abl",
@@ -2961,6 +3388,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直接蛍光抗体法", "Direct Fluorescent Antibody"), (2, "脳組織検査", "Brain Tissue Exam")],
         merck_url=_MERCK + "australian+bat+lyssavirus",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_proliferative_enteropathy",
@@ -2974,6 +3404,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "糞便PCR", "Fecal PCR"), (2, "血清蛋白", "Serum Protein")],
         merck_url=_MERCK + "equine+proliferative+enteropathy",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_serum_hepatitis",
@@ -2986,6 +3419,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "肝酵素検査", "Liver Enzymes"), (2, "凝固系検査", "Coagulation Panel")],
         merck_url=_MERCK + "theiler+disease+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     # ════════════════════════════════════════
     # MUSCULOSKELETAL (19 new)
@@ -3002,6 +3438,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "angular+limb+deformities+foals",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_capped_elbow",
@@ -3014,6 +3453,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "穿刺液分析", "Fluid Analysis")],
         merck_url=_MERCK + "capped+elbow+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_capped_hock",
@@ -3026,6 +3468,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "X線検査", "Radiographs")],
         merck_url=_MERCK + "capped+hock+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_collateral_lig",
@@ -3038,6 +3483,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "collateral+ligament+injury+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_compartment",
@@ -3050,6 +3498,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "区画内圧測定", "Compartment Pressure"), (2, "CK/AST", "CK/AST Levels")],
         merck_url=_MERCK + "compartment+syndrome+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_ddft_injury",
@@ -3062,6 +3513,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "MRI", "MRI"), (2, "超音波検査", "Ultrasound")],
         merck_url=_MERCK + "deep+digital+flexor+tendon+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_dod",
@@ -3075,6 +3529,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "栄養分析", "Nutritional Analysis")],
         merck_url=_MERCK + "developmental+orthopedic+disease+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_fibrotic_myopathy",
@@ -3087,6 +3544,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "fibrotic+myopathy+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_kissing_spines",
@@ -3099,6 +3559,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "核シンチグラフィ", "Nuclear Scintigraphy")],
         merck_url=_MERCK + "kissing+spines+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_osselets",
@@ -3112,6 +3575,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "超音波検査", "Ultrasound")],
         merck_url=_MERCK + "osselets+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_proximal_susp",
@@ -3124,6 +3590,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "proximal+suspensory+desmitis",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_sacroiliac",
@@ -3136,6 +3605,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "核シンチグラフィ", "Nuclear Scintigraphy"), (2, "超音波検査", "Ultrasound")],
         merck_url=_MERCK + "sacroiliac+joint+disease+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_septic_arthritis",
@@ -3155,6 +3627,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "関節液分析・培養", "Synovial Fluid Analysis / Culture"), (2, "X線検査", "Radiographs")],
         merck_url=_MERCK + "septic+arthritis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_shivers",
@@ -3167,6 +3642,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床神経検査", "Neurological Exam"), (2, "筋生検", "Muscle Biopsy")],
         merck_url=_MERCK + "shivers+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_stringhalt",
@@ -3179,6 +3657,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "筋電図", "Electromyography")],
         merck_url=_MERCK + "stringhalt+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_sdft",
@@ -3191,6 +3672,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "superficial+digital+flexor+tendinitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_sweeney",
@@ -3203,6 +3687,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "筋電図", "Electromyography")],
         merck_url=_MERCK + "sweeney+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_susp_branch",
@@ -3215,6 +3702,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "suspensory+branch+desmitis",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_tmj",
@@ -3227,6 +3717,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "CT検査", "CT Scan")],
         merck_url=_MERCK + "temporomandibular+joint+disease+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     # ════════════════════════════════════════
     # HOOF (5 new)
@@ -3242,6 +3735,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "装蹄評価", "Farrier Assessment")],
         merck_url=_MERCK + "club+foot+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_contracted_heels",
@@ -3254,6 +3750,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "装蹄評価", "Farrier Assessment")],
         merck_url=_MERCK + "contracted+heels+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_corn",
@@ -3266,6 +3765,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "蹄検査（削蹄）", "Hoof Exam (Trimming)"), (2, "X線検査", "Radiographs")],
         merck_url=_MERCK + "corn+hoof+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_nail_bind",
@@ -3278,6 +3780,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "蹄検査", "Hoof Exam"), (2, "X線検査", "Radiographs")],
         merck_url=_MERCK + "nail+bind+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_sheared_heels",
@@ -3290,6 +3795,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "蹄バランス評価", "Hoof Balance Assessment"), (2, "X線検査", "Radiographs")],
         merck_url=_MERCK + "sheared+heels+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     # ════════════════════════════════════════
     # DIGESTIVE (6 new)
@@ -3309,6 +3817,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "腹部超音波", "Abdominal Ultrasound"),
         ],
         merck_url=_MERCK + "inflammatory+bowel+disease+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_grass_sickness",
@@ -3321,6 +3832,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasound"), (2, "回腸生検", "Ileal Biopsy")],
         merck_url=_MERCK + "equine+grass+sickness",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_phytobezoar",
@@ -3333,6 +3847,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胃内視鏡", "Gastroscopy"), (2, "腹部超音波", "Abdominal Ultrasound")],
         merck_url=_MERCK + "phytobezoar+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_hyperlipemia",
@@ -3345,6 +3862,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血清トリグリセリド", "Serum Triglycerides"), (2, "肝酵素検査", "Liver Enzymes")],
         merck_url=_MERCK + "hyperlipemia+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_peritonitis",
@@ -3366,6 +3886,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "腹水穿刺・分析", "Abdominocentesis"), (2, "腹部超音波", "Abdominal Ultrasound")],
         merck_url=_MERCK + "peritonitis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_rectal_prolapse",
@@ -3378,6 +3901,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "直腸鏡検査", "Proctoscopy")],
         merck_url=_MERCK + "rectal+prolapse+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     # ════════════════════════════════════════
     # RESPIRATORY (6 new)
@@ -3393,6 +3919,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "上気道内視鏡", "Upper Airway Endoscopy"), (2, "X線/CT", "Radiographs / CT")],
         merck_url=_MERCK + "arytenoid+chondritis+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_epiglottal",
@@ -3405,6 +3934,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "上気道内視鏡", "Upper Airway Endoscopy"), (2, "動的内視鏡", "Overground Endoscopy")],
         merck_url=_MERCK + "epiglottal+entrapment+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_empf",
@@ -3417,6 +3949,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胸部X線", "Thoracic Radiographs"), (2, "BAL（気管支肺胞洗浄）", "Bronchoalveolar Lavage")],
         merck_url=_MERCK + "equine+multinodular+pulmonary+fibrosis",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_nasopharyngeal",
@@ -3429,6 +3964,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "上気道内視鏡", "Upper Airway Endoscopy"), (2, "CT検査", "CT Scan")],
         merck_url=_MERCK + "nasopharyngeal+cicatrix+syndrome",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_nasal_polyp",
@@ -3441,6 +3979,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "CT検査", "CT Scan")],
         merck_url=_MERCK + "nasal+polyp+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_ards",
@@ -3453,6 +3994,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液ガス分析", "Blood Gas Analysis"), (2, "胸部超音波", "Thoracic Ultrasound")],
         merck_url=_MERCK + "acute+respiratory+distress+syndrome+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     # ════════════════════════════════════════
     # SKIN (17 new)
@@ -3468,6 +4012,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮内テスト", "Intradermal Skin Test"), (2, "アレルゲン特異的IgE", "Allergen-Specific IgE")],
         merck_url=_MERCK + "atopic+dermatitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_aural_plaques",
@@ -3480,6 +4027,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "aural+plaques+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_cpl",
@@ -3493,6 +4043,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "皮膚生検", "Skin Biopsy")],
         merck_url=_MERCK + "chronic+progressive+lymphedema+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_contact",
@@ -3505,6 +4058,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "パッチテスト", "Patch Test")],
         merck_url=_MERCK + "contact+dermatitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_onchocerciasis",
@@ -3517,6 +4073,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "駆虫試験", "Deworming Trial")],
         merck_url=_MERCK + "onchocerciasis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_pythiosis",
@@ -3529,6 +4088,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "血清学検査", "Serology"), (3, "培養", "Culture")],
         merck_url=_MERCK + "pythiosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_hyperelastosis",
@@ -3542,6 +4104,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "hyperelastosis+cutis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_lice",
@@ -3557,6 +4122,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "スコッチテープ法", "Scotch Tape Prep"),
         ],
         merck_url=_MERCK + "lice+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_mange",
@@ -3569,6 +4137,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "皮膚掻爬", "Skin Scraping"), (2, "顕微鏡検査", "Microscopy")],
         merck_url=_MERCK + "mange+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_papillomatosis",
@@ -3582,6 +4153,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "papillomatosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_proud_flesh",
@@ -3594,6 +4168,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "proud+flesh+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_saddle_sores",
@@ -3606,6 +4183,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "鞍適合評価", "Saddle Fit Assessment")],
         merck_url=_MERCK + "saddle+sores+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_scratches",
@@ -3618,6 +4198,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚掻爬", "Skin Scraping"), (2, "培養", "Culture")],
         merck_url=_MERCK + "pastern+dermatitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_seborrhea",
@@ -3630,6 +4213,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "甲状腺機能検査", "Thyroid Function")],
         merck_url=_MERCK + "seborrhea+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_sunburn",
@@ -3642,6 +4228,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "sunburn+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_ulcerative_lymph",
@@ -3654,6 +4243,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "培養", "Culture"), (2, "細胞診", "Cytology")],
         merck_url=_MERCK + "ulcerative+lymphangitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_vasculitis",
@@ -3666,6 +4258,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "CBC", "Complete Blood Count")],
         merck_url=_MERCK + "vasculitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     # ════════════════════════════════════════
     # EYE (8 new)
@@ -3681,6 +4276,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "眼科検査（細隙灯）", "Slit Lamp Exam"), (2, "超音波検査", "Ocular Ultrasound")],
         merck_url=_MERCK + "cataracts+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_eosinophilic",
@@ -3693,6 +4291,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "角膜掻爬細胞診", "Corneal Cytology"), (2, "眼科検査", "Ophthalmic Exam")],
         merck_url=_MERCK + "eosinophilic+keratitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_entropion",
@@ -3706,6 +4307,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Exam"), (2, "フルオレセイン染色", "Fluorescein Stain")],
         merck_url=_MERCK + "entropion+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_eyeworm",
@@ -3718,6 +4322,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "眼科検査（虫体確認）", "Ophthalmic Exam"), (2, "洗浄・虫体摘出", "Lavage / Removal")],
         merck_url=_MERCK + "eyeworm+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_immune_keratitis",
@@ -3730,6 +4337,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Exam"), (2, "角膜細胞診", "Corneal Cytology")],
         merck_url=_MERCK + "immune+mediated+keratitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_keratomycosis",
@@ -3745,6 +4355,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "細隙灯検査", "Slit Lamp Exam"),
         ],
         merck_url=_MERCK + "keratomycosis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_mcoa",
@@ -3758,6 +4371,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Exam"), (2, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "multiple+congenital+ocular+anomalies+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_nasolacrimal",
@@ -3770,6 +4386,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "鼻涙管洗浄", "Nasolacrimal Duct Flush"), (2, "内視鏡検査", "Endoscopy")],
         merck_url=_MERCK + "nasolacrimal+duct+occlusion+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     # ════════════════════════════════════════
     # NEUROLOGICAL (14 new)
@@ -3785,6 +4404,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "神経検査", "Neurological Exam"), (2, "筋電図", "Electromyography")],
         merck_url=_MERCK + "acquired+equine+polyneuropathy",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_cauda_equina",
@@ -3797,6 +4419,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "神経検査", "Neurological Exam"), (2, "CSF分析", "CSF Analysis")],
         merck_url=_MERCK + "cauda+equina+neuritis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_cerebellar",
@@ -3811,6 +4436,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "神経検査", "Neurological Exam"), (2, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "cerebellar+abiotrophy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_discospondylitis",
@@ -3823,6 +4451,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "血液培養", "Blood Culture")],
         merck_url=_MERCK + "discospondylitis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_edm",
@@ -3836,6 +4467,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "血清ビタミンE", "Serum Vitamin E"), (2, "神経検査", "Neurological Exam")],
         merck_url=_MERCK + "equine+degenerative+myeloencephalopathy",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_leukoencephalomalacia",
@@ -3848,6 +4482,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "飼料分析（フモニシン）", "Feed Analysis (Fumonisin)"), (2, "肝酵素", "Liver Enzymes")],
         merck_url=_MERCK + "equine+leukoencephalomalacia",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_emnd",
@@ -3860,6 +4497,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清ビタミンE", "Serum Vitamin E"), (2, "筋生検", "Muscle Biopsy")],
         merck_url=_MERCK + "equine+motor+neuron+disease",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_ead",
@@ -3873,6 +4513,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "血清ビタミンE", "Serum Vitamin E"), (2, "神経検査", "Neurological Exam")],
         merck_url=_MERCK + "equine+neuroaxonal+dystrophy",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_halicephalobiasis",
@@ -3885,6 +4528,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "CSF分析", "CSF Analysis"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "halicephalobiasis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_narcolepsy",
@@ -3897,6 +4543,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査（ビデオ記録）", "Clinical Exam (Video)"), (2, "睡眠試験", "Sleep Study")],
         merck_url=_MERCK + "narcolepsy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_tho",
@@ -3909,6 +4558,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CT検査", "CT Scan"), (2, "内視鏡（咽頭嚢）", "Endoscopy (Guttural Pouch)")],
         merck_url=_MERCK + "temporohyoid+osteoarthropathy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_epilepsy",
@@ -3923,6 +4575,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "脳波検査", "EEG"), (2, "CSF分析", "CSF Analysis")],
         merck_url=_MERCK + "juvenile+idiopathic+epilepsy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_australian_stringhalt",
@@ -3935,6 +4590,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "牧草地調査", "Pasture Survey")],
         merck_url=_MERCK + "australian+stringhalt",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_parkinsonism",
@@ -3948,6 +4606,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "神経検査", "Neurological Exam"), (2, "ACTH検査", "ACTH Level")],
         merck_url=_MERCK + "equine+parkinsonism",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     # ════════════════════════════════════════
     # CARDIOVASCULAR (6 new)
@@ -3963,6 +4624,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasound"), (2, "血管造影", "Angiography")],
         merck_url=_MERCK + "aortoiliac+thrombosis+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_congenital",
@@ -3976,6 +4640,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG")],
         merck_url=_MERCK + "congenital+heart+defects+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_heart_failure",
@@ -3997,6 +4664,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG"), (3, "胸部X線", "Thoracic Radiographs")],
         merck_url=_MERCK + "heart+failure+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_mitral",
@@ -4009,6 +4679,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG")],
         merck_url=_MERCK + "mitral+regurgitation+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_tricuspid",
@@ -4021,6 +4694,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG")],
         merck_url=_MERCK + "tricuspid+regurgitation+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_air_embolism",
@@ -4033,6 +4709,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "血液ガス分析", "Blood Gas Analysis")],
         merck_url=_MERCK + "air+embolism",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     # ════════════════════════════════════════
     # METABOLIC / ENDOCRINE (6 new)
@@ -4048,6 +4727,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "T3/T4測定", "T3/T4 Levels"), (2, "甲状腺超音波", "Thyroid Ultrasound")],
         merck_url=_MERCK + "hyperthyroidism+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hypothyroidism",
@@ -4060,6 +4742,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "T3/T4測定", "T3/T4 Levels"), (2, "TSH刺激試験", "TSH Stimulation Test")],
         merck_url=_MERCK + "hypothyroidism+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_malignant_hyp",
@@ -4072,6 +4757,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "CK/血液ガス", "CK / Blood Gas")],
         merck_url=_MERCK + "malignant+hyperthermia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_nsh",
@@ -4084,6 +4772,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清Ca/P", "Serum Ca/P"), (2, "X線検査", "Radiographs"), (3, "飼料分析", "Feed Analysis")],
         merck_url=_MERCK + "nutritional+secondary+hyperparathyroidism+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_selenium_def",
@@ -4097,6 +4788,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清セレン/ビタミンE", "Serum Selenium / Vitamin E"), (2, "CK/AST", "CK/AST")],
         merck_url=_MERCK + "selenium+deficiency+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_insulin_resistance",
@@ -4112,6 +4806,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "OST（経口糖負荷試験）", "Oral Sugar Test"),
         ],
         merck_url=_MERCK + "insulin+resistance+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     # ════════════════════════════════════════
     # DENTAL (3 new)
@@ -4127,6 +4824,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔内検査", "Oral Exam"), (2, "歯科X線", "Dental Radiographs")],
         merck_url=_MERCK + "periodontal+disease+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_sialolithiasis",
@@ -4139,6 +4839,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "X線検査", "Radiographs")],
         merck_url=_MERCK + "sialolithiasis+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_diastem",
@@ -4151,6 +4854,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔内検査", "Oral Exam"), (2, "歯科X線", "Dental Radiographs")],
         merck_url=_MERCK + "diastema+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     # ════════════════════════════════════════
     # REPRODUCTIVE (3 new)
@@ -4166,6 +4872,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "胎盤検査", "Placental Examination")],
         merck_url=_MERCK + "equine+amnionitis+fetal+loss",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_mrls",
@@ -4178,6 +4887,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "胎盤検査", "Placental Exam"), (2, "心エコー", "Echocardiography")],
         merck_url=_MERCK + "mare+reproductive+loss+syndrome",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_dystocia",
@@ -4190,6 +4902,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "膣内検査", "Vaginal Exam"), (2, "超音波検査", "Ultrasound")],
         merck_url=_MERCK + "dystocia+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     # ════════════════════════════════════════
     # FOAL / NEONATAL (12 new)
@@ -4206,6 +4921,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "免疫グロブリン定量", "Immunoglobulin Levels"), (2, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "foal+immunodeficiency+syndrome",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_gbed",
@@ -4220,6 +4938,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "筋生検", "Muscle Biopsy")],
         merck_url=_MERCK + "glycogen+branching+enzyme+deficiency",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_jeb",
@@ -4234,6 +4955,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "皮膚生検", "Skin Biopsy")],
         merck_url=_MERCK + "junctional+epidermolysis+bullosa+horses",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_lavender",
@@ -4248,6 +4972,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "lavender+foal+syndrome",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_lwos",
@@ -4262,6 +4989,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "腹部X線", "Abdominal Radiographs")],
         merck_url=_MERCK + "lethal+white+overo+syndrome",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_madd",
@@ -4275,6 +5005,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "有機酸分析", "Organic Acid Analysis"), (2, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "multiple+acyl+coa+dehydrogenase+deficiency",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_ni",
@@ -4296,6 +5029,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="重症例では輸血。初乳摂取の中止と人工哺乳への切り替え。軽症例では支持療法。母馬の初乳検査（Jaundiced Foal Agglutination test）",
         prognosis="早期発見・治療で良好。重度の貧血が進行した場合は予後注意",
         prevention="出産前の母馬血清による交差適合試験。陽性の場合、初乳を別の馬から給与（コロストラムバンク）",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
     ),
     Disease(
         "fl_nms",
@@ -4309,6 +5043,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "血液ガス", "Blood Gas"), (3, "IgG定量", "IgG Level")],
         merck_url=_MERCK + "neonatal+maladjustment+syndrome",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_scid",
@@ -4323,6 +5060,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "リンパ球数", "Lymphocyte Count")],
         merck_url=_MERCK + "severe+combined+immunodeficiency+horses",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_sleepy_foal",
@@ -4336,6 +5076,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液培養", "Blood Culture"), (2, "IgG定量", "IgG Level")],
         merck_url=_MERCK + "sleepy+foal+disease",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_fpt",
@@ -4349,6 +5092,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "IgG定量（SNAP/比濁法）", "IgG Level (SNAP / Turbidimetric)"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "failure+passive+transfer+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_septic_arthritis",
@@ -4366,6 +5112,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "血液培養", "Blood Culture"),
         ],
         merck_url=_MERCK + "septic+arthritis+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     # ════════════════════════════════════════
     # IMMUNE (6 new)
@@ -4381,6 +5130,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "皮膚生検・免疫蛍光", "Skin Biopsy / Immunofluorescence"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "equine+bullous+pemphigoid",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_imm_myositis",
@@ -4394,6 +5146,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CK/AST", "CK/AST"), (2, "筋生検", "Muscle Biopsy"), (3, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "immune+mediated+myositis+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_meed",
@@ -4406,6 +5161,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検（多部位）", "Multi-Site Biopsy"), (2, "CBC（好酸球）", "CBC (Eosinophils)")],
         merck_url=_MERCK + "multisystemic+eosinophilic+epitheliotropic+disease",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_purpura",
@@ -4422,6 +5180,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "皮膚生検", "Skin Biopsy"),
         ],
         merck_url=_MERCK + "purpura+hemorrhagica+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_granulomatous",
@@ -4434,6 +5195,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "systemic+granulomatous+disease+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_food_allergy",
@@ -4446,6 +5210,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "除去食試験", "Elimination Diet Trial"), (2, "皮内テスト", "Intradermal Test")],
         merck_url=_MERCK + "food+allergy+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     # ════════════════════════════════════════
     # ONCOLOGY (3 new)
@@ -4471,6 +5238,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "腹部超音波", "Abdominal Ultrasound"),
         ],
         merck_url=_MERCK + "equine+lymphoma",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_leukemia",
@@ -4483,6 +5253,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CBC・血液塗抹", "CBC / Blood Smear"), (2, "骨髄生検", "Bone Marrow Biopsy")],
         merck_url=_MERCK + "leukemia+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_scc",
@@ -4495,6 +5268,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "局所リンパ節評価", "Regional Lymph Node Assessment")],
         merck_url=_MERCK + "squamous+cell+carcinoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     # ════════════════════════════════════════
     # URINARY (1 new)
@@ -4522,6 +5298,9 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "膀胱鏡", "Cystoscopy"),
         ],
         merck_url=_MERCK + "urolithiasis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     # ════════════════════════════════════════
     # MISC / OTHER (16 new)
@@ -4540,6 +5319,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "甲状腺機能", "Thyroid Function"),
         ],
         merck_url=_MERCK + "anhidrosis+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_bee_sting",
@@ -4552,6 +5334,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "bee+sting+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_fire_ant",
@@ -4564,6 +5349,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "fire+ant+bites+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_heat_stress",
@@ -4576,6 +5364,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "体温測定", "Temperature"), (2, "血液ガス・電解質", "Blood Gas / Electrolytes")],
         merck_url=_MERCK + "heat+stroke+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_lightning",
@@ -4588,6 +5379,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "lightning+strike+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_snake_bite",
@@ -4600,6 +5394,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "凝固系検査", "Coagulation Panel"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "snake+bite+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_spider_bite",
@@ -4612,6 +5409,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "spider+bite+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_stocking_up",
@@ -4624,6 +5424,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "stocking+up+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_hernia",
@@ -4636,6 +5439,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "hernia+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_insect_hyper",
@@ -4648,6 +5454,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床検査", "Clinical Exam"), (2, "アレルゲン検査", "Allergen Testing")],
         merck_url=_MERCK + "insect+bite+hypersensitivity+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_self_mutilation",
@@ -4660,6 +5469,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "行動評価", "Behavioral Assessment"), (2, "ホルモン検査", "Hormone Assay")],
         merck_url=_MERCK + "equine+self+mutilation+syndrome",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_rhinosporidiosis",
@@ -4672,6 +5484,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "rhinosporidiosis+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_sporotrichosis",
@@ -4684,6 +5499,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "培養", "Fungal Culture"), (2, "細胞診", "Cytology")],
         merck_url=_MERCK + "sporotrichosis+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_nodular_necrosis",
@@ -4696,6 +5514,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "臨床検査", "Clinical Exam")],
         merck_url=_MERCK + "equine+nodular+necrosis",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_pegivirus",
@@ -4708,6 +5529,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "PCR検査", "PCR"), (2, "肝酵素", "Liver Enzymes")],
         merck_url=_MERCK + "equine+pegivirus",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_coccidioidomycosis",
@@ -4720,6 +5544,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清学検査", "Serology"), (2, "X線検査", "Radiographs")],
         merck_url=_MERCK + "coccidioidomycosis+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     # ═══════════════════════════════════════════════════════════
     # Wave 2 拡充: 追加 ~245 疾患
@@ -4736,6 +5563,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "頸部X線", "Cervical Radiographs"), (2, "ミエログラフィー", "Myelography")],
         merck_url=_MERCK + "cervical+vertebral+stenotic+myelopathy+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_windgalls",
@@ -4748,6 +5578,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波", "Ultrasound")],
         merck_url=_MERCK + "windgalls+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_sacroiliac_injury",
@@ -4760,6 +5593,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Transrectal Ultrasound"), (2, "シンチグラフィー", "Nuclear Scintigraphy")],
         merck_url=_MERCK + "sacroiliac+injury+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_bucked_shins",
@@ -4772,6 +5608,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "シンチグラフィー", "Scintigraphy")],
         merck_url=_MERCK + "bucked+shins+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_poll_evil",
@@ -4784,6 +5623,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "培養検査", "Culture")],
         merck_url=_MERCK + "poll+evil+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_fistulous_withers",
@@ -4796,6 +5638,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "培養・感受性", "Culture & Sensitivity")],
         merck_url=_MERCK + "fistulous+withers+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_myositis",
@@ -4808,6 +5653,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "CK/AST", "Muscle Enzymes"), (2, "筋生検", "Muscle Biopsy")],
         merck_url=_MERCK + "myositis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_hypp",
@@ -4820,6 +5668,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清K", "Serum Potassium"), (2, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "hyperkalemic+periodic+paralysis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_upward_fixation_patella",
@@ -4832,6 +5683,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "臨床検査", "Clinical Examination")],
         merck_url=_MERCK + "upward+fixation+patella+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_subchondral_cyst",
@@ -4844,6 +5698,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線検査", "Radiographs"), (2, "関節鏡", "Arthroscopy")],
         merck_url=_MERCK + "subchondral+bone+cyst+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     # ── Infectious (if) 追加 25 ──
     Disease(
@@ -4857,6 +5714,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "培養", "Culture"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "corynebacterium+pseudotuberculosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_clostridiosis",
@@ -4869,6 +5729,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "毒素検出", "Toxin Assay"), (2, "糞便培養", "Fecal Culture")],
         merck_url=_MERCK + "clostridial+diseases+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_lawsonia",
@@ -4881,6 +5744,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "PCR検査", "Fecal PCR"), (2, "血清蛋白", "Serum Protein")],
         merck_url=_MERCK + "lawsonia+intracellularis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_eee",
@@ -4893,6 +5759,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血清学", "Serology"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "eastern+equine+encephalomyelitis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_wee",
@@ -4905,6 +5774,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血清学", "Serology"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "western+equine+encephalomyelitis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_vee",
@@ -4917,6 +5789,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血清学", "Serology"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "venezuelan+equine+encephalomyelitis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_wnv",
@@ -4929,6 +5804,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "IgM抗体", "IgM Capture ELISA"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "west+nile+virus+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_equine_influenza",
@@ -4941,6 +5819,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "鼻腔スワブPCR", "Nasal Swab PCR"), (2, "ペア血清", "Paired Serology")],
         merck_url=_MERCK + "equine+influenza",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_ehv1_myeloencephalopathy",
@@ -4953,6 +5834,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "鼻腔PCR", "Nasal PCR"), (2, "血清学", "Serology")],
         merck_url=_MERCK + "ehv1+myeloencephalopathy+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_evd",
@@ -4965,6 +5849,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "PCR", "PCR"), (2, "ウイルス分離", "Virus Isolation")],
         merck_url=_MERCK + "equine+viral+arteritis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_african_horse_sickness",
@@ -4977,6 +5864,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "PCR", "PCR"), (2, "ELISA", "ELISA")],
         merck_url=_MERCK + "african+horse+sickness",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_equine_infectious_anemia",
@@ -5001,6 +5891,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "培養", "Culture"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "contagious+equine+metritis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_equine_granulocytic_anaplasmosis",
@@ -5013,6 +5906,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "血液塗抹", "Blood Smear"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "equine+granulocytic+anaplasmosis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_equine_piroplasmosis",
@@ -5025,6 +5921,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "cELISA", "cELISA"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "equine+piroplasmosis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_cryptococcosis",
@@ -5037,6 +5936,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "培養", "Culture"), (2, "抗原検査", "Antigen Testing")],
         merck_url=_MERCK + "cryptococcosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_aspergillosis",
@@ -5049,6 +5951,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "培養", "Culture")],
         merck_url=_MERCK + "aspergillosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_babesiosis",
@@ -5061,6 +5966,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液塗抹", "Blood Smear"), (2, "PCR", "PCR")],
         merck_url=_MERCK + "babesiosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     # ── Toxic (tx) 追加 20 ──
     Disease(
@@ -5074,6 +5982,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中鉛濃度", "Blood Lead Level"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "lead+poisoning+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_arsenic_poisoning",
@@ -5086,6 +5997,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "尿中ヒ素", "Urine Arsenic"), (2, "肝腎機能", "Liver/Kidney Panel")],
         merck_url=_MERCK + "arsenic+poisoning+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_mercury_poisoning",
@@ -5098,6 +6012,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中水銀", "Blood Mercury"), (2, "腎機能", "Renal Panel")],
         merck_url=_MERCK + "mercury+poisoning+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_zinc_toxicosis",
@@ -5110,6 +6027,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "血清亜鉛", "Serum Zinc"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "zinc+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_copper_poisoning",
@@ -5122,6 +6042,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清銅", "Serum Copper"), (2, "肝機能", "Liver Panel")],
         merck_url=_MERCK + "copper+poisoning+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_selenium_toxicosis",
@@ -5134,6 +6057,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清セレン", "Serum Selenium"), (2, "蹄検査", "Hoof Examination")],
         merck_url=_MERCK + "selenium+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_iron_overload",
@@ -5146,6 +6072,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "血清鉄・フェリチン", "Iron/Ferritin"), (2, "肝生検", "Liver Biopsy")],
         merck_url=_MERCK + "iron+overload+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_avocado",
@@ -5158,6 +6087,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心筋酵素", "Cardiac Enzymes")],
         merck_url=_MERCK + "avocado+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_botulinum_forage",
@@ -5170,6 +6102,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "飼料検査", "Feed Analysis"), (2, "血清毒素", "Serum Toxin")],
         merck_url=_MERCK + "botulism+forage+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_organophosphate",
@@ -5187,6 +6122,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="アトロピン投与、2-PAM（プラリドキシム）。除染、支持療法",
         prognosis="早期治療で回復可能。呼吸筋麻痺が進行した場合は予後不良",
         prevention="農薬の適切な保管・使用、飼料・水の管理",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
     ),
     Disease(
         "tx_pyrrolizidine_chronic",
@@ -5199,6 +6135,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "肝機能", "Liver Panel"), (2, "肝生検", "Liver Biopsy")],
         merck_url=_MERCK + "pyrrolizidine+alkaloid+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_fluorosis",
@@ -5211,6 +6150,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "尿中フッ素", "Urine Fluoride"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "fluorosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_aflatoxin",
@@ -5223,6 +6165,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "飼料検査", "Feed Mycotoxin Analysis"), (2, "肝機能", "Liver Panel")],
         merck_url=_MERCK + "aflatoxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_fumonisin",
@@ -5235,6 +6180,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "飼料検査", "Feed Mycotoxin"), (2, "肝機能", "Liver Panel")],
         merck_url=_MERCK + "fumonisin+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_endophyte_fescue",
@@ -5247,6 +6195,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "牧草検査", "Pasture Analysis"), (2, "プロラクチン", "Prolactin Level")],
         merck_url=_MERCK + "fescue+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_cantharadin_secondary",
@@ -5259,6 +6210,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "電解質", "Electrolytes"), (2, "尿検査", "Urinalysis")],
         merck_url=_MERCK + "cantharidin+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     # ── Digestive (dg) 追加 20 ──
     Disease(
@@ -5272,6 +6226,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "胃内視鏡", "Gastroscopy")],
         merck_url=_MERCK + "equine+gastric+ulcer+syndrome",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_gastric_ulcer_glandular",
@@ -5284,6 +6241,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "胃内視鏡", "Gastroscopy")],
         merck_url=_MERCK + "equine+glandular+gastric+disease",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_right_dorsal_colitis",
@@ -5296,6 +6256,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Abdominal Ultrasound"), (2, "血清蛋白", "Serum Protein")],
         merck_url=_MERCK + "right+dorsal+colitis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_large_colon_volvulus",
@@ -5313,6 +6276,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="緊急外科手術が唯一の治療法。360度以上の捻転では腸管壊死のリスクが高い。術中の腸管色・蠕動で予後判断",
         prognosis="早期手術例では生存率60-80%。腸管壊死を伴う場合は予後不良。再発リスクあり",
         prevention="産後の管理強化、適切な飼養管理、異常の早期発見",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
     ),
     Disease(
         "dg_small_intestinal_strangulation",
@@ -5330,6 +6294,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="緊急手術が必要。壊死腸管の切除・吻合。術後の腸管機能回復管理が重要",
         prognosis="手術時期と壊死範囲に依存。早期手術で良好、壊死範囲が広いと予後不良",
         prevention="高齢馬の定期的な健康チェック、疝痛症状の早期発見",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
     ),
     Disease(
         "dg_epiploic_foramen_entrapment",
@@ -5342,6 +6307,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "腹水検査", "Peritoneal Fluid")],
         merck_url=_MERCK + "epiploic+foramen+entrapment+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_ileal_impaction",
@@ -5354,6 +6322,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "ileal+impaction+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_cecal_impaction",
@@ -5366,6 +6337,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "cecal+impaction+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_gastric_rupture",
@@ -5383,6 +6357,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="予後絶対不良。確定診断後は人道的安楽死の判断が必要",
         prognosis="致死的",
         prevention="疝痛の早期対応、穀類の管理、過食防止",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
     ),
     Disease(
         "dg_anterior_enteritis",
@@ -5400,6 +6375,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="経鼻胃管での胃内容物排液（定期的に反復）、大量輸液、電解質補正。外科疾患との鑑別が重要",
         prognosis="適切な支持療法で生存率90%以上。自然軽快することが多い（3-7日）。蹄葉炎に注意",
         prevention="特定の予防法はないが、衛生管理と飼養管理の徹底",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
     ),
     Disease(
         "dg_colitis_x",
@@ -5412,6 +6388,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "CBC", "CBC"), (2, "血液ガス", "Blood Gas")],
         merck_url=_MERCK + "colitis+x+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_inguinal_hernia",
@@ -5424,6 +6403,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "直腸検査", "Rectal Examination")],
         merck_url=_MERCK + "inguinal+hernia+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_meconium_impaction",
@@ -5436,6 +6418,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "直腸検査", "Digital Examination"), (2, "腹部X線", "Abdominal Radiographs")],
         merck_url=_MERCK + "meconium+impaction+foals",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_pyloric_stenosis",
@@ -5448,6 +6433,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "胃内視鏡", "Gastroscopy"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "pyloric+stenosis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_duodenitis",
@@ -5460,6 +6448,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "胃内視鏡", "Gastroscopy"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "duodenitis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_typhlocolitis",
@@ -5472,6 +6463,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CBC", "CBC"), (2, "糞便培養", "Fecal Culture")],
         merck_url=_MERCK + "typhlocolitis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_liver_failure",
@@ -5484,6 +6478,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "肝機能", "Liver Panel"), (2, "超音波", "Liver Ultrasound")],
         merck_url=_MERCK + "hepatic+failure+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     # ── Respiratory (rp) 追加 15 ──
     Disease(
@@ -5497,6 +6494,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "BAL", "Bronchoalveolar Lavage"), (2, "内視鏡", "Endoscopy")],
         merck_url=_MERCK + "exercise+induced+pulmonary+hemorrhage+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_epiglottic_entrapment",
@@ -5509,6 +6509,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Endoscopy")],
         merck_url=_MERCK + "epiglottic+entrapment+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_fourth_branchial_arch",
@@ -5521,6 +6524,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "fourth+branchial+arch+defect+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_guttural_pouch_empyema",
@@ -5533,6 +6539,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Guttural Pouch Endoscopy"), (2, "培養", "Culture")],
         merck_url=_MERCK + "guttural+pouch+empyema+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_guttural_pouch_mycosis",
@@ -5545,6 +6554,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "内視鏡", "Guttural Pouch Endoscopy"), (2, "血管造影", "Angiography")],
         merck_url=_MERCK + "guttural+pouch+mycosis+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_guttural_pouch_tympany",
@@ -5557,6 +6569,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "guttural+pouch+tympany+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_silicosis",
@@ -5569,6 +6584,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "胸部X線", "Thoracic Radiographs"), (2, "BAL", "Bronchoalveolar Lavage")],
         merck_url=_MERCK + "silicosis+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_summer_pasture_asthma",
@@ -5581,6 +6599,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "BAL", "Bronchoalveolar Lavage"), (2, "肺機能検査", "Pulmonary Function Test")],
         merck_url=_MERCK + "summer+pasture+asthma+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_sinus_cyst",
@@ -5593,6 +6614,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Skull Radiographs"), (2, "CT", "CT Scan")],
         merck_url=_MERCK + "paranasal+sinus+cyst+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_pharyngeal_lymphoid_hyperplasia",
@@ -5605,6 +6629,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "内視鏡", "Endoscopy")],
         merck_url=_MERCK + "pharyngeal+lymphoid+hyperplasia+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_tracheal_collapse",
@@ -5617,6 +6644,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "tracheal+collapse+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     # ── Skin (sk) 追加 15 ──
     Disease(
@@ -5630,6 +6660,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "血清学", "Serology")],
         merck_url=_MERCK + "besnoitiosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_pemphigus_foliaceus",
@@ -5642,6 +6675,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "免疫蛍光", "Immunofluorescence")],
         merck_url=_MERCK + "pemphigus+foliaceus+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_erythema_multiforme",
@@ -5654,6 +6690,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy")],
         merck_url=_MERCK + "erythema+multiforme+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_pastern_dermatitis",
@@ -5666,6 +6705,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "培養", "Culture"), (2, "皮膚生検", "Biopsy if chronic")],
         merck_url=_MERCK + "pastern+dermatitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_cannon_keratosis",
@@ -5678,6 +6720,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy if needed")],
         merck_url=_MERCK + "cannon+keratosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_linear_keratosis",
@@ -5690,6 +6735,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy")],
         merck_url=_MERCK + "linear+keratosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_axillary_nodular_necrosis",
@@ -5702,6 +6750,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "FNA", "Fine Needle Aspirate"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "axillary+nodular+necrosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_bacterial_folliculitis",
@@ -5714,6 +6765,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "培養", "Culture"), (2, "細胞診", "Cytology")],
         merck_url=_MERCK + "bacterial+folliculitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_hypersensitivity_culicoides",
@@ -5726,6 +6780,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "アレルゲン検査", "Allergen Testing")],
         merck_url=_MERCK + "culicoides+hypersensitivity+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_phytophotodermatitis",
@@ -5738,6 +6795,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "phytophotodermatitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     # ── Neurological (nr) 追加 15 ──
     Disease(
@@ -5751,6 +6811,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "頸部X線", "Cervical Radiographs"), (2, "ミエログラフィー", "Myelography")],
         merck_url=_MERCK + "cervical+vertebral+malformation+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_equine_degenerative_myeloencephalopathy",
@@ -5763,6 +6826,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清VitE", "Serum Vitamin E"), (2, "CSF", "CSF Analysis")],
         merck_url=_MERCK + "equine+degenerative+myeloencephalopathy",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_equine_motor_neuron_disease",
@@ -5775,6 +6841,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清VitE", "Serum Vitamin E"), (2, "筋生検", "Muscle Biopsy")],
         merck_url=_MERCK + "equine+motor+neuron+disease",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_temporohyoid_osteoarthropathy",
@@ -5787,6 +6856,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CT/X線", "CT or Radiographs"), (2, "内視鏡", "Guttural Pouch Endoscopy")],
         merck_url=_MERCK + "temporohyoid+osteoarthropathy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_equine_herpesvirus_myelitis",
@@ -5799,6 +6871,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "PCR", "Nasal/Blood PCR"), (2, "CSF", "CSF Analysis")],
         merck_url=_MERCK + "ehv+myelitis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_rabies",
@@ -5811,6 +6886,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "脳組織FA", "Brain Fluorescent Antibody")],
         merck_url=_MERCK + "rabies+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_verminous_encephalitis",
@@ -5823,6 +6901,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "CSF検査", "CSF Analysis"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "verminous+encephalitis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_hepatic_encephalopathy",
@@ -5835,6 +6916,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血中アンモニア", "Blood Ammonia"), (2, "肝機能", "Liver Panel")],
         merck_url=_MERCK + "hepatic+encephalopathy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_vestibular_disease",
@@ -5847,6 +6931,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "神経学的検査", "Neurological Examination"), (2, "CT/MRI", "CT or MRI")],
         merck_url=_MERCK + "vestibular+disease+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_cerebellar_abiotrophy",
@@ -5859,6 +6946,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "cerebellar+abiotrophy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_cauda_equina_syndrome",
@@ -5871,6 +6961,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "cauda+equina+syndrome+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_stringhalt",
@@ -5883,6 +6976,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "臨床診断", "Clinical Examination"), (2, "EMG", "Electromyography")],
         merck_url=_MERCK + "stringhalt+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_shivers",
@@ -5895,6 +6991,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床観察", "Clinical Observation")],
         merck_url=_MERCK + "shivers+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     # ── Eye (ey) 追加 12 ──
     Disease(
@@ -5908,6 +7007,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "角膜スクレイピング", "Corneal Scraping"), (2, "培養", "Fungal Culture")],
         merck_url=_MERCK + "fungal+keratitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_stromal_abscess",
@@ -5920,6 +7022,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "超音波", "Ocular Ultrasound")],
         merck_url=_MERCK + "stromal+abscess+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_immune_mediated_keratitis",
@@ -5932,6 +7037,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "フルオレセイン", "Fluorescein Test")],
         merck_url=_MERCK + "immune+mediated+keratitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_lens_luxation",
@@ -5944,6 +7052,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "超音波", "Ocular Ultrasound")],
         merck_url=_MERCK + "lens+luxation+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_retinal_detachment",
@@ -5956,6 +7067,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "眼底検査", "Fundoscopy"), (2, "超音波", "Ocular Ultrasound")],
         merck_url=_MERCK + "retinal+detachment+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_conjunctivitis",
@@ -5968,6 +7082,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "培養", "Culture if needed")],
         merck_url=_MERCK + "conjunctivitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_orbital_cellulitis",
@@ -5980,6 +7097,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Orbital Ultrasound"), (2, "CT", "CT Scan")],
         merck_url=_MERCK + "orbital+cellulitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_squamous_cell_carcinoma_eye",
@@ -5992,6 +7112,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "眼科検査", "Ophthalmic Examination")],
         merck_url=_MERCK + "squamous+cell+carcinoma+eye+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_habronema_ocular",
@@ -6004,6 +7127,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "細胞診", "Cytology"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "habronema+ocular+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     # ── Cardiovascular (cv) 追加 12 ──
     Disease(
@@ -6022,6 +7148,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="心電図で確定診断。キニジン硫酸塩またはアミオダロンによる薬物的除細動。基礎心疾患の評価が重要",
         prognosis="単独性（lone AF）は薬物除細動で80-90%が洞調律に復帰。基礎心疾患を伴う場合は再発率が高い",
         prevention="定期的な心臓聴診、電解質管理",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
     ),
     Disease(
         "cv_mitral_regurgitation",
@@ -6034,6 +7161,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG")],
         merck_url=_MERCK + "mitral+regurgitation+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_aortic_regurgitation",
@@ -6046,6 +7176,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG")],
         merck_url=_MERCK + "aortic+regurgitation+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_tricuspid_regurgitation",
@@ -6058,6 +7191,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG")],
         merck_url=_MERCK + "tricuspid+regurgitation+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_asd",
@@ -6070,6 +7206,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "心エコー", "Echocardiography")],
         merck_url=_MERCK + "atrial+septal+defect+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_myocarditis",
@@ -6082,6 +7221,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "心電図", "ECG"), (2, "心筋トロポニン", "Cardiac Troponin")],
         merck_url=_MERCK + "myocarditis+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_aortic_root_rupture",
@@ -6094,6 +7236,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心エコー", "Echocardiography")],
         merck_url=_MERCK + "aortic+root+rupture+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_second_degree_av_block",
@@ -6106,6 +7251,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "心電図", "ECG"), (2, "運動負荷心電図", "Exercising ECG")],
         merck_url=_MERCK + "second+degree+av+block+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_ventricular_tachycardia",
@@ -6118,6 +7266,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "電解質", "Electrolytes")],
         merck_url=_MERCK + "ventricular+tachycardia+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     # ── Metabolic (mt) 追加 12 ──
     Disease(
@@ -6131,6 +7282,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "トリグリセリド", "Triglycerides"), (2, "肝機能", "Liver Panel")],
         merck_url=_MERCK + "hyperlipemia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hypokalemia",
@@ -6143,6 +7297,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "血清K", "Serum Potassium"), (2, "ECG", "ECG")],
         merck_url=_MERCK + "hypokalemia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hypocalcemia",
@@ -6155,6 +7312,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清Ca", "Serum Calcium"), (2, "イオン化Ca", "Ionized Calcium")],
         merck_url=_MERCK + "hypocalcemia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hypomagnesemia",
@@ -6167,6 +7327,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清Mg", "Serum Magnesium")],
         merck_url=_MERCK + "hypomagnesemia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hyponatremia",
@@ -6179,6 +7342,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "血清Na", "Serum Sodium"), (2, "尿比重", "Urine Specific Gravity")],
         merck_url=_MERCK + "hyponatremia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_vitamin_e_deficiency",
@@ -6191,6 +7357,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "血清VitE", "Serum Vitamin E")],
         merck_url=_MERCK + "vitamin+e+deficiency+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_vitamin_a_deficiency",
@@ -6203,6 +7372,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "血清VitA", "Serum Vitamin A"), (2, "肝臓VitA", "Liver Vitamin A")],
         merck_url=_MERCK + "vitamin+a+deficiency+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_iodine_deficiency",
@@ -6215,6 +7387,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "T4", "Total T4"), (2, "甲状腺超音波", "Thyroid Ultrasound")],
         merck_url=_MERCK + "iodine+deficiency+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_nutritional_secondary_hyperparathyroidism",
@@ -6227,6 +7402,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "Ca/P", "Calcium/Phosphorus"), (2, "X線", "Skull Radiographs")],
         merck_url=_MERCK + "nutritional+secondary+hyperparathyroidism+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_iron_deficiency_anemia",
@@ -6239,6 +7417,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "CBC", "CBC"), (2, "血清鉄・フェリチン", "Iron/Ferritin")],
         merck_url=_MERCK + "iron+deficiency+anemia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     # ── Hoof (hf) 追加 10 ──
     Disease(
@@ -6252,6 +7433,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "蹄検査", "Hoof Examination")],
         merck_url=_MERCK + "white+line+disease+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_coffin_joint_disease",
@@ -6264,6 +7448,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "coffin+joint+disease+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_hoof_crack",
@@ -6276,6 +7463,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "蹄検査", "Hoof Examination"), (2, "X線", "Radiographs if deep")],
         merck_url=_MERCK + "hoof+wall+crack+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_coronary_band_injury",
@@ -6288,6 +7478,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "coronary+band+injury+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_laminitis_acute",
@@ -6300,6 +7493,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "ACTH/インスリン", "ACTH/Insulin")],
         merck_url=_MERCK + "acute+laminitis+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_laminitis_chronic",
@@ -6312,6 +7508,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "ベノグラム", "Venogram")],
         merck_url=_MERCK + "chronic+laminitis+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     # ── Dental (dn) 追加 8 ──
     Disease(
@@ -6325,6 +7524,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "wolf+teeth+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_fractured_tooth",
@@ -6337,6 +7539,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "fractured+tooth+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_dental_abscess",
@@ -6349,6 +7554,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Skull Radiographs"), (2, "CT", "CT Scan")],
         merck_url=_MERCK + "dental+abscess+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_sharp_enamel_points",
@@ -6361,6 +7569,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "sharp+enamel+points+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_malocclusion",
@@ -6373,6 +7584,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "malocclusion+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_retained_deciduous",
@@ -6385,6 +7599,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "retained+deciduous+teeth+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_mandibular_fracture",
@@ -6397,6 +7614,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "CT", "CT Scan")],
         merck_url=_MERCK + "mandibular+fracture+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     # ── Reproductive (rp/repo) 追加 15 ──
     Disease(
@@ -6410,6 +7630,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床検査", "Clinical Examination")],
         merck_url=_MERCK + "uterine+prolapse+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_ovarian_tumor",
@@ -6422,6 +7645,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Transrectal Ultrasound"), (2, "ホルモン検査", "Hormone Panel")],
         merck_url=_MERCK + "ovarian+tumor+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_vaginal_varicose",
@@ -6434,6 +7660,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "膣鏡", "Vaginoscopy")],
         merck_url=_MERCK + "vaginal+varicose+veins+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_cervical_laceration",
@@ -6446,6 +7675,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "膣鏡", "Vaginoscopy"), (2, "培養", "Culture")],
         merck_url=_MERCK + "cervical+laceration+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_torsion_uterine",
@@ -6458,6 +7690,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "uterine+torsion+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_ruptured_prepubic_tendon",
@@ -6470,6 +7705,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "臨床検査", "Clinical Examination")],
         merck_url=_MERCK + "ruptured+prepubic+tendon+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_hydrops",
@@ -6482,6 +7720,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Transrectal Ultrasound")],
         merck_url=_MERCK + "hydrops+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_perineal_laceration",
@@ -6494,6 +7735,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床検査", "Clinical Examination")],
         merck_url=_MERCK + "perineal+laceration+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_fescue_toxicosis_repro",
@@ -6506,6 +7750,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "牧草検査", "Pasture Analysis"), (2, "プロラクチン", "Prolactin")],
         merck_url=_MERCK + "fescue+toxicosis+reproductive+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_twinning",
@@ -6518,6 +7765,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Transrectal Ultrasound")],
         merck_url=_MERCK + "twin+pregnancy+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_abortion_etiologies",
@@ -6530,6 +7780,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胎盤・胎児検査", "Fetal/Placental Examination"), (2, "培養", "Culture")],
         merck_url=_MERCK + "abortion+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     # ── Foal (fl) 追加 15 ──
     Disease(
@@ -6543,6 +7796,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "PCV/TP", "PCV/Total Protein"), (2, "交差試験", "Cross-match")],
         merck_url=_MERCK + "neonatal+isoerythrolysis+horses",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_septicemia",
@@ -6567,6 +7823,7 @@ DISEASE_DATABASE: list[Disease] = [
         general_management="血液培養と広域スペクトラム抗菌薬の静脈内投与。IgG測定と必要に応じた血漿輸血。ICU管理が理想的",
         prognosis="早期発見・治療で生存率50-70%。多臓器不全に進展した場合は予後不良",
         prevention="清潔な分娩環境、出生6時間以内の十分な初乳摂取（IgG>800mg/dL目標）、臍帯の消毒処理",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
     ),
     Disease(
         "fl_failure_passive_transfer",
@@ -6579,6 +7836,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "IgG測定", "IgG SNAP Test")],
         merck_url=_MERCK + "failure+passive+transfer+horses",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_uroperitoneum",
@@ -6591,6 +7851,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "腹水Cr", "Peritoneal Fluid Creatinine"), (2, "電解質", "Electrolytes")],
         merck_url=_MERCK + "uroperitoneum+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_patent_urachus",
@@ -6603,6 +7866,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Umbilical Ultrasound")],
         merck_url=_MERCK + "patent+urachus+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_umbilical_hernia",
@@ -6615,6 +7881,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波", "Ultrasound")],
         merck_url=_MERCK + "umbilical+hernia+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_umbilical_infection",
@@ -6627,6 +7896,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Umbilical Ultrasound"), (2, "培養", "Culture")],
         merck_url=_MERCK + "umbilical+infection+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_premature_foal",
@@ -6639,6 +7911,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線（四肢）", "Limb Radiographs"), (2, "IgG", "IgG Level")],
         merck_url=_MERCK + "premature+foal+horses",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_hypoxic_ischemic_encephalopathy",
@@ -6651,6 +7926,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液ガス", "Blood Gas"), (2, "血糖", "Glucose")],
         merck_url=_MERCK + "hypoxic+ischemic+encephalopathy+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_meconium_aspiration",
@@ -6663,6 +7941,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "胸部X線", "Thoracic Radiographs"), (2, "血液ガス", "Blood Gas")],
         merck_url=_MERCK + "meconium+aspiration+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_rhodococcus_pneumonia",
@@ -6675,6 +7956,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasound"), (2, "PCR", "Tracheobronchial PCR")],
         merck_url=_MERCK + "rhodococcus+pneumonia+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_foal_heat_diarrhea",
@@ -6687,6 +7971,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床観察", "Clinical Observation")],
         merck_url=_MERCK + "foal+heat+diarrhea",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_rotavirus",
@@ -6699,6 +7986,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "糞便ロタウイルス検査", "Fecal Rotavirus Test")],
         merck_url=_MERCK + "rotavirus+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_clostridial_enteritis",
@@ -6711,6 +8001,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "毒素検出", "Toxin Assay"), (2, "糞便培養", "Fecal Culture")],
         merck_url=_MERCK + "clostridial+enteritis+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_flexural_deformity",
@@ -6723,6 +8016,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "臨床検査", "Clinical Examination")],
         merck_url=_MERCK + "flexural+deformity+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     # ── Immune (im) 追加 8 ──
     Disease(
@@ -6736,6 +8032,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "リンパ球数", "Lymphocyte Count")],
         merck_url=_MERCK + "combined+immunodeficiency+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_selective_iga_deficiency",
@@ -6748,6 +8047,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "免疫グロブリン", "Immunoglobulin Levels")],
         merck_url=_MERCK + "iga+deficiency+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_immune_mediated_hemolytic_anemia",
@@ -6760,6 +8062,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CBC", "CBC"), (2, "クームス試験", "Coombs Test")],
         merck_url=_MERCK + "immune+mediated+hemolytic+anemia+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_immune_mediated_thrombocytopenia",
@@ -6772,6 +8077,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CBC/血小板", "CBC/Platelet Count"), (2, "骨髄検査", "Bone Marrow Aspirate")],
         merck_url=_MERCK + "immune+mediated+thrombocytopenia+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_purpura_hemorrhagica",
@@ -6784,6 +8092,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CBC", "CBC"), (2, "Strep M protein抗体", "Serum SeM Antibody")],
         merck_url=_MERCK + "purpura+hemorrhagica+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_anaphylaxis",
@@ -6796,6 +8107,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "anaphylaxis+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_systemic_lupus",
@@ -6808,6 +8122,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "ANA", "Antinuclear Antibody"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "systemic+lupus+erythematosus+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_drug_hypersensitivity",
@@ -6820,6 +8137,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "薬剤中止", "Drug Withdrawal")],
         merck_url=_MERCK + "drug+hypersensitivity+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     # ── Oncology (on) 追加 10 ──
     Disease(
@@ -6833,6 +8153,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "FNA", "Fine Needle Aspirate"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "melanoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_sarcoid",
@@ -6845,6 +8168,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "PCR", "BPV PCR")],
         merck_url=_MERCK + "equine+sarcoid",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_squamous_cell_carcinoma",
@@ -6857,6 +8183,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "生検", "Biopsy")],
         merck_url=_MERCK + "squamous+cell+carcinoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_fibrosarcoma",
@@ -6869,6 +8198,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "CT/MRI", "CT or MRI")],
         merck_url=_MERCK + "fibrosarcoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_hemangiosarcoma",
@@ -6881,6 +8213,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Abdominal Ultrasound"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "hemangiosarcoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_mastocytoma",
@@ -6893,6 +8228,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "FNA", "Fine Needle Aspirate"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "mastocytoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_lipoma_pedunculated",
@@ -6905,6 +8243,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波", "Abdominal Ultrasound"), (2, "腹水検査", "Peritoneal Fluid")],
         merck_url=_MERCK + "pedunculated+lipoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_gastric_scc",
@@ -6917,6 +8258,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胃内視鏡", "Gastroscopy"), (2, "腹部超音波", "Abdominal Ultrasound")],
         merck_url=_MERCK + "gastric+squamous+cell+carcinoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_nasal_polyp",
@@ -6929,6 +8273,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "nasal+polyp+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_ethmoid_carcinoma",
@@ -6941,6 +8288,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CT", "CT Scan"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "ethmoid+carcinoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     # ── Urinary (ur) 追加 10 ──
     Disease(
@@ -6954,6 +8304,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "BUN/Cr", "BUN/Creatinine"), (2, "尿検査", "Urinalysis")],
         merck_url=_MERCK + "acute+renal+failure+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_chronic_renal_failure",
@@ -6966,6 +8319,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "BUN/Cr", "BUN/Creatinine"), (2, "腎臓超音波", "Renal Ultrasound")],
         merck_url=_MERCK + "chronic+renal+failure+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_cystitis",
@@ -6978,6 +8334,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "尿検査・培養", "Urinalysis/Culture"), (2, "超音波", "Bladder Ultrasound")],
         merck_url=_MERCK + "cystitis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_bladder_rupture",
@@ -6990,6 +8349,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "腹水Cr", "Peritoneal Fluid Creatinine"), (2, "電解質", "Electrolytes")],
         merck_url=_MERCK + "bladder+rupture+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_nephrolithiasis",
@@ -7002,6 +8364,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "腎臓超音波", "Renal Ultrasound"), (2, "尿検査", "Urinalysis")],
         merck_url=_MERCK + "nephrolithiasis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_pyelonephritis",
@@ -7014,6 +8379,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "尿検査・培養", "Urinalysis/Culture"), (2, "腎臓超音波", "Renal Ultrasound")],
         merck_url=_MERCK + "pyelonephritis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_urethral_calculus",
@@ -7026,6 +8394,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "内視鏡", "Urethroscopy"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "urethral+calculus+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_sabulous_cystitis",
@@ -7038,6 +8409,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Bladder Ultrasound"), (2, "膀胱鏡", "Cystoscopy")],
         merck_url=_MERCK + "sabulous+cystitis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_renal_tubular_acidosis",
@@ -7050,6 +8424,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "血液ガス", "Blood Gas"), (2, "尿pH", "Urine pH")],
         merck_url=_MERCK + "renal+tubular+acidosis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_ectopic_ureter",
@@ -7062,6 +8439,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "膀胱鏡", "Cystoscopy")],
         merck_url=_MERCK + "ectopic+ureter+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     # ── Misc (mc) 追加 15 ──
     Disease(
@@ -7075,6 +8455,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "傷の評価", "Wound Assessment"), (2, "X線（異物）", "Radiographs")],
         merck_url=_MERCK + "wound+management+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_burn_injury",
@@ -7087,6 +8470,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "傷の評価", "Burn Assessment"), (2, "CBC", "CBC")],
         merck_url=_MERCK + "burn+injury+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_frostbite",
@@ -7099,6 +8485,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "臨床評価", "Clinical Assessment")],
         merck_url=_MERCK + "frostbite+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_smoke_inhalation",
@@ -7111,6 +8500,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "内視鏡", "Airway Endoscopy"), (2, "血液ガス", "Blood Gas")],
         merck_url=_MERCK + "smoke+inhalation+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_drowning_near",
@@ -7123,6 +8515,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "胸部X線", "Thoracic Radiographs"), (2, "血液ガス", "Blood Gas")],
         merck_url=_MERCK + "near+drowning+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_fractured_rib",
@@ -7135,6 +8530,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Thoracic Ultrasound"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "rib+fracture+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_vertebral_fracture",
@@ -7147,6 +8545,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "CT/MRI", "CT or MRI")],
         merck_url=_MERCK + "vertebral+fracture+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_pelvic_fracture",
@@ -7159,6 +8560,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "超音波", "Transrectal Ultrasound")],
         merck_url=_MERCK + "pelvic+fracture+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_long_bone_fracture",
@@ -7171,6 +8575,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "X線", "Radiographs")],
         merck_url=_MERCK + "long+bone+fracture+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_desmitis_suspensory",
@@ -7183,6 +8590,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "suspensory+ligament+desmitis+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_tendinitis_sdft",
@@ -7195,6 +8605,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound")],
         merck_url=_MERCK + "superficial+digital+flexor+tendinitis+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_tendinitis_ddft",
@@ -7207,6 +8620,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "deep+digital+flexor+tendinitis+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_collateral_ligament_injury",
@@ -7219,6 +8635,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "collateral+ligament+injury+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_electrocution",
@@ -7231,6 +8650,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "CK", "Muscle Enzymes")],
         merck_url=_MERCK + "electrocution+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_foreign_body_foot",
@@ -7243,6 +8665,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "foreign+body+foot+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     # ═══════════════════════════════════════════════════════════
     # Wave 3: 追加 ~40 疾患
@@ -7259,6 +8684,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "splints+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_carpitis",
@@ -7271,6 +8699,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "関節鏡", "Arthroscopy")],
         merck_url=_MERCK + "carpitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     # ── Additional Infectious ──
     Disease(
@@ -7284,6 +8715,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "PCR", "PCR"), (2, "血清学", "Serology")],
         merck_url=_MERCK + "equine+encephalosis+virus",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_getah_virus",
@@ -7296,6 +8730,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "PCR", "PCR"), (2, "血清学", "Serology")],
         merck_url=_MERCK + "getah+virus+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_nipah_virus",
@@ -7308,6 +8745,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "PCR", "PCR"), (2, "血清学", "Serology")],
         merck_url=_MERCK + "nipah+virus+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_melioidosis",
@@ -7320,6 +8760,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "培養", "Culture"), (2, "血清学", "Serology")],
         merck_url=_MERCK + "melioidosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     # ── Additional Digestive ──
     Disease(
@@ -7333,6 +8776,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "経鼻胃管", "Nasogastric Intubation"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "gastric+impaction+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_displacement_nephrosplenic",
@@ -7345,6 +8791,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "超音波", "Ultrasound")],
         merck_url=_MERCK + "nephrosplenic+entrapment+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_intussusception",
@@ -7357,6 +8806,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "直腸検査", "Rectal Examination")],
         merck_url=_MERCK + "intussusception+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_cholelithiasis",
@@ -7369,6 +8821,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Abdominal Ultrasound"), (2, "肝機能", "Liver Panel")],
         merck_url=_MERCK + "cholelithiasis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     # ── Additional Skin ──
     Disease(
@@ -7382,6 +8837,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing"), (2, "皮膚生検", "Skin Biopsy")],
         merck_url=_MERCK + "herda+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     # ── Additional Neurological ──
     Disease(
@@ -7395,6 +8853,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "神経学的検査", "Neurological Examination"), (2, "頸部超音波", "Cervical Ultrasound")],
         merck_url=_MERCK + "horner+syndrome+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_tetanus",
@@ -7407,6 +8868,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "創傷検査", "Wound Examination")],
         merck_url=_MERCK + "tetanus+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_grass_sickness",
@@ -7419,6 +8883,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "回腸生検", "Ileal Biopsy")],
         merck_url=_MERCK + "equine+grass+sickness",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     # ── Additional Cardiovascular ──
     Disease(
@@ -7432,6 +8899,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "心エコー", "Echocardiography")],
         merck_url=_MERCK + "patent+ductus+arteriosus+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_tetralogy_of_fallot",
@@ -7444,6 +8914,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG")],
         merck_url=_MERCK + "tetralogy+of+fallot+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_jugular_thrombophlebitis",
@@ -7456,6 +8929,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound")],
         merck_url=_MERCK + "jugular+thrombophlebitis+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     # ── Additional Metabolic ──
     Disease(
@@ -7469,6 +8945,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "筋生検", "Muscle Biopsy"), (2, "遺伝子検査", "Genetic Panel")],
         merck_url=_MERCK + "pssm+type+2+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_mfm",
@@ -7481,6 +8960,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "筋生検", "Muscle Biopsy")],
         merck_url=_MERCK + "myofibrillar+myopathy+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     # ── Additional Foal ──
     Disease(
@@ -7494,6 +8976,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液ガス", "Blood Gas"), (2, "血糖", "Glucose")],
         merck_url=_MERCK + "perinatal+asphyxia+foals",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_lethal_white_syndrome",
@@ -7506,6 +8991,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "遺伝子検査", "Genetic Testing")],
         merck_url=_MERCK + "lethal+white+overo+syndrome",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     # ── Additional Hoof ──
     Disease(
@@ -7519,6 +9007,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "navicular+syndrome+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     # ── Additional Dental ──
     Disease(
@@ -7532,6 +9023,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "parrot+mouth+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     # ── Additional Reproductive ──
     Disease(
@@ -7545,6 +9039,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "超音波", "Transrectal Ultrasound"), (2, "精液検査", "Semen Analysis")],
         merck_url=_MERCK + "seminal+vesiculitis+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_testicular_torsion",
@@ -7557,6 +9054,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波", "Scrotal Ultrasound")],
         merck_url=_MERCK + "testicular+torsion+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     # ── Additional Oncology ──
     Disease(
@@ -7570,6 +9070,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "FNA/生検", "FNA/Biopsy")],
         merck_url=_MERCK + "hemangioma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "on_neurofibroma",
@@ -7582,6 +9085,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "生検", "Biopsy")],
         merck_url=_MERCK + "neurofibroma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     # ── Additional Urinary ──
     Disease(
@@ -7595,6 +9101,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "CBC", "CBC"), (2, "BUN/Cr", "BUN/Creatinine")],
         merck_url=_MERCK + "hemolytic+uremic+syndrome+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     # ── Additional Misc ──
     Disease(
@@ -7608,6 +9117,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "ECG"), (2, "臨床検査", "Clinical Examination")],
         merck_url=_MERCK + "lightning+strike+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_compartment_syndrome",
@@ -7620,6 +9132,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "CK", "Creatine Kinase"), (2, "区画内圧測定", "Compartment Pressure")],
         merck_url=_MERCK + "compartment+syndrome+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "mc_recurrent_airway_obstruction",
@@ -7632,6 +9147,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "BAL", "Bronchoalveolar Lavage"), (2, "肺機能検査", "Pulmonary Function Test")],
         merck_url=_MERCK + "recurrent+airway+obstruction+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     # ── Final additions (Wave 3) ──
     Disease(
@@ -7645,6 +9163,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血清学", "Serology"), (2, "PCR", "CSF PCR")],
         merck_url=_MERCK + "japanese+encephalitis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "mc_exertional_heat_illness",
@@ -7657,6 +9178,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸温", "Rectal Temperature"), (2, "電解質", "Electrolytes")],
         merck_url=_MERCK + "exertional+heat+illness+horses",
+        treatment_protocol="Treatment depends on the specific condition. General principles include: species-appropriate pain management (NSAIDs, opioids), IV fluid therapy for dehydration/shock, antimicrobial therapy guided by culture/sensitivity when infection is present, nutritional support including assisted feeding if anorexic, environmental modification for comfort and safety, and close monitoring with serial clinical and laboratory assessment.",
+        clinical_signs_detail="疾患特異的な臨床徴候に加え、一般的所見として発熱、食欲不振、沈鬱、体重減少、脱水、粘膜色調変化が認められることがある",
+        risk_factors="個々の疾患に特異的なリスク因子に依存。一般的に免疫低下、ストレス、不適切な飼育環境、栄養不良、加齢が共通リスク因子となる",
     ),
     Disease(
         "ur_bladder_neoplasia",
@@ -7669,6 +9193,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "膀胱鏡", "Cystoscopy"), (2, "超音波", "Bladder Ultrasound")],
         merck_url=_MERCK + "bladder+neoplasia+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "on_intestinal_lymphoma",
@@ -7681,6 +9208,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasound"), (2, "直腸生検", "Rectal Biopsy")],
         merck_url=_MERCK + "intestinal+lymphoma+horses",
+        treatment_protocol="Surgical excision with wide margins where anatomically feasible. Cisplatin beads or intralesional chemotherapy for sarcoids and squamous cell carcinoma. Radiation therapy (brachytherapy) for periocular and localized tumors. Cryotherapy or laser ablation for superficial lesions. BCG immunotherapy for sarcoids. Systemic chemotherapy (rarely used): carboplatin for melanoma. Palliative care: NSAIDs for pain, nutritional support. Prognosis depends on tumor type, location, and stage.",
+        clinical_signs_detail="局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限",
+        risk_factors="灰色馬（メラノーマ好発）、日光曝露（白い皮膚部位のSCC）、BPV（ウシパピローマウイルス：サルコイド関連）、加齢、遺伝的素因、慢性刺激/炎症",
     ),
     Disease(
         "im_evans_syndrome",
@@ -7693,6 +9223,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "CBC", "CBC"), (2, "クームス試験", "Coombs Test")],
         merck_url=_MERCK + "evans+syndrome+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "ey_anterior_uveitis",
@@ -7705,6 +9238,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="soon",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "眼圧", "Tonometry")],
         merck_url=_MERCK + "anterior+uveitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "sk_ventral_midline_dermatitis",
@@ -7717,6 +9253,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "皮膚掻爬", "Skin Scraping")],
         merck_url=_MERCK + "ventral+midline+dermatitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     # ================================================================
     # 追加運動器疾患 (Musculoskeletal) — 追加20疾患
@@ -7732,6 +9271,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "sesamoiditis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_pedal_osteitis",
@@ -7744,6 +9286,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "MRI検査", "MRI")],
         merck_url=_MERCK + "pedal+osteitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_ringbone_high",
@@ -7756,6 +9301,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "関節内麻酔", "Intra-articular Anesthesia")],
         merck_url=_MERCK + "ringbone+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_ringbone_low",
@@ -7768,6 +9316,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "MRI検査", "MRI")],
         merck_url=_MERCK + "low+ringbone+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_suspensory_desmitis_hind",
@@ -7780,6 +9331,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "MRI検査", "MRI")],
         merck_url=_MERCK + "suspensory+desmitis+hindlimb+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_inferior_check_desmitis",
@@ -7792,6 +9346,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "inferior+check+ligament+desmitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_superior_check_desmitis",
@@ -7804,6 +9361,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "superior+check+ligament+desmitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_carpal_oa",
@@ -7816,6 +9376,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "関節内麻酔", "Intra-articular Anesthesia")],
         merck_url=_MERCK + "carpal+osteoarthritis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_stifle_oa",
@@ -7828,6 +9391,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "stifle+osteoarthritis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_meniscal_injury",
@@ -7840,6 +9406,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "関節鏡検査", "Arthroscopy"), (3, "MRI検査", "MRI")],
         merck_url=_MERCK + "meniscal+injury+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_cruciate_injury",
@@ -7852,6 +9421,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "関節鏡検査", "Arthroscopy")],
         merck_url=_MERCK + "cruciate+ligament+injury+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_elbow_hygroma",
@@ -7864,6 +9436,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "穿刺液検査", "Fluid Analysis")],
         merck_url=_MERCK + "capped+elbow+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_trochanteric_bursitis",
@@ -7876,6 +9451,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "核医学検査", "Nuclear Scintigraphy")],
         merck_url=_MERCK + "trochanteric+bursitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_pastern_oa",
@@ -7888,6 +9466,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "関節内麻酔", "Intra-articular Anesthesia")],
         merck_url=_MERCK + "pastern+osteoarthritis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_tarsal_oa",
@@ -7901,6 +9482,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "関節内麻酔", "Intra-articular Anesthesia")],
         merck_url=_MERCK + "bone+spavin+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_bicipital_bursitis",
@@ -7913,6 +9497,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "関節内麻酔", "Intra-articular Anesthesia")],
         merck_url=_MERCK + "bicipital+bursitis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_shoulder_oa",
@@ -7925,6 +9512,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "shoulder+osteoarthritis+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_radial_fracture",
@@ -7937,6 +9527,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "CT検査", "CT Scan")],
         merck_url=_MERCK + "radial+fracture+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_tibial_fracture",
@@ -7949,6 +9542,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "CT検査", "CT Scan")],
         merck_url=_MERCK + "tibial+fracture+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     Disease(
         "ms_humeral_fracture",
@@ -7961,6 +9557,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "humeral+fracture+horses",
+        treatment_protocol="Initial management includes rest, controlled exercise restriction, and cryotherapy. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID or flunixin meglumine 1.1 mg/kg IV) for pain and inflammation. Intra-articular corticosteroid injections (triamcinolone 6-12 mg or methylprednisolone 40-80 mg) for joint disease. Hyaluronic acid and polysulfated glycosaminoglycans (Adequan) for cartilage support. Extracorporeal shockwave therapy or PRP/IRAP for tendon/ligament injuries. Surgical intervention (arthroscopy, internal fixation) when indicated. Rehabilitation: progressive exercise program, controlled turnout.",
+        clinical_signs_detail="跛行（前肢/後肢）、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
+        risk_factors="若齢馬の急速な成長、高強度トレーニング、不適切な蹄管理、体格・骨格の構造的弱点、過体重、硬い地面での運動、遺伝的素因",
     ),
     # ================================================================
     # 追加蹄疾患 (Hoof) — 追加10疾患
@@ -7976,6 +9575,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "フィストログラフィ", "Fistulography")],
         merck_url=_MERCK + "quittor+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_canker2",
@@ -7988,6 +9590,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "canker+hoof+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_keratoma2",
@@ -8000,6 +9605,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "MRI検査", "MRI")],
         merck_url=_MERCK + "keratoma+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_sidebone",
@@ -8013,6 +9621,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography")],
         merck_url=_MERCK + "sidebone+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_subsolar_abscess",
@@ -8025,6 +9636,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "蹄検査（ホーフテスター）", "Hoof Tester Examination"), (2, "X線検査", "Radiography")],
         merck_url=_MERCK + "subsolar+abscess+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_coronary_band_dystrophy",
@@ -8037,6 +9651,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "X線検査", "Radiography")],
         merck_url=_MERCK + "coronary+band+dystrophy+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_bruised_sole_chronic",
@@ -8049,6 +9666,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "蹄検査", "Hoof Examination"), (2, "X線検査", "Radiography")],
         merck_url=_MERCK + "bruised+sole+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_sand_crack",
@@ -8061,6 +9681,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "sand+crack+hoof+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_grass_crack",
@@ -8073,6 +9696,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "grass+crack+hoof+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     Disease(
         "hf_heel_bulb_laceration",
@@ -8085,6 +9711,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "X線検査", "Radiography")],
         merck_url=_MERCK + "heel+bulb+laceration+horses",
+        treatment_protocol="Immediate stabilization with therapeutic shoeing or hoof casting. Cryotherapy (continuous digital hypothermia) in acute laminitis. NSAIDs (phenylbutazone 2.2-4.4 mg/kg PO BID) for pain management. Corrective farriery: heart bar shoes, pads, pour-in materials for support. Digital venography to assess perfusion in severe cases. Hoof wall resection for subsolar abscesses or white line disease. Strict stall rest with deep bedding for acute cases. Regular farrier visits (4-6 week cycle) for chronic management.",
+        clinical_signs_detail="跛行（急性/慢性）、蹄の熱感、指動脈拍動亢進、蹄壁の変形・亀裂・離層、蹄底の圧痛（ヒッテスター反応陽性）、ソリヤリング（蹄輪の不整）、陥蹄姿勢、歩様短縮",
+        risk_factors="不適切な装蹄・削蹄間隔、高糖質飼料（穀類過給）、肥満、クッシング病・EMS（馬メタボリックシンドローム）、湿潤環境、蹄壁の外傷、品種的素因",
     ),
     # ================================================================
     # 追加呼吸器疾患 (Respiratory) — 追加15疾患
@@ -8101,6 +9730,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "気管支肺胞洗浄液（BAL）", "BAL"), (2, "内視鏡検査", "Endoscopy"), (3, "X線検査", "Radiography")],
         merck_url=_MERCK + "recurrent+airway+obstruction+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_eiph",
@@ -8113,6 +9745,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "気管支肺胞洗浄液", "BAL")],
         merck_url=_MERCK + "exercise+induced+pulmonary+hemorrhage+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_laryngeal_hemiplegia",
@@ -8125,6 +9760,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "内視鏡検査（安静時・運動時）", "Endoscopy (Resting & Dynamic)"), (2, "喉頭超音波", "Laryngeal Ultrasonography")],
         merck_url=_MERCK + "laryngeal+hemiplegia+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_ddsp2",
@@ -8137,6 +9775,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "運動時内視鏡検査", "Dynamic Endoscopy"), (2, "安静時内視鏡検査", "Resting Endoscopy")],
         merck_url=_MERCK + "dorsal+displacement+soft+palate+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_arytenoid_chondritis",
@@ -8149,6 +9790,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "X線検査", "Radiography"), (3, "CT検査", "CT Scan")],
         merck_url=_MERCK + "arytenoid+chondritis+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_pleuropneumonia2",
@@ -8161,6 +9805,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸部X線", "Thoracic Radiography"), (3, "胸水穿刺・培養", "Thoracocentesis & Culture")],
         merck_url=_MERCK + "pleuropneumonia+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_pneumonia_bacterial",
@@ -8173,6 +9820,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "気管洗浄液培養", "Transtracheal Wash & Culture"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "bacterial+pneumonia+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_fungal_pneumonia",
@@ -8185,6 +9835,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胸部X線", "Thoracic Radiography"), (2, "気管洗浄液培養", "Transtracheal Wash & Culture"), (3, "血清学検査", "Serology")],
         merck_url=_MERCK + "fungal+pneumonia+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_lung_abscess",
@@ -8197,6 +9850,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸部X線", "Thoracic Radiography")],
         merck_url=_MERCK + "lung+abscess+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_pneumothorax",
@@ -8209,6 +9865,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸部X線", "Thoracic Radiography")],
         merck_url=_MERCK + "pneumothorax+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_hemothorax",
@@ -8221,6 +9880,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸水穿刺・検査", "Thoracocentesis & Analysis")],
         merck_url=_MERCK + "hemothorax+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_sinusitis_primary",
@@ -8233,6 +9895,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "頭部X線", "Skull Radiography"), (2, "内視鏡検査", "Endoscopy"), (3, "CT検査", "CT Scan")],
         merck_url=_MERCK + "sinusitis+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_sinusitis_secondary",
@@ -8245,6 +9910,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "頭部X線", "Skull Radiography"), (2, "CT検査", "CT Scan"), (3, "内視鏡検査", "Endoscopy")],
         merck_url=_MERCK + "dental+sinusitis+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_sinus_cyst2",
@@ -8257,6 +9925,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "頭部X線", "Skull Radiography"), (2, "CT検査", "CT Scan"), (3, "内視鏡検査", "Endoscopy")],
         merck_url=_MERCK + "sinus+cyst+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     Disease(
         "rp_aspiration_pneumonia",
@@ -8269,6 +9940,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸部X線", "Thoracic Radiography"), (3, "気管洗浄液培養", "Transtracheal Wash & Culture")],
         merck_url=_MERCK + "aspiration+pneumonia+horses",
+        treatment_protocol="Environmental management: reduce dust, improve ventilation, soak/steam hay. Bronchodilators (clenbuterol 0.8 μg/kg PO BID or inhaled albuterol) for airway obstruction. Corticosteroids (dexamethasone 0.04-0.1 mg/kg IV/IM or inhaled fluticasone/beclomethasone). Antimicrobials based on culture/sensitivity for bacterial pneumonia (TMS, penicillin, gentamicin). Antivirals not routinely available; supportive care for viral respiratory disease. Nebulization with saline ± mucolytics. Tracheostomy for upper airway emergencies. Rest from exercise during active respiratory disease.",
+        clinical_signs_detail="鼻汁（漿液性/粘液膿性）、咳嗽、呼吸困難・努力性呼吸、鼻翼呼吸、腹式呼吸（ヒーブライン）、運動不耐性、喘鳴・異常呼吸音、発熱、頸部リンパ節腫脹",
+        risk_factors="密集飼育・換気不良、埃っぽい飼料・敷料、輸送ストレス、混合飼育（異なる施設の馬の接触）、ワクチン未接種、免疫低下（幼齢/高齢/ストレス）",
     ),
     # ================================================================
     # 追加消化器疾患 (Digestive) — 追加20疾患
@@ -8284,6 +9958,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "胃内視鏡検査", "Gastroscopy")],
         merck_url=_MERCK + "equine+gastric+ulcer+syndrome",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_gastric_glandular_ulcer",
@@ -8296,6 +9973,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "胃内視鏡検査", "Gastroscopy")],
         merck_url=_MERCK + "equine+glandular+gastric+disease",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_cecal_tympany",
@@ -8308,6 +9988,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹部超音波", "Abdominal Ultrasonography")],
         merck_url=_MERCK + "cecal+tympany+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_cecal_rupture",
@@ -8320,6 +10003,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "腹水穿刺", "Abdominocentesis"), (2, "直腸検査", "Rectal Examination")],
         merck_url=_MERCK + "cecal+rupture+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_small_colon_impaction",
@@ -8332,6 +10018,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹部超音波", "Abdominal Ultrasonography")],
         merck_url=_MERCK + "small+colon+impaction+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_colonic_torsion",
@@ -8344,6 +10033,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹水穿刺", "Abdominocentesis"), (3, "腹部超音波", "Abdominal Ultrasonography")],
         merck_url=_MERCK + "large+colon+volvulus+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_right_dorsal_colitis_nsaid",
@@ -8356,6 +10048,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasonography"), (2, "血液検査（総蛋白）", "CBC & Total Protein")],
         merck_url=_MERCK + "right+dorsal+colitis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_mesenteric_lipoma",
@@ -8369,6 +10064,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "腹水穿刺", "Abdominocentesis")],
         merck_url=_MERCK + "pedunculated+lipoma+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_esophageal_stricture",
@@ -8381,6 +10079,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "バリウム造影", "Barium Swallow")],
         merck_url=_MERCK + "esophageal+stricture+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_esophageal_diverticulum",
@@ -8393,6 +10094,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "バリウム造影", "Barium Swallow")],
         merck_url=_MERCK + "esophageal+diverticulum+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_megaesophagus",
@@ -8405,6 +10109,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "バリウム造影", "Barium Swallow"), (3, "胸部X線", "Thoracic Radiography")],
         merck_url=_MERCK + "megaesophagus+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_hepatic_lipidosis",
@@ -8417,6 +10124,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液生化学検査", "Serum Biochemistry"), (2, "肝臓超音波", "Hepatic Ultrasonography"), (3, "肝生検", "Liver Biopsy")],
         merck_url=_MERCK + "hepatic+lipidosis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_hepatic_encephalopathy",
@@ -8429,6 +10139,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液生化学検査", "Serum Biochemistry"), (2, "血中アンモニア", "Blood Ammonia"), (3, "肝臓超音波", "Hepatic Ultrasonography")],
         merck_url=_MERCK + "hepatic+encephalopathy+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_clostridial_colitis",
@@ -8441,6 +10154,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "糞便培養・毒素検出", "Fecal Culture & Toxin Assay"), (2, "血液検査", "CBC"), (3, "腹部超音波", "Abdominal Ultrasonography")],
         merck_url=_MERCK + "clostridial+colitis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_salmonellosis",
@@ -8453,6 +10169,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "糞便培養", "Fecal Culture"), (2, "血液検査", "CBC"), (3, "糞便PCR", "Fecal PCR")],
         merck_url=_MERCK + "salmonellosis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_potomac_horse_fever",
@@ -8465,6 +10184,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液PCR", "Blood PCR"), (2, "血清学検査", "Serology"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "potomac+horse+fever",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_anterior_enteritis_severe",
@@ -8477,6 +10199,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "経鼻胃管（減圧）", "Nasogastric Intubation"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "proximal+enteritis+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_small_intestinal_volvulus",
@@ -8489,6 +10214,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "腹水穿刺", "Abdominocentesis")],
         merck_url=_MERCK + "small+intestinal+volvulus+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_gastric_dilatation",
@@ -8501,6 +10229,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "経鼻胃管（減圧）", "Nasogastric Intubation"), (2, "腹部超音波", "Abdominal Ultrasonography")],
         merck_url=_MERCK + "gastric+dilatation+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     Disease(
         "dg_rectal_tear",
@@ -8513,6 +10244,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直腸検査（慎重に）", "Careful Rectal Examination"), (2, "腹水穿刺", "Abdominocentesis")],
         merck_url=_MERCK + "rectal+tear+horses",
+        treatment_protocol="Colic management: nasogastric intubation for gastric decompression, IV fluid therapy (LRS or hypertonic saline). Analgesics: flunixin meglumine 1.1 mg/kg IV, xylazine 0.3-0.5 mg/kg IV, butorphanol 0.02-0.04 mg/kg IV. Mineral oil via nasogastric tube for impactions. Prokinetics (lidocaine 1.3 mg/kg IV bolus then 0.05 mg/kg/min CRI). Surgical exploration (celiotomy) for strangulating lesions, large colon volvulus, or unresponsive impactions. Post-surgical: IV fluids, antibiotics, gradual refeeding. Gastric ulcer management: omeprazole 4 mg/kg PO SID.",
+        clinical_signs_detail="腹痛徴候（パーリング、フランク注視、転がり、起臥反復）、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常（減弱/亢進/消失）、脱水、頻脈",
+        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス（輸送・環境変化）、運動不足、脱水、NSAIDs長期投与（胃潰瘍リスク）",
     ),
     # ================================================================
     # 追加皮膚疾患 (Skin) — 追加15疾患
@@ -8528,6 +10262,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "真菌培養", "Fungal Culture"), (2, "ウッド灯検査", "Wood's Lamp"), (3, "皮膚掻爬", "Skin Scraping")],
         merck_url=_MERCK + "dermatophytosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_melanoma2",
@@ -8541,6 +10278,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "細胞診（FNA）", "Fine Needle Aspirate"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "melanoma+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_squamous_cell_ca_skin",
@@ -8553,6 +10293,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "細胞診", "Cytology")],
         merck_url=_MERCK + "squamous+cell+carcinoma+skin+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_habronemiasis2",
@@ -8565,6 +10308,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "皮膚掻爬", "Skin Scraping")],
         merck_url=_MERCK + "habronemiasis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_onchocerciasis2",
@@ -8577,6 +10323,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "皮膚掻爬", "Skin Snip")],
         merck_url=_MERCK + "onchocerciasis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_folliculitis",
@@ -8589,6 +10338,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "細菌培養", "Bacterial Culture"), (2, "細胞診", "Cytology")],
         merck_url=_MERCK + "folliculitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_urticaria2",
@@ -8601,6 +10353,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "アレルギー検査", "Allergy Testing")],
         merck_url=_MERCK + "urticaria+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_phytophotodermatitis2",
@@ -8613,6 +10368,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "血液生化学検査", "Serum Biochemistry")],
         merck_url=_MERCK + "photosensitization+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_cellulitis2",
@@ -8625,6 +10383,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液検査", "CBC"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "cellulitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_lymphangitis",
@@ -8637,6 +10398,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液検査", "CBC"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "lymphangitis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_mast_cell_tumor",
@@ -8649,6 +10413,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "細胞診（FNA）", "Fine Needle Aspirate"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "mast+cell+tumor+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_pythiosis2",
@@ -8661,6 +10428,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "血清学検査", "Serology"), (3, "培養", "Culture")],
         merck_url=_MERCK + "pythiosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_dermatophilosis",
@@ -8673,6 +10443,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "細胞診", "Cytology"), (2, "細菌培養", "Bacterial Culture")],
         merck_url=_MERCK + "dermatophilosis+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_seborrhea2",
@@ -8685,6 +10458,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "皮膚掻爬", "Skin Scraping"), (2, "生検", "Biopsy")],
         merck_url=_MERCK + "seborrhea+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     Disease(
         "sk_alopecia_areata",
@@ -8697,6 +10473,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "生検", "Biopsy")],
         merck_url=_MERCK + "alopecia+areata+horses",
+        treatment_protocol="Topical therapy: antimicrobial shampoos (chlorhexidine 2-4%), antifungal washes (miconazole/ketoconazole). Systemic antimicrobials: TMS 15-30 mg/kg PO BID for bacterial dermatitis. Griseofulvin 10 mg/kg PO SID or systemic azoles for dermatophytosis. Corticosteroids (prednisolone 1 mg/kg PO SID tapering) for allergic/immune-mediated conditions. Fly control: permethrin sprays, fly sheets, fly masks. Wound management: lavage, debridement, bandaging. Proud flesh prevention/treatment with topical corticosteroids or surgical excision.",
+        clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒（擦り付け）、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全（過剰肉芽・proud flesh）、光過敏症",
+        risk_factors="湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス",
     ),
     # ================================================================
     # 追加眼疾患 (Eye) — 追加10疾患
@@ -8712,6 +10491,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "フルオレセイン染色", "Fluorescein Staining"), (2, "細隙灯検査", "Slit Lamp Examination")],
         merck_url=_MERCK + "corneal+ulcer+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_corneal_ulcer_deep",
@@ -8724,6 +10506,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "フルオレセイン染色", "Fluorescein Staining"), (2, "角膜培養・感受性", "Corneal Culture & Sensitivity"), (3, "細隙灯検査", "Slit Lamp Examination")],
         merck_url=_MERCK + "melting+corneal+ulcer+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_recurrent_uveitis",
@@ -8736,6 +10521,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "眼科検査", "Complete Ophthalmic Examination"), (2, "眼超音波", "Ocular Ultrasonography"), (3, "レプトスピラ検査", "Leptospira Testing")],
         merck_url=_MERCK + "equine+recurrent+uveitis",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_glaucoma2",
@@ -8748,6 +10536,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "眼圧測定", "Tonometry"), (2, "眼科検査", "Complete Ophthalmic Examination")],
         merck_url=_MERCK + "glaucoma+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_cataract2",
@@ -8760,6 +10551,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "眼科検査", "Complete Ophthalmic Examination"), (2, "眼超音波", "Ocular Ultrasonography")],
         merck_url=_MERCK + "cataract+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_entropion2",
@@ -8773,6 +10567,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "フルオレセイン染色", "Fluorescein Staining")],
         merck_url=_MERCK + "entropion+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_conjunctivitis2",
@@ -8785,6 +10582,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "結膜スワブ培養", "Conjunctival Swab Culture")],
         merck_url=_MERCK + "conjunctivitis+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_eyelid_laceration",
@@ -8797,6 +10597,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "眼科検査", "Complete Ophthalmic Examination"), (2, "フルオレセイン染色", "Fluorescein Staining")],
         merck_url=_MERCK + "eyelid+laceration+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_periorbital_scc",
@@ -8810,6 +10613,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "眼科検査", "Complete Ophthalmic Examination")],
         merck_url=_MERCK + "squamous+cell+carcinoma+eye+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     Disease(
         "ey_blocked_nasolacrimal",
@@ -8822,6 +10628,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "鼻涙管洗浄", "Nasolacrimal Duct Flush"), (2, "フルオレセイン通過試験", "Fluorescein Passage Test")],
         merck_url=_MERCK + "nasolacrimal+duct+obstruction+horses",
+        treatment_protocol="Ophthalmic examination with sedation and nerve blocks (auriculopalpebral, supraorbital). Topical antibiotics: chloramphenicol, ciprofloxacin, or triple antibiotic for corneal ulcers. Topical atropine 1% for ciliary spasm and pain. Subpalpebral lavage system for frequent medication delivery. Systemic NSAIDs (flunixin meglumine 1.1 mg/kg IV) for uveitis. Topical corticosteroids ONLY for non-ulcerative conditions. Cyclosporine for immune-mediated keratitis. Enucleation for end-stage painful eyes. Fly mask for UV protection.",
+        clinical_signs_detail="流涙、眼瞼痙攣（羞明）、結膜充血、角膜混濁・潰瘍、前房フレア・蓄膿、瞳孔縮瞳/散瞳、眼球突出/陥没、視力低下（障害物回避困難）、眼周囲腫脹",
+        risk_factors="Appaloosa品種（ERU好発）、外傷（牧草片・埃）、昆虫媒介感染（Onchocerca）、UV曝露、レプトスピラ感染既往、免疫介在性素因",
     ),
     # ================================================================
     # 追加神経疾患 (Neurological) — 追加15疾患
@@ -8838,6 +10647,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "頚部X線", "Cervical Radiography"), (2, "脊髄造影", "Myelography"), (3, "CT検査", "CT Scan")],
         merck_url=_MERCK + "wobbler+syndrome+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_west_nile",
@@ -8850,6 +10662,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血清学検査（IgM）", "Serology (IgM)"), (2, "脳脊髄液検査", "CSF Analysis"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "west+nile+virus+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_rabies2",
@@ -8862,6 +10677,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "死後検査（蛍光抗体法）", "Postmortem FA Test"), (2, "臨床診断（除外診断）", "Clinical Diagnosis (Rule-out)")],
         merck_url=_MERCK + "rabies+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_botulism",
@@ -8874,6 +10692,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "血清毒素検出", "Serum Toxin Detection"), (3, "飼料検査", "Feed Analysis")],
         merck_url=_MERCK + "botulism+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_tetanus2",
@@ -8886,6 +10707,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "tetanus+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_stringhalt2",
@@ -8898,6 +10722,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "筋生検", "Muscle Biopsy"), (3, "EMG検査", "Electromyography")],
         merck_url=_MERCK + "stringhalt+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_shivers2",
@@ -8910,6 +10737,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "神経学的検査", "Neurological Examination")],
         merck_url=_MERCK + "shivers+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_narcolepsy2",
@@ -8922,6 +10752,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "ビデオ記録", "Video Documentation")],
         merck_url=_MERCK + "narcolepsy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_headshaking2",
@@ -8934,6 +10767,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "頭部CT", "Head CT"), (3, "内視鏡検査", "Endoscopy")],
         merck_url=_MERCK + "headshaking+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_cervical_facet_oa",
@@ -8947,6 +10783,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "頚部X線", "Cervical Radiography"), (2, "超音波ガイド下注射", "Ultrasound-Guided Injection"), (3, "核医学検査", "Nuclear Scintigraphy")],
         merck_url=_MERCK + "cervical+facet+arthropathy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_leukoencephalomalacia2",
@@ -8959,6 +10798,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液生化学検査", "Serum Biochemistry"), (2, "飼料検査（フモニシン）", "Feed Analysis (Fumonisin)"), (3, "MRI検査", "MRI")],
         merck_url=_MERCK + "leukoencephalomalacia+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_peripheral_neuropathy",
@@ -8971,6 +10813,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "神経学的検査", "Neurological Examination"), (2, "EMG検査", "Electromyography")],
         merck_url=_MERCK + "peripheral+neuropathy+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_suprascapular_nerve",
@@ -8983,6 +10828,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "超音波検査", "Ultrasonography"), (3, "EMG検査", "Electromyography")],
         merck_url=_MERCK + "suprascapular+nerve+paralysis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_radial_nerve_paralysis",
@@ -8995,6 +10843,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "神経学的検査", "Neurological Examination"), (2, "X線検査", "Radiography"), (3, "EMG検査", "Electromyography")],
         merck_url=_MERCK + "radial+nerve+paralysis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     Disease(
         "nr_peroneal_nerve_paralysis",
@@ -9007,6 +10858,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "神経学的検査", "Neurological Examination"), (2, "EMG検査", "Electromyography")],
         merck_url=_MERCK + "peroneal+nerve+paralysis+horses",
+        treatment_protocol="Supportive care: sling support for recumbent horses, deep bedding, nutritional support. Anti-inflammatories: flunixin meglumine 1.1 mg/kg IV or DMSO 1 g/kg IV in 10% solution for cerebral edema. Anticonvulsants: diazepam 0.05-0.4 mg/kg IV for seizures, phenobarbital for maintenance. Antimicrobials: high-dose penicillin + gentamicin for bacterial meningitis/encephalitis. Tetanus antitoxin + toxoid, penicillin, and sedation (acepromazine/diazepam) for tetanus. Physical therapy and controlled exercise during recovery. Prognosis varies significantly by etiology.",
+        clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
+        risk_factors="ワクチン未接種（EHV、WNV、狂犬病、EEE/WEE）、蚊媒介ウイルスの流行地域、頸椎の先天的狭窄、外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露",
     ),
     # ================================================================
     # 追加循環器疾患 (Cardiovascular) — 追加10疾患
@@ -9022,6 +10876,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "心臓超音波", "Echocardiography"), (2, "心電図", "Electrocardiography")],
         merck_url=_MERCK + "pulmonary+hypertension+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_aortic_valve_disease",
@@ -9035,6 +10892,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "心臓超音波", "Echocardiography"), (2, "心電図", "Electrocardiography")],
         merck_url=_MERCK + "aortic+valve+disease+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_premature_beats",
@@ -9047,6 +10907,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "ホルター心電図", "Holter Monitoring"), (3, "心臓超音波", "Echocardiography")],
         merck_url=_MERCK + "premature+beats+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_sustained_vtach",
@@ -9059,6 +10922,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "心臓超音波", "Echocardiography"), (3, "血液生化学検査", "Serum Biochemistry")],
         merck_url=_MERCK + "ventricular+tachycardia+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_complete_heart_block",
@@ -9071,6 +10937,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "心臓超音波", "Echocardiography")],
         merck_url=_MERCK + "complete+heart+block+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_mitral_valve_prolapse",
@@ -9083,6 +10952,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "心臓超音波", "Echocardiography")],
         merck_url=_MERCK + "mitral+valve+prolapse+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_cor_pulmonale",
@@ -9095,6 +10967,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "心臓超音波", "Echocardiography"), (2, "心電図", "Electrocardiography"), (3, "胸部X線", "Thoracic Radiography")],
         merck_url=_MERCK + "cor+pulmonale+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_cardiac_tamponade",
@@ -9107,6 +10982,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心臓超音波", "Echocardiography"), (2, "心嚢穿刺", "Pericardiocentesis")],
         merck_url=_MERCK + "cardiac+tamponade+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_thrombophlebitis",
@@ -9119,6 +10997,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "血液検査", "CBC")],
         merck_url=_MERCK + "thrombophlebitis+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     Disease(
         "cv_aortic_iliac_thrombosis",
@@ -9131,6 +11012,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸超音波", "Transrectal Ultrasonography"), (2, "核医学検査", "Nuclear Scintigraphy")],
         merck_url=_MERCK + "aortoiliac+thrombosis+horses",
+        treatment_protocol="Medical management: digoxin 0.011 mg/kg PO BID for atrial fibrillation with hemodynamic compromise. Quinidine sulfate 22 mg/kg PO q2h via nasogastric tube for conversion of atrial fibrillation. Lidocaine 0.25-0.5 mg/kg IV bolus for ventricular arrhythmias. ACE inhibitors (benazepril 0.5 mg/kg PO SID) for congestive heart failure. Furosemide 1-2 mg/kg IV/IM for acute pulmonary edema. Echocardiographic monitoring of cardiac function. Exercise restriction for significant cardiac disease.",
+        clinical_signs_detail="運動不耐性、頻脈/徐脈、不整脈（聴診で検出）、頸静脈怒張・拍動、末梢浮腫（腹下・四肢）、粘膜蒼白/チアノーゼ、呼吸促迫、発汗、虚脱",
+        risk_factors="高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因",
     ),
     # ================================================================
     # 追加生殖器疾患 (Reproductive) — 追加15疾患
@@ -9146,6 +11030,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography"), (2, "血液検査（プロジェステロン）", "Progesterone Assay"), (3, "培養", "Culture")],
         merck_url=_MERCK + "placentitis+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_dystocia_mare",
@@ -9158,6 +11045,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "膣検査", "Vaginal Examination"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "dystocia+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_uterine_torsion",
@@ -9170,6 +11060,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "uterine+torsion+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_endometritis2",
@@ -9182,6 +11075,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "子宮スワブ培養", "Uterine Swab Culture"), (2, "経直腸超音波", "Transrectal Ultrasonography"), (3, "子宮生検", "Uterine Biopsy")],
         merck_url=_MERCK + "endometritis+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_pyometra",
@@ -9194,6 +11090,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography"), (2, "子宮スワブ培養", "Uterine Swab Culture")],
         merck_url=_MERCK + "pyometra+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_endometrial_fibrosis",
@@ -9207,6 +11106,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "子宮生検", "Uterine Biopsy"), (2, "経直腸超音波", "Transrectal Ultrasonography")],
         merck_url=_MERCK + "endometrial+fibrosis+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_ovarian_hemorrhage",
@@ -9219,6 +11121,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography"), (2, "腹水穿刺", "Abdominocentesis")],
         merck_url=_MERCK + "ovarian+hemorrhage+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_cryptorchidism2",
@@ -9231,6 +11136,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography"), (2, "ホルモン検査（テストステロン）", "Testosterone Assay"), (3, "腹腔鏡検査", "Laparoscopy")],
         merck_url=_MERCK + "cryptorchidism+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_testicular_torsion_stallion",
@@ -9243,6 +11151,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "testicular+torsion+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_vaginal_varicose2",
@@ -9255,6 +11166,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "膣鏡検査", "Vaginoscopy"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "vaginal+varicose+veins+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_uterine_prolapse2",
@@ -9267,6 +11181,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "uterine+prolapse+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_mastitis",
@@ -9279,6 +11196,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "乳汁培養", "Milk Culture"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "mastitis+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_inguinal_hernia_stallion",
@@ -9291,6 +11211,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "直腸検査", "Rectal Examination")],
         merck_url=_MERCK + "inguinal+hernia+stallion+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_twin_pregnancy",
@@ -9303,6 +11226,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography")],
         merck_url=_MERCK + "twin+pregnancy+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     Disease(
         "rp_caslick_vulvoplasty_needed",
@@ -9315,6 +11241,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "膣鏡検査", "Vaginoscopy")],
         merck_url=_MERCK + "caslick+vulvoplasty+horses",
+        treatment_protocol="Uterine lavage with warm saline for post-breeding endometritis. Oxytocin 10-20 IU IM/IV for uterine clearance and retained fetal membranes. Prostaglandin F2α (cloprostenol 250 μg IM) for luteolysis/uterine clearance. Progesterone supplementation (altrenogest 0.044 mg/kg PO SID) for pregnancy maintenance. Deslorelin or hCG for ovulation induction. Antibiotics: intrauterine infusion (gentamicin, amikacin) or systemic. Surgical intervention: cesarean section, cryptorchid castration, ovariectomy when indicated.",
+        clinical_signs_detail="外陰部からの排出物（膿性/血性）、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常（微弱/強直）、後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）",
+        risk_factors="高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、子宮内膜症の既往、栄養不良、双子妊娠、感染症（CEM、EHV-1）、難産既往",
     ),
     # ================================================================
     # 追加感染症 (Infectious) — 追加15疾患
@@ -9330,6 +11259,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"), (2, "超音波検査（リンパ節）", "Lymph Node Ultrasonography"), (3, "鼻腔洗浄培養", "Nasopharyngeal Wash Culture")],
         merck_url=_MERCK + "strangles+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_bastard_strangles",
@@ -9342,6 +11274,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasonography"), (2, "血液検査", "CBC"), (3, "血清学検査", "Serology")],
         merck_url=_MERCK + "bastard+strangles+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_equine_influenza2",
@@ -9354,6 +11289,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"), (2, "ペア血清", "Paired Serology")],
         merck_url=_MERCK + "equine+influenza",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_ehv4",
@@ -9367,6 +11305,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"), (2, "ペア血清", "Paired Serology")],
         merck_url=_MERCK + "equine+herpesvirus+4",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_ehv1_neuro",
@@ -9379,6 +11320,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液PCR", "Blood PCR"), (2, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"), (3, "脳脊髄液検査", "CSF Analysis")],
         merck_url=_MERCK + "equine+herpesvirus+myeloencephalopathy",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_rhodococcus_adult",
@@ -9391,6 +11335,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "気管洗浄液培養", "Transtracheal Wash Culture"), (2, "胸部超音波", "Thoracic Ultrasonography"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "rhodococcus+equi+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_leptospirosis2",
@@ -9403,6 +11350,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血清学検査（MAT）", "Microscopic Agglutination Test"), (2, "尿PCR", "Urine PCR"), (3, "血液生化学", "Serum Biochemistry")],
         merck_url=_MERCK + "leptospirosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_corynebacterium2",
@@ -9415,6 +11365,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "膿汁培養", "Abscess Culture"), (2, "血清学検査", "Serology"), (3, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "ulcerative+lymphangitis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_pigeon_fever_internal",
@@ -9427,6 +11380,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasonography"), (2, "血清学検査（SHI）", "Synergistic Hemolysis Inhibition Test"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "pigeon+fever+internal+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_fungal_skin",
@@ -9439,6 +11395,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "培養", "Fungal Culture"), (2, "生検", "Biopsy"), (3, "細胞診", "Cytology")],
         merck_url=_MERCK + "sporotrichosis+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_anaplasmosis2",
@@ -9451,6 +11410,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液塗抹（封入体）", "Blood Smear (Morulae)"), (2, "血液PCR", "Blood PCR"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "equine+anaplasmosis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_piroplasmosis",
@@ -9463,6 +11425,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液塗抹", "Blood Smear"), (2, "血液PCR", "Blood PCR"), (3, "血清学検査（cELISA）", "cELISA Serology")],
         merck_url=_MERCK + "equine+piroplasmosis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_glanders2",
@@ -9475,6 +11440,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "マレイン反応", "Mallein Test"), (2, "血清学検査（CF）", "Complement Fixation Test"), (3, "培養", "Culture")],
         merck_url=_MERCK + "glanders+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_equine_viral_arteritis",
@@ -9487,6 +11455,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液PCR", "Blood PCR"), (2, "ペア血清", "Paired Serology"), (3, "ウイルス分離", "Virus Isolation")],
         merck_url=_MERCK + "equine+viral+arteritis",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     Disease(
         "if_equine_rotavirus",
@@ -9500,6 +11471,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "糞便抗原検査", "Fecal Antigen Test"), (2, "糞便PCR", "Fecal PCR")],
         merck_url=_MERCK + "rotavirus+horses",
+        treatment_protocol="Isolation and quarantine of affected animals. Antimicrobial therapy based on culture/sensitivity: penicillin, gentamicin, TMS, enrofloxacin. Antifungal therapy: systemic azoles or amphotericin B for mycotic infections. Supportive care: IV fluid therapy, nutritional support, fever management (flunixin 1.1 mg/kg IV). Vaccination post-exposure when applicable (tetanus, strangles). Environmental decontamination, vector control. Report notifiable diseases to authorities.",
+        clinical_signs_detail="発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難",
+        risk_factors="ワクチン未接種、密集飼育、新規馬の導入（隔離不足）、免疫低下（幼齢/高齢/ストレス/クッシング病）、汚染された水・飼料、昆虫ベクターの多い環境",
     ),
     # ================================================================
     # 追加代謝性疾患 (Metabolic) — 追加10疾患
@@ -9515,6 +11489,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "インスリン動態検査", "Dynamic Insulin Test"), (2, "血糖値", "Blood Glucose"), (3, "ACTH検査", "ACTH Assay")],
         merck_url=_MERCK + "equine+metabolic+syndrome",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_ppid2",
@@ -9528,6 +11505,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "血中ACTH", "Basal ACTH"), (2, "TRH刺激試験", "TRH Stimulation Test")],
         merck_url=_MERCK + "pituitary+pars+intermedia+dysfunction+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hypocalcemia2",
@@ -9540,6 +11520,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液生化学（Ca, Mg）", "Serum Biochemistry (Ca, Mg)"), (2, "血液検査", "CBC")],
         merck_url=_MERCK + "hypocalcemia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hypomagnesemia2",
@@ -9552,6 +11535,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液生化学（Mg）", "Serum Magnesium"), (2, "血液検査", "CBC")],
         merck_url=_MERCK + "hypomagnesemia+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hyperkalemic_periodic_paralysis",
@@ -9565,6 +11551,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血中カリウム", "Serum Potassium"), (2, "遺伝子検査", "Genetic Testing"), (3, "心電図", "Electrocardiography")],
         merck_url=_MERCK + "hyperkalemic+periodic+paralysis+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_polysaccharide_storage_myopathy",
@@ -9578,6 +11567,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中CK・AST", "Serum CK & AST"), (2, "遺伝子検査（GYS1）", "Genetic Testing (GYS1)"), (3, "筋生検", "Muscle Biopsy")],
         merck_url=_MERCK + "polysaccharide+storage+myopathy+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_rhabdomyolysis2",
@@ -9590,6 +11582,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中CK・AST", "Serum CK & AST"), (2, "尿検査（ミオグロビン）", "Urinalysis (Myoglobin)"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "exertional+rhabdomyolysis+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hypothyroidism2",
@@ -9602,6 +11597,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "甲状腺ホルモン（T3, T4）", "Thyroid Hormones (T3, T4)"), (2, "TSH刺激試験", "TSH Stimulation Test")],
         merck_url=_MERCK + "hypothyroidism+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_hyperadrenocorticism",
@@ -9614,6 +11612,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "血中ACTH", "Basal ACTH"), (2, "デキサメサゾン抑制試験", "Dexamethasone Suppression Test")],
         merck_url=_MERCK + "hyperadrenocorticism+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     Disease(
         "mt_nutritional_myodegeneration",
@@ -9627,6 +11628,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血中CK・AST", "Serum CK & AST"), (2, "血中ビタミンE", "Serum Vitamin E"), (3, "全血セレン", "Whole Blood Selenium")],
         merck_url=_MERCK + "nutritional+myodegeneration+horses",
+        treatment_protocol="Dietary management: low-NSC (non-structural carbohydrate) diet, grazing muzzle, controlled pasture access. IV fluid therapy (LRS with potassium supplementation) for metabolic derangements. Insulin regulation: levothyroxine 0.1 mg/kg PO SID, metformin 15-30 mg/kg PO BID for insulin dysregulation. Electrolyte correction: calcium borogluconate for hypocalcemia, magnesium sulfate for hypomagnesemia. Hepatic support: IV dextrose, branched-chain amino acids for hepatic encephalopathy. Exercise program for equine metabolic syndrome. Regular metabolic panel monitoring.",
+        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着（馬首）、陥蹄（続発性蹄葉炎）、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        risk_factors="肥満、品種的素因（ポニー、モーガン、アラブ）、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動（春の牧草増加）",
     ),
     # ================================================================
     # 追加歯科疾患 (Dental) — 追加10疾患
@@ -9642,6 +11646,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "歯科X線", "Dental Radiography")],
         merck_url=_MERCK + "diastema+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_equine_odontoclastic",
@@ -9655,6 +11662,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "歯科X線", "Dental Radiography"), (2, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "EOTRH+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_caries",
@@ -9667,6 +11677,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "歯科X線", "Dental Radiography")],
         merck_url=_MERCK + "dental+caries+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_tooth_root_abscess",
@@ -9679,6 +11692,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "歯科X線", "Dental Radiography"), (2, "頭部CT", "Head CT"), (3, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "tooth+root+abscess+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_brachygnathism",
@@ -9692,6 +11708,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "頭部X線", "Skull Radiography")],
         merck_url=_MERCK + "brachygnathism+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_prognathism",
@@ -9705,6 +11724,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination")],
         merck_url=_MERCK + "prognathism+parrot+mouth+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_displaced_tooth",
@@ -9717,6 +11739,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "歯科X線", "Dental Radiography"), (3, "頭部CT", "Head CT")],
         merck_url=_MERCK + "displaced+tooth+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_mandibular_fracture_dental",
@@ -9729,6 +11754,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "CT検査", "CT Scan")],
         merck_url=_MERCK + "mandibular+fracture+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_supernumerary",
@@ -9741,6 +11769,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "歯科X線", "Dental Radiography")],
         merck_url=_MERCK + "supernumerary+tooth+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     Disease(
         "dn_periodontal_disease",
@@ -9753,6 +11784,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "歯科X線", "Dental Radiography"), (3, "歯周ポケット探査", "Periodontal Probing")],
         merck_url=_MERCK + "periodontal+disease+horses",
+        treatment_protocol="Sedation (detomidine 0.01-0.02 mg/kg IV + butorphanol 0.01-0.02 mg/kg IV) for oral examination. Dental floating (rasping): correction of sharp enamel points, hooks, ramps, and wave mouth. Extraction of diseased, fractured, or supernumerary teeth under standing sedation or general anesthesia. Oral lavage and debridement for periodontal disease. Antibiotics (TMS, metronidazole) for dental abscesses. Regular dental examinations every 6-12 months. Dietary modifications for horses with significant dental disease.",
+        clinical_signs_detail="咀嚼困難（キッディング）、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁（片側性）、顔面腫脹",
+        risk_factors="加齢（歯の摩耗パターン変化）、品種的素因（短頭種）、不適切な飼料形態、定期的歯科検診の欠如、外傷、先天的歯列異常",
     ),
     # ================================================================
     # 追加中毒疾患 (Toxic) — 追加10疾患
@@ -9768,6 +11802,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血中CK・cTnI", "Serum CK & Cardiac Troponin I"), (2, "心電図", "Electrocardiography"), (3, "心臓超音波", "Echocardiography")],
         merck_url=_MERCK + "ionophore+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_organophosphate2",
@@ -9780,6 +11817,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血中コリンエステラーゼ活性", "Serum Cholinesterase Activity"), (2, "毒物分析", "Toxicological Analysis")],
         merck_url=_MERCK + "organophosphate+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_oleander2",
@@ -9792,6 +11832,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "血液生化学", "Serum Biochemistry"), (3, "毒物分析", "Toxicological Analysis")],
         merck_url=_MERCK + "oleander+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_acorn2",
@@ -9804,6 +11847,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液生化学（BUN, Cr）", "Serum Biochemistry (BUN, Creatinine)"), (2, "尿検査", "Urinalysis")],
         merck_url=_MERCK + "oak+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_yew2",
@@ -9816,6 +11862,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "胃内容物分析", "Gastric Content Analysis")],
         merck_url=_MERCK + "yew+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_sorghum_cystitis",
@@ -9828,6 +11877,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "膀胱超音波", "Bladder Ultrasonography"), (3, "飼料分析", "Feed Analysis")],
         merck_url=_MERCK + "sorghum+cystitis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_nitrate2",
@@ -9840,6 +11892,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血中メトヘモグロビン", "Blood Methemoglobin"), (2, "飼料・水質分析", "Feed & Water Analysis")],
         merck_url=_MERCK + "nitrate+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_aflatoxin2",
@@ -9852,6 +11907,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液生化学（肝酵素）", "Serum Biochemistry (Liver Enzymes)"), (2, "飼料検査", "Feed Analysis"), (3, "肝生検", "Liver Biopsy")],
         merck_url=_MERCK + "aflatoxin+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_nsaid_overdose",
@@ -9864,6 +11922,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液生化学", "Serum Biochemistry"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "胃内視鏡", "Gastroscopy")],
         merck_url=_MERCK + "nsaid+toxicosis+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     Disease(
         "tx_aminoglycoside_nephrotoxicity",
@@ -9876,6 +11937,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液生化学（BUN, Cr）", "Serum Biochemistry (BUN, Creatinine)"), (2, "尿検査", "Urinalysis"), (3, "GGT:クレアチニン比", "Urine GGT:Creatinine Ratio")],
         merck_url=_MERCK + "aminoglycoside+nephrotoxicity+horses",
+        treatment_protocol="Immediate removal from toxin source. Gastric decontamination: activated charcoal 1-3 g/kg via nasogastric tube (within 2-4 hours of ingestion). Cathartics (mineral oil, magnesium sulfate) to hasten GI transit. Specific antidotes when available: atropine for organophosphates, vitamin K1 for anticoagulant rodenticides, dimercaprol or succimer for heavy metals. IV fluid therapy for renal support and toxin excretion. Hepatoprotectants: N-acetylcysteine, S-adenosylmethionine for hepatotoxins. Serial monitoring of organ function (hepatic, renal, hematologic panels).",
+        clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
+        risk_factors="毒性植物へのアクセス（セネシオ、キョウチクトウ、イチイ等）、殺虫剤・除草剤への曝露、カビ毒汚染飼料、不適切な薬物投与、汚染水源、過放牧による毒草摂食",
     ),
     # ================================================================
     # 追加子馬疾患 (Foal) — 追加15疾患
@@ -9892,6 +11956,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液検査（PCV）", "CBC (PCV)"), (2, "血液型判定", "Blood Typing"), (3, "ジャウンディスフォールアガー試験", "Jaundiced Foal Agglutination Test")],
         merck_url=_MERCK + "neonatal+isoerythrolysis+horses",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_ruptured_bladder_foal",
@@ -9905,6 +11972,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "腹水穿刺（クレアチニン比）", "Abdominocentesis (Creatinine Ratio)"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "血液生化学", "Serum Biochemistry")],
         merck_url=_MERCK + "ruptured+bladder+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_angular_limb_deformity",
@@ -9918,6 +11988,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "angular+limb+deformity+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_flexural_deformity_acquired",
@@ -9931,6 +12004,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "X線検査", "Radiography"), (2, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "flexural+deformity+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_gastric_ulcer_foal",
@@ -9944,6 +12020,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胃内視鏡検査", "Gastroscopy"), (2, "糞便潜血", "Fecal Occult Blood")],
         merck_url=_MERCK + "gastric+ulcer+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_enterocolitis",
@@ -9957,6 +12036,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "糞便培養・PCR", "Fecal Culture & PCR"), (2, "血液検査", "CBC"), (3, "血液生化学", "Serum Biochemistry")],
         merck_url=_MERCK + "enterocolitis+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_septic_arthritis_foal",
@@ -9970,6 +12052,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "関節液分析・培養", "Synovial Fluid Analysis & Culture"), (2, "X線検査", "Radiography"), (3, "血液培養", "Blood Culture")],
         merck_url=_MERCK + "septic+arthritis+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_pneumonia_foal",
@@ -9983,6 +12068,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "気管洗浄液培養", "Transtracheal Wash Culture"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "pneumonia+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_hernia_umbilical",
@@ -9996,6 +12084,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "umbilical+hernia+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_patent_urachus_foal",
@@ -10009,6 +12100,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "超音波検査", "Ultrasonography")],
         merck_url=_MERCK + "patent+urachus+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_meconium_impaction_foal",
@@ -10022,6 +12116,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "腹部X線", "Abdominal Radiography")],
         merck_url=_MERCK + "meconium+impaction+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_prematurity",
@@ -10035,6 +12132,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液検査", "CBC"), (2, "IgG測定", "IgG Assay"), (3, "胸部X線", "Thoracic Radiography")],
         merck_url=_MERCK + "prematurity+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_failure_passive_transfer_foal",
@@ -10048,6 +12148,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "IgG測定（SNAP/RID）", "IgG Assay (SNAP/RID)"), (2, "血液検査", "CBC")],
         merck_url=_MERCK + "failure+passive+transfer+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_perinatal_asphyxia2",
@@ -10061,6 +12164,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "血液ガス分析", "Blood Gas Analysis"), (3, "血液検査", "CBC")],
         merck_url=_MERCK + "perinatal+asphyxia+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     Disease(
         "fl_tyzzers_disease",
@@ -10074,6 +12180,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液生化学（肝酵素）", "Serum Biochemistry (Liver Enzymes)"), (2, "剖検（確定診断）", "Necropsy (Definitive Diagnosis)")],
         merck_url=_MERCK + "tyzzer+disease+foal",
+        treatment_protocol="Neonatal ICU care: thermal support (heat lamps, blankets), IV catheterization, fluid therapy. Colostrum/plasma transfusion for failure of passive transfer (IgG <800 mg/dL). Broad-spectrum antimicrobials: penicillin + amikacin or ceftiofur for neonatal sepsis. Nutritional support: nasogastric tube feeding of mare's milk/milk replacer every 1-2 hours. Oxygen supplementation: intranasal insufflation 5-10 L/min. Ulcer prophylaxis: omeprazole 4 mg/kg PO SID. Ophthalmic exam for entropion and ulcers. Monitoring: serial blood glucose, IgG, lactate, sepsis scoring.",
+        clinical_signs_detail="哺乳意欲低下・吸啜力低下、沈鬱、発熱/低体温、関節腫脹（化膿性多関節炎）、臍帯異常（臍炎・膿瘍）、下痢（子馬下痢）、呼吸促迫、歩行異常",
+        risk_factors="初乳摂取不足（受動免疫移行不全）、難産、未熟/過熟出生、不衛生な分娩環境、臍帯処理不適切、Rh不適合（新生子溶血性疾患）、先天性異常",
     ),
     # ================================================================
     # 追加泌尿器疾患 (Urinary) — 追加10疾患
@@ -10089,6 +12198,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "尿検査・培養", "Urinalysis & Culture"), (2, "膀胱超音波", "Bladder Ultrasonography")],
         merck_url=_MERCK + "cystitis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_pyelonephritis2",
@@ -10101,6 +12213,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "尿検査・培養", "Urinalysis & Culture"), (2, "腎臓超音波", "Renal Ultrasonography"), (3, "血液生化学", "Serum Biochemistry")],
         merck_url=_MERCK + "pyelonephritis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_nephrolithiasis2",
@@ -10113,6 +12228,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="routine",
         recommended_exams=[(1, "腎臓超音波", "Renal Ultrasonography"), (2, "尿検査", "Urinalysis")],
         merck_url=_MERCK + "nephrolithiasis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_urolithiasis_bladder",
@@ -10125,6 +12243,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "膀胱超音波", "Bladder Ultrasonography"), (3, "内視鏡検査", "Cystoscopy")],
         merck_url=_MERCK + "urolithiasis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_urethral_calculus2",
@@ -10137,6 +12258,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "超音波検査", "Ultrasonography"), (3, "内視鏡検査", "Urethroscopy")],
         merck_url=_MERCK + "urethral+calculus+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_renal_cell_carcinoma",
@@ -10149,6 +12273,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "腎臓超音波", "Renal Ultrasonography"), (2, "生検", "Biopsy"), (3, "CT検査", "CT Scan")],
         merck_url=_MERCK + "renal+cell+carcinoma+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_toxic_nephrosis",
@@ -10161,6 +12288,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液生化学（BUN, Cr）", "Serum Biochemistry (BUN, Creatinine)"), (2, "尿検査", "Urinalysis"), (3, "腎臓超音波", "Renal Ultrasonography")],
         merck_url=_MERCK + "toxic+nephrosis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_renal_dysplasia",
@@ -10174,6 +12304,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "腎臓超音波", "Renal Ultrasonography"), (2, "血液生化学", "Serum Biochemistry"), (3, "腎生検", "Renal Biopsy")],
         merck_url=_MERCK + "renal+dysplasia+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_glomerulonephritis",
@@ -10186,6 +12319,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "尿検査（蛋白/クレアチニン比）", "Urinalysis (UPC Ratio)"), (2, "血液生化学", "Serum Biochemistry"), (3, "腎生検", "Renal Biopsy")],
         merck_url=_MERCK + "glomerulonephritis+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     Disease(
         "ur_bladder_neoplasia2",
@@ -10199,6 +12335,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "膀胱超音波", "Bladder Ultrasonography"), (2, "内視鏡検査（膀胱鏡）", "Cystoscopy"), (3, "生検", "Biopsy")],
         merck_url=_MERCK + "bladder+neoplasia+horses",
+        treatment_protocol="IV fluid therapy (LRS, 0.9% NaCl) for renal support and diuresis. Antimicrobials based on urine culture/sensitivity for urinary tract infections. Dietary management: reduce calcium intake for calcium carbonate urolithiasis. Surgical: cystotomy for bladder calculi, urethrostomy for obstructive urolithiasis. Acidification of urine generally not effective in horses. Monitor: serial urinalysis, BUN/creatinine, electrolytes. Chronic renal failure: supportive care, dietary protein management.",
+        clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱",
+        risk_factors="高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因",
     ),
     # ================================================================
     # 追加免疫疾患 (Immune) — 追加5疾患
@@ -10214,6 +12353,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "臨床診断", "Clinical Diagnosis")],
         merck_url=_MERCK + "anaphylaxis+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_immune_mediated_thrombocytopenia2",
@@ -10226,6 +12368,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "血液検査（血小板数）", "CBC (Platelet Count)"), (2, "骨髄検査", "Bone Marrow Aspiration")],
         merck_url=_MERCK + "immune+mediated+thrombocytopenia+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_vasculitis",
@@ -10238,6 +12383,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "血液検査", "CBC"), (3, "血清蛋白電気泳動", "Serum Protein Electrophoresis")],
         merck_url=_MERCK + "vasculitis+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_autoimmune_hemolytic_anemia",
@@ -10250,6 +12398,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="emergency",
         recommended_exams=[(1, "血液検査（PCV, Coombs）", "CBC & Coombs Test"), (2, "血液生化学", "Serum Biochemistry")],
         merck_url=_MERCK + "autoimmune+hemolytic+anemia+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
     Disease(
         "im_sarcoidosis",
@@ -10262,6 +12413,9 @@ DISEASE_DATABASE: list[Disease] = [
         urgency="urgent",
         recommended_exams=[(1, "生検", "Biopsy"), (2, "血液検査", "CBC"), (3, "腹部超音波", "Abdominal Ultrasonography")],
         merck_url=_MERCK + "granulomatous+disease+horses",
+        treatment_protocol="Immunosuppressive therapy: dexamethasone 0.04-0.2 mg/kg IV/IM tapering or prednisolone 1-2 mg/kg PO SID. Azathioprine 3 mg/kg PO SID as steroid-sparing agent for chronic immune-mediated disease. Blood transfusion for severe immune-mediated hemolytic anemia (IMHA). Pentoxifylline 8.5 mg/kg PO BID as adjunctive anti-inflammatory. Topical immunomodulators for localized conditions. Supportive care: IV fluids, nutrition. Monitor: CBC, chemistry panel, immune markers. Gradual steroid taper to prevent relapse.",
+        clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
+        risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与（ペニシリン等による免疫介在性反応）",
     ),
 ]
 
