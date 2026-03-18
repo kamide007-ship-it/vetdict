@@ -40,6 +40,48 @@ from api.species.sugar_glider_diseases import analyze_symptoms as analyze_sugar_
 from api.species.tortoise_diseases import analyze_symptoms as analyze_tortoise
 from api.symptom_checker import analyze_symptoms as analyze_dog
 
+# ── Horse category-based content templates ──
+_HORSE_TRANSMISSION: dict[str, tuple[str, str]] = {
+    "viral": (
+        "Transmitted through direct contact, aerosol droplets, fomites, or insect vectors.",
+        "直接接触、飛沫、汚染物、昆虫媒介により伝播する。",
+    ),
+    "bacterial": (
+        "Transmitted through direct contact, wound contamination, ingestion, or aerosol.",
+        "直接接触、創傷汚染、経口摂取、飛沫により伝播する。",
+    ),
+    "fungal": (
+        "Transmitted through environmental spore exposure or contact with infected animals.",
+        "環境中の胞子曝露または感染動物との接触により伝播する。",
+    ),
+    "parasitic": (
+        "Transmitted through ingestion of larvae/eggs, vector-mediated, or percutaneous penetration.",
+        "幼虫・虫卵の経口摂取、媒介動物、経皮侵入により伝播する。",
+    ),
+}
+_HORSE_TRANS_DEFAULT = (
+    "Not directly transmissible between horses in most cases.",
+    "ほとんどの場合、馬間で直接伝播しない。",
+)
+
+
+def _horse_category(name: str, desc: str) -> str:
+    """Simple category classifier for horse diseases."""
+    combined = (name + " " + desc).lower()
+    for cat in ("viral", "bacterial", "fungal", "parasitic"):
+        keywords = {
+            "viral": ["virus", "viral", "herpes", "influenza", "ehv", "eav", "wnv", "rabies"],
+            "bacterial": ["bacterial", "streptococc", "staphylococc", "clostrid", "salmonell",
+                          "rhodococc", "strangles", "abscess", "septic", "cellulitis"],
+            "fungal": ["fungal", "mycosis", "aspergill", "ringworm", "dermatophyt"],
+            "parasitic": ["parasit", "strongyl", "ascarid", "tapeworm", "bot", "mange",
+                          "mite", "tick", "lice"],
+        }
+        for kw in keywords[cat]:
+            if kw in combined:
+                return cat
+    return "general"
+
 
 def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
     """馬用の症状解析。馬の鑑別診断エンジンに委譲する。
@@ -75,6 +117,18 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
         # 推奨検査の日本語名のみ抽出（優先度順）
         tests = [t[1] for t in (dis.recommended_exams or [])]
         recommended_tests.extend(tests)
+        # Category-based transmission
+        _cat = _horse_category(dis.name_en or "", dis.description_ja or "")
+        _trans = _HORSE_TRANSMISSION.get(_cat, _HORSE_TRANS_DEFAULT)
+        # Build diagnosis text
+        _diag_en = (
+            f"Diagnosis is based on clinical signs, history, and physical examination. "
+            f"Recommended diagnostics: {', '.join(tests[:4])}."
+        ) if tests else "Diagnosis is based on clinical signs, history, and physical examination."
+        _diag_ja = (
+            f"臨床徴候、病歴、身体検査に基づき診断する。推奨検査: {', '.join(tests[:4])}。"
+        ) if tests else "臨床徴候、病歴、身体検査に基づき診断する。"
+
         possible_conditions.append(
             {
                 "name": name,
@@ -93,8 +147,8 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
                 "clinical_signs": dis.clinical_signs_detail or "",
                 "risk_factors": dis.risk_factors or "",
                 "recommended_tests": tests,
-                "transmission": "",
-                "transmission_ja": "",
+                "transmission": _trans[0],
+                "transmission_ja": _trans[1],
                 "urgency": dis.urgency or "moderate",
                 "pathophysiology_ja": "",
                 "causes_ja": "",
@@ -102,8 +156,8 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
                 "prevention_ja": "",
                 "prognosis_ja": "",
                 "clinical_signs_ja": "",
-                "diagnosis": "",
-                "diagnosis_ja": "",
+                "diagnosis": _diag_en,
+                "diagnosis_ja": _diag_ja,
             }
         )
     # 重複する検査を除外
