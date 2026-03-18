@@ -24,6 +24,10 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "calici", "retrovirus", "adenovirus", "polyoma", "pox", "borna",
         "paramyxo", "rotavirus", "nidovirus", "reovirus", "fiv", "felv",
         "hiv", "rabies", "myxomato", "ebola", "west nile", "encephalomyelit",
+        "hemorrhagic disease", "papillomatosis", "papilloma", "newcastle",
+        "pacheco", "french molt", "aleutian disease", "pbfd",
+        "beak and feather disease", "budgerigar fledgling", "inclusion body disease",
+        "ibd", "fledgling disease", "wasting disease",
     ],
     "bacterial": [
         "bacterial", "bacteria", "streptococc", "staphylococc", "clostrid",
@@ -31,13 +35,27 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "chlamyd", "bartonell", "helicobacter", "campylobacter", "e. coli",
         "escherichia", "borrelios", "tyzzer", "abscess", "pyometra", "septic",
         "otitis", "kennel cough", "strangles", "glanders", "actinomyc",
-        "nocardia", "erysipel", "brucell", "listeria", "psittacosis",
+        "nocardia", "erysipel", "brucell", "listeri", "psittacosis",
+        "treponema", "syphilis", "pseudomonas", "tularemia", "yersinia",
+        "yersiniosis", "klebsiella", "cellulitis", "peritonitis", "tuberculosis",
+        "mycoplasma", "nocardiosis", "proliferative enteropathy", "lawsonia",
+        "proliferative bowel", "wet tail", "proliferative ileitis",
+        "aeromonas", "citrobacter", "rickettsial", "pneumocystis",
+        "vent disease", "cervical lymphadenitis", "air sacculit",
+        "salpingitis", "scent gland infection", "pouch infection",
+        "ear infection", "feather follicle infection", "flagellate",
+        "entamoeba", "red leg syndrome", "dermocystidium",
+        "chrysosporium", "canv", "nannizziopsis", "ichthyophonus",
+        "mycoplasma agassizii", "infectious disease",
+        "neonatal infection", "beak rot",
     ],
     "fungal": [
         "fungal", "fungus", "mycosis", "aspergill", "candida", "dermatophyt",
         "ringworm", "malassezia", "cryptococcus", "histoplasm", "blastomyc",
         "sporotrich", "zygomyc", "mucormyc", "saprolegn", "chromomyc",
         "megabacteriosis", "macrorhabdus",
+        "candidiasis", "cryptococcosis", "oral candidiasis",
+        "batrachochytrium", "bsal",
     ],
     "parasitic": [
         "parasit", "mite", "flea", "tick", "worm", "coccidia", "giardia",
@@ -47,6 +65,9 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "strongyl", "ascarid", "cuterebra", "myiasis", "flystrike",
         "acariasis", "cheyletiella", "caparinia", "ixodes", "babesia",
         "leishmania", "trypanosoma", "theileria", "haemoproteus",
+        "coccidiosis", "leishmaniosis", "leucocytozoon", "sarcocyst",
+        "cnemidocoptes", "scaly face", "plasmodium", "malaria",
+        "static lice", "gliricola", "enteric flagellate",
     ],
     "neoplastic": [
         "tumor", "tumour", "cancer", "neoplas", "carcinoma", "lymphoma",
@@ -55,6 +76,9 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "thymoma", "insulinoma", "pheochromocytoma", "osteosarcoma",
         "chondrosarcoma", "squamous cell", "basal cell", "schwannoma",
         "meningioma", "glioma", "seminoma", "leiomyoma",
+        "plasmacytoma", "trichoblastoma", "trichoepithelioma",
+        "trichofolliculoma", "chordoma", "polyfolliculosis",
+        "choanal papilloma",
     ],
     "metabolic": [
         "metaboli", "diabet", "hypothyroid", "hyperthyroid", "cushing",
@@ -63,12 +87,16 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "acidosis", "alkalosis", "gout", "amyloid", "hemochromatosis",
         "insulin", "adrenal", "pituitary", "thyroid", "hyperparathyroid",
         "hypoparathyroid", "hepatic lipidosis", "fatty liver", "lipidosis",
+        "ketosis", "hyperphosphatemia", "hyperadrenocorticism",
+        "endocrine", "hypernatremia", "hyponatremia", "hypersplenism",
+        "atherosclerosis",
     ],
     "nutritional": [
         "deficien", "nutrit", "vitamin", "malnutrit", "hypovitamin",
         "hypervitamin", "scurvy", "rickets", "mbd", "calcium", "phosphorus",
         "iodine", "iron storage", "obesity", "anorexia", "cachexia",
         "thiamine", "selenium", "copper", "zinc defic",
+        "failure to thrive", "muscle wasting", "dehydration",
     ],
     "toxic": [
         "toxic", "poison", "toxicosis", "intoxicat", "envenomation",
@@ -76,6 +104,7 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "anticoagulant rodenticide", "plant toxic", "heavy metal",
         "pyrethrin", "ivermectin toxic", "nsaid toxic", "chocolate",
         "xylitol", "lily toxic", "acetaminophen",
+        "enterotoxemia", "dysbiosis",
     ],
     "traumatic": [
         "trauma", "fracture", "injury", "wound", "burn", "bite wound",
@@ -83,33 +112,47 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "rupture", "perforation", "tear", "avulsion", "foreign body",
         "heatstroke", "hypothermia", "frostbite", "drowning", "electrocution",
         "shell fracture", "beak fracture", "tail degloving",
+        "heat stroke", "hyperthermia", "thermal shock", "constriction band",
+        "toe necrosis", "tail necrosis", "toe loss", "necrosis",
+        "retained shed", "dysecdysis", "retained spectacle",
+        "spectacle retention", "fur slip", "hay poke",
+        "desiccation", "gas bubble disease", "thread", "tourniquet",
+        "hypovolemic shock", "stroke",
     ],
     "dental": [
         "dental", "tooth", "molar", "incisor", "periodontal", "malocclusion",
         "slobbers", "stomatitis", "gingivitis", "oral mass", "epulis",
         "tooth root", "dental abscess", "jaw", "mandibular", "maxillary",
+        "beak overgrowth", "nail overgrowth", "hoof overgrowth",
+        "nasal hyperkeratosis",
     ],
     "autoimmune": [
         "autoimmun", "immune-mediat", "pemphigus", "lupus", "immunodeficien",
         "allergic", "allergy", "atopic", "anaphyla", "hypersensitiv",
         "immune thrombocytopenia", "imha", "itp", "myasthenia",
+        "eosinophilic granuloma", "transfusion reaction",
     ],
     "cardiovascular": [
         "cardiac", "heart", "cardiomyopath", "arrhythm", "murmur",
         "pericardial", "endocardit", "congestive", "hypertension",
         "thromboembol", "aortic", "mitral", "tricuspid", "atrial",
         "ventricular", "myocarditis", "vasculitis",
+        "chylothorax",
     ],
     "respiratory": [
         "pneumonia", "respiratory", "bronchit", "asthma", "pleural",
         "rhinitis", "sinusitis", "tracheitis", "dyspnea", "pulmonary",
         "pneumothorax", "pyothorax", "aspiration", "tracheal collapse",
         "laryngeal", "brachycephalic airway",
+        "air sac cyst", "tracheal stenosis", "stenotic nares",
+        "nasopharyngeal stenosis", "lung lobe consolidation",
+        "runny nose syndrome",
     ],
     "renal": [
         "renal", "kidney", "nephrit", "urolithiasis", "cystitis", "urinary",
         "bladder", "urolith", "nephropathy", "glomerulo", "pyelonephrit",
         "hydronephrosis", "polycystic kidney", "ckd", "aki",
+        "nephrocalcinosis", "uroabdomen",
     ],
     "gastrointestinal": [
         "gastric", "intestin", "enteritis", "colitis", "bloat", "stasis",
@@ -117,30 +160,49 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "gastroenter", "pancreatit", "hepatic", "liver", "cholangitis",
         "megacolon", "intussusception", "cecal", "crop", "proventric",
         "cloac", "esophag", "megaesophagus", "regurgit",
+        "trichobezoar", "ascites", "hepatitis", "pyloric stenosis",
+        "inflammatory bowel", "salivary mucocele", "perianal fistula",
+        "rectal polyp", "chronic vomiting", "protein-losing enteropathy",
+        "pancreatic exocrine", "exocrine pancreatic",
     ],
     "reproductive": [
         "reproduct", "dystocia", "mastitis", "metritis", "pregnancy",
         "testicular", "ovarian", "uterine", "mammary", "eclampsia",
         "infertil", "egg binding", "egg yolk", "penile", "vaginal",
         "vulvar", "cryptorchid", "phimosis", "paraphimosis",
+        "orchitis", "endometrial hyperplasia", "agalactia", "aborted litter",
+        "cystic ovary", "egg peritonitis", "chronic egg laying",
+        "retained egg", "salpingit", "neonatal mortality", "vaginitis",
+        "prostatic", "prostate", "egg retention", "chronic egg lay",
+        "egg layer syndrome",
     ],
     "neurological": [
         "neurolog", "seizure", "epilepsy", "vestibular", "encephalit",
         "meningit", "neuropath", "paralysis", "paresis", "ataxia",
         "myelopath", "intervertebral", "ivdd", "disc disease", "spondylosis",
         "head tilt", "tremor", "torticollis", "hydrocephalus", "syringomyelia",
+        "wobbler", "cauda equina", "lumbosacral stenosis", "dysautonomia",
+        "cognitive dysfunction", "chiari", "atlantoaxial", "manx syndrome",
+        "spinal arachnoid", "dancing doberman", "multisystem degeneration",
     ],
     "dermatological": [
         "dermatit", "skin", "alopecia", "pyoderma", "folliculit",
         "acne", "sebaceous", "eczema", "pruritus", "hot spot",
         "pododermatit", "bumblefoot", "shell rot", "scale rot",
         "feather cyst", "xanthoma", "cutaneous",
+        "blister disease", "algae growth", "cere hypertrophy",
+        "flank gland hyperplasia", "scent gland hyperplasia",
+        "scent gland inflammation", "interdigital cyst", "furuncle",
+        "wing tip edema", "nasal bridge swelling", "periorbital swelling", "feather follicle cyst",
+        "boar glue", "grease gland",
     ],
     "ophthalmic": [
         "ophthalm", "cataract", "glaucoma", "uveitis", "corneal",
         "conjunctivit", "keratitis", "eye", "retinal", "proptosis",
         "entropion", "ectropion", "cherry eye", "iris", "lens luxation",
         "panophthalmitis", "dacryocystitis",
+        "symblepharon", "pseudopterygium", "conjunctival overgrowth",
+        "cholesteatoma",
     ],
     "orthopedic": [
         "arthrit", "osteo", "dysplasia", "luxat", "tendon", "ligament",
@@ -148,16 +210,31 @@ _CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "bone", "joint", "synovitis", "bursitis", "cruciate",
         "patellar", "hip", "elbow", "spondyl", "kyphosis", "lordosis",
         "pyramiding",
+        "pes varus", "orthopedic", "foot rot",
     ],
     "congenital": [
         "congeni", "genetic", "heredit", "inherited", "developmental",
         "portosystemic shunt", "cleft", "atresia", "ectopic", "patent ductus",
         "megaesophagus congenital", "polydactyly",
+        "hernia",
     ],
     "behavioral": [
         "behavior", "stress", "anxiety", "aggression", "self-mutilat",
         "feather pluck", "fur chew", "bar chew", "pica", "stereotyp",
         "overgrooming", "compulsive", "phobia", "separation anxiety",
+        "vocalization", "screaming", "barking", "hibernation attempt",
+        "torpor", "nocturnal vocalization",
+    ],
+    "hematological": [
+        "anemia", "anaemia", "thrombocytopenia", "polycythemia",
+        "pancytopenia", "hemolytic", "disseminated intravascular",
+        "coagulation", "splenomegaly", "splenic enlargement",
+        "hematological", "red urine", "polyuria", "polydipsia",
+        "multi-organ failure", "chronic wasting", "axolotl floating",
+        "temporal gland", "apocrine gland cyst", "anal gland",
+        "disseminated idiopathic myofasciitis",
+        "sialometaplasia", "edema", "anasarca", "splenic torsion",
+        "hemorrhagic syndrome", "lymph sac",
     ],
 }
 
@@ -518,6 +595,38 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "慢性ストレスは視床下部-下垂体-副腎系を活性化し、"
         "コルチゾール上昇と免疫抑制を引き起こす。"
     ),
+    "hematological": (
+        "{name} is a hematological/systemic condition in {species}. {desc} "
+        "The pathophysiology involves disruption of normal blood cell production, "
+        "function, or destruction. Bone marrow disorders, splenic sequestration, "
+        "consumptive coagulopathies, or peripheral destruction mechanisms may be "
+        "involved. Impaired oxygen-carrying capacity (anemia), hemostatic failure "
+        "(thrombocytopenia, DIC), or abnormal cell proliferation (polycythemia) "
+        "compromises tissue perfusion and organ function. Secondary organ damage "
+        "including hepatic, renal, and cardiovascular complications may develop.",
+        "{name_ja}は{species}における血液・全身性疾患である。"
+        "正常な血球産生、機能、または破壊の障害を伴う病態生理を有する。"
+        "骨髄障害、脾臓隔離、消費性凝固障害、末梢破壊機構が関与しうる。"
+        "酸素運搬能の低下（貧血）、止血不全（血小板減少症、DIC）、"
+        "異常な細胞増殖（多血症）により組織灌流と臓器機能が障害される。"
+        "肝、腎、心血管系の二次的臓器障害が発生しうる。"
+    ),
+    "general": (
+        "{name} is a clinical condition affecting {species}. {desc} "
+        "The pathological process involves disruption of normal tissue homeostasis "
+        "through inflammatory, degenerative, or functional mechanisms. Cellular injury "
+        "triggers local and systemic responses including inflammatory mediator release, "
+        "immune activation, and compensatory physiological adjustments. Disease "
+        "progression depends on the balance between ongoing tissue damage and the "
+        "body's repair capacity. Without appropriate intervention, chronic changes "
+        "including fibrosis, functional impairment, and secondary complications may develop.",
+        "{name_ja}は{species}に影響を及ぼす臨床疾患である。"
+        "炎症性、変性、または機能的メカニズムによる正常な組織恒常性の破綻を伴う。"
+        "細胞障害は炎症メディエーター放出、免疫活性化、代償性生理的調整を含む"
+        "局所的・全身的応答を惹起する。疾患の進行は継続的な組織損傷と"
+        "生体の修復能力のバランスに依存する。適切な介入がなければ、"
+        "線維化、機能障害、二次的合併症を含む慢性変化が生じうる。"
+    ),
 }
 
 _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
@@ -676,6 +785,21 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "免疫療法を行う。医原性免疫抑制の合併症をモニタリングする。"
         "再発防止のため段階的に減量する。"
     ),
+    "hematological": (
+        "Treatment of {name_l} in {species_l} requires identifying and addressing the "
+        "underlying cause of the hematological abnormality. Blood transfusions may be "
+        "necessary for severe anemia or acute hemorrhage. Coagulation disorders may require "
+        "fresh frozen plasma, vitamin K, or specific clotting factor replacement. "
+        "Immunosuppressive therapy is indicated for immune-mediated destruction. "
+        "Supportive care includes oxygen supplementation, IV fluids, nutritional support, "
+        "and monitoring of hematological parameters with serial blood work.",
+        "{species}における{name_ja}の治療は血液異常の基礎原因の特定と対処が必要である。"
+        "重度の貧血や急性出血には輸血が必要となりうる。"
+        "凝固障害には新鮮凍結血漿、ビタミンK、または特定の凝固因子補充が必要な場合がある。"
+        "免疫介在性破壊には免疫抑制療法が適応となる。"
+        "酸素補充、輸液、栄養サポート、連続血液検査による血液学的パラメータの"
+        "モニタリングを含む支持療法を行う。"
+    ),
 }
 
 _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
@@ -774,6 +898,18 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "最適な栄養の維持、定期的な健康モニタリング、フレアの早期治療で"
         "リスクを低減する。"
     ),
+    "hematological": (
+        "Prevention of {name_l} includes regular health monitoring with complete blood "
+        "counts, minimizing exposure to known triggers (toxins, infectious agents), "
+        "appropriate vaccination and parasite prevention, avoiding drugs known to cause "
+        "hematological side effects, and prompt veterinary attention for early signs "
+        "such as pale mucous membranes, petechiae, or unexplained lethargy.",
+        "{name_ja}の予防には全血球計算を含む定期的な健康モニタリング、"
+        "既知のトリガー（毒素、感染性病原体）への曝露の最小化、"
+        "適切なワクチン接種と寄生虫予防、血液学的副作用が知られる薬剤の回避、"
+        "粘膜蒼白、点状出血、原因不明の無気力などの初期徴候に対する"
+        "迅速な獣医学的対応が含まれる。"
+    ),
 }
 
 # Default templates for categories without specific ones
@@ -866,6 +1002,8 @@ def enrich_disease(d: dict) -> dict:
         "Parasitic organism establishes",
         "Autoimmune-mediated attack",
         "Traumatic force applied",
+        "is a clinical condition in",
+        "The underlying pathological process involves tissue-level changes",
     ]
     is_template = any(m in patho for m in template_markers) or not patho
     if not is_template and len(patho) > 200:
