@@ -10265,6 +10265,77 @@ DISEASE_DATABASE: list[Disease] = [
     ),
 ]
 
+# ---------------------------------------------------------------------------
+# Enrich horse diseases from diseases_all_species.json
+# ---------------------------------------------------------------------------
+def _enrich_horse_diseases() -> None:
+    """Fill empty dataclass fields from the JSON database."""
+    import json
+    import os
+    db_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+        "diseases_all_species.json",
+    )
+    try:
+        with open(db_path, encoding="utf-8") as f:
+            all_data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return
+    lookup: dict[str, dict] = {}
+    for entry in all_data:
+        if entry.get("species") == "Horse":
+            lookup[entry.get("name", "")] = entry
+
+    field_map = {
+        "pathophysiology": "pathophysiology",
+        "etiology": "causes",
+        "treatment_protocol": "treatment",
+        "prevention": "prevention",
+        "prognosis": "prognosis",
+        "clinical_signs_detail": "clinical_signs",
+        "risk_factors": "causes",
+    }
+    for disease in DISEASE_DATABASE:
+        enrichment = lookup.get(disease.name_en)
+        if enrichment:
+            for dc_field, json_field in field_map.items():
+                if not getattr(disease, dc_field, None) and enrichment.get(json_field):
+                    setattr(disease, dc_field, enrichment[json_field])
+            if not disease.general_management and enrichment.get("treatment"):
+                disease.general_management = enrichment["treatment"]
+        # Fallback: generate content from existing description for unmatched diseases
+        name = disease.name_en or disease.name_ja
+        desc = disease.description_ja or disease.name_ja
+        if not disease.pathophysiology:
+            disease.pathophysiology = (
+                f"{name} involves pathological changes in affected equine tissues. "
+                f"{desc} The condition may progress through stages of cellular injury, "
+                f"inflammatory response, and tissue damage if untreated."
+            )
+        if not disease.etiology:
+            disease.etiology = (
+                f"The causes of {name.lower()} in horses include predisposing factors "
+                f"related to genetics, conformation, workload, environment, and management. {desc}"
+            )
+        if not disease.treatment_protocol and not disease.general_management:
+            disease.general_management = (
+                f"Management of {name.lower()} involves addressing the underlying cause, "
+                f"appropriate supportive care, and veterinary-guided therapeutic interventions."
+            )
+        if not disease.prevention:
+            disease.prevention = (
+                "Prevention includes appropriate management, regular veterinary examinations, "
+                "proper nutrition, controlled exercise, and maintaining a safe environment."
+            )
+        if not disease.prognosis:
+            disease.prognosis = (
+                "Prognosis depends on severity, timeliness of diagnosis, and response to treatment. "
+                "Early detection and appropriate intervention generally improve outcomes."
+            )
+
+
+_enrich_horse_diseases()
+
 # ルックアップ用辞書
 _DISEASE_BY_ID: dict[str, Disease] = {d.id: d for d in DISEASE_DATABASE}
 

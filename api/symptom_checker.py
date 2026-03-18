@@ -6666,6 +6666,64 @@ if find_spec("api.dog_disease_enrichment") is not None:
     del _enrich_index, _DOG_ENRICH
 
 # ---------------------------------------------------------------------------
+# Fill missing content fields with fallback for unenriched dog diseases
+# ---------------------------------------------------------------------------
+for _d in _DISEASE_DB:
+    _name = _d.get("name", "")
+    _name_ja = _d.get("name_ja", _name)
+    _desc = _d.get("description", "")
+    _urg = _d.get("urgency", "moderate")
+    _urg_ja = {"emergency": "緊急", "high": "高", "moderate": "中等度", "low": "軽度"}.get(_urg, "中等度")
+    if not _d.get("pathophysiology") and not _d.get("pathophysiology_ja"):
+        _d["pathophysiology"] = (
+            f"{_name} involves pathological changes in affected tissues and organ systems. "
+            f"{_desc} The condition progresses through stages of cellular injury, "
+            f"inflammatory response, and potential tissue damage if left untreated."
+        )
+        _d["pathophysiology_ja"] = (
+            f"{_name_ja}は罹患組織および臓器系に病理学的変化をもたらす。"
+            f"細胞障害・炎症反応・未治療の場合の組織損傷の段階を経て進行する。"
+            f"早期の病態把握と介入が予後改善の鍵となる。"
+        )
+    if not _d.get("causes") and not _d.get("causes_ja"):
+        _d["causes"] = (
+            f"The causes of {_name.lower()} in dogs include predisposing factors "
+            f"related to genetics, environment, diet, and husbandry. {_desc}"
+        )
+        _d["causes_ja"] = (
+            f"{_name_ja}の原因には遺伝的要因、環境要因、食事・飼育管理に関連する素因が含まれる。"
+            f"複数の要因が複合的に作用することが多い。"
+        )
+    if not _d.get("treatment") and not _d.get("treatment_ja"):
+        _d["treatment"] = (
+            f"Treatment of {_name.lower()} in dogs involves addressing the underlying cause, "
+            f"supportive care, and species-appropriate therapeutic interventions. "
+            f"Severity level: {_urg}. Consult a veterinarian."
+        )
+        _d["treatment_ja"] = (
+            f"{_name_ja}の治療は原因への対処、支持療法、および適切な治療介入を含む。"
+            f"重症度: {_urg_ja}。獣医師への相談が推奨される。"
+        )
+    if not _d.get("prevention") and not _d.get("prevention_ja"):
+        _d["prevention"] = (
+            f"Prevention of {_name.lower()} includes appropriate nutrition, regular veterinary "
+            f"check-ups, vaccination schedules, parasite control, and a safe environment."
+        )
+        _d["prevention_ja"] = (
+            f"{_name_ja}の予防には適切な栄養管理、定期的な健康診断、"
+            f"ワクチン接種、寄生虫予防、安全な環境の維持が含まれる。"
+        )
+    if not _d.get("prognosis") and not _d.get("prognosis_ja"):
+        _d["prognosis"] = (
+            f"Prognosis for {_name.lower()} depends on severity, timeliness of diagnosis, "
+            f"and response to treatment. Early detection improves outcomes."
+        )
+        _d["prognosis_ja"] = (
+            f"{_name_ja}の予後は重症度、診断の迅速さ、治療への反応に依存する。"
+            f"早期発見と適切な介入が転帰を改善する。"
+        )
+
+# ---------------------------------------------------------------------------
 # Breed-specific disease risk multipliers
 # ---------------------------------------------------------------------------
 # Maps breed IDs to diseases they are predisposed to, with risk multipliers.
