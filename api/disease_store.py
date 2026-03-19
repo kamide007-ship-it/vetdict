@@ -106,27 +106,115 @@ def invalidate_cache() -> None:
 # ---------------------------------------------------------------------------
 
 @lru_cache(maxsize=1)
+def _fallback_disease_counts() -> dict[str, int]:
+    """Count diseases per species from Python modules and JSON as fallback."""
+    counts: dict[str, int] = {}
+
+    # Map species id -> module info
+    _MODULE_MAP = {
+        "dog": ("api.symptom_checker", "_DISEASE_DB"),
+        "horse": ("api.species.equine_diseases", "DISEASE_DATABASE"),
+        "cat": ("api.species.cat_diseases", "DISEASES"),
+        "rabbit": ("api.species.rabbit_diseases", "DISEASES"),
+        "hamster": ("api.species.hamster_diseases", "DISEASES"),
+        "guinea_pig": ("api.species.guinea_pig_diseases", "DISEASES"),
+        "chinchilla": ("api.species.chinchilla_diseases", "DISEASES"),
+        "ferret": ("api.species.ferret_diseases", "DISEASES"),
+        "hedgehog": ("api.species.hedgehog_diseases", "DISEASES"),
+        "sugar_glider": ("api.species.sugar_glider_diseases", "DISEASES"),
+        "degu": ("api.species.degu_diseases", "DISEASES"),
+        "bird": ("api.species.bird_diseases", "DISEASES"),
+        "parakeet": ("api.species.parakeet_diseases", "DISEASES"),
+        "parrot": ("api.species.parrot_diseases", "DISEASES"),
+        "reptile": ("api.species.reptile_diseases", "DISEASES"),
+        "tortoise": ("api.species.tortoise_diseases", "DISEASES"),
+        "snake": ("api.species.snake_diseases", "DISEASES"),
+        "lizard": ("api.species.lizard_diseases", "DISEASES"),
+        "amphibian": ("api.species.amphibian_diseases", "DISEASES"),
+        "exotic_other": ("api.species.exotic_other_diseases", "DISEASES"),
+    }
+
+    import importlib
+    for sp_id, (mod_path, attr) in _MODULE_MAP.items():
+        try:
+            mod = importlib.import_module(mod_path)
+            data = getattr(mod, attr, [])
+            counts[sp_id] = len(data) if data else 0
+        except Exception:
+            pass
+
+    # JSON fallback for any species still missing
+    if any(counts.get(sp, 0) == 0 for sp in SPECIES_META):
+        try:
+            import json as _json
+            from pathlib import Path as _Path
+            data_file = _Path(__file__).parent.parent / "diseases_all_species.json"
+            if data_file.exists():
+                _name_to_id = {v[1]: k for k, v in SPECIES_META.items()}
+                with open(data_file, "r", encoding="utf-8") as f:
+                    for entry in _json.load(f):
+                        sp_name = entry.get("species", "")
+                        sp_id = _name_to_id.get(sp_name)
+                        if sp_id and counts.get(sp_id, 0) == 0:
+                            counts[sp_id] = counts.get(sp_id, 0) + 1
+        except Exception:
+            pass
+
+    return counts
+
+
+def _fallback_drug_counts() -> tuple[dict[str, int], int]:
+    """Count drugs per species from Python module as fallback."""
+    per_species: dict[str, int] = {}
+    total = 0
+    try:
+        from api.drug_dictionary import DRUGS
+        total = len(DRUGS)
+        for d in DRUGS:
+            for sp in d.get("species_info") or {}:
+                per_species[sp] = per_species.get(sp, 0) + 1
+    except Exception:
+        pass
+    return per_species, total
+
+
+@lru_cache(maxsize=1)
 def get_species_stats() -> dict[str, Any]:
     """Return per-species disease/drug counts from SQLite.
+
+    Falls back to Python modules / JSON if the database is empty.
 
     Returns a dict with keys: ``species`` (list), ``total_diseases``,
     ``total_drugs``, ``total_species``.
     """
-    _ensure_db()
-    with get_connection() as conn:
-        disease_counts: dict[str, int] = {}
-        for row in conn.execute(
-            "SELECT species, COUNT(*) AS cnt FROM diseases GROUP BY species ORDER BY species"
-        ).fetchall():
-            disease_counts[row["species"]] = row["cnt"]
+    disease_counts: dict[str, int] = {}
+    drug_counts: dict[str, int] = {}
+    total_drugs = 0
 
-        drug_counts: dict[str, int] = {}
-        for row in conn.execute(
-            "SELECT species, COUNT(*) AS cnt FROM drug_species_info GROUP BY species"
-        ).fetchall():
-            drug_counts[row["species"]] = row["cnt"]
+    try:
+        _ensure_db()
+        with get_connection() as conn:
+            for row in conn.execute(
+                "SELECT species, COUNT(*) AS cnt FROM diseases GROUP BY species ORDER BY species"
+            ).fetchall():
+                disease_counts[row["species"]] = row["cnt"]
 
-        total_drugs = conn.execute("SELECT COUNT(*) FROM drugs").fetchone()[0]
+            for row in conn.execute(
+                "SELECT species, COUNT(*) AS cnt FROM drug_species_info GROUP BY species"
+            ).fetchall():
+                drug_counts[row["species"]] = row["cnt"]
+
+            total_drugs = conn.execute("SELECT COUNT(*) FROM drugs").fetchone()[0]
+    except Exception:
+        logger.warning("SQLite query failed — will use fallback", exc_info=True)
+
+    # Fallback: if SQLite has no disease data, use modules/JSON
+    if sum(disease_counts.values()) == 0:
+        logger.info("No disease data from SQLite — using module/JSON fallback")
+        disease_counts = _fallback_disease_counts()
+
+    if total_drugs == 0:
+        drug_counts, total_drugs = _fallback_drug_counts()
 
     stats = []
     for sp_id, (name_ja, name_en) in SPECIES_META.items():

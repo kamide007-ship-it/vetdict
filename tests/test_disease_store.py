@@ -387,3 +387,45 @@ class TestDiseasesAPI:
         assert len(data["urgency_levels"]) == 1
         assert data["urgency_levels"][0]["urgency"] == "high"
         assert data["urgency_levels"][0]["count"] == 2
+
+
+class TestSpeciesMetaConsistency:
+    """Validate that SPECIES_META matches the JS-side SPECIES array (20 species)."""
+
+    def test_species_meta_has_20_entries(self):
+        from api.disease_store import SPECIES_META
+        assert len(SPECIES_META) == 20
+
+    def test_all_expected_species_present(self):
+        from api.disease_store import SPECIES_META
+        expected = {
+            "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig",
+            "chinchilla", "ferret", "hedgehog", "sugar_glider", "degu",
+            "bird", "parakeet", "parrot", "reptile", "tortoise",
+            "snake", "lizard", "amphibian", "exotic_other",
+        }
+        assert set(SPECIES_META.keys()) == expected
+
+
+class TestFallbackWhenDbEmpty:
+    """When SQLite has no diseases, get_species_stats falls back to modules/JSON."""
+
+    def test_fallback_returns_all_species(self, tmp_path, monkeypatch):
+        """Even with an empty DB, all 20 species should be returned."""
+        path = str(tmp_path / "empty.db")
+        init_db(path)
+        import contextlib
+
+        @contextlib.contextmanager
+        def _patched():
+            with get_connection(path) as conn:
+                yield conn
+
+        monkeypatch.setattr("api.disease_store.get_connection", _patched)
+        monkeypatch.setattr("api.disease_store._db_ready", True)
+        invalidate_cache()
+
+        result = get_species_stats()
+        assert result["total_species"] == 20
+        species_ids = {s["id"] for s in result["species"]}
+        assert len(species_ids) == 20

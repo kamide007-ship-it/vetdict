@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const diseaseSearch=document.getElementById("diseaseSearch");
     if(symptomSearch)symptomSearch.addEventListener("input",()=>renderSymptomList(symptomData));
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
-    if(diseaseSearch)diseaseSearch.addEventListener("input",renderDiseaseDb);
+    if(diseaseSearch)diseaseSearch.addEventListener("input",()=>{diseaseDisplayLimit=100;renderDiseaseDb();});
     // Restore view from URL hash
     const hash=location.hash.replace("#","");
     if(hash&&["checker","database","chat","drugs"].includes(hash))switchView(hash);
@@ -654,10 +654,12 @@ function renderAzNav(){
 
 function filterDiseaseDb(letter){
   diseaseFilter=letter;
+  diseaseDisplayLimit=100;
   document.querySelectorAll(".az-nav button").forEach(b=>b.classList.toggle("active",b.textContent===letter||(letter===""&&b.textContent==="ALL")));
   renderDiseaseDb();
 }
 
+let diseaseDisplayLimit=100;
 function renderDiseaseDb(){
   const list=document.getElementById("diseaseDbList");
   const search=(document.getElementById("diseaseSearch").value||"").toLowerCase();
@@ -667,7 +669,8 @@ function renderDiseaseDb(){
   document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDiseases.length);
   if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
   const pk=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
-  list.innerHTML=filtered.slice(0,100).map(d=>{
+  const shown=filtered.slice(0,diseaseDisplayLimit);
+  list.innerHTML=shown.map(d=>{
     const diseaseName=d.name_ja||d.name||"Disease";
     const desc=pk(d.description_ja,d.description)||buildFieldFallback(t("dtDescription"),diseaseName);
     const patho=pk(d.pathophysiology_ja,d.pathophysiology)||buildFieldFallback(t("dtPathophysiology"),diseaseName);
@@ -689,6 +692,9 @@ function renderDiseaseDb(){
         ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
       </dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">Data needs review: ${d.missing_fields.join(", ")}</div>`:""}</div>
     </div>`}).join("");
+  if(filtered.length>diseaseDisplayLimit){
+    list.innerHTML+=`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${filtered.length-diseaseDisplayLimit}件)`:`Show more (${filtered.length-diseaseDisplayLimit} remaining)`}</button>`;
+  }
 }
 
 function switchView(view){
