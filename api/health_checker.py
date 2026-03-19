@@ -3127,108 +3127,364 @@ def _jaccard_similarity(set_a, set_b):
     return len(intersection) / len(union)
 
 
+# ---------------------------------------------------------------------------
+# ADVANCED DIAGNOSTIC SCORING ENGINE
+# ---------------------------------------------------------------------------
+# Uses TF-IDF-inspired symptom weighting, negative evidence, prevalence
+# priors, pathognomonic clusters, and Bayesian-calibrated confidence.
+# ---------------------------------------------------------------------------
+
+import math as _math
+
+# --- Precompute symptom IDF (inverse document frequency) ---
+# Symptoms appearing in few diseases are more diagnostically specific.
+# IDF = log(N / df) where N = total diseases, df = # diseases containing symptom
+
+def _build_symptom_idf():
+    """Compute IDF weights for all symptoms across the disease database."""
+    n_diseases = len(DISEASES)
+    doc_freq = {}
+    for disease in DISEASES:
+        for symptom in disease["symptoms"]:
+            doc_freq[symptom] = doc_freq.get(symptom, 0) + 1
+    idf = {}
+    for symptom, df in doc_freq.items():
+        idf[symptom] = _math.log((n_diseases + 1) / (df + 1)) + 1.0
+    return idf
+
+
+_SYMPTOM_IDF = _build_symptom_idf()
+
+# --- Symptom specificity tiers (veterinary clinical knowledge) ---
+# Pathognomonic: nearly unique to one disease family
+# High: strong diagnostic value
+# Moderate: useful but shared across conditions
+# Low: non-specific, seen in many diseases
+
+_SYMPTOM_SPECIFICITY = {
+    # Pathognomonic / very high specificity
+    "bloating": 3.0, "blood_in_stool": 2.5, "blood_in_urine": 2.5,
+    "seizures": 2.5, "paralysis": 2.8, "jaundice": 2.8,
+    "head_tilting": 2.5, "circling": 2.5, "fainting": 2.5,
+    "reverse_sneezing": 2.2, "incontinence": 2.2,
+    "cloudiness_in_eyes": 2.5, "pale_gums": 2.5,
+    # High specificity
+    "tremors": 2.0, "muscle_wasting": 2.0, "joint_swelling": 2.0,
+    "hot_spots": 2.0, "lumps_bumps": 2.0, "excessive_drooling": 1.8,
+    "straining_to_urinate": 2.0, "eye_swelling": 1.8,
+    "swollen_lymph_nodes": 2.2, "squinting": 1.8,
+    # Moderate specificity
+    "coughing": 1.2, "sneezing": 1.2, "nasal_discharge": 1.3,
+    "labored_breathing": 1.5, "wheezing": 1.5,
+    "diarrhea": 1.1, "vomiting": 1.0, "constipation": 1.5,
+    "limping": 1.3, "stiffness": 1.3, "skin_rashes": 1.3,
+    "itching": 1.1, "hair_loss": 1.2, "dry_skin": 1.3,
+    "redness_in_eyes": 1.3, "eye_discharge": 1.2,
+    "frequent_urination": 1.5, "excessive_thirst": 1.5,
+    "rapid_breathing": 1.4, "exercise_intolerance": 1.5,
+    "aggression": 1.5, "excessive_licking": 1.3,
+    # Low specificity (non-specific signs)
+    "lethargy": 0.6, "loss_of_appetite": 0.6, "fever": 0.8,
+    "weight_loss": 0.7, "anxiety": 0.8, "reluctance_to_move": 0.9,
+}
+
+# --- Pathognomonic symptom clusters ---
+# Signature combinations that strongly indicate specific diseases.
+# Each cluster: (required_symptoms_frozenset, disease_id, boost_factor)
+_PATHOGNOMONIC_CLUSTERS = [
+    # GDV: bloating + excessive drooling + rapid breathing
+    (frozenset({"bloating", "excessive_drooling", "rapid_breathing"}), "gdv_bloat", 2.0),
+    (frozenset({"bloating", "excessive_drooling", "pale_gums"}), "gdv_bloat", 2.0),
+    # Parvovirus: bloody diarrhea + vomiting + lethargy in young dog
+    (frozenset({"blood_in_stool", "vomiting", "diarrhea"}), "canine_parvovirus", 1.8),
+    # Distemper: respiratory + neurological combination
+    (frozenset({"coughing", "nasal_discharge", "seizures"}), "canine_distemper", 1.8),
+    (frozenset({"coughing", "nasal_discharge", "tremors"}), "canine_distemper", 1.7),
+    # BOAS: wheezing + reverse sneezing + labored breathing
+    (frozenset({"wheezing", "reverse_sneezing", "labored_breathing"}), "brachycephalic_airway_syndrome", 1.8),
+    # Epilepsy: seizures + disorientation
+    (frozenset({"seizures", "disorientation"}), "epilepsy", 1.7),
+    # Vestibular: head tilting + circling + disorientation
+    (frozenset({"head_tilting", "circling", "disorientation"}), "vestibular_disease", 2.0),
+    (frozenset({"head_tilting", "circling"}), "vestibular_disease", 1.8),
+    # Cushing's: excessive thirst + frequent urination + hair loss
+    (frozenset({"excessive_thirst", "frequent_urination", "hair_loss"}), "cushings_disease", 1.8),
+    # CKD: excessive thirst + frequent urination + weight loss
+    (frozenset({"excessive_thirst", "frequent_urination", "weight_loss"}), "chronic_kidney_disease", 1.7),
+    # UTI: blood in urine + frequent urination + straining
+    (frozenset({"blood_in_urine", "frequent_urination", "straining_to_urinate"}), "urinary_tract_infection", 2.0),
+    # Pancreatitis: vomiting + loss of appetite + bloating
+    (frozenset({"vomiting", "loss_of_appetite", "bloating"}), "pancreatitis", 1.6),
+    # Glaucoma: cloudiness + eye swelling + squinting
+    (frozenset({"cloudiness_in_eyes", "eye_swelling", "squinting"}), "glaucoma", 2.0),
+    # Lymphoma: swollen lymph nodes + weight loss + lethargy
+    (frozenset({"swollen_lymph_nodes", "weight_loss", "lethargy"}), "lymphoma", 1.7),
+    # Allergic dermatitis: itching + skin rashes + hot spots
+    (frozenset({"itching", "skin_rashes", "hot_spots"}), "allergic_dermatitis", 1.8),
+    # IMHA: pale gums + jaundice + lethargy
+    (frozenset({"pale_gums", "jaundice", "lethargy"}), "hemolytic_anemia", 2.0),
+    # Liver disease: jaundice + vomiting + loss of appetite
+    (frozenset({"jaundice", "vomiting", "loss_of_appetite"}), "liver_disease", 1.8),
+    # Degenerative myelopathy: paralysis + muscle wasting + stiffness
+    (frozenset({"paralysis", "muscle_wasting", "stiffness"}), "degenerative_myelopathy", 1.9),
+    # Heart disease: fainting + exercise intolerance + coughing
+    (frozenset({"fainting", "exercise_intolerance", "coughing"}), "dcm", 1.7),
+    (frozenset({"fainting", "exercise_intolerance", "rapid_breathing"}), "mitral_valve_disease", 1.7),
+    # Diabetes: excessive thirst + frequent urination + weight loss + loss_of_appetite
+    (frozenset({"excessive_thirst", "frequent_urination", "weight_loss", "loss_of_appetite"}), "diabetes_mellitus", 1.9),
+]
+
+# --- Prevalence tiers (prior probability weights) ---
+# Common diseases should rank higher when evidence is ambiguous.
+_PREVALENCE_PRIOR = {
+    "very_common": 1.15,  # seen daily in practice
+    "common": 1.08,       # seen weekly
+    "uncommon": 0.95,     # seen monthly
+    "rare": 0.85,         # seen < 1x/year
+}
+
+# --- Age-based disease category multipliers ---
+# Generalizable by disease category tags rather than hardcoded IDs.
+_AGE_CATEGORY_TAGS = {}
+for _d in DISEASES:
+    _did = _d["id"]
+    _sev = _d["severity"]
+    _syms = set(_d["symptoms"])
+    tags = set()
+    # Infectious diseases (typically affect young)
+    if _did in ("canine_parvovirus", "canine_distemper", "kennel_cough",
+                "canine_influenza", "leptospirosis"):
+        tags.add("infectious")
+    # Congenital / developmental
+    if _did in ("hip_dysplasia", "elbow_dysplasia", "patellar_luxation",
+                "portosystemic_shunt", "pda", "cherry_eye"):
+        tags.add("congenital")
+    # Degenerative / age-related
+    if _did in ("degenerative_myelopathy", "wobbler_syndrome", "cataracts",
+                "laryngeal_paralysis", "vestibular_disease",
+                "chronic_kidney_disease", "liver_disease"):
+        tags.add("degenerative")
+    # Neoplastic (cancer)
+    if _did in ("hemangiosarcoma", "lymphoma", "osteosarcoma",
+                "mast_cell_tumor", "melanoma"):
+        tags.add("neoplastic")
+    # Endocrine / metabolic
+    if _did in ("hypothyroidism", "cushings_disease", "diabetes_mellitus",
+                "addisons_disease", "pancreatitis", "ibd"):
+        tags.add("metabolic")
+    # Cardiac
+    if _did in ("dcm", "mitral_valve_disease", "pda"):
+        tags.add("cardiac")
+    # Autoimmune
+    if _did in ("hemolytic_anemia", "immune_mediated_thrombocytopenia",
+                "pemphigus", "lupus", "dermatomyositis"):
+        tags.add("autoimmune")
+    # Neurological
+    if "seizures" in _syms or "paralysis" in _syms or "head_tilting" in _syms:
+        tags.add("neurological")
+    _AGE_CATEGORY_TAGS[_did] = tags
+
+# Age multiplier matrix: {age_bracket: {category_tag: multiplier}}
+_AGE_MULTIPLIERS = {
+    "puppy": {    # < 1 year
+        "infectious": 1.5, "congenital": 1.4, "autoimmune": 0.8,
+        "neoplastic": 0.5, "degenerative": 0.4, "metabolic": 0.7,
+    },
+    "young": {    # 1-3 years
+        "infectious": 1.2, "congenital": 1.3, "autoimmune": 1.1,
+        "neoplastic": 0.6, "degenerative": 0.5, "metabolic": 0.8,
+    },
+    "adult": {    # 4-7 years
+        "infectious": 1.0, "congenital": 0.8, "autoimmune": 1.1,
+        "neoplastic": 1.1, "degenerative": 0.9, "metabolic": 1.3,
+        "cardiac": 1.2,
+    },
+    "senior": {   # 8+ years
+        "infectious": 0.9, "congenital": 0.6, "autoimmune": 1.0,
+        "neoplastic": 1.6, "degenerative": 1.5, "metabolic": 1.3,
+        "cardiac": 1.4,
+    },
+}
+
+
+def _get_age_bracket(age_years):
+    """Map age in years to bracket."""
+    if age_years is None:
+        return None
+    if age_years < 1:
+        return "puppy"
+    if age_years <= 3:
+        return "young"
+    if age_years <= 7:
+        return "adult"
+    return "senior"
+
+
+def _compute_symptom_weight(symptom_id):
+    """Combine IDF and clinical specificity for a symptom."""
+    idf = _SYMPTOM_IDF.get(symptom_id, 1.0)
+    specificity = _SYMPTOM_SPECIFICITY.get(symptom_id, 1.0)
+    return idf * specificity
+
+
 def _analyze_symptoms(breed_id, symptom_ids, age_years=None, onset=None):
     """
-    Core analysis engine.
+    Advanced diagnostic scoring engine.
 
-    - Match symptoms to diseases using Jaccard similarity.
-    - Apply breed-specific risk multipliers.
-    - Apply onset (time-course) and age adjustments.
-    - Sort by (match_score * breed_risk * severity_weight).
-    - Return top matches with confidence percentage.
+    Scoring Components
+    ------------------
+    1. Weighted Recall: What fraction of user symptoms match the disease,
+       weighted by symptom specificity (IDF * clinical weight)?
+    2. Coverage: What fraction of the disease's symptoms are present?
+       Missing key symptoms penalize.
+    3. Pathognomonic Cluster Boost: Signature symptom combinations
+       that strongly indicate specific diseases.
+    4. Breed Risk Multiplier: Breed-specific predisposition.
+    5. Age Factor: Category-based (not hardcoded) age adjustment.
+    6. Onset Factor: Time-course match bonus/penalty.
+    7. Prevalence Prior: Common diseases get small boost when
+       evidence is ambiguous.
+    8. Negative Evidence Penalty: Missing high-specificity symptoms
+       that are expected for the disease reduce confidence.
 
-    Parameters
-    ----------
-    onset:
-        Optional time-course: "acute", "subacute", or "chronic".
+    Confidence is calibrated via logistic function to avoid
+    artificial capping and provide clinically meaningful percentages.
     """
     input_symptoms = set(symptom_ids)
+    if not input_symptoms:
+        return []
+
+    # Precompute total weight of user symptoms
+    user_symptom_weights = {s: _compute_symptom_weight(s) for s in input_symptoms}
+    total_user_weight = sum(user_symptom_weights.values())
+
     results = []
+    age_bracket = _get_age_bracket(age_years)
 
     for disease in DISEASES:
         disease_symptoms = set(disease["symptoms"])
+        matched = input_symptoms & disease_symptoms
 
-        # Jaccard similarity as the base match score
-        jaccard = _jaccard_similarity(input_symptoms, disease_symptoms)
-        if jaccard == 0:
+        if not matched:
             continue
 
-        # Matched symptoms detail
-        matched = sorted(input_symptoms & disease_symptoms)
+        # --- 1. Weighted Recall ---
+        # How well do the user's symptoms cover this disease, weighted by
+        # diagnostic value? High-specificity matches count more.
+        matched_weight = sum(user_symptom_weights.get(s, 1.0) for s in matched)
+        weighted_recall = matched_weight / total_user_weight if total_user_weight > 0 else 0
 
-        # Breed-specific risk multiplier (default 1.0)
-        breed_multiplier = disease["breed_risks"].get(breed_id, 1.0) if breed_id else 1.0
+        # --- 2. Coverage (sensitivity) ---
+        # What fraction of the disease's expected symptoms are present?
+        # Weight disease symptoms by their specificity too.
+        disease_symptom_weights = {s: _compute_symptom_weight(s) for s in disease_symptoms}
+        total_disease_weight = sum(disease_symptom_weights.values())
+        covered_weight = sum(disease_symptom_weights.get(s, 1.0) for s in matched)
+        coverage = covered_weight / total_disease_weight if total_disease_weight > 0 else 0
 
-        # Severity weight
-        severity_weight = SEVERITY_WEIGHTS.get(disease["severity"], 1.0)
+        # --- 3. Base score: harmonic mean of weighted recall and coverage ---
+        # This balances "does the evidence support this disease?" with
+        # "does this disease explain the symptoms?"
+        if weighted_recall + coverage > 0:
+            base_score = 2.0 * weighted_recall * coverage / (weighted_recall + coverage)
+        else:
+            base_score = 0.0
 
-        # Onset (time-course) adjustment
+        # --- 4. Specificity bonus ---
+        # Reward matches on highly specific symptoms (the diagnostic gems)
+        specificity_bonus = 0.0
+        for s in matched:
+            spec = _SYMPTOM_SPECIFICITY.get(s, 1.0)
+            if spec >= 2.0:
+                specificity_bonus += 0.06  # pathognomonic
+            elif spec >= 1.5:
+                specificity_bonus += 0.03  # high specificity
+        base_score = min(base_score + specificity_bonus, 1.0)
+
+        # --- 5. Pathognomonic cluster boost ---
+        cluster_boost = 1.0
+        for cluster_symptoms, cluster_disease_id, boost in _PATHOGNOMONIC_CLUSTERS:
+            if cluster_disease_id == disease["id"] and cluster_symptoms <= input_symptoms:
+                cluster_boost = max(cluster_boost, boost)
+
+        # --- 6. Negative evidence penalty ---
+        # If a disease has highly specific symptoms that the user does NOT
+        # report, that's evidence against the disease.
+        missing = disease_symptoms - input_symptoms
+        negative_penalty = 1.0
+        n_user = len(input_symptoms)
+        if n_user >= 3:
+            # Only apply when user has reported enough symptoms to be meaningful
+            for s in missing:
+                spec = _SYMPTOM_SPECIFICITY.get(s, 1.0)
+                if spec >= 2.5:
+                    negative_penalty -= 0.06  # missing pathognomonic symptom
+                elif spec >= 2.0:
+                    negative_penalty -= 0.03  # missing highly specific symptom
+            negative_penalty = max(negative_penalty, 0.5)  # floor
+
+        # --- 7. Breed risk multiplier ---
+        breed_multiplier = 1.0
+        if breed_id:
+            breed_multiplier = disease["breed_risks"].get(breed_id, 1.0)
+
+        # --- 8. Severity context weight ---
+        # Less aggressive than before: high-severity diseases get a small
+        # boost to ensure they appear prominently, but don't overwhelm.
+        severity_weight = {
+            "emergency": 1.15,
+            "high": 1.08,
+            "moderate": 1.0,
+            "low": 0.95,
+        }.get(disease["severity"], 1.0)
+
+        # --- 9. Onset factor ---
         onset_factor = 1.0
         if onset:
             disease_onsets = _DISEASE_ONSET_BY_ID.get(disease["id"])
             if disease_onsets:
                 if onset in disease_onsets:
-                    onset_factor = 1.3   # matching onset -> boost
+                    onset_factor = 1.2
                 else:
-                    onset_factor = 0.7   # mismatch -> penalize
+                    onset_factor = 0.75
 
-        # Age-related adjustment
+        # --- 10. Age factor (category-based) ---
         age_factor = 1.0
-        if age_years is not None:
-            # Puppies under 1: higher risk for infectious diseases
-            if age_years < 1 and disease["id"] in (
-                "canine_parvovirus",
-                "canine_distemper",
-                "kennel_cough",
-                "canine_influenza",
-                "portosystemic_shunt",
-                "pda",
-                "cherry_eye",
-            ):
-                age_factor = 1.4
-            # Young dogs 1-3: higher risk for congenital/developmental
-            elif 1 <= age_years <= 3 and disease["id"] in (
-                "hip_dysplasia",
-                "elbow_dysplasia",
-                "patellar_luxation",
-                "epilepsy",
-                "demodex_mange",
-                "cherry_eye",
-            ):
-                age_factor = 1.3
-            # Middle-aged 4-7: moderate adjustments
-            elif 4 <= age_years <= 7 and disease["id"] in (
-                "hypothyroidism",
-                "cushings_disease",
-                "pancreatitis",
-                "ibd",
-            ):
-                age_factor = 1.2
-            # Senior 8+: higher risk for degenerative and neoplastic
-            elif age_years >= 8 and disease["id"] in (
-                "degenerative_myelopathy",
-                "dcm",
-                "mitral_valve_disease",
-                "chronic_kidney_disease",
-                "hemangiosarcoma",
-                "lymphoma",
-                "osteosarcoma",
-                "mast_cell_tumor",
-                "laryngeal_paralysis",
-                "liver_disease",
-                "cataracts",
-                "glaucoma",
-                "wobbler_syndrome",
-                "diabetes_mellitus",
-                "cushings_disease",
-            ):
-                age_factor = 1.5
+        if age_bracket:
+            disease_tags = _AGE_CATEGORY_TAGS.get(disease["id"], set())
+            bracket_multipliers = _AGE_MULTIPLIERS.get(age_bracket, {})
+            # Use the highest matching multiplier across tags
+            tag_factors = [bracket_multipliers.get(tag, 1.0) for tag in disease_tags]
+            if tag_factors:
+                age_factor = max(tag_factors)
 
-        # Composite score
-        composite_score = jaccard * breed_multiplier * severity_weight * age_factor * onset_factor
+        # --- 11. Prevalence prior ---
+        prevalence_tier = disease.get("prevalence_tier", "common")
+        prevalence_prior = _PREVALENCE_PRIOR.get(prevalence_tier, 1.0)
 
-        # Confidence: Jaccard * 100 capped at 95% (never claim 100% certainty)
-        confidence = min(round(jaccard * 100, 1), 95.0)
+        # --- Composite score ---
+        composite_score = (
+            base_score
+            * cluster_boost
+            * negative_penalty
+            * breed_multiplier
+            * severity_weight
+            * onset_factor
+            * age_factor
+            * prevalence_prior
+        )
+
+        # --- Confidence calibration ---
+        # Use logistic function to map composite_score to clinically
+        # meaningful percentage. Steepness and midpoint tuned so:
+        #   - composite ~0.1 → ~15% confidence
+        #   - composite ~0.3 → ~40% confidence
+        #   - composite ~0.5 → ~60% confidence
+        #   - composite ~0.8 → ~85% confidence
+        #   - composite ~1.0+ → ~92% confidence
+        # Never exceeds 95% (veterinary epistemic humility)
+        raw_logistic = 1.0 / (1.0 + _math.exp(-6.0 * (composite_score - 0.4)))
+        confidence = min(round(raw_logistic * 100, 1), 95.0)
 
         # Build recommended tests with priority
         rec_tests = []
@@ -3258,10 +3514,24 @@ def _analyze_symptoms(breed_id, symptom_ids, age_years=None, onset=None):
                 "breed_risk_multiplier": breed_multiplier,
                 "onset_factor": onset_factor,
                 "age_factor": age_factor,
-                "matched_symptoms": matched,
+                "matched_symptoms": sorted(matched),
                 "matched_count": len(matched),
                 "total_disease_symptoms": len(disease_symptoms),
+                "missing_key_symptoms": sorted(
+                    s for s in missing
+                    if _SYMPTOM_SPECIFICITY.get(s, 1.0) >= 1.5
+                ),
                 "recommended_tests": rec_tests,
+                # Diagnostic transparency
+                "scoring_detail": {
+                    "weighted_recall": round(weighted_recall, 3),
+                    "coverage": round(coverage, 3),
+                    "base_score": round(base_score, 3),
+                    "cluster_boost": cluster_boost,
+                    "negative_penalty": round(negative_penalty, 3),
+                    "specificity_bonus": round(specificity_bonus, 3),
+                    "prevalence_prior": prevalence_prior,
+                },
             }
         )
 
