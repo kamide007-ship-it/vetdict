@@ -9,6 +9,7 @@ Provides:
   - RECO2/RECO3 AI integrity control layer
 """
 
+import contextlib
 import logging
 import os
 from functools import wraps
@@ -274,14 +275,55 @@ def api_analyze_symptoms():
     species = data.get('species', 'dog')
     age_stage = data.get('age_stage')
     breed = data.get('breed')
+    onset = data.get('onset')
+    gender = data.get('gender')
+
+    # Parse age_years safely
+    age_years = data.get('age_years')
+    if age_years is not None:
+        try:
+            age_years = float(age_years)
+        except (ValueError, TypeError):
+            age_years = None
+
+    # Parse lab_values safely: coerce to {str: float}
+    raw_lab = data.get('lab_values')
+    lab_values = None
+    if isinstance(raw_lab, dict):
+        lab_values = {}
+        for k, v in raw_lab.items():
+            with contextlib.suppress(ValueError, TypeError):
+                lab_values[str(k)] = float(v)
+        if not lab_values:
+            lab_values = None
+
+    # Parse vaccination fields
+    vaccines = data.get('vaccines')
+    vaccination_status = data.get('vaccination_status')
 
     try:
         if species == 'dog' or species is None:
-            result = analyze_symptoms(symptoms, breed=breed)
+            result = analyze_symptoms(
+                symptoms,
+                breed=breed,
+                onset=onset,
+                age_years=age_years,
+                lab_values=lab_values,
+                gender=gender,
+                vaccines=vaccines,
+                vaccination_status=vaccination_status,
+            )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
                 return {'error': 'Species analyzer module not available'}, 500
-            result = analyze_species_symptoms(species, symptoms, age_stage)
+            result = analyze_species_symptoms(
+                species, symptoms, age_stage,
+                breed=breed,
+                onset=onset,
+                age_years=age_years,
+                lab_values=lab_values,
+                gender=gender,
+            )
         return result
     except ValueError as ve:
         logger.error(f"Symptom analysis error: {ve}", exc_info=True)
