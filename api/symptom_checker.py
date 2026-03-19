@@ -7820,6 +7820,28 @@ def analyze_symptoms(
             "match_count": match_count,
             "total_symptoms": total,
             "clinical_frequency_data": clinical_freq_data,
+            # Scoring transparency (consumed by frontend)
+            "scoring_detail": {
+                "weighted_recall": round(matching_weight / total_weight if total_weight > 0 else 0, 3),
+                "coverage": round(coverage, 3),
+                "cluster_boost": round(max(pair_multiplier, triple_multiplier), 3),
+                "negative_penalty": round(symptom_count_factor, 3),
+                "specificity_bonus": round(
+                    sum(
+                        0.06 if _w.get(s, _dw) >= 2.0 else (0.03 if _w.get(s, _dw) >= 1.5 else 0)
+                        for s in matching
+                    ), 3
+                ),
+                "prevalence_prior": round(prevalence_multiplier, 3),
+                "breed_multiplier": round(breed_multiplier, 3),
+                "age_multiplier": round(age_multiplier, 3),
+                "onset_multiplier": round(onset_multiplier, 3),
+            },
+            # Key symptoms of this disease that the user has NOT reported
+            "missing_key_symptoms": sorted(
+                s for s in (disease_symptoms - symptom_set)
+                if _w.get(s, _dw) >= 1.5
+            ),
             # internal fields for later processing
             "_urgency": disease["urgency"],
             "_match_ratio": coverage,
@@ -7860,6 +7882,7 @@ def analyze_symptoms(
     used_symptoms: set[str] = set()
     for entry in suspected:
         used_symptoms.update(entry["matching_symptoms"])
+        used_symptoms.update(entry.get("missing_key_symptoms", []))
     symptom_names_lookup = {
         sid: _SYMPTOM_NAMES[sid]
         for sid in used_symptoms
