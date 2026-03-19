@@ -32,27 +32,27 @@ logger = logging.getLogger(__name__)
 # Species metadata (labels)
 # ---------------------------------------------------------------------------
 
-SPECIES_META: dict[str, tuple[str, str]] = {
-    "dog": ("犬", "Dog"),
-    "cat": ("猫", "Cat"),
-    "horse": ("馬", "Horse"),
-    "rabbit": ("うさぎ", "Rabbit"),
-    "hamster": ("ハムスター", "Hamster"),
-    "guinea_pig": ("モルモット", "Guinea Pig"),
-    "chinchilla": ("チンチラ", "Chinchilla"),
-    "ferret": ("フェレット", "Ferret"),
-    "hedgehog": ("ハリネズミ", "Hedgehog"),
-    "sugar_glider": ("フクロモモンガ", "Sugar Glider"),
-    "degu": ("デグー", "Degu"),
-    "bird": ("鳥", "Bird"),
-    "parakeet": ("インコ", "Parakeet"),
-    "parrot": ("オウム", "Parrot"),
-    "reptile": ("爬虫類", "Reptile"),
-    "tortoise": ("リクガメ", "Tortoise"),
-    "snake": ("ヘビ", "Snake"),
-    "lizard": ("トカゲ", "Lizard"),
-    "amphibian": ("両生類", "Amphibian"),
-    "exotic_other": ("その他エキゾチック", "Exotic Other"),
+SPECIES_META: dict[str, dict[str, str]] = {
+    "dog": {"name_ja": "犬", "name_en": "Dog", "desc_ja": "最も一般的なペットの疾患辞典", "desc_en": "Comprehensive disease dictionary for dogs"},
+    "cat": {"name_ja": "猫", "name_en": "Cat", "desc_ja": "猫特有の疾患と症状", "desc_en": "Feline-specific diseases and symptoms"},
+    "horse": {"name_ja": "馬", "name_en": "Horse", "desc_ja": "馬の疾患・運動器障害を網羅", "desc_en": "Equine diseases and musculoskeletal disorders"},
+    "rabbit": {"name_ja": "うさぎ", "name_en": "Rabbit", "desc_ja": "うさぎに多い消化器・歯科疾患", "desc_en": "Common rabbit digestive and dental diseases"},
+    "hamster": {"name_ja": "ハムスター", "name_en": "Hamster", "desc_ja": "ハムスターの腫瘍・皮膚疾患など", "desc_en": "Hamster tumors, skin conditions, and more"},
+    "guinea_pig": {"name_ja": "モルモット", "name_en": "Guinea Pig", "desc_ja": "ビタミンC欠乏症や呼吸器疾患", "desc_en": "Vitamin C deficiency and respiratory diseases"},
+    "chinchilla": {"name_ja": "チンチラ", "name_en": "Chinchilla", "desc_ja": "チンチラの歯科・消化器疾患", "desc_en": "Chinchilla dental and digestive conditions"},
+    "ferret": {"name_ja": "フェレット", "name_en": "Ferret", "desc_ja": "フェレットの内分泌・腫瘍疾患", "desc_en": "Ferret endocrine and neoplastic diseases"},
+    "hedgehog": {"name_ja": "ハリネズミ", "name_en": "Hedgehog", "desc_ja": "ハリネズミの皮膚・神経疾患", "desc_en": "Hedgehog skin and neurological conditions"},
+    "sugar_glider": {"name_ja": "フクロモモンガ", "name_en": "Sugar Glider", "desc_ja": "栄養性疾患やストレス関連症状", "desc_en": "Nutritional diseases and stress-related conditions"},
+    "degu": {"name_ja": "デグー", "name_en": "Degu", "desc_ja": "デグーの糖尿病・歯科疾患", "desc_en": "Degu diabetes and dental diseases"},
+    "bird": {"name_ja": "鳥", "name_en": "Bird", "desc_ja": "鳥類全般の感染症・栄養疾患", "desc_en": "Avian infections and nutritional diseases"},
+    "parakeet": {"name_ja": "インコ", "name_en": "Parakeet", "desc_ja": "インコの呼吸器・羽毛疾患", "desc_en": "Parakeet respiratory and feather disorders"},
+    "parrot": {"name_ja": "オウム", "name_en": "Parrot", "desc_ja": "オウム病やPBFDなど大型鳥の疾患", "desc_en": "Psittacosis, PBFD, and large parrot diseases"},
+    "reptile": {"name_ja": "爬虫類", "name_en": "Reptile", "desc_ja": "爬虫類全般の代謝性骨疾患など", "desc_en": "Metabolic bone disease and general reptile conditions"},
+    "tortoise": {"name_ja": "リクガメ", "name_en": "Tortoise", "desc_ja": "リクガメの甲羅・呼吸器疾患", "desc_en": "Tortoise shell and respiratory disorders"},
+    "snake": {"name_ja": "ヘビ", "name_en": "Snake", "desc_ja": "ヘビの呼吸器感染症・脱皮異常", "desc_en": "Snake respiratory infections and dysecdysis"},
+    "lizard": {"name_ja": "トカゲ", "name_en": "Lizard", "desc_ja": "トカゲの寄生虫症・代謝疾患", "desc_en": "Lizard parasitic and metabolic diseases"},
+    "amphibian": {"name_ja": "両生類", "name_en": "Amphibian", "desc_ja": "カエル・イモリのツボカビ症など", "desc_en": "Chytrid fungus and amphibian diseases"},
+    "exotic_other": {"name_ja": "その他エキゾチック", "name_en": "Exotic Other", "desc_ja": "その他のエキゾチックアニマルの疾患", "desc_en": "Diseases of other exotic animals"},
 }
 
 
@@ -150,7 +150,7 @@ def _fallback_disease_counts() -> dict[str, int]:
             from pathlib import Path as _Path
             data_file = _Path(__file__).parent.parent / "diseases_all_species.json"
             if data_file.exists():
-                _name_to_id = {v[1]: k for k, v in SPECIES_META.items()}
+                _name_to_id = {v["name_en"]: k for k, v in SPECIES_META.items()}
                 with open(data_file, "r", encoding="utf-8") as f:
                     for entry in _json.load(f):
                         sp_name = entry.get("species", "")
@@ -217,11 +217,13 @@ def get_species_stats() -> dict[str, Any]:
         drug_counts, total_drugs = _fallback_drug_counts()
 
     stats = []
-    for sp_id, (name_ja, name_en) in SPECIES_META.items():
+    for sp_id, meta in SPECIES_META.items():
         stats.append({
             "id": sp_id,
-            "name": name_ja,
-            "nameEn": name_en,
+            "name": meta["name_ja"],
+            "nameEn": meta["name_en"],
+            "description": meta.get("desc_en", ""),
+            "description_ja": meta.get("desc_ja", ""),
             "diseases": disease_counts.get(sp_id, 0),
             "drugs": drug_counts.get(sp_id, 0),
         })
