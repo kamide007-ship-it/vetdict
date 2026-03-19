@@ -1041,6 +1041,14 @@ SYMPTOM_CLINICAL_WEIGHTS: Dict[str, float] = {
 # デフォルト重み（辞書に登録されていない症状用）
 _DEFAULT_SYMPTOM_WEIGHT = 1.0
 
+# Prevalence multiplier for Bayesian-like prior adjustment
+_PREVALENCE_MULTIPLIER: Dict[str, float] = {
+    "very_common": 1.4,
+    "common": 1.2,
+    "uncommon": 0.9,
+    "rare": 0.7,
+}
+
 
 # =============================================================================
 # LAB VALUE → DISEASE BOOST MAP (検査値異常による疾患スコアブースト)
@@ -1754,8 +1762,10 @@ def analyze_symptoms_generic(
     breed: str | None = None,
     species: str | None = None,
     lab_values: Dict[str, float] | None = None,
-    prevalence_map: Dict[str, str] | None = None,  # New: prevalence tier map
-    gender: str | None = None,  # New: "male" | "female" | None
+    prevalence_map: Dict[str, str] | None = None,
+    gender: str | None = None,
+    vaccines: list | None = None,
+    vaccination_status: str | None = None,
 ) -> Dict[str, Any]:
     """Generic differential diagnosis engine.
 
@@ -1859,11 +1869,33 @@ def analyze_symptoms_generic(
     if lab_values:
         lab_boosts = compute_lab_boosts(lab_values, species=species or "dog")
 
+    # Pre-compute vaccine-preventable diseases (skip from results if vaccinated)
+    vaccine_preventable: set = set()
+    vaccine_list = [str(v) for v in (vaccines or []) if v]
+    if vaccine_list:
+        try:
+            from api.data.vaccine_mapping import get_preventable_diseases
+            vaccine_preventable = get_preventable_diseases(vaccine_list)
+        except ImportError:
+            pass
+
+    # Load vaccination status handler for score adjustment
+    _VaccinationStatusHandler = None
+    if vaccination_status:
+        try:
+            from api.data.vaccination_protection import VaccinationStatusHandler
+            _VaccinationStatusHandler = VaccinationStatusHandler
+        except ImportError:
+            pass
+
     for disease in diseases:
         disease_symptoms = set(disease.get("symptoms", set()))
         if not disease_symptoms:
             continue
         matching = symptom_set & disease_symptoms
+        # Skip vaccine-preventable diseases if animal is vaccinated
+        if disease.get("name", "") in vaccine_preventable:
+            continue
         if not matching:
             continue
 
@@ -1959,9 +1991,16 @@ def analyze_symptoms_generic(
             color_class = "score-minimal"
         # Get prevalence tier if prevalence_map provided
         prevalence_tier = "unknown"
+        prevalence_multiplier = 1.0
         if prevalence_map:
             disease_name = disease.get("name", "")
             prevalence_tier = prevalence_map.get(disease_name, "unknown")
+            prevalence_multiplier = _PREVALENCE_MULTIPLIER.get(prevalence_tier, 1.0)
+            combined_boost *= prevalence_multiplier
+            combined_boost = min(combined_boost, 3.0)  # Re-cap after prevalence
+            if combined_boost < 1.0:
+                combined_boost = max(combined_boost, 0.6)
+            adjusted_percent = min(round(match_percent * combined_boost), 100)
 
         suspected.append({
             "name": disease["name"],
@@ -1969,7 +2008,7 @@ def analyze_symptoms_generic(
             "likelihood": likelihood,
             "match_percent": adjusted_percent,
             "color_class": color_class,
-            "prevalence_tier": prevalence_tier,  # New: prevalence classification
+            "prevalence_tier": prevalence_tier,
             "description": disease.get("description", ""),
             "description_ja": disease.get("description_ja", ""),
             "pathophysiology": disease.get("pathophysiology", ""),
@@ -1993,9 +2032,50 @@ def analyze_symptoms_generic(
             "matching_symptoms": sorted(matching),
             "match_count": len(matching),
             "total_symptoms": len(disease_symptoms),
+            # Scoring transparency (consumed by frontend)
+            "scoring_detail": {
+                "weighted_recall": round(matching_weight / total_weight if total_weight > 0 else 0, 3),
+                "coverage": round(coverage, 3),
+                "cluster_boost": round(max(pair_multiplier, triple_multiplier), 3),
+                "negative_penalty": round(symptom_count_factor, 3),
+                "specificity_bonus": round(
+                    sum(
+                        0.06 if SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) >= 2.0
+                        else (0.03 if SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) >= 1.5 else 0)
+                        for s in matching
+                    ), 3
+                ),
+                "prevalence_prior": round(prevalence_multiplier, 3),
+                "breed_multiplier": round(breed_multiplier, 3),
+                "gender_multiplier": round(gender_multiplier, 3),
+                "age_multiplier": round(age_multiplier, 3),
+                "onset_multiplier": round(onset_multiplier, 3),
+                "lab_multiplier": round(lab_multiplier, 3),
+            },
+            # Key symptoms of this disease that the user has NOT reported
+            "missing_key_symptoms": sorted(
+                s for s in (disease_symptoms - symptom_set)
+                if SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) >= 1.5
+            ),
             "_urgency": disease.get("urgency", "low"),
             "_match_ratio": coverage,
         })
+
+    # Apply vaccination status adjustment (reduce confidence for vaccine-preventable diseases)
+    vaccination_adjustment_applied = False
+    if _VaccinationStatusHandler and vaccination_status:
+        for entry in suspected:
+            original = entry["match_percent"]
+            adjusted, applied = _VaccinationStatusHandler.apply_vaccination_adjustment(
+                entry["name"], original, vaccination_status
+            )
+            if applied:
+                entry["match_percent_before_vaccination"] = original
+                entry["match_percent"] = adjusted
+                entry["vaccination_adjustment_applied"] = True
+                vaccination_adjustment_applied = True
+            else:
+                entry["vaccination_adjustment_applied"] = False
 
     # Sort results: Prevalence tier first (if available), then match_percent, then match_count
     # This creates a stepwise differential diagnosis aligned with clinical practice
@@ -2034,10 +2114,11 @@ def analyze_symptoms_generic(
     advice_dict = advice or ADVICE
     advice_pair = advice_dict.get(severity, advice_dict["low"])
 
-    # Build symptom names lookup
+    # Build symptom names lookup (include missing_key_symptoms for frontend)
     used_symptoms: Set[str] = set()
     for entry in suspected:
         used_symptoms.update(entry["matching_symptoms"])
+        used_symptoms.update(entry.get("missing_key_symptoms", []))
     symptom_names_lookup: Dict[str, Dict[str, str]] = {
         sid: symptom_names[sid] for sid in used_symptoms if sid in symptom_names
     }
@@ -2069,5 +2150,7 @@ def analyze_symptoms_generic(
         "pair_boost_applied": len(pair_boosts) > 0,
         "lab_boost_applied": len(lab_boosts) > 0,
         "lab_values": lab_values,
+        "vaccination_adjustment_applied": vaccination_adjustment_applied,
+        "vaccine_preventable_excluded": len(vaccine_preventable) > 0,
         "symptom_names": symptom_names_lookup,
     }

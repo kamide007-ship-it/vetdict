@@ -64,6 +64,36 @@ VACCINE_TYPES: dict[str, dict[str, object]] = {
         "species": ["cat"],
         "required": False,
     },
+    "rhdv": {
+        "ja": "ウサギ出血病ワクチン",
+        "en": "Rabbit Hemorrhagic Disease Vaccine",
+        "components": ["RHDV1", "RHDV2"],
+        "preventable_diseases": [
+            "Rabbit Hemorrhagic Disease (RHDV)",
+            "Rabbit Hemorrhagic Disease Virus 2 (RHDV2)",
+        ],
+        "schedule": "10週齢以降1回、1年後追加接種",
+        "species": ["rabbit"],
+        "required": True,
+    },
+    "myxomatosis": {
+        "ja": "粘液腫症ワクチン",
+        "en": "Myxomatosis Vaccine",
+        "components": ["Myxoma"],
+        "preventable_diseases": ["Myxomatosis"],
+        "schedule": "6週齢以降1回、6ヶ月後追加接種",
+        "species": ["rabbit"],
+        "required": True,
+    },
+    "ferret_cdv": {
+        "ja": "フェレット用ジステンパーワクチン",
+        "en": "Ferret Canine Distemper Vaccine",
+        "components": ["CDV-ferret"],
+        "preventable_diseases": ["Canine Distemper"],
+        "schedule": "8週齢、12週齢、16週齢、1年後追加接種",
+        "species": ["ferret"],
+        "required": True,
+    },
 }
 
 VACCINES_BY_SPECIES = {
@@ -72,7 +102,7 @@ VACCINES_BY_SPECIES = {
         for vaccine_id, vaccine_data in VACCINE_TYPES.items()
         if species in vaccine_data.get("species", [])
     ]
-    for species in {"dog", "cat", "ferret"}
+    for species in {"dog", "cat", "ferret", "rabbit"}
 }
 
 

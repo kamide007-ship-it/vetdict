@@ -84,7 +84,19 @@ def _horse_category(name: str, desc: str) -> str:
     return "general"
 
 
-def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
+def analyze_horse(
+    symptoms: List[str],
+    age_stage: str | None = None,
+    *,
+    breed: str | None = None,
+    onset: str | None = None,
+    age_years: float | None = None,
+    species: str | None = None,
+    lab_values: dict | None = None,
+    gender: str | None = None,
+    vaccines: list | None = None,
+    vaccination_status: str | None = None,
+) -> Dict:
     """馬用の症状解析。馬の鑑別診断エンジンに委譲する。
 
     馬用データベースでは症状を "所見キー" として扱うため、入力された
@@ -93,20 +105,52 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
     Args:
         symptoms: 所見キーのリスト
         age_stage: "young" / "adult" / "senior" など（馬用エンジンに渡される）
+        breed: 品種コード（任意）
+        onset: 発症経過（任意）
+        age_years: 年齢（任意）
+        species: 動物種コード（任意）
+        lab_values: 検査値（任意）
+        gender: 性別（任意）
+        vaccines: ワクチンIDリスト（任意）
+        vaccination_status: ワクチン接種状況（任意）
 
     Returns:
         dict: 鑑別診断結果を共通形式に整形した辞書
     """
     checked = set(symptoms)
     diff_list = generate_differential_diagnosis(checked, age_stage or "")
+
+    # Vaccine-preventable disease exclusion
+    vaccine_preventable: set = set()
+    vaccine_list = [str(v) for v in (vaccines or []) if v]
+    if vaccine_list:
+        try:
+            from api.data.vaccine_mapping import get_preventable_diseases
+            vaccine_preventable = get_preventable_diseases(vaccine_list)
+        except ImportError:
+            pass
+
+    # Lab boosts for horse
+    lab_boosts: Dict[str, float] = {}
+    if lab_values:
+        try:
+            from api.species.helpers import compute_lab_boosts
+            lab_boosts = compute_lab_boosts(lab_values, species="horse")
+        except ImportError:
+            pass
+
     possible_conditions = []
     recommended_tests: List[str] = []
 
     for item in diff_list:
         dis = item.disease
-        # 日本語名があればそれを使用
         name = dis.name_ja or dis.name_en or dis.id
-        # 重症度を英語から日本語レベルへ簡易変換
+        name_en = dis.name_en or ""
+
+        # Skip vaccine-preventable diseases
+        if name in vaccine_preventable or name_en in vaccine_preventable:
+            continue
+
         severity = dis.severity.lower() if dis.severity else "unknown"
         severity_map = {
             "critical": "critical",
@@ -115,13 +159,10 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
             "mild": "low",
         }
         severity_level = severity_map.get(severity, "unknown")
-        # 推奨検査の日本語名のみ抽出（優先度順）
         tests = [t[1] for t in (dis.recommended_exams or [])]
         recommended_tests.extend(tests)
-        # Category-based transmission
         _cat = _horse_category(dis.name_en or "", dis.description_ja or "")
         _trans = _HORSE_TRANSMISSION.get(_cat, _HORSE_TRANS_DEFAULT)
-        # Build diagnosis text
         _diag_en = (
             f"Diagnosis is based on clinical signs, history, and physical examination. "
             f"Recommended diagnostics: {', '.join(tests[:4])}."
@@ -130,13 +171,43 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
             f"臨床徴候、病歴、身体検査に基づき診断する。推奨検査: {', '.join(tests[:4])}。"
         ) if tests else "臨床徴候、病歴、身体検査に基づき診断する。"
 
+        # Apply lab boost if available
+        lab_multiplier = 1.0
+        if lab_boosts:
+            from api.species.helpers import _fuzzy_boost_lookup
+            lab_multiplier = min(_fuzzy_boost_lookup(name, lab_boosts), 1.5)
+            if lab_multiplier == 1.0:
+                lab_multiplier = min(_fuzzy_boost_lookup(name_en, lab_boosts), 1.5)
+
+        match_pct = round(item.confidence_pct * lab_multiplier)
+        match_pct = min(match_pct, 100)
+
+        # Determine likelihood tier
+        if match_pct >= 50:
+            likelihood = "high"
+        elif match_pct >= 30:
+            likelihood = "moderate"
+        else:
+            likelihood = "low"
+        # Color class
+        if match_pct >= 70:
+            color_class = "score-high"
+        elif match_pct >= 45:
+            color_class = "score-moderate"
+        elif match_pct >= 25:
+            color_class = "score-low"
+        else:
+            color_class = "score-minimal"
+
         possible_conditions.append(
             {
                 "name": name,
                 "name_ja": dis.name_ja or "",
                 "match_count": item.match_count,
                 "confidence": round(item.confidence_pct, 2),
-                "match_percent": round(item.confidence_pct),
+                "match_percent": match_pct,
+                "likelihood": likelihood,
+                "color_class": color_class,
                 "severity": severity_level,
                 "description": dis.description_ja or dis.name_ja,
                 "description_ja": dis.description_ja or "",
@@ -148,7 +219,9 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
                 "clinical_signs": dis.clinical_signs_detail or "",
                 "risk_factors": dis.risk_factors or "",
                 "recommended_tests": tests,
-                "_name_en": dis.name_en or "",  # enrichment lookup key
+                "matching_symptoms": sorted(item.matched_findings),
+                "total_symptoms": len(dis.findings) if dis.findings else 0,
+                "_name_en": dis.name_en or "",
                 "transmission": _trans[0],
                 "transmission_ja": _trans[1],
                 "urgency": dis.urgency or "moderate",
@@ -160,6 +233,26 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
                 "clinical_signs_ja": "",
                 "diagnosis": _diag_en,
                 "diagnosis_ja": _diag_ja,
+                # Scoring transparency
+                "scoring_detail": {
+                    "weighted_recall": round(item.match_ratio, 3),
+                    "coverage": round(item.match_ratio, 3),
+                    "weighted_score": round(item.weighted_score, 3),
+                    "cluster_boost": 1.0,
+                    "negative_penalty": round(1.0 - item.absence_penalty, 3),
+                    "specificity_bonus": 0.0,
+                    "prevalence_prior": 1.0,
+                    "breed_multiplier": 1.0,
+                    "gender_multiplier": 1.0,
+                    "age_multiplier": 1.0,
+                    "onset_multiplier": 1.0,
+                    "lab_multiplier": round(lab_multiplier, 3),
+                    "confidence_level": item.confidence_level,
+                    "absence_penalty": round(item.absence_penalty, 3),
+                    "rule_out_note": item.rule_out_note,
+                },
+                # Key findings that are missing (for follow-up questions)
+                "missing_key_symptoms": sorted(item.absent_key_findings),
             }
         )
 
@@ -186,9 +279,35 @@ def analyze_horse(symptoms: List[str], age_stage: str | None = None) -> Dict:
     for t in recommended_tests:
         if t not in dedup_tests:
             dedup_tests.append(t)
+    # Compute overall severity
+    severity = "low"
+    for c in possible_conditions:
+        u = c.get("urgency", "low")
+        if u == "emergency" and c.get("likelihood") == "high":
+            severity = "emergency"
+            break
+        if u == "high" and c.get("match_percent", 0) >= 30:
+            severity = "high"
+        elif u == "moderate" and c.get("match_percent", 0) >= 50 and severity == "low":
+            severity = "moderate"
+
     return {
         "possible_conditions": possible_conditions,
+        "suspected_diseases": possible_conditions,
         "recommended_tests": dedup_tests,
+        "severity": severity,
+        "breed_risk_applied": False,
+        "gender_risk_applied": False,
+        "onset_applied": onset is not None,
+        "onset": onset,
+        "age_applied": age_years is not None,
+        "age_years": age_years,
+        "age_stage": age_stage,
+        "pair_boost_applied": False,
+        "lab_boost_applied": len(lab_boosts) > 0,
+        "lab_values": lab_values,
+        "vaccination_adjustment_applied": len(vaccine_preventable) > 0,
+        "vaccine_preventable_excluded": len(vaccine_preventable) > 0,
     }
 
 
@@ -268,14 +387,34 @@ def analyze_species_symptoms(
         )
     elif species_key == "horse":
         handler = SPECIES_HANDLERS[species_key]
-        return handler(symptoms, age_stage)
-    else:
-        handler = SPECIES_HANDLERS[species_key]
-        # Non-dog species analyzers do not currently accept vaccination kwargs.
         return handler(
             symptoms, age_stage,
             breed=breed, onset=onset, age_years=age_years,
             species=species_key,
             lab_values=lab_values,
             gender=gender,
+            vaccines=vaccines,
+            vaccination_status=vaccination_status,
         )
+    else:
+        handler = SPECIES_HANDLERS[species_key]
+        # Try passing all params including vaccination; fall back gracefully
+        # if the species handler hasn't been updated to accept them yet.
+        try:
+            return handler(
+                symptoms, age_stage,
+                breed=breed, onset=onset, age_years=age_years,
+                species=species_key,
+                lab_values=lab_values,
+                gender=gender,
+                vaccines=vaccines,
+                vaccination_status=vaccination_status,
+            )
+        except TypeError:
+            return handler(
+                symptoms, age_stage,
+                breed=breed, onset=onset, age_years=age_years,
+                species=species_key,
+                lab_values=lab_values,
+                gender=gender,
+            )

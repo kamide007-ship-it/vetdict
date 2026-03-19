@@ -2725,5 +2725,5 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Rabbit")
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None) -> Dict[str, Any]:
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("rabbit", {}))
+def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None) -> Dict[str, Any]:
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("rabbit", {}))
