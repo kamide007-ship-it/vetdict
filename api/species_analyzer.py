@@ -220,7 +220,7 @@ def analyze_horse(
                 "risk_factors": dis.risk_factors or "",
                 "recommended_tests": tests,
                 "matching_symptoms": sorted(item.matched_findings),
-                "total_symptoms": len(dis.findings) if dis.findings else 0,
+                "total_symptoms": len(dis.associated_findings) if dis.associated_findings else 0,
                 "_name_en": dis.name_en or "",
                 "transmission": _trans[0],
                 "transmission_ja": _trans[1],
