@@ -271,11 +271,23 @@ def analyze_species_symptoms(
         return handler(symptoms, age_stage)
     else:
         handler = SPECIES_HANDLERS[species_key]
-        # Non-dog species analyzers do not currently accept vaccination kwargs.
-        return handler(
-            symptoms, age_stage,
-            breed=breed, onset=onset, age_years=age_years,
-            species=species_key,
-            lab_values=lab_values,
-            gender=gender,
-        )
+        # Try passing all params including vaccination; fall back gracefully
+        # if the species handler hasn't been updated to accept them yet.
+        try:
+            return handler(
+                symptoms, age_stage,
+                breed=breed, onset=onset, age_years=age_years,
+                species=species_key,
+                lab_values=lab_values,
+                gender=gender,
+                vaccines=vaccines,
+                vaccination_status=vaccination_status,
+            )
+        except TypeError:
+            return handler(
+                symptoms, age_stage,
+                breed=breed, onset=onset, age_years=age_years,
+                species=species_key,
+                lab_values=lab_values,
+                gender=gender,
+            )
