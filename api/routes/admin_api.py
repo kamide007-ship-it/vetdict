@@ -14,6 +14,7 @@ from api.database import (
     upsert_disease,
     upsert_drug,
 )
+from api.disease_store import invalidate_cache
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/api/admin")
 
@@ -57,6 +58,7 @@ def create_disease():
         return jsonify({"success": False, "error": "id and species are required"}), 400
     with get_connection() as conn:
         upsert_disease(conn, data)
+    invalidate_cache()
     return jsonify({"success": True, "id": data["id"]}), 201
 
 
@@ -74,6 +76,7 @@ def update_disease(disease_id: str):
         # Merge: keep existing fields not provided in update
         merged = {**existing, **{k: v for k, v in data.items() if v is not None}}
         upsert_disease(conn, merged)
+    invalidate_cache()
     return jsonify({"success": True, "id": disease_id})
 
 
@@ -84,6 +87,7 @@ def remove_disease(disease_id: str):
         deleted = delete_disease(conn, disease_id)
     if not deleted:
         return jsonify({"success": False, "error": "Disease not found"}), 404
+    invalidate_cache()
     return jsonify({"success": True, "deleted": disease_id})
 
 
@@ -142,4 +146,5 @@ def bulk_import():
     with get_connection() as conn:
         for d in diseases:
             upsert_disease(conn, d)
+    invalidate_cache()
     return jsonify({"success": True, "imported": len(diseases)}), 201

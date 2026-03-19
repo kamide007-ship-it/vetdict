@@ -95,12 +95,10 @@ except ImportError:
 
 # Health checker blueprint (checkbox UI)
 try:
-    from api.health_checker import SYMPTOMS as ALL_SYMPTOMS
     from api.health_checker import health_bp
     HEALTH_CHECKER_AVAILABLE = True
 except ImportError:
     try:
-        from health_checker import SYMPTOMS as ALL_SYMPTOMS
         from health_checker import health_bp
         HEALTH_CHECKER_AVAILABLE = True
     except ImportError:
@@ -196,6 +194,15 @@ try:
 except ImportError:
     ADMIN_API_AVAILABLE = False
     logger.warning("Admin API module not available")
+
+# Public diseases API blueprint (SQLite read-only access)
+try:
+    from api.routes.diseases_api import diseases_bp
+    app.register_blueprint(diseases_bp)
+    DISEASES_API_AVAILABLE = True
+except ImportError:
+    DISEASES_API_AVAILABLE = False
+    logger.warning("Diseases API module not available")
 
 # Phase 3 Learning Insights blueprint (Continuous Learning Pipeline)
 try:
@@ -401,220 +408,28 @@ def health():
 
 
 # =============================================================================
-# API: Species Stats (dynamic disease/drug counts)
+# API: Species Stats (from SQLite)
 # =============================================================================
 
 @app.route('/api/species-stats', methods=['GET'])
 @ensure_json_response
 def api_species_stats():
-    """各動物種の疾患数・薬品数を動的に返す。"""
-    stats = []
-    species_modules = {
-        "dog": ("犬", "Dog", "symptom_checker"),
-        "cat": ("猫", "Cat", "cat_diseases"),
-        "horse": ("馬", "Horse", "equine_diseases"),
-        "rabbit": ("うさぎ", "Rabbit", "rabbit_diseases"),
-        "hamster": ("ハムスター", "Hamster", "hamster_diseases"),
-        "guinea_pig": ("モルモット", "Guinea Pig", "guinea_pig_diseases"),
-        "chinchilla": ("チンチラ", "Chinchilla", "chinchilla_diseases"),
-        "ferret": ("フェレット", "Ferret", "ferret_diseases"),
-        "hedgehog": ("ハリネズミ", "Hedgehog", "hedgehog_diseases"),
-        "sugar_glider": ("フクロモモンガ", "Sugar Glider", "sugar_glider_diseases"),
-        "degu": ("デグー", "Degu", "degu_diseases"),
-        "bird": ("鳥", "Bird", "bird_diseases"),
-        "parakeet": ("インコ", "Parakeet", "parakeet_diseases"),
-        "parrot": ("オウム", "Parrot", "parrot_diseases"),
-        "reptile": ("爬虫類", "Reptile", "reptile_diseases"),
-        "tortoise": ("リクガメ", "Tortoise", "tortoise_diseases"),
-        "snake": ("ヘビ", "Snake", "snake_diseases"),
-        "lizard": ("トカゲ", "Lizard", "lizard_diseases"),
-        "amphibian": ("両生類", "Amphibian", "amphibian_diseases"),
-        "exotic_other": ("その他エキゾチック", "Exotic Other", "exotic_other_diseases"),
-    }
-
-    drug_counts = {}
-    try:
-        from api.drug_dictionary import DRUGS
-        for d in DRUGS:
-            for sp in (d.get("species_info") or {}):
-                drug_counts[sp] = drug_counts.get(sp, 0) + 1
-    except Exception:
-        pass
-
-    # Load disease counts from diseases_all_species.json as reliable fallback
-    json_counts = {}
-    try:
-        import json as _json
-        from pathlib import Path as _Path
-        _data_file = _Path(__file__).parent.parent / "diseases_all_species.json"
-        if _data_file.exists():
-            with open(_data_file, "r", encoding="utf-8") as _f:
-                _all = _json.load(_f)
-            for _e in _all:
-                _sp = _e.get("species", "")
-                json_counts[_sp] = json_counts.get(_sp, 0) + 1
-    except Exception:
-        pass
-
-    # Map species_id to JSON species name for count lookup
-    sp_id_to_json = {
-        "dog": "Dog", "cat": "Cat", "horse": "Horse", "rabbit": "Rabbit",
-        "hamster": "Hamster", "guinea_pig": "Guinea Pig", "chinchilla": "Chinchilla",
-        "ferret": "Ferret", "hedgehog": "Hedgehog", "sugar_glider": "Sugar Glider",
-        "degu": "Degu", "bird": "Bird", "parakeet": "Parakeet", "parrot": "Parrot",
-        "reptile": "Reptile", "tortoise": "Tortoise", "snake": "Snake",
-        "lizard": "Lizard", "amphibian": "Amphibian", "exotic_other": "Exotic Other",
-    }
-
-    for sp_id, (name_ja, name_en, module_name) in species_modules.items():
-        disease_count = 0
-        try:
-            if sp_id == "dog":
-                from api.symptom_checker import _DISEASE_DB as dog_diseases
-                disease_count = len(dog_diseases)
-            elif sp_id == "horse":
-                from api.species.equine_diseases import DISEASE_DATABASE
-                disease_count = len(DISEASE_DATABASE)
-            else:
-                import importlib
-                mod = importlib.import_module(f"api.species.{module_name}")
-                disease_count = len(getattr(mod, "DISEASES", []))
-        except Exception:
-            pass
-        # Fall back to JSON count if module count is zero
-        if disease_count == 0:
-            json_name = sp_id_to_json.get(sp_id, name_en)
-            disease_count = json_counts.get(json_name, 0)
-        stats.append({
-            "id": sp_id,
-            "name": name_ja,
-            "nameEn": name_en,
-            "diseases": disease_count,
-            "drugs": drug_counts.get(sp_id, 0),
-        })
-
-    total_diseases = sum(s["diseases"] for s in stats)
-    total_drugs = 0
-    try:
-        from api.drug_dictionary import DRUGS
-        total_drugs = len(DRUGS)
-    except Exception:
-        pass
-
-    return {
-        "species": stats,
-        "total_diseases": total_diseases,
-        "total_drugs": total_drugs,
-        "total_species": len(stats),
-    }
+    """各動物種の疾患数・薬品数を SQLite から返す。"""
+    from api.disease_store import get_species_stats
+    return get_species_stats()
 
 
 # =============================================================================
-# API: Species-specific Symptoms
+# API: Species-specific Symptoms (from SQLite)
 # =============================================================================
 
 @app.route('/api/species/<species>/symptoms', methods=['GET'])
 @ensure_json_response
 def api_species_symptoms(species: str):
-    """Return symptom list relevant to the selected species."""
+    """Return symptom list for the selected species from SQLite."""
+    from api.disease_store import get_symptoms_for_species
     species_key = (species or '').lower()
-    species_modules = {
-        "cat": "cat_diseases",
-        "rabbit": "rabbit_diseases",
-        "hamster": "hamster_diseases",
-        "chinchilla": "chinchilla_diseases",
-        "guinea_pig": "guinea_pig_diseases",
-        "ferret": "ferret_diseases",
-        "hedgehog": "hedgehog_diseases",
-        "sugar_glider": "sugar_glider_diseases",
-        "degu": "degu_diseases",
-        "bird": "bird_diseases",
-        "parakeet": "parakeet_diseases",
-        "parrot": "parrot_diseases",
-        "reptile": "reptile_diseases",
-        "tortoise": "tortoise_diseases",
-        "snake": "snake_diseases",
-        "lizard": "lizard_diseases",
-        "amphibian": "amphibian_diseases",
-        "exotic_other": "exotic_other_diseases",
-    }
-    diseases = []
-    species_module = None
-    try:
-        if species_key == "dog":
-            from api.symptom_checker import _DISEASE_DB as dog_db
-            diseases = dog_db
-        elif species_key == "horse":
-            from api.species.equine_diseases import DISEASE_DATABASE
-            diseases = DISEASE_DATABASE
-        else:
-            mod_name = species_modules.get(species_key)
-            if mod_name is None:
-                return {"symptoms": []}
-            import importlib
-            species_module = importlib.import_module(f"api.species.{mod_name}")
-            diseases = getattr(species_module, "DISEASES", [])
-    except Exception:
-        return {"symptoms": []}
-
-    unique_syms = set()
-    for dis in diseases:
-        if isinstance(dis, dict):
-            syms = dis.get("symptoms", [])
-        else:
-            syms = getattr(dis, "symptoms", []) or getattr(dis, "observations", []) or getattr(dis, "associated_findings", [])
-        if isinstance(syms, (set, list, tuple)):
-            unique_syms.update(syms)
-    id_to_info = {s["id"]: s for s in ALL_SYMPTOMS}
-
-    def merge_symptom_names(symptom_names):
-        if not isinstance(symptom_names, dict):
-            return
-        for symptom_id, names in symptom_names.items():
-            if not isinstance(names, dict):
-                continue
-            current = id_to_info.get(symptom_id, {"id": symptom_id, "category": "other"})
-            id_to_info[symptom_id] = {
-                "id": symptom_id,
-                "name_ja": names.get("ja") or current.get("name_ja") or symptom_id,
-                "name_en": names.get("en") or current.get("name_en") or symptom_id,
-                "category": current.get("category") or "other",
-            }
-
-    # Horse has an expanded symptom namespace that is not fully covered by
-    # generic SYMPTOMS. Merge equine labels so UI does not fall back to raw IDs.
-    if species_key == "horse":
-        try:
-            from api.species.equine_diseases import HEALTH_CHECK_ITEMS
-
-            for category, items in HEALTH_CHECK_ITEMS.items():
-                for symptom_id, name_ja, name_en in items:
-                    id_to_info[symptom_id] = {
-                        "id": symptom_id,
-                        "name_ja": name_ja,
-                        "name_en": name_en,
-                        "category": category,
-                    }
-        except Exception:
-            pass
-    elif species_key == "dog":
-        try:
-            from api.symptom_checker import _SYMPTOM_NAMES
-
-            merge_symptom_names(_SYMPTOM_NAMES)
-        except Exception:
-            pass
-    elif species_module is not None:
-        merge_symptom_names(getattr(species_module, "SYMPTOM_NAMES", None))
-
-    result = []
-    for sid in sorted(unique_syms):
-        info = id_to_info.get(sid)
-        if info is None:
-            result.append({"id": sid, "name_ja": sid, "name_en": sid, "category": "other"})
-        else:
-            result.append(info)
-    return {"symptoms": result}
+    return {"symptoms": get_symptoms_for_species(species_key)}
 
 
 # =============================================================================

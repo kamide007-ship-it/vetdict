@@ -3,6 +3,7 @@ __pycache__/
 instance/
 .coverage
 *.db
+venv/
 
 # Phase enrichment runtime files
 phase1_enrichment_manifest.json
