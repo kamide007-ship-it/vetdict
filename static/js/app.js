@@ -545,14 +545,16 @@ function renderCitationMap(item){
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
+  const progress=document.getElementById("analyzeProgress");
+  if(progress)progress.classList.add("active");
   const payload={species:currentSpecies,symptoms:[...selectedSymptoms]};
   if(currentBreed)payload.breed=currentBreed;
   const labVals=collectLabValues();
   if(labVals)payload.lab_values=labVals;
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
-  .then(r=>r.json()).then(data=>renderResults(data))
+  .then(r=>r.json()).then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})
   .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${t("errorPrefix")}${err.message}</div>`;})
-  .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");});
+  .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
 function renderResults(data){
