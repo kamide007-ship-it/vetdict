@@ -241,6 +241,7 @@ def ensure_json_response(f):
                     return resp
                 return result
             if isinstance(result, dict):
+                result.setdefault('success', True)
                 result.setdefault('version', VERSION)
                 return jsonify(result)
             return result
