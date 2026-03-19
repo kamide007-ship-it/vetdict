@@ -384,6 +384,8 @@ function selectSpecies(id){
   });
   renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
   resetSpeciesChat(id);
+  const sp=SPECIES.find(s=>s.id===id);
+  if(sp&&typeof showToast==="function"){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
   const resultsArea=document.getElementById("resultsArea");
   if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>`;
 }
@@ -416,6 +418,8 @@ function loadBreeds(species){
 
 function loadSymptoms(species){
   const requestId=++symptomRequestId;
+  const list=document.getElementById("symptomList");
+  if(list)list.innerHTML='<div class="skeleton skeleton-line" style="margin:12px"></div><div class="skeleton skeleton-line medium" style="margin:12px"></div><div class="skeleton skeleton-line short" style="margin:12px"></div><div class="skeleton skeleton-line" style="margin:12px"></div>';
   fetch(`/api/species/${species}/symptoms`).then(r=>r.json()).then(data=>{
     if(requestId!==symptomRequestId||species!==currentSpecies)return;
     if(data.symptoms&&data.symptoms.length){
@@ -643,7 +647,7 @@ function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
   const list=document.getElementById("diseaseDbList");
   if(!list){console.warn("diseaseDbList element not found");return;}
-  list.innerHTML='<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
+  list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetch(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
   .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
@@ -705,7 +709,10 @@ function switchView(view){
     const tab=document.getElementById("tab-"+v);
     const panel=document.getElementById("view"+v.charAt(0).toUpperCase()+v.slice(1));
     if(tab)tab.setAttribute("aria-selected",v===view);
-    if(panel)panel.classList.toggle("hidden",v!==view);
+    if(panel){
+      if(v===view){panel.classList.remove("hidden");panel.style.animation="fade-tab-in .3s ease-out";}
+      else{panel.classList.add("hidden");panel.style.animation="";}
+    }
   });
   history.replaceState(null,null,"#"+view);
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
@@ -873,4 +880,58 @@ function renderDrugList(){
       </div>
     </div>`;
   }).join("");
+}
+
+/* ===== UI/UX Enhancements ===== */
+
+/* --- Header shadow on scroll --- */
+(function(){
+  let ticking=false;
+  const header=document.querySelector(".header");
+  if(!header)return;
+  window.addEventListener("scroll",()=>{
+    if(!ticking){requestAnimationFrame(()=>{header.classList.toggle("scrolled",window.scrollY>10);ticking=false;});ticking=true;}
+  },{passive:true});
+})();
+
+/* --- Scroll-to-top button --- */
+(function(){
+  const btn=document.createElement("button");
+  btn.className="scroll-top";
+  btn.setAttribute("aria-label","Scroll to top");
+  btn.innerHTML="\u2191";
+  document.body.appendChild(btn);
+  let ticking=false;
+  window.addEventListener("scroll",()=>{
+    if(!ticking){requestAnimationFrame(()=>{btn.classList.toggle("visible",window.scrollY>400);ticking=false;});ticking=true;}
+  },{passive:true});
+  btn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+})();
+
+/* --- Fade-in sections on scroll --- */
+(function(){
+  const sections=document.querySelectorAll(".species-section,.main-content,.sponsor-section,.references,.landing-chat");
+  sections.forEach(s=>s.classList.add("fade-in-section"));
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);}});
+  },{threshold:0.08,rootMargin:"0px 0px -40px 0px"});
+  sections.forEach(s=>observer.observe(s));
+})();
+
+/* --- Stagger species card animation --- */
+const _origRenderSpeciesGrid=renderSpeciesGrid;
+renderSpeciesGrid=function(){
+  _origRenderSpeciesGrid();
+  document.querySelectorAll(".species-card").forEach((c,i)=>{c.style.animationDelay=`${i*40}ms`;});
+};
+
+/* --- Toast utility --- */
+function showToast(msg,type,duration){
+  type=type||"";duration=duration||2500;
+  let toast=document.querySelector(".toast");
+  if(!toast){toast=document.createElement("div");toast.className="toast";document.body.appendChild(toast);}
+  toast.textContent=msg;toast.className="toast"+(type?" "+type:"");
+  requestAnimationFrame(()=>{toast.classList.add("show");});
+  clearTimeout(toast._timer);
+  toast._timer=setTimeout(()=>toast.classList.remove("show"),duration);
 }
