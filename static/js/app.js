@@ -333,7 +333,7 @@ function setDefaultStats(){
   ];
   pendingStats={
     diseases:6393,
-    species:26,
+    species:20,
     drugs:175,
     symptoms:52
   };
