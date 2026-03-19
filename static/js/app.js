@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const diseaseSearch=document.getElementById("diseaseSearch");
     if(symptomSearch)symptomSearch.addEventListener("input",()=>renderSymptomList(symptomData));
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
-    if(diseaseSearch)diseaseSearch.addEventListener("input",()=>{diseaseDisplayLimit=100;renderDiseaseDb();});
+    if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
     // Restore view from URL hash
     const hash=location.hash.replace("#","");
     if(hash&&["checker","database","chat","drugs"].includes(hash))switchView(hash);
@@ -643,7 +643,7 @@ function renderDiseaseCard(d,data){
 
   const urgencyIcon=likelihood==="high"?"\u26A0\uFE0F":likelihood==="moderate"?"\u{1F7E1}":"\u{1F7E2}";
   let html=`<div class="disease-result disease-${likelihood}">
-    <div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.expand-icon')?.classList.toggle('rotated')">
+    <div class="disease-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleDetail(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDetail(this)}">
       <div class="disease-head-info">
         <div class="disease-name-row">
           <span class="disease-name">${name}</span>
@@ -705,7 +705,8 @@ function loadDiseaseDb(species){
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   if(!azNav){console.warn("azNav element not found");return;}
-  azNav.innerHTML=`<button class="active" onclick="filterDiseaseDb('')">ALL</button>`+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l=>`<button onclick="filterDiseaseDb('${l}')">${l}</button>`).join("");
+  azNav.innerHTML=`<button class="active" data-letter="" aria-label="Show all">ALL</button>`+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+  azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
 }
 
 function filterDiseaseDb(letter){
@@ -734,9 +735,12 @@ function renderDiseaseDb(){
     const prevention=pk(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
     const treatment=pk(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
     const prognosis=pk(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
-    return`<div class="disease-db-item" onclick="this.querySelector('.disease-detail').classList.toggle('open')">
-      <div class="d-name">${d.name||""} <span class="d-name-ja">${d.name_ja||""}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
-      <div class="d-desc">${desc.substring(0,80)}${desc.length>80?"...":""}</div>
+    const dName=highlightMatch(d.name||"",search);
+    const dNameJa=highlightMatch(d.name_ja||"",search);
+    const dDesc=desc.substring(0,80)+(desc.length>80?"...":"");
+    return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDbItem(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDbItem(this)}">
+      <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
+      <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${desc}</dd>
         <dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd>
@@ -823,7 +827,7 @@ function sendLandingChat(){
   const msgs=document.getElementById("landingChatMessages");
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
   const species=currentSpecies||"dog";
-  const loading=document.createElement("div");loading.className="chat-msg bot";loading.innerHTML='<span class="spinner" style="width:16px;height:16px"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
@@ -844,9 +848,12 @@ function sendLandingChat(){
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
   addChatMsg(text,"user");const species=currentSpecies||"dog";
+  const msgs=document.getElementById("chatMessages");
+  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
+    loading.remove();
     if(!data){addChatMsg("No response data","bot");return;}
     if(data.species_guidance) addChatMsg(`[Species] ${data.species_guidance}`,"bot");
     const base=(data.response||data.message||data.error||t("noResponse"));
@@ -854,6 +861,7 @@ function sendChatMessage(){
     else addChatMsg(t("noResponse"),"bot");
   })
   .catch(err=>{
+    loading.remove();
     console.error("Chat error:",err);
     addChatMsg(t("commError")+" ("+err.message+")","bot");
   });
@@ -869,7 +877,7 @@ let drugsLoaded=false,allDrugs=[],drugCategories={};
 
 function loadDrugDictionary(){
   const list=document.getElementById("drugList");
-  list.innerHTML='<div style="padding:20px;text-align:center"><span class="spinner"></span></div>';
+  list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div><div class="skeleton skeleton-card" style="height:90px"></div><div class="skeleton skeleton-card" style="height:60px"></div></div>';
   Promise.all([fetch("/api/drugs").then(r=>r.json()),fetch("/api/drug-categories").then(r=>r.json())])
   .then(([drugsData,catData])=>{
     allDrugs=drugsData.drugs||[];drugCategories=drugsData.categories||{};
@@ -882,7 +890,7 @@ function loadDrugDictionary(){
     SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.innerHTML+=`<option value="${sp.id}">${primary} ${secondary}</option>`;});
     drugsLoaded=true;renderDrugList();
   }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
-  document.getElementById("drugSearch").addEventListener("input",renderDrugList);
+  document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
   document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
   document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
 }
@@ -904,32 +912,64 @@ function renderDrugList(){
     let dosageHtml="";
     if(speciesFilter&&d.species_info&&d.species_info[speciesFilter]){
       const si=d.species_info[speciesFilter];
-      const safeLabel=si.safe?`<span style="color:var(--green);font-weight:700">\u2713 ${t("safe")}</span>`:`<span style="color:var(--red);font-weight:700">\u2717 ${t("contraindicated")}</span>`;
+      const safeLabel=si.safe?`<span class="drug-safe-label">\u2713 ${t("safe")}</span>`:`<span class="drug-unsafe-label">\u2717 ${t("contraindicated")}</span>`;
       const doseText=currentLang==="ja"?(si.dosage_ja||si.dosage||"N/A"):(si.dosage||si.dosage_ja||"N/A");
       const noteText=currentLang==="ja"?(si.notes_ja||si.notes||""):(si.notes||si.notes_ja||"");
-      dosageHtml=`<div style="margin-top:4px;font-size:.8rem;padding:6px 10px;background:${si.safe?'#f0fdf4':'#fef2f2'};border-radius:6px">${safeLabel} | ${t("dosageLabel")}${doseText}<br/><span style="color:var(--gray-500)">${noteText}</span></div>`;
+      dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${doseText}<br/><span class="drug-dosage-note">${noteText}</span></div>`;
     }
     const catLabel=drugCategories[d.category]?(currentLang==="ja"?(drugCategories[d.category].ja||drugCategories[d.category].en):(drugCategories[d.category].en||drugCategories[d.category].ja)):(currentLang==="ja"?(d.category_ja||d.category):(d.category||d.category_ja));
-    const sponsorBadge=d.sponsor?'<span style="font-size:.65rem;padding:2px 8px;background:var(--green);color:#fff;border-radius:10px;margin-left:6px;font-weight:600">Sponsor</span>':"";
-    const sponsorLink=d.sponsor?`<div style="margin-top:8px;padding:8px 12px;background:var(--green-light);border:1px solid rgba(34,168,79,.3);border-radius:6px;font-size:.8rem"><strong style="color:var(--green-dark)">${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/><span style="color:var(--gray-600)">${t("sponsorVetLabel")}</span><br/><a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" style="color:var(--navy);font-weight:600">${t("productDetails")}</a></div>`:"";
-    return`<div class="disease-db-item" onclick="this.querySelector('.disease-detail')&&this.querySelector('.disease-detail').classList.toggle('open')" style="${d.sponsor?'border-left:3px solid var(--green)':''}">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
-        <div class="d-name">${d.name} <span class="d-name-ja">${d.name_ja}</span>${sponsorBadge}</div>
-        <span style="font-size:.7rem;padding:2px 8px;background:var(--gray-100);color:var(--navy);border-radius:10px;font-weight:600">${catLabel}</span>
+    const sponsorBadge=d.sponsor?'<span class="sponsor-badge-tag">Sponsor</span>':"";
+    const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
+    const dName=highlightMatch(d.name||"",search);
+    const dNameJa=highlightMatch(d.name_ja||"",search);
+    return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false" onclick="toggleDbItem(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDbItem(this)}">
+      <div class="drug-head-row">
+        <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${sponsorBadge}</div>
+        <span class="drug-category-tag">${catLabel}</span>
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
         <dl><dt>${t("dtContraindications")}</dt><dd>${currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||"")}</dd></dl>
         ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", ")}</dd></dl>`:""}
         ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", ")}</dd></dl>`:""}
-        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span style="display:inline-block;margin:2px 4px 2px 0;padding:2px 6px;background:#fef2f2;border-radius:4px;font-size:.76rem">${di.drug}: ${currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja)}</span>`).join("")}</dd></dl>`:""}
-        <div style="margin-top:8px"><strong style="font-size:.8rem">${t("dtSpeciesInfo")}</strong>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;margin-top:4px">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div style="font-size:.76rem;padding:4px 8px;background:${info.safe?'#f0fdf4':'#fef2f2'};border-radius:4px;border:1px solid ${info.safe?'#bbf7d0':'#fecaca'}"><strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${dose}${note?'<br/><span style="color:var(--gray-500)">'+note+'</span>':''}</div>`;}).join("")}
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${di.drug}: ${currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja)}</span>`).join("")}</dd></dl>`:""}
+        <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
+          <div class="drug-species-grid">
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"}"><strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${dose}${note?'<br/><span class="drug-dosage-note">'+note+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
       </div>
     </div>`;
   }).join("");
+}
+
+/* ===== Shared helpers ===== */
+
+/* Toggle detail panel with accessibility */
+function toggleDetail(head){
+  const detail=head.nextElementSibling;
+  const icon=head.querySelector(".expand-icon");
+  const isOpen=detail.classList.toggle("open");
+  head.setAttribute("aria-expanded",isOpen);
+  if(icon)icon.classList.toggle("rotated",isOpen);
+}
+
+/* Toggle disease DB item */
+function toggleDbItem(el){
+  const detail=el.querySelector(".disease-detail");
+  if(detail){
+    const isOpen=detail.classList.toggle("open");
+    el.setAttribute("aria-expanded",isOpen);
+  }
+}
+
+/* Debounce utility */
+function debounce(fn,ms){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn.apply(this,a),ms);};}
+
+/* Search text highlight */
+function highlightMatch(text,query){
+  if(!query||!text)return text;
+  const escaped=query.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  return text.replace(new RegExp(`(${escaped})`,"gi"),'<mark class="search-highlight">$1</mark>');
 }
 
 /* ===== UI/UX Enhancements ===== */
