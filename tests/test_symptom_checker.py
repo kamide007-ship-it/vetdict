@@ -529,12 +529,13 @@ class TestAnalyzeSymptoms:
             assert "ja" in names
             assert "en" in names
 
-    def test_symptom_names_only_for_matched_symptoms(self):
-        """symptom_names includes only IDs from matching_symptoms."""
+    def test_symptom_names_only_for_relevant_symptoms(self):
+        """symptom_names includes IDs from matching and missing_key symptoms."""
         result = analyze_symptoms(["vomiting", "lethargy"])
         used = set()
         for entry in result["suspected_diseases"]:
             used.update(entry["matching_symptoms"])
+            used.update(entry.get("missing_key_symptoms", []))
         assert set(result["symptom_names"].keys()) <= used
 
     # -- recommended tests structure -----------------------------------

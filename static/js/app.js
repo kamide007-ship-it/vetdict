@@ -620,6 +620,42 @@ function renderResults(data){
   area.innerHTML=html;
 }
 
+function renderMissingKeySymptoms(d,data){
+  const missingKeys=d.missing_key_symptoms||[];
+  if(!missingKeys.length)return "";
+  const symNames=data.symptom_names||{};
+  const items=missingKeys.map(s=>{
+    const n=symNames[s];
+    if(!n)return `<span class="missing-sym-tag">${s}</span>`;
+    const label=currentLang==="ja"?`${n.ja} <span class="missing-sym-sub">${n.en}</span>`:`${n.en} <span class="missing-sym-sub">${n.ja}</span>`;
+    return `<span class="missing-sym-tag">${label}</span>`;
+  }).join("");
+  const title=currentLang==="ja"?"確認すべき症状（未報告）":"Key symptoms to check (not reported)";
+  return `<div class="detail-missing-symptoms"><div class="detail-missing-header">\u{1F50E} ${title}</div><div class="detail-missing-list">${items}</div><div class="detail-missing-hint">${currentLang==="ja"?"これらの症状の有無を確認すると、鑑別精度が向上します。":"Checking for these symptoms will improve diagnostic accuracy."}</div></div>`;
+}
+
+function renderScoringDetail(d){
+  const sd=d.scoring_detail;
+  if(!sd)return "";
+  const pctBar=(val,label,color)=>{
+    const w=Math.min(Math.round(val*100),100);
+    return `<div class="score-row"><span class="score-label">${label}</span><div class="score-bar-track"><div class="score-bar-fill" style="width:${w}%;background:${color}"></div></div><span class="score-value">${w}%</span></div>`;
+  };
+  const recallLabel=currentLang==="ja"?"症状一致度":"Symptom Recall";
+  const coverageLabel=currentLang==="ja"?"疾患カバレッジ":"Disease Coverage";
+  let html=`<div class="detail-scoring"><div class="detail-scoring-header">\u{1F9E0} ${currentLang==="ja"?"診断根拠スコア":"Diagnostic Evidence Score"}</div>`;
+  html+=pctBar(sd.weighted_recall||0,recallLabel,"#22c55e");
+  html+=pctBar(sd.coverage||0,coverageLabel,"#3b82f6");
+  const badges=[];
+  if(sd.cluster_boost&&sd.cluster_boost>1)badges.push(`<span class="score-badge boost">${currentLang==="ja"?"病徴パターン一致":"Pathognomonic Match"} +${Math.round((sd.cluster_boost-1)*100)}%</span>`);
+  if(sd.negative_penalty&&sd.negative_penalty<1)badges.push(`<span class="score-badge penalty">${currentLang==="ja"?"欠如症状ペナルティ":"Missing Symptom Penalty"} -${Math.round((1-sd.negative_penalty)*100)}%</span>`);
+  if(sd.specificity_bonus&&sd.specificity_bonus>0)badges.push(`<span class="score-badge boost">${currentLang==="ja"?"高特異度ボーナス":"High Specificity Bonus"} +${Math.round(sd.specificity_bonus*100)}%</span>`);
+  if(sd.prevalence_prior&&sd.prevalence_prior!==1)badges.push(`<span class="score-badge ${sd.prevalence_prior>1?"boost":"penalty"}">${currentLang==="ja"?"有病率調整":"Prevalence Adj."} ${sd.prevalence_prior>1?"+":""}${Math.round((sd.prevalence_prior-1)*100)}%</span>`);
+  if(badges.length)html+=`<div class="score-badges">${badges.join("")}</div>`;
+  html+=`</div>`;
+  return html;
+}
+
 function renderDiseaseCard(d,data){
   const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
   const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
@@ -686,6 +722,8 @@ function renderDiseaseCard(d,data){
         </div>
       </div>
       ${matchSymptoms.length?`<div class="detail-matched"><strong>${t("dtMatchedSymptoms")}:</strong> ${matchDisplay}</div>`:""}
+      ${renderMissingKeySymptoms(d,data)}
+      ${renderScoringDetail(d)}
       ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${recTests.join(", ")}</div>`:""}
       ${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}
     </div>

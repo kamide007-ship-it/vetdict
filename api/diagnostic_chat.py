@@ -1924,14 +1924,14 @@ def match_symptoms_to_diseases(symptom_ids: list) -> list:
     if not symptom_ids:
         return []
 
+    import math
+
     # Import scoring components from health_checker (single source of truth)
     from api.health_checker import (
-        _SYMPTOM_IDF,
-        _SYMPTOM_SPECIFICITY,
         _PATHOGNOMONIC_CLUSTERS,
+        _SYMPTOM_SPECIFICITY,
         _compute_symptom_weight,
     )
-    import math
 
     symptom_set = set(symptom_ids)
     user_weights = {s: _compute_symptom_weight(s) for s in symptom_set}
