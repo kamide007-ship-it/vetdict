@@ -310,13 +310,30 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:576,drugs:0},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:516,drugs:0},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:736,drugs:0},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:575,drugs:0},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:530,drugs:0},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:656,drugs:0},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:414,drugs:0},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:285,drugs:0},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F439}",diseases:308,drugs:0},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43F}\uFE0F",diseases:246,drugs:0},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F9A1}",diseases:241,drugs:0},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:210,drugs:0},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43F}\uFE0F",diseases:188,drugs:0},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F42D}",diseases:178,drugs:0},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:479,drugs:0},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:402,drugs:0},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:251,drugs:0},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:250,drugs:0},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:256,drugs:0},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:214,drugs:0},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:218,drugs:0},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:215,drugs:0},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:250,drugs:0},
   ];
   pendingStats={
-    diseases:6376,
-    species:20,
+    diseases:6393,
+    species:26,
     drugs:175,
     symptoms:52
   };
