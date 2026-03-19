@@ -641,7 +641,55 @@ function renderDiseaseCard(d,data){
   const prevalenceTier=d.prevalence_tier||"unknown";
   const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
 
-  let html=`<div class="disease-result"><div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open')"><div><span class="disease-name">${name}</span>${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}<span class="quality-badge ${qualityClass}">${completeness}%</span>${prevalenceLabel?`<span style="font-size:.7rem;color:var(--gray-500);margin-left:8px;padding:2px 6px;background:var(--gray-100);border-radius:6px">${prevalenceLabel}</span>`:""}  </div><span class="match-badge ${likelihood}">${pct}%</span></div><div class="disease-detail"><dl><dt>${t("dtDescription")}</dt><dd>${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</dd><dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd><dt>${t("dtCauses")}</dt><dd>${causes}</dd><dt>${t("dtPrevention")}</dt><dd>${prevention}</dd><dt>${t("dtTreatment")}</dt><dd>${treatment}</dd><dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>${matchSymptoms.length?`<dt>${t("dtMatchedSymptoms")}</dt><dd>${matchDisplay}</dd>`:""} ${recTests.length?`<dt>${t("dtRecommendedTests")}</dt><dd>${recTests.join(", ")}</dd>`:""}</dl>${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}</div></div>`;
+  const urgencyIcon=likelihood==="high"?"\u26A0\uFE0F":likelihood==="moderate"?"\u{1F7E1}":"\u{1F7E2}";
+  let html=`<div class="disease-result disease-${likelihood}">
+    <div class="disease-head" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.expand-icon')?.classList.toggle('rotated')">
+      <div class="disease-head-info">
+        <div class="disease-name-row">
+          <span class="disease-name">${name}</span>
+          ${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}
+          <span class="quality-badge ${qualityClass}">${completeness}%</span>
+          ${prevalenceLabel?`<span class="prevalence-badge">${prevalenceLabel}</span>`:""}
+        </div>
+        <div class="disease-match-bar-row">
+          <div class="disease-match-bar"><div class="disease-match-fill disease-match-${likelihood}" style="width:${Math.min(pct,100)}%"></div></div>
+          <span class="disease-match-label">${urgencyIcon} ${pct}%</span>
+        </div>
+      </div>
+      <span class="expand-icon">&#9660;</span>
+    </div>
+    <div class="disease-detail">
+      <div class="detail-grid">
+        <div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1F4CB}</span> ${t("dtDescription")}</div>
+          <div class="detail-section-body">${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1F9EC}</span> ${t("dtPathophysiology")}</div>
+          <div class="detail-section-body">${patho}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1F50D}</span> ${t("dtCauses")}</div>
+          <div class="detail-section-body">${causes}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")}</div>
+          <div class="detail-section-body">${treatment}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1F6E1}\uFE0F</span> ${t("dtPrevention")}</div>
+          <div class="detail-section-body">${prevention}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1F4CA}</span> ${t("dtPrognosis")}</div>
+          <div class="detail-section-body">${prognosis}</div>
+        </div>
+      </div>
+      ${matchSymptoms.length?`<div class="detail-matched"><strong>${t("dtMatchedSymptoms")}:</strong> ${matchDisplay}</div>`:""}
+      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${recTests.join(", ")}</div>`:""}
+      ${d.content_origin?`<div class="missing-note">Content source: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">Data needs review: ${missing.join(", ")}</div>`:""}
+    </div>
+  </div>`;
   return html;
 }
 
@@ -926,6 +974,32 @@ renderSpeciesGrid=function(){
   _origRenderSpeciesGrid();
   document.querySelectorAll(".species-card").forEach((c,i)=>{c.style.animationDelay=`${i*40}ms`;});
 };
+
+/* --- Dark mode toggle --- */
+(function(){
+  const toggle=document.getElementById("themeToggle");
+  const icon=document.getElementById("themeIcon");
+  if(!toggle)return;
+  function setTheme(theme){
+    document.documentElement.setAttribute("data-theme",theme);
+    if(icon)icon.innerHTML=theme==="dark"?"\u2600\uFE0F":"\u263D";
+    try{localStorage.setItem("vetdict-theme",theme);}catch(e){}
+  }
+  // Restore saved theme or detect system preference
+  try{
+    const saved=localStorage.getItem("vetdict-theme");
+    if(saved){setTheme(saved);}
+    else if(matchMedia("(prefers-color-scheme:dark)").matches){setTheme("dark");}
+  }catch(e){}
+  toggle.addEventListener("click",()=>{
+    const current=document.documentElement.getAttribute("data-theme");
+    setTheme(current==="dark"?"light":"dark");
+  });
+  // Listen for system theme changes
+  matchMedia("(prefers-color-scheme:dark)").addEventListener("change",e=>{
+    if(!localStorage.getItem("vetdict-theme")){setTheme(e.matches?"dark":"light");}
+  });
+})();
 
 /* --- Toast utility --- */
 function showToast(msg,type,duration){
