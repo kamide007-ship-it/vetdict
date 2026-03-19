@@ -57,6 +57,35 @@ SPECIES_META: dict[str, tuple[str, str]] = {
 
 
 # ---------------------------------------------------------------------------
+# Auto-initialise database on first access
+# ---------------------------------------------------------------------------
+
+_db_ready = False
+
+
+def _ensure_db() -> None:
+    """Create schema and run migration if the diseases table is empty."""
+    global _db_ready
+    if _db_ready:
+        return
+    from api.database import init_db
+    init_db()
+    with get_connection() as conn:
+        try:
+            count = conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+        except Exception:
+            count = 0
+    if count == 0:
+        logger.info("diseases table is empty — running auto-migration")
+        try:
+            from scripts.migrate_to_sqlite import main as run_migration
+            run_migration()
+        except Exception:
+            logger.exception("Auto-migration failed")
+    _db_ready = True
+
+
+# ---------------------------------------------------------------------------
 # Cache helpers
 # ---------------------------------------------------------------------------
 
@@ -83,6 +112,7 @@ def get_species_stats() -> dict[str, Any]:
     Returns a dict with keys: ``species`` (list), ``total_diseases``,
     ``total_drugs``, ``total_species``.
     """
+    _ensure_db()
     with get_connection() as conn:
         disease_counts: dict[str, int] = {}
         for row in conn.execute(
