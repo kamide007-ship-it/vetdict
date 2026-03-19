@@ -441,6 +441,31 @@ def api_species_stats():
     except Exception:
         pass
 
+    # Load disease counts from diseases_all_species.json as reliable fallback
+    json_counts = {}
+    try:
+        import json as _json
+        from pathlib import Path as _Path
+        _data_file = _Path(__file__).parent.parent / "diseases_all_species.json"
+        if _data_file.exists():
+            with open(_data_file, "r", encoding="utf-8") as _f:
+                _all = _json.load(_f)
+            for _e in _all:
+                _sp = _e.get("species", "")
+                json_counts[_sp] = json_counts.get(_sp, 0) + 1
+    except Exception:
+        pass
+
+    # Map species_id to JSON species name for count lookup
+    sp_id_to_json = {
+        "dog": "Dog", "cat": "Cat", "horse": "Horse", "rabbit": "Rabbit",
+        "hamster": "Hamster", "guinea_pig": "Guinea Pig", "chinchilla": "Chinchilla",
+        "ferret": "Ferret", "hedgehog": "Hedgehog", "sugar_glider": "Sugar Glider",
+        "degu": "Degu", "bird": "Bird", "parakeet": "Parakeet", "parrot": "Parrot",
+        "reptile": "Reptile", "tortoise": "Tortoise", "snake": "Snake",
+        "lizard": "Lizard", "amphibian": "Amphibian", "exotic_other": "Exotic Other",
+    }
+
     for sp_id, (name_ja, name_en, module_name) in species_modules.items():
         disease_count = 0
         try:
@@ -456,6 +481,10 @@ def api_species_stats():
                 disease_count = len(getattr(mod, "DISEASES", []))
         except Exception:
             pass
+        # Fall back to JSON count if module count is zero
+        if disease_count == 0:
+            json_name = sp_id_to_json.get(sp_id, name_en)
+            disease_count = json_counts.get(json_name, 0)
         stats.append({
             "id": sp_id,
             "name": name_ja,
