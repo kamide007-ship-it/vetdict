@@ -7627,7 +7627,7 @@ def analyze_symptoms(
     # Pre-compute lab value boosts
     lab_boosts: dict[str, float] = {}
     if lab_values:
-        lab_boosts = compute_lab_boosts(lab_values)
+        lab_boosts = compute_lab_boosts(lab_values, species="dog")
 
     # Load gender risk data
     try:

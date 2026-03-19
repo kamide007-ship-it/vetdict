@@ -1384,8 +1384,237 @@ LAB_REFERENCE_RANGES: Dict[str, Dict[str, float]] = {
 }
 
 
+# ---------------------------------------------------------------------------
+# SPECIES-SPECIFIC LAB REFERENCE RANGES
+# ---------------------------------------------------------------------------
+# Each species has its own normal reference ranges for lab values.
+# Based on veterinary clinical pathology references:
+# - Willard & Tvedten: Small Animal Clinical Diagnosis by Laboratory Methods
+# - Quesenberry & Carpenter: Ferrets, Rabbits, and Rodents
+# - Meredith & Lord: BSAVA Manual of Rabbit Medicine
+# - Kaneko et al: Clinical Biochemistry of Domestic Animals
+
+SPECIES_LAB_REFERENCE_RANGES: Dict[str, Dict[str, Dict[str, float]]] = {
+    "cat": {
+        "bun":        {"low_threshold": 16,   "high_threshold": 36},
+        "creatinine": {"low_threshold": 0.8,  "high_threshold": 2.4},
+        "sdma":       {"low_threshold": 0,    "high_threshold": 14},
+        "alt":        {"low_threshold": 12,   "high_threshold": 130},
+        "alp":        {"low_threshold": 14,   "high_threshold": 111},
+        "ggt":        {"low_threshold": 0,    "high_threshold": 4},
+        "tbil":       {"low_threshold": 0,    "high_threshold": 0.4},
+        "albumin":    {"low_threshold": 2.1,  "high_threshold": 3.9},
+        "glucose":    {"low_threshold": 74,   "high_threshold": 159},
+        "potassium":  {"low_threshold": 3.5,  "high_threshold": 5.8},
+        "sodium":     {"low_threshold": 147,  "high_threshold": 156},
+        "calcium":    {"low_threshold": 8.0,  "high_threshold": 11.8},
+        "phosphorus": {"low_threshold": 3.1,  "high_threshold": 6.8},
+        "wbc":        {"low_threshold": 5.5,  "high_threshold": 19.5},
+        "pcv":        {"low_threshold": 30,   "high_threshold": 45},
+        "platelets":  {"low_threshold": 175,  "high_threshold": 500},
+        "t4":         {"low_threshold": 1.0,  "high_threshold": 5.0},
+        "crp":        {"low_threshold": 0,    "high_threshold": 5},
+    },
+    "rabbit": {
+        "bun":        {"low_threshold": 13,   "high_threshold": 29},
+        "creatinine": {"low_threshold": 0.5,  "high_threshold": 2.5},
+        "alt":        {"low_threshold": 14,   "high_threshold": 80},
+        "alp":        {"low_threshold": 10,   "high_threshold": 70},
+        "ggt":        {"low_threshold": 0,    "high_threshold": 14},
+        "tbil":       {"low_threshold": 0,    "high_threshold": 0.5},
+        "albumin":    {"low_threshold": 2.7,  "high_threshold": 4.6},
+        "glucose":    {"low_threshold": 75,   "high_threshold": 150},
+        "potassium":  {"low_threshold": 3.5,  "high_threshold": 7.0},
+        "sodium":     {"low_threshold": 131,  "high_threshold": 155},
+        "calcium":    {"low_threshold": 12.0, "high_threshold": 16.0},
+        "phosphorus": {"low_threshold": 4.0,  "high_threshold": 6.9},
+        "wbc":        {"low_threshold": 5.0,  "high_threshold": 12.0},
+        "pcv":        {"low_threshold": 33,   "high_threshold": 45},
+        "platelets":  {"low_threshold": 250,  "high_threshold": 650},
+    },
+    "hamster": {
+        "bun":        {"low_threshold": 12,   "high_threshold": 25},
+        "creatinine": {"low_threshold": 0.3,  "high_threshold": 1.0},
+        "alt":        {"low_threshold": 22,   "high_threshold": 128},
+        "alp":        {"low_threshold": 25,   "high_threshold": 110},
+        "albumin":    {"low_threshold": 2.6,  "high_threshold": 4.1},
+        "glucose":    {"low_threshold": 60,   "high_threshold": 150},
+        "potassium":  {"low_threshold": 3.9,  "high_threshold": 5.5},
+        "sodium":     {"low_threshold": 128,  "high_threshold": 144},
+        "calcium":    {"low_threshold": 5.3,  "high_threshold": 12.0},
+        "phosphorus": {"low_threshold": 3.4,  "high_threshold": 8.2},
+        "wbc":        {"low_threshold": 3.0,  "high_threshold": 11.0},
+        "pcv":        {"low_threshold": 36,   "high_threshold": 55},
+    },
+    "guinea_pig": {
+        "bun":        {"low_threshold": 9,    "high_threshold": 31},
+        "creatinine": {"low_threshold": 0.6,  "high_threshold": 2.2},
+        "alt":        {"low_threshold": 10,   "high_threshold": 100},
+        "alp":        {"low_threshold": 18,   "high_threshold": 105},
+        "albumin":    {"low_threshold": 2.1,  "high_threshold": 3.9},
+        "glucose":    {"low_threshold": 60,   "high_threshold": 125},
+        "potassium":  {"low_threshold": 4.0,  "high_threshold": 8.0},
+        "sodium":     {"low_threshold": 120,  "high_threshold": 152},
+        "calcium":    {"low_threshold": 8.2,  "high_threshold": 12.0},
+        "phosphorus": {"low_threshold": 4.0,  "high_threshold": 7.5},
+        "wbc":        {"low_threshold": 5.5,  "high_threshold": 17.5},
+        "pcv":        {"low_threshold": 37,   "high_threshold": 48},
+    },
+    "ferret": {
+        "bun":        {"low_threshold": 10,   "high_threshold": 45},
+        "creatinine": {"low_threshold": 0.2,  "high_threshold": 0.9},
+        "alt":        {"low_threshold": 78,   "high_threshold": 289},
+        "alp":        {"low_threshold": 9,    "high_threshold": 84},
+        "albumin":    {"low_threshold": 2.8,  "high_threshold": 3.8},
+        "glucose":    {"low_threshold": 63,   "high_threshold": 134},
+        "potassium":  {"low_threshold": 4.5,  "high_threshold": 7.7},
+        "sodium":     {"low_threshold": 137,  "high_threshold": 162},
+        "calcium":    {"low_threshold": 8.0,  "high_threshold": 11.8},
+        "phosphorus": {"low_threshold": 4.0,  "high_threshold": 9.1},
+        "wbc":        {"low_threshold": 2.5,  "high_threshold": 8.6},
+        "pcv":        {"low_threshold": 42,   "high_threshold": 55},
+        "platelets":  {"low_threshold": 172,  "high_threshold": 613},
+    },
+    "chinchilla": {
+        "bun":        {"low_threshold": 10,   "high_threshold": 25},
+        "creatinine": {"low_threshold": 0.4,  "high_threshold": 1.3},
+        "alt":        {"low_threshold": 10,   "high_threshold": 35},
+        "alp":        {"low_threshold": 6,    "high_threshold": 36},
+        "albumin":    {"low_threshold": 2.3,  "high_threshold": 4.4},
+        "glucose":    {"low_threshold": 60,   "high_threshold": 120},
+        "calcium":    {"low_threshold": 8.0,  "high_threshold": 14.0},
+        "phosphorus": {"low_threshold": 4.0,  "high_threshold": 8.0},
+        "wbc":        {"low_threshold": 4.0,  "high_threshold": 18.0},
+        "pcv":        {"low_threshold": 33,   "high_threshold": 45},
+    },
+    "hedgehog": {
+        "bun":        {"low_threshold": 13,   "high_threshold": 42},
+        "creatinine": {"low_threshold": 0.2,  "high_threshold": 0.5},
+        "alt":        {"low_threshold": 18,   "high_threshold": 60},
+        "alp":        {"low_threshold": 10,   "high_threshold": 52},
+        "glucose":    {"low_threshold": 63,   "high_threshold": 148},
+        "calcium":    {"low_threshold": 7.3,  "high_threshold": 11.0},
+        "wbc":        {"low_threshold": 5.0,  "high_threshold": 18.0},
+        "pcv":        {"low_threshold": 30,   "high_threshold": 45},
+    },
+    "bird": {
+        "bun":        {"low_threshold": 0,    "high_threshold": 11},
+        "creatinine": {"low_threshold": 0.1,  "high_threshold": 0.4},
+        "alt":        {"low_threshold": 19,   "high_threshold": 50},
+        "alp":        {"low_threshold": 10,   "high_threshold": 75},
+        "tbil":       {"low_threshold": 0,    "high_threshold": 0.3},
+        "albumin":    {"low_threshold": 1.0,  "high_threshold": 2.5},
+        "glucose":    {"low_threshold": 200,  "high_threshold": 450},
+        "calcium":    {"low_threshold": 8.0,  "high_threshold": 13.0},
+        "wbc":        {"low_threshold": 5.0,  "high_threshold": 13.0},
+        "pcv":        {"low_threshold": 35,   "high_threshold": 55},
+    },
+    "reptile": {
+        "bun":        {"low_threshold": 0,    "high_threshold": 15},
+        "creatinine": {"low_threshold": 0.1,  "high_threshold": 0.5},
+        "alt":        {"low_threshold": 5,    "high_threshold": 30},
+        "alp":        {"low_threshold": 10,   "high_threshold": 100},
+        "glucose":    {"low_threshold": 40,   "high_threshold": 200},
+        "calcium":    {"low_threshold": 8.0,  "high_threshold": 14.0},
+        "phosphorus": {"low_threshold": 1.5,  "high_threshold": 5.5},
+        "wbc":        {"low_threshold": 3.0,  "high_threshold": 15.0},
+        "pcv":        {"low_threshold": 20,   "high_threshold": 40},
+    },
+    "horse": {
+        "bun":        {"low_threshold": 10,   "high_threshold": 27},
+        "creatinine": {"low_threshold": 1.0,  "high_threshold": 2.0},
+        "alt":        {"low_threshold": 3,    "high_threshold": 23},
+        "alp":        {"low_threshold": 143,  "high_threshold": 395},
+        "ggt":        {"low_threshold": 4,    "high_threshold": 44},
+        "tbil":       {"low_threshold": 1.0,  "high_threshold": 3.5},
+        "albumin":    {"low_threshold": 2.6,  "high_threshold": 3.7},
+        "glucose":    {"low_threshold": 75,   "high_threshold": 115},
+        "potassium":  {"low_threshold": 2.8,  "high_threshold": 4.7},
+        "sodium":     {"low_threshold": 132,  "high_threshold": 146},
+        "calcium":    {"low_threshold": 11.2, "high_threshold": 13.6},
+        "phosphorus": {"low_threshold": 2.3,  "high_threshold": 4.7},
+        "wbc":        {"low_threshold": 5.4,  "high_threshold": 14.3},
+        "pcv":        {"low_threshold": 32,   "high_threshold": 53},
+        "platelets":  {"low_threshold": 100,  "high_threshold": 350},
+    },
+}
+
+# Alias species to share reference ranges
+for _alias, _source in [
+    ("parakeet", "bird"), ("parrot", "bird"),
+    ("snake", "reptile"), ("lizard", "reptile"),
+    ("tortoise", "reptile"), ("amphibian", "reptile"),
+    ("sugar_glider", "hamster"), ("degu", "chinchilla"),
+    ("exotic_other", "hamster"),
+]:
+    SPECIES_LAB_REFERENCE_RANGES[_alias] = SPECIES_LAB_REFERENCE_RANGES[_source]
+
+# ---------------------------------------------------------------------------
+# LAB COMBINATION PATTERNS (synergistic multi-lab abnormality detection)
+# ---------------------------------------------------------------------------
+# When multiple lab values are simultaneously abnormal, these combinations
+# provide stronger evidence than any single lab value alone.
+
+LAB_COMBINATION_PATTERNS: Dict[frozenset, Dict[str, float]] = {
+    frozenset({("bun", "high"), ("creatinine", "high")}): {
+        "Chronic Kidney Disease (CKD)": 2.8,
+        "Acute Kidney Injury": 3.0,
+        "Leptospirosis": 2.0,
+    },
+    frozenset({("bun", "high"), ("creatinine", "high"), ("phosphorus", "high")}): {
+        "Chronic Kidney Disease (CKD)": 3.2,
+        "Acute Kidney Injury": 3.5,
+    },
+    frozenset({("alt", "high"), ("alp", "high")}): {
+        "Hepatitis": 2.5,
+        "Cholangiohepatitis": 2.5,
+        "Liver Disease": 2.5,
+    },
+    frozenset({("alt", "high"), ("alp", "high"), ("tbil", "high")}): {
+        "Hepatitis": 3.0,
+        "Cholangiohepatitis": 3.2,
+        "Liver Disease": 3.0,
+        "Portosystemic Shunt": 2.5,
+    },
+    frozenset({("glucose", "high"), ("fructosamine", "high")}): {
+        "Diabetes Mellitus": 3.5,
+    },
+    frozenset({("t4", "low"), ("tsh", "high")}): {
+        "Hypothyroidism": 3.5,
+    },
+    frozenset({("t4", "high"),}): {
+        "Hyperthyroidism": 2.5,
+    },
+    frozenset({("cortisol_post_acth", "high"), ("alp", "high")}): {
+        "Cushing's Disease (Hyperadrenocorticism)": 3.0,
+    },
+    frozenset({("wbc", "high"), ("crp", "high")}): {
+        "Sepsis": 2.0,
+        "Pyometra": 2.2,
+        "Peritonitis": 2.0,
+    },
+    frozenset({("pcv", "low"), ("platelets", "low")}): {
+        "Immune-Mediated Hemolytic Anemia (IMHA)": 2.5,
+        "Ehrlichiosis": 2.3,
+        "Hemangiosarcoma": 2.0,
+    },
+    frozenset({("albumin", "low"), ("calcium", "low")}): {
+        "Protein-Losing Enteropathy (PLE)": 2.5,
+        "Inflammatory Bowel Disease (IBD)": 2.0,
+    },
+    frozenset({("potassium", "high"), ("sodium", "low")}): {
+        "Addison's Disease (Hypoadrenocorticism)": 3.5,
+    },
+    frozenset({("bun", "low"), ("albumin", "low")}): {
+        "Liver Disease": 2.2,
+        "Portosystemic Shunt": 2.8,
+    },
+}
+
+
 def compute_lab_boosts(
     lab_values: Dict[str, float],
+    species: str = "dog",
 ) -> Dict[str, float]:
     """検査値の異常パターンから疾患ブーストマッピングを計算する。
 
@@ -1393,18 +1622,28 @@ def compute_lab_boosts(
     ----------
     lab_values:
         {検査項目ID: 数値} の辞書。例: {"bun": 45, "creatinine": 3.2}
+    species:
+        動物種ID。種別基準範囲が存在する場合はそちらを使用。
 
     Returns
     -------
     Dict[str, float]
         {疾患名: 最大ブースト倍率} の辞書。
         複数の検査値異常が同一疾患を指す場合は最大倍率を採用。
+        検査値組合せパターンが一致する場合はさらに高い倍率を適用。
     """
+    # Select species-specific reference ranges, fall back to dog
+    ref_ranges = SPECIES_LAB_REFERENCE_RANGES.get(species, LAB_REFERENCE_RANGES)
+
     boosts: Dict[str, float] = {}
     abnormalities: list[str] = []
+    detected_abnormals: set = set()  # Track (item, direction) for combination patterns
 
     for item, value in lab_values.items():
-        ref = LAB_REFERENCE_RANGES.get(item)
+        # Try species-specific range first, then fall back to dog range
+        ref = ref_ranges.get(item) if isinstance(ref_ranges, dict) else None
+        if ref is None:
+            ref = LAB_REFERENCE_RANGES.get(item)
         if ref is None:
             continue
 
@@ -1417,6 +1656,8 @@ def compute_lab_boosts(
         if direction is None:
             continue
 
+        detected_abnormals.add((item, direction))
+
         # 異常値を記録
         arrow = "↑" if direction == "high" else "↓"
         name_info = LAB_ITEM_NAMES.get(item, {"ja": item, "en": item})
@@ -1428,6 +1669,14 @@ def compute_lab_boosts(
         for disease_name, multiplier in disease_boosts.items():
             if disease_name not in boosts or multiplier > boosts[disease_name]:
                 boosts[disease_name] = multiplier
+
+    # Apply combination pattern boosts (synergistic multi-lab detection)
+    if len(detected_abnormals) >= 2:
+        for pattern, pattern_boosts in LAB_COMBINATION_PATTERNS.items():
+            if pattern <= detected_abnormals:
+                for disease_name, multiplier in pattern_boosts.items():
+                    if disease_name not in boosts or multiplier > boosts[disease_name]:
+                        boosts[disease_name] = multiplier
 
     return boosts
 
@@ -1605,10 +1854,10 @@ def analyze_symptoms_generic(
                     if disease_name not in triple_boosts or multiplier > triple_boosts[disease_name]:
                         triple_boosts[disease_name] = multiplier
 
-    # Pre-compute lab value boosts
+    # Pre-compute lab value boosts (species-specific reference ranges)
     lab_boosts: Dict[str, float] = {}
     if lab_values:
-        lab_boosts = compute_lab_boosts(lab_values)
+        lab_boosts = compute_lab_boosts(lab_values, species=species or "dog")
 
     for disease in diseases:
         disease_symptoms = set(disease.get("symptoms", set()))

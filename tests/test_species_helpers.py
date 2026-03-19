@@ -750,15 +750,17 @@ class TestComputeLabBoosts:
         assert result["Pancreatitis"] == 2.0  # exact mapping value
 
     def test_multiple_abnormal_values_merged_with_max(self):
-        # Both bun and creatinine high -> both boost CKD; should keep max
+        # Both bun and creatinine high -> both boost CKD individually AND
+        # trigger the combination pattern for an even higher synergistic boost
         result_bun = compute_lab_boosts({"bun": 60.0})
         result_cre = compute_lab_boosts({"creatinine": 5.0})
         result_both = compute_lab_boosts({"bun": 60.0, "creatinine": 5.0})
-        expected_max = max(
+        individual_max = max(
             result_bun.get("Chronic Kidney Disease (CKD)", 1.0),
             result_cre.get("Chronic Kidney Disease (CKD)", 1.0),
         )
-        assert result_both.get("Chronic Kidney Disease (CKD)", 1.0) == expected_max
+        # Combined result should be >= individual max (combination pattern may boost further)
+        assert result_both.get("Chronic Kidney Disease (CKD)", 1.0) >= individual_max
 
     def test_unknown_lab_item_ignored(self):
         # Unknown item should be silently skipped
