@@ -96,6 +96,7 @@ a:hover{text-decoration:underline}
 .species-card .icon{font-size:1.8rem;margin-bottom:4px;display:block}
 .species-card .name{font-size:.82rem;font-weight:700;color:var(--gray-700)}
 .species-card .count{font-size:.72rem;color:var(--gray-600);margin-top:2px}
+.species-card .species-desc{font-size:.68rem;color:var(--gray-500);margin-top:3px;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 
 /* --- Main content --- */
 .main-content{max-width:1200px;margin:0 auto;padding:0 20px 48px}
