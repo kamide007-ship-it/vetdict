@@ -12,24 +12,7 @@ Features:
 """
 
 import json
-import re
-from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass
-
-
-@dataclass
-class Disease:
-    """Disease record"""
-    id: str
-    name: str
-    species: str
-    description: Optional[str] = None
-    clinical_signs: Optional[str] = None
-    causes: Optional[str] = None
-    diagnosis: Optional[str] = None
-    treatment: Optional[str] = None
-    prognosis: Optional[str] = None
 
 
 class DiseaseContentGenerator:
@@ -423,20 +406,6 @@ class DiseaseContentGenerator:
         # For now, create a Japanese summary
         category = self._detect_disease_category(disease_name)
         category_ja = self.disease_keywords[category]['category_ja']
-
-        # Map key English terms to Japanese
-        translation_map = {
-            'Supportive care': 'サポーティブケア',
-            'Antibiotic therapy': '抗生物質療法',
-            'Antiparasitic': '駆虫薬療法',
-            'Corticosteroids': 'コルチコステロイド',
-            'NSAIDs': 'NSAIDs',
-            'Dietary management': '食事管理',
-            'Medical therapy': '医学的治療',
-            'Surgical resection': '外科的切除',
-            'Chemotherapy': '化学療法',
-            'Fluid therapy': '輸液療法',
-        }
 
         treatment_ja = f"{category_ja}の治療には、"
 
