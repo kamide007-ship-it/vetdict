@@ -184,6 +184,32 @@ GENDER_RISK_MULTIPLIERS: Dict[str, Dict[str, Dict[str, float]]] = {
         "Equine Herpes Virus": {"male": 1.0, "female": 1.2},  # Pregnant mares more susceptible
         "Prepuce Infection (Smegma)": {"male": 3.0, "female": 0.0},
     },
+    "chinchilla": {
+        "Pyometra": {"male": 0.0, "female": 2.0},
+        "Uterine Infection": {"male": 0.0, "female": 2.0},
+        "Mammary Gland Tumors": {"male": 0.1, "female": 1.8},
+        "Dystocia": {"male": 0.0, "female": 2.5},
+    },
+    "hedgehog": {
+        "Uterine Adenocarcinoma": {"male": 0.0, "female": 2.5},
+        "Pyometra": {"male": 0.0, "female": 2.0},
+        "Mammary Gland Tumors": {"male": 0.1, "female": 2.0},
+        "Testicular Tumor": {"male": 2.0, "female": 0.0},
+    },
+    "sugar_glider": {
+        "Self-Mutilation": {"male": 1.5, "female": 1.0},  # Males more prone
+        "Penile Prolapse": {"male": 2.5, "female": 0.0},
+        "Cloacal Prolapse": {"male": 1.0, "female": 1.3},
+        "Pouch Infection": {"male": 0.0, "female": 2.0},
+    },
+    "degu": {
+        "Pyometra": {"male": 0.0, "female": 2.0},
+        "Mammary Gland Tumors": {"male": 0.1, "female": 1.8},
+    },
+    "amphibian": {
+        "Egg Binding": {"male": 0.0, "female": 3.0},
+        "Reproductive Disorder": {"male": 0.0, "female": 1.8},
+    },
 }
 
 

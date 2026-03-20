@@ -21,6 +21,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "サーコウイルスによる進行性の羽毛異常、嘴壊死、免疫抑制を引き起こすオウム目の感染症。",
         "urgency": "high",
         "recommended_tests": ["PCR_blood", "PCR_feather", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
@@ -30,6 +32,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鳥ボルナウイルスによる神経節神経炎で、消化管および中枢神経系に影響し腺胃拡張を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "fluoroscopy", "PCR_bornavirus", "biopsy_crop"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Polyomavirus",
@@ -39,6 +43,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ポリオーマウイルス感染症で、幼鳥の急死や成鳥の羽毛異常を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_blood", "PCR_cloacal_swab", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Avian Poxvirus",
@@ -48,6 +54,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ポックスウイルス感染症で、皮膚結節（乾燥型）または口腔内ジフテリア様膜（湿潤型）として現れる。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "PCR_poxvirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Newcastle Disease",
@@ -57,6 +65,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "パラミクソウイルスによる高度伝染性疾患で、呼吸器・神経・消化器症状を引き起こす届出疾病。",
         "urgency": "emergency",
         "recommended_tests": ["virus_isolation", "PCR_NDV", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Influenza",
@@ -66,6 +76,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "A型インフルエンザウイルス感染症で、軽症から高病原性まで様々。届出疾病。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_influenza", "virus_isolation", "serology", "cloacal_swab"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pacheco\'s Disease (Psittacid Herpesvirus)",
@@ -75,6 +87,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "オウム目ヘルペスウイルス1型による急性肝壊死を引き起こし、高い致死率を示す。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_herpesvirus", "histopathology", "liver_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Paramyxovirus Infection (PMV-1/2/3)",
@@ -84,6 +98,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "パラミクソウイルスによる神経・呼吸器疾患で、特にハトやオウム目に多い。",
         "urgency": "high",
         "recommended_tests": ["serology", "virus_isolation", "PCR_paramyxovirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Reovirus Infection",
@@ -93,6 +109,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "レオウイルスによるウイルス性関節炎・腱鞘炎および免疫抑制。",
         "urgency": "moderate",
         "recommended_tests": ["virus_isolation", "PCR_reovirus", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Adenovirus Infection",
@@ -102,6 +120,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アデノウイルスによる肝炎、腸炎、呼吸器疾患を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["PCR_adenovirus", "histopathology", "virus_isolation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 細菌性感染症 (Bacterial Infectious Diseases) ──
     {
@@ -112,6 +132,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "クラミジア・シタッシによる呼吸器・肝臓・全身性疾患。人獣共通感染症。",
         "urgency": "high",
         "recommended_tests": ["PCR_chlamydia", "serology", "CBC", "liver_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Tuberculosis (Mycobacteriosis)",
@@ -121,6 +143,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "マイコバクテリウム・アビウムによる慢性肉芽腫性疾患で、複数臓器に影響する。",
         "urgency": "high",
         "recommended_tests": ["acid_fast_stain", "PCR_mycobacterium", "biopsy", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mycoplasmosis",
@@ -130,6 +154,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "マイコプラズマによる慢性上部気道疾患および副鼻腔炎。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_mycoplasma", "culture", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "E. coli Infection (Colibacillosis)",
@@ -139,6 +165,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "大腸菌による腸炎、敗血症、二次感染を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pseudomonas Infection",
@@ -148,6 +176,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "免疫抑制や衛生不良に二次的に発生する緑膿菌感染症。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Klebsiella Infection",
@@ -157,6 +187,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "クレブシエラ属による呼吸器・消化管感染症で、抗生物質耐性を示すことが多い。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Salmonellosis",
@@ -166,6 +198,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "サルモネラ菌による腸炎および全身性疾患。人獣共通感染症。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "fecal_culture", "sensitivity_testing", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Staphylococcal Infection",
@@ -175,6 +209,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "黄色ブドウ球菌による趾瘤症、関節炎、膿瘍を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Streptococcal Infection",
@@ -184,6 +220,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "レンサ球菌による敗血症、呼吸器疾患、関節炎。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pasteurellosis",
@@ -193,6 +231,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "猫の咬傷・引っかき傷からのパスツレラ・ムルトシダ感染で、敗血症を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "wound_culture", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bordetella Infection",
@@ -202,6 +242,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ボルデテラ・アビウムによる上部気道疾患で、特に幼鳥に多い。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "PCR_bordetella", "tracheal_wash"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Citrobacter Infection",
@@ -211,6 +253,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "免疫不全の鳥におけるシトロバクター属による消化管・全身感染症。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 真菌性疾患 (Fungal Diseases) ──
     {
@@ -221,6 +265,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アスペルギルス属による真菌感染症で、主に呼吸器系に影響する。",
         "urgency": "high",
         "recommended_tests": ["radiography", "endoscopy", "fungal_culture", "aspergillus_antigen_test"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Candidiasis",
@@ -230,6 +276,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "抗生物質使用に二次的に発生するカンジダ・アルビカンスの口腔・嗉嚢内増殖。",
         "urgency": "moderate",
         "recommended_tests": ["crop_cytology", "gram_stain", "fungal_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Megabacteriosis (Avian Gastric Yeast / AGY)",
@@ -239,6 +287,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "マクロラブダス・オルニトガスターによる腺胃感染症で、慢性消耗を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fecal_gram_stain", "fecal_wet_mount", "endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cryptococcosis",
@@ -248,6 +298,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "クリプトコッカス・ネオフォルマンスによる呼吸器・中枢神経疾患。",
         "urgency": "high",
         "recommended_tests": ["cryptococcal_antigen_test", "cytology", "fungal_culture", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mucormycosis (Zygomycosis)",
@@ -257,6 +309,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ムコール目による日和見真菌感染症で、侵襲性の呼吸器・全身疾患を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "fungal_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 呼吸器疾患 (Respiratory Diseases) ──
     {
@@ -267,6 +321,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌・真菌・ウイルスによる眼窩下洞の炎症。",
         "urgency": "moderate",
         "recommended_tests": ["sinus_flush_cytology", "bacterial_culture", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Rhinitis",
@@ -276,6 +332,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鼻腔の炎症により鼻汁やくしゃみを引き起こす。",
         "urgency": "low",
         "recommended_tests": ["nasal_flush_cytology", "bacterial_culture", "choanal_swab"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Air Sacculitis",
@@ -285,6 +343,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アスペルギルス、細菌、クラミジアなどによる気嚢の感染・炎症。",
         "urgency": "high",
         "recommended_tests": ["radiography", "endoscopy", "air_sac_wash_cytology", "fungal_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tracheal Obstruction",
@@ -294,6 +354,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "異物、膿瘍、肉芽腫による気管の機械的閉塞。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "endoscopy", "CT_scan"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pneumonia",
@@ -303,6 +365,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌・真菌・ウイルスによる肺実質の感染症。",
         "urgency": "high",
         "recommended_tests": ["radiography", "tracheal_wash", "bacterial_culture", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Air Sac Mites (Sternostoma tracheacolum)",
@@ -312,6 +376,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気管・気嚢に寄生するダニ感染症で、フィンチやカナリアに多い。",
         "urgency": "moderate",
         "recommended_tests": ["transillumination_trachea", "tracheal_wash", "fecal_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 消化器疾患 (Gastrointestinal Diseases) ──
     {
@@ -322,6 +388,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、閉塞、運動障害による嗉嚢内容物の排出不全。",
         "urgency": "high",
         "recommended_tests": ["crop_cytology", "radiography", "crop_culture", "gram_stain"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Crop Burn (Thermal Ingluvitis)",
@@ -331,6 +399,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "加熱しすぎた挿し餌による嗉嚢の熱傷で、壊死や瘻孔形成を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "radiography", "crop_endoscopy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Crop Foreign Body",
@@ -340,6 +410,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "異物摂取による嗉嚢の食滞または閉塞。",
         "urgency": "high",
         "recommended_tests": ["radiography", "contrast_radiography", "crop_endoscopy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ingluvitis (Crop Infection)",
@@ -349,6 +421,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌、酵母（カンジダ）、トリコモナスによる嗉嚢粘膜の感染症。",
         "urgency": "moderate",
         "recommended_tests": ["crop_cytology", "gram_stain", "crop_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Proventriculitis",
@@ -358,6 +432,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、PDD、毒素による腺胃の炎症。",
         "urgency": "high",
         "recommended_tests": ["radiography", "fluoroscopy", "biopsy_crop", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ventriculitis (Gizzard Inflammation)",
@@ -367,6 +443,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、異物、重金属摂取による筋胃の炎症。",
         "urgency": "high",
         "recommended_tests": ["radiography", "heavy_metal_panel", "endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cloacal Prolapse",
@@ -376,6 +454,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "排泄孔からの総排泄腔組織の脱出で、いきみ、感染、腫瘤が原因となる。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "cloacal_culture", "radiography", "biopsy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cloacal Papillomatosis",
@@ -385,6 +465,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "パピローマウイルスによる総排泄腔の腫瘤で、一部の種では胆管癌と関連する。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology", "cloacal_exam", "PCR_papillomavirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Enteritis",
@@ -394,6 +476,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌、ウイルス、寄生虫、食事性の原因による腸の炎症。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_gram_stain", "fecal_culture", "fecal_float", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Gastrointestinal Foreign Body",
@@ -403,6 +487,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "消化管内に停滞した異物による閉塞。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "contrast_radiography", "ultrasound", "endoscopy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 肝臓疾患 (Hepatic Diseases) ──
     {
@@ -413,6 +499,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝臓への過度の脂肪蓄積で、種子食のみのアマゾンインコやセキセイインコに多い。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "liver_panel", "bile_acids"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Hepatitis",
@@ -422,6 +510,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染性（細菌、ウイルス、クラミジア）または中毒性の肝臓の炎症。",
         "urgency": "high",
         "recommended_tests": ["liver_panel", "bile_acids", "radiography", "ultrasound", "liver_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hemochromatosis (Iron Storage Disease)",
@@ -431,6 +521,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝臓への過度の鉄沈着で、オオハシ、ムクドリ、フウチョウに多い。",
         "urgency": "high",
         "recommended_tests": ["liver_panel", "serum_iron", "liver_biopsy", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aflatoxicosis",
@@ -440,6 +532,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "汚染飼料中のアスペルギルス・フラバスが産生するアフラトキシンによる肝毒性。",
         "urgency": "high",
         "recommended_tests": ["liver_panel", "bile_acids", "feed_analysis", "histopathology"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hepatic Amyloidosis",
@@ -449,6 +543,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性炎症に関連した肝臓へのアミロイドタンパク沈着で、水禽に多い。",
         "urgency": "high",
         "recommended_tests": ["liver_biopsy", "histopathology", "liver_panel", "ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── 腎臓疾患 (Renal Diseases) ──
     {
@@ -459,6 +555,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、毒素、脱水、加齢性変性による腎機能の喪失。",
         "urgency": "high",
         "recommended_tests": ["uric_acid_level", "CBC", "radiography", "ultrasound", "renal_biopsy"],
+        "onset_pattern": {"acute", "chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Articular Gout",
@@ -468,6 +566,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎不全による高尿酸血症に伴う関節への尿酸結晶沈着。",
         "urgency": "high",
         "recommended_tests": ["uric_acid_level", "radiography", "joint_aspirate", "renal_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Visceral Gout",
@@ -477,6 +577,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "重度の腎不全による内臓表面への尿酸沈着。",
         "urgency": "emergency",
         "recommended_tests": ["uric_acid_level", "CBC", "radiography", "necropsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Nephritis",
@@ -486,6 +588,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌またはウイルス感染による腎臓の炎症。",
         "urgency": "high",
         "recommended_tests": ["uric_acid_level", "CBC", "bacterial_culture", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Renal Tumor (Renal Adenocarcinoma)",
@@ -495,6 +599,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "坐骨神経圧迫による片側肢麻痺を引き起こす悪性腎腫瘍。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "biopsy", "CT_scan"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── 内分泌疾患 (Endocrine Diseases) ──
     {
@@ -505,6 +611,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヨウ素欠乏による甲状腺の腫大で、種子食のセキセイインコに多い。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "thyroid_hormone_panel", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Diabetes Mellitus",
@@ -514,6 +622,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "膵島細胞の機能障害による高血糖で、鳥では稀。",
         "urgency": "moderate",
         "recommended_tests": ["blood_glucose", "fructosamine", "CBC", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── 栄養性疾患 (Nutritional Diseases) ──
     {
@@ -524,6 +634,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "上皮表面の扁平上皮化生を引き起こすビタミンA欠乏で、種子食の鳥に多い。",
         "urgency": "moderate",
         "recommended_tests": ["plasma_vitamin_A", "choanal_exam", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Calcium Deficiency (Hypocalcemia)",
@@ -533,6 +645,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カルシウム摂取不足による代謝性骨疾患、痙攣、卵詰まり。",
         "urgency": "high",
         "recommended_tests": ["ionized_calcium", "radiography", "CBC", "total_calcium"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin D Deficiency",
@@ -542,6 +656,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンD3不足によるカルシウム代謝障害およびくる病。",
         "urgency": "moderate",
         "recommended_tests": ["vitamin_D_level", "ionized_calcium", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Iodine Deficiency",
@@ -551,6 +667,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヨウ素不足による甲状腺機能障害で甲状腺腫を引き起こし、主にセキセイインコに見られる。",
         "urgency": "moderate",
         "recommended_tests": ["thyroid_hormone_panel", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Iron Storage Disease (non-hemochromatosis)",
@@ -560,6 +678,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "高鉄分食による感受性種（オオハシ、ムクドリ）の鉄過剰。",
         "urgency": "high",
         "recommended_tests": ["serum_iron", "ferritin", "liver_biopsy", "liver_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Obesity",
@@ -569,6 +689,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "高脂肪種子食と運動不足による過体重で、脂肪肝の素因となる。",
         "urgency": "moderate",
         "recommended_tests": ["body_condition_score", "radiography", "liver_panel", "cholesterol"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Malnutrition / Cachexia",
@@ -578,6 +700,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "不適切な食事または慢性疾患による全身的な栄養欠乏。",
         "urgency": "moderate",
         "recommended_tests": ["CBC", "total_protein", "albumin", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin E / Selenium Deficiency",
@@ -587,6 +711,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "脳軟化症、筋障害、免疫機能障害を引き起こすビタミンE／セレン欠乏。",
         "urgency": "moderate",
         "recommended_tests": ["vitamin_E_level", "selenium_level", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 羽毛・皮膚疾患 (Feather and Skin Diseases) ──
     {
@@ -597,6 +723,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "医学的、心理的、環境的原因による自己誘発性の羽毛損傷。",
         "urgency": "moderate",
         "recommended_tests": ["CBC", "liver_panel", "thyroid_hormone_panel", "skin_biopsy", "behavioral_assessment"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "French Molt (Budgerigar Fledgling Disease)",
@@ -606,6 +734,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "若齢セキセイインコのポリオーマウイルス関連羽毛障害で、風切羽・尾羽の脱落を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_polyomavirus", "feather_biopsy", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Folliculitis",
@@ -615,6 +745,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌または真菌による毛包の感染性炎症。",
         "urgency": "moderate",
         "recommended_tests": ["skin_cytology", "bacterial_culture", "skin_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pododermatitis (Bumblefoot)",
@@ -624,6 +756,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "不適切な止まり木、肥満、ビタミンA欠乏による足底の感染・炎症。",
         "urgency": "moderate",
         "recommended_tests": ["cytology", "bacterial_culture", "radiography_feet", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Feather Cysts",
@@ -633,6 +767,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "毛包内で異常な羽毛が巻き込まれてケラチン充満嚢胞を形成する。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "cytology", "surgical_excision_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Xanthomas",
@@ -642,6 +778,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "高脂血症に関連した皮下の黄色い脂質沈着腫瘤。",
         "urgency": "low",
         "recommended_tests": ["cholesterol", "lipid_panel", "biopsy", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Squamous Cell Carcinoma (Skin)",
@@ -651,6 +789,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "扁平上皮から発生する悪性皮膚腫瘍で、尾脂腺や足に多い。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiography", "CT_scan"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Dermatitis",
@@ -660,6 +800,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌、真菌、アレルギー、環境因子による皮膚の炎症。",
         "urgency": "low",
         "recommended_tests": ["skin_cytology", "bacterial_culture", "fungal_culture", "skin_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 筋骨格系疾患 (Musculoskeletal Diseases) ──
     {
@@ -670,6 +812,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カルシウム／リン／ビタミンDの不均衡により成長中の鳥の骨が軟化・変形する。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ionized_calcium", "phosphorus", "vitamin_D_level"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Fractures",
@@ -679,6 +823,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "外傷、代謝性骨疾患、病的原因による骨の破損。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "physical_exam", "CBC"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Egg Binding (Dystocia)",
@@ -688,6 +834,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カルシウム欠乏、肥満、卵管機能障害による卵の排出不能。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "ionized_calcium", "physical_exam", "ultrasound"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Splay Leg (Spraddle Leg)",
@@ -697,6 +845,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "不適切な床材や栄養不良による幼鳥の片側または両側肢の側方偏位。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Arthritis",
@@ -706,6 +856,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染（化膿性）、痛風、変性による関節の炎症。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "joint_aspirate", "uric_acid_level", "bacterial_culture"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Osteoporosis",
@@ -715,6 +867,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性的なカルシウム欠乏による骨密度低下で、特に慢性産卵鳥に多い。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "ionized_calcium", "total_calcium", "vitamin_D_level"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Constricted Toe Syndrome",
@@ -724,6 +878,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "幼鳥の趾に線維性絞扼輪が形成され虚血を引き起こす。エクレクタスやコンゴウインコに多い。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 神経疾患 (Neurological Diseases) ──
     {
@@ -734,6 +890,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鳥ボルナウイルスの中枢神経系症状で、脳炎および神経障害を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["PCR_bornavirus", "MRI", "CSF_analysis", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lead Poisoning (Neurological)",
@@ -743,6 +901,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鉛摂取による中枢神経毒性で、痙攣、運動失調、視覚障害を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["blood_lead_level", "radiography", "CBC", "zinc_protoporphyrin"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Head Trauma",
@@ -752,6 +912,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "窓、壁、天井扇風機との衝突による外傷性脳損傷。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "radiography", "CT_scan", "neurological_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Seizure Disorder",
@@ -761,6 +923,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "代謝性、中毒性、感染性、特発性の原因による反復性痙攣。",
         "urgency": "emergency",
         "recommended_tests": ["CBC", "blood_glucose", "ionized_calcium", "blood_lead_level", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Star-Gazing (Opisthotonus)",
@@ -770,6 +934,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、毒素、栄養欠乏による中枢神経疾患を示す背側頸部伸展姿勢。",
         "urgency": "high",
         "recommended_tests": ["CBC", "blood_lead_level", "vitamin_E_level", "PCR_paramyxovirus", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 生殖器疾患 (Reproductive Diseases) ──
     {
@@ -780,6 +946,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "異所性排卵などによる体腔内の遊離卵黄物質が腹膜炎を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "ultrasound", "coelomic_fluid_analysis", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chronic Egg Laying",
@@ -789,6 +957,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "持続的な産卵によるカルシウムおよび栄養素の枯渇。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "ionized_calcium", "CBC", "hormonal_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Oviductal Prolapse",
@@ -798,6 +968,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "産卵時などに卵管が総排泄腔から反転脱出する。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "radiography", "CBC"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Testicular Tumor",
@@ -807,6 +979,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "精巣の腫瘍で、セキセイインコに比較的多く、ホルモン変化を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "hormonal_panel", "biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Ovarian Tumor",
@@ -816,6 +990,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "卵巣の腫瘍で、体腔液貯留や臓器圧迫を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "coelomic_fluid_analysis", "biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Cystic Ovarian Disease",
@@ -825,6 +1001,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "卵巣上の液体充満嚢胞で、腹部膨満と不快感を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["ultrasound", "radiography", "hormonal_panel", "coelomic_fluid_analysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 腫瘍性疾患 (Oncological Diseases) ──
     {
@@ -835,6 +1013,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肥満のセキセイインコ、アマゾンインコ、モモイロインコに多い良性脂肪腫瘍。",
         "urgency": "low",
         "recommended_tests": ["fine_needle_aspirate", "biopsy", "radiography", "cholesterol"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Fibrosarcoma",
@@ -844,6 +1024,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "線維組織の悪性間葉系腫瘍で、局所浸潤性。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiography", "CT_scan"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Papilloma",
@@ -853,6 +1035,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "パピローマウイルスによる良性上皮性腫瘤で、口腔、総排泄腔、皮膚に発生。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology", "PCR_papillomavirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lymphoma",
@@ -862,6 +1046,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "複数臓器に影響する悪性リンパ球増殖。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "CBC", "radiography", "ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Pituitary Adenoma",
@@ -871,6 +1057,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "下垂体の良性腫瘍で、ホルモン不均衡と神経症状を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["CT_scan", "MRI", "hormonal_panel", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Bile Duct Carcinoma (Cholangiocarcinoma)",
@@ -880,6 +1068,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "胆管の悪性腫瘍で、アマゾンインコの乳頭腫症と関連することが多い。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "liver_biopsy", "histopathology", "liver_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── 寄生虫疾患 (Parasitic Diseases) ──
     {
@@ -890,6 +1080,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "羽軸に寄生する外部ダニ感染で、羽毛損傷を引き起こす。",
         "urgency": "low",
         "recommended_tests": ["feather_exam_microscopy", "skin_scraping", "scotch_tape_test"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Red Mites (Dermanyssus gallinae)",
@@ -899,6 +1091,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ケージの隙間に潜む夜行性吸血ダニで、大量寄生で貧血を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["cage_inspection_nocturnal", "CBC", "skin_scraping"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lice (Mallophaga)",
@@ -908,6 +1102,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "羽毛や皮膚に寄生する咀嚼シラミで、刺激や羽毛損傷を引き起こす。",
         "urgency": "low",
         "recommended_tests": ["feather_exam_microscopy", "visual_inspection"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Roundworms (Ascaridia)",
@@ -917,6 +1113,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "飼鳥舎の鳥や屋外アクセスのある鳥に多い腸管線虫感染。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "fecal_direct_smear", "fecal_PCR"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tapeworms (Cestodes)",
@@ -926,6 +1124,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "中間宿主を必要とする条虫感染で、昆虫にアクセスできる鳥に見られる。",
         "urgency": "low",
         "recommended_tests": ["fecal_float", "fecal_direct_smear", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Capillaria (Hairworm)",
@@ -935,6 +1135,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "嗉嚢、食道、腸に感染する糸状の線虫。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "crop_cytology", "fecal_direct_smear"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Coccidia",
@@ -944,6 +1146,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "原虫性腸管寄生虫で、特に若鳥やストレス下の鳥に腸炎を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "fecal_direct_smear", "fecal_PCR"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Giardiasis",
@@ -953,6 +1157,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ジアルジア原虫の腸管感染で、オカメインコに多い。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_direct_smear", "fecal_antigen_test", "fecal_PCR"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Trichomoniasis",
@@ -962,6 +1168,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "トリコモナス・ガリネによる口腔・嗉嚢の乾酪性病変。",
         "urgency": "high",
         "recommended_tests": ["crop_wet_mount", "crop_cytology", "oral_swab"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Atoxoplasmosis",
@@ -971,6 +1179,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アトキソプラズマ（イソスポラ）による肝炎および全身性疾患で、スズメ目に多い。",
         "urgency": "high",
         "recommended_tests": ["impression_smear", "histopathology", "fecal_float", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Knemidocoptes (Scaly Face/Leg Mites)",
@@ -980,6 +1190,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "嘴、蝋膜、足にハニカム状の痂皮を形成する穿孔性ダニで、セキセイインコに多い。",
         "urgency": "moderate",
         "recommended_tests": ["skin_scraping", "microscopy", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 心臓疾患 (Cardiac Diseases) ──
     {
@@ -990,6 +1202,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "動脈内のコレステロールプラーク蓄積で、高齢のアマゾン、コンゴウ、ヨウムに多い。",
         "urgency": "high",
         "recommended_tests": ["radiography", "echocardiography", "cholesterol", "ECG"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Congestive Heart Failure",
@@ -999,6 +1213,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心拍出量不足による体液貯留と全身状態の悪化。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "echocardiography", "ECG", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Pericardial Effusion",
@@ -1008,6 +1224,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心嚢内の液体貯留により心機能が障害される。",
         "urgency": "emergency",
         "recommended_tests": ["echocardiography", "radiography", "pericardiocentesis", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 中毒性疾患 (Toxicological Diseases) ──
     {
@@ -1018,6 +1236,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "過熱されたPTFEコーティング調理器具の煙による急性致死性呼吸器中毒。",
         "urgency": "emergency",
         "recommended_tests": ["history_of_exposure", "necropsy", "lung_histopathology"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avocado Toxicity",
@@ -1027,6 +1247,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アボカドのペルシンによる心筋壊死と呼吸不全。",
         "urgency": "emergency",
         "recommended_tests": ["history_of_ingestion", "ECG", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lead Poisoning (Plumbism)",
@@ -1036,6 +1258,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "塗料、カーテンウェイト、ステンドグラスなどの鉛含有物質の摂取による全身中毒。",
         "urgency": "emergency",
         "recommended_tests": ["blood_lead_level", "radiography", "CBC", "zinc_protoporphyrin"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Zinc Poisoning",
@@ -1045,6 +1269,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "亜鉛メッキ金属、亜鉛コーティングケージワイヤー、亜鉛硬貨の摂取による中毒。",
         "urgency": "high",
         "recommended_tests": ["blood_zinc_level", "radiography", "CBC"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Copper Poisoning",
@@ -1054,6 +1280,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "銅の摂取または銅含有水源による肝毒性。",
         "urgency": "high",
         "recommended_tests": ["liver_panel", "serum_copper_level", "radiography", "liver_biopsy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chocolate Toxicity",
@@ -1063,6 +1291,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チョコレート摂取によるテオブロミンおよびカフェイン中毒で、心臓・神経症状を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["history_of_ingestion", "ECG", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 行動異常 (Behavioral Disorders) ──
     {
@@ -1073,6 +1303,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ストレスや退屈を含む多因子的病因による羽毛損傷を伴う複雑な行動障害。",
         "urgency": "moderate",
         "recommended_tests": ["behavioral_assessment", "CBC", "liver_panel", "thyroid_hormone_panel", "skin_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Screaming (Excessive Vocalization)",
@@ -1082,6 +1314,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "注意引き、ホルモン、環境、恐怖に基づく過剰な発声行動。",
         "urgency": "low",
         "recommended_tests": ["behavioral_assessment", "physical_exam", "hormonal_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Self-Mutilation",
@@ -1091,6 +1325,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "毛引きを超えた重度の自己誘発性組織損傷で、緊急介入を要する。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "CBC", "behavioral_assessment", "skin_biopsy", "liver_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Phobic Behavior",
@@ -1100,6 +1336,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "特定の刺激や全般的な不安に対する極端な恐怖反応で、オウムに多い。",
         "urgency": "moderate",
         "recommended_tests": ["behavioral_assessment", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── 眼科疾患 (Ophthalmological Diseases) ──
     {
@@ -1110,6 +1348,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌、ウイルス、クラミジア、刺激物による結膜の炎症。",
         "urgency": "moderate",
         "recommended_tests": ["eye_culture", "conjunctival_cytology", "PCR_chlamydia", "ophthalmologic_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cataracts",
@@ -1119,6 +1359,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "加齢、外傷、栄養欠乏による水晶体混濁で視力障害を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["ophthalmologic_exam", "slit_lamp_exam", "ultrasound_eye"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Uveitis",
@@ -1128,6 +1370,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、外傷、免疫介在性の原因によるぶどう膜の炎症。",
         "urgency": "high",
         "recommended_tests": ["ophthalmologic_exam", "eye_culture", "CBC", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Periorbital Abscess (Retrobulbar Abscess)",
@@ -1137,6 +1381,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "副鼻腔炎や上行性感染による眼窩後部または周囲の膿瘍形成。",
         "urgency": "high",
         "recommended_tests": ["radiography", "CT_scan", "bacterial_culture", "cytology"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
 
     # ── 追加疾患 (Additional Diseases) ──
@@ -1148,6 +1394,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "クラミジア・シッタシによる感染症で、主に眼脂を伴う結膜炎として現れる。",
         "urgency": "high",
         "recommended_tests": ["PCR_chlamydia", "conjunctival_swab", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Circovirus (Non-PBFD)",
@@ -1157,6 +1405,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "オウム目以外の鳥におけるサーコウイルス感染で、免疫抑制と二次感染を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["PCR_circovirus", "CBC", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Avian Erythroblastosis (Leukosis)",
@@ -1166,6 +1416,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "レトロウイルスによる造血系の腫瘍性疾患で、貧血と臓器浸潤を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["CBC", "blood_smear", "histopathology", "bone_marrow_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Encephalomyelitis",
@@ -1175,6 +1427,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ウイルス性脳脊髄炎で、主に若鳥に振戦と運動失調を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["serology", "PCR_brain", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Marek's Disease",
@@ -1184,6 +1438,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヘルペスウイルスによるリンパ増殖性疾患で、末梢神経腫瘍と免疫抑制を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["histopathology", "PCR_herpes", "feather_follicle_PCR"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Metapneumovirus Infection",
@@ -1193,6 +1449,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "メタニューモウイルスによる腫頭症候群で、呼吸器症状と副鼻腔炎を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_metapneumovirus", "serology", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Duck Viral Hepatitis",
@@ -1202,6 +1460,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "主に若いアヒルに発症する急性致死性ウイルス性肝炎で、特徴的な角弓反張を示す。",
         "urgency": "emergency",
         "recommended_tests": ["virus_isolation", "PCR_hepatitis", "histopathology_liver"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Infectious Laryngotracheitis (ILT)",
@@ -1211,6 +1471,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヘルペスウイルスによる重度呼吸器疾患で、出血性気管炎を伴う。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_ILT", "tracheal_swab", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Infectious Bronchitis",
@@ -1220,6 +1482,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "コロナウイルスによる上部呼吸器感染症で、産卵低下を伴う。",
         "urgency": "high",
         "recommended_tests": ["PCR_coronavirus", "serology", "tracheal_swab"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Infectious Bursal Disease (Gumboro)",
@@ -1229,6 +1493,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビルナウイルスによるファブリキウス嚢の破壊で、重度の免疫抑制を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["serology", "histopathology", "PCR_birnavirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Spirochetosis",
@@ -1238,6 +1504,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ダニ媒介性のボレリア・アンセリナ感染症で、敗血症を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["blood_smear", "dark_field_microscopy", "PCR_borrelia"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Malaria",
@@ -1247,6 +1515,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "蚊媒介性のプラスモジウム属感染症で、溶血性貧血を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["blood_smear", "PCR_plasmodium", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Haemoproteosis",
@@ -1256,6 +1526,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヘモプロテウス属感染症で、軽度〜中等度の貧血を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["blood_smear", "PCR_haemoproteus", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Leucocytozoonosis",
@@ -1265,6 +1537,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ブユ媒介性のロイコチトゾーン属感染症で、重度の貧血を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["blood_smear", "PCR_leucocytozoon", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Cholera (Fowl Cholera)",
@@ -1274,6 +1548,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "パスツレラ・ムルトシダによる急性敗血症または慢性局所感染症。",
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "PCR_pasteurella", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Erysipelas",
@@ -1283,6 +1559,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エリシペロスリクス・ルシオパシエによる敗血症と皮膚病変。",
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "PCR", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Listeriosis",
@@ -1292,6 +1570,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "リステリア・モノサイトゲネスによる脳炎と敗血症。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "PCR_listeria", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ornithobacterium rhinotracheale (ORT) Infection",
@@ -1301,6 +1581,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "呼吸器疾患と気嚢炎を引き起こす細菌感染症。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "PCR_ORT", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Gastric Yeast (Macrorhabdus ornithogaster) Refractory",
@@ -1310,6 +1592,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "抗真菌薬に反応しない慢性マクロラブダス・オルニトガスター感染症。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_gram_stain", "crop_wash", "gastric_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mycotic Pneumonia",
@@ -1319,6 +1603,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アスペルギルス以外の真菌による肺炎。",
         "urgency": "high",
         "recommended_tests": ["radiography", "fungal_culture", "cytology", "CT_scan"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dermatophytosis (Ringworm)",
@@ -1328,6 +1614,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "皮膚糸状菌による皮膚真菌感染症。鳥では稀だが報告がある。",
         "urgency": "low",
         "recommended_tests": ["fungal_culture", "skin_scraping", "Woods_lamp"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dactylariosis",
@@ -1337,6 +1625,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ダクチラリア・ガロパバによる肉芽腫性脳炎を引き起こす真菌感染症。",
         "urgency": "high",
         "recommended_tests": ["fungal_culture", "histopathology", "CT_scan", "MRI"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Histoplasmosis",
@@ -1346,6 +1636,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヒストプラズマ・カプスラーツムによる全身性肉芽腫性疾患。",
         "urgency": "high",
         "recommended_tests": ["fungal_culture", "histopathology", "serology", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Microsporidiosis",
@@ -1355,6 +1647,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エンセファリトゾーンまたは関連微胞子虫による全身性疾患。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_examination", "histopathology", "PCR_microsporidia"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Toxoplasmosis",
@@ -1364,6 +1658,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "トキソプラズマ・ゴンディによる脳炎と全身性疾患。",
         "urgency": "high",
         "recommended_tests": ["serology", "PCR_toxoplasma", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Sarcocystosis",
@@ -1373,6 +1669,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "住肉胞子虫属による肺出血と筋炎を引き起こす感染症。",
         "urgency": "high",
         "recommended_tests": ["histopathology", "muscle_biopsy", "PCR_sarcocystis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hexamitosis",
@@ -1382,6 +1680,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヘキサミタ（スピロヌクレウス）による腸管感染症で腸炎を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_wet_mount", "fecal_smear", "crop_wash"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cochlosoma Infection",
@@ -1391,6 +1691,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "コクロソーマ属鞭毛虫による腸炎で、主にフィンチ類に発症。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_wet_mount", "fecal_float", "crop_cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Syngamus (Gapeworm)",
@@ -1400,6 +1702,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気管虫（シンガムス・トラケア）の気管寄生で、呼吸困難と口開け呼吸を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "tracheal_endoscopy", "fecal_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Acanthocephalan Infection (Thorny-Headed Worms)",
@@ -1409,6 +1713,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鉤頭虫による腸管寄生で、炎症と閉塞を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "fecal_examination", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Sternostoma tracheacolum (Air Sac Mite) Chronic",
@@ -1418,6 +1724,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気嚢ダニの慢性感染で、進行性の呼吸障害を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["transillumination", "tracheal_swab", "endoscopy"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cnemidocoptes pilae (Scaly Leg Mite)",
@@ -1427,6 +1735,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "穿孔ヒゼンダニによる脚・足・蝋膜の過角化性痂皮形成。",
         "urgency": "moderate",
         "recommended_tests": ["skin_scraping", "microscopy", "clinical_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Myiasis (Fly Strike)",
@@ -1436,6 +1746,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ハエの幼虫による皮膚創傷や汚染部位の寄生で、組織破壊を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["clinical_examination", "wound_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tick Infestation",
@@ -1445,6 +1757,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "外部ダニ寄生による貧血と感染症伝播の可能性。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "CBC", "blood_smear"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hippoboscid Fly Infestation",
@@ -1454,6 +1768,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "シラミバエ科の寄生で、刺激と失血を引き起こす。",
         "urgency": "low",
         "recommended_tests": ["clinical_examination", "parasite_identification"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Proventricular Nematodes",
@@ -1463,6 +1779,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腺胃に寄生する線虫（ディスファリンクス、テトラメレス）による感染症。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "endoscopy", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Crop Mycosis",
@@ -1472,6 +1790,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "素嚢の真菌感染で、抗生物質使用や免疫抑制に続発することが多い。",
         "urgency": "moderate",
         "recommended_tests": ["crop_wash_cytology", "fungal_culture", "gram_stain"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tracheal Stenosis",
@@ -1481,6 +1801,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "瘢痕、肉芽腫、先天性奇形による気管内腔の狭窄。",
         "urgency": "high",
         "recommended_tests": ["radiography", "endoscopy", "CT_scan"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pulmonary Edema",
@@ -1490,6 +1812,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心疾患、毒素、感染症による肺内の液体貯留。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "echocardiography", "CBC", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aortic Rupture",
@@ -1499,6 +1823,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "大動脈の破裂による急性内出血で、動脈硬化に関連することが多い。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "ultrasound", "postmortem_examination"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Valvular Heart Disease",
@@ -1508,6 +1834,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心臓弁の変性または感染による心不全。",
         "urgency": "high",
         "recommended_tests": ["echocardiography", "radiography", "auscultation", "electrocardiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Cardiomyopathy",
@@ -1517,6 +1845,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "原発性心筋疾患による心不全で、様々な鳥類に見られる。",
         "urgency": "high",
         "recommended_tests": ["echocardiography", "radiography", "electrocardiography", "cardiac_troponin"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Amyloidosis (Systemic)",
@@ -1526,6 +1856,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性炎症に続発することの多い多臓器へのアミロイド沈着。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology_Congo_red", "blood_chemistry", "protein_electrophoresis"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Pancreatitis",
@@ -1535,6 +1867,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "膵臓の炎症で、消化および代謝機能障害を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "amylase_lipase", "radiography", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Adrenal Gland Disease",
@@ -1544,6 +1878,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鳥における副腎皮質機能亢進症または低下症を含む副腎機能障害。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "ACTH_stimulation", "ultrasound", "adrenal_hormone_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Thyroid Carcinoma",
@@ -1553,6 +1889,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "甲状腺の悪性腫瘍で、局所圧迫と転移を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fine_needle_aspirate", "biopsy", "radiography", "CT_scan", "thyroid_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Hemangiosarcoma",
@@ -1562,6 +1900,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "血管内皮の悪性腫瘍で、出血と転移を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "ultrasound", "cytology", "histopathology"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Melanoma",
@@ -1571,6 +1911,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "メラノサイト由来の良性または悪性腫瘍で、皮膚や内臓に発生する。",
         "urgency": "moderate",
         "recommended_tests": ["fine_needle_aspirate", "biopsy", "histopathology", "staging_radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Seminoma",
@@ -1580,6 +1922,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "精巣腫瘍でホルモン変化と腹部膨大を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "ultrasound", "hormonal_assay", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Osteosarcoma",
@@ -1589,6 +1933,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "骨の悪性腫瘍で、骨破壊と病的骨折を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "biopsy", "histopathology", "CT_scan"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Cholangiocellular Carcinoma",
@@ -1598,6 +1944,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "胆管上皮由来の原発性肝腫瘍。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "blood_chemistry", "histopathology"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Cloacitis (Vent Gleet)",
@@ -1607,6 +1955,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌、真菌、寄生虫感染による総排泄腔の炎症。",
         "urgency": "moderate",
         "recommended_tests": ["cloacal_swab_culture", "cytology", "gram_stain", "fecal_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Proventricular Ulceration",
@@ -1616,6 +1966,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、ストレス、重金属中毒による腺胃粘膜の潰瘍形成。",
         "urgency": "high",
         "recommended_tests": ["endoscopy", "radiography", "heavy_metal_panel", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ingluvoliths (Crop Stones)",
@@ -1625,6 +1977,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "素嚢内に異物が蓄積し結石を形成する。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "crop_palpation", "endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Nephropathy",
@@ -1634,6 +1988,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "進行性腎疾患による腎不全と尿酸塩の蓄積。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "uric_acid", "radiography", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Reproductive Tract Infection (Salpingitis)",
@@ -1643,6 +1999,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "卵管の細菌感染で、産卵障害と腹膜炎を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "bacterial_culture", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Coelomic Effusion (Ascites)",
@@ -1652,6 +2010,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心疾患、肝疾患、腫瘍性疾患による体腔内の液体貯留。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "coelomocentesis_cytology", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Feather Follicle Cyst (Chronic)",
@@ -1661,6 +2021,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "羽毛素材の貯留を伴う羽包の慢性嚢胞性拡張。",
         "urgency": "low",
         "recommended_tests": ["fine_needle_aspirate", "surgical_excision", "histopathology"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Wing Tip Edema",
@@ -1670,6 +2032,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "翼端の浮腫と腫脹で、閉所飼育や肥満鳥に多く見られる。",
         "urgency": "low",
         "recommended_tests": ["clinical_examination", "radiography", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Nutritional Secondary Hyperparathyroidism",
@@ -1679,6 +2043,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カルシウム・リン不均衡による上皮小体ホルモン過剰分泌と骨吸収。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "ionized_calcium", "radiography", "PTH_assay"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Biotin Deficiency",
@@ -1688,6 +2054,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビオチン（ビタミンB7）欠乏による皮膚炎と羽毛発育不良。",
         "urgency": "low",
         "recommended_tests": ["dietary_history", "blood_biotin_level", "response_to_supplementation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Niacin Deficiency (Pellagra)",
@@ -1697,6 +2065,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ナイアシン（ビタミンB3）欠乏による皮膚炎、下痢、神経症状。",
         "urgency": "moderate",
         "recommended_tests": ["dietary_history", "blood_chemistry", "response_to_supplementation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Riboflavin Deficiency",
@@ -1706,6 +2076,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "リボフラビン（ビタミンB2）欠乏による巻き趾麻痺と成長遅延。",
         "urgency": "moderate",
         "recommended_tests": ["dietary_history", "response_to_supplementation", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Thiamine Deficiency (Star-Gazing)",
@@ -1715,6 +2087,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チアミン（ビタミンB1）欠乏による多発性脳軟化症と角弓反張。",
         "urgency": "high",
         "recommended_tests": ["dietary_history", "response_to_thiamine_injection", "blood_thiamine"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin K Deficiency",
@@ -1724,6 +2098,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンK欠乏による凝固障害と出血。",
         "urgency": "high",
         "recommended_tests": ["coagulation_panel", "dietary_history", "response_to_vitamin_K"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Protein Deficiency",
@@ -1733,6 +2109,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食餌性タンパク質不足による羽毛不良、筋消耗、免疫抑制。",
         "urgency": "moderate",
         "recommended_tests": ["dietary_analysis", "blood_chemistry", "protein_electrophoresis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypervitaminosis D",
@@ -1742,6 +2120,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンD過剰による高カルシウム血症、軟部組織石灰化、腎障害。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "ionized_calcium", "radiography", "vitamin_D_level"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypervitaminosis A",
@@ -1751,6 +2131,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンA過剰摂取による皮膚・骨・肝臓の異常を伴う中毒。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "vitamin_A_level", "radiography", "liver_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pesticide Poisoning",
@@ -1760,6 +2142,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "有機リン、カーバメート等の農薬による神経症状を伴う中毒。",
         "urgency": "emergency",
         "recommended_tests": ["cholinesterase_levels", "toxicology_screen", "crop_contents_analysis"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Plant Toxicity",
@@ -1769,6 +2153,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "キョウチクトウ、ユリ、ディフェンバキアなどの有毒植物の摂取による中毒。",
         "urgency": "emergency",
         "recommended_tests": ["crop_contents_analysis", "blood_chemistry", "supportive_care"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Rodenticide Poisoning",
@@ -1778,6 +2164,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "抗凝固性殺鼠剤による凝固障害と内出血。",
         "urgency": "emergency",
         "recommended_tests": ["coagulation_panel", "toxicology_screen", "radiography"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Smoke Inhalation",
@@ -1787,6 +2175,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "煙や煙霧の吸入による呼吸器損傷で、肺水腫と中毒を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "pulse_oximetry", "blood_gas_analysis"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Essential Oil Toxicity",
@@ -1796,6 +2186,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "濃縮エッセンシャルオイルの拡散または直接接触による中毒。",
         "urgency": "high",
         "recommended_tests": ["clinical_examination", "blood_chemistry", "supportive_care"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Phallus Prolapse",
@@ -1805,6 +2197,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "雄鳥の陰茎脱出で、感染や過度の交尾が原因となることが多い。",
         "urgency": "high",
         "recommended_tests": ["clinical_examination", "bacterial_culture", "cloacal_examination"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Air Sac Rupture",
@@ -1814,6 +2208,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気嚢の破裂による皮下気腫で、外傷や呼吸器感染が原因となることが多い。",
         "urgency": "high",
         "recommended_tests": ["radiography", "physical_examination", "needle_decompression"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Beak Malocclusion (Scissor Beak)",
@@ -1823,6 +2219,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "上嘴の側方偏位による不正咬合と摂食困難。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "radiography", "beak_trimming"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Beak Overgrowth",
@@ -1832,6 +2230,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝疾患、栄養不良、摩耗不足による嘴の過剰成長。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "blood_chemistry", "liver_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Nail Overgrowth / Nail Injury",
@@ -1841,6 +2241,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "爪の過長や爪損傷による出血と止まり木困難。",
         "urgency": "low",
         "recommended_tests": ["clinical_examination", "nail_trim", "styptic_application"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Night Fright (Night Thrashing)",
@@ -1850,6 +2252,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "夜間のパニック発作による自傷で、特にオカメインコやセキセイインコに多い。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "environmental_assessment", "injury_evaluation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hormonal Feather Plucking",
@@ -1859,6 +2263,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ホルモン不均衡や繁殖欲求不満による羽毛破壊行動。",
         "urgency": "moderate",
         "recommended_tests": ["hormonal_panel", "behavioral_assessment", "dietary_review"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Contact Dermatitis",
@@ -1868,6 +2274,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "清掃用化学物質や粗い止まり木などの刺激物との接触による皮膚炎。",
         "urgency": "low",
         "recommended_tests": ["clinical_examination", "environmental_review", "skin_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Preen Gland Abscess (Uropygial Gland)",
@@ -1877,6 +2285,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "尾脂腺の感染または閉塞による膿瘍形成。",
         "urgency": "moderate",
         "recommended_tests": ["fine_needle_aspirate", "bacterial_culture", "cytology"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Preen Gland Adenoma/Carcinoma",
@@ -1886,6 +2296,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "尾脂腺の良性（腺腫）または悪性（癌）腫瘍。",
         "urgency": "moderate",
         "recommended_tests": ["fine_needle_aspirate", "biopsy", "histopathology", "staging_radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Subcutaneous Emphysema",
@@ -1895,6 +2307,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気嚢破裂や頸部外傷による皮下への空気貯留。",
         "urgency": "high",
         "recommended_tests": ["radiography", "clinical_examination", "needle_aspiration"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Additional Diseases (Viral / Bacterial / Parasitic / Neoplastic) ──
     {
@@ -1905,6 +2319,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎腫瘍が坐骨神経を圧迫し片側脚麻痺を引き起こす。セキセイインコに多い。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "blood_chemistry"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Avian Thyroid Hyperplasia",
@@ -1914,6 +2330,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "甲状腺の肥大により気管や食道を圧迫する。ヨウ素欠乏食に起因することが多い。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "blood_thyroid_levels", "dietary_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Psittacine Poxvirus (Canarypox Variant)",
@@ -1923,6 +2341,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "オウム目に特異的なポックスウイルス変異型で、重度の皮膚・ジフテリア様病変を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "PCR_poxvirus", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Adenovirus Hepatitis",
@@ -1932,6 +2352,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アデノウイルスによる急性肝壊死で、特に若齢オウム目やハトで重篤化する。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_adenovirus", "histopathology", "liver_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Paramyxovirus-3 (PMV-3)",
@@ -1941,6 +2363,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "PMV-3感染症で、主にオウム目やアキクサインコ属に神経・呼吸器症状を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["serology", "PCR_paramyxovirus", "virus_isolation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Duck Plague (Anatid Herpesvirus)",
@@ -1950,6 +2374,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カモ科に致死的なヘルペスウイルス感染症で、出血性疾患と高い死亡率を示す。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_herpesvirus", "virus_isolation", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Falcon Herpesvirus Infection",
@@ -1959,6 +2385,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ハヤブサや猛禽類に肝脾炎と封入体肝炎を引き起こすヘルペスウイルス感染症。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_herpesvirus", "liver_biopsy", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Owl Herpesvirus Infection",
@@ -1968,6 +2396,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "フクロウに肝壊死と全身性疾患を引き起こすヘルペスウイルス感染症。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_herpesvirus", "liver_biopsy", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Erysipelas",
@@ -1977,6 +2407,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エリジペロスリックス菌による急性敗血症で、各種鳥類に突然死を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["blood_culture", "necropsy", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Pasteurellosis (Fowl Cholera Variant)",
@@ -1986,6 +2418,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "パスツレラ・ムルトシダ感染症で、急性敗血症または慢性局所感染を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["blood_culture", "culture_sensitivity", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Salmonellosis (Paratyphoid)",
@@ -1995,6 +2429,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "非宿主適応型サルモネラ属菌による腸炎、敗血症、慢性キャリア状態を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["cloacal_culture", "blood_culture", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian E. coli Septicemia",
@@ -2004,6 +2440,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "病原性大腸菌による全身感染で、気嚢炎、肝周囲炎、心膜炎を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["blood_culture", "culture_sensitivity", "radiography"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Listeriosis",
@@ -2013,6 +2451,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "リステリア菌による脳炎と敗血症で、汚染飼料に関連することが多い。",
         "urgency": "emergency",
         "recommended_tests": ["blood_culture", "CSF_analysis", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Coccidiosis (Eimeria)",
@@ -2022,6 +2462,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アイメリア属による腸コクシジウム症で、特に若齢鳥に出血性腸炎を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fecal_flotation", "fecal_smear", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Syngamus trachea (Gapeworm) Advanced",
@@ -2031,6 +2473,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気管開口虫の重度寄生により気管閉塞と重篤な呼吸障害を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fecal_flotation", "tracheal_endoscopy", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Schistosomiasis",
@@ -2040,6 +2484,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "住血吸虫感染により肝臓、腸管、その他の臓器に肉芽腫性炎症を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fecal_examination", "blood_smear", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Filarial Infection",
@@ -2049,6 +2495,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "節足動物媒介のフィラリア線虫感染で、皮下または内臓疾患を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["blood_smear", "microfilaria_test", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Leukosis",
@@ -2058,6 +2506,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "レトロウイルス感染によるリンパ系および骨髄系腫瘍形成で、特に家禽やオウム目に発生する。",
         "urgency": "high",
         "recommended_tests": ["PCR_retrovirus", "histopathology", "blood_smear"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Marek's Disease (Avian)",
@@ -2067,6 +2517,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アルファヘルペスウイルスによるT細胞リンパ腫と末梢神経障害で、主に鶏に発生するが他の鳥種でも報告がある。",
         "urgency": "high",
         "recommended_tests": ["PCR_herpesvirus", "histopathology", "feather_pulp_PCR"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Reticuloendotheliosis",
@@ -2076,6 +2528,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "レトロウイルスによる免疫抑制、発育不良、リンパ系腫瘍を引き起こす鳥類の疾患。",
         "urgency": "high",
         "recommended_tests": ["PCR_retrovirus", "histopathology", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Nephritis Virus Infection",
@@ -2085,6 +2539,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アストロウイルス関連の腎炎で、若齢鳥に間質性腎炎と腎機能障害を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "urinalysis", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Encephalomyelitis (Epidemic Tremor)",
@@ -2094,6 +2550,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エンテロウイルスによる脳脊髄炎で、主に若齢雛に振戦と運動失調を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["serology", "histopathology", "virus_isolation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Hepatitis E Virus",
@@ -2103,6 +2561,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "E型肝炎ウイルス感染により肝脾腫、肝壊死、死亡率上昇を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["PCR_HEV", "liver_biopsy", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Riemerella anatipestifer Infection",
@@ -2112,6 +2572,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "主にカモやガチョウに漿膜炎、敗血症、髄膜炎を引き起こす細菌感染症。",
         "urgency": "high",
         "recommended_tests": ["blood_culture", "culture_sensitivity", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Brachyspira Infection (Avian Intestinal Spirochetosis)",
@@ -2121,6 +2583,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ブラキスピラ属菌による慢性下痢で、家禽やその他の鳥類の生産性低下を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_culture", "PCR_brachyspira", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Macrorhabdus ornithogaster Refractory Infection",
@@ -2130,6 +2594,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "治療抵抗性マクロラブダス・オルニトガスター感染で、慢性腺胃炎と消耗を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fecal_gram_stain", "crop_wash", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Capillaria Infection (Hairworm, Severe)",
@@ -2139,6 +2605,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "嗉嚢、食道、または腸管の重度毛頭虫寄生で、粘膜の著しい損傷を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fecal_flotation", "crop_wash_cytology", "endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Infectious Laryngotracheitis (ILT) Advanced",
@@ -2148,6 +2616,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ニワトリヘルペスウイルス1型による出血性喉頭気管炎で、重度呼吸困難と高致死率を示す。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_herpesvirus", "tracheal_swab", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ornithobacterium rhinotracheale (ORT) Pneumonia",
@@ -2157,6 +2627,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ORT感染の進行による重度肺炎で、気嚢炎と線維素膿性滲出物を伴う。",
         "urgency": "high",
         "recommended_tests": ["culture_sensitivity", "PCR_ORT", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Spirochetosis (Borrelia)",
@@ -2166,6 +2638,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "軟ダニ媒介のボレリア・アンセリナによる急性敗血症と溶血性貧血。",
         "urgency": "emergency",
         "recommended_tests": ["blood_smear", "PCR_borrelia", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Metapneumovirus Rhinotracheitis",
@@ -2175,6 +2649,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "メタニューモウイルスによる鼻気管炎と二次細菌感染を伴う頭部腫脹症候群。",
         "urgency": "high",
         "recommended_tests": ["PCR_metapneumovirus", "serology", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
 
     {
@@ -2185,6 +2661,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "免疫抑制やストレス下でPDDに進行する可能性のある無症候性ボルナウイルスキャリア状態。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_bornavirus", "serology", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Psittacine Herpesvirus – Mucosal Form",
@@ -2194,6 +2672,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "劇症肝炎を伴わない口腔・上部気道病変を引き起こす非致死的ヘルペスウイルス粘膜型。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_herpesvirus", "oral_cytology", "conjunctival_swab"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chlamydiosis – Chronic Latent Form",
@@ -2203,6 +2683,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "間欠的排菌と軽微な症状を示すクラミジア・シタッシの慢性不顕性感染。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_chlamydia", "serology", "liver_panel"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chlamydiosis – Ocular Form",
@@ -2212,6 +2694,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "片側性または両側性結膜炎として主に現れるクラミジア・シタッシ感染。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_chlamydia", "conjunctival_swab", "eye_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chlamydiosis – Hepatic Form",
@@ -2221,6 +2705,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝腫大とビリベルジン尿を伴う肝臓主体のクラミジア・シタッシ感染。",
         "urgency": "high",
         "recommended_tests": ["PCR_chlamydia", "liver_panel", "bile_acids", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Sour Crop (Fermentative Ingluvitis)",
@@ -2230,6 +2716,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "嗉嚢内の細菌・酵母発酵により悪臭を伴う膨満と吐き戻しを生じる。",
         "urgency": "moderate",
         "recommended_tests": ["crop_cytology", "gram_stain", "crop_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Crop Fistula",
@@ -2239,6 +2727,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "嗉嚢と皮膚表面との異常な交通で、通常嗉嚢火傷や外傷に続発する。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "radiography", "crop_endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Rhinolithiasis (Rhinolith)",
@@ -2248,6 +2738,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性感染やビタミンA欠乏に続発する鼻腔または後鼻孔内の石灰化凝集物。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "CT_scan", "nasal_flush_cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aspergillosis – Acute Fulminant Form",
@@ -2257,6 +2749,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "免疫抑制鳥における呼吸器系への大量真菌侵入による急速致死型のアスペルギルス症。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "endoscopy", "aspergillus_antigen_test", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aspergillosis – Chronic Granulomatous Form",
@@ -2266,6 +2760,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気嚢、肺、気管に肉芽腫を形成するアスペルギルスの慢性感染で、進行性呼吸障害を伴う。",
         "urgency": "high",
         "recommended_tests": ["radiography", "CT_scan", "endoscopy", "fungal_culture", "aspergillus_antigen_test"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aspergillosis – Syringeal Form",
@@ -2275,6 +2771,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鳴管でのアスペルギルス肉芽腫により声の変化と進行性気道閉塞を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["endoscopy", "radiography", "CT_scan", "fungal_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin D Toxicosis (Hypervitaminosis D – Renal Form)",
@@ -2284,6 +2782,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "過剰なビタミンD3補給による軟部組織の石灰化と腎不全。",
         "urgency": "high",
         "recommended_tests": ["vitamin_D_level", "ionized_calcium", "uric_acid_level", "radiography"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Conure Bleeding Syndrome",
@@ -2293,6 +2793,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カルシウム欠乏、肝疾患、ウイルス感染に関連するコニュアの出血素因。",
         "urgency": "emergency",
         "recommended_tests": ["CBC", "coagulation_panel", "ionized_calcium", "liver_panel"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Psittacine Beak and Feather Disease – Peracute Neonatal Form",
@@ -2302,6 +2804,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "羽毛症状出現前に大量ウイルス血症と多臓器不全を伴う新生児の急速致死型PBFD。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_blood", "histopathology", "necropsy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Psittacine Beak and Feather Disease – Chronic Adult Form",
@@ -2311,6 +2815,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "成鳥における緩徐進行性PBFDで、段階的な羽毛異常と二次感染を伴う。",
         "urgency": "high",
         "recommended_tests": ["PCR_blood", "PCR_feather", "CBC", "biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cryptosporidiosis",
@@ -2320,6 +2826,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "免疫不全の鳥にクリプトスポリジウム原虫による腸炎・呼吸器疾患を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["fecal_acid_fast_stain", "fecal_PCR", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cochlosomosis",
@@ -2329,6 +2837,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "コクロソーマ・アナティス鞭毛虫による腸管感染で、フィンチに慢性下痢を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_direct_smear", "fecal_wet_mount", "fecal_PCR"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Malaria – Acute Form",
@@ -2338,6 +2848,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "蚊媒介のプラスモジウム急性感染で、溶血性貧血と臓器不全を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["blood_smear", "PCR_plasmodium", "CBC", "radiography"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Leucocytozoonosis",
@@ -2347,6 +2859,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ブユ媒介のロイコチトゾーン血液寄生虫で、貧血と組織損傷を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["blood_smear", "PCR_leucocytozoon", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tracheal Mites (Sternostoma – Non-Finch Species)",
@@ -2356,6 +2870,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "フィンチ以外のオウム目におけるステルノストマ気管ダニ寄生で呼吸障害を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["transillumination_trachea", "tracheal_wash", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Feather Follicle Tumor (Feather Folliculoma)",
@@ -2365,6 +2881,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "毛包組織から発生する腫瘍性増殖で、再発性の皮下結節として現れる。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology", "fine_needle_aspirate"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Renal Cystadenocarcinoma",
@@ -2374,6 +2892,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "坐骨神経圧迫と片側性下肢不全麻痺を引き起こす悪性腎嚢胞性腫瘍。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "CT_scan", "biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Hepatocellular Carcinoma",
@@ -2383,6 +2903,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝腫大と進行性の全身状態悪化を引き起こす原発性悪性肝腫瘍。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "liver_biopsy", "liver_panel", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Liposarcoma",
@@ -2392,6 +2914,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "浸潤性増殖を示す悪性脂肪組織腫瘍で、組織病理学的に良性脂肪腫と区別される。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiography", "CT_scan"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Leiomyosarcoma",
@@ -2401,6 +2925,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "消化管またはその他の臓器の悪性平滑筋腫瘍。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "histopathology", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Adenocarcinoma (General)",
@@ -2410,6 +2936,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎臓、肝臓、消化管を含む各臓器に発生する悪性腺上皮腫瘍。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiography", "ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Feather Destructive Behavior – Hormonal",
@@ -2419,6 +2947,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "生殖ホルモン亢進による羽毛損傷行動で、単独飼育のペット鳥に多い。",
         "urgency": "moderate",
         "recommended_tests": ["hormonal_panel", "behavioral_assessment", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Beak Malocclusion – Lateral Deviation (Scissor Beak)",
@@ -2428,6 +2958,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "上嘴の側方偏位で、先天性または不適切な挿し餌手技による。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Beak Malocclusion – Mandibular Prognathism",
@@ -2437,6 +2969,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "下嘴が上嘴を超えて突出し、食物の把持を妨げる。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Egg Peritonitis – Chronic Form",
@@ -2446,6 +2980,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "反復する異所性排卵による慢性的な体腔炎で、進行性の線維素性癒着を伴う。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "coelomic_fluid_analysis", "CBC"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Papillomatosis – Oral Form",
@@ -2455,6 +2991,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "口腔および後鼻孔のパピローマウイルス誘発性腫瘤で、嚥下障害を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology", "oral_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Herpesvirus – Internal Papillomatosis",
@@ -2464,6 +3002,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "胆管癌リスクと関連するヘルペスウイルス関連消化管内部乳頭腫。",
         "urgency": "high",
         "recommended_tests": ["endoscopy", "biopsy", "histopathology", "PCR_herpesvirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Zinc Toxicosis – Acute",
@@ -2473,6 +3013,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "亜鉛メッキワイヤーや金具からの急性亜鉛摂取による溶血性貧血と消化器症状。",
         "urgency": "emergency",
         "recommended_tests": ["blood_zinc_level", "radiography", "CBC"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lead Toxicosis – Chronic",
@@ -2482,6 +3024,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性的な低レベル鉛曝露による潜行性の体重減少、神経変化、腎障害。",
         "urgency": "high",
         "recommended_tests": ["blood_lead_level", "radiography", "CBC", "renal_panel"],
+        "onset_pattern": {"acute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Heavy Metal Poisoning – Mixed (Lead and Zinc)",
@@ -2491,6 +3035,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "汚染されたケージ材料や家庭用品の摂取による鉛・亜鉛の複合中毒。",
         "urgency": "emergency",
         "recommended_tests": ["blood_lead_level", "blood_zinc_level", "radiography", "CBC"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Thyroid Hyperplasia – Tracheal Compression",
@@ -2500,6 +3046,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヨウ素欠乏性甲状腺腫による気管・食道圧迫で、呼吸器・消化器症状を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "thyroid_hormone_panel", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin A Deficiency – Oral Abscesses",
@@ -2509,6 +3057,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンA欠乏による扁平上皮化生と唾液腺の二次性口腔膿瘍形成。",
         "urgency": "moderate",
         "recommended_tests": ["plasma_vitamin_A", "oral_exam", "cytology"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Calcium Deficiency – Reproductive (Laying Hens)",
@@ -2518,6 +3068,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "活発に産卵中の雌鳥における重度カルシウム枯渇で、子癇様痙攣と卵詰まりを引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["ionized_calcium", "radiography", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Proventricular Impaction",
@@ -2527,6 +3079,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "乾固した食物、異物、凝集物による腺胃の閉塞。",
         "urgency": "high",
         "recommended_tests": ["radiography", "contrast_radiography", "endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Crop Impaction",
@@ -2536,6 +3090,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食物や異物の蓄積による嗉嚢の完全閉塞。",
         "urgency": "high",
         "recommended_tests": ["radiography", "crop_palpation", "crop_endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Gastric Dilatation (Non-PDD)",
@@ -2545,6 +3101,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "PDD以外の原因（異物、毒素等）による腺胃または筋胃の拡張。",
         "urgency": "high",
         "recommended_tests": ["radiography", "fluoroscopy", "heavy_metal_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ventricular Foreign Body (Gizzard)",
@@ -2554,6 +3112,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "筋胃に停滞した金属等の異物で、重金属中毒を引き起こす可能性がある。",
         "urgency": "high",
         "recommended_tests": ["radiography", "heavy_metal_panel", "endoscopy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Intestinal Intussusception",
@@ -2563,6 +3123,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腸管の一部が隣接部分に嵌入し、閉塞と虚血を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "contrast_radiography", "ultrasound"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Air Sac Cyst",
@@ -2572,6 +3134,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気嚢の液体または気体充満嚢胞で、体腔内の占拠を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "ultrasound", "aspirate_cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Preen Gland Carcinoma",
@@ -2581,6 +3145,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "尾脂腺の悪性腫瘍で、しばしば潰瘍化し予後不良。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Ovarian Cyst",
@@ -2590,6 +3156,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "卵巣上の非腫瘍性液体充満嚢胞で、腹部膨満を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["ultrasound", "radiography", "coelomic_fluid_analysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Salpingitis (Oviduct Infection)",
@@ -2599,6 +3167,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌・真菌による卵管感染で、繁殖機能障害を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "CBC", "bacterial_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cloacal Stricture",
@@ -2608,6 +3178,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "瘢痕、炎症、腫瘍による総排泄腔開口部の狭窄。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "cloacal_exam", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Articular Gout – Chronic Progressive",
@@ -2617,6 +3189,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "複数関節への進行性尿酸結晶沈着で、慢性の衰弱性関節炎を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["uric_acid_level", "radiography", "joint_aspirate"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Visceral Gout – Acute Form",
@@ -2626,6 +3200,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "急性腎不全による内臓表面への尿酸の急性沈着で、しばしば致命的。",
         "urgency": "emergency",
         "recommended_tests": ["uric_acid_level", "CBC", "radiography", "necropsy"],
+        "onset_pattern": {"acute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Atherosclerosis – Aortic",
@@ -2635,6 +3211,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "主に大動脈に動脈硬化性プラークが形成され、高齢アマゾンインコに多い。",
         "urgency": "high",
         "recommended_tests": ["echocardiography", "radiography", "cholesterol", "ECG"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Endocarditis",
@@ -2644,6 +3222,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心臓弁の細菌感染で、弁機能不全と全身性塞栓症を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["echocardiography", "blood_culture", "CBC", "ECG"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pulmonary Mycosis",
@@ -2653,6 +3233,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アスペルギルス以外の真菌による肺感染で、進行性呼吸器疾患を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "tracheal_wash", "fungal_culture", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tracheal Papilloma",
@@ -2662,6 +3244,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気管内の乳頭腫性増殖で、進行性気道閉塞を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["endoscopy", "biopsy", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Air Sac Herniation",
@@ -2671,6 +3255,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "気嚢膜の体壁貫通による皮下空気充満性腫脹の形成。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "physical_exam", "transillumination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ingluvoliths (Crop Concretions)",
@@ -2680,6 +3266,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鉱物沈着物と残骸の蓄積により嗉嚢内に形成される硬化した凝集物。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "crop_palpation", "crop_endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Gastrointestinal Motility Disorder",
@@ -2689,6 +3277,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "構造的閉塞を伴わない機能的消化管運動障害で、しばしば神経原性。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "fluoroscopy", "contrast_study", "PCR_bornavirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Polyomavirus – Chronic Carrier",
@@ -2698,6 +3288,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "成鳥における間欠的排泄と不顕性症状を伴うポリオーマウイルス慢性キャリア状態。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_blood", "PCR_cloacal_swab", "CBC"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Egg Retention (Pre-laying)",
@@ -2707,6 +3299,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "殻付き卵の活動的な難産を伴わない長期停滞で、自然に解消するか卵詰まりに進行する場合がある。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "physical_exam", "ionized_calcium"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Uropygial Gland Impaction",
@@ -2716,6 +3310,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "尾脂腺管の閉塞による腺腫大と羽毛状態の悪化。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Nutritional Hyperparathyroidism",
@@ -2725,6 +3321,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食事性カルシウム・リン不均衡による二次性上皮小体機能亢進症で、骨の脱灰を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["ionized_calcium", "phosphorus", "radiography", "PTH_level"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Coronavirus Infection",
@@ -2734,6 +3332,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "各種鳥類に腸炎と腎炎を引き起こすコロナウイルス感染症。",
         "urgency": "moderate",
         "recommended_tests": ["PCR_coronavirus", "fecal_PCR", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Avian Rotavirus Infection",
@@ -2743,6 +3343,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "主に若鳥に急性腸炎を引き起こすロタウイルス感染症。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_PCR", "electron_microscopy", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Splenic Disease (Splenitis)",
@@ -2752,6 +3354,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、腫瘍、溶血性原因による脾臓の炎症または腫大。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "ultrasound", "CBC", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Zinc-Responsive Dermatosis",
@@ -2761,6 +3365,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "亜鉛補給に反応する皮膚・羽毛異常で、亜鉛中毒とは異なる。",
         "urgency": "low",
         "recommended_tests": ["serum_zinc_level", "skin_biopsy", "dietary_assessment"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Amyloidosis – Hepatic",
@@ -2770,6 +3376,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝臓へのアミロイドタンパク沈着で、肝腫大と肝不全を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["liver_biopsy", "histopathology", "liver_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Amyloidosis – Renal",
@@ -2779,6 +3387,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎臓へのアミロイドタンパク沈着で、進行性腎不全を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["uric_acid_level", "renal_biopsy", "histopathology", "CBC"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Myopathy (Nutritional / Capture)",
@@ -2788,6 +3398,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンE/セレン欠乏または捕獲・保定ストレスによる骨格筋変性。",
         "urgency": "high",
         "recommended_tests": ["CK_level", "vitamin_E_level", "selenium_level", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Peripheral Neuropathy",
@@ -2797,6 +3409,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "中毒性、感染性、栄養性原因による末梢神経の障害で、運動・感覚障害を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["neurological_exam", "blood_lead_level", "vitamin_E_level", "electromyography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cloacal Calculus (Cloacolith)",
@@ -2806,6 +3420,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "総排泄腔内の石灰化凝集物で、閉塞といきみを引き起こす。",
         "urgency": "high",
         "recommended_tests": ["radiography", "physical_exam", "cloacal_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
 ]
 
@@ -3043,6 +3659,8 @@ def analyze_symptoms(
     *, onset: str | None = None, age_years: float | None = None, species: str | None = None,
     lab_values: dict | None = None,
     gender: str | None = None,
+    vaccines=None,
+    vaccination_status=None,
 ) -> Dict[str, Any]:
     """鳥類用の鑑別診断関数。"""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("bird", {}))
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("bird", {}))

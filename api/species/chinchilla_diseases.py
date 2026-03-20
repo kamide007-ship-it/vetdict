@@ -23,6 +23,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "切歯または臼歯の不整合により正常な咀嚼ができない状態です。常生歯であるチンチラでは非常に多い疾患です。",
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "skull_radiographs"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Molar Elongation",
@@ -32,6 +34,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "臼歯の過長により鋭い突起が舌や頬を傷つけます。根尖部の伸長は鼻涙管を圧迫することがあります。",
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "skull_radiographs", "ct_scan"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dental Abscess",
@@ -41,6 +45,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "歯根周囲の感染により顎骨に膿瘍が形成されます。骨を侵食して顔面腫脹を引き起こすことがあります。",
         "urgency": "high",
         "recommended_tests": ["oral_exam", "skull_radiographs", "ct_scan", "culture_sensitivity"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Slobbers (Ptyalism)",
@@ -50,6 +56,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "通常は歯科疾患に続発する過度の流涎で、顎や胸部の被毛が濡れて固まります。",
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "skull_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Gastrointestinal ────────────────────────────────────────────────
     {
@@ -60,6 +68,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "消化管の蠕動運動が低下または停止する状態です。チンチラでは一般的で生命を脅かす可能性があります。",
         "urgency": "high",
         "recommended_tests": ["abdominal_radiographs", "physical_exam", "blood_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bloat (Gastric Tympany)",
@@ -69,6 +79,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "胃または腸にガスが貯留して痛みを伴う膨満を引き起こします。急速にショック状態に進行する可能性があります。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_radiographs", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Constipation",
@@ -78,6 +90,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "脱水、食事の不足、または消化管蠕動の問題により排便が困難になる状態です。",
         "urgency": "moderate",
         "recommended_tests": ["abdominal_radiographs", "physical_exam", "diet_history"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Diarrhea",
@@ -87,6 +101,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "軟便や水様便で、食事の問題、感染症、寄生虫などが原因となります。急速に脱水を引き起こす可能性があります。",
         "urgency": "high",
         "recommended_tests": ["fecal_exam", "fecal_culture", "blood_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Enteritis",
@@ -96,6 +112,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌、ウイルス、寄生虫などの病原体による腸管粘膜の炎症です。",
         "urgency": "high",
         "recommended_tests": ["fecal_exam", "fecal_culture", "blood_panel", "abdominal_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hepatic Lipidosis",
@@ -105,6 +123,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食欲不振や肥満がきっかけで肝臓に脂肪が蓄積する疾患です。食事を停止したチンチラに多く見られます。",
         "urgency": "high",
         "recommended_tests": ["blood_panel", "liver_enzymes", "abdominal_ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Rectal Prolapse",
@@ -114,6 +134,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性の下痢やいきみに伴い、直腸組織が肛門から突出する状態です。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "fecal_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cecal Torsion",
@@ -123,6 +145,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "盲腸が捻転して血液供給が遮断される外科的緊急疾患です。急速に臨床状態が悪化します。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_radiographs", "abdominal_ultrasound", "blood_panel"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Dermatological ──────────────────────────────────────────────────
     {
@@ -133,6 +157,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "乱暴な取り扱いやストレス時に防御機構として大きな毛の塊が抜け落ちる現象です。チンチラ特有の反応です。",
         "urgency": "low",
         "recommended_tests": ["physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Ring",
@@ -142,6 +168,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "毛が陰茎に巻き付いて血流を阻害する状態です。壊死を防ぐため手動での除去が必要です。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "genital_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ringworm (Dermatophytosis)",
@@ -151,6 +179,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "Trichophyton mentagrophytesによる真菌性皮膚感染症です。鱗屑を伴う円形の脱毛を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "skin_scraping", "woods_lamp"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Chewing (Barbering)",
@@ -160,6 +190,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "自分自身またはケージメイトの毛を噛む行動です。ストレス、退屈、栄養不足による行動的要因が多いです。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "diet_history", "behavioral_assessment"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ear Dermatitis",
@@ -169,6 +201,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "耳介の剥離、痂皮、肥厚が見られます。低湿度や真菌感染に関連することがあります。",
         "urgency": "low",
         "recommended_tests": ["skin_scraping", "fungal_culture", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bumblefoot (Pododermatitis)",
@@ -178,6 +212,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "金網床ケージや運動不足による足底の炎症と感染です。深部感染に進行する可能性があります。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "radiographs_limb", "culture_sensitivity"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Respiratory ─────────────────────────────────────────────────────
     {
@@ -188,6 +224,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌または真菌による肺の感染症です。Pseudomonas、Bordetella、Streptococcusが原因となることが多いです。",
         "urgency": "high",
         "recommended_tests": ["thoracic_radiographs", "blood_panel", "culture_sensitivity", "pulse_oximetry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Upper Respiratory Infection",
@@ -197,6 +235,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鼻腔および上気道の感染症です。未治療の場合、肺炎に進行する可能性があります。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "nasal_culture", "thoracic_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Heat Stroke",
@@ -206,6 +246,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "生命を脅かす過熱状態です。チンチラは非常に暑さに弱く、26°C以上の環境は危険です。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "body_temperature", "blood_panel"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Urinary ─────────────────────────────────────────────────────────
     {
@@ -216,6 +258,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "膀胱または尿道に炭酸カルシウム結石が形成される疾患です。過剰なカルシウム摂取のチンチラに多く見られます。",
         "urgency": "high",
         "recommended_tests": ["urinalysis", "abdominal_radiographs", "abdominal_ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chronic Kidney Disease",
@@ -225,6 +269,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎機能が進行性に低下し、尿毒症や電解質異常を引き起こす疾患です。",
         "urgency": "high",
         "recommended_tests": ["blood_panel", "urinalysis", "abdominal_ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Urinary Tract Infection",
@@ -234,6 +280,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "膀胱または尿道の細菌感染により排尿困難や血尿が起こります。",
         "urgency": "moderate",
         "recommended_tests": ["urinalysis", "urine_culture", "abdominal_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Calcium Deposits (Tissue Calcification)",
@@ -243,6 +291,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食事中のカルシウム・リン比の不均衡による軟部組織の転移性石灰化です。",
         "urgency": "moderate",
         "recommended_tests": ["blood_panel", "radiographs_whole_body", "diet_history"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Reproductive ────────────────────────────────────────────────────
     {
@@ -253,6 +303,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "分娩困難です。チンチラの妊娠期間は111日と長く、仔は早成性であるため、大きな仔が産道を閉塞する可能性があります。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_radiographs", "abdominal_ultrasound", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pyometra",
@@ -262,6 +314,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "子宮内に細菌感染と膿が蓄積する疾患です。外科的介入が必要です。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_ultrasound", "blood_panel", "vaginal_cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Penile Fur Ring",
@@ -271,6 +325,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "交配時に毛が陰茎に巻き付いて絞扼輪を形成します。嵌頓包茎や組織壊死を引き起こす可能性があります。",
         "urgency": "high",
         "recommended_tests": ["genital_exam", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mastitis",
@@ -280,6 +336,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "授乳中の雌の乳腺における感染と炎症です。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "milk_cytology", "culture_sensitivity"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Metritis",
@@ -289,6 +347,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "産後の子宮の炎症と感染です。敗血症に進行する可能性があります。",
         "urgency": "high",
         "recommended_tests": ["blood_panel", "abdominal_ultrasound", "vaginal_cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Musculoskeletal ─────────────────────────────────────────────────
     {
@@ -299,6 +359,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チンチラで最も一般的な長骨骨折である脛骨の骨折です。ケージ事故や不適切な取り扱いが原因となることが多いです。",
         "urgency": "high",
         "recommended_tests": ["radiographs_limb", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Limb Fracture (General)",
@@ -308,6 +370,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "落下、ケージへの挟み込み、乱暴な取り扱いによる四肢の骨折です。",
         "urgency": "high",
         "recommended_tests": ["radiographs_limb", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cage Injuries",
@@ -317,6 +381,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ケージの金網、回し車、ケージアクセサリーに足や脚が挟まれることによる外傷です。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "radiographs_limb", "wound_assessment"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Muscle Wasting",
@@ -326,6 +392,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性疾患、歯科疾患、不適切な栄養に続発して筋肉量が進行性に減少する状態です。",
         "urgency": "moderate",
         "recommended_tests": ["blood_panel", "physical_exam", "diet_history"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Neurological ────────────────────────────────────────────────────
     {
@@ -336,6 +404,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "代謝障害、中毒、熱中症、感染症などが原因となる不随意の痙攣です。",
         "urgency": "emergency",
         "recommended_tests": ["blood_panel", "neurological_exam", "body_temperature"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lead Poisoning",
@@ -345,6 +415,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "塗料やはんだなどの鉛含有物質の摂取による中毒です。神経症状と消化器症状を引き起こします。",
         "urgency": "emergency",
         "recommended_tests": ["blood_lead_level", "blood_panel", "abdominal_radiographs"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vestibular Disease",
@@ -354,6 +426,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "前庭系の機能障害により斜頸や平衡感覚の喪失が起こります。中耳炎や中枢神経疾患が原因の場合があります。",
         "urgency": "high",
         "recommended_tests": ["neurological_exam", "skull_radiographs", "ct_scan", "otoscopic_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Listeriosis",
@@ -363,6 +437,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "Listeria monocytogenesの感染による髄膜脳炎です。汚染された食物や敷材を介して広がります。",
         "urgency": "emergency",
         "recommended_tests": ["blood_panel", "neurological_exam", "culture_sensitivity", "csf_analysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Heat Stroke (Neurological)",
@@ -372,6 +448,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "痙攣や意識消失などの神経症状を呈する重度の熱中症です。",
         "urgency": "emergency",
         "recommended_tests": ["body_temperature", "blood_panel", "neurological_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Ophthalmological ────────────────────────────────────────────────
     {
@@ -382,6 +460,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "結膜の炎症です。砂浴びの刺激、感染症、歯科疾患が原因となることがあります。",
         "urgency": "moderate",
         "recommended_tests": ["ophthalmic_exam", "fluorescein_stain", "eye_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Corneal Ulcer",
@@ -391,6 +471,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "外傷、異物、感染による角膜表面の侵食です。痛みを伴い、穿孔に至る可能性があります。",
         "urgency": "high",
         "recommended_tests": ["ophthalmic_exam", "fluorescein_stain"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cataracts",
@@ -400,6 +482,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水晶体の混濁により視力が低下します。加齢性またはの糖尿病に続発することがあります。",
         "urgency": "low",
         "recommended_tests": ["ophthalmic_exam", "blood_glucose"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── Cardiac ─────────────────────────────────────────────────────────
     {
@@ -410,6 +494,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心筋の疾患により心拍出量が低下します。チンチラでは突然死として発症することがあります。",
         "urgency": "high",
         "recommended_tests": ["thoracic_radiographs", "echocardiography", "electrocardiogram"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Heart Murmur",
@@ -419,6 +505,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "聴診で検出される異常な心音です。弁膜疾患や心筋疾患の存在を示唆する場合があります。",
         "urgency": "moderate",
         "recommended_tests": ["echocardiography", "thoracic_radiographs", "electrocardiogram"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Congestive Heart Failure",
@@ -428,6 +516,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心臓が十分な血液を送り出せず、肺や腹腔に体液が貯留する状態です。",
         "urgency": "emergency",
         "recommended_tests": ["thoracic_radiographs", "echocardiography", "blood_panel", "electrocardiogram"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── Metabolic ───────────────────────────────────────────────────────
     {
@@ -438,6 +528,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "インスリン抵抗性または欠乏による高血糖症です。チンチラでは比較的まれですが報告されています。",
         "urgency": "high",
         "recommended_tests": ["blood_glucose", "blood_panel", "urinalysis"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Vitamin Deficiency",
@@ -447,6 +539,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンA、E、またはB群の欠乏により皮膚症状および全身症状が現れます。",
         "urgency": "moderate",
         "recommended_tests": ["blood_panel", "diet_history"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypocalcemia",
@@ -456,6 +550,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "血中カルシウム濃度の低下で、妊娠後期や授乳期に多く見られます。痙攣を引き起こす可能性があります。",
         "urgency": "high",
         "recommended_tests": ["blood_panel", "ionized_calcium"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ketosis (Pregnancy Toxemia)",
@@ -465,6 +561,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "妊娠後期または授乳初期のエネルギー不足による代謝障害です。しばしば致死的です。",
         "urgency": "emergency",
         "recommended_tests": ["blood_glucose", "blood_panel", "urine_ketones"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Infectious ──────────────────────────────────────────────────────
     {
@@ -475,6 +573,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チンチラの日和見病原体であるPseudomonas aeruginosaによる感染症で、呼吸器および全身症状を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["culture_sensitivity", "blood_panel", "thoracic_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pasteurella Infection",
@@ -484,6 +584,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "Pasteurella multocidaの感染による呼吸器疾患、膿瘍、または敗血症です。",
         "urgency": "high",
         "recommended_tests": ["culture_sensitivity", "blood_panel", "thoracic_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Listeria Infection",
@@ -493,6 +595,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "Listeria monocytogenesの全身感染により脳炎や敗血症を引き起こします。致死率が高い疾患です。",
         "urgency": "emergency",
         "recommended_tests": ["blood_panel", "culture_sensitivity", "neurological_exam", "csf_analysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Giardiasis",
@@ -502,6 +606,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ジアルジア属の原虫による腸管感染症で、慢性的な間欠性下痢を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "giardia_antigen_test"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Streptococcal Infection",
@@ -511,6 +617,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "Streptococcus属の感染により肺炎、敗血症、またはリンパ節炎を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["culture_sensitivity", "blood_panel", "thoracic_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Parasitic ───────────────────────────────────────────────────────
     {
@@ -521,6 +629,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "Eimeria属による腸管感染症で、特に若いチンチラで下痢と体重減少を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_flotation", "fecal_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Mites",
@@ -530,6 +640,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ツメダニやニキビダニなどの外部寄生虫の感染により掻痒と脱毛を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["skin_scraping", "fur_pluck_exam", "microscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cryptosporidiosis",
@@ -539,6 +651,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "クリプトスポリジウム属による腸管感染症です。無症候性のことが多いが、免疫不全の動物では重篤化する可能性があります。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "acid_fast_stain"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Oncological ─────────────────────────────────────────────────────
     {
@@ -549,6 +663,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "柔らかく可動性のある皮下腫瘤として現れる良性脂肪腫瘍です。大きくならない限り通常は問題ありません。",
         "urgency": "low",
         "recommended_tests": ["fine_needle_aspirate", "cytology"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Lymphoma",
@@ -558,6 +674,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "リンパ系の悪性腫瘍です。複数の臓器に影響を及ぼす可能性があり、予後不良です。",
         "urgency": "high",
         "recommended_tests": ["fine_needle_aspirate", "blood_panel", "abdominal_ultrasound", "biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Ovarian Tumors",
@@ -567,6 +685,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "卵巣の腫瘍性病変で、ホルモンを分泌して脱毛や行動変化を引き起こすことがあります。",
         "urgency": "high",
         "recommended_tests": ["abdominal_ultrasound", "blood_panel", "hormone_panel", "biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Mammary Tumors",
@@ -576,6 +696,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "乳腺の良性または悪性腫瘍です。未避妊の雌に多く見られます。",
         "urgency": "moderate",
         "recommended_tests": ["fine_needle_aspirate", "cytology", "thoracic_radiographs", "biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── Additional Conditions ───────────────────────────────────────────
     {
@@ -586,6 +708,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "中耳または内耳の感染により前庭症状が現れます。上部気道感染症に続発することが多いです。",
         "urgency": "high",
         "recommended_tests": ["otoscopic_exam", "skull_radiographs", "ct_scan", "culture_sensitivity"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Intussusception",
@@ -595,6 +719,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腸管の一部が他の部分に陥入して閉塞と虚血を引き起こす疾患です。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_ultrasound", "abdominal_radiographs", "blood_panel"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Spinal Injury",
@@ -604,6 +730,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "落下やケージ事故による脊椎の外傷で、部分的または完全な麻痺を引き起こします。",
         "urgency": "emergency",
         "recommended_tests": ["spinal_radiographs", "neurological_exam", "ct_scan"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dermatitis (Contact / Allergic)",
@@ -613,6 +741,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "敷材や洗浄剤などの接触アレルゲンによる皮膚の炎症です。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "skin_scraping", "allergy_testing"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bite Wounds",
@@ -622,6 +752,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ケージメイトとの喧嘩による外傷です。二次的な細菌感染や膿瘍に発展する可能性があります。",
         "urgency": "moderate",
         "recommended_tests": ["wound_assessment", "culture_sensitivity"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Obesity",
@@ -631,6 +763,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "おやつや種子の過剰給餌による過体重です。肝リピドーシスなどの疾患のリスクを高めます。",
         "urgency": "low",
         "recommended_tests": ["body_condition_scoring", "diet_history", "blood_panel"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dehydration",
@@ -640,6 +774,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水分摂取不足、下痢、環境の暑さによる体液不足です。急速に生命を脅かす状態になる可能性があります。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "blood_panel", "packed_cell_volume"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Impacted Cecotrophs",
@@ -649,6 +785,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肥満、歯科疾患の痛み、脊椎の問題により盲腸便が肛門周囲に蓄積する状態です。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "perineal_exam", "diet_history"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aspiration Pneumonia",
@@ -658,6 +796,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食物、水、経口薬の気道への吸引による肺感染症です。",
         "urgency": "emergency",
         "recommended_tests": ["thoracic_radiographs", "blood_panel", "pulse_oximetry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Skin Abscess",
@@ -667,6 +807,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "皮下に膿の袋が形成される局所的な細菌感染です。外科的排膿が必要な場合があります。",
         "urgency": "moderate",
         "recommended_tests": ["culture_sensitivity", "cytology", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Ring (Penile) - Acute",
@@ -676,6 +818,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "絡まった毛が陰茎を締め付け、嵌頓包茎、排尿閉塞、虚血性損傷を引き起こします。速やかに除去しないと緊急事態です。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "genital_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Heat Stroke - Chronic Sequelae",
@@ -685,6 +829,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "熱中症後の長期臓器障害で、腎不全、肝障害、神経学的障害を含みます。チンチラは極めて暑さに弱いです。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "urinalysis", "neurological_exam"],
+        "onset_pattern": {"acute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dental Malocclusion - Molar Spurs",
@@ -694,6 +840,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "臼歯の縁に鋭い突起が発生し、舌と頬粘膜を裂傷します。チンチラに非常に多いです。",
         "urgency": "high",
         "recommended_tests": ["oral_exam", "skull_xray", "dental_endoscopy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dental Malocclusion - Incisor",
@@ -703,6 +851,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "切歯の過長と不整列により正常な把持と齧りができなくなります。しばしば臼歯の問題に続発します。",
         "urgency": "moderate",
         "recommended_tests": ["dental_exam", "skull_xray", "physical_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tooth Root Abscess",
@@ -712,6 +862,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "歯根部の感染で、顔面膿瘍、下顎または上顎の骨髄炎、瘻孔形成を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["skull_xray", "ct_scan", "culture_sensitivity"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dental Resorption",
@@ -721,6 +873,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "歯構造の病的吸収で、痛みと歯の完全性の進行的喪失を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["dental_xray", "oral_exam", "ct_scan"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Chewing (Self-Barbering) - Stress-Related",
@@ -730,6 +884,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ストレス、退屈、栄養欠乏、遺伝的素因による強迫的な毛噛み行動です。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "behavioral_assessment", "diet_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Slip - Extensive",
@@ -739,6 +895,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "防衛機構として大量の毛が抜ける現象。チンチラ特有の適応です。毛の再生には数ヶ月かかります。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "stress_evaluation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mycosis (Systemic Fungal Infection)",
@@ -748,6 +906,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "皮膚糸状菌症を超える深部または全身性真菌感染で、肺や他の臓器に影響する可能性があります。",
         "urgency": "high",
         "recommended_tests": ["culture", "chest_xray", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Trichophyton mentagrophytes (Ringworm)",
@@ -757,6 +917,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チンチラに一般的な皮膚糸状菌感染で、鼻や耳に鱗屑を伴う円形脱毛を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "wood_lamp", "skin_scraping"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aspergillosis",
@@ -766,6 +928,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アスペルギルス属による真菌感染で、主に免疫不全のチンチラの呼吸器系に影響します。",
         "urgency": "high",
         "recommended_tests": ["chest_xray", "culture", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bacterial Enteritis (Clostridial)",
@@ -775,6 +939,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "クロストリジウム属菌の異常増殖による毒素介在性腸炎で、抗生物質使用や食事変更後に多いです。",
         "urgency": "emergency",
         "recommended_tests": ["fecal_culture", "fecal_toxin_assay", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "E. coli Enteritis",
@@ -784,6 +950,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腸管病原性大腸菌感染による急性下痢と脱水で、特に若いチンチラに多いです。",
         "urgency": "high",
         "recommended_tests": ["fecal_culture", "blood_chemistry", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Salmonellosis",
@@ -793,6 +961,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "サルモネラ属による細菌感染で、腸炎と敗血症を引き起こします。人獣共通感染症のリスクがあります。",
         "urgency": "high",
         "recommended_tests": ["fecal_culture", "blood_culture", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Yersinia Infection",
@@ -802,6 +972,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エルシニア属による感染で、リンパ節と腸管に肉芽腫性病変を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["fecal_culture", "blood_culture", "necropsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Intestinal Parasites (Giardia)",
@@ -811,6 +983,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ジアルジア・ランブリア感染による慢性間欠性下痢と吸収不良です。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_flotation", "fecal_antigen_test", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cecal Impaction",
@@ -820,6 +994,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "脱水や繊維摂取不足による乾燥した内容物の盲腸嵌頓です。",
         "urgency": "high",
         "recommended_tests": ["abdominal_xray", "physical_exam", "abdominal_palpation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Gastric Ulceration",
@@ -829,6 +1005,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ストレス、NSAID使用、ヘリコバクター感染による胃粘膜の糜爛と潰瘍です。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "fecal_occult_blood", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hepatic Coccidiosis",
@@ -838,6 +1016,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝臓に影響するコクシジウム感染で、肝腫大、胆管過形成、肝不全の可能性があります。",
         "urgency": "high",
         "recommended_tests": ["fecal_flotation", "blood_chemistry", "liver_ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cholelithiasis",
@@ -847,6 +1027,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "胆道系の胆石形成で、閉塞と肝機能障害を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["abdominal_ultrasound", "blood_chemistry", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pericardial Effusion",
@@ -856,6 +1038,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心臓周囲の液体貯留で、心タンポナーデと心拍出量の低下を引き起こします。",
         "urgency": "emergency",
         "recommended_tests": ["echocardiography", "chest_xray", "pericardiocentesis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aortic Calcification",
@@ -865,6 +1049,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食事中のカルシウム過剰や代謝不均衡による大動脈と主要血管の石灰化です。",
         "urgency": "high",
         "recommended_tests": ["chest_xray", "blood_chemistry", "echocardiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pleural Effusion",
@@ -874,6 +1060,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、心不全、腫瘍による胸腔内液体貯留で肺を圧迫します。",
         "urgency": "emergency",
         "recommended_tests": ["chest_xray", "thoracocentesis", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Acute Renal Failure",
@@ -883,6 +1071,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "毒素、感染、尿路閉塞による突然の腎機能喪失で、高窒素血症と電解質不均衡を引き起こします。",
         "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "urinalysis", "renal_ultrasound"],
+        "onset_pattern": {"acute", "chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Nephrolithiasis",
@@ -892,6 +1082,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎臓内の結石形成で、閉塞と進行性の腎障害を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["abdominal_xray", "renal_ultrasound", "urinalysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hydronephrosis",
@@ -901,6 +1093,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "尿管閉塞による腎盂拡張で、進行性の腎障害を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["renal_ultrasound", "blood_chemistry", "urinalysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hyperthyroidism",
@@ -910,6 +1104,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "過剰な甲状腺ホルモン産生により代謝率の増加、体重減少、心臓への影響を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["thyroid_panel", "blood_chemistry", "physical_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Adrenal Hyperplasia",
@@ -919,6 +1115,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "副腎の肥大によるコルチゾール過剰とクッシング様症状です。",
         "urgency": "moderate",
         "recommended_tests": ["hormone_panel", "abdominal_ultrasound", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ovarian Cysts",
@@ -928,6 +1126,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "嚢胞性卵巣濾胞によるホルモン障害と未避妊雌の両側性側腹部脱毛です。",
         "urgency": "moderate",
         "recommended_tests": ["abdominal_ultrasound", "hormone_panel", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Endometritis",
@@ -937,6 +1137,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "子宮内膜の炎症と感染で、子宮蓄膿症に進行する可能性があります。",
         "urgency": "high",
         "recommended_tests": ["abdominal_ultrasound", "vaginal_cytology", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Uterine Torsion",
@@ -946,6 +1148,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "子宮が軸を中心に回転し血管障害を引き起こします。外科的緊急事態です。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_ultrasound", "physical_exam", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Retained Fetus",
@@ -955,6 +1159,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "分娩時にすべての子を排出できない状態で、敗血症と毒血症に至ります。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_xray", "abdominal_ultrasound", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pregnancy Toxemia (Early)",
@@ -964,6 +1170,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "負のエネルギーバランスによる妊娠中毒症の早期徴候で、即座の栄養支持が必要です。",
         "urgency": "high",
         "recommended_tests": ["blood_glucose", "blood_chemistry", "urinalysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mastitis (Acute)",
@@ -973,6 +1181,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "授乳中の雌の乳腺の急性細菌感染で、全身性疾患を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "milk_culture", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Orchitis",
@@ -982,6 +1192,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "精巣の炎症または感染で、上行性尿路感染や外傷に続発することがあります。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "scrotal_ultrasound", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ear Infection (Otitis Externa)",
@@ -991,6 +1203,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌、酵母、ダニによる外耳道の感染で、炎症と分泌物を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["otoscopy", "ear_swab_cytology", "culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Corneal Dystrophy",
@@ -1000,6 +1214,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "遺伝性または加齢性の変性疾患で、角膜混濁と視力障害の可能性があります。",
         "urgency": "low",
         "recommended_tests": ["ophthalmic_exam", "slit_lamp_exam", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Retinal Degeneration",
@@ -1009,6 +1225,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "進行性の網膜変性で視力喪失に至り、遺伝性または加齢性の場合があります。",
         "urgency": "low",
         "recommended_tests": ["ophthalmic_exam", "electroretinography", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Keratoconjunctivitis",
@@ -1018,6 +1236,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "角膜と結膜の複合炎症で、砂浴び粉の刺激や感染が原因となります。",
         "urgency": "moderate",
         "recommended_tests": ["ophthalmic_exam", "fluorescein_stain", "culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dust Bath Dermatitis",
@@ -1027,6 +1247,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "不適切な砂浴び材料や過度の砂浴び頻度による皮膚または呼吸器刺激です。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "environmental_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bacterial Skin Infection (Pyoderma)",
@@ -1036,6 +1258,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "創傷、咬傷、免疫抑制による皮膚の二次細菌感染です。",
         "urgency": "moderate",
         "recommended_tests": ["skin_culture", "cytology", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vertebral Disc Disease",
@@ -1045,6 +1269,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "椎間板の変性またはヘルニアによる脊髄圧迫と神経学的徴候です。",
         "urgency": "high",
         "recommended_tests": ["spinal_xray", "neurological_exam", "mri"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Femoral Fracture",
@@ -1054,6 +1280,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "落下、ケージ内外傷、代謝性骨疾患による大腿骨の骨折。外科的固定が必要です。",
         "urgency": "emergency",
         "recommended_tests": ["limb_xray", "physical_exam", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Patellar Luxation",
@@ -1063,6 +1291,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "膝蓋骨が大腿骨溝から脱臼し、間欠的から持続的な跛行を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["orthopedic_exam", "limb_xray", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Osteoarthritis (Degenerative Joint Disease)",
@@ -1072,6 +1302,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "関節軟骨の進行性変性で慢性痛と運動性低下を引き起こし、高齢チンチラに多いです。",
         "urgency": "moderate",
         "recommended_tests": ["joint_xray", "physical_exam", "blood_chemistry"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Nutritional Secondary Hyperparathyroidism",
@@ -1081,6 +1313,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カルシウム-リン食事不均衡による副甲状腺ホルモンの過剰分泌で、骨の脱灰を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "xray", "parathyroid_hormone_level"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Iron Storage Disease",
@@ -1090,6 +1324,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝臓や他の臓器への病的な鉄蓄積で臓器障害を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "liver_biopsy", "serum_iron"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Squamous Cell Carcinoma",
@@ -1099,6 +1335,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チンチラの皮膚や口腔に発生する悪性上皮腫瘍です。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "chest_xray"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Fibrosarcoma",
@@ -1108,6 +1346,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "悪性結合組織腫瘍。外科的切除後の局所再発が一般的です。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "chest_xray"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Hepatocellular Carcinoma",
@@ -1117,6 +1357,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "予後不良の原発性悪性肝臓腫瘍。突然の腹部膨張として現れることがあります。",
         "urgency": "high",
         "recommended_tests": ["liver_ultrasound", "blood_chemistry", "fine_needle_aspirate"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Pulmonary Adenocarcinoma",
@@ -1126,6 +1368,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "進行性呼吸機能障害を引き起こす原発性肺腫瘍。X線検査で偶然発見されることがあります。",
         "urgency": "high",
         "recommended_tests": ["chest_xray", "cytology", "blood_chemistry"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Toxicosis (Plant Poisoning)",
@@ -1135,6 +1379,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ケージ外での活動中に有毒な観葉植物、処理済み木材、その他の危険物質を摂取することによる中毒です。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "blood_chemistry", "toxicology_screen"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Eye Proptosis",
@@ -1144,6 +1390,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "後眼窩膿瘍、腫瘍、外傷による眼球の眼窩からの前方変位です。",
         "urgency": "emergency",
         "recommended_tests": ["ophthalmic_exam", "orbital_ultrasound", "skull_xray"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cecal Dysbiosis",
@@ -1153,6 +1401,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "抗生物質使用、食事変更、ストレスによる盲腸の正常な微生物叢の撹乱です。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "physical_exam", "diet_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tympanic Bulla Infection",
@@ -1162,6 +1412,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鼓室胞の深部感染で、重度の前庭症状と顔面神経麻痺を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["skull_xray", "ct_scan", "neurological_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Neonatal Mortality",
@@ -1171,6 +1423,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "母親の育児放棄、感染、低体温、先天性欠陥による生後1週間以内の子の死亡です。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "necropsy", "environmental_review"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Anemia (Non-specific)",
@@ -1180,6 +1434,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性疾患、寄生虫、出血など様々な原因による赤血球数の減少です。",
         "urgency": "high",
         "recommended_tests": ["cbc", "blood_smear", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Wound Infection",
@@ -1189,6 +1445,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ケージ内外傷、喧嘩、術後合併症による外傷の細菌感染です。",
         "urgency": "moderate",
         "recommended_tests": ["wound_culture", "physical_exam", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Stress Syndrome (Chronic)",
@@ -1198,6 +1456,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "環境因子による慢性ストレスで、免疫抑制、毛噛み、疾患感受性の増加を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "behavioral_assessment", "environmental_review"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hepatic Lipidosis (Severe)",
@@ -1207,6 +1467,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "長期の食欲不振や高脂肪食による肝臓の重度の脂肪浸潤で、肝不全を引き起こす可能性があります。",
         "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "liver_ultrasound", "liver_biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Antibiotic-Associated Dysbiosis",
@@ -1216,6 +1478,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "不適切な抗生物質（ペニシリン、アモキシシリン、リンコマイシン）による腸内細菌叢の重度の撹乱。チンチラでは致死的になり得ます。",
         "urgency": "emergency",
         "recommended_tests": ["fecal_exam", "blood_chemistry", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Prolapsed Rectum",
@@ -1225,6 +1489,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性下痢、いきみ、腸炎に続発することが多い直腸組織の肛門からの突出です。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "fecal_exam", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cheilitis",
@@ -1234,6 +1500,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "歯科疾患や栄養欠乏による流涎に続発することが多い唇の炎症と感染です。",
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "culture", "dental_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cryptorchidism",
@@ -1243,6 +1511,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "片方または両方の精巣が下降しない状態。停留精巣は腫瘍化のリスクが増加します。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "abdominal_ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tail Degloving",
@@ -1252,6 +1522,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ケージのドア、回し車、不適切な取り扱いにより尾の皮膚が剥離し、下層の骨が露出します。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "tail_xray"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Nail Avulsion",
@@ -1261,6 +1533,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ケージのワイヤーや粗い床材に引っかかることによる爪の剥離です。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "foot_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Myocarditis",
@@ -1270,6 +1544,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ウイルス、細菌、寄生虫感染による心筋の炎症で、心機能障害を引き起こします。",
         "urgency": "high",
         "recommended_tests": ["echocardiography", "chest_xray", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Encephalitozoon cuniculi Infection",
@@ -1279,6 +1555,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チンチラに肉芽腫性脳炎、腎炎、水晶体破裂を引き起こす微胞子虫です。",
         "urgency": "high",
         "recommended_tests": ["serology", "urinalysis", "neurological_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Zinc Toxicosis",
@@ -1288,6 +1566,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "亜鉛メッキされたケージバーやアクセサリーを齧ることによる溶血性貧血を伴う中毒です。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "cbc", "serum_zinc_level"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Additional diseases to reach 170 ──
     {
@@ -1298,6 +1578,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "常生歯の切歯が不正咬合となり、正常な食物の把持ができなくなる。",
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "skull_radiographs"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dental Disease - Molar Root Infection",
@@ -1307,6 +1589,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "臼歯歯根の深部感染が下顎または上顎骨に波及し、骨髄炎を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["skull_radiographs", "ct_scan", "culture_sensitivity"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dental Disease - Resorptive Lesions",
@@ -1316,6 +1600,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "歯牙構造の進行性外部・内部吸収で、疼痛と歯の脱落を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["skull_radiographs", "ct_scan", "oral_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Slobbers - Severe (with Dermatitis)",
@@ -1325,6 +1611,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性的な流涎に伴い顎と胸部に二次的な細菌・真菌性皮膚炎を合併する重度の流涎症。",
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "skull_radiographs", "culture_sensitivity"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bloat - Acute Cecal Tympany",
@@ -1334,6 +1622,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "高デンプン食の発酵や盲腸内細菌叢異常による急性盲腸ガス膨張。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_radiographs", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Intussusception - Chinchilla",
@@ -1343,6 +1633,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腸管の重積により閉塞と虚血が起こり、手術なしでは致死的になることが多い。",
         "urgency": "emergency",
         "recommended_tests": ["abdominal_radiographs", "abdominal_ultrasound"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Listeriosis - Chinchilla",
@@ -1352,6 +1644,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "汚染飼料によるリステリア菌感染で、敗血症や髄膜脳炎を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["blood_culture", "blood_panel", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pseudomonas Otitis",
@@ -1361,6 +1655,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "緑膿菌による耳道感染で、緑色の排膿を伴う化膿性外耳炎を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["ear_swab_culture", "otoscopy", "skull_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Penile Hair Ring - Chinchilla",
@@ -1370,6 +1666,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "抜け毛が陰茎に巻き付き締め付け、嵌頓包茎と壊死の可能性がある。",
         "urgency": "high",
         "recommended_tests": ["genital_exam", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Heat Stroke - Chinchilla",
@@ -1379,6 +1677,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チンチラは極めて暑さに弱く、26℃以上で致死的な熱中症を起こし得る。",
         "urgency": "emergency",
         "recommended_tests": ["body_temperature", "blood_panel", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Constipation - Chronic",
@@ -1388,6 +1688,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "脱水、低繊維食、消化管運動障害による慢性便秘。",
         "urgency": "moderate",
         "recommended_tests": ["abdominal_radiographs", "diet_history", "physical_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Chewing - Stress-Related",
@@ -1397,6 +1699,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "退屈、ストレス、過密飼育による強迫的な自己毛噛み行動。",
         "urgency": "low",
         "recommended_tests": ["behavioral_assessment", "physical_exam", "diet_history"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fur Chewing - Nutritional",
@@ -1406,6 +1710,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "脂肪酸、タンパク質、繊維の食事性欠乏に関連する毛噛み。",
         "urgency": "low",
         "recommended_tests": ["dietary_review", "blood_panel", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Conjunctivitis - Chinchilla",
@@ -1415,6 +1721,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "砂浴びの刺激、感染、歯科疾患による結膜の炎症。",
         "urgency": "moderate",
         "recommended_tests": ["ophthalmic_exam", "fluorescein_stain", "culture_sensitivity"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Otitis Externa - Chinchilla",
@@ -1424,6 +1732,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "真菌や細菌による外耳道の感染または炎症。",
         "urgency": "moderate",
         "recommended_tests": ["otoscopy", "ear_swab_culture", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Diabetes Mellitus - Chinchilla",
@@ -1433,6 +1743,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "高血糖と多飲多尿を引き起こすまれな内分泌疾患。",
         "urgency": "moderate",
         "recommended_tests": ["blood_glucose", "urinalysis", "fructosamine"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Dystocia - Chinchilla",
@@ -1442,6 +1754,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "大きな仔、子宮弛緩、胎位異常による分娩障害で、獣医学的介入が必要。",
         "urgency": "emergency",
         "recommended_tests": ["radiographs", "ultrasound", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pyometra - Chinchilla",
@@ -1451,6 +1765,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌感染により子宮内に膿が蓄積する外科的緊急疾患。",
         "urgency": "emergency",
         "recommended_tests": ["ultrasound", "blood_panel", "culture_sensitivity"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Gastric Ulceration - Chinchilla",
@@ -1460,6 +1776,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "飼育環境の変化、疼痛、併発疾患によるストレス関連の胃潰瘍。",
         "urgency": "high",
         "recommended_tests": ["blood_panel", "fecal_exam", "abdominal_radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fungal Pneumonia - Chinchilla",
@@ -1469,6 +1787,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "免疫低下チンチラにおける環境曝露による肺の真菌感染。",
         "urgency": "high",
         "recommended_tests": ["chest_radiographs", "fungal_culture", "blood_panel"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Spinal Trauma",
@@ -1478,6 +1798,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "落下やケージでの挟まりによる脊髄損傷で、チンチラは背部損傷を起こしやすい。",
         "urgency": "emergency",
         "recommended_tests": ["spinal_radiographs", "neurological_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Paraphimosis - Chinchilla",
@@ -1487,6 +1809,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "露出した陰茎を戻せない状態で、毛輪や陰茎腫脹が原因。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "genital_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Trichophyton Dermatitis (Severe)",
@@ -1496,6 +1820,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "複数の体部位に及ぶ広範な皮膚糸状菌症で、著しい痂皮と脱毛を伴う。",
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "skin_scraping", "woods_lamp"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Malocclusion - Progressive",
@@ -1505,6 +1831,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "臼歯の伸長により鼻涙管圧迫と体重減少を引き起こす進行性歯科疾患。",
         "urgency": "high",
         "recommended_tests": ["skull_radiographs", "ct_scan", "oral_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # Duplicate "Intestinal Parasites (Giardia)" removed (merged into earlier entry at line 807)
     {
@@ -1515,6 +1843,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "分娩後のホルモン変化と授乳の栄養要求による産後脱毛。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "blood_panel", "dietary_review"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # Duplicate "Hepatic Coccidiosis" removed (same symptoms as earlier entry at line 834)
     {
@@ -1525,6 +1855,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "無神経節症による先天性結腸拡張で、白色被毛のチンチラに見られる。",
         "urgency": "high",
         "recommended_tests": ["abdominal_radiographs", "biopsy", "physical_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Calcification of Organs (Visceral)",
@@ -1534,6 +1866,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "栄養不均衡による腎臓、心臓等の臓器のジストロフィー性または転移性石灰化。",
         "urgency": "moderate",
         "recommended_tests": ["radiographs", "blood_panel", "dietary_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
 
 ]
@@ -1766,5 +2100,5 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Chinchilla")
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None) -> Dict[str, Any]:
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("chinchilla", {}))
+def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None) -> Dict[str, Any]:
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("chinchilla", {}))
