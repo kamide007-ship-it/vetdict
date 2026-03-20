@@ -10,6 +10,7 @@ defined here for consistent messaging across species.
 from __future__ import annotations
 
 import json
+import math as _math
 import os
 from typing import Any, Dict, List, Set
 
@@ -414,70 +415,111 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
         {"id": "rabbit_mixed", "name": "Mixed Breed", "name_ja": "雑種（ミックス）",
          "risk": {}},
         {"id": "rabbit_netherland_dwarf", "name": "Netherland Dwarf", "name_ja": "ネザーランドドワーフ",
-         "risk": {"Malocclusion": 2.5, "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5, "Pasteurellosis": 1.3}},
+         "risk": {"Malocclusion": 2.5, "Gastrointestinal Stasis": 1.5, "GI Stasis": 1.5, "Pasteurellosis": 1.3,
+                  "Dental Malocclusion": 2.5, "Upper Respiratory Infection": 1.3}},
         {"id": "rabbit_holland_lop", "name": "Holland Lop", "name_ja": "ホーランドロップ",
-         "risk": {"Otitis Media / Interna": 2.0, "Malocclusion": 1.8, "Gastrointestinal Stasis": 1.3}},
+         "risk": {"Otitis Media / Interna": 2.0, "Malocclusion": 1.8, "Gastrointestinal Stasis": 1.3,
+                  "Head Tilt (Vestibular Disease)": 1.8, "Dental Malocclusion": 1.8}},
         {"id": "rabbit_mini_rex", "name": "Mini Rex", "name_ja": "ミニレッキス",
          "risk": {"Pododermatitis (Sore Hocks)": 2.0, "Gastrointestinal Stasis": 1.3}},
         {"id": "rabbit_lionhead", "name": "Lionhead", "name_ja": "ライオンヘッド",
-         "risk": {"Malocclusion": 1.8, "Wool Block/Trichobezoar": 2.0}},
+         "risk": {"Malocclusion": 1.8, "Wool Block/Trichobezoar": 2.0, "Dental Malocclusion": 1.8}},
         {"id": "rabbit_flemish_giant", "name": "Flemish Giant", "name_ja": "フレミッシュジャイアント",
-         "risk": {"Pododermatitis (Sore Hocks)": 2.0, "Spondylosis": 1.8, "Heart Disease": 1.5, "Congestive Heart Failure": 1.5}},
+         "risk": {"Pododermatitis (Sore Hocks)": 2.0, "Spondylosis": 1.8, "Heart Disease": 1.5,
+                  "Congestive Heart Failure": 1.5, "Obesity": 1.5, "Hock Sores": 2.0}},
         {"id": "rabbit_rex", "name": "Rex", "name_ja": "レッキス",
          "risk": {"Pododermatitis (Sore Hocks)": 2.5, "Gastrointestinal Stasis": 1.3}},
         {"id": "rabbit_lop_eared", "name": "Lop Eared (General)", "name_ja": "ロップイヤー（一般）",
-         "risk": {"Otitis Media / Interna": 2.5, "Ear Mites": 1.5, "Dental Disease": 1.3, "Dental Malocclusion": 1.3}},
+         "risk": {"Otitis Media / Interna": 2.5, "Ear Mites": 1.5, "Dental Disease": 1.3, "Dental Malocclusion": 1.3,
+                  "Head Tilt (Vestibular Disease)": 1.8}},
+        {"id": "rabbit_angora", "name": "Angora", "name_ja": "アンゴラ",
+         "risk": {"Wool Block/Trichobezoar": 2.5, "GI Stasis": 1.8, "Gastrointestinal Stasis": 1.8,
+                  "Flystrike (Myiasis)": 1.8, "Heat Stroke": 1.5}},
+        {"id": "rabbit_dwarf_hotot", "name": "Dwarf Hotot", "name_ja": "ドワーフホト",
+         "risk": {"Malocclusion": 2.0, "Dental Malocclusion": 2.0}},
     ],
     "hamster": [
         {"id": "hamster_golden", "name": "Golden (Syrian)", "name_ja": "ゴールデン（シリアン）",
-         "risk": {"Wet Tail (Proliferative Ileitis)": 2.0, "Hamster Pyometra": 1.8, "Amyloidosis": 1.5}},
+         "risk": {"Wet Tail (Proliferative Ileitis)": 2.0, "Hamster Pyometra": 1.8, "Amyloidosis": 1.5,
+                  "Cardiomyopathy": 1.5, "Lymphoma": 1.5, "Cushing's Disease (Hyperadrenocorticism)": 1.3}},
         {"id": "hamster_djungarian", "name": "Djungarian (Winter White)", "name_ja": "ジャンガリアン",
-         "risk": {"Diabetes Mellitus": 2.5, "Tumors/Neoplasia": 1.5}},
+         "risk": {"Diabetes Mellitus": 2.5, "Tumors/Neoplasia": 1.5, "Obesity": 1.3}},
         {"id": "hamster_campbell", "name": "Campbell's Dwarf", "name_ja": "キャンベル",
-         "risk": {"Diabetes Mellitus": 3.0, "Glaucoma": 1.5}},
+         "risk": {"Diabetes Mellitus": 3.0, "Glaucoma": 1.5, "Cataracts": 1.5,
+                  "Tumors/Neoplasia": 1.5}},
         {"id": "hamster_roborovski", "name": "Roborovski", "name_ja": "ロボロフスキー",
          "risk": {"Tumors/Neoplasia": 1.3}},
+        {"id": "hamster_chinese", "name": "Chinese Hamster", "name_ja": "チャイニーズハムスター",
+         "risk": {"Diabetes Mellitus": 2.0, "Tail Slip": 1.5, "Tumors/Neoplasia": 1.5}},
     ],
     "ferret": [
         {"id": "ferret_standard", "name": "Standard", "name_ja": "スタンダード",
          "risk": {}},
         {"id": "ferret_marshall", "name": "Marshall Ferret", "name_ja": "マーシャルフェレット",
-         "risk": {"Adrenal Disease": 2.0, "Insulinoma": 1.8, "Lymphoma": 1.5}},
+         "risk": {"Adrenal Disease": 2.0, "Insulinoma": 1.8, "Lymphoma": 1.5,
+                  "Cardiomyopathy": 1.5, "Helicobacter Gastritis": 1.5}},
         {"id": "ferret_angora", "name": "Angora", "name_ja": "アンゴラ",
          "risk": {"Adrenal Disease": 1.5, "Hairball/GI Obstruction": 1.8, "Gastrointestinal Foreign Body / Obstruction": 1.8}},
+        {"id": "ferret_albino", "name": "Albino (Dark-eyed White)", "name_ja": "アルビノ（ダークアイドホワイト）",
+         "risk": {"Waardenburg Syndrome": 2.0, "Deafness": 1.8, "Adrenal Disease": 1.5}},
     ],
     "guinea_pig": [
         {"id": "guinea_pig_american", "name": "American (Short Hair)", "name_ja": "アメリカン（短毛）",
          "risk": {}},
         {"id": "guinea_pig_abyssinian", "name": "Abyssinian", "name_ja": "アビシニアン",
-         "risk": {"Ovarian Cysts": 1.5, "Diabetes Mellitus": 1.3}},
+         "risk": {"Ovarian Cysts": 1.5, "Diabetes Mellitus": 1.3, "Urolithiasis (Bladder Stones)": 1.3}},
         {"id": "guinea_pig_peruvian", "name": "Peruvian", "name_ja": "ペルビアン",
-         "risk": {"Dermatophytosis (Ringworm)": 1.8, "Ringworm (Trichophyton mentagrophytes)": 1.8, "Heat Stroke": 1.5}},
+         "risk": {"Dermatophytosis (Ringworm)": 1.8, "Ringworm (Trichophyton mentagrophytes)": 1.8, "Heat Stroke": 1.5,
+                  "Flystrike (Myiasis)": 1.8, "Pododermatitis (Bumblefoot)": 1.3}},
         {"id": "guinea_pig_skinny", "name": "Skinny Pig", "name_ja": "スキニーギニアピッグ",
-         "risk": {"Hypothermia": 2.0, "Skin Infections": 1.8, "Sunburn": 2.0}},
+         "risk": {"Hypothermia": 2.0, "Skin Infections": 1.8, "Sunburn": 2.0, "Ringworm (Trichophyton mentagrophytes)": 1.5}},
         {"id": "guinea_pig_teddy", "name": "Teddy", "name_ja": "テディ",
          "risk": {"Ear Wax Buildup": 1.5, "Dermatophytosis (Ringworm)": 1.3, "Ringworm (Trichophyton mentagrophytes)": 1.3}},
+        {"id": "guinea_pig_coronet", "name": "Coronet", "name_ja": "コロネット",
+         "risk": {"Dermatophytosis (Ringworm)": 1.5, "Heat Stroke": 1.3}},
+        {"id": "guinea_pig_texel", "name": "Texel", "name_ja": "テッセル",
+         "risk": {"Dermatophytosis (Ringworm)": 1.8, "Heat Stroke": 1.5, "Flystrike (Myiasis)": 1.5}},
     ],
     "chinchilla": [
         {"id": "chinchilla_standard", "name": "Standard Grey", "name_ja": "スタンダードグレー",
          "risk": {}},
-        {"id": "chinchilla_velvet", "name": "Black Velvet", "name_ja": "ブラックベルベット",
+        {"id": "chinchilla_black_velvet", "name": "Black Velvet", "name_ja": "ブラックベルベット",
          "risk": {"Lethal Gene Issues": 1.5}},
+        {"id": "chinchilla_white", "name": "White (Wilson White)", "name_ja": "ホワイト（ウィルソンホワイト）",
+         "risk": {"Lethal Gene Issues": 1.5, "Dental Disease": 1.3, "Dental Malocclusion": 1.3}},
+        {"id": "chinchilla_beige", "name": "Beige (Heterozygous)", "name_ja": "ベージュ",
+         "risk": {"Dental Disease": 1.3, "Dental Malocclusion": 1.3}},
+        {"id": "chinchilla_ebony", "name": "Ebony", "name_ja": "エボニー",
+         "risk": {}},
     ],
     "hedgehog": [
         {"id": "hedgehog_four_toed", "name": "Four-toed (African Pygmy)", "name_ja": "ヨツユビハリネズミ",
          "risk": {"Wobbly Hedgehog Syndrome (WHS)": 2.0, "Tumors/Neoplasia": 2.0,
-                  "Obesity": 1.5, "Mite Infestation": 1.3}},
+                  "Obesity": 1.5, "Mite Infestation": 1.3, "Fatty Liver Disease": 1.5,
+                  "Squamous Cell Carcinoma": 1.8, "Cardiomyopathy": 1.5}},
+        {"id": "hedgehog_european", "name": "European Hedgehog", "name_ja": "ヨーロッパハリネズミ",
+         "risk": {"Lungworm Infection": 2.0, "Parasitic Infection": 1.8,
+                  "Ringworm (Dermatophytosis)": 1.5}},
+        {"id": "hedgehog_long_eared", "name": "Long-eared Hedgehog", "name_ja": "オオミミハリネズミ",
+         "risk": {"Ear Infections": 1.5, "Mite Infestation": 1.5}},
     ],
     "bird": [
         {"id": "bird_mixed", "name": "Mixed/Other", "name_ja": "その他",
          "risk": {}},
         {"id": "bird_canary", "name": "Canary", "name_ja": "カナリア",
-         "risk": {"Air Sac Mites": 2.0, "Avian Pox": 1.5}},
+         "risk": {"Air Sac Mites": 2.0, "Avian Pox": 1.5, "Coccidiosis": 1.5,
+                  "Feather Cysts": 1.8, "Atoxoplasmosis": 2.0}},
         {"id": "bird_finch", "name": "Finch", "name_ja": "フィンチ",
-         "risk": {"Air Sac Mites": 2.0, "Coccidiosis": 1.5}},
+         "risk": {"Air Sac Mites": 2.0, "Coccidiosis": 1.5, "Scaly Leg Mites": 1.5,
+                  "Atoxoplasmosis": 1.8}},
         {"id": "bird_java_sparrow", "name": "Java Sparrow", "name_ja": "文鳥",
-         "risk": {"Egg Binding": 1.8, "Obesity": 1.5, "Iron Storage Disease": 1.5}},
+         "risk": {"Egg Binding": 1.8, "Obesity": 1.5, "Iron Storage Disease": 1.5,
+                  "Gout": 1.5, "Bumblefoot (Pododermatitis)": 1.3}},
+        {"id": "bird_dove", "name": "Dove/Pigeon", "name_ja": "ハト",
+         "risk": {"Trichomoniasis": 2.5, "Paramyxovirus Infection": 2.0,
+                  "Coccidiosis": 1.8, "Candidiasis": 1.5}},
+        {"id": "bird_mynah", "name": "Mynah Bird", "name_ja": "キュウカンチョウ",
+         "risk": {"Iron Storage Disease": 3.0, "Hemochromatosis": 3.0, "Obesity": 1.5}},
     ],
     "parakeet": [
         {"id": "parakeet_budgerigar", "name": "Budgerigar", "name_ja": "セキセイインコ",
@@ -507,6 +549,15 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
     "reptile": [
         {"id": "reptile_general", "name": "General Reptile", "name_ja": "爬虫類（一般）",
          "risk": {}},
+        {"id": "reptile_ball_python", "name": "Ball Python", "name_ja": "ボールパイソン",
+         "risk": {"Respiratory Infection": 1.8, "Inclusion Body Disease (IBD)": 2.0,
+                  "Mite Infestation": 1.5, "Anorexia/Feeding Refusal": 2.0}},
+        {"id": "reptile_bearded_dragon", "name": "Bearded Dragon", "name_ja": "フトアゴヒゲトカゲ",
+         "risk": {"Metabolic Bone Disease": 2.0, "Adenovirus Infection": 2.0,
+                  "Yellow Fungus Disease": 1.8, "Impaction": 1.5}},
+        {"id": "reptile_leopard_gecko", "name": "Leopard Gecko", "name_ja": "ヒョウモントカゲモドキ",
+         "risk": {"Metabolic Bone Disease": 1.5, "Cryptosporidiosis": 2.0,
+                  "Impaction": 1.8}},
     ],
     "tortoise": [
         {"id": "tortoise_russian", "name": "Russian Tortoise", "name_ja": "ロシアリクガメ",
@@ -558,10 +609,22 @@ SPECIES_BREEDS: Dict[str, List[Dict[str, Any]]] = {
     "sugar_glider": [
         {"id": "sugar_glider_standard", "name": "Standard Grey", "name_ja": "スタンダードグレー",
          "risk": {}},
+        {"id": "sugar_glider_leucistic", "name": "Leucistic", "name_ja": "リューシスティック",
+         "risk": {"Nutritional Secondary Hyperparathyroidism": 1.5, "Metabolic Bone Disease": 1.5}},
+        {"id": "sugar_glider_white_faced_blonde", "name": "White Faced Blonde", "name_ja": "ホワイトフェイスブロンド",
+         "risk": {"Self-Mutilation": 1.3, "Stress-Related Disorders": 1.3}},
     ],
     "degu": [
         {"id": "degu_standard", "name": "Standard (Agouti)", "name_ja": "スタンダード（アグーチ）",
          "risk": {"Diabetes Mellitus": 2.5, "Cataracts": 2.0, "Dental Disease": 2.0, "Dental Malocclusion": 2.0}},
+        {"id": "degu_blue", "name": "Blue", "name_ja": "ブルー",
+         "risk": {"Diabetes Mellitus": 2.5, "Cataracts": 2.0, "Dental Disease": 2.0, "Dental Malocclusion": 2.0}},
+        {"id": "degu_pied", "name": "Pied", "name_ja": "パイド",
+         "risk": {"Diabetes Mellitus": 2.5, "Cataracts": 2.0}},
+    ],
+    "exotic_other": [
+        {"id": "exotic_other_general", "name": "Other Exotic", "name_ja": "その他のエキゾチック",
+         "risk": {}},
     ],
 }
 
@@ -1807,6 +1870,21 @@ def analyze_symptoms_generic(
     symptom_set: Set[str] = set(symptoms)
     suspected: List[Dict[str, Any]] = []
 
+    # =========================================================================
+    # IDF (Inverse Disease Frequency) weighted scoring v2.0
+    # 馬エンジンと同等: 稀な症状ほど高い重みを持つ
+    # IDF(s) = log(N / df(s))  where df(s) = 症状 s を持つ疾患数
+    # =========================================================================
+    n_diseases = len(diseases)
+    symptom_df: Dict[str, int] = {}  # document frequency per symptom
+    for d in diseases:
+        for s in d.get("symptoms", set()):
+            symptom_df[s] = symptom_df.get(s, 0) + 1
+    symptom_idf: Dict[str, float] = {}
+    for s, df_count in symptom_df.items():
+        # Laplace smoothing: log((N+1) / df) で N=1 でも IDF > 0 を保証
+        symptom_idf[s] = _math.log((n_diseases + 1) / df_count) if df_count > 0 else 1.0
+
     # Resolve age stage
     age_stage: str | None = None
     if age_years is not None:
@@ -1888,6 +1966,8 @@ def analyze_symptoms_generic(
         except ImportError:
             pass
 
+    n_checked = len(symptom_set)
+
     for disease in diseases:
         disease_symptoms = set(disease.get("symptoms", set()))
         if not disease_symptoms:
@@ -1902,20 +1982,42 @@ def analyze_symptoms_generic(
         match_count = len(matching)
         total_count = len(disease_symptoms)
 
-        # Weighted coverage: 臨床的重要度で重み付けしたカバー率
-        # 病態特異的な症状（seizures=2.5, jaundice=2.5 等）が一致すると
-        # 非特異的な症状（lethargy=1.0）より大きくスコアに寄与する
+        # =====================================================================
+        # IDF重み付きスコア（馬エンジンと同等のアルゴリズム）
+        # 臨床的重要度 (SYMPTOM_CLINICAL_WEIGHTS) と統計的希少性 (IDF) を
+        # ハイブリッドで組み合わせる
+        # =====================================================================
+        # IDF重み付きカバー率
+        matched_idf = sum(symptom_idf.get(s, 1.0) for s in matching)
+        total_idf = sum(symptom_idf.get(s, 1.0) for s in disease_symptoms)
+        idf_ratio = matched_idf / total_idf if total_idf > 0 else 0.0
+
+        # 臨床的重み付きカバー率（既存）
         matching_weight = sum(
             SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) for s in matching
         )
         total_weight = sum(
             SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) for s in disease_symptoms
         )
-        coverage = matching_weight / total_weight
+        clinical_ratio = matching_weight / total_weight if total_weight > 0 else 0.0
 
-        # 症状数による補正: 疾患の定義症状が少ない場合、カバー率が過大に
-        # なるためペナルティを適用。定義症状が多い疾患は特異性が高いため
-        # ボーナスを付与する。
+        # ハイブリッドスコア: IDF 60% + 臨床重み 40%
+        # IDF は疾患DB内での統計的希少性、臨床重みは医学的重要度
+        coverage = idf_ratio * 0.6 + clinical_ratio * 0.4
+
+        # --- 組合せボーナス（馬エンジンと同等） ---
+        # 複数症状が一致するほど信頼度が上昇
+        combo_bonus = 1.0
+        if match_count >= 5:
+            combo_bonus = 1.20
+        elif match_count >= 4:
+            combo_bonus = 1.15
+        elif match_count >= 3:
+            combo_bonus = 1.08
+        elif match_count == 2:
+            combo_bonus = 1.0
+
+        # 症状数による補正（疾患の定義症状が少ない場合のペナルティ）
         if total_count <= 2:
             symptom_count_factor = 0.75
         elif total_count <= 4:
@@ -1925,11 +2027,48 @@ def analyze_symptoms_generic(
         else:
             symptom_count_factor = 1.0
 
-        # 一致症状が1つだけの場合はスコアを抑制（ノイズ除去）
+        # ノイズ抑制: 1症状マッチの場合
         if match_count == 1:
-            symptom_count_factor *= 0.6
+            if total_count >= 3:
+                # 大きな疾患に1症状だけマッチ → 信頼度を大幅に下げる
+                combo_bonus = 0.5
+            elif total_count == 1:
+                # 1症状疾患 → IDFが低い（汎用症状）ならペナルティ
+                the_symptom = next(iter(disease_symptoms))
+                s_idf = symptom_idf.get(the_symptom, 3.0)
+                if s_idf < 3.0:
+                    combo_bonus = 0.55
+                elif s_idf < 4.0:
+                    combo_bonus = 0.75
+            else:
+                combo_bonus = 0.6
 
-        match_percent = round(coverage * symptom_count_factor * 100)
+        # =====================================================================
+        # ベイズ除外診断: 症状の不在によるペナルティ（馬エンジンと同等）
+        # P(D|absent_symptom) ∝ P(D) × (1 - P(symptom|D) × observability)
+        # =====================================================================
+        absence_penalty = 0.0
+        absent_key_symptoms: List[str] = []
+
+        if n_checked >= 3 and total_count >= 3:
+            absent = disease_symptoms - matching
+            for s in absent:
+                s_idf = symptom_idf.get(s, 1.0)
+                # IDF ≥ 4.0 の特徴的症状が不在 → 除外根拠
+                if s_idf >= 4.0:
+                    absent_key_symptoms.append(s)
+
+            if absent_key_symptoms:
+                # 観察徹底度: ユーザーがチェックした症状数に応じた重み
+                observability = min(0.7, n_checked * 0.1)
+                absent_idf_sum = sum(symptom_idf.get(s, 1.0) for s in absent_key_symptoms)
+                max_penalty = absent_idf_sum / (total_idf + 1.0)
+                absence_penalty = min(0.35, max_penalty * observability)
+
+        # 基本スコア（IDF + 組合せ + ノイズ抑制 + ベイズ除外）
+        match_percent = round(
+            coverage * symptom_count_factor * combo_bonus * (1.0 - absence_penalty) * 100
+        )
 
         # Apply onset multiplier (緩和: ペナルティを軽減)
         onset_multiplier = 1.0
@@ -2034,8 +2173,12 @@ def analyze_symptoms_generic(
             "total_symptoms": len(disease_symptoms),
             # Scoring transparency (consumed by frontend)
             "scoring_detail": {
-                "weighted_recall": round(matching_weight / total_weight if total_weight > 0 else 0, 3),
+                "idf_ratio": round(idf_ratio, 3),
+                "clinical_ratio": round(clinical_ratio, 3),
+                "weighted_recall": round(coverage, 3),
                 "coverage": round(coverage, 3),
+                "combo_bonus": round(combo_bonus, 3),
+                "absence_penalty": round(absence_penalty, 3),
                 "cluster_boost": round(max(pair_multiplier, triple_multiplier), 3),
                 "negative_penalty": round(symptom_count_factor, 3),
                 "specificity_bonus": round(
@@ -2051,11 +2194,22 @@ def analyze_symptoms_generic(
                 "age_multiplier": round(age_multiplier, 3),
                 "onset_multiplier": round(onset_multiplier, 3),
                 "lab_multiplier": round(lab_multiplier, 3),
+                "confidence_level": (
+                    "high" if adjusted_percent >= 50 else
+                    "medium" if adjusted_percent >= 30 else "low"
+                ),
             },
             # Key symptoms of this disease that the user has NOT reported
+            # IDF ≥ 3.0 の特徴的症状 OR 臨床重み ≥ 1.5 の重要症状
             "missing_key_symptoms": sorted(
                 s for s in (disease_symptoms - symptom_set)
-                if SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) >= 1.5
+                if symptom_idf.get(s, 1.0) >= 3.0 or SYMPTOM_CLINICAL_WEIGHTS.get(s, _DEFAULT_SYMPTOM_WEIGHT) >= 1.5
+            ),
+            # ベイズ除外: 不在の特徴的症状（高IDF）
+            "absent_key_symptoms": sorted(absent_key_symptoms),
+            "rule_out_note": (
+                f"特徴的症状の不在: {', '.join(sorted(absent_key_symptoms)[:3])}"
+                if absent_key_symptoms and absence_penalty > 0.05 else ""
             ),
             "_urgency": disease.get("urgency", "low"),
             "_match_ratio": coverage,

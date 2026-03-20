@@ -36,6 +36,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "種に適したUVBライトの設置（6ヶ月毎に交換）、カルシウムパウダーでの餌のダスティング（UVB十分ならD3なし、不十分ならD3入り）、適切なCa:P食事比（2:1）の維持、ビタミンD3合成のための適切なバスキング温度の確保。",
         "urgency": "high",
         "recommended_tests": ["blood_calcium_phosphorus", "radiographs", "uvb_husbandry_review"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Nutritional Secondary Hyperparathyroidism",
@@ -55,6 +57,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "MBDの予防と同様：適切なUVBライト、Ca:P比を考慮したカルシウム強化食、種に応じたビタミンD3の供給、定期的な獣医学的健康診断。",
         "urgency": "high",
         "recommended_tests": ["blood_calcium_phosphorus", "pth_levels", "radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin A Deficiency (Hypovitaminosis A)",
@@ -74,6 +78,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "ビタミンA豊富な食材を含む多様な食事の提供。餌昆虫にビタミンAを含む野菜でガットローディング。種に適したマルチビタミンサプリメント（既成ビタミンA含有）を週1-2回使用。単調な食事を避ける。",
         "urgency": "moderate",
         "recommended_tests": ["blood_vitamin_a_levels", "physical_exam", "dietary_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin D3 Deficiency",
@@ -93,6 +99,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "種に応じた適切なUVBライトの提供、UVBバルブの6ヶ月毎交換、直接（フィルターなし）UVB照射の確保、UVB供給が不十分な場合はビタミンD3のサプリメント。",
         "urgency": "moderate",
         "recommended_tests": ["blood_vitamin_d3", "blood_calcium_phosphorus", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypocalcemia",
@@ -112,6 +120,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "適切な食事性カルシウムとUVBの提供。繁殖雌では産卵前・産卵中のカルシウム補給強化。ハイリスク個体の定期的な血中カルシウムモニタリング。",
         "urgency": "emergency",
         "recommended_tests": ["blood_calcium", "ionized_calcium", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypervitaminosis A",
@@ -131,6 +141,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "ビタミンAサプリメントは控えめに使用 — 注射用ビタミンAは1,000-5,000 IU/kgを超えず、2週間以内の繰り返しは避ける。可能な場合はβカロテン源（中毒を起こさない）を優先。獣医学的用量指針を厳守。",
         "urgency": "moderate",
         "recommended_tests": ["blood_vitamin_a_levels", "liver_function_tests", "dietary_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypervitaminosis D3",
@@ -150,6 +162,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "D3補給はメーカーの指針に従う。高用量の経口D3と高カルシウム食を同時に併用しない。可能な場合はUVBライトを主要なD3源として使用する（皮膚合成は自己調節的）。",
         "urgency": "high",
         "recommended_tests": ["blood_calcium", "blood_chemistry", "radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Thiamine (Vitamin B1) Deficiency",
@@ -169,6 +183,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "チアミナーゼ豊富な魚を主食として使用しない。魚を給餌する場合はチアミン補給で前処理するか、チアミナーゼ不活化のため魚を短時間加熱する。多様な餌と適切なビタミン補給を使用。",
         "urgency": "high",
         "recommended_tests": ["blood_thiamine_levels", "neurological_exam", "dietary_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Iron Storage Disease (Hemochromatosis)",
@@ -188,6 +204,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "鉄含量を管理した種に適した食事を与える。不要な鉄サプリメントを避ける。感受性の高い種では鉄と肝パラメーターの定期血液検査。",
         "urgency": "moderate",
         "recommended_tests": ["liver_function_tests", "blood_iron_levels", "liver_biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Articular / Visceral Gout ────────────────────────────────────────
     {
@@ -208,6 +226,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "常に十分な水分補給（水皿、定期的な入浴・霧吹き）。草食種での過剰タンパクを避ける。腎毒性薬剤を避ける。高齢爬虫類の定期的な血中尿酸モニタリング。",
         "urgency": "high",
         "recommended_tests": ["blood_uric_acid", "radiographs", "joint_aspiration"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Visceral Gout",
@@ -227,6 +247,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "関節痛風と同様：水分補給の維持、腎毒性薬剤の回避、適切な食事、定期的な腎モニタリング。腎疾患の早期発見と治療が重要。",
         "urgency": "emergency",
         "recommended_tests": ["blood_uric_acid", "blood_chemistry", "radiographs", "ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Respiratory ──────────────────────────────────────────────────────
     {
@@ -247,6 +269,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "種に適したPOTZの維持、適切な湿度と換気、新規動物の60-90日間検疫、ストレスの最小化、ケージ間の衛生管理の徹底。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "culture_sensitivity", "radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lower Respiratory Infection (Pneumonia)",
@@ -266,6 +290,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "至適POTZと湿度の維持、URIの速やかな治療、誤嚥リスクの回避（背臥位での強制給餌を避ける）、新規動物の検疫、適切な換気の確保。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "tracheal_wash", "culture_sensitivity", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mycoplasma Respiratory Infection",
@@ -285,6 +311,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規カメ類をPCR検査付きで最低90日間検疫。マイコプラズマ陽性・陰性動物を混合しない。繁殖や集団飼育の前に検査。ストレスを軽減し至適飼育管理を維持。",
         "urgency": "moderate",
         "recommended_tests": ["pcr_mycoplasma", "nasal_culture", "radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aspergillosis",
@@ -304,6 +332,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "至適温度と換気の維持、抗真菌カバーなしの長期抗菌薬投与の回避、床材の清潔乾燥の維持、ストレスの最小化、適切な飼育管理による強い免疫機能の維持。",
         "urgency": "high",
         "recommended_tests": ["fungal_culture", "radiographs", "endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Oral / Stomatitis ────────────────────────────────────────────────
     {
@@ -324,6 +354,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "過密飼育・闘争の回避、吻部擦過傷防止の適切な床材使用、至適POTZの維持、適切な栄養確保、ハンドリングストレスの最小化。定期健診時の口腔検査。",
         "urgency": "high",
         "recommended_tests": ["oral_exam", "culture_sensitivity", "complete_blood_count"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Oral Abscess",
@@ -343,6 +375,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "口腔外傷の予防、口内炎の早期治療、良好な口腔衛生と至適飼育管理の維持。健診時の定期的な口腔検査。",
         "urgency": "high",
         "recommended_tests": ["oral_exam", "culture_sensitivity", "radiographs"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Parasitic ────────────────────────────────────────────────────────
     {
@@ -363,6 +397,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規動物の検疫と糞便検査。可能な場合は繁殖餌を使用。定期的な床材交換で清潔な飼育環境を維持。6-12ヶ月毎の定期糞便検査。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "fecal_float", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cryptosporidiosis",
@@ -382,6 +418,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規動物のPCR検査付き厳格な検疫（90日以上）。オーシストは大部分の消毒薬に耐性 — アンモニア（5-10%）または蒸気滅菌を使用。ケージ間で器具を共用しない。コレクションに追加する前に検査。",
         "urgency": "high",
         "recommended_tests": ["pcr_cryptosporidium", "acid_fast_stain", "gastric_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Coccidia Infection",
@@ -401,6 +439,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "清潔なケージの維持、過密飼育の回避、糞便検査付きの新規動物検疫、糞便の速やかな除去、アンモニア系消毒液による消毒（オーシストは大部分の消毒薬に耐性）。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "fecal_float"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Amoebic Infection (Entamoeba)",
@@ -420,6 +460,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "カメ類をヘビやトカゲと絶対に同居させない。全ての新規動物を糞便検査付きで検疫。至適温度と衛生の維持。種群ごとに別々の器具を使用。",
         "urgency": "high",
         "recommended_tests": ["fecal_exam", "fecal_wet_mount", "pcr_entamoeba"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hexamita Infection",
@@ -439,6 +481,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "清潔な水の供給維持、過密飼育の回避、新規動物の検疫、衛生管理の実践。カメ類の定期的な糞便スクリーニング。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_wet_mount", "fecal_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "External Mites (Ophionyssus)",
@@ -458,6 +502,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規爬虫類を30-60日間検疫。購入前に動物を入念に検査。ケージ間で床材や器具を共用しない。コレクションに予防的捕食性ダニを使用。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "skin_scraping", "mite_identification"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tick Infestation",
@@ -477,6 +523,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "野生捕獲爬虫類の入念な検査。屋外飼育動物の検疫。清潔な飼育環境の維持。マダニ侵入防止のための屋外ケージのスクリーン設置。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "complete_blood_count", "blood_smear"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pentastomid Infection",
@@ -496,6 +544,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "感染中間宿主を避けるため繁殖餌を使用。野生捕獲動物の徹底的な呼吸器評価付き検疫。虫卵の糞便検査。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "endoscopy", "fecal_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Myiasis (Fly Strike)",
@@ -515,6 +565,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "屋外ケージのハエ防止スクリーン設置。清潔な飼育環境の維持と汚れた動物の速やかな清拭。創傷の速やかな治療。衰弱動物へのハエ侵入防止。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "wound_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Skin / Integument ────────────────────────────────────────────────
     {
@@ -535,6 +587,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "種に応じた適切な湿度の維持（湿度シェルター/モイストボックス）、脱皮開始のための粗面（樹皮、岩）の設置、十分な水分補給、外部寄生虫の速やかな治療。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "husbandry_review", "skin_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Scale Rot (Ulcerative Dermatitis)",
@@ -554,6 +608,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "定期的な交換で清潔・乾燥した床材を維持。適切な換気と乾燥したバスキングエリアの提供。毎日の糞便のスポットクリーニング。ケージに適切な湿度勾配を確保。",
         "urgency": "moderate",
         "recommended_tests": ["skin_culture", "skin_biopsy", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Blister Disease",
@@ -573,6 +629,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "適切な床材の湿度レベル、十分な換気、乾燥した退避場所の確保。日常的なハンドリング時に腹面を確認する。",
         "urgency": "moderate",
         "recommended_tests": ["skin_exam", "culture_sensitivity", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Thermal Burns",
@@ -592,6 +650,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "ヒートロックを絶対に使用しない。全ての熱源をサーモスタットで制御。ヒートランプとセラミックヒーターにガードを使用。赤外線温度計で表面温度をモニター。大部分の種でバスキング表面温度は最大40-45°Cを超えないこと。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "wound_assessment", "husbandry_review"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dermatophytosis (Fungal Skin Infection)",
@@ -611,6 +671,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "適切な湿度と換気の維持、新規動物の検疫、過密飼育の回避、ケージ間の衛生管理の実践、感染動物のハンドリング時の手袋着用（人獣共通感染リスク）。",
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "skin_scraping", "skin_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bacterial Dermatitis",
@@ -630,6 +692,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "清潔な飼育環境の維持、皮膚外傷の予防、外部寄生虫の速やかな治療、至適飼育条件の確保。",
         "urgency": "moderate",
         "recommended_tests": ["skin_culture", "culture_sensitivity", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Subcutaneous Abscess",
@@ -649,6 +713,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "咬傷の予防（攻撃的な個体の分離）、適切な衛生管理、無菌的注射手技、創傷の速やかな治療。",
         "urgency": "moderate",
         "recommended_tests": ["fine_needle_aspirate", "culture_sensitivity", "radiographs"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Rostral Abrasion (Nose Rub)",
@@ -668,6 +734,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "十分な隠れ家と視覚バリアの提供、適切なケージサイズ、外部ストレスの最小化、擦過傷防止のためスクリーン蓋を滑らかな素材で被覆。新規動物には順応期間を設ける。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "wound_assessment", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Shell Diseases (Chelonians) ──────────────────────────────────────
     {
@@ -688,6 +756,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "清潔な水と床材の維持、乾燥したバスキングエリアの提供、甲羅外傷の速やかな治療、十分なUVBと栄養（ビタミンAを含む）の確保、甲羅の定期的な検査。",
         "urgency": "moderate",
         "recommended_tests": ["shell_exam", "shell_culture", "radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Shell Fracture / Trauma",
@@ -707,6 +777,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "屋外カメ類の監視、犬侵入防止ケージの使用、道路から離れた逃げ道の確保、捕食者に対するケージの安全確保、落下防止のための慎重なハンドリング。",
         "urgency": "emergency",
         "recommended_tests": ["radiographs", "wound_assessment", "complete_blood_count"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pyramiding",
@@ -726,6 +798,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "高湿度環境（湿度ボックス/チャンバー）での孵化仔の飼育、適切な高繊維・低タンパク食の給餌、UVBライトの提供、過給餌の回避、十分な運動スペースの確保。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "dietary_review", "husbandry_review"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Gastrointestinal ─────────────────────────────────────────────────
     {
@@ -746,6 +820,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "非粒状床材（新聞紙、爬虫類用カーペット、タイル）または嚥下不可能な大粒子床材の使用。適切なサイズの餌の給餌。適切な温度と水分補給の維持。草食種への食物繊維の提供。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "physical_exam", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Gastroenteritis",
@@ -765,6 +841,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新鮮で適切な餌の給餌、適切な温度の維持、ストレスの最小化、衛生管理の実践、新規動物の検疫、定期的な糞便寄生虫スクリーニング。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "culture_sensitivity", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Foreign Body Ingestion",
@@ -784,6 +862,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "非摂取性床材の使用、皿/ボウル上での給餌（床材上に直接置かない）、ケージからの小さな緩い物体の除去、ケージ外活動時の監視。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "ultrasound", "contrast_study"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hepatic Lipidosis (Fatty Liver Disease)",
@@ -803,6 +883,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "適切な量の種に合った食事の給餌、高脂肪食品の回避、十分な運動スペースの提供、適切な飼育管理の維持、定期的なボディコンディションのモニタリング。",
         "urgency": "high",
         "recommended_tests": ["liver_function_tests", "ultrasound", "liver_biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Salmonellosis",
@@ -822,6 +904,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての爬虫類がサルモネラ保菌者であると想定する。厳格な衛生管理：ハンドリング後の手洗い、食品調理エリアへの爬虫類持ち込み禁止、爬虫類の周りでの小児の監視、希釈漂白剤による表面消毒。免疫不全者は爬虫類との接触を避ける。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_culture", "blood_culture", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Dehydration / General ────────────────────────────────────────────
     {
@@ -842,6 +926,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "常に新鮮な水を提供、浸漬で飲水する種への定期的な入浴、適切な湿度の維持、衰弱動物の水へのアクセス確保。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "blood_chemistry", "packed_cell_volume"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Anorexia (Non-specific)",
@@ -861,6 +947,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "至適飼育条件の維持、ストレスの最小化、適切な餌の提供、季節的行動変化（休眠）の許容、定期的な獣医学的健診。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "blood_chemistry", "husbandry_review", "fecal_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Obesity",
@@ -880,6 +968,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "種に適切な量と間隔での給餌、環境エンリッチメントの提供、運動のための十分なケージサイズの確保、定期的なボディコンディションのモニタリング。",
         "urgency": "low",
         "recommended_tests": ["physical_exam", "body_condition_scoring", "dietary_review"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Viral Diseases ───────────────────────────────────────────────────
     {
@@ -900,6 +990,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規ボア科のPCR検査付き厳格な検疫（6ヶ月以上）。積極的なダニ駆除。ケージ間で器具を共用しない。コレクションのPCRスクリーニング。陽性動物の淘汰または永続的隔離。",
         "urgency": "emergency",
         "recommended_tests": ["pcr_ibd", "liver_biopsy", "complete_blood_count"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Adenovirus Infection",
@@ -919,6 +1011,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規フトアゴヒゲトカゲをコレクション導入前にPCR検査。最低90日間の検疫。衛生管理の実践。ペットショップの全てのフトアゴヒゲトカゲは保菌者の可能性を想定。陽性動物は繁殖させない。",
         "urgency": "high",
         "recommended_tests": ["pcr_adenovirus", "liver_biopsy", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Paramyxovirus Infection",
@@ -938,6 +1032,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規ヘビの血清学/PCR検査付き厳格な検疫（90日以上）。ケージ間の空気感染防止のための良好な換気。検疫用の独立した空気空間。器具の共用禁止。呼吸器疾患の最初の徴候での即時隔離と検査。",
         "urgency": "emergency",
         "recommended_tests": ["pcr_paramyxovirus", "hemagglutination_inhibition", "radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Nidovirus Infection",
@@ -957,6 +1053,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規ボールパイソンを導入前にPCR検査。90日以上の検疫。ケージ間の良好な換気。器具の共用禁止。ペアリング前の繁殖動物の検査。",
         "urgency": "high",
         "recommended_tests": ["pcr_nidovirus", "oral_swab", "tracheal_wash"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Herpesvirus Infection",
@@ -976,6 +1074,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規カメ類の検疫とPCR検査。検査なしに異なる由来の動物を混合しない。ストレスの最小化。ケージ間の厳格な衛生管理の実践。",
         "urgency": "high",
         "recommended_tests": ["pcr_herpesvirus", "viral_isolation", "liver_function_tests"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ranavirus Infection",
@@ -995,6 +1095,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "PCR検査付きの新規動物の検疫。出所不明の両生類や魚類と爬虫類を混合しない。1%次亜塩素酸ナトリウムで消毒。必要に応じてアウトブレイクを獣医当局に報告。",
         "urgency": "emergency",
         "recommended_tests": ["pcr_ranavirus", "histopathology", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Iridovirus Infection",
@@ -1014,6 +1116,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規動物の検疫、外部寄生虫の駆除、衛生管理の維持、利用可能な場合のPCR検査。",
         "urgency": "high",
         "recommended_tests": ["pcr_iridovirus", "histopathology", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Septicemia / Systemic ────────────────────────────────────────────
     {
@@ -1034,6 +1138,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての感染と創傷の速やかな治療。至適飼育管理の維持。免疫抑制状態の回避。早期感染発見のための定期的な健康モニタリング。",
         "urgency": "emergency",
         "recommended_tests": ["blood_culture", "complete_blood_count", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Eye Diseases ─────────────────────────────────────────────────────
     {
@@ -1054,6 +1160,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "清潔な床材の維持、十分なビタミンA栄養、適切な湿度、環境刺激物の軽減。",
         "urgency": "moderate",
         "recommended_tests": ["ophthalmic_exam", "eye_culture", "blood_vitamin_a_levels"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Retained Spectacle (Retained Eye Cap)",
@@ -1073,6 +1181,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "湿度シェルター/モイストボックスで適切な湿度を維持。十分な水分補給の確保。毎回の脱皮後に残存スペクタクルを確認。外部寄生虫と全身疾患の治療。",
         "urgency": "moderate",
         "recommended_tests": ["ophthalmic_exam", "physical_exam", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Subspectacular Abscess",
@@ -1092,6 +1202,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "口内炎と呼吸器感染の速やかな治療。残存スペクタクル防止のための適切な湿度の維持。健診時の定期的な眼科検査。",
         "urgency": "high",
         "recommended_tests": ["ophthalmic_exam", "culture_sensitivity", "ultrasound"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Corneal Ulcer",
@@ -1111,6 +1223,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "滑らかで非研磨性の床材の使用、鋭利なケージ家具の回避、適切な湿度の維持、攻撃的な個体の分離、残存スペクタクルの速やかな治療。",
         "urgency": "high",
         "recommended_tests": ["ophthalmic_exam", "fluorescein_stain", "eye_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Reproductive ─────────────────────────────────────────────────────
     {
@@ -1131,6 +1245,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "適切な産卵場所の提供、至適温度とカルシウム栄養の維持、十分な水分補給の確保、非繁殖雌の避妊手術の検討。",
         "urgency": "emergency",
         "recommended_tests": ["radiographs", "ultrasound", "blood_calcium"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Pre-ovulatory Follicular Stasis",
@@ -1150,6 +1266,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "繁殖種への適切な環境サイクルの提供。繁殖目的でない雌の外科的避妊手術の検討。繁殖活性のある雌の超音波モニタリング。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "radiographs", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Post-ovulatory Egg Stasis",
@@ -1169,6 +1287,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "卵塞の予防と同様：適切な産卵場所、カルシウム栄養、水分補給、温度管理。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "ultrasound", "blood_calcium"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Prolapse ─────────────────────────────────────────────────────────
     {
@@ -1189,6 +1309,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "便秘、寄生虫、その他のいきみの原因を速やかに治療。十分なカルシウムと水分補給の維持。繁殖雌への適切な産卵場所の提供。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "radiographs", "ultrasound"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hemipenal Prolapse",
@@ -1208,6 +1330,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "強制交尾の回避、必要時のみ適切なプロービング/ポッピング技法の使用、便秘の治療、良好な総排泄腔衛生の維持。",
         "urgency": "high",
         "recommended_tests": ["physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Gastric/Intestinal Prolapse",
@@ -1227,6 +1351,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "消化管寄生虫と腸炎の速やかな治療。適切な食事と水分補給の提供。いきみの徴候のモニタリング。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "radiographs"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Renal / Urinary ──────────────────────────────────────────────────
     {
@@ -1247,6 +1373,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "十分な水分補給の維持、種に適した食事の給餌、腎毒性薬剤の回避、高齢爬虫類の腎数値モニタリング。",
         "urgency": "high",
         "recommended_tests": ["blood_uric_acid", "blood_chemistry", "ultrasound", "kidney_biopsy"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Bladder Stones (Urolithiasis)",
@@ -1266,6 +1394,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "十分な水分補給（入浴、水皿、霧吹き）、草食種への種に適した低タンパク食、尿酸値を含む定期的な獣医学的モニタリング。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "ultrasound", "urinalysis"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Neurological ─────────────────────────────────────────────────────
     {
@@ -1286,6 +1416,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "至適飼育管理、栄養、温度の維持。新規動物の検疫。毒素曝露の回避。繁殖プログラムでの遺伝性疾患スクリーニング（例：スパイダーモルフのボールパイソン）。",
         "urgency": "high",
         "recommended_tests": ["neurological_exam", "blood_chemistry", "radiographs", "ct_mri"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Spinal Osteopathy / Spondylosis",
@@ -1305,6 +1437,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "MBDの予防、外傷の回避（適切なハンドリング、安全なケージ）、感染の早期治療、加齢動物の変性変化のモニタリング。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "ct_mri", "neurological_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── Neoplasia ────────────────────────────────────────────────────────
     {
@@ -1325,6 +1459,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "確立された予防法はない。腫瘤の早期発見のための定期的な身体検査。疑わしい増殖物の速やかな生検。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiographs"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Lymphoma",
@@ -1344,6 +1480,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "既知の予防法はない。早期発見のための定期的な獣医学的検査。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "complete_blood_count", "radiographs", "ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Fibrosarcoma",
@@ -1363,6 +1501,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "確立された予防法はない。以前の手術部位や注射部位の腫脹をモニタリング。疑わしい腫瘤の早期生検。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiographs"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Melanoma",
@@ -1382,6 +1522,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "既知の予防法はない。色素性病変の変化を検出するための定期的な検査。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     # ── Organ Failure / Systemic ─────────────────────────────────────────
     {
@@ -1402,6 +1544,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "肝毒性物質の回避、適切な食事の給餌、肥満の予防、適切な飼育管理の維持、ハイリスク種での定期的な肝数値モニタリング。",
         "urgency": "emergency",
         "recommended_tests": ["liver_function_tests", "blood_chemistry", "ultrasound", "liver_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cardiac Disease",
@@ -1421,6 +1565,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "ビタミンEとセレンを含む十分な栄養の提供。全身感染の速やかな治療。高齢動物の心評価を含む定期的な獣医学的検査。",
         "urgency": "high",
         "recommended_tests": ["echocardiography", "radiographs", "electrocardiogram"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # ── Miscellaneous ────────────────────────────────────────────────────
     {
@@ -1441,6 +1587,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "バックアップシステム付きのサーモスタット制御暖房の信頼性確保。加温シェルターなしの寒冷地での屋外飼育の回避。飼育環境温度の毎日のモニタリング。フェイルセーフ警報付きサーモスタットの使用。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hyperthermia (Heat Stroke)",
@@ -1460,6 +1608,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "常にクールリトリート付きの温度勾配を提供。高温カットオフ付きの信頼性の高いサーモスタットの使用。直射日光下や車内に爬虫類を放置しない。デジタル温度計での温度モニタリング。",
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "blood_chemistry", "husbandry_review"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypothermia",
@@ -1479,6 +1629,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "信頼性の高い暖房器具でPOTZを適切に維持。バックアップ暖房システムの使用。最高/最低温度計での温度モニタリング。病気の動物に補助的暖房を確保。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "temperature_check", "husbandry_review"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Trauma / Bite Wounds",
@@ -1498,6 +1650,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "攻撃的な種は個別飼育。冷凍解凍餌の給餌。防護された熱源の使用。飼育設備の固定。屋外活動の監視。捕食者のアクセス防止。",
         "urgency": "moderate",
         "recommended_tests": ["wound_assessment", "radiographs", "culture_sensitivity"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Stress Syndrome",
@@ -1517,6 +1671,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "飼育前に種固有の飼育要件を調査。適切なケージサイズ、温度勾配、隠れ場所、エンリッチメントの提供。ストレスに敏感な種のハンドリングを最小限に。",
         "urgency": "low",
         "recommended_tests": ["husbandry_review", "physical_exam"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Regurgitation Syndrome",
@@ -1536,6 +1692,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "適切なPOTZの維持、給餌後48時間はハンドリングしない、適切なサイズの餌の給餌、ストレスのない環境の提供、感染性原因防止のための新規動物の検疫。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "radiographs", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Toxicosis (Poisoning)",
@@ -1555,6 +1713,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "爬虫類に安全な床材と洗浄製品のみの使用。亜鉛メッキワイヤーケージの回避。爬虫類に承認されていないノミ/ダニ製品の不使用。ケージから有毒植物の除去。水質の確保。",
         "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "toxicology_screen", "physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chronic Malnutrition",
@@ -1574,6 +1734,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "種固有の食事要件の調査。種に適した多様な食事の提供（昆虫食、草食、肉食、雑食）。昆虫へのカルシウム/ビタミンD3のダスティング。飼料昆虫のガットローディング。適切なビタミンの補給。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "dietary_review", "physical_exam"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
@@ -1593,6 +1755,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規動物を60-90日間検疫。厳格な衛生管理の維持。感染動物との接触回避。免疫機能維持のための適切な飼育管理。コレクションへの導入前にフトアゴヒゲトカゲの皮膚病変のスクリーニング。",
         "urgency": "high",
         "recommended_tests": ["fungal_culture", "skin_biopsy", "pcr_canv"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Osteomyelitis",
@@ -1612,6 +1776,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての外傷への適切な創傷管理。清潔な飼育環境の維持。血行性播種前の感染の早期治療。無菌手術技法。",
         "urgency": "high",
         "recommended_tests": ["radiographs", "bone_culture", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Peritonitis / Coelomitis",
@@ -1631,6 +1797,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "生殖関連体腔炎を予防するため非繁殖雌の避妊手術。卵塞の速やかな治療。消化管異物の回避。無菌手術技法の維持。",
         "urgency": "emergency",
         "recommended_tests": ["coelomic_fluid_analysis", "ultrasound", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Panophthalmitis",
@@ -1650,6 +1818,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "上行感染を予防するため口内炎の早期治療。清潔な飼育環境の維持。眼外傷や感染の速やかな治療。",
         "urgency": "emergency",
         "recommended_tests": ["ophthalmic_exam", "eye_culture", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chlamydiosis",
@@ -1669,6 +1839,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "PCR検査を伴う新規動物の検疫。良好な衛生管理の維持。ストレスの最小化。繁殖動物のスクリーニング。",
         "urgency": "moderate",
         "recommended_tests": ["pcr_chlamydia", "conjunctival_swab", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Mycobacteriosis",
@@ -1688,6 +1860,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規動物の検疫。水質の維持。肉芽腫性病変の抗酸菌染色。疑い例の取り扱い時のPPE。定期的な健康診断によるコレクション動物のスクリーニング。",
         "urgency": "high",
         "recommended_tests": ["acid_fast_stain", "culture", "biopsy", "radiographs"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
 
     # ── 追加疾患 (Additional Diseases) ──
@@ -1709,6 +1883,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規パイソンの検疫。病変のスクリーニング。ワクチンは利用不可。罹患動物の隔離。",
         "urgency": "high",
         "recommended_tests": ["PCR_sunshinevirus", "histopathology", "liver_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ferlasvirus Infection",
@@ -1728,6 +1904,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規ボア科の厳格な検疫。積極的なダニ駆除プログラム。新規導入動物のPCRスクリーニング。陽性動物の隔離。",
         "urgency": "high",
         "recommended_tests": ["PCR_ferlasvirus", "radiography", "tracheal_wash"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tortoise Intranuclear Coccidia (TINC)",
@@ -1747,6 +1925,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "糞便スクリーニングを伴う新規リクガメの90日以上の検疫。新規動物のPCR検査。ケージ間の厳格な衛生管理の維持。リクガメ種の混合飼育の回避。",
         "urgency": "high",
         "recommended_tests": ["PCR_TINC", "nasal_flush_cytology", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Agamid Adenovirus Infection",
@@ -1766,6 +1946,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規フトアゴヒゲトカゲの検疫とアデノウイルスPCR検査。厳格な衛生管理の維持。幼体と成体を混合しない。繁殖個体の検査。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_adenovirus", "histopathology", "liver_biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Reovirus Infection",
@@ -1785,6 +1967,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規動物の検疫。良好な衛生管理と換気の維持。ストレスの最小化。病気の動物の速やかな隔離。",
         "urgency": "high",
         "recommended_tests": ["PCR_reovirus", "virus_isolation", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Arenavirus Infection",
@@ -1804,6 +1988,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "厳格な検疫（ボア科は6ヶ月以上）。積極的なダニ駆除。PCR検査または血液塗抹スクリーニング。ボアとパイソンを混合しない。神経学的徴候を示す動物の隔離と検査。",
         "urgency": "high",
         "recommended_tests": ["PCR_arenavirus", "blood_smear", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chelonian Herpesvirus Infection",
@@ -1823,6 +2009,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規カメ類の6ヶ月以上の検疫。種の混合の回避。ストレスの最小化。新規導入動物の最初の1年は冬眠させない。新規動物のPCRスクリーニング。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_herpesvirus", "oral_swab", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Papillomavirus Infection",
@@ -1842,6 +2030,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規動物の検疫。免疫機能を支持するための良好な飼育管理の維持。可視的病変のある動物の隔離。",
         "urgency": "low",
         "recommended_tests": ["biopsy", "histopathology", "PCR_papillomavirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Poxvirus Infection",
@@ -1861,6 +2051,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "ベクター制御（蚊、ダニ）。新規動物の検疫。良好な衛生管理の維持と過密飼育の回避。ストレスの軽減。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology", "PCR_poxvirus", "electron_microscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Boid Nidovirus (Respiratory)",
@@ -1880,6 +2072,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "PCR検査を伴う全ての新規ボア科の検疫。新規導入動物に別の空気空間の維持。ケージ間の厳格な衛生管理。動物間で器具を共有しない。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_nidovirus", "tracheal_wash", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Flagellate Protozoal Infection",
@@ -1899,6 +2093,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "清潔な飼育環境、適切な水分補給、低ストレスの維持。過密飼育の回避。糞便スクリーニングを伴う新規動物の検疫。定期的な糞便検査。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_wet_mount", "fecal_smear", "fecal_float"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ciliate Protozoal Infection (Balantidium / Nyctotherus)",
@@ -1918,6 +2114,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "十分な繊維を含む種に適した食事の維持。良好な衛生管理。正常叢を撹乱する抗菌薬の過剰使用の回避。ストレスの最小化。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_wet_mount", "fecal_smear", "fecal_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Oxyurid (Pinworm) Infection",
@@ -1937,6 +2135,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "定期的な糞便検査。糞便の速やかな除去。定期的な環境消毒。新規動物の検疫。草食種の低レベル感染は正常でありうることの受容。",
         "urgency": "low",
         "recommended_tests": ["fecal_float", "fecal_examination", "tape_test"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hookworm Infection (Kalicephalus)",
@@ -1956,6 +2156,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "新規動物の検疫と糞便スクリーニング。清潔な床材の維持。飼育ヘビに自然土壌床材の回避。冷凍解凍餌の給餌。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "CBC", "fecal_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Rhabdias (Lungworm) Infection",
@@ -1975,6 +2177,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "糞便検査と気管洗浄スクリーニングを伴う野生捕獲ヘビの検疫。非土壌床材の使用。生活環を断つための清潔な環境の維持。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "tracheal_wash", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Acanthocephalan (Thorny-Headed Worm) Infection",
@@ -1994,6 +2198,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "野生捕獲ではなく商業的に飼育された昆虫の給餌。野生捕獲動物の検疫とスクリーニング。定期的な糞便検査。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_examination", "radiography", "endoscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Spirorchiid Trematode Infection",
@@ -2013,6 +2219,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "野生/半野生環境では困難。管理された水生生息地での巻貝個体数の最小化。飼育ウミガメの定期的な健康スクリーニング。",
         "urgency": "high",
         "recommended_tests": ["fecal_examination", "histopathology", "blood_smear"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Snake Mite Infestation (Ophionyssus natricis) - Severe",
@@ -2032,6 +2240,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "全ての新規ヘビを30日以上検疫。動物の定期的な視診。ケージ間の厳格な衛生管理の維持。検疫中はダニ検出を容易にするためペーパー床材の使用。",
         "urgency": "high",
         "recommended_tests": ["clinical_examination", "CBC", "skin_scraping"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chigger Mite Infestation (Trombiculidae)",
@@ -2051,6 +2261,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "温暖月のツツガムシ常在地域での屋外飼育の回避。屋外飼育爬虫類の定期的な視診。屋外飼育エリアへの適切な殺ダニ剤の処理。",
         "urgency": "low",
         "recommended_tests": ["clinical_examination", "skin_scraping", "microscopy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Leech Infestation",
@@ -2070,6 +2282,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "飼育水生爬虫類のための水源のろ過または処理。屋外飼育時の動物の定期的な視診。既知のヒル集団のある自然水源からの取水の回避。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "CBC", "leech_removal"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hepatocellular Carcinoma",
@@ -2089,6 +2303,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "アフラトキシン汚染飼料の回避。適切な食事による肝臓の健康維持。定期的な獣医学的検査。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "blood_chemistry", "histopathology"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Renal Cell Carcinoma",
@@ -2108,6 +2324,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "既知の予防法はない。定期的な健康検査で腎腫大の早期発見の可能性。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "blood_chemistry", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Chromatophoroma",
@@ -2127,6 +2345,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "確立された予防法はない。新しいまたは変化する腫瘤を検出するための定期的な皮膚検査。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology", "fine_needle_aspirate"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chondrosarcoma",
@@ -2146,6 +2366,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "既知の予防法はない。腫脹や腫瘤の定期的な検査による早期発見。",
         "urgency": "high",
         "recommended_tests": ["radiography", "biopsy", "histopathology", "CT_scan"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Ovarian Neoplasia",
@@ -2165,6 +2387,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "非繁殖雌の待機的卵巣摘出術でリスクを排除。超音波で生殖活性のある雌のモニタリング。",
         "urgency": "moderate",
         "recommended_tests": ["ultrasound", "radiography", "biopsy", "blood_chemistry"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Osteomyelitis (Jaw)",
@@ -2184,6 +2408,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "口内炎の早期かつ積極的な治療。免疫抑制を予防するための適切な飼育管理の維持。口腔外傷の回避。",
         "urgency": "high",
         "recommended_tests": ["radiography", "bacterial_culture", "CT_scan", "biopsy"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Aural Abscess (Ear Abscess)",
@@ -2203,6 +2429,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "食事中の十分なビタミンAの確保（丸ごとの餌、肝臓、濃い緑の葉野菜）。良好な水質の維持。定期的な健康検査。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "radiography", "surgical_drainage", "bacterial_culture"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hyperthyroidism",
@@ -2222,6 +2450,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "過剰なヨウ素補給の回避。甲状腺腫大を検出するための定期的な獣医学的検査。",
         "urgency": "moderate",
         "recommended_tests": ["thyroid_panel", "blood_chemistry", "ultrasound"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Hypothyroidism",
@@ -2241,6 +2471,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "アブラナ科野菜の過剰なしの多様な食事の給餌。食事中の十分なヨウ素の確保。草食性爬虫類への専らアブラナ科ベースの食事の回避。",
         "urgency": "moderate",
         "recommended_tests": ["thyroid_panel", "blood_chemistry"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hyperparathyroidism (Primary)",
@@ -2260,6 +2492,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "原発性副甲状腺機能亢進症の既知の予防法はない。ハイリスク動物のカルシウムレベルの定期的モニタリング。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "ionized_calcium", "PTH_assay", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypoglycemia",
@@ -2279,6 +2513,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "定期的な適切な給餌の確保。肝臓の健康のモニタリング。感染の速やかな治療。孵化後数日以内の食物へのアクセスを含む新生児の適切なケア。",
         "urgency": "emergency",
         "recommended_tests": ["blood_glucose", "blood_chemistry", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hyperuricemia",
@@ -2298,6 +2534,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "常時十分な水分補給。種に適した食事（草食種には低タンパク）。腎毒性薬剤の回避。高齢爬虫類の尿酸レベルのモニタリング。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "uric_acid", "radiography", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Zinc Toxicosis",
@@ -2317,6 +2555,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "爬虫類ケージに亜鉛メッキワイヤーや亜鉛メッキ金物を使用しない。ステンレス鋼またはパウダーコート材料の使用。硬貨や亜鉛含有物へのアクセスの除去。",
         "urgency": "high",
         "recommended_tests": ["blood_zinc_level", "radiography", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Lead Toxicosis",
@@ -2336,6 +2576,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "ケージから全ての鉛源の除去。無鉛塗料の使用。汚染土壌での爬虫類飼育の回避。鉛汚染地域からの野生捕獲動物のスクリーニング。",
         "urgency": "emergency",
         "recommended_tests": ["blood_lead_level", "radiography", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ivermectin Toxicosis",
@@ -2355,6 +2597,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "カメ類にイベルメクチンを絶対に使用しない。感受性の高い種では極度の注意を持って使用。用量決定に正確な秤の使用。感受性の高い種には代替的駆虫薬（フェンベンダゾール）の検討。",
         "urgency": "emergency",
         "recommended_tests": ["clinical_history", "neurological_examination", "supportive_care"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Metronidazole Toxicosis",
@@ -2374,6 +2618,8 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "正確な用量計算の使用。動物の正確な計量。感受性が高いことが知られている種には用量範囲の下限の使用。可能な場合は長期投与（10日以上）の回避。",
         "urgency": "high",
         "recommended_tests": ["clinical_history", "neurological_examination"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Substrate Impaction",
@@ -2383,6 +2629,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "砂・樹皮などの床材摂取による消化管閉塞。",
         "urgency": "high",
         "recommended_tests": ["radiography", "contrast_study", "palpation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Nutritional Osteodystrophy",
@@ -2392,6 +2640,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カルシウム・リン・ビタミンD3比の不適切による骨疾患。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "radiography", "dietary_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Protein Deficiency / Malnutrition",
@@ -2401,6 +2651,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "タンパク質摂取不足による筋消耗と免疫機能障害。",
         "urgency": "moderate",
         "recommended_tests": ["dietary_analysis", "blood_chemistry", "albumin_level"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Vitamin C Deficiency (Scurvy)",
@@ -2410,6 +2662,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アスコルビン酸合成能を持たない一部の爬虫類種におけるビタミンC欠乏症。",
         "urgency": "moderate",
         "recommended_tests": ["dietary_history", "blood_chemistry", "response_to_supplementation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Biotin Deficiency",
@@ -2419,6 +2673,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "生卵白給餌などによるビオチン欠乏で、皮膚・脱皮障害を引き起こす。",
         "urgency": "low",
         "recommended_tests": ["dietary_history", "response_to_supplementation"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cloacal Calculi (Cloacoliths)",
@@ -2428,6 +2684,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "総排泄腔内に形成される結石様凝集物による閉塞。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "cloacal_examination", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Phallus Prolapse (Paraphimosis)",
@@ -2437,6 +2695,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "陰茎または半陰茎の還納不能で、緊急処置が必要。",
         "urgency": "emergency",
         "recommended_tests": ["clinical_examination", "lubrication_attempt", "surgical_consultation"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Follicular Stasis (Chronic)",
@@ -2446,6 +2706,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "排卵や再吸収なく卵胞が慢性的に停滞する状態。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "radiography", "blood_chemistry", "hormonal_assay"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Egg-related Coelomitis (Egg Peritonitis)",
@@ -2455,6 +2717,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "破裂卵胞や異所性卵による体腔の炎症。",
         "urgency": "emergency",
         "recommended_tests": ["ultrasound", "coelomocentesis", "blood_chemistry", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Retained Hemipenes",
@@ -2464,6 +2728,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "交尾後の半陰茎還納不能で、壊死のリスクがある。",
         "urgency": "high",
         "recommended_tests": ["clinical_examination", "cloacal_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Corneal Disease / Panophthalmitis",
@@ -2473,6 +2739,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "眼球喪失に至る可能性のある重度の眼感染・炎症。",
         "urgency": "high",
         "recommended_tests": ["ophthalmic_examination", "cytology", "bacterial_culture", "ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hypoxia / Drowning",
@@ -2482,6 +2750,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "半水棲種の溺水や換気不良による酸素欠乏。",
         "urgency": "emergency",
         "recommended_tests": ["clinical_examination", "blood_gas", "radiography"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Egg Retention (Chronic)",
@@ -2491,6 +2761,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "殻付き卵の長期貯留による圧迫と二次感染。",
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "blood_chemistry"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Dermal Mycosis (Non-CANV Fungal Dermatitis)",
@@ -2500,6 +2772,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "トリコフィトン、フザリウムなどCANV以外の真菌による皮膚感染症。",
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "skin_biopsy", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Bacterial Pneumonia (Chronic)",
@@ -2509,6 +2783,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "不適切な飼育環境に起因する慢性の細菌性肺感染。",
         "urgency": "high",
         "recommended_tests": ["tracheal_wash_culture", "sensitivity_testing", "radiography"],
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Abdominal Wall Hernia",
@@ -2518,6 +2794,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腹壁欠損部からの体腔内容物の脱出。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "ultrasound", "clinical_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Spinal Fracture / Vertebral Luxation",
@@ -2527,6 +2805,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "外傷による椎骨の骨折または脱臼で不全麻痺・麻痺を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "CT_scan", "neurological_examination"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Tail Necrosis / Autotomy Complications",
@@ -2536,6 +2816,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "絞扼帯・外傷・自切合併症による尾の壊死。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "radiography", "bacterial_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Ear Infection (Otitis)",
@@ -2545,6 +2827,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カメや一部のトカゲに多い中耳・内耳感染症。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "radiography", "CT_scan", "bacterial_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "UV Light Deficiency",
@@ -2554,6 +2838,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "UVB照射不足によるビタミンD3欠乏と免疫抑制。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "vitamin_D3_level", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chronic Respiratory Disease Complex",
@@ -2563,6 +2849,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌・ウイルス・飼育管理因子の複合による多因子性慢性呼吸器疾患。",
         "urgency": "high",
         "recommended_tests": ["tracheal_wash", "bacterial_culture", "PCR_panel", "radiography"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Proliferative Osteoarthritis",
@@ -2572,6 +2860,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "骨増殖を伴う慢性変性性関節疾患で、疼痛と運動制限を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "joint_aspirate", "blood_chemistry"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Cecal Impaction / Colonic Impaction",
@@ -2581,6 +2871,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "盲腸または結腸における糞便・異物のインパクション。",
         "urgency": "high",
         "recommended_tests": ["radiography", "contrast_study", "palpation", "cloacal_examination"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Photosensitization Dermatitis",
@@ -2590,6 +2882,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "光増感物質とUV照射の併用による皮膚損傷。",
         "urgency": "moderate",
         "recommended_tests": ["skin_biopsy", "dietary_history", "husbandry_review"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Organ Prolapse (Gastric/Intestinal/Oviductal)",
@@ -2599,6 +2893,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "胃・腸・卵管の総排泄腔からの脱出。",
         "urgency": "emergency",
         "recommended_tests": ["clinical_examination", "radiography", "cloacal_examination"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Anasarca (Generalized Edema)",
@@ -2608,6 +2904,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "心・腎・肝不全による全身性皮下浮腫。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "ultrasound", "radiography", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Disseminated Granulomatous Disease",
@@ -2617,6 +2915,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "マイコバクテリア・真菌・寄生虫による多臓器肉芽腫性炎症。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "acid_fast_stain", "fungal_culture"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
 
 
@@ -2629,6 +2929,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンD過剰症や慢性腎疾患による腎組織へのカルシウム沈着。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "radiography", "ultrasound", "uric_acid"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hemolytic Anemia",
@@ -2638,6 +2940,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染・毒素・免疫介在性原因による赤血球の破壊。",
         "urgency": "high",
         "recommended_tests": ["CBC", "blood_smear", "blood_chemistry", "Coombs_test"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Hemoparasites (Blood Parasites)",
@@ -2647,6 +2951,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヘモグレガリン、プラスモジウムなどの爬虫類血液寄生虫。",
         "urgency": "moderate",
         "recommended_tests": ["blood_smear", "PCR_hemoparasite", "CBC"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
@@ -2656,6 +2962,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "汚染床材や不衛生環境との接触による重度の皮膚壊死。",
         "urgency": "high",
         "recommended_tests": ["skin_biopsy", "bacterial_culture", "cytology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Intestinal Volvulus / Intussusception",
@@ -2665,6 +2973,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腸管の捻転または嵌入による急性閉塞。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "contrast_study", "ultrasound", "surgical_exploration"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Hepatic Coccidiosis",
@@ -2674,6 +2984,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "肝実質に感染するコクシジウム種による肝炎。",
         "urgency": "high",
         "recommended_tests": ["fecal_float", "liver_biopsy", "histopathology", "blood_chemistry"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Chronic Dehydration",
@@ -2683,6 +2995,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "長期的な水分摂取不足または過度の水分喪失。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "PCV", "total_solids", "husbandry_review"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Myxomatous Skin Disease",
@@ -2692,6 +3006,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "様々な爬虫類種に報告される粘液腫様の皮膚腫瘍。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology", "fine_needle_aspirate"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Adenoviral Hepatitis",
@@ -2701,6 +3017,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "特にフトアゴヒゲトカゲなどアガマ科のアデノウイルス性急性肝炎。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_adenovirus", "blood_chemistry", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Cutaneous Papilloma",
@@ -2710,6 +3028,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "皮膚の良性乳頭腫性増殖で、ウイルス関連の可能性がある。",
         "urgency": "low",
         "recommended_tests": ["biopsy", "histopathology", "PCR_papillomavirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     {
         "name": "Fibropapillomatosis (Sea Turtles)",
@@ -2719,6 +3039,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ウミガメに多発性線維乳頭腫を引き起こすヘルペスウイルス関連腫瘍疾患。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "PCR_herpesvirus"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
 
 ]
@@ -2915,7 +3237,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Reptile")
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None) -> Dict[str, Any]:
+def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None) -> Dict[str, Any]:
     """Analyze reptile symptoms and return suspected diseases.
 
     Parameters
@@ -2932,4 +3254,4 @@ def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None
     dict
         Analysis result in the standard differential diagnosis format.
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("reptile", {}))
+    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("reptile", {}))
