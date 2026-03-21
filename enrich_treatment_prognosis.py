@@ -79,7 +79,7 @@ class TreatmentPrognosisEnricher:
         """Build enhanced treatment templates"""
         return {
             'infectious_viral': [
-                'Supportive care including IV fluid therapy, electrolyte management, and nutritional support. Fever management with antipyretics (acetaminophen, ibuprofen). Antiviral therapy if available (acyclovir, antiretrovirals). Prevention and treatment of secondary bacterial infections with antibiotics. Close monitoring for complications.',
+                'Supportive care including IV fluid therapy, electrolyte management, and nutritional support. Fever management with species-appropriate antipyretics as prescribed by a veterinarian. Antiviral therapy if available (acyclovir, antiretrovirals). Prevention and treatment of secondary bacterial infections with antibiotics. Close monitoring for complications.',
                 'Symptomatic treatment with emphasis on supportive care. Fluid and electrolyte replacement. Airway management if respiratory involvement. Anti-inflammatory medications. Treatment of secondary infections. Monitoring for systemic complications.',
                 'Primary focus on supportive therapy: maintain hydration, provide nutritional support, manage fever, and prevent secondary infections. Specific antiviral therapy if available. Monitoring for progression or complications.',
             ],
@@ -137,6 +137,11 @@ class TreatmentPrognosisEnricher:
                 'Treatment depends on underlying cause: antiparasitic therapy for parasites, antifungal therapy for fungal infections, hypoallergenic diet and allergen avoidance for allergies, antibiotics for bacterial pyoderma. Topical treatments (medicated shampoos, ointments). Omega-3 fatty acids for skin health. Symptomatic relief.',
                 'Cause-specific treatment with topical and systemic therapy. Environmental and dietary modifications.',
                 'Treatment based on diagnosis with topical and/or systemic therapy.',
+            ],
+            'general': [
+                'Treatment should be based on clinical assessment and diagnosis. Consult a veterinarian for disease-specific treatment protocols.',
+                'Supportive care and symptomatic treatment tailored to the specific condition. Veterinary consultation recommended for appropriate therapeutic planning.',
+                'Disease-specific treatment based on thorough clinical evaluation. Supportive care as indicated by the presenting condition.',
             ],
         }
 
@@ -203,6 +208,11 @@ class TreatmentPrognosisEnricher:
                 'guarded': 'Prognosis depends on underlying cause. Allergic conditions require long-term management.',
                 'poor': 'Poor prognosis if underlying cause cannot be identified or managed.',
             },
+            'general': {
+                'good': 'Prognosis is generally favorable with timely veterinary intervention and appropriate management. Outcomes depend on the specific condition and individual response to treatment.',
+                'guarded': 'Prognosis varies depending on the specific condition, severity, and response to treatment. Veterinary assessment is essential for accurate prognostic evaluation.',
+                'poor': 'Prognosis is guarded to poor depending on disease progression and response to therapy. Intensive veterinary care may be required.',
+            },
         }
 
     def _detect_disease_category(self, disease_name: str) -> str:
@@ -212,7 +222,7 @@ class TreatmentPrognosisEnricher:
             for keyword in data['keywords']:
                 if keyword in name_lower:
                     return category
-        return 'infectious_viral'
+        return 'general'
 
     def _assess_severity(self, disease_name: str) -> str:
         """Assess disease severity"""
@@ -223,6 +233,11 @@ class TreatmentPrognosisEnricher:
             return 'guarded'
         else:
             return 'good'
+
+    @staticmethod
+    def normalize_severity(score_int: int) -> float:
+        """Convert 1-5 integer score to 0-1 float for downstream AI consumption"""
+        return (score_int - 1) / 4.0
 
     def enrich_treatment_prognosis(self, input_file: str, output_file: str) -> Dict:
         """Enrich diseases with specific treatment and prognosis"""
@@ -238,7 +253,8 @@ class TreatmentPrognosisEnricher:
             'treatment is supportive',
             'management includes',
             'Treatment options include',
-            'involves',
+            'involves addressing the underlying cause and providing supportive care',
+            'involves supportive care',
         ]
 
         generic_prognosis_phrases = [
@@ -282,6 +298,10 @@ class TreatmentPrognosisEnricher:
                 disease['prognosis_ja'] = self._translate_prognosis(disease_name, severity)
                 updated_prognosis += 1
 
+            # Normalize severity_score from 1-5 int to 0-1 float
+            if 'severity_score' in disease and isinstance(disease['severity_score'], int):
+                disease['severity_score'] = self.normalize_severity(disease['severity_score'])
+
         print(f"\nSaving {output_file}...")
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(diseases, f, ensure_ascii=False, indent=2)
@@ -307,6 +327,7 @@ class TreatmentPrognosisEnricher:
             'gastrointestinal': '消化器疾患',
             'urogenital': '泌尿生殖器疾患',
             'dermatological': '皮膚疾患',
+            'general': '一般疾患',
         }.get(category, '疾患')
 
         return f"{disease_name}の治療は{category_ja}の特性に応じて実施されます。早期診断と適切な獣医学的管理が重要です。"
