@@ -7,8 +7,7 @@ more disease-specific, detailed recommendations based on disease category.
 """
 
 import json
-import re
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 
 class TreatmentPrognosisEnricher:

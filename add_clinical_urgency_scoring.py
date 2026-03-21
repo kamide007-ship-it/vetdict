@@ -11,7 +11,7 @@ This script:
 """
 
 import json
-from typing import Dict, List, Optional
+from typing import Dict
 
 
 class UrgencyScoringEngine:
@@ -58,7 +58,6 @@ class UrgencyScoringEngine:
         """Estimate likelihood of hospitalization"""
         urgency_lower = urgency.lower()
         treatment_lower = treatment.lower()
-        disease_lower = disease_name.lower()
 
         if urgency_lower == 'emergency':
             return 'high'
@@ -107,14 +106,12 @@ class UrgencyScoringEngine:
         """Recommend monitoring frequency"""
         urgency_lower = urgency.lower()
 
-        if urgency_lower == 'emergency':
-            return 'continuous'
-        elif urgency_lower == 'high':
-            return 'weekly'
-        elif urgency_lower == 'moderate':
-            return 'bi-weekly'
-        else:
-            return 'monthly'
+        frequency_map = {
+            'emergency': 'continuous',
+            'high': 'weekly',
+            'moderate': 'bi-weekly',
+        }
+        return frequency_map.get(urgency_lower, 'monthly')
 
     def add_clinical_scores(self, input_file: str, output_file: str) -> Dict:
         """Add urgency scores and clinical recommendations"""

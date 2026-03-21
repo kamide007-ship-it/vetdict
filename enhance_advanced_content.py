@@ -12,8 +12,7 @@ This script performs second-pass enrichment:
 
 import json
 import re
-from typing import Dict, List, Optional, Set
-from collections import defaultdict
+from typing import Dict, List, Set
 
 
 class AdvancedEnhancer:
@@ -146,7 +145,7 @@ class AdvancedEnhancer:
             'hair loss', 'alopecia', 'coat changes',
             'skin lesion', 'pustule', 'ulcer', 'scab',
             'swelling', 'edema', 'lymphadenopathy',
-            'discharge', 'ocular discharge', 'nasal discharge',
+            'discharge', 'ocular discharge',
             'odor', 'foul smell', 'bad breath',
             'dehydration', 'sunken eyes',
             'pale gums', 'white gums', 'cyanotic gums',
@@ -207,13 +206,12 @@ class AdvancedEnhancer:
         # Find medication mentions in treatment
         for med_name, med_info in self.medication_db.items():
             pattern = re.compile(f'\\b{med_name}\\b', re.IGNORECASE)
-            if pattern.search(treatment):
+            if pattern.search(treatment) and med_info['dosage'] not in treatment:
                 # Add dosage information if not already present
-                if med_info['dosage'] not in treatment:
-                    enhanced = pattern.sub(
-                        f'{med_name} ({med_info["dosage"]})',
-                        enhanced
-                    )
+                enhanced = pattern.sub(
+                    f'{med_name} ({med_info["dosage"]})',
+                    enhanced
+                )
 
         return enhanced
 
@@ -260,13 +258,12 @@ class AdvancedEnhancer:
 
             # 4. Reduce "early diagnosis" repetition in prognosis
             prognosis = disease.get('prognosis', '')
-            if 'early diagnosis' in prognosis.lower():
-                # Only keep one instance
-                if prognosis.count('early diagnosis') > 1 or prognosis.count('Early diagnosis') > 1:
-                    # Remove redundant mentions
-                    prognosis = re.sub(r'(?i)\s*[,.]?\s*early diagnosis[^.]*\.?\s*', ' ', prognosis)
-                    disease['prognosis'] = prognosis.strip()
-                    early_diagnosis_reduced += 1
+            early_count = prognosis.count('early diagnosis') + prognosis.count('Early diagnosis')
+            if 'early diagnosis' in prognosis.lower() and early_count > 1:
+                # Remove redundant mentions
+                prognosis = re.sub(r'(?i)\s*[,.]?\s*early diagnosis[^.]*\.?\s*', ' ', prognosis)
+                disease['prognosis'] = prognosis.strip()
+                early_diagnosis_reduced += 1
 
         print(f"\nSaving {output_file}...")
         with open(output_file, 'w', encoding='utf-8') as f:

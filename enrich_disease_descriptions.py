@@ -9,8 +9,7 @@ causes, symptoms, clinical_signs) to create more detailed descriptions.
 
 import json
 import re
-from typing import Dict, List, Optional
-from collections import defaultdict
+from typing import Dict
 
 
 class DescriptionEnricher:
@@ -175,7 +174,6 @@ class DescriptionEnricher:
         name = disease.get('name', 'Unknown Disease')
         species = disease.get('species', 'animal')
         pathophysiology = disease.get('pathophysiology', '')
-        causes = disease.get('causes', '')
         clinical_signs = disease.get('clinical_signs', '')
 
         # Determine severity and condition type
