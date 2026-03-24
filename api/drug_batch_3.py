@@ -426,4 +426,130 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     "iron_dextran": {
         "hedgehog": {"safe": True, "dosage": "10 mg/kg IM once", "dosage_ja": "10 mg/kg 筋注 単回", "notes": "For iron deficiency anemia", "notes_ja": "鉄欠乏性貧血に使用"},
     },
+    # ==================================================================
+    # Chinchilla (チンチラ) — ~45 drugs
+    # ==================================================================
+    "amoxicillin_clavulanate": {
+        "chinchilla": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral penicillins/cephalosporins cause fatal dysbiosis in chinchillas", "notes_ja": "経口ペニシリン/セファロスポリンはチンチラに致死的な腸内細菌叢の破壊を起こす"},
+    },
+    "doxycycline": {
+        "chinchilla": {"safe": True, "dosage": "5-10 mg/kg PO q12h", "dosage_ja": "5-10 mg/kg 経口 12時間毎", "notes": "Safe broad-spectrum option for chinchillas", "notes_ja": "チンチラに安全な広域スペクトル抗菌薬"},
+    },
+    "metronidazole": {
+        "chinchilla": {"safe": True, "dosage": "10-20 mg/kg PO q12h", "dosage_ja": "10-20 mg/kg 経口 12時間毎", "notes": "For anaerobic infections and Giardia", "notes_ja": "嫌気性菌感染・ジアルジアに使用"},
+    },
+    "cephalexin": {
+        "chinchilla": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral cephalosporins cause fatal dysbiosis", "notes_ja": "経口セファロスポリンは致死的な腸内細菌叢の破壊を起こす"},
+    },
+    "marbofloxacin": {
+        "chinchilla": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "Fluoroquinolone; safe for chinchillas", "notes_ja": "フルオロキノロン系。チンチラに安全"},
+    },
+    "clindamycin": {
+        "chinchilla": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Risk of fatal dysbiosis; avoid in chinchillas", "notes_ja": "致死的な腸内細菌叢破壊のリスク。チンチラには使用しない"},
+    },
+    "azithromycin": {
+        "chinchilla": {"safe": True, "dosage": "15-30 mg/kg PO q24h", "dosage_ja": "15-30 mg/kg 経口 24時間毎", "notes": "Safe macrolide for respiratory infections", "notes_ja": "呼吸器感染症に安全なマクロライド"},
+    },
+    "trimethoprim_sulfa": {
+        "chinchilla": {"safe": True, "dosage": "15-30 mg/kg PO q12h", "dosage_ja": "15-30 mg/kg 経口 12時間毎", "notes": "Well-tolerated broad-spectrum option", "notes_ja": "忍容性の良い広域スペクトル抗菌薬"},
+    },
+    "chloramphenicol": {
+        "chinchilla": {"safe": True, "dosage": "30-50 mg/kg PO q12h", "dosage_ja": "30-50 mg/kg 経口 12時間毎", "notes": "Broad-spectrum; safe alternative to penicillins", "notes_ja": "広域スペクトル。ペニシリンの安全な代替"},
+    },
+    "gentamicin": {
+        "chinchilla": {"safe": True, "dosage": "5 mg/kg SC/IM q24h", "dosage_ja": "5 mg/kg 皮下/筋注 24時間毎", "notes": "Monitor for nephrotoxicity", "notes_ja": "腎毒性に注意"},
+    },
+    "penicillin_g": {
+        "chinchilla": {"safe": True, "dosage": "22,000-44,000 IU/kg SC/IM q24h", "dosage_ja": "22,000-44,000 IU/kg 皮下/筋注 24時間毎", "notes": "Injectable penicillin is safe; NEVER give oral penicillin", "notes_ja": "注射用ペニシリンは安全。経口ペニシリンは絶対に投与しない"},
+    },
+    "itraconazole": {
+        "chinchilla": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "For dermatophytosis; give with food", "notes_ja": "皮膚糸状菌症に使用。食事と投与"},
+    },
+    "fluconazole": {
+        "chinchilla": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "Alternative antifungal", "notes_ja": "代替抗真菌薬"},
+    },
+    "terbinafine": {
+        "chinchilla": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "Effective for Trichophyton mentagrophytes", "notes_ja": "トリコフィトン・メンタグロフィテスに有効"},
+    },
+    "griseofulvin": {
+        "chinchilla": {"safe": True, "dosage": "25 mg/kg PO q24h for 6-8 weeks", "dosage_ja": "25 mg/kg 経口 24時間毎 6-8週間", "notes": "Teratogenic; do not use in pregnant animals", "notes_ja": "催奇形性あり。妊娠個体には使用しない"},
+    },
+    "ivermectin": {
+        "chinchilla": {"safe": True, "dosage": "0.2-0.4 mg/kg SC; repeat in 14 days", "dosage_ja": "0.2-0.4 mg/kg 皮下; 14日後に再投与", "notes": "For fur mites and other ectoparasites", "notes_ja": "毛ダニ等の外部寄生虫に使用"},
+    },
+    "selamectin": {
+        "chinchilla": {"safe": True, "dosage": "15-30 mg/kg topical; repeat in 21-28 days", "dosage_ja": "15-30 mg/kg 外用; 21-28日後に再投与", "notes": "Apply to skin on dorsal neck area", "notes_ja": "背部頸部の皮膚に塗布"},
+    },
+    "fenbendazole": {
+        "chinchilla": {"safe": True, "dosage": "20-50 mg/kg PO q24h for 5 days", "dosage_ja": "20-50 mg/kg 経口 24時間毎 5日間", "notes": "For Giardia and intestinal helminths", "notes_ja": "ジアルジア・腸管蠕虫に使用"},
+    },
+    "praziquantel": {
+        "chinchilla": {"safe": True, "dosage": "5-10 mg/kg PO/SC; repeat in 14 days", "dosage_ja": "5-10 mg/kg 経口/皮下; 14日後に再投与", "notes": "For cestode infections", "notes_ja": "条虫感染に使用"},
+    },
+    "carprofen": {
+        "chinchilla": {"safe": True, "dosage": "4 mg/kg SC q24h", "dosage_ja": "4 mg/kg 皮下 24時間毎", "notes": "NSAID; short-term use", "notes_ja": "NSAID。短期使用"},
+    },
+    "tramadol": {
+        "chinchilla": {"safe": True, "dosage": "5-10 mg/kg PO q12h", "dosage_ja": "5-10 mg/kg 経口 12時間毎", "notes": "Moderate analgesia", "notes_ja": "中等度の鎮痛"},
+    },
+    "gabapentin": {
+        "chinchilla": {"safe": True, "dosage": "3-5 mg/kg PO q8-12h", "dosage_ja": "3-5 mg/kg 経口 8-12時間毎", "notes": "Neuropathic pain; may cause sedation", "notes_ja": "神経障害性疼痛。鎮静を生じうる"},
+    },
+    "buprenorphine": {
+        "chinchilla": {"safe": True, "dosage": "0.05 mg/kg SC q8-12h", "dosage_ja": "0.05 mg/kg 皮下 8-12時間毎", "notes": "Perioperative analgesia", "notes_ja": "周術期鎮痛"},
+    },
+    "butorphanol": {
+        "chinchilla": {"safe": True, "dosage": "0.5-2 mg/kg SC q4-6h", "dosage_ja": "0.5-2 mg/kg 皮下 4-6時間毎", "notes": "Short-acting opioid", "notes_ja": "短時間作用型オピオイド"},
+    },
+    "ketamine": {
+        "chinchilla": {"safe": True, "dosage": "20-40 mg/kg IM (with xylazine 2-5 mg/kg)", "dosage_ja": "20-40 mg/kg 筋注（キシラジン2-5 mg/kgと併用）", "notes": "Combine with sedative for adequate depth", "notes_ja": "十分な深度のため鎮静薬と併用"},
+    },
+    "alfaxalone": {
+        "chinchilla": {"safe": True, "dosage": "5-8 mg/kg IM", "dosage_ja": "5-8 mg/kg 筋注", "notes": "Smoother recovery vs ketamine combos", "notes_ja": "ケタミン併用より回復が良好"},
+    },
+    "prednisolone": {
+        "chinchilla": {"safe": True, "dosage": "0.5-2 mg/kg PO q12-24h", "dosage_ja": "0.5-2 mg/kg 経口 12-24時間毎", "notes": "Anti-inflammatory; use cautiously", "notes_ja": "抗炎症。慎重投与"},
+    },
+    "dexamethasone": {
+        "chinchilla": {"safe": True, "dosage": "0.5-2 mg/kg IM/SC", "dosage_ja": "0.5-2 mg/kg 筋注/皮下", "notes": "Emergency anti-inflammatory", "notes_ja": "緊急の抗炎症"},
+    },
+    "furosemide": {
+        "chinchilla": {"safe": True, "dosage": "1-4 mg/kg PO/SC/IM q12h", "dosage_ja": "1-4 mg/kg 経口/皮下/筋注 12時間毎", "notes": "For cardiac disease and edema", "notes_ja": "心疾患・浮腫に使用"},
+    },
+    "famotidine": {
+        "chinchilla": {"safe": True, "dosage": "0.5-1 mg/kg PO q24h", "dosage_ja": "0.5-1 mg/kg 経口 24時間毎", "notes": "Gastric acid reduction", "notes_ja": "胃酸分泌抑制"},
+    },
+    "metoclopramide": {
+        "chinchilla": {"safe": True, "dosage": "0.5 mg/kg PO/SC q8-12h", "dosage_ja": "0.5 mg/kg 経口/皮下 8-12時間毎", "notes": "Prokinetic for GI stasis", "notes_ja": "消化管うっ滞の運動促進薬"},
+    },
+    "lactulose": {
+        "chinchilla": {"safe": True, "dosage": "0.5 mL/kg PO q8-12h", "dosage_ja": "0.5 mL/kg 経口 8-12時間毎", "notes": "For constipation; adjust to stool consistency", "notes_ja": "便秘に使用。便の硬さに応じて調整"},
+    },
+    "isoflurane": {
+        "chinchilla": {"safe": True, "dosage": "Induction 3-5%, maintenance 1.5-3%", "dosage_ja": "導入 3-5%, 維持 1.5-3%", "notes": "Standard inhalant anesthetic; mask induction", "notes_ja": "標準的吸入麻酔薬。マスクで導入"},
+    },
+    "sevoflurane": {
+        "chinchilla": {"safe": True, "dosage": "Induction 6-8%, maintenance 3-4.5%", "dosage_ja": "導入 6-8%, 維持 3-4.5%", "notes": "Faster recovery than isoflurane", "notes_ja": "イソフルランより回復が速い"},
+    },
+    "midazolam": {
+        "chinchilla": {"safe": True, "dosage": "0.5-2 mg/kg IM/IN", "dosage_ja": "0.5-2 mg/kg 筋注/経鼻", "notes": "Sedation/premedication", "notes_ja": "鎮静/前投薬"},
+    },
+    "diazepam": {
+        "chinchilla": {"safe": True, "dosage": "0.5-3 mg/kg IM", "dosage_ja": "0.5-3 mg/kg 筋注", "notes": "Seizure control", "notes_ja": "痙攣管理"},
+    },
+    "atropine": {
+        "chinchilla": {"safe": True, "dosage": "0.05 mg/kg SC/IM", "dosage_ja": "0.05 mg/kg 皮下/筋注", "notes": "Preanesthetic anticholinergic", "notes_ja": "麻酔前投薬の抗コリン薬"},
+    },
+    "glycopyrrolate": {
+        "chinchilla": {"safe": True, "dosage": "0.01-0.02 mg/kg SC/IM", "dosage_ja": "0.01-0.02 mg/kg 皮下/筋注", "notes": "Preferred anticholinergic", "notes_ja": "推奨される抗コリン薬"},
+    },
+    "sucralfate": {
+        "chinchilla": {"safe": True, "dosage": "25-50 mg/kg PO q8-12h", "dosage_ja": "25-50 mg/kg 経口 8-12時間毎", "notes": "Gastric protection", "notes_ja": "胃保護"},
+    },
+    "vitamin_b12": {
+        "chinchilla": {"safe": True, "dosage": "0.02 mg/kg SC/IM q7d", "dosage_ja": "0.02 mg/kg 皮下/筋注 週1回", "notes": "Supportive care", "notes_ja": "支持療法"},
+    },
+    "vitamin_k1": {
+        "chinchilla": {"safe": True, "dosage": "1-10 mg/kg SC/IM q24h", "dosage_ja": "1-10 mg/kg 皮下/筋注 24時間毎", "notes": "For coagulopathy/rodenticide toxicity", "notes_ja": "凝固障害/殺鼠剤中毒に使用"},
+    },
 }
