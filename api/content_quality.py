@@ -133,7 +133,12 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         else:
             sourced.append(ja_key)
         if not en_val:
-            out[en_key] = _fallback(field, name_en, species, sym_text, "en")
+            # Prefer JA content over English template to avoid mixed-language display
+            ja_content = _text(out.get(ja_key))
+            if ja_content:
+                out[en_key] = ja_content
+            else:
+                out[en_key] = _fallback(field, name_ja, species, sym_text, "ja")
             missing.append(en_key)
         else:
             sourced.append(en_key)

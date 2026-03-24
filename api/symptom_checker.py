@@ -6682,53 +6682,61 @@ for _d in _DISEASE_DB:
     _urg = _d.get("urgency", "moderate")
     _urg_ja = {"emergency": "緊急", "high": "高", "moderate": "中等度", "low": "軽度"}.get(_urg, "中等度")
     if not _d.get("pathophysiology") and not _d.get("pathophysiology_ja"):
-        _d["pathophysiology"] = (
-            f"{_name} involves pathological changes in affected tissues and organ systems. "
-            f"{_desc} The condition progresses through stages of cellular injury, "
-            f"inflammatory response, and potential tissue damage if left untreated."
-        )
-        _d["pathophysiology_ja"] = (
+        _patho_ja = (
             f"{_name_ja}は罹患組織および臓器系に病理学的変化をもたらす。"
             f"細胞障害・炎症反応・未治療の場合の組織損傷の段階を経て進行する。"
             f"早期の病態把握と介入が予後改善の鍵となる。"
         )
+        _d["pathophysiology"] = _patho_ja
+        _d["pathophysiology_ja"] = _patho_ja
+    elif _d.get("pathophysiology_ja") and not _d.get("pathophysiology"):
+        _d["pathophysiology"] = _d["pathophysiology_ja"]
+    elif _d.get("pathophysiology") and not _d.get("pathophysiology_ja"):
+        _d["pathophysiology_ja"] = _d["pathophysiology"]
     if not _d.get("causes") and not _d.get("causes_ja"):
-        _d["causes"] = (
-            f"The causes of {_name.lower()} in dogs include predisposing factors "
-            f"related to genetics, environment, diet, and husbandry. {_desc}"
-        )
-        _d["causes_ja"] = (
+        _causes_ja = (
             f"{_name_ja}の原因には遺伝的要因、環境要因、食事・飼育管理に関連する素因が含まれる。"
             f"複数の要因が複合的に作用することが多い。"
         )
+        _d["causes"] = _causes_ja
+        _d["causes_ja"] = _causes_ja
+    elif _d.get("causes_ja") and not _d.get("causes"):
+        _d["causes"] = _d["causes_ja"]
+    elif _d.get("causes") and not _d.get("causes_ja"):
+        _d["causes_ja"] = _d["causes"]
     if not _d.get("treatment") and not _d.get("treatment_ja"):
-        _d["treatment"] = (
-            f"Treatment of {_name.lower()} in dogs involves addressing the underlying cause, "
-            f"supportive care, and species-appropriate therapeutic interventions. "
-            f"Severity level: {_urg}. Consult a veterinarian."
-        )
-        _d["treatment_ja"] = (
+        _treat_ja = (
             f"{_name_ja}の治療は原因への対処、支持療法、および適切な治療介入を含む。"
             f"重症度: {_urg_ja}。獣医師への相談が推奨される。"
         )
+        _d["treatment"] = _treat_ja
+        _d["treatment_ja"] = _treat_ja
+    elif _d.get("treatment_ja") and not _d.get("treatment"):
+        _d["treatment"] = _d["treatment_ja"]
+    elif _d.get("treatment") and not _d.get("treatment_ja"):
+        _d["treatment_ja"] = _d["treatment"]
     if not _d.get("prevention") and not _d.get("prevention_ja"):
-        _d["prevention"] = (
-            f"Prevention of {_name.lower()} includes appropriate nutrition, regular veterinary "
-            f"check-ups, vaccination schedules, parasite control, and a safe environment."
-        )
-        _d["prevention_ja"] = (
+        _prev_ja = (
             f"{_name_ja}の予防には適切な栄養管理、定期的な健康診断、"
             f"ワクチン接種、寄生虫予防、安全な環境の維持が含まれる。"
         )
+        _d["prevention"] = _prev_ja
+        _d["prevention_ja"] = _prev_ja
+    elif _d.get("prevention_ja") and not _d.get("prevention"):
+        _d["prevention"] = _d["prevention_ja"]
+    elif _d.get("prevention") and not _d.get("prevention_ja"):
+        _d["prevention_ja"] = _d["prevention"]
     if not _d.get("prognosis") and not _d.get("prognosis_ja"):
-        _d["prognosis"] = (
-            f"Prognosis for {_name.lower()} depends on severity, timeliness of diagnosis, "
-            f"and response to treatment. Early detection improves outcomes."
-        )
-        _d["prognosis_ja"] = (
+        _prog_ja = (
             f"{_name_ja}の予後は重症度、診断の迅速さ、治療への反応に依存する。"
             f"早期発見と適切な介入が転帰を改善する。"
         )
+        _d["prognosis"] = _prog_ja
+        _d["prognosis_ja"] = _prog_ja
+    elif _d.get("prognosis_ja") and not _d.get("prognosis"):
+        _d["prognosis"] = _d["prognosis_ja"]
+    elif _d.get("prognosis") and not _d.get("prognosis_ja"):
+        _d["prognosis_ja"] = _d["prognosis"]
 
 # ---------------------------------------------------------------------------
 # Breed-specific disease risk multipliers
@@ -7482,20 +7490,31 @@ def _disease_detail_text(
     *,
     fallback_description: str = "",
 ) -> str:
-    """Return a non-empty disease detail string for API responses."""
+    """Return a non-empty disease detail string for API responses.
+
+    Prefers Japanese content to avoid English template text in the UI.
+    """
+    ja_value = str(disease.get(f"{field}_ja") or "").strip()
+    if ja_value:
+        return ja_value
+
     value = str(disease.get(field) or "").strip()
     if value:
         return value
 
-    ja_value = str(disease.get(f"{field}_ja") or "").strip()
-    if ja_value:
-        return "Detailed information is currently available in Japanese only."
-
     if fallback_description:
         return fallback_description
 
-    field_label = field.replace("_", " ")
-    return f"Detailed {field_label} information is not yet available."
+    _field_labels_ja = {
+        "description": "説明",
+        "pathophysiology": "病態生理",
+        "causes": "原因",
+        "treatment": "治療",
+        "prevention": "予防",
+        "prognosis": "予後",
+    }
+    field_label = _field_labels_ja.get(field, field.replace("_", " "))
+    return f"{field_label}の詳細情報はまだ登録されていません。"
 
 
 # ---------------------------------------------------------------------------
