@@ -17,6 +17,7 @@ from flask import Blueprint, jsonify, request
 
 from api.drug_batch_1 import DRUGS_BATCH_1
 from api.drug_batch_2 import DRUGS_BATCH_2
+from api.drug_batch_3 import SPECIES_INFO_PATCH
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -1877,6 +1878,15 @@ for _batch in (DRUGS_BATCH_1, DRUGS_BATCH_2):
         if _drug["id"] not in _existing_ids:
             DRUGS.append(_drug)
             _existing_ids.add(_drug["id"])
+
+# species_info パッチを適用（既存薬品に動物種別投与量を追加）
+_drug_index = {d["id"]: d for d in DRUGS}
+for _drug_id, _species_patch in SPECIES_INFO_PATCH.items():
+    if _drug_id in _drug_index:
+        _target = _drug_index[_drug_id].setdefault("species_info", {})
+        for _sp, _info in _species_patch.items():
+            if _sp not in _target:
+                _target[_sp] = _info
 
 
 # ---------------------------------------------------------------------------
