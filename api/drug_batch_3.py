@@ -162,4 +162,139 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     "glycopyrrolate": {
         "guinea_pig": {"safe": True, "dosage": "0.01-0.02 mg/kg SC/IM", "dosage_ja": "0.01-0.02 mg/kg 皮下/筋注", "notes": "Preferred anticholinergic; not affected by atropinase", "notes_ja": "推奨される抗コリン薬。アトロピナーゼの影響を受けない"},
     },
+    # ==================================================================
+    # Hamster (ハムスター) — ~45 drugs
+    # ==================================================================
+    "amoxicillin_clavulanate": {
+        "hamster": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral penicillins/cephalosporins cause fatal enterotoxemia in hamsters", "notes_ja": "経口ペニシリン/セファロスポリンはハムスターに致死的腸毒素血症を起こす"},
+    },
+    "metronidazole": {
+        "hamster": {"safe": True, "dosage": "20 mg/kg PO q12h", "dosage_ja": "20 mg/kg 経口 12時間毎", "notes": "For anaerobic infections and protozoal disease", "notes_ja": "嫌気性菌感染・原虫疾患に使用"},
+    },
+    "cephalexin": {
+        "hamster": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral cephalosporins cause fatal dysbiosis in hamsters", "notes_ja": "経口セファロスポリンはハムスターに致死的な腸内細菌叢の破壊を起こす"},
+    },
+    "marbofloxacin": {
+        "hamster": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "Fluoroquinolone; avoid in young growing animals", "notes_ja": "フルオロキノロン系。成長期の若齢個体は避ける"},
+    },
+    "azithromycin": {
+        "hamster": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "Macrolide; useful for respiratory infections", "notes_ja": "マクロライド系。呼吸器感染症に有用"},
+    },
+    "trimethoprim_sulfa": {
+        "hamster": {"safe": True, "dosage": "15-30 mg/kg PO q12h", "dosage_ja": "15-30 mg/kg 経口 12時間毎", "notes": "Broad-spectrum; well-tolerated in hamsters", "notes_ja": "広域スペクトル。ハムスターに忍容性良好"},
+    },
+    "chloramphenicol": {
+        "hamster": {"safe": True, "dosage": "50 mg/kg PO q12h", "dosage_ja": "50 mg/kg 経口 12時間毎", "notes": "Safe broad-spectrum alternative to penicillins", "notes_ja": "ペニシリンの代替となる安全な広域スペクトル抗菌薬"},
+    },
+    "gentamicin": {
+        "hamster": {"safe": True, "dosage": "5 mg/kg SC/IM q24h", "dosage_ja": "5 mg/kg 皮下/筋注 24時間毎", "notes": "Monitor for nephrotoxicity; maintain hydration", "notes_ja": "腎毒性に注意。水和を維持"},
+    },
+    "tylosin": {
+        "hamster": {"safe": True, "dosage": "10 mg/kg PO q12h", "dosage_ja": "10 mg/kg 経口 12時間毎", "notes": "May be added to water (0.5 mg/mL); for proliferative ileitis", "notes_ja": "飲水に添加可能（0.5 mg/mL）。増殖性回腸炎に使用"},
+    },
+    "penicillin_g": {
+        "hamster": {"safe": True, "dosage": "22,000 IU/kg SC/IM q24h", "dosage_ja": "22,000 IU/kg 皮下/筋注 24時間毎", "notes": "Injectable penicillin is safe; NEVER give oral penicillin", "notes_ja": "注射用ペニシリンは安全。経口投与は絶対に不可"},
+    },
+    "itraconazole": {
+        "hamster": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "For dermatophytosis; give with fatty food", "notes_ja": "皮膚糸状菌症に使用。脂肪分の多い食事と投与"},
+    },
+    "fluconazole": {
+        "hamster": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "Good oral bioavailability; alternative to itraconazole", "notes_ja": "経口バイオアベイラビリティ良好。イトラコナゾールの代替"},
+    },
+    "terbinafine": {
+        "hamster": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "For dermatophytosis", "notes_ja": "皮膚糸状菌症に使用"},
+    },
+    "selamectin": {
+        "hamster": {"safe": True, "dosage": "15-30 mg/kg topical once; repeat in 14-28 days", "dosage_ja": "15-30 mg/kg 外用 単回; 14-28日後に再投与", "notes": "For mites (Demodex, Notoedres); apply between shoulder blades", "notes_ja": "ダニ類（ニキビダニ, ノトエドレス）に使用。肩甲骨間に塗布"},
+    },
+    "fenbendazole": {
+        "hamster": {"safe": True, "dosage": "20-50 mg/kg PO q24h for 5 days", "dosage_ja": "20-50 mg/kg 経口 24時間毎 5日間", "notes": "For pinworms (Syphacia) and other helminths", "notes_ja": "蟯虫（シファシア）等の蠕虫に使用"},
+    },
+    "praziquantel": {
+        "hamster": {"safe": True, "dosage": "5-10 mg/kg PO/SC; repeat in 14 days", "dosage_ja": "5-10 mg/kg 経口/皮下; 14日後に再投与", "notes": "For cestode infections (Hymenolepis)", "notes_ja": "条虫感染（小形条虫）に使用"},
+    },
+    "fipronil": {
+        "hamster": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "TOXIC to hamsters — can cause fatal neurological signs", "notes_ja": "ハムスターに有毒 — 致死的神経症状を引き起こす可能性"},
+    },
+    "moxidectin": {
+        "hamster": {"safe": True, "dosage": "0.2-0.5 mg/kg PO/topical; repeat in 10-14 days", "dosage_ja": "0.2-0.5 mg/kg 経口/外用; 10-14日後に再投与", "notes": "For Demodex mites", "notes_ja": "ニキビダニに使用"},
+    },
+    "toltrazuril": {
+        "hamster": {"safe": True, "dosage": "10 mg/kg PO q24h for 3 days", "dosage_ja": "10 mg/kg 経口 24時間毎 3日間", "notes": "For coccidiosis", "notes_ja": "コクシジウム症に使用"},
+    },
+    "carprofen": {
+        "hamster": {"safe": True, "dosage": "5 mg/kg SC q24h", "dosage_ja": "5 mg/kg 皮下 24時間毎", "notes": "NSAID; short-term use for post-operative pain", "notes_ja": "NSAID。術後疼痛の短期使用"},
+    },
+    "tramadol": {
+        "hamster": {"safe": True, "dosage": "5-10 mg/kg PO q12h", "dosage_ja": "5-10 mg/kg 経口 12時間毎", "notes": "Moderate analgesia", "notes_ja": "中等度の鎮痛"},
+    },
+    "gabapentin": {
+        "hamster": {"safe": True, "dosage": "5-10 mg/kg PO q8-12h", "dosage_ja": "5-10 mg/kg 経口 8-12時間毎", "notes": "Neuropathic pain; causes mild sedation", "notes_ja": "神経障害性疼痛。軽度の鎮静を生じうる"},
+    },
+    "buprenorphine": {
+        "hamster": {"safe": True, "dosage": "0.05-0.1 mg/kg SC q8-12h", "dosage_ja": "0.05-0.1 mg/kg 皮下 8-12時間毎", "notes": "Perioperative analgesia; may reduce food intake", "notes_ja": "周術期鎮痛。摂食量が減少する場合がある"},
+    },
+    "butorphanol": {
+        "hamster": {"safe": True, "dosage": "1-5 mg/kg SC q4h", "dosage_ja": "1-5 mg/kg 皮下 4時間毎", "notes": "Short-acting opioid", "notes_ja": "短時間作用型オピオイド"},
+    },
+    "ketamine": {
+        "hamster": {"safe": True, "dosage": "50-200 mg/kg IP (with xylazine 10 mg/kg)", "dosage_ja": "50-200 mg/kg 腹腔内（キシラジン10 mg/kgと併用）", "notes": "Wide dose range; always combine with sedative", "notes_ja": "用量幅が広い。必ず鎮静薬と併用"},
+    },
+    "alfaxalone": {
+        "hamster": {"safe": True, "dosage": "5-10 mg/kg IP/IM", "dosage_ja": "5-10 mg/kg 腹腔内/筋注", "notes": "Smoother recovery than ketamine combinations", "notes_ja": "ケタミン併用より回復が良好"},
+    },
+    "prednisolone": {
+        "hamster": {"safe": True, "dosage": "0.5-2 mg/kg PO/SC q12-24h", "dosage_ja": "0.5-2 mg/kg 経口/皮下 12-24時間毎", "notes": "Anti-inflammatory/immunosuppressive; use cautiously", "notes_ja": "抗炎症/免疫抑制。慎重投与"},
+    },
+    "dexamethasone": {
+        "hamster": {"safe": True, "dosage": "0.5-2 mg/kg IM/SC", "dosage_ja": "0.5-2 mg/kg 筋注/皮下", "notes": "Emergency anti-inflammatory; avoid chronic use", "notes_ja": "緊急の抗炎症。長期使用は避ける"},
+    },
+    "famotidine": {
+        "hamster": {"safe": True, "dosage": "0.5 mg/kg PO/SC q24h", "dosage_ja": "0.5 mg/kg 経口/皮下 24時間毎", "notes": "H2 blocker for gastric protection", "notes_ja": "胃保護のH2ブロッカー"},
+    },
+    "furosemide": {
+        "hamster": {"safe": True, "dosage": "1-4 mg/kg SC/IM q12h", "dosage_ja": "1-4 mg/kg 皮下/筋注 12時間毎", "notes": "For congestive heart failure; common in aged hamsters", "notes_ja": "うっ血性心不全に使用。高齢ハムスターに多い"},
+    },
+    "isoflurane": {
+        "hamster": {"safe": True, "dosage": "Induction 3-4%, maintenance 1-2.5%", "dosage_ja": "導入 3-4%, 維持 1-2.5%", "notes": "Standard inhalant; chamber induction recommended", "notes_ja": "標準的吸入麻酔。チャンバー導入を推奨"},
+    },
+    "sevoflurane": {
+        "hamster": {"safe": True, "dosage": "Induction 6-8%, maintenance 3-4%", "dosage_ja": "導入 6-8%, 維持 3-4%", "notes": "Faster induction and recovery than isoflurane", "notes_ja": "イソフルランより導入・回復が速い"},
+    },
+    "midazolam": {
+        "hamster": {"safe": True, "dosage": "1-2 mg/kg IM/IP", "dosage_ja": "1-2 mg/kg 筋注/腹腔内", "notes": "Premedication/sedation; often combined with opioid", "notes_ja": "前投薬/鎮静。オピオイドとの併用が多い"},
+    },
+    "diazepam": {
+        "hamster": {"safe": True, "dosage": "0.5-3 mg/kg IM/IP", "dosage_ja": "0.5-3 mg/kg 筋注/腹腔内", "notes": "Seizure control", "notes_ja": "痙攣管理"},
+    },
+    "atropine": {
+        "hamster": {"safe": True, "dosage": "0.05 mg/kg SC/IM", "dosage_ja": "0.05 mg/kg 皮下/筋注", "notes": "Preanesthetic anticholinergic", "notes_ja": "麻酔前投薬の抗コリン薬"},
+    },
+    "vitamin_b12": {
+        "hamster": {"safe": True, "dosage": "0.02 mg/kg SC/IM q7d", "dosage_ja": "0.02 mg/kg 皮下/筋注 週1回", "notes": "Supportive care", "notes_ja": "支持療法"},
+    },
+    "vitamin_k1": {
+        "hamster": {"safe": True, "dosage": "1-10 mg/kg SC/IM q24h", "dosage_ja": "1-10 mg/kg 皮下/筋注 24時間毎", "notes": "For rodenticide toxicity", "notes_ja": "殺鼠剤中毒に使用"},
+    },
+    "sucralfate": {
+        "hamster": {"safe": True, "dosage": "25-50 mg/kg PO q8-12h", "dosage_ja": "25-50 mg/kg 経口 8-12時間毎", "notes": "Gastric ulcer protection", "notes_ja": "胃潰瘍保護"},
+    },
+    "metoclopramide": {
+        "hamster": {"safe": True, "dosage": "0.5 mg/kg PO/SC q12h", "dosage_ja": "0.5 mg/kg 経口/皮下 12時間毎", "notes": "Prokinetic for GI stasis", "notes_ja": "消化管うっ滞の運動促進薬"},
+    },
+    "mannitol": {
+        "hamster": {"safe": True, "dosage": "0.5-1 g/kg IV over 20 min", "dosage_ja": "0.5-1 g/kg 20分かけて静注", "notes": "For cerebral edema; IV access very challenging", "notes_ja": "脳浮腫に使用。静脈確保が非常に困難"},
+    },
+    "n_acetylcysteine": {
+        "hamster": {"safe": True, "dosage": "70 mg/kg PO/SC q8h", "dosage_ja": "70 mg/kg 経口/皮下 8時間毎", "notes": "Mucolytic; hepatoprotective", "notes_ja": "粘液溶解・肝保護"},
+    },
+    "iron_dextran": {
+        "hamster": {"safe": True, "dosage": "10 mg/kg IM once", "dosage_ja": "10 mg/kg 筋注 単回", "notes": "For iron deficiency anemia", "notes_ja": "鉄欠乏性貧血に使用"},
+    },
+    "fluralaner": {
+        "hamster": {"safe": True, "dosage": "10 mg/kg PO once; repeat in 8-12 weeks", "dosage_ja": "10 mg/kg 経口 単回; 8-12週後に再投与", "notes": "Emerging use for Demodex; limited data", "notes_ja": "ニキビダニへの使用が増加中。データは限られる"},
+    },
+    "glycopyrrolate": {
+        "hamster": {"safe": True, "dosage": "0.01-0.02 mg/kg SC/IM", "dosage_ja": "0.01-0.02 mg/kg 皮下/筋注", "notes": "Preanesthetic anticholinergic", "notes_ja": "麻酔前投薬の抗コリン薬"},
+    },
 }
