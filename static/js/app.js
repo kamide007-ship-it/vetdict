@@ -334,7 +334,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6393,
     species:20,
-    drugs:175,
+    drugs:175, // NOTE: 薬品数が増えたらここを更新 / Update when drugs are added
     symptoms:52
   };
   renderSpeciesGrid();
