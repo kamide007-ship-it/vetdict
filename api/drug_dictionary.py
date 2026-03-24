@@ -15,6 +15,9 @@ from typing import Any, Dict, List, Optional
 
 from flask import Blueprint, jsonify, request
 
+from api.drug_batch_1 import DRUGS_BATCH_1
+from api.drug_batch_2 import DRUGS_BATCH_2
+
 drug_bp = Blueprint("drug_dictionary", __name__)
 
 # ---------------------------------------------------------------------------
@@ -1866,6 +1869,14 @@ DRUGS: List[Dict[str, Any]] = [
     {'id': 'calcitriol', 'name': 'Calcitriol', 'name_ja': 'カルシトリオール', 'category': 'endocrine', 'mechanism': 'Active form of vitamin D3 (1,25-dihydroxycholecalciferol); increases calcium absorption and regulates PTH.', 'mechanism_ja': 'ビタミンD3の活性型（1,25-ジヒドロキシコレカルシフェロール）。カルシウム吸収を増加しPTHを調節。', 'routes': ['PO'], 'routes_ja': ['経口'], 'formulations': ['Capsules', 'Oral solution'], 'formulations_ja': ['カプセル', '経口液'], 'species_info': {'dog': {'safe': True, 'dosage': '2.5-3.5 ng/kg PO q24h', 'dosage_ja': '2.5-3.5 ng/kg 経口 24時間毎', 'notes': 'For renal secondary hyperparathyroidism (CKD); monitor ionized calcium closely', 'notes_ja': '腎性続発性副甲状腺機能亢進症(CKD)に。イオン化カルシウムを厳密にモニタリング'}, 'cat': {'safe': True, 'dosage': '2.5-3.5 ng/kg PO q24h', 'dosage_ja': '2.5-3.5 ng/kg 経口 24時間毎', 'notes': 'For CKD; very small doses - nanogram dosing', 'notes_ja': 'CKDに。非常に少量 - ナノグラム単位の投与'}, 'horse': {'safe': True, 'dosage': 'Not commonly used', 'dosage_ja': '一般的には使用されない', 'notes': 'Limited equine data', 'notes_ja': '馬のデータは限定的'}, 'rabbit': {'safe': True, 'dosage': 'Not well established', 'dosage_ja': '十分に確立されていない', 'notes': 'Limited data; rabbits have unique calcium metabolism', 'notes_ja': 'データ限定的。ウサギは独特のカルシウム代謝を持つ'}, 'ferret': {'safe': True, 'dosage': 'Not well established', 'dosage_ja': '十分に確立されていない', 'notes': 'Limited data', 'notes_ja': 'データ限定的'}, 'bird': {'safe': True, 'dosage': 'Not well established', 'dosage_ja': '十分に確立されていない', 'notes': 'For hypocalcemia', 'notes_ja': '低カルシウム血症に'}}, 'side_effects': ['hypercalcemia', 'soft tissue mineralization', 'polyuria/polydipsia', 'anorexia', 'vomiting'], 'side_effects_ja': ['高カルシウム血症', '軟部組織石灰化', '多尿/多飲', '食欲不振', '嘔吐'], 'contraindications': 'Hypercalcemia. Hyperphosphatemia (must control phosphorus first). Must monitor iCa regularly.', 'contraindications_ja': '高カルシウム血症。高リン血症（先にリンをコントロールする必要）。定期的にiCaモニタリングが必要。', 'drug_interactions': [{'drug': 'thiazide diuretics', 'effect': 'Increased hypercalcemia risk', 'effect_ja': '高カルシウム血症リスク増加'}]},
 
 ]
+
+# バッチファイルの薬品を統合（重複IDを除外）
+_existing_ids = {d["id"] for d in DRUGS}
+for _batch in (DRUGS_BATCH_1, DRUGS_BATCH_2):
+    for _drug in _batch:
+        if _drug["id"] not in _existing_ids:
+            DRUGS.append(_drug)
+            _existing_ids.add(_drug["id"])
 
 
 # ---------------------------------------------------------------------------

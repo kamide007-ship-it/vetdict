@@ -3668,23 +3668,24 @@ def get_diseases():
         except ImportError:
             from species.equine_diseases import DISEASE_DATABASE
         for d in DISEASE_DATABASE:
-            findings = getattr(d, "associated_findings", []) if not isinstance(d, dict) else d.get("associated_findings", [])
+            _ga = (lambda obj, attr, default="": getattr(obj, attr, default) if not isinstance(obj, dict) else obj.get(attr, default))
+            findings = _ga(d, "associated_findings", [])
             output.append(enrich_disease_content({
-                    "name": getattr(d, "name_en", "") if not isinstance(d, dict) else d.get("name_en", ""),
-                    "name_ja": getattr(d, "name_ja", "") if not isinstance(d, dict) else d.get("name_ja", ""),
-                    "description": "",
-                    "description_ja": getattr(d, "description_ja", "") if not isinstance(d, dict) else d.get("description_ja", ""),
+                    "name": _ga(d, "name_en"),
+                    "name_ja": _ga(d, "name_ja"),
+                    "description": _ga(d, "clinical_signs_detail"),
+                    "description_ja": _ga(d, "description_ja"),
                     "pathophysiology": "",
-                    "pathophysiology_ja": "",
+                    "pathophysiology_ja": _ga(d, "pathophysiology"),
                     "causes": "",
-                    "causes_ja": "",
+                    "causes_ja": _ga(d, "etiology") or _ga(d, "risk_factors"),
                     "prevention": "",
-                    "prevention_ja": "",
+                    "prevention_ja": _ga(d, "prevention"),
                     "treatment": "",
-                    "treatment_ja": "",
+                    "treatment_ja": _ga(d, "treatment_protocol") or _ga(d, "general_management"),
                     "prognosis": "",
-                    "prognosis_ja": "",
-                    "severity": getattr(d, "severity", "") if not isinstance(d, dict) else d.get("severity", ""),
+                    "prognosis_ja": _ga(d, "prognosis"),
+                    "severity": _ga(d, "severity"),
                     "symptoms": findings,
                 }, "horse"))
     else:
