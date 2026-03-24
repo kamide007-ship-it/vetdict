@@ -297,4 +297,133 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     "glycopyrrolate": {
         "hamster": {"safe": True, "dosage": "0.01-0.02 mg/kg SC/IM", "dosage_ja": "0.01-0.02 mg/kg 皮下/筋注", "notes": "Preanesthetic anticholinergic", "notes_ja": "麻酔前投薬の抗コリン薬"},
     },
+    # ==================================================================
+    # Hedgehog (ハリネズミ) — ~45 drugs
+    # ==================================================================
+    "amoxicillin": {
+        "hedgehog": {"safe": True, "dosage": "15-30 mg/kg PO q12h", "dosage_ja": "15-30 mg/kg 経口 12時間毎", "notes": "Broad-spectrum; well-tolerated in hedgehogs", "notes_ja": "広域スペクトル。ハリネズミに忍容性良好"},
+    },
+    "amoxicillin_clavulanate": {
+        "hedgehog": {"safe": True, "dosage": "12.5-25 mg/kg PO q12h", "dosage_ja": "12.5-25 mg/kg 経口 12時間毎", "notes": "For resistant infections", "notes_ja": "耐性菌感染に使用"},
+    },
+    "doxycycline": {
+        "hedgehog": {"safe": True, "dosage": "5-10 mg/kg PO q12-24h", "dosage_ja": "5-10 mg/kg 経口 12-24時間毎", "notes": "Good for respiratory and skin infections", "notes_ja": "呼吸器・皮膚感染症に有効"},
+    },
+    "metronidazole": {
+        "hedgehog": {"safe": True, "dosage": "20 mg/kg PO q12h", "dosage_ja": "20 mg/kg 経口 12時間毎", "notes": "For anaerobic infections and GI protozoal disease", "notes_ja": "嫌気性菌感染・消化管原虫疾患に使用"},
+    },
+    "cephalexin": {
+        "hedgehog": {"safe": True, "dosage": "25 mg/kg PO q12h", "dosage_ja": "25 mg/kg 経口 12時間毎", "notes": "First-generation cephalosporin; safe in hedgehogs", "notes_ja": "第一世代セファロスポリン。ハリネズミに安全"},
+    },
+    "clindamycin": {
+        "hedgehog": {"safe": True, "dosage": "5.5-10 mg/kg PO q12h", "dosage_ja": "5.5-10 mg/kg 経口 12時間毎", "notes": "Good bone and dental penetration", "notes_ja": "骨・歯への移行性良好"},
+    },
+    "azithromycin": {
+        "hedgehog": {"safe": True, "dosage": "10-30 mg/kg PO q24-48h", "dosage_ja": "10-30 mg/kg 経口 24-48時間毎", "notes": "Long half-life allows less frequent dosing", "notes_ja": "半減期が長く投与頻度を減らせる"},
+    },
+    "trimethoprim_sulfa": {
+        "hedgehog": {"safe": True, "dosage": "30 mg/kg PO q12h", "dosage_ja": "30 mg/kg 経口 12時間毎", "notes": "Broad-spectrum; useful for UTI", "notes_ja": "広域スペクトル。尿路感染症に有用"},
+    },
+    "chloramphenicol": {
+        "hedgehog": {"safe": True, "dosage": "50 mg/kg PO q12h", "dosage_ja": "50 mg/kg 経口 12時間毎", "notes": "Broad-spectrum alternative", "notes_ja": "広域スペクトルの代替薬"},
+    },
+    "gentamicin": {
+        "hedgehog": {"safe": True, "dosage": "5 mg/kg SC/IM q24h", "dosage_ja": "5 mg/kg 皮下/筋注 24時間毎", "notes": "Ensure hydration; nephrotoxic", "notes_ja": "水和を確保。腎毒性あり"},
+    },
+    "itraconazole": {
+        "hedgehog": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "For dermatophytosis (Trichophyton erinacei); give with food", "notes_ja": "皮膚糸状菌症（T. erinacei）に使用。食事と投与"},
+    },
+    "fluconazole": {
+        "hedgehog": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "Alternative antifungal; good CNS penetration", "notes_ja": "代替抗真菌薬。CNS移行性良好"},
+    },
+    "terbinafine": {
+        "hedgehog": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "Very effective for hedgehog dermatophytosis", "notes_ja": "ハリネズミの皮膚糸状菌症に非常に有効"},
+    },
+    "ivermectin": {
+        "hedgehog": {"safe": True, "dosage": "0.2-0.4 mg/kg SC; repeat in 14 days", "dosage_ja": "0.2-0.4 mg/kg 皮下; 14日後に再投与", "notes": "For Caparinia mites and other ectoparasites; 3 treatments typical", "notes_ja": "カパリニアダニ等の外部寄生虫に使用。通常3回投与"},
+    },
+    "fenbendazole": {
+        "hedgehog": {"safe": True, "dosage": "20-50 mg/kg PO q24h for 5 days", "dosage_ja": "20-50 mg/kg 経口 24時間毎 5日間", "notes": "For intestinal helminths (Crenosoma, Capillaria)", "notes_ja": "腸管蠕虫（クレノソーマ、キャピラリア）に使用"},
+    },
+    "selamectin": {
+        "hedgehog": {"safe": True, "dosage": "6-18 mg/kg topical once; repeat in 21-28 days", "dosage_ja": "6-18 mg/kg 外用 単回; 21-28日後に再投与", "notes": "Apply to skin between quills; effective for mites and fleas", "notes_ja": "針の間の皮膚に塗布。ダニ・ノミに有効"},
+    },
+    "praziquantel": {
+        "hedgehog": {"safe": True, "dosage": "5-10 mg/kg PO/SC; repeat in 14 days", "dosage_ja": "5-10 mg/kg 経口/皮下; 14日後に再投与", "notes": "For cestode infections", "notes_ja": "条虫感染に使用"},
+    },
+    "fipronil": {
+        "hedgehog": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Potential toxicity in hedgehogs; avoid use", "notes_ja": "ハリネズミに毒性の可能性。使用を避ける"},
+    },
+    "fluralaner": {
+        "hedgehog": {"safe": True, "dosage": "10-15 mg/kg PO once; repeat in 8-12 weeks", "dosage_ja": "10-15 mg/kg 経口 単回; 8-12週後に再投与", "notes": "Emerging treatment for Caparinia mites", "notes_ja": "カパリニアダニの新しい治療法"},
+    },
+    "carprofen": {
+        "hedgehog": {"safe": True, "dosage": "1-2 mg/kg PO/SC q12-24h", "dosage_ja": "1-2 mg/kg 経口/皮下 12-24時間毎", "notes": "NSAID for post-operative and chronic pain", "notes_ja": "術後・慢性疼痛のNSAID"},
+    },
+    "tramadol": {
+        "hedgehog": {"safe": True, "dosage": "5-10 mg/kg PO q12h", "dosage_ja": "5-10 mg/kg 経口 12時間毎", "notes": "Moderate analgesia; can be mixed with food", "notes_ja": "中等度の鎮痛。食事に混ぜて投与可能"},
+    },
+    "gabapentin": {
+        "hedgehog": {"safe": True, "dosage": "3-5 mg/kg PO q8-12h", "dosage_ja": "3-5 mg/kg 経口 8-12時間毎", "notes": "For neuropathic pain and Wobbly Hedgehog Syndrome", "notes_ja": "神経障害性疼痛とふらつきハリネズミ症候群に使用"},
+    },
+    "buprenorphine": {
+        "hedgehog": {"safe": True, "dosage": "0.01-0.05 mg/kg SC/IM q8-12h", "dosage_ja": "0.01-0.05 mg/kg 皮下/筋注 8-12時間毎", "notes": "Perioperative analgesia", "notes_ja": "周術期鎮痛"},
+    },
+    "butorphanol": {
+        "hedgehog": {"safe": True, "dosage": "0.2-1 mg/kg SC/IM q4-6h", "dosage_ja": "0.2-1 mg/kg 皮下/筋注 4-6時間毎", "notes": "Short-acting opioid", "notes_ja": "短時間作用型オピオイド"},
+    },
+    "ketamine": {
+        "hedgehog": {"safe": True, "dosage": "5-20 mg/kg IM (with medetomidine 0.05-0.1 mg/kg)", "dosage_ja": "5-20 mg/kg 筋注（メデトミジン0.05-0.1 mg/kgと併用）", "notes": "Must combine with sedative; mask induction with isoflurane often preferred", "notes_ja": "鎮静薬との併用が必須。イソフルランマスク導入が好まれることが多い"},
+    },
+    "alfaxalone": {
+        "hedgehog": {"safe": True, "dosage": "1-3 mg/kg IM/IV", "dosage_ja": "1-3 mg/kg 筋注/静注", "notes": "Preferred injectable anesthetic for hedgehogs", "notes_ja": "ハリネズミに推奨される注射麻酔薬"},
+    },
+    "prednisolone": {
+        "hedgehog": {"safe": True, "dosage": "0.5-2 mg/kg PO q12-24h", "dosage_ja": "0.5-2 mg/kg 経口 12-24時間毎", "notes": "Anti-inflammatory; immunosuppression risk", "notes_ja": "抗炎症。免疫抑制のリスクあり"},
+    },
+    "dexamethasone": {
+        "hedgehog": {"safe": True, "dosage": "0.2-2 mg/kg IM/IV", "dosage_ja": "0.2-2 mg/kg 筋注/静注", "notes": "Emergency anti-inflammatory/shock therapy", "notes_ja": "緊急の抗炎症/ショック治療"},
+    },
+    "furosemide": {
+        "hedgehog": {"safe": True, "dosage": "1-4 mg/kg PO/SC/IM q12h", "dosage_ja": "1-4 mg/kg 経口/皮下/筋注 12時間毎", "notes": "For cardiac disease and pulmonary edema", "notes_ja": "心疾患・肺水腫に使用"},
+    },
+    "famotidine": {
+        "hedgehog": {"safe": True, "dosage": "0.5-1 mg/kg PO/SC q24h", "dosage_ja": "0.5-1 mg/kg 経口/皮下 24時間毎", "notes": "Gastric acid reduction", "notes_ja": "胃酸分泌抑制"},
+    },
+    "isoflurane": {
+        "hedgehog": {"safe": True, "dosage": "Induction 3-5%, maintenance 1.5-3%", "dosage_ja": "導入 3-5%, 維持 1.5-3%", "notes": "Preferred method of anesthesia; chamber or mask induction", "notes_ja": "推奨される麻酔法。チャンバーまたはマスクで導入"},
+    },
+    "sevoflurane": {
+        "hedgehog": {"safe": True, "dosage": "Induction 6-8%, maintenance 3-4.5%", "dosage_ja": "導入 6-8%, 維持 3-4.5%", "notes": "Faster recovery than isoflurane", "notes_ja": "イソフルランより回復が速い"},
+    },
+    "midazolam": {
+        "hedgehog": {"safe": True, "dosage": "0.5-2 mg/kg IM/IN", "dosage_ja": "0.5-2 mg/kg 筋注/経鼻", "notes": "Sedation/premedication; intranasal effective for uncooperative patients", "notes_ja": "鎮静/前投薬。非協力的な患者に経鼻投与が有効"},
+    },
+    "diazepam": {
+        "hedgehog": {"safe": True, "dosage": "0.5-2 mg/kg IM", "dosage_ja": "0.5-2 mg/kg 筋注", "notes": "Seizure control; IM absorption unreliable", "notes_ja": "痙攣管理。IM吸収は不安定"},
+    },
+    "atropine": {
+        "hedgehog": {"safe": True, "dosage": "0.01-0.04 mg/kg SC/IM", "dosage_ja": "0.01-0.04 mg/kg 皮下/筋注", "notes": "Preanesthetic; reduce respiratory secretions", "notes_ja": "麻酔前投薬。気道分泌物の減少"},
+    },
+    "glycopyrrolate": {
+        "hedgehog": {"safe": True, "dosage": "0.01-0.02 mg/kg SC/IM", "dosage_ja": "0.01-0.02 mg/kg 皮下/筋注", "notes": "Preferred anticholinergic for premedication", "notes_ja": "前投薬に推奨される抗コリン薬"},
+    },
+    "vitamin_b12": {
+        "hedgehog": {"safe": True, "dosage": "0.02 mg/kg SC/IM q7d", "dosage_ja": "0.02 mg/kg 皮下/筋注 週1回", "notes": "Supportive care", "notes_ja": "支持療法"},
+    },
+    "vitamin_k1": {
+        "hedgehog": {"safe": True, "dosage": "1-5 mg/kg SC/IM q24h", "dosage_ja": "1-5 mg/kg 皮下/筋注 24時間毎", "notes": "For coagulopathy", "notes_ja": "凝固障害に使用"},
+    },
+    "sucralfate": {
+        "hedgehog": {"safe": True, "dosage": "25-50 mg/kg PO q8-12h", "dosage_ja": "25-50 mg/kg 経口 8-12時間毎", "notes": "Gastric protection", "notes_ja": "胃保護"},
+    },
+    "omeprazole": {
+        "hedgehog": {"safe": True, "dosage": "4 mg/kg PO q24h", "dosage_ja": "4 mg/kg 経口 24時間毎", "notes": "Proton pump inhibitor for gastric ulcers", "notes_ja": "胃潰瘍に対するプロトンポンプ阻害薬"},
+    },
+    "lactulose": {
+        "hedgehog": {"safe": True, "dosage": "0.5 mL/kg PO q8-12h", "dosage_ja": "0.5 mL/kg 経口 8-12時間毎", "notes": "For hepatic encephalopathy or constipation", "notes_ja": "肝性脳症または便秘に使用"},
+    },
+    "iron_dextran": {
+        "hedgehog": {"safe": True, "dosage": "10 mg/kg IM once", "dosage_ja": "10 mg/kg 筋注 単回", "notes": "For iron deficiency anemia", "notes_ja": "鉄欠乏性貧血に使用"},
+    },
 }
