@@ -3667,8 +3667,10 @@ def get_diseases():
             from api.species.equine_diseases import DISEASE_DATABASE
         except ImportError:
             from species.equine_diseases import DISEASE_DATABASE
+        def _ga(obj, attr, default=""):
+            return getattr(obj, attr, default) if not isinstance(obj, dict) else obj.get(attr, default)
+
         for d in DISEASE_DATABASE:
-            _ga = (lambda obj, attr, default="": getattr(obj, attr, default) if not isinstance(obj, dict) else obj.get(attr, default))
             findings = _ga(d, "associated_findings", [])
             output.append(enrich_disease_content({
                     "name": _ga(d, "name_en"),
