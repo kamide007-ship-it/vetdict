@@ -370,4 +370,70 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     "calcium_gluconate": {
         "tortoise": {"safe": True, "dosage": "50-100 mg/kg IM/SC q24h; 10% sol'n IV slowly for tetany", "dosage_ja": "50-100 mg/kg 筋注/皮下 24時間毎; テタニー時は10%液を緩徐静注", "notes": "Essential for metabolic bone disease/hypocalcemia", "notes_ja": "代謝性骨疾患/低カルシウム血症に必須"},
     },
+    # ==================================================================
+    # Horse (馬) — additional ~30 drugs
+    # ==================================================================
+    "marbofloxacin": {
+        "horse": {"safe": True, "dosage": "2 mg/kg PO/IV q24h", "dosage_ja": "2 mg/kg 経口/静注 24時間毎", "notes": "Fluoroquinolone; good for respiratory and joint infections", "notes_ja": "フルオロキノロン系。呼吸器・関節感染症に有効"},
+    },
+    "azithromycin": {
+        "horse": {"safe": True, "dosage": "10 mg/kg PO q24h for 5 days, then q48h", "dosage_ja": "10 mg/kg 経口 24時間毎 5日間、以降48時間毎", "notes": "First-line for Rhodococcus equi in foals; combine with rifampin", "notes_ja": "仔馬のロドコッカス・エクイに第一選択。リファンピンと併用"},
+    },
+    "tylosin": {
+        "horse": {"safe": True, "dosage": "10 mg/kg PO/IM q12-24h", "dosage_ja": "10 mg/kg 経口/筋注 12-24時間毎", "notes": "Macrolide; may cause diarrhea in adult horses—monitor closely", "notes_ja": "マクロライド系。成馬に下痢を起こす可能性—注意深く観察"},
+    },
+    "fluconazole": {
+        "horse": {"safe": True, "dosage": "14 mg/kg PO loading, then 5 mg/kg PO q24h", "dosage_ja": "負荷量 14 mg/kg 経口、以降 5 mg/kg 経口 24時間毎", "notes": "Good CNS penetration; useful for fungal meningitis", "notes_ja": "CNS移行性良好。真菌性髄膜炎に有用"},
+    },
+    "terbinafine": {
+        "horse": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "For dermatophytosis; limited equine-specific data", "notes_ja": "皮膚糸状菌症に使用。馬特異的データは限られる"},
+    },
+    "voriconazole": {
+        "horse": {"safe": True, "dosage": "3-4 mg/kg PO q24h", "dosage_ja": "3-4 mg/kg 経口 24時間毎", "notes": "For Aspergillus guttural pouch mycosis", "notes_ja": "喉嚢真菌症（アスペルギルス）に使用"},
+    },
+    "toltrazuril": {
+        "horse": {"safe": True, "dosage": "10-20 mg/kg PO once; repeat in 14 days", "dosage_ja": "10-20 mg/kg 経口 単回; 14日後に再投与", "notes": "For EPM (Sarcocystis neurona) and coccidiosis in foals", "notes_ja": "EPM（サルコシスチス・ニューロナ）・仔馬のコクシジウム症に使用"},
+    },
+    "alfaxalone": {
+        "horse": {"safe": True, "dosage": "1-2 mg/kg IV slowly", "dosage_ja": "1-2 mg/kg 緩徐静注", "notes": "Short-acting injectable anesthetic; emerging use in equine practice", "notes_ja": "短時間作用型注射麻酔薬。馬臨床での使用が増加中"},
+    },
+    "famotidine": {
+        "horse": {"safe": True, "dosage": "1.8-2.8 mg/kg PO q12h; 0.23-0.5 mg/kg IV q8-12h", "dosage_ja": "1.8-2.8 mg/kg 経口 12時間毎; 0.23-0.5 mg/kg 静注 8-12時間毎", "notes": "H2 blocker; less effective than omeprazole for EGUS", "notes_ja": "H2ブロッカー。馬胃潰瘍症候群にはオメプラゾールより効果が劣る"},
+    },
+    "metoclopramide": {
+        "horse": {"safe": True, "dosage": "0.25-0.6 mg/kg IV CRI (0.04 mg/kg/h)", "dosage_ja": "0.25-0.6 mg/kg 持続静注（0.04 mg/kg/時）", "notes": "Prokinetic for post-operative ileus; CRI preferred over bolus", "notes_ja": "術後イレウスの消化管運動促進薬。ボーラスより持続静注を推奨"},
+    },
+    "maropitant": {
+        "horse": {"safe": True, "dosage": "1 mg/kg IV q24h", "dosage_ja": "1 mg/kg 静注 24時間毎", "notes": "NK1 antagonist; visceral analgesic effect in colic; antiemetic", "notes_ja": "NK1拮抗薬。疝痛における内臓鎮痛効果・制吐作用"},
+    },
+    "lactulose": {
+        "horse": {"safe": True, "dosage": "0.1-0.2 mL/kg PO q6-12h", "dosage_ja": "0.1-0.2 mL/kg 経口 6-12時間毎", "notes": "For hepatic encephalopathy; adjust dose to stool consistency", "notes_ja": "肝性脳症に使用。便の硬さに応じて用量調整"},
+    },
+    "enalapril": {
+        "horse": {"safe": True, "dosage": "0.5 mg/kg PO q24h", "dosage_ja": "0.5 mg/kg 経口 24時間毎", "notes": "ACE inhibitor for valvular disease; limited equine data", "notes_ja": "弁膜疾患に対するACE阻害薬。馬でのデータは限られる"},
+    },
+    "amlodipine": {
+        "horse": {"safe": True, "dosage": "0.05-0.1 mg/kg PO q24h", "dosage_ja": "0.05-0.1 mg/kg 経口 24時間毎", "notes": "Calcium channel blocker; limited equine data", "notes_ja": "カルシウム拮抗薬。馬でのデータは限られる"},
+    },
+    "levetiracetam": {
+        "horse": {"safe": True, "dosage": "20-60 mg/kg PO q8h", "dosage_ja": "20-60 mg/kg 経口 8時間毎", "notes": "Anticonvulsant; useful for neonatal seizures", "notes_ja": "抗痙攣薬。新生仔の痙攣に有用"},
+    },
+    "diphenhydramine": {
+        "horse": {"safe": True, "dosage": "0.5-1 mg/kg IV/IM q8-12h", "dosage_ja": "0.5-1 mg/kg 静注/筋注 8-12時間毎", "notes": "Antihistamine for acute allergic reactions/urticaria", "notes_ja": "急性アレルギー反応/蕁麻疹に対する抗ヒスタミン薬"},
+    },
+    "omega3": {
+        "horse": {"safe": True, "dosage": "60-120 mL/day PO (flaxseed or fish oil)", "dosage_ja": "60-120 mL/日 経口（亜麻仁油またはフィッシュオイル）", "notes": "Anti-inflammatory supplement for joint and skin health", "notes_ja": "関節・皮膚の健康のための抗炎症性サプリメント"},
+    },
+    "acetaminophen": {
+        "horse": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "TOXIC to horses — can cause hepatic necrosis and methemoglobinemia", "notes_ja": "馬に有毒 — 肝壊死・メトヘモグロビン血症を起こす可能性"},
+    },
+    "fipronil": {
+        "horse": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Not approved for horses; potential toxicity", "notes_ja": "馬に未承認。毒性の可能性あり"},
+    },
+    "ibuprofen": {
+        "horse": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Causes GI ulceration and nephrotoxicity; use flunixin or phenylbutazone instead", "notes_ja": "消化管潰瘍・腎毒性を起こす。フルニキシンまたはフェニルブタゾンを使用"},
+    },
+    "ondansetron": {
+        "horse": {"safe": True, "dosage": "0.1-0.5 mg/kg IV q8-12h", "dosage_ja": "0.1-0.5 mg/kg 静注 8-12時間毎", "notes": "5-HT3 antagonist; for post-operative nausea and ileus support", "notes_ja": "5-HT3拮抗薬。術後悪心・イレウス補助に使用"},
+    },
 }
