@@ -2,11 +2,16 @@ const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\
 
 /* ===== Admin / Pro access control ===== */
 const ADMIN_TOKEN="kamide007";
+// OPEN BETA: All users get Pro access for free.
+// Set to false when launching paid plans.
+const OPEN_BETA=true;
 let isAdmin=false;
 let isPro=false;
 
 function checkAccess(){
   const params=new URLSearchParams(location.search);
+  // Open beta: everyone is Pro
+  if(OPEN_BETA) isPro=true;
   // Check PayPal return ?pro=activated
   if(params.get("pro")==="activated"){
     localStorage.setItem("vetdict-pro","1");
@@ -18,15 +23,13 @@ function checkAccess(){
   if(adminParam===ADMIN_TOKEN){
     localStorage.setItem("vetdict-admin","1");
     isAdmin=true;isPro=true;
-    // Clean URL
     history.replaceState(null,"",location.pathname+location.hash);
   } else if(localStorage.getItem("vetdict-admin")==="1"){
     isAdmin=true;isPro=true;
   }
-  // Check pro subscription via PayPal
-  if(localStorage.getItem("vetdict-pro")==="1"){
+  // Check pro subscription via PayPal (skip during open beta)
+  if(!OPEN_BETA&&localStorage.getItem("vetdict-pro")==="1"){
     isPro=true;
-    // Verify with server in background
     const subId=localStorage.getItem("vetdict-subscription-id");
     if(subId){
       fetch("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})})
