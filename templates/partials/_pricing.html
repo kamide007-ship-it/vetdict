@@ -1,33 +1,17 @@
 <section class="pricing-section" id="pricingSection">
   <div class="pricing-header">
-    <h2 class="pricing-title">VetDict Pro</h2>
-    <p class="pricing-subtitle">獣医学の臨床をもっと便利に</p>
+    <h2 class="pricing-title">VetDict</h2>
+    <p class="pricing-subtitle">現在オープンベータ — 全機能を無料でご利用いただけます</p>
   </div>
   <div class="pricing-cards">
-    <!-- Free Plan -->
-    <div class="pricing-card">
-      <div class="pricing-card-header">
-        <h3>Free</h3>
-        <div class="pricing-price"><span class="pricing-amount">&yen;0</span></div>
-      </div>
-      <ul class="pricing-features">
-        <li>症状チェッカー（全21動物種）</li>
-        <li>疾患データベース閲覧</li>
-        <li>薬品辞書（基本情報）</li>
-        <li>AI症状相談チャット（1日5回）</li>
-      </ul>
-      <div class="pricing-cta">
-        <span class="pricing-btn pricing-btn-free">現在ご利用中</span>
-      </div>
-    </div>
-    <!-- Pro Plan -->
+    <!-- Current: All Free -->
     <div class="pricing-card pricing-card-pro">
-      <div class="pricing-badge">おすすめ</div>
+      <div class="pricing-badge">オープンベータ</div>
       <div class="pricing-card-header">
-        <h3>Pro</h3>
+        <h3>全機能無料</h3>
         <div class="pricing-price">
-          <span class="pricing-amount">&yen;980</span>
-          <span class="pricing-period">/月</span>
+          <span class="pricing-amount">&yen;0</span>
+          <span class="pricing-period" style="text-decoration:line-through;color:var(--gray-400)">&yen;980/月</span>
         </div>
       </div>
       <ul class="pricing-features">
@@ -36,130 +20,12 @@
         <li>薬品辞書<strong>フルアクセス</strong></li>
         <li>AI症状相談チャット<strong>無制限</strong></li>
         <li>詳細な鑑別診断レポート</li>
-        <li>優先サポート</li>
+        <li>全動物種対応（犬・猫・馬・魚 他）</li>
       </ul>
       <div class="pricing-cta">
-        <div id="paypal-button-container"></div>
-        <div id="paypal-fallback" style="display:none;text-align:center">
-          <button onclick="serverSidePayPal()" class="pricing-btn pricing-btn-pro" id="paypalFallbackBtn">PayPalで申し込む（¥980/月）</button>
-          <p style="font-size:.68rem;color:var(--gray-500);margin-top:6px">PayPalの決済ページにリダイレクトします</p>
-        </div>
-        <p class="pricing-note" id="proStatusText">安全なPayPal決済 — いつでもキャンセル可能</p>
-        <!-- Restore Pro on another device -->
-        <div class="pro-restore" id="proRestoreSection">
-          <p class="pro-restore-label">既にProをお持ちの方（別端末で復元）</p>
-          <div class="pro-restore-row">
-            <input type="email" id="restoreEmail" placeholder="登録メールアドレス" class="pro-restore-input">
-            <button onclick="restorePro()" class="pro-restore-btn" id="restoreBtn">復元</button>
-          </div>
-          <p class="pro-restore-msg" id="restoreMsg"></p>
-        </div>
+        <span class="pricing-btn pricing-btn-pro" style="background:var(--green);pointer-events:none">現在すべて無料でご利用中</span>
+        <p class="pricing-note">正式リリース後は一部機能が有料プラン（¥980/月）に移行予定です</p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- PayPal JS SDK -->
-<script src="https://www.paypal.com/sdk/js?client-id=AX7kp51yXEJ_NiNH4dH-Y6NA-bDz7pFzT6uPgelYbXMjW3doC0I2wCGjHTGaIN2ExrixrLeXg4ZuVTUE&vault=true&intent=subscription&currency=JPY&locale=ja_JP&disable-funding=credit,card" data-sdk-integration-source="button-factory"></script>
-<script>
-(function(){
-  // Skip PayPal if admin/pro
-  if(localStorage.getItem("vetdict-admin")==="1"||localStorage.getItem("vetdict-pro")==="1"){
-    var container=document.getElementById("paypal-button-container");
-    if(container)container.innerHTML='<span class="pricing-btn pricing-btn-pro" style="pointer-events:none;background:var(--green)">Pro \u2713 \u30a2\u30af\u30c6\u30a3\u30d6</span>';
-    var status=document.getElementById("proStatusText");
-    if(status)status.textContent="";
-    return;
-  }
-
-  // Render PayPal subscription button
-  var btnContainer=document.getElementById("paypal-button-container");
-  var fallback=document.getElementById("paypal-fallback");
-  if(typeof paypal!=="undefined"&&btnContainer){
-    try{
-      paypal.Buttons({
-        style:{shape:"pill",color:"blue",layout:"vertical",label:"subscribe"},
-        createSubscription:function(data,actions){
-          return actions.subscription.create({
-            plan_id:"P-5FB7289813535813HNHCF4OA"
-          });
-        },
-        onApprove:function(data){
-          localStorage.setItem("vetdict-pro","1");
-          localStorage.setItem("vetdict-subscription-id",data.subscriptionID);
-          // Ask for email to enable cross-device sync
-          var email=prompt("Pro\u30d7\u30e9\u30f3\u306e\u304a\u7533\u3057\u8fbc\u307f\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01\n\n\u4ed6\u306e\u7aef\u672b\u3067\u3082Pro\u3092\u4f7f\u3046\u305f\u3081\u3001\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\uff1a");
-          if(email){localStorage.setItem("vetdict-email",email);}
-          fetch("/api/paypal/activate",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({subscription_id:data.subscriptionID,email:email||""})
-          }).catch(function(){});
-          location.reload();
-        },
-        onError:function(err){
-          console.error("PayPal button error:",err);
-          // Show fallback payment link
-          if(fallback)fallback.style.display="block";
-        }
-      }).render("#paypal-button-container").catch(function(err){
-        console.error("PayPal render error:",err);
-        if(fallback)fallback.style.display="block";
-      });
-    }catch(e){
-      console.error("PayPal init error:",e);
-      if(fallback)fallback.style.display="block";
-    }
-  } else {
-    // SDK failed to load
-    if(fallback)fallback.style.display="block";
-  }
-})();
-
-function serverSidePayPal(){
-  var btn=document.getElementById("paypalFallbackBtn");
-  if(btn)btn.textContent="処理中...";
-  fetch("/api/paypal/create-subscription",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"})
-  .then(function(r){return r.json();})
-  .then(function(d){
-    if(d.approve_url){
-      window.location.href=d.approve_url;
-    } else {
-      alert("PayPal接続エラー: "+(d.error||"不明なエラー"));
-      if(btn)btn.textContent="PayPalで申し込む（¥980/月）";
-    }
-  })
-  .catch(function(e){
-    alert("通信エラー: "+e.message);
-    if(btn)btn.textContent="PayPalで申し込む（¥980/月）";
-  });
-}
-
-function restorePro(){
-  var email=document.getElementById("restoreEmail").value.trim();
-  var msg=document.getElementById("restoreMsg");
-  var btn=document.getElementById("restoreBtn");
-  if(!email){msg.textContent="メールアドレスを入力してください";msg.className="pro-restore-msg error";return;}
-  btn.textContent="確認中...";btn.disabled=true;
-  fetch("/api/paypal/restore",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
-  .then(function(r){return r.json();})
-  .then(function(d){
-    if(d.active){
-      localStorage.setItem("vetdict-pro","1");
-      localStorage.setItem("vetdict-subscription-id",d.subscription_id);
-      localStorage.setItem("vetdict-email",email);
-      msg.textContent="Pro\u304c\u5fa9\u5143\u3055\u308c\u307e\u3057\u305f\uff01";
-      msg.className="pro-restore-msg success";
-      setTimeout(function(){location.reload();},1000);
-    } else {
-      msg.textContent="\u3053\u306e\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u306b\u6709\u52b9\u306aPro\u30d7\u30e9\u30f3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093";
-      msg.className="pro-restore-msg error";
-      btn.textContent="\u5fa9\u5143";btn.disabled=false;
-    }
-  })
-  .catch(function(){
-    msg.textContent="\u901a\u4fe1\u30a8\u30e9\u30fc";msg.className="pro-restore-msg error";
-    btn.textContent="\u5fa9\u5143";btn.disabled=false;
-  });
-}
-</script>
