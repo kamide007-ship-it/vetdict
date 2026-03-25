@@ -1,7 +1,7 @@
 const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
 
 /* ===== Admin / Pro access control ===== */
-const ADMIN_TOKEN="vetdict-admin-2026";
+const ADMIN_TOKEN="kamide007";
 let isAdmin=false;
 let isPro=false;
 
