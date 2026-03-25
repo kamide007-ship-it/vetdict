@@ -41,8 +41,8 @@
       <div class="pricing-cta">
         <div id="paypal-button-container"></div>
         <div id="paypal-fallback" style="display:none;text-align:center">
-          <a href="https://www.paypal.com/paypalme/equinevetsynapse/980JPY" target="_blank" rel="noopener" class="pricing-btn pricing-btn-pro">PayPalで¥980を支払う</a>
-          <p style="font-size:.68rem;color:var(--gray-500);margin-top:6px">お支払い後、メールにてPro有効化をご連絡ください</p>
+          <button onclick="serverSidePayPal()" class="pricing-btn pricing-btn-pro" id="paypalFallbackBtn">PayPalで申し込む（¥980/月）</button>
+          <p style="font-size:.68rem;color:var(--gray-500);margin-top:6px">PayPalの決済ページにリダイレクトします</p>
         </div>
         <p class="pricing-note" id="proStatusText">安全なPayPal決済 — いつでもキャンセル可能</p>
       </div>
@@ -51,7 +51,7 @@
 </section>
 
 <!-- PayPal JS SDK -->
-<script src="https://www.paypal.com/sdk/js?client-id=AX7kp51yXEJ_NiNH4dH-Y6NA-bDz7pFzT6uPgelYbXMjW3doC0I2wCGjHTGaIN2ExrixrLeXg4ZuVTUE&vault=true&intent=subscription&currency=JPY" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AX7kp51yXEJ_NiNH4dH-Y6NA-bDz7pFzT6uPgelYbXMjW3doC0I2wCGjHTGaIN2ExrixrLeXg4ZuVTUE&vault=true&intent=subscription&currency=JPY&locale=ja_JP&disable-funding=credit,card" data-sdk-integration-source="button-factory"></script>
 <script>
 (function(){
   // Skip PayPal if admin/pro
@@ -104,4 +104,23 @@
     if(fallback)fallback.style.display="block";
   }
 })();
+
+function serverSidePayPal(){
+  var btn=document.getElementById("paypalFallbackBtn");
+  if(btn)btn.textContent="処理中...";
+  fetch("/api/paypal/create-subscription",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"})
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.approve_url){
+      window.location.href=d.approve_url;
+    } else {
+      alert("PayPal接続エラー: "+(d.error||"不明なエラー"));
+      if(btn)btn.textContent="PayPalで申し込む（¥980/月）";
+    }
+  })
+  .catch(function(e){
+    alert("通信エラー: "+e.message);
+    if(btn)btn.textContent="PayPalで申し込む（¥980/月）";
+  });
+}
 </script>
