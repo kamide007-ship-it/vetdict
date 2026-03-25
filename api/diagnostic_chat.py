@@ -971,19 +971,65 @@ def extract_symptoms_from_text(text: str) -> list:
     text_lower = text.lower()
     matched_symptoms = set()
 
-    # Try direct symptom name matches
+    # ---------------------------------------------------------------
+    # Phase 1: Longest-match-first alias matching
+    # Sort aliases by length descending so that longer, more specific
+    # phrases match before shorter substrings (e.g. "食欲がない" before
+    # "ない", "blood in stool" before "stool").
+    # ---------------------------------------------------------------
+    _sorted_aliases = sorted(SYMPTOM_ALIASES.keys(), key=len, reverse=True)
+    consumed_ranges: list[tuple[int, int]] = []  # track matched text regions
+
+    for alias in _sorted_aliases:
+        pos = text_lower.find(alias)
+        if pos == -1:
+            continue
+        symptom_id = SYMPTOM_ALIASES[alias]
+        if symptom_id not in SYMPTOM_IDS:
+            continue
+        end = pos + len(alias)
+        # Skip if this range overlaps with an already-consumed range
+        overlap = False
+        for cs, ce in consumed_ranges:
+            if pos < ce and end > cs:
+                overlap = True
+                break
+        if overlap:
+            # Still add the symptom (same region might describe multiple things)
+            matched_symptoms.add(symptom_id)
+            continue
+        matched_symptoms.add(symptom_id)
+        consumed_ranges.append((pos, end))
+
+    # Phase 2: Direct symptom name matches (catch anything aliases missed)
     for symptom in SYMPTOMS:
         name_ja = symptom["name_ja"].lower()
         name_en = symptom["name_en"].lower()
         symptom_id = symptom["id"]
-
         if name_ja in text_lower or name_en in text_lower:
             matched_symptoms.add(symptom_id)
 
-    # Try alias matches
-    for alias, symptom_id in SYMPTOM_ALIASES.items():
-        if alias in text_lower and symptom_id in SYMPTOM_IDS:
-            matched_symptoms.add(symptom_id)
+    # ---------------------------------------------------------------
+    # Phase 3: Fuzzy / partial matching for Japanese input
+    # If no symptoms matched yet, try splitting by common particles and
+    # retrying with individual phrases.  This handles cases like
+    # "咳と下痢がある" → ["咳", "下痢がある"] → coughing, diarrhea
+    # ---------------------------------------------------------------
+    if not matched_symptoms:
+        import re as _re
+        fragments = _re.split(r'[、。,.と！!？?\s]+', text_lower)
+        fragments = [f.strip() for f in fragments if len(f.strip()) >= 1]
+        for frag in fragments:
+            for alias in _sorted_aliases:
+                if alias in frag:
+                    sid = SYMPTOM_ALIASES[alias]
+                    if sid in SYMPTOM_IDS:
+                        matched_symptoms.add(sid)
+                        break  # one match per fragment is enough
+            # Also check direct names
+            for symptom in SYMPTOMS:
+                if symptom["name_ja"].lower() in frag or symptom["name_en"].lower() in frag:
+                    matched_symptoms.add(symptom["id"])
 
     return list(matched_symptoms)
 
