@@ -395,6 +395,33 @@ a:hover{text-decoration:underline}
 .lang-toggle button.active{background:var(--navy);color:var(--white)}
 .lang-toggle button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 
+/* --- Pricing --- */
+.pricing-section{max-width:800px;margin:0 auto;padding:40px 20px}
+.pricing-header{text-align:center;margin-bottom:24px}
+.pricing-title{font-size:1.4rem;font-weight:800;color:var(--navy)}
+.pricing-subtitle{font-size:.86rem;color:var(--gray-500);margin-top:4px}
+.pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.pricing-cards{grid-template-columns:1fr}}
+.pricing-card{background:var(--white);border:2px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px;position:relative}
+.pricing-card-pro{border-color:var(--navy);box-shadow:var(--shadow-lg)}
+.pricing-badge{position:absolute;top:-10px;right:16px;background:var(--orange);color:var(--white);font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:10px}
+.pricing-card-header h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.pricing-price{display:flex;align-items:baseline;gap:2px}
+.pricing-amount{font-size:1.8rem;font-weight:800;color:var(--navy)}
+.pricing-period{font-size:.82rem;color:var(--gray-500)}
+.pricing-features{list-style:none;padding:0;margin:16px 0}
+.pricing-features li{font-size:.8rem;padding:6px 0;border-bottom:1px solid var(--gray-100);color:var(--gray-600)}
+.pricing-features li::before{content:"\2713 ";color:var(--green);font-weight:700}
+.pricing-features li strong{color:var(--navy);font-weight:600}
+.pricing-cta{margin-top:16px;text-align:center}
+.pricing-btn{display:inline-block;padding:10px 24px;border-radius:20px;font-size:.84rem;font-weight:600;text-decoration:none;transition:all var(--transition-fast);font-family:var(--font)}
+.pricing-btn-free{background:var(--gray-100);color:var(--gray-500);cursor:default}
+.pricing-btn-pro{background:var(--navy);color:var(--white)}
+.pricing-btn-pro:hover{background:var(--navy-light);transform:scale(1.02);color:var(--white);text-decoration:none}
+.pricing-note{font-size:.68rem;color:var(--gray-400);margin-top:8px}
+[data-theme="dark"] .pricing-card{background:var(--gray-100);border-color:var(--gray-200)}
+[data-theme="dark"] .pricing-card-pro{border-color:var(--navy-light)}
+
 /* --- Footer --- */
 .footer{color:rgba(255,255,255,.7);font-size:.78rem}
 .footer a{color:var(--green)}

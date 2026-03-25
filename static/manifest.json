@@ -1,0 +1,19 @@
+{
+  "name": "VetDict - Veterinary Disease Database",
+  "short_name": "VetDict",
+  "description": "21 animal species, 6,400+ diseases, 187 drugs. AI-powered veterinary diagnostic support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a2744",
+  "theme_color": "#1a2744",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "/static/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["medical", "education", "health"]
+}
