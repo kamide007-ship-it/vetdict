@@ -162,6 +162,13 @@ if HEALTH_CHECKER_AVAILABLE and health_bp:
 if DIAGNOSTIC_CHAT_AVAILABLE and diagnostic_bp:
     app.register_blueprint(diagnostic_bp)
 
+# PayPal subscription blueprint
+try:
+    from api.paypal_api import paypal_bp
+    app.register_blueprint(paypal_bp)
+except ImportError:
+    pass
+
 # Drug dictionary blueprint
 try:
     from api.drug_dictionary import drug_bp

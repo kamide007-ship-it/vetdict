@@ -17,8 +17,18 @@ function checkAccess(){
   } else if(localStorage.getItem("vetdict-admin")==="1"){
     isAdmin=true;isPro=true;
   }
-  // Check pro subscription (future Stripe integration)
-  if(localStorage.getItem("vetdict-pro")==="1") isPro=true;
+  // Check pro subscription via PayPal
+  if(localStorage.getItem("vetdict-pro")==="1"){
+    isPro=true;
+    // Verify with server in background
+    const subId=localStorage.getItem("vetdict-subscription-id");
+    if(subId){
+      fetch("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})})
+      .then(function(r){return r.json();})
+      .then(function(d){if(!d.active){localStorage.removeItem("vetdict-pro");localStorage.removeItem("vetdict-subscription-id");isPro=false;document.body.classList.remove("is-pro");}})
+      .catch(function(){});
+    }
+  }
 
   // Update UI based on access level
   document.body.classList.toggle("is-admin",isAdmin);
