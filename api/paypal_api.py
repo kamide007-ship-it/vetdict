@@ -5,9 +5,11 @@ Handles subscription activation, verification, and webhook events.
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 import os
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 
@@ -16,6 +18,33 @@ from flask import Blueprint, jsonify, request
 logger = logging.getLogger(__name__)
 
 paypal_bp = Blueprint("paypal", __name__, url_prefix="/api/paypal")
+
+# PayPal configuration
+PAYPAL_CLIENT_ID = os.getenv(
+    "PAYPAL_CLIENT_ID",
+    "AX7kp51yXEJ_NiNH4dH-Y6NA-bDz7pFzT6uPgelYbXMjW3doC0I2wCGjHTGaIN2ExrixrLeXg4ZuVTUE",
+)
+PAYPAL_SECRET = os.getenv("PAYPAL_SECRET", "")
+PAYPAL_PLAN_ID = os.getenv("PAYPAL_PLAN_ID", "P-5FB7289813535813HNHCF4OA")
+PAYPAL_API_BASE = "https://api-m.paypal.com"
+
+
+def _get_paypal_token() -> str | None:
+    """Get PayPal OAuth2 access token."""
+    if not PAYPAL_SECRET:
+        return None
+    auth = base64.b64encode(f"{PAYPAL_CLIENT_ID}:{PAYPAL_SECRET}".encode()).decode()
+    req = urllib.request.Request(
+        f"{PAYPAL_API_BASE}/v1/oauth2/token",
+        data=b"grant_type=client_credentials",
+        headers={"Authorization": f"Basic {auth}", "Content-Type": "application/x-www-form-urlencoded"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read()).get("access_token")
+    except Exception as e:
+        logger.error(f"PayPal token error: {e}")
+        return None
 
 # Subscribers file (simple JSON-based storage)
 _SUBSCRIBERS_FILE = Path(__file__).resolve().parent.parent / "instance" / "subscribers.json"
@@ -37,6 +66,48 @@ def _save_subscribers(data: dict) -> None:
     _SUBSCRIBERS_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(_SUBSCRIBERS_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+@paypal_bp.route("/create-subscription", methods=["POST"])
+def create_subscription():
+    """Create a PayPal subscription and return the approval URL."""
+    token = _get_paypal_token()
+    if not token:
+        return jsonify({"error": "PayPal configuration incomplete"}), 500
+
+    sub_data = {
+        "plan_id": PAYPAL_PLAN_ID,
+        "application_context": {
+            "brand_name": "VetDict",
+            "locale": "ja-JP",
+            "user_action": "SUBSCRIBE_NOW",
+            "return_url": request.host_url.rstrip("/") + "/?pro=activated",
+            "cancel_url": request.host_url.rstrip("/") + "/#pricing",
+        },
+    }
+    req = urllib.request.Request(
+        f"{PAYPAL_API_BASE}/v1/billing/subscriptions",
+        data=json.dumps(sub_data).encode(),
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Prefer": "return=representation",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            sub = json.loads(resp.read())
+            approve_url = next(
+                (l["href"] for l in sub.get("links", []) if l["rel"] == "approve"), None
+            )
+            return jsonify({
+                "subscription_id": sub.get("id"),
+                "approve_url": approve_url,
+                "status": sub.get("status"),
+            })
+    except Exception as e:
+        logger.error(f"PayPal create subscription error: {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 @paypal_bp.route("/activate", methods=["POST"])

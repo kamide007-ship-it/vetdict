@@ -6,8 +6,14 @@ let isAdmin=false;
 let isPro=false;
 
 function checkAccess(){
-  // Check URL param ?admin=<token>
   const params=new URLSearchParams(location.search);
+  // Check PayPal return ?pro=activated
+  if(params.get("pro")==="activated"){
+    localStorage.setItem("vetdict-pro","1");
+    isPro=true;
+    history.replaceState(null,"",location.pathname+location.hash);
+  }
+  // Check URL param ?admin=<token>
   const adminParam=params.get("admin");
   if(adminParam===ADMIN_TOKEN){
     localStorage.setItem("vetdict-admin","1");
