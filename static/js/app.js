@@ -64,7 +64,7 @@ const I18N={
     dtContraindications:"禁忌事項",dtRoutes:"投与経路",dtFormulations:"製剤",dtInteractions:"薬物相互作用",dtSpeciesInfo:"動物種別情報:",
     safe:"安全",contraindicated:"禁忌",dosageLabel:"投与量: ",
     sponsorVetLabel:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
-    productDetails:"製品詳細 &rarr;",
+    productDetails:"製品詳細 \u2192",
     speciesCardDisease:"疾患",speciesCardDrug:"薬品",
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
@@ -130,7 +130,7 @@ const I18N={
     dtContraindications:"Contraindications",dtRoutes:"Routes",dtFormulations:"Formulations",dtInteractions:"Drug Interactions",dtSpeciesInfo:"Species Information:",
     safe:"Safe",contraindicated:"Contraindicated",dosageLabel:"Dosage: ",
     sponsorVetLabel:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
-    productDetails:"Product details &rarr;",
+    productDetails:"Product details \u2192",
     speciesCardDisease:"diseases",speciesCardDrug:"drugs",
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
@@ -866,43 +866,139 @@ function sendLandingChat(){
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
   const species=currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
+  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
-    if(!data){loading.textContent="No response data";return;}
-    const base=(data.response||data.message||data.error||t("noResponse"));
-    if(!base){loading.textContent="No base response";return;}
-    loading.textContent=stripGuidanceFromResponse(base,data.species_guidance);
-    renderSpeciesGuidance("landingChatMessages",data.species_guidance);
-    msgs.scrollTop=msgs.scrollHeight;
+    loading.remove();
+    if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
+    renderChatResult(msgs,data);
   })
   .catch(err=>{
+    loading.remove();
     console.error("Chat error:",err);
-    loading.textContent=t("commError")+" ("+err.message+")";
+    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.textContent=t("commError")+" ("+err.message+")";msgs.appendChild(errDiv);
     msgs.scrollTop=msgs.scrollHeight;
   });
 }
+
+// Accumulated symptoms for chat conversation continuity
+let chatAccumulatedSymptoms=[];
 
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species})})
+  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();
-    if(!data){addChatMsg("No response data","bot");return;}
-    if(data.species_guidance) addChatMsg(`[Species] ${data.species_guidance}`,"bot");
-    const base=(data.response||data.message||data.error||t("noResponse"));
-    if(base) addChatMsg(stripGuidanceFromResponse(base,data.species_guidance),"bot");
-    else addChatMsg(t("noResponse"),"bot");
+    if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    // Update accumulated symptoms
+    if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
+    // Render rich response
+    renderChatResult(msgs,data);
   })
   .catch(err=>{
     loading.remove();
     console.error("Chat error:",err);
     addChatMsg(t("commError")+" ("+err.message+")","bot");
   });
+}
+
+function renderChatResult(container,data){
+  const wrapper=document.createElement("div");
+  wrapper.className="chat-msg bot chat-result";
+
+  // 1. Species guidance
+  if(data.species_guidance){
+    const g=document.createElement("div");
+    g.className="chat-species-guidance";
+    g.textContent=data.species_guidance;
+    wrapper.appendChild(g);
+  }
+
+  // 2. Extracted symptoms tags
+  const symptoms=data.symptom_details||[];
+  if(symptoms.length>0){
+    const symDiv=document.createElement("div");
+    symDiv.className="chat-symptoms-tags";
+    const label=document.createElement("span");
+    label.className="chat-symptoms-label";
+    label.textContent=currentLang==="ja"?"\u691c\u51fa\u3055\u308c\u305f\u75c7\u72b6: ":"Detected symptoms: ";
+    symDiv.appendChild(label);
+    symptoms.forEach(s=>{
+      const tag=document.createElement("span");
+      tag.className="chat-symptom-tag";
+      tag.textContent=currentLang==="ja"?(s.name_ja||s.name_en||s.id):(s.name_en||s.name_ja||s.id);
+      symDiv.appendChild(tag);
+    });
+    wrapper.appendChild(symDiv);
+  }
+
+  // 3. Disease candidate cards
+  const candidates=data.disease_candidates||[];
+  if(candidates.length>0){
+    const listDiv=document.createElement("div");
+    listDiv.className="chat-disease-list";
+    candidates.slice(0,5).forEach((c,i)=>{
+      const card=document.createElement("div");
+      card.className="chat-disease-card";
+      const pct=Math.round((c.similarity_score||0)*100);
+      const sevClass=c.severity==="high"||c.severity==="critical"?"sev-high":c.severity==="medium"?"sev-med":"sev-low";
+      card.innerHTML=`
+        <div class="chat-disease-head">
+          <span class="chat-disease-rank">${i+1}</span>
+          <span class="chat-disease-name">${c.name_ja||c.name_en||c.disease_id}</span>
+          <span class="chat-disease-name-en">${c.name_en||""}</span>
+          <span class="chat-disease-pct ${sevClass}">${pct}%</span>
+        </div>
+        <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
+        ${c.description_ja||c.description?`<div class="chat-disease-desc">${c.description_ja||c.description}</div>`:""}
+        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.join(", ")}</div>`:""}
+      `;
+      listDiv.appendChild(card);
+    });
+    wrapper.appendChild(listDiv);
+  } else if(symptoms.length>0){
+    const noMatch=document.createElement("div");
+    noMatch.className="chat-no-match";
+    noMatch.textContent=currentLang==="ja"?"\u8a72\u5f53\u3059\u308b\u75be\u60a3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u3082\u3046\u5c11\u3057\u8a73\u3057\u304f\u75c7\u72b6\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044\u3002":"No matching diseases found. Please describe more symptoms.";
+    wrapper.appendChild(noMatch);
+  } else {
+    const noSym=document.createElement("div");
+    noSym.className="chat-no-symptoms";
+    noSym.textContent=currentLang==="ja"?"\u75c7\u72b6\u3092\u691c\u51fa\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u5177\u4f53\u7684\u306a\u75c7\u72b6\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002\n\u4f8b: \u300c\u54b3\u304c\u51fa\u308b\u300d\u300c\u8ddb\u884c\u3057\u3066\u3044\u308b\u300d\u300c\u5143\u6c17\u304c\u306a\u3044\u300d":"No symptoms detected. Please enter specific symptoms.\nExample: coughing, limping, lethargy";
+    wrapper.appendChild(noSym);
+  }
+
+  // 4. Follow-up questions
+  const fqs=data.follow_up_questions||[];
+  if(fqs.length>0){
+    const fqDiv=document.createElement("div");
+    fqDiv.className="chat-followup";
+    fqs.forEach(fq=>{
+      const btn=document.createElement("button");
+      btn.className="chat-followup-btn";
+      btn.textContent=currentLang==="ja"?(fq.question_ja||fq.question_en||""):(fq.question_en||fq.question_ja||"");
+      btn.addEventListener("click",()=>{
+        const chatInput=document.getElementById("chatInput");
+        if(chatInput){chatInput.value=btn.textContent;sendChatMessage();}
+      });
+      fqDiv.appendChild(btn);
+    });
+    wrapper.appendChild(fqDiv);
+  }
+
+  // 5. Disclaimer
+  const disc=document.createElement("div");
+  disc.className="chat-disclaimer";
+  disc.textContent=currentLang==="ja"?"\u203b \u3053\u3061\u3089\u306f\u53c2\u8003\u60c5\u5831\u3067\u3059\u3002\u7363\u533b\u5e2b\u306e\u8a3a\u5bdf\u3092\u53d7\u3051\u3066\u304f\u3060\u3055\u3044\u3002":"\u203b This is reference information. Please consult a veterinarian.";
+  wrapper.appendChild(disc);
+
+  container.appendChild(wrapper);
+  container.scrollTop=container.scrollHeight;
 }
 
 function addChatMsg(text,type){
