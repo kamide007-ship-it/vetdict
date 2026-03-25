@@ -20,6 +20,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "hamster": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral cephalosporins cause fatal dysbiosis in hamsters", "notes_ja": "経口セファロスポリンはハムスターに致死的な腸内細菌叢の破壊を起こす"},
         "hedgehog": {"safe": True, "dosage": "25 mg/kg PO q12h", "dosage_ja": "25 mg/kg 経口 12時間毎", "notes": "First-generation cephalosporin; safe in hedgehogs", "notes_ja": "第一世代セファロスポリン。ハリネズミに安全"},
         "chinchilla": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral cephalosporins cause fatal dysbiosis", "notes_ja": "経口セファロスポリンは致死的な腸内細菌叢の破壊を起こす"},
+        "bird": {"safe": True, "dosage": "35-100 mg/kg PO q6-8h", "dosage_ja": "35-100 mg/kg 経口 6-8時間毎", "notes": "Short half-life in birds; frequent dosing required", "notes_ja": "鳥類では半減期が短い。頻回投与が必要"},
     },
     "chloramphenicol": {
         "guinea_pig": {"safe": True, "dosage": "30-50 mg/kg PO q12h", "dosage_ja": "30-50 mg/kg 経口 12時間毎", "notes": "Useful broad-spectrum option safe for guinea pigs", "notes_ja": "モルモットに安全な広域スペクトル抗菌薬"},
@@ -28,6 +29,8 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "chinchilla": {"safe": True, "dosage": "30-50 mg/kg PO q12h", "dosage_ja": "30-50 mg/kg 経口 12時間毎", "notes": "Broad-spectrum; safe alternative to penicillins", "notes_ja": "広域スペクトル。ペニシリンの安全な代替"},
         "snake": {"safe": True, "dosage": "40 mg/kg SC/IM q24-48h", "dosage_ja": "40 mg/kg 皮下/筋注 24-48時間毎", "notes": "Broad-spectrum; useful for resistant infections", "notes_ja": "広域スペクトル。耐性菌感染に有用"},
         "tortoise": {"safe": True, "dosage": "40 mg/kg SC/IM q24-48h", "dosage_ja": "40 mg/kg 皮下/筋注 24-48時間毎", "notes": "For resistant infections", "notes_ja": "耐性菌感染に使用"},
+        "reptile": {"safe": True, "dosage": "40 mg/kg SC/IM q24-48h", "dosage_ja": "40 mg/kg 皮下/筋注 24-48時間毎", "notes": "Useful for anaerobic infections", "notes_ja": "嫌気性菌感染に有用"},
+        "ferret": {"safe": True, "dosage": "25-50 mg/kg PO q12h", "dosage_ja": "25-50 mg/kg 経口 12時間毎", "notes": "Broad-spectrum; useful for resistant infections", "notes_ja": "広域スペクトル。耐性菌感染に有用"},
     },
     "gentamicin": {
         "guinea_pig": {"safe": True, "dosage": "5-8 mg/kg SC/IM q24h", "dosage_ja": "5-8 mg/kg 皮下/筋注 24時間毎", "notes": "Monitor for nephrotoxicity and ototoxicity; ensure adequate hydration", "notes_ja": "腎毒性・聴器毒性に注意。十分な水和を確保"},
@@ -36,26 +39,37 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "chinchilla": {"safe": True, "dosage": "5 mg/kg SC/IM q24h", "dosage_ja": "5 mg/kg 皮下/筋注 24時間毎", "notes": "Monitor for nephrotoxicity", "notes_ja": "腎毒性に注意"},
         "snake": {"safe": True, "dosage": "2.5 mg/kg IM q72h", "dosage_ja": "2.5 mg/kg 筋注 72時間毎", "notes": "Inject in cranial half of body; nephrotoxic—ensure hydration", "notes_ja": "体の前半部に注射。腎毒性—水和を確保"},
         "tortoise": {"safe": True, "dosage": "2.5 mg/kg IM q72h", "dosage_ja": "2.5 mg/kg 筋注 72時間毎", "notes": "Inject in forelimbs; avoid renal portal bypass", "notes_ja": "前肢に注射。腎門脈迂回を避ける"},
+        "ferret": {"safe": True, "dosage": "5 mg/kg SC/IM q24h", "dosage_ja": "5 mg/kg 皮下/筋注 24時間毎", "notes": "Nephrotoxic; ensure hydration", "notes_ja": "腎毒性あり。水和を確保"},
+        "bird": {"safe": True, "dosage": "5 mg/kg IM q12h", "dosage_ja": "5 mg/kg 筋注 12時間毎", "notes": "Monitor for nephrotoxicity; maintain hydration", "notes_ja": "腎毒性に注意。水和を維持"},
     },
     "marbofloxacin": {
         "guinea_pig": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "Fluoroquinolone; use with caution in young growing animals", "notes_ja": "フルオロキノロン系。成長期の若齢個体には慎重投与"},
         "hamster": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "Fluoroquinolone; avoid in young growing animals", "notes_ja": "フルオロキノロン系。成長期の若齢個体は避ける"},
         "chinchilla": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "Fluoroquinolone; safe for chinchillas", "notes_ja": "フルオロキノロン系。チンチラに安全"},
+        "horse": {"safe": True, "dosage": "2 mg/kg PO/IV q24h", "dosage_ja": "2 mg/kg 経口/静注 24時間毎", "notes": "Fluoroquinolone; good for respiratory and joint infections", "notes_ja": "フルオロキノロン系。呼吸器・関節感染症に有効"},
     },
     "tylosin": {
         "guinea_pig": {"safe": True, "dosage": "10 mg/kg PO q12h", "dosage_ja": "10 mg/kg 経口 12時間毎", "notes": "Macrolide; useful for respiratory infections", "notes_ja": "マクロライド系。呼吸器感染症に有用"},
         "hamster": {"safe": True, "dosage": "10 mg/kg PO q12h", "dosage_ja": "10 mg/kg 経口 12時間毎", "notes": "May be added to water (0.5 mg/mL); for proliferative ileitis", "notes_ja": "飲水に添加可能（0.5 mg/mL）。増殖性回腸炎に使用"},
+        "horse": {"safe": True, "dosage": "10 mg/kg PO/IM q12-24h", "dosage_ja": "10 mg/kg 経口/筋注 12-24時間毎", "notes": "Macrolide; may cause diarrhea in adult horses—monitor closely", "notes_ja": "マクロライド系。成馬に下痢を起こす可能性—注意深く観察"},
+        "ferret": {"safe": True, "dosage": "5-10 mg/kg PO q12h", "dosage_ja": "5-10 mg/kg 経口 12時間毎", "notes": "For proliferative bowel disease", "notes_ja": "増殖性腸疾患に使用"},
+        "rabbit": {"safe": True, "dosage": "10 mg/kg PO q12h", "dosage_ja": "10 mg/kg 経口 12時間毎", "notes": "Macrolide; useful for respiratory infections and Clostridial enteritis", "notes_ja": "マクロライド系。呼吸器感染症・クロストリジウム腸炎に有用"},
     },
     "florfenicol": {
         "guinea_pig": {"safe": True, "dosage": "25 mg/kg SC q24-48h", "dosage_ja": "25 mg/kg 皮下 24-48時間毎", "notes": "Alternative when chloramphenicol unavailable", "notes_ja": "クロラムフェニコール入手不可時の代替"},
+        "bird": {"safe": True, "dosage": "25-30 mg/kg PO/IM q12h", "dosage_ja": "25-30 mg/kg 経口/筋注 12時間毎", "notes": "Broad-spectrum; good penetration into respiratory tissue", "notes_ja": "広域スペクトル。呼吸器組織への移行性良好"},
+        "rabbit": {"safe": True, "dosage": "25 mg/kg SC q24-48h", "dosage_ja": "25 mg/kg 皮下 24-48時間毎", "notes": "Alternative broad-spectrum antibiotic", "notes_ja": "代替の広域スペクトル抗菌薬"},
     },
     "penicillin_g": {
         "guinea_pig": {"safe": True, "dosage": "22,000-44,000 IU/kg SC/IM q24h", "dosage_ja": "22,000-44,000 IU/kg 皮下/筋注 24時間毎", "notes": "Injectable penicillin is safe; NEVER give oral penicillin to guinea pigs", "notes_ja": "注射用ペニシリンは安全。経口ペニシリンは絶対に投与しない"},
         "hamster": {"safe": True, "dosage": "22,000 IU/kg SC/IM q24h", "dosage_ja": "22,000 IU/kg 皮下/筋注 24時間毎", "notes": "Injectable penicillin is safe; NEVER give oral penicillin", "notes_ja": "注射用ペニシリンは安全。経口投与は絶対に不可"},
         "chinchilla": {"safe": True, "dosage": "22,000-44,000 IU/kg SC/IM q24h", "dosage_ja": "22,000-44,000 IU/kg 皮下/筋注 24時間毎", "notes": "Injectable penicillin is safe; NEVER give oral penicillin", "notes_ja": "注射用ペニシリンは安全。経口ペニシリンは絶対に投与しない"},
+        "ferret": {"safe": True, "dosage": "22,000-44,000 IU/kg SC/IM q12-24h", "dosage_ja": "22,000-44,000 IU/kg 皮下/筋注 12-24時間毎", "notes": "Injectable penicillin safe for ferrets", "notes_ja": "注射用ペニシリンはフェレットに安全"},
     },
     "oxytetracycline": {
         "guinea_pig": {"safe": True, "dosage": "50 mg/kg PO q12h", "dosage_ja": "50 mg/kg 経口 12時間毎", "notes": "Long-acting injectable: 60 mg/kg SC q72h also used", "notes_ja": "長時間作用型注射：60 mg/kg 皮下 72時間毎も使用"},
+        "reptile": {"safe": True, "dosage": "6-10 mg/kg PO/IM q24-48h", "dosage_ja": "6-10 mg/kg 経口/筋注 24-48時間毎", "notes": "For intracellular organisms", "notes_ja": "細胞内寄生体に使用"},
+        "rabbit": {"safe": True, "dosage": "15-30 mg/kg PO q8h; or 60 mg/kg SC q72h (LA)", "dosage_ja": "15-30 mg/kg 経口 8時間毎; または 60 mg/kg 皮下 72時間毎（長時間型）", "notes": "For Pasteurella and other respiratory pathogens", "notes_ja": "パスツレラ等の呼吸器病原体に使用"},
     },
     "itraconazole": {
         "guinea_pig": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "First-line for dermatophytosis; give with food for better absorption", "notes_ja": "皮膚糸状菌症の第一選択。食事と共に投与で吸収向上"},
@@ -64,6 +78,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "chinchilla": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "For dermatophytosis; give with food", "notes_ja": "皮膚糸状菌症に使用。食事と投与"},
         "snake": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "For systemic mycosis; give with food", "notes_ja": "全身性真菌症に使用。食事と投与"},
         "tortoise": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "For systemic mycosis", "notes_ja": "全身性真菌症に使用"},
+        "rabbit": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "For dermatophytosis; give with food", "notes_ja": "皮膚糸状菌症に使用。食事と投与"},
     },
     "fluconazole": {
         "guinea_pig": {"safe": True, "dosage": "5-16 mg/kg PO q24h", "dosage_ja": "5-16 mg/kg 経口 24時間毎", "notes": "Alternative antifungal; good CNS penetration", "notes_ja": "代替抗真菌薬。CNS移行性良好"},
@@ -71,16 +86,23 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "hedgehog": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "Alternative antifungal; good CNS penetration", "notes_ja": "代替抗真菌薬。CNS移行性良好"},
         "chinchilla": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "Alternative antifungal", "notes_ja": "代替抗真菌薬"},
         "snake": {"safe": True, "dosage": "5 mg/kg PO q48h", "dosage_ja": "5 mg/kg 経口 48時間毎", "notes": "CNS-penetrating antifungal", "notes_ja": "CNS移行性のある抗真菌薬"},
+        "horse": {"safe": True, "dosage": "14 mg/kg PO loading, then 5 mg/kg PO q24h", "dosage_ja": "負荷量 14 mg/kg 経口、以降 5 mg/kg 経口 24時間毎", "notes": "Good CNS penetration; useful for fungal meningitis", "notes_ja": "CNS移行性良好。真菌性髄膜炎に有用"},
+        "ferret": {"safe": True, "dosage": "5-10 mg/kg PO q24h", "dosage_ja": "5-10 mg/kg 経口 24時間毎", "notes": "For systemic mycosis; good bioavailability", "notes_ja": "全身性真菌症に使用。バイオアベイラビリティ良好"},
     },
     "terbinafine": {
         "guinea_pig": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "Effective for Trichophyton; 4-6 week course typically needed", "notes_ja": "トリコフィトンに有効。通常4-6週間の投与が必要"},
         "hamster": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "For dermatophytosis", "notes_ja": "皮膚糸状菌症に使用"},
         "hedgehog": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "Very effective for hedgehog dermatophytosis", "notes_ja": "ハリネズミの皮膚糸状菌症に非常に有効"},
         "chinchilla": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "Effective for Trichophyton mentagrophytes", "notes_ja": "トリコフィトン・メンタグロフィテスに有効"},
+        "horse": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "For dermatophytosis; limited equine-specific data", "notes_ja": "皮膚糸状菌症に使用。馬特異的データは限られる"},
+        "ferret": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "For dermatophytosis", "notes_ja": "皮膚糸状菌症に使用"},
+        "bird": {"safe": True, "dosage": "10-15 mg/kg PO q12-24h", "dosage_ja": "10-15 mg/kg 経口 12-24時間毎", "notes": "For Aspergillosis (adjunctive to voriconazole)", "notes_ja": "アスペルギルス症（ボリコナゾールとの補助療法）"},
     },
     "griseofulvin": {
         "guinea_pig": {"safe": True, "dosage": "15-25 mg/kg PO q24h for 4-6 weeks", "dosage_ja": "15-25 mg/kg 経口 24時間毎 4-6週間", "notes": "Teratogenic; do not use in pregnant animals", "notes_ja": "催奇形性あり。妊娠個体には使用しない"},
         "chinchilla": {"safe": True, "dosage": "25 mg/kg PO q24h for 6-8 weeks", "dosage_ja": "25 mg/kg 経口 24時間毎 6-8週間", "notes": "Teratogenic; do not use in pregnant animals", "notes_ja": "催奇形性あり。妊娠個体には使用しない"},
+        "bird": {"safe": True, "dosage": "25 mg/kg PO q12h", "dosage_ja": "25 mg/kg 経口 12時間毎", "notes": "For dermatophytosis; rarely needed in birds", "notes_ja": "皮膚糸状菌症に使用。鳥類での必要性は稀"},
+        "rabbit": {"safe": True, "dosage": "15-25 mg/kg PO q24h for 4-6 weeks", "dosage_ja": "15-25 mg/kg 経口 24時間毎 4-6週間", "notes": "Teratogenic; do not use in pregnant does", "notes_ja": "催奇形性あり。妊娠個体には使用しない"},
     },
     "praziquantel": {
         "guinea_pig": {"safe": True, "dosage": "5-10 mg/kg PO/SC, repeat in 10-14 days", "dosage_ja": "5-10 mg/kg 経口/皮下 10-14日後に再投与", "notes": "For cestode infections", "notes_ja": "条虫感染に使用"},
@@ -94,6 +116,8 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "guinea_pig": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "TOXIC to guinea pigs — can cause fatal seizures", "notes_ja": "モルモットに有毒 — 致死的痙攣を引き起こす可能性"},
         "hamster": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "TOXIC to hamsters — can cause fatal neurological signs", "notes_ja": "ハムスターに有毒 — 致死的神経症状を引き起こす可能性"},
         "hedgehog": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Potential toxicity in hedgehogs; avoid use", "notes_ja": "ハリネズミに毒性の可能性。使用を避ける"},
+        "horse": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Not approved for horses; potential toxicity", "notes_ja": "馬に未承認。毒性の可能性あり"},
+        "bird": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "TOXIC to some bird species; potentially fatal", "notes_ja": "一部の鳥種に有毒。致死的な可能性あり"},
     },
     "fluralaner": {
         "guinea_pig": {"safe": True, "dosage": "8-12 mg/kg PO once; repeat in 8-12 weeks", "dosage_ja": "8-12 mg/kg 経口 単回; 8-12週後に再投与", "notes": "Effective for Trixacarus mites; emerging use in exotics", "notes_ja": "疥癬ダニに有効。エキゾチック動物での使用が増加中"},
@@ -103,12 +127,19 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     "toltrazuril": {
         "guinea_pig": {"safe": True, "dosage": "10 mg/kg PO q24h for 3 days", "dosage_ja": "10 mg/kg 経口 24時間毎 3日間", "notes": "For coccidiosis (Eimeria caviae)", "notes_ja": "コクシジウム症（Eimeria caviae）に使用"},
         "hamster": {"safe": True, "dosage": "10 mg/kg PO q24h for 3 days", "dosage_ja": "10 mg/kg 経口 24時間毎 3日間", "notes": "For coccidiosis", "notes_ja": "コクシジウム症に使用"},
+        "horse": {"safe": True, "dosage": "10-20 mg/kg PO once; repeat in 14 days", "dosage_ja": "10-20 mg/kg 経口 単回; 14日後に再投与", "notes": "For EPM (Sarcocystis neurona) and coccidiosis in foals", "notes_ja": "EPM（サルコシスチス・ニューロナ）・仔馬のコクシジウム症に使用"},
+        "reptile": {"safe": True, "dosage": "5-15 mg/kg PO; repeat in 7-14 days", "dosage_ja": "5-15 mg/kg 経口; 7-14日後に再投与", "notes": "For coccidiosis", "notes_ja": "コクシジウム症に使用"},
+        "ferret": {"safe": True, "dosage": "10 mg/kg PO q24h for 3-5 days", "dosage_ja": "10 mg/kg 経口 24時間毎 3-5日間", "notes": "For coccidiosis (Eimeria/Isospora)", "notes_ja": "コクシジウム症に使用"},
+        "bird": {"safe": True, "dosage": "7-25 mg/kg PO q24h for 2-3 days", "dosage_ja": "7-25 mg/kg 経口 24時間毎 2-3日間", "notes": "For coccidiosis", "notes_ja": "コクシジウム症に使用"},
     },
     "carprofen": {
         "guinea_pig": {"safe": True, "dosage": "4 mg/kg SC q24h", "dosage_ja": "4 mg/kg 皮下 24時間毎", "notes": "NSAID; use short-term; monitor for GI side effects", "notes_ja": "NSAID。短期使用。消化器副作用に注意"},
         "hamster": {"safe": True, "dosage": "5 mg/kg SC q24h", "dosage_ja": "5 mg/kg 皮下 24時間毎", "notes": "NSAID; short-term use for post-operative pain", "notes_ja": "NSAID。術後疼痛の短期使用"},
         "hedgehog": {"safe": True, "dosage": "1-2 mg/kg PO/SC q12-24h", "dosage_ja": "1-2 mg/kg 経口/皮下 12-24時間毎", "notes": "NSAID for post-operative and chronic pain", "notes_ja": "術後・慢性疼痛のNSAID"},
         "chinchilla": {"safe": True, "dosage": "4 mg/kg SC q24h", "dosage_ja": "4 mg/kg 皮下 24時間毎", "notes": "NSAID; short-term use", "notes_ja": "NSAID。短期使用"},
+        "ferret": {"safe": True, "dosage": "1-2 mg/kg PO/SC q12-24h", "dosage_ja": "1-2 mg/kg 経口/皮下 12-24時間毎", "notes": "NSAID; short-term use for pain management", "notes_ja": "NSAID。疼痛管理の短期使用"},
+        "bird": {"safe": True, "dosage": "1-2 mg/kg PO/IM q12-24h", "dosage_ja": "1-2 mg/kg 経口/筋注 12-24時間毎", "notes": "NSAID for pain management", "notes_ja": "疼痛管理のNSAID"},
+        "rabbit": {"safe": True, "dosage": "2-4 mg/kg SC/PO q12-24h", "dosage_ja": "2-4 mg/kg 皮下/経口 12-24時間毎", "notes": "NSAID; well-tolerated; useful post-operatively", "notes_ja": "NSAID。忍容性良好。術後に有用"},
     },
     "tramadol": {
         "guinea_pig": {"safe": True, "dosage": "5-10 mg/kg PO q12h", "dosage_ja": "5-10 mg/kg 経口 12時間毎", "notes": "Moderate pain relief; often combined with NSAID", "notes_ja": "中等度の鎮痛。NSAIDとの併用が多い"},
@@ -123,6 +154,9 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "hamster": {"safe": True, "dosage": "5-10 mg/kg PO q8-12h", "dosage_ja": "5-10 mg/kg 経口 8-12時間毎", "notes": "Neuropathic pain; causes mild sedation", "notes_ja": "神経障害性疼痛。軽度の鎮静を生じうる"},
         "hedgehog": {"safe": True, "dosage": "3-5 mg/kg PO q8-12h", "dosage_ja": "3-5 mg/kg 経口 8-12時間毎", "notes": "For neuropathic pain and Wobbly Hedgehog Syndrome", "notes_ja": "神経障害性疼痛とふらつきハリネズミ症候群に使用"},
         "chinchilla": {"safe": True, "dosage": "3-5 mg/kg PO q8-12h", "dosage_ja": "3-5 mg/kg 経口 8-12時間毎", "notes": "Neuropathic pain; may cause sedation", "notes_ja": "神経障害性疼痛。鎮静を生じうる"},
+        "reptile": {"safe": True, "dosage": "5 mg/kg PO q24-48h", "dosage_ja": "5 mg/kg 経口 24-48時間毎", "notes": "Neuropathic pain; limited data in reptiles", "notes_ja": "神経障害性疼痛。爬虫類でのデータは限られる"},
+        "ferret": {"safe": True, "dosage": "3-5 mg/kg PO q8-12h", "dosage_ja": "3-5 mg/kg 経口 8-12時間毎", "notes": "Neuropathic pain", "notes_ja": "神経障害性疼痛に使用"},
+        "bird": {"safe": True, "dosage": "10-25 mg/kg PO q8-12h", "dosage_ja": "10-25 mg/kg 経口 8-12時間毎", "notes": "Neuropathic and chronic pain; useful for self-mutilation", "notes_ja": "神経障害性・慢性疼痛。自傷行為に有用"},
     },
     "buprenorphine": {
         "guinea_pig": {"safe": True, "dosage": "0.05-0.1 mg/kg SC/IM q8-12h", "dosage_ja": "0.05-0.1 mg/kg 皮下/筋注 8-12時間毎", "notes": "Good perioperative analgesia", "notes_ja": "周術期の良好な鎮痛効果"},
@@ -152,6 +186,9 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "guinea_pig": {"safe": True, "dosage": "3-5 mg/kg IV slowly to effect", "dosage_ja": "3-5 mg/kg 緩徐静注 効果発現まで", "notes": "IV access challenging; often use after IM premedication", "notes_ja": "静脈確保が困難。IM前投薬後に使用することが多い"},
         "snake": {"safe": True, "dosage": "5-15 mg/kg IV slowly", "dosage_ja": "5-15 mg/kg 緩徐静注", "notes": "Induction agent; IV access via jugular or ventral tail vein", "notes_ja": "導入薬。頸静脈または尾腹側静脈から静注"},
         "tortoise": {"safe": True, "dosage": "5-15 mg/kg IV slowly", "dosage_ja": "5-15 mg/kg 緩徐静注", "notes": "Via jugular vein; prolonged recovery", "notes_ja": "頸静脈から投与。回復に時間がかかる"},
+        "ferret": {"safe": True, "dosage": "2-8 mg/kg IV slowly to effect", "dosage_ja": "2-8 mg/kg 効果発現まで緩徐静注", "notes": "Induction agent; rapid recovery", "notes_ja": "導入薬。回復が速い"},
+        "bird": {"safe": True, "dosage": "3-5 mg/kg IV slowly", "dosage_ja": "3-5 mg/kg 緩徐静注", "notes": "Induction; apnea risk—have IPPV ready", "notes_ja": "導入。無呼吸リスク—IPPV準備を"},
+        "rabbit": {"safe": True, "dosage": "3-6 mg/kg IV slowly", "dosage_ja": "3-6 mg/kg 緩徐静注", "notes": "Induction agent; use after premedication", "notes_ja": "導入薬。前投薬後に使用"},
     },
     "alfaxalone": {
         "guinea_pig": {"safe": True, "dosage": "5-10 mg/kg IM for sedation; 3-5 mg/kg IV for induction", "dosage_ja": "鎮静: 5-10 mg/kg 筋注; 導入: 3-5 mg/kg 静注", "notes": "Preferred induction agent; smoother recovery than ketamine", "notes_ja": "推奨される導入薬。ケタミンより回復が良好"},
@@ -160,6 +197,8 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "chinchilla": {"safe": True, "dosage": "5-8 mg/kg IM", "dosage_ja": "5-8 mg/kg 筋注", "notes": "Smoother recovery vs ketamine combos", "notes_ja": "ケタミン併用より回復が良好"},
         "snake": {"safe": True, "dosage": "5-15 mg/kg IM/IV", "dosage_ja": "5-15 mg/kg 筋注/静注", "notes": "Preferred injectable anesthetic for snakes", "notes_ja": "ヘビに推奨される注射麻酔薬"},
         "tortoise": {"safe": True, "dosage": "5-15 mg/kg IM/IV", "dosage_ja": "5-15 mg/kg 筋注/静注", "notes": "Good induction agent for chelonians", "notes_ja": "カメ類に適した導入薬"},
+        "horse": {"safe": True, "dosage": "1-2 mg/kg IV slowly", "dosage_ja": "1-2 mg/kg 緩徐静注", "notes": "Short-acting injectable anesthetic; emerging use in equine practice", "notes_ja": "短時間作用型注射麻酔薬。馬臨床での使用が増加中"},
+        "bird": {"safe": True, "dosage": "5-10 mg/kg IM/IV", "dosage_ja": "5-10 mg/kg 筋注/静注", "notes": "Preferred injectable for avian anesthesia", "notes_ja": "鳥類麻酔に推奨される注射薬"},
     },
     "prednisolone": {
         "guinea_pig": {"safe": True, "dosage": "0.5-1 mg/kg PO/IM q12-24h", "dosage_ja": "0.5-1 mg/kg 経口/筋注 12-24時間毎", "notes": "Use cautiously; guinea pigs are sensitive to immunosuppression", "notes_ja": "慎重投与。モルモットは免疫抑制に敏感"},
@@ -168,6 +207,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "chinchilla": {"safe": True, "dosage": "0.5-2 mg/kg PO q12-24h", "dosage_ja": "0.5-2 mg/kg 経口 12-24時間毎", "notes": "Anti-inflammatory; use cautiously", "notes_ja": "抗炎症。慎重投与"},
         "snake": {"safe": True, "dosage": "1-2 mg/kg IM q24-48h", "dosage_ja": "1-2 mg/kg 筋注 24-48時間毎", "notes": "Anti-inflammatory; use short-term", "notes_ja": "抗炎症。短期使用"},
         "tortoise": {"safe": True, "dosage": "1-2 mg/kg IM q24-48h", "dosage_ja": "1-2 mg/kg 筋注 24-48時間毎", "notes": "Anti-inflammatory; short-term use only", "notes_ja": "抗炎症。短期使用のみ"},
+        "reptile": {"safe": True, "dosage": "1-2 mg/kg IM q24-48h", "dosage_ja": "1-2 mg/kg 筋注 24-48時間毎", "notes": "Anti-inflammatory; use sparingly—immunosuppression risk", "notes_ja": "抗炎症。免疫抑制リスクがあるため控えめに使用"},
     },
     "dexamethasone": {
         "guinea_pig": {"safe": True, "dosage": "0.2-0.6 mg/kg IM/IV once", "dosage_ja": "0.2-0.6 mg/kg 筋注/静注 単回", "notes": "Short-term anti-inflammatory/shock; avoid chronic use", "notes_ja": "短期間の抗炎症/ショック治療。長期使用は避ける"},
@@ -176,26 +216,36 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "chinchilla": {"safe": True, "dosage": "0.5-2 mg/kg IM/SC", "dosage_ja": "0.5-2 mg/kg 筋注/皮下", "notes": "Emergency anti-inflammatory", "notes_ja": "緊急の抗炎症"},
         "snake": {"safe": True, "dosage": "0.5-2 mg/kg IM/SC", "dosage_ja": "0.5-2 mg/kg 筋注/皮下", "notes": "Emergency use; immunosuppression risk", "notes_ja": "緊急使用。免疫抑制のリスク"},
         "tortoise": {"safe": True, "dosage": "0.5-2 mg/kg IM", "dosage_ja": "0.5-2 mg/kg 筋注", "notes": "Shock therapy; avoid chronic use", "notes_ja": "ショック治療。長期使用は避ける"},
+        "reptile": {"safe": True, "dosage": "0.5-2 mg/kg IM/SC", "dosage_ja": "0.5-2 mg/kg 筋注/皮下", "notes": "Emergency anti-inflammatory/shock", "notes_ja": "緊急の抗炎症/ショック治療"},
     },
     "omeprazole": {
         "guinea_pig": {"safe": True, "dosage": "4 mg/kg PO q24h", "dosage_ja": "4 mg/kg 経口 24時間毎", "notes": "For gastric ulceration, commonly seen with NSAIDs or stress", "notes_ja": "胃潰瘍に使用。NSAID投与時やストレス時に多い"},
         "hedgehog": {"safe": True, "dosage": "4 mg/kg PO q24h", "dosage_ja": "4 mg/kg 経口 24時間毎", "notes": "Proton pump inhibitor for gastric ulcers", "notes_ja": "胃潰瘍に対するプロトンポンプ阻害薬"},
+        "ferret": {"safe": True, "dosage": "4 mg/kg PO q24h", "dosage_ja": "4 mg/kg 経口 24時間毎", "notes": "For gastric ulcers; common with Helicobacter", "notes_ja": "胃潰瘍に使用。ヘリコバクターに関連して多い"},
+        "bird": {"safe": True, "dosage": "1-4 mg/kg PO q12-24h", "dosage_ja": "1-4 mg/kg 経口 12-24時間毎", "notes": "For proventricular conditions and GI ulceration", "notes_ja": "前胃疾患・消化管潰瘍に使用"},
+        "rabbit": {"safe": True, "dosage": "0.5-1 mg/kg PO q24h", "dosage_ja": "0.5-1 mg/kg 経口 24時間毎", "notes": "For gastric ulceration", "notes_ja": "胃潰瘍に使用"},
     },
     "famotidine": {
         "guinea_pig": {"safe": True, "dosage": "0.5-1 mg/kg PO/SC q12-24h", "dosage_ja": "0.5-1 mg/kg 経口/皮下 12-24時間毎", "notes": "H2 blocker; gastric acid reduction", "notes_ja": "H2ブロッカー。胃酸分泌抑制"},
         "hamster": {"safe": True, "dosage": "0.5 mg/kg PO/SC q24h", "dosage_ja": "0.5 mg/kg 経口/皮下 24時間毎", "notes": "H2 blocker for gastric protection", "notes_ja": "胃保護のH2ブロッカー"},
         "hedgehog": {"safe": True, "dosage": "0.5-1 mg/kg PO/SC q24h", "dosage_ja": "0.5-1 mg/kg 経口/皮下 24時間毎", "notes": "Gastric acid reduction", "notes_ja": "胃酸分泌抑制"},
         "chinchilla": {"safe": True, "dosage": "0.5-1 mg/kg PO q24h", "dosage_ja": "0.5-1 mg/kg 経口 24時間毎", "notes": "Gastric acid reduction", "notes_ja": "胃酸分泌抑制"},
+        "horse": {"safe": True, "dosage": "1.8-2.8 mg/kg PO q12h; 0.23-0.5 mg/kg IV q8-12h", "dosage_ja": "1.8-2.8 mg/kg 経口 12時間毎; 0.23-0.5 mg/kg 静注 8-12時間毎", "notes": "H2 blocker; less effective than omeprazole for EGUS", "notes_ja": "H2ブロッカー。馬胃潰瘍症候群にはオメプラゾールより効果が劣る"},
+        "ferret": {"safe": True, "dosage": "0.5-1 mg/kg PO/SC q24h", "dosage_ja": "0.5-1 mg/kg 経口/皮下 24時間毎", "notes": "H2 blocker for gastric protection", "notes_ja": "胃保護のH2ブロッカー"},
     },
     "metoclopramide": {
         "guinea_pig": {"safe": True, "dosage": "0.5-1 mg/kg PO/SC q8-12h", "dosage_ja": "0.5-1 mg/kg 経口/皮下 8-12時間毎", "notes": "Prokinetic; useful for GI stasis", "notes_ja": "消化管運動促進薬。消化管うっ滞に有用"},
         "hamster": {"safe": True, "dosage": "0.5 mg/kg PO/SC q12h", "dosage_ja": "0.5 mg/kg 経口/皮下 12時間毎", "notes": "Prokinetic for GI stasis", "notes_ja": "消化管うっ滞の運動促進薬"},
         "chinchilla": {"safe": True, "dosage": "0.5 mg/kg PO/SC q8-12h", "dosage_ja": "0.5 mg/kg 経口/皮下 8-12時間毎", "notes": "Prokinetic for GI stasis", "notes_ja": "消化管うっ滞の運動促進薬"},
+        "horse": {"safe": True, "dosage": "0.25-0.6 mg/kg IV CRI (0.04 mg/kg/h)", "dosage_ja": "0.25-0.6 mg/kg 持続静注（0.04 mg/kg/時）", "notes": "Prokinetic for post-operative ileus; CRI preferred over bolus", "notes_ja": "術後イレウスの消化管運動促進薬。ボーラスより持続静注を推奨"},
+        "ferret": {"safe": True, "dosage": "0.2-1 mg/kg PO/SC q6-8h", "dosage_ja": "0.2-1 mg/kg 経口/皮下 6-8時間毎", "notes": "Prokinetic; useful for GI stasis and nausea", "notes_ja": "消化管運動促進薬。うっ滞・悪心に有用"},
     },
     "lactulose": {
         "guinea_pig": {"safe": True, "dosage": "0.5 mL/kg PO q8-12h", "dosage_ja": "0.5 mL/kg 経口 8-12時間毎", "notes": "Osmotic laxative; adjust dose to stool consistency", "notes_ja": "浸透圧性緩下剤。便の硬さに応じて用量調整"},
         "hedgehog": {"safe": True, "dosage": "0.5 mL/kg PO q8-12h", "dosage_ja": "0.5 mL/kg 経口 8-12時間毎", "notes": "For hepatic encephalopathy or constipation", "notes_ja": "肝性脳症または便秘に使用"},
         "chinchilla": {"safe": True, "dosage": "0.5 mL/kg PO q8-12h", "dosage_ja": "0.5 mL/kg 経口 8-12時間毎", "notes": "For constipation; adjust to stool consistency", "notes_ja": "便秘に使用。便の硬さに応じて調整"},
+        "horse": {"safe": True, "dosage": "0.1-0.2 mL/kg PO q6-12h", "dosage_ja": "0.1-0.2 mL/kg 経口 6-12時間毎", "notes": "For hepatic encephalopathy; adjust dose to stool consistency", "notes_ja": "肝性脳症に使用。便の硬さに応じて用量調整"},
+        "ferret": {"safe": True, "dosage": "0.15-0.75 mL/kg PO q12h", "dosage_ja": "0.15-0.75 mL/kg 経口 12時間毎", "notes": "For hepatic encephalopathy or constipation", "notes_ja": "肝性脳症・便秘に使用"},
     },
     "furosemide": {
         "guinea_pig": {"safe": True, "dosage": "1-4 mg/kg PO/SC/IM q12h", "dosage_ja": "1-4 mg/kg 経口/皮下/筋注 12時間毎", "notes": "For pulmonary edema or pleural effusion", "notes_ja": "肺水腫・胸水に使用"},
@@ -203,12 +253,16 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "hedgehog": {"safe": True, "dosage": "1-4 mg/kg PO/SC/IM q12h", "dosage_ja": "1-4 mg/kg 経口/皮下/筋注 12時間毎", "notes": "For cardiac disease and pulmonary edema", "notes_ja": "心疾患・肺水腫に使用"},
         "chinchilla": {"safe": True, "dosage": "1-4 mg/kg PO/SC/IM q12h", "dosage_ja": "1-4 mg/kg 経口/皮下/筋注 12時間毎", "notes": "For cardiac disease and edema", "notes_ja": "心疾患・浮腫に使用"},
         "tortoise": {"safe": True, "dosage": "2-5 mg/kg IM q12-24h", "dosage_ja": "2-5 mg/kg 筋注 12-24時間毎", "notes": "For edema/fluid overload", "notes_ja": "浮腫/体液過剰に使用"},
+        "reptile": {"safe": True, "dosage": "2-5 mg/kg IM q12-24h", "dosage_ja": "2-5 mg/kg 筋注 12-24時間毎", "notes": "For edema and fluid overload", "notes_ja": "浮腫・体液過剰に使用"},
     },
     "benazepril": {
         "guinea_pig": {"safe": True, "dosage": "0.25-0.5 mg/kg PO q24h", "dosage_ja": "0.25-0.5 mg/kg 経口 24時間毎", "notes": "ACE inhibitor for cardiac disease", "notes_ja": "心疾患に対するACE阻害薬"},
     },
     "amlodipine": {
         "guinea_pig": {"safe": True, "dosage": "0.1-0.25 mg/kg PO q24h", "dosage_ja": "0.1-0.25 mg/kg 経口 24時間毎", "notes": "Calcium channel blocker for hypertension", "notes_ja": "高血圧に対するカルシウム拮抗薬"},
+        "horse": {"safe": True, "dosage": "0.05-0.1 mg/kg PO q24h", "dosage_ja": "0.05-0.1 mg/kg 経口 24時間毎", "notes": "Calcium channel blocker; limited equine data", "notes_ja": "カルシウム拮抗薬。馬でのデータは限られる"},
+        "ferret": {"safe": True, "dosage": "0.1-0.25 mg/kg PO q24h", "dosage_ja": "0.1-0.25 mg/kg 経口 24時間毎", "notes": "For hypertension", "notes_ja": "高血圧に使用"},
+        "rabbit": {"safe": True, "dosage": "0.1-0.25 mg/kg PO q24h", "dosage_ja": "0.1-0.25 mg/kg 経口 24時間毎", "notes": "For hypertension associated with renal disease", "notes_ja": "腎疾患に伴う高血圧に使用"},
     },
     "midazolam": {
         "guinea_pig": {"safe": True, "dosage": "0.5-2 mg/kg IM/IN", "dosage_ja": "0.5-2 mg/kg 筋注/経鼻", "notes": "Sedation/premedication; intranasal route effective", "notes_ja": "鎮静/前投薬。経鼻投与も有効"},
@@ -230,6 +284,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "hedgehog": {"safe": True, "dosage": "1-5 mg/kg SC/IM q24h", "dosage_ja": "1-5 mg/kg 皮下/筋注 24時間毎", "notes": "For coagulopathy", "notes_ja": "凝固障害に使用"},
         "chinchilla": {"safe": True, "dosage": "1-10 mg/kg SC/IM q24h", "dosage_ja": "1-10 mg/kg 皮下/筋注 24時間毎", "notes": "For coagulopathy/rodenticide toxicity", "notes_ja": "凝固障害/殺鼠剤中毒に使用"},
         "tortoise": {"safe": True, "dosage": "0.5-2.5 mg/kg IM q24h", "dosage_ja": "0.5-2.5 mg/kg 筋注 24時間毎", "notes": "For coagulopathy", "notes_ja": "凝固障害に使用"},
+        "reptile": {"safe": True, "dosage": "0.5-2.5 mg/kg IM q24h", "dosage_ja": "0.5-2.5 mg/kg 筋注 24時間毎", "notes": "For coagulopathy", "notes_ja": "凝固障害に使用"},
     },
     "vitamin_b12": {
         "guinea_pig": {"safe": True, "dosage": "0.02 mg/kg SC/IM q7d", "dosage_ja": "0.02 mg/kg 皮下/筋注 週1回", "notes": "Supportive care for anorexia and weight loss", "notes_ja": "食欲不振・体重減少の支持療法"},
@@ -247,6 +302,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     },
     "maropitant": {
         "guinea_pig": {"safe": True, "dosage": "1-2 mg/kg SC q24h", "dosage_ja": "1-2 mg/kg 皮下 24時間毎", "notes": "Antiemetic; limited data in guinea pigs but used clinically", "notes_ja": "制吐薬。モルモットでのデータは限られるが臨床使用あり"},
+        "horse": {"safe": True, "dosage": "1 mg/kg IV q24h", "dosage_ja": "1 mg/kg 静注 24時間毎", "notes": "NK1 antagonist; visceral analgesic effect in colic; antiemetic", "notes_ja": "NK1拮抗薬。疝痛における内臓鎮痛効果・制吐作用"},
     },
     "isoflurane": {
         "guinea_pig": {"safe": True, "dosage": "Induction 3-5%, maintenance 1.5-3%", "dosage_ja": "導入 3-5%, 維持 1.5-3%", "notes": "Standard inhalant anesthetic; mask or chamber induction", "notes_ja": "標準的吸入麻酔薬。マスクまたはチャンバーで導入"},
@@ -267,22 +323,31 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     "moxidectin": {
         "guinea_pig": {"safe": True, "dosage": "0.2-0.5 mg/kg PO/topical once; repeat in 10-14 days", "dosage_ja": "0.2-0.5 mg/kg 経口/外用 単回; 10-14日後に再投与", "notes": "For mite infestations (Trixacarus)", "notes_ja": "ダニ寄生（Trixacarus）に使用"},
         "hamster": {"safe": True, "dosage": "0.2-0.5 mg/kg PO/topical; repeat in 10-14 days", "dosage_ja": "0.2-0.5 mg/kg 経口/外用; 10-14日後に再投与", "notes": "For Demodex mites", "notes_ja": "ニキビダニに使用"},
+        "ferret": {"safe": True, "dosage": "0.2-0.5 mg/kg topical/PO; repeat in 30 days", "dosage_ja": "0.2-0.5 mg/kg 外用/経口; 30日後に再投与", "notes": "For heartworm prevention and ectoparasites", "notes_ja": "フィラリア予防・外部寄生虫に使用"},
+        "bird": {"safe": True, "dosage": "0.2-0.5 mg/kg PO/topical; repeat in 10-14 days", "dosage_ja": "0.2-0.5 mg/kg 経口/外用; 10-14日後に再投与", "notes": "For mites and nematodes", "notes_ja": "ダニ・線虫に使用"},
+        "rabbit": {"safe": True, "dosage": "0.2-0.5 mg/kg topical; repeat in 10-14 days", "dosage_ja": "0.2-0.5 mg/kg 外用; 10-14日後に再投与", "notes": "For Psoroptes mites and other ectoparasites", "notes_ja": "耳ダニ（プソロプテス）等の外部寄生虫に使用"},
     },
     "rifampin": {
         "guinea_pig": {"safe": True, "dosage": "10-20 mg/kg PO q24h", "dosage_ja": "10-20 mg/kg 経口 24時間毎", "notes": "For mycobacterial or resistant infections; turns urine orange", "notes_ja": "抗酸菌・耐性菌感染に使用。尿がオレンジ色になる"},
+        "bird": {"safe": True, "dosage": "10-20 mg/kg PO q12h", "dosage_ja": "10-20 mg/kg 経口 12時間毎", "notes": "For mycobacterial infections; combine with other antibiotics", "notes_ja": "抗酸菌感染に使用。他の抗菌薬と併用"},
+        "rabbit": {"safe": True, "dosage": "10-20 mg/kg PO q24h", "dosage_ja": "10-20 mg/kg 経口 24時間毎", "notes": "For mycobacterial or abscess infections (combine with other ABs)", "notes_ja": "抗酸菌・膿瘍感染に使用（他の抗菌薬と併用）"},
     },
     "iron_dextran": {
         "guinea_pig": {"safe": True, "dosage": "10 mg/kg IM once; repeat in 7-10 days if needed", "dosage_ja": "10 mg/kg 筋注 単回; 必要時7-10日後に再投与", "notes": "For iron deficiency anemia in neonates/weanlings", "notes_ja": "新生仔/離乳仔の鉄欠乏性貧血に使用"},
         "hamster": {"safe": True, "dosage": "10 mg/kg IM once", "dosage_ja": "10 mg/kg 筋注 単回", "notes": "For iron deficiency anemia", "notes_ja": "鉄欠乏性貧血に使用"},
         "hedgehog": {"safe": True, "dosage": "10 mg/kg IM once", "dosage_ja": "10 mg/kg 筋注 単回", "notes": "For iron deficiency anemia", "notes_ja": "鉄欠乏性貧血に使用"},
+        "reptile": {"safe": True, "dosage": "10-12 mg/kg IM once; repeat in 7-14 days", "dosage_ja": "10-12 mg/kg 筋注 単回; 7-14日後に再投与", "notes": "For iron deficiency anemia", "notes_ja": "鉄欠乏性貧血に使用"},
     },
     "n_acetylcysteine": {
         "guinea_pig": {"safe": True, "dosage": "70 mg/kg PO/IV q6-8h", "dosage_ja": "70 mg/kg 経口/静注 6-8時間毎", "notes": "Mucolytic and antioxidant; used for hepatic support", "notes_ja": "粘液溶解薬・抗酸化剤。肝保護に使用"},
         "hamster": {"safe": True, "dosage": "70 mg/kg PO/SC q8h", "dosage_ja": "70 mg/kg 経口/皮下 8時間毎", "notes": "Mucolytic; hepatoprotective", "notes_ja": "粘液溶解・肝保護"},
+        "reptile": {"safe": True, "dosage": "50-70 mg/kg PO/SC q8h", "dosage_ja": "50-70 mg/kg 経口/皮下 8時間毎", "notes": "Mucolytic and hepatoprotective", "notes_ja": "粘液溶解・肝保護"},
+        "ferret": {"safe": True, "dosage": "70 mg/kg PO/IV loading, then 70 mg/kg q6-8h", "dosage_ja": "70 mg/kg 経口/静注 負荷後 70 mg/kg 6-8時間毎", "notes": "For acetaminophen toxicity and hepatic support", "notes_ja": "アセトアミノフェン中毒・肝保護に使用"},
     },
     "mannitol": {
         "guinea_pig": {"safe": True, "dosage": "0.5-1 g/kg IV over 20 min", "dosage_ja": "0.5-1 g/kg 20分かけて静注", "notes": "For cerebral edema/raised ICP; ensure IV access", "notes_ja": "脳浮腫/頭蓋内圧亢進に使用。静脈路確保が必要"},
         "hamster": {"safe": True, "dosage": "0.5-1 g/kg IV over 20 min", "dosage_ja": "0.5-1 g/kg 20分かけて静注", "notes": "For cerebral edema; IV access very challenging", "notes_ja": "脳浮腫に使用。静脈確保が非常に困難"},
+        "reptile": {"safe": True, "dosage": "0.5-1 g/kg IV over 20 min", "dosage_ja": "0.5-1 g/kg 20分かけて静注", "notes": "For cerebral edema", "notes_ja": "脳浮腫に使用"},
     },
     "atropine": {
         "guinea_pig": {"safe": True, "dosage": "0.05-0.1 mg/kg SC/IM", "dosage_ja": "0.05-0.1 mg/kg 皮下/筋注", "notes": "Many guinea pigs carry atropinase; higher doses may be needed", "notes_ja": "多くのモルモットはアトロピナーゼを持つ。高用量が必要な場合がある"},
@@ -302,6 +367,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "hamster": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral penicillins/cephalosporins cause fatal enterotoxemia in hamsters", "notes_ja": "経口ペニシリン/セファロスポリンはハムスターに致死的腸毒素血症を起こす"},
         "hedgehog": {"safe": True, "dosage": "12.5-25 mg/kg PO q12h", "dosage_ja": "12.5-25 mg/kg 経口 12時間毎", "notes": "For resistant infections", "notes_ja": "耐性菌感染に使用"},
         "chinchilla": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Oral penicillins/cephalosporins cause fatal dysbiosis in chinchillas", "notes_ja": "経口ペニシリン/セファロスポリンはチンチラに致死的な腸内細菌叢の破壊を起こす"},
+        "bird": {"safe": True, "dosage": "125 mg/kg PO q8-12h", "dosage_ja": "125 mg/kg 経口 8-12時間毎", "notes": "Higher doses needed due to rapid clearance in birds", "notes_ja": "鳥類ではクリアランスが速いため高用量が必要"},
     },
     "metronidazole": {
         "hamster": {"safe": True, "dosage": "20 mg/kg PO q12h", "dosage_ja": "20 mg/kg 経口 12時間毎", "notes": "For anaerobic infections and protozoal disease", "notes_ja": "嫌気性菌感染・原虫疾患に使用"},
@@ -314,6 +380,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "hamster": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "Macrolide; useful for respiratory infections", "notes_ja": "マクロライド系。呼吸器感染症に有用"},
         "hedgehog": {"safe": True, "dosage": "10-30 mg/kg PO q24-48h", "dosage_ja": "10-30 mg/kg 経口 24-48時間毎", "notes": "Long half-life allows less frequent dosing", "notes_ja": "半減期が長く投与頻度を減らせる"},
         "chinchilla": {"safe": True, "dosage": "15-30 mg/kg PO q24h", "dosage_ja": "15-30 mg/kg 経口 24時間毎", "notes": "Safe macrolide for respiratory infections", "notes_ja": "呼吸器感染症に安全なマクロライド"},
+        "horse": {"safe": True, "dosage": "10 mg/kg PO q24h for 5 days, then q48h", "dosage_ja": "10 mg/kg 経口 24時間毎 5日間、以降48時間毎", "notes": "First-line for Rhodococcus equi in foals; combine with rifampin", "notes_ja": "仔馬のロドコッカス・エクイに第一選択。リファンピンと併用"},
     },
     "trimethoprim_sulfa": {
         "hamster": {"safe": True, "dosage": "15-30 mg/kg PO q12h", "dosage_ja": "15-30 mg/kg 経口 12時間毎", "notes": "Broad-spectrum; well-tolerated in hamsters", "notes_ja": "広域スペクトル。ハムスターに忍容性良好"},
@@ -321,6 +388,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
         "chinchilla": {"safe": True, "dosage": "15-30 mg/kg PO q12h", "dosage_ja": "15-30 mg/kg 経口 12時間毎", "notes": "Well-tolerated broad-spectrum option", "notes_ja": "忍容性の良い広域スペクトル抗菌薬"},
         "snake": {"safe": True, "dosage": "15-25 mg/kg PO/IM q24-48h", "dosage_ja": "15-25 mg/kg 経口/筋注 24-48時間毎", "notes": "Good for UTI and skin infections", "notes_ja": "尿路・皮膚感染症に有効"},
         "tortoise": {"safe": True, "dosage": "15-25 mg/kg PO/IM q24-48h", "dosage_ja": "15-25 mg/kg 経口/筋注 24-48時間毎", "notes": "Broad-spectrum; ensure adequate hydration", "notes_ja": "広域スペクトル。十分な水和を確保"},
+        "reptile": {"safe": True, "dosage": "15-25 mg/kg PO/IM q24-48h", "dosage_ja": "15-25 mg/kg 経口/筋注 24-48時間毎", "notes": "Broad-spectrum; safe in most reptiles", "notes_ja": "広域スペクトル。ほとんどの爬虫類に安全"},
     },
     "selamectin": {
         "hamster": {"safe": True, "dosage": "15-30 mg/kg topical once; repeat in 14-28 days", "dosage_ja": "15-30 mg/kg 外用 単回; 14-28日後に再投与", "notes": "For mites (Demodex, Notoedres); apply between shoulder blades", "notes_ja": "ダニ類（ニキビダニ, ノトエドレス）に使用。肩甲骨間に塗布"},
@@ -347,6 +415,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     "clindamycin": {
         "hedgehog": {"safe": True, "dosage": "5.5-10 mg/kg PO q12h", "dosage_ja": "5.5-10 mg/kg 経口 12時間毎", "notes": "Good bone and dental penetration", "notes_ja": "骨・歯への移行性良好"},
         "chinchilla": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Risk of fatal dysbiosis; avoid in chinchillas", "notes_ja": "致死的な腸内細菌叢破壊のリスク。チンチラには使用しない"},
+        "bird": {"safe": True, "dosage": "25 mg/kg PO q8h", "dosage_ja": "25 mg/kg 経口 8時間毎", "notes": "For bone and dental infections; useful in raptors", "notes_ja": "骨・歯の感染症に使用。猛禽類に有用"},
     },
     "ivermectin": {
         "hedgehog": {"safe": True, "dosage": "0.2-0.4 mg/kg SC; repeat in 14 days", "dosage_ja": "0.2-0.4 mg/kg 皮下; 14日後に再投与", "notes": "For Caparinia mites and other ectoparasites; 3 treatments typical", "notes_ja": "カパリニアダニ等の外部寄生虫に使用。通常3回投与"},
@@ -359,6 +428,7 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     },
     "voriconazole": {
         "snake": {"safe": True, "dosage": "5 mg/kg PO q24h", "dosage_ja": "5 mg/kg 経口 24時間毎", "notes": "For Nannizziopsis/Ophidiomyces (snake fungal disease)", "notes_ja": "ヘビ真菌症（ナンニッツィオプシス/オフィディオミセス）に使用"},
+        "horse": {"safe": True, "dosage": "3-4 mg/kg PO q24h", "dosage_ja": "3-4 mg/kg 経口 24時間毎", "notes": "For Aspergillus guttural pouch mycosis", "notes_ja": "喉嚢真菌症（アスペルギルス）に使用"},
     },
     "meloxicam": {
         "snake": {"safe": True, "dosage": "0.1-0.2 mg/kg PO/IM q24-48h", "dosage_ja": "0.1-0.2 mg/kg 経口/筋注 24-48時間毎", "notes": "NSAID; limited data in snakes", "notes_ja": "NSAID。ヘビでのデータは限られる"},
@@ -366,74 +436,61 @@ SPECIES_INFO_PATCH: dict[str, dict[str, dict]] = {
     },
     "amikacin": {
         "tortoise": {"safe": True, "dosage": "5 mg/kg IM; then 2.5 mg/kg q72h", "dosage_ja": "初回 5 mg/kg 筋注; 以降 2.5 mg/kg 72時間毎", "notes": "Loading dose important; inject in forelimbs", "notes_ja": "負荷用量が重要。前肢に注射"},
+        "reptile": {"safe": True, "dosage": "5 mg/kg IM; then 2.5 mg/kg q72h", "dosage_ja": "初回 5 mg/kg 筋注; 以降 2.5 mg/kg 72時間毎", "notes": "Preferred aminoglycoside in reptiles; inject in cranial half", "notes_ja": "爬虫類で推奨されるアミノグリコシド。体の前半部に注射"},
     },
     "calcium_gluconate": {
         "tortoise": {"safe": True, "dosage": "50-100 mg/kg IM/SC q24h; 10% sol'n IV slowly for tetany", "dosage_ja": "50-100 mg/kg 筋注/皮下 24時間毎; テタニー時は10%液を緩徐静注", "notes": "Essential for metabolic bone disease/hypocalcemia", "notes_ja": "代謝性骨疾患/低カルシウム血症に必須"},
-    },
-    # ==================================================================
-    # Horse (馬) — additional ~30 drugs
-    # ==================================================================
-    "marbofloxacin": {
-        "horse": {"safe": True, "dosage": "2 mg/kg PO/IV q24h", "dosage_ja": "2 mg/kg 経口/静注 24時間毎", "notes": "Fluoroquinolone; good for respiratory and joint infections", "notes_ja": "フルオロキノロン系。呼吸器・関節感染症に有効"},
-    },
-    "azithromycin": {
-        "horse": {"safe": True, "dosage": "10 mg/kg PO q24h for 5 days, then q48h", "dosage_ja": "10 mg/kg 経口 24時間毎 5日間、以降48時間毎", "notes": "First-line for Rhodococcus equi in foals; combine with rifampin", "notes_ja": "仔馬のロドコッカス・エクイに第一選択。リファンピンと併用"},
-    },
-    "tylosin": {
-        "horse": {"safe": True, "dosage": "10 mg/kg PO/IM q12-24h", "dosage_ja": "10 mg/kg 経口/筋注 12-24時間毎", "notes": "Macrolide; may cause diarrhea in adult horses—monitor closely", "notes_ja": "マクロライド系。成馬に下痢を起こす可能性—注意深く観察"},
-    },
-    "fluconazole": {
-        "horse": {"safe": True, "dosage": "14 mg/kg PO loading, then 5 mg/kg PO q24h", "dosage_ja": "負荷量 14 mg/kg 経口、以降 5 mg/kg 経口 24時間毎", "notes": "Good CNS penetration; useful for fungal meningitis", "notes_ja": "CNS移行性良好。真菌性髄膜炎に有用"},
-    },
-    "terbinafine": {
-        "horse": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "For dermatophytosis; limited equine-specific data", "notes_ja": "皮膚糸状菌症に使用。馬特異的データは限られる"},
-    },
-    "voriconazole": {
-        "horse": {"safe": True, "dosage": "3-4 mg/kg PO q24h", "dosage_ja": "3-4 mg/kg 経口 24時間毎", "notes": "For Aspergillus guttural pouch mycosis", "notes_ja": "喉嚢真菌症（アスペルギルス）に使用"},
-    },
-    "toltrazuril": {
-        "horse": {"safe": True, "dosage": "10-20 mg/kg PO once; repeat in 14 days", "dosage_ja": "10-20 mg/kg 経口 単回; 14日後に再投与", "notes": "For EPM (Sarcocystis neurona) and coccidiosis in foals", "notes_ja": "EPM（サルコシスチス・ニューロナ）・仔馬のコクシジウム症に使用"},
-    },
-    "alfaxalone": {
-        "horse": {"safe": True, "dosage": "1-2 mg/kg IV slowly", "dosage_ja": "1-2 mg/kg 緩徐静注", "notes": "Short-acting injectable anesthetic; emerging use in equine practice", "notes_ja": "短時間作用型注射麻酔薬。馬臨床での使用が増加中"},
-    },
-    "famotidine": {
-        "horse": {"safe": True, "dosage": "1.8-2.8 mg/kg PO q12h; 0.23-0.5 mg/kg IV q8-12h", "dosage_ja": "1.8-2.8 mg/kg 経口 12時間毎; 0.23-0.5 mg/kg 静注 8-12時間毎", "notes": "H2 blocker; less effective than omeprazole for EGUS", "notes_ja": "H2ブロッカー。馬胃潰瘍症候群にはオメプラゾールより効果が劣る"},
-    },
-    "metoclopramide": {
-        "horse": {"safe": True, "dosage": "0.25-0.6 mg/kg IV CRI (0.04 mg/kg/h)", "dosage_ja": "0.25-0.6 mg/kg 持続静注（0.04 mg/kg/時）", "notes": "Prokinetic for post-operative ileus; CRI preferred over bolus", "notes_ja": "術後イレウスの消化管運動促進薬。ボーラスより持続静注を推奨"},
-    },
-    "maropitant": {
-        "horse": {"safe": True, "dosage": "1 mg/kg IV q24h", "dosage_ja": "1 mg/kg 静注 24時間毎", "notes": "NK1 antagonist; visceral analgesic effect in colic; antiemetic", "notes_ja": "NK1拮抗薬。疝痛における内臓鎮痛効果・制吐作用"},
-    },
-    "lactulose": {
-        "horse": {"safe": True, "dosage": "0.1-0.2 mL/kg PO q6-12h", "dosage_ja": "0.1-0.2 mL/kg 経口 6-12時間毎", "notes": "For hepatic encephalopathy; adjust dose to stool consistency", "notes_ja": "肝性脳症に使用。便の硬さに応じて用量調整"},
+        "reptile": {"safe": True, "dosage": "50-100 mg/kg IM/SC q24h; 10% IV slowly for tetany", "dosage_ja": "50-100 mg/kg 筋注/皮下 24時間毎; テタニー時は10%液を緩徐静注", "notes": "For metabolic bone disease/hypocalcemia", "notes_ja": "代謝性骨疾患/低カルシウム血症に使用"},
     },
     "enalapril": {
         "horse": {"safe": True, "dosage": "0.5 mg/kg PO q24h", "dosage_ja": "0.5 mg/kg 経口 24時間毎", "notes": "ACE inhibitor for valvular disease; limited equine data", "notes_ja": "弁膜疾患に対するACE阻害薬。馬でのデータは限られる"},
-    },
-    "amlodipine": {
-        "horse": {"safe": True, "dosage": "0.05-0.1 mg/kg PO q24h", "dosage_ja": "0.05-0.1 mg/kg 経口 24時間毎", "notes": "Calcium channel blocker; limited equine data", "notes_ja": "カルシウム拮抗薬。馬でのデータは限られる"},
+        "ferret": {"safe": True, "dosage": "0.25-0.5 mg/kg PO q24-48h", "dosage_ja": "0.25-0.5 mg/kg 経口 24-48時間毎", "notes": "ACE inhibitor for dilated cardiomyopathy", "notes_ja": "拡張型心筋症に対するACE阻害薬"},
+        "rabbit": {"safe": True, "dosage": "0.25-0.5 mg/kg PO q24h", "dosage_ja": "0.25-0.5 mg/kg 経口 24時間毎", "notes": "ACE inhibitor for cardiac disease", "notes_ja": "心疾患に対するACE阻害薬"},
     },
     "levetiracetam": {
         "horse": {"safe": True, "dosage": "20-60 mg/kg PO q8h", "dosage_ja": "20-60 mg/kg 経口 8時間毎", "notes": "Anticonvulsant; useful for neonatal seizures", "notes_ja": "抗痙攣薬。新生仔の痙攣に有用"},
+        "ferret": {"safe": True, "dosage": "20 mg/kg PO q8h", "dosage_ja": "20 mg/kg 経口 8時間毎", "notes": "Anticonvulsant; first-line for seizures", "notes_ja": "抗痙攣薬。痙攣の第一選択"},
+        "bird": {"safe": True, "dosage": "50-100 mg/kg PO q8h", "dosage_ja": "50-100 mg/kg 経口 8時間毎", "notes": "Anticonvulsant; high doses needed in birds", "notes_ja": "抗痙攣薬。鳥類では高用量が必要"},
+        "rabbit": {"safe": True, "dosage": "20-40 mg/kg PO q8h", "dosage_ja": "20-40 mg/kg 経口 8時間毎", "notes": "Anticonvulsant; first-line for seizures in rabbits", "notes_ja": "抗痙攣薬。ウサギの痙攣に第一選択"},
     },
     "diphenhydramine": {
         "horse": {"safe": True, "dosage": "0.5-1 mg/kg IV/IM q8-12h", "dosage_ja": "0.5-1 mg/kg 静注/筋注 8-12時間毎", "notes": "Antihistamine for acute allergic reactions/urticaria", "notes_ja": "急性アレルギー反応/蕁麻疹に対する抗ヒスタミン薬"},
+        "ferret": {"safe": True, "dosage": "1-2 mg/kg PO/IM q8-12h", "dosage_ja": "1-2 mg/kg 経口/筋注 8-12時間毎", "notes": "Antihistamine; for vaccine reactions and allergies", "notes_ja": "抗ヒスタミン薬。ワクチン反応・アレルギーに使用"},
+        "bird": {"safe": True, "dosage": "2-4 mg/kg PO/IM q8-12h", "dosage_ja": "2-4 mg/kg 経口/筋注 8-12時間毎", "notes": "Antihistamine for allergic reactions", "notes_ja": "アレルギー反応に対する抗ヒスタミン薬"},
+        "rabbit": {"safe": True, "dosage": "1-2 mg/kg PO/SC q8-12h", "dosage_ja": "1-2 mg/kg 経口/皮下 8-12時間毎", "notes": "Antihistamine", "notes_ja": "抗ヒスタミン薬"},
     },
     "omega3": {
         "horse": {"safe": True, "dosage": "60-120 mL/day PO (flaxseed or fish oil)", "dosage_ja": "60-120 mL/日 経口（亜麻仁油またはフィッシュオイル）", "notes": "Anti-inflammatory supplement for joint and skin health", "notes_ja": "関節・皮膚の健康のための抗炎症性サプリメント"},
+        "rabbit": {"safe": True, "dosage": "0.5-1 mL/kg PO q24h (fish oil)", "dosage_ja": "0.5-1 mL/kg 経口 24時間毎（フィッシュオイル）", "notes": "Anti-inflammatory supplement; may improve coat quality", "notes_ja": "抗炎症性サプリメント。毛質改善の可能性あり"},
     },
     "acetaminophen": {
         "horse": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "TOXIC to horses — can cause hepatic necrosis and methemoglobinemia", "notes_ja": "馬に有毒 — 肝壊死・メトヘモグロビン血症を起こす可能性"},
-    },
-    "fipronil": {
-        "horse": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Not approved for horses; potential toxicity", "notes_ja": "馬に未承認。毒性の可能性あり"},
     },
     "ibuprofen": {
         "horse": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Causes GI ulceration and nephrotoxicity; use flunixin or phenylbutazone instead", "notes_ja": "消化管潰瘍・腎毒性を起こす。フルニキシンまたはフェニルブタゾンを使用"},
     },
     "ondansetron": {
         "horse": {"safe": True, "dosage": "0.1-0.5 mg/kg IV q8-12h", "dosage_ja": "0.1-0.5 mg/kg 静注 8-12時間毎", "notes": "5-HT3 antagonist; for post-operative nausea and ileus support", "notes_ja": "5-HT3拮抗薬。術後悪心・イレウス補助に使用"},
+        "ferret": {"safe": True, "dosage": "0.5-1 mg/kg PO/IV q12h", "dosage_ja": "0.5-1 mg/kg 経口/静注 12時間毎", "notes": "5-HT3 antagonist antiemetic", "notes_ja": "5-HT3拮抗薬の制吐薬"},
+        "bird": {"safe": True, "dosage": "0.5-1 mg/kg PO/IM q12h", "dosage_ja": "0.5-1 mg/kg 経口/筋注 12時間毎", "notes": "Antiemetic; limited avian data", "notes_ja": "制吐薬。鳥類でのデータは限られる"},
+        "rabbit": {"safe": True, "dosage": "0.5-1 mg/kg IV/SC q12h", "dosage_ja": "0.5-1 mg/kg 静注/皮下 12時間毎", "notes": "Antiemetic; limited data (rabbits rarely vomit)", "notes_ja": "制吐薬。データ限られる（ウサギは嘔吐が稀）"},
+    },
+    "ketoconazole": {
+        "reptile": {"safe": True, "dosage": "15-30 mg/kg PO q24h", "dosage_ja": "15-30 mg/kg 経口 24時間毎", "notes": "For dermatophytes and systemic mycosis", "notes_ja": "皮膚糸状菌・全身性真菌症に使用"},
+        "ferret": {"safe": True, "dosage": "10-30 mg/kg PO q24h", "dosage_ja": "10-30 mg/kg 経口 24時間毎", "notes": "For dermatophytosis and adrenal disease (adjunctive)", "notes_ja": "皮膚糸状菌症・副腎疾患（補助的）に使用"},
+    },
+    "milbemycin_oxime": {
+        "ferret": {"safe": True, "dosage": "1.15-2.33 mg/kg PO monthly", "dosage_ja": "1.15-2.33 mg/kg 経口 月1回", "notes": "Heartworm prevention", "notes_ja": "フィラリア予防"},
+        "bird": {"safe": True, "dosage": "0.5-1 mg/kg PO; repeat in 14 days", "dosage_ja": "0.5-1 mg/kg 経口; 14日後に再投与", "notes": "For nematodes and mites", "notes_ja": "線虫・ダニに使用"},
+    },
+    "atenolol": {
+        "ferret": {"safe": True, "dosage": "3.125-6.25 mg/ferret PO q24h", "dosage_ja": "3.125-6.25 mg/頭 経口 24時間毎", "notes": "Beta-blocker for hypertrophic cardiomyopathy", "notes_ja": "肥大型心筋症に対するβ遮断薬"},
+    },
+    "spironolactone": {
+        "ferret": {"safe": True, "dosage": "1-2 mg/kg PO q12h", "dosage_ja": "1-2 mg/kg 経口 12時間毎", "notes": "Aldosterone antagonist for cardiac disease", "notes_ja": "心疾患に対するアルドステロン拮抗薬"},
+    },
+    "firocoxib": {
+        "bird": {"safe": True, "dosage": "1-5 mg/kg PO q24h", "dosage_ja": "1-5 mg/kg 経口 24時間毎", "notes": "COX-2 selective NSAID; emerging use in avian medicine", "notes_ja": "COX-2選択的NSAID。鳥類医療での使用が増加中"},
+        "rabbit": {"safe": True, "dosage": "1-3 mg/kg PO q24h", "dosage_ja": "1-3 mg/kg 経口 24時間毎", "notes": "COX-2 selective; limited rabbit data", "notes_ja": "COX-2選択的。ウサギでのデータは限られる"},
     },
 }
