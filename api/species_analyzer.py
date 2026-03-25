@@ -27,6 +27,7 @@ from api.species.degu_diseases import analyze_symptoms as analyze_degu
 from api.species.equine_diseases import generate_differential_diagnosis
 from api.species.exotic_other_diseases import analyze_symptoms as analyze_exotic_other
 from api.species.ferret_diseases import analyze_symptoms as analyze_ferret
+from api.species.fish_diseases import analyze_symptoms as analyze_fish
 from api.species.guinea_pig_diseases import analyze_symptoms as analyze_guinea_pig
 from api.species.hamster_diseases import analyze_symptoms as analyze_hamster
 from api.species.hedgehog_diseases import analyze_symptoms as analyze_hedgehog
@@ -332,6 +333,7 @@ SPECIES_HANDLERS: Dict[str, Callable[[List[str], str | None], Dict]] = {
     "snake": analyze_snake,
     "lizard": analyze_lizard,
     "amphibian": analyze_amphibian,
+    "fish": analyze_fish,
     "exotic_other": analyze_exotic_other,
     "horse": analyze_horse,
 }
