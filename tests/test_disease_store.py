@@ -390,11 +390,11 @@ class TestDiseasesAPI:
 
 
 class TestSpeciesMetaConsistency:
-    """Validate that SPECIES_META matches the JS-side SPECIES array (20 species)."""
+    """Validate that SPECIES_META matches the JS-side SPECIES array (21 species)."""
 
-    def test_species_meta_has_20_entries(self):
+    def test_species_meta_has_21_entries(self):
         from api.disease_store import SPECIES_META
-        assert len(SPECIES_META) == 20
+        assert len(SPECIES_META) == 21
 
     def test_all_expected_species_present(self):
         from api.disease_store import SPECIES_META
@@ -402,7 +402,7 @@ class TestSpeciesMetaConsistency:
             "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig",
             "chinchilla", "ferret", "hedgehog", "sugar_glider", "degu",
             "bird", "parakeet", "parrot", "reptile", "tortoise",
-            "snake", "lizard", "amphibian", "exotic_other",
+            "snake", "lizard", "amphibian", "fish", "exotic_other",
         }
         assert set(SPECIES_META.keys()) == expected
 
@@ -411,7 +411,7 @@ class TestFallbackWhenDbEmpty:
     """When SQLite has no diseases, get_species_stats falls back to modules/JSON."""
 
     def test_fallback_returns_all_species(self, tmp_path, monkeypatch):
-        """Even with an empty DB, all 20 species should be returned."""
+        """Even with an empty DB, all 21 species should be returned."""
         path = str(tmp_path / "empty.db")
         init_db(path)
         import contextlib
@@ -426,6 +426,6 @@ class TestFallbackWhenDbEmpty:
         invalidate_cache()
 
         result = get_species_stats()
-        assert result["total_species"] == 20
+        assert result["total_species"] == 21
         species_ids = {s["id"] for s in result["species"]}
-        assert len(species_ids) == 20
+        assert len(species_ids) == 21
