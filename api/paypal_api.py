@@ -115,6 +115,7 @@ def activate_subscription():
     """Record a new subscription activation from frontend."""
     body = request.get_json(silent=True) or {}
     subscription_id = body.get("subscription_id", "").strip()
+    email = body.get("email", "").strip().lower()
 
     if not subscription_id:
         return jsonify({"error": "subscription_id required"}), 400
@@ -122,17 +123,49 @@ def activate_subscription():
     data = _load_subscribers()
     # Check for duplicate
     existing = [s for s in data["subscribers"] if s["subscription_id"] == subscription_id]
-    if not existing:
+    if existing:
+        # Update email if provided
+        if email and not existing[0].get("email"):
+            existing[0]["email"] = email
+            _save_subscribers(data)
+    else:
         data["subscribers"].append({
             "subscription_id": subscription_id,
+            "email": email,
             "status": "active",
             "activated_at": datetime.utcnow().isoformat(),
             "ip": request.remote_addr,
         })
         _save_subscribers(data)
-        logger.info(f"PayPal subscription activated: {subscription_id}")
+        logger.info(f"PayPal subscription activated: {subscription_id} ({email})")
 
     return jsonify({"status": "ok", "subscription_id": subscription_id})
+
+
+@paypal_bp.route("/restore", methods=["POST"])
+def restore_subscription():
+    """Restore Pro access on a new device using email address."""
+    body = request.get_json(silent=True) or {}
+    email = body.get("email", "").strip().lower()
+
+    if not email:
+        return jsonify({"active": False, "error": "email required"}), 400
+
+    data = _load_subscribers()
+    active_sub = next(
+        (s for s in data["subscribers"]
+         if s.get("email") == email and s.get("status") == "active"),
+        None,
+    )
+
+    if active_sub:
+        return jsonify({
+            "active": True,
+            "subscription_id": active_sub["subscription_id"],
+            "activated_at": active_sub.get("activated_at", ""),
+        })
+
+    return jsonify({"active": False, "error": "no_active_subscription"})
 
 
 @paypal_bp.route("/verify", methods=["POST"])

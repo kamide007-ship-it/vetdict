@@ -625,3 +625,17 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 body.is-pro .pricing-btn-pro{background:var(--green);pointer-events:none}
 body.is-pro .pricing-btn-pro::after{content:" ✓ アクティブ"}
 body.is-pro .pricing-note{display:none}
+
+/* --- Pro restore (cross-device sync) --- */
+.pro-restore{margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200)}
+.pro-restore-label{font-size:.72rem;color:var(--gray-500);margin-bottom:6px}
+.pro-restore-row{display:flex;gap:6px}
+.pro-restore-input{flex:1;padding:8px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:.8rem;font-family:var(--font)}
+.pro-restore-input:focus{border-color:var(--navy-light);outline:none;box-shadow:0 0 0 2px rgba(42,74,143,.1)}
+.pro-restore-btn{padding:8px 16px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--font);white-space:nowrap}
+.pro-restore-btn:hover{background:var(--navy-light)}
+.pro-restore-btn:disabled{opacity:.5;cursor:not-allowed}
+.pro-restore-msg{font-size:.72rem;margin-top:4px;min-height:1em}
+.pro-restore-msg.success{color:#16a34a}
+.pro-restore-msg.error{color:#dc2626}
+body.is-pro .pro-restore{display:none}
