@@ -618,3 +618,10 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .scroll-top{bottom:16px;right:16px;width:38px;height:38px}
   body{padding-bottom:env(safe-area-inset-bottom)}
 }
+
+/* --- Admin / Pro access control --- */
+.admin-badge{position:fixed;top:8px;right:8px;background:#dc2626;color:#fff;font-size:.64rem;font-weight:700;padding:3px 8px;border-radius:10px;z-index:9999;pointer-events:none;opacity:.85}
+/* Hide pricing CTA for admin/pro users */
+body.is-pro .pricing-btn-pro{background:var(--green);pointer-events:none}
+body.is-pro .pricing-btn-pro::after{content:" ✓ アクティブ"}
+body.is-pro .pricing-note{display:none}

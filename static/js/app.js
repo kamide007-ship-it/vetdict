@@ -1,5 +1,38 @@
 const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
 
+/* ===== Admin / Pro access control ===== */
+const ADMIN_TOKEN="vetdict-admin-2026";
+let isAdmin=false;
+let isPro=false;
+
+function checkAccess(){
+  // Check URL param ?admin=<token>
+  const params=new URLSearchParams(location.search);
+  const adminParam=params.get("admin");
+  if(adminParam===ADMIN_TOKEN){
+    localStorage.setItem("vetdict-admin","1");
+    isAdmin=true;isPro=true;
+    // Clean URL
+    history.replaceState(null,"",location.pathname+location.hash);
+  } else if(localStorage.getItem("vetdict-admin")==="1"){
+    isAdmin=true;isPro=true;
+  }
+  // Check pro subscription (future Stripe integration)
+  if(localStorage.getItem("vetdict-pro")==="1") isPro=true;
+
+  // Update UI based on access level
+  document.body.classList.toggle("is-admin",isAdmin);
+  document.body.classList.toggle("is-pro",isPro);
+  // Show admin badge if admin
+  if(isAdmin){
+    const badge=document.createElement("div");
+    badge.className="admin-badge";
+    badge.textContent="Admin";
+    badge.title="管理者モード — 全機能アンロック済み";
+    document.body.appendChild(badge);
+  }
+}
+
 /* ===== Bilingual i18n system ===== */
 let currentLang="ja";
 const I18N={
@@ -197,6 +230,7 @@ let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 
 document.addEventListener("DOMContentLoaded",()=>{
   try{
+    checkAccess();
     loadSpeciesStats();
     setupNavigation();
     setupChat();
