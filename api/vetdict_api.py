@@ -295,7 +295,11 @@ def add_headers(response):
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
     elif path.startswith('/static/'):
-        response.headers.setdefault('Cache-Control', 'public, max-age=3600, must-revalidate')
+        # Immutable assets (SW handles revalidation): cache for 7 days
+        if any(path.endswith(ext) for ext in ('.css', '.js', '.svg', '.png', '.woff2')):
+            response.headers['Cache-Control'] = 'public, max-age=604800, stale-while-revalidate=86400'
+        else:
+            response.headers.setdefault('Cache-Control', 'public, max-age=3600, must-revalidate')
 
     return response
 
