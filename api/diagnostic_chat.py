@@ -391,8 +391,10 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     # 全身状態
     "元気がない": "lethargy",
+    "元気がなく": "lethargy",
     "元気ない": "lethargy",
     "元気なくなった": "lethargy",
+    "元気なく": "lethargy",
     "ぐったり": "lethargy",
     "ぐったりしてる": "lethargy",
     "ぐたっとしてる": "lethargy",
@@ -425,6 +427,8 @@ SYMPTOM_ALIASES = {
     "えさ食べない": "loss_of_appetite",
     "食が細い": "loss_of_appetite",
     "食欲がない": "loss_of_appetite",
+    "食欲もない": "loss_of_appetite",
+    "食欲なく": "loss_of_appetite",
     "食欲ない": "loss_of_appetite",
     "食欲減退": "loss_of_appetite",
     "食欲なくなった": "loss_of_appetite",
@@ -952,7 +956,11 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
 
 
 def _extract_species_symptoms(text: str, species: str) -> list[str]:
-    """Extract symptom IDs from text using species-specific SYMPTOM_NAMES."""
+    """Extract symptom IDs from text using species-specific SYMPTOM_NAMES.
+
+    Uses longest-match-first strategy and Japanese particle splitting
+    for maximum extraction accuracy across all species.
+    """
     sp_data = _SPECIES_DATA.get(species)
     if not sp_data:
         return []
@@ -961,17 +969,64 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     matched: set[str] = set()
     symptom_names = sp_data["symptom_names"]
 
-    # Match by Japanese and English symptom names
+    # Cross-species ID mapping: dog aliases use "loss_of_appetite" but many
+    # species modules use "appetite_loss", "anorexia", etc. for the same concept.
+    _ID_SYNONYMS: dict[str, list[str]] = {
+        "loss_of_appetite": ["appetite_loss", "anorexia", "poor_appetite"],
+        "appetite_loss": ["loss_of_appetite", "anorexia"],
+        "anorexia": ["loss_of_appetite", "appetite_loss"],
+        "lethargy": ["depression", "inactivity"],
+        "diarrhea": ["loose_stool", "watery_stool"],
+        "vomiting": ["regurgitation"],
+        "seizures": ["convulsions", "fits"],
+        "tremors": ["shaking", "trembling"],
+        "bloating": ["abdominal_distension", "abdominal_distention"],
+        "weight_loss": ["emaciation", "wasting"],
+        "emaciation": ["weight_loss", "wasting"],
+    }
+
+    def _resolve_id(sid: str) -> str | None:
+        """Return the symptom ID that exists in this species' SYMPTOM_NAMES."""
+        if sid in symptom_names:
+            return sid
+        for alt in _ID_SYNONYMS.get(sid, []):
+            if alt in symptom_names:
+                return alt
+        return None
+
+    # Phase 1: Longest-match-first alias matching (aliases → species symptom IDs)
+    _sorted_aliases = sorted(SYMPTOM_ALIASES.keys(), key=len, reverse=True)
+    for alias in _sorted_aliases:
+        if alias in text_lower:
+            symptom_id = SYMPTOM_ALIASES[alias]
+            resolved = _resolve_id(symptom_id)
+            if resolved:
+                matched.add(resolved)
+
+    # Phase 2: Direct symptom name matches (ja/en)
     for sym_id, names in symptom_names.items():
         ja = names.get("ja", "").lower()
         en = names.get("en", "").lower()
         if (ja and ja in text_lower) or (en and en in text_lower):
             matched.add(sym_id)
 
-    # Also try dog aliases — many symptom IDs are shared
-    for alias, symptom_id in SYMPTOM_ALIASES.items():
-        if alias in text_lower and symptom_id in symptom_names:
-            matched.add(symptom_id)
+    # Phase 3: Fragment splitting for compound Japanese phrases
+    if not matched:
+        import re as _re
+        fragments = _re.split(r'[、。,.と！!？?\s]+', text_lower)
+        fragments = [f.strip() for f in fragments if len(f.strip()) >= 1]
+        for frag in fragments:
+            for alias in _sorted_aliases:
+                if alias in frag:
+                    sid = SYMPTOM_ALIASES[alias]
+                    if sid in symptom_names:
+                        matched.add(sid)
+                        break
+            for sym_id, names in symptom_names.items():
+                ja = names.get("ja", "").lower()
+                en = names.get("en", "").lower()
+                if (ja and ja in frag) or (en and en in frag):
+                    matched.add(sym_id)
 
     return list(matched)
 
