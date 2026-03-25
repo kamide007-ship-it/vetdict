@@ -17,6 +17,11 @@
 <meta name="twitter:description" content="21動物種・6,400+疾患・187薬品。獣医師監修の無料AI診断支援プラットフォーム。">
 <link rel="canonical" href="https://vetdict.info/">
 <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
+<link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#1a2744">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VetDict">
 <link rel="stylesheet" href="/static/css/main.css"/>
 <link rel="stylesheet" href="/static/css/multidisease-ui.css">
 <script type="application/ld+json">
@@ -61,5 +66,6 @@
 <script src="/static/js/multidisease-questions.js"></script>
 <script src="/static/js/multidisease-guidance.js"></script>
 <script src="/static/js/multidisease-ui.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}</script>
 </body>
 </html>
