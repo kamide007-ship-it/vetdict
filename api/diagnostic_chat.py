@@ -977,39 +977,120 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
 
 
 def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) -> list[dict]:
-    """Match symptom IDs to species-specific diseases using Jaccard similarity."""
+    """Match symptom IDs to species-specific diseases using advanced weighted scoring.
+
+    Uses the same harmonic-mean + specificity + negative-evidence algorithm as
+    the dog matcher (match_symptoms_to_diseases) to achieve consistent,
+    high-accuracy differential diagnosis across all species.
+    """
+    import math
+
     sp_data = _SPECIES_DATA.get(species)
     if not sp_data or not symptom_ids:
         return []
 
     symptom_set = set(symptom_ids)
-    matches = []
+    diseases = sp_data["diseases"]
 
-    for disease in sp_data["diseases"]:
+    # --- Build per-symptom specificity for this species ---
+    # Count how many diseases each symptom appears in (IDF-like).
+    symptom_disease_count: dict[str, int] = {}
+    for disease in diseases:
+        for s in disease.get("symptoms", set()):
+            symptom_disease_count[s] = symptom_disease_count.get(s, 0) + 1
+    total_diseases = max(len(diseases), 1)
+
+    def _compute_weight(sym_id: str) -> float:
+        """Higher weight for symptoms that appear in fewer diseases (more specific)."""
+        count = symptom_disease_count.get(sym_id, 1)
+        # IDF-inspired: log(N / count) + 1, clamped to [1.0, 3.0]
+        idf = math.log(total_diseases / max(count, 1)) + 1.0
+        return max(1.0, min(idf, 3.0))
+
+    user_weights = {s: _compute_weight(s) for s in symptom_set}
+    total_user_weight = sum(user_weights.values())
+
+    matches = []
+    for disease in diseases:
         disease_symptoms = set(disease.get("symptoms", set()))
         if not disease_symptoms:
             continue
 
-        intersection = len(symptom_set & disease_symptoms)
-        if intersection == 0:
+        matched = symptom_set & disease_symptoms
+        if not matched:
             continue
 
-        union = len(symptom_set | disease_symptoms)
-        similarity = intersection / union
+        # --- Weighted recall (how well user symptoms match this disease) ---
+        matched_weight = sum(user_weights.get(s, 1.0) for s in matched)
+        weighted_recall = matched_weight / total_user_weight if total_user_weight > 0 else 0
+
+        # --- Coverage (how much of the disease's symptom profile is covered) ---
+        disease_weights = {s: _compute_weight(s) for s in disease_symptoms}
+        total_disease_weight = sum(disease_weights.values())
+        covered_weight = sum(disease_weights.get(s, 1.0) for s in matched)
+        coverage = covered_weight / total_disease_weight if total_disease_weight > 0 else 0
+
+        # --- Harmonic mean base score ---
+        if weighted_recall + coverage > 0:
+            base_score = 2.0 * weighted_recall * coverage / (weighted_recall + coverage)
+        else:
+            base_score = 0.0
+
+        # --- Specificity bonus: reward matching highly specific symptoms ---
+        specificity_bonus = 0.0
+        for s in matched:
+            w = _compute_weight(s)
+            if w >= 2.5:
+                specificity_bonus += 0.06
+            elif w >= 1.8:
+                specificity_bonus += 0.03
+        base_score = min(base_score + specificity_bonus, 1.0)
+
+        # --- Negative evidence penalty ---
+        missing = disease_symptoms - symptom_set
+        negative_penalty = 1.0
+        if len(symptom_set) >= 3:
+            for s in missing:
+                w = _compute_weight(s)
+                if w >= 2.5:
+                    negative_penalty -= 0.06
+                elif w >= 2.0:
+                    negative_penalty -= 0.03
+            negative_penalty = max(negative_penalty, 0.5)
+
+        # --- Urgency boost: slightly favor high-urgency diseases for safety ---
+        urgency = disease.get("urgency", "low")
+        urgency_factor = {"emergency": 1.05, "high": 1.02}.get(urgency, 1.0)
+
+        composite = base_score * negative_penalty * urgency_factor
+
+        # --- Logistic confidence calibration ---
+        raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
+        confidence = min(round(raw_logistic * 100, 1), 95.0)
 
         matches.append({
             "disease_id": disease.get("name", ""),
             "name_ja": disease.get("name_ja", ""),
             "name_en": disease.get("name", ""),
-            "severity": disease.get("urgency", "low"),
-            "similarity_score": round(similarity, 3),
-            "matched_symptoms": list(symptom_set & disease_symptoms),
-            "unmatched_user_symptoms": list(symptom_set - disease_symptoms),
-            "additional_disease_symptoms": list(disease_symptoms - symptom_set),
+            "severity": urgency,
+            "similarity_score": round(composite, 3),
+            "confidence_percent": confidence,
+            "matched_symptoms": sorted(matched),
+            "unmatched_user_symptoms": sorted(symptom_set - disease_symptoms),
+            "additional_disease_symptoms": sorted(disease_symptoms - symptom_set),
+            "missing_key_symptoms": sorted(
+                s for s in missing if _compute_weight(s) >= 1.8
+            ),
             "description": disease.get("description", ""),
             "description_ja": disease.get("description_ja", ""),
             "description_en": disease.get("description", ""),
             "recommended_tests": disease.get("recommended_tests", []),
+            "scoring_detail": {
+                "weighted_recall": round(weighted_recall, 3),
+                "coverage": round(coverage, 3),
+                "negative_penalty": round(negative_penalty, 3),
+                "urgency_factor": urgency_factor,
+            },
         })
 
     matches.sort(key=lambda m: m["similarity_score"], reverse=True)
