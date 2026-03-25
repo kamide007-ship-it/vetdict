@@ -39,6 +39,7 @@ SPECIES_MODULES = {
     "parakeet": "api.species.parakeet_diseases",
     "parrot": "api.species.parrot_diseases",
     "amphibian": "api.species.amphibian_diseases",
+    "fish": "api.species.fish_diseases",
     "degu": "api.species.degu_diseases",
     "sugar_glider": "api.species.sugar_glider_diseases",
     "exotic_other": "api.species.exotic_other_diseases",

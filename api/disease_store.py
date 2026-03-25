@@ -214,9 +214,44 @@ def get_species_stats() -> dict[str, Any]:
     if sum(disease_counts.values()) == 0:
         logger.info("No disease data from SQLite — using module/JSON fallback")
         disease_counts = _fallback_disease_counts()
+    else:
+        # Supplement species that were never migrated to SQLite.
+        # Check which species have zero rows in the DB — those need fallback.
+        try:
+            with get_connection() as conn:
+                _db_species = {row[0] for row in conn.execute(
+                    "SELECT DISTINCT species FROM diseases"
+                ).fetchall()}
+        except Exception:
+            _db_species = set(disease_counts.keys())
+
+        _unmigrated = [sp for sp in SPECIES_META if sp not in _db_species]
+        if _unmigrated:
+            _fb = _fallback_disease_counts()
+            for sp in _unmigrated:
+                if _fb.get(sp, 0) > 0:
+                    disease_counts[sp] = _fb[sp]
 
     if total_drugs == 0:
         drug_counts, total_drugs = _fallback_drug_counts()
+    else:
+        # Supplement species with no drug rows in SQLite
+        try:
+            with get_connection() as conn:
+                _db_drug_species = {row[0] for row in conn.execute(
+                    "SELECT DISTINCT species FROM drug_species_info"
+                ).fetchall()}
+        except Exception:
+            _db_drug_species = set(drug_counts.keys())
+
+        _unmigrated_drugs = [sp for sp in SPECIES_META if sp not in _db_drug_species]
+        if _unmigrated_drugs:
+            _fb_drugs, _fb_total = _fallback_drug_counts()
+            for sp in _unmigrated_drugs:
+                if _fb_drugs.get(sp, 0) > 0:
+                    drug_counts[sp] = _fb_drugs[sp]
+            if _fb_total > total_drugs:
+                total_drugs = _fb_total
 
     stats = []
     for sp_id, meta in SPECIES_META.items():

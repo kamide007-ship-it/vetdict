@@ -87,7 +87,12 @@ def db_path(tmp_path, monkeypatch):
 
 
 class TestGetSpeciesStats:
-    def test_returns_species_with_counts(self, db_path):
+    def test_returns_species_with_counts(self, db_path, monkeypatch):
+        # Disable fallback so test only sees DB data
+        monkeypatch.setattr("api.disease_store._fallback_disease_counts", lambda: {})
+        monkeypatch.setattr("api.disease_store._fallback_drug_counts", lambda: ({}, 0))
+        invalidate_cache()
+
         result = get_species_stats()
         assert "species" in result
         assert "total_diseases" in result
