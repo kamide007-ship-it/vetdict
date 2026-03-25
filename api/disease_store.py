@@ -403,16 +403,16 @@ def get_symptoms_for_species(species: str) -> list[dict]:
 
     # Fallback: load from Python species module if SQLite has no data
     import importlib as _importlib
-    _mod_map = {**{k: v for k, v in _fallback_disease_counts.__code__.co_consts
-                   if isinstance(v, str)}} if False else {}  # noqa — see below
     try:
         mod = _importlib.import_module(f"api.species.{species}_diseases")
         sym_names = getattr(mod, "SYMPTOM_NAMES", {})
+        sym_cats = getattr(mod, "SYMPTOM_CATEGORIES", {})
         if sym_names:
             return sorted(
-                [{"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid), "category": "other"}
+                [{"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),
+                  "category": sym_cats.get(sid, "other")}
                  for sid, v in sym_names.items()],
-                key=lambda s: s["id"],
+                key=lambda s: (s["category"], s["id"]),
             )
     except (ImportError, Exception):
         pass
