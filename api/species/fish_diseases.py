@@ -12,6 +12,40 @@ from typing import Any, Dict, List
 from . import prevalence_data
 from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 
+# Category mapping for symptom checkbox UI
+SYMPTOM_CATEGORIES: Dict[str, str] = {
+    # 体表・外観
+    "white_spots": "skin", "cotton_like_growth": "skin", "fin_rot": "skin",
+    "scale_loss": "skin", "raised_scales": "skin", "ulcers": "skin",
+    "redness_skin": "skin", "mucus_overproduction": "skin",
+    "discoloration": "skin", "dark_coloration": "skin", "white_film": "skin",
+    "gold_dust": "skin", "lumps_nodules": "skin", "spots_black": "skin",
+    "worm_like_parasites": "parasites", "anchor_worm": "parasites",
+    # 鰭
+    "clamped_fins": "fins", "frayed_fins": "fins", "fin_hemorrhage": "fins",
+    # 眼
+    "pop_eye": "eyes", "cloudy_eye": "eyes", "sunken_eye": "eyes",
+    # 鰓
+    "gill_redness": "gills", "gill_paleness": "gills", "gill_swelling": "gills",
+    "gill_mucus": "gills", "rapid_gill_movement": "gills",
+    # 行動
+    "flashing": "behavior", "lethargy": "behavior", "loss_of_appetite": "behavior",
+    "gasping_surface": "behavior", "erratic_swimming": "behavior",
+    "loss_of_balance": "behavior", "swimming_upside_down": "behavior",
+    "hiding": "behavior", "isolation": "behavior", "head_shaking": "behavior",
+    "spinning": "behavior",
+    # 腹部・体型
+    "bloating": "body", "emaciation": "body", "dropsy": "body", "bent_spine": "body",
+    # 排泄
+    "white_stringy_feces": "digestive", "trailing_feces": "digestive",
+    # 呼吸
+    "labored_breathing": "respiratory",
+    # 繁殖
+    "egg_binding": "reproductive",
+    # 急変
+    "sudden_death": "emergency", "mass_mortality": "emergency",
+}
+
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     # 体表・外観
     "white_spots": {"ja": "白点（白い斑点）", "en": "White spots"},
