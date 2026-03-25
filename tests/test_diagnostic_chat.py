@@ -1038,25 +1038,25 @@ class TestSymptomAliasesIntegrity:
         assert len(SYMPTOM_ALIASES) > 0
 
     def test_all_alias_values_are_valid_symptom_ids_or_known_mismatches(self):
-        """Every value should be in SYMPTOM_IDS or be a documented mismatch."""
+        """Every value should be in SYMPTOM_IDS (dog) or a species SYMPTOM_NAMES, or be a documented mismatch."""
+        # Build combined valid IDs from all species modules
+        all_valid_ids = set(SYMPTOM_IDS) | _KNOWN_ALIAS_MISMATCHES
+        from api.diagnostic_chat import _SPECIES_DATA
+        for sp_data in _SPECIES_DATA.values():
+            all_valid_ids.update(sp_data.get("symptom_names", {}).keys())
+
         for alias, symptom_id in SYMPTOM_ALIASES.items():
-            if symptom_id in _KNOWN_ALIAS_MISMATCHES:
-                continue
-            assert symptom_id in SYMPTOM_IDS, (
+            assert symptom_id in all_valid_ids, (
                 f"Alias '{alias}' maps to '{symptom_id}' "
-                f"which is not in SYMPTOM_IDS and not a known mismatch"
+                f"which is not in any species symptom set"
             )
 
-    def test_known_mismatches_are_exhaustive(self):
-        """Verify _KNOWN_ALIAS_MISMATCHES covers all actual mismatches."""
-        actual_mismatches = set()
-        for _alias, symptom_id in SYMPTOM_ALIASES.items():
-            if symptom_id not in SYMPTOM_IDS:
-                actual_mismatches.add(symptom_id)
-        assert actual_mismatches == _KNOWN_ALIAS_MISMATCHES, (
-            f"Mismatches changed. Expected: {_KNOWN_ALIAS_MISMATCHES}, "
-            f"Actual: {actual_mismatches}"
-        )
+    def test_known_mismatches_are_still_valid(self):
+        """Verify _KNOWN_ALIAS_MISMATCHES entries are actually missing from dog SYMPTOM_IDS."""
+        for sid in _KNOWN_ALIAS_MISMATCHES:
+            assert sid not in SYMPTOM_IDS, (
+                f"'{sid}' is in _KNOWN_ALIAS_MISMATCHES but now exists in SYMPTOM_IDS — remove from mismatches"
+            )
 
     def test_all_alias_keys_are_lowercase(self):
         for alias in SYMPTOM_ALIASES:
