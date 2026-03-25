@@ -30,3 +30,10 @@ services:
         value: "0.7"
       - key: AI_SYMPTOM_FALLBACK
         value: "true"
+      # PayPal Configuration
+      - key: PAYPAL_CLIENT_ID
+        value: "AX7kp51yXEJ_NiNH4dH-Y6NA-bDz7pFzT6uPgelYbXMjW3doC0I2wCGjHTGaIN2ExrixrLeXg4ZuVTUE"
+      - key: PAYPAL_SECRET
+        sync: false
+      - key: PAYPAL_MODE
+        value: "live"
