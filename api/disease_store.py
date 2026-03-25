@@ -132,6 +132,7 @@ def _fallback_disease_counts() -> dict[str, int]:
         "snake": ("api.species.snake_diseases", "DISEASES"),
         "lizard": ("api.species.lizard_diseases", "DISEASES"),
         "amphibian": ("api.species.amphibian_diseases", "DISEASES"),
+        "fish": ("api.species.fish_diseases", "DISEASES"),
         "exotic_other": ("api.species.exotic_other_diseases", "DISEASES"),
     }
 
