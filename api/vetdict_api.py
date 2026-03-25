@@ -325,6 +325,11 @@ def privacy():
     return render_template('privacy.html')
 
 
+@app.route('/tokushoho')
+def tokushoho():
+    return render_template('tokushoho.html')
+
+
 @app.route('/favicon.ico')
 def favicon():
     try:
