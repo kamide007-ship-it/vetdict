@@ -681,26 +681,25 @@ SYMPTOM_ALIASES = {
     "体が黒くなった": "dark_coloration", "黒ずんでる": "dark_coloration",
     "コショウ病": "gold_dust", "金粉": "gold_dust",
     "金色の粉": "gold_dust", "velvet": "gold_dust",
-    # 眼
+    # 眼（魚用 — dog用と重複しない表現のみ）
     "目が飛び出てる": "pop_eye", "目が出てる": "pop_eye",
     "ポップアイ": "pop_eye", "pop eye": "pop_eye",
-    "目が白い": "cloudy_eye", "目が濁ってる": "cloudy_eye",
+    "目が濁ってる": "cloudy_eye",
     # 鰓
     "エラが赤い": "gill_redness", "鰓が赤い": "gill_redness",
     "エラが白い": "gill_paleness", "鰓が白い": "gill_paleness",
     "エラが腫れてる": "gill_swelling",
     "エラの動きが速い": "rapid_gill_movement", "鰓蓋パタパタ": "rapid_gill_movement",
     "エラをパタパタ": "rapid_gill_movement",
-    # 行動
+    # 行動（魚用 — dog用と重複しない表現のみ）
     "体を擦りつける": "flashing", "擦りつけ": "flashing",
     "底石にこすりつける": "flashing", "フラッシング": "flashing",
     "flashing": "flashing", "scratching": "flashing",
     "底にじっとしてる": "lethargy", "じっとしてる": "lethargy",
-    "じっとしてて": "lethargy", "動かない": "lethargy",
-    "沈んでる": "lethargy", "元気がない": "lethargy",
+    "じっとしてて": "lethargy",
+    "沈んでる": "lethargy",
     "パクパク": "gasping_surface", "鼻上げ": "gasping_surface",
     "水面でパクパク": "gasping_surface", "水面に上がってくる": "gasping_surface",
-    "gasping": "gasping_surface",
     "暴れる": "erratic_swimming", "急に暴れる": "erratic_swimming",
     "ビュンビュン泳ぐ": "erratic_swimming",
     "ひっくり返る": "swimming_upside_down", "転覆": "swimming_upside_down",
@@ -719,14 +718,13 @@ SYMPTOM_ALIASES = {
     "イカリムシ": "anchor_worm", "糸みたいなのがついてる": "anchor_worm",
     "虫がついてる": "worm_like_parasites",
     "ウオジラミ": "worm_like_parasites",
-    # 痩せ
-    "痩せてきた": "emaciation", "やせてきた": "emaciation",
-    "ガリガリ": "emaciation",
+    # 痩せ（魚用 — dog用 weight_loss と異なるID emaciation を使用）
+    "魚が痩せた": "emaciation", "魚がやせた": "emaciation",
+    "痩せ細った": "emaciation",
     # 背骨
     "背骨が曲がってる": "bent_spine", "体が曲がってる": "bent_spine",
-    # 餌を食べない
+    # 餌を食べない（魚用 — dog用と重複しない表現のみ）
     "餌を食べない": "loss_of_appetite", "エサを食べない": "loss_of_appetite",
-    "食べなくなった": "loss_of_appetite",
     # 大量死
     "大量に死んでる": "mass_mortality", "何匹も死んだ": "mass_mortality",
     "次々死ぬ": "mass_mortality", "全滅": "mass_mortality",
