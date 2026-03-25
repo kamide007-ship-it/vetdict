@@ -45,6 +45,15 @@
           <p style="font-size:.68rem;color:var(--gray-500);margin-top:6px">PayPalの決済ページにリダイレクトします</p>
         </div>
         <p class="pricing-note" id="proStatusText">安全なPayPal決済 — いつでもキャンセル可能</p>
+        <!-- Restore Pro on another device -->
+        <div class="pro-restore" id="proRestoreSection">
+          <p class="pro-restore-label">既にProをお持ちの方（別端末で復元）</p>
+          <div class="pro-restore-row">
+            <input type="email" id="restoreEmail" placeholder="登録メールアドレス" class="pro-restore-input">
+            <button onclick="restorePro()" class="pro-restore-btn" id="restoreBtn">復元</button>
+          </div>
+          <p class="pro-restore-msg" id="restoreMsg"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -78,12 +87,14 @@
         onApprove:function(data){
           localStorage.setItem("vetdict-pro","1");
           localStorage.setItem("vetdict-subscription-id",data.subscriptionID);
+          // Ask for email to enable cross-device sync
+          var email=prompt("Pro\u30d7\u30e9\u30f3\u306e\u304a\u7533\u3057\u8fbc\u307f\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01\n\n\u4ed6\u306e\u7aef\u672b\u3067\u3082Pro\u3092\u4f7f\u3046\u305f\u3081\u3001\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\uff1a");
+          if(email){localStorage.setItem("vetdict-email",email);}
           fetch("/api/paypal/activate",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({subscription_id:data.subscriptionID})
+            body:JSON.stringify({subscription_id:data.subscriptionID,email:email||""})
           }).catch(function(){});
-          alert("\u30d7\u30ed\u30d7\u30e9\u30f3\u306e\u304a\u7533\u3057\u8fbc\u307f\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01\u5168\u6a5f\u80fd\u304c\u30a2\u30f3\u30ed\u30c3\u30af\u3055\u308c\u307e\u3057\u305f\u3002");
           location.reload();
         },
         onError:function(err){
@@ -121,6 +132,34 @@ function serverSidePayPal(){
   .catch(function(e){
     alert("通信エラー: "+e.message);
     if(btn)btn.textContent="PayPalで申し込む（¥980/月）";
+  });
+}
+
+function restorePro(){
+  var email=document.getElementById("restoreEmail").value.trim();
+  var msg=document.getElementById("restoreMsg");
+  var btn=document.getElementById("restoreBtn");
+  if(!email){msg.textContent="メールアドレスを入力してください";msg.className="pro-restore-msg error";return;}
+  btn.textContent="確認中...";btn.disabled=true;
+  fetch("/api/paypal/restore",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.active){
+      localStorage.setItem("vetdict-pro","1");
+      localStorage.setItem("vetdict-subscription-id",d.subscription_id);
+      localStorage.setItem("vetdict-email",email);
+      msg.textContent="Pro\u304c\u5fa9\u5143\u3055\u308c\u307e\u3057\u305f\uff01";
+      msg.className="pro-restore-msg success";
+      setTimeout(function(){location.reload();},1000);
+    } else {
+      msg.textContent="\u3053\u306e\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u306b\u6709\u52b9\u306aPro\u30d7\u30e9\u30f3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093";
+      msg.className="pro-restore-msg error";
+      btn.textContent="\u5fa9\u5143";btn.disabled=false;
+    }
+  })
+  .catch(function(){
+    msg.textContent="\u901a\u4fe1\u30a8\u30e9\u30fc";msg.className="pro-restore-msg error";
+    btn.textContent="\u5fa9\u5143";btn.disabled=false;
   });
 }
 </script>
