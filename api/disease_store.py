@@ -396,8 +396,27 @@ def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[di
 
 
 def get_symptoms_for_species(species: str) -> list[dict]:
-    """Return symptom list for a species from SQLite."""
-    return _get_symptoms_for_species_cached(species, _cache_version)
+    """Return symptom list for a species from SQLite, with module fallback."""
+    result = _get_symptoms_for_species_cached(species, _cache_version)
+    if result:
+        return result
+
+    # Fallback: load from Python species module if SQLite has no data
+    import importlib as _importlib
+    _mod_map = {**{k: v for k, v in _fallback_disease_counts.__code__.co_consts
+                   if isinstance(v, str)}} if False else {}  # noqa — see below
+    try:
+        mod = _importlib.import_module(f"api.species.{species}_diseases")
+        sym_names = getattr(mod, "SYMPTOM_NAMES", {})
+        if sym_names:
+            return sorted(
+                [{"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid), "category": "other"}
+                 for sid, v in sym_names.items()],
+                key=lambda s: s["id"],
+            )
+    except (ImportError, Exception):
+        pass
+    return result
 
 
 # ---------------------------------------------------------------------------
