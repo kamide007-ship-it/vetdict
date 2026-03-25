@@ -40,6 +40,10 @@
       </ul>
       <div class="pricing-cta">
         <div id="paypal-button-container"></div>
+        <div id="paypal-fallback" style="display:none;text-align:center">
+          <a href="https://www.paypal.com/paypalme/equinevetsynapse/980JPY" target="_blank" rel="noopener" class="pricing-btn pricing-btn-pro">PayPalで¥980を支払う</a>
+          <p style="font-size:.68rem;color:var(--gray-500);margin-top:6px">お支払い後、メールにてPro有効化をご連絡ください</p>
+        </div>
         <p class="pricing-note" id="proStatusText">安全なPayPal決済 — いつでもキャンセル可能</p>
       </div>
     </div>
@@ -60,34 +64,44 @@
   }
 
   // Render PayPal subscription button
-  if(typeof paypal!=="undefined"&&document.getElementById("paypal-button-container")){
-    paypal.Buttons({
-      style:{shape:"pill",color:"blue",layout:"vertical",label:"subscribe"},
-      createSubscription:function(data,actions){
-        return actions.subscription.create({
-          plan_id:"P-5FB7289813535813HNHCF4OA"
-        });
-      },
-      onApprove:function(data){
-        // Subscription approved
-        localStorage.setItem("vetdict-pro","1");
-        localStorage.setItem("vetdict-subscription-id",data.subscriptionID);
-
-        // Notify server
-        fetch("/api/paypal/activate",{
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({subscription_id:data.subscriptionID})
-        }).catch(function(){});
-
-        // Update UI
-        alert("\u30d7\u30ed\u30d7\u30e9\u30f3\u306e\u304a\u7533\u3057\u8fbc\u307f\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01\u5168\u6a5f\u80fd\u304c\u30a2\u30f3\u30ed\u30c3\u30af\u3055\u308c\u307e\u3057\u305f\u3002");
-        location.reload();
-      },
-      onError:function(err){
-        console.error("PayPal error:",err);
-      }
-    }).render("#paypal-button-container");
+  var btnContainer=document.getElementById("paypal-button-container");
+  var fallback=document.getElementById("paypal-fallback");
+  if(typeof paypal!=="undefined"&&btnContainer){
+    try{
+      paypal.Buttons({
+        style:{shape:"pill",color:"blue",layout:"vertical",label:"subscribe"},
+        createSubscription:function(data,actions){
+          return actions.subscription.create({
+            plan_id:"P-5FB7289813535813HNHCF4OA"
+          });
+        },
+        onApprove:function(data){
+          localStorage.setItem("vetdict-pro","1");
+          localStorage.setItem("vetdict-subscription-id",data.subscriptionID);
+          fetch("/api/paypal/activate",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({subscription_id:data.subscriptionID})
+          }).catch(function(){});
+          alert("\u30d7\u30ed\u30d7\u30e9\u30f3\u306e\u304a\u7533\u3057\u8fbc\u307f\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01\u5168\u6a5f\u80fd\u304c\u30a2\u30f3\u30ed\u30c3\u30af\u3055\u308c\u307e\u3057\u305f\u3002");
+          location.reload();
+        },
+        onError:function(err){
+          console.error("PayPal button error:",err);
+          // Show fallback payment link
+          if(fallback)fallback.style.display="block";
+        }
+      }).render("#paypal-button-container").catch(function(err){
+        console.error("PayPal render error:",err);
+        if(fallback)fallback.style.display="block";
+      });
+    }catch(e){
+      console.error("PayPal init error:",e);
+      if(fallback)fallback.style.display="block";
+    }
+  } else {
+    // SDK failed to load
+    if(fallback)fallback.style.display="block";
   }
 })();
 </script>
