@@ -278,11 +278,12 @@ def add_headers(response):
     # Content Security Policy (prevent XSS, clickjacking, etc.)
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline'; "
+        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: https:; "
-        "font-src 'self'; "
-        "connect-src 'self'; "
+        "font-src 'self' https:; "
+        "connect-src 'self' https://www.google-analytics.com https://www.paypal.com https://api-m.paypal.com; "
+        "frame-src https://www.paypal.com https://www.sandbox.paypal.com; "
         "frame-ancestors 'none'"
     )
 
