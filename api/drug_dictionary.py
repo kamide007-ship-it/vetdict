@@ -18,6 +18,7 @@ from flask import Blueprint, jsonify, request
 from api.drug_batch_1 import DRUGS_BATCH_1
 from api.drug_batch_2 import DRUGS_BATCH_2
 from api.drug_batch_3 import SPECIES_INFO_PATCH
+from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -1887,6 +1888,20 @@ for _drug_id, _species_patch in SPECIES_INFO_PATCH.items():
         for _sp, _info in _species_patch.items():
             if _sp not in _target:
                 _target[_sp] = _info
+
+# 魚用薬品を統合
+for _fish_drug in FISH_DRUGS:
+    if _fish_drug["id"] not in _existing_ids:
+        DRUGS.append(_fish_drug)
+        _existing_ids.add(_fish_drug["id"])
+        _drug_index[_fish_drug["id"]] = _fish_drug
+
+# 魚用 species_info パッチを適用
+for _drug_id, _fish_info in FISH_SPECIES_INFO_PATCH.items():
+    if _drug_id in _drug_index:
+        _target = _drug_index[_drug_id].setdefault("species_info", {})
+        if "fish" not in _target:
+            _target["fish"] = _fish_info["fish"]
 
 
 # ---------------------------------------------------------------------------

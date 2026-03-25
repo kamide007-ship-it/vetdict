@@ -52,6 +52,7 @@ SPECIES_META: dict[str, dict[str, str]] = {
     "snake": {"name_ja": "ヘビ", "name_en": "Snake", "desc_ja": "ヘビの呼吸器感染症・脱皮異常", "desc_en": "Snake respiratory infections and dysecdysis"},
     "lizard": {"name_ja": "トカゲ", "name_en": "Lizard", "desc_ja": "トカゲの寄生虫症・代謝疾患", "desc_en": "Lizard parasitic and metabolic diseases"},
     "amphibian": {"name_ja": "両生類", "name_en": "Amphibian", "desc_ja": "カエル・イモリのツボカビ症など", "desc_en": "Chytrid fungus and amphibian diseases"},
+    "fish": {"name_ja": "魚", "name_en": "Fish", "desc_ja": "白点病・尾ぐされ病など観賞魚の疾患", "desc_en": "Ich, fin rot, dropsy and aquarium fish diseases"},
     "exotic_other": {"name_ja": "その他エキゾチック", "name_en": "Exotic Other", "desc_ja": "その他のエキゾチックアニマルの疾患", "desc_en": "Diseases of other exotic animals"},
 }
 

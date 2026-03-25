@@ -146,7 +146,8 @@ import importlib as _importlib
 _GENERIC_SPECIES = [
     "cat", "rabbit", "hamster", "chinchilla", "guinea_pig", "ferret",
     "hedgehog", "sugar_glider", "degu", "bird", "parakeet", "parrot",
-    "reptile", "tortoise", "snake", "lizard", "amphibian", "exotic_other",
+    "reptile", "tortoise", "snake", "lizard", "amphibian", "fish",
+    "exotic_other",
 ]
 _SPECIES_DATA: dict = {}  # {species: {"diseases": [...], "symptom_names": {...}}}
 
@@ -170,6 +171,7 @@ SPECIES_LABELS = {
     "snake": {"ja": "ヘビ", "en": "Snake"},
     "lizard": {"ja": "トカゲ", "en": "Lizard"},
     "amphibian": {"ja": "両生類", "en": "Amphibian"},
+    "fish": {"ja": "魚", "en": "Fish"},
     "exotic_other": {"ja": "その他エキゾチック", "en": "Other Exotic"},
 }
 

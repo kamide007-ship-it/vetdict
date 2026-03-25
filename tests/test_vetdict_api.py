@@ -724,7 +724,7 @@ class TestSpeciesStatsEndpoint:
     def test_species_count_matches_total_species(self, client):
         payload = client.get('/api/species-stats').get_json()
         assert payload['total_species'] == len(payload['species'])
-        assert payload['total_species'] == 20
+        assert payload['total_species'] == 21
 
     def test_totals_are_non_negative_integers(self, client):
         payload = client.get('/api/species-stats').get_json()
