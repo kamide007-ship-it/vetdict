@@ -49,6 +49,9 @@ SPECIES_PREVALENCE = {
     # CAT
     "cat": {
         "Upper Respiratory Infection (Feline)": "very_common",
+        "Feline Herpesvirus (FHV-1) Infection": "very_common",
+        "Feline Calicivirus Infection": "very_common",
+        "Feline Chlamydiosis": "common",
         "Feline Panleukopenia": "very_common",
         "Feline Leukemia Virus (FeLV)": "very_common",
         "Feline Immunodeficiency Virus (FIV)": "very_common",

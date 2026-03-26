@@ -1147,8 +1147,8 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "open_mouth_breathing": ["labored_breathing", "respiratory_distress", "mouth_breathing"],
         "rapid_breathing": ["tachypnea", "panting"],
         "coughing": ["cough", "kennel_cough"],
-        "sneezing": ["reverse_sneezing", "nasal_irritation"],
-        "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion"],
+        "sneezing": ["reverse_sneezing", "nasal_irritation", "nasal_discharge"],
+        "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion", "sneezing"],
         # Urinary
         "straining_to_urinate": ["dysuria", "urinary_straining", "difficulty_urinating"],
         "blood_in_urine": ["hematuria", "bloody_urine"],
@@ -1271,8 +1271,25 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "gill_swelling": ["gill_redness"],
         "gill_paleness": ["gill_necrosis"],
         "nystagmus": ["head_tilt", "rolling"],
-        "ataxia": ["tremors", "incoordination", "wobbling"],
-        "tremors": ["ataxia", "shaking"],
+        "ataxia": ["tremors", "incoordination", "wobbling", "stumbling", "mild_ataxia"],
+        "tremors": ["ataxia", "shaking", "muscle_twitching"],
+        # Hedgehog WHS
+        "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis"],
+        "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis"],
+        "paralysis_or_paresis": ["paralysis", "progressive_paralysis", "hind_limb_paralysis", "hindlimb_weakness"],
+        # Hedgehog mites
+        "skin_lesions": ["crusting", "thick_crusting", "flaky_skin", "skin_flaking", "dry_skin"],
+        "pruritus": ["scratching", "itching", "mild_itching", "ear_scratching"],
+        "hair_loss": ["quill_loss", "severe_quill_loss", "alopecia"],
+        "itching": ["pruritus", "scratching", "mild_itching"],
+        # General
+        "sneezing": ["nasal_discharge"],
+        # Reptile vitamin A
+        "eye_swelling": ["swollen_eyes", "periorbital_swelling", "blepharitis"],
+        "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
+        # Reptile MBD / shell
+        "soft_bones": ["jaw_softening", "shell_soft_spots", "bone_weakness", "fractures"],
+        "skin_lesions": ["shell_discoloration", "shell_pitting", "scale_discoloration", "crusting"],
     }
     expanded_set = set(symptom_ids)
     for sid in symptom_ids:
@@ -1280,6 +1297,16 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
             expanded_set.add(alt)
     symptom_set = expanded_set
     diseases = sp_data["diseases"]
+
+    # --- Load prevalence data for this species ---
+    from api.species import prevalence_data as _prev_mod
+    _prevalence = _prev_mod.SPECIES_PREVALENCE.get(species, {})
+    _PREVALENCE_MULTIPLIER = {
+        "very_common": 1.20,
+        "common": 1.0,
+        "uncommon": 0.90,
+        "rare": 0.80,
+    }
 
     # --- Build per-symptom specificity for this species ---
     # Count how many diseases each symptom appears in (IDF-like).
@@ -1347,11 +1374,26 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
                     negative_penalty -= 0.03
             negative_penalty = max(negative_penalty, 0.5)
 
+        # --- Coverage completeness bonus ---
+        # Reward diseases where more absolute symptoms matched (not just ratio).
+        # This prevents diseases with few symptoms from dominating.
+        coverage_bonus = 1.0
+        absolute_match_count = len(matched)
+        if absolute_match_count >= 4:
+            coverage_bonus = 1.10
+        elif absolute_match_count >= 3:
+            coverage_bonus = 1.05
+
         # --- Urgency boost: slightly favor high-urgency diseases for safety ---
         urgency = disease.get("urgency", "low")
         urgency_factor = {"emergency": 1.05, "high": 1.02}.get(urgency, 1.0)
 
-        composite = base_score * negative_penalty * urgency_factor
+        # --- Prevalence prior ---
+        disease_name = disease.get("name", "")
+        prevalence_tier = _prevalence.get(disease_name, "")
+        prevalence_mult = _PREVALENCE_MULTIPLIER.get(prevalence_tier, 1.0)
+
+        composite = base_score * negative_penalty * urgency_factor * coverage_bonus * prevalence_mult
 
         # --- Logistic confidence calibration ---
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
