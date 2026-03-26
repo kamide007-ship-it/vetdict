@@ -43,7 +43,15 @@
 [data-theme="dark"] .sponsor-product{background:var(--gray-50);border-color:var(--gray-200)}
 [data-theme="dark"] .ref-header{background:var(--white);border-color:var(--gray-200)}
 [data-theme="dark"] .ref-category{background:var(--white);border-color:var(--gray-200)}
+[data-theme="dark"] .header-nav button[aria-selected="true"]{color:#fff}
+[data-theme="dark"] .az-nav button:hover,[data-theme="dark"] .az-nav button.active{color:#fff}
+[data-theme="dark"] .chat-mode-btn.active{color:#fff}
+[data-theme="dark"] .guided-sym-btn.selected,[data-theme="dark"] .guided-context-opt.selected{color:#fff}
+[data-theme="dark"] .guided-action-btn.primary{color:#fff}
+[data-theme="dark"] .chat-followup-btn.selected{color:#fff}
+[data-theme="dark"] .species-guidance,[data-theme="dark"] .chat-species-guidance{background:rgba(74,122,255,.12);border-color:rgba(74,122,255,.25);color:var(--navy-light)}
 [data-theme="dark"] .lang-toggle{border-color:var(--gray-200)}
+[data-theme="dark"] .lang-toggle button.active{color:#fff}
 [data-theme="dark"] .footer{background:linear-gradient(180deg,#0d1018,#060810)}
 [data-theme="dark"] .chat-msg.bot{background:var(--gray-100)}
 [data-theme="dark"] .results-empty{background:linear-gradient(180deg,var(--gray-50),transparent)}
@@ -56,6 +64,9 @@
 [data-theme="dark"] .severity-bar.high{background:rgba(248,113,113,.1);color:#f87171}
 [data-theme="dark"] .severity-bar.emergency{background:#7f1d1d;color:#fca5a5}
 [data-theme="dark"] .clinical-details-body{background:linear-gradient(135deg,#0d1220,#1a2744)}
+[data-theme="dark"] .species-card[aria-pressed="true"]{background:linear-gradient(135deg,#1e2a4a,#253560);box-shadow:0 4px 16px rgba(74,122,255,.2)}
+[data-theme="dark"] .species-card[aria-pressed="true"] .name{color:var(--gray-900)}
+[data-theme="dark"] .species-card[aria-pressed="true"]::after{background:var(--green)}
 
 /* --- Theme toggle button --- */
 .theme-toggle{background:none;border:2px solid var(--gray-200);border-radius:20px;padding:4px 10px;cursor:pointer;font-size:.82rem;display:flex;align-items:center;gap:4px;transition:all var(--transition-fast);color:var(--gray-600);flex-shrink:0;font-family:var(--font)}
@@ -682,6 +693,11 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .sponsor-banner-inner{flex-direction:column;align-items:flex-start}
   .scroll-top{bottom:16px;right:16px;width:38px;height:38px}
   body{padding-bottom:env(safe-area-inset-bottom)}
+  /* Dark mode mobile nav dropdown */
+  [data-theme="dark"] .header-nav{background:rgba(30,34,51,.97);border-bottom-color:rgba(51,56,72,.6)}
+  [data-theme="dark"] .header-nav button{color:var(--gray-600)}
+  [data-theme="dark"] .header-nav button:hover{background:var(--gray-200);color:var(--gray-900)}
+  [data-theme="dark"] .header-nav button[aria-selected="true"]{background:var(--navy);color:#fff}
 }
 
 /* --- Admin / Pro access control --- */
