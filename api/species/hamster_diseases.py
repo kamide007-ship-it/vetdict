@@ -2780,7 +2780,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Retrobulbar Abscess",
         "name_ja": "後眼窩膿瘍",
-        "symptoms": {"appetite_loss", "exophthalmos", "eye_discharge", "facial_swelling"},
+        "symptoms": {"appetite_loss", "exophthalmos", "eye_swelling", "eye_discharge", "facial_swelling", "lethargy"},
         "description": "角膜と結膜の複合炎症で、床材の粉塵、感染、乾燥が原因となります。",
         "description_ja": "眼球後方の膿瘍で、歯科疾患に続発することが多く、眼球突出を引き起こします。",
         "urgency": "high",

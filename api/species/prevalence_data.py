@@ -15,6 +15,20 @@
 # ============================================================================
 
 SPECIES_PREVALENCE = {
+    # FISH
+    "fish": {
+        "Ichthyophthirius (White Spot Disease / Ich)": "very_common",
+        "Columnaris Disease": "very_common",
+        "Ammonia Poisoning": "very_common",
+        "Swim Bladder Disorder": "very_common",
+        "Dropsy (Pinecone Disease)": "common",
+        "Velvet Disease (Oodinium / Piscinoodinium)": "common",
+        "Anchor Worm (Lernaea)": "common",
+        "Gill Flukes (Dactylogyrus)": "common",
+        "Hexamita / Spironucleus (Internal Flagellates)": "common",
+        "Costia (Ichthyobodo)": "common",
+    },
+
     # AMPHIBIAN
     "amphibian": {
         "Nematode Infection": "very_common",

@@ -19,7 +19,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mite Infestation (Caparinia)",
         "name_ja": "疥癬ダニ感染症（カパリニア）",
-        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability"},
+        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability", "itching", "dry_skin"},
         "description": "ハリネズミに最も多い外部寄生虫であるカパリニアダニによる感染症で、強い痒みと針の脱落を引き起こします。",
         "description_ja": "ハリネズミに最も多い外部寄生虫であるカパリニアダニによる感染症で、強い痒みと針の脱落を引き起こします。",
         "urgency": "moderate",
@@ -946,7 +946,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Retrobulbar Abscess",
         "name_ja": "眼球後膿瘍",
-        "symptoms": {"eye_bulging", "pain", "appetite_loss", "facial_swelling", "fever"},
+        "symptoms": {"eye_bulging", "eye_swelling", "pain", "appetite_loss", "facial_swelling", "fever", "lethargy"},
         "description": "外傷や床材の刺激による角膜表面の欠損です。",
         "description_ja": "歯根感染に関連することが多い眼球後部の細菌性膿瘍です。",
         "urgency": "high",

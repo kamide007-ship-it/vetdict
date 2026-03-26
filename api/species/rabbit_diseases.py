@@ -305,7 +305,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pasteurellosis (Snuffles)",
         "name_ja": "パスツレラ症（スナッフル）",
-        "symptoms": {"nasal_discharge", "sneezing", "conjunctivitis", "head_tilt", "abscess", "respiratory_distress"},
+        "symptoms": {"nasal_discharge", "sneezing", "conjunctivitis", "head_tilt", "abscess", "respiratory_distress", "lethargy", "eye_discharge"},
         "description": "臼歯や前臼歯の歯根が眼窩や鼻腔に伸長し、涙嚢炎や球後圧迫を引き起こします。",
         "description_ja": "パスツレラ・ムルトシダによる多臓器感染で、上部呼吸器疾患、膿瘍、中耳炎、敗血症を引き起こします。",
         "urgency": "high",
