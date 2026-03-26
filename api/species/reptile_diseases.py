@@ -63,7 +63,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Vitamin A Deficiency (Hypovitaminosis A)",
         "name_ja": "ビタミンA欠乏症",
-        "symptoms": {"swollen_eyes", "nasal_discharge", "respiratory_distress", "anorexia", "skin_lesions", "lethargy"},
+        "symptoms": {"swollen_eyes", "eye_swelling", "nasal_discharge", "respiratory_distress", "anorexia", "skin_lesions", "lethargy"},
         "description": "慢性的なカルシウム不足またはビタミンD3不足による副甲状腺ホルモンの過剰分泌です。",
         "description_ja": "食事中のビタミンA不足により上皮組織の扁平上皮化生を引き起こし、特に目や呼吸器に影響します。",
         "causes": "ビタミンAを含む食材が不足した単調な食事（例：ガットローディングなしのレタスやコオロギのみ）。アイスバーグレタスのみを与えられたカメや、サプリメントなしの昆虫食爬虫類に多い。",

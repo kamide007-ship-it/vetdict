@@ -1404,7 +1404,8 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
         "sneezing": ["nasal_discharge"],
         "wet_tail": ["diarrhea"], "diarrhea": ["wet_tail"],
-        "poor_coat": ["hair_loss", "dry_skin"], "dry_skin": ["poor_coat"],
+        "poor_coat": ["hair_loss", "dry_skin"], "dry_skin": ["poor_coat", "flaky_skin", "scaling"],
+        "flaky_skin": ["dry_skin", "scaling", "crusting"],
         "thinning_skin": ["hair_loss"],
     }
     expanded_set = set(symptom_ids)

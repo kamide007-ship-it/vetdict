@@ -19,7 +19,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mite Infestation (Caparinia)",
         "name_ja": "疥癬ダニ感染症（カパリニア）",
-        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability"},
+        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability", "itching", "dry_skin"},
         "description": "ハリネズミに最も多い外部寄生虫であるカパリニアダニによる感染症で、強い痒みと針の脱落を引き起こします。",
         "description_ja": "ハリネズミに最も多い外部寄生虫であるカパリニアダニによる感染症で、強い痒みと針の脱落を引き起こします。",
         "urgency": "moderate",

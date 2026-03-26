@@ -2625,8 +2625,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Infectious Anemia (Hemoplasma)",
         "name_ja": "猫伝染性貧血（ヘモプラズマ症）",
-        "symptoms": {"pale_gums", "lethargy", "fever", "weight_loss", "appetite_loss", "jaundice"},
-        "description": "マイコプラズマ属が赤血球に寄生して引き起こす貧血です。",
+        "symptoms": {"pale_gums", "lethargy", "fever", "weight_loss", "appetite_loss", "jaundice", "weakness", "labored_breathing"},        "description": "マイコプラズマ属が赤血球に寄生して引き起こす貧血です。",
         "description_ja": "マイコプラズマ属が赤血球に寄生して引き起こす貧血です。",
         "urgency": "high",
         "recommended_tests": ["complete_blood_count", "blood_smear", "hemoplasma_pcr", "reticulocyte_count"],
