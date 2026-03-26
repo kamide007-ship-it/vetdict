@@ -766,6 +766,55 @@ SYMPTOM_ALIASES = {
     "retained shed": "dysecdysis",
     # 関節
     "足が腫れてる": "lameness_or_limping",
+    # ---------------------------------------------------------------
+    # 口腔・歯科
+    # ---------------------------------------------------------------
+    "口が臭い": "bad_breath", "口臭": "bad_breath", "息が臭い": "bad_breath",
+    "よだれが出る": "excessive_drooling", "よだれが多い": "excessive_drooling",
+    "よだれダラダラ": "excessive_drooling",
+    "食べにくそう": "loss_of_appetite", "食べるのを嫌がる": "loss_of_appetite",
+    "口を痛がる": "excessive_drooling", "口を触ると嫌がる": "excessive_drooling",
+    "歯が折れた": "excessive_drooling", "歯肉が赤い": "excessive_drooling",
+    "口内炎": "oral_ulcers", "歯周病": "bad_breath",
+    # ---------------------------------------------------------------
+    # ウサギ追加
+    # ---------------------------------------------------------------
+    "うんちが小さい": "small_fecal_pellets", "糞が小さい": "small_fecal_pellets",
+    "うんちが少ない": "reduced_fecal_output", "糞が少ない": "reduced_fecal_output",
+    "うんちが出ない": "constipation",
+    "お腹が張ってる": "abdominal_distension",
+    "歯ぎしり": "teeth_grinding", "歯ぎしりしてる": "teeth_grinding",
+    "お腹を痛がる": "abdominal_pain", "丸まってる": "abdominal_pain",
+    "お腹を触ると嫌がる": "abdominal_pain",
+    # ---------------------------------------------------------------
+    # ハムスター追加
+    # ---------------------------------------------------------------
+    "お尻が濡れてる": "diarrhea", "おしりが汚れてる": "diarrhea",
+    "ウェットテイル": "diarrhea", "wet tail": "diarrhea",
+    "頬袋が腫れてる": "bloating", "頬が膨らんでる": "bloating",
+    # ---------------------------------------------------------------
+    # 爬虫類追加
+    # ---------------------------------------------------------------
+    "口を開けたまま": "open_mouth_breathing",
+    "粘液が出る": "nasal_discharge", "口から粘液": "nasal_discharge",
+    "骨が柔らかい": "soft_bones", "骨軟化": "soft_bones",
+    "甲羅が柔らかい": "soft_bones", "甲羅がぶよぶよ": "soft_bones",
+    "手足が変形してる": "bone_deformity", "顎が柔らかい": "jaw_softening",
+    "代謝性骨疾患": "soft_bones", "mbd": "soft_bones",
+    "後ろ足が弱い": "hind_limb_weakness",
+    "口の中に病変": "mouth_lesions", "口の中が腫れてる": "mouth_lesions",
+    "口から粘液": "mucus_in_mouth", "口に粘液": "mucus_in_mouth",
+    # ---------------------------------------------------------------
+    # ハリネズミ追加
+    # ---------------------------------------------------------------
+    "針が抜ける": "hair_loss", "クイルロス": "hair_loss",
+    "quilling": "hair_loss",
+    "ふらふら歩く": "tremors", "後ろ足が動かない": "paralysis_or_paresis",
+    "wobbly hedgehog": "tremors",
+    # ---------------------------------------------------------------
+    # モルモット追加
+    # ---------------------------------------------------------------
+    "キーキー鳴く": "lethargy", "鳴き声が変": "lethargy",
 }
 
 
@@ -1014,7 +1063,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # GI
         "diarrhea": ["loose_stool", "watery_stool", "soft_stool"],
         "vomiting": ["regurgitation", "emesis"],
-        "constipation": ["reduced_fecal_output", "straining_to_defecate"],
+        "constipation": ["reduced_fecal_output", "straining_to_defecate", "small_fecal_pellets"],
+        "reduced_fecal_output": ["constipation", "small_fecal_pellets"],
+        "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
+        "teeth_grinding": ["bruxism", "dental_pain"],
+        "abdominal_pain": ["abdominal_distension", "hunched_posture"],
         "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen"],
         "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen"],
         # Neuro
@@ -1025,6 +1078,10 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "weight_loss": ["emaciation", "wasting", "cachexia"],
         "emaciation": ["weight_loss", "wasting", "cachexia"],
         # Skin / coat
+        "excessive_drooling": ["drooling", "hypersalivation", "ptyalism"],
+        "drooling": ["excessive_drooling", "hypersalivation"],
+        "bad_breath": ["halitosis", "oral_odor"],
+        "oral_ulcers": ["mouth_lesions", "stomatitis", "gingivitis"],
         "excessive_licking": ["itching", "pruritus", "scratching", "overgrooming"],
         "itching": ["pruritus", "scratching", "excessive_licking", "overgrooming"],
         "pruritus": ["itching", "scratching", "excessive_licking"],
@@ -1062,6 +1119,18 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "dysecdysis": ["abnormal_shedding", "retained_shed", "shedding_problems"],
         # Bird-specific
         "fluffed_feathers": ["feather_fluffing", "puffed_up", "ruffled_feathers"],
+        # Fish fin
+        "frayed_fins": ["fin_rot", "fin_erosion", "ragged_fins"],
+        "fin_rot": ["frayed_fins", "fin_erosion"],
+        "redness_skin": ["skin_redness", "hemorrhage", "fin_hemorrhage"],
+        "fin_hemorrhage": ["redness_skin", "hemorrhage"],
+        # Reptile-specific
+        "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots"],
+        "bone_deformity": ["bone_swelling", "limb_deformity"],
+        "mouth_lesions": ["oral_lesions", "stomatitis", "mouth_rot"],
+        "mucus_in_mouth": ["oral_mucus", "mouth_discharge"],
+        # Hamster
+        "wet_tail": ["diarrhea", "watery_diarrhea"],
     }
 
     def _resolve_id(sid: str) -> str | None:
@@ -1123,7 +1192,29 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
     if not sp_data or not symptom_ids:
         return []
 
-    symptom_set = set(symptom_ids)
+    # Expand user symptoms with synonyms for better disease matching
+    _ID_SYNONYMS_LOCAL = _extract_species_symptoms.__code__.co_consts  # noqa — not used
+    # Re-define synonym map here (shared with extraction)
+    _SYN = {
+        "frayed_fins": ["fin_rot"], "fin_rot": ["frayed_fins"],
+        "redness_skin": ["fin_hemorrhage", "hemorrhage"], "fin_hemorrhage": ["redness_skin"],
+        "loss_of_appetite": ["appetite_loss", "anorexia"], "appetite_loss": ["loss_of_appetite"],
+        "constipation": ["reduced_fecal_output", "small_fecal_pellets"],
+        "bloating": ["abdominal_distension"], "abdominal_distension": ["bloating"],
+        "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
+        "hair_loss": ["alopecia"], "alopecia": ["hair_loss"],
+        "itching": ["pruritus", "scratching"], "pruritus": ["itching", "scratching"],
+        "cloudy_eyes": ["cloudy_eye", "cloudiness_in_eyes"], "cloudy_eye": ["cloudy_eyes"],
+        "open_mouth_breathing": ["respiratory_distress", "labored_breathing"],
+        "soft_bones": ["bone_weakness", "jaw_softening"],
+        "head_tilt": ["vestibular_signs", "torticollis"],
+        "fluffed_feathers": ["feather_fluffing"],
+    }
+    expanded_set = set(symptom_ids)
+    for sid in symptom_ids:
+        for alt in _SYN.get(sid, []):
+            expanded_set.add(alt)
+    symptom_set = expanded_set
     diseases = sp_data["diseases"]
 
     # --- Build per-symptom specificity for this species ---
