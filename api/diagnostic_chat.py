@@ -862,8 +862,9 @@ SYMPTOM_ALIASES = {
     # 獣医師監査: 追加エイリアス (全種共通 + 種別)
     # ---------------------------------------------------------------
     # 猫 — 耳
-    "耳が臭い": "excessive_licking",
-    "黒い耳垢": "excessive_licking", "耳垢が多い": "excessive_licking",
+    "耳をかく": "itching",
+    "耳が臭い": "ear_discharge",
+    "黒い耳垢": "ear_discharge", "耳垢が多い": "ear_discharge",
     # 猫 — 眼
     "目をしょぼしょぼ": "squinting",
     "片目だけ涙": "eye_discharge",
@@ -1207,7 +1208,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding"],
         "blood_in_stool": ["melena", "hematochezia", "bloody_stool"],
         # Ferret adrenal
-        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "vulvar_swelling"],
+        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "vulvar_swelling", "prostatic_enlargement"],
+        "itching": ["pruritus", "scratching", "scratching_ears", "ear_scratching", "excessive_grooming"],
+        "excessive_licking": ["scratching_ears", "ear_scratching", "scratching", "itching", "overgrooming"],
+        "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
+        "lethargy": ["weakness", "depression", "inactivity", "muscle_wasting"],
         # Guinea pig scurvy
         "lameness_or_limping": ["lameness", "limping", "joint_swelling", "joint_pain"],
         "itching": ["pruritus", "scratching", "excessive_licking", "overgrooming"],
