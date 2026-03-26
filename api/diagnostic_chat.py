@@ -3366,3 +3366,377 @@ def analyze_multidisease():
     except Exception as e:
         logger.error(f"Error in multi-disease analysis: {e}", exc_info=True)
         return jsonify({"error": "multidisease_analysis_failed"}), 500
+
+
+# =============================================================================
+# GUIDED CONSULTATION (問診モード)
+# =============================================================================
+
+# Category labels for UI display
+_CATEGORY_LABELS = {
+    "respiratory": {"ja": "呼吸器系", "en": "Respiratory"},
+    "digestive": {"ja": "消化器系", "en": "Digestive"},
+    "skin": {"ja": "皮膚・被毛", "en": "Skin / Coat"},
+    "dermatological": {"ja": "皮膚・被毛", "en": "Skin / Coat"},
+    "neurological": {"ja": "神経系", "en": "Neurological"},
+    "musculoskeletal": {"ja": "運動器", "en": "Musculoskeletal"},
+    "urinary": {"ja": "泌尿器系", "en": "Urinary"},
+    "ophthalmological": {"ja": "眼科", "en": "Ophthalmological"},
+    "eyes": {"ja": "眼科", "en": "Eyes"},
+    "cardiovascular": {"ja": "循環器系", "en": "Cardiovascular"},
+    "behavioral": {"ja": "行動・元気", "en": "Behavioral"},
+    "general": {"ja": "全身症状", "en": "General"},
+    "reproductive": {"ja": "生殖器系", "en": "Reproductive"},
+    "emergency": {"ja": "緊急症状", "en": "Emergency"},
+    "parasites": {"ja": "寄生虫", "en": "Parasites"},
+    "fins": {"ja": "鰭", "en": "Fins"},
+    "gills": {"ja": "鰓", "en": "Gills"},
+    "behavior": {"ja": "行動", "en": "Behavior"},
+    "other": {"ja": "その他", "en": "Other"},
+}
+
+
+def _get_species_symptoms_with_categories(species: str) -> list[dict]:
+    """Get all symptoms for a species with category info."""
+    from api.disease_store import get_symptoms_for_species
+    symptoms = get_symptoms_for_species(species)
+    if symptoms:
+        return symptoms
+
+    # Fallback: build from _SPECIES_DATA
+    sp_data = _SPECIES_DATA.get(species)
+    if not sp_data:
+        # Dog fallback
+        return [
+            {"id": s["id"], "name_ja": s["name_ja"], "name_en": s["name_en"],
+             "category": s.get("category", "other")}
+            for s in SYMPTOMS
+        ]
+    sym_names = sp_data["symptom_names"]
+    return [
+        {"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),
+         "category": "other"}
+        for sid, v in sym_names.items()
+    ]
+
+
+def _group_symptoms_by_category(symptoms: list[dict]) -> dict[str, list[dict]]:
+    """Group symptoms by category, returning {category: [symptom, ...]}."""
+    groups: dict[str, list[dict]] = {}
+    for s in symptoms:
+        cat = s.get("category", "other")
+        groups.setdefault(cat, []).append(s)
+    return groups
+
+
+def _suggest_next_categories(
+    species: str,
+    selected_symptoms: list[str],
+    answered_categories: list[str],
+    disease_matches: list[dict],
+    all_symptoms: list[dict],
+) -> list[dict]:
+    """Suggest the most informative symptom categories to ask about next.
+
+    Looks at top disease candidates and finds which un-asked categories
+    contain symptoms that would best differentiate between them.
+    """
+    selected_set = set(selected_symptoms)
+    answered_set = set(answered_categories)
+
+    # Collect differentiating symptoms from top 10 disease candidates
+    diff_symptoms: dict[str, int] = {}  # symptom_id -> count of diseases containing it
+    for dm in disease_matches[:10]:
+        for s in dm.get("additional_disease_symptoms", []):
+            if s not in selected_set:
+                diff_symptoms[s] = diff_symptoms.get(s, 0) + 1
+
+    # Map symptom IDs to categories
+    sym_cat_map = {s["id"]: s.get("category", "other") for s in all_symptoms}
+
+    # Score each unanswered category by how many differentiating symptoms it has
+    cat_scores: dict[str, int] = {}
+    for sid, count in diff_symptoms.items():
+        cat = sym_cat_map.get(sid, "other")
+        if cat not in answered_set:
+            cat_scores[cat] = cat_scores.get(cat, 0) + count
+
+    # Sort by score descending, return top 3
+    sorted_cats = sorted(cat_scores.items(), key=lambda x: x[1], reverse=True)
+    result = []
+    for cat, score in sorted_cats[:3]:
+        labels = _CATEGORY_LABELS.get(cat, {"ja": cat, "en": cat})
+        result.append({
+            "id": cat,
+            "name_ja": labels["ja"],
+            "name_en": labels["en"],
+            "differentiating_count": score,
+        })
+    return result
+
+
+@diagnostic_bp.route("/consultation", methods=["POST"])
+def consultation():
+    """Guided consultation endpoint (問診モード).
+
+    Manages an interactive interview flow where the system asks symptom
+    questions step by step, similar to a veterinary examination.
+
+    Request JSON:
+    {
+        "species": "cat",
+        "phase": "start" | "select_symptoms" | "next_category" | "ask_context" | "finalize",
+        "selected_symptoms": ["fever", "coughing"],
+        "selected_category": "respiratory",
+        "answered_categories": ["respiratory"],
+        "onset": null,
+        "age_years": null
+    }
+    """
+    data = request.get_json() or {}
+    species = data.get("species", "dog")
+    phase = data.get("phase", "start")
+    selected_symptoms = data.get("selected_symptoms", [])
+    selected_category = data.get("selected_category")
+    answered_categories = data.get("answered_categories", [])
+    onset = data.get("onset")
+    age_years = data.get("age_years")
+
+    sp_label = SPECIES_LABELS.get(species, {"ja": species, "en": species})
+    all_symptoms = _get_species_symptoms_with_categories(species)
+    grouped = _group_symptoms_by_category(all_symptoms)
+
+    # ------------------------------------------------------------------
+    # Phase: START — return available symptom categories
+    # ------------------------------------------------------------------
+    if phase == "start":
+        categories = []
+        for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1])):
+            labels = _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})
+            categories.append({
+                "id": cat_id,
+                "name_ja": labels["ja"],
+                "name_en": labels["en"],
+                "symptom_count": len(syms),
+            })
+        return jsonify({
+            "phase": "select_category",
+            "message_ja": f"{sp_label['ja']}の問診を始めます。一番気になる症状のカテゴリを選んでください。",
+            "message_en": f"Starting consultation for {sp_label['en']}. Please select the symptom category that concerns you most.",
+            "categories": categories,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: SELECT_SYMPTOMS — return symptoms for a chosen category
+    # ------------------------------------------------------------------
+    if phase == "select_symptoms":
+        if not selected_category:
+            return jsonify({"error": "selected_category required"}), 400
+
+        cat_symptoms = grouped.get(selected_category, [])
+        labels = _CATEGORY_LABELS.get(selected_category, {"ja": selected_category, "en": selected_category})
+
+        return jsonify({
+            "phase": "show_symptoms",
+            "category": selected_category,
+            "category_label_ja": labels["ja"],
+            "category_label_en": labels["en"],
+            "message_ja": f"{labels['ja']}の症状について教えてください。当てはまるものを全て選んでください。",
+            "message_en": f"Tell us about {labels['en']} symptoms. Select all that apply.",
+            "symptoms": [
+                {
+                    "id": s["id"],
+                    "name_ja": s["name_ja"],
+                    "name_en": s["name_en"],
+                    "selected": s["id"] in selected_symptoms,
+                }
+                for s in cat_symptoms
+            ],
+            "selected_symptoms": selected_symptoms,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: NEXT_CATEGORY — run diagnosis + suggest next category
+    # ------------------------------------------------------------------
+    if phase == "next_category":
+        if not selected_symptoms:
+            return jsonify({
+                "phase": "select_category",
+                "message_ja": "症状が選択されていません。カテゴリを選んでください。",
+                "message_en": "No symptoms selected. Please select a category.",
+                "categories": [
+                    {
+                        "id": cat_id,
+                        "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id})["ja"],
+                        "name_en": _CATEGORY_LABELS.get(cat_id, {"en": cat_id})["en"],
+                        "symptom_count": len(syms),
+                    }
+                    for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1]))
+                ],
+                "species": species,
+            }), 200
+
+        # Run diagnosis with current symptoms
+        if species == "horse" and EQUINE_AVAILABLE:
+            disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
+        elif species in _SPECIES_DATA:
+            disease_matches = _match_species_symptoms_to_diseases(selected_symptoms, species)
+        else:
+            disease_matches = match_symptoms_to_diseases(selected_symptoms)
+
+        # Build symptom details for display
+        sym_name_map = {s["id"]: s for s in all_symptoms}
+        symptom_details = [
+            {
+                "id": sid,
+                "name_ja": sym_name_map.get(sid, {}).get("name_ja", sid),
+                "name_en": sym_name_map.get(sid, {}).get("name_en", sid),
+            }
+            for sid in selected_symptoms
+        ]
+
+        # Suggest next categories
+        next_cats = _suggest_next_categories(
+            species, selected_symptoms, answered_categories,
+            disease_matches, all_symptoms,
+        )
+
+        # Build top candidates
+        top_candidates = []
+        for d in disease_matches[:5]:
+            top_candidates.append({
+                "name_ja": d.get("name_ja", ""),
+                "name_en": d.get("name_en", d.get("disease_id", "")),
+                "similarity_score": d.get("similarity_score", 0),
+                "confidence_percent": d.get("confidence_percent", 0),
+                "severity": d.get("severity", "low"),
+                "matched_symptoms": d.get("matched_symptoms", []),
+                "description_ja": d.get("description_ja", ""),
+                "description_en": d.get("description", d.get("description_en", "")),
+                "additional_disease_symptoms": d.get("additional_disease_symptoms", []),
+            })
+
+        has_more = len(next_cats) > 0
+        return jsonify({
+            "phase": "interim_results",
+            "message_ja": f"{len(selected_symptoms)}個の症状から{len(disease_matches)}件の候補が見つかりました。"
+                          + ("さらに絞り込むために、他のカテゴリの症状も確認しましょう。" if has_more else ""),
+            "message_en": f"Found {len(disease_matches)} candidates from {len(selected_symptoms)} symptoms."
+                          + (" Let's check other categories to narrow down." if has_more else ""),
+            "disease_candidates": top_candidates,
+            "total_candidates": len(disease_matches),
+            "selected_symptoms": selected_symptoms,
+            "symptom_details": symptom_details,
+            "next_categories": next_cats,
+            "answered_categories": answered_categories,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: ASK_CONTEXT — ask about onset and age
+    # ------------------------------------------------------------------
+    if phase == "ask_context":
+        questions = []
+        if not onset:
+            questions.append({
+                "type": "onset",
+                "question_ja": "症状はいつ頃から始まりましたか？",
+                "question_en": "When did the symptoms start?",
+                "options": [
+                    {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
+                    {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
+                    {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
+                ],
+            })
+        if age_years is None:
+            questions.append({
+                "type": "age",
+                "question_ja": "何歳ですか？（だいたいで構いません）",
+                "question_en": "How old is the animal? (approximate is fine)",
+                "options": [
+                    {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
+                    {"value": 2.0, "label_ja": "1〜3歳", "label_en": "1–3 years"},
+                    {"value": 5.0, "label_ja": "3〜7歳", "label_en": "3–7 years"},
+                    {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
+                ],
+            })
+        return jsonify({
+            "phase": "context_questions",
+            "message_ja": "あと少しだけ教えてください。",
+            "message_en": "Just a few more details.",
+            "questions": questions,
+            "selected_symptoms": selected_symptoms,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: FINALIZE — run final diagnosis with full context
+    # ------------------------------------------------------------------
+    if phase == "finalize":
+        # Use the same diagnosis engine as the checkbox system for accuracy parity
+        if species in _SPECIES_DATA or species == "dog":
+            try:
+                from api.species_analyzer import analyze_species_symptoms
+                result = analyze_species_symptoms(
+                    species=species,
+                    symptoms=selected_symptoms,
+                    onset=onset,
+                    age_years=age_years,
+                )
+            except (ImportError, Exception):
+                # Fallback to chat engine
+                if species == "horse" and EQUINE_AVAILABLE:
+                    disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
+                elif species in _SPECIES_DATA:
+                    disease_matches = _match_species_symptoms_to_diseases(selected_symptoms, species)
+                else:
+                    disease_matches = match_symptoms_to_diseases(selected_symptoms)
+                result = {
+                    "suspected_diseases": [
+                        {
+                            "name": d.get("name_en", d.get("disease_id", "")),
+                            "name_ja": d.get("name_ja", ""),
+                            "match_percent": round(d.get("similarity_score", 0) * 100),
+                            "matching_symptoms": d.get("matched_symptoms", []),
+                            "total_symptoms": len(d.get("matched_symptoms", [])) + len(d.get("additional_disease_symptoms", [])),
+                            "severity": d.get("severity", "low"),
+                            "description_ja": d.get("description_ja", ""),
+                            "description": d.get("description", d.get("description_en", "")),
+                            "recommended_tests": d.get("recommended_tests", []),
+                        }
+                        for d in disease_matches[:10]
+                    ],
+                }
+        else:
+            result = {"suspected_diseases": []}
+
+        # Build symptom details
+        sym_name_map = {s["id"]: s for s in all_symptoms}
+        symptom_details = [
+            {
+                "id": sid,
+                "name_ja": sym_name_map.get(sid, {}).get("name_ja", sid),
+                "name_en": sym_name_map.get(sid, {}).get("name_en", sid),
+            }
+            for sid in selected_symptoms
+        ]
+
+        return jsonify({
+            "phase": "final_results",
+            "message_ja": f"問診結果です。{len(selected_symptoms)}個の症状をもとに診断候補を算出しました。",
+            "message_en": f"Consultation results. Calculated candidates based on {len(selected_symptoms)} symptoms.",
+            "result": result,
+            "selected_symptoms": selected_symptoms,
+            "symptom_details": symptom_details,
+            "onset": onset,
+            "age_years": age_years,
+            "species": species,
+            "recommendations": {
+                "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",
+                "next_step_en": "This is reference information only. Supervised by Kentaro Kaimide, DVM. Please consult a veterinarian.",
+            },
+        })
+
+    return jsonify({"error": f"Unknown phase: {phase}"}), 400

@@ -100,7 +100,11 @@
   <div id="viewChat" class="hidden" role="tabpanel" aria-labelledby="tab-chat">
     <div class="card" style="margin-top:20px">
       <div class="card-header" data-i18n-html="cardChat">&#128172; 症状相談</div>
-      <div class="chat-container">
+      <div class="chat-mode-toggle">
+        <button id="chatModeFree" class="chat-mode-btn active" data-i18n="chatModeFree">自由入力</button>
+        <button id="chatModeGuided" class="chat-mode-btn" data-i18n="chatModeGuided">問診モード</button>
+      </div>
+      <div class="chat-container" id="chatFreeContainer">
         <div class="chat-messages" id="chatMessages">
           <div class="chat-msg bot" id="chatWelcome" data-i18n-html="chatWelcome">
             こんにちは。気になる症状を日本語または英語で入力してください。<br/>
@@ -112,6 +116,10 @@
           <input type="text" id="chatInput" placeholder="症状を入力してください..." data-i18n-ph="chatInputPh"/>
           <button id="chatSend" data-i18n="chatSend">送信</button>
         </div>
+      </div>
+      <div class="chat-container hidden" id="chatGuidedContainer">
+        <div class="chat-messages" id="guidedMessages"></div>
+        <div class="guided-actions" id="guidedActions"></div>
       </div>
     </div>
   </div>
