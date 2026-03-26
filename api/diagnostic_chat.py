@@ -792,7 +792,7 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     "お尻が濡れてる": "wet_tail", "おしりが汚れてる": "wet_tail",
     "ウェットテイル": "wet_tail", "wet tail": "wet_tail",
-    "頬袋が腫れてる": "bloating", "頬が膨らんでる": "bloating",
+    "頬袋が腫れてる": "cheek_swelling", "頬が膨らんでる": "cheek_swelling",
     # ---------------------------------------------------------------
     # 爬虫類追加
     # ---------------------------------------------------------------
@@ -822,8 +822,8 @@ SYMPTOM_ALIASES = {
     "お腹が膨らんできた": "bloating",
     "急に後ろ足が動かなくなった": "paralysis_or_paresis",
     "後ろ足が冷たい": "paralysis_or_paresis",
-    "痛がる": "lethargy", "鳴いて痛がる": "lethargy",
-    "口の中が赤い": "excessive_drooling",
+    "痛がる": "pain", "鳴いて痛がる": "pain",
+    "口の中が赤い": "stomatitis",
     "トイレで鳴く": "straining_to_urinate",
     "黄疸が出てる": "jaundice",
     # ---------------------------------------------------------------
@@ -875,10 +875,10 @@ SYMPTOM_ALIASES = {
     # 猫 — 毛
     "毛艶が悪い": "weight_loss",
     # ウサギ
-    "膿が出てる": "lethargy", "下顎が腫れてる": "bloating",
+    "膿が出てる": "abscess", "下顎が腫れてる": "jaw_swelling",
     # ハムスター
     "眼球突出": "pop_eye",
-    "頬袋が出たまま": "bloating", "頬袋が戻らない": "bloating",
+    "頬袋が出たまま": "cheek_pouch_prolapse", "頬袋が戻らない": "cheek_pouch_prolapse",
     # 鳥
     "糞が水っぽい": "diarrhea", "糞が緑色": "diarrhea",
     "嘴が伸びてる": "loss_of_appetite", "嘴過長": "loss_of_appetite",
@@ -916,7 +916,7 @@ SYMPTOM_ALIASES = {
     "自分で羽を抜く": "hair_loss", "毛引き": "hair_loss",
     "嘴が長い": "loss_of_appetite",
     # モルモット — 壊血病の症状
-    "歯茎が腫れてる": "lethargy", "関節が痛そう": "lameness_or_limping",
+    "歯茎が腫れてる": "bleeding_gums", "関節が痛そう": "swollen_joints",
     "毛がバサバサ": "hair_loss",
     # フェレット — 副腎
     "外陰部が腫れてる": "vulvar_swelling", "外陰部腫大": "vulvar_swelling",
@@ -928,7 +928,7 @@ SYMPTOM_ALIASES = {
     "便に虫がいる": "diarrhea", "虫が出た": "diarrhea",
     "寄生虫": "diarrhea",
     # ウサギ — 肛門/子宮
-    "肛門が腫れてる": "bloating", "肛門周囲が腫れ": "bloating",
+    "肛門が腫れてる": "perineal_swelling", "肛門周囲が腫れ": "perineal_swelling",
     "陰部から出血": "blood_in_urine",
     # 鳥 — 貧血
     "貧血": "lethargy", "anemia": "lethargy",
@@ -1285,6 +1285,20 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "prostatic_enlargement": ["prostate_enlargement", "enlarged_prostate"],
         # Cardiac
         "bradycardia": ["slow_heart_rate"],
+        # Cheek / oral
+        "cheek_swelling": ["bloating", "cheek_pouch_prolapse", "facial_swelling"],
+        "cheek_pouch_prolapse": ["cheek_swelling"],
+        "jaw_swelling": ["facial_swelling", "swelling"],
+        "abscess": ["discharge", "swelling"],
+        # Pain
+        "pain": ["lethargy", "vocalization"],
+        # Oral
+        "stomatitis": ["oral_ulcers", "bad_breath", "excessive_drooling"],
+        # Perianal
+        "perineal_swelling": ["perianal_irritation", "swelling"],
+        # Guinea pig scurvy
+        "bleeding_gums": ["swollen_gums", "oral_bleeding"],
+        "swollen_joints": ["joint_swelling", "lameness_or_limping", "lameness"],
     }
 
     def _resolve_id(sid: str) -> str | None:
