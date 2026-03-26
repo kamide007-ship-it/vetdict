@@ -790,8 +790,8 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     # ハムスター追加
     # ---------------------------------------------------------------
-    "お尻が濡れてる": "diarrhea", "おしりが汚れてる": "diarrhea",
-    "ウェットテイル": "diarrhea", "wet tail": "diarrhea",
+    "お尻が濡れてる": "wet_tail", "おしりが汚れてる": "wet_tail",
+    "ウェットテイル": "wet_tail", "wet tail": "wet_tail",
     "頬袋が腫れてる": "bloating", "頬が膨らんでる": "bloating",
     # ---------------------------------------------------------------
     # 爬虫類追加
@@ -919,9 +919,9 @@ SYMPTOM_ALIASES = {
     "歯茎が腫れてる": "lethargy", "関節が痛そう": "lameness_or_limping",
     "毛がバサバサ": "hair_loss",
     # フェレット — 副腎
-    "外陰部が腫れてる": "bloating", "外陰部腫大": "bloating",
+    "外陰部が腫れてる": "vulvar_swelling", "外陰部腫大": "vulvar_swelling",
     "尻尾の毛が抜ける": "hair_loss", "体の毛が薄くなった": "hair_loss",
-    "前立腺が大きい": "bloating",
+    "前立腺が大きい": "prostatic_enlargement",
     # 爬虫類 — 甲羅/寄生虫
     "甲羅がカビみたい": "shell_discoloration", "甲羅が白い": "shell_discoloration",
     "甲羅が変色してる": "shell_discoloration",
@@ -1277,6 +1277,14 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "fin_hemorrhage": ["redness_skin", "hemorrhage"],
         # Hamster
         "wet_tail": ["diarrhea", "watery_diarrhea"],
+        # Skin / coat additional
+        "thinning_skin": ["skin_fragility", "thin_skin", "fragile_skin"],
+        "poor_coat": ["dry_skin", "rough_coat", "dull_coat"],
+        # Ferret reproductive
+        "vulvar_swelling": ["vulvar_discharge", "genital_swelling"],
+        "prostatic_enlargement": ["prostate_enlargement", "enlarged_prostate"],
+        # Cardiac
+        "bradycardia": ["slow_heart_rate"],
     }
 
     def _resolve_id(sid: str) -> str | None:
@@ -1381,6 +1389,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis"],
         "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
         "sneezing": ["nasal_discharge"],
+        "wet_tail": ["diarrhea"], "diarrhea": ["wet_tail"],
+        "poor_coat": ["hair_loss", "dry_skin"], "dry_skin": ["poor_coat"],
+        "thinning_skin": ["hair_loss"],
     }
     expanded_set = set(symptom_ids)
     for sid in symptom_ids:

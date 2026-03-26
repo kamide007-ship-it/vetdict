@@ -1280,3 +1280,89 @@ class TestFeedbackEndpoint:
         })
         data = r.get_json()
         assert isinstance(data["learning_signal_strength"], (int, float))
+
+
+# ===========================================================================
+# 12. Diagnostic accuracy regression tests
+# ===========================================================================
+
+
+class TestDiagnosticAccuracyFerretAdrenal:
+    """Ferret adrenal disease should rank highly with typical symptoms."""
+
+    @pytest.mark.skipif("ferret" not in _SPECIES_DATA, reason="Ferret data not loaded")
+    def test_adrenal_disease_top5_with_hair_loss_vulvar_swelling(self):
+        result = _match_species_symptoms_to_diseases(
+            ["hair_loss", "vulvar_swelling", "itching", "aggression", "lethargy"], "ferret",
+        )
+        top5 = [m["disease_id"] for m in result[:5]]
+        assert "Adrenal Disease" in top5
+
+    @pytest.mark.skipif("ferret" not in _SPECIES_DATA, reason="Ferret data not loaded")
+    def test_adrenal_disease_confidence_above_50(self):
+        result = _match_species_symptoms_to_diseases(
+            ["hair_loss", "vulvar_swelling", "itching", "aggression", "lethargy"], "ferret",
+        )
+        adrenal = [m for m in result if m["disease_id"] == "Adrenal Disease"]
+        assert adrenal, "Adrenal Disease not found in results"
+        confidence = adrenal[0]["similarity_score"] * 100
+        assert confidence > 50, f"Confidence {confidence:.1f}% too low"
+
+    @pytest.mark.skipif("ferret" not in _SPECIES_DATA, reason="Ferret data not loaded")
+    def test_adrenal_alias_vulvar_swelling_extracted(self):
+        result = _extract_species_symptoms("外陰部が腫れてる 毛が抜ける", "ferret")
+        assert "vulvar_swelling" in result
+
+    @pytest.mark.skipif("ferret" not in _SPECIES_DATA, reason="Ferret data not loaded")
+    def test_adrenal_alias_prostatic_enlargement_extracted(self):
+        result = _extract_species_symptoms("前立腺が大きい", "ferret")
+        assert "prostatic_enlargement" in result
+
+
+class TestDiagnosticAccuracyCatHypothyroidism:
+    """Cat hypothyroidism should be detected with typical symptoms."""
+
+    @pytest.mark.skipif("cat" not in _SPECIES_DATA, reason="Cat data not loaded")
+    def test_hypothyroidism_detected_with_typical_symptoms(self):
+        result = _match_species_symptoms_to_diseases(
+            ["lethargy", "weight_gain", "hair_loss", "constipation"], "cat",
+        )
+        names = [m["disease_id"] for m in result[:10]]
+        assert "Hypothyroidism (Iatrogenic)" in names
+
+    @pytest.mark.skipif("cat" not in _SPECIES_DATA, reason="Cat data not loaded")
+    def test_hypothyroidism_confidence_above_55(self):
+        result = _match_species_symptoms_to_diseases(
+            ["lethargy", "weight_gain", "hair_loss", "poor_coat", "bradycardia"], "cat",
+        )
+        hypo = [m for m in result if m["disease_id"] == "Hypothyroidism (Iatrogenic)"]
+        assert hypo, "Hypothyroidism not found in results"
+        confidence = hypo[0]["similarity_score"] * 100
+        assert confidence > 55, f"Confidence {confidence:.1f}% too low"
+
+
+class TestDiagnosticAccuracyHamsterWetTail:
+    """Hamster wet tail should rank highly and alias should extract wet_tail ID."""
+
+    @pytest.mark.skipif("hamster" not in _SPECIES_DATA, reason="Hamster data not loaded")
+    def test_wet_tail_alias_extracts_wet_tail_id(self):
+        result = _extract_species_symptoms("ウェットテイル 元気ない", "hamster")
+        assert "wet_tail" in result
+
+    @pytest.mark.skipif("hamster" not in _SPECIES_DATA, reason="Hamster data not loaded")
+    def test_wet_tail_top3_with_typical_symptoms(self):
+        result = _match_species_symptoms_to_diseases(
+            ["wet_tail", "diarrhea", "lethargy", "appetite_loss"], "hamster",
+        )
+        top3 = [m["disease_id"] for m in result[:3]]
+        assert "Wet Tail (Proliferative Ileitis)" in top3
+
+    @pytest.mark.skipif("hamster" not in _SPECIES_DATA, reason="Hamster data not loaded")
+    def test_wet_tail_confidence_above_55(self):
+        result = _match_species_symptoms_to_diseases(
+            ["wet_tail", "diarrhea", "lethargy", "appetite_loss", "dehydration"], "hamster",
+        )
+        wt = [m for m in result if m["disease_id"] == "Wet Tail (Proliferative Ileitis)"]
+        assert wt, "Wet Tail not found in results"
+        confidence = wt[0]["similarity_score"] * 100
+        assert confidence > 55, f"Confidence {confidence:.1f}% too low"

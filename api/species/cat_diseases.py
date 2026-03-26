@@ -3438,7 +3438,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hypothyroidism (Iatrogenic)",
         "name_ja": "甲状腺機能低下症（医原性）",
-        "symptoms": {"lethargy", "weight_gain", "poor_coat", "constipation", "hypothermia", "decreased_activity"},
+        "symptoms": {"lethargy", "weight_gain", "poor_coat", "constipation", "hypothermia", "decreased_activity", "hair_loss", "bradycardia"},
         "description": "マイコバクテリウム属による慢性感染症で、肉芽腫性皮膚病変と全身症状を引き起こします。",
         "description_ja": "甲状腺ホルモン低値で、通常は甲状腺機能亢進症の過剰治療による医原性です。",
         "urgency": "moderate",
