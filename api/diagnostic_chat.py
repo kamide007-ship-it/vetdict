@@ -2739,13 +2739,27 @@ def _build_follow_up_questions(
     onset: str | None,
     age: float | None,
     symptoms: list,
+    disease_candidates: list | None = None,
+    species: str = "dog",
 ) -> list[dict]:
-    """Build context-aware follow-up questions for the chat UI.
+    """Build context-aware follow-up questions for interactive consultation.
 
-    If onset or age information is missing, suggest the user provide it.
+    Generates targeted symptom questions based on top disease candidates
+    to progressively narrow differential diagnosis — mimicking a vet exam.
     """
-    questions = []
+    questions: list[dict] = []
 
+    # Phase 1: If no symptoms yet, ask what's wrong
+    if not symptoms:
+        questions.append({
+            "question_ja": "どのような症状がありますか？",
+            "question_en": "What symptoms are you seeing?",
+            "type": "symptoms",
+            "options": [],
+        })
+        return questions
+
+    # Phase 2: Basic context (onset / age) — ask once
     if not onset:
         questions.append({
             "question_ja": "症状はいつ頃から始まりましたか？",
@@ -2764,20 +2778,44 @@ def _build_follow_up_questions(
             "question_en": "How old is the animal? (approximate is fine)",
             "type": "age",
             "options": [
-                {"value": 0.5, "label_ja": "1歳未満（子犬/子猫）", "label_en": "Under 1 year (puppy/kitten)"},
-                {"value": 2.0, "label_ja": "1〜3歳（若齢）", "label_en": "1–3 years (young)"},
-                {"value": 5.0, "label_ja": "3〜7歳（成犬/成猫）", "label_en": "3–7 years (adult)"},
-                {"value": 10.0, "label_ja": "7歳以上（高齢）", "label_en": "7+ years (senior)"},
+                {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
+                {"value": 3.0, "label_ja": "1〜5歳", "label_en": "1–5 years"},
+                {"value": 8.0, "label_ja": "5歳以上", "label_en": "5+ years"},
             ],
         })
 
-    if not symptoms:
-        questions.append({
-            "question_ja": "どのような症状がありますか？",
-            "question_en": "What symptoms are you seeing?",
-            "type": "symptoms",
-            "options": [],
-        })
+    # Phase 3: Targeted symptom questions from disease candidates
+    if disease_candidates and len(symptoms) >= 1:
+        symptom_set = set(symptoms)
+        # Collect key missing symptoms from top candidates for differentiation
+        seen_symptoms: set[str] = set()
+        sp_names = {}
+        if species in _SPECIES_DATA:
+            sp_names = _SPECIES_DATA[species].get("symptom_names", {})
+
+        for candidate in disease_candidates[:5]:
+            missing = candidate.get("missing_key_symptoms") or candidate.get("additional_disease_symptoms", [])
+            for sid in missing[:3]:
+                if sid in symptom_set or sid in seen_symptoms:
+                    continue
+                if len(questions) >= 5:
+                    break
+                seen_symptoms.add(sid)
+                names = sp_names.get(sid, {})
+                name_ja = names.get("ja", sid)
+                name_en = names.get("en", sid)
+                questions.append({
+                    "question_ja": f"{name_ja}はありますか？",
+                    "question_en": f"Is there {name_en.lower()}?",
+                    "type": "symptom_check",
+                    "symptom_id": sid,
+                    "options": [
+                        {"value": f"+{sid}", "label_ja": f"はい — {name_ja}", "label_en": f"Yes — {name_en}"},
+                        {"value": f"-{sid}", "label_ja": "いいえ", "label_en": "No"},
+                    ],
+                })
+            if len(questions) >= 5:
+                break
 
     return questions
 
@@ -2949,7 +2987,8 @@ def diagnostic_chat():
         "onset_detected_from_text": detected_onset,
         "age_detected_from_text": detected_age,
         "follow_up_questions": _build_follow_up_questions(
-            effective_onset, effective_age, all_symptoms
+            effective_onset, effective_age, all_symptoms,
+            disease_candidates=enhanced_candidates, species=species,
         ),
         "recommendations": {
             "next_step": "This is reference information only. Supervised by Kentaro Kaimide, DVM (Minamisoma Vet Clinic). Please consult a veterinarian for professional evaluation.",

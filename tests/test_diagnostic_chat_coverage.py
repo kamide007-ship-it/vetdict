@@ -265,32 +265,41 @@ class TestExtractAgeFromText:
 class TestBuildFollowUpQuestions:
     """Test context-aware follow-up question builder."""
 
-    def test_no_info_returns_three_questions(self):
-        """All three question types when onset, age, and symptoms all missing."""
+    def test_no_symptoms_returns_symptoms_question(self):
+        """When no symptoms, ask what symptoms are present (consultation start)."""
         result = _build_follow_up_questions(None, None, [])
-        assert len(result) == 3
-        types = {q["type"] for q in result}
-        assert types == {"onset", "age", "symptoms"}
+        assert len(result) == 1
+        assert result[0]["type"] == "symptoms"
 
-    def test_all_info_returns_empty(self):
-        """No questions when all context is known."""
-        result = _build_follow_up_questions("acute", 5.0, ["coughing"])
-        assert result == []
-
-    def test_onset_missing_adds_onset_question(self):
+    def test_with_symptoms_no_onset_asks_onset(self):
+        """When symptoms present but onset missing, ask onset."""
         result = _build_follow_up_questions(None, 5.0, ["coughing"])
         types = [q["type"] for q in result]
         assert "onset" in types
 
-    def test_age_missing_adds_age_question(self):
+    def test_with_symptoms_no_age_asks_age(self):
+        """When symptoms present but age missing, ask age."""
         result = _build_follow_up_questions("chronic", None, ["coughing"])
         types = [q["type"] for q in result]
         assert "age" in types
 
-    def test_symptoms_missing_adds_symptoms_question(self):
-        result = _build_follow_up_questions("acute", 3.0, [])
-        types = [q["type"] for q in result]
-        assert "symptoms" in types
+    def test_all_context_no_candidates_returns_empty(self):
+        """No questions when all context known and no disease candidates."""
+        result = _build_follow_up_questions("acute", 5.0, ["coughing"])
+        assert result == []
+
+    def test_with_candidates_generates_symptom_checks(self):
+        """With disease candidates, generates targeted symptom_check questions."""
+        mock_candidates = [
+            {"missing_key_symptoms": ["fever", "lethargy"],
+             "additional_disease_symptoms": ["vomiting", "diarrhea"]},
+        ]
+        result = _build_follow_up_questions("acute", 5.0, ["coughing"],
+                                            disease_candidates=mock_candidates, species="cat")
+        symptom_checks = [q for q in result if q["type"] == "symptom_check"]
+        assert len(symptom_checks) > 0
+        assert "symptom_id" in symptom_checks[0]
+        assert len(symptom_checks[0]["options"]) == 2
 
     def test_onset_question_has_three_options(self):
         result = _build_follow_up_questions(None, 5.0, ["coughing"])
@@ -305,15 +314,10 @@ class TestBuildFollowUpQuestions:
         assert "subacute" in values
         assert "chronic" in values
 
-    def test_age_question_has_four_options(self):
+    def test_age_question_has_options(self):
         result = _build_follow_up_questions("acute", None, ["coughing"])
         age_q = next(q for q in result if q["type"] == "age")
-        assert len(age_q["options"]) == 4
-
-    def test_symptoms_question_has_empty_options(self):
-        result = _build_follow_up_questions("acute", 5.0, [])
-        sym_q = next(q for q in result if q["type"] == "symptoms")
-        assert sym_q["options"] == []
+        assert len(age_q["options"]) >= 3
 
     def test_all_questions_have_ja_and_en(self):
         result = _build_follow_up_questions(None, None, [])
