@@ -244,6 +244,11 @@ function setupLanguageToggle(){
 
 let SPECIES=[];
 
+/* ===== GA4 Analytics Helper ===== */
+function trackEvent(name,params){
+  if(typeof gtag==="function") gtag("event",name,params||{});
+}
+
 let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 
@@ -431,6 +436,7 @@ function renderSpeciesGrid(){
 }
 
 function selectSpecies(id){
+  trackEvent("select_species",{species:id});
   currentSpecies=id;selectedSymptoms.clear();currentBreed="";
   document.querySelectorAll(".species-card").forEach(c=>{
     const sel=c.dataset.species===id;
@@ -598,6 +604,7 @@ function renderCitationMap(item){
 
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
+  trackEvent("analyze_symptoms",{species:currentSpecies,symptom_count:selectedSymptoms.size});
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
   const progress=document.getElementById("analyzeProgress");
   if(progress)progress.classList.add("active");
@@ -850,6 +857,7 @@ function renderDiseaseDb(){
 }
 
 function switchView(view){
+  trackEvent("switch_view",{view:view});
   const views=["checker","database","chat","drugs"];
   views.forEach(v=>{
     const tab=document.getElementById("tab-"+v);
@@ -941,6 +949,7 @@ let chatAccumulatedSymptoms=[];
 
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
+  trackEvent("chat_message",{species:currentSpecies||"dog",message_length:text.length});
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
