@@ -354,6 +354,48 @@ a:hover{text-decoration:underline}
 [data-theme="dark"] .chat-result .chat-disease-card{background:var(--gray-100);border-color:var(--gray-200)}
 [data-theme="dark"] .chat-symptoms-tags{background:var(--gray-100)}
 
+/* --- Chat Mode Toggle --- */
+.chat-mode-toggle{display:flex;gap:4px;padding:8px 12px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
+.chat-mode-btn{flex:1;padding:8px 12px;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-600);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.chat-mode-btn:hover{border-color:var(--navy-light);color:var(--navy)}
+.chat-mode-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+
+/* --- Guided Consultation --- */
+#chatGuidedContainer{height:460px}
+#guidedMessages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.guided-actions{padding:12px;border-top:1px solid var(--gray-200);max-height:260px;overflow-y:auto}
+.guided-category-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.guided-category-grid.compact{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.guided-cat-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 8px;background:var(--white);border:2px solid var(--gray-200);border-radius:10px;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.guided-cat-btn:hover{border-color:var(--navy);background:#f0f4ff}
+.guided-cat-btn.suggested{border-color:var(--navy-light);background:#f0f4ff}
+.guided-cat-name{font-size:.78rem;font-weight:600;color:var(--navy)}
+.guided-cat-count{font-size:.66rem;color:var(--gray-500)}
+.guided-symptom-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.guided-sym-btn{padding:6px 12px;background:var(--white);border:1.5px solid var(--gray-300);border-radius:16px;font-size:.76rem;cursor:pointer;transition:all .2s;font-family:var(--font);color:var(--gray-700)}
+.guided-sym-btn:hover{border-color:var(--navy);color:var(--navy)}
+.guided-sym-btn.selected{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.guided-bottom-actions{display:flex;gap:8px;margin-top:10px;justify-content:flex-end;flex-wrap:wrap}
+.guided-action-btn{padding:8px 18px;border:none;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.guided-action-btn.primary{background:var(--navy);color:var(--white)}
+.guided-action-btn.primary:hover{background:var(--navy-light)}
+.guided-action-btn.secondary{background:var(--white);border:2px solid var(--navy);color:var(--navy)}
+.guided-action-btn.secondary:hover{background:var(--navy);color:var(--white)}
+.guided-action-btn.text{background:transparent;color:var(--gray-500);font-weight:400;text-decoration:underline}
+.guided-action-btn.text:hover{color:var(--navy)}
+.guided-next-actions{display:flex;flex-direction:column;gap:8px}
+.guided-next-label{font-size:.74rem;font-weight:600;color:var(--gray-600);margin-bottom:2px}
+.guided-interim-label,.guided-final-label{font-size:.76rem;font-weight:700;color:var(--navy);margin-bottom:6px;padding-bottom:4px;border-bottom:2px solid var(--navy)}
+.guided-context-questions{display:flex;flex-direction:column;gap:12px}
+.guided-context-q{display:flex;flex-direction:column;gap:6px}
+.guided-context-label{font-size:.78rem;font-weight:600;color:var(--gray-700)}
+.guided-context-options{display:flex;flex-wrap:wrap;gap:6px}
+.guided-context-opt{padding:6px 14px;background:var(--white);border:1.5px solid var(--gray-300);border-radius:16px;font-size:.76rem;cursor:pointer;transition:all .2s;font-family:var(--font);color:var(--gray-700)}
+.guided-context-opt:hover{border-color:var(--navy);color:var(--navy)}
+.guided-context-opt.selected{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.guided-context-opt.skip{border-style:dashed;color:var(--gray-400)}
+.guided-context-opt.skip:hover{color:var(--gray-600)}
+
 /* --- References (collapsible) --- */
 .references{max-width:1200px;margin:0 auto;padding:24px 20px}
 .ref-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:16px 20px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);transition:all var(--transition-normal);user-select:none}
