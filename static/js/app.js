@@ -93,7 +93,7 @@ const I18N={
     refTitle3:"症状の臨床的重み付け・尤度比",
     refTitle4:"エキゾチック動物・鳥類・爬虫類",
     refTitle5:"馬疾患データベース",
-    refTitle6:"関連サービス・データベース",refTitle7:"薬品辞書",
+    refTitle6:"関連サービス・データベース",refTitle7:"薬品辞書",refTitle8:"魚病・水産学",
     // Dynamic UI strings
     analyzing:"解析中...",
     noSymptomData:"症状データを読み込めませんでした",
@@ -160,7 +160,7 @@ const I18N={
     refTitle3:"Clinical Symptom Weighting & Likelihood Ratios",
     refTitle4:"Exotic Animals, Birds & Reptiles",
     refTitle5:"Equine Disease Database",
-    refTitle6:"Related Services & Databases",refTitle7:"Drug Dictionary",
+    refTitle6:"Related Services & Databases",refTitle7:"Drug Dictionary",refTitle8:"Fish Diseases & Aquatic Medicine",
     analyzing:"Analyzing...",
     noSymptomData:"Failed to load symptom data",
     noMatchingSymptom:"No matching symptoms",
