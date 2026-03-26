@@ -39,7 +39,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Adrenal Disease",
         "name_ja": "副腎疾患",
-        "symptoms": {"hair_loss", "itching", "vulvar_swelling", "aggression", "muscle_wasting", "excessive_grooming", "weight_loss", "thinning_skin"},
+        "symptoms": {"hair_loss", "itching", "vulvar_swelling", "aggression", "muscle_wasting", "excessive_grooming", "weight_loss", "thinning_skin", "lethargy", "prostatic_enlargement"},
         "description": "副腎からの性ホルモン過剰分泌により左右対称の脱毛やかゆみが起こります。フェレットで非常に多い疾患です。",
         "description_ja": "副腎からの性ホルモン過剰分泌により左右対称の脱毛やかゆみが起こります。フェレットで非常に多い疾患です。",
         "urgency": "moderate",

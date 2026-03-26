@@ -131,7 +131,7 @@ SPECIES_PREVALENCE = {
 
     # FERRET
     "ferret": {
-        "Adrenal Gland Disease": "very_common",
+        "Adrenal Disease": "very_common",
         "Lymphoma": "very_common",
         "Parasitic Infection": "very_common",
         "Respiratory Infection": "very_common",
@@ -169,7 +169,7 @@ SPECIES_PREVALENCE = {
         "Cheek Pouch Impaction": "very_common",
         "Respiratory Infection": "very_common",
         "Diarrhea": "very_common",
-        "Wet Tail": "very_common",
+        "Wet Tail (Proliferative Ileitis)": "very_common",
         "Dermatitis": "very_common",
         "Dental Overgrowth": "very_common",
         "Parasitic Infection": "very_common",
