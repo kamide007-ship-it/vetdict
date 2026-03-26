@@ -290,6 +290,8 @@ a:hover{text-decoration:underline}
 .az-nav{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:14px;justify-content:center}
 .az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:4px 7px;border-radius:4px;font-size:.74rem;cursor:pointer;min-width:26px;transition:background .15s,color .15s;font-weight:600;font-family:var(--font)}
 .az-nav button:hover,.az-nav button.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.az-mode-toggle{background:var(--green)!important;color:var(--white)!important;border-color:var(--green)!important;padding:4px 12px!important;border-radius:6px!important;margin-right:6px;font-size:.72rem!important;white-space:nowrap}
+.az-mode-toggle:hover{opacity:.85;background:var(--green)!important;color:var(--white)!important}
 .az-nav button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 
 /* --- Disease DB --- */
@@ -641,12 +643,16 @@ body.is-pro .pricing-note{display:none}
 body.is-pro .pro-restore{display:none}
 
 /* --- Share buttons --- */
-.share-section{text-align:center;padding:20px;background:var(--gray-50);border-top:1px solid var(--gray-200)}
-.share-label{font-size:.78rem;color:var(--gray-500);margin-bottom:8px}
-.share-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.share-btn{display:inline-block;padding:6px 16px;border-radius:16px;font-size:.76rem;font-weight:600;text-decoration:none;transition:all .2s;font-family:var(--font)}
+.share-section{text-align:center;padding:24px 16px;background:var(--gray-50);border-top:1px solid var(--gray-200)}
+.share-label{font-size:.82rem;color:var(--gray-500);margin-bottom:12px;font-weight:600}
+.share-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-size:.8rem;font-weight:600;text-decoration:none;transition:all .2s;font-family:var(--font)}
+.share-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.share-icon{width:18px;height:18px;flex-shrink:0}
+.share-text{display:flex;align-items:baseline;gap:4px}
+.share-text small{font-weight:400;font-size:.72rem;opacity:.85}
 .share-x{background:#000;color:#fff}
-.share-x:hover{background:#333;color:#fff;text-decoration:none}
+.share-x:hover{background:#1a1a1a;color:#fff;text-decoration:none}
 .share-fb{background:#1877f2;color:#fff}
 .share-fb:hover{background:#1664d6;color:#fff;text-decoration:none}
 .share-line{background:#06c755;color:#fff}

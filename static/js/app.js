@@ -802,17 +802,21 @@ function loadDiseaseDb(species){
   .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
+let diseaseNavMode="az";
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   if(!azNav){console.warn("azNav element not found");return;}
-  azNav.innerHTML=`<button class="active" data-letter="" aria-label="Show all">ALL</button>`+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+  const isAz=diseaseNavMode==="az";
+  const toggleLabel=isAz?"あいうえお順":"A-Z順";
+  const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
+  azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode=diseaseNavMode==='az'?'kana':'az';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${toggleLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
   azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
 }
 
 function filterDiseaseDb(letter){
   diseaseFilter=letter;
   diseaseDisplayLimit=100;
-  document.querySelectorAll(".az-nav button").forEach(b=>b.classList.toggle("active",b.textContent===letter||(letter===""&&b.textContent==="ALL")));
+  document.querySelectorAll(".az-nav button:not(.az-mode-toggle)").forEach(b=>b.classList.toggle("active",b.dataset.letter===letter));
   renderDiseaseDb();
 }
 
@@ -821,7 +825,15 @@ function renderDiseaseDb(){
   const list=document.getElementById("diseaseDbList");
   const search=(document.getElementById("diseaseSearch").value||"").toLowerCase();
   let filtered=allDiseases;
-  if(diseaseFilter)filtered=filtered.filter(d=>(d.name||"").toUpperCase().startsWith(diseaseFilter));
+  if(diseaseFilter){
+    if(diseaseNavMode==="kana"){
+      const kanaRow={"あ":"あいうえお","か":"かきくけこがぎぐげご","さ":"さしすせそざじずぜぞ","た":"たちつてとだぢづでど","な":"なにぬねの","は":"はひふへほばびぶべぼぱぴぷぺぽ","ま":"まみむめも","や":"やゆよ","ら":"らりるれろ","わ":"わをん"};
+      const row=kanaRow[diseaseFilter]||diseaseFilter;
+      filtered=filtered.filter(d=>{const ja=(d.name_ja||"");return ja&&row.includes(ja.charAt(0));});
+    }else{
+      filtered=filtered.filter(d=>(d.name||"").toUpperCase().startsWith(diseaseFilter));
+    }
+  }
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
   document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDiseases.length);
   if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
