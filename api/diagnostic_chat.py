@@ -1337,13 +1337,21 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         return None
 
     # Phase 1: Longest-match-first alias matching (aliases → species symptom IDs)
+    # Track consumed character positions to avoid substring double-matching
+    # (e.g. "外陰部が腫れてる" should not also match "腫れてる")
     _sorted_aliases = sorted(SYMPTOM_ALIASES.keys(), key=len, reverse=True)
+    _consumed: set[int] = set()
     for alias in _sorted_aliases:
-        if alias in text_lower:
+        pos = text_lower.find(alias)
+        if pos >= 0:
+            alias_range = set(range(pos, pos + len(alias)))
+            if alias_range & _consumed:
+                continue
             symptom_id = SYMPTOM_ALIASES[alias]
             resolved = _resolve_id(symptom_id)
             if resolved:
                 matched.add(resolved)
+                _consumed |= alias_range
 
     # Phase 2: Direct symptom name matches (ja/en)
     for sym_id, names in symptom_names.items():
@@ -1394,6 +1402,8 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "redness_skin": ["fin_hemorrhage", "hemorrhage"], "fin_hemorrhage": ["redness_skin"],
         "loss_of_appetite": ["appetite_loss", "anorexia"], "appetite_loss": ["loss_of_appetite"],
         "constipation": ["reduced_fecal_output", "small_fecal_pellets"],
+        "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
+        "reduced_fecal_output": ["small_fecal_pellets", "constipation"],
         "bloating": ["abdominal_distension"], "abdominal_distension": ["bloating"],
         "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
         "frequent_urination": ["excessive_urination", "polyuria"],
