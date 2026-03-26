@@ -555,7 +555,7 @@ SYMPTOM_ALIASES = {
     "歩けない": "lameness_or_limping",
     "立てない": "lameness_or_limping",
     "足が痛そう": "lameness_or_limping",
-    "ふらふら": "tremors",
+    "ふらふら": "ataxia",
     "フラフラ": "tremors",
     "ふらつき": "tremors",
     "よろよろ": "tremors",
@@ -574,9 +574,9 @@ SYMPTOM_ALIASES = {
     "泡吹いてる": "seizures",
     "意識がない": "seizures",
     "意識ない": "seizures",
-    "倒れた": "fainting",
-    "倒れる": "fainting",
-    "気絶": "fainting",
+    "倒れた": "collapse",
+    "倒れる": "collapse",
+    "気絶": "collapse",
     # 皮膚
     "かゆい": "excessive_licking",
     "痒い": "excessive_licking",
@@ -808,7 +808,7 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     # ハリネズミ追加
     # ---------------------------------------------------------------
-    "針が抜ける": "hair_loss", "クイルロス": "hair_loss",
+    "針が抜ける": "quill_loss", "クイルロス": "quill_loss",
     "quilling": "hair_loss",
     "ふらふら歩く": "ataxia", "後ろ足が動かない": "paralysis_or_paresis",
     "wobbly hedgehog": "ataxia",
@@ -821,7 +821,7 @@ SYMPTOM_ALIASES = {
     "お腹が大きくなった": "bloating", "お腹が大きくなってきた": "bloating",
     "お腹が膨らんできた": "bloating",
     "急に後ろ足が動かなくなった": "paralysis_or_paresis",
-    "後ろ足が冷たい": "paralysis_or_paresis",
+    "後ろ足が冷たい": "cold_extremities",
     "痛がる": "pain", "鳴いて痛がる": "pain",
     "口の中が赤い": "stomatitis",
     "トイレで鳴く": "straining_to_urinate",
@@ -937,7 +937,7 @@ SYMPTOM_ALIASES = {
     # 獣医師監査 第3回
     # ---------------------------------------------------------------
     # 体重・体型
-    "太ってきた": "weight_loss", "太った": "weight_loss",
+    "太ってきた": "weight_gain", "太った": "weight_gain",
     "毛が薄くなった": "hair_loss",
     "寒がる": "lethargy",
     # 鳥 — そのう
@@ -951,6 +951,27 @@ SYMPTOM_ALIASES = {
     "エラが速く動いてる": "rapid_gill_movement",
     # ハリネズミ
     "毛が逆立ってる": "lethargy",
+    # ---------------------------------------------------------------
+    # 獣医師監査 第4回: 日本語チャット精度向上
+    # ---------------------------------------------------------------
+    # 体型・体重 (修正: 太った=weight_gain, not weight_loss)
+    "体重が増えた": "weight_gain", "体重増加": "weight_gain",
+    # 皮膚
+    "皮膚がカサカサ": "dry_skin", "カサカサしてる": "dry_skin",
+    "肌がカサカサ": "dry_skin", "粉ふいてる": "dry_skin",
+    # 四肢冷感
+    "足が冷たい": "cold_extremities", "冷たい": "cold_extremities",
+    "手足が冷たい": "cold_extremities", "末端が冷たい": "cold_extremities",
+    # 虚脱・倒れる
+    "崩れ落ちた": "collapse", "バタッと倒れた": "collapse",
+    # 呼吸 (鳥・爬虫類向け)
+    "口を開けて息してる": "open_mouth_breathing",
+    "息が苦しそう": "labored_breathing",
+    # 魚 — 擦り付け行動
+    "体を擦り付ける": "flashing", "擦り付けてる": "flashing",
+    "体をこすりつける": "flashing", "底砂に体を擦る": "flashing",
+    # ハリネズミ — 針
+    "針がボロボロ抜ける": "quill_loss", "針がたくさん抜ける": "quill_loss",
 }
 
 
@@ -1208,8 +1229,10 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen"],
         # Neuro
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
+        "fainting": ["collapse", "syncope"],
+        "collapse": ["fainting", "syncope"],
         "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "hind_limb_paralysis", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness"],
-        "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness"],
+        "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness", "hind_limb_paralysis"],
         "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
         # Weight / body
         "weight_loss": ["emaciation", "wasting", "cachexia", "rough_coat", "poor_growth"],
@@ -1245,7 +1268,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "labored_breathing": ["respiratory_distress", "dyspnea", "open_mouth_breathing", "difficulty_breathing"],
         "respiratory_distress": ["labored_breathing", "dyspnea", "open_mouth_breathing"],
         "open_mouth_breathing": ["labored_breathing", "respiratory_distress", "mouth_breathing"],
-        "rapid_breathing": ["tachypnea", "panting"],
+        "rapid_breathing": ["tachypnea", "panting", "labored_breathing"],
         "coughing": ["cough", "kennel_cough"],
         "sneezing": ["reverse_sneezing", "nasal_irritation", "nasal_discharge"],
         "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion", "sneezing"],
@@ -1388,6 +1411,7 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "head_tilt": ["vestibular_signs", "torticollis"],
         "fluffed_feathers": ["feather_fluffing"],
         "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_limb_paralysis"],
+        "paralysis": ["hind_limb_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
         "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye"],
         "jaundice": ["icterus", "yellow_skin"],
         "vomiting": ["regurgitation", "crop_stasis"],
