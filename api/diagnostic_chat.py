@@ -933,6 +933,24 @@ SYMPTOM_ALIASES = {
     # 鳥 — 貧血
     "貧血": "lethargy", "anemia": "lethargy",
     "黒い便": "blood_in_stool",
+    # ---------------------------------------------------------------
+    # 獣医師監査 第3回
+    # ---------------------------------------------------------------
+    # 体重・体型
+    "太ってきた": "weight_loss", "太った": "weight_loss",
+    "毛が薄くなった": "hair_loss",
+    "寒がる": "lethargy",
+    # 鳥 — そのう
+    "口をパクパク": "vomiting", "口をパクパクさせてる": "vomiting",
+    "泡が出てる": "vomiting", "口から泡": "vomiting",
+    # フェレット
+    "まだらに抜ける": "hair_loss", "腫瘤": "lumps_and_bumps",
+    "お腹に腫瘤": "lumps_and_bumps",
+    # 魚 — 白点病補強
+    "白い点々が全身に": "white_spots",
+    "エラが速く動いてる": "rapid_gill_movement",
+    # ハリネズミ
+    "毛が逆立ってる": "lethargy",
 }
 
 
