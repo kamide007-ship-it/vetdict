@@ -884,7 +884,7 @@ SYMPTOM_ALIASES = {
     "嘴が伸びてる": "loss_of_appetite", "嘴過長": "loss_of_appetite",
     "眠ってばかり": "lethargy",
     # モルモット
-    "歯茎から出血": "lethargy", "壊血病": "lethargy",
+    "歯茎から出血": "blood_in_stool", "壊血病": "weight_loss",
     "ビタミンc不足": "lethargy",
     # フェレット
     "低血糖": "lethargy",
@@ -923,7 +923,8 @@ SYMPTOM_ALIASES = {
     "尻尾の毛が抜ける": "hair_loss", "体の毛が薄くなった": "hair_loss",
     "前立腺が大きい": "bloating",
     # 爬虫類 — 甲羅/寄生虫
-    "甲羅がカビみたい": "skin_lesions", "甲羅が白い": "skin_lesions",
+    "甲羅がカビみたい": "shell_discoloration", "甲羅が白い": "shell_discoloration",
+    "甲羅が変色してる": "shell_discoloration",
     "便に虫がいる": "diarrhea", "虫が出た": "diarrhea",
     "寄生虫": "diarrhea",
     # ウサギ — 肛門/子宮
@@ -932,6 +933,24 @@ SYMPTOM_ALIASES = {
     # 鳥 — 貧血
     "貧血": "lethargy", "anemia": "lethargy",
     "黒い便": "blood_in_stool",
+    # ---------------------------------------------------------------
+    # 獣医師監査 第3回
+    # ---------------------------------------------------------------
+    # 体重・体型
+    "太ってきた": "weight_loss", "太った": "weight_loss",
+    "毛が薄くなった": "hair_loss",
+    "寒がる": "lethargy",
+    # 鳥 — そのう
+    "口をパクパク": "vomiting", "口をパクパクさせてる": "vomiting",
+    "泡が出てる": "vomiting", "口から泡": "vomiting",
+    # フェレット
+    "まだらに抜ける": "hair_loss", "腫瘤": "lumps_and_bumps",
+    "お腹に腫瘤": "lumps_and_bumps",
+    # 魚 — 白点病補強
+    "白い点々が全身に": "white_spots",
+    "エラが速く動いてる": "rapid_gill_movement",
+    # ハリネズミ
+    "毛が逆立ってる": "lethargy",
 }
 
 
@@ -1193,7 +1212,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness"],
         "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
         # Weight / body
-        "weight_loss": ["emaciation", "wasting", "cachexia"],
+        "weight_loss": ["emaciation", "wasting", "cachexia", "rough_coat", "poor_growth"],
         "emaciation": ["weight_loss", "wasting", "cachexia"],
         # Skin / coat
         "excessive_drooling": ["drooling", "hypersalivation", "ptyalism"],
@@ -1201,14 +1220,14 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "bad_breath": ["halitosis", "oral_odor"],
         "oral_ulcers": ["mouth_lesions", "stomatitis", "gingivitis"],
         "excessive_licking": ["itching", "pruritus", "scratching", "overgrooming", "ear_scratching", "scratching_ears"],
-        "pop_eye": ["exophthalmia", "eye_protrusion", "bulging_eye", "eye_swelling"],
-        "eye_swelling": ["pop_eye", "exophthalmia", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen"],
+        "pop_eye": ["exophthalmia", "exophthalmos", "eye_protrusion", "bulging_eye", "eye_swelling", "eye_bulging", "enlarged_eye"],
+        "eye_swelling": ["pop_eye", "exophthalmia", "exophthalmos", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen", "eye_bulging", "enlarged_eye"],
         "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding"],
-        "blood_in_stool": ["melena", "hematochezia", "bloody_stool"],
+        "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
         "itching": ["pruritus", "scratching", "scratching_ears", "ear_scratching", "excessive_grooming", "excessive_licking", "overgrooming"],
         "pruritus": ["itching", "scratching", "excessive_licking"],
-        "lameness_or_limping": ["lameness", "limping", "joint_swelling", "joint_pain", "leg_swelling", "foot_swelling"],
+        "lameness_or_limping": ["lameness", "limping", "joint_swelling", "joint_pain", "leg_swelling", "foot_swelling", "reluctance_to_move"],
         "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps"],
         # Hair
         "hair_loss": ["alopecia", "fur_loss", "feather_loss", "bald_patches", "quill_loss", "severe_quill_loss", "scaling"],
@@ -1344,7 +1363,7 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "head_tilt": ["vestibular_signs", "torticollis"],
         "fluffed_feathers": ["feather_fluffing"],
         "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_limb_paralysis"],
-        "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "bulging_eye"],
+        "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye"],
         "jaundice": ["icterus", "yellow_skin"],
         "vomiting": ["regurgitation", "crop_stasis"],
         "head_shaking": ["head_bobbing"],
@@ -1355,7 +1374,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "tremors": ["ataxia", "shaking", "muscle_twitching"],
         "ear_discharge": ["ear_infection", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "uterine_bleeding"],
-        "blood_in_stool": ["melena", "hematochezia"],
+        "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
+        "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
+        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
         "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis"],
         "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis"],
         "swollen_eyes": ["eye_swelling", "periorbital_swelling"],

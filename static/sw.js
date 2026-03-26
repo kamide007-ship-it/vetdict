@@ -3,7 +3,6 @@ const CACHE_NAME = 'vetdict-v2';
 const STATIC_ASSETS = [
   '/',
   '/static/css/main.css',
-  '/static/css/app.css',
   '/static/js/app.js',
   '/static/favicon.svg',
   '/static/manifest.json',
