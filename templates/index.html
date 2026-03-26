@@ -30,8 +30,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VetDict">
 <link rel="stylesheet" href="/static/css/main.css"/>
-<link rel="stylesheet" href="/static/css/multidisease-ui.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/static/css/multidisease-ui.css"></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -69,12 +67,6 @@
 {% include 'partials/_footer.html' %}
 
 <script defer src="/static/js/app.js"></script>
-<script defer src="/static/js/multidisease-combinations.js"></script>
-<script defer src="/static/js/multidisease-ambiguity.js"></script>
-<script defer src="/static/js/multidisease-confidence.js"></script>
-<script defer src="/static/js/multidisease-questions.js"></script>
-<script defer src="/static/js/multidisease-guidance.js"></script>
-<script defer src="/static/js/multidisease-ui.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}</script>
 </body>
 </html>
