@@ -347,9 +347,30 @@ a:hover{text-decoration:underline}
 .chat-disease-desc{font-size:.72rem;color:var(--gray-600);margin-top:4px;line-height:1.4}
 .chat-disease-matched{font-size:.68rem;color:var(--gray-500);margin-top:4px}
 .chat-no-match,.chat-no-symptoms{font-size:.78rem;color:var(--gray-500);padding:12px;text-align:center;background:var(--gray-50);border-radius:8px;white-space:pre-wrap}
-.chat-followup{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chat-followup{display:flex;flex-direction:column;gap:8px;margin-top:12px;padding:12px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-200)}
+.chat-followup-label{font-size:.76rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.chat-symptom-question{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--gray-100)}
+.chat-symptom-question:last-child{border-bottom:none}
+.chat-q-text{font-size:.78rem;color:var(--gray-700);flex:1;min-width:120px}
+.chat-q-btns{display:flex;gap:6px;flex-shrink:0}
+.chat-q-btn{font-size:.72rem;padding:5px 14px;border-radius:16px;cursor:pointer;transition:all .2s;font-family:var(--font);font-weight:600;border:1px solid}
+.chat-q-yes{background:var(--white);border-color:var(--green);color:var(--green)}
+.chat-q-yes:hover{background:var(--green);color:var(--white)}
+.chat-q-no{background:var(--white);border-color:var(--gray-300);color:var(--gray-500)}
+.chat-q-no:hover{background:var(--gray-100)}
+.chat-q-btn.selected{opacity:1}
+.chat-q-yes.selected{background:var(--green);color:var(--white)}
+.chat-q-no.selected{background:var(--gray-200);color:var(--gray-500)}
+.chat-q-btn.answered:not(.selected){opacity:.4;cursor:default}
+.chat-q-btn:disabled{cursor:default}
 .chat-followup-btn{font-size:.72rem;padding:5px 12px;background:var(--white);border:1px solid var(--navy);color:var(--navy);border-radius:16px;cursor:pointer;transition:all .2s;font-family:var(--font)}
 .chat-followup-btn:hover{background:var(--navy);color:var(--white)}
+.chat-followup-btn.selected{background:var(--navy);color:var(--white)}
+.chat-followup-btn.answered:not(.selected){opacity:.4;cursor:default}
+.chat-msg.bot-brief{font-size:.72rem;color:var(--gray-500);padding:4px 12px;font-style:italic}
+[data-theme="dark"] .chat-followup{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+[data-theme="dark"] .chat-q-text{color:var(--gray-300)}
+[data-theme="dark"] .chat-q-btn{background:transparent}
 .chat-disclaimer{font-size:.66rem;color:var(--gray-400);margin-top:8px;text-align:center}
 [data-theme="dark"] .chat-result .chat-disease-card{background:var(--gray-100);border-color:var(--gray-200)}
 [data-theme="dark"] .chat-symptoms-tags{background:var(--gray-100)}

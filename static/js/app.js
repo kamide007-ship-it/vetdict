@@ -959,6 +959,26 @@ function sendLandingChat(){
 
 // Accumulated symptoms for chat conversation continuity
 let chatAccumulatedSymptoms=[];
+let chatDeniedSymptoms=[];
+
+function _sendSymptomUpdate(symptomId,confirmed){
+  const species=currentSpecies||"dog";
+  if(!confirmed)chatDeniedSymptoms.push(symptomId);
+  const msgs=document.getElementById("chatMessages");
+  // Show brief status
+  const statusMsg=confirmed?(currentLang==="ja"?"症状を追加しました。再解析中...":"Added symptom. Re-analyzing..."):(currentLang==="ja"?"了解しました。他の症状を確認します。":"Understood. Checking other symptoms.");
+  addChatMsg(statusMsg,"bot-brief");
+  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:confirmed?symptomId:"",species:species,previous_symptoms:chatAccumulatedSymptoms})})
+  .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
+  .then(data=>{
+    loading.remove();
+    if(!data)return;
+    if(data.accumulated_symptoms)chatAccumulatedSymptoms=data.accumulated_symptoms;
+    renderChatResult(msgs,data);
+  })
+  .catch(err=>{loading.remove();console.error("Symptom update error:",err);});
+}
 
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
@@ -1049,20 +1069,84 @@ function renderChatResult(container,data){
     wrapper.appendChild(noSym);
   }
 
-  // 4. Follow-up questions
+  // 4. Follow-up questions (interactive consultation style)
   const fqs=data.follow_up_questions||[];
   if(fqs.length>0){
     const fqDiv=document.createElement("div");
     fqDiv.className="chat-followup";
+    const fqLabel=document.createElement("div");
+    fqLabel.className="chat-followup-label";
+    fqLabel.textContent=currentLang==="ja"?"追加の確認をさせてください：":"Let me ask a few more questions:";
+    fqDiv.appendChild(fqLabel);
     fqs.forEach(fq=>{
-      const btn=document.createElement("button");
-      btn.className="chat-followup-btn";
-      btn.textContent=currentLang==="ja"?(fq.question_ja||fq.question_en||""):(fq.question_en||fq.question_ja||"");
-      btn.addEventListener("click",()=>{
-        const chatInput=document.getElementById("chatInput");
-        if(chatInput){chatInput.value=btn.textContent;sendChatMessage();}
-      });
-      fqDiv.appendChild(btn);
+      if(fq.type==="symptom_check"&&fq.options&&fq.options.length>=2){
+        // Interactive yes/no symptom question
+        const qRow=document.createElement("div");
+        qRow.className="chat-symptom-question";
+        const qText=document.createElement("span");
+        qText.className="chat-q-text";
+        qText.textContent=currentLang==="ja"?(fq.question_ja||""):(fq.question_en||"");
+        qRow.appendChild(qText);
+        const btnGroup=document.createElement("span");
+        btnGroup.className="chat-q-btns";
+        fq.options.forEach(opt=>{
+          const btn=document.createElement("button");
+          const isYes=opt.value.startsWith("+");
+          btn.className="chat-q-btn "+(isYes?"chat-q-yes":"chat-q-no");
+          btn.textContent=currentLang==="ja"?(opt.label_ja||""):(opt.label_en||"");
+          btn.addEventListener("click",()=>{
+            // Disable all buttons in this question row
+            qRow.querySelectorAll("button").forEach(b=>{b.disabled=true;b.classList.add("answered");});
+            btn.classList.add("selected");
+            if(isYes){
+              const sid=opt.value.substring(1);
+              chatAccumulatedSymptoms.push(sid);
+              // Auto-trigger re-analysis with updated symptoms
+              _sendSymptomUpdate(sid,true);
+            }else{
+              _sendSymptomUpdate(fq.symptom_id,false);
+            }
+          });
+          btnGroup.appendChild(btn);
+        });
+        qRow.appendChild(btnGroup);
+        fqDiv.appendChild(qRow);
+      }else{
+        // Onset / age / free-text questions (existing behavior)
+        if(fq.options&&fq.options.length>0){
+          const qRow=document.createElement("div");
+          qRow.className="chat-symptom-question";
+          const qText=document.createElement("span");
+          qText.className="chat-q-text";
+          qText.textContent=currentLang==="ja"?(fq.question_ja||""):(fq.question_en||"");
+          qRow.appendChild(qText);
+          const btnGroup=document.createElement("span");
+          btnGroup.className="chat-q-btns";
+          fq.options.forEach(opt=>{
+            const btn=document.createElement("button");
+            btn.className="chat-followup-btn";
+            btn.textContent=currentLang==="ja"?(opt.label_ja||""):(opt.label_en||"");
+            btn.addEventListener("click",()=>{
+              qRow.querySelectorAll("button").forEach(b=>{b.disabled=true;b.classList.add("answered");});
+              btn.classList.add("selected");
+              const chatInput=document.getElementById("chatInput");
+              if(chatInput){chatInput.value=btn.textContent;sendChatMessage();}
+            });
+            btnGroup.appendChild(btn);
+          });
+          qRow.appendChild(btnGroup);
+          fqDiv.appendChild(qRow);
+        }else{
+          const btn=document.createElement("button");
+          btn.className="chat-followup-btn";
+          btn.textContent=currentLang==="ja"?(fq.question_ja||""):(fq.question_en||"");
+          btn.addEventListener("click",()=>{
+            const chatInput=document.getElementById("chatInput");
+            if(chatInput){chatInput.value=btn.textContent;sendChatMessage();}
+          });
+          fqDiv.appendChild(btn);
+        }
+      }
     });
     wrapper.appendChild(fqDiv);
   }
