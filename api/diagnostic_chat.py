@@ -923,7 +923,8 @@ SYMPTOM_ALIASES = {
     "尻尾の毛が抜ける": "hair_loss", "体の毛が薄くなった": "hair_loss",
     "前立腺が大きい": "bloating",
     # 爬虫類 — 甲羅/寄生虫
-    "甲羅がカビみたい": "skin_lesions", "甲羅が白い": "skin_lesions",
+    "甲羅がカビみたい": "shell_discoloration", "甲羅が白い": "shell_discoloration",
+    "甲羅が変色してる": "shell_discoloration",
     "便に虫がいる": "diarrhea", "虫が出た": "diarrhea",
     "寄生虫": "diarrhea",
     # ウサギ — 肛門/子宮
