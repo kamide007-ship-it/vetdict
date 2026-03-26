@@ -13,51 +13,54 @@
 - **テスト**: pytest (2,471テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js)
-- **Analytics**: GA4 (G-D8LSEGW9ZX)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v2)
+- **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
+- **現状**: OPEN_BETA=true（全機能無料）
 
 ## ディレクトリ構造
 ```
 api/
-  vetdict_api.py          — メインFlaskアプリ + ルーティング
+  vetdict_api.py          — メインFlaskアプリ + ルーティング + CSPヘッダー
   diagnostic_chat.py      — チャット診断エンジン (症状抽出 + 疾患マッチング)
+                            SYMPTOM_ALIASES (500+), _ID_SYNONYMS (80+),
+                            _extract_species_symptoms(), _match_species_symptoms_to_diseases()
   health_checker.py       — 犬用症状チェッカー (チェックボックス)
   drug_dictionary.py      — 薬品辞書API + Blueprint
   drug_batch_1.py         — 薬品データ batch 1
   drug_batch_2.py         — 薬品データ batch 2
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
-  disease_store.py        — SQLite疾患ストア + fallback
-  species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS)
-  paypal_api.py           — PayPalサブスクリプション管理
+  disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
+  species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種)
+  paypal_api.py           — PayPalサブスク + waitlist + メール復元
   auth.py                 — API認証
   species/
-    fish_diseases.py      — 魚病 25疾患 48症状
+    fish_diseases.py      — 魚病 25疾患 48症状 + SYMPTOM_CATEGORIES
     cat_diseases.py       — 猫
     rabbit_diseases.py    — ウサギ
     ... (21種)
     helpers.py            — 共通解析関数 (analyze_symptoms_generic)
-    prevalence_data.py    — 種別有病率
+    prevalence_data.py    — 種別有病率（猫: FHV-1=very_common, Chlamydia=common 等）
 templates/
-  index.html              — メインSPA
+  index.html              — メインSPA (GA4, PWA, OGP, Schema.org, defer JS)
   partials/
     _hero.html            — ヒーローセクション
-    _species.html         — 動物種カード
+    _species.html         — 動物種カード (21種)
     _main_content.html    — チェッカー/DB/チャット/薬品タブ
-    _pricing.html         — 料金プラン (現在オープンベータ: 全機能無料)
+    _pricing.html         — オープンベータ（全機能無料）+ メールリスト収集
     _sponsors.html        — スポンサー
-    _references.html      — 参考文献 (66+ citations)
-    _footer.html          — フッター + SNSシェア + 免責事項
+    _references.html      — 参考文献 (66+ citations, 魚病文献含む)
+    _footer.html          — SNSシェア + 免責事項 + FDA/農水省未認証表記
   tokushoho.html          — 特商法
   terms.html / privacy.html
 static/
-  js/app.js               — 統合JS (I18N + UI + チャット + GA4イベント)
-  css/main.css            — 統合CSS (全コンポーネント)
+  js/app.js               — 統合JS (I18N + UI + チャット + GA4 + admin/pro制御)
+  css/main.css            — 統合CSS (app.cssは削除済み — 絶対に復活させないこと)
   manifest.json           — PWA
-  sw.js                   — ServiceWorker
+  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v2)
   robots.txt / sitemap.xml
-  og-image.svg            — OGP画像
+  og-image.svg            — OGP画像 (1200x630)
 scripts/
   migrate_to_sqlite.py    — SQLiteマイグレーション (SPECIES_MODULESにfish含む)
 ```
@@ -65,7 +68,7 @@ scripts/
 ## データ規模
 - **疾患**: 6,400+ (21動物種)
 - **薬品**: 187 (12種が魚専用)
-- **症状**: 種別48-52項目
+- **症状エイリアス**: 500+ (SYMPTOM_ALIASES) + 80+ (ID同義語)
 - **対応動物種**: 21 (犬,猫,馬,ウサギ,ハムスター,モルモット,チンチラ,フェレット,ハリネズミ,フクロモモンガ,デグー,鳥,インコ,オウム,爬虫類,リクガメ,ヘビ,トカゲ,両生類,魚,その他)
 
 ## 診断エンジン
@@ -75,15 +78,21 @@ scripts/
 
 ### チャット式 (diagnostic_chat.py)
 - **症状抽出**: `_extract_species_symptoms()` — 最長一致優先 + フラグメント分割
-- **ID同義語解決**: `_ID_SYNONYMS` (50+マッピング) — loss_of_appetite ↔ appetite_loss 等
+- **ID同義語解決**: `_ID_SYNONYMS` (80+マッピング) — loss_of_appetite ↔ appetite_loss 等
+  - pop_eye ↔ exophthalmos/eye_bulging/enlarged_eye
+  - eye_swelling ↔ exophthalmia/bulging_eye
+  - sneezing ↔ nasal_discharge（爬虫類用）
+  - bloating ↔ vulvar_swelling（フェレット副腎用）
 - **疾患マッチング**: `_match_species_symptoms_to_diseases()` — IDF重み付き調和平均
   - 特異度ボーナス、陰性証拠ペナルティ、緊急度安全ブースト
   - ロジスティック信頼度校正 (0-95%)
-  - シノニム展開 (frayed_fins → fin_rot も疾患マッチ対象)
-- **SYMPTOM_ALIASES**: 400+のJP/EN口語表現→症状IDマッピング
+  - シノニム展開 (_SYN辞書: frayed_fins → fin_rot も疾患マッチ対象)
+  - 有病率補正 (prevalence_data.py から読み込み)
+- **SYMPTOM_ALIASES**: 500+のJP/EN口語表現→症状IDマッピング
   - 犬用 + 魚用 + 全種共通 (毛が抜ける, 首が傾いてる, 羽を膨らませてる 等)
+  - 獣医師監査3回実施済み
 
-### 精度実績 (36テストケース中27が55%+、500+エイリアス)
+### 精度実績 (50テストケース、500+エイリアス)
 | テストケース | 信頼度 |
 |------------|--------|
 | 魚 白点病 (3症状) | 95.0% |
@@ -94,15 +103,23 @@ scripts/
 | 猫 FIP/胸水 | 76.9% |
 | 猫 動脈血栓症 | 72.5% |
 | 猫 肝リピドーシス | 85.0% |
+| 猫 角膜潰瘍 | 91.1% |
+| 猫 貧血/出血 | 92.3% |
 | ウサギ 斜頸 | 85.8% |
-| 鳥 そのう炎 | 70.0% |
+| ウサギ パスツレラ | 88.7% |
+| ウサギ 消化管うっ滞 | 90.5% |
+| 鳥 そのう炎 | 83.2% |
 | 鳥 呼吸器 | 66.7% |
 | 爬虫類 呼吸器 | 95.0% |
 | 爬虫類 甲羅/MBD | 72.1% |
 | 爬虫類 ビタミンA欠乏 | 71.2% |
 | ハリネズミ WHS | 61.9% |
 | ハリネズミ ダニ | 66.0% |
+| ハリネズミ 眼球突出 | 64.3% |
+| ハムスター 眼球突出 | 64.3% |
 | モルモット 呼吸器 | 95.0% |
+| モルモット 壊血病 | 83.5% |
+| フェレット インスリノーマ | 67.5% |
 
 ### 診断アルゴリズムの構成
 - IDF重み付き調和平均（weighted recall × coverage）
@@ -111,7 +128,7 @@ scripts/
 - 緊急度安全ブースト（emergency: +5%, high: +2%）
 - 有病率補正（very_common: ×1.20, uncommon: ×0.90, rare: ×0.80）
 - カバレッジボーナス（3+症状マッチ: +5%, 4+: +10%）
-- シノニム展開（frayed_fins→fin_rot, sneezing→nasal_discharge 等50+）
+- シノニム展開（frayed_fins→fin_rot, sneezing→nasal_discharge 等80+）
 - ロジスティック信頼度校正（0-95%スケール）
 
 ## アクセス制御
@@ -161,9 +178,25 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - 新規薬品を追加: `api/drug_batch_4.py` の FISH_DRUGS (または新バッチファイル)
 - `api/drug_dictionary.py` でインポート + マージロジック
 
+## 診断精度を改善する手順
+1. `api/diagnostic_chat.py` の `SYMPTOM_ALIASES` に口語表現を追加
+2. `_ID_SYNONYMS` にID間の同義語を追加（種ごとにIDが異なる場合）
+3. `_match_species_symptoms_to_diseases()` 内の `_SYN` にマッチング用シノニムを追加
+4. `api/species/prevalence_data.py` に有病率データを追加
+5. **重複チェック必須**: ruff F601 — 3つの辞書 (SYMPTOM_ALIASES, _ID_SYNONYMS, _SYN) の重複キーを確認
+
 ## 注意事項
 - CSS/JSは全て統合済み (main.css, app.js) — 個別ファイルの参照を追加しないこと
+- **app.cssは削除済み** — 復活させるとヘッダーが水色グラデーションになるバグが再発
 - `data-i18n` は textContent で設定 → HTMLエンティティ不可 (Unicode文字を使用)
 - `data-i18n-html` は innerHTML で設定 → HTMLエンティティ可
-- ruff F601 (重複dictキー) に注意 — SYMPTOM_ALIASESは巨大dictなので重複チェック必須
+- ruff F601 (重複dictキー) に注意 — SYMPTOM_ALIASES, _ID_SYNONYMS, _SYN は巨大dictなので重複チェック必須
 - SQLiteにデータがない種は `get_symptoms_for_species()` がPythonモジュールからfallback
+- ServiceWorkerのキャッシュ更新時は `sw.js` の `CACHE_NAME` をインクリメント
+- エイリアスキーは全て小文字 (ruffテストで検証済み)
+
+## 既知の課題（次セッションで対応可能）
+- フェレット副腎疾患の診断精度がまだ低い（44.6%）— 疾患DB側のsymptom IDを拡充必要
+- 猫甲状腺機能低下症（48.8%）— 同上
+- ハムスターウェットテイル（48.3%）— diarrhea + lethargy の2症状では特異性が低い
+- Renderフリープランのスリープ問題（15分無操作→初回アクセス遅延）
