@@ -669,6 +669,9 @@ SYMPTOM_ALIASES = {
     "ヒレが赤い": "fin_hemorrhage", "ヒレの充血": "fin_hemorrhage",
     # 体表
     "鱗が逆立つ": "raised_scales", "松かさ": "raised_scales",
+    "鱗が逆立ってる": "raised_scales", "うろこが逆立ってる": "raised_scales",
+    "お腹が膨れてきた": "bloating", "お腹膨れてる": "bloating",
+    "目が飛び出してる": "pop_eye",
     "まつかさ": "raised_scales", "マツカサ": "raised_scales",
     "鱗が立ってる": "raised_scales", "うろこが逆立つ": "raised_scales",
     "pinecone": "raised_scales", "dropsy": "dropsy",
@@ -688,7 +691,7 @@ SYMPTOM_ALIASES = {
     # 眼（魚用 — dog用と重複しない表現のみ）
     "目が飛び出てる": "pop_eye", "目が出てる": "pop_eye",
     "ポップアイ": "pop_eye", "pop eye": "pop_eye",
-    "目が濁ってる": "cloudy_eye", "目が白く濁ってる": "cloudy_eye",
+    "目が白く濁ってる": "cloudy_eye",
     # 鰓
     "エラが赤い": "gill_redness", "鰓が赤い": "gill_redness",
     "エラが白い": "gill_paleness", "鰓が白い": "gill_paleness",
@@ -743,7 +746,7 @@ SYMPTOM_ALIASES = {
     "脱毛": "hair_loss", "ハゲ": "hair_loss", "はげ": "hair_loss",
     "毛が薄い": "hair_loss", "毛並みが悪い": "hair_loss",
     "羽が抜ける": "hair_loss", "羽毛が抜ける": "hair_loss",
-    "itching": "itching", "かゆがる": "itching",
+    "itching": "itching",
     "かゆそう": "itching", "掻く": "itching",
     "皮膚が赤い": "skin_lesions", "皮膚炎": "skin_lesions",
     "かさぶた": "skin_lesions", "フケ": "skin_lesions",
@@ -758,7 +761,7 @@ SYMPTOM_ALIASES = {
     "口を開けて呼吸": "open_mouth_breathing", "口開けてる": "open_mouth_breathing",
     "開口呼吸してる": "open_mouth_breathing",
     # 鳥
-    "羽を膨らませてる": "fluffed_feathers", "膨らんでる": "fluffed_feathers",
+    "羽を膨らませてる": "fluffed_feathers",
     "もこもこしてる": "fluffed_feathers",
     # 爬虫類
     "脱皮不全": "dysecdysis", "脱皮がうまくいかない": "dysecdysis",
@@ -770,8 +773,7 @@ SYMPTOM_ALIASES = {
     # 口腔・歯科
     # ---------------------------------------------------------------
     "口が臭い": "bad_breath", "口臭": "bad_breath", "息が臭い": "bad_breath",
-    "よだれが出る": "excessive_drooling", "よだれが多い": "excessive_drooling",
-    "よだれダラダラ": "excessive_drooling",
+    "よだれが出る": "excessive_drooling",
     "食べにくそう": "loss_of_appetite", "食べるのを嫌がる": "loss_of_appetite",
     "口を痛がる": "excessive_drooling", "口を触ると嫌がる": "excessive_drooling",
     "歯が折れた": "excessive_drooling", "歯肉が赤い": "excessive_drooling",
@@ -781,8 +783,6 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     "うんちが小さい": "small_fecal_pellets", "糞が小さい": "small_fecal_pellets",
     "うんちが少ない": "reduced_fecal_output", "糞が少ない": "reduced_fecal_output",
-    "うんちが出ない": "constipation",
-    "お腹が張ってる": "abdominal_distension",
     "歯ぎしり": "teeth_grinding", "歯ぎしりしてる": "teeth_grinding",
     "お腹を痛がる": "abdominal_pain", "丸まってる": "abdominal_pain",
     "お腹を触ると嫌がる": "abdominal_pain",
@@ -803,7 +803,7 @@ SYMPTOM_ALIASES = {
     "代謝性骨疾患": "soft_bones", "mbd": "soft_bones",
     "後ろ足が弱い": "hind_limb_weakness",
     "口の中に病変": "mouth_lesions", "口の中が腫れてる": "mouth_lesions",
-    "口から粘液": "mucus_in_mouth", "口に粘液": "mucus_in_mouth",
+    "口に粘液": "mucus_in_mouth",
     # ---------------------------------------------------------------
     # ハリネズミ追加
     # ---------------------------------------------------------------
@@ -1107,7 +1107,8 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # Urinary
         "straining_to_urinate": ["dysuria", "urinary_straining", "difficulty_urinating"],
         "blood_in_urine": ["hematuria", "bloody_urine"],
-        "frequent_urination": ["pollakiuria", "polyuria"],
+        "frequent_urination": ["pollakiuria", "polyuria", "excessive_urination"],
+        "excessive_urination": ["frequent_urination", "polyuria", "pollakiuria"],
         # Musculoskeletal
         "lameness_or_limping": ["lameness", "limping", "leg_swelling", "foot_swelling"],
         "joint_pain_or_stiffness": ["joint_pain", "arthritis", "stiffness"],
@@ -1202,7 +1203,12 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "constipation": ["reduced_fecal_output", "small_fecal_pellets"],
         "bloating": ["abdominal_distension"], "abdominal_distension": ["bloating"],
         "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
-        "hair_loss": ["alopecia"], "alopecia": ["hair_loss"],
+        "frequent_urination": ["excessive_urination", "polyuria"],
+        "excessive_urination": ["frequent_urination", "polyuria"],
+        "excessive_thirst": ["polydipsia", "increased_thirst"],
+        "hair_loss": ["alopecia", "scaling"], "alopecia": ["hair_loss"],
+        "skin_lesions": ["scaling", "dermatitis", "skin_rash"],
+        "scaling": ["skin_lesions", "dandruff"],
         "itching": ["pruritus", "scratching"], "pruritus": ["itching", "scratching"],
         "cloudy_eyes": ["cloudy_eye", "cloudiness_in_eyes"], "cloudy_eye": ["cloudy_eyes"],
         "open_mouth_breathing": ["respiratory_distress", "labored_breathing"],
