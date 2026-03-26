@@ -107,7 +107,7 @@ a:hover{text-decoration:underline}
 
 /* Hero Content */
 .hero-content{margin-bottom:32px;position:relative;z-index:1}
-.hero-lead{font-size:.95rem;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 28px;line-height:1.8}
+.hero-lead{font-size:.95rem;color:#fff;max-width:540px;margin:0 auto 28px;line-height:1.8}
 .hero-cta{margin-bottom:0}
 
 /* Hero Button */
@@ -124,10 +124,10 @@ a:hover{text-decoration:underline}
 .hero-stat{text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 20px;min-width:100px;backdrop-filter:blur(4px);transition:transform var(--transition-fast),background var(--transition-fast)}
 .hero-stat:hover{transform:translateY(-2px);background:rgba(255,255,255,.1)}
 .hero-stat .num{font-size:2.2rem;font-weight:800;display:block;background:linear-gradient(135deg,var(--white),var(--green-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-stat .label{font-size:.75rem;color:rgba(255,255,255,.85);letter-spacing:.5px}
+.hero-stat .label{font-size:.75rem;color:#fff;letter-spacing:.5px}
 
 /* Hero Credit */
-.hero-credit{font-size:.78rem;color:rgba(255,255,255,.7);position:relative;z-index:1}
+.hero-credit{font-size:.78rem;color:#fff;position:relative;z-index:1}
 .hero-credit a{color:var(--green-light);opacity:1}
 
 /* --- Sponsor banner --- */
