@@ -80,6 +80,10 @@ const I18N={
     cardChat:"&#128172; 症状相談",
     chatWelcome:'こんにちは。気になる症状を日本語または英語で入力してください。<br/>例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>',
     chatInputPh:"症状を入力してください...",chatSend:"送信",
+    chatModeFree:"自由入力",chatModeGuided:"問診モード",
+    guidedStart:"問診を開始",guidedNext:"次へ",guidedFinish:"結果を見る",guidedMore:"他の症状もある",guidedRestart:"最初からやり直す",
+    guidedSelectCategory:"カテゴリを選んでください",guidedSelectSymptoms:"当てはまる症状を選んでください",
+    guidedInterimTitle:"現在の診断候補",guidedFinalTitle:"問診結果",
     cardDrugs:"&#128138; 薬品辞書",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
     allCategories:"全カテゴリ",allSpecies:"全動物種",
@@ -147,6 +151,10 @@ const I18N={
     cardChat:"&#128172; Symptom Chat",
     chatWelcome:'Hello! Please describe the symptoms in Japanese or English.<br/>Examples: "my cat is vomiting and has no appetite" "my dog is limping and has a fever"<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">Note: This tool provides reference information about diseases. Always consult a veterinarian for diagnosis and treatment.</em>',
     chatInputPh:"Describe symptoms...",chatSend:"Send",
+    chatModeFree:"Free Text",chatModeGuided:"Guided",
+    guidedStart:"Start Consultation",guidedNext:"Next",guidedFinish:"See Results",guidedMore:"More Symptoms",guidedRestart:"Start Over",
+    guidedSelectCategory:"Select a category",guidedSelectSymptoms:"Select symptoms that apply",
+    guidedInterimTitle:"Current Candidates",guidedFinalTitle:"Consultation Results",
     cardDrugs:"&#128138; Drug Dictionary",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
     allCategories:"All Categories",allSpecies:"All Species",
@@ -223,7 +231,7 @@ function applyLanguage(){
   renderSpeciesGrid();
   if(symptomData.length)renderSymptomList(symptomData);
   renderSelectedSymptoms();
-  if(allDiseases.length)renderDiseaseDb();
+  if(allDiseases.length){diseaseNavMode=currentLang==="ja"?"kana":"az";diseaseFilter="";renderAzNav();renderDiseaseDb();}
   if(drugsLoaded)renderDrugList();
 }
 
@@ -258,6 +266,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadSpeciesStats();
     setupNavigation();
     setupChat();
+    setupGuidedConsultation();
     setupHamburger();
     setupLanguageToggle();
     const symptomSearch=document.getElementById("symptomSearch");
@@ -444,6 +453,10 @@ function selectSpecies(id){
   });
   renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
   resetSpeciesChat(id);
+  // Reset guided consultation if active
+  const guidedCont=document.getElementById("chatGuidedContainer");
+  if(guidedCont&&!guidedCont.classList.contains("hidden")){startGuidedConsultation();}
+  else{guidedState.species=id;}
   const sp=SPECIES.find(s=>s.id===id);
   if(sp&&typeof showToast==="function"){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
   const resultsArea=document.getElementById("resultsArea");
@@ -802,10 +815,11 @@ function loadDiseaseDb(species){
   .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
-let diseaseNavMode="az";
+let diseaseNavMode=null;
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   if(!azNav){console.warn("azNav element not found");return;}
+  if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"kana":"az";
   const isAz=diseaseNavMode==="az";
   const toggleLabel=isAz?"あいうえお順":"A-Z順";
   const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
@@ -835,6 +849,7 @@ function renderDiseaseDb(){
     }
   }
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
+  if(currentLang==="ja"){filtered=filtered.slice().sort((a,b)=>(a.name_ja||a.name||"").localeCompare(b.name_ja||b.name||"","ja"));}else{filtered=filtered.slice().sort((a,b)=>(a.name||"").localeCompare(b.name||"","en"));}
   document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDiseases.length);
   if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
   const pk=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
@@ -1165,6 +1180,365 @@ function addChatMsg(text,type){
   const msgs=document.getElementById("chatMessages"),div=document.createElement("div");
   div.className=`chat-msg ${type}`;div.textContent=text;
   msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+}
+
+// =============================================================================
+// GUIDED CONSULTATION (問診モード)
+// =============================================================================
+let guidedState={
+  species:null,
+  selectedSymptoms:[],
+  answeredCategories:[],
+  onset:null,
+  ageYears:null,
+  phase:"start"
+};
+
+function setupGuidedConsultation(){
+  const freeBtn=document.getElementById("chatModeFree");
+  const guidedBtn=document.getElementById("chatModeGuided");
+  if(!freeBtn||!guidedBtn)return;
+  freeBtn.addEventListener("click",()=>switchChatMode("free"));
+  guidedBtn.addEventListener("click",()=>switchChatMode("guided"));
+}
+
+function switchChatMode(mode){
+  const freeBtn=document.getElementById("chatModeFree");
+  const guidedBtn=document.getElementById("chatModeGuided");
+  const freeCont=document.getElementById("chatFreeContainer");
+  const guidedCont=document.getElementById("chatGuidedContainer");
+  if(!freeCont||!guidedCont)return;
+  if(mode==="guided"){
+    freeBtn.classList.remove("active");guidedBtn.classList.add("active");
+    freeCont.classList.add("hidden");guidedCont.classList.remove("hidden");
+    startGuidedConsultation();
+  } else {
+    guidedBtn.classList.remove("active");freeBtn.classList.add("active");
+    guidedCont.classList.add("hidden");freeCont.classList.remove("hidden");
+  }
+}
+
+function startGuidedConsultation(){
+  guidedState={species:currentSpecies||"dog",selectedSymptoms:[],answeredCategories:[],onset:null,ageYears:null,phase:"start"};
+  const msgs=document.getElementById("guidedMessages");
+  const actions=document.getElementById("guidedActions");
+  if(msgs)msgs.innerHTML="";
+  if(actions)actions.innerHTML="";
+  guidedFetch("start");
+}
+
+function guidedAddMsg(html,type){
+  const msgs=document.getElementById("guidedMessages");
+  if(!msgs)return;
+  const div=document.createElement("div");
+  div.className=`chat-msg ${type||"bot"}`;
+  div.innerHTML=html;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function guidedSetActions(html){
+  const actions=document.getElementById("guidedActions");
+  if(!actions)return;
+  actions.innerHTML=html;
+  const msgs=document.getElementById("guidedMessages");
+  if(msgs)msgs.scrollTop=msgs.scrollHeight;
+}
+
+function guidedFetch(phase,extra){
+  const body={
+    species:guidedState.species,
+    phase:phase,
+    selected_symptoms:guidedState.selectedSymptoms,
+    answered_categories:guidedState.answeredCategories,
+    onset:guidedState.onset,
+    age_years:guidedState.ageYears,
+    ...(extra||{})
+  };
+  guidedAddMsg('<span class="dot"></span><span class="dot"></span><span class="dot"></span>',"bot typing-indicator");
+  fetch("/api/diagnostic-chat/consultation",{
+    method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)
+  })
+  .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
+  .then(data=>{
+    // Remove typing indicator
+    const msgs=document.getElementById("guidedMessages");
+    const typing=msgs?.querySelector(".typing-indicator");
+    if(typing)typing.remove();
+    guidedHandleResponse(data);
+  })
+  .catch(err=>{
+    const msgs=document.getElementById("guidedMessages");
+    const typing=msgs?.querySelector(".typing-indicator");
+    if(typing)typing.remove();
+    guidedAddMsg(t("commError")+" ("+err.message+")","bot");
+  });
+}
+
+function guidedHandleResponse(data){
+  const lang=currentLang;
+  const msgKey=lang==="ja"?"message_ja":"message_en";
+  if(data[msgKey])guidedAddMsg(data[msgKey],"bot");
+
+  if(data.phase==="select_category"){
+    guidedRenderCategories(data.categories||[]);
+  } else if(data.phase==="show_symptoms"){
+    guidedRenderSymptoms(data);
+  } else if(data.phase==="interim_results"){
+    guidedRenderInterim(data);
+  } else if(data.phase==="context_questions"){
+    guidedRenderContextQuestions(data.questions||[]);
+  } else if(data.phase==="final_results"){
+    guidedRenderFinalResults(data);
+  }
+}
+
+function guidedRenderCategories(categories){
+  let html='<div class="guided-category-grid">';
+  categories.forEach(c=>{
+    const label=currentLang==="ja"?c.name_ja:c.name_en;
+    html+=`<button class="guided-cat-btn" data-cat="${c.id}"><span class="guided-cat-name">${label}</span><span class="guided-cat-count">${c.symptom_count}</span></button>`;
+  });
+  html+='</div>';
+  guidedSetActions(html);
+  document.querySelectorAll(".guided-cat-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const cat=btn.dataset.cat;
+      const label=currentLang==="ja"?btn.querySelector(".guided-cat-name").textContent:btn.querySelector(".guided-cat-name").textContent;
+      guidedAddMsg(label,"user");
+      guidedSetActions("");
+      guidedFetch("select_symptoms",{selected_category:cat});
+    });
+  });
+}
+
+function guidedRenderSymptoms(data){
+  const symptoms=data.symptoms||[];
+  const selected=new Set(guidedState.selectedSymptoms);
+  let html='<div class="guided-symptom-grid">';
+  symptoms.forEach(s=>{
+    const label=currentLang==="ja"?s.name_ja:s.name_en;
+    const cls=selected.has(s.id)?"guided-sym-btn selected":"guided-sym-btn";
+    html+=`<button class="${cls}" data-sid="${s.id}">${label}</button>`;
+  });
+  html+='</div>';
+  html+=`<div class="guided-bottom-actions">`;
+  html+=`<button class="guided-action-btn primary" id="guidedConfirmSymptoms">${t("guidedNext")}</button>`;
+  html+=`</div>`;
+  guidedSetActions(html);
+
+  // Toggle symptoms
+  document.querySelectorAll(".guided-sym-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const sid=btn.dataset.sid;
+      if(btn.classList.contains("selected")){
+        btn.classList.remove("selected");
+        selected.delete(sid);
+      } else {
+        btn.classList.add("selected");
+        selected.add(sid);
+      }
+    });
+  });
+
+  // Confirm
+  const confirmBtn=document.getElementById("guidedConfirmSymptoms");
+  if(confirmBtn)confirmBtn.addEventListener("click",()=>{
+    const newSymptoms=[...selected];
+    if(newSymptoms.length===0){return;}
+    guidedState.selectedSymptoms=newSymptoms;
+    if(!guidedState.answeredCategories.includes(data.category)){
+      guidedState.answeredCategories.push(data.category);
+    }
+    // Show selected symptoms as user message
+    const labels=symptoms.filter(s=>selected.has(s.id)).map(s=>currentLang==="ja"?s.name_ja:s.name_en);
+    guidedAddMsg(labels.join("、"),"user");
+    guidedSetActions("");
+    guidedFetch("next_category");
+  });
+}
+
+function guidedRenderInterim(data){
+  // Show current symptom tags
+  const details=data.symptom_details||[];
+  if(details.length>0){
+    let tagsHtml='<div class="chat-symptoms-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"選択中の症状: ":"Selected: ")+'</span>';
+    details.forEach(s=>{
+      tagsHtml+=`<span class="chat-symptom-tag">${currentLang==="ja"?s.name_ja:s.name_en}</span>`;
+    });
+    tagsHtml+='</div>';
+    guidedAddMsg(tagsHtml,"bot chat-result");
+  }
+
+  // Show disease candidates
+  const candidates=data.disease_candidates||[];
+  if(candidates.length>0){
+    let html=`<div class="guided-interim-label">${t("guidedInterimTitle")}</div>`;
+    html+='<div class="chat-disease-list">';
+    candidates.slice(0,3).forEach((c,i)=>{
+      const pct=Math.round((c.similarity_score||0)*100);
+      const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
+      html+=`<div class="chat-disease-card">
+        <div class="chat-disease-head">
+          <span class="chat-disease-rank">${i+1}</span>
+          <span class="chat-disease-name">${c.name_ja||c.name_en}</span>
+          <span class="chat-disease-pct ${sevClass}">${pct}%</span>
+        </div>
+        <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
+      </div>`;
+    });
+    html+='</div>';
+    guidedAddMsg(html,"bot chat-result");
+  }
+
+  // Action buttons
+  const nextCats=data.next_categories||[];
+  let actHtml='<div class="guided-next-actions">';
+  if(nextCats.length>0){
+    actHtml+=`<div class="guided-next-label">${currentLang==="ja"?"さらに確認したいカテゴリ:":"Check more categories:"}</div>`;
+    actHtml+='<div class="guided-category-grid compact">';
+    nextCats.forEach(c=>{
+      const label=currentLang==="ja"?c.name_ja:c.name_en;
+      actHtml+=`<button class="guided-cat-btn suggested" data-cat="${c.id}"><span class="guided-cat-name">${label}</span></button>`;
+    });
+    actHtml+='</div>';
+  }
+  actHtml+=`<div class="guided-bottom-actions">`;
+  actHtml+=`<button class="guided-action-btn secondary" id="guidedAskContext">${t("guidedFinish")}</button>`;
+  actHtml+=`<button class="guided-action-btn text" id="guidedRestartBtn">${t("guidedRestart")}</button>`;
+  actHtml+=`</div></div>`;
+  guidedSetActions(actHtml);
+
+  // Category buttons
+  document.querySelectorAll(".guided-cat-btn.suggested").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const cat=btn.dataset.cat;
+      const label=btn.querySelector(".guided-cat-name").textContent;
+      guidedAddMsg(label,"user");
+      guidedSetActions("");
+      guidedFetch("select_symptoms",{selected_category:cat});
+    });
+  });
+
+  // Finish button -> ask context
+  const finishBtn=document.getElementById("guidedAskContext");
+  if(finishBtn)finishBtn.addEventListener("click",()=>{
+    guidedSetActions("");
+    guidedFetch("ask_context");
+  });
+
+  // Restart
+  const restartBtn=document.getElementById("guidedRestartBtn");
+  if(restartBtn)restartBtn.addEventListener("click",()=>{
+    guidedSetActions("");
+    startGuidedConsultation();
+  });
+}
+
+function guidedRenderContextQuestions(questions){
+  if(questions.length===0){
+    // No context needed, go straight to finalize
+    guidedFetch("finalize");
+    return;
+  }
+  let html='<div class="guided-context-questions">';
+  questions.forEach(q=>{
+    const label=currentLang==="ja"?q.question_ja:q.question_en;
+    html+=`<div class="guided-context-q"><div class="guided-context-label">${label}</div><div class="guided-context-options">`;
+    (q.options||[]).forEach(o=>{
+      const olabel=currentLang==="ja"?o.label_ja:o.label_en;
+      html+=`<button class="guided-context-opt" data-type="${q.type}" data-value="${o.value}">${olabel}</button>`;
+    });
+    html+=`<button class="guided-context-opt skip" data-type="${q.type}" data-value="">${currentLang==="ja"?"スキップ":"Skip"}</button>`;
+    html+='</div></div>';
+  });
+  html+=`<div class="guided-bottom-actions"><button class="guided-action-btn primary" id="guidedFinalizeBtn">${t("guidedFinish")}</button></div>`;
+  html+='</div>';
+  guidedSetActions(html);
+
+  // Context option selection
+  document.querySelectorAll(".guided-context-opt").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const type=btn.dataset.type;
+      const val=btn.dataset.value;
+      // Deselect siblings
+      btn.parentElement.querySelectorAll(".guided-context-opt").forEach(b=>b.classList.remove("selected"));
+      if(val)btn.classList.add("selected");
+      if(type==="onset"&&val)guidedState.onset=val;
+      if(type==="age"&&val)guidedState.ageYears=parseFloat(val);
+    });
+  });
+
+  // Finalize
+  const finalBtn=document.getElementById("guidedFinalizeBtn");
+  if(finalBtn)finalBtn.addEventListener("click",()=>{
+    guidedSetActions("");
+    guidedFetch("finalize");
+  });
+}
+
+function guidedRenderFinalResults(data){
+  const result=data.result||{};
+  const diseases=result.suspected_diseases||[];
+  const details=data.symptom_details||[];
+
+  // Symptom summary
+  if(details.length>0){
+    let tagsHtml='<div class="chat-symptoms-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"検出症状: ":"Symptoms: ")+'</span>';
+    details.forEach(s=>{
+      tagsHtml+=`<span class="chat-symptom-tag">${currentLang==="ja"?s.name_ja:s.name_en}</span>`;
+    });
+    tagsHtml+='</div>';
+    guidedAddMsg(tagsHtml,"bot chat-result");
+  }
+
+  // Context info
+  let ctxParts=[];
+  if(data.onset)ctxParts.push((currentLang==="ja"?"発症: ":"Onset: ")+data.onset);
+  if(data.age_years)ctxParts.push((currentLang==="ja"?"年齢: ":"Age: ")+data.age_years+(currentLang==="ja"?"歳":"y"));
+  if(ctxParts.length>0)guidedAddMsg(ctxParts.join(" / "),"bot");
+
+  // Disease results
+  if(diseases.length>0){
+    let html=`<div class="guided-final-label">${t("guidedFinalTitle")}</div>`;
+    html+='<div class="chat-disease-list">';
+    diseases.slice(0,5).forEach((d,i)=>{
+      const pct=d.match_percent||0;
+      const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
+      const name=d.name_ja||d.name||"";
+      const nameEn=d.name||"";
+      const desc=d.description_ja||d.description||"";
+      const matched=(d.matching_symptoms||[]).map(sid=>{
+        const found=details.find(s=>s.id===sid);
+        return found?(currentLang==="ja"?found.name_ja:found.name_en):sid;
+      }).join(", ");
+      html+=`<div class="chat-disease-card">
+        <div class="chat-disease-head">
+          <span class="chat-disease-rank">${i+1}</span>
+          <span class="chat-disease-name">${name}</span>
+          <span class="chat-disease-name-en">${nameEn}</span>
+          <span class="chat-disease-pct ${sevClass}">${pct}%</span>
+        </div>
+        <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
+        ${desc?`<div class="chat-disease-desc">${desc}</div>`:""}
+        ${matched?`<div class="chat-disease-matched">${currentLang==="ja"?"一致: ":"Matched: "}${matched}</div>`:""}
+      </div>`;
+    });
+    html+='</div>';
+    guidedAddMsg(html,"bot chat-result");
+  } else {
+    guidedAddMsg(currentLang==="ja"?"該当する疾患が見つかりませんでした。":"No matching diseases found.","bot");
+  }
+
+  // Disclaimer + recommendations
+  const rec=data.recommendations||{};
+  const disclaimer=currentLang==="ja"?rec.next_step_ja:rec.next_step_en;
+  if(disclaimer)guidedAddMsg(`<div class="chat-disclaimer">${disclaimer}</div>`,"bot chat-result");
+
+  // Restart button
+  guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);
+  const rb=document.getElementById("guidedRestartFinal");
+  if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
 }
 
 let drugsLoaded=false,allDrugs=[],drugCategories={};
