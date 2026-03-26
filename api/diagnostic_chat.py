@@ -688,7 +688,7 @@ SYMPTOM_ALIASES = {
     # 眼（魚用 — dog用と重複しない表現のみ）
     "目が飛び出てる": "pop_eye", "目が出てる": "pop_eye",
     "ポップアイ": "pop_eye", "pop eye": "pop_eye",
-    "目が濁ってる": "cloudy_eye",
+    "目が濁ってる": "cloudy_eye", "目が白く濁ってる": "cloudy_eye",
     # 鰓
     "エラが赤い": "gill_redness", "鰓が赤い": "gill_redness",
     "エラが白い": "gill_paleness", "鰓が白い": "gill_paleness",
@@ -735,6 +735,37 @@ SYMPTOM_ALIASES = {
     "突然死んだ": "sudden_death",
     # 過抱卵
     "卵が出ない": "egg_binding", "卵詰まり": "egg_binding",
+    # ---------------------------------------------------------------
+    # 全種共通の追加エイリアス（多種のSYMPTOM_NAMES IDにマッチ）
+    # ---------------------------------------------------------------
+    # 皮膚・被毛
+    "毛が抜ける": "hair_loss", "毛が抜けてきた": "hair_loss",
+    "脱毛": "hair_loss", "ハゲ": "hair_loss", "はげ": "hair_loss",
+    "毛が薄い": "hair_loss", "毛並みが悪い": "hair_loss",
+    "羽が抜ける": "hair_loss", "羽毛が抜ける": "hair_loss",
+    "itching": "itching", "かゆがる": "itching",
+    "かゆそう": "itching", "掻く": "itching",
+    "皮膚が赤い": "skin_lesions", "皮膚炎": "skin_lesions",
+    "かさぶた": "skin_lesions", "フケ": "skin_lesions",
+    "ふけ": "skin_lesions", "皮膚が荒れてる": "skin_lesions",
+    # 頭部
+    "首が傾いてる": "head_tilt", "首が曲がってる": "head_tilt",
+    "首傾げてる": "head_tilt", "斜頸": "head_tilt",
+    "head tilt": "head_tilt",
+    # 眼
+    "目が濁ってる": "cloudy_eyes", "目が白っぽい": "cloudy_eyes",
+    # 呼吸
+    "口を開けて呼吸": "open_mouth_breathing", "口開けてる": "open_mouth_breathing",
+    "開口呼吸してる": "open_mouth_breathing",
+    # 鳥
+    "羽を膨らませてる": "fluffed_feathers", "膨らんでる": "fluffed_feathers",
+    "もこもこしてる": "fluffed_feathers",
+    # 爬虫類
+    "脱皮不全": "dysecdysis", "脱皮がうまくいかない": "dysecdysis",
+    "脱皮できない": "dysecdysis", "皮が残ってる": "dysecdysis",
+    "retained shed": "dysecdysis",
+    # 関節
+    "足が腫れてる": "lameness_or_limping",
 }
 
 
@@ -972,17 +1003,65 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     # Cross-species ID mapping: dog aliases use "loss_of_appetite" but many
     # species modules use "appetite_loss", "anorexia", etc. for the same concept.
     _ID_SYNONYMS: dict[str, list[str]] = {
-        "loss_of_appetite": ["appetite_loss", "anorexia", "poor_appetite"],
-        "appetite_loss": ["loss_of_appetite", "anorexia"],
-        "anorexia": ["loss_of_appetite", "appetite_loss"],
-        "lethargy": ["depression", "inactivity"],
-        "diarrhea": ["loose_stool", "watery_stool"],
-        "vomiting": ["regurgitation"],
-        "seizures": ["convulsions", "fits"],
-        "tremors": ["shaking", "trembling"],
-        "bloating": ["abdominal_distension", "abdominal_distention"],
-        "weight_loss": ["emaciation", "wasting"],
-        "emaciation": ["weight_loss", "wasting"],
+        # Appetite
+        "loss_of_appetite": ["appetite_loss", "anorexia", "poor_appetite", "decreased_appetite"],
+        "appetite_loss": ["loss_of_appetite", "anorexia", "poor_appetite", "decreased_appetite"],
+        "anorexia": ["loss_of_appetite", "appetite_loss", "poor_appetite"],
+        # General
+        "lethargy": ["depression", "inactivity", "weakness", "listlessness"],
+        "weakness": ["lethargy", "depression", "inactivity"],
+        "fever": ["hyperthermia", "elevated_temperature"],
+        # GI
+        "diarrhea": ["loose_stool", "watery_stool", "soft_stool"],
+        "vomiting": ["regurgitation", "emesis"],
+        "constipation": ["reduced_fecal_output", "straining_to_defecate"],
+        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen"],
+        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen"],
+        # Neuro
+        "seizures": ["convulsions", "fits", "epileptic_episodes"],
+        "tremors": ["shaking", "trembling", "muscle_tremors"],
+        "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness"],
+        # Weight / body
+        "weight_loss": ["emaciation", "wasting", "cachexia"],
+        "emaciation": ["weight_loss", "wasting", "cachexia"],
+        # Skin / coat
+        "excessive_licking": ["itching", "pruritus", "scratching", "overgrooming"],
+        "itching": ["pruritus", "scratching", "excessive_licking", "overgrooming"],
+        "pruritus": ["itching", "scratching", "excessive_licking"],
+        "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps"],
+        # Hair
+        "hair_loss": ["alopecia", "fur_loss", "feather_loss", "bald_patches"],
+        "alopecia": ["hair_loss", "fur_loss", "bald_patches"],
+        # Eyes
+        "cloudiness_in_eyes": ["cloudy_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye"],
+        "cloudy_eyes": ["cloudiness_in_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye"],
+        "cloudy_eye": ["cloudy_eyes", "cloudiness_in_eyes", "eye_cloudiness"],
+        "redness_in_eyes": ["red_eyes", "conjunctivitis", "eye_redness"],
+        "eye_discharge": ["ocular_discharge", "eye_secretion", "epiphora"],
+        "squinting": ["blepharospasm", "eye_squinting"],
+        # Respiratory
+        "labored_breathing": ["respiratory_distress", "dyspnea", "open_mouth_breathing", "difficulty_breathing"],
+        "respiratory_distress": ["labored_breathing", "dyspnea", "open_mouth_breathing"],
+        "open_mouth_breathing": ["labored_breathing", "respiratory_distress", "mouth_breathing"],
+        "rapid_breathing": ["tachypnea", "panting"],
+        "coughing": ["cough", "kennel_cough"],
+        "sneezing": ["reverse_sneezing", "nasal_irritation"],
+        "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion"],
+        # Urinary
+        "straining_to_urinate": ["dysuria", "urinary_straining", "difficulty_urinating"],
+        "blood_in_urine": ["hematuria", "bloody_urine"],
+        "frequent_urination": ["pollakiuria", "polyuria"],
+        # Musculoskeletal
+        "lameness_or_limping": ["lameness", "limping", "leg_swelling", "foot_swelling"],
+        "joint_pain_or_stiffness": ["joint_pain", "arthritis", "stiffness"],
+        # Behavior
+        "anxiety": ["restlessness", "pacing", "nervousness"],
+        # Head
+        "head_tilt": ["vestibular_signs", "torticollis", "wry_neck"],
+        # Reptile-specific
+        "dysecdysis": ["abnormal_shedding", "retained_shed", "shedding_problems"],
+        # Bird-specific
+        "fluffed_feathers": ["feather_fluffing", "puffed_up", "ruffled_feathers"],
     }
 
     def _resolve_id(sid: str) -> str | None:
