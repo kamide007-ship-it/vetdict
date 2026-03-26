@@ -858,6 +858,43 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     "関節が腫れてる": "lameness_or_limping", "関節腫れ": "lameness_or_limping",
     "キーキー鳴く": "lethargy", "鳴き声が変": "lethargy",
+    # ---------------------------------------------------------------
+    # 獣医師監査: 追加エイリアス (全種共通 + 種別)
+    # ---------------------------------------------------------------
+    # 猫 — 耳
+    "耳が臭い": "excessive_licking",
+    "黒い耳垢": "excessive_licking", "耳垢が多い": "excessive_licking",
+    # 猫 — 眼
+    "目をしょぼしょぼ": "squinting",
+    "片目だけ涙": "eye_discharge",
+    # 猫 — 体型
+    "急に太った": "bloating", "お腹だけ大きい": "bloating",
+    # 猫 — 脱水
+    "脱水してる": "lethargy",
+    # 猫 — 毛
+    "毛艶が悪い": "weight_loss",
+    # ウサギ
+    "膿が出てる": "lethargy", "下顎が腫れてる": "bloating",
+    # ハムスター
+    "眼球突出": "pop_eye",
+    "頬袋が出たまま": "bloating", "頬袋が戻らない": "bloating",
+    # 鳥
+    "糞が水っぽい": "diarrhea", "糞が緑色": "diarrhea",
+    "嘴が伸びてる": "loss_of_appetite", "嘴過長": "loss_of_appetite",
+    "眠ってばかり": "lethargy",
+    # モルモット
+    "歯茎から出血": "lethargy", "壊血病": "lethargy",
+    "ビタミンC不足": "lethargy",
+    # フェレット
+    "低血糖": "lethargy",
+    # 爬虫類
+    "脱皮が途中で止まってる": "dysecdysis", "脱皮途中": "dysecdysis",
+    "水疱": "skin_lesions",
+    # 魚
+    "ふわふわした白いもの": "cotton_like_growth",
+    "白いもやもやがついてる": "cotton_like_growth",
+    "白い綿": "cotton_like_growth",
+    "急に死んだ": "sudden_death",
 }
 
 
@@ -1127,7 +1164,8 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "drooling": ["excessive_drooling", "hypersalivation"],
         "bad_breath": ["halitosis", "oral_odor"],
         "oral_ulcers": ["mouth_lesions", "stomatitis", "gingivitis"],
-        "excessive_licking": ["itching", "pruritus", "scratching", "overgrooming"],
+        "excessive_licking": ["itching", "pruritus", "scratching", "overgrooming", "ear_scratching"],
+        "pop_eye": ["exophthalmia", "eye_protrusion", "bulging_eye"],
         "itching": ["pruritus", "scratching", "excessive_licking", "overgrooming"],
         "pruritus": ["itching", "scratching", "excessive_licking"],
         "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps"],
