@@ -1212,7 +1212,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness"],
         "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
         # Weight / body
-        "weight_loss": ["emaciation", "wasting", "cachexia"],
+        "weight_loss": ["emaciation", "wasting", "cachexia", "rough_coat", "poor_growth"],
         "emaciation": ["weight_loss", "wasting", "cachexia"],
         # Skin / coat
         "excessive_drooling": ["drooling", "hypersalivation", "ptyalism"],
@@ -1224,12 +1224,10 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "eye_swelling": ["pop_eye", "exophthalmia", "exophthalmos", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen", "eye_bulging", "enlarged_eye"],
         "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding"],
-        "blood_in_stool": ["melena", "hematochezia", "bloody_stool"],
+        "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
         "itching": ["pruritus", "scratching", "scratching_ears", "ear_scratching", "excessive_grooming", "excessive_licking", "overgrooming"],
         "pruritus": ["itching", "scratching", "excessive_licking"],
         "lameness_or_limping": ["lameness", "limping", "joint_swelling", "joint_pain", "leg_swelling", "foot_swelling", "reluctance_to_move"],
-        "blood_in_stool": ["melena", "hematochezia", "bleeding_gums", "bloody_stool"],
-        "weight_loss": ["emaciation", "wasting", "rough_coat", "poor_growth"],
         "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps"],
         # Hair
         "hair_loss": ["alopecia", "fur_loss", "feather_loss", "bald_patches", "quill_loss", "severe_quill_loss", "scaling"],
@@ -1379,7 +1377,6 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
         "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
         "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
-        "blood_in_stool": ["melena", "hematochezia"],
         "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis"],
         "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis"],
         "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
