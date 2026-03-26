@@ -231,7 +231,7 @@ function applyLanguage(){
   renderSpeciesGrid();
   if(symptomData.length)renderSymptomList(symptomData);
   renderSelectedSymptoms();
-  if(allDiseases.length)renderDiseaseDb();
+  if(allDiseases.length){diseaseNavMode=currentLang==="ja"?"kana":"az";diseaseFilter="";renderAzNav();renderDiseaseDb();}
   if(drugsLoaded)renderDrugList();
 }
 
@@ -815,10 +815,11 @@ function loadDiseaseDb(species){
   .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
-let diseaseNavMode="az";
+let diseaseNavMode=null;
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   if(!azNav){console.warn("azNav element not found");return;}
+  if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"kana":"az";
   const isAz=diseaseNavMode==="az";
   const toggleLabel=isAz?"あいうえお順":"A-Z順";
   const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
@@ -848,6 +849,7 @@ function renderDiseaseDb(){
     }
   }
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
+  if(currentLang==="ja"){filtered=filtered.slice().sort((a,b)=>(a.name_ja||a.name||"").localeCompare(b.name_ja||b.name||"","ja"));}else{filtered=filtered.slice().sort((a,b)=>(a.name||"").localeCompare(b.name||"","en"));}
   document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDiseases.length);
   if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
   const pk=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
