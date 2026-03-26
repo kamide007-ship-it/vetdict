@@ -176,7 +176,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ツボカビ菌（Bd）による感染で皮膚の電解質輸送が障害され、世界的な両生類減少の原因となっている致死的疾患。",
         "urgency": "emergency",
         "recommended_tests": ["PCR検査", "皮膚スクレイピング", "組織病理検査"],
-        "causes": "Amphibianにおけるツボカビ症（Amphibian）の原因: 両生類における真菌性の皮膚疾患。ツボカビ症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
+        "causes": "Caused by the chytrid fungus Batrachochytrium dendrobatidis (Bd), which infects keratinized skin cells and disrupts cutaneous electrolyte transport. Transmission occurs through waterborne zoospores, and stress, cool temperatures, and immunosuppression increase susceptibility.",
+
         "causes_ja": "Amphibianにおけるツボカビ症（Amphibian）の原因: 両生類における真菌性の皮膚疾患。ツボカビ症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "ツボカビ症（Amphibian）はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
         "pathophysiology_ja": "ツボカビ症（Amphibian）はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -239,7 +240,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ムコール属真菌による感染で組織壊死と全身症状を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["真菌培養", "組織病理検査", "皮膚生検"],
-        "causes": "Amphibianにおけるムコール症の原因: ムコール属真菌による感染で組織壊死と全身症状を引き起こす。",
+        "causes": "Caused by opportunistic fungi of the order Mucorales (e.g., Mucor, Rhizopus). Infection typically occurs via spore inhalation or wound contamination, particularly in immunocompromised or stressed amphibians.",
+
         "causes_ja": "Amphibianにおけるムコール症の原因: ムコール属真菌による感染で組織壊死と全身症状を引き起こす。",
         "pathophysiology": "ムコール症はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
         "pathophysiology_ja": "ムコール症はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -260,7 +262,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性真菌感染で皮膚に暗色の結節性病変を形成する。",
         "urgency": "moderate",
         "recommended_tests": ["皮膚生検", "真菌培養", "組織病理検査"],
-        "causes": "Amphibianにおける黒色真菌症（Amphibian）の原因: 胞子吸入、直接接種、粘膜コロニー形成による真菌感染。免疫抑制、多湿環境、換気不良、長期抗菌薬使用が感受性を高める。",
+        "causes": "Caused by dematiaceous (darkly pigmented) fungi that invade skin and subcutaneous tissues. Infection occurs through direct inoculation via skin wounds, and humid environments with poor ventilation increase susceptibility.",
+
         "causes_ja": "Amphibianにおける黒色真菌症（Amphibian）の原因: 胞子吸入、直接接種、粘膜コロニー形成による真菌感染。免疫抑制、多湿環境、換気不良、長期抗菌薬使用が感受性を高める。",
         "pathophysiology": "黒色真菌症（Amphibian）はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
         "pathophysiology_ja": "黒色真菌症（Amphibian）はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -282,7 +285,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エロモナスなどの細菌感染による皮膚敗血症で腹面や四肢の発赤と全身症状を示す。",
         "urgency": "high",
         "recommended_tests": ["細菌培養", "感受性試験", "血液検査", "皮膚スワブ"],
-        "causes": "Amphibianにおける赤脚病（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
+        "causes": "Caused by opportunistic gram-negative bacteria, primarily Aeromonas hydrophila, that colonize through skin wounds or are exacerbated by stress, poor water quality, overcrowding, and immunosuppression.",
+
         "causes_ja": "Amphibianにおける赤脚病（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "赤脚病（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "赤脚病（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -303,7 +307,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "外傷や水質悪化に続発する表在性細菌性皮膚感染症。",
         "urgency": "moderate",
         "recommended_tests": ["細菌培養", "感受性試験", "皮膚スクレイピング"],
-        "causes": "Amphibianにおける赤脚病（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
+        "causes": "Caused by opportunistic bacteria (Aeromonas, Pseudomonas, Citrobacter spp.) that colonize damaged skin following trauma, abrasion, or poor water quality. Stress and immunosuppression are predisposing factors.",
+
         "causes_ja": "Amphibianにおける細菌性皮膚炎の原因: 外傷や水質悪化に続発する表在性細菌性皮膚感染症。",
         "pathophysiology": "赤脚病（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "細菌性皮膚炎はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -324,7 +329,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "マイコバクテリウム属による慢性肉芽腫性感染で皮膚や臓器に結節を形成する。",
         "urgency": "high",
         "recommended_tests": ["抗酸菌染色", "組織病理検査", "PCR検査", "細菌培養"],
-        "causes": "Amphibianにおける細菌性皮膚炎の原因: 外傷や水質悪化に続発する表在性細菌性皮膚感染症。",
+        "causes": "Caused by Mycobacterium spp. (e.g., M. marinum, M. fortuitum) that form chronic granulomatous infections. Transmission occurs through contaminated water, ingestion, or wound contact.",
+
         "causes_ja": "Amphibianにおけるマイコバクテリウム症（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "細菌性皮膚炎はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "マイコバクテリウム症（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -345,7 +351,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌が血流に侵入し全身感染を引き起こす重篤な状態。",
         "urgency": "emergency",
         "recommended_tests": ["血液培養", "血液検査", "感受性試験"],
-        "causes": "Amphibianにおけるマイコバクテリウム症（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
+        "causes": "Caused by bacterial invasion of the bloodstream, most commonly by gram-negative organisms such as Aeromonas, Pseudomonas, or Citrobacter. Precipitated by stress, trauma, poor water quality, or concurrent disease.",
+
         "causes_ja": "Amphibianにおける敗血症の原因: 細菌が血流に侵入し全身感染を引き起こす重篤な状態。",
         "pathophysiology": "マイコバクテリウム症（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "敗血症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -366,7 +373,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "クラミジア属による全身性感染で肝臓・脾臓障害を伴う。",
         "urgency": "high",
         "recommended_tests": ["PCR検査", "血液検査", "組織病理検査"],
-        "causes": "Amphibianにおける敗血症の原因: 細菌が血流に侵入し全身感染を引き起こす重篤な状態。",
+        "causes": "Caused by Chlamydia spp. (primarily Chlamydia pneumoniae) infection. Transmission occurs through direct contact or aerosol exposure, and stress or immunosuppression increases susceptibility.",
+
         "causes_ja": "Amphibianにおけるクラミジア症（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "敗血症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "クラミジア症（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -388,7 +396,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ラナウイルスによる出血性疾患で両生類集団に高い致死率をもたらす。",
         "urgency": "emergency",
         "recommended_tests": ["PCR検査", "ウイルス分離", "組織病理検査"],
-        "causes": "Amphibianにおけるラナウイルス感染症（Amphibian）の原因: ウイルス病原体による感染。直接接触、飛沫・空気感染、媒介物、ベクター媒介が感染経路。免疫抑制、ストレス、過密飼育、ワクチン未接種が感受性を高める。",
+        "causes": "Caused by ranaviruses (family Iridoviridae) transmitted through direct contact, contaminated water, or ingestion of infected tissue. Stress, overcrowding, and environmental changes increase susceptibility.",
+
         "causes_ja": "Amphibianにおけるラナウイルス感染症（Amphibian）の原因: ウイルス病原体による感染。直接接触、飛沫・空気感染、媒介物、ベクター媒介が感染経路。免疫抑制、ストレス、過密飼育、ワクチン未接種が感受性を高める。",
         "pathophysiology": "ラナウイルス感染症（Amphibian）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "ラナウイルス感染症（Amphibian）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -452,7 +461,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腸管内線虫の寄生による栄養不良と消化器症状。",
         "urgency": "moderate",
         "recommended_tests": ["糞便検査", "浮遊法", "顕微鏡検査"],
-        "causes": "消化器系組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
+        "causes": "Caused by parasitic nematodes (roundworms) that infect the gastrointestinal tract. Transmission occurs through ingestion of infective eggs, larvae, or intermediate hosts. Poor hygiene and stress are predisposing factors.",
+
         "causes_ja": "消化器系組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の消化器系組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の消化器系組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -473,7 +483,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "吸虫類の寄生で皮膚、腎臓、その他臓器に障害を与え、一部の種は四肢奇形を引き起こす。",
         "urgency": "moderate",
         "recommended_tests": ["糞便検査", "組織病理検査", "顕微鏡検査"],
-        "causes": "多臓器/全身組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
+        "causes": "Caused by digenean trematodes (flukes) with complex life cycles involving snail intermediate hosts. Amphibians become infected by ingesting metacercariae or through cercarial skin penetration.",
+
         "causes_ja": "多臓器/全身組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の多臓器/全身組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の多臓器/全身組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -515,7 +526,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "粘液胞子虫による各組織でのシスト形成を伴う寄生虫感染症。",
         "urgency": "moderate",
         "recommended_tests": ["組織病理検査", "顕微鏡検査", "湿潤標本検査"],
-        "causes": "消化器系組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。その他エキゾチックの食性が特定の寄生虫生活環への曝露を増加させうる。",
+        "causes": "Caused by myxosporean parasites (Myxozoa) that infect various tissues. Transmission involves complex life cycles typically requiring an invertebrate alternate host.",
+
         "causes_ja": "Amphibianにおける粘液胞子虫感染症の原因: 粘液胞子虫による各組織でのシスト形成を伴う寄生虫感染症。",
         "pathophysiology": "寄生虫は経口摂取・皮膚穿通・ベクター媒介によりその他エキゾチックの消化器系組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
         "pathophysiology_ja": "粘液胞子虫感染症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -536,7 +548,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "白点虫の寄生により水生両生類幼生の皮膚に白点を形成する。",
         "urgency": "moderate",
         "recommended_tests": ["皮膚スクレイピング", "顕微鏡検査", "水質検査"],
-        "causes": "Amphibianにおける白点病（イクチオフチリウス症）の原因: 白点虫の寄生により水生両生類幼生の皮膚に白点を形成する。",
+        "causes": "Caused by the ciliate protozoan Ichthyophthirius multifiliis, which parasitizes the skin of aquatic amphibian larvae. Transmission occurs through waterborne theronts released from cysts.",
+
         "causes_ja": "Amphibianにおける白点病（イクチオフチリウス症）の原因: 白点虫の寄生により水生両生類幼生の皮膚に白点を形成する。",
         "pathophysiology": "白点病（イクチオフチリウス症）はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "白点病（イクチオフチリウス症）はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -557,7 +570,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "毛細線虫の消化管寄生による栄養障害と衰弱。",
         "urgency": "moderate",
         "recommended_tests": ["糞便検査", "顕微鏡検査"],
-        "causes": "Amphibianにおける毛細線虫症の原因: 毛細線虫の消化管寄生による栄養障害と衰弱。",
+        "causes": "Caused by capillarid nematodes (Capillaria spp.) that parasitize the gastrointestinal tract, leading to mucosal damage, malnutrition, and debilitation.",
+
         "causes_ja": "Amphibianにおける毛細線虫症の原因: 毛細線虫の消化管寄生による栄養障害と衰弱。",
         "pathophysiology": "毛細線虫症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "毛細線虫症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -578,7 +592,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヒルの体表寄生による失血と二次感染。",
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "血液検査"],
-        "causes": "Amphibianにおけるヒル寄生症の原因: ヒルの体表寄生による失血と二次感染。",
+        "causes": "Caused by aquatic leeches (Hirudinea) that attach to the skin and feed on blood, resulting in blood loss, anemia, and secondary bacterial infections at attachment sites.",
+
         "causes_ja": "Amphibianにおけるヒル寄生症の原因: ヒルの体表寄生による失血と二次感染。",
         "pathophysiology": "ヒル寄生症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "ヒル寄生症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -621,7 +636,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンA不足による上皮組織の扁平上皮化生、特に眼に顕著。",
         "urgency": "moderate",
         "recommended_tests": ["血液検査", "食事内容評価", "眼科検査"],
-        "causes": "筋骨格系機能に影響する食事の欠乏または過剰が原因。その他エキゾチックの食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
+        "causes": "Caused by dietary deficiency of vitamin A (retinol), typically from feeding an unvaried diet lacking carotenoid-rich prey items. Leads to squamous metaplasia of epithelial tissues.",
+
         "causes_ja": "AmphibianにおけるビタミンA欠乏症の原因: ビタミンA不足による上皮組織の扁平上皮化生、特に眼に顕著。",
         "pathophysiology": "その他エキゾチックの筋骨格系機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。その他エキゾチックの食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
         "pathophysiology_ja": "ビタミンA欠乏症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -663,7 +679,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "食事またはUVB照射不足によるビタミンD3欠乏でカルシウム代謝が障害される。",
         "urgency": "moderate",
         "recommended_tests": ["血液検査", "X線検査", "飼育環境評価"],
-        "causes": "内分泌/代謝機能に影響する食事の欠乏または過剰が原因。オウムの食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
+        "causes": "Caused by insufficient vitamin D3 due to inadequate UVB light exposure and dietary deficiency. Results in impaired calcium metabolism and subsequent metabolic bone disease.",
+
         "causes_ja": "内分泌/代謝機能に影響する食事の欠乏または過剰が原因。両生類の食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
         "pathophysiology": "両生類の内分泌/代謝機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。両生類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
         "pathophysiology_ja": "両生類の内分泌/代謝機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。両生類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
@@ -684,7 +701,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "チアミナーゼを含む魚類中心の食事によるビタミンB1欠乏で神経症状を呈する。",
         "urgency": "high",
         "recommended_tests": ["血液検査", "食事内容評価", "神経学的検査"],
-        "causes": "Amphibianにおけるチアミン（ビタミンB1）欠乏症の原因: チアミナーゼを含む魚類中心の食事によるビタミンB1欠乏で神経症状を呈する。",
+        "causes": "Caused by thiamine (vitamin B1) deficiency, typically from feeding a diet high in thiaminase-containing fish. Leads to neurological dysfunction due to impaired energy metabolism.",
+
         "causes_ja": "Amphibianにおけるチアミン（ビタミンB1）欠乏症の原因: チアミナーゼを含む魚類中心の食事によるビタミンB1欠乏で神経症状を呈する。",
         "pathophysiology": "チアミン（ビタミンB1）欠乏症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
         "pathophysiology_ja": "チアミン（ビタミンB1）欠乏症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -706,7 +724,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水中アンモニア濃度上昇による鰓・皮膚の障害。",
         "urgency": "emergency",
         "recommended_tests": ["水質検査（アンモニア）", "鰓検査", "血液検査"],
-        "causes": "Amphibianにおけるアンモニア中毒の原因: 水中アンモニア濃度上昇による鰓・皮膚の障害。",
+        "causes": "Caused by elevated ammonia levels in the aquatic environment due to inadequate filtration, overcrowding, or overfeeding. Ammonia damages gill epithelium and permeable skin.",
+
         "causes_ja": "Amphibianにおけるアンモニア中毒の原因: 水中アンモニア濃度上昇による鰓・皮膚の障害。",
         "pathophysiology": "アンモニア中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
         "pathophysiology_ja": "アンモニア中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -727,7 +746,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "亜硝酸塩の毒性によるメトヘモグロビン血症で酸素輸送が障害される。",
         "urgency": "emergency",
         "recommended_tests": ["水質検査（亜硝酸）", "血液検査"],
-        "causes": "Amphibianにおける亜硝酸中毒の原因: 亜硝酸塩の毒性によるメトヘモグロビン血症で酸素輸送が障害される。",
+        "causes": "Caused by elevated nitrite levels in the water, which induce methemoglobinemia by oxidizing hemoglobin, impairing oxygen transport in the blood.",
+
         "causes_ja": "Amphibianにおける亜硝酸中毒の原因: 亜硝酸塩の毒性によるメトヘモグロビン血症で酸素輸送が障害される。",
         "pathophysiology": "亜硝酸中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
         "pathophysiology_ja": "亜硝酸中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -748,7 +768,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "塩素処理水への曝露による急性の皮膚・鰓障害。",
         "urgency": "emergency",
         "recommended_tests": ["水質検査（残留塩素）", "身体検査"],
-        "causes": "Amphibianにおける塩素・クロラミン中毒の原因: 塩素処理水への曝露による急性の皮膚・鰓障害。",
+        "causes": "Caused by exposure to chlorinated or chloraminated tap water that has not been dechlorinated. Chlorine and chloramine cause acute chemical damage to gills and permeable skin.",
+
         "causes_ja": "Amphibianにおける塩素・クロラミン中毒の原因: 塩素処理水への曝露による急性の皮膚・鰓障害。",
         "pathophysiology": "塩素・クロラミン中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
         "pathophysiology_ja": "塩素・クロラミン中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -769,7 +790,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "農薬、除草剤、重金属などの環境汚染物質による中毒。",
         "urgency": "emergency",
         "recommended_tests": ["毒物スクリーニング", "水質検査", "血液検査"],
-        "causes": "Amphibianにおける化学物質中毒（農薬・重金属）の原因: 農薬、除草剤、重金属などの環境汚染物質による中毒。",
+        "causes": "Caused by exposure to environmental contaminants including pesticides, herbicides, heavy metals, and industrial pollutants. Amphibians are highly susceptible due to their permeable skin.",
+
         "causes_ja": "Amphibianにおける化学物質中毒（農薬・重金属）の原因: 農薬、除草剤、重金属などの環境汚染物質による中毒。",
         "pathophysiology": "化学物質中毒（農薬・重金属）はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
         "pathophysiology_ja": "化学物質中毒（農薬・重金属）はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -790,7 +812,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性的なアンモニア高濃度環境による皮膚・粘膜の化学的熱傷。",
         "urgency": "moderate",
         "recommended_tests": ["水質検査", "皮膚検査", "身体検査"],
-        "causes": "Amphibianにおけるアンモニア熱傷の原因: 慢性的なアンモニア高濃度環境による皮膚・粘膜の化学的熱傷。",
+        "causes": "Caused by chronic exposure to elevated ammonia levels in the aquatic environment, resulting in progressive chemical burns to the skin and mucous membranes.",
+
         "causes_ja": "Amphibianにおけるアンモニア熱傷の原因: 慢性的なアンモニア高濃度環境による皮膚・粘膜の化学的熱傷。",
         "pathophysiology": "アンモニア熱傷はAmphibianにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
         "pathophysiology_ja": "アンモニア熱傷はAmphibianにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -812,7 +835,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "種の耐性を超える高温環境による熱ストレス。",
         "urgency": "high",
         "recommended_tests": ["環境温度測定", "身体検査"],
-        "causes": "Amphibianにおける温熱ストレス（高体温症）の原因: 種の耐性を超える高温環境による熱ストレス。",
+        "causes": "Caused by ambient temperatures exceeding the species-specific thermal tolerance range. Amphibians are ectothermic and cannot thermoregulate effectively when environmental temperatures are excessive.",
+
         "causes_ja": "Amphibianにおける温熱ストレス（高体温症）の原因: 種の耐性を超える高温環境による熱ストレス。",
         "pathophysiology": "温熱ストレス（高体温症）はAmphibianにおける行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
         "pathophysiology_ja": "温熱ストレス（高体温症）はAmphibianにおける行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
@@ -875,7 +899,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "飼育環境の危険物、ハンドリング、同種間攻撃による物理的損傷。",
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "創傷培養", "X線検査"],
-        "causes": "Amphibianにおける外傷・擦傷の原因: 飼育環境の危険物、ハンドリング、同種間攻撃による物理的損傷。",
+        "causes": "Caused by physical injury from rough enclosure surfaces, improper handling, conspecific aggression, or predator attacks. Skin abrasions in amphibians readily become secondarily infected.",
+
         "causes_ja": "Amphibianにおける外傷・擦傷の原因: 飼育環境の危険物、ハンドリング、同種間攻撃による物理的損傷。",
         "pathophysiology": "外傷・擦傷はAmphibianにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
         "pathophysiology_ja": "外傷・擦傷はAmphibianにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -897,7 +922,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎臓・肝臓・心臓機能障害による全身性または局所的な液体貯留。",
         "urgency": "high",
         "recommended_tests": ["超音波検査", "血液生化学検査", "腹水穿刺検査", "X線検査"],
-        "causes": "Amphibianにおける浮腫・水腫（腹水症）の原因: 腎臓・肝臓・心臓機能障害による全身性または局所的な液体貯留。",
+        "causes": "Caused by fluid accumulation due to renal, hepatic, or cardiac dysfunction, or by osmotic imbalance from poor water quality. Bacterial septicemia is a common underlying cause.",
+
         "causes_ja": "Amphibianにおける浮腫・水腫（腹水症）の原因: 腎臓・肝臓・心臓機能障害による全身性または局所的な液体貯留。",
         "pathophysiology": "浮腫・水腫（腹水症）はAmphibianにおける循環器疾患である。心臓、大血管、または末梢血管系の構造的・機能的異常を伴う。心拍出量の低下、弁膜機能障害、調律異常により組織灌流が障害される。代償機構（神経ホルモン活性化、心室リモデリング）が一時的に機能を維持するが、進行性の心筋劣化を引き起こす。心不全、血栓塞栓症、突然死が進行期疾患の潜在的結果である。",
         "pathophysiology_ja": "浮腫・水腫（腹水症）はAmphibianにおける循環器疾患である。心臓、大血管、または末梢血管系の構造的・機能的異常を伴う。心拍出量の低下、弁膜機能障害、調律異常により組織灌流が障害される。代償機構（神経ホルモン活性化、心室リモデリング）が一時的に機能を維持するが、進行性の心筋劣化を引き起こす。心不全、血栓塞栓症、突然死が進行期疾患の潜在的結果である。",
@@ -918,7 +944,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水中のガス過飽和により皮下気腫や血管ガス塞栓を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["水質検査（溶存酸素）", "身体検査", "X線検査"],
-        "causes": "Amphibianにおける浮腫・水腫（腹水症）の原因: 腎臓・肝臓・心臓機能障害による全身性または局所的な液体貯留。",
+        "causes": "Caused by gas supersaturation of the water, leading to gas bubble formation in blood vessels and tissues. Typically results from rapid changes in water temperature or pressure.",
+
         "causes_ja": "Amphibianにおける気泡病（Amphibian）の原因: 環境的危険、落下、不適切な取り扱い、同種間攻撃、捕食者攻撃、温度極端による物理的損傷。不適切な飼育環境がリスクを高める。",
         "pathophysiology": "浮腫・水腫（腹水症）はAmphibianにおける循環器疾患である。心臓、大血管、または末梢血管系の構造的・機能的異常を伴う。心拍出量の低下、弁膜機能障害、調律異常により組織灌流が障害される。代償機構（神経ホルモン活性化、心室リモデリング）が一時的に機能を維持するが、進行性の心筋劣化を引き起こす。心不全、血栓塞栓症、突然死が進行期疾患の潜在的結果である。",
         "pathophysiology_ja": "気泡病（Amphibian）はAmphibianにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -940,7 +967,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "床材、大きすぎる餌、異物の摂取による消化管閉塞。",
         "urgency": "high",
         "recommended_tests": ["X線検査", "超音波検査", "身体検査"],
-        "causes": "Amphibianにおける腸閉塞（腸インパクション）の原因: 床材、大きすぎる餌、異物の摂取による消化管閉塞。",
+        "causes": "Caused by ingestion of substrate material, oversized prey items, or foreign objects that obstruct the gastrointestinal tract. Inappropriate substrate and feeding practices are primary risk factors.",
+
         "causes_ja": "Amphibianにおける腸閉塞（腸インパクション）の原因: 床材、大きすぎる餌、異物の摂取による消化管閉塞。",
         "pathophysiology": "腸閉塞（腸インパクション）はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "pathophysiology_ja": "腸閉塞（腸インパクション）はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -961,7 +989,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "床材や砂利などの非食物の摂取による消化管閉塞。",
         "urgency": "high",
         "recommended_tests": ["X線検査", "超音波検査", "身体検査"],
-        "causes": "Amphibianにおける腸閉塞（腸インパクション）の原因: 床材、大きすぎる餌、異物の摂取による消化管閉塞。",
+        "causes": "Caused by accidental ingestion of non-food items such as substrate particles, decorations, or other foreign bodies that cause gastrointestinal obstruction.",
+
         "causes_ja": "消化器系組織への物理的外傷が原因。転落・ケージ損傷・取扱い事故・同居個体や捕食者からの咬傷・環境危険物が一般的原因。両生類の解剖学的特性が特定の損傷タイプへの素因となりうる。二次合併症として感染・治癒遅延・慢性疼痛がある。",
         "pathophysiology": "両生類の消化器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
         "pathophysiology_ja": "両生類の消化器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
@@ -982,7 +1011,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "過剰給餌による胃拡張と吐き戻し。",
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "X線検査", "食事評価"],
-        "causes": "Amphibianにおける胃過負荷の原因: 過剰給餌による胃拡張と吐き戻し。",
+        "causes": "Caused by overfeeding or ingestion of excessively large prey items, leading to gastric overdistension and subsequent regurgitation.",
+
         "causes_ja": "Amphibianにおける胃過負荷の原因: 過剰給餌による胃拡張と吐き戻し。",
         "pathophysiology": "胃過負荷はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "pathophysiology_ja": "胃過負荷はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -1004,7 +1034,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "いきみ、寄生虫、生殖器の問題などによる総排泄腔組織の脱出。",
         "urgency": "emergency",
         "recommended_tests": ["身体検査", "糞便検査", "X線検査"],
-        "causes": "Amphibianにおける胃過負荷の原因: 過剰給餌による胃拡張と吐き戻し。",
+        "causes": "Caused by straining from constipation, parasitic infection, gastrointestinal obstruction, or reproductive complications, leading to eversion of cloacal tissue.",
+
         "causes_ja": "生殖器系組織への物理的外傷が原因。転落・ケージ損傷・取扱い事故・同居個体や捕食者からの咬傷・環境危険物が一般的原因。両生類の解剖学的特性が特定の損傷タイプへの素因となりうる。二次合併症として感染・治癒遅延・慢性疼痛がある。",
         "pathophysiology": "両生類の生殖器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
         "pathophysiology_ja": "両生類の生殖器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
@@ -1025,7 +1056,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "胃が口から反転脱出する緊急状態。",
         "urgency": "emergency",
         "recommended_tests": ["身体検査", "X線検査"],
-        "causes": "Amphibianにおける胃脱の原因: 胃が口から反転脱出する緊急状態。",
+        "causes": "Caused by forceful regurgitation or straining that results in eversion of the stomach through the mouth. Often associated with gastric overload, foreign body ingestion, or parasitism.",
+
         "causes_ja": "Amphibianにおける胃脱の原因: 胃が口から反転脱出する緊急状態。",
         "pathophysiology": "胃脱はAmphibianにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
         "pathophysiology_ja": "胃脱はAmphibianにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -1046,7 +1078,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "総排泄腔からの腸管組織の脱出。速やかな獣医処置が必要。",
         "urgency": "emergency",
         "recommended_tests": ["身体検査", "X線検査"],
-        "causes": "消化器系組織への物理的外傷が原因。転落・ケージ損傷・取扱い事故・同居個体や捕食者からの咬傷・環境危険物が一般的原因。両生類の解剖学的特性が特定の損傷タイプへの素因となりうる。二次合併症として感染・治癒遅延・慢性疼痛がある。",
+        "causes": "Caused by chronic straining from parasitism, constipation, foreign body obstruction, or dystocia, resulting in prolapse of intestinal tissue through the cloaca.",
+
         "causes_ja": "消化器系組織への物理的外傷が原因。転落・ケージ損傷・取扱い事故・同居個体や捕食者からの咬傷・環境危険物が一般的原因。両生類の解剖学的特性が特定の損傷タイプへの素因となりうる。二次合併症として感染・治癒遅延・慢性疼痛がある。",
         "pathophysiology": "両生類の消化器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
         "pathophysiology_ja": "両生類の消化器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
@@ -1068,7 +1101,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "変態中の子ガエルに発生する四肢の発達異常で、栄養・環境因子と関連する。",
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "飼育環境評価", "食事内容評価"],
-        "causes": "筋骨格系機能に影響する食事の欠乏または過剰が原因。両生類の食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
+        "causes": "Caused by nutritional deficiencies (especially calcium and vitamin D3), inadequate UVB exposure, and improper husbandry during larval and early post-metamorphic development.",
+
         "causes_ja": "筋骨格系機能に影響する食事の欠乏または過剰が原因。両生類の食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
         "pathophysiology": "両生類の筋骨格系機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。両生類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
         "pathophysiology_ja": "両生類の筋骨格系機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。両生類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
@@ -1089,7 +1123,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "オタマジャクシおよび子ガエルにおける先天的・発達的な軸骨格短縮。",
         "urgency": "moderate",
         "recommended_tests": ["X線検査", "身体検査"],
-        "causes": "Amphibianにおけるショートボディ症候群の原因: オタマジャクシおよび子ガエルにおける先天的・発達的な軸骨格短縮。",
+        "causes": "Caused by congenital or developmental axial skeletal shortening in tadpoles and froglets, often linked to genetic factors, water quality issues, or nutritional deficiencies during development.",
+
         "causes_ja": "Amphibianにおけるショートボディ症候群の原因: オタマジャクシおよび子ガエルにおける先天的・発達的な軸骨格短縮。",
         "pathophysiology": "ショートボディ症候群はAmphibianにおける先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
         "pathophysiology_ja": "ショートボディ症候群はAmphibianにおける先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
@@ -1111,7 +1146,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "皮膚、肝臓、腎臓その他の臓器に発生する良性または悪性腫瘍。",
         "urgency": "moderate",
         "recommended_tests": ["組織生検", "X線検査", "超音波検査", "血液検査"],
-        "causes": "Amphibianにおけるショートボディ症候群の原因: オタマジャクシおよび子ガエルにおける先天的・発達的な軸骨格短縮。",
+        "causes": "Caused by spontaneous neoplastic transformation, with various tumor types reported in amphibians. Aging, chronic inflammation, viral infection, and environmental carcinogens may contribute.",
+
         "causes_ja": "Amphibianにおける腫瘍性疾患の原因: 皮膚、肝臓、腎臓その他の臓器に発生する良性または悪性腫瘍。",
         "pathophysiology": "ショートボディ症候群はAmphibianにおける先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
         "pathophysiology_ja": "腫瘍性疾患はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -1133,7 +1169,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "高脂肪食などに関連する角膜への脂質沈着による白濁。",
         "urgency": "low",
         "recommended_tests": ["眼科検査", "血液脂質検査", "食事内容評価"],
-        "causes": "Amphibianにおける角膜脂質症（Amphibian）の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
+        "causes": "Caused by lipid deposition in the corneal stroma, associated with hyperlipidemia from metabolic disorders, obesity, high-fat diets, or hepatic dysfunction.",
+
         "causes_ja": "Amphibianにおける角膜脂質症（Amphibian）の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
         "pathophysiology": "角膜脂質症（Amphibian）はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "角膜脂質症（Amphibian）はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -1154,7 +1191,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水晶体の混濁による視力障害。先天性、栄養性、加齢性がある。",
         "urgency": "low",
         "recommended_tests": ["眼科検査", "超音波検査"],
-        "causes": "Amphibianにおける角膜脂質症（Amphibian）の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
+        "causes": "Caused by lens opacification due to aging, UV exposure, nutritional deficiencies, metabolic disorders, toxin exposure, or congenital factors.",
+
         "causes_ja": "加齢・慢性的摩耗・累積的損傷による眼科組織の進行性劣化が原因。遺伝的素因・慢性炎症・酸化ストレス・不適切な飼育条件が寄与。両生類の飼育管理と食事因子が変性変化を加速しうる。",
         "pathophysiology": "両生類の眼科組織における進行性変性変化は、細胞構造と機能の漸進的喪失を伴う。酸化ストレス・慢性炎症・細胞老化・組織修復障害が関与する。加齢変化・累積的環境侵襲・遺伝的素因が疾患進行に寄与する。飼育管理と食事要因が変性疾患を悪化させうる。",
         "pathophysiology_ja": "両生類の眼科組織における進行性変性変化は、細胞構造と機能の漸進的喪失を伴う。酸化ストレス・慢性炎症・細胞老化・組織修復障害が関与する。加齢変化・累積的環境侵襲・遺伝的素因が疾患進行に寄与する。飼育管理と食事要因が変性疾患を悪化させうる。",
@@ -1175,7 +1213,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "全身疾患、感染、水質問題に関連する眼周囲の腫脹。",
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "血液検査", "水質検査"],
-        "causes": "Amphibianにおける眼窩周囲浮腫の原因: 全身疾患、感染、水質問題に関連する眼周囲の腫脹。",
+        "causes": "Caused by fluid accumulation around the eyes secondary to systemic disease, bacterial infection, renal dysfunction, or poor water quality.",
+
         "causes_ja": "Amphibianにおける眼窩周囲浮腫の原因: 全身疾患、感染、水質問題に関連する眼周囲の腫脹。",
         "pathophysiology": "眼窩周囲浮腫はAmphibianにおける眼科疾患である。眼球、付属器、または視覚経路に影響を及ぼす炎症性、変性、または構造的変化を伴う。眼内炎症は血液房水関門・血液網膜関門を破壊し、蛋白漏出、細胞浸潤、視力喪失の可能性がある。眼圧上昇は視神経と網膜神経節細胞を損傷する。角膜潰瘍はデスメ膜瘤や穿孔に進行しうる。",
         "pathophysiology_ja": "眼窩周囲浮腫はAmphibianにおける眼科疾患である。眼球、付属器、または視覚経路に影響を及ぼす炎症性、変性、または構造的変化を伴う。眼内炎症は血液房水関門・血液網膜関門を破壊し、蛋白漏出、細胞浸潤、視力喪失の可能性がある。眼圧上昇は視神経と網膜神経節細胞を損傷する。角膜潰瘍はデスメ膜瘤や穿孔に進行しうる。",
@@ -1197,7 +1236,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "感染、毒素、慢性疾患による腎機能障害で体液バランスが崩れる。",
         "urgency": "high",
         "recommended_tests": ["血液生化学検査", "尿検査", "超音波検査"],
-        "causes": "Amphibianにおける眼窩周囲浮腫の原因: 全身疾患、感染、水質問題に関連する眼周囲の腫脹。",
+        "causes": "Caused by renal pathology from infectious agents, nephrotoxins, chronic dehydration, urolithiasis, or congenital defects. Aging, diet, and species-specific susceptibility are contributing factors.",
+
         "causes_ja": "Amphibianにおける腎不全（Amphibian）の原因: 感染性病原体、毒素、免疫学的過程、尿石症、先天性欠損、慢性脱水による腎病理。加齢、食事、種特異的感受性が寄与因子。",
         "pathophysiology": "眼窩周囲浮腫はAmphibianにおける眼科疾患である。眼球、付属器、または視覚経路に影響を及ぼす炎症性、変性、または構造的変化を伴う。眼内炎症は血液房水関門・血液網膜関門を破壊し、蛋白漏出、細胞浸潤、視力喪失の可能性がある。眼圧上昇は視神経と網膜神経節細胞を損傷する。角膜潰瘍はデスメ膜瘤や穿孔に進行しうる。",
         "pathophysiology_ja": "腎不全（Amphibian）はAmphibianにおける腎・泌尿器疾患である。腎臓、尿管、膀胱、または尿道の構造的・機能的障害を伴う。腎疾患は糸球体濾過、尿細管再吸収・分泌、およびホルモン機能（エリスロポエチン、カルシトリオール、レニン）を障害する。進行性のネフロン喪失により高窒素血症、電解質異常、酸塩基障害が生じる。下部尿路疾患は閉塞、尿石症、上行感染を引き起こしうる。",
@@ -1218,7 +1258,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "過剰給餌、肥満、代謝障害による脂肪肝。",
         "urgency": "high",
         "recommended_tests": ["血液生化学検査", "超音波検査", "肝生検"],
-        "causes": "Amphibianにおける腎不全（Amphibian）の原因: 感染性病原体、毒素、免疫学的過程、尿石症、先天性欠損、慢性脱水による腎病理。加齢、食事、種特異的感受性が寄与因子。",
+        "causes": "Caused by excessive hepatic lipid accumulation, typically from obesity, high-fat diets, starvation-induced lipid mobilization, or metabolic disorders.",
+
         "causes_ja": "Amphibianにおける肝リピドーシス（Amphibian）の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
         "pathophysiology": "腎不全（Amphibian）はAmphibianにおける腎・泌尿器疾患である。腎臓、尿管、膀胱、または尿道の構造的・機能的障害を伴う。腎疾患は糸球体濾過、尿細管再吸収・分泌、およびホルモン機能（エリスロポエチン、カルシトリオール、レニン）を障害する。進行性のネフロン喪失により高窒素血症、電解質異常、酸塩基障害が生じる。下部尿路疾患は閉塞、尿石症、上行感染を引き起こしうる。",
         "pathophysiology_ja": "肝リピドーシス（Amphibian）はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -1326,7 +1367,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水質悪化に伴う細菌性の尾や四肢末端の進行性壊死。",
         "urgency": "high",
         "recommended_tests": ["細菌培養", "水質検査", "身体検査"],
-        "causes": "Amphibianにおける尾腐れ・壊死性皮膚炎の原因: 水質悪化に伴う細菌性の尾や四肢末端の進行性壊死。",
+        "causes": "Caused by opportunistic bacteria (Aeromonas, Pseudomonas, Flavobacterium spp.) that cause progressive necrosis of the tail and extremities, exacerbated by poor water quality.",
+
         "causes_ja": "Amphibianにおける尾腐れ・壊死性皮膚炎の原因: 水質悪化に伴う細菌性の尾や四肢末端の進行性壊死。",
         "pathophysiology": "肥満症はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "尾腐れ・壊死性皮膚炎はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1347,7 +1389,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌感染や環境要因による両生類幼生の外鰓障害。",
         "urgency": "high",
         "recommended_tests": ["水質検査", "鰓スクレイピング", "細菌培養"],
-        "causes": "Amphibianにおける尾腐れ・壊死性皮膚炎の原因: 水質悪化に伴う細菌性の尾や四肢末端の進行性壊死。",
+        "causes": "Caused by bacterial infection (primarily Flavobacterium and Aeromonas spp.) of larval gills, often secondary to poor water quality, overcrowding, or elevated ammonia levels.",
+
         "causes_ja": "Amphibianにおける鰓壊死（幼生期）の原因: 細菌感染や環境要因による両生類幼生の外鰓障害。",
         "pathophysiology": "尾腐れ・壊死性皮膚炎はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "鰓壊死（幼生期）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1412,7 +1455,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヒョウガエルにおけるヘルペスウイルス関連腎腺癌。",
         "urgency": "high",
         "recommended_tests": ["histopathology", "PCR_herpesvirus", "ultrasound"],
-        "causes": "Amphibianにおけるルッケ腫瘍ヘルペスウイルス（腎癌）の原因: ヒョウガエルにおけるヘルペスウイルス関連腎腺癌。",
+        "causes": "Caused by Lucke tumor herpesvirus (Ranid herpesvirus 1) that induces renal adenocarcinoma in leopard frogs (Rana pipiens). Temperature-dependent viral replication influences tumor development.",
+
         "causes_ja": "Amphibianにおけるルッケ腫瘍ヘルペスウイルス（腎癌）の原因: ヒョウガエルにおけるヘルペスウイルス関連腎腺癌。",
         "pathophysiology": "ルッケ腫瘍ヘルペスウイルス（腎癌）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "ルッケ腫瘍ヘルペスウイルス（腎癌）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1433,7 +1477,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ラナウイルスの基準種で、出血性疾患と多臓器壊死を引き起こす。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_FV3", "histopathology", "virus_isolation"],
-        "causes": "Amphibianにおけるカエルウイルス3型（FV3）の原因: ラナウイルスの基準種で、出血性疾患と多臓器壊死を引き起こす。",
+        "causes": "Caused by Frog Virus 3 (FV3), the type species of the genus Ranavirus (family Iridoviridae), which causes hemorrhagic disease and multiorgan necrosis in amphibians.",
+
         "causes_ja": "Amphibianにおけるカエルウイルス3型（FV3）の原因: ラナウイルスの基準種で、出血性疾患と多臓器壊死を引き起こす。",
         "pathophysiology": "カエルウイルス3型（FV3）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "カエルウイルス3型（FV3）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1454,7 +1499,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "主にタイガーサラマンダーと関連種に疾患を引き起こすラナウイルス。",
         "urgency": "emergency",
         "recommended_tests": ["PCR_ATV", "histopathology"],
-        "causes": "Amphibianにおけるタイガーサラマンダーウイルスの原因: 主にタイガーサラマンダーと関連種に疾患を引き起こすラナウイルス。",
+        "causes": "Caused by Ambystoma tigrinum virus (ATV), a ranavirus that primarily affects tiger salamanders and related ambystomatid species, causing systemic hemorrhagic disease.",
+
         "causes_ja": "Amphibianにおけるタイガーサラマンダーウイルスの原因: 主にタイガーサラマンダーと関連種に疾患を引き起こすラナウイルス。",
         "pathophysiology": "タイガーサラマンダーウイルスはAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "タイガーサラマンダーウイルスはAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1475,7 +1521,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "両生類に水疱性皮膚疾患を引き起こすカリシウイルス。",
         "urgency": "high",
         "recommended_tests": ["PCR_calicivirus", "histopathology", "skin_biopsy"],
-        "causes": "Amphibianにおけるカリシウイルス感染症の原因: 両生類に水疱性皮膚疾患を引き起こすカリシウイルス。",
+        "causes": "Caused by calicivirus infection in amphibians, producing vesicular skin lesions. Transmission occurs through direct contact or contaminated water.",
+
         "causes_ja": "Amphibianにおけるカリシウイルス感染症の原因: 両生類に水疱性皮膚疾患を引き起こすカリシウイルス。",
         "pathophysiology": "カリシウイルス感染症はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "カリシウイルス感染症はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1496,7 +1543,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アデノウイルスによる肝炎と全身性疾患。",
         "urgency": "high",
         "recommended_tests": ["PCR_adenovirus", "histopathology"],
-        "causes": "Amphibianにおけるアデノウイルス感染（Amphibian）の原因: ウイルス病原体による感染。直接接触、飛沫・空気感染、媒介物、ベクター媒介が感染経路。免疫抑制、ストレス、過密飼育、ワクチン未接種が感受性を高める。",
+        "causes": "Caused by adenovirus infection transmitted through direct contact, fomites, or contaminated water. Immunosuppression, stress, and overcrowding increase susceptibility.",
+
         "causes_ja": "Amphibianにおけるアデノウイルス感染（Amphibian）の原因: ウイルス病原体による感染。直接接触、飛沫・空気感染、媒介物、ベクター媒介が感染経路。免疫抑制、ストレス、過密飼育、ワクチン未接種が感受性を高める。",
         "pathophysiology": "アデノウイルス感染（Amphibian）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "アデノウイルス感染（Amphibian）はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1517,7 +1565,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "無尾類に皮膚乳頭腫を引き起こすパピローマウイルス。",
         "urgency": "low",
         "recommended_tests": ["biopsy", "histopathology"],
-        "causes": "Amphibianにおけるパピローマウイルス感染症の原因: 無尾類に皮膚乳頭腫を引き起こすパピローマウイルス。",
+        "causes": "Caused by papillomavirus infection that induces cutaneous papillomas (wart-like growths) in anuran amphibians. Transmission occurs through direct contact.",
+
         "causes_ja": "Amphibianにおけるパピローマウイルス感染症の原因: 無尾類に皮膚乳頭腫を引き起こすパピローマウイルス。",
         "pathophysiology": "パピローマウイルス感染症はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "パピローマウイルス感染症はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1538,7 +1587,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "急性エロモナス感染による重度のレッドレッグと敗血症。",
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
-        "causes": "Amphibianにおけるエロモナス・ハイドロフィラ急性感染症の原因: 急性エロモナス感染による重度のレッドレッグと敗血症。",
+        "causes": "Caused by acute infection with Aeromonas hydrophila, an opportunistic gram-negative bacterium that causes severe red leg syndrome and septicemia, particularly under stressful conditions.",
+
         "causes_ja": "Amphibianにおけるエロモナス・ハイドロフィラ急性感染症の原因: 急性エロモナス感染による重度のレッドレッグと敗血症。",
         "pathophysiology": "エロモナス・ハイドロフィラ急性感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "エロモナス・ハイドロフィラ急性感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1559,7 +1609,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "緑膿菌による皮膚炎と敗血症。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "gram_stain"],
-        "causes": "Amphibianにおけるエロモナス・ハイドロフィラ急性感染症の原因: 急性エロモナス感染による重度のレッドレッグと敗血症。",
+        "causes": "Caused by Pseudomonas aeruginosa and related species, opportunistic gram-negative bacteria that cause skin ulceration and septicemia, especially in immunocompromised amphibians.",
+
         "causes_ja": "Amphibianにおける緑膿菌感染（Amphibian）の原因: 両生類における細菌性の多臓器/全身疾患。緑膿菌感染は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "エロモナス・ハイドロフィラ急性感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "緑膿菌感染（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1580,7 +1631,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "シトロバクター・フロインディによる潰瘍性皮膚疾患と敗血症。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing"],
-        "causes": "Amphibianにおける緑膿菌感染（Amphibian）の原因: 両生類における細菌性の多臓器/全身疾患。緑膿菌感染は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
+        "causes": "Caused by Citrobacter freundii, an opportunistic gram-negative bacterium that produces ulcerative skin disease and septicemia in stressed or immunocompromised amphibians.",
+
         "causes_ja": "Amphibianにおけるシトロバクター感染症の原因: シトロバクター・フロインディによる潰瘍性皮膚疾患と敗血症。",
         "pathophysiology": "緑膿菌感染（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "シトロバクター感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1601,7 +1653,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "フラボバクテリウムによる皮膚びらんと鰓疾患。特に幼生に多い。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "skin_scraping", "gill_biopsy"],
-        "causes": "Amphibianにおけるシトロバクター感染症の原因: シトロバクター・フロインディによる潰瘍性皮膚疾患と敗血症。",
+        "causes": "Caused by Flavobacterium spp. that produce skin erosion and gill disease, particularly in larval amphibians. Poor water quality is a major predisposing factor.",
+
         "causes_ja": "Amphibianにおけるフラボバクテリウム感染症の原因: フラボバクテリウムによる皮膚びらんと鰓疾患。特に幼生に多い。",
         "pathophysiology": "シトロバクター感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "フラボバクテリウム感染症はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -1622,7 +1675,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "サルモネラ属感染症。人獣共通感染症の懸念あり。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "PCR_salmonella"],
-        "causes": "Amphibianにおけるフラボバクテリウム感染症の原因: フラボバクテリウムによる皮膚びらんと鰓疾患。特に幼生に多い。",
+        "causes": "Caused by Salmonella spp. infection, typically acquired through contaminated water, food, or fecal-oral transmission. Amphibians can be asymptomatic carriers and a zoonotic risk.",
+
         "causes_ja": "Amphibianにおけるサルモネラ症（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "フラボバクテリウム感染症はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
         "pathophysiology_ja": "サルモネラ症（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1643,7 +1697,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エリザベスキンギア・メニンゴセプティカによる敗血症と髄膜炎。",
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
-        "causes": "Amphibianにおけるサルモネラ症（Amphibian）の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
+        "causes": "Caused by Elizabethkingia meningoseptica (formerly Chryseobacterium), an opportunistic gram-negative bacterium that causes septicemia and meningitis in amphibians.",
+
         "causes_ja": "Amphibianにおけるエリザベスキンギア感染症の原因: エリザベスキンギア・メニンゴセプティカによる敗血症と髄膜炎。",
         "pathophysiology": "サルモネラ症（Amphibian）はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "エリザベスキンギア感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1664,7 +1719,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エリシペロスリクスによる敗血症。",
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "histopathology"],
-        "causes": "Amphibianにおけるエリザベスキンギア感染症の原因: エリザベスキンギア・メニンゴセプティカによる敗血症と髄膜炎。",
+        "causes": "Caused by Erysipelothrix rhusiopathiae, a gram-positive bacterium that causes acute septicemia in amphibians. Infection occurs through skin wounds or ingestion.",
+
         "causes_ja": "Amphibianにおける丹毒の原因: エリシペロスリクスによる敗血症。",
         "pathophysiology": "エリザベスキンギア感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "丹毒はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1685,7 +1741,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "バシディオボルス・ラナルムによる皮下接合菌症。",
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "biopsy", "histopathology"],
-        "causes": "Amphibianにおける丹毒の原因: エリシペロスリクスによる敗血症。",
+        "causes": "Caused by Basidiobolus ranarum, a zygomycete fungus commonly found in amphibian gastrointestinal tracts that can cause subcutaneous granulomatous infection.",
+
         "causes_ja": "Amphibianにおけるバシディオボルス感染症の原因: バシディオボルス・ラナルムによる皮下接合菌症。",
         "pathophysiology": "丹毒はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "バシディオボルス感染症はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -1706,7 +1763,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "フザリウム属による皮膚真菌症。",
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "skin_biopsy"],
-        "causes": "Amphibianにおけるフザリウム感染症の原因: フザリウム属による皮膚真菌症。",
+        "causes": "Caused by Fusarium spp., opportunistic filamentous fungi that cause cutaneous mycosis in amphibians, particularly in immunocompromised individuals or those with skin damage.",
+
         "causes_ja": "Amphibianにおけるフザリウム感染症の原因: フザリウム属による皮膚真菌症。",
         "pathophysiology": "フザリウム感染症はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
         "pathophysiology_ja": "フザリウム感染症はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -1727,7 +1785,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "アスペルギルス属による呼吸器・皮膚疾患。",
         "urgency": "high",
         "recommended_tests": ["fungal_culture", "histopathology", "radiography"],
-        "causes": "Amphibianにおけるアスペルギルス症（Amphibian）の原因: 胞子吸入、直接接種、粘膜コロニー形成による真菌感染。免疫抑制、多湿環境、換気不良、長期抗菌薬使用が感受性を高める。",
+        "causes": "Caused by Aspergillus spp. infection through spore inhalation or direct wound inoculation. Immunosuppression, high humidity, poor ventilation, and prolonged antibiotic use increase susceptibility.",
+
         "causes_ja": "Amphibianにおけるアスペルギルス症（Amphibian）の原因: 胞子吸入、直接接種、粘膜コロニー形成による真菌感染。免疫抑制、多湿環境、換気不良、長期抗菌薬使用が感受性を高める。",
         "pathophysiology": "アスペルギルス症（Amphibian）はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
         "pathophysiology_ja": "アスペルギルス症（Amphibian）はAmphibianにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -1748,7 +1807,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "デルモシスチジウム属による両生類の皮膚嚢胞。",
         "urgency": "moderate",
         "recommended_tests": ["skin_biopsy", "histopathology"],
-        "causes": "Amphibianにおけるデルモシスチジウム感染症の原因: デルモシスチジウム属による両生類の皮膚嚢胞。",
+        "causes": "Caused by Dermocystidium spp., protistan parasites that form dermal and subcutaneous cysts in amphibians. Transmission occurs through waterborne spores.",
+
         "causes_ja": "Amphibianにおけるデルモシスチジウム感染症の原因: デルモシスチジウム属による両生類の皮膚嚢胞。",
         "pathophysiology": "デルモシスチジウム感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "デルモシスチジウム感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1769,7 +1829,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヒル媒介のトリパノソーマ属血液寄生虫。",
         "urgency": "moderate",
         "recommended_tests": ["blood_smear", "PCR_trypanosoma"],
-        "causes": "Amphibianにおけるデルモシスチジウム感染症の原因: デルモシスチジウム属による両生類の皮膚嚢胞。",
+        "causes": "Caused by Trypanosoma spp., flagellate blood parasites transmitted by leeches or other hematophagous vectors. Infection causes anemia and immunosuppression.",
+
         "causes_ja": "Amphibianにおけるトリパノソーマ症の原因: ヒル媒介のトリパノソーマ属血液寄生虫。",
         "pathophysiology": "デルモシスチジウム感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "トリパノソーマ症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1790,7 +1851,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "皮膚と内臓に嚢胞を形成する粘液胞子虫。",
         "urgency": "moderate",
         "recommended_tests": ["histopathology", "skin_biopsy"],
-        "causes": "多臓器/全身組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
+        "causes": "Caused by myxozoan parasites that infect multiple organ systems through complex life cycles involving invertebrate alternate hosts. Poor water quality and overcrowding increase exposure.",
+
         "causes_ja": "多臓器/全身組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の多臓器/全身組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の多臓器/全身組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -1811,7 +1873,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "吸虫メタセルカリアの重度被嚢による肢奇形と臓器障害。",
         "urgency": "moderate",
         "recommended_tests": ["histopathology", "fecal_examination", "radiography"],
-        "causes": "Amphibianにおける吸虫被嚢（重度寄生）の原因: 吸虫メタセルカリアの重度被嚢による肢奇形と臓器障害。",
+        "causes": "Caused by heavy metacercarial encystment of digenean trematodes, particularly Ribeiroia ondatrae, which causes limb deformities and organ damage in developing amphibians.",
+
         "causes_ja": "Amphibianにおける吸虫被嚢（重度寄生）の原因: 吸虫メタセルカリアの重度被嚢による肢奇形と臓器障害。",
         "pathophysiology": "吸虫被嚢（重度寄生）はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "吸虫被嚢（重度寄生）はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1832,7 +1895,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "消化管の蟯虫寄生。",
         "urgency": "low",
         "recommended_tests": ["fecal_float", "fecal_examination"],
-        "causes": "Amphibianにおける蟯虫感染症の原因: 消化管の蟯虫寄生。",
+        "causes": "Caused by oxyurid (pinworm) nematodes that parasitize the gastrointestinal tract. Transmission occurs through ingestion of embryonated eggs via the fecal-oral route.",
+
         "causes_ja": "Amphibianにおける蟯虫感染症の原因: 消化管の蟯虫寄生。",
         "pathophysiology": "蟯虫感染症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "蟯虫感染症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1853,7 +1917,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "カエル・ヒキガエルの肺のラブディアス属肺虫。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "lung_wash", "radiography"],
-        "causes": "Amphibianにおけるラブディアス肺虫症の原因: カエル・ヒキガエルの肺のラブディアス属肺虫。",
+        "causes": "Caused by Rhabdias spp. lungworms that parasitize the lungs of frogs and toads. These nematodes have a direct life cycle with free-living and parasitic generations.",
+
         "causes_ja": "Amphibianにおけるラブディアス肺虫症の原因: カエル・ヒキガエルの肺のラブディアス属肺虫。",
         "pathophysiology": "ラブディアス肺虫症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "ラブディアス肺虫症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1874,7 +1939,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "自家感染能を持つ糞線虫属感染症。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "fecal_examination"],
-        "causes": "Amphibianにおける糞線虫症の原因: 自家感染能を持つ糞線虫属感染症。",
+        "causes": "Caused by Strongyloides spp. nematodes capable of autoinfection, where larvae can re-infect the host without leaving the body, leading to hyperinfection in immunosuppressed individuals.",
+
         "causes_ja": "Amphibianにおける糞線虫症の原因: 自家感染能を持つ糞線虫属感染症。",
         "pathophysiology": "糞線虫症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "糞線虫症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1895,7 +1961,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "鉤頭虫による腸管炎症。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_examination"],
-        "causes": "Amphibianにおける鉤頭虫感染症の原因: 鉤頭虫による腸管炎症。",
+        "causes": "Caused by acanthocephalan (thorny-headed) worms that attach to the intestinal wall using a hooked proboscis, causing inflammation and intestinal damage.",
+
         "causes_ja": "Amphibianにおける鉤頭虫感染症の原因: 鉤頭虫による腸管炎症。",
         "pathophysiology": "鉤頭虫感染症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "鉤頭虫感染症はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1958,7 +2025,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "陸生両生類の外部マダニ寄生。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "tick_removal"],
-        "causes": "皮膚組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
+        "causes": "Caused by tick (Ixodidae or Argasidae) attachment to the skin, resulting in blood loss, local tissue damage, and potential transmission of blood-borne pathogens.",
+
         "causes_ja": "皮膚組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の皮膚組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の皮膚組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -1979,7 +2047,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "悪性線維組織腫瘍。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology"],
-        "causes": "Amphibianにおける線維肉腫（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
+        "causes": "Caused by malignant neoplastic transformation of fibroblasts. Contributing factors include aging, chronic inflammation, viral infection, and genetic predisposition.",
+
         "causes_ja": "Amphibianにおける線維肉腫（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "線維肉腫（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "pathophysiology_ja": "線維肉腫（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2000,7 +2069,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "悪性上皮性腫瘍。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology"],
-        "causes": "Amphibianにおける扁平上皮癌（Amphibian）の原因: 両生類における腫瘍性の皮膚疾患。扁平上皮癌は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
+        "causes": "Caused by malignant neoplastic transformation of squamous epithelial cells. Contributing factors include chronic skin irritation, UV exposure, and genetic predisposition.",
+
         "causes_ja": "Amphibianにおける扁平上皮癌（Amphibian）の原因: 両生類における腫瘍性の皮膚疾患。扁平上皮癌は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "扁平上皮癌（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "pathophysiology_ja": "扁平上皮癌（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2021,7 +2091,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "多臓器に影響するリンパ系腫瘍。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "CBC"],
-        "causes": "Amphibianにおけるリンパ腫（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
+        "causes": "Caused by malignant neoplastic transformation of lymphocytes. Contributing factors include viral infection, chronic immune stimulation, aging, and genetic predisposition.",
+
         "causes_ja": "Amphibianにおけるリンパ腫（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "リンパ腫（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "pathophysiology_ja": "リンパ腫（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2042,7 +2113,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "メラノサイト由来腫瘍。",
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology"],
-        "causes": "Amphibianにおけるメラノーマ（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
+        "causes": "Caused by malignant neoplastic transformation of melanocytes. Contributing factors include UV exposure, genetic predisposition, and chronic inflammation.",
+
         "causes_ja": "Amphibianにおけるメラノーマ（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "メラノーマ（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "pathophysiology_ja": "メラノーマ（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2063,7 +2135,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "原発性悪性肝腫瘍。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "histopathology"],
-        "causes": "Amphibianにおける肝細胞癌の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
+        "causes": "Caused by malignant neoplastic transformation of hepatocytes. Contributing factors include chronic hepatic inflammation, environmental carcinogens, and aging.",
+
         "causes_ja": "Amphibianにおける肝細胞癌の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "肝細胞癌はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "pathophysiology_ja": "肝細胞癌はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2084,7 +2157,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "悪性腎腫瘍。ヘルペスウイルス関連の場合がある。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "histopathology"],
-        "causes": "Amphibianにおける腎腺癌の原因: 悪性腎腫瘍。ヘルペスウイルス関連の場合がある。",
+        "causes": "Caused by malignant renal neoplasia, in some species associated with Lucke tumor herpesvirus (Ranid herpesvirus 1) infection.",
+
         "causes_ja": "Amphibianにおける腎腺癌の原因: 悪性腎腫瘍。ヘルペスウイルス関連の場合がある。",
         "pathophysiology": "腎腺癌はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "pathophysiology_ja": "腎腺癌はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -2105,7 +2179,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "悪性骨腫瘍。",
         "urgency": "high",
         "recommended_tests": ["radiography", "biopsy", "histopathology"],
-        "causes": "Amphibianにおける骨肉腫（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
+        "causes": "Caused by malignant neoplastic transformation of osteoblasts. Contributing factors include chronic inflammation, previous fractures, and genetic predisposition.",
+
         "causes_ja": "Amphibianにおける骨肉腫（Amphibian）の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "骨肉腫（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "pathophysiology_ja": "骨肉腫（Amphibian）はAmphibianにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2126,7 +2201,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "外傷やMBDによる骨折。",
         "urgency": "high",
         "recommended_tests": ["radiography", "blood_chemistry"],
-        "causes": "Amphibianにおける四肢骨折・外傷の原因: 外傷やMBDによる骨折。",
+        "causes": "Caused by physical trauma (falls, crush injuries, handling accidents) or pathological fractures secondary to metabolic bone disease (MBD) from calcium/vitamin D3 deficiency.",
+
         "causes_ja": "Amphibianにおける四肢骨折・外傷の原因: 外傷やMBDによる骨折。",
         "pathophysiology": "四肢骨折・外傷はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "四肢骨折・外傷はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -2189,7 +2265,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビタミンE欠乏による筋ジストロフィーと神経症状。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "dietary_review"],
-        "causes": "AmphibianにおけるビタミンE欠乏症の原因: ビタミンE欠乏による筋ジストロフィーと神経症状。",
+        "causes": "Caused by dietary deficiency of vitamin E (alpha-tocopherol), leading to oxidative damage of muscle and neural tissues, resulting in white muscle disease and neurological signs.",
+
         "causes_ja": "AmphibianにおけるビタミンE欠乏症の原因: ビタミンE欠乏による筋ジストロフィーと神経症状。",
         "pathophysiology": "栄養性二次性上皮小体機能亢進症はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "ビタミンE欠乏症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2210,7 +2287,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ビオチン欠乏による皮膚障害。",
         "urgency": "low",
         "recommended_tests": ["dietary_history", "response_to_supplementation"],
-        "causes": "Amphibianにおけるビオチン欠乏症の原因: ビオチン欠乏による皮膚障害。",
+        "causes": "Caused by dietary biotin deficiency, leading to impaired keratin synthesis and skin integrity. May result from feeding raw egg whites containing avidin.",
+
         "causes_ja": "Amphibianにおけるビオチン欠乏症の原因: ビオチン欠乏による皮膚障害。",
         "pathophysiology": "ビオチン欠乏症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
         "pathophysiology_ja": "ビオチン欠乏症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2231,7 +2309,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ヨウ素欠乏による甲状腺腫と幼生の変態障害。",
         "urgency": "moderate",
         "recommended_tests": ["thyroid_panel", "dietary_review"],
-        "causes": "Amphibianにおけるヨウ素欠乏症（甲状腺腫）の原因: ヨウ素欠乏による甲状腺腫と幼生の変態障害。",
+        "causes": "Caused by dietary iodine deficiency, resulting in thyroid gland hyperplasia (goiter) and failure of thyroid hormone-dependent metamorphosis in larvae.",
+
         "causes_ja": "Amphibianにおけるヨウ素欠乏症（甲状腺腫）の原因: ヨウ素欠乏による甲状腺腫と幼生の変態障害。",
         "pathophysiology": "ヨウ素欠乏症（甲状腺腫）はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "ヨウ素欠乏症（甲状腺腫）はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -2252,7 +2331,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "タンパク質不足による筋消耗。",
         "urgency": "moderate",
         "recommended_tests": ["dietary_analysis", "blood_chemistry"],
-        "causes": "Amphibianにおけるヨウ素欠乏症（甲状腺腫）の原因: ヨウ素欠乏による甲状腺腫と幼生の変態障害。",
+        "causes": "Caused by insufficient dietary protein intake, leading to impaired growth, poor wound healing, immunosuppression, and muscle wasting.",
+
         "causes_ja": "Amphibianにおけるタンパク質欠乏症の原因: タンパク質不足による筋消耗。",
         "pathophysiology": "ヨウ素欠乏症（甲状腺腫）はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "タンパク質欠乏症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2273,7 +2353,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "飢餓や肝疾患による低血糖。",
         "urgency": "emergency",
         "recommended_tests": ["blood_glucose", "blood_chemistry"],
-        "causes": "Amphibianにおける低血糖症の原因: 飢餓や肝疾患による低血糖。",
+        "causes": "Caused by blood glucose depletion due to starvation, hepatic disease, septicemia, or prolonged anorexia. Neonates and small species are particularly susceptible.",
+
         "causes_ja": "Amphibianにおける低血糖症の原因: 飢餓や肝疾患による低血糖。",
         "pathophysiology": "低血糖症はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "低血糖症はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -2294,7 +2375,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "D3合成にUVBが必要な種における紫外線不足。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "husbandry_review"],
-        "causes": "Amphibianにおける低血糖症の原因: 飢餓や肝疾患による低血糖。",
+        "causes": "Caused by insufficient exposure to ultraviolet B (UVB) radiation, impairing cutaneous vitamin D3 synthesis and subsequent calcium metabolism.",
+
         "causes_ja": "Amphibianにおける紫外線不足症の原因: D3合成にUVBが必要な種における紫外線不足。",
         "pathophysiology": "低血糖症はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "pathophysiology_ja": "紫外線不足症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2315,7 +2397,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "環境汚染による鉛中毒。",
         "urgency": "emergency",
         "recommended_tests": ["blood_lead_level", "blood_chemistry"],
-        "causes": "Amphibianにおける鉛中毒の原因: 環境汚染による鉛中毒。",
+        "causes": "Caused by lead exposure from contaminated water, soil, or ingestion of lead-containing materials. Lead inhibits heme synthesis and causes neurotoxicity.",
+
         "causes_ja": "Amphibianにおける鉛中毒の原因: 環境汚染による鉛中毒。",
         "pathophysiology": "鉛中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
         "pathophysiology_ja": "鉛中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -2336,7 +2419,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "飼育ケージの亜鉛メッキ金具からの亜鉛中毒。",
         "urgency": "high",
         "recommended_tests": ["blood_zinc_level", "blood_chemistry"],
-        "causes": "Amphibianにおける亜鉛中毒の原因: 飼育ケージの亜鉛メッキ金具からの亜鉛中毒。",
+        "causes": "Caused by zinc toxicosis from ingestion of or contact with galvanized metal fixtures in the enclosure. Zinc causes gastrointestinal irritation and systemic toxicity.",
+
         "causes_ja": "Amphibianにおける亜鉛中毒の原因: 飼育ケージの亜鉛メッキ金具からの亜鉛中毒。",
         "pathophysiology": "亜鉛中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
         "pathophysiology_ja": "亜鉛中毒はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -2357,7 +2441,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "銅処理水や銅金具からの銅中毒。",
         "urgency": "emergency",
         "recommended_tests": ["water_quality_testing", "blood_chemistry"],
-        "causes": "Amphibianにおける銅中毒の原因: 銅処理水や銅金具からの銅中毒。",
+        "causes": "Caused by copper toxicosis from copper-treated water, copper plumbing, or copper-containing fixtures. Amphibians are highly sensitive to copper ions due to their permeable skin.",
+
         "causes_ja": "Amphibianにおける銅中毒の原因: 銅処理水や銅金具からの銅中毒。",
         "pathophysiology": "銅中毒はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
         "pathophysiology_ja": "銅中毒はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2378,7 +2463,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水環境の急激なpH変化による浸透圧ストレス。",
         "urgency": "emergency",
         "recommended_tests": ["water_quality_testing", "clinical_examination"],
-        "causes": "AmphibianにおけるpHショックの原因: 水環境の急激なpH変化による浸透圧ストレス。",
+        "causes": "Caused by abrupt changes in water pH, leading to osmotic stress and damage to the skin and gill epithelium. Both acidic and alkaline extremes are harmful.",
+
         "causes_ja": "AmphibianにおけるpHショックの原因: 水環境の急激なpH変化による浸透圧ストレス。",
         "pathophysiology": "pH Shock is a behavioral condition in Amphibian. Sudden pH change in aquatic environment causing osmotic stress. The behavioral pathology involves dysregulation of neurochemical signaling (serotonin, dopamine, norepinephrine, GABA) in brain circuits governing emotional regulation, stress response, and learned behaviors. Environmental stressors, inadequate socialization, inappropriate husbandry, or underlying medical conditions may trigger or exacerbate behavioral abnormalities. Chronic stress activates the hypothalamic-pituitary-adrenal axis, leading to elevated cortisol and immunosuppression.",
         "pathophysiology_ja": "pHショックはAmphibianにおける行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
@@ -2399,7 +2485,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水中酸素化不足による低酸素症。",
         "urgency": "high",
         "recommended_tests": ["water_quality_testing", "dissolved_oxygen_measurement"],
-        "causes": "Amphibianにおける溶存酸素低下症の原因: 水中酸素化不足による低酸素症。",
+        "causes": "Caused by insufficient dissolved oxygen in the aquatic environment due to poor aeration, overcrowding, high water temperature, or organic waste accumulation.",
+
         "causes_ja": "Amphibianにおける溶存酸素低下症の原因: 水中酸素化不足による低酸素症。",
         "pathophysiology": "pHショックはAmphibianにおける行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
         "pathophysiology_ja": "溶存酸素低下症はAmphibianにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -2420,7 +2507,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性的な硝酸塩高値による免疫抑制と臓器障害。",
         "urgency": "moderate",
         "recommended_tests": ["water_quality_testing", "blood_chemistry"],
-        "causes": "Amphibianにおける高硝酸塩毒性の原因: 慢性的な硝酸塩高値による免疫抑制と臓器障害。",
+        "causes": "Caused by chronic exposure to elevated nitrate levels in the water, leading to immunosuppression, impaired growth, and progressive organ damage.",
+
         "causes_ja": "Amphibianにおける高硝酸塩毒性の原因: 慢性的な硝酸塩高値による免疫抑制と臓器障害。",
         "pathophysiology": "高硝酸塩毒性はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
         "pathophysiology_ja": "高硝酸塩毒性はAmphibianにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -2441,7 +2529,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "フラボバクテリウム・コラムナーレによる水棲両生類の皮膚びらんと鰓疾患。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "skin_scraping", "gill_biopsy"],
-        "causes": "Amphibianにおけるカラムナリス病の原因: フラボバクテリウム・コラムナーレによる水棲両生類の皮膚びらんと鰓疾患。",
+        "causes": "Caused by Flavobacterium columnare, a gram-negative bacterium that produces skin erosion and gill disease in aquatic amphibians, especially under warm water conditions.",
+
         "causes_ja": "Amphibianにおけるカラムナリス病の原因: フラボバクテリウム・コラムナーレによる水棲両生類の皮膚びらんと鰓疾患。",
         "pathophysiology": "カラムナリス病はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
         "pathophysiology_ja": "カラムナリス病はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2462,7 +2551,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "エロモナスの慢性感染による治癒しない皮膚潰瘍。",
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "biopsy"],
-        "causes": "Amphibianにおけるカラムナリス病の原因: フラボバクテリウム・コラムナーレによる水棲両生類の皮膚びらんと鰓疾患。",
+        "causes": "Caused by chronic Aeromonas spp. infection resulting in persistent, non-healing skin ulcers. Often associated with suboptimal water quality and chronic stress.",
+
         "causes_ja": "Amphibianにおけるエロモナス慢性感染症の原因: エロモナスの慢性感染による治癒しない皮膚潰瘍。",
         "pathophysiology": "カラムナリス病はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
         "pathophysiology_ja": "エロモナス慢性感染症はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2483,7 +2573,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水棲両生類にベルベット様皮膚被覆を引き起こすウーディニウム渦鞭毛虫感染症。",
         "urgency": "high",
         "recommended_tests": ["skin_scraping", "microscopy"],
-        "causes": "Amphibianにおけるエロモナス慢性感染症の原因: エロモナスの慢性感染による治癒しない皮膚潰瘍。",
+        "causes": "Caused by Oodinium spp. (Piscinoodinium), dinoflagellate ectoparasites that produce a characteristic gold-dust or velvet-like coating on the skin of aquatic amphibians.",
+
         "causes_ja": "Amphibianにおけるウーディニウム症（ベルベット病）の原因: 水棲両生類にベルベット様皮膚被覆を引き起こすウーディニウム渦鞭毛虫感染症。",
         "pathophysiology": "エロモナス慢性感染症はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
         "pathophysiology_ja": "ウーディニウム症（ベルベット病）はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2504,7 +2595,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水質悪化時に皮膚と鰓に付着するツリガネムシ繊毛虫。",
         "urgency": "moderate",
         "recommended_tests": ["skin_scraping", "microscopy", "water_quality_testing"],
-        "causes": "Amphibianにおけるウーディニウム症（ベルベット病）の原因: 水棲両生類にベルベット様皮膚被覆を引き起こすウーディニウム渦鞭毛虫感染症。",
+        "causes": "Caused by Vorticella spp., peritrich ciliate protozoans that attach to the skin and gills in deteriorating water quality conditions, causing irritation and respiratory compromise.",
+
         "causes_ja": "Amphibianにおけるツリガネムシ寄生症の原因: 水質悪化時に皮膚と鰓に付着するツリガネムシ繊毛虫。",
         "pathophysiology": "ウーディニウム症（ベルベット病）はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
         "pathophysiology_ja": "ツリガネムシ寄生症はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2525,7 +2617,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "幼生両生類の鰓と皮膚を損傷するプラナリア扁形動物。",
         "urgency": "moderate",
         "recommended_tests": ["microscopy", "water_quality_testing"],
-        "causes": "Amphibianにおけるツリガネムシ寄生症の原因: 水質悪化時に皮膚と鰓に付着するツリガネムシ繊毛虫。",
+        "causes": "Caused by predatory planarian flatworms (Turbellaria) that attack amphibian eggs, larvae, and small juveniles, causing tissue damage and mortality.",
+
         "causes_ja": "Amphibianにおけるプラナリア寄生の原因: 幼生両生類の鰓と皮膚を損傷するプラナリア扁形動物。",
         "pathophysiology": "ツリガネムシ寄生症はAmphibianにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
         "pathophysiology_ja": "プラナリア寄生はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -2546,7 +2639,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "消化管における鞭毛虫原虫の過増殖。",
         "urgency": "moderate",
         "recommended_tests": ["fecal_wet_mount", "fecal_smear"],
-        "causes": "Amphibianにおける腸管鞭毛虫感染症の原因: 消化管における鞭毛虫原虫の過増殖。",
+        "causes": "Caused by overgrowth of flagellate protozoans (e.g., Hexamita, Spironucleus) in the gastrointestinal tract, often triggered by stress or immunosuppression.",
+
         "causes_ja": "Amphibianにおける腸管鞭毛虫感染症の原因: 消化管における鞭毛虫原虫の過増殖。",
         "pathophysiology": "腸管鞭毛虫感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "腸管鞭毛虫感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -2567,7 +2661,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "過食や大きすぎる餌による胃捻転。",
         "urgency": "emergency",
         "recommended_tests": ["radiography", "clinical_examination"],
-        "causes": "Amphibianにおける腸管鞭毛虫感染症の原因: 消化管における鞭毛虫原虫の過増殖。",
+        "causes": "Caused by gastric torsion (volvulus) following ingestion of excessively large prey or overfeeding, resulting in rotation and obstruction of the stomach.",
+
         "causes_ja": "Amphibianにおける胃捻転の原因: 過食や大きすぎる餌による胃捻転。",
         "pathophysiology": "腸管鞭毛虫感染症はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "胃捻転はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -2588,7 +2683,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "産卵障害による卵停滞と体腔炎。",
         "urgency": "high",
         "recommended_tests": ["ultrasound", "radiography", "blood_chemistry"],
-        "causes": "Amphibianにおける胃捻転の原因: 過食や大きすぎる餌による胃捻転。",
+        "causes": "Caused by failure to oviposit due to hormonal imbalance, poor body condition, inappropriate environmental cues, or physical obstruction, leading to egg retention and coelomitis.",
+
         "causes_ja": "Amphibianにおける繁殖障害・卵停滞の原因: 産卵障害による卵停滞と体腔炎。",
         "pathophysiology": "胃捻転はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "pathophysiology_ja": "繁殖障害・卵停滞はAmphibianにおける生殖器疾患である。ホルモンバランスの異常、構造異常、または生殖器への感染過程を伴う。性ホルモンの調節障害は生殖器官の嚢胞性変化、過形成、または腫瘍形成を引き起こしうる。産科的合併症は機械的閉塞や代謝異常を引き起こし、母体と産子の両方を脅かす。生殖器の二次細菌感染は全身性敗血症に進行しうる。",
@@ -2609,7 +2705,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "寄生虫や毒素による赤血球破壊。",
         "urgency": "high",
         "recommended_tests": ["CBC", "blood_smear"],
-        "causes": "Amphibianにおける繁殖障害・卵停滞の原因: 産卵障害による卵停滞と体腔炎。",
+        "causes": "Caused by accelerated red blood cell destruction due to infectious agents, toxins, immune-mediated processes, or oxidative damage, resulting in anemia.",
+
         "causes_ja": "Amphibianにおける溶血性貧血の原因: 寄生虫や毒素による赤血球破壊。",
         "pathophysiology": "繁殖障害・卵停滞はAmphibianにおける生殖器疾患である。ホルモンバランスの異常、構造異常、または生殖器への感染過程を伴う。性ホルモンの調節障害は生殖器官の嚢胞性変化、過形成、または腫瘍形成を引き起こしうる。産科的合併症は機械的閉塞や代謝異常を引き起こし、母体と産子の両方を脅かす。生殖器の二次細菌感染は全身性敗血症に進行しうる。",
         "pathophysiology_ja": "溶血性貧血はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -2630,7 +2727,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎臓へのカルシウム沈着。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "histopathology"],
-        "causes": "Amphibianにおける腎石灰沈着症の原因: 必須栄養素の欠乏・過剰・吸収不良を含む食事バランスの異常。不適切な食事組成、単調な給餌、種に不適切な食物、吸収障害が主要因。",
+        "causes": "Caused by calcium deposition in renal tubules due to dietary mineral imbalance, chronic dehydration, or vitamin D3 excess, leading to progressive renal damage.",
+
         "causes_ja": "Amphibianにおける腎石灰沈着症の原因: 必須栄養素の欠乏・過剰・吸収不良を含む食事バランスの異常。不適切な食事組成、単調な給餌、種に不適切な食物、吸収障害が主要因。",
         "pathophysiology": "腎石灰沈着症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
         "pathophysiology_ja": "腎石灰沈着症はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2651,7 +2749,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "光増感物質による皮膚損傷。",
         "urgency": "moderate",
         "recommended_tests": ["skin_biopsy", "environmental_review"],
-        "causes": "皮膚に影響する有毒物質への曝露が原因。一般的な毒素：重金属（鉛・亜鉛）・家庭用化学物質・有毒植物・農薬・薬物（不適切使用・偶発曝露）・環境汚染物質。両生類の食性と生理学的特性が毒素の吸収・代謝・感受性に影響しうる。",
+        "causes": "Caused by exposure to photosensitizing agents (certain plants, chemicals, or medications) that render the skin hypersensitive to ultraviolet light, causing dermal necrosis.",
+
         "causes_ja": "皮膚に影響する有毒物質への曝露が原因。一般的な毒素：重金属（鉛・亜鉛）・家庭用化学物質・有毒植物・農薬・薬物（不適切使用・偶発曝露）・環境汚染物質。両生類の食性と生理学的特性が毒素の吸収・代謝・感受性に影響しうる。",
         "pathophysiology": "両生類の皮膚組織に影響する中毒曝露は、有害物質の経口摂取・吸入・経皮吸収に起因する。毒素は直接的な細胞毒性・酸化ストレス・ミトコンドリア機能障害・重要酵素経路の攪乱を介して細胞を損傷する。両生類の食性と生理学的特性が毒素の吸収と代謝に影響しうる。臓器特異的損傷は毒素の薬物動態と標的臓器親和性に依存する。",
         "pathophysiology_ja": "両生類の皮膚組織に影響する中毒曝露は、有害物質の経口摂取・吸入・経皮吸収に起因する。毒素は直接的な細胞毒性・酸化ストレス・ミトコンドリア機能障害・重要酵素経路の攪乱を介して細胞を損傷する。両生類の食性と生理学的特性が毒素の吸収と代謝に影響しうる。臓器特異的損傷は毒素の薬物動態と標的臓器親和性に依存する。",
@@ -2672,7 +2771,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "臓器不全や敗血症による重度全身浮腫。",
         "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "coelomocentesis", "CBC"],
-        "causes": "Amphibianにおける全身浮腫・膨満の原因: 臓器不全や敗血症による重度全身浮腫。",
+        "causes": "Caused by severe generalized edema secondary to organ failure (renal, hepatic, cardiac), septicemia, or severe osmotic imbalance.",
+
         "causes_ja": "Amphibianにおける全身浮腫・膨満の原因: 臓器不全や敗血症による重度全身浮腫。",
         "pathophysiology": "全身浮腫・膨満はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "pathophysiology_ja": "全身浮腫・膨満はAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -2735,7 +2835,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌・ウイルス・毒素による肝臓の炎症。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "liver_biopsy", "histopathology"],
-        "causes": "両生類の肝臓/胆道組織における炎症過程が原因。感染・外傷・自己免疫応答・中毒曝露・異物反応が誘因。慢性炎症は持続的な抗原刺激や免疫調節異常に起因しうる。両生類の種特異的炎症反応は家畜種と異なりうる。",
+        "causes": "Caused by hepatic inflammation from infectious agents (bacteria, viruses, parasites), toxin exposure, or metabolic disorders affecting the liver.",
+
         "causes_ja": "両生類の肝臓/胆道組織における炎症過程が原因。感染・外傷・自己免疫応答・中毒曝露・異物反応が誘因。慢性炎症は持続的な抗原刺激や免疫調節異常に起因しうる。両生類の種特異的炎症反応は家畜種と異なりうる。",
         "pathophysiology": "うっ血性心不全はAmphibianにおける循環器疾患である。心臓、大血管、または末梢血管系の構造的・機能的異常を伴う。心拍出量の低下、弁膜機能障害、調律異常により組織灌流が障害される。代償機構（神経ホルモン活性化、心室リモデリング）が一時的に機能を維持するが、進行性の心筋劣化を引き起こす。心不全、血栓塞栓症、突然死が進行期疾患の潜在的結果である。",
         "pathophysiology_ja": "両生類の肝臓/胆道組織における炎症過程は、自然免疫および適応免疫応答の活性化を伴う。炎症性サイトカイン（TNF-α、IL-1、IL-6）とケモカインが好中球・マクロファージ・リンパ球を患部組織に動員する。持続的炎症は組織浮腫・血管透過性変化・進行性組織損傷をもたらす。両生類の生理学的特性が炎症反応パターンと治癒能力に影響しうる。",
@@ -2756,7 +2857,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "膵臓の炎症による代謝機能障害。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "ultrasound"],
-        "causes": "両生類の消化器系組織における炎症過程が原因。感染・外傷・自己免疫応答・中毒曝露・異物反応が誘因。慢性炎症は持続的な抗原刺激や免疫調節異常に起因しうる。両生類の種特異的炎症反応は家畜種と異なりうる。",
+        "causes": "Caused by inflammation of the pancreas due to infectious agents, dietary factors, toxin exposure, or metabolic derangements.",
+
         "causes_ja": "両生類の消化器系組織における炎症過程が原因。感染・外傷・自己免疫応答・中毒曝露・異物反応が誘因。慢性炎症は持続的な抗原刺激や免疫調節異常に起因しうる。両生類の種特異的炎症反応は家畜種と異なりうる。",
         "pathophysiology": "両生類の消化器系組織における炎症過程は、自然免疫および適応免疫応答の活性化を伴う。炎症性サイトカイン（TNF-α、IL-1、IL-6）とケモカインが好中球・マクロファージ・リンパ球を患部組織に動員する。持続的炎症は組織浮腫・血管透過性変化・進行性組織損傷をもたらす。両生類の生理学的特性が炎症反応パターンと治癒能力に影響しうる。",
         "pathophysiology_ja": "両生類の消化器系組織における炎症過程は、自然免疫および適応免疫応答の活性化を伴う。炎症性サイトカイン（TNF-α、IL-1、IL-6）とケモカインが好中球・マクロファージ・リンパ球を患部組織に動員する。持続的炎症は組織浮腫・血管透過性変化・進行性組織損傷をもたらす。両生類の生理学的特性が炎症反応パターンと治癒能力に影響しうる。",
@@ -2777,7 +2879,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "水質不良や遺伝によるアホロートルの鰓前方カール。",
         "urgency": "moderate",
         "recommended_tests": ["water_quality_testing", "clinical_examination"],
-        "causes": "Amphibianにおけるアホロートル鰓カールの原因: 水質不良や遺伝によるアホロートルの鰓前方カール。",
+        "causes": "Caused by poor water quality (especially high ammonia or nitrite), genetic predisposition, or chronic gill irritation, resulting in anterior curling of axolotl external gills.",
+
         "causes_ja": "Amphibianにおけるアホロートル鰓カールの原因: 水質不良や遺伝によるアホロートルの鰓前方カール。",
         "pathophysiology": "アホロートル鰓カールはAmphibianにおける先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
         "pathophysiology_ja": "アホロートル鰓カールはAmphibianにおける先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
@@ -2798,7 +2901,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "消化管や体腔のガス蓄積による浮力障害。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "water_quality_testing", "dietary_review"],
-        "causes": "Amphibianにおけるアホロートル鰓カールの原因: 水質不良や遺伝によるアホロートルの鰓前方カール。",
+        "causes": "Caused by gastrointestinal gas accumulation, constipation, or swim bladder-like dysfunction in axolotls, leading to uncontrolled buoyancy and inability to remain submerged.",
+
         "causes_ja": "Amphibianにおけるアホロートル浮遊障害の原因: 消化管や体腔のガス蓄積による浮力障害。",
         "pathophysiology": "アホロートル鰓カールはAmphibianにおける先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
         "pathophysiology_ja": "アホロートル浮遊障害はAmphibianにおける血液・全身性疾患である。正常な血球産生、機能、または破壊の障害を伴う病態生理を有する。骨髄障害、脾臓隔離、消費性凝固障害、末梢破壊機構が関与しうる。酸素運搬能の低下（貧血）、止血不全（血小板減少症、DIC）、異常な細胞増殖（多血症）により組織灌流と臓器機能が障害される。肝、腎、心血管系の二次的臓器障害が発生しうる。",
@@ -2819,7 +2923,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "寄生虫・化学物質・UV照射による発育性肢奇形。",
         "urgency": "moderate",
         "recommended_tests": ["radiography", "environmental_testing", "histopathology"],
-        "causes": "Amphibianにおける肢奇形（発育性）の原因: 寄生虫・化学物質・UV照射による発育性肢奇形。",
+        "causes": "Caused by developmental limb malformations resulting from trematode metacercarial encystment (especially Ribeiroia), chemical contaminant exposure, UV radiation, or genetic factors.",
+
         "causes_ja": "Amphibianにおける肢奇形（発育性）の原因: 寄生虫・化学物質・UV照射による発育性肢奇形。",
         "pathophysiology": "肢奇形（発育性）はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
         "pathophysiology_ja": "肢奇形（発育性）はAmphibianにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -2843,7 +2948,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "マイコバクテリアや真菌による多臓器肉芽腫。",
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "acid_fast_stain"],
-        "causes": "Amphibianにおける播種性肉芽腫性疾患の原因: マイコバクテリアや真菌による多臓器肉芽腫。",
+        "causes": "Caused by systemic granulomatous inflammation from mycobacterial or fungal infections that disseminate to multiple organs via hematogenous spread.",
+
         "causes_ja": "Amphibianにおける播種性肉芽腫性疾患の原因: マイコバクテリアや真菌による多臓器肉芽腫。",
         "pathophysiology": "播種性肉芽腫性疾患はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "播種性肉芽腫性疾患はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -2864,7 +2970,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "陸生両生類における長期的な湿度不足による脱水。",
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "husbandry_review"],
-        "causes": "Amphibianにおける播種性肉芽腫性疾患の原因: マイコバクテリアや真菌による多臓器肉芽腫。",
+        "causes": "Caused by inadequate environmental humidity and insufficient access to water sources for terrestrial amphibian species, leading to progressive dehydration through their permeable skin.",
+
         "causes_ja": "Amphibianにおける慢性脱水（陸生種）の原因: 陸生両生類における長期的な湿度不足による脱水。",
         "pathophysiology": "播種性肉芽腫性疾患はAmphibianにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "pathophysiology_ja": "慢性脱水（陸生種）はAmphibianにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2885,7 +2992,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "床材の摂取による消化管閉塞。",
         "urgency": "high",
         "recommended_tests": ["radiography", "contrast_study"],
-        "causes": "Amphibianにおける床材インパクションの原因: 床材の摂取による消化管閉塞。",
+        "causes": "Caused by ingestion of enclosure substrate material (gravel, soil, moss particles) during feeding, resulting in gastrointestinal obstruction.",
+
         "causes_ja": "Amphibianにおける床材インパクションの原因: 床材の摂取による消化管閉塞。",
         "pathophysiology": "床材インパクションはAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "pathophysiology_ja": "床材インパクションはAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -2906,7 +3014,8 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "甲状腺機能障害や環境因子による変態完了の障害。",
         "urgency": "moderate",
         "recommended_tests": ["thyroid_panel", "water_quality_testing", "husbandry_review"],
-        "causes": "Amphibianにおける床材インパクションの原因: 床材の摂取による消化管閉塞。",
+        "causes": "Caused by failure to complete metamorphosis due to iodine deficiency, thyroid dysfunction, environmental factors, or genetic predisposition, leading to complications in obligate neotenic species.",
+
         "causes_ja": "Amphibianにおける変態障害（幼形成熟合併症）の原因: 甲状腺機能障害や環境因子による変態完了の障害。",
         "pathophysiology": "床材インパクションはAmphibianにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "pathophysiology_ja": "変態障害（幼形成熟合併症）はAmphibianにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
