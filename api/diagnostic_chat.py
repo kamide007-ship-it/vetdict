@@ -1216,26 +1216,31 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # General
         "lethargy": ["depression", "inactivity", "weakness", "listlessness", "muscle_wasting"],
         "weakness": ["lethargy", "depression", "inactivity"],
+        "depression": ["lethargy", "inactivity", "weakness"],
         "fever": ["hyperthermia", "elevated_temperature"],
         # GI
         "diarrhea": ["loose_stool", "watery_stool", "soft_stool"],
         "vomiting": ["regurgitation", "emesis"],
-        "constipation": ["reduced_fecal_output", "straining_to_defecate", "small_fecal_pellets"],
-        "reduced_fecal_output": ["constipation", "small_fecal_pellets"],
+        "constipation": ["reduced_fecal_output", "straining_to_defecate", "small_fecal_pellets", "decreased_fecal_output"],
+        "reduced_fecal_output": ["constipation", "small_fecal_pellets", "decreased_fecal_output"],
+        "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
         "teeth_grinding": ["bruxism", "dental_pain"],
-        "abdominal_pain": ["abdominal_distension", "hunched_posture"],
-        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "vulvar_swelling", "prostatic_enlargement"],
-        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen"],
+        "abdominal_pain": ["abdominal_distension", "hunched_posture", "bloating"],
+        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
+        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
         # Neuro
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
         "fainting": ["collapse", "syncope"],
         "collapse": ["fainting", "syncope"],
         "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "hind_limb_paralysis", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness"],
         "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness", "hind_limb_paralysis"],
+        "sudden_paralysis": ["hind_limb_paralysis", "paralysis", "paralysis_or_paresis"],
+        "hind_limb_paralysis": ["paralysis", "paralysis_or_paresis", "hind_limb_weakness", "sudden_paralysis"],
         "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
         # Weight / body
         "weight_loss": ["emaciation", "wasting", "cachexia", "rough_coat", "poor_growth"],
+        "weight_gain": ["obesity", "overweight"],
         "emaciation": ["weight_loss", "wasting", "cachexia"],
         # Skin / coat
         "excessive_drooling": ["drooling", "hypersalivation", "ptyalism"],
@@ -1244,7 +1249,10 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "oral_ulcers": ["mouth_lesions", "stomatitis", "gingivitis"],
         "excessive_licking": ["itching", "pruritus", "scratching", "overgrooming", "ear_scratching", "scratching_ears"],
         "pop_eye": ["exophthalmia", "exophthalmos", "eye_protrusion", "bulging_eye", "eye_swelling", "eye_bulging", "enlarged_eye"],
-        "eye_swelling": ["pop_eye", "exophthalmia", "exophthalmos", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen", "eye_bulging", "enlarged_eye"],
+        "eye_protrusion": ["pop_eye", "exophthalmia", "exophthalmos", "eye_bulging", "bulging_eye", "eye_swelling", "enlarged_eye", "proptosis"],
+        "eye_swelling": ["pop_eye", "exophthalmia", "exophthalmos", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen", "eye_bulging", "enlarged_eye", "eye_protrusion"],
+        "eye_bulging": ["pop_eye", "exophthalmia", "exophthalmos", "eye_protrusion", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
+        "exophthalmos": ["pop_eye", "eye_protrusion", "eye_bulging", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
         "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding"],
         "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
@@ -1253,56 +1261,90 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "lameness_or_limping": ["lameness", "limping", "joint_swelling", "joint_pain", "leg_swelling", "foot_swelling", "reluctance_to_move"],
         "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps"],
         # Hair
-        "hair_loss": ["alopecia", "fur_loss", "feather_loss", "bald_patches", "quill_loss", "severe_quill_loss", "scaling"],
-        "alopecia": ["hair_loss", "fur_loss", "bald_patches"],
-        "skin_lesions": ["scaling", "dermatitis", "skin_rash", "crusting", "thick_crusting", "flaky_skin", "dry_skin", "shell_discoloration", "shell_pitting"],
-        "scaling": ["skin_lesions", "dandruff"],
+        "hair_loss": ["alopecia", "fur_loss", "feather_loss", "bald_patches", "quill_loss", "severe_quill_loss", "scaling", "circular_hair_loss"],
+        "circular_hair_loss": ["hair_loss", "alopecia", "fur_loss", "bald_patches"],
+        "alopecia": ["hair_loss", "fur_loss", "bald_patches", "circular_hair_loss"],
+        "feather_loss": ["hair_loss", "feather_plucking", "alopecia"],
+        "skin_lesions": ["scaling", "dermatitis", "skin_rash", "crusting", "thick_crusting", "flaky_skin", "dry_skin", "shell_discoloration", "shell_pitting", "skin_crusting"],
+        "scaly_skin": ["scaling", "dandruff", "skin_crusting", "dry_skin", "flaky_skin"],
+        "skin_crusting": ["scaling", "scaly_skin", "dandruff", "crusting"],
+        "scaling": ["skin_lesions", "dandruff", "scaly_skin", "skin_crusting"],
+        "dandruff": ["scaling", "scaly_skin", "skin_crusting"],
         # Eyes
-        "cloudiness_in_eyes": ["cloudy_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye"],
-        "cloudy_eyes": ["cloudiness_in_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye"],
-        "cloudy_eye": ["cloudy_eyes", "cloudiness_in_eyes", "eye_cloudiness"],
+        "cloudiness_in_eyes": ["cloudy_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye", "corneal_cloudiness"],
+        "cloudy_eyes": ["cloudiness_in_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye", "corneal_cloudiness"],
+        "cloudy_eye": ["cloudy_eyes", "cloudiness_in_eyes", "eye_cloudiness", "corneal_cloudiness"],
+        "corneal_opacity": ["corneal_cloudiness", "cloudy_eyes", "cloudy_eye", "cloudiness_in_eyes"],
+        "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye", "cloudiness_in_eyes"],
         "redness_in_eyes": ["red_eyes", "conjunctivitis", "eye_redness"],
         "eye_discharge": ["ocular_discharge", "eye_secretion", "epiphora"],
         "squinting": ["blepharospasm", "eye_squinting"],
+        "tearing": ["excessive_tearing", "epiphora", "eye_discharge"],
+        "excessive_tearing": ["tearing", "epiphora", "eye_discharge"],
+        "vision_loss": ["blindness", "cloudy_eye", "cloudy_eyes", "cataracts"],
         # Respiratory
         "labored_breathing": ["respiratory_distress", "dyspnea", "open_mouth_breathing", "difficulty_breathing"],
         "respiratory_distress": ["labored_breathing", "dyspnea", "open_mouth_breathing"],
         "open_mouth_breathing": ["labored_breathing", "respiratory_distress", "mouth_breathing"],
         "rapid_breathing": ["tachypnea", "panting", "labored_breathing"],
         "coughing": ["cough", "kennel_cough"],
+        "wheezing": ["coughing", "labored_breathing", "respiratory_distress"],
         "sneezing": ["reverse_sneezing", "nasal_irritation", "nasal_discharge"],
         "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion", "sneezing"],
         # Urinary
         "straining_to_urinate": ["dysuria", "urinary_straining", "difficulty_urinating"],
-        "frequent_urination": ["pollakiuria", "polyuria", "excessive_urination"],
-        "excessive_urination": ["frequent_urination", "polyuria", "pollakiuria"],
+        "frequent_urination": ["pollakiuria", "polyuria", "excessive_urination", "increased_urination"],
+        "excessive_urination": ["frequent_urination", "polyuria", "pollakiuria", "increased_urination"],
+        "increased_urination": ["excessive_urination", "frequent_urination", "polyuria", "pollakiuria"],
+        "increased_thirst": ["excessive_thirst", "polydipsia"],
+        "excessive_thirst": ["increased_thirst", "polydipsia"],
+        "polydipsia": ["excessive_thirst", "increased_thirst"],
+        "polyuria": ["excessive_urination", "frequent_urination", "increased_urination"],
         # Musculoskeletal
         "joint_pain_or_stiffness": ["joint_pain", "arthritis", "stiffness"],
         # Behavior
         "anxiety": ["restlessness", "pacing", "nervousness"],
+        "self_mutilation": ["self_chewing", "self_harm", "overgrooming", "feather_plucking"],
+        "self_chewing": ["self_mutilation", "self_harm"],
+        "behavioral_change": ["behavioral_changes", "aggression", "depression", "restlessness"],
+        "behavioral_changes": ["behavioral_change", "aggression", "depression"],
         # Head
         "head_tilt": ["vestibular_signs", "torticollis", "wry_neck", "nystagmus"],
         "nystagmus": ["head_tilt", "vestibular_signs", "rolling"],
         "ataxia": ["tremors", "incoordination", "wobbling", "unsteady_gait"],
         "tremors": ["shaking", "trembling", "muscle_tremors", "ataxia"],
+        "wobbling": ["ataxia", "incoordination", "unsteady_gait", "stumbling"],
         # Reptile-specific
-        "dysecdysis": ["abnormal_shedding", "retained_shed", "shedding_problems"],
-        "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots", "fractures"],
-        "bone_deformity": ["bone_swelling", "limb_deformity"],
+        "dysecdysis": ["abnormal_shedding", "retained_shed", "shedding_problems", "retained_skin"],
+        "retained_shed": ["dysecdysis", "retained_skin", "shedding_problems"],
+        "retained_skin": ["dysecdysis", "retained_shed", "shedding_problems"],
+        "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots", "fractures", "bone_deformity", "shell_softening", "soft_shell"],
+        "bone_deformity": ["bone_swelling", "limb_deformity", "soft_bones", "shell_deformity", "fractures"],
+        "shell_softening": ["soft_shell", "soft_bones", "shell_soft_spots", "shell_deformity"],
+        "soft_shell": ["shell_softening", "soft_bones", "shell_soft_spots", "shell_deformity"],
+        "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],
         "mouth_lesions": ["oral_lesions", "stomatitis", "mouth_rot"],
         "mucus_in_mouth": ["oral_mucus", "mouth_discharge"],
+        # Limbs / extremities
+        "cold_limbs": ["cold_extremities", "poor_circulation"],
+        "cold_extremities": ["cold_limbs", "poor_circulation"],
         # Bird-specific
         "fluffed_feathers": ["feather_fluffing", "puffed_up", "ruffled_feathers"],
+        "feather_plucking": ["feather_loss", "self_mutilation", "feather_destructive_behavior"],
+        "crop_swelling": ["crop_stasis", "ingluvitis", "crop_distension"],
+        "crop_stasis": ["crop_swelling", "ingluvitis"],
         # Fish fin
         "frayed_fins": ["fin_rot", "fin_erosion", "ragged_fins"],
         "fin_rot": ["frayed_fins", "fin_erosion"],
         "redness_skin": ["skin_redness", "hemorrhage", "fin_hemorrhage"],
+        "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
         "fin_hemorrhage": ["redness_skin", "hemorrhage"],
         # Hamster
         "wet_tail": ["diarrhea", "watery_diarrhea"],
         # Skin / coat additional
         "thinning_skin": ["skin_fragility", "thin_skin", "fragile_skin"],
         "poor_coat": ["dry_skin", "rough_coat", "dull_coat"],
+        "rough_coat": ["poor_coat", "dry_skin", "dull_coat"],
         # Ferret reproductive
         "vulvar_swelling": ["vulvar_discharge", "genital_swelling"],
         "prostatic_enlargement": ["prostate_enlargement", "enlarged_prostate"],
@@ -1313,6 +1355,8 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "cheek_pouch_prolapse": ["cheek_swelling"],
         "jaw_swelling": ["facial_swelling", "swelling"],
         "abscess": ["discharge", "swelling"],
+        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "tooth_overgrowth", "malocclusion"],
+        "dental_overgrowth": ["overgrown_teeth", "incisor_overgrowth", "molar_overgrowth", "malocclusion"],
         # Pain
         "pain": ["lethargy", "vocalization"],
         # Oral
@@ -1325,6 +1369,16 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # Fish
         "darkened_coloration": ["dark_coloration", "discoloration"],
         "dark_coloration": ["darkened_coloration", "discoloration"],
+        # Amphibian
+        "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
+        "red_ventrum": ["red_legs", "skin_redness", "hemorrhage"],
+        "edema": ["swelling", "bloating", "ascites"],
+        # Effusion
+        "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
+        "pleural_effusion": ["effusion", "labored_breathing"],
+        "ascites": ["effusion", "abdominal_distension", "bloating"],
+        # Swelling (generic)
+        "swelling": ["facial_swelling", "eye_swelling", "edema"],
     }
 
     def _resolve_id(sid: str) -> str | None:
@@ -1399,43 +1453,79 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
     # Re-define synonym map here (shared with extraction)
     _SYN = {
         "frayed_fins": ["fin_rot"], "fin_rot": ["frayed_fins"],
-        "redness_skin": ["fin_hemorrhage", "hemorrhage"], "fin_hemorrhage": ["redness_skin"],
-        "loss_of_appetite": ["appetite_loss", "anorexia"], "appetite_loss": ["loss_of_appetite"],
-        "constipation": ["reduced_fecal_output", "small_fecal_pellets"],
+        "redness_skin": ["fin_hemorrhage", "hemorrhage", "skin_redness"], "fin_hemorrhage": ["redness_skin"],
+        "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
+        "loss_of_appetite": ["appetite_loss", "anorexia"], "appetite_loss": ["loss_of_appetite", "anorexia"],
+        "anorexia": ["loss_of_appetite", "appetite_loss"],
+        "constipation": ["reduced_fecal_output", "small_fecal_pellets", "decreased_fecal_output"],
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
-        "reduced_fecal_output": ["small_fecal_pellets", "constipation"],
-        "bloating": ["abdominal_distension"], "abdominal_distension": ["bloating"],
+        "reduced_fecal_output": ["small_fecal_pellets", "constipation", "decreased_fecal_output"],
+        "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
+        "bloating": ["abdominal_distension", "abdominal_pain"], "abdominal_distension": ["bloating", "abdominal_pain"],
+        "abdominal_pain": ["bloating", "abdominal_distension", "hunched_posture"],
+        "hunched_posture": ["abdominal_pain"],
         "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
-        "frequent_urination": ["excessive_urination", "polyuria"],
-        "excessive_urination": ["frequent_urination", "polyuria"],
+        "frequent_urination": ["excessive_urination", "polyuria", "increased_urination"],
+        "excessive_urination": ["frequent_urination", "polyuria", "increased_urination"],
+        "increased_urination": ["excessive_urination", "frequent_urination", "polyuria"],
         "excessive_thirst": ["polydipsia", "increased_thirst"],
-        "hair_loss": ["alopecia", "scaling", "quill_loss", "severe_quill_loss", "feather_loss"],
-        "alopecia": ["hair_loss"],
-        "skin_lesions": ["scaling", "dermatitis", "skin_rash", "crusting", "thick_crusting", "flaky_skin", "dry_skin", "shell_discoloration", "shell_pitting"],
-        "scaling": ["skin_lesions", "dandruff"],
+        "increased_thirst": ["excessive_thirst", "polydipsia"],
+        "polydipsia": ["excessive_thirst", "increased_thirst"],
+        "polyuria": ["excessive_urination", "frequent_urination", "increased_urination"],
+        "hair_loss": ["alopecia", "scaling", "quill_loss", "severe_quill_loss", "feather_loss", "circular_hair_loss"],
+        "circular_hair_loss": ["hair_loss", "alopecia"],
+        "alopecia": ["hair_loss", "circular_hair_loss"],
+        "feather_loss": ["hair_loss", "feather_plucking"],
+        "feather_plucking": ["feather_loss", "self_mutilation"],
+        "skin_lesions": ["scaling", "dermatitis", "skin_rash", "crusting", "thick_crusting", "flaky_skin", "dry_skin", "shell_discoloration", "shell_pitting", "skin_crusting"],
+        "scaly_skin": ["scaling", "dandruff", "skin_crusting", "dry_skin"],
+        "skin_crusting": ["scaling", "scaly_skin", "dandruff"],
+        "scaling": ["skin_lesions", "dandruff", "scaly_skin"],
+        "dandruff": ["scaling", "scaly_skin", "skin_crusting"],
         "itching": ["pruritus", "scratching", "mild_itching", "ear_scratching"],
         "pruritus": ["itching", "scratching", "mild_itching", "ear_scratching"],
-        "cloudy_eyes": ["cloudy_eye", "cloudiness_in_eyes"], "cloudy_eye": ["cloudy_eyes"],
+        "cloudy_eyes": ["cloudy_eye", "cloudiness_in_eyes", "corneal_cloudiness", "corneal_opacity"],
+        "cloudy_eye": ["cloudy_eyes", "corneal_cloudiness", "corneal_opacity"],
+        "corneal_opacity": ["corneal_cloudiness", "cloudy_eyes", "cloudy_eye"],
+        "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye"],
+        "tearing": ["excessive_tearing", "epiphora"], "excessive_tearing": ["tearing", "epiphora"],
+        "vision_loss": ["blindness", "cloudy_eye", "cataracts"],
         "open_mouth_breathing": ["respiratory_distress", "labored_breathing"],
-        "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots", "fractures"],
+        "labored_breathing": ["respiratory_distress", "open_mouth_breathing", "dyspnea"],
+        "respiratory_distress": ["labored_breathing", "open_mouth_breathing", "dyspnea"],
+        "wheezing": ["coughing", "labored_breathing", "respiratory_distress"],
+        "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots", "fractures", "bone_deformity", "soft_shell", "shell_softening"],
+        "bone_deformity": ["soft_bones", "limb_deformity", "shell_deformity", "fractures", "swollen_limbs"],
+        "shell_softening": ["soft_shell", "soft_bones", "shell_deformity"],
+        "soft_shell": ["shell_softening", "soft_bones", "shell_deformity"],
+        "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],
         "head_tilt": ["vestibular_signs", "torticollis"],
         "fluffed_feathers": ["feather_fluffing"],
         "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_limb_paralysis"],
         "paralysis": ["hind_limb_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
-        "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye"],
+        "sudden_paralysis": ["hind_limb_paralysis", "paralysis", "paralysis_or_paresis"],
+        "hind_limb_paralysis": ["paralysis", "sudden_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
+        "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye", "eye_protrusion"],
+        "eye_protrusion": ["eye_swelling", "eye_bulging", "pop_eye", "exophthalmos", "bulging_eye", "proptosis"],
+        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "proptosis"],
+        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "proptosis"],
         "jaundice": ["icterus", "yellow_skin"],
         "vomiting": ["regurgitation", "crop_stasis"],
+        "regurgitation": ["vomiting"],
         "head_shaking": ["head_bobbing"],
         "gill_swelling": ["gill_redness"],
         "gill_paleness": ["gill_necrosis"],
         "nystagmus": ["head_tilt", "rolling"],
         "ataxia": ["tremors", "incoordination", "wobbling", "stumbling", "mild_ataxia"],
         "tremors": ["ataxia", "shaking", "muscle_twitching"],
+        "wobbling": ["ataxia", "incoordination", "stumbling"],
         "ear_discharge": ["ear_infection", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "uterine_bleeding"],
         "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
         "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
-        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
+        "weight_gain": ["obesity", "overweight"],
+        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch", "depression"],
+        "depression": ["lethargy", "weakness"],
         "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis"],
         "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis"],
         "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
@@ -1446,6 +1536,26 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "thinning_skin": ["hair_loss"],
         "darkened_coloration": ["dark_coloration", "discoloration"],
         "dark_coloration": ["darkened_coloration", "discoloration"],
+        "cold_limbs": ["cold_extremities"], "cold_extremities": ["cold_limbs"],
+        "self_mutilation": ["self_chewing", "feather_plucking"],
+        "self_chewing": ["self_mutilation"],
+        "behavioral_change": ["behavioral_changes", "aggression"],
+        "behavioral_changes": ["behavioral_change"],
+        "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
+        "pleural_effusion": ["effusion", "abdominal_distension"],
+        "ascites": ["effusion", "abdominal_distension", "bloating"],
+        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion"],
+        "dental_overgrowth": ["overgrown_teeth", "malocclusion"],
+        "dysecdysis": ["retained_shed", "retained_skin", "shedding_problems"],
+        "retained_shed": ["dysecdysis", "retained_skin"],
+        "retained_skin": ["dysecdysis", "retained_shed"],
+        "crop_swelling": ["crop_stasis", "ingluvitis"],
+        "crop_stasis": ["crop_swelling", "ingluvitis"],
+        "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
+        "red_ventrum": ["red_legs", "skin_redness"],
+        "edema": ["swelling", "bloating", "ascites"],
+        "swelling": ["edema", "facial_swelling", "eye_swelling"],
+        "rough_coat": ["poor_coat", "dry_skin"],
     }
     expanded_set = set(symptom_ids)
     for sid in symptom_ids:
@@ -1458,10 +1568,10 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
     from api.species import prevalence_data as _prev_mod
     _prevalence = _prev_mod.SPECIES_PREVALENCE.get(species, {})
     _PREVALENCE_MULTIPLIER = {
-        "very_common": 1.20,
-        "common": 1.0,
-        "uncommon": 0.90,
-        "rare": 0.80,
+        "very_common": 1.30,
+        "common": 1.05,
+        "uncommon": 0.85,
+        "rare": 0.70,
     }
 
     # --- Build per-symptom specificity for this species ---
@@ -2739,13 +2849,27 @@ def _build_follow_up_questions(
     onset: str | None,
     age: float | None,
     symptoms: list,
+    disease_candidates: list | None = None,
+    species: str = "dog",
 ) -> list[dict]:
-    """Build context-aware follow-up questions for the chat UI.
+    """Build context-aware follow-up questions for interactive consultation.
 
-    If onset or age information is missing, suggest the user provide it.
+    Generates targeted symptom questions based on top disease candidates
+    to progressively narrow differential diagnosis — mimicking a vet exam.
     """
-    questions = []
+    questions: list[dict] = []
 
+    # Phase 1: If no symptoms yet, ask what's wrong
+    if not symptoms:
+        questions.append({
+            "question_ja": "どのような症状がありますか？",
+            "question_en": "What symptoms are you seeing?",
+            "type": "symptoms",
+            "options": [],
+        })
+        return questions
+
+    # Phase 2: Basic context (onset / age) — ask once
     if not onset:
         questions.append({
             "question_ja": "症状はいつ頃から始まりましたか？",
@@ -2764,20 +2888,44 @@ def _build_follow_up_questions(
             "question_en": "How old is the animal? (approximate is fine)",
             "type": "age",
             "options": [
-                {"value": 0.5, "label_ja": "1歳未満（子犬/子猫）", "label_en": "Under 1 year (puppy/kitten)"},
-                {"value": 2.0, "label_ja": "1〜3歳（若齢）", "label_en": "1–3 years (young)"},
-                {"value": 5.0, "label_ja": "3〜7歳（成犬/成猫）", "label_en": "3–7 years (adult)"},
-                {"value": 10.0, "label_ja": "7歳以上（高齢）", "label_en": "7+ years (senior)"},
+                {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
+                {"value": 3.0, "label_ja": "1〜5歳", "label_en": "1–5 years"},
+                {"value": 8.0, "label_ja": "5歳以上", "label_en": "5+ years"},
             ],
         })
 
-    if not symptoms:
-        questions.append({
-            "question_ja": "どのような症状がありますか？",
-            "question_en": "What symptoms are you seeing?",
-            "type": "symptoms",
-            "options": [],
-        })
+    # Phase 3: Targeted symptom questions from disease candidates
+    if disease_candidates and len(symptoms) >= 1:
+        symptom_set = set(symptoms)
+        # Collect key missing symptoms from top candidates for differentiation
+        seen_symptoms: set[str] = set()
+        sp_names = {}
+        if species in _SPECIES_DATA:
+            sp_names = _SPECIES_DATA[species].get("symptom_names", {})
+
+        for candidate in disease_candidates[:5]:
+            missing = candidate.get("missing_key_symptoms") or candidate.get("additional_disease_symptoms", [])
+            for sid in missing[:3]:
+                if sid in symptom_set or sid in seen_symptoms:
+                    continue
+                if len(questions) >= 5:
+                    break
+                seen_symptoms.add(sid)
+                names = sp_names.get(sid, {})
+                name_ja = names.get("ja", sid)
+                name_en = names.get("en", sid)
+                questions.append({
+                    "question_ja": f"{name_ja}はありますか？",
+                    "question_en": f"Is there {name_en.lower()}?",
+                    "type": "symptom_check",
+                    "symptom_id": sid,
+                    "options": [
+                        {"value": f"+{sid}", "label_ja": f"はい — {name_ja}", "label_en": f"Yes — {name_en}"},
+                        {"value": f"-{sid}", "label_ja": "いいえ", "label_en": "No"},
+                    ],
+                })
+            if len(questions) >= 5:
+                break
 
     return questions
 
@@ -2949,7 +3097,8 @@ def diagnostic_chat():
         "onset_detected_from_text": detected_onset,
         "age_detected_from_text": detected_age,
         "follow_up_questions": _build_follow_up_questions(
-            effective_onset, effective_age, all_symptoms
+            effective_onset, effective_age, all_symptoms,
+            disease_candidates=enhanced_candidates, species=species,
         ),
         "recommendations": {
             "next_step": "This is reference information only. Supervised by Kentaro Kaimide, DVM (Minamisoma Vet Clinic). Please consult a veterinarian for professional evaluation.",
@@ -3366,3 +3515,377 @@ def analyze_multidisease():
     except Exception as e:
         logger.error(f"Error in multi-disease analysis: {e}", exc_info=True)
         return jsonify({"error": "multidisease_analysis_failed"}), 500
+
+
+# =============================================================================
+# GUIDED CONSULTATION (問診モード)
+# =============================================================================
+
+# Category labels for UI display
+_CATEGORY_LABELS = {
+    "respiratory": {"ja": "呼吸器系", "en": "Respiratory"},
+    "digestive": {"ja": "消化器系", "en": "Digestive"},
+    "skin": {"ja": "皮膚・被毛", "en": "Skin / Coat"},
+    "dermatological": {"ja": "皮膚・被毛", "en": "Skin / Coat"},
+    "neurological": {"ja": "神経系", "en": "Neurological"},
+    "musculoskeletal": {"ja": "運動器", "en": "Musculoskeletal"},
+    "urinary": {"ja": "泌尿器系", "en": "Urinary"},
+    "ophthalmological": {"ja": "眼科", "en": "Ophthalmological"},
+    "eyes": {"ja": "眼科", "en": "Eyes"},
+    "cardiovascular": {"ja": "循環器系", "en": "Cardiovascular"},
+    "behavioral": {"ja": "行動・元気", "en": "Behavioral"},
+    "general": {"ja": "全身症状", "en": "General"},
+    "reproductive": {"ja": "生殖器系", "en": "Reproductive"},
+    "emergency": {"ja": "緊急症状", "en": "Emergency"},
+    "parasites": {"ja": "寄生虫", "en": "Parasites"},
+    "fins": {"ja": "鰭", "en": "Fins"},
+    "gills": {"ja": "鰓", "en": "Gills"},
+    "behavior": {"ja": "行動", "en": "Behavior"},
+    "other": {"ja": "その他", "en": "Other"},
+}
+
+
+def _get_species_symptoms_with_categories(species: str) -> list[dict]:
+    """Get all symptoms for a species with category info."""
+    from api.disease_store import get_symptoms_for_species
+    symptoms = get_symptoms_for_species(species)
+    if symptoms:
+        return symptoms
+
+    # Fallback: build from _SPECIES_DATA
+    sp_data = _SPECIES_DATA.get(species)
+    if not sp_data:
+        # Dog fallback
+        return [
+            {"id": s["id"], "name_ja": s["name_ja"], "name_en": s["name_en"],
+             "category": s.get("category", "other")}
+            for s in SYMPTOMS
+        ]
+    sym_names = sp_data["symptom_names"]
+    return [
+        {"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),
+         "category": "other"}
+        for sid, v in sym_names.items()
+    ]
+
+
+def _group_symptoms_by_category(symptoms: list[dict]) -> dict[str, list[dict]]:
+    """Group symptoms by category, returning {category: [symptom, ...]}."""
+    groups: dict[str, list[dict]] = {}
+    for s in symptoms:
+        cat = s.get("category", "other")
+        groups.setdefault(cat, []).append(s)
+    return groups
+
+
+def _suggest_next_categories(
+    species: str,
+    selected_symptoms: list[str],
+    answered_categories: list[str],
+    disease_matches: list[dict],
+    all_symptoms: list[dict],
+) -> list[dict]:
+    """Suggest the most informative symptom categories to ask about next.
+
+    Looks at top disease candidates and finds which un-asked categories
+    contain symptoms that would best differentiate between them.
+    """
+    selected_set = set(selected_symptoms)
+    answered_set = set(answered_categories)
+
+    # Collect differentiating symptoms from top 10 disease candidates
+    diff_symptoms: dict[str, int] = {}  # symptom_id -> count of diseases containing it
+    for dm in disease_matches[:10]:
+        for s in dm.get("additional_disease_symptoms", []):
+            if s not in selected_set:
+                diff_symptoms[s] = diff_symptoms.get(s, 0) + 1
+
+    # Map symptom IDs to categories
+    sym_cat_map = {s["id"]: s.get("category", "other") for s in all_symptoms}
+
+    # Score each unanswered category by how many differentiating symptoms it has
+    cat_scores: dict[str, int] = {}
+    for sid, count in diff_symptoms.items():
+        cat = sym_cat_map.get(sid, "other")
+        if cat not in answered_set:
+            cat_scores[cat] = cat_scores.get(cat, 0) + count
+
+    # Sort by score descending, return top 3
+    sorted_cats = sorted(cat_scores.items(), key=lambda x: x[1], reverse=True)
+    result = []
+    for cat, score in sorted_cats[:3]:
+        labels = _CATEGORY_LABELS.get(cat, {"ja": cat, "en": cat})
+        result.append({
+            "id": cat,
+            "name_ja": labels["ja"],
+            "name_en": labels["en"],
+            "differentiating_count": score,
+        })
+    return result
+
+
+@diagnostic_bp.route("/consultation", methods=["POST"])
+def consultation():
+    """Guided consultation endpoint (問診モード).
+
+    Manages an interactive interview flow where the system asks symptom
+    questions step by step, similar to a veterinary examination.
+
+    Request JSON:
+    {
+        "species": "cat",
+        "phase": "start" | "select_symptoms" | "next_category" | "ask_context" | "finalize",
+        "selected_symptoms": ["fever", "coughing"],
+        "selected_category": "respiratory",
+        "answered_categories": ["respiratory"],
+        "onset": null,
+        "age_years": null
+    }
+    """
+    data = request.get_json() or {}
+    species = data.get("species", "dog")
+    phase = data.get("phase", "start")
+    selected_symptoms = data.get("selected_symptoms", [])
+    selected_category = data.get("selected_category")
+    answered_categories = data.get("answered_categories", [])
+    onset = data.get("onset")
+    age_years = data.get("age_years")
+
+    sp_label = SPECIES_LABELS.get(species, {"ja": species, "en": species})
+    all_symptoms = _get_species_symptoms_with_categories(species)
+    grouped = _group_symptoms_by_category(all_symptoms)
+
+    # ------------------------------------------------------------------
+    # Phase: START — return available symptom categories
+    # ------------------------------------------------------------------
+    if phase == "start":
+        categories = []
+        for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1])):
+            labels = _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})
+            categories.append({
+                "id": cat_id,
+                "name_ja": labels["ja"],
+                "name_en": labels["en"],
+                "symptom_count": len(syms),
+            })
+        return jsonify({
+            "phase": "select_category",
+            "message_ja": f"{sp_label['ja']}の問診を始めます。一番気になる症状のカテゴリを選んでください。",
+            "message_en": f"Starting consultation for {sp_label['en']}. Please select the symptom category that concerns you most.",
+            "categories": categories,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: SELECT_SYMPTOMS — return symptoms for a chosen category
+    # ------------------------------------------------------------------
+    if phase == "select_symptoms":
+        if not selected_category:
+            return jsonify({"error": "selected_category required"}), 400
+
+        cat_symptoms = grouped.get(selected_category, [])
+        labels = _CATEGORY_LABELS.get(selected_category, {"ja": selected_category, "en": selected_category})
+
+        return jsonify({
+            "phase": "show_symptoms",
+            "category": selected_category,
+            "category_label_ja": labels["ja"],
+            "category_label_en": labels["en"],
+            "message_ja": f"{labels['ja']}の症状について教えてください。当てはまるものを全て選んでください。",
+            "message_en": f"Tell us about {labels['en']} symptoms. Select all that apply.",
+            "symptoms": [
+                {
+                    "id": s["id"],
+                    "name_ja": s["name_ja"],
+                    "name_en": s["name_en"],
+                    "selected": s["id"] in selected_symptoms,
+                }
+                for s in cat_symptoms
+            ],
+            "selected_symptoms": selected_symptoms,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: NEXT_CATEGORY — run diagnosis + suggest next category
+    # ------------------------------------------------------------------
+    if phase == "next_category":
+        if not selected_symptoms:
+            return jsonify({
+                "phase": "select_category",
+                "message_ja": "症状が選択されていません。カテゴリを選んでください。",
+                "message_en": "No symptoms selected. Please select a category.",
+                "categories": [
+                    {
+                        "id": cat_id,
+                        "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id})["ja"],
+                        "name_en": _CATEGORY_LABELS.get(cat_id, {"en": cat_id})["en"],
+                        "symptom_count": len(syms),
+                    }
+                    for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1]))
+                ],
+                "species": species,
+            }), 200
+
+        # Run diagnosis with current symptoms
+        if species == "horse" and EQUINE_AVAILABLE:
+            disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
+        elif species in _SPECIES_DATA:
+            disease_matches = _match_species_symptoms_to_diseases(selected_symptoms, species)
+        else:
+            disease_matches = match_symptoms_to_diseases(selected_symptoms)
+
+        # Build symptom details for display
+        sym_name_map = {s["id"]: s for s in all_symptoms}
+        symptom_details = [
+            {
+                "id": sid,
+                "name_ja": sym_name_map.get(sid, {}).get("name_ja", sid),
+                "name_en": sym_name_map.get(sid, {}).get("name_en", sid),
+            }
+            for sid in selected_symptoms
+        ]
+
+        # Suggest next categories
+        next_cats = _suggest_next_categories(
+            species, selected_symptoms, answered_categories,
+            disease_matches, all_symptoms,
+        )
+
+        # Build top candidates
+        top_candidates = []
+        for d in disease_matches[:5]:
+            top_candidates.append({
+                "name_ja": d.get("name_ja", ""),
+                "name_en": d.get("name_en", d.get("disease_id", "")),
+                "similarity_score": d.get("similarity_score", 0),
+                "confidence_percent": d.get("confidence_percent", 0),
+                "severity": d.get("severity", "low"),
+                "matched_symptoms": d.get("matched_symptoms", []),
+                "description_ja": d.get("description_ja", ""),
+                "description_en": d.get("description", d.get("description_en", "")),
+                "additional_disease_symptoms": d.get("additional_disease_symptoms", []),
+            })
+
+        has_more = len(next_cats) > 0
+        return jsonify({
+            "phase": "interim_results",
+            "message_ja": f"{len(selected_symptoms)}個の症状から{len(disease_matches)}件の候補が見つかりました。"
+                          + ("さらに絞り込むために、他のカテゴリの症状も確認しましょう。" if has_more else ""),
+            "message_en": f"Found {len(disease_matches)} candidates from {len(selected_symptoms)} symptoms."
+                          + (" Let's check other categories to narrow down." if has_more else ""),
+            "disease_candidates": top_candidates,
+            "total_candidates": len(disease_matches),
+            "selected_symptoms": selected_symptoms,
+            "symptom_details": symptom_details,
+            "next_categories": next_cats,
+            "answered_categories": answered_categories,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: ASK_CONTEXT — ask about onset and age
+    # ------------------------------------------------------------------
+    if phase == "ask_context":
+        questions = []
+        if not onset:
+            questions.append({
+                "type": "onset",
+                "question_ja": "症状はいつ頃から始まりましたか？",
+                "question_en": "When did the symptoms start?",
+                "options": [
+                    {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
+                    {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
+                    {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
+                ],
+            })
+        if age_years is None:
+            questions.append({
+                "type": "age",
+                "question_ja": "何歳ですか？（だいたいで構いません）",
+                "question_en": "How old is the animal? (approximate is fine)",
+                "options": [
+                    {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
+                    {"value": 2.0, "label_ja": "1〜3歳", "label_en": "1–3 years"},
+                    {"value": 5.0, "label_ja": "3〜7歳", "label_en": "3–7 years"},
+                    {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
+                ],
+            })
+        return jsonify({
+            "phase": "context_questions",
+            "message_ja": "あと少しだけ教えてください。",
+            "message_en": "Just a few more details.",
+            "questions": questions,
+            "selected_symptoms": selected_symptoms,
+            "species": species,
+        })
+
+    # ------------------------------------------------------------------
+    # Phase: FINALIZE — run final diagnosis with full context
+    # ------------------------------------------------------------------
+    if phase == "finalize":
+        # Use the same diagnosis engine as the checkbox system for accuracy parity
+        if species in _SPECIES_DATA or species == "dog":
+            try:
+                from api.species_analyzer import analyze_species_symptoms
+                result = analyze_species_symptoms(
+                    species=species,
+                    symptoms=selected_symptoms,
+                    onset=onset,
+                    age_years=age_years,
+                )
+            except (ImportError, Exception):
+                # Fallback to chat engine
+                if species == "horse" and EQUINE_AVAILABLE:
+                    disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
+                elif species in _SPECIES_DATA:
+                    disease_matches = _match_species_symptoms_to_diseases(selected_symptoms, species)
+                else:
+                    disease_matches = match_symptoms_to_diseases(selected_symptoms)
+                result = {
+                    "suspected_diseases": [
+                        {
+                            "name": d.get("name_en", d.get("disease_id", "")),
+                            "name_ja": d.get("name_ja", ""),
+                            "match_percent": round(d.get("similarity_score", 0) * 100),
+                            "matching_symptoms": d.get("matched_symptoms", []),
+                            "total_symptoms": len(d.get("matched_symptoms", [])) + len(d.get("additional_disease_symptoms", [])),
+                            "severity": d.get("severity", "low"),
+                            "description_ja": d.get("description_ja", ""),
+                            "description": d.get("description", d.get("description_en", "")),
+                            "recommended_tests": d.get("recommended_tests", []),
+                        }
+                        for d in disease_matches[:10]
+                    ],
+                }
+        else:
+            result = {"suspected_diseases": []}
+
+        # Build symptom details
+        sym_name_map = {s["id"]: s for s in all_symptoms}
+        symptom_details = [
+            {
+                "id": sid,
+                "name_ja": sym_name_map.get(sid, {}).get("name_ja", sid),
+                "name_en": sym_name_map.get(sid, {}).get("name_en", sid),
+            }
+            for sid in selected_symptoms
+        ]
+
+        return jsonify({
+            "phase": "final_results",
+            "message_ja": f"問診結果です。{len(selected_symptoms)}個の症状をもとに診断候補を算出しました。",
+            "message_en": f"Consultation results. Calculated candidates based on {len(selected_symptoms)} symptoms.",
+            "result": result,
+            "selected_symptoms": selected_symptoms,
+            "symptom_details": symptom_details,
+            "onset": onset,
+            "age_years": age_years,
+            "species": species,
+            "recommendations": {
+                "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",
+                "next_step_en": "This is reference information only. Supervised by Kentaro Kaimide, DVM. Please consult a veterinarian.",
+            },
+        })
+
+    return jsonify({"error": f"Unknown phase: {phase}"}), 400
