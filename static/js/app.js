@@ -613,8 +613,9 @@ function doAnalyze(){
   const labVals=collectLabValues();
   if(labVals)payload.lab_values=labVals;
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
-  .then(r=>r.json()).then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})
-  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${t("errorPrefix")}${err.message}</div>`;})
+  .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
+  .then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})
+  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${t("errorPrefix")}${err.message}</div>`;console.error("Analyze error:",err);})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
