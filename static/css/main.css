@@ -652,3 +652,16 @@ body.is-pro .pro-restore{display:none}
 .share-line{background:#06c755;color:#fff}
 .share-line:hover{background:#05a847;color:#fff;text-decoration:none}
 [data-theme="dark"] .share-section{background:var(--navy-dark);border-color:rgba(255,255,255,.05)}
+
+/* --- Email signup / waitlist --- */
+.email-signup{margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200)}
+.email-signup-label{font-size:.76rem;color:var(--gray-500);margin-bottom:6px;font-weight:600}
+.email-signup-row{display:flex;gap:6px}
+.email-signup-input{flex:1;padding:8px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:.8rem;font-family:var(--font)}
+.email-signup-input:focus{border-color:var(--navy-light);outline:none;box-shadow:0 0 0 2px rgba(42,74,143,.1)}
+.email-signup-btn{padding:8px 16px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--font);white-space:nowrap}
+.email-signup-btn:hover{background:var(--navy-light)}
+.email-signup-btn:disabled{opacity:.5;cursor:not-allowed}
+.email-signup-msg{font-size:.72rem;margin-top:4px;min-height:1em}
+.email-signup-msg.success{color:#16a34a}
+.email-signup-msg.error{color:#dc2626}

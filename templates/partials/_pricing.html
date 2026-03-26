@@ -25,7 +25,43 @@
       <div class="pricing-cta">
         <span class="pricing-btn pricing-btn-pro" style="background:var(--green);pointer-events:none">現在すべて無料でご利用中</span>
         <p class="pricing-note">正式リリース後は一部機能が有料プラン（¥980/月）に移行予定です</p>
+        <!-- Email signup for launch notification -->
+        <div class="email-signup" id="emailSignup">
+          <p class="email-signup-label">正式リリース時に通知を受け取る</p>
+          <div class="email-signup-row">
+            <input type="email" id="signupEmail" placeholder="メールアドレス" class="email-signup-input">
+            <button onclick="submitEmailSignup()" class="email-signup-btn" id="signupBtn">登録</button>
+          </div>
+          <p class="email-signup-msg" id="signupMsg"></p>
+        </div>
       </div>
     </div>
   </div>
 </section>
+<script>
+function submitEmailSignup(){
+  var email=document.getElementById("signupEmail").value.trim();
+  var msg=document.getElementById("signupMsg");
+  var btn=document.getElementById("signupBtn");
+  if(!email||email.indexOf("@")<0){msg.textContent="有効なメールアドレスを入力してください";msg.className="email-signup-msg error";return;}
+  btn.textContent="登録中...";btn.disabled=true;
+  fetch("/api/paypal/waitlist",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.status==="ok"){
+      msg.textContent="登録完了！正式リリース時にお知らせします。";
+      msg.className="email-signup-msg success";
+      btn.textContent="登録済み";
+      document.getElementById("signupEmail").disabled=true;
+      if(typeof trackEvent==="function")trackEvent("waitlist_signup",{email_domain:email.split("@")[1]});
+    } else {
+      msg.textContent=d.error||"エラーが発生しました";
+      msg.className="email-signup-msg error";
+      btn.textContent="登録";btn.disabled=false;
+    }
+  }).catch(function(){
+    msg.textContent="通信エラー";msg.className="email-signup-msg error";
+    btn.textContent="登録";btn.disabled=false;
+  });
+}
+</script>
