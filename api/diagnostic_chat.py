@@ -1299,6 +1299,9 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # Guinea pig scurvy
         "bleeding_gums": ["swollen_gums", "oral_bleeding"],
         "swollen_joints": ["joint_swelling", "lameness_or_limping", "lameness"],
+        # Fish
+        "darkened_coloration": ["dark_coloration", "discoloration"],
+        "dark_coloration": ["darkened_coloration", "discoloration"],
     }
 
     def _resolve_id(sid: str) -> str | None:
@@ -1407,6 +1410,8 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "poor_coat": ["hair_loss", "dry_skin"], "dry_skin": ["poor_coat", "flaky_skin", "scaling"],
         "flaky_skin": ["dry_skin", "scaling", "crusting"],
         "thinning_skin": ["hair_loss"],
+        "darkened_coloration": ["dark_coloration", "discoloration"],
+        "dark_coloration": ["darkened_coloration", "discoloration"],
     }
     expanded_set = set(symptom_ids)
     for sid in symptom_ids:
