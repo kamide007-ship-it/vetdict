@@ -261,3 +261,57 @@ def list_subscribers():
         "active": active_count,
         "subscribers": data["subscribers"],
     })
+
+
+# ---------------------------------------------------------------------------
+# Email waitlist for launch notification
+# ---------------------------------------------------------------------------
+_WAITLIST_FILE = Path(__file__).resolve().parent.parent / "instance" / "waitlist.json"
+
+
+def _load_waitlist() -> list:
+    if _WAITLIST_FILE.exists():
+        try:
+            with open(_WAITLIST_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            pass
+    return []
+
+
+def _save_waitlist(data: list) -> None:
+    _WAITLIST_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(_WAITLIST_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+@paypal_bp.route("/waitlist", methods=["POST"])
+def join_waitlist():
+    """Add email to launch notification waitlist."""
+    body = request.get_json(silent=True) or {}
+    email = body.get("email", "").strip().lower()
+
+    if not email or "@" not in email:
+        return jsonify({"error": "valid email required"}), 400
+
+    waitlist = _load_waitlist()
+    if email not in [e.get("email") for e in waitlist]:
+        waitlist.append({
+            "email": email,
+            "signed_up_at": datetime.utcnow().isoformat(),
+        })
+        _save_waitlist(waitlist)
+        logger.info(f"Waitlist signup: {email}")
+
+    return jsonify({"status": "ok", "total": len(waitlist)})
+
+
+@paypal_bp.route("/waitlist", methods=["GET"])
+def get_waitlist():
+    """Admin: list waitlist emails."""
+    token = request.headers.get("X-Admin-Token", "")
+    admin_token = os.getenv("ADMIN_TOKEN", "kamide007")
+    if token != admin_token:
+        return jsonify({"error": "unauthorized"}), 403
+    waitlist = _load_waitlist()
+    return jsonify({"total": len(waitlist), "emails": waitlist})

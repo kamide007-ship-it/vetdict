@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#1a3068"/>
+  <text x="600" y="220" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="120" font-weight="800">
+    <tspan fill="#ffffff">Vet</tspan><tspan fill="#22a84f">Dict</tspan>
+  </text>
+  <text x="600" y="320" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="36" fill="rgba(255,255,255,0.8)">
+    獣医学疾患データベース
+  </text>
+  <text x="600" y="420" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="28" fill="rgba(255,255,255,0.5)">
+    21動物種 · 6,400+疾患 · 187薬品 · AI診断チャット
+  </text>
+  <text x="600" y="560" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="rgba(255,255,255,0.3)">
+    vetdict.info — Developed by Kentaro Kamide, DVM
+  </text>
+</svg>

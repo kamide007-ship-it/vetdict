@@ -70,25 +70,25 @@ class TestHTMLIntegration:
     """Test HTML includes frontend assets."""
 
     def test_html_includes_multidisease_css(self):
-        """Test that index.html includes multi-disease CSS."""
+        """Test that index.html includes main CSS (which now contains multidisease styles)."""
         html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
-        assert "multidisease-ui.css" in html_content, "CSS should be linked in HTML"
+        assert "main.css" in html_content, "CSS should be linked in HTML"
 
     def test_html_includes_multidisease_js(self):
-        """Test that index.html includes multi-disease JS."""
+        """Test that index.html includes app JS (which now contains multidisease scripts)."""
         html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
-        assert "multidisease-ui.js" in html_content, "JS should be linked in HTML"
+        assert "app.js" in html_content, "JS should be linked in HTML"
 
     def test_css_loaded_before_body_content(self):
         """Test that CSS is loaded in head before body."""
         html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
-        css_index = html_content.find("multidisease-ui.css")
+        css_index = html_content.find("main.css")
         body_index = html_content.find("<body")
 
         assert (
@@ -100,7 +100,7 @@ class TestHTMLIntegration:
         html_path = PROJECT_ROOT / "templates" / "index.html"
         html_content = html_path.read_text()
 
-        js_index = html_content.find("multidisease-ui.js")
+        js_index = html_content.find("app.js")
         body_end = html_content.rfind("</body>")
 
         assert js_index > body_end - 500, "JS should be near end of body"
