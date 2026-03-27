@@ -802,7 +802,7 @@ SYMPTOM_ALIASES = {
     "甲羅が柔らかい": "soft_bones", "甲羅がぶよぶよ": "soft_bones",
     "手足が変形してる": "bone_deformity", "顎が柔らかい": "jaw_softening",
     "代謝性骨疾患": "soft_bones", "mbd": "soft_bones",
-    "後ろ足が弱い": "hind_limb_weakness", "後ろ足が動かない": "hind_limb_weakness",
+    "後ろ足が弱い": "hind_limb_weakness",
     "後肢麻痺": "hind_limb_weakness", "後ろ足ふらふら": "hind_limb_weakness",
     "後ろ足に力が入らない": "hind_limb_weakness", "後肢が弱い": "hind_limb_weakness",
     "口の中に病変": "mouth_lesions", "口の中が腫れてる": "mouth_lesions",
