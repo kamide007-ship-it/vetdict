@@ -834,6 +834,206 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Systemic fungal infections. Diabetes mellitus (relative). GI ulceration. Active infections without antibiotic coverage.",
         "contraindications_ja": "全身性真菌感染症。糖尿病（相対的禁忌）。消化管潰瘍。抗菌薬カバーのない活動性感染症。",
     },
+    # ------------------------------------------------------------------
+    # Imidacloprid + Moxidectin (Advocate/Advantage Multi)
+    # ------------------------------------------------------------------
+    {
+        "id": "imidacloprid_moxidectin",
+        "name": "Imidacloprid + Moxidectin (Advocate/Advantage Multi)",
+        "name_ja": "イミダクロプリド＋モキシデクチン（アドボケート）",
+        "category": "antiparasitics",
+        "mechanism": "Combination topical: imidacloprid (neonicotinoid, kills fleas) + moxidectin (macrocyclic lactone, kills heartworm larvae, GI nematodes, ear mites, and Demodex/Sarcoptes). Broad-spectrum endo/ectoparasiticide.",
+        "mechanism_ja": "配合外用薬：イミダクロプリド（ネオニコチノイド、ノミ駆除）＋モキシデクチン（マクロライド系、フィラリア幼虫・消化管線虫・ミミヒゼンダニ・ニキビダニ/疥癬虫を駆除）。広域スペクトル内外部寄生虫駆除薬。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "10 mg/kg imidacloprid + 2.5 mg/kg moxidectin topical monthly",
+                "dosage_ja": "イミダクロプリド10 mg/kg＋モキシデクチン2.5 mg/kg 外用 月1回",
+                "notes": "Heartworm prevention + flea treatment + GI nematodes + mites. AVOID in dogs with MDR1 mutation at high doses. Do not use orally",
+                "notes_ja": "フィラリア予防＋ノミ駆除＋消化管線虫＋ダニ。MDR1変異犬は高用量で注意。経口使用不可",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "10 mg/kg imidacloprid + 1 mg/kg moxidectin topical monthly",
+                "dosage_ja": "イミダクロプリド10 mg/kg＋モキシデクチン1 mg/kg 外用 月1回",
+                "notes": "Heartworm prevention + flea/ear mite/roundworm treatment. Safe for cats ≥9 weeks",
+                "notes_ja": "フィラリア予防＋ノミ・ミミヒゼンダニ・回虫駆除。9週齢以上の猫に安全",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "0.4 mL/ferret (cat <4kg pipette) topical monthly",
+                "dosage_ja": "0.4 mL/匹（猫4kg未満用ピペット）外用 月1回",
+                "notes": "Approved for ferrets in EU (Advocate). Heartworm prevention and flea control",
+                "notes_ja": "EUでフェレットに承認（アドボケート）。フィラリア予防＋ノミ駆除",
+            },
+        },
+        "side_effects": ["transient skin irritation", "lethargy (rare)", "GI upset if ingested"],
+        "side_effects_ja": ["一過性皮膚刺激", "倦怠感（稀）", "経口摂取時の消化器症状"],
+        "contraindications": "Not for oral use. Puppies/kittens <7-9 weeks. Caution in MDR1 mutant breeds (collies).",
+        "contraindications_ja": "経口使用不可。7-9週齢未満の子犬/子猫。MDR1変異種（コリー系）は注意。",
+    },
+    # ------------------------------------------------------------------
+    # Milbemycin oxime + Praziquantel (Milbemax/Interceptor Plus)
+    # ------------------------------------------------------------------
+    {
+        "id": "milbemycin_praziquantel",
+        "name": "Milbemycin Oxime + Praziquantel (Milbemax/Interceptor Plus)",
+        "name_ja": "ミルベマイシンオキシム＋プラジクアンテル（ミルベマックス）",
+        "category": "antiparasitics",
+        "mechanism": "Combination oral: milbemycin oxime (macrocyclic lactone, heartworm prevention + nematodes) + praziquantel (isoquinolone, cestodes including Echinococcus). Monthly broad-spectrum internal parasiticide.",
+        "mechanism_ja": "配合経口薬：ミルベマイシンオキシム（マクロライド系、フィラリア予防＋線虫）＋プラジクアンテル（イソキノロン系、エキノコックス含む条虫）。月1回の広域スペクトル内部寄生虫駆除薬。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "0.5-1 mg/kg milbemycin + 5 mg/kg praziquantel PO monthly",
+                "dosage_ja": "ミルベマイシン0.5-1 mg/kg＋プラジクアンテル5 mg/kg 経口 月1回",
+                "notes": "Heartworm prevention + roundworm/hookworm/whipworm + tapeworm (including Echinococcus). Very commonly used in Japan (ミルベマックス)",
+                "notes_ja": "フィラリア予防＋回虫/鉤虫/鞭虫＋条虫（エキノコックス含む）。日本で非常に頻用（ミルベマックス）",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "2 mg/kg milbemycin + 5 mg/kg praziquantel PO monthly",
+                "dosage_ja": "ミルベマイシン2 mg/kg＋プラジクアンテル5 mg/kg 経口 月1回",
+                "notes": "All-in-one dewormer for cats; safe from 6 weeks. Covers roundworm, hookworm, tapeworm",
+                "notes_ja": "猫のオールインワン駆虫薬。6週齢から安全。回虫、鉤虫、条虫に対応",
+            },
+        },
+        "side_effects": ["rare GI upset", "rare lethargy", "hypersalivation (cats, if tablet crushed)"],
+        "side_effects_ja": ["稀に消化器症状", "稀に倦怠感", "流涎（猫、錠剤を砕いた場合）"],
+        "contraindications": "Puppies <2 weeks or kittens <6 weeks. Caution in MDR1 mutant breeds at higher doses.",
+        "contraindications_ja": "2週齢未満の子犬・6週齢未満の子猫。MDR1変異種は高用量で注意。",
+    },
+    # ------------------------------------------------------------------
+    # Selamectin + Sarolaner (Stronghold Plus/Revolution Plus)
+    # ------------------------------------------------------------------
+    {
+        "id": "selamectin_sarolaner",
+        "name": "Selamectin + Sarolaner (Revolution Plus/Stronghold Plus)",
+        "name_ja": "セラメクチン＋サロラネル（レボリューションプラス/ストロングホールドプラス）",
+        "category": "antiparasitics",
+        "mechanism": "Combination topical for cats: selamectin (avermectin, heartworm + roundworm + ear mites + fleas) + sarolaner (isoxazoline, ticks + fleas). Broadest spectrum cat-approved topical parasiticide.",
+        "mechanism_ja": "猫用配合外用薬：セラメクチン（アベルメクチン系、フィラリア＋回虫＋ミミヒゼンダニ＋ノミ）＋サロラネル（イソオキサゾリン系、マダニ＋ノミ）。猫に承認された最も広いスペクトルの外用駆虫薬。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "6 mg/kg selamectin + 1 mg/kg sarolaner topical monthly",
+                "dosage_ja": "セラメクチン6 mg/kg＋サロラネル1 mg/kg 外用 月1回",
+                "notes": "Covers fleas, ticks, heartworm, roundworm, hookworm, ear mites. For cats ≥8 weeks and ≥1.25 kg. Very popular in Japan",
+                "notes_ja": "ノミ、マダニ、フィラリア、回虫、鉤虫、ミミヒゼンダニに対応。8週齢以上・1.25kg以上の猫に。日本で非常に人気",
+            },
+        },
+        "side_effects": ["transient hair loss at application site", "lethargy (rare)", "GI upset (rare)"],
+        "side_effects_ja": ["塗布部位の一過性脱毛", "倦怠感（稀）", "消化器症状（稀）"],
+        "contraindications": "Kittens <8 weeks or <1.25 kg. Not for dogs (sarolaner component dose differs).",
+        "contraindications_ja": "8週齢未満または1.25kg未満の子猫。犬には不可（サロラネル成分の用量が異なる）。",
+    },
+    # ------------------------------------------------------------------
+    # Spinosad (Comfortis) – oral flea control
+    # ------------------------------------------------------------------
+    {
+        "id": "spinosad",
+        "name": "Spinosad (Comfortis)",
+        "name_ja": "スピノサド（コンフォティス）",
+        "category": "antiparasitics",
+        "mechanism": "Spinosyn insecticide derived from Saccharopolyspora spinosa. Activates nicotinic acetylcholine receptors in insects causing hyperexcitation and death. Rapid oral flea kill (begins within 30 min, 100% in 4h).",
+        "mechanism_ja": "放線菌Saccharopolyspora spinosa由来のスピノシン系殺虫薬。昆虫のニコチン性アセチルコリン受容体を活性化し過興奮と死滅。速効性経口ノミ駆除（30分以内に効果発現、4時間で100%）。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "30-60 mg/kg PO monthly (with food)",
+                "dosage_ja": "30-60 mg/kg 経口 月1回（食事と）",
+                "notes": "FDA-approved for dogs ≥14 weeks and ≥2.3 kg. Give with food for best absorption. Fastest flea kill among monthly orals",
+                "notes_ja": "14週齢以上・2.3kg以上の犬にFDA承認。食事と投与で吸収向上。月1回経口薬の中で最速のノミ駆除",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "50-100 mg/kg PO monthly (with food)",
+                "dosage_ja": "50-100 mg/kg 経口 月1回（食事と）",
+                "notes": "FDA-approved for cats ≥14 weeks and ≥1.8 kg. Higher dose needed in cats. Vomiting common initially",
+                "notes_ja": "14週齢以上・1.8kg以上の猫にFDA承認。猫は犬より高用量が必要。初期に嘔吐が多い",
+            },
+        },
+        "side_effects": ["vomiting (most common, especially cats)", "diarrhea", "anorexia", "lethargy"],
+        "side_effects_ja": ["嘔吐（最多、特に猫）", "下痢", "食欲不振", "倦怠感"],
+        "contraindications": "Do not combine with high-dose ivermectin (increased ivermectin toxicity via P-gp). Dogs/cats <14 weeks. Epileptic dogs (may lower seizure threshold).",
+        "contraindications_ja": "高用量イベルメクチンとの併用不可（P-gp阻害でイベルメクチン毒性増加）。14週齢未満の犬/猫。てんかん犬（痙攣閾値低下の可能性）。",
+    },
+    # ------------------------------------------------------------------
+    # Hydrochlorothiazide – thiazide diuretic
+    # ------------------------------------------------------------------
+    {
+        "id": "hydrochlorothiazide",
+        "name": "Hydrochlorothiazide (HCTZ)",
+        "name_ja": "ヒドロクロロチアジド",
+        "category": "diuretics",
+        "mechanism": "Thiazide diuretic; inhibits Na-Cl cotransporter in distal convoluted tubule. Mild diuresis. Also reduces urinary calcium excretion (useful for calcium oxalate urolithiasis prevention).",
+        "mechanism_ja": "チアジド系利尿薬。遠位尿細管のNa-Cl共輸送体を阻害。軽度の利尿作用。尿中カルシウム排泄を減少（シュウ酸カルシウム尿石予防に有用）。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Diuretic: 2-4 mg/kg PO q12h; Ca-oxalate prevention: 2 mg/kg PO q12h",
+                "dosage_ja": "利尿: 2-4 mg/kg 経口 12時間毎；シュウ酸Ca予防: 2 mg/kg 経口 12時間毎",
+                "notes": "Often combined with furosemide for refractory CHF. Reduces urinary calcium for CaOx stone prevention. Monitor electrolytes (hypokalemia, hyponatremia)",
+                "notes_ja": "難治性CHFでフロセミドと併用が多い。CaOx結石予防に尿中カルシウム低下。電解質モニター（低K、低Na）",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "1-2 mg/kg PO q12-24h",
+                "dosage_ja": "1-2 mg/kg 経口 12-24時間毎",
+                "notes": "For calcium oxalate stone prevention; less commonly used as diuretic in cats",
+                "notes_ja": "シュウ酸カルシウム結石予防に。猫では利尿薬としてはあまり使用されない",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "0.5-1 mg/kg PO/IV q12-24h",
+                "dosage_ja": "0.5-1 mg/kg 経口/静注 12-24時間毎",
+                "notes": "For edema; limited equine use",
+                "notes_ja": "浮腫に。馬での使用は限定的",
+            },
+        },
+        "side_effects": ["hypokalemia", "hyponatremia", "dehydration", "hyperglycemia", "hypercalcemia"],
+        "side_effects_ja": ["低カリウム血症", "低ナトリウム血症", "脱水", "高血糖", "高カルシウム血症"],
+        "contraindications": "Anuria. Severe renal failure. Hypercalcemia. Hypokalemia.",
+        "contraindications_ja": "無尿。重度腎不全。高カルシウム血症。低カリウム血症。",
+    },
+    # ------------------------------------------------------------------
+    # Miconazole + Chlorhexidine (Malaseb)
+    # ------------------------------------------------------------------
+    {
+        "id": "miconazole_chlorhex",
+        "name": "Miconazole + Chlorhexidine (Malaseb)",
+        "name_ja": "ミコナゾール＋クロルヘキシジン（マラセブ）",
+        "category": "dermatological",
+        "mechanism": "Combination medicated shampoo: miconazole (imidazole antifungal, inhibits ergosterol synthesis) + chlorhexidine (cationic antiseptic, disrupts bacterial cell membranes). Synergistic activity against Malassezia and bacteria.",
+        "mechanism_ja": "配合薬用シャンプー：ミコナゾール（イミダゾール系抗真菌薬、エルゴステロール合成阻害）＋クロルヘキシジン（カチオン性殺菌薬、細菌細胞膜破壊）。マラセチアと細菌に相乗作用。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "2% miconazole + 2% chlorhexidine shampoo; lather and leave on 10 min, rinse. q3-7 days",
+                "dosage_ja": "ミコナゾール2%＋クロルヘキシジン2%シャンプー；泡立て10分放置後すすぐ。3-7日毎",
+                "notes": "Gold standard for Malassezia dermatitis and pyoderma. Leave-on time important for efficacy. Can also use as pre-surgical scrub component",
+                "notes_ja": "マラセチア皮膚炎・膿皮症のゴールドスタンダード。効果のため放置時間が重要。術前消毒の成分としても使用可",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "Same formulation; lather and leave on 10 min, rinse. q3-7 days",
+                "dosage_ja": "同製剤；泡立て10分放置後すすぐ。3-7日毎",
+                "notes": "Safe for cats; effective for Malassezia and dermatophytosis adjunct therapy",
+                "notes_ja": "猫に安全。マラセチア・皮膚糸状菌症の補助療法に有効",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "Apply to affected areas, lather 10 min, rinse. q3-7 days",
+                "dosage_ja": "患部に塗布、10分泡立て放置後すすぐ。3-7日毎",
+                "notes": "For dermatophilosis (rain scald), dermatophytosis",
+                "notes_ja": "皮膚糸状菌症（レインスカルド）、白癬に",
+            },
+        },
+        "side_effects": ["skin dryness (frequent bathing)", "rare contact irritation"],
+        "side_effects_ja": ["皮膚乾燥（頻回入浴時）", "稀に接触性刺激"],
+        "contraindications": "Known hypersensitivity to chlorhexidine or miconazole. Avoid contact with eyes and ears.",
+        "contraindications_ja": "クロルヘキシジンまたはミコナゾール過敏症。目と耳への接触を避ける。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
@@ -1117,5 +1317,172 @@ DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
         {"drug": "metoclopramide", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
         {"drug": "amiodarone", "effect": "Doubled digoxin levels; reduce digoxin dose by 50%", "effect_ja": "ジゴキシン濃度が2倍に。ジゴキシン用量50%減量"},
         {"drug": "verapamil/diltiazem", "effect": "Increased digoxin levels and additive bradycardia", "effect_ja": "ジゴキシン濃度上昇と徐脈の相加作用"},
+    ],
+    "omeprazole": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Reduced absorption of azole antifungals (need acidic pH)", "effect_ja": "アゾール系抗真菌薬の吸収低下（酸性pHが必要）"},
+        {"drug": "clopidogrel", "effect": "May reduce clopidogrel activation via CYP2C19 inhibition", "effect_ja": "CYP2C19阻害でクロピドグレル活性化低下の可能性"},
+        {"drug": "sucralfate", "effect": "Give omeprazole 30 min before sucralfate", "effect_ja": "オメプラゾールをスクラルファートの30分前に投与"},
+    ],
+    "sucralfate": [
+        {"drug": "fluoroquinolones", "effect": "Chelation reduces FQ absorption by 50-70%; separate by 2h", "effect_ja": "キレート化でFQ吸収50-70%低下。2時間間隔を空ける"},
+        {"drug": "doxycycline", "effect": "Reduced doxycycline absorption; separate by 2-3h", "effect_ja": "ドキシサイクリン吸収低下。2-3時間間隔を空ける"},
+        {"drug": "digoxin", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
+        {"drug": "levothyroxine", "effect": "Reduced thyroid hormone absorption; separate by 2h", "effect_ja": "甲状腺ホルモン吸収低下。2時間間隔を空ける"},
+    ],
+    "metoclopramide": [
+        {"drug": "opioids", "effect": "Antagonistic on GI motility", "effect_ja": "消化管運動に対して拮抗"},
+        {"drug": "phenothiazines", "effect": "Additive extrapyramidal effects", "effect_ja": "錐体外路症状の相加作用"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine absorption", "effect_ja": "シクロスポリン吸収増加"},
+    ],
+    "cisapride": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Increased cisapride levels; risk of cardiac arrhythmia (QT prolongation)", "effect_ja": "シサプリド濃度上昇。心不整脈リスク（QT延長）"},
+        {"drug": "erythromycin", "effect": "Increased cisapride levels via CYP3A4 inhibition; arrhythmia risk", "effect_ja": "CYP3A4阻害でシサプリド濃度上昇。不整脈リスク"},
+    ],
+    "amlodipine": [
+        {"drug": "ACE inhibitors", "effect": "Additive hypotension (often used together therapeutically)", "effect_ja": "低血圧の相加作用（治療的に併用されることが多い）"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+    ],
+    "pimobendan": [
+        {"drug": "beta-blockers", "effect": "May partially antagonize inotropic effect", "effect_ja": "強心作用を部分的に拮抗する可能性"},
+        {"drug": "verapamil/diltiazem", "effect": "Additive negative chronotropic effects; use cautiously", "effect_ja": "陰性変時作用の相加。慎重に使用"},
+    ],
+    "acepromazine": [
+        {"drug": "opioids", "effect": "Additive sedation and hypotension", "effect_ja": "鎮静・低血圧の相加作用"},
+        {"drug": "epinephrine", "effect": "Reversed pressor response (epinephrine reversal); use norepinephrine instead", "effect_ja": "昇圧反応の逆転（エピネフリン逆転）。ノルエピネフリンを代わりに使用"},
+        {"drug": "organophosphates", "effect": "Potentiated toxicity", "effect_ja": "毒性増強"},
+    ],
+    "dexmedetomidine": [
+        {"drug": "opioids", "effect": "Synergistic sedation; dose reduction of both drugs recommended", "effect_ja": "鎮静の相乗作用。両薬の用量削減を推奨"},
+        {"drug": "ketamine", "effect": "Commonly combined; balanced anesthesia protocol", "effect_ja": "頻繁に併用。バランス麻酔プロトコル"},
+        {"drug": "other alpha-2 agonists", "effect": "Do not combine; additive cardiovascular depression", "effect_ja": "併用不可。心血管系抑制の相加作用"},
+    ],
+    "ivermectin": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Increased ivermectin levels via P-gp/CYP3A4 inhibition; neurotoxicity risk", "effect_ja": "P-gp/CYP3A4阻害でイベルメクチン濃度上昇。神経毒性リスク"},
+        {"drug": "spinosad", "effect": "Increased ivermectin toxicity; do not combine with high-dose ivermectin", "effect_ja": "イベルメクチン毒性増加。高用量イベルメクチンとの併用不可"},
+    ],
+    "clindamycin": [
+        {"drug": "erythromycin/azithromycin", "effect": "Antagonistic binding at same ribosomal site; do not combine", "effect_ja": "同一リボソーム部位での拮抗結合。併用不可"},
+        {"drug": "neuromuscular blockers", "effect": "Potentiated neuromuscular blockade", "effect_ja": "神経筋遮断の増強"},
+    ],
+    "azithromycin": [
+        {"drug": "clindamycin", "effect": "Antagonistic ribosomal binding; do not combine", "effect_ja": "リボソーム結合の拮抗。併用不可"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+        {"drug": "digoxin", "effect": "Increased digoxin levels", "effect_ja": "ジゴキシン濃度上昇"},
+    ],
+    "prednisolone": [
+        {"drug": "NSAIDs", "effect": "Markedly increased GI ulceration risk; avoid concurrent use", "effect_ja": "消化管潰瘍リスクが著明に増加。併用を避ける"},
+        {"drug": "insulin", "effect": "Antagonizes insulin effect; may require dose increase", "effect_ja": "インスリン効果を拮抗。増量が必要な場合あり"},
+        {"drug": "furosemide", "effect": "Additive hypokalemia", "effect_ja": "低カリウム血症の相加作用"},
+        {"drug": "phenobarbital", "effect": "Increased steroid metabolism; may need higher dose", "effect_ja": "ステロイド代謝促進。増量が必要な場合あり"},
+    ],
+    "dexamethasone": [
+        {"drug": "NSAIDs", "effect": "Markedly increased GI ulceration risk", "effect_ja": "消化管潰瘍リスクが著明に増加"},
+        {"drug": "insulin", "effect": "Antagonizes insulin effect", "effect_ja": "インスリン効果を拮抗"},
+        {"drug": "phenobarbital", "effect": "Increased dexamethasone clearance", "effect_ja": "デキサメタゾンのクリアランス増加"},
+        {"drug": "furosemide", "effect": "Additive hypokalemia", "effect_ja": "低カリウム血症の相加作用"},
+    ],
+    "carprofen": [
+        {"drug": "other NSAIDs", "effect": "Never combine; marked GI ulceration risk", "effect_ja": "絶対に併用しない。消化管潰瘍リスクの著明な増加"},
+        {"drug": "corticosteroids", "effect": "Increased GI ulceration risk; 5-day washout recommended", "effect_ja": "消化管潰瘍リスク増加。5日間の休薬期間を推奨"},
+        {"drug": "ACE inhibitors", "effect": "Reduced antihypertensive effect; renal risk", "effect_ja": "降圧効果低下。腎リスク"},
+        {"drug": "furosemide", "effect": "Reduced diuretic efficacy", "effect_ja": "利尿効果低下"},
+    ],
+    "firocoxib": [
+        {"drug": "other NSAIDs", "effect": "Never combine; increased GI/renal toxicity", "effect_ja": "絶対に併用しない。消化管/腎毒性増加"},
+        {"drug": "corticosteroids", "effect": "Increased GI ulceration risk", "effect_ja": "消化管潰瘍リスク増加"},
+        {"drug": "ACE inhibitors", "effect": "Reduced renal blood flow", "effect_ja": "腎血流低下"},
+    ],
+    "butorphanol": [
+        {"drug": "pure mu agonists", "effect": "Partial antagonism of morphine/fentanyl analgesia", "effect_ja": "モルヒネ/フェンタニルの鎮痛を部分的に拮抗"},
+        {"drug": "alpha-2 agonists", "effect": "Synergistic sedation (commonly combined)", "effect_ja": "鎮静の相乗作用（頻繁に併用）"},
+        {"drug": "other CNS depressants", "effect": "Additive CNS/respiratory depression", "effect_ja": "中枢/呼吸抑制の相加作用"},
+    ],
+    "buprenorphine": [
+        {"drug": "pure mu agonists", "effect": "May partially antagonize full mu agonist analgesia", "effect_ja": "完全μ作動薬の鎮痛を部分的に拮抗する可能性"},
+        {"drug": "other CNS depressants", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
+        {"drug": "MAOIs", "effect": "Potentially fatal interaction; avoid", "effect_ja": "致死的な相互作用の可能性。避ける"},
+    ],
+    "ketamine": [
+        {"drug": "alpha-2 agonists", "effect": "Synergistic sedation/analgesia; commonly combined", "effect_ja": "鎮静/鎮痛の相乗作用。頻繁に併用"},
+        {"drug": "benzodiazepines", "effect": "Smooth induction/recovery; commonly combined", "effect_ja": "滑らかな導入/覚醒。頻繁に併用"},
+        {"drug": "chloramphenicol", "effect": "Prolonged ketamine effect (inhibits metabolism)", "effect_ja": "ケタミン効果延長（代謝阻害）"},
+    ],
+    "diazepam": [
+        {"drug": "other CNS depressants", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
+        {"drug": "ketoconazole/itraconazole", "effect": "Prolonged sedation via CYP3A4 inhibition", "effect_ja": "CYP3A4阻害で鎮静延長"},
+        {"drug": "phenobarbital", "effect": "Enhanced CNS depression", "effect_ja": "中枢抑制の増強"},
+    ],
+    "insulin_vetsulin": [
+        {"drug": "corticosteroids", "effect": "Antagonize insulin effect; may need dose increase", "effect_ja": "インスリン効果を拮抗。用量増加が必要な場合あり"},
+        {"drug": "thiazide diuretics", "effect": "Hyperglycemic effect; may increase insulin requirement", "effect_ja": "高血糖作用。インスリン必要量増加の可能性"},
+        {"drug": "beta-blockers", "effect": "May mask hypoglycemia signs (tachycardia)", "effect_ja": "低血糖兆候（頻脈）を隠蔽する可能性"},
+    ],
+    "methimazole": [
+        {"drug": "warfarin", "effect": "Altered anticoagulant effect as thyroid status changes", "effect_ja": "甲状腺状態の変化に伴い抗凝固作用が変動"},
+        {"drug": "digoxin", "effect": "Digoxin levels change with thyroid normalization", "effect_ja": "甲状腺機能正常化に伴いジゴキシン濃度が変動"},
+    ],
+    "trilostane": [
+        {"drug": "ACE inhibitors", "effect": "Additive aldosterone suppression; hyperkalemia risk", "effect_ja": "アルドステロン抑制の相加作用。高カリウム血症リスク"},
+        {"drug": "potassium-sparing diuretics", "effect": "Risk of life-threatening hyperkalemia", "effect_ja": "生命を脅かす高カリウム血症のリスク"},
+        {"drug": "ketoconazole", "effect": "Additive adrenal suppression", "effect_ja": "副腎抑制の相加作用"},
+    ],
+    "enalapril": [
+        {"drug": "NSAIDs", "effect": "Reduced antihypertensive effect; increased renal risk", "effect_ja": "降圧効果低下。腎リスク増加"},
+        {"drug": "potassium-sparing diuretics", "effect": "Risk of hyperkalemia", "effect_ja": "高カリウム血症リスク"},
+        {"drug": "furosemide", "effect": "First-dose hypotension; start ACEi low", "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始"},
+    ],
+    "benazepril": [
+        {"drug": "NSAIDs", "effect": "Reduced antihypertensive effect; increased renal risk", "effect_ja": "降圧効果低下。腎リスク増加"},
+        {"drug": "potassium-sparing diuretics", "effect": "Risk of hyperkalemia", "effect_ja": "高カリウム血症リスク"},
+        {"drug": "furosemide", "effect": "First-dose hypotension; start ACEi low", "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始"},
+    ],
+    "amoxicillin": [
+        {"drug": "methotrexate", "effect": "Reduced methotrexate clearance; toxicity risk", "effect_ja": "メトトレキサートクリアランス低下。毒性リスク"},
+        {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
+    ],
+    "amoxicillin_clavulanate": [
+        {"drug": "methotrexate", "effect": "Reduced methotrexate clearance; toxicity risk", "effect_ja": "メトトレキサートクリアランス低下。毒性リスク"},
+        {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
+    ],
+    "trimethoprim_sulfa": [
+        {"drug": "ACE inhibitors", "effect": "Risk of hyperkalemia (trimethoprim acts like K-sparing diuretic)", "effect_ja": "高カリウム血症リスク（トリメトプリムがK保持性利尿薬様に作用）"},
+        {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
+        {"drug": "methotrexate", "effect": "Additive folate antagonism; increased toxicity", "effect_ja": "葉酸拮抗の相加作用。毒性増加"},
+        {"drug": "phenytoin", "effect": "Increased phenytoin levels", "effect_ja": "フェニトイン濃度上昇"},
+    ],
+    "ondansetron": [
+        {"drug": "tramadol", "effect": "May reduce tramadol analgesic efficacy", "effect_ja": "トラマドール鎮痛効果低下の可能性"},
+        {"drug": "apomorphine", "effect": "Blocks emetic effect of apomorphine", "effect_ja": "アポモルフィンの催吐効果を遮断"},
+        {"drug": "QT-prolonging drugs", "effect": "Additive QT prolongation risk", "effect_ja": "QT延長リスクの相加作用"},
+    ],
+    "famotidine": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Reduced azole absorption (need acidic pH)", "effect_ja": "アゾール系吸収低下（酸性pHが必要）"},
+        {"drug": "sucralfate", "effect": "Reduced famotidine absorption; separate by 2h", "effect_ja": "ファモチジン吸収低下。2時間間隔を空ける"},
+    ],
+    "mannitol": [
+        {"drug": "furosemide", "effect": "Additive diuresis; risk of dehydration/electrolyte imbalance", "effect_ja": "利尿の相加作用。脱水/電解質異常のリスク"},
+        {"drug": "lithium", "effect": "Increased lithium clearance", "effect_ja": "リチウムクリアランス増加"},
+    ],
+    "levetiracetam": [
+        {"drug": "phenobarbital", "effect": "Commonly combined; may slightly increase clearance", "effect_ja": "頻繁に併用。クリアランスがやや増加する可能性"},
+        {"drug": "potassium_bromide", "effect": "Can be combined safely for multi-drug seizure control", "effect_ja": "多剤てんかん管理で安全に併用可能"},
+    ],
+    "sildenafil": [
+        {"drug": "nitrates", "effect": "Severe life-threatening hypotension; absolutely contraindicated", "effect_ja": "重度の生命を脅かす低血圧。絶対禁忌"},
+        {"drug": "alpha-blockers", "effect": "Additive hypotension", "effect_ja": "低血圧の相加作用"},
+        {"drug": "bosentan", "effect": "Bosentan reduces sildenafil levels; may combine with dose adjustment", "effect_ja": "ボセンタンがシルデナフィル濃度を低下。用量調整で併用可"},
+    ],
+    "clopidogrel": [
+        {"drug": "omeprazole", "effect": "May reduce clopidogrel activation; use famotidine instead", "effect_ja": "クロピドグレル活性化低下の可能性。ファモチジンを代わりに使用"},
+        {"drug": "NSAIDs", "effect": "Increased bleeding risk", "effect_ja": "出血リスク増加"},
+        {"drug": "aspirin", "effect": "Additive antiplatelet effect (sometimes used together for ATE in cats)", "effect_ja": "抗血小板作用の相加（猫のATEで併用されることあり）"},
+    ],
+    "ampicillin": [
+        {"drug": "aminoglycosides", "effect": "Synergistic antibacterial effect but do not mix in same syringe (inactivation)", "effect_ja": "抗菌作用の相乗効果だが同一シリンジで混合不可（失活）"},
+        {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
+    ],
+    "lactulose": [
+        {"drug": "antacids", "effect": "May reduce lactulose efficacy by altering colonic pH", "effect_ja": "結腸pHの変化でラクツロース有効性低下の可能性"},
+        {"drug": "neomycin", "effect": "May reduce lactulose efficacy (kills bacteria needed for metabolism)", "effect_ja": "代謝に必要な細菌を殺すためラクツロース有効性低下の可能性"},
     ],
 }
