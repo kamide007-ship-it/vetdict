@@ -90,16 +90,20 @@ def _ensure_db() -> None:
 # Cache helpers
 # ---------------------------------------------------------------------------
 
+import threading
+
 _cache_version = 0
+_cache_lock = threading.Lock()
 
 
 def invalidate_cache() -> None:
     """Clear all cached data (call after writes to the database)."""
     global _cache_version
-    _cache_version += 1
-    get_species_stats.cache_clear()
-    get_urgency_stats.cache_clear()
-    _get_symptoms_for_species_cached.cache_clear()
+    with _cache_lock:
+        _cache_version += 1
+        get_species_stats.cache_clear()
+        get_urgency_stats.cache_clear()
+        _get_symptoms_for_species_cached.cache_clear()
 
 
 # ---------------------------------------------------------------------------
