@@ -538,7 +538,7 @@ function renderSymptomList(symptoms){
   const search=(symptomSearch?.value||"").toLowerCase();
   const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
   let html=`<button class="symptom-sort-toggle" onclick="toggleSymptomSort()" aria-label="Switch sort mode">${sortLabel}</button>`;
-  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?s.name_ja:s.name_en;const secondary=currentLang==="ja"?s.name_en:s.name_ja;return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;};
+  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?(s.name_ja||s.name_en):(s.name_en||s.name_ja);const secondary=currentLang==="ja"?(s.name_en||""):(s.name_ja||"");return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;};
   const matchSearch=s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);};
   if(symptomSortMode==="category"){
     const categories={};
@@ -565,7 +565,7 @@ function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
   if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;return;}
   btn.disabled=false;
-  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?sym.name_ja:sym.name_en):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
+  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
 }
 
@@ -1202,12 +1202,12 @@ function renderChatResult(container,data){
       card.innerHTML=`
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${escapeHtml(c.name_ja||c.name_en||c.disease_id)}</span>
-          <span class="chat-disease-name-en">${escapeHtml(c.name_en||"")}</span>
+          <span class="chat-disease-name">${escapeHtml(currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id):(c.name_en||c.name_ja||c.disease_id))}</span>
+          <span class="chat-disease-name-en">${escapeHtml(currentLang==="ja"?(c.name_en||""):(c.name_ja||""))}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
-        ${c.description_ja||c.description?`<div class="chat-disease-desc">${escapeHtml(c.description_ja||c.description)}</div>`:""}
+        ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${escapeHtml(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))}</div>`:""}
         ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.map(s=>escapeHtml(s)).join(", ")}</div>`:""}
       `;
       listDiv.appendChild(card);
@@ -1544,7 +1544,7 @@ function guidedRenderInterim(data){
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${c.name_ja||c.name_en}</span>
+          <span class="chat-disease-name">${currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja)}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
@@ -1668,18 +1668,18 @@ function guidedRenderFinalResults(data){
     diseases.slice(0,5).forEach((d,i)=>{
       const pct=d.match_percent||0;
       const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
-      const name=d.name_ja||d.name||"";
-      const nameEn=d.name||"";
-      const desc=d.description_ja||d.description||"";
+      const name=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+      const nameSecondary=currentLang==="ja"?(d.name||""):(d.name_ja||"");
+      const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
       const matched=(d.matching_symptoms||[]).map(sid=>{
         const found=details.find(s=>s.id===sid);
-        return found?(currentLang==="ja"?found.name_ja:found.name_en):sid;
+        return found?(currentLang==="ja"?(found.name_ja||found.name_en):(found.name_en||found.name_ja)):sid;
       }).join(", ");
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${name}</span>
-          <span class="chat-disease-name-en">${nameEn}</span>
+          <span class="chat-disease-name-en">${nameSecondary}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
