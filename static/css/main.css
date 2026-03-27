@@ -94,6 +94,29 @@
 [data-theme="dark"] .species-card[aria-pressed="true"]{background:linear-gradient(135deg,#1e2a4a,#253560);box-shadow:0 4px 16px rgba(74,122,255,.2)}
 [data-theme="dark"] .species-card[aria-pressed="true"] .name{color:var(--gray-900)}
 [data-theme="dark"] .species-card[aria-pressed="true"]::after{background:var(--green)}
+/* Dark mode: text visibility fixes */
+[data-theme="dark"] .missing-note{color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.25)}
+[data-theme="dark"] .disease-db-item .d-desc{color:var(--gray-700)}
+[data-theme="dark"] .disease-db-item .d-name-ja{color:var(--gray-600)}
+[data-theme="dark"] .disease-db-item .d-name{color:var(--gray-900)}
+[data-theme="dark"] .disease-detail dt{color:var(--navy-light)}
+[data-theme="dark"] .disease-detail dd{color:var(--gray-700)}
+[data-theme="dark"] .show-more-btn{background:var(--gray-100)!important;color:var(--gray-900)!important;border-color:var(--gray-300)!important}
+[data-theme="dark"] .symptom-cat{background:var(--gray-100);color:var(--gray-700)}
+[data-theme="dark"] .symptom-item{color:var(--gray-900)}
+[data-theme="dark"] .quality-badge{color:var(--gray-600)}
+[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:var(--gray-100);color:var(--gray-900);border-color:var(--gray-300)}
+[data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{color:var(--gray-500)}
+[data-theme="dark"] .drug-item{color:var(--gray-900)}
+[data-theme="dark"] .drug-detail{background:var(--gray-50);color:var(--gray-900)}
+[data-theme="dark"] .drug-detail dt{color:var(--navy-light)}
+[data-theme="dark"] .drug-detail dd{color:var(--gray-700)}
+[data-theme="dark"] .tab-content{color:var(--gray-900)}
+[data-theme="dark"] .pricing-card{background:var(--white);color:var(--gray-900)}
+[data-theme="dark"] .pricing-feature{color:var(--gray-700)}
+[data-theme="dark"] .ref-title{color:var(--gray-900)}
+[data-theme="dark"] .ref-item{color:var(--gray-700)}
+[data-theme="dark"] body{color:var(--gray-900)}
 
 /* --- Theme toggle button --- */
 .theme-toggle{background:none;border:2px solid var(--gray-200);border-radius:20px;padding:4px 10px;cursor:pointer;font-size:.82rem;display:flex;align-items:center;gap:4px;transition:all var(--transition-fast);color:var(--gray-600);flex-shrink:0;font-family:var(--font)}
@@ -216,6 +239,10 @@ a:hover{text-decoration:underline}
 .search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:20px;height:20px;font-size:.7rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
 .search-clear:hover{background:var(--gray-300);color:var(--gray-900)}
 .symptom-search input:not(:placeholder-shown)~.search-clear{display:flex}
+.symptom-sort-toggle{display:block;margin:0 auto 8px;padding:4px 14px;font-size:.75rem;border:1px solid var(--gray-300);border-radius:var(--radius);background:var(--white);color:var(--gray-700);cursor:pointer;transition:all var(--transition-fast)}
+.symptom-sort-toggle:hover{background:var(--gray-100);border-color:var(--navy-light);color:var(--navy)}
+[data-theme="dark"] .symptom-sort-toggle{background:var(--gray-100);color:var(--gray-700);border-color:var(--gray-200)}
+[data-theme="dark"] .symptom-sort-toggle:hover{background:var(--gray-200);color:#fff}
 .symptom-list{max-height:360px;overflow-y:auto;border:1px solid var(--gray-200);border-radius:var(--radius)}
 .symptom-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:all var(--transition-fast);font-size:.84rem;min-height:44px}
 .symptom-item:hover{background:var(--green-light);padding-left:16px}
