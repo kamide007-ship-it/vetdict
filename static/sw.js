@@ -1,5 +1,5 @@
 // VetDict Service Worker — offline support & caching
-const CACHE_NAME = 'vetdict-v3';
+const CACHE_NAME = 'vetdict-v4';
 const STATIC_ASSETS = [
   '/',
   '/static/css/main.css',
@@ -30,12 +30,20 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // API requests: always network
+  // API requests: network with offline fallback
   if (url.pathname.startsWith('/api/')) {
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        new Response(JSON.stringify({ error: 'offline', message: 'ネットワークに接続できません。接続を確認してください。' }), {
+          status: 503,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      )
+    );
     return;
   }
 
-  // Static assets: cache-first
+  // Static assets: cache-first with network fallback
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) {
@@ -53,7 +61,12 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
         return response;
-      });
+      }).catch(() =>
+        // Offline fallback for navigation requests
+        event.request.mode === 'navigate'
+          ? caches.match('/')
+          : new Response('Offline', { status: 503 })
+      );
     })
   );
 });

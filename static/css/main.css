@@ -17,7 +17,7 @@
 }
 /* --- Dark mode --- */
 [data-theme="dark"]{
-  --navy:#4a7aff;--navy-dark:#1a2744;--navy-light:#6b9aff;
+  --navy:#6b9aff;--navy-dark:#1a2744;--navy-light:#8bb4ff;
   --green:#34d058;--green-dark:#28a745;--green-light:rgba(52,208,88,.12);
   --white:#1e2233;--bg:#14171f;
   --gray-50:#1e2233;--gray-100:#252a3a;--gray-200:#333848;--gray-300:#444b5e;
@@ -43,7 +43,7 @@
 [data-theme="dark"] .species-card[aria-pressed="true"]{background:linear-gradient(135deg,#1e2744,#253052);border-color:var(--navy)}
 [data-theme="dark"] .card{background:var(--gray-50);border-color:var(--gray-200)}
 [data-theme="dark"] .card-header{background:var(--gray-100);border-bottom-color:var(--gray-200)}
-[data-theme="dark"] .card-header.accent{background:linear-gradient(135deg,#1a2744,#2a3a5e)}
+[data-theme="dark"] .card-header.accent{background:linear-gradient(135deg,#1a2744,#2a3a5e);color:#fff}
 [data-theme="dark"] .disease-detail{background:var(--gray-50)}
 [data-theme="dark"] .detail-section{background:var(--gray-100);border-color:var(--gray-200)}
 [data-theme="dark"] .symptom-item:hover{background:rgba(52,208,88,.08)}
@@ -53,7 +53,15 @@
 [data-theme="dark"] .sponsor-product{background:var(--gray-100);border-color:var(--gray-200)}
 [data-theme="dark"] .ref-header{background:var(--gray-50);border-color:var(--gray-200)}
 [data-theme="dark"] .ref-category{background:var(--gray-50);border-color:var(--gray-200)}
+[data-theme="dark"] .header-nav button[aria-selected="true"]{color:#fff}
+[data-theme="dark"] .az-nav button:hover,[data-theme="dark"] .az-nav button.active{color:#fff}
+[data-theme="dark"] .chat-mode-btn.active{color:#fff}
+[data-theme="dark"] .guided-sym-btn.selected,[data-theme="dark"] .guided-context-opt.selected{color:#fff}
+[data-theme="dark"] .guided-action-btn.primary{color:#fff}
+[data-theme="dark"] .chat-followup-btn.selected{color:#fff}
+[data-theme="dark"] .species-guidance,[data-theme="dark"] .chat-species-guidance{background:rgba(74,122,255,.12);border-color:rgba(74,122,255,.25);color:var(--navy-light)}
 [data-theme="dark"] .lang-toggle{border-color:var(--gray-200)}
+[data-theme="dark"] .lang-toggle button.active{color:#fff}
 [data-theme="dark"] .footer{background:linear-gradient(180deg,#0d1018,#060810)}
 [data-theme="dark"] .chat-msg.bot{background:var(--gray-100)}
 [data-theme="dark"] .results-empty{background:linear-gradient(180deg,var(--gray-50),transparent)}
@@ -65,7 +73,30 @@
 [data-theme="dark"] .severity-bar.moderate{background:rgba(245,158,11,.1);color:#fbbf24}
 [data-theme="dark"] .severity-bar.high{background:rgba(248,113,113,.1);color:#f87171}
 [data-theme="dark"] .severity-bar.emergency{background:#7f1d1d;color:#fca5a5}
-[data-theme="dark"] .clinical-details-body{background:linear-gradient(135deg,#0d1220,#1a2744)}
+[data-theme="dark"] .clinical-details-body{background:linear-gradient(135deg,#0d1220,#1a2744);color:#fff}
+[data-theme="dark"] .clinical-toggle{color:#fff}
+/* Dark mode: fix all navy-bg / green-bg elements where var(--white) resolves to dark */
+[data-theme="dark"] .selected-tag,
+[data-theme="dark"] .chat-msg.user,
+[data-theme="dark"] .chat-input-row button,
+[data-theme="dark"] .chat-symptom-tag,
+[data-theme="dark"] .chat-disease-rank,
+[data-theme="dark"] .analyze-btn,
+[data-theme="dark"] .hero-btn.primary,
+[data-theme="dark"] .sponsor-btn-navy,
+[data-theme="dark"] .sponsor-btn-green,
+[data-theme="dark"] .pricing-btn-pro,
+[data-theme="dark"] .pricing-badge,
+[data-theme="dark"] .toast,
+[data-theme="dark"] .scroll-top,
+[data-theme="dark"] .skip-link,
+[data-theme="dark"] .severity-bar.emergency,
+[data-theme="dark"] .symptom-item[aria-checked="true"] .sym-icon,
+[data-theme="dark"] .species-card[aria-pressed="true"]::after{color:#fff}
+[data-theme="dark"] .az-mode-toggle{color:#fff!important}
+[data-theme="dark"] .species-card[aria-pressed="true"]{background:linear-gradient(135deg,#1e2a4a,#253560);box-shadow:0 4px 16px rgba(74,122,255,.2)}
+[data-theme="dark"] .species-card[aria-pressed="true"] .name{color:var(--gray-900)}
+[data-theme="dark"] .species-card[aria-pressed="true"]::after{background:var(--green)}
 
 /* --- Theme toggle button --- */
 .theme-toggle{background:none;border:2px solid var(--gray-200);border-radius:20px;padding:4px 10px;cursor:pointer;font-size:.82rem;display:flex;align-items:center;gap:4px;transition:all var(--transition-fast);color:var(--gray-600);flex-shrink:0;font-family:var(--font)}
@@ -185,7 +216,7 @@ a:hover{text-decoration:underline}
 .symptom-search{position:relative;margin-bottom:12px}
 .symptom-search input{width:100%;padding:10px 36px 10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;outline:none;transition:border-color var(--transition-fast),box-shadow var(--transition-fast);background:var(--white)}
 .symptom-search input:focus{border-color:var(--navy-light);box-shadow:0 0 0 3px rgba(42,74,143,.1)}
-.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:20px;height:20px;font-size:.7rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
+.search-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:32px;height:32px;font-size:.8rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
 .search-clear:hover{background:var(--gray-300);color:var(--gray-900)}
 .symptom-search input:not(:placeholder-shown)~.search-clear{display:flex}
 .symptom-list{max-height:360px;overflow-y:auto;border:1px solid var(--gray-200);border-radius:var(--radius)}
@@ -298,7 +329,7 @@ a:hover{text-decoration:underline}
 
 /* --- A-Z nav --- */
 .az-nav{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:14px;justify-content:center}
-.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:4px 7px;border-radius:4px;font-size:.74rem;cursor:pointer;min-width:26px;transition:background .15s,color .15s;font-weight:600;font-family:var(--font)}
+.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:6px 8px;border-radius:4px;font-size:.74rem;cursor:pointer;min-width:32px;min-height:32px;transition:background .15s,color .15s;font-weight:600;font-family:var(--font)}
 .az-nav button:hover,.az-nav button.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .az-mode-toggle{background:var(--green)!important;color:var(--white)!important;border-color:var(--green)!important;padding:4px 12px!important;border-radius:6px!important;margin-right:6px;font-size:.72rem!important;white-space:nowrap}
 .az-mode-toggle:hover{opacity:.85;background:var(--green)!important;color:var(--white)!important}
@@ -667,6 +698,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 .landing-chat .card{box-shadow:var(--shadow-lg);border:2px solid var(--navy);transition:all var(--transition-normal)}
 .landing-chat .card:hover{box-shadow:0 16px 40px rgba(26,48,104,.16)}
 .landing-chat .card-header{font-size:.92rem;font-weight:700;border-radius:var(--radius) var(--radius) 0 0;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%)}
+[data-theme="dark"] .landing-chat .card-header{color:#fff}
 
 /* Tablet breakpoint */
 @media(max-width:1024px){
@@ -692,6 +724,11 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .sponsor-banner-inner{flex-direction:column;align-items:flex-start}
   .scroll-top{bottom:16px;right:16px;width:38px;height:38px}
   body{padding-bottom:env(safe-area-inset-bottom)}
+  /* Dark mode mobile nav dropdown */
+  [data-theme="dark"] .header-nav{background:rgba(30,34,51,.97);border-bottom-color:rgba(51,56,72,.6)}
+  [data-theme="dark"] .header-nav button{color:var(--gray-600)}
+  [data-theme="dark"] .header-nav button:hover{background:var(--gray-200);color:var(--gray-900)}
+  [data-theme="dark"] .header-nav button[aria-selected="true"]{background:var(--navy);color:#fff}
 }
 
 /* --- Admin / Pro access control --- */
