@@ -996,6 +996,44 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Anuria. Severe renal failure. Hypercalcemia. Hypokalemia.",
         "contraindications_ja": "無尿。重度腎不全。高カルシウム血症。低カリウム血症。",
     },
+    # ------------------------------------------------------------------
+    # Miconazole + Chlorhexidine (Malaseb)
+    # ------------------------------------------------------------------
+    {
+        "id": "miconazole_chlorhex",
+        "name": "Miconazole + Chlorhexidine (Malaseb)",
+        "name_ja": "ミコナゾール＋クロルヘキシジン（マラセブ）",
+        "category": "dermatological",
+        "mechanism": "Combination medicated shampoo: miconazole (imidazole antifungal, inhibits ergosterol synthesis) + chlorhexidine (cationic antiseptic, disrupts bacterial cell membranes). Synergistic activity against Malassezia and bacteria.",
+        "mechanism_ja": "配合薬用シャンプー：ミコナゾール（イミダゾール系抗真菌薬、エルゴステロール合成阻害）＋クロルヘキシジン（カチオン性殺菌薬、細菌細胞膜破壊）。マラセチアと細菌に相乗作用。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "2% miconazole + 2% chlorhexidine shampoo; lather and leave on 10 min, rinse. q3-7 days",
+                "dosage_ja": "ミコナゾール2%＋クロルヘキシジン2%シャンプー；泡立て10分放置後すすぐ。3-7日毎",
+                "notes": "Gold standard for Malassezia dermatitis and pyoderma. Leave-on time important for efficacy. Can also use as pre-surgical scrub component",
+                "notes_ja": "マラセチア皮膚炎・膿皮症のゴールドスタンダード。効果のため放置時間が重要。術前消毒の成分としても使用可",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "Same formulation; lather and leave on 10 min, rinse. q3-7 days",
+                "dosage_ja": "同製剤；泡立て10分放置後すすぐ。3-7日毎",
+                "notes": "Safe for cats; effective for Malassezia and dermatophytosis adjunct therapy",
+                "notes_ja": "猫に安全。マラセチア・皮膚糸状菌症の補助療法に有効",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "Apply to affected areas, lather 10 min, rinse. q3-7 days",
+                "dosage_ja": "患部に塗布、10分泡立て放置後すすぐ。3-7日毎",
+                "notes": "For dermatophilosis (rain scald), dermatophytosis",
+                "notes_ja": "皮膚糸状菌症（レインスカルド）、白癬に",
+            },
+        },
+        "side_effects": ["skin dryness (frequent bathing)", "rare contact irritation"],
+        "side_effects_ja": ["皮膚乾燥（頻回入浴時）", "稀に接触性刺激"],
+        "contraindications": "Known hypersensitivity to chlorhexidine or miconazole. Avoid contact with eyes and ears.",
+        "contraindications_ja": "クロルヘキシジンまたはミコナゾール過敏症。目と耳への接触を避ける。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
@@ -1279,5 +1317,56 @@ DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
         {"drug": "metoclopramide", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
         {"drug": "amiodarone", "effect": "Doubled digoxin levels; reduce digoxin dose by 50%", "effect_ja": "ジゴキシン濃度が2倍に。ジゴキシン用量50%減量"},
         {"drug": "verapamil/diltiazem", "effect": "Increased digoxin levels and additive bradycardia", "effect_ja": "ジゴキシン濃度上昇と徐脈の相加作用"},
+    ],
+    "omeprazole": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Reduced absorption of azole antifungals (need acidic pH)", "effect_ja": "アゾール系抗真菌薬の吸収低下（酸性pHが必要）"},
+        {"drug": "clopidogrel", "effect": "May reduce clopidogrel activation via CYP2C19 inhibition", "effect_ja": "CYP2C19阻害でクロピドグレル活性化低下の可能性"},
+        {"drug": "sucralfate", "effect": "Give omeprazole 30 min before sucralfate", "effect_ja": "オメプラゾールをスクラルファートの30分前に投与"},
+    ],
+    "sucralfate": [
+        {"drug": "fluoroquinolones", "effect": "Chelation reduces FQ absorption by 50-70%; separate by 2h", "effect_ja": "キレート化でFQ吸収50-70%低下。2時間間隔を空ける"},
+        {"drug": "doxycycline", "effect": "Reduced doxycycline absorption; separate by 2-3h", "effect_ja": "ドキシサイクリン吸収低下。2-3時間間隔を空ける"},
+        {"drug": "digoxin", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
+        {"drug": "levothyroxine", "effect": "Reduced thyroid hormone absorption; separate by 2h", "effect_ja": "甲状腺ホルモン吸収低下。2時間間隔を空ける"},
+    ],
+    "metoclopramide": [
+        {"drug": "opioids", "effect": "Antagonistic on GI motility", "effect_ja": "消化管運動に対して拮抗"},
+        {"drug": "phenothiazines", "effect": "Additive extrapyramidal effects", "effect_ja": "錐体外路症状の相加作用"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine absorption", "effect_ja": "シクロスポリン吸収増加"},
+    ],
+    "cisapride": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Increased cisapride levels; risk of cardiac arrhythmia (QT prolongation)", "effect_ja": "シサプリド濃度上昇。心不整脈リスク（QT延長）"},
+        {"drug": "erythromycin", "effect": "Increased cisapride levels via CYP3A4 inhibition; arrhythmia risk", "effect_ja": "CYP3A4阻害でシサプリド濃度上昇。不整脈リスク"},
+    ],
+    "amlodipine": [
+        {"drug": "ACE inhibitors", "effect": "Additive hypotension (often used together therapeutically)", "effect_ja": "低血圧の相加作用（治療的に併用されることが多い）"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+    ],
+    "pimobendan": [
+        {"drug": "beta-blockers", "effect": "May partially antagonize inotropic effect", "effect_ja": "強心作用を部分的に拮抗する可能性"},
+        {"drug": "verapamil/diltiazem", "effect": "Additive negative chronotropic effects; use cautiously", "effect_ja": "陰性変時作用の相加。慎重に使用"},
+    ],
+    "acepromazine": [
+        {"drug": "opioids", "effect": "Additive sedation and hypotension", "effect_ja": "鎮静・低血圧の相加作用"},
+        {"drug": "epinephrine", "effect": "Reversed pressor response (epinephrine reversal); use norepinephrine instead", "effect_ja": "昇圧反応の逆転（エピネフリン逆転）。ノルエピネフリンを代わりに使用"},
+        {"drug": "organophosphates", "effect": "Potentiated toxicity", "effect_ja": "毒性増強"},
+    ],
+    "dexmedetomidine": [
+        {"drug": "opioids", "effect": "Synergistic sedation; dose reduction of both drugs recommended", "effect_ja": "鎮静の相乗作用。両薬の用量削減を推奨"},
+        {"drug": "ketamine", "effect": "Commonly combined; balanced anesthesia protocol", "effect_ja": "頻繁に併用。バランス麻酔プロトコル"},
+        {"drug": "other alpha-2 agonists", "effect": "Do not combine; additive cardiovascular depression", "effect_ja": "併用不可。心血管系抑制の相加作用"},
+    ],
+    "ivermectin": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Increased ivermectin levels via P-gp/CYP3A4 inhibition; neurotoxicity risk", "effect_ja": "P-gp/CYP3A4阻害でイベルメクチン濃度上昇。神経毒性リスク"},
+        {"drug": "spinosad", "effect": "Increased ivermectin toxicity; do not combine with high-dose ivermectin", "effect_ja": "イベルメクチン毒性増加。高用量イベルメクチンとの併用不可"},
+    ],
+    "clindamycin": [
+        {"drug": "erythromycin/azithromycin", "effect": "Antagonistic binding at same ribosomal site; do not combine", "effect_ja": "同一リボソーム部位での拮抗結合。併用不可"},
+        {"drug": "neuromuscular blockers", "effect": "Potentiated neuromuscular blockade", "effect_ja": "神経筋遮断の増強"},
+    ],
+    "azithromycin": [
+        {"drug": "clindamycin", "effect": "Antagonistic ribosomal binding; do not combine", "effect_ja": "リボソーム結合の拮抗。併用不可"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+        {"drug": "digoxin", "effect": "Increased digoxin levels", "effect_ja": "ジゴキシン濃度上昇"},
     ],
 }
