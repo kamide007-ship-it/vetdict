@@ -562,6 +562,30 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Known hypersensitivity to cosyntropin. Not a therapeutic agent (diagnostic only).",
         "contraindications_ja": "コシントロピン過敏症。治療薬ではなく診断薬。",
     },
+    # ------------------------------------------------------------------
+    # Bosentan – endothelin receptor antagonist
+    # ------------------------------------------------------------------
+    {
+        "id": "bosentan",
+        "name": "Bosentan (Tracleer)",
+        "name_ja": "ボセンタン（トラクリア）",
+        "category": "cardiovascular",
+        "mechanism": "Dual endothelin receptor antagonist (ETA and ETB). Blocks endothelin-1-mediated vasoconstriction and smooth muscle proliferation in pulmonary vasculature. Used for pulmonary arterial hypertension.",
+        "mechanism_ja": "デュアルエンドセリン受容体拮抗薬（ETAおよびETB）。肺血管でエンドセリン-1による血管収縮と平滑筋増殖を遮断。肺動脈性高血圧症に使用。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "2 mg/kg PO q12h",
+                "dosage_ja": "2 mg/kg 経口 12時間毎",
+                "notes": "For pulmonary hypertension refractory to sildenafil; can combine with PDE5 inhibitors. Monitor liver enzymes monthly (hepatotoxicity risk)",
+                "notes_ja": "シルデナフィル抵抗性肺高血圧症に。PDE5阻害薬と併用可。肝毒性リスクのため月1回肝酵素モニター",
+            },
+        },
+        "side_effects": ["hepatotoxicity (dose-dependent)", "anemia", "edema", "headache", "teratogenicity"],
+        "side_effects_ja": ["肝毒性（用量依存性）", "貧血", "浮腫", "頭痛", "催奇形性"],
+        "contraindications": "Pregnancy (teratogenic). Moderate-severe hepatic impairment. Concurrent cyclosporine or glyburide.",
+        "contraindications_ja": "妊娠（催奇形性）。中等度-重度の肝障害。シクロスポリンまたはグリベンクラミドとの併用。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
