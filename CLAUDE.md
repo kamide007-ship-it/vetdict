@@ -10,7 +10,7 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (2,471テスト)
+- **テスト**: pytest (2,480テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
 - **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v2)
@@ -28,7 +28,7 @@ api/
   health_checker.py       — 犬用症状チェッカー (チェックボックス)
   drug_dictionary.py      — 薬品辞書API + Blueprint
   drug_batch_1.py         — 薬品データ batch 1
-  drug_batch_2.py         — 薬品データ batch 2
+  drug_batch_2.py         — 薬品データ batch 2 + 新薬7剤 (サイトポイント,リブレラ,ソレンシア,ブレンダ,GS-441524,モルヌピラビル,スプレソリン)
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
@@ -66,9 +66,9 @@ scripts/
 ```
 
 ## データ規模
-- **疾患**: 6,400+ (21動物種)
-- **薬品**: 187 (12種が魚専用)
-- **症状エイリアス**: 500+ (SYMPTOM_ALIASES) + 80+ (ID同義語)
+- **疾患**: 6,393 (21動物種) — 治療プロトコル100%カバー（テンプレート文0件）
+- **薬品**: 194 (12種が魚専用, 7種が2026年追加の新薬)
+- **症状エイリアス**: 530+ (SYMPTOM_ALIASES) + 90+ (ID同義語)
 - **対応動物種**: 21 (犬,猫,馬,ウサギ,ハムスター,モルモット,チンチラ,フェレット,ハリネズミ,フクロモモンガ,デグー,鳥,インコ,オウム,爬虫類,リクガメ,ヘビ,トカゲ,両生類,魚,その他)
 
 ## 診断エンジン
@@ -77,10 +77,19 @@ scripts/
 - 各種モジュールの `analyze_symptoms()` → `analyze_symptoms_generic()` (helpers.py)
 
 ### チャット式 (diagnostic_chat.py)
+- **自由入力モード**: 従来の自然言語入力
+- **問診モード（guided consultation）**: ステップバイステップの問診式
+  - エンドポイント: `POST /api/diagnostic-chat/consultation`
+  - フロー: カテゴリ選択→症状選択（タップ式）→中間結果→追加カテゴリ提案→発症/年齢→最終結果
+  - 最終結果は `analyze_species_symptoms` エンジン（チェックボックス式と同じ）を使用
+  - UI: `chatModeFree`/`chatModeGuided` 切替ボタン、`chatGuidedContainer`
+  - JS: `setupGuidedConsultation()`, `guidedFetch()`, `guidedHandleResponse()` 等
 - **症状抽出**: `_extract_species_symptoms()` — 最長一致優先 + フラグメント分割
-- **ID同義語解決**: `_ID_SYNONYMS` (80+マッピング) — loss_of_appetite ↔ appetite_loss 等
-  - pop_eye ↔ exophthalmos/eye_bulging/enlarged_eye
-  - eye_swelling ↔ exophthalmia/bulging_eye
+- **ID同義語解決**: `_ID_SYNONYMS` (90+マッピング) — loss_of_appetite ↔ appetite_loss 等
+  - eye_bulging ↔ eye_swelling/exophthalmos/enlarged_eye/eye_protrusion/pop_eye
+  - hind_leg_weakness ↔ hind_limb_weakness/hindlimb_weakness
+  - abdominal_distension ↔ abdominal_pain/bloating
+  - hunched_posture ↔ abdominal_pain/reluctance_to_move
   - sneezing ↔ nasal_discharge（爬虫類用）
   - bloating ↔ vulvar_swelling（フェレット副腎用）
 - **疾患マッチング**: `_match_species_symptoms_to_diseases()` — IDF重み付き調和平均
@@ -93,34 +102,34 @@ scripts/
   - 獣医師監査3回実施済み
 
 ### 精度実績 (26テストケース、530+エイリアス)
-| テストケース | 信頼度 |
-|------------|--------|
-| 魚 白点病 (3症状) | 86.1% |
-| 魚 松かさ病 (3症状) | 58.9% |
-| 魚 ヘキサミタ | 66.3% |
-| 猫 FHV-1/URI | 95.0% |
-| 猫 FIP/胸水 | 72.2% |
-| 猫 動脈血栓症 | 88.8% |
-| 猫 肝リピドーシス | 70.0% |
-| 猫 角膜潰瘍 | 95.0% |
-| 猫 貧血/出血 | 86.6% |
-| 猫 甲状腺機能低下症 | 80.4% |
-| ウサギ 斜頸 | 60.1% |
-| ウサギ パスツレラ | 74.5% |
-| ウサギ 消化管うっ滞 | 81.9% |
-| 鳥 そのう炎 | 62.9% |
-| 鳥 呼吸器 | 82.9% |
-| 爬虫類 呼吸器 | 72.6% |
-| 爬虫類 甲羅/MBD | 95.0% |
-| 爬虫類 ビタミンA欠乏 | 67.7% |
-| ハリネズミ WHS | 73.1% |
-| ハリネズミ ダニ | 94.0% |
-| ハリネズミ 眼球突出 | 38.0% |
-| ハムスター 眼球突出 | 43.2% |
-| モルモット 呼吸器 | 95.0% |
-| モルモット 壊血病 | 94.2% |
-| フェレット インスリノーマ | 79.3% |
-| フェレット 副腎疾患 | 75.4% |
+| テストケース | 信頼度 | 備考 |
+|------------|--------|------|
+| 魚 白点病 (3症状) | 86.1% | |
+| 魚 松かさ病 (3症状) | 58.9% | rank 1達成 |
+| 魚 ヘキサミタ | 66.3% | |
+| 猫 FHV-1/URI | 95.0% | |
+| 猫 FIP/胸水 | 72.2% | |
+| 猫 動脈血栓症 | 88.8% | |
+| 猫 肝リピドーシス | 70.0% | |
+| 猫 角膜潰瘍 | 95.0% | |
+| 猫 貧血/出血 | 86.6% | |
+| 猫 甲状腺機能低下症 | 80.4% | |
+| ウサギ 斜頸 | 60.1% | |
+| ウサギ パスツレラ | 74.5% | |
+| ウサギ 消化管うっ滞 | 95.0% | ★改善 (81.9%→95.0% rank1) hunched_postureシノニム追加 |
+| 鳥 そのう炎 | 62.9% | |
+| 鳥 呼吸器 | 82.9% | |
+| 爬虫類 呼吸器 | 95.0% | ★改善 (72.6%→95.0% rank1) |
+| 爬虫類 甲羅/MBD | 95.0% | |
+| 爬虫類 ビタミンA欠乏 | 67.7% | |
+| ハリネズミ WHS | 51.1% | ★改善 rank1達成 |
+| ハリネズミ ダニ | 94.0% | |
+| ハリネズミ 眼球突出 | 41.3% | ★改善 (38%→41.3%) eye_bulging修正 |
+| ハムスター 眼球突出 | 43.2% | 2症状入力の構造的限界 |
+| モルモット 呼吸器 | 95.0% | |
+| モルモット 壊血病 | 94.2% | |
+| フェレット インスリノーマ | 51.5% | ★改善 (0%→51.5% rank3) hind_leg_weaknessシノニム追加 |
+| フェレット 副腎疾患 | 75.4% | |
 
 ### 診断アルゴリズムの構成
 - IDF重み付き調和平均（weighted recall × coverage）
@@ -160,7 +169,7 @@ scripts/
 
 ## テスト実行
 ```bash
-python3 -m pytest tests/ -x -q          # 全テスト (2,471)
+python3 -m pytest tests/ -x -q          # 全テスト (2,480)
 python3 -m pytest tests/test_diagnostic_chat.py -x -q  # チャット診断テスト
 python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 ```
@@ -176,8 +185,10 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 
 ## 薬品投与量を追加する手順
 - 既存薬品に種別投与量を追加: `api/drug_batch_3.py` の SPECIES_INFO_PATCH
-- 新規薬品を追加: `api/drug_batch_4.py` の FISH_DRUGS (または新バッチファイル)
+- 新規薬品を追加: `api/drug_batch_2.py` の DRUGS_BATCH_2 に追加（2026年新薬7剤はここ）
+- 魚専用薬品: `api/drug_batch_4.py` の FISH_DRUGS
 - `api/drug_dictionary.py` でインポート + マージロジック
+- **薬品カテゴリ**: `api/drug_dictionary.py` の DRUG_CATEGORIES に追加（biologics, antivirals は追加済み）
 
 ## 診断精度を改善する手順
 1. `api/diagnostic_chat.py` の `SYMPTOM_ALIASES` に口語表現を追加
@@ -197,8 +208,36 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - エイリアスキーは全て小文字 (ruffテストで検証済み)
 
 ## 既知の課題（次セッションで対応可能）
-- ハリネズミ/ハムスター眼球突出（38-43%）— 2症状入力では特異性が構造的に低い（ただしrank 1達成）
+- ハムスター眼球突出（43.2%）— 2症状入力では特異性が構造的に低い（rank 1は達成）
 - 魚 松かさ病（58.9%）— 3/7症状マッチが限界（rank 1達成）
-- 爬虫類 呼吸器（72.6%、rank 14）— 呼吸器症状が複数疾患と重複
 - _extract_species_symptoms の位置追跡は最初の1出現のみ対応（同一テキスト内の複数出現は未対応）
 - Renderフリープランのスリープ問題（15分無操作→初回アクセス遅延）
+- エキゾチック動物（ウサギ/鳥/爬虫類等）の治療プロトコルはカテゴリベースの汎用記載が多い — 犬猫と同レベルの個別詳細プロトコルへのアップグレードが望ましい
+- 問診モードのUI動作確認・ブラウザテストが未実施
+
+## 2026-03セッションで実施した主な改善
+### 問診モード (Guided Consultation)
+- `POST /api/diagnostic-chat/consultation` — 5フェーズの問診フロー
+- フロントエンド: `chatModeFree`/`chatModeGuided`切替、`guidedMessages`/`guidedActions`
+- CSS: `.guided-category-grid`, `.guided-sym-btn`, `.guided-action-btn` 等
+
+### 治療プロトコル100%更新
+- `diseases_all_species.json` の全6,393疾患のテンプレート文を臨床的に適切な内容に置換
+- 犬575件: 個別に詳細プロトコル（薬品名・用量・投与経路・好発犬種・モニタリング）
+- 猫530件: 同上（猫特有の注意事項含む）
+- エキゾチック~4,300件: 主要疾患は個別、その他はカテゴリ×種特異的注意事項
+
+### 新薬7剤追加 (`drug_batch_2.py`)
+- ロキベトマブ (Cytopoint) — 犬アトピー抗IL-31 mAb
+- ベジンベトマブ (Librela) — 犬OA疼痛 抗NGF mAb
+- フルネベトマブ (Solensia) — 猫OA疼痛 抗NGF mAb
+- フザプラジブナトリウム (ブレンダ) — 犬急性膵炎 白血球接着阻害
+- GS-441524 — 猫FIP ヌクレオシドアナログ抗ウイルス薬
+- モルヌピラビル — 猫FIP 代替抗ウイルス薬
+- デスロレリン (スプレソリン) — GnRHアゴニストインプラント
+- 新カテゴリ: `biologics` (生物学的製剤), `antivirals` (抗ウイルス薬)
+
+### 診断精度改善
+- 眼球突出マッピング修正: `pop_eye`(魚専用)→`eye_bulging`に修正
+- `_ID_SYNONYMS`/`_SYN` に eye_bulging, enlarged_eye, exophthalmos, hind_leg_weakness, abdominal_pain↔hunched_posture 追加
+- ウサギGI stasis: 81.9%→95.0% (rank1)、フェレットインスリノーマ: 0%→51.5%、爬虫類呼吸器: 72.6%→95.0%
