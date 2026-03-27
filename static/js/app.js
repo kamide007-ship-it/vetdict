@@ -271,6 +271,7 @@ function trackEvent(name,params){
 
 let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
+let symptomSortMode="category";
 
 document.addEventListener("DOMContentLoaded",async()=>{
   try{
@@ -524,23 +525,31 @@ function loadSymptoms(species){
   });
 }
 
+function toggleSymptomSort(){symptomSortMode=symptomSortMode==="category"?(currentLang==="ja"?"kana":"az"):"category";renderSymptomList(symptomData);}
 function renderSymptomList(symptoms){
   const symptomSearch=document.getElementById("symptomSearch");
   const list=document.getElementById("symptomList");
   if(!list){console.warn("symptomList element not found");return;}
   const search=(symptomSearch?.value||"").toLowerCase();
-  const categories={};
-  symptoms.forEach(s=>{const cat=s.category||"other";if(!categories[cat])categories[cat]=[];categories[cat].push(s);});
-  const catLabels=t("catLabels");
-  let html="";
-  for(const[cat,items]of Object.entries(categories)){
-    const filtered=items.filter(s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);});
-    if(!filtered.length)continue;
-    html+=`<div class="symptom-cat" role="heading" aria-level="4">${catLabels[cat]||cat}</div>`;
-    for(const s of filtered){const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?s.name_ja:s.name_en;const secondary=currentLang==="ja"?s.name_en:s.name_ja;html+=`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;}
+  const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
+  let html=`<button class="symptom-sort-toggle" onclick="toggleSymptomSort()" aria-label="Switch sort mode">${sortLabel}</button>`;
+  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?s.name_ja:s.name_en;const secondary=currentLang==="ja"?s.name_en:s.name_ja;return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;};
+  const matchSearch=s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);};
+  if(symptomSortMode==="category"){
+    const categories={};
+    symptoms.forEach(s=>{const cat=s.category||"other";if(!categories[cat])categories[cat]=[];categories[cat].push(s);});
+    const catLabels=t("catLabels");
+    for(const[cat,items]of Object.entries(categories)){
+      const filtered=items.filter(matchSearch);
+      if(!filtered.length)continue;
+      html+=`<div class="symptom-cat" role="heading" aria-level="4">${catLabels[cat]||cat}</div>`;
+      for(const s of filtered)html+=mkItem(s);
+    }
+  }else{
+    const sorted=symptoms.filter(matchSearch).slice().sort((a,b)=>{const an=currentLang==="ja"?(a.name_ja||a.name_en||""):(a.name_en||a.name_ja||"");const bn=currentLang==="ja"?(b.name_ja||b.name_en||""):(b.name_en||b.name_ja||"");return an.localeCompare(bn,currentLang==="ja"?"ja":"en");});
+    for(const s of sorted)html+=mkItem(s);
   }
   list.innerHTML=html||`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noMatchingSymptom")}</div>`;
-  // Event delegation for symptom items
   list.onclick=e=>{const item=e.target.closest(".symptom-item");if(item)toggleSymptom(item.dataset.id);};
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
 }
@@ -748,20 +757,6 @@ function renderResults(data){
   // Fallback: render all diseases if no phase info
   if(phase1.length===0&&phase2.length===0){
     diseases.forEach(d=>{
-    const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
-    const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
-    const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
-    const diseaseName=nameJa||name||"Disease";
-    const matchSymptoms=d.matching_symptoms||[],recTests=d.recommended_tests||[];
-    const lf=currentLang==="ja"?"_ja":"";const lf2=currentLang==="ja"?"":"_ja";
-    const pick=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
-    const symNames=data.symptom_names||{};
-    const patho=pick(d.pathophysiology_ja,d.pathophysiology)||buildFieldFallback(t("dtPathophysiology"),diseaseName);
-    const causes=pick(d.causes_ja,d.causes)||buildFieldFallback(t("dtCauses"),diseaseName);
-    const prevention=pick(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
-    const treatment=pick(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
-    const prognosis=pick(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
-    const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return s;return currentLang==="ja"?`${n.ja} <span style="color:var(--gray-500);font-size:.78rem">${n.en}</span>`:`${n.en} <span style="color:var(--gray-500);font-size:.78rem">${n.ja}</span>`;}).join("&ensp;|&ensp;");
       html+=renderDiseaseCard(d,data);
     });
   }
@@ -860,7 +855,10 @@ function renderScoringDetail(d){
 }
 
 function renderDiseaseCard(d,data){
-  const name=d.name||d.name_ja||"",nameJa=d.name_ja||"",pct=d.match_percent||d.confidence||0;
+  const nameEn=d.name||d.name_ja||"",nameJa=d.name_ja||"";
+  const name=currentLang==="ja"?(nameJa||nameEn):nameEn;
+  const nameSecondary=currentLang==="ja"?nameEn:nameJa;
+  const pct=d.match_percent||d.confidence||0;
   const likelihood=d.likelihood||(pct>=50?"high":pct>=30?"moderate":"low");
   const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
   const diseaseName=nameJa||name||"Disease";
@@ -886,7 +884,7 @@ function renderDiseaseCard(d,data){
       <div class="disease-head-info">
         <div class="disease-name-row">
           <span class="disease-name">${name}</span>
-          ${nameJa&&nameJa!==name?`<span class="disease-name-ja">${nameJa}</span>`:""}
+          ${nameSecondary&&nameSecondary!==name?`<span class="disease-name-ja">${nameSecondary}</span>`:""}
           <span class="quality-badge ${qualityClass}">${completeness}%</span>
           ${prevalenceLabel?`<span class="prevalence-badge">${prevalenceLabel}</span>`:""}
         </div>
@@ -990,11 +988,13 @@ function renderDiseaseDb(){
     const prevention=pk(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
     const treatment=pk(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
     const prognosis=pk(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
-    const dName=highlightMatch(d.name||"",search);
+    const dNameEn=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
+    const dPrimary=currentLang==="ja"?dNameJa:dNameEn;
+    const dSecondary=currentLang==="ja"?dNameEn:dNameJa;
     const dDesc=desc.substring(0,80)+(desc.length>80?"...":"");
     return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDbItem(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDbItem(this)}">
-      <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
+      <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${desc}</dd>
