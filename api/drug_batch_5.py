@@ -116,6 +116,116 @@ DRUGS_BATCH_5: list[dict] = [
         "contraindications": "Severe cardiovascular disease. Hepatic/renal impairment. Not for cats (unapproved).",
         "contraindications_ja": "重度の心血管疾患。肝/腎障害。猫には未承認。",
     },
+    # ------------------------------------------------------------------
+    # Anti-NGF monoclonal antibody – OA pain (dog)
+    # ------------------------------------------------------------------
+    {
+        "id": "librela",
+        "name": "Bedinvetmab (Librela)",
+        "name_ja": "ベジンベトマブ（リブレラ）",
+        "category": "analgesics",
+        "mechanism": "Caninized anti-nerve growth factor (NGF) monoclonal antibody. Blocks NGF-mediated pain signaling without affecting prostaglandins. Monthly SC injection for osteoarthritis pain.",
+        "mechanism_ja": "犬化抗神経成長因子（NGF）モノクローナル抗体。プロスタグランジンに影響せずNGFを介した疼痛シグナルを遮断。変形性関節症の月1回皮下注射。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "0.5-1.0 mg/kg SC once monthly",
+                "dosage_ja": "0.5-1.0 mg/kg 皮下 月1回",
+                "notes": "FDA/EMA approved for OA pain in dogs ≥12 months and ≥5 kg. Do not use in breeding dogs. Onset 1-2 weeks",
+                "notes_ja": "12ヶ月以上・5kg以上の犬のOA疼痛にFDA/EMA承認。繁殖犬には使用不可。効果発現1-2週",
+            },
+        },
+        "side_effects": ["injection site reactions", "urinary tract infections (rare)", "dermatitis", "bacterial skin infections"],
+        "side_effects_ja": ["注射部位反応", "尿路感染症（稀）", "皮膚炎", "細菌性皮膚感染症"],
+        "contraindications": "Not for cats (species-specific). Not for breeding, pregnant, or lactating dogs. Not recommended under 12 months or <5 kg.",
+        "contraindications_ja": "猫には使用不可（種特異的）。繁殖・妊娠・授乳中の犬には不可。12ヶ月未満または5kg未満には非推奨。",
+    },
+    # ------------------------------------------------------------------
+    # Anti-NGF monoclonal antibody – OA pain (cat)
+    # ------------------------------------------------------------------
+    {
+        "id": "solensia",
+        "name": "Frunevetmab (Solensia)",
+        "name_ja": "フルネベトマブ（ソレンシア）",
+        "category": "analgesics",
+        "mechanism": "Felinized anti-nerve growth factor (NGF) monoclonal antibody. Blocks pain signaling without affecting prostaglandins. Monthly SC injection for osteoarthritis pain in cats.",
+        "mechanism_ja": "猫化抗NGFモノクローナル抗体。プロスタグランジンに影響せずNGFを介した疼痛シグナルを遮断。猫の変形性関節症の月1回皮下注射。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "1-2.8 mg/kg SC once monthly",
+                "dosage_ja": "1-2.8 mg/kg 皮下 月1回",
+                "notes": "FDA/EMA approved for OA pain in cats ≥12 months and ≥2.5 kg. First mAb approved for cats",
+                "notes_ja": "12ヶ月以上・2.5kg以上の猫のOA疼痛にFDA/EMA承認。猫初の承認モノクローナル抗体",
+            },
+        },
+        "side_effects": ["injection site reactions", "vomiting", "diarrhea", "skin lesions (rare)"],
+        "side_effects_ja": ["注射部位反応", "嘔吐", "下痢", "皮膚病変（稀）"],
+        "contraindications": "Not for dogs (species-specific). Not for breeding, pregnant, or lactating cats. Not recommended under 12 months or <2.5 kg.",
+        "contraindications_ja": "犬には使用不可（種特異的）。繁殖・妊娠・授乳中の猫には不可。12ヶ月未満または2.5kg未満には非推奨。",
+    },
+    # ------------------------------------------------------------------
+    # Anti-IL-31 monoclonal antibody – pruritus (dog)
+    # ------------------------------------------------------------------
+    {
+        "id": "cytopoint",
+        "name": "Lokivetmab (Cytopoint)",
+        "name_ja": "ロキベトマブ（サイトポイント）",
+        "category": "dermatological",
+        "mechanism": "Caninized anti-interleukin-31 (IL-31) monoclonal antibody. Neutralizes IL-31, a key cytokine in itch signaling. Monthly SC injection for atopic dermatitis and allergic pruritus.",
+        "mechanism_ja": "犬化抗インターロイキン-31（IL-31）モノクローナル抗体。瘙痒シグナルの主要サイトカインIL-31を中和。アトピー性皮膚炎・アレルギー性瘙痒に月1回皮下注射。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "1 mg/kg SC once monthly (can give q4-8 weeks based on response)",
+                "dosage_ja": "1 mg/kg 皮下 月1回（反応に応じて4-8週間隔）",
+                "notes": "USDA-licensed. Safe with other medications including vaccines. Onset within 1 day. Can use in puppies ≥3 months",
+                "notes_ja": "USDA承認。ワクチン含む他の薬剤と併用安全。1日以内に効果発現。3ヶ月以上の子犬にも使用可能",
+            },
+        },
+        "side_effects": ["injection site reactions (rare)", "lethargy (transient)", "vomiting (rare)"],
+        "side_effects_ja": ["注射部位反応（稀）", "倦怠感（一過性）", "嘔吐（稀）"],
+        "contraindications": "Dogs only (species-specific anti-canine IL-31). No known contraindications in dogs.",
+        "contraindications_ja": "犬のみ（種特異的抗犬IL-31）。犬における既知の禁忌なし。",
+    },
+    # ------------------------------------------------------------------
+    # Trazodone – anxiolytic/sedative
+    # ------------------------------------------------------------------
+    {
+        "id": "trazodone",
+        "name": "Trazodone (Desyrel)",
+        "name_ja": "トラゾドン（デジレル）",
+        "category": "sedatives",
+        "mechanism": "Serotonin antagonist and reuptake inhibitor (SARI). Provides anxiolysis and sedation by blocking 5-HT2A receptors and inhibiting serotonin reuptake. Commonly used for event-based anxiety and post-operative confinement.",
+        "mechanism_ja": "セロトニン拮抗・再取り込み阻害薬（SARI）。5-HT2A受容体遮断とセロトニン再取り込み阻害で抗不安・鎮静作用。イベント時の不安や術後安静に。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "2-5 mg/kg PO q8-12h (up to 8-10 mg/kg for events)",
+                "dosage_ja": "2-5 mg/kg 経口 8-12時間毎（イベント時は最大8-10 mg/kg）",
+                "notes": "Widely used for confinement anxiety, vet visits, thunderstorms. Can combine with gabapentin. Titrate up slowly",
+                "notes_ja": "安静時不安、通院、雷恐怖症に広く使用。ガバペンチンと併用可。ゆっくり増量",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "25-50 mg/cat PO q12-24h (or 2-5 mg/kg)",
+                "dosage_ja": "25-50 mg/匹 経口 12-24時間毎（または2-5 mg/kg）",
+                "notes": "Useful for travel, vet visits, hospitalization anxiety. Can combine with gabapentin for synergistic effect",
+                "notes_ja": "移動、通院、入院時の不安に有用。ガバペンチンとの併用で相乗効果",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "4-6 mg/kg PO q12-24h",
+                "dosage_ja": "4-6 mg/kg 経口 12-24時間毎",
+                "notes": "For anxiety-related behavioral issues; limited equine data",
+                "notes_ja": "不安関連の行動問題に。馬でのデータは限定的",
+            },
+        },
+        "side_effects": ["sedation", "ataxia", "GI upset", "priapism (rare in dogs)", "serotonin syndrome if combined with SSRIs"],
+        "side_effects_ja": ["鎮静", "運動失調", "消化器症状", "持続勃起症（犬で稀）", "SSRI併用時セロトニン症候群"],
+        "contraindications": "Do not combine with MAOIs or serotonergic drugs without caution. Severe hepatic impairment.",
+        "contraindications_ja": "MAOI・セロトニン作動薬との併用は慎重に。重度の肝障害。",
+    },
 ]
 # ---------------------------------------------------------------------------
 # Species-specific dosage patches for existing drugs (batch 5)
