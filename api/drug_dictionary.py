@@ -20,7 +20,7 @@ from api.drug_batch_2 import DRUGS_BATCH_2
 from api.drug_batch_3 import SPECIES_INFO_PATCH
 from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 from api.drug_batch_5 import DRUGS_BATCH_5, SPECIES_INFO_PATCH_5
-from api.drug_batch_6 import DRUGS_BATCH_6, DRUG_INTERACTIONS_PATCH_6, SPECIES_INFO_PATCH_6
+from api.drug_batch_6 import DRUG_INTERACTIONS_PATCH_6, DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
