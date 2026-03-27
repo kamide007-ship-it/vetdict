@@ -1576,9 +1576,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
     from api.species import prevalence_data as _prev_mod
     _prevalence = _prev_mod.SPECIES_PREVALENCE.get(species, {})
     _PREVALENCE_MULTIPLIER = {
-        "very_common": 1.30,
-        "common": 1.05,
-        "uncommon": 0.85,
+        "very_common": 1.35,
+        "common": 1.125,
+        "uncommon": 0.875,
         "rare": 0.70,
     }
 

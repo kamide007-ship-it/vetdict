@@ -1996,10 +1996,10 @@ _DEFAULT_SYMPTOM_WEIGHT = 1.0
 
 # Prevalence multiplier for Bayesian-like prior adjustment
 _PREVALENCE_MULTIPLIER: Dict[str, float] = {
-    "very_common": 1.4,
-    "common": 1.2,
-    "uncommon": 0.9,
-    "rare": 0.7,
+    "very_common": 1.35,
+    "common": 1.125,
+    "uncommon": 0.875,
+    "rare": 0.70,
 }
 
 

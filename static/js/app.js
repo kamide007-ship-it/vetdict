@@ -662,7 +662,7 @@ function doAnalyze(){
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})
-  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${t("errorPrefix")}${err.message}</div>`;console.error("Analyze error:",err);})
+  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${escapeHtml(t("errorPrefix"))}${escapeHtml(String(err.message||"Unknown error"))}</div>`;})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
@@ -763,7 +763,7 @@ function loadCommonDiseases(species){
     const renderList=(list,cls)=>list.map(d=>{
       const name=currentLang==="ja"?(d.name_ja||d.name):d.name;
       const sub=currentLang==="ja"?d.name:(d.name_ja||"");
-      return `<span class="common-disease-tag ${cls}">${name}${sub?` <span class="common-disease-sub">${sub}</span>`:""}</span>`;
+      return `<span class="common-disease-tag ${cls}">${escapeHtml(name)}${sub?` <span class="common-disease-sub">${escapeHtml(sub)}</span>`:""}</span>`;
     }).join("");
     area.innerHTML=`<div class="common-diseases-section">
       <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
@@ -1284,7 +1284,7 @@ function renderChatResult(container,data){
       const common=diseases.filter(d=>d.prevalence==="common");
       const renderTags=(list,cls)=>list.map(d=>{
         const n=currentLang==="ja"?(d.name_ja||d.name):d.name;
-        return `<span class="common-disease-tag ${cls}">${n}</span>`;
+        return `<span class="common-disease-tag ${cls}">${escapeHtml(n)}</span>`;
       }).join("");
       chatRef.innerHTML=`<div class="common-diseases-section compact">
         <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>

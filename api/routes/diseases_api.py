@@ -33,8 +33,11 @@ def api_list_diseases():
     """
     species = request.args.get("species")
     query = request.args.get("q")
-    limit = min(int(request.args.get("limit", 200)), 1000)
-    offset = max(int(request.args.get("offset", 0)), 0)
+    try:
+        limit = max(1, min(int(request.args.get("limit", 200)), 1000))
+        offset = max(0, int(request.args.get("offset", 0)))
+    except (ValueError, TypeError):
+        return jsonify({"success": False, "error": "Invalid limit or offset parameter"}), 400
 
     if query:
         results = search_diseases(query, species=species, limit=limit)
@@ -66,7 +69,10 @@ def api_get_diseases_by_symptom(symptom_id: str):
         limit: max results (default 50, max 500)
     """
     species = request.args.get("species")
-    limit = min(int(request.args.get("limit", 50)), 500)
+    try:
+        limit = max(1, min(int(request.args.get("limit", 50)), 500))
+    except (ValueError, TypeError):
+        limit = 50
 
     diseases = get_diseases_by_symptom(symptom_id, species=species, limit=limit)
     return jsonify({"success": True, "symptom_id": symptom_id, "diseases": diseases})
