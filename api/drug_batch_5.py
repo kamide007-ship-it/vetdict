@@ -527,4 +527,196 @@ SPECIES_INFO_PATCH_5: dict[str, dict[str, dict]] = {
             "notes_ja": "毛皮ダニに。安全な外用の選択肢",
         },
     },
+    # ------------------------------------------------------------------
+    # Pradofloxacin – expand beyond dog/cat
+    # ------------------------------------------------------------------
+    "pradofloxacin": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "5-7.5 mg/kg PO q24h",
+            "dosage_ja": "5-7.5 mg/kg 経口 24時間毎",
+            "notes": "Broad-spectrum fluoroquinolone; useful for Pasteurella and anaerobic infections",
+            "notes_ja": "広域フルオロキノロン。パスツレラや嫌気性菌感染に有用",
+        },
+        "ferret": {
+            "safe": True,
+            "dosage": "5-7.5 mg/kg PO q24h",
+            "dosage_ja": "5-7.5 mg/kg 経口 24時間毎",
+            "notes": "Good oral bioavailability; covers atypicals",
+            "notes_ja": "良好な経口吸収率。非定型菌にも有効",
+        },
+        "reptile": {
+            "safe": True,
+            "dosage": "5 mg/kg PO q24h",
+            "dosage_ja": "5 mg/kg 経口 24時間毎",
+            "notes": "Adjust interval in cold environments; good gram-negative activity",
+            "notes_ja": "低温環境では投与間隔を調整。グラム陰性菌に良好な活性",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Robenacoxib – expand beyond dog/cat
+    # ------------------------------------------------------------------
+    "robenacoxib": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "1-2 mg/kg SC/PO q24h (short-term)",
+            "dosage_ja": "1-2 mg/kg 皮下/経口 24時間毎（短期使用）",
+            "notes": "COX-2 selective NSAID; limited data in rabbits, use short-term perioperatively",
+            "notes_ja": "COX-2選択的NSAID。ウサギでのデータ限定、周術期短期使用",
+        },
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "1-2 mg/kg SC q24h (short-term)",
+            "dosage_ja": "1-2 mg/kg 皮下 24時間毎（短期使用）",
+            "notes": "COX-2 selectivity may reduce GI risk; perioperative analgesia",
+            "notes_ja": "COX-2選択性によりGIリスク軽減の可能性。周術期鎮痛",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Methimazole – expand beyond cat/dog
+    # ------------------------------------------------------------------
+    "methimazole": {
+        "ferret": {
+            "safe": True,
+            "dosage": "0.5-1 mg/ferret PO q12h",
+            "dosage_ja": "0.5-1 mg/匹 経口 12時間毎",
+            "notes": "Rare thyroid disease in ferrets; start low and titrate based on T4",
+            "notes_ja": "フェレットの甲状腺疾患は稀。低用量から開始しT4でモニター",
+        },
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "1-2.5 mg/kg PO q12h",
+            "dosage_ja": "1-2.5 mg/kg 経口 12時間毎",
+            "notes": "Limited reports of hyperthyroidism; dose extrapolated from cat",
+            "notes_ja": "甲状腺機能亢進症の報告は限定的。猫からの用量外挿",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Trilostane – expand beyond dog/ferret
+    # ------------------------------------------------------------------
+    "trilostane": {
+        "horse": {
+            "safe": True,
+            "dosage": "0.5-1 mg/kg PO q24h",
+            "dosage_ja": "0.5-1 mg/kg 経口 24時間毎",
+            "notes": "For pituitary pars intermedia dysfunction (PPID/Cushing's); monitor ACTH",
+            "notes_ja": "下垂体中間部機能障害（PPID/クッシング）に。ACTHをモニター",
+        },
+        "cat": {
+            "safe": True,
+            "dosage": "1-2 mg/kg PO q24h",
+            "dosage_ja": "1-2 mg/kg 経口 24時間毎",
+            "notes": "Feline hyperadrenocorticism is rare; monitor electrolytes closely",
+            "notes_ja": "猫の副腎皮質機能亢進症は稀。電解質を厳密にモニター",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Chlorambucil – expand beyond dog/cat
+    # ------------------------------------------------------------------
+    "chlorambucil": {
+        "ferret": {
+            "safe": True,
+            "dosage": "2 mg/ferret PO q48-72h",
+            "dosage_ja": "2 mg/匹 経口 48-72時間毎",
+            "notes": "For lymphoma; combine with prednisolone. Monitor CBC closely",
+            "notes_ja": "リンパ腫に。プレドニゾロンと併用。CBC厳密にモニター",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "2 mg/rabbit PO q48h",
+            "dosage_ja": "2 mg/匹 経口 48時間毎",
+            "notes": "For thymoma and lymphoma; use with corticosteroids",
+            "notes_ja": "胸腺腫・リンパ腫に。コルチコステロイドと併用",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Amphotericin B – expand beyond dog/cat/bird
+    # ------------------------------------------------------------------
+    "amphotericin_b": {
+        "horse": {
+            "safe": True,
+            "dosage": "0.3-0.5 mg/kg IV q48h (cumulative dose ≤6 mg/kg)",
+            "dosage_ja": "0.3-0.5 mg/kg 静注 48時間毎（累積投与量 ≤6 mg/kg）",
+            "notes": "For systemic mycoses; highly nephrotoxic, pre-hydrate with saline. Monitor BUN/creatinine",
+            "notes_ja": "全身性真菌症に。腎毒性が高く生理食塩水で前水和。BUN/クレアチニンをモニター",
+        },
+        "reptile": {
+            "safe": True,
+            "dosage": "1 mg/kg IT/ICe q24h for 14-28 days, or 1 mg/kg SC diluted q72h",
+            "dosage_ja": "1 mg/kg 気管内/体腔内 24時間毎 14-28日、または1 mg/kg 皮下希釈 72時間毎",
+            "notes": "For systemic fungal infections; less nephrotoxic in reptiles but monitor closely",
+            "notes_ja": "全身性真菌症に。爬虫類では腎毒性が低いが慎重にモニター",
+        },
+        "ferret": {
+            "safe": True,
+            "dosage": "0.15-0.5 mg/kg IV q24-48h (cumulative ≤7-25 mg)",
+            "dosage_ja": "0.15-0.5 mg/kg 静注 24-48時間毎（累積 ≤7-25 mg）",
+            "notes": "For systemic mycoses (blastomycosis, histoplasmosis). Pre-hydrate; stop if azotemia develops",
+            "notes_ja": "全身性真菌症に。前水和。高窒素血症が出たら中止",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Phenylbutazone – expand beyond horse/dog/cat
+    # ------------------------------------------------------------------
+    "phenylbutazone": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "10-20 mg/kg PO q8-12h (short-term only)",
+            "dosage_ja": "10-20 mg/kg 経口 8-12時間毎（短期使用のみ）",
+            "notes": "Non-selective NSAID; use only short-term. Risk of GI ulceration",
+            "notes_ja": "非選択的NSAID。短期使用のみ。消化管潰瘍のリスクあり",
+        },
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "10-20 mg/kg PO q12h",
+            "dosage_ja": "10-20 mg/kg 経口 12時間毎",
+            "notes": "Short-term analgesic; GI risk with prolonged use",
+            "notes_ja": "短期鎮痛薬。長期使用では消化管リスクあり",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Flunixin meglumine – expand beyond horse/dog/cat
+    # ------------------------------------------------------------------
+    "flunixin": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "1.1 mg/kg SC/IM q12-24h (1-3 days max)",
+            "dosage_ja": "1.1 mg/kg 皮下/筋注 12-24時間毎（最大1-3日）",
+            "notes": "Potent NSAID for visceral pain; limit to 3 days to avoid GI/renal toxicity",
+            "notes_ja": "内臓痛に有効なNSAID。GI/腎毒性回避のため3日以内に制限",
+        },
+        "bird": {
+            "safe": True,
+            "dosage": "1-10 mg/kg IM q12-24h",
+            "dosage_ja": "1-10 mg/kg 筋注 12-24時間毎",
+            "notes": "Wide dose range across avian species; effective for visceral and musculoskeletal pain",
+            "notes_ja": "鳥種により用量範囲が広い。内臓・筋骨格系痛に有効",
+        },
+        "reptile": {
+            "safe": True,
+            "dosage": "0.1-0.5 mg/kg IM q24-48h",
+            "dosage_ja": "0.1-0.5 mg/kg 筋注 24-48時間毎",
+            "notes": "Limited PK data; adjust interval based on ambient temperature",
+            "notes_ja": "薬物動態データ限定。環境温度に応じて投与間隔を調整",
+        },
+        "ferret": {
+            "safe": True,
+            "dosage": "0.5-2 mg/kg SC/IM q12-24h (short-term)",
+            "dosage_ja": "0.5-2 mg/kg 皮下/筋注 12-24時間毎（短期使用）",
+            "notes": "For acute pain/inflammation; avoid prolonged use",
+            "notes_ja": "急性疼痛・炎症に。長期使用は避ける",
+        },
+    },
+    # ------------------------------------------------------------------
+    # Oclacitinib – expand beyond dog/cat (limited evidence)
+    # ------------------------------------------------------------------
+    "oclacitinib": {
+        "ferret": {
+            "safe": True,
+            "dosage": "0.4-0.6 mg/kg PO q12h x14d then q24h",
+            "dosage_ja": "0.4-0.6 mg/kg 経口 12時間毎×14日後、24時間毎",
+            "notes": "JAK inhibitor; anecdotal use for pruritic dermatitis in ferrets. Monitor CBC",
+            "notes_ja": "JAK阻害薬。フェレットの瘙痒性皮膚炎に経験的使用。CBCモニター",
+        },
+    },
 }
