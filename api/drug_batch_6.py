@@ -663,4 +663,96 @@ SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {
             "notes_ja": "胸腺腫・リンパ腫に。CBC・肝機能を厳密にモニター",
         },
     },
+    # Maropitant – add hedgehog, bird
+    "maropitant": {
+        "hedgehog": {
+            "safe": True,
+            "dosage": "1 mg/kg SC q24h",
+            "dosage_ja": "1 mg/kg 皮下 24時間毎",
+            "notes": "Anti-emetic; limited data but dose extrapolated from small mammals",
+            "notes_ja": "制吐薬。データ限定的だが小型哺乳類から用量外挿",
+        },
+        "bird": {
+            "safe": True,
+            "dosage": "2 mg/kg IM/SC q24h",
+            "dosage_ja": "2 mg/kg 筋注/皮下 24時間毎",
+            "notes": "Anti-emetic and visceral analgesic; emerging avian data",
+            "notes_ja": "制吐・内臓鎮痛。鳥類のデータ増加中",
+        },
+    },
+    # Benazepril – add ferret, rabbit
+    "benazepril": {
+        "ferret": {
+            "safe": True,
+            "dosage": "0.25-0.5 mg/kg PO q24h",
+            "dosage_ja": "0.25-0.5 mg/kg 経口 24時間毎",
+            "notes": "For cardiac disease and proteinuria; preferred ACEi in renal patients (hepatic elimination)",
+            "notes_ja": "心疾患・蛋白尿に。腎疾患患者に推奨のACE阻害薬（肝排泄）",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "0.25-0.5 mg/kg PO q24h",
+            "dosage_ja": "0.25-0.5 mg/kg 経口 24時間毎",
+            "notes": "For cardiomyopathy and renal disease; limited rabbit data",
+            "notes_ja": "心筋症・腎疾患に。ウサギのデータは限定的",
+        },
+    },
+    # Insulin – add guinea_pig, rabbit
+    "insulin_vetsulin": {
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "0.5-1 U/kg SC q12h (start 0.5, titrate)",
+            "dosage_ja": "0.5-1 U/kg 皮下 12時間毎（0.5から開始、漸増）",
+            "notes": "Diabetes rare in guinea pigs; monitor blood glucose closely",
+            "notes_ja": "モルモットの糖尿病は稀。血糖値を厳密にモニター",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "0.5-2 U/kg SC q12h (titrate to glucose)",
+            "dosage_ja": "0.5-2 U/kg 皮下 12時間毎（血糖値に応じて調整）",
+            "notes": "For diabetes mellitus; very rare in rabbits",
+            "notes_ja": "糖尿病に。ウサギでは極めて稀",
+        },
+    },
+    # Ampicillin – add ferret, bird, rabbit
+    "ampicillin": {
+        "ferret": {
+            "safe": True,
+            "dosage": "10-20 mg/kg SC/IM/IV q8-12h",
+            "dosage_ja": "10-20 mg/kg 皮下/筋注/静注 8-12時間毎",
+            "notes": "Broad-spectrum; parenteral for serious infections",
+            "notes_ja": "広域スペクトル。重症感染には注射剤",
+        },
+        "bird": {
+            "safe": True,
+            "dosage": "100-200 mg/kg IM q8-12h",
+            "dosage_ja": "100-200 mg/kg 筋注 8-12時間毎",
+            "notes": "High doses needed due to rapid avian metabolism",
+            "notes_ja": "鳥類の代謝が速いため高用量が必要",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "15-30 mg/kg SC/IV q8-12h (parenteral only)",
+            "dosage_ja": "15-30 mg/kg 皮下/静注 8-12時間毎（注射剤のみ）",
+            "notes": "NEVER give oral ampicillin to rabbits — fatal dysbiosis. Parenteral only",
+            "notes_ja": "経口アンピシリンはウサギに絶対禁忌（致死的腸内細菌叢異常）。注射剤のみ",
+        },
+    },
+    # Ketoconazole – add rabbit, guinea_pig
+    "ketoconazole": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "10-40 mg/kg PO q24h",
+            "dosage_ja": "10-40 mg/kg 経口 24時間毎",
+            "notes": "For dermatophytosis; hepatotoxicity risk with prolonged use",
+            "notes_ja": "皮膚糸状菌症に。長期使用で肝毒性リスク",
+        },
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "10-40 mg/kg PO q24h for 14-28 days",
+            "dosage_ja": "10-40 mg/kg 経口 24時間毎 14-28日間",
+            "notes": "For Trichophyton ringworm; give with food for absorption",
+            "notes_ja": "トリコフィトン白癬に。食事と投与で吸収向上",
+        },
+    },
 }
