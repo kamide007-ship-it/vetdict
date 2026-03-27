@@ -61,6 +61,19 @@
                 <button type="button" onclick="clearLabValues()" style="margin-top:8px;padding:6px 14px;font-size:.78rem;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-300);border-radius:6px;cursor:pointer">検査値をクリア</button>
               </div>
             </details>
+            <details class="pain-scale-section" id="painScaleDetails" style="margin-top:10px;border:2px solid var(--gray-200);border-radius:var(--radius);padding:0;display:none">
+              <summary style="cursor:pointer;padding:10px 14px;font-size:.86rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-radius:var(--radius);user-select:none">&#x1F9D1;&#x200D;&#x2695;&#xFE0F; 痛みの評価 (CSU Pain Scale)<span id="painScaleBadge" style="display:none;margin-left:8px;font-size:.72rem;font-weight:600;background:var(--green);color:#fff;padding:2px 8px;border-radius:10px"></span></summary>
+              <div style="padding:12px 14px" id="painScaleGrid">
+                <p style="font-size:.74rem;color:var(--gray-500);margin:0 0 10px">Colorado State University 犬急性痛みスケール（0〜4）を選択してください。</p>
+                <div class="pain-scale-options" id="painScaleOptions">
+                  <label class="pain-option" data-score="0"><input type="radio" name="painScore" value="0"/><span class="pain-dot" style="background:#16a34a"></span><span class="pain-label"><b>0</b> 痛みなし</span><span class="pain-desc">快適、リラックス、尾を振る</span></label>
+                  <label class="pain-option" data-score="1"><input type="radio" name="painScore" value="1"/><span class="pain-dot" style="background:#65a30d"></span><span class="pain-label"><b>1</b> 軽度</span><span class="pain-desc">やや落ち着かない、リップリッキング</span></label>
+                  <label class="pain-option" data-score="2"><input type="radio" name="painScore" value="2"/><span class="pain-dot" style="background:#eab308"></span><span class="pain-label"><b>2</b> 中等度</span><span class="pain-desc">体位変換、うめき声、食欲低下</span></label>
+                  <label class="pain-option" data-score="3"><input type="radio" name="painScore" value="3"/><span class="pain-dot" style="background:#ea580c"></span><span class="pain-label"><b>3</b> 中〜重度</span><span class="pain-desc">鳴き声、動かない、触ると攻撃的</span></label>
+                  <label class="pain-option" data-score="4"><input type="radio" name="painScore" value="4"/><span class="pain-dot" style="background:#dc2626"></span><span class="pain-label"><b>4</b> 重度</span><span class="pain-desc">横臥、叫び声、硬直、無反応</span></label>
+                </div>
+              </div>
+            </details>
             <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px" data-i18n="analyzeBtn">鑑別疾患を検索</button>
             <div class="analyze-progress" id="analyzeProgress"><div class="analyze-progress-bar"></div></div>
           </div>
@@ -105,7 +118,7 @@
         <button id="chatModeGuided" class="chat-mode-btn" data-i18n="chatModeGuided">問診モード</button>
       </div>
       <div class="chat-container" id="chatFreeContainer">
-        <div class="chat-messages" id="chatMessages">
+        <div class="chat-messages" id="chatMessages" aria-live="polite" aria-relevant="additions">
           <div class="chat-msg bot" id="chatWelcome" data-i18n-html="chatWelcome">
             こんにちは。気になる症状を日本語または英語で入力してください。<br/>
             例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/>

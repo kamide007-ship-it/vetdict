@@ -90,16 +90,20 @@ def _ensure_db() -> None:
 # Cache helpers
 # ---------------------------------------------------------------------------
 
+import threading
+
 _cache_version = 0
+_cache_lock = threading.Lock()
 
 
 def invalidate_cache() -> None:
     """Clear all cached data (call after writes to the database)."""
     global _cache_version
-    _cache_version += 1
-    get_species_stats.cache_clear()
-    get_urgency_stats.cache_clear()
-    _get_symptoms_for_species_cached.cache_clear()
+    with _cache_lock:
+        _cache_version += 1
+        get_species_stats.cache_clear()
+        get_urgency_stats.cache_clear()
+        _get_symptoms_for_species_cached.cache_clear()
 
 
 # ---------------------------------------------------------------------------
@@ -470,12 +474,16 @@ def list_diseases(
 
     Returns ``{"diseases": [...], "total": N, "limit": L, "offset": O}``.
     """
+    # Clamp pagination parameters to prevent abuse
+    limit = max(1, min(limit, 500))
+    offset = max(0, offset)
+
     search_clause = (
-        "(name LIKE ? OR name_ja LIKE ? OR "
-        "description LIKE ? OR description_ja LIKE ? OR "
-        "treatment LIKE ? OR treatment_ja LIKE ? OR "
-        "prevention LIKE ? OR prevention_ja LIKE ? OR "
-        "pathophysiology LIKE ? OR pathophysiology_ja LIKE ?)"
+        "(name LIKE ? ESCAPE '\\' OR name_ja LIKE ? ESCAPE '\\' OR "
+        "description LIKE ? ESCAPE '\\' OR description_ja LIKE ? ESCAPE '\\' OR "
+        "treatment LIKE ? ESCAPE '\\' OR treatment_ja LIKE ? ESCAPE '\\' OR "
+        "prevention LIKE ? ESCAPE '\\' OR prevention_ja LIKE ? ESCAPE '\\' OR "
+        "pathophysiology LIKE ? ESCAPE '\\' OR pathophysiology_ja LIKE ? ESCAPE '\\')"
     )
 
     with get_connection() as conn:
@@ -486,7 +494,7 @@ def list_diseases(
             conditions.append("species = ?")
             params.append(species)
         if search:
-            like_pattern = "%" + search + "%"
+            like_pattern = "%" + search.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
             conditions.append(search_clause)
             params.extend([like_pattern] * 10)
 
@@ -522,13 +530,13 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
     Searches both English and Japanese fields. Returns results ordered by
     relevance (name match prioritized) then by species and name.
     """
-    like_pattern = "%" + query + "%"
+    like_pattern = "%" + query.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
     search_clause = (
-        "(name LIKE ? OR name_ja LIKE ? OR "
-        "description LIKE ? OR description_ja LIKE ? OR "
-        "treatment LIKE ? OR treatment_ja LIKE ? OR "
-        "prevention LIKE ? OR prevention_ja LIKE ? OR "
-        "pathophysiology LIKE ? OR pathophysiology_ja LIKE ?)"
+        "(name LIKE ? ESCAPE '\\' OR name_ja LIKE ? ESCAPE '\\' OR "
+        "description LIKE ? ESCAPE '\\' OR description_ja LIKE ? ESCAPE '\\' OR "
+        "treatment LIKE ? ESCAPE '\\' OR treatment_ja LIKE ? ESCAPE '\\' OR "
+        "prevention LIKE ? ESCAPE '\\' OR prevention_ja LIKE ? ESCAPE '\\' OR "
+        "pathophysiology LIKE ? ESCAPE '\\' OR pathophysiology_ja LIKE ? ESCAPE '\\')"
     )
 
     with get_connection() as conn:

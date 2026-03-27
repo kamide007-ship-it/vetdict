@@ -803,6 +803,8 @@ SYMPTOM_ALIASES = {
     "手足が変形してる": "bone_deformity", "顎が柔らかい": "jaw_softening",
     "代謝性骨疾患": "soft_bones", "mbd": "soft_bones",
     "後ろ足が弱い": "hind_limb_weakness",
+    "後肢麻痺": "hind_limb_weakness", "後ろ足ふらふら": "hind_limb_weakness",
+    "後ろ足に力が入らない": "hind_limb_weakness", "後肢が弱い": "hind_limb_weakness",
     "口の中に病変": "mouth_lesions", "口の中が腫れてる": "mouth_lesions",
     "口に粘液": "mucus_in_mouth",
     # ---------------------------------------------------------------
@@ -810,7 +812,7 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     "針が抜ける": "quill_loss", "クイルロス": "quill_loss",
     "quilling": "hair_loss",
-    "ふらふら歩く": "ataxia", "後ろ足が動かない": "paralysis_or_paresis",
+    "ふらふら歩く": "ataxia",
     "wobbly hedgehog": "ataxia",
     "後ろ足が動かなくなってきた": "paralysis_or_paresis",
     "ふらつく": "ataxia", "ふらついてる": "ataxia",
@@ -876,8 +878,11 @@ SYMPTOM_ALIASES = {
     "毛艶が悪い": "weight_loss",
     # ウサギ
     "膿が出てる": "abscess", "下顎が腫れてる": "jaw_swelling",
-    # ハムスター
-    "眼球突出": "pop_eye",
+    "目から膿が出る": "eye_discharge", "目から膿": "eye_discharge",
+    "顔が腫れてる": "facial_swelling", "顔が腫れた": "facial_swelling",
+    "うずくまってる": "hunched_posture",
+    # ハムスター/ハリネズミ — 眼球突出
+    "眼球突出": "eye_bulging",
     "頬袋が出たまま": "cheek_pouch_prolapse", "頬袋が戻らない": "cheek_pouch_prolapse",
     # 鳥
     "糞が水っぽい": "diarrhea", "糞が緑色": "diarrhea",
@@ -906,8 +911,9 @@ SYMPTOM_ALIASES = {
     # 猫 — 便秘（追加表現）
     "便が硬い": "constipation", "排便時に鳴く": "constipation",
     # ハムスター/ハリネズミ — 眼球突出
-    "目が出てきた": "eye_swelling", "目が大きくなった": "eye_swelling",
-    "目が飛び出した": "eye_swelling",
+    "目が出てきた": "eye_bulging", "目が大きくなった": "eye_bulging",
+    "目が飛び出した": "eye_bulging", "目が膨らんでる": "eye_bulging",
+    "眼が出てる": "eye_bulging", "目が丸くなってる": "eye_bulging",
     # ウサギ — 涙
     "涙が止まらない": "eye_discharge", "目の周りが汚れてる": "eye_discharge",
     "目の周りが濡れてる": "eye_discharge",
@@ -1233,10 +1239,10 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
         "fainting": ["collapse", "syncope"],
         "collapse": ["fainting", "syncope"],
-        "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "hind_limb_paralysis", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness"],
+        "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "hind_limb_paralysis", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_leg_weakness"],
         "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness", "hind_limb_paralysis"],
-        "sudden_paralysis": ["hind_limb_paralysis", "paralysis", "paralysis_or_paresis"],
-        "hind_limb_paralysis": ["paralysis", "paralysis_or_paresis", "hind_limb_weakness", "sudden_paralysis"],
+        "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis"],
+        "hind_limb_weakness": ["hind_leg_weakness", "hindlimb_weakness", "posterior_paresis", "progressive_paralysis"],
         "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
         # Weight / body
         "weight_loss": ["emaciation", "wasting", "cachexia", "rough_coat", "poor_growth"],
@@ -1253,6 +1259,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "eye_swelling": ["pop_eye", "exophthalmia", "exophthalmos", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen", "eye_bulging", "enlarged_eye", "eye_protrusion"],
         "eye_bulging": ["pop_eye", "exophthalmia", "exophthalmos", "eye_protrusion", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
         "exophthalmos": ["pop_eye", "eye_protrusion", "eye_bulging", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
+        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
         "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding"],
         "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
@@ -1355,8 +1362,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "cheek_pouch_prolapse": ["cheek_swelling"],
         "jaw_swelling": ["facial_swelling", "swelling"],
         "abscess": ["discharge", "swelling"],
-        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "tooth_overgrowth", "malocclusion"],
-        "dental_overgrowth": ["overgrown_teeth", "incisor_overgrowth", "molar_overgrowth", "malocclusion"],
+        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "tooth_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+        "dental_overgrowth": ["overgrown_teeth", "incisor_overgrowth", "molar_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+        "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
+        "scaly_legs": ["leg_scales", "scaly_face"],
+        "leg_scales": ["scaly_legs", "scaly_face"],
         # Pain
         "pain": ["lethargy", "vocalization"],
         # Oral
@@ -1507,8 +1517,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "hind_limb_paralysis": ["paralysis", "sudden_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
         "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye", "eye_protrusion"],
         "eye_protrusion": ["eye_swelling", "eye_bulging", "pop_eye", "exophthalmos", "bulging_eye", "proptosis"],
-        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "proptosis"],
-        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "proptosis"],
+        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "enlarged_eye", "proptosis"],
+        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
+        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "enlarged_eye", "proptosis"],
         "jaundice": ["icterus", "yellow_skin"],
         "vomiting": ["regurgitation", "crop_stasis"],
         "regurgitation": ["vomiting"],
@@ -1523,11 +1534,10 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "blood_in_urine": ["hematuria", "uterine_bleeding"],
         "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
         "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
-        "weight_gain": ["obesity", "overweight"],
-        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch", "depression"],
-        "depression": ["lethargy", "weakness"],
-        "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis"],
-        "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis"],
+        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
+        "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis", "hind_leg_weakness"],
+        "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis", "hind_leg_weakness"],
+        "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis"],
         "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
         "sneezing": ["nasal_discharge"],
         "wet_tail": ["diarrhea"], "diarrhea": ["wet_tail"],
@@ -1544,8 +1554,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
         "pleural_effusion": ["effusion", "abdominal_distension"],
         "ascites": ["effusion", "abdominal_distension", "bloating"],
-        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion"],
-        "dental_overgrowth": ["overgrown_teeth", "malocclusion"],
+        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+        "dental_overgrowth": ["overgrown_teeth", "malocclusion", "visible_tooth_overgrowth"],
+        "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
         "dysecdysis": ["retained_shed", "retained_skin", "shedding_problems"],
         "retained_shed": ["dysecdysis", "retained_skin"],
         "retained_skin": ["dysecdysis", "retained_shed"],
@@ -1556,6 +1567,10 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "edema": ["swelling", "bloating", "ascites"],
         "swelling": ["edema", "facial_swelling", "eye_swelling"],
         "rough_coat": ["poor_coat", "dry_skin"],
+        "scaly_legs": ["leg_scales", "scaly_face"],
+        "leg_scales": ["scaly_legs", "scaly_face"],
+        "scaly_face": ["scaly_legs", "leg_scales", "crusty_beak"],
+        "hole_in_head": ["head_erosion", "head_pitting"],
     }
     expanded_set = set(symptom_ids)
     for sid in symptom_ids:
@@ -1568,9 +1583,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
     from api.species import prevalence_data as _prev_mod
     _prevalence = _prev_mod.SPECIES_PREVALENCE.get(species, {})
     _PREVALENCE_MULTIPLIER = {
-        "very_common": 1.30,
-        "common": 1.05,
-        "uncommon": 0.85,
+        "very_common": 1.35,
+        "common": 1.125,
+        "uncommon": 0.875,
         "rare": 0.70,
     }
 
@@ -1629,16 +1644,19 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         base_score = min(base_score + specificity_bonus, 1.0)
 
         # --- Negative evidence penalty ---
+        # Scale penalty by how many symptoms the user actually provided vs disease total.
+        # When user provides few symptoms relative to disease total, reduce penalty.
         missing = disease_symptoms - symptom_set
         negative_penalty = 1.0
-        if len(symptom_set) >= 3:
+        if len(symptom_set) >= 3 and len(disease_symptoms) >= 3:
+            obs_ratio = min(1.0, len(symptom_ids) / len(disease_symptoms))
             for s in missing:
                 w = _compute_weight(s)
                 if w >= 2.5:
-                    negative_penalty -= 0.06
+                    negative_penalty -= 0.06 * obs_ratio
                 elif w >= 2.0:
-                    negative_penalty -= 0.03
-            negative_penalty = max(negative_penalty, 0.5)
+                    negative_penalty -= 0.03 * obs_ratio
+            negative_penalty = max(negative_penalty, 0.55)
 
         # --- Coverage completeness bonus ---
         # Reward diseases where more absolute symptoms matched (not just ratio).

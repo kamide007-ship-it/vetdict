@@ -1,14 +1,21 @@
 const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
 
 /* ===== Admin / Pro access control ===== */
-const ADMIN_TOKEN="kamide007";
+// Admin token stored as SHA-256 hash (not plaintext)
+const _ADMIN_HASH="58f058ae43b4ebaaa2426ad922e492d27710de51716e87b53a19485ed84f194a";
 // OPEN BETA: All users get Pro access for free.
 // Set to false when launching paid plans.
 const OPEN_BETA=true;
 let isAdmin=false;
 let isPro=false;
 
-function checkAccess(){
+async function _hashToken(t){
+  const d=new TextEncoder().encode(t);
+  const h=await crypto.subtle.digest("SHA-256",d);
+  return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+async function checkAccess(){
   const params=new URLSearchParams(location.search);
   // Open beta: everyone is Pro
   if(OPEN_BETA) isPro=true;
@@ -18,11 +25,14 @@ function checkAccess(){
     isPro=true;
     history.replaceState(null,"",location.pathname+location.hash);
   }
-  // Check URL param ?admin=<token>
+  // Check URL param ?admin=<token> (compared via SHA-256 hash)
   const adminParam=params.get("admin");
-  if(adminParam===ADMIN_TOKEN){
-    localStorage.setItem("vetdict-admin","1");
-    isAdmin=true;isPro=true;
+  if(adminParam){
+    const h=await _hashToken(adminParam);
+    if(h===_ADMIN_HASH){
+      localStorage.setItem("vetdict-admin","1");
+      isAdmin=true;isPro=true;
+    }
     history.replaceState(null,"",location.pathname+location.hash);
   } else if(localStorage.getItem("vetdict-admin")==="1"){
     isAdmin=true;isPro=true;
@@ -125,6 +135,7 @@ const I18N={
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
+    mdCombinations:"疾患の組み合わせ候補",mdAmbiguous:"曖昧な症状が検出されました",mdConfidence:"信頼度分析",mdClarifying:"確認質問",mdGuidance:"診断ガイダンス",mdRecommendations:"推奨事項",mdActive:"複合疾患モード",mdAnalyzing:"複合疾患の組み合わせを分析中...",
   },
   en:{
     skipLink:"Skip to main content",
@@ -195,6 +206,7 @@ const I18N={
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
+    mdCombinations:"Possible Disease Combinations",mdAmbiguous:"Ambiguous Symptoms Detected",mdConfidence:"Confidence Analysis",mdClarifying:"Clarifying Questions",mdGuidance:"Diagnostic Guidance",mdRecommendations:"Recommendations",mdActive:"Multi-Disease Mode Active",mdAnalyzing:"Analyzing multi-disease combinations...",
   }
 };
 
@@ -209,11 +221,16 @@ function applyLanguage(){
     const val=t(key);
     if(val&&val!==key)el.textContent=val;
   });
-  // Update data-i18n-html (innerHTML)
+  // Update data-i18n-html (innerHTML — sanitized to allow only safe tags)
   document.querySelectorAll("[data-i18n-html]").forEach(el=>{
     const key=el.getAttribute("data-i18n-html");
     const val=t(key);
-    if(val&&val!==key)el.innerHTML=val;
+    if(val&&val!==key){
+      const tmp=document.createElement("div");tmp.innerHTML=val;
+      tmp.querySelectorAll("script,iframe,object,embed,form,input,textarea,style,link,meta").forEach(n=>n.remove());
+      tmp.querySelectorAll("*").forEach(n=>{for(const a of[...n.attributes]){if(a.name.startsWith("on"))n.removeAttribute(a.name);}});
+      el.innerHTML=tmp.innerHTML;
+    }
   });
   // Update data-i18n-ph (placeholder)
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
@@ -261,9 +278,9 @@ let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[]
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 let symptomSortMode="category";
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded",async()=>{
   try{
-    checkAccess();
+    await checkAccess();
     loadSpeciesStats();
     setupNavigation();
     setupChat();
@@ -452,7 +469,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();
   resetSpeciesChat(id);
   // Reset guided consultation if active
   const guidedCont=document.getElementById("chatGuidedContainer");
@@ -465,6 +482,7 @@ function selectSpecies(id){
 }
 
 function resetSpeciesChat(species){
+  chatAccumulatedSymptoms=[];
   const sp=SPECIES.find(s=>s.id===species);
   const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):(species||"dog");
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
@@ -483,7 +501,7 @@ function loadBreeds(species){
   fetch("/api/breeds/"+species).then(r=>r.json()).then(data=>{
     if(requestId!==breedRequestId||species!==currentSpecies)return;
     if(data.breeds&&data.breeds.length>0){
-      data.breeds.forEach(b=>{select.innerHTML+=`<option value="${b.id}">${b.name_ja} (${b.name})</option>`;});
+      data.breeds.forEach(b=>{select.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(b.id)}">${escapeHtml(b.name_ja)} (${escapeHtml(b.name)})</option>`);});
       area.classList.remove("hidden");
     }else{area.classList.add("hidden");}
   }).catch(()=>{if(requestId===breedRequestId)area.classList.add("hidden");});
@@ -551,12 +569,52 @@ function renderSelectedSymptoms(){
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
 }
 
+function collectPainScore(){
+  const checked=document.querySelector('#painScaleOptions input[name="painScore"]:checked');
+  return checked?parseInt(checked.value,10):null;
+}
+function updatePainScaleVisibility(){
+  const section=document.getElementById("painScaleDetails");
+  if(section) section.style.display=(currentSpecies==="dog")?"":"none";
+}
+document.addEventListener("change",e=>{
+  if(e.target.matches('#painScaleOptions input[name="painScore"]')){
+    const score=parseInt(e.target.value,10);
+    const badge=document.getElementById("painScaleBadge");
+    const labels=["\u75db\u307f\u306a\u3057","\u8efd\u5ea6","\u4e2d\u7b49\u5ea6","\u4e2d\u301c\u91cd\u5ea6","\u91cd\u5ea6"];
+    const colors=["#16a34a","#65a30d","#eab308","#ea580c","#dc2626"];
+    if(badge){badge.style.display="inline";badge.textContent=`\u30b9\u30b3\u30a2 ${score}: ${labels[score]}`;badge.style.background=colors[score];}
+  }
+});
+
 function collectLabValues(){
   const vals={};
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{
     if(el.value.trim()!==""){const v=parseFloat(el.value);if(!isNaN(v))vals[el.dataset.lab]=v;}
   });
   return Object.keys(vals).length>0?vals:null;
+}
+let _labRangesCache={};
+function updateLabRangesForSpecies(species){
+  if(_labRangesCache[species]){_applyLabRanges(_labRangesCache[species]);return;}
+  fetch(`/api/lab-ranges/${encodeURIComponent(species)}`)
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{
+      if(!data||!data.ranges||species!==currentSpecies)return;
+      _labRangesCache[species]=data.ranges;
+      _applyLabRanges(data.ranges);
+    }).catch(()=>{});
+}
+function _applyLabRanges(ranges){
+  document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{
+    const id=el.dataset.lab;
+    const r=ranges[id];
+    if(!r)return;
+    el.dataset.lo=r.low;
+    el.dataset.hi=r.high;
+    el.placeholder=`${r.low}–${r.high===99?"":r.high}`;
+  });
+  highlightLabAbnormals();
 }
 function highlightLabAbnormals(){
   let filled=0,abnormal=0;
@@ -634,10 +692,12 @@ function doAnalyze(){
   if(currentBreed)payload.breed=currentBreed;
   const labVals=collectLabValues();
   if(labVals)payload.lab_values=labVals;
+  const painVal=collectPainScore();
+  if(painVal!==null)payload.pain_score=painVal;
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})
-  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${t("errorPrefix")}${err.message}</div>`;console.error("Analyze error:",err);})
+  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${escapeHtml(t("errorPrefix"))}${escapeHtml(String(err.message||"Unknown error"))}</div>`;})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
@@ -651,12 +711,40 @@ function renderResults(data){
   if(diseases.length===0){area.innerHTML=`<div class="results-empty"><span class="big-icon">\u2705</span><p>${t("noDiseasesFound")}</p></div>`;return;}
   const sevLabels=t("sevLabels");
   let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
-  if(data.lab_boost_applied){
+  if(data.lab_boost_applied&&data.lab_values){
     const labNames={bun:"BUN",creatinine:"Cre",sdma:"SDMA",alt:"ALT",alp:"ALP",ggt:"GGT",tbil:"T-Bil",albumin:"Alb",glucose:"Glu",lipase:"Lipase",potassium:"K",sodium:"Na",calcium:"Ca",phosphorus:"P",wbc:"WBC",pcv:"PCV",platelets:"PLT",t4:"T4",crp:"CRP",usg:"USG"};
-    const labRanges={bun:[7,27],creatinine:[0.5,1.8],sdma:[0,14],alt:[10,125],alp:[23,212],ggt:[0,11],tbil:[0,0.5],albumin:[2.3,4],glucose:[74,143],lipase:[10,160],potassium:[3.5,5.8],sodium:[140,155],calcium:[7.9,12],phosphorus:[2.5,6.8],wbc:[5.5,16.9],pcv:[37,55],platelets:[175,500],t4:[1,4],crp:[0,10],usg:[1.03,99]};
-    let abnList=[];
-    if(data.lab_values){for(const[k,v]of Object.entries(data.lab_values)){const r=labRanges[k];if(r){if(v>r[1])abnList.push(`<span style="color:#e74c3c;font-weight:700">${labNames[k]||k} ${v}\u2191</span>`);else if(v<r[0])abnList.push(`<span style="color:#2980b9;font-weight:700">${labNames[k]||k} ${v}\u2193</span>`);}}}
-    html+=`<div style="font-size:.8rem;color:#2980b9;margin-bottom:8px;padding:8px 12px;background:#ebf5fb;border-radius:var(--radius)">&#128300; ${currentLang==="ja"?"検査値異常":"Lab abnormalities"}: ${abnList.length?abnList.join("&ensp;"):(currentLang==="ja"?"（基準値内）":"(within range)")}</div>`;
+    const sp=currentSpecies||"dog";
+    const cachedRanges=_labRangesCache[sp]||{};
+    const defaultRanges={bun:[7,27],creatinine:[0.5,1.8],sdma:[0,14],alt:[10,125],alp:[23,212],ggt:[0,11],tbil:[0,0.5],albumin:[2.3,4],glucose:[74,143],lipase:[10,160],potassium:[3.5,5.8],sodium:[140,155],calcium:[7.9,12],phosphorus:[2.5,6.8],wbc:[5.5,16.9],pcv:[37,55],platelets:[175,500],t4:[1,4],crp:[0,10],usg:[1.03,99]};
+    let bars="";let abnCount=0;
+    for(const[k,v]of Object.entries(data.lab_values)){
+      const cr=cachedRanges[k];
+      const lo=cr?cr.low:defaultRanges[k]?defaultRanges[k][0]:0;
+      const hi=cr?cr.high:defaultRanges[k]?defaultRanges[k][1]:100;
+      if(hi===99||hi===0)continue;
+      const name=escapeHtml(labNames[k]||k);
+      const isHigh=v>hi,isLow=v<lo,isAbn=isHigh||isLow;
+      if(isAbn)abnCount++;
+      const range=hi-lo;const margin=range*0.5;
+      const scaleMin=Math.max(0,lo-margin),scaleMax=hi+margin;
+      const scaleRange=scaleMax-scaleMin;
+      const normLo=((lo-scaleMin)/scaleRange*100).toFixed(1);
+      const normHi=((hi-scaleMin)/scaleRange*100).toFixed(1);
+      const valPos=Math.max(0,Math.min(100,((v-scaleMin)/scaleRange*100))).toFixed(1);
+      const dotColor=isHigh?"#e74c3c":isLow?"#2980b9":"#16a34a";
+      const flag=isHigh?"\u2191":isLow?"\u2193":"";
+      bars+=`<div class="lab-bar-row"><span class="lab-bar-label" style="color:${isAbn?dotColor:"var(--gray-700)"};font-weight:${isAbn?700:500}">${name} <b>${v}</b>${flag}</span><div class="lab-bar-track"><div class="lab-bar-normal" style="left:${normLo}%;width:${normHi-normLo}%"></div><div class="lab-bar-dot" style="left:${valPos}%;background:${dotColor}"></div></div><span class="lab-bar-range">${lo}–${hi}</span></div>`;
+    }
+    const title=currentLang==="ja"?(abnCount>0?`\u{1F4CA} 血液検査: ${abnCount}項目に異常`:`\u{1F4CA} 血液検査: 基準値内`):(abnCount>0?`\u{1F4CA} Lab Results: ${abnCount} abnormal`:`\u{1F4CA} Lab Results: within range`);
+    html+=`<div class="lab-results-viz"><div class="lab-viz-title" style="color:${abnCount>0?"#e74c3c":"#16a34a"}">${title}</div>${bars}</div>`;
+  }
+  // Pain score display
+  if(data.pain_score!==undefined&&data.pain_score!==null&&currentSpecies==="dog"){
+    const ps=data.pain_score;
+    const painLabels=currentLang==="ja"?["痛みなし","軽度","中等度","中〜重度","重度"]:["No Pain","Mild","Moderate","Severe","Excruciating"];
+    const painColors=["#16a34a","#65a30d","#eab308","#ea580c","#dc2626"];
+    const painPct=ps*25;
+    html+=`<div class="lab-results-viz" style="border-color:${painColors[ps]}33"><div class="lab-viz-title" style="color:${painColors[ps]}">&#x1F9D1;&#x200D;&#x2695;&#xFE0F; ${currentLang==="ja"?"痛み評価":"Pain Assessment"}: ${painLabels[ps]} (${ps}/4)</div><div class="pain-meter"><div class="pain-meter-fill" style="width:${painPct}%;background:${painColors[ps]}"></div></div>${ps>=3?`<div style="font-size:.74rem;color:${painColors[ps]};margin-top:4px;font-weight:600">${currentLang==="ja"?"⚠ 強い痛みが検出されました。早急な鎮痛処置を検討してください。":"⚠ Severe pain detected. Consider immediate analgesic intervention."}</div>`:""}</div>`;
   }
   const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
   if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
@@ -687,7 +775,60 @@ function renderResults(data){
   }
 
   if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${x.priority}]</span>`:"";return`<li>\u{1F52C} ${label}${priority}</li>`;}).join("")}</ul></div>`;}
+  html+=`<div id="commonDiseasesArea"></div><div id="breedEcologyArea"></div>`;
   area.innerHTML=html;
+  loadCommonDiseases(currentSpecies);
+  loadBreedEcology(currentSpecies,currentBreed);
+}
+
+function loadCommonDiseases(species){
+  const area=document.getElementById("commonDiseasesArea");
+  if(!area||!species)return;
+  fetch(`/api/species/${encodeURIComponent(species)}/common-diseases`).then(r=>r.json()).then(data=>{
+    if(species!==currentSpecies)return;
+    const diseases=data.common_diseases||[];
+    if(!diseases.length){area.innerHTML="";return;}
+    const veryCommon=diseases.filter(d=>d.prevalence==="very_common");
+    const common=diseases.filter(d=>d.prevalence==="common");
+    const renderList=(list,cls)=>list.map(d=>{
+      const name=currentLang==="ja"?(d.name_ja||d.name):d.name;
+      const sub=currentLang==="ja"?d.name:(d.name_ja||"");
+      return `<span class="common-disease-tag ${cls}">${escapeHtml(name)}${sub?` <span class="common-disease-sub">${escapeHtml(sub)}</span>`:""}</span>`;
+    }).join("");
+    area.innerHTML=`<div class="common-diseases-section">
+      <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
+      ${veryCommon.length?`<div class="common-diseases-group"><span class="common-diseases-tier tier-very-common">${currentLang==="ja"?"非常に多い":"Very Common"}</span>${renderList(veryCommon,"tag-very-common")}</div>`:""}
+      ${common.length?`<div class="common-diseases-group"><span class="common-diseases-tier tier-common">${currentLang==="ja"?"多い":"Common"}</span>${renderList(common,"tag-common")}</div>`:""}
+      <div class="common-diseases-hint">${currentLang==="ja"?"※ 鑑別診断の参考としてご活用ください":"※ Use as reference for differential diagnosis"}</div>
+    </div>`;
+  }).catch(()=>{if(area)area.innerHTML="";});
+}
+
+function loadBreedEcology(species,breedId){
+  const area=document.getElementById("breedEcologyArea");
+  if(!area||!species)return;
+  fetch(`/api/breeds/${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{
+    const breeds=data.breeds||[];
+    const breed=breedId?breeds.find(b=>b.id===breedId):null;
+    const eco=breed&&breed.ecology?breed.ecology:null;
+    if(!eco){area.innerHTML="";return;}
+    const bName=currentLang==="ja"?(breed.name_ja||breed.name):breed.name;
+    const rows=[];
+    if(eco.lifespan)rows.push({icon:"⏱",label:currentLang==="ja"?"平均寿命":"Lifespan",val:`${eco.lifespan.min}–${eco.lifespan.max} ${eco.lifespan.unit==="years"?(currentLang==="ja"?"年":"yrs"):eco.lifespan.unit}`});
+    if(eco.weight)rows.push({icon:"⚖️",label:currentLang==="ja"?"体重":"Weight",val:`${eco.weight.min}–${eco.weight.max} ${eco.weight.unit}`});
+    if(eco.temperature)rows.push({icon:"🌡",label:currentLang==="ja"?"適正温度":"Temperature",val:`${eco.temperature.min}–${eco.temperature.max}${eco.temperature.unit}`});
+    if(eco.humidity)rows.push({icon:"💧",label:currentLang==="ja"?"適正湿度":"Humidity",val:`${eco.humidity.min}–${eco.humidity.max}${eco.humidity.unit}`});
+    const diet=currentLang==="ja"?(eco.diet_ja||eco.diet||""):(eco.diet||eco.diet_ja||"");
+    const housing=currentLang==="ja"?(eco.housing_ja||eco.housing||""):(eco.housing||eco.housing_ja||"");
+    const notes=currentLang==="ja"?(eco.notes_ja||eco.notes||""):(eco.notes||eco.notes_ja||"");
+    area.innerHTML=`<div class="breed-ecology-section">
+      <div class="breed-ecology-header">🐾 ${bName} ${currentLang==="ja"?"の生態・飼育環境":"Ecology & Husbandry"}</div>
+      <div class="breed-ecology-grid">${rows.map(r=>`<div class="breed-ecology-item"><span class="breed-ecology-icon">${r.icon}</span><span class="breed-ecology-label">${r.label}</span><span class="breed-ecology-val">${r.val}</span></div>`).join("")}</div>
+      ${diet?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"食事":"Diet"}:</strong> ${diet}</div>`:""}
+      ${housing?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"飼育環境":"Housing"}:</strong> ${housing}</div>`:""}
+      ${notes?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"特記事項":"Notes"}:</strong> ${notes}</div>`:""}
+    </div>`;
+  }).catch(()=>{if(area)area.innerHTML="";});
 }
 
 function renderMissingKeySymptoms(d,data){
@@ -880,7 +1021,7 @@ function renderDiseaseDb(){
       </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${d.missing_fields.join(", ")}</div>`:""}</div>
     </div>`}).join("");
   if(filtered.length>diseaseDisplayLimit){
-    list.innerHTML+=`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${filtered.length-diseaseDisplayLimit}件)`:`Show more (${filtered.length-diseaseDisplayLimit} remaining)`}</button>`;
+    list.insertAdjacentHTML("beforeend",`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${filtered.length-diseaseDisplayLimit}件)`:`Show more (${filtered.length-diseaseDisplayLimit} remaining)`}</button>`);
   }
 }
 
@@ -1061,13 +1202,13 @@ function renderChatResult(container,data){
       card.innerHTML=`
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id):(c.name_en||c.name_ja||c.disease_id)}</span>
-          <span class="chat-disease-name-en">${currentLang==="ja"?(c.name_en||""):(c.name_ja||"")}</span>
+          <span class="chat-disease-name">${escapeHtml(currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id):(c.name_en||c.name_ja||c.disease_id))}</span>
+          <span class="chat-disease-name-en">${escapeHtml(currentLang==="ja"?(c.name_en||""):(c.name_ja||""))}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
-        ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja)}</div>`:""}
-        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.join(", ")}</div>`:""}
+        ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${escapeHtml(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))}</div>`:""}
+        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.map(s=>escapeHtml(s)).join(", ")}</div>`:""}
       `;
       listDiv.appendChild(card);
     });
@@ -1166,7 +1307,29 @@ function renderChatResult(container,data){
     wrapper.appendChild(fqDiv);
   }
 
-  // 5. Disclaimer
+  // 5. Common diseases & breed ecology for chat
+  if(candidates.length>0&&currentSpecies){
+    const chatRef=document.createElement("div");
+    chatRef.className="chat-reference-section";
+    wrapper.appendChild(chatRef);
+    fetch(`/api/species/${encodeURIComponent(currentSpecies)}/common-diseases`).then(r=>r.json()).then(data=>{
+      const diseases=data.common_diseases||[];
+      if(!diseases.length)return;
+      const veryCommon=diseases.filter(d=>d.prevalence==="very_common");
+      const common=diseases.filter(d=>d.prevalence==="common");
+      const renderTags=(list,cls)=>list.map(d=>{
+        const n=currentLang==="ja"?(d.name_ja||d.name):d.name;
+        return `<span class="common-disease-tag ${cls}">${escapeHtml(n)}</span>`;
+      }).join("");
+      chatRef.innerHTML=`<div class="common-diseases-section compact">
+        <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
+        ${veryCommon.length?`<div class="common-diseases-group">${renderTags(veryCommon,"tag-very-common")}</div>`:""}
+        ${common.length?`<div class="common-diseases-group">${renderTags(common,"tag-common")}</div>`:""}
+      </div>`;
+    }).catch(()=>{});
+  }
+
+  // 6. Disclaimer
   const disc=document.createElement("div");
   disc.className="chat-disclaimer";
   disc.textContent=currentLang==="ja"?"\u203b \u3053\u3061\u3089\u306f\u53c2\u8003\u60c5\u5831\u3067\u3059\u3002\u7363\u533b\u5e2b\u306e\u8a3a\u5bdf\u3092\u53d7\u3051\u3066\u304f\u3060\u3055\u3044\u3002":"\u203b This is reference information. Please consult a veterinarian.";
@@ -1552,10 +1715,10 @@ function loadDrugDictionary(){
     pendingStats.drugs=allDrugs.length;animateCount(document.getElementById("statDrugs"),allDrugs.length,800);
     const catSelect=document.getElementById("drugCategoryFilter");
     catSelect.innerHTML=`<option value="">${t("allCategories")}</option>`;
-    (catData.categories||[]).forEach(c=>{if(c.count>0){const cName=currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja);catSelect.innerHTML+=`<option value="${c.id}">${cName} (${c.count})</option>`;}});
+    (catData.categories||[]).forEach(c=>{if(c.count>0){const cName=currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja);catSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(c.id)}">${escapeHtml(cName)} (${c.count})</option>`);}});
     const spSelect=document.getElementById("drugSpeciesFilter");
     spSelect.innerHTML=`<option value="">${t("allSpecies")}</option>`;
-    SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.innerHTML+=`<option value="${sp.id}">${primary} ${secondary}</option>`;});
+    SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(sp.id)}">${escapeHtml(primary)} ${escapeHtml(secondary)}</option>`);});
     drugsLoaded=true;renderDrugList();
   }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
   document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
@@ -1683,31 +1846,7 @@ renderSpeciesGrid=function(){
   document.querySelectorAll(".species-card").forEach((c,i)=>{c.style.animationDelay=`${i*40}ms`;});
 };
 
-/* --- Dark mode toggle --- */
-(function(){
-  const toggle=document.getElementById("themeToggle");
-  const icon=document.getElementById("themeIcon");
-  if(!toggle)return;
-  function setTheme(theme){
-    document.documentElement.setAttribute("data-theme",theme);
-    if(icon)icon.innerHTML=theme==="dark"?"\u2600\uFE0F":"\u263D";
-    try{localStorage.setItem("vetdict-theme",theme);}catch(e){}
-  }
-  // Restore saved theme or detect system preference
-  try{
-    const saved=localStorage.getItem("vetdict-theme");
-    if(saved){setTheme(saved);}
-    else if(matchMedia("(prefers-color-scheme:dark)").matches){setTheme("dark");}
-  }catch(e){}
-  toggle.addEventListener("click",()=>{
-    const current=document.documentElement.getAttribute("data-theme");
-    setTheme(current==="dark"?"light":"dark");
-  });
-  // Listen for system theme changes
-  matchMedia("(prefers-color-scheme:dark)").addEventListener("change",e=>{
-    if(!localStorage.getItem("vetdict-theme")){setTheme(e.matches?"dark":"light");}
-  });
-})();
+/* --- Dark mode removed for better mobile readability --- */
 
 /* --- Toast utility --- */
 function showToast(msg,type,duration){
@@ -1736,7 +1875,7 @@ function renderCombinations(combinations) {
 
   const title = document.createElement('div');
   title.className = 'combinations-title';
-  title.textContent = 'Possible Disease Combinations';
+  title.textContent = t('mdCombinations');
   section.appendChild(title);
 
   combinations.forEach((combo, index) => {
@@ -1818,7 +1957,7 @@ function renderAmbiguityAnalysis(analysis) {
 
   const title = document.createElement('div');
   title.className = 'ambiguity-title';
-  title.textContent = 'Ambiguous Symptoms Detected';
+  title.textContent = t('mdAmbiguous');
   section.appendChild(title);
 
   if (
@@ -1853,7 +1992,7 @@ function renderAmbiguityAnalysis(analysis) {
       const recDiv = document.createElement('div');
       recDiv.className = 'user-guidance';
       recDiv.innerHTML = `
-        <div class="guidance-title">Recommendations</div>
+        <div class="guidance-title">${escapeHtml(t('mdRecommendations'))}</div>
         <ul style="margin-left: 16px; margin-top: 4px;">
           ${recommendations
             .map(([key, value]) => `<li>${value}</li>`)
@@ -1884,7 +2023,7 @@ function renderConfidenceBreakdown(breakdown) {
 
   const title = document.createElement('div');
   title.className = 'breakdown-title';
-  title.textContent = 'Confidence Analysis';
+  title.textContent = t('mdConfidence');
   section.appendChild(title);
 
   // Individual confidences
@@ -1955,7 +2094,7 @@ function renderClarifyingQuestions(questions) {
 
   const title = document.createElement('div');
   title.className = 'questions-title';
-  title.textContent = 'Clarifying Questions';
+  title.textContent = t('mdClarifying');
   section.appendChild(title);
 
   const list = document.createElement('div');
@@ -2012,7 +2151,7 @@ function renderUserGuidance(analysis) {
 
   const title = document.createElement('div');
   title.className = 'guidance-title';
-  title.textContent = 'Diagnostic Guidance';
+  title.textContent = t('mdGuidance');
   guidance.appendChild(title);
 
   const text = document.createElement('div');
@@ -2202,7 +2341,7 @@ class MultiDiseaseUIHandler {
   createModeBadge() {
     const badge = document.createElement('div');
     badge.className = 'multidisease-badge';
-    badge.textContent = 'Multi-Disease Mode Active';
+    badge.textContent = t('mdActive');
     return badge;
   }
 
@@ -2233,7 +2372,7 @@ class MultiDiseaseUIHandler {
     container.innerHTML = `
       <div class="multidisease-loading">
         <span class="spinner"></span>
-        <span>Analyzing multi-disease combinations...</span>
+        <span>${escapeHtml(t('mdAnalyzing'))}</span>
       </div>
     `;
   }
@@ -2270,7 +2409,7 @@ class MultiDiseaseUIHandler {
     });
     element.classList.add('selected');
     const comboId = element.getAttribute('data-combo-id');
-    console.log('Selected combination:', comboId);
+    // combo selection handled via data attribute
   }
 
   /**
@@ -2284,7 +2423,7 @@ class MultiDiseaseUIHandler {
     if (chatInput) {
       chatInput.value = questionText;
     }
-    console.log('Selected question:', questionId);
+    // question selection handled via input injection
   }
 }
 

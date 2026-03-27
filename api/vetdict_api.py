@@ -471,15 +471,31 @@ def api_analyze_symptoms():
     if error:
         return error, status
 
+    # Input size limits to prevent abuse
+    MAX_SYMPTOMS = 50
+    MAX_STRING_LEN = 256
+    MAX_VACCINES = 20
+    MAX_LAB_VALUES = 50
+
+    if len(symptoms) > MAX_SYMPTOMS:
+        return {'error': f'Too many symptoms (max {MAX_SYMPTOMS})'}, 400
+    if any(len(s) > MAX_STRING_LEN for s in symptoms):
+        return {'error': f'Symptom ID too long (max {MAX_STRING_LEN} chars)'}, 400
+
     species = data.get('species', 'dog')
+    if isinstance(species, str) and len(species) > MAX_STRING_LEN:
+        return {'error': 'species value too long'}, 400
     age_stage = data.get('age_stage')
     breed = data.get('breed')
+    if isinstance(breed, str) and len(breed) > MAX_STRING_LEN:
+        return {'error': 'breed value too long'}, 400
     onset = data.get('onset')  # "acute" | "subacute" | "chronic"
     age_years = data.get('age_years')  # numeric age in years
     lab_values_raw = data.get('lab_values')  # {item_id: numeric_value}
     gender = data.get('gender')  # "male" | "female"
     vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
     vaccination_status = data.get('vaccination_status')  # "current" | "outdated" | "none"
+    pain_score = data.get('pain_score')  # 0-4 (CSU Canine Acute Pain Scale)
 
     # Validate onset
     if onset and onset not in ('acute', 'subacute', 'chronic'):
@@ -493,12 +509,23 @@ def api_analyze_symptoms():
     if vaccination_status and vaccination_status not in ('current', 'outdated', 'none'):
         return {'error': "vaccination_status must be 'current', 'outdated', or 'none'"}, 400
 
+    # Validate pain_score (CSU Canine Pain Scale 0-4)
+    if pain_score is not None:
+        try:
+            pain_score = int(pain_score)
+            if pain_score < 0 or pain_score > 4:
+                return {'error': 'pain_score must be 0-4'}, 400
+        except (ValueError, TypeError):
+            return {'error': 'pain_score must be an integer 0-4'}, 400
+
     # Coerce vaccines to list of strings
     vaccines = []
     if vaccines_raw is not None:
         vaccines, error, status = _normalize_string_list(vaccines_raw, 'vaccines')
         if error:
             return error, status
+        if len(vaccines) > MAX_VACCINES:
+            return {'error': f'Too many vaccines (max {MAX_VACCINES})'}, 400
 
     # Coerce age_years to float
     if age_years is not None:
@@ -510,6 +537,8 @@ def api_analyze_symptoms():
     # Coerce lab_values to {str: float}
     lab_values = None
     if lab_values_raw and isinstance(lab_values_raw, dict):
+        if len(lab_values_raw) > MAX_LAB_VALUES:
+            return {'error': f'Too many lab values (max {MAX_LAB_VALUES})'}, 400
         lab_values = {}
         for k, v in lab_values_raw.items():
             try:
@@ -527,6 +556,7 @@ def api_analyze_symptoms():
                 gender=gender,
                 vaccines=vaccines,
                 vaccination_status=vaccination_status,
+                pain_score=pain_score,
             )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
@@ -549,13 +579,158 @@ def api_analyze_symptoms():
 
 
 # =============================================================================
+# API: CSU Canine Acute Pain Scale
+# =============================================================================
+# Based on: Colorado State University Canine Acute Pain Scale
+# Reference: Mathews K et al. (2014) JSAP 55(6):E10-E68
+# Japanese version: 動物臨床医学研究所 (dourinken.com)
+
+_CSU_PAIN_SCALE = [
+    {
+        "score": 0,
+        "level": "no_pain",
+        "level_ja": "痛みなし",
+        "level_en": "No Pain",
+        "color": "#16a34a",
+        "behavioral": "Comfortable, relaxed, sleeping or resting normally",
+        "behavioral_ja": "快適で、リラックスしている。正常な睡眠・休息。",
+        "body_tension": "Minimal body tension, soft abdomen, relaxed muscles",
+        "body_tension_ja": "体の緊張は最小限。腹部は柔らかく、筋肉はリラックス。",
+        "response_to_palpation": "No response or normal response to gentle palpation of surgical site/wound",
+        "response_to_palpation_ja": "手術部位/創傷の優しい触診に対して反応なし、または正常な反応。",
+        "associated_conditions": [],
+    },
+    {
+        "score": 1,
+        "level": "mild",
+        "level_ja": "軽度の痛み",
+        "level_en": "Mild Pain",
+        "color": "#ca8a04",
+        "behavioral": "Content to slightly unsettled. Distracted or interested in surroundings. May look at affected area occasionally.",
+        "behavioral_ja": "おおむね落ち着いているがやや不安定。周囲に関心を示す。時折患部を見る。",
+        "body_tension": "Mild body tension, may shift weight occasionally",
+        "body_tension_ja": "軽度の体の緊張。時折体重移動。",
+        "response_to_palpation": "Mild response to palpation — may look, flinch, or pull away slightly",
+        "response_to_palpation_ja": "触診に軽度の反応 — 見る、軽くビクッとする、わずかに引く。",
+        "associated_conditions": ["post_minor_surgery", "mild_otitis", "mild_dermatitis", "early_arthritis"],
+    },
+    {
+        "score": 2,
+        "level": "moderate",
+        "level_ja": "中等度の痛み",
+        "level_en": "Moderate Pain",
+        "color": "#ea580c",
+        "behavioral": "Restless, shifting positions frequently. May whimper or vocalize occasionally. Reluctant to move. Reduced appetite.",
+        "behavioral_ja": "落ち着きがなく、頻繁に体位を変える。時折クンクン鳴く。動きたがらない。食欲低下。",
+        "body_tension": "Moderate body tension, guarding of affected area, may tremble",
+        "body_tension_ja": "中等度の体の緊張。患部を守る姿勢。震えることがある。",
+        "response_to_palpation": "Moderate response — flinches, pulls away, may vocalize or turn head toward site",
+        "response_to_palpation_ja": "中等度の反応 — ビクッとする、引く、鳴く、または患部の方を向く。",
+        "associated_conditions": ["fracture", "pancreatitis", "intervertebral_disc_disease", "moderate_otitis", "cystitis"],
+    },
+    {
+        "score": 3,
+        "level": "severe",
+        "level_ja": "強い痛み",
+        "level_en": "Severe Pain",
+        "color": "#dc2626",
+        "behavioral": "Restless, crying, groaning, or whimpering. May bite or chew at affected area. Reluctant to move or unable to get comfortable. Depressed, unresponsive to surroundings.",
+        "behavioral_ja": "落ち着きがなく、鳴き声、うめき声。患部を噛む・舐め続ける。動けない、またはどの体勢でも落ち着けない。沈鬱、周囲に無反応。",
+        "body_tension": "Significant body tension, rigid abdomen, protective posture, hunched back",
+        "body_tension_ja": "著しい体の緊張。腹部硬直。防御姿勢。背中を丸める。",
+        "response_to_palpation": "Strong response — cries, attempts to bite, significant withdrawal, aggressive when touched near area",
+        "response_to_palpation_ja": "強い反応 — 鳴く、噛もうとする、著しく引く、患部付近の接触で攻撃的。",
+        "associated_conditions": ["gdv", "peritonitis", "severe_trauma", "bone_cancer", "acute_abdomen", "disc_herniation"],
+    },
+    {
+        "score": 4,
+        "level": "excruciating",
+        "level_ja": "激痛",
+        "level_en": "Excruciating Pain",
+        "color": "#991b1b",
+        "behavioral": "Prostrate, unresponsive to environment. Constant vocalization (crying, screaming). May be rigid or thrashing. Potential for shock.",
+        "behavioral_ja": "伏臥、環境に無反応。絶え間ない鳴き声（叫び声）。硬直またはのたうち回る。ショックに陥る可能性。",
+        "body_tension": "Extreme tension, rigid body, may be in lateral recumbency unable to rise",
+        "body_tension_ja": "極度の緊張。体の硬直。横臥して起立不能の場合がある。",
+        "response_to_palpation": "Extreme response or paradoxical non-response (shock state). May scream, thrash, or become completely unresponsive.",
+        "response_to_palpation_ja": "極度の反応、または逆説的な無反応（ショック状態）。叫ぶ、のたうつ、または完全に無反応。",
+        "associated_conditions": ["gdv", "aortic_thromboembolism", "severe_burns", "multiple_fractures", "meningitis"],
+    },
+]
+
+# Pain-associated disease boost multipliers
+_PAIN_DISEASE_BOOST = {
+    0: {},  # No pain → no boost
+    1: {"Osteoarthritis": 1.3, "Otitis Externa": 1.2, "Dermatitis": 1.15},
+    2: {"Pancreatitis": 1.5, "Fracture": 1.4, "Intervertebral Disc Disease": 1.5,
+        "Cystitis": 1.3, "Otitis Media": 1.3, "Gastric Foreign Body": 1.3,
+        "Peritonitis": 1.2, "Osteosarcoma": 1.2},
+    3: {"Gastric Dilatation-Volvulus (GDV)": 1.6, "Peritonitis": 1.5,
+        "Intervertebral Disc Disease": 1.4, "Osteosarcoma": 1.5,
+        "Pancreatitis": 1.4, "Meningitis": 1.4, "Panosteitis": 1.3},
+    4: {"Gastric Dilatation-Volvulus (GDV)": 1.8, "Aortic Thromboembolism": 1.7,
+        "Meningitis": 1.6, "Peritonitis": 1.6, "Necrotizing Fasciitis": 1.5},
+}
+
+
+# =============================================================================
+# API: Lab Reference Ranges
+# =============================================================================
+
+@app.route('/api/lab-ranges/<species>', methods=['GET'])
+@ensure_json_response
+def api_lab_ranges(species):
+    """Return species-specific lab reference ranges for visualization."""
+    try:
+        from api.species.helpers import (
+            LAB_ITEM_NAMES,
+            LAB_REFERENCE_RANGES,
+            SPECIES_LAB_REFERENCE_RANGES,
+        )
+    except ImportError:
+        from species.helpers import (
+            LAB_ITEM_NAMES,
+            LAB_REFERENCE_RANGES,
+            SPECIES_LAB_REFERENCE_RANGES,
+        )
+
+    # Get species-specific ranges, fall back to dog defaults
+    ranges = SPECIES_LAB_REFERENCE_RANGES.get(species, LAB_REFERENCE_RANGES)
+
+    # Build response with names and units
+    result = {}
+    for item_id, thresholds in ranges.items():
+        names = LAB_ITEM_NAMES.get(item_id, {"en": item_id, "ja": item_id})
+        result[item_id] = {
+            "low": thresholds["low_threshold"],
+            "high": thresholds["high_threshold"],
+            "name_en": names.get("en", item_id),
+            "name_ja": names.get("ja", item_id),
+        }
+
+    return {"species": species, "ranges": result}
+
+
+@app.route('/api/pain-scale', methods=['GET'])
+@ensure_json_response
+def api_pain_scale():
+    """Return CSU Canine Acute Pain Scale data for UI rendering."""
+    try:
+        from api.species.helpers import CANINE_PAIN_SCALE
+    except ImportError:
+        from species.helpers import CANINE_PAIN_SCALE
+
+    return {"pain_scale": {str(k): v for k, v in CANINE_PAIN_SCALE.items()}}
+
+
+# =============================================================================
 # API: Species Breeds
 # =============================================================================
 
 @app.route('/api/breeds/<species>', methods=['GET'])
 @ensure_json_response
 def api_get_breeds(species):
-    """Return available breeds for a given species."""
+    """Return available breeds for a given species with ecology info."""
     try:
         from api.species.helpers import SPECIES_BREEDS
     except ImportError:
@@ -563,8 +738,43 @@ def api_get_breeds(species):
     breeds = SPECIES_BREEDS.get(species, [])
     return {
         "species": species,
-        "breeds": [{"id": b["id"], "name": b["name"], "name_ja": b["name_ja"]} for b in breeds],
+        "breeds": [{
+            "id": b["id"], "name": b["name"], "name_ja": b["name_ja"],
+            "ecology": b.get("ecology"),
+        } for b in breeds],
     }
+
+
+@app.route('/api/species/<species>/common-diseases', methods=['GET'])
+@ensure_json_response
+def api_common_diseases(species):
+    """Return common/very_common diseases for a species with Japanese names."""
+    try:
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+    except ImportError:
+        from species.prevalence_data import SPECIES_PREVALENCE
+    prev = SPECIES_PREVALENCE.get(species, {})
+    # Load disease data to get Japanese names
+    try:
+        from api.diagnostic_chat import _SPECIES_DATA
+    except ImportError:
+        _SPECIES_DATA = {}
+    sp_data = _SPECIES_DATA.get(species, {})
+    diseases_list = sp_data.get("diseases", [])
+    name_map = {}
+    for d in diseases_list:
+        name_map[d.get("name", "")] = d.get("name_ja", "")
+    result = []
+    for name, tier in prev.items():
+        if tier in ("very_common", "common"):
+            result.append({
+                "name": name,
+                "name_ja": name_map.get(name, ""),
+                "prevalence": tier,
+            })
+    # Sort: very_common first, then common
+    result.sort(key=lambda x: (0 if x["prevalence"] == "very_common" else 1, x["name"]))
+    return {"species": species, "common_diseases": result}
 
 
 # =============================================================================
