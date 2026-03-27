@@ -520,7 +520,7 @@ function renderSymptomList(symptoms){
   const search=(symptomSearch?.value||"").toLowerCase();
   const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
   let html=`<button class="symptom-sort-toggle" onclick="toggleSymptomSort()" aria-label="Switch sort mode">${sortLabel}</button>`;
-  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?s.name_ja:s.name_en;const secondary=currentLang==="ja"?s.name_en:s.name_ja;return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;};
+  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?(s.name_ja||s.name_en):(s.name_en||s.name_ja);const secondary=currentLang==="ja"?(s.name_en||""):(s.name_ja||"");return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;};
   const matchSearch=s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);};
   if(symptomSortMode==="category"){
     const categories={};
@@ -547,7 +547,7 @@ function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
   if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;return;}
   btn.disabled=false;
-  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?sym.name_ja:sym.name_en):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
+  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
 }
 
