@@ -180,7 +180,35 @@ def analyze_horse(
             if lab_multiplier == 1.0:
                 lab_multiplier = min(_fuzzy_boost_lookup(name_en, lab_boosts), 1.5)
 
-        match_pct = round(item.confidence_pct * lab_multiplier)
+        # Onset multiplier for horse
+        onset_multiplier = 1.0
+        if onset:
+            disease_onsets = getattr(dis, "onset_pattern", None)
+            if disease_onsets:
+                onset_multiplier = 1.15 if onset in disease_onsets else 0.85
+
+        # Age multiplier for horse
+        age_multiplier = 1.0
+        if age_years is not None:
+            horse_age_stage = (
+                "puppy" if age_years < 1.0
+                else "young" if age_years < 4.0
+                else "adult" if age_years < 15.0
+                else "senior"
+            )
+            age_pred = getattr(dis, "age_predisposition", None)
+            if age_pred:
+                age_multiplier = 1.15 if horse_age_stage in age_pred else 0.85
+
+        # Gender multiplier for horse
+        gender_multiplier = 1.0
+        # Breed multiplier for horse (placeholder for future breed risk data)
+        breed_multiplier = 1.0
+
+        combined_horse_boost = onset_multiplier * age_multiplier * breed_multiplier * gender_multiplier * lab_multiplier
+        combined_horse_boost = max(0.6, min(combined_horse_boost, 3.0))
+
+        match_pct = round(item.confidence_pct * combined_horse_boost)
         match_pct = min(match_pct, 100)
 
         # Determine likelihood tier
@@ -243,10 +271,10 @@ def analyze_horse(
                     "negative_penalty": round(1.0 - item.absence_penalty, 3),
                     "specificity_bonus": 0.0,
                     "prevalence_prior": 1.0,
-                    "breed_multiplier": 1.0,
-                    "gender_multiplier": 1.0,
-                    "age_multiplier": 1.0,
-                    "onset_multiplier": 1.0,
+                    "breed_multiplier": round(breed_multiplier, 3),
+                    "gender_multiplier": round(gender_multiplier, 3),
+                    "age_multiplier": round(age_multiplier, 3),
+                    "onset_multiplier": round(onset_multiplier, 3),
                     "lab_multiplier": round(lab_multiplier, 3),
                     "confidence_level": item.confidence_level,
                     "absence_penalty": round(item.absence_penalty, 3),
