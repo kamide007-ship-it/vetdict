@@ -579,6 +579,101 @@ def api_analyze_symptoms():
 
 
 # =============================================================================
+# API: CSU Canine Acute Pain Scale
+# =============================================================================
+# Based on: Colorado State University Canine Acute Pain Scale
+# Reference: Mathews K et al. (2014) JSAP 55(6):E10-E68
+# Japanese version: 動物臨床医学研究所 (dourinken.com)
+
+_CSU_PAIN_SCALE = [
+    {
+        "score": 0,
+        "level": "no_pain",
+        "level_ja": "痛みなし",
+        "level_en": "No Pain",
+        "color": "#16a34a",
+        "behavioral": "Comfortable, relaxed, sleeping or resting normally",
+        "behavioral_ja": "快適で、リラックスしている。正常な睡眠・休息。",
+        "body_tension": "Minimal body tension, soft abdomen, relaxed muscles",
+        "body_tension_ja": "体の緊張は最小限。腹部は柔らかく、筋肉はリラックス。",
+        "response_to_palpation": "No response or normal response to gentle palpation of surgical site/wound",
+        "response_to_palpation_ja": "手術部位/創傷の優しい触診に対して反応なし、または正常な反応。",
+        "associated_conditions": [],
+    },
+    {
+        "score": 1,
+        "level": "mild",
+        "level_ja": "軽度の痛み",
+        "level_en": "Mild Pain",
+        "color": "#ca8a04",
+        "behavioral": "Content to slightly unsettled. Distracted or interested in surroundings. May look at affected area occasionally.",
+        "behavioral_ja": "おおむね落ち着いているがやや不安定。周囲に関心を示す。時折患部を見る。",
+        "body_tension": "Mild body tension, may shift weight occasionally",
+        "body_tension_ja": "軽度の体の緊張。時折体重移動。",
+        "response_to_palpation": "Mild response to palpation — may look, flinch, or pull away slightly",
+        "response_to_palpation_ja": "触診に軽度の反応 — 見る、軽くビクッとする、わずかに引く。",
+        "associated_conditions": ["post_minor_surgery", "mild_otitis", "mild_dermatitis", "early_arthritis"],
+    },
+    {
+        "score": 2,
+        "level": "moderate",
+        "level_ja": "中等度の痛み",
+        "level_en": "Moderate Pain",
+        "color": "#ea580c",
+        "behavioral": "Restless, shifting positions frequently. May whimper or vocalize occasionally. Reluctant to move. Reduced appetite.",
+        "behavioral_ja": "落ち着きがなく、頻繁に体位を変える。時折クンクン鳴く。動きたがらない。食欲低下。",
+        "body_tension": "Moderate body tension, guarding of affected area, may tremble",
+        "body_tension_ja": "中等度の体の緊張。患部を守る姿勢。震えることがある。",
+        "response_to_palpation": "Moderate response — flinches, pulls away, may vocalize or turn head toward site",
+        "response_to_palpation_ja": "中等度の反応 — ビクッとする、引く、鳴く、または患部の方を向く。",
+        "associated_conditions": ["fracture", "pancreatitis", "intervertebral_disc_disease", "moderate_otitis", "cystitis"],
+    },
+    {
+        "score": 3,
+        "level": "severe",
+        "level_ja": "強い痛み",
+        "level_en": "Severe Pain",
+        "color": "#dc2626",
+        "behavioral": "Restless, crying, groaning, or whimpering. May bite or chew at affected area. Reluctant to move or unable to get comfortable. Depressed, unresponsive to surroundings.",
+        "behavioral_ja": "落ち着きがなく、鳴き声、うめき声。患部を噛む・舐め続ける。動けない、またはどの体勢でも落ち着けない。沈鬱、周囲に無反応。",
+        "body_tension": "Significant body tension, rigid abdomen, protective posture, hunched back",
+        "body_tension_ja": "著しい体の緊張。腹部硬直。防御姿勢。背中を丸める。",
+        "response_to_palpation": "Strong response — cries, attempts to bite, significant withdrawal, aggressive when touched near area",
+        "response_to_palpation_ja": "強い反応 — 鳴く、噛もうとする、著しく引く、患部付近の接触で攻撃的。",
+        "associated_conditions": ["gdv", "peritonitis", "severe_trauma", "bone_cancer", "acute_abdomen", "disc_herniation"],
+    },
+    {
+        "score": 4,
+        "level": "excruciating",
+        "level_ja": "激痛",
+        "level_en": "Excruciating Pain",
+        "color": "#991b1b",
+        "behavioral": "Prostrate, unresponsive to environment. Constant vocalization (crying, screaming). May be rigid or thrashing. Potential for shock.",
+        "behavioral_ja": "伏臥、環境に無反応。絶え間ない鳴き声（叫び声）。硬直またはのたうち回る。ショックに陥る可能性。",
+        "body_tension": "Extreme tension, rigid body, may be in lateral recumbency unable to rise",
+        "body_tension_ja": "極度の緊張。体の硬直。横臥して起立不能の場合がある。",
+        "response_to_palpation": "Extreme response or paradoxical non-response (shock state). May scream, thrash, or become completely unresponsive.",
+        "response_to_palpation_ja": "極度の反応、または逆説的な無反応（ショック状態）。叫ぶ、のたうつ、または完全に無反応。",
+        "associated_conditions": ["gdv", "aortic_thromboembolism", "severe_burns", "multiple_fractures", "meningitis"],
+    },
+]
+
+# Pain-associated disease boost multipliers
+_PAIN_DISEASE_BOOST = {
+    0: {},  # No pain → no boost
+    1: {"Osteoarthritis": 1.3, "Otitis Externa": 1.2, "Dermatitis": 1.15},
+    2: {"Pancreatitis": 1.5, "Fracture": 1.4, "Intervertebral Disc Disease": 1.5,
+        "Cystitis": 1.3, "Otitis Media": 1.3, "Gastric Foreign Body": 1.3,
+        "Peritonitis": 1.2, "Osteosarcoma": 1.2},
+    3: {"Gastric Dilatation-Volvulus (GDV)": 1.6, "Peritonitis": 1.5,
+        "Intervertebral Disc Disease": 1.4, "Osteosarcoma": 1.5,
+        "Pancreatitis": 1.4, "Meningitis": 1.4, "Panosteitis": 1.3},
+    4: {"Gastric Dilatation-Volvulus (GDV)": 1.8, "Aortic Thromboembolism": 1.7,
+        "Meningitis": 1.6, "Peritonitis": 1.6, "Necrotizing Fasciitis": 1.5},
+}
+
+
+# =============================================================================
 # API: Lab Reference Ranges
 # =============================================================================
 

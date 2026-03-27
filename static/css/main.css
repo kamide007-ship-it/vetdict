@@ -16,65 +16,6 @@
   --transition-slow:.4s cubic-bezier(.4,0,.2,1);
 }
 /* --- Dark mode --- */
-[data-theme="dark"]{
-  --navy:#6b9aff;--navy-dark:#1a2744;--navy-light:#8bb4ff;
-  --green:#34d058;--green-dark:#28a745;--green-light:rgba(52,208,88,.12);
-  --white:#1e2233;--bg:#14171f;
-  --gray-50:#1e2233;--gray-100:#252a3a;--gray-200:#333848;--gray-300:#444b5e;
-  --gray-500:#8b92a8;--gray-600:#a0a8c0;--gray-700:#c5cbd8;--gray-900:#eef0f5;
-  --red:#ff6b6b;--orange:#ffb347;
-  --shadow:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
-  --shadow-md:0 4px 12px rgba(0,0,0,.35);
-  --shadow-lg:0 12px 32px rgba(0,0,0,.4);
-}
-[data-theme="dark"] .header{background:rgba(30,34,51,.92);border-bottom-color:rgba(51,56,72,.6)}
-[data-theme="dark"] .hero{background:linear-gradient(135deg,#0d1220 0%,#141824 60%,#0a0e18 100%);color:#eef0f5}
-[data-theme="dark"] .hero-stat{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
-[data-theme="dark"] .hero-stat .num{background:linear-gradient(135deg,#fff,#34d058);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-[data-theme="dark"] .hero-stat .label{color:rgba(255,255,255,.85)}
-[data-theme="dark"] .hero-badge{color:#34d058;border-color:rgba(52,208,88,.5);background:rgba(52,208,88,.15)}
-[data-theme="dark"] .hero-lead{color:rgba(255,255,255,.8)}
-[data-theme="dark"] .hero-vet{color:#fff;-webkit-text-fill-color:#fff}
-[data-theme="dark"] .hero-credit{color:rgba(255,255,255,.7)}
-[data-theme="dark"] .hero-credit a{color:#34d058}
-[data-theme="dark"] .species-card{background:var(--gray-50);border-color:var(--gray-200)}
-[data-theme="dark"] .species-card .name{color:var(--gray-900)}
-[data-theme="dark"] .species-card .count{color:var(--gray-600)}
-[data-theme="dark"] .species-card[aria-pressed="true"]{background:linear-gradient(135deg,#1e2744,#253052);border-color:var(--navy)}
-[data-theme="dark"] .card{background:var(--gray-50);border-color:var(--gray-200)}
-[data-theme="dark"] .card-header{background:var(--gray-100);border-bottom-color:var(--gray-200)}
-[data-theme="dark"] .card-header.accent{background:linear-gradient(135deg,#1a2744,#2a3a5e);color:#fff}
-[data-theme="dark"] .disease-detail{background:var(--gray-50)}
-[data-theme="dark"] .detail-section{background:var(--gray-100);border-color:var(--gray-200)}
-[data-theme="dark"] .symptom-item:hover{background:rgba(52,208,88,.08)}
-[data-theme="dark"] .symptom-item[aria-checked="true"]{background:rgba(74,122,255,.15)}
-[data-theme="dark"] .sponsor-banner-inner{background:var(--gray-50);border-color:var(--gray-200)}
-[data-theme="dark"] .sponsor-card{background:var(--gray-50);border-color:var(--gray-200)}
-[data-theme="dark"] .sponsor-product{background:var(--gray-100);border-color:var(--gray-200)}
-[data-theme="dark"] .ref-header{background:var(--gray-50);border-color:var(--gray-200)}
-[data-theme="dark"] .ref-category{background:var(--gray-50);border-color:var(--gray-200)}
-[data-theme="dark"] .header-nav button[aria-selected="true"]{color:#fff}
-[data-theme="dark"] .az-nav button:hover,[data-theme="dark"] .az-nav button.active{color:#fff}
-[data-theme="dark"] .chat-mode-btn.active{color:#fff}
-[data-theme="dark"] .guided-sym-btn.selected,[data-theme="dark"] .guided-context-opt.selected{color:#fff}
-[data-theme="dark"] .guided-action-btn.primary{color:#fff}
-[data-theme="dark"] .chat-followup-btn.selected{color:#fff}
-[data-theme="dark"] .species-guidance,[data-theme="dark"] .chat-species-guidance{background:rgba(74,122,255,.12);border-color:rgba(74,122,255,.25);color:var(--navy-light)}
-[data-theme="dark"] .lang-toggle{border-color:var(--gray-200)}
-[data-theme="dark"] .lang-toggle button.active{color:#fff}
-[data-theme="dark"] .footer{background:linear-gradient(180deg,#0d1018,#060810)}
-[data-theme="dark"] .chat-msg.bot{background:var(--gray-100)}
-[data-theme="dark"] .results-empty{background:linear-gradient(180deg,var(--gray-50),transparent)}
-[data-theme="dark"] .az-nav button{background:var(--gray-100);border-color:var(--gray-300);color:var(--gray-600)}
-[data-theme="dark"] .match-badge.high{background:rgba(34,197,94,.15);color:#4ade80}
-[data-theme="dark"] .match-badge.moderate{background:rgba(245,158,11,.15);color:#fbbf24}
-[data-theme="dark"] .match-badge.low{background:rgba(248,113,113,.15);color:#f87171}
-[data-theme="dark"] .severity-bar.low{background:rgba(34,197,94,.1);color:#4ade80}
-[data-theme="dark"] .severity-bar.moderate{background:rgba(245,158,11,.1);color:#fbbf24}
-[data-theme="dark"] .severity-bar.high{background:rgba(248,113,113,.1);color:#f87171}
-[data-theme="dark"] .severity-bar.emergency{background:#7f1d1d;color:#fca5a5}
-[data-theme="dark"] .clinical-details-body{background:linear-gradient(135deg,#0d1220,#1a2744);color:#fff}
-[data-theme="dark"] .clinical-toggle{color:#fff}
 /* Dark mode: fix all navy-bg / green-bg elements where var(--white) resolves to dark */
 [data-theme="dark"] .selected-tag,
 [data-theme="dark"] .chat-msg.user,
@@ -92,39 +33,8 @@
 [data-theme="dark"] .skip-link,
 [data-theme="dark"] .severity-bar.emergency,
 [data-theme="dark"] .symptom-item[aria-checked="true"] .sym-icon,
-[data-theme="dark"] .species-card[aria-pressed="true"]::after{color:#fff}
-[data-theme="dark"] .az-mode-toggle{color:#fff!important}
-[data-theme="dark"] .species-card[aria-pressed="true"]{background:linear-gradient(135deg,#1e2a4a,#253560);box-shadow:0 4px 16px rgba(74,122,255,.2)}
-[data-theme="dark"] .species-card[aria-pressed="true"] .name{color:var(--gray-900)}
-[data-theme="dark"] .species-card[aria-pressed="true"]::after{background:var(--green)}
 /* Dark mode: text visibility fixes */
-[data-theme="dark"] .missing-note{color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.25)}
-[data-theme="dark"] .disease-db-item .d-desc{color:var(--gray-700)}
-[data-theme="dark"] .disease-db-item .d-name-ja{color:var(--gray-600)}
-[data-theme="dark"] .disease-db-item .d-name{color:var(--gray-900)}
-[data-theme="dark"] .disease-detail dt{color:var(--navy-light)}
-[data-theme="dark"] .disease-detail dd{color:var(--gray-700)}
-[data-theme="dark"] .show-more-btn{background:var(--gray-100)!important;color:var(--gray-900)!important;border-color:var(--gray-300)!important}
-[data-theme="dark"] .symptom-cat{background:var(--gray-100);color:var(--gray-700)}
-[data-theme="dark"] .symptom-item{color:var(--gray-900)}
-[data-theme="dark"] .quality-badge{color:var(--gray-600)}
-[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:var(--gray-100);color:var(--gray-900);border-color:var(--gray-300)}
-[data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{color:var(--gray-500)}
-[data-theme="dark"] .drug-item{color:var(--gray-900)}
-[data-theme="dark"] .drug-detail{background:var(--gray-50);color:var(--gray-900)}
-[data-theme="dark"] .drug-detail dt{color:var(--navy-light)}
-[data-theme="dark"] .drug-detail dd{color:var(--gray-700)}
-[data-theme="dark"] .tab-content{color:var(--gray-900)}
-[data-theme="dark"] .pricing-card{background:var(--white);color:var(--gray-900)}
-[data-theme="dark"] .pricing-feature{color:var(--gray-700)}
-[data-theme="dark"] .ref-title{color:var(--gray-900)}
-[data-theme="dark"] .ref-item{color:var(--gray-700)}
-[data-theme="dark"] body{color:var(--gray-900)}
 
-/* --- Theme toggle button --- */
-.theme-toggle{background:none;border:2px solid var(--gray-200);border-radius:20px;padding:4px 10px;cursor:pointer;font-size:.82rem;display:flex;align-items:center;gap:4px;transition:all var(--transition-fast);color:var(--gray-600);flex-shrink:0;font-family:var(--font)}
-.theme-toggle:hover{border-color:var(--gray-300);background:var(--gray-100)}
-.theme-toggle:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 
 html{font-size:15px;scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--gray-900);line-height:1.65;transition:background .3s ease,color .3s ease}
@@ -244,8 +154,6 @@ a:hover{text-decoration:underline}
 .symptom-search input:not(:placeholder-shown)~.search-clear{display:flex}
 .symptom-sort-toggle{display:block;margin:0 auto 8px;padding:4px 14px;font-size:.75rem;border:1px solid var(--gray-300);border-radius:var(--radius);background:var(--white);color:var(--gray-700);cursor:pointer;transition:all var(--transition-fast)}
 .symptom-sort-toggle:hover{background:var(--gray-100);border-color:var(--navy-light);color:var(--navy)}
-[data-theme="dark"] .symptom-sort-toggle{background:var(--gray-100);color:var(--gray-700);border-color:var(--gray-200)}
-[data-theme="dark"] .symptom-sort-toggle:hover{background:var(--gray-200);color:#fff}
 .symptom-list{max-height:360px;overflow-y:auto;border:1px solid var(--gray-200);border-radius:var(--radius)}
 .symptom-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:all var(--transition-fast);font-size:.84rem;min-height:44px}
 .symptom-item:hover{background:var(--green-light);padding-left:16px}
@@ -353,10 +261,6 @@ a:hover{text-decoration:underline}
 .lab-bar-normal{position:absolute;top:0;height:100%;background:rgba(22,163,74,.15);border-radius:5px}
 .lab-bar-dot{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);z-index:1}
 .lab-bar-range{font-size:.68rem;color:var(--gray-500);text-align:right;white-space:nowrap}
-[data-theme="dark"] .lab-results-viz{background:var(--navy-dark);border-color:rgba(255,255,255,.08)}
-[data-theme="dark"] .lab-bar-track{background:rgba(255,255,255,.1)}
-[data-theme="dark"] .lab-bar-normal{background:rgba(22,163,74,.2)}
-[data-theme="dark"] .lab-bar-dot{border-color:var(--navy-dark)}
 @media(max-width:600px){.lab-bar-row{grid-template-columns:70px 1fr 50px;font-size:.7rem}.lab-bar-label b{display:block}}
 /* --- Pain Scale --- */
 .pain-scale-options{display:flex;flex-direction:column;gap:6px}
@@ -367,8 +271,8 @@ a:hover{text-decoration:underline}
 .pain-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
 .pain-label{font-weight:600;min-width:80px}
 .pain-desc{font-size:.74rem;color:var(--gray-500)}
-[data-theme="dark"] .pain-option{border-color:var(--gray-200)}
-[data-theme="dark"] .pain-option:has(input:checked){border-color:var(--navy);background:rgba(74,122,255,.15)}
+.pain-meter{height:10px;background:var(--gray-200);border-radius:5px;margin-top:6px;overflow:hidden}
+.pain-meter-fill{height:100%;border-radius:5px;transition:width .4s ease-out}
 /* --- Buttons --- */
 .analyze-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:var(--white);border:none;border-radius:var(--radius);font-size:.95rem;font-weight:700;cursor:pointer;transition:all var(--transition-normal);position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(34,168,79,.2)}
 .analyze-btn:hover:not(:disabled){box-shadow:0 4px 16px rgba(34,168,79,.35);transform:translateY(-1px)}
@@ -461,12 +365,7 @@ a:hover{text-decoration:underline}
 .chat-followup-btn.selected{background:var(--navy);color:var(--white)}
 .chat-followup-btn.answered:not(.selected){opacity:.4;cursor:default}
 .chat-msg.bot-brief{font-size:.72rem;color:var(--gray-500);padding:4px 12px;font-style:italic}
-[data-theme="dark"] .chat-followup{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-[data-theme="dark"] .chat-q-text{color:var(--gray-300)}
-[data-theme="dark"] .chat-q-btn{background:transparent}
 .chat-disclaimer{font-size:.66rem;color:var(--gray-400);margin-top:8px;text-align:center}
-[data-theme="dark"] .chat-result .chat-disease-card{background:var(--gray-100);border-color:var(--gray-200)}
-[data-theme="dark"] .chat-symptoms-tags{background:var(--gray-100)}
 
 /* --- Chat Mode Toggle --- */
 .chat-mode-toggle{display:flex;gap:4px;padding:8px 12px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
@@ -577,8 +476,6 @@ a:hover{text-decoration:underline}
 .pricing-btn-pro{background:var(--navy);color:var(--white)}
 .pricing-btn-pro:hover{background:var(--navy-light);transform:scale(1.02);color:var(--white);text-decoration:none}
 .pricing-note{font-size:.68rem;color:var(--gray-400);margin-top:8px}
-[data-theme="dark"] .pricing-card{background:var(--gray-50);border-color:var(--gray-200)}
-[data-theme="dark"] .pricing-card-pro{border-color:var(--navy-light)}
 
 /* --- Footer --- */
 .footer{color:rgba(255,255,255,.7);font-size:.78rem}
@@ -587,16 +484,13 @@ a:hover{text-decoration:underline}
 /* --- Missing key symptoms panel --- */
 .detail-missing-symptoms{margin-top:10px;padding:10px 14px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:var(--radius)}
 .detail-missing-header{font-weight:700;font-size:.78rem;color:#b45309;margin-bottom:6px}
-[data-theme="dark"] .detail-missing-header{color:#fbbf24}
 .detail-missing-list{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
 .missing-sym-tag{display:inline-block;padding:3px 8px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;font-size:.74rem;color:#92400e;font-weight:500}
-[data-theme="dark"] .missing-sym-tag{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.2);color:#fde68a}
 .missing-sym-sub{font-size:.68rem;color:var(--gray-500);font-weight:400}
 .detail-missing-hint{font-size:.72rem;color:var(--gray-500);font-style:italic}
 
 /* --- Scoring detail panel --- */
 .detail-scoring{margin-top:10px;padding:10px 14px;background:rgba(26,48,104,.04);border:1px solid rgba(26,48,104,.1);border-radius:var(--radius)}
-[data-theme="dark"] .detail-scoring{background:rgba(74,122,255,.06);border-color:rgba(74,122,255,.15)}
 .detail-scoring-header{font-weight:700;font-size:.78rem;color:var(--navy);margin-bottom:8px}
 .score-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .score-label{font-size:.72rem;color:var(--gray-600);width:100px;flex-shrink:0;text-align:right}
@@ -607,8 +501,6 @@ a:hover{text-decoration:underline}
 .score-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:600}
 .score-badge.boost{background:rgba(34,197,94,.1);color:#166534;border:1px solid rgba(34,197,94,.2)}
 .score-badge.penalty{background:rgba(239,68,68,.08);color:#991b1b;border:1px solid rgba(239,68,68,.15)}
-[data-theme="dark"] .score-badge.boost{background:rgba(34,197,94,.12);color:#4ade80;border-color:rgba(34,197,94,.25)}
-[data-theme="dark"] .score-badge.penalty{background:rgba(239,68,68,.12);color:#f87171;border-color:rgba(239,68,68,.25)}
 
 /* --- Drug dictionary cards --- */
 .drug-item.drug-sponsored{border-left:3px solid var(--green)}
@@ -618,8 +510,6 @@ a:hover{text-decoration:underline}
 .drug-dosage-box{margin-top:4px;font-size:.8rem;padding:6px 10px;border-radius:6px}
 .drug-dosage-box.drug-safe{background:#f0fdf4}
 .drug-dosage-box.drug-unsafe{background:#fef2f2}
-[data-theme="dark"] .drug-dosage-box.drug-safe{background:rgba(34,197,94,.1)}
-[data-theme="dark"] .drug-dosage-box.drug-unsafe{background:rgba(248,113,113,.1)}
 .drug-safe-label{color:var(--green);font-weight:700}
 .drug-unsafe-label{color:var(--red);font-weight:700}
 .drug-dosage-note{color:var(--gray-500)}
@@ -633,10 +523,7 @@ a:hover{text-decoration:underline}
 .drug-species-card{font-size:.76rem;padding:4px 8px;border-radius:4px;border:1px solid}
 .drug-species-card.drug-safe{background:#f0fdf4;border-color:#bbf7d0}
 .drug-species-card.drug-unsafe{background:#fef2f2;border-color:#fecaca}
-[data-theme="dark"] .drug-species-card.drug-safe{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25)}
-[data-theme="dark"] .drug-species-card.drug-unsafe{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.25)}
 .drug-interaction-tag{display:inline-block;margin:2px 4px 2px 0;padding:2px 6px;background:#fef2f2;border-radius:4px;font-size:.76rem}
-[data-theme="dark"] .drug-interaction-tag{background:rgba(248,113,113,.1)}
 
 /* --- Typing indicator --- */
 .typing-indicator{display:flex;align-items:center;gap:4px;padding:10px 14px!important}
@@ -647,7 +534,6 @@ a:hover{text-decoration:underline}
 
 /* --- Search highlight --- */
 .search-highlight{background:rgba(245,158,11,.25);color:inherit;padding:0 1px;border-radius:2px}
-[data-theme="dark"] .search-highlight{background:rgba(251,191,36,.2)}
 
 .hidden{display:none!important}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--gray-300);border-top-color:var(--navy);border-radius:50%;animation:spin .6s linear infinite}
@@ -755,7 +641,6 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 .landing-chat .card{box-shadow:var(--shadow-lg);border:2px solid var(--navy);transition:all var(--transition-normal)}
 .landing-chat .card:hover{box-shadow:0 16px 40px rgba(26,48,104,.16)}
 .landing-chat .card-header{font-size:.92rem;font-weight:700;border-radius:var(--radius) var(--radius) 0 0;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%)}
-[data-theme="dark"] .landing-chat .card-header{color:#fff}
 
 /* Tablet breakpoint */
 @media(max-width:1024px){
@@ -784,10 +669,6 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   #chatGuidedContainer{height:calc(100dvh - 280px);min-height:300px;max-height:500px}
   body{padding-bottom:env(safe-area-inset-bottom)}
   /* Dark mode mobile nav dropdown */
-  [data-theme="dark"] .header-nav{background:rgba(30,34,51,.97);border-bottom-color:rgba(51,56,72,.6)}
-  [data-theme="dark"] .header-nav button{color:var(--gray-600)}
-  [data-theme="dark"] .header-nav button:hover{background:var(--gray-200);color:var(--gray-900)}
-  [data-theme="dark"] .header-nav button[aria-selected="true"]{background:var(--navy);color:#fff}
 }
 
 /* --- Admin / Pro access control --- */
@@ -826,7 +707,6 @@ body.is-pro .pro-restore{display:none}
 .share-fb:hover{background:#1664d6;color:#fff;text-decoration:none}
 .share-line{background:#06c755;color:#fff}
 .share-line:hover{background:#05a847;color:#fff;text-decoration:none}
-[data-theme="dark"] .share-section{background:var(--navy-dark);border-color:rgba(255,255,255,.05)}
 
 /* --- Email signup / waitlist --- */
 .email-signup{margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200)}
@@ -1317,19 +1197,6 @@ button.combination-item:focus-visible {
 }
 
 /* Auto dark mode for users without manual toggle */
-@media(prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --navy:#6b9aff;--navy-dark:#1a2744;--navy-light:#8bb4ff;
-    --green:#34d058;--green-dark:#28a745;--green-light:rgba(52,208,88,.12);
-    --white:#1e2233;--bg:#14171f;
-    --gray-50:#1e2233;--gray-100:#252a3a;--gray-200:#333848;--gray-300:#444b5e;
-    --gray-500:#8b92a8;--gray-600:#a0a8c0;--gray-700:#c5cbd8;--gray-900:#eef0f5;
-    --red:#ff6b6b;--orange:#ffb347;
-    --shadow:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
-    --shadow-md:0 4px 12px rgba(0,0,0,.35);
-    --shadow-lg:0 12px 32px rgba(0,0,0,.4);
-  }
-}
 
 /* Common diseases section */
 .common-diseases-section{margin-top:20px;padding:14px 16px;background:linear-gradient(135deg,#f0f7ff 0%,#e8f4f8 100%);border:1px solid #d0e3f0;border-radius:var(--radius);font-size:.82rem}
