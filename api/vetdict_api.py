@@ -495,6 +495,7 @@ def api_analyze_symptoms():
     gender = data.get('gender')  # "male" | "female"
     vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
     vaccination_status = data.get('vaccination_status')  # "current" | "outdated" | "none"
+    pain_score = data.get('pain_score')  # 0-4 (CSU Canine Acute Pain Scale)
 
     # Validate onset
     if onset and onset not in ('acute', 'subacute', 'chronic'):
@@ -507,6 +508,15 @@ def api_analyze_symptoms():
     # Validate vaccination_status
     if vaccination_status and vaccination_status not in ('current', 'outdated', 'none'):
         return {'error': "vaccination_status must be 'current', 'outdated', or 'none'"}, 400
+
+    # Validate pain_score (CSU Canine Pain Scale 0-4)
+    if pain_score is not None:
+        try:
+            pain_score = int(pain_score)
+            if pain_score < 0 or pain_score > 4:
+                return {'error': 'pain_score must be 0-4'}, 400
+        except (ValueError, TypeError):
+            return {'error': 'pain_score must be an integer 0-4'}, 400
 
     # Coerce vaccines to list of strings
     vaccines = []
@@ -546,6 +556,7 @@ def api_analyze_symptoms():
                 gender=gender,
                 vaccines=vaccines,
                 vaccination_status=vaccination_status,
+                pain_score=pain_score,
             )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
@@ -603,6 +614,18 @@ def api_lab_ranges(species):
         }
 
     return {"species": species, "ranges": result}
+
+
+@app.route('/api/pain-scale', methods=['GET'])
+@ensure_json_response
+def api_pain_scale():
+    """Return CSU Canine Acute Pain Scale data for UI rendering."""
+    try:
+        from api.species.helpers import CANINE_PAIN_SCALE
+    except ImportError:
+        from species.helpers import CANINE_PAIN_SCALE
+
+    return {"pain_scale": {str(k): v for k, v in CANINE_PAIN_SCALE.items()}}
 
 
 # =============================================================================

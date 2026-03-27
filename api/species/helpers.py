@@ -1724,6 +1724,84 @@ SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
 
 
 # =============================================================================
+# CSU CANINE ACUTE PAIN SCALE (Colorado State University)
+# Reference: dourinken.com/wp-content/uploads/2019/04/pain_scale.pdf
+# Score 0-4, used as urgency/disease modifier for dog symptom analysis
+# =============================================================================
+
+CANINE_PAIN_SCALE: Dict[int, Dict[str, Any]] = {
+    0: {
+        "level_en": "Comfortable / No Pain",
+        "level_ja": "快適 / 痛みなし",
+        "description_en": "Not bothered by palpation of wound or surgery site. Comfortable and interested in surroundings.",
+        "description_ja": "創部や手術部位の触診に反応しない。快適で周囲に興味を示す。",
+        "behavioral_signs_ja": "満足、快適に睡眠・休息、尾を振る、食事に興味を示す",
+        "body_tension_ja": "リラックスした体勢、筋緊張は最小限",
+        "urgency_modifier": 1.0,
+    },
+    1: {
+        "level_en": "Mild Pain",
+        "level_ja": "軽度の痛み",
+        "description_en": "Content to slightly unsettled. May look at wound site. Responds to palpation with mild reaction.",
+        "description_ja": "ほぼ快適だがやや落ち着かない。創部を気にする。触診にわずかに反応。",
+        "behavioral_signs_ja": "やや落ち着きがない、リップリッキング・あくび、体重移動、患部を見る",
+        "body_tension_ja": "やや緊張した体勢、軽度の防御姿勢",
+        "urgency_modifier": 1.05,
+    },
+    2: {
+        "level_en": "Moderate Pain",
+        "level_ja": "中等度の痛み",
+        "description_en": "Arises from rest or shifts body position. Flinches on palpation. May whimper occasionally.",
+        "description_ja": "休息から起き上がる・体位変換。触診で逃避反応。時折うめき声。",
+        "behavioral_signs_ja": "体位変換、患部の防御、断続的なうめき声、動きたがらない、食欲低下",
+        "body_tension_ja": "中程度の筋緊張、患部の防御",
+        "urgency_modifier": 1.15,
+    },
+    3: {
+        "level_en": "Moderate to Severe Pain",
+        "level_ja": "中等度〜重度の痛み",
+        "description_en": "Unsettled, cries when touched. Reluctant to move, may not eat. Guards wound.",
+        "description_ja": "不安定、触ると鳴き声。動きたがらない、食べない。創部を防御。",
+        "behavioral_signs_ja": "落ち着きなし、鳴き声、動きたがらない、触ると攻撃的、食欲なし、震え、猫背姿勢",
+        "body_tension_ja": "体の緊張、固定、触診で硬直",
+        "urgency_modifier": 1.3,
+    },
+    4: {
+        "level_en": "Severe Pain",
+        "level_ja": "重度の痛み",
+        "description_en": "Prostrate. Constantly groaning or screaming. May bite. Unresponsive. Extremely rigid.",
+        "description_ja": "横臥。持続的なうなり声・叫び声。咬みつき。周囲に無反応。極度に硬直。",
+        "behavioral_signs_ja": "横臥、持続的な発声、咬みつき、周囲への無反応、硬直、循環器系への影響",
+        "body_tension_ja": "極度の緊張・硬直、外的刺激に無反応",
+        "urgency_modifier": 1.5,
+    },
+}
+
+# Pain-associated disease boost mapping
+PAIN_LEVEL_DISEASE_BOOST: Dict[int, Dict[str, float]] = {
+    2: {
+        "Osteoarthritis": 1.3, "Intervertebral Disc Disease": 1.2,
+        "Pancreatitis": 1.3, "Gastric Ulcer": 1.2,
+        "Urinary Tract Infection": 1.2, "Otitis Media": 1.2,
+    },
+    3: {
+        "Pancreatitis": 1.5, "Intervertebral Disc Disease": 1.5,
+        "Fracture": 1.4, "Peritonitis": 1.5, "Pyelonephritis": 1.3,
+        "Urolithiasis": 1.4, "Foreign Body Obstruction": 1.4,
+        "Immune-Mediated Polyarthritis": 1.3, "Meningitis": 1.4,
+        "Osteosarcoma": 1.3, "Acute Abdomen": 1.5,
+    },
+    4: {
+        "Gastric Dilatation-Volvulus (GDV)": 1.8, "Pancreatitis": 1.6,
+        "Peritonitis": 1.8, "Meningitis": 1.6,
+        "Intervertebral Disc Disease": 1.6, "Fracture": 1.6,
+        "Urethral Obstruction": 1.6, "Spinal Fracture": 1.7,
+        "Acute Abdomen": 1.8, "Aortic Thromboembolism": 1.7,
+    },
+}
+
+
+# =============================================================================
 # SYMPTOM CLINICAL WEIGHTS (尤度比ベース臨床的重み付け)
 # =============================================================================
 # 各症状の臨床的重要度を重み付け。文献ベースの尤度比 (Likelihood Ratio) を
@@ -2719,6 +2797,7 @@ def analyze_symptoms_generic(
     gender: str | None = None,
     vaccines: list | None = None,
     vaccination_status: str | None = None,
+    pain_score: int | None = None,
 ) -> Dict[str, Any]:
     """Generic differential diagnosis engine.
 
@@ -2836,6 +2915,13 @@ def analyze_symptoms_generic(
     lab_boosts: Dict[str, float] = {}
     if lab_values:
         lab_boosts = compute_lab_boosts(lab_values, species=species or "dog")
+
+    # Pre-compute pain level boosts (CSU Canine Pain Scale)
+    pain_boosts: Dict[str, float] = {}
+    pain_urgency_modifier = 1.0
+    if pain_score is not None and pain_score in CANINE_PAIN_SCALE:
+        pain_urgency_modifier = CANINE_PAIN_SCALE[pain_score]["urgency_modifier"]
+        pain_boosts = PAIN_LEVEL_DISEASE_BOOST.get(pain_score, {})
 
     # Pre-compute vaccine-preventable diseases (skip from results if vaccinated)
     vaccine_preventable: set = set()
@@ -2992,8 +3078,11 @@ def analyze_symptoms_generic(
         # Apply lab value boost (上限を制限、部分一致)
         lab_multiplier = min(_fuzzy_boost_lookup(disease["name"], lab_boosts), 1.5)
 
+        # Apply pain level boost (CSU Pain Scale disease-specific, 上限制限)
+        pain_multiplier = min(_fuzzy_boost_lookup(disease["name"], pain_boosts), 1.8) if pain_boosts else pain_urgency_modifier
+
         # 複合ブースト倍率の上限を設定（過度なインフレ防止）
-        combined_boost = onset_multiplier * age_multiplier * breed_multiplier * gender_multiplier * pair_multiplier * triple_multiplier * lab_multiplier
+        combined_boost = onset_multiplier * age_multiplier * breed_multiplier * gender_multiplier * pair_multiplier * triple_multiplier * lab_multiplier * pain_multiplier
         combined_boost = min(combined_boost, 3.0)  # 最大3.0倍（トリプルで強いブースト可能）
         if combined_boost < 1.0:
             # ペナルティの下限: 0.6（40%以上は削らない）
@@ -3084,6 +3173,7 @@ def analyze_symptoms_generic(
                 "age_multiplier": round(age_multiplier, 3),
                 "onset_multiplier": round(onset_multiplier, 3),
                 "lab_multiplier": round(lab_multiplier, 3),
+                "pain_multiplier": round(pain_multiplier, 3),
                 "confidence_level": (
                     "high" if adjusted_percent >= 50 else
                     "medium" if adjusted_percent >= 30 else "low"
@@ -3194,6 +3284,8 @@ def analyze_symptoms_generic(
         "pair_boost_applied": len(pair_boosts) > 0,
         "lab_boost_applied": len(lab_boosts) > 0,
         "lab_values": lab_values,
+        "pain_score": pain_score,
+        "pain_applied": pain_score is not None and pain_score > 0,
         "vaccination_adjustment_applied": vaccination_adjustment_applied,
         "vaccine_preventable_excluded": len(vaccine_preventable) > 0,
         "symptom_names": symptom_names_lookup,
