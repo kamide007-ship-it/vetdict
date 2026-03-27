@@ -1355,8 +1355,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "cheek_pouch_prolapse": ["cheek_swelling"],
         "jaw_swelling": ["facial_swelling", "swelling"],
         "abscess": ["discharge", "swelling"],
-        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "tooth_overgrowth", "malocclusion"],
-        "dental_overgrowth": ["overgrown_teeth", "incisor_overgrowth", "molar_overgrowth", "malocclusion"],
+        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "tooth_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+        "dental_overgrowth": ["overgrown_teeth", "incisor_overgrowth", "molar_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+        "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
+        "scaly_legs": ["leg_scales", "scaly_face"],
+        "leg_scales": ["scaly_legs", "scaly_face"],
         # Pain
         "pain": ["lethargy", "vocalization"],
         # Oral
@@ -1544,8 +1547,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
         "pleural_effusion": ["effusion", "abdominal_distension"],
         "ascites": ["effusion", "abdominal_distension", "bloating"],
-        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion"],
-        "dental_overgrowth": ["overgrown_teeth", "malocclusion"],
+        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+        "dental_overgrowth": ["overgrown_teeth", "malocclusion", "visible_tooth_overgrowth"],
+        "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
         "dysecdysis": ["retained_shed", "retained_skin", "shedding_problems"],
         "retained_shed": ["dysecdysis", "retained_skin"],
         "retained_skin": ["dysecdysis", "retained_shed"],
@@ -1556,6 +1560,10 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "edema": ["swelling", "bloating", "ascites"],
         "swelling": ["edema", "facial_swelling", "eye_swelling"],
         "rough_coat": ["poor_coat", "dry_skin"],
+        "scaly_legs": ["leg_scales", "scaly_face"],
+        "leg_scales": ["scaly_legs", "scaly_face"],
+        "scaly_face": ["scaly_legs", "leg_scales", "crusty_beak"],
+        "hole_in_head": ["head_erosion", "head_pitting"],
     }
     expanded_set = set(symptom_ids)
     for sid in symptom_ids:
@@ -1629,16 +1637,19 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         base_score = min(base_score + specificity_bonus, 1.0)
 
         # --- Negative evidence penalty ---
+        # Scale penalty by how many symptoms the user actually provided vs disease total.
+        # When user provides few symptoms relative to disease total, reduce penalty.
         missing = disease_symptoms - symptom_set
         negative_penalty = 1.0
-        if len(symptom_set) >= 3:
+        if len(symptom_set) >= 3 and len(disease_symptoms) >= 3:
+            obs_ratio = min(1.0, len(symptom_ids) / len(disease_symptoms))
             for s in missing:
                 w = _compute_weight(s)
                 if w >= 2.5:
-                    negative_penalty -= 0.06
+                    negative_penalty -= 0.06 * obs_ratio
                 elif w >= 2.0:
-                    negative_penalty -= 0.03
-            negative_penalty = max(negative_penalty, 0.5)
+                    negative_penalty -= 0.03 * obs_ratio
+            negative_penalty = max(negative_penalty, 0.55)
 
         # --- Coverage completeness bonus ---
         # Reward diseases where more absolute symptoms matched (not just ratio).
