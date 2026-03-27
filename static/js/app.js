@@ -2282,7 +2282,7 @@ class MultiDiseaseUIHandler {
     });
     element.classList.add('selected');
     const comboId = element.getAttribute('data-combo-id');
-    console.log('Selected combination:', comboId);
+    // combo selection handled via data attribute
   }
 
   /**
@@ -2296,7 +2296,7 @@ class MultiDiseaseUIHandler {
     if (chatInput) {
       chatInput.value = questionText;
     }
-    console.log('Selected question:', questionId);
+    // question selection handled via input injection
   }
 }
 
