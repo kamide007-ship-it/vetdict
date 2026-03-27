@@ -5521,19 +5521,32 @@ DISEASES: List[Dict[str, Any]] = [
         "name_ja": "猫シュウ酸カルシウム尿路結石症",
         "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "vocalization_changes", "appetite_loss"},
         "description": "Feline Calcium Oxalate Urolithiasis is a nutritional or metabolic disorder caused by dietary imbalance or deficiency.",
-        "description_ja": "尿路にシュウ酸カルシウム結石が形成される疾患で、高齢猫に多いです。",
+        "description_ja": "猫で最も多い尿石症の一つ。内科的溶解が不可能で外科的摘出が必要。"
+                          "中高齢の雄猫、ペルシャ、ヒマラヤン、ブリティッシュショートヘアに好発。"
+                          "近年ストラバイトから置き換わり増加傾向。",
         "urgency": "high",
         "recommended_tests": ["urinalysis", "abdominal_xray", "abdominal_ultrasound", "serum_calcium"],
-        "causes": "Caused by calcium deficiency, inadequate UVB exposure, and/or improper calcium-to-phosphorus dietary ratio leading to metabolic bone disease.",
-        "causes_ja": "猫における猫シュウ酸カルシウム尿路結石症の原因: 尿路にシュウ酸カルシウム結石が形成される疾患で、高齢猫に多いです。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "猫シュウ酸カルシウム尿路結石症は猫における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "猫における猫シュウ酸カルシウム尿路結石症の治療は栄養バランスの是正が中心となる。欠乏状態では食事の改善または治療的サプリメンテーションにより特定の栄養素を補充する。過剰状態では食事制限と臓器障害に対する支持療法を行う。栄養不良動物ではリフィーディング症候群予防のため段階的に是正する。種特異的な食事要求に基づく長期栄養計画を立案する。過不足のない摂取を確保するため定期的に再評価する。",
-        "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
-        "prevention_ja": "猫シュウ酸カルシウム尿路結石症の予防には全ての栄養要求を満たす種に適した食事設計、単一食品のみの食事の回避、獣医師との定期的な食事内容の見直し、必要時の適切なサプリメンテーション、種固有の栄養ニーズに関する知識が必要である。",
-        "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
-        "prognosis_ja": "猫シュウ酸カルシウム尿路結石症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
+        "causes": "Hypercalciuria, hyperoxaluria, acidic urine, low water intake, genetic predisposition.",
+        "causes_ja": "高カルシウム尿症、高シュウ酸尿症、酸性尿、飲水量不足、遺伝的素因。"
+                     "過度の尿酸性化食（ストラバイト予防の過剰対応）も一因。"
+                     "副甲状腺機能亢進症による高カルシウム血症も検索すべき。",
+        "pathophysiology": "Supersaturation of urine with calcium and oxalate ions leads to crystal nucleation and stone growth in acidic urine.",
+        "pathophysiology_ja": "尿中のカルシウムイオンとシュウ酸イオンが過飽和→結晶核形成→結石成長。"
+                              "酸性尿でシュウ酸カルシウムの溶解度が低下し結石形成が促進される。"
+                              "膀胱・腎盂・尿管に形成。尿管結石は猫で急増しており緊急性が高い。",
+        "treatment": "Surgical removal required; medical dissolution is not possible.",
+        "treatment_ja": "内科的溶解不可→外科的摘出が標準。"
+                        "(1)膀胱切開術で膀胱結石摘出、(2)尿管結石：SUBシステム（皮下尿管バイパス）"
+                        "または尿管ステント留置、(3)術後療法食（Royal Canin S/O, Hill's c/d等）、"
+                        "(4)飲水量増加（ウェットフード主体）、(5)クエン酸カリウムで尿pH 6.5〜7.0維持。"
+                        "iCa（イオン化カルシウム）高値の場合は原因精査。",
+        "prevention": "Adequate hydration, wet food diet, avoid excessive urinary acidification.",
+        "prevention_ja": "ウェットフード主体の食事で飲水量確保。過度の尿酸性化を避ける。"
+                         "療法食（結石予防食）。3〜6ヶ月毎のX線/超音波モニタリング。"
+                         "血清カルシウム値の定期測定。",
+        "prognosis": "Recurrence rate 30-50% within 3 years. Lifelong monitoring required.",
+        "prognosis_ja": "外科的摘出後の短期予後は良好。再発率が高い（3年以内に30〜50%）。"
+                        "尿管結石の場合SUBシステム管理が必要。生涯の食事管理とモニタリングが必須。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
@@ -5542,21 +5555,97 @@ DISEASES: List[Dict[str, Any]] = [
         "name_ja": "猫ストルバイト尿路結石症",
         "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "inappropriate_urination"},
         "description": "Feline Struvite Urolithiasis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
-        "description_ja": "尿路にリン酸アンモニウムマグネシウム結石が形成される疾患です。",
+        "description_ja": "リン酸マグネシウムアンモニウム（ストラバイト）結石。"
+                          "猫では犬と異なり無菌性（感染非関連）が多い。"
+                          "内科的溶解が可能。若齢〜中齢猫に多い。",
         "urgency": "high",
         "recommended_tests": ["urinalysis", "urine_culture", "abdominal_xray", "abdominal_ultrasound"],
-        "causes": "Caused by mineral precipitation in the urinary tract, influenced by diet, water intake, urine pH, and genetic predisposition.",
-        "causes_ja": "猫における猫ストルバイト尿路結石症の原因: 尿路にリン酸アンモニウムマグネシウム結石が形成される疾患です。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "猫ストルバイト尿路結石症は猫における腎・泌尿器疾患である。腎臓、尿管、膀胱、または尿道の構造的・機能的障害を伴う。腎疾患は糸球体濾過、尿細管再吸収・分泌、およびホルモン機能（エリスロポエチン、カルシトリオール、レニン）を障害する。進行性のネフロン喪失により高窒素血症、電解質異常、酸塩基障害が生じる。下部尿路疾患は閉塞、尿石症、上行感染を引き起こしうる。",
-        "treatment": "Appropriate medical or surgical intervention based on diagnosis, supportive care with IV fluids as needed, pain management, nutritional support, and regular monitoring of treatment response.",
-        "treatment_ja": "猫における猫ストルバイト尿路結石症の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "猫ストルバイト尿路結石症の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
-        "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
-        "prognosis_ja": "猫ストルバイト尿路結石症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
+        "causes": "Alkaline urine, high mineral diet, insufficient water intake. Unlike dogs, usually sterile (non-infection related).",
+        "causes_ja": "アルカリ尿（pH>6.8）、高ミネラル食（マグネシウム・リン過剰）、飲水量不足。"
+                     "犬と異なり猫では無菌性ストラバイトが主（尿路感染は少数）。"
+                     "ドライフード主体の食事がリスク因子。",
+        "pathophysiology": "Supersaturation of urine with magnesium, ammonium, and phosphate in alkaline conditions leads to crystal nucleation and stone formation.",
+        "pathophysiology_ja": "アルカリ尿中でマグネシウム・アンモニウム・リン酸が過飽和→"
+                              "結晶核形成→結石成長。猫では無菌性が多く、食事性の尿pH上昇が主因。"
+                              "結石が膀胱粘膜を刺激→血尿・頻尿。雄猫では尿道閉塞のリスクあり。",
+        "treatment": "Medical dissolution possible with acidifying diet.",
+        "treatment_ja": "内科的溶解が可能（シュウ酸カルシウムとの最大の違い）。"
+                        "(1)溶解食（Hill's s/d, Royal Canin S/O等）→2〜5週間で溶解、"
+                        "(2)尿路感染が併存する場合は適切な抗菌薬併用、"
+                        "(3)溶解確認まで2〜4週毎のX線モニタリング、"
+                        "(4)溶解後は維持食（c/d等）に切替。"
+                        "尿道閉塞時は緊急カテーテル処置＋入院管理。"
+                        "大結石や溶解不応例は膀胱切開術。",
+        "prevention": "Wet food based diet, urinary health diet, adequate hydration.",
+        "prevention_ja": "ウェットフード主体の食事。尿路健康維持食。"
+                         "十分な飲水量（給水器、フードへの加水）。"
+                         "定期的な尿検査でpH・結晶の有無をモニタリング。",
+        "prognosis": "Good with dietary dissolution; recurrence manageable with proper diet.",
+        "prognosis_ja": "溶解食で良好に管理可能。再発予防には生涯の食事管理が必要。"
+                        "尿道閉塞を繰り返す雄猫では会陰尿道造瘻術を検討。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
+    {
+        "name": "Feline Cystine Urolithiasis",
+        "name_ja": "猫シスチン尿石症",
+        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "vocalization_changes"},
+        "description": "Cystine stone formation due to hereditary renal tubular reabsorption defect in cats.",
+        "description_ja": "腎尿細管でのシスチン再吸収障害による遺伝性尿石症。"
+                          "猫では犬に比べ稀だが、シャム、ドメスティックショートヘアで報告あり。"
+                          "雄猫に多く、尿道閉塞のリスクがある。",
+        "urgency": "high",
+        "recommended_tests": ["urinalysis", "stone_analysis", "abdominal_xray", "abdominal_ultrasound", "urine_amino_acid_analysis"],
+        "causes": "Hereditary defect in renal tubular cystine reabsorption (SLC3A1/SLC7A9 mutations).",
+        "causes_ja": "腎近位尿細管のアミノ酸トランスポーター（SLC3A1/SLC7A9）の遺伝子変異。"
+                     "シスチンの再吸収障害→尿中シスチン濃度上昇→結石形成。",
+        "pathophysiology": "Defective proximal renal tubular reabsorption of cystine leads to cystinuria and stone formation in acidic urine.",
+        "pathophysiology_ja": "腎近位尿細管のシスチントランスポーター異常→シスチン再吸収障害→"
+                              "尿中シスチン過排泄→酸性尿中でシスチンが析出→結晶化→結石形成。"
+                              "シスチンは全アミノ酸中で最も水溶性が低い。",
+        "treatment": "Urinary alkalinization, thiopronin, dietary management, surgical removal for large stones.",
+        "treatment_ja": "尿アルカリ化（クエン酸カリウム）でシスチン溶解度を上昇させる。"
+                        "チオプロニン（2-MPG）でシスチンを可溶性化合物に変換。"
+                        "低タンパク食＋十分な飲水で尿希釈。"
+                        "大結石は外科的摘出（膀胱切開術）。"
+                        "尿道閉塞時は緊急カテーテル処置。",
+        "prevention": "Dietary protein restriction, adequate hydration, urinary alkalinization.",
+        "prevention_ja": "低タンパク食、十分な飲水量（ウェットフード主体）、尿アルカリ化。"
+                         "定期的な尿検査・画像検査でモニタリング。",
+        "prognosis": "Manageable with lifelong therapy; recurrence possible without treatment.",
+        "prognosis_ja": "適切な内科管理で再発率を低減可能。生涯の管理が必要。"
+                        "繁殖管理のための遺伝子検査が推奨される。",
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
+    {
+        "name": "Feline Urate Urolithiasis",
+        "name_ja": "猫尿酸アンモニウム尿石症",
+        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "appetite_loss"},
+        "description": "Ammonium urate stone formation in cats, often associated with portosystemic shunts or liver disease.",
+        "description_ja": "尿酸アンモニウム結石。猫では門脈体循環シャント（PSS）や"
+                          "肝疾患に伴うことが多い。エジプシャンマウ、シャムで報告あり。",
+        "urgency": "high",
+        "recommended_tests": ["urinalysis", "stone_analysis", "abdominal_ultrasound", "liver_function_tests", "bile_acids", "ammonia_level"],
+        "causes": "Portosystemic shunt, liver disease, high purine diet.",
+        "causes_ja": "門脈体循環シャント（先天性・後天性）、肝疾患による尿酸代謝異常、"
+                     "高プリン食（内臓肉等）。",
+        "pathophysiology": "Impaired hepatic conversion of uric acid to allantoin combined with hyperammonemia leads to urate stone formation.",
+        "pathophysiology_ja": "肝臓での尿酸→アラントインへの変換障害→血中尿酸上昇→高尿酸尿症。"
+                              "門脈シャントによる高アンモニア血症も寄与→尿酸アンモニウム結石形成。",
+        "treatment": "Address underlying liver disease/shunt; allopurinol, low purine diet.",
+        "treatment_ja": "基礎疾患（門脈シャント・肝疾患）の治療が根本。"
+                        "門脈シャント：外科的結紮（アメロイドコンストリクター等）。"
+                        "アロプリノール（猫での使用は犬より注意が必要）、低プリン食、"
+                        "尿アルカリ化。大結石は外科的摘出。",
+        "prevention": "Treat underlying hepatic disease; low purine diet; adequate hydration.",
+        "prevention_ja": "基礎疾患の管理、低プリン食、十分な飲水量。"
+                         "門脈シャント修正後も定期的な尿検査・画像検査。",
+        "prognosis": "Depends on underlying cause; fair to good with shunt correction.",
+        "prognosis_ja": "基礎疾患の管理次第。門脈シャント結紮後は結石形成リスク低下。"
+                        "肝疾患が進行性の場合は予後注意。",
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"young", "adult"},
     },
     {
         "name": "Feline Ureteral Obstruction",

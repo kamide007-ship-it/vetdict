@@ -1129,12 +1129,113 @@ _DISEASE_DB: list[dict[str, Any]] = [
     },
     {
         "name": "Bladder Stones",
-        "name_ja": "\u81a8\u80f1\u7d50\u77f3",
+        "name_ja": "膀胱結石",
         "symptoms": {"straining_urinate", "blood_urine",
                       "excessive_urination", "pain_on_touch"},
         "description": "Mineral formations in the bladder causing urinary "
                        "obstruction and discomfort.",
-        "description_ja": "膀胱内のミネラル結石により、排尿障害や不快感を引き起こします。",
+        "description_ja": "膀胱内のミネラル結石により、排尿障害や不快感を引き起こします。"
+                          "結石の種類にはストラバイト、シュウ酸カルシウム、シスチン、尿酸等があり、"
+                          "種類により治療法が異なります。",
+        "pathophysiology_ja": "尿中のミネラル（リン酸マグネシウムアンモニウム、シュウ酸カルシウム等）が"
+                              "過飽和状態となり結晶化→結石形成。尿pH、食事内容、飲水量、"
+                              "尿路感染の有無が結石形成に影響。結石による膀胱粘膜刺激→血尿・頻尿。",
+        "causes_ja": "食事（高ミネラル食）、飲水量不足、尿路感染（ストラバイト形成促進）、"
+                     "遺伝的素因（シスチン尿症等）、代謝異常。犬種素因あり。",
+        "treatment_ja": "結石分析が治療方針決定に必須。"
+                        "ストラバイト：溶解食（Hill's s/d等）＋尿路感染治療で内科的溶解可能。"
+                        "シュウ酸カルシウム：内科的溶解不可→外科的摘出（膀胱切開術）。"
+                        "再発予防：療法食＋十分な飲水＋定期的尿検査・画像検査。",
+        "prognosis_ja": "適切な治療で予後良好。再発率が高い（特にシュウ酸カルシウム）ため、"
+                        "生涯にわたる食事管理と定期モニタリングが必要。",
+        "prevention_ja": "療法食、十分な飲水量確保、定期的な尿検査。"
+                         "ストラバイト：尿路感染の早期治療。",
+        "urgency": "normal",
+    },
+    {
+        "name": "Struvite Urolithiasis",
+        "name_ja": "ストラバイト尿石症（リン酸マグネシウムアンモニウム結石）",
+        "symptoms": {"straining_urinate", "blood_urine",
+                      "excessive_urination", "pain_on_touch"},
+        "description": "Struvite (magnesium ammonium phosphate) stone formation "
+                       "in the urinary tract, often associated with UTI.",
+        "description_ja": "リン酸マグネシウムアンモニウム（ストラバイト）結石。"
+                          "犬では尿路感染（特にウレアーゼ産生菌）に続発することが多い。"
+                          "雌犬に多い。ミニチュアシュナウザー、シーズー、ビション・フリーゼに好発。",
+        "pathophysiology_ja": "ウレアーゼ産生菌（Staphylococcus, Proteus等）の感染→"
+                              "尿素をアンモニア＋CO₂に分解→尿pH上昇（アルカリ化）→"
+                              "マグネシウム・アンモニウム・リン酸が過飽和→ストラバイト結晶化→結石形成。"
+                              "犬では感染誘発型が主（猫とは異なる）。",
+        "causes_ja": "尿路感染（ウレアーゼ産生菌）が最大の原因。"
+                     "アルカリ尿、高ミネラル食、飲水量不足も寄与。",
+        "treatment_ja": "内科的溶解が可能（犬のストラバイト結石の大きな利点）。"
+                        "(1)適切な抗菌薬で尿路感染を治療（培養感受性試験に基づく）、"
+                        "(2)溶解食（Hill's s/d, Royal Canin S/O等）→2〜4週間で溶解開始、"
+                        "(3)溶解確認まで月1回のX線/超音波モニタリング、"
+                        "(4)結石消失後も2〜4週間の溶解食継続を推奨。"
+                        "大結石・尿道閉塞時は外科的摘出（膀胱切開術）。",
+        "prognosis_ja": "溶解食＋感染治療で良好。再発予防の鍵は尿路感染の管理。"
+                        "適切な管理で再発率を低く抑えられる。",
+        "prevention_ja": "尿路感染の早期発見・治療。療法食（維持食）。"
+                         "十分な飲水量。定期的な尿培養検査。",
+        "urgency": "normal",
+    },
+    {
+        "name": "Calcium Oxalate Urolithiasis",
+        "name_ja": "シュウ酸カルシウム尿石症",
+        "symptoms": {"straining_urinate", "blood_urine",
+                      "excessive_urination", "pain_on_touch"},
+        "description": "Calcium oxalate stone formation in the urinary tract, "
+                       "the most common stone type in certain breeds.",
+        "description_ja": "シュウ酸カルシウム結石は内科的溶解が不可能で、外科的摘出が必要。"
+                          "ミニチュアシュナウザー、ヨークシャーテリア、シーズー、"
+                          "ビション・フリーゼ、ポメラニアンに好発。中高齢の雄犬に多い。",
+        "pathophysiology_ja": "高カルシウム尿症・高シュウ酸尿症→尿中でシュウ酸カルシウムが過飽和→"
+                              "結晶核形成→結石成長。酸性尿でより形成されやすい。"
+                              "副甲状腺機能亢進症、高カルシウム血症も原因となりうる。",
+        "causes_ja": "高カルシウム食・高シュウ酸食（ほうれん草等）、代謝性アシドーシス、"
+                     "副甲状腺機能亢進症、特発性高カルシウム尿症、遺伝的素因。"
+                     "尿酸性化食の過剰使用も原因。",
+        "treatment_ja": "内科的溶解不可→外科的摘出が標準治療。"
+                        "(1)膀胱切開術で結石摘出、(2)術後結石分析で確定診断、"
+                        "(3)再発予防食（Hill's u/d, Royal Canin U/C等）、"
+                        "(4)クエン酸カリウム（75mg/kg BID）で尿アルカリ化、"
+                        "(5)ヒドロクロロチアジド（2〜4mg/kg BID）で尿中Ca排泄低減、"
+                        "(6)3〜6ヶ月毎のX線/超音波モニタリング。",
+        "prognosis_ja": "外科的摘出後の短期予後は良好。再発率が高い（3年以内に30〜50%）。"
+                        "生涯にわたる食事管理とモニタリングが必要。",
+        "prevention_ja": "療法食（中程度タンパク、低シュウ酸、低ナトリウム）。"
+                         "十分な飲水量。尿アルカリ化。定期的な画像検査。",
+        "urgency": "normal",
+    },
+    {
+        "name": "Urate Urolithiasis",
+        "name_ja": "尿酸アンモニウム尿石症",
+        "symptoms": {"straining_urinate", "blood_urine",
+                      "excessive_urination", "pain_on_touch"},
+        "description": "Ammonium urate stone formation, common in Dalmatians "
+                       "and dogs with portosystemic shunts.",
+        "description_ja": "尿酸アンモニウム結石。ダルメシアン（尿酸代謝の遺伝的特異性）と"
+                          "門脈体循環シャントを有する犬に好発。"
+                          "ダルメシアンでは品種の100%が高尿酸尿症を示す。",
+        "pathophysiology_ja": "ダルメシアン：SLC2A9遺伝子変異→肝臓での尿酸→アラントインへの変換障害"
+                              "＋腎尿細管での尿酸再吸収障害→高尿酸尿症→尿酸結石形成。"
+                              "門脈シャント犬：肝臓での尿酸代謝低下＋高アンモニア血症→"
+                              "尿酸アンモニウム結石形成。",
+        "causes_ja": "ダルメシアン（SLC2A9変異、品種特異的）、門脈体循環シャント、"
+                     "高プリン食（内臓肉等）。イングリッシュブルドッグ、"
+                     "ロシアンブラックテリアでも報告あり。",
+        "treatment_ja": "内科的溶解が可能な場合あり。"
+                        "(1)低プリン食（Hill's u/d等）、(2)アロプリノール（10〜15mg/kg BID）"
+                        "→キサンチンオキシダーゼ阻害で尿酸産生抑制、"
+                        "(3)尿アルカリ化（クエン酸カリウム）、(4)十分な飲水。"
+                        "門脈シャント犬：シャント結紮術が根本治療。"
+                        "大結石は外科的摘出。",
+        "prognosis_ja": "アロプリノール＋低プリン食で良好に管理可能。"
+                        "門脈シャントの外科的修正後は結石形成リスク低下。"
+                        "ダルメシアンでは生涯管理が必要。",
+        "prevention_ja": "低プリン食、十分な飲水、アロプリノール予防投与（ダルメシアン）。"
+                         "門脈シャント犬はシャント結紮後も定期モニタリング。",
         "urgency": "normal",
     },
     {
@@ -2288,10 +2389,28 @@ _DISEASE_DB: list[dict[str, Any]] = [
     {
         "name": "Cystinuria",
         "name_ja": "シスチン尿症",
-        "symptoms": {"straining_urinate", "blood_urine", "pain_on_touch"},
+        "symptoms": {"straining_urinate", "blood_urine", "pain_on_touch",
+                      "excessive_urination"},
         "description": "A hereditary condition causing cystine stones in the "
                        "urinary tract, common in certain breeds.",
-        "description_ja": "遺伝的に尿路にシスチン結石を形成する疾患で、特定犬種に多いです。",
+        "description_ja": "腎尿細管でのシスチン再吸収障害による遺伝性疾患。"
+                          "尿中シスチン濃度上昇→シスチン結石形成。"
+                          "ニューファンドランド、イングリッシュブルドッグ、ダックスフンド、"
+                          "マスティフ、バセットハウンドに好発。雄に多い。",
+        "pathophysiology_ja": "腎近位尿細管のアミノ酸トランスポーター（SLC3A1/SLC7A9）の遺伝子変異→"
+                              "シスチン再吸収障害→尿中シスチン過排泄→酸性尿中でシスチン結晶化→結石形成。"
+                              "シスチンは全アミノ酸中で最も溶解度が低い。",
+        "causes_ja": "常染色体劣性遺伝（Type I：ニューファンドランド等）、"
+                     "常染色体優性遺伝（Type II-A/B：ミニチュアピンシャー等）。"
+                     "SLC3A1またはSLC7A9遺伝子変異が原因。",
+        "treatment_ja": "尿アルカリ化（クエン酸カリウム 75mg/kg BID）→シスチン溶解度上昇。"
+                        "チオプロニン（2-MPG、15〜20mg/kg BID）→シスチンをより可溶性の化合物に変換。"
+                        "低タンパク食＋十分な飲水。大結石は外科的摘出（膀胱切開術）。"
+                        "尿道閉塞時は緊急カテーテル処置。",
+        "prognosis_ja": "生涯にわたる管理が必要。チオプロニン投与で再発率を大幅に低減可能。"
+                        "遺伝子検査で繁殖管理が推奨される。",
+        "prevention_ja": "遺伝子検査による繁殖管理。低タンパク食、十分な飲水、尿アルカリ化。"
+                         "定期的な尿検査・画像検査でモニタリング。",
         "urgency": "normal",
     },
     # ---- Tumors / Oncology ----
