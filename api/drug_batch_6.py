@@ -1031,3 +1031,91 @@ SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {
         },
     },
 }
+
+# ---------------------------------------------------------------------------
+# Drug interaction patches for existing drugs (batch 6)
+# ---------------------------------------------------------------------------
+DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
+    "enrofloxacin": [
+        {"drug": "theophylline", "effect": "Inhibits theophylline metabolism; risk of toxicity", "effect_ja": "テオフィリン代謝阻害。中毒リスク"},
+        {"drug": "NSAIDs", "effect": "Increased seizure risk", "effect_ja": "痙攣リスク増加"},
+        {"drug": "sucralfate", "effect": "Reduced absorption if given concurrently; separate by 2h", "effect_ja": "同時投与で吸収低下。2時間間隔を空ける"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+    ],
+    "metronidazole": [
+        {"drug": "phenobarbital", "effect": "Increased metronidazole clearance", "effect_ja": "メトロニダゾールのクリアランス増加"},
+        {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+    ],
+    "doxycycline": [
+        {"drug": "antacids/sucralfate", "effect": "Chelation reduces absorption; separate by 2-3h", "effect_ja": "キレート化で吸収低下。2-3時間間隔を空ける"},
+        {"drug": "phenobarbital", "effect": "Decreased doxycycline half-life", "effect_ja": "ドキシサイクリン半減期短縮"},
+        {"drug": "methotrexate", "effect": "Increased methotrexate toxicity", "effect_ja": "メトトレキサート毒性増加"},
+    ],
+    "itraconazole": [
+        {"drug": "cyclosporine", "effect": "Markedly increases cyclosporine levels; reduce dose by 50%", "effect_ja": "シクロスポリン濃度を著明に上昇。用量50%減量"},
+        {"drug": "midazolam/diazepam", "effect": "Prolonged sedation via CYP3A4 inhibition", "effect_ja": "CYP3A4阻害で鎮静延長"},
+        {"drug": "antacids/H2 blockers", "effect": "Reduced absorption (needs acidic pH)", "effect_ja": "吸収低下（酸性pHが必要）"},
+        {"drug": "ivermectin", "effect": "Increased ivermectin levels; neurotoxicity risk", "effect_ja": "イベルメクチン濃度上昇。神経毒性リスク"},
+    ],
+    "ketoconazole": [
+        {"drug": "cyclosporine", "effect": "Increases cyclosporine levels (used therapeutically to reduce dose)", "effect_ja": "シクロスポリン濃度上昇（用量削減目的で治療的併用あり）"},
+        {"drug": "antacids/H2 blockers", "effect": "Reduced absorption (needs acidic pH)", "effect_ja": "吸収低下（酸性pHが必要）"},
+        {"drug": "ivermectin", "effect": "Increased ivermectin levels via P-gp inhibition", "effect_ja": "P-gp阻害でイベルメクチン濃度上昇"},
+    ],
+    "fluconazole": [
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+        {"drug": "phenobarbital", "effect": "Decreased fluconazole efficacy", "effect_ja": "フルコナゾール有効性低下"},
+        {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
+    ],
+    "gentamicin": [
+        {"drug": "furosemide", "effect": "Synergistic nephro/ototoxicity", "effect_ja": "腎毒性・耳毒性の相乗作用"},
+        {"drug": "amphotericin_b", "effect": "Additive nephrotoxicity", "effect_ja": "腎毒性の相加作用"},
+        {"drug": "neuromuscular blockers", "effect": "Potentiated neuromuscular blockade", "effect_ja": "神経筋遮断の増強"},
+        {"drug": "NSAIDs", "effect": "Increased nephrotoxicity risk", "effect_ja": "腎毒性リスク増加"},
+    ],
+    "chloramphenicol": [
+        {"drug": "phenobarbital", "effect": "Mutual interaction: chloramphenicol increases phenobarbital levels; phenobarbital decreases chloramphenicol levels", "effect_ja": "相互作用: クロラムフェニコールがフェノバルビタール濃度を上昇、フェノバルビタールがクロラムフェニコール濃度を低下"},
+        {"drug": "cyclophosphamide", "effect": "Delayed metabolism of cyclophosphamide", "effect_ja": "シクロホスファミドの代謝遅延"},
+    ],
+    "meloxicam": [
+        {"drug": "other NSAIDs", "effect": "Increased GI ulceration risk; never combine", "effect_ja": "消化管潰瘍リスク増加。絶対に併用しない"},
+        {"drug": "corticosteroids", "effect": "Markedly increased GI ulceration risk", "effect_ja": "消化管潰瘍リスクが著明に増加"},
+        {"drug": "furosemide", "effect": "Reduced diuretic efficacy; nephrotoxicity risk", "effect_ja": "利尿効果低下。腎毒性リスク"},
+        {"drug": "ACE inhibitors", "effect": "Reduced antihypertensive effect; renal risk", "effect_ja": "降圧効果低下。腎リスク"},
+    ],
+    "gabapentin": [
+        {"drug": "opioids", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
+        {"drug": "antacids", "effect": "Reduced gabapentin absorption by 20%", "effect_ja": "ガバペンチン吸収約20%低下"},
+    ],
+    "tramadol": [
+        {"drug": "SSRIs/MAOIs", "effect": "Serotonin syndrome risk", "effect_ja": "セロトニン症候群リスク"},
+        {"drug": "other opioids", "effect": "Additive CNS depression", "effect_ja": "中枢抑制の相加作用"},
+        {"drug": "ondansetron", "effect": "May reduce tramadol analgesic efficacy", "effect_ja": "トラマドール鎮痛効果低下の可能性"},
+    ],
+    "phenobarbital": [
+        {"drug": "chloramphenicol", "effect": "Increased phenobarbital levels", "effect_ja": "フェノバルビタール濃度上昇"},
+        {"drug": "doxycycline", "effect": "Decreased doxycycline half-life", "effect_ja": "ドキシサイクリン半減期短縮"},
+        {"drug": "cyclosporine", "effect": "Decreased cyclosporine levels", "effect_ja": "シクロスポリン濃度低下"},
+        {"drug": "corticosteroids", "effect": "Increased steroid metabolism", "effect_ja": "ステロイド代謝促進"},
+        {"drug": "metronidazole", "effect": "Increased metronidazole clearance", "effect_ja": "メトロニダゾールクリアランス増加"},
+    ],
+    "cyclosporine": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Markedly increases cyclosporine levels (used therapeutically)", "effect_ja": "シクロスポリン濃度を著明に上昇（治療的に利用）"},
+        {"drug": "phenobarbital", "effect": "Decreased cyclosporine levels", "effect_ja": "シクロスポリン濃度低下"},
+        {"drug": "NSAIDs", "effect": "Additive nephrotoxicity", "effect_ja": "腎毒性の相加作用"},
+        {"drug": "metoclopramide", "effect": "Increased cyclosporine absorption", "effect_ja": "シクロスポリン吸収増加"},
+    ],
+    "furosemide": [
+        {"drug": "aminoglycosides", "effect": "Synergistic ototoxicity and nephrotoxicity", "effect_ja": "耳毒性・腎毒性の相乗作用"},
+        {"drug": "ACE inhibitors", "effect": "Risk of hypotension; start ACEi at low dose", "effect_ja": "低血圧リスク。ACE阻害薬は低用量から開始"},
+        {"drug": "NSAIDs", "effect": "Reduced diuretic efficacy", "effect_ja": "利尿効果の低下"},
+        {"drug": "digoxin", "effect": "Hypokalemia potentiates digoxin toxicity", "effect_ja": "低カリウム血症でジゴキシン毒性増強"},
+    ],
+    "digoxin": [
+        {"drug": "furosemide", "effect": "Hypokalemia increases digoxin toxicity risk", "effect_ja": "低カリウム血症でジゴキシン毒性リスク増加"},
+        {"drug": "metoclopramide", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
+        {"drug": "amiodarone", "effect": "Doubled digoxin levels; reduce digoxin dose by 50%", "effect_ja": "ジゴキシン濃度が2倍に。ジゴキシン用量50%減量"},
+        {"drug": "verapamil/diltiazem", "effect": "Increased digoxin levels and additive bradycardia", "effect_ja": "ジゴキシン濃度上昇と徐脈の相加作用"},
+    ],
+}
