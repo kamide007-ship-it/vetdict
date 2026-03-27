@@ -1436,4 +1436,53 @@ DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
         {"drug": "potassium-sparing diuretics", "effect": "Risk of hyperkalemia", "effect_ja": "高カリウム血症リスク"},
         {"drug": "furosemide", "effect": "First-dose hypotension; start ACEi low", "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始"},
     ],
+    "amoxicillin": [
+        {"drug": "methotrexate", "effect": "Reduced methotrexate clearance; toxicity risk", "effect_ja": "メトトレキサートクリアランス低下。毒性リスク"},
+        {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
+    ],
+    "amoxicillin_clavulanate": [
+        {"drug": "methotrexate", "effect": "Reduced methotrexate clearance; toxicity risk", "effect_ja": "メトトレキサートクリアランス低下。毒性リスク"},
+        {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
+    ],
+    "trimethoprim_sulfa": [
+        {"drug": "ACE inhibitors", "effect": "Risk of hyperkalemia (trimethoprim acts like K-sparing diuretic)", "effect_ja": "高カリウム血症リスク（トリメトプリムがK保持性利尿薬様に作用）"},
+        {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
+        {"drug": "methotrexate", "effect": "Additive folate antagonism; increased toxicity", "effect_ja": "葉酸拮抗の相加作用。毒性増加"},
+        {"drug": "phenytoin", "effect": "Increased phenytoin levels", "effect_ja": "フェニトイン濃度上昇"},
+    ],
+    "ondansetron": [
+        {"drug": "tramadol", "effect": "May reduce tramadol analgesic efficacy", "effect_ja": "トラマドール鎮痛効果低下の可能性"},
+        {"drug": "apomorphine", "effect": "Blocks emetic effect of apomorphine", "effect_ja": "アポモルフィンの催吐効果を遮断"},
+        {"drug": "QT-prolonging drugs", "effect": "Additive QT prolongation risk", "effect_ja": "QT延長リスクの相加作用"},
+    ],
+    "famotidine": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Reduced azole absorption (need acidic pH)", "effect_ja": "アゾール系吸収低下（酸性pHが必要）"},
+        {"drug": "sucralfate", "effect": "Reduced famotidine absorption; separate by 2h", "effect_ja": "ファモチジン吸収低下。2時間間隔を空ける"},
+    ],
+    "mannitol": [
+        {"drug": "furosemide", "effect": "Additive diuresis; risk of dehydration/electrolyte imbalance", "effect_ja": "利尿の相加作用。脱水/電解質異常のリスク"},
+        {"drug": "lithium", "effect": "Increased lithium clearance", "effect_ja": "リチウムクリアランス増加"},
+    ],
+    "levetiracetam": [
+        {"drug": "phenobarbital", "effect": "Commonly combined; may slightly increase clearance", "effect_ja": "頻繁に併用。クリアランスがやや増加する可能性"},
+        {"drug": "potassium_bromide", "effect": "Can be combined safely for multi-drug seizure control", "effect_ja": "多剤てんかん管理で安全に併用可能"},
+    ],
+    "sildenafil": [
+        {"drug": "nitrates", "effect": "Severe life-threatening hypotension; absolutely contraindicated", "effect_ja": "重度の生命を脅かす低血圧。絶対禁忌"},
+        {"drug": "alpha-blockers", "effect": "Additive hypotension", "effect_ja": "低血圧の相加作用"},
+        {"drug": "bosentan", "effect": "Bosentan reduces sildenafil levels; may combine with dose adjustment", "effect_ja": "ボセンタンがシルデナフィル濃度を低下。用量調整で併用可"},
+    ],
+    "clopidogrel": [
+        {"drug": "omeprazole", "effect": "May reduce clopidogrel activation; use famotidine instead", "effect_ja": "クロピドグレル活性化低下の可能性。ファモチジンを代わりに使用"},
+        {"drug": "NSAIDs", "effect": "Increased bleeding risk", "effect_ja": "出血リスク増加"},
+        {"drug": "aspirin", "effect": "Additive antiplatelet effect (sometimes used together for ATE in cats)", "effect_ja": "抗血小板作用の相加（猫のATEで併用されることあり）"},
+    ],
+    "ampicillin": [
+        {"drug": "aminoglycosides", "effect": "Synergistic antibacterial effect but do not mix in same syringe (inactivation)", "effect_ja": "抗菌作用の相乗効果だが同一シリンジで混合不可（失活）"},
+        {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
+    ],
+    "lactulose": [
+        {"drug": "antacids", "effect": "May reduce lactulose efficacy by altering colonic pH", "effect_ja": "結腸pHの変化でラクツロース有効性低下の可能性"},
+        {"drug": "neomycin", "effect": "May reduce lactulose efficacy (kills bacteria needed for metabolism)", "effect_ja": "代謝に必要な細菌を殺すためラクツロース有効性低下の可能性"},
+    ],
 }
