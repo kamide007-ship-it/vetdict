@@ -586,6 +586,254 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Pregnancy (teratogenic). Moderate-severe hepatic impairment. Concurrent cyclosporine or glyburide.",
         "contraindications_ja": "妊娠（催奇形性）。中等度-重度の肝障害。シクロスポリンまたはグリベンクラミドとの併用。",
     },
+    # ------------------------------------------------------------------
+    # Xylazine – α2 agonist sedative/analgesic
+    # ------------------------------------------------------------------
+    {
+        "id": "xylazine",
+        "name": "Xylazine (Rompun/Sedazine)",
+        "name_ja": "キシラジン（ロンプン/セダジン）",
+        "category": "sedatives",
+        "mechanism": "Alpha-2 adrenergic agonist. Provides dose-dependent sedation, analgesia, and muscle relaxation. Also causes bradycardia, respiratory depression, and transient hyperglycemia.",
+        "mechanism_ja": "α2アドレナリン作動薬。用量依存的に鎮静・鎮痛・筋弛緩作用。徐脈、呼吸抑制、一過性高血糖も引き起こす。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "Sedation: 0.5-1.1 mg/kg IV (or 1-2 mg/kg IM); Standing sedation: 0.3-0.5 mg/kg IV",
+                "dosage_ja": "鎮静: 0.5-1.1 mg/kg 静注（または1-2 mg/kg 筋注）；立位鎮静: 0.3-0.5 mg/kg 静注",
+                "notes": "Standard equine sedative. Often combined with butorphanol for enhanced sedation/analgesia. Reversal: yohimbine or atipamezole. Onset IV: 3-5 min",
+                "notes_ja": "馬の標準的鎮静薬。ブトルファノールと併用で鎮静・鎮痛増強。拮抗: ヨヒンビンまたはアチパメゾール。静注効果発現: 3-5分",
+            },
+            "dog": {
+                "safe": True,
+                "dosage": "0.5-1.1 mg/kg IV/IM",
+                "dosage_ja": "0.5-1.1 mg/kg 静注/筋注",
+                "notes": "Less commonly used in dogs vs dexmedetomidine; causes vomiting (useful for emesis induction). Bradycardia expected",
+                "notes_ja": "犬ではデクスメデトミジンより使用頻度低い。催吐作用あり（催吐に利用可能）。徐脈は予期される反応",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "0.5-1.1 mg/kg IM",
+                "dosage_ja": "0.5-1.1 mg/kg 筋注",
+                "notes": "Effective emetic in cats; also sedation. Profound bradycardia possible",
+                "notes_ja": "猫で有効な催吐薬。鎮静にも。高度徐脈の可能性あり",
+            },
+            "rabbit": {
+                "safe": True,
+                "dosage": "1-5 mg/kg IM (usually combined with ketamine)",
+                "dosage_ja": "1-5 mg/kg 筋注（通常ケタミンと併用）",
+                "notes": "Part of ketamine-xylazine protocol; monitor respiratory depression closely",
+                "notes_ja": "ケタミン-キシラジンプロトコルの一部。呼吸抑制を厳密にモニター",
+            },
+        },
+        "side_effects": ["bradycardia", "respiratory depression", "hyperglycemia", "vomiting (dogs/cats)", "bloat (horses)", "muscle tremors"],
+        "side_effects_ja": ["徐脈", "呼吸抑制", "高血糖", "嘔吐（犬/猫）", "鼓脹（馬）", "筋振戦"],
+        "contraindications": "Severe cardiac disease. Last trimester of pregnancy (oxytocic effect). GI obstruction (vomiting risk). Do not use IV in cats.",
+        "contraindications_ja": "重度の心疾患。妊娠末期（子宮収縮作用）。消化管閉塞（嘔吐リスク）。猫に静注不可。",
+    },
+    # ------------------------------------------------------------------
+    # Detomidine – α2 agonist (primarily equine)
+    # ------------------------------------------------------------------
+    {
+        "id": "detomidine",
+        "name": "Detomidine (Dormosedan)",
+        "name_ja": "デトミジン（ドルモセダン）",
+        "category": "sedatives",
+        "mechanism": "Potent alpha-2 adrenergic agonist with higher α2 selectivity than xylazine. Provides profound sedation and visceral analgesia. Available as injectable and oral transmucosal gel (Dormosedan Gel).",
+        "mechanism_ja": "キシラジンよりα2選択性が高い強力なα2アドレナリン作動薬。深い鎮静と内臓鎮痛作用。注射剤および口腔粘膜ジェル（ドルモセダンジェル）がある。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "IV: 10-40 µg/kg; IM: 20-80 µg/kg; OTM gel: 40 µg/kg sublingual",
+                "dosage_ja": "静注: 10-40 µg/kg；筋注: 20-80 µg/kg；口腔ジェル: 40 µg/kg 舌下",
+                "notes": "Gold standard equine sedative. More potent and longer-lasting than xylazine. OTM gel for non-injectable sedation (farrier, clipping). Combine with butorphanol for procedures",
+                "notes_ja": "馬鎮静のゴールドスタンダード。キシラジンより強力で長時間。OTMジェルで非注射鎮静（装蹄、クリッピング）。処置にはブトルファノール併用",
+            },
+            "dog": {
+                "safe": True,
+                "dosage": "10-30 µg/kg IV/IM",
+                "dosage_ja": "10-30 µg/kg 静注/筋注",
+                "notes": "Rarely used in dogs; dexmedetomidine preferred. Research setting mainly",
+                "notes_ja": "犬では殆ど使用しない。デクスメデトミジンが推奨。主に研究用途",
+            },
+        },
+        "side_effects": ["bradycardia", "AV block", "respiratory depression", "sweating (horses)", "ataxia", "penile prolapse (horses)"],
+        "side_effects_ja": ["徐脈", "房室ブロック", "呼吸抑制", "発汗（馬）", "運動失調", "陰茎脱出（馬）"],
+        "contraindications": "Severe cardiac disease. Last trimester pregnancy. Not for food-producing horses in some jurisdictions. Reversal: atipamezole.",
+        "contraindications_ja": "重度の心疾患。妊娠末期。一部法域で食用馬には使用不可。拮抗: アチパメゾール。",
+    },
+    # ------------------------------------------------------------------
+    # Romifidine – α2 agonist (equine)
+    # ------------------------------------------------------------------
+    {
+        "id": "romifidine",
+        "name": "Romifidine (Sedivet)",
+        "name_ja": "ロミフィジン（セディベット）",
+        "category": "sedatives",
+        "mechanism": "Alpha-2 adrenergic agonist with highest α2:α1 selectivity ratio among equine sedatives. Provides reliable standing sedation with less ataxia than xylazine or detomidine.",
+        "mechanism_ja": "馬用鎮静薬の中で最もα2:α1選択性比が高いα2アドレナリン作動薬。キシラジンやデトミジンより運動失調が少なく、安定した立位鎮静を提供。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "40-120 µg/kg IV",
+                "dosage_ja": "40-120 µg/kg 静注",
+                "notes": "Best standing sedation with minimal ataxia. Longer onset (5-10 min) but longer duration than xylazine. Often combined with butorphanol",
+                "notes_ja": "最小限の運動失調で最良の立位鎮静。効果発現はやや遅い（5-10分）がキシラジンより長時間。ブトルファノールと併用が多い",
+            },
+        },
+        "side_effects": ["bradycardia", "AV block", "reduced GI motility", "mild ataxia", "sweating"],
+        "side_effects_ja": ["徐脈", "房室ブロック", "消化管運動低下", "軽度運動失調", "発汗"],
+        "contraindications": "Severe cardiac disease. Pre-existing bradycardia/AV block. Last trimester pregnancy.",
+        "contraindications_ja": "重度の心疾患。既存の徐脈/房室ブロック。妊娠末期。",
+    },
+    # ------------------------------------------------------------------
+    # Clenbuterol – β2 agonist bronchodilator (equine)
+    # ------------------------------------------------------------------
+    {
+        "id": "clenbuterol",
+        "name": "Clenbuterol (Ventipulmin)",
+        "name_ja": "クレンブテロール（ベンティプルミン）",
+        "category": "bronchodilators",
+        "mechanism": "Selective beta-2 adrenergic agonist. Relaxes bronchial smooth muscle causing bronchodilation. Also has mucolytic properties. Long half-life in horses.",
+        "mechanism_ja": "選択的β2アドレナリン作動薬。気管支平滑筋を弛緩し気管支拡張。粘液溶解作用もあり。馬で長い半減期。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "0.8-3.2 µg/kg PO q12h (start low, titrate up over 3 days)",
+                "dosage_ja": "0.8-3.2 µg/kg 経口 12時間毎（低用量から3日かけて漸増）",
+                "notes": "FDA-approved for horses (Ventipulmin syrup). For RAO/heaves and IAD. Taper down when discontinuing to prevent rebound bronchoconstriction. Withdrawal time applies for competition horses",
+                "notes_ja": "馬にFDA承認（ベンティプルミンシロップ）。RAO/喘鳴・IADに。中止時は漸減（リバウンド気管支収縮予防）。競走馬は休薬期間あり",
+            },
+        },
+        "side_effects": ["tachycardia", "sweating", "muscle tremors", "restlessness", "decreased appetite (initial)"],
+        "side_effects_ja": ["頻脈", "発汗", "筋振戦", "不穏", "食欲低下（初期）"],
+        "contraindications": "Cardiac arrhythmias. Concurrent β-blocker use (antagonism). Not approved for food animals in many countries.",
+        "contraindications_ja": "心不整脈。β遮断薬との併用（拮抗）。多くの国で食用動物には未承認。",
+    },
+    # ------------------------------------------------------------------
+    # Famciclovir – antiviral (feline herpesvirus)
+    # ------------------------------------------------------------------
+    {
+        "id": "famciclovir",
+        "name": "Famciclovir (Famvir)",
+        "name_ja": "ファムシクロビル（ファムビル）",
+        "category": "antibiotics",
+        "mechanism": "Prodrug of penciclovir; converted to penciclovir triphosphate which inhibits viral DNA polymerase. Active against feline herpesvirus-1 (FHV-1). Oral bioavailability is superior to acyclovir in cats.",
+        "mechanism_ja": "ペンシクロビルのプロドラッグ。ペンシクロビル三リン酸に変換されウイルスDNAポリメラーゼを阻害。猫ヘルペスウイルス1型（FHV-1）に有効。猫ではアシクロビルより経口バイオアベイラビリティが優れる。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "40-90 mg/kg PO q8-12h",
+                "dosage_ja": "40-90 mg/kg 経口 8-12時間毎",
+                "notes": "First-line antiviral for FHV-1 (rhinotracheitis, keratitis, dermatitis). High doses needed due to cat metabolism. 90 mg/kg q8h for severe cases. Safe long-term",
+                "notes_ja": "FHV-1（鼻気管炎、角膜炎、皮膚炎）の第一選択抗ウイルス薬。猫の代謝のため高用量が必要。重症例は90 mg/kg 8時間毎。長期使用安全",
+            },
+        },
+        "side_effects": ["rare GI upset", "mild elevation of liver enzymes (rare)"],
+        "side_effects_ja": ["稀に消化器症状", "軽度肝酵素上昇（稀）"],
+        "contraindications": "Severe renal impairment (dose adjustment needed). Not effective against calicivirus.",
+        "contraindications_ja": "重度腎障害（用量調整必要）。カリシウイルスには無効。",
+    },
+    # ------------------------------------------------------------------
+    # L-Lysine – supplement (feline herpesvirus)
+    # ------------------------------------------------------------------
+    {
+        "id": "lysine",
+        "name": "L-Lysine",
+        "name_ja": "L-リジン",
+        "category": "supplements",
+        "mechanism": "Essential amino acid that may antagonize arginine, theoretically reducing herpesvirus replication. Widely used as FHV-1 supplement, though recent evidence questions efficacy.",
+        "mechanism_ja": "必須アミノ酸でアルギニンに拮抗し、理論的にヘルペスウイルス複製を減少。FHV-1サプリメントとして広く使用されるが、近年のエビデンスでは有効性に疑問。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "250-500 mg/cat PO q12-24h",
+                "dosage_ja": "250-500 mg/匹 経口 12-24時間毎",
+                "notes": "Widely used for FHV-1 but 2015 ABCD and recent meta-analyses found insufficient evidence of efficacy. Low risk, may have placebo value. Not a substitute for famciclovir in severe cases",
+                "notes_ja": "FHV-1に広く使用されるが、2015年ABCDおよび最近のメタアナリシスで有効性のエビデンス不十分。リスクは低い。重症例ではファムシクロビルの代替にならない",
+            },
+        },
+        "side_effects": ["rare GI upset"],
+        "side_effects_ja": ["稀に消化器症状"],
+        "contraindications": "None significant.",
+        "contraindications_ja": "特になし。",
+    },
+    # ------------------------------------------------------------------
+    # Interferon omega – antiviral/immunomodulator
+    # ------------------------------------------------------------------
+    {
+        "id": "interferon_omega",
+        "name": "Feline Interferon Omega (Virbagen Omega)",
+        "name_ja": "猫インターフェロンオメガ（インターキャット/ビルバゲンオメガ）",
+        "category": "immunosuppressives",
+        "mechanism": "Recombinant feline interferon omega (rFeIFN-ω). Antiviral and immunomodulatory. Binds cell surface receptors to induce antiviral state. Licensed in EU/Japan for canine parvovirus and feline retroviral infections.",
+        "mechanism_ja": "組換え猫インターフェロンオメガ（rFeIFN-ω）。抗ウイルス・免疫調節作用。細胞表面受容体に結合し抗ウイルス状態を誘導。EU/日本で犬パルボウイルスおよび猫レトロウイルス感染に承認。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "FeLV/FIV: 1 MU/kg SC q48h x 3 doses, 3 cycles (weeks 0, 2, 8); Stomatitis: 0.1 MU oral daily",
+                "dosage_ja": "FeLV/FIV: 1 MU/kg 皮下 48時間毎×3回、3サイクル（0,2,8週）；口内炎: 0.1 MU 経口 毎日",
+                "notes": "For FeLV/FIV (improves clinical signs, not curative), chronic gingivostomatitis (oral mucosal application). Licensed in Japan (インターキャット)",
+                "notes_ja": "FeLV/FIV（臨床症状改善、治癒ではない）、慢性歯肉口内炎（口腔粘膜塗布）に。日本で承認（インターキャット）",
+            },
+            "dog": {
+                "safe": True,
+                "dosage": "Parvovirus: 2.5 MU/kg IV q24h x 3 days (start as early as possible)",
+                "dosage_ja": "パルボウイルス: 2.5 MU/kg 静注 24時間毎×3日（できるだけ早期に開始）",
+                "notes": "Licensed for canine parvovirus in EU/Japan. Most effective when started within 3 days of symptom onset. Reduces mortality in clinical trials",
+                "notes_ja": "EU/日本で犬パルボウイルスに承認。症状発現3日以内の開始が最も有効。臨床試験で死亡率低下",
+            },
+        },
+        "side_effects": ["transient hyperthermia", "lethargy", "vomiting (rare)", "mild transient leukopenia"],
+        "side_effects_ja": ["一過性発熱", "倦怠感", "嘔吐（稀）", "軽度一過性白血球減少"],
+        "contraindications": "Hypersensitivity to feline interferon. Not for use in pregnancy.",
+        "contraindications_ja": "猫インターフェロン過敏症。妊娠中は使用不可。",
+    },
+    # ------------------------------------------------------------------
+    # Methylprednisolone – corticosteroid
+    # ------------------------------------------------------------------
+    {
+        "id": "methylprednisolone",
+        "name": "Methylprednisolone (Depo-Medrol/Medrol)",
+        "name_ja": "メチルプレドニゾロン（デポメドロール/メドロール）",
+        "category": "corticosteroids",
+        "mechanism": "Intermediate-acting synthetic glucocorticoid with minimal mineralocorticoid activity. Available as oral tablets (Medrol) and injectable depot (Depo-Medrol, methylprednisolone acetate). 5x potency of cortisol.",
+        "mechanism_ja": "ミネラルコルチコイド活性が少ない中間型合成グルココルチコイド。経口錠（メドロール）と注射用デポ剤（デポメドロール、酢酸メチルプレドニゾロン）がある。コルチゾールの5倍の力価。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Anti-inflammatory: 0.5-1 mg/kg PO q12-24h; Immunosuppressive: 2-4 mg/kg PO q12-24h; Depot IM: 1-2 mg/kg (duration 2-6 weeks)",
+                "dosage_ja": "抗炎症: 0.5-1 mg/kg 経口 12-24時間毎；免疫抑制: 2-4 mg/kg 経口 12-24時間毎；デポ筋注: 1-2 mg/kg（持続2-6週）",
+                "notes": "Oral for IMHA/IMTP/IBD; Depo-Medrol for allergic skin disease when compliance difficult. Taper slowly",
+                "notes_ja": "経口はIMHA/IMTP/IBDに。デポメドロールはコンプライアンス困難時のアレルギー性皮膚疾患に。ゆっくり漸減",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "Anti-inflammatory: 0.5-1 mg/kg PO q12-24h; Depot: 10-20 mg/cat IM/SC q2-6 weeks",
+                "dosage_ja": "抗炎症: 0.5-1 mg/kg 経口 12-24時間毎；デポ: 10-20 mg/匹 筋注/皮下 2-6週毎",
+                "notes": "Depo-Medrol widely used in Japan for feline asthma, eosinophilic granuloma, allergic dermatitis. Risk of diabetes with repeated depot injections",
+                "notes_ja": "デポメドロールは日本で猫喘息・好酸球性肉芽腫・アレルギー性皮膚炎に広く使用。デポ繰返し投与で糖尿病リスク",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "Intra-articular: 40-120 mg per joint; Systemic: 0.5-1 mg/kg IM",
+                "dosage_ja": "関節内: 40-120 mg/関節；全身: 0.5-1 mg/kg 筋注",
+                "notes": "Commonly used intra-articularly for OA. Withdrawal time for competition horses. Risk of laminitis with systemic use",
+                "notes_ja": "OAの関節内注射に頻用。競走馬は休薬期間あり。全身投与で蹄葉炎リスク",
+            },
+            "rabbit": {
+                "safe": True,
+                "dosage": "0.5-2 mg/kg IM/SC (depot)",
+                "dosage_ja": "0.5-2 mg/kg 筋注/皮下（デポ）",
+                "notes": "Use cautiously; rabbits susceptible to immunosuppression. Short-term only",
+                "notes_ja": "慎重に使用。ウサギは免疫抑制に感受性が高い。短期使用のみ",
+            },
+        },
+        "side_effects": ["PU/PD", "polyphagia", "iatrogenic Cushing's", "diabetes (cats)", "GI ulceration", "immunosuppression"],
+        "side_effects_ja": ["多飲多尿", "多食", "医原性クッシング症候群", "糖尿病（猫）", "消化管潰瘍", "免疫抑制"],
+        "contraindications": "Systemic fungal infections. Diabetes mellitus (relative). GI ulceration. Active infections without antibiotic coverage.",
+        "contraindications_ja": "全身性真菌感染症。糖尿病（相対的禁忌）。消化管潰瘍。抗菌薬カバーのない活動性感染症。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
@@ -738,6 +986,33 @@ SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {
             "notes_ja": "経口アンピシリンはウサギに絶対禁忌（致死的腸内細菌叢異常）。注射剤のみ",
         },
     },
+    # Marbofloxacin – add reptile, amphibian
+    "marbofloxacin": {
+        "reptile": {
+            "safe": True,
+            "dosage": "5-10 mg/kg PO/IM q24-48h",
+            "dosage_ja": "5-10 mg/kg 経口/筋注 24-48時間毎",
+            "notes": "Good gram-negative activity; adjust interval based on ambient temperature",
+            "notes_ja": "グラム陰性菌に良好な活性。環境温度に応じて投与間隔を調整",
+        },
+        "amphibian": {
+            "safe": True,
+            "dosage": "5 mg/kg PO/bath q24h",
+            "dosage_ja": "5 mg/kg 経口/薬浴 24時間毎",
+            "notes": "For bacterial dermatosepticemia; bath route may improve absorption in aquatic species",
+            "notes_ja": "細菌性皮膚敗血症に。水棲種では薬浴経路で吸収改善の可能性",
+        },
+    },
+    # Terbinafine – add reptile
+    "terbinafine": {
+        "reptile": {
+            "safe": True,
+            "dosage": "10-15 mg/kg PO q24h for 14-42 days",
+            "dosage_ja": "10-15 mg/kg 経口 24時間毎 14-42日間",
+            "notes": "For systemic mycoses (Chrysosporium/CANV); long treatment courses needed. Good shell/skin penetration",
+            "notes_ja": "全身性真菌症（Chrysosporium/CANV）に。長期治療が必要。甲羅/皮膚への移行良好",
+        },
+    },
     # Ketoconazole – add rabbit, guinea_pig
     "ketoconazole": {
         "rabbit": {
@@ -755,4 +1030,92 @@ SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {
             "notes_ja": "トリコフィトン白癬に。食事と投与で吸収向上",
         },
     },
+}
+
+# ---------------------------------------------------------------------------
+# Drug interaction patches for existing drugs (batch 6)
+# ---------------------------------------------------------------------------
+DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
+    "enrofloxacin": [
+        {"drug": "theophylline", "effect": "Inhibits theophylline metabolism; risk of toxicity", "effect_ja": "テオフィリン代謝阻害。中毒リスク"},
+        {"drug": "NSAIDs", "effect": "Increased seizure risk", "effect_ja": "痙攣リスク増加"},
+        {"drug": "sucralfate", "effect": "Reduced absorption if given concurrently; separate by 2h", "effect_ja": "同時投与で吸収低下。2時間間隔を空ける"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+    ],
+    "metronidazole": [
+        {"drug": "phenobarbital", "effect": "Increased metronidazole clearance", "effect_ja": "メトロニダゾールのクリアランス増加"},
+        {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+    ],
+    "doxycycline": [
+        {"drug": "antacids/sucralfate", "effect": "Chelation reduces absorption; separate by 2-3h", "effect_ja": "キレート化で吸収低下。2-3時間間隔を空ける"},
+        {"drug": "phenobarbital", "effect": "Decreased doxycycline half-life", "effect_ja": "ドキシサイクリン半減期短縮"},
+        {"drug": "methotrexate", "effect": "Increased methotrexate toxicity", "effect_ja": "メトトレキサート毒性増加"},
+    ],
+    "itraconazole": [
+        {"drug": "cyclosporine", "effect": "Markedly increases cyclosporine levels; reduce dose by 50%", "effect_ja": "シクロスポリン濃度を著明に上昇。用量50%減量"},
+        {"drug": "midazolam/diazepam", "effect": "Prolonged sedation via CYP3A4 inhibition", "effect_ja": "CYP3A4阻害で鎮静延長"},
+        {"drug": "antacids/H2 blockers", "effect": "Reduced absorption (needs acidic pH)", "effect_ja": "吸収低下（酸性pHが必要）"},
+        {"drug": "ivermectin", "effect": "Increased ivermectin levels; neurotoxicity risk", "effect_ja": "イベルメクチン濃度上昇。神経毒性リスク"},
+    ],
+    "ketoconazole": [
+        {"drug": "cyclosporine", "effect": "Increases cyclosporine levels (used therapeutically to reduce dose)", "effect_ja": "シクロスポリン濃度上昇（用量削減目的で治療的併用あり）"},
+        {"drug": "antacids/H2 blockers", "effect": "Reduced absorption (needs acidic pH)", "effect_ja": "吸収低下（酸性pHが必要）"},
+        {"drug": "ivermectin", "effect": "Increased ivermectin levels via P-gp inhibition", "effect_ja": "P-gp阻害でイベルメクチン濃度上昇"},
+    ],
+    "fluconazole": [
+        {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
+        {"drug": "phenobarbital", "effect": "Decreased fluconazole efficacy", "effect_ja": "フルコナゾール有効性低下"},
+        {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
+    ],
+    "gentamicin": [
+        {"drug": "furosemide", "effect": "Synergistic nephro/ototoxicity", "effect_ja": "腎毒性・耳毒性の相乗作用"},
+        {"drug": "amphotericin_b", "effect": "Additive nephrotoxicity", "effect_ja": "腎毒性の相加作用"},
+        {"drug": "neuromuscular blockers", "effect": "Potentiated neuromuscular blockade", "effect_ja": "神経筋遮断の増強"},
+        {"drug": "NSAIDs", "effect": "Increased nephrotoxicity risk", "effect_ja": "腎毒性リスク増加"},
+    ],
+    "chloramphenicol": [
+        {"drug": "phenobarbital", "effect": "Mutual interaction: chloramphenicol increases phenobarbital levels; phenobarbital decreases chloramphenicol levels", "effect_ja": "相互作用: クロラムフェニコールがフェノバルビタール濃度を上昇、フェノバルビタールがクロラムフェニコール濃度を低下"},
+        {"drug": "cyclophosphamide", "effect": "Delayed metabolism of cyclophosphamide", "effect_ja": "シクロホスファミドの代謝遅延"},
+    ],
+    "meloxicam": [
+        {"drug": "other NSAIDs", "effect": "Increased GI ulceration risk; never combine", "effect_ja": "消化管潰瘍リスク増加。絶対に併用しない"},
+        {"drug": "corticosteroids", "effect": "Markedly increased GI ulceration risk", "effect_ja": "消化管潰瘍リスクが著明に増加"},
+        {"drug": "furosemide", "effect": "Reduced diuretic efficacy; nephrotoxicity risk", "effect_ja": "利尿効果低下。腎毒性リスク"},
+        {"drug": "ACE inhibitors", "effect": "Reduced antihypertensive effect; renal risk", "effect_ja": "降圧効果低下。腎リスク"},
+    ],
+    "gabapentin": [
+        {"drug": "opioids", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
+        {"drug": "antacids", "effect": "Reduced gabapentin absorption by 20%", "effect_ja": "ガバペンチン吸収約20%低下"},
+    ],
+    "tramadol": [
+        {"drug": "SSRIs/MAOIs", "effect": "Serotonin syndrome risk", "effect_ja": "セロトニン症候群リスク"},
+        {"drug": "other opioids", "effect": "Additive CNS depression", "effect_ja": "中枢抑制の相加作用"},
+        {"drug": "ondansetron", "effect": "May reduce tramadol analgesic efficacy", "effect_ja": "トラマドール鎮痛効果低下の可能性"},
+    ],
+    "phenobarbital": [
+        {"drug": "chloramphenicol", "effect": "Increased phenobarbital levels", "effect_ja": "フェノバルビタール濃度上昇"},
+        {"drug": "doxycycline", "effect": "Decreased doxycycline half-life", "effect_ja": "ドキシサイクリン半減期短縮"},
+        {"drug": "cyclosporine", "effect": "Decreased cyclosporine levels", "effect_ja": "シクロスポリン濃度低下"},
+        {"drug": "corticosteroids", "effect": "Increased steroid metabolism", "effect_ja": "ステロイド代謝促進"},
+        {"drug": "metronidazole", "effect": "Increased metronidazole clearance", "effect_ja": "メトロニダゾールクリアランス増加"},
+    ],
+    "cyclosporine": [
+        {"drug": "ketoconazole/itraconazole", "effect": "Markedly increases cyclosporine levels (used therapeutically)", "effect_ja": "シクロスポリン濃度を著明に上昇（治療的に利用）"},
+        {"drug": "phenobarbital", "effect": "Decreased cyclosporine levels", "effect_ja": "シクロスポリン濃度低下"},
+        {"drug": "NSAIDs", "effect": "Additive nephrotoxicity", "effect_ja": "腎毒性の相加作用"},
+        {"drug": "metoclopramide", "effect": "Increased cyclosporine absorption", "effect_ja": "シクロスポリン吸収増加"},
+    ],
+    "furosemide": [
+        {"drug": "aminoglycosides", "effect": "Synergistic ototoxicity and nephrotoxicity", "effect_ja": "耳毒性・腎毒性の相乗作用"},
+        {"drug": "ACE inhibitors", "effect": "Risk of hypotension; start ACEi at low dose", "effect_ja": "低血圧リスク。ACE阻害薬は低用量から開始"},
+        {"drug": "NSAIDs", "effect": "Reduced diuretic efficacy", "effect_ja": "利尿効果の低下"},
+        {"drug": "digoxin", "effect": "Hypokalemia potentiates digoxin toxicity", "effect_ja": "低カリウム血症でジゴキシン毒性増強"},
+    ],
+    "digoxin": [
+        {"drug": "furosemide", "effect": "Hypokalemia increases digoxin toxicity risk", "effect_ja": "低カリウム血症でジゴキシン毒性リスク増加"},
+        {"drug": "metoclopramide", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
+        {"drug": "amiodarone", "effect": "Doubled digoxin levels; reduce digoxin dose by 50%", "effect_ja": "ジゴキシン濃度が2倍に。ジゴキシン用量50%減量"},
+        {"drug": "verapamil/diltiazem", "effect": "Increased digoxin levels and additive bradycardia", "effect_ja": "ジゴキシン濃度上昇と徐脈の相加作用"},
+    ],
 }

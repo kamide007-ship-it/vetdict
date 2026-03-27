@@ -20,7 +20,7 @@ from api.drug_batch_2 import DRUGS_BATCH_2
 from api.drug_batch_3 import SPECIES_INFO_PATCH
 from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 from api.drug_batch_5 import DRUGS_BATCH_5, SPECIES_INFO_PATCH_5
-from api.drug_batch_6 import DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
+from api.drug_batch_6 import DRUG_INTERACTIONS_PATCH_6, DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -1936,6 +1936,13 @@ for _drug_id, _species_patch in SPECIES_INFO_PATCH_6.items():
         for _sp, _info in _species_patch.items():
             if _sp not in _target:
                 _target[_sp] = _info
+
+# バッチ6 薬物相互作用パッチを適用
+for _drug_id, _interactions in DRUG_INTERACTIONS_PATCH_6.items():
+    if _drug_id in _drug_index:
+        _existing = _drug_index[_drug_id].get("drug_interactions", [])
+        if not _existing:
+            _drug_index[_drug_id]["drug_interactions"] = _interactions
 
 
 # ---------------------------------------------------------------------------
