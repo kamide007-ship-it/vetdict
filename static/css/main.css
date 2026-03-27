@@ -15,26 +15,6 @@
   --transition-normal:.25s ease;
   --transition-slow:.4s cubic-bezier(.4,0,.2,1);
 }
-/* --- Dark mode --- */
-/* Dark mode: fix all navy-bg / green-bg elements where var(--white) resolves to dark */
-[data-theme="dark"] .selected-tag,
-[data-theme="dark"] .chat-msg.user,
-[data-theme="dark"] .chat-input-row button,
-[data-theme="dark"] .chat-symptom-tag,
-[data-theme="dark"] .chat-disease-rank,
-[data-theme="dark"] .analyze-btn,
-[data-theme="dark"] .hero-btn.primary,
-[data-theme="dark"] .sponsor-btn-navy,
-[data-theme="dark"] .sponsor-btn-green,
-[data-theme="dark"] .pricing-btn-pro,
-[data-theme="dark"] .pricing-badge,
-[data-theme="dark"] .toast,
-[data-theme="dark"] .scroll-top,
-[data-theme="dark"] .skip-link,
-[data-theme="dark"] .severity-bar.emergency,
-[data-theme="dark"] .symptom-item[aria-checked="true"] .sym-icon,
-/* Dark mode: text visibility fixes */
-
 
 html{font-size:15px;scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--gray-900);line-height:1.65;transition:background .3s ease,color .3s ease}
