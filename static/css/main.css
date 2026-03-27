@@ -685,9 +685,14 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 
 /* Reduced motion preference */
 @media(prefers-reduced-motion:reduce){
-  *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+  *{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important}
   .fade-in-section{opacity:1;transform:none}
   .species-card{opacity:1;transform:none}
+  .typing-indicator span{animation:none}
+  .shimmer-line{animation:none;background:var(--gray-200)}
+  .analyze-progress-fill{transition:none}
+  .share-btn:hover{transform:none}
+  .scroll-top{transition:none}
 }
 
 /* --- Landing Chat --- */
