@@ -803,6 +803,8 @@ SYMPTOM_ALIASES = {
     "手足が変形してる": "bone_deformity", "顎が柔らかい": "jaw_softening",
     "代謝性骨疾患": "soft_bones", "mbd": "soft_bones",
     "後ろ足が弱い": "hind_limb_weakness",
+    "後肢麻痺": "hind_limb_weakness", "後ろ足ふらふら": "hind_limb_weakness",
+    "後ろ足に力が入らない": "hind_limb_weakness", "後肢が弱い": "hind_limb_weakness",
     "口の中に病変": "mouth_lesions", "口の中が腫れてる": "mouth_lesions",
     "口に粘液": "mucus_in_mouth",
     # ---------------------------------------------------------------
@@ -810,7 +812,7 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     "針が抜ける": "quill_loss", "クイルロス": "quill_loss",
     "quilling": "hair_loss",
-    "ふらふら歩く": "ataxia", "後ろ足が動かない": "paralysis_or_paresis",
+    "ふらふら歩く": "ataxia",
     "wobbly hedgehog": "ataxia",
     "後ろ足が動かなくなってきた": "paralysis_or_paresis",
     "ふらつく": "ataxia", "ふらついてる": "ataxia",
@@ -876,8 +878,11 @@ SYMPTOM_ALIASES = {
     "毛艶が悪い": "weight_loss",
     # ウサギ
     "膿が出てる": "abscess", "下顎が腫れてる": "jaw_swelling",
-    # ハムスター
-    "眼球突出": "pop_eye",
+    "目から膿が出る": "eye_discharge", "目から膿": "eye_discharge",
+    "顔が腫れてる": "facial_swelling", "顔が腫れた": "facial_swelling",
+    "うずくまってる": "hunched_posture",
+    # ハムスター/ハリネズミ — 眼球突出
+    "眼球突出": "eye_bulging",
     "頬袋が出たまま": "cheek_pouch_prolapse", "頬袋が戻らない": "cheek_pouch_prolapse",
     # 鳥
     "糞が水っぽい": "diarrhea", "糞が緑色": "diarrhea",
@@ -906,8 +911,9 @@ SYMPTOM_ALIASES = {
     # 猫 — 便秘（追加表現）
     "便が硬い": "constipation", "排便時に鳴く": "constipation",
     # ハムスター/ハリネズミ — 眼球突出
-    "目が出てきた": "eye_swelling", "目が大きくなった": "eye_swelling",
-    "目が飛び出した": "eye_swelling",
+    "目が出てきた": "eye_bulging", "目が大きくなった": "eye_bulging",
+    "目が飛び出した": "eye_bulging", "目が膨らんでる": "eye_bulging",
+    "眼が出てる": "eye_bulging", "目が丸くなってる": "eye_bulging",
     # ウサギ — 涙
     "涙が止まらない": "eye_discharge", "目の周りが汚れてる": "eye_discharge",
     "目の周りが濡れてる": "eye_discharge",
@@ -1233,10 +1239,10 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
         "fainting": ["collapse", "syncope"],
         "collapse": ["fainting", "syncope"],
-        "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "hind_limb_paralysis", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness"],
+        "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "hind_limb_paralysis", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_leg_weakness"],
         "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness", "hind_limb_paralysis"],
-        "sudden_paralysis": ["hind_limb_paralysis", "paralysis", "paralysis_or_paresis"],
-        "hind_limb_paralysis": ["paralysis", "paralysis_or_paresis", "hind_limb_weakness", "sudden_paralysis"],
+        "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis"],
+        "hind_limb_weakness": ["hind_leg_weakness", "hindlimb_weakness", "posterior_paresis", "progressive_paralysis"],
         "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
         # Weight / body
         "weight_loss": ["emaciation", "wasting", "cachexia", "rough_coat", "poor_growth"],
@@ -1253,6 +1259,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "eye_swelling": ["pop_eye", "exophthalmia", "exophthalmos", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen", "eye_bulging", "enlarged_eye", "eye_protrusion"],
         "eye_bulging": ["pop_eye", "exophthalmia", "exophthalmos", "eye_protrusion", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
         "exophthalmos": ["pop_eye", "eye_protrusion", "eye_bulging", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
+        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
         "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding"],
         "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
@@ -1510,8 +1517,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "hind_limb_paralysis": ["paralysis", "sudden_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
         "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye", "eye_protrusion"],
         "eye_protrusion": ["eye_swelling", "eye_bulging", "pop_eye", "exophthalmos", "bulging_eye", "proptosis"],
-        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "proptosis"],
-        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "proptosis"],
+        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "enlarged_eye", "proptosis"],
+        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
+        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "enlarged_eye", "proptosis"],
         "jaundice": ["icterus", "yellow_skin"],
         "vomiting": ["regurgitation", "crop_stasis"],
         "regurgitation": ["vomiting"],
@@ -1526,11 +1534,10 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "blood_in_urine": ["hematuria", "uterine_bleeding"],
         "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
         "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
-        "weight_gain": ["obesity", "overweight"],
-        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch", "depression"],
-        "depression": ["lethargy", "weakness"],
-        "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis"],
-        "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis"],
+        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
+        "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis", "hind_leg_weakness"],
+        "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis", "hind_leg_weakness"],
+        "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis"],
         "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
         "sneezing": ["nasal_discharge"],
         "wet_tail": ["diarrhea"], "diarrhea": ["wet_tail"],
