@@ -273,6 +273,8 @@ a:hover{text-decoration:underline}
 .az-nav button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 
 /* --- Disease DB --- */
+.disease-cat-header{padding:8px 14px;font-size:.82rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:1}
+[data-theme="dark"] .disease-cat-header{background:var(--gray-100);color:var(--gray-900);border-color:var(--gray-200)}
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
 .disease-db-item:hover{background:var(--green-light)}
 .disease-db-item .d-name{font-weight:600;font-size:.86rem}

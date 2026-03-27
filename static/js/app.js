@@ -954,15 +954,52 @@ function loadDiseaseDb(species){
   .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
+const DISEASE_CATEGORIES={
+  infectious:{en:"Infectious",ja:"感染症",keywords:/infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich/i},
+  neoplastic:{en:"Neoplastic",ja:"腫瘍",keywords:/tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas/i},
+  cardiovascular:{en:"Cardiovascular",ja:"循環器",keywords:/cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat/i},
+  respiratory:{en:"Respiratory",ja:"呼吸器",keywords:/respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm/i},
+  gastrointestinal:{en:"Gastrointestinal",ja:"消化器",keywords:/gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit/i},
+  renal:{en:"Renal/Urinary",ja:"泌尿器",keywords:/renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros/i},
+  endocrine:{en:"Endocrine",ja:"内分泌",keywords:/endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal/i},
+  dermatological:{en:"Dermatological",ja:"皮膚",keywords:/dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar/i},
+  neurological:{en:"Neurological",ja:"神経",keywords:/neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia/i},
+  musculoskeletal:{en:"Musculoskeletal",ja:"筋骨格",keywords:/musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro/i},
+  ophthalmological:{en:"Ophthalmological",ja:"眼科",keywords:/ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm/i},
+  hematological:{en:"Hematological",ja:"血液",keywords:/hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit/i},
+  dental:{en:"Dental",ja:"歯科",keywords:/dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast/i},
+  parasitic:{en:"Parasitic",ja:"寄生虫",keywords:/parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas/i},
+  reproductive:{en:"Reproductive",ja:"生殖器",keywords:/reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit/i},
+  toxicological:{en:"Toxicological",ja:"中毒",keywords:/toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol/i},
+  behavioral:{en:"Behavioral",ja:"行動",keywords:/behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia/i},
+  congenital:{en:"Congenital",ja:"先天性",keywords:/congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia/i},
+  immune:{en:"Immune-mediated",ja:"免疫",keywords:/immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom/i},
+};
+const DISEASE_CAT_ORDER=["infectious","neoplastic","cardiovascular","respiratory","gastrointestinal","renal","endocrine","dermatological","neurological","musculoskeletal","ophthalmological","hematological","dental","parasitic","reproductive","toxicological","behavioral","congenital","immune"];
+function classifyDisease(d){
+  const text=(d.name||"")+" "+(d.name_ja||"")+" "+(d.description||"");
+  for(const catId of DISEASE_CAT_ORDER){
+    if(DISEASE_CATEGORIES[catId].keywords.test(text))return catId;
+  }
+  return "other";
+}
+
 let diseaseNavMode=null;
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   if(!azNav){console.warn("azNav element not found");return;}
   if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"kana":"az";
-  const isAz=diseaseNavMode==="az";
-  const toggleLabel=isAz?"あいうえお順":"A-Z順";
-  const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
-  azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode=diseaseNavMode==='az'?'kana':'az';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${toggleLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+  const modeLabels={az:{next:"kana",label:"あいうえお順"},kana:{next:"category",label:currentLang==="ja"?"カテゴリ別":"By Category"},category:{next:"az",label:"A-Z順"}};
+  const cur=modeLabels[diseaseNavMode]||modeLabels.az;
+  if(diseaseNavMode==="category"){
+    const cats=[...DISEASE_CAT_ORDER,"other"];
+    const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${c}" aria-label="${lbl}">${lbl}</button>`;}).join("");
+    azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode='${cur.next}';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
+  }else{
+    const isAz=diseaseNavMode==="az";
+    const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
+    azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode='${cur.next}';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+  }
   azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
 }
 
@@ -983,17 +1020,35 @@ function renderDiseaseDb(){
       const kanaRow={"あ":"あいうえお","か":"かきくけこがぎぐげご","さ":"さしすせそざじずぜぞ","た":"たちつてとだぢづでど","な":"なにぬねの","は":"はひふへほばびぶべぼぱぴぷぺぽ","ま":"まみむめも","や":"やゆよ","ら":"らりるれろ","わ":"わをん"};
       const row=kanaRow[diseaseFilter]||diseaseFilter;
       filtered=filtered.filter(d=>{const ja=(d.name_ja||"");return ja&&row.includes(ja.charAt(0));});
+    }else if(diseaseNavMode==="category"){
+      filtered=filtered.filter(d=>classifyDisease(d)===diseaseFilter);
     }else{
       filtered=filtered.filter(d=>(d.name||"").toUpperCase().startsWith(diseaseFilter));
     }
   }
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
-  if(currentLang==="ja"){filtered=filtered.slice().sort((a,b)=>(a.name_ja||a.name||"").localeCompare(b.name_ja||b.name||"","ja"));}else{filtered=filtered.slice().sort((a,b)=>(a.name||"").localeCompare(b.name||"","en"));}
-  document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDiseases.length);
-  if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
+  const sortJa=(a,b)=>(a.name_ja||a.name||"").localeCompare(b.name_ja||b.name||"","ja");
+  const sortEn=(a,b)=>(a.name||"").localeCompare(b.name||"","en");
+  const sortFn=currentLang==="ja"?sortJa:sortEn;
+  if(diseaseNavMode==="category"&&!diseaseFilter){
+    /* カテゴリ別グループ表示: カテゴリごとにヘッダー + あいうえお/A-Z順 */
+    filtered=filtered.slice().map(d=>({...d,_cat:classifyDisease(d)}));
+    const groups={};
+    filtered.forEach(d=>{const c=d._cat;if(!groups[c])groups[c]=[];groups[c].push(d);});
+    for(const k of Object.keys(groups))groups[k].sort(sortFn);
+    const orderedCats=[...DISEASE_CAT_ORDER,"other"].filter(c=>groups[c]&&groups[c].length);
+    filtered=[];
+    orderedCats.forEach(c=>{filtered.push({_catHeader:c});filtered.push(...groups[c]);});
+  }else{
+    filtered=filtered.slice().sort(sortFn);
+  }
+  const totalCount=filtered.filter(d=>!d._catHeader).length;
+  document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",totalCount).replace("%total%",allDiseases.length);
+  if(totalCount===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
   const pk=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
   const shown=filtered.slice(0,diseaseDisplayLimit);
   list.innerHTML=shown.map(d=>{
+    if(d._catHeader){const cat=DISEASE_CATEGORIES[d._catHeader];const lbl=currentLang==="ja"?(cat?.ja||"その他"):(cat?.en||"Other");return`<div class="disease-cat-header" role="heading" aria-level="3">${lbl}</div>`;}
     const diseaseName=d.name_ja||d.name||"Disease";
     const desc=pk(d.description_ja,d.description)||buildFieldFallback(t("dtDescription"),diseaseName);
     const patho=pk(d.pathophysiology_ja,d.pathophysiology)||buildFieldFallback(t("dtPathophysiology"),diseaseName);
@@ -1020,8 +1075,10 @@ function renderDiseaseDb(){
         ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
       </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${d.missing_fields.join(", ")}</div>`:""}</div>
     </div>`}).join("");
-  if(filtered.length>diseaseDisplayLimit){
-    list.insertAdjacentHTML("beforeend",`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${filtered.length-diseaseDisplayLimit}件)`:`Show more (${filtered.length-diseaseDisplayLimit} remaining)`}</button>`);
+  const shownCount=shown.filter(d=>!d._catHeader).length;
+  if(totalCount>shownCount){
+    const remaining=totalCount-shownCount;
+    list.insertAdjacentHTML("beforeend",`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${remaining}件)`:`Show more (${remaining} remaining)`}</button>`);
   }
 }
 
