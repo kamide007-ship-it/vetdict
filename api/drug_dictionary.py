@@ -20,6 +20,7 @@ from api.drug_batch_2 import DRUGS_BATCH_2
 from api.drug_batch_3 import SPECIES_INFO_PATCH
 from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 from api.drug_batch_5 import DRUGS_BATCH_5, SPECIES_INFO_PATCH_5
+from api.drug_batch_6 import DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -1913,6 +1914,21 @@ for _drug5 in DRUGS_BATCH_5:
 
 # バッチ5 species_info パッチを適用
 for _drug_id, _species_patch in SPECIES_INFO_PATCH_5.items():
+    if _drug_id in _drug_index:
+        _target = _drug_index[_drug_id].setdefault("species_info", {})
+        for _sp, _info in _species_patch.items():
+            if _sp not in _target:
+                _target[_sp] = _info
+
+# バッチ6 薬品を統合（救急・循環器・その他）
+for _drug6 in DRUGS_BATCH_6:
+    if _drug6["id"] not in _existing_ids:
+        DRUGS.append(_drug6)
+        _existing_ids.add(_drug6["id"])
+        _drug_index[_drug6["id"]] = _drug6
+
+# バッチ6 species_info パッチを適用
+for _drug_id, _species_patch in SPECIES_INFO_PATCH_6.items():
     if _drug_id in _drug_index:
         _target = _drug_index[_drug_id].setdefault("species_info", {})
         for _sp, _info in _species_patch.items():
