@@ -876,8 +876,10 @@ SYMPTOM_ALIASES = {
     "毛艶が悪い": "weight_loss",
     # ウサギ
     "膿が出てる": "abscess", "下顎が腫れてる": "jaw_swelling",
-    # ハムスター
-    "眼球突出": "pop_eye",
+    "目から膿が出る": "eye_discharge", "目から膿": "eye_discharge",
+    "顔が腫れてる": "facial_swelling", "顔が腫れた": "facial_swelling",
+    # ハムスター/ハリネズミ — 眼球突出
+    "眼球突出": "eye_bulging",
     "頬袋が出たまま": "cheek_pouch_prolapse", "頬袋が戻らない": "cheek_pouch_prolapse",
     # 鳥
     "糞が水っぽい": "diarrhea", "糞が緑色": "diarrhea",
@@ -906,8 +908,9 @@ SYMPTOM_ALIASES = {
     # 猫 — 便秘（追加表現）
     "便が硬い": "constipation", "排便時に鳴く": "constipation",
     # ハムスター/ハリネズミ — 眼球突出
-    "目が出てきた": "eye_swelling", "目が大きくなった": "eye_swelling",
-    "目が飛び出した": "eye_swelling",
+    "目が出てきた": "eye_bulging", "目が大きくなった": "eye_bulging",
+    "目が飛び出した": "eye_bulging", "目が膨らんでる": "eye_bulging",
+    "眼が出てる": "eye_bulging", "目が丸くなってる": "eye_bulging",
     # ウサギ — 涙
     "涙が止まらない": "eye_discharge", "目の周りが汚れてる": "eye_discharge",
     "目の周りが濡れてる": "eye_discharge",
@@ -1253,6 +1256,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "eye_swelling": ["pop_eye", "exophthalmia", "exophthalmos", "periorbital_swelling", "swollen_eyes", "bulging_eye", "eye_swollen", "eye_bulging", "enlarged_eye", "eye_protrusion"],
         "eye_bulging": ["pop_eye", "exophthalmia", "exophthalmos", "eye_protrusion", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
         "exophthalmos": ["pop_eye", "eye_protrusion", "eye_bulging", "eye_swelling", "bulging_eye", "enlarged_eye", "proptosis"],
+        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
         "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
         "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding"],
         "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
@@ -1510,8 +1514,9 @@ def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) ->
         "hind_limb_paralysis": ["paralysis", "sudden_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
         "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye", "eye_protrusion"],
         "eye_protrusion": ["eye_swelling", "eye_bulging", "pop_eye", "exophthalmos", "bulging_eye", "proptosis"],
-        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "proptosis"],
-        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "proptosis"],
+        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "enlarged_eye", "proptosis"],
+        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
+        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "enlarged_eye", "proptosis"],
         "jaundice": ["icterus", "yellow_skin"],
         "vomiting": ["regurgitation", "crop_stasis"],
         "regurgitation": ["vomiting"],
