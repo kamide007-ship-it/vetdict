@@ -746,7 +746,59 @@ function renderResults(data){
   }
 
   if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${x.priority}]</span>`:"";return`<li>\u{1F52C} ${label}${priority}</li>`;}).join("")}</ul></div>`;}
+  html+=`<div id="commonDiseasesArea"></div><div id="breedEcologyArea"></div>`;
   area.innerHTML=html;
+  loadCommonDiseases(currentSpecies);
+  loadBreedEcology(currentSpecies,currentBreed);
+}
+
+function loadCommonDiseases(species){
+  const area=document.getElementById("commonDiseasesArea");
+  if(!area||!species)return;
+  fetch(`/api/species/${encodeURIComponent(species)}/common-diseases`).then(r=>r.json()).then(data=>{
+    const diseases=data.common_diseases||[];
+    if(!diseases.length){area.innerHTML="";return;}
+    const veryCommon=diseases.filter(d=>d.prevalence==="very_common");
+    const common=diseases.filter(d=>d.prevalence==="common");
+    const renderList=(list,cls)=>list.map(d=>{
+      const name=currentLang==="ja"?(d.name_ja||d.name):d.name;
+      const sub=currentLang==="ja"?d.name:(d.name_ja||"");
+      return `<span class="common-disease-tag ${cls}">${name}${sub?` <span class="common-disease-sub">${sub}</span>`:""}</span>`;
+    }).join("");
+    area.innerHTML=`<div class="common-diseases-section">
+      <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
+      ${veryCommon.length?`<div class="common-diseases-group"><span class="common-diseases-tier tier-very-common">${currentLang==="ja"?"非常に多い":"Very Common"}</span>${renderList(veryCommon,"tag-very-common")}</div>`:""}
+      ${common.length?`<div class="common-diseases-group"><span class="common-diseases-tier tier-common">${currentLang==="ja"?"多い":"Common"}</span>${renderList(common,"tag-common")}</div>`:""}
+      <div class="common-diseases-hint">${currentLang==="ja"?"※ 鑑別診断の参考としてご活用ください":"※ Use as reference for differential diagnosis"}</div>
+    </div>`;
+  }).catch(()=>{if(area)area.innerHTML="";});
+}
+
+function loadBreedEcology(species,breedId){
+  const area=document.getElementById("breedEcologyArea");
+  if(!area||!species)return;
+  fetch(`/api/breeds/${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{
+    const breeds=data.breeds||[];
+    const breed=breedId?breeds.find(b=>b.id===breedId):null;
+    const eco=breed&&breed.ecology?breed.ecology:null;
+    if(!eco){area.innerHTML="";return;}
+    const bName=currentLang==="ja"?(breed.name_ja||breed.name):breed.name;
+    const rows=[];
+    if(eco.lifespan)rows.push({icon:"⏱",label:currentLang==="ja"?"平均寿命":"Lifespan",val:`${eco.lifespan.min}–${eco.lifespan.max} ${eco.lifespan.unit==="years"?(currentLang==="ja"?"年":"yrs"):eco.lifespan.unit}`});
+    if(eco.weight)rows.push({icon:"⚖️",label:currentLang==="ja"?"体重":"Weight",val:`${eco.weight.min}–${eco.weight.max} ${eco.weight.unit}`});
+    if(eco.temperature)rows.push({icon:"🌡",label:currentLang==="ja"?"適正温度":"Temperature",val:`${eco.temperature.min}–${eco.temperature.max}${eco.temperature.unit}`});
+    if(eco.humidity)rows.push({icon:"💧",label:currentLang==="ja"?"適正湿度":"Humidity",val:`${eco.humidity.min}–${eco.humidity.max}${eco.humidity.unit}`});
+    const diet=currentLang==="ja"?(eco.diet_ja||eco.diet||""):(eco.diet||eco.diet_ja||"");
+    const housing=currentLang==="ja"?(eco.housing_ja||eco.housing||""):(eco.housing||eco.housing_ja||"");
+    const notes=currentLang==="ja"?(eco.notes_ja||eco.notes||""):(eco.notes||eco.notes_ja||"");
+    area.innerHTML=`<div class="breed-ecology-section">
+      <div class="breed-ecology-header">🐾 ${bName} ${currentLang==="ja"?"の生態・飼育環境":"Ecology & Husbandry"}</div>
+      <div class="breed-ecology-grid">${rows.map(r=>`<div class="breed-ecology-item"><span class="breed-ecology-icon">${r.icon}</span><span class="breed-ecology-label">${r.label}</span><span class="breed-ecology-val">${r.val}</span></div>`).join("")}</div>
+      ${diet?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"食事":"Diet"}:</strong> ${diet}</div>`:""}
+      ${housing?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"飼育環境":"Housing"}:</strong> ${housing}</div>`:""}
+      ${notes?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"特記事項":"Notes"}:</strong> ${notes}</div>`:""}
+    </div>`;
+  }).catch(()=>{if(area)area.innerHTML="";});
 }
 
 function renderMissingKeySymptoms(d,data){
@@ -1220,7 +1272,29 @@ function renderChatResult(container,data){
     wrapper.appendChild(fqDiv);
   }
 
-  // 5. Disclaimer
+  // 5. Common diseases & breed ecology for chat
+  if(candidates.length>0&&currentSpecies){
+    const chatRef=document.createElement("div");
+    chatRef.className="chat-reference-section";
+    wrapper.appendChild(chatRef);
+    fetch(`/api/species/${encodeURIComponent(currentSpecies)}/common-diseases`).then(r=>r.json()).then(data=>{
+      const diseases=data.common_diseases||[];
+      if(!diseases.length)return;
+      const veryCommon=diseases.filter(d=>d.prevalence==="very_common");
+      const common=diseases.filter(d=>d.prevalence==="common");
+      const renderTags=(list,cls)=>list.map(d=>{
+        const n=currentLang==="ja"?(d.name_ja||d.name):d.name;
+        return `<span class="common-disease-tag ${cls}">${n}</span>`;
+      }).join("");
+      chatRef.innerHTML=`<div class="common-diseases-section compact">
+        <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
+        ${veryCommon.length?`<div class="common-diseases-group">${renderTags(veryCommon,"tag-very-common")}</div>`:""}
+        ${common.length?`<div class="common-diseases-group">${renderTags(common,"tag-common")}</div>`:""}
+      </div>`;
+    }).catch(()=>{});
+  }
+
+  // 6. Disclaimer
   const disc=document.createElement("div");
   disc.className="chat-disclaimer";
   disc.textContent=currentLang==="ja"?"\u203b \u3053\u3061\u3089\u306f\u53c2\u8003\u60c5\u5831\u3067\u3059\u3002\u7363\u533b\u5e2b\u306e\u8a3a\u5bdf\u3092\u53d7\u3051\u3066\u304f\u3060\u3055\u3044\u3002":"\u203b This is reference information. Please consult a veterinarian.";
