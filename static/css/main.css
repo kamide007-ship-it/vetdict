@@ -742,6 +742,8 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .species-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
   .sponsor-banner-inner{flex-direction:column;align-items:flex-start}
   .scroll-top{bottom:16px;right:16px;width:38px;height:38px}
+  .chat-container{height:calc(100dvh - 280px);min-height:300px;max-height:500px}
+  #chatGuidedContainer{height:calc(100dvh - 280px);min-height:300px;max-height:500px}
   body{padding-bottom:env(safe-area-inset-bottom)}
   /* Dark mode mobile nav dropdown */
   [data-theme="dark"] .header-nav{background:rgba(30,34,51,.97);border-bottom-color:rgba(51,56,72,.6)}

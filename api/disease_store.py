@@ -474,6 +474,10 @@ def list_diseases(
 
     Returns ``{"diseases": [...], "total": N, "limit": L, "offset": O}``.
     """
+    # Clamp pagination parameters to prevent abuse
+    limit = max(1, min(limit, 500))
+    offset = max(0, offset)
+
     search_clause = (
         "(name LIKE ? ESCAPE '\\' OR name_ja LIKE ? ESCAPE '\\' OR "
         "description LIKE ? ESCAPE '\\' OR description_ja LIKE ? ESCAPE '\\' OR "
