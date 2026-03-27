@@ -1846,31 +1846,7 @@ renderSpeciesGrid=function(){
   document.querySelectorAll(".species-card").forEach((c,i)=>{c.style.animationDelay=`${i*40}ms`;});
 };
 
-/* --- Dark mode toggle --- */
-(function(){
-  const toggle=document.getElementById("themeToggle");
-  const icon=document.getElementById("themeIcon");
-  if(!toggle)return;
-  function setTheme(theme){
-    document.documentElement.setAttribute("data-theme",theme);
-    if(icon)icon.innerHTML=theme==="dark"?"\u2600\uFE0F":"\u263D";
-    try{localStorage.setItem("vetdict-theme",theme);}catch(e){}
-  }
-  // Restore saved theme or detect system preference
-  try{
-    const saved=localStorage.getItem("vetdict-theme");
-    if(saved){setTheme(saved);}
-    else if(matchMedia("(prefers-color-scheme:dark)").matches){setTheme("dark");}
-  }catch(e){}
-  toggle.addEventListener("click",()=>{
-    const current=document.documentElement.getAttribute("data-theme");
-    setTheme(current==="dark"?"light":"dark");
-  });
-  // Listen for system theme changes
-  matchMedia("(prefers-color-scheme:dark)").addEventListener("change",e=>{
-    if(!localStorage.getItem("vetdict-theme")){setTheme(e.matches?"dark":"light");}
-  });
-})();
+/* --- Dark mode removed for better mobile readability --- */
 
 /* --- Toast utility --- */
 function showToast(msg,type,duration){
