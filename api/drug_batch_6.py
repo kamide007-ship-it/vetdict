@@ -199,6 +199,172 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Hypertrophic cardiomyopathy (HCM) with outflow tract obstruction. Ventricular tachycardia.",
         "contraindications_ja": "流出路閉塞を伴う肥大型心筋症（HCM）。心室頻拍。",
     },
+    # ------------------------------------------------------------------
+    # Theophylline – bronchodilator
+    # ------------------------------------------------------------------
+    {
+        "id": "theophylline",
+        "name": "Theophylline (Theo-Dur)",
+        "name_ja": "テオフィリン（テオドール）",
+        "category": "bronchodilators",
+        "mechanism": "Methylxanthine; inhibits phosphodiesterase, increases cAMP. Bronchodilation, mild diuresis, positive chronotrope/inotrope, respiratory stimulant. Narrow therapeutic index.",
+        "mechanism_ja": "メチルキサンチン系。ホスホジエステラーゼ阻害でcAMP増加。気管支拡張、軽度利尿、陽性変時/変力作用、呼吸促進。治療域が狭い。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "SR: 10 mg/kg PO q12h; IR: 5-8 mg/kg PO q6-8h",
+                "dosage_ja": "徐放: 10 mg/kg 経口 12時間毎；速放: 5-8 mg/kg 経口 6-8時間毎",
+                "notes": "Monitor serum levels (10-20 µg/mL). For chronic bronchitis, collapsing trachea",
+                "notes_ja": "血中濃度モニター（10-20 µg/mL）。慢性気管支炎・気管虚脱に",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "SR: 10-15 mg/kg PO q24h evening; IR: 4 mg/kg PO q8-12h",
+                "dosage_ja": "徐放: 10-15 mg/kg 経口 24時間毎 夕方；速放: 4 mg/kg 経口 8-12時間毎",
+                "notes": "Cats metabolize more slowly; once daily SR may suffice. For feline asthma",
+                "notes_ja": "猫は代謝が遅い。1日1回徐放で十分な場合あり。猫喘息に",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "5-15 mg/kg PO q12h",
+                "dosage_ja": "5-15 mg/kg 経口 12時間毎",
+                "notes": "For recurrent airway obstruction (RAO/heaves); variable oral bioavailability",
+                "notes_ja": "反復性気道閉塞（RAO/喘鳴）に。経口バイオアベイラビリティにばらつき",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "4 mg/kg PO q8-12h",
+                "dosage_ja": "4 mg/kg 経口 8-12時間毎",
+                "notes": "For bronchospasm; limited data",
+                "notes_ja": "気管支攣縮に。データ限定的",
+            },
+        },
+        "side_effects": ["tachycardia", "restlessness", "GI upset", "seizures (toxic levels)", "arrhythmias"],
+        "side_effects_ja": ["頻脈", "不穏", "消化器症状", "痙攣（中毒域）", "不整脈"],
+        "contraindications": "Active seizure disorder. Severe cardiac arrhythmias. Narrow therapeutic index: monitor levels.",
+        "contraindications_ja": "活動性てんかん。重度の心不整脈。治療域が狭い：血中濃度モニター必須。",
+    },
+    # ------------------------------------------------------------------
+    # Lomustine (CCNU) – antineoplastic
+    # ------------------------------------------------------------------
+    {
+        "id": "lomustine",
+        "name": "Lomustine (CCNU/CeeNU)",
+        "name_ja": "ロムスチン（CCNU）",
+        "category": "antineoplastics",
+        "mechanism": "Alkylating nitrosourea agent. Crosses BBB. Cell-cycle non-specific. Used for CNS tumors, mast cell tumors, lymphoma, and histiocytic sarcoma in veterinary oncology.",
+        "mechanism_ja": "アルキル化ニトロソウレア系薬剤。血液脳関門を通過。細胞周期非特異的。獣医腫瘍学でCNS腫瘍、肥満細胞腫、リンパ腫、組織球性肉腫に使用。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "60-90 mg/m² PO once q3-6 weeks",
+                "dosage_ja": "60-90 mg/m² 経口 3-6週毎に1回",
+                "notes": "Cumulative hepatotoxicity; check ALT before each dose. Myelosuppression nadir at 7 days (thrombocytopenia) and 14-21 days (neutropenia). CBC weekly",
+                "notes_ja": "累積性肝毒性あり。各投与前にALT確認。骨髄抑制の最低値は7日目（血小板減少）と14-21日目（好中球減少）。毎週CBC",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "50-60 mg/m² PO q3-6 weeks",
+                "dosage_ja": "50-60 mg/m² 経口 3-6週毎",
+                "notes": "More sensitive to myelosuppression; use lower doses. For lymphoma, mast cell tumors",
+                "notes_ja": "骨髄抑制に敏感。低用量を使用。リンパ腫・肥満細胞腫に",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "50 mg/m² PO q3 weeks",
+                "dosage_ja": "50 mg/m² 経口 3週毎",
+                "notes": "For lymphoma; monitor CBC and liver values closely",
+                "notes_ja": "リンパ腫に。CBC・肝機能を厳密にモニター",
+            },
+        },
+        "side_effects": ["myelosuppression (cumulative)", "hepatotoxicity (cumulative, dose-limiting)", "GI upset", "anorexia"],
+        "side_effects_ja": ["骨髄抑制（累積性）", "肝毒性（累積性、用量制限因子）", "消化器症状", "食欲不振"],
+        "contraindications": "Pre-existing hepatic disease (ALT >3x ULN). Severe myelosuppression. Do not handle with bare hands (cytotoxic).",
+        "contraindications_ja": "既存の肝疾患（ALT >正常上限3倍）。重度の骨髄抑制。素手で取り扱わないこと（細胞毒性）。",
+    },
+    # ------------------------------------------------------------------
+    # Leflunomide – immunosuppressive
+    # ------------------------------------------------------------------
+    {
+        "id": "leflunomide",
+        "name": "Leflunomide (Arava)",
+        "name_ja": "レフルノミド（アラバ）",
+        "category": "immunosuppressives",
+        "mechanism": "Isoxazole derivative; inhibits dihydroorotate dehydrogenase (DHODH), blocking de novo pyrimidine synthesis. Immunomodulatory; suppresses T and B lymphocyte proliferation.",
+        "mechanism_ja": "イソオキサゾール誘導体。ジヒドロオロト酸脱水素酵素（DHODH）を阻害しピリミジンのde novo合成を遮断。T・Bリンパ球増殖を抑制する免疫調節薬。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "2-4 mg/kg PO q24h (loading: 4 mg/kg x3d, then 2 mg/kg maintenance)",
+                "dosage_ja": "2-4 mg/kg 経口 24時間毎（負荷: 4 mg/kg×3日後、維持2 mg/kg）",
+                "notes": "For IMHA, IMTP, immune-mediated polyarthritis, vasculitis. Monitor CBC and liver enzymes q2 weeks initially. Therapeutic drug monitoring available (teriflunomide level 20-40 µg/mL)",
+                "notes_ja": "IMHA、IMTP、免疫介在性多発関節炎、血管炎に。初期は2週毎にCBC・肝酵素モニター。TDM可能（テリフルノミド値 20-40 µg/mL）",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "10 mg/cat PO q24-48h",
+                "dosage_ja": "10 mg/匹 経口 24-48時間毎",
+                "notes": "For FIP (dry form), immune-mediated disease. Less data in cats than dogs",
+                "notes_ja": "FIP（ドライ型）、免疫介在性疾患に。猫のデータは犬より少ない",
+            },
+        },
+        "side_effects": ["GI upset", "hepatotoxicity", "myelosuppression", "weight loss"],
+        "side_effects_ja": ["消化器症状", "肝毒性", "骨髄抑制", "体重減少"],
+        "contraindications": "Pregnancy (teratogenic). Severe hepatic disease. Concurrent other immunosuppressives may increase toxicity.",
+        "contraindications_ja": "妊娠（催奇形性）。重度の肝疾患。他の免疫抑制薬併用で毒性増加の可能性。",
+    },
+    # ------------------------------------------------------------------
+    # Nitenpyram – fast-acting flea killer
+    # ------------------------------------------------------------------
+    {
+        "id": "nitenpyram",
+        "name": "Nitenpyram (Capstar)",
+        "name_ja": "ニテンピラム（キャプスター）",
+        "category": "antiparasitics",
+        "mechanism": "Neonicotinoid insecticide; nicotinic acetylcholine receptor agonist in insect neurons. Rapid oral flea kill (begins within 30 min). No residual activity (24h duration).",
+        "mechanism_ja": "ネオニコチノイド系殺虫薬。昆虫ニューロンのニコチン性アセチルコリン受容体作動薬。経口投与で速やかにノミ駆除（30分以内に効果発現）。残効性なし（24時間持続）。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "1 mg/kg PO once (can repeat daily if needed)",
+                "dosage_ja": "1 mg/kg 経口 1回（必要時毎日繰返し可）",
+                "notes": "For rapid flea knockdown; no residual. Safe for puppies ≥4 weeks and ≥0.9 kg",
+                "notes_ja": "ノミの速効駆除に。残効なし。4週以上・0.9kg以上の子犬に安全",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "1 mg/kg PO once (can repeat daily)",
+                "dosage_ja": "1 mg/kg 経口 1回（毎日繰返し可）",
+                "notes": "Safe for kittens ≥4 weeks and ≥0.9 kg. Combine with long-acting product for sustained control",
+                "notes_ja": "4週以上・0.9kg以上の子猫に安全。持続制御には長時間作用製品と併用",
+            },
+            "rabbit": {
+                "safe": True,
+                "dosage": "1 mg/kg PO once",
+                "dosage_ja": "1 mg/kg 経口 1回",
+                "notes": "Off-label; safe and effective for rapid flea removal in rabbits",
+                "notes_ja": "適応外。ウサギのノミ速効駆除に安全かつ有効",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "1 mg/kg PO once",
+                "dosage_ja": "1 mg/kg 経口 1回",
+                "notes": "Off-label use; well-tolerated",
+                "notes_ja": "適応外使用。忍容性良好",
+            },
+            "guinea_pig": {
+                "safe": True,
+                "dosage": "1 mg/kg PO once",
+                "dosage_ja": "1 mg/kg 経口 1回",
+                "notes": "Off-label; anecdotal safety in guinea pigs",
+                "notes_ja": "適応外。モルモットでの経験的安全性",
+            },
+        },
+        "side_effects": ["transient hyperexcitability (flea biting sensation)", "itching", "rare GI upset"],
+        "side_effects_ja": ["一過性の過興奮（ノミの咬傷感覚）", "掻痒", "稀に消化器症状"],
+        "contraindications": "Puppies/kittens <4 weeks or <0.9 kg.",
+        "contraindications_ja": "4週齢未満または0.9kg未満の子犬/子猫。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
