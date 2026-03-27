@@ -476,6 +476,7 @@ function selectSpecies(id){
 }
 
 function resetSpeciesChat(species){
+  chatAccumulatedSymptoms=[];
   const sp=SPECIES.find(s=>s.id===species);
   const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):(species||"dog");
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
@@ -494,7 +495,7 @@ function loadBreeds(species){
   fetch("/api/breeds/"+species).then(r=>r.json()).then(data=>{
     if(requestId!==breedRequestId||species!==currentSpecies)return;
     if(data.breeds&&data.breeds.length>0){
-      data.breeds.forEach(b=>{select.innerHTML+=`<option value="${b.id}">${b.name_ja} (${b.name})</option>`;});
+      data.breeds.forEach(b=>{select.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(b.id)}">${escapeHtml(b.name_ja)} (${escapeHtml(b.name)})</option>`);});
       area.classList.remove("hidden");
     }else{area.classList.add("hidden");}
   }).catch(()=>{if(requestId===breedRequestId)area.classList.add("hidden");});
@@ -567,7 +568,7 @@ function updateLabRangesForSpecies(species){
   fetch(`/api/lab-ranges/${encodeURIComponent(species)}`)
     .then(r=>r.ok?r.json():null)
     .then(data=>{
-      if(!data||!data.ranges)return;
+      if(!data||!data.ranges||species!==currentSpecies)return;
       _labRangesCache[species]=data.ranges;
       _applyLabRanges(data.ranges);
     }).catch(()=>{});
@@ -662,7 +663,7 @@ function doAnalyze(){
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})
-  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${t("errorPrefix")}${err.message}</div>`;console.error("Analyze error:",err);})
+  .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${escapeHtml(t("errorPrefix"))}${escapeHtml(String(err.message||"Unknown error"))}</div>`;})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
@@ -756,6 +757,7 @@ function loadCommonDiseases(species){
   const area=document.getElementById("commonDiseasesArea");
   if(!area||!species)return;
   fetch(`/api/species/${encodeURIComponent(species)}/common-diseases`).then(r=>r.json()).then(data=>{
+    if(species!==currentSpecies)return;
     const diseases=data.common_diseases||[];
     if(!diseases.length){area.innerHTML="";return;}
     const veryCommon=diseases.filter(d=>d.prevalence==="very_common");
@@ -763,7 +765,7 @@ function loadCommonDiseases(species){
     const renderList=(list,cls)=>list.map(d=>{
       const name=currentLang==="ja"?(d.name_ja||d.name):d.name;
       const sub=currentLang==="ja"?d.name:(d.name_ja||"");
-      return `<span class="common-disease-tag ${cls}">${name}${sub?` <span class="common-disease-sub">${sub}</span>`:""}</span>`;
+      return `<span class="common-disease-tag ${cls}">${escapeHtml(name)}${sub?` <span class="common-disease-sub">${escapeHtml(sub)}</span>`:""}</span>`;
     }).join("");
     area.innerHTML=`<div class="common-diseases-section">
       <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
@@ -986,7 +988,7 @@ function renderDiseaseDb(){
       </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${d.missing_fields.join(", ")}</div>`:""}</div>
     </div>`}).join("");
   if(filtered.length>diseaseDisplayLimit){
-    list.innerHTML+=`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${filtered.length-diseaseDisplayLimit}件)`:`Show more (${filtered.length-diseaseDisplayLimit} remaining)`}</button>`;
+    list.insertAdjacentHTML("beforeend",`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${filtered.length-diseaseDisplayLimit}件)`:`Show more (${filtered.length-diseaseDisplayLimit} remaining)`}</button>`);
   }
 }
 
@@ -1284,7 +1286,7 @@ function renderChatResult(container,data){
       const common=diseases.filter(d=>d.prevalence==="common");
       const renderTags=(list,cls)=>list.map(d=>{
         const n=currentLang==="ja"?(d.name_ja||d.name):d.name;
-        return `<span class="common-disease-tag ${cls}">${n}</span>`;
+        return `<span class="common-disease-tag ${cls}">${escapeHtml(n)}</span>`;
       }).join("");
       chatRef.innerHTML=`<div class="common-diseases-section compact">
         <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
@@ -1680,10 +1682,10 @@ function loadDrugDictionary(){
     pendingStats.drugs=allDrugs.length;animateCount(document.getElementById("statDrugs"),allDrugs.length,800);
     const catSelect=document.getElementById("drugCategoryFilter");
     catSelect.innerHTML=`<option value="">${t("allCategories")}</option>`;
-    (catData.categories||[]).forEach(c=>{if(c.count>0){const cName=currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja);catSelect.innerHTML+=`<option value="${c.id}">${cName} (${c.count})</option>`;}});
+    (catData.categories||[]).forEach(c=>{if(c.count>0){const cName=currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja);catSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(c.id)}">${escapeHtml(cName)} (${c.count})</option>`);}});
     const spSelect=document.getElementById("drugSpeciesFilter");
     spSelect.innerHTML=`<option value="">${t("allSpecies")}</option>`;
-    SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.innerHTML+=`<option value="${sp.id}">${primary} ${secondary}</option>`;});
+    SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(sp.id)}">${escapeHtml(primary)} ${escapeHtml(secondary)}</option>`);});
     drugsLoaded=true;renderDrugList();
   }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
   document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
