@@ -28,12 +28,19 @@
   --shadow-lg:0 12px 32px rgba(0,0,0,.4);
 }
 [data-theme="dark"] .header{background:rgba(30,34,51,.92);border-bottom-color:rgba(51,56,72,.6)}
-[data-theme="dark"] .hero{background:linear-gradient(135deg,#0d1220 0%,#141824 60%,#0a0e18 100%)}
-[data-theme="dark"] .hero-stat{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+[data-theme="dark"] .hero{background:linear-gradient(135deg,#0d1220 0%,#141824 60%,#0a0e18 100%);color:#fff}
+[data-theme="dark"] .hero-vet{color:#fff}
+[data-theme="dark"] .hero-lead{color:rgba(255,255,255,.88)}
+[data-theme="dark"] .hero-badge{color:#34d058;background:rgba(52,208,88,.18);border-color:rgba(52,208,88,.5)}
+[data-theme="dark"] .hero-stat{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+[data-theme="dark"] .hero-stat .num{background:linear-gradient(135deg,#fff,#34d058);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+[data-theme="dark"] .hero-stat .label{color:rgba(255,255,255,.85)}
+[data-theme="dark"] .hero-credit{color:rgba(255,255,255,.7)}
+[data-theme="dark"] .hero-credit a{color:#34d058}
 [data-theme="dark"] .species-card{background:var(--white);border-color:var(--gray-200)}
 [data-theme="dark"] .card{background:var(--white);border-color:var(--gray-200)}
 [data-theme="dark"] .card-header{background:var(--gray-50);border-bottom-color:var(--gray-200)}
-[data-theme="dark"] .card-header.accent{background:linear-gradient(135deg,#1a2744,#2a3a5e)}
+[data-theme="dark"] .card-header.accent{background:linear-gradient(135deg,#1a2744,#2a3a5e);color:#fff}
 [data-theme="dark"] .disease-detail{background:var(--gray-50)}
 [data-theme="dark"] .detail-section{background:var(--gray-100);border-color:var(--gray-200)}
 [data-theme="dark"] .symptom-item:hover{background:rgba(52,208,88,.08)}
@@ -63,7 +70,27 @@
 [data-theme="dark"] .severity-bar.moderate{background:rgba(245,158,11,.1);color:#fbbf24}
 [data-theme="dark"] .severity-bar.high{background:rgba(248,113,113,.1);color:#f87171}
 [data-theme="dark"] .severity-bar.emergency{background:#7f1d1d;color:#fca5a5}
-[data-theme="dark"] .clinical-details-body{background:linear-gradient(135deg,#0d1220,#1a2744)}
+[data-theme="dark"] .clinical-details-body{background:linear-gradient(135deg,#0d1220,#1a2744);color:#fff}
+[data-theme="dark"] .clinical-toggle{color:#fff}
+/* Dark mode: fix all navy-bg / green-bg elements where var(--white) resolves to dark */
+[data-theme="dark"] .selected-tag,
+[data-theme="dark"] .chat-msg.user,
+[data-theme="dark"] .chat-input-row button,
+[data-theme="dark"] .chat-symptom-tag,
+[data-theme="dark"] .chat-disease-rank,
+[data-theme="dark"] .analyze-btn,
+[data-theme="dark"] .hero-btn.primary,
+[data-theme="dark"] .sponsor-btn-navy,
+[data-theme="dark"] .sponsor-btn-green,
+[data-theme="dark"] .pricing-btn-pro,
+[data-theme="dark"] .pricing-badge,
+[data-theme="dark"] .toast,
+[data-theme="dark"] .scroll-top,
+[data-theme="dark"] .skip-link,
+[data-theme="dark"] .severity-bar.emergency,
+[data-theme="dark"] .symptom-item[aria-checked="true"] .sym-icon,
+[data-theme="dark"] .species-card[aria-pressed="true"]::after{color:#fff}
+[data-theme="dark"] .az-mode-toggle{color:#fff!important}
 [data-theme="dark"] .species-card[aria-pressed="true"]{background:linear-gradient(135deg,#1e2a4a,#253560);box-shadow:0 4px 16px rgba(74,122,255,.2)}
 [data-theme="dark"] .species-card[aria-pressed="true"] .name{color:var(--gray-900)}
 [data-theme="dark"] .species-card[aria-pressed="true"]::after{background:var(--green)}
@@ -668,6 +695,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 .landing-chat .card{box-shadow:var(--shadow-lg);border:2px solid var(--navy);transition:all var(--transition-normal)}
 .landing-chat .card:hover{box-shadow:0 16px 40px rgba(26,48,104,.16)}
 .landing-chat .card-header{font-size:.92rem;font-weight:700;border-radius:var(--radius) var(--radius) 0 0;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%)}
+[data-theme="dark"] .landing-chat .card-header{color:#fff}
 
 /* Tablet breakpoint */
 @media(max-width:1024px){
