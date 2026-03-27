@@ -42,6 +42,8 @@ DRUG_CATEGORIES: Dict[str, Dict[str, str]] = {
     "neurological": {"ja": "神経薬", "en": "Neurological Drugs"},
     "urinary": {"ja": "泌尿器薬", "en": "Urinary Drugs"},
     "immunosuppressives": {"ja": "免疫抑制薬", "en": "Immunosuppressives"},
+    "biologics": {"ja": "生物学的製剤", "en": "Biologics / Monoclonal Antibodies"},
+    "antivirals": {"ja": "抗ウイルス薬", "en": "Antivirals"},
     "antineoplastics": {"ja": "抗腫瘍薬", "en": "Antineoplastics"},
     "supplements": {"ja": "ビタミン・サプリメント", "en": "Vitamins & Supplements"},
     "sedatives": {"ja": "鎮静薬", "en": "Sedatives"},
