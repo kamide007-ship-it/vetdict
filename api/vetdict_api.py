@@ -577,15 +577,15 @@ def api_lab_ranges(species):
     """Return species-specific lab reference ranges for visualization."""
     try:
         from api.species.helpers import (
+            LAB_ITEM_NAMES,
             LAB_REFERENCE_RANGES,
             SPECIES_LAB_REFERENCE_RANGES,
-            LAB_ITEM_NAMES,
         )
     except ImportError:
         from species.helpers import (
+            LAB_ITEM_NAMES,
             LAB_REFERENCE_RANGES,
             SPECIES_LAB_REFERENCE_RANGES,
-            LAB_ITEM_NAMES,
         )
 
     # Get species-specific ranges, fall back to dog defaults
@@ -612,7 +612,7 @@ def api_lab_ranges(species):
 @app.route('/api/breeds/<species>', methods=['GET'])
 @ensure_json_response
 def api_get_breeds(species):
-    """Return available breeds for a given species."""
+    """Return available breeds for a given species with ecology info."""
     try:
         from api.species.helpers import SPECIES_BREEDS
     except ImportError:
@@ -620,8 +620,43 @@ def api_get_breeds(species):
     breeds = SPECIES_BREEDS.get(species, [])
     return {
         "species": species,
-        "breeds": [{"id": b["id"], "name": b["name"], "name_ja": b["name_ja"]} for b in breeds],
+        "breeds": [{
+            "id": b["id"], "name": b["name"], "name_ja": b["name_ja"],
+            "ecology": b.get("ecology"),
+        } for b in breeds],
     }
+
+
+@app.route('/api/species/<species>/common-diseases', methods=['GET'])
+@ensure_json_response
+def api_common_diseases(species):
+    """Return common/very_common diseases for a species with Japanese names."""
+    try:
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+    except ImportError:
+        from species.prevalence_data import SPECIES_PREVALENCE
+    prev = SPECIES_PREVALENCE.get(species, {})
+    # Load disease data to get Japanese names
+    try:
+        from api.diagnostic_chat import _SPECIES_DATA
+    except ImportError:
+        _SPECIES_DATA = {}
+    sp_data = _SPECIES_DATA.get(species, {})
+    diseases_list = sp_data.get("diseases", [])
+    name_map = {}
+    for d in diseases_list:
+        name_map[d.get("name", "")] = d.get("name_ja", "")
+    result = []
+    for name, tier in prev.items():
+        if tier in ("very_common", "common"):
+            result.append({
+                "name": name,
+                "name_ja": name_map.get(name, ""),
+                "prevalence": tier,
+            })
+    # Sort: very_common first, then common
+    result.sort(key=lambda x: (0 if x["prevalence"] == "very_common" else 1, x["name"]))
+    return {"species": species, "common_diseases": result}
 
 
 # =============================================================================
