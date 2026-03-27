@@ -1369,4 +1369,71 @@ DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
         {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
         {"drug": "digoxin", "effect": "Increased digoxin levels", "effect_ja": "ジゴキシン濃度上昇"},
     ],
+    "prednisolone": [
+        {"drug": "NSAIDs", "effect": "Markedly increased GI ulceration risk; avoid concurrent use", "effect_ja": "消化管潰瘍リスクが著明に増加。併用を避ける"},
+        {"drug": "insulin", "effect": "Antagonizes insulin effect; may require dose increase", "effect_ja": "インスリン効果を拮抗。増量が必要な場合あり"},
+        {"drug": "furosemide", "effect": "Additive hypokalemia", "effect_ja": "低カリウム血症の相加作用"},
+        {"drug": "phenobarbital", "effect": "Increased steroid metabolism; may need higher dose", "effect_ja": "ステロイド代謝促進。増量が必要な場合あり"},
+    ],
+    "dexamethasone": [
+        {"drug": "NSAIDs", "effect": "Markedly increased GI ulceration risk", "effect_ja": "消化管潰瘍リスクが著明に増加"},
+        {"drug": "insulin", "effect": "Antagonizes insulin effect", "effect_ja": "インスリン効果を拮抗"},
+        {"drug": "phenobarbital", "effect": "Increased dexamethasone clearance", "effect_ja": "デキサメタゾンのクリアランス増加"},
+        {"drug": "furosemide", "effect": "Additive hypokalemia", "effect_ja": "低カリウム血症の相加作用"},
+    ],
+    "carprofen": [
+        {"drug": "other NSAIDs", "effect": "Never combine; marked GI ulceration risk", "effect_ja": "絶対に併用しない。消化管潰瘍リスクの著明な増加"},
+        {"drug": "corticosteroids", "effect": "Increased GI ulceration risk; 5-day washout recommended", "effect_ja": "消化管潰瘍リスク増加。5日間の休薬期間を推奨"},
+        {"drug": "ACE inhibitors", "effect": "Reduced antihypertensive effect; renal risk", "effect_ja": "降圧効果低下。腎リスク"},
+        {"drug": "furosemide", "effect": "Reduced diuretic efficacy", "effect_ja": "利尿効果低下"},
+    ],
+    "firocoxib": [
+        {"drug": "other NSAIDs", "effect": "Never combine; increased GI/renal toxicity", "effect_ja": "絶対に併用しない。消化管/腎毒性増加"},
+        {"drug": "corticosteroids", "effect": "Increased GI ulceration risk", "effect_ja": "消化管潰瘍リスク増加"},
+        {"drug": "ACE inhibitors", "effect": "Reduced renal blood flow", "effect_ja": "腎血流低下"},
+    ],
+    "butorphanol": [
+        {"drug": "pure mu agonists", "effect": "Partial antagonism of morphine/fentanyl analgesia", "effect_ja": "モルヒネ/フェンタニルの鎮痛を部分的に拮抗"},
+        {"drug": "alpha-2 agonists", "effect": "Synergistic sedation (commonly combined)", "effect_ja": "鎮静の相乗作用（頻繁に併用）"},
+        {"drug": "other CNS depressants", "effect": "Additive CNS/respiratory depression", "effect_ja": "中枢/呼吸抑制の相加作用"},
+    ],
+    "buprenorphine": [
+        {"drug": "pure mu agonists", "effect": "May partially antagonize full mu agonist analgesia", "effect_ja": "完全μ作動薬の鎮痛を部分的に拮抗する可能性"},
+        {"drug": "other CNS depressants", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
+        {"drug": "MAOIs", "effect": "Potentially fatal interaction; avoid", "effect_ja": "致死的な相互作用の可能性。避ける"},
+    ],
+    "ketamine": [
+        {"drug": "alpha-2 agonists", "effect": "Synergistic sedation/analgesia; commonly combined", "effect_ja": "鎮静/鎮痛の相乗作用。頻繁に併用"},
+        {"drug": "benzodiazepines", "effect": "Smooth induction/recovery; commonly combined", "effect_ja": "滑らかな導入/覚醒。頻繁に併用"},
+        {"drug": "chloramphenicol", "effect": "Prolonged ketamine effect (inhibits metabolism)", "effect_ja": "ケタミン効果延長（代謝阻害）"},
+    ],
+    "diazepam": [
+        {"drug": "other CNS depressants", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
+        {"drug": "ketoconazole/itraconazole", "effect": "Prolonged sedation via CYP3A4 inhibition", "effect_ja": "CYP3A4阻害で鎮静延長"},
+        {"drug": "phenobarbital", "effect": "Enhanced CNS depression", "effect_ja": "中枢抑制の増強"},
+    ],
+    "insulin_vetsulin": [
+        {"drug": "corticosteroids", "effect": "Antagonize insulin effect; may need dose increase", "effect_ja": "インスリン効果を拮抗。用量増加が必要な場合あり"},
+        {"drug": "thiazide diuretics", "effect": "Hyperglycemic effect; may increase insulin requirement", "effect_ja": "高血糖作用。インスリン必要量増加の可能性"},
+        {"drug": "beta-blockers", "effect": "May mask hypoglycemia signs (tachycardia)", "effect_ja": "低血糖兆候（頻脈）を隠蔽する可能性"},
+    ],
+    "methimazole": [
+        {"drug": "warfarin", "effect": "Altered anticoagulant effect as thyroid status changes", "effect_ja": "甲状腺状態の変化に伴い抗凝固作用が変動"},
+        {"drug": "digoxin", "effect": "Digoxin levels change with thyroid normalization", "effect_ja": "甲状腺機能正常化に伴いジゴキシン濃度が変動"},
+    ],
+    "trilostane": [
+        {"drug": "ACE inhibitors", "effect": "Additive aldosterone suppression; hyperkalemia risk", "effect_ja": "アルドステロン抑制の相加作用。高カリウム血症リスク"},
+        {"drug": "potassium-sparing diuretics", "effect": "Risk of life-threatening hyperkalemia", "effect_ja": "生命を脅かす高カリウム血症のリスク"},
+        {"drug": "ketoconazole", "effect": "Additive adrenal suppression", "effect_ja": "副腎抑制の相加作用"},
+    ],
+    "enalapril": [
+        {"drug": "NSAIDs", "effect": "Reduced antihypertensive effect; increased renal risk", "effect_ja": "降圧効果低下。腎リスク増加"},
+        {"drug": "potassium-sparing diuretics", "effect": "Risk of hyperkalemia", "effect_ja": "高カリウム血症リスク"},
+        {"drug": "furosemide", "effect": "First-dose hypotension; start ACEi low", "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始"},
+    ],
+    "benazepril": [
+        {"drug": "NSAIDs", "effect": "Reduced antihypertensive effect; increased renal risk", "effect_ja": "降圧効果低下。腎リスク増加"},
+        {"drug": "potassium-sparing diuretics", "effect": "Risk of hyperkalemia", "effect_ja": "高カリウム血症リスク"},
+        {"drug": "furosemide", "effect": "First-dose hypotension; start ACEi low", "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始"},
+    ],
 }
