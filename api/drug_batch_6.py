@@ -586,6 +586,130 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Pregnancy (teratogenic). Moderate-severe hepatic impairment. Concurrent cyclosporine or glyburide.",
         "contraindications_ja": "妊娠（催奇形性）。中等度-重度の肝障害。シクロスポリンまたはグリベンクラミドとの併用。",
     },
+    # ------------------------------------------------------------------
+    # Xylazine – α2 agonist sedative/analgesic
+    # ------------------------------------------------------------------
+    {
+        "id": "xylazine",
+        "name": "Xylazine (Rompun/Sedazine)",
+        "name_ja": "キシラジン（ロンプン/セダジン）",
+        "category": "sedatives",
+        "mechanism": "Alpha-2 adrenergic agonist. Provides dose-dependent sedation, analgesia, and muscle relaxation. Also causes bradycardia, respiratory depression, and transient hyperglycemia.",
+        "mechanism_ja": "α2アドレナリン作動薬。用量依存的に鎮静・鎮痛・筋弛緩作用。徐脈、呼吸抑制、一過性高血糖も引き起こす。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "Sedation: 0.5-1.1 mg/kg IV (or 1-2 mg/kg IM); Standing sedation: 0.3-0.5 mg/kg IV",
+                "dosage_ja": "鎮静: 0.5-1.1 mg/kg 静注（または1-2 mg/kg 筋注）；立位鎮静: 0.3-0.5 mg/kg 静注",
+                "notes": "Standard equine sedative. Often combined with butorphanol for enhanced sedation/analgesia. Reversal: yohimbine or atipamezole. Onset IV: 3-5 min",
+                "notes_ja": "馬の標準的鎮静薬。ブトルファノールと併用で鎮静・鎮痛増強。拮抗: ヨヒンビンまたはアチパメゾール。静注効果発現: 3-5分",
+            },
+            "dog": {
+                "safe": True,
+                "dosage": "0.5-1.1 mg/kg IV/IM",
+                "dosage_ja": "0.5-1.1 mg/kg 静注/筋注",
+                "notes": "Less commonly used in dogs vs dexmedetomidine; causes vomiting (useful for emesis induction). Bradycardia expected",
+                "notes_ja": "犬ではデクスメデトミジンより使用頻度低い。催吐作用あり（催吐に利用可能）。徐脈は予期される反応",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "0.5-1.1 mg/kg IM",
+                "dosage_ja": "0.5-1.1 mg/kg 筋注",
+                "notes": "Effective emetic in cats; also sedation. Profound bradycardia possible",
+                "notes_ja": "猫で有効な催吐薬。鎮静にも。高度徐脈の可能性あり",
+            },
+            "rabbit": {
+                "safe": True,
+                "dosage": "1-5 mg/kg IM (usually combined with ketamine)",
+                "dosage_ja": "1-5 mg/kg 筋注（通常ケタミンと併用）",
+                "notes": "Part of ketamine-xylazine protocol; monitor respiratory depression closely",
+                "notes_ja": "ケタミン-キシラジンプロトコルの一部。呼吸抑制を厳密にモニター",
+            },
+        },
+        "side_effects": ["bradycardia", "respiratory depression", "hyperglycemia", "vomiting (dogs/cats)", "bloat (horses)", "muscle tremors"],
+        "side_effects_ja": ["徐脈", "呼吸抑制", "高血糖", "嘔吐（犬/猫）", "鼓脹（馬）", "筋振戦"],
+        "contraindications": "Severe cardiac disease. Last trimester of pregnancy (oxytocic effect). GI obstruction (vomiting risk). Do not use IV in cats.",
+        "contraindications_ja": "重度の心疾患。妊娠末期（子宮収縮作用）。消化管閉塞（嘔吐リスク）。猫に静注不可。",
+    },
+    # ------------------------------------------------------------------
+    # Detomidine – α2 agonist (primarily equine)
+    # ------------------------------------------------------------------
+    {
+        "id": "detomidine",
+        "name": "Detomidine (Dormosedan)",
+        "name_ja": "デトミジン（ドルモセダン）",
+        "category": "sedatives",
+        "mechanism": "Potent alpha-2 adrenergic agonist with higher α2 selectivity than xylazine. Provides profound sedation and visceral analgesia. Available as injectable and oral transmucosal gel (Dormosedan Gel).",
+        "mechanism_ja": "キシラジンよりα2選択性が高い強力なα2アドレナリン作動薬。深い鎮静と内臓鎮痛作用。注射剤および口腔粘膜ジェル（ドルモセダンジェル）がある。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "IV: 10-40 µg/kg; IM: 20-80 µg/kg; OTM gel: 40 µg/kg sublingual",
+                "dosage_ja": "静注: 10-40 µg/kg；筋注: 20-80 µg/kg；口腔ジェル: 40 µg/kg 舌下",
+                "notes": "Gold standard equine sedative. More potent and longer-lasting than xylazine. OTM gel for non-injectable sedation (farrier, clipping). Combine with butorphanol for procedures",
+                "notes_ja": "馬鎮静のゴールドスタンダード。キシラジンより強力で長時間。OTMジェルで非注射鎮静（装蹄、クリッピング）。処置にはブトルファノール併用",
+            },
+            "dog": {
+                "safe": True,
+                "dosage": "10-30 µg/kg IV/IM",
+                "dosage_ja": "10-30 µg/kg 静注/筋注",
+                "notes": "Rarely used in dogs; dexmedetomidine preferred. Research setting mainly",
+                "notes_ja": "犬では殆ど使用しない。デクスメデトミジンが推奨。主に研究用途",
+            },
+        },
+        "side_effects": ["bradycardia", "AV block", "respiratory depression", "sweating (horses)", "ataxia", "penile prolapse (horses)"],
+        "side_effects_ja": ["徐脈", "房室ブロック", "呼吸抑制", "発汗（馬）", "運動失調", "陰茎脱出（馬）"],
+        "contraindications": "Severe cardiac disease. Last trimester pregnancy. Not for food-producing horses in some jurisdictions. Reversal: atipamezole.",
+        "contraindications_ja": "重度の心疾患。妊娠末期。一部法域で食用馬には使用不可。拮抗: アチパメゾール。",
+    },
+    # ------------------------------------------------------------------
+    # Romifidine – α2 agonist (equine)
+    # ------------------------------------------------------------------
+    {
+        "id": "romifidine",
+        "name": "Romifidine (Sedivet)",
+        "name_ja": "ロミフィジン（セディベット）",
+        "category": "sedatives",
+        "mechanism": "Alpha-2 adrenergic agonist with highest α2:α1 selectivity ratio among equine sedatives. Provides reliable standing sedation with less ataxia than xylazine or detomidine.",
+        "mechanism_ja": "馬用鎮静薬の中で最もα2:α1選択性比が高いα2アドレナリン作動薬。キシラジンやデトミジンより運動失調が少なく、安定した立位鎮静を提供。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "40-120 µg/kg IV",
+                "dosage_ja": "40-120 µg/kg 静注",
+                "notes": "Best standing sedation with minimal ataxia. Longer onset (5-10 min) but longer duration than xylazine. Often combined with butorphanol",
+                "notes_ja": "最小限の運動失調で最良の立位鎮静。効果発現はやや遅い（5-10分）がキシラジンより長時間。ブトルファノールと併用が多い",
+            },
+        },
+        "side_effects": ["bradycardia", "AV block", "reduced GI motility", "mild ataxia", "sweating"],
+        "side_effects_ja": ["徐脈", "房室ブロック", "消化管運動低下", "軽度運動失調", "発汗"],
+        "contraindications": "Severe cardiac disease. Pre-existing bradycardia/AV block. Last trimester pregnancy.",
+        "contraindications_ja": "重度の心疾患。既存の徐脈/房室ブロック。妊娠末期。",
+    },
+    # ------------------------------------------------------------------
+    # Clenbuterol – β2 agonist bronchodilator (equine)
+    # ------------------------------------------------------------------
+    {
+        "id": "clenbuterol",
+        "name": "Clenbuterol (Ventipulmin)",
+        "name_ja": "クレンブテロール（ベンティプルミン）",
+        "category": "bronchodilators",
+        "mechanism": "Selective beta-2 adrenergic agonist. Relaxes bronchial smooth muscle causing bronchodilation. Also has mucolytic properties. Long half-life in horses.",
+        "mechanism_ja": "選択的β2アドレナリン作動薬。気管支平滑筋を弛緩し気管支拡張。粘液溶解作用もあり。馬で長い半減期。",
+        "species_info": {
+            "horse": {
+                "safe": True,
+                "dosage": "0.8-3.2 µg/kg PO q12h (start low, titrate up over 3 days)",
+                "dosage_ja": "0.8-3.2 µg/kg 経口 12時間毎（低用量から3日かけて漸増）",
+                "notes": "FDA-approved for horses (Ventipulmin syrup). For RAO/heaves and IAD. Taper down when discontinuing to prevent rebound bronchoconstriction. Withdrawal time applies for competition horses",
+                "notes_ja": "馬にFDA承認（ベンティプルミンシロップ）。RAO/喘鳴・IADに。中止時は漸減（リバウンド気管支収縮予防）。競走馬は休薬期間あり",
+            },
+        },
+        "side_effects": ["tachycardia", "sweating", "muscle tremors", "restlessness", "decreased appetite (initial)"],
+        "side_effects_ja": ["頻脈", "発汗", "筋振戦", "不穏", "食欲低下（初期）"],
+        "contraindications": "Cardiac arrhythmias. Concurrent β-blocker use (antagonism). Not approved for food animals in many countries.",
+        "contraindications_ja": "心不整脈。β遮断薬との併用（拮抗）。多くの国で食用動物には未承認。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
