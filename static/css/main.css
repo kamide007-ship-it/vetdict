@@ -369,6 +369,8 @@ a:hover{text-decoration:underline}
 .pain-desc{font-size:.74rem;color:var(--gray-500)}
 [data-theme="dark"] .pain-option{border-color:var(--gray-200)}
 [data-theme="dark"] .pain-option:has(input:checked){border-color:var(--navy);background:rgba(74,122,255,.15)}
+.pain-meter{height:10px;background:var(--gray-200);border-radius:5px;margin-top:6px;overflow:hidden}
+.pain-meter-fill{height:100%;border-radius:5px;transition:width .4s ease-out}
 /* --- Buttons --- */
 .analyze-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:var(--white);border:none;border-radius:var(--radius);font-size:.95rem;font-weight:700;cursor:pointer;transition:all var(--transition-normal);position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(34,168,79,.2)}
 .analyze-btn:hover:not(:disabled){box-shadow:0 4px 16px rgba(34,168,79,.35);transform:translateY(-1px)}

@@ -738,6 +738,14 @@ function renderResults(data){
     const title=currentLang==="ja"?(abnCount>0?`\u{1F4CA} 血液検査: ${abnCount}項目に異常`:`\u{1F4CA} 血液検査: 基準値内`):(abnCount>0?`\u{1F4CA} Lab Results: ${abnCount} abnormal`:`\u{1F4CA} Lab Results: within range`);
     html+=`<div class="lab-results-viz"><div class="lab-viz-title" style="color:${abnCount>0?"#e74c3c":"#16a34a"}">${title}</div>${bars}</div>`;
   }
+  // Pain score display
+  if(data.pain_score!==undefined&&data.pain_score!==null&&currentSpecies==="dog"){
+    const ps=data.pain_score;
+    const painLabels=currentLang==="ja"?["痛みなし","軽度","中等度","中〜重度","重度"]:["No Pain","Mild","Moderate","Severe","Excruciating"];
+    const painColors=["#16a34a","#65a30d","#eab308","#ea580c","#dc2626"];
+    const painPct=ps*25;
+    html+=`<div class="lab-results-viz" style="border-color:${painColors[ps]}33"><div class="lab-viz-title" style="color:${painColors[ps]}">&#x1F9D1;&#x200D;&#x2695;&#xFE0F; ${currentLang==="ja"?"痛み評価":"Pain Assessment"}: ${painLabels[ps]} (${ps}/4)</div><div class="pain-meter"><div class="pain-meter-fill" style="width:${painPct}%;background:${painColors[ps]}"></div></div>${ps>=3?`<div style="font-size:.74rem;color:${painColors[ps]};margin-top:4px;font-weight:600">${currentLang==="ja"?"⚠ 強い痛みが検出されました。早急な鎮痛処置を検討してください。":"⚠ Severe pain detected. Consider immediate analgesic intervention."}</div>`:""}</div>`;
+  }
   const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
   if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
 
