@@ -710,6 +710,130 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Cardiac arrhythmias. Concurrent β-blocker use (antagonism). Not approved for food animals in many countries.",
         "contraindications_ja": "心不整脈。β遮断薬との併用（拮抗）。多くの国で食用動物には未承認。",
     },
+    # ------------------------------------------------------------------
+    # Famciclovir – antiviral (feline herpesvirus)
+    # ------------------------------------------------------------------
+    {
+        "id": "famciclovir",
+        "name": "Famciclovir (Famvir)",
+        "name_ja": "ファムシクロビル（ファムビル）",
+        "category": "antibiotics",
+        "mechanism": "Prodrug of penciclovir; converted to penciclovir triphosphate which inhibits viral DNA polymerase. Active against feline herpesvirus-1 (FHV-1). Oral bioavailability is superior to acyclovir in cats.",
+        "mechanism_ja": "ペンシクロビルのプロドラッグ。ペンシクロビル三リン酸に変換されウイルスDNAポリメラーゼを阻害。猫ヘルペスウイルス1型（FHV-1）に有効。猫ではアシクロビルより経口バイオアベイラビリティが優れる。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "40-90 mg/kg PO q8-12h",
+                "dosage_ja": "40-90 mg/kg 経口 8-12時間毎",
+                "notes": "First-line antiviral for FHV-1 (rhinotracheitis, keratitis, dermatitis). High doses needed due to cat metabolism. 90 mg/kg q8h for severe cases. Safe long-term",
+                "notes_ja": "FHV-1（鼻気管炎、角膜炎、皮膚炎）の第一選択抗ウイルス薬。猫の代謝のため高用量が必要。重症例は90 mg/kg 8時間毎。長期使用安全",
+            },
+        },
+        "side_effects": ["rare GI upset", "mild elevation of liver enzymes (rare)"],
+        "side_effects_ja": ["稀に消化器症状", "軽度肝酵素上昇（稀）"],
+        "contraindications": "Severe renal impairment (dose adjustment needed). Not effective against calicivirus.",
+        "contraindications_ja": "重度腎障害（用量調整必要）。カリシウイルスには無効。",
+    },
+    # ------------------------------------------------------------------
+    # L-Lysine – supplement (feline herpesvirus)
+    # ------------------------------------------------------------------
+    {
+        "id": "lysine",
+        "name": "L-Lysine",
+        "name_ja": "L-リジン",
+        "category": "supplements",
+        "mechanism": "Essential amino acid that may antagonize arginine, theoretically reducing herpesvirus replication. Widely used as FHV-1 supplement, though recent evidence questions efficacy.",
+        "mechanism_ja": "必須アミノ酸でアルギニンに拮抗し、理論的にヘルペスウイルス複製を減少。FHV-1サプリメントとして広く使用されるが、近年のエビデンスでは有効性に疑問。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "250-500 mg/cat PO q12-24h",
+                "dosage_ja": "250-500 mg/匹 経口 12-24時間毎",
+                "notes": "Widely used for FHV-1 but 2015 ABCD and recent meta-analyses found insufficient evidence of efficacy. Low risk, may have placebo value. Not a substitute for famciclovir in severe cases",
+                "notes_ja": "FHV-1に広く使用されるが、2015年ABCDおよび最近のメタアナリシスで有効性のエビデンス不十分。リスクは低い。重症例ではファムシクロビルの代替にならない",
+            },
+        },
+        "side_effects": ["rare GI upset"],
+        "side_effects_ja": ["稀に消化器症状"],
+        "contraindications": "None significant.",
+        "contraindications_ja": "特になし。",
+    },
+    # ------------------------------------------------------------------
+    # Interferon omega – antiviral/immunomodulator
+    # ------------------------------------------------------------------
+    {
+        "id": "interferon_omega",
+        "name": "Feline Interferon Omega (Virbagen Omega)",
+        "name_ja": "猫インターフェロンオメガ（インターキャット/ビルバゲンオメガ）",
+        "category": "immunosuppressives",
+        "mechanism": "Recombinant feline interferon omega (rFeIFN-ω). Antiviral and immunomodulatory. Binds cell surface receptors to induce antiviral state. Licensed in EU/Japan for canine parvovirus and feline retroviral infections.",
+        "mechanism_ja": "組換え猫インターフェロンオメガ（rFeIFN-ω）。抗ウイルス・免疫調節作用。細胞表面受容体に結合し抗ウイルス状態を誘導。EU/日本で犬パルボウイルスおよび猫レトロウイルス感染に承認。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "FeLV/FIV: 1 MU/kg SC q48h x 3 doses, 3 cycles (weeks 0, 2, 8); Stomatitis: 0.1 MU oral daily",
+                "dosage_ja": "FeLV/FIV: 1 MU/kg 皮下 48時間毎×3回、3サイクル（0,2,8週）；口内炎: 0.1 MU 経口 毎日",
+                "notes": "For FeLV/FIV (improves clinical signs, not curative), chronic gingivostomatitis (oral mucosal application). Licensed in Japan (インターキャット)",
+                "notes_ja": "FeLV/FIV（臨床症状改善、治癒ではない）、慢性歯肉口内炎（口腔粘膜塗布）に。日本で承認（インターキャット）",
+            },
+            "dog": {
+                "safe": True,
+                "dosage": "Parvovirus: 2.5 MU/kg IV q24h x 3 days (start as early as possible)",
+                "dosage_ja": "パルボウイルス: 2.5 MU/kg 静注 24時間毎×3日（できるだけ早期に開始）",
+                "notes": "Licensed for canine parvovirus in EU/Japan. Most effective when started within 3 days of symptom onset. Reduces mortality in clinical trials",
+                "notes_ja": "EU/日本で犬パルボウイルスに承認。症状発現3日以内の開始が最も有効。臨床試験で死亡率低下",
+            },
+        },
+        "side_effects": ["transient hyperthermia", "lethargy", "vomiting (rare)", "mild transient leukopenia"],
+        "side_effects_ja": ["一過性発熱", "倦怠感", "嘔吐（稀）", "軽度一過性白血球減少"],
+        "contraindications": "Hypersensitivity to feline interferon. Not for use in pregnancy.",
+        "contraindications_ja": "猫インターフェロン過敏症。妊娠中は使用不可。",
+    },
+    # ------------------------------------------------------------------
+    # Methylprednisolone – corticosteroid
+    # ------------------------------------------------------------------
+    {
+        "id": "methylprednisolone",
+        "name": "Methylprednisolone (Depo-Medrol/Medrol)",
+        "name_ja": "メチルプレドニゾロン（デポメドロール/メドロール）",
+        "category": "corticosteroids",
+        "mechanism": "Intermediate-acting synthetic glucocorticoid with minimal mineralocorticoid activity. Available as oral tablets (Medrol) and injectable depot (Depo-Medrol, methylprednisolone acetate). 5x potency of cortisol.",
+        "mechanism_ja": "ミネラルコルチコイド活性が少ない中間型合成グルココルチコイド。経口錠（メドロール）と注射用デポ剤（デポメドロール、酢酸メチルプレドニゾロン）がある。コルチゾールの5倍の力価。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Anti-inflammatory: 0.5-1 mg/kg PO q12-24h; Immunosuppressive: 2-4 mg/kg PO q12-24h; Depot IM: 1-2 mg/kg (duration 2-6 weeks)",
+                "dosage_ja": "抗炎症: 0.5-1 mg/kg 経口 12-24時間毎；免疫抑制: 2-4 mg/kg 経口 12-24時間毎；デポ筋注: 1-2 mg/kg（持続2-6週）",
+                "notes": "Oral for IMHA/IMTP/IBD; Depo-Medrol for allergic skin disease when compliance difficult. Taper slowly",
+                "notes_ja": "経口はIMHA/IMTP/IBDに。デポメドロールはコンプライアンス困難時のアレルギー性皮膚疾患に。ゆっくり漸減",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "Anti-inflammatory: 0.5-1 mg/kg PO q12-24h; Depot: 10-20 mg/cat IM/SC q2-6 weeks",
+                "dosage_ja": "抗炎症: 0.5-1 mg/kg 経口 12-24時間毎；デポ: 10-20 mg/匹 筋注/皮下 2-6週毎",
+                "notes": "Depo-Medrol widely used in Japan for feline asthma, eosinophilic granuloma, allergic dermatitis. Risk of diabetes with repeated depot injections",
+                "notes_ja": "デポメドロールは日本で猫喘息・好酸球性肉芽腫・アレルギー性皮膚炎に広く使用。デポ繰返し投与で糖尿病リスク",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "Intra-articular: 40-120 mg per joint; Systemic: 0.5-1 mg/kg IM",
+                "dosage_ja": "関節内: 40-120 mg/関節；全身: 0.5-1 mg/kg 筋注",
+                "notes": "Commonly used intra-articularly for OA. Withdrawal time for competition horses. Risk of laminitis with systemic use",
+                "notes_ja": "OAの関節内注射に頻用。競走馬は休薬期間あり。全身投与で蹄葉炎リスク",
+            },
+            "rabbit": {
+                "safe": True,
+                "dosage": "0.5-2 mg/kg IM/SC (depot)",
+                "dosage_ja": "0.5-2 mg/kg 筋注/皮下（デポ）",
+                "notes": "Use cautiously; rabbits susceptible to immunosuppression. Short-term only",
+                "notes_ja": "慎重に使用。ウサギは免疫抑制に感受性が高い。短期使用のみ",
+            },
+        },
+        "side_effects": ["PU/PD", "polyphagia", "iatrogenic Cushing's", "diabetes (cats)", "GI ulceration", "immunosuppression"],
+        "side_effects_ja": ["多飲多尿", "多食", "医原性クッシング症候群", "糖尿病（猫）", "消化管潰瘍", "免疫抑制"],
+        "contraindications": "Systemic fungal infections. Diabetes mellitus (relative). GI ulceration. Active infections without antibiotic coverage.",
+        "contraindications_ja": "全身性真菌感染症。糖尿病（相対的禁忌）。消化管潰瘍。抗菌薬カバーのない活動性感染症。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
