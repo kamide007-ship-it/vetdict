@@ -862,6 +862,33 @@ SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {
             "notes_ja": "経口アンピシリンはウサギに絶対禁忌（致死的腸内細菌叢異常）。注射剤のみ",
         },
     },
+    # Marbofloxacin – add reptile, amphibian
+    "marbofloxacin": {
+        "reptile": {
+            "safe": True,
+            "dosage": "5-10 mg/kg PO/IM q24-48h",
+            "dosage_ja": "5-10 mg/kg 経口/筋注 24-48時間毎",
+            "notes": "Good gram-negative activity; adjust interval based on ambient temperature",
+            "notes_ja": "グラム陰性菌に良好な活性。環境温度に応じて投与間隔を調整",
+        },
+        "amphibian": {
+            "safe": True,
+            "dosage": "5 mg/kg PO/bath q24h",
+            "dosage_ja": "5 mg/kg 経口/薬浴 24時間毎",
+            "notes": "For bacterial dermatosepticemia; bath route may improve absorption in aquatic species",
+            "notes_ja": "細菌性皮膚敗血症に。水棲種では薬浴経路で吸収改善の可能性",
+        },
+    },
+    # Terbinafine – add reptile
+    "terbinafine": {
+        "reptile": {
+            "safe": True,
+            "dosage": "10-15 mg/kg PO q24h for 14-42 days",
+            "dosage_ja": "10-15 mg/kg 経口 24時間毎 14-42日間",
+            "notes": "For systemic mycoses (Chrysosporium/CANV); long treatment courses needed. Good shell/skin penetration",
+            "notes_ja": "全身性真菌症（Chrysosporium/CANV）に。長期治療が必要。甲羅/皮膚への移行良好",
+        },
+    },
     # Ketoconazole – add rabbit, guinea_pig
     "ketoconazole": {
         "rabbit": {
