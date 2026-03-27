@@ -135,6 +135,7 @@ const I18N={
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
+    mdCombinations:"疾患の組み合わせ候補",mdAmbiguous:"曖昧な症状が検出されました",mdConfidence:"信頼度分析",mdClarifying:"確認質問",mdGuidance:"診断ガイダンス",mdRecommendations:"推奨事項",mdActive:"複合疾患モード",mdAnalyzing:"複合疾患の組み合わせを分析中...",
   },
   en:{
     skipLink:"Skip to main content",
@@ -205,6 +206,7 @@ const I18N={
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
+    mdCombinations:"Possible Disease Combinations",mdAmbiguous:"Ambiguous Symptoms Detected",mdConfidence:"Confidence Analysis",mdClarifying:"Clarifying Questions",mdGuidance:"Diagnostic Guidance",mdRecommendations:"Recommendations",mdActive:"Multi-Disease Mode Active",mdAnalyzing:"Analyzing multi-disease combinations...",
   }
 };
 
@@ -1746,7 +1748,7 @@ function renderCombinations(combinations) {
 
   const title = document.createElement('div');
   title.className = 'combinations-title';
-  title.textContent = 'Possible Disease Combinations';
+  title.textContent = t('mdCombinations');
   section.appendChild(title);
 
   combinations.forEach((combo, index) => {
@@ -1828,7 +1830,7 @@ function renderAmbiguityAnalysis(analysis) {
 
   const title = document.createElement('div');
   title.className = 'ambiguity-title';
-  title.textContent = 'Ambiguous Symptoms Detected';
+  title.textContent = t('mdAmbiguous');
   section.appendChild(title);
 
   if (
@@ -1863,7 +1865,7 @@ function renderAmbiguityAnalysis(analysis) {
       const recDiv = document.createElement('div');
       recDiv.className = 'user-guidance';
       recDiv.innerHTML = `
-        <div class="guidance-title">Recommendations</div>
+        <div class="guidance-title">${escapeHtml(t('mdRecommendations'))}</div>
         <ul style="margin-left: 16px; margin-top: 4px;">
           ${recommendations
             .map(([key, value]) => `<li>${value}</li>`)
@@ -1894,7 +1896,7 @@ function renderConfidenceBreakdown(breakdown) {
 
   const title = document.createElement('div');
   title.className = 'breakdown-title';
-  title.textContent = 'Confidence Analysis';
+  title.textContent = t('mdConfidence');
   section.appendChild(title);
 
   // Individual confidences
@@ -1965,7 +1967,7 @@ function renderClarifyingQuestions(questions) {
 
   const title = document.createElement('div');
   title.className = 'questions-title';
-  title.textContent = 'Clarifying Questions';
+  title.textContent = t('mdClarifying');
   section.appendChild(title);
 
   const list = document.createElement('div');
@@ -2022,7 +2024,7 @@ function renderUserGuidance(analysis) {
 
   const title = document.createElement('div');
   title.className = 'guidance-title';
-  title.textContent = 'Diagnostic Guidance';
+  title.textContent = t('mdGuidance');
   guidance.appendChild(title);
 
   const text = document.createElement('div');
@@ -2212,7 +2214,7 @@ class MultiDiseaseUIHandler {
   createModeBadge() {
     const badge = document.createElement('div');
     badge.className = 'multidisease-badge';
-    badge.textContent = 'Multi-Disease Mode Active';
+    badge.textContent = t('mdActive');
     return badge;
   }
 
@@ -2243,7 +2245,7 @@ class MultiDiseaseUIHandler {
     container.innerHTML = `
       <div class="multidisease-loading">
         <span class="spinner"></span>
-        <span>Analyzing multi-disease combinations...</span>
+        <span>${escapeHtml(t('mdAnalyzing'))}</span>
       </div>
     `;
   }

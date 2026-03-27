@@ -471,9 +471,24 @@ def api_analyze_symptoms():
     if error:
         return error, status
 
+    # Input size limits to prevent abuse
+    MAX_SYMPTOMS = 50
+    MAX_STRING_LEN = 256
+    MAX_VACCINES = 20
+    MAX_LAB_VALUES = 50
+
+    if len(symptoms) > MAX_SYMPTOMS:
+        return {'error': f'Too many symptoms (max {MAX_SYMPTOMS})'}, 400
+    if any(len(s) > MAX_STRING_LEN for s in symptoms):
+        return {'error': f'Symptom ID too long (max {MAX_STRING_LEN} chars)'}, 400
+
     species = data.get('species', 'dog')
+    if isinstance(species, str) and len(species) > MAX_STRING_LEN:
+        return {'error': 'species value too long'}, 400
     age_stage = data.get('age_stage')
     breed = data.get('breed')
+    if isinstance(breed, str) and len(breed) > MAX_STRING_LEN:
+        return {'error': 'breed value too long'}, 400
     onset = data.get('onset')  # "acute" | "subacute" | "chronic"
     age_years = data.get('age_years')  # numeric age in years
     lab_values_raw = data.get('lab_values')  # {item_id: numeric_value}
@@ -499,6 +514,8 @@ def api_analyze_symptoms():
         vaccines, error, status = _normalize_string_list(vaccines_raw, 'vaccines')
         if error:
             return error, status
+        if len(vaccines) > MAX_VACCINES:
+            return {'error': f'Too many vaccines (max {MAX_VACCINES})'}, 400
 
     # Coerce age_years to float
     if age_years is not None:
@@ -510,6 +527,8 @@ def api_analyze_symptoms():
     # Coerce lab_values to {str: float}
     lab_values = None
     if lab_values_raw and isinstance(lab_values_raw, dict):
+        if len(lab_values_raw) > MAX_LAB_VALUES:
+            return {'error': f'Too many lab values (max {MAX_LAB_VALUES})'}, 400
         lab_values = {}
         for k, v in lab_values_raw.items():
             try:
