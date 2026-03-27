@@ -591,4 +591,168 @@ DRUGS_BATCH_6: list[dict] = [
 # ---------------------------------------------------------------------------
 # Species-specific dosage patches for existing drugs (batch 6)
 # ---------------------------------------------------------------------------
-SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {}
+SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {
+    # Trazodone – add ferret, rabbit
+    "trazodone": {
+        "ferret": {
+            "safe": True,
+            "dosage": "2-4 mg/kg PO q12-24h",
+            "dosage_ja": "2-4 mg/kg 経口 12-24時間毎",
+            "notes": "For anxiety; limited data, start low",
+            "notes_ja": "不安に。データ限定的、低用量から開始",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "1-2 mg/kg PO q12-24h",
+            "dosage_ja": "1-2 mg/kg 経口 12-24時間毎",
+            "notes": "For peri-operative/transport anxiety; anecdotal use",
+            "notes_ja": "周術期・輸送時不安に。経験的使用",
+        },
+    },
+    # Tobramycin ophthalmic – add rabbit, bird
+    "tobramycin_ophthalmic": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "1 drop affected eye q6-8h",
+            "dosage_ja": "患眼に1滴 6-8時間毎",
+            "notes": "For bacterial conjunctivitis/keratitis; good gram-negative coverage",
+            "notes_ja": "細菌性結膜炎・角膜炎に。グラム陰性菌に良好な活性",
+        },
+        "bird": {
+            "safe": True,
+            "dosage": "1 drop affected eye q4-6h",
+            "dosage_ja": "患眼に1滴 4-6時間毎",
+            "notes": "For ocular infections in psittacines and raptors",
+            "notes_ja": "オウム目・猛禽類の眼感染症に",
+        },
+    },
+    # Budesonide – add rabbit, guinea_pig
+    "budesonide": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "0.5-1 mg/rabbit PO q24h",
+            "dosage_ja": "0.5-1 mg/匹 経口 24時間毎",
+            "notes": "For IBD; first-pass metabolism limits systemic effects",
+            "notes_ja": "IBDに。初回通過代謝で全身作用が限定的",
+        },
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "0.5 mg/kg PO q24h",
+            "dosage_ja": "0.5 mg/kg 経口 24時間毎",
+            "notes": "For chronic GI inflammation; limited data",
+            "notes_ja": "慢性消化管炎症に。データ限定的",
+        },
+    },
+    # Oclacitinib – add rabbit
+    "oclacitinib": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "0.4-1 mg/kg PO q12h x14d then q24h",
+            "dosage_ja": "0.4-1 mg/kg 経口 12時間毎×14日後、24時間毎",
+            "notes": "Anecdotal use for pruritic dermatitis in rabbits; monitor CBC",
+            "notes_ja": "ウサギの瘙痒性皮膚炎に経験的使用。CBCモニター",
+        },
+    },
+    # Lomustine – add rabbit
+    "lomustine": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "40-50 mg/m² PO q3-4 weeks",
+            "dosage_ja": "40-50 mg/m² 経口 3-4週毎",
+            "notes": "For thymoma, lymphoma; monitor CBC and liver closely",
+            "notes_ja": "胸腺腫・リンパ腫に。CBC・肝機能を厳密にモニター",
+        },
+    },
+    # Maropitant – add hedgehog, bird
+    "maropitant": {
+        "hedgehog": {
+            "safe": True,
+            "dosage": "1 mg/kg SC q24h",
+            "dosage_ja": "1 mg/kg 皮下 24時間毎",
+            "notes": "Anti-emetic; limited data but dose extrapolated from small mammals",
+            "notes_ja": "制吐薬。データ限定的だが小型哺乳類から用量外挿",
+        },
+        "bird": {
+            "safe": True,
+            "dosage": "2 mg/kg IM/SC q24h",
+            "dosage_ja": "2 mg/kg 筋注/皮下 24時間毎",
+            "notes": "Anti-emetic and visceral analgesic; emerging avian data",
+            "notes_ja": "制吐・内臓鎮痛。鳥類のデータ増加中",
+        },
+    },
+    # Benazepril – add ferret, rabbit
+    "benazepril": {
+        "ferret": {
+            "safe": True,
+            "dosage": "0.25-0.5 mg/kg PO q24h",
+            "dosage_ja": "0.25-0.5 mg/kg 経口 24時間毎",
+            "notes": "For cardiac disease and proteinuria; preferred ACEi in renal patients (hepatic elimination)",
+            "notes_ja": "心疾患・蛋白尿に。腎疾患患者に推奨のACE阻害薬（肝排泄）",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "0.25-0.5 mg/kg PO q24h",
+            "dosage_ja": "0.25-0.5 mg/kg 経口 24時間毎",
+            "notes": "For cardiomyopathy and renal disease; limited rabbit data",
+            "notes_ja": "心筋症・腎疾患に。ウサギのデータは限定的",
+        },
+    },
+    # Insulin – add guinea_pig, rabbit
+    "insulin_vetsulin": {
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "0.5-1 U/kg SC q12h (start 0.5, titrate)",
+            "dosage_ja": "0.5-1 U/kg 皮下 12時間毎（0.5から開始、漸増）",
+            "notes": "Diabetes rare in guinea pigs; monitor blood glucose closely",
+            "notes_ja": "モルモットの糖尿病は稀。血糖値を厳密にモニター",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "0.5-2 U/kg SC q12h (titrate to glucose)",
+            "dosage_ja": "0.5-2 U/kg 皮下 12時間毎（血糖値に応じて調整）",
+            "notes": "For diabetes mellitus; very rare in rabbits",
+            "notes_ja": "糖尿病に。ウサギでは極めて稀",
+        },
+    },
+    # Ampicillin – add ferret, bird, rabbit
+    "ampicillin": {
+        "ferret": {
+            "safe": True,
+            "dosage": "10-20 mg/kg SC/IM/IV q8-12h",
+            "dosage_ja": "10-20 mg/kg 皮下/筋注/静注 8-12時間毎",
+            "notes": "Broad-spectrum; parenteral for serious infections",
+            "notes_ja": "広域スペクトル。重症感染には注射剤",
+        },
+        "bird": {
+            "safe": True,
+            "dosage": "100-200 mg/kg IM q8-12h",
+            "dosage_ja": "100-200 mg/kg 筋注 8-12時間毎",
+            "notes": "High doses needed due to rapid avian metabolism",
+            "notes_ja": "鳥類の代謝が速いため高用量が必要",
+        },
+        "rabbit": {
+            "safe": True,
+            "dosage": "15-30 mg/kg SC/IV q8-12h (parenteral only)",
+            "dosage_ja": "15-30 mg/kg 皮下/静注 8-12時間毎（注射剤のみ）",
+            "notes": "NEVER give oral ampicillin to rabbits — fatal dysbiosis. Parenteral only",
+            "notes_ja": "経口アンピシリンはウサギに絶対禁忌（致死的腸内細菌叢異常）。注射剤のみ",
+        },
+    },
+    # Ketoconazole – add rabbit, guinea_pig
+    "ketoconazole": {
+        "rabbit": {
+            "safe": True,
+            "dosage": "10-40 mg/kg PO q24h",
+            "dosage_ja": "10-40 mg/kg 経口 24時間毎",
+            "notes": "For dermatophytosis; hepatotoxicity risk with prolonged use",
+            "notes_ja": "皮膚糸状菌症に。長期使用で肝毒性リスク",
+        },
+        "guinea_pig": {
+            "safe": True,
+            "dosage": "10-40 mg/kg PO q24h for 14-28 days",
+            "dosage_ja": "10-40 mg/kg 経口 24時間毎 14-28日間",
+            "notes": "For Trichophyton ringworm; give with food for absorption",
+            "notes_ja": "トリコフィトン白癬に。食事と投与で吸収向上",
+        },
+    },
+}

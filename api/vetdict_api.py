@@ -577,15 +577,15 @@ def api_lab_ranges(species):
     """Return species-specific lab reference ranges for visualization."""
     try:
         from api.species.helpers import (
+            LAB_ITEM_NAMES,
             LAB_REFERENCE_RANGES,
             SPECIES_LAB_REFERENCE_RANGES,
-            LAB_ITEM_NAMES,
         )
     except ImportError:
         from species.helpers import (
+            LAB_ITEM_NAMES,
             LAB_REFERENCE_RANGES,
             SPECIES_LAB_REFERENCE_RANGES,
-            LAB_ITEM_NAMES,
         )
 
     # Get species-specific ranges, fall back to dog defaults
