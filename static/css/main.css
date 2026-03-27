@@ -742,6 +742,8 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .species-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
   .sponsor-banner-inner{flex-direction:column;align-items:flex-start}
   .scroll-top{bottom:16px;right:16px;width:38px;height:38px}
+  .chat-container{height:calc(100dvh - 280px);min-height:300px;max-height:500px}
+  #chatGuidedContainer{height:calc(100dvh - 280px);min-height:300px;max-height:500px}
   body{padding-bottom:env(safe-area-inset-bottom)}
   /* Dark mode mobile nav dropdown */
   [data-theme="dark"] .header-nav{background:rgba(30,34,51,.97);border-bottom-color:rgba(51,56,72,.6)}
@@ -1276,6 +1278,21 @@ button.combination-item:focus-visible {
   font-size: 0.7rem;
 }
 
+/* Auto dark mode for users without manual toggle */
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --navy:#6b9aff;--navy-dark:#1a2744;--navy-light:#8bb4ff;
+    --green:#34d058;--green-dark:#28a745;--green-light:rgba(52,208,88,.12);
+    --white:#1e2233;--bg:#14171f;
+    --gray-50:#1e2233;--gray-100:#252a3a;--gray-200:#333848;--gray-300:#444b5e;
+    --gray-500:#8b92a8;--gray-600:#a0a8c0;--gray-700:#c5cbd8;--gray-900:#eef0f5;
+    --red:#ff6b6b;--orange:#ffb347;
+    --shadow:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
+    --shadow-md:0 4px 12px rgba(0,0,0,.35);
+    --shadow-lg:0 12px 32px rgba(0,0,0,.4);
+  }
+}
+
 /* Common diseases section */
 .common-diseases-section{margin-top:20px;padding:14px 16px;background:linear-gradient(135deg,#f0f7ff 0%,#e8f4f8 100%);border:1px solid #d0e3f0;border-radius:var(--radius);font-size:.82rem}
 .common-diseases-section.compact{margin-top:12px;padding:10px 12px;font-size:.78rem}
@@ -1301,5 +1318,3 @@ button.combination-item:focus-visible {
 .breed-ecology-val{font-size:.8rem;font-weight:600;color:#5a4520;margin-left:auto;white-space:nowrap}
 .breed-ecology-field{font-size:.8rem;color:#5a4520;margin-bottom:6px;line-height:1.5}
 .breed-ecology-field strong{color:#7c5e2a}
-
-

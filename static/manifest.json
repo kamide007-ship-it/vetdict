@@ -7,13 +7,46 @@
   "background_color": "#1a2744",
   "theme_color": "#1a2744",
   "lang": "ja",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/static/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/static/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ],
-  "categories": ["medical", "education", "health"]
+  "categories": ["medical", "education", "health"],
+  "shortcuts": [
+    {
+      "name": "症状チェッカー",
+      "short_name": "チェッカー",
+      "url": "/#checker",
+      "description": "症状から疾患を鑑別"
+    },
+    {
+      "name": "疾患データベース",
+      "short_name": "疾患DB",
+      "url": "/#database",
+      "description": "6,400+疾患を検索"
+    },
+    {
+      "name": "症状相談チャット",
+      "short_name": "チャット",
+      "url": "/#chat",
+      "description": "AIに症状を相談"
+    },
+    {
+      "name": "薬品辞書",
+      "short_name": "薬品",
+      "url": "/#drugs",
+      "description": "187薬品の投与量を検索"
+    }
+  ]
 }
