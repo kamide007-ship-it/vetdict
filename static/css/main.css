@@ -314,6 +314,20 @@ a:hover{text-decoration:underline}
 .lab-group input.lab-high{border-color:#e74c3c;background:#fff5f5}
 .lab-group input.lab-low{border-color:#2980b9;background:#ebf5fb}
 .lab-flag{position:absolute;right:8px;bottom:7px;font-size:.72rem;font-weight:800;pointer-events:none}
+/* --- Lab Results Visualization --- */
+.lab-results-viz{margin-bottom:12px;padding:12px 14px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200)}
+.lab-viz-title{font-size:.86rem;font-weight:700;margin-bottom:10px}
+.lab-bar-row{display:grid;grid-template-columns:90px 1fr 60px;align-items:center;gap:6px;margin-bottom:6px;font-size:.76rem}
+.lab-bar-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lab-bar-track{position:relative;height:10px;background:var(--gray-200);border-radius:5px;overflow:visible}
+.lab-bar-normal{position:absolute;top:0;height:100%;background:rgba(22,163,74,.15);border-radius:5px}
+.lab-bar-dot{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);z-index:1}
+.lab-bar-range{font-size:.68rem;color:var(--gray-500);text-align:right;white-space:nowrap}
+[data-theme="dark"] .lab-results-viz{background:var(--navy-dark);border-color:rgba(255,255,255,.08)}
+[data-theme="dark"] .lab-bar-track{background:rgba(255,255,255,.1)}
+[data-theme="dark"] .lab-bar-normal{background:rgba(22,163,74,.2)}
+[data-theme="dark"] .lab-bar-dot{border-color:var(--navy-dark)}
+@media(max-width:600px){.lab-bar-row{grid-template-columns:70px 1fr 50px;font-size:.7rem}.lab-bar-label b{display:block}}
 /* --- Buttons --- */
 .analyze-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:var(--white);border:none;border-radius:var(--radius);font-size:.95rem;font-weight:700;cursor:pointer;transition:all var(--transition-normal);position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(34,168,79,.2)}
 .analyze-btn:hover:not(:disabled){box-shadow:0 4px 16px rgba(34,168,79,.35);transform:translateY(-1px)}

@@ -568,6 +568,44 @@ def api_analyze_symptoms():
 
 
 # =============================================================================
+# API: Lab Reference Ranges
+# =============================================================================
+
+@app.route('/api/lab-ranges/<species>', methods=['GET'])
+@ensure_json_response
+def api_lab_ranges(species):
+    """Return species-specific lab reference ranges for visualization."""
+    try:
+        from api.species.helpers import (
+            LAB_REFERENCE_RANGES,
+            SPECIES_LAB_REFERENCE_RANGES,
+            LAB_ITEM_NAMES,
+        )
+    except ImportError:
+        from species.helpers import (
+            LAB_REFERENCE_RANGES,
+            SPECIES_LAB_REFERENCE_RANGES,
+            LAB_ITEM_NAMES,
+        )
+
+    # Get species-specific ranges, fall back to dog defaults
+    ranges = SPECIES_LAB_REFERENCE_RANGES.get(species, LAB_REFERENCE_RANGES)
+
+    # Build response with names and units
+    result = {}
+    for item_id, thresholds in ranges.items():
+        names = LAB_ITEM_NAMES.get(item_id, {"en": item_id, "ja": item_id})
+        result[item_id] = {
+            "low": thresholds["low_threshold"],
+            "high": thresholds["high_threshold"],
+            "name_en": names.get("en", item_id),
+            "name_ja": names.get("ja", item_id),
+        }
+
+    return {"species": species, "ranges": result}
+
+
+# =============================================================================
 # API: Species Breeds
 # =============================================================================
 

@@ -463,7 +463,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);
   resetSpeciesChat(id);
   // Reset guided consultation if active
   const guidedCont=document.getElementById("chatGuidedContainer");
@@ -561,6 +561,28 @@ function collectLabValues(){
   });
   return Object.keys(vals).length>0?vals:null;
 }
+let _labRangesCache={};
+function updateLabRangesForSpecies(species){
+  if(_labRangesCache[species]){_applyLabRanges(_labRangesCache[species]);return;}
+  fetch(`/api/lab-ranges/${encodeURIComponent(species)}`)
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{
+      if(!data||!data.ranges)return;
+      _labRangesCache[species]=data.ranges;
+      _applyLabRanges(data.ranges);
+    }).catch(()=>{});
+}
+function _applyLabRanges(ranges){
+  document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{
+    const id=el.dataset.lab;
+    const r=ranges[id];
+    if(!r)return;
+    el.dataset.lo=r.low;
+    el.dataset.hi=r.high;
+    el.placeholder=`${r.low}–${r.high===99?"":r.high}`;
+  });
+  highlightLabAbnormals();
+}
 function highlightLabAbnormals(){
   let filled=0,abnormal=0;
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{
@@ -654,12 +676,32 @@ function renderResults(data){
   if(diseases.length===0){area.innerHTML=`<div class="results-empty"><span class="big-icon">\u2705</span><p>${t("noDiseasesFound")}</p></div>`;return;}
   const sevLabels=t("sevLabels");
   let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
-  if(data.lab_boost_applied){
+  if(data.lab_boost_applied&&data.lab_values){
     const labNames={bun:"BUN",creatinine:"Cre",sdma:"SDMA",alt:"ALT",alp:"ALP",ggt:"GGT",tbil:"T-Bil",albumin:"Alb",glucose:"Glu",lipase:"Lipase",potassium:"K",sodium:"Na",calcium:"Ca",phosphorus:"P",wbc:"WBC",pcv:"PCV",platelets:"PLT",t4:"T4",crp:"CRP",usg:"USG"};
-    const labRanges={bun:[7,27],creatinine:[0.5,1.8],sdma:[0,14],alt:[10,125],alp:[23,212],ggt:[0,11],tbil:[0,0.5],albumin:[2.3,4],glucose:[74,143],lipase:[10,160],potassium:[3.5,5.8],sodium:[140,155],calcium:[7.9,12],phosphorus:[2.5,6.8],wbc:[5.5,16.9],pcv:[37,55],platelets:[175,500],t4:[1,4],crp:[0,10],usg:[1.03,99]};
-    let abnList=[];
-    if(data.lab_values){for(const[k,v]of Object.entries(data.lab_values)){const r=labRanges[k];if(r){if(v>r[1])abnList.push(`<span style="color:#e74c3c;font-weight:700">${labNames[k]||k} ${v}\u2191</span>`);else if(v<r[0])abnList.push(`<span style="color:#2980b9;font-weight:700">${labNames[k]||k} ${v}\u2193</span>`);}}}
-    html+=`<div style="font-size:.8rem;color:#2980b9;margin-bottom:8px;padding:8px 12px;background:#ebf5fb;border-radius:var(--radius)">&#128300; ${currentLang==="ja"?"検査値異常":"Lab abnormalities"}: ${abnList.length?abnList.join("&ensp;"):(currentLang==="ja"?"（基準値内）":"(within range)")}</div>`;
+    const sp=currentSpecies||"dog";
+    const cachedRanges=_labRangesCache[sp]||{};
+    const defaultRanges={bun:[7,27],creatinine:[0.5,1.8],sdma:[0,14],alt:[10,125],alp:[23,212],ggt:[0,11],tbil:[0,0.5],albumin:[2.3,4],glucose:[74,143],lipase:[10,160],potassium:[3.5,5.8],sodium:[140,155],calcium:[7.9,12],phosphorus:[2.5,6.8],wbc:[5.5,16.9],pcv:[37,55],platelets:[175,500],t4:[1,4],crp:[0,10],usg:[1.03,99]};
+    let bars="";let abnCount=0;
+    for(const[k,v]of Object.entries(data.lab_values)){
+      const cr=cachedRanges[k];
+      const lo=cr?cr.low:defaultRanges[k]?defaultRanges[k][0]:0;
+      const hi=cr?cr.high:defaultRanges[k]?defaultRanges[k][1]:100;
+      if(hi===99||hi===0)continue;
+      const name=escapeHtml(labNames[k]||k);
+      const isHigh=v>hi,isLow=v<lo,isAbn=isHigh||isLow;
+      if(isAbn)abnCount++;
+      const range=hi-lo;const margin=range*0.5;
+      const scaleMin=Math.max(0,lo-margin),scaleMax=hi+margin;
+      const scaleRange=scaleMax-scaleMin;
+      const normLo=((lo-scaleMin)/scaleRange*100).toFixed(1);
+      const normHi=((hi-scaleMin)/scaleRange*100).toFixed(1);
+      const valPos=Math.max(0,Math.min(100,((v-scaleMin)/scaleRange*100))).toFixed(1);
+      const dotColor=isHigh?"#e74c3c":isLow?"#2980b9":"#16a34a";
+      const flag=isHigh?"\u2191":isLow?"\u2193":"";
+      bars+=`<div class="lab-bar-row"><span class="lab-bar-label" style="color:${isAbn?dotColor:"var(--gray-700)"};font-weight:${isAbn?700:500}">${name} <b>${v}</b>${flag}</span><div class="lab-bar-track"><div class="lab-bar-normal" style="left:${normLo}%;width:${normHi-normLo}%"></div><div class="lab-bar-dot" style="left:${valPos}%;background:${dotColor}"></div></div><span class="lab-bar-range">${lo}–${hi}</span></div>`;
+    }
+    const title=currentLang==="ja"?(abnCount>0?`\u{1F4CA} 血液検査: ${abnCount}項目に異常`:`\u{1F4CA} 血液検査: 基準値内`):(abnCount>0?`\u{1F4CA} Lab Results: ${abnCount} abnormal`:`\u{1F4CA} Lab Results: within range`);
+    html+=`<div class="lab-results-viz"><div class="lab-viz-title" style="color:${abnCount>0?"#e74c3c":"#16a34a"}">${title}</div>${bars}</div>`;
   }
   const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
   if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
