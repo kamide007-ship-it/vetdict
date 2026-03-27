@@ -1274,7 +1274,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Herpesvirus Infection",
         "name_ja": "ヘルペスウイルス感染症",
         "symptoms": {"nasal_discharge", "appetite_loss", "lethargy", "weight_loss", "labored_breathing"},
-        "description": "Herpesvirus Infection is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
+        "description": "Herpesvirus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "ハリネズミに呼吸器症状や全身症状を引き起こすウイルス感染症です。",
         "urgency": "high",
         "recommended_tests": ["pcr", "blood_work", "radiography"],

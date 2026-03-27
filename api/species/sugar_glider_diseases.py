@@ -26,7 +26,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Metabolic Bone Disease (MBD)",
         "name_ja": "代謝性骨疾患（MBD）",
         "symptoms": {"weakness", "bone_deformity", "seizures", "hind_leg_paralysis", "fractures"},
-        "description": "Metabolic Bone Disease (MBD) is a metabolic disorder affecting glucose regulation and energy metabolism.",
+        "description": "Metabolic Bone Disease (MBD) is a metabolic disorder caused by calcium-phosphorus imbalance and/or vitamin D3 deficiency, leading to progressive skeletal demineralization, pathological fractures, and deformities.",
         "description_ja": "カルシウム・リン比の不均衡やビタミンD3欠乏により骨が脆弱化する非常に多い疾患。",
         "urgency": "high",
         "recommended_tests": ["blood_calcium", "blood_phosphorus", "radiographs", "blood_chemistry"],

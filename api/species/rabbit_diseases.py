@@ -3498,7 +3498,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Papilloma Virus Infection",
         "name_ja": "パピローマウイルス感染症",
         "symptoms": {"hair_loss", "skin_masses", "skin_thickening", "wart_like_lesions"},
-        "description": "Papilloma Virus Infection is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
+        "description": "Papilloma Virus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "ショープパピローマウイルスまたはワタオウサギパピローマウイルスによる感染で、癌化する可能性のある疣贅状増殖を引き起こします。",
         "urgency": "low",
         "recommended_tests": ["biopsy", "histopathology", "physical_exam"],
