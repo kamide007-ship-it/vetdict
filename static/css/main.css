@@ -17,7 +17,7 @@
 }
 /* --- Dark mode --- */
 [data-theme="dark"]{
-  --navy:#4a7aff;--navy-dark:#1a2744;--navy-light:#6b9aff;
+  --navy:#6b9aff;--navy-dark:#1a2744;--navy-light:#8bb4ff;
   --green:#34d058;--green-dark:#28a745;--green-light:rgba(52,208,88,.12);
   --white:#1e2233;--bg:#14171f;
   --gray-50:#1e2233;--gray-100:#252a3a;--gray-200:#333848;--gray-300:#444b5e;
@@ -186,7 +186,7 @@ a:hover{text-decoration:underline}
 .symptom-search{position:relative;margin-bottom:12px}
 .symptom-search input{width:100%;padding:10px 36px 10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;outline:none;transition:border-color var(--transition-fast),box-shadow var(--transition-fast);background:var(--white)}
 .symptom-search input:focus{border-color:var(--navy-light);box-shadow:0 0 0 3px rgba(42,74,143,.1)}
-.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:20px;height:20px;font-size:.7rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
+.search-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:32px;height:32px;font-size:.8rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
 .search-clear:hover{background:var(--gray-300);color:var(--gray-900)}
 .symptom-search input:not(:placeholder-shown)~.search-clear{display:flex}
 .symptom-list{max-height:360px;overflow-y:auto;border:1px solid var(--gray-200);border-radius:var(--radius)}
@@ -299,7 +299,7 @@ a:hover{text-decoration:underline}
 
 /* --- A-Z nav --- */
 .az-nav{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:14px;justify-content:center}
-.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:4px 7px;border-radius:4px;font-size:.74rem;cursor:pointer;min-width:26px;transition:background .15s,color .15s;font-weight:600;font-family:var(--font)}
+.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:6px 8px;border-radius:4px;font-size:.74rem;cursor:pointer;min-width:32px;min-height:32px;transition:background .15s,color .15s;font-weight:600;font-family:var(--font)}
 .az-nav button:hover,.az-nav button.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .az-mode-toggle{background:var(--green)!important;color:var(--white)!important;border-color:var(--green)!important;padding:4px 12px!important;border-radius:6px!important;margin-right:6px;font-size:.72rem!important;white-space:nowrap}
 .az-mode-toggle:hover{opacity:.85;background:var(--green)!important;color:var(--white)!important}

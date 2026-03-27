@@ -1,14 +1,21 @@
 const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
 
 /* ===== Admin / Pro access control ===== */
-const ADMIN_TOKEN="kamide007";
+// Admin token stored as SHA-256 hash (not plaintext)
+const _ADMIN_HASH="58f058ae43b4ebaaa2426ad922e492d27710de51716e87b53a19485ed84f194a";
 // OPEN BETA: All users get Pro access for free.
 // Set to false when launching paid plans.
 const OPEN_BETA=true;
 let isAdmin=false;
 let isPro=false;
 
-function checkAccess(){
+async function _hashToken(t){
+  const d=new TextEncoder().encode(t);
+  const h=await crypto.subtle.digest("SHA-256",d);
+  return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+async function checkAccess(){
   const params=new URLSearchParams(location.search);
   // Open beta: everyone is Pro
   if(OPEN_BETA) isPro=true;
@@ -18,11 +25,14 @@ function checkAccess(){
     isPro=true;
     history.replaceState(null,"",location.pathname+location.hash);
   }
-  // Check URL param ?admin=<token>
+  // Check URL param ?admin=<token> (compared via SHA-256 hash)
   const adminParam=params.get("admin");
-  if(adminParam===ADMIN_TOKEN){
-    localStorage.setItem("vetdict-admin","1");
-    isAdmin=true;isPro=true;
+  if(adminParam){
+    const h=await _hashToken(adminParam);
+    if(h===_ADMIN_HASH){
+      localStorage.setItem("vetdict-admin","1");
+      isAdmin=true;isPro=true;
+    }
     history.replaceState(null,"",location.pathname+location.hash);
   } else if(localStorage.getItem("vetdict-admin")==="1"){
     isAdmin=true;isPro=true;
@@ -260,9 +270,9 @@ function trackEvent(name,params){
 let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded",async()=>{
   try{
-    checkAccess();
+    await checkAccess();
     loadSpeciesStats();
     setupNavigation();
     setupChat();
@@ -1061,13 +1071,13 @@ function renderChatResult(container,data){
       card.innerHTML=`
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${c.name_ja||c.name_en||c.disease_id}</span>
-          <span class="chat-disease-name-en">${c.name_en||""}</span>
+          <span class="chat-disease-name">${escapeHtml(c.name_ja||c.name_en||c.disease_id)}</span>
+          <span class="chat-disease-name-en">${escapeHtml(c.name_en||"")}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
-        ${c.description_ja||c.description?`<div class="chat-disease-desc">${c.description_ja||c.description}</div>`:""}
-        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.join(", ")}</div>`:""}
+        ${c.description_ja||c.description?`<div class="chat-disease-desc">${escapeHtml(c.description_ja||c.description)}</div>`:""}
+        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.map(s=>escapeHtml(s)).join(", ")}</div>`:""}
       `;
       listDiv.appendChild(card);
     });
