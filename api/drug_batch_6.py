@@ -834,6 +834,168 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Systemic fungal infections. Diabetes mellitus (relative). GI ulceration. Active infections without antibiotic coverage.",
         "contraindications_ja": "全身性真菌感染症。糖尿病（相対的禁忌）。消化管潰瘍。抗菌薬カバーのない活動性感染症。",
     },
+    # ------------------------------------------------------------------
+    # Imidacloprid + Moxidectin (Advocate/Advantage Multi)
+    # ------------------------------------------------------------------
+    {
+        "id": "imidacloprid_moxidectin",
+        "name": "Imidacloprid + Moxidectin (Advocate/Advantage Multi)",
+        "name_ja": "イミダクロプリド＋モキシデクチン（アドボケート）",
+        "category": "antiparasitics",
+        "mechanism": "Combination topical: imidacloprid (neonicotinoid, kills fleas) + moxidectin (macrocyclic lactone, kills heartworm larvae, GI nematodes, ear mites, and Demodex/Sarcoptes). Broad-spectrum endo/ectoparasiticide.",
+        "mechanism_ja": "配合外用薬：イミダクロプリド（ネオニコチノイド、ノミ駆除）＋モキシデクチン（マクロライド系、フィラリア幼虫・消化管線虫・ミミヒゼンダニ・ニキビダニ/疥癬虫を駆除）。広域スペクトル内外部寄生虫駆除薬。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "10 mg/kg imidacloprid + 2.5 mg/kg moxidectin topical monthly",
+                "dosage_ja": "イミダクロプリド10 mg/kg＋モキシデクチン2.5 mg/kg 外用 月1回",
+                "notes": "Heartworm prevention + flea treatment + GI nematodes + mites. AVOID in dogs with MDR1 mutation at high doses. Do not use orally",
+                "notes_ja": "フィラリア予防＋ノミ駆除＋消化管線虫＋ダニ。MDR1変異犬は高用量で注意。経口使用不可",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "10 mg/kg imidacloprid + 1 mg/kg moxidectin topical monthly",
+                "dosage_ja": "イミダクロプリド10 mg/kg＋モキシデクチン1 mg/kg 外用 月1回",
+                "notes": "Heartworm prevention + flea/ear mite/roundworm treatment. Safe for cats ≥9 weeks",
+                "notes_ja": "フィラリア予防＋ノミ・ミミヒゼンダニ・回虫駆除。9週齢以上の猫に安全",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "0.4 mL/ferret (cat <4kg pipette) topical monthly",
+                "dosage_ja": "0.4 mL/匹（猫4kg未満用ピペット）外用 月1回",
+                "notes": "Approved for ferrets in EU (Advocate). Heartworm prevention and flea control",
+                "notes_ja": "EUでフェレットに承認（アドボケート）。フィラリア予防＋ノミ駆除",
+            },
+        },
+        "side_effects": ["transient skin irritation", "lethargy (rare)", "GI upset if ingested"],
+        "side_effects_ja": ["一過性皮膚刺激", "倦怠感（稀）", "経口摂取時の消化器症状"],
+        "contraindications": "Not for oral use. Puppies/kittens <7-9 weeks. Caution in MDR1 mutant breeds (collies).",
+        "contraindications_ja": "経口使用不可。7-9週齢未満の子犬/子猫。MDR1変異種（コリー系）は注意。",
+    },
+    # ------------------------------------------------------------------
+    # Milbemycin oxime + Praziquantel (Milbemax/Interceptor Plus)
+    # ------------------------------------------------------------------
+    {
+        "id": "milbemycin_praziquantel",
+        "name": "Milbemycin Oxime + Praziquantel (Milbemax/Interceptor Plus)",
+        "name_ja": "ミルベマイシンオキシム＋プラジクアンテル（ミルベマックス）",
+        "category": "antiparasitics",
+        "mechanism": "Combination oral: milbemycin oxime (macrocyclic lactone, heartworm prevention + nematodes) + praziquantel (isoquinolone, cestodes including Echinococcus). Monthly broad-spectrum internal parasiticide.",
+        "mechanism_ja": "配合経口薬：ミルベマイシンオキシム（マクロライド系、フィラリア予防＋線虫）＋プラジクアンテル（イソキノロン系、エキノコックス含む条虫）。月1回の広域スペクトル内部寄生虫駆除薬。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "0.5-1 mg/kg milbemycin + 5 mg/kg praziquantel PO monthly",
+                "dosage_ja": "ミルベマイシン0.5-1 mg/kg＋プラジクアンテル5 mg/kg 経口 月1回",
+                "notes": "Heartworm prevention + roundworm/hookworm/whipworm + tapeworm (including Echinococcus). Very commonly used in Japan (ミルベマックス)",
+                "notes_ja": "フィラリア予防＋回虫/鉤虫/鞭虫＋条虫（エキノコックス含む）。日本で非常に頻用（ミルベマックス）",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "2 mg/kg milbemycin + 5 mg/kg praziquantel PO monthly",
+                "dosage_ja": "ミルベマイシン2 mg/kg＋プラジクアンテル5 mg/kg 経口 月1回",
+                "notes": "All-in-one dewormer for cats; safe from 6 weeks. Covers roundworm, hookworm, tapeworm",
+                "notes_ja": "猫のオールインワン駆虫薬。6週齢から安全。回虫、鉤虫、条虫に対応",
+            },
+        },
+        "side_effects": ["rare GI upset", "rare lethargy", "hypersalivation (cats, if tablet crushed)"],
+        "side_effects_ja": ["稀に消化器症状", "稀に倦怠感", "流涎（猫、錠剤を砕いた場合）"],
+        "contraindications": "Puppies <2 weeks or kittens <6 weeks. Caution in MDR1 mutant breeds at higher doses.",
+        "contraindications_ja": "2週齢未満の子犬・6週齢未満の子猫。MDR1変異種は高用量で注意。",
+    },
+    # ------------------------------------------------------------------
+    # Selamectin + Sarolaner (Stronghold Plus/Revolution Plus)
+    # ------------------------------------------------------------------
+    {
+        "id": "selamectin_sarolaner",
+        "name": "Selamectin + Sarolaner (Revolution Plus/Stronghold Plus)",
+        "name_ja": "セラメクチン＋サロラネル（レボリューションプラス/ストロングホールドプラス）",
+        "category": "antiparasitics",
+        "mechanism": "Combination topical for cats: selamectin (avermectin, heartworm + roundworm + ear mites + fleas) + sarolaner (isoxazoline, ticks + fleas). Broadest spectrum cat-approved topical parasiticide.",
+        "mechanism_ja": "猫用配合外用薬：セラメクチン（アベルメクチン系、フィラリア＋回虫＋ミミヒゼンダニ＋ノミ）＋サロラネル（イソオキサゾリン系、マダニ＋ノミ）。猫に承認された最も広いスペクトルの外用駆虫薬。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "6 mg/kg selamectin + 1 mg/kg sarolaner topical monthly",
+                "dosage_ja": "セラメクチン6 mg/kg＋サロラネル1 mg/kg 外用 月1回",
+                "notes": "Covers fleas, ticks, heartworm, roundworm, hookworm, ear mites. For cats ≥8 weeks and ≥1.25 kg. Very popular in Japan",
+                "notes_ja": "ノミ、マダニ、フィラリア、回虫、鉤虫、ミミヒゼンダニに対応。8週齢以上・1.25kg以上の猫に。日本で非常に人気",
+            },
+        },
+        "side_effects": ["transient hair loss at application site", "lethargy (rare)", "GI upset (rare)"],
+        "side_effects_ja": ["塗布部位の一過性脱毛", "倦怠感（稀）", "消化器症状（稀）"],
+        "contraindications": "Kittens <8 weeks or <1.25 kg. Not for dogs (sarolaner component dose differs).",
+        "contraindications_ja": "8週齢未満または1.25kg未満の子猫。犬には不可（サロラネル成分の用量が異なる）。",
+    },
+    # ------------------------------------------------------------------
+    # Spinosad (Comfortis) – oral flea control
+    # ------------------------------------------------------------------
+    {
+        "id": "spinosad",
+        "name": "Spinosad (Comfortis)",
+        "name_ja": "スピノサド（コンフォティス）",
+        "category": "antiparasitics",
+        "mechanism": "Spinosyn insecticide derived from Saccharopolyspora spinosa. Activates nicotinic acetylcholine receptors in insects causing hyperexcitation and death. Rapid oral flea kill (begins within 30 min, 100% in 4h).",
+        "mechanism_ja": "放線菌Saccharopolyspora spinosa由来のスピノシン系殺虫薬。昆虫のニコチン性アセチルコリン受容体を活性化し過興奮と死滅。速効性経口ノミ駆除（30分以内に効果発現、4時間で100%）。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "30-60 mg/kg PO monthly (with food)",
+                "dosage_ja": "30-60 mg/kg 経口 月1回（食事と）",
+                "notes": "FDA-approved for dogs ≥14 weeks and ≥2.3 kg. Give with food for best absorption. Fastest flea kill among monthly orals",
+                "notes_ja": "14週齢以上・2.3kg以上の犬にFDA承認。食事と投与で吸収向上。月1回経口薬の中で最速のノミ駆除",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "50-100 mg/kg PO monthly (with food)",
+                "dosage_ja": "50-100 mg/kg 経口 月1回（食事と）",
+                "notes": "FDA-approved for cats ≥14 weeks and ≥1.8 kg. Higher dose needed in cats. Vomiting common initially",
+                "notes_ja": "14週齢以上・1.8kg以上の猫にFDA承認。猫は犬より高用量が必要。初期に嘔吐が多い",
+            },
+        },
+        "side_effects": ["vomiting (most common, especially cats)", "diarrhea", "anorexia", "lethargy"],
+        "side_effects_ja": ["嘔吐（最多、特に猫）", "下痢", "食欲不振", "倦怠感"],
+        "contraindications": "Do not combine with high-dose ivermectin (increased ivermectin toxicity via P-gp). Dogs/cats <14 weeks. Epileptic dogs (may lower seizure threshold).",
+        "contraindications_ja": "高用量イベルメクチンとの併用不可（P-gp阻害でイベルメクチン毒性増加）。14週齢未満の犬/猫。てんかん犬（痙攣閾値低下の可能性）。",
+    },
+    # ------------------------------------------------------------------
+    # Hydrochlorothiazide – thiazide diuretic
+    # ------------------------------------------------------------------
+    {
+        "id": "hydrochlorothiazide",
+        "name": "Hydrochlorothiazide (HCTZ)",
+        "name_ja": "ヒドロクロロチアジド",
+        "category": "diuretics",
+        "mechanism": "Thiazide diuretic; inhibits Na-Cl cotransporter in distal convoluted tubule. Mild diuresis. Also reduces urinary calcium excretion (useful for calcium oxalate urolithiasis prevention).",
+        "mechanism_ja": "チアジド系利尿薬。遠位尿細管のNa-Cl共輸送体を阻害。軽度の利尿作用。尿中カルシウム排泄を減少（シュウ酸カルシウム尿石予防に有用）。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Diuretic: 2-4 mg/kg PO q12h; Ca-oxalate prevention: 2 mg/kg PO q12h",
+                "dosage_ja": "利尿: 2-4 mg/kg 経口 12時間毎；シュウ酸Ca予防: 2 mg/kg 経口 12時間毎",
+                "notes": "Often combined with furosemide for refractory CHF. Reduces urinary calcium for CaOx stone prevention. Monitor electrolytes (hypokalemia, hyponatremia)",
+                "notes_ja": "難治性CHFでフロセミドと併用が多い。CaOx結石予防に尿中カルシウム低下。電解質モニター（低K、低Na）",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "1-2 mg/kg PO q12-24h",
+                "dosage_ja": "1-2 mg/kg 経口 12-24時間毎",
+                "notes": "For calcium oxalate stone prevention; less commonly used as diuretic in cats",
+                "notes_ja": "シュウ酸カルシウム結石予防に。猫では利尿薬としてはあまり使用されない",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "0.5-1 mg/kg PO/IV q12-24h",
+                "dosage_ja": "0.5-1 mg/kg 経口/静注 12-24時間毎",
+                "notes": "For edema; limited equine use",
+                "notes_ja": "浮腫に。馬での使用は限定的",
+            },
+        },
+        "side_effects": ["hypokalemia", "hyponatremia", "dehydration", "hyperglycemia", "hypercalcemia"],
+        "side_effects_ja": ["低カリウム血症", "低ナトリウム血症", "脱水", "高血糖", "高カルシウム血症"],
+        "contraindications": "Anuria. Severe renal failure. Hypercalcemia. Hypokalemia.",
+        "contraindications_ja": "無尿。重度腎不全。高カルシウム血症。低カリウム血症。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
