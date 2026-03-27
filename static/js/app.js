@@ -463,7 +463,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();
   resetSpeciesChat(id);
   // Reset guided consultation if active
   const guidedCont=document.getElementById("chatGuidedContainer");
@@ -554,6 +554,24 @@ function renderSelectedSymptoms(){
   area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?sym.name_ja:sym.name_en):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
 }
+
+function collectPainScore(){
+  const checked=document.querySelector('#painScaleOptions input[name="painScore"]:checked');
+  return checked?parseInt(checked.value,10):null;
+}
+function updatePainScaleVisibility(){
+  const section=document.getElementById("painScaleDetails");
+  if(section) section.style.display=(currentSpecies==="dog")?"":"none";
+}
+document.addEventListener("change",e=>{
+  if(e.target.matches('#painScaleOptions input[name="painScore"]')){
+    const score=parseInt(e.target.value,10);
+    const badge=document.getElementById("painScaleBadge");
+    const labels=["\u75db\u307f\u306a\u3057","\u8efd\u5ea6","\u4e2d\u7b49\u5ea6","\u4e2d\u301c\u91cd\u5ea6","\u91cd\u5ea6"];
+    const colors=["#16a34a","#65a30d","#eab308","#ea580c","#dc2626"];
+    if(badge){badge.style.display="inline";badge.textContent=`\u30b9\u30b3\u30a2 ${score}: ${labels[score]}`;badge.style.background=colors[score];}
+  }
+});
 
 function collectLabValues(){
   const vals={};
@@ -660,6 +678,8 @@ function doAnalyze(){
   if(currentBreed)payload.breed=currentBreed;
   const labVals=collectLabValues();
   if(labVals)payload.lab_values=labVals;
+  const painVal=collectPainScore();
+  if(painVal!==null)payload.pain_score=painVal;
   fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})

@@ -331,6 +331,17 @@ a:hover{text-decoration:underline}
 [data-theme="dark"] .lab-bar-normal{background:rgba(22,163,74,.2)}
 [data-theme="dark"] .lab-bar-dot{border-color:var(--navy-dark)}
 @media(max-width:600px){.lab-bar-row{grid-template-columns:70px 1fr 50px;font-size:.7rem}.lab-bar-label b{display:block}}
+/* --- Pain Scale --- */
+.pain-scale-options{display:flex;flex-direction:column;gap:6px}
+.pain-option{display:flex;align-items:center;gap:10px;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);cursor:pointer;transition:all .15s;font-size:.82rem}
+.pain-option:hover{border-color:var(--navy-light);background:rgba(42,74,143,.04)}
+.pain-option input[type="radio"]{display:none}
+.pain-option:has(input:checked){border-color:var(--navy);background:rgba(42,74,143,.08);box-shadow:0 0 0 1px var(--navy)}
+.pain-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.pain-label{font-weight:600;min-width:80px}
+.pain-desc{font-size:.74rem;color:var(--gray-500)}
+[data-theme="dark"] .pain-option{border-color:var(--gray-200)}
+[data-theme="dark"] .pain-option:has(input:checked){border-color:var(--navy);background:rgba(74,122,255,.15)}
 /* --- Buttons --- */
 .analyze-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:var(--white);border:none;border-radius:var(--radius);font-size:.95rem;font-weight:700;cursor:pointer;transition:all var(--transition-normal);position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(34,168,79,.2)}
 .analyze-btn:hover:not(:disabled){box-shadow:0 4px 16px rgba(34,168,79,.35);transform:translateY(-1px)}
