@@ -1061,12 +1061,12 @@ function renderChatResult(container,data){
       card.innerHTML=`
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${c.name_ja||c.name_en||c.disease_id}</span>
-          <span class="chat-disease-name-en">${c.name_en||""}</span>
+          <span class="chat-disease-name">${currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id):(c.name_en||c.name_ja||c.disease_id)}</span>
+          <span class="chat-disease-name-en">${currentLang==="ja"?(c.name_en||""):(c.name_ja||"")}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
-        ${c.description_ja||c.description?`<div class="chat-disease-desc">${c.description_ja||c.description}</div>`:""}
+        ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja)}</div>`:""}
         ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.join(", ")}</div>`:""}
       `;
       listDiv.appendChild(card);
@@ -1381,7 +1381,7 @@ function guidedRenderInterim(data){
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${c.name_ja||c.name_en}</span>
+          <span class="chat-disease-name">${currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja)}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
@@ -1505,18 +1505,18 @@ function guidedRenderFinalResults(data){
     diseases.slice(0,5).forEach((d,i)=>{
       const pct=d.match_percent||0;
       const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
-      const name=d.name_ja||d.name||"";
-      const nameEn=d.name||"";
-      const desc=d.description_ja||d.description||"";
+      const name=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+      const nameSecondary=currentLang==="ja"?(d.name||""):(d.name_ja||"");
+      const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
       const matched=(d.matching_symptoms||[]).map(sid=>{
         const found=details.find(s=>s.id===sid);
-        return found?(currentLang==="ja"?found.name_ja:found.name_en):sid;
+        return found?(currentLang==="ja"?(found.name_ja||found.name_en):(found.name_en||found.name_ja)):sid;
       }).join(", ");
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${name}</span>
-          <span class="chat-disease-name-en">${nameEn}</span>
+          <span class="chat-disease-name-en">${nameSecondary}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
