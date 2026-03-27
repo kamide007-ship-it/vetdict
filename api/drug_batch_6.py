@@ -365,6 +365,203 @@ DRUGS_BATCH_6: list[dict] = [
         "contraindications": "Puppies/kittens <4 weeks or <0.9 kg.",
         "contraindications_ja": "4週齢未満または0.9kg未満の子犬/子猫。",
     },
+    # ------------------------------------------------------------------
+    # Tadalafil – PDE5 inhibitor (pulmonary hypertension)
+    # ------------------------------------------------------------------
+    {
+        "id": "tadalafil",
+        "name": "Tadalafil (Cialis)",
+        "name_ja": "タダラフィル（シアリス）",
+        "category": "cardiovascular",
+        "mechanism": "Phosphodiesterase-5 (PDE5) inhibitor. Increases cGMP in pulmonary vascular smooth muscle, causing vasodilation. Longer half-life than sildenafil (17.5h vs 4h in dogs).",
+        "mechanism_ja": "ホスホジエステラーゼ5（PDE5）阻害薬。肺血管平滑筋のcGMPを増加させ血管拡張。シルデナフィルより長い半減期（犬で17.5時間 vs 4時間）。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "1-2 mg/kg PO q24h",
+                "dosage_ja": "1-2 mg/kg 経口 24時間毎",
+                "notes": "For pulmonary hypertension; once-daily alternative to sildenafil. May have better compliance",
+                "notes_ja": "肺高血圧症に。シルデナフィルの1日1回代替薬。コンプライアンス向上の可能性",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "1 mg/kg PO q24h",
+                "dosage_ja": "1 mg/kg 経口 24時間毎",
+                "notes": "Limited feline data; extrapolated from canine. For pulmonary hypertension",
+                "notes_ja": "猫のデータは限定的。犬から外挿。肺高血圧症に",
+            },
+        },
+        "side_effects": ["hypotension", "facial flushing", "GI upset", "nasal congestion"],
+        "side_effects_ja": ["低血圧", "顔面紅潮", "消化器症状", "鼻閉"],
+        "contraindications": "Concurrent nitrates (severe hypotension). Severe aortic stenosis. Systemic hypotension.",
+        "contraindications_ja": "硝酸薬との併用（重度低血圧）。重度大動脈弁狭窄症。全身性低血圧。",
+    },
+    # ------------------------------------------------------------------
+    # Cabergoline – dopamine agonist
+    # ------------------------------------------------------------------
+    {
+        "id": "cabergoline",
+        "name": "Cabergoline (Galastop/Dostinex)",
+        "name_ja": "カベルゴリン（ギャラストップ/カバサール）",
+        "category": "hormones",
+        "mechanism": "Ergot-derived dopamine D2 receptor agonist. Inhibits prolactin secretion from anterior pituitary. Used for pregnancy termination, pseudopregnancy, and galactorrhea.",
+        "mechanism_ja": "麦角由来ドパミンD2受容体作動薬。下垂体前葉からのプロラクチン分泌を抑制。偽妊娠の治療・妊娠中絶・乳汁漏出に使用。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "5 µg/kg PO q24h for 5-10 days",
+                "dosage_ja": "5 µg/kg 経口 24時間毎 5-10日間",
+                "notes": "For pseudopregnancy (usually 5-7 days); pregnancy termination (combine with PGF2α after day 25). Licensed veterinary product (Galastop) in EU",
+                "notes_ja": "偽妊娠に（通常5-7日間）。妊娠中絶（25日以降にPGF2αと併用）。EU圏で動物用医薬品（ギャラストップ）として承認",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "5 µg/kg PO q24h for 5-7 days",
+                "dosage_ja": "5 µg/kg 経口 24時間毎 5-7日間",
+                "notes": "For pseudopregnancy and lactation suppression",
+                "notes_ja": "偽妊娠・泌乳抑制に",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "5 µg/kg PO q24h for 5-7 days",
+                "dosage_ja": "5 µg/kg 経口 24時間毎 5-7日間",
+                "notes": "Off-label; for persistent estrus or pseudopregnancy",
+                "notes_ja": "適応外。持続発情・偽妊娠に",
+            },
+            "rabbit": {
+                "safe": True,
+                "dosage": "5 µg/kg PO q24h for 5-7 days",
+                "dosage_ja": "5 µg/kg 経口 24時間毎 5-7日間",
+                "notes": "For pseudopregnancy in rabbits",
+                "notes_ja": "ウサギの偽妊娠に",
+            },
+        },
+        "side_effects": ["vomiting (transient)", "anorexia (mild)", "drowsiness"],
+        "side_effects_ja": ["嘔吐（一過性）", "食欲不振（軽度）", "眠気"],
+        "contraindications": "Pregnancy (unless intended termination). Hypersensitivity to ergot alkaloids.",
+        "contraindications_ja": "妊娠中（中絶目的でない限り）。麦角アルカロイド過敏症。",
+    },
+    # ------------------------------------------------------------------
+    # Tranexamic acid – antifibrinolytic
+    # ------------------------------------------------------------------
+    {
+        "id": "tranexamic_acid",
+        "name": "Tranexamic Acid (TXA/Transamin)",
+        "name_ja": "トラネキサム酸（トランサミン）",
+        "category": "cardiovascular",
+        "mechanism": "Synthetic lysine analog; competitively inhibits plasminogen activation, preventing fibrinolysis. Stabilizes clots. Used for hemorrhage, DIC (hyperfibrinolytic phase), and surgical bleeding.",
+        "mechanism_ja": "合成リジンアナログ。プラスミノゲン活性化を競合的に阻害し線溶を防止。血栓を安定化。出血、DIC（線溶亢進相）、手術出血に使用。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "10-25 mg/kg IV/PO q8-12h",
+                "dosage_ja": "10-25 mg/kg 静注/経口 8-12時間毎",
+                "notes": "For life-threatening hemorrhage, hemoabdomen, post-surgical bleeding. Can give as CRI 10 mg/kg/h",
+                "notes_ja": "生命を脅かす出血、血腹、術後出血に。持続投与 10 mg/kg/時も可",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "10-20 mg/kg IV/PO q8-12h",
+                "dosage_ja": "10-20 mg/kg 静注/経口 8-12時間毎",
+                "notes": "For hemorrhage control; limited feline-specific data",
+                "notes_ja": "止血に。猫固有のデータは限定的",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "5-10 mg/kg IV q8-12h",
+                "dosage_ja": "5-10 mg/kg 静注 8-12時間毎",
+                "notes": "For exercise-induced pulmonary hemorrhage (EIPH); intra-operative hemorrhage",
+                "notes_ja": "運動誘発性肺出血（EIPH）、術中出血に",
+            },
+        },
+        "side_effects": ["GI upset", "thromboembolism (theoretical risk)", "seizures (rare, high dose)"],
+        "side_effects_ja": ["消化器症状", "血栓塞栓症（理論的リスク）", "痙攣（稀、高用量）"],
+        "contraindications": "Active thromboembolic disease. DIC (hypercoagulable phase). Severe renal impairment (adjust dose). Hematuria of upper urinary tract origin (risk of ureteral obstruction).",
+        "contraindications_ja": "活動性血栓塞栓症。DIC（過凝固相）。重度腎障害（用量調整）。上部尿路由来の血尿（尿管閉塞リスク）。",
+    },
+    # ------------------------------------------------------------------
+    # Aminocaproic acid – antifibrinolytic
+    # ------------------------------------------------------------------
+    {
+        "id": "aminocaproic_acid",
+        "name": "Aminocaproic Acid (Amicar)",
+        "name_ja": "アミノカプロン酸（イプシロン）",
+        "category": "cardiovascular",
+        "mechanism": "Lysine analog; inhibits plasminogen activation and fibrinolysis. Also used empirically for degenerative myelopathy (DM) in dogs to slow progression.",
+        "mechanism_ja": "リジンアナログ。プラスミノゲン活性化・線溶を阻害。犬の変性性脊髄症（DM）の進行遅延に経験的にも使用。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Hemorrhage: 15-40 mg/kg IV/PO q8h; DM: 500 mg PO q8h (large dogs)",
+                "dosage_ja": "出血: 15-40 mg/kg 静注/経口 8時間毎；DM: 500 mg 経口 8時間毎（大型犬）",
+                "notes": "For DM in German Shepherds/Corgis (empirical). For hemorrhagic conditions and post-surgical bleeding",
+                "notes_ja": "ジャーマンシェパード/コーギーのDMに（経験的）。出血性疾患・術後出血に",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "15-20 mg/kg IV/PO q8h",
+                "dosage_ja": "15-20 mg/kg 静注/経口 8時間毎",
+                "notes": "For hemorrhage control; less data than tranexamic acid in cats",
+                "notes_ja": "止血に。猫ではトラネキサム酸よりデータが少ない",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "30-50 mg/kg IV slow q6-8h",
+                "dosage_ja": "30-50 mg/kg 緩徐静注 6-8時間毎",
+                "notes": "For surgical hemorrhage; give IV slowly to avoid hypotension",
+                "notes_ja": "手術出血に。低血圧回避のため緩徐に静注",
+            },
+        },
+        "side_effects": ["GI upset", "hypotension (rapid IV)", "myopathy (prolonged use)", "thrombosis (theoretical)"],
+        "side_effects_ja": ["消化器症状", "低血圧（急速静注時）", "筋症（長期使用）", "血栓症（理論的）"],
+        "contraindications": "Active intravascular clotting (DIC hypercoagulable phase). Upper urinary tract bleeding (ureteral clot risk).",
+        "contraindications_ja": "活動性血管内凝固（DIC過凝固相）。上部尿路出血（尿管血栓リスク）。",
+    },
+    # ------------------------------------------------------------------
+    # Cosyntropin – diagnostic (ACTH stimulation test)
+    # ------------------------------------------------------------------
+    {
+        "id": "cosyntropin",
+        "name": "Cosyntropin (Cortrosyn/Synacthen)",
+        "name_ja": "コシントロピン（コートロシン/シナクテン）",
+        "category": "endocrine",
+        "mechanism": "Synthetic ACTH (1-24) analog. Stimulates adrenal cortex to produce cortisol. Used as diagnostic agent for ACTH stimulation test to evaluate adrenal function (Addison's, Cushing's, and iatrogenic hypoadrenocorticism).",
+        "mechanism_ja": "合成ACTH（1-24）アナログ。副腎皮質を刺激しコルチゾール産生を促進。ACTH刺激試験の診断薬として副腎機能評価に使用（アジソン病、クッシング症候群、医原性副腎皮質機能低下症）。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "5 µg/kg IV/IM (max 250 µg); measure cortisol at 0 and 60 min post-injection",
+                "dosage_ja": "5 µg/kg 静注/筋注（最大250 µg）；投与前と投与後60分にコルチゾール測定",
+                "notes": "Gold standard for Addison's diagnosis and trilostane monitoring. Can use low-dose (1 µg/kg) protocol for increased sensitivity",
+                "notes_ja": "アジソン病診断・トリロスタンモニタリングのゴールドスタンダード。感度向上には低用量（1 µg/kg）プロトコルも可",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "125 µg/cat IV/IM; measure cortisol at 0 and 60 min",
+                "dosage_ja": "125 µg/匹 静注/筋注；投与前と投与後60分にコルチゾール測定",
+                "notes": "Feline Addison's is rare but increasing recognition. Also for monitoring exogenous steroid effects",
+                "notes_ja": "猫のアジソン病は稀だが認識増加中。外因性ステロイド効果のモニタリングにも",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "1 µg/kg IV or 100 µg/horse IV; cortisol at 0 and 30 min",
+                "dosage_ja": "1 µg/kg 静注 または 100 µg/頭 静注；投与前と投与後30分にコルチゾール測定",
+                "notes": "For evaluation of PPID; TRH stimulation test is preferred for equine Cushing's",
+                "notes_ja": "PPID評価に。馬のクッシングにはTRH刺激試験が推奨",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "1 µg/kg IV/IM; cortisol at 0 and 60 min",
+                "dosage_ja": "1 µg/kg 静注/筋注；投与前と投与後60分にコルチゾール測定",
+                "notes": "For suspected iatrogenic or naturally occurring hypoadrenocorticism",
+                "notes_ja": "医原性または自然発生副腎皮質機能低下症の診断に",
+            },
+        },
+        "side_effects": ["hypersensitivity (rare)", "flushing", "tachycardia"],
+        "side_effects_ja": ["過敏反応（稀）", "紅潮", "頻脈"],
+        "contraindications": "Known hypersensitivity to cosyntropin. Not a therapeutic agent (diagnostic only).",
+        "contraindications_ja": "コシントロピン過敏症。治療薬ではなく診断薬。",
+    },
 ]
 
 # ---------------------------------------------------------------------------
