@@ -221,11 +221,16 @@ function applyLanguage(){
     const val=t(key);
     if(val&&val!==key)el.textContent=val;
   });
-  // Update data-i18n-html (innerHTML)
+  // Update data-i18n-html (innerHTML — sanitized to allow only safe tags)
   document.querySelectorAll("[data-i18n-html]").forEach(el=>{
     const key=el.getAttribute("data-i18n-html");
     const val=t(key);
-    if(val&&val!==key)el.innerHTML=val;
+    if(val&&val!==key){
+      const tmp=document.createElement("div");tmp.innerHTML=val;
+      tmp.querySelectorAll("script,iframe,object,embed,form,input,textarea,style,link,meta").forEach(n=>n.remove());
+      tmp.querySelectorAll("*").forEach(n=>{for(const a of[...n.attributes]){if(a.name.startsWith("on"))n.removeAttribute(a.name);}});
+      el.innerHTML=tmp.innerHTML;
+    }
   });
   // Update data-i18n-ph (placeholder)
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
