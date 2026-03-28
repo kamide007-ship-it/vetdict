@@ -9,6 +9,7 @@ Provides:
   - RECO2/RECO3 AI integrity control layer
 """
 
+import contextlib
 import logging
 import os
 from functools import wraps
@@ -551,10 +552,8 @@ def api_analyze_symptoms():
         for k, v in lab_values_raw.items():
             if not isinstance(k, str) or len(k) > MAX_STRING_LEN:
                 return {'error': 'lab_values keys must be strings'}, 400
-            try:
+            with contextlib.suppress(ValueError, TypeError):
                 lab_values[str(k)] = float(v)
-            except (ValueError, TypeError):
-                pass  # Skip non-numeric entries silently
         if not lab_values:
             lab_values = None
 
