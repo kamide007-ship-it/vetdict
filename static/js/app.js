@@ -310,6 +310,18 @@ document.addEventListener("DOMContentLoaded",async()=>{
     // Handle ?species= query param (from sitemap/SEO links)
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
+    // References toggle (replaces inline onclick)
+    const refHeader=document.querySelector(".ref-header");
+    if(refHeader){
+      refHeader.addEventListener("click",()=>{
+        const expanded=refHeader.getAttribute("aria-expanded")==="false";
+        refHeader.setAttribute("aria-expanded",expanded);
+        document.getElementById("refContent").classList.toggle("ref-open");
+      });
+      refHeader.addEventListener("keydown",(e)=>{
+        if(e.key==="Enter"||e.key===" "){e.preventDefault();refHeader.click();}
+      });
+    }
   }catch(e){
     console.error("Error in DOMContentLoaded:",e);
   }
