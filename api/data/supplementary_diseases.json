@@ -46632,7 +46632,8 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of atadenovirus infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "アタデノウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "アタデノウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "treatment_ja": "特異的抗ウイルス治療はない。支持療法：輸液（生理食塩水10-25 mL/kg/日SC/IC）、補助給餌、POTZ上限での保温。併発コクシジウムの積極的治療（ポナズリル20 mg/kg PO q24h）。肝保護薬（シリマリン）。二次感染にエンロフロキサシン5-10 mg/kg IM q24h。肝数値モニタリング。感染動物の隔離。"
   },
   {
     "name": "Yellow Fungus Disease (Chrysosporium)",
@@ -46954,7 +46955,8 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of paramyxovirus is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "パラミクソウイルス（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "パラミクソウイルス（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "treatment_ja": "抗ウイルス治療は利用不可能。支持療法：生理食塩水/F10でのネブライゼーション、輸液（10-25 mL/kg/日SC/IC）、POTZ上限への加温。二次性細菌性肺炎にセフタジジム20 mg/kg IM q72hまたはエンロフロキサシン5-10 mg/kg IM q24h。頭位挙上によるドレナージ促進。感染動物の厳格な隔離。重症例は安楽死を検討。"
   },
   {
     "name": "Iridovirus (Ranavirus)",
@@ -46984,7 +46986,8 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of iridovirus (ranavirus) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "イリドウイルス（ラナウイルス）（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "イリドウイルス（ラナウイルス）（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "treatment_ja": "特異的抗ウイルス療法はない。輸液（10-25 mL/kg/日）、保温（POTZ上限）、栄養管理による支持療法。二次性細菌感染にエンロフロキサシン5 mg/kg IM q24h。感染動物の隔離。コレクション保護のため検疫と淘汰が必要な場合あり。予後はウイルス種と臓器障害の程度に依存。"
   },
   {
     "name": "Mycoplasma Infection",
@@ -49485,7 +49488,8 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of hepatic viral infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "肝ウイルス感染症（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "肝ウイルス感染症（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "treatment_ja": "特異的抗ウイルス治療はない。肝保護薬：シリマリン（ミルクシスル）、SAMe。積極的輸液療法（生理食塩水/乳酸リンゲル10-25 mL/kg/日IC/IO）。POTZ上限での保温。チューブフィーディングによる栄養支持。二次感染にエンロフロキサシン5 mg/kg IM q24h。肝酵素の定期的モニタリング。感染動物の隔離と新規導入個体の検疫。"
   },
   {
     "name": "Hepatic Parasitic Disease",
@@ -49635,7 +49639,8 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of gastrointestinal viral infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "消化管ウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "消化管ウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "treatment_ja": "特異的抗ウイルス治療はない。積極的輸液療法（生理食塩水/乳酸リンゲル10-25 mL/kg/日SC/IC）で脱水を補正。POTZ上限での保温。チューブフィーディングまたはシリンジ給餌による栄養支持。嘔吐・下痢のコントロール。二次性細菌感染にメトロニダゾール20 mg/kg PO q24-48h＋エンロフロキサシン5 mg/kg IM q24h。電解質モニタリング。感染動物の隔離。"
   },
   {
     "name": "Gastrointestinal Fungal Infection",
@@ -49878,7 +49883,8 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of respiratory viral infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "呼吸器ウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "呼吸器ウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "treatment_ja": "特異的抗ウイルス治療はない。ネブライゼーション（生理食塩水またはF10希釈液）による気道加湿。POTZ上限での保温。輸液療法（10-25 mL/kg/日SC/IC）。二次性細菌性肺炎にセフタジジム20 mg/kg IM q72hまたはアミカシン2.5 mg/kg IM q72h（初回に生食ボーラス投与）。頭位挙上によるドレナージ促進。感染動物の厳格な隔離。"
   },
   {
     "name": "Respiratory Fungal Infection",
@@ -50116,7 +50122,8 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of dermatological viral infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "皮膚ウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "皮膚ウイルス感染（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "treatment_ja": "特異的抗ウイルス治療はない。局所病変のクロルヘキシジン0.05%またはポビドンヨード希釈液での洗浄。二次性細菌感染にスルファジアジン銀局所塗布＋エンロフロキサシン5-10 mg/kg IM q24h（全身投与）。POTZ上限での保温。栄養支持と輸液。感染動物の隔離。脱皮周期のモニタリング。"
   },
   {
     "name": "Dermatological Fungal Infection",
