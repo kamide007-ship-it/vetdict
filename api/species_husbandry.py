@@ -3,6 +3,8 @@
 Each species entry contains bilingual (ja/en) information about:
 - temperature: Optimal temperature range
 - humidity: Optimal humidity range
+- subtypes (optional): Breed/type-specific care data for species with
+  significant variation (e.g. lizard → bearded dragon, leopard gecko, chameleon)
 - housing: Housing requirements
 - diet: Dietary needs
 - enrichment: Environmental enrichment
@@ -545,6 +547,32 @@ HUSBANDRY_DATA: dict = {
         "enrichment": {"en": "Multiple hides and cover. Branches and ledges. Novel scents (shed from other species). Environmental changes (rearrange decor). Some species benefit from handling.", "ja": "複数のシェルターとカバー。枝や棚。新しい匂い（他種の脱皮殻など）。環境の模様替え。ハンドリングが有益な種もある。"},
         "socialization": {"en": "Strictly solitary (with very few exceptions). Co-habitation is stressful and dangerous (cannibalism risk in some species). Regular gentle handling tames most species.", "ja": "厳格な単独飼育（ごく一部の例外を除く）。同居はストレスと危険（共食いのリスクも）。定期的な穏やかなハンドリングで多くの種は馴れる。"},
         "notes": {"en": "Lifespan 15–30+ years (ball pythons). Do not handle 48 hours after feeding. Blue/milky eyes indicate upcoming shed. Respiratory infections common with improper humidity. Escape prevention is critical.", "ja": "寿命15〜30年以上（ボールパイソン）。給餌後48時間はハンドリング不可。目が白く濁ると脱皮間近。湿度管理不良で呼吸器感染症が多い。脱走防止が最重要。"},
+        "subtypes": [
+            {
+                "name": "Ball Python", "name_ja": "ボールパイソン",
+                "temperature": {"en": "Warm side 30–32°C, cool side 24–26°C, night 24°C. Belly heat (under-tank heater + thermostat) preferred. Ceramic heat emitter for ambient.", "ja": "温暖側30〜32℃、冷涼側24〜26℃、夜間24℃。パネルヒーター＋サーモスタットで腹部加温。暖突で環境温度調整。"},
+                "humidity": {"en": "50–60% ambient; 70–80% during shed (humid hide or misting). Dehydration and stuck shed are common issues.", "ja": "通常50〜60%。脱皮時は70〜80%（ウェットシェルターまたは霧吹き）。脱水と脱皮不全がよくある問題。"},
+                "housing": {"en": "Minimum 120×60×45 cm for adults. PVC or tub setups retain humidity better than screen cages. Tight-fitting hides (they like snug spaces). Climbing opportunities appreciated.", "ja": "成体で最低120×60×45cm。PVCケージやタブ飼育はメッシュケージより湿度維持が容易。体にフィットする隠れ家（狭い空間を好む）。登る機会も喜ぶ。"},
+                "diet": {"en": "Frozen-thawed rats/mice. Juveniles: every 5–7 days. Adults: every 10–14 days. Prey width ≈ widest part of snake. Known for hunger strikes (months-long fasting can be normal).", "ja": "冷凍解凍マウス/ラット。幼体：5〜7日ごと。成体：10〜14日ごと。餌の幅≒ヘビの最太部。拒食しやすい（数ヶ月の絶食が正常なことも）。"},
+                "notes": {"en": "Lifespan 20–30+ years. Ball-up defense posture (curls into ball). Notorious picky eaters. Respiratory infections if too cold/humid. Many morphs available but some linked to neurological issues (spider morph wobble).", "ja": "寿命20〜30年以上。ボール防御姿勢（丸まる）。偏食で有名。低温/高湿度で呼吸器感染症。多数のモルフがあるが一部は神経障害と関連（スパイダーモルフのウォブル）。"},
+            },
+            {
+                "name": "Corn Snake", "name_ja": "コーンスネーク",
+                "temperature": {"en": "Warm side 28–30°C, cool side 22–25°C, night 20–22°C. Heat mat with thermostat. Room temperature is often too cool.", "ja": "温暖側28〜30℃、冷涼側22〜25℃、夜間20〜22℃。サーモスタット付きヒートマット。室温だけでは低すぎることが多い。"},
+                "humidity": {"en": "40–50% ambient; increase to 60–70% during shed. Good ventilation important.", "ja": "通常40〜50%。脱皮時は60〜70%に上げる。換気の確保が重要。"},
+                "housing": {"en": "Minimum 90×45×45 cm for adults. Escape-proof lid essential (notorious escape artists). Multiple hides. Semi-arboreal — provide climbing branches.", "ja": "成体で最低90×45×45cm。脱走防止の蓋が必須（脱走の名人）。複数のシェルター。半樹上性 — 登攀用の枝を設置。"},
+                "diet": {"en": "Frozen-thawed mice. Hatchlings: pinky mice every 5–7 days. Adults: adult mice every 10–14 days. Usually excellent feeders.", "ja": "冷凍解凍マウス。ハッチリング：ピンクマウスを5〜7日ごと。成体：アダルトマウスを10〜14日ごと。通常は食欲旺盛。"},
+                "notes": {"en": "Lifespan 15–20 years. Excellent beginner snake — docile, hardy, great feeders. Many color morphs. Brumation possible (2–3 months at 10–15°C) for breeding.", "ja": "寿命15〜20年。初心者に最適 — 温厚、丈夫、食欲旺盛。多数のカラーモルフ。繁殖にはブルメーション（2〜3ヶ月、10〜15℃）が可能。"},
+            },
+            {
+                "name": "Boa Constrictor", "name_ja": "ボアコンストリクター",
+                "temperature": {"en": "Basking 32–35°C, cool side 26–28°C, night 24–26°C. Radiant heat panel or ceramic heat emitter for large enclosures.", "ja": "ホットスポット32〜35℃、冷涼側26〜28℃、夜間24〜26℃。大型ケージにはラジアントヒートパネルまたは暖突。"},
+                "humidity": {"en": "60–70%. Higher for tropical subspecies (BCI: 60–70%, BCC: 70–80%). Misting or large water bowl for humidity.", "ja": "60〜70%。熱帯亜種はより高湿度（BCI：60〜70%、BCC：70〜80%）。霧吹きまたは大型水入れで湿度確保。"},
+                "housing": {"en": "Adults need 180×60×60 cm minimum (can reach 2–3 m). Heavy-duty enclosure with secure locking. Large water bowl for soaking. PVC enclosures preferred.", "ja": "成体は最低180×60×60cm（体長2〜3mに達する）。頑丈なケージと確実なロック。浸かれる大型水入れ。PVCケージ推奨。"},
+                "diet": {"en": "Frozen-thawed rats/rabbits (size-appropriate). Juveniles: every 7–10 days. Adults: every 2–4 weeks. Obesity is common in captivity — monitor body condition.", "ja": "冷凍解凍ラット/ウサギ（サイズに合わせて）。幼体：7〜10日ごと。成体：2〜4週ごと。飼育下では肥満が多い — 体型管理を。"},
+                "notes": {"en": "Lifespan 20–30+ years. Can become large and strong — experienced keeper recommended. Inclusion body disease (IBD) is a serious viral threat. Regular health checks important.", "ja": "寿命20〜30年以上。大きく力も強くなるため経験者向け。封入体病（IBD）は深刻なウイルス疾患。定期的な健康チェックが重要。"},
+            },
+        ],
     },
     # =========================================================================
     # トカゲ (Lizard)
@@ -559,6 +587,40 @@ HUSBANDRY_DATA: dict = {
         "enrichment": {"en": "Climbing structures, basking platforms. Varied substrate textures. Live plants (non-toxic). Foraging opportunities. Supervised outdoor time in warm weather.", "ja": "登攀構造物、バスキング台。様々な質感の床材。無毒の生きた植物。採食機会。暖かい日には監視下で屋外日光浴。"},
         "socialization": {"en": "Most lizards are solitary. Bearded dragons can be handleable and interactive. Chameleons are strictly solitary and stress-sensitive. Leopard geckos tolerate gentle handling.", "ja": "多くのトカゲは単独飼育。フトアゴはハンドリングしやすく人馴れする。カメレオンは完全単独でストレスに弱い。ヒョウモンは穏やかなハンドリングを許容。"},
         "notes": {"en": "MBD (metabolic bone disease) is #1 health issue — proper UVB and calcium critical. Tail autotomy in geckos is a defense mechanism (may or may not regrow). Impaction from substrate ingestion is common.", "ja": "MBD（代謝性骨疾患）が最大の健康問題 — UVBとカルシウムが不可欠。ヤモリの尾の自切は防御反応（再生する場合としない場合あり）。床材の誤飲による腸閉塞が多い。"},
+        "subtypes": [
+            {
+                "name": "Bearded Dragon", "name_ja": "フトアゴヒゲトカゲ",
+                "temperature": {"en": "Basking 38–42°C, cool side 24–28°C, night 20–22°C. UVB 10.0 essential (10–12 hr/day).", "ja": "ホットスポット38〜42℃、クールゾーン24〜28℃、夜間20〜22℃。UVB 10.0必須（10〜12時間/日）。"},
+                "humidity": {"en": "30–40%. Low humidity species; excessive humidity causes respiratory infections.", "ja": "30〜40%。乾燥環境の種。高湿度は呼吸器感染の原因。"},
+                "housing": {"en": "120×60×60 cm minimum for adults. Front-opening terrarium preferred. No loose sand substrate (impaction risk) — tile, reptile carpet, or excavator clay.", "ja": "成体で最低120×60×60cm。前面開閉式テラリウム推奨。砂の床材不可（腸閉塞リスク）— タイル、レプタイルカーペット、クレイ系床材。"},
+                "diet": {"en": "Juveniles: 70% insects, 30% greens. Adults: 70% greens, 30% insects. Staple insects: dubia roaches, black soldier fly larvae. Greens: collard, mustard, dandelion. Calcium dust daily for juveniles.", "ja": "幼体：昆虫70%、野菜30%。成体：野菜70%、昆虫30%。主食昆虫：デュビアローチ、アメリカミズアブ幼虫。野菜：コラード、マスタードグリーン、タンポポ。幼体はCaダスティング毎日。"},
+                "notes": {"en": "Lifespan 10–15 years. Brumation (winter dormancy) normal in adults. Arm waving = submission, head bobbing = dominance/territorial. Black beard = stress or aggression.", "ja": "寿命10〜15年。成体のブルメーション（冬季休眠）は正常。腕振り＝服従、ヘッドボビング＝優位/縄張り。顎が黒くなる＝ストレスまたは攻撃性。"},
+            },
+            {
+                "name": "Leopard Gecko", "name_ja": "ヒョウモントカゲモドキ",
+                "temperature": {"en": "Warm side 28–32°C (belly heat via under-tank heater), cool side 24–26°C, night 20–22°C. No UVB strictly required but beneficial.", "ja": "温暖側28〜32℃（パネルヒーターで腹部加温）、冷涼側24〜26℃、夜間20〜22℃。UVBは必須ではないが有益。"},
+                "humidity": {"en": "30–40% ambient; humid hide (70–80%) for shedding support.", "ja": "環境湿度30〜40%。脱皮補助用のウェットシェルター（70〜80%）を設置。"},
+                "housing": {"en": "60×45×30 cm minimum. Terrestrial — floor space more important than height. 3 hides minimum (warm, cool, humid). Paper towel or tile substrate safest.", "ja": "最低60×45×30cm。地表性 — 高さより床面積重要。最低3つのシェルター（温暖側、冷涼側、ウェット）。キッチンペーパーまたはタイルが最も安全。"},
+                "diet": {"en": "Strictly insectivorous: crickets, dubia roaches, mealworms (treat only — high fat). Calcium + D3 dusting every feeding. No vegetables/fruit.", "ja": "完全昆虫食：コオロギ、デュビアローチ、ミルワーム（おやつ程度 — 高脂肪）。毎回Ca＋D3ダスティング。野菜・果物は不可。"},
+                "notes": {"en": "Lifespan 15–20+ years. Crepuscular (dawn/dusk active). Fat stored in tail — thin tail indicates illness. Tail autotomy if grabbed — handle body, never tail.", "ja": "寿命15〜20年以上。薄明薄暮性。尻尾に脂肪を蓄積 — 尻尾が細いと体調不良。尻尾を掴むと自切 — 体を持ち、尻尾は決して掴まない。"},
+            },
+            {
+                "name": "Chameleon", "name_ja": "カメレオン",
+                "temperature": {"en": "Basking 30–35°C, ambient 24–28°C, night drop to 16–22°C important. UVB 5.0 essential.", "ja": "ホットスポット30〜35℃、環境温度24〜28℃、夜間16〜22℃への温度低下が重要。UVB 5.0必須。"},
+                "humidity": {"en": "50–70%. Misting 2–4x daily (they drink water droplets off leaves — do NOT use standing water bowls). Drip system or misting system essential.", "ja": "50〜70%。1日2〜4回の霧吹き（葉の水滴を舐めて飲水 — 水入れは使わない）。ドリップシステムまたはミスティングシステム必須。"},
+                "housing": {"en": "Screen/mesh cage (NOT glass — need ventilation). Minimum 60×60×120 cm for veiled/panther chameleons. Live plants (pothos, ficus) essential. Horizontal branches at multiple levels.", "ja": "メッシュケージ（ガラス不可 — 通気性が必要）。エボシ/パンサーで最低60×60×120cm。生きた植物（ポトス、フィカス）必須。複数の高さに水平の枝。"},
+                "diet": {"en": "Insectivorous: crickets, silkworms, hornworms. Gut-load insects with greens. Calcium every feeding, D3 2x/month, multivitamin 2x/month.", "ja": "昆虫食：コオロギ、シルクワーム、ホーンワーム。昆虫には野菜でガットローディング。Ca毎回、D3月2回、マルチビタミン月2回。"},
+                "notes": {"en": "Lifespan 5–8 years. Strictly solitary — visual contact with other chameleons causes chronic stress. Color changes indicate mood/health. Very stress-sensitive — not a handling pet.", "ja": "寿命5〜8年。厳格な単独飼育 — 他のカメレオンが見えるだけでストレス。体色変化は気分/健康のバロメーター。ストレスに非常に弱い — ハンドリング向きではない。"},
+            },
+            {
+                "name": "Crested Gecko", "name_ja": "クレステッドゲッコー",
+                "temperature": {"en": "22–27°C (room temperature often sufficient). Do NOT exceed 30°C — heat-sensitive. No basking light needed. Low UVB beneficial but not essential.", "ja": "22〜27℃（室温で十分なことが多い）。30℃を超えてはならない — 暑さに弱い。バスキングライト不要。低出力UVBは有益だが必須ではない。"},
+                "humidity": {"en": "60–80%. Mist heavily in evening, let dry during day. Good ventilation to prevent stagnant air.", "ja": "60〜80%。夕方にたっぷり霧吹き、日中は乾燥させる。空気が淀まないよう換気を確保。"},
+                "housing": {"en": "Tall enclosure (45×45×60 cm minimum). Arboreal — vertical space critical. Cork bark, branches, live/artificial plants. Front-opening preferred.", "ja": "縦長ケージ（最低45×45×60cm）。樹上性 — 垂直空間が重要。コルクバーク、枝、生体/人工植物。前面開閉式推奨。"},
+                "diet": {"en": "Commercial crested gecko diet (CGD: Repashy, Pangea) as staple — complete nutrition. Insects 1–2x/week as supplement. Fresh CGD every other day.", "ja": "クレステッドゲッコー用人工飼料（CGD：レパシー、パンゲア）が主食 — 完全栄養食。昆虫は週1〜2回の補助。新鮮なCGDを1日おきに。"},
+                "notes": {"en": "Lifespan 15–20 years. Dropped tail does NOT regrow (unlike many geckos). 'Floppy tail syndrome' from always hanging upside down. Easy beginner reptile.", "ja": "寿命15〜20年。自切した尻尾は再生しない（他のヤモリと異なる）。常に逆さにいると尻尾が曲がる（フロッピーテール症候群）。初心者向けの飼いやすい種。"},
+            },
+        ],
     },
     # =========================================================================
     # 両生類 (Amphibian)
