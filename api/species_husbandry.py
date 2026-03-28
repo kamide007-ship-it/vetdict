@@ -117,6 +117,26 @@ HUSBANDRY_DATA: dict = {
             "en": "Spay/neuter recommended (uterine cancer risk 60–80% in unspayed does). Nails need regular trimming. Cecotropes (night feces) are normal and must be eaten. Annual vet checkups with exotic-experienced vet.",
             "ja": "避妊・去勢推奨（未避妊メスの子宮癌リスクは60〜80%）。爪は定期的にカット。盲腸便（夜間糞）は正常で食べる必要あり。エキゾチック診療経験のある獣医で年1回健診。",
         },
+        "subtypes": [
+            {
+                "name": "Dwarf Breeds (Netherland Dwarf, Holland Lop, etc.)", "name_ja": "小型種（ネザーランドドワーフ、ホーランドロップ等）",
+                "housing": {"en": "Minimum cage 60×90 cm + daily free-roaming. Smaller body but equally active — don't underestimate space needs. Lower platforms to prevent fall injuries (small, fragile bones).", "ja": "最低ケージ60×90cm＋毎日の放し飼い。小さいが同等に活発 — スペース需要を過小評価しない。落下事故防止のため低い段差に（小さく骨が脆い）。"},
+                "diet": {"en": "Timothy hay unlimited. Pellets: 1/8 cup/day (small breed, easy to overfeed). Fewer leafy greens than large breeds (proportional). Monitor weight closely — obesity common in small breeds.", "ja": "チモシー牧草食べ放題。ペレット：1/8カップ/日（小型種は過食になりやすい）。葉物は大型種より少なめ（体格に応じて）。体重管理を厳密に — 小型種は肥満になりやすい。"},
+                "notes": {"en": "Lifespan 8–12 years. Dental malocclusion very common in dwarfs (shortened skull). Holland Lops: ear infections due to lop ears trapping moisture. Netherland Dwarf: can be skittish — patient handling needed.", "ja": "寿命8〜12年。不正咬合がドワーフ種に非常に多い（短頭型頭蓋）。ホーランドロップ：垂れ耳に湿気がこもり耳炎になりやすい。ネザーランドドワーフ：臆病な傾向 — 根気強いハンドリングが必要。"},
+            },
+            {
+                "name": "Medium Breeds (Mini Rex, Dutch, etc.)", "name_ja": "中型種（ミニレッキス、ダッチ等）",
+                "housing": {"en": "Minimum cage 75×120 cm + 4+ hours free-roaming daily. Sturdy platforms for jumping. Rex breeds: sensitive feet — fleece liners preferred over hard surfaces.", "ja": "最低ケージ75×120cm＋毎日4時間以上の放し飼い。ジャンプ用の頑丈な段差。レッキス種：足裏が敏感 — 硬い床よりフリースライナー推奨。"},
+                "diet": {"en": "Timothy hay unlimited. Pellets: 1/4 cup/day. Generous leafy greens (2 packed cups/day). Good balance of size vs metabolism.", "ja": "チモシー牧草食べ放題。ペレット：1/4カップ/日。たっぷりの葉物野菜（1日パック2カップ分）。体格と代謝のバランスが良い。"},
+                "notes": {"en": "Lifespan 8–12 years. Often considered ideal pet rabbits — manageable size, generally friendly. Mini Rex: velvet-like fur, sore hocks on hard surfaces. Dutch: active and social.", "ja": "寿命8〜12年。ペットウサギとして理想的とされることが多い — 扱いやすいサイズ、概して人懐こい。ミニレッキス：ビロードのような毛、硬い床でソアホック。ダッチ：活発で社交的。"},
+            },
+            {
+                "name": "Large/Giant Breeds (Flemish Giant, French Lop, etc.)", "name_ja": "大型種（フレミッシュジャイアント、フレンチロップ等）",
+                "housing": {"en": "Large pen or dedicated room — standard cages too small. Minimum 120×180 cm. Reinforced flooring (heavy body weight). Low platforms only (spinal injuries from falls).", "ja": "大型ペンまたは専用部屋 — 標準ケージでは小さすぎる。最低120×180cm。補強された床（体重が重い）。段差は低くする（落下で脊椎損傷の危険）。"},
+                "diet": {"en": "Timothy hay unlimited (they eat a LOT). Pellets: 1/4–1/2 cup/day (weight-dependent, up to 6+ kg). Large amounts of leafy greens. Higher calorie needs but still monitor for obesity.", "ja": "チモシー牧草食べ放題（大量に食べる）。ペレット：1/4〜1/2カップ/日（体重6kg以上にもなるため体重に応じて）。大量の葉物野菜。カロリー需要は高いが肥満に注意。"},
+                "notes": {"en": "Lifespan 5–8 years (shorter than small breeds). Spondylosis and arthritis common due to body weight. Heart disease more prevalent. Gentle giants — excellent temperament but need experienced handling due to size.", "ja": "寿命5〜8年（小型種より短い）。体重による脊椎症・関節炎が多い。心疾患も多い。穏やかな巨人 — 優れた気質だがサイズのため経験者向けのハンドリング。"},
+            },
+        ],
     },
     # =========================================================================
     # ハムスター (Hamster)
@@ -152,6 +172,22 @@ HUSBANDRY_DATA: dict = {
             "en": "Lifespan 2–3 years. Cheek pouches can become impacted. Teeth grow continuously — provide chew materials. Handle gently; startled hamsters may bite. Nocturnal — respect sleep cycle.",
             "ja": "寿命2〜3年。頬袋の詰まりに注意。歯は生涯伸び続ける — かじり木を常備。驚くと噛むことがあるため優しく扱う。夜行性のため昼間の睡眠を尊重。",
         },
+        "subtypes": [
+            {
+                "name": "Syrian (Golden) Hamster", "name_ja": "ゴールデンハムスター",
+                "temperature": {"en": "20–24°C. Torpor risk below 10°C — slightly more cold-tolerant than dwarf species.", "ja": "20〜24℃。10℃以下で擬似冬眠の危険 — ドワーフ種よりやや寒さに強い。"},
+                "housing": {"en": "Minimum 5,000 cm² floor space (100×50 cm). Deep bedding 20+ cm for burrowing. Exercise wheel 28+ cm diameter (back must not arch). STRICTLY solitary — will fight to death if cohabited.", "ja": "最低床面積5,000cm²（100×50cm）。巣穴掘り用に20cm以上の深い床材。回し車は直径28cm以上（背中が反らないサイズ）。厳格な単独飼育 — 同居は死闘になる。"},
+                "diet": {"en": "Hamster seed mix + pellets. Protein: boiled egg, mealworm, chicken 2–3x/week. Fresh vegetables daily (broccoli, cucumber, carrot). Larger body = slightly more food than dwarf.", "ja": "ハムスター用シードミックス＋ペレット。タンパク質：ゆで卵、ミルワーム、鶏肉を週2〜3回。毎日新鮮な野菜（ブロッコリー、キュウリ、ニンジン）。体が大きいぶんドワーフよりやや多めに。"},
+                "notes": {"en": "Lifespan 2–3 years. Body length 15–18 cm. Docile and easy to handle — best hamster for children. Large cheek pouches. Nocturnal but can adjust to evening handling.", "ja": "寿命2〜3年。体長15〜18cm。温厚でハンドリングしやすい — 子供向きのハムスター。大きな頬袋。夜行性だが夕方のふれあいに順応可能。"},
+            },
+            {
+                "name": "Dwarf Hamster (Roborovski / Campbell's / Winter White)", "name_ja": "ドワーフハムスター（ロボロフスキー/キャンベル/ジャンガリアン）",
+                "temperature": {"en": "20–24°C. Torpor risk below 10°C. Winter White may change coat color in response to light cycle changes.", "ja": "20〜24℃。10℃以下で擬似冬眠の危険。ジャンガリアンは日照変化で毛色が変わることがある。"},
+                "housing": {"en": "Minimum 4,000 cm² floor space. Deep bedding 15+ cm. Exercise wheel 20+ cm (Roborovski: 20 cm, Campbell's/Winter White: 21+ cm). Same-sex pairs possible if raised together (monitor closely).", "ja": "最低床面積4,000cm²。巣穴掘り用に15cm以上の深い床材。回し車は直径20cm以上（ロボ：20cm、キャンベル/ジャンガリ：21cm以上）。幼少期からの同性ペア飼育は可能（要監視）。"},
+                "diet": {"en": "Dwarf hamster-specific mix (lower sugar — Campbell's highly prone to diabetes). Tiny portions of vegetables. Protein 2–3x/week. Avoid sugary fruits especially for Campbell's.", "ja": "ドワーフハムスター専用ミックス（低糖質 — キャンベルは糖尿病になりやすい）。野菜は少量。タンパク質は週2〜3回。特にキャンベルは甘い果物を避ける。"},
+                "notes": {"en": "Lifespan 1.5–3 years. Roborovski: fastest, rarely bites but hard to handle (5 cm). Campbell's: diabetes-prone, can be nippy. Winter White: gentle, seasonal coat change. Chinese hamster is technically not a dwarf but similar care.", "ja": "寿命1.5〜3年。ロボロフスキー：最速、噛まないがハンドリング困難（5cm）。キャンベル：糖尿病に注意、噛むことも。ジャンガリアン：穏やか、季節で毛色変化。チャイニーズは厳密にはドワーフではないが飼育法は類似。"},
+            },
+        ],
     },
     # =========================================================================
     # モルモット (Guinea Pig)
@@ -187,6 +223,21 @@ HUSBANDRY_DATA: dict = {
             "en": "Lifespan 5–7 years. Vitamin C deficiency (scurvy) is common and serious. Open-rooted teeth require hay for proper wear. Bumblefoot common on hard/wire surfaces. Exotic vet recommended.",
             "ja": "寿命5〜7年。ビタミンC欠乏症（壊血病）は深刻で多い。常生歯のため牧草で歯の摩耗が必要。硬い床や金網では飛節びらんになりやすい。エキゾチック診療経験のある獣医推奨。",
         },
+        "subtypes": [
+            {
+                "name": "Short-haired (American, Crested, etc.)", "name_ja": "短毛種（アメリカン、クレステッド等）",
+                "notes": {"en": "Easiest to care for — minimal grooming needed. Most common pet variety. Rosettes (Abyssinian) need occasional brushing. Hardy and beginner-friendly.", "ja": "最も飼いやすい — グルーミングの手間が少ない。最も一般的なペット品種。アビシニアン（ロゼット毛）は時々ブラッシング。丈夫で初心者向き。"},
+            },
+            {
+                "name": "Long-haired (Peruvian, Silkie, Texel, etc.)", "name_ja": "長毛種（ペルビアン、シェルティ、テッセル等）",
+                "notes": {"en": "Daily brushing essential to prevent matting. Regular trimming (especially around rear). Bedding gets tangled in fur — fleece liners preferred. More prone to flystrike in warm weather. Show breeds may need coat wraps.", "ja": "毛玉防止のため毎日のブラッシングが必須。定期的なカット（特にお尻周り）。床材が毛に絡む — フリースライナー推奨。暖かい季節はハエウジ症になりやすい。ショー用品種はコートラッピングが必要。"},
+            },
+            {
+                "name": "Skinny Pig / Baldwin (Hairless)", "name_ja": "スキニーギニアピッグ / ボールドウィン（無毛種）",
+                "temperature": {"en": "22–26°C — higher than haired breeds (no fur for insulation). Fleece blankets and cozy hides essential. Avoid drafts.", "ja": "22〜26℃ — 有毛種より高めに（断熱する毛がない）。フリースブランケットと暖かい隠れ家が必須。隙間風を避ける。"},
+                "notes": {"en": "Higher calorie needs (to maintain body temperature). Skin needs moisturizing (coconut oil). Sunburn risk — no direct sunlight. More susceptible to skin injuries and fungal infections.", "ja": "カロリー需要が高い（体温維持のため）。皮膚の保湿が必要（ココナッツオイル）。日焼けのリスク — 直射日光不可。皮膚の怪我や真菌感染に罹りやすい。"},
+            },
+        ],
     },
     # =========================================================================
     # チンチラ (Chinchilla)
@@ -502,6 +553,26 @@ HUSBANDRY_DATA: dict = {
             "en": "Lifespan 25–30 years. Farrier every 6–8 weeks. Dental floating every 6–12 months. Colic is #1 cause of death. Vaccinations (tetanus, influenza, EHV) and deworming schedules. Annual vet checkup.",
             "ja": "寿命25〜30年。蹄のケア6〜8週ごと。歯の研磨6〜12ヶ月ごと。疝痛が死因第1位。予防接種（破傷風、インフルエンザ、EHV）と駆虫計画。年1回の定期健診。",
         },
+        "subtypes": [
+            {
+                "name": "Thoroughbred / Sport Horse", "name_ja": "サラブレッド / スポーツホース",
+                "diet": {"en": "High-energy diet for performance: quality hay + concentrates (oats, commercial feeds). Electrolyte supplementation during heavy work. 2–3% BW in total daily feed. Risk of gastric ulcers from high-grain diets.", "ja": "パフォーマンス用の高エネルギー食：良質な乾草＋濃厚飼料（オーツ、配合飼料）。激しい運動時は電解質補給。総給餌量は体重の2〜3%/日。高穀物食では胃潰瘍のリスク。"},
+                "housing": {"en": "Stall 3.6×3.6 m minimum. Daily turnout essential for mental health. Careful footing in arenas (tendon/ligament injuries). Adequate warm-up before exercise.", "ja": "馬房3.6×3.6m以上。精神的健康のため毎日の放牧が必須。馬場の足場管理（腱・靱帯損傷予防）。運動前の十分なウォームアップ。"},
+                "notes": {"en": "Prone to: gastric ulcers (60–90% prevalence in racehorses), tendon injuries, exercise-induced pulmonary hemorrhage (EIPH), osteochondrosis. Regular sport horse vet exams. Retirement planning important.", "ja": "好発疾患：胃潰瘍（競走馬の60〜90%に発生）、腱損傷、運動誘発性肺出血（EIPH）、骨軟骨症。定期的なスポーツホース健診。引退後の計画も重要。"},
+            },
+            {
+                "name": "Pony / Miniature Horse", "name_ja": "ポニー / ミニチュアホース",
+                "diet": {"en": "RESTRICTED grazing — highly prone to obesity and laminitis from rich pasture. Low-sugar hay (soaked if necessary). Minimal to no concentrates. Grazing muzzle recommended.", "ja": "放牧制限 — 肥満と蹄葉炎に非常になりやすい。低糖質の乾草（必要なら浸水）。濃厚飼料は最小限〜不要。グレージングマズル推奨。"},
+                "housing": {"en": "Smaller stalls adequate (3×3 m). Need companionship. Fencing must be appropriate for small size (can escape through standard horse fencing). Dry lot turnout often safer than rich pasture.", "ja": "小さめの馬房で可（3×3m）。仲間が必要。小さい体に合った柵（標準の馬用柵から脱走可能）。栄養豊富な牧草地よりドライロットでの放牧が安全なことが多い。"},
+                "notes": {"en": "Lifespan 25–35 years. #1 issue: obesity → laminitis → founder. Equine Metabolic Syndrome (EMS) and PPID (Cushing's) very common. Dental issues due to crowded teeth in small jaws. Hyperlipemia risk if suddenly starved.", "ja": "寿命25〜35年。最大の問題：肥満→蹄葉炎→蹄骨沈下。馬メタボリックシンドローム（EMS）とPPID（クッシング病）が非常に多い。小さな顎に歯が密集し歯科問題多発。急な絶食で高脂血症の危険。"},
+            },
+            {
+                "name": "Draft Horse", "name_ja": "重種馬（輓馬）",
+                "diet": {"en": "Moderate energy requirements despite large size. Quality hay (2% BW). Concentrates only for working horses. Some breeds prone to polysaccharide storage myopathy (PSSM) — low starch/sugar diet essential.", "ja": "体が大きいが必要エネルギーは中程度。良質な乾草（体重の2%）。濃厚飼料は使役馬のみ。PSSM（多糖類貯蔵筋症）になりやすい品種あり — 低澱粉・低糖質食が必須。"},
+                "housing": {"en": "Larger stalls needed (4×4 m minimum). Reinforced fencing and equipment. Wider doorways. Heavy-duty halters and lead ropes. Good footing — heavy body stresses joints.", "ja": "大きめの馬房が必要（最低4×4m）。柵と設備を強化。広い出入口。丈夫な無口と曳き綱。良好な足場 — 重い体重が関節に負担。"},
+                "notes": {"en": "Lifespan 18–25 years. Prone to: PSSM, shivers, chronic progressive lymphedema (feathered breeds), scratches/mud fever. Larger hooves need experienced farrier. Gentle temperament.", "ja": "寿命18〜25年。好発疾患：PSSM、シバーズ、慢性進行性リンパ浮腫（飾り毛品種）、球節皮膚炎。大きな蹄に経験豊富な装蹄師が必要。穏やかな気質。"},
+            },
+        ],
     },
     # =========================================================================
     # 爬虫類 (Reptile — general)
