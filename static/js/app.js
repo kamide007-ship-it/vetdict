@@ -838,7 +838,7 @@ function renderResults(data){
     html+=`<div class="lab-results-viz" style="border-color:${painColors[ps]}33"><div class="lab-viz-title" style="color:${painColors[ps]}">&#x1F9D1;&#x200D;&#x2695;&#xFE0F; ${currentLang==="ja"?"痛み評価":"Pain Assessment"}: ${painLabels[ps]} (${ps}/4)</div><div class="pain-meter"><div class="pain-meter-fill" style="width:${painPct}%;background:${painColors[ps]}"></div></div>${ps>=3?`<div style="font-size:.74rem;color:${painColors[ps]};margin-top:4px;font-weight:600">${currentLang==="ja"?"⚠ 強い痛みが検出されました。早急な鎮痛処置を検討してください。":"⚠ Severe pain detected. Consider immediate analgesic intervention."}</div>`:""}</div>`;
   }
   const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
-  if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
+  if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${escapeHtml(adviceText)}</div>`;
 
   // Stepwise differential diagnosis: Phase 1 (common) vs Phase 2 (rare)
   const phase1=diseasesByPhase.phase_1_common||[];
@@ -871,6 +871,8 @@ function renderResults(data){
   area.appendChild(createResultsDisclaimer());
   const contentDiv=document.createElement("div");
   contentDiv.innerHTML=html;
+  contentDiv.addEventListener("click",function(e){const head=e.target.closest(".disease-head");if(head)toggleDetail(head);});
+  contentDiv.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const head=e.target.closest(".disease-head");if(head){e.preventDefault();toggleDetail(head);}}});
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
   area.appendChild(createShareWidget(diseases));
@@ -981,7 +983,7 @@ function renderDiseaseCard(d,data){
   const prevention=pick(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
   const treatment=pick(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
   const prognosis=pick(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
-  const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return s;return currentLang==="ja"?`${n.ja} <span style="color:var(--gray-500);font-size:.78rem">${n.en}</span>`:`${n.en} <span style="color:var(--gray-500);font-size:.78rem">${n.ja}</span>`;}).join("&ensp;|&ensp;");
+  const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return escapeHtml(s);return currentLang==="ja"?`${escapeHtml(n.ja)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.en)}</span>`:`${escapeHtml(n.en)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.ja)}</span>`;}).join("&ensp;|&ensp;");
   const completeness=Number(d.completeness_score||100);
   const missing=(d.missing_fields||[]);
   const qualityClass=completeness>=90?"quality-ok":"quality-warn";
@@ -989,14 +991,14 @@ function renderDiseaseCard(d,data){
   const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
 
   const urgencyIcon=likelihood==="high"?"\u26A0\uFE0F":likelihood==="moderate"?"\u{1F7E1}":"\u{1F7E2}";
-  let html=`<div class="disease-result disease-${likelihood}">
-    <div class="disease-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleDetail(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDetail(this)}">
+  let html=`<div class="disease-result disease-${escapeHtml(likelihood)}">
+    <div class="disease-head" role="button" tabindex="0" aria-expanded="false">
       <div class="disease-head-info">
         <div class="disease-name-row">
-          <span class="disease-name">${name}</span>
-          ${nameSecondary&&nameSecondary!==name?`<span class="disease-name-ja">${nameSecondary}</span>`:""}
+          <span class="disease-name">${escapeHtml(name)}</span>
+          ${nameSecondary&&nameSecondary!==name?`<span class="disease-name-ja">${escapeHtml(nameSecondary)}</span>`:""}
           <span class="quality-badge ${qualityClass}">${completeness}%</span>
-          ${prevalenceLabel?`<span class="prevalence-badge">${prevalenceLabel}</span>`:""}
+          ${prevalenceLabel?`<span class="prevalence-badge">${escapeHtml(prevalenceLabel)}</span>`:""}
         </div>
         <div class="disease-match-bar-row">
           <div class="disease-match-bar"><div class="disease-match-fill disease-match-${likelihood}" style="width:${Math.min(pct,100)}%"></div></div>
@@ -1009,34 +1011,34 @@ function renderDiseaseCard(d,data){
       <div class="detail-grid">
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F4CB}</span> ${t("dtDescription")}</div>
-          <div class="detail-section-body">${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</div>
+          <div class="detail-section-body">${escapeHtml(desc||buildFieldFallback(t("dtDescription"),diseaseName))}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F9EC}</span> ${t("dtPathophysiology")}</div>
-          <div class="detail-section-body">${patho}</div>
+          <div class="detail-section-body">${escapeHtml(patho)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F50D}</span> ${t("dtCauses")}</div>
-          <div class="detail-section-body">${causes}</div>
+          <div class="detail-section-body">${escapeHtml(causes)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")}</div>
-          <div class="detail-section-body">${treatment}</div>
+          <div class="detail-section-body">${escapeHtml(treatment)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F6E1}\uFE0F</span> ${t("dtPrevention")}</div>
-          <div class="detail-section-body">${prevention}</div>
+          <div class="detail-section-body">${escapeHtml(prevention)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F4CA}</span> ${t("dtPrognosis")}</div>
-          <div class="detail-section-body">${prognosis}</div>
+          <div class="detail-section-body">${escapeHtml(prognosis)}</div>
         </div>
       </div>
       ${matchSymptoms.length?`<div class="detail-matched"><strong>${t("dtMatchedSymptoms")}:</strong> ${matchDisplay}</div>`:""}
       ${renderMissingKeySymptoms(d,data)}
       ${renderScoringDetail(d)}
-      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${recTests.join(", ")}</div>`:""}
-      ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${missing.join(", ")}</div>`:""}
+      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${escapeHtml(recTests.join(", "))}</div>`:""}
+      ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>
   </div>`;
   return html;
@@ -1912,31 +1914,32 @@ function renderDrugList(){
       const safeLabel=si.safe?`<span class="drug-safe-label">\u2713 ${t("safe")}</span>`:`<span class="drug-unsafe-label">\u2717 ${t("contraindicated")}</span>`;
       const doseText=currentLang==="ja"?(si.dosage_ja||si.dosage||"N/A"):(si.dosage||si.dosage_ja||"N/A");
       const noteText=currentLang==="ja"?(si.notes_ja||si.notes||""):(si.notes||si.notes_ja||"");
-      dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${doseText}<br/><span class="drug-dosage-note">${noteText}</span></div>`;
+      dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${escapeHtml(doseText)}<br/><span class="drug-dosage-note">${escapeHtml(noteText)}</span></div>`;
     }
     const catLabel=drugCategories[d.category]?(currentLang==="ja"?(drugCategories[d.category].ja||drugCategories[d.category].en):(drugCategories[d.category].en||drugCategories[d.category].ja)):(currentLang==="ja"?(d.category_ja||d.category):(d.category||d.category_ja));
     const sponsorBadge=d.sponsor?'<span class="sponsor-badge-tag">Sponsor</span>':"";
-    const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
+    const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${escapeHtml(d.sponsor_name||"Equine & Canine Vet Nutrition")}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${sanitizeUrl(d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/')}" target="_blank" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
     const dName=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
-    return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false" onclick="toggleDbItem(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDbItem(this)}">
+    return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false">
       <div class="drug-head-row">
         <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${sponsorBadge}</div>
-        <span class="drug-category-tag">${catLabel}</span>
+        <span class="drug-category-tag">${escapeHtml(catLabel)}</span>
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
-        <dl><dt>${t("dtContraindications")}</dt><dd>${currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||"")}</dd></dl>
-        ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", ")}</dd></dl>`:""}
-        ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", ")}</dd></dl>`:""}
-        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${di.drug}: ${currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja)}</span>`).join("")}</dd></dl>`:""}
+        <dl><dt>${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
+        ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", "))}</dd></dl>`:""}
+        ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", "))}</dd></dl>`:""}
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${escapeHtml(di.drug)}: ${escapeHtml(currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja))}</span>`).join("")}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"}"><strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${dose}${note?'<br/><span class="drug-dosage-note">'+note+'</span>':''}</div>`;}).join("")}
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
       </div>
     </div>`;
   }).join("");
+  _attachDbItemHandlers(list);
 }
 
 /* ===== Shared helpers ===== */
@@ -1952,8 +1955,8 @@ function toggleDetail(head){
 
 /* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
 function _attachDbItemHandlers(container){
-  container.addEventListener("click",function(e){const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
-  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item){e.preventDefault();toggleDbItem(item);}}});
+  container.addEventListener("click",function(e){if(e.target.closest("a"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
+  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")){e.preventDefault();toggleDbItem(item);}}});
 }
 
 /* Toggle disease DB item */
@@ -2142,7 +2145,7 @@ function renderAmbiguityAnalysis(analysis) {
     analysis.high_ambiguity_symptoms.forEach((symptom) => {
       const item = document.createElement('span');
       item.className = 'ambiguous-symptom';
-      item.innerHTML = `${symptom.symptom_id}`;
+      item.textContent = symptom.symptom_id;
 
       if (symptom.ambiguity_score !== undefined) {
         const score = document.createElement('span');
