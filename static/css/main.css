@@ -286,6 +286,14 @@ a:hover{text-decoration:underline}
 [data-theme="dark"] .husbandry-card{background:var(--gray-100);border-color:var(--gray-200)}
 [data-theme="dark"] .husbandry-card-label{color:var(--gray-900)}
 [data-theme="dark"] .husbandry-card-text{color:var(--gray-800)}
+.husbandry-subtypes{margin-top:16px}
+.husbandry-subtype{margin-bottom:10px;border:1px solid var(--gray-200);border-radius:8px;overflow:hidden}
+.husbandry-subtype-title{padding:10px 14px;font-size:.88rem;font-weight:700;color:var(--navy);background:var(--gray-50);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px}
+.husbandry-subtype-title::before{content:"\25B6";font-size:.65rem;transition:transform .2s}
+.husbandry-subtype[open]>.husbandry-subtype-title::before{transform:rotate(90deg)}
+.husbandry-subtype .husbandry-grid{padding:12px}
+[data-theme="dark"] .husbandry-subtype{border-color:var(--gray-200)}
+[data-theme="dark"] .husbandry-subtype-title{background:var(--gray-100);color:var(--gray-900)}
 @media(max-width:600px){.husbandry-grid{grid-template-columns:1fr}}
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
 .disease-db-item:hover{background:var(--green-light)}

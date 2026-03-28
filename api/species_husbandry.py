@@ -533,6 +533,32 @@ HUSBANDRY_DATA: dict = {
         "enrichment": {"en": "Outdoor grazing time. Varied terrain with slopes and obstacles. Hiding spots. Edible plants in enclosure for foraging. Shallow warm soaks 1–2x/week.", "ja": "屋外での放牧。傾斜や障害物のある変化に富んだ地形。隠れ家。ケージ内に食用植物で採食エンリッチメント。温浴を週1〜2回。"},
         "socialization": {"en": "Generally solitary. Males may fight. Gentle handling acceptable but they are not cuddly pets. Recognize owners over time.", "ja": "基本的に単独飼育。オス同士は喧嘩することも。穏やかなハンドリングは可能だが抱っこ向きではない。時間をかけて飼い主を認識。"},
         "notes": {"en": "Lifespan 50–100+ years. Shell pyramiding indicates poor husbandry (low humidity, excess protein). MBD very common without proper UVB/calcium. Brumation (winter dormancy) natural for temperate species.", "ja": "寿命50〜100年以上。甲羅のピラミッド化は飼育環境の問題（低湿度、過剰タンパク質）を示す。UVB/カルシウム不足でMBDが非常に多い。温帯種のブルメーション（冬眠）は自然。"},
+        "subtypes": [
+            {
+                "name": "Russian Tortoise", "name_ja": "ロシアリクガメ（ホルスフィールド）",
+                "temperature": {"en": "Basking 32–35°C, cool side 22–26°C, night 15–18°C. UVB 10.0. Tolerates wider temperature range than tropical species.", "ja": "ホットスポット32〜35℃、クールゾーン22〜26℃、夜間15〜18℃。UVB 10.0。熱帯種より広い温度範囲に耐える。"},
+                "humidity": {"en": "40–60%. Dry species from Central Asian steppes. Humid hide still recommended. Avoid constant high humidity.", "ja": "40〜60%。中央アジアのステップ原産の乾燥種。ウェットシェルターは設置推奨。常時高湿度は避ける。"},
+                "housing": {"en": "Tortoise table 120×60 cm minimum. Prolific diggers — deep substrate (15+ cm). Outdoor enclosure excellent in warm months. Excellent climbers — secure walls.", "ja": "トータステーブル最低120×60cm。掘るのが好き — 深い床材（15cm以上）。暖かい季節の屋外飼育は最適。登るのが上手 — 壁を確実に。"},
+                "diet": {"en": "Weeds and greens: dandelion, plantain, clover, hibiscus leaves. Very high fiber. NO fruit. Timothy hay available. Calcium 3x/week.", "ja": "野草と葉物：タンポポ、オオバコ、クローバー、ハイビスカスの葉。非常に高繊維。果物は不可。チモシー牧草を常備。カルシウム週3回。"},
+                "notes": {"en": "Lifespan 40–60+ years. Small species (15–20 cm). Brumation natural and recommended for health. Very active and personable. Most popular pet tortoise species.", "ja": "寿命40〜60年以上。小型種（15〜20cm）。ブルメーションは自然で健康に推奨。非常に活発で人に馴れやすい。最も人気のあるペットリクガメ。"},
+            },
+            {
+                "name": "Hermann's / Greek Tortoise", "name_ja": "ヘルマンリクガメ / ギリシャリクガメ",
+                "temperature": {"en": "Basking 30–34°C, cool side 22–26°C, night 16–20°C. UVB 10.0. Mediterranean climate species.", "ja": "ホットスポット30〜34℃、クールゾーン22〜26℃、夜間16〜20℃。UVB 10.0。地中海性気候の種。"},
+                "humidity": {"en": "50–60%. Moderate humidity; humid hide essential for proper shell growth and hydration.", "ja": "50〜60%。中程度の湿度。甲羅の正常な成長と水分補給のためウェットシェルター必須。"},
+                "housing": {"en": "Tortoise table 120×60 cm minimum. Outdoor gardens ideal in Mediterranean-like climates. Mix of sunny and shaded areas. Varied substrate.", "ja": "トータステーブル最低120×60cm。温暖な気候では屋外庭園が理想。日向と日陰を組み合わせる。様々な床材。"},
+                "diet": {"en": "Mediterranean weeds and greens: dandelion, plantain, hawkbit, sow thistle. High fiber, low protein. NO fruit for Hermann's (small amounts OK for Greek). Calcium regularly.", "ja": "地中海の野草と葉物：タンポポ、オオバコ、ブタナ、ノゲシ。高繊維・低タンパク質。ヘルマンは果物不可（ギリシャは少量可）。カルシウムを定期的に。"},
+                "notes": {"en": "Lifespan 50–80+ years. Brumation recommended for breeding and long-term health. Pyramiding prevention: adequate humidity + proper diet (no excess protein).", "ja": "寿命50〜80年以上。繁殖と長期的健康のためブルメーション推奨。ピラミッド化予防：適切な湿度＋正しい食事（過剰タンパク質を避ける）。"},
+            },
+            {
+                "name": "Red-footed Tortoise", "name_ja": "アカアシガメ",
+                "temperature": {"en": "Basking 32–35°C, ambient 26–30°C, night 22–25°C. UVB 5.0–10.0. Tropical species — no brumation.", "ja": "ホットスポット32〜35℃、環境温度26〜30℃、夜間22〜25℃。UVB 5.0〜10.0。熱帯種 — ブルメーションなし。"},
+                "humidity": {"en": "70–80%. High humidity species from South American forests. Frequent misting. Large shallow water dish.", "ja": "70〜80%。南米の森林原産の高湿度種。頻繁な霧吹き。大きな浅い水皿。"},
+                "housing": {"en": "Larger enclosure needed (150×60 cm minimum — they grow to 30–35 cm). Closed-top vivarium helps retain humidity. Deep, moisture-retaining substrate (cypress mulch, coco coir).", "ja": "より大きなケージが必要（最低150×60cm — 30〜35cmに成長）。密閉型ビバリウムで湿度維持。保湿性のある深い床材（サイプレスマルチ、ココヤシ繊維）。"},
+                "diet": {"en": "Mixed diet: greens (70%), fruits (20% — unlike temperate species, fruit is OK), protein (10% — mushrooms, occasional snail/worm). Calcium 2–3x/week.", "ja": "混合食：葉物（70%）、果物（20% — 温帯種と違い果物OK）、タンパク質（10% — キノコ、時々カタツムリ/ミミズ）。カルシウム週2〜3回。"},
+                "notes": {"en": "Lifespan 50+ years. More omnivorous than most tortoises. Personable and interactive. Prone to respiratory infections if kept too cool/dry.", "ja": "寿命50年以上。多くのリクガメより雑食性。人に馴れやすく対話的。低温・乾燥環境では呼吸器感染症になりやすい。"},
+            },
+        ],
     },
     # =========================================================================
     # ヘビ (Snake)
@@ -635,6 +661,32 @@ HUSBANDRY_DATA: dict = {
         "enrichment": {"en": "Live plants, leaf litter, cork bark hides. Water features (small waterfall/drip wall). Varied terrain. Dim lighting (many are nocturnal/crepuscular).", "ja": "生きた植物、落ち葉、コルクバークのシェルター。水場（小さな滝・点滴壁）。変化のある地形。薄暗い照明（夜行性・薄明性が多い）。"},
         "socialization": {"en": "Observation pets — minimal handling recommended. Skin absorbs toxins from human hands (wash hands, wet them before handling). Some species (dart frogs) can be kept in groups.", "ja": "観察型ペット — ハンドリングは最小限推奨。皮膚が人間の手の毒素を吸収（触る前に手を洗い湿らせる）。ヤドクガエルなどはグループ飼育可。"},
         "notes": {"en": "Skin is semi-permeable — water quality and air quality are critical. Chytrid fungus is a global amphibian threat. Never release pet amphibians into the wild. Use dechlorinated or RO water only.", "ja": "皮膚は半透過性 — 水質と空気の質が生命に直結。ツボカビ症は世界的な両生類の脅威。ペットの両生類を野外に放さない。カルキ抜きまたはRO水のみ使用。"},
+        "subtypes": [
+            {
+                "name": "Axolotl", "name_ja": "ウーパールーパー（メキシコサラマンダー）",
+                "temperature": {"en": "16–20°C (CRITICAL — cold water species). Above 24°C causes severe stress and death. Aquarium chiller or cool room essential in summer.", "ja": "16〜20℃（厳守 — 冷水種）。24℃以上で重度ストレスと死亡。夏季は水槽用クーラーまたは冷房必須。"},
+                "humidity": {"en": "N/A (fully aquatic). Water changes 20% weekly. Dechlorinated water. Ammonia/nitrite must be 0.", "ja": "該当なし（完全水生）。週20%の水替え。カルキ抜き水使用。アンモニア/亜硝酸は0であること。"},
+                "housing": {"en": "Minimum 75 L for one axolotl. Fine sand or bare bottom (gravel causes impaction). Gentle filtration (they dislike strong current). Hides and live plants.", "ja": "1匹あたり最低75L。細かい砂またはベアタンク（砂利は誤飲で腸閉塞）。穏やかなろ過（強い水流を嫌う）。隠れ家と水草。"},
+                "diet": {"en": "Carnivorous: earthworms (staple), sinking pellets (Hikari), frozen bloodworms. Feed every 1–2 days for juveniles, 2–3x/week for adults.", "ja": "肉食：ミミズ（主食）、沈降性ペレット（ひかり）、冷凍アカムシ。幼体は1〜2日ごと、成体は週2〜3回。"},
+                "notes": {"en": "Lifespan 10–15 years. Remarkable regeneration ability (limbs, gills, organs). External gills are normal (neotenic). NEVER house with fish (they eat or get bitten). Critically endangered in the wild.", "ja": "寿命10〜15年。驚異的な再生能力（四肢、鰓、臓器）。外鰓は正常（ネオテニー）。魚との同居は厳禁（食べる/噛まれる）。野生では絶滅危惧種。"},
+            },
+            {
+                "name": "Tree Frog", "name_ja": "ツリーフロッグ（アマガエル類）",
+                "temperature": {"en": "22–27°C daytime, 18–22°C night. Avoid overheating. Temperate species (Japanese tree frog) tolerate cooler temperatures.", "ja": "日中22〜27℃、夜間18〜22℃。過加温に注意。温帯種（ニホンアマガエル）はより低温に耐える。"},
+                "humidity": {"en": "60–80%. Mist 2–3x daily. Good ventilation to prevent stagnant air. Drip system or large water dish.", "ja": "60〜80%。1日2〜3回霧吹き。換気を確保して空気の淀みを防ぐ。ドリップシステムまたは大きめの水皿。"},
+                "housing": {"en": "Tall terrarium (30×30×45 cm minimum). Arboreal — vertical space with branches, vines, broad-leaf plants. Screen or ventilated lid. Shallow water section at bottom.", "ja": "縦長テラリウム（最低30×30×45cm）。樹上性 — 枝、蔓、広葉植物で垂直空間を。メッシュまたは通気性のある蓋。底部に浅い水場。"},
+                "diet": {"en": "Small insects: fruit flies, small crickets, springtails. Calcium dusting every feeding. Size-appropriate prey (smaller than frog's head).", "ja": "小型昆虫：ショウジョウバエ、小さなコオロギ、トビムシ。毎回カルシウムダスティング。カエルの頭より小さい餌。"},
+                "notes": {"en": "Lifespan varies (5–15+ years by species). Nocturnal/crepuscular — most active at night. Observation pet — handle minimally. Some species produce mild skin toxins.", "ja": "寿命は種により異なる（5〜15年以上）。夜行性/薄明性。観察型ペット — ハンドリングは最小限。軽度の皮膚毒を出す種もある。"},
+            },
+            {
+                "name": "Poison Dart Frog", "name_ja": "ヤドクガエル",
+                "temperature": {"en": "22–27°C. Stable temperature crucial. Avoid direct sunlight. Air conditioning may be needed in summer.", "ja": "22〜27℃。安定した温度が重要。直射日光を避ける。夏季はエアコンが必要になることも。"},
+                "humidity": {"en": "80–100%. Misting system essential (automatic preferred). Live moss and tropical plants maintain humidity. Fogger can supplement.", "ja": "80〜100%。ミスティングシステム必須（自動が望ましい）。生きた苔と熱帯植物で湿度維持。フォガーで補助。"},
+                "housing": {"en": "Bioactive vivarium ideal. Minimum 45×45×45 cm. Drainage layer + substrate + live plants + leaf litter. Tight-fitting lid. Can keep small groups of same species.", "ja": "バイオアクティブビバリウムが理想。最低45×45×45cm。排水層＋床材＋生きた植物＋落ち葉。密閉蓋。同種なら小グループ飼育可。"},
+                "diet": {"en": "Tiny insects: fruit flies (Drosophila melanogaster/hydei), springtails, isopods. Calcium + vitamin dusting every feeding. Feed daily.", "ja": "極小昆虫：ショウジョウバエ（メラノガスター/ハイデイ）、トビムシ、ワラジムシ。毎回Ca＋ビタミンダスティング。毎日給餌。"},
+                "notes": {"en": "Lifespan 10–20 years. Captive-bred are NOT toxic (toxins come from wild diet). Bold, diurnal, colorful — great display animals. Sensitive to water quality — use RO or spring water.", "ja": "寿命10〜20年。飼育下繁殖個体は無毒（毒は野生の餌由来）。大胆で昼行性、色鮮やか — 素晴らしい観賞動物。水質に敏感 — RO水または湧水を使用。"},
+            },
+        ],
     },
     # =========================================================================
     # 魚 (Fish)
@@ -649,6 +701,36 @@ HUSBANDRY_DATA: dict = {
         "enrichment": {"en": "Plants (live preferred), driftwood, rocks, caves. Varied terrain mimicking natural habitat. Appropriate tankmates for social species. LED lighting on timer (8–10 hr photoperiod).", "ja": "水草（生体が望ましい）、流木、石、洞窟。自然の生息地を模した多様な地形。社会性のある種には適切な混泳相手。LEDライトをタイマーで管理（明期8〜10時間）。"},
         "socialization": {"en": "Varies greatly: schooling fish need 6+ of same species, territorial species need space, aggressive species may need solitary tanks. Research compatibility.", "ja": "種により大きく異なる：群泳魚は同種6匹以上、縄張り魚にはスペース、攻撃的な種は単独水槽。混泳の相性を事前に調査。"},
         "notes": {"en": "Nitrogen cycle must be established before adding fish (fishless cycling). Test water parameters regularly (ammonia, nitrite, nitrate, pH). Quarantine new fish 2–4 weeks. Never flush sick fish.", "ja": "魚を入れる前に窒素循環を確立（フィッシュレスサイクリング）。水質パラメータを定期検査（アンモニア、亜硝酸、硝酸、pH）。新しい魚は2〜4週間隔離。病気の魚を流しに捨てない。"},
+        "subtypes": [
+            {
+                "name": "Goldfish / Koi", "name_ja": "金魚・錦鯉",
+                "temperature": {"en": "15–22°C (cold water — NO heater needed). Tolerate 4–30°C but optimal range is narrow. Outdoor ponds: seasonal temperature changes are natural.", "ja": "15〜22℃（冷水魚 — ヒーター不要）。4〜30℃に耐えるが最適範囲は狭い。屋外池：季節的な水温変化は自然。"},
+                "housing": {"en": "Goldfish: minimum 75 L for first fish, +40 L each additional. Koi: 1,000+ L pond. Powerful filtration essential (heavy bioload). No bowls — goldfish need space and filtration.", "ja": "金魚：最初の1匹に最低75L、追加1匹につき＋40L。錦鯉：1,000L以上の池。強力なろ過が必須（生物負荷が高い）。金魚鉢は不可 — スペースとろ過が必要。"},
+                "diet": {"en": "Sinking pellets preferred (floating food causes air gulping → swim bladder issues). Peas (deshelled), blanched vegetables as treats. Feed 2x daily, amount consumed in 2 minutes.", "ja": "沈降性ペレット推奨（浮上性餌は空気を飲む→転覆病の原因）。剥いたエンドウ豆、茹で野菜をおやつに。1日2回、2分で食べ切る量。"},
+                "notes": {"en": "Goldfish lifespan 10–15+ years (NOT disposable pets). Koi 25–35+ years. Swim bladder disease very common in fancy varieties. Ammonia burns are #1 killer — cycle the tank first.", "ja": "金魚の寿命10〜15年以上（使い捨てではない）。錦鯉25〜35年以上。琉金等のファンシー種は転覆病が非常に多い。アンモニア中毒が最大の死因 — 先にフィッシュレスサイクリングを。"},
+            },
+            {
+                "name": "Tropical Freshwater", "name_ja": "熱帯淡水魚",
+                "temperature": {"en": "24–28°C (heater with thermostat essential). Stable temperature critical — fluctuations cause stress and ich outbreaks.", "ja": "24〜28℃（サーモスタット付きヒーター必須）。安定した水温が重要 — 変動はストレスと白点病の原因。"},
+                "housing": {"en": "Community tanks: 60+ L minimum. Planted tanks ideal. Species-appropriate flow rate. Driftwood, rocks for territory. Dimmer lighting for shy species (tetras, corydoras).", "ja": "コミュニティタンク：最低60L以上。水草水槽が理想。種に合った水流。流木、石で縄張り。シャイな種（テトラ、コリドラス）には暗めの照明。"},
+                "diet": {"en": "High-quality flake/micro pellets as staple. Frozen/live foods (brine shrimp, daphnia, bloodworms) 2–3x/week. Bottom feeders: algae wafers, sinking pellets. Feed small amounts 1–2x daily.", "ja": "良質なフレーク/マイクロペレットを主食に。冷凍/生き餌（ブラインシュリンプ、ミジンコ、アカムシ）を週2〜3回。底生魚：アルジーウエハー、沈降性ペレット。少量を1日1〜2回。"},
+                "notes": {"en": "Water parameters vary by species: tetras/discus prefer soft acidic (pH 6.0–7.0), livebearers prefer hard alkaline (pH 7.0–8.0). Research species requirements before mixing.", "ja": "水質は種により異なる：テトラ/ディスカスは軟水・酸性（pH 6.0〜7.0）、グッピー等は硬水・アルカリ性（pH 7.0〜8.0）。混泳前に種の要件を調査。"},
+            },
+            {
+                "name": "Betta (Siamese Fighting Fish)", "name_ja": "ベタ（闘魚）",
+                "temperature": {"en": "25–28°C. Tropical species — heater essential (NOT a cold-water fish despite common misconception). Stable temperature critical.", "ja": "25〜28℃。熱帯魚 — ヒーター必須（一般的な誤解に反して冷水魚ではない）。水温の安定が重要。"},
+                "housing": {"en": "Minimum 20 L (NOT tiny bowls/cups). Gentle filtration (they dislike strong current due to long fins). Lid essential (they jump). Live or silk plants (no sharp plastic — fin damage).", "ja": "最低20L（小さなボウル/カップは不可）。穏やかなろ過（長いヒレのため強い水流を嫌う）。蓋必須（飛び出す）。生体またはシルク製の植物（鋭いプラスチックはヒレを傷つける）。"},
+                "diet": {"en": "High-protein betta pellets as staple. Frozen/live bloodworms, brine shrimp, daphnia as treats 2–3x/week. Feed 2–3 pellets 2x daily. Prone to bloating from overfeeding.", "ja": "高タンパクのベタ用ペレットを主食に。冷凍/生きアカムシ、ブラインシュリンプ、ミジンコを週2〜3回のおやつに。1回2〜3粒を1日2回。過食で膨満しやすい。"},
+                "notes": {"en": "Lifespan 3–5 years. Males MUST be housed alone (will fight to death). Females can sometimes coexist in 'sorority' tanks (5+ in 75+ L). Bubble nest building is normal healthy behavior.", "ja": "寿命3〜5年。オスは必ず単独飼育（死ぬまで戦う）。メスは「ソロリティ」タンク（75L以上に5匹以上）で共存可能な場合も。泡巣作りは正常な健康行動。"},
+            },
+            {
+                "name": "Marine / Saltwater", "name_ja": "海水魚",
+                "temperature": {"en": "24–27°C. Chiller may be needed in summer. Temperature stability even more critical than freshwater — ±1°C fluctuation max.", "ja": "24〜27℃。夏季はクーラーが必要になることも。淡水以上に水温安定が重要 — 変動は±1℃以内。"},
+                "housing": {"en": "Minimum 150 L for fish-only, 200+ L for reef. Protein skimmer essential. Live rock for biological filtration. RO/DI water for top-off and salt mixing. Salinity 1.023–1.025 SG.", "ja": "魚のみなら最低150L、サンゴ水槽なら200L以上。プロテインスキマー必須。ライブロックで生物ろ過。RO/DI水で足し水と人工海水。比重1.023〜1.025。"},
+                "diet": {"en": "Species-specific: herbivores (nori, spirulina), omnivores (mixed flake + frozen mysis), carnivores (frozen shrimp, silversides). Marine fish often need multiple small feedings per day.", "ja": "種による：草食魚（海苔、スピルリナ）、雑食魚（フレーク＋冷凍ミシスシュリンプ）、肉食魚（冷凍エビ、シルバーサイド）。海水魚は1日複数回の少量給餌が必要なことが多い。"},
+                "notes": {"en": "Most expensive and demanding aquarium type. Quarantine ALL new fish (ich/velvet can devastate a tank). Copper medications kill invertebrates. Research extensively before starting — high learning curve.", "ja": "最も費用と手間がかかる水槽タイプ。新しい魚は全て隔離（白点病/ウーディニウムが水槽を壊滅させる）。銅系薬品は無脊椎動物を殺す。始める前に徹底的にリサーチ — 学習曲線が急。"},
+            },
+        ],
     },
     # =========================================================================
     # その他エキゾチック (Exotic Other)
