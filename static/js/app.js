@@ -1950,6 +1950,12 @@ function toggleDetail(head){
   if(icon)icon.classList.toggle("rotated",isOpen);
 }
 
+/* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
+function _attachDbItemHandlers(container){
+  container.addEventListener("click",function(e){const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
+  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item){e.preventDefault();toggleDbItem(item);}}});
+}
+
 /* Toggle disease DB item */
 function toggleDbItem(el){
   const detail=el.querySelector(".disease-detail");
