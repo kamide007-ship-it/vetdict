@@ -1780,16 +1780,6 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "urgency": "normal",
     },
     {
-        "name": "Ehrlichiosis",
-        "name_ja": "エールリヒア症",
-        "symptoms": {"fever", "lethargy", "appetite_loss", "weight_loss",
-                      *_ANY_LIMPING},
-        "description": "A tick-borne rickettsial disease causing fever, "
-                       "lethargy, and blood cell abnormalities.",
-        "description_ja": "マダニ媒介のリケッチア感染症で、発熱・倦怠感・血球異常を引き起こします。",
-        "urgency": "normal",
-    },
-    {
         "name": "Anaplasmosis",
         "name_ja": "アナプラズマ症",
         "symptoms": {"fever", "lethargy", "stiffness", "appetite_loss",
@@ -1798,26 +1788,6 @@ _DISEASE_DB: list[dict[str, Any]] = [
                        "fever, and platelet abnormalities.",
         "description_ja": "マダニ媒介の細菌感染症で、関節痛・発熱・血小板異常を引き起こします。",
         "urgency": "normal",
-    },
-    {
-        "name": "Coccidiosis",
-        "name_ja": "コクシジウム症",
-        "symptoms": {"diarrhea", "bloody_stool", "weight_loss", "lethargy",
-                      "appetite_loss"},
-        "description": "A protozoal intestinal infection common in puppies, "
-                       "causing watery or bloody diarrhea.",
-        "description_ja": "子犬に多い原虫性の腸管感染症で、水様便や血便を引き起こします。",
-        "urgency": "normal",
-    },
-    {
-        "name": "Babesiosis",
-        "name_ja": "バベシア症",
-        "symptoms": {"lethargy", "fever", "appetite_loss", "rapid_breathing",
-                      "weight_loss"},
-        "description": "A tick-borne protozoal disease that destroys red blood "
-                       "cells, causing severe anemia.",
-        "description_ja": "マダニ媒介の原虫疾患で、赤血球を破壊し重度の貧血を引き起こします。",
-        "urgency": "urgent",
     },
     {
         "name": "Canine Coronavirus (Enteric)",
@@ -2412,6 +2382,157 @@ _DISEASE_DB: list[dict[str, Any]] = [
         "prevention_ja": "遺伝子検査による繁殖管理。低タンパク食、十分な飲水、尿アルカリ化。"
                          "定期的な尿検査・画像検査でモニタリング。",
         "urgency": "normal",
+    },
+    # ---- Common General Practice Diseases ----
+    {
+        "name": "Obesity",
+        "name_ja": "肥満",
+        "symptoms": {"weight_gain", "lethargy", "difficulty_breathing",
+                      "excessive_panting"},
+        "description": "Excessive body fat accumulation, the most common nutritional disorder in dogs.",
+        "description_ja": "犬で最も多い栄養障害。日本の飼育犬の30〜40%が肥満または過体重。"
+                          "BCS（ボディコンディションスコア）7/9以上を肥満と判定。"
+                          "関節疾患・糖尿病・心臓病・腫瘍・寿命短縮のリスク因子。",
+        "pathophysiology_ja": "エネルギー摂取>消費の慢性的不均衡→脂肪組織の過剰蓄積→"
+                              "脂肪組織からの炎症性サイトカイン（アディポカイン）分泌増加→"
+                              "慢性低度炎症→インスリン抵抗性、関節負荷増大、呼吸障害。"
+                              "避妊/去勢後に代謝率低下で肥満リスク上昇。",
+        "causes_ja": "過剰なカロリー摂取（おやつ・人間の食事）、運動不足、避妊/去勢後の代謝変化、"
+                     "遺伝的素因（ラブラドール、ビーグル、コッカースパニエル、ダックスフンド）、"
+                     "甲状腺機能低下症・クッシング症候群等の内分泌疾患。",
+        "treatment_ja": "カロリー制限食（現体重の維持カロリーの60〜70%）＋段階的な運動増加。"
+                        "減量用療法食（Hill's Metabolic, Royal Canin Satiety等）。"
+                        "目標：週1〜2%の体重減少。おやつは1日摂取カロリーの10%以内。"
+                        "内分泌疾患が基礎にある場合はその治療が先決。"
+                        "月1回の体重・BCS測定でモニタリング。",
+        "prognosis_ja": "適切な食事管理と運動で予後良好。"
+                        "肥満関連疾患（DM、OA等）がある場合でも減量で症状改善。"
+                        "ラブラドールのPOMC遺伝子変異個体は生涯管理が必要。",
+        "prevention_ja": "適正体重の維持。給餌量の計量。おやつの制限。定期的な運動。"
+                         "避妊/去勢後の食事量10〜20%減量。BCSの定期評価。",
+        "urgency": "normal",
+    },
+    {
+        "name": "Anal Gland Impaction / Abscess",
+        "name_ja": "肛門嚢疾患（貯留・膿瘍）",
+        "symptoms": {"itching", "pain_on_touch",
+                      "swelling", "diarrhea"},
+        "description": "Impaction, infection, or abscessation of the anal sacs, extremely common in small breed dogs.",
+        "description_ja": "肛門嚢の分泌液貯留・感染・膿瘍化。犬で非常に多い一般診療疾患。"
+                          "小型犬（チワワ、トイプードル、シーズー等）に好発。"
+                          "お尻を擦りつける（スクーティング）、肛門周囲を舐める行動が特徴的。",
+        "pathophysiology_ja": "肛門嚢導管の閉塞→分泌液の貯留（impaction）→"
+                              "細菌増殖→感染（sacculitis）→膿瘍形成→"
+                              "重症例では肛門嚢破裂→肛門周囲の瘻孔形成。",
+        "causes_ja": "軟便・下痢（排便時に自然排出されない）、小型犬の解剖学的素因、"
+                     "肥満、食物アレルギー、低繊維食。",
+        "treatment_ja": "貯留：用手的な肛門嚢圧出（外部法or内部法）。"
+                        "感染：抗菌薬（アモキシシリン/クラブラン酸12.5mg/kg BID、7〜14日）"
+                        "＋肛門嚢洗浄。"
+                        "膿瘍：切開排膿＋洗浄＋全身性抗菌薬。"
+                        "再発性：肛門嚢摘出術を検討。",
+        "prognosis_ja": "予後良好。再発性の場合は肛門嚢摘出術で根治可能。"
+                        "術後合併症（便失禁）は稀。",
+        "prevention_ja": "高繊維食で便の量を増やす。定期的な肛門嚢チェック。"
+                         "適正体重の維持。食物アレルギーの管理。",
+        "urgency": "normal",
+    },
+    {
+        "name": "Acute Moist Dermatitis (Hot Spot)",
+        "name_ja": "急性湿性皮膚炎（ホットスポット）",
+        "symptoms": {"skin_redness", "hair_loss", "scratching",
+                      "itching", "pain_on_touch"},
+        "description": "Rapidly developing, localized area of acute pyotraumatic dermatitis.",
+        "description_ja": "自己外傷（舐める・掻く）により急速に発症する局所的な化膿性皮膚炎。"
+                          "数時間〜1日で円形の脱毛・湿潤・疼痛病変を形成。"
+                          "ゴールデンレトリバー、ラブラドール等の長毛種に多い。夏季に多発。",
+        "pathophysiology_ja": "基礎疾患による掻痒→自己外傷→表皮バリア破壊→"
+                              "Staphylococcus属の二次感染→滲出液による被毛の湿潤→"
+                              "掻痒増悪→さらなる自己外傷の悪循環。湿った環境で急速に拡大。",
+        "causes_ja": "基礎疾患としてノミアレルギー（最多）、アトピー性皮膚炎、食物アレルギー、"
+                     "外耳炎、肛門嚢疾患、接触性皮膚炎。"
+                     "被毛の湿潤（水浴び後・雨後）も誘因。",
+        "treatment_ja": "病変部の剃毛→クロルヘキシジン洗浄→局所ステロイドスプレー"
+                        "（ヒドロコルチゾン）。"
+                        "深部感染：全身性抗菌薬（セファレキシン25mg/kg BID、14日間）。"
+                        "掻痒管理：エリザベスカラー、短期プレドニゾロン（0.5mg/kg SID、5日間）。"
+                        "基礎疾患の治療が再発防止の鍵。",
+        "prognosis_ja": "治療で急速に改善（3〜7日）。基礎疾患未治療では再発する。",
+        "prevention_ja": "ノミ予防の徹底。アレルギーの管理。被毛を清潔・乾燥に保つ。"
+                         "水浴び後の十分な乾燥。",
+        "urgency": "normal",
+    },
+    {
+        "name": "Babesiosis",
+        "name_ja": "バベシア症",
+        "symptoms": {"lethargy", "fever", "appetite_loss", "weight_loss",
+                      "blood_urine", "collapse"},
+        "description": "Tick-borne protozoal infection causing hemolytic anemia.",
+        "description_ja": "マダニ媒介性の原虫感染症。Babesia canis/gibsoniが赤血球に寄生し溶血性貧血を引き起こす。"
+                          "日本ではB. gibsoniが主体（西日本に多い）。"
+                          "ピットブル系犬種で闘犬による直接接触感染も報告。",
+        "pathophysiology_ja": "マダニ吸血時にBabesia sporozoiteが注入→赤血球に侵入→"
+                              "赤血球内で増殖→赤血球破壊（溶血）→溶血性貧血→"
+                              "ヘモグロビン尿（赤ワイン色尿）。"
+                              "免疫介在性の赤血球破壊も併発→貧血増悪。重症例ではDIC・多臓器不全。",
+        "causes_ja": "Babesia canis（フタトゲチマダニ媒介）、B. gibsoni（日本で主体）。"
+                     "マダニ咬傷、輸血、経胎盤感染、闘犬による直接接触。",
+        "treatment_ja": "B. gibsoni：アトバコン（13.3mg/kg TID PO、10日間）＋アジスロマイシン（10mg/kg SID PO、10日間）。"
+                        "B. canis：イミドカルブ（6.6mg/kg IM、2週間隔で2回）。"
+                        "支持療法：輸血（PCV<15%）、輸液。"
+                        "B. gibsoniの完全駆虫は困難→キャリア状態が持続することが多い。",
+        "prognosis_ja": "B. canis：治療で予後良好。B. gibsoni：慎重（完全駆虫困難、再発あり）。"
+                        "重度貧血・DIC合併例は予後不良。",
+        "prevention_ja": "マダニ予防（イソキサゾリン系：フルララネル、サロラネル等の通年投与）。"
+                         "B. gibsoniキャリア犬の輸血ドナー禁止。",
+        "urgency": "high",
+    },
+    {
+        "name": "Ehrlichiosis",
+        "name_ja": "エールリヒア症",
+        "symptoms": {"lethargy", "fever", "appetite_loss", "weight_loss",
+                      "bloody_stool", "swollen_joints"},
+        "description": "Tick-borne rickettsial infection affecting white blood cells.",
+        "description_ja": "マダニ媒介性のリケッチア感染症。Ehrlichia canisが単球/マクロファージに寄生。"
+                          "急性期（1〜3週間）→不顕性期（数ヶ月〜数年）→慢性期に移行する三相性。"
+                          "慢性期の汎血球減少症・骨髄低形成は致死的。",
+        "pathophysiology_ja": "マダニ吸血時にE. canisが注入→単球/マクロファージに感染→"
+                              "細胞内で増殖（morula形成）→免疫介在性の血小板減少・貧血→"
+                              "血管炎。慢性期：骨髄の低形成/無形成→汎血球減少→出血傾向・免疫不全。",
+        "causes_ja": "Ehrlichia canis（褐色犬ダニRhipicephalus sanguineus媒介）。"
+                     "E. ewingii（顆粒球型）、Anaplasma phagocytophilum（顆粒球型アナプラズマ症）。"
+                     "日本では温暖な地域に多い。",
+        "treatment_ja": "ドキシサイクリン（5mg/kg BID PO、28日間）が標準治療。"
+                        "急性期は治療反応良好（24〜48時間で改善開始）。"
+                        "慢性期骨髄低形成：予後不良→輸血＋支持療法。"
+                        "Anaplasma：同じくドキシサイクリン（14日間で可）。",
+        "prognosis_ja": "急性期：治療で予後良好。不顕性期：治療で根治可能。"
+                        "慢性期骨髄低形成：予後不良（回復困難）。",
+        "prevention_ja": "マダニ予防の通年投与。流行地域では年1回のスクリーニング検査（SNAP 4Dx等）。",
+        "urgency": "high",
+    },
+    {
+        "name": "Coccidiosis",
+        "name_ja": "コクシジウム症",
+        "symptoms": {"diarrhea", "bloody_stool", "weight_loss",
+                      "dehydration", "lethargy"},
+        "description": "Intestinal protozoal infection by Isospora (Cystoisospora) species, common in puppies.",
+        "description_ja": "Cystoisospora属原虫による腸管寄生虫症。子犬・若齢犬に多い。"
+                          "ペットショップ・ブリーダーからの入手直後に発症しやすい。"
+                          "水様性〜粘液血便を呈する。成犬は不顕性感染が多い。",
+        "pathophysiology_ja": "オーシスト経口摂取→小腸上皮細胞に侵入→細胞内で無性・有性生殖→"
+                              "上皮細胞破壊→腸管吸収面積の減少→下痢・脱水→"
+                              "重度感染では粘液血便。免疫未熟な子犬で症状が顕著。",
+        "causes_ja": "Cystoisospora canis, C. ohioensis等。糞口感染（汚染環境からのオーシスト摂取）。"
+                     "過密飼育、不衛生な環境、ストレス、免疫低下が発症のリスク。",
+        "treatment_ja": "スルファジメトキシン（55mg/kg 初日、その後27.5mg/kg SID、10〜14日間）。"
+                        "またはトルトラズリル（10〜30mg/kg 単回投与、5日後に再投与）。"
+                        "ポナズリル（20mg/kg SID、3〜5日間）も有効。"
+                        "支持療法：輸液、整腸剤。環境の徹底消毒。",
+        "prognosis_ja": "治療で予後良好。子犬の重度脱水例は注意。環境消毒が再感染防止の鍵。",
+        "prevention_ja": "飼育環境の清潔維持。糞便の速やかな除去。"
+                         "過密飼育の回避。新規子犬の糞便検査。",
+        "urgency": "moderate",
     },
     # ---- Tumors / Oncology ----
     {
