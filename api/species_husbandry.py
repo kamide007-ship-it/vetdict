@@ -47,6 +47,26 @@ HUSBANDRY_DATA: dict = {
             "en": "Annual veterinary checkups recommended. Regular dental care, nail trimming, and grooming. Parasite prevention (heartworm, fleas, ticks) year-round in endemic areas.",
             "ja": "年1回以上の定期健診推奨。歯のケア・爪切り・被毛の手入れを定期的に。フィラリア・ノミ・マダニの通年予防（流行地域）。",
         },
+        "subtypes": [
+            {
+                "name": "Brachycephalic Breeds (Pug, French Bulldog, English Bulldog, etc.)", "name_ja": "短頭種（パグ、フレンチブルドッグ、イングリッシュブルドッグ等）",
+                "temperature": {"en": "18–24°C — extremely heat-sensitive. Heat stroke risk is high above 26°C. NEVER leave in hot cars. Cool areas, fans, cooling mats essential in summer.", "ja": "18〜24℃ — 極めて暑さに弱い。26℃以上で熱中症のリスク大。絶対に暑い車内に放置しない。夏場は涼しいエリア、扇風機、クールマットが必須。"},
+                "diet": {"en": "Weight management critical (obesity worsens breathing). Slow feeder bowls (prevent gulping air → bloating). Elevated food bowls may help. Avoid overfeeding — these breeds gain weight easily.", "ja": "体重管理が最重要（肥満は呼吸を悪化させる）。早食い防止食器（空気の飲み込み→膨満を防ぐ）。高さのある食器が有効な場合も。過食に注意 — 太りやすい犬種。"},
+                "notes": {"en": "BOAS (Brachycephalic Obstructive Airway Syndrome) is lifelong. Skin fold infections need daily cleaning. Spinal issues (hemivertebrae). Corneal ulcers (protruding eyes). Difficulty with anesthesia. Cannot fly on many airlines.", "ja": "BOAS（短頭種気道閉塞症候群）は生涯の問題。皮膚のしわは毎日清掃が必要。脊椎の異常（半椎）。角膜潰瘍（突出した眼）。麻酔リスクが高い。多くの航空会社で搭乗不可。"},
+            },
+            {
+                "name": "Large / Giant Breeds (Great Dane, St. Bernard, Newfoundland, etc.)", "name_ja": "大型・超大型犬（グレートデーン、セントバーナード、ニューファンドランド等）",
+                "housing": {"en": "Ample indoor space. Orthopedic beds essential (joint support). Non-slip flooring important (hip dysplasia). Ramps instead of stairs for older dogs. Vehicle ramp for car access.", "ja": "十分な室内スペース。整形外科用ベッド必須（関節サポート）。滑りにくい床が重要（股関節形成不全）。シニア犬には階段の代わりにスロープ。車の乗り降り用のスロープ。"},
+                "diet": {"en": "Large-breed specific food (controlled calcium/phosphorus for proper growth). Slow growth rate prevents orthopedic issues. 2–3 small meals/day (bloat/GDV prevention). Elevated feeders controversial — consult vet.", "ja": "大型犬専用フード（適正な成長のためCa/P比管理）。ゆっくりとした成長が骨格異常を予防。1日2〜3回の分食（胃拡張・胃捻転予防）。食器の高さは獣医に相談。"},
+                "notes": {"en": "Lifespan 6–10 years (shorter than small breeds). GDV (bloat) is life-threatening emergency — know the signs. Hip/elbow dysplasia, osteosarcoma common. Cardiomyopathy in some breeds. Higher anesthesia drug costs.", "ja": "寿命6〜10年（小型犬より短い）。胃拡張・胃捻転（GDV）は致死的緊急疾患 — 徴候を知っておく。股関節/肘関節形成不全、骨肉腫が多い。一部犬種で心筋症。麻酔薬コストが高い。"},
+            },
+            {
+                "name": "Small / Toy Breeds (Chihuahua, Yorkshire Terrier, Toy Poodle, etc.)", "name_ja": "小型・超小型犬（チワワ、ヨークシャーテリア、トイプードル等）",
+                "temperature": {"en": "Prefer warm environments — more susceptible to cold due to small body mass. Sweaters/coats helpful in winter. Warm bedding essential.", "ja": "暖かい環境を好む — 体が小さいため寒さに弱い。冬は洋服/コートが有効。暖かい寝床が必須。"},
+                "diet": {"en": "Small-breed specific food (higher calorie density, smaller kibble). Prone to hypoglycemia (especially puppies) — frequent small meals. Dental disease extremely common — dental-specific diet or chews.", "ja": "小型犬専用フード（高カロリー密度、小粒）。低血糖になりやすい（特に子犬）— 少量頻回の食事。歯周病が非常に多い — デンタル用フードやガム。"},
+                "notes": {"en": "Lifespan 12–18+ years. Patellar luxation, tracheal collapse, dental disease very common. Fontanelles (open skull) in some toy breeds. Fragile — risk of injury from falls, being stepped on. Prone to anxiety.", "ja": "寿命12〜18年以上。膝蓋骨脱臼、気管虚脱、歯周病が非常に多い。一部超小型犬は泉門が開いたまま。骨折しやすい — 落下、踏まれる危険。不安になりやすい傾向。"},
+            },
+        ],
     },
     # =========================================================================
     # 猫 (Cat)
@@ -82,6 +102,25 @@ HUSBANDRY_DATA: dict = {
             "en": "Annual veterinary checkups. Indoor cats still need parasite prevention. Dental disease very common — regular dental checks. Senior cats (7+) benefit from biannual checkups.",
             "ja": "年1回の定期健診。室内猫もノミ・寄生虫予防を。歯周病が非常に多い — 定期的な歯科検診を。7歳以上は年2回の健診推奨。",
         },
+        "subtypes": [
+            {
+                "name": "Brachycephalic (Persian, Exotic Shorthair, Himalayan)", "name_ja": "短頭種（ペルシャ、エキゾチックショートヘア、ヒマラヤン）",
+                "housing": {"en": "Air-conditioned environment recommended (heat-sensitive). Eye-level food/water bowls (flat face makes eating from floor difficult). Daily eye cleaning essential.", "ja": "エアコン環境推奨（暑さに弱い）。顔の高さの食器・水入れ（扁平な顔のため床からの食事が困難）。毎日の目の周りの清掃が必須。"},
+                "diet": {"en": "Flat-face specific kibble (easier to pick up). Wet food often preferred (easier to eat). Monitor for obesity — less active than other breeds.", "ja": "扁平顔用の特殊形状キブル（拾いやすい）。ウェットフードを好むことが多い（食べやすい）。肥満に注意 — 他の品種より活動量が少ない。"},
+                "notes": {"en": "Prone to: brachycephalic airway issues, chronic eye discharge (epiphora), PKD (polycystic kidney disease — screen parents), dental malocclusion. Persian: daily brushing essential (matting). Anesthesia risk higher.", "ja": "好発疾患：短頭種気道障害、慢性流涙（エピフォーラ）、PKD（多発性嚢胞腎 — 親の検査を）、不正咬合。ペルシャ：毎日のブラッシング必須（毛玉）。麻酔リスクが高い。"},
+            },
+            {
+                "name": "Large Breeds (Maine Coon, Norwegian Forest Cat, Ragdoll)", "name_ja": "大型種（メインクーン、ノルウェージャンフォレストキャット、ラグドール）",
+                "housing": {"en": "Sturdy cat trees (weight-rated for 8+ kg). Extra-large litter boxes. Reinforced shelves. More floor space needed. Larger carriers for vet visits.", "ja": "頑丈なキャットタワー（8kg以上対応）。特大トイレ。補強された棚。より広い床面積が必要。通院用に大きめのキャリー。"},
+                "diet": {"en": "Large-breed specific food available. Slow growth important (reaches full size at 3–5 years). Joint supplements (glucosamine) may benefit. Monitor weight — easy to overfeed.", "ja": "大型猫専用フードあり。ゆっくりとした成長が重要（3〜5歳で成猫サイズ）。関節サプリメント（グルコサミン）が有効な場合も。体重管理 — 過食になりやすい。"},
+                "notes": {"en": "Maine Coon: HCM (hypertrophic cardiomyopathy) screening recommended, hip dysplasia possible. Ragdoll: HCM risk, docile temperament ('floppy' when held). Norwegian: generally healthy, thick double coat needs regular grooming.", "ja": "メインクーン：HCM（肥大型心筋症）のスクリーニング推奨、股関節形成不全の可能性。ラグドール：HCMリスク、穏やかな気質（抱くと脱力）。ノルウェージャン：比較的健康、厚いダブルコートの定期グルーミング。"},
+            },
+            {
+                "name": "Hairless / Low-maintenance (Sphynx, Devon Rex, Cornish Rex)", "name_ja": "無毛・特殊被毛種（スフィンクス、デボンレックス、コーニッシュレックス）",
+                "temperature": {"en": "24–28°C — higher than normal cats (no/thin fur insulation). Cat sweaters and heated beds essential. Avoid cold drafts.", "ja": "24〜28℃ — 通常の猫より高めに（毛がないまたは薄い）。猫用セーターとヒーター付きベッドが必須。冷たい隙間風を避ける。"},
+                "notes": {"en": "Sphynx: weekly baths needed (skin oil buildup), ear cleaning 1–2x/week, sunburn risk. HCM screening essential. Devon/Cornish Rex: fragile curly coat, prone to yeast infections in ears. Higher calorie needs for thermoregulation.", "ja": "スフィンクス：週1回の入浴（皮脂蓄積）、耳掃除週1〜2回、日焼けのリスク。HCMスクリーニング必須。デボン/コーニッシュ：繊細な巻き毛、耳の酵母感染に注意。体温維持のためカロリー需要が高い。"},
+            },
+        ],
     },
     # =========================================================================
     # ウサギ (Rabbit)
@@ -448,6 +487,20 @@ HUSBANDRY_DATA: dict = {
             "en": "Lifespan varies widely (finch 5–8 yr, cockatiel 15–25 yr, parrot 40–80 yr). Respiratory system extremely sensitive — no aerosols, candles, non-stick cookware fumes. Annual avian vet checkups.",
             "ja": "寿命は種により大きく異なる（フィンチ5〜8年、オカメインコ15〜25年、大型インコ40〜80年）。呼吸器系が非常に敏感 — スプレー、キャンドル、テフロンのガスは厳禁。年1回の鳥類専門獣医での健診。",
         },
+        "subtypes": [
+            {
+                "name": "Finch / Canary", "name_ja": "フィンチ / カナリア",
+                "housing": {"en": "Flight cage (horizontal space more important than height). Minimum 75×45×45 cm for a pair. Multiple perches at different heights. Finches need companions — never keep alone.", "ja": "フライトケージ（高さより横幅が重要）。ペアで最低75×45×45cm。高さの異なる複数の止まり木。フィンチは必ずペア以上で飼育。"},
+                "diet": {"en": "High-quality finch/canary seed mix as base. Egg food for breeding and molting. Fresh greens (spinach, broccoli). Cuttlebone for calcium. Canaries: song food supplement for males.", "ja": "良質なフィンチ/カナリア用シードミックスが主食。繁殖期・換羽期にエッグフード。新鮮な葉物（ほうれん草、ブロッコリー）。カトルボーンでカルシウム補給。カナリア：オスにはソングフード。"},
+                "notes": {"en": "Finch lifespan 5–8 years; Canary 10–15 years. Observation birds — not handleable. Canary males sing; females generally don't. Air sac mites common in finches. Draft-sensitive.", "ja": "フィンチ寿命5〜8年、カナリア10〜15年。観賞用 — ハンドリングには向かない。カナリアのオスはさえずる、メスは通常さえずらない。フィンチは気嚢ダニが多い。隙間風に弱い。"},
+            },
+            {
+                "name": "Dove / Pigeon", "name_ja": "ハト / ジュズカケバト",
+                "housing": {"en": "Large flight cage or aviary. Minimum 90×60×60 cm for a pair. Flat perches (not round — they have flat feet). Floor space important (ground feeders). Can be kept outdoors in mild climates.", "ja": "大型フライトケージまたは鳥舎。ペアで最低90×60×60cm。平らな止まり木（丸棒でなく — 足が平ら）。床面積が重要（地面で採食）。温暖な気候なら屋外飼育可。"},
+                "diet": {"en": "Dove seed mix (millet, safflower, wheat). Grit essential for digestion (doves have a crop/gizzard system). Fresh vegetables. Pellets can supplement.", "ja": "ハト用シードミックス（アワ、ベニバナ、小麦）。消化にグリット（砂嚢で消化するため）が必須。新鮮な野菜。ペレットで補助。"},
+                "notes": {"en": "Lifespan 10–20+ years. Gentle, quiet birds — great for apartments. Can be trained to fly and return. Canker (trichomoniasis) is common. Pair bonding is strong — keep in pairs.", "ja": "寿命10〜20年以上。穏やかで静か — マンション向き。飛んで戻るトレーニングが可能。カンカー（トリコモナス症）が多い。ペアの絆が強い — ペアで飼育。"},
+            },
+        ],
     },
     # =========================================================================
     # インコ (Parakeet)
@@ -483,6 +536,26 @@ HUSBANDRY_DATA: dict = {
             "en": "Budgies: 8–15 years; Cockatiels: 15–25 years. Crop infections common in young birds. Night frights in cockatiels — dim nightlight helps. Egg binding risk in females.",
             "ja": "セキセイインコ：8〜15年、オカメインコ：15〜25年。幼鳥ではそのう炎が多い。オカメインコのナイトフライト — 常夜灯が有効。メスでは卵詰まりに注意。",
         },
+        "subtypes": [
+            {
+                "name": "Budgerigar (Budgie)", "name_ja": "セキセイインコ",
+                "housing": {"en": "Minimum 45×45×60 cm for a pair. Horizontal bars for climbing. Mirrors can be enriching but may cause hormonal issues in solitary birds.", "ja": "ペアで最低45×45×60cm。登攀用の横向き金網。鏡はエンリッチメントになるが単独飼育では発情の原因にも。"},
+                "diet": {"en": "Pellets as base (transition from seeds gradually). Fresh vegetables daily: broccoli, carrot, leafy greens. Seed mix as treat (10–20%). Millet spray as training reward.", "ja": "ペレットを主食に（シードから徐々に移行）。毎日新鮮な野菜：ブロッコリー、ニンジン、葉物。シードミックスはおやつ（10〜20%）。粟の穂をトレーニングのご褒美に。"},
+                "notes": {"en": "Lifespan 8–15 years. Tumors (lipomas, kidney, gonadal) very common over age 5. Budgerigar fledgling disease (polyomavirus). Scaly face mites (Knemidokoptes). Social — pairs recommended.", "ja": "寿命8〜15年。5歳以上で腫瘍（脂肪腫、腎臓、性腺）が非常に多い。セキセイヒナ病（ポリオーマウイルス）。疥癬ダニ。社会的 — ペア飼育推奨。"},
+            },
+            {
+                "name": "Cockatiel", "name_ja": "オカメインコ",
+                "housing": {"en": "Minimum 60×45×75 cm. Wider cage preferred for wing stretching. Night light essential (prone to night frights — can injure themselves thrashing in dark).", "ja": "最低60×45×75cm。翼を広げられる幅広ケージ推奨。常夜灯必須（ナイトフライトを起こしやすい — 暗闇でパニックになり怪我する）。"},
+                "diet": {"en": "Pellets (60–70%) + fresh vegetables + limited seeds. Prone to seed addiction — transition to pellets early. Higher fat needs than budgies. Sunflower seeds sparingly (high fat).", "ja": "ペレット（60〜70%）＋新鮮な野菜＋少量のシード。シード依存になりやすい — 早期にペレットへ移行。セキセイより脂肪の必要量が多い。ヒマワリの種は少量で。"},
+                "notes": {"en": "Lifespan 15–25 years. Dust producers (powder down) — caution with asthmatic owners. Chronic egg laying common in females (calcium depletion risk). Whistlers — males sing, females tend to be quieter.", "ja": "寿命15〜25年。粉綿羽で粉っぽい — 喘息の飼い主は注意。メスの慢性産卵が多い（カルシウム枯渇のリスク）。オスは口笛のようにさえずる、メスは比較的静か。"},
+            },
+            {
+                "name": "Lovebird / Conure", "name_ja": "ラブバード / コニュア",
+                "housing": {"en": "Lovebird: minimum 45×45×60 cm. Conure: 60×60×90 cm (active, need room). Strong bars (powerful chewers for their size). Lots of shredding toys.", "ja": "ラブバード：最低45×45×60cm。コニュア：60×60×90cm（活発、スペースが必要）。頑丈な金網（体の割に噛む力が強い）。裂けるおもちゃを豊富に。"},
+                "diet": {"en": "Pellets as base + fresh vegetables + small amounts of fruit and seeds. Conures: diverse diet important — they enjoy a wide variety. Warm foods (cooked beans, rice) appreciated.", "ja": "ペレットを主食に＋新鮮な野菜＋少量の果物・シード。コニュア：多様な食事が重要 — バラエティを好む。温かい食べ物（茹でた豆、ご飯）も好む。"},
+                "notes": {"en": "Lovebird lifespan 10–15 years; Conure 20–30 years. Lovebirds: nippy but loyal, pairs bond intensely. Conures: loud but affectionate, 'velcro birds'. Sun conure: very loud — not apartment-friendly.", "ja": "ラブバード寿命10〜15年、コニュア20〜30年。ラブバード：噛み癖があるが忠実、ペアの絆が強い。コニュア：声は大きいが愛情深い。サンコニュア：非常にうるさい — マンション不向き。"},
+            },
+        ],
     },
     # =========================================================================
     # オウム (Parrot)
@@ -518,6 +591,26 @@ HUSBANDRY_DATA: dict = {
             "en": "Lifespan 30–80+ years (cockatoos, macaws). Feather plucking is #1 behavioral problem. Psittacosis (Chlamydia psittaci) is zoonotic. Extremely loud — consider neighbors. Annual avian vet checkups.",
             "ja": "寿命30〜80年以上（オウム、コンゴウインコ）。毛引きが最大の行動問題。オウム病（クラミジア）は人畜共通感染症。非常にうるさい — 近隣への配慮を。年1回の鳥類専門医での健診。",
         },
+        "subtypes": [
+            {
+                "name": "African Grey", "name_ja": "ヨウム",
+                "housing": {"en": "Minimum 90×60×120 cm. Intelligent — need complex environment. Multiple foraging stations. Sensitive to change — keep cage in consistent location.", "ja": "最低90×60×120cm。知能が高い — 複雑な環境が必要。複数の採食ステーション。変化に敏感 — ケージの位置は固定。"},
+                "diet": {"en": "Pellets (60–70%) + fresh vegetables + limited nuts (almonds, walnuts as treats). Prone to calcium deficiency and vitamin A deficiency — red/orange vegetables important.", "ja": "ペレット（60〜70%）＋新鮮な野菜＋少量のナッツ（アーモンド、くるみをおやつに）。カルシウム・ビタミンA欠乏になりやすい — 赤/オレンジ色の野菜が重要。"},
+                "notes": {"en": "Lifespan 40–60 years. Considered most intelligent parrot — can learn 1,000+ words with context. Feather plucking very common (stress, boredom). Hypocalcemia/seizures if calcium-deficient. Shy, sensitive — need patient, consistent handling.", "ja": "寿命40〜60年。最も知能の高いオウムとされる — 文脈を理解して1,000語以上を習得。毛引きが非常に多い（ストレス、退屈）。Ca不足で低Ca血症/痙攣。繊細で臆病 — 根気強く一貫したハンドリングが必要。"},
+            },
+            {
+                "name": "Cockatoo", "name_ja": "オウム（キバタン、モモイロインコ等）",
+                "housing": {"en": "Large cage minimum 120×90×150 cm (they are very active). Powder-coated steel bars (extremely powerful beaks). Padlock on doors (they learn to open latches). Extensive out-of-cage time.", "ja": "大型ケージ最低120×90×150cm（非常に活発）。パウダーコート鋼鉄の金網（嘴の力が極めて強い）。ドアに南京錠（開け方を覚える）。十分なケージ外時間。"},
+                "diet": {"en": "Pellets + fresh vegetables + limited nuts and seeds. Low-fat diet important (fatty liver disease common). Offer varied fresh foods daily. Avoid excess sunflower seeds.", "ja": "ペレット＋新鮮な野菜＋少量のナッツ・シード。低脂肪食が重要（脂肪肝が多い）。毎日多様な新鮮な食品を。ヒマワリの種の過剰は避ける。"},
+                "notes": {"en": "Lifespan 40–80 years. EXTREMELY loud (100+ dB). Velcro birds — intense bonding leads to screaming when separated. Feather destruction very common. Needs 4–6 hours daily interaction. Not for beginners.", "ja": "寿命40〜80年。極めて大きな鳴き声（100dB以上）。飼い主への強い愛着 — 離れると絶叫。毛引きが非常に多い。1日4〜6時間の交流が必要。初心者には不向き。"},
+            },
+            {
+                "name": "Macaw", "name_ja": "コンゴウインコ",
+                "housing": {"en": "Massive cage (minimum 150×90×180 cm) or dedicated bird room. Stainless steel bars essential (they destroy powder-coated). Custom-built enclosures often needed. Outdoor aviary ideal in warm climates.", "ja": "巨大ケージ（最低150×90×180cm）または専用バードルーム。ステンレス鋼の金網が必須（パウダーコートは破壊する）。特注ケージが必要になることも。温暖な気候では屋外鳥舎が理想。"},
+                "diet": {"en": "Pellets + fresh vegetables + nuts (macadamia, brazil nuts, almonds — higher fat needs than other parrots). Fresh fruits. Varied diet critical. Calcium supplementation.", "ja": "ペレット＋新鮮な野菜＋ナッツ（マカダミア、ブラジルナッツ、アーモンド — 他のオウムより脂肪の必要量が多い）。新鮮な果物。多様な食事が不可欠。カルシウム補給。"},
+                "notes": {"en": "Lifespan 50–80+ years. Largest parrots (up to 100 cm). Proventricular dilatation disease (PDD) is a serious threat. Very loud. Powerful beaks can cause serious injury. Need experienced, committed owners. Estate planning recommended.", "ja": "寿命50〜80年以上。最大のオウム（体長100cmに達する）。腺胃拡張症（PDD）は深刻な脅威。非常にうるさい。強力な嘴で重傷を負わせうる。経験豊富で献身的な飼い主が必要。遺言での引き取り先計画を推奨。"},
+            },
+        ],
     },
     # =========================================================================
     # 馬 (Horse)
