@@ -307,6 +307,9 @@ document.addEventListener("DOMContentLoaded",async()=>{
     // Restore view from URL hash
     const hash=location.hash.replace("#","");
     if(hash&&["checker","database","chat","drugs"].includes(hash))switchView(hash);
+    // Handle ?species= query param (from sitemap/SEO links)
+    const spParam=new URLSearchParams(location.search).get("species");
+    if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
   }catch(e){
     console.error("Error in DOMContentLoaded:",e);
   }
