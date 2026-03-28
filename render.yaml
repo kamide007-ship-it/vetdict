@@ -32,7 +32,7 @@ services:
         value: "true"
       # PayPal Configuration
       - key: PAYPAL_CLIENT_ID
-        value: "AX7kp51yXEJ_NiNH4dH-Y6NA-bDz7pFzT6uPgelYbXMjW3doC0I2wCGjHTGaIN2ExrixrLeXg4ZuVTUE"
+        sync: false
       - key: PAYPAL_SECRET
         sync: false
       - key: PAYPAL_MODE
