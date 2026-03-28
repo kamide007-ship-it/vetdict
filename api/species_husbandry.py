@@ -66,6 +66,18 @@ HUSBANDRY_DATA: dict = {
                 "diet": {"en": "Small-breed specific food (higher calorie density, smaller kibble). Prone to hypoglycemia (especially puppies) — frequent small meals. Dental disease extremely common — dental-specific diet or chews.", "ja": "小型犬専用フード（高カロリー密度、小粒）。低血糖になりやすい（特に子犬）— 少量頻回の食事。歯周病が非常に多い — デンタル用フードやガム。"},
                 "notes": {"en": "Lifespan 12–18+ years. Patellar luxation, tracheal collapse, dental disease very common. Fontanelles (open skull) in some toy breeds. Fragile — risk of injury from falls, being stepped on. Prone to anxiety.", "ja": "寿命12〜18年以上。膝蓋骨脱臼、気管虚脱、歯周病が非常に多い。一部超小型犬は泉門が開いたまま。骨折しやすい — 落下、踏まれる危険。不安になりやすい傾向。"},
             },
+            {
+                "name": "Working / Sporting Breeds (Labrador, Golden Retriever, German Shepherd, Border Collie, etc.)", "name_ja": "使役犬・スポーティング種（ラブラドール、ゴールデンレトリーバー、ジャーマンシェパード、ボーダーコリー等）",
+                "diet": {"en": "High-quality protein for muscle maintenance. Active dogs need 20–40% more calories than sedentary. Joint supplements (glucosamine, omega-3) beneficial early. Labrador/Golden: notorious overeaters — strict portion control.", "ja": "筋肉維持のための良質なタンパク質。活動的な犬は非活動犬より20〜40%多いカロリーが必要。関節サプリメント（グルコサミン、オメガ3）を早期から。ラブ/ゴールデン：過食で有名 — 厳格な量管理。"},
+                "enrichment": {"en": "Physical exercise 60–120 min/day (breed-dependent). Mental stimulation critical (puzzle toys, training, nose work). Herding breeds (Border Collie, Aussie) need a 'job' — boredom leads to destructive behavior.", "ja": "1日60〜120分の運動（犬種による）。精神的刺激が不可欠（知育玩具、トレーニング、ノーズワーク）。牧羊犬種（ボーダーコリー、オゥシー）には「仕事」が必要 — 退屈は破壊行動に。"},
+                "notes": {"en": "Lifespan 10–14 years. Hip/elbow dysplasia screening (OFA/PennHIP) recommended. Labrador/Golden: high cancer rates. GSD: degenerative myelopathy risk. Sporting breeds: ear infections common (floppy ears + water exposure). Regular training essential for well-being.", "ja": "寿命10〜14年。股関節/肘関節形成不全のスクリーニング推奨。ラブ/ゴールデン：がんの発生率が高い。GSD：変性性脊髄症のリスク。スポーティング種：垂れ耳＋水濡れで耳炎が多い。定期的なトレーニングが健康に不可欠。"},
+            },
+            {
+                "name": "Sighthounds (Greyhound, Whippet, Italian Greyhound, Saluki, etc.)", "name_ja": "サイトハウンド（グレーハウンド、ウィペット、イタリアングレーハウンド、サルーキ等）",
+                "temperature": {"en": "Very cold-sensitive (minimal body fat, thin coat). Winter coats/sweaters essential. Greyhounds especially prone to hypothermia. Warm bedding (they love soft beds).", "ja": "寒さに非常に弱い（体脂肪が少なく被毛が薄い）。冬は洋服/コートが必須。グレーハウンドは特に低体温になりやすい。暖かい寝床（柔らかいベッドを好む）。"},
+                "diet": {"en": "Higher protein needs. Lean body type is normal — do NOT overfeed to 'fill out'. Smaller, frequent meals for deep-chested breeds (bloat prevention). Some sighthounds have unique drug sensitivities.", "ja": "タンパク質の必要量が高い。細身の体型は正常 — 太らせようとしない。深胸種は少量頻回の食事（胃捻転予防）。一部のサイトハウンドは特異的な薬物感受性あり。"},
+                "notes": {"en": "Unique physiology: higher RBC/hemoglobin (normal for breed — don't treat as polycythemia), different anesthesia protocols (thiopental contraindicated, propofol preferred), thin skin tears easily. Prey drive management essential (secure fencing). Retired racers may have track injuries.", "ja": "特殊な生理：RBC/ヘモグロビンが高い（犬種正常値 — 多血症と間違えない）。麻酔プロトコルが異なる（チオペンタール禁忌、プロポフォール推奨）。皮膚が薄く裂けやすい。追跡本能の管理（確実な柵）。元競走犬はレース中の怪我の既往があることも。"},
+            },
         ],
     },
     # =========================================================================
@@ -119,6 +131,16 @@ HUSBANDRY_DATA: dict = {
                 "name": "Hairless / Low-maintenance (Sphynx, Devon Rex, Cornish Rex)", "name_ja": "無毛・特殊被毛種（スフィンクス、デボンレックス、コーニッシュレックス）",
                 "temperature": {"en": "24–28°C — higher than normal cats (no/thin fur insulation). Cat sweaters and heated beds essential. Avoid cold drafts.", "ja": "24〜28℃ — 通常の猫より高めに（毛がないまたは薄い）。猫用セーターとヒーター付きベッドが必須。冷たい隙間風を避ける。"},
                 "notes": {"en": "Sphynx: weekly baths needed (skin oil buildup), ear cleaning 1–2x/week, sunburn risk. HCM screening essential. Devon/Cornish Rex: fragile curly coat, prone to yeast infections in ears. Higher calorie needs for thermoregulation.", "ja": "スフィンクス：週1回の入浴（皮脂蓄積）、耳掃除週1〜2回、日焼けのリスク。HCMスクリーニング必須。デボン/コーニッシュ：繊細な巻き毛、耳の酵母感染に注意。体温維持のためカロリー需要が高い。"},
+            },
+            {
+                "name": "Bengal / Active Hybrid Breeds (Bengal, Savannah, Abyssinian)", "name_ja": "ベンガル / 活発なハイブリッド種（ベンガル、サバンナ、アビシニアン）",
+                "housing": {"en": "Cat-proofed rooms essential (extremely curious, destructive if bored). Tall cat trees with multiple levels. Running wheels popular. Secure windows/doors (escape artists). Consider catio (enclosed outdoor space).", "ja": "猫対策した部屋が必須（極めて好奇心旺盛、退屈だと破壊的）。多段の高いキャットタワー。猫用回し車が人気。窓/ドアの確実な施錠（脱走の名人）。キャティオ（囲い付き屋外スペース）の検討を。"},
+                "enrichment": {"en": "High-energy play 30+ min/day. Interactive puzzle feeders. Water play (many Bengals love water). Clicker training (highly intelligent). Companionship — consider a pair. Without enrichment, behavioral issues are guaranteed.", "ja": "1日30分以上の激しい遊び。インタラクティブなパズルフィーダー。水遊び（ベンガルは水好きが多い）。クリッカートレーニング（非常に高い知能）。仲間を検討 — ペア飼育。エンリッチメントなしでは問題行動は確実。"},
+                "notes": {"en": "Bengal: HCM screening, PRA-b (progressive retinal atrophy) testing. Savannah: F1–F3 generations may be restricted by law — check local regulations. Very vocal. NOT for first-time cat owners. May not get along with docile breeds.", "ja": "ベンガル：HCMスクリーニング、PRA-b（進行性網膜萎縮症）検査。サバンナ：F1〜F3世代は法規制の対象 — 地域の法律確認を。非常に声が大きい。猫初心者には不向き。穏やかな品種とは合わない場合も。"},
+            },
+            {
+                "name": "Scottish Fold / Fold-eared Breeds", "name_ja": "スコティッシュフォールド",
+                "notes": {"en": "Osteochondrodysplasia (OCD) is inherent to ALL fold-eared cats — cartilage defect that causes the folded ears also affects joints. Fold × Fold breeding is unethical (severe OCD). Joint pain/stiffness common from young age. Ear infections: folded ears trap moisture — clean 1–2x/week. Monitor for signs of pain (reluctance to jump, stiff gait). Tail stiffness is an early OCD sign. Consider: some countries have banned Scottish Fold breeding due to welfare concerns.", "ja": "骨軟骨異形成症（OCD）は全ての折れ耳猫に内在する — 耳を折る軟骨欠損は関節にも影響。フォールド×フォールドの交配は非倫理的（重度OCD）。若齢から関節痛・硬直が多い。耳感染：折れ耳に湿気がこもる — 週1〜2回清掃。痛みの徴候を監視（ジャンプの拒否、硬い歩様）。尻尾の硬直はOCDの初期徴候。注意：動物福祉の観点から繁殖を禁止している国もある。"},
             },
         ],
     },
@@ -174,6 +196,12 @@ HUSBANDRY_DATA: dict = {
                 "housing": {"en": "Large pen or dedicated room — standard cages too small. Minimum 120×180 cm. Reinforced flooring (heavy body weight). Low platforms only (spinal injuries from falls).", "ja": "大型ペンまたは専用部屋 — 標準ケージでは小さすぎる。最低120×180cm。補強された床（体重が重い）。段差は低くする（落下で脊椎損傷の危険）。"},
                 "diet": {"en": "Timothy hay unlimited (they eat a LOT). Pellets: 1/4–1/2 cup/day (weight-dependent, up to 6+ kg). Large amounts of leafy greens. Higher calorie needs but still monitor for obesity.", "ja": "チモシー牧草食べ放題（大量に食べる）。ペレット：1/4〜1/2カップ/日（体重6kg以上にもなるため体重に応じて）。大量の葉物野菜。カロリー需要は高いが肥満に注意。"},
                 "notes": {"en": "Lifespan 5–8 years (shorter than small breeds). Spondylosis and arthritis common due to body weight. Heart disease more prevalent. Gentle giants — excellent temperament but need experienced handling due to size.", "ja": "寿命5〜8年（小型種より短い）。体重による脊椎症・関節炎が多い。心疾患も多い。穏やかな巨人 — 優れた気質だがサイズのため経験者向けのハンドリング。"},
+            },
+            {
+                "name": "Angora / Long-haired (English Angora, French Angora, Jersey Wooly)", "name_ja": "アンゴラ / 長毛種（イングリッシュアンゴラ、フレンチアンゴラ、ジャージーウーリー）",
+                "housing": {"en": "Wire-bottom cage sections may be needed (wool gets soiled on solid flooring). Extra-clean environment essential. Grooming table or area. Avoid hay racks that tangle wool.", "ja": "ワイヤーボトム区画が必要な場合も（固い床では毛が汚れる）。特別に清潔な環境が必須。グルーミング台またはエリア。毛が絡まる牧草ラックは避ける。"},
+                "diet": {"en": "Timothy hay unlimited (critical for wool block prevention — ingested fur can cause fatal GI blockage). Papaya/pineapple enzyme supplements may help. Higher protein needs during heavy wool growth. Extra water intake important.", "ja": "チモシー牧草食べ放題（ウールブロック予防に不可欠 — 飲み込んだ毛が致死的な消化管閉塞の原因）。パパイヤ/パイナップル酵素サプリメントが有効な場合も。毛の成長期は高タンパク。十分な水分摂取が重要。"},
+                "notes": {"en": "Daily grooming MANDATORY (30+ min) — matting occurs rapidly and causes skin infections, flystrike. Shearing/trimming every 3 months. Wool block (trichobezoar) is life-threatening — recognize signs early (decreased appetite, small droppings). NOT beginner rabbits. Temperature: more heat-sensitive than short-haired breeds due to wool insulation.", "ja": "毎日のグルーミングが必須（30分以上）— 毛玉は急速に形成され皮膚感染症・ハエウジ症の原因。3ヶ月ごとに刈り込み/トリミング。ウールブロック（毛球症）は致死的 — 徴候を早期に認識（食欲低下、糞の縮小）。初心者向けではない。温度：毛の断熱効果で短毛種より暑さに弱い。"},
             },
         ],
     },
@@ -347,6 +375,16 @@ HUSBANDRY_DATA: dict = {
             "en": "Lifespan 6–10 years. Adrenal disease, insulinoma, and lymphoma very common. Annual checkups essential from age 3+. Descenting is cosmetic and not recommended. Must be spayed/neutered.",
             "ja": "寿命6〜10年。副腎疾患・インスリノーマ・リンパ腫が非常に多い。3歳以降は年1回の健診必須。臭腺除去は美容目的で非推奨。避妊去勢は必須。",
         },
+        "subtypes": [
+            {
+                "name": "Standard Ferret (Sable, Albino, etc.)", "name_ja": "スタンダードフェレット（セーブル、アルビノ等）",
+                "notes": {"en": "Most common pet ferrets. Sable: most popular color, generally healthy. Albino: may have slightly higher deafness risk but care is identical. Dark-eyed White (DEW): higher incidence of Waardenburg syndrome (deafness) — test hearing. All colors have same adrenal/insulinoma/lymphoma risks.", "ja": "最も一般的なペットフェレット。セーブル：最も人気のカラー、概して健康。アルビノ：聴覚障害リスクがやや高いが飼育法は同じ。ダークアイドホワイト（DEW）：ワールデンブルグ症候群（聴覚障害）の発生率が高い — 聴力検査を。全てのカラーで副腎/インスリノーマ/リンパ腫リスクは同等。"},
+            },
+            {
+                "name": "Angora Ferret (Long-haired)", "name_ja": "アンゴラフェレット（長毛種）",
+                "notes": {"en": "Longer, silky coat requiring more grooming than standard ferrets. Brush 2–3x/week to prevent matting. More prone to hairballs — add hairball paste/laxatone 2–3x/week. Some Angoras have no undercoat (single coat) — slightly more cold-sensitive. Rare and expensive. Same disease predispositions as standard ferrets.", "ja": "長く柔らかい毛のため通常フェレットよりグルーミングが必要。週2〜3回のブラッシングで毛玉防止。毛球症になりやすい — ヘアボールペースト/ラキサトーンを週2〜3回。アンダーコートがない個体もあり寒さにやや弱い。希少で高価。疾患の素因は通常フェレットと同じ。"},
+            },
+        ],
     },
     # =========================================================================
     # ハリネズミ (Hedgehog)
