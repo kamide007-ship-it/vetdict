@@ -82,14 +82,16 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 <div id="cookieConsent" class="cookie-consent" style="display:none">
   <p>当サイトではGoogle Analyticsを使用しています。<a href="/privacy" style="color:var(--green)">プライバシーポリシー</a></p>
   <div style="display:flex;gap:8px">
-    <button onclick="acceptAnalytics()" class="cookie-btn accept">同意する</button>
-    <button onclick="dismissConsent()" class="cookie-btn dismiss">閉じる</button>
+    <button class="cookie-btn accept" id="cookieAcceptBtn">同意する</button>
+    <button class="cookie-btn dismiss" id="cookieDismissBtn">閉じる</button>
   </div>
 </div>
 <script>
 function acceptAnalytics(){gtag('consent','update',{'analytics_storage':'granted'});localStorage.setItem('vetdict-analytics-consent','1');document.getElementById('cookieConsent').style.display='none';}
 function dismissConsent(){localStorage.setItem('vetdict-analytics-dismissed','1');document.getElementById('cookieConsent').style.display='none';}
 if(!localStorage.getItem('vetdict-analytics-consent')&&!localStorage.getItem('vetdict-analytics-dismissed')){document.getElementById('cookieConsent').style.display='flex';}
+document.getElementById('cookieAcceptBtn').addEventListener('click',acceptAnalytics);
+document.getElementById('cookieDismissBtn').addEventListener('click',dismissConsent);
 </script>
 <script defer src="/static/js/app.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}</script>

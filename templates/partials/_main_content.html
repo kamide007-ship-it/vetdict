@@ -14,7 +14,7 @@
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
               <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh"/>
-              <button class="search-clear" type="button" aria-label="Clear" onclick="this.previousElementSibling.value='';this.previousElementSibling.dispatchEvent(new Event('input'));this.previousElementSibling.focus()">&times;</button>
+              <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
             </div>
             <div class="symptom-list" id="symptomList"></div>
             <details class="lab-values-section" id="labDetails" style="margin-top:12px;border:2px solid var(--gray-200);border-radius:var(--radius);padding:0">
@@ -58,7 +58,7 @@
                   <div class="lab-group"><label for="lab-crp">CRP <span class="lab-unit">mg/L</span></label><input type="number" step="any" id="lab-crp" data-lab="crp" data-lo="0" data-hi="10" placeholder="0–10"/><span class="lab-flag"></span></div>
                   <div class="lab-group"><label for="lab-usg">USG <span class="lab-unit">比重</span></label><input type="number" step="any" id="lab-usg" data-lab="usg" data-lo="1.030" data-hi="99" placeholder="1.030+"/><span class="lab-flag"></span></div>
                 </div>
-                <button type="button" onclick="clearLabValues()" style="margin-top:8px;padding:6px 14px;font-size:.78rem;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-300);border-radius:6px;cursor:pointer">検査値をクリア</button>
+                <button type="button" id="clearLabBtn" style="margin-top:8px;padding:6px 14px;font-size:.78rem;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-300);border-radius:6px;cursor:pointer">検査値をクリア</button>
               </div>
             </details>
             <details class="pain-scale-section" id="painScaleDetails" style="margin-top:10px;border:2px solid var(--gray-200);border-radius:var(--radius);padding:0;display:none">
@@ -101,7 +101,7 @@
       <div class="card-body">
         <div class="symptom-search" style="margin-bottom:12px">
           <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)" data-i18n-ph="diseaseSearchPh"/>
-          <button class="search-clear" type="button" aria-label="Clear" onclick="this.previousElementSibling.value='';this.previousElementSibling.dispatchEvent(new Event('input'));this.previousElementSibling.focus()">&times;</button>
+          <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
         </div>
         <div class="az-nav" id="azNav"></div>
         <div id="diseaseDbCount" style="font-size:.76rem;color:var(--gray-500);margin-bottom:8px"></div>
@@ -144,7 +144,7 @@
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh"/>
-            <button class="search-clear" type="button" aria-label="Clear" onclick="this.previousElementSibling.value='';this.previousElementSibling.dispatchEvent(new Event('input'));this.previousElementSibling.focus()">&times;</button>
+            <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
           </div>
           <select id="drugCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">
             <option value="" data-i18n="allCategories">全カテゴリ</option>

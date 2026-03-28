@@ -310,6 +310,13 @@ document.addEventListener("DOMContentLoaded",async()=>{
     // Handle ?species= query param (from sitemap/SEO links)
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
+    // Search clear buttons (replaces inline onclick)
+    document.querySelectorAll('[data-action="clear-search"]').forEach(btn=>{
+      btn.addEventListener("click",()=>{const inp=btn.previousElementSibling;inp.value='';inp.dispatchEvent(new Event('input'));inp.focus();});
+    });
+    // Clear lab values button
+    const clearLabBtn=document.getElementById("clearLabBtn");
+    if(clearLabBtn)clearLabBtn.addEventListener("click",clearLabValues);
     // References toggle (replaces inline onclick)
     const refHeader=document.querySelector(".ref-header");
     if(refHeader){
