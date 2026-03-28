@@ -15,7 +15,7 @@ import os
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, jsonify, render_template, request, send_from_directory
+from flask import Flask, Response, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
@@ -364,6 +364,39 @@ def static_assets(filename):
         return send_from_directory(STATIC_DIR, filename)
     except (FileNotFoundError, WerkzeugNotFound):
         return jsonify({'error': f'{filename} not found'}), 404
+
+
+@app.route('/sitemap.xml')
+def dynamic_sitemap():
+    """Generate a dynamic sitemap including all species and feature pages."""
+    from api.disease_store import SPECIES_META
+
+    base = 'https://vetdict.info'
+    urls = [
+        (f'{base}/', 'weekly', '1.0'),
+        (f'{base}/#checker', 'weekly', '0.9'),
+        (f'{base}/#database', 'weekly', '0.9'),
+        (f'{base}/#chat', 'weekly', '0.8'),
+        (f'{base}/#drugs', 'monthly', '0.8'),
+    ]
+    # Species-specific pages
+    for sp in SPECIES_META:
+        urls.append((f'{base}/?species={sp}#checker', 'weekly', '0.7'))
+        urls.append((f'{base}/?species={sp}#database', 'weekly', '0.7'))
+
+    # Legal pages
+    for page in ('terms', 'privacy', 'tokushoho'):
+        urls.append((f'{base}/{page}', 'monthly', '0.3'))
+
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, freq, priority in urls:
+        lines.append(f'  <url><loc>{loc}</loc>'
+                     f'<changefreq>{freq}</changefreq>'
+                     f'<priority>{priority}</priority></url>')
+    lines.append('</urlset>')
+
+    return Response('\n'.join(lines), mimetype='application/xml')
 
 
 @app.route('/<path:filename>')

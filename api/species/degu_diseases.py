@@ -1614,7 +1614,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "細菌性肺炎（急性）はデグーにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
         "treatment": "Treatment includes appropriate antimicrobial therapy based on culture and sensitivity, supportive care, fluid therapy, and surgical drainage if indicated. Monitor for treatment response and complications.",
-        "treatment_ja": "デグーにおける細菌性肺炎（急性）の治療は主に支持療法であり、多くのウイルス感染症には特異的抗ウイルス薬がない。輸液療法により水分補給と電解質補正を行う。解熱鎮痛薬で発熱と不快感を管理する。広域抗菌薬で二次細菌感染を予防・治療する。食欲不振時の補助給餌を含む栄養サポートが不可欠である。免疫賦活剤やインターフェロンが有効な場合がある。感受性個体への伝播防止のため罹患個体を隔離する。",
+        "treatment_ja": "培養感受性に基づく抗菌薬療法：エンロフロキサシン5-10 mg/kg PO q12hまたはトリメトプリム-スルファ15-30 mg/kg PO q12h。輸液（温生理食塩水SC）。メロキシカム0.2-1 mg/kg PO q24hで疼痛管理。シリンジによる強制給餌。膿瘍の場合は外科的排膿・洗浄。",
         "prevention": "Prevention includes maintaining proper hygiene, appropriate husbandry, stress reduction, quarantine of new animals, and prompt treatment of wounds or primary conditions.",
         "prevention_ja": "細菌性肺炎（急性）の予防にはワクチン接種（利用可能な場合）、新規・病気動物の隔離、厳格なバイオセキュリティ対策、適切な消毒プロトコル、既知のキャリアや汚染環境との接触回避が含まれる。",
         "prognosis": "Generally good with appropriate antimicrobial therapy and source control. Chronic or deep-seated infections may require prolonged treatment. Immunocompromised patients have a more guarded prognosis.",

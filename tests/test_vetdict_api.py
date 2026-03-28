@@ -185,6 +185,39 @@ class TestStaticRoutes:
         assert 'no_such_file.css' in payload.get('error', '')
 
 
+class TestDynamicSitemap:
+    def test_sitemap_returns_xml(self, client):
+        resp = client.get('/sitemap.xml')
+        assert resp.status_code == 200
+        assert 'xml' in resp.content_type
+
+    def test_sitemap_contains_base_urls(self, client):
+        data = client.get('/sitemap.xml').data.decode()
+        assert 'https://vetdict.info/' in data
+        assert '#checker' in data
+        assert '#database' in data
+        assert '#chat' in data
+        assert '#drugs' in data
+
+    def test_sitemap_contains_species(self, client):
+        data = client.get('/sitemap.xml').data.decode()
+        assert 'species=dog' in data
+        assert 'species=cat' in data
+        assert 'species=fish' in data
+
+    def test_sitemap_contains_legal_pages(self, client):
+        data = client.get('/sitemap.xml').data.decode()
+        assert '/terms' in data
+        assert '/privacy' in data
+        assert '/tokushoho' in data
+
+    def test_sitemap_has_all_species(self, client):
+        from api.disease_store import SPECIES_META
+        data = client.get('/sitemap.xml').data.decode()
+        for sp in SPECIES_META:
+            assert f'species={sp}' in data
+
+
 # =============================================================================
 # 4. Error handlers
 # =============================================================================
