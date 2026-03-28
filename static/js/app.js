@@ -1066,13 +1066,24 @@ function renderHusbandry(h,container){
   const icon=k=>({"temperature":"\uD83C\uDF21\uFE0F","humidity":"\uD83D\uDCA7","housing":"\uD83C\uDFE0","diet":"\uD83C\uDF7D\uFE0F","enrichment":"\uD83C\uDFAE","socialization":"\uD83E\uDD1D","notes":"\uD83D\uDCCB"}[k]||"");
   const labelKey=k=>({"temperature":"husbandryTemp","humidity":"husbandryHumidity","housing":"husbandryHousing","diet":"husbandryDiet","enrichment":"husbandryEnrichment","socialization":"husbandrySocial","notes":"husbandryNotes"}[k]||k);
   const fields=["temperature","humidity","housing","diet","enrichment","socialization","notes"];
-  let html=`<h3 class="husbandry-title">${icon("notes")} ${t("husbandryTitle")}</h3><div class="husbandry-grid">`;
-  for(const f of fields){
-    const val=h[f];if(!val)continue;
-    const text=val[lang]||val.en||val.ja||"";
-    html+=`<div class="husbandry-card"><div class="husbandry-card-icon">${icon(f)}</div><div class="husbandry-card-label">${t(labelKey(f))}</div><div class="husbandry-card-text">${escapeHtml(text)}</div></div>`;
+  function renderCards(data){
+    let out="";
+    for(const f of fields){
+      const val=data[f];if(!val)continue;
+      const text=val[lang]||val.en||val.ja||"";
+      out+=`<div class="husbandry-card"><div class="husbandry-card-icon">${icon(f)}</div><div class="husbandry-card-label">${t(labelKey(f))}</div><div class="husbandry-card-text">${escapeHtml(text)}</div></div>`;
+    }
+    return out;
   }
-  html+="</div>";
+  let html=`<h3 class="husbandry-title">${icon("notes")} ${t("husbandryTitle")}</h3><div class="husbandry-grid">${renderCards(h)}</div>`;
+  if(h.subtypes&&h.subtypes.length){
+    html+=`<div class="husbandry-subtypes">`;
+    for(const st of h.subtypes){
+      const stName=lang==="ja"?(st.name_ja||st.name):(st.name||st.name_ja);
+      html+=`<details class="husbandry-subtype"><summary class="husbandry-subtype-title">${escapeHtml(stName)}</summary><div class="husbandry-grid">${renderCards(st)}</div></details>`;
+    }
+    html+=`</div>`;
+  }
   container.innerHTML=html;
 }
 
