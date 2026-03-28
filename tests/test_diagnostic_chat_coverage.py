@@ -1373,6 +1373,77 @@ class TestDiagnosticAccuracyHamsterWetTail:
 
 
 # ===========================================================================
+# Next Questions Endpoint (POST /api/diagnostic-chat/next-questions)
+# ===========================================================================
+
+
+class TestNextQuestionsEndpoint:
+    """Test POST /api/diagnostic-chat/next-questions."""
+
+    def test_missing_suspected_diseases_returns_400(self, client):
+        r = client.post("/api/diagnostic-chat/next-questions", json={
+            "symptoms": ["vomiting"],
+        })
+        assert r.status_code == 400
+        assert "suspected_diseases" in r.get_json()["error"]
+
+    def test_empty_suspected_diseases_returns_400(self, client):
+        r = client.post("/api/diagnostic-chat/next-questions", json={
+            "suspected_diseases": [],
+            "symptoms": ["vomiting"],
+        })
+        assert r.status_code == 400
+
+    def test_valid_request_returns_200(self, client):
+        r = client.post("/api/diagnostic-chat/next-questions", json={
+            "suspected_diseases": [
+                {"name": "Gastroenteritis", "similarity_score": 0.8},
+                {"name": "Pancreatitis", "similarity_score": 0.6},
+            ],
+            "symptoms": ["vomiting", "lethargy"],
+        })
+        assert r.status_code == 200
+
+    def test_response_has_required_keys(self, client):
+        r = client.post("/api/diagnostic-chat/next-questions", json={
+            "suspected_diseases": [
+                {"name": "Gastroenteritis", "similarity_score": 0.8},
+            ],
+            "symptoms": ["vomiting"],
+        })
+        data = r.get_json()
+        assert "next_questions" in data
+        assert "question_count" in data
+
+    def test_question_limit_caps_at_5(self, client):
+        r = client.post("/api/diagnostic-chat/next-questions", json={
+            "suspected_diseases": [
+                {"name": "Gastroenteritis", "similarity_score": 0.8},
+                {"name": "Pancreatitis", "similarity_score": 0.6},
+                {"name": "Liver Disease", "similarity_score": 0.4},
+            ],
+            "symptoms": ["vomiting", "lethargy", "appetite_loss"],
+            "question_limit": 10,
+        })
+        data = r.get_json()
+        assert data.get("question_count", 0) <= 5
+
+    def test_default_question_limit_is_3(self, client):
+        r = client.post("/api/diagnostic-chat/next-questions", json={
+            "suspected_diseases": [
+                {"name": "Gastroenteritis", "similarity_score": 0.8},
+            ],
+            "symptoms": ["vomiting"],
+        })
+        data = r.get_json()
+        assert data.get("question_count", 0) <= 3
+
+    def test_empty_body_returns_400(self, client):
+        r = client.post("/api/diagnostic-chat/next-questions", json={})
+        assert r.status_code == 400
+
+
+# ===========================================================================
 # Guided Consultation Endpoint (POST /api/diagnostic-chat/consultation)
 # ===========================================================================
 
