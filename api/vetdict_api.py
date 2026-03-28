@@ -276,8 +276,8 @@ def add_headers(response):
     # Content security headers
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
 
     # Content Security Policy (prevent XSS, clickjacking, etc.)
     response.headers['Content-Security-Policy'] = (
@@ -295,7 +295,6 @@ def add_headers(response):
     is_production = os.getenv('RENDER') or os.getenv('PRODUCTION')
     if is_production:
         response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload'
-        response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
 
     # Remove server version disclosure
     response.headers.pop('Server', None)

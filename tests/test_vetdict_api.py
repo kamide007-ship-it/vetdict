@@ -110,9 +110,11 @@ class TestSecurityHeaders:
         resp = client.get('/api/health')
         assert resp.headers.get('X-Frame-Options') == 'SAMEORIGIN'
 
-    def test_x_xss_protection(self, client):
+    def test_permissions_policy(self, client):
         resp = client.get('/api/health')
-        assert resp.headers.get('X-XSS-Protection') == '1; mode=block'
+        pp = resp.headers.get('Permissions-Policy', '')
+        assert 'geolocation=()' in pp
+        assert 'camera=()' in pp
 
     def test_referrer_policy(self, client):
         resp = client.get('/api/health')
