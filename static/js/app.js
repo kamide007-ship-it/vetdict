@@ -501,7 +501,7 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   ["chatMessages","landingChatMessages"].forEach(id=>{
     const el=document.getElementById(id);
-    if(el){el.innerHTML=`<div class="chat-msg bot">${hint}</div>`;}
+    if(el){el.innerHTML=`<div class="chat-msg bot">${escapeHtml(hint)}</div>`;}
   });
 }
 
