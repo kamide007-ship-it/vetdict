@@ -9,6 +9,7 @@ Provides:
   - RECO2/RECO3 AI integrity control layer
 """
 
+import contextlib
 import logging
 import os
 from functools import wraps
@@ -56,8 +57,11 @@ app.VERSION = VERSION  # Make VERSION available to decorators
 _allowed_origins = os.getenv('CORS_ALLOWED_ORIGINS', '').strip()
 if _allowed_origins:
     CORS(app, resources={r"/api/*": {"origins": _allowed_origins.split(',')}})
-else:
+elif is_debug_mode_enabled():
     CORS(app)
+    logger.warning("CORS_ALLOWED_ORIGINS not set — allowing all origins (debug mode only)")
+else:
+    CORS(app, resources={r"/api/*": {"origins": ["https://vetdict.info"]}})
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
@@ -278,7 +282,7 @@ def add_headers(response):
     # Content Security Policy (prevent XSS, clickjacking, etc.)
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com; "
+        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: https:; "
         "font-src 'self' https:; "
@@ -295,6 +299,7 @@ def add_headers(response):
 
     # Remove server version disclosure
     response.headers.pop('Server', None)
+    response.headers.pop('X-Powered-By', None)
 
     # Cache policy: API responses are never cached; static files are revalidated
     path = request.path or ''
@@ -450,6 +455,71 @@ def api_species_symptoms(species: str):
     return {"symptoms": get_symptoms_for_species(species_key)}
 
 
+@app.route('/api/related-symptoms/<species>', methods=['POST'])
+@ensure_json_response
+def get_related_symptoms(species):
+    """Suggest symptoms that commonly co-occur with selected ones."""
+    data = request.get_json(silent=True) or {}
+    selected = data.get('symptoms', [])
+    if not selected or not isinstance(selected, list):
+        return {'related': []}
+
+    species_key = (species or '').lower()
+
+    try:
+        from api.disease_store import get_symptoms_for_species
+        all_symptoms = get_symptoms_for_species(species_key)
+        if not all_symptoms:
+            return {'related': []}
+
+        # Build a lookup from symptom id to symptom info
+        sym_lookup = {s['id']: s for s in all_symptoms}
+
+        # Query diseases for this species to build co-occurrence
+        import json as _json
+
+        from api.database import get_connection
+        with get_connection() as conn:
+            rows = conn.execute(
+                "SELECT symptoms FROM diseases WHERE species = ? AND symptoms IS NOT NULL",
+                (species_key,),
+            ).fetchall()
+
+        if not rows:
+            return {'related': []}
+
+        selected_set = set(selected)
+        co_occur: dict[str, int] = {}
+        for row in rows:
+            try:
+                disease_symptoms = set(_json.loads(row['symptoms']))
+            except (ValueError, TypeError):
+                continue
+            overlap = disease_symptoms & selected_set
+            if overlap:
+                for s in disease_symptoms - selected_set:
+                    co_occur[s] = co_occur.get(s, 0) + len(overlap)
+
+        # Sort by co-occurrence frequency, take top 5
+        sorted_symptoms = sorted(co_occur.items(), key=lambda x: -x[1])[:5]
+
+        result = []
+        for sym_id, score in sorted_symptoms:
+            sym_info = sym_lookup.get(sym_id)
+            if sym_info:
+                result.append({
+                    'id': sym_id,
+                    'name_ja': sym_info.get('name_ja', sym_id),
+                    'name_en': sym_info.get('name_en', sym_id),
+                    'score': score,
+                })
+
+        return {'related': result}
+    except Exception as e:
+        logger.warning(f"Related symptoms error: {e}")
+        return {'related': []}
+
+
 # =============================================================================
 # API: Symptom Analysis (multi-species)
 # =============================================================================
@@ -527,24 +597,28 @@ def api_analyze_symptoms():
         if len(vaccines) > MAX_VACCINES:
             return {'error': f'Too many vaccines (max {MAX_VACCINES})'}, 400
 
-    # Coerce age_years to float
+    # Coerce age_years to float and validate range
     if age_years is not None:
         try:
             age_years = float(age_years)
         except (ValueError, TypeError):
             return {'error': 'age_years must be a number'}, 400
+        if age_years < 0 or age_years > 100:
+            return {'error': 'age_years must be between 0 and 100'}, 400
 
     # Coerce lab_values to {str: float}
     lab_values = None
-    if lab_values_raw and isinstance(lab_values_raw, dict):
+    if lab_values_raw is not None:
+        if not isinstance(lab_values_raw, dict):
+            return {'error': 'lab_values must be a JSON object'}, 400
         if len(lab_values_raw) > MAX_LAB_VALUES:
             return {'error': f'Too many lab values (max {MAX_LAB_VALUES})'}, 400
         lab_values = {}
         for k, v in lab_values_raw.items():
-            try:
+            if not isinstance(k, str) or len(k) > MAX_STRING_LEN:
+                return {'error': 'lab_values keys must be strings'}, 400
+            with contextlib.suppress(ValueError, TypeError):
                 lab_values[str(k)] = float(v)
-            except (ValueError, TypeError):
-                continue
         if not lab_values:
             lab_values = None
 
@@ -892,6 +966,24 @@ def reco3_config():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
     return public_reco2_config(load_reco2_config())
+
+
+# =============================================================================
+# API: Admin Token Verification
+# =============================================================================
+
+@app.route('/api/admin/verify', methods=['POST'])
+def verify_admin():
+    """Server-side admin token verification."""
+    body = request.get_json(silent=True) or {}
+    token = body.get('token', '')
+    admin_token = os.getenv('ADMIN_TOKEN', '')
+    if not admin_token:
+        return jsonify({'valid': False}), 403
+    import hmac
+    if hmac.compare_digest(token, admin_token):
+        return jsonify({'valid': True})
+    return jsonify({'valid': False}), 403
 
 
 # =============================================================================

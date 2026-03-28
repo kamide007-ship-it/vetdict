@@ -1206,3 +1206,32 @@ button.combination-item:focus-visible {
 .breed-ecology-val{font-size:.8rem;font-weight:600;color:#5a4520;margin-left:auto;white-space:nowrap}
 .breed-ecology-field{font-size:.8rem;color:#5a4520;margin-bottom:6px;line-height:1.5}
 .breed-ecology-field strong{color:#7c5e2a}
+
+.results-disclaimer{background:#fffbeb;border:1px solid #fde68a;border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;font-size:.78rem;color:#92400e;display:flex;align-items:center;gap:6px}
+.feedback-widget{text-align:center;padding:16px;margin-top:12px;border-top:1px solid var(--gray-200);font-size:.84rem;color:var(--gray-600)}
+.feedback-btns{display:flex;justify-content:center;gap:10px;margin-top:8px}
+.feedback-btn{padding:8px 18px;border-radius:8px;border:1px solid var(--gray-200);background:var(--white);cursor:pointer;font-size:.82rem;transition:all .2s}
+.feedback-btn.helpful:hover{background:#dcfce7;border-color:#86efac}
+.feedback-btn.not-helpful:hover{background:#fee2e2;border-color:#fca5a5}
+.feedback-btn:disabled{opacity:.5;cursor:default}
+.feedback-thanks{color:var(--green);font-weight:600}
+.share-widget{text-align:center;padding:12px;margin-top:8px;font-size:.82rem;color:var(--gray-600)}
+.share-btns{display:flex;justify-content:center;gap:8px;margin-top:6px}
+.share-btn{padding:6px 14px;border-radius:6px;font-size:.76rem;font-weight:600;cursor:pointer;text-decoration:none;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-700);transition:all .2s;font-family:var(--font)}
+.share-btn.twitter:hover{background:#1da1f2;color:var(--white);border-color:#1da1f2}
+.share-btn.line:hover{background:#06c755;color:var(--white);border-color:#06c755}
+.share-btn.copy:hover{background:var(--gray-100)}
+
+.cookie-consent{position:fixed;bottom:0;left:0;right:0;background:var(--navy-dark);color:var(--white);padding:14px 20px;z-index:200;align-items:center;justify-content:space-between;gap:12px;font-size:.82rem;box-shadow:0 -4px 16px rgba(0,0,0,.3)}
+.cookie-consent p{margin:0;flex:1}
+.cookie-btn{border:none;padding:8px 16px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--font)}
+.cookie-btn.accept{background:var(--green);color:var(--white)}
+.cookie-btn.dismiss{background:transparent;color:var(--gray-300);border:1px solid var(--gray-500)}
+
+.related-suggestions{background:linear-gradient(135deg,#eef3ff,#e8edf8);border:1px solid #c7d2e8;border-radius:var(--radius);padding:12px 16px;margin-bottom:12px;animation:fadeIn .3s ease}
+.related-label{font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+.related-btns{display:flex;flex-wrap:wrap;gap:6px}
+.related-sym-btn{padding:6px 12px;border-radius:20px;border:1px solid var(--navy-light);background:var(--white);color:var(--navy);font-size:.78rem;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.related-sym-btn:hover{background:var(--navy);color:var(--white)}
+.related-sym-btn.added{background:var(--green);color:var(--white);border-color:var(--green);cursor:default}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}

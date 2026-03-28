@@ -890,7 +890,6 @@ SYMPTOM_ALIASES = {
     "眠ってばかり": "lethargy",
     # モルモット
     "歯茎から出血": "blood_in_stool", "壊血病": "weight_loss",
-    "ビタミンc不足": "lethargy",
     # フェレット
     "低血糖": "lethargy",
     # 爬虫類
@@ -978,6 +977,57 @@ SYMPTOM_ALIASES = {
     "体をこすりつける": "flashing", "底砂に体を擦る": "flashing",
     # ハリネズミ — 針
     "針がボロボロ抜ける": "quill_loss", "針がたくさん抜ける": "quill_loss",
+    # --- 2026-03 追加: 曖昧な主訴 ---
+    "具合が悪そう": "lethargy",
+    "何か変": "lethargy",
+    "動きが遅い": "lethargy",
+    # --- 猫特有 ---
+    "ゴロゴロ言わなくなった": "behavioral_changes",
+    "毛玉を吐く": "vomiting",
+    "トイレに何度も行く": "frequent_urination",
+    # --- ウサギ特有 ---
+    "盲腸便を食べない": "abnormal_cecotropes",
+    # --- 鳥特有 ---
+    "卵が詰まってる": "egg_binding",
+    "羽がボロボロ": "feather_loss",
+    "止まり木に止まれない": "weakness",
+    "くちばしが伸びてる": "beak_deformity",
+    # --- 魚特有 ---
+    "底でじっとしている": "lethargy",
+    "体が白い": "white_spots",
+    # --- 犬特有 ---
+    "後ろ足が立たない": "hind_leg_weakness",
+    "散歩を嫌がる": "exercise_intolerance",
+    "お座りできない": "hind_leg_weakness",
+    "耳を掻く": "ear_scratching",
+    "お尻を引きずる": "scooting",
+    "目やにが多い": "eye_discharge",
+    # --- フェレット特有 ---
+    "しっぽが細い": "hair_loss",
+    "後ろ足がふらつく": "hind_leg_weakness",
+    # --- モルモット特有 ---
+    "歯が伸びてる": "visible_tooth_overgrowth",
+    # --- ハリネズミ特有 ---
+    "丸まったまま": "lethargy",
+    # --- English colloquial additions ---
+    "not eating well": "loss_of_appetite",
+    "off feed": "loss_of_appetite",
+    "struggling to breathe": "labored_breathing",
+    "can't walk": "paralysis",
+    "wobbly gait": "ataxia",
+    "stumbling": "ataxia",
+    "blood in pee": "blood_in_urine",
+    "blood in poop": "blood_in_stool",
+    "puking": "vomiting",
+    "throwing up": "vomiting",
+    "swollen belly": "abdominal_distension",
+    "lost weight": "weight_loss",
+    "gaining weight": "weight_gain",
+    "can't poop": "constipation",
+    "itchy skin": "scratching",
+    "bald patches": "hair_loss",
+    "lumps on body": "lumps",
+    "bad smell": "foul_odor",
 }
 
 
@@ -3560,6 +3610,19 @@ _CATEGORY_LABELS = {
     "gills": {"ja": "鰓", "en": "Gills"},
     "behavior": {"ja": "行動", "en": "Behavior"},
     "other": {"ja": "その他", "en": "Other"},
+    # --- 2026-03 追加 ---
+    "endocrine": {"ja": "内分泌", "en": "Endocrine"},
+    "hematological": {"ja": "血液", "en": "Hematological"},
+    "hepatic": {"ja": "肝臓", "en": "Hepatic"},
+    "immune": {"ja": "免疫", "en": "Immune"},
+    "infectious": {"ja": "感染症", "en": "Infectious"},
+    "metabolic": {"ja": "代謝", "en": "Metabolic"},
+    "neoplastic": {"ja": "腫瘍", "en": "Neoplastic"},
+    "nutritional": {"ja": "栄養", "en": "Nutritional"},
+    "parasitic": {"ja": "寄生虫", "en": "Parasitic"},
+    "renal": {"ja": "腎臓", "en": "Renal"},
+    "toxicological": {"ja": "中毒", "en": "Toxicological"},
+    "traumatic": {"ja": "外傷", "en": "Traumatic"},
 }
 
 
@@ -3668,6 +3731,8 @@ def consultation():
     answered_categories = data.get("answered_categories", [])
     onset = data.get("onset")
     age_years = data.get("age_years")
+    lab_values = data.get("lab_values")
+    breed = data.get("breed")
 
     sp_label = SPECIES_LABELS.get(species, {"ja": species, "en": species})
     all_symptoms = _get_species_symptoms_with_categories(species)
@@ -3851,6 +3916,8 @@ def consultation():
                     symptoms=selected_symptoms,
                     onset=onset,
                     age_years=age_years,
+                    lab_values=lab_values,
+                    breed=breed,
                 )
             except (ImportError, Exception):
                 # Fallback to chat engine

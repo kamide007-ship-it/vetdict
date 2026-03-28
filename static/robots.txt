@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /static/js/
-Disallow: /static/css/
+Allow: /static/js/
+Allow: /static/css/
+Allow: /static/manifest.json
 
 Sitemap: https://vetdict.info/sitemap.xml
