@@ -761,7 +761,9 @@ function createResultsDisclaimer(){
 function createFeedbackWidget(){
   const w=document.createElement("div");
   w.className="feedback-widget";
-  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button class="feedback-btn helpful" onclick="sendFeedback(true)">&#128077; '+t("feedbackYes")+'</button><button class="feedback-btn not-helpful" onclick="sendFeedback(false)">&#128078; '+t("feedbackNo")+'</button></div>';
+  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button class="feedback-btn helpful">&#128077; '+t("feedbackYes")+'</button><button class="feedback-btn not-helpful">&#128078; '+t("feedbackNo")+'</button></div>';
+  w.querySelector(".feedback-btn.helpful").addEventListener("click",function(){sendFeedback(true);});
+  w.querySelector(".feedback-btn.not-helpful").addEventListener("click",function(){sendFeedback(false);});
   return w;
 }
 
@@ -865,7 +867,7 @@ function renderResults(data){
     });
   }
 
-  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${x.priority}]</span>`:"";return`<li>\u{1F52C} ${label}${priority}</li>`;}).join("")}</ul></div>`;}
+  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${escapeHtml(x.priority)}]</span>`:"";return`<li>\u{1F52C} ${escapeHtml(label)}${priority}</li>`;}).join("")}</ul></div>`;}
   html+=`<div id="commonDiseasesArea"></div><div id="breedEcologyArea"></div>`;
   area.innerHTML="";
   area.appendChild(createResultsDisclaimer());
