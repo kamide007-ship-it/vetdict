@@ -19,7 +19,7 @@ async function checkAccess(){
   const adminParam=params.get("admin");
   if(adminParam){
     try{
-      const r=await fetch("/api/admin/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:adminParam})});
+      const r=await fetchWithTimeout("/api/admin/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:adminParam})},5000);
       const d=await r.json();
       if(d.valid){localStorage.setItem("vetdict-admin","1");isAdmin=true;isPro=true;}
       else{localStorage.removeItem("vetdict-admin");}
@@ -32,7 +32,7 @@ async function checkAccess(){
     isPro=true;
     const subId=localStorage.getItem("vetdict-subscription-id");
     if(subId){
-      fetch("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})})
+      fetchWithTimeout("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})},5000)
       .then(function(r){return r.json();})
       .then(function(d){if(!d.active){localStorage.removeItem("vetdict-pro");localStorage.removeItem("vetdict-subscription-id");isPro=false;document.body.classList.remove("is-pro");}})
       .catch(function(){});
@@ -509,7 +509,7 @@ function loadBreeds(species){
   const select=document.getElementById("breedSelect");
   select.innerHTML=`<option value="">${t("breedNone")}</option>`;
   currentBreed="";
-  fetch("/api/breeds/"+species).then(r=>r.json()).then(data=>{
+  fetchWithTimeout("/api/breeds/"+species).then(r=>r.json()).then(data=>{
     if(requestId!==breedRequestId||species!==currentSpecies)return;
     if(data.breeds&&data.breeds.length>0){
       data.breeds.forEach(b=>{select.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(b.id)}">${escapeHtml(b.name_ja)} (${escapeHtml(b.name)})</option>`);});
@@ -548,8 +548,8 @@ function renderSymptomList(symptoms){
   if(!list){console.warn("symptomList element not found");return;}
   const search=(symptomSearch?.value||"").toLowerCase();
   const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
-  let html=`<button class="symptom-sort-toggle" onclick="toggleSymptomSort()" aria-label="Switch sort mode">${sortLabel}</button>`;
-  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?(s.name_ja||s.name_en):(s.name_en||s.name_ja);const secondary=currentLang==="ja"?(s.name_en||""):(s.name_ja||"");return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;};
+  let html=`<button class="symptom-sort-toggle" aria-label="Switch sort mode">${escapeHtml(sortLabel)}</button>`;
+  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?(s.name_ja||s.name_en):(s.name_en||s.name_ja);const secondary=currentLang==="ja"?(s.name_en||""):(s.name_ja||"");return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${escapeHtml(s.id)}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${escapeHtml(primary)} <span style="color:var(--gray-600)">${escapeHtml(secondary)}</span></span></div>`;};
   const matchSearch=s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);};
   if(symptomSortMode==="category"){
     const categories={};
@@ -566,6 +566,8 @@ function renderSymptomList(symptoms){
     for(const s of sorted)html+=mkItem(s);
   }
   list.innerHTML=html||`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noMatchingSymptom")}</div>`;
+  const sortToggle=list.querySelector(".symptom-sort-toggle");
+  if(sortToggle)sortToggle.addEventListener("click",toggleSymptomSort);
   list.onclick=e=>{const item=e.target.closest(".symptom-item");if(item)toggleSymptom(item.dataset.id);};
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
 }
@@ -576,7 +578,7 @@ function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
   if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;return;}
   btn.disabled=false;
-  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
+  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${escapeHtml(label)} <button class="remove" type="button" aria-label="${escapeHtml(ariaLabel)}" data-id="${escapeHtml(id)}">&times;</button></span>`;}).join("");
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
 }
 
@@ -784,7 +786,9 @@ function createShareWidget(diseases){
   const shareUrl="https://vetdict.info/";
   const twitterUrl=`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
   const lineUrl=`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
-  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X(Twitter)</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy" onclick="navigator.clipboard.writeText('${escapeHtml(shareText)} ${shareUrl}').then(()=>this.textContent='${t("shareCopied")}')">${t("shareCopy")}</button></div>`;
+  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X(Twitter)</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button></div>`;
+  const copyBtn=w.querySelector(".share-btn.copy");
+  copyBtn.addEventListener("click",function(){navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{copyBtn.textContent=t("shareCopied");});});
   return w;
 }
 
@@ -877,7 +881,7 @@ function renderResults(data){
 function loadCommonDiseases(species){
   const area=document.getElementById("commonDiseasesArea");
   if(!area||!species)return;
-  fetch(`/api/species/${encodeURIComponent(species)}/common-diseases`).then(r=>r.json()).then(data=>{
+  fetchWithTimeout(`/api/species/${encodeURIComponent(species)}/common-diseases`).then(r=>r.json()).then(data=>{
     if(species!==currentSpecies)return;
     const diseases=data.common_diseases||[];
     if(!diseases.length){area.innerHTML="";return;}
@@ -1043,7 +1047,7 @@ function loadDiseaseDb(species){
   const list=document.getElementById("diseaseDbList");
   if(!list){console.warn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
-  fetch(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
+  fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
   .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
@@ -1086,13 +1090,15 @@ function renderAzNav(){
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
   if(diseaseNavMode==="category"){
     const cats=[...DISEASE_CAT_ORDER,"other"];
-    const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${c}" aria-label="${lbl}">${lbl}</button>`;}).join("");
-    azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode='${cur.next}';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
+    const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}">${escapeHtml(lbl)}</button>`;}).join("");
+    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
   }else{
     const isAz=diseaseNavMode==="az";
     const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
-    azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode='${cur.next}';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
   }
+  const nextMode=cur.next;
+  azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
   azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
 }
 
@@ -1154,24 +1160,30 @@ function renderDiseaseDb(){
     const dPrimary=currentLang==="ja"?dNameJa:dNameEn;
     const dSecondary=currentLang==="ja"?dNameEn:dNameJa;
     const dDesc=desc.substring(0,80)+(desc.length>80?"...":"");
-    return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDbItem(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDbItem(this)}">
+    return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
-        <dt>${t("dtDescription")}</dt><dd>${desc}</dd>
-        <dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd>
-        <dt>${t("dtCauses")}</dt><dd>${causes}</dd>
-        <dt>${t("dtPrevention")}</dt><dd>${prevention}</dd>
-        <dt>${t("dtTreatment")}</dt><dd>${treatment}</dd>
-        <dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>
-        ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):d.symptoms)}</dd>`:""}
-        ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
-      </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${d.missing_fields.join(", ")}</div>`:""}</div>
+        <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
+        <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
+        <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
+        <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
+        <dt>${t("dtTreatment")}</dt><dd>${escapeHtml(treatment)}</dd>
+        <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
+        ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:""}
+        ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:""}
+      </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
+  _attachDbItemHandlers(list);
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
-    list.insertAdjacentHTML("beforeend",`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${remaining}件)`:`Show more (${remaining} remaining)`}</button>`);
+    const showMoreBtn=document.createElement("button");
+    showMoreBtn.className="show-more-btn";
+    showMoreBtn.style.cssText="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer";
+    showMoreBtn.textContent=currentLang==="ja"?`さらに表示 (残り${remaining}件)`:`Show more (${remaining} remaining)`;
+    showMoreBtn.addEventListener("click",function(){diseaseDisplayLimit+=100;renderDiseaseDb();});
+    list.appendChild(showMoreBtn);
   }
 }
 
@@ -1462,7 +1474,7 @@ function renderChatResult(container,data){
     const chatRef=document.createElement("div");
     chatRef.className="chat-reference-section";
     wrapper.appendChild(chatRef);
-    fetch(`/api/species/${encodeURIComponent(currentSpecies)}/common-diseases`).then(r=>r.json()).then(data=>{
+    fetchWithTimeout(`/api/species/${encodeURIComponent(currentSpecies)}/common-diseases`).then(r=>r.json()).then(data=>{
       const diseases=data.common_diseases||[];
       if(!diseases.length)return;
       const veryCommon=diseases.filter(d=>d.prevalence==="very_common");
@@ -1863,7 +1875,7 @@ let drugsLoaded=false,allDrugs=[],drugCategories={};
 function loadDrugDictionary(){
   const list=document.getElementById("drugList");
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div><div class="skeleton skeleton-card" style="height:90px"></div><div class="skeleton skeleton-card" style="height:60px"></div></div>';
-  Promise.all([fetch("/api/drugs").then(r=>r.json()),fetch("/api/drug-categories").then(r=>r.json())])
+  Promise.all([fetchWithTimeout("/api/drugs").then(r=>r.json()),fetchWithTimeout("/api/drug-categories").then(r=>r.json())])
   .then(([drugsData,catData])=>{
     allDrugs=drugsData.drugs||[];drugCategories=drugsData.categories||{};
     pendingStats.drugs=allDrugs.length;animateCount(document.getElementById("statDrugs"),allDrugs.length,800);
