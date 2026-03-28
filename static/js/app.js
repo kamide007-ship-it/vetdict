@@ -1532,7 +1532,7 @@ function switchChatMode(mode){
 }
 
 function startGuidedConsultation(){
-  guidedState={species:currentSpecies||"dog",selectedSymptoms:[],answeredCategories:[],onset:null,ageYears:null,phase:"start",breed:currentBreed||""};
+  guidedState={species:currentSpecies||"dog",selectedSymptoms:[],answeredCategories:[],onset:null,ageYears:null,painScore:null,phase:"start",breed:currentBreed||""};
   const msgs=document.getElementById("guidedMessages");
   const actions=document.getElementById("guidedActions");
   if(msgs)msgs.innerHTML="";
@@ -1566,6 +1566,7 @@ function guidedFetch(phase,extra){
     answered_categories:guidedState.answeredCategories,
     onset:guidedState.onset,
     age_years:guidedState.ageYears,
+    pain_score:guidedState.painScore,
     breed:guidedState.breed||"",
     ...(extra||{})
   };
@@ -1780,6 +1781,7 @@ function guidedRenderContextQuestions(questions){
       if(val)btn.classList.add("selected");
       if(type==="onset"&&val)guidedState.onset=val;
       if(type==="age"&&val)guidedState.ageYears=parseFloat(val);
+      if(type==="pain_score"&&val!=="")guidedState.painScore=parseInt(val,10);
     });
   });
 
@@ -1810,6 +1812,7 @@ function guidedRenderFinalResults(data){
   let ctxParts=[];
   if(data.onset)ctxParts.push((currentLang==="ja"?"発症: ":"Onset: ")+data.onset);
   if(data.age_years)ctxParts.push((currentLang==="ja"?"年齢: ":"Age: ")+data.age_years+(currentLang==="ja"?"歳":"y"));
+  if(data.pain_score!=null)ctxParts.push((currentLang==="ja"?"疼痛: ":"Pain: ")+data.pain_score+"/4");
   if(ctxParts.length>0)guidedAddMsg(ctxParts.join(" / "),"bot");
 
   // Disease results

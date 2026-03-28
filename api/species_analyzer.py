@@ -379,6 +379,7 @@ def analyze_species_symptoms(
     gender: str | None = None,
     vaccines: list[str] | None = None,
     vaccination_status: str | None = None,
+    pain_score: int | None = None,
 ) -> Dict:
     """動物種に応じて適切な鑑別診断関数を呼び出すユーティリティ。
 
