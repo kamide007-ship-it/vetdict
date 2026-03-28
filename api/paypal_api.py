@@ -6,6 +6,7 @@ Handles subscription activation, verification, and webhook events.
 from __future__ import annotations
 
 import base64
+import hmac
 import json
 import logging
 import os
@@ -186,6 +187,44 @@ def verify_subscription():
     return jsonify({"active": active, "subscription_id": subscription_id})
 
 
+def _verify_webhook_signature(request_obj) -> bool:
+    """Verify PayPal webhook signature using transmission headers."""
+    webhook_id = os.getenv("PAYPAL_WEBHOOK_ID", "")
+    if not webhook_id:
+        logger.warning("PAYPAL_WEBHOOK_ID not set — skipping webhook verification")
+        return True  # Allow in dev; require in production
+
+    token = _get_paypal_token()
+    if not token:
+        return False
+
+    verify_data = {
+        "auth_algo": request_obj.headers.get("Paypal-Auth-Algo", ""),
+        "cert_url": request_obj.headers.get("Paypal-Cert-Url", ""),
+        "transmission_id": request_obj.headers.get("Paypal-Transmission-Id", ""),
+        "transmission_sig": request_obj.headers.get("Paypal-Transmission-Sig", ""),
+        "transmission_time": request_obj.headers.get("Paypal-Transmission-Time", ""),
+        "webhook_id": webhook_id,
+        "webhook_event": request_obj.get_json(silent=True) or {},
+    }
+
+    req = urllib.request.Request(
+        f"{PAYPAL_API_BASE}/v1/notifications/verify-webhook-signature",
+        data=json.dumps(verify_data).encode(),
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            result = json.loads(resp.read())
+            return result.get("verification_status") == "SUCCESS"
+    except Exception as e:
+        logger.error(f"Webhook signature verification failed: {e}")
+        return False
+
+
 @paypal_bp.route("/webhook", methods=["POST"])
 def paypal_webhook():
     """Handle PayPal webhook events (subscription lifecycle).
@@ -198,6 +237,12 @@ def paypal_webhook():
     - PAYMENT.SALE.COMPLETED
     """
     body = request.get_json(silent=True) or {}
+
+    # Verify webhook signature in production
+    if os.getenv("PAYPAL_WEBHOOK_ID") and not _verify_webhook_signature(request):
+        logger.warning("Invalid PayPal webhook signature")
+        return jsonify({"error": "invalid signature"}), 403
+
     event_type = body.get("event_type", "")
     resource = body.get("resource", {})
 
@@ -249,8 +294,8 @@ def paypal_webhook():
 def list_subscribers():
     """Admin endpoint: list all subscribers (requires admin token)."""
     token = request.headers.get("X-Admin-Token", "")
-    admin_token = os.getenv("ADMIN_TOKEN", "kamide007")
-    if token != admin_token:
+    admin_token = os.getenv("ADMIN_TOKEN", "")
+    if not admin_token or not hmac.compare_digest(token, admin_token):
         return jsonify({"error": "unauthorized"}), 403
 
     data = _load_subscribers()
@@ -310,8 +355,8 @@ def join_waitlist():
 def get_waitlist():
     """Admin: list waitlist emails."""
     token = request.headers.get("X-Admin-Token", "")
-    admin_token = os.getenv("ADMIN_TOKEN", "kamide007")
-    if token != admin_token:
+    admin_token = os.getenv("ADMIN_TOKEN", "")
+    if not admin_token or not hmac.compare_digest(token, admin_token):
         return jsonify({"error": "unauthorized"}), 403
     waitlist = _load_waitlist()
     return jsonify({"total": len(waitlist), "emails": waitlist})

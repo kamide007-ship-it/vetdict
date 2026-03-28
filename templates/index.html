@@ -5,13 +5,20 @@
 <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin/>
 <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
 <!-- Google Analytics 4 -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{'analytics_storage':'denied'});
+if(localStorage.getItem('vetdict-analytics-consent')==='1'){
+  gtag('consent','update',{'analytics_storage':'granted'});
+}
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8LSEGW9ZX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>
+<script>gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>Vet Dict — 多動物種対応 獣医学疾患データベース</title>
-<meta name="description" content="症状から鑑別疾患リストを即座に表示。6,400+疾患・187薬品・21動物種対応。獣医師監修の疾患データベース・薬品辞書・AI診断チャットを搭載。">
+<meta name="description" content="臨床症状から鑑別疾患リストを即座に表示。6,400+疾患・194薬品・21動物種対応。獣医師が開発した獣医臨床支援プラットフォーム。">
 <meta property="og:title" content="VetDict — 獣医学疾患データベース | 21動物種対応">
-<meta property="og:description" content="症状から鑑別疾患リストを即座に表示。6,400+疾患・187薬品・21動物種対応。獣医師監修の無料獣医学プラットフォーム。">
+<meta property="og:description" content="臨床症状から鑑別疾患リストを即座に表示。6,400+疾患・194薬品・21動物種対応。獣医師が開発した獣医臨床支援プラットフォーム。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vetdict.info/">
 <meta property="og:site_name" content="VetDict">
@@ -19,10 +26,10 @@
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="VetDict — 獣医学疾患データベース">
-<meta name="twitter:description" content="21動物種・6,400+疾患・187薬品。獣医師監修の無料AI診断支援プラットフォーム。">
-<meta name="twitter:image" content="https://vetdict.info/static/og-image.svg">
-<meta property="og:image" content="https://vetdict.info/static/og-image.svg">
-<meta property="og:image:type" content="image/svg+xml">
+<meta name="twitter:description" content="21動物種・6,400+疾患・194薬品。獣医師が開発した獣医臨床支援プラットフォーム。">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="VetDict — 21動物種対応の獣医学疾患データベース">
@@ -72,6 +79,18 @@
 {% include 'partials/_references.html' %}
 {% include 'partials/_footer.html' %}
 
+<div id="cookieConsent" class="cookie-consent" style="display:none">
+  <p>当サイトではGoogle Analyticsを使用しています。<a href="/privacy" style="color:var(--green)">プライバシーポリシー</a></p>
+  <div style="display:flex;gap:8px">
+    <button onclick="acceptAnalytics()" class="cookie-btn accept">同意する</button>
+    <button onclick="dismissConsent()" class="cookie-btn dismiss">閉じる</button>
+  </div>
+</div>
+<script>
+function acceptAnalytics(){gtag('consent','update',{'analytics_storage':'granted'});localStorage.setItem('vetdict-analytics-consent','1');document.getElementById('cookieConsent').style.display='none';}
+function dismissConsent(){localStorage.setItem('vetdict-analytics-dismissed','1');document.getElementById('cookieConsent').style.display='none';}
+if(!localStorage.getItem('vetdict-analytics-consent')&&!localStorage.getItem('vetdict-analytics-dismissed')){document.getElementById('cookieConsent').style.display='flex';}
+</script>
 <script defer src="/static/js/app.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}</script>
 </body>

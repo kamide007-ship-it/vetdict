@@ -56,8 +56,11 @@ app.VERSION = VERSION  # Make VERSION available to decorators
 _allowed_origins = os.getenv('CORS_ALLOWED_ORIGINS', '').strip()
 if _allowed_origins:
     CORS(app, resources={r"/api/*": {"origins": _allowed_origins.split(',')}})
-else:
+elif is_debug_mode_enabled():
     CORS(app)
+    logger.warning("CORS_ALLOWED_ORIGINS not set — allowing all origins (debug mode only)")
+else:
+    CORS(app, resources={r"/api/*": {"origins": ["https://vetdict.info"]}})
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
@@ -278,7 +281,7 @@ def add_headers(response):
     # Content Security Policy (prevent XSS, clickjacking, etc.)
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com; "
+        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: https:; "
         "font-src 'self' https:; "
@@ -295,6 +298,7 @@ def add_headers(response):
 
     # Remove server version disclosure
     response.headers.pop('Server', None)
+    response.headers.pop('X-Powered-By', None)
 
     # Cache policy: API responses are never cached; static files are revalidated
     path = request.path or ''
@@ -527,24 +531,30 @@ def api_analyze_symptoms():
         if len(vaccines) > MAX_VACCINES:
             return {'error': f'Too many vaccines (max {MAX_VACCINES})'}, 400
 
-    # Coerce age_years to float
+    # Coerce age_years to float and validate range
     if age_years is not None:
         try:
             age_years = float(age_years)
         except (ValueError, TypeError):
             return {'error': 'age_years must be a number'}, 400
+        if age_years < 0 or age_years > 100:
+            return {'error': 'age_years must be between 0 and 100'}, 400
 
     # Coerce lab_values to {str: float}
     lab_values = None
-    if lab_values_raw and isinstance(lab_values_raw, dict):
+    if lab_values_raw is not None:
+        if not isinstance(lab_values_raw, dict):
+            return {'error': 'lab_values must be a JSON object'}, 400
         if len(lab_values_raw) > MAX_LAB_VALUES:
             return {'error': f'Too many lab values (max {MAX_LAB_VALUES})'}, 400
         lab_values = {}
         for k, v in lab_values_raw.items():
+            if not isinstance(k, str) or len(k) > MAX_STRING_LEN:
+                return {'error': 'lab_values keys must be strings'}, 400
             try:
                 lab_values[str(k)] = float(v)
             except (ValueError, TypeError):
-                continue
+                pass  # Skip non-numeric entries silently
         if not lab_values:
             lab_values = None
 
@@ -892,6 +902,24 @@ def reco3_config():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
     return public_reco2_config(load_reco2_config())
+
+
+# =============================================================================
+# API: Admin Token Verification
+# =============================================================================
+
+@app.route('/api/admin/verify', methods=['POST'])
+def verify_admin():
+    """Server-side admin token verification."""
+    body = request.get_json(silent=True) or {}
+    token = body.get('token', '')
+    admin_token = os.getenv('ADMIN_TOKEN', '')
+    if not admin_token:
+        return jsonify({'valid': False}), 403
+    import hmac
+    if hmac.compare_digest(token, admin_token):
+        return jsonify({'valid': True})
+    return jsonify({'valid': False}), 403
 
 
 # =============================================================================

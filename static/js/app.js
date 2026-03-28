@@ -1,43 +1,33 @@
 const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
 
 /* ===== Admin / Pro access control ===== */
-// Admin token stored as SHA-256 hash (not plaintext)
-const _ADMIN_HASH="58f058ae43b4ebaaa2426ad922e492d27710de51716e87b53a19485ed84f194a";
+// Admin verification handled server-side
 // OPEN BETA: All users get Pro access for free.
 // Set to false when launching paid plans.
 const OPEN_BETA=true;
 let isAdmin=false;
 let isPro=false;
 
-async function _hashToken(t){
-  const d=new TextEncoder().encode(t);
-  const h=await crypto.subtle.digest("SHA-256",d);
-  return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-
 async function checkAccess(){
   const params=new URLSearchParams(location.search);
-  // Open beta: everyone is Pro
   if(OPEN_BETA) isPro=true;
-  // Check PayPal return ?pro=activated
   if(params.get("pro")==="activated"){
     localStorage.setItem("vetdict-pro","1");
     isPro=true;
     history.replaceState(null,"",location.pathname+location.hash);
   }
-  // Check URL param ?admin=<token> (compared via SHA-256 hash)
   const adminParam=params.get("admin");
   if(adminParam){
-    const h=await _hashToken(adminParam);
-    if(h===_ADMIN_HASH){
-      localStorage.setItem("vetdict-admin","1");
-      isAdmin=true;isPro=true;
-    }
+    try{
+      const r=await fetch("/api/admin/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:adminParam})});
+      const d=await r.json();
+      if(d.valid){localStorage.setItem("vetdict-admin","1");isAdmin=true;isPro=true;}
+      else{localStorage.removeItem("vetdict-admin");}
+    }catch(e){/* network error — skip admin */}
     history.replaceState(null,"",location.pathname+location.hash);
   } else if(localStorage.getItem("vetdict-admin")==="1"){
     isAdmin=true;isPro=true;
   }
-  // Check pro subscription via PayPal (skip during open beta)
   if(!OPEN_BETA&&localStorage.getItem("vetdict-pro")==="1"){
     isPro=true;
     const subId=localStorage.getItem("vetdict-subscription-id");
@@ -48,11 +38,8 @@ async function checkAccess(){
       .catch(function(){});
     }
   }
-
-  // Update UI based on access level
   document.body.classList.toggle("is-admin",isAdmin);
   document.body.classList.toggle("is-pro",isPro);
-  // Show admin badge if admin
   if(isAdmin){
     const badge=document.createElement("div");
     badge.className="admin-badge";
@@ -72,8 +59,8 @@ const I18N={
     landingChatTitle:"症状をすぐに相談",
     landingChatHint:'症状を入力すると、考えられる疾患をお伝えします。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「犬が嘔吐して元気がない」「cat vomiting and lethargic」</span>',
     heroBadge:"獣医師が開発 — 臨床現場をサポート",
-    heroLead:"症状から鑑別疾患リストを即座に表示。<br/>疾患データベース・薬品辞書を搭載した獣医学総合プラットフォーム。",
-    heroCta:"動物種を選んで始める",
+    heroLead:"臨床症状から鑑別疾患リストを即座に表示。<br/>疾患データベース・薬品辞書を搭載した獣医臨床支援プラットフォーム。",
+    heroCta:"動物種を選択して鑑別診断を開始",
     statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
     sponsorDesc:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
@@ -88,7 +75,7 @@ const I18N={
     cardDiseaseDb:"&#128218; 疾患データベース",
     diseaseSearchPh:"疾患名で検索... (例: 腎臓, colic, 感染)",
     cardChat:"&#128172; 症状相談",
-    chatWelcome:'こんにちは。気になる症状を日本語または英語で入力してください。<br/>例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>',
+    chatWelcome:'臨床症状を日本語または英語で入力してください。<br/>例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>',
     chatInputPh:"症状を入力してください...",chatSend:"送信",
     chatModeFree:"自由入力",chatModeGuided:"問診モード",
     guidedStart:"問診を開始",guidedNext:"次へ",guidedFinish:"結果を見る",guidedMore:"他の症状もある",guidedRestart:"最初からやり直す",
@@ -136,6 +123,12 @@ const I18N={
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
     mdCombinations:"疾患の組み合わせ候補",mdAmbiguous:"曖昧な症状が検出されました",mdConfidence:"信頼度分析",mdClarifying:"確認質問",mdGuidance:"診断ガイダンス",mdRecommendations:"推奨事項",mdActive:"複合疾患モード",mdAnalyzing:"複合疾患の組み合わせを分析中...",
+    resultsDisclaimer:"本結果は参考情報です。確定診断・治療方針は必ず臨床所見と併せて総合的にご判断ください。",
+    feedbackQuestion:"この鑑別診断は参考になりましたか？",
+    feedbackYes:"参考になった",
+    feedbackNo:"改善の余地あり",
+    feedbackThanks:"フィードバックありがとうございます。",
+    shareResults:"鑑別診断結果を共有",shareCopy:"コピー",shareCopied:"コピー済み",
   },
   en:{
     skipLink:"Skip to main content",
@@ -144,8 +137,8 @@ const I18N={
     landingChatTitle:"Quick Symptom Chat",
     landingChatHint:'Describe symptoms and we\'ll suggest possible conditions.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "my dog is vomiting and lethargic" "cat not eating for 2 days"</span>',
     heroBadge:"Developed by a veterinarian — Supporting clinical practice",
-    heroLead:"Instantly display differential diagnosis lists from symptoms.<br/>A comprehensive veterinary platform with disease database &amp; drug dictionary.",
-    heroCta:"Select a species to start",
+    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>A veterinary clinical decision support platform with disease database &amp; drug dictionary.",
+    heroCta:"Select a species to begin differential diagnosis",
     statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
     sponsorDesc:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
@@ -160,7 +153,7 @@ const I18N={
     cardDiseaseDb:"&#128218; Disease Database",
     diseaseSearchPh:"Search diseases... (e.g. renal, colic, infection)",
     cardChat:"&#128172; Symptom Chat",
-    chatWelcome:'Hello! Please describe the symptoms in Japanese or English.<br/>Examples: "my cat is vomiting and has no appetite" "my dog is limping and has a fever"<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">Note: This tool provides reference information about diseases. Always consult a veterinarian for diagnosis and treatment.</em>',
+    chatWelcome:'Please describe the clinical signs in Japanese or English.<br/>Examples: "my cat is vomiting and has no appetite" "my dog is limping and has a fever"<br/><br/><em style="font-size:.76rem;color:var(--gray-500)">Note: This tool provides reference information about diseases. Always consult a veterinarian for diagnosis and treatment.</em>',
     chatInputPh:"Describe symptoms...",chatSend:"Send",
     chatModeFree:"Free Text",chatModeGuided:"Guided",
     guidedStart:"Start Consultation",guidedNext:"Next",guidedFinish:"See Results",guidedMore:"More Symptoms",guidedRestart:"Start Over",
@@ -207,10 +200,22 @@ const I18N={
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
     mdCombinations:"Possible Disease Combinations",mdAmbiguous:"Ambiguous Symptoms Detected",mdConfidence:"Confidence Analysis",mdClarifying:"Clarifying Questions",mdGuidance:"Diagnostic Guidance",mdRecommendations:"Recommendations",mdActive:"Multi-Disease Mode Active",mdAnalyzing:"Analyzing multi-disease combinations...",
+    resultsDisclaimer:"These results are for reference only. Final diagnosis and treatment decisions should be based on comprehensive clinical assessment.",
+    feedbackQuestion:"Was this differential diagnosis helpful?",
+    feedbackYes:"Helpful",
+    feedbackNo:"Could improve",
+    feedbackThanks:"Thank you for your feedback.",
+    shareResults:"Share results",shareCopy:"Copy",shareCopied:"Copied!",
   }
 };
 
 function t(key){return (I18N[currentLang]&&I18N[currentLang][key])||key;}
+
+function fetchWithTimeout(url,opts={},timeoutMs=10000){
+  const ctrl=new AbortController();
+  const timer=setTimeout(()=>ctrl.abort(),timeoutMs);
+  return fetch(url,{...opts,signal:ctrl.signal}).finally(()=>clearTimeout(timer));
+}
 
 function applyLanguage(){
   document.documentElement.lang=currentLang;
@@ -227,8 +232,14 @@ function applyLanguage(){
     const val=t(key);
     if(val&&val!==key){
       const tmp=document.createElement("div");tmp.innerHTML=val;
-      tmp.querySelectorAll("script,iframe,object,embed,form,input,textarea,style,link,meta").forEach(n=>n.remove());
-      tmp.querySelectorAll("*").forEach(n=>{for(const a of[...n.attributes]){if(a.name.startsWith("on"))n.removeAttribute(a.name);}});
+      // Allowlist: only keep safe elements and attributes
+      const SAFE_TAGS=new Set(["a","br","strong","em","span","b","i","u","small","sub","sup"]);
+      const SAFE_ATTRS=new Set(["href","target","rel","style","class"]);
+      tmp.querySelectorAll("*").forEach(n=>{
+        if(!SAFE_TAGS.has(n.tagName.toLowerCase())){n.remove();return;}
+        for(const a of[...n.attributes]){if(!SAFE_ATTRS.has(a.name))n.removeAttribute(a.name);}
+        if(n.tagName==="A"){const hr=n.getAttribute("href")||"";if(hr.startsWith("javascript:"))n.removeAttribute("href");}
+      });
       el.innerHTML=tmp.innerHTML;
     }
   });
@@ -358,8 +369,8 @@ function animateCount(el,target,duration){
 /* --- Load stats with Promise.all --- */
 function loadSpeciesStats(){
   Promise.all([
-    fetch("/api/species-stats").then(r=>r.json()),
-    fetch("/api/health-check/symptoms").then(r=>r.json())
+    fetchWithTimeout("/api/species-stats").then(r=>r.json()),
+    fetchWithTimeout("/api/health-check/symptoms").then(r=>r.json())
   ]).then(([data,sd])=>{
     try{
       // Check if API returned an error response
@@ -512,7 +523,7 @@ function loadSymptoms(species){
   const requestId=++symptomRequestId;
   const list=document.getElementById("symptomList");
   if(list)list.innerHTML='<div class="skeleton skeleton-line" style="margin:12px"></div><div class="skeleton skeleton-line medium" style="margin:12px"></div><div class="skeleton skeleton-line short" style="margin:12px"></div><div class="skeleton skeleton-line" style="margin:12px"></div>';
-  fetch(`/api/species/${species}/symptoms`).then(r=>r.json()).then(data=>{
+  fetchWithTimeout(`/api/species/${species}/symptoms`).then(r=>r.json()).then(data=>{
     if(requestId!==symptomRequestId||species!==currentSpecies)return;
     if(data.symptoms&&data.symptoms.length){
       symptomData=data.symptoms;
@@ -694,11 +705,50 @@ function doAnalyze(){
   if(labVals)payload.lab_values=labVals;
   const painVal=collectPainScore();
   if(painVal!==null)payload.pain_score=painVal;
-  fetch("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
+  fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");})
   .catch(err=>{document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high">${escapeHtml(t("errorPrefix"))}${escapeHtml(String(err.message||"Unknown error"))}</div>`;})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
+}
+
+function createResultsDisclaimer(){
+  const d=document.createElement("div");
+  d.className="results-disclaimer";
+  d.innerHTML='<strong>&#9888; </strong><span data-i18n="resultsDisclaimer">'+t("resultsDisclaimer")+'</span>';
+  return d;
+}
+
+function createFeedbackWidget(){
+  const w=document.createElement("div");
+  w.className="feedback-widget";
+  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button class="feedback-btn helpful" onclick="sendFeedback(true)">&#128077; '+t("feedbackYes")+'</button><button class="feedback-btn not-helpful" onclick="sendFeedback(false)">&#128078; '+t("feedbackNo")+'</button></div>';
+  return w;
+}
+
+function sendFeedback(helpful){
+  const species=currentSpecies||"unknown";
+  const symptoms=[...selectedSymptoms].join(",");
+  if(typeof gtag==="function")gtag("event","diagnosis_feedback",{helpful:helpful,species:species,symptom_count:selectedSymptoms.size});
+  const btns=document.querySelectorAll(".feedback-btn");
+  btns.forEach(b=>b.disabled=true);
+  const widget=document.querySelector(".feedback-widget");
+  if(widget){widget.innerHTML='<span class="feedback-thanks">'+t("feedbackThanks")+'</span>';}
+}
+
+function createShareWidget(diseases){
+  const w=document.createElement("div");
+  w.className="share-widget";
+  const speciesName=SPECIES_ICONS[currentSpecies]||"";
+  const topDisease=diseases.length>0?(currentLang==="ja"?(diseases[0].name_ja||diseases[0].name):(diseases[0].name||diseases[0].name_ja)):"";
+  const shareText=currentLang==="ja"
+    ?`VetDictで${speciesName}の鑑別診断: ${topDisease} 他${diseases.length}疾患`
+    :`VetDict differential diagnosis: ${topDisease} and ${diseases.length} more`;
+  const shareUrl="https://vetdict.info/";
+  const twitterUrl=`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+  const lineUrl=`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X(Twitter)</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy" onclick="navigator.clipboard.writeText('${escapeHtml(shareText)} ${shareUrl}').then(()=>this.textContent='${t("shareCopied")}')">${t("shareCopy")}</button></div>`;
+  return w;
 }
 
 function renderResults(data){
@@ -776,7 +826,13 @@ function renderResults(data){
 
   if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${x.priority}]</span>`:"";return`<li>\u{1F52C} ${label}${priority}</li>`;}).join("")}</ul></div>`;}
   html+=`<div id="commonDiseasesArea"></div><div id="breedEcologyArea"></div>`;
-  area.innerHTML=html;
+  area.innerHTML="";
+  area.appendChild(createResultsDisclaimer());
+  const contentDiv=document.createElement("div");
+  contentDiv.innerHTML=html;
+  area.appendChild(contentDiv);
+  area.appendChild(createFeedbackWidget());
+  area.appendChild(createShareWidget(diseases));
   loadCommonDiseases(currentSpecies);
   loadBreedEcology(currentSpecies,currentBreed);
 }
@@ -1154,7 +1210,7 @@ function sendLandingChat(){
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
   const species=currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
+  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();
@@ -1182,7 +1238,7 @@ function _sendSymptomUpdate(symptomId,confirmed){
   const statusMsg=confirmed?(currentLang==="ja"?"症状を追加しました。再解析中...":"Added symptom. Re-analyzing..."):(currentLang==="ja"?"了解しました。他の症状を確認します。":"Understood. Checking other symptoms.");
   addChatMsg(statusMsg,"bot-brief");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:confirmed?symptomId:"",species:species,previous_symptoms:chatAccumulatedSymptoms})})
+  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:confirmed?symptomId:"",species:species,previous_symptoms:chatAccumulatedSymptoms})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();
@@ -1199,7 +1255,7 @@ function sendChatMessage(){
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetch("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
+  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();
@@ -1476,7 +1532,7 @@ function guidedFetch(phase,extra){
     ...(extra||{})
   };
   guidedAddMsg('<span class="dot"></span><span class="dot"></span><span class="dot"></span>',"bot typing-indicator");
-  fetch("/api/diagnostic-chat/consultation",{
+  fetchWithTimeout("/api/diagnostic-chat/consultation",{
     method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)
   })
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
