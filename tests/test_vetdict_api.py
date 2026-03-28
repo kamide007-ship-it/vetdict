@@ -192,7 +192,7 @@ class TestDynamicSitemap:
         assert 'xml' in resp.content_type
 
     def test_sitemap_contains_base_urls(self, client):
-        data = resp = client.get('/sitemap.xml').data.decode()
+        data = client.get('/sitemap.xml').data.decode()
         assert 'https://vetdict.info/' in data
         assert '#checker' in data
         assert '#database' in data

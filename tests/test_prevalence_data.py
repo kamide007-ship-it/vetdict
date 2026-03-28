@@ -1,6 +1,5 @@
 """Tests for api/species/prevalence_data.py — Species prevalence tiers."""
 
-import pytest
 
 from api.species.prevalence_data import SPECIES_PREVALENCE
 

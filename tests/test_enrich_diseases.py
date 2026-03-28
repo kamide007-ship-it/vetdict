@@ -1,8 +1,6 @@
 """Tests for enrich_diseases() in api/species/helpers.py."""
 
-import copy
 
-import pytest
 
 from api.species.helpers import enrich_diseases
 
@@ -40,7 +38,6 @@ class TestEnrichDiseases:
 
     def test_does_not_duplicate_entries(self):
         diseases = [self._make_disease("Unique Test Disease XYZ")]
-        original_len = len(diseases)
         enrich_diseases(diseases, "dog")
         # Should not create duplicate entries for the same disease
         names = [d["name"] for d in diseases]

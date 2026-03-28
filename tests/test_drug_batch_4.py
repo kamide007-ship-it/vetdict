@@ -1,6 +1,5 @@
 """Tests for api/drug_batch_4.py — Fish-specific medications."""
 
-import pytest
 
 from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 
