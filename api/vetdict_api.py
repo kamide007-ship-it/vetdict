@@ -12,10 +12,11 @@ Provides:
 import contextlib
 import logging
 import os
+import secrets
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, Response, jsonify, render_template, request, send_from_directory
+from flask import Flask, Response, g, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
@@ -270,6 +271,12 @@ def ensure_json_response(f):
 # Security headers
 # ---------------------------------------------------------------------------
 
+@app.before_request
+def generate_csp_nonce():
+    """Generate a per-request nonce for Content Security Policy."""
+    g.csp_nonce = secrets.token_urlsafe(16)
+
+
 @app.after_request
 def add_headers(response):
     """Add security headers to all responses."""
@@ -280,9 +287,10 @@ def add_headers(response):
     response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
 
     # Content Security Policy (prevent XSS, clickjacking, etc.)
+    nonce = getattr(g, 'csp_nonce', '')
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
+        f"script-src 'self' 'nonce-{nonce}' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: https:; "
         "font-src 'self' https:; "

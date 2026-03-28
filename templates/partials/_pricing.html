@@ -38,7 +38,7 @@
     </div>
   </div>
 </section>
-<script>
+<script nonce="{{ g.csp_nonce }}">
 function submitEmailSignup(){
   var email=document.getElementById("signupEmail").value.trim();
   var msg=document.getElementById("signupMsg");

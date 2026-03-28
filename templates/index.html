@@ -5,15 +5,15 @@
 <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin/>
 <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
 <!-- Google Analytics 4 -->
-<script>
+<script nonce="{{ g.csp_nonce }}">
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{'analytics_storage':'denied'});
 if(localStorage.getItem('vetdict-analytics-consent')==='1'){
   gtag('consent','update',{'analytics_storage':'granted'});
 }
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D8LSEGW9ZX"></script>
-<script>gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D8LSEGW9ZX" nonce="{{ g.csp_nonce }}"></script>
+<script nonce="{{ g.csp_nonce }}">gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>Vet Dict — 多動物種対応 獣医学疾患データベース</title>
 <meta name="description" content="臨床症状から鑑別疾患リストを即座に表示。6,400+疾患・194薬品・21動物種対応。獣医師が開発した獣医臨床支援プラットフォーム。">
@@ -86,14 +86,14 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
     <button class="cookie-btn dismiss" id="cookieDismissBtn">閉じる</button>
   </div>
 </div>
-<script>
+<script nonce="{{ g.csp_nonce }}">
 function acceptAnalytics(){gtag('consent','update',{'analytics_storage':'granted'});localStorage.setItem('vetdict-analytics-consent','1');document.getElementById('cookieConsent').style.display='none';}
 function dismissConsent(){localStorage.setItem('vetdict-analytics-dismissed','1');document.getElementById('cookieConsent').style.display='none';}
 if(!localStorage.getItem('vetdict-analytics-consent')&&!localStorage.getItem('vetdict-analytics-dismissed')){document.getElementById('cookieConsent').style.display='flex';}
 document.getElementById('cookieAcceptBtn').addEventListener('click',acceptAnalytics);
 document.getElementById('cookieDismissBtn').addEventListener('click',dismissConsent);
 </script>
-<script defer src="/static/js/app.js"></script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}</script>
+<script defer src="/static/js/app.js" nonce="{{ g.csp_nonce }}"></script>
+<script nonce="{{ g.csp_nonce }}">if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}</script>
 </body>
 </html>
