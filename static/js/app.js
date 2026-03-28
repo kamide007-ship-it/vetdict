@@ -129,6 +129,7 @@ const I18N={
     feedbackNo:"改善の余地あり",
     feedbackThanks:"フィードバックありがとうございます。",
     shareResults:"鑑別診断結果を共有",shareCopy:"コピー",shareCopied:"コピー済み",
+    husbandryTitle:"飼育環境ガイド",husbandryTemp:"適正温度",husbandryHumidity:"適正湿度",husbandryHousing:"飼育環境",husbandryDiet:"食事",husbandryEnrichment:"エンリッチメント",husbandrySocial:"社会性",husbandryNotes:"その他の注意",husbandryLoading:"飼育環境情報を読み込み中...",husbandryError:"飼育環境情報の取得に失敗しました",
   },
   en:{
     skipLink:"Skip to main content",
@@ -206,6 +207,7 @@ const I18N={
     feedbackNo:"Could improve",
     feedbackThanks:"Thank you for your feedback.",
     shareResults:"Share results",shareCopy:"Copy",shareCopied:"Copied!",
+    husbandryTitle:"Care Environment Guide",husbandryTemp:"Temperature",husbandryHumidity:"Humidity",husbandryHousing:"Housing",husbandryDiet:"Diet",husbandryEnrichment:"Enrichment",husbandrySocial:"Socialization",husbandryNotes:"Additional Notes",husbandryLoading:"Loading care information...",husbandryError:"Failed to load care information",
   }
 };
 
@@ -480,7 +482,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();loadHusbandry(id);
   resetSpeciesChat(id);
   // Reset guided consultation if active
   const guidedCont=document.getElementById("chatGuidedContainer");
@@ -1036,6 +1038,34 @@ function renderDiseaseCard(d,data){
     </div>
   </div>`;
   return html;
+}
+
+/* ===== Husbandry / Care Environment ===== */
+let husbandryRequestId=0;
+function loadHusbandry(species){
+  const requestId=++husbandryRequestId;
+  const container=document.getElementById("husbandryPanel");
+  if(!container)return;
+  container.innerHTML=`<div class="skeleton skeleton-line" style="margin:12px"></div>`;
+  fetch(`/api/species/${encodeURIComponent(species)}/husbandry`).then(r=>r.json()).then(data=>{
+    if(requestId!==husbandryRequestId||species!==currentSpecies)return;
+    if(data.husbandry){renderHusbandry(data.husbandry,container);}
+    else{container.innerHTML=`<p style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;}
+  }).catch(()=>{if(requestId===husbandryRequestId)container.innerHTML=`<p style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;});
+}
+function renderHusbandry(h,container){
+  const lang=currentLang;
+  const icon=k=>({"temperature":"\uD83C\uDF21\uFE0F","humidity":"\uD83D\uDCA7","housing":"\uD83C\uDFE0","diet":"\uD83C\uDF7D\uFE0F","enrichment":"\uD83C\uDFAE","socialization":"\uD83E\uDD1D","notes":"\uD83D\uDCCB"}[k]||"");
+  const labelKey=k=>({"temperature":"husbandryTemp","humidity":"husbandryHumidity","housing":"husbandryHousing","diet":"husbandryDiet","enrichment":"husbandryEnrichment","socialization":"husbandrySocial","notes":"husbandryNotes"}[k]||k);
+  const fields=["temperature","humidity","housing","diet","enrichment","socialization","notes"];
+  let html=`<h3 class="husbandry-title">${icon("notes")} ${t("husbandryTitle")}</h3><div class="husbandry-grid">`;
+  for(const f of fields){
+    const val=h[f];if(!val)continue;
+    const text=val[lang]||val.en||val.ja||"";
+    html+=`<div class="husbandry-card"><div class="husbandry-card-icon">${icon(f)}</div><div class="husbandry-card-label">${t(labelKey(f))}</div><div class="husbandry-card-text">${escapeHtml(text)}</div></div>`;
+  }
+  html+="</div>";
+  container.innerHTML=html;
 }
 
 function loadDiseaseDb(species){
