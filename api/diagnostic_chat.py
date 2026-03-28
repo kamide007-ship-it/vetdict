@@ -3731,6 +3731,7 @@ def consultation():
     answered_categories = data.get("answered_categories", [])
     onset = data.get("onset")
     age_years = data.get("age_years")
+    pain_score = data.get("pain_score")
     lab_values = data.get("lab_values")
     breed = data.get("breed")
 
@@ -3894,6 +3895,19 @@ def consultation():
                     {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
                 ],
             })
+        if pain_score is None:
+            questions.append({
+                "type": "pain_score",
+                "question_ja": "痛みの程度はどのくらいですか？（CSU疼痛スケール 0-4）",
+                "question_en": "How severe is the pain? (CSU Pain Scale 0–4)",
+                "options": [
+                    {"value": 0, "label_ja": "0: 痛みなし（快適）", "label_en": "0: No pain (comfortable)"},
+                    {"value": 1, "label_ja": "1: 軽度（やや落ち着かない）", "label_en": "1: Mild (slightly unsettled)"},
+                    {"value": 2, "label_ja": "2: 中等度（触診で反応）", "label_en": "2: Moderate (reacts to palpation)"},
+                    {"value": 3, "label_ja": "3: 重度（持続的な不快感）", "label_en": "3: Severe (persistent discomfort)"},
+                    {"value": 4, "label_ja": "4: 激痛（触れられない）", "label_en": "4: Extreme (untouchable)"},
+                ],
+            })
         return jsonify({
             "phase": "context_questions",
             "message_ja": "あと少しだけ教えてください。",
@@ -3918,6 +3932,7 @@ def consultation():
                     age_years=age_years,
                     lab_values=lab_values,
                     breed=breed,
+                    pain_score=pain_score,
                 )
             except (ImportError, Exception):
                 # Fallback to chat engine
@@ -3966,6 +3981,7 @@ def consultation():
             "symptom_details": symptom_details,
             "onset": onset,
             "age_years": age_years,
+            "pain_score": pain_score,
             "species": species,
             "recommendations": {
                 "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",

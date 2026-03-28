@@ -1370,3 +1370,344 @@ class TestDiagnosticAccuracyHamsterWetTail:
         assert wt, "Wet Tail not found in results"
         confidence = wt[0]["similarity_score"] * 100
         assert confidence > 55, f"Confidence {confidence:.1f}% too low"
+
+
+# ===========================================================================
+# Guided Consultation Endpoint (POST /api/diagnostic-chat/consultation)
+# ===========================================================================
+
+class TestConsultationEndpoint:
+    """Tests for the 5-phase guided consultation flow."""
+
+    ENDPOINT = "/api/diagnostic-chat/consultation"
+
+    # --- Phase 1: start ---------------------------------------------------
+
+    def test_start_phase(self, client):
+        """POST with phase='start' returns category list."""
+        r = client.post(self.ENDPOINT, json={"phase": "start", "species": "dog"})
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "select_category"
+        assert "categories" in data
+        assert len(data["categories"]) > 0
+        # Each category has required keys
+        cat = data["categories"][0]
+        assert "id" in cat
+        assert "name_ja" in cat
+        assert "name_en" in cat
+        assert "symptom_count" in cat
+        assert cat["symptom_count"] > 0
+        assert data["species"] == "dog"
+        assert "message_ja" in data
+        assert "message_en" in data
+
+    def test_start_phase_cat(self, client):
+        """Start phase works for cat species too."""
+        r = client.post(self.ENDPOINT, json={"phase": "start", "species": "cat"})
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "select_category"
+        assert data["species"] == "cat"
+        assert len(data["categories"]) > 0
+
+    # --- Phase 2: select_symptoms -----------------------------------------
+
+    def test_select_symptoms_phase(self, client):
+        """POST with phase='select_symptoms' returns symptoms for a category."""
+        # First get categories
+        r1 = client.post(self.ENDPOINT, json={"phase": "start", "species": "dog"})
+        cats = r1.get_json()["categories"]
+        cat_id = cats[0]["id"]
+
+        r = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "dog",
+            "selected_category": cat_id,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "show_symptoms"
+        assert data["category"] == cat_id
+        assert "symptoms" in data
+        assert len(data["symptoms"]) > 0
+        sym = data["symptoms"][0]
+        assert "id" in sym
+        assert "name_ja" in sym
+        assert "name_en" in sym
+        assert "selected" in sym
+
+    def test_select_symptoms_missing_category(self, client):
+        """Omitting selected_category returns 400."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "dog",
+        })
+        assert r.status_code == 400
+        assert "error" in r.get_json()
+
+    def test_select_symptoms_marks_selected(self, client):
+        """Previously selected symptoms are marked as selected."""
+        r1 = client.post(self.ENDPOINT, json={"phase": "start", "species": "dog"})
+        cat_id = r1.get_json()["categories"][0]["id"]
+
+        # Get symptoms for category to find a valid id
+        r2 = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "dog",
+            "selected_category": cat_id,
+        })
+        sym_id = r2.get_json()["symptoms"][0]["id"]
+
+        # Request again with that symptom pre-selected
+        r3 = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "dog",
+            "selected_category": cat_id,
+            "selected_symptoms": [sym_id],
+        })
+        data = r3.get_json()
+        matching = [s for s in data["symptoms"] if s["id"] == sym_id]
+        assert matching[0]["selected"] is True
+
+    # --- Phase 3: next_category -------------------------------------------
+
+    def test_next_category_phase(self, client):
+        """POST with selected symptoms returns interim results + suggested categories."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "dog",
+            "selected_symptoms": ["coughing", "nasal_discharge"],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "interim_results"
+        assert "disease_candidates" in data
+        assert "total_candidates" in data
+        assert "next_categories" in data
+        assert "symptom_details" in data
+        assert data["species"] == "dog"
+        assert data["selected_symptoms"] == ["coughing", "nasal_discharge"]
+
+    def test_next_category_no_symptoms(self, client):
+        """Without symptoms, next_category falls back to category selection."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "dog",
+            "selected_symptoms": [],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "select_category"
+        assert "categories" in data
+
+    def test_next_category_returns_candidates(self, client):
+        """Interim results include disease candidate details."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "dog",
+            "selected_symptoms": ["coughing", "nasal_discharge"],
+        })
+        data = r.get_json()
+        if data["disease_candidates"]:
+            cand = data["disease_candidates"][0]
+            assert "name_en" in cand
+            assert "confidence_percent" in cand
+            assert "severity" in cand
+            assert "matched_symptoms" in cand
+
+    # --- Phase 4: ask_context ---------------------------------------------
+
+    def test_ask_context_phase(self, client):
+        """POST with phase='ask_context' returns context questions."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "selected_symptoms": ["coughing", "nasal_discharge"],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "context_questions"
+        assert "questions" in data
+        # Should ask both onset and age when not provided
+        qtypes = [q["type"] for q in data["questions"]]
+        assert "onset" in qtypes
+        assert "age" in qtypes
+
+    def test_ask_context_onset_provided(self, client):
+        """When onset is provided, only age question remains."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "onset": "acute",
+        })
+        data = r.get_json()
+        qtypes = [q["type"] for q in data["questions"]]
+        assert "onset" not in qtypes
+        assert "age" in qtypes
+
+    def test_ask_context_age_provided(self, client):
+        """When age is provided, only onset question remains."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "age_years": 5,
+        })
+        data = r.get_json()
+        qtypes = [q["type"] for q in data["questions"]]
+        assert "onset" in qtypes
+        assert "age" not in qtypes
+
+    def test_ask_context_both_provided(self, client):
+        """When onset and age are provided, only pain_score question may remain."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "onset": "chronic",
+            "age_years": 10,
+        })
+        data = r.get_json()
+        remaining_types = [q["type"] for q in data["questions"]]
+        assert "onset" not in remaining_types
+        assert "age" not in remaining_types
+
+    def test_ask_context_includes_pain_score(self, client):
+        """Pain score question is included in context questions."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+        })
+        data = r.get_json()
+        question_types = [q["type"] for q in data["questions"]]
+        assert "pain_score" in question_types
+        pain_q = [q for q in data["questions"] if q["type"] == "pain_score"][0]
+        assert "options" in pain_q
+        assert len(pain_q["options"]) > 0
+
+    # --- Phase 5: finalize ------------------------------------------------
+
+    def test_finalize_phase(self, client):
+        """POST with phase='finalize' returns final diagnosis results."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "dog",
+            "selected_symptoms": ["coughing", "nasal_discharge", "sneezing"],
+            "onset": "acute",
+            "age_years": 5,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert "result" in data
+        assert "suspected_diseases" in data["result"]
+        assert "symptom_details" in data
+        assert "recommendations" in data
+        assert data["species"] == "dog"
+        assert data["onset"] == "acute"
+        assert data["age_years"] == 5
+
+    def test_finalize_cat(self, client):
+        """Finalize works for cat species."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "cat",
+            "selected_symptoms": ["vomiting", "lethargy", "appetite_loss"],
+            "onset": "subacute",
+            "age_years": 3,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert data["species"] == "cat"
+        assert len(data["result"]["suspected_diseases"]) > 0
+
+    def test_finalize_returns_recommendations(self, client):
+        """Final results include next-step recommendations."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "dog",
+            "selected_symptoms": ["coughing"],
+        })
+        data = r.get_json()
+        recs = data["recommendations"]
+        assert "next_step_ja" in recs
+        assert "next_step_en" in recs
+
+    # --- Full flow --------------------------------------------------------
+
+    def test_full_flow(self, client):
+        """Test the complete guided consultation flow from start to finalize."""
+        # Step 1: Start
+        r1 = client.post(self.ENDPOINT, json={"phase": "start", "species": "dog"})
+        d1 = r1.get_json()
+        assert d1["phase"] == "select_category"
+        cat_id = d1["categories"][0]["id"]
+
+        # Step 2: Select symptoms for a category
+        r2 = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "dog",
+            "selected_category": cat_id,
+        })
+        d2 = r2.get_json()
+        assert d2["phase"] == "show_symptoms"
+        sym_ids = [s["id"] for s in d2["symptoms"][:3]]
+
+        # Step 3: Get interim results
+        r3 = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "dog",
+            "selected_symptoms": sym_ids,
+            "answered_categories": [cat_id],
+        })
+        d3 = r3.get_json()
+        assert d3["phase"] == "interim_results"
+
+        # Step 4: Ask context
+        r4 = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "selected_symptoms": sym_ids,
+        })
+        d4 = r4.get_json()
+        assert d4["phase"] == "context_questions"
+
+        # Step 5: Finalize
+        r5 = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "dog",
+            "selected_symptoms": sym_ids,
+            "onset": "acute",
+            "age_years": 3,
+        })
+        d5 = r5.get_json()
+        assert d5["phase"] == "final_results"
+        assert "suspected_diseases" in d5["result"]
+
+    # --- Error handling ---------------------------------------------------
+
+    def test_invalid_phase(self, client):
+        """Unknown phase returns 400 error."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "nonexistent_phase",
+            "species": "dog",
+        })
+        assert r.status_code == 400
+        data = r.get_json()
+        assert "error" in data
+        assert "nonexistent_phase" in data["error"]
+
+    def test_missing_species_defaults_to_dog(self, client):
+        """Without species, defaults to 'dog'."""
+        r = client.post(self.ENDPOINT, json={"phase": "start"})
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["species"] == "dog"
+
+    def test_empty_body(self, client):
+        """Empty JSON body defaults to start phase for dog."""
+        r = client.post(self.ENDPOINT, json={})
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "select_category"
+        assert data["species"] == "dog"
