@@ -693,8 +693,45 @@ function renderCitationMap(item){
   return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${escapeHtml(k)} → ${ids.map(id=>idToNumber[id]?`[${escapeHtml(idToNumber[id])}]`:escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
 }
 
+function showRelatedSuggestions(){
+  if(!currentSpecies||selectedSymptoms.size===0||selectedSymptoms.size>=3)return;
+  const existing=document.getElementById("relatedSuggestions");
+  if(existing)existing.remove();
+  fetchWithTimeout(`/api/related-symptoms/${encodeURIComponent(currentSpecies)}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({symptoms:[...selectedSymptoms]})})
+  .then(r=>r.json())
+  .then(data=>{
+    if(!data.related||data.related.length===0)return;
+    const container=document.createElement("div");
+    container.id="relatedSuggestions";
+    container.className="related-suggestions";
+    const label=currentLang==="ja"?"関連する症状を追加すると精度が向上します:":"Adding related symptoms improves accuracy:";
+    container.innerHTML=`<p class="related-label">${label}</p>`;
+    const btns=document.createElement("div");
+    btns.className="related-btns";
+    data.related.forEach(s=>{
+      const btn=document.createElement("button");
+      btn.className="related-sym-btn";
+      btn.textContent=`+ ${currentLang==="ja"?s.name_ja:s.name_en}`;
+      btn.onclick=()=>{
+        selectedSymptoms.add(s.id);
+        renderSelectedSymptoms();
+        renderSymptomList(symptomData);
+        btn.disabled=true;
+        btn.classList.add("added");
+        btn.textContent=`\u2713 ${currentLang==="ja"?s.name_ja:s.name_en}`;
+      };
+      btns.appendChild(btn);
+    });
+    container.appendChild(btns);
+    const resultsArea=document.getElementById("resultsArea");
+    if(resultsArea)resultsArea.parentNode.insertBefore(container,resultsArea);
+  })
+  .catch(()=>{});
+}
+
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
+  showRelatedSuggestions();
   trackEvent("analyze_symptoms",{species:currentSpecies,symptom_count:selectedSymptoms.size});
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
   const progress=document.getElementById("analyzeProgress");
@@ -1495,7 +1532,7 @@ function switchChatMode(mode){
 }
 
 function startGuidedConsultation(){
-  guidedState={species:currentSpecies||"dog",selectedSymptoms:[],answeredCategories:[],onset:null,ageYears:null,phase:"start"};
+  guidedState={species:currentSpecies||"dog",selectedSymptoms:[],answeredCategories:[],onset:null,ageYears:null,phase:"start",breed:currentBreed||""};
   const msgs=document.getElementById("guidedMessages");
   const actions=document.getElementById("guidedActions");
   if(msgs)msgs.innerHTML="";
@@ -1529,6 +1566,7 @@ function guidedFetch(phase,extra){
     answered_categories:guidedState.answeredCategories,
     onset:guidedState.onset,
     age_years:guidedState.ageYears,
+    breed:guidedState.breed||"",
     ...(extra||{})
   };
   guidedAddMsg('<span class="dot"></span><span class="dot"></span><span class="dot"></span>',"bot typing-indicator");
@@ -1762,7 +1800,7 @@ function guidedRenderFinalResults(data){
   if(details.length>0){
     let tagsHtml='<div class="chat-symptoms-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"検出症状: ":"Symptoms: ")+'</span>';
     details.forEach(s=>{
-      tagsHtml+=`<span class="chat-symptom-tag">${currentLang==="ja"?s.name_ja:s.name_en}</span>`;
+      tagsHtml+=`<span class="chat-symptom-tag">${escapeHtml(currentLang==="ja"?s.name_ja:s.name_en)}</span>`;
     });
     tagsHtml+='</div>';
     guidedAddMsg(tagsHtml,"bot chat-result");
@@ -1781,13 +1819,13 @@ function guidedRenderFinalResults(data){
     diseases.slice(0,5).forEach((d,i)=>{
       const pct=d.match_percent||0;
       const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
-      const name=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
-      const nameSecondary=currentLang==="ja"?(d.name||""):(d.name_ja||"");
-      const desc=currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||"");
-      const matched=(d.matching_symptoms||[]).map(sid=>{
+      const name=escapeHtml(currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||""));
+      const nameSecondary=escapeHtml(currentLang==="ja"?(d.name||""):(d.name_ja||""));
+      const desc=escapeHtml(currentLang==="ja"?(d.description_ja||d.description||""):(d.description||d.description_ja||""));
+      const matched=escapeHtml((d.matching_symptoms||[]).map(sid=>{
         const found=details.find(s=>s.id===sid);
         return found?(currentLang==="ja"?(found.name_ja||found.name_en):(found.name_en||found.name_ja)):sid;
-      }).join(", ");
+      }).join(", "));
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
@@ -1809,7 +1847,7 @@ function guidedRenderFinalResults(data){
   // Disclaimer + recommendations
   const rec=data.recommendations||{};
   const disclaimer=currentLang==="ja"?rec.next_step_ja:rec.next_step_en;
-  if(disclaimer)guidedAddMsg(`<div class="chat-disclaimer">${disclaimer}</div>`,"bot chat-result");
+  if(disclaimer)guidedAddMsg(`<div class="chat-disclaimer">${escapeHtml(disclaimer)}</div>`,"bot chat-result");
 
   // Restart button
   guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);

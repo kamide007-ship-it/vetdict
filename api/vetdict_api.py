@@ -455,6 +455,71 @@ def api_species_symptoms(species: str):
     return {"symptoms": get_symptoms_for_species(species_key)}
 
 
+@app.route('/api/related-symptoms/<species>', methods=['POST'])
+@ensure_json_response
+def get_related_symptoms(species):
+    """Suggest symptoms that commonly co-occur with selected ones."""
+    data = request.get_json(silent=True) or {}
+    selected = data.get('symptoms', [])
+    if not selected or not isinstance(selected, list):
+        return {'related': []}
+
+    species_key = (species or '').lower()
+
+    try:
+        from api.disease_store import get_symptoms_for_species
+        all_symptoms = get_symptoms_for_species(species_key)
+        if not all_symptoms:
+            return {'related': []}
+
+        # Build a lookup from symptom id to symptom info
+        sym_lookup = {s['id']: s for s in all_symptoms}
+
+        # Query diseases for this species to build co-occurrence
+        import json as _json
+
+        from api.database import get_connection
+        with get_connection() as conn:
+            rows = conn.execute(
+                "SELECT symptoms FROM diseases WHERE species = ? AND symptoms IS NOT NULL",
+                (species_key,),
+            ).fetchall()
+
+        if not rows:
+            return {'related': []}
+
+        selected_set = set(selected)
+        co_occur: dict[str, int] = {}
+        for row in rows:
+            try:
+                disease_symptoms = set(_json.loads(row['symptoms']))
+            except (ValueError, TypeError):
+                continue
+            overlap = disease_symptoms & selected_set
+            if overlap:
+                for s in disease_symptoms - selected_set:
+                    co_occur[s] = co_occur.get(s, 0) + len(overlap)
+
+        # Sort by co-occurrence frequency, take top 5
+        sorted_symptoms = sorted(co_occur.items(), key=lambda x: -x[1])[:5]
+
+        result = []
+        for sym_id, score in sorted_symptoms:
+            sym_info = sym_lookup.get(sym_id)
+            if sym_info:
+                result.append({
+                    'id': sym_id,
+                    'name_ja': sym_info.get('name_ja', sym_id),
+                    'name_en': sym_info.get('name_en', sym_id),
+                    'score': score,
+                })
+
+        return {'related': result}
+    except Exception as e:
+        logger.warning(f"Related symptoms error: {e}")
+        return {'related': []}
+
+
 # =============================================================================
 # API: Symptom Analysis (multi-species)
 # =============================================================================
