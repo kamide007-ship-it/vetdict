@@ -117,7 +117,7 @@ def _fallback_disease_counts() -> dict[str, int]:
 
     # Map species id -> module info
     _MODULE_MAP = {
-        "dog": ("api.symptom_checker", "_DISEASE_DB"),
+        "dog": ("api.species.dog_diseases", "DISEASES"),
         "horse": ("api.species.equine_diseases", "DISEASE_DATABASE"),
         "cat": ("api.species.cat_diseases", "DISEASES"),
         "rabbit": ("api.species.rabbit_diseases", "DISEASES"),
