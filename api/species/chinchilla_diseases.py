@@ -3539,7 +3539,111 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
-
+    # =========================================================================
+    # ADDITIONAL DISEASES — REPRODUCTIVE, INFECTIOUS, ENVIRONMENTAL
+    # =========================================================================
+    {
+        "name": "Fur Ring (Paraphimosis)",
+        "name_ja": "ファーリング（包皮嵌頓）",
+        "symptoms": {"genital_swelling", "straining_urinate", "excessive_grooming",
+                      "pain", "lethargy"},
+        "description": "Hair ring constricting the penis, preventing retraction into the prepuce.",
+        "description_ja": "陰茎に毛が巻き付いて環状の絞扼を形成し、包皮内に戻らなくなる状態。"
+                          "雄チンチラで比較的多い。交尾後や自己グルーミング時に発生。"
+                          "放置すると陰茎の虚血・壊死→排尿障害に至る緊急疾患。",
+        "pathophysiology": "Shed fur wraps around the penis during mating or grooming, forming a constrictive ring that impedes blood flow and prevents retraction.",
+        "pathophysiology_ja": "脱毛した被毛が陰茎に巻きつき環状の絞扼を形成→"
+                              "静脈還流障害→陰茎浮腫→さらに嵌頓が悪化→"
+                              "動脈血流障害→虚血性壊死。尿道圧迫による排尿障害も併発。",
+        "causes": "Fur accumulation around penis during mating or self-grooming. More common during shedding periods.",
+        "causes_ja": "交尾時または自己グルーミング時の陰茎への被毛巻きつき。"
+                     "換毛期にリスク上昇。多頭飼育（繁殖群）で発生率が高い。",
+        "treatment": "Manual removal of hair ring under gentle restraint or light sedation.",
+        "treatment_ja": "毛環の用手的除去（保定下または軽度鎮静下）。"
+                        "潤滑ゼリーを塗布→細い鉗子やピンセットで慎重に毛を除去。"
+                        "浮腫が強い場合はまず冷湿布で浮腫軽減→除去。"
+                        "壊死した場合は陰茎切断術が必要。"
+                        "除去後は抗菌軟膏塗布＋数日間の経過観察。",
+        "prevention": "Regular penile checks in breeding males; proper grooming.",
+        "prevention_ja": "繁殖雄の定期的な陰茎チェック（月1回推奨）。"
+                         "換毛期の注意深い観察。排尿困難の早期発見。",
+        "prognosis": "Excellent if caught early; poor if necrosis has developed.",
+        "prognosis_ja": "早期発見・除去で予後良好。壊死が進行した場合は陰茎切断が必要で、"
+                        "繁殖用としては使用不可。排尿機能は通常維持される。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult"},
+    },
+    {
+        "name": "Heat Stroke (Hyperthermia)",
+        "name_ja": "熱中症（高体温症）",
+        "symptoms": {"labored_breathing", "lethargy", "drooling", "recumbency",
+                      "seizures", "reddened_ears"},
+        "description": "Life-threatening hyperthermia in chinchillas, which are extremely heat-sensitive.",
+        "description_ja": "チンチラは高温に極めて弱い動物で、25℃以上で熱ストレス、"
+                          "30℃以上で熱中症を発症する。厚い被毛と汗腺の欠如が原因。"
+                          "流涎・耳の充血・横臥位・痙攣が特徴。致死率が高い緊急疾患。",
+        "pathophysiology": "Chinchillas lack sweat glands and have dense fur, making heat dissipation inefficient. Core temperature >40°C causes organ failure.",
+        "pathophysiology_ja": "チンチラは汗腺を持たず、極めて密な被毛（1毛穴60〜80本）→"
+                              "放熱効率が極めて低い→深部体温上昇→"
+                              "タンパク質変性・細胞障害→DIC・腎不全・肝不全・脳浮腫→"
+                              "多臓器不全。直腸温40℃以上で緊急状態。",
+        "causes": "Ambient temperature >25°C, direct sunlight, poor ventilation, humidity >50%.",
+        "causes_ja": "室温25℃以上（特に30℃以上は危険）、直射日光、換気不良、"
+                     "高湿度（50%以上）、エアコン故障、停電時の夏季。",
+        "treatment": "Emergency cooling: cool (not cold) water, fan, IV fluids.",
+        "treatment_ja": "緊急冷却が最優先。"
+                        "(1)涼しい場所への移動、(2)ぬるま水（15〜20℃）で耳・足裏を湿らせる、"
+                        "(3)扇風機で送風、(4)冷たい石やタイルの上に置く、"
+                        "(5)皮下輸液（温めない）、(6)酸素投与。"
+                        "氷水は使用禁忌（末梢血管収縮→放熱阻害）。"
+                        "直腸温39℃まで下がったら冷却中止（過冷却防止）。",
+        "prevention": "Keep environment 15-22°C; air conditioning essential in summer.",
+        "prevention_ja": "飼育環境を15〜22℃に維持。エアコン必須（夏季）。"
+                         "直射日光の回避。大理石等の冷却プレート設置。"
+                         "停電対策（蓄電池付きエアコン等）。",
+        "prognosis": "Poor if core temperature exceeded 41°C; guarded even with treatment.",
+        "prognosis_ja": "慎重〜不良。深部体温41℃超で臓器障害が不可逆的になる。"
+                        "早期冷却で改善する場合もあるが、回復後もDIC・腎不全のリスクあり。",
+        "urgency": "emergency",
+        "recommended_tests": ["rectal_temperature", "complete_blood_count", "serum_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
+    {
+        "name": "Listeriosis",
+        "name_ja": "リステリア症",
+        "symptoms": {"head_tilt", "circling", "seizures", "lethargy",
+                      "appetite_loss", "fever", "sudden_death"},
+        "description": "Bacterial infection by Listeria monocytogenes causing meningoencephalitis.",
+        "description_ja": "Listeria monocytogenesによる細菌感染症。中枢神経系に親和性が高く、"
+                          "髄膜脳炎を引き起こす。斜頸・旋回運動・痙攣が特徴。"
+                          "汚染された干し草・飼料が感染源。人畜共通感染症。",
+        "pathophysiology": "L. monocytogenes ingested in contaminated feed invades intestinal epithelium, disseminates via blood to CNS, causing suppurative meningoencephalitis.",
+        "pathophysiology_ja": "汚染飼料の経口摂取→腸管上皮への侵入→血行性に中枢神経系へ播種→"
+                              "化膿性髄膜脳炎。脳幹部に好発→前庭症状（斜頸・旋回）。"
+                              "妊娠個体では胎盤経由で流産・死産の原因にもなる。",
+        "causes": "Listeria monocytogenes. Contaminated hay, feed, or water (especially silage).",
+        "causes_ja": "Listeria monocytogenes。汚染された干し草・牧草・水が主な感染源。"
+                     "カビの生えた飼料はリスクが高い。免疫低下・ストレスが発症を促進。",
+        "treatment": "High-dose antibiotics (chloramphenicol, TMS) with supportive care.",
+        "treatment_ja": "高用量抗菌薬の長期投与。"
+                        "第一選択：クロラムフェニコール（50mg/kg BID）またはTMS（30mg/kg BID）。"
+                        "エンロフロキサシン（5mg/kg BID）も使用される。"
+                        "最低14〜21日間の投与。支持療法（輸液・強制給餌・保温）。"
+                        "痙攣管理（ジアゼパム）。",
+        "prevention": "Feed quality control; avoid moldy hay; proper food storage.",
+        "prevention_ja": "飼料の品質管理（カビのない干し草）。適切な飼料保管。"
+                         "飲水の清潔維持。ストレス軽減。新規飼料は段階的に導入。",
+        "prognosis": "Guarded; CNS involvement often results in permanent deficits or death.",
+        "prognosis_ja": "慎重。中枢神経症状が出現した場合は予後不良（致死率50%以上）。"
+                        "早期治療で改善する場合もあるが、神経学的後遺症が残ることが多い。",
+        "urgency": "emergency",
+        "recommended_tests": ["complete_blood_count", "serum_chemistry", "csf_analysis", "bacterial_culture"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
 ]
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {

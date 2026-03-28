@@ -3001,6 +3001,75 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
+    # =========================================================================
+    # ADDITIONAL DISEASES — UNIQUE HEDGEHOG CONDITIONS
+    # =========================================================================
+    {
+        "name": "Balloon Syndrome (Subcutaneous Emphysema)",
+        "name_ja": "バルーン症候群（皮下気腫）",
+        "symptoms": {"swelling", "body_swelling", "lethargy", "labored_breathing",
+                      "appetite_loss"},
+        "description": "Dramatic subcutaneous accumulation of air causing the hedgehog to inflate like a balloon.",
+        "description_ja": "皮下に空気が大量に貯留し、ハリネズミが風船のように膨らむ特異的疾患。"
+                          "肺損傷・気管損傷・皮下膿瘍のガス産生菌感染が原因。"
+                          "触診で捻髪音を認める。外見は劇的だが適切な処置で回復可能。",
+        "pathophysiology": "Air leaks from damaged lung/airway into subcutaneous space, or gas-producing bacteria in subcutaneous abscess generate gas that dissects tissue planes.",
+        "pathophysiology_ja": "肺実質・気道の損傷→空気漏出→縦隔気腫→皮下気腫として全身に拡散。"
+                              "または皮下膿瘍のガス産生菌（Clostridium等）による皮下ガス貯留。"
+                              "ハリネズミは皮膚が緩く皮下腔が広いため空気が大量に貯留しやすい。",
+        "causes": "Lung/airway trauma, respiratory infection with emphysema, gas-producing bacterial abscess.",
+        "causes_ja": "肺・気道の外傷（咬傷・鋭的外傷）、呼吸器感染に伴う気腫性変化、"
+                     "ガス産生菌による皮下膿瘍。原因不明の特発性症例もある。",
+        "treatment": "Needle decompression of subcutaneous air; treat underlying cause.",
+        "treatment_ja": "皮下ガスの針穿刺脱気（18G針で複数箇所から吸引）。"
+                        "基礎疾患の治療：呼吸器感染には抗菌薬（エンロフロキサシン5mg/kg BID）、"
+                        "膿瘍にはデブリードマン＋抗菌薬。"
+                        "胸部X線で気胸の有無を確認。再貯留する場合は原因の再検索。",
+        "prevention": "Prevent trauma; treat respiratory infections early.",
+        "prevention_ja": "外傷の予防（安全な飼育環境）。呼吸器感染の早期治療。"
+                         "皮下膿瘍の早期発見・治療。",
+        "prognosis": "Good if underlying cause is addressed; may recur if source of air leak persists.",
+        "prognosis_ja": "基礎疾患が治療可能であれば予後良好。脱気後に急速に改善する。"
+                        "原因が持続する場合は再貯留→原因の精査が必要。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "thoracic_radiographs", "bacterial_culture"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
+    {
+        "name": "Oral Squamous Cell Carcinoma",
+        "name_ja": "口腔扁平上皮癌",
+        "symptoms": {"appetite_loss", "weight_loss", "drooling", "facial_swelling",
+                      "oral_mass", "difficulty_eating", "bloody_discharge"},
+        "description": "Aggressive malignant oral tumor, one of the most common neoplasms in hedgehogs.",
+        "description_ja": "ハリネズミで最も多い悪性腫瘍の一つ。口腔内（歯肉・舌・硬口蓋）に好発。"
+                          "局所浸潤性が高く、顎骨破壊を伴う。3歳以上で発生率上昇。"
+                          "初期症状は食欲低下・流涎。進行すると顔面変形。",
+        "pathophysiology": "Malignant proliferation of squamous epithelial cells with local bone invasion and potential regional lymph node metastasis.",
+        "pathophysiology_ja": "口腔粘膜扁平上皮の悪性増殖→局所浸潤→顎骨骨溶解→顔面変形。"
+                              "所属リンパ節転移あり。遠隔転移は比較的稀だが肺転移の報告あり。"
+                              "ハリネズミは腫瘍全般の発生率が高い動物種。",
+        "causes": "Unknown; hedgehogs have a high overall neoplasm incidence. No specific carcinogens identified.",
+        "causes_ja": "原因不明。ハリネズミは全腫瘍の発生率が高い（剖検の30〜50%に腫瘍あり）。"
+                     "特定の発癌物質は同定されていない。3歳以上で急増。",
+        "treatment": "Surgical excision if possible; palliative care for advanced cases.",
+        "treatment_ja": "外科的切除（早期の小病変）：顎骨部分切除を含む広範切除。"
+                        "進行例は完全切除困難→緩和ケア（疼痛管理：メロキシカム0.2mg/kg SID、"
+                        "栄養支持：流動食の強制給餌）。"
+                        "放射線療法・化学療法の有効性はハリネズミでは未確立。"
+                        "QOLが著しく低下した場合は安楽死を検討。",
+        "prevention": "No known prevention; regular oral examinations recommended.",
+        "prevention_ja": "予防法なし。定期的な口腔チェック（年2回以上）。"
+                         "食欲低下・流涎がある場合は早期受診。3歳以上は腫瘍の好発年齢。",
+        "prognosis": "Guarded to poor; locally aggressive with high recurrence after incomplete excision.",
+        "prognosis_ja": "慎重〜不良。局所浸潤性が高く、不完全切除後の再発率が高い。"
+                        "早期の完全切除で延命可能だが根治は困難。"
+                        "緩和ケアでのQOL維持が現実的な目標。",
+        "urgency": "high",
+        "recommended_tests": ["oral_exam", "fine_needle_aspirate", "radiographs", "histopathology", "ct_scan"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
 ]
 
 

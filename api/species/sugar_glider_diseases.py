@@ -2782,6 +2782,81 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
+    # =========================================================================
+    # ADDITIONAL DISEASES — BEHAVIORAL, INFECTIOUS
+    # =========================================================================
+    {
+        "name": "Self-Mutilation Syndrome",
+        "name_ja": "自咬症（セルフミューティレーション）",
+        "symptoms": {"self_mutilation", "hair_loss", "skin_lesions", "bleeding",
+                      "lethargy", "behavioral_changes"},
+        "description": "Compulsive self-injuring behavior, one of the most serious welfare issues in captive sugar gliders.",
+        "description_ja": "フクロモモンガ飼育で最も深刻な行動障害。ストレス・孤独・疼痛が原因で"
+                          "自身の体（特に陰嚢・四肢・尾・膜翼）を噛む自傷行為。"
+                          "単頭飼育・不適切な環境で多発。重症例は四肢切断に至る。",
+        "pathophysiology": "Chronic stress, social isolation, or pain triggers compulsive self-directed biting, causing progressive tissue damage.",
+        "pathophysiology_ja": "慢性ストレス・社会的孤立・疼痛→コルチゾール持続上昇→"
+                              "異常行動（常同行動）としての自咬開始→組織損傷→"
+                              "疼痛→さらなる自咬の悪循環。神経内分泌系の恒常性破綻。"
+                              "雄の去勢後（特に陰嚢）に多い。",
+        "causes": "Social isolation (single housing), chronic stress, boredom, pain, inadequate space, post-surgical complications.",
+        "causes_ja": "単頭飼育（最大のリスク因子）、不十分な環境エンリッチメント、"
+                     "狭いケージ、疼痛（歯科疾患・外傷等の基礎疾患）、"
+                     "去勢術後の陰嚢自咬、飼い主の過剰な接触・不規則な生活リズム。",
+        "treatment": "Address underlying cause; environmental enrichment; companion animal; pain management; E-collar.",
+        "treatment_ja": "原因の特定と対処が最優先。"
+                        "(1)単頭飼育→同種の同居個体を導入（段階的に）、"
+                        "(2)環境エンリッチメント（広いケージ・隠れ家・フォレジング）、"
+                        "(3)疼痛管理（メロキシカム0.2mg/kg SID）、"
+                        "(4)エリザベスカラー（自咬防止、短期間）、"
+                        "(5)重症例：ジアゼパム（0.5〜1mg/kg）or フルオキセチンの短期使用、"
+                        "(6)壊死組織のデブリードマン・抗菌薬。",
+        "prevention": "Social housing (pairs/groups), adequate cage size, enrichment, proper diet.",
+        "prevention_ja": "ペアまたはグループ飼育（単頭飼育を避ける）。"
+                         "十分なケージサイズ（最低60×60×90cm以上）。"
+                         "環境エンリッチメント。適切な光周期（夜行性を尊重）。"
+                         "バランスの取れた食事。",
+        "prognosis": "Variable; depends on severity and ability to address root cause.",
+        "prognosis_ja": "原因が改善可能な場合は予後良好（社会的パートナーの導入等）。"
+                        "慢性化した自咬行動は矯正困難。四肢壊死例は切断後も再発リスクあり。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "behavioral_assessment", "complete_blood_count"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
+    {
+        "name": "Aflatoxicosis",
+        "name_ja": "アフラトキシン中毒",
+        "symptoms": {"appetite_loss", "lethargy", "weight_loss", "diarrhea",
+                      "jaundice", "sudden_death"},
+        "description": "Toxic hepatopathy from ingestion of aflatoxin-contaminated food, particularly corn and peanuts.",
+        "description_ja": "カビ毒（アフラトキシン）に汚染された食品の摂取による肝臓障害。"
+                          "トウモロコシ・ピーナッツ・穀物が主な汚染源。"
+                          "フクロモモンガは小型動物のため微量でも致死的。急性肝不全を引き起こす。",
+        "pathophysiology": "Aflatoxin B1 is metabolized in the liver to a reactive epoxide that binds DNA and proteins, causing hepatocellular necrosis and carcinogenesis.",
+        "pathophysiology_ja": "アフラトキシンB1が肝臓でCYP450により活性代謝物（エポキシド）に変換→"
+                              "DNA・タンパク質への共有結合→肝細胞壊死・アポトーシス→"
+                              "急性肝不全。慢性曝露では肝線維化・肝細胞癌のリスク。"
+                              "小型動物では体重あたりの毒素量が大きく感受性が高い。",
+        "causes": "Aflatoxins (B1, B2, G1, G2) produced by Aspergillus flavus/parasiticus in stored grains, corn, peanuts.",
+        "causes_ja": "Aspergillus flavus/parasiticusが産生するアフラトキシン。"
+                     "不適切に保管されたトウモロコシ・ピーナッツ・穀物が汚染源。"
+                     "高温多湿環境でカビが増殖しやすい。",
+        "treatment": "No antidote; supportive care with hepatoprotectants and fluids.",
+        "treatment_ja": "特異的解毒薬なし。支持療法が中心。"
+                        "輸液療法、肝保護薬（シリマリン）、ビタミンK（凝固障害時）、"
+                        "強制給餌、保温。汚染食品の即座の除去。",
+        "prevention": "Fresh, high-quality food; proper storage; avoid moldy food items.",
+        "prevention_ja": "新鮮で高品質な食材の使用。穀物・ナッツ類の適切な保管（密閉・低温・乾燥）。"
+                         "カビの生えた食品は即座に廃棄。信頼できるメーカーのフードを使用。",
+        "prognosis": "Poor in acute cases; guarded with chronic exposure.",
+        "prognosis_ja": "急性中毒は予後不良（致死率高い）。慢性曝露でも肝障害が進行性。"
+                        "早期の汚染源除去＋支持療法で改善する場合あり。",
+        "urgency": "emergency",
+        "recommended_tests": ["serum_chemistry", "complete_blood_count", "liver_biopsy", "aflatoxin_food_testing"],
+        "onset_pattern": {"acute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
 ]
 
 

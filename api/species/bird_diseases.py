@@ -6503,6 +6503,76 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
+    # =========================================================================
+    # ADDITIONAL DISEASES — FUNGAL & GI
+    # =========================================================================
+    {
+        "name": "Megabacteriosis (Macrorhabdus ornithogaster)",
+        "name_ja": "メガバクテリア症（マクロラブダス症）",
+        "symptoms": {"weight_loss", "regurgitation", "appetite_loss", "lethargy",
+                      "fluffed_feathers", "diarrhea", "undigested_seeds_in_droppings"},
+        "description": "Fungal infection of the proventriculus caused by Macrorhabdus ornithogaster (formerly AGY/megabacteria).",
+        "description_ja": "Macrorhabdus ornithogaster（旧称AGY/メガバクテリア）による"
+                          "腺胃の真菌感染症。セキセイインコに最も多いが、カナリア・文鳥・"
+                          "オカメインコにも発生。慢性的な体重減少・嘔吐・未消化便が特徴。"
+                          "「going light syndrome」とも呼ばれる。",
+        "pathophysiology": "M. ornithogaster colonizes the isthmus between proventriculus and ventriculus, causing mucosal inflammation and disrupted gastric function.",
+        "pathophysiology_ja": "M. ornithogasterが腺胃・筋胃接合部（峡部）に定着→粘膜炎症→"
+                              "胃酸分泌障害→消化不良→未消化種子の排泄。"
+                              "慢性感染→腺胃粘膜肥厚・潰瘍形成→出血→貧血。"
+                              "免疫低下・ストレスで増悪。",
+        "causes": "Macrorhabdus ornithogaster (ascomycete fungus). Transmitted by fecal-oral route, crop feeding.",
+        "causes_ja": "Macrorhabdus ornithogaster（子嚢菌類の真菌）。糞口感染・親鳥からの給餌で伝播。"
+                     "ストレス・免疫低下が発症のトリガー。不顕性キャリアが多い。",
+        "treatment": "Amphotericin B (oral suspension, 100mg/kg BID for 10-30 days) is standard.",
+        "treatment_ja": "アムホテリシンB経口懸濁液（100mg/kg BID、10〜30日間）が標準治療。"
+                        "フルコナゾール（5〜10mg/kg BID）も使用される。"
+                        "酸性化剤（りんご酢）で胃内pH低下→真菌増殖抑制。"
+                        "支持療法：保温、強制給餌、消化補助。再発率が高い。",
+        "prevention": "Quarantine new birds, minimize stress, good hygiene.",
+        "prevention_ja": "新規導入鳥の検疫と糞便検査。ストレス軽減。衛生管理。"
+                         "感染鳥の隔離。繁殖ペアの検査。",
+        "prognosis": "Guarded; chronic recurring infection. Early treatment improves outcome.",
+        "prognosis_ja": "慎重。慢性再発性で完全根治は困難。早期治療で予後改善。"
+                        "重度の体重減少・貧血例は予後不良。",
+        "urgency": "moderate",
+        "recommended_tests": ["fecal_gram_stain", "fecal_wet_mount", "crop_wash", "complete_blood_count"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
+    {
+        "name": "Candidiasis (Crop Mycosis)",
+        "name_ja": "カンジダ症（そのう真菌症）",
+        "symptoms": {"regurgitation", "appetite_loss", "crop_stasis", "white_plaques_in_mouth",
+                      "weight_loss", "lethargy", "diarrhea"},
+        "description": "Fungal infection by Candida albicans, primarily affecting the crop, esophagus, and oral cavity.",
+        "description_ja": "Candida albicansによる真菌感染症。そのう・食道・口腔に好発。"
+                          "幼鳥（手乗り雛）、抗菌薬長期使用後、免疫低下鳥に多い。"
+                          "口腔内の白色プラーク、そのう停滞、嘔吐が特徴的。",
+        "pathophysiology": "Candida albicans, a commensal yeast, overgrows when normal flora is disrupted or immunity is compromised.",
+        "pathophysiology_ja": "Candida albicans（常在酵母）が正常細菌叢の破綻や免疫低下で過増殖→"
+                              "そのう粘膜・食道・口腔に白色偽膜性病変形成→粘膜障害→"
+                              "そのう運動低下→消化不良。重症例では食道潰瘍・穿孔。",
+        "causes": "Candida albicans overgrowth due to antibiotic use, immunosuppression, hand-feeding hygiene issues, or underlying disease.",
+        "causes_ja": "抗菌薬の長期使用（正常細菌叢の破壊）、免疫低下（PBFD・PDD等の基礎疾患）、"
+                     "挿し餌の不適切な温度管理・衛生管理、ビタミンA欠乏。"
+                     "幼鳥は正常細菌叢が未確立のためリスクが高い。",
+        "treatment": "Nystatin (oral, 300,000 IU/kg BID-TID) for mild cases; fluconazole for systemic infection.",
+        "treatment_ja": "ナイスタチン経口投与（300,000 IU/kg BID〜TID、7〜14日間）が第一選択。"
+                        "全身感染：フルコナゾール（5〜10mg/kg SID）。"
+                        "口腔内プラークの除去。そのう洗浄（重度そのう炎）。"
+                        "基礎疾患の治療。不適切な抗菌薬の中止。",
+        "prevention": "Proper hand-feeding hygiene, avoid unnecessary antibiotics, adequate vitamin A.",
+        "prevention_ja": "挿し餌器具の消毒・適切な温度管理。不要な抗菌薬使用の回避。"
+                         "ビタミンA の適切な摂取。幼鳥の衛生管理。基礎疾患の管理。",
+        "prognosis": "Good with appropriate antifungal therapy. Address underlying cause.",
+        "prognosis_ja": "適切な抗真菌薬治療で予後良好。基礎疾患がある場合はその管理が鍵。"
+                        "幼鳥の重度そのう炎では予後慎重。",
+        "urgency": "moderate",
+        "recommended_tests": ["crop_wash_cytology", "gram_stain", "fungal_culture", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"puppy", "young", "adult"},
+    },
 ]
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {

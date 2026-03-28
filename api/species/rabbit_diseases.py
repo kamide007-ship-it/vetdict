@@ -5701,6 +5701,141 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
+    # =========================================================================
+    # ADDITIONAL DISEASES — UROLITHIASIS & REPRODUCTIVE & INFECTIOUS
+    # =========================================================================
+    {
+        "name": "Myxomatosis",
+        "name_ja": "粘液腫症（ミクソマトーシス）",
+        "symptoms": {"eye_discharge", "eye_swelling", "nasal_discharge", "lethargy",
+                      "appetite_loss", "fever", "skin_lesions", "swelling"},
+        "description": "Fatal viral disease caused by myxoma virus, transmitted by fleas and mosquitoes.",
+        "description_ja": "ミクソーマウイルスによる致死的ウイルス疾患。"
+                          "ノミ・蚊などの吸血昆虫により伝播。ヨーロッパ・オーストラリアで流行。"
+                          "日本でもペットウサギでの発症報告あり。",
+        "pathophysiology": "Myxoma virus replicates at inoculation site, then spreads via lymphatics to regional lymph nodes and systemically via viremia.",
+        "pathophysiology_ja": "接種部位でのウイルス増殖→所属リンパ節へリンパ行性拡散→ウイルス血症で全身播種。"
+                              "皮膚・粘膜の粘液腫性腫脹（特に眼瞼・鼻・外陰部・耳）。"
+                              "免疫抑制→二次細菌感染→肺炎→死亡。潜伏期5〜14日。",
+        "causes": "Myxoma virus (Leporipoxvirus). Transmitted by fleas (Spilopsyllus cuniculi) and mosquitoes.",
+        "causes_ja": "ミクソーマウイルス（レポリポックスウイルス属）。"
+                     "伝播経路：ノミ（Spilopsyllus cuniculi）、蚊、直接接触。"
+                     "野生ウサギが保有宿主。",
+        "treatment": "No specific antiviral. Supportive care only; most cases are fatal.",
+        "treatment_ja": "特異的抗ウイルス薬なし。支持療法：輸液、強制給餌、抗菌薬（二次感染予防）、"
+                        "眼軟膏、NSAIDs（疼痛・発熱管理）。重度例は安楽死を検討。"
+                        "弱毒株感染や部分免疫のある個体では回復例あり。",
+        "prevention": "Vaccination (in countries where available), flea/mosquito control, quarantine of new rabbits.",
+        "prevention_ja": "ワクチン接種（欧州・豪州で利用可能、日本未承認）。"
+                         "ノミ・蚊の駆除・防除。屋外飼育の回避（特に夏季）。"
+                         "新規導入ウサギの検疫。感染ウサギとの隔離。",
+        "prognosis": "Very poor; mortality >90% in naive populations. Attenuated strains have lower mortality.",
+        "prognosis_ja": "極めて不良。未免疫個体の致死率90%以上。"
+                        "弱毒株では致死率30〜50%に低下する場合あり。回復例でも長期の後遺症あり。",
+        "urgency": "emergency",
+        "recommended_tests": ["physical_exam", "pcr", "histopathology", "serology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
+    {
+        "name": "Rabbit Syphilis (Treponematosis)",
+        "name_ja": "ウサギ梅毒（トレポネーマ症）",
+        "symptoms": {"skin_lesions", "nasal_discharge", "eye_discharge",
+                      "genital_swelling", "crusty_skin"},
+        "description": "Venereal disease caused by Treponema cuniculi, causing genital and facial lesions.",
+        "description_ja": "Treponema cuniculiによる性行為感染症。"
+                          "外陰部・会陰部・鼻・口唇に痂皮性病変を形成。"
+                          "ヒト梅毒とは別の病原体で人畜共通感染症ではない。",
+        "pathophysiology": "Treponema cuniculi penetrates intact mucous membranes during mating or direct contact, causing localized inflammatory lesions.",
+        "pathophysiology_ja": "交配時の粘膜接触でTreponema cuniculiが侵入→局所増殖→"
+                              "外陰部・会陰部に紅斑・水疱・痂皮形成。顔面（鼻・口唇）にも波及。"
+                              "母子垂直感染もあり。全身症状は稀。",
+        "causes": "Treponema cuniculi. Transmitted by direct contact (venereal) or from doe to kits.",
+        "causes_ja": "Treponema cuniculi。性行為感染（主要）または母子感染。"
+                     "潜伏期3〜16週間。不顕性キャリアが存在。",
+        "treatment": "Penicillin G benzathine (42,000-84,000 IU/kg SC, 3 injections at 7-14 day intervals).",
+        "treatment_ja": "ペニシリンGベンザチン（42,000〜84,000 IU/kg SC、7〜14日間隔で3回投与）が治療の標準。"
+                        "クロルテトラサイクリンも有効。病変部の清拭・消毒。"
+                        "治療中は交配禁止。同居ウサギも同時治療。",
+        "prevention": "Screen breeding rabbits, quarantine new additions, treat all contacts.",
+        "prevention_ja": "繁殖前の検査。新規導入ウサギの検疫と検査。"
+                         "感染個体の繁殖使用禁止。同居個体の同時治療。",
+        "prognosis": "Excellent with penicillin treatment. Self-limiting in some cases but may recur.",
+        "prognosis_ja": "ペニシリン治療で予後良好。未治療でも自然治癒することがあるが再発リスクあり。"
+                        "治療後の再感染防止が重要。",
+        "urgency": "normal",
+        "recommended_tests": ["physical_exam", "dark_field_microscopy", "serology", "pcr"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult"},
+    },
+    {
+        "name": "Uterine Adenocarcinoma",
+        "name_ja": "子宮腺癌",
+        "symptoms": {"vaginal_bleeding", "appetite_loss", "weight_loss",
+                      "lethargy", "abdominal_distension"},
+        "description": "Most common neoplasm in intact female rabbits, with incidence increasing dramatically with age.",
+        "description_ja": "未避妊雌ウサギで最も多い腫瘍。4歳以上の未避妊雌で発生率60〜80%。"
+                          "初期は無症状、進行すると血性膣分泌物・体重減少。"
+                          "肺転移が多い。早期の避妊手術が最善の予防。",
+        "pathophysiology": "Chronic estrogen and progesterone stimulation leads to endometrial hyperplasia, then adenomatous changes, and ultimately adenocarcinoma.",
+        "pathophysiology_ja": "慢性的なエストロゲン・プロゲステロン刺激→子宮内膜過形成→腺腫性変化→腺癌。"
+                              "局所浸潤→腹腔内播種・肺転移。5歳以上では80%に子宮病変が認められる。"
+                              "乳腺腫瘍の併発も多い。",
+        "causes": "Hormonal stimulation in intact females. Incidence: 50-80% in intact does over 4 years of age.",
+        "causes_ja": "未避妊による持続的な性ホルモン刺激。年齢依存的に発生率が急増。"
+                     "2〜3歳：4〜10%、4〜5歳：50〜60%、5歳以上：80%。",
+        "treatment": "Ovariohysterectomy (if no metastasis). Thoracic radiographs to check for lung metastasis before surgery.",
+        "treatment_ja": "卵巣子宮摘出術（転移なしの場合）が標準治療。"
+                        "術前に胸部X線で肺転移の有無を確認。"
+                        "転移がある場合は予後不良→緩和ケア（疼痛管理・栄養支持）。"
+                        "化学療法の有効性は限定的。",
+        "prevention": "Early spaying (before 6 months of age) eliminates risk.",
+        "prevention_ja": "早期避妊手術（6ヶ月齢まで）が最善の予防法。"
+                         "未避妊雌は年1回の腹部超音波検査を推奨。",
+        "prognosis": "Good if caught early without metastasis; poor once lung metastasis present.",
+        "prognosis_ja": "転移前の早期摘出で予後良好（完治可能）。"
+                        "肺転移がある場合は予後不良（余命数ヶ月）。"
+                        "早期発見が鍵。",
+        "urgency": "high",
+        "recommended_tests": ["abdominal_ultrasound", "thoracic_radiographs", "complete_blood_count", "histopathology"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
+    {
+        "name": "Pasteurellosis (Snuffles)",
+        "name_ja": "パスツレラ症（スナッフル）",
+        "symptoms": {"nasal_discharge", "sneezing", "eye_discharge", "head_tilt",
+                      "ear_discharge", "lethargy", "appetite_loss", "labored_breathing"},
+        "description": "Bacterial infection by Pasteurella multocida, the most common pathogen in domestic rabbits.",
+        "description_ja": "Pasteurella multocidaによる細菌感染症。ウサギで最も重要な病原菌。"
+                          "上部呼吸器感染（スナッフル）が最多だが、中耳炎・肺炎・膿瘍・"
+                          "子宮蓄膿症・敗血症など多臓器に病変を形成。不顕性キャリアが多い。",
+        "pathophysiology": "P. multocida colonizes the nasal passages; stress or immunosuppression allows bacterial proliferation and spread.",
+        "pathophysiology_ja": "P. multocidaが鼻腔に定着（キャリア状態）→ストレス・免疫低下で増殖→"
+                              "上部呼吸器感染（鼻炎・副鼻腔炎）→下行感染で肺炎→血行性播種で"
+                              "中耳炎（斜頸の原因）・膿瘍（皮下・内臓）・生殖器感染・敗血症。",
+        "causes": "Pasteurella multocida. Transmitted by direct contact, aerosol, or fomites. Stress is a major trigger.",
+        "causes_ja": "Pasteurella multocida。直接接触・飛沫・媒介物で伝播。"
+                     "ストレス（環境変化・過密・温度変化）、免疫低下が発症のトリガー。"
+                     "キャリア率は飼育ウサギの50〜90%と推定。",
+        "treatment": "Long-term antibiotics based on culture and sensitivity.",
+        "treatment_ja": "培養感受性試験に基づく長期抗菌薬投与（最低14〜30日）。"
+                        "第一選択：エンロフロキサシン（5〜10mg/kg BID PO）、"
+                        "トリメトプリム・サルファ（30mg/kg BID PO）。"
+                        "膿瘍：外科的排膿＋抗菌薬。鼻腔洗浄（重度鼻炎）。"
+                        "完全根治は困難→再発管理が現実的目標。",
+        "prevention": "Stress reduction, good ventilation, quarantine, avoid overcrowding.",
+        "prevention_ja": "ストレス軽減、良好な換気、適切な飼育密度。"
+                         "新規導入ウサギの検疫。キャリア検査（鼻腔培養）。"
+                         "免疫力維持のための適切な栄養管理。",
+        "prognosis": "Guarded; complete eradication is rare. Manageable with long-term care.",
+        "prognosis_ja": "慎重。完全根治は稀で、キャリア状態が持続することが多い。"
+                        "長期管理で良好なQOLを維持可能。膿瘍・肺炎の合併例は要注意。",
+        "urgency": "moderate",
+        "recommended_tests": ["nasal_culture_sensitivity", "radiographs", "complete_blood_count", "ct_scan"],
+        "onset_pattern": {"acute", "subacute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
 ]
 
 
