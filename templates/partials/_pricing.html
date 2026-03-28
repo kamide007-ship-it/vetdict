@@ -30,7 +30,7 @@
           <p class="email-signup-label">正式リリース時に通知を受け取る</p>
           <div class="email-signup-row">
             <input type="email" id="signupEmail" placeholder="メールアドレス" class="email-signup-input">
-            <button onclick="submitEmailSignup()" class="email-signup-btn" id="signupBtn">登録</button>
+            <button class="email-signup-btn" id="signupBtn">登録</button>
           </div>
           <p class="email-signup-msg" id="signupMsg"></p>
         </div>
@@ -64,4 +64,5 @@ function submitEmailSignup(){
     btn.textContent="登録";btn.disabled=false;
   });
 }
+document.getElementById("signupBtn").addEventListener("click",submitEmailSignup);
 </script>
