@@ -6113,9 +6113,73 @@ TEST_DB: List[Dict[str, Any]] = [
 ]
 
 # ---------------------------------------------------------------------------
+# Merge optional dog_disease_enrichment data
+# ---------------------------------------------------------------------------
+from importlib.util import find_spec as _find_spec
+
+if _find_spec("api.dog_disease_enrichment") is not None:
+    from api.dog_disease_enrichment import DOG_ENRICHMENT as _DOG_ENRICH
+
+    _enrich_index = {d["name"]: d for d in DISEASES}
+    for _name, _data in _DOG_ENRICH.items():
+        if _name in _enrich_index:
+            _enrich_index[_name].update(_data)
+    del _enrich_index, _DOG_ENRICH
+
+# ---------------------------------------------------------------------------
 # Enrich diseases from JSON database
 # ---------------------------------------------------------------------------
 enrich_diseases(DISEASES, "Dog")
+
+# ---------------------------------------------------------------------------
+# Fill missing content fields with fallback for unenriched diseases
+# ---------------------------------------------------------------------------
+for _d in DISEASES:
+    _name = _d.get("name", "")
+    _name_ja = _d.get("name_ja", _name)
+    _urg = _d.get("urgency", "moderate")
+    _urg_ja = {"emergency": "緊急", "high": "高", "moderate": "中等度", "low": "軽度"}.get(_urg, "中等度")
+    if not _d.get("pathophysiology") and not _d.get("pathophysiology_ja"):
+        _d["pathophysiology"] = _d["pathophysiology_ja"] = (
+            f"{_name_ja}は罹患組織および臓器系に病理学的変化をもたらす。"
+            f"細胞障害・炎症反応・未治療の場合の組織損傷の段階を経て進行する。"
+            f"早期の病態把握と介入が予後改善の鍵となる。")
+    elif _d.get("pathophysiology_ja") and not _d.get("pathophysiology"):
+        _d["pathophysiology"] = _d["pathophysiology_ja"]
+    elif _d.get("pathophysiology") and not _d.get("pathophysiology_ja"):
+        _d["pathophysiology_ja"] = _d["pathophysiology"]
+    if not _d.get("causes") and not _d.get("causes_ja"):
+        _d["causes"] = _d["causes_ja"] = (
+            f"{_name_ja}の原因には遺伝的要因、環境要因、食事・飼育管理に関連する素因が含まれる。"
+            f"複数の要因が複合的に作用することが多い。")
+    elif _d.get("causes_ja") and not _d.get("causes"):
+        _d["causes"] = _d["causes_ja"]
+    elif _d.get("causes") and not _d.get("causes_ja"):
+        _d["causes_ja"] = _d["causes"]
+    if not _d.get("treatment") and not _d.get("treatment_ja"):
+        _d["treatment"] = _d["treatment_ja"] = (
+            f"{_name_ja}の治療は原因への対処、支持療法、および適切な治療介入を含む。"
+            f"重症度: {_urg_ja}。獣医師への相談が推奨される。")
+    elif _d.get("treatment_ja") and not _d.get("treatment"):
+        _d["treatment"] = _d["treatment_ja"]
+    elif _d.get("treatment") and not _d.get("treatment_ja"):
+        _d["treatment_ja"] = _d["treatment"]
+    if not _d.get("prevention") and not _d.get("prevention_ja"):
+        _d["prevention"] = _d["prevention_ja"] = (
+            f"{_name_ja}の予防には適切な栄養管理、定期的な健康診断、"
+            f"ワクチン接種、寄生虫予防、安全な環境の維持が含まれる。")
+    elif _d.get("prevention_ja") and not _d.get("prevention"):
+        _d["prevention"] = _d["prevention_ja"]
+    elif _d.get("prevention") and not _d.get("prevention_ja"):
+        _d["prevention_ja"] = _d["prevention"]
+    if not _d.get("prognosis") and not _d.get("prognosis_ja"):
+        _d["prognosis"] = _d["prognosis_ja"] = (
+            f"{_name_ja}の予後は重症度、診断の迅速さ、治療への反応に依存する。"
+            f"早期発見と適切な介入が転帰を改善する。")
+    elif _d.get("prognosis_ja") and not _d.get("prognosis"):
+        _d["prognosis"] = _d["prognosis_ja"]
+    elif _d.get("prognosis") and not _d.get("prognosis_ja"):
+        _d["prognosis_ja"] = _d["prognosis"]
 
 # Build SYMPTOM_CATEGORIES from disease symptoms
 SYMPTOM_CATEGORIES = {
