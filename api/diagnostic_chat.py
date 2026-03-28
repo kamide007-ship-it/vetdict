@@ -1495,12 +1495,22 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     return list(matched)
 
 
-def _match_species_symptoms_to_diseases(symptom_ids: list[str], species: str) -> list[dict]:
+def _match_species_symptoms_to_diseases(
+    symptom_ids: list[str],
+    species: str,
+    *,
+    pain_score: int | None = None,
+    lab_values: dict | None = None,
+    breed: str | None = None,
+) -> list[dict]:
     """Match symptom IDs to species-specific diseases using advanced weighted scoring.
 
     Uses the same harmonic-mean + specificity + negative-evidence algorithm as
     the dog matcher (match_symptoms_to_diseases) to achieve consistent,
     high-accuracy differential diagnosis across all species.
+
+    Optional clinical context (pain_score, lab_values, breed) is accepted for
+    future scoring refinement and is forwarded from the chat endpoint.
     """
     import math
 
@@ -2794,7 +2804,13 @@ def get_treatment_recommendations_for_disease(disease_id: str, breed_id=None, ag
     return recommendations
 
 
-def match_symptoms_to_diseases(symptom_ids: list) -> list:
+def match_symptoms_to_diseases(
+    symptom_ids: list,
+    *,
+    pain_score: int | None = None,
+    lab_values: dict | None = None,
+    breed: str | None = None,
+) -> list:
     """
     Match extracted symptoms to diseases using advanced weighted scoring.
 
@@ -3043,7 +3059,9 @@ def diagnostic_chat():
     onset = data.get("onset")  # explicit onset from client
     previous_symptoms = data.get("previous_symptoms", [])
     species = data.get("species", "dog")
-    data.get("gender")  # "male" | "female" (optional)
+    pain_score = data.get("pain_score")       # int 1-10 (optional)
+    lab_values = data.get("lab_values")       # dict (optional)
+    breed = data.get("breed")                 # str (optional)
 
     if not message:
         return jsonify({"error": "Message required"}), 400
@@ -3071,7 +3089,10 @@ def diagnostic_chat():
     elif species in _SPECIES_DATA:
         extracted = _extract_species_symptoms(message, species)
         all_symptoms = list(set(extracted + previous_symptoms))
-        disease_matches = _match_species_symptoms_to_diseases(all_symptoms, species)
+        disease_matches = _match_species_symptoms_to_diseases(
+            all_symptoms, species,
+            pain_score=pain_score, lab_values=lab_values, breed=breed,
+        )
         sp_names = _SPECIES_DATA[species]["symptom_names"]
         symptom_details = [
             {
@@ -3085,7 +3106,10 @@ def diagnostic_chat():
     else:
         extracted = extract_symptoms_from_text(message)
         all_symptoms = list(set(extracted + previous_symptoms))
-        disease_matches = match_symptoms_to_diseases(all_symptoms)
+        disease_matches = match_symptoms_to_diseases(
+            all_symptoms,
+            pain_score=pain_score, lab_values=lab_values, breed=breed,
+        )
         symptom_details = [
             {
                 "id": sid,
@@ -3160,6 +3184,9 @@ def diagnostic_chat():
         "total_candidates": len(disease_matches),
         "species_guidance": guidance_line,
         "breed_context": breed_id,
+        "breed": breed,
+        "pain_score": pain_score,
+        "lab_values": lab_values,
         "age_context": effective_age,
         "onset_context": effective_onset,
         "onset_detected_from_text": detected_onset,
@@ -3815,9 +3842,15 @@ def consultation():
         if species == "horse" and EQUINE_AVAILABLE:
             disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
         elif species in _SPECIES_DATA:
-            disease_matches = _match_species_symptoms_to_diseases(selected_symptoms, species)
+            disease_matches = _match_species_symptoms_to_diseases(
+                selected_symptoms, species,
+                pain_score=pain_score, lab_values=lab_values, breed=breed,
+            )
         else:
-            disease_matches = match_symptoms_to_diseases(selected_symptoms)
+            disease_matches = match_symptoms_to_diseases(
+                selected_symptoms,
+                pain_score=pain_score, lab_values=lab_values, breed=breed,
+            )
 
         # Build symptom details for display
         sym_name_map = {s["id"]: s for s in all_symptoms}
@@ -3939,9 +3972,15 @@ def consultation():
                 if species == "horse" and EQUINE_AVAILABLE:
                     disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
                 elif species in _SPECIES_DATA:
-                    disease_matches = _match_species_symptoms_to_diseases(selected_symptoms, species)
+                    disease_matches = _match_species_symptoms_to_diseases(
+                        selected_symptoms, species,
+                        pain_score=pain_score, lab_values=lab_values, breed=breed,
+                    )
                 else:
-                    disease_matches = match_symptoms_to_diseases(selected_symptoms)
+                    disease_matches = match_symptoms_to_diseases(
+                        selected_symptoms,
+                        pain_score=pain_score, lab_values=lab_values, breed=breed,
+                    )
                 result = {
                     "suspected_diseases": [
                         {

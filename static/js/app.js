@@ -19,7 +19,7 @@ async function checkAccess(){
   const adminParam=params.get("admin");
   if(adminParam){
     try{
-      const r=await fetch("/api/admin/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:adminParam})});
+      const r=await fetchWithTimeout("/api/admin/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:adminParam})},5000);
       const d=await r.json();
       if(d.valid){localStorage.setItem("vetdict-admin","1");isAdmin=true;isPro=true;}
       else{localStorage.removeItem("vetdict-admin");}
@@ -32,7 +32,7 @@ async function checkAccess(){
     isPro=true;
     const subId=localStorage.getItem("vetdict-subscription-id");
     if(subId){
-      fetch("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})})
+      fetchWithTimeout("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})},5000)
       .then(function(r){return r.json();})
       .then(function(d){if(!d.active){localStorage.removeItem("vetdict-pro");localStorage.removeItem("vetdict-subscription-id");isPro=false;document.body.classList.remove("is-pro");}})
       .catch(function(){});
@@ -509,7 +509,7 @@ function loadBreeds(species){
   const select=document.getElementById("breedSelect");
   select.innerHTML=`<option value="">${t("breedNone")}</option>`;
   currentBreed="";
-  fetch("/api/breeds/"+species).then(r=>r.json()).then(data=>{
+  fetchWithTimeout("/api/breeds/"+species).then(r=>r.json()).then(data=>{
     if(requestId!==breedRequestId||species!==currentSpecies)return;
     if(data.breeds&&data.breeds.length>0){
       data.breeds.forEach(b=>{select.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(b.id)}">${escapeHtml(b.name_ja)} (${escapeHtml(b.name)})</option>`);});
@@ -548,8 +548,8 @@ function renderSymptomList(symptoms){
   if(!list){console.warn("symptomList element not found");return;}
   const search=(symptomSearch?.value||"").toLowerCase();
   const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
-  let html=`<button class="symptom-sort-toggle" onclick="toggleSymptomSort()" aria-label="Switch sort mode">${sortLabel}</button>`;
-  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?(s.name_ja||s.name_en):(s.name_en||s.name_ja);const secondary=currentLang==="ja"?(s.name_en||""):(s.name_ja||"");return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${s.id}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${primary} <span style="color:var(--gray-600)">${secondary}</span></span></div>`;};
+  let html=`<button class="symptom-sort-toggle" aria-label="Switch sort mode">${escapeHtml(sortLabel)}</button>`;
+  const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?(s.name_ja||s.name_en):(s.name_en||s.name_ja);const secondary=currentLang==="ja"?(s.name_en||""):(s.name_ja||"");return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${escapeHtml(s.id)}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${escapeHtml(primary)} <span style="color:var(--gray-600)">${escapeHtml(secondary)}</span></span></div>`;};
   const matchSearch=s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);};
   if(symptomSortMode==="category"){
     const categories={};
@@ -566,6 +566,8 @@ function renderSymptomList(symptoms){
     for(const s of sorted)html+=mkItem(s);
   }
   list.innerHTML=html||`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noMatchingSymptom")}</div>`;
+  const sortToggle=list.querySelector(".symptom-sort-toggle");
+  if(sortToggle)sortToggle.addEventListener("click",toggleSymptomSort);
   list.onclick=e=>{const item=e.target.closest(".symptom-item");if(item)toggleSymptom(item.dataset.id);};
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
 }
@@ -576,7 +578,7 @@ function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
   if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;return;}
   btn.disabled=false;
-  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${label} <button class="remove" type="button" aria-label="${ariaLabel}" data-id="${id}">&times;</button></span>`;}).join("");
+  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${escapeHtml(label)} <button class="remove" type="button" aria-label="${escapeHtml(ariaLabel)}" data-id="${escapeHtml(id)}">&times;</button></span>`;}).join("");
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
 }
 
@@ -759,7 +761,9 @@ function createResultsDisclaimer(){
 function createFeedbackWidget(){
   const w=document.createElement("div");
   w.className="feedback-widget";
-  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button class="feedback-btn helpful" onclick="sendFeedback(true)">&#128077; '+t("feedbackYes")+'</button><button class="feedback-btn not-helpful" onclick="sendFeedback(false)">&#128078; '+t("feedbackNo")+'</button></div>';
+  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button class="feedback-btn helpful">&#128077; '+t("feedbackYes")+'</button><button class="feedback-btn not-helpful">&#128078; '+t("feedbackNo")+'</button></div>';
+  w.querySelector(".feedback-btn.helpful").addEventListener("click",function(){sendFeedback(true);});
+  w.querySelector(".feedback-btn.not-helpful").addEventListener("click",function(){sendFeedback(false);});
   return w;
 }
 
@@ -784,7 +788,9 @@ function createShareWidget(diseases){
   const shareUrl="https://vetdict.info/";
   const twitterUrl=`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
   const lineUrl=`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
-  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X(Twitter)</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy" onclick="navigator.clipboard.writeText('${escapeHtml(shareText)} ${shareUrl}').then(()=>this.textContent='${t("shareCopied")}')">${t("shareCopy")}</button></div>`;
+  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X(Twitter)</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button></div>`;
+  const copyBtn=w.querySelector(".share-btn.copy");
+  copyBtn.addEventListener("click",function(){navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{copyBtn.textContent=t("shareCopied");});});
   return w;
 }
 
@@ -834,7 +840,7 @@ function renderResults(data){
     html+=`<div class="lab-results-viz" style="border-color:${painColors[ps]}33"><div class="lab-viz-title" style="color:${painColors[ps]}">&#x1F9D1;&#x200D;&#x2695;&#xFE0F; ${currentLang==="ja"?"痛み評価":"Pain Assessment"}: ${painLabels[ps]} (${ps}/4)</div><div class="pain-meter"><div class="pain-meter-fill" style="width:${painPct}%;background:${painColors[ps]}"></div></div>${ps>=3?`<div style="font-size:.74rem;color:${painColors[ps]};margin-top:4px;font-weight:600">${currentLang==="ja"?"⚠ 強い痛みが検出されました。早急な鎮痛処置を検討してください。":"⚠ Severe pain detected. Consider immediate analgesic intervention."}</div>`:""}</div>`;
   }
   const adviceText=currentLang==="ja"?adviceJa:(data.general_advice||adviceJa);
-  if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${adviceText}</div>`;
+  if(adviceText)html+=`<div style="font-size:.82rem;color:var(--gray-700);margin-bottom:12px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)">${escapeHtml(adviceText)}</div>`;
 
   // Stepwise differential diagnosis: Phase 1 (common) vs Phase 2 (rare)
   const phase1=diseasesByPhase.phase_1_common||[];
@@ -861,12 +867,14 @@ function renderResults(data){
     });
   }
 
-  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${x.priority}]</span>`:"";return`<li>\u{1F52C} ${label}${priority}</li>`;}).join("")}</ul></div>`;}
+  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${escapeHtml(x.priority)}]</span>`:"";return`<li>\u{1F52C} ${escapeHtml(label)}${priority}</li>`;}).join("")}</ul></div>`;}
   html+=`<div id="commonDiseasesArea"></div><div id="breedEcologyArea"></div>`;
   area.innerHTML="";
   area.appendChild(createResultsDisclaimer());
   const contentDiv=document.createElement("div");
   contentDiv.innerHTML=html;
+  contentDiv.addEventListener("click",function(e){const head=e.target.closest(".disease-head");if(head)toggleDetail(head);});
+  contentDiv.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const head=e.target.closest(".disease-head");if(head){e.preventDefault();toggleDetail(head);}}});
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
   area.appendChild(createShareWidget(diseases));
@@ -877,7 +885,7 @@ function renderResults(data){
 function loadCommonDiseases(species){
   const area=document.getElementById("commonDiseasesArea");
   if(!area||!species)return;
-  fetch(`/api/species/${encodeURIComponent(species)}/common-diseases`).then(r=>r.json()).then(data=>{
+  fetchWithTimeout(`/api/species/${encodeURIComponent(species)}/common-diseases`).then(r=>r.json()).then(data=>{
     if(species!==currentSpecies)return;
     const diseases=data.common_diseases||[];
     if(!diseases.length){area.innerHTML="";return;}
@@ -977,7 +985,7 @@ function renderDiseaseCard(d,data){
   const prevention=pick(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
   const treatment=pick(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
   const prognosis=pick(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
-  const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return s;return currentLang==="ja"?`${n.ja} <span style="color:var(--gray-500);font-size:.78rem">${n.en}</span>`:`${n.en} <span style="color:var(--gray-500);font-size:.78rem">${n.ja}</span>`;}).join("&ensp;|&ensp;");
+  const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return escapeHtml(s);return currentLang==="ja"?`${escapeHtml(n.ja)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.en)}</span>`:`${escapeHtml(n.en)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.ja)}</span>`;}).join("&ensp;|&ensp;");
   const completeness=Number(d.completeness_score||100);
   const missing=(d.missing_fields||[]);
   const qualityClass=completeness>=90?"quality-ok":"quality-warn";
@@ -985,14 +993,14 @@ function renderDiseaseCard(d,data){
   const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
 
   const urgencyIcon=likelihood==="high"?"\u26A0\uFE0F":likelihood==="moderate"?"\u{1F7E1}":"\u{1F7E2}";
-  let html=`<div class="disease-result disease-${likelihood}">
-    <div class="disease-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleDetail(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDetail(this)}">
+  let html=`<div class="disease-result disease-${escapeHtml(likelihood)}">
+    <div class="disease-head" role="button" tabindex="0" aria-expanded="false">
       <div class="disease-head-info">
         <div class="disease-name-row">
-          <span class="disease-name">${name}</span>
-          ${nameSecondary&&nameSecondary!==name?`<span class="disease-name-ja">${nameSecondary}</span>`:""}
+          <span class="disease-name">${escapeHtml(name)}</span>
+          ${nameSecondary&&nameSecondary!==name?`<span class="disease-name-ja">${escapeHtml(nameSecondary)}</span>`:""}
           <span class="quality-badge ${qualityClass}">${completeness}%</span>
-          ${prevalenceLabel?`<span class="prevalence-badge">${prevalenceLabel}</span>`:""}
+          ${prevalenceLabel?`<span class="prevalence-badge">${escapeHtml(prevalenceLabel)}</span>`:""}
         </div>
         <div class="disease-match-bar-row">
           <div class="disease-match-bar"><div class="disease-match-fill disease-match-${likelihood}" style="width:${Math.min(pct,100)}%"></div></div>
@@ -1005,34 +1013,34 @@ function renderDiseaseCard(d,data){
       <div class="detail-grid">
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F4CB}</span> ${t("dtDescription")}</div>
-          <div class="detail-section-body">${desc||buildFieldFallback(t("dtDescription"),diseaseName)}</div>
+          <div class="detail-section-body">${escapeHtml(desc||buildFieldFallback(t("dtDescription"),diseaseName))}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F9EC}</span> ${t("dtPathophysiology")}</div>
-          <div class="detail-section-body">${patho}</div>
+          <div class="detail-section-body">${escapeHtml(patho)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F50D}</span> ${t("dtCauses")}</div>
-          <div class="detail-section-body">${causes}</div>
+          <div class="detail-section-body">${escapeHtml(causes)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")}</div>
-          <div class="detail-section-body">${treatment}</div>
+          <div class="detail-section-body">${escapeHtml(treatment)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F6E1}\uFE0F</span> ${t("dtPrevention")}</div>
-          <div class="detail-section-body">${prevention}</div>
+          <div class="detail-section-body">${escapeHtml(prevention)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F4CA}</span> ${t("dtPrognosis")}</div>
-          <div class="detail-section-body">${prognosis}</div>
+          <div class="detail-section-body">${escapeHtml(prognosis)}</div>
         </div>
       </div>
       ${matchSymptoms.length?`<div class="detail-matched"><strong>${t("dtMatchedSymptoms")}:</strong> ${matchDisplay}</div>`:""}
       ${renderMissingKeySymptoms(d,data)}
       ${renderScoringDetail(d)}
-      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${recTests.join(", ")}</div>`:""}
-      ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${missing.join(", ")}</div>`:""}
+      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${escapeHtml(recTests.join(", "))}</div>`:""}
+      ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>
   </div>`;
   return html;
@@ -1043,7 +1051,7 @@ function loadDiseaseDb(species){
   const list=document.getElementById("diseaseDbList");
   if(!list){console.warn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
-  fetch(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
+  fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
   .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
 }
 
@@ -1086,13 +1094,15 @@ function renderAzNav(){
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
   if(diseaseNavMode==="category"){
     const cats=[...DISEASE_CAT_ORDER,"other"];
-    const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${c}" aria-label="${lbl}">${lbl}</button>`;}).join("");
-    azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode='${cur.next}';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
+    const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}">${escapeHtml(lbl)}</button>`;}).join("");
+    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
   }else{
     const isAz=diseaseNavMode==="az";
     const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
-    azNav.innerHTML=`<button class="az-mode-toggle" onclick="diseaseNavMode='${cur.next}';diseaseFilter='';renderAzNav();renderDiseaseDb();" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
   }
+  const nextMode=cur.next;
+  azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
   azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
 }
 
@@ -1154,24 +1164,30 @@ function renderDiseaseDb(){
     const dPrimary=currentLang==="ja"?dNameJa:dNameEn;
     const dSecondary=currentLang==="ja"?dNameEn:dNameJa;
     const dDesc=desc.substring(0,80)+(desc.length>80?"...":"");
-    return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDbItem(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDbItem(this)}">
+    return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
-        <dt>${t("dtDescription")}</dt><dd>${desc}</dd>
-        <dt>${t("dtPathophysiology")}</dt><dd>${patho}</dd>
-        <dt>${t("dtCauses")}</dt><dd>${causes}</dd>
-        <dt>${t("dtPrevention")}</dt><dd>${prevention}</dd>
-        <dt>${t("dtTreatment")}</dt><dd>${treatment}</dd>
-        <dt>${t("dtPrognosis")}</dt><dd>${prognosis}</dd>
-        ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):d.symptoms)}</dd>`:""}
-        ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${d.recommended_tests.join(", ")}</dd>`:""}
-      </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${d.content_origin}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${d.missing_fields.join(", ")}</div>`:""}</div>
+        <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
+        <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
+        <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
+        <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
+        <dt>${t("dtTreatment")}</dt><dd>${escapeHtml(treatment)}</dd>
+        <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
+        ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:""}
+        ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:""}
+      </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
+  _attachDbItemHandlers(list);
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
-    list.insertAdjacentHTML("beforeend",`<button class="show-more-btn" onclick="diseaseDisplayLimit+=100;renderDiseaseDb();" style="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer">${currentLang==="ja"?`さらに表示 (残り${remaining}件)`:`Show more (${remaining} remaining)`}</button>`);
+    const showMoreBtn=document.createElement("button");
+    showMoreBtn.className="show-more-btn";
+    showMoreBtn.style.cssText="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer";
+    showMoreBtn.textContent=currentLang==="ja"?`さらに表示 (残り${remaining}件)`:`Show more (${remaining} remaining)`;
+    showMoreBtn.addEventListener("click",function(){diseaseDisplayLimit+=100;renderDiseaseDb();});
+    list.appendChild(showMoreBtn);
   }
 }
 
@@ -1462,7 +1478,7 @@ function renderChatResult(container,data){
     const chatRef=document.createElement("div");
     chatRef.className="chat-reference-section";
     wrapper.appendChild(chatRef);
-    fetch(`/api/species/${encodeURIComponent(currentSpecies)}/common-diseases`).then(r=>r.json()).then(data=>{
+    fetchWithTimeout(`/api/species/${encodeURIComponent(currentSpecies)}/common-diseases`).then(r=>r.json()).then(data=>{
       const diseases=data.common_diseases||[];
       if(!diseases.length)return;
       const veryCommon=diseases.filter(d=>d.prevalence==="very_common");
@@ -1863,7 +1879,7 @@ let drugsLoaded=false,allDrugs=[],drugCategories={};
 function loadDrugDictionary(){
   const list=document.getElementById("drugList");
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div><div class="skeleton skeleton-card" style="height:90px"></div><div class="skeleton skeleton-card" style="height:60px"></div></div>';
-  Promise.all([fetch("/api/drugs").then(r=>r.json()),fetch("/api/drug-categories").then(r=>r.json())])
+  Promise.all([fetchWithTimeout("/api/drugs").then(r=>r.json()),fetchWithTimeout("/api/drug-categories").then(r=>r.json())])
   .then(([drugsData,catData])=>{
     allDrugs=drugsData.drugs||[];drugCategories=drugsData.categories||{};
     pendingStats.drugs=allDrugs.length;animateCount(document.getElementById("statDrugs"),allDrugs.length,800);
@@ -1900,31 +1916,32 @@ function renderDrugList(){
       const safeLabel=si.safe?`<span class="drug-safe-label">\u2713 ${t("safe")}</span>`:`<span class="drug-unsafe-label">\u2717 ${t("contraindicated")}</span>`;
       const doseText=currentLang==="ja"?(si.dosage_ja||si.dosage||"N/A"):(si.dosage||si.dosage_ja||"N/A");
       const noteText=currentLang==="ja"?(si.notes_ja||si.notes||""):(si.notes||si.notes_ja||"");
-      dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${doseText}<br/><span class="drug-dosage-note">${noteText}</span></div>`;
+      dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${escapeHtml(doseText)}<br/><span class="drug-dosage-note">${escapeHtml(noteText)}</span></div>`;
     }
     const catLabel=drugCategories[d.category]?(currentLang==="ja"?(drugCategories[d.category].ja||drugCategories[d.category].en):(drugCategories[d.category].en||drugCategories[d.category].ja)):(currentLang==="ja"?(d.category_ja||d.category):(d.category||d.category_ja));
     const sponsorBadge=d.sponsor?'<span class="sponsor-badge-tag">Sponsor</span>':"";
-    const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${d.sponsor_name||"Equine & Canine Vet Nutrition"}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/'}" target="_blank" onclick="event.stopPropagation()" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
+    const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${escapeHtml(d.sponsor_name||"Equine & Canine Vet Nutrition")}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${sanitizeUrl(d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/')}" target="_blank" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
     const dName=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
-    return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false" onclick="toggleDbItem(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDbItem(this)}">
+    return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false">
       <div class="drug-head-row">
         <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${sponsorBadge}</div>
-        <span class="drug-category-tag">${catLabel}</span>
+        <span class="drug-category-tag">${escapeHtml(catLabel)}</span>
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
-        <dl><dt>${t("dtContraindications")}</dt><dd>${currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||"")}</dd></dl>
-        ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", ")}</dd></dl>`:""}
-        ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", ")}</dd></dl>`:""}
-        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${di.drug}: ${currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja)}</span>`).join("")}</dd></dl>`:""}
+        <dl><dt>${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
+        ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", "))}</dd></dl>`:""}
+        ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", "))}</dd></dl>`:""}
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${escapeHtml(di.drug)}: ${escapeHtml(currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja))}</span>`).join("")}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"}"><strong>${label}</strong>: ${info.safe?'\u2713':'\u2717'} ${dose}${note?'<br/><span class="drug-dosage-note">'+note+'</span>':''}</div>`;}).join("")}
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
       </div>
     </div>`;
   }).join("");
+  _attachDbItemHandlers(list);
 }
 
 /* ===== Shared helpers ===== */
@@ -1936,6 +1953,12 @@ function toggleDetail(head){
   const isOpen=detail.classList.toggle("open");
   head.setAttribute("aria-expanded",isOpen);
   if(icon)icon.classList.toggle("rotated",isOpen);
+}
+
+/* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
+function _attachDbItemHandlers(container){
+  container.addEventListener("click",function(e){if(e.target.closest("a"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
+  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")){e.preventDefault();toggleDbItem(item);}}});
 }
 
 /* Toggle disease DB item */
@@ -2124,7 +2147,7 @@ function renderAmbiguityAnalysis(analysis) {
     analysis.high_ambiguity_symptoms.forEach((symptom) => {
       const item = document.createElement('span');
       item.className = 'ambiguous-symptom';
-      item.innerHTML = `${symptom.symptom_id}`;
+      item.textContent = symptom.symptom_id;
 
       if (symptom.ambiguity_score !== undefined) {
         const score = document.createElement('span');
