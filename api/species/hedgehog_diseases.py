@@ -3070,6 +3070,69 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"adult", "senior"},
     },
+    {
+        "name": "Metabolic Bone Disease (MBD)",
+        "name_ja": "代謝性骨疾患（MBD）",
+        "symptoms": {"hind_limb_weakness", "limb_swelling", "lethargy", "appetite_loss",
+                      "weight_loss", "limping", "ataxia"},
+        "description": "Nutritional secondary hyperparathyroidism causing bone demineralization, common in hedgehogs fed calcium-deficient or imbalanced diets.",
+        "description_ja": "カルシウム不足やCa:P比の不均衡な食事により二次性上皮小体機能亢進症→骨脱灰が起こる。"
+                          "ハリネズミではミルワームの過剰給餌（高リン・低Ca）が主因。"
+                          "病的骨折、後肢不全麻痺で来院することが多い。",
+        "pathophysiology": "Inadequate dietary calcium or improper Ca:P ratio → chronic hypocalcemia → PTH hypersecretion → osteoclastic bone resorption → weakened bones → pathological fractures.",
+        "pathophysiology_ja": "食事中のCa不足またはCa:P比不良→慢性低Ca血症→PTH過剰分泌→"
+                              "破骨細胞性骨吸収→骨密度低下→病的骨折。"
+                              "ビタミンD3不足も関与（室内飼育でUVB照射なし）。",
+        "causes": "Calcium-deficient diet, excessive mealworms/insects (high phosphorus), lack of calcium supplementation, vitamin D3 deficiency.",
+        "causes_ja": "Ca不足の食事、ミルワーム等昆虫の過剰給餌（高リン）、"
+                     "カルシウムサプリメント不使用、ビタミンD3不足。",
+        "treatment": "Calcium gluconate (50–100 mg/kg PO or SC), vitamin D3 supplementation, diet correction to proper Ca:P ratio (1.5–2:1). Fracture management with splinting. Analgesics: meloxicam 0.2 mg/kg SID.",
+        "treatment_ja": "グルコン酸カルシウム（50〜100mg/kg PO or SC）、ビタミンD3補給、"
+                        "食事矯正（Ca:P比1.5〜2:1に）。骨折は副木固定。"
+                        "鎮痛：メロキシカム0.2mg/kg SID。"
+                        "食事改善が最重要（良質な猫用フード＋Ca添加昆虫）。",
+        "prevention": "Balanced diet with proper Ca:P ratio. Dust insects with calcium powder before feeding. Avoid exclusive mealworm diets.",
+        "prevention_ja": "Ca:P比が適正な食事。昆虫にはカルシウムパウダーをダスティングしてから給餌。"
+                         "ミルワームのみの食事は禁忌。",
+        "prognosis": "Good if caught early and diet corrected; guarded with pathological fractures or severe demineralization.",
+        "prognosis_ja": "早期発見・食事矯正で予後良好。病的骨折や重度骨脱灰では慎重。"
+                        "治療後も骨密度回復に数ヶ月要する。",
+        "urgency": "high",
+        "recommended_tests": ["radiographs", "calcium_levels", "phosphorus_levels", "vitamin_d_levels"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"juvenile", "young_adult", "adult"},
+    },
+    {
+        "name": "Gastrointestinal Foreign Body",
+        "name_ja": "消化管異物",
+        "symptoms": {"appetite_loss", "vomiting", "lethargy", "abdominal_pain",
+                      "weight_loss", "diarrhea", "dehydration"},
+        "description": "Ingestion of non-food items (bedding fibers, rubber, fabric) causing partial or complete GI obstruction. Hedgehogs are curious foragers prone to ingesting foreign material.",
+        "description_ja": "床材の繊維、ゴム、布などの非食品を摂取し消化管閉塞を起こす。"
+                          "ハリネズミは好奇心旺盛で床を探索しながら異物を摂取しやすい。"
+                          "完全閉塞では緊急手術が必要。",
+        "pathophysiology": "Foreign material lodges in stomach or intestine → mechanical obstruction → proximal distension → fluid/electrolyte loss → dehydration → potential bowel necrosis if blood supply compromised.",
+        "pathophysiology_ja": "異物が胃または腸に停滞→機械的閉塞→近位腸管拡張→"
+                              "体液・電解質喪失→脱水。血流障害で腸管壊死の危険。",
+        "causes": "Ingestion of bedding material (especially loose fabric, carpet fibers), rubber toys, foam, or other small objects during foraging behavior.",
+        "causes_ja": "床材（布製ライナーのほつれ、カーペット繊維）、ゴム製おもちゃ、"
+                     "スポンジ等の小物を探索行動中に摂取。",
+        "treatment": "Stabilize (IV fluids, warmth). Radiographs/ultrasound for diagnosis. Surgical enterotomy or gastrotomy for removal. Post-op: fluids, antibiotics (enrofloxacin 5 mg/kg BID), analgesics (meloxicam 0.2 mg/kg SID), assisted feeding.",
+        "treatment_ja": "安定化（輸液、保温）。X線/超音波で診断。"
+                        "外科的腸切開または胃切開で異物除去。"
+                        "術後：輸液、抗生剤（エンロフロキサシン5mg/kg BID）、"
+                        "鎮痛（メロキシカム0.2mg/kg SID）、補助給餌。",
+        "prevention": "Use safe bedding (fleece liners without loose threads). Remove small ingestible objects. Supervise out-of-cage time. Avoid loose substrate bedding for known chewers.",
+        "prevention_ja": "安全な床材を使用（ほつれのないフリースライナー）。"
+                         "小さな飲み込めるものを除去。ケージ外では監視。"
+                         "異物を噛む癖のある個体にはバラバラになる床材を避ける。",
+        "prognosis": "Good with early surgical intervention; poor if bowel necrosis or peritonitis develops.",
+        "prognosis_ja": "早期手術で予後良好。腸管壊死や腹膜炎に進展すると予後不良。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiographs", "ultrasound", "cbc", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"juvenile", "young_adult", "adult"},
+    },
 ]
 
 
