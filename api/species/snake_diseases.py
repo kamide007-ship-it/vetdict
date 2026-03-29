@@ -3000,7 +3000,53 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"puppy", "young", "adult", "senior"},
     },
-
+    # =========================================================================
+    # ADDITIONAL DISEASES — NEUROLOGICAL, VIRAL
+    # =========================================================================
+    {
+        "name": "Stargazing Syndrome",
+        "name_ja": "スターゲイジング症候群（仰天症）",
+        "symptoms": {"stargazing", "neurological_signs", "abnormal_posture",
+                      "loss_of_righting_reflex", "appetite_loss", "regurgitation"},
+        "description": "Neurological condition where the snake holds its head elevated and inverted, gazing upward. Multiple etiologies.",
+        "description_ja": "ヘビが頭部を持続的に上方に向け、反転させる神経症状の総称。"
+                          "IBD（ボア・パイソン）、パラミクソウイルス、アレナウイルス、"
+                          "ニドウイルス、細菌性髄膜炎、ビタミンB1欠乏等が原因。"
+                          "ボールパイソン・ボア科で特に多い。鑑別診断が重要。",
+        "pathophysiology": "Various etiologies cause CNS inflammation or degeneration affecting the brainstem/vestibular system, resulting in abnormal head posture and loss of righting reflex.",
+        "pathophysiology_ja": "多様な原因による中枢神経系（特に脳幹・前庭系）の炎症・変性→"
+                              "頭部の持続的背屈・正向反射の消失。"
+                              "IBD：アレナウイルスが神経細胞内に好酸性封入体を形成→進行性神経変性。"
+                              "パラミクソウイルス：脳炎→壊死性髄膜脳炎。"
+                              "代謝性（ビタミンB1欠乏）：ウェルニッケ様脳症。",
+        "causes": "Inclusion body disease (arenavirus), paramyxovirus, nidovirus, bacterial meningitis, vitamin B1 deficiency, organophosphate toxicity, septicemia.",
+        "causes_ja": "封入体病（IBD/アレナウイルス）：ボア・パイソン科、"
+                     "パラミクソウイルス：ナミヘビ科を含む広範な種、"
+                     "ニドウイルス：ボールパイソン、"
+                     "細菌性髄膜炎・敗血症、ビタミンB1欠乏（冷凍魚の長期給餌）、"
+                     "有機リン中毒、重金属中毒。",
+        "treatment": "Depends on underlying cause; often no effective treatment for viral etiologies.",
+        "treatment_ja": "原因により治療法が異なる。"
+                        "IBD：根治療法なし→安楽死を検討（他個体への感染リスク）。"
+                        "細菌性：培養感受性試験に基づく抗菌薬（セフタジジム20mg/kg q72h IM）。"
+                        "ビタミンB1欠乏：チアミン25mg/kg IM→経口補充に切替。"
+                        "パラミクソウイルス：支持療法（輸液・保温・強制給餌）。"
+                        "全症例で隔離管理。",
+        "prevention": "Quarantine, biosecurity, proper nutrition (vitamin supplementation for fish-fed species).",
+        "prevention_ja": "新規個体の厳格な検疫（90日以上）。IBDスクリーニング。"
+                         "魚食性ヘビにはビタミンB1を補充。適切な衛生管理。"
+                         "感染個体の速やかな隔離。",
+        "prognosis": "Depends on etiology: viral (IBD/paramyxovirus) - poor; bacterial - guarded; nutritional - good with supplementation.",
+        "prognosis_ja": "原因により大きく異なる。"
+                        "IBD：予後不良（進行性、治療法なし）。"
+                        "パラミクソ：予後不良〜慎重。"
+                        "細菌性：早期治療で予後やや良好。"
+                        "ビタミンB1欠乏：補充で回復可能（予後良好）。",
+        "urgency": "high",
+        "recommended_tests": ["neurological_exam", "pcr", "blood_work", "radiographs", "histopathology", "virus_isolation"],
+        "onset_pattern": {"acute", "subacute", "chronic"},
+        "age_predisposition": {"puppy", "young", "adult", "senior"},
+    },
 ]
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {

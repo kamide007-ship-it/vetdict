@@ -634,6 +634,111 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "young", "senior"},
     },
+    # =========================================================================
+    # ADDITIONAL DISEASES — BACTERIAL, VIRAL, FUNGAL
+    # =========================================================================
+    {
+        "name": "Fin Rot (Bacterial/Fungal)",
+        "name_ja": "尾ぐされ病（フィンロット）",
+        "symptoms": {"fin_damage", "frayed_fins", "fin_discoloration", "lethargy",
+                      "appetite_loss", "fin_erosion"},
+        "description": "Progressive destruction of fin tissue by opportunistic bacteria (Aeromonas, Pseudomonas, Flavobacterium) or fungi.",
+        "description_ja": "ヒレ組織の進行性壊死。Aeromonas, Pseudomonas, Flavobacterium等の"
+                          "日和見細菌、またはSaprolegnia等の真菌が原因。"
+                          "水質悪化・ストレス・外傷が発症の引き金。金魚・ベタに多い。"
+                          "軽度は白濁→進行するとヒレの崩壊・出血。",
+        "pathophysiology": "Water quality deterioration weakens fish immune defenses; opportunistic bacteria colonize damaged fin margins, producing proteolytic enzymes that progressively destroy fin tissue.",
+        "pathophysiology_ja": "水質悪化→魚の免疫低下→ヒレ辺縁への日和見菌定着→"
+                              "タンパク分解酵素によるヒレ組織の進行性破壊。"
+                              "ヒレ辺縁の白濁→壊死→ヒレ条の露出→基部への波及→体幹への二次感染。",
+        "causes": "Poor water quality (high ammonia/nitrite), overcrowding, fin nipping, stress, temperature fluctuations.",
+        "causes_ja": "水質悪化（高アンモニア・高亜硝酸）、過密飼育、ヒレかじり、"
+                     "ストレス、急激な水温変動、外傷。",
+        "treatment": "Water quality improvement is the foundation; antibacterial medications for moderate to severe cases.",
+        "treatment_ja": "水質改善が最優先（部分換水50%、フィルター清掃）。"
+                        "軽度：0.3%塩水浴（食塩3g/L）で回復可能。"
+                        "中等度：抗菌薬浴（エルバージュエース、グリーンFゴールドリキッド）。"
+                        "重度：隔離治療＋グリーンFゴールド顆粒（ニトロフラゾン系）。"
+                        "真菌性：メチレンブルー浴＋塩水浴。",
+        "prevention": "Maintain water quality, avoid overcrowding, regular water changes, compatible tankmates.",
+        "prevention_ja": "定期的な水換え（週1回25〜30%）。適切な飼育密度。"
+                         "水質パラメータの定期測定（NH3, NO2, NO3）。"
+                         "ヒレをかじる魚種との混泳を避ける。",
+        "prognosis": "Good if caught early with water quality correction; fin tissue can regenerate. Poor if infection reaches body.",
+        "prognosis_ja": "早期で水質改善すれば予後良好。ヒレは再生能力がある。"
+                        "体幹まで感染が波及した場合は予後不良。",
+        "urgency": "moderate",
+        "recommended_tests": ["water_quality_test", "skin_scraping_microscopy"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "young", "senior"},
+    },
+    {
+        "name": "Viral Hemorrhagic Septicemia (VHS)",
+        "name_ja": "ウイルス性出血性敗血症（VHS）",
+        "symptoms": {"hemorrhaging", "lethargy", "appetite_loss", "abnormal_swimming",
+                      "pale_gills", "body_darkening", "eye_bulging", "sudden_death"},
+        "description": "Highly lethal rhabdovirus infection causing systemic hemorrhages, reportable disease in many countries.",
+        "description_ja": "VHSウイルス（ラブドウイルス科）による致死率の高い全身性出血性疾患。"
+                          "淡水魚・海水魚の80種以上に感染。ニジマス・コイ・ヒラメ等で重要。"
+                          "法定伝染病（OIE届出疾病）。冬季〜春季に多発。",
+        "pathophysiology": "VHSV enters via gills, replicates in endothelial cells causing widespread hemorrhages in skin, muscles, viscera, and brain.",
+        "pathophysiology_ja": "VHSVが鰓から侵入→血管内皮細胞で増殖→全身性の血管内皮障害→"
+                              "皮膚・筋肉・内臓・脳の広範な点状出血・斑状出血→"
+                              "貧血・循環不全→死亡。神経型では旋回遊泳・異常行動。"
+                              "致死率は感受性魚種で70〜100%に達する。",
+        "causes": "Viral hemorrhagic septicemia virus (VHSV, Rhabdoviridae). Transmitted via water, direct contact, contaminated equipment.",
+        "causes_ja": "VHSウイルス（ラブドウイルス科Novirhabdovirus属）。"
+                     "水平感染（水中・直接接触・汚染器具）。低水温（4〜14℃）で活発化。"
+                     "キャリア魚からのウイルス排泄。",
+        "treatment": "No treatment available. Depopulation and disinfection required for outbreak control.",
+        "treatment_ja": "特異的治療法なし。法定伝染病のため殺処分・消毒が原則。"
+                        "観賞魚では隔離＋水温上昇（15℃以上）で一部の個体は回復する場合あり。"
+                        "感染水槽の器具は次亜塩素酸等で徹底消毒。",
+        "prevention": "Quarantine new fish, biosecurity, avoid introduction of wild-caught fish from endemic areas.",
+        "prevention_ja": "新規魚の厳格な検疫（4〜6週間）。生体購入先の信頼性確認。"
+                         "野生魚の導入禁止。器具の消毒。低水温期の注意深い観察。",
+        "prognosis": "Very poor; high mortality in susceptible species. Survivors may become carriers.",
+        "prognosis_ja": "極めて不良。感受性魚種での致死率70〜100%。"
+                        "生存個体はキャリアとなりウイルスを排泄し続ける可能性。",
+        "urgency": "emergency",
+        "recommended_tests": ["pcr", "virus_isolation", "histopathology", "serology"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "young", "senior"},
+    },
+    {
+        "name": "Furunculosis (Aeromonas salmonicida)",
+        "name_ja": "せつ腫症（フルンクローシス）",
+        "symptoms": {"skin_ulcers", "hemorrhaging", "lethargy", "appetite_loss",
+                      "body_darkening", "fin_erosion", "sudden_death"},
+        "description": "Systemic bacterial infection by Aeromonas salmonicida, primarily affecting salmonids but also ornamental fish.",
+        "description_ja": "Aeromonas salmonicidaによる全身性細菌感染症。"
+                          "サケ科魚類（ニジマス・アマゴ等）に最も重要だが、金魚・コイにも発生。"
+                          "皮膚の癤（せつ＝おでき）状病変が特徴的。急性型では大量死。"
+                          "養殖場では大きな経済的損失を引き起こす。",
+        "pathophysiology": "A. salmonicida produces A-layer protein and extracellular proteases that evade host defenses and cause tissue necrosis, hemorrhagic septicemia.",
+        "pathophysiology_ja": "A. salmonicidaのA層タンパク（免疫回避）と細胞外プロテアーゼ→"
+                              "皮膚・筋肉の局所壊死（癤形成）→血行性播種→"
+                              "出血性敗血症→多臓器不全。急性型では癤形成なしに大量死。"
+                              "慢性型では皮膚潰瘍が主体。",
+        "causes": "Aeromonas salmonicida subsp. salmonicida. Stress, high water temperature, overcrowding, poor water quality.",
+        "causes_ja": "Aeromonas salmonicida。ストレス・高水温・過密飼育・水質悪化がトリガー。"
+                     "キャリア魚からの水平感染。汚染器具による機械的伝播。",
+        "treatment": "Antibiotics (oxytetracycline, florfenicol) via medicated feed; improve water quality.",
+        "treatment_ja": "抗菌薬経口投与（薬餌）：オキシテトラサイクリン（50〜75mg/kg/日、10日間）、"
+                        "フロルフェニコール（10mg/kg/日、10日間）。"
+                        "薬浴：オキソリン酸浴。水質改善。ストレス要因の除去。"
+                        "潰瘍の局所処理（ポビドンヨード塗布）。",
+        "prevention": "Vaccination (available for salmonids), quarantine, stress reduction, good water quality.",
+        "prevention_ja": "ワクチン接種（サケ科魚類用は利用可能）。新規魚の検疫。"
+                         "適切な飼育密度。水質管理。ストレス軽減。器具の消毒。",
+        "prognosis": "Guarded in acute outbreaks; better with early antibiotic treatment.",
+        "prognosis_ja": "急性爆発時は予後不良（致死率50%以上）。"
+                        "早期の抗菌薬投与で改善可能。慢性型は予後やや良好。",
+        "urgency": "high",
+        "recommended_tests": ["bacterial_culture", "skin_scraping_microscopy", "pcr", "histopathology"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "young", "senior"},
+    },
 ]
 
 

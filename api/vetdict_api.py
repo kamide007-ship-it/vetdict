@@ -859,6 +859,21 @@ def api_get_breeds(species):
     }
 
 
+@app.route('/api/species/<species>/husbandry', methods=['GET'])
+@ensure_json_response
+def api_species_husbandry(species: str):
+    """Return husbandry / care environment data for a species."""
+    try:
+        from api.species_husbandry import HUSBANDRY_DATA
+    except ImportError:
+        from species_husbandry import HUSBANDRY_DATA
+    species_key = (species or '').lower()
+    data = HUSBANDRY_DATA.get(species_key)
+    if not data:
+        return {'error': 'No husbandry data for this species'}, 404
+    return {"species": species_key, "husbandry": data}
+
+
 @app.route('/api/species/<species>/common-diseases', methods=['GET'])
 @ensure_json_response
 def api_common_diseases(species):

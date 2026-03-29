@@ -275,6 +275,26 @@ a:hover{text-decoration:underline}
 /* --- Disease DB --- */
 .disease-cat-header{padding:8px 14px;font-size:.82rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:1}
 [data-theme="dark"] .disease-cat-header{background:var(--gray-100);color:var(--gray-900);border-color:var(--gray-200)}
+.husbandry-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+[data-theme="dark"] .husbandry-title{color:var(--gray-900)}
+.husbandry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.husbandry-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:14px;transition:box-shadow .2s}
+.husbandry-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.husbandry-card-icon{font-size:1.4rem;margin-bottom:4px}
+.husbandry-card-label{font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.husbandry-card-text{font-size:.82rem;color:var(--gray-700);line-height:1.5}
+[data-theme="dark"] .husbandry-card{background:var(--gray-100);border-color:var(--gray-200)}
+[data-theme="dark"] .husbandry-card-label{color:var(--gray-900)}
+[data-theme="dark"] .husbandry-card-text{color:var(--gray-800)}
+.husbandry-subtypes{margin-top:16px}
+.husbandry-subtype{margin-bottom:10px;border:1px solid var(--gray-200);border-radius:8px;overflow:hidden}
+.husbandry-subtype-title{padding:10px 14px;font-size:.88rem;font-weight:700;color:var(--navy);background:var(--gray-50);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px}
+.husbandry-subtype-title::before{content:"\25B6";font-size:.65rem;transition:transform .2s}
+.husbandry-subtype[open]>.husbandry-subtype-title::before{transform:rotate(90deg)}
+.husbandry-subtype .husbandry-grid{padding:12px}
+[data-theme="dark"] .husbandry-subtype{border-color:var(--gray-200)}
+[data-theme="dark"] .husbandry-subtype-title{background:var(--gray-100);color:var(--gray-900)}
+@media(max-width:600px){.husbandry-grid{grid-template-columns:1fr}}
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
 .disease-db-item:hover{background:var(--green-light)}
 .disease-db-item .d-name{font-weight:600;font-size:.86rem}

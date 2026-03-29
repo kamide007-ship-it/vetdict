@@ -3955,7 +3955,75 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
-
+    # =========================================================================
+    # ADDITIONAL DISEASES — ENDOCRINE & NEOPLASTIC
+    # =========================================================================
+    {
+        "name": "Adrenal Gland Tumor",
+        "name_ja": "副腎腫瘍",
+        "symptoms": {"hair_loss", "weight_loss", "lethargy", "excessive_thirst",
+                      "excessive_urination", "abdominal_distension", "skin_changes"},
+        "description": "Adrenal cortical tumors (adenoma or carcinoma) in hamsters, causing Cushing's-like syndrome.",
+        "description_ja": "副腎皮質腺腫または腺癌。高齢ハムスター（特にゴールデンハムスター）に多い。"
+                          "クッシング症候群様の症状：脱毛、多飲多尿、腹部膨満、皮膚菲薄化。",
+        "pathophysiology": "Adrenal cortical neoplasia leads to excessive cortisol and/or sex hormone production.",
+        "pathophysiology_ja": "副腎皮質細胞の腫瘍性増殖→コルチゾール・性ホルモンの過剰分泌→"
+                              "多飲多尿、対称性脱毛、皮膚菲薄化、筋萎縮、腹部膨満。"
+                              "副腎癌の場合は局所浸潤・転移の可能性あり。",
+        "causes": "Unknown; age-related neoplastic change. More common in older hamsters.",
+        "causes_ja": "原因不明。加齢に伴う腫瘍性変化。1.5〜2歳以上で発生率上昇。"
+                     "ゴールデンハムスターに多い。",
+        "treatment": "Surgical adrenalectomy if possible; otherwise supportive care.",
+        "treatment_ja": "外科的副腎摘出術が理想だが、ハムスターのサイズと麻酔リスクを考慮。"
+                        "内科的管理：症状緩和（皮膚ケア、栄養支持）。"
+                        "手術不適応例は緩和ケア。",
+        "prevention": "No known prevention.",
+        "prevention_ja": "予防法なし。高齢ハムスターの脱毛・多飲多尿は早期受診を推奨。",
+        "prognosis": "Guarded; depends on tumor type and surgical feasibility.",
+        "prognosis_ja": "慎重。腺腫は摘出で良好。腺癌は転移リスクあり。"
+                        "手術不適応例は進行性。ハムスターの短い寿命を考慮した管理が必要。",
+        "urgency": "moderate",
+        "recommended_tests": ["abdominal_ultrasound", "complete_blood_count", "serum_chemistry", "cortisol_level"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"senior"},
+    },
+    {
+        "name": "Proliferative Ileitis (Wet Tail)",
+        "name_ja": "増殖性回腸炎（ウェットテイル）",
+        "symptoms": {"wet_tail", "diarrhea", "lethargy", "appetite_loss",
+                      "dehydration", "hunched_posture", "weight_loss"},
+        "description": "Severe, often fatal diarrheal disease in young hamsters caused by Lawsonia intracellularis.",
+        "description_ja": "Lawsonia intracellularis（偏性細胞内寄生菌）による"
+                          "重篤な下痢性疾患。離乳期〜若齢ハムスター（3〜8週齢）に好発。"
+                          "ストレス（輸送・環境変化・過密）が発症のトリガー。"
+                          "致死率が高い（50%以上）。「ウェットテイル」の名の由来となった疾患。",
+        "pathophysiology": "Lawsonia intracellularis infects intestinal epithelial cells of the ileum, causing proliferative hyperplasia and severe secretory diarrhea.",
+        "pathophysiology_ja": "Lawsonia intracellularisが回腸上皮細胞に感染→"
+                              "腸上皮の増殖性過形成→吸収障害＋分泌性下痢→重度脱水→"
+                              "電解質異常→循環不全。腸重積・直腸脱の合併もあり。"
+                              "重症例では敗血症→多臓器不全→死亡。",
+        "causes": "Lawsonia intracellularis. Stress (weaning, transport, overcrowding) is the primary trigger.",
+        "causes_ja": "Lawsonia intracellularis。ストレス（離乳、輸送、環境変化、過密飼育）、"
+                     "不適切な食事変更、免疫未熟な若齢個体でリスク上昇。",
+        "treatment": "Aggressive fluid therapy, antibiotics, supportive care. Emergency treatment.",
+        "treatment_ja": "緊急治療が必要。"
+                        "(1)積極的輸液療法（皮下/腹腔内、温めた乳酸リンゲル液）、"
+                        "(2)抗菌薬（エンロフロキサシン5〜10mg/kg BID、TMS 30mg/kg BID）、"
+                        "(3)保温（28〜30℃）、(4)強制給餌（脱水改善後）、"
+                        "(5)止痢薬は禁忌。治療開始が遅れると致死率急上昇。",
+        "prevention": "Minimize stress during weaning and transport; proper hygiene.",
+        "prevention_ja": "離乳・輸送時のストレス最小化。適切な飼育密度。"
+                         "清潔な飼育環境。急激な食事変更の回避。"
+                         "購入後1〜2週間は安静な環境で管理。",
+        "prognosis": "Guarded to poor; 50%+ mortality even with treatment. Early intervention critical.",
+        "prognosis_ja": "慎重〜不良。治療しても致死率50%以上。"
+                        "早期治療（発症24時間以内）で予後改善。"
+                        "脱水が重度の場合・食欲完全廃絶の場合は予後不良。",
+        "urgency": "emergency",
+        "recommended_tests": ["fecal_exam", "complete_blood_count", "serum_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young"},
+    },
 ]
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {

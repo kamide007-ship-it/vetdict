@@ -3001,6 +3001,138 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
+    # =========================================================================
+    # ADDITIONAL DISEASES — UNIQUE HEDGEHOG CONDITIONS
+    # =========================================================================
+    {
+        "name": "Balloon Syndrome (Subcutaneous Emphysema)",
+        "name_ja": "バルーン症候群（皮下気腫）",
+        "symptoms": {"swelling", "body_swelling", "lethargy", "labored_breathing",
+                      "appetite_loss"},
+        "description": "Dramatic subcutaneous accumulation of air causing the hedgehog to inflate like a balloon.",
+        "description_ja": "皮下に空気が大量に貯留し、ハリネズミが風船のように膨らむ特異的疾患。"
+                          "肺損傷・気管損傷・皮下膿瘍のガス産生菌感染が原因。"
+                          "触診で捻髪音を認める。外見は劇的だが適切な処置で回復可能。",
+        "pathophysiology": "Air leaks from damaged lung/airway into subcutaneous space, or gas-producing bacteria in subcutaneous abscess generate gas that dissects tissue planes.",
+        "pathophysiology_ja": "肺実質・気道の損傷→空気漏出→縦隔気腫→皮下気腫として全身に拡散。"
+                              "または皮下膿瘍のガス産生菌（Clostridium等）による皮下ガス貯留。"
+                              "ハリネズミは皮膚が緩く皮下腔が広いため空気が大量に貯留しやすい。",
+        "causes": "Lung/airway trauma, respiratory infection with emphysema, gas-producing bacterial abscess.",
+        "causes_ja": "肺・気道の外傷（咬傷・鋭的外傷）、呼吸器感染に伴う気腫性変化、"
+                     "ガス産生菌による皮下膿瘍。原因不明の特発性症例もある。",
+        "treatment": "Needle decompression of subcutaneous air; treat underlying cause.",
+        "treatment_ja": "皮下ガスの針穿刺脱気（18G針で複数箇所から吸引）。"
+                        "基礎疾患の治療：呼吸器感染には抗菌薬（エンロフロキサシン5mg/kg BID）、"
+                        "膿瘍にはデブリードマン＋抗菌薬。"
+                        "胸部X線で気胸の有無を確認。再貯留する場合は原因の再検索。",
+        "prevention": "Prevent trauma; treat respiratory infections early.",
+        "prevention_ja": "外傷の予防（安全な飼育環境）。呼吸器感染の早期治療。"
+                         "皮下膿瘍の早期発見・治療。",
+        "prognosis": "Good if underlying cause is addressed; may recur if source of air leak persists.",
+        "prognosis_ja": "基礎疾患が治療可能であれば予後良好。脱気後に急速に改善する。"
+                        "原因が持続する場合は再貯留→原因の精査が必要。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "thoracic_radiographs", "bacterial_culture"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
+    {
+        "name": "Oral Squamous Cell Carcinoma",
+        "name_ja": "口腔扁平上皮癌",
+        "symptoms": {"appetite_loss", "weight_loss", "drooling", "facial_swelling",
+                      "oral_mass", "difficulty_eating", "bloody_discharge"},
+        "description": "Aggressive malignant oral tumor, one of the most common neoplasms in hedgehogs.",
+        "description_ja": "ハリネズミで最も多い悪性腫瘍の一つ。口腔内（歯肉・舌・硬口蓋）に好発。"
+                          "局所浸潤性が高く、顎骨破壊を伴う。3歳以上で発生率上昇。"
+                          "初期症状は食欲低下・流涎。進行すると顔面変形。",
+        "pathophysiology": "Malignant proliferation of squamous epithelial cells with local bone invasion and potential regional lymph node metastasis.",
+        "pathophysiology_ja": "口腔粘膜扁平上皮の悪性増殖→局所浸潤→顎骨骨溶解→顔面変形。"
+                              "所属リンパ節転移あり。遠隔転移は比較的稀だが肺転移の報告あり。"
+                              "ハリネズミは腫瘍全般の発生率が高い動物種。",
+        "causes": "Unknown; hedgehogs have a high overall neoplasm incidence. No specific carcinogens identified.",
+        "causes_ja": "原因不明。ハリネズミは全腫瘍の発生率が高い（剖検の30〜50%に腫瘍あり）。"
+                     "特定の発癌物質は同定されていない。3歳以上で急増。",
+        "treatment": "Surgical excision if possible; palliative care for advanced cases.",
+        "treatment_ja": "外科的切除（早期の小病変）：顎骨部分切除を含む広範切除。"
+                        "進行例は完全切除困難→緩和ケア（疼痛管理：メロキシカム0.2mg/kg SID、"
+                        "栄養支持：流動食の強制給餌）。"
+                        "放射線療法・化学療法の有効性はハリネズミでは未確立。"
+                        "QOLが著しく低下した場合は安楽死を検討。",
+        "prevention": "No known prevention; regular oral examinations recommended.",
+        "prevention_ja": "予防法なし。定期的な口腔チェック（年2回以上）。"
+                         "食欲低下・流涎がある場合は早期受診。3歳以上は腫瘍の好発年齢。",
+        "prognosis": "Guarded to poor; locally aggressive with high recurrence after incomplete excision.",
+        "prognosis_ja": "慎重〜不良。局所浸潤性が高く、不完全切除後の再発率が高い。"
+                        "早期の完全切除で延命可能だが根治は困難。"
+                        "緩和ケアでのQOL維持が現実的な目標。",
+        "urgency": "high",
+        "recommended_tests": ["oral_exam", "fine_needle_aspirate", "radiographs", "histopathology", "ct_scan"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
+    {
+        "name": "Metabolic Bone Disease (MBD)",
+        "name_ja": "代謝性骨疾患（MBD）",
+        "symptoms": {"hind_limb_weakness", "limb_swelling", "lethargy", "appetite_loss",
+                      "weight_loss", "limping", "ataxia"},
+        "description": "Nutritional secondary hyperparathyroidism causing bone demineralization, common in hedgehogs fed calcium-deficient or imbalanced diets.",
+        "description_ja": "カルシウム不足やCa:P比の不均衡な食事により二次性上皮小体機能亢進症→骨脱灰が起こる。"
+                          "ハリネズミではミルワームの過剰給餌（高リン・低Ca）が主因。"
+                          "病的骨折、後肢不全麻痺で来院することが多い。",
+        "pathophysiology": "Inadequate dietary calcium or improper Ca:P ratio → chronic hypocalcemia → PTH hypersecretion → osteoclastic bone resorption → weakened bones → pathological fractures.",
+        "pathophysiology_ja": "食事中のCa不足またはCa:P比不良→慢性低Ca血症→PTH過剰分泌→"
+                              "破骨細胞性骨吸収→骨密度低下→病的骨折。"
+                              "ビタミンD3不足も関与（室内飼育でUVB照射なし）。",
+        "causes": "Calcium-deficient diet, excessive mealworms/insects (high phosphorus), lack of calcium supplementation, vitamin D3 deficiency.",
+        "causes_ja": "Ca不足の食事、ミルワーム等昆虫の過剰給餌（高リン）、"
+                     "カルシウムサプリメント不使用、ビタミンD3不足。",
+        "treatment": "Calcium gluconate (50–100 mg/kg PO or SC), vitamin D3 supplementation, diet correction to proper Ca:P ratio (1.5–2:1). Fracture management with splinting. Analgesics: meloxicam 0.2 mg/kg SID.",
+        "treatment_ja": "グルコン酸カルシウム（50〜100mg/kg PO or SC）、ビタミンD3補給、"
+                        "食事矯正（Ca:P比1.5〜2:1に）。骨折は副木固定。"
+                        "鎮痛：メロキシカム0.2mg/kg SID。"
+                        "食事改善が最重要（良質な猫用フード＋Ca添加昆虫）。",
+        "prevention": "Balanced diet with proper Ca:P ratio. Dust insects with calcium powder before feeding. Avoid exclusive mealworm diets.",
+        "prevention_ja": "Ca:P比が適正な食事。昆虫にはカルシウムパウダーをダスティングしてから給餌。"
+                         "ミルワームのみの食事は禁忌。",
+        "prognosis": "Good if caught early and diet corrected; guarded with pathological fractures or severe demineralization.",
+        "prognosis_ja": "早期発見・食事矯正で予後良好。病的骨折や重度骨脱灰では慎重。"
+                        "治療後も骨密度回復に数ヶ月要する。",
+        "urgency": "high",
+        "recommended_tests": ["radiographs", "calcium_levels", "phosphorus_levels", "vitamin_d_levels"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"juvenile", "young_adult", "adult"},
+    },
+    {
+        "name": "Gastrointestinal Foreign Body",
+        "name_ja": "消化管異物",
+        "symptoms": {"appetite_loss", "vomiting", "lethargy", "abdominal_pain",
+                      "weight_loss", "diarrhea", "dehydration"},
+        "description": "Ingestion of non-food items (bedding fibers, rubber, fabric) causing partial or complete GI obstruction. Hedgehogs are curious foragers prone to ingesting foreign material.",
+        "description_ja": "床材の繊維、ゴム、布などの非食品を摂取し消化管閉塞を起こす。"
+                          "ハリネズミは好奇心旺盛で床を探索しながら異物を摂取しやすい。"
+                          "完全閉塞では緊急手術が必要。",
+        "pathophysiology": "Foreign material lodges in stomach or intestine → mechanical obstruction → proximal distension → fluid/electrolyte loss → dehydration → potential bowel necrosis if blood supply compromised.",
+        "pathophysiology_ja": "異物が胃または腸に停滞→機械的閉塞→近位腸管拡張→"
+                              "体液・電解質喪失→脱水。血流障害で腸管壊死の危険。",
+        "causes": "Ingestion of bedding material (especially loose fabric, carpet fibers), rubber toys, foam, or other small objects during foraging behavior.",
+        "causes_ja": "床材（布製ライナーのほつれ、カーペット繊維）、ゴム製おもちゃ、"
+                     "スポンジ等の小物を探索行動中に摂取。",
+        "treatment": "Stabilize (IV fluids, warmth). Radiographs/ultrasound for diagnosis. Surgical enterotomy or gastrotomy for removal. Post-op: fluids, antibiotics (enrofloxacin 5 mg/kg BID), analgesics (meloxicam 0.2 mg/kg SID), assisted feeding.",
+        "treatment_ja": "安定化（輸液、保温）。X線/超音波で診断。"
+                        "外科的腸切開または胃切開で異物除去。"
+                        "術後：輸液、抗生剤（エンロフロキサシン5mg/kg BID）、"
+                        "鎮痛（メロキシカム0.2mg/kg SID）、補助給餌。",
+        "prevention": "Use safe bedding (fleece liners without loose threads). Remove small ingestible objects. Supervise out-of-cage time. Avoid loose substrate bedding for known chewers.",
+        "prevention_ja": "安全な床材を使用（ほつれのないフリースライナー）。"
+                         "小さな飲み込めるものを除去。ケージ外では監視。"
+                         "異物を噛む癖のある個体にはバラバラになる床材を避ける。",
+        "prognosis": "Good with early surgical intervention; poor if bowel necrosis or peritonitis develops.",
+        "prognosis_ja": "早期手術で予後良好。腸管壊死や腹膜炎に進展すると予後不良。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiographs", "ultrasound", "cbc", "blood_chemistry"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"juvenile", "young_adult", "adult"},
+    },
 ]
 
 

@@ -3002,7 +3002,79 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"puppy", "young", "adult", "senior"},
     },
-
+    # =========================================================================
+    # ADDITIONAL DISEASES — INFECTIOUS, FUNGAL
+    # =========================================================================
+    {
+        "name": "Infectious Stomatitis (Mouth Rot)",
+        "name_ja": "感染性口内炎（マウスロット）",
+        "symptoms": {"mouth_lesions", "appetite_loss", "oral_discharge",
+                      "swollen_jaw", "lethargy", "weight_loss"},
+        "description": "Bacterial infection of the oral cavity, one of the most common diseases in captive lizards.",
+        "description_ja": "口腔内の細菌感染症。飼育下トカゲで最も多い疾患の一つ。"
+                          "Pseudomonas, Aeromonas, Klebsiella等のグラム陰性菌が主要な起因菌。"
+                          "初期は粘膜の発赤・点状出血、進行するとチーズ状壊死物質の蓄積・骨溶解。",
+        "pathophysiology": "Opportunistic bacteria invade oral mucosa compromised by stress, trauma, or immunosuppression, causing necrotizing inflammation.",
+        "pathophysiology_ja": "ストレス・外傷・免疫低下→口腔粘膜のバリア破綻→"
+                              "日和見菌（Pseudomonas, Aeromonas等）の侵入→壊死性炎症→"
+                              "チーズ状壊死物質（カゼイン様）の形成→骨浸潤（顎骨骨髄炎）→"
+                              "血行性播種で敗血症・肺炎。",
+        "causes": "Stress, immunosuppression, inappropriate husbandry (low temperature, low humidity), oral trauma, vitamin C/A deficiency.",
+        "causes_ja": "不適切な飼育環境（低温・低湿度）、ストレス、口腔内外傷（吻端擦過等）、"
+                     "ビタミンA欠乏、免疫低下。基礎疾患の存在が多い。",
+        "treatment": "Debridement, topical and systemic antibiotics based on culture and sensitivity.",
+        "treatment_ja": "壊死組織のデブリードマン（毎日〜隔日）＋ポビドンヨード/クロルヘキシジン洗浄。"
+                        "局所抗菌薬（シルバースルファジアジンクリーム）。"
+                        "全身性抗菌薬：培養感受性試験に基づき選択（セフタジジム20mg/kg q72h IM、"
+                        "エンロフロキサシン5〜10mg/kg SID）。"
+                        "飼育環境の適正化（温度・湿度）。ビタミンA補給。",
+        "prevention": "Proper husbandry (correct temperature/humidity), minimize stress, balanced nutrition.",
+        "prevention_ja": "適切な温度・湿度管理。ストレス最小化。バランスの取れた食事。"
+                         "口腔外傷の防止（飼育ケージの安全確認）。定期的な口腔チェック。",
+        "prognosis": "Good if mild and caught early; guarded with bone involvement.",
+        "prognosis_ja": "軽度は早期治療で予後良好。骨浸潤がある場合は予後慎重〜不良。"
+                        "全身性敗血症に進行した場合は予後不良。基礎疾患の改善が鍵。",
+        "urgency": "moderate",
+        "recommended_tests": ["oral_exam", "bacterial_culture_sensitivity", "radiographs", "complete_blood_count"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
+    {
+        "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+        "name_ja": "黄色真菌症（CANV感染症）",
+        "symptoms": {"skin_discoloration", "skin_lesions", "shedding_problems",
+                      "weight_loss", "lethargy", "appetite_loss"},
+        "description": "Aggressive dermatomycosis caused by CANV complex, particularly devastating in bearded dragons.",
+        "description_ja": "Nannizziopsis vriesii（CANV）複合体による侵襲性真菌性皮膚疾患。"
+                          "フトアゴヒゲトカゲに特に多い。黄色〜褐色の痂皮形成、皮膚壊死が特徴。"
+                          "治療困難で致死率が高い。近年飼育下爬虫類で増加傾向。",
+        "pathophysiology": "CANV invades deep dermis and subcutaneous tissue, causing granulomatous inflammation and tissue necrosis. Can disseminate to internal organs.",
+        "pathophysiology_ja": "CANV真菌が真皮深層・皮下組織に侵入→肉芽腫性炎症→"
+                              "組織壊死→黄色〜褐色痂皮形成。深部浸潤→筋肉・骨への波及。"
+                              "全身播種で内臓（肝臓・肺等）にも肉芽腫形成→致死的。",
+        "causes": "Nannizziopsis vriesii complex. Predisposing factors: immunosuppression, poor husbandry, stress, contact with infected animals.",
+        "causes_ja": "Nannizziopsis vriesii（CANV）複合体。免疫低下、不適切な飼育環境、"
+                     "ストレス、感染個体との接触。真菌胞子の環境中での長期残存。",
+        "treatment": "Aggressive antifungal therapy; often poor response to treatment.",
+        "treatment_ja": "長期の抗真菌薬投与が必要だが反応は限定的。"
+                        "ボリコナゾール（10mg/kg SID PO）が最も推奨される。"
+                        "テルビナフィン（10〜15mg/kg SID）を併用する場合もある。"
+                        "局所：壊死組織のデブリードマン＋抗真菌クリーム。"
+                        "最低3〜6ヶ月の治療期間。感染個体の厳格な隔離。"
+                        "飼育器具の徹底消毒（次亜塩素酸等）。",
+        "prevention": "Quarantine new animals, proper hygiene, stress reduction, optimal husbandry.",
+        "prevention_ja": "新規導入個体の検疫（最低90日）。飼育環境の衛生管理。"
+                         "適切な温度・湿度管理。ストレス最小化。"
+                         "感染個体の使用器具は他個体と共有しない。",
+        "prognosis": "Guarded to poor; high mortality even with aggressive treatment.",
+        "prognosis_ja": "慎重〜不良。治療しても致死率が高い（50%以上）。"
+                        "早期の局所病変に限局している場合は外科的切除＋抗真菌薬で改善例あり。"
+                        "全身播種例は予後不良。",
+        "urgency": "high",
+        "recommended_tests": ["skin_biopsy", "fungal_culture", "histopathology", "pcr"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
 ]
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {

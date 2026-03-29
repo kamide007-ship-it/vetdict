@@ -2567,6 +2567,73 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
+    # =========================================================================
+    # ADDITIONAL DISEASES — DERMATOLOGICAL, TRAUMATIC
+    # =========================================================================
+    {
+        "name": "Bumblefoot (Pododermatitis)",
+        "name_ja": "趾瘤症（バンブルフット）",
+        "symptoms": {"limping", "swollen_feet", "foot_lesions", "lethargy",
+                      "appetite_loss"},
+        "description": "Pressure sore infection of the plantar surface of the feet, common in caged rodents.",
+        "description_ja": "足底面の圧迫性潰瘍・感染症。硬い床材、肥満、不活動がリスク因子。"
+                          "初期は発赤・腫脹、進行すると深部感染・骨髄炎。"
+                          "ケージ飼育のデグーで比較的多い。",
+        "pathophysiology": "Chronic pressure on plantar surface causes ischemic necrosis of skin, secondary bacterial infection (Staphylococcus spp.), and potential deep tissue involvement.",
+        "pathophysiology_ja": "硬い床面での持続的圧迫→足底皮膚の虚血性壊死→"
+                              "Staphylococcus属等の二次細菌感染→蜂窩織炎→膿瘍形成→"
+                              "重症例では腱・骨への波及（骨髄炎）。肥満個体でリスク上昇。",
+        "causes": "Wire-bottom cages, hard surfaces, obesity, inactivity, poor hygiene.",
+        "causes_ja": "金網底ケージ、硬い床材、肥満、運動不足、不衛生な飼育環境。"
+                     "爪の過長も寄与。",
+        "treatment": "Wound care, antibiotics, padding, address husbandry issues.",
+        "treatment_ja": "軽度：局所洗浄＋抗菌軟膏（ムピロシン等）＋包帯＋床材改善。"
+                        "中等度：全身性抗菌薬（エンロフロキサシン5mg/kg BID）＋NSAIDs。"
+                        "重度（膿瘍・骨髄炎）：外科的デブリードマン＋長期抗菌薬。"
+                        "床材を柔らかいもの（フリース等）に変更が必須。",
+        "prevention": "Soft bedding, avoid wire-bottom cages, maintain healthy weight, exercise.",
+        "prevention_ja": "柔らかい床材の使用（金網底禁止）。適切な体重管理。"
+                         "十分な運動スペース。爪の定期的トリミング。衛生管理。",
+        "prognosis": "Good if mild; guarded with deep infection or osteomyelitis.",
+        "prognosis_ja": "軽度は床材改善＋治療で予後良好。"
+                        "骨髄炎に進行した場合は予後慎重（断趾が必要な場合あり）。",
+        "urgency": "moderate",
+        "recommended_tests": ["physical_exam", "bacterial_culture_sensitivity", "radiographs"],
+        "onset_pattern": {"subacute", "chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
+    {
+        "name": "Tail Degloving Injury",
+        "name_ja": "尾部皮膚剥脱損傷（テイルスリップ）",
+        "symptoms": {"tail_injury", "bleeding", "pain", "tail_abnormality"},
+        "description": "Traumatic loss of tail skin when grabbed improperly, a common and unique injury in degus.",
+        "description_ja": "デグー特有の防御機構で、尾を掴まれると皮膚が容易に剥離する。"
+                          "不適切な保定や取り扱い事故で発生。露出した尾骨は壊死→"
+                          "断尾が必要。デグー飼育で最も注意すべき外傷。",
+        "pathophysiology": "Degu tail skin has a unique structure allowing degloving as a predator-escape mechanism. Exposed tail tissue desiccates and undergoes avascular necrosis.",
+        "pathophysiology_ja": "デグーの尾部皮膚は捕食者からの逃避機構として容易に剥離する構造。"
+                              "皮膚剥離→露出した皮下組織・骨の乾燥→無血管性壊死→"
+                              "二次感染のリスク。自然治癒はせず、壊死部位の断尾が必要。",
+        "causes": "Improper handling (grabbing by tail), cage-related accidents, fighting.",
+        "causes_ja": "不適切な保定（尾を掴む）、ケージ回し車での事故、"
+                     "同居個体との喧嘩、ケージの隙間に尾が挟まる。",
+        "treatment": "Tail amputation proximal to the injury site under general anesthesia.",
+        "treatment_ja": "損傷部位より近位での断尾術（全身麻酔下）が標準治療。"
+                        "術後：抗菌薬（エンロフロキサシン5mg/kg BID、5〜7日間）、"
+                        "疼痛管理（メロキシカム0.2mg/kg SID）、エリザベスカラー。"
+                        "皮膚のみの部分剥離：清浄＋抗菌軟膏で保存的に管理可能な場合あり。",
+        "prevention": "Never grab a degu by the tail; proper handling technique education.",
+        "prevention_ja": "絶対に尾を掴まない。両手で体を包み込む保定法の習得。"
+                         "ケージの回し車は尾が挟まらないソリッドタイプを使用。"
+                         "ケージの隙間を確認・修正。",
+        "prognosis": "Good after amputation; degus adapt well to tail loss.",
+        "prognosis_ja": "断尾後の予後は良好。デグーは尾の喪失に良く適応する。"
+                        "バランス能力への影響は軽微。感染予防が重要。",
+        "urgency": "high",
+        "recommended_tests": ["physical_exam", "radiographs"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult", "puppy", "senior", "young"},
+    },
 ]
 
 

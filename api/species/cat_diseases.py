@@ -4650,6 +4650,70 @@ DISEASES: List[Dict[str, Any]] = [
         "age_predisposition": {"adult", "puppy", "senior", "young"},
     },
     # =========================================================================
+    # COMMON GENERAL PRACTICE DISEASES
+    # =========================================================================
+    {
+        "name": "Feline Obesity",
+        "name_ja": "猫の肥満",
+        "symptoms": {"weight_gain", "lethargy", "exercise_intolerance", "labored_breathing"},
+        "description": "Excessive body fat accumulation, the most common nutritional disorder in cats.",
+        "description_ja": "猫で最も多い栄養障害。室内飼育猫の30〜40%が肥満または過体重。"
+                          "BCS 7/9以上を肥満と判定。糖尿病・肝リピドーシス・関節疾患・"
+                          "下部尿路疾患のリスク因子。肥満猫が食欲廃絶すると肝リピドーシスを発症するため注意。",
+        "pathophysiology_ja": "慢性的なエネルギー過剰→白色脂肪組織の蓄積→"
+                              "アディポカイン分泌異常→インスリン抵抗性（糖尿病リスク4倍）→"
+                              "慢性低度炎症。猫は犬と異なりタンパク質代謝依存が高く、"
+                              "絶食時に肝臓への脂肪動員が急速→肝リピドーシスのリスク。",
+        "causes_ja": "過剰なカロリー摂取、運動不足（完全室内飼育）、避妊/去勢後の代謝低下、"
+                     "自由給餌（ad lib feeding）、高炭水化物食。"
+                     "品種素因：雑種猫、ブリティッシュショートヘア。",
+        "treatment_ja": "安全な減量速度は週0.5〜2%体重（急速減量は肝リピドーシスのリスク）。"
+                        "減量用療法食（Hill's Metabolic, Royal Canin Satiety等）。"
+                        "現維持カロリーの80%からスタート→徐々に調整。"
+                        "環境エンリッチメント（フードパズル・おもちゃ）で活動量増加。"
+                        "月1回の体重・BCS測定。絶食は絶対に避ける。",
+        "prognosis_ja": "適切な管理で予後良好。減量によりインスリン感受性が改善し"
+                        "糖尿病が寛解する場合もある。急速減量は肝リピドーシスのリスク。",
+        "prevention_ja": "給餌量の計量管理。自由給餌を避ける。食事時間制限。"
+                         "避妊/去勢後のカロリー10〜20%削減。環境エンリッチメント。"
+                         "定期的なBCS評価。",
+        "urgency": "normal",
+        "recommended_tests": ["physical_exam", "serum_chemistry", "thyroid_panel", "urinalysis"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
+    {
+        "name": "Feline Idiopathic Cystitis (FIC)",
+        "name_ja": "猫特発性膀胱炎（FIC）",
+        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination",
+                      "inappropriate_urination", "vocalization_changes", "excessive_grooming"},
+        "description": "Stress-related sterile inflammation of the bladder, the most common cause of FLUTD in cats under 10 years.",
+        "description_ja": "ストレス関連の無菌性膀胱炎。10歳未満の猫のFLUTDの55〜65%を占める最多原因。"
+                          "血尿・頻尿・不適切排泄が特徴。尿培養は陰性。"
+                          "再発率が高く、ストレス管理が治療の中心。",
+        "pathophysiology_ja": "慢性ストレス→視床下部-下垂体-副腎系の異常活性化→"
+                              "膀胱粘膜のGAG層（グリコサミノグリカン層）菲薄化→"
+                              "尿中刺激物質が膀胱壁を直接刺激→神経原性炎症→"
+                              "疼痛・頻尿・血尿。ヒトの間質性膀胱炎に類似。",
+        "causes_ja": "ストレス（環境変化・多頭飼育・トイレの問題・引越し・来客）、"
+                     "室内飼育、肥満、飲水量不足、ドライフード主体の食事。"
+                     "性格的に神経質な猫に多い。",
+        "treatment_ja": "環境修正（MEMO: Multimodal Environmental MOdification）が最重要。"
+                        "(1)ストレス源の特定と除去、(2)トイレ環境改善（猫数+1個、静かな場所）、"
+                        "(3)ウェットフード主体の食事（飲水量増加）、"
+                        "(4)フェリウェイ（合成猫フェロモン）拡散器、"
+                        "(5)環境エンリッチメント、(6)急性期の疼痛管理（ブプレノルフィン）。"
+                        "雄猫の尿道閉塞時は緊急カテーテル処置。",
+        "prognosis_ja": "自然軽快することが多い（急性エピソードは数日〜1週間で改善）。"
+                        "再発率が高い（1年以内に50%）。環境修正で再発率を大幅低減。",
+        "prevention_ja": "環境エンリッチメント。ストレス軽減。適切なトイレ管理。"
+                         "ウェットフード。十分な飲水量。フェリウェイ。",
+        "urgency": "moderate",
+        "recommended_tests": ["urinalysis", "urine_culture", "abdominal_ultrasound"],
+        "onset_pattern": {"acute", "subacute"},
+        "age_predisposition": {"adult", "young"},
+    },
+    # =========================================================================
     # MISCELLANEOUS / OTHER DISEASES
     # =========================================================================
     {

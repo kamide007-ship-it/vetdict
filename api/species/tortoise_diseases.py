@@ -3422,7 +3422,82 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"puppy", "young", "adult", "senior"},
     },
-
+    # =========================================================================
+    # ADDITIONAL DISEASES — METABOLIC, REPRODUCTIVE
+    # =========================================================================
+    {
+        "name": "Shell Pyramiding",
+        "name_ja": "甲羅のピラミッド化（甲板隆起）",
+        "symptoms": {"shell_deformity", "abnormal_shell_growth"},
+        "description": "Abnormal vertical growth of scutes causing a pyramidal appearance, common in captive tortoises.",
+        "description_ja": "甲板が垂直方向に異常隆起し、ピラミッド状の外観を呈する代謝性疾患。"
+                          "飼育下リクガメで極めて多い。ケヅメリクガメ、ヒョウモンリクガメに特に多い。"
+                          "低湿度・過剰タンパク・ビタミンD過剰が主因。不可逆的な変形。",
+        "pathophysiology": "Improper keratinization and bone growth at scute margins due to chronic metabolic imbalance, low humidity, and dietary excess.",
+        "pathophysiology_ja": "低湿度→甲板辺縁の角質化異常＋骨成長異常→甲板の垂直方向への隆起。"
+                              "過剰タンパク食→成長速度の不均衡→甲板変形。"
+                              "一度形成されたピラミッド化は不可逆的。重度では内臓圧迫・"
+                              "肺機能障害・産卵障害の原因にもなる。",
+        "causes": "Low humidity, excessive protein diet, rapid growth, inadequate UVB, vitamin D excess, calcium-phosphorus imbalance.",
+        "causes_ja": "低湿度（最大の原因）、過剰タンパク食、急速な成長、"
+                     "不十分なUVB照射、ビタミンD過剰補充、Ca:P比の不均衡。"
+                     "屋内飼育で湿度管理が不十分な場合に多発。",
+        "treatment": "Cannot reverse existing deformity; correct husbandry to prevent progression.",
+        "treatment_ja": "既存の変形は不可逆的→進行予防が治療の主体。"
+                        "(1)湿度を60〜80%に維持（加湿器・スプレー・湿ったシェルター）、"
+                        "(2)食事の適正化（高繊維・低タンパク食）、(3)適切なUVB照射、"
+                        "(4)カルシウム:リン比の是正。重度の甲羅変形で内臓圧迫がある場合は対症療法。",
+        "prevention": "Proper humidity (60-80%), high-fiber/low-protein diet, adequate UVB, balanced calcium supplementation.",
+        "prevention_ja": "高湿度環境（60〜80%）の維持が最も重要。"
+                         "高繊維・低タンパク食（牧草・葉野菜中心）。果実・ドッグフード等の禁止。"
+                         "適切なUVB照射。カルシウム適正補給。屋外飼育が理想的。",
+        "prognosis": "Irreversible deformity but progression can be halted with proper husbandry.",
+        "prognosis_ja": "既存変形は不可逆的だが、飼育環境の改善で進行を停止できる。"
+                        "軽度のピラミッド化はQOLに影響少ない。"
+                        "重度では呼吸障害・産卵障害のリスク。",
+        "urgency": "normal",
+        "recommended_tests": ["physical_exam", "radiographs", "serum_calcium_phosphorus"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"puppy", "young", "adult"},
+    },
+    {
+        "name": "Egg Binding (Dystocia)",
+        "name_ja": "卵塞（卵詰まり）",
+        "symptoms": {"straining", "lethargy", "appetite_loss", "hind_leg_weakness",
+                      "restlessness", "digging_behavior"},
+        "description": "Inability to pass eggs, a life-threatening emergency in female tortoises.",
+        "description_ja": "雌リクガメが卵を産出できない緊急疾患。"
+                          "適切な産卵場所の欠如、低カルシウム血症、卵の異常（過大卵・変形卵）、"
+                          "骨盤狭窄が原因。放置すると卵管破裂・敗血症→致死的。",
+        "pathophysiology": "Mechanical or functional obstruction prevents egg passage through the oviduct and cloaca.",
+        "pathophysiology_ja": "機械的閉塞（過大卵・変形卵・骨盤狭窄）または機能的障害"
+                              "（低カルシウム血症による子宮収縮力低下・ストレスによる産卵抑制）→"
+                              "卵の停滞→卵管壁の圧迫壊死→卵管破裂→腹膜炎→敗血症。"
+                              "停滞した卵による総排泄腔圧迫→排尿障害→腎後性尿毒症。",
+        "causes": "Lack of appropriate nesting site, hypocalcemia, oversized/malformed eggs, pelvic abnormalities, dehydration, stress.",
+        "causes_ja": "適切な産卵場所の欠如（最多の原因）、低カルシウム血症、"
+                     "MBD、脱水、過大卵・変形卵、骨盤狭窄（甲羅のピラミッド化等）、"
+                     "ストレス、低温環境。",
+        "treatment": "Oxytocin, calcium gluconate, warm water soaks; surgery if medical management fails.",
+        "treatment_ja": "内科的管理を先行："
+                        "(1)グルコン酸カルシウム10%（50〜100mg/kg IM/SC、緩徐投与）、"
+                        "(2)30分後にオキシトシン（1〜5 IU/kg IM）、"
+                        "(3)温浴（30〜32℃、20〜30分）で筋弛緩促進、"
+                        "(4)適切な産卵場所の提供。"
+                        "内科的管理で産出不可の場合→外科的卵摘出術（甲羅切開or卵管切開）。",
+        "prevention": "Provide appropriate nesting site, balanced calcium, proper UVB, adequate hydration.",
+        "prevention_ja": "適切な産卵場所の常時提供（深さ体長の1.5倍の湿った土壌）。"
+                         "カルシウム適正補給。適切なUVB照射。十分な飲水。"
+                         "繁殖しない雌の避妊手術も検討。",
+        "prognosis": "Good with early intervention; poor if egg rupture or peritonitis develops.",
+        "prognosis_ja": "早期の内科的管理で予後良好（オキシトシン反応率60〜70%）。"
+                        "卵管破裂・腹膜炎の場合は予後不良。"
+                        "外科的介入が必要な場合も適切な手術で回復可能。",
+        "urgency": "emergency",
+        "recommended_tests": ["radiographs", "ultrasound", "serum_calcium", "complete_blood_count"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"adult"},
+    },
 ]
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
