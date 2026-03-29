@@ -373,6 +373,22 @@ def static_assets(filename):
         return jsonify({'error': f'{filename} not found'}), 404
 
 
+import re as _re
+
+
+def _disease_slug(disease) -> str:
+    """Generate a URL-safe slug from a disease dict or dataclass."""
+    name = disease.get("name", "") if isinstance(disease, dict) else getattr(disease, "name", "")
+    return _re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
+
+
+def _disease_get(disease, key, default=""):
+    """Get attribute from disease dict or dataclass."""
+    if isinstance(disease, dict):
+        return disease.get(key, default)
+    return getattr(disease, key, default)
+
+
 @app.route('/sitemap.xml')
 def dynamic_sitemap():
     """Generate a dynamic sitemap including all species and feature pages."""
@@ -391,6 +407,33 @@ def dynamic_sitemap():
         urls.append((f'{base}/?species={sp}#checker', 'weekly', '0.7'))
         urls.append((f'{base}/?species={sp}#database', 'weekly', '0.7'))
 
+    # Disease detail pages (SEO: each disease = a crawlable page)
+    _sitemap_modules = {
+        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
+        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
+        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
+        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
+        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
+        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
+        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
+        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
+        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
+        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
+        "exotic_other": "api.species.exotic_other_diseases",
+    }
+    import importlib as _il
+    for sp, mod_name in _sitemap_modules.items():
+        if sp not in SPECIES_META:
+            continue
+        try:
+            _mod = _il.import_module(mod_name)
+            for _d in getattr(_mod, "DISEASES", getattr(_mod, "DISEASE_DATABASE", [])):
+                _slug = _disease_slug(_d)
+                if _slug:
+                    urls.append((f'{base}/diseases/{sp}/{_slug}', 'monthly', '0.5'))
+        except ImportError:
+            pass
+
     # Legal pages
     for page in ('terms', 'privacy', 'tokushoho'):
         urls.append((f'{base}/{page}', 'monthly', '0.3'))
@@ -404,6 +447,75 @@ def dynamic_sitemap():
     lines.append('</urlset>')
 
     return Response('\n'.join(lines), mimetype='application/xml')
+
+
+@app.route('/diseases/<species>/<disease_slug>')
+def disease_detail(species: str, disease_slug: str):
+    """Server-rendered disease detail page for SEO indexing.
+
+    Each of the 6,400+ diseases gets its own URL that Google can crawl,
+    turning the disease database into a long-tail SEO asset.
+    """
+    from api.disease_store import SPECIES_META
+
+    _DISEASE_MODULES = {
+        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
+        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
+        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
+        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
+        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
+        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
+        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
+        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
+        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
+        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
+        "exotic_other": "api.species.exotic_other_diseases",
+    }
+
+    species_key = species.lower()
+    if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
+        return jsonify({'error': 'Unknown species'}), 404
+
+    # Load diseases for this species
+    sp_meta = SPECIES_META[species_key]
+    diseases = []
+    try:
+        import importlib
+        mod = importlib.import_module(_DISEASE_MODULES[species_key])
+        diseases = getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
+    except ImportError:
+        pass
+
+    # Find matching disease by slug
+    disease = None
+    for d in diseases:
+        if _disease_slug(d) == disease_slug:
+            disease = d
+            break
+
+    if not disease:
+        return jsonify({'error': 'Disease not found'}), 404
+
+    # Normalize to dict for template rendering (handles dataclass objects)
+    if not isinstance(disease, dict):
+        from dataclasses import asdict
+        try:
+            disease = asdict(disease)
+        except TypeError:
+            disease = {k: getattr(disease, k, "") for k in ("name", "name_ja", "description", "description_ja",
+                       "symptoms", "causes", "causes_ja", "pathophysiology", "pathophysiology_ja",
+                       "treatment", "treatment_ja", "prevention", "prevention_ja", "prognosis", "prognosis_ja",
+                       "urgency", "recommended_tests")}
+
+    sp_label_ja = sp_meta.get("name_ja", species_key)
+    sp_label_en = sp_meta.get("name_en", species_key.title())
+    return render_template(
+        'disease_detail.html',
+        disease=disease,
+        species=species_key,
+        species_ja=sp_label_ja,
+        species_en=sp_label_en,
+    )
 
 
 @app.route('/<path:filename>')

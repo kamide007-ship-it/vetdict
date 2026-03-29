@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}{{ disease.name_ja or disease.name }} | {{ species_ja }} | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="{{ (disease.description_ja or disease.description or '')[:160] }}">
+<meta property="og:title" content="{{ disease.name_ja or disease.name }} - {{ species_ja }}の疾患情報 | VetDict">
+<meta property="og:description" content="{{ (disease.description_ja or disease.description or '')[:200] }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vetdict.info/diseases/{{ species }}/{{ disease.name | lower | replace(' ', '-') | replace('(', '') | replace(')', '') | replace('/', '-') }}">
+<link rel="canonical" href="https://vetdict.info/diseases/{{ species }}/{{ disease.name | lower | replace(' ', '-') | replace('(', '') | replace(')', '') | replace('/', '-') }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalCondition",
+  "name": "{{ disease.name or '' }}",
+  "alternateName": "{{ disease.name_ja or '' }}",
+  "description": "{{ (disease.description or '')[:300] }}",
+  "possibleTreatment": {
+    "@type": "MedicalTherapy",
+    "name": "{{ (disease.treatment or '')[:100] }}"
+  },
+  "signOrSymptom": [
+    {% for s in disease.symptoms or [] %}"{{ s }}"{% if not loop.last %}, {% endif %}{% endfor %}
+  ]
+}
+</script>
+<style>
+.disease-page{max-width:860px;margin:0 auto;padding:20px 20px 60px}
+.disease-page h1{font-size:1.6rem;color:var(--navy);margin-bottom:4px}
+.disease-page .disease-subtitle{font-size:1rem;color:var(--gray-600);margin-bottom:16px}
+.disease-page .disease-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.disease-page .meta-tag{padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600}
+.meta-species{background:#e8f5e9;color:#2e7d32}
+.meta-urgency-emergency{background:#ffebee;color:#c62828}
+.meta-urgency-high{background:#fff3e0;color:#e65100}
+.meta-urgency-moderate{background:#fff8e1;color:#f57f17}
+.meta-urgency-low{background:#e8f5e9;color:#2e7d32}
+.disease-page section{margin-bottom:24px}
+.disease-page section h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--gray-200)}
+.disease-page section p{font-size:.9rem;line-height:1.8;color:var(--gray-700)}
+.disease-page .symptoms-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.disease-page .symptom-tag{background:var(--gray-50);border:1px solid var(--gray-200);padding:4px 10px;border-radius:6px;font-size:.8rem;color:var(--gray-700)}
+.disease-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin-top:32px}
+.disease-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none;font-size:.92rem}
+.disease-page .cta-box a:hover{opacity:.9}
+.disease-page .disclaimer{font-size:.76rem;color:var(--gray-500);margin-top:20px;padding:12px;background:var(--gray-50);border-radius:6px}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="disease-page">
+  <div class="disease-meta">
+    <span class="meta-tag meta-species">{{ species_ja }} ({{ species_en }})</span>
+    {% if disease.urgency %}
+    <span class="meta-tag meta-urgency-{{ disease.urgency }}">
+      {% if disease.urgency == 'emergency' %}緊急{% elif disease.urgency == 'high' %}重度{% elif disease.urgency == 'moderate' %}中等度{% else %}軽度{% endif %}
+    </span>
+    {% endif %}
+  </div>
+
+  <h1>{{ disease.name_ja or disease.name }}</h1>
+  <div class="disease-subtitle">{{ disease.name or '' }}{% if disease.name_ja and disease.name %} / {{ disease.name_ja }}{% endif %}</div>
+
+  {% if disease.description_ja or disease.description %}
+  <section>
+    <h2>概要</h2>
+    <p>{{ disease.description_ja or disease.description }}</p>
+  </section>
+  {% endif %}
+
+  {% if disease.symptoms %}
+  <section>
+    <h2>主な症状</h2>
+    <div class="symptoms-grid">
+      {% for s in disease.symptoms|sort %}
+      <span class="symptom-tag">{{ s | replace('_', ' ') }}</span>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if disease.causes_ja or disease.causes %}
+  <section>
+    <h2>原因</h2>
+    <p>{{ disease.causes_ja or disease.causes }}</p>
+  </section>
+  {% endif %}
+
+  {% if disease.pathophysiology_ja or disease.pathophysiology %}
+  <section>
+    <h2>病態生理</h2>
+    <p>{{ disease.pathophysiology_ja or disease.pathophysiology }}</p>
+  </section>
+  {% endif %}
+
+  {% if disease.treatment_ja or disease.treatment %}
+  <section>
+    <h2>治療</h2>
+    <p>{{ disease.treatment_ja or disease.treatment }}</p>
+  </section>
+  {% endif %}
+
+  {% if disease.prevention_ja or disease.prevention %}
+  <section>
+    <h2>予防</h2>
+    <p>{{ disease.prevention_ja or disease.prevention }}</p>
+  </section>
+  {% endif %}
+
+  {% if disease.prognosis_ja or disease.prognosis %}
+  <section>
+    <h2>予後</h2>
+    <p>{{ disease.prognosis_ja or disease.prognosis }}</p>
+  </section>
+  {% endif %}
+
+  <div class="cta-box">
+    <p style="margin-bottom:12px;font-weight:600;color:var(--navy)">VetDictで{{ species_ja }}の鑑別診断を行う</p>
+    <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>
+  </div>
+
+  <div class="disclaimer">
+    ※ 本ページの情報は獣医学的参考資料であり、診断・治療の代替ではありません。実際の診療は必ず獣医師にご相談ください。<br>
+    VetDict は獣医師（DVM）が開発した臨床支援ツールです。
+  </div>
+</div>
+{% endblock %}
