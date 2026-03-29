@@ -151,4 +151,9 @@
     VetDict は獣医師（DVM）が開発した臨床支援ツールです。
   </div>
 </div>
+<script>
+if(typeof gtag==="function"){
+  gtag("event","view_disease_page",{species:"{{ species }}",disease:"{{ (disease.name or '')|e }}",urgency:"{{ (disease.urgency or '')|e }}"});
+}
+</script>
 {% endblock %}
