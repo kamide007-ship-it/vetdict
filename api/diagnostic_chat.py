@@ -1028,6 +1028,61 @@ SYMPTOM_ALIASES = {
     "bald patches": "hair_loss",
     "lumps on body": "lumps",
     "bad smell": "foul_odor",
+    # ---------------------------------------------------------------
+    # 両生類用エイリアス (Amphibian-specific aliases) — 重複なし
+    # ---------------------------------------------------------------
+    # 皮膚・体表
+    "皮膚が白い": "white_patches_skin", "体が白くなった": "white_patches_skin",
+    "白いカビ": "cotton_like_growth", "綿みたいなのがついてる": "cotton_like_growth",
+    "体が赤い": "skin_redness", "お腹が赤い": "red_ventrum",
+    "足が赤い": "red_legs", "レッドレッグ": "red_legs",
+    "red leg": "red_legs", "red legs": "red_legs",
+    "皮がむけてる": "skin_shedding", "皮膚がただれてる": "skin_ulcers",
+    "皮膚に穴が開いてる": "skin_ulcers", "体にできものがある": "raised_nodules",
+    "黒いできもの": "dark_skin_nodules", "体がぬるぬる": "excessive_mucus",
+    "粘液が多い": "excessive_mucus",
+    # 行動・全身 (重複する一般的表現は既存エイリアスに委譲)
+    "太ってる": "obesity",
+    # 浮腫・膨満
+    "お腹が膨らんでる": "bloating", "体が膨れてる": "edema",
+    "パンパンに膨れてる": "edema", "風船みたい": "edema",
+    "balloon frog": "edema",
+    "水ぶくれ": "skin_blistering", "体が浮いてる": "buoyancy_problems",
+    "沈めない": "buoyancy_problems", "浮いたまま": "buoyancy_problems",
+    # 呼吸
+    "口を開けてる": "open_mouth_breathing",
+    # 鰓（アホロートル等）
+    "エラが縮んでる": "gill_shrinkage", "エラが小さくなった": "gill_shrinkage",
+    "エラがカールしてる": "gill_curling",
+    "エラにカビ": "cotton_like_growth",
+    # 消化器 (重複する一般的表現は既存エイリアスに委譲)
+    "フンが出ない": "constipation",
+    "白い便": "white_feces",
+    "おしりから何か出てる": "cloacal_prolapse",
+    # 骨格・四肢
+    "足が曲がってる": "limb_deformity",
+    "顎が変形してる": "jaw_deformity",
+    "後ろ足が動かない": "paralysis", "足が細い": "spindly_legs",
+    "指が黒くなった": "digit_necrosis", "指が取れた": "missing_digits",
+    # 眼
+    "目がくぼんでる": "sunken_eyes",
+    # 神経
+    "痙攣してる": "seizures",
+    "ふらふらしてる": "incoordination",
+    # 英語 (amphibian-specific)
+    "shedding too much": "excessive_shedding",
+    "skin peeling": "skin_shedding",
+    "bloated frog": "bloating",
+    "floating upside down": "buoyancy_problems",
+    "not metamorphosing": "metamorphosis_failure",
+    "won't transform": "metamorphosis_failure",
+    "gills shrinking": "gill_shrinkage",
+    "gill curl": "gill_curling",
+    "spindly legs": "spindly_legs",
+    "short tongue": "inability_to_feed",
+    "can't catch food": "inability_to_feed",
+    "chytrid": "skin_shedding",
+    "ツボカビ": "skin_shedding",
 }
 
 
