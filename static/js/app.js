@@ -1092,6 +1092,7 @@ function renderDiseaseCard(d,data){
       ${renderMissingKeySymptoms(d,data)}
       ${renderScoringDetail(d)}
       ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${escapeHtml(recTests.join(", "))}</div>`:""}
+      <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>
   </div>`;
@@ -1279,7 +1280,7 @@ function renderDiseaseDb(){
         <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
         ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:""}
         ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:""}
-      </dl>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
+      </dl><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
   _attachDbItemHandlers(list);
   const shownCount=shown.filter(d=>!d._catHeader).length;
