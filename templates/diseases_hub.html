@@ -36,6 +36,7 @@
   <div class="species-hub-grid">
     {% for sp in species %}
     <a href="/diseases/{{ sp.id }}" class="species-hub-card">
+      <span style="font-size:2rem;display:block;margin-bottom:4px">{{ sp.icon }}</span>
       <span class="sp-name">{{ sp.name_ja }}</span>
       <span class="sp-en">{{ sp.name_en }}</span>
       <span class="sp-count">{{ sp.count }}疾患</span>

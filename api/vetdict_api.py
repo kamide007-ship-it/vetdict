@@ -375,6 +375,44 @@ def static_assets(filename):
 
 import re as _re
 
+# Module-level constants for disease page routing (used by sitemap, hub, index, detail)
+_DISEASE_MODULES: dict[str, str] = {
+    "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
+    "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
+    "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
+    "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
+    "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
+    "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
+    "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
+    "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
+    "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
+    "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
+    "exotic_other": "api.species.exotic_other_diseases",
+}
+
+_SPECIES_ICONS: dict[str, str] = {
+    "dog": "\U0001F415", "cat": "\U0001F408", "horse": "\U0001F434",
+    "rabbit": "\U0001F407", "hamster": "\U0001F439", "guinea_pig": "\U0001F439",
+    "chinchilla": "\U0001F43F\uFE0F", "ferret": "\U0001F9A1", "hedgehog": "\U0001F994",
+    "sugar_glider": "\U0001F43F\uFE0F", "degu": "\U0001F42D", "bird": "\U0001F426",
+    "parakeet": "\U0001F99C", "parrot": "\U0001F99C", "reptile": "\U0001F98E",
+    "tortoise": "\U0001F422", "snake": "\U0001F40D", "lizard": "\U0001F98E",
+    "amphibian": "\U0001F438", "fish": "\U0001F41F", "exotic_other": "\U0001F999",
+}
+
+
+def _load_diseases(species_key: str) -> list:
+    """Load DISEASES list for a species from its Python module."""
+    mod_name = _DISEASE_MODULES.get(species_key)
+    if not mod_name:
+        return []
+    try:
+        import importlib
+        mod = importlib.import_module(mod_name)
+        return getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
+    except ImportError:
+        return []
+
 
 def _disease_slug(disease) -> str:
     """Generate a URL-safe slug from a disease dict or dataclass."""
@@ -410,26 +448,11 @@ def dynamic_sitemap():
         urls.append((f'{base}/diseases/{sp}', 'weekly', '0.8'))  # Disease index per species
 
     # Disease detail pages (SEO: each disease = a crawlable page)
-    _sitemap_modules = {
-        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
-        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
-        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
-        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
-        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
-        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
-        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
-        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
-        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
-        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
-        "exotic_other": "api.species.exotic_other_diseases",
-    }
-    import importlib as _il
-    for sp, mod_name in _sitemap_modules.items():
+    for sp in _DISEASE_MODULES:
         if sp not in SPECIES_META:
             continue
         try:
-            _mod = _il.import_module(mod_name)
-            for _d in getattr(_mod, "DISEASES", getattr(_mod, "DISEASE_DATABASE", [])):
+            for _d in _load_diseases(sp):
                 _slug = _disease_slug(_d)
                 if _slug:
                     urls.append((f'{base}/diseases/{sp}/{_slug}', 'monthly', '0.5'))
@@ -456,36 +479,18 @@ def diseases_hub():
     """Top-level diseases hub page listing all 21 species with disease counts."""
     from api.disease_store import SPECIES_META
 
-    _DISEASE_MODULES = {
-        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
-        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
-        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
-        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
-        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
-        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
-        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
-        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
-        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
-        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
-        "exotic_other": "api.species.exotic_other_diseases",
-    }
     species_list = []
     total_diseases = 0
-    for sp_id, mod_name in _DISEASE_MODULES.items():
+    for sp_id in _DISEASE_MODULES:
         if sp_id not in SPECIES_META:
             continue
         meta = SPECIES_META[sp_id]
-        try:
-            import importlib
-            mod = importlib.import_module(mod_name)
-            diseases = getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
-            count = len(diseases)
-        except ImportError:
-            count = 0
+        count = len(_load_diseases(sp_id))
         total_diseases += count
         species_list.append({
             "id": sp_id, "name_ja": meta.get("name_ja", sp_id),
             "name_en": meta.get("name_en", sp_id.title()), "count": count,
+            "icon": _SPECIES_ICONS.get(sp_id, "\U0001F43E"),
         })
     species_list.sort(key=lambda x: x["count"], reverse=True)
     return render_template('diseases_hub.html', species=species_list, total=total_diseases)
@@ -500,32 +505,12 @@ def disease_index(species: str):
     """
     from api.disease_store import SPECIES_META
 
-    _DISEASE_MODULES = {
-        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
-        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
-        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
-        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
-        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
-        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
-        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
-        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
-        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
-        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
-        "exotic_other": "api.species.exotic_other_diseases",
-    }
-
     species_key = species.lower()
     if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
         return jsonify({'error': 'Unknown species'}), 404
 
     sp_meta = SPECIES_META[species_key]
-    diseases = []
-    try:
-        import importlib
-        mod = importlib.import_module(_DISEASE_MODULES[species_key])
-        diseases = getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
-    except ImportError:
-        pass
+    diseases = _load_diseases(species_key)
 
     # Build disease list with slugs
     disease_list = []
@@ -558,33 +543,12 @@ def disease_detail(species: str, disease_slug: str):
     """
     from api.disease_store import SPECIES_META
 
-    _DISEASE_MODULES = {
-        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
-        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
-        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
-        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
-        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
-        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
-        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
-        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
-        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
-        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
-        "exotic_other": "api.species.exotic_other_diseases",
-    }
-
     species_key = species.lower()
     if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
         return jsonify({'error': 'Unknown species'}), 404
 
-    # Load diseases for this species
     sp_meta = SPECIES_META[species_key]
-    diseases = []
-    try:
-        import importlib
-        mod = importlib.import_module(_DISEASE_MODULES[species_key])
-        diseases = getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
-    except ImportError:
-        pass
+    diseases = _load_diseases(species_key)
 
     # Find matching disease by slug
     disease = None
@@ -609,12 +573,24 @@ def disease_detail(species: str, disease_slug: str):
 
     sp_label_ja = sp_meta.get("name_ja", species_key)
     sp_label_en = sp_meta.get("name_en", species_key.title())
+
+    # Load symptom names for human-readable display
+    symptom_names = {}
+    try:
+        import importlib
+        _mod = importlib.import_module(_DISEASE_MODULES[species_key])
+        sym_names_dict = getattr(_mod, "SYMPTOM_NAMES", {})
+        symptom_names = {k: v.get("ja", k) for k, v in sym_names_dict.items()}
+    except Exception:
+        pass
+
     return render_template(
         'disease_detail.html',
         disease=disease,
         species=species_key,
         species_ja=sp_label_ja,
         species_en=sp_label_en,
+        symptom_names=symptom_names,
     )
 
 
