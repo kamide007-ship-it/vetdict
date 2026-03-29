@@ -1871,6 +1871,15 @@ def _match_species_symptoms_to_diseases(
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
         confidence = min(round(raw_logistic * 100, 1), 95.0)
 
+        # --- Low-information confidence cap ---
+        # When user provides very few symptoms, cap confidence to prevent
+        # false sense of certainty from non-specific presentations.
+        user_symptom_count = len(symptom_set)
+        if user_symptom_count == 1:
+            confidence = min(confidence, 35.0)
+        elif user_symptom_count == 2:
+            confidence = min(confidence, 55.0)
+
         matches.append({
             "disease_id": disease.get("name", ""),
             "name_ja": disease.get("name_ja", ""),
@@ -3301,6 +3310,11 @@ def diagnostic_chat():
         )
 
     # Build response
+    low_info_warning = None
+    if len(all_symptoms) == 1:
+        low_info_warning = "症状が1つのみのため、信頼度を制限しています。追加の症状を入力すると精度が向上します。"
+    elif len(all_symptoms) == 2:
+        low_info_warning = "症状が2つのため、信頼度に上限を設けています。さらに症状を追加すると精度が向上します。"
     response = {
         "response": response_text,
         "user_message": message,
@@ -3311,6 +3325,7 @@ def diagnostic_chat():
         "disease_candidates": enhanced_candidates,
         "total_candidates": len(disease_matches),
         "species_guidance": guidance_line,
+        "low_info_warning": low_info_warning,
         "breed_context": breed_id,
         "breed": breed,
         "pain_score": pain_score,
