@@ -4,8 +4,8 @@
   "description": "21 animal species, 6,400+ diseases, 187 drugs. AI-powered veterinary diagnostic support.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a2744",
-  "theme_color": "#1a2744",
+  "background_color": "#1a3068",
+  "theme_color": "#1a3068",
   "lang": "ja",
   "dir": "ltr",
   "icons": [
