@@ -157,7 +157,7 @@ Ensure medical accuracy appropriate for veterinary professionals."""
 def main():
     """Example usage of DiseaseEnricher."""
     # Load dog diseases
-    from api.symptom_checker import _DISEASE_DB
+    from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
     enricher = DiseaseEnricher()
 

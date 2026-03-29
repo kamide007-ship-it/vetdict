@@ -192,7 +192,7 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
 
 def main():
     """Example batch enrichment."""
-    from api.symptom_checker import _DISEASE_DB
+    from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
     enricher = DiseaseBatchEnricher()
 

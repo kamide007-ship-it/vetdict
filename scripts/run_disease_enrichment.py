@@ -26,7 +26,7 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from api.disease_batch_enricher import DiseaseBatchEnricher
-from api.symptom_checker import _DISEASE_DB
+from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
 
 def save_batch_manifest(batch_ids: list):
