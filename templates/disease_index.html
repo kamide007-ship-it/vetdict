@@ -7,6 +7,17 @@
 <meta property="og:title" content="{{ species_ja }}の疾患一覧 | VetDict">
 <meta property="og:description" content="{{ species_ja }}に発生する{{ count }}件の疾患情報。症状・原因・治療法・予後を詳しく解説。">
 <link rel="canonical" href="https://vetdict.info/diseases/{{ species }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "VetDict", "item": "https://vetdict.info/"},
+    {"@type": "ListItem", "position": 2, "name": "疾患データベース", "item": "https://vetdict.info/diseases"},
+    {"@type": "ListItem", "position": 3, "name": "{{ species_ja }}"}
+  ]
+}
+</script>
 <style>
 .index-page{max-width:900px;margin:0 auto;padding:20px 20px 60px}
 .index-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
