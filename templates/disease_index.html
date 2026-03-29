@@ -28,6 +28,14 @@
 
 {% block content %}
 <div class="index-page">
+  <nav style="font-size:.8rem;margin-bottom:12px;color:var(--gray-500)">
+    <a href="/" style="color:var(--navy);text-decoration:none">VetDict</a>
+    <span> › </span>
+    <a href="/diseases" style="color:var(--navy);text-decoration:none">疾患データベース</a>
+    <span> › </span>
+    <span>{{ species_ja }}</span>
+  </nav>
+
   <h1>{{ species_ja }}（{{ species_en }}）の疾患一覧</h1>
   <p class="subtitle">{{ count }}件の疾患が登録されています</p>
 

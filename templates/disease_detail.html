@@ -50,6 +50,16 @@
 
 {% block content %}
 <div class="disease-page">
+  <nav style="font-size:.8rem;margin-bottom:12px;color:var(--gray-500)">
+    <a href="/" style="color:var(--navy);text-decoration:none">VetDict</a>
+    <span> › </span>
+    <a href="/diseases" style="color:var(--navy);text-decoration:none">疾患データベース</a>
+    <span> › </span>
+    <a href="/diseases/{{ species }}" style="color:var(--navy);text-decoration:none">{{ species_ja }}</a>
+    <span> › </span>
+    <span>{{ disease.name_ja or disease.name }}</span>
+  </nav>
+
   <div class="disease-meta">
     <span class="meta-tag meta-species">{{ species_ja }} ({{ species_en }})</span>
     {% if disease.urgency %}
