@@ -406,6 +406,7 @@ def dynamic_sitemap():
     for sp in SPECIES_META:
         urls.append((f'{base}/?species={sp}#checker', 'weekly', '0.7'))
         urls.append((f'{base}/?species={sp}#database', 'weekly', '0.7'))
+        urls.append((f'{base}/diseases/{sp}', 'weekly', '0.8'))  # Disease index per species
 
     # Disease detail pages (SEO: each disease = a crawlable page)
     _sitemap_modules = {
@@ -447,6 +448,64 @@ def dynamic_sitemap():
     lines.append('</urlset>')
 
     return Response('\n'.join(lines), mimetype='application/xml')
+
+
+@app.route('/diseases/<species>')
+def disease_index(species: str):
+    """Server-rendered disease index page per species for SEO.
+
+    Acts as a hub page linking to all individual disease pages,
+    improving internal link structure and crawlability.
+    """
+    from api.disease_store import SPECIES_META
+
+    _DISEASE_MODULES = {
+        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
+        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
+        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
+        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
+        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
+        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
+        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
+        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
+        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
+        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
+        "exotic_other": "api.species.exotic_other_diseases",
+    }
+
+    species_key = species.lower()
+    if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
+        return jsonify({'error': 'Unknown species'}), 404
+
+    sp_meta = SPECIES_META[species_key]
+    diseases = []
+    try:
+        import importlib
+        mod = importlib.import_module(_DISEASE_MODULES[species_key])
+        diseases = getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
+    except ImportError:
+        pass
+
+    # Build disease list with slugs
+    disease_list = []
+    for d in diseases:
+        name = d.get("name", "") if isinstance(d, dict) else getattr(d, "name", "")
+        name_ja = d.get("name_ja", "") if isinstance(d, dict) else getattr(d, "name_ja", "")
+        urgency = d.get("urgency", "") if isinstance(d, dict) else getattr(d, "urgency", "")
+        slug = _disease_slug(d)
+        if slug:
+            disease_list.append({"name": name, "name_ja": name_ja, "urgency": urgency, "slug": slug})
+
+    disease_list.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
+
+    return render_template(
+        'disease_index.html',
+        diseases=disease_list,
+        species=species_key,
+        species_ja=sp_meta.get("name_ja", species_key),
+        species_en=sp_meta.get("name_en", species_key.title()),
+        count=len(disease_list),
+    )
 
 
 @app.route('/diseases/<species>/<disease_slug>')

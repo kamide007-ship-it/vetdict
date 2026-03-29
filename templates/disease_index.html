@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}{{ species_ja }}の疾患一覧 ({{ count }}件) | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="{{ species_ja }}に発生する{{ count }}件の疾患情報を掲載。各疾患の症状・原因・治療法・予後を詳しく解説。獣医師が開発した獣医学疾患データベース。">
+<meta property="og:title" content="{{ species_ja }}の疾患一覧 | VetDict">
+<meta property="og:description" content="{{ species_ja }}に発生する{{ count }}件の疾患情報。症状・原因・治療法・予後を詳しく解説。">
+<link rel="canonical" href="https://vetdict.info/diseases/{{ species }}">
+<style>
+.index-page{max-width:900px;margin:0 auto;padding:20px 20px 60px}
+.index-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
+.index-page .subtitle{color:var(--gray-600);font-size:.9rem;margin-bottom:20px}
+.index-page .search-box{width:100%;padding:10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.9rem;margin-bottom:16px;box-sizing:border-box}
+.index-page .search-box:focus{border-color:var(--green);outline:none}
+.disease-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.disease-link{display:block;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);text-decoration:none;color:var(--gray-800);transition:all .15s;font-size:.86rem;border-left:3px solid var(--gray-300)}
+.disease-link:hover{border-color:var(--green);box-shadow:var(--shadow-sm);background:var(--gray-50)}
+.disease-link .d-ja{font-weight:600;display:block}
+.disease-link .d-en{color:var(--gray-500);font-size:.78rem}
+.disease-link.urgency-emergency{border-left-color:#ef4444}
+.disease-link.urgency-high{border-left-color:#f59e0b}
+.disease-link.urgency-moderate{border-left-color:#3b82f6}
+.index-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin:24px 0}
+.index-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none;font-size:.92rem}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="index-page">
+  <h1>{{ species_ja }}（{{ species_en }}）の疾患一覧</h1>
+  <p class="subtitle">{{ count }}件の疾患が登録されています</p>
+
+  <input type="text" class="search-box" id="diseaseSearch" placeholder="疾患名で検索... (例: 肺炎, malocclusion)">
+
+  <div class="cta-box">
+    <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">{{ species_ja }}の症状から鑑別診断を行う</p>
+    <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>
+  </div>
+
+  <div class="disease-grid" id="diseaseGrid">
+    {% for d in diseases %}
+    <a href="/diseases/{{ species }}/{{ d.slug }}" class="disease-link urgency-{{ d.urgency }}" data-name="{{ d.name|lower }}" data-name-ja="{{ d.name_ja|lower }}">
+      <span class="d-ja">{{ d.name_ja or d.name }}</span>
+      <span class="d-en">{{ d.name }}</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="cta-box" style="margin-top:32px">
+    <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">他の動物種の疾患を見る</p>
+    <a href="/#database">疾患データベースへ</a>
+  </div>
+</div>
+
+<script>
+document.getElementById('diseaseSearch').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.disease-link').forEach(function(el) {
+    const match = el.dataset.name.includes(q) || el.dataset.nameJa.includes(q);
+    el.style.display = match ? '' : 'none';
+  });
+});
+</script>
+{% endblock %}
