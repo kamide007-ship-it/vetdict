@@ -6,9 +6,21 @@ symptom-to-disease matching using Jaccard similarity, and diagnostic
 test recommendations based on real veterinary medical knowledge.
 """
 
+import json
+import os
+
 from flask import Blueprint, jsonify, request
 
 from api.content_quality import enrich_disease_content
+
+# ---------------------------------------------------------------------------
+# Japanese name reading lookup for あいうえお sorting
+# ---------------------------------------------------------------------------
+_NAME_JA_READINGS: dict[str, str] = {}
+_readings_path = os.path.join(os.path.dirname(__file__), "name_ja_readings.json")
+if os.path.exists(_readings_path):
+    with open(_readings_path, encoding="utf-8") as _f:
+        _NAME_JA_READINGS = json.load(_f)
 
 health_bp = Blueprint("health_bp", __name__, url_prefix="/api/health-check")
 
@@ -3719,6 +3731,12 @@ def get_diseases():
                     "severity": d.get("severity", ""),
                     "symptoms": symptoms,
                 }, species))
+
+    # Inject hiragana reading for あいうえお sorting
+    for item in output:
+        name_ja = item.get("name_ja", "")
+        if name_ja and name_ja in _NAME_JA_READINGS:
+            item["name_ja_sort"] = _NAME_JA_READINGS[name_ja]
 
     return jsonify(
         {

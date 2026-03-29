@@ -1213,7 +1213,7 @@ function renderDiseaseDb(){
     if(diseaseNavMode==="kana"){
       const kanaRow={"あ":"あいうえお","か":"かきくけこがぎぐげご","さ":"さしすせそざじずぜぞ","た":"たちつてとだぢづでど","な":"なにぬねの","は":"はひふへほばびぶべぼぱぴぷぺぽ","ま":"まみむめも","や":"やゆよ","ら":"らりるれろ","わ":"わをん"};
       const row=kanaRow[diseaseFilter]||diseaseFilter;
-      filtered=filtered.filter(d=>{const ja=(d.name_ja||"");return ja&&row.includes(ja.charAt(0));});
+      filtered=filtered.filter(d=>{const sort=(d.name_ja_sort||"");if(sort&&row.includes(sort.charAt(0)))return true;const ja=(d.name_ja||"");return ja&&row.includes(ja.charAt(0));});
     }else if(diseaseNavMode==="category"){
       filtered=filtered.filter(d=>classifyDisease(d)===diseaseFilter);
     }else{
@@ -1221,7 +1221,7 @@ function renderDiseaseDb(){
     }
   }
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
-  const sortJa=(a,b)=>(a.name_ja||a.name||"").localeCompare(b.name_ja||b.name||"","ja");
+  const sortJa=(a,b)=>(a.name_ja_sort||a.name_ja||a.name||"").localeCompare(b.name_ja_sort||b.name_ja||b.name||"","ja");
   const sortEn=(a,b)=>(a.name||"").localeCompare(b.name||"","en");
   const sortFn=currentLang==="ja"?sortJa:sortEn;
   if(diseaseNavMode==="category"&&!diseaseFilter){
