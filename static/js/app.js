@@ -799,7 +799,7 @@ function doAnalyze(){
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
-  .catch(err=>{const msg=currentLang==="ja"?"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。":"Failed to connect to server. Please check your network.";document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(msg)}</div><button onclick="doAnalyze()" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再試行":"Retry"}</button></div>`;})
+  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const msg=currentLang==="ja"?"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。":"Failed to connect to server. Please check your network.";document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(msg)}</div><button onclick="doAnalyze()" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再試行":"Retry"}</button></div>`;})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
@@ -1440,6 +1440,7 @@ function sendChatMessage(){
   .catch(err=>{
     loading.remove();
     console.error("Chat error:",err);
+    trackEvent("api_error",{endpoint:"diagnostic-chat",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});
     addChatMsg(t("commError")+" ("+err.message+")","bot");
   });
 }
