@@ -3037,7 +3037,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "bacterial_culture_sensitivity", "radiographs", "complete_blood_count"],
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "young", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
@@ -3073,7 +3073,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["skin_biopsy", "fungal_culture", "histopathology", "pcr"],
         "onset_pattern": {"subacute", "chronic"},
-        "age_predisposition": {"adult", "young", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
 ]
 
