@@ -1181,16 +1181,16 @@ function renderAzNav(){
   const azNav=document.getElementById("azNav");
   if(!azNav){console.warn("azNav element not found");return;}
   if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"kana":"az";
-  const modeLabels={az:{next:"kana",label:"あいうえお順"},kana:{next:"category",label:currentLang==="ja"?"カテゴリ別":"By Category"},category:{next:"az",label:"A-Z順"}};
+  const modeLabels={az:{next:"kana",label:"A-Z",switchLabel:currentLang==="ja"?"あいうえお順へ":"Switch to Kana"},kana:{next:"category",label:currentLang==="ja"?"あいうえお順":"Kana",switchLabel:currentLang==="ja"?"カテゴリ別へ":"Switch to Category"},category:{next:"az",label:currentLang==="ja"?"カテゴリ別":"Category",switchLabel:"A-Z"}};
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
   if(diseaseNavMode==="category"){
     const cats=[...DISEASE_CAT_ORDER,"other"];
     const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}">${escapeHtml(lbl)}</button>`;}).join("");
-    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
+    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
   }else{
     const isAz=diseaseNavMode==="az";
     const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あ か さ た な は ま や ら わ".split(" ");
-    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
   }
   const nextMode=cur.next;
   azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
