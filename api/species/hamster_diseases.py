@@ -7,6 +7,123 @@ from typing import Any, Dict, List
 from . import prevalence_data
 from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 
+# Category mapping for symptom checkbox UI
+SYMPTOM_CATEGORIES: Dict[str, str] = {
+    # 皮膚・体表
+    "rough_coat": "skin", "hair_loss": "skin",
+    "dry_skin": "skin", "itching": "skin",
+    "skin_crusting": "skin", "severe_itching": "skin",
+    "skin_redness": "skin", "scratching": "skin",
+    "circular_lesions": "skin", "skin_lump": "skin",
+    "wound": "skin", "skin_mass_growth": "skin",
+    "ulceration": "skin", "thin_skin": "skin",
+    "bumping_into_objects": "skin", "visible_parasites": "skin",
+    "skin_tenting": "skin", "tail_injury": "skin",
+    "dark_skin_lesion": "skin", "abscess_formation": "skin",
+    "abscesses": "skin", "bald_patches": "skin",
+    "bite_wounds": "skin", "bleeding_from_mass": "skin",
+    "cervical_abscess": "skin", "cervical_mass": "skin",
+    "draining_wound": "skin", "dry_flaky_skin": "skin",
+    "foot_sores": "skin", "foot_swelling": "skin",
+    "foul_odor_from_mouth": "skin", "hair_loss_around_ears": "skin",
+    "hair_loss_around_mass": "skin", "pigmented_skin_mass": "skin",
+    "poor_coat": "skin", "pruritus": "skin",
+    "skin_abrasion": "skin", "skin_exposure": "skin",
+    "skin_lesions": "skin", "skin_masses": "skin",
+    "skin_thickening": "skin", "skin_thinning": "skin",
+    "slow_growing_lump": "skin", "subcutaneous_mass": "skin",
+    "sweet_breath_odor": "skin", "visible_mass_in_mouth": "skin",
+    "wart_like_growths": "skin",
+    # 眼
+    "eye_discharge": "eyes", "cloudy_eyes": "eyes",
+    "vision_loss": "eyes", "eye_bulging": "eyes",
+    "eye_redness": "eyes", "eye_swelling": "eyes",
+    "sunken_eyes": "eyes", "conjunctivitis": "eyes",
+    "corneal_opacity": "eyes", "exophthalmos": "eyes",
+    "pawing_at_eye": "eyes", "photophobia": "eyes",
+    # 耳
+    "scratching_ears": "ears", "ear_discharge": "ears",
+    "ear_crusting": "ears", "ear_scratching": "ears",
+    "head_shaking": "ears", "otitis": "ears",
+    # 呼吸器
+    "labored_breathing": "respiratory", "nasal_discharge": "respiratory",
+    "sneezing": "respiratory", "wheezing": "respiratory",
+    "coughing": "respiratory", "slow_breathing": "respiratory",
+    "open_mouth_breathing": "respiratory", "rapid_breathing": "respiratory",
+    "red_nasal_discharge": "respiratory", "respiratory_distress": "respiratory",
+    # 消化器・口腔
+    "wet_tail": "digestive", "diarrhea": "digestive",
+    "appetite_loss": "digestive", "constipation": "digestive",
+    "straining": "digestive", "rectal_prolapse": "digestive",
+    "bloody_stool": "digestive", "drooling": "digestive",
+    "pawing_at_mouth": "digestive", "cheek_pouch_prolapse": "digestive",
+    "oral_mass": "digestive", "overgrown_teeth": "digestive",
+    "appetite_increase": "digestive", "visible_worms_in_stool": "digestive",
+    "perianal_irritation": "digestive", "difficulty_swallowing": "digestive",
+    "fecal_incontinence": "digestive", "intermittent_diarrhea": "digestive",
+    "recurrent_soft_stool": "digestive", "reduced_fecal_output": "digestive",
+    "teeth_damage": "digestive", "visible_tissue_from_mouth": "digestive",
+    "vomiting": "digestive",
+    # 骨格・四肢
+    "hind_limb_weakness": "musculoskeletal", "lameness": "musculoskeletal",
+    "limb_deformity": "musculoskeletal", "stiffness": "musculoskeletal",
+    "bone_pain": "musculoskeletal", "hind_limb_paralysis": "musculoskeletal",
+    "limb_swelling": "musculoskeletal", "splayed_limbs": "musculoskeletal",
+    # 神経
+    "paralysis": "neurological", "head_tilt": "neurological",
+    "circling": "neurological", "disorientation": "neurological",
+    "nystagmus": "neurological", "seizures": "neurological",
+    "tremors": "neurological", "unresponsiveness": "neurological",
+    # 泌尿器・生殖器
+    "mammary_mass": "urinary", "increased_urination": "urinary",
+    "vaginal_bleeding": "urinary", "blood_in_urine": "urinary",
+    "frequent_urination": "urinary", "vaginal_discharge": "urinary",
+    "mammary_swelling": "urinary", "mammary_redness": "urinary",
+    "testicular_swelling": "urinary", "asymmetric_testes": "urinary",
+    "absent_testicle": "urinary", "infertility": "urinary",
+    "maternal_stress": "urinary", "polyuria": "urinary",
+    "straining_to_urinate": "urinary", "tissue_protrusion_from_vulva": "urinary",
+    "urinary_incontinence": "urinary",
+    # 循環器
+    "cyanosis": "cardiovascular", "exercise_intolerance": "cardiovascular",
+    "heart_murmur": "cardiovascular",
+    # 体型・全身
+    "dehydration": "body", "weight_loss": "body",
+    "abdominal_distension": "body", "cheek_swelling": "body",
+    "facial_swelling": "body", "swelling": "body",
+    "enlarged_lymph_nodes": "body", "weight_gain": "body",
+    "edema": "body", "ascites": "body",
+    "muscle_wasting": "body", "wasting": "body",
+    "abdominal_pain": "body", "inguinal_swelling": "body",
+    "obesity": "body", "rapid_growth": "body",
+    "subcutaneous_swelling": "body", "toe_swelling": "body",
+    # 行動・活動
+    "lethargy": "behavior", "hunched_posture": "behavior",
+    "pain": "behavior", "reduced_activity": "behavior",
+    "discomfort": "behavior", "loss_of_balance": "behavior",
+    "squinting": "behavior", "weakness": "behavior",
+    "cold_body": "behavior", "bar_chewing": "behavior",
+    "excessive_grooming": "behavior", "aggression": "behavior",
+    "licking_flank": "behavior", "cold_intolerance": "behavior",
+    "aggressive_behavior": "behavior", "behavioral_changes": "behavior",
+    "curled_posture": "behavior", "inability_to_stand": "behavior",
+    "missing_pups": "behavior", "mobility_issues": "behavior",
+    "muscle_weakness": "behavior", "reluctance_to_move": "behavior",
+    "repetitive_bar_chewing": "behavior", "stress_signs": "behavior",
+    "vocalization": "behavior",
+    # 緊急
+    "sudden_death": "emergency", "unconsciousness": "emergency",
+    "shock": "emergency",
+    # 内科・血液
+    "discharge": "internal", "fever": "internal",
+    "increased_thirst": "internal", "jaundice": "internal",
+    "bleeding": "internal", "anemia": "internal",
+    "bleeding_from_foot": "internal", "blood_stains_in_nest": "internal",
+    "green_discharge": "internal", "polydipsia": "internal",
+    "red_discharge_around_eye": "internal",
+}
+
+
 DISEASES: List[Dict[str, Any]] = [
     # ── 消化器系 ──
     {

@@ -12,6 +12,112 @@ from typing import Any, Dict, List
 from . import prevalence_data
 from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 
+# Category mapping for symptom checkbox UI
+SYMPTOM_CATEGORIES: Dict[str, str] = {
+    # 皮膚・体表
+    "bad_odor": "skin", "burn_marks": "skin",
+    "crusting": "skin", "draining_wound": "skin",
+    "greasy_coat": "skin", "hair_loss": "skin",
+    "iris_color_change": "skin", "itching": "skin",
+    "itching_around_anus": "skin", "lumps": "skin",
+    "miliary_dermatitis": "skin", "nail_abnormalities": "skin",
+    "non_healing_wound": "skin", "paw_swelling": "skin",
+    "petechiae": "skin", "poor_coat": "skin",
+    "scaling": "skin", "singed_whiskers": "skin",
+    "skin_fragility": "skin", "skin_lesions": "skin",
+    "skin_twitching": "skin", "subcutaneous_mass": "skin",
+    "ulcerated_mass": "skin", "visible_parasites": "skin",
+    # 眼
+    "blindness": "eyes", "conjunctivitis": "eyes",
+    "cloudiness_in_eyes": "eyes", "corneal_cloudiness": "eyes",
+    "corneal_ulcer": "eyes", "dilated_pupils": "eyes",
+    "enlarged_eye": "eyes", "excessive_tearing": "eyes",
+    "eye_changes": "eyes", "eye_discharge": "eyes",
+    "eye_pain": "eyes", "eye_redness": "eyes",
+    "night_blindness": "eyes", "third_eyelid_protrusion": "eyes",
+    # 耳
+    "ear_discharge": "ears", "ear_droop": "ears",
+    "ear_inflammation": "ears", "ear_tip_lesions": "ears",
+    "hearing_loss": "ears", "head_shaking": "ears",
+    "scratching_ears": "ears",
+    # 呼吸器
+    "coughing": "respiratory", "labored_breathing": "respiratory",
+    "nasal_discharge": "respiratory", "noisy_breathing": "respiratory",
+    "open_mouth_breathing": "respiratory", "sneezing": "respiratory",
+    "snoring": "respiratory", "voice_change": "respiratory",
+    "wheezing": "respiratory",
+    # 消化器・口腔
+    "acetone_breath": "digestive", "appetite_loss": "digestive",
+    "bad_breath": "digestive", "bloody_stool": "digestive",
+    "constipation": "digestive", "diarrhea": "digestive",
+    "difficulty_eating": "digestive", "difficulty_swallowing": "digestive",
+    "drooling": "digestive", "eating_non_food": "digestive",
+    "flatulence": "digestive", "fecal_incontinence": "digestive",
+    "gagging": "digestive", "increased_appetite": "digestive",
+    "oral_masses": "digestive", "oral_ulcers": "digestive",
+    "pale_stool": "digestive", "prognathia": "digestive",
+    "regurgitation": "digestive", "scooting": "digestive",
+    "stomatitis": "digestive", "straining_to_defecate": "digestive",
+    "tooth_loss": "digestive", "visible_tissue_protrusion": "digestive",
+    "visible_worms": "digestive", "vomiting": "digestive",
+    # 骨格・四肢
+    "deformity": "musculoskeletal", "enlarged_head": "musculoskeletal",
+    "hind_limb_paralysis": "musculoskeletal", "lameness": "musculoskeletal",
+    "non_weight_bearing": "musculoskeletal", "short_thick_tail": "musculoskeletal",
+    "stiffness": "musculoskeletal",
+    # 神経
+    "ataxia": "neurological", "circling": "neurological",
+    "decreased_reflexes": "neurological", "disorientation": "neurological",
+    "facial_nerve_paralysis": "neurological", "facial_twitching": "neurological",
+    "falling": "neurological", "head_pressing": "neurological",
+    "head_tilt": "neurological", "jaw_drop": "neurological",
+    "limp_tail": "neurological", "muscle_spasms": "neurological",
+    "nystagmus": "neurological", "paralysis": "neurological",
+    "seizures": "neurological", "tremors": "neurological",
+    "ventroflexion_of_neck": "neurological",
+    # 泌尿器・生殖器
+    "bloody_urine": "urinary", "dark_urine": "urinary",
+    "decreased_urination": "urinary", "excessive_urination": "urinary",
+    "frequent_urination": "urinary", "inappropriate_urination": "urinary",
+    "mammary_masses": "urinary", "prolonged_labor": "urinary",
+    "straining_to_urinate": "urinary", "swollen_testicle": "urinary",
+    "urinary_incontinence": "urinary", "vaginal_discharge": "urinary",
+    # 循環器
+    "bradycardia": "cardiovascular", "cold_extremities": "cardiovascular",
+    "collapse": "cardiovascular", "cyanosis": "cardiovascular",
+    "exercise_intolerance": "cardiovascular", "heart_murmur": "cardiovascular",
+    "irregular_heartbeat": "cardiovascular", "muffled_heart_sounds": "cardiovascular",
+    "pleural_effusion": "cardiovascular",
+    # 体型・全身
+    "abdominal_distension": "body", "abdominal_contractions": "body",
+    "abdominal_pain": "body", "chin_swelling": "body",
+    "dehydration": "body", "dry_nose": "body",
+    "facial_swelling": "body", "lip_swelling": "body",
+    "muscle_wasting": "body", "stunted_growth": "body",
+    "swelling": "body", "weight_gain": "body",
+    "weight_loss": "body",
+    # 行動・活動
+    "aggression": "behavior", "behavioral_changes": "behavior",
+    "decreased_activity": "behavior", "excessive_grooming": "behavior",
+    "hiding": "behavior", "hyperactivity": "behavior",
+    "jaw_chattering": "behavior", "lethargy": "behavior",
+    "muscle_weakness": "behavior", "night_waking": "behavior",
+    "pain": "behavior", "pawing_at_face": "behavior",
+    "plantigrade_stance": "behavior", "reluctance_to_jump": "behavior",
+    "self_mutilation": "behavior", "skipping_gait": "behavior",
+    "squinting": "behavior", "tail_chasing": "behavior",
+    "vocalization_changes": "behavior", "weakness": "behavior",
+    "wool_sucking": "behavior",
+    # 内科・血液
+    "bleeding": "internal", "bleeding_gums": "internal",
+    "bloody_discharge": "internal", "excessive_thirst": "internal",
+    "fever": "internal", "hyperthermia": "internal",
+    "hypothermia": "internal", "jaundice": "internal",
+    "lymph_node_enlargement": "internal", "pale_gums": "internal",
+    "recurrent_infections": "internal",
+}
+
+
 DISEASES: List[Dict[str, Any]] = [
     # =========================================================================
     # RESPIRATORY DISEASES
