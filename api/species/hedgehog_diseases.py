@@ -35,7 +35,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antiparasitic treatment. Reinfection is possible without environmental management.",
         "prognosis_ja": "適切な駆虫薬治療で予後良好。環境管理なしでは再感染の可能性あり。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Quilling (Physiological)",
@@ -56,7 +56,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "クイリング（生理的針交換）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Ringworm (Dermatophytosis)",
@@ -77,7 +77,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antifungal therapy, though treatment course may be prolonged. Environmental recontamination can cause recurrence.",
         "prognosis_ja": "適切な抗真菌療法で予後良好。治療期間は長期化することがある。環境の再汚染による再発に注意。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Dry Skin",
@@ -98,7 +98,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "乾燥性皮膚炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Skin Abscess",
@@ -119,7 +119,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "皮膚膿瘍の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Cutaneous Squamous Cell Carcinoma",
@@ -130,11 +130,11 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "radiography"],
         "causes": "Exact etiology is unknown; hedgehogs have a high overall incidence of neoplasia. Chronic skin irritation, UV exposure, and genetic predisposition may contribute to malignant transformation of cutaneous squamous epithelial cells.",
-        "causes_ja": "馬における皮膚扁平上皮癌の原因: 皮膚の扁平上皮癌。非色素部位・紫外線暴露で好発。",
+        "causes_ja": "ハリネズミにおける皮膚扁平上皮癌の原因: ハリネズミは腫瘍発生率が高く、扁平上皮癌は皮膚腫瘍の中で比較的多い。慢性皮膚刺激、紫外線曝露、遺伝的素因が発生に関与。高齢個体に好発し、潰瘍性または隆起性の皮膚腫瘤として現れる。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
-        "pathophysiology_ja": "皮膚扁平上皮癌は馬における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
+        "pathophysiology_ja": "皮膚扁平上皮癌はハリネズミにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "treatment": "Treatment options include surgical excision, chemotherapy, radiation therapy, and palliative care depending on tumor type, location, and staging. Supportive care and pain management are essential.",
-        "treatment_ja": "馬における皮膚扁平上皮癌の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "ハリネズミにおける皮膚扁平上皮癌の治療: 十分なマージンを確保した外科的切除が第一選択。四肢遠位の腫瘍では断脚が必要な場合がある。不完全切除例では放射線療法を検討。転移性疾患には化学療法（カルボプラチン等）を考慮。根治困難な場合は鎮痛薬（メロキシカム0.2mg/kg SID）と栄養サポートによる緩和ケア。",
         "prevention": "Prevention is limited for most neoplastic conditions. Regular health examinations facilitate early detection. Spaying/neutering may reduce risk of hormone-dependent tumors.",
         "prevention_ja": "Prevention includes appropriate management, regular veterinary examinations, proper nutrition, controlled exercise, and maintaining a safe environment.",
         "prognosis": "Prognosis depends on tumor type, staging, and response to treatment. Early detection improves outcomes. Malignant tumors carry a guarded to poor long-term prognosis.",
@@ -161,7 +161,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "適切な抗菌薬療法と感染源制御で予後良好。慢性または深部感染は長期管理が必要。免疫不全の個体はより予後要注意。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Oncological
@@ -356,7 +356,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "栄養疾患の予後は欠乏/過剰の程度と是正の速やかさに依存する。早期発見と食事是正で予後良好。重度の栄養障害や不可逆的な組織損傷がある場合は予後慎重。適切な食事指導が再発予防の鍵。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Diarrhea (Non-specific)",
@@ -377,7 +377,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "非特異的下痢（Exotic Other）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Gastrointestinal Foreign Body",
@@ -398,7 +398,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "消化管内異物の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Hepatic Lipidosis",
@@ -440,7 +440,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "腸炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Colitis",
@@ -461,7 +461,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "炎症性疾患の予後は原因の特定と除去、治療反応に依存する。急性炎症は適切な治療で予後良好な場合が多い。慢性炎症は長期管理が必要で、進行性臓器障害のリスクがある。抗炎症療法と原因治療の併用が予後改善に重要。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Rectal Prolapse",
@@ -482,7 +482,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Dental
@@ -506,7 +506,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "歯周病の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Gingivitis",
@@ -527,7 +527,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "歯肉炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Tooth Root Abscess",
@@ -548,7 +548,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good with appropriate antimicrobial therapy and source control. Chronic or deep-seated infections may require prolonged treatment. Immunocompromised patients have a more guarded prognosis.",
         "prognosis_ja": "歯根膿瘍の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Dental Tartar",
@@ -569,7 +569,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Fair to good with regular dental management. Hereditary malocclusion requires lifelong monitoring and periodic correction.",
         "prognosis_ja": "歯石の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Respiratory
@@ -593,7 +593,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "肺炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Upper Respiratory Infection",
@@ -614,7 +614,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "上部気道感染症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Mycobacteriosis (Pulmonary)",
@@ -635,7 +635,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Neurological
@@ -680,7 +680,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Seizures",
@@ -701,7 +701,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Brain Tumor",
@@ -802,17 +802,17 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["radiography", "physical_exam"],
         "causes": "Caused by traumatic injury from falls, cage accidents (wheel injuries, wire floors), improper handling, or metabolic bone disease weakening bone structure. Hedgehog limbs are small and fragile.",
-        "causes_ja": "筋骨格系組織への物理的外傷が原因。転落・ケージ損傷・取扱い事故・同居個体や捕食者からの咬傷・環境危険物が一般的原因。ウサギの解剖学的特性が特定の損傷タイプへの素因となりうる。二次合併症として感染・治癒遅延・慢性疼痛がある。",
+        "causes_ja": "ハリネズミにおける四肢骨折の原因: ケージ内の器具（回し車のスリット、ワイヤーフロア）への足の挟み込み、落下事故、不適切な取り扱いが主因。ハリネズミの四肢は細く脆弱で骨折しやすい。代謝性骨疾患（MBD）による骨脆弱化も素因となる。",
         "pathophysiology": "Mechanical force exceeds bone strength, causing cortical disruption. Associated soft tissue damage, hemorrhage, and inflammation follow. Healing proceeds through hematoma formation, callus development, and remodeling.",
-        "pathophysiology_ja": "ウサギの筋骨格系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。ウサギでは損傷からのストレスが追加の全身合併症を引き起こしうる。",
+        "pathophysiology_ja": "ハリネズミの四肢骨折では、機械的外力が骨の強度を超えて皮質骨の断裂を引き起こす。周囲軟部組織の損傷、出血、炎症が伴う。ハリネズミは体が小さく四肢が細いため、骨折の固定が技術的に困難である。疼痛とストレスにより丸まり行動が増加し、診察・治療を困難にする。",
         "treatment": "Fracture stabilization (splinting, surgical fixation), pain management with multimodal analgesia, restricted activity, and monitoring for healing complications.",
-        "treatment_ja": "ウサギにおける四肢骨折の治療は、原因に対する特異的療法と支持療法の組み合わせで行う。輸液療法・栄養支持・疼痛管理（種に適した鎮痛薬）・環境最適化が基本。特異的治療は診断に基づき、抗菌薬・駆虫薬・抗真菌薬・外科的介入・支持療法が含まれうる。エキゾチック動物専門獣医師への相談を推奨。",
+        "treatment_ja": "ハリネズミにおける四肢骨折の治療: 閉鎖骨折は外固定（軽量スプリント、テープ固定）が第一選択。複雑骨折や開放骨折では髄内ピンや創外固定器による外科的整復。鎮痛薬（メロキシカム0.2mg/kg SID、ブプレノルフィン0.01-0.05mg/kg SC）。活動制限（狭いケージでの安静）。重度の四肢損傷では断脚も選択肢となる（ハリネズミは3本脚でも適応可能）。",
         "prevention": "Prevention includes providing safe housing, appropriate handling techniques, supervised exercise, and removal of environmental hazards.",
         "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
         "prognosis": "Good for uncomplicated fractures with appropriate stabilization. Open fractures and those with concurrent injuries carry a more guarded prognosis.",
         "prognosis_ja": "外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Osteoarthritis",
@@ -854,7 +854,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "脚の軟部組織損傷の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Toe Loss / Necrosis",
@@ -875,7 +875,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "趾壊死・趾脱落の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Ophthalmological
@@ -899,7 +899,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Conjunctivitis",
@@ -920,7 +920,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "結膜炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Corneal Ulcer",
@@ -941,7 +941,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Retrobulbar Abscess",
@@ -962,7 +962,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good with appropriate antimicrobial therapy and source control. Chronic or deep-seated infections may require prolonged treatment. Immunocompromised patients have a more guarded prognosis.",
         "prognosis_ja": "眼球後膿瘍の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Cataracts",
@@ -1028,7 +1028,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good prognosis. Benign condition that may be managed conservatively or with surgical excision.",
         "prognosis_ja": "膀胱炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Urolithiasis (Bladder Stones)",
@@ -1039,17 +1039,17 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["radiography", "ultrasound", "urinalysis", "urine_culture"],
         "causes": "",
-        "causes_ja": "猫における尿路結石症の原因: 尿路内の鉱物結石形成により、刺激、閉塞、痛みを引き起こします。",
+        "causes_ja": "ハリネズミにおける尿路結石症の原因: 不適切な食事（高ミネラル食）、水分摂取不足、慢性尿路感染が結石形成のリスク因子。ストルバイト結石やシュウ酸カルシウム結石が報告されている。肥満個体や高齢個体に多い。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "尿路結石症は猫における腎・泌尿器疾患である。腎臓、尿管、膀胱、または尿道の構造的・機能的障害を伴う。腎疾患は糸球体濾過、尿細管再吸収・分泌、およびホルモン機能（エリスロポエチン、カルシトリオール、レニン）を障害する。進行性のネフロン喪失により高窒素血症、電解質異常、酸塩基障害が生じる。下部尿路疾患は閉塞、尿石症、上行感染を引き起こしうる。",
+        "pathophysiology_ja": "尿路結石症はハリネズミにおける腎・泌尿器疾患である。尿中のミネラル過飽和により結晶が形成・成長し結石となる。結石が膀胱粘膜を刺激して炎症・出血を引き起こし、尿道閉塞に至ると急性腎不全を招く。慢性的な尿路感染が結石形成を促進する悪循環が生じる。",
         "treatment": "Appropriate medical or surgical intervention based on diagnosis, supportive care with IV fluids as needed, pain management, nutritional support, and regular monitoring of treatment response.",
-        "treatment_ja": "猫における尿路結石症の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "ハリネズミにおける尿路結石症の治療: 膀胱結石は外科的膀胱切開術による摘出が第一選択。尿道閉塞時は緊急カテーテル処置。術後は鎮痛薬（メロキシカム0.2mg/kg SID）、抗菌薬（併発UTI治療）、皮下補液。食事改善（低ミネラル食への変更）と水分摂取促進。結石分析に基づく再発予防策。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "尿路結石症の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "尿路結石症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Urinary Tract Infection",
@@ -1070,7 +1070,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "尿路感染症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Reproductive
@@ -1115,7 +1115,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Mastitis",
@@ -1136,7 +1136,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "乳腺炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Uterine Polyps",
@@ -1157,7 +1157,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "子宮ポリープの予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Metabolic
@@ -1181,7 +1181,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Heatstroke",
@@ -1202,7 +1202,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "熱中症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Fatty Liver Disease (Non-obese)",
@@ -1223,7 +1223,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Variable. Hepatic lipidosis has a fair prognosis with early aggressive nutritional support. Chronic liver disease is guarded depending on underlying cause and degree of fibrosis.",
         "prognosis_ja": "予後は原因と重症度により異なる。肝リピドーシスは早期の積極的栄養サポートで予後やや良好。慢性肝疾患は線維化の程度により予後要注意。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Infectious
@@ -1247,7 +1247,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "サルモネラ症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Mycobacteriosis (Disseminated)",
@@ -1268,7 +1268,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "マイコバクテリア症（播種型）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Herpesvirus Infection",
@@ -1289,7 +1289,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good with appropriate antimicrobial therapy and source control. Chronic or deep-seated infections may require prolonged treatment. Immunocompromised patients have a more guarded prognosis.",
         "prognosis_ja": "ヘルペスウイルス感染症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Parasitic
@@ -1313,7 +1313,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "適切な駆虫薬治療で予後は一般的に良好。重度感染や免疫不全ハリネズミでは予後不良となりうる。環境消毒と再感染予防が長期的な予後改善に重要。定期的な糞便検査と予防的駆虫が推奨される。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Flea Infestation",
@@ -1334,7 +1334,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "適切な駆虫薬治療で予後は一般的に良好。重度感染や免疫不全ハリネズミでは予後不良となりうる。環境消毒と再感染予防が長期的な予後改善に重要。定期的な糞便検査と予防的駆虫が推奨される。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Internal Parasites (Intestinal Worms)",
@@ -1355,7 +1355,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antiparasitic treatment. Reinfection is possible without environmental management.",
         "prognosis_ja": "腸内寄生虫症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Lungworm Infection",
@@ -1376,7 +1376,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good with appropriate antimicrobial therapy and source control. Chronic or deep-seated infections may require prolonged treatment. Immunocompromised patients have a more guarded prognosis.",
         "prognosis_ja": "肺虫感染症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Coccidia Infection",
@@ -1397,7 +1397,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "コクシジウム感染症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Ear Mites",
@@ -1418,7 +1418,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antiparasitic treatment. Reinfection is possible without environmental management.",
         "prognosis_ja": "耳ダニ症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # ──────────────────────────────────────────────
     # Additional Oncological
@@ -1508,7 +1508,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Balloon Syndrome",
@@ -1529,7 +1529,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Ear Infection (Otitis)",
@@ -1550,7 +1550,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "耳感染症（外耳炎）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Adrenal Disease",
@@ -1592,7 +1592,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "陰茎脱出・嵌頓包茎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Green Stool (Stress/Diet)",
@@ -1613,7 +1613,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "緑色便（ストレス・食事性）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Anemia",
@@ -1634,7 +1634,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "貧血の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Intervertebral Disc Disease",
@@ -1655,7 +1655,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "椎間板疾患の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Splenic Disease",
@@ -1676,7 +1676,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "脾臓疾患の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Wobbly Hedgehog Syndrome (WHS) - Early Stage",
@@ -1876,11 +1876,11 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["abdominal_ultrasound", "cbc", "blood_chemistry"],
         "causes": "",
-        "causes_ja": "犬における脾臓血管肉腫の原因: 脾臓の血管の高悪性度腫瘍で、破裂すると致死的な内出血を引き起こします。",
+        "causes_ja": "ハリネズミにおける脾臓血管肉腫の原因: 脾臓の血管内皮細胞から発生する高悪性度腫瘍。ハリネズミは腫瘍の発生率が非常に高く（推定50%以上）、血管肉腫は内臓腫瘍の中で比較的多い。高齢個体に好発し、脾臓破裂による急性腹腔内出血で突然死することがある。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
-        "pathophysiology_ja": "脾臓血管肉腫は犬における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
+        "pathophysiology_ja": "脾臓血管肉腫はハリネズミにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "treatment": "Emergency stabilization with IV fluid therapy, oxygen supplementation, pain management, and treatment directed at the underlying cause. Intensive monitoring of vital parameters and organ function.",
-        "treatment_ja": "犬における脾臓血管肉腫の治療は腫瘍の種類、部位、病期に依存する。アクセス可能な固形腫瘍には十分なマージンを確保した外科的切除が第一選択である。全身性腫瘍、不完全切除、転移性疾患には化学療法が適応となりうる。放射線療法は局所的な腫瘍制御を提供できる。根治療法が困難な場合は疼痛管理、栄養サポート、QOL維持に焦点を当てた緩和ケアを行う。",
+        "treatment_ja": "ハリネズミにおける脾臓血管肉腫の治療は腫瘍の種類、部位、病期に依存する。アクセス可能な固形腫瘍には十分なマージンを確保した外科的切除が第一選択である。全身性腫瘍、不完全切除、転移性疾患には化学療法が適応となりうる。放射線療法は局所的な腫瘍制御を提供できる。根治療法が困難な場合は疼痛管理、栄養サポート、QOL維持に焦点を当てた緩和ケアを行う。",
         "prevention": "Prevention is limited for most neoplastic conditions. Regular health examinations facilitate early detection. Spaying/neutering may reduce risk of hormone-dependent tumors.",
         "prevention_ja": "脾臓血管肉腫の予防は限定的であるが、ホルモン依存性腫瘍軽減のための避妊・去勢手術、既知の発癌物質の回避、早期発見のための定期健診、適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。",
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
@@ -1949,7 +1949,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Caparinia Mange (Severe)",
@@ -1970,7 +1970,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "カパリニアダニ症（重症型）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Quill Mites (Chorioptes)",
@@ -1991,7 +1991,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antiparasitic treatment. Reinfection is possible without environmental management.",
         "prognosis_ja": "針ダニ（コリオプテス）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Demodex Mange",
@@ -2012,7 +2012,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "ニキビダニ症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Dermatophytosis (Severe)",
@@ -2033,7 +2033,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antifungal therapy, though treatment course may be prolonged. Environmental recontamination can cause recurrence.",
         "prognosis_ja": "適切な抗真菌療法で予後良好。治療期間は長期化することがある。環境の再汚染による再発に注意。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Bacterial Quill Folliculitis",
@@ -2054,7 +2054,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "適切な抗菌薬療法と感染源制御で予後良好。慢性または深部感染は長期管理が必要。免疫不全の個体はより予後要注意。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Allergic Dermatitis",
@@ -2075,7 +2075,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "アレルギー性皮膚炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Mycobacterium avium Infection",
@@ -2096,7 +2096,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good with appropriate antimicrobial therapy and source control. Chronic or deep-seated infections may require prolonged treatment. Immunocompromised patients have a more guarded prognosis.",
         "prognosis_ja": "マイコバクテリウム・アビウム感染症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Salmonellosis - Asymptomatic Carrier",
@@ -2117,7 +2117,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "サルモネラ症 - 無症候性キャリアの予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Staphylococcal Dermatitis",
@@ -2138,7 +2138,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "ブドウ球菌性皮膚炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Streptococcal Septicemia",
@@ -2159,7 +2159,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Guarded prognosis. Mortality rates are significant even with aggressive treatment. Early intervention improves survival. Multi-organ dysfunction carries a poor prognosis.",
         "prognosis_ja": "レンサ球菌敗血症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Aspiration Pneumonia",
@@ -2180,7 +2180,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Verminous Pneumonia (Crenosoma)",
@@ -2201,7 +2201,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "虫性肺炎（クレノソーマ）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Capillaria Hepatica Infection",
@@ -2222,7 +2222,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Variable. Hepatic lipidosis has a fair prognosis with early aggressive nutritional support. Chronic liver disease is guarded depending on underlying cause and degree of fibrosis.",
         "prognosis_ja": "カピラリア・ヘパティカ感染の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Fluke Infection (Brachylaemus)",
@@ -2243,7 +2243,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "吸虫感染（ブラキレムス）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Thorny-Headed Worm Infection",
@@ -2264,7 +2264,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with appropriate antimicrobial therapy. Most infections resolve with proper treatment. Chronic or recurrent cases may require longer management.",
         "prognosis_ja": "鉤頭虫感染の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Giardiasis",
@@ -2285,7 +2285,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "ジアルジア症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Renal Amyloidosis",
@@ -2327,7 +2327,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "腎結石症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Pyelonephritis",
@@ -2348,7 +2348,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "腎盂腎炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Urethral Obstruction",
@@ -2369,7 +2369,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with timely surgical intervention. Delayed treatment increases risk of intestinal necrosis, perforation, and peritonitis, which carry a guarded to poor prognosis.",
         "prognosis_ja": "尿道閉塞の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Pregnancy Toxemia",
@@ -2390,7 +2390,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "妊娠中毒症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Retained Fetus",
@@ -2411,7 +2411,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "胎児残留の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Neonatal Mortality / Cannibalism",
@@ -2432,7 +2432,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"puppy", "young"},
+        "age_predisposition": {"young"},
     },
     {
         "name": "Orchitis",
@@ -2453,7 +2453,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "精巣炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Testicular Neoplasia",
@@ -2495,7 +2495,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "陰茎壊死の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Dilated Cardiomyopathy - Advanced",
@@ -2600,7 +2600,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "甲状腺機能低下症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Obesity (Severe / Morbid)",
@@ -2621,7 +2621,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with owner compliance in dietary management and exercise. Weight reduction improves overall health and reduces secondary disease risk.",
         "prognosis_ja": "飼い主の食事管理と運動への取り組みにより予後良好。減量は全体的な健康状態を改善し二次疾患リスクを軽減。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Gastric Dilation / Bloat",
@@ -2632,17 +2632,17 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["abdominal_xray", "physical_exam", "blood_chemistry"],
         "causes": "",
-        "causes_ja": "フェレットにおける胃拡張・鼓腸の原因: 急性の胃拡張で生命を脅かすことがあり、直ちに獣医師の処置が必要です。",
+        "causes_ja": "ハリネズミにおける胃拡張・鼓腸の原因: 急性の胃拡張で生命を脅かすことがあり、直ちに獣医師の処置が必要です。",
         "pathophysiology": "Gastric Dilation / Bloat is a gastrointestinal disorder. Acute gastric dilation which can be life-threatening; requires immediate veterinary attention. The GI pathology involves disruption of mucosal integrity, motility, secretory function, or microbiome balance. Inflammation damages the epithelial barrier, leading to malabsorption, fluid loss, and potential bacterial translocation. Motility disorders (hypomotility/stasis or hypermotility) alter transit time and digestion efficiency. In hindgut fermenters, disruption of cecal/colonic flora can trigger fatal dysbiosis and enterotoxemia.",
-        "pathophysiology_ja": "胃拡張・鼓腸はフェレットにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
+        "pathophysiology_ja": "胃拡張・鼓腸はハリネズミにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "treatment": "Emergency stabilization with IV fluids and shock management, gastric decompression (trocarization or orogastric tube), followed by surgical correction if torsion is present. Post-operative monitoring for reperfusion injury and cardiac arrhythmias.",
-        "treatment_ja": "フェレットにおける胃拡張・鼓腸の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "ハリネズミにおける胃拡張・鼓腸の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
         "prevention": "Prevention of gastric dilation / bloat includes appropriate husbandry, balanced species-specific nutrition, regular veterinary health checks, stress minimization, maintaining clean living conditions, and prompt attention to early clinical signs.",
         "prevention_ja": "胃拡張・鼓腸の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "胃拡張・鼓腸の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Intestinal Intussusception",
@@ -2663,7 +2663,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "腸重積症の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"puppy", "young"},
+        "age_predisposition": {"young"},
     },
     {
         "name": "Intestinal Foreign Body",
@@ -2684,7 +2684,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "腸管異物の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Pancreatitis",
@@ -2705,7 +2705,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "炎症性疾患の予後は原因の特定と除去、治療反応に依存する。急性炎症は適切な治療で予後良好な場合が多い。慢性炎症は長期管理が必要で、進行性臓器障害のリスクがある。抗炎症療法と原因治療の併用が予後改善に重要。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Dental Fracture",
@@ -2726,7 +2726,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Fair to good with regular dental management. Hereditary malocclusion requires lifelong monitoring and periodic correction.",
         "prognosis_ja": "歯の骨折の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Eye Abscess (Retrobulbar)",
@@ -2747,7 +2747,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good with appropriate antimicrobial therapy and source control. Chronic or deep-seated infections may require prolonged treatment. Immunocompromised patients have a more guarded prognosis.",
         "prognosis_ja": "眼膿瘍（後眼窩）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Corneal Laceration",
@@ -2768,7 +2768,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "角膜裂傷の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Glaucoma",
@@ -2810,7 +2810,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on the toxin, amount ingested, and time to treatment. Early decontamination and aggressive supportive care improve outcomes. Severe organ damage may be irreversible.",
         "prognosis_ja": "毒物の種類、摂取量、治療開始までの時間により異なる。早期の除染と積極的な支持療法で予後改善。重度の臓器障害は不可逆的な場合がある。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Spinal Fracture",
@@ -2831,7 +2831,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis is generally good for simple fractures with appropriate stabilization. Complications include malunion, nonunion, and osteomyelitis.",
         "prognosis_ja": "外傷の予後は損傷の重症度と合併症の有無に依存する。軽度外傷は適切な創傷管理で予後良好。重度外傷、多発骨折、脊髄損傷は予後慎重〜不良。早期治療と適切な疼痛管理が回復を促進する。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Digit Amputation Wound",
@@ -2852,7 +2852,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "指切断創の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Thread / Hair Tourniquet (Toe)",
@@ -2873,7 +2873,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "糸/毛の締め付け（指）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Hepatic Neoplasia (General)",
@@ -2936,7 +2936,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "間質性腎炎の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Pneumothorax",
@@ -2957,7 +2957,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "気胸の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Autoimmune Hemolytic Anemia",
@@ -2978,7 +2978,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
         "prognosis_ja": "自己免疫性溶血性貧血の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Chordoma (Spinal)",
@@ -2999,7 +2999,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "脊索腫（脊椎）の予後は適切な管理により一般的にやや良好〜良好である。早期診断された症例の多くは治療に良好に反応する。慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     # =========================================================================
     # ADDITIONAL DISEASES — UNIQUE HEDGEHOG CONDITIONS
@@ -3034,7 +3034,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["physical_exam", "thoracic_radiographs", "bacterial_culture"],
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "senior", "young"},
+        "age_predisposition": {"adult", "young", "senior", "young"},
     },
     {
         "name": "Oral Squamous Cell Carcinoma",
