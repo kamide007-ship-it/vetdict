@@ -1127,6 +1127,35 @@ SYMPTOM_ALIASES = {
     "can't catch food": "inability_to_feed",
     "chytrid": "skin_shedding",
     "ツボカビ": "skin_shedding",
+    # ---------------------------------------------------------------
+    # スパースカバレッジ症状の補強 (Sparse coverage symptom aliases)
+    # ---------------------------------------------------------------
+    # 口腔
+    "mouth ulcer": "oral_ulcers", "mouth ulcers": "oral_ulcers",
+    "mouth sores": "oral_ulcers",
+    "mouth inflammation": "stomatitis", "oral inflammation": "stomatitis",
+    "口臭がひどい": "foul_breath", "halitosis": "foul_breath",
+    "飲水量が増えた": "increased_water_intake",
+    # 骨格・四肢
+    "足が変形してる": "bone_deformity", "骨が曲がってる": "bone_deformity",
+    "bent legs": "bone_deformity", "limb deformity": "bone_deformity",
+    "bowed legs": "bone_deformity",
+    "よろよろしている": "ataxia", "wobbly": "ataxia",
+    # 皮膚
+    "フケが多い": "dandruff", "フケが出る": "dandruff",
+    "かさぶたがある": "crusting",
+    "scabs": "crusting", "scabby": "crusting",
+    # 呼吸
+    "ゼーゼーいってる": "wheezing", "ヒューヒュー音がする": "wheezing",
+    "鼻水が出る": "nasal_discharge",
+    # 眼
+    "watery eyes": "epiphora", "tearing": "epiphora",
+    # 行動・神経
+    "ぐるぐる回る": "circling", "同じところを回る": "circling",
+    "頭を壁に押し付ける": "head_pressing",
+    "head pressing": "head_pressing", "体が震える": "tremors", "shivering": "tremors",
+    # 泌尿
+    "おしっこに血が混じる": "blood_in_urine", "おしっこが赤い": "blood_in_urine",
 }
 
 
