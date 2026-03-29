@@ -3390,6 +3390,99 @@ DISEASES: List[Dict[str, Any]] = [
 
 ]
 
+# Category mapping for symptom checkbox UI
+SYMPTOM_CATEGORIES: Dict[str, str] = {
+    # 皮膚・体表
+    "feather_loss": "skin", "abnormal_feathers": "skin",
+    "subcutaneous_hemorrhage": "skin", "feather_abnormalities": "skin",
+    "skin_lesions": "skin", "crusty_lesions_on_face": "skin",
+    "cloacal_mass": "skin", "foot_swelling": "skin",
+    "white_patches_in_mouth": "skin", "dry_flaky_skin": "skin",
+    "lipomas": "skin", "feather_plucking": "skin",
+    "cere_color_change": "skin", "cloacal_lesions": "skin",
+    "crusty_skin": "skin", "dark_skin_masses": "skin",
+    "dermatitis": "skin", "feather_cysts": "skin",
+    "foul_odor": "skin", "granulomatous_lesions": "skin",
+    "hemorrhage": "skin", "internal_hemorrhage": "skin",
+    "maggots_visible": "skin", "matted_feathers_around_vent": "skin",
+    "papillomas": "skin", "poor_feather_quality": "skin",
+    "skin_irritation": "skin", "skin_masses": "skin",
+    "thickened_skin": "skin", "tissue_necrosis": "skin",
+    "ulcerated_mass": "skin",
+    # 眼
+    "conjunctivitis": "eyes", "vision_loss": "eyes",
+    "eye_cloudiness": "eyes", "eye_discharge": "eyes",
+    "eye_swelling": "eyes", "blindness": "eyes",
+    # 耳
+    "head_shaking": "ears",
+    # 呼吸器
+    "respiratory_distress": "respiratory", "nasal_discharge": "respiratory",
+    "tail_bobbing": "respiratory", "open_mouth_breathing": "respiratory",
+    "sneezing": "respiratory", "voice_change": "respiratory",
+    "gasping": "respiratory", "sinusitis": "respiratory",
+    "stridor": "respiratory", "subcutaneous_emphysema": "respiratory",
+    # 消化器・口腔
+    "regurgitation": "digestive", "undigested_seeds_in_droppings": "digestive",
+    "crop_stasis": "digestive", "anorexia": "digestive",
+    "lime_green_droppings": "digestive", "bloody_droppings": "digestive",
+    "oral_plaques": "digestive", "difficulty_eating": "digestive",
+    "diarrhea": "digestive", "vent_soiling": "digestive",
+    "straining_to_defecate": "digestive", "abnormal_droppings": "digestive",
+    "beak_overgrowth": "digestive", "appetite_loss": "digestive",
+    "crop_distension": "digestive", "dark_droppings": "digestive",
+    "diarrhea_green": "digestive", "dysphagia": "digestive",
+    "oral_lesions": "digestive",
+    # 骨格・四肢
+    "beak_deformity": "musculoskeletal", "lameness": "musculoskeletal",
+    "joint_swelling": "musculoskeletal", "fractures": "musculoskeletal",
+    "bone_deformity": "musculoskeletal", "bone_swelling": "musculoskeletal",
+    "crepitus": "musculoskeletal", "swollen_joints": "musculoskeletal",
+    # 神経
+    "ataxia": "neurological", "seizures": "neurological",
+    "torticollis": "neurological", "paralysis": "neurological",
+    "tremors": "neurological", "clumsiness": "neurological",
+    "loss_of_consciousness": "neurological", "neurological_signs": "neurological",
+    "opisthotonus": "neurological",
+    # 泌尿器・生殖器
+    "polyuria": "urinary", "egg_binding": "urinary",
+    "breeding_behavior": "urinary", "feminization": "urinary",
+    "kidney_calcification": "urinary", "polyuria_polydipsia": "urinary",
+    "swollen_vent": "urinary",
+    # 循環器
+    "cyanosis": "cardiovascular", "exercise_intolerance": "cardiovascular",
+    # 体型・全身
+    "weight_loss": "body", "abdominal_distension": "body",
+    "facial_swelling": "body", "cloacal_swelling": "body",
+    "weight_gain": "body", "swelling": "body",
+    "obesity_related_signs": "body", "ascites": "body",
+    "dehydration": "body", "muscle_wasting": "body",
+    "neck_swelling": "body", "organ_enlargement": "body",
+    "splenomegaly": "body", "swelling_at_tail_base": "body",
+    "swelling_under_skin": "body", "wing_swelling": "body",
+    # 行動・活動
+    "lethargy": "behavior", "reluctance_to_perch": "behavior",
+    "muscle_weakness": "behavior", "difficulty_flying": "behavior",
+    "self_mutilation": "behavior", "screaming": "behavior",
+    "aggression": "behavior", "stereotypic_behavior": "behavior",
+    "wing_droop": "behavior", "inability_to_fly": "behavior",
+    "pain_vocalization": "behavior", "fluffed_feathers": "behavior",
+    "wing_spreading": "behavior", "hyperactivity": "behavior",
+    "inability_to_perch": "behavior", "difficulty_perching": "behavior",
+    "leg_weakness": "behavior", "pain_on_palpation": "behavior",
+    "panic": "behavior", "ruffled_feathers": "behavior",
+    "self_injury": "behavior", "thrashing": "behavior",
+    "weakness": "behavior",
+    # 緊急
+    "sudden_death": "emergency",
+    # 内科・血液
+    "immunosuppression": "internal", "polydipsia": "internal",
+    "bleeding": "internal", "anemia": "internal",
+    "biliverdinuria": "internal", "bleeding_nail": "internal",
+    "bruising": "internal", "discharge_from_vent": "internal",
+    "gout_deposits": "internal", "liver_enlargement": "internal",
+    "secondary_infections": "internal", "septicemia": "internal",
+}
+
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "feather_loss": {"ja": "羽毛脱落", "en": "Feather loss"},
     "beak_deformity": {"ja": "嘴変形", "en": "Beak deformity"},

@@ -2641,6 +2641,115 @@ DISEASES: List[Dict[str, Any]] = [
 # Symptom name lookup
 # ---------------------------------------------------------------------------
 
+# Category mapping for symptom checkbox UI
+SYMPTOM_CATEGORIES: Dict[str, str] = {
+    # 皮膚・体表
+    "bumping_into_objects": "skin", "hair_loss": "skin",
+    "crusty_skin": "skin", "scaly_skin": "skin",
+    "itching": "skin", "scratching": "skin",
+    "circular_lesions": "skin", "patchy_fur": "skin",
+    "skin_redness": "skin", "skin_mass": "skin",
+    "ulceration": "skin", "tail_injury": "skin",
+    "swollen_feet": "skin", "foot_sores": "skin",
+    "rough_coat": "skin", "scratching_ear": "skin",
+    "barbering": "skin", "bite_wounds": "skin",
+    "bleeding_from_mass": "skin", "circular_hair_loss": "skin",
+    "crusting": "skin", "draining_tract": "skin",
+    "exposed_tail_bone": "skin", "extensive_hair_loss": "skin",
+    "foot_swelling": "skin", "foot_ulceration": "skin",
+    "intense_itching": "skin", "poor_coat": "skin",
+    "pruritus": "skin", "severe_foot_swelling": "skin",
+    "skin_abrasion": "skin", "skin_crusting": "skin",
+    "skin_lesions": "skin", "skin_masses": "skin",
+    "skin_scaling": "skin", "skin_thickening": "skin",
+    "slow_growing_lump": "skin", "slow_wound_healing": "skin",
+    "subcutaneous_mass": "skin", "tail_necrosis": "skin",
+    "visible_lice": "skin", "widespread_lesions": "skin",
+    # 眼
+    "cloudy_eyes": "eyes", "vision_loss": "eyes",
+    "eye_discharge": "eyes", "eye_redness": "eyes",
+    "eye_swelling": "eyes", "pawing_at_eye": "eyes",
+    "sunken_eyes": "eyes", "conjunctivitis": "eyes",
+    "corneal_opacity": "eyes", "dilated_pupils": "eyes",
+    "enlarged_eye": "eyes", "epiphora": "eyes",
+    "eye_pain": "eyes",
+    # 耳
+    "ear_discharge": "ears",
+    # 呼吸器
+    "sneezing": "respiratory", "nasal_discharge": "respiratory",
+    "labored_breathing": "respiratory", "rapid_breathing": "respiratory",
+    "coughing": "respiratory", "chronic_sneezing": "respiratory",
+    "respiratory_distress": "respiratory",
+    # 消化器・口腔
+    "drooling": "digestive", "appetite_loss": "digestive",
+    "teeth_grinding": "digestive", "visible_tooth_overgrowth": "digestive",
+    "diarrhea": "digestive", "bloating": "digestive",
+    "reduced_fecal_output": "digestive", "straining": "digestive",
+    "vomiting": "digestive", "bloody_stool": "digestive",
+    "tissue_protrusion_anus": "digestive", "dark_stool": "digestive",
+    "difficulty_eating": "digestive", "excessive_hunger": "digestive",
+    "gas": "digestive", "perianal_irritation": "digestive",
+    "selective_eating": "digestive", "soft_jaw": "digestive",
+    "soft_stool": "digestive", "tooth_discoloration": "digestive",
+    "tooth_fracture": "digestive", "visible_proglottids": "digestive",
+    # 骨格・四肢
+    "exposed_bone": "musculoskeletal", "lameness": "musculoskeletal",
+    "limb_deformity": "musculoskeletal", "stiffness": "musculoskeletal",
+    "swollen_joints": "musculoskeletal", "bone_infection": "musculoskeletal",
+    "bone_pain": "musculoskeletal", "crepitus": "musculoskeletal",
+    "hind_limb_weakness": "musculoskeletal", "intermittent_lameness": "musculoskeletal",
+    "limb_fracture": "musculoskeletal", "limb_stiffness": "musculoskeletal",
+    "limb_swelling": "musculoskeletal", "non_weight_bearing": "musculoskeletal",
+    "pathological_fracture": "musculoskeletal", "pathological_fractures": "musculoskeletal",
+    # 神経
+    "hind_leg_paralysis": "neurological", "dragging_legs": "neurological",
+    "seizures": "neurological", "disorientation": "neurological",
+    "head_tilt": "neurological", "circling": "neurological",
+    "nystagmus": "neurological", "abnormal_gait": "neurological",
+    "memory_loss": "neurological", "reduced_reflexes": "neurological",
+    # 泌尿器・生殖器
+    "polyuria": "urinary", "incontinence": "urinary",
+    "blood_in_urine": "urinary", "frequent_urination": "urinary",
+    "vaginal_discharge": "urinary", "mammary_mass": "urinary",
+    "testicular_swelling": "urinary", "asymmetric_testes": "urinary",
+    "mammary_redness": "urinary", "mammary_swelling": "urinary",
+    "straining_to_urinate": "urinary", "vulvar_swelling": "urinary",
+    # 循環器
+    "cold_extremities": "cardiovascular", "cyanosis": "cardiovascular",
+    "collapse": "cardiovascular", "exercise_intolerance": "cardiovascular",
+    "muffled_heart_sounds": "cardiovascular",
+    # 体型・全身
+    "weight_loss": "body", "weight_gain": "body",
+    "obesity": "body", "dehydration": "body",
+    "facial_swelling": "body", "swelling": "body",
+    "distended_abdomen": "body", "abdominal_distension": "body",
+    "abdominal_pain": "body", "edema": "body",
+    "failure_to_thrive": "body", "jaw_swelling": "body",
+    "lymph_node_swelling": "body", "muscle_wasting": "body",
+    "rapid_growth": "body", "splenomegaly": "body",
+    "swelling_at_tail_stump": "body",
+    # 行動・活動
+    "lethargy": "behavior", "shivering": "behavior",
+    "squinting": "behavior", "stress_behavior": "behavior",
+    "reluctance_to_move": "behavior", "pain": "behavior",
+    "reduced_activity": "behavior", "restlessness": "behavior",
+    "loss_of_balance": "behavior", "aggression": "behavior",
+    "back_pain": "behavior", "behavioral_changes": "behavior",
+    "cold_intolerance": "behavior", "confusion": "behavior",
+    "decreased_social_interaction": "behavior", "repetitive_behavior": "behavior",
+    "sleep_pattern_changes": "behavior", "stereotypic_behavior": "behavior",
+    "stress_signs": "behavior", "vocalization": "behavior",
+    "weakness": "behavior",
+    # 緊急
+    "sudden_death": "emergency",
+    # 内科・血液
+    "polydipsia": "internal", "hyperglycemia": "internal",
+    "fever": "internal", "bleeding_gums": "internal",
+    "bleeding": "internal", "discharge": "internal",
+    "jaundice": "internal", "anemia": "internal",
+    "hypothermia": "internal",
+}
+
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     # Endocrine / Metabolic
     "polyuria": {"ja": "多尿", "en": "Polyuria"},

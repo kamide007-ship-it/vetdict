@@ -3049,6 +3049,102 @@ DISEASES: List[Dict[str, Any]] = [
     },
 ]
 
+# Category mapping for symptom checkbox UI
+SYMPTOM_CATEGORIES: Dict[str, str] = {
+    # 皮膚・体表
+    "mucus_in_mouth": "skin", "skin_irritation": "skin",
+    "visible_mites": "skin", "dysecdysis": "skin",
+    "rubbing_against_objects": "skin", "visible_parasites": "skin",
+    "skin_lesions": "skin", "blisters": "skin",
+    "scale_discoloration": "skin", "foul_odor": "skin",
+    "skin_necrosis": "skin", "retained_skin": "skin",
+    "skin_constriction": "skin", "dull_coloration": "skin",
+    "retained_spectacle": "skin", "skin_burns": "skin",
+    "crusty_patches": "skin", "skin_redness": "skin",
+    "nose_abrasion": "skin", "scale_spreading": "skin",
+    "wrinkled_skin": "skin", "decreased_skin_elasticity": "skin",
+    "skin_hemorrhage": "skin", "petechia": "skin",
+    "firm_mass": "skin", "ulcerated_mass": "skin",
+    "granulomatous_lesions": "skin", "crusty_nodules": "skin",
+    "crusty_scales": "skin", "dark_skin_masses": "skin",
+    "dermatitis": "skin", "discoloration": "skin",
+    "orange_red_clusters": "skin", "papular_dermatitis": "skin",
+    "poor_wound_healing": "skin", "pruritus": "skin",
+    "skin_blistering": "skin", "skin_color_changes": "skin",
+    "skin_discoloration": "skin", "skin_masses": "skin",
+    "skin_nodules": "skin", "skin_papillomas": "skin",
+    "skin_sloughing": "skin", "skin_ulceration": "skin",
+    "soft_mass": "skin", "tail_necrosis": "skin",
+    "tissue_discoloration": "skin", "ulcerated_masses": "skin",
+    "visible_leeches": "skin", "wart_like_growths": "skin",
+    "yellow_skin_lesions": "skin",
+    # 眼
+    "cloudy_eyes": "eyes", "eye_swelling": "eyes",
+    "sunken_eyes": "eyes", "bulging_eye": "eyes",
+    "eye_discharge": "eyes", "swollen_eyes": "eyes",
+    "eye_opacity": "eyes",
+    # 呼吸器
+    "respiratory_distress": "respiratory", "nasal_discharge": "respiratory",
+    "open_mouth_breathing": "respiratory", "wheezing": "respiratory",
+    "pneumonia_signs": "respiratory", "pneumonia": "respiratory",
+    "upper_respiratory_signs": "respiratory",
+    # 消化器・口腔
+    "regurgitation": "digestive", "anorexia": "digestive",
+    "diarrhea": "digestive", "mouth_lesions": "digestive",
+    "stomatitis": "digestive", "drooling": "digestive",
+    "oral_hemorrhage": "digestive", "bloody_stool": "digestive",
+    "mucus_in_stool": "digestive", "constipation": "digestive",
+    "straining": "digestive", "tissue_prolapse": "digestive",
+    "intestinal_obstruction": "digestive", "mouth_rot": "digestive",
+    "oral_lesions": "digestive", "oral_mucus": "digestive",
+    "poor_appetite": "digestive", "poor_feeding_response": "digestive",
+    "segments_in_stool": "digestive",
+    # 骨格・四肢
+    "swollen_joints": "musculoskeletal", "joint_pain": "musculoskeletal",
+    "lameness": "musculoskeletal", "kinking": "musculoskeletal",
+    "bone_deformity": "musculoskeletal", "bone_weakness": "musculoskeletal",
+    "fractures": "musculoskeletal", "jaw_softening": "musculoskeletal",
+    "kinking_of_body": "musculoskeletal",
+    # 神経
+    "neurological_signs": "neurological", "stargazing": "neurological",
+    "head_tilt": "neurological", "tremors": "neurological",
+    "paralysis": "neurological", "loss_of_righting_reflex": "neurological",
+    "seizures": "neurological", "circling": "neurological",
+    "slow_reflexes": "neurological", "loss_of_movement_posterior": "neurological",
+    "muscle_twitching": "neurological", "vestibular_signs": "neurological",
+    # 泌尿器・生殖器
+    "kidney_enlargement": "urinary", "reproductive_failure": "urinary",
+    "tissue_protruding_from_cloaca": "urinary",
+    # 循環器
+    "cyanosis": "cardiovascular",
+    # 体型・全身
+    "weight_loss": "body", "facial_swelling": "body",
+    "swelling": "body", "body_swelling": "body",
+    "mid_body_swelling": "body", "dehydration": "body",
+    "abdominal_swelling": "body", "excessive_weight": "body",
+    "fat_deposits": "body", "cloacal_swelling": "body",
+    "edema": "body", "organ_enlargement": "body",
+    "poor_body_condition": "body", "generalized_swelling": "body",
+    "head_swelling": "body", "muscle_wasting": "body",
+    "posterior_body_swelling": "body", "swelling_at_site": "body",
+    # 行動・活動
+    "lethargy": "behavior", "elevated_head_posture": "behavior",
+    "excessive_soaking": "behavior", "difficulty_moving": "behavior",
+    "weakness": "behavior", "restlessness": "behavior",
+    "abnormal_posture": "behavior", "hiding_behavior": "behavior",
+    "defensive_behavior": "behavior", "pain_response": "behavior",
+    "muscle_weakness": "behavior", "pain_on_handling": "behavior",
+    # 緊急
+    "sudden_death": "emergency", "unconsciousness": "emergency",
+    # 内科・血液
+    "swollen_gums": "internal", "anemia": "internal",
+    "jaundice": "internal", "gout_tophi": "internal",
+    "bleeding": "internal", "immunosuppression": "internal",
+    "liver_enlargement": "internal", "organ_failure": "internal",
+    "pale_mucous_membranes": "internal", "septicemia": "internal",
+    "tissue_calcification": "internal",
+}
+
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "neurological_signs": {"ja": "神経学的徴候", "en": "Neurological signs"},
     "stargazing": {"ja": "スターゲイジング", "en": "Stargazing"},
