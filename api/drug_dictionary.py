@@ -1954,6 +1954,12 @@ for _drug_id, _species_patch in CHINCHILLA_SPECIES_PATCH.items():
             if _sp not in _target:
                 _target[_sp] = _info
 
+# Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
+_DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
+for _d in DRUGS:
+    _cat = _d.get("category", "")
+    _DRUG_COUNT_BY_CATEGORY[_cat] = _DRUG_COUNT_BY_CATEGORY.get(_cat, 0) + 1
+
 # ---------------------------------------------------------------------------
 # 検索・フィルタ関数
 # ---------------------------------------------------------------------------
@@ -2045,7 +2051,7 @@ def api_drug_categories():
     """薬品カテゴリ一覧を返す。"""
     cats = []
     for cat_id, names in DRUG_CATEGORIES.items():
-        count = len([d for d in DRUGS if d["category"] == cat_id])
+        count = _DRUG_COUNT_BY_CATEGORY.get(cat_id, 0)
         cats.append({"id": cat_id, "name_ja": names["ja"], "name_en": names["en"], "count": count})
     cats.sort(key=lambda c: c["count"], reverse=True)
     return jsonify({"categories": cats, "total_drugs": len(DRUGS)})
