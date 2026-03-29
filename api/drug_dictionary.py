@@ -172,7 +172,7 @@ DRUGS: List[Dict[str, Any]] = [
         "mechanism_ja": "ニトロイミダゾール系。嫌気性菌とプロトゾアのDNA合成を阻害する。",
         "species_info": {
             "dog": {"safe": True, "dosage": "10-15 mg/kg PO q12h", "dosage_ja": "10-15 mg/kg 経口 12時間毎", "notes": "Neurotoxicity at high doses or prolonged use. Bitter taste.", "notes_ja": "高用量や長期投与で神経毒性。苦味がある。"},
-            "cat": {"safe": True, "dosage": "10-15 mg/kg PO q12h", "dosage_ja": "10-15 mg/kg 経口 12時間毎", "notes": "Cats more sensitive to neurotoxicity. Use lower doses.", "notes_ja": "猫は神経毒性に敏感。低用量で使用。"},
+            "cat": {"safe": True, "dosage": "10-15 mg/kg PO q24h (or 5-7.5 mg/kg q12h; max 7.5 mg/kg/dose)", "dosage_ja": "10-15 mg/kg 経口 24時間毎（または5-7.5 mg/kg 12時間毎。1回最大7.5 mg/kg）", "notes": "CATS SENSITIVE — max 7.5 mg/kg/dose. Neurotoxicity (ataxia, seizures) at higher doses or >5 days. Stop immediately if neurological signs appear.", "notes_ja": "【猫は神経毒性に敏感】1回7.5 mg/kgを超えないこと。高用量や5日以上の投与で運動失調・痙攣のリスク。神経症状が出たら直ちに中止。"},
             "horse": {"safe": True, "dosage": "15-25 mg/kg PO q6-8h", "dosage_ja": "15-25 mg/kg 経口 6-8時間毎", "notes": "Used for anaerobic infections, clostridial diseases", "notes_ja": "嫌気性感染症・クロストリジウム症に使用"},
             "rabbit": {"safe": True, "dosage": "20 mg/kg PO q12h", "dosage_ja": "20 mg/kg 経口 12時間毎", "notes": "Use with caution; monitor for GI disturbance", "notes_ja": "注意して使用。消化器症状を観察"},
             "guinea_pig": {"safe": True, "dosage": "20 mg/kg PO q12h", "dosage_ja": "20 mg/kg 経口 12時間毎", "notes": "Use with caution", "notes_ja": "注意して使用"},
