@@ -4021,7 +4021,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "急性胃鼓脹はハムスターにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "treatment": "Emergency stabilization with IV fluids and shock management, gastric decompression (trocarization or orogastric tube), followed by surgical correction if torsion is present. Post-operative monitoring for reperfusion injury and cardiac arrhythmias.",
-        "treatment_ja": "ハムスターにおける急性胃鼓脹の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "ハムスターにおける急性胃鼓脹の緊急治療: 重度の腹部膨満には25G針による経皮的胃ガス減圧（左側腹部から慎重に穿刺）。シメチコン経口投与（消泡剤、小動物用量）。皮下補液（温めた乳酸リンゲル液または生理食塩水、体重の3-4%量）で循環維持。鎮痛としてメロキシカム0.2mg/kg SC SIDまたはブプレノルフィン0.05-0.1mg/kg SC q8-12h。保温（25-28℃の温かい環境に安置）。絶食後、回復に合わせて少量ずつ給餌を再開。原因食物（発酵性の高い野菜・果物）の除去。再発防止のため高繊維食への食事改善。",
         "prevention": "Prevention includes providing a high-fiber diet, ensuring adequate hydration, regular exercise, stress reduction, and maintaining proper environmental conditions.",
         "prevention_ja": "急性胃鼓脹の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
