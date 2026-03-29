@@ -527,20 +527,48 @@ function resetSpeciesChat(species){
   });
 }
 
+let cachedBreeds=[];
 function loadBreeds(species){
   const requestId=++breedRequestId;
   const area=document.getElementById("breedSelectArea");
   const select=document.getElementById("breedSelect");
   select.innerHTML=`<option value="">${t("breedNone")}</option>`;
-  currentBreed="";
+  currentBreed="";cachedBreeds=[];
+  const ecoPanel=document.getElementById("breedEcologyPanel");
+  if(ecoPanel)ecoPanel.innerHTML="";
   fetchWithTimeout("/api/breeds/"+species).then(r=>r.json()).then(data=>{
     if(requestId!==breedRequestId||species!==currentSpecies)return;
     if(data.breeds&&data.breeds.length>0){
+      cachedBreeds=data.breeds;
       data.breeds.forEach(b=>{select.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(b.id)}">${escapeHtml(b.name_ja)} (${escapeHtml(b.name)})</option>`);});
       area.classList.remove("hidden");
     }else{area.classList.add("hidden");}
   }).catch(()=>{if(requestId===breedRequestId)area.classList.add("hidden");});
-  select.onchange=function(){currentBreed=this.value;};
+  select.onchange=function(){currentBreed=this.value;showBreedEcologyPanel(this.value);};
+}
+function showBreedEcologyPanel(breedId){
+  const panel=document.getElementById("breedEcologyPanel");
+  if(!panel)return;
+  if(!breedId){panel.innerHTML="";return;}
+  const breed=cachedBreeds.find(b=>b.id===breedId);
+  const eco=breed&&breed.ecology?breed.ecology:null;
+  if(!eco){panel.innerHTML="";return;}
+  const bName=currentLang==="ja"?(breed.name_ja||breed.name):breed.name;
+  const rows=[];
+  if(eco.lifespan)rows.push({icon:"⏱",label:currentLang==="ja"?"平均寿命":"Lifespan",val:`${eco.lifespan.min}–${eco.lifespan.max} ${eco.lifespan.unit==="years"?(currentLang==="ja"?"年":"yrs"):eco.lifespan.unit}`});
+  if(eco.weight)rows.push({icon:"⚖️",label:currentLang==="ja"?"体重":"Weight",val:`${eco.weight.min}–${eco.weight.max} ${eco.weight.unit}`});
+  if(eco.temperature)rows.push({icon:"🌡",label:currentLang==="ja"?"適正温度":"Temperature",val:`${eco.temperature.min}–${eco.temperature.max}${eco.temperature.unit}`});
+  if(eco.humidity)rows.push({icon:"💧",label:currentLang==="ja"?"適正湿度":"Humidity",val:`${eco.humidity.min}–${eco.humidity.max}${eco.humidity.unit}`});
+  const diet=currentLang==="ja"?(eco.diet_ja||eco.diet||""):(eco.diet||eco.diet_ja||"");
+  const housing=currentLang==="ja"?(eco.housing_ja||eco.housing||""):(eco.housing||eco.housing_ja||"");
+  const notes=currentLang==="ja"?(eco.notes_ja||eco.notes||""):(eco.notes||eco.notes_ja||"");
+  panel.innerHTML=`<div class="breed-ecology-section" style="margin-top:10px">
+    <div class="breed-ecology-header">🐾 ${escapeHtml(bName)} ${currentLang==="ja"?"の生態・飼育環境":"Ecology & Husbandry"}</div>
+    <div class="breed-ecology-grid">${rows.map(r=>`<div class="breed-ecology-item"><span class="breed-ecology-icon">${r.icon}</span><span class="breed-ecology-label">${r.label}</span><span class="breed-ecology-val">${r.val}</span></div>`).join("")}</div>
+    ${diet?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"食事":"Diet"}:</strong> ${escapeHtml(diet)}</div>`:""}
+    ${housing?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"飼育環境":"Housing"}:</strong> ${escapeHtml(housing)}</div>`:""}
+    ${notes?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"特記事項":"Notes"}:</strong> ${escapeHtml(notes)}</div>`:""}
+  </div>`;
 }
 
 function loadSymptoms(species){
