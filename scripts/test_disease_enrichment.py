@@ -33,7 +33,7 @@ def test_enrichment():
 
     # Load disease database
     try:
-        from api.symptom_checker import _DISEASE_DB
+        from api.species.dog_diseases import DISEASES as _DISEASE_DB
         print(f"✓ Loaded {len(_DISEASE_DB)} diseases")
     except Exception as e:
         print(f"✗ Failed to load disease database: {e}")
@@ -128,7 +128,7 @@ def show_batch_recommendations():
     print("=" * 70)
 
     from api.disease_batch_enricher import DiseaseBatchEnricher
-    from api.symptom_checker import _DISEASE_DB
+    from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
     enricher = DiseaseBatchEnricher()
     batches = enricher.create_batch_requests(_DISEASE_DB)

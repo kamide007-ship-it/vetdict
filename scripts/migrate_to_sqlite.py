@@ -45,10 +45,10 @@ SPECIES_MODULES = {
     "exotic_other": "api.species.exotic_other_diseases",
 }
 
-# Dog uses symptom_checker module (different structure)
-DOG_MODULE = "api.symptom_checker"
-DOG_DISEASES_VAR = "_DISEASE_DB"
-DOG_SYMPTOMS_VAR = "_SYMPTOM_NAMES"
+# Dog uses dedicated species module (same structure as other species)
+DOG_MODULE = "api.species.dog_diseases"
+DOG_DISEASES_VAR = "DISEASES"
+DOG_SYMPTOMS_VAR = "SYMPTOM_NAMES"
 
 
 def _load_module(module_path: str):

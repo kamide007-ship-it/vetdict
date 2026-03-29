@@ -3637,9 +3637,9 @@ def get_diseases():
     output = []
     if species == "dog" or species is None:
         try:
-            from api.symptom_checker import _DISEASE_DB
+            from api.species.dog_diseases import DISEASES as _DISEASE_DB
         except ImportError:
-            from symptom_checker import _DISEASE_DB
+            from species.dog_diseases import DISEASES as _DISEASE_DB
         for d in _DISEASE_DB:
             symptoms = d.get("symptoms", set())
             if isinstance(symptoms, set):

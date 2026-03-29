@@ -36,7 +36,7 @@ sys.path.insert(0, str(project_root))
 
 from api.disease_batch_enricher import DiseaseBatchEnricher
 from api.disease_content_enricher import DiseaseEnricher
-from api.symptom_checker import _DISEASE_DB
+from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
 
 class Phase1Scheduler:

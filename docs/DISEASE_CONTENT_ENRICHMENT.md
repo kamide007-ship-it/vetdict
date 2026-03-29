@@ -55,7 +55,7 @@ print(enriched['treatment'])
 
 ```python
 from api.disease_batch_enricher import DiseaseBatchEnricher
-from api.symptom_checker import _DISEASE_DB
+from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
 enricher = DiseaseBatchEnricher()
 
@@ -78,7 +78,7 @@ print(f"Results: {result['results']}")
 
 ```python
 from api.disease_content_enricher import DiseaseEnricher
-from api.symptom_checker import _DISEASE_DB
+from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
 enricher = DiseaseEnricher()
 status = enricher.get_enrichment_status(_DISEASE_DB)
@@ -109,7 +109,7 @@ pip install anthropic>=0.7.0
 ```python
 # test_enrichment.py
 from api.disease_batch_enricher import DiseaseBatchEnricher
-from api.symptom_checker import _DISEASE_DB
+from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
 # 最初の100疾患でテスト
 enricher = DiseaseBatchEnricher()
@@ -129,7 +129,7 @@ for disease in sample_diseases:
 ```python
 # full_enrichment.py
 from api.disease_batch_enricher import DiseaseBatchEnricher
-from api.symptom_checker import _DISEASE_DB
+from api.species.dog_diseases import DISEASES as _DISEASE_DB
 
 enricher = DiseaseBatchEnricher()
 result = enricher.enrich_diseases_batch(_DISEASE_DB, wait=True)
