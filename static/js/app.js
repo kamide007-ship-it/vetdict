@@ -833,6 +833,8 @@ function createShareWidget(diseases){
   const w=document.createElement("div");
   w.className="share-widget";
   const speciesName=SPECIES_ICONS[currentSpecies]||"";
+  const sp=SPECIES.find(s=>s.id===currentSpecies);
+  const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):(currentSpecies||"");
   const topDisease=diseases.length>0?(currentLang==="ja"?(diseases[0].name_ja||diseases[0].name):(diseases[0].name||diseases[0].name_ja)):"";
   const shareText=currentLang==="ja"
     ?`VetDictで${speciesName}の鑑別診断: ${topDisease} 他${diseases.length}疾患`
@@ -840,9 +842,15 @@ function createShareWidget(diseases){
   const shareUrl="https://vetdict.info/";
   const twitterUrl=`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
   const lineUrl=`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
-  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X(Twitter)</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button></div>`;
-  const copyBtn=w.querySelector(".share-btn.copy");
-  copyBtn.addEventListener("click",function(){navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{copyBtn.textContent=t("shareCopied");});});
+  /* 詳細結果テキスト生成 */
+  const sympList=[...selectedSymptoms].map(id=>{const s=symptomData.find(x=>x.id===id);return s?(currentLang==="ja"?(s.name_ja||s.name_en):s.name_en):id;}).join(", ");
+  const diseaseLines=diseases.slice(0,10).map((d,i)=>{const name=currentLang==="ja"?(d.name_ja||d.name):d.name;const pct=d.match_percent||d.confidence||0;return`${i+1}. ${name} (${pct}%)`;}).join("\n");
+  const fullText=currentLang==="ja"
+    ?`【VetDict 鑑別診断結果】\n動物種: ${spLabel}\n症状: ${sympList}\n\n${diseaseLines}\n\n※ 参考情報です。獣医師の診察を受けてください。\n${shareUrl}`
+    :`[VetDict Differential Diagnosis]\nSpecies: ${spLabel}\nSymptoms: ${sympList}\n\n${diseaseLines}\n\nNote: For reference only. Consult a veterinarian.\n${shareUrl}`;
+  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button><button class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
+  w.querySelector(".share-btn.copy").addEventListener("click",function(){navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{this.textContent=t("shareCopied");});});
+  w.querySelector(".share-btn.copy-full").addEventListener("click",function(){navigator.clipboard.writeText(fullText).then(()=>{this.textContent=t("shareCopied");setTimeout(()=>{this.textContent=currentLang==="ja"?"詳細コピー":"Copy Full";},2000);});});
   return w;
 }
 
@@ -1466,7 +1474,15 @@ function renderChatResult(container,data){
     wrapper.appendChild(symDiv);
   }
 
-  // 3. Disease candidate cards
+  // 3. Low-info warning (when 1-2 symptoms only)
+  if(data.low_info_warning){
+    const warnDiv=document.createElement("div");
+    warnDiv.style.cssText="padding:8px 12px;margin:8px 0;background:#fff8e1;border-left:3px solid #f59e0b;border-radius:6px;font-size:.8rem;color:#92400e";
+    warnDiv.textContent=data.low_info_warning;
+    wrapper.appendChild(warnDiv);
+  }
+
+  // 4. Disease candidate cards
   const candidates=data.disease_candidates||[];
   if(candidates.length>0){
     const listDiv=document.createElement("div");
