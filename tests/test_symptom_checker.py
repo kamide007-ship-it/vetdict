@@ -247,6 +247,7 @@ class TestAnalyzeSymptoms:
             "vaccination_status",
             "vaccination_adjustment_applied",
             "symptom_names",
+            "pain_score",
         }
         assert set(result.keys()) == expected_keys
 
