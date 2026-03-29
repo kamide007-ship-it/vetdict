@@ -1213,13 +1213,19 @@ function renderDiseaseDb(){
     if(diseaseNavMode==="kana"){
       /* あいうえお行フィルタ: localeCompare("ja")で漢字も読み順でグループ化 */
       const kanaRanges={"あ":["あ","か"],"か":["か","さ"],"さ":["さ","た"],"た":["た","な"],"な":["な","は"],"は":["は","ま"],"ま":["ま","や"],"や":["や","ら"],"ら":["ら","わ"],"わ":["わ","\uffff"]};
+      const kanaRow={"あ":"あいうえお","か":"かきくけこがぎぐげご","さ":"さしすせそざじずぜぞ","た":"たちつてとだぢづでど","な":"なにぬねの","は":"はひふへほばびぶべぼぱぴぷぺぽ","ま":"まみむめも","や":"やゆよ","ら":"らりるれろ","わ":"わをん"};
       const range=kanaRanges[diseaseFilter];
-      if(range){
-        filtered=filtered.filter(d=>{const ja=(d.name_ja||"");if(!ja)return false;return ja.localeCompare(range[0],"ja")>=0&&ja.localeCompare(range[1],"ja")<0;});
-      }else{
-        /* 個別の仮名キーでの直接マッチ（フォールバック） */
-        filtered=filtered.filter(d=>{const ja=(d.name_ja||"");return ja&&ja.charAt(0)===diseaseFilter;});
-      }
+      const row=kanaRow[diseaseFilter]||diseaseFilter;
+      filtered=filtered.filter(d=>{
+        /* name_ja_sort があればまずそれで判定 */
+        const sort=(d.name_ja_sort||"");
+        if(sort&&row.includes(sort.charAt(0)))return true;
+        /* localeCompare レンジチェック（漢字を読み順で判定） */
+        const ja=(d.name_ja||"");
+        if(!ja)return false;
+        if(range&&ja.localeCompare(range[0],"ja")>=0&&ja.localeCompare(range[1],"ja")<0)return true;
+        return row.includes(ja.charAt(0));
+      });
     }else if(diseaseNavMode==="category"){
       filtered=filtered.filter(d=>classifyDisease(d)===diseaseFilter);
     }else{
@@ -1227,7 +1233,7 @@ function renderDiseaseDb(){
     }
   }
   if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.description||"").toLowerCase().includes(search)||(d.description_ja||"").toLowerCase().includes(search));
-  const sortJa=(a,b)=>(a.name_ja||a.name||"").localeCompare(b.name_ja||b.name||"","ja");
+  const sortJa=(a,b)=>(a.name_ja_sort||a.name_ja||a.name||"").localeCompare(b.name_ja_sort||b.name_ja||b.name||"","ja");
   const sortEn=(a,b)=>(a.name||"").localeCompare(b.name||"","en");
   const sortFn=currentLang==="ja"?sortJa:sortEn;
   if(diseaseNavMode==="category"&&!diseaseFilter){
