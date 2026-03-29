@@ -37,6 +37,10 @@ try:
 except ImportError:
     from health_checker import DISEASES, SYMPTOM_IDS, SYMPTOMS
 
+# O(1) disease lookup index (avoids N+1 linear scans)
+_DISEASES_BY_ID: dict = {d["id"]: d for d in DISEASES}
+_SYMPTOMS_BY_ID: dict = {s["id"]: s for s in SYMPTOMS}
+
 # AI-powered symptom extraction (Phase 1)
 _AI_EXTRACTION_ENABLED = os.getenv("VETDICT_USE_AI_SYMPTOM_EXTRACTION", "false").lower() == "true"
 _AI_EXTRACTOR = None
@@ -2867,7 +2871,7 @@ _DEFAULT_SUPPLEMENTS = [
 
 def get_treatment_recommendations_for_disease(disease_id: str, breed_id=None, age_years=None) -> dict:
     """Get care guide including supplement reference and test information."""
-    disease_record = next((d for d in DISEASES if d["id"] == disease_id), {})
+    disease_record = _DISEASES_BY_ID.get(disease_id, {})
 
     if disease_id:
         supplements = DISEASE_SUPPLEMENTS.get(disease_id, _DEFAULT_SUPPLEMENTS)
@@ -3208,9 +3212,9 @@ def diagnostic_chat():
         symptom_details = [
             {
                 "id": sid,
-                "name_ja": next((s["name_ja"] for s in SYMPTOMS if s["id"] == sid), ""),
-                "name_en": next((s["name_en"] for s in SYMPTOMS if s["id"] == sid), ""),
-                "category": next((s["category"] for s in SYMPTOMS if s["id"] == sid), ""),
+                "name_ja": _SYMPTOMS_BY_ID.get(sid, {}).get("name_ja", ""),
+                "name_en": _SYMPTOMS_BY_ID.get(sid, {}).get("name_en", ""),
+                "category": _SYMPTOMS_BY_ID.get(sid, {}).get("category", ""),
             }
             for sid in all_symptoms
         ]
@@ -3358,8 +3362,8 @@ def differential_analysis():
     if not disease_id_1 or not disease_id_2:
         return jsonify({"error": "Both disease IDs required"}), 400
 
-    disease_1 = next((d for d in DISEASES if d["id"] == disease_id_1), None)
-    disease_2 = next((d for d in DISEASES if d["id"] == disease_id_2), None)
+    disease_1 = _DISEASES_BY_ID.get(disease_id_1)
+    disease_2 = _DISEASES_BY_ID.get(disease_id_2)
 
     if not disease_1 or not disease_2:
         return jsonify({"error": "One or both diseases not found"}), 404
@@ -3422,7 +3426,7 @@ def get_treatment_plan():
     if not disease_id:
         return jsonify({"error": "Disease ID required"}), 400
 
-    disease = next((d for d in DISEASES if d["id"] == disease_id), None)
+    disease = _DISEASES_BY_ID.get(disease_id)
 
     if not disease:
         return jsonify({"error": "Disease not found"}), 404
