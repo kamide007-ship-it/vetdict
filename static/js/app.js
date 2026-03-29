@@ -1189,7 +1189,7 @@ function renderAzNav(){
     azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
   }else{
     const isAz=diseaseNavMode==="az";
-    const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split("");
+    const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あ か さ た な は ま や ら わ".split(" ");
     azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.label}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
   }
   const nextMode=cur.next;
@@ -1211,9 +1211,15 @@ function renderDiseaseDb(){
   let filtered=allDiseases;
   if(diseaseFilter){
     if(diseaseNavMode==="kana"){
-      const kanaRow={"あ":"あいうえお","か":"かきくけこがぎぐげご","さ":"さしすせそざじずぜぞ","た":"たちつてとだぢづでど","な":"なにぬねの","は":"はひふへほばびぶべぼぱぴぷぺぽ","ま":"まみむめも","や":"やゆよ","ら":"らりるれろ","わ":"わをん"};
-      const row=kanaRow[diseaseFilter]||diseaseFilter;
-      filtered=filtered.filter(d=>{const ja=(d.name_ja||"");return ja&&row.includes(ja.charAt(0));});
+      /* あいうえお行フィルタ: localeCompare("ja")で漢字も読み順でグループ化 */
+      const kanaRanges={"あ":["あ","か"],"か":["か","さ"],"さ":["さ","た"],"た":["た","な"],"な":["な","は"],"は":["は","ま"],"ま":["ま","や"],"や":["や","ら"],"ら":["ら","わ"],"わ":["わ","\uffff"]};
+      const range=kanaRanges[diseaseFilter];
+      if(range){
+        filtered=filtered.filter(d=>{const ja=(d.name_ja||"");if(!ja)return false;return ja.localeCompare(range[0],"ja")>=0&&ja.localeCompare(range[1],"ja")<0;});
+      }else{
+        /* 個別の仮名キーでの直接マッチ（フォールバック） */
+        filtered=filtered.filter(d=>{const ja=(d.name_ja||"");return ja&&ja.charAt(0)===diseaseFilter;});
+      }
     }else if(diseaseNavMode==="category"){
       filtered=filtered.filter(d=>classifyDisease(d)===diseaseFilter);
     }else{
