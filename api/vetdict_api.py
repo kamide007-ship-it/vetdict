@@ -483,9 +483,19 @@ def diseases_hub():
         except ImportError:
             count = 0
         total_diseases += count
+        _ICONS = {
+            "dog": "\U0001F415", "cat": "\U0001F408", "horse": "\U0001F434",
+            "rabbit": "\U0001F407", "hamster": "\U0001F439", "guinea_pig": "\U0001F439",
+            "chinchilla": "\U0001F43F\uFE0F", "ferret": "\U0001F9A1", "hedgehog": "\U0001F994",
+            "sugar_glider": "\U0001F43F\uFE0F", "degu": "\U0001F42D", "bird": "\U0001F426",
+            "parakeet": "\U0001F99C", "parrot": "\U0001F99C", "reptile": "\U0001F98E",
+            "tortoise": "\U0001F422", "snake": "\U0001F40D", "lizard": "\U0001F98E",
+            "amphibian": "\U0001F438", "fish": "\U0001F41F", "exotic_other": "\U0001F999",
+        }
         species_list.append({
             "id": sp_id, "name_ja": meta.get("name_ja", sp_id),
             "name_en": meta.get("name_en", sp_id.title()), "count": count,
+            "icon": _ICONS.get(sp_id, "\U0001F43E"),
         })
     species_list.sort(key=lambda x: x["count"], reverse=True)
     return render_template('diseases_hub.html', species=species_list, total=total_diseases)
@@ -609,12 +619,22 @@ def disease_detail(species: str, disease_slug: str):
 
     sp_label_ja = sp_meta.get("name_ja", species_key)
     sp_label_en = sp_meta.get("name_en", species_key.title())
+
+    # Load symptom names for human-readable display
+    symptom_names = {}
+    try:
+        sym_names_dict = getattr(mod, "SYMPTOM_NAMES", {})
+        symptom_names = {k: v.get("ja", k) for k, v in sym_names_dict.items()}
+    except Exception:
+        pass
+
     return render_template(
         'disease_detail.html',
         disease=disease,
         species=species_key,
         species_ja=sp_label_ja,
         species_en=sp_label_en,
+        symptom_names=symptom_names,
     )
 
 

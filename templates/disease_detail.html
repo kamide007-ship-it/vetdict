@@ -74,7 +74,7 @@
     <h2>主な症状</h2>
     <div class="symptoms-grid">
       {% for s in disease.symptoms|sort %}
-      <span class="symptom-tag">{{ s | replace('_', ' ') }}</span>
+      <span class="symptom-tag">{{ symptom_names.get(s, s | replace('_', ' ')) }}</span>
       {% endfor %}
     </div>
   </section>
