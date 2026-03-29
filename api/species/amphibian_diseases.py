@@ -101,6 +101,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "immunosuppression": "general", "inability_to_use_limb": "general",
     "collapse": "general", "death": "emergency",
     "sudden_death": "emergency", "rapid_death": "emergency",
+    "tetany": "neurological", "vomiting": "digestive",
     # 新規追加症状
     "vocalization_loss": "behavior", "nocturnal_activity_loss": "behavior",
     "substrate_burrowing": "behavior", "excessive_soaking": "behavior",
