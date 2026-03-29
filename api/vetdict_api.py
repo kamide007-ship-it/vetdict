@@ -399,6 +399,7 @@ def dynamic_sitemap():
         (f'{base}/', 'weekly', '1.0'),
         (f'{base}/#checker', 'weekly', '0.9'),
         (f'{base}/#database', 'weekly', '0.9'),
+        (f'{base}/diseases', 'weekly', '0.9'),
         (f'{base}/#chat', 'weekly', '0.8'),
         (f'{base}/#drugs', 'monthly', '0.8'),
     ]
@@ -448,6 +449,46 @@ def dynamic_sitemap():
     lines.append('</urlset>')
 
     return Response('\n'.join(lines), mimetype='application/xml')
+
+
+@app.route('/diseases')
+def diseases_hub():
+    """Top-level diseases hub page listing all 21 species with disease counts."""
+    from api.disease_store import SPECIES_META
+
+    _DISEASE_MODULES = {
+        "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
+        "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
+        "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
+        "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
+        "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
+        "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
+        "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
+        "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
+        "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
+        "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
+        "exotic_other": "api.species.exotic_other_diseases",
+    }
+    species_list = []
+    total_diseases = 0
+    for sp_id, mod_name in _DISEASE_MODULES.items():
+        if sp_id not in SPECIES_META:
+            continue
+        meta = SPECIES_META[sp_id]
+        try:
+            import importlib
+            mod = importlib.import_module(mod_name)
+            diseases = getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
+            count = len(diseases)
+        except ImportError:
+            count = 0
+        total_diseases += count
+        species_list.append({
+            "id": sp_id, "name_ja": meta.get("name_ja", sp_id),
+            "name_en": meta.get("name_en", sp_id.title()), "count": count,
+        })
+    species_list.sort(key=lambda x: x["count"], reverse=True)
+    return render_template('diseases_hub.html', species=species_list, total=total_diseases)
 
 
 @app.route('/diseases/<species>')
