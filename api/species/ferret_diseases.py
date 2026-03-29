@@ -1618,7 +1618,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "胃拡張・鼓腸はフェレットにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "treatment": "Emergency stabilization with IV fluids and shock management, gastric decompression (trocarization or orogastric tube), followed by surgical correction if torsion is present. Post-operative monitoring for reperfusion injury and cardiac arrhythmias.",
-        "treatment_ja": "フェレットにおける胃拡張・鼓腸の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "フェレットにおける胃拡張・鼓腸の緊急治療: 経口胃管挿入によるガス・液体の減圧が第一選択（挿入困難な場合は18-20G針による経皮的胃穿刺）。腹部レントゲンで胃捻転の有無を確認。静脈輸液（乳酸リンゲル液、ショック時はショックレート90mL/kg/hで初期ボーラス投与後に減速）。鎮痛としてブプレノルフィン0.01-0.03mg/kg SC q8-12h。ショック兆候がある場合はデキサメタゾン1-2mg/kg IV。胃捻転が確認された場合は緊急外科手術（胃固定術）。回復期は少量頻回の給餌、消化管運動促進薬（メトクロプラミド0.2-1mg/kg PO/SC q6-8h）を検討。異物や毛球が原因の場合は外科的摘出。",
         "prevention": "Prevention includes providing a high-fiber diet, ensuring adequate hydration, regular exercise, stress reduction, and maintaining proper environmental conditions.",
         "prevention_ja": "胃拡張・鼓腸の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",

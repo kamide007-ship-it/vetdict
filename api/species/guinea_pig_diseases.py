@@ -134,7 +134,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Decreased gastrointestinal motility leads to ingesta dehydration and compaction, altered cecal fermentation, bacterial overgrowth, and endotoxin absorption. Gas accumulation causes painful distension.",
         "pathophysiology_ja": "消化管うっ滞はモルモットにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "treatment": "Emergency stabilization with IV fluid therapy, oxygen supplementation, pain management, and treatment directed at the underlying cause. Intensive monitoring of vital parameters and organ function.",
-        "treatment_ja": "モルモットにおける消化管うっ滞の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "モルモットにおける消化管うっ滞の緊急治療: メトクロプラミド0.5mg/kg SC q8h（消化管運動促進）。シメチコン経口投与（20-40mg/kg、ガス軽減）。皮下補液（温めた乳酸リンゲル液50-100mL/kg/日）または静脈輸液による脱水補正。シリンジによる強制給餌（Critical Care等の草食動物用流動食を2-4時間ごと）。疼痛管理としてメロキシカム0.5mg/kg PO/SC SID。保温（25-28℃の温かい環境）。腹部レントゲンでガス貯留・閉塞の評価。ビタミンC 50-100mg/日PO（モルモットは体内合成不能のため補給必須）。24時間以内に排便・食欲の改善がなければ再評価。重度の場合はシサプリド0.5mg/kg PO q8-12hの追加を検討。",
         "prevention": "Prevention includes providing a high-fiber diet, ensuring adequate hydration, regular exercise, stress reduction, and maintaining proper environmental conditions.",
         "prevention_ja": "消化管うっ滞の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",

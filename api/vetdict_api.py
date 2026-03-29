@@ -617,19 +617,29 @@ def health():
 
     checks = {}
 
-    # Database connectivity (optional — absence is not an error)
+    # Database connectivity + integrity check
+    import time as _time
     try:
         from api.database import DB_PATH as _db_path
         _db_file = Path(_db_path)
         if _db_file.exists() and _db_file.stat().st_size > 0:
-            _conn = _sqlite3.connect(_db_path)
+            _t0 = _time.monotonic()
+            _conn = _sqlite3.connect(_db_path, timeout=5.0)
             _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+            _integrity = _conn.execute("PRAGMA quick_check").fetchone()[0]
             _conn.close()
-            checks["database"] = {"status": "ok", "diseases": _count}
+            _latency_ms = round((_time.monotonic() - _t0) * 1000, 1)
+            _db_ok = _integrity == "ok"
+            checks["database"] = {
+                "status": "ok" if _db_ok else "error",
+                "diseases": _count,
+                "integrity": _integrity,
+                "latency_ms": _latency_ms,
+            }
         else:
             checks["database"] = {"status": "ok", "detail": "not configured"}
-    except Exception:
-        checks["database"] = {"status": "ok", "detail": "not configured"}
+    except Exception as _e:
+        checks["database"] = {"status": "error", "detail": str(_e)[:200]}
 
     # Disk space
     try:

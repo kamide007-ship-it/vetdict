@@ -2002,7 +2002,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "尿道閉塞はウサギにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "treatment": "Stabilization with IV fluids, pain management, radiographic assessment. Surgical intervention (enterotomy/gastrotomy) for confirmed obstruction. Post-operative monitoring for dehiscence, peritonitis, and ileus.",
-        "treatment_ja": "ウサギにおける尿道閉塞の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "ウサギにおける尿道閉塞の緊急治療: 鎮静下（ミダゾラム0.5-1mg/kg IM + ブトルファノール0.3-0.5mg/kg IM）で尿道カテーテル挿入を試みる。カテーテル挿入困難な場合は膀胱穿刺による緊急減圧。静脈輸液（乳酸リンゲル液、維持量の2-3倍）で脱水補正と腎灌流維持。高カリウム血症がある場合はグルコン酸カルシウム50-100mg/kg IV緩徐投与+ブドウ糖液で補正。鎮痛としてメロキシカム0.3-0.6mg/kg SC SID、ブプレノルフィン0.03-0.05mg/kg SC q8-12h。閉塞解除後は食事中のカルシウム制限（アルファルファ→チモシー主体）、十分な水分摂取を促進。再発性の場合は膀胱結石の外科的摘出を検討。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "尿道閉塞の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
         "prognosis": "Good with timely surgical intervention. Delayed treatment increases risk of intestinal necrosis, perforation, and peritonitis, which carry a guarded to poor prognosis.",
