@@ -584,6 +584,34 @@ def disease_detail(species: str, disease_slug: str):
     except Exception:
         pass
 
+    # Build related diseases (same species, shared symptoms)
+    disease_symptoms = disease.get("symptoms", set())
+    if isinstance(disease_symptoms, (set, list)):
+        disease_symptoms = set(disease_symptoms)
+    else:
+        disease_symptoms = set()
+    related = []
+    if disease_symptoms:
+        for d in diseases:
+            d_name = _disease_get(d, "name", "")
+            if d_name == disease.get("name"):
+                continue
+            d_syms = _disease_get(d, "symptoms", set())
+            if isinstance(d_syms, (set, list)):
+                d_syms = set(d_syms)
+            else:
+                continue
+            shared = disease_symptoms & d_syms
+            if len(shared) >= 2:
+                related.append({
+                    "name": d_name,
+                    "name_ja": _disease_get(d, "name_ja", ""),
+                    "slug": _disease_slug(d),
+                    "shared": len(shared),
+                })
+        related.sort(key=lambda x: -x["shared"])
+        related = related[:8]
+
     return render_template(
         'disease_detail.html',
         disease=disease,
@@ -591,6 +619,7 @@ def disease_detail(species: str, disease_slug: str):
         species_ja=sp_label_ja,
         species_en=sp_label_en,
         symptom_names=symptom_names,
+        related_diseases=related,
     )
 
 

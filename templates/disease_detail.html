@@ -142,6 +142,19 @@
     <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>
   </div>
 
+  {% if related_diseases %}
+  <section style="margin-top:24px">
+    <h2>関連する疾患</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      {% for rd in related_diseases %}
+      <a href="/diseases/{{ species }}/{{ rd.slug }}" style="display:inline-block;padding:6px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:6px;text-decoration:none;color:var(--gray-800);font-size:.82rem;transition:all .15s">
+        {{ rd.name_ja or rd.name }} <span style="color:var(--gray-400);font-size:.72rem">(共通{{ rd.shared }}症状)</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   <div style="margin-top:16px;text-align:center">
     <a href="/diseases/{{ species }}" style="font-size:.88rem;color:var(--navy);font-weight:600;text-decoration:none">📋 {{ species_ja }}の疾患一覧を見る →</a>
   </div>
