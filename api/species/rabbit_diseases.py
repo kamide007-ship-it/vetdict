@@ -3367,7 +3367,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "脳幼虫移行症はウサギにおける神経疾患である。炎症、変性、圧迫、または血管障害による中枢・末梢神経系の損傷を伴う。解剖学的位置に応じて運動機能、感覚処理、自律神経調節、認知状態に影響を及ぼす。脱髄、軸索変性、ニューロン喪失は不可逆的な場合がある。浮腫や腫瘤性病変による頭蓋内圧亢進は脳幹ヘルニアを引き起こしうる。",
         "treatment": "Emergency stabilization with IV fluid therapy, oxygen supplementation, pain management, and treatment directed at the underlying cause. Intensive monitoring of vital parameters and organ function.",
-        "treatment_ja": "ウサギにおける脳幼虫移行症の治療は原因への対処、適切な支持療法、臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、環境調整が主要な治療要素である。定期的なフォローアップにより治療効果を確認し用量調整を行う。",
+        "treatment_ja": "駆虫薬: フェンベンダゾール 20-50mg/kg PO q24h×28日間（幼虫移行の抑制、早期投与が重要）。抗炎症: デキサメタゾン 0.5-2mg/kg IV/IM（脳浮腫軽減、初期3-5日間）、その後プレドニゾロン 0.5-1mg/kg PO q12-24hに漸減。けいれん管理: ミダゾラム 0.5-1mg/kg IM/IV（活動性けいれん時）、維持にレベチラセタム 20-30mg/kg PO q8h。疼痛管理（メロキシカム 0.3-0.6mg/kg PO q24h）。輸液療法と栄養支持（強制給餌）。予後は発症時の神経障害の程度に大きく依存し、進行例では不可逆的な脳損傷のため予後不良。アライグマ糞便との接触防止が最重要。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "脳幼虫移行症の予防には適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、初期臨床徴候への迅速な対応が含まれる。",
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
