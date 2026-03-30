@@ -2718,7 +2718,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "爬虫類の皮膚機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。爬虫類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
         "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "爬虫類におけるビオチン欠乏症の治療は、原因に対する特異的療法と支持療法の組み合わせで行う。輸液療法・栄養支持・疼痛管理（種に適した鎮痛薬）・環境最適化が基本。特異的治療は診断に基づき、抗菌薬・駆虫薬・抗真菌薬・外科的介入・支持療法が含まれうる。エキゾチック動物専門獣医師への相談を推奨。",
+        "treatment_ja": "爬虫類におけるの治療: 原因の鑑別（真菌培養/皮膚掻爬/細胞診）。感染性は適切な抗菌薬/抗真菌薬。アレルギー性は原因除去+対症療法。環境改善・衛生管理。",
         "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
         "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
