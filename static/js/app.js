@@ -472,18 +472,38 @@ function setDefaultStats(){
 function renderSpeciesGrid(){
   const grid=document.getElementById("speciesGrid");
   if(!grid){console.warn("speciesGrid element not found");return;}
-  grid.innerHTML=SPECIES.map(sp=>{
-    const primary=currentLang==="ja"?sp.name:sp.nameEn;
-    const secondary=currentLang==="ja"?sp.nameEn:sp.name;
-    const desc=currentLang==="ja"?(sp.description_ja||sp.description||""):(sp.description||sp.description_ja||"");
-    const dLabel=t("speciesCardDisease"),drLabel=t("speciesCardDrug");
-    return`<div class="species-card" role="button" tabindex="0" aria-pressed="${currentSpecies===sp.id}" data-species="${sp.id}">
-      <span class="icon" aria-hidden="true">${sp.icon}</span>
-      <div class="name">${primary}</div>
-      <div class="count">${secondary}</div>
-      ${desc?`<div class="species-desc">${desc}</div>`:""}
-      <div class="count" style="margin-top:2px">${sp.diseases}${dLabel}${sp.drugs?' · '+sp.drugs+drLabel:''}</div>
-    </div>`}).join("");
+  const groups=currentLang==="ja"?{
+    "犬・猫":["dog","cat"],
+    "小動物":["rabbit","hamster","guinea_pig","chinchilla","ferret","hedgehog","sugar_glider","degu"],
+    "鳥類":["bird","parakeet","parrot"],
+    "爬虫類・両生類・魚":["reptile","tortoise","snake","lizard","amphibian","fish"],
+    "馬・その他":["horse","exotic_other"],
+  }:{
+    "Dogs & Cats":["dog","cat"],
+    "Small Animals":["rabbit","hamster","guinea_pig","chinchilla","ferret","hedgehog","sugar_glider","degu"],
+    "Birds":["bird","parakeet","parrot"],
+    "Reptiles, Amphibians & Fish":["reptile","tortoise","snake","lizard","amphibian","fish"],
+    "Equine & Other":["horse","exotic_other"],
+  };
+  let html="";
+  for(const[groupName,ids] of Object.entries(groups)){
+    const members=ids.map(id=>SPECIES.find(s=>s.id===id)).filter(Boolean);
+    if(!members.length)continue;
+    html+=`<div class="species-group-label">${groupName}</div>`;
+    html+=members.map(sp=>{
+      const primary=currentLang==="ja"?sp.name:sp.nameEn;
+      const secondary=currentLang==="ja"?sp.nameEn:sp.name;
+      const desc=currentLang==="ja"?(sp.description_ja||sp.description||""):(sp.description||sp.description_ja||"");
+      const dLabel=t("speciesCardDisease"),drLabel=t("speciesCardDrug");
+      return`<div class="species-card" role="button" tabindex="0" aria-pressed="${currentSpecies===sp.id}" data-species="${sp.id}">
+        <span class="icon" aria-hidden="true">${sp.icon}</span>
+        <div class="name">${primary}</div>
+        <div class="count">${secondary}</div>
+        ${desc?`<div class="species-desc">${desc}</div>`:""}
+        <div class="count" style="margin-top:2px">${sp.diseases}${dLabel}${sp.drugs?' · '+sp.drugs+drLabel:''}</div>
+      </div>`}).join("");
+  }
+  grid.innerHTML=html;
   // Event delegation for species cards
   if(grid.dataset.bound==="1")return;
   grid.dataset.bound="1";

@@ -102,6 +102,8 @@ a:hover{text-decoration:underline}
 .section-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .section-title::before{content:'';width:4px;height:18px;background:var(--green);border-radius:2px;display:inline-block}
 .species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.species-group-label{grid-column:1/-1;font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 0 2px;border-bottom:2px solid var(--green);margin-top:8px}
+.species-group-label:first-child{margin-top:0}
 .species-card{background:var(--white);border:2px solid var(--gray-200);border-radius:var(--radius-lg);padding:16px 10px;text-align:center;cursor:pointer;transition:all var(--transition-normal);min-height:48px;position:relative;overflow:hidden}
 .species-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(34,168,79,.04),rgba(26,48,104,.04));opacity:0;transition:opacity var(--transition-normal)}
 .species-card:hover{border-color:var(--navy-light);box-shadow:var(--shadow-md);transform:translateY(-4px)}
