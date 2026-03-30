@@ -1874,7 +1874,8 @@ def _match_species_symptoms_to_diseases(
         # --- Low-information confidence cap ---
         # When user provides very few symptoms, cap confidence to prevent
         # false sense of certainty from non-specific presentations.
-        user_symptom_count = len(symptom_set)
+        # Use original symptom count (before synonym expansion).
+        user_symptom_count = len(symptom_ids)
         if user_symptom_count == 1:
             confidence = min(confidence, 35.0)
         elif user_symptom_count == 2:
