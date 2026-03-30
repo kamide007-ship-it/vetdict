@@ -163,6 +163,17 @@
     ※ 本ページの情報は獣医学的参考資料であり、診断・治療の代替ではありません。実際の診療は必ず獣医師にご相談ください。<br>
     VetDict は獣医師（DVM）が開発した臨床支援ツールです。
   </div>
+
+  <nav style="margin-top:32px;padding:16px 0;border-top:1px solid var(--gray-200)">
+    <div style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:8px">他の動物種の疾患データベース</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:.78rem">
+      {% for sp_id, sp_name in [('dog','犬'),('cat','猫'),('rabbit','ウサギ'),('hamster','ハムスター'),('guinea_pig','モルモット'),('chinchilla','チンチラ'),('ferret','フェレット'),('hedgehog','ハリネズミ'),('bird','鳥'),('reptile','爬虫類'),('fish','魚')] %}
+      {% if sp_id != species %}
+      <a href="/diseases/{{ sp_id }}" style="padding:4px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:4px;text-decoration:none;color:var(--gray-700)">{{ sp_name }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </nav>
 </div>
 <script>
 if(typeof gtag==="function"){

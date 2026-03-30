@@ -68,7 +68,14 @@
 
   <div class="cta-box" style="margin-top:32px">
     <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">他の動物種の疾患を見る</p>
-    <a href="/#database">疾患データベースへ</a>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:12px;font-size:.82rem">
+      {% for sp_id, sp_name in [('dog','犬'),('cat','猫'),('rabbit','ウサギ'),('hamster','ハムスター'),('guinea_pig','モルモット'),('chinchilla','チンチラ'),('ferret','フェレット'),('hedgehog','ハリネズミ'),('bird','鳥'),('reptile','爬虫類'),('fish','魚')] %}
+      {% if sp_id != species %}
+      <a href="/diseases/{{ sp_id }}" style="padding:4px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:4px;text-decoration:none;color:var(--gray-700)">{{ sp_name }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <a href="/diseases">全動物種を見る</a>
   </div>
 </div>
 
