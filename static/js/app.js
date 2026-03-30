@@ -291,6 +291,12 @@ let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[]
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 let symptomSortMode="category";
 
+/* Session engagement tracking */
+const _sessionStart=Date.now();
+let _maxScrollPct=0;
+window.addEventListener("scroll",function(){const h=document.documentElement;const pct=Math.round((h.scrollTop/(h.scrollHeight-h.clientHeight||1))*100);if(pct>_maxScrollPct)_maxScrollPct=pct;},{passive:true});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){const dur=Math.round((Date.now()-_sessionStart)/1000);trackEvent("session_engagement",{duration_sec:dur,max_scroll_pct:_maxScrollPct,species_used:currentSpecies||"none",analyses_done:loadDiagnosisHistory().length});}});
+
 document.addEventListener("DOMContentLoaded",async()=>{
   try{
     await checkAccess();
@@ -303,7 +309,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     const symptomSearch=document.getElementById("symptomSearch");
     const analyzeBtn=document.getElementById("analyzeBtn");
     const diseaseSearch=document.getElementById("diseaseSearch");
-    if(symptomSearch)symptomSearch.addEventListener("input",()=>renderSymptomList(symptomData));
+    if(symptomSearch)symptomSearch.addEventListener("input",debounce(()=>{renderSymptomList(symptomData);if(symptomSearch.value.length>=2)trackEvent("symptom_search",{species:currentSpecies,query:symptomSearch.value.substring(0,50)});},300));
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
     // Restore view from URL hash
@@ -859,7 +865,10 @@ function createShareWidget(diseases){
   const shareText=currentLang==="ja"
     ?`VetDictで${speciesName}の鑑別診断: ${topDisease} 他${diseases.length}疾患`
     :`VetDict differential diagnosis: ${topDisease} and ${diseases.length} more`;
-  const shareUrl="https://vetdict.info/";
+  /* Share URL: link to top disease page if available, else species index */
+  const topDiseaseEn=diseases.length>0?(diseases[0].name||""):"";
+  const topSlug=topDiseaseEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const shareUrl=topSlug?`https://vetdict.info/diseases/${currentSpecies}/${topSlug}`:`https://vetdict.info/?species=${currentSpecies}#checker`;
   const twitterUrl=`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
   const lineUrl=`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
   /* 詳細結果テキスト生成 */
@@ -869,8 +878,10 @@ function createShareWidget(diseases){
     ?`【VetDict 鑑別診断結果】\n動物種: ${spLabel}\n症状: ${sympList}\n\n${diseaseLines}\n\n※ 参考情報です。獣医師の診察を受けてください。\n${shareUrl}`
     :`[VetDict Differential Diagnosis]\nSpecies: ${spLabel}\nSymptoms: ${sympList}\n\n${diseaseLines}\n\nNote: For reference only. Consult a veterinarian.\n${shareUrl}`;
   w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button><button class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
-  w.querySelector(".share-btn.copy").addEventListener("click",function(){navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{this.textContent=t("shareCopied");});});
-  w.querySelector(".share-btn.copy-full").addEventListener("click",function(){navigator.clipboard.writeText(fullText).then(()=>{this.textContent=t("shareCopied");setTimeout(()=>{this.textContent=currentLang==="ja"?"詳細コピー":"Copy Full";},2000);});});
+  w.querySelector(".share-btn.twitter").addEventListener("click",function(){trackEvent("share_results",{method:"twitter",species:currentSpecies});});
+  w.querySelector(".share-btn.line").addEventListener("click",function(){trackEvent("share_results",{method:"line",species:currentSpecies});});
+  w.querySelector(".share-btn.copy").addEventListener("click",function(){navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{this.textContent=t("shareCopied");trackEvent("share_results",{method:"copy",species:currentSpecies});});});
+  w.querySelector(".share-btn.copy-full").addEventListener("click",function(){navigator.clipboard.writeText(fullText).then(()=>{this.textContent=t("shareCopied");trackEvent("share_results",{method:"copy_full",species:currentSpecies});setTimeout(()=>{this.textContent=currentLang==="ja"?"詳細コピー":"Copy Full";},2000);});});
   return w;
 }
 
