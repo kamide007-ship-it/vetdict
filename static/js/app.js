@@ -533,7 +533,7 @@ function selectSpecies(id){
   const sp=SPECIES.find(s=>s.id===id);
   if(sp&&typeof showToast==="function"){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
   const resultsArea=document.getElementById("resultsArea");
-  if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>`;
+  if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>${renderHistoryPanel()}`;
 }
 
 function resetSpeciesChat(species){
@@ -960,6 +960,45 @@ function renderResults(data){
   area.appendChild(createShareWidget(diseases));
   loadCommonDiseases(currentSpecies);
   loadBreedEcology(currentSpecies,currentBreed);
+  /* Save diagnosis to history (localStorage) */
+  saveDiagnosisHistory(data,diseases);
+}
+
+/* ===== Diagnosis History (localStorage) ===== */
+function saveDiagnosisHistory(data,diseases){
+  try{
+    const entry={
+      id:Date.now(),
+      date:new Date().toISOString(),
+      species:currentSpecies,
+      symptoms:[...selectedSymptoms],
+      topDiseases:diseases.slice(0,5).map(d=>({name:d.name||"",name_ja:d.name_ja||"",confidence:d.match_percent||d.confidence||0})),
+      severity:data.severity||"",
+    };
+    const history=JSON.parse(localStorage.getItem("vetdict-history")||"[]");
+    history.unshift(entry);
+    if(history.length>50)history.length=50;
+    localStorage.setItem("vetdict-history",JSON.stringify(history));
+  }catch(e){/* quota exceeded or private mode */}
+}
+
+function loadDiagnosisHistory(){
+  try{return JSON.parse(localStorage.getItem("vetdict-history")||"[]");}catch(e){return[];}
+}
+
+function renderHistoryPanel(){
+  const history=loadDiagnosisHistory();
+  if(!history.length)return"";
+  const sp=id=>SPECIES.find(s=>s.id===id);
+  const items=history.slice(0,10).map(h=>{
+    const s=sp(h.species);
+    const icon=s?s.icon:"🐾";
+    const spName=s?(currentLang==="ja"?s.name:s.nameEn):(h.species||"");
+    const date=new Date(h.date).toLocaleDateString(currentLang==="ja"?"ja-JP":"en-US",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});
+    const top=h.topDiseases&&h.topDiseases[0]?(currentLang==="ja"?(h.topDiseases[0].name_ja||h.topDiseases[0].name):h.topDiseases[0].name):"";
+    return`<div class="history-item" data-id="${h.id}" style="padding:8px 12px;border-bottom:1px solid var(--gray-100);cursor:pointer;font-size:.82rem"><span>${icon}</span> <strong>${escapeHtml(spName)}</strong> <span style="color:var(--gray-500)">${date}</span><br><span style="color:var(--navy)">${escapeHtml(top)}</span> <span style="color:var(--gray-400)">${h.symptoms?h.symptoms.length:0}症状</span></div>`;
+  }).join("");
+  return`<div class="history-panel" style="margin-top:12px"><div style="font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 12px;border-bottom:2px solid var(--green)">${currentLang==="ja"?"📋 診断履歴":"📋 Diagnosis History"}</div>${items}</div>`;
 }
 
 function loadCommonDiseases(species){
@@ -2115,6 +2154,7 @@ function toggleDbItem(el){
   if(detail){
     const isOpen=detail.classList.toggle("open");
     el.setAttribute("aria-expanded",isOpen);
+    if(isOpen){const nameEl=el.querySelector(".d-name");trackEvent("view_disease_detail",{species:currentSpecies,disease:(nameEl?nameEl.textContent:"").substring(0,80)});}
   }
 }
 
