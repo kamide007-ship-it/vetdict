@@ -641,6 +641,21 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .scroll-top{transition:none}
 }
 
+/* --- Print styles --- */
+@media print{
+  .header,.hero,.sponsor-banner,.landing-chat,.species-section,.footer,
+  .share-widget,.feedback-widget,.print-results-btn,.az-nav,.hamburger,
+  .history-panel,.tab-nav-wrap{display:none!important}
+  body{background:#fff;font-size:11pt;padding:0}
+  .main-content{display:block!important}
+  #viewChecker{display:block!important}
+  #resultsArea{box-shadow:none;border:none}
+  .disease-result{break-inside:avoid;border:1px solid #ccc;margin-bottom:8pt}
+  .disease-detail{display:block!important;max-height:none!important;opacity:1!important}
+  .severity-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .disease-page,.index-page,.hub-page{padding:10pt}
+}
+
 /* --- Landing Chat --- */
 .landing-chat{padding:0 20px 30px;margin-top:-10px}
 .landing-chat .card{box-shadow:var(--shadow-lg);border:2px solid var(--navy);transition:all var(--transition-normal)}

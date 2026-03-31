@@ -969,10 +969,24 @@ function renderResults(data){
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
   area.appendChild(createShareWidget(diseases));
+  area.appendChild(createPrintButton());
   loadCommonDiseases(currentSpecies);
   loadBreedEcology(currentSpecies,currentBreed);
   /* Save diagnosis to history (localStorage) */
   saveDiagnosisHistory(data,diseases);
+}
+
+/* ===== Print / Export ===== */
+function createPrintButton(){
+  const btn=document.createElement("button");
+  btn.className="print-results-btn";
+  btn.style.cssText="display:block;margin:12px auto;padding:10px 24px;background:var(--white);border:2px solid var(--navy);color:var(--navy);border-radius:8px;font-size:.84rem;font-weight:600;cursor:pointer";
+  btn.textContent=currentLang==="ja"?"🖨 診断結果を印刷":"🖨 Print Results";
+  btn.addEventListener("click",function(){
+    trackEvent("print_results",{species:currentSpecies});
+    window.print();
+  });
+  return btn;
 }
 
 /* ===== Diagnosis History (localStorage) ===== */
