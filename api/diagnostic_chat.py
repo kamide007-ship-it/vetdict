@@ -725,7 +725,7 @@ SYMPTOM_ALIASES = {
     # 排泄
     "白い糞": "white_stringy_feces", "白い糸みたいな糞": "white_stringy_feces",
     "透明な糞": "white_stringy_feces",
-    "糞がぶら下がってる": "trailing_feces",
+    "糞がぶら下がってる": "white_stringy_feces",
     # 寄生虫
     "イカリムシ": "anchor_worm", "糸みたいなのがついてる": "anchor_worm",
     "虫がついてる": "worm_like_parasites",
