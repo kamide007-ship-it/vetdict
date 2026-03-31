@@ -3097,6 +3097,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "straining": "digestive", "tissue_prolapse": "digestive",
     "intestinal_obstruction": "digestive", "mouth_rot": "digestive",
     "oral_mucus": "digestive",
+    "appetite_loss": "general",
     "poor_appetite": "digestive", "poor_feeding_response": "digestive",
     "segments_in_stool": "digestive",
     # 骨格・四肢
@@ -3270,6 +3271,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
     "papular_dermatitis": {"ja": "丘疹性皮膚炎", "en": "Papular Dermatitis"},
     "pneumonia": {"ja": "肺炎", "en": "Pneumonia"},
+    "appetite_loss": {"ja": "食欲不振", "en": "Appetite loss"},
     "poor_appetite": {"ja": "食欲減退", "en": "Poor appetite"},
     "poor_feeding_response": {"ja": "哺乳反応不良", "en": "Poor Feeding Response"},
     "poor_wound_healing": {"ja": "創傷治癒不良", "en": "Poor Wound Healing"},

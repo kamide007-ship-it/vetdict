@@ -27590,7 +27590,6 @@
     "symptoms": [
       "circular_hair_loss",
       "circular_lesions",
-      "crusting",
       "crusty_skin",
       "hair_loss",
       "itching",
@@ -29206,7 +29205,6 @@
     "symptoms": [
       "circular_hair_loss",
       "circular_lesions",
-      "crusting",
       "crusty_skin",
       "hair_loss",
       "itching",
@@ -36879,7 +36877,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -37034,7 +37031,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -37155,7 +37151,6 @@
     "name_ja": "そ嚢うっ滞（新生児）（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -37276,7 +37271,7 @@
     "name_ja": "栄養欠乏症（一般）（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -37308,7 +37303,6 @@
     "name_ja": "そ嚢うっ滞（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -37459,7 +37453,7 @@
     "name_ja": "ビタミンA欠乏症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -37491,7 +37485,7 @@
     "name_ja": "ヨウ素欠乏症（甲状腺過形成）（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "decreased_activity",
       "lameness",
       "lethargy",
@@ -37770,7 +37764,6 @@
     "species": "Parakeet",
     "symptoms": [
       "anemia",
-      "appetite_loss",
       "clicking_sounds",
       "decreased_appetite",
       "diarrhea",
@@ -38004,7 +37997,7 @@
     "name_ja": "変形性関節症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -38029,7 +38022,7 @@
     "name_ja": "竜骨変形（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -38115,7 +38108,6 @@
     "name_ja": "口腔膿瘍（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "decreased_appetite",
       "diarrhea",
       "lethargy",
@@ -38355,7 +38347,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -38387,7 +38378,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -38419,7 +38409,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -39100,7 +39089,6 @@
     "name_ja": "熱傷（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "beak_deformity",
       "bleeding",
       "crop_stasis",
@@ -39223,7 +39211,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -39285,7 +39272,7 @@
     "species": "Parakeet",
     "symptoms": [
       "anemia",
-      "appetite_loss",
+      "decreased_appetite",
       "decreased_activity",
       "feather_loss",
       "lethargy",
@@ -39829,7 +39816,6 @@
     "name_ja": "消化管部分閉塞（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -40268,7 +40254,7 @@
     "name_ja": "皮膚自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -40293,7 +40279,7 @@
     "name_ja": "皮膚アレルギー疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41136,7 +41122,7 @@
     "name_ja": "筋骨格系栄養欠乏（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -41259,7 +41245,7 @@
     "name_ja": "内分泌自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41405,7 +41391,7 @@
     "name_ja": "血液自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41460,7 +41446,7 @@
     "name_ja": "血液栄養欠乏（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -41791,7 +41777,7 @@
     "name_ja": "全身性自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41906,7 +41892,7 @@
     "name_ja": "免疫介在性疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41991,7 +41977,7 @@
     "name_ja": "環境ストレス症候群（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "bleeding",
       "breeding_behavior",
       "feather_loss",
@@ -42226,7 +42212,7 @@
     "name_ja": "免疫介在性溶血性貧血（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -42251,7 +42237,7 @@
     "name_ja": "免疫介在性血小板減少症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -42666,7 +42652,7 @@
     "name_ja": "セレン欠乏症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -42760,7 +42746,6 @@
     "name_ja": "新生児そ嚢火傷（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "beak_deformity",
       "bleeding",
       "crop_stasis",
@@ -61936,10 +61921,10 @@
     "name_ja": "卵詰まり（難産）（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "lethargy",
-      "straining"
+      "straining",
+      "bloating"
     ],
     "description": "Egg Binding (Dystocia) in Amphibian",
     "description_ja": "両生類における代謝性の生殖器系疾患。卵詰まり（難産）は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
@@ -61962,7 +61947,6 @@
     "name_ja": "排卵前卵胞停滞（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -61993,7 +61977,6 @@
     "name_ja": "排卵後卵停滞（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -62024,10 +62007,10 @@
     "name_ja": "卵黄体腔炎（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "lethargy",
-      "straining"
+      "straining",
+      "bloating"
     ],
     "description": "Egg Yolk Coelomitis in Amphibian",
     "description_ja": "両生類における代謝性の生殖器系疾患。卵黄体腔炎は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
@@ -62176,7 +62159,6 @@
     "name_ja": "胃腸炎（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -62207,7 +62189,6 @@
     "name_ja": "腸閉塞（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -62239,7 +62220,6 @@
     "name_ja": "便秘（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "bloating",
       "bloody_stool",
@@ -62269,7 +62249,6 @@
     "name_ja": "吐出（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "bloating",
       "bloody_stool",

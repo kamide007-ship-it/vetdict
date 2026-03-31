@@ -69,10 +69,13 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "oral_plaques": "digestive", "overgrown_beak": "digestive",
     "regurgitation": "digestive", "sour_crop_odor": "digestive",
     "straining": "digestive", "tapeworm_segments_in_droppings": "digestive",
-    "undigested_food_in_droppings": "digestive", "vomiting": "digestive",
+    "undigested_food_in_droppings": "digestive", "undigested_seeds_in_droppings": "digestive",
+    "vomiting": "digestive",
     "difficulty_eating": "digestive", "dysphagia": "digestive",
     "intestinal_obstruction": "digestive", "oral_irritation": "digestive",
     "oral_lesions": "digestive",
+    # 口腔
+    "white_plaques_in_mouth": "oral",
     # 骨格・四肢
     "beak_deformity": "musculoskeletal", "bowed_legs": "musculoskeletal",
     "fractures": "musculoskeletal", "joint_swelling": "musculoskeletal",
@@ -6855,6 +6858,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "tremors": {"ja": "振戦", "en": "Tremors"},
     "ulcerated_masses": {"ja": "潰瘍化腫瘤", "en": "Ulcerated masses"},
     "undigested_food_in_droppings": {"ja": "糞中の未消化食物", "en": "Undigested food in droppings"},
+    "undigested_seeds_in_droppings": {"ja": "未消化種子の排泄", "en": "Undigested seeds in droppings"},
     "vision_loss": {"ja": "視力喪失", "en": "Vision loss"},
     "voice_change": {"ja": "声の変化", "en": "Voice change"},
     "vomiting": {"ja": "嘔吐", "en": "Vomiting"},
@@ -6863,6 +6867,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "weight_loss": {"ja": "体重減少", "en": "Weight loss"},
     "white_deposits_on_joints": {"ja": "関節上の白色沈着物", "en": "White deposits on joints"},
     "white_patches_in_mouth": {"ja": "口腔内白色斑", "en": "White patches in mouth"},
+    "white_plaques_in_mouth": {"ja": "口腔内白色斑", "en": "White plaques in mouth"},
     "wing_droop": {"ja": "翼下垂", "en": "Wing droop"},
     "yellow_skin_masses": {"ja": "黄色皮膚腫瘤", "en": "Yellow skin masses"},
 

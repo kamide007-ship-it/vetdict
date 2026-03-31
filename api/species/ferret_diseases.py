@@ -3494,7 +3494,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "green_mucoid_stool": "digestive", "intermittent_diarrhea": "digestive",
     "rectal_bleeding": "digestive", "reduced_fecal_output": "digestive",
     "scooting": "digestive", "tarry_stool": "digestive",
-    "voluminous_stool": "digestive",
+    "voluminous_stool": "digestive", "fecal_incontinence": "digestive",
     # 骨格・四肢
     "limping": "musculoskeletal", "inability_to_bear_weight": "musculoskeletal",
     "fractures_spontaneous": "musculoskeletal", "hind_limb_paralysis": "musculoskeletal",
@@ -3506,7 +3506,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "dragging_hind_legs": "neurological", "abnormal_gait": "neurological",
     "facial_asymmetry": "neurological", "hyperesthesia": "neurological",
     "neurological_signs": "neurological", "reduced_reflexes": "neurological",
-    "tremors": "neurological",
+    "tremors": "neurological", "ataxia": "neurological",
     # 泌尿器・生殖器
     "excessive_urination": "urinary", "frequent_urination": "urinary",
     "straining_to_urinate": "urinary", "blood_in_urine": "urinary",
@@ -3531,6 +3531,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "ascites": "body", "jaw_swelling": "body",
     "lymph_node_swelling": "body", "perianal_swelling": "body",
     "preputial_swelling": "body", "progressive_weight_loss": "body",
+    "tail_abnormality": "body", "pale_mucous_membranes": "body",
     # 行動・活動
     "lethargy": "behavior", "weakness": "behavior",
     "pain": "behavior", "vocalization": "behavior",
@@ -3541,6 +3542,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "muscle_weakness": "behavior", "aggression": "behavior",
     "behavioral_changes": "behavior", "excessive_grooming": "behavior",
     "behavioral_improvement": "behavior", "muscle_pain": "behavior",
+    "aggressive_behavior": "behavioral",
     # 緊急
     "coma": "emergency", "sudden_death": "emergency",
     # 内科・血液
@@ -3703,6 +3705,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "anal_irritation": {"ja": "肛門の刺激", "en": "Anal Irritation"},
     "anemia": {"ja": "貧血", "en": "Anemia"},
     "anorexia": {"ja": "食欲廃絶", "en": "Anorexia"},
+    "ataxia": {"ja": "運動失調", "en": "Ataxia"},
     "arrhythmia": {"ja": "不整脈", "en": "Arrhythmia"},
     "ascites": {"ja": "腹水", "en": "Ascites"},
     "behavioral_improvement": {"ja": "行動の改善", "en": "Behavioral Improvement"},
@@ -3718,6 +3721,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "excoriation": {"ja": "擦過傷", "en": "Excoriation"},
     "exophthalmos": {"ja": "眼球突出", "en": "Exophthalmos"},
     "facial_asymmetry": {"ja": "顔面非対称", "en": "Facial Asymmetry"},
+    "fecal_incontinence": {"ja": "便失禁", "en": "Fecal incontinence"},
     "foul_odor": {"ja": "悪臭", "en": "Foul odor"},
     "glazed_eyes": {"ja": "うつろな目", "en": "Glazed Eyes"},
     "green_mucoid_stool": {"ja": "緑色粘液便", "en": "Green Mucoid Stool"},

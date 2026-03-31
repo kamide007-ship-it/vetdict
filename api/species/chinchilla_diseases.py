@@ -3671,6 +3671,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "skin_scaling": "skin", "skin_thinning": "skin",
     "tail_injury": "skin", "ulceration": "skin",
     "wound_discharge": "skin",
+    "reddened_ears": "skin",
     # 眼
     "eye_discharge": "eyes", "eye_redness": "eyes",
     "eye_swelling": "eyes", "cloudiness_eye": "eyes",
@@ -3687,6 +3688,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "sneezing": "respiratory", "wheezing": "respiratory",
     "coughing": "respiratory", "excessive_panting": "respiratory",
     "rapid_breathing": "respiratory", "respiratory_distress": "respiratory",
+    "labored_breathing": "respiratory",
     # 消化器・口腔
     "appetite_loss": "digestive", "drooling": "digestive",
     "difficulty_eating": "digestive", "pawing_at_mouth": "digestive",
@@ -3729,6 +3731,8 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "reduced_urine_output": "urinary", "renal_failure": "urinary",
     "testicular_swelling": "urinary", "vaginal_bleeding": "urinary",
     "vulvar_swelling": "urinary",
+    "straining_urinate": "urinary",
+    "genital_swelling": "reproductive",
     # 循環器
     "collapse": "cardiovascular", "cyanosis": "cardiovascular",
     "exercise_intolerance": "cardiovascular", "muffled_heart_sounds": "cardiovascular",
@@ -3754,6 +3758,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "back_pain": "behavior", "hyperactivity": "behavior",
     "licking_foot": "behavior", "licking_genital_area": "behavior",
     "stress_signs": "behavior", "vocalization": "behavior",
+    "excessive_grooming": "behavioral",
     # 緊急
     "shock": "emergency", "sudden_death": "emergency",
     # 内科・血液
@@ -3981,6 +3986,11 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "vocalization": {"ja": "鳴き声", "en": "Vocalization"},
     "vulvar_swelling": {"ja": "外陰部腫脹", "en": "Vulvar Swelling"},
     "wound_discharge": {"ja": "創傷分泌物", "en": "Wound Discharge"},
+    "excessive_grooming": {"ja": "過剰グルーミング", "en": "Excessive grooming"},
+    "genital_swelling": {"ja": "生殖器腫脹", "en": "Genital swelling"},
+    "labored_breathing": {"ja": "努力呼吸", "en": "Labored breathing"},
+    "reddened_ears": {"ja": "耳の発赤", "en": "Reddened ears"},
+    "straining_urinate": {"ja": "排尿困難", "en": "Straining to urinate"},
 }
 
 

@@ -2573,7 +2573,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Bumblefoot (Pododermatitis)",
         "name_ja": "趾瘤症（バンブルフット）",
-        "symptoms": {"limping", "swollen_feet", "foot_lesions", "lethargy",
+        "symptoms": {"lameness", "swollen_feet", "foot_lesions", "lethargy",
                       "appetite_loss"},
         "description": "Pressure sore infection of the plantar surface of the feet, common in caged rodents.",
         "description_ja": "足底面の圧迫性潰瘍・感染症。硬い床材、肥満、不活動がリスク因子。"
@@ -2656,7 +2656,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "bleeding_from_mass": "skin", "circular_hair_loss": "skin",
     "draining_tract": "skin",
     "exposed_tail_bone": "skin", "extensive_hair_loss": "skin",
-    "foot_ulceration": "skin",
+    "foot_lesions": "skin", "foot_ulceration": "skin",
     "intense_itching": "skin", "poor_coat": "skin",
     "pruritus": "skin", "severe_foot_swelling": "skin",
     "skin_abrasion": "skin", "skin_crusting": "skin",
@@ -2727,7 +2727,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "failure_to_thrive": "body", "jaw_swelling": "body",
     "lymph_node_swelling": "body", "muscle_wasting": "body",
     "rapid_growth": "body", "splenomegaly": "body",
-    "swelling_at_tail_stump": "body",
+    "swelling_at_tail_stump": "body", "tail_abnormality": "body",
     # 行動・活動
     "lethargy": "behavior", "shivering": "behavior",
     "squinting": "behavior", "stress_behavior": "behavior",
@@ -2796,6 +2796,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "tail_injury": {"ja": "尾部の損傷", "en": "Tail Injury"},
     "bleeding": {"ja": "出血", "en": "Bleeding"},
     "exposed_bone": {"ja": "骨の露出", "en": "Exposed Bone"},
+    "foot_lesions": {"ja": "足部病変", "en": "Foot lesions"},
     # Musculoskeletal
     "swollen_feet": {"ja": "足の腫脹", "en": "Swollen Feet"},
     "foot_sores": {"ja": "足底の傷", "en": "Foot Sores"},
@@ -2929,6 +2930,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "subcutaneous_mass": {"ja": "皮下腫瘤", "en": "Subcutaneous Mass"},
     "sudden_death": {"ja": "突然死", "en": "Sudden death"},
     "swelling_at_tail_stump": {"ja": "尾の断端の腫脹", "en": "Swelling At Tail Stump"},
+    "tail_abnormality": {"ja": "尾の異常", "en": "Tail abnormality"},
     "tail_necrosis": {"ja": "尾の壊死", "en": "Tail Necrosis"},
     "tooth_discoloration": {"ja": "歯の変色", "en": "Tooth Discoloration"},
     "tooth_fracture": {"ja": "歯の破折", "en": "Tooth Fracture"},
