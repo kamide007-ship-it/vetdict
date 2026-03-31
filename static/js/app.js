@@ -69,7 +69,7 @@ const I18N={
     cardSymptoms:"&#9745; 症状を選択",cardResults:"&#128202; 検索結果",
     breedLabel:"品種を選択（任意）",breedNone:"品種を選択しない",
     symptomSearchPh:"症状を検索... (例: 咳, vomiting, 下痢)",
-    analyzeBtn:"鑑別疾患を検索",
+    analyzeBtn:"鑑別疾患を検索",checkerGuide:'💡 <strong>使い方:</strong> 上の症状リストからチェックを入れ、「鑑別疾患を検索」を押してください。<br/>症状が多いほど精度が向上します（3つ以上推奨）。',
     resultsEmpty:'動物種を選択し、症状にチェックを入れて<br/>「鑑別疾患を検索」を押してください',
     resultsSelectSymptom:"症状を選択してください",
     cardDiseaseDb:"&#128218; 疾患データベース",
@@ -148,7 +148,7 @@ const I18N={
     cardSymptoms:"&#9745; Select Symptoms",cardResults:"&#128202; Results",
     breedLabel:"Select breed (optional)",breedNone:"No breed selected",
     symptomSearchPh:"Search symptoms... (e.g. cough, vomiting, diarrhea)",
-    analyzeBtn:"Search Differential Diagnoses",
+    analyzeBtn:"Search Differential Diagnoses",checkerGuide:'💡 <strong>How to use:</strong> Check symptoms from the list above, then press "Search Differential Diagnoses".<br/>More symptoms = better accuracy (3+ recommended).',
     resultsEmpty:'Select a species, check symptoms, and<br/>press "Search Differential Diagnoses"',
     resultsSelectSymptom:"Please select symptoms",
     cardDiseaseDb:"&#128218; Disease Database",
@@ -547,9 +547,29 @@ function resetSpeciesChat(species){
   const sp=SPECIES.find(s=>s.id===species);
   const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):(species||"dog");
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
+  /* Quick symptom buttons per species */
+  const quickSymptoms=currentLang==="ja"?{
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける"],
+    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水"],
+    chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない"],
+    hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない"],
+    guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ"],
+    ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない"],
+    hedgehog:["針が抜ける","フケ","ふらつく","食べない","目が出ている","体重が減った"],
+    bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ"],
+  }:{
+    dog:["vomiting","lethargic","diarrhea","coughing","limping","itchy skin"],
+    cat:["not eating","vomiting","sneezing","eye discharge","can't urinate","hair loss"],
+    rabbit:["small feces","not eating","teeth grinding","head tilt","bloated","nasal discharge"],
+  };
+  const btns=(quickSymptoms[species]||[]).map(s=>
+    `<button class="quick-sym-btn" style="display:inline-block;padding:4px 10px;margin:2px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;font-size:.76rem;cursor:pointer;color:var(--navy);transition:all .15s" onclick="document.getElementById('chatInput').value=this.textContent;document.getElementById('chatSend').click();">${s}</button>`
+  ).join("");
+  const quickHtml=btns?`<div style="margin-top:6px;font-size:.72rem;color:var(--gray-400)">${currentLang==="ja"?"💬 タップで入力:":"💬 Quick input:"}</div><div style="margin-top:4px">${btns}</div>`:"";
   ["chatMessages","landingChatMessages"].forEach(id=>{
     const el=document.getElementById(id);
-    if(el){el.innerHTML=`<div class="chat-msg bot">${escapeHtml(hint)}</div>`;}
+    if(el){el.innerHTML=`<div class="chat-msg bot">${escapeHtml(hint)}${quickHtml}</div>`;}
   });
 }
 
@@ -1196,7 +1216,7 @@ function renderDiseaseCard(d,data){
       ${matchSymptoms.length?`<div class="detail-matched"><strong>${t("dtMatchedSymptoms")}:</strong> ${matchDisplay}</div>`:""}
       ${renderMissingKeySymptoms(d,data)}
       ${renderScoringDetail(d)}
-      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong> ${escapeHtml(recTests.join(", "))}</div>`:""}
+      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${recTests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("")}</div></div>`:""}
       <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>
