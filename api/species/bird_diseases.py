@@ -3044,7 +3044,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Avian Cholera (Fowl Cholera)",
         "name_ja": "鳥コレラ（家禽コレラ）",
-        "symptoms": {"cyanosis", "diarrhea", "nasal_discharge", "respiratory_distress", "sudden_death", "swollen_joints"},
+        "symptoms": {"cyanosis", "diarrhea", "nasal_discharge", "respiratory_distress", "sudden_death", "joint_swelling"},
         "description": "Avian Cholera (Fowl Cholera) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "パスツレラ・ムルトシダによる急性敗血症または慢性局所感染症。",
         "urgency": "emergency",
@@ -3065,7 +3065,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Erysipelas",
         "name_ja": "丹毒",
-        "symptoms": {"cyanosis", "lethargy", "skin_lesions", "sudden_death", "swollen_joints"},
+        "symptoms": {"cyanosis", "lethargy", "skin_lesions", "sudden_death", "joint_swelling"},
         "description": "Erysipelas is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "エリシペロスリクス・ルシオパシエによる敗血症と皮膚病変。",
         "urgency": "emergency",
@@ -6845,7 +6845,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "swelling": {"ja": "腫脹", "en": "Swelling"},
     "swollen_feet": {"ja": "足の腫脹", "en": "Swollen feet"},
     "swollen_infraorbital_sinus": {"ja": "眼窩下洞腫脹", "en": "Swollen infraorbital sinus"},
-    "swollen_joints": {"ja": "関節腫脹", "en": "Swollen joints"},
     "swollen_toes": {"ja": "趾の腫脹", "en": "Swollen toes"},
     "tail_bobbing": {"ja": "尾振り呼吸", "en": "Tail bobbing"},
     "tapeworm_segments_in_droppings": {"ja": "糞中の条虫片節", "en": "Tapeworm segments in droppings"},

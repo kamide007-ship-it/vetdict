@@ -36,7 +36,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "skin_redness": "skin", "skin_thickening": "skin",
     "skin_thinning": "skin", "swelling_at_quill_base": "skin",
     "swollen_toe": "skin", "tail_mass": "skin",
-    "thick_crusting": "skin", "discolored_toes": "skin",
+    "thick_crusting": "skin",
     "toe_necrosis": "skin", "ulceration": "skin",
     "wound_infection": "skin",
     # 眼
@@ -44,7 +44,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "eye_redness": "eyes", "eye_squinting": "eyes",
     "eye_cloudiness": "eyes", "vision_loss": "eyes",
     "cataracts": "eyes", "corneal_opacity": "eyes",
-    "enlarged_eye": "eyes", "eye_bulging": "eyes",
+    "enlarged_eye": "eyes",
     "eye_pain": "eyes",
     # 耳
     "ear_scratching": "ears", "head_shaking": "ears",
@@ -72,7 +72,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "lameness": "musculoskeletal", "stiffness": "musculoskeletal",
     "limb_not_bearing_weight": "musculoskeletal", "hind_limb_paralysis": "musculoskeletal",
     "hind_limb_weakness": "musculoskeletal", "limb_swelling": "musculoskeletal",
-    "lameness": "musculoskeletal", "pathological_fracture": "musculoskeletal",
+    "pathological_fracture": "musculoskeletal",
     # 神経
     "ataxia": "neurological", "falling_over": "neurological",
     "progressive_paralysis": "neurological", "head_tilt": "neurological",

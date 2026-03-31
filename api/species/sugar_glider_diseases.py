@@ -1756,7 +1756,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatic Neoplasia",
         "name_ja": "肝臓腫瘍",
-        "symptoms": {"abdominal_distension", "appetite_loss", "jaundice", "lethargy", "weight_loss"},
+        "symptoms": {"abdominal_distension", "poor_appetite", "jaundice", "lethargy", "weight_loss"},
         "description": "Hepatic Neoplasia is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "進行性肝不全を引き起こす原発性または転移性肝臓腫瘍です。",
         "urgency": "high",
@@ -1777,7 +1777,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Splenic Lymphoma",
         "name_ja": "脾臓リンパ腫",
-        "symptoms": {"appetite_loss", "lethargy", "splenomegaly", "weight_loss"},
+        "symptoms": {"poor_appetite", "lethargy", "splenomegaly", "weight_loss"},
         "description": "Splenic Lymphoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "主に脾臓に影響するリンパ腫で、著明な脾腫大を引き起こします。",
         "urgency": "high",
@@ -2008,7 +2008,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Gastrointestinal Candidiasis",
         "name_ja": "消化管カンジダ症",
-        "symptoms": {"appetite_loss", "diarrhea", "oral_plaques", "weight_loss"},
+        "symptoms": {"poor_appetite", "diarrhea", "oral_plaques", "weight_loss"},
         "description": "Gastrointestinal Candidiasis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "免疫抑制、抗生物質使用、高糖質食による消化管の酵母過増殖です。",
         "urgency": "moderate",
@@ -2134,7 +2134,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "symptoms": {"appetite_loss", "blood_in_urine", "fever", "lethargy", "polydipsia"},
+        "symptoms": {"poor_appetite", "blood_in_urine", "fever", "lethargy", "polydipsia"},
         "description": "Pyelonephritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "下部尿路疾患からの上行性腎臓細菌感染です。",
         "urgency": "high",
@@ -2344,7 +2344,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dental Abscess (Molar)",
         "name_ja": "歯の膿瘍（臼歯）",
-        "symptoms": {"appetite_loss", "drooling", "facial_swelling", "weight_loss"},
+        "symptoms": {"poor_appetite", "drooling", "facial_swelling", "weight_loss"},
         "description": "Dental Abscess (Molar) is a dental condition affecting tooth structure, alignment, or oral health.",
         "description_ja": "臼歯の歯根部の膿瘍で、顔面腫脹と摂食困難を引き起こします。",
         "urgency": "high",
@@ -2365,7 +2365,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Periodontal Disease",
         "name_ja": "歯周病",
-        "symptoms": {"appetite_loss", "drooling", "foul_breath", "gum_redness", "loose_teeth"},
+        "symptoms": {"poor_appetite", "drooling", "foul_breath", "gum_redness", "loose_teeth"},
         "description": "Periodontal Disease is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "歯石と細菌蓄積による歯肉と支持構造の炎症と感染です。",
         "urgency": "moderate",
@@ -2386,7 +2386,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Incisor Fracture",
         "name_ja": "切歯骨折",
-        "symptoms": {"appetite_loss", "bleeding_from_mouth", "difficulty_eating", "drooling"},
+        "symptoms": {"poor_appetite", "bleeding_from_mouth", "difficulty_eating", "drooling"},
         "description": "Incisor Fracture involves traumatic injury requiring assessment of damage extent and appropriate stabilization and repair.",
         "description_ja": "ケージバーの齧りや外傷による切歯の骨折で、歯髄が露出する可能性があります。",
         "urgency": "moderate",
@@ -2407,7 +2407,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pancreatitis",
         "name_ja": "膵炎",
-        "symptoms": {"abdominal_pain", "appetite_loss", "diarrhea", "lethargy", "vomiting"},
+        "symptoms": {"abdominal_pain", "poor_appetite", "diarrhea", "lethargy", "vomiting"},
         "description": "Pancreatitis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "高脂肪または高糖質の食事による膵臓の炎症です。",
         "urgency": "high",
@@ -2428,7 +2428,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Candidiasis",
         "name_ja": "腸管カンジダ症",
-        "symptoms": {"appetite_loss", "diarrhea", "lethargy", "weight_loss"},
+        "symptoms": {"poor_appetite", "diarrhea", "lethargy", "weight_loss"},
         "description": "Intestinal Candidiasis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "腸管内の酵母過増殖で吸収不良と慢性下痢を引き起こします。",
         "urgency": "moderate",
@@ -2491,7 +2491,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Obesity-Related Hepatic Lipidosis",
         "name_ja": "肥満関連肝リピドーシス",
-        "symptoms": {"abdominal_distension", "appetite_loss", "jaundice", "lethargy", "obesity"},
+        "symptoms": {"abdominal_distension", "poor_appetite", "jaundice", "lethargy", "obesity"},
         "description": "Obesity-Related Hepatic Lipidosis is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "特にミールワームやナッツなどの高脂肪食の慢性的な過食による脂肪肝です。",
         "urgency": "high",
@@ -2575,7 +2575,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Otitis Media / Interna",
         "name_ja": "中耳炎/内耳炎",
-        "symptoms": {"appetite_loss", "balance_loss", "circling", "head_tilt", "nystagmus"},
+        "symptoms": {"poor_appetite", "balance_loss", "circling", "head_tilt", "nystagmus"},
         "description": "Otitis Media / Interna is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "中耳または内耳に影響する深部耳感染で、前庭症状を引き起こします。",
         "urgency": "high",
@@ -2638,7 +2638,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Obstruction",
         "name_ja": "腸閉塞",
-        "symptoms": {"abdominal_distension", "appetite_loss", "lethargy", "reduced_fecal_output", "vomiting"},
+        "symptoms": {"abdominal_distension", "poor_appetite", "lethargy", "reduced_fecal_output", "vomiting"},
         "description": "Intestinal Obstruction is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "異物、腫瘍、腸重積による腸の閉塞です。",
         "urgency": "emergency",
@@ -2659,7 +2659,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Lead Poisoning",
         "name_ja": "鉛中毒",
-        "symptoms": {"appetite_loss", "ataxia", "diarrhea", "lethargy", "seizures"},
+        "symptoms": {"poor_appetite", "ataxia", "diarrhea", "lethargy", "seizures"},
         "description": "Lead Poisoning is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "ケージ外探索中の鉛塗料、はんだ、その他の鉛含有物質の摂取による中毒症です。",
         "urgency": "emergency",
@@ -2680,7 +2680,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "symptoms": {"anemia", "appetite_loss", "jaundice", "lethargy"},
+        "symptoms": {"anemia", "poor_appetite", "jaundice", "lethargy"},
         "description": "Zinc Toxicosis is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "亜鉛メッキされたケージ部品を齧ることによる溶血性貧血を伴う中毒です。",
         "urgency": "high",
@@ -2827,7 +2827,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Aflatoxicosis",
         "name_ja": "アフラトキシン中毒",
-        "symptoms": {"appetite_loss", "lethargy", "weight_loss", "diarrhea",
+        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "diarrhea",
                       "jaundice", "sudden_death"},
         "description": "Toxic hepatopathy from ingestion of aflatoxin-contaminated food, particularly corn and peanuts.",
         "description_ja": "カビ毒（アフラトキシン）に汚染された食品の摂取による肝臓障害。"
