@@ -6911,7 +6911,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
     "polyuria_polydipsia": {"ja": "多飲多尿", "en": "Polyuria/polydipsia"},
     "poor_growth": {"ja": "成長不良", "en": "Poor Growth"},
-    "pruritus": {"ja": "掻痒", "en": "Pruritus"},
     "redness": {"ja": "発赤", "en": "Redness"},
     "ruffled_feathers": {"ja": "羽毛逆立ち", "en": "Ruffled feathers"},
     "secondary_infection": {"ja": "二次感染", "en": "Secondary Infection"},
