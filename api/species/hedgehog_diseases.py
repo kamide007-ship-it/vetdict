@@ -26,7 +26,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "abdominal_mass": "skin", "bloody_discharge_from_mass": "skin",
     "crusting_skin": "skin", "dandruff": "skin",
     "dry_flaky_skin": "skin", "dry_skin": "skin",
-    "foul_odor": "skin", "hair_loss": "skin",
+    "foul_odor": "skin", "alopecia": "skin",
     "mild_itching": "skin", "missing_toe": "skin",
     "poor_coat": "skin", "pruritus": "skin",
     "pustules": "skin", "pustules_at_quill_base": "skin",
@@ -36,7 +36,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "skin_redness": "skin", "skin_thickening": "skin",
     "skin_thinning": "skin", "swelling_at_quill_base": "skin",
     "swollen_toe": "skin", "tail_mass": "skin",
-    "thick_crusting": "skin", "toe_discoloration": "skin",
+    "thick_crusting": "skin", "discolored_toes": "skin",
     "toe_necrosis": "skin", "ulceration": "skin",
     "wound_infection": "skin",
     # 眼
@@ -44,7 +44,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "eye_redness": "eyes", "eye_squinting": "eyes",
     "eye_cloudiness": "eyes", "vision_loss": "eyes",
     "cataracts": "eyes", "corneal_opacity": "eyes",
-    "enlarged_eye": "eyes", "exophthalmos": "eyes",
+    "enlarged_eye": "eyes", "eye_bulging": "eyes",
     "eye_pain": "eyes",
     # 耳
     "ear_scratching": "ears", "head_shaking": "ears",
@@ -72,7 +72,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "lameness": "musculoskeletal", "stiffness": "musculoskeletal",
     "limb_not_bearing_weight": "musculoskeletal", "hind_limb_paralysis": "musculoskeletal",
     "hind_limb_weakness": "musculoskeletal", "limb_swelling": "musculoskeletal",
-    "limping": "musculoskeletal", "pathological_fracture": "musculoskeletal",
+    "lameness": "musculoskeletal", "pathological_fracture": "musculoskeletal",
     # 神経
     "ataxia": "neurological", "falling_over": "neurological",
     "progressive_paralysis": "neurological", "head_tilt": "neurological",
@@ -83,13 +83,13 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "mild_ataxia": "neurological", "muscle_twitching": "neurological",
     "neurological_signs": "neurological", "stumbling": "neurological",
     # 泌尿器・生殖器
-    "excessive_urination": "urinary", "bloody_urine": "urinary",
+    "polyuria": "urinary", "bloody_urine": "urinary",
     "frequent_urination": "urinary", "straining_to_urinate": "urinary",
     "vaginal_bleeding": "urinary", "vaginal_discharge": "urinary",
     "mammary_mass": "urinary", "mammary_discharge": "urinary",
     "mammary_swelling": "urinary", "mammary_redness": "urinary",
     "penile_protrusion": "urinary", "asymmetric_testes": "urinary",
-    "blood_in_urine": "urinary", "dark_urine": "urinary",
+    "bloody_urine": "urinary", "dark_urine": "urinary",
     "incontinence": "urinary", "maternal_stress": "urinary",
     "penile_discoloration": "urinary", "polyuria": "urinary",
     "testicular_enlargement": "urinary", "testicular_swelling": "urinary",
@@ -126,12 +126,11 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 内科・血液
     "fever": "internal", "discharge": "internal",
     "jaundice": "internal", "red_gums": "internal",
-    "excessive_thirst": "internal", "anemia": "internal",
+    "polydipsia": "internal", "anemia": "internal",
     "lymph_node_enlargement": "internal", "pale_mucous_membranes": "internal",
     "foaming_at_mouth": "internal", "bleeding": "internal",
     "blood_in_nest": "internal", "hepatic_lipidosis_signs": "internal",
     "no_obvious_symptoms": "internal", "pale_gums": "internal",
-    "polydipsia": "internal",
 }
 
 
@@ -1114,7 +1113,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Chronic Kidney Disease",
         "name_ja": "慢性腎臓病",
-        "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "appetite_loss", "lethargy", "dehydration"},
+        "symptoms": {"polydipsia", "polyuria", "weight_loss", "appetite_loss", "lethargy", "dehydration"},
         "description": "Chronic Kidney Disease is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "高齢のハリネズミに多い、進行性の腎機能低下です。",
         "urgency": "high",
@@ -1201,7 +1200,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyometra",
         "name_ja": "子宮蓄膿症",
-        "symptoms": {"vaginal_discharge", "abdominal_distension", "lethargy", "appetite_loss", "excessive_thirst", "fever"},
+        "symptoms": {"vaginal_discharge", "abdominal_distension", "lethargy", "appetite_loss", "polydipsia", "fever"},
         "description": "Pyometra is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "子宮内に膿が蓄積する致命的な感染症で、緊急手術が必要です。",
         "urgency": "emergency",
@@ -1678,7 +1677,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Adrenal Disease",
         "name_ja": "副腎疾患",
-        "symptoms": {"alopecia", "weight_loss", "lethargy", "excessive_thirst", "muscle_wasting"},
+        "symptoms": {"alopecia", "weight_loss", "lethargy", "polydipsia", "muscle_wasting"},
         "description": "Adrenal Disease is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "副腎機能障害によるホルモン異常で、腫瘍性または過形成性のことがあります。",
         "urgency": "moderate",
@@ -1909,7 +1908,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Granulosa Cell Tumor",
         "name_ja": "卵巣顆粒膜細胞腫",
-        "symptoms": {"abdominal_distension", "hair_loss", "lethargy", "vaginal_discharge"},
+        "symptoms": {"abdominal_distension", "alopecia", "lethargy", "vaginal_discharge"},
         "description": "Ovarian Granulosa Cell Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "ホルモン産生性卵巣腫瘍で、子宮内膜変化と腹水の可能性があります。",
         "urgency": "high",
@@ -2434,7 +2433,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nephrolithiasis",
         "name_ja": "腎結石症",
-        "symptoms": {"appetite_loss", "blood_in_urine", "lethargy", "straining_to_urinate"},
+        "symptoms": {"appetite_loss", "bloody_urine", "lethargy", "straining_to_urinate"},
         "description": "Nephrolithiasis is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "腎臓内の結石形成で、痛み、閉塞、腎障害の可能性があります。",
         "urgency": "high",
@@ -2455,7 +2454,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "symptoms": {"appetite_loss", "back_pain", "blood_in_urine", "fever", "lethargy"},
+        "symptoms": {"appetite_loss", "back_pain", "bloody_urine", "fever", "lethargy"},
         "description": "Pyelonephritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "下部尿路疾患からの上行性腎臓細菌感染です。",
         "urgency": "high",
@@ -2854,7 +2853,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Eye Abscess (Retrobulbar)",
         "name_ja": "眼膿瘍（後眼窩）",
-        "symptoms": {"appetite_loss", "exophthalmos", "eye_discharge", "facial_swelling"},
+        "symptoms": {"appetite_loss", "eye_bulging", "eye_discharge", "facial_swelling"},
         "description": "Eye Abscess (Retrobulbar) is an ophthalmic condition affecting the eye or surrounding structures.",
         "description_ja": "歯科疾患に続発することが多い眼球後方の膿瘍で、進行性の眼球突出を引き起こします。",
         "urgency": "high",
@@ -2959,7 +2958,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Digit Amputation Wound",
         "name_ja": "指切断創",
-        "symptoms": {"bleeding", "limping", "missing_toe", "wound_infection"},
+        "symptoms": {"bleeding", "lameness", "missing_toe", "wound_infection"},
         "description": "Digit Amputation Wound involves traumatic injury requiring assessment of damage extent and appropriate stabilization and repair.",
         "description_ja": "糸の巻き付き、ケージワイヤーの絡まり、回し車の怪我による指の外傷性喪失。ハリネズミに多いです。",
         "urgency": "high",
@@ -2980,7 +2979,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Thread / Hair Tourniquet (Toe)",
         "name_ja": "糸/毛の締め付け（指）",
-        "symptoms": {"limping", "swollen_toe", "toe_discoloration", "toe_necrosis"},
+        "symptoms": {"lameness", "swollen_toe", "discolored_toes", "toe_necrosis"},
         "description": "Thread / Hair Tourniquet (Toe) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "糸、毛、繊維による指の締め付けで血液供給が遮断されます。緊急除去が必要です。",
         "urgency": "emergency",
@@ -3022,7 +3021,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Adrenal Cortical Tumor",
         "name_ja": "副腎皮質腫瘍",
-        "symptoms": {"hair_loss", "polydipsia", "polyuria", "skin_thinning", "weight_gain"},
+        "symptoms": {"alopecia", "polydipsia", "polyuria", "skin_thinning", "weight_gain"},
         "description": "Adrenal Cortical Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "過剰コルチゾール産生によるクッシング様徴候を引き起こす副腎皮質の腫瘍です。",
         "urgency": "moderate",
@@ -3197,7 +3196,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Metabolic Bone Disease (MBD)",
         "name_ja": "代謝性骨疾患（MBD）",
         "symptoms": {"hind_limb_weakness", "limb_swelling", "lethargy", "appetite_loss",
-                      "weight_loss", "limping", "ataxia"},
+                      "weight_loss", "lameness", "ataxia"},
         "description": "Nutritional secondary hyperparathyroidism causing bone demineralization, common in hedgehogs fed calcium-deficient or imbalanced diets.",
         "description_ja": "カルシウム不足やCa:P比の不均衡な食事により二次性上皮小体機能亢進症→骨脱灰が起こる。"
                           "ハリネズミではミルワームの過剰給餌（高リン・低Ca）が主因。"
@@ -3352,8 +3351,8 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "vision_loss": {"ja": "視力低下", "en": "Vision loss"},
     "bumping_into_objects": {"ja": "物にぶつかる", "en": "Bumping into objects"},
     # Urinary
-    "excessive_thirst": {"ja": "多飲", "en": "Excessive thirst"},
-    "excessive_urination": {"ja": "多尿", "en": "Excessive urination"},
+    "polydipsia": {"ja": "多飲", "en": "Excessive thirst"},
+    "polyuria": {"ja": "多尿", "en": "Excessive urination"},
     "bloody_urine": {"ja": "血尿", "en": "Bloody urine"},
     "frequent_urination": {"ja": "頻尿", "en": "Frequent urination"},
     "straining_to_urinate": {"ja": "排尿時のいきみ", "en": "Straining to urinate"},
@@ -3398,7 +3397,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "back_pain": {"ja": "背部痛", "en": "Back Pain"},
     "bleeding": {"ja": "出血", "en": "Bleeding"},
     "blood_in_nest": {"ja": "巣内の血液", "en": "Blood In Nest"},
-    "blood_in_urine": {"ja": "血尿", "en": "Blood in urine"},
     "bloody_discharge_from_mass": {"ja": "腫瘤からの血性分泌物", "en": "Bloody Discharge From Mass"},
     "cataracts": {"ja": "白内障", "en": "Cataracts"},
     "cold_intolerance": {"ja": "寒冷不耐", "en": "Cold Intolerance"},
@@ -3412,13 +3410,11 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "dry_skin": {"ja": "皮膚乾燥", "en": "Dry Skin"},
     "edema": {"ja": "浮腫", "en": "Edema"},
     "enlarged_eye": {"ja": "眼球肥大", "en": "Enlarged Eye"},
-    "exophthalmos": {"ja": "眼球突出", "en": "Exophthalmos"},
     "eye_pain": {"ja": "眼痛", "en": "Eye Pain"},
     "face_rubbing": {"ja": "顔をこする", "en": "Face Rubbing"},
     "falling_over_occasionally": {"ja": "時折の転倒", "en": "Falling Over Occasionally"},
     "foul_breath": {"ja": "悪臭のある呼気", "en": "Foul Breath"},
     "foul_odor": {"ja": "悪臭", "en": "Foul odor"},
-    "hair_loss": {"ja": "脱毛", "en": "Hair loss"},
     "head_pressing": {"ja": "頭部圧迫行動", "en": "Head Pressing"},
     "heart_murmur": {"ja": "心雑音", "en": "Heart Murmur"},
     "hepatic_lipidosis_signs": {"ja": "肝リピドーシスの徴候", "en": "Hepatic Lipidosis Signs"},
@@ -3426,7 +3422,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "hind_limb_weakness": {"ja": "後肢の衰弱", "en": "Hind limb weakness"},
     "incontinence": {"ja": "失禁", "en": "Incontinence"},
     "limb_swelling": {"ja": "四肢腫脹", "en": "Limb swelling"},
-    "limping": {"ja": "跛行", "en": "Limping"},
     "lymph_node_swelling": {"ja": "リンパ節腫脹", "en": "Lymph Node Swelling"},
     "maternal_stress": {"ja": "母体のストレス", "en": "Maternal Stress"},
     "mild_ataxia": {"ja": "軽度の運動失調", "en": "Mild Ataxia"},
@@ -3440,8 +3435,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "pale_gums": {"ja": "歯肉蒼白", "en": "Pale gums"},
     "pathological_fracture": {"ja": "病的骨折", "en": "Pathological Fracture"},
     "penile_discoloration": {"ja": "陰茎の変色", "en": "Penile Discoloration"},
-    "polydipsia": {"ja": "多飲", "en": "Polydipsia"},
-    "polyuria": {"ja": "多尿", "en": "Polyuria"},
     "poor_appetite": {"ja": "食欲減退", "en": "Poor appetite"},
     "poor_coat": {"ja": "被毛質の低下", "en": "Poor Coat"},
     "pruritus": {"ja": "掻痒", "en": "Pruritus"},
@@ -3470,7 +3463,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "testicular_enlargement": {"ja": "精巣腫大", "en": "Testicular enlargement"},
     "testicular_swelling": {"ja": "精巣腫脹", "en": "Testicular Swelling"},
     "thick_crusting": {"ja": "厚い痂皮", "en": "Thick Crusting"},
-    "toe_discoloration": {"ja": "趾の変色", "en": "Toe Discoloration"},
     "toe_necrosis": {"ja": "趾の壊死", "en": "Toe Necrosis"},
     "ulceration": {"ja": "潰瘍形成", "en": "Ulceration"},
     "very_slow_breathing": {"ja": "非常に遅い呼吸", "en": "Very Slow Breathing"},

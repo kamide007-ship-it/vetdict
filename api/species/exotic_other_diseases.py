@@ -2410,7 +2410,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Porcine Circovirus Disease (PCV2)",
         "name_ja": "ブタサーコウイルス2型疾患",
-        "symptoms": {"diarrhea", "immunosuppression", "lymph_node_enlargement", "respiratory_distress", "weight_loss"},
+        "symptoms": {"diarrhea", "immunosuppression", "enlarged_lymph_nodes", "respiratory_distress", "weight_loss"},
         "description": "Porcine Circovirus Disease (PCV2) is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "PCV2による離乳後多臓器性消耗症候群（PMWS）。",
         "urgency": "high",
@@ -2956,7 +2956,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Polioencephalomalacia (Goat)",
         "name_ja": "ヤギ多発性脳軟化症",
-        "symptoms": {"ataxia", "blindness", "opisthotonus", "seizures", "stargazing"},
+        "symptoms": {"incoordination", "blindness", "opisthotonos", "seizures", "stargazing"},
         "description": "Polioencephalomalacia (Goat) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "チアミン欠乏や硫黄中毒による大脳皮質壊死。",
         "urgency": "emergency",
@@ -2977,7 +2977,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Urolithiasis (Goat)",
         "name_ja": "ヤギ尿路結石症",
-        "symptoms": {"abdominal_pain", "inability_to_urinate", "straining_to_urinate", "vocalization"},
+        "symptoms": {"abdominal_pain", "inability_to_urinate", "straining_urinate", "vocalization"},
         "description": "Urolithiasis (Goat) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "去勢雄に多い尿道閉塞性尿路結石。",
         "urgency": "emergency",
@@ -3124,7 +3124,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hedgehog Wobbly Hedgehog Syndrome (WHS)",
         "name_ja": "ハリネズミふらつき症候群（WHS）",
-        "symptoms": {"ataxia", "hind_limb_weakness", "muscle_wasting", "paralysis", "weight_loss"},
+        "symptoms": {"incoordination", "hind_limb_weakness", "muscle_wasting", "paralysis", "weight_loss"},
         "description": "Hedgehog Wobbly Hedgehog Syndrome (WHS) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "ハリネズミに上行性麻痺を引き起こす進行性脱髄疾患。",
         "urgency": "high",
@@ -3397,7 +3397,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ferret Lymphoma",
         "name_ja": "フェレットリンパ腫",
-        "symptoms": {"lethargy", "lymph_node_enlargement", "splenomegaly", "weight_loss"},
+        "symptoms": {"lethargy", "enlarged_lymph_nodes", "splenomegaly", "weight_loss"},
         "description": "Ferret Lymphoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "フェレットで最も多い腫瘍で、リンパ節と臓器に影響。",
         "urgency": "high",
@@ -3544,7 +3544,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ferret Helicobacter Gastritis",
         "name_ja": "フェレットヘリコバクター胃炎",
-        "symptoms": {"anorexia", "bruxism", "chronic_vomiting", "melena", "weight_loss"},
+        "symptoms": {"anorexia", "teeth_grinding", "chronic_vomiting", "melena", "weight_loss"},
         "description": "Ferret Helicobacter Gastritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "ヘリコバクター・ムステラエによる慢性胃炎と潰瘍。",
         "urgency": "moderate",
