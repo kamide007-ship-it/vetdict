@@ -167,6 +167,77 @@ DISEASE_REFERENCES: dict[str, list[dict]] = {
             "pmid": "15361950",
         },
     ],
+    # === Dogs ===
+    "canine parvovirus": [
+        {
+            "title": "Canine parvovirus: current perspective",
+            "authors": "Mylonakis ME, Kalli I, Rallis TS",
+            "journal": "Vet J",
+            "year": 2016,
+            "doi": "10.1016/j.tvjl.2016.08.004",
+            "pmid": "27638138",
+        },
+    ],
+    "chronic kidney disease": [
+        {
+            "title": "IRIS Canine GN Study Group Standard Therapy Subgroup: diagnostic criteria for CKD in dogs and cats",
+            "authors": "International Renal Interest Society",
+            "journal": "J Vet Intern Med",
+            "year": 2013,
+            "doi": "10.1111/jvim.12032",
+            "pmid": "23418890",
+        },
+    ],
+    "feline infectious peritonitis": [
+        {
+            "title": "Efficacy and safety of the nucleoside analog GS-441524 for treatment of cats with naturally occurring feline infectious peritonitis",
+            "authors": "Pedersen NC, Perron M, Bannasch M, et al.",
+            "journal": "J Feline Med Surg",
+            "year": 2019,
+            "doi": "10.1177/1098612X19825701",
+            "pmid": "30755068",
+        },
+    ],
+    "encephalitozoon cuniculi": [
+        {
+            "title": "Treatment of encephalitozoonosis in pet rabbits",
+            "authors": "Suter C, Müller-Doblies UU, Hatt JM, Deplazes P",
+            "journal": "Vet Parasitol",
+            "year": 2001,
+            "doi": "10.1016/S0304-4017(01)00494-1",
+            "pmid": "11587839",
+        },
+    ],
+    "diabetes mellitus": [
+        {
+            "title": "Diabetes mellitus in dogs and cats",
+            "authors": "Behrend E, Holford A, Lathan P, et al.",
+            "journal": "J Vet Intern Med",
+            "year": 2018,
+            "doi": "10.1111/jvim.15090",
+            "pmid": "29527781",
+        },
+    ],
+    "feline asthma": [
+        {
+            "title": "An update on feline asthma",
+            "authors": "Trzil JE",
+            "journal": "Vet Clin North Am Small Anim Pract",
+            "year": 2020,
+            "doi": "10.1016/j.cvsm.2019.08.001",
+            "pmid": "31679799",
+        },
+    ],
+    "immune-mediated hemolytic anemia": [
+        {
+            "title": "ACVIM consensus statement on the treatment of immune-mediated hemolytic anemia in dogs",
+            "authors": "Garden OA, Kidd L, Mexas AM, et al.",
+            "journal": "J Vet Intern Med",
+            "year": 2019,
+            "doi": "10.1111/jvim.15441",
+            "pmid": "30847962",
+        },
+    ],
 }
 
 
