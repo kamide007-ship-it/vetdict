@@ -6894,7 +6894,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "foul_odor": {"ja": "悪臭", "en": "Foul odor"},
     "gasping": {"ja": "あえぎ呼吸", "en": "Gasping"},
     "head_swelling": {"ja": "頭部の腫脹", "en": "Head Swelling"},
-    "hemorrhage": {"ja": "出血", "en": "Hemorrhage"},
     "inability_to_retract": {"ja": "引っ込み不能", "en": "Inability to retract"},
     "injuries": {"ja": "外傷", "en": "Injuries"},
     "intestinal_obstruction": {"ja": "腸閉塞", "en": "Intestinal obstruction"},

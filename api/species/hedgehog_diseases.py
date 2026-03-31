@@ -89,9 +89,9 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "mammary_mass": "urinary", "mammary_discharge": "urinary",
     "mammary_swelling": "urinary", "mammary_redness": "urinary",
     "penile_protrusion": "urinary", "asymmetric_testes": "urinary",
-    "bloody_urine": "urinary", "dark_urine": "urinary",
+    "dark_urine": "urinary",
     "incontinence": "urinary", "maternal_stress": "urinary",
-    "penile_discoloration": "urinary", "polyuria": "urinary",
+    "penile_discoloration": "urinary",
     "testicular_enlargement": "urinary", "testicular_swelling": "urinary",
     # 循環器
     "collapse": "cardiovascular", "cyanosis": "cardiovascular",
