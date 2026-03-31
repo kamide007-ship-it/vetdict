@@ -1018,7 +1018,12 @@ function renderResults(data){
   area.appendChild(createResultsDisclaimer());
   const contentDiv=document.createElement("div");
   contentDiv.innerHTML=html;
-  contentDiv.addEventListener("click",function(e){const head=e.target.closest(".disease-head");if(head)toggleDetail(head);});
+  /* Disease card expand/collapse — event delegation on contentDiv */
+  contentDiv.addEventListener("click",function(e){
+    if(e.target.closest("a"))return; /* don't intercept link clicks */
+    const head=e.target.closest(".disease-head");
+    if(head)toggleDetail(head);
+  });
   contentDiv.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const head=e.target.closest(".disease-head");if(head){e.preventDefault();toggleDetail(head);}}});
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
@@ -2217,7 +2222,13 @@ function renderDrugList(){
 
 /* Toggle detail panel with accessibility */
 function toggleDetail(head){
-  const detail=head.nextElementSibling;
+  /* Find detail section: nextElementSibling or querySelector within parent */
+  let detail=head.nextElementSibling;
+  if(!detail||!detail.classList.contains("disease-detail")){
+    const parent=head.closest(".disease-result");
+    if(parent)detail=parent.querySelector(".disease-detail");
+  }
+  if(!detail)return;
   const icon=head.querySelector(".expand-icon");
   const isOpen=detail.classList.toggle("open");
   head.setAttribute("aria-expanded",isOpen);
