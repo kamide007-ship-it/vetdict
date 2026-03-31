@@ -41,7 +41,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "wound_infection": "skin",
     # 眼
     "eye_bulging": "eyes", "eye_discharge": "eyes",
-    "eye_redness": "eyes", "eye_squinting": "eyes",
+    "eye_redness": "eyes", "eye_squinting": "eyes", "eye_swelling": "eyes",
     "eye_cloudiness": "eyes", "vision_loss": "eyes",
     "cataracts": "eyes", "corneal_opacity": "eyes",
     "enlarged_eye": "eyes",
@@ -100,7 +100,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 体型・全身
     "weight_loss": "body", "weight_gain": "body",
     "dehydration": "body", "swelling": "body",
-    "abdominal_pain": "body", "abdominal_distension": "body",
+    "abdominal_pain": "body", "abdominal_distension": "body", "body_swelling": "body",
     "hepatomegaly": "body", "facial_swelling": "body",
     "muscle_wasting": "body", "ascites": "body",
     "fatty_deposits": "body", "splenomegaly": "body",
@@ -141,7 +141,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mite Infestation (Caparinia)",
         "name_ja": "疥癬ダニ感染症（カパリニア）",
-        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability", "itching", "dry_skin"},
+        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability", "dry_skin"},
         "description": "Mite Infestation (Caparinia) is a parasitic condition that causes clinical signs ranging from subclinical to severe systemic disease.",
         "description_ja": "ハリネズミに最も多い外部寄生虫であるカパリニアダニによる感染症で、強い痒みと針の脱落を引き起こします。",
         "urgency": "moderate",
