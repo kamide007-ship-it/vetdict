@@ -19,12 +19,14 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "scale_loss": "skin", "raised_scales": "skin", "ulcers": "skin",
     "redness_skin": "skin", "mucus_overproduction": "skin",
     "discoloration": "skin", "dark_coloration": "skin", "white_film": "skin",
-    "gold_dust": "skin", "lumps_nodules": "skin", "spots_black": "skin",
+    "gold_dust": "skin", "lumps_nodules": "skin",
+    "body_darkening": "skin", "fin_damage": "skin", "fin_discoloration": "skin",
+    "fin_erosion": "skin", "skin_ulcers": "skin",
     "worm_like_parasites": "parasites", "anchor_worm": "parasites",
     # 鰭
     "clamped_fins": "fins", "frayed_fins": "fins", "fin_hemorrhage": "fins",
     # 眼
-    "pop_eye": "eyes", "cloudy_eye": "eyes", "sunken_eye": "eyes",
+    "pop_eye": "eyes", "eye_bulging": "eye", "sunken_eye": "eyes",
     # 鰓
     "gill_redness": "gills", "gill_paleness": "gills", "gill_swelling": "gills",
     "gill_mucus": "gills", "rapid_gill_movement": "gills",
@@ -32,14 +34,15 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "flashing": "behavior", "lethargy": "behavior", "loss_of_appetite": "behavior",
     "gasping_surface": "behavior", "erratic_swimming": "behavior",
     "loss_of_balance": "behavior", "swimming_upside_down": "behavior",
-    "hiding": "behavior", "isolation": "behavior", "head_shaking": "behavior",
-    "spinning": "behavior",
+    "hiding": "behavior", "isolation": "behavior",
+    "abnormal_swimming": "behavioral", "appetite_loss": "general",
     # 腹部・体型
     "bloating": "body", "emaciation": "body", "dropsy": "body", "bent_spine": "body",
+    "hemorrhaging": "body",
     # 排泄
-    "white_stringy_feces": "digestive", "trailing_feces": "digestive",
+    "white_stringy_feces": "digestive",
     # 呼吸
-    "labored_breathing": "respiratory",
+    "labored_breathing": "respiratory", "pale_gills": "respiratory",
     # 繁殖
     "egg_binding": "reproductive",
     # 急変
