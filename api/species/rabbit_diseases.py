@@ -5895,7 +5895,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Rabbit Syphilis (Treponematosis)",
         "name_ja": "ウサギ梅毒（トレポネーマ症）",
         "symptoms": {"skin_lesions", "nasal_discharge", "eye_discharge",
-                      "genital_swelling", "crusty_skin"},
+                      "genital_swelling", "skin_crusting"},
         "description": "Venereal disease caused by Treponema cuniculi, causing genital and facial lesions.",
         "description_ja": "Treponema cuniculiによる性行為感染症。"
                           "外陰部・会陰部・鼻・口唇に痂皮性病変を形成。"
@@ -5959,7 +5959,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Pasteurellosis (Snuffles)",
         "name_ja": "パスツレラ症（スナッフル）",
         "symptoms": {"nasal_discharge", "sneezing", "eye_discharge", "head_tilt",
-                      "ear_discharge", "lethargy", "appetite_loss", "labored_breathing"},
+                      "ear_discharge", "lethargy", "appetite_loss", "respiratory_distress"},
         "description": "Bacterial infection by Pasteurella multocida, the most common pathogen in domestic rabbits.",
         "description_ja": "Pasteurella multocidaによる細菌感染症。ウサギで最も重要な病原菌。"
                           "上部呼吸器感染（スナッフル）が最多だが、中耳炎・肺炎・膿瘍・"

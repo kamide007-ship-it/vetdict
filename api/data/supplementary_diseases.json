@@ -18344,7 +18344,7 @@
       "redness",
       "respiratory_distress",
       "skin_crusting",
-      "skin_masses",
+      "skin_mass",
       "weight_loss"
     ],
     "description": "Dermatophytosis in Ferret",
@@ -18683,7 +18683,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -18714,7 +18713,7 @@
       "blood_in_urine",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
+      "excessive_thirst",
       "straining_to_urinate",
       "vocalization_during_urination",
       "weight_loss"
@@ -18776,7 +18775,7 @@
       "excessive_urination",
       "frequent_urination",
       "lethargy",
-      "polydipsia",
+      "excessive_thirst",
       "straining_to_urinate",
       "vocalization_during_urination",
       "weight_loss"
@@ -20255,7 +20254,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -20315,7 +20313,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -20345,7 +20342,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -21309,7 +21305,7 @@
       "redness",
       "respiratory_distress",
       "skin_crusting",
-      "skin_masses",
+      "skin_mass",
       "weight_loss"
     ],
     "description": "Dermatophytosis (Microsporum) in Ferret",
@@ -46809,7 +46805,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -46839,7 +46835,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -47760,7 +47756,7 @@
     "name_ja": "排卵前卵胞停滞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -47790,7 +47786,7 @@
     "name_ja": "排卵後卵停滞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -47874,7 +47870,7 @@
     "name_ja": "精巣腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -47905,7 +47901,7 @@
     "name_ja": "卵巣腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -47998,7 +47994,7 @@
     "name_ja": "肝腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -48029,7 +48025,7 @@
     "name_ja": "腸閉塞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48090,7 +48086,7 @@
     "name_ja": "便秘（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48120,7 +48116,7 @@
     "name_ja": "吐出（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48153,7 +48149,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -48210,7 +48206,7 @@
     "name_ja": "膵炎（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48537,7 +48533,7 @@
     "symptoms": [
       "abnormal_shell_growth",
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -48566,7 +48562,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -48625,7 +48621,7 @@
     "symptoms": [
       "abnormal_shell_growth",
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -48939,7 +48935,7 @@
     "name_ja": "脂肪腫（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -48970,7 +48966,7 @@
     "name_ja": "骨肉腫（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lameness",
@@ -49005,7 +49001,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -49035,7 +49031,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -49393,7 +49389,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -49511,7 +49507,7 @@
     "name_ja": "肝線維症（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49692,7 +49688,7 @@
     "name_ja": "消化管腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -49723,7 +49719,7 @@
     "name_ja": "消化管炎症性疾患（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49753,7 +49749,7 @@
     "name_ja": "消化管運動障害（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49783,7 +49779,7 @@
     "name_ja": "消化管部分閉塞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49937,7 +49933,7 @@
     "name_ja": "呼吸器腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -50175,7 +50171,7 @@
     "name_ja": "皮膚腫瘍性疾患（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -50321,7 +50317,7 @@
     "name_ja": "泌尿生殖器腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -50416,7 +50412,7 @@
       "abnormal_shell_growth",
       "difficulty_moving",
       "discharge_under_scutes",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -50772,7 +50768,7 @@
     "name_ja": "生殖停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -50802,7 +50798,7 @@
     "name_ja": "卵胞停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -51759,7 +51755,7 @@
     "name_ja": "排卵前卵胞停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -51789,7 +51785,7 @@
     "name_ja": "排卵後卵停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52030,7 +52026,7 @@
     "name_ja": "腸閉塞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52060,7 +52056,7 @@
     "name_ja": "便秘（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52090,7 +52086,7 @@
     "name_ja": "吐出（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52181,7 +52177,7 @@
     "name_ja": "膵炎（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52502,7 +52498,7 @@
       "abnormal_shell_growth",
       "difficulty_moving",
       "discharge_under_scutes",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -52592,7 +52588,7 @@
       "abnormal_shell_growth",
       "difficulty_moving",
       "discharge_under_scutes",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -53427,7 +53423,7 @@
     "name_ja": "肝線維症（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -53638,7 +53634,7 @@
     "name_ja": "消化管炎症性疾患（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -53668,7 +53664,7 @@
     "name_ja": "消化管運動障害（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -53698,7 +53694,7 @@
     "name_ja": "消化管部分閉塞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -57587,7 +57583,7 @@
     "name_ja": "砂停滞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -57677,7 +57673,7 @@
     "name_ja": "大腿腺閉塞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -58696,7 +58692,7 @@
     "name_ja": "排卵前卵胞停滞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -58726,7 +58722,7 @@
     "name_ja": "排卵後卵停滞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -58967,7 +58963,7 @@
     "name_ja": "腸閉塞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59028,7 +59024,7 @@
     "name_ja": "便秘（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59058,7 +59054,7 @@
     "name_ja": "吐出（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59149,7 +59145,7 @@
     "name_ja": "膵炎（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59486,7 +59482,7 @@
     "species": "Lizard",
     "symptoms": [
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness"
     ],
     "description": "Osteoarthritis in Lizard",
@@ -59571,7 +59567,7 @@
     "species": "Lizard",
     "symptoms": [
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness"
     ],
     "description": "Scoliosis/Kyphosis in Lizard",
@@ -60387,7 +60383,7 @@
     "name_ja": "肝線維症（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",

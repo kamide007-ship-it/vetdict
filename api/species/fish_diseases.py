@@ -64,16 +64,20 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "white_film": {"ja": "白い膜状の付着", "en": "White film on body"},
     "gold_dust": {"ja": "金粉状の付着（コショウ病）", "en": "Gold dust appearance"},
     "lumps_nodules": {"ja": "しこり・結節", "en": "Lumps / nodules"},
+    "body_darkening": {"ja": "体色暗化", "en": "Body darkening"},
+    "fin_damage": {"ja": "鰭損傷", "en": "Fin damage"},
+    "fin_discoloration": {"ja": "鰭変色", "en": "Fin discoloration"},
+    "fin_erosion": {"ja": "鰭びらん", "en": "Fin erosion"},
+    "skin_ulcers": {"ja": "皮膚潰瘍", "en": "Skin ulcers"},
     "worm_like_parasites": {"ja": "糸状の寄生虫が見える", "en": "Visible worm-like parasites"},
     "anchor_worm": {"ja": "イカリムシの付着", "en": "Anchor worm attached"},
-    "spots_black": {"ja": "黒い斑点", "en": "Black spots"},
     # 鰭・尾
     "clamped_fins": {"ja": "鰭をたたんでいる", "en": "Clamped fins"},
     "frayed_fins": {"ja": "鰭がボロボロ", "en": "Frayed / ragged fins"},
     "fin_hemorrhage": {"ja": "鰭の充血", "en": "Fin hemorrhage"},
     # 眼
     "pop_eye": {"ja": "眼球突出（ポップアイ）", "en": "Pop-eye (exophthalmia)"},
-    "cloudy_eye": {"ja": "目の白濁", "en": "Cloudy eye"},
+    "eye_bulging": {"ja": "眼球突出", "en": "Eye bulging"},
     "sunken_eye": {"ja": "眼球陥没", "en": "Sunken eye"},
     # 鰓
     "gill_redness": {"ja": "鰓の充血", "en": "Gill redness"},
@@ -91,18 +95,19 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "swimming_upside_down": {"ja": "転覆（逆さまに泳ぐ）", "en": "Swimming upside down"},
     "hiding": {"ja": "隠れて出てこない", "en": "Hiding behavior"},
     "isolation": {"ja": "群れから離れる", "en": "Isolation from group"},
-    "head_shaking": {"ja": "頭を振る", "en": "Head shaking"},
-    "spinning": {"ja": "旋回遊泳", "en": "Spinning / whirling"},
+    "abnormal_swimming": {"ja": "異常遊泳", "en": "Abnormal swimming"},
+    "appetite_loss": {"ja": "食欲低下", "en": "Appetite loss"},
     # 腹部・体型
     "bloating": {"ja": "腹部膨満", "en": "Abdominal bloating / swelling"},
     "emaciation": {"ja": "痩せ（やつれ）", "en": "Emaciation / wasting"},
     "dropsy": {"ja": "腹水・浮腫", "en": "Dropsy / edema"},
     "bent_spine": {"ja": "脊椎の湾曲", "en": "Bent / curved spine"},
+    "hemorrhaging": {"ja": "出血", "en": "Hemorrhaging"},
     # 排泄
     "white_stringy_feces": {"ja": "白い糸状の糞", "en": "White stringy feces"},
-    "trailing_feces": {"ja": "糞がぶら下がる", "en": "Trailing feces"},
     # 呼吸
     "labored_breathing": {"ja": "呼吸困難", "en": "Labored breathing"},
+    "pale_gills": {"ja": "鰓蒼白", "en": "Pale gills"},
     # 繁殖
     "egg_binding": {"ja": "過抱卵", "en": "Egg binding"},
     # 急変
