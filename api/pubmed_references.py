@@ -238,6 +238,95 @@ DISEASE_REFERENCES: dict[str, list[dict]] = {
             "pmid": "30847962",
         },
     ],
+    # === Additional high-impact diseases ===
+    "atopic dermatitis": [
+        {
+            "title": "Treatment of canine atopic dermatitis: 2015 updated guidelines from the International Committee on Allergic Diseases of Animals (ICADA)",
+            "authors": "Olivry T, DeBoer DJ, Favrot C, et al.",
+            "journal": "BMC Vet Res",
+            "year": 2015,
+            "doi": "10.1186/s12917-015-0514-6",
+            "pmid": "26399359",
+        },
+    ],
+    "feline herpesvirus": [
+        {
+            "title": "Use of oral famciclovir for treatment of feline herpesvirus",
+            "authors": "Thomasy SM, Maggs DJ",
+            "journal": "Vet Ophthalmol",
+            "year": 2016,
+            "doi": "10.1111/vop.12408",
+            "pmid": "27443215",
+        },
+    ],
+    "urolithiasis": [
+        {
+            "title": "ACVIM Small Animal Consensus Recommendations on the Treatment and Prevention of Uroliths in Dogs and Cats",
+            "authors": "Lulich JP, Berent AC, Adams LG, et al.",
+            "journal": "J Vet Intern Med",
+            "year": 2016,
+            "doi": "10.1111/jvim.14559",
+            "pmid": "27611724",
+        },
+    ],
+    "pyometra": [
+        {
+            "title": "Pyometra in small animals - a review",
+            "authors": "Jitpean S, Hagman R, Ström Holst B, et al.",
+            "journal": "J Vet Intern Med",
+            "year": 2014,
+            "doi": "10.1111/jvim.12325",
+            "pmid": "24597708",
+        },
+    ],
+    "lymphoma": [
+        {
+            "title": "Treatment of canine lymphoma: a practice-based review",
+            "authors": "Garrett LD",
+            "journal": "Vet Med Sci",
+            "year": 2023,
+            "doi": "10.1002/vms3.1104",
+            "pmid": "36697344",
+        },
+    ],
+    "feline leukemia virus": [
+        {
+            "title": "2020 AAFP Feline Retrovirus Testing and Management Guidelines",
+            "authors": "Little S, Levy J, Hartmann K, et al.",
+            "journal": "J Feline Med Surg",
+            "year": 2020,
+            "doi": "10.1177/1098612X19895940",
+            "pmid": "31916872",
+        },
+    ],
+    "feline immunodeficiency virus": [
+        {
+            "title": "2020 AAFP Feline Retrovirus Testing and Management Guidelines",
+            "authors": "Little S, Levy J, Hartmann K, et al.",
+            "journal": "J Feline Med Surg",
+            "year": 2020,
+            "doi": "10.1177/1098612X19895940",
+            "pmid": "31916872",
+        },
+    ],
+    "heartworm disease": [
+        {
+            "title": "Current canine guidelines for the prevention, diagnosis, and management of heartworm (Dirofilaria immitis) infection in dogs",
+            "authors": "American Heartworm Society",
+            "journal": "AHS Guidelines",
+            "year": 2024,
+        },
+    ],
+    "rabbit hemorrhagic disease": [
+        {
+            "title": "RHDV2 epidemic in the United States",
+            "authors": "Ambagala A, Schwantje H, Harding J, et al.",
+            "journal": "Emerg Infect Dis",
+            "year": 2021,
+            "doi": "10.3201/eid2703.204609",
+            "pmid": "33629890",
+        },
+    ],
 }
 
 
