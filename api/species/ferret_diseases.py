@@ -780,7 +780,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Urolithiasis (Bladder Stones)",
         "name_ja": "尿路結石症",
-        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "abdominal_pain", "vocalization_during_urination"},
+        "symptoms": {"straining_to_urinate", "blood_in_urine", "frequent_urination", "abdominal_pain", "vocalization_during_urination"},
         "description": "Urolithiasis (Bladder Stones) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "尿路に結石（ストルバイトやシスチンが多い）が形成され、閉塞を起こすことがあります。",
         "urgency": "high",
@@ -843,7 +843,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Urinary Tract Infection (UTI)",
         "name_ja": "尿路感染症",
-        "symptoms": {"frequent_urination", "straining_to_urinate", "bloody_urine", "foul_smelling_urine", "lethargy"},
+        "symptoms": {"frequent_urination", "straining_to_urinate", "blood_in_urine", "foul_smelling_urine", "lethargy"},
         "description": "Urinary Tract Infection (UTI) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "尿路の細菌感染により排尿困難や血尿がみられます。",
         "urgency": "moderate",
@@ -1119,7 +1119,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Rabies",
         "name_ja": "狂犬病",
-        "symptoms": {"behavior_change", "aggression", "seizures", "paralysis", "drooling", "difficulty_swallowing"},
+        "symptoms": {"behavioral_changes", "aggression", "seizures", "paralysis", "drooling", "difficulty_swallowing"},
         "description": "Rabies is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "致死的なウイルス性人獣共通感染症。承認されたワクチンによる予防接種が必要です。",
         "urgency": "emergency",
@@ -2196,7 +2196,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cutaneous Lymphoma",
         "name_ja": "皮膚リンパ腫",
-        "symptoms": {"hair_loss", "pruritus", "skin_masses", "skin_thickening", "ulceration"},
+        "symptoms": {"hair_loss", "pruritus", "skin_mass", "skin_thickening", "ulceration"},
         "description": "Cutaneous Lymphoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "皮膚結節、プラーク、びまん性皮膚肥厚として現れるリンパ腫（上皮親和性リンパ腫）です。",
         "urgency": "moderate",
@@ -2638,7 +2638,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Renal Cell Carcinoma",
         "name_ja": "腎細胞癌",
-        "symptoms": {"abdominal_mass", "blood_in_urine", "lethargy", "weight_loss"},
+        "symptoms": {"abdominal_masses", "blood_in_urine", "lethargy", "weight_loss"},
         "description": "Renal Cell Carcinoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "原発性悪性腎腫瘍。稀ですが転移能を持ち予後不良です。",
         "urgency": "high",
@@ -2806,7 +2806,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cryptococcosis",
         "name_ja": "クリプトコッカス症",
-        "symptoms": {"nasal_discharge", "neurological_signs", "respiratory_distress", "skin_masses"},
+        "symptoms": {"nasal_discharge", "neurological_signs", "respiratory_distress", "skin_mass"},
         "description": "Cryptococcosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "クリプトコッカス・ネオフォルマンスによる全身性真菌感染で、呼吸器系、皮膚、中枢神経系に影響します。",
         "urgency": "high",
@@ -2827,7 +2827,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Blastomycosis",
         "name_ja": "ブラストミセス症",
-        "symptoms": {"eye_discharge", "lymph_node_swelling", "respiratory_distress", "skin_masses", "weight_loss"},
+        "symptoms": {"eye_discharge", "lymph_node_swelling", "respiratory_distress", "skin_mass", "weight_loss"},
         "description": "Blastomycosis is a fungal infection that can affect skin, respiratory, or systemic organs.",
         "description_ja": "ブラストミセス・デルマティティディスによる全身性真菌感染で、特定の地域に固有です。",
         "urgency": "high",
@@ -3163,7 +3163,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nephrolithiasis",
         "name_ja": "腎結石症",
-        "symptoms": {"appetite_loss", "blood_in_urine", "lethargy", "polydipsia"},
+        "symptoms": {"appetite_loss", "blood_in_urine", "lethargy", "excessive_thirst"},
         "description": "Nephrolithiasis is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "腎臓内の結石形成で、閉塞と進行性腎障害の可能性があります。",
         "urgency": "high",
@@ -3184,7 +3184,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Polycystic Kidney Disease",
         "name_ja": "多発性嚢胞腎疾患",
-        "symptoms": {"abdominal_distension", "lethargy", "polydipsia", "polyuria", "weight_loss"},
+        "symptoms": {"abdominal_distension", "lethargy", "excessive_thirst", "excessive_urination", "weight_loss"},
         "description": "Polycystic Kidney Disease is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "両腎臓の多発性嚢胞で、進行性の腎機能喪失を引き起こします。",
         "urgency": "moderate",
@@ -3453,12 +3453,12 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "petechiae": "skin", "crusty_foot_pads": "skin",
     "swollen_feet": "skin", "bumping_into_objects": "skin",
     "gum_redness": "skin", "tail_mass": "skin",
-    "abdominal_mass": "skin", "abdominal_masses": "skin",
+    "abdominal_masses": "skin",
     "draining_tract": "skin", "excoriation": "skin",
     "foul_odor": "skin", "hair_regrowth": "skin",
     "poor_coat": "skin", "pruritus": "skin",
     "severe_hair_loss": "skin", "skin_lesions": "skin",
-    "skin_masses": "skin", "skin_redness": "skin",
+    "skin_mass": "skin", "skin_redness": "skin",
     "skin_thickening": "skin", "skull_mass": "skin",
     "slow_growing_lump": "skin", "subcutaneous_mass": "skin",
     "ulceration": "skin",
@@ -3509,14 +3509,13 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "tremors": "neurological",
     # 泌尿器・生殖器
     "excessive_urination": "urinary", "frequent_urination": "urinary",
-    "straining_to_urinate": "urinary", "bloody_urine": "urinary",
+    "straining_to_urinate": "urinary", "blood_in_urine": "urinary",
     "foul_smelling_urine": "urinary", "dribbling_urine": "urinary",
     "urinary_obstruction": "urinary", "urinary_incontinence": "urinary",
     "vocalization_during_urination": "urinary", "vulvar_swelling": "urinary",
     "vulvar_discharge": "urinary", "prostatic_enlargement": "urinary",
-    "blood_in_urine": "urinary", "distended_bladder": "urinary",
     "painful_urination": "urinary", "persistent_estrus": "urinary",
-    "polyuria": "urinary", "reduced_vulvar_swelling": "urinary",
+    "distended_bladder": "urinary", "reduced_vulvar_swelling": "urinary",
     "renal_failure": "urinary", "vaginal_discharge": "urinary",
     # 循環器
     "collapse": "cardiovascular", "cyanosis": "cardiovascular",
@@ -3540,8 +3539,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "paddling": "behavior", "staring": "behavior",
     "squinting": "behavior", "pawing_at_face": "behavior",
     "muscle_weakness": "behavior", "aggression": "behavior",
-    "behavior_change": "behavior", "excessive_grooming": "behavior",
-    "aggressive_behavior": "behavior", "behavioral_changes": "behavior",
+    "behavioral_changes": "behavior", "excessive_grooming": "behavior",
     "behavioral_improvement": "behavior", "muscle_pain": "behavior",
     # 緊急
     "coma": "emergency", "sudden_death": "emergency",
@@ -3553,7 +3551,6 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "hypoglycemia": "internal", "jaundice": "internal",
     "anemia": "internal", "discharge_from_prepuce": "internal",
     "high_fever": "internal", "neutrophilia": "internal",
-    "pale_mucous_membranes": "internal", "polydipsia": "internal",
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -3641,7 +3638,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "excessive_urination": {"ja": "多尿", "en": "Excessive Urination"},
     "frequent_urination": {"ja": "頻尿", "en": "Frequent Urination"},
     "straining_to_urinate": {"ja": "排尿時のいきみ", "en": "Straining to Urinate"},
-    "bloody_urine": {"ja": "血尿", "en": "Bloody Urine"},
+    "blood_in_urine": {"ja": "血尿", "en": "Bloody Urine"},
     "foul_smelling_urine": {"ja": "悪臭尿", "en": "Foul-smelling Urine"},
     "dribbling_urine": {"ja": "尿漏れ", "en": "Dribbling Urine"},
     "urinary_obstruction": {"ja": "尿閉", "en": "Urinary Obstruction"},
@@ -3693,15 +3690,14 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "sunken_eyes": {"ja": "眼球陥凹", "en": "Sunken Eyes"},
     # Behavioral
     "aggression": {"ja": "攻撃性", "en": "Aggression"},
-    "behavior_change": {"ja": "行動変化", "en": "Behavior Change"},
+    "behavioral_changes": {"ja": "行動変化", "en": "Behavior Change"},
     "excessive_grooming": {"ja": "過度なグルーミング", "en": "Excessive Grooming"},
     # Other
     "tail_mass": {"ja": "尾部腫瘤", "en": "Tail Mass"},
     "difficulty_defecating": {"ja": "排便困難", "en": "Difficulty Defecating"},
 
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
-    "abdominal_mass": {"ja": "腹部腫瘤", "en": "Abdominal Mass"},
-    "abdominal_masses": {"ja": "腹部腫瘤", "en": "Abdominal Masses"},
+    "abdominal_masses": {"ja": "腹部腫瘤", "en": "Abdominal Mass"},
     "abnormal_gait": {"ja": "異常歩行", "en": "Abnormal gait"},
     "aggressive_behavior": {"ja": "攻撃的行動", "en": "Aggressive Behavior"},
     "anal_irritation": {"ja": "肛門の刺激", "en": "Anal Irritation"},
@@ -3709,9 +3705,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "anorexia": {"ja": "食欲廃絶", "en": "Anorexia"},
     "arrhythmia": {"ja": "不整脈", "en": "Arrhythmia"},
     "ascites": {"ja": "腹水", "en": "Ascites"},
-    "behavioral_changes": {"ja": "行動変化", "en": "Behavioral changes"},
     "behavioral_improvement": {"ja": "行動の改善", "en": "Behavioral Improvement"},
-    "blood_in_urine": {"ja": "血尿", "en": "Blood in urine"},
     "bloody_diarrhea": {"ja": "血性下痢", "en": "Bloody Diarrhea"},
     "chronic_diarrhea": {"ja": "慢性下痢", "en": "Chronic Diarrhea"},
     "coma": {"ja": "昏睡", "en": "Coma"},
@@ -3743,8 +3737,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
     "perianal_swelling": {"ja": "肛門周囲腫脹", "en": "Perianal Swelling"},
     "persistent_estrus": {"ja": "持続性発情", "en": "Persistent Estrus"},
-    "polydipsia": {"ja": "多飲", "en": "Polydipsia"},
-    "polyuria": {"ja": "多尿", "en": "Polyuria"},
     "poor_coat": {"ja": "被毛質の低下", "en": "Poor Coat"},
     "preputial_swelling": {"ja": "包皮腫脹", "en": "Preputial Swelling"},
     "progressive_weight_loss": {"ja": "進行性体重減少", "en": "Progressive Weight Loss"},
@@ -3758,7 +3750,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "scooting": {"ja": "お尻を擦りつける", "en": "Scooting"},
     "severe_hair_loss": {"ja": "重度の脱毛", "en": "Severe Hair Loss"},
     "skin_lesions": {"ja": "皮膚病変", "en": "Skin Lesions"},
-    "skin_masses": {"ja": "皮膚腫瘤", "en": "Skin masses"},
     "skin_redness": {"ja": "皮膚の発赤", "en": "Skin Redness"},
     "skin_thickening": {"ja": "皮膚の肥厚", "en": "Skin Thickening"},
     "skull_mass": {"ja": "頭蓋腫瘤", "en": "Skull Mass"},

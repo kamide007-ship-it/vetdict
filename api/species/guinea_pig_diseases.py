@@ -2049,7 +2049,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Scurvy - Acute Form",
         "name_ja": "壊血病 - 急性型",
-        "symptoms": {"joint_swelling", "lameness", "lethargy", "pain", "reluctance_to_move", "vocalization"},
+        "symptoms": {"joint_swelling", "limping", "lethargy", "pain", "reluctance_to_move", "vocalization"},
         "description": "Scurvy - Acute Form is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "急性ビタミンC欠乏により関節や筋肉への出血、重度の痛み、歩行不能を引き起こします。モルモットはビタミンCを合成できません。",
         "urgency": "high",
@@ -2154,7 +2154,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Bumblefoot - Grade III-IV",
         "name_ja": "趾瘤症 - グレードIII-IV",
-        "symptoms": {"bone_infection", "foot_ulceration", "lameness", "reluctance_to_move", "severe_foot_swelling"},
+        "symptoms": {"bone_infection", "foot_ulceration", "limping", "reluctance_to_move", "severe_foot_swelling"},
         "description": "Bumblefoot - Grade III-IV is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "深い潰瘍、腱の関与、骨髄炎を伴う進行した趾瘤症で、積極的な治療が必要です。",
         "urgency": "high",
@@ -2364,7 +2364,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Yersinia pseudotuberculosis Infection",
         "name_ja": "仮性結核菌感染症",
-        "symptoms": {"diarrhea", "lethargy", "lymph_node_swelling", "sudden_death", "weight_loss"},
+        "symptoms": {"diarrhea", "lethargy", "swollen_lymph_nodes", "sudden_death", "weight_loss"},
         "description": "Yersinia pseudotuberculosis Infection is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "複数臓器に乾酪性リンパ節炎と肉芽腫性病変を引き起こす細菌感染。人獣共通感染症の可能性があります。",
         "urgency": "emergency",
@@ -2553,7 +2553,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Leukemia (Lymphocytic)",
         "name_ja": "白血病（リンパ球性）",
-        "symptoms": {"anemia", "lethargy", "lymph_node_swelling", "splenomegaly", "weight_loss"},
+        "symptoms": {"anemia", "lethargy", "swollen_lymph_nodes", "splenomegaly", "weight_loss"},
         "description": "Leukemia (Lymphocytic) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "血中リンパ球の腫瘍性増殖で、モルモットではレトロウイルス（モルモット白血病ウイルス）に関連します。",
         "urgency": "high",
@@ -2574,7 +2574,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Osteosarcoma",
         "name_ja": "骨肉腫",
-        "symptoms": {"lameness", "limb_swelling", "pain", "pathological_fracture", "weight_loss"},
+        "symptoms": {"limping", "limb_swelling", "pain", "pathological_fracture", "weight_loss"},
         "description": "Osteosarcoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "肺転移の高い可能性を持つ悪性骨腫瘍。どの骨にも発生し得ます。",
         "urgency": "high",
@@ -2616,7 +2616,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Calcium Phosphorus Imbalance",
         "name_ja": "カルシウム-リン不均衡",
-        "symptoms": {"bone_pain", "lameness", "pathological_fracture", "teeth_problems", "weight_loss"},
+        "symptoms": {"bone_pain", "limping", "pathological_fracture", "teeth_problems", "weight_loss"},
         "description": "Calcium Phosphorus Imbalance is a nutritional or metabolic disorder caused by dietary imbalance or deficiency.",
         "description_ja": "食事中のカルシウムとリンの比率の不均衡による代謝性骨疾患と軟部組織石灰化です。",
         "urgency": "moderate",
@@ -2700,7 +2700,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ringworm (Trichophyton mentagrophytes)",
         "name_ja": "皮膚糸状菌症（トリコフィトン・メンタグロフィテス）",
-        "symptoms": {"circular_hair_loss", "crusting", "mild_itching", "skin_scaling"},
+        "symptoms": {"circular_hair_loss", "crusty_skin", "mild_itching", "skin_scaling"},
         "description": "Ringworm (Trichophyton mentagrophytes) is a fungal infection that can affect skin, respiratory, or systemic organs.",
         "description_ja": "鱗屑を伴う円形脱毛を引き起こす皮膚糸状菌感染。ヒトへの人獣共通感染症です。",
         "urgency": "moderate",
@@ -2742,7 +2742,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pasteurella multocida Infection",
         "name_ja": "パスツレラ・マルトシダ感染症",
-        "symptoms": {"abscesses", "fever", "lethargy", "nasal_discharge", "respiratory_distress"},
+        "symptoms": {"abscess", "fever", "lethargy", "nasal_discharge", "respiratory_distress"},
         "description": "Pasteurella multocida Infection is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "モルモットに呼吸器疾患、膿瘍、敗血症を引き起こす細菌感染症です。",
         "urgency": "high",
@@ -2805,7 +2805,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Renal Calculi",
         "name_ja": "腎結石",
-        "symptoms": {"appetite_loss", "blood_in_urine", "pain", "polydipsia", "polyuria"},
+        "symptoms": {"appetite_loss", "blood_in_urine", "pain", "excessive_thirst", "excessive_urination"},
         "description": "Renal Calculi is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "腎臓内のカルシウムベースの結石形成で、独特なカルシウム代謝のためモルモットに多いです。",
         "urgency": "high",
@@ -2847,7 +2847,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "symptoms": {"appetite_loss", "back_pain", "blood_in_urine", "fever", "lethargy", "polydipsia", "weight_loss"},
+        "symptoms": {"appetite_loss", "back_pain", "blood_in_urine", "fever", "lethargy", "excessive_thirst", "weight_loss"},
         "description": "Pyelonephritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "下部尿路疾患に続発することが多い腎臓の上行性細菌感染です。",
         "urgency": "high",
@@ -3078,7 +3078,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tibial Fracture",
         "name_ja": "脛骨骨折",
-        "symptoms": {"crepitus", "lameness", "limb_swelling", "non_weight_bearing", "pain"},
+        "symptoms": {"crepitus", "limping", "limb_swelling", "non_weight_bearing", "pain"},
         "description": "Tibial Fracture involves traumatic injury requiring assessment of damage extent and appropriate stabilization and repair.",
         "description_ja": "落下、不適切な取り扱い、代謝性骨疾患による脛骨の骨折。モルモットで一般的な骨折部位です。",
         "urgency": "high",
@@ -3099,7 +3099,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Elbow Osteoarthritis",
         "name_ja": "肘関節骨関節炎",
-        "symptoms": {"joint_swelling", "lameness", "reluctance_to_move", "stiff_gait"},
+        "symptoms": {"joint_swelling", "limping", "reluctance_to_move", "stiff_gait"},
         "description": "Elbow Osteoarthritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "肘の変形性関節症で、肥満または高齢のモルモットに多いです。",
         "urgency": "moderate",
@@ -3120,7 +3120,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Toe Nail Overgrowth / Curling",
         "name_ja": "爪の過長/巻き爪",
-        "symptoms": {"bleeding_from_nail", "curled_nails", "foot_pain", "lameness"},
+        "symptoms": {"bleeding_from_nail", "curled_nails", "foot_pain", "limping"},
         "description": "Toe Nail Overgrowth / Curling is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "爪の過度の成長により足裏に巻き込み、痛み、感染、歩行困難を引き起こします。",
         "urgency": "low",
@@ -3288,7 +3288,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Galactostasis",
         "name_ja": "乳汁うっ滞",
-        "symptoms": {"appetite_loss", "fever", "mammary_pain", "mammary_swelling"},
+        "symptoms": {"appetite_loss", "fever", "mammary_pain", "swollen_mammary_glands"},
         "description": "Galactostasis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "乳腺への乳汁蓄積とうっ滞で、管理されなければ乳腺炎に進行することがあります。",
         "urgency": "moderate",
@@ -4171,8 +4171,8 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "swollen_feet": "skin", "foot_sores": "skin",
     "crusty_eyes": "skin", "bumping_into_objects": "skin",
     "crusty_nipples": "skin", "abscess": "skin",
-    "abscesses": "skin", "circular_hair_loss": "skin",
-    "crusting": "skin", "crusting_at_rump": "skin",
+    "circular_hair_loss": "skin",
+    "crusting_at_rump": "skin",
     "curled_nails": "skin", "foot_pain": "skin",
     "foot_redness": "skin", "foot_ulceration": "skin",
     "foul_odor_from_rump": "skin", "hair_loss_around_cyst": "skin",
@@ -4217,7 +4217,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "stiffness": "musculoskeletal", "splayed_legs": "musculoskeletal",
     "bone_infection": "musculoskeletal", "bone_pain": "musculoskeletal",
     "crepitus": "musculoskeletal", "hind_limb_weakness": "musculoskeletal",
-    "joint_swelling": "musculoskeletal", "lameness": "musculoskeletal",
+    "joint_swelling": "musculoskeletal",
     "limb_swelling": "musculoskeletal", "non_weight_bearing": "musculoskeletal",
     "pathological_fracture": "musculoskeletal", "stiff_gait": "musculoskeletal",
     # 神経
@@ -4237,8 +4237,8 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "testicular_swelling": "urinary", "bloody_vaginal_discharge": "urinary",
     "dystocia": "urinary", "inability_to_deliver": "urinary",
     "infertility": "urinary", "mammary_pain": "urinary",
-    "mammary_swelling": "urinary", "mounting_behavior": "urinary",
-    "persistent_estrus": "urinary", "polyuria": "urinary",
+    "mounting_behavior": "urinary",
+    "persistent_estrus": "urinary",
     "renal_failure": "urinary", "urine_staining": "urinary",
     "vulvar_swelling": "urinary",
     # 循環器
@@ -4251,7 +4251,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "groin_swelling": "body",
     "abdominal_pain": "body", "cervical_swelling": "body",
     "genital_swelling": "body", "jaw_swelling": "body",
-    "lymph_node_swelling": "body", "mild_swelling_feet": "body",
+    "mild_swelling_feet": "body",
     "obesity": "body", "peripheral_edema": "body",
     "rapid_growth": "body", "salivary_gland_swelling": "body",
     "splenomegaly": "body",
@@ -4274,7 +4274,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "bleeding_gums": "internal", "excessive_thirst": "internal",
     "jaundice": "internal", "swollen_lymph_nodes": "internal",
     "anemia": "internal", "bleeding_from_nail": "internal",
-    "immunosuppression": "internal", "polydipsia": "internal",
+    "immunosuppression": "internal",
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -4405,7 +4405,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 
     "abdominal_pain": {"ja": "腹痛", "en": "Abdominal pain"},
     "abscess": {"ja": "膿瘍", "en": "Abscess"},
-    "abscesses": {"ja": "膿瘍", "en": "Abscesses"},
     "aggressive_behavior": {"ja": "攻撃的行動", "en": "Aggressive Behavior"},
     "anemia": {"ja": "貧血", "en": "Anemia"},
     "ataxia": {"ja": "運動失調", "en": "Ataxia"},
@@ -4422,7 +4421,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "conjunctivitis": {"ja": "結膜炎", "en": "Conjunctivitis"},
     "corneal_opacity": {"ja": "角膜混濁", "en": "Corneal Opacity"},
     "crepitus": {"ja": "捻髪音", "en": "Crepitus"},
-    "crusting": {"ja": "痂皮形成", "en": "Crusting"},
     "crusting_at_rump": {"ja": "臀部の痂皮", "en": "Crusting At Rump"},
     "curled_nails": {"ja": "巻き爪", "en": "Curled Nails"},
     "dystocia": {"ja": "難産", "en": "Dystocia"},
@@ -4444,13 +4442,10 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "intense_itching": {"ja": "激しい掻痒", "en": "Intense Itching"},
     "jaw_swelling": {"ja": "顎腫脹", "en": "Jaw Swelling"},
     "joint_swelling": {"ja": "関節腫脹", "en": "Joint swelling"},
-    "lameness": {"ja": "跛行", "en": "Lameness"},
     "licking_genital_area": {"ja": "陰部を舐める", "en": "Licking Genital Area"},
     "limb_swelling": {"ja": "四肢腫脹", "en": "Limb swelling"},
     "loose_teeth": {"ja": "動揺歯", "en": "Loose Teeth"},
-    "lymph_node_swelling": {"ja": "リンパ節腫脹", "en": "Lymph Node Swelling"},
     "mammary_pain": {"ja": "乳腺痛", "en": "Mammary Pain"},
-    "mammary_swelling": {"ja": "乳腺の腫脹", "en": "Mammary Swelling"},
     "mild_itching": {"ja": "軽度の掻痒", "en": "Mild Itching"},
     "mild_swelling_feet": {"ja": "足の軽度腫脹", "en": "Mild Swelling Feet"},
     "mobility_issues": {"ja": "運動障害", "en": "Mobility Issues"},
@@ -4465,8 +4460,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "peripheral_edema": {"ja": "末梢浮腫", "en": "Peripheral Edema"},
     "persistent_estrus": {"ja": "持続性発情", "en": "Persistent Estrus"},
     "pneumonia": {"ja": "肺炎", "en": "Pneumonia"},
-    "polydipsia": {"ja": "多飲", "en": "Polydipsia"},
-    "polyuria": {"ja": "多尿", "en": "Polyuria"},
     "poor_coat": {"ja": "被毛質の低下", "en": "Poor Coat"},
     "rapid_breathing": {"ja": "頻呼吸", "en": "Rapid breathing"},
     "rapid_growth": {"ja": "急速増大", "en": "Rapid Growth"},

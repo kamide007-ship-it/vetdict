@@ -27,7 +27,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "foot_sores": "skin", "foot_swelling": "skin",
     "foul_odor_from_mouth": "skin", "hair_loss_around_ears": "skin",
     "hair_loss_around_mass": "skin", "pigmented_skin_mass": "skin",
-    "poor_coat": "skin", "pruritus": "skin",
+    "poor_coat": "skin",
     "skin_abrasion": "skin", "skin_exposure": "skin",
     "skin_lesions": "skin", "skin_masses": "skin",
     "skin_thickening": "skin", "skin_thinning": "skin",
@@ -1401,7 +1401,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hamster Polyomavirus",
         "name_ja": "ハムスターポリオーマウイルス",
-        "symptoms": {"skin_lump", "hair_loss", "wasting", "lethargy"},
+        "symptoms": {"skin_lump", "hair_loss", "weakness", "lethargy"},
         "description": "Hamster Polyomavirus is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "皮膚腫瘍やリンパ腫を引き起こすウイルス感染。",
         "urgency": "high",
@@ -2435,7 +2435,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Diabetic Nephropathy",
         "name_ja": "糖尿病性腎症",
-        "symptoms": {"lethargy", "polydipsia", "polyuria", "poor_coat", "weight_loss"},
+        "symptoms": {"lethargy", "increased_thirst", "increased_urination", "poor_coat", "weight_loss"},
         "description": "Diabetic Nephropathy is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "長期にわたる糖尿病による進行性の腎障害で、慢性腎不全に至ります。",
         "urgency": "high",
@@ -2456,7 +2456,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Insulin Resistance",
         "name_ja": "インスリン抵抗性",
-        "symptoms": {"lethargy", "obesity", "polydipsia", "polyuria", "poor_coat"},
+        "symptoms": {"lethargy", "obesity", "increased_thirst", "increased_urination", "poor_coat"},
         "description": "Insulin Resistance is a metabolic disorder affecting glucose regulation and energy metabolism.",
         "description_ja": "インスリンに対する細胞応答の低下で、顕性糖尿病の前段階であることが多く、チャイニーズハムスターに特に多いです。",
         "urgency": "moderate",
@@ -2498,7 +2498,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hyperadrenocorticism (Cushing's Syndrome)",
         "name_ja": "副腎皮質機能亢進症（クッシング症候群）",
-        "symptoms": {"abdominal_distension", "hair_loss", "polydipsia", "polyuria", "skin_thinning"},
+        "symptoms": {"abdominal_distension", "hair_loss", "increased_thirst", "increased_urination", "skin_thinning"},
         "description": "Hyperadrenocorticism (Cushing's Syndrome) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "副腎腺腫または下垂体腫瘍からの過剰コルチゾール産生で、代謝および皮膚科的変化を引き起こします。",
         "urgency": "moderate",
@@ -2687,7 +2687,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Staphylococcal Dermatitis",
         "name_ja": "ブドウ球菌性皮膚炎",
-        "symptoms": {"abscess_formation", "hair_loss", "pruritus", "skin_crusting", "skin_lesions"},
+        "symptoms": {"abscess_formation", "hair_loss", "itching", "skin_crusting", "skin_lesions"},
         "description": "Staphylococcal Dermatitis is a dermatological condition affecting the skin, coat, or integumentary system.",
         "description_ja": "黄色ブドウ球菌による皮膚感染で、膿皮症、膿瘍、潰瘍性皮膚炎を引き起こします。",
         "urgency": "moderate",
@@ -2729,7 +2729,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dermatitis (Contact)",
         "name_ja": "接触性皮膚炎",
-        "symptoms": {"foot_sores", "hair_loss", "pruritus", "skin_lesions", "skin_redness"},
+        "symptoms": {"foot_sores", "hair_loss", "itching", "skin_lesions", "skin_redness"},
         "description": "Dermatitis (Contact) is a dermatological condition affecting the skin, coat, or integumentary system.",
         "description_ja": "刺激性の床材（杉、松の削り屑）や洗浄剤との接触による炎症性皮膚反応です。",
         "urgency": "low",
@@ -2813,7 +2813,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mast Cell Tumor",
         "name_ja": "肥満細胞腫",
-        "symptoms": {"pruritus", "skin_masses", "skin_redness", "ulceration"},
+        "symptoms": {"itching", "skin_masses", "skin_redness", "ulceration"},
         "description": "Mast Cell Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "皮膚の肥満細胞の腫瘍で、ヒスタミンを放出し局所炎症と全身性影響を引き起こすことがあります。",
         "urgency": "moderate",
@@ -2897,7 +2897,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Retrobulbar Abscess",
         "name_ja": "後眼窩膿瘍",
-        "symptoms": {"appetite_loss", "exophthalmos", "eye_swelling", "eye_discharge", "facial_swelling", "lethargy"},
+        "symptoms": {"appetite_loss", "eye_bulging", "eye_swelling", "eye_discharge", "facial_swelling", "lethargy"},
         "description": "Retrobulbar Abscess is a localized collection of purulent material requiring drainage and antimicrobial therapy.",
         "description_ja": "眼球後方の膿瘍で、歯科疾患に続発することが多く、眼球突出を引き起こします。",
         "urgency": "high",
@@ -2939,7 +2939,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Harderian Gland Tumor",
         "name_ja": "ハーダー腺腫瘍",
-        "symptoms": {"exophthalmos", "eye_discharge", "facial_swelling", "red_discharge_around_eye"},
+        "symptoms": {"eye_bulging", "eye_discharge", "facial_swelling", "red_discharge_around_eye"},
         "description": "Harderian Gland Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "ハーダー腺（後眼窩涙腺）の腫瘍で、進行性の眼球突出を引き起こします。",
         "urgency": "high",
@@ -3002,7 +3002,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nephrolithiasis",
         "name_ja": "腎結石症",
-        "symptoms": {"appetite_loss", "blood_in_urine", "lethargy", "polydipsia", "polyuria"},
+        "symptoms": {"appetite_loss", "blood_in_urine", "lethargy", "increased_thirst", "increased_urination"},
         "description": "Nephrolithiasis is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "腎臓内の結石形成で、閉塞、感染、進行性腎障害を引き起こす可能性があります。",
         "urgency": "high",
@@ -3023,7 +3023,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Renal Amyloidosis",
         "name_ja": "腎アミロイドーシス",
-        "symptoms": {"edema", "lethargy", "polydipsia", "polyuria", "weight_loss"},
+        "symptoms": {"edema", "lethargy", "increased_thirst", "increased_urination", "weight_loss"},
         "description": "Renal Amyloidosis is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "腎臓へのアミロイドタンパク沈着で進行性腎不全を引き起こし、高齢シリアンハムスターに一般的です。",
         "urgency": "high",
