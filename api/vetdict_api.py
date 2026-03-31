@@ -627,6 +627,14 @@ def disease_detail(species: str, disease_slug: str):
         except Exception:
             pass
 
+    # Load PubMed references
+    pubmed_refs = []
+    try:
+        from api.pubmed_references import get_references_for_disease
+        pubmed_refs = get_references_for_disease(disease.get("name", ""))
+    except Exception:
+        pass
+
     return render_template(
         'disease_detail.html',
         disease=disease,
@@ -636,6 +644,7 @@ def disease_detail(species: str, disease_slug: str):
         symptom_names=symptom_names,
         related_diseases=related,
         mentioned_drugs=mentioned_drugs,
+        pubmed_refs=pubmed_refs,
     )
 
 

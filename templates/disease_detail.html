@@ -158,6 +158,22 @@
   </section>
   {% endif %}
 
+  {% if pubmed_refs %}
+  <section style="margin-top:24px">
+    <h2>📚 参考文献</h2>
+    <p style="font-size:.72rem;color:var(--gray-400);margin-bottom:8px">Based on articles retrieved from PubMed</p>
+    <ol style="font-size:.82rem;line-height:1.7;padding-left:20px;color:var(--gray-700)">
+      {% for ref in pubmed_refs %}
+      <li style="margin-bottom:6px">
+        {{ ref.authors }} ({{ ref.year }}). <em>{{ ref.title }}</em>. {{ ref.journal }}.
+        {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);font-size:.78rem">[DOI]</a>{% endif %}
+        {% if ref.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ ref.pmid }}/" target="_blank" rel="noopener" style="color:var(--gray-500);font-size:.78rem">[PubMed]</a>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endif %}
+
   <div class="cta-box">
     <p style="margin-bottom:12px;font-weight:600;color:var(--navy)">VetDictで{{ species_ja }}の鑑別診断を行う</p>
     <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>
