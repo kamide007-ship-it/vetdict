@@ -585,12 +585,22 @@ function resetSpeciesChat(species){
     rabbit:["small feces","not eating","teeth grinding","head tilt","bloated","nasal discharge"],
   };
   const btns=(quickSymptoms[species]||[]).map(s=>
-    `<button class="quick-sym-btn" style="display:inline-block;padding:4px 10px;margin:2px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;font-size:.76rem;cursor:pointer;color:var(--navy);transition:all .15s" onclick="document.getElementById('chatInput').value=this.textContent;document.getElementById('chatSend').click();">${s}</button>`
+    `<button class="quick-sym-btn" style="display:inline-block;padding:4px 10px;margin:2px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;font-size:.76rem;cursor:pointer;color:var(--navy);transition:all .15s" data-symptom="${escapeHtml(s)}">${s}</button>`
   ).join("");
   const quickHtml=btns?`<div style="margin-top:6px;font-size:.72rem;color:var(--gray-400)">${currentLang==="ja"?"💬 タップで入力:":"💬 Quick input:"}</div><div style="margin-top:4px">${btns}</div>`:"";
   ["chatMessages","landingChatMessages"].forEach(id=>{
     const el=document.getElementById(id);
-    if(el){el.innerHTML=`<div class="chat-msg bot">${escapeHtml(hint)}${quickHtml}</div>`;}
+    if(el){
+      el.innerHTML=`<div class="chat-msg bot">${escapeHtml(hint)}${quickHtml}</div>`;
+      el.querySelectorAll(".quick-sym-btn").forEach(btn=>{
+        btn.addEventListener("click",function(){
+          const input=document.getElementById("chatInput")||document.getElementById("landingChatInput");
+          const send=document.getElementById("chatSend")||document.getElementById("landingChatSend");
+          if(input){input.value=this.dataset.symptom||this.textContent;}
+          if(send)send.click();
+        });
+      });
+    }
   });
 }
 
@@ -866,7 +876,7 @@ function doAnalyze(){
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
-  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const msg=currentLang==="ja"?"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。":"Failed to connect to server. Please check your network.";document.getElementById("resultsArea").innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(msg)}</div><button onclick="doAnalyze()" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再試行":"Retry"}</button></div>`;})
+  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const msg=currentLang==="ja"?"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。":"Failed to connect to server. Please check your network.";const ra=document.getElementById("resultsArea");ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(msg)}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再試行":"Retry"}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
@@ -1018,7 +1028,12 @@ function renderResults(data){
   area.appendChild(createResultsDisclaimer());
   const contentDiv=document.createElement("div");
   contentDiv.innerHTML=html;
-  contentDiv.addEventListener("click",function(e){const head=e.target.closest(".disease-head");if(head)toggleDetail(head);});
+  /* Disease card expand/collapse — event delegation on contentDiv */
+  contentDiv.addEventListener("click",function(e){
+    if(e.target.closest("a"))return; /* don't intercept link clicks */
+    const head=e.target.closest(".disease-head");
+    if(head)toggleDetail(head);
+  });
   contentDiv.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const head=e.target.closest(".disease-head");if(head){e.preventDefault();toggleDetail(head);}}});
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
@@ -1290,7 +1305,7 @@ function loadDiseaseDb(species){
   if(!list){console.warn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
-  .catch(()=>{if(requestId===diseaseRequestId&&list)list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button onclick="loadDiseaseDb('${escapeHtml(species)}')" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再読み込み":"Reload"}</button></div>`;});
+  .catch(()=>{if(requestId===diseaseRequestId&&list){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再読み込み":"Reload"}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
 }
 
 const DISEASE_CATEGORIES={
@@ -2217,7 +2232,13 @@ function renderDrugList(){
 
 /* Toggle detail panel with accessibility */
 function toggleDetail(head){
-  const detail=head.nextElementSibling;
+  /* Find detail section: nextElementSibling or querySelector within parent */
+  let detail=head.nextElementSibling;
+  if(!detail||!detail.classList.contains("disease-detail")){
+    const parent=head.closest(".disease-result");
+    if(parent)detail=parent.querySelector(".disease-detail");
+  }
+  if(!detail)return;
   const icon=head.querySelector(".expand-icon");
   const isOpen=detail.classList.toggle("open");
   head.setAttribute("aria-expanded",isOpen);
