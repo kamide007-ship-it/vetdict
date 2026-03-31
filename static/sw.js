@@ -1,5 +1,5 @@
 // VetDict Service Worker — offline support & caching
-const CACHE_NAME = 'vetdict-v8';
+const CACHE_NAME = 'vetdict-v9';
 const STATIC_ASSETS = [
   '/',
   '/static/css/main.css',
@@ -38,6 +38,24 @@ self.addEventListener('fetch', (event) => {
           status: 503,
           headers: { 'Content-Type': 'application/json' },
         })
+      )
+    );
+    return;
+  }
+
+  // Disease pages: network-first, cache for offline
+  if (url.pathname.startsWith('/diseases')) {
+    event.respondWith(
+      fetch(event.request).then((response) => {
+        if (response && response.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() =>
+        caches.match(event.request).then((cached) =>
+          cached || (event.request.mode === 'navigate' ? caches.match('/') : new Response('Offline', { status: 503 }))
+        )
       )
     );
     return;

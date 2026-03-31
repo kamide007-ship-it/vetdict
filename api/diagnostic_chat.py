@@ -1156,6 +1156,20 @@ SYMPTOM_ALIASES = {
     "head pressing": "head_pressing", "体が震える": "tremors", "shivering": "tremors",
     # 泌尿
     "おしっこに血が混じる": "blood_in_urine", "おしっこが赤い": "blood_in_urine",
+    # ---------------------------------------------------------------
+    # 飼い主の日常表現（追加カバレッジ）
+    # ---------------------------------------------------------------
+    "血が出る": "bleeding", "出血": "bleeding", "血が止まらない": "bleeding",
+    "体重が減った": "weight_loss",
+    "ゴホゴホ": "coughing", "コンコン": "coughing",
+    "ブルブル震える": "tremors",
+    "腫れている": "swelling",
+    "おなかがゴロゴロ": "abdominal_pain",
+    "ヨダレ": "drooling",
+    "歩き方が変": "limping",
+    "ゲーゲー": "vomiting",
+    "水ばかり飲む": "increased_water_intake",
+    "丸まっている": "hunched_posture", "丸くなっている": "hunched_posture",
 }
 
 
