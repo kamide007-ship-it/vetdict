@@ -144,6 +144,20 @@
   </section>
   {% endif %}
 
+  {% if mentioned_drugs %}
+  <section>
+    <h2>関連する薬品</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      {% for dr in mentioned_drugs %}
+      <a href="/?species={{ species }}#drugs" style="display:inline-block;padding:5px 12px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:6px;text-decoration:none;color:var(--navy);font-size:.82rem;font-weight:500">
+        💊 {{ dr.name_ja or dr.name }}
+      </a>
+      {% endfor %}
+    </div>
+    <p style="font-size:.72rem;color:var(--gray-400);margin-top:6px">※ 薬品辞書で詳細な投与量・副作用情報を確認できます</p>
+  </section>
+  {% endif %}
+
   <div class="cta-box">
     <p style="margin-bottom:12px;font-weight:600;color:var(--navy)">VetDictで{{ species_ja }}の鑑別診断を行う</p>
     <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>

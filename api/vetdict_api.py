@@ -612,6 +612,21 @@ def disease_detail(species: str, disease_slug: str):
         related.sort(key=lambda x: -x["shared"])
         related = related[:8]
 
+    # Extract mentioned drugs from treatment text
+    mentioned_drugs = []
+    treatment_text = (disease.get("treatment_ja", "") + " " + disease.get("treatment", "")).lower()
+    if treatment_text.strip():
+        try:
+            from api.drug_dictionary import DRUGS as _ALL_DRUGS
+            for dr in _ALL_DRUGS:
+                dr_name = dr.get("name", "")
+                dr_name_ja = dr.get("name_ja", "")
+                if (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text):
+                    mentioned_drugs.append({"id": dr.get("id", ""), "name": dr_name, "name_ja": dr_name_ja})
+            mentioned_drugs = mentioned_drugs[:10]
+        except Exception:
+            pass
+
     return render_template(
         'disease_detail.html',
         disease=disease,
@@ -620,6 +635,7 @@ def disease_detail(species: str, disease_slug: str):
         species_en=sp_label_en,
         symptom_names=symptom_names,
         related_diseases=related,
+        mentioned_drugs=mentioned_drugs,
     )
 
 
