@@ -3083,6 +3083,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "skin_lesions": "skin", "skin_sloughing": "skin",
     "skin_hemorrhage": "skin", "yellow_skin_patches": "skin",
     "crusty_patches": "skin", "dysecdysis": "skin",
+    "shedding_problems": "skin",
     "skin_necrosis": "skin", "scale_discoloration": "skin",
     "mucus_in_mouth": "skin", "skin_irritation": "skin",
     "visible_mites": "skin", "visible_parasites": "skin",
@@ -3119,6 +3120,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "anorexia": "digestive", "rubber_jaw": "digestive",
     "diarrhea": "digestive", "mouth_lesions": "digestive",
     "stomatitis": "digestive", "drooling": "digestive",
+    "oral_discharge": "oral",
     "oral_hemorrhage": "digestive", "bloody_stool": "digestive",
     "straining": "digestive", "constipation": "digestive",
     "regurgitation": "digestive", "tissue_prolapse": "digestive",
@@ -3152,7 +3154,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "toe_swelling": "body", "swelling": "body",
     "abdominal_swelling": "body", "cloacal_swelling": "body",
     "dry_mucous_membranes": "body", "organ_enlargement": "body",
-    "head_swelling": "body",
+    "head_swelling": "body", "swollen_jaw": "body",
     "generalized_swelling": "body", "muscle_wasting": "body",
     "rapid_growth": "body", "swelling_behind_jaw": "body",
     # 行動・活動
@@ -3170,6 +3172,8 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "gout_tophi": "internal", "bleeding": "internal",
     "anemia": "internal", "immunosuppression": "internal",
     "pale_mucous_membranes": "internal", "septicemia": "internal",
+    # 一般
+    "appetite_loss": "general",
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -3326,6 +3330,10 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "visible_leeches": {"ja": "肉眼的なヒル", "en": "Visible Leeches"},
     "wart_like_growths": {"ja": "疣贅様増殖", "en": "Wart-like growths"},
     "white_corneal_deposits": {"ja": "角膜の白色沈着", "en": "White Corneal Deposits"},
+    "appetite_loss": {"ja": "食欲不振", "en": "Appetite loss"},
+    "oral_discharge": {"ja": "口腔分泌物", "en": "Oral discharge"},
+    "shedding_problems": {"ja": "脱皮異常", "en": "Shedding problems"},
+    "swollen_jaw": {"ja": "顎の腫脹", "en": "Swollen jaw"},
 }
 
 

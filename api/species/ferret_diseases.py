@@ -3761,6 +3761,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "slow_heart_rate": {"ja": "徐脈", "en": "Slow Heart Rate"},
     "subcutaneous_mass": {"ja": "皮下腫瘤", "en": "Subcutaneous Mass"},
     "sudden_death": {"ja": "突然死", "en": "Sudden death"},
+    "tail_abnormality": {"ja": "尾の異常", "en": "Tail abnormality"},
     "tarry_stool": {"ja": "タール便", "en": "Tarry Stool"},
     "tremors": {"ja": "振戦", "en": "Tremors"},
     "ulceration": {"ja": "潰瘍形成", "en": "Ulceration"},

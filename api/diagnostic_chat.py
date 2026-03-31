@@ -1101,7 +1101,6 @@ SYMPTOM_ALIASES = {
     "エラにカビ": "cotton_like_growth",
     # 消化器 (重複する一般的表現は既存エイリアスに委譲)
     "フンが出ない": "constipation",
-    "白い便": "white_feces",
     "おしりから何か出てる": "cloacal_prolapse",
     # 骨格・四肢
     "足が曲がってる": "limb_deformity",
