@@ -6,6 +6,11 @@
 <meta name="description" content="{{ species_ja }}に発生する{{ count }}件の疾患情報を掲載。各疾患の症状・原因・治療法・予後を詳しく解説。獣医師が開発した獣医学疾患データベース。">
 <meta property="og:title" content="{{ species_ja }}の疾患一覧 | VetDict">
 <meta property="og:description" content="{{ species_ja }}に発生する{{ count }}件の疾患情報。症状・原因・治療法・予後を詳しく解説。">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ species_ja }}の疾患一覧 | VetDict">
+<meta name="twitter:description" content="{{ species_ja }}に発生する{{ count }}件の疾患情報。">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
 <link rel="canonical" href="https://vetdict.info/diseases/{{ species }}">
 <script type="application/ld+json">
 {
@@ -68,7 +73,14 @@
 
   <div class="cta-box" style="margin-top:32px">
     <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">他の動物種の疾患を見る</p>
-    <a href="/#database">疾患データベースへ</a>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:12px;font-size:.82rem">
+      {% for sp_id, sp_name in [('dog','犬'),('cat','猫'),('rabbit','ウサギ'),('hamster','ハムスター'),('guinea_pig','モルモット'),('chinchilla','チンチラ'),('ferret','フェレット'),('hedgehog','ハリネズミ'),('bird','鳥'),('reptile','爬虫類'),('fish','魚')] %}
+      {% if sp_id != species %}
+      <a href="/diseases/{{ sp_id }}" style="padding:4px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:4px;text-decoration:none;color:var(--gray-700)">{{ sp_name }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <a href="/diseases">全動物種を見る</a>
   </div>
 </div>
 
