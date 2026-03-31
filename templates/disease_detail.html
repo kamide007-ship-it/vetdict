@@ -212,7 +212,7 @@
     </div>
   </nav>
 </div>
-<script>
+<script nonce="{{ g.csp_nonce }}">
 if(typeof gtag==="function"){
   gtag("event","view_disease_page",{species:"{{ species }}",disease:"{{ (disease.name or '')|e }}",urgency:"{{ (disease.urgency or '')|e }}"});
 }

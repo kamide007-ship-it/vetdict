@@ -84,7 +84,7 @@
   </div>
 </div>
 
-<script>
+<script nonce="{{ g.csp_nonce }}">
 document.getElementById('diseaseSearch').addEventListener('input', function() {
   const q = this.value.toLowerCase();
   document.querySelectorAll('.disease-link').forEach(function(el) {
