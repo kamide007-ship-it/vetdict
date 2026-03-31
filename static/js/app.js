@@ -2114,7 +2114,10 @@ function loadDrugDictionary(){
     const spSelect=document.getElementById("drugSpeciesFilter");
     spSelect.innerHTML=`<option value="">${t("allSpecies")}</option>`;
     SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(sp.id)}">${escapeHtml(primary)} ${escapeHtml(secondary)}</option>`);});
-    drugsLoaded=true;renderDrugList();
+    drugsLoaded=true;
+    /* Auto-select current species in drug filter */
+    if(currentSpecies){spSelect.value=currentSpecies;}
+    renderDrugList();
   }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
   document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
   document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
