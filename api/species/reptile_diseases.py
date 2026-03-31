@@ -2288,7 +2288,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatocellular Carcinoma",
         "name_ja": "肝細胞癌",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "liver_enlargement", "weight_loss"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "liver_enlargement", "weight_loss"},
         "description": "Hepatocellular Carcinoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "爬虫類の原発性悪性肝腫瘍。",
         "causes": "Caused by neoplastic cell proliferation; etiology is often multifactorial including genetic predisposition, age, hormonal influences, and environmental factors.",
@@ -2372,7 +2372,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Neoplasia",
         "name_ja": "卵巣腫瘍",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "reproductive_failure", "weight_loss"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "reproductive_failure", "weight_loss"},
         "description": "Ovarian Neoplasia is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "卵巣の腫瘍による生殖機能障害。",
         "causes": "Caused by neoplastic cell proliferation; etiology is often multifactorial including genetic predisposition, age, hormonal influences, and environmental factors.",
@@ -2624,7 +2624,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Substrate Impaction",
         "name_ja": "床材インパクション",
-        "symptoms": {"abdominal_distension", "anorexia", "constipation", "lethargy", "straining"},
+        "symptoms": {"abdominal_swelling", "anorexia", "constipation", "lethargy", "straining"},
         "description": "Substrate Impaction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "砂・樹皮などの床材摂取による消化管閉塞。",
         "urgency": "high",
@@ -2771,7 +2771,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Follicular Stasis (Chronic)",
         "name_ja": "慢性濾胞停滞",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "weight_loss"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "weight_loss"},
         "description": "Follicular Stasis (Chronic) is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "排卵や再吸収なく卵胞が慢性的に停滞する状態。",
         "urgency": "high",
@@ -2792,7 +2792,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Egg-related Coelomitis (Egg Peritonitis)",
         "name_ja": "卵関連体腔炎（卵性腹膜炎）",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "respiratory_distress", "weakness"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "respiratory_distress", "weakness"},
         "description": "Egg-related Coelomitis (Egg Peritonitis) is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "破裂卵胞や異所性卵による体腔の炎症。",
         "urgency": "emergency",
@@ -2876,7 +2876,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Egg Retention (Chronic)",
         "name_ja": "慢性卵貯留",
-        "symptoms": {"abdominal_distension", "anorexia", "constipation", "hind_limb_weakness", "lethargy"},
+        "symptoms": {"abdominal_swelling", "anorexia", "constipation", "hind_limb_weakness", "lethargy"},
         "description": "Egg Retention (Chronic) is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "殻付き卵の長期貯留による圧迫と二次感染。",
         "urgency": "high",
@@ -3086,7 +3086,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cecal Impaction / Colonic Impaction",
         "name_ja": "盲腸・結腸インパクション",
-        "symptoms": {"abdominal_distension", "anorexia", "constipation", "lethargy", "straining"},
+        "symptoms": {"abdominal_swelling", "anorexia", "constipation", "lethargy", "straining"},
         "description": "Cecal Impaction / Colonic Impaction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "盲腸または結腸における糞便・異物のインパクション。",
         "urgency": "high",
@@ -3278,7 +3278,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Volvulus / Intussusception",
         "name_ja": "腸捻転・腸重積",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "sudden_death", "vomiting"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "sudden_death", "vomiting"},
         "description": "Intestinal Volvulus / Intussusception is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "腸管の捻転または嵌入による急性閉塞。",
         "urgency": "emergency",
@@ -3509,7 +3509,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "excessive_weight": "body", "fat_deposits": "body",
     "edema": "body", "cloacal_swelling": "body",
     "organ_enlargement": "body", "poor_body_condition": "body",
-    "tissue_swelling": "body", "abdominal_distension": "body",
+    "tissue_swelling": "body",
     "generalized_swelling": "body", "jaw_swelling": "body",
     "muscle_wasting": "body", "obesity": "body",
     "slow_growth": "body", "swelling_behind_jaw": "body",
@@ -3642,7 +3642,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "stomatitis": {"ja": "口内炎", "en": "Stomatitis"},
 
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
-    "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
     "blindness": {"ja": "失明", "en": "Blindness"},
     "bone_deformity": {"ja": "骨変形", "en": "Bone deformity"},
     "bone_swelling": {"ja": "骨腫脹", "en": "Bone swelling"},

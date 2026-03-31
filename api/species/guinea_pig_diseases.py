@@ -2091,7 +2091,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Cysts - Serous",
         "name_ja": "卵巣嚢胞 - 漿液性",
-        "symptoms": {"abdominal_distension", "aggressive_behavior", "bilateral_hair_loss", "bloated_abdomen", "crusty_nipples", "hormonal_behavior", "lethargy", "mounting_behavior"},
+        "symptoms": {"aggressive_behavior", "bilateral_hair_loss", "bloated_abdomen", "crusty_nipples", "hormonal_behavior", "lethargy", "mounting_behavior"},
         "description": "Ovarian Cysts - Serous is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "2歳以上の未避妊雌モルモットに非常に多い漿液性卵巣嚢胞で、ホルモン症状と側腹部脱毛を引き起こします。",
         "urgency": "moderate",
@@ -2112,7 +2112,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Cysts - Follicular",
         "name_ja": "卵巣嚢胞 - 濾胞性",
-        "symptoms": {"abdominal_distension", "hair_loss", "persistent_estrus", "vulvar_swelling"},
+        "symptoms": {"bloated_abdomen", "hair_loss", "persistent_estrus", "vulvar_swelling"},
         "description": "Ovarian Cysts - Follicular is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "ホルモン産生性濾胞嚢胞で、持続的な発情兆候と著明な両側性脱毛を引き起こします。",
         "urgency": "moderate",
@@ -2343,7 +2343,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Clostridial Enterotoxemia",
         "name_ja": "クロストリジウム腸毒素血症",
-        "symptoms": {"abdominal_distension", "dehydration", "diarrhea", "lethargy", "sudden_death"},
+        "symptoms": {"bloated_abdomen", "dehydration", "diarrhea", "lethargy", "sudden_death"},
         "description": "Clostridial Enterotoxemia is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "抗生物質使用や食事変更後の毒素産生クロストリジウム属菌の異常増殖。しばしば急速に致死的です。",
         "urgency": "emergency",
@@ -2511,7 +2511,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Uterine Adenocarcinoma",
         "name_ja": "子宮腺癌",
-        "symptoms": {"abdominal_distension", "appetite_loss", "lethargy", "vaginal_bleeding", "weight_loss"},
+        "symptoms": {"bloated_abdomen", "appetite_loss", "lethargy", "vaginal_bleeding", "weight_loss"},
         "description": "Uterine Adenocarcinoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "子宮内膜の悪性腫瘍で、3歳以上の未避妊雌に比較的多く見られます。",
         "urgency": "high",
@@ -2532,7 +2532,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Teratoma",
         "name_ja": "卵巣奇形腫",
-        "symptoms": {"abdominal_distension", "hair_loss", "lethargy", "weight_gain"},
+        "symptoms": {"bloated_abdomen", "hair_loss", "lethargy", "weight_gain"},
         "description": "Ovarian Teratoma is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "歯、毛、骨を含む複数の胚細胞層からの組織を含む稀な卵巣腫瘍です。",
         "urgency": "moderate",
@@ -2931,7 +2931,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dilated Cardiomyopathy",
         "name_ja": "拡張型心筋症",
-        "symptoms": {"abdominal_distension", "exercise_intolerance", "lethargy", "respiratory_distress", "sudden_death"},
+        "symptoms": {"bloated_abdomen", "exercise_intolerance", "lethargy", "respiratory_distress", "sudden_death"},
         "description": "Dilated Cardiomyopathy is a cardiovascular condition affecting cardiac function and hemodynamic stability.",
         "description_ja": "心室の拡張と弱化によるうっ血性心不全。ビタミンC欠乏と関連します。",
         "urgency": "high",
@@ -2952,7 +2952,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tricuspid Valve Disease",
         "name_ja": "三尖弁疾患",
-        "symptoms": {"abdominal_distension", "exercise_intolerance", "lethargy", "peripheral_edema"},
+        "symptoms": {"bloated_abdomen", "exercise_intolerance", "lethargy", "peripheral_edema"},
         "description": "Tricuspid Valve Disease is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "三尖弁の変性または不全による右心不全です。",
         "urgency": "moderate",
@@ -2973,7 +2973,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatic Cyst",
         "name_ja": "肝嚢胞",
-        "symptoms": {"abdominal_distension", "appetite_loss", "lethargy", "weight_loss"},
+        "symptoms": {"bloated_abdomen", "appetite_loss", "lethargy", "weight_loss"},
         "description": "Hepatic Cyst is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "肝臓内の液体で満たされた嚢胞で、単発または多発性。通常偶発的ですが圧迫を引き起こすことがあります。",
         "urgency": "low",
@@ -3246,7 +3246,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Endometrial Hyperplasia",
         "name_ja": "子宮内膜過形成",
-        "symptoms": {"abdominal_distension", "bloody_vaginal_discharge", "lethargy", "vaginal_discharge"},
+        "symptoms": {"bloated_abdomen", "bloody_vaginal_discharge", "lethargy", "vaginal_discharge"},
         "description": "Endometrial Hyperplasia is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "子宮内膜の増殖で、嚢胞性子宮内膜過形成と子宮蓄膿症に進行することが多いです。",
         "urgency": "moderate",
@@ -3267,7 +3267,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Fetal Macrosomia",
         "name_ja": "胎児巨大症",
-        "symptoms": {"abdominal_distension", "dystocia", "lethargy", "straining"},
+        "symptoms": {"bloated_abdomen", "dystocia", "lethargy", "straining"},
         "description": "Fetal Macrosomia is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "過度に大きな胎児による難産で、特に産仔数が少なく子が大きくなる雌に多いです。",
         "urgency": "emergency",
@@ -4248,7 +4248,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "weight_loss": "body", "weight_gain": "body",
     "dehydration": "body", "poor_growth": "body",
     "swelling": "body", "facial_swelling": "body",
-    "groin_swelling": "body", "abdominal_distension": "body",
+    "groin_swelling": "body",
     "abdominal_pain": "body", "cervical_swelling": "body",
     "genital_swelling": "body", "jaw_swelling": "body",
     "lymph_node_swelling": "body", "mild_swelling_feet": "body",
@@ -4402,7 +4402,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "difficulty_grooming": {"ja": "グルーミング困難", "en": "Difficulty Grooming"},
 
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
-    "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
+
     "abdominal_pain": {"ja": "腹痛", "en": "Abdominal pain"},
     "abscess": {"ja": "膿瘍", "en": "Abscess"},
     "abscesses": {"ja": "膿瘍", "en": "Abscesses"},

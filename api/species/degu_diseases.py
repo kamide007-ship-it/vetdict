@@ -752,7 +752,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatic Lipidosis (Fatty Liver Disease)",
         "name_ja": "肝リピドーシス（脂肪肝）",
-        "symptoms": {"appetite_loss", "lethargy", "weight_loss", "jaundice", "distended_abdomen"},
+        "symptoms": {"appetite_loss", "lethargy", "weight_loss", "jaundice", "abdominal_distension"},
         "description": "Hepatic Lipidosis (Fatty Liver Disease) is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "肝臓への過度な脂肪蓄積。肥満や食欲不振と関連することが多い。",
         "urgency": "high",
@@ -773,7 +773,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Liver Disease (Chronic)",
         "name_ja": "慢性肝疾患",
-        "symptoms": {"jaundice", "weight_loss", "lethargy", "distended_abdomen", "appetite_loss"},
+        "symptoms": {"jaundice", "weight_loss", "lethargy", "abdominal_distension", "appetite_loss"},
         "description": "Liver Disease (Chronic) is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "毒素、感染、代謝性疾患による進行性の肝機能障害。",
         "urgency": "high",
@@ -903,7 +903,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Abdominal Tumor",
         "name_ja": "腹腔内腫瘍",
-        "symptoms": {"distended_abdomen", "weight_loss", "appetite_loss", "lethargy"},
+        "symptoms": {"abdominal_distension", "weight_loss", "appetite_loss", "lethargy"},
         "description": "Abdominal Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "腹腔内の腫瘍により腹部膨満と全身状態の悪化が生じる。",
         "urgency": "high",
@@ -926,7 +926,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyometra",
         "name_ja": "子宮蓄膿症",
-        "symptoms": {"vaginal_discharge", "lethargy", "appetite_loss", "distended_abdomen", "polydipsia"},
+        "symptoms": {"vaginal_discharge", "lethargy", "appetite_loss", "abdominal_distension", "polydipsia"},
         "description": "Pyometra is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "子宮内に膿が蓄積する感染症。未避妊の雌で致命的になりうる。",
         "urgency": "emergency",
@@ -2722,7 +2722,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "weight_loss": "body", "weight_gain": "body",
     "obesity": "body", "dehydration": "body",
     "facial_swelling": "body", "swelling": "body",
-    "distended_abdomen": "body", "abdominal_distension": "body",
+    "abdominal_distension": "body",
     "abdominal_pain": "body", "edema": "body",
     "failure_to_thrive": "body", "jaw_swelling": "body",
     "lymph_node_swelling": "body", "muscle_wasting": "body",
@@ -2829,7 +2829,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "collapse": {"ja": "虚脱", "en": "Collapse"},
     "reduced_activity": {"ja": "活動量の低下", "en": "Reduced Activity"},
     "restlessness": {"ja": "落ち着きのなさ", "en": "Restlessness"},
-    "distended_abdomen": {"ja": "腹部膨満", "en": "Distended Abdomen"},
     "jaundice": {"ja": "黄疸", "en": "Jaundice"},
     "incontinence": {"ja": "失禁", "en": "Incontinence"},
     # Urinary

@@ -2435,7 +2435,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Substrate Impaction",
         "name_ja": "床材インパクション",
-        "symptoms": {"abdominal_distension", "anorexia", "constipation", "lethargy", "straining"},
+        "symptoms": {"abdominal_swelling", "anorexia", "constipation", "lethargy", "straining"},
         "description": "Substrate Impaction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "床材の摂取による消化管閉塞。",
         "urgency": "high",
@@ -2456,7 +2456,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Egg-related Coelomitis",
         "name_ja": "卵関連体腔炎",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "respiratory_distress"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "respiratory_distress"},
         "description": "Egg-related Coelomitis is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "破裂卵胞や異所性卵による腹膜炎。",
         "urgency": "emergency",
@@ -2477,7 +2477,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Follicular Stasis (Chronic)",
         "name_ja": "慢性濾胞停滞",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "weight_change"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "weight_change"},
         "description": "Follicular Stasis (Chronic) is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "排卵前卵胞の慢性停滞による体腔膨大。",
         "urgency": "high",
@@ -2645,7 +2645,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Neoplasia",
         "name_ja": "卵巣腫瘍",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "reproductive_failure"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "reproductive_failure"},
         "description": "Ovarian Neoplasia is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "卵巣腫瘍による生殖機能障害。",
         "urgency": "moderate",
@@ -3065,7 +3065,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Volvulus",
         "name_ja": "腸捻転",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "sudden_death"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "sudden_death"},
         "description": "Intestinal Volvulus is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "腸管の捻転による急性閉塞と壊死。",
         "urgency": "emergency",
@@ -3320,7 +3320,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cecal Impaction",
         "name_ja": "盲腸インパクション",
-        "symptoms": {"abdominal_distension", "anorexia", "constipation", "lethargy"},
+        "symptoms": {"abdominal_swelling", "anorexia", "constipation", "lethargy"},
         "description": "Cecal Impaction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "繊維質や異物による盲腸のインパクション。",
         "urgency": "high",
@@ -3584,7 +3584,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "excessive_weight": "body", "fat_deposits": "body",
     "poor_body_condition": "body", "swollen_limbs": "body",
     "jaw_swelling": "body", "periocular_edema": "body",
-    "abdominal_distension": "body", "asymmetric_growth": "body",
+    "asymmetric_growth": "body",
     "generalized_swelling": "body", "muscle_wasting": "body",
     "obesity": "body", "organ_enlargement": "body",
     "poor_growth": "body", "slow_growth": "body",
@@ -3714,7 +3714,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "retained_scutes": {"ja": "甲板の残存", "en": "Retained scutes"},
 
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
-    "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
     "abnormal_scute_growth": {"ja": "甲板の異常成長", "en": "Abnormal Scute Growth"},
     "abnormal_shell_shape": {"ja": "甲羅の変形", "en": "Abnormal Shell Shape"},
     "anemia": {"ja": "貧血", "en": "Anemia"},

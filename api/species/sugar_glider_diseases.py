@@ -193,7 +193,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Iron Storage Disease (Hemochromatosis)",
         "name_ja": "鉄過剰症（ヘモクロマトーシス）",
-        "symptoms": {"lethargy", "weight_loss", "distended_abdomen", "jaundice"},
+        "symptoms": {"lethargy", "weight_loss", "abdominal_distension", "jaundice"},
         "description": "Iron Storage Disease (Hemochromatosis) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "臓器、特に肝臓への過剰な鉄蓄積。",
         "urgency": "high",
@@ -902,7 +902,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyometra",
         "name_ja": "子宮蓄膿症",
-        "symptoms": {"vaginal_discharge", "lethargy", "poor_appetite", "distended_abdomen", "fever"},
+        "symptoms": {"vaginal_discharge", "lethargy", "poor_appetite", "abdominal_distension", "fever"},
         "description": "Pyometra is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "未避妊の雌で子宮内に膿が蓄積する感染症。",
         "urgency": "emergency",
@@ -1118,7 +1118,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatic Lipidosis (Fatty Liver)",
         "name_ja": "肝リピドーシス（脂肪肝）",
-        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "jaundice", "distended_abdomen"},
+        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "jaundice", "abdominal_distension"},
         "description": "Hepatic Lipidosis (Fatty Liver) is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "高脂肪食や長期の食欲不振による脂肪肝。",
         "urgency": "high",
@@ -1225,7 +1225,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Abdominal Neoplasia",
         "name_ja": "腹腔内腫瘍",
-        "symptoms": {"distended_abdomen", "weight_loss", "poor_appetite", "lethargy"},
+        "symptoms": {"abdominal_distension", "weight_loss", "poor_appetite", "lethargy"},
         "description": "Abdominal Neoplasia is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "腹腔内の腫瘍により進行性の腹部膨満が生じる。",
         "urgency": "high",
@@ -2947,7 +2947,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "muscle_wasting": "body", "dehydration": "body",
     "dry_mucous_membranes": "body", "swelling": "body",
     "facial_swelling": "body", "joey_failure_to_thrive": "body",
-    "distended_abdomen": "body", "lymph_node_swelling": "body",
+    "lymph_node_swelling": "body",
     "abdominal_distension": "body", "abdominal_pain": "body",
     "ascites": "body", "edema": "body",
     "membrane_swelling": "body", "mild_swelling": "body",
@@ -3087,7 +3087,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "frequent_urination": {"ja": "頻尿", "en": "Frequent Urination"},
     # Hepatic
     "jaundice": {"ja": "黄疸", "en": "Jaundice"},
-    "distended_abdomen": {"ja": "腹部膨満", "en": "Distended Abdomen"},
     # Neoplasia
     "lymph_node_swelling": {"ja": "リンパ節の腫脹", "en": "Lymph Node Swelling"},
     # Musculoskeletal
