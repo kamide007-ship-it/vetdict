@@ -2494,7 +2494,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Clostridial Enteritis",
         "name_ja": "クロストリジウム性腸炎",
-        "symptoms": {"abdominal_distension", "bloody_diarrhea", "lethargy", "sudden_death"},
+        "symptoms": {"bloating", "bloody_diarrhea", "lethargy", "sudden_death"},
         "description": "Clostridial Enteritis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "ウェルシュ菌またはC.ディフィシルによる壊死性腸炎。",
         "urgency": "emergency",
@@ -2641,7 +2641,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cystitis / Urinary Tract Infection (Porcine)",
         "name_ja": "ブタ膀胱炎・尿路感染症",
-        "symptoms": {"blood_in_urine", "foul_urine_odor", "frequent_urination", "straining"},
+        "symptoms": {"hematuria", "foul_urine_odor", "frequent_urination", "straining"},
         "description": "Cystitis / Urinary Tract Infection (Porcine) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "雌のペットブタに多い細菌性尿路感染症。",
         "urgency": "moderate",

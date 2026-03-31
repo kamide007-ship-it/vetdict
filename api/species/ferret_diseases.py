@@ -3458,7 +3458,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "foul_odor": "skin", "hair_regrowth": "skin",
     "poor_coat": "skin", "pruritus": "skin",
     "severe_hair_loss": "skin", "skin_lesions": "skin",
-    "skin_mass": "skin", "skin_redness": "skin",
+    "skin_redness": "skin",
     "skin_thickening": "skin", "skull_mass": "skin",
     "slow_growing_lump": "skin", "subcutaneous_mass": "skin",
     "ulceration": "skin",

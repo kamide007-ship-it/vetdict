@@ -26,7 +26,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "abdominal_mass": "skin", "bloody_discharge_from_mass": "skin",
     "crusting_skin": "skin", "dandruff": "skin",
     "dry_flaky_skin": "skin", "dry_skin": "skin",
-    "foul_odor": "skin", "alopecia": "skin",
+    "foul_odor": "skin",
     "mild_itching": "skin", "missing_toe": "skin",
     "poor_coat": "skin", "pruritus": "skin",
     "pustules": "skin", "pustules_at_quill_base": "skin",

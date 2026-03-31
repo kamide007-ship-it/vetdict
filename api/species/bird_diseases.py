@@ -547,7 +547,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pasteurellosis",
         "name_ja": "パスツレラ症",
-        "symptoms": {"respiratory_distress", "nasal_discharge", "lethargy", "sudden_death", "swollen_joints", "diarrhea"},
+        "symptoms": {"respiratory_distress", "nasal_discharge", "lethargy", "sudden_death", "joint_swelling", "diarrhea"},
         "description": "Pasteurellosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "猫の咬傷・引っかき傷からのパスツレラ・ムルトシダ感染で、敗血症を引き起こす。",
         "urgency": "emergency",
@@ -3170,7 +3170,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dermatophytosis (Ringworm)",
         "name_ja": "皮膚糸状菌症（白癬）",
-        "symptoms": {"crusty_lesions_on_face", "feather_loss", "pruritus", "skin_lesions", "thickened_skin"},
+        "symptoms": {"crusty_lesions_on_face", "feather_loss", "itching", "skin_lesions", "thickened_skin"},
         "description": "Dermatophytosis (Ringworm) is a fungal infection that can affect skin, respiratory, or systemic organs.",
         "description_ja": "皮膚糸状菌による皮膚真菌感染症。鳥では稀だが報告がある。",
         "urgency": "low",
@@ -3401,7 +3401,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cnemidocoptes pilae (Scaly Leg Mite)",
         "name_ja": "穿孔ヒゼンダニ症（脚疥癬）",
-        "symptoms": {"crusty_lesions_on_legs", "lameness", "pruritus", "swollen_toes", "thickened_skin"},
+        "symptoms": {"crusty_lesions_on_legs", "lameness", "itching", "swollen_toes", "thickened_skin"},
         "description": "Cnemidocoptes pilae (Scaly Leg Mite) is a parasitic condition that causes clinical signs ranging from subclinical to severe systemic disease.",
         "description_ja": "穿孔ヒゼンダニによる脚・足・蝋膜の過角化性痂皮形成。",
         "urgency": "moderate",
@@ -3443,7 +3443,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tick Infestation",
         "name_ja": "ダニ寄生症",
-        "symptoms": {"anemia", "lethargy", "pruritus", "skin_lesions", "weakness"},
+        "symptoms": {"anemia", "lethargy", "itching", "skin_lesions", "weakness"},
         "description": "Tick Infestation is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "外部ダニ寄生による貧血と感染症伝播の可能性。",
         "urgency": "moderate",
@@ -3464,7 +3464,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hippoboscid Fly Infestation",
         "name_ja": "シラミバエ寄生症",
-        "symptoms": {"anemia", "feather_damage", "lethargy", "pruritus", "restlessness"},
+        "symptoms": {"anemia", "feather_damage", "lethargy", "itching", "restlessness"},
         "description": "Hippoboscid Fly Infestation is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "シラミバエ科の寄生で、刺激と失血を引き起こす。",
         "urgency": "low",
@@ -4220,7 +4220,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Rodenticide Poisoning",
         "name_ja": "殺鼠剤中毒",
-        "symptoms": {"dark_droppings", "hemorrhage", "lethargy", "respiratory_distress", "weakness"},
+        "symptoms": {"dark_droppings", "bleeding", "lethargy", "respiratory_distress", "weakness"},
         "description": "Rodenticide Poisoning is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "抗凝固性殺鼠剤による凝固障害と内出血。",
         "urgency": "emergency",
@@ -4430,7 +4430,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Contact Dermatitis",
         "name_ja": "接触性皮膚炎",
-        "symptoms": {"feather_loss", "pruritus", "redness", "skin_lesions", "swollen_feet"},
+        "symptoms": {"feather_loss", "itching", "redness", "skin_lesions", "swollen_feet"},
         "description": "Contact Dermatitis is a dermatological condition affecting the skin, coat, or integumentary system.",
         "description_ja": "清掃用化学物質や粗い止まり木などの刺激物との接触による皮膚炎。",
         "urgency": "low",

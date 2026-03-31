@@ -61,7 +61,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "noisy_breathing": "respiratory", "rapid_breathing": "respiratory",
     "respiratory_distress": "respiratory", "sneezing": "respiratory",
     "aspiration_pneumonia": "respiratory", "slow_breathing": "respiratory",
-    "stridor": "respiratory", "wheezing": "respiratory",
+    "wheezing": "respiratory",
     # 消化器・口腔
     "abnormal_cecotropes": "digestive", "acetone_breath": "digestive",
     "appetite_changes": "digestive", "appetite_loss": "digestive",
@@ -110,7 +110,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "urinary_incontinence": "urinary", "urine_staining": "urinary",
     "vaginal_discharge": "urinary", "wet_bedding": "urinary",
     "abortion": "urinary", "dark_urine": "urinary",
-    "mammary_discharge": "urinary", "polyuria": "urinary",
+    "mammary_discharge": "urinary",
     "urinary_difficulty": "urinary", "vaginal_bleeding": "urinary",
     # 循環器
     "cyanosis": "cardiovascular", "exercise_intolerance": "cardiovascular",
@@ -153,9 +153,9 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "hypothermia": "internal", "jaundice": "internal",
     "lymph_node_enlargement": "internal", "pale_mucous_membranes": "internal",
     "soft_tissue_calcification": "internal", "anemia": "internal",
-    "bleeding": "internal", "bleeding_from_nose": "internal",
+    "bleeding": "internal",
     "bruising": "internal", "genital_discharge": "internal",
-    "organ_dysfunction": "internal", "polydipsia": "internal",
+    "organ_dysfunction": "internal",
     # その他
     "normal_behavior": "other",
 }
@@ -3189,7 +3189,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Viral Haemorrhagic Disease (VHD) - Classical",
         "name_ja": "ウイルス性出血病（VHD）- 古典型",
-        "symptoms": {"bleeding_from_nose", "fever", "lethargy", "respiratory_distress", "seizures", "sudden_death"},
+        "symptoms": {"epistaxis", "fever", "lethargy", "respiratory_distress", "seizures", "sudden_death"},
         "description": "Viral Haemorrhagic Disease (VHD) - Classical is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "カリシウイルスによる高度に伝染性の致死的感染症で、急性肝壊死と播種性血管内凝固を引き起こします。",
         "urgency": "emergency",
@@ -3882,7 +3882,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Adrenal Hyperplasia",
         "name_ja": "副腎過形成",
-        "symptoms": {"aggressive_behavior", "hair_loss", "polydipsia", "polyuria", "weight_gain"},
+        "symptoms": {"aggressive_behavior", "hair_loss", "excessive_thirst", "excessive_urination", "weight_gain"},
         "description": "Adrenal Hyperplasia is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "副腎の肥大と機能亢進によりホルモン不均衡と関連する臨床徴候を引き起こします。",
         "urgency": "moderate",
@@ -4344,7 +4344,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Renal Cyst",
         "name_ja": "腎嚢胞",
-        "symptoms": {"abdominal_distension", "lethargy", "polydipsia", "polyuria", "weight_loss"},
+        "symptoms": {"abdominal_distension", "lethargy", "excessive_thirst", "excessive_urination", "weight_loss"},
         "description": "Renal Cyst is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "腎実質内の液体で満たされた嚢胞で、偶発的に発見されるか、進行性の腎機能障害を引き起こすことがあります。",
         "urgency": "low",
@@ -4365,7 +4365,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hydronephrosis",
         "name_ja": "水腎症",
-        "symptoms": {"abdominal_distension", "appetite_loss", "lethargy", "polydipsia", "polyuria"},
+        "symptoms": {"abdominal_distension", "appetite_loss", "lethargy", "excessive_thirst", "excessive_urination"},
         "description": "Hydronephrosis is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "尿管閉塞による腎盂と腎杯の拡張で、進行性の腎障害を引き起こします。",
         "urgency": "high",
@@ -4386,7 +4386,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "symptoms": {"appetite_loss", "back_pain", "fever", "lethargy", "polydipsia", "polyuria"},
+        "symptoms": {"appetite_loss", "back_pain", "fever", "lethargy", "excessive_thirst", "excessive_urination"},
         "description": "Pyelonephritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "腎盂と腎実質の細菌感染で、下部尿路感染からの上行性感染が多いです。",
         "urgency": "high",
@@ -4701,7 +4701,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Endometritis",
         "name_ja": "子宮内膜炎",
-        "symptoms": {"appetite_loss", "fever", "lethargy", "polydipsia", "vaginal_discharge"},
+        "symptoms": {"appetite_loss", "fever", "lethargy", "excessive_thirst", "vaginal_discharge"},
         "description": "Endometritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "子宮内膜の炎症と感染で、未治療では子宮蓄膿症に進行することが多いです。",
         "urgency": "high",
@@ -4743,7 +4743,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tracheal Stenosis",
         "name_ja": "気管狭窄",
-        "symptoms": {"cyanosis", "exercise_intolerance", "respiratory_distress", "stridor"},
+        "symptoms": {"cyanosis", "exercise_intolerance", "respiratory_distress", "wheezing"},
         "description": "Tracheal Stenosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "先天性奇形、外傷、挿管後の瘢痕による気管内腔の狭窄です。",
         "urgency": "high",

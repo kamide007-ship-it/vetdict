@@ -2456,7 +2456,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hypothyroidism",
         "name_ja": "甲状腺機能低下症",
-        "symptoms": {"cold_intolerance", "lethargy", "obesity", "poor_shedding", "slow_growth"},
+        "symptoms": {"cold_intolerance", "lethargy", "obesity", "dysecdysis", "slow_growth"},
         "description": "Hypothyroidism is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "甲状腺ホルモン不足による代謝低下。",
         "causes": "Caused by insufficient thyroid hormone production, often due to thyroid gland destruction or iodine deficiency.",
@@ -2834,7 +2834,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Corneal Disease / Panophthalmitis",
         "name_ja": "角膜疾患・全眼球炎",
-        "symptoms": {"blindness", "cloudy_eye", "eye_discharge", "eye_swelling", "lethargy"},
+        "symptoms": {"blindness", "cloudy_eyes", "eye_discharge", "eye_swelling", "lethargy"},
         "description": "Corneal Disease / Panophthalmitis is an ophthalmic condition affecting the eye or surrounding structures.",
         "description_ja": "眼球喪失に至る可能性のある重度の眼感染・炎症。",
         "urgency": "high",
@@ -3341,7 +3341,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Myxomatous Skin Disease",
         "name_ja": "粘液腫様皮膚疾患",
-        "symptoms": {"nodular_skin_lesions", "skin_masses", "ulcerated_masses"},
+        "symptoms": {"nodular_skin_lesions", "skin_masses", "ulcerated_mass"},
         "description": "Myxomatous Skin Disease is a dermatological condition affecting the skin, coat, or integumentary system.",
         "description_ja": "様々な爬虫類種に報告される粘液腫様の皮膚腫瘍。",
         "urgency": "moderate",
