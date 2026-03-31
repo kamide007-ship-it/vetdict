@@ -3007,7 +3007,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Stargazing Syndrome",
         "name_ja": "スターゲイジング症候群（仰天症）",
         "symptoms": {"stargazing", "neurological_signs", "abnormal_posture",
-                      "loss_of_righting_reflex", "appetite_loss", "regurgitation"},
+                      "loss_of_righting_reflex", "anorexia", "regurgitation"},
         "description": "Neurological condition where the snake holds its head elevated and inverted, gazing upward. Multiple etiologies.",
         "description_ja": "ヘビが頭部を持続的に上方に向け、反転させる神経症状の総称。"
                           "IBD（ボア・パイソン）、パラミクソウイルス、アレナウイルス、"
@@ -3097,7 +3097,6 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "straining": "digestive", "tissue_prolapse": "digestive",
     "intestinal_obstruction": "digestive", "mouth_rot": "digestive",
     "oral_mucus": "digestive",
-    "appetite_loss": "general",
     "poor_appetite": "digestive", "poor_feeding_response": "digestive",
     "segments_in_stool": "digestive",
     # 骨格・四肢
@@ -3271,7 +3270,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
     "papular_dermatitis": {"ja": "丘疹性皮膚炎", "en": "Papular Dermatitis"},
     "pneumonia": {"ja": "肺炎", "en": "Pneumonia"},
-    "appetite_loss": {"ja": "食欲不振", "en": "Appetite loss"},
     "poor_appetite": {"ja": "食欲減退", "en": "Poor appetite"},
     "poor_feeding_response": {"ja": "哺乳反応不良", "en": "Poor Feeding Response"},
     "poor_wound_healing": {"ja": "創傷治癒不良", "en": "Poor Wound Healing"},

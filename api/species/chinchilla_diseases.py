@@ -3579,7 +3579,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Heat Stroke (Hyperthermia)",
         "name_ja": "熱中症（高体温症）",
         "symptoms": {"labored_breathing", "lethargy", "drooling", "recumbency",
-                      "seizures", "reddened_ears"},
+                      "seizures", "ear_redness"},
         "description": "Life-threatening hyperthermia in chinchillas, which are extremely heat-sensitive.",
         "description_ja": "チンチラは高温に極めて弱い動物で、25℃以上で熱ストレス、"
                           "30℃以上で熱中症を発症する。厚い被毛と汗腺の欠如が原因。"
@@ -3671,7 +3671,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "skin_scaling": "skin", "skin_thinning": "skin",
     "tail_injury": "skin", "ulceration": "skin",
     "wound_discharge": "skin",
-    "reddened_ears": "skin",
+
     # 眼
     "eye_discharge": "eyes", "eye_redness": "eyes",
     "eye_swelling": "eyes", "cloudiness_eye": "eyes",
@@ -3989,7 +3989,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "excessive_grooming": {"ja": "過剰グルーミング", "en": "Excessive grooming"},
     "genital_swelling": {"ja": "生殖器腫脹", "en": "Genital swelling"},
     "labored_breathing": {"ja": "努力呼吸", "en": "Labored breathing"},
-    "reddened_ears": {"ja": "耳の発赤", "en": "Reddened ears"},
     "straining_urinate": {"ja": "排尿困難", "en": "Straining to urinate"},
 }
 

@@ -16,7 +16,7 @@ from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
     "quill_loss": "skin", "new_quill_growth": "skin",
-    "scratching": "skin", "flaky_skin": "skin",
+    "scratching": "skin", "itching": "skin", "flaky_skin": "skin",
     "crusting": "skin", "skin_lesions": "skin",
     "skin_mass": "skin", "ulcerated_lesion": "skin",
     "redness": "skin", "alopecia": "skin",
@@ -141,7 +141,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mite Infestation (Caparinia)",
         "name_ja": "疥癬ダニ感染症（カパリニア）",
-        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability", "dry_skin"},
+        "symptoms": {"quill_loss", "scratching", "flaky_skin", "crusting", "irritability", "itching", "dry_skin"},
         "description": "Mite Infestation (Caparinia) is a parasitic condition that causes clinical signs ranging from subclinical to severe systemic disease.",
         "description_ja": "ハリネズミに最も多い外部寄生虫であるカパリニアダニによる感染症で、強い痒みと針の脱落を引き起こします。",
         "urgency": "moderate",
@@ -3263,6 +3263,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "quill_loss": {"ja": "針の脱落", "en": "Quill loss"},
     "new_quill_growth": {"ja": "新しい針の成長", "en": "New quill growth"},
     "scratching": {"ja": "掻痒・引っ掻き", "en": "Scratching"},
+    "itching": {"ja": "かゆみ", "en": "Itching"},
     "flaky_skin": {"ja": "皮膚の剥離・フケ", "en": "Flaky skin"},
     "crusting": {"ja": "痂皮形成", "en": "Crusting"},
     "skin_lesions": {"ja": "皮膚病変", "en": "Skin lesions"},

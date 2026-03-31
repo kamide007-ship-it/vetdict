@@ -3008,7 +3008,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Infectious Stomatitis (Mouth Rot)",
         "name_ja": "感染性口内炎（マウスロット）",
-        "symptoms": {"mouth_lesions", "appetite_loss", "oral_discharge",
+        "symptoms": {"mouth_lesions", "anorexia", "oral_discharge",
                       "swollen_jaw", "lethargy", "weight_loss"},
         "description": "Bacterial infection of the oral cavity, one of the most common diseases in captive lizards.",
         "description_ja": "口腔内の細菌感染症。飼育下トカゲで最も多い疾患の一つ。"
@@ -3043,7 +3043,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
         "name_ja": "黄色真菌症（CANV感染症）",
         "symptoms": {"skin_discoloration", "skin_lesions", "shedding_problems",
-                      "weight_loss", "lethargy", "appetite_loss"},
+                      "weight_loss", "lethargy", "anorexia"},
         "description": "Aggressive dermatomycosis caused by CANV complex, particularly devastating in bearded dragons.",
         "description_ja": "Nannizziopsis vriesii（CANV）複合体による侵襲性真菌性皮膚疾患。"
                           "フトアゴヒゲトカゲに特に多い。黄色〜褐色の痂皮形成、皮膚壊死が特徴。"
@@ -3173,7 +3173,6 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "anemia": "internal", "immunosuppression": "internal",
     "pale_mucous_membranes": "internal", "septicemia": "internal",
     # 一般
-    "appetite_loss": "general",
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -3330,7 +3329,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "visible_leeches": {"ja": "肉眼的なヒル", "en": "Visible Leeches"},
     "wart_like_growths": {"ja": "疣贅様増殖", "en": "Wart-like growths"},
     "white_corneal_deposits": {"ja": "角膜の白色沈着", "en": "White Corneal Deposits"},
-    "appetite_loss": {"ja": "食欲不振", "en": "Appetite loss"},
     "oral_discharge": {"ja": "口腔分泌物", "en": "Oral discharge"},
     "shedding_problems": {"ja": "脱皮異常", "en": "Shedding problems"},
     "swollen_jaw": {"ja": "顎の腫脹", "en": "Swollen jaw"},

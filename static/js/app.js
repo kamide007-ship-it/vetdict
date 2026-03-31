@@ -1181,6 +1181,31 @@ function renderScoringDetail(d){
   return html;
 }
 
+function renderMentionedDrugs(d){
+  const drugs=d.mentioned_drugs;
+  if(!drugs||!drugs.length)return"";
+  const title=currentLang==="ja"?"💊 関連薬品・投与量":"💊 Related Drugs & Dosage";
+  let html=`<div class="detail-drugs" style="margin-top:10px"><strong style="font-size:.84rem">${title}</strong><div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">`;
+  drugs.forEach(dr=>{
+    const name=currentLang==="ja"?(dr.name_ja||dr.name):(dr.name||dr.name_ja);
+    const hasDosage=dr.dosage||dr.dosage_ja;
+    const dosage=currentLang==="ja"?(dr.dosage_ja||dr.dosage):(dr.dosage||dr.dosage_ja);
+    const notes=currentLang==="ja"?(dr.notes_ja||dr.notes):(dr.notes||dr.notes_ja);
+    const safeClass=dr.safe===false?"drug-unsafe":"drug-safe";
+    const safeIcon=dr.safe===false?"✗":"✓";
+    const safeLabel=dr.safe===false?(currentLang==="ja"?"禁忌":"Contraindicated"):"";
+    html+=`<div class="drug-mention-card" style="padding:8px 12px;background:${dr.safe===false?"#fef2f2":"#f0f7ff"};border:1px solid ${dr.safe===false?"#fecaca":"#bfdbfe"};border-radius:6px;font-size:.82rem">`;
+    html+=`<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span style="font-weight:600;color:var(--navy)">${escapeHtml(name)}</span>`;
+    if(dr.safe===false)html+=`<span style="color:#dc2626;font-weight:600;font-size:.75rem">⚠ ${safeLabel}</span>`;
+    html+=`</div>`;
+    if(hasDosage&&dr.safe!==false)html+=`<div style="margin-top:3px;color:var(--gray-700)"><span style="font-weight:500">${currentLang==="ja"?"投与量":"Dosage"}:</span> ${escapeHtml(dosage)}</div>`;
+    if(notes&&dr.safe!==false)html+=`<div style="margin-top:2px;color:var(--gray-500);font-size:.76rem">${escapeHtml(notes)}</div>`;
+    html+=`</div>`;
+  });
+  html+=`</div><div style="font-size:.7rem;color:var(--gray-400);margin-top:4px">${currentLang==="ja"?"※ 投与量は参考値です。必ず獣医師の指示に従ってください。":"※ Dosages are for reference only. Always follow veterinary guidance."}</div></div>`;
+  return html;
+}
+
 function renderDiseaseCard(d,data){
   const nameEn=d.name||d.name_ja||"",nameJa=d.name_ja||"";
   const name=currentLang==="ja"?(nameJa||nameEn):nameEn;
@@ -1253,6 +1278,7 @@ function renderDiseaseCard(d,data){
       ${renderMissingKeySymptoms(d,data)}
       ${renderScoringDetail(d)}
       ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${recTests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("")}</div></div>`:""}
+      ${renderMentionedDrugs(d)}
       <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>

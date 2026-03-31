@@ -3463,7 +3463,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Egg Binding (Dystocia)",
         "name_ja": "卵塞（卵詰まり）",
-        "symptoms": {"straining", "lethargy", "appetite_loss", "hind_leg_weakness",
+        "symptoms": {"straining", "lethargy", "anorexia", "hind_leg_weakness",
                       "restlessness", "digging_behavior"},
         "description": "Inability to pass eggs, a life-threatening emergency in female tortoises.",
         "description_ja": "雌リクガメが卵を産出できない緊急疾患。"
@@ -3607,7 +3607,6 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "organ_failure": "internal", "septicemia": "internal",
     "white_deposits": "internal",
     # 一般
-    "appetite_loss": "general",
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -3778,7 +3777,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "weight_change": {"ja": "体重変化", "en": "Weight Change"},
     "white_corneal_deposits": {"ja": "角膜の白色沈着", "en": "White Corneal Deposits"},
     "white_deposits": {"ja": "白色沈着物", "en": "White Deposits"},
-    "appetite_loss": {"ja": "食欲不振", "en": "Appetite loss"},
     "hind_leg_weakness": {"ja": "後肢虚弱", "en": "Hind leg weakness"},
 }
 

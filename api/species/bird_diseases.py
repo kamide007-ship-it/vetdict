@@ -75,7 +75,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "intestinal_obstruction": "digestive", "oral_irritation": "digestive",
     "oral_lesions": "digestive",
     # 口腔
-    "white_plaques_in_mouth": "oral",
+
     # 骨格・四肢
     "beak_deformity": "musculoskeletal", "bowed_legs": "musculoskeletal",
     "fractures": "musculoskeletal", "joint_swelling": "musculoskeletal",
@@ -6677,7 +6677,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Candidiasis (Crop Mycosis)",
         "name_ja": "カンジダ症（そのう真菌症）",
-        "symptoms": {"regurgitation", "appetite_loss", "crop_stasis", "white_plaques_in_mouth",
+        "symptoms": {"regurgitation", "appetite_loss", "crop_stasis", "white_patches_in_mouth",
                       "weight_loss", "lethargy", "diarrhea"},
         "description": "Fungal infection by Candida albicans, primarily affecting the crop, esophagus, and oral cavity.",
         "description_ja": "Candida albicansによる真菌感染症。そのう・食道・口腔に好発。"
@@ -6867,7 +6867,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "weight_loss": {"ja": "体重減少", "en": "Weight loss"},
     "white_deposits_on_joints": {"ja": "関節上の白色沈着物", "en": "White deposits on joints"},
     "white_patches_in_mouth": {"ja": "口腔内白色斑", "en": "White patches in mouth"},
-    "white_plaques_in_mouth": {"ja": "口腔内白色斑", "en": "White plaques in mouth"},
     "wing_droop": {"ja": "翼下垂", "en": "Wing droop"},
     "yellow_skin_masses": {"ja": "黄色皮膚腫瘤", "en": "Yellow skin masses"},
 
