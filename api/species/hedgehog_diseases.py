@@ -85,7 +85,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 泌尿器・生殖器
     "polyuria": "urinary", "bloody_urine": "urinary",
     "frequent_urination": "urinary", "straining_to_urinate": "urinary",
-    "vaginal_bleeding": "urinary", "vaginal_discharge": "urinary",
+    "bloody_discharge": "reproductive", "vaginal_bleeding": "urinary", "vaginal_discharge": "urinary",
     "mammary_mass": "urinary", "mammary_discharge": "urinary",
     "mammary_swelling": "urinary", "mammary_redness": "urinary",
     "penile_protrusion": "urinary", "asymmetric_testes": "urinary",
@@ -3282,6 +3282,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "dehydration": {"ja": "脱水", "en": "Dehydration"},
     "pain": {"ja": "疼痛", "en": "Pain"},
     "swelling": {"ja": "腫脹", "en": "Swelling"},
+    "body_swelling": {"ja": "体の腫脹", "en": "Body swelling"},
     "discharge": {"ja": "分泌物", "en": "Discharge"},
     "collapse": {"ja": "虚脱", "en": "Collapse"},
     "distress": {"ja": "苦悶", "en": "Distress"},
@@ -3346,6 +3347,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "eye_bulging": {"ja": "眼球突出", "en": "Eye bulging / proptosis"},
     "eye_discharge": {"ja": "眼脂", "en": "Eye discharge"},
     "eye_redness": {"ja": "眼の充血", "en": "Eye redness"},
+    "eye_swelling": {"ja": "眼の腫脹", "en": "Eye swelling"},
     "eye_squinting": {"ja": "眼の細め", "en": "Eye squinting"},
     "eye_cloudiness": {"ja": "眼の白濁", "en": "Eye cloudiness"},
     "vision_loss": {"ja": "視力低下", "en": "Vision loss"},
@@ -3357,6 +3359,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "frequent_urination": {"ja": "頻尿", "en": "Frequent urination"},
     "straining_to_urinate": {"ja": "排尿時のいきみ", "en": "Straining to urinate"},
     # Reproductive
+    "bloody_discharge": {"ja": "血性分泌物", "en": "Bloody discharge"},
     "vaginal_bleeding": {"ja": "膣出血", "en": "Vaginal bleeding"},
     "vaginal_discharge": {"ja": "膣分泌物", "en": "Vaginal discharge"},
     "mammary_mass": {"ja": "乳腺の腫瘤", "en": "Mammary mass"},
