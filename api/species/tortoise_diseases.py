@@ -3561,6 +3561,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "swollen_joints": "musculoskeletal", "joint_pain": "musculoskeletal",
     "lameness": "musculoskeletal", "bone_deformity": "musculoskeletal",
     "bone_swelling": "musculoskeletal", "bone_weakness": "musculoskeletal",
+    "hind_leg_weakness": "musculoskeletal",
     "hind_limb_swelling": "musculoskeletal", "hind_limb_weakness": "musculoskeletal",
     "jaw_softening": "musculoskeletal",
     "limb_amputation": "musculoskeletal", "limb_injury": "musculoskeletal",
@@ -3605,6 +3606,8 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "immunosuppression": "internal", "liver_enlargement": "internal",
     "organ_failure": "internal", "septicemia": "internal",
     "white_deposits": "internal",
+    # 一般
+    "appetite_loss": "general",
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -3775,6 +3778,8 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "weight_change": {"ja": "体重変化", "en": "Weight Change"},
     "white_corneal_deposits": {"ja": "角膜の白色沈着", "en": "White Corneal Deposits"},
     "white_deposits": {"ja": "白色沈着物", "en": "White Deposits"},
+    "appetite_loss": {"ja": "食欲不振", "en": "Appetite loss"},
+    "hind_leg_weakness": {"ja": "後肢虚弱", "en": "Hind leg weakness"},
 }
 
 

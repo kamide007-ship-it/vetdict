@@ -721,7 +721,7 @@ SYMPTOM_ALIASES = {
     "横になってる": "loss_of_balance", "listing": "loss_of_balance",
     "隠れてる": "hiding", "出てこない": "hiding",
     "群れから離れてる": "isolation",
-    "旋回": "spinning", "くるくる回る": "spinning",
+    "旋回": "erratic_swimming", "くるくる回る": "erratic_swimming",
     # 排泄
     "白い糞": "white_stringy_feces", "白い糸みたいな糞": "white_stringy_feces",
     "透明な糞": "white_stringy_feces",
