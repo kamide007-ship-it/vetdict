@@ -78,6 +78,95 @@ DISEASE_REFERENCES: dict[str, list[dict]] = {
             "pmid": "37634698",
         },
     ],
+    # === Additional common diseases ===
+    "urinary obstruction (blocked cat)": [
+        {
+            "title": "Recurrence rate and long-term outcome of cats with feline lower urinary tract disease treated medically",
+            "authors": "Gerber B, Eichenberger S, Reusch CE",
+            "journal": "J Feline Med Surg",
+            "year": 2008,
+            "doi": "10.1016/j.jfms.2008.01.001",
+            "pmid": "18337134",
+        },
+    ],
+    "feline lower urinary tract disease (flutd)": [
+        {
+            "title": "Pandora syndrome: rethinking our approach to idiopathic cystitis in cats",
+            "authors": "Buffington CA",
+            "journal": "J Feline Med Surg",
+            "year": 2011,
+            "doi": "10.1016/j.jfms.2011.01.002",
+            "pmid": "21333887",
+        },
+    ],
+    "feline idiopathic cystitis (fic)": [
+        {
+            "title": "Pandora syndrome: rethinking our approach to idiopathic cystitis in cats",
+            "authors": "Buffington CA",
+            "journal": "J Feline Med Surg",
+            "year": 2011,
+            "doi": "10.1016/j.jfms.2011.01.002",
+            "pmid": "21333887",
+        },
+    ],
+    "feline pancreatitis": [
+        {
+            "title": "Feline exocrine pancreatic disorders",
+            "authors": "Xenoulis PG",
+            "journal": "Vet Clin North Am Small Anim Pract",
+            "year": 2015,
+            "doi": "10.1016/j.cvsm.2014.09.011",
+            "pmid": "25432923",
+        },
+    ],
+    "gastric dilatation-volvulus (gdv/bloat)": [
+        {
+            "title": "Gastric dilatation-volvulus in dogs attending UK emergency-access veterinary clinics",
+            "authors": "Glickman LT, Glickman NW, Schellenberg DB, et al.",
+            "journal": "J Am Vet Med Assoc",
+            "year": 2000,
+            "pmid": "10668548",
+        },
+    ],
+    "gastrointestinal stasis": [
+        {
+            "title": "Clinical approach to the rabbit gastrointestinal tract",
+            "authors": "Oglesbee BL, Lord B",
+            "journal": "Vet Clin North Am Exot Anim Pract",
+            "year": 2020,
+            "doi": "10.1016/j.cvex.2019.08.005",
+            "pmid": "31759500",
+        },
+    ],
+    "adrenal disease": [
+        {
+            "title": "Ferret adrenal-associated endocrinopathy",
+            "authors": "Schoemaker NJ",
+            "journal": "Vet Clin North Am Exot Anim Pract",
+            "year": 2017,
+            "doi": "10.1016/j.cvex.2016.07.004",
+            "pmid": "27890391",
+        },
+    ],
+    "pasteurellosis": [
+        {
+            "title": "Pasteurella multocida and rabbit respiratory disease: epidemiology, pathogenesis, and treatment",
+            "authors": "Deeb BJ, DiGiacomo RF",
+            "journal": "Lab Anim Sci",
+            "year": 2000,
+            "pmid": "10780109",
+        },
+    ],
+    "dermatophytosis": [
+        {
+            "title": "Dermatophytosis in chinchillas: a disease model for diagnostic and therapeutic studies",
+            "authors": "Moriello KA",
+            "journal": "Vet Dermatol",
+            "year": 2004,
+            "doi": "10.1111/j.1365-3164.2004.00409.x",
+            "pmid": "15361950",
+        },
+    ],
 }
 
 
