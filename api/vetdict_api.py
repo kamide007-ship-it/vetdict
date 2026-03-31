@@ -827,6 +827,59 @@ def get_related_symptoms(species):
 # API: Symptom Analysis (multi-species)
 # =============================================================================
 
+
+def _attach_mentioned_drugs(result, species):
+    """Attach mentioned_drugs with species-specific dosage to each disease."""
+    try:
+        from api.drug_dictionary import DRUGS as _ALL_DRUGS
+    except Exception:
+        return
+
+    disease_lists = []
+    for key in ('suspected_diseases', 'possible_conditions'):
+        if key in result:
+            disease_lists.append(result[key])
+    by_phase = result.get('suspected_diseases_by_phase', {})
+    for phase_diseases in by_phase.values():
+        if isinstance(phase_diseases, list):
+            disease_lists.append(phase_diseases)
+
+    for diseases in disease_lists:
+        for disease in diseases:
+            treatment_text = (
+                (disease.get("treatment_ja", "") or "")
+                + " "
+                + (disease.get("treatment", "") or "")
+            ).lower()
+            if not treatment_text.strip():
+                continue
+            matched = []
+            for dr in _ALL_DRUGS:
+                dr_name = dr.get("name", "")
+                dr_name_ja = dr.get("name_ja", "")
+                if not ((dr_name and dr_name.lower() in treatment_text)
+                        or (dr_name_ja and dr_name_ja in treatment_text)):
+                    continue
+                entry = {
+                    "id": dr.get("id", ""),
+                    "name": dr_name,
+                    "name_ja": dr_name_ja,
+                    "category": dr.get("category", ""),
+                }
+                si = (dr.get("species_info") or {}).get(species)
+                if si:
+                    entry["dosage"] = si.get("dosage", "")
+                    entry["dosage_ja"] = si.get("dosage_ja", "")
+                    entry["safe"] = si.get("safe", True)
+                    entry["notes"] = si.get("notes", "")
+                    entry["notes_ja"] = si.get("notes_ja", "")
+                matched.append(entry)
+                if len(matched) >= 10:
+                    break
+            if matched:
+                disease["mentioned_drugs"] = matched
+
+
 @app.route('/api/analyze-symptoms', methods=['POST'])
 @ensure_json_response
 def api_analyze_symptoms():
@@ -946,6 +999,10 @@ def api_analyze_symptoms():
                 vaccines=vaccines,
                 vaccination_status=vaccination_status,
             )
+
+        # Attach mentioned_drugs with species-specific dosage to each disease
+        _attach_mentioned_drugs(result, species or 'dog')
+
         return result
     except ValueError as ve:
         logger.error(f"Symptom analysis error: {ve}", exc_info=True)

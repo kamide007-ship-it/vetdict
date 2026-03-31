@@ -3008,7 +3008,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Infectious Stomatitis (Mouth Rot)",
         "name_ja": "感染性口内炎（マウスロット）",
-        "symptoms": {"mouth_lesions", "appetite_loss", "oral_discharge",
+        "symptoms": {"mouth_lesions", "anorexia", "oral_discharge",
                       "swollen_jaw", "lethargy", "weight_loss"},
         "description": "Bacterial infection of the oral cavity, one of the most common diseases in captive lizards.",
         "description_ja": "口腔内の細菌感染症。飼育下トカゲで最も多い疾患の一つ。"
@@ -3043,7 +3043,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
         "name_ja": "黄色真菌症（CANV感染症）",
         "symptoms": {"skin_discoloration", "skin_lesions", "shedding_problems",
-                      "weight_loss", "lethargy", "appetite_loss"},
+                      "weight_loss", "lethargy", "anorexia"},
         "description": "Aggressive dermatomycosis caused by CANV complex, particularly devastating in bearded dragons.",
         "description_ja": "Nannizziopsis vriesii（CANV）複合体による侵襲性真菌性皮膚疾患。"
                           "フトアゴヒゲトカゲに特に多い。黄色〜褐色の痂皮形成、皮膚壊死が特徴。"
@@ -3083,6 +3083,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "skin_lesions": "skin", "skin_sloughing": "skin",
     "skin_hemorrhage": "skin", "yellow_skin_patches": "skin",
     "crusty_patches": "skin", "dysecdysis": "skin",
+    "shedding_problems": "skin",
     "skin_necrosis": "skin", "scale_discoloration": "skin",
     "mucus_in_mouth": "skin", "skin_irritation": "skin",
     "visible_mites": "skin", "visible_parasites": "skin",
@@ -3119,6 +3120,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "anorexia": "digestive", "rubber_jaw": "digestive",
     "diarrhea": "digestive", "mouth_lesions": "digestive",
     "stomatitis": "digestive", "drooling": "digestive",
+    "oral_discharge": "oral",
     "oral_hemorrhage": "digestive", "bloody_stool": "digestive",
     "straining": "digestive", "constipation": "digestive",
     "regurgitation": "digestive", "tissue_prolapse": "digestive",
@@ -3152,7 +3154,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "toe_swelling": "body", "swelling": "body",
     "abdominal_swelling": "body", "cloacal_swelling": "body",
     "dry_mucous_membranes": "body", "organ_enlargement": "body",
-    "head_swelling": "body",
+    "head_swelling": "body", "swollen_jaw": "body",
     "generalized_swelling": "body", "muscle_wasting": "body",
     "rapid_growth": "body", "swelling_behind_jaw": "body",
     # 行動・活動
@@ -3170,6 +3172,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "gout_tophi": "internal", "bleeding": "internal",
     "anemia": "internal", "immunosuppression": "internal",
     "pale_mucous_membranes": "internal", "septicemia": "internal",
+    # 一般
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -3326,6 +3329,9 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "visible_leeches": {"ja": "肉眼的なヒル", "en": "Visible Leeches"},
     "wart_like_growths": {"ja": "疣贅様増殖", "en": "Wart-like growths"},
     "white_corneal_deposits": {"ja": "角膜の白色沈着", "en": "White Corneal Deposits"},
+    "oral_discharge": {"ja": "口腔分泌物", "en": "Oral discharge"},
+    "shedding_problems": {"ja": "脱皮異常", "en": "Shedding problems"},
+    "swollen_jaw": {"ja": "顎の腫脹", "en": "Swollen jaw"},
 }
 
 

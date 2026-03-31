@@ -58,7 +58,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "diarrhea": "digestive", "constipation": "digestive",
     "intestinal_prolapse": "digestive", "cloacal_prolapse": "digestive",
     "gastric_prolapse": "digestive", "visible_worms": "digestive",
-    "regurgitation": "digestive", "white_feces": "digestive",
+    "regurgitation": "digestive",
     "bloody_stool": "digestive", "intestinal_obstruction": "digestive",
     "straining": "digestive",
     # 呼吸器
@@ -103,9 +103,8 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "sudden_death": "emergency", "rapid_death": "emergency",
     "tetany": "neurological", "vomiting": "digestive",
     # 新規追加症状
-    "vocalization_loss": "behavior", "nocturnal_activity_loss": "behavior",
-    "substrate_burrowing": "behavior", "excessive_soaking": "behavior",
-    "skin_depigmentation": "skin", "digit_necrosis": "skin",
+    "vocalization_loss": "behavior",
+    "digit_necrosis": "skin",
     "coelomic_distension": "body", "lymph_sac_edema": "body",
     "microfilaria_visible": "internal", "goiter": "body",
     "thyroid_enlargement": "body",
@@ -186,7 +185,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "reluctance_to_move": {"ja": "動きたがらない", "en": "Reluctance to move"},
     "inability_to_feed": {"ja": "摂食不能", "en": "Inability to feed"},
     "regurgitation": {"ja": "吐き戻し", "en": "Regurgitation"},
-    "white_feces": {"ja": "白色便", "en": "White feces"},
     "bloody_stool": {"ja": "血便", "en": "Bloody stool"},
     "pale_coloration": {"ja": "退色", "en": "Pale coloration"},
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
@@ -263,10 +261,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "wrinkled_skin": {"ja": "皮膚のしわ", "en": "Wrinkled skin"},
     # --- 新規追加症状 (大型両生類・種特異的) ---
     "vocalization_loss": {"ja": "鳴き声の消失", "en": "Loss of vocalization"},
-    "nocturnal_activity_loss": {"ja": "夜間活動の低下", "en": "Loss of nocturnal activity"},
-    "substrate_burrowing": {"ja": "異常な穴掘り行動", "en": "Abnormal burrowing behavior"},
-    "excessive_soaking": {"ja": "過度の浸水行動", "en": "Excessive soaking"},
-    "skin_depigmentation": {"ja": "皮膚色素脱失", "en": "Skin depigmentation"},
     "digit_necrosis": {"ja": "指趾壊死", "en": "Digit necrosis"},
     "coelomic_distension": {"ja": "体腔膨満", "en": "Coelomic distension"},
     "lymph_sac_edema": {"ja": "リンパ嚢浮腫", "en": "Lymph sac edema"},

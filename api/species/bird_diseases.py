@@ -69,10 +69,13 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "oral_plaques": "digestive", "overgrown_beak": "digestive",
     "regurgitation": "digestive", "sour_crop_odor": "digestive",
     "straining": "digestive", "tapeworm_segments_in_droppings": "digestive",
-    "undigested_food_in_droppings": "digestive", "vomiting": "digestive",
+    "undigested_food_in_droppings": "digestive", "undigested_seeds_in_droppings": "digestive",
+    "vomiting": "digestive",
     "difficulty_eating": "digestive", "dysphagia": "digestive",
     "intestinal_obstruction": "digestive", "oral_irritation": "digestive",
     "oral_lesions": "digestive",
+    # 口腔
+
     # 骨格・四肢
     "beak_deformity": "musculoskeletal", "bowed_legs": "musculoskeletal",
     "fractures": "musculoskeletal", "joint_swelling": "musculoskeletal",
@@ -6674,7 +6677,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Candidiasis (Crop Mycosis)",
         "name_ja": "カンジダ症（そのう真菌症）",
-        "symptoms": {"regurgitation", "appetite_loss", "crop_stasis", "white_plaques_in_mouth",
+        "symptoms": {"regurgitation", "appetite_loss", "crop_stasis", "white_patches_in_mouth",
                       "weight_loss", "lethargy", "diarrhea"},
         "description": "Fungal infection by Candida albicans, primarily affecting the crop, esophagus, and oral cavity.",
         "description_ja": "Candida albicansによる真菌感染症。そのう・食道・口腔に好発。"
@@ -6855,6 +6858,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "tremors": {"ja": "振戦", "en": "Tremors"},
     "ulcerated_masses": {"ja": "潰瘍化腫瘤", "en": "Ulcerated masses"},
     "undigested_food_in_droppings": {"ja": "糞中の未消化食物", "en": "Undigested food in droppings"},
+    "undigested_seeds_in_droppings": {"ja": "未消化種子の排泄", "en": "Undigested seeds in droppings"},
     "vision_loss": {"ja": "視力喪失", "en": "Vision loss"},
     "voice_change": {"ja": "声の変化", "en": "Voice change"},
     "vomiting": {"ja": "嘔吐", "en": "Vomiting"},

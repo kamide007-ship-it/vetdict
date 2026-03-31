@@ -721,11 +721,11 @@ SYMPTOM_ALIASES = {
     "横になってる": "loss_of_balance", "listing": "loss_of_balance",
     "隠れてる": "hiding", "出てこない": "hiding",
     "群れから離れてる": "isolation",
-    "旋回": "spinning", "くるくる回る": "spinning",
+    "旋回": "erratic_swimming", "くるくる回る": "erratic_swimming",
     # 排泄
     "白い糞": "white_stringy_feces", "白い糸みたいな糞": "white_stringy_feces",
     "透明な糞": "white_stringy_feces",
-    "糞がぶら下がってる": "trailing_feces",
+    "糞がぶら下がってる": "white_stringy_feces",
     # 寄生虫
     "イカリムシ": "anchor_worm", "糸みたいなのがついてる": "anchor_worm",
     "虫がついてる": "worm_like_parasites",
@@ -1101,7 +1101,6 @@ SYMPTOM_ALIASES = {
     "エラにカビ": "cotton_like_growth",
     # 消化器 (重複する一般的表現は既存エイリアスに委譲)
     "フンが出ない": "constipation",
-    "白い便": "white_feces",
     "おしりから何か出てる": "cloacal_prolapse",
     # 骨格・四肢
     "足が曲がってる": "limb_deformity",

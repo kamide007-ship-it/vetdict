@@ -30,7 +30,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "poor_coat": "skin",
     "skin_abrasion": "skin", "skin_exposure": "skin",
     "skin_lesions": "skin", "skin_masses": "skin",
-    "skin_thickening": "skin", "skin_thinning": "skin",
+    "skin_changes": "skin", "skin_thickening": "skin", "skin_thinning": "skin",
     "slow_growing_lump": "skin", "subcutaneous_mass": "skin",
     "sweet_breath_odor": "skin", "visible_mass_in_mouth": "skin",
     "wart_like_growths": "skin",
@@ -4078,8 +4078,8 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Adrenal Gland Tumor",
         "name_ja": "副腎腫瘍",
-        "symptoms": {"hair_loss", "weight_loss", "lethargy", "excessive_thirst",
-                      "excessive_urination", "abdominal_distension", "skin_changes"},
+        "symptoms": {"hair_loss", "weight_loss", "lethargy", "increased_thirst",
+                      "increased_urination", "abdominal_distension", "skin_changes"},
         "description": "Adrenal cortical tumors (adenoma or carcinoma) in hamsters, causing Cushing's-like syndrome.",
         "description_ja": "副腎皮質腺腫または腺癌。高齢ハムスター（特にゴールデンハムスター）に多い。"
                           "クッシング症候群様の症状：脱毛、多飲多尿、腹部膨満、皮膚菲薄化。",
@@ -4311,6 +4311,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "respiratory_distress": {"ja": "呼吸窮迫", "en": "Respiratory distress"},
     "shock": {"ja": "ショック", "en": "Shock"},
     "skin_abrasion": {"ja": "皮膚擦過傷", "en": "Skin Abrasion"},
+    "skin_changes": {"ja": "皮膚の変化", "en": "Skin changes"},
     "skin_exposure": {"ja": "皮膚露出", "en": "Skin Exposure"},
     "skin_lesions": {"ja": "皮膚病変", "en": "Skin Lesions"},
     "skin_masses": {"ja": "皮膚腫瘤", "en": "Skin masses"},

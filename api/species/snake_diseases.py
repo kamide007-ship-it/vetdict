@@ -3007,7 +3007,7 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Stargazing Syndrome",
         "name_ja": "スターゲイジング症候群（仰天症）",
         "symptoms": {"stargazing", "neurological_signs", "abnormal_posture",
-                      "loss_of_righting_reflex", "appetite_loss", "regurgitation"},
+                      "loss_of_righting_reflex", "anorexia", "regurgitation"},
         "description": "Neurological condition where the snake holds its head elevated and inverted, gazing upward. Multiple etiologies.",
         "description_ja": "ヘビが頭部を持続的に上方に向け、反転させる神経症状の総称。"
                           "IBD（ボア・パイソン）、パラミクソウイルス、アレナウイルス、"

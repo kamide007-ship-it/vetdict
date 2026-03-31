@@ -16,7 +16,7 @@ from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
     "quill_loss": "skin", "new_quill_growth": "skin",
-    "scratching": "skin", "flaky_skin": "skin",
+    "scratching": "skin", "itching": "skin", "flaky_skin": "skin",
     "crusting": "skin", "skin_lesions": "skin",
     "skin_mass": "skin", "ulcerated_lesion": "skin",
     "redness": "skin", "alopecia": "skin",
@@ -41,7 +41,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "wound_infection": "skin",
     # 眼
     "eye_bulging": "eyes", "eye_discharge": "eyes",
-    "eye_redness": "eyes", "eye_squinting": "eyes",
+    "eye_redness": "eyes", "eye_squinting": "eyes", "eye_swelling": "eyes",
     "eye_cloudiness": "eyes", "vision_loss": "eyes",
     "cataracts": "eyes", "corneal_opacity": "eyes",
     "enlarged_eye": "eyes",
@@ -85,7 +85,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 泌尿器・生殖器
     "polyuria": "urinary", "bloody_urine": "urinary",
     "frequent_urination": "urinary", "straining_to_urinate": "urinary",
-    "vaginal_bleeding": "urinary", "vaginal_discharge": "urinary",
+    "bloody_discharge": "reproductive", "vaginal_bleeding": "urinary", "vaginal_discharge": "urinary",
     "mammary_mass": "urinary", "mammary_discharge": "urinary",
     "mammary_swelling": "urinary", "mammary_redness": "urinary",
     "penile_protrusion": "urinary", "asymmetric_testes": "urinary",
@@ -100,7 +100,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 体型・全身
     "weight_loss": "body", "weight_gain": "body",
     "dehydration": "body", "swelling": "body",
-    "abdominal_pain": "body", "abdominal_distension": "body",
+    "abdominal_pain": "body", "abdominal_distension": "body", "body_swelling": "body",
     "hepatomegaly": "body", "facial_swelling": "body",
     "muscle_wasting": "body", "ascites": "body",
     "fatty_deposits": "body", "splenomegaly": "body",
@@ -3263,6 +3263,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "quill_loss": {"ja": "針の脱落", "en": "Quill loss"},
     "new_quill_growth": {"ja": "新しい針の成長", "en": "New quill growth"},
     "scratching": {"ja": "掻痒・引っ掻き", "en": "Scratching"},
+    "itching": {"ja": "かゆみ", "en": "Itching"},
     "flaky_skin": {"ja": "皮膚の剥離・フケ", "en": "Flaky skin"},
     "crusting": {"ja": "痂皮形成", "en": "Crusting"},
     "skin_lesions": {"ja": "皮膚病変", "en": "Skin lesions"},
@@ -3282,6 +3283,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "dehydration": {"ja": "脱水", "en": "Dehydration"},
     "pain": {"ja": "疼痛", "en": "Pain"},
     "swelling": {"ja": "腫脹", "en": "Swelling"},
+    "body_swelling": {"ja": "体の腫脹", "en": "Body swelling"},
     "discharge": {"ja": "分泌物", "en": "Discharge"},
     "collapse": {"ja": "虚脱", "en": "Collapse"},
     "distress": {"ja": "苦悶", "en": "Distress"},
@@ -3346,6 +3348,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "eye_bulging": {"ja": "眼球突出", "en": "Eye bulging / proptosis"},
     "eye_discharge": {"ja": "眼脂", "en": "Eye discharge"},
     "eye_redness": {"ja": "眼の充血", "en": "Eye redness"},
+    "eye_swelling": {"ja": "眼の腫脹", "en": "Eye swelling"},
     "eye_squinting": {"ja": "眼の細め", "en": "Eye squinting"},
     "eye_cloudiness": {"ja": "眼の白濁", "en": "Eye cloudiness"},
     "vision_loss": {"ja": "視力低下", "en": "Vision loss"},
@@ -3357,6 +3360,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "frequent_urination": {"ja": "頻尿", "en": "Frequent urination"},
     "straining_to_urinate": {"ja": "排尿時のいきみ", "en": "Straining to urinate"},
     # Reproductive
+    "bloody_discharge": {"ja": "血性分泌物", "en": "Bloody discharge"},
     "vaginal_bleeding": {"ja": "膣出血", "en": "Vaginal bleeding"},
     "vaginal_discharge": {"ja": "膣分泌物", "en": "Vaginal discharge"},
     "mammary_mass": {"ja": "乳腺の腫瘤", "en": "Mammary mass"},

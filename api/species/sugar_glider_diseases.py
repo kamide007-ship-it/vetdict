@@ -2896,7 +2896,6 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "vision_loss": "eyes", "eye_discharge": "eyes",
     "eye_redness": "eyes", "eye_swelling": "eyes",
     "pawing_at_eye": "eyes", "eye_protrusion": "eyes",
-    "cataracts": "eyes",
     # 耳
     "ear_discharge": "ears",
     # 呼吸器
@@ -2969,7 +2968,8 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "joey_on_cage_floor": "behavior", "licking_foot": "behavior",
     "licking_genital_area": "behavior", "membrane_chewing": "behavior",
     "nighttime_activity": "behavior", "restlessness": "behavior",
-    "self_grooming_obsessive": "behavior", "stress_signs": "behavior",
+    "self_grooming_obsessive": "behavior", "self_mutilation": "behavioral",
+    "stress_signs": "behavior",
     "tail_chewing": "behavior",
     # 緊急
     "sudden_death_risk": "emergency", "joey_death": "emergency",
@@ -3116,7 +3116,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "bleeding_from_mass": {"ja": "腫瘤からの出血", "en": "Bleeding From Mass"},
     "bleeding_from_mouth": {"ja": "口腔出血", "en": "Bleeding From Mouth"},
     "bone_pain": {"ja": "骨痛", "en": "Bone Pain"},
-    "cataracts": {"ja": "白内障", "en": "Cataracts"},
     "cloacal_discharge": {"ja": "総排泄腔分泌物", "en": "Cloacal discharge"},
     "cloacal_mass": {"ja": "総排泄腔腫瘤", "en": "Cloacal Mass"},
     "cold_body": {"ja": "冷たい体", "en": "Cold Body"},
@@ -3177,6 +3176,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "restlessness": {"ja": "落ち着きのなさ", "en": "Restlessness"},
     "scent_gland_mass": {"ja": "臭腺の腫瘤", "en": "Scent Gland Mass"},
     "self_grooming_obsessive": {"ja": "過度の自己グルーミング", "en": "Self Grooming Obsessive"},
+    "self_mutilation": {"ja": "自傷行為", "en": "Self-mutilation"},
     "severe_hair_loss": {"ja": "重度の脱毛", "en": "Severe Hair Loss"},
     "skin_crusting": {"ja": "皮膚の痂皮形成", "en": "Skin Crusting"},
     "skin_lesions": {"ja": "皮膚病変", "en": "Skin Lesions"},
