@@ -290,7 +290,7 @@ def add_headers(response):
     nonce = getattr(g, 'csp_nonce', '')
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        f"script-src 'self' 'nonce-{nonce}' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
+        f"script-src 'self' 'nonce-{nonce}' 'unsafe-hashes' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: https:; "
         "font-src 'self' https:; "
