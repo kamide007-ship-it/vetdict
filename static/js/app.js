@@ -1682,6 +1682,7 @@ function renderChatResult(container,data){
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
         ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${escapeHtml(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))}</div>`:""}
         ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.map(s=>escapeHtml(s)).join(", ")}</div>`:""}
+        ${c.mentioned_drugs&&c.mentioned_drugs.length?renderMentionedDrugs(c):""}
       `;
       listDiv.appendChild(card);
     });
@@ -2283,8 +2284,61 @@ function toggleDbItem(el){
   if(detail){
     const isOpen=detail.classList.toggle("open");
     el.setAttribute("aria-expanded",isOpen);
-    if(isOpen){const nameEl=el.querySelector(".d-name");trackEvent("view_disease_detail",{species:currentSpecies,disease:(nameEl?nameEl.textContent:"").substring(0,80)});}
+    if(isOpen){
+      const nameEl=el.querySelector(".d-name");
+      trackEvent("view_disease_detail",{species:currentSpecies,disease:(nameEl?nameEl.textContent:"").substring(0,80)});
+      /* Lazy-load drug info on first open */
+      if(!detail.dataset.drugsLoaded){
+        detail.dataset.drugsLoaded="1";
+        _loadDbItemDrugs(detail);
+      }
+    }
   }
+}
+
+/* Load and display related drugs for a disease DB item */
+function _loadDbItemDrugs(detail){
+  const treatmentDd=detail.querySelectorAll("dd");
+  let treatmentText="";
+  /* Treatment is the 5th <dd> (index 4) in the <dl> */
+  const dl=detail.querySelector("dl");
+  if(dl){
+    const dts=dl.querySelectorAll("dt");
+    dts.forEach((dt,i)=>{
+      const ddList=dl.querySelectorAll("dd");
+      if(dt.textContent.includes(t("dtTreatment"))&&ddList[i])treatmentText=ddList[i].textContent;
+    });
+  }
+  if(!treatmentText)return;
+  const lowerText=treatmentText.toLowerCase();
+
+  function doMatch(){
+    if(!allDrugs.length)return;
+    const matched=[];
+    for(const dr of allDrugs){
+      const name=dr.name||"";
+      const nameJa=dr.name_ja||"";
+      if((name&&lowerText.includes(name.toLowerCase()))||(nameJa&&lowerText.includes(nameJa))){
+        const entry={name,name_ja:nameJa,id:dr.id||"",category:dr.category||""};
+        const si=(dr.species_info||{})[currentSpecies];
+        if(si){entry.dosage=si.dosage||"";entry.dosage_ja=si.dosage_ja||"";entry.safe=si.safe;entry.notes=si.notes||"";entry.notes_ja=si.notes_ja||"";}
+        matched.push(entry);
+        if(matched.length>=10)break;
+      }
+    }
+    if(!matched.length)return;
+    const container=document.createElement("div");
+    container.style.cssText="margin-top:10px;border-top:1px solid var(--gray-200);padding-top:10px";
+    container.innerHTML=renderMentionedDrugs({mentioned_drugs:matched});
+    detail.appendChild(container);
+  }
+
+  if(allDrugs.length>0){doMatch();return;}
+  /* Drugs not loaded yet — fetch them */
+  fetchWithTimeout("/api/drugs").then(r=>r.json()).then(data=>{
+    if(!allDrugs.length){allDrugs=data.drugs||[];}
+    doMatch();
+  }).catch(()=>{});
 }
 
 /* Debounce utility */
