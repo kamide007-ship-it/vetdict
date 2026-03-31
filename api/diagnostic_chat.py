@@ -1170,6 +1170,18 @@ SYMPTOM_ALIASES = {
     "ゲーゲー": "vomiting",
     "水ばかり飲む": "increased_water_intake",
     "丸まっている": "hunched_posture", "丸くなっている": "hunched_posture",
+    # English pet owner phrases (additional)
+    "runny eyes": "eye_discharge", "watery eye": "eye_discharge",
+    "bald spots": "fur_loss_patches", "bald patch": "fur_loss_patches",
+    "losing fur": "fur_loss_patches", "losing hair": "hair_loss",
+    "won't walk": "reluctance_to_move",
+    "stopped eating": "appetite_loss",
+    "throwing up blood": "bloody_stool",
+    "swollen eye": "eye_swelling", "puffy eye": "eye_swelling",
+    "keeps scratching": "itching", "constantly scratching": "itching",
+    "trouble breathing": "dyspnea", "hard to breathe": "dyspnea",
+    "peeing blood": "blood_in_urine",
+    "straining to poop": "straining_to_defecate",
 }
 
 
