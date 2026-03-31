@@ -273,7 +273,14 @@ def ensure_json_response(f):
 
 @app.before_request
 def generate_csp_nonce():
-    """Generate a per-request nonce for Content Security Policy."""
+    """Generate a per-request nonce kept for template <script> tags.
+
+    The nonce is no longer referenced in the CSP header (we use
+    'unsafe-inline' + host allowlists instead so GA4 inline event
+    handlers are not blocked), but templates still carry
+    ``nonce="{{ g.csp_nonce }}"`` on their ``<script>`` tags for
+    forward-compatibility if we re-enable nonce-based CSP later.
+    """
     g.csp_nonce = secrets.token_urlsafe(16)
 
 
@@ -287,10 +294,14 @@ def add_headers(response):
     response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
 
     # Content Security Policy (prevent XSS, clickjacking, etc.)
-    nonce = getattr(g, 'csp_nonce', '')
+    # Note: nonce + 'unsafe-inline' causes browsers to ignore 'unsafe-inline'
+    # (CSP Level 2 spec), and 'strict-dynamic' causes host allowlists to be
+    # ignored.  GA4/GTM injects inline event handlers that cannot carry a nonce,
+    # so we use 'unsafe-inline' + explicit host allowlists without nonce/
+    # strict-dynamic to avoid blocking GA tracking after diagnosis events.
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        f"script-src 'self' 'nonce-{nonce}' 'strict-dynamic' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
+        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: https:; "
         "font-src 'self' https:; "
