@@ -2288,7 +2288,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian / Testicular Neoplasia",
         "name_ja": "卵巣・精巣腫瘍",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy"},
         "description": "Ovarian / Testicular Neoplasia is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "生殖腺腫瘍による生殖機能障害。",
         "urgency": "moderate",
@@ -2351,7 +2351,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Egg-related Coelomitis",
         "name_ja": "卵関連体腔炎",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "respiratory_distress"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "respiratory_distress"},
         "description": "Egg-related Coelomitis is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "破裂卵胞や停滞卵による腹膜炎。",
         "urgency": "emergency",
@@ -2372,7 +2372,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Follicular Stasis (Chronic)",
         "name_ja": "慢性濾胞停滞",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy"},
         "description": "Follicular Stasis (Chronic) is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "排卵前卵胞の慢性停滞。",
         "urgency": "high",
@@ -2666,7 +2666,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Substrate Impaction (Non-GI)",
         "name_ja": "床材インパクション（消化管外型）",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy"},
         "description": "Substrate Impaction (Non-GI) involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "単純な便秘とは異なる床材による消化管閉塞。",
         "urgency": "high",
@@ -2687,7 +2687,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Volvulus / Intussusception",
         "name_ja": "腸捻転・腸重積",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "sudden_death"},
+        "symptoms": {"abdominal_swelling", "anorexia", "lethargy", "sudden_death"},
         "description": "Intestinal Volvulus / Intussusception is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "腸管の捻転・嵌入。",
         "urgency": "emergency",
@@ -3152,7 +3152,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "toe_swelling": "body", "swelling": "body",
     "abdominal_swelling": "body", "cloacal_swelling": "body",
     "dry_mucous_membranes": "body", "organ_enlargement": "body",
-    "head_swelling": "body", "abdominal_distension": "body",
+    "head_swelling": "body",
     "generalized_swelling": "body", "muscle_wasting": "body",
     "rapid_growth": "body", "swelling_behind_jaw": "body",
     # 行動・活動
@@ -3279,7 +3279,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "granulomatous_lesions": {"ja": "肉芽腫性病変", "en": "Granulomatous lesions"},
 
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
-    "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
     "anemia": {"ja": "貧血", "en": "Anemia"},
     "ataxia": {"ja": "運動失調", "en": "Ataxia"},
     "bone_swelling": {"ja": "骨腫脹", "en": "Bone swelling"},
