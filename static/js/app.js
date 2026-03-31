@@ -337,10 +337,31 @@ document.addEventListener("DOMContentLoaded",async()=>{
         if(e.key==="Enter"||e.key===" "){e.preventDefault();refHeader.click();}
       });
     }
+    /* Returning user welcome */
+    showReturningUserBanner();
   }catch(e){
     console.error("Error in DOMContentLoaded:",e);
   }
 });
+
+function showReturningUserBanner(){
+  const history=loadDiagnosisHistory();
+  if(!history.length)return;
+  const heroContent=document.querySelector(".hero-content");
+  if(!heroContent)return;
+  const lastEntry=history[0];
+  const sp=SPECIES.find(s=>s.id===lastEntry.species);
+  if(!sp)return;
+  const spName=currentLang==="ja"?sp.name:sp.nameEn;
+  const topDisease=lastEntry.topDiseases&&lastEntry.topDiseases[0]?(currentLang==="ja"?(lastEntry.topDiseases[0].name_ja||lastEntry.topDiseases[0].name):lastEntry.topDiseases[0].name):"";
+  const date=new Date(lastEntry.date).toLocaleDateString(currentLang==="ja"?"ja-JP":"en-US",{month:"short",day:"numeric"});
+  const banner=document.createElement("div");
+  banner.style.cssText="margin-top:12px;padding:10px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:8px;font-size:.82rem;color:rgba(255,255,255,.9);backdrop-filter:blur(4px)";
+  banner.innerHTML=currentLang==="ja"
+    ?`📋 前回の診断: <strong>${escapeHtml(spName)}</strong> — ${escapeHtml(topDisease)} (${date}) <a href="/?species=${lastEntry.species}#checker" style="color:var(--green);margin-left:8px;font-weight:600">続きを見る →</a>`
+    :`📋 Last diagnosis: <strong>${escapeHtml(spName)}</strong> — ${escapeHtml(topDisease)} (${date}) <a href="/?species=${lastEntry.species}#checker" style="color:var(--green);margin-left:8px;font-weight:600">Continue →</a>`;
+  heroContent.appendChild(banner);
+}
 
 /* --- Hamburger menu --- */
 function setupHamburger(){
