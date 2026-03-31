@@ -895,6 +895,19 @@ function renderResults(data){
   if(diseases.length===0){area.innerHTML=`<div class="results-empty"><span class="big-icon">\u2705</span><p>${t("noDiseasesFound")}</p></div>`;return;}
   const sevLabels=t("sevLabels");
   let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
+  /* Next steps banner based on severity */
+  const nextSteps=currentLang==="ja"?{
+    emergency:"⚠️ 緊急：直ちに獣医師の診察を受けてください。応急処置が必要な場合があります。",
+    high:"🔴 早急に獣医師の診察を予約してください。24時間以内の受診を推奨します。",
+    moderate:"🟡 近日中に獣医師にご相談ください。経過観察しながら1週間以内の受診を推奨します。",
+    low:"🟢 通常の健康診断時にご相談ください。症状が悪化した場合は早めの受診を。",
+  }:{
+    emergency:"⚠️ Emergency: Seek immediate veterinary care. First aid may be required.",
+    high:"🔴 Schedule a veterinary visit urgently. Within 24 hours recommended.",
+    moderate:"🟡 Consult your veterinarian soon. Visit within 1 week recommended.",
+    low:"🟢 Discuss at next routine checkup. Seek earlier care if symptoms worsen.",
+  };
+  if(nextSteps[severity])html+=`<div style="padding:10px 14px;margin-bottom:12px;border-radius:var(--radius);font-size:.84rem;font-weight:500;background:var(--gray-50);border-left:4px solid ${severity==='emergency'||severity==='high'?'#ef4444':severity==='moderate'?'#f59e0b':'#22a853'}">${nextSteps[severity]}</div>`;
   if(data.lab_boost_applied&&data.lab_values){
     const labNames={bun:"BUN",creatinine:"Cre",sdma:"SDMA",alt:"ALT",alp:"ALP",ggt:"GGT",tbil:"T-Bil",albumin:"Alb",glucose:"Glu",lipase:"Lipase",potassium:"K",sodium:"Na",calcium:"Ca",phosphorus:"P",wbc:"WBC",pcv:"PCV",platelets:"PLT",t4:"T4",crp:"CRP",usg:"USG"};
     const sp=currentSpecies||"dog";
@@ -2101,7 +2114,10 @@ function loadDrugDictionary(){
     const spSelect=document.getElementById("drugSpeciesFilter");
     spSelect.innerHTML=`<option value="">${t("allSpecies")}</option>`;
     SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(sp.id)}">${escapeHtml(primary)} ${escapeHtml(secondary)}</option>`);});
-    drugsLoaded=true;renderDrugList();
+    drugsLoaded=true;
+    /* Auto-select current species in drug filter */
+    if(currentSpecies){spSelect.value=currentSpecies;}
+    renderDrugList();
   }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
   document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
   document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
