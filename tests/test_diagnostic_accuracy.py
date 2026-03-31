@@ -148,6 +148,40 @@ class TestHedgehogDiagnosticAccuracy:
 
 
 # =========================================================================
+# Ferret diagnostic accuracy
+# =========================================================================
+class TestFerretDiagnosticAccuracy:
+    def test_adrenal_disease(self):
+        """Ferret: adrenal disease with classic signs."""
+        _assert_diagnosis("ferret",
+            ["hair_loss", "vulvar_swelling", "aggression", "itching"],
+            "adrenal", min_confidence=80)
+
+    def test_insulinoma(self):
+        """Ferret: insulinoma — islet cell in top 3."""
+        results = _match_species_symptoms_to_diseases(
+            ["lethargy", "weakness", "weight_loss", "seizures"], "ferret")
+        names = [(r.get("name_en", "")).lower() for r in results[:3]]
+        assert any("insulinoma" in n or "islet" in n for n in names), (
+            f"Insulinoma not in top 3: {names}"
+        )
+
+
+# =========================================================================
+# Sugar glider diagnostic accuracy
+# =========================================================================
+class TestSugarGliderDiagnosticAccuracy:
+    def test_nutritional_deficiency(self):
+        """Sugar glider: nutritional disease."""
+        results = _match_species_symptoms_to_diseases(
+            ["lethargy", "weakness", "weight_loss", "tremors"], "sugar_glider")
+        names = [(r.get("name_en", "")).lower() for r in results[:5]]
+        assert any("calcium" in n or "nutrition" in n or "metabolic" in n for n in names), (
+            f"No nutritional disease in top 5: {names}"
+        )
+
+
+# =========================================================================
 # Low-information confidence cap
 # =========================================================================
 class TestLowInfoConfidenceCap:
