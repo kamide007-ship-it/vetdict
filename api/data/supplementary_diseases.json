@@ -15655,7 +15655,7 @@
     "symptoms": [
       "bleeding",
       "fecal_incontinence",
-      "lameness",
+      "limping",
       "non_weight_bearing",
       "pain",
       "reduced_activity",
@@ -15687,7 +15687,7 @@
     "symptoms": [
       "bleeding",
       "fecal_incontinence",
-      "lameness",
+      "limping",
       "non_weight_bearing",
       "pain",
       "reduced_activity",
@@ -15836,7 +15836,7 @@
       "abdominal_distension",
       "appetite_loss",
       "behavioral_changes",
-      "lameness",
+      "limping",
       "lethargy",
       "respiratory_distress",
       "skin_masses",
@@ -15930,7 +15930,7 @@
       "abdominal_distension",
       "appetite_loss",
       "behavioral_changes",
-      "lameness",
+      "limping",
       "lethargy",
       "respiratory_distress",
       "skin_masses",
@@ -17672,7 +17672,7 @@
     "symptoms": [
       "bleeding",
       "fecal_incontinence",
-      "lameness",
+      "limping",
       "non_weight_bearing",
       "pain",
       "reduced_activity",
@@ -65619,7 +65619,7 @@
     "species": "Exotic Other",
     "symptoms": [
       "abnormal_posture_invert",
-      "ataxia",
+      "incoordination",
       "circling",
       "fever",
       "head_tilt",
@@ -66014,13 +66014,11 @@
     "symptoms": [
       "abdominal_pain",
       "anorexia",
-      "blood_in_urine",
       "dehydration",
       "hematuria",
       "lethargy",
       "polydipsia",
       "polyuria",
-      "straining_to_urinate",
       "straining_urinate"
     ],
     "description": "Urolithiasis in Exotic Other",

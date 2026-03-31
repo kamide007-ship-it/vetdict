@@ -193,7 +193,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Iron Storage Disease (Hemochromatosis)",
         "name_ja": "鉄過剰症（ヘモクロマトーシス）",
-        "symptoms": {"lethargy", "weight_loss", "distended_abdomen", "jaundice"},
+        "symptoms": {"lethargy", "weight_loss", "abdominal_distension", "jaundice"},
         "description": "Iron Storage Disease (Hemochromatosis) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "臓器、特に肝臓への過剰な鉄蓄積。",
         "urgency": "high",
@@ -902,7 +902,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyometra",
         "name_ja": "子宮蓄膿症",
-        "symptoms": {"vaginal_discharge", "lethargy", "poor_appetite", "distended_abdomen", "fever"},
+        "symptoms": {"vaginal_discharge", "lethargy", "poor_appetite", "abdominal_distension", "fever"},
         "description": "Pyometra is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "未避妊の雌で子宮内に膿が蓄積する感染症。",
         "urgency": "emergency",
@@ -1118,7 +1118,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatic Lipidosis (Fatty Liver)",
         "name_ja": "肝リピドーシス（脂肪肝）",
-        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "jaundice", "distended_abdomen"},
+        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "jaundice", "abdominal_distension"},
         "description": "Hepatic Lipidosis (Fatty Liver) is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "高脂肪食や長期の食欲不振による脂肪肝。",
         "urgency": "high",
@@ -1225,7 +1225,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Abdominal Neoplasia",
         "name_ja": "腹腔内腫瘍",
-        "symptoms": {"distended_abdomen", "weight_loss", "poor_appetite", "lethargy"},
+        "symptoms": {"abdominal_distension", "weight_loss", "poor_appetite", "lethargy"},
         "description": "Abdominal Neoplasia is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "腹腔内の腫瘍により進行性の腹部膨満が生じる。",
         "urgency": "high",
@@ -1399,7 +1399,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nutritional Secondary Hyperparathyroidism (NSHP)",
         "name_ja": "栄養性二次性副甲状腺機能亢進症（NSHP）",
-        "symptoms": {"hind_limb_weakness", "inability_to_climb", "pathological_fractures", "seizures", "tremors"},
+        "symptoms": {"hind_limb_weakness", "inability_to_climb", "pathological_fracture", "seizures", "tremors"},
         "description": "Nutritional Secondary Hyperparathyroidism (NSHP) is a nutritional or metabolic disorder caused by dietary imbalance or deficiency.",
         "description_ja": "食事中のカルシウム:リン比の不適切さによる重度の代謝性骨疾患。飼育下フクロモモンガの最も一般的な致死的疾患です。",
         "urgency": "high",
@@ -1756,7 +1756,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatic Neoplasia",
         "name_ja": "肝臓腫瘍",
-        "symptoms": {"abdominal_distension", "appetite_loss", "jaundice", "lethargy", "weight_loss"},
+        "symptoms": {"abdominal_distension", "poor_appetite", "jaundice", "lethargy", "weight_loss"},
         "description": "Hepatic Neoplasia is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "進行性肝不全を引き起こす原発性または転移性肝臓腫瘍です。",
         "urgency": "high",
@@ -1777,7 +1777,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Splenic Lymphoma",
         "name_ja": "脾臓リンパ腫",
-        "symptoms": {"appetite_loss", "lethargy", "splenomegaly", "weight_loss"},
+        "symptoms": {"poor_appetite", "lethargy", "splenomegaly", "weight_loss"},
         "description": "Splenic Lymphoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "主に脾臓に影響するリンパ腫で、著明な脾腫大を引き起こします。",
         "urgency": "high",
@@ -2008,7 +2008,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Gastrointestinal Candidiasis",
         "name_ja": "消化管カンジダ症",
-        "symptoms": {"appetite_loss", "diarrhea", "oral_plaques", "weight_loss"},
+        "symptoms": {"poor_appetite", "diarrhea", "oral_plaques", "weight_loss"},
         "description": "Gastrointestinal Candidiasis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "免疫抑制、抗生物質使用、高糖質食による消化管の酵母過増殖です。",
         "urgency": "moderate",
@@ -2029,7 +2029,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pasteurellosis",
         "name_ja": "パスツレラ症",
-        "symptoms": {"abscesses", "fever", "lethargy", "nasal_discharge", "respiratory_distress"},
+        "symptoms": {"abscess", "fever", "lethargy", "nasal_discharge", "respiratory_distress"},
         "description": "Pasteurellosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "パスツレラ属による細菌感染で、呼吸器疾患と膿瘍形成を引き起こします。",
         "urgency": "high",
@@ -2134,7 +2134,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "symptoms": {"appetite_loss", "blood_in_urine", "fever", "lethargy", "polydipsia"},
+        "symptoms": {"poor_appetite", "blood_in_urine", "fever", "lethargy", "polydipsia"},
         "description": "Pyelonephritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "下部尿路疾患からの上行性腎臓細菌感染です。",
         "urgency": "high",
@@ -2239,7 +2239,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Vertebral Fracture",
         "name_ja": "椎骨骨折",
-        "symptoms": {"hind_limb_paralysis", "inability_to_climb", "incontinence", "pain"},
+        "symptoms": {"hind_leg_paralysis", "inability_to_climb", "incontinence", "pain"},
         "description": "Vertebral Fracture involves traumatic injury requiring assessment of damage extent and appropriate stabilization and repair.",
         "description_ja": "落下、ケージ内外傷、代謝性骨疾患による椎骨の骨折です。",
         "urgency": "emergency",
@@ -2344,7 +2344,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dental Abscess (Molar)",
         "name_ja": "歯の膿瘍（臼歯）",
-        "symptoms": {"appetite_loss", "drooling", "facial_swelling", "weight_loss"},
+        "symptoms": {"poor_appetite", "drooling", "facial_swelling", "weight_loss"},
         "description": "Dental Abscess (Molar) is a dental condition affecting tooth structure, alignment, or oral health.",
         "description_ja": "臼歯の歯根部の膿瘍で、顔面腫脹と摂食困難を引き起こします。",
         "urgency": "high",
@@ -2365,7 +2365,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Periodontal Disease",
         "name_ja": "歯周病",
-        "symptoms": {"appetite_loss", "drooling", "foul_breath", "gum_redness", "loose_teeth"},
+        "symptoms": {"poor_appetite", "drooling", "foul_breath", "gum_redness", "loose_teeth"},
         "description": "Periodontal Disease is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "歯石と細菌蓄積による歯肉と支持構造の炎症と感染です。",
         "urgency": "moderate",
@@ -2386,7 +2386,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Incisor Fracture",
         "name_ja": "切歯骨折",
-        "symptoms": {"appetite_loss", "bleeding_from_mouth", "difficulty_eating", "drooling"},
+        "symptoms": {"poor_appetite", "bleeding_from_mouth", "difficulty_eating", "drooling"},
         "description": "Incisor Fracture involves traumatic injury requiring assessment of damage extent and appropriate stabilization and repair.",
         "description_ja": "ケージバーの齧りや外傷による切歯の骨折で、歯髄が露出する可能性があります。",
         "urgency": "moderate",
@@ -2407,7 +2407,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pancreatitis",
         "name_ja": "膵炎",
-        "symptoms": {"abdominal_pain", "appetite_loss", "diarrhea", "lethargy", "vomiting"},
+        "symptoms": {"abdominal_pain", "poor_appetite", "diarrhea", "lethargy", "vomiting"},
         "description": "Pancreatitis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "高脂肪または高糖質の食事による膵臓の炎症です。",
         "urgency": "high",
@@ -2428,7 +2428,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Candidiasis",
         "name_ja": "腸管カンジダ症",
-        "symptoms": {"appetite_loss", "diarrhea", "lethargy", "weight_loss"},
+        "symptoms": {"poor_appetite", "diarrhea", "lethargy", "weight_loss"},
         "description": "Intestinal Candidiasis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "腸管内の酵母過増殖で吸収不良と慢性下痢を引き起こします。",
         "urgency": "moderate",
@@ -2491,7 +2491,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Obesity-Related Hepatic Lipidosis",
         "name_ja": "肥満関連肝リピドーシス",
-        "symptoms": {"abdominal_distension", "appetite_loss", "jaundice", "lethargy", "obesity"},
+        "symptoms": {"abdominal_distension", "poor_appetite", "jaundice", "lethargy", "obesity"},
         "description": "Obesity-Related Hepatic Lipidosis is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "特にミールワームやナッツなどの高脂肪食の慢性的な過食による脂肪肝です。",
         "urgency": "high",
@@ -2575,7 +2575,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Otitis Media / Interna",
         "name_ja": "中耳炎/内耳炎",
-        "symptoms": {"appetite_loss", "balance_loss", "circling", "head_tilt", "nystagmus"},
+        "symptoms": {"poor_appetite", "balance_loss", "circling", "head_tilt", "nystagmus"},
         "description": "Otitis Media / Interna is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "中耳または内耳に影響する深部耳感染で、前庭症状を引き起こします。",
         "urgency": "high",
@@ -2638,7 +2638,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intestinal Obstruction",
         "name_ja": "腸閉塞",
-        "symptoms": {"abdominal_distension", "appetite_loss", "lethargy", "reduced_fecal_output", "vomiting"},
+        "symptoms": {"abdominal_distension", "poor_appetite", "lethargy", "reduced_fecal_output", "vomiting"},
         "description": "Intestinal Obstruction is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "異物、腫瘍、腸重積による腸の閉塞です。",
         "urgency": "emergency",
@@ -2659,7 +2659,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Lead Poisoning",
         "name_ja": "鉛中毒",
-        "symptoms": {"appetite_loss", "ataxia", "diarrhea", "lethargy", "seizures"},
+        "symptoms": {"poor_appetite", "ataxia", "diarrhea", "lethargy", "seizures"},
         "description": "Lead Poisoning is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "ケージ外探索中の鉛塗料、はんだ、その他の鉛含有物質の摂取による中毒症です。",
         "urgency": "emergency",
@@ -2680,7 +2680,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "symptoms": {"anemia", "appetite_loss", "jaundice", "lethargy"},
+        "symptoms": {"anemia", "poor_appetite", "jaundice", "lethargy"},
         "description": "Zinc Toxicosis is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "亜鉛メッキされたケージ部品を齧ることによる溶血性貧血を伴う中毒です。",
         "urgency": "high",
@@ -2827,7 +2827,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Aflatoxicosis",
         "name_ja": "アフラトキシン中毒",
-        "symptoms": {"appetite_loss", "lethargy", "weight_loss", "diarrhea",
+        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "diarrhea",
                       "jaundice", "sudden_death"},
         "description": "Toxic hepatopathy from ingestion of aflatoxin-contaminated food, particularly corn and peanuts.",
         "description_ja": "カビ毒（アフラトキシン）に汚染された食品の摂取による肝臓障害。"
@@ -2878,7 +2878,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "flea_dirt": "skin", "bumping_into_objects": "skin",
     "membrane_tear": "skin", "scratching_ear": "skin",
     "abdominal_mass": "skin", "abscess": "skin",
-    "abscesses": "skin", "bite_wounds": "skin",
+    "bite_wounds": "skin",
     "bleeding_from_mass": "skin", "cloacal_mass": "skin",
     "enlarged_scent_gland": "skin", "excessive_oily_secretion": "skin",
     "foul_odor": "skin", "foul_odor_from_pouch": "skin",
@@ -2910,7 +2910,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "straining": "digestive", "vomiting": "digestive",
     "tissue_protrusion_anus": "digestive", "drooling": "digestive",
     "bad_breath": "digestive", "teeth_grinding": "digestive",
-    "appetite_loss": "digestive", "difficulty_eating": "digestive",
+    "difficulty_eating": "digestive",
     "foul_breath": "digestive", "loose_teeth": "digestive",
     "oral_plaques": "digestive",
     # 骨格・四肢
@@ -2918,9 +2918,9 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "lameness": "musculoskeletal", "limb_deformity": "musculoskeletal",
     "bone_pain": "musculoskeletal", "deformities": "musculoskeletal",
     "exposed_bone": "musculoskeletal", "hind_limb_lameness": "musculoskeletal",
-    "hind_limb_paralysis": "musculoskeletal", "hind_limb_weakness": "musculoskeletal",
+    "hind_limb_weakness": "musculoskeletal",
     "limb_swelling": "musculoskeletal", "pathological_fracture": "musculoskeletal",
-    "pathological_fractures": "musculoskeletal", "soft_bones": "musculoskeletal",
+    "soft_bones": "musculoskeletal",
     # 神経
     "seizures": "neurological", "tremors": "neurological",
     "muscle_twitching": "neurological", "hind_leg_paralysis": "neurological",
@@ -2947,7 +2947,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "muscle_wasting": "body", "dehydration": "body",
     "dry_mucous_membranes": "body", "swelling": "body",
     "facial_swelling": "body", "joey_failure_to_thrive": "body",
-    "distended_abdomen": "body", "lymph_node_swelling": "body",
+    "lymph_node_swelling": "body",
     "abdominal_distension": "body", "abdominal_pain": "body",
     "ascites": "body", "edema": "body",
     "membrane_swelling": "body", "mild_swelling": "body",
@@ -3087,7 +3087,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "frequent_urination": {"ja": "頻尿", "en": "Frequent Urination"},
     # Hepatic
     "jaundice": {"ja": "黄疸", "en": "Jaundice"},
-    "distended_abdomen": {"ja": "腹部膨満", "en": "Distended Abdomen"},
     # Neoplasia
     "lymph_node_swelling": {"ja": "リンパ節の腫脹", "en": "Lymph Node Swelling"},
     # Musculoskeletal
@@ -3105,9 +3104,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "abdominal_mass": {"ja": "腹部腫瘤", "en": "Abdominal Mass"},
     "abdominal_pain": {"ja": "腹痛", "en": "Abdominal pain"},
     "abscess": {"ja": "膿瘍", "en": "Abscess"},
-    "abscesses": {"ja": "膿瘍", "en": "Abscesses"},
     "anemia": {"ja": "貧血", "en": "Anemia"},
-    "appetite_loss": {"ja": "食欲低下", "en": "Appetite loss"},
     "ascites": {"ja": "腹水", "en": "Ascites"},
     "ataxia": {"ja": "運動失調", "en": "Ataxia"},
     "attention_seeking": {"ja": "注目要求行動", "en": "Attention Seeking"},
@@ -3144,7 +3141,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "hair_thinning": {"ja": "被毛の菲薄化", "en": "Hair Thinning"},
     "hepatitis": {"ja": "肝炎", "en": "Hepatitis"},
     "hind_limb_lameness": {"ja": "後肢跛行", "en": "Hind Limb Lameness"},
-    "hind_limb_paralysis": {"ja": "後肢麻痺", "en": "Hind limb paralysis"},
     "hind_limb_weakness": {"ja": "後肢の衰弱", "en": "Hind limb weakness"},
     "hypothermic_joey": {"ja": "低体温の仔", "en": "Hypothermic Joey"},
     "immunosuppression": {"ja": "免疫抑制", "en": "Immunosuppression"},
@@ -3169,7 +3165,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "opisthotonos": {"ja": "後弓反張", "en": "Opisthotonos"},
     "oral_plaques": {"ja": "口腔プラーク", "en": "Oral Plaques"},
     "pathological_fracture": {"ja": "病的骨折", "en": "Pathological Fracture"},
-    "pathological_fractures": {"ja": "病的骨折", "en": "Pathological Fractures"},
     "penile_injury": {"ja": "陰茎の損傷", "en": "Penile Injury"},
     "penile_tissue_loss": {"ja": "陰茎組織の欠損", "en": "Penile Tissue Loss"},
     "pneumonia": {"ja": "肺炎", "en": "Pneumonia"},

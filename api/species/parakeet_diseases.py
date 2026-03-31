@@ -74,7 +74,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "French Moult",
         "name_ja": "フレンチモールト",
-        "symptoms": {"feather_loss", "abnormal_feathers", "flight_inability", "stunted_growth"},
+        "symptoms": {"feather_loss", "abnormal_feathers", "inability_to_fly", "stunted_growth"},
         "description": "French Moult is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "ポリオーマウイルスに関連し、若齢セキセイインコの風切羽や尾羽が脱落する疾患。",
         "urgency": "moderate",
@@ -2048,7 +2048,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Avian Herpesvirus Infection",
         "name_ja": "鳥ヘルペスウイルス感染症",
-        "symptoms": {"appetite_loss", "diarrhea", "lethargy", "liver_enlargement", "sudden_death"},
+        "symptoms": {"decreased_appetite", "diarrhea", "lethargy", "liver_enlargement", "sudden_death"},
         "description": "Avian Herpesvirus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "ヘルペスウイルスによる肝炎と高致死率。パチェコ病とは異なるインコの感染症。",
         "urgency": "emergency",
@@ -2090,7 +2090,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Adenovirus Infection",
         "name_ja": "アデノウイルス感染症",
-        "symptoms": {"appetite_loss", "diarrhea", "lethargy", "liver_enlargement", "sudden_death"},
+        "symptoms": {"decreased_appetite", "diarrhea", "lethargy", "liver_enlargement", "sudden_death"},
         "description": "Adenovirus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "鳥アデノウイルスによる若鳥の肝壊死と腸炎。",
         "urgency": "high",
@@ -2447,7 +2447,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pasteurellosis",
         "name_ja": "パスツレラ症",
-        "symptoms": {"lethargy", "nasal_discharge", "respiratory_distress", "sudden_death", "swollen_joints"},
+        "symptoms": {"lethargy", "nasal_discharge", "respiratory_distress", "sudden_death", "joint_swelling"},
         "description": "Pasteurellosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "パスツレラ・ムルトシダ感染で、猫の咬傷から感染することが多い。",
         "urgency": "emergency",
@@ -2510,7 +2510,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Erysipelas",
         "name_ja": "丹毒",
-        "symptoms": {"cyanosis", "lethargy", "skin_lesions", "sudden_death", "swollen_joints"},
+        "symptoms": {"cyanosis", "lethargy", "skin_lesions", "sudden_death", "joint_swelling"},
         "description": "Erysipelas is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "エリシペロスリクス・ルシオパシエによる敗血症。",
         "urgency": "emergency",
@@ -2636,7 +2636,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pancreatitis",
         "name_ja": "膵炎",
-        "symptoms": {"appetite_loss", "diarrhea", "lethargy", "vomiting", "weight_loss"},
+        "symptoms": {"decreased_appetite", "diarrhea", "lethargy", "vomiting", "weight_loss"},
         "description": "Pancreatitis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "膵臓の炎症による消化・代謝機能障害。",
         "urgency": "high",
@@ -2699,7 +2699,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Proventricular Ulceration",
         "name_ja": "腺胃潰瘍",
-        "symptoms": {"appetite_loss", "dark_droppings", "lethargy", "regurgitation", "weight_loss"},
+        "symptoms": {"decreased_appetite", "dark_droppings", "lethargy", "regurgitation", "weight_loss"},
         "description": "Proventricular Ulceration is an erosive lesion of tissue requiring treatment to promote healing and prevent complications.",
         "description_ja": "感染・ストレス・毒素による腺胃粘膜の潰瘍。",
         "urgency": "high",
@@ -2720,7 +2720,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Gastrointestinal Foreign Body",
         "name_ja": "消化管異物",
-        "symptoms": {"appetite_loss", "crop_distension", "lethargy", "regurgitation", "weight_loss"},
+        "symptoms": {"decreased_appetite", "crop_distension", "lethargy", "regurgitation", "weight_loss"},
         "description": "Gastrointestinal Foreign Body is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "異物の摂取による素嚢・腺胃・砂嚢の閉塞。",
         "urgency": "high",
@@ -3014,7 +3014,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Vitamin K Deficiency",
         "name_ja": "ビタミンK欠乏症",
-        "symptoms": {"bruising", "dark_droppings", "hemorrhage", "weakness"},
+        "symptoms": {"bruising", "dark_droppings", "bleeding", "weakness"},
         "description": "Vitamin K Deficiency is a nutritional or metabolic disorder caused by dietary imbalance or deficiency.",
         "description_ja": "ビタミンK欠乏による凝固障害と出血。",
         "urgency": "high",
@@ -3182,7 +3182,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Rodenticide Poisoning",
         "name_ja": "殺鼠剤中毒",
-        "symptoms": {"dark_droppings", "hemorrhage", "lethargy", "weakness"},
+        "symptoms": {"dark_droppings", "bleeding", "lethargy", "weakness"},
         "description": "Rodenticide Poisoning is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "抗凝固性殺鼠剤による凝固障害と内出血。",
         "urgency": "emergency",
@@ -3308,7 +3308,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hippoboscid Fly Infestation",
         "name_ja": "シラミバエ寄生症",
-        "symptoms": {"anemia", "feather_damage", "pruritus", "restlessness"},
+        "symptoms": {"anemia", "feather_damage", "itching", "restlessness"},
         "description": "Hippoboscid Fly Infestation is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "シラミバエ寄生による刺激と失血。",
         "urgency": "low",
@@ -3329,7 +3329,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Reproductive Tract Infection (Salpingitis)",
         "name_ja": "生殖器感染症（卵管炎）",
-        "symptoms": {"abdominal_distension", "appetite_loss", "discharge_from_vent", "lethargy", "straining"},
+        "symptoms": {"abdominal_distension", "decreased_appetite", "discharge_from_vent", "lethargy", "straining"},
         "description": "Reproductive Tract Infection (Salpingitis) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "卵管の細菌感染による腹膜炎。",
         "urgency": "high",
@@ -3455,7 +3455,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Crop Mycosis",
         "name_ja": "素嚢真菌症",
-        "symptoms": {"appetite_loss", "crop_stasis", "regurgitation", "white_patches_in_mouth"},
+        "symptoms": {"decreased_appetite", "crop_stasis", "regurgitation", "white_patches_in_mouth"},
         "description": "Crop Mycosis is a fungal infection that can affect skin, respiratory, or systemic organs.",
         "description_ja": "抗生物質や免疫抑制に続発する素嚢の真菌増殖。",
         "urgency": "moderate",
@@ -4486,7 +4486,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "French Moult – Severe",
         "name_ja": "フレンチモールト重症型",
-        "symptoms": {"abnormal_feathers", "feather_loss", "flight_inability", "lethargy", "stunted_growth"},
+        "symptoms": {"abnormal_feathers", "feather_loss", "inability_to_fly", "lethargy", "stunted_growth"},
         "description": "French Moult – Severe is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "風切羽・尾羽の完全喪失を伴うポリオーマウイルス関連羽毛障害の重症型。",
         "urgency": "high",
@@ -5322,10 +5322,10 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "crusty_skin": "skin", "dark_skin_masses": "skin",
     "dermatitis": "skin", "feather_abnormalities": "skin",
     "feather_cysts": "skin", "feather_damage": "skin",
-    "granulomatous_lesions": "skin", "hemorrhage": "skin",
+    "granulomatous_lesions": "skin",
     "internal_hemorrhage": "skin", "maggots_visible": "skin",
     "matted_feathers": "skin", "poor_feather_quality": "skin",
-    "pruritus": "skin", "redness": "skin",
+    "redness": "skin",
     "skin_masses": "skin", "swollen_feet": "skin",
     "thickened_skin": "skin", "tissue_necrosis": "skin",
     "ulcerated_mass": "skin", "white_patches_in_mouth": "skin",
@@ -5351,7 +5351,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "bloody_droppings": "digestive", "segments_in_droppings": "digestive",
     "beak_overgrowth": "digestive", "straining": "digestive",
     "cloacal_prolapse": "digestive", "vent_soiling": "digestive",
-    "increased_appetite": "digestive", "appetite_loss": "digestive",
+    "increased_appetite": "digestive",
     "crop_distension": "digestive", "dark_droppings": "digestive",
     "diarrhea_green": "digestive", "difficulty_eating": "digestive",
     "oral_irritation": "digestive", "oral_lesions": "digestive",
@@ -5363,7 +5363,6 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "pathological_fractures": "musculoskeletal", "bone_deformity": "musculoskeletal",
     "bone_swelling": "musculoskeletal", "crepitus": "musculoskeletal",
     "curled_toes": "musculoskeletal", "fractures": "musculoskeletal",
-    "swollen_joints": "musculoskeletal",
     # 神経
     "neurological_signs": "neurological", "head_tilt": "neurological",
     "seizures": "neurological", "tremors": "neurological",
@@ -5390,7 +5389,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "organ_enlargement": "body", "poor_growth": "body",
     "splenomegaly": "body", "swelling_at_tail_base": "body",
     # 行動・活動
-    "lethargy": "behavior", "flight_inability": "behavior",
+    "lethargy": "behavior",
     "fluffed_feathers": "behavior", "restlessness_at_night": "behavior",
     "decreased_activity": "behavior", "inability_to_perch": "behavior",
     "pain_response": "behavior", "inability_to_fly": "behavior",
@@ -5421,7 +5420,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
     "subcutaneous_hemorrhage": {"ja": "皮下出血", "en": "Subcutaneous hemorrhage"},
     "stunted_growth": {"ja": "発育不良", "en": "Stunted growth"},
-    "flight_inability": {"ja": "飛翔不能", "en": "Flight inability"},
     "skin_lesions": {"ja": "皮膚病変", "en": "Skin lesions"},
     "scabs_on_skin": {"ja": "皮膚の痂皮", "en": "Scabs on skin"},
     "respiratory_distress": {"ja": "呼吸困難", "en": "Respiratory distress"},
@@ -5509,7 +5507,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "bleeding": {"ja": "出血", "en": "Bleeding"},
 
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
-    "appetite_loss": {"ja": "食欲低下", "en": "Appetite loss"},
     "ascites": {"ja": "腹水", "en": "Ascites"},
     "ataxia": {"ja": "運動失調", "en": "Ataxia"},
     "blindness": {"ja": "失明", "en": "Blindness"},
@@ -5539,7 +5536,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "fractures": {"ja": "骨折", "en": "Fractures"},
     "gasping": {"ja": "あえぎ呼吸", "en": "Gasping"},
     "granulomatous_lesions": {"ja": "肉芽腫性病変", "en": "Granulomatous lesions"},
-    "hemorrhage": {"ja": "出血", "en": "Hemorrhage"},
     "internal_hemorrhage": {"ja": "内出血", "en": "Internal hemorrhage"},
     "kidney_calcification": {"ja": "腎石灰化", "en": "Kidney calcification"},
     "leg_weakness": {"ja": "脚力低下", "en": "Leg weakness"},
@@ -5558,7 +5554,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "polyuria_polydipsia": {"ja": "多飲多尿", "en": "Polyuria/polydipsia"},
     "poor_feather_quality": {"ja": "羽質低下", "en": "Poor feather quality"},
     "poor_growth": {"ja": "成長不良", "en": "Poor Growth"},
-    "pruritus": {"ja": "掻痒", "en": "Pruritus"},
     "redness": {"ja": "発赤", "en": "Redness"},
     "restlessness": {"ja": "落ち着きのなさ", "en": "Restlessness"},
     "ruffled_feathers": {"ja": "羽毛逆立ち", "en": "Ruffled feathers"},
@@ -5570,7 +5565,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "subcutaneous_emphysema": {"ja": "皮下気腫", "en": "Subcutaneous emphysema"},
     "swelling_at_tail_base": {"ja": "尾根部腫脹", "en": "Swelling at tail base"},
     "swollen_feet": {"ja": "足の腫脹", "en": "Swollen Feet"},
-    "swollen_joints": {"ja": "関節腫脹", "en": "Swollen joints"},
     "thickened_skin": {"ja": "皮膚肥厚", "en": "Thickened skin"},
     "tissue_necrosis": {"ja": "組織壊死", "en": "Tissue necrosis"},
     "tissue_protruding_from_vent": {"ja": "肛門からの組織突出", "en": "Tissue Protruding From Vent"},

@@ -80,7 +80,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "edema": "body", "bloating": "body",
     "ascites": "body", "swelling": "body",
     "subcutaneous_gas": "body", "buoyancy_problems": "body",
-    "abdominal_distension": "body", "generalized_swelling": "body",
+    "generalized_swelling": "body",
     "obesity": "body", "weight_loss": "body",
     "chronic_edema": "body", "inability_to_sink": "body",
     "muscle_wasting": "body", "muscle_weakness": "body",
@@ -190,7 +190,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "bloody_stool": {"ja": "血便", "en": "Bloody stool"},
     "pale_coloration": {"ja": "退色", "en": "Pale coloration"},
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
-    "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
     "anemia": {"ja": "貧血", "en": "Anemia"},
     "appetite_loss": {"ja": "食欲低下", "en": "Appetite loss"},
     "bone_deformity": {"ja": "骨変形", "en": "Bone deformity"},
@@ -1561,7 +1560,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Lucke Tumor Herpesvirus (Renal Carcinoma)",
         "name_ja": "ルッケ腫瘍ヘルペスウイルス（腎癌）",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "weight_loss"},
+        "symptoms": {"bloating", "anorexia", "lethargy", "weight_loss"},
         "description": "Lucke Tumor Herpesvirus (Renal Carcinoma) is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "ヒョウガエルにおけるヘルペスウイルス関連腎腺癌。",
         "urgency": "high",
@@ -2241,7 +2240,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hepatocellular Carcinoma",
         "name_ja": "肝細胞癌",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy"},
+        "symptoms": {"bloating", "anorexia", "lethargy"},
         "description": "Hepatocellular Carcinoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "原発性悪性肝腫瘍。",
         "urgency": "high",
@@ -2263,7 +2262,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Renal Adenocarcinoma",
         "name_ja": "腎腺癌",
-        "symptoms": {"abdominal_distension", "lethargy", "weight_loss"},
+        "symptoms": {"bloating", "lethargy", "weight_loss"},
         "description": "Renal Adenocarcinoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "悪性腎腫瘍。ヘルペスウイルス関連の場合がある。",
         "urgency": "high",
@@ -2767,7 +2766,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Gastric Torsion",
         "name_ja": "胃捻転",
-        "symptoms": {"abdominal_distension", "lethargy", "sudden_death"},
+        "symptoms": {"bloating", "lethargy", "sudden_death"},
         "description": "Gastric Torsion is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "過食や大きすぎる餌による胃捻転。",
         "urgency": "emergency",
@@ -2789,7 +2788,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Reproductive Failure / Egg Retention",
         "name_ja": "繁殖障害・卵停滞",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy", "straining"},
+        "symptoms": {"bloating", "anorexia", "lethargy", "straining"},
         "description": "Reproductive Failure / Egg Retention is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "産卵障害による卵停滞と体腔炎。",
         "urgency": "high",
@@ -2920,7 +2919,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Congestive Heart Failure",
         "name_ja": "うっ血性心不全",
-        "symptoms": {"abdominal_distension", "edema", "lethargy", "respiratory_distress"},
+        "symptoms": {"bloating", "edema", "lethargy", "respiratory_distress"},
         "description": "Congestive Heart Failure is a cardiovascular condition affecting cardiac function and hemodynamic stability.",
         "description_ja": "液体貯留を伴う心不全。",
         "urgency": "high",
@@ -2963,7 +2962,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pancreatitis",
         "name_ja": "膵炎",
-        "symptoms": {"abdominal_distension", "anorexia", "lethargy"},
+        "symptoms": {"bloating", "anorexia", "lethargy"},
         "description": "Pancreatitis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "膵臓の炎症による代謝機能障害。",
         "urgency": "high",
@@ -3007,7 +3006,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Axolotl Floating Disorder",
         "name_ja": "アホロートル浮遊障害",
-        "symptoms": {"abdominal_distension", "buoyancy_problems", "inability_to_sink"},
+        "symptoms": {"bloating", "buoyancy_problems", "inability_to_sink"},
         "description": "Axolotl Floating Disorder is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "消化管や体腔のガス蓄積による浮力障害。",
         "urgency": "moderate",
@@ -3098,7 +3097,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Substrate Impaction",
         "name_ja": "床材インパクション",
-        "symptoms": {"abdominal_distension", "anorexia", "constipation"},
+        "symptoms": {"bloating", "anorexia", "constipation"},
         "description": "Substrate Impaction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "床材の摂取による消化管閉塞。",
         "urgency": "high",
@@ -3303,7 +3302,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pacman Frog Gastric Overload Syndrome",
         "name_ja": "パックマンフロッグ胃過負荷症候群",
-        "symptoms": {"bloating", "abdominal_distension", "regurgitation", "lethargy", "dyspnea", "anorexia", "reluctance_to_move"},
+        "symptoms": {"bloating", "regurgitation", "lethargy", "dyspnea", "anorexia", "reluctance_to_move"},
         "description": "Acute gastric overload from ingestion of oversized prey items or excessive feeding in horned frogs (Ceratophrys spp.). Can lead to respiratory compromise and death.",
         "description_ja": "ツノガエル属（Ceratophrys）における過大な餌の摂取または過食による急性胃過負荷。呼吸障害から死亡に至る可能性がある。",
         "urgency": "high",
@@ -3324,7 +3323,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
         "name_ja": "パックマンフロッグ床材誤飲性閉塞",
-        "symptoms": {"constipation", "bloating", "abdominal_distension", "anorexia", "lethargy", "straining", "intestinal_obstruction"},
+        "symptoms": {"constipation", "bloating", "anorexia", "lethargy", "straining", "intestinal_obstruction"},
         "description": "Gastrointestinal obstruction from ingestion of gravel, pebbles, or large bark substrate particles during ambush feeding in Ceratophrys species.",
         "description_ja": "ツノガエル属の待ち伏せ給餌時に砂利・小石・大型樹皮粒子を誤飲することによる消化管閉塞。",
         "urgency": "high",

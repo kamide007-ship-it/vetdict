@@ -1551,7 +1551,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ranavirus Infection",
         "name_ja": "ラナウイルス感染症",
-        "symptoms": {"anorexia", "lethargy", "oral_lesions", "skin_hemorrhage", "sudden_death"},
+        "symptoms": {"anorexia", "lethargy", "mouth_lesions", "skin_hemorrhage", "sudden_death"},
         "description": "Ranavirus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "ヘビに全身性出血性疾患を引き起こすラナウイルス。",
         "urgency": "emergency",
@@ -2055,7 +2055,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Melanoma",
         "name_ja": "メラノーマ",
-        "symptoms": {"dark_skin_masses", "skin_lesions", "ulcerated_masses"},
+        "symptoms": {"dark_skin_masses", "skin_lesions", "ulcerated_mass"},
         "description": "Melanoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "皮膚のメラノサイト由来腫瘍。",
         "urgency": "moderate",
@@ -3075,7 +3075,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "skin_nodules": "skin", "skin_papillomas": "skin",
     "skin_sloughing": "skin", "skin_ulceration": "skin",
     "soft_mass": "skin", "tail_necrosis": "skin",
-    "tissue_discoloration": "skin", "ulcerated_masses": "skin",
+    "tissue_discoloration": "skin",
     "visible_leeches": "skin", "wart_like_growths": "skin",
     "yellow_skin_lesions": "skin",
     # 眼
@@ -3096,7 +3096,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "mucus_in_stool": "digestive", "constipation": "digestive",
     "straining": "digestive", "tissue_prolapse": "digestive",
     "intestinal_obstruction": "digestive", "mouth_rot": "digestive",
-    "oral_lesions": "digestive", "oral_mucus": "digestive",
+    "oral_mucus": "digestive",
     "poor_appetite": "digestive", "poor_feeding_response": "digestive",
     "segments_in_stool": "digestive",
     # 骨格・四肢
@@ -3263,7 +3263,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "muscle_twitching": {"ja": "筋攣縮", "en": "Muscle Twitching"},
     "muscle_wasting": {"ja": "筋萎縮", "en": "Muscle wasting"},
     "muscle_weakness": {"ja": "筋力低下", "en": "Muscle weakness"},
-    "oral_lesions": {"ja": "口腔内病変", "en": "Oral lesions"},
     "oral_mucus": {"ja": "口腔粘液", "en": "Oral Mucus"},
     "orange_red_clusters": {"ja": "橙赤色の集塊", "en": "Orange Red Clusters"},
     "organ_failure": {"ja": "臓器不全", "en": "Organ Failure"},
@@ -3294,7 +3293,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "tissue_calcification": {"ja": "組織石灰化", "en": "Tissue Calcification"},
     "tissue_discoloration": {"ja": "組織の変色", "en": "Tissue Discoloration"},
     "tissue_protruding_from_cloaca": {"ja": "総排泄腔からの組織突出", "en": "Tissue Protruding From Cloaca"},
-    "ulcerated_masses": {"ja": "潰瘍化した腫瘤", "en": "Ulcerated Masses"},
     "unconsciousness": {"ja": "意識消失", "en": "Unconsciousness"},
     "upper_respiratory_signs": {"ja": "上部気道症状", "en": "Upper Respiratory Signs"},
     "vestibular_signs": {"ja": "前庭症状", "en": "Vestibular Signs"},

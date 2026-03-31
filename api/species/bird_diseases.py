@@ -35,10 +35,10 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "yellow_skin_masses": "skin", "blood_tinged_mucus": "skin",
     "broken_blood_feathers": "skin", "dark_masses": "skin",
     "dermatitis": "skin", "feather_matting": "skin",
-    "foul_odor": "skin", "hemorrhage": "skin",
+    "foul_odor": "skin",
     "injuries": "skin", "maggots_visible": "skin",
     "matted_feathers_around_vent": "skin", "pale_comb": "skin",
-    "pruritus": "skin", "redness": "skin",
+    "redness": "skin",
     "tissue_necrosis": "skin",
     # 眼
     "blindness": "eyes", "conjunctivitis": "eyes",
@@ -77,7 +77,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "beak_deformity": "musculoskeletal", "bowed_legs": "musculoskeletal",
     "fractures": "musculoskeletal", "joint_swelling": "musculoskeletal",
     "lameness": "musculoskeletal", "poor_bone_density": "musculoskeletal",
-    "splay_legs": "musculoskeletal", "swollen_joints": "musculoskeletal",
+    "splay_legs": "musculoskeletal",
     "bone_deformity": "musculoskeletal", "crepitus": "musculoskeletal",
     "curled_toes": "musculoskeletal", "inability_to_retract": "musculoskeletal",
     "wing_damage": "musculoskeletal",
@@ -139,7 +139,6 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "bruising": "internal", "discharge_from_gland": "internal",
     "discharge_from_vent": "internal", "fever": "internal",
     "pale_mucous_membranes": "internal", "secondary_infection": "internal",
-    "secondary_infections": "internal",
 }
 
 
@@ -548,7 +547,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pasteurellosis",
         "name_ja": "パスツレラ症",
-        "symptoms": {"respiratory_distress", "nasal_discharge", "lethargy", "sudden_death", "swollen_joints", "diarrhea"},
+        "symptoms": {"respiratory_distress", "nasal_discharge", "lethargy", "sudden_death", "joint_swelling", "diarrhea"},
         "description": "Pasteurellosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "猫の咬傷・引っかき傷からのパスツレラ・ムルトシダ感染で、敗血症を引き起こす。",
         "urgency": "emergency",
@@ -2772,7 +2771,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Avian Circovirus (Non-PBFD)",
         "name_ja": "鳥サーコウイルス感染症（非PBFD型）",
-        "symptoms": {"diarrhea", "immunosuppression", "lethargy", "secondary_infections", "weight_loss"},
+        "symptoms": {"diarrhea", "immunosuppression", "lethargy", "secondary_infection", "weight_loss"},
         "description": "Avian Circovirus (Non-PBFD) is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "オウム目以外の鳥におけるサーコウイルス感染で、免疫抑制と二次感染を引き起こす。",
         "urgency": "high",
@@ -2877,7 +2876,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Duck Viral Hepatitis",
         "name_ja": "アヒルウイルス性肝炎",
-        "symptoms": {"hemorrhage", "lethargy", "liver_enlargement", "opisthotonus", "sudden_death"},
+        "symptoms": {"bleeding", "lethargy", "liver_enlargement", "opisthotonus", "sudden_death"},
         "description": "Duck Viral Hepatitis is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "主に若いアヒルに発症する急性致死性ウイルス性肝炎で、特徴的な角弓反張を示す。",
         "urgency": "emergency",
@@ -3045,7 +3044,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Avian Cholera (Fowl Cholera)",
         "name_ja": "鳥コレラ（家禽コレラ）",
-        "symptoms": {"cyanosis", "diarrhea", "nasal_discharge", "respiratory_distress", "sudden_death", "swollen_joints"},
+        "symptoms": {"cyanosis", "diarrhea", "nasal_discharge", "respiratory_distress", "sudden_death", "joint_swelling"},
         "description": "Avian Cholera (Fowl Cholera) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "パスツレラ・ムルトシダによる急性敗血症または慢性局所感染症。",
         "urgency": "emergency",
@@ -3066,7 +3065,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Erysipelas",
         "name_ja": "丹毒",
-        "symptoms": {"cyanosis", "lethargy", "skin_lesions", "sudden_death", "swollen_joints"},
+        "symptoms": {"cyanosis", "lethargy", "skin_lesions", "sudden_death", "joint_swelling"},
         "description": "Erysipelas is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "エリシペロスリクス・ルシオパシエによる敗血症と皮膚病変。",
         "urgency": "emergency",
@@ -3171,7 +3170,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dermatophytosis (Ringworm)",
         "name_ja": "皮膚糸状菌症（白癬）",
-        "symptoms": {"crusty_lesions_on_face", "feather_loss", "pruritus", "skin_lesions", "thickened_skin"},
+        "symptoms": {"crusty_lesions_on_face", "feather_loss", "itching", "skin_lesions", "thickened_skin"},
         "description": "Dermatophytosis (Ringworm) is a fungal infection that can affect skin, respiratory, or systemic organs.",
         "description_ja": "皮膚糸状菌による皮膚真菌感染症。鳥では稀だが報告がある。",
         "urgency": "low",
@@ -3402,7 +3401,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cnemidocoptes pilae (Scaly Leg Mite)",
         "name_ja": "穿孔ヒゼンダニ症（脚疥癬）",
-        "symptoms": {"crusty_lesions_on_legs", "lameness", "pruritus", "swollen_toes", "thickened_skin"},
+        "symptoms": {"crusty_lesions_on_legs", "lameness", "itching", "swollen_toes", "thickened_skin"},
         "description": "Cnemidocoptes pilae (Scaly Leg Mite) is a parasitic condition that causes clinical signs ranging from subclinical to severe systemic disease.",
         "description_ja": "穿孔ヒゼンダニによる脚・足・蝋膜の過角化性痂皮形成。",
         "urgency": "moderate",
@@ -3444,7 +3443,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tick Infestation",
         "name_ja": "ダニ寄生症",
-        "symptoms": {"anemia", "lethargy", "pruritus", "skin_lesions", "weakness"},
+        "symptoms": {"anemia", "lethargy", "itching", "skin_lesions", "weakness"},
         "description": "Tick Infestation is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "外部ダニ寄生による貧血と感染症伝播の可能性。",
         "urgency": "moderate",
@@ -3465,7 +3464,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hippoboscid Fly Infestation",
         "name_ja": "シラミバエ寄生症",
-        "symptoms": {"anemia", "feather_damage", "lethargy", "pruritus", "restlessness"},
+        "symptoms": {"anemia", "feather_damage", "lethargy", "itching", "restlessness"},
         "description": "Hippoboscid Fly Infestation is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "シラミバエ科の寄生で、刺激と失血を引き起こす。",
         "urgency": "low",
@@ -3717,7 +3716,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hemangiosarcoma",
         "name_ja": "血管肉腫",
-        "symptoms": {"abdominal_distension", "hemorrhage", "lethargy", "sudden_death", "weakness"},
+        "symptoms": {"abdominal_distension", "bleeding", "lethargy", "sudden_death", "weakness"},
         "description": "Hemangiosarcoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "血管内皮の悪性腫瘍で、出血と転移を引き起こす。",
         "urgency": "emergency",
@@ -4095,7 +4094,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Vitamin K Deficiency",
         "name_ja": "ビタミンK欠乏症",
-        "symptoms": {"bruising", "dark_droppings", "hemorrhage", "lethargy", "weakness"},
+        "symptoms": {"bruising", "dark_droppings", "bleeding", "lethargy", "weakness"},
         "description": "Vitamin K Deficiency is a nutritional or metabolic disorder caused by dietary imbalance or deficiency.",
         "description_ja": "ビタミンK欠乏による凝固障害と出血。",
         "urgency": "high",
@@ -4221,7 +4220,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Rodenticide Poisoning",
         "name_ja": "殺鼠剤中毒",
-        "symptoms": {"dark_droppings", "hemorrhage", "lethargy", "respiratory_distress", "weakness"},
+        "symptoms": {"dark_droppings", "bleeding", "lethargy", "respiratory_distress", "weakness"},
         "description": "Rodenticide Poisoning is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "抗凝固性殺鼠剤による凝固障害と内出血。",
         "urgency": "emergency",
@@ -4431,7 +4430,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Contact Dermatitis",
         "name_ja": "接触性皮膚炎",
-        "symptoms": {"feather_loss", "pruritus", "redness", "skin_lesions", "swollen_feet"},
+        "symptoms": {"feather_loss", "itching", "redness", "skin_lesions", "swollen_feet"},
         "description": "Contact Dermatitis is a dermatological condition affecting the skin, coat, or integumentary system.",
         "description_ja": "清掃用化学物質や粗い止まり木などの刺激物との接触による皮膚炎。",
         "urgency": "low",
@@ -6846,7 +6845,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "swelling": {"ja": "腫脹", "en": "Swelling"},
     "swollen_feet": {"ja": "足の腫脹", "en": "Swollen feet"},
     "swollen_infraorbital_sinus": {"ja": "眼窩下洞腫脹", "en": "Swollen infraorbital sinus"},
-    "swollen_joints": {"ja": "関節腫脹", "en": "Swollen joints"},
     "swollen_toes": {"ja": "趾の腫脹", "en": "Swollen toes"},
     "tail_bobbing": {"ja": "尾振り呼吸", "en": "Tail bobbing"},
     "tapeworm_segments_in_droppings": {"ja": "糞中の条虫片節", "en": "Tapeworm segments in droppings"},
@@ -6896,7 +6894,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "foul_odor": {"ja": "悪臭", "en": "Foul odor"},
     "gasping": {"ja": "あえぎ呼吸", "en": "Gasping"},
     "head_swelling": {"ja": "頭部の腫脹", "en": "Head Swelling"},
-    "hemorrhage": {"ja": "出血", "en": "Hemorrhage"},
     "inability_to_retract": {"ja": "引っ込み不能", "en": "Inability to retract"},
     "injuries": {"ja": "外傷", "en": "Injuries"},
     "intestinal_obstruction": {"ja": "腸閉塞", "en": "Intestinal obstruction"},
@@ -6914,11 +6911,9 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
     "polyuria_polydipsia": {"ja": "多飲多尿", "en": "Polyuria/polydipsia"},
     "poor_growth": {"ja": "成長不良", "en": "Poor Growth"},
-    "pruritus": {"ja": "掻痒", "en": "Pruritus"},
     "redness": {"ja": "発赤", "en": "Redness"},
     "ruffled_feathers": {"ja": "羽毛逆立ち", "en": "Ruffled feathers"},
     "secondary_infection": {"ja": "二次感染", "en": "Secondary Infection"},
-    "secondary_infections": {"ja": "二次感染", "en": "Secondary infections"},
     "subcutaneous_emphysema": {"ja": "皮下気腫", "en": "Subcutaneous emphysema"},
     "swelling_at_bone": {"ja": "骨部の腫脹", "en": "Swelling At Bone"},
     "swelling_at_tail_base": {"ja": "尾根部腫脹", "en": "Swelling at tail base"},
