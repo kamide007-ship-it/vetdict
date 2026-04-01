@@ -1655,6 +1655,7 @@ def _match_species_symptoms_to_diseases(
     pain_score: int | None = None,
     lab_values: dict | None = None,
     breed: str | None = None,
+    lang: str = "",
 ) -> list[dict]:
     """Match symptom IDs to species-specific diseases using advanced weighted scoring.
 
@@ -1792,9 +1793,10 @@ def _match_species_symptoms_to_diseases(
     symptom_set = expanded_set
     diseases = sp_data["diseases"]
 
-    # --- Load prevalence data for this species ---
+    # --- Load prevalence data for this species (region-aware) ---
     from api.species import prevalence_data as _prev_mod
-    _prevalence = _prev_mod.SPECIES_PREVALENCE.get(species, {})
+    _region = "jp" if lang == "ja" else ("intl" if lang else "")
+    _prevalence = _prev_mod.get_prevalence_for_species(species, region=_region)
     _PREVALENCE_MULTIPLIER = {
         "very_common": 1.35,
         "common": 1.125,
@@ -3265,6 +3267,7 @@ def diagnostic_chat():
     pain_score = data.get("pain_score")       # int 1-10 (optional)
     lab_values = data.get("lab_values")       # dict (optional)
     breed = data.get("breed")                 # str (optional)
+    lang = data.get("lang", "")              # "ja" or "en" for regional prevalence
 
     if not message:
         return jsonify({"error": "Message required"}), 400
@@ -3295,6 +3298,7 @@ def diagnostic_chat():
         disease_matches = _match_species_symptoms_to_diseases(
             all_symptoms, species,
             pain_score=pain_score, lab_values=lab_values, breed=breed,
+            lang=lang,
         )
         sp_names = _SPECIES_DATA[species]["symptom_names"]
         symptom_details = [
@@ -3974,6 +3978,7 @@ def consultation():
     pain_score = data.get("pain_score")
     lab_values = data.get("lab_values")
     breed = data.get("breed")
+    lang = data.get("lang", "")              # "ja" or "en" for regional prevalence
 
     sp_label = SPECIES_LABELS.get(species, {"ja": species, "en": species})
     all_symptoms = _get_species_symptoms_with_categories(species)
@@ -4058,6 +4063,7 @@ def consultation():
             disease_matches = _match_species_symptoms_to_diseases(
                 selected_symptoms, species,
                 pain_score=pain_score, lab_values=lab_values, breed=breed,
+                lang=lang,
             )
         else:
             disease_matches = match_symptoms_to_diseases(
@@ -4188,6 +4194,7 @@ def consultation():
                 disease_matches = _match_species_symptoms_to_diseases(
                     selected_symptoms, species,
                     pain_score=pain_score, lab_values=lab_values, breed=breed,
+                    lang=lang,
                 )
             else:
                 disease_matches = match_symptoms_to_diseases(

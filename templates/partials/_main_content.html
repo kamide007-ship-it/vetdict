@@ -14,7 +14,7 @@
             </div>
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
-              <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh"/>
+              <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh" aria-label="症状を検索"/>
               <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
             </div>
             <div class="symptom-list" id="symptomList"></div>
@@ -104,7 +104,7 @@
       <div class="card-header" data-i18n-html="cardDiseaseDb">&#128218; 疾患データベース</div>
       <div class="card-body">
         <div class="symptom-search" style="margin-bottom:12px">
-          <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)" data-i18n-ph="diseaseSearchPh"/>
+          <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)" data-i18n-ph="diseaseSearchPh" aria-label="疾患名で検索"/>
           <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
         </div>
         <div class="az-nav" id="azNav"></div>
@@ -134,7 +134,7 @@
           </div>
         </div>
         <div class="chat-input-row">
-          <input type="text" id="chatInput" placeholder="臨床症状を入力..." data-i18n-ph="chatInputPh"/>
+          <input type="text" id="chatInput" placeholder="臨床症状を入力..." data-i18n-ph="chatInputPh" aria-label="臨床症状を入力"/>
           <button id="chatSend" data-i18n="chatSend">送信</button>
         </div>
       </div>
@@ -151,7 +151,7 @@
       <div class="card-body">
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
-            <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh"/>
+            <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh" aria-label="薬品名で検索"/>
             <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
           </div>
           <select id="drugCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">
