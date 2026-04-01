@@ -841,6 +841,47 @@ class TestBreedsEndpoint:
 
 
 # =============================================================================
+# 10b. Husbandry endpoint
+# =============================================================================
+
+
+class TestHusbandryEndpoint:
+    def test_dog_husbandry_returns_200(self, client):
+        resp = client.get('/api/species/dog/husbandry')
+        assert resp.status_code == 200
+
+    def test_response_has_species_and_husbandry(self, client):
+        payload = client.get('/api/species/dog/husbandry').get_json()
+        assert payload.get('species') == 'dog'
+        assert 'husbandry' in payload
+
+    def test_husbandry_has_required_fields(self, client):
+        data = client.get('/api/species/cat/husbandry').get_json()['husbandry']
+        for field in ('name', 'name_ja', 'temperature', 'humidity', 'housing', 'diet'):
+            assert field in data, f"Missing field: {field}"
+
+    def test_bilingual_fields(self, client):
+        data = client.get('/api/species/rabbit/husbandry').get_json()['husbandry']
+        assert 'en' in data['temperature']
+        assert 'ja' in data['temperature']
+
+    def test_unknown_species_returns_404(self, client):
+        resp = client.get('/api/species/unicorn/husbandry')
+        assert resp.status_code == 404
+
+    def test_all_species_return_200(self, client):
+        species_list = [
+            'dog', 'cat', 'rabbit', 'hamster', 'guinea_pig', 'chinchilla',
+            'ferret', 'hedgehog', 'sugar_glider', 'degu', 'bird', 'parakeet',
+            'parrot', 'reptile', 'tortoise', 'snake', 'lizard', 'amphibian',
+            'fish', 'exotic_other', 'horse',
+        ]
+        for sp in species_list:
+            resp = client.get(f'/api/species/{sp}/husbandry')
+            assert resp.status_code == 200, f"{sp}: expected 200, got {resp.status_code}"
+
+
+# =============================================================================
 # 11. Protected RECO2 routes — authentication / 503
 # =============================================================================
 
