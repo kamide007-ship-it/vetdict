@@ -1524,17 +1524,151 @@ SPECIES_PREVALENCE = {
 }
 
 
-def get_prevalence_for_species(species: str) -> dict[str, str]:
-    """Get prevalence mapping for a specific species.
+# ============================================================================
+# Regional Prevalence Adjustments (Japan)
+# ============================================================================
+# Override prevalence tiers for diseases with documented regional differences.
+# These adjustments are applied when the UI language is Japanese (region=jp).
+#
+# EVIDENCE SOURCES:
+# - Heartworm: Japan is endemic; year-round transmission in southern regions.
+#   Atkins CE et al. (2014) Guidelines for Diagnosis, Prevention &
+#   Management of Heartworm (Dirofilaria immitis) Infection in Dogs. ACVIM.
+#   Japanese prevalence 10-30% in unprotected dogs (Venco et al., 2011).
+# - Babesiosis: Babesia gibsoni common in Japan, especially in fighting dogs
+#   and Shiba Inus. Irwin PJ (2009) Canine babesiosis. Vet Clin Small Anim.
+# - SFTS (Severe Fever with Thrombocytopenia Syndrome): Tick-borne bunyavirus
+#   endemic in western Japan since 2013. Zoonotic. Takahashi T et al. (2014).
+# - FIP: High prevalence in multi-cat households; Japan has dense cattery
+#   populations. Pedersen NC (2014) An update on feline infectious peritonitis.
+# - Leptospirosis: Common in Japan due to high humidity and wildlife reservoirs.
+#   Koizumi N et al. (2009) Japanese leptospirosis serovar distribution.
+# - Salmon Poisoning: Neorickettsia helminthoeca — absent in Japan (Pacific NW
+#   North America only). Gorham JR & Foreyt WJ (2006).
+# - Rabies: Eliminated from Japan since 1957. Only imported cases since.
+#   Ministry of Health, Labour and Welfare, Japan.
+# - Blastomycosis/Coccidioidomycosis/Histoplasmosis: Endemic to Americas,
+#   essentially absent in Japan. Imported cases only.
+# - Chagas Disease (Trypanosomiasis): Americas only, absent in Japan.
+# - Leishmaniasis (visceral): Mediterranean/South America, not endemic in Japan.
+# ============================================================================
+
+JAPAN_REGIONAL_ADJUSTMENTS = {
+    "dog": {
+        # MORE common in Japan
+        "Heartworm Disease": "very_common",        # Endemic; southern Japan year-round
+        "Babesiosis": "common",                     # B. gibsoni in Shiba, Tosa, Akita
+        "Periodontal Disease": "very_common",       # Small breeds very popular in Japan
+        "Patellar Luxation": "very_common",         # Small breed predominance in Japan
+        "Brachycephalic Airway Syndrome": "common", # French Bulldog #1 breed in Japan
+        "Leptospirosis": "common",                  # High humidity, wildlife reservoirs
+        # LESS common / absent in Japan
+        "Salmon Poisoning Disease": "rare",         # Pacific NW North America only
+        "Blastomycosis": "rare",                    # Americas endemic, imported only
+        "Coccidioidomycosis": "rare",               # Americas endemic
+        "Histoplasmosis": "rare",                   # Americas endemic
+        "Rabies": "rare",                           # Eliminated since 1957
+        "Chagas Disease (Trypanosomiasis)": "rare", # Americas only
+        "Leishmaniasis (Visceral)": "rare",         # Not endemic
+    },
+    "cat": {
+        # MORE common in Japan
+        "Feline Infectious Peritonitis (FIP)": "common",  # High multi-cat density
+        "Feline Leukemia Virus (FeLV)": "common",         # Outdoor cats common
+        "Feline Immunodeficiency Virus (FIV)": "common",  # High outdoor cat population
+        "Hyperthyroidism": "very_common",                  # Aging cat population
+        "Chronic Kidney Disease (CKD)": "very_common",     # #1 cause of death in JP cats
+        # LESS common / absent in Japan
+        "Rabies": "rare",                                  # Eliminated
+        "Histoplasmosis": "rare",                          # Americas endemic
+        "Cytauxzoonosis": "rare",                          # Americas (tick-borne)
+    },
+    "horse": {
+        # MORE common in Japan
+        "Japanese Encephalitis": "common",          # Endemic, mosquito-borne
+        "Getah Virus Infection": "common",          # Endemic in Japanese horses
+        "Babesiosis (Equine)": "common",            # Tick-borne, endemic
+        # LESS common / absent in Japan
+        "African Horse Sickness": "rare",           # Africa/Middle East
+        "Dourine": "rare",                          # Not present in Japan
+        "Venezuelan Equine Encephalitis": "rare",   # Americas only
+    },
+    "rabbit": {
+        # MORE common in Japan
+        "Pasteurellosis": "very_common",            # Most common rabbit pathogen in JP
+        "Encephalitozoon cuniculi": "common",       # Widespread in pet rabbits
+        "GI Stasis": "very_common",                 # #1 rabbit emergency in JP practice
+        # LESS common in Japan
+        "Myxomatosis": "rare",                      # No endemic myxoma in Japan
+        "Rabbit Hemorrhagic Disease (RHDV)": "uncommon",  # Outbreaks sporadic in JP
+    },
+    "ferret": {
+        # MORE common in Japan
+        "Adrenal Disease": "very_common",           # Very common in JP spayed/neutered
+        "Insulinoma": "very_common",                # Common in older ferrets in JP
+        "Heartworm Disease": "common",              # Japan is endemic
+        # LESS common
+        "Aleutian Disease": "uncommon",             # Less common in JP pet ferrets
+    },
+    "fish": {
+        # Japan-specific aquaculture and ornamental fish diseases
+        "Koi Herpesvirus Disease (KHV)": "common",    # Reportable in Japan, outbreaks
+        "White Spot Disease (Ichthyophthirius)": "very_common",
+        "Columnaris Disease": "very_common",           # Warm water, common in JP summer
+    },
+}
+
+# International baseline: diseases more common outside Japan
+INTERNATIONAL_REGIONAL_ADJUSTMENTS = {
+    "dog": {
+        "Heartworm Disease": "common",              # Varies by region globally
+        "Salmon Poisoning Disease": "uncommon",     # Pacific NW North America
+        "Blastomycosis": "uncommon",                # Ohio/Mississippi river valleys
+        "Coccidioidomycosis": "uncommon",           # US Southwest, Central America
+        "Histoplasmosis": "uncommon",               # Americas
+        "Babesiosis": "uncommon",                   # Global but more focal
+        "Rabies": "common",                         # Still endemic in most countries
+        "Leishmaniasis (Visceral)": "uncommon",     # Mediterranean, South America
+        "Chagas Disease (Trypanosomiasis)": "uncommon",  # Americas
+    },
+    "cat": {
+        "Rabies": "uncommon",                       # Still endemic globally
+        "Cytauxzoonosis": "uncommon",               # US Southeast
+        "Histoplasmosis": "uncommon",               # Americas
+    },
+    "horse": {
+        "African Horse Sickness": "uncommon",       # Africa, Middle East
+        "Japanese Encephalitis": "rare",            # Asia-specific
+        "Getah Virus Infection": "rare",            # Asia-specific
+    },
+    "rabbit": {
+        "Myxomatosis": "common",                    # Endemic in Europe, Australia
+        "Rabbit Hemorrhagic Disease (RHDV)": "common",  # Endemic in Europe, Australia
+    },
+}
+
+
+def get_prevalence_for_species(species: str, region: str = "") -> dict[str, str]:
+    """Get prevalence mapping for a specific species with optional regional adjustments.
 
     Parameters
     ----------
     species : str
         Species key (e.g., 'cat', 'rabbit', 'bird')
+    region : str
+        Regional context: 'jp' for Japan, 'intl' for international.
+        Empty string returns base prevalence without regional adjustments.
 
     Returns
     -------
     dict[str, str]
         Mapping of disease names to prevalence tiers
     """
-    return SPECIES_PREVALENCE.get(species, {})
+    base = dict(SPECIES_PREVALENCE.get(species, {}))
+    if region == "jp":
+        overrides = JAPAN_REGIONAL_ADJUSTMENTS.get(species, {})
+        base.update(overrides)
+    elif region == "intl":
+        overrides = INTERNATIONAL_REGIONAL_ADJUSTMENTS.get(species, {})
+        base.update(overrides)
+    return base

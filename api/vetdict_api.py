@@ -922,6 +922,7 @@ def api_analyze_symptoms():
     vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
     vaccination_status = data.get('vaccination_status')  # "current" | "outdated" | "none"
     pain_score = data.get('pain_score')  # 0-4 (CSU Canine Acute Pain Scale)
+    lang = data.get('lang', '')  # "ja" or "en" for regional prevalence adjustments
 
     # Validate onset
     if onset and onset not in ('acute', 'subacute', 'chronic'):
@@ -998,6 +999,7 @@ def api_analyze_symptoms():
                 gender=gender,
                 vaccines=vaccines,
                 vaccination_status=vaccination_status,
+                lang=lang,
             )
 
         # Attach mentioned_drugs with species-specific dosage to each disease

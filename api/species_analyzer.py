@@ -380,6 +380,7 @@ def analyze_species_symptoms(
     vaccines: list[str] | None = None,
     vaccination_status: str | None = None,
     pain_score: int | None = None,
+    lang: str = "",
 ) -> Dict:
     """動物種に応じて適切な鑑別診断関数を呼び出すユーティリティ。
 
@@ -404,6 +405,10 @@ def analyze_species_symptoms(
     species_key = (species or "dog").lower()
     if species_key not in SPECIES_HANDLERS:
         raise ValueError(f"Unsupported species: {species}")
+    # Load region-aware prevalence map
+    from api.species.prevalence_data import get_prevalence_for_species
+    _region = "jp" if lang == "ja" else ("intl" if lang else "")
+    _prevalence_map = get_prevalence_for_species(species_key, region=_region)
     # 犬: 全パラメータを渡す
     if species_key == "dog":
         return analyze_dog(
@@ -429,7 +434,7 @@ def analyze_species_symptoms(
         )
     else:
         handler = SPECIES_HANDLERS[species_key]
-        # Try passing all params including vaccination; fall back gracefully
+        # Try passing all params including vaccination and prevalence; fall back gracefully
         # if the species handler hasn't been updated to accept them yet.
         try:
             return handler(
@@ -440,12 +445,23 @@ def analyze_species_symptoms(
                 gender=gender,
                 vaccines=vaccines,
                 vaccination_status=vaccination_status,
+                prevalence_map=_prevalence_map,
             )
         except TypeError:
-            return handler(
-                symptoms, age_stage,
-                breed=breed, onset=onset, age_years=age_years,
-                species=species_key,
-                lab_values=lab_values,
-                gender=gender,
-            )
+            try:
+                return handler(
+                    symptoms, age_stage,
+                    breed=breed, onset=onset, age_years=age_years,
+                    species=species_key,
+                    lab_values=lab_values,
+                    gender=gender,
+                    prevalence_map=_prevalence_map,
+                )
+            except TypeError:
+                return handler(
+                    symptoms, age_stage,
+                    breed=breed, onset=onset, age_years=age_years,
+                    species=species_key,
+                    lab_values=lab_values,
+                    gender=gender,
+                )

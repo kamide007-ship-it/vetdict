@@ -869,7 +869,7 @@ function doAnalyze(){
   const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
   const progress=document.getElementById("analyzeProgress");
   if(progress)progress.classList.add("active");
-  const payload={species:currentSpecies,symptoms:[...selectedSymptoms]};
+  const payload={species:currentSpecies,symptoms:[...selectedSymptoms],lang:currentLang};
   if(currentBreed)payload.breed=currentBreed;
   const labVals=collectLabValues();
   if(labVals)payload.lab_values=labVals;
@@ -1572,7 +1572,7 @@ function sendLandingChat(){
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
   const species=currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
+  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();
@@ -1617,7 +1617,7 @@ function sendChatMessage(){
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms})})
+  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();
@@ -1903,6 +1903,7 @@ function guidedFetch(phase,extra){
     age_years:guidedState.ageYears,
     pain_score:guidedState.painScore,
     breed:guidedState.breed||"",
+    lang:currentLang,
     ...(extra||{})
   };
   guidedAddMsg('<span class="dot"></span><span class="dot"></span><span class="dot"></span>',"bot typing-indicator");
