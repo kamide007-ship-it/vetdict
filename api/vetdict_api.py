@@ -69,6 +69,32 @@ TEMPLATES_DIR = str(ROOT_DIR / 'templates')
 STATIC_DIR = str(ROOT_DIR / 'static')
 
 # ---------------------------------------------------------------------------
+# Public API rate limiter (prevents abuse of compute-heavy endpoints)
+# ---------------------------------------------------------------------------
+from api.auth import RateLimiter, ClientIP
+
+_public_rate_limiter = RateLimiter(
+    max_requests=int(os.getenv('PUBLIC_API_RATE_LIMIT', '60')),
+    window_seconds=60,
+)
+_public_client_ip = ClientIP()
+
+
+def _check_public_rate_limit():
+    """Return a 429 response tuple if rate-limited, else None."""
+    client_ip = _public_client_ip.get_client_ip()
+    if _public_rate_limiter.is_limited(client_ip):
+        return (
+            jsonify({
+                'error': 'Rate limit exceeded. Please wait before retrying.',
+                'error_ja': 'リクエスト制限に達しました。しばらくしてから再試行してください。',
+            }),
+            429,
+        )
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Module imports — graceful degradation
 # ---------------------------------------------------------------------------
 
@@ -884,6 +910,9 @@ def _attach_mentioned_drugs(result, species):
 @ensure_json_response
 def api_analyze_symptoms():
     """症状チェック → 疾患・検査リスト（全動物種対応）"""
+    rate_err = _check_public_rate_limit()
+    if rate_err:
+        return rate_err
     if not SYMPTOM_CHECKER_AVAILABLE:
         return {'error': 'Symptom checker module not available'}, 500
 
