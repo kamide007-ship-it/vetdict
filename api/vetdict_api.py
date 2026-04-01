@@ -926,8 +926,8 @@ def reco2_logs_route():
     if not RECO2_AVAILABLE:
         return {'error': 'reco2 not available'}, 503
     try:
-        limit = int(request.args.get('limit', '50'))
-    except Exception:
+        limit = max(1, min(int(request.args.get('limit', '50')), 500))
+    except (ValueError, TypeError):
         limit = 50
     return reco2_get_logs(limit=limit)
 
