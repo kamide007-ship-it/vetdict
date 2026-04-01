@@ -905,7 +905,7 @@ def diagnostic_chat():
             }
             for sid in all_symptoms
         ]
-    elif species in _SPECIES_DATA:
+    elif species != "dog" and species in _SPECIES_DATA:
         extracted = _extract_species_symptoms(message, species)
         all_symptoms = list(set(extracted + previous_symptoms))
         disease_matches = _match_species_symptoms_to_diseases(
@@ -1480,6 +1480,23 @@ _CATEGORY_LABELS = {
     "renal": {"ja": "腎臓", "en": "Renal"},
     "toxicological": {"ja": "中毒", "en": "Toxicological"},
     "traumatic": {"ja": "外傷", "en": "Traumatic"},
+    # --- 犬・馬・エキゾチック種追加カテゴリ ---
+    "eyes_ears": {"ja": "眼・耳", "en": "Eyes / Ears"},
+    "eye": {"ja": "眼科", "en": "Eye"},
+    "ears": {"ja": "耳", "en": "Ears"},
+    "ocular": {"ja": "眼科", "en": "Ocular"},
+    "oral": {"ja": "口腔", "en": "Oral"},
+    "dental": {"ja": "歯科", "en": "Dental"},
+    "hoof": {"ja": "蹄", "en": "Hoof"},
+    "foal": {"ja": "子馬", "en": "Foal"},
+    "toxic": {"ja": "中毒", "en": "Toxic"},
+    "body": {"ja": "体幹", "en": "Body"},
+    "limb": {"ja": "四肢", "en": "Limbs"},
+    "repository_exam": {"ja": "検査所見", "en": "Exam Findings"},
+    "misc": {"ja": "その他", "en": "Miscellaneous"},
+    "developmental": {"ja": "発育", "en": "Developmental"},
+    "internal": {"ja": "内臓", "en": "Internal"},
+    "cardiac": {"ja": "心臓", "en": "Cardiac"},
 }
 
 
