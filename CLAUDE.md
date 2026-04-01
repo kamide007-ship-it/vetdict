@@ -11,7 +11,7 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (2,790テスト)
+- **テスト**: pytest (2,794テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
 - **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v11)
