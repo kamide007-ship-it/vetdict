@@ -11,10 +11,10 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (2,480テスト)
+- **テスト**: pytest (2,746テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v2)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v10)
 - **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
 - **現状**: OPEN_BETA=true（全機能無料）
@@ -215,7 +215,7 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - _extract_species_symptoms の位置追跡は最初の1出現のみ対応（同一テキスト内の複数出現は未対応）
 - Renderフリープランのスリープ問題（15分無操作→初回アクセス遅延）
 - エキゾチック動物（ウサギ/鳥/爬虫類等）の治療プロトコルはカテゴリベースの汎用記載が多い — 犬猫と同レベルの個別詳細プロトコルへのアップグレードが望ましい
-- 問診モードのUI動作確認・ブラウザテストが未実施
+- 問診モードのブラウザ手動テスト（実機確認）が未実施（自動テスト48件は実装済み）
 - **診断精度の体系的検証**: 感度/特異度/PPV/NPVの定量評価が未実施。TRIPODガイドラインに準拠した検証プロトコルの策定が必要
 - **臨床データのピアレビュー文書化**: AIエンリッチメント（enrich_treatment_prognosis.py等）で生成されたデータの獣医師レビュー履歴が未文書化。レビューログの整備が望ましい
 - **依存関係のピニング**: anthropic>=0.7.0等の緩いバージョン指定。lockfile未導入
@@ -263,6 +263,16 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - サブスクライバーデータ: subscribers.json → subscribers.db (SQLite + WAL)
 - ウェイトリストデータ: waitlist.json → waitlist.db (SQLite + WAL + UNIQUE制約)
 - モジュールロード時にJSON→SQLite自動マイグレーション
+
+### 問診モード検証・改善
+- バグ修正: カテゴリラベルKeyErrorリスク、finalize species条件（horse等が空結果）、中間結果XSS対策
+- アクセシビリティ: `#guidedMessages` に `aria-live="polite"`、`#guidedActions` に `role="group"`
+- UX改善: 症状選択画面に「← カテゴリに戻る」ボタン、エラー時の「やり直す」ボタン追加
+- モバイルCSS: 600px以下でカテゴリグリッド/ボタン/モード切替のサイズ最適化
+- finalize フォールバック時に `logger.warning` でログ出力
+- テスト: 48件（フロー15 + エッジケース19 + 診断精度パリティ14）
+  - 全21種のstartフェーズ疎通、6種フルフロー、12種の臨床シナリオ精度検証
+  - 中間結果↔最終結果の一貫性テスト
 
 ### 参考文献拡充（72→90+ citations）
 - AAHA/AVMA/ISFM/WSAVA臨床ガイドライン10件追加（ワクチン、CKD、糖尿病等）

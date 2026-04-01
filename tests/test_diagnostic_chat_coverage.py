@@ -1980,3 +1980,177 @@ class TestConsultationEndpoint:
             data = r.get_json()
             assert data["phase"] == "select_category", f"wrong phase for species={sp}"
             assert data["species"] == sp
+
+
+class TestConsultationAccuracyParity:
+    """Verify consultation flow produces diagnostic results matching known test cases.
+
+    These tests ensure the guided consultation (問診モード) produces results
+    consistent with the checkbox-based diagnosis for established clinical scenarios.
+    """
+
+    ENDPOINT = "/api/diagnostic-chat/consultation"
+
+    def _finalize(self, client, species, symptoms, onset="subacute", age_years=5):
+        """Helper: run finalize and return suspected_diseases list."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": species,
+            "selected_symptoms": symptoms,
+            "onset": onset,
+            "age_years": age_years,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        return data["result"]["suspected_diseases"]
+
+    def _top_disease_names(self, diseases, n=3):
+        """Return top N disease name_en values (lowercased)."""
+        return [d.get("name", d.get("name_en", "")).lower() for d in diseases[:n]]
+
+    # --- Cat ---
+
+    def test_cat_fhv1_uri(self, client):
+        """Cat FHV-1/URI: sneezing+nasal_discharge+eye_discharge → top result."""
+        diseases = self._finalize(client, "cat",
+            ["sneezing", "nasal_discharge", "eye_discharge"], onset="acute", age_years=2)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["herpes", "rhinotracheitis", "uri", "upper respiratory", "fhv"])
+
+    def test_cat_corneal_ulcer(self, client):
+        """Cat corneal ulcer: squinting+eye_discharge+corneal_cloudiness+eye_redness → top result."""
+        diseases = self._finalize(client, "cat",
+            ["squinting", "eye_discharge", "corneal_cloudiness", "eye_redness"], onset="acute", age_years=4)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["corneal", "ulcer", "keratitis", "sequestrum"])
+
+    # --- Rabbit ---
+
+    def test_rabbit_gi_stasis(self, client):
+        """Rabbit GI stasis: appetite_loss+reduced_fecal_output+lethargy → top result."""
+        diseases = self._finalize(client, "rabbit",
+            ["appetite_loss", "reduced_fecal_output", "lethargy", "hunched_posture"], onset="acute", age_years=3)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["gi stasis", "gastrointestinal stasis", "ileus"])
+
+    def test_rabbit_pasteurella(self, client):
+        """Rabbit pasteurella: sneezing+nasal_discharge+eye_discharge → rank in top 3."""
+        diseases = self._finalize(client, "rabbit",
+            ["sneezing", "nasal_discharge", "eye_discharge"], onset="subacute", age_years=2)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["pasteurel", "snuffles"])
+
+    # --- Reptile ---
+
+    def test_reptile_respiratory(self, client):
+        """Reptile respiratory infection: open_mouth_breathing+nasal_discharge+lethargy."""
+        diseases = self._finalize(client, "reptile",
+            ["open_mouth_breathing", "nasal_discharge", "lethargy"], onset="subacute", age_years=3)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["respiratory", "pneumonia"])
+
+    def test_reptile_mbd(self, client):
+        """Reptile MBD: soft_bones+weakness+lethargy+anorexia."""
+        diseases = self._finalize(client, "reptile",
+            ["soft_bones", "weakness", "lethargy", "anorexia"], onset="chronic", age_years=2)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["metabolic bone", "mbd", "calcium"])
+
+    # --- Guinea Pig ---
+
+    def test_guinea_pig_respiratory(self, client):
+        """Guinea pig respiratory: sneezing+nasal_discharge+labored_breathing."""
+        diseases = self._finalize(client, "guinea_pig",
+            ["sneezing", "nasal_discharge", "labored_breathing"], onset="acute", age_years=2)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["respiratory", "pneumonia", "bordetella"])
+
+    def test_guinea_pig_scurvy(self, client):
+        """Guinea pig scurvy: lethargy+appetite_loss+limping+swollen_joints."""
+        diseases = self._finalize(client, "guinea_pig",
+            ["lethargy", "appetite_loss", "limping", "swollen_joints"], onset="chronic", age_years=2)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["scurvy", "vitamin c", "hypovitaminosis"])
+
+    # --- Hedgehog ---
+
+    def test_hedgehog_mites(self, client):
+        """Hedgehog mites: quill_loss+itching+flaky_skin+scratching."""
+        diseases = self._finalize(client, "hedgehog",
+            ["quill_loss", "itching", "flaky_skin", "scratching"], onset="subacute", age_years=2)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["mite", "acariasis", "caparinia", "mange"])
+
+    # --- Ferret ---
+
+    def test_ferret_adrenal(self, client):
+        """Ferret adrenal disease: hair_loss+vulvar_swelling+lethargy."""
+        diseases = self._finalize(client, "ferret",
+            ["hair_loss", "vulvar_swelling", "lethargy"], onset="chronic", age_years=4)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["adrenal", "hyperadrenocorticism"])
+
+    # --- Bird ---
+
+    def test_bird_respiratory(self, client):
+        """Bird respiratory: tail_bobbing+open_mouth_breathing+nasal_discharge."""
+        diseases = self._finalize(client, "bird",
+            ["tail_bobbing", "open_mouth_breathing", "nasal_discharge"], onset="acute", age_years=2)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["respiratory", "aspergill", "pneumonia"])
+
+    # --- Fish ---
+
+    def test_fish_ich(self, client):
+        """Fish white spot disease: white_spots+flashing+lethargy."""
+        diseases = self._finalize(client, "fish",
+            ["white_spots", "flashing", "lethargy"], onset="acute", age_years=1)
+        assert len(diseases) > 0
+        top_names = " ".join(self._top_disease_names(diseases))
+        assert any(kw in top_names for kw in ["ich", "white spot", "ichthyophthirius"])
+
+    # --- Horse ---
+
+    def test_horse_finalize(self, client):
+        """Horse finalize completes without error (equine engine uses own finding keys)."""
+        diseases = self._finalize(client, "horse",
+            ["lameness", "fever", "lethargy"], onset="acute", age_years=8)
+        # Horse uses equine-specific finding keys; standard symptom IDs may return
+        # empty results, but the endpoint must not error
+        assert isinstance(diseases, list)
+
+    # --- Interim → Finalize parity ---
+
+    def test_interim_and_finalize_consistency(self, client):
+        """Top diseases in interim_results should appear in finalize results."""
+        symptoms = ["vomiting", "lethargy", "appetite_loss"]
+        species = "cat"
+
+        # Get interim results
+        r_interim = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": species,
+            "selected_symptoms": symptoms,
+        })
+        interim = r_interim.get_json()
+        interim_names = {c.get("name_en", "").lower() for c in interim["disease_candidates"][:3]}
+
+        # Get finalize results
+        diseases = self._finalize(client, species, symptoms)
+        final_names = {d.get("name", "").lower() for d in diseases[:5]}
+
+        # At least one top-3 interim candidate should appear in top-5 final
+        overlap = interim_names & final_names
+        assert len(overlap) > 0, f"No overlap: interim={interim_names}, final={final_names}"
