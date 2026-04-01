@@ -7,11 +7,14 @@ Processes up to 100,000 requests per batch for maximum cost efficiency.
 """
 
 import json
+import logging
 import os
 import time
 from typing import List
 
 import anthropic
+
+logger = logging.getLogger(__name__)
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
 from anthropic.types.messages.batch_create_params import Request
 
@@ -99,17 +102,19 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
     def submit_batch(self, requests: List[Request]) -> str:
         """Submit a batch for processing."""
         batch = self.client.messages.batches.create(requests=requests)
-        print(f"Created batch {batch.id} with {len(requests)} requests")
+        logger.info("Created batch %s with %d requests", batch.id, len(requests))
         return batch.id
 
     def wait_for_batch(self, batch_id: str, poll_interval: int = 30) -> dict:
         """Wait for batch to complete."""
         while True:
             batch = self.client.messages.batches.retrieve(batch_id)
-            print(
-                f"Batch {batch_id}: {batch.processing_status} "
-                f"(processing: {batch.request_counts.processing}, "
-                f"succeeded: {batch.request_counts.succeeded})"
+            logger.info(
+                "Batch %s: %s (processing: %s, succeeded: %s)",
+                batch_id,
+                batch.processing_status,
+                batch.request_counts.processing,
+                batch.request_counts.succeeded,
             )
 
             if batch.processing_status == "ended":
@@ -157,9 +162,9 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
                         updated_count += 1
 
             except (json.JSONDecodeError, ValueError, IndexError) as e:
-                print(f"Error processing result {custom_id}: {e}")
+                logger.error("Error processing result %s: %s", custom_id, e)
 
-        print(f"Updated {updated_count} diseases from batch {batch_id}")
+        logger.info("Updated %d diseases from batch %s", updated_count, batch_id)
         return diseases
 
     def enrich_diseases_batch(
@@ -167,7 +172,7 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
     ) -> dict:
         """Enrich diseases using batch API."""
         batches = self.create_batch_requests(diseases)
-        print(f"Created {len(batches)} batch(es)")
+        logger.info("Created %d batch(es)", len(batches))
 
         batch_ids = []
         for batch_requests in batches:
