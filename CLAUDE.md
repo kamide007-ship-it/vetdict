@@ -312,11 +312,12 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - ハムスター: 36件のlow urgencyテンプレートが残存 (11%)
 - 鳥: 93件のmoderate/lowテンプレートが残存 (16%)
 - ハリネズミ: 50件のmoderate/lowテンプレートが残存 (20%)
-- フェレット: 93件 (33%) — emergency/highの詳細化が必要
-- モルモット: 141件 (40%) — emergency/highの詳細化が必要
-- チンチラ: 113件 (40%) — emergency/highの詳細化が必要
-- フクロモモンガ: 80件 (36%) — emergency/highの詳細化が必要
-- デグー: 75件 (37%) — emergency/highの詳細化が必要
+- フェレット: 93→61件 (22%) — 主要疾患は詳細化済み
+- モルモット: 141→108件 (31%) — emergency/highの主要疾患は詳細化済み
+- チンチラ: 113→84件 (30%) — emergency/highの主要疾患は詳細化済み
+- フクロモモンガ: 80→54件 (24%) — emergency/highの主要疾患は詳細化済み
+- デグー: 75→47件 (23%) — emergency/highの主要疾患は詳細化済み
+- 残り533件はmoderate/low urgencyまたはvariant/subformエントリ
 
 ### 診断精度の体系的検証
 - TRIPOD準拠の検証プロトコル策定が必要
