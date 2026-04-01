@@ -2220,6 +2220,16 @@ function guidedRenderFinalResults(data){
   if(data.pain_score!=null)ctxParts.push((currentLang==="ja"?"疼痛: ":"Pain: ")+data.pain_score+"/4");
   if(ctxParts.length>0)guidedAddMsg(ctxParts.join(" / "),"bot");
 
+  // Low-confidence warning
+  const topPct=diseases.length>0?(diseases[0].match_percent||0):0;
+  const symCount=details.length;
+  if(symCount<=2||topPct<50){
+    const warnMsg=currentLang==="ja"
+      ?`症状${symCount}個での診断です（最高信頼度 ${topPct}%）。症状を追加すると精度が大幅に向上します。`
+      :`Diagnosis based on ${symCount} symptom(s) (top confidence ${topPct}%). Adding more symptoms will significantly improve accuracy.`;
+    guidedAddMsg(`<div class="guided-low-confidence-warn">${escapeHtml(warnMsg)}</div>`,"bot chat-result");
+  }
+
   // Disease results
   if(diseases.length>0){
     let html=`<div class="guided-final-label">${t("guidedFinalTitle")}</div>`;
@@ -2257,8 +2267,11 @@ function guidedRenderFinalResults(data){
   const disclaimer=currentLang==="ja"?rec.next_step_ja:rec.next_step_en;
   if(disclaimer)guidedAddMsg(`<div class="chat-disclaimer">${escapeHtml(disclaimer)}</div>`,"bot chat-result");
 
-  // Restart button
-  guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);
+  // Action buttons: add more symptoms + restart
+  const addMoreLabel=currentLang==="ja"?"+ 症状を追加して再診断":"+ Add symptoms & re-diagnose";
+  guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn primary" id="guidedAddMore">${addMoreLabel}</button><button class="guided-action-btn text" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);
+  const addBtn=document.getElementById("guidedAddMore");
+  if(addBtn)addBtn.addEventListener("click",()=>{guidedSetActions("");guidedFetch("next_category");});
   const rb=document.getElementById("guidedRestartFinal");
   if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
 }

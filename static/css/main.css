@@ -327,6 +327,7 @@ a:hover{text-decoration:underline}
 .chat-symptom-tag.removable:hover{opacity:.85}
 .guided-tag-remove{background:none;border:none;color:var(--white);font-size:.82rem;line-height:1;cursor:pointer;padding:0 1px;opacity:.7;transition:opacity .15s}
 .guided-tag-remove:hover{opacity:1}
+.guided-low-confidence-warn{padding:10px 12px;margin:4px 0;border-radius:var(--radius);background:#fef3c7;border-left:4px solid #f59e0b;font-size:.78rem;color:#92400e;line-height:1.5}
 .chat-disease-list{display:flex;flex-direction:column;gap:6px}
 .chat-disease-card{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:10px 12px;transition:box-shadow .2s}
 .chat-disease-card:hover{box-shadow:var(--shadow-md)}
