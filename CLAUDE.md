@@ -1,8 +1,9 @@
 # VetDict — Claude Code Project Guide
 
 ## プロジェクト概要
-獣医学疾患データベース・薬品辞書・AI診断チャットを搭載した獣医学総合プラットフォーム。
+獣医師・獣医学生を対象とした臨床意思決定支援プラットフォーム。疾患データベース・薬品辞書・AI鑑別診断チャットを搭載。
 - **URL**: https://vetdict.info
+- **ターゲット**: 獣医師・獣医学生（臨床意思決定支援ツール）
 - **デプロイ**: Render (gunicorn)
 - **開発者**: 上手 健太郎 DVM（南相馬アニマルクリニック）
 - **運営**: Equine Vet Synapse
@@ -148,10 +149,11 @@ scripts/
 
 ## 重要な設定
 ### PayPal
-- Client ID: `AX7kp51y...VTUE` (フロントエンドに設定済み)
+- Client ID: 環境変数 `PAYPAL_CLIENT_ID` (Renderダッシュボードで設定)
 - Secret: 環境変数 `PAYPAL_SECRET` (Renderダッシュボードで設定)
-- Plan ID: `P-5FB7289813535813HNHCF4OA` (¥980/月)
-- Webhook: `https://vetdict.info/api/paypal/webhook` (ID: 5DH235157M131750H)
+- Plan ID: 環境変数 `PAYPAL_PLAN_ID` (¥980/月)
+- Webhook: `https://vetdict.info/api/paypal/webhook` (環境変数 `PAYPAL_WEBHOOK_ID` — 本番必須)
+- **注意**: クレデンシャルは全て環境変数経由。ソースコードにデフォルト値を書かないこと
 
 ### Stripe (未使用/将来用)
 - Account: acct_1T0Tw86CJtNyrrE8
@@ -214,6 +216,10 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - Renderフリープランのスリープ問題（15分無操作→初回アクセス遅延）
 - エキゾチック動物（ウサギ/鳥/爬虫類等）の治療プロトコルはカテゴリベースの汎用記載が多い — 犬猫と同レベルの個別詳細プロトコルへのアップグレードが望ましい
 - 問診モードのUI動作確認・ブラウザテストが未実施
+- **診断精度の体系的検証**: 感度/特異度/PPV/NPVの定量評価が未実施。TRIPODガイドラインに準拠した検証プロトコルの策定が必要
+- **臨床データのピアレビュー文書化**: AIエンリッチメント（enrich_treatment_prognosis.py等）で生成されたデータの獣医師レビュー履歴が未文書化。レビューログの整備が望ましい
+- **依存関係のピニング**: anthropic>=0.7.0等の緩いバージョン指定。lockfile未導入
+- **テストカバレッジ計測**: pytest-covはインストール済みだがCI未設定
 
 ## 2026-03セッションで実施した主な改善
 ### 問診モード (Guided Consultation)
@@ -241,3 +247,23 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - 眼球突出マッピング修正: `pop_eye`(魚専用)→`eye_bulging`に修正
 - `_ID_SYNONYMS`/`_SYN` に eye_bulging, enlarged_eye, exophthalmos, hind_leg_weakness, abdominal_pain↔hunched_posture 追加
 - ウサギGI stasis: 81.9%→95.0% (rank1)、フェレットインスリノーマ: 0%→51.5%、爬虫類呼吸器: 72.6%→95.0%
+
+## 2026-04セッションで実施した主な改善
+
+### ターゲット明確化（獣医師・獣医学生）
+- ヒーロー・ナビ・チャット・プライシング・フッターのコピーを獣医師向けに統一
+- SEOメタタグ（title/description/OGP/Twitter Card）を臨床意思決定支援キーワードに最適化
+- Schema.org に audience 属性追加（Veterinarians, Veterinary Students, Veterinary Technicians）
+- manifest.json のPWAショートカットを臨床用語に統一
+
+### セキュリティ強化
+- Admin API全11エンドポイントに `@require_internal_api_access` デコレータ適用
+- PayPalクレデンシャルのハードコードデフォルト値を削除（環境変数必須に）
+- Webhook検証を本番で必須化（fail-closed、debug時のみスキップ許可）
+- サブスクライバーデータ: subscribers.json → subscribers.db (SQLite + WAL)
+- ウェイトリストデータ: waitlist.json → waitlist.db (SQLite + WAL + UNIQUE制約)
+- モジュールロード時にJSON→SQLite自動マイグレーション
+
+### 参考文献拡充（72→90+ citations）
+- AAHA/AVMA/ISFM/WSAVA臨床ガイドライン10件追加（ワクチン、CKD、糖尿病等）
+- 診断精度検証・臨床意思決定支援の文献8件追加（TRIPOD、JAMA CDS、NEJM ML等）
