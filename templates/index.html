@@ -15,24 +15,24 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8LSEGW9ZX" nonce="{{ g.csp_nonce }}"></script>
 <script nonce="{{ g.csp_nonce }}">gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>Vet Dict — 多動物種対応 獣医学疾患データベース</title>
-<meta name="description" content="臨床症状から鑑別疾患リストを即座に表示。6,400+疾患・194薬品・21動物種対応。獣医師が開発した獣医臨床支援プラットフォーム。">
-<meta property="og:title" content="VetDict — 獣医学疾患データベース | 21動物種対応">
-<meta property="og:description" content="臨床症状から鑑別疾患リストを即座に表示。6,400+疾患・194薬品・21動物種対応。獣医師が開発した獣医臨床支援プラットフォーム。">
+<title>VetDict — 獣医師のための臨床意思決定支援ツール | 鑑別診断・疾患DB・薬品辞書</title>
+<meta name="description" content="獣医師・獣医学生向け臨床支援プラットフォーム。臨床症状から鑑別疾患リストを即座に生成。6,400+疾患・194薬品・21動物種対応。現役獣医師が開発。">
+<meta property="og:title" content="VetDict — 獣医師のための臨床意思決定支援ツール">
+<meta property="og:description" content="獣医師・獣医学生向け。臨床症状から鑑別疾患リストを即座に生成。6,400+疾患・194薬品・21動物種対応。現役獣医師が開発した臨床支援プラットフォーム。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vetdict.info/">
 <meta property="og:site_name" content="VetDict">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VetDict — 獣医学疾患データベース">
-<meta name="twitter:description" content="21動物種・6,400+疾患・194薬品。獣医師が開発した獣医臨床支援プラットフォーム。">
+<meta name="twitter:title" content="VetDict — 獣医師のための臨床意思決定支援ツール">
+<meta name="twitter:description" content="獣医師・獣医学生向け。6,400+疾患・194薬品・21動物種。臨床症状から鑑別疾患リストを即座に生成。">
 <meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
 <meta property="og:image" content="https://vetdict.info/static/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="VetDict — 21動物種対応の獣医学疾患データベース">
+<meta property="og:image:alt" content="VetDict — 獣医師のための臨床意思決定支援ツール">
 <link rel="canonical" href="https://vetdict.info/">
 <link rel="alternate" hreflang="x-default" href="https://vetdict.info/">
 <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
@@ -49,9 +49,13 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
   "@type": "WebApplication",
   "name": "VetDict",
   "alternateName": "Vet Dict - Veterinary Disease Database",
-  "description": "21動物種対応 獣医学疾患データベース・薬品辞書・AI診断チャット",
+  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。6,400+疾患・194薬品・21動物種対応の鑑別診断・疾患DB・薬品辞書。",
   "applicationCategory": "HealthApplication",
   "applicationSubCategory": "VeterinaryApplication",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Veterinarians, Veterinary Students, Veterinary Technicians"
+  },
   "operatingSystem": "Web",
   "url": "https://vetdict.info/",
   "inLanguage": ["ja", "en"],

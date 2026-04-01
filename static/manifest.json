@@ -1,7 +1,7 @@
 {
-  "name": "VetDict - Veterinary Disease Database",
+  "name": "VetDict - Clinical Decision Support for Veterinarians",
   "short_name": "VetDict",
-  "description": "21 animal species, 6,400+ diseases, 187 drugs. AI-powered veterinary diagnostic support.",
+  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。6,400+疾患・194薬品・21動物種対応。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a3068",
@@ -25,28 +25,28 @@
   "categories": ["medical", "education", "health"],
   "shortcuts": [
     {
-      "name": "症状チェッカー",
-      "short_name": "チェッカー",
+      "name": "鑑別診断",
+      "short_name": "鑑別Dx",
       "url": "/#checker",
-      "description": "症状から疾患を鑑別"
+      "description": "臨床症状から鑑別疾患リストを生成"
     },
     {
       "name": "疾患データベース",
       "short_name": "疾患DB",
       "url": "/#database",
-      "description": "6,400+疾患を検索"
+      "description": "6,400+疾患を検索・閲覧"
     },
     {
-      "name": "症状相談チャット",
-      "short_name": "チャット",
+      "name": "臨床相談チャット",
+      "short_name": "臨床相談",
       "url": "/#chat",
-      "description": "AIに症状を相談"
+      "description": "臨床症状から鑑別疾患を相談"
     },
     {
       "name": "薬品辞書",
       "short_name": "薬品",
       "url": "/#drugs",
-      "description": "187薬品の投与量を検索"
+      "description": "194薬品の種別投与量を検索"
     }
   ]
 }

@@ -1,16 +1,13 @@
-"""Tests for PayPal subscription management API."""
+"""Tests for PayPal subscription management API (SQLite-backed)."""
 
-import json
 import os
 from unittest.mock import patch
 
 import flask
 
 from api.paypal_api import (
-    _load_subscribers,
-    _load_waitlist,
-    _save_subscribers,
-    _save_waitlist,
+    _get_subscribers_db,
+    _get_waitlist_db,
     paypal_bp,
 )
 
@@ -24,67 +21,81 @@ def _create_app():
 
 
 # ---------------------------------------------------------------------------
-# Subscriber storage helpers
+# Subscriber storage (SQLite)
 # ---------------------------------------------------------------------------
 
 
 class TestSubscriberStorage:
-    """Tests for JSON-based subscriber persistence."""
+    """Tests for SQLite-based subscriber persistence."""
 
-    def test_load_subscribers_missing_file(self, tmp_path):
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", tmp_path / "missing.json"):
-            result = _load_subscribers()
-        assert result == {"subscribers": []}
+    def test_subscribers_db_creates_table(self, tmp_path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                tables = conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' AND name='subscribers'"
+                ).fetchall()
+                assert len(tables) == 1
+            finally:
+                conn.close()
 
-    def test_load_subscribers_corrupt_file(self, tmp_path):
-        bad = tmp_path / "corrupt.json"
-        bad.write_text("{bad json", encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", bad):
-            result = _load_subscribers()
-        assert result == {"subscribers": []}
-
-    def test_save_and_load_roundtrip(self, tmp_path):
-        path = tmp_path / "subs.json"
-        data = {"subscribers": [{"subscription_id": "I-TEST123", "status": "active"}]}
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
-            _save_subscribers(data)
-            loaded = _load_subscribers()
-        assert loaded == data
-
-    def test_save_creates_parent_dirs(self, tmp_path):
-        path = tmp_path / "nested" / "dir" / "subs.json"
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
-            _save_subscribers({"subscribers": []})
-        assert path.exists()
+    def test_subscribers_db_insert_and_query(self, tmp_path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, email, status, activated_at) VALUES (?, ?, ?, ?)",
+                    ("I-TEST", "vet@example.com", "active", "2026-01-01"),
+                )
+                conn.commit()
+                row = conn.execute("SELECT * FROM subscribers WHERE subscription_id = 'I-TEST'").fetchone()
+                assert row["email"] == "vet@example.com"
+                assert row["status"] == "active"
+            finally:
+                conn.close()
 
 
 # ---------------------------------------------------------------------------
-# Waitlist storage helpers
+# Waitlist storage (SQLite)
 # ---------------------------------------------------------------------------
 
 
 class TestWaitlistStorage:
-    """Tests for JSON-based waitlist persistence."""
+    """Tests for SQLite-based waitlist persistence."""
 
-    def test_load_waitlist_missing_file(self, tmp_path):
-        with patch("api.paypal_api._WAITLIST_FILE", tmp_path / "missing.json"):
-            result = _load_waitlist()
-        assert result == []
+    def test_waitlist_db_creates_table(self, tmp_path):
+        db_path = tmp_path / "wl.db"
+        with patch("api.paypal_api._WAITLIST_DB", db_path):
+            conn = _get_waitlist_db()
+            try:
+                tables = conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' AND name='waitlist'"
+                ).fetchall()
+                assert len(tables) == 1
+            finally:
+                conn.close()
 
-    def test_load_waitlist_corrupt_file(self, tmp_path):
-        bad = tmp_path / "corrupt.json"
-        bad.write_text("not json!", encoding="utf-8")
-        with patch("api.paypal_api._WAITLIST_FILE", bad):
-            result = _load_waitlist()
-        assert result == []
-
-    def test_save_and_load_roundtrip(self, tmp_path):
-        path = tmp_path / "wl.json"
-        data = [{"email": "vet@example.com", "signed_up_at": "2026-01-01T00:00:00"}]
-        with patch("api.paypal_api._WAITLIST_FILE", path):
-            _save_waitlist(data)
-            loaded = _load_waitlist()
-        assert loaded == data
+    def test_waitlist_unique_email(self, tmp_path):
+        db_path = tmp_path / "wl.db"
+        with patch("api.paypal_api._WAITLIST_DB", db_path):
+            conn = _get_waitlist_db()
+            try:
+                conn.execute(
+                    "INSERT INTO waitlist (email, signed_up_at) VALUES (?, ?)",
+                    ("vet@example.com", "2026-01-01"),
+                )
+                conn.commit()
+                conn.execute(
+                    "INSERT OR IGNORE INTO waitlist (email, signed_up_at) VALUES (?, ?)",
+                    ("vet@example.com", "2026-01-02"),
+                )
+                conn.commit()
+                count = conn.execute("SELECT COUNT(*) FROM waitlist").fetchone()[0]
+                assert count == 1
+            finally:
+                conn.close()
 
 
 # ---------------------------------------------------------------------------
@@ -115,8 +126,8 @@ class TestActivateSubscription:
         assert resp.status_code == 400
 
     def test_activate_success(self, tmp_path):
-        path = tmp_path / "subs.json"
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
             resp = self.client.post(
                 "/api/paypal/activate",
                 json={"subscription_id": "I-NEW123", "email": "vet@example.com"},
@@ -127,24 +138,32 @@ class TestActivateSubscription:
         assert data["subscription_id"] == "I-NEW123"
 
     def test_activate_duplicate_updates_email(self, tmp_path):
-        path = tmp_path / "subs.json"
-        initial = {
-            "subscribers": [
-                {"subscription_id": "I-DUP", "email": "", "status": "active"}
-            ]
-        }
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(initial), encoding="utf-8")
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            # First activation without email
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, email, status, activated_at) VALUES (?, ?, ?, ?)",
+                    ("I-DUP", "", "active", "2026-01-01"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
 
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
             resp = self.client.post(
                 "/api/paypal/activate",
                 json={"subscription_id": "I-DUP", "email": "new@example.com"},
             )
         assert resp.status_code == 200
         # Verify email was updated
-        saved = json.loads(path.read_text(encoding="utf-8"))
-        assert saved["subscribers"][0]["email"] == "new@example.com"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                row = conn.execute("SELECT email FROM subscribers WHERE subscription_id = 'I-DUP'").fetchone()
+                assert row["email"] == "new@example.com"
+            finally:
+                conn.close()
 
     def test_activate_no_body(self):
         resp = self.client.post(
@@ -173,10 +192,8 @@ class TestRestoreSubscription:
         assert resp.get_json()["error"] == "email required"
 
     def test_restore_no_matching_subscription(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"subscribers": []}), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
             resp = self.client.post(
                 "/api/paypal/restore", json={"email": "nobody@example.com"}
             )
@@ -186,20 +203,18 @@ class TestRestoreSubscription:
         assert data["error"] == "no_active_subscription"
 
     def test_restore_active_subscription_found(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        subs = {
-            "subscribers": [
-                {
-                    "subscription_id": "I-RESTORE",
-                    "email": "vet@example.com",
-                    "status": "active",
-                    "activated_at": "2026-01-15T10:00:00",
-                }
-            ]
-        }
-        path.write_text(json.dumps(subs), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, email, status, activated_at) VALUES (?, ?, ?, ?)",
+                    ("I-RESTORE", "vet@example.com", "active", "2026-01-15T10:00:00"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
             resp = self.client.post(
                 "/api/paypal/restore", json={"email": "vet@example.com"}
             )
@@ -208,19 +223,18 @@ class TestRestoreSubscription:
         assert data["subscription_id"] == "I-RESTORE"
 
     def test_restore_cancelled_subscription_not_returned(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        subs = {
-            "subscribers": [
-                {
-                    "subscription_id": "I-CANCEL",
-                    "email": "ex@example.com",
-                    "status": "cancelled",
-                }
-            ]
-        }
-        path.write_text(json.dumps(subs), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, email, status) VALUES (?, ?, ?)",
+                    ("I-CANCEL", "ex@example.com", "cancelled"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
             resp = self.client.post(
                 "/api/paypal/restore", json={"email": "ex@example.com"}
             )
@@ -244,15 +258,18 @@ class TestVerifySubscription:
         assert resp.status_code == 400
 
     def test_verify_active(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        subs = {
-            "subscribers": [
-                {"subscription_id": "I-VERIFY", "status": "active"}
-            ]
-        }
-        path.write_text(json.dumps(subs), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, status) VALUES (?, ?)",
+                    ("I-VERIFY", "active"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
             resp = self.client.post(
                 "/api/paypal/verify", json={"subscription_id": "I-VERIFY"}
             )
@@ -260,10 +277,8 @@ class TestVerifySubscription:
         assert data["active"] is True
 
     def test_verify_inactive(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"subscribers": []}), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
             resp = self.client.post(
                 "/api/paypal/verify", json={"subscription_id": "I-MISSING"}
             )
@@ -283,18 +298,20 @@ class TestWebhook:
         self.client = self.app.test_client()
 
     def test_webhook_no_subscription_id(self):
-        resp = self.client.post(
-            "/api/paypal/webhook",
-            json={"event_type": "BILLING.SUBSCRIPTION.ACTIVATED", "resource": {}},
-        )
+        with patch("api.paypal_api._verify_webhook_signature", return_value=True):
+            resp = self.client.post(
+                "/api/paypal/webhook",
+                json={"event_type": "BILLING.SUBSCRIPTION.ACTIVATED", "resource": {}},
+            )
         assert resp.status_code == 200
         assert resp.get_json()["status"] == "ignored"
 
     def test_webhook_activation_creates_subscriber(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"subscribers": []}), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with (
+            patch("api.paypal_api._SUBSCRIBERS_DB", db_path),
+            patch("api.paypal_api._verify_webhook_signature", return_value=True),
+        ):
             resp = self.client.post(
                 "/api/paypal/webhook",
                 json={
@@ -303,20 +320,32 @@ class TestWebhook:
                 },
             )
         assert resp.status_code == 200
-        saved = json.loads(path.read_text(encoding="utf-8"))
-        assert len(saved["subscribers"]) == 1
-        assert saved["subscribers"][0]["status"] == "active"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                row = conn.execute("SELECT * FROM subscribers WHERE subscription_id = 'I-HOOK1'").fetchone()
+                assert row is not None
+                assert row["status"] == "active"
+            finally:
+                conn.close()
 
     def test_webhook_payment_completed_updates_existing(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        subs = {
-            "subscribers": [
-                {"subscription_id": "I-PAY", "status": "active"}
-            ]
-        }
-        path.write_text(json.dumps(subs), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, status) VALUES (?, ?)",
+                    ("I-PAY", "active"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
+        with (
+            patch("api.paypal_api._SUBSCRIBERS_DB", db_path),
+            patch("api.paypal_api._verify_webhook_signature", return_value=True),
+        ):
             resp = self.client.post(
                 "/api/paypal/webhook",
                 json={
@@ -325,19 +354,31 @@ class TestWebhook:
                 },
             )
         assert resp.status_code == 200
-        saved = json.loads(path.read_text(encoding="utf-8"))
-        assert saved["subscribers"][0].get("last_payment") is not None
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                row = conn.execute("SELECT last_payment FROM subscribers WHERE subscription_id = 'I-PAY'").fetchone()
+                assert row["last_payment"] is not None
+            finally:
+                conn.close()
 
     def test_webhook_cancellation(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        subs = {
-            "subscribers": [
-                {"subscription_id": "I-CANCEL", "status": "active"}
-            ]
-        }
-        path.write_text(json.dumps(subs), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, status) VALUES (?, ?)",
+                    ("I-CANCEL", "active"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
+        with (
+            patch("api.paypal_api._SUBSCRIBERS_DB", db_path),
+            patch("api.paypal_api._verify_webhook_signature", return_value=True),
+        ):
             resp = self.client.post(
                 "/api/paypal/webhook",
                 json={
@@ -346,15 +387,21 @@ class TestWebhook:
                 },
             )
         assert resp.status_code == 200
-        saved = json.loads(path.read_text(encoding="utf-8"))
-        assert saved["subscribers"][0]["status"] == "cancelled"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                row = conn.execute("SELECT status FROM subscribers WHERE subscription_id = 'I-CANCEL'").fetchone()
+                assert row["status"] == "cancelled"
+            finally:
+                conn.close()
 
     def test_webhook_billing_agreement_id_fallback(self, tmp_path):
         """Subscription ID from billing_agreement_id when id is absent."""
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"subscribers": []}), encoding="utf-8")
-        with patch("api.paypal_api._SUBSCRIBERS_FILE", path):
+        db_path = tmp_path / "subs.db"
+        with (
+            patch("api.paypal_api._SUBSCRIBERS_DB", db_path),
+            patch("api.paypal_api._verify_webhook_signature", return_value=True),
+        ):
             resp = self.client.post(
                 "/api/paypal/webhook",
                 json={
@@ -363,17 +410,17 @@ class TestWebhook:
                 },
             )
         assert resp.status_code == 200
-        saved = json.loads(path.read_text(encoding="utf-8"))
-        assert saved["subscribers"][0]["subscription_id"] == "I-BILL"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                row = conn.execute("SELECT * FROM subscribers WHERE subscription_id = 'I-BILL'").fetchone()
+                assert row is not None
+            finally:
+                conn.close()
 
-    def test_webhook_invalid_signature_rejected(self, tmp_path):
-        """When PAYPAL_WEBHOOK_ID is set and verification fails, return 403."""
-        path = tmp_path / "subs.json"
-        with (
-            patch.dict(os.environ, {"PAYPAL_WEBHOOK_ID": "WH-TEST123"}),
-            patch("api.paypal_api._verify_webhook_signature", return_value=False),
-            patch("api.paypal_api._SUBSCRIBERS_FILE", path),
-        ):
+    def test_webhook_invalid_signature_rejected(self):
+        """When verification fails, return 403."""
+        with patch("api.paypal_api._verify_webhook_signature", return_value=False):
             resp = self.client.post(
                 "/api/paypal/webhook",
                 json={
@@ -409,18 +456,25 @@ class TestListSubscribers:
         assert resp.status_code == 403
 
     def test_authorized_returns_subscribers(self, tmp_path):
-        path = tmp_path / "subs.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        subs = {
-            "subscribers": [
-                {"subscription_id": "I-A", "status": "active"},
-                {"subscription_id": "I-B", "status": "cancelled"},
-            ]
-        }
-        path.write_text(json.dumps(subs), encoding="utf-8")
+        db_path = tmp_path / "subs.db"
+        with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
+            conn = _get_subscribers_db()
+            try:
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, status) VALUES (?, ?)",
+                    ("I-A", "active"),
+                )
+                conn.execute(
+                    "INSERT INTO subscribers (subscription_id, status) VALUES (?, ?)",
+                    ("I-B", "cancelled"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
         with (
             patch.dict(os.environ, {"ADMIN_TOKEN": "secret123"}),
-            patch("api.paypal_api._SUBSCRIBERS_FILE", path),
+            patch("api.paypal_api._SUBSCRIBERS_DB", db_path),
         ):
             resp = self.client.get(
                 "/api/paypal/subscribers",
@@ -452,8 +506,8 @@ class TestWaitlistEndpoints:
         assert resp.status_code == 400
 
     def test_join_waitlist_success(self, tmp_path):
-        path = tmp_path / "wl.json"
-        with patch("api.paypal_api._WAITLIST_FILE", path):
+        db_path = tmp_path / "wl.db"
+        with patch("api.paypal_api._WAITLIST_DB", db_path):
             resp = self.client.post(
                 "/api/paypal/waitlist", json={"email": "vet@example.com"}
             )
@@ -463,8 +517,8 @@ class TestWaitlistEndpoints:
         assert data["total"] == 1
 
     def test_join_waitlist_duplicate_ignored(self, tmp_path):
-        path = tmp_path / "wl.json"
-        with patch("api.paypal_api._WAITLIST_FILE", path):
+        db_path = tmp_path / "wl.db"
+        with patch("api.paypal_api._WAITLIST_DB", db_path):
             self.client.post(
                 "/api/paypal/waitlist", json={"email": "vet@example.com"}
             )
@@ -478,15 +532,21 @@ class TestWaitlistEndpoints:
         assert resp.status_code == 403
 
     def test_get_waitlist_authorized(self, tmp_path):
-        path = tmp_path / "wl.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            json.dumps([{"email": "a@b.com", "signed_up_at": "2026-01-01"}]),
-            encoding="utf-8",
-        )
+        db_path = tmp_path / "wl.db"
+        with patch("api.paypal_api._WAITLIST_DB", db_path):
+            conn = _get_waitlist_db()
+            try:
+                conn.execute(
+                    "INSERT INTO waitlist (email, signed_up_at) VALUES (?, ?)",
+                    ("a@b.com", "2026-01-01"),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
         with (
             patch.dict(os.environ, {"ADMIN_TOKEN": "secret"}),
-            patch("api.paypal_api._WAITLIST_FILE", path),
+            patch("api.paypal_api._WAITLIST_DB", db_path),
         ):
             resp = self.client.get(
                 "/api/paypal/waitlist",
@@ -509,7 +569,7 @@ class TestCreateSubscription:
         self.client = self.app.test_client()
 
     def test_create_subscription_no_secret(self):
-        """Without PAYPAL_SECRET, token retrieval fails → 500."""
+        """Without PAYPAL_SECRET, token retrieval fails -> 500."""
         with patch("api.paypal_api.PAYPAL_SECRET", ""):
             resp = self.client.post("/api/paypal/create-subscription")
         assert resp.status_code == 500

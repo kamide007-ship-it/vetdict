@@ -120,7 +120,7 @@
 
   <div id="viewChat" class="hidden" role="tabpanel" aria-labelledby="tab-chat">
     <div class="card" style="margin-top:20px">
-      <div class="card-header" data-i18n-html="cardChat">&#128172; 症状相談</div>
+      <div class="card-header" data-i18n-html="cardChat">&#128172; 臨床相談</div>
       <div class="chat-mode-toggle">
         <button id="chatModeFree" class="chat-mode-btn active" data-i18n="chatModeFree">自由入力</button>
         <button id="chatModeGuided" class="chat-mode-btn" data-i18n="chatModeGuided">問診モード</button>
@@ -128,13 +128,13 @@
       <div class="chat-container" id="chatFreeContainer">
         <div class="chat-messages" id="chatMessages" aria-live="polite" aria-relevant="additions">
           <div class="chat-msg bot" id="chatWelcome" data-i18n-html="chatWelcome">
-            こんにちは。気になる症状を日本語または英語で入力してください。<br/>
-            例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/>
-            <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>
+            臨床症状を日本語または英語で入力してください。<br/>
+            例: 「3歳猫 嘔吐 食欲廃絶 黄疸」「5yo dog PU/PD weight loss」<br/><br/>
+            <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは臨床意思決定支援を目的とした参考情報を提供するものです。確定診断には臨床所見・検査結果との総合判断が必要です。</em>
           </div>
         </div>
         <div class="chat-input-row">
-          <input type="text" id="chatInput" placeholder="症状を入力してください..." data-i18n-ph="chatInputPh"/>
+          <input type="text" id="chatInput" placeholder="臨床症状を入力..." data-i18n-ph="chatInputPh"/>
           <button id="chatSend" data-i18n="chatSend">送信</button>
         </div>
       </div>
