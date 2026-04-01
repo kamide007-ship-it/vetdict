@@ -20,7 +20,7 @@ from flask import Flask, Response, g, jsonify, render_template, request, send_fr
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
-from api.auth import require_internal_api_access
+from api.auth import ClientIP, RateLimiter, require_internal_api_access
 from api.debug_config import is_debug_mode_enabled
 
 # ---------------------------------------------------------------------------
@@ -71,8 +71,6 @@ STATIC_DIR = str(ROOT_DIR / 'static')
 # ---------------------------------------------------------------------------
 # Public API rate limiter (prevents abuse of compute-heavy endpoints)
 # ---------------------------------------------------------------------------
-from api.auth import RateLimiter, ClientIP
-
 _public_rate_limiter = RateLimiter(
     max_requests=int(os.getenv('PUBLIC_API_RATE_LIMIT', '60')),
     window_seconds=60,
