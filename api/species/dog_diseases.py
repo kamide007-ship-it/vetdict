@@ -3242,6 +3242,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "skin_redness", "rapid_breathing", "fever"},
         "description": "Concurrent IMHA and immune-mediated thrombocytopenia, a serious autoimmune condition.",
         "description_ja": "IMHAと免疫介在性血小板減少症の同時発生で、重篤な自己免疫疾患です。",
+        "pathophysiology_ja": "免疫介在性溶血性貧血（IMHA）＋免疫介在性血小板減少症（ITP）の同時発症→赤血球と血小板の両方が自己抗体により破壊→重度貧血＋出血傾向の二重苦。IMHA単独よりも予後不良（致死率40〜70%）。DIC・血栓塞栓症の合併リスクが極めて高い。",
+        "causes_ja": "一次性（特発性自己免疫性、最多）。二次性：腫瘍（リンパ腫）、感染症（Ehrlichia・Babesia）、薬剤性。IMHA好発犬種と同様（コッカースパニエル、プードル、オールドイングリッシュシープドッグ）。中年雌犬に多い。",
+        "prevention_ja": "確実な予防法はない。IMHA治療中の血小板数モニタリングが重要。強力な免疫抑制療法（プレドニゾロン＋ミコフェノール酸モフェチル/シクロスポリン）＋抗血栓療法が必要。輸血サポート。",
         "urgency": "emergency",
     },
     # ---- Urinary (expanded) ----
@@ -3270,6 +3273,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"straining_urinate", "pain_on_touch", "vomiting", "lethargy"},
         "description": "Complete blockage of the urethra by stones or mucus plug, a life-threatening emergency in males.",
         "description_ja": "結石や粘液栓による尿道の完全閉塞で、オス犬では致命的な緊急疾患です。",
+        "pathophysiology_ja": "尿道結石（ストルバイト・シュウ酸カルシウム・尿酸塩）または粘液栓による尿道完全閉塞→排尿不能→膀胱の過伸展→腎後性高窒素血症（BUN・Cre上昇）→高カリウム血症→心室性不整脈・心停止。閉塞後24〜48時間で致死的な代謝異常に進展。雄犬は陰茎骨部位で尿道が狭く閉塞しやすい。",
+        "causes_ja": "尿路結石（最多：ストルバイト・シュウ酸カルシウム）、腫瘍（TCC）、前立腺肥大による尿道圧排、尿道狭窄。雄犬に圧倒的に多い（解剖学的に尿道が長く陰茎骨で狭窄）。ダルメシアン（尿酸塩結石）、ミニチュアシュナウザー（シュウ酸Ca）。",
+        "prevention_ja": "結石再発防止食（ストルバイト：酸性化食、シュウ酸Ca：クエン酸K＋適度な水分摂取）、定期的な尿検査・腹部エコー、十分な飲水量の確保。排尿困難の早期受診が救命に直結。",
         "urgency": "emergency",
     },
     # ---- Dental (expanded) ----
@@ -3610,6 +3616,9 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Cardiac Tamponade",
+        "pathophysiology_ja": "心嚢腔への急速な液体貯留→心嚢内圧が心房圧を超過→心臓の拡張障害→心拍出量の急激な低下→静脈還流障害→Beck三徴（頸静脈怒張・低血圧・心音減弱）→心原性ショック→心停止。急性（血管肉腫破裂・心房裂傷）では少量の液体でも致命的。心嚢穿刺（pericardiocentesis）が緊急的治療。",
+        "causes_ja": "腫瘍性（右心房血管肉腫が最多、心基底部腫瘍、中皮腫）、特発性（良性反復性心嚢水）、心房裂傷（小型犬の左房破裂：MMVD末期）、感染性（犬では稀）、凝固障害。ゴールデンレトリーバー・ジャーマンシェパードに好発（血管肉腫）。",
+        "prevention_ja": "確実な予防法はない。心嚢水の原因精査（心エコー・心嚢液細胞診）が重要。反復性の場合は心嚢膜切除術。腫瘍性は原疾患の予後に依存。",
         "name_ja": "心タンポナーデ",
         "symptoms": {"collapse", "difficulty_breathing", "rapid_breathing", "lethargy", "excessive_panting"},
         "description": "Life-threatening compression of the heart by fluid accumulation in the pericardial sac, requiring emergency drainage.",
@@ -3630,6 +3639,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "lethargy", "difficulty_breathing", "excessive_panting", "rapid_breathing"},
         "description": "A dangerous rapid heart rhythm originating from the ventricles that can lead to sudden death.",
         "description_ja": "心室から発生する危険な頻拍で、突然死につながる可能性があります。",
+        "pathophysiology_ja": "心室筋のリエントリー回路または異常自動能→心室の急速な異所性興奮（HR>160-300/min）→心室充満時間の短縮→心拍出量低下→失神・虚脱。持続性VT→心室細動（VF）→心停止・突然死。犬で最も多い致死性不整脈。R-on-T現象（VPCがT波に乗る）はVFへの移行リスクが最も高い。",
+        "causes_ja": "脾臓血管肉腫（最多の腫瘍性原因）、DCM（ドーベルマン・ボクサーARVC）、GDV（胃捻転に伴う再灌流障害）、心筋炎、電解質異常（高K血症）、薬物中毒（ジゴキシン）、外傷性心筋炎（交通事故後24〜72時間）。",
+        "prevention_ja": "基礎疾患の管理。好発犬種（ドーベルマン・ボクサー）のホルター心電図スクリーニング。VPC>50/日で抗不整脈薬（ソタロール・メキシレチン）を検討。GDV術後は48時間のECGモニタリングが推奨。",
         "urgency": "emergency",
     },
     {
@@ -4574,6 +4586,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "abdominal_pain", "vomiting", "lethargy", "collapse", "bloated_abdomen", "dehydration"},
         "description": "Life-threatening inflammation of the peritoneum, often from GI perforation, bile leakage, or ruptured abscess.",
         "description_ja": "腹膜の致死的炎症で、消化管穿孔、胆汁漏出、膿瘍破裂が原因となることが多いです。",
+        "pathophysiology_ja": "腹膜への細菌・化学物質の曝露→急性腹膜炎→大量の炎症性滲出液の腹腔内貯留→全身性炎症反応症候群（SIRS）→敗血症性ショック→多臓器不全。原因：(1)消化管穿孔（異物・潰瘍・腫瘍・術後縫合不全）、(2)胆汁性（胆嚢破裂・胆管損傷）、(3)尿腹（膀胱破裂）、(4)膵臓性（重症膵炎からの波及）。",
+        "causes_ja": "消化管穿孔（異物・NSAID潰瘍・腫瘍が三大原因）、胆嚢粘液嚢腫の破裂、子宮蓄膿症の破裂（開放型→閉鎖型移行時）、術後合併症（腸管吻合部の裂開）。犬ではGDV術後、異物による腸穿孔が多い。",
+        "prevention_ja": "消化管異物の予防、NSAID使用時の消化管保護（オメプラゾール併用）、胆嚢粘液嚢腫の早期発見・予防的胆嚢摘出。急性腹症は緊急開腹探査が必要。",
         "urgency": "emergency",
     },
     {
@@ -4582,6 +4597,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "rapid_breathing", "lethargy", "bloated_abdomen", "excessive_panting"},
         "description": "Free blood in the abdominal cavity from splenic/hepatic mass rupture, trauma, or coagulopathy.",
         "description_ja": "脾臓・肝臓腫瘤の破裂、外傷、凝固障害による腹腔内遊離血液です。",
+        "pathophysiology_ja": "腹腔内への急速な出血→循環血液量の低下→出血性ショック（頻脈・蒼白粘膜・CRT延長・低血圧）。腹部FACTエコー（focused assessment with CT for trauma/triage）で遊離液の迅速検出。腹腔穿刺でPCV>10%の血性液を確認→血腹。自己輸血（autotransfusion：腹腔内血液の回収輸血）が緊急的に有用。",
+        "causes_ja": "脾臓血管肉腫の破裂（最多の非外傷性原因、ゴールデンレトリーバー）、肝臓腫瘤の破裂、外傷（交通事故・落下）、抗凝固性殺鼠剤中毒、脾臓血腫の破裂。脾臓腫瘤の2/3が悪性（血管肉腫）。",
+        "prevention_ja": "好発犬種の定期的腹部エコー。突然の虚脱・粘膜蒼白・腹部膨満は超緊急受診。安定化（輸液・自己輸血）→緊急開腹→脾摘が標準治療。",
         "urgency": "emergency",
     },
     {
