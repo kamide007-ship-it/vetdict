@@ -1895,7 +1895,12 @@ function guidedSetActions(html){
   if(msgs)msgs.scrollTop=msgs.scrollHeight;
 }
 
+var _guidedFetching=false;
 function guidedFetch(phase,extra){
+  if(_guidedFetching)return;
+  _guidedFetching=true;
+  // Disable all action buttons to prevent double-submission
+  document.querySelectorAll("#guidedActions button").forEach(b=>{b.disabled=true;});
   const body={
     species:guidedState.species,
     phase:phase,
@@ -1914,6 +1919,7 @@ function guidedFetch(phase,extra){
   })
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
+    _guidedFetching=false;
     // Remove typing indicator
     const msgs=document.getElementById("guidedMessages");
     const typing=msgs?.querySelector(".typing-indicator");
@@ -1921,6 +1927,7 @@ function guidedFetch(phase,extra){
     guidedHandleResponse(data);
   })
   .catch(err=>{
+    _guidedFetching=false;
     const msgs=document.getElementById("guidedMessages");
     const typing=msgs?.querySelector(".typing-indicator");
     if(typing)typing.remove();
@@ -1946,6 +1953,16 @@ function guidedHandleResponse(data){
     guidedRenderContextQuestions(data.questions||[]);
   } else if(data.phase==="final_results"){
     guidedRenderFinalResults(data);
+  } else if(data.error){
+    guidedAddMsg(data.error,"bot");
+    guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
+    const rb=document.getElementById("guidedRetryBtn");
+    if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
+  } else if(!data.phase&&!data[msgKey]){
+    guidedAddMsg(currentLang==="ja"?"予期しないレスポンスです。やり直してください。":"Unexpected response. Please start over.","bot");
+    guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
+    const rb2=document.getElementById("guidedRetryBtn");
+    if(rb2)rb2.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
   }
 }
 

@@ -1500,9 +1500,10 @@ def _get_species_symptoms_with_categories(species: str) -> list[dict]:
             for s in SYMPTOMS
         ]
     sym_names = sp_data["symptom_names"]
+    sym_cats = sp_data.get("symptom_categories", {})
     return [
         {"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),
-         "category": "other"}
+         "category": sym_cats.get(sid, "other")}
         for sid, v in sym_names.items()
     ]
 

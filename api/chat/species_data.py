@@ -24,4 +24,5 @@ for _sp in _GENERIC_SPECIES:
     _SPECIES_DATA[_sp] = {
         "diseases": _mod.DISEASES,
         "symptom_names": _mod.SYMPTOM_NAMES,
+        "symptom_categories": getattr(_mod, "SYMPTOM_CATEGORIES", {}),
     }
