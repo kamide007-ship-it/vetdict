@@ -434,3 +434,98 @@ class TestFallbackWhenDbEmpty:
         assert result["total_species"] == 21
         species_ids = {s["id"] for s in result["species"]}
         assert len(species_ids) == 21
+
+
+class TestSymptomCategoriesFormatDetection:
+    """Tests for SYMPTOM_CATEGORIES format auto-detection in disease_store."""
+
+    def test_dog_style_format_produces_categories(self, tmp_path, monkeypatch):
+        """Dog-style SYMPTOM_CATEGORIES {cat: {symptoms: [...]}} produces correct category_map."""
+        path = str(tmp_path / "cat_test.db")
+        init_db(path)
+        import contextlib
+
+        @contextlib.contextmanager
+        def _patched():
+            with get_connection(path) as conn:
+                yield conn
+
+        monkeypatch.setattr("api.disease_store.get_connection", _patched)
+        monkeypatch.setattr("api.disease_store._db_ready", True)
+        invalidate_cache()
+
+        # Dog uses {category: {name_ja, name_en, symptoms: [...]}} format
+        result = get_symptoms_for_species("dog")
+        assert len(result) > 0
+        categories = {s.get("category", "NONE") for s in result}
+        # Should have multiple categories, not just "other"
+        assert categories != {"other"}, f"Dog should have diverse categories, got: {categories}"
+
+    def test_standard_format_produces_categories(self, tmp_path, monkeypatch):
+        """Standard SYMPTOM_CATEGORIES {symptom_id: category} produces correct category_map."""
+        path = str(tmp_path / "std_test.db")
+        init_db(path)
+        import contextlib
+
+        @contextlib.contextmanager
+        def _patched():
+            with get_connection(path) as conn:
+                yield conn
+
+        monkeypatch.setattr("api.disease_store.get_connection", _patched)
+        monkeypatch.setattr("api.disease_store._db_ready", True)
+        invalidate_cache()
+
+        # Cat uses standard {symptom_id: category} format
+        result = get_symptoms_for_species("cat")
+        assert len(result) > 0
+        categories = {s.get("category", "NONE") for s in result}
+        assert categories != {"other"}, f"Cat should have diverse categories, got: {categories}"
+
+
+class TestSqliteExceptionHandling:
+    """Tests for SQLite exception handling in _get_symptoms_for_species_cached."""
+
+    def test_returns_fallback_on_missing_table(self, tmp_path, monkeypatch):
+        """When symptoms table doesn't exist, falls back to module data."""
+        import contextlib
+        import sqlite3
+
+        # Create a DB with no tables at all
+        path = str(tmp_path / "no_tables.db")
+        conn = sqlite3.connect(path)
+        conn.close()
+
+        @contextlib.contextmanager
+        def _patched():
+            c = sqlite3.connect(path)
+            c.row_factory = sqlite3.Row
+            try:
+                yield c
+            finally:
+                c.close()
+
+        monkeypatch.setattr("api.disease_store.get_connection", _patched)
+        monkeypatch.setattr("api.disease_store._db_ready", True)
+        invalidate_cache()
+
+        # Should fall back to module data, not crash
+        result = get_symptoms_for_species("cat")
+        assert len(result) > 0
+        assert all("id" in s and "name_ja" in s for s in result)
+
+    def test_returns_fallback_on_connection_error(self, monkeypatch):
+        """When get_connection raises, falls back to module data."""
+        import contextlib
+
+        @contextlib.contextmanager
+        def _broken():
+            raise RuntimeError("DB unavailable")
+            yield  # noqa: F841
+
+        monkeypatch.setattr("api.disease_store.get_connection", _broken)
+        monkeypatch.setattr("api.disease_store._db_ready", True)
+        invalidate_cache()
+
+        result = get_symptoms_for_species("cat")
+        assert len(result) > 0
