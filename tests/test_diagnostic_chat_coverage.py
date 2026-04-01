@@ -2622,3 +2622,55 @@ class TestConsultationEdgeCases:
         # Each disease should have expected keys
         for disease in data["result"]["suspected_diseases"][:3]:
             assert "name" in disease or "name_ja" in disease
+
+    # -- Species-aware ask_context --
+
+    def test_ask_context_fish_skips_pain_score(self):
+        """ask_context for fish should not ask about pain_score (CSU scale N/A)."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "fish",
+            "selected_symptoms": ["white_spots"],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        types = [q["type"] for q in data["questions"]]
+        assert "pain_score" not in types
+        assert "onset" in types
+        assert "age" in types
+
+    def test_ask_context_reptile_skips_pain_score(self):
+        """ask_context for reptile should not ask about pain_score."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "reptile",
+            "selected_symptoms": ["lethargy"],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        types = [q["type"] for q in data["questions"]]
+        assert "pain_score" not in types
+
+    def test_ask_context_dog_includes_pain_score(self):
+        """ask_context for dog should still ask about pain_score."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "selected_symptoms": ["vomiting"],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        types = [q["type"] for q in data["questions"]]
+        assert "pain_score" in types
+
+    def test_ask_context_amphibian_skips_pain_score(self):
+        """ask_context for amphibian should not ask about pain_score."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "amphibian",
+            "selected_symptoms": ["lethargy"],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        types = [q["type"] for q in data["questions"]]
+        assert "pain_score" not in types

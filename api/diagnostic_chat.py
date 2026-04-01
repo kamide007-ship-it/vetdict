@@ -1784,6 +1784,11 @@ def consultation():
     # Phase: ASK_CONTEXT — ask about onset and age
     # ------------------------------------------------------------------
     if phase == "ask_context":
+        # Species where CSU pain scale is not applicable
+        _NO_PAIN_SPECIES = {
+            "fish", "reptile", "tortoise", "snake", "lizard",
+            "amphibian",
+        }
         questions = []
         if not onset:
             questions.append({
@@ -1808,7 +1813,7 @@ def consultation():
                     {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
                 ],
             })
-        if pain_score is None:
+        if pain_score is None and species not in _NO_PAIN_SPECIES:
             questions.append({
                 "type": "pain_score",
                 "question_ja": "痛みの程度はどのくらいですか？（CSU疼痛スケール 0-4）",
