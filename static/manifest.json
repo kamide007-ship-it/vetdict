@@ -1,7 +1,7 @@
 {
   "name": "VetDict - Clinical Decision Support for Veterinarians",
   "short_name": "VetDict",
-  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。6,400+疾患・194薬品・21動物種対応。",
+  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。7,000+疾患・220+薬品・21動物種対応。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a3068",
