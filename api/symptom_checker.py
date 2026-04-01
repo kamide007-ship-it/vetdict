@@ -1845,15 +1845,26 @@ def analyze_symptoms(
             "_match_ratio": coverage,
         })
 
-    # Sort: Prevalence tier (very_common → common → uncommon → rare → unknown),
-    #       then match_percent desc, then match_count desc
-    # This creates a "stepwise differential diagnosis" aligned with clinical practice
+    # Sort: Match quality tier first, then prevalence within each tier.
+    # This prevents low-confidence common diseases (e.g. Periodontal Disease at 22%)
+    # from outranking high-confidence matches (e.g. Resource Guarding at 65%).
     prevalence_priority = {"very_common": 0, "common": 1, "uncommon": 2, "rare": 3, "unknown": 4}
+
+    def _match_quality_tier(d: dict) -> int:
+        pct = d["match_percent"]
+        cnt = d["match_count"]
+        if pct >= 50 or cnt >= 3:
+            return 0  # Strong match
+        if pct >= 25 or cnt >= 2:
+            return 1  # Moderate match
+        return 2  # Weak match (single symptom, low confidence)
+
     suspected.sort(
         key=lambda d: (
-            prevalence_priority.get(d["prevalence_tier"], 5),  # Primary: prevalence (ascending)
-            -d["match_percent"],                                # Secondary: match_percent (descending)
-            -d["match_count"]                                   # Tertiary: match_count (descending)
+            _match_quality_tier(d),                                # Primary: match quality tier
+            prevalence_priority.get(d["prevalence_tier"], 5),      # Secondary: prevalence within tier
+            -d["match_percent"],                                   # Tertiary: match_percent (descending)
+            -d["match_count"]                                      # Quaternary: match_count (descending)
         )
     )
 
@@ -1934,6 +1945,7 @@ def analyze_symptoms(
 
     suspected.sort(
         key=lambda d: (
+            _match_quality_tier(d),
             prevalence_priority.get(d["prevalence_tier"], 5),
             -d["match_percent"],
             -d["match_count"],
