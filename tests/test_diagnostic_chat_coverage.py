@@ -2392,6 +2392,30 @@ class TestSuggestNextCategories:
             assert "name_en" in cat
             assert "differentiating_count" in cat
 
+    def test_differential_scoring_favors_splitting_symptoms(self):
+        """Symptoms present in ~50% of candidates score higher than ubiquitous ones."""
+        from api.diagnostic_chat import _suggest_next_categories
+
+        # Build synthetic all_symptoms with two categories
+        all_symptoms = [
+            {"id": "sym_split", "name_ja": "分割", "name_en": "split", "category": "cat_a"},
+            {"id": "sym_ubiq", "name_ja": "共通", "name_en": "ubiq", "category": "cat_b"},
+        ]
+        # 10 candidates: sym_split in 5/10 (max info), sym_ubiq in 10/10 (no info)
+        disease_matches = []
+        for i in range(10):
+            extra = ["sym_ubiq"]
+            if i < 5:
+                extra.append("sym_split")
+            disease_matches.append({"additional_disease_symptoms": extra})
+
+        result = _suggest_next_categories(
+            "dog", [], [], disease_matches, all_symptoms,
+        )
+        assert len(result) >= 2
+        # cat_a (splitting symptom) should rank first
+        assert result[0]["id"] == "cat_a"
+
 
 class TestConsultationEdgeCases:
     """Edge case tests for the consultation endpoint."""
