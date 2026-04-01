@@ -3880,6 +3880,24 @@ _CATEGORY_LABELS = {
 
 def _get_species_symptoms_with_categories(species: str) -> list[dict]:
     """Get all symptoms for a species with category info."""
+    # Horse uses HEALTH_CHECK_ITEMS from equine_diseases (finding keys)
+    if species == "horse" and EQUINE_AVAILABLE:
+        try:
+            from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+            result = []
+            for cat, items in HEALTH_CHECK_ITEMS.items():
+                for finding_key, name_ja, name_en in items:
+                    result.append({
+                        "id": finding_key,
+                        "name_ja": name_ja,
+                        "name_en": name_en,
+                        "category": cat,
+                    })
+            if result:
+                return result
+        except (ImportError, Exception):
+            pass
+
     from api.disease_store import get_symptoms_for_species
     symptoms = get_symptoms_for_species(species)
     if symptoms:

@@ -1933,11 +1933,11 @@ class TestConsultationEndpoint:
         assert "suspected_diseases" in data["result"]
 
     def test_finalize_horse(self, client):
-        """Finalize works for horse species."""
+        """Finalize works for horse species with equine finding keys."""
         r = client.post(self.ENDPOINT, json={
             "phase": "finalize",
             "species": "horse",
-            "selected_symptoms": ["lameness", "fever"],
+            "selected_symptoms": ["gen_fever", "limb_lameness_fore", "resp_cough"],
             "onset": "acute",
             "age_years": 8,
         })
@@ -1945,6 +1945,54 @@ class TestConsultationEndpoint:
         data = r.get_json()
         assert data["phase"] == "final_results"
         assert data["species"] == "horse"
+        assert len(data["result"]["suspected_diseases"]) > 0
+
+    def test_horse_full_flow(self, client):
+        """Full 5-phase consultation flow for horse with equine finding keys."""
+        # Phase 1: Start — should have 18 categories
+        r1 = client.post(self.ENDPOINT, json={"phase": "start", "species": "horse"})
+        d1 = r1.get_json()
+        assert d1["phase"] == "select_category"
+        cat_ids = {c["id"] for c in d1["categories"]}
+        assert len(cat_ids) > 5, f"Horse should have many categories, got: {cat_ids}"
+        assert "respiratory" in cat_ids
+
+        # Phase 2: Select respiratory symptoms
+        r2 = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms", "species": "horse", "selected_category": "respiratory",
+        })
+        d2 = r2.get_json()
+        assert d2["phase"] == "show_symptoms"
+        assert len(d2["symptoms"]) > 0
+        # Finding keys should have equine prefixes
+        sym_ids = [s["id"] for s in d2["symptoms"]]
+        assert any(s.startswith("resp_") for s in sym_ids), f"Expected resp_ prefixed IDs, got: {sym_ids}"
+        selected = sym_ids[:3]
+
+        # Phase 3: Interim results should find disease candidates
+        r3 = client.post(self.ENDPOINT, json={
+            "phase": "next_category", "species": "horse",
+            "selected_symptoms": selected, "answered_categories": ["respiratory"],
+        })
+        d3 = r3.get_json()
+        assert d3["phase"] == "interim_results"
+        assert len(d3["disease_candidates"]) > 0, "Horse interim should find disease candidates"
+
+        # Phase 4: Ask context
+        r4 = client.post(self.ENDPOINT, json={
+            "phase": "ask_context", "species": "horse", "selected_symptoms": selected,
+        })
+        d4 = r4.get_json()
+        assert d4["phase"] == "context_questions"
+
+        # Phase 5: Finalize
+        r5 = client.post(self.ENDPOINT, json={
+            "phase": "finalize", "species": "horse",
+            "selected_symptoms": selected, "onset": "acute", "age_years": 10,
+        })
+        d5 = r5.get_json()
+        assert d5["phase"] == "final_results"
+        assert len(d5["result"]["suspected_diseases"]) > 0
 
     def test_next_category_candidate_structure(self, client):
         """Verify all fields in disease candidate structure."""
