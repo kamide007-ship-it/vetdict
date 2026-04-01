@@ -13,9 +13,12 @@ Supports batch processing for cost efficiency.
 """
 
 import json
+import logging
 import os
 
 import anthropic
+
+logger = logging.getLogger(__name__)
 
 
 class DiseaseEnricher:
@@ -104,7 +107,7 @@ Ensure medical accuracy appropriate for veterinary professionals."""
                         disease[key] = value
 
         except (json.JSONDecodeError, ValueError) as e:
-            print(f"Failed to parse response for {disease.get('name')}: {e}")
+            logger.error("Failed to parse response for %s: %s", disease.get("name"), e)
 
         return disease
 

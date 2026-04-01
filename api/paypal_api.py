@@ -44,7 +44,7 @@ def _get_paypal_token() -> str | None:
         with urllib.request.urlopen(req, timeout=15) as resp:
             return json.loads(resp.read()).get("access_token")
     except Exception as e:
-        logger.error(f"PayPal token error: {e}")
+        logger.error("PayPal token error: %s", e)
         return None
 
 # Subscribers file (simple JSON-based storage)
@@ -107,7 +107,7 @@ def create_subscription():
                 "status": sub.get("status"),
             })
     except Exception as e:
-        logger.error(f"PayPal create subscription error: {e}")
+        logger.error("PayPal create subscription error: %s", e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -138,7 +138,7 @@ def activate_subscription():
             "ip": request.remote_addr,
         })
         _save_subscribers(data)
-        logger.info(f"PayPal subscription activated: {subscription_id} ({email})")
+        logger.info("PayPal subscription activated: %s (%s)", subscription_id, email)
 
     return jsonify({"status": "ok", "subscription_id": subscription_id})
 
@@ -221,7 +221,7 @@ def _verify_webhook_signature(request_obj) -> bool:
             result = json.loads(resp.read())
             return result.get("verification_status") == "SUCCESS"
     except Exception as e:
-        logger.error(f"Webhook signature verification failed: {e}")
+        logger.error("Webhook signature verification failed: %s", e)
         return False
 
 
@@ -246,7 +246,7 @@ def paypal_webhook():
     event_type = body.get("event_type", "")
     resource = body.get("resource", {})
 
-    logger.info(f"PayPal webhook: {event_type}")
+    logger.info("PayPal webhook: %s", event_type)
 
     subscription_id = resource.get("id", "")
     if not subscription_id:
@@ -272,7 +272,7 @@ def paypal_webhook():
                 "last_payment": datetime.utcnow().isoformat(),
             })
         _save_subscribers(data)
-        logger.info(f"Subscription activated/confirmed: {subscription_id}")
+        logger.info("Subscription activated/confirmed: %s", subscription_id)
 
     elif event_type in (
         "BILLING.SUBSCRIPTION.CANCELLED",
@@ -285,7 +285,7 @@ def paypal_webhook():
                 s["status"] = "cancelled"
                 s["cancelled_at"] = datetime.utcnow().isoformat()
         _save_subscribers(data)
-        logger.info(f"Subscription cancelled/suspended: {subscription_id}")
+        logger.info("Subscription cancelled/suspended: %s", subscription_id)
 
     return jsonify({"status": "processed"}), 200
 
@@ -346,7 +346,7 @@ def join_waitlist():
             "signed_up_at": datetime.utcnow().isoformat(),
         })
         _save_waitlist(waitlist)
-        logger.info(f"Waitlist signup: {email}")
+        logger.info("Waitlist signup: %s", email)
 
     return jsonify({"status": "ok", "total": len(waitlist)})
 
