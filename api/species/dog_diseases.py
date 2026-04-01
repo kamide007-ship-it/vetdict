@@ -2915,6 +2915,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "excessive_thirst", "seizures", "lethargy"},
         "description": "Lethal antifreeze poisoning causing rapid kidney failure. Treatment must begin within hours.",
         "description_ja": "不凍液による致命的な中毒で、急速な腎不全を引き起こします。数時間以内の治療が必要です。",
+        "pathophysiology_ja": "エチレングリコール摂取→肝臓でアルコールデヒドロゲナーゼ（ADH）により代謝→グリコアルデヒド→グリコール酸→シュウ酸。(1)代謝性アシドーシス（高アニオンギャップ）、(2)シュウ酸カルシウム結晶が腎尿細管に沈着→急性尿細管壊死→乏尿性腎不全。3段階の経過：I期（30分〜12h：酩酊様）→II期（12〜24h：心肺症状）→III期（24〜72h：腎不全）。致死量は犬で4.4mL/kg。",
+        "causes_ja": "自動車用不凍液（エチレングリコール）の摂取。甘味があるため犬が好んで飲む。ガレージの不凍液漏れ、水たまりの汚染水。冬季に多い。少量でも致死的。摂取後8〜12時間以内のエタノールまたはフォメピゾール投与が救命に不可欠。",
+        "prevention_ja": "不凍液のペットからの完全隔離、漏れの即時清掃、プロピレングリコール系の安全な代替品の使用、ガレージへのペットアクセス制限。",
         "urgency": "emergency",
     },
     {
@@ -3003,6 +3006,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "weight_loss", "appetite_loss", "difficulty_breathing", *_ANY_LIMPING},
         "description": "An aggressive cancer of histiocyte cells, common in Bernese Mountain Dogs and Flat-Coated Retrievers.",
         "description_ja": "組織球由来の悪性腫瘍で、バーニーズやフラットコーテッドレトリーバーに多いです。",
+        "pathophysiology_ja": "樹状細胞またはマクロファージ由来の悪性腫瘍。局在型（脾臓・四肢関節周囲に単発腫瘤）と播種型（多臓器同時浸潤：脾臓・肝臓・肺・骨髄・リンパ節）に分類。播種型は急速に進行し、診断時にはすでに多臓器浸潤。貧血・血小板減少・DICを高率に合併。",
+        "causes_ja": "遺伝的素因が強い。バーニーズマウンテンドッグ（生涯発症リスク25%）、フラットコーテッドレトリーバー、ロットワイラー、ゴールデンレトリーバーに好発。中高齢犬。CDKN2A等の腫瘍抑制遺伝子の変異が関与。",
+        "prevention_ja": "確実な予防法はない。好発犬種の繁殖管理（罹患犬系統の繁殖制限）、定期的な健康診断（血液検査・腹部エコー）。ロムスチン（CCNU）化学療法のMSTは約5ヶ月。",
         "urgency": "urgent",
     },
     {
@@ -3307,6 +3313,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"rapid_breathing", "coughing", "lethargy", "appetite_loss"},
         "description": "Accumulation of lymphatic fluid (chyle) in the chest cavity causing respiratory distress.",
         "description_ja": "胸腔内にリンパ液（乳び）が貯留し、呼吸困難を引き起こす疾患です。",
+        "pathophysiology_ja": "胸管またはその分枝の損傷・閉塞・圧迫→乳び液の胸腔内漏出→胸水貯留→肺の圧排→呼吸困難。慢性乳び胸→線維性胸膜炎（constrictive pleuritis）→肺の拡張障害（不可逆的）。乳び液はトリグリセリド高値（>100mg/dL）・コレステロール低値が特徴。",
+        "causes_ja": "特発性（最多、犬では60〜70%）。二次性：心疾患（右心不全、心膜炎）、縦隔腫瘍（リンパ腫）、外傷、胸管奇形。好発犬種：アフガンハウンド、柴犬（日本の報告で多い）。中高齢犬に多い。",
+        "prevention_ja": "確実な予防法はない。基礎疾患（心疾患・縦隔腫瘍）の管理。低脂肪食（MCTオイル食）で乳び産生を減少。内科不応例は胸管結紮＋心嚢膜部分切除術。",
         "urgency": "urgent",
     },
     {
@@ -3467,6 +3476,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "pain_on_touch", "stiffness", "reluctance_move", "appetite_loss"},
         "description": "An immune-mediated inflammatory disease of the meninges and arteries causing severe neck pain and fever in young dogs.",
         "description_ja": "髄膜と動脈の免疫介在性炎症性疾患で、若い犬に重度の頸部痛と発熱を引き起こします。",
+        "pathophysiology_ja": "免疫調節障害→髄膜血管への好中球浸潤（急性型）→フィブリノイド壊死性動脈炎→重度の頸部硬直・疼痛・高熱（40〜41℃）。CSF解析：好中球性多細胞症・IgA上昇が特徴的。慢性型は肉芽腫性変化→線維化。適切なステロイド療法で予後良好だが、減薬が早すぎると50%が再発。",
+        "causes_ja": "原因不明の免疫介在性疾患。IgA系の異常が主因とされる。若齢犬（6〜18ヶ月）に好発。好発犬種：ビーグル、バーニーズマウンテンドッグ、ボクサー、ノバスコシアダックトーリングレトリーバー。ワクチン接種との時間的関連が報告されるが因果関係は未確定。",
+        "prevention_ja": "確実な予防法はない。「首が痛くて動けない若い犬」はSRMAを疑う。早期のCSF検査・ステロイド開始が予後を改善。プレドニゾロン2mg/kg/日で開始→6ヶ月以上かけて漸減が標準プロトコル。",
         "urgency": "urgent",
     },
     {
@@ -3581,6 +3593,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "lethargy", "appetite_loss", "dehydration", "excessive_thirst", "rapid_breathing", "collapse"},
         "description": "A life-threatening complication of diabetes where the body produces excess ketones, causing metabolic acidosis.",
         "description_ja": "糖尿病の致死的合併症で、体が過剰なケトン体を産生し、代謝性アシドーシスを引き起こします。",
+        "pathophysiology_ja": "絶対的または相対的インスリン欠乏→高血糖→浸透圧利尿→重度脱水・電解質喪失（K、Na、P）。同時に脂肪分解亢進→肝臓でケトン体（β-ヒドロキシ酪酸・アセト酢酸）過剰産生→代謝性アシドーシス（高アニオンギャップ）→嘔吐・腹痛→さらなる脱水の悪循環。低K血症→心不整脈→死亡。併発疾患（膵炎・UTI・クッシング）が誘因。",
+        "causes_ja": "未診断の糖尿病、インスリン投与の中断/不足、併発疾患（膵炎・感染症・クッシング症候群）による急性増悪。犬糖尿病の約40%がDKAとして初診。中高齢の未避妊雌犬（プロゲステロンによるインスリン抵抗性）にリスク高。",
+        "prevention_ja": "糖尿病の適切なインスリン管理・血糖モニタリング、併発疾患の早期治療、食欲低下時のインスリン用量調整（自己判断でインスリン中止しない）、定期的なフルクトサミン/HbA1c測定。",
         "urgency": "emergency",
     },
     {
@@ -3808,6 +3823,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "circling", "head_tilting", "aggression_change", "lethargy"},
         "description": "A usually benign but space-occupying tumor of the meninges, the most common brain tumor in dogs.",
         "description_ja": "髄膜の通常は良性だが占拠性の腫瘍で、犬で最も一般的な脳腫瘍です。",
+        "pathophysiology_ja": "くも膜キャップ細胞由来の腫瘍→脳表面からの外方発育→脳実質の圧排→頭蓋内圧亢進→けいれん・行動変化・神経学的欠損。犬の原発性脳腫瘍の45〜50%を占める最多腫瘍。多くは組織学的に良性（WHO Grade I）だが、占拠効果による神経障害が問題。前頭葉・嗅覚野に好発。犬の髄膜腫は猫と異なり浸潤性が高い傾向。",
+        "causes_ja": "原因不明。長頭種（コリー・ゴールデンレトリーバー）に好発。中高齢犬（>7歳）。雌犬にやや多い。プロゲステロン受容体陽性のことがあり、ホルモン関与が示唆されるが未確定。",
+        "prevention_ja": "確実な予防法はない。高齢犬の新規けいれん・行動変化はMRIで精査。外科的切除可能な部位では手術が第一選択（MST 7ヶ月〜2年）。放射線療法の併用で生存期間延長。定位放射線治療（SRS）が新しい選択肢。",
         "urgency": "urgent",
     },
     {
@@ -4119,6 +4137,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "appetite_loss", "lethargy", "abdominal_pain", "fever", "bloated_abdomen"},
         "description": "Abnormal accumulation of thick mucus in the gallbladder that can lead to rupture and bile peritonitis.",
         "description_ja": "胆嚢内の異常な粘液蓄積で、破裂と胆汁性腹膜炎を引き起こす可能性があります。",
+        "pathophysiology_ja": "胆嚢粘膜上皮の異常なムチン過分泌→半固形の粘液物質が胆嚢内に蓄積→胆嚢壁の伸展・菲薄化→胆嚢壁壊死→破裂→胆汁性腹膜炎（致死的）。エコーで「キウイフルーツ様」の特徴的パターン。胆管閉塞→閉塞性黄疸も起こりうる。高脂血症・甲状腺機能低下症・クッシング症候群との関連が報告。",
+        "causes_ja": "原因不明だが、胆嚢運動障害・胆汁組成の変化・ABCB4遺伝子変異が関与。高脂血症・甲状腺機能低下症・クッシング症候群が基礎にあることが多い。好発犬種：シェルティ、コッカースパニエル、ミニチュアシュナウザー、ポメラニアン。中高齢犬。",
+        "prevention_ja": "確実な予防法はない。高脂血症の管理（低脂肪食）、甲状腺機能低下症の治療。定期的な腹部エコーで早期発見。無症状でも粘液嚢腫が確認された場合は予防的胆嚢摘出を検討。",
         "urgency": "emergency",
     },
     {
@@ -4421,6 +4442,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"difficulty_breathing", "rapid_breathing", "vomiting", "lethargy", "appetite_loss"},
         "description": "Tear in the diaphragm allowing abdominal organs to enter the chest cavity, usually from trauma.",
         "description_ja": "横隔膜の裂傷により腹腔臓器が胸腔に侵入する状態で、通常は外傷が原因です。",
+        "pathophysiology_ja": "外傷性（最多）：交通事故・落下→横隔膜破裂→腹腔臓器（肝臓・胃・腸管・脾臓）の胸腔内脱出→肺圧排→換気障害→呼吸窮迫。先天性（心膜腹膜横隔膜ヘルニア：PPDH）は心嚢と腹腔が交通。胃の胸腔内嵌頓→GDV様の急性虚血→致死的。慢性例は無症状で偶然発見されることもある。",
+        "causes_ja": "外傷性（交通事故・落下・腹部の鈍的外傷：80%以上）。先天性PPDH（ウェイマラナー・コッカースパニエルに報告）。腹腔内圧の急上昇（過度のいきみ等）も原因。多臓器外傷の合併が多い。",
+        "prevention_ja": "交通事故の防止（リードでの管理・柵付き庭）、外傷の予防。外傷犬は胸部X線で横隔膜の連続性を確認。安定化後に外科的整復。",
         "urgency": "emergency",
     },
     {
@@ -4429,6 +4453,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "straining_urinate", "swelling", "lethargy", "pain_on_touch"},
         "description": "Weakening of the pelvic diaphragm muscles allowing herniation of pelvic/abdominal contents, common in intact males.",
         "description_ja": "骨盤隔膜筋の衰弱により骨盤・腹腔内容がヘルニアする状態で、未去勢の雄犬に多いです。",
+        "pathophysiology_ja": "骨盤隔膜の筋群（尾骨筋・肛門挙筋）のテストステロン依存性萎縮→骨盤腔の支持構造の脆弱化→直腸・膀胱・前立腺・腹腔脂肪の会陰部への脱出。直腸の偏位→排便困難。膀胱の後方脱出（retroflexion）→尿路閉塞（緊急）。両側性が多い。",
+        "causes_ja": "未去勢雄犬（テストステロン依存性筋萎縮）。中高齢犬（7〜9歳）に好発。前立腺肥大の合併が多い。好発犬種：コーギー、ボストンテリア、コリー、ボクサー、ペキニーズ。稀に雌犬でも発症。",
+        "prevention_ja": "去勢手術（テストステロン依存性萎縮の予防、前立腺縮小）。前立腺肥大の管理。片側発症後の対側発症リスクが高い。外科的修復時の同時去勢が強く推奨。",
         "urgency": "urgent",
     },
     {
@@ -4563,6 +4590,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"drooling", "appetite_loss", "swelling", "pain_on_touch", "lumps"},
         "description": "A locally aggressive oral tumor invading bone; benign but destructive, requiring mandibulectomy or maxillectomy.",
         "description_ja": "骨に浸潤する局所的に攻撃的な口腔腫瘍で、良性ですが破壊的であり、下顎切除や上顎切除が必要です。",
+        "pathophysiology_ja": "歯原性上皮（エナメル器）由来の良性腫瘍だが局所浸潤性が極めて高い→歯槽骨の進行性破壊→歯の脱落・顎骨変形。遠隔転移はしないが、不完全切除では100%再発。下顎前部の歯肉に最も好発。X線で骨溶解像を呈し、扁平上皮癌との鑑別が重要（生検必須）。",
+        "causes_ja": "原因不明。歯原性上皮の腫瘍性増殖。中高齢犬（7〜10歳）。大型犬に多い。口腔良性腫瘍の中では最も浸潤性が高い。メラノーマ・SCCとの鑑別診断が臨床的に重要。",
+        "prevention_ja": "確実な予防法はない。口腔内のしこり・歯の動揺・歯肉出血の早期受診。広範囲切除（下顎切除・上顎切除、腫瘍縁から1cm以上）で治癒率90%以上。術後のQOLは概ね良好。",
         "urgency": "urgent",
     },
     {
@@ -4627,6 +4657,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "pain_on_touch", "stiffness", "reluctance_move", "lethargy", "appetite_loss", "weight_loss"},
         "description": "Infection of the intervertebral disc and adjacent vertebral endplates, often bacterial or fungal in origin.",
         "description_ja": "椎間板と隣接する椎体終板の感染で、細菌性または真菌性が原因となることが多いです。",
+        "pathophysiology_ja": "血行性感染→椎体終板の血管豊富な領域に細菌が定着→椎間板・隣接椎体の感染→骨溶解・新生骨形成→脊柱管内への波及→硬膜外膿瘍→脊髄圧迫→疼痛・神経学的障害。腰仙部（L7-S1）に最も多い。多発性病変が30〜40%。",
+        "causes_ja": "細菌性（Staphylococcus intermedius/aureus、Streptococcus、Brucella canis が主要起因菌）。真菌性（Aspergillus、Coccidioides）は免疫抑制犬。感染源：尿路感染・歯周病・皮膚感染からの血行性播種。大型犬に好発。ブルセラ症の鑑別が重要（人獣共通）。",
+        "prevention_ja": "尿路感染・歯周病等の感染巣の早期治療。原因不明の発熱＋脊椎痛では本疾患を疑い、脊椎X線・MRI・血液/尿培養を実施。抗菌薬治療は最低6〜8週間の長期投与が必要。",
         "urgency": "urgent",
     },
     {
@@ -4959,6 +4992,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "itching", "skin_redness", "hair_loss", "fever"},
         "description": "Autoimmune skin disease causing pustules and crusting.",
         "description_ja": "膿疱と痂皮を形成する自己免疫性皮膚疾患です。",
+        "pathophysiology_ja": "表皮細胞間接着蛋白（デスモグレイン-1）に対する自己抗体（IgG）→棘融解（acantholysis）→表層の表皮内水疱・膿疱形成→破裂後に痂皮・びらん。鼻梁・耳介・足底パッド・爪周囲に好発。犬で最も多い自己免疫性皮膚疾患。全身症状（発熱・食欲不振）を伴うことがある。",
+        "causes_ja": "一次性（特発性、最多）：自己免疫性。二次性：薬剤誘発性（トリメトプリム・サルファ等）。好発犬種：秋田犬、チャウチャウ、ダックスフンド、ビーグル、ニューファンドランド。中年犬に多い。皮膚生検で棘融解細胞を伴う表皮内膿疱が確定診断。",
+        "prevention_ja": "確実な予防法はない。薬剤誘発性が疑われる場合は原因薬の中止。免疫抑制療法（プレドニゾロン→アザチオプリン/ミコフェノール酸モフェチル併用）で管理。生涯治療が必要なことが多い。",
         "urgency": "urgent",
     },
     {
@@ -5189,6 +5225,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"swollen_joints", "stiffness", "fever", "lethargy", "appetite_loss"},
         "description": "Autoimmune inflammation of multiple joints.",
         "description_ja": "複数の関節の自己免疫性炎症です。",
+        "pathophysiology_ja": "関節滑膜への免疫複合体沈着→補体活性化→好中球浸潤→滑膜炎→関節液の好中球性多細胞症。非びらん性（Type I〜IV、犬で最多）：軟骨・骨の破壊なし。びらん性（関節リウマチ）：パンヌス形成→軟骨・骨の進行性破壊。複数の関節が同時に対称性に侵される。移動性跛行（shifting lameness）が特徴的。",
+        "causes_ja": "一次性/特発性（Type I、最多）。二次性：腫瘍（リンパ腫・白血病）、感染症（Ehrlichia・Borrelia）、薬剤性（サルファ剤）、ワクチン後、IBD関連。全犬種に発症するが、スパニエル、ボクサーに報告多い。中年犬。関節液の分析（FNA→好中球性）で確定診断。",
+        "prevention_ja": "確実な予防法はない。原因不明の発熱＋多発性跛行＋関節腫脹では本疾患を疑い関節穿刺を実施。免疫抑制療法（プレドニゾロン→レフルノミド/アザチオプリン併用）で管理。",
         "urgency": "urgent",
     },
     {
