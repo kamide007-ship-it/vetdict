@@ -11,10 +11,10 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (2,746テスト)
+- **テスト**: pytest (2,790テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v10)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v11)
 - **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
 - **現状**: OPEN_BETA=true（全機能無料）
@@ -215,7 +215,7 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - _extract_species_symptoms の位置追跡は複数出現対応済み（findループ化）
 - Renderフリープランのスリープ問題（15分無操作→初回アクセス遅延）
 - エキゾチック動物（ウサギ/鳥/爬虫類等）の治療プロトコルはカテゴリベースの汎用記載が多い — 犬猫と同レベルの個別詳細プロトコルへのアップグレードが望ましい
-- 問診モードのブラウザ手動テスト（実機確認）が未実施（自動テスト48件は実装済み）
+- 問診モードのブラウザ手動テスト（実機確認）が未実施（自動テスト100件+は実装済み）
 - **診断精度の体系的検証**: 感度/特異度/PPV/NPVの定量評価が未実施。TRIPODガイドラインに準拠した検証プロトコルの策定が必要
 - **臨床データのピアレビュー文書化**: AIエンリッチメント（enrich_treatment_prognosis.py等）で生成されたデータの獣医師レビュー履歴が未文書化。レビューログの整備が望ましい
 - **依存関係のピニング**: anthropic>=0.7.0等の緩いバージョン指定。lockfile未導入
