@@ -279,10 +279,15 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - 診断精度検証・臨床意思決定支援の文献8件追加（TRIPOD、JAMA CDS、NEJM ML等）
 
 ### エキゾチック動物の治療プロトコル詳細化
-- ハムスター: テンプレート治療文 122→36件 (71%改善) — Wet Tail, Tyzzer's, pneumonia等59件を臨床プロトコルに
-- 鳥: テンプレート治療文 212→93件 (56%改善) — Psittacosis, egg binding, lead poisoning等119件
-- ハリネズミ: テンプレート治療文 83→50件 (40%改善) — CHF, proptosis, pyometra等33件
-- フェレット/モルモット/チンチラ/フクロモモンガ/デグー: 進行中
+- ハムスター: テンプレート治療文 122→36件 (71%改善)
+- 鳥: テンプレート治療文 212→93件 (56%改善)
+- ハリネズミ: テンプレート治療文 83→50件 (40%改善)
+- フェレット: 93→61件 (34%改善) — ECE, insulinoma, lymphoma, ADV等
+- モルモット: 141→108件 (23%改善) — scurvy, GI stasis, dysbiosis等（ペニシリン禁忌明記）
+- チンチラ: 113→84件 (26%改善) — dental, fur ring, heatstroke等（フィプロニル致死明記）
+- フクロモモンガ: 80→54件 (33%改善) — Ca deficiency, self-mutilation, MBD等
+- デグー: 75→47件 (37%改善) — diabetes, tail degloving等（糖分禁忌明記）
+- 8種合計: テンプレート839→533件 (36%削減、306件を臨床プロトコルに置換)
 
 ### 診断精度UX改善
 - 低信頼度時のUI警告バナー: 症状2個以下 or 最高信頼度<50%で黄色警告を表示
@@ -302,6 +307,29 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - pip-audit にrequirements-dev.txtも追加
 - 依存関係上限ピニング: anthropic<1.0.0, gunicorn<23.0.0, pytest-cov<6.0.0, ruff<1.0.0
 
+### diagnostic_chat.py モジュール分割
+- 4,249行→1,862行 (56%削減) — `api/chat/` パッケージに分割
+- `api/chat/symptom_aliases.py` (992行) — 530+エイリアス辞書
+- `api/chat/disease_matcher.py` (298行) — 疾患マッチングアルゴリズム
+- `api/chat/symptom_extractor.py` (256行) — 症状抽出エンジン
+- `api/chat/supplements.py` (836行) — サプリメントデータ
+- `api/chat/constants.py` (32行) — 種ラベル・定数
+- `api/chat/species_data.py` (28行) — 種モジュール読み込み
+- 後方互換性完全維持（全publicインポートは引き続き動作）
+
+### その他の改善
+- 公開APIレート制限: /api/analyze-symptoms にIP単位60req/min制限
+- iOS PWA対応: apple-touch-icon.png (180x180) + icon-192.png (192x192)
+- ServiceWorker: CACHE_NAME vetdict-v9→v10 更新
+- FAQPage構造化データ: 3問→10問に拡充
+- WCAG: 全入力フィールドにaria-label追加 (5箇所)
+- PayPal str(e)内部情報漏洩修正
+- logger f-string→%s lazy format統一
+- ダークモードCSS残骸削除
+- GA4ファネルイベント (funnel_page_load) 追加
+- 統計数値: コピー文をAPIデータと統一 (7,000+疾患/220+薬品)
+- ヒーロー信頼性シグナル: 学術文献数・テスト数・OSS開発を表示
+
 ## 次セッションへの引き継ぎ事項
 
 ### 問診モード（Guided Consultation）の検証 — 最優先
@@ -319,15 +347,8 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - 関連CSS: `.guided-category-grid`, `.guided-sym-btn`, `.guided-action-btn`
 
 ### 残りのエキゾチック治療プロトコル
-- ハムスター: 36件のlow urgencyテンプレートが残存 (11%)
-- 鳥: 93件のmoderate/lowテンプレートが残存 (16%)
-- ハリネズミ: 50件のmoderate/lowテンプレートが残存 (20%)
-- フェレット: 93→61件 (22%) — 主要疾患は詳細化済み
-- モルモット: 141→108件 (31%) — emergency/highの主要疾患は詳細化済み
-- チンチラ: 113→84件 (30%) — emergency/highの主要疾患は詳細化済み
-- フクロモモンガ: 80→54件 (24%) — emergency/highの主要疾患は詳細化済み
-- デグー: 75→47件 (23%) — emergency/highの主要疾患は詳細化済み
 - 残り533件はmoderate/low urgencyまたはvariant/subformエントリ
+- emergency/highの主要疾患は全8種で詳細化済み
 
 ### 診断精度の体系的検証
 - TRIPOD準拠の検証プロトコル策定が必要
@@ -336,5 +357,5 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 
 ### その他の残課題
 - AIエンリッチメントの臨床レビュー文書化（レビューログのフォーマット策定）
-- diagnostic_chat.py のモジュール分割（4,244行の巨大ファイル）
-- app.js のモジュール分割（3,000行の単一ファイル）
+- app.js のモジュール分割（3,000行の単一ファイル — バンドラー導入が前提）
+- CSP 'unsafe-inline' → nonce-based strict-dynamic への移行（GA4対応が必要）
