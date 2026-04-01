@@ -1506,6 +1506,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Separation of the retina from its underlying tissue, "
                        "causing sudden vision loss.",
         "description_ja": "網膜が下層組織から剥離し、突然の視力喪失を引き起こします。",
+        "pathophysiology_ja": "神経網膜が網膜色素上皮（RPE）から剥離→視細胞への栄養供給途絶→視細胞の変性→不可逆的視力喪失。3型分類：(1)裂孔原性（網膜裂孔→硝子体液の網膜下浸入）、(2)漿液性/滲出性（全身性高血圧・ぶどう膜炎・腫瘍→網膜下液の蓄積、犬で最多）、(3)牽引性（硝子体膜の牽引）。急性の突然失明として来院。",
+        "causes_ja": "全身性高血圧（最多：CKD、クッシング、褐色細胞腫に伴う）、ぶどう膜炎、Ehrlichia感染、眼内腫瘍（リンパ腫）、SARDS（網膜変性後の二次的剥離）、白内障手術後、外傷。シーズー・ラサアプソに先天性網膜異形成→剥離の報告。",
+        "prevention_ja": "全身性高血圧の早期発見・管理（amlodipine等）、ぶどう膜炎の適切な治療。突然の失明は緊急眼科受診（網膜再接着の可能性は時間に依存）。",
         "urgency": "emergency",
     },
     # ---- Musculoskeletal ----
@@ -2531,6 +2534,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", *_ANY_LIMPING, "appetite_loss"},
         "description": "A bacterial infection of the heart valves causing fever, lameness, and embolic complications.",
         "description_ja": "心臓弁の細菌感染で、発熱・跛行・塞栓性合併症を引き起こします。",
+        "pathophysiology_ja": "菌血症→心臓弁（大動脈弁が最多、僧帽弁）への細菌定着→疣贅（vegetation）形成→弁破壊→弁逆流→急性心不全。疣贅からの塞栓→多臓器塞栓（腎梗塞→血尿、脾梗塞、関節→敗血症性関節炎→跛行、脳→神経症状）。原因不明の発熱（FUO）＋心雑音＋多発性跛行のtriadで疑う。",
+        "causes_ja": "Staphylococcus aureus・Streptococcus・E. coli・Bartonella vinsonii berkhoffii（犬特有）。感染源：歯周病（口腔内菌血症）、尿路感染、皮膚感染、術後菌血症。大型犬の雄犬に好発。大動脈弁下狭窄は大動脈弁への乱流→内皮損傷→感染リスク増大。",
+        "prevention_ja": "歯周病の管理（菌血症の最大の感染源）、重度歯科処置前の抗菌薬予防投与（大動脈弁下狭窄犬）、尿路感染の適切な治療。血液培養（最低3セット）での起因菌同定が治療の鍵。",
         "urgency": "emergency",
     },
     # ---- Respiratory (expanded) ----
@@ -3427,6 +3433,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "rapid_breathing", "collapse", "appetite_loss"},
         "description": "Inflammation of the heart muscle, often caused by infection, leading to cardiac dysfunction.",
         "description_ja": "心筋の炎症で、しばしば感染により引き起こされ、心機能障害を招きます。",
+        "pathophysiology_ja": "感染性/免疫介在性の心筋炎症→心筋細胞の壊死・線維化→収縮機能障害（急性DCM様）＋不整脈（心室性不整脈が致死的）。急性期：心原性ショック・突然死のリスク。慢性期：拡張型心筋症への進展。外傷性心筋炎（交通事故後24〜72時間に心室性不整脈が出現）が犬で臨床的に重要。",
+        "causes_ja": "感染性：パルボウイルス（新生子犬の心筋型）、トリパノソーマ（Chagas病、南米）、Bartonella、Borrelia。非感染性：外傷性（交通事故後の心筋挫傷→不整脈）、免疫介在性、薬剤性（ドキソルビシン心筋毒性）。犬では外傷性とパルボウイルス性が最も多い。",
+        "prevention_ja": "パルボウイルスワクチンの適切な接種。交通事故犬は48時間のECGモニタリング推奨。ドキソルビシン使用時の総投与量管理（240mg/m²以下）。",
         "urgency": "emergency",
     },
     {
@@ -3650,6 +3659,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "lethargy", "reluctance_move", "excessive_panting", "stiffness"},
         "description": "Complete block of electrical signals from the atria to ventricles, causing dangerously slow heart rate.",
         "description_ja": "心房から心室への電気信号の完全遮断で、危険な徐脈を引き起こします。",
+        "pathophysiology_ja": "房室結節またはHis束の完全な伝導途絶→心房と心室が独立して興奮（AV解離）→心室補充調律（escape rhythm: 20〜40bpm）→著明な徐脈→心拍出量低下→失神（Adams-Stokes発作）・運動不耐性・うっ血性心不全。ECGでP波とQRS波が完全に無関係（AV解離）。",
+        "causes_ja": "特発性線維化（高齢犬で最多）、心筋炎（Borrelia・Trypanosoma）、心筋梗塞、心臓腫瘍（リンパ腫・血管肉腫のAVN浸潤）、先天性。コッカースパニエル・ダックスフンドに報告多い。薬剤性（ジゴキシン中毒・Ca channel blocker過量）は可逆的。",
+        "prevention_ja": "確実な予防法はない。症候性の完全AVブロックはペースメーカー植込みが唯一の根治的治療。一時的にアトロピン・イソプロテレノールで心拍数を維持。原因疾患の治療（感染性の場合は抗菌薬で回復の可能性あり）。",
         "urgency": "emergency",
     },
     # ---- Endocrine ----
@@ -3675,6 +3687,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "stiffness", "lethargy", "anxiety", "excessive_panting"},
         "description": "Deficient parathyroid hormone causing dangerously low blood calcium levels, muscle tremors and seizures.",
         "description_ja": "副甲状腺ホルモンの欠乏により危険な低カルシウム血症、筋肉の震えとけいれんを引き起こします。",
+        "pathophysiology_ja": "PTH分泌低下→腸管Ca吸収低下＋腎Ca再吸収低下＋骨吸収低下→低カルシウム血症（iCa<1.0mmol/L）→神経筋興奮性亢進→筋線維束攣縮・テタニー・全身性けいれん。低Ca血症は心臓の電気的活動にも影響→QT延長→不整脈。同時に高リン血症（腎からのP排泄低下）。",
+        "causes_ja": "医原性（甲状腺手術時の副甲状腺の損傷・除去が最多）、特発性（免疫介在性の副甲状腺破壊）。トイプードル・ラブラドール・ジャーマンシェパードに報告多い。特発性は中年犬に多い。甲状腺手術後24〜72時間でCaモニタリングが必須。",
+        "prevention_ja": "甲状腺手術時の副甲状腺の愛護的温存。術後の血清Ca定期測定。確定後はビタミンD（カルシトリオール0.02〜0.03μg/kg/日）＋経口Caの生涯補充。",
         "urgency": "emergency",
     },
     {
@@ -4306,6 +4321,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"difficulty_breathing", "rapid_breathing", "collapse", "coughing", "lethargy", "excessive_panting"},
         "description": "Blood clot in the pulmonary arteries causing acute respiratory distress; often secondary to other conditions.",
         "description_ja": "肺動脈の血栓による急性呼吸困難で、他の疾患に続発することが多いです。",
+        "pathophysiology_ja": "血栓（全身静脈系からの塞栓、またはin situ形成）が肺動脈を閉塞→肺血管抵抗の急激な上昇→右心負荷→V/Qミスマッチ→低酸素血症→急性呼吸困難。大塊PTEは突然死の原因。犬のPTEはほぼ常に基礎疾患に続発する（独立した疾患としての発症は稀）。",
+        "causes_ja": "IMHA（最多の基礎疾患、PTEがIMHAの主要死因）、クッシング症候群（凝固亢進状態）、DIC、蛋白漏出性腎症/腸症（アンチトロンビンIII喪失）、血管肉腫、敗血症。Virchowの三徴（血管内皮障害・血流停滞・凝固亢進）の全てが犬でも関与。",
+        "prevention_ja": "高リスク疾患（IMHA・PLE/PLN・クッシング）での抗血栓療法（低用量アスピリン＋クロピドグレル）。IMHA治療中は抗血栓薬の併用が標準。急性呼吸困難の犬ではPTEを鑑別に含める。",
         "urgency": "emergency",
     },
     {
@@ -4828,6 +4846,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"swollen_joints", "fever", "limping_fl", "limping_fr", "limping_rl", "limping_rr", "pain_on_touch", "lethargy"},
         "description": "Bacterial infection of a joint causing acute swelling, heat, pain, and systemic illness.",
         "description_ja": "関節の細菌感染で、急性腫脹、熱感、疼痛、全身症状を引き起こします。",
+        "pathophysiology_ja": "細菌の関節内侵入（血行性・直接外傷性・医原性）→滑膜の急性化膿性炎症→好中球性関節液（混濁・細胞数>40,000/μL）→細菌性プロテアーゼ＋好中球のリソソーム酵素→関節軟骨の急速な破壊→不可逆的関節障害。未治療では数日で関節破壊が進行するため超緊急。",
+        "causes_ja": "血行性播種（感染性心内膜炎・椎間板脊椎炎・菌血症）、穿通創（咬傷・交通事故）、関節手術後の医原性感染、関節内注射後。Staphylococcus（最多）、Streptococcus、E. coli。膝・肘・手根関節に多い。免疫介在性多発性関節炎との鑑別が重要（関節液の培養・グラム染色）。",
+        "prevention_ja": "穿通創の適切なデブリードマン、関節手術時の無菌操作、菌血症源（歯周病・UTI）の管理。関節液の培養＋抗菌薬感受性試験に基づく長期抗菌薬療法（最低4〜6週間）＋関節洗浄が治療の柱。",
         "urgency": "emergency",
     },
     {
