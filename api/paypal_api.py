@@ -41,7 +41,7 @@ def _get_paypal_token() -> str | None:
         with urllib.request.urlopen(req, timeout=15) as resp:
             return json.loads(resp.read()).get("access_token")
     except Exception as e:
-        logger.error(f"PayPal token error: {e}")
+        logger.error("PayPal token error: %s", e)
         return None
 
 # Subscribers database (SQLite-backed)
@@ -106,9 +106,9 @@ def _migrate_subscribers_json():
         finally:
             conn.close()
         json_path.unlink(missing_ok=True)
-        logger.info(f"Migrated {len(subs)} subscribers from JSON to SQLite")
+        logger.info("Migrated %d subscribers from JSON to SQLite", len(subs))
     except Exception as e:
-        logger.error(f"Subscriber JSON migration error: {e}")
+        logger.error("Subscriber JSON migration error: %s", e)
 
 
 # Run migration on module load
@@ -153,7 +153,7 @@ def create_subscription():
                 "status": sub.get("status"),
             })
     except Exception as e:
-        logger.error(f"PayPal create subscription error: {e}")
+        logger.error("PayPal create subscription error: %s", e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -187,7 +187,7 @@ def activate_subscription():
                 (subscription_id, email, datetime.utcnow().isoformat(), request.remote_addr or ""),
             )
             conn.commit()
-            logger.info(f"PayPal subscription activated: {subscription_id} ({email})")
+            logger.info("PayPal subscription activated: %s (%s)", subscription_id, email)
     finally:
         conn.close()
 
@@ -281,7 +281,7 @@ def _verify_webhook_signature(request_obj) -> bool:
             result = json.loads(resp.read())
             return result.get("verification_status") == "SUCCESS"
     except Exception as e:
-        logger.error(f"Webhook signature verification failed: {e}")
+        logger.error("Webhook signature verification failed: %s", e)
         return False
 
 
@@ -306,7 +306,7 @@ def paypal_webhook():
     event_type = body.get("event_type", "")
     resource = body.get("resource", {})
 
-    logger.info(f"PayPal webhook: {event_type}")
+    logger.info("PayPal webhook: %s", event_type)
 
     subscription_id = resource.get("id", "")
     if not subscription_id:
@@ -336,7 +336,7 @@ def paypal_webhook():
                     (subscription_id, now, now),
                 )
             conn.commit()
-            logger.info(f"Subscription activated/confirmed: {subscription_id}")
+            logger.info("Subscription activated/confirmed: %s", subscription_id)
 
         elif event_type in (
             "BILLING.SUBSCRIPTION.CANCELLED",
@@ -348,7 +348,7 @@ def paypal_webhook():
                 (now, subscription_id),
             )
             conn.commit()
-            logger.info(f"Subscription cancelled/suspended: {subscription_id}")
+            logger.info("Subscription cancelled/suspended: %s", subscription_id)
     finally:
         conn.close()
 
@@ -431,9 +431,9 @@ def _migrate_waitlist_json():
         finally:
             conn.close()
         json_path.unlink(missing_ok=True)
-        logger.info(f"Migrated {len(entries)} waitlist entries from JSON to SQLite")
+        logger.info("Migrated %d waitlist entries from JSON to SQLite", len(entries))
     except Exception as e:
-        logger.error(f"Waitlist JSON migration error: {e}")
+        logger.error("Waitlist JSON migration error: %s", e)
 
 
 # Run migration on module load
@@ -460,7 +460,7 @@ def join_waitlist():
     finally:
         conn.close()
 
-    logger.info(f"Waitlist signup: {email}")
+    logger.info("Waitlist signup: %s", email)
     return jsonify({"status": "ok", "total": total})
 
 

@@ -80,7 +80,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error in comprehensive analysis: {e}")
+            logger.error("Error in comprehensive analysis: %s", e)
             return {"error": str(e)}, 500
 
     def get_case_by_id(self, case_id: str) -> Dict:
@@ -99,7 +99,7 @@ class ClinicalAPIHandler:
             return {"status": "success"}, 200
 
         except Exception as e:
-            logger.error(f"Error retrieving case: {e}")
+            logger.error("Error retrieving case: %s", e)
             return {"error": str(e)}, 500
 
     # ===== DIAGNOSIS MANAGEMENT =====
@@ -157,7 +157,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error getting differentials: {e}")
+            logger.error("Error getting differentials: %s", e)
             return {"error": str(e)}, 500
 
     def post_record_outcome(self) -> Dict:
@@ -192,7 +192,7 @@ class ClinicalAPIHandler:
             return {"status": "success", "message": "Outcome recorded"}, 200
 
         except Exception as e:
-            logger.error(f"Error recording outcome: {e}")
+            logger.error("Error recording outcome: %s", e)
             return {"error": str(e)}, 500
 
     # ===== PROGNOSIS =====
@@ -239,7 +239,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error predicting prognosis: {e}")
+            logger.error("Error predicting prognosis: %s", e)
             return {"error": str(e)}, 500
 
     # ===== TREATMENT PLANNING =====
@@ -284,7 +284,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error predicting treatment response: {e}")
+            logger.error("Error predicting treatment response: %s", e)
             return {"error": str(e)}, 500
 
     def post_recommend_treatments(self) -> Dict:
@@ -323,7 +323,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error recommending treatments: {e}")
+            logger.error("Error recommending treatments: %s", e)
             return {"error": str(e)}, 500
 
     # ===== DISEASE COMBINATIONS =====
@@ -358,7 +358,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error analyzing combinations: {e}")
+            logger.error("Error analyzing combinations: %s", e)
             return {"error": str(e)}, 500
 
     # ===== STATISTICS & MONITORING =====
@@ -381,7 +381,7 @@ class ClinicalAPIHandler:
             return {"status": "success", "statistics": stats}, 200
 
         except Exception as e:
-            logger.error(f"Error getting statistics: {e}")
+            logger.error("Error getting statistics: %s", e)
             return {"error": str(e)}, 500
 
     def get_veterinarian_stats(self, vet_id: str) -> Dict:
@@ -403,7 +403,7 @@ class ClinicalAPIHandler:
             return {"status": "success", "statistics": stats}, 200
 
         except Exception as e:
-            logger.error(f"Error getting vet stats: {e}")
+            logger.error("Error getting vet stats: %s", e)
             return {"error": str(e)}, 500
 
     def get_clinic_stats(self, clinic_id: str) -> Dict:
@@ -425,7 +425,7 @@ class ClinicalAPIHandler:
             return {"status": "success", "statistics": stats}, 200
 
         except Exception as e:
-            logger.error(f"Error getting clinic stats: {e}")
+            logger.error("Error getting clinic stats: %s", e)
             return {"error": str(e)}, 500
 
     # ===== MODEL MANAGEMENT =====
@@ -452,7 +452,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error training models: {e}")
+            logger.error("Error training models: %s", e)
             return {"error": str(e)}, 500
 
     def get_clinical_summary(self, case_id: str) -> Dict:
@@ -474,7 +474,7 @@ class ClinicalAPIHandler:
             }, 200
 
         except Exception as e:
-            logger.error(f"Error getting summary: {e}")
+            logger.error("Error getting summary: %s", e)
             return {"error": str(e)}, 500
 
 
