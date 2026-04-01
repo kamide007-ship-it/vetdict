@@ -300,6 +300,8 @@ window.addEventListener("scroll",function(){const h=document.documentElement;con
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){const dur=Math.round((Date.now()-_sessionStart)/1000);trackEvent("session_engagement",{duration_sec:dur,max_scroll_pct:_maxScrollPct,species_used:currentSpecies||"none",analyses_done:loadDiagnosisHistory().length});}});
 
 document.addEventListener("DOMContentLoaded",async()=>{
+  /* Funnel step 0: page load */
+  trackEvent("funnel_page_load",{referrer:document.referrer.substring(0,100),lang:currentLang});
   try{
     await checkAccess();
     loadSpeciesStats();
