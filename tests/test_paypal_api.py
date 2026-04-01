@@ -1,6 +1,5 @@
 """Tests for PayPal subscription management API (SQLite-backed)."""
 
-import json
 import os
 from unittest.mock import patch
 
