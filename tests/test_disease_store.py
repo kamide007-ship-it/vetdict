@@ -488,8 +488,8 @@ class TestSqliteExceptionHandling:
 
     def test_returns_fallback_on_missing_table(self, tmp_path, monkeypatch):
         """When symptoms table doesn't exist, falls back to module data."""
-        import sqlite3
         import contextlib
+        import sqlite3
 
         # Create a DB with no tables at all
         path = str(tmp_path / "no_tables.db")
@@ -521,7 +521,7 @@ class TestSqliteExceptionHandling:
         @contextlib.contextmanager
         def _broken():
             raise RuntimeError("DB unavailable")
-            yield  # noqa: unreachable
+            yield  # noqa: F841
 
         monkeypatch.setattr("api.disease_store.get_connection", _broken)
         monkeypatch.setattr("api.disease_store._db_ready", True)
