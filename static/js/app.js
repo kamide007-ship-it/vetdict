@@ -2040,15 +2040,34 @@ function guidedRenderSymptoms(data){
 }
 
 function guidedRenderInterim(data){
-  // Show current symptom tags
+  // Show current symptom tags (removable)
   const details=data.symptom_details||[];
   if(details.length>0){
-    let tagsHtml='<div class="chat-symptoms-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"選択中の症状: ":"Selected: ")+'</span>';
+    let tagsHtml='<div class="chat-symptoms-tags guided-removable-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"選択中の症状 (×で解除): ":"Selected (tap × to remove): ")+'</span>';
     details.forEach(s=>{
-      tagsHtml+=`<span class="chat-symptom-tag">${currentLang==="ja"?s.name_ja:s.name_en}</span>`;
+      tagsHtml+=`<span class="chat-symptom-tag removable" data-sid="${escapeHtml(s.id)}">${currentLang==="ja"?s.name_ja:s.name_en} <button class="guided-tag-remove" type="button" aria-label="${currentLang==="ja"?"解除":"Remove"}">&times;</button></span>`;
     });
     tagsHtml+='</div>';
     guidedAddMsg(tagsHtml,"bot chat-result");
+    // Wire up removal handlers
+    document.querySelectorAll(".guided-removable-tags .guided-tag-remove").forEach(btn=>{
+      btn.addEventListener("click",function(){
+        const tag=this.closest(".chat-symptom-tag");
+        if(!tag)return;
+        const sid=tag.dataset.sid;
+        guidedState.selectedSymptoms=guidedState.selectedSymptoms.filter(s=>s!==sid);
+        tag.remove();
+        if(guidedState.selectedSymptoms.length>0){
+          // Re-run interim diagnosis with updated symptoms
+          guidedSetActions("");
+          guidedFetch("next_category");
+        } else {
+          // No symptoms left — go back to category selection
+          guidedSetActions("");
+          guidedFetch("start");
+        }
+      });
+    });
   }
 
   // Show disease candidates

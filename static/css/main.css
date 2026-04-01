@@ -322,7 +322,11 @@ a:hover{text-decoration:underline}
 .chat-species-guidance{font-size:.74rem;color:var(--navy);background:#e6eefb;border:1px solid #c7d8f5;padding:6px 10px;border-radius:8px;margin-bottom:8px}
 .chat-symptoms-tags{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:8px;padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px}
 .chat-symptoms-label{font-size:.74rem;font-weight:600;color:var(--gray-600);margin-right:4px}
-.chat-symptom-tag{display:inline-block;font-size:.72rem;padding:2px 8px;background:var(--navy);color:var(--white);border-radius:10px;white-space:nowrap}
+.chat-symptom-tag{display:inline-flex;align-items:center;gap:3px;font-size:.72rem;padding:2px 8px;background:var(--navy);color:var(--white);border-radius:10px;white-space:nowrap}
+.chat-symptom-tag.removable{cursor:default;transition:opacity .2s}
+.chat-symptom-tag.removable:hover{opacity:.85}
+.guided-tag-remove{background:none;border:none;color:var(--white);font-size:.82rem;line-height:1;cursor:pointer;padding:0 1px;opacity:.7;transition:opacity .15s}
+.guided-tag-remove:hover{opacity:1}
 .chat-disease-list{display:flex;flex-direction:column;gap:6px}
 .chat-disease-card{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:10px 12px;transition:box-shadow .2s}
 .chat-disease-card:hover{box-shadow:var(--shadow-md)}
