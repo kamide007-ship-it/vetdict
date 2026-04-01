@@ -1191,6 +1191,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A tick-borne protozoal disease that destroys red blood "
                        "cells, causing severe anemia.",
         "description_ja": "マダニ媒介の原虫疾患で、赤血球を破壊し重度の貧血を引き起こします。",
+        "pathophysiology_ja": "マダニ刺咬→Babesia canis/gibsoniのスポロゾイトが赤血球に侵入→赤血球内増殖→赤血球の破壊（血管内溶血）→溶血性貧血・ヘモグロビン尿・黄疸。重症型では免疫介在性溶血の合併、DIC、急性腎障害、脳バベシア症（中枢神経症状）。B. gibsoniは日本で主流、慢性キャリアとなりやすい。",
+        "causes_ja": "B. canis（大型バベシア、マダニRhipicephalus属媒介）、B. gibsoni（小型バベシア、マダニHaemaphysalis属媒介）。日本ではB. gibsoniが主流（西日本に多い）。マダニ刺咬、輸血、闘犬による直接血液接触でも伝播。アメリカンピットブルテリアに好発。",
+        "prevention_ja": "マダニ駆除薬（イソキサゾリン系）の通年投与、散歩後のマダニチェック、流行地域での注意強化、輸血前のPCRスクリーニング。",
         "urgency": "urgent",
     },
     {
@@ -1297,6 +1300,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An abnormal blood vessel bypasses the liver, allowing "
                        "toxins to reach the brain and other organs.",
         "description_ja": "異常血管が肝臓を迂回し、毒素が脳や他の臓器に到達する先天性疾患です。",
+        "pathophysiology_ja": "門脈血が肝臓を迂回して全身循環に流入→肝臓での解毒・代謝が不十分→高アンモニア血症→肝性脳症（旋回運動・失見当・けいれん・昏迷）。尿酸塩結石の形成（肝臓での尿酸代謝障害）。肝臓の発育不全（microhepatica）。先天性（肝外性/肝内性）と後天性（門脈圧亢進に続発する多発性）に分類。",
+        "causes_ja": "先天性（最多）：肝外性は小型犬（ヨークシャーテリア、マルチーズ、シーズー、ミニチュアシュナウザー）に好発。肝内性は大型犬（アイリッシュウルフハウンド、ラブラドール）。後天性：慢性肝疾患・門脈圧亢進に続発。多くは1歳未満で発症。",
+        "prevention_ja": "好発犬種の繁殖管理（罹患犬の繁殖制限）。食後の異常行動（食後脳症）を示す若齢犬は早期に血清胆汁酸検査でスクリーニング。",
         "urgency": "urgent",
     },
     # ---- Cardiac ----
@@ -1321,6 +1327,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A congenital heart defect where the ductus arteriosus "
                        "fails to close after birth.",
         "description_ja": "出生後に動脈管が閉鎖しない先天性心疾患です。",
+        "pathophysiology_ja": "出生後に動脈管（大動脈-肺動脈間）が閉鎖しない→左-右シャント→肺血流増加→左房・左室の容量負荷→左心拡大→うっ血性心不全。大型シャントでは肺高血圧→アイゼンメンジャー症候群（シャント逆転、右-左）→チアノーゼ（差別的チアノーゼ：後肢のみ）。聴診で連続性心雑音（machinery murmur）が特徴的。",
+        "causes_ja": "多遺伝子性の先天性心疾患。犬で最も多い先天性心疾患の一つ。好発犬種：マルチーズ、ポメラニアン、シェルティ、ミニチュアプードル、ジャーマンシェパード。雌に多い（3:1）。",
+        "prevention_ja": "好発犬種の心臓聴診スクリーニング（子犬検診時）。罹患犬の繁殖制限。早期発見後の外科的閉鎖術（カテーテルコイル塞栓 or 開胸結紮）で予後良好。",
         "urgency": "urgent",
     },
     {
@@ -1331,6 +1340,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Narrowing of the aortic valve obstructing blood flow "
                        "from the heart, common in large breeds.",
         "description_ja": "大動脈弁の狭窄により心臓からの血流が阻害される疾患で、大型犬に多いです。",
+        "pathophysiology_ja": "大動脈弁下部（SAS、犬で最多）・弁性・弁上部の狭窄→左室流出路閉塞→左室圧負荷→左室求心性肥大→心筋酸素需要増大→心筋虚血→失神・突然死（心室性不整脈）。圧較差>80mmHgの重症例は突然死リスクが高い。聴診で左心基底部のcrescendo-decrescendo収縮期雑音。",
+        "causes_ja": "先天性（多遺伝子性遺伝）。大型犬：ゴールデンレトリーバー、ニューファンドランド、ロットワイラー、ボクサー、ジャーマンシェパード。弁下性線維輪（SAS）が犬で最も多い型。軽度は無症状で偶然発見、重度は運動不耐性・失神・突然死。",
+        "prevention_ja": "好発犬種の心臓聴診スクリーニング（子犬検診〜繁殖前）、罹患犬の繁殖制限、心エコーによる圧較差測定で重症度評価。重度は激しい運動制限。",
         "urgency": "urgent",
     },
     {
@@ -1351,6 +1363,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Fluid accumulation around the heart, compressing "
                        "it and reducing cardiac output.",
         "description_ja": "心臓周囲に液体が貯留し、心臓を圧迫して心拍出量を低下させます。",
+        "pathophysiology_ja": "心嚢腔への液体（血液・漿液）貯留→心嚢内圧上昇→心臓の拡張障害（心タンポナーデ）→心拍出量低下→右心不全徴候（頸静脈怒張・腹水・肝腫大）→心原性ショック。急性大量貯留は致死的。腫瘍性（血管肉腫が犬で最多）と特発性に大別。心エコーで診断、心嚢穿刺が緊急的治療。",
+        "causes_ja": "腫瘍性（右心房血管肉腫が最多、中皮腫、心基底部腫瘍）、特発性（良性反復性）、心不全性、感染性、凝固障害。大型犬・大型犬種（ゴールデンレトリーバー、ジャーマンシェパード、ラブラドール）に好発。",
+        "prevention_ja": "確実な予防法はない。好発犬種の定期的な心臓聴診・心エコー。特発性反復性は心嚢膜切除術（pericardiectomy）で再発防止。腫瘍性は原疾患の管理が鍵。",
         "urgency": "emergency",
     },
     # ---- Skin ----
@@ -1552,6 +1567,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Abnormal accumulation of cerebrospinal fluid in the "
                        "brain, common in toy breeds.",
         "description_ja": "脳内の脳脊髄液の異常蓄積で、トイ犬種に多く見られます。",
+        "pathophysiology_ja": "脳脊髄液（CSF）の産生・吸収・循環の不均衡→脳室内のCSF蓄積→脳室拡大→脳実質の圧迫・萎縮→神経機能障害。先天性（中脳水道狭窄が最多）と後天性（腫瘍・炎症による閉塞）に分類。開放泉門（molera）が触知可能な場合が多い。",
+        "causes_ja": "先天性（トイ犬種：チワワ、ポメラニアン、マルチーズ、ヨークシャーテリア、トイプードル）、後天性（脳腫瘍・脳炎・脳内出血によるCSF循環障害）。先天性は生後数ヶ月で発症。ドーム状頭蓋・斜視が身体的特徴。",
+        "prevention_ja": "好発犬種の責任ある繁殖（極端な小型化の回避）、子犬期の神経学的異常の早期発見。軽度は内科管理（オメプラゾール・プレドニゾロン・アセタゾラミド）、重度は脳室-腹腔シャント術。",
         "urgency": "urgent",
     },
     {
@@ -1586,6 +1604,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An autoimmune neuromuscular disease causing muscle "
                        "weakness, often associated with megaesophagus.",
         "description_ja": "筋力低下を引き起こす自己免疫性神経筋疾患で、巨大食道症を伴うことが多いです。",
+        "pathophysiology_ja": "後天性（最多）：ニコチン性アセチルコリン受容体（AChR）に対する自己抗体→神経筋接合部でのAChR破壊→神経筋伝達障害→骨格筋の易疲労性。局所型：食道筋（巨大食道症→誤嚥性肺炎）・咽頭筋・顔面筋に限局。全身型：四肢筋力低下・運動不耐性。胸腺腫の合併が5〜15%。",
+        "causes_ja": "後天性免疫介在性（最多）、先天性（ジャックラッセルテリア・スムースフォックステリア等のAChR遺伝子変異）。後天性は中高齢犬（5〜10歳）に多い。ゴールデンレトリーバー、ジャーマンシェパード、ダックスフンドに好発。",
+        "prevention_ja": "確実な予防法はない。巨大食道症の犬では抗AChR抗体価の測定でスクリーニング。誤嚥性肺炎の予防（立位給餌）が生命予後に直結。自然寛解例も報告（約50%が6〜18ヶ月で寛解）。",
         "urgency": "high",
     },
     {
@@ -1662,6 +1683,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Loss of nerve function to the larynx, causing "
                        "difficulty breathing, especially in older large breeds.",
         "description_ja": "喉頭の神経機能喪失により呼吸困難を引き起こし、高齢の大型犬に多いです。",
+        "pathophysiology_ja": "反回喉頭神経の変性→披裂軟骨の外転障害→声門の開大不全→吸気時の喉頭閉塞→吸気努力増大→吸気性喘鳴（stridor）→高体温・呼吸窮迫。多くは全身性多発神経障害（GOLPP: Geriatric Onset Laryngeal Paralysis Polyneuropathy）の一部として後肢の運動失調を伴う。熱中症・興奮時に急性呼吸窮迫のリスク。",
+        "causes_ja": "特発性/GOLPP（最多、高齢大型犬の加齢性多発神経障害）、甲状腺機能低下症関連（稀だが精査すべき）、外傷性（頸部手術後）、先天性（ブービエ・デ・フランダース、ダルメシアン子犬）。好発：ラブラドール、ゴールデン、セントバーナード、アイリッシュセッター。10歳以上に多い。",
+        "prevention_ja": "確実な予防法はない。甲状腺機能低下症の適切な管理。罹患犬の高温環境・興奮の回避、ハーネスの使用。重症例は片側披裂軟骨側方化術（tie-back手術）で呼吸改善。",
         "urgency": "urgent",
     },
     {
@@ -2019,6 +2043,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "The immune system destroys the body's own platelets, "
                        "causing spontaneous bleeding.",
         "description_ja": "免疫系が自身の血小板を破壊し、自然出血を引き起こします。",
+        "pathophysiology_ja": "抗血小板自己抗体（IgG）→血小板表面への結合→脾臓マクロファージによる貪食・破壊→血小板数の急速な低下（<50,000/μL）→点状出血・斑状出血・粘膜出血。重症（<10,000/μL）では消化管出血・血尿・致死的出血のリスク。IMHA（免疫介在性溶血性貧血）との併発（Evans症候群）は予後不良。",
+        "causes_ja": "一次性（特発性、最多）：自己免疫性。二次性：腫瘍（リンパ腫・血管肉腫）、感染症（Ehrlichia・Babesia・Leishmania）、薬剤性、ワクチン後。コッカースパニエル、プードル、オールドイングリッシュシープドッグに好発。中年雌犬に多い。",
+        "prevention_ja": "確実な予防法はない。基礎疾患（感染症・腫瘍）の管理。点状出血・粘膜出血・鼻出血の早期受診。ワクチン接種後は一過性の血小板減少に注意。",
         "urgency": "urgent",
     },
     # ---- Dental ----
@@ -2059,6 +2086,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A pancreatic tumor that overproduces insulin, "
                        "causing dangerous drops in blood sugar.",
         "description_ja": "インスリンを過剰産生する膵臓腫瘍で、危険な血糖低下を引き起こします。",
+        "pathophysiology_ja": "膵臓β細胞の腫瘍性増殖→インスリンの自律的過剰分泌→低血糖（BG<60mg/dL）→脳のグルコース欠乏→脱力・運動失調・けいれん・昏迷。低血糖時にインスリン値が高値（修正インスリン:グルコース比>30が疑い）。約50%が悪性で肝臓・リンパ節への転移あり。",
+        "causes_ja": "膵β細胞の腫瘍性増殖（機能性膵島細胞腫瘍）。中高齢犬（8〜12歳）に好発。大型犬：ジャーマンシェパード、アイリッシュセッター、ラブラドール。低血糖発作は空腹時・運動後に誘発されやすい（Whippleの三徴）。",
+        "prevention_ja": "確実な予防法はない。空腹時低血糖エピソード（ぼんやり・ふらつき・けいれん）の早期受診。食事は少量頻回（1日4〜6回、低炭水化物・高蛋白・高脂肪食）で低血糖を最小化。",
         "urgency": "urgent",
     },
     {
@@ -2102,6 +2132,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "aggression_change", "anxiety", "excessive_panting", "difficulty_breathing"},
         "description": "A fatal viral disease affecting the central nervous system, transmissible to humans through bites. Vaccination is legally required.",
         "description_ja": "中枢神経系を侵す致死性ウイルス疾患で、咬傷を通じて人に感染します。ワクチン接種が法律で義務付けられています。",
+        "pathophysiology_ja": "感染動物の咬傷→唾液中のリッサウイルスが末梢神経に侵入→軸索内を逆行性に中枢神経へ伝播（1〜3ヶ月の潜伏期間）→脳幹・大脳辺縁系の神経細胞壊死→狂躁型（攻撃性・興奮・水恐怖）または麻痺型（進行性麻痺）→脳幹機能不全→呼吸停止→死亡。発症後の致死率はほぼ100%。ネグリ小体（神経細胞内封入体）が病理学的特徴。",
+        "causes_ja": "狂犬病ウイルス（Lyssavirus属）。感染動物（犬・コウモリ・アライグマ・キツネ・スカンク）の咬傷。日本は1957年以降清浄国（島嶼国の利点）だが、世界では年間約59,000人が死亡（WHO）。東南アジア・アフリカで高リスク。日本では狂犬病予防法により年1回のワクチン接種が義務。",
+        "prevention_ja": "法定ワクチン接種（日本：狂犬病予防法に基づく年1回接種の義務）、海外渡航犬の事前ワクチン接種・抗体価確認、野生動物との接触回避。日本入国時は180日前までにワクチン接種・抗体価検査が必要。",
         "urgency": "emergency",
     },
     {
@@ -3088,6 +3121,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "rapid_breathing", "skin_redness", "vomiting"},
         "description": "A life-threatening coagulation cascade disorder causing simultaneous clotting and bleeding.",
         "description_ja": "凝固と出血が同時に起こる致命的な凝固異常で、基礎疾患の合併症です。",
+        "pathophysiology_ja": "基礎疾患→組織因子の大量放出/内皮障害→凝固カスケードの全身的活性化→微小血管内血栓形成（多臓器微小梗塞）→凝固因子・血小板の消費→消費性凝固障害→出血傾向（点状出血・体腔内出血・穿刺部出血）。フィブリン分解産物（FDP/D-dimer）上昇、血小板減少、PT/APTT延長が診断指標。",
+        "causes_ja": "単独疾患ではなく基礎疾患の合併症。犬で多い原因：血管肉腫、IMHA、GDV、膵炎、敗血症、蛇咬傷、熱射病。致死率は基礎疾患と進行度に依存するが50〜70%と高い。",
+        "prevention_ja": "基礎疾患の早期・適切な治療が最重要。DIC早期徴候（点状出血・穿刺部持続出血・血小板減少）のモニタリング。新鮮凍結血漿・ヘパリン投与は基礎疾患治療と並行。",
         "urgency": "emergency",
     },
     {
@@ -3152,6 +3188,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"appetite_loss", "lumps", "weight_loss"},
         "description": "The most common malignant oral tumor in dogs, highly aggressive with early metastasis.",
         "description_ja": "犬で最も多い口腔悪性腫瘍で、早期に転移する高悪性度腫瘍です。",
+        "pathophysiology_ja": "口腔粘膜メラノサイトの悪性増殖→局所浸潤性腫瘤形成→歯槽骨破壊→早期リンパ節転移（転移率80%以上）→肺転移。高度な局所浸潤性と全身転移性を有する犬で最も予後不良な口腔腫瘍。WHO Stage I〜IV（腫瘤径と転移有無で分類）。メラニン欠乏型（無色素性メラノーマ）は診断が困難。",
+        "causes_ja": "原因不明。口腔粘膜のメラノサイト由来。好発：コッカースパニエル、スコティッシュテリア、ゴールデンレトリーバー、ミニチュアプードル、ダックスフンド。中高齢犬（10〜12歳）。口腔メラノーマの約80%が悪性。歯肉に最も多い。",
+        "prevention_ja": "確実な予防法はない。口腔内のしこり・出血・口臭・摂食困難の早期受診。早期発見が予後を改善。メラノーマワクチン（Oncept DNA）がStage II-III/術後の補助療法として承認。",
         "urgency": "urgent",
     },
     {
@@ -3775,6 +3814,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "lethargy", "bloated_abdomen", "rapid_breathing", "appetite_loss", "weight_loss"},
         "description": "A highly malignant tumor of the spleen's blood vessels that can rupture, causing life-threatening internal bleeding.",
         "description_ja": "脾臓の血管の高悪性度腫瘍で、破裂すると致死的な内出血を引き起こします。",
+        "pathophysiology_ja": "血管内皮細胞由来の悪性腫瘍→脾臓内で血液充満腔を形成→破裂→致命的な腹腔内出血（血腹）→出血性ショック。早期に肝臓・肺・心臓に血行性転移（診断時に80%以上が転移あり）。DICの合併が高率。脾臓の腫瘤の2/3は血管肉腫（残り1/3は良性の血腫・結節性過形成）。",
+        "causes_ja": "原因不明。大型犬（ゴールデンレトリーバー、ジャーマンシェパード、ラブラドール）に好発。中高齢犬（8〜12歳）。ゴールデンレトリーバーは生涯発症リスクが約20%。被毛色の薄い犬種にも多い。脾臓・右心房・皮下が好発部位。",
+        "prevention_ja": "確実な予防法はない。好発犬種の中高齢期での定期的腹部エコー。突然の虚脱・腹部膨満は緊急受診。脾摘後のドキソルビシン併用化学療法でMST 4〜6ヶ月（脾摘のみでは1〜3ヶ月）。",
         "urgency": "emergency",
     },
     {
@@ -5153,6 +5195,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "collapse", "excessive_panting", "appetite_loss", "vomiting"},
         "description": "Autoimmune destruction of red blood cells.",
         "description_ja": "赤血球の自己免疫性破壊による貧血です。",
+        "pathophysiology_ja": "抗赤血球自己抗体（IgG/IgM）→赤血球表面に結合→(1)脾臓マクロファージによる血管外溶血（球状赤血球化・脾腫）、(2)補体活性化→血管内溶血（ヘモグロビン尿・黄疸）。急性重症型はPCV<15%に急速に低下。DICの合併が高率（50%）で予後不良因子。血栓塞栓症（肺塞栓）が主要な死因。",
+        "causes_ja": "一次性（特発性、約75%）：自己免疫性。二次性：腫瘍（リンパ腫）、感染症（Babesia・Ehrlichia・Mycoplasma haemocanis）、薬剤性、ワクチン後、蜂刺傷後。コッカースパニエル、プードル、バイション・フリーゼ、オールドイングリッシュシープドッグに好発。中年雌犬に多い。",
+        "prevention_ja": "確実な予防法はない。急性貧血（粘膜蒼白・頻脈・嗜眠）の早期受診。再発率20〜30%。マダニ媒介感染症の予防（二次性IMHA予防）。ITP併発（Evans症候群）に注意。",
         "urgency": "emergency",
     },
     {
