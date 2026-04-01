@@ -1967,6 +1967,7 @@ function guidedRenderSymptoms(data){
   });
   html+='</div>';
   html+=`<div class="guided-bottom-actions">`;
+  html+=`<button class="guided-action-btn text" id="guidedBackToCategories">${currentLang==="ja"?"← カテゴリに戻る":"← Back"}</button>`;
   html+=`<button class="guided-action-btn primary" id="guidedConfirmSymptoms">${t("guidedNext")}</button>`;
   html+=`</div>`;
   guidedSetActions(html);
@@ -1983,6 +1984,13 @@ function guidedRenderSymptoms(data){
         selected.add(sid);
       }
     });
+  });
+
+  // Back to categories
+  const backBtn=document.getElementById("guidedBackToCategories");
+  if(backBtn)backBtn.addEventListener("click",()=>{
+    guidedSetActions("");
+    guidedFetch("start");
   });
 
   // Confirm

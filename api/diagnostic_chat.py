@@ -4168,51 +4168,48 @@ def consultation():
     # ------------------------------------------------------------------
     if phase == "finalize":
         # Use the same diagnosis engine as the checkbox system for accuracy parity
-        if species in _SPECIES_DATA or species == "dog":
-            try:
-                from api.species_analyzer import analyze_species_symptoms
-                result = analyze_species_symptoms(
-                    species=species,
-                    symptoms=selected_symptoms,
-                    onset=onset,
-                    age_years=age_years,
-                    lab_values=lab_values,
-                    breed=breed,
-                    pain_score=pain_score,
+        try:
+            from api.species_analyzer import analyze_species_symptoms
+            result = analyze_species_symptoms(
+                species=species,
+                symptoms=selected_symptoms,
+                onset=onset,
+                age_years=age_years,
+                lab_values=lab_values,
+                breed=breed,
+                pain_score=pain_score,
+            )
+        except (ImportError, Exception) as exc:
+            # Fallback to chat engine
+            logger.warning("Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc)
+            if species == "horse" and EQUINE_AVAILABLE:
+                disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
+            elif species in _SPECIES_DATA:
+                disease_matches = _match_species_symptoms_to_diseases(
+                    selected_symptoms, species,
+                    pain_score=pain_score, lab_values=lab_values, breed=breed,
                 )
-            except (ImportError, Exception) as exc:
-                # Fallback to chat engine
-                logger.warning("Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc)
-                if species == "horse" and EQUINE_AVAILABLE:
-                    disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
-                elif species in _SPECIES_DATA:
-                    disease_matches = _match_species_symptoms_to_diseases(
-                        selected_symptoms, species,
-                        pain_score=pain_score, lab_values=lab_values, breed=breed,
-                    )
-                else:
-                    disease_matches = match_symptoms_to_diseases(
-                        selected_symptoms,
-                        pain_score=pain_score, lab_values=lab_values, breed=breed,
-                    )
-                result = {
-                    "suspected_diseases": [
-                        {
-                            "name": d.get("name_en", d.get("disease_id", "")),
-                            "name_ja": d.get("name_ja", ""),
-                            "match_percent": round(d.get("similarity_score", 0) * 100),
-                            "matching_symptoms": d.get("matched_symptoms", []),
-                            "total_symptoms": len(d.get("matched_symptoms", [])) + len(d.get("additional_disease_symptoms", [])),
-                            "severity": d.get("severity", "low"),
-                            "description_ja": d.get("description_ja", ""),
-                            "description": d.get("description", d.get("description_en", "")),
-                            "recommended_tests": d.get("recommended_tests", []),
-                        }
-                        for d in disease_matches[:10]
-                    ],
-                }
-        else:
-            result = {"suspected_diseases": []}
+            else:
+                disease_matches = match_symptoms_to_diseases(
+                    selected_symptoms,
+                    pain_score=pain_score, lab_values=lab_values, breed=breed,
+                )
+            result = {
+                "suspected_diseases": [
+                    {
+                        "name": d.get("name_en", d.get("disease_id", "")),
+                        "name_ja": d.get("name_ja", ""),
+                        "match_percent": round(d.get("similarity_score", 0) * 100),
+                        "matching_symptoms": d.get("matched_symptoms", []),
+                        "total_symptoms": len(d.get("matched_symptoms", [])) + len(d.get("additional_disease_symptoms", [])),
+                        "severity": d.get("severity", "low"),
+                        "description_ja": d.get("description_ja", ""),
+                        "description": d.get("description", d.get("description_en", "")),
+                        "recommended_tests": d.get("recommended_tests", []),
+                    }
+                    for d in disease_matches[:10]
+                ],
+            }
 
         # Build symptom details
         sym_name_map = {s["id"]: s for s in all_symptoms}
