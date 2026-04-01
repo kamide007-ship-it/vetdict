@@ -1,0 +1,298 @@
+"""Disease matching algorithm for multi-species differential diagnosis.
+
+IDF-weighted harmonic mean scoring with specificity bonuses,
+negative evidence penalties, urgency boosts, and prevalence correction.
+"""
+
+import math
+
+from api.chat.species_data import _SPECIES_DATA
+
+
+def _match_species_symptoms_to_diseases(
+    symptom_ids: list[str],
+    species: str,
+    *,
+    pain_score: int | None = None,
+    lab_values: dict | None = None,
+    breed: str | None = None,
+    lang: str = "",
+) -> list[dict]:
+    """Match symptom IDs to species-specific diseases using advanced weighted scoring.
+
+    Uses the same harmonic-mean + specificity + negative-evidence algorithm as
+    the dog matcher (match_symptoms_to_diseases) to achieve consistent,
+    high-accuracy differential diagnosis across all species.
+
+    Optional clinical context (pain_score, lab_values, breed) is accepted for
+    future scoring refinement and is forwarded from the chat endpoint.
+    """
+
+    sp_data = _SPECIES_DATA.get(species)
+    if not sp_data or not symptom_ids:
+        return []
+
+    # Expand user symptoms with synonyms for better disease matching
+    # Synonym map for matching (shared concepts across species)
+    _SYN = {
+        "frayed_fins": ["fin_rot"], "fin_rot": ["frayed_fins"],
+        "redness_skin": ["fin_hemorrhage", "hemorrhage", "skin_redness"], "fin_hemorrhage": ["redness_skin"],
+        "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
+        "loss_of_appetite": ["appetite_loss", "anorexia"], "appetite_loss": ["loss_of_appetite", "anorexia"],
+        "anorexia": ["loss_of_appetite", "appetite_loss"],
+        "constipation": ["reduced_fecal_output", "small_fecal_pellets", "decreased_fecal_output"],
+        "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
+        "reduced_fecal_output": ["small_fecal_pellets", "constipation", "decreased_fecal_output"],
+        "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
+        "bloating": ["abdominal_distension", "abdominal_pain"], "abdominal_distension": ["bloating", "abdominal_pain"],
+        "abdominal_pain": ["bloating", "abdominal_distension", "hunched_posture"],
+        "hunched_posture": ["abdominal_pain"],
+        "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
+        "frequent_urination": ["excessive_urination", "polyuria", "increased_urination"],
+        "excessive_urination": ["frequent_urination", "polyuria", "increased_urination"],
+        "increased_urination": ["excessive_urination", "frequent_urination", "polyuria"],
+        "excessive_thirst": ["polydipsia", "increased_thirst"],
+        "increased_thirst": ["excessive_thirst", "polydipsia"],
+        "polydipsia": ["excessive_thirst", "increased_thirst"],
+        "polyuria": ["excessive_urination", "frequent_urination", "increased_urination"],
+        "hair_loss": ["alopecia", "scaling", "quill_loss", "severe_quill_loss", "feather_loss", "circular_hair_loss"],
+        "circular_hair_loss": ["hair_loss", "alopecia"],
+        "alopecia": ["hair_loss", "circular_hair_loss"],
+        "feather_loss": ["hair_loss", "feather_plucking"],
+        "feather_plucking": ["feather_loss", "self_mutilation"],
+        "skin_lesions": ["scaling", "dermatitis", "skin_rash", "crusting", "thick_crusting", "flaky_skin", "dry_skin", "shell_discoloration", "shell_pitting", "skin_crusting"],
+        "scaly_skin": ["scaling", "dandruff", "skin_crusting", "dry_skin"],
+        "skin_crusting": ["scaling", "scaly_skin", "dandruff"],
+        "scaling": ["skin_lesions", "dandruff", "scaly_skin"],
+        "dandruff": ["scaling", "scaly_skin", "skin_crusting"],
+        "itching": ["pruritus", "scratching", "mild_itching", "ear_scratching"],
+        "pruritus": ["itching", "scratching", "mild_itching", "ear_scratching"],
+        "cloudy_eyes": ["cloudy_eye", "cloudiness_in_eyes", "corneal_cloudiness", "corneal_opacity"],
+        "cloudy_eye": ["cloudy_eyes", "corneal_cloudiness", "corneal_opacity"],
+        "corneal_opacity": ["corneal_cloudiness", "cloudy_eyes", "cloudy_eye"],
+        "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye"],
+        "tearing": ["excessive_tearing", "epiphora"], "excessive_tearing": ["tearing", "epiphora"],
+        "vision_loss": ["blindness", "cloudy_eye", "cataracts"],
+        "open_mouth_breathing": ["respiratory_distress", "labored_breathing"],
+        "labored_breathing": ["respiratory_distress", "open_mouth_breathing", "dyspnea"],
+        "respiratory_distress": ["labored_breathing", "open_mouth_breathing", "dyspnea"],
+        "wheezing": ["coughing", "labored_breathing", "respiratory_distress"],
+        "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots", "fractures", "bone_deformity", "soft_shell", "shell_softening"],
+        "bone_deformity": ["soft_bones", "limb_deformity", "shell_deformity", "fractures", "swollen_limbs"],
+        "shell_softening": ["soft_shell", "soft_bones", "shell_deformity"],
+        "soft_shell": ["shell_softening", "soft_bones", "shell_deformity"],
+        "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],
+        "head_tilt": ["vestibular_signs", "torticollis"],
+        "fluffed_feathers": ["feather_fluffing"],
+        "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_limb_paralysis"],
+        "paralysis": ["hind_limb_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
+        "sudden_paralysis": ["hind_limb_paralysis", "paralysis", "paralysis_or_paresis"],
+        "hind_limb_paralysis": ["paralysis", "sudden_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
+        "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye", "eye_protrusion"],
+        "eye_protrusion": ["eye_swelling", "eye_bulging", "pop_eye", "exophthalmos", "bulging_eye", "proptosis"],
+        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "enlarged_eye", "proptosis"],
+        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
+        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "enlarged_eye", "proptosis"],
+        "jaundice": ["icterus", "yellow_skin"],
+        "vomiting": ["regurgitation", "crop_stasis"],
+        "regurgitation": ["vomiting"],
+        "head_shaking": ["head_bobbing"],
+        "gill_swelling": ["gill_redness"],
+        "gill_paleness": ["gill_necrosis"],
+        "nystagmus": ["head_tilt", "rolling"],
+        "ataxia": ["tremors", "incoordination", "wobbling", "stumbling", "mild_ataxia"],
+        "tremors": ["ataxia", "shaking", "muscle_twitching"],
+        "wobbling": ["ataxia", "incoordination", "stumbling"],
+        "ear_discharge": ["ear_infection", "otitis", "ear_mites"],
+        "blood_in_urine": ["hematuria", "uterine_bleeding"],
+        "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
+        "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
+        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
+        "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis", "hind_leg_weakness"],
+        "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis", "hind_leg_weakness"],
+        "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis"],
+        "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
+        "sneezing": ["nasal_discharge"],
+        "wet_tail": ["diarrhea"], "diarrhea": ["wet_tail"],
+        "poor_coat": ["hair_loss", "dry_skin"], "dry_skin": ["poor_coat", "flaky_skin", "scaling"],
+        "flaky_skin": ["dry_skin", "scaling", "crusting"],
+        "thinning_skin": ["hair_loss"],
+        "darkened_coloration": ["dark_coloration", "discoloration"],
+        "dark_coloration": ["darkened_coloration", "discoloration"],
+        "cold_limbs": ["cold_extremities"], "cold_extremities": ["cold_limbs"],
+        "self_mutilation": ["self_chewing", "feather_plucking"],
+        "self_chewing": ["self_mutilation"],
+        "behavioral_change": ["behavioral_changes", "aggression"],
+        "behavioral_changes": ["behavioral_change"],
+        "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
+        "pleural_effusion": ["effusion", "abdominal_distension"],
+        "ascites": ["effusion", "abdominal_distension", "bloating"],
+        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+        "dental_overgrowth": ["overgrown_teeth", "malocclusion", "visible_tooth_overgrowth"],
+        "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
+        "dysecdysis": ["retained_shed", "retained_skin", "shedding_problems"],
+        "retained_shed": ["dysecdysis", "retained_skin"],
+        "retained_skin": ["dysecdysis", "retained_shed"],
+        "crop_swelling": ["crop_stasis", "ingluvitis"],
+        "crop_stasis": ["crop_swelling", "ingluvitis"],
+        "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
+        "red_ventrum": ["red_legs", "skin_redness"],
+        "edema": ["swelling", "bloating", "ascites"],
+        "swelling": ["edema", "facial_swelling", "eye_swelling"],
+        "rough_coat": ["poor_coat", "dry_skin"],
+        "scaly_legs": ["leg_scales", "scaly_face"],
+        "leg_scales": ["scaly_legs", "scaly_face"],
+        "scaly_face": ["scaly_legs", "leg_scales", "crusty_beak"],
+        "hole_in_head": ["head_erosion", "head_pitting"],
+    }
+    expanded_set = set(symptom_ids)
+    for sid in symptom_ids:
+        for alt in _SYN.get(sid, []):
+            expanded_set.add(alt)
+    symptom_set = expanded_set
+    diseases = sp_data["diseases"]
+
+    # --- Load prevalence data for this species (region-aware) ---
+    from api.species import prevalence_data as _prev_mod
+    _region = "jp" if lang == "ja" else ("intl" if lang else "")
+    _prevalence = _prev_mod.get_prevalence_for_species(species, region=_region)
+    _PREVALENCE_MULTIPLIER = {
+        "very_common": 1.35,
+        "common": 1.125,
+        "uncommon": 0.875,
+        "rare": 0.70,
+    }
+
+    # --- Build per-symptom specificity for this species ---
+    # Count how many diseases each symptom appears in (IDF-like).
+    symptom_disease_count: dict[str, int] = {}
+    for disease in diseases:
+        for s in disease.get("symptoms", set()):
+            symptom_disease_count[s] = symptom_disease_count.get(s, 0) + 1
+    total_diseases = max(len(diseases), 1)
+
+    def _compute_weight(sym_id: str) -> float:
+        """Higher weight for symptoms that appear in fewer diseases (more specific)."""
+        count = symptom_disease_count.get(sym_id, 1)
+        # IDF-inspired: log(N / count) + 1, clamped to [1.0, 3.0]
+        idf = math.log(total_diseases / max(count, 1)) + 1.0
+        return max(1.0, min(idf, 3.0))
+
+    user_weights = {s: _compute_weight(s) for s in symptom_set}
+    total_user_weight = sum(user_weights.values())
+
+    matches = []
+    for disease in diseases:
+        disease_symptoms = set(disease.get("symptoms", set()))
+        if not disease_symptoms:
+            continue
+
+        matched = symptom_set & disease_symptoms
+        if not matched:
+            continue
+
+        # --- Weighted recall (how well user symptoms match this disease) ---
+        matched_weight = sum(user_weights.get(s, 1.0) for s in matched)
+        weighted_recall = matched_weight / total_user_weight if total_user_weight > 0 else 0
+
+        # --- Coverage (how much of the disease's symptom profile is covered) ---
+        disease_weights = {s: _compute_weight(s) for s in disease_symptoms}
+        total_disease_weight = sum(disease_weights.values())
+        covered_weight = sum(disease_weights.get(s, 1.0) for s in matched)
+        coverage = covered_weight / total_disease_weight if total_disease_weight > 0 else 0
+
+        # --- Harmonic mean base score ---
+        if weighted_recall + coverage > 0:
+            base_score = 2.0 * weighted_recall * coverage / (weighted_recall + coverage)
+        else:
+            base_score = 0.0
+
+        # --- Specificity bonus: reward matching highly specific symptoms ---
+        specificity_bonus = 0.0
+        for s in matched:
+            w = _compute_weight(s)
+            if w >= 2.5:
+                specificity_bonus += 0.06
+            elif w >= 1.8:
+                specificity_bonus += 0.03
+        base_score = min(base_score + specificity_bonus, 1.0)
+
+        # --- Negative evidence penalty ---
+        # Scale penalty by how many symptoms the user actually provided vs disease total.
+        # When user provides few symptoms relative to disease total, reduce penalty.
+        missing = disease_symptoms - symptom_set
+        negative_penalty = 1.0
+        if len(symptom_set) >= 3 and len(disease_symptoms) >= 3:
+            obs_ratio = min(1.0, len(symptom_ids) / len(disease_symptoms))
+            for s in missing:
+                w = _compute_weight(s)
+                if w >= 2.5:
+                    negative_penalty -= 0.06 * obs_ratio
+                elif w >= 2.0:
+                    negative_penalty -= 0.03 * obs_ratio
+            negative_penalty = max(negative_penalty, 0.55)
+
+        # --- Coverage completeness bonus ---
+        # Reward diseases where more absolute symptoms matched (not just ratio).
+        # This prevents diseases with few symptoms from dominating.
+        coverage_bonus = 1.0
+        absolute_match_count = len(matched)
+        if absolute_match_count >= 4:
+            coverage_bonus = 1.10
+        elif absolute_match_count >= 3:
+            coverage_bonus = 1.05
+
+        # --- Urgency boost: slightly favor high-urgency diseases for safety ---
+        urgency = disease.get("urgency", "low")
+        urgency_factor = {"emergency": 1.05, "high": 1.02}.get(urgency, 1.0)
+
+        # --- Prevalence prior ---
+        disease_name = disease.get("name", "")
+        prevalence_tier = _prevalence.get(disease_name, "")
+        prevalence_mult = _PREVALENCE_MULTIPLIER.get(prevalence_tier, 1.0)
+
+        composite = base_score * negative_penalty * urgency_factor * coverage_bonus * prevalence_mult
+
+        # --- Logistic confidence calibration ---
+        raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
+        confidence = min(round(raw_logistic * 100, 1), 95.0)
+
+        # --- Low-information confidence cap ---
+        # When user provides very few symptoms, cap confidence to prevent
+        # false sense of certainty from non-specific presentations.
+        # Use original symptom count (before synonym expansion).
+        user_symptom_count = len(symptom_ids)
+        if user_symptom_count == 1:
+            confidence = min(confidence, 35.0)
+        elif user_symptom_count == 2:
+            confidence = min(confidence, 55.0)
+
+        matches.append({
+            "disease_id": disease.get("name", ""),
+            "name_ja": disease.get("name_ja", ""),
+            "name_en": disease.get("name", ""),
+            "severity": urgency,
+            "similarity_score": round(composite, 3),
+            "confidence_percent": confidence,
+            "matched_symptoms": sorted(matched),
+            "unmatched_user_symptoms": sorted(symptom_set - disease_symptoms),
+            "additional_disease_symptoms": sorted(disease_symptoms - symptom_set),
+            "missing_key_symptoms": sorted(
+                s for s in missing if _compute_weight(s) >= 1.8
+            ),
+            "description": disease.get("description", ""),
+            "description_ja": disease.get("description_ja", ""),
+            "description_en": disease.get("description", ""),
+            "recommended_tests": disease.get("recommended_tests", []),
+            "scoring_detail": {
+                "weighted_recall": round(weighted_recall, 3),
+                "coverage": round(coverage, 3),
+                "negative_penalty": round(negative_penalty, 3),
+                "urgency_factor": urgency_factor,
+            },
+        })
+
+    matches.sort(key=lambda m: m["similarity_score"], reverse=True)
+    return matches
+
+
