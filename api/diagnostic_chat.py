@@ -151,7 +151,6 @@ from api.chat.constants import _GENERIC_SPECIES, SPECIES_LABELS  # noqa: F401
 from api.chat.species_data import _SPECIES_DATA  # noqa: F401
 from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 
-
 # =============================================================================
 # EQUINE SYMPTOM ALIASES (natural language → equine finding keys)
 # =============================================================================
