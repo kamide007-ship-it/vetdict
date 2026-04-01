@@ -2209,3 +2209,137 @@ class TestConsultationCategoryGrouping:
         # Should return symptoms (matching the count from start phase)
         assert len(data["symptoms"]) == cat["symptom_count"], \
             f"Expected {cat['symptom_count']} symptoms for {cat['id']}, got {len(data['symptoms'])}"
+
+
+# =============================================================================
+# Unit tests for consultation helper functions
+# =============================================================================
+
+
+class TestGroupSymptomsByCategory:
+    """Unit tests for _group_symptoms_by_category."""
+
+    def test_groups_correctly(self):
+        from api.diagnostic_chat import _group_symptoms_by_category
+
+        symptoms = [
+            {"id": "fever", "category": "systemic"},
+            {"id": "coughing", "category": "respiratory"},
+            {"id": "lethargy", "category": "systemic"},
+            {"id": "vomiting", "category": "digestive"},
+        ]
+        grouped = _group_symptoms_by_category(symptoms)
+        assert set(grouped.keys()) == {"systemic", "respiratory", "digestive"}
+        assert len(grouped["systemic"]) == 2
+        assert len(grouped["respiratory"]) == 1
+
+    def test_missing_category_defaults_to_other(self):
+        from api.diagnostic_chat import _group_symptoms_by_category
+
+        symptoms = [{"id": "x"}, {"id": "y", "category": "neuro"}]
+        grouped = _group_symptoms_by_category(symptoms)
+        assert "other" in grouped
+        assert len(grouped["other"]) == 1
+        assert len(grouped["neuro"]) == 1
+
+    def test_empty_list(self):
+        from api.diagnostic_chat import _group_symptoms_by_category
+
+        assert _group_symptoms_by_category([]) == {}
+
+
+class TestGetSpeciesSymptomsWithCategories:
+    """Unit tests for _get_species_symptoms_with_categories."""
+
+    def test_returns_list_for_dog(self):
+        from api.diagnostic_chat import _get_species_symptoms_with_categories
+
+        result = _get_species_symptoms_with_categories("dog")
+        assert isinstance(result, list)
+        assert len(result) > 0
+        s = result[0]
+        assert "id" in s
+        assert "name_ja" in s
+        assert "name_en" in s
+        assert "category" in s
+
+    def test_returns_list_for_cat(self):
+        from api.diagnostic_chat import _get_species_symptoms_with_categories
+
+        result = _get_species_symptoms_with_categories("cat")
+        assert len(result) > 0
+        cats = {s["category"] for s in result}
+        assert len(cats) > 1, "Cat should have multiple categories"
+
+    def test_unknown_species_fallback(self):
+        from api.diagnostic_chat import _get_species_symptoms_with_categories
+
+        result = _get_species_symptoms_with_categories("nonexistent_species_xyz")
+        assert isinstance(result, list)
+        assert len(result) > 0  # Falls back to dog
+
+
+class TestSuggestNextCategories:
+    """Unit tests for _suggest_next_categories."""
+
+    def test_excludes_answered_categories(self):
+        from api.diagnostic_chat import (
+            _get_species_symptoms_with_categories,
+            _suggest_next_categories,
+        )
+
+        all_symptoms = _get_species_symptoms_with_categories("dog")
+        disease_matches = [
+            {
+                "additional_disease_symptoms": ["vomiting", "diarrhea", "fever"],
+            }
+        ]
+        result = _suggest_next_categories(
+            "dog", ["coughing"], ["digestive"], disease_matches, all_symptoms,
+        )
+        for cat in result:
+            assert cat["id"] != "digestive"
+
+    def test_returns_max_3(self):
+        from api.diagnostic_chat import (
+            _get_species_symptoms_with_categories,
+            _suggest_next_categories,
+        )
+
+        all_symptoms = _get_species_symptoms_with_categories("dog")
+        # Create disease matches with symptoms across many categories
+        many_symptoms = [s["id"] for s in all_symptoms[:30]]
+        disease_matches = [{"additional_disease_symptoms": many_symptoms}]
+        result = _suggest_next_categories(
+            "dog", [], [], disease_matches, all_symptoms,
+        )
+        assert len(result) <= 3
+
+    def test_empty_disease_matches(self):
+        from api.diagnostic_chat import (
+            _get_species_symptoms_with_categories,
+            _suggest_next_categories,
+        )
+
+        all_symptoms = _get_species_symptoms_with_categories("dog")
+        result = _suggest_next_categories("dog", [], [], [], all_symptoms)
+        assert result == []
+
+    def test_result_structure(self):
+        from api.diagnostic_chat import (
+            _get_species_symptoms_with_categories,
+            _suggest_next_categories,
+        )
+
+        all_symptoms = _get_species_symptoms_with_categories("dog")
+        disease_matches = [
+            {"additional_disease_symptoms": ["vomiting", "diarrhea", "fever"]},
+        ]
+        result = _suggest_next_categories(
+            "dog", [], [], disease_matches, all_symptoms,
+        )
+        for cat in result:
+            assert "id" in cat
+            assert "name_ja" in cat
+            assert "name_en" in cat
+            assert "differentiating_count" in cat
