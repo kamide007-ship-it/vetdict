@@ -2183,14 +2183,32 @@ function guidedRenderFinalResults(data){
   const diseases=result.suspected_diseases||[];
   const details=data.symptom_details||[];
 
-  // Symptom summary
+  // Symptom summary (removable — re-runs finalize on removal)
   if(details.length>0){
-    let tagsHtml='<div class="chat-symptoms-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"検出症状: ":"Symptoms: ")+'</span>';
+    let tagsHtml='<div class="chat-symptoms-tags guided-removable-tags guided-final-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"検出症状 (×で解除して再診断): ":"Symptoms (tap × to remove & re-diagnose): ")+'</span>';
     details.forEach(s=>{
-      tagsHtml+=`<span class="chat-symptom-tag">${escapeHtml(currentLang==="ja"?s.name_ja:s.name_en)}</span>`;
+      tagsHtml+=`<span class="chat-symptom-tag removable" data-sid="${escapeHtml(s.id)}">${escapeHtml(currentLang==="ja"?s.name_ja:s.name_en)} <button class="guided-tag-remove" type="button" aria-label="${currentLang==="ja"?"解除":"Remove"}">&times;</button></span>`;
     });
     tagsHtml+='</div>';
     guidedAddMsg(tagsHtml,"bot chat-result");
+    // Wire up removal handlers
+    document.querySelectorAll(".guided-final-tags .guided-tag-remove").forEach(btn=>{
+      btn.addEventListener("click",function(){
+        const tag=this.closest(".chat-symptom-tag");
+        if(!tag)return;
+        const sid=tag.dataset.sid;
+        guidedState.selectedSymptoms=guidedState.selectedSymptoms.filter(s=>s!==sid);
+        tag.remove();
+        if(guidedState.selectedSymptoms.length>0){
+          // Re-run finalize with updated symptoms
+          guidedSetActions("");
+          guidedFetch("finalize");
+        } else {
+          guidedSetActions("");
+          guidedFetch("start");
+        }
+      });
+    });
   }
 
   // Context info
