@@ -304,19 +304,19 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 
 ## 次セッションへの引き継ぎ事項
 
-### 問診モード（Guided Consultation）の検証 — 最優先
-- `POST /api/diagnostic-chat/consultation` の5フェーズ問診フローは実装済みだが**UI動作確認・ブラウザテストが未実施**
-- テスト項目:
-  1. カテゴリ選択画面の表示・タップ動作
-  2. 症状選択（タップ式）の正常動作
-  3. 中間結果表示の正確性
-  4. 追加カテゴリ提案→追加症状選択フロー
-  5. 発症期間・年齢入力の処理
-  6. 最終結果の表示（analyze_species_symptomsエンジン使用）
-  7. chatModeFree ↔ chatModeGuided 切替時のコンテキスト保持
-  8. モバイル・デスクトップの両方でのレイアウト確認
-- 関連ファイル: `app.js` の `setupGuidedConsultation()`, `guidedFetch()`, `guidedHandleResponse()`
-- 関連CSS: `.guided-category-grid`, `.guided-sym-btn`, `.guided-action-btn`
+### 問診モード（Guided Consultation）の検証 — ✅ 自動テスト完了
+- `POST /api/diagnostic-chat/consultation` の5フェーズ問診フロー: **全21種で自動テスト検証済み**
+- 修正済みバグ:
+  - カテゴリラベルKeyError（fallback辞書にenキー欠落）
+  - finalize種制限（horse等が空結果）
+  - 全種カテゴリ"other"化（disease_store.pyのSYMPTOM_CATEGORIES未読込）
+  - 馬の問診完全不動作（HEALTH_CHECK_ITEMSからfinding_keys構築で修正）
+  - 犬のカテゴリ"other"化（dog-style SYMPTOM_CATEGORIES形式の自動検出・変換）
+  - 犬のinterim候補0件（_GENERIC_SPECIESに犬追加）
+  - 犬の自由入力チャット回帰（species != "dog"で従来パス維持）
+- UX改善: フェッチ中のボタン連打防止、未知phaseフォールバック、カテゴリラベル16件追加
+- テスト: 100件+（フルフロー21種 + エッジケース + 精度パリティ + ヘルパー関数 + disease_store例外処理）
+- **残り: ブラウザ手動テスト（実機確認）のみ未実施**
 
 ### 残りのエキゾチック治療プロトコル
 - ハムスター: 36件のlow urgencyテンプレートが残存 (11%)
