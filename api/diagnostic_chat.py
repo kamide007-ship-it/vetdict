@@ -3301,7 +3301,7 @@ def diagnostic_chat():
             }
             for sid in all_symptoms
         ]
-    elif species in _SPECIES_DATA:
+    elif species != "dog" and species in _SPECIES_DATA:
         extracted = _extract_species_symptoms(message, species)
         all_symptoms = list(set(extracted + previous_symptoms))
         disease_matches = _match_species_symptoms_to_diseases(
