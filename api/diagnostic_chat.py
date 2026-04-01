@@ -73,9 +73,9 @@ def _get_ai_extractor():
                 manual_aliases=SYMPTOM_ALIASES if 'SYMPTOM_ALIASES' in globals() else {},
             )
             _AI_EXTRACTOR.set_valid_symptom_ids(SYMPTOM_IDS)
-            logger.info(f"AI symptom extractor initialized (model={ai_model}, timeout={ai_timeout}s)")
+            logger.info("AI symptom extractor initialized (model=%s, timeout=%ss)", ai_model, ai_timeout)
         except Exception as e:
-            logger.warning(f"Failed to initialize AI extractor: {e}")
+            logger.warning("Failed to initialize AI extractor: %s", e)
             _AI_EXTRACTOR = False  # Sentinel value to avoid retrying
     return _AI_EXTRACTOR if _AI_EXTRACTOR else None
 
@@ -113,7 +113,7 @@ def evaluate_with_ai_confidence(
             ai_result=ai_result,
         )
     except Exception as e:
-        logger.debug(f"RECO2 evaluation failed, skipping: {e}")
+        logger.debug("RECO2 evaluation failed, skipping: %s", e)
         # Return None to indicate RECO2 unavailable - caller should continue normally
         return None
 
@@ -1810,7 +1810,7 @@ def extract_symptoms_from_text(text: str) -> list:
                     return symptoms
                 # If AI found no symptoms but no error, continue to manual fallback
             except Exception as e:
-                logger.warning(f"AI extraction failed, falling back to manual: {e}")
+                logger.warning("AI extraction failed, falling back to manual: %s", e)
                 # Fall through to manual extraction
 
     # Manual extraction (original algorithm)
@@ -3461,7 +3461,7 @@ def record_diagnostic_feedback():
             }), 201
 
         except Exception as e:
-            logger.warning(f"Failed to record learning feedback: {e}")
+            logger.warning("Failed to record learning feedback: %s", e)
             # Fallback: still record basic feedback
             return jsonify({
                 "status": "recorded",
@@ -3470,7 +3470,7 @@ def record_diagnostic_feedback():
             }), 201
 
     except Exception as e:
-        logger.error(f"Error recording diagnostic feedback: {e}")
+        logger.error("Error recording diagnostic feedback: %s", e)
         return jsonify({"error": "internal_error"}), 500
 
 
@@ -3524,7 +3524,7 @@ def get_next_diagnostic_questions():
         return jsonify(response), 200
 
     except Exception as e:
-        logger.error(f"Error generating next questions: {e}", exc_info=True)
+        logger.error("Error generating next questions: %s", e, exc_info=True)
         return jsonify({"error": "failed_to_generate_questions"}), 500
 
 
@@ -3608,7 +3608,7 @@ def analyze_multidisease():
         return jsonify(analysis_result), 200
 
     except Exception as e:
-        logger.error(f"Error in multi-disease analysis: {e}", exc_info=True)
+        logger.error("Error in multi-disease analysis: %s", e, exc_info=True)
         return jsonify({"error": "multidisease_analysis_failed"}), 500
 
 
