@@ -2475,6 +2475,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "difficulty_breathing", "coughing", "bloated_abdomen"},
         "description": "An irregular heart rhythm common in large-breed dogs with underlying heart disease.",
         "description_ja": "心疾患を有する大型犬に多い不整脈で、心機能低下を引き起こします。",
+        "pathophysiology_ja": "心房の電気的リモデリング→心房内の多数のリエントリー回路→心房の無秩序な電気活動→心房の有効な収縮喪失→不規則で通常は速い心室応答（HR 160〜250/min）→心拍出量低下→うっ血性心不全の悪化。基礎心疾患（DCM・MMVD・先天性心疾患）の合併がほぼ必発。大型犬では孤立性AFもあり。",
+        "causes_ja": "DCM（最多の基礎疾患）、進行したMMVD、先天性心疾患、甲状腺機能亢進症（稀）。大型犬・超大型犬（心房が大きく維持しやすい）：アイリッシュウルフハウンド、グレートデーン、ニューファンドランド、ドーベルマン。小型犬では孤立性AFは極めて稀。",
+        "prevention_ja": "確実な予防法はない。基礎心疾患の早期管理、定期的な心臓聴診・心電図。レート管理（ジルチアゼム・ジゴキシン）で心室応答を制御。",
         "urgency": "urgent",
     },
     {
@@ -2568,6 +2571,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "circling", "head_tilting", "aggression_change", "lethargy"},
         "description": "Primary or metastatic tumors of the brain causing progressive neurological signs.",
         "description_ja": "脳の原発性または転移性腫瘍で、進行性の神経症状を引き起こします。",
+        "pathophysiology_ja": "原発性（髄膜腫・神経膠腫が最多）または転移性（血管肉腫・乳腺癌・肺癌から）→腫瘤効果→頭蓋内圧亢進→神経組織の圧迫・虚血→進行性神経症状。前頭葉：行動変化・旋回・けいれん。脳幹：前庭症状・意識障害。小脳：運動失調。けいれんが高齢犬で新規発症した場合は脳腫瘍を最も疑うべき。",
+        "causes_ja": "原発性脳腫瘍（髄膜腫、星状膠細胞腫、乏突起膠細胞腫、脈絡叢腫瘍）。中高齢犬（>5歳）に好発。長頭種は髄膜腫に好発（コリー、ゴールデン）、短頭種は神経膠腫に好発（ボクサー、ブルドッグ、ボストンテリア）。",
+        "prevention_ja": "確実な予防法はない。高齢犬の新規けいれんは緊急精査（MRI）。早期発見でQOL改善：外科的切除（髄膜腫で最も有効）、放射線療法、緩和ケア（抗けいれん薬・ステロイド）。",
         "urgency": "urgent",
     },
     # ---- Musculoskeletal (expanded) ----
@@ -2585,6 +2591,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"pain_on_touch", "appetite_loss", "fever", "swollen_joints"},
         "description": "An immune-mediated inflammatory disease of the jaw muscles causing pain and inability to open the mouth.",
         "description_ja": "咀嚼筋の免疫介在性炎症で、痛みと開口障害を引き起こします。",
+        "pathophysiology_ja": "咀嚼筋に特異的な2M筋線維のミオシン結合蛋白に対する自己抗体→咀嚼筋（側頭筋・咬筋・翼状筋）の免疫介在性炎症→急性期：筋腫脹・疼痛・開口障害・摂食困難。慢性期：筋萎縮・線維化→恒常的開口制限。四肢の筋は2M線維を含まないため侵されない（咀嚼筋に限局）。",
+        "causes_ja": "免疫介在性（2M線維ミオシン結合蛋白に対する自己抗体）。大型犬：ジャーマンシェパード、ラブラドール、ゴールデン、キャバリアに好発。若齢〜中齢犬に多い。血清抗2M抗体検査（UCSD）で確定診断。",
+        "prevention_ja": "確実な予防法はない。急性期の早期免疫抑制療法（プレドニゾロン1〜2mg/kg/日、4〜6ヶ月の漸減）が線維化予防に重要。治療中止が早すぎると再発しやすい。",
         "urgency": "urgent",
     },
     {
@@ -2669,6 +2678,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "swollen_joints", "skin_redness", "lethargy", "appetite_loss"},
         "description": "A serious autoimmune disease affecting multiple organ systems including skin, joints, and kidneys.",
         "description_ja": "皮膚・関節・腎臓を含む多臓器を侵す重篤な自己免疫疾患です。",
+        "pathophysiology_ja": "免疫寛容の破綻→抗核抗体（ANA）・抗dsDNA抗体等の多種自己抗体産生→免疫複合体の全身組織沈着→補体活性化→多臓器の炎症性障害：関節（多発性関節炎）、腎臓（糸球体腎炎→蛋白尿・腎不全）、皮膚（紅斑・潰瘍・脱毛）、血液（溶血性貧血・血小板減少症）。複数の臓器系が同時または逐次的に侵される。",
+        "causes_ja": "原因不明の多因子性自己免疫疾患。遺伝的素因（MHCクラスII関連）、紫外線暴露、薬剤誘発性（sulfonamide等）。好発犬種：シェルティ、コリー、ジャーマンシェパード。中年犬に多い。ANA検査陽性が支持的だが確定的ではない。",
+        "prevention_ja": "確実な予防法はない。SLE疑い犬種の繁殖管理。紫外線暴露の軽減。薬剤誘発性が疑われる場合は原因薬の中止。早期診断と免疫抑制療法の開始が臓器障害の予防に重要。",
         "urgency": "urgent",
     },
     {
@@ -2710,6 +2722,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "weight_loss", "bloated_abdomen", "lethargy"},
         "description": "Severe intestinal protein loss causing hypoalbuminemia, edema, and effusions.",
         "description_ja": "腸管からの重度のタンパク質喪失で、低アルブミン血症・浮腫・胸腹水を引き起こします。",
+        "pathophysiology_ja": "腸管粘膜のリンパ管・毛細血管からのアルブミン・グロブリン漏出→低アルブミン血症（<2.0g/dL）→膠質浸透圧低下→腹水・胸水・末梢浮腫。腸リンパ管拡張症（最多）、IBD、腸管リンパ腫が基礎疾患。低Ca血症（アルブミン結合Ca喪失）、低コレステロール血症、リンパ球減少を伴うことが多い。血栓塞栓症のリスク（アンチトロンビンIII喪失）。",
+        "causes_ja": "腸リンパ管拡張症（最多、ヨークシャーテリアに好発）、IBD（リンパ球形質細胞性腸炎）、腸管リンパ腫。好発犬種：ヨークシャーテリア、ソフトコーテッドウィートンテリア、ノルウェージャンルンデフンド。確定診断には内視鏡生検が必要。",
+        "prevention_ja": "確実な予防法はない。好発犬種の定期的な血液検査（アルブミン値）。低脂肪食が腸リンパ管拡張症の管理に有効。",
         "urgency": "urgent",
     },
     {
@@ -2762,6 +2777,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"anxiety", "excessive_panting", "lethargy", "appetite_loss"},
         "description": "An adrenal gland tumor producing excess catecholamines, causing episodic hypertension.",
         "description_ja": "副腎の腫瘍で過剰なカテコラミンを産生し、発作的な高血圧を引き起こします。",
+        "pathophysiology_ja": "副腎髄質クロマフィン細胞の腫瘍性増殖→カテコラミン（エピネフリン・ノルエピネフリン）の不規則な大量放出→発作的高血圧→頻脈・不整脈・振戦・不安・虚脱。持続性高血圧→網膜障害・心肥大・腎障害。約50%が悪性で後大静脈への浸潤・肝臓や肺への転移あり。副腎皮質腫瘍（クッシング）との鑑別が重要。",
+        "causes_ja": "副腎髄質クロマフィン細胞の腫瘍性増殖。高齢犬（>10歳）に好発。特定の犬種素因は明確でない。副腎偶発腫として超音波で発見されることも多い。クッシング症候群との併存が20〜50%。",
+        "prevention_ja": "確実な予防法はない。副腎腫瘤発見時のカテコラミン/メタネフリン測定による機能評価。手術時の高血圧クリーゼに対する麻酔管理が重要（フェノキシベンザミンによる術前α遮断）。",
         "urgency": "urgent",
     },
     {
