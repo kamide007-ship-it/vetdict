@@ -195,7 +195,8 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # Effusion
         "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
         "pleural_effusion": ["effusion", "labored_breathing"],
-        "ascites": ["effusion", "abdominal_distension", "bloating"],
+        "ascites": ["effusion", "abdominal_distension", "bloating", "dropsy"],
+        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
         # Swelling (generic)
         "swelling": ["facial_swelling", "eye_swelling", "edema"],
     }
