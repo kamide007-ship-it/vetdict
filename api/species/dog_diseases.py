@@ -1740,6 +1740,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Abnormal fluid accumulation in the chest cavity, "
                        "compressing the lungs.",
         "description_ja": "胸腔内の異常な液体貯留で、肺を圧迫します。",
+        "pathophysiology_ja": "胸腔内への液体貯留→肺の圧排→換気障害→呼吸困難。液体の性状で原因を推定：(1)漏出液（低蛋白）：うっ血性心不全・低アルブミン血症、(2)滲出液（高蛋白・細胞数高）：膿胸・FIP（猫）・腫瘍、(3)乳び液：乳び胸、(4)血性：血管肉腫・外傷・凝固障害。犬では心不全・腫瘍・膿胸が三大原因。",
+        "causes_ja": "うっ血性心不全（右心不全または両心不全）、胸腔内腫瘍（リンパ腫・胸腺腫・肺癌・中皮腫）、膿胸（胸腔内細菌感染）、乳び胸、低アルブミン血症（PLE・肝不全）、外傷性血胸、横隔膜ヘルニア。胸水の細胞診・蛋白定量が原因精査に不可欠。",
+        "prevention_ja": "基礎疾患の適切な管理。呼吸困難の犬は胸部X線→胸腔穿刺（診断＋治療的減圧）を緊急実施。反復性貯留は胸腔ドレーン留置を検討。",
         "urgency": "emergency",
     },
     {
@@ -2215,6 +2218,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"stiffness", "seizures", "difficulty_breathing", "anxiety"},
         "description": "A bacterial toxin disease causing severe muscle rigidity and spasms, rare but serious in dogs.",
         "description_ja": "細菌毒素による重度の筋硬直と痙攣を引き起こす疾患で、犬では稀ですが重篤です。",
+        "pathophysiology_ja": "Clostridium tetaniの芽胞が創傷から侵入→嫌気条件下で発芽・増殖→テタノスパスミン（神経毒素）産生→末梢神経の軸索を逆行性に上行→脊髄・脳幹の抑制性介在ニューロン（グリシン・GABA放出）を遮断→拮抗筋の同時収縮→全身性筋硬直（開口障害=trismus・四肢伸展・角弓反張）。犬は人やウマに比べ自然抵抗性が高い（猫はさらに高い）。",
+        "causes_ja": "Clostridium tetani（偏性嫌気性芽胞形成菌）。創傷感染（穿通創・咬傷・術後創）。犬では稀（年間発症率は非常に低い）だが、発症すると致死率10〜50%。潜伏期間5〜21日。局在型（一肢の硬直）から全身型に進行することがある。",
+        "prevention_ja": "創傷の適切なデブリードマンと洗浄、汚染創のメトロニダゾール/ペニシリン予防投与。犬用破傷風ワクチンは市販されていない（人用破傷風トキソイドは禁忌ではないが一般的に不使用）。",
         "urgency": "emergency",
     },
     {
@@ -2775,6 +2781,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"bloated_abdomen", "vomiting", "lethargy", "pain_on_touch"},
         "description": "Twisting of the intestines cutting off blood supply, a life-threatening surgical emergency.",
         "description_ja": "腸管の捻転により血流が遮断される致命的な外科的緊急疾患です。",
+        "pathophysiology_ja": "腸間膜根部を軸とした腸管の捻転→腸間膜動静脈の絞扼→広範な腸管虚血・壊死→エンドトキシンの全身循環への流入→敗血症性ショック→DIC→多臓器不全。GDV（胃捻転）と同様に超緊急疾患。致死率は極めて高い（80〜100%）。症状は急性腹症として発症し、数時間で致死的となる。",
+        "causes_ja": "原因は多くの場合不明。ジャーマンシェパード・大型犬に報告が多い。腸管の運動異常、炎症性腸疾患、腸間膜リンパ腫、術後癒着が誘因となることがある。異常に柔軟な腸間膜が解剖学的素因。",
+        "prevention_ja": "確実な予防法はない。急性の激しい腹痛・腹部膨満・ショック徴候は超緊急で外科的介入が必要。広範な腸壊死では予後極めて不良のため安楽死の判断も必要となる場合がある。",
         "urgency": "emergency",
     },
     {
@@ -2802,6 +2811,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "bloody_stool", "lethargy", "appetite_loss", "bloated_abdomen"},
         "description": "Telescoping of one intestinal segment into another, a surgical emergency in puppies.",
         "description_ja": "腸管の一部が隣接部に嵌入する疾患で、子犬の外科的緊急疾患です。",
+        "pathophysiology_ja": "腸管の一部（intussusceptum）が隣接の腸管（intussuscipiens）内に嵌入→血管圧迫→腸壁の虚血・浮腫→さらなる嵌入の進行→腸壊死・穿孔→腹膜炎。空腸-空腸または回腸-盲腸接合部に最も多い。触診でソーセージ様の腫瘤として触知される。腹部エコーで「標的サイン」（target sign）が特徴的。",
+        "causes_ja": "基礎疾患による腸管蠕動異常：パルボウイルス腸炎、腸内寄生虫（回虫）、IBD、異物、腸管腫瘍。子犬（<1歳）に好発。ジャーマンシェパードに多いとの報告。術後（腸管手術後の蠕動異常）にも発生。",
+        "prevention_ja": "基礎疾患（腸管感染症・寄生虫）の早期適切な治療。子犬の定期的な駆虫。嘔吐・血便・腹部膨満の早期受診。外科的整復（manual reduction）または腸管切除吻合が必要。",
         "urgency": "emergency",
     },
     # ---- Endocrine (expanded) ----
@@ -2988,6 +3000,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_panting", "lethargy", "vomiting", "rapid_breathing", "seizures"},
         "description": "Life-threatening hyperthermia from heat exposure, especially in brachycephalic breeds.",
         "description_ja": "高温環境による生命を脅かす高体温症で、短頭種に特に危険です。",
+        "pathophysiology_ja": "高温環境→体温調節機構の破綻→深部体温>41℃→全身性炎症反応症候群（SIRS）→内皮障害→DIC・多臓器不全（腎障害・肝壊死・横紋筋融解・脳浮腫・消化管粘膜壊死）。犬はパンティングが主な放熱手段のため、高温多湿環境では効率が急激に低下。短頭種は上気道閉塞でパンティング効率がさらに低下→致死的。",
+        "causes_ja": "車内放置（最多、車内温度は外気温+20〜30℃に急上昇）、高温下の過度な運動、短頭種（ブルドッグ・パグ・ボストンテリア）、肥満犬、喉頭麻痺犬、厚い被毛の犬種。日本では5〜9月に集中。アスファルト表面温度は気温の1.5〜2倍。",
+        "prevention_ja": "車内への犬の放置禁止（5分でも危険）、高温時の運動制限（早朝・夜間に限定）、常に新鮮な水と日陰の確保、短頭種の特に厳重な温度管理、アスファルト表面の5秒テスト（手の甲で触れて熱ければ散歩中止）。",
         "urgency": "emergency",
     },
     {
@@ -2996,6 +3011,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "stiffness", "difficulty_breathing"},
         "description": "Dangerously low body temperature from cold exposure, especially in small or toy breeds.",
         "description_ja": "低温環境による危険な低体温で、小型犬・トイ犬種に特にリスクが高いです。",
+        "pathophysiology_ja": "深部体温<37℃→軽度（32〜37℃：振戦・末梢血管収縮）→中等度（28〜32℃：振戦停止・徐脈・意識低下・心室性不整脈リスク）→重度（<28℃：心室細動・心停止）。新生子犬は体温調節機構が未熟で特にリスク高。低体温は凝固障害・免疫機能低下・薬物代謝遅延を伴う。",
+        "causes_ja": "環境性（冬季の屋外放置・水中落下）、麻酔後（術中低体温が最多の医原性原因）、新生子犬のケア不足、ショック・敗血症に伴う二次性低体温。リスク犬：小型犬・トイ犬種・被毛の薄い犬種・痩せた犬・高齢犬・新生子犬。",
+        "prevention_ja": "冬季の屋外犬の防寒対策（犬用コート・暖房付き犬小屋）、水場での監視、麻酔中の保温（温風ブランケット・加温輸液）、新生子犬の保温（環境温30〜32℃）。",
         "urgency": "emergency",
     },
     {
@@ -3004,6 +3022,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "rapid_breathing", "fever"},
         "description": "Water aspiration causing pulmonary edema. Secondary drowning can occur hours later.",
         "description_ja": "水の誤嚥による肺水腫で、数時間後に二次的溺水が起こることがあります。",
+        "pathophysiology_ja": "水の気道吸引→肺胞サーファクタントの洗い流し・不活化→肺胞虚脱→低酸素血症。淡水：浸透圧差で水が肺胞→血管内に移動→肺水腫・血液希釈。海水：高浸透圧で血漿が肺胞内に移動→肺水腫。「二次性溺水」（乾性溺水）：初期回復後6〜24時間で肺水腫が遅発性に進行→呼吸不全。",
+        "causes_ja": "プール・池・川・浴槽への落下、遊泳中の疲労。ブルドッグ等の短頭種は体型的に泳ぎが困難。てんかん犬の水辺での発作、高齢犬の筋力低下。冬季の氷上落下。",
+        "prevention_ja": "水辺での常時監視、プールフェンスの設置、泳ぎが苦手な犬種にはライフジャケット着用、てんかん犬の水辺制限。溺水後は無症状でも24時間の観察入院が推奨。",
         "urgency": "emergency",
     },
     {
@@ -3012,10 +3033,16 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"pain_on_touch", "lethargy", "vomiting", "difficulty_breathing", "swollen_joints"},
         "description": "Venomous snake bite causing local swelling, pain, and potentially fatal systemic effects.",
         "description_ja": "毒蛇咬傷による局所腫脹・痛み・致命的な全身影響を引き起こします。",
+        "pathophysiology_ja": "日本：マムシ（Gloydius blomhoffii）→出血毒（メタロプロテアーゼ）＋細胞毒→局所の激しい腫脹・壊死＋全身性凝固障害（DIC）・急性腎障害。ハブ（沖縄）→より重度の組織壊死。北米：ガラガラヘビ→出血毒＋神経毒。咬傷部位は顔面（鼻先・口唇）が最多（犬が蛇を嗅ぐ行動による）。",
+        "causes_ja": "日本：マムシ（本州〜九州に広く分布、4〜10月に活動）、ハブ（沖縄・奄美）。犬は好奇心で蛇に近づくため咬傷リスクが高い。散歩中・庭での遭遇が多い。顔面・前肢に咬傷が多い。",
+        "prevention_ja": "蛇の活動期（春〜秋）の草むら・岩場での注意、リードでの管理、夜間散歩時の注意（マムシは夜行性）。咬傷後は安静にし早急に受診（抗毒素血清の投与が有効な場合がある）。",
         "urgency": "emergency",
     },
     {
         "name": "Bee/Wasp Sting Anaphylaxis",
+        "pathophysiology_ja": "蜂毒蛋白（メリチン・ホスホリパーゼA2等）に対するIgE介在性I型過敏反応→肥満細胞脱顆粒→ヒスタミン・ロイコトリエン大量放出→全身性血管拡張→低血圧性ショック。犬のアナフィラキシーは肝静脈のうっ血が特徴的（人と異なる）→肝腫大・門脈圧亢進→消化管うっ血→血性下痢。局所反応のみのことも多いが、口腔・咽頭刺傷では気道閉塞のリスク。",
+        "causes_ja": "ミツバチ・スズメバチ・アシナガバチの刺傷。犬は口や足で蜂を捕まえようとして刺される。口腔内・咽頭の刺傷は気道浮腫で致死的になりうる。多数刺傷（スズメバチの群れ攻撃）は直接毒性で致死的。アナフィラキシーは過去の感作後（2回目以降）にリスク上昇。",
+        "prevention_ja": "蜂の巣への犬のアクセス制限、蜂が多い場所でのリード管理。過去にアナフィラキシー歴がある犬はエピネフリン自己注射器の携帯を検討。軽度の局所反応は冷却・抗ヒスタミン薬で対応。",
         "name_ja": "蜂刺傷アナフィラキシー",
         "symptoms": {"vomiting", "difficulty_breathing", "lethargy", "skin_redness"},
         "description": "Severe allergic reaction to insect stings causing facial swelling and potential anaphylactic shock.",
