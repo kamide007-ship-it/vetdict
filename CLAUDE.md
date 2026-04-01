@@ -267,3 +267,63 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 ### 参考文献拡充（72→90+ citations）
 - AAHA/AVMA/ISFM/WSAVA臨床ガイドライン10件追加（ワクチン、CKD、糖尿病等）
 - 診断精度検証・臨床意思決定支援の文献8件追加（TRIPOD、JAMA CDS、NEJM ML等）
+
+### エキゾチック動物の治療プロトコル詳細化
+- ハムスター: テンプレート治療文 122→36件 (71%改善) — Wet Tail, Tyzzer's, pneumonia等59件を臨床プロトコルに
+- 鳥: テンプレート治療文 212→93件 (56%改善) — Psittacosis, egg binding, lead poisoning等119件
+- ハリネズミ: テンプレート治療文 83→50件 (40%改善) — CHF, proptosis, pyometra等33件
+- フェレット/モルモット/チンチラ/フクロモモンガ/デグー: 進行中
+
+### 診断精度UX改善
+- 低信頼度時のUI警告バナー: 症状2個以下 or 最高信頼度<50%で黄色警告を表示
+  - 「症状を追加すると精度が大幅に向上します」のガイダンス付き
+  - 日英バイリンガル対応
+
+### 地域別有病率調整（日本 vs 海外）
+- `prevalence_data.py`: JAPAN_REGIONAL_ADJUSTMENTS / INTERNATIONAL_REGIONAL_ADJUSTMENTS 追加
+- UI言語が日本語→日本の有病率、英語→海外の有病率を自動適用
+- 日本で多い: フィラリア, バベシア, FIP, GI stasis(ウサギ), 日本脳炎(馬)
+- 日本で稀: 狂犬病(eliminated), 粘液腫症, Blastomycosis等Americas endemic
+- エビデンス: Atkins(2014), Irwin(2009), Koizumi(2009), Pedersen(2014), MHLW Japan
+- diagnostic_chat.py + species_analyzer.py + vetdict_api.py + app.js でlang伝搬
+
+### CI/依存関係強化
+- テストカバレッジ計測 (--cov-fail-under=60) をCIに追加
+- pip-audit にrequirements-dev.txtも追加
+- 依存関係上限ピニング: anthropic<1.0.0, gunicorn<23.0.0, pytest-cov<6.0.0, ruff<1.0.0
+
+## 次セッションへの引き継ぎ事項
+
+### 問診モード（Guided Consultation）の検証 — 最優先
+- `POST /api/diagnostic-chat/consultation` の5フェーズ問診フローは実装済みだが**UI動作確認・ブラウザテストが未実施**
+- テスト項目:
+  1. カテゴリ選択画面の表示・タップ動作
+  2. 症状選択（タップ式）の正常動作
+  3. 中間結果表示の正確性
+  4. 追加カテゴリ提案→追加症状選択フロー
+  5. 発症期間・年齢入力の処理
+  6. 最終結果の表示（analyze_species_symptomsエンジン使用）
+  7. chatModeFree ↔ chatModeGuided 切替時のコンテキスト保持
+  8. モバイル・デスクトップの両方でのレイアウト確認
+- 関連ファイル: `app.js` の `setupGuidedConsultation()`, `guidedFetch()`, `guidedHandleResponse()`
+- 関連CSS: `.guided-category-grid`, `.guided-sym-btn`, `.guided-action-btn`
+
+### 残りのエキゾチック治療プロトコル
+- ハムスター: 36件のlow urgencyテンプレートが残存 (11%)
+- 鳥: 93件のmoderate/lowテンプレートが残存 (16%)
+- ハリネズミ: 50件のmoderate/lowテンプレートが残存 (20%)
+- フェレット: 93件 (33%) — emergency/highの詳細化が必要
+- モルモット: 141件 (40%) — emergency/highの詳細化が必要
+- チンチラ: 113件 (40%) — emergency/highの詳細化が必要
+- フクロモモンガ: 80件 (36%) — emergency/highの詳細化が必要
+- デグー: 75件 (37%) — emergency/highの詳細化が必要
+
+### 診断精度の体系的検証
+- TRIPOD準拠の検証プロトコル策定が必要
+- 感度/特異度/PPV/NPVの定量評価
+- 26テストケースは存在するが、体系的な検証フレームワークは未構築
+
+### その他の残課題
+- AIエンリッチメントの臨床レビュー文書化（レビューログのフォーマット策定）
+- diagnostic_chat.py のモジュール分割（4,244行の巨大ファイル）
+- app.js のモジュール分割（3,000行の単一ファイル）
