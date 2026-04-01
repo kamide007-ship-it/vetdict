@@ -16,9 +16,15 @@
       "purpose": "any"
     },
     {
-      "src": "/static/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ],
