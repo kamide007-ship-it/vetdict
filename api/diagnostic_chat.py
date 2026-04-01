@@ -148,7 +148,7 @@ except ImportError:
 import importlib as _importlib
 
 _GENERIC_SPECIES = [
-    "cat", "rabbit", "hamster", "chinchilla", "guinea_pig", "ferret",
+    "dog", "cat", "rabbit", "hamster", "chinchilla", "guinea_pig", "ferret",
     "hedgehog", "sugar_glider", "degu", "bird", "parakeet", "parrot",
     "reptile", "tortoise", "snake", "lizard", "amphibian", "fish",
     "exotic_other",
@@ -3875,6 +3875,23 @@ _CATEGORY_LABELS = {
     "renal": {"ja": "腎臓", "en": "Renal"},
     "toxicological": {"ja": "中毒", "en": "Toxicological"},
     "traumatic": {"ja": "外傷", "en": "Traumatic"},
+    # --- 犬・馬・エキゾチック種追加カテゴリ ---
+    "eyes_ears": {"ja": "眼・耳", "en": "Eyes / Ears"},
+    "eye": {"ja": "眼科", "en": "Eye"},
+    "ears": {"ja": "耳", "en": "Ears"},
+    "ocular": {"ja": "眼科", "en": "Ocular"},
+    "oral": {"ja": "口腔", "en": "Oral"},
+    "dental": {"ja": "歯科", "en": "Dental"},
+    "hoof": {"ja": "蹄", "en": "Hoof"},
+    "foal": {"ja": "子馬", "en": "Foal"},
+    "toxic": {"ja": "中毒", "en": "Toxic"},
+    "body": {"ja": "体幹", "en": "Body"},
+    "limb": {"ja": "四肢", "en": "Limbs"},
+    "repository_exam": {"ja": "検査所見", "en": "Exam Findings"},
+    "misc": {"ja": "その他", "en": "Miscellaneous"},
+    "developmental": {"ja": "発育", "en": "Developmental"},
+    "internal": {"ja": "内臓", "en": "Internal"},
+    "cardiac": {"ja": "心臓", "en": "Cardiac"},
 }
 
 
