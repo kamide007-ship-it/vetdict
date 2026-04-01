@@ -2209,7 +2209,7 @@ class TestConsultationCategoryGrouping:
 
     ENDPOINT = "/api/diagnostic-chat/consultation"
 
-    @pytest.mark.parametrize("species", ["cat", "rabbit", "ferret", "hedgehog", "bird", "fish"])
+    @pytest.mark.parametrize("species", ["dog", "cat", "rabbit", "ferret", "hedgehog", "bird", "fish", "horse"])
     def test_categories_not_all_other(self, client, species):
         """Species should have multiple categories, not just 'other'."""
         r = client.post(self.ENDPOINT, json={"phase": "start", "species": species})
@@ -2220,7 +2220,7 @@ class TestConsultationCategoryGrouping:
         assert len(cat_ids) > 1, f"{species} has only categories: {cat_ids}"
         assert cat_ids != {"other"}, f"{species} has all symptoms in 'other'"
 
-    @pytest.mark.parametrize("species", ["cat", "rabbit", "hamster", "guinea_pig", "reptile"])
+    @pytest.mark.parametrize("species", ["dog", "cat", "rabbit", "hamster", "guinea_pig", "reptile", "horse"])
     def test_common_categories_present(self, client, species):
         """Major species should have diverse categories, not just 'other'."""
         r = client.post(self.ENDPOINT, json={"phase": "start", "species": species})
