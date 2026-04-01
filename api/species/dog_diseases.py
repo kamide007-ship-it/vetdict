@@ -733,6 +733,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Inflammation of the conjunctiva causing redness, "
                        "discharge, and discomfort.",
         "description_ja": "結膜の炎症により、充血・分泌物・不快感を引き起こします。",
+        "pathophysiology_ja": "結膜上皮への感染・アレルゲン・異物刺激→局所免疫反応→血管拡張（充血）・血管透過性亢進（浮腫・漿液/粘液膿性分泌物）。慢性化すると濾胞形成・結膜肥厚が生じる。",
+        "causes_ja": "細菌性（Staphylococcus, Streptococcus）、ウイルス性（CDV）、アレルギー性（花粉・ハウスダスト）、異物、乾性角結膜炎（KCS）に続発、化学刺激。短頭種は解剖学的に罹患しやすい。",
+        "prevention_ja": "定期的な眼周囲の清拭、刺激物（煙・粉塵）の回避、基礎疾患（KCS・アレルギー）の管理、感染犬との接触回避。",
         "urgency": "normal",
     },
     {
@@ -752,6 +755,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Degenerative joint disease causing chronic pain, "
                        "stiffness, and reduced mobility.",
         "description_ja": "変形性関節疾患で、慢性の痛み・こわばり・可動域の低下を引き起こします。",
+        "pathophysiology_ja": "関節軟骨の変性・菲薄化→軟骨下骨の硬化・骨棘形成→滑膜炎→炎症性サイトカイン（IL-1β, TNF-α, MMP）放出→軟骨破壊の悪循環。加齢・肥満・関節不安定性（前十字靭帯断裂後等）が促進因子。",
+        "causes_ja": "一次性（加齢性）、二次性（股関節/肘関節形成不全、前十字靭帯断裂、OCD、関節内骨折後）。肥満は最大の修正可能リスク因子。大型犬・超大型犬に好発。",
+        "prevention_ja": "適正体重の維持（BCS 4-5/9）、関節に負担の少ない適度な運動、好発犬種の股関節/肘関節スクリーニング、関節サプリメント（グルコサミン・EPA/DHA）の早期投与。",
+        "prognosis_ja": "治癒は不可能だが、マルチモーダル管理（NSAIDs＋体重管理＋リハビリ＋関節サプリメント）で多くの症例がQOLを維持。抗NGF抗体（ベジンベトマブ）が新たな選択肢。末期は人工関節置換術を検討。",
         "urgency": "normal",
     },
     {
@@ -879,6 +886,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Worms or protozoa living in the gastrointestinal "
                        "tract, stealing nutrients and causing irritation.",
         "description_ja": "消化管に寄生する線虫や原虫で、栄養を奪い消化管を刺激します。",
+        "pathophysiology_ja": "経口・経皮感染→消化管粘膜への付着・穿入→栄養吸収障害・粘膜損傷・出血。回虫は腸管内腔で栄養を奪い、鉤虫は吸血による貧血、鞭虫は大腸粘膜炎症、条虫は栄養吸収競合を引き起こす。大量感染時は腸閉塞のリスク。",
+        "causes_ja": "回虫（Toxocara canis）、鉤虫（Ancylostoma caninum）、鞭虫（Trichuris vulpis）、条虫（Dipylidium caninum）、コクシジウム、ジアルジア。糞口感染が主経路。子犬は経胎盤・経乳感染あり。",
+        "prevention_ja": "月1回の広域駆虫薬（イベルメクチン・ミルベマイシン・フェンベンダゾール系）、子犬は2週齢から2週間隔で駆虫、年1〜2回の糞便検査、環境の糞便除去、ノミ駆除（条虫予防）。",
         "urgency": "normal",
     },
     {
@@ -968,6 +978,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Skin disease caused by mites, leading to intense "
                        "itching, hair loss, and skin irritation.",
         "description_ja": "ダニによる皮膚疾患で、激しいかゆみ・脱毛・皮膚刺激を引き起こします。",
+        "pathophysiology_ja": "ニキビダニ症：Demodex canisの毛包内過剰増殖→毛包炎・脂腺炎→脱毛・二次細菌感染。細胞性免疫の欠陥が基礎にある。疥癬：Sarcoptes scabieiが角質層に穿孔→激しいI型・IV型過敏反応→強烈な掻痒。",
+        "causes_ja": "ニキビダニ（D. canis）：免疫抑制・遺伝的素因・若齢/高齢。疥癬（S. scabiei var. canis）：感染犬との直接接触。好発：ニキビダニは短毛種の子犬、疥癬は全犬種。",
+        "prevention_ja": "イソキサゾリン系駆虫薬（フルララネル・アフォキソラネル・サロラネル）の通年投与。感染犬との接触回避。免疫抑制の原因（副腎皮質機能亢進症等）の管理。",
         "urgency": "normal",
     },
     {
@@ -1325,6 +1338,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A bacterial skin infection causing pustules, crusts, "
                        "and hair loss, often secondary to allergies.",
         "description_ja": "膿疱・痂皮・脱毛を引き起こす細菌性皮膚感染症で、アレルギーに続発することが多いです。",
+        "pathophysiology_ja": "皮膚バリア機能の破綻→常在菌（主にStaphylococcus pseudintermedius）の過剰増殖→表在性：表皮小環（epidermal collarette）・膿疱形成。深在性：毛包破裂→真皮・皮下組織への細菌浸潤→蜂窩織炎・瘻管形成。",
+        "causes_ja": "基礎疾患（アトピー性皮膚炎、食物アレルギー、甲状腺機能低下症、クッシング症候群）による皮膚バリア破綻が最多。主要起因菌はS. pseudintermedius。メチシリン耐性株（MRSP）の増加が問題。",
+        "prevention_ja": "基礎疾患の適切な管理、定期的なシャンプー療法（クロルヘキシジン2〜4%）、皮膚の乾燥・湿潤環境の回避。再発性の場合は基礎疾患の精査が必須。",
         "urgency": "normal",
     },
     {
@@ -1362,6 +1378,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A self-inflicted skin lesion from compulsive licking, "
                        "often with underlying psychological or physical causes.",
         "description_ja": "強迫的な舐め行動により生じる自傷性皮膚病変で、心因性または身体的原因があります。",
+        "pathophysiology_ja": "反復的な舐め行動→表皮の機械的損傷→真皮の線維化・肉芽組織形成→掻痒-舐め-損傷の悪循環。慢性化すると表皮肥厚・毛包炎・深部細菌感染。内因性オピオイド放出が自己強化行動を維持。",
+        "causes_ja": "心因性（退屈・分離不安・強迫性障害）、身体的（変形性関節症・神経障害性疼痛・異物・アレルギー）が複合。好発：ドーベルマン、ラブラドール、グレートデーン等の大型犬。",
+        "prevention_ja": "十分な運動と精神的刺激（知育玩具・トレーニング）、分離不安の早期対応、基礎疾患（OA・アレルギー）の管理、環境エンリッチメント。",
         "urgency": "normal",
     },
     # ---- Eye ----
@@ -1381,6 +1400,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Insufficient tear production causing chronic eye "
                        "irritation, discharge, and potential corneal damage.",
         "description_ja": "涙液分泌不足による慢性的な眼の刺激・分泌物・角膜障害のリスクがあります。",
+        "pathophysiology_ja": "涙腺の免疫介在性破壊（最多）→涙液分泌低下（STT<15mm/min）→眼表面の乾燥→角膜上皮の角化・色素沈着→粘液膿性分泌物の蓄積→二次細菌感染・角膜潰瘍のリスク上昇。",
+        "causes_ja": "免疫介在性（最多、約80%）、薬剤性（サルファ剤・エトドラク）、神経性（顔面神経麻痺）、先天性、内分泌性（甲状腺機能低下症）、CDV後遺症。好発：コッカースパニエル、ブルドッグ、シーズー、WHWT。",
+        "prevention_ja": "好発犬種では定期的なSTT（シルマー涙液試験）によるスクリーニング。サルファ剤等の起因薬剤の慎重投与。早期発見・治療開始が角膜障害予防の鍵。",
         "urgency": "normal",
     },
     {
@@ -1945,6 +1967,10 @@ DISEASES: List[Dict[str, Any]] = [
                        "most common disease in dogs. Can lead to tooth loss "
                        "and systemic infection.",
         "description_ja": "歯と歯肉の進行性感染症で、犬で最も一般的な疾患です。歯の喪失や全身感染に至ることがあります。",
+        "pathophysiology_ja": "歯垢（細菌バイオフィルム）の蓄積→歯肉溝への嫌気性菌侵入（Porphyromonas, Prevotella等）→歯肉炎（Stage 1）→歯周靭帯・歯槽骨の破壊（Stage 2-4）→歯の動揺・脱落。菌血症により心臓・肝臓・腎臓への転移性感染のリスク。3歳以上の犬の80%以上が罹患。",
+        "causes_ja": "歯垢・歯石の蓄積が主因。リスク因子：小型犬（歯の過密）、短頭種、歯磨き不足、軟質食、加齢、免疫抑制。好発犬種：ダックスフンド、ヨークシャーテリア、チワワ、トイプードル。",
+        "prevention_ja": "毎日の歯磨き（犬用酵素歯磨き粉）、歯科用ガム・デンタルチュー（VOHC認定製品推奨）、年1回の麻酔下歯科スケーリング、歯科用処方食。",
+        "prognosis_ja": "Stage 1-2は適切な歯科処置で管理可能。Stage 3-4は抜歯が必要だが術後のQOLは良好。無治療では疼痛・菌血症による全身合併症のリスク。",
         "urgency": "normal",
     },
     {
@@ -2166,6 +2192,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "bloody_stool", "weight_loss", "lethargy"},
         "description": "Blood-sucking intestinal parasites causing anemia, especially dangerous in puppies.",
         "description_ja": "吸血性の腸管寄生虫で、特に子犬では貧血を引き起こし危険です。",
+        "pathophysiology_ja": "Ancylostoma caninumのL3幼虫が経口・経皮・経乳感染→小腸粘膜に咬着→吸血（成虫1匹あたり0.1mL/日）→鉄欠乏性貧血・低蛋白血症。大量感染の子犬では急性出血性貧血で致死的。経皮感染時は皮膚の足底皮膚炎。",
+        "causes_ja": "Ancylostoma caninum（最多）、A. braziliense、Uncinaria stenocephala。糞口感染・経皮感染・経胎盤/経乳感染。温暖湿潤環境で幼虫が生存。子犬・屋外飼育犬にリスク高。",
+        "prevention_ja": "月1回のマクロサイクリックラクトン系駆虫薬（イベルメクチン・ミルベマイシン等）、子犬は2週齢から2週間隔で駆虫開始、環境の糞便除去、妊娠犬の駆虫。",
         "urgency": "normal",
     },
     {
@@ -2198,6 +2227,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"itching", "hair_loss", "skin_redness", "hot_spots"},
         "description": "An allergic reaction to flea saliva causing intense itching, especially at the tail base.",
         "description_ja": "ノミ唾液に対するアレルギー反応で、特に尾根部に激しい痒みを引き起こします。",
+        "pathophysiology_ja": "Ctenocephalides felis/canisの唾液中ハプテン（分子量15-40kDa）に対するI型（即時型）・IV型（遅延型）過敏反応→肥満細胞脱顆粒・ヒスタミン/ロイコトリエン放出→激しい掻痒→自傷性脱毛・二次感染。1匹のノミ刺咬でも発症可能。",
+        "causes_ja": "ノミ（主にCtenocephalides felis）唾液中のアレルゲン蛋白に対する過敏反応。アトピー素因のある犬でリスク上昇。温暖湿潤気候で通年発症、温帯では夏〜秋に好発。",
+        "prevention_ja": "通年のノミ駆除（イソキサゾリン系：フルララネル・アフォキソラネル、スピノサド等）、環境駆除（室内の吸引清掃・寝具洗濯・IGR処理）、同居動物全頭の駆虫。",
         "urgency": "normal",
     },
     {
@@ -2500,6 +2532,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"itching", "skin_redness", "ear_odor", "ear_scratching"},
         "description": "Yeast overgrowth on the skin causing greasy, itchy, malodorous skin and ear infections.",
         "description_ja": "皮膚の酵母過剰増殖で、脂っぽく痒みのある悪臭を伴う皮膚・耳感染症です。",
+        "pathophysiology_ja": "Malassezia pachydermatis（常在菌）の過剰増殖→酵母由来リパーゼによる皮脂分解→遊離脂肪酸が皮膚を刺激→掻痒・炎症→脂漏性皮膚炎。酵母抗原に対するI型・IV型過敏反応が痒みを増幅。皮膚皺部・耳道・指間に好発。",
+        "causes_ja": "基礎疾患（アトピー性皮膚炎、甲状腺機能低下症、クッシング症候群、角化異常症）による皮膚微小環境の変化が過剰増殖を促進。多湿環境、過度の皮膚皺（シャーペイ、バセットハウンド等）。",
+        "prevention_ja": "基礎疾患の管理、定期的な薬浴（ミコナゾール・クロルヘキシジン配合シャンプー週2回→維持期週1回）、耳の定期清掃、皮膚の乾燥維持。",
         "urgency": "normal",
     },
     {
@@ -3368,6 +3403,10 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"itching", "skin_redness", "hair_loss", "ear_scratching", "hot_spots", "skin_lesions"},
         "description": "A chronic allergic skin disease with genetic predisposition, causing intense itching and recurrent skin infections.",
         "description_ja": "遺伝的素因を持つ慢性アレルギー性皮膚疾患で、強い痒みと再発性皮膚感染を引き起こします。",
+        "pathophysiology_ja": "フィラグリン等の皮膚バリア蛋白の遺伝的異常→経皮アレルゲン侵入→ランゲルハンス細胞がTh2応答を誘導→IgE産生→肥満細胞脱顆粒→ヒスタミン/IL-31放出→激しい掻痒。慢性化で皮膚の苔癬化・色素沈着・二次感染（細菌・マラセチア）。",
+        "causes_ja": "環境アレルゲン（ハウスダストマイト、花粉、カビ胞子）に対する遺伝的過敏性。発症1〜3歳。好発犬種：フレンチブルドッグ、柴犬、ウエストハイランドテリア、ラブラドール、ゴールデンレトリーバー。",
+        "prevention_ja": "完全予防は困難。環境アレルゲンの軽減（HEPA空気清浄機・寝具の頻回洗濯）、皮膚バリア強化（EFA含有食・セラミド配合シャンプー）、好発犬種での早期スクリーニング、減感作療法（ASIT）の早期開始。",
+        "prognosis_ja": "生涯管理が必要。マルチモーダル治療（オクラシチニブ・ロキベトマブ・減感作療法・スキンケア）で80%以上が良好なQOL維持。二次感染の反復管理が鍵。",
         "urgency": "normal",
     },
     {
@@ -4277,6 +4316,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"ear_scratching", "head_tilting", "ear_odor", "head_shaking", "ear_discharge", "pain_on_touch"},
         "description": "Persistent infection of the middle ear, often from untreated external ear infections penetrating the tympanic membrane.",
         "description_ja": "中耳の持続的感染で、未治療の外耳炎が鼓膜を貫通することが原因となることが多いです。",
+        "pathophysiology_ja": "慢性外耳炎→鼓膜の損傷・穿孔→中耳腔への細菌・酵母感染の波及→鼓室内の炎症性滲出液貯留・骨溶解。Pseudomonas, Staphylococcus, Malasseziaが主要起因菌。鼓室包の骨増殖・狭窄により難治化。",
+        "causes_ja": "慢性外耳炎の不適切な管理（最多）、耳道の解剖学的異常（垂れ耳・狭窄耳道）、アレルギー性疾患、ポリープ、異物。好発：コッカースパニエル、ラブラドール、シャーペイ等の垂れ耳犬種。",
+        "prevention_ja": "外耳炎の早期・適切な治療、基礎疾患（アトピー・食物アレルギー）の管理、定期的な耳道検査・清掃、過度の耳洗浄の回避。",
         "urgency": "urgent",
     },
     {
@@ -4285,6 +4327,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"head_tilting", "circling", "head_shaking", "vomiting", "lethargy", "eye_redness"},
         "description": "Infection of the inner ear causing severe vestibular signs including head tilt, nystagmus, and ataxia.",
         "description_ja": "内耳の感染で、頭位傾斜、眼振、運動失調を含む重度の前庭症状を引き起こします。",
+        "pathophysiology_ja": "中耳炎からの感染波及→内耳（蝸牛・前庭器官）の炎症→前庭神経障害→末梢性前庭症候群（頭位傾斜・水平眼振・旋回運動・運動失調）。蝸牛障害を伴うと感音性難聴。重症例では髄膜炎のリスク。",
+        "causes_ja": "慢性中耳炎からの進展（最多）、血行性感染、外傷性鼓膜穿孔後の感染。起因菌：Pseudomonas aeruginosa, Staphylococcus, Streptococcus, Malassezia。",
+        "prevention_ja": "外耳炎・中耳炎の早期治療、耳道の定期管理、基礎疾患（アレルギー）のコントロール、耳に水が入る状況の回避。",
         "urgency": "urgent",
     },
     {
