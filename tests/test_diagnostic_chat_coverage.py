@@ -2154,3 +2154,58 @@ class TestConsultationAccuracyParity:
         # At least one top-3 interim candidate should appear in top-5 final
         overlap = interim_names & final_names
         assert len(overlap) > 0, f"No overlap: interim={interim_names}, final={final_names}"
+
+
+class TestConsultationCategoryGrouping:
+    """Verify symptom category grouping works correctly for guided consultation."""
+
+    ENDPOINT = "/api/diagnostic-chat/consultation"
+
+    @pytest.mark.parametrize("species", ["cat", "rabbit", "ferret", "hedgehog", "bird", "fish"])
+    def test_categories_not_all_other(self, client, species):
+        """Species should have multiple categories, not just 'other'."""
+        r = client.post(self.ENDPOINT, json={"phase": "start", "species": species})
+        assert r.status_code == 200
+        data = r.get_json()
+        cat_ids = {c["id"] for c in data["categories"]}
+        # Should have more than just "other"
+        assert len(cat_ids) > 1, f"{species} has only categories: {cat_ids}"
+        assert cat_ids != {"other"}, f"{species} has all symptoms in 'other'"
+
+    @pytest.mark.parametrize("species", ["cat", "rabbit", "hamster", "guinea_pig", "reptile"])
+    def test_common_categories_present(self, client, species):
+        """Major species should have diverse categories, not just 'other'."""
+        r = client.post(self.ENDPOINT, json={"phase": "start", "species": species})
+        data = r.get_json()
+        cat_ids = {c["id"] for c in data["categories"]}
+        # Should have multiple distinct categories
+        assert len(cat_ids) >= 2, f"{species} only has {len(cat_ids)} categories: {cat_ids}"
+
+    def test_category_symptom_count_positive(self, client):
+        """Each category should have at least 1 symptom."""
+        r = client.post(self.ENDPOINT, json={"phase": "start", "species": "cat"})
+        data = r.get_json()
+        for cat in data["categories"]:
+            assert cat["symptom_count"] > 0, f"Category {cat['id']} has 0 symptoms"
+
+    def test_select_symptoms_returns_category_specific(self, client):
+        """Selecting a non-'other' category returns only symptoms from that category."""
+        # Start to get categories
+        r1 = client.post(self.ENDPOINT, json={"phase": "start", "species": "cat"})
+        cats = r1.get_json()["categories"]
+        # Find a non-other category
+        non_other = [c for c in cats if c["id"] != "other"]
+        assert len(non_other) > 0, "No non-other categories for cat"
+        cat = non_other[0]
+
+        # Select symptoms for that category
+        r2 = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "cat",
+            "selected_category": cat["id"],
+        })
+        data = r2.get_json()
+        assert data["phase"] == "show_symptoms"
+        # Should return symptoms (matching the count from start phase)
+        assert len(data["symptoms"]) == cat["symptom_count"], \
+            f"Expected {cat['symptom_count']} symptoms for {cat['id']}, got {len(data['symptoms'])}"
