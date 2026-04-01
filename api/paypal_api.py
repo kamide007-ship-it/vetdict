@@ -154,7 +154,7 @@ def create_subscription():
             })
     except Exception as e:
         logger.error("PayPal create subscription error: %s", e)
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": "PayPal subscription creation failed"}), 500
 
 
 @paypal_bp.route("/activate", methods=["POST"])

@@ -20,7 +20,7 @@ from flask import Flask, Response, g, jsonify, render_template, request, send_fr
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
-from api.auth import require_internal_api_access
+from api.auth import ClientIP, RateLimiter, require_internal_api_access
 from api.debug_config import is_debug_mode_enabled
 
 # ---------------------------------------------------------------------------
@@ -67,6 +67,30 @@ else:
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
 STATIC_DIR = str(ROOT_DIR / 'static')
+
+# ---------------------------------------------------------------------------
+# Public API rate limiter (prevents abuse of compute-heavy endpoints)
+# ---------------------------------------------------------------------------
+_public_rate_limiter = RateLimiter(
+    max_requests=int(os.getenv('PUBLIC_API_RATE_LIMIT', '60')),
+    window_seconds=60,
+)
+_public_client_ip = ClientIP()
+
+
+def _check_public_rate_limit():
+    """Return a 429 response tuple if rate-limited, else None."""
+    client_ip = _public_client_ip.get_client_ip()
+    if _public_rate_limiter.is_limited(client_ip):
+        return (
+            jsonify({
+                'error': 'Rate limit exceeded. Please wait before retrying.',
+                'error_ja': 'リクエスト制限に達しました。しばらくしてから再試行してください。',
+            }),
+            429,
+        )
+    return None
+
 
 # ---------------------------------------------------------------------------
 # Module imports — graceful degradation
@@ -258,7 +282,7 @@ def ensure_json_response(f):
                 return jsonify(result)
             return result
         except Exception as e:
-            logger.error(f"Error in {f.__name__}: {e}", exc_info=True)
+            logger.error("Error in %s: %s", f.__name__, e, exc_info=True)
             is_production = os.getenv('RENDER') or os.getenv('PRODUCTION')
             error_msg = 'エラーが発生しました。しばらくしてからもう一度お試しください。' if is_production else str(e)
             return jsonify({'success': False, 'error': error_msg, 'version': VERSION}), 500
@@ -819,7 +843,7 @@ def get_related_symptoms(species):
 
         return {'related': result}
     except Exception as e:
-        logger.warning(f"Related symptoms error: {e}")
+        logger.warning("Related symptoms error: %s", e)
         return {'related': []}
 
 
@@ -884,6 +908,9 @@ def _attach_mentioned_drugs(result, species):
 @ensure_json_response
 def api_analyze_symptoms():
     """症状チェック → 疾患・検査リスト（全動物種対応）"""
+    rate_err = _check_public_rate_limit()
+    if rate_err:
+        return rate_err
     if not SYMPTOM_CHECKER_AVAILABLE:
         return {'error': 'Symptom checker module not available'}, 500
 
@@ -922,6 +949,7 @@ def api_analyze_symptoms():
     vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
     vaccination_status = data.get('vaccination_status')  # "current" | "outdated" | "none"
     pain_score = data.get('pain_score')  # 0-4 (CSU Canine Acute Pain Scale)
+    lang = data.get('lang', '')  # "ja" or "en" for regional prevalence adjustments
 
     # Validate onset
     if onset and onset not in ('acute', 'subacute', 'chronic'):
@@ -998,6 +1026,7 @@ def api_analyze_symptoms():
                 gender=gender,
                 vaccines=vaccines,
                 vaccination_status=vaccination_status,
+                lang=lang,
             )
 
         # Attach mentioned_drugs with species-specific dosage to each disease
@@ -1005,10 +1034,10 @@ def api_analyze_symptoms():
 
         return result
     except ValueError as ve:
-        logger.error(f"Symptom analysis error: {ve}", exc_info=True)
+        logger.error("Symptom analysis error: %s", ve, exc_info=True)
         return {'error': str(ve)}, 400
     except Exception as e:
-        logger.error(f"Symptom analysis error: {e}", exc_info=True)
+        logger.error("Symptom analysis error: %s", e, exc_info=True)
         return {'error': '症状解析に失敗しました'}, 500
 
 
@@ -1375,7 +1404,7 @@ def rate_limited(e):
 
 @app.errorhandler(500)
 def server_error(e):
-    logger.error(f"500: {e}", exc_info=True)
+    logger.error("500: %s", e, exc_info=True)
     return jsonify({'error': 'Internal server error', 'version': VERSION}), 500
 
 
@@ -1398,10 +1427,10 @@ if SYMPTOM_CHECKER_AVAILABLE:
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-    logger.info(f"VetDict v{VERSION} starting on port {port}")
-    logger.info(f"Symptom checker: {SYMPTOM_CHECKER_AVAILABLE}")
-    logger.info(f"Species analyzer: {SPECIES_ANALYZER_AVAILABLE}")
-    logger.info(f"Health checker: {HEALTH_CHECKER_AVAILABLE}")
-    logger.info(f"Diagnostic chat: {DIAGNOSTIC_CHAT_AVAILABLE}")
-    logger.info(f"RECO2: {RECO2_AVAILABLE}")
+    logger.info("VetDict v%s starting on port %s", VERSION, port)
+    logger.info("Symptom checker: %s", SYMPTOM_CHECKER_AVAILABLE)
+    logger.info("Species analyzer: %s", SPECIES_ANALYZER_AVAILABLE)
+    logger.info("Health checker: %s", HEALTH_CHECKER_AVAILABLE)
+    logger.info("Diagnostic chat: %s", DIAGNOSTIC_CHAT_AVAILABLE)
+    logger.info("RECO2: %s", RECO2_AVAILABLE)
     app.run(host='0.0.0.0', port=port, debug=is_debug_mode_enabled())

@@ -75,6 +75,7 @@ def _ensure_db() -> None:
         try:
             count = conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
         except Exception:
+            logger.debug("Could not count diseases in SQLite", exc_info=True)
             count = 0
     if count == 0:
         logger.info("diseases table is empty — running auto-migration")
@@ -147,7 +148,7 @@ def _fallback_disease_counts() -> dict[str, int]:
             data = getattr(mod, attr, [])
             counts[sp_id] = len(data) if data else 0
         except Exception:
-            pass
+            logger.debug("Failed to load species module %s", mod_path)
 
     # JSON fallback for any species still missing
     if any(counts.get(sp, 0) == 0 for sp in SPECIES_META):
@@ -164,7 +165,7 @@ def _fallback_disease_counts() -> dict[str, int]:
                         if sp_id and counts.get(sp_id, 0) == 0:
                             counts[sp_id] = counts.get(sp_id, 0) + 1
         except Exception:
-            pass
+            logger.debug("JSON fallback for disease counts failed", exc_info=True)
 
     return counts
 
@@ -180,7 +181,7 @@ def _fallback_drug_counts() -> tuple[dict[str, int], int]:
             for sp in d.get("species_info") or {}:
                 per_species[sp] = per_species.get(sp, 0) + 1
     except Exception:
-        pass
+        logger.debug("Failed to load drug dictionary for counts", exc_info=True)
     return per_species, total
 
 
@@ -452,7 +453,7 @@ def get_symptoms_for_species(species: str) -> list[dict]:
                 key=lambda s: (s["category"], s["id"]),
             )
     except (ImportError, Exception):
-        pass
+        logger.debug("Fallback symptom loading failed for species module")
     return result
 
 

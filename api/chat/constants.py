@@ -1,0 +1,32 @@
+"""Shared constants for the diagnostic chat system."""
+
+_GENERIC_SPECIES = [
+    "dog", "cat", "rabbit", "hamster", "chinchilla", "guinea_pig", "ferret",
+    "hedgehog", "sugar_glider", "degu", "bird", "parakeet", "parrot",
+    "reptile", "tortoise", "snake", "lizard", "amphibian", "fish",
+    "exotic_other",
+]
+
+SPECIES_LABELS = {
+    "dog": {"ja": "犬", "en": "Dog"},
+    "cat": {"ja": "猫", "en": "Cat"},
+    "horse": {"ja": "馬", "en": "Horse"},
+    "rabbit": {"ja": "ウサギ", "en": "Rabbit"},
+    "hamster": {"ja": "ハムスター", "en": "Hamster"},
+    "chinchilla": {"ja": "チンチラ", "en": "Chinchilla"},
+    "guinea_pig": {"ja": "モルモット", "en": "Guinea Pig"},
+    "ferret": {"ja": "フェレット", "en": "Ferret"},
+    "hedgehog": {"ja": "ハリネズミ", "en": "Hedgehog"},
+    "sugar_glider": {"ja": "フクロモモンガ", "en": "Sugar Glider"},
+    "degu": {"ja": "デグー", "en": "Degu"},
+    "bird": {"ja": "鳥", "en": "Bird"},
+    "parakeet": {"ja": "インコ", "en": "Parakeet"},
+    "parrot": {"ja": "オウム", "en": "Parrot"},
+    "reptile": {"ja": "爬虫類", "en": "Reptile"},
+    "tortoise": {"ja": "リクガメ", "en": "Tortoise"},
+    "snake": {"ja": "ヘビ", "en": "Snake"},
+    "lizard": {"ja": "トカゲ", "en": "Lizard"},
+    "amphibian": {"ja": "両生類", "en": "Amphibian"},
+    "fish": {"ja": "魚", "en": "Fish"},
+    "exotic_other": {"ja": "その他エキゾチック", "en": "Other Exotic"},
+}

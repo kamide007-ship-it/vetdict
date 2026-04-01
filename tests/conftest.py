@@ -10,6 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+# Ensure SECRET_KEY and debug mode are set BEFORE any app module imports
+os.environ.setdefault("SECRET_KEY", "test-secret-key")
+os.environ.setdefault("FLASK_DEBUG", "1")
+
 # Set test database path BEFORE any module imports
 _test_db_fd, _test_db_path = tempfile.mkstemp(suffix=".db")
 os.close(_test_db_fd)
