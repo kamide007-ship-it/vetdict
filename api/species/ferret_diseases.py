@@ -1213,7 +1213,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "フェレットにおけるサルモネラ症の原因: 汚染食物による細菌性胃腸炎で、人獣共通感染症です。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "サルモネラ症はフェレットにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Enrofloxacin 5-10 mg/kg PO q12h based on C&S. SC fluids. Zoonotic. Isolate.",
         "treatment_ja": "フェレットにおけるサルモネラ症の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "サルモネラ症の予防には適切な衛生管理・消毒、利用可能なワクチン接種、創傷の迅速な処置、ストレス軽減、適切な換気、感染動物の隔離が含まれる。",
