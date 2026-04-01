@@ -6158,8 +6158,9 @@ for _d in DISEASES:
         _d["causes_ja"] = _d["causes"]
     if not _d.get("treatment") and not _d.get("treatment_ja"):
         _d["treatment"] = _d["treatment_ja"] = (
-            f"{_name_ja}の治療は原因への対処、支持療法、および適切な治療介入を含む。"
-            f"重症度: {_urg_ja}。獣医師への相談が推奨される。")
+            f"{_name_ja}の治療: 獣医師による診断に基づく適切な治療計画が必要。"
+            f"緊急度: {_urg_ja}。疼痛管理・輸液・栄養サポートを含む支持療法を基本とし、"
+            f"原因に応じた特異的治療を実施。")
     elif _d.get("treatment_ja") and not _d.get("treatment"):
         _d["treatment"] = _d["treatment_ja"]
     elif _d.get("treatment") and not _d.get("treatment_ja"):

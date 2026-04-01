@@ -6,6 +6,9 @@ for the diseases and drugs tables.
 """
 
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 import os
 import sqlite3
 from contextlib import contextmanager
@@ -23,10 +26,19 @@ def get_connection(db_path: str | None = None):
     """Yield a SQLite connection with WAL mode and foreign keys enabled."""
     path = db_path or DB_PATH
     _ensure_dir(path)
-    conn = sqlite3.connect(path)
+    conn = sqlite3.connect(path, timeout=10.0)
     conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
+    try:
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA foreign_keys=ON")
+        # Integrity check on first connection to detect corruption early
+        integrity = conn.execute("PRAGMA quick_check").fetchone()[0]
+        if integrity != "ok":
+            logger.critical("Database corruption detected: %s (path: %s)", integrity, path)
+    except sqlite3.DatabaseError:
+        logger.critical("Database error during connection setup (path: %s)", path, exc_info=True)
+        conn.close()
+        raise
     try:
         yield conn
         conn.commit()

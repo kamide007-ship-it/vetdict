@@ -1,8 +1,9 @@
 # VetDict — Claude Code Project Guide
 
 ## プロジェクト概要
-獣医学疾患データベース・薬品辞書・AI診断チャットを搭載した獣医学総合プラットフォーム。
+獣医師・獣医学生を対象とした臨床意思決定支援プラットフォーム。疾患データベース・薬品辞書・AI鑑別診断チャットを搭載。
 - **URL**: https://vetdict.info
+- **ターゲット**: 獣医師・獣医学生（臨床意思決定支援ツール）
 - **デプロイ**: Render (gunicorn)
 - **開発者**: 上手 健太郎 DVM（南相馬アニマルクリニック）
 - **運営**: Equine Vet Synapse
@@ -10,10 +11,10 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (2,480テスト)
+- **テスト**: pytest (2,746テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v2)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v10)
 - **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
 - **現状**: OPEN_BETA=true（全機能無料）
@@ -148,10 +149,11 @@ scripts/
 
 ## 重要な設定
 ### PayPal
-- Client ID: `AX7kp51y...VTUE` (フロントエンドに設定済み)
+- Client ID: 環境変数 `PAYPAL_CLIENT_ID` (Renderダッシュボードで設定)
 - Secret: 環境変数 `PAYPAL_SECRET` (Renderダッシュボードで設定)
-- Plan ID: `P-5FB7289813535813HNHCF4OA` (¥980/月)
-- Webhook: `https://vetdict.info/api/paypal/webhook` (ID: 5DH235157M131750H)
+- Plan ID: 環境変数 `PAYPAL_PLAN_ID` (¥980/月)
+- Webhook: `https://vetdict.info/api/paypal/webhook` (環境変数 `PAYPAL_WEBHOOK_ID` — 本番必須)
+- **注意**: クレデンシャルは全て環境変数経由。ソースコードにデフォルト値を書かないこと
 
 ### Stripe (未使用/将来用)
 - Account: acct_1T0Tw86CJtNyrrE8
@@ -210,10 +212,14 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 ## 既知の課題（次セッションで対応可能）
 - ハムスター眼球突出（43.2%）— 2症状入力では特異性が構造的に低い（rank 1は達成）
 - 魚 松かさ病（58.9%）— 3/7症状マッチが限界（rank 1達成）
-- _extract_species_symptoms の位置追跡は最初の1出現のみ対応（同一テキスト内の複数出現は未対応）
+- _extract_species_symptoms の位置追跡は複数出現対応済み（findループ化）
 - Renderフリープランのスリープ問題（15分無操作→初回アクセス遅延）
 - エキゾチック動物（ウサギ/鳥/爬虫類等）の治療プロトコルはカテゴリベースの汎用記載が多い — 犬猫と同レベルの個別詳細プロトコルへのアップグレードが望ましい
-- 問診モードのUI動作確認・ブラウザテストが未実施
+- 問診モードのブラウザ手動テスト（実機確認）が未実施（自動テスト48件は実装済み）
+- **診断精度の体系的検証**: 感度/特異度/PPV/NPVの定量評価が未実施。TRIPODガイドラインに準拠した検証プロトコルの策定が必要
+- **臨床データのピアレビュー文書化**: AIエンリッチメント（enrich_treatment_prognosis.py等）で生成されたデータの獣医師レビュー履歴が未文書化。レビューログの整備が望ましい
+- **依存関係のピニング**: anthropic>=0.7.0等の緩いバージョン指定。lockfile未導入
+- **テストカバレッジ計測**: pytest-covはインストール済みだがCI未設定
 
 ## 2026-03セッションで実施した主な改善
 ### 問診モード (Guided Consultation)
@@ -241,3 +247,94 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - 眼球突出マッピング修正: `pop_eye`(魚専用)→`eye_bulging`に修正
 - `_ID_SYNONYMS`/`_SYN` に eye_bulging, enlarged_eye, exophthalmos, hind_leg_weakness, abdominal_pain↔hunched_posture 追加
 - ウサギGI stasis: 81.9%→95.0% (rank1)、フェレットインスリノーマ: 0%→51.5%、爬虫類呼吸器: 72.6%→95.0%
+
+## 2026-04セッションで実施した主な改善
+
+### ターゲット明確化（獣医師・獣医学生）
+- ヒーロー・ナビ・チャット・プライシング・フッターのコピーを獣医師向けに統一
+- SEOメタタグ（title/description/OGP/Twitter Card）を臨床意思決定支援キーワードに最適化
+- Schema.org に audience 属性追加（Veterinarians, Veterinary Students, Veterinary Technicians）
+- manifest.json のPWAショートカットを臨床用語に統一
+
+### セキュリティ強化
+- Admin API全11エンドポイントに `@require_internal_api_access` デコレータ適用
+- PayPalクレデンシャルのハードコードデフォルト値を削除（環境変数必須に）
+- Webhook検証を本番で必須化（fail-closed、debug時のみスキップ許可）
+- サブスクライバーデータ: subscribers.json → subscribers.db (SQLite + WAL)
+- ウェイトリストデータ: waitlist.json → waitlist.db (SQLite + WAL + UNIQUE制約)
+- モジュールロード時にJSON→SQLite自動マイグレーション
+
+### 問診モード検証・改善
+- バグ修正: カテゴリラベルKeyErrorリスク、finalize species条件（horse等が空結果）、中間結果XSS対策
+- アクセシビリティ: `#guidedMessages` に `aria-live="polite"`、`#guidedActions` に `role="group"`
+- UX改善: 症状選択画面に「← カテゴリに戻る」ボタン、エラー時の「やり直す」ボタン追加
+- モバイルCSS: 600px以下でカテゴリグリッド/ボタン/モード切替のサイズ最適化
+- finalize フォールバック時に `logger.warning` でログ出力
+- テスト: 48件（フロー15 + エッジケース19 + 診断精度パリティ14）
+  - 全21種のstartフェーズ疎通、6種フルフロー、12種の臨床シナリオ精度検証
+  - 中間結果↔最終結果の一貫性テスト
+
+### 参考文献拡充（72→90+ citations）
+- AAHA/AVMA/ISFM/WSAVA臨床ガイドライン10件追加（ワクチン、CKD、糖尿病等）
+- 診断精度検証・臨床意思決定支援の文献8件追加（TRIPOD、JAMA CDS、NEJM ML等）
+
+### エキゾチック動物の治療プロトコル詳細化
+- ハムスター: テンプレート治療文 122→36件 (71%改善) — Wet Tail, Tyzzer's, pneumonia等59件を臨床プロトコルに
+- 鳥: テンプレート治療文 212→93件 (56%改善) — Psittacosis, egg binding, lead poisoning等119件
+- ハリネズミ: テンプレート治療文 83→50件 (40%改善) — CHF, proptosis, pyometra等33件
+- フェレット/モルモット/チンチラ/フクロモモンガ/デグー: 進行中
+
+### 診断精度UX改善
+- 低信頼度時のUI警告バナー: 症状2個以下 or 最高信頼度<50%で黄色警告を表示
+  - 「症状を追加すると精度が大幅に向上します」のガイダンス付き
+  - 日英バイリンガル対応
+
+### 地域別有病率調整（日本 vs 海外）
+- `prevalence_data.py`: JAPAN_REGIONAL_ADJUSTMENTS / INTERNATIONAL_REGIONAL_ADJUSTMENTS 追加
+- UI言語が日本語→日本の有病率、英語→海外の有病率を自動適用
+- 日本で多い: フィラリア, バベシア, FIP, GI stasis(ウサギ), 日本脳炎(馬)
+- 日本で稀: 狂犬病(eliminated), 粘液腫症, Blastomycosis等Americas endemic
+- エビデンス: Atkins(2014), Irwin(2009), Koizumi(2009), Pedersen(2014), MHLW Japan
+- diagnostic_chat.py + species_analyzer.py + vetdict_api.py + app.js でlang伝搬
+
+### CI/依存関係強化
+- テストカバレッジ計測 (--cov-fail-under=60) をCIに追加
+- pip-audit にrequirements-dev.txtも追加
+- 依存関係上限ピニング: anthropic<1.0.0, gunicorn<23.0.0, pytest-cov<6.0.0, ruff<1.0.0
+
+## 次セッションへの引き継ぎ事項
+
+### 問診モード（Guided Consultation）の検証 — 最優先
+- `POST /api/diagnostic-chat/consultation` の5フェーズ問診フローは実装済みだが**UI動作確認・ブラウザテストが未実施**
+- テスト項目:
+  1. カテゴリ選択画面の表示・タップ動作
+  2. 症状選択（タップ式）の正常動作
+  3. 中間結果表示の正確性
+  4. 追加カテゴリ提案→追加症状選択フロー
+  5. 発症期間・年齢入力の処理
+  6. 最終結果の表示（analyze_species_symptomsエンジン使用）
+  7. chatModeFree ↔ chatModeGuided 切替時のコンテキスト保持
+  8. モバイル・デスクトップの両方でのレイアウト確認
+- 関連ファイル: `app.js` の `setupGuidedConsultation()`, `guidedFetch()`, `guidedHandleResponse()`
+- 関連CSS: `.guided-category-grid`, `.guided-sym-btn`, `.guided-action-btn`
+
+### 残りのエキゾチック治療プロトコル
+- ハムスター: 36件のlow urgencyテンプレートが残存 (11%)
+- 鳥: 93件のmoderate/lowテンプレートが残存 (16%)
+- ハリネズミ: 50件のmoderate/lowテンプレートが残存 (20%)
+- フェレット: 93→61件 (22%) — 主要疾患は詳細化済み
+- モルモット: 141→108件 (31%) — emergency/highの主要疾患は詳細化済み
+- チンチラ: 113→84件 (30%) — emergency/highの主要疾患は詳細化済み
+- フクロモモンガ: 80→54件 (24%) — emergency/highの主要疾患は詳細化済み
+- デグー: 75→47件 (23%) — emergency/highの主要疾患は詳細化済み
+- 残り533件はmoderate/low urgencyまたはvariant/subformエントリ
+
+### 診断精度の体系的検証
+- TRIPOD準拠の検証プロトコル策定が必要
+- 感度/特異度/PPV/NPVの定量評価
+- 26テストケースは存在するが、体系的な検証フレームワークは未構築
+
+### その他の残課題
+- AIエンリッチメントの臨床レビュー文書化（レビューログのフォーマット策定）
+- diagnostic_chat.py のモジュール分割（4,244行の巨大ファイル）
+- app.js のモジュール分割（3,000行の単一ファイル）

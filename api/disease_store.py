@@ -368,8 +368,17 @@ def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[di
             (species,),
         ).fetchall()
 
-    # Horse has category-aware symptoms from HEALTH_CHECK_ITEMS
-    horse_categories = _load_horse_category_map() if species == "horse" else {}
+    # Load category map from species module or horse HEALTH_CHECK_ITEMS
+    category_map: dict[str, str] = {}
+    if species == "horse":
+        category_map = _load_horse_category_map()
+    else:
+        try:
+            import importlib as _il
+            _smod = _il.import_module(f"api.species.{species}_diseases")
+            category_map = getattr(_smod, "SYMPTOM_CATEGORIES", {})
+        except (ImportError, Exception):
+            pass
 
     # Symptom records from symptoms table
     symptom_map: dict[str, dict] = {}
@@ -379,7 +388,7 @@ def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[di
             "id": raw_id,
             "name_ja": r["name_ja"],
             "name_en": r["name_en"],
-            "category": horse_categories.get(raw_id, "other"),
+            "category": category_map.get(raw_id, "other"),
         }
 
     # Ensure every symptom referenced in diseases is present
@@ -394,7 +403,7 @@ def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[di
                     "id": sid,
                     "name_ja": sid,
                     "name_en": sid,
-                    "category": horse_categories.get(sid, "other"),
+                    "category": category_map.get(sid, "other"),
                 }
 
     return sorted(symptom_map.values(), key=lambda s: s["id"])

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}獣医学疾患データベース — 全{{ total }}疾患 | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="21動物種・{{ total }}疾患の獣医学疾患データベース。各疾患の症状・原因・治療法・予後を詳しく解説。獣医師が開発した臨床支援ツール。">
+<meta property="og:title" content="獣医学疾患データベース — {{ total }}疾患 | VetDict">
+<meta property="og:description" content="21動物種・{{ total }}疾患。症状・原因・治療法・予後を詳しく解説。">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="獣医学疾患データベース | VetDict">
+<meta name="twitter:description" content="21動物種・{{ total }}疾患の臨床情報。">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<link rel="canonical" href="https://vetdict.info/diseases">
+<style>
+.hub-page{max-width:900px;margin:0 auto;padding:20px 20px 60px}
+.hub-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
+.hub-page .subtitle{color:var(--gray-600);font-size:.9rem;margin-bottom:24px}
+.species-hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.species-hub-card{display:block;padding:16px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--gray-800);transition:all .2s;text-align:center}
+.species-hub-card:hover{border-color:var(--green);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.species-hub-card .sp-name{font-size:1.1rem;font-weight:700;color:var(--navy);display:block}
+.species-hub-card .sp-en{font-size:.78rem;color:var(--gray-500);display:block;margin-bottom:6px}
+.species-hub-card .sp-count{font-size:.86rem;color:var(--green);font-weight:600}
+.hub-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin:28px 0}
+.hub-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hub-page">
+  <h1>獣医学疾患データベース</h1>
+  <p class="subtitle">21動物種・{{ total }}疾患の臨床情報を掲載</p>
+
+  <div class="cta-box">
+    <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">症状から鑑別診断を行う</p>
+    <a href="/#checker">症状チェッカーを使う</a>
+  </div>
+
+  <h2 style="font-size:1.1rem;color:var(--navy);margin-bottom:12px">動物種から探す</h2>
+  <div class="species-hub-grid">
+    {% for sp in species %}
+    <a href="/diseases/{{ sp.id }}" class="species-hub-card">
+      <span style="font-size:2rem;display:block;margin-bottom:4px">{{ sp.icon }}</span>
+      <span class="sp-name">{{ sp.name_ja }}</span>
+      <span class="sp-en">{{ sp.name_en }}</span>
+      <span class="sp-count">{{ sp.count }}疾患</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="cta-box" style="margin-top:32px">
+    <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">AI診断チャットで相談する</p>
+    <a href="/#chat">チャットで相談</a>
+  </div>
+
+  <p style="font-size:.76rem;color:var(--gray-500);margin-top:24px;text-align:center">
+    ※ 本データベースは獣医学的参考資料です。実際の診療は必ず獣医師にご相談ください。<br>
+    VetDict は獣医師（DVM）が開発した臨床支援ツールです。
+  </p>
+</div>
+{% endblock %}

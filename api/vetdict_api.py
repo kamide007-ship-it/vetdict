@@ -20,7 +20,7 @@ from flask import Flask, Response, g, jsonify, render_template, request, send_fr
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
-from api.auth import require_internal_api_access
+from api.auth import ClientIP, RateLimiter, require_internal_api_access
 from api.debug_config import is_debug_mode_enabled
 
 # ---------------------------------------------------------------------------
@@ -67,6 +67,30 @@ else:
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / 'templates')
 STATIC_DIR = str(ROOT_DIR / 'static')
+
+# ---------------------------------------------------------------------------
+# Public API rate limiter (prevents abuse of compute-heavy endpoints)
+# ---------------------------------------------------------------------------
+_public_rate_limiter = RateLimiter(
+    max_requests=int(os.getenv('PUBLIC_API_RATE_LIMIT', '60')),
+    window_seconds=60,
+)
+_public_client_ip = ClientIP()
+
+
+def _check_public_rate_limit():
+    """Return a 429 response tuple if rate-limited, else None."""
+    client_ip = _public_client_ip.get_client_ip()
+    if _public_rate_limiter.is_limited(client_ip):
+        return (
+            jsonify({
+                'error': 'Rate limit exceeded. Please wait before retrying.',
+                'error_ja': 'リクエスト制限に達しました。しばらくしてから再試行してください。',
+            }),
+            429,
+        )
+    return None
+
 
 # ---------------------------------------------------------------------------
 # Module imports — graceful degradation
@@ -273,7 +297,14 @@ def ensure_json_response(f):
 
 @app.before_request
 def generate_csp_nonce():
-    """Generate a per-request nonce for Content Security Policy."""
+    """Generate a per-request nonce kept for template <script> tags.
+
+    The nonce is no longer referenced in the CSP header (we use
+    'unsafe-inline' + host allowlists instead so GA4 inline event
+    handlers are not blocked), but templates still carry
+    ``nonce="{{ g.csp_nonce }}"`` on their ``<script>`` tags for
+    forward-compatibility if we re-enable nonce-based CSP later.
+    """
     g.csp_nonce = secrets.token_urlsafe(16)
 
 
@@ -287,10 +318,14 @@ def add_headers(response):
     response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
 
     # Content Security Policy (prevent XSS, clickjacking, etc.)
-    nonce = getattr(g, 'csp_nonce', '')
+    # Note: nonce + 'unsafe-inline' causes browsers to ignore 'unsafe-inline'
+    # (CSP Level 2 spec), and 'strict-dynamic' causes host allowlists to be
+    # ignored.  GA4/GTM injects inline event handlers that cannot carry a nonce,
+    # so we use 'unsafe-inline' + explicit host allowlists without nonce/
+    # strict-dynamic to avoid blocking GA tracking after diagnosis events.
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        f"script-src 'self' 'nonce-{nonce}' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
+        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: https:; "
         "font-src 'self' https:; "
@@ -373,6 +408,60 @@ def static_assets(filename):
         return jsonify({'error': f'{filename} not found'}), 404
 
 
+import re as _re
+
+# Module-level constants for disease page routing (used by sitemap, hub, index, detail)
+_DISEASE_MODULES: dict[str, str] = {
+    "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
+    "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
+    "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
+    "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
+    "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
+    "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
+    "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
+    "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
+    "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
+    "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
+    "exotic_other": "api.species.exotic_other_diseases",
+}
+
+_SPECIES_ICONS: dict[str, str] = {
+    "dog": "\U0001F415", "cat": "\U0001F408", "horse": "\U0001F434",
+    "rabbit": "\U0001F407", "hamster": "\U0001F439", "guinea_pig": "\U0001F439",
+    "chinchilla": "\U0001F43F\uFE0F", "ferret": "\U0001F9A1", "hedgehog": "\U0001F994",
+    "sugar_glider": "\U0001F43F\uFE0F", "degu": "\U0001F42D", "bird": "\U0001F426",
+    "parakeet": "\U0001F99C", "parrot": "\U0001F99C", "reptile": "\U0001F98E",
+    "tortoise": "\U0001F422", "snake": "\U0001F40D", "lizard": "\U0001F98E",
+    "amphibian": "\U0001F438", "fish": "\U0001F41F", "exotic_other": "\U0001F999",
+}
+
+
+def _load_diseases(species_key: str) -> list:
+    """Load DISEASES list for a species from its Python module."""
+    mod_name = _DISEASE_MODULES.get(species_key)
+    if not mod_name:
+        return []
+    try:
+        import importlib
+        mod = importlib.import_module(mod_name)
+        return getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
+    except ImportError:
+        return []
+
+
+def _disease_slug(disease) -> str:
+    """Generate a URL-safe slug from a disease dict or dataclass."""
+    name = disease.get("name", "") if isinstance(disease, dict) else getattr(disease, "name", "")
+    return _re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
+
+
+def _disease_get(disease, key, default=""):
+    """Get attribute from disease dict or dataclass."""
+    if isinstance(disease, dict):
+        return disease.get(key, default)
+    return getattr(disease, key, default)
+
+
 @app.route('/sitemap.xml')
 def dynamic_sitemap():
     """Generate a dynamic sitemap including all species and feature pages."""
@@ -383,6 +472,7 @@ def dynamic_sitemap():
         (f'{base}/', 'weekly', '1.0'),
         (f'{base}/#checker', 'weekly', '0.9'),
         (f'{base}/#database', 'weekly', '0.9'),
+        (f'{base}/diseases', 'weekly', '0.9'),
         (f'{base}/#chat', 'weekly', '0.8'),
         (f'{base}/#drugs', 'monthly', '0.8'),
     ]
@@ -390,6 +480,19 @@ def dynamic_sitemap():
     for sp in SPECIES_META:
         urls.append((f'{base}/?species={sp}#checker', 'weekly', '0.7'))
         urls.append((f'{base}/?species={sp}#database', 'weekly', '0.7'))
+        urls.append((f'{base}/diseases/{sp}', 'weekly', '0.8'))  # Disease index per species
+
+    # Disease detail pages (SEO: each disease = a crawlable page)
+    for sp in _DISEASE_MODULES:
+        if sp not in SPECIES_META:
+            continue
+        try:
+            for _d in _load_diseases(sp):
+                _slug = _disease_slug(_d)
+                if _slug:
+                    urls.append((f'{base}/diseases/{sp}/{_slug}', 'monthly', '0.5'))
+        except ImportError:
+            pass
 
     # Legal pages
     for page in ('terms', 'privacy', 'tokushoho'):
@@ -404,6 +507,180 @@ def dynamic_sitemap():
     lines.append('</urlset>')
 
     return Response('\n'.join(lines), mimetype='application/xml')
+
+
+@app.route('/diseases')
+def diseases_hub():
+    """Top-level diseases hub page listing all 21 species with disease counts."""
+    from api.disease_store import SPECIES_META
+
+    species_list = []
+    total_diseases = 0
+    for sp_id in _DISEASE_MODULES:
+        if sp_id not in SPECIES_META:
+            continue
+        meta = SPECIES_META[sp_id]
+        count = len(_load_diseases(sp_id))
+        total_diseases += count
+        species_list.append({
+            "id": sp_id, "name_ja": meta.get("name_ja", sp_id),
+            "name_en": meta.get("name_en", sp_id.title()), "count": count,
+            "icon": _SPECIES_ICONS.get(sp_id, "\U0001F43E"),
+        })
+    species_list.sort(key=lambda x: x["count"], reverse=True)
+    return render_template('diseases_hub.html', species=species_list, total=total_diseases)
+
+
+@app.route('/diseases/<species>')
+def disease_index(species: str):
+    """Server-rendered disease index page per species for SEO.
+
+    Acts as a hub page linking to all individual disease pages,
+    improving internal link structure and crawlability.
+    """
+    from api.disease_store import SPECIES_META
+
+    species_key = species.lower()
+    if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
+        return jsonify({'error': 'Unknown species'}), 404
+
+    sp_meta = SPECIES_META[species_key]
+    diseases = _load_diseases(species_key)
+
+    # Build disease list with slugs
+    disease_list = []
+    for d in diseases:
+        name = d.get("name", "") if isinstance(d, dict) else getattr(d, "name", "")
+        name_ja = d.get("name_ja", "") if isinstance(d, dict) else getattr(d, "name_ja", "")
+        urgency = d.get("urgency", "") if isinstance(d, dict) else getattr(d, "urgency", "")
+        slug = _disease_slug(d)
+        if slug:
+            disease_list.append({"name": name, "name_ja": name_ja, "urgency": urgency, "slug": slug})
+
+    disease_list.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
+
+    return render_template(
+        'disease_index.html',
+        diseases=disease_list,
+        species=species_key,
+        species_ja=sp_meta.get("name_ja", species_key),
+        species_en=sp_meta.get("name_en", species_key.title()),
+        count=len(disease_list),
+    )
+
+
+@app.route('/diseases/<species>/<disease_slug>')
+def disease_detail(species: str, disease_slug: str):
+    """Server-rendered disease detail page for SEO indexing.
+
+    Each of the 6,400+ diseases gets its own URL that Google can crawl,
+    turning the disease database into a long-tail SEO asset.
+    """
+    from api.disease_store import SPECIES_META
+
+    species_key = species.lower()
+    if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
+        return jsonify({'error': 'Unknown species'}), 404
+
+    sp_meta = SPECIES_META[species_key]
+    diseases = _load_diseases(species_key)
+
+    # Find matching disease by slug
+    disease = None
+    for d in diseases:
+        if _disease_slug(d) == disease_slug:
+            disease = d
+            break
+
+    if not disease:
+        return jsonify({'error': 'Disease not found'}), 404
+
+    # Normalize to dict for template rendering (handles dataclass objects)
+    if not isinstance(disease, dict):
+        from dataclasses import asdict
+        try:
+            disease = asdict(disease)
+        except TypeError:
+            disease = {k: getattr(disease, k, "") for k in ("name", "name_ja", "description", "description_ja",
+                       "symptoms", "causes", "causes_ja", "pathophysiology", "pathophysiology_ja",
+                       "treatment", "treatment_ja", "prevention", "prevention_ja", "prognosis", "prognosis_ja",
+                       "urgency", "recommended_tests")}
+
+    sp_label_ja = sp_meta.get("name_ja", species_key)
+    sp_label_en = sp_meta.get("name_en", species_key.title())
+
+    # Load symptom names for human-readable display
+    symptom_names = {}
+    try:
+        import importlib
+        _mod = importlib.import_module(_DISEASE_MODULES[species_key])
+        sym_names_dict = getattr(_mod, "SYMPTOM_NAMES", {})
+        symptom_names = {k: v.get("ja", k) for k, v in sym_names_dict.items()}
+    except Exception:
+        pass
+
+    # Build related diseases (same species, shared symptoms)
+    disease_symptoms = disease.get("symptoms", set())
+    if isinstance(disease_symptoms, (set, list)):
+        disease_symptoms = set(disease_symptoms)
+    else:
+        disease_symptoms = set()
+    related = []
+    if disease_symptoms:
+        for d in diseases:
+            d_name = _disease_get(d, "name", "")
+            if d_name == disease.get("name"):
+                continue
+            d_syms = _disease_get(d, "symptoms", set())
+            if isinstance(d_syms, (set, list)):
+                d_syms = set(d_syms)
+            else:
+                continue
+            shared = disease_symptoms & d_syms
+            if len(shared) >= 2:
+                related.append({
+                    "name": d_name,
+                    "name_ja": _disease_get(d, "name_ja", ""),
+                    "slug": _disease_slug(d),
+                    "shared": len(shared),
+                })
+        related.sort(key=lambda x: -x["shared"])
+        related = related[:8]
+
+    # Extract mentioned drugs from treatment text
+    mentioned_drugs = []
+    treatment_text = (disease.get("treatment_ja", "") + " " + disease.get("treatment", "")).lower()
+    if treatment_text.strip():
+        try:
+            from api.drug_dictionary import DRUGS as _ALL_DRUGS
+            for dr in _ALL_DRUGS:
+                dr_name = dr.get("name", "")
+                dr_name_ja = dr.get("name_ja", "")
+                if (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text):
+                    mentioned_drugs.append({"id": dr.get("id", ""), "name": dr_name, "name_ja": dr_name_ja})
+            mentioned_drugs = mentioned_drugs[:10]
+        except Exception:
+            pass
+
+    # Load PubMed references
+    pubmed_refs = []
+    try:
+        from api.pubmed_references import get_references_for_disease
+        pubmed_refs = get_references_for_disease(disease.get("name", ""))
+    except Exception:
+        pass
+
+    return render_template(
+        'disease_detail.html',
+        disease=disease,
+        species=species_key,
+        species_ja=sp_label_ja,
+        species_en=sp_label_en,
+        symptom_names=symptom_names,
+        related_diseases=related,
+        mentioned_drugs=mentioned_drugs,
+        pubmed_refs=pubmed_refs,
+    )
 
 
 @app.route('/<path:filename>')
@@ -429,19 +706,29 @@ def health():
 
     checks = {}
 
-    # Database connectivity (optional — absence is not an error)
+    # Database connectivity + integrity check
+    import time as _time
     try:
         from api.database import DB_PATH as _db_path
         _db_file = Path(_db_path)
         if _db_file.exists() and _db_file.stat().st_size > 0:
-            _conn = _sqlite3.connect(_db_path)
+            _t0 = _time.monotonic()
+            _conn = _sqlite3.connect(_db_path, timeout=5.0)
             _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+            _integrity = _conn.execute("PRAGMA quick_check").fetchone()[0]
             _conn.close()
-            checks["database"] = {"status": "ok", "diseases": _count}
+            _latency_ms = round((_time.monotonic() - _t0) * 1000, 1)
+            _db_ok = _integrity == "ok"
+            checks["database"] = {
+                "status": "ok" if _db_ok else "error",
+                "diseases": _count,
+                "integrity": _integrity,
+                "latency_ms": _latency_ms,
+            }
         else:
             checks["database"] = {"status": "ok", "detail": "not configured"}
-    except Exception:
-        checks["database"] = {"status": "ok", "detail": "not configured"}
+    except Exception as _e:
+        checks["database"] = {"status": "error", "detail": str(_e)[:200]}
 
     # Disk space
     try:
@@ -564,10 +851,66 @@ def get_related_symptoms(species):
 # API: Symptom Analysis (multi-species)
 # =============================================================================
 
+
+def _attach_mentioned_drugs(result, species):
+    """Attach mentioned_drugs with species-specific dosage to each disease."""
+    try:
+        from api.drug_dictionary import DRUGS as _ALL_DRUGS
+    except Exception:
+        return
+
+    disease_lists = []
+    for key in ('suspected_diseases', 'possible_conditions'):
+        if key in result:
+            disease_lists.append(result[key])
+    by_phase = result.get('suspected_diseases_by_phase', {})
+    for phase_diseases in by_phase.values():
+        if isinstance(phase_diseases, list):
+            disease_lists.append(phase_diseases)
+
+    for diseases in disease_lists:
+        for disease in diseases:
+            treatment_text = (
+                (disease.get("treatment_ja", "") or "")
+                + " "
+                + (disease.get("treatment", "") or "")
+            ).lower()
+            if not treatment_text.strip():
+                continue
+            matched = []
+            for dr in _ALL_DRUGS:
+                dr_name = dr.get("name", "")
+                dr_name_ja = dr.get("name_ja", "")
+                if not ((dr_name and dr_name.lower() in treatment_text)
+                        or (dr_name_ja and dr_name_ja in treatment_text)):
+                    continue
+                entry = {
+                    "id": dr.get("id", ""),
+                    "name": dr_name,
+                    "name_ja": dr_name_ja,
+                    "category": dr.get("category", ""),
+                }
+                si = (dr.get("species_info") or {}).get(species)
+                if si:
+                    entry["dosage"] = si.get("dosage", "")
+                    entry["dosage_ja"] = si.get("dosage_ja", "")
+                    entry["safe"] = si.get("safe", True)
+                    entry["notes"] = si.get("notes", "")
+                    entry["notes_ja"] = si.get("notes_ja", "")
+                matched.append(entry)
+                if len(matched) >= 10:
+                    break
+            if matched:
+                disease["mentioned_drugs"] = matched
+
+
 @app.route('/api/analyze-symptoms', methods=['POST'])
 @ensure_json_response
 def api_analyze_symptoms():
     """症状チェック → 疾患・検査リスト（全動物種対応）"""
+    rate_err = _check_public_rate_limit()
+    if rate_err:
+        return rate_err
     if not SYMPTOM_CHECKER_AVAILABLE:
         return {'error': 'Symptom checker module not available'}, 500
 
@@ -606,6 +949,7 @@ def api_analyze_symptoms():
     vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
     vaccination_status = data.get('vaccination_status')  # "current" | "outdated" | "none"
     pain_score = data.get('pain_score')  # 0-4 (CSU Canine Acute Pain Scale)
+    lang = data.get('lang', '')  # "ja" or "en" for regional prevalence adjustments
 
     # Validate onset
     if onset and onset not in ('acute', 'subacute', 'chronic'):
@@ -682,7 +1026,12 @@ def api_analyze_symptoms():
                 gender=gender,
                 vaccines=vaccines,
                 vaccination_status=vaccination_status,
+                lang=lang,
             )
+
+        # Attach mentioned_drugs with species-specific dosage to each disease
+        _attach_mentioned_drugs(result, species or 'dog')
+
         return result
     except ValueError as ve:
         logger.error("Symptom analysis error: %s", ve, exc_info=True)

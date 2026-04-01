@@ -19,12 +19,14 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "scale_loss": "skin", "raised_scales": "skin", "ulcers": "skin",
     "redness_skin": "skin", "mucus_overproduction": "skin",
     "discoloration": "skin", "dark_coloration": "skin", "white_film": "skin",
-    "gold_dust": "skin", "lumps_nodules": "skin", "spots_black": "skin",
+    "gold_dust": "skin", "lumps_nodules": "skin",
+    "body_darkening": "skin", "fin_damage": "skin", "fin_discoloration": "skin",
+    "fin_erosion": "skin", "skin_ulcers": "skin",
     "worm_like_parasites": "parasites", "anchor_worm": "parasites",
     # 鰭
     "clamped_fins": "fins", "frayed_fins": "fins", "fin_hemorrhage": "fins",
     # 眼
-    "pop_eye": "eyes", "cloudy_eye": "eyes", "sunken_eye": "eyes",
+    "pop_eye": "eyes", "eye_bulging": "eye", "sunken_eye": "eyes",
     # 鰓
     "gill_redness": "gills", "gill_paleness": "gills", "gill_swelling": "gills",
     "gill_mucus": "gills", "rapid_gill_movement": "gills",
@@ -32,14 +34,15 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "flashing": "behavior", "lethargy": "behavior", "loss_of_appetite": "behavior",
     "gasping_surface": "behavior", "erratic_swimming": "behavior",
     "loss_of_balance": "behavior", "swimming_upside_down": "behavior",
-    "hiding": "behavior", "isolation": "behavior", "head_shaking": "behavior",
-    "spinning": "behavior",
+    "hiding": "behavior", "isolation": "behavior",
+    "abnormal_swimming": "behavioral", "appetite_loss": "general",
     # 腹部・体型
     "bloating": "body", "emaciation": "body", "dropsy": "body", "bent_spine": "body",
+    "hemorrhaging": "body",
     # 排泄
-    "white_stringy_feces": "digestive", "trailing_feces": "digestive",
+    "white_stringy_feces": "digestive",
     # 呼吸
-    "labored_breathing": "respiratory",
+    "labored_breathing": "respiratory", "pale_gills": "respiratory",
     # 繁殖
     "egg_binding": "reproductive",
     # 急変
@@ -61,16 +64,20 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "white_film": {"ja": "白い膜状の付着", "en": "White film on body"},
     "gold_dust": {"ja": "金粉状の付着（コショウ病）", "en": "Gold dust appearance"},
     "lumps_nodules": {"ja": "しこり・結節", "en": "Lumps / nodules"},
+    "body_darkening": {"ja": "体色暗化", "en": "Body darkening"},
+    "fin_damage": {"ja": "鰭損傷", "en": "Fin damage"},
+    "fin_discoloration": {"ja": "鰭変色", "en": "Fin discoloration"},
+    "fin_erosion": {"ja": "鰭びらん", "en": "Fin erosion"},
+    "skin_ulcers": {"ja": "皮膚潰瘍", "en": "Skin ulcers"},
     "worm_like_parasites": {"ja": "糸状の寄生虫が見える", "en": "Visible worm-like parasites"},
     "anchor_worm": {"ja": "イカリムシの付着", "en": "Anchor worm attached"},
-    "spots_black": {"ja": "黒い斑点", "en": "Black spots"},
     # 鰭・尾
     "clamped_fins": {"ja": "鰭をたたんでいる", "en": "Clamped fins"},
     "frayed_fins": {"ja": "鰭がボロボロ", "en": "Frayed / ragged fins"},
     "fin_hemorrhage": {"ja": "鰭の充血", "en": "Fin hemorrhage"},
     # 眼
     "pop_eye": {"ja": "眼球突出（ポップアイ）", "en": "Pop-eye (exophthalmia)"},
-    "cloudy_eye": {"ja": "目の白濁", "en": "Cloudy eye"},
+    "eye_bulging": {"ja": "眼球突出", "en": "Eye bulging"},
     "sunken_eye": {"ja": "眼球陥没", "en": "Sunken eye"},
     # 鰓
     "gill_redness": {"ja": "鰓の充血", "en": "Gill redness"},
@@ -88,18 +95,19 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "swimming_upside_down": {"ja": "転覆（逆さまに泳ぐ）", "en": "Swimming upside down"},
     "hiding": {"ja": "隠れて出てこない", "en": "Hiding behavior"},
     "isolation": {"ja": "群れから離れる", "en": "Isolation from group"},
-    "head_shaking": {"ja": "頭を振る", "en": "Head shaking"},
-    "spinning": {"ja": "旋回遊泳", "en": "Spinning / whirling"},
+    "abnormal_swimming": {"ja": "異常遊泳", "en": "Abnormal swimming"},
+    "appetite_loss": {"ja": "食欲低下", "en": "Appetite loss"},
     # 腹部・体型
     "bloating": {"ja": "腹部膨満", "en": "Abdominal bloating / swelling"},
     "emaciation": {"ja": "痩せ（やつれ）", "en": "Emaciation / wasting"},
     "dropsy": {"ja": "腹水・浮腫", "en": "Dropsy / edema"},
     "bent_spine": {"ja": "脊椎の湾曲", "en": "Bent / curved spine"},
+    "hemorrhaging": {"ja": "出血", "en": "Hemorrhaging"},
     # 排泄
     "white_stringy_feces": {"ja": "白い糸状の糞", "en": "White stringy feces"},
-    "trailing_feces": {"ja": "糞がぶら下がる", "en": "Trailing feces"},
     # 呼吸
     "labored_breathing": {"ja": "呼吸困難", "en": "Labored breathing"},
+    "pale_gills": {"ja": "鰓蒼白", "en": "Pale gills"},
     # 繁殖
     "egg_binding": {"ja": "過抱卵", "en": "Egg binding"},
     # 急変
@@ -127,7 +135,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "早期発見・治療で予後良好。重症例や鰓への大量寄生は致死的。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Columnaris Disease",
@@ -148,7 +156,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Fair with early treatment. Gill involvement or systemic spread significantly worsens prognosis.",
         "prognosis_ja": "早期治療で予後はやや良好。鰓病変や全身播種は予後を著しく悪化させる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Aeromonas / Motile Aeromonad Septicemia",
@@ -169,7 +177,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Poor once dropsy/pinecone scales develop. Early ulcerative lesions respond better to antibiotic therapy.",
         "prognosis_ja": "松かさ病・腹水発症後の予後は不良。初期の潰瘍性病変は抗菌薬治療に比較的よく反応する。",
         "onset_pattern": {"acute", "subacute", "chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Saprolegnia (Water Mold / Cotton Wool Disease)",
@@ -190,7 +198,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with early treatment if underlying cause is addressed. Extensive lesions covering >30% of body surface carry poor prognosis due to osmoregulatory collapse.",
         "prognosis_ja": "原因が除去されれば早期治療で予後良好。体表面積30%超の広範病変は浸透圧調節破綻により予後不良。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Velvet Disease (Oodinium / Piscinoodinium)",
@@ -211,7 +219,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with early detection and treatment. Heavy gill infestation can be rapidly fatal, especially in marine fish (Amyloodinium).",
         "prognosis_ja": "早期発見・治療で予後良好。鰓への重度寄生は急速に致死的、特に海水魚（アミルウーディニウム）。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Swim Bladder Disorder",
@@ -253,7 +261,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "一般に予後不良。早期の軽症例では回復の可能性があるが、重度の立鱗・腹水は治療困難。",
         "prognosis_ja": "一般に予後不良。早期の軽症例では回復の可能性があるが、重度の立鱗・腹水は治療困難。",
         "onset_pattern": {"subacute", "chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Anchor Worm (Lernaea)",
@@ -274,7 +282,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with prompt manual removal and wound care. Heavy infestations in small fish can be debilitating. Larval control is necessary to prevent reinfestation.",
         "prognosis_ja": "速やかな手作業除去と創傷ケアで予後良好。小型魚への大量寄生は衰弱を招く。再寄生防止には幼虫対策が必要。",
         "onset_pattern": {"subacute", "chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Fish Lice (Argulus)",
@@ -295,7 +303,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with treatment. Argulus is readily controlled with organophosphates. Recurrence is common without environmental control of free-swimming stages.",
         "prognosis_ja": "治療により予後良好。有機リン剤で効果的に駆除可能。遊泳期の環境対策なしでは再発しやすい。",
         "onset_pattern": {"subacute", "chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Gill Flukes (Dactylogyrus)",
@@ -316,7 +324,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with prompt antiparasitic treatment. Untreated heavy gill infestations can be fatal due to respiratory failure.",
         "prognosis_ja": "速やかな駆虫治療で予後良好。未治療の重度鰓寄生は呼吸不全により致死的となりうる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     # --- Additional diseases (batch 2) ---
     {
@@ -338,7 +346,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with treatment. Requires multiple treatments to break the reproductive cycle due to viviparous reproduction.",
         "prognosis_ja": "治療により予後良好。胎生のため生殖サイクル遮断に複数回の治療が必要。",
         "onset_pattern": {"subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Hole-in-the-Head Disease (HITH / HLLE)",
@@ -359,7 +367,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Chronic and slowly progressive. Early-stage lesions may heal with dietary correction and metronidazole. Advanced deep craters are irreversible and leave permanent scarring.",
         "prognosis_ja": "慢性かつ緩徐進行性。初期病変は食餌改善とメトロニダゾールで治癒しうる。進行した深いクレーターは不可逆的で永続的な瘢痕を残す。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Hexamita / Spironucleus (Internal Flagellates)",
@@ -380,7 +388,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Fair to good with early metronidazole treatment and dietary improvement. Advanced cases with systemic involvement carry guarded prognosis.",
         "prognosis_ja": "早期のメトロニダゾール治療と食餌改善でやや良好〜良好。全身播種を伴う進行例の予後は慎重。",
         "onset_pattern": {"subacute", "chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Mycobacteriosis (Fish Tuberculosis)",
@@ -422,7 +430,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good if caught early and water is corrected promptly. Chronic gill damage may persist. Severe acute exposure can cause mass mortality.",
         "prognosis_ja": "早期発見・速やかな水質是正で予後良好。慢性の鰓損傷は持続しうる。重度の急性暴露は大量死を招く。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Nitrite Poisoning (Brown Blood Disease)",
@@ -443,7 +451,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good if treated promptly with water changes and salt. Severe methemoglobinemia (>70% MetHb) is usually fatal.",
         "prognosis_ja": "速やかな換水と塩添加で予後良好。重度のメトヘモグロビン血症（MetHb 70%超）は通常致死的。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "pH Shock",
@@ -464,7 +472,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Depends on severity and speed of correction. Mild pH shifts are reversible. Acute crashes causing mass mortality are usually irreversible.",
         "prognosis_ja": "重症度と是正速度に依存。軽度のpH変動は可逆的。大量死を伴う急性の崩壊は通常不可逆。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Costia (Ichthyobodo)",
@@ -485,7 +493,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with prompt treatment. Heavy gill infestation in fry/juveniles can cause rapid mortality.",
         "prognosis_ja": "速やかな治療で予後良好。仔魚・稚魚の重度鰓寄生は急速な死亡を招きうる。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Trichodina",
@@ -506,7 +514,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Excellent once water quality is corrected. Trichodina rarely causes mortality on its own but indicates underlying husbandry issues that must be addressed.",
         "prognosis_ja": "水質改善により予後は極めて良好。トリコディナ単独での致死はまれだが、対処すべき飼育管理上の問題を示唆する。",
         "onset_pattern": {"subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Lymphocystis",
@@ -527,7 +535,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Excellent. Self-limiting disease that typically resolves in weeks to months. Rarely life-threatening unless lesions obstruct the mouth or gills.",
         "prognosis_ja": "予後は極めて良好。自然治癒する疾患で通常数週間〜数ヶ月で消退。口や鰓を閉塞しない限り生命を脅かすことはまれ。",
         "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Koi Herpesvirus Disease (KHV / CyHV-3)",
@@ -548,7 +556,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "予後極めて不良。生残魚はキャリアとなり感染源となる。",
         "prognosis_ja": "予後極めて不良。生残魚はキャリアとなり感染源となる。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Spring Viremia of Carp (SVC)",
@@ -569,7 +577,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Poor. Mortality rates of 30-70% are typical. Survivors may develop immunity but can remain carriers.",
         "prognosis_ja": "予後不良。致死率は通常30-70%。生残魚は免疫を獲得しうるがキャリアとなる可能性あり。",
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Neon Tetra Disease (Pleistophora)",
@@ -632,7 +640,7 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis": "Good with early copper treatment in a hospital tank. Eradication from display tanks requires 6+ weeks of fallow period (no fish). Untreated outbreaks in marine tanks often result in total fish loss.",
         "prognosis_ja": "治療用水槽での早期銅治療で予後良好。ディスプレイ水槽からの駆除には6週間以上の魚なし期間が必要。未治療の海水水槽での発症は全魚喪失に至ることが多い。",
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     # =========================================================================
     # ADDITIONAL DISEASES — BACTERIAL, VIRAL, FUNGAL
@@ -670,7 +678,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["water_quality_test", "skin_scraping_microscopy"],
         "onset_pattern": {"subacute", "chronic"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Viral Hemorrhagic Septicemia (VHS)",
@@ -703,7 +711,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["pcr", "virus_isolation", "histopathology", "serology"],
         "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
     {
         "name": "Furunculosis (Aeromonas salmonicida)",
@@ -737,7 +745,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "skin_scraping_microscopy", "pcr", "histopathology"],
         "onset_pattern": {"acute", "subacute"},
-        "age_predisposition": {"adult", "puppy", "young", "senior"},
+        "age_predisposition": {"adult", "young", "senior"},
     },
 ]
 

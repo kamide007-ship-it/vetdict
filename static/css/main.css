@@ -37,7 +37,7 @@ a:hover{text-decoration:underline}
 .logo-dict{color:var(--green)}
 .logo-sub{display:block;font-size:.7rem;font-weight:500;color:rgba(255,255,255,.75);letter-spacing:.5px;margin-top:-2px}
 .header-nav{display:flex;gap:4px;flex-wrap:wrap;position:relative}
-.header-nav button{color:rgba(255,255,255,.85);font-size:.82rem;padding:7px 14px;border-radius:8px;transition:background var(--transition-fast),color var(--transition-fast),transform var(--transition-fast);cursor:pointer;font-weight:500;border:none;background:transparent;font-family:var(--font);position:relative}
+.header-nav button{color:rgba(255,255,255,.85);font-size:.82rem;padding:10px 14px;min-height:44px;border-radius:8px;transition:background var(--transition-fast),color var(--transition-fast),transform var(--transition-fast);cursor:pointer;font-weight:500;border:none;background:transparent;font-family:var(--font);position:relative}
 .header-nav button:hover{background:rgba(255,255,255,.12);color:var(--white)}
 .header-nav button:active{transform:scale(.96)}
 .header-nav button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
@@ -102,6 +102,8 @@ a:hover{text-decoration:underline}
 .section-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .section-title::before{content:'';width:4px;height:18px;background:var(--green);border-radius:2px;display:inline-block}
 .species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.species-group-label{grid-column:1/-1;font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 0 2px;border-bottom:2px solid var(--green);margin-top:8px}
+.species-group-label:first-child{margin-top:0}
 .species-card{background:var(--white);border:2px solid var(--gray-200);border-radius:var(--radius-lg);padding:16px 10px;text-align:center;cursor:pointer;transition:all var(--transition-normal);min-height:48px;position:relative;overflow:hidden}
 .species-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(34,168,79,.04),rgba(26,48,104,.04));opacity:0;transition:opacity var(--transition-normal)}
 .species-card:hover{border-color:var(--navy-light);box-shadow:var(--shadow-md);transform:translateY(-4px)}
@@ -228,7 +230,7 @@ a:hover{text-decoration:underline}
 .lab-group{display:flex;flex-direction:column;gap:2px;position:relative}
 .lab-group label{font-size:.76rem;font-weight:600;color:var(--navy)}
 .lab-unit{color:var(--gray-500);font-size:.68rem;font-weight:400}
-.lab-group input{padding:6px 28px 6px 8px;border:1.5px solid var(--gray-200);border-radius:6px;font-size:.82rem;width:100%;box-sizing:border-box;transition:border-color .2s}
+.lab-group input{padding:10px 28px 10px 8px;min-height:44px;border:1.5px solid var(--gray-200);border-radius:6px;font-size:.82rem;width:100%;box-sizing:border-box;transition:border-color .2s}
 .lab-group input:focus{border-color:var(--green);outline:none}
 .lab-group input.lab-high{border-color:#e74c3c;background:#fff5f5}
 .lab-group input.lab-low{border-color:#2980b9;background:#ebf5fb}
@@ -266,7 +268,7 @@ a:hover{text-decoration:underline}
 
 /* --- A-Z nav --- */
 .az-nav{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:14px;justify-content:center}
-.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:6px 8px;border-radius:4px;font-size:.74rem;cursor:pointer;min-width:32px;min-height:32px;transition:background .15s,color .15s;font-weight:600;font-family:var(--font)}
+.az-nav button{background:var(--white);border:1px solid var(--gray-300);padding:8px 10px;border-radius:4px;font-size:.74rem;cursor:pointer;min-width:44px;min-height:44px;transition:background .15s,color .15s;font-weight:600;font-family:var(--font)}
 .az-nav button:hover,.az-nav button.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .az-mode-toggle{background:var(--green)!important;color:var(--white)!important;border-color:var(--green)!important;padding:4px 12px!important;border-radius:6px!important;margin-right:6px;font-size:.72rem!important;white-space:nowrap}
 .az-mode-toggle:hover{opacity:.85;background:var(--green)!important;color:var(--white)!important}
@@ -274,26 +276,19 @@ a:hover{text-decoration:underline}
 
 /* --- Disease DB --- */
 .disease-cat-header{padding:8px 14px;font-size:.82rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:1}
-[data-theme="dark"] .disease-cat-header{background:var(--gray-100);color:var(--gray-900);border-color:var(--gray-200)}
 .husbandry-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px}
-[data-theme="dark"] .husbandry-title{color:var(--gray-900)}
 .husbandry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
 .husbandry-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:14px;transition:box-shadow .2s}
 .husbandry-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.08)}
 .husbandry-card-icon{font-size:1.4rem;margin-bottom:4px}
 .husbandry-card-label{font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:4px}
 .husbandry-card-text{font-size:.82rem;color:var(--gray-700);line-height:1.5}
-[data-theme="dark"] .husbandry-card{background:var(--gray-100);border-color:var(--gray-200)}
-[data-theme="dark"] .husbandry-card-label{color:var(--gray-900)}
-[data-theme="dark"] .husbandry-card-text{color:var(--gray-800)}
 .husbandry-subtypes{margin-top:16px}
 .husbandry-subtype{margin-bottom:10px;border:1px solid var(--gray-200);border-radius:8px;overflow:hidden}
 .husbandry-subtype-title{padding:10px 14px;font-size:.88rem;font-weight:700;color:var(--navy);background:var(--gray-50);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px}
 .husbandry-subtype-title::before{content:"\25B6";font-size:.65rem;transition:transform .2s}
 .husbandry-subtype[open]>.husbandry-subtype-title::before{transform:rotate(90deg)}
 .husbandry-subtype .husbandry-grid{padding:12px}
-[data-theme="dark"] .husbandry-subtype{border-color:var(--gray-200)}
-[data-theme="dark"] .husbandry-subtype-title{background:var(--gray-100);color:var(--gray-900)}
 @media(max-width:600px){.husbandry-grid{grid-template-columns:1fr}}
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
 .disease-db-item:hover{background:var(--green-light)}
@@ -639,6 +634,21 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .scroll-top{transition:none}
 }
 
+/* --- Print styles --- */
+@media print{
+  .header,.hero,.sponsor-banner,.landing-chat,.species-section,.footer,
+  .share-widget,.feedback-widget,.print-results-btn,.az-nav,.hamburger,
+  .history-panel,.tab-nav-wrap{display:none!important}
+  body{background:#fff;font-size:11pt;padding:0}
+  .main-content{display:block!important}
+  #viewChecker{display:block!important}
+  #resultsArea{box-shadow:none;border:none}
+  .disease-result{break-inside:avoid;border:1px solid #ccc;margin-bottom:8pt}
+  .disease-detail{display:block!important;max-height:none!important;opacity:1!important}
+  .severity-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .disease-page,.index-page,.hub-page{padding:10pt}
+}
+
 /* --- Landing Chat --- */
 .landing-chat{padding:0 20px 30px;margin-top:-10px}
 .landing-chat .card{box-shadow:var(--shadow-lg);border:2px solid var(--navy);transition:all var(--transition-normal)}
@@ -670,6 +680,14 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .scroll-top{bottom:16px;right:16px;width:38px;height:38px}
   .chat-container{height:calc(100dvh - 280px);min-height:300px;max-height:500px}
   #chatGuidedContainer{height:calc(100dvh - 280px);min-height:300px;max-height:500px}
+  .guided-actions{max-height:220px;padding:6px}
+  .guided-category-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}
+  .guided-cat-btn{padding:8px 6px}
+  .guided-sym-btn{font-size:.74rem;padding:5px 10px}
+  .guided-action-btn{font-size:.78rem;padding:8px 14px}
+  .guided-context-opt{font-size:.74rem;padding:6px 10px}
+  .chat-mode-toggle{gap:4px;padding:6px}
+  .chat-mode-btn{font-size:.74rem;padding:6px 10px}
   body{padding-bottom:env(safe-area-inset-bottom)}
   /* Dark mode mobile nav dropdown */
 }
@@ -1198,8 +1216,6 @@ button.combination-item:focus-visible {
   font-weight: 600;
   font-size: 0.7rem;
 }
-
-/* Auto dark mode for users without manual toggle */
 
 /* Common diseases section */
 .common-diseases-section{margin-top:20px;padding:14px 16px;background:linear-gradient(135deg,#f0f7ff 0%,#e8f4f8 100%);border:1px solid #d0e3f0;border-radius:var(--radius);font-size:.82rem}

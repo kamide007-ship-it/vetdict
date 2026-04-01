@@ -37,6 +37,10 @@ try:
 except ImportError:
     from health_checker import DISEASES, SYMPTOM_IDS, SYMPTOMS
 
+# O(1) disease lookup index (avoids N+1 linear scans)
+_DISEASES_BY_ID: dict = {d["id"]: d for d in DISEASES}
+_SYMPTOMS_BY_ID: dict = {s["id"]: s for s in SYMPTOMS}
+
 # AI-powered symptom extraction (Phase 1)
 _AI_EXTRACTION_ENABLED = os.getenv("VETDICT_USE_AI_SYMPTOM_EXTRACTION", "false").lower() == "true"
 _AI_EXTRACTOR = None
@@ -186,6 +190,7 @@ for _sp in _GENERIC_SPECIES:
     _SPECIES_DATA[_sp] = {
         "diseases": _mod.DISEASES,
         "symptom_names": _mod.SYMPTOM_NAMES,
+        "symptom_categories": getattr(_mod, "SYMPTOM_CATEGORIES", {}),
     }
 
 # =============================================================================
@@ -682,6 +687,9 @@ SYMPTOM_ALIASES = {
     "穴が開いてる": "ulcers", "穴あき": "ulcers",
     "赤くなってる": "redness_skin", "充血": "redness_skin",
     "出血してる": "redness_skin", "赤い斑点": "redness_skin",
+    "体表が赤い": "redness_skin",
+    "体が赤くなってる": "redness_skin", "赤くなった": "redness_skin",
+    "腹水": "dropsy", "浮腫んでる": "dropsy", "むくんでる": "dropsy",
     "粘液": "mucus_overproduction", "ぬめり": "mucus_overproduction",
     "ヌルヌル": "mucus_overproduction",
     "色が薄くなった": "discoloration", "退色": "discoloration",
@@ -717,11 +725,11 @@ SYMPTOM_ALIASES = {
     "横になってる": "loss_of_balance", "listing": "loss_of_balance",
     "隠れてる": "hiding", "出てこない": "hiding",
     "群れから離れてる": "isolation",
-    "旋回": "spinning", "くるくる回る": "spinning",
+    "旋回": "erratic_swimming", "くるくる回る": "erratic_swimming",
     # 排泄
     "白い糞": "white_stringy_feces", "白い糸みたいな糞": "white_stringy_feces",
     "透明な糞": "white_stringy_feces",
-    "糞がぶら下がってる": "trailing_feces",
+    "糞がぶら下がってる": "white_stringy_feces",
     # 寄生虫
     "イカリムシ": "anchor_worm", "糸みたいなのがついてる": "anchor_worm",
     "虫がついてる": "worm_like_parasites",
@@ -1028,6 +1036,155 @@ SYMPTOM_ALIASES = {
     "bald patches": "hair_loss",
     "lumps on body": "lumps",
     "bad smell": "foul_odor",
+    # ── チンチラ固有エイリアス (Chinchilla-specific aliases) ──
+    "ファースリップ": "fur_loss_patches",
+    "毛が抜けた": "fur_loss_patches",
+    "毛が束で抜ける": "fur_loss_patches",
+    "毛が束で抜けた": "fur_loss_patches",
+    "毛が大量に抜けた": "fur_loss_patches",
+    "fur slip": "fur_loss_patches",
+    "毛噛み": "fur_chewing",
+    "毛を噛んでいる": "fur_chewing",
+    "毛を噛む": "fur_chewing",
+    "自分の毛を噛む": "fur_chewing",
+    "バーバリング": "fur_chewing",
+    "fur chewing": "fur_chewing",
+    "barbering": "fur_chewing",
+    "砂浴びしない": "poor_coat",
+    "砂浴びをしない": "poor_coat",
+    "被毛がベタベタ": "poor_coat",
+    "よだれで顎が濡れている": "wet_chin",
+    "顎が濡れている": "wet_chin",
+    "顎が汚れている": "wet_chin",
+    "歯が伸びている": "visible_tooth_overgrowth",
+    "歯ぎしりしている": "teeth_grinding",
+    "食べ方がおかしい": "difficulty_eating",
+    "えり好みする": "selective_eating",
+    "ペレットしか食べない": "selective_eating",
+    "牧草を食べない": "selective_eating",
+    "暑がっている": "excessive_panting",
+    "耳が赤い": "red_ears",
+    "ぐったりしている": "lethargy",
+    "ジャンプしない": "reluctance_to_move",
+    "ジャンプしなくなった": "reluctance_to_move",
+    "陰茎に毛が巻きついている": "fur_ring_penis",
+    "ペニスリング": "fur_ring_penis",
+    "penile fur ring": "fur_ring_penis",
+    "首が傾いている": "head_tilt",
+    "お尻が汚い": "soiled_perineum",
+    "お腹が膨れている": "abdominal_distension",
+    "糞が出ない": "reduced_fecal_output",
+    "便が出ない": "reduced_fecal_output",
+    "痙攣している": "seizures",
+    # ---------------------------------------------------------------
+    # 両生類用エイリアス (Amphibian-specific aliases) — 重複なし
+    # ---------------------------------------------------------------
+    # 皮膚・体表
+    "皮膚が白い": "white_patches_skin", "体が白くなった": "white_patches_skin",
+    "白いカビ": "cotton_like_growth", "綿みたいなのがついてる": "cotton_like_growth",
+    "体が赤い": "skin_redness", "お腹が赤い": "red_ventrum",
+    "足が赤い": "red_legs", "レッドレッグ": "red_legs",
+    "red leg": "red_legs", "red legs": "red_legs",
+    "皮がむけてる": "skin_shedding", "皮膚がただれてる": "skin_ulcers",
+    "皮膚に穴が開いてる": "skin_ulcers", "体にできものがある": "raised_nodules",
+    "黒いできもの": "dark_skin_nodules", "体がぬるぬる": "excessive_mucus",
+    "粘液が多い": "excessive_mucus",
+    # 行動・全身 (重複する一般的表現は既存エイリアスに委譲)
+    "太ってる": "obesity",
+    # 浮腫・膨満
+    "お腹が膨らんでる": "bloating", "体が膨れてる": "edema",
+    "パンパンに膨れてる": "edema", "風船みたい": "edema",
+    "balloon frog": "edema",
+    "水ぶくれ": "skin_blistering", "体が浮いてる": "buoyancy_problems",
+    "沈めない": "buoyancy_problems", "浮いたまま": "buoyancy_problems",
+    # 呼吸
+    "口を開けてる": "open_mouth_breathing",
+    # 鰓（アホロートル等）
+    "エラが縮んでる": "gill_shrinkage", "エラが小さくなった": "gill_shrinkage",
+    "エラがカールしてる": "gill_curling",
+    "エラにカビ": "cotton_like_growth",
+    # 消化器 (重複する一般的表現は既存エイリアスに委譲)
+    "フンが出ない": "constipation",
+    "おしりから何か出てる": "cloacal_prolapse",
+    # 骨格・四肢
+    "足が曲がってる": "limb_deformity",
+    "顎が変形してる": "jaw_deformity",
+    "後ろ足が動かない": "paralysis", "足が細い": "spindly_legs",
+    "指が黒くなった": "digit_necrosis", "指が取れた": "missing_digits",
+    # 眼
+    "目がくぼんでる": "sunken_eyes",
+    # 神経
+    "痙攣してる": "seizures",
+    "ふらふらしてる": "incoordination",
+    # 英語 (amphibian-specific)
+    "shedding too much": "excessive_shedding",
+    "skin peeling": "skin_shedding",
+    "bloated frog": "bloating",
+    "floating upside down": "buoyancy_problems",
+    "not metamorphosing": "metamorphosis_failure",
+    "won't transform": "metamorphosis_failure",
+    "gills shrinking": "gill_shrinkage",
+    "gill curl": "gill_curling",
+    "spindly legs": "spindly_legs",
+    "short tongue": "inability_to_feed",
+    "can't catch food": "inability_to_feed",
+    "chytrid": "skin_shedding",
+    "ツボカビ": "skin_shedding",
+    # ---------------------------------------------------------------
+    # スパースカバレッジ症状の補強 (Sparse coverage symptom aliases)
+    # ---------------------------------------------------------------
+    # 口腔
+    "mouth ulcer": "oral_ulcers", "mouth ulcers": "oral_ulcers",
+    "mouth sores": "oral_ulcers",
+    "mouth inflammation": "stomatitis", "oral inflammation": "stomatitis",
+    "口臭がひどい": "foul_breath", "halitosis": "foul_breath",
+    "飲水量が増えた": "increased_water_intake",
+    # 骨格・四肢
+    "足が変形してる": "bone_deformity", "骨が曲がってる": "bone_deformity",
+    "bent legs": "bone_deformity", "limb deformity": "bone_deformity",
+    "bowed legs": "bone_deformity",
+    "よろよろしている": "ataxia", "wobbly": "ataxia",
+    # 皮膚
+    "フケが多い": "dandruff", "フケが出る": "dandruff",
+    "かさぶたがある": "crusting",
+    "scabs": "crusting", "scabby": "crusting",
+    # 呼吸
+    "ゼーゼーいってる": "wheezing", "ヒューヒュー音がする": "wheezing",
+    "鼻水が出る": "nasal_discharge",
+    # 眼
+    "watery eyes": "epiphora", "tearing": "epiphora",
+    # 行動・神経
+    "ぐるぐる回る": "circling", "同じところを回る": "circling",
+    "頭を壁に押し付ける": "head_pressing",
+    "head pressing": "head_pressing", "体が震える": "tremors", "shivering": "tremors",
+    # 泌尿
+    "おしっこに血が混じる": "blood_in_urine", "おしっこが赤い": "blood_in_urine",
+    # ---------------------------------------------------------------
+    # 飼い主の日常表現（追加カバレッジ）
+    # ---------------------------------------------------------------
+    "血が出る": "bleeding", "出血": "bleeding", "血が止まらない": "bleeding",
+    "体重が減った": "weight_loss",
+    "ゴホゴホ": "coughing", "コンコン": "coughing",
+    "ブルブル震える": "tremors",
+    "腫れている": "swelling",
+    "おなかがゴロゴロ": "abdominal_pain",
+    "ヨダレ": "drooling",
+    "歩き方が変": "limping",
+    "ゲーゲー": "vomiting",
+    "水ばかり飲む": "increased_water_intake",
+    "丸まっている": "hunched_posture", "丸くなっている": "hunched_posture",
+    # English pet owner phrases (additional)
+    "runny eyes": "eye_discharge", "watery eye": "eye_discharge",
+    "bald spots": "fur_loss_patches", "bald patch": "fur_loss_patches",
+    "losing fur": "fur_loss_patches", "losing hair": "hair_loss",
+    "won't walk": "reluctance_to_move",
+    "stopped eating": "appetite_loss",
+    "throwing up blood": "bloody_stool",
+    "swollen eye": "eye_swelling", "puffy eye": "eye_swelling",
+    "keeps scratching": "itching", "constantly scratching": "itching",
+    "trouble breathing": "dyspnea", "hard to breathe": "dyspnea",
+    "peeing blood": "blood_in_urine",
+    "straining to poop": "straining_to_defecate",
 }
 
 
@@ -1283,8 +1440,9 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
         "teeth_grinding": ["bruxism", "dental_pain"],
         "abdominal_pain": ["abdominal_distension", "hunched_posture", "bloating"],
-        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
-        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
+        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
+        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "abdominal_pain", "dropsy"],
+        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen", "abdominal_pain", "dropsy"],
         # Neuro
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
         "fainting": ["collapse", "syncope"],
@@ -1432,7 +1590,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # Amphibian
         "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
         "red_ventrum": ["red_legs", "skin_redness", "hemorrhage"],
-        "edema": ["swelling", "bloating", "ascites"],
+        "edema": ["swelling", "bloating", "ascites", "dropsy"],
         # Effusion
         "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
         "pleural_effusion": ["effusion", "labored_breathing"],
@@ -1453,19 +1611,25 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     # Phase 1: Longest-match-first alias matching (aliases → species symptom IDs)
     # Track consumed character positions to avoid substring double-matching
     # (e.g. "外陰部が腫れてる" should not also match "腫れてる")
+    # Supports multiple occurrences of the same alias in different positions
     _sorted_aliases = sorted(SYMPTOM_ALIASES.keys(), key=len, reverse=True)
     _consumed: set[int] = set()
     for alias in _sorted_aliases:
-        pos = text_lower.find(alias)
-        if pos >= 0:
+        start = 0
+        while start <= len(text_lower) - len(alias):
+            pos = text_lower.find(alias, start)
+            if pos < 0:
+                break
             alias_range = set(range(pos, pos + len(alias)))
             if alias_range & _consumed:
+                start = pos + 1
                 continue
             symptom_id = SYMPTOM_ALIASES[alias]
             resolved = _resolve_id(symptom_id)
             if resolved:
                 matched.add(resolved)
-                _consumed |= alias_range
+            _consumed |= alias_range
+            start = pos + len(alias)
 
     # Phase 2: Direct symptom name matches (ja/en)
     for sym_id, names in symptom_names.items():
@@ -1502,6 +1666,7 @@ def _match_species_symptoms_to_diseases(
     pain_score: int | None = None,
     lab_values: dict | None = None,
     breed: str | None = None,
+    lang: str = "",
 ) -> list[dict]:
     """Match symptom IDs to species-specific diseases using advanced weighted scoring.
 
@@ -1531,7 +1696,8 @@ def _match_species_symptoms_to_diseases(
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
         "reduced_fecal_output": ["small_fecal_pellets", "constipation", "decreased_fecal_output"],
         "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
-        "bloating": ["abdominal_distension", "abdominal_pain"], "abdominal_distension": ["bloating", "abdominal_pain"],
+        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
+        "bloating": ["abdominal_distension", "abdominal_pain", "dropsy"], "abdominal_distension": ["bloating", "abdominal_pain", "dropsy"],
         "abdominal_pain": ["bloating", "abdominal_distension", "hunched_posture"],
         "hunched_posture": ["abdominal_pain"],
         "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
@@ -1624,7 +1790,7 @@ def _match_species_symptoms_to_diseases(
         "crop_stasis": ["crop_swelling", "ingluvitis"],
         "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
         "red_ventrum": ["red_legs", "skin_redness"],
-        "edema": ["swelling", "bloating", "ascites"],
+        "edema": ["swelling", "bloating", "ascites", "dropsy"],
         "swelling": ["edema", "facial_swelling", "eye_swelling"],
         "rough_coat": ["poor_coat", "dry_skin"],
         "scaly_legs": ["leg_scales", "scaly_face"],
@@ -1639,9 +1805,10 @@ def _match_species_symptoms_to_diseases(
     symptom_set = expanded_set
     diseases = sp_data["diseases"]
 
-    # --- Load prevalence data for this species ---
+    # --- Load prevalence data for this species (region-aware) ---
     from api.species import prevalence_data as _prev_mod
-    _prevalence = _prev_mod.SPECIES_PREVALENCE.get(species, {})
+    _region = "jp" if lang == "ja" else ("intl" if lang else "")
+    _prevalence = _prev_mod.get_prevalence_for_species(species, region=_region)
     _PREVALENCE_MULTIPLIER = {
         "very_common": 1.35,
         "common": 1.125,
@@ -1742,6 +1909,16 @@ def _match_species_symptoms_to_diseases(
         # --- Logistic confidence calibration ---
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
         confidence = min(round(raw_logistic * 100, 1), 95.0)
+
+        # --- Low-information confidence cap ---
+        # When user provides very few symptoms, cap confidence to prevent
+        # false sense of certainty from non-specific presentations.
+        # Use original symptom count (before synonym expansion).
+        user_symptom_count = len(symptom_ids)
+        if user_symptom_count == 1:
+            confidence = min(confidence, 35.0)
+        elif user_symptom_count == 2:
+            confidence = min(confidence, 55.0)
 
         matches.append({
             "disease_id": disease.get("name", ""),
@@ -2772,7 +2949,7 @@ _DEFAULT_SUPPLEMENTS = [
 
 def get_treatment_recommendations_for_disease(disease_id: str, breed_id=None, age_years=None) -> dict:
     """Get care guide including supplement reference and test information."""
-    disease_record = next((d for d in DISEASES if d["id"] == disease_id), {})
+    disease_record = _DISEASES_BY_ID.get(disease_id, {})
 
     if disease_id:
         supplements = DISEASE_SUPPLEMENTS.get(disease_id, _DEFAULT_SUPPLEMENTS)
@@ -2929,6 +3106,46 @@ def match_symptoms_to_diseases(
 # FOLLOW-UP QUESTION BUILDER
 # =============================================================================
 
+
+def _extract_mentioned_drugs(disease: dict, species: str) -> list:
+    """Extract drugs mentioned in treatment text with species-specific dosage."""
+    treatment_text = (
+        (disease.get("treatment_ja") or "")
+        + " "
+        + (disease.get("treatment") or "")
+    ).lower()
+    if not treatment_text.strip():
+        return []
+    try:
+        from api.drug_dictionary import DRUGS as _ALL_DRUGS
+    except Exception:
+        return []
+    matched = []
+    for dr in _ALL_DRUGS:
+        dr_name = dr.get("name", "")
+        dr_name_ja = dr.get("name_ja", "")
+        if not ((dr_name and dr_name.lower() in treatment_text)
+                or (dr_name_ja and dr_name_ja in treatment_text)):
+            continue
+        entry = {
+            "id": dr.get("id", ""),
+            "name": dr_name,
+            "name_ja": dr_name_ja,
+            "category": dr.get("category", ""),
+        }
+        si = (dr.get("species_info") or {}).get(species)
+        if si:
+            entry["dosage"] = si.get("dosage", "")
+            entry["dosage_ja"] = si.get("dosage_ja", "")
+            entry["safe"] = si.get("safe", True)
+            entry["notes"] = si.get("notes", "")
+            entry["notes_ja"] = si.get("notes_ja", "")
+        matched.append(entry)
+        if len(matched) >= 10:
+            break
+    return matched
+
+
 def _build_follow_up_questions(
     onset: str | None,
     age: float | None,
@@ -3062,6 +3279,7 @@ def diagnostic_chat():
     pain_score = data.get("pain_score")       # int 1-10 (optional)
     lab_values = data.get("lab_values")       # dict (optional)
     breed = data.get("breed")                 # str (optional)
+    lang = data.get("lang", "")              # "ja" or "en" for regional prevalence
 
     if not message:
         return jsonify({"error": "Message required"}), 400
@@ -3092,6 +3310,7 @@ def diagnostic_chat():
         disease_matches = _match_species_symptoms_to_diseases(
             all_symptoms, species,
             pain_score=pain_score, lab_values=lab_values, breed=breed,
+            lang=lang,
         )
         sp_names = _SPECIES_DATA[species]["symptom_names"]
         symptom_details = [
@@ -3113,9 +3332,9 @@ def diagnostic_chat():
         symptom_details = [
             {
                 "id": sid,
-                "name_ja": next((s["name_ja"] for s in SYMPTOMS if s["id"] == sid), ""),
-                "name_en": next((s["name_en"] for s in SYMPTOMS if s["id"] == sid), ""),
-                "category": next((s["category"] for s in SYMPTOMS if s["id"] == sid), ""),
+                "name_ja": _SYMPTOMS_BY_ID.get(sid, {}).get("name_ja", ""),
+                "name_en": _SYMPTOMS_BY_ID.get(sid, {}).get("name_en", ""),
+                "category": _SYMPTOMS_BY_ID.get(sid, {}).get("category", ""),
             }
             for sid in all_symptoms
         ]
@@ -3142,10 +3361,14 @@ def diagnostic_chat():
             treatments = {"supplements": [], "primary_care_plan_ja": "獣医師にご相談ください。",
                           "recommended_tests": disease.get("recommended_tests", [])}
 
+        # Extract mentioned drugs from treatment text
+        mentioned_drugs = _extract_mentioned_drugs(disease, species)
+
         enhanced_candidates.append({
             **disease,
             "reasoning": reasoning,
             "treatment_recommendations": treatments,
+            "mentioned_drugs": mentioned_drugs,
             "confidence_level": f"{int(disease['similarity_score'] * 100)}%"
         })
 
@@ -3173,6 +3396,11 @@ def diagnostic_chat():
         )
 
     # Build response
+    low_info_warning = None
+    if len(all_symptoms) == 1:
+        low_info_warning = "症状が1つのみのため、信頼度を制限しています。追加の症状を入力すると精度が向上します。"
+    elif len(all_symptoms) == 2:
+        low_info_warning = "症状が2つのため、信頼度に上限を設けています。さらに症状を追加すると精度が向上します。"
     response = {
         "response": response_text,
         "user_message": message,
@@ -3183,6 +3411,7 @@ def diagnostic_chat():
         "disease_candidates": enhanced_candidates,
         "total_candidates": len(disease_matches),
         "species_guidance": guidance_line,
+        "low_info_warning": low_info_warning,
         "breed_context": breed_id,
         "breed": breed,
         "pain_score": pain_score,
@@ -3263,8 +3492,8 @@ def differential_analysis():
     if not disease_id_1 or not disease_id_2:
         return jsonify({"error": "Both disease IDs required"}), 400
 
-    disease_1 = next((d for d in DISEASES if d["id"] == disease_id_1), None)
-    disease_2 = next((d for d in DISEASES if d["id"] == disease_id_2), None)
+    disease_1 = _DISEASES_BY_ID.get(disease_id_1)
+    disease_2 = _DISEASES_BY_ID.get(disease_id_2)
 
     if not disease_1 or not disease_2:
         return jsonify({"error": "One or both diseases not found"}), 404
@@ -3327,7 +3556,7 @@ def get_treatment_plan():
     if not disease_id:
         return jsonify({"error": "Disease ID required"}), 400
 
-    disease = next((d for d in DISEASES if d["id"] == disease_id), None)
+    disease = _DISEASES_BY_ID.get(disease_id)
 
     if not disease:
         return jsonify({"error": "Disease not found"}), 404
@@ -3670,9 +3899,10 @@ def _get_species_symptoms_with_categories(species: str) -> list[dict]:
             for s in SYMPTOMS
         ]
     sym_names = sp_data["symptom_names"]
+    sym_cats = sp_data.get("symptom_categories", {})
     return [
         {"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),
-         "category": "other"}
+         "category": sym_cats.get(sid, "other")}
         for sid, v in sym_names.items()
     ]
 
@@ -3761,6 +3991,7 @@ def consultation():
     pain_score = data.get("pain_score")
     lab_values = data.get("lab_values")
     breed = data.get("breed")
+    lang = data.get("lang", "")              # "ja" or "en" for regional prevalence
 
     sp_label = SPECIES_LABELS.get(species, {"ja": species, "en": species})
     all_symptoms = _get_species_symptoms_with_categories(species)
@@ -3829,8 +4060,8 @@ def consultation():
                 "categories": [
                     {
                         "id": cat_id,
-                        "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id})["ja"],
-                        "name_en": _CATEGORY_LABELS.get(cat_id, {"en": cat_id})["en"],
+                        "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["ja"],
+                        "name_en": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["en"],
                         "symptom_count": len(syms),
                     }
                     for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1]))
@@ -3845,6 +4076,7 @@ def consultation():
             disease_matches = _match_species_symptoms_to_diseases(
                 selected_symptoms, species,
                 pain_score=pain_score, lab_values=lab_values, breed=breed,
+                lang=lang,
             )
         else:
             disease_matches = match_symptoms_to_diseases(
@@ -3955,50 +4187,49 @@ def consultation():
     # ------------------------------------------------------------------
     if phase == "finalize":
         # Use the same diagnosis engine as the checkbox system for accuracy parity
-        if species in _SPECIES_DATA or species == "dog":
-            try:
-                from api.species_analyzer import analyze_species_symptoms
-                result = analyze_species_symptoms(
-                    species=species,
-                    symptoms=selected_symptoms,
-                    onset=onset,
-                    age_years=age_years,
-                    lab_values=lab_values,
-                    breed=breed,
-                    pain_score=pain_score,
+        try:
+            from api.species_analyzer import analyze_species_symptoms
+            result = analyze_species_symptoms(
+                species=species,
+                symptoms=selected_symptoms,
+                onset=onset,
+                age_years=age_years,
+                lab_values=lab_values,
+                breed=breed,
+                pain_score=pain_score,
+            )
+        except (ImportError, Exception) as exc:
+            # Fallback to chat engine
+            logger.warning("Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc)
+            if species == "horse" and EQUINE_AVAILABLE:
+                disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
+            elif species in _SPECIES_DATA:
+                disease_matches = _match_species_symptoms_to_diseases(
+                    selected_symptoms, species,
+                    pain_score=pain_score, lab_values=lab_values, breed=breed,
+                    lang=lang,
                 )
-            except (ImportError, Exception):
-                # Fallback to chat engine
-                if species == "horse" and EQUINE_AVAILABLE:
-                    disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
-                elif species in _SPECIES_DATA:
-                    disease_matches = _match_species_symptoms_to_diseases(
-                        selected_symptoms, species,
-                        pain_score=pain_score, lab_values=lab_values, breed=breed,
-                    )
-                else:
-                    disease_matches = match_symptoms_to_diseases(
-                        selected_symptoms,
-                        pain_score=pain_score, lab_values=lab_values, breed=breed,
-                    )
-                result = {
-                    "suspected_diseases": [
-                        {
-                            "name": d.get("name_en", d.get("disease_id", "")),
-                            "name_ja": d.get("name_ja", ""),
-                            "match_percent": round(d.get("similarity_score", 0) * 100),
-                            "matching_symptoms": d.get("matched_symptoms", []),
-                            "total_symptoms": len(d.get("matched_symptoms", [])) + len(d.get("additional_disease_symptoms", [])),
-                            "severity": d.get("severity", "low"),
-                            "description_ja": d.get("description_ja", ""),
-                            "description": d.get("description", d.get("description_en", "")),
-                            "recommended_tests": d.get("recommended_tests", []),
-                        }
-                        for d in disease_matches[:10]
-                    ],
-                }
-        else:
-            result = {"suspected_diseases": []}
+            else:
+                disease_matches = match_symptoms_to_diseases(
+                    selected_symptoms,
+                    pain_score=pain_score, lab_values=lab_values, breed=breed,
+                )
+            result = {
+                "suspected_diseases": [
+                    {
+                        "name": d.get("name_en", d.get("disease_id", "")),
+                        "name_ja": d.get("name_ja", ""),
+                        "match_percent": round(d.get("similarity_score", 0) * 100),
+                        "matching_symptoms": d.get("matched_symptoms", []),
+                        "total_symptoms": len(d.get("matched_symptoms", [])) + len(d.get("additional_disease_symptoms", [])),
+                        "severity": d.get("severity", "low"),
+                        "description_ja": d.get("description_ja", ""),
+                        "description": d.get("description", d.get("description_en", "")),
+                        "recommended_tests": d.get("recommended_tests", []),
+                    }
+                    for d in disease_matches[:10]
+                ],
+            }
 
         # Build symptom details
         sym_name_map = {s["id"]: s for s in all_symptoms}

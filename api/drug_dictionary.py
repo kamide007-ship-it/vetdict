@@ -21,6 +21,7 @@ from api.drug_batch_3 import SPECIES_INFO_PATCH
 from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 from api.drug_batch_5 import DRUGS_BATCH_5, SPECIES_INFO_PATCH_5
 from api.drug_batch_6 import DRUG_INTERACTIONS_PATCH_6, DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
+from api.drug_batch_7 import CHINCHILLA_SPECIES_PATCH
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -171,7 +172,7 @@ DRUGS: List[Dict[str, Any]] = [
         "mechanism_ja": "ニトロイミダゾール系。嫌気性菌とプロトゾアのDNA合成を阻害する。",
         "species_info": {
             "dog": {"safe": True, "dosage": "10-15 mg/kg PO q12h", "dosage_ja": "10-15 mg/kg 経口 12時間毎", "notes": "Neurotoxicity at high doses or prolonged use. Bitter taste.", "notes_ja": "高用量や長期投与で神経毒性。苦味がある。"},
-            "cat": {"safe": True, "dosage": "10-15 mg/kg PO q12h", "dosage_ja": "10-15 mg/kg 経口 12時間毎", "notes": "Cats more sensitive to neurotoxicity. Use lower doses.", "notes_ja": "猫は神経毒性に敏感。低用量で使用。"},
+            "cat": {"safe": True, "dosage": "10-15 mg/kg PO q24h (or 5-7.5 mg/kg q12h; max 7.5 mg/kg/dose)", "dosage_ja": "10-15 mg/kg 経口 24時間毎（または5-7.5 mg/kg 12時間毎。1回最大7.5 mg/kg）", "notes": "CATS SENSITIVE — max 7.5 mg/kg/dose. Neurotoxicity (ataxia, seizures) at higher doses or >5 days. Stop immediately if neurological signs appear.", "notes_ja": "【猫は神経毒性に敏感】1回7.5 mg/kgを超えないこと。高用量や5日以上の投与で運動失調・痙攣のリスク。神経症状が出たら直ちに中止。"},
             "horse": {"safe": True, "dosage": "15-25 mg/kg PO q6-8h", "dosage_ja": "15-25 mg/kg 経口 6-8時間毎", "notes": "Used for anaerobic infections, clostridial diseases", "notes_ja": "嫌気性感染症・クロストリジウム症に使用"},
             "rabbit": {"safe": True, "dosage": "20 mg/kg PO q12h", "dosage_ja": "20 mg/kg 経口 12時間毎", "notes": "Use with caution; monitor for GI disturbance", "notes_ja": "注意して使用。消化器症状を観察"},
             "guinea_pig": {"safe": True, "dosage": "20 mg/kg PO q12h", "dosage_ja": "20 mg/kg 経口 12時間毎", "notes": "Use with caution", "notes_ja": "注意して使用"},
@@ -1945,6 +1946,20 @@ for _drug_id, _interactions in DRUG_INTERACTIONS_PATCH_6.items():
             _drug_index[_drug_id]["drug_interactions"] = _interactions
 
 
+# バッチ7 チンチラ species_info パッチを適用
+for _drug_id, _species_patch in CHINCHILLA_SPECIES_PATCH.items():
+    if _drug_id in _drug_index:
+        _target = _drug_index[_drug_id].setdefault("species_info", {})
+        for _sp, _info in _species_patch.items():
+            if _sp not in _target:
+                _target[_sp] = _info
+
+# Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
+_DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
+for _d in DRUGS:
+    _cat = _d.get("category", "")
+    _DRUG_COUNT_BY_CATEGORY[_cat] = _DRUG_COUNT_BY_CATEGORY.get(_cat, 0) + 1
+
 # ---------------------------------------------------------------------------
 # 検索・フィルタ関数
 # ---------------------------------------------------------------------------
@@ -2036,7 +2051,7 @@ def api_drug_categories():
     """薬品カテゴリ一覧を返す。"""
     cats = []
     for cat_id, names in DRUG_CATEGORIES.items():
-        count = len([d for d in DRUGS if d["category"] == cat_id])
+        count = _DRUG_COUNT_BY_CATEGORY.get(cat_id, 0)
         cats.append({"id": cat_id, "name_ja": names["ja"], "name_en": names["en"], "count": count})
     cats.sort(key=lambda c: c["count"], reverse=True)
     return jsonify({"categories": cats, "total_drugs": len(DRUGS)})

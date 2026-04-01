@@ -1509,6 +1509,7 @@ def analyze_symptoms(
     gender: str | None = None,
     vaccines: list[str] | None = None,
     vaccination_status: str | None = None,
+    pain_score: int | None = None,
 ) -> dict:
     """Analyze a list of symptom IDs and return suspected diseases, tests,
     severity assessment, and general advice.
@@ -1972,6 +1973,7 @@ def analyze_symptoms(
         "vaccination_status": vaccination_status,
         "vaccination_adjustment_applied": vaccination_adjustment_applied,
         "symptom_names": symptom_names_lookup,
+        "pain_score": pain_score,
     }
 
 

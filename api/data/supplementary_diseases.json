@@ -6164,7 +6164,6 @@
       "hair_loss",
       "itching",
       "pain",
-      "pruritus",
       "skin_lesions",
       "skin_redness",
       "tail_injury"
@@ -6194,7 +6193,7 @@
       "foot_sores",
       "hair_loss",
       "pain",
-      "pruritus",
+      "itching",
       "skin_lesions",
       "skin_redness",
       "tail_injury"
@@ -6224,7 +6223,7 @@
       "foot_sores",
       "hair_loss",
       "pain",
-      "pruritus",
+      "itching",
       "skin_lesions",
       "skin_redness",
       "tail_injury"
@@ -6255,7 +6254,6 @@
       "hair_loss",
       "itching",
       "pain",
-      "pruritus",
       "skin_lesions",
       "skin_redness",
       "tail_injury"
@@ -7727,7 +7725,7 @@
       "foot_sores",
       "hair_loss",
       "pain",
-      "pruritus",
+      "itching",
       "skin_lesions",
       "skin_redness",
       "tail_injury"
@@ -9930,7 +9928,7 @@
       "hair_loss",
       "lameness",
       "pain",
-      "pruritus",
+      "itching",
       "reduced_activity",
       "skin_lesions",
       "skin_redness",
@@ -10082,7 +10080,7 @@
       "foot_sores",
       "hair_loss",
       "itching",
-      "lameness",
+      "limping",
       "limping",
       "redness",
       "skin_lump",
@@ -10200,7 +10198,7 @@
     "name_ja": "鼓脹症（胃鼓脹）（Guinea Pig）",
     "species": "Guinea Pig",
     "symptoms": [
-      "abdominal_distension",
+      "bloated_abdomen",
       "abdominal_pain",
       "appetite_loss",
       "bloated_abdomen",
@@ -11278,7 +11276,7 @@
     "name_ja": "モルモット疥癬（Guinea Pig）",
     "species": "Guinea Pig",
     "symptoms": [
-      "crusting",
+      "crusty_skin",
       "dehydration",
       "diarrhea",
       "hair_loss",
@@ -11339,7 +11337,7 @@
     "name_ja": "ニキビダニ症（Guinea Pig）",
     "species": "Guinea Pig",
     "symptoms": [
-      "crusting",
+      "crusty_skin",
       "dehydration",
       "diarrhea",
       "hair_loss",
@@ -11854,7 +11852,7 @@
     "name_ja": "子宮内膜炎（Guinea Pig）",
     "species": "Guinea Pig",
     "symptoms": [
-      "abdominal_distension",
+      "bloated_abdomen",
       "bilateral_hair_loss",
       "bloated_abdomen",
       "crusty_nipples",
@@ -11884,7 +11882,7 @@
     "name_ja": "偽妊娠（Guinea Pig）",
     "species": "Guinea Pig",
     "symptoms": [
-      "abdominal_distension",
+      "bloated_abdomen",
       "bilateral_hair_loss",
       "bloated_abdomen",
       "crusty_nipples",
@@ -12376,7 +12374,7 @@
     "symptoms": [
       "distress_vocalizations",
       "eye_discharge",
-      "lameness",
+      "limping",
       "limping",
       "pain",
       "pain_on_touch",
@@ -12408,7 +12406,7 @@
     "symptoms": [
       "distress_vocalizations",
       "eye_discharge",
-      "lameness",
+      "limping",
       "limping",
       "pain",
       "pain_on_touch",
@@ -12565,7 +12563,7 @@
       "appetite_loss",
       "bloated_abdomen",
       "hair_loss",
-      "lameness",
+      "limping",
       "lethargy",
       "mammary_mass",
       "skin_lump",
@@ -14057,7 +14055,7 @@
     "symptoms": [
       "distress_vocalizations",
       "eye_discharge",
-      "lameness",
+      "limping",
       "limping",
       "pain",
       "pain_on_touch",
@@ -14118,7 +14116,7 @@
     "species": "Guinea Pig",
     "symptoms": [
       "joint_swelling",
-      "lameness",
+      "limping",
       "lethargy",
       "limping",
       "reluctance_to_move",
@@ -15655,7 +15653,7 @@
     "symptoms": [
       "bleeding",
       "fecal_incontinence",
-      "lameness",
+      "limping",
       "non_weight_bearing",
       "pain",
       "reduced_activity",
@@ -15687,7 +15685,7 @@
     "symptoms": [
       "bleeding",
       "fecal_incontinence",
-      "lameness",
+      "limping",
       "non_weight_bearing",
       "pain",
       "reduced_activity",
@@ -15836,7 +15834,7 @@
       "abdominal_distension",
       "appetite_loss",
       "behavioral_changes",
-      "lameness",
+      "limping",
       "lethargy",
       "respiratory_distress",
       "skin_masses",
@@ -15930,7 +15928,7 @@
       "abdominal_distension",
       "appetite_loss",
       "behavioral_changes",
-      "lameness",
+      "limping",
       "lethargy",
       "respiratory_distress",
       "skin_masses",
@@ -17672,7 +17670,7 @@
     "symptoms": [
       "bleeding",
       "fecal_incontinence",
-      "lameness",
+      "limping",
       "non_weight_bearing",
       "pain",
       "reduced_activity",
@@ -18344,7 +18342,7 @@
       "redness",
       "respiratory_distress",
       "skin_crusting",
-      "skin_masses",
+      "skin_mass",
       "weight_loss"
     ],
     "description": "Dermatophytosis in Ferret",
@@ -18683,7 +18681,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -18714,7 +18711,7 @@
       "blood_in_urine",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
+      "excessive_thirst",
       "straining_to_urinate",
       "vocalization_during_urination",
       "weight_loss"
@@ -18776,7 +18773,7 @@
       "excessive_urination",
       "frequent_urination",
       "lethargy",
-      "polydipsia",
+      "excessive_thirst",
       "straining_to_urinate",
       "vocalization_during_urination",
       "weight_loss"
@@ -20255,7 +20252,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -20315,7 +20311,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -20345,7 +20340,6 @@
       "excessive_thirst",
       "excessive_urination",
       "lethargy",
-      "polydipsia",
       "vocalization_during_urination",
       "weight_loss"
     ],
@@ -21309,7 +21303,7 @@
       "redness",
       "respiratory_distress",
       "skin_crusting",
-      "skin_masses",
+      "skin_mass",
       "weight_loss"
     ],
     "description": "Dermatophytosis (Microsporum) in Ferret",
@@ -21549,7 +21543,7 @@
       "crusting",
       "diarrhea",
       "flaky_skin",
-      "hair_loss",
+      "alopecia",
       "lethargy",
       "quill_loss",
       "scratching",
@@ -21581,7 +21575,7 @@
       "crusting",
       "diarrhea",
       "flaky_skin",
-      "hair_loss",
+      "alopecia",
       "lethargy",
       "quill_loss",
       "scratching",
@@ -21613,7 +21607,7 @@
       "crusting",
       "diarrhea",
       "flaky_skin",
-      "hair_loss",
+      "alopecia",
       "lethargy",
       "quill_loss",
       "scratching",
@@ -21800,7 +21794,7 @@
       "abdominal_distension",
       "appetite_loss",
       "drooling",
-      "hair_loss",
+      "alopecia",
       "jaundice",
       "lethargy",
       "skin_mass",
@@ -22630,7 +22624,7 @@
     "symptoms": [
       "dull_quills",
       "flaky_skin",
-      "hair_loss",
+      "alopecia",
       "scratching",
       "skin_lesions",
       "skin_redness"
@@ -22658,7 +22652,7 @@
     "symptoms": [
       "dull_quills",
       "flaky_skin",
-      "hair_loss",
+      "alopecia",
       "scratching",
       "skin_lesions"
     ],
@@ -22960,7 +22954,7 @@
     "symptoms": [
       "dull_quills",
       "flaky_skin",
-      "hair_loss",
+      "alopecia",
       "lameness",
       "scratching",
       "skin_lesions",
@@ -23261,8 +23255,8 @@
     "symptoms": [
       "appetite_loss",
       "dehydration",
-      "excessive_thirst",
-      "excessive_urination",
+      "polydipsia",
+      "polyuria",
       "lethargy",
       "pain",
       "straining_to_urinate",
@@ -23291,10 +23285,10 @@
     "symptoms": [
       "abdominal_pain",
       "appetite_loss",
-      "blood_in_urine",
+      "bloody_urine",
       "dehydration",
-      "excessive_thirst",
-      "excessive_urination",
+      "polydipsia",
+      "polyuria",
       "lethargy",
       "pain",
       "straining_to_urinate",
@@ -24367,7 +24361,6 @@
       "crusting",
       "crusting_skin",
       "flaky_skin",
-      "hair_loss",
       "quill_base_crusting",
       "quill_loss",
       "skin_flaking",
@@ -24457,7 +24450,7 @@
     "name_ja": "ストレス性皮膚炎（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "hair_loss",
       "itching",
       "lethargy",
@@ -24488,7 +24481,7 @@
     "name_ja": "カルシウム欠乏症（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "lameness",
       "lethargy",
       "pain",
@@ -24519,7 +24512,7 @@
     "name_ja": "ビタミンD欠乏症（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "lameness",
       "lethargy",
       "pain",
@@ -24641,7 +24634,7 @@
     "name_ja": "ストレス性脱毛（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "hair_loss",
       "lethargy",
       "over_grooming",
@@ -24730,7 +24723,7 @@
     "name_ja": "ランピージョー（下顎膿瘍）（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "diarrhea",
       "discharge",
       "fever",
@@ -24760,7 +24753,7 @@
     "name_ja": "歯科膿瘍（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "diarrhea",
       "discharge",
       "drooling",
@@ -24792,7 +24785,7 @@
     "name_ja": "歯のう蝕（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "bad_breath",
       "difficulty_eating",
       "drooling",
@@ -24822,7 +24815,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_pain",
-      "appetite_loss",
+      "poor_appetite",
       "dehydration",
       "diarrhea",
       "discharge",
@@ -24853,7 +24846,7 @@
     "name_ja": "下痢（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "dehydration",
       "diarrhea",
       "discharge",
@@ -24883,7 +24876,7 @@
     "name_ja": "サルモネラ症（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "diarrhea",
       "discharge",
       "fever",
@@ -24914,7 +24907,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_pain",
-      "appetite_loss",
+      "poor_appetite",
       "dehydration",
       "diarrhea",
       "discharge",
@@ -24946,7 +24939,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_pain",
-      "appetite_loss",
+      "poor_appetite",
       "dehydration",
       "diarrhea",
       "discharge",
@@ -25067,7 +25060,7 @@
     "name_ja": "肝炎（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "collapse",
       "drooling",
       "dry_mucous_membranes",
@@ -25244,7 +25237,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "poor_appetite",
       "skin_mass",
@@ -25276,7 +25269,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "poor_appetite",
       "skin_masses",
@@ -25307,7 +25300,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "poor_appetite",
       "skin_masses",
@@ -25338,7 +25331,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "poor_appetite",
       "skin_masses",
@@ -25369,7 +25362,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "poor_appetite",
       "skin_masses",
@@ -25429,7 +25422,7 @@
     "name_ja": "眼球脱出（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -25643,7 +25636,7 @@
     "name_ja": "変形性関節症（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -25821,7 +25814,7 @@
     "name_ja": "熱傷（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "bleeding",
       "eye_discharge",
       "eye_redness",
@@ -25912,7 +25905,7 @@
     "name_ja": "胃潰瘍（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "dehydration",
       "diarrhea",
       "discharge",
@@ -25943,7 +25936,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_pain",
-      "appetite_loss",
+      "poor_appetite",
       "dehydration",
       "diarrhea",
       "discharge",
@@ -26085,7 +26078,7 @@
     "name_ja": "緑内障（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "eye_swelling",
       "lethargy",
       "vision_loss",
@@ -26112,7 +26105,7 @@
     "name_ja": "眼球突出（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -26137,7 +26130,7 @@
     "name_ja": "中耳炎（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "diarrhea",
       "discharge",
       "fever",
@@ -26229,7 +26222,7 @@
     "name_ja": "ビタミンE欠乏症（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "lameness",
       "lethargy",
       "pain",
@@ -26351,7 +26344,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lameness",
       "lethargy",
       "poor_appetite",
@@ -26383,7 +26376,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "hair_loss",
       "lethargy",
       "poor_appetite",
@@ -26622,7 +26615,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "poor_appetite",
       "skin_masses",
@@ -26652,7 +26645,7 @@
     "name_ja": "肝膿瘍（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "diarrhea",
       "discharge",
       "fever",
@@ -26682,7 +26675,7 @@
     "name_ja": "胆管肝炎（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "collapse",
       "drooling",
       "dry_mucous_membranes",
@@ -26921,7 +26914,7 @@
     "species": "Sugar Glider",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
+      "poor_appetite",
       "lethargy",
       "poor_appetite",
       "skin_masses",
@@ -27041,7 +27034,7 @@
     "name_ja": "細菌性肺炎（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "coughing",
       "diarrhea",
       "discharge",
@@ -27073,7 +27066,7 @@
     "name_ja": "皮膚糸状菌症（Sugar Glider）",
     "species": "Sugar Glider",
     "symptoms": [
-      "appetite_loss",
+      "poor_appetite",
       "circular_lesions",
       "crusty_skin",
       "diarrhea",
@@ -27590,7 +27583,6 @@
     "symptoms": [
       "circular_hair_loss",
       "circular_lesions",
-      "crusting",
       "crusty_skin",
       "hair_loss",
       "itching",
@@ -29206,7 +29198,6 @@
     "symptoms": [
       "circular_hair_loss",
       "circular_lesions",
-      "crusting",
       "crusty_skin",
       "hair_loss",
       "itching",
@@ -36879,7 +36870,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -37034,7 +37024,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -37155,7 +37144,6 @@
     "name_ja": "そ嚢うっ滞（新生児）（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -37276,7 +37264,7 @@
     "name_ja": "栄養欠乏症（一般）（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -37308,7 +37296,6 @@
     "name_ja": "そ嚢うっ滞（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -37459,7 +37446,7 @@
     "name_ja": "ビタミンA欠乏症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -37491,7 +37478,7 @@
     "name_ja": "ヨウ素欠乏症（甲状腺過形成）（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "decreased_activity",
       "lameness",
       "lethargy",
@@ -37770,7 +37757,6 @@
     "species": "Parakeet",
     "symptoms": [
       "anemia",
-      "appetite_loss",
       "clicking_sounds",
       "decreased_appetite",
       "diarrhea",
@@ -38004,7 +37990,7 @@
     "name_ja": "変形性関節症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -38029,7 +38015,7 @@
     "name_ja": "竜骨変形（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -38115,7 +38101,6 @@
     "name_ja": "口腔膿瘍（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "decreased_appetite",
       "diarrhea",
       "lethargy",
@@ -38355,7 +38340,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -38387,7 +38371,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -38419,7 +38402,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "decreased_appetite",
       "lameness",
       "leg_paralysis",
@@ -39100,7 +39082,6 @@
     "name_ja": "熱傷（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "beak_deformity",
       "bleeding",
       "crop_stasis",
@@ -39223,7 +39204,6 @@
     "species": "Parakeet",
     "symptoms": [
       "abdominal_distension",
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -39285,7 +39265,7 @@
     "species": "Parakeet",
     "symptoms": [
       "anemia",
-      "appetite_loss",
+      "decreased_appetite",
       "decreased_activity",
       "feather_loss",
       "lethargy",
@@ -39829,7 +39809,6 @@
     "name_ja": "消化管部分閉塞（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "bloody_droppings",
       "decreased_appetite",
       "diarrhea",
@@ -40268,7 +40247,7 @@
     "name_ja": "皮膚自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -40293,7 +40272,7 @@
     "name_ja": "皮膚アレルギー疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41136,7 +41115,7 @@
     "name_ja": "筋骨格系栄養欠乏（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -41259,7 +41238,7 @@
     "name_ja": "内分泌自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41405,7 +41384,7 @@
     "name_ja": "血液自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41460,7 +41439,7 @@
     "name_ja": "血液栄養欠乏（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -41791,7 +41770,7 @@
     "name_ja": "全身性自己免疫疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41906,7 +41885,7 @@
     "name_ja": "免疫介在性疾患（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -41991,7 +41970,7 @@
     "name_ja": "環境ストレス症候群（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "bleeding",
       "breeding_behavior",
       "feather_loss",
@@ -42226,7 +42205,7 @@
     "name_ja": "免疫介在性溶血性貧血（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -42251,7 +42230,7 @@
     "name_ja": "免疫介在性血小板減少症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "lethargy",
       "weight_loss"
     ],
@@ -42666,7 +42645,7 @@
     "name_ja": "セレン欠乏症（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
+      "decreased_appetite",
       "conjunctivitis",
       "dermatitis",
       "inability_to_perch",
@@ -42760,7 +42739,6 @@
     "name_ja": "新生児そ嚢火傷（Parakeet）",
     "species": "Parakeet",
     "symptoms": [
-      "appetite_loss",
       "beak_deformity",
       "bleeding",
       "crop_stasis",
@@ -46824,7 +46802,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -46854,7 +46832,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -47775,7 +47753,7 @@
     "name_ja": "排卵前卵胞停滞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -47805,7 +47783,7 @@
     "name_ja": "排卵後卵停滞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -47889,7 +47867,7 @@
     "name_ja": "精巣腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -47920,7 +47898,7 @@
     "name_ja": "卵巣腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -48013,7 +47991,7 @@
     "name_ja": "肝腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -48044,7 +48022,7 @@
     "name_ja": "腸閉塞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48105,7 +48083,7 @@
     "name_ja": "便秘（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48135,7 +48113,7 @@
     "name_ja": "吐出（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48168,7 +48146,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -48225,7 +48203,7 @@
     "name_ja": "膵炎（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -48552,7 +48530,7 @@
     "symptoms": [
       "abnormal_shell_growth",
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -48581,7 +48559,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -48640,7 +48618,7 @@
     "symptoms": [
       "abnormal_shell_growth",
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -48954,7 +48932,7 @@
     "name_ja": "脂肪腫（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -48985,7 +48963,7 @@
     "name_ja": "骨肉腫（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lameness",
@@ -49020,7 +48998,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -49050,7 +49028,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -49408,7 +49386,7 @@
       "anorexia",
       "immunosuppression",
       "lethargy",
-      "poor_shedding",
+      "dysecdysis",
       "skin_lesions",
       "tremors",
       "weakness",
@@ -49526,7 +49504,7 @@
     "name_ja": "肝線維症（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49707,7 +49685,7 @@
     "name_ja": "消化管腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -49738,7 +49716,7 @@
     "name_ja": "消化管炎症性疾患（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49768,7 +49746,7 @@
     "name_ja": "消化管運動障害（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49798,7 +49776,7 @@
     "name_ja": "消化管部分閉塞（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -49952,7 +49930,7 @@
     "name_ja": "呼吸器腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -50190,7 +50168,7 @@
     "name_ja": "皮膚腫瘍性疾患（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -50336,7 +50314,7 @@
     "name_ja": "泌尿生殖器腫瘍（Reptile）",
     "species": "Reptile",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "anorexia",
       "firm_mass",
       "lethargy",
@@ -50431,7 +50409,7 @@
       "abnormal_shell_growth",
       "difficulty_moving",
       "discharge_under_scutes",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -50787,7 +50765,7 @@
     "name_ja": "生殖停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -50817,7 +50795,7 @@
     "name_ja": "卵胞停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -51774,7 +51752,7 @@
     "name_ja": "排卵前卵胞停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -51804,7 +51782,7 @@
     "name_ja": "排卵後卵停滞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52045,7 +52023,7 @@
     "name_ja": "腸閉塞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52075,7 +52053,7 @@
     "name_ja": "便秘（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52105,7 +52083,7 @@
     "name_ja": "吐出（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52196,7 +52174,7 @@
     "name_ja": "膵炎（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -52517,7 +52495,7 @@
       "abnormal_shell_growth",
       "difficulty_moving",
       "discharge_under_scutes",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -52607,7 +52585,7 @@
       "abnormal_shell_growth",
       "difficulty_moving",
       "discharge_under_scutes",
-      "joint_swelling",
+      "swollen_joints",
       "lameness",
       "lethargy",
       "shell_pyramiding"
@@ -53442,7 +53420,7 @@
     "name_ja": "肝線維症（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -53653,7 +53631,7 @@
     "name_ja": "消化管炎症性疾患（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -53683,7 +53661,7 @@
     "name_ja": "消化管運動障害（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -53713,7 +53691,7 @@
     "name_ja": "消化管部分閉塞（Tortoise）",
     "species": "Tortoise",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -57602,7 +57580,7 @@
     "name_ja": "砂停滞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -57692,7 +57670,7 @@
     "name_ja": "大腿腺閉塞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -58711,7 +58689,7 @@
     "name_ja": "排卵前卵胞停滞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -58741,7 +58719,7 @@
     "name_ja": "排卵後卵停滞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -58982,7 +58960,7 @@
     "name_ja": "腸閉塞（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59043,7 +59021,7 @@
     "name_ja": "便秘（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59073,7 +59051,7 @@
     "name_ja": "吐出（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59164,7 +59142,7 @@
     "name_ja": "膵炎（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -59501,7 +59479,7 @@
     "species": "Lizard",
     "symptoms": [
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness"
     ],
     "description": "Osteoarthritis in Lizard",
@@ -59586,7 +59564,7 @@
     "species": "Lizard",
     "symptoms": [
       "difficulty_moving",
-      "joint_swelling",
+      "swollen_joints",
       "lameness"
     ],
     "description": "Scoliosis/Kyphosis in Lizard",
@@ -60402,7 +60380,7 @@
     "name_ja": "肝線維症（Lizard）",
     "species": "Lizard",
     "symptoms": [
-      "abdominal_distension",
+      "abdominal_swelling",
       "abdominal_swelling",
       "anorexia",
       "constipation",
@@ -61936,10 +61914,10 @@
     "name_ja": "卵詰まり（難産）（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "lethargy",
-      "straining"
+      "straining",
+      "bloating"
     ],
     "description": "Egg Binding (Dystocia) in Amphibian",
     "description_ja": "両生類における代謝性の生殖器系疾患。卵詰まり（難産）は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
@@ -61962,7 +61940,6 @@
     "name_ja": "排卵前卵胞停滞（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -61993,7 +61970,6 @@
     "name_ja": "排卵後卵停滞（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -62024,10 +62000,10 @@
     "name_ja": "卵黄体腔炎（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "lethargy",
-      "straining"
+      "straining",
+      "bloating"
     ],
     "description": "Egg Yolk Coelomitis in Amphibian",
     "description_ja": "両生類における代謝性の生殖器系疾患。卵黄体腔炎は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
@@ -62176,7 +62152,6 @@
     "name_ja": "胃腸炎（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -62207,7 +62182,6 @@
     "name_ja": "腸閉塞（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "appetite_loss",
       "bloating",
@@ -62239,7 +62213,6 @@
     "name_ja": "便秘（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "bloating",
       "bloody_stool",
@@ -62269,7 +62242,6 @@
     "name_ja": "吐出（Amphibian）",
     "species": "Amphibian",
     "symptoms": [
-      "abdominal_distension",
       "anorexia",
       "bloating",
       "bloody_stool",
@@ -65619,7 +65591,7 @@
     "species": "Exotic Other",
     "symptoms": [
       "abnormal_posture_invert",
-      "ataxia",
+      "incoordination",
       "circling",
       "fever",
       "head_tilt",
@@ -66014,13 +65986,11 @@
     "symptoms": [
       "abdominal_pain",
       "anorexia",
-      "blood_in_urine",
       "dehydration",
       "hematuria",
       "lethargy",
       "polydipsia",
       "polyuria",
-      "straining_to_urinate",
       "straining_urinate"
     ],
     "description": "Urolithiasis in Exotic Other",

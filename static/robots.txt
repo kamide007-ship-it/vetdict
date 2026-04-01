@@ -1,8 +1,14 @@
 User-agent: *
 Allow: /
+Allow: /diseases/
 Disallow: /api/
 Allow: /static/js/
 Allow: /static/css/
 Allow: /static/manifest.json
+
+# Disease database pages (6,400+ diseases)
+# /diseases — hub page
+# /diseases/<species> — species index
+# /diseases/<species>/<disease> — individual disease
 
 Sitemap: https://vetdict.info/sitemap.xml

@@ -3,6 +3,7 @@
 
 from flask import Blueprint, jsonify, request
 
+from api.auth import require_internal_api_access
 from api.database import (
     count_diseases,
     delete_disease,
@@ -24,6 +25,7 @@ admin_bp = Blueprint("admin", __name__, url_prefix="/api/admin")
 # ---------------------------------------------------------------------------
 
 @admin_bp.route("/diseases", methods=["GET"])
+@require_internal_api_access
 def list_diseases():
     """List diseases, optionally filtered by species."""
     species = request.args.get("species")
@@ -41,6 +43,7 @@ def list_diseases():
 
 
 @admin_bp.route("/diseases/<disease_id>", methods=["GET"])
+@require_internal_api_access
 def get_disease(disease_id: str):
     """Get a single disease by ID."""
     with get_connection() as conn:
@@ -51,6 +54,7 @@ def get_disease(disease_id: str):
 
 
 @admin_bp.route("/diseases", methods=["POST"])
+@require_internal_api_access
 def create_disease():
     """Create or update a disease."""
     data = request.get_json(force=True)
@@ -63,6 +67,7 @@ def create_disease():
 
 
 @admin_bp.route("/diseases/<disease_id>", methods=["PUT"])
+@require_internal_api_access
 def update_disease(disease_id: str):
     """Update an existing disease."""
     data = request.get_json(force=True)
@@ -81,6 +86,7 @@ def update_disease(disease_id: str):
 
 
 @admin_bp.route("/diseases/<disease_id>", methods=["DELETE"])
+@require_internal_api_access
 def remove_disease(disease_id: str):
     """Delete a disease by ID."""
     with get_connection() as conn:
@@ -92,6 +98,7 @@ def remove_disease(disease_id: str):
 
 
 @admin_bp.route("/diseases/stats", methods=["GET"])
+@require_internal_api_access
 def disease_stats():
     """Return disease count statistics."""
     with get_connection() as conn:
@@ -104,6 +111,7 @@ def disease_stats():
 # ---------------------------------------------------------------------------
 
 @admin_bp.route("/drugs", methods=["GET"])
+@require_internal_api_access
 def list_drugs():
     """List all drugs."""
     with get_connection() as conn:
@@ -112,6 +120,7 @@ def list_drugs():
 
 
 @admin_bp.route("/drugs/<drug_id>", methods=["GET"])
+@require_internal_api_access
 def get_drug(drug_id: str):
     """Get a single drug by ID with species info."""
     with get_connection() as conn:
@@ -122,6 +131,7 @@ def get_drug(drug_id: str):
 
 
 @admin_bp.route("/drugs", methods=["POST"])
+@require_internal_api_access
 def create_drug():
     """Create or update a drug."""
     data = request.get_json(force=True)
@@ -137,6 +147,7 @@ def create_drug():
 # ---------------------------------------------------------------------------
 
 @admin_bp.route("/import", methods=["POST"])
+@require_internal_api_access
 def bulk_import():
     """Bulk import diseases from JSON payload."""
     data = request.get_json(force=True)

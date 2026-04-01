@@ -10,10 +10,11 @@
               <select id="breedSelect" style="width:100%;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;background:var(--white)">
                 <option value="" data-i18n="breedNone">品種を選択しない</option>
               </select>
+              <div id="breedEcologyPanel"></div>
             </div>
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
-              <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh"/>
+              <input type="text" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh" aria-label="症状を検索"/>
               <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
             </div>
             <div class="symptom-list" id="symptomList"></div>
@@ -76,6 +77,9 @@
             </details>
             <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px" data-i18n="analyzeBtn">鑑別疾患を検索</button>
             <div class="analyze-progress" id="analyzeProgress"><div class="analyze-progress-bar"></div></div>
+            <div id="checkerGuide" style="margin-top:8px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius);font-size:.76rem;color:var(--gray-500);line-height:1.5">
+              <span data-i18n-html="checkerGuide">💡 <strong>使い方:</strong> 上の症状リストからチェックを入れ、「鑑別疾患を検索」を押してください。<br/>症状が多いほど精度が向上します（3つ以上推奨）。</span>
+            </div>
           </div>
         </div>
       </div>
@@ -100,7 +104,7 @@
       <div class="card-header" data-i18n-html="cardDiseaseDb">&#128218; 疾患データベース</div>
       <div class="card-body">
         <div class="symptom-search" style="margin-bottom:12px">
-          <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)" data-i18n-ph="diseaseSearchPh"/>
+          <input type="text" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)" data-i18n-ph="diseaseSearchPh" aria-label="疾患名で検索"/>
           <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
         </div>
         <div class="az-nav" id="azNav"></div>
@@ -116,7 +120,7 @@
 
   <div id="viewChat" class="hidden" role="tabpanel" aria-labelledby="tab-chat">
     <div class="card" style="margin-top:20px">
-      <div class="card-header" data-i18n-html="cardChat">&#128172; 症状相談</div>
+      <div class="card-header" data-i18n-html="cardChat">&#128172; 臨床相談</div>
       <div class="chat-mode-toggle">
         <button id="chatModeFree" class="chat-mode-btn active" data-i18n="chatModeFree">自由入力</button>
         <button id="chatModeGuided" class="chat-mode-btn" data-i18n="chatModeGuided">問診モード</button>
@@ -124,19 +128,19 @@
       <div class="chat-container" id="chatFreeContainer">
         <div class="chat-messages" id="chatMessages" aria-live="polite" aria-relevant="additions">
           <div class="chat-msg bot" id="chatWelcome" data-i18n-html="chatWelcome">
-            こんにちは。気になる症状を日本語または英語で入力してください。<br/>
-            例: 「うちの猫が嘔吐して食欲がない」「my dog is limping and has a fever」<br/><br/>
-            <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは疾患についての参考情報を提供するものです。診断・治療は必ず獣医師にご相談ください。</em>
+            臨床症状を日本語または英語で入力してください。<br/>
+            例: 「3歳猫 嘔吐 食欲廃絶 黄疸」「5yo dog PU/PD weight loss」<br/><br/>
+            <em style="font-size:.76rem;color:var(--gray-500)">※ 本ツールは臨床意思決定支援を目的とした参考情報を提供するものです。確定診断には臨床所見・検査結果との総合判断が必要です。</em>
           </div>
         </div>
         <div class="chat-input-row">
-          <input type="text" id="chatInput" placeholder="症状を入力してください..." data-i18n-ph="chatInputPh"/>
+          <input type="text" id="chatInput" placeholder="臨床症状を入力..." data-i18n-ph="chatInputPh" aria-label="臨床症状を入力"/>
           <button id="chatSend" data-i18n="chatSend">送信</button>
         </div>
       </div>
       <div class="chat-container hidden" id="chatGuidedContainer">
-        <div class="chat-messages" id="guidedMessages"></div>
-        <div class="guided-actions" id="guidedActions"></div>
+        <div class="chat-messages" id="guidedMessages" aria-live="polite" aria-relevant="additions"></div>
+        <div class="guided-actions" id="guidedActions" role="group" aria-label="Consultation actions"></div>
       </div>
     </div>
   </div>
@@ -147,7 +151,7 @@
       <div class="card-body">
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
-            <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh"/>
+            <input type="text" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh" aria-label="薬品名で検索"/>
             <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
           </div>
           <select id="drugCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">

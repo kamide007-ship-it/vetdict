@@ -1,18 +1,20 @@
 <section class="hero">
   <!-- Hero Header -->
   <div class="hero-header">
-    <div class="hero-badge" data-i18n="heroBadge">獣医師が開発 — 臨床現場をサポート</div>
+    <div class="hero-badge" data-i18n="heroBadge">現役獣医師が開発 — 臨床現場の鑑別診断を支援</div>
     <h1 class="hero-title">
       <span class="hero-vet">Vet</span>
       <span class="hero-dict">Dict</span>
     </h1>
+    <p class="hero-audience" data-i18n="heroAudience" style="font-size:.88rem;color:rgba(255,255,255,.8);margin-top:4px;font-weight:600">獣医師・獣医学生のための臨床支援ツール</p>
   </div>
 
   <!-- Hero Description -->
   <div class="hero-content">
-    <p class="hero-lead" data-i18n-html="heroLead">臨床症状から鑑別疾患リストを即座に表示。<br/>疾患データベース・薬品辞書を搭載した獣医臨床支援プラットフォーム。</p>
+    <p class="hero-lead" data-i18n-html="heroLead">臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・21動物種対応の臨床意思決定支援プラットフォーム。</p>
     <div class="hero-cta">
       <a href="#speciesSection" class="hero-btn primary" data-i18n="heroCta">動物種を選択して鑑別診断を開始</a>
+      <a href="/diseases" class="hero-btn secondary" style="background:transparent;border:2px solid rgba(255,255,255,.5);color:var(--white)" data-i18n="heroCtaDb">疾患データベースを見る</a>
     </div>
   </div>
 
@@ -38,7 +40,7 @@
 
   <!-- Hero Credit -->
   <div class="hero-credit" data-i18n-html="heroCredit">
-    開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎
+    開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎 DVM
   </div>
 </section>
 
@@ -65,10 +67,10 @@
     <div class="card-header" style="background:var(--navy);color:var(--white)">&#128172; <span data-i18n="landingChatTitle">症状をすぐに相談</span></div>
     <div class="card-body" style="padding:0">
       <div class="chat-messages" id="landingChatMessages" style="height:160px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px">
-        <div class="chat-msg bot" data-i18n-html="landingChatHint">症状を入力すると、考えられる疾患をお伝えします。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「犬が嘔吐して元気がない」「cat vomiting and lethargic」</span></div>
+        <div class="chat-msg bot" data-i18n-html="landingChatHint">臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span></div>
       </div>
       <div class="chat-input-row">
-        <input type="text" id="landingChatInput" placeholder="症状を入力してください..." data-i18n-ph="chatInputPh" aria-label="症状を入力"/>
+        <input type="text" id="landingChatInput" placeholder="臨床症状を入力..." data-i18n-ph="chatInputPh" aria-label="臨床症状を入力"/>
         <button id="landingChatSend" data-i18n="chatSend">送信</button>
       </div>
     </div>

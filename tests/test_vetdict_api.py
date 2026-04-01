@@ -125,22 +125,19 @@ class TestSecurityHeaders:
         csp = resp.headers.get('Content-Security-Policy', '')
         assert "default-src 'self'" in csp
 
-    def test_csp_uses_nonce_not_unsafe_inline(self, client):
+    def test_csp_allows_inline_and_ga_hosts(self, client):
         resp = client.get('/api/health')
         csp = resp.headers.get('Content-Security-Policy', '')
-        assert "'unsafe-inline'" not in csp.split("script-src")[1].split(";")[0]
-        assert "'nonce-" in csp
-
-    def test_csp_nonce_changes_per_request(self, client):
-        import re
-        r1 = client.get('/api/health')
-        r2 = client.get('/api/health')
-        csp1 = r1.headers.get('Content-Security-Policy', '')
-        csp2 = r2.headers.get('Content-Security-Policy', '')
-        nonce1 = re.search(r"'nonce-([^']+)'", csp1)
-        nonce2 = re.search(r"'nonce-([^']+)'", csp2)
-        assert nonce1 and nonce2
-        assert nonce1.group(1) != nonce2.group(1)
+        script_src = csp.split("script-src")[1].split(";")[0]
+        # 'unsafe-inline' must be present for GA4 inline event handlers
+        assert "'unsafe-inline'" in script_src
+        # GA/GTM host allowlists must be present
+        assert "https://www.googletagmanager.com" in script_src
+        assert "https://www.google-analytics.com" in script_src
+        # nonce and strict-dynamic must NOT be present (they cause
+        # browsers to ignore 'unsafe-inline' and host allowlists)
+        assert "'nonce-" not in csp
+        assert "'strict-dynamic'" not in script_src
 
     def test_server_header_removed(self, client):
         resp = client.get('/api/health')
