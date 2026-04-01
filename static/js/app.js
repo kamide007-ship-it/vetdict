@@ -1913,6 +1913,9 @@ function guidedFetch(phase,extra){
     const typing=msgs?.querySelector(".typing-indicator");
     if(typing)typing.remove();
     guidedAddMsg(t("commError")+" ("+err.message+")","bot");
+    guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
+    const rb=document.getElementById("guidedRetryBtn");
+    if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
   });
 }
 
@@ -1964,6 +1967,7 @@ function guidedRenderSymptoms(data){
   });
   html+='</div>';
   html+=`<div class="guided-bottom-actions">`;
+  html+=`<button class="guided-action-btn text" id="guidedBackToCategories">${currentLang==="ja"?"← カテゴリに戻る":"← Back"}</button>`;
   html+=`<button class="guided-action-btn primary" id="guidedConfirmSymptoms">${t("guidedNext")}</button>`;
   html+=`</div>`;
   guidedSetActions(html);
@@ -1980,6 +1984,13 @@ function guidedRenderSymptoms(data){
         selected.add(sid);
       }
     });
+  });
+
+  // Back to categories
+  const backBtn=document.getElementById("guidedBackToCategories");
+  if(backBtn)backBtn.addEventListener("click",()=>{
+    guidedSetActions("");
+    guidedFetch("start");
   });
 
   // Confirm
@@ -2022,7 +2033,7 @@ function guidedRenderInterim(data){
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja)}</span>
+          <span class="chat-disease-name">${escapeHtml(currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja))}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
