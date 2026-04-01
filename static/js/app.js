@@ -948,6 +948,15 @@ function renderResults(data){
   if(diseases.length===0){area.innerHTML=`<div class="results-empty"><span class="big-icon">\u2705</span><p>${t("noDiseasesFound")}</p></div>`;return;}
   const sevLabels=t("sevLabels");
   let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
+  /* Low-confidence warning: alert when symptom count <=2 or top confidence <50% */
+  const topPct=diseases[0]?diseases[0].match_percent||diseases[0].confidence||0:0;
+  const symCount=selectedSymptoms?selectedSymptoms.size:0;
+  if(symCount<=2||topPct<50){
+    const warnMsg=currentLang==="ja"
+      ?`⚠ 入力症状が${symCount}個${symCount<=2?"（推奨: 3個以上）":""}のため、鑑別精度が制限されています（最高信頼度 ${topPct.toFixed(1)}%）。症状を追加すると精度が大幅に向上します。`
+      :`⚠ With only ${symCount} symptom${symCount!==1?"s":""} entered${symCount<=2?" (3+ recommended)":""}, diagnostic accuracy is limited (top confidence ${topPct.toFixed(1)}%). Adding more symptoms will significantly improve results.`;
+    html+=`<div style="padding:10px 14px;margin-bottom:12px;border-radius:var(--radius);font-size:.82rem;font-weight:500;background:#fef3c7;border-left:4px solid #f59e0b;color:#92400e">${warnMsg}</div>`;
+  }
   /* Next steps banner based on severity */
   const nextSteps=currentLang==="ja"?{
     emergency:"⚠️ 緊急：直ちに獣医師の診察を受けてください。応急処置が必要な場合があります。",

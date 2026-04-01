@@ -10,6 +10,22 @@
 # - uncommon (0.9x): Occasional presentations (breed-specific, genetic)
 # - rare (0.7x): Rarely encountered (exotic conditions, syndromes)
 #
+# DATA SOURCES:
+# - Primary: Ettinger & Feldman (2017), Nelson & Couto (2019),
+#   Quesenberry & Carpenter (2020), Mader & Divers (2019)
+# - Epidemiological: O'Neill et al. (2013) UK dog populations,
+#   BanfieldPet Hospital State of Pet Health Reports (2019-2024)
+# - Japanese context: 犬と猫の治療薬ガイド EduOne (2024),
+#   日本獣医師会 小動物臨床部会 症例統計
+#
+# LIMITATIONS:
+# - Prevalence tiers are primarily based on English-language veterinary
+#   literature and may not fully reflect regional differences (e.g.,
+#   heartworm is common in Japan but rare in the UK).
+# - Exotic species prevalence is less well-documented and relies heavily
+#   on clinical experience rather than epidemiological studies.
+# - Tiers represent general clinical frequency, not population prevalence.
+#
 # IMPORTANT: Disease names must EXACTLY match the "name" field in the
 # corresponding species disease module (api/species/*_diseases.py).
 # ============================================================================
