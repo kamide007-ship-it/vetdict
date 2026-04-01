@@ -1913,6 +1913,9 @@ function guidedFetch(phase,extra){
     const typing=msgs?.querySelector(".typing-indicator");
     if(typing)typing.remove();
     guidedAddMsg(t("commError")+" ("+err.message+")","bot");
+    guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
+    const rb=document.getElementById("guidedRetryBtn");
+    if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
   });
 }
 
@@ -2022,7 +2025,7 @@ function guidedRenderInterim(data){
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
-          <span class="chat-disease-name">${currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja)}</span>
+          <span class="chat-disease-name">${escapeHtml(currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja))}</span>
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>

@@ -1782,3 +1782,201 @@ class TestConsultationEndpoint:
         data = r.get_json()
         assert data["phase"] == "select_category"
         assert data["species"] == "dog"
+
+    # --- Multi-species full flow tests -----------------------------------
+
+    @pytest.mark.parametrize("species", ["cat", "rabbit", "hamster", "bird", "fish", "reptile"])
+    def test_full_flow_multi_species(self, client, species):
+        """Full 5-phase consultation flow works for various species."""
+        # Phase 1: Start
+        r1 = client.post(self.ENDPOINT, json={"phase": "start", "species": species})
+        assert r1.status_code == 200
+        d1 = r1.get_json()
+        assert d1["phase"] == "select_category"
+        assert d1["species"] == species
+        assert len(d1["categories"]) > 0
+        cat_id = d1["categories"][0]["id"]
+
+        # Phase 2: Select symptoms
+        r2 = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": species,
+            "selected_category": cat_id,
+        })
+        assert r2.status_code == 200
+        d2 = r2.get_json()
+        assert d2["phase"] == "show_symptoms"
+        assert len(d2["symptoms"]) > 0
+        sym_ids = [s["id"] for s in d2["symptoms"][:2]]
+
+        # Phase 3: Interim results
+        r3 = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": species,
+            "selected_symptoms": sym_ids,
+            "answered_categories": [cat_id],
+        })
+        assert r3.status_code == 200
+        d3 = r3.get_json()
+        assert d3["phase"] == "interim_results"
+        assert "disease_candidates" in d3
+
+        # Phase 4: Context questions
+        r4 = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": species,
+            "selected_symptoms": sym_ids,
+        })
+        assert r4.status_code == 200
+        d4 = r4.get_json()
+        assert d4["phase"] == "context_questions"
+
+        # Phase 5: Finalize
+        r5 = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": species,
+            "selected_symptoms": sym_ids,
+            "onset": "acute",
+            "age_years": 3,
+            "pain_score": 1,
+        })
+        assert r5.status_code == 200
+        d5 = r5.get_json()
+        assert d5["phase"] == "final_results"
+        assert "suspected_diseases" in d5["result"]
+        assert d5["species"] == species
+        assert "recommendations" in d5
+
+    # --- Additional edge case tests --------------------------------------
+
+    def test_select_symptoms_unknown_category(self, client):
+        """Unknown category returns empty symptom list, not error."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "dog",
+            "selected_category": "nonexistent_category",
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "show_symptoms"
+        assert data["symptoms"] == []
+
+    def test_next_category_with_answered_categories(self, client):
+        """Suggested next categories exclude already-answered ones."""
+        r1 = client.post(self.ENDPOINT, json={"phase": "start", "species": "dog"})
+        cats = r1.get_json()["categories"]
+        cat_ids = [c["id"] for c in cats[:2]]
+
+        # Get symptoms from first category
+        r2 = client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "dog",
+            "selected_category": cat_ids[0],
+        })
+        sym_ids = [s["id"] for s in r2.get_json()["symptoms"][:3]]
+
+        # Next category with both categories answered
+        r3 = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "dog",
+            "selected_symptoms": sym_ids,
+            "answered_categories": cat_ids,
+        })
+        data = r3.get_json()
+        assert data["phase"] == "interim_results"
+        # Suggested next categories should not include answered ones
+        for nc in data.get("next_categories", []):
+            assert nc["id"] not in cat_ids
+
+    def test_ask_context_all_provided(self, client):
+        """When all context is provided, questions list is empty."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "onset": "acute",
+            "age_years": 5,
+            "pain_score": 2,
+        })
+        data = r.get_json()
+        assert data["phase"] == "context_questions"
+        assert len(data["questions"]) == 0
+
+    def test_finalize_with_full_context(self, client):
+        """Finalize with all context parameters returns enriched results."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "dog",
+            "selected_symptoms": ["coughing", "nasal_discharge", "fever"],
+            "onset": "acute",
+            "age_years": 3,
+            "pain_score": 2,
+            "breed": "Labrador",
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert data["onset"] == "acute"
+        assert data["age_years"] == 3
+        assert data["pain_score"] == 2
+        assert len(data["result"]["suspected_diseases"]) > 0
+
+    def test_finalize_no_symptoms(self, client):
+        """Finalize with no symptoms returns results (possibly empty)."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "dog",
+            "selected_symptoms": [],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert "suspected_diseases" in data["result"]
+
+    def test_finalize_horse(self, client):
+        """Finalize works for horse species."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "horse",
+            "selected_symptoms": ["lameness", "fever"],
+            "onset": "acute",
+            "age_years": 8,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert data["species"] == "horse"
+
+    def test_next_category_candidate_structure(self, client):
+        """Verify all fields in disease candidate structure."""
+        r = client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "cat",
+            "selected_symptoms": ["vomiting", "lethargy", "appetite_loss"],
+        })
+        data = r.get_json()
+        assert data["phase"] == "interim_results"
+        assert data["total_candidates"] >= len(data["disease_candidates"])
+        for cand in data["disease_candidates"]:
+            assert "name_ja" in cand
+            assert "name_en" in cand
+            assert "similarity_score" in cand
+            assert "confidence_percent" in cand
+            assert "severity" in cand
+            assert "matched_symptoms" in cand
+            assert "description_ja" in cand
+            assert "additional_disease_symptoms" in cand
+
+    def test_start_phase_all_21_species(self, client):
+        """Start phase works for all 21 supported species."""
+        species_list = [
+            "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig",
+            "chinchilla", "ferret", "hedgehog", "sugar_glider", "degu",
+            "bird", "parakeet", "parrot", "reptile", "tortoise",
+            "snake", "lizard", "amphibian", "fish", "other",
+        ]
+        for sp in species_list:
+            r = client.post(self.ENDPOINT, json={"phase": "start", "species": sp})
+            assert r.status_code == 200, f"start failed for species={sp}"
+            data = r.get_json()
+            assert data["phase"] == "select_category", f"wrong phase for species={sp}"
+            assert data["species"] == sp

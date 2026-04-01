@@ -4042,8 +4042,8 @@ def consultation():
                 "categories": [
                     {
                         "id": cat_id,
-                        "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id})["ja"],
-                        "name_en": _CATEGORY_LABELS.get(cat_id, {"en": cat_id})["en"],
+                        "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["ja"],
+                        "name_en": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["en"],
                         "symptom_count": len(syms),
                     }
                     for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1]))
@@ -4180,8 +4180,9 @@ def consultation():
                     breed=breed,
                     pain_score=pain_score,
                 )
-            except (ImportError, Exception):
+            except (ImportError, Exception) as exc:
                 # Fallback to chat engine
+                logger.warning("Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc)
                 if species == "horse" and EQUINE_AVAILABLE:
                     disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
                 elif species in _SPECIES_DATA:
