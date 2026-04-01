@@ -3092,6 +3092,46 @@ def match_symptoms_to_diseases(
 # FOLLOW-UP QUESTION BUILDER
 # =============================================================================
 
+
+def _extract_mentioned_drugs(disease: dict, species: str) -> list:
+    """Extract drugs mentioned in treatment text with species-specific dosage."""
+    treatment_text = (
+        (disease.get("treatment_ja") or "")
+        + " "
+        + (disease.get("treatment") or "")
+    ).lower()
+    if not treatment_text.strip():
+        return []
+    try:
+        from api.drug_dictionary import DRUGS as _ALL_DRUGS
+    except Exception:
+        return []
+    matched = []
+    for dr in _ALL_DRUGS:
+        dr_name = dr.get("name", "")
+        dr_name_ja = dr.get("name_ja", "")
+        if not ((dr_name and dr_name.lower() in treatment_text)
+                or (dr_name_ja and dr_name_ja in treatment_text)):
+            continue
+        entry = {
+            "id": dr.get("id", ""),
+            "name": dr_name,
+            "name_ja": dr_name_ja,
+            "category": dr.get("category", ""),
+        }
+        si = (dr.get("species_info") or {}).get(species)
+        if si:
+            entry["dosage"] = si.get("dosage", "")
+            entry["dosage_ja"] = si.get("dosage_ja", "")
+            entry["safe"] = si.get("safe", True)
+            entry["notes"] = si.get("notes", "")
+            entry["notes_ja"] = si.get("notes_ja", "")
+        matched.append(entry)
+        if len(matched) >= 10:
+            break
+    return matched
+
+
 def _build_follow_up_questions(
     onset: str | None,
     age: float | None,
@@ -3305,10 +3345,14 @@ def diagnostic_chat():
             treatments = {"supplements": [], "primary_care_plan_ja": "獣医師にご相談ください。",
                           "recommended_tests": disease.get("recommended_tests", [])}
 
+        # Extract mentioned drugs from treatment text
+        mentioned_drugs = _extract_mentioned_drugs(disease, species)
+
         enhanced_candidates.append({
             **disease,
             "reasoning": reasoning,
             "treatment_recommendations": treatments,
+            "mentioned_drugs": mentioned_drugs,
             "confidence_level": f"{int(disease['similarity_score'] * 100)}%"
         })
 
