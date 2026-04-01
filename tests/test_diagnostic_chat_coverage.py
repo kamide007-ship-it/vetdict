@@ -2391,3 +2391,210 @@ class TestSuggestNextCategories:
             assert "name_ja" in cat
             assert "name_en" in cat
             assert "differentiating_count" in cat
+
+
+class TestConsultationEdgeCases:
+    """Edge case tests for the consultation endpoint."""
+
+    ENDPOINT = "/api/diagnostic-chat/consultation"
+
+    @pytest.fixture(autouse=True)
+    def _client(self, client):
+        self.client = client
+
+    # -- Empty / missing symptom edge cases --
+
+    def test_select_symptoms_empty_category(self):
+        """select_symptoms with missing selected_category returns 400."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "select_symptoms",
+            "species": "cat",
+        })
+        assert r.status_code == 400
+
+    def test_next_category_empty_symptoms_returns_categories(self):
+        """next_category with empty symptoms redirects to category selection."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "cat",
+            "selected_symptoms": [],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "select_category"
+        assert len(data["categories"]) > 0
+
+    # -- Invalid species --
+
+    def test_start_invalid_species_returns_gracefully(self):
+        """Start phase with non-existent species returns without error."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "start",
+            "species": "unicorn",
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "select_category"
+        assert data["species"] == "unicorn"
+
+    def test_finalize_invalid_species_returns_results(self):
+        """Finalize with unknown species falls back to generic matcher."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "unicorn",
+            "selected_symptoms": ["fever", "vomiting"],
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert "suspected_diseases" in data["result"]
+
+    # -- Unknown phase --
+
+    def test_unknown_phase_returns_400(self):
+        """Unknown phase returns 400 error."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "nonexistent_phase",
+            "species": "cat",
+        })
+        assert r.status_code == 400
+
+    # -- lab_values parameter --
+
+    def test_finalize_with_lab_values(self):
+        """Finalize accepts lab_values parameter without error."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "dog",
+            "selected_symptoms": ["vomiting", "diarrhea", "lethargy"],
+            "lab_values": {"glucose": 250, "bun": 45},
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert len(data["result"]["suspected_diseases"]) > 0
+
+    def test_finalize_with_empty_lab_values(self):
+        """Finalize with empty lab_values dict works."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "cat",
+            "selected_symptoms": ["fever", "sneezing"],
+            "lab_values": {},
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+
+    # -- lang parameter for regional prevalence --
+
+    def test_finalize_with_lang_ja(self):
+        """Finalize with lang=ja runs without error (regional prevalence)."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "cat",
+            "selected_symptoms": ["fever", "sneezing", "nasal_discharge"],
+            "lang": "ja",
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert len(data["result"]["suspected_diseases"]) > 0
+
+    def test_next_category_with_lang_en(self):
+        """next_category with lang=en runs regional prevalence path."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "next_category",
+            "species": "cat",
+            "selected_symptoms": ["fever", "sneezing"],
+            "lang": "en",
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "interim_results"
+
+    # -- ask_context edge cases --
+
+    def test_ask_context_all_fields_provided_returns_empty_questions(self):
+        """ask_context with all context returns empty questions list."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "selected_symptoms": ["vomiting"],
+            "onset": "acute",
+            "age_years": 5,
+            "pain_score": 2,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "context_questions"
+        assert len(data["questions"]) == 0
+
+    def test_ask_context_partial_returns_remaining_questions(self):
+        """ask_context with only onset returns age + pain_score questions."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "cat",
+            "selected_symptoms": ["fever"],
+            "onset": "chronic",
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        types = [q["type"] for q in data["questions"]]
+        assert "onset" not in types
+        assert "age" in types
+        assert "pain_score" in types
+
+    # -- breed parameter --
+
+    def test_finalize_with_breed(self):
+        """Finalize with breed parameter runs breed-specific adjustments."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "dog",
+            "selected_symptoms": ["vomiting", "diarrhea", "lethargy"],
+            "breed": "Golden Retriever",
+            "onset": "acute",
+            "age_years": 8,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert len(data["result"]["suspected_diseases"]) > 0
+
+    # -- Empty JSON body --
+
+    def test_empty_body_defaults_to_dog_start(self):
+        """Empty JSON body defaults to dog species, start phase."""
+        r = self.client.post(self.ENDPOINT, json={})
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "select_category"
+        assert data["species"] == "dog"
+
+    # -- Finalize response structure --
+
+    def test_finalize_response_structure(self):
+        """Verify finalize returns all expected fields."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "finalize",
+            "species": "cat",
+            "selected_symptoms": ["fever", "sneezing", "nasal_discharge"],
+            "onset": "subacute",
+            "age_years": 3,
+            "pain_score": 1,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        assert data["phase"] == "final_results"
+        assert "result" in data
+        assert "symptom_details" in data
+        assert "onset" in data
+        assert "age_years" in data
+        assert "pain_score" in data
+        assert "recommendations" in data
+        assert "next_step_ja" in data["recommendations"]
+        assert "next_step_en" in data["recommendations"]
+
+        # Each disease should have expected keys
+        for disease in data["result"]["suspected_diseases"][:3]:
+            assert "name" in disease or "name_ja" in disease
