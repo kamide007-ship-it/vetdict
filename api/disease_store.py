@@ -357,16 +357,19 @@ def _load_horse_category_map() -> dict[str, str]:
 @lru_cache(maxsize=32)
 def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[dict]:
     """Cached implementation; ``_version`` key busts cache on invalidation."""
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT id, name_en, name_ja, species, clinical_weight FROM symptoms WHERE species = ? ORDER BY id",
-            (species,),
-        ).fetchall()
-        # Also gather unique symptom IDs from disease records for this species
-        disease_syms_raw = conn.execute(
-            "SELECT symptoms FROM diseases WHERE species = ? AND symptoms IS NOT NULL",
-            (species,),
-        ).fetchall()
+    try:
+        with get_connection() as conn:
+            rows = conn.execute(
+                "SELECT id, name_en, name_ja, species, clinical_weight FROM symptoms WHERE species = ? ORDER BY id",
+                (species,),
+            ).fetchall()
+            # Also gather unique symptom IDs from disease records for this species
+            disease_syms_raw = conn.execute(
+                "SELECT symptoms FROM diseases WHERE species = ? AND symptoms IS NOT NULL",
+                (species,),
+            ).fetchall()
+    except Exception:
+        return []
 
     # Load category map from species module or horse HEALTH_CHECK_ITEMS
     category_map: dict[str, str] = {}
