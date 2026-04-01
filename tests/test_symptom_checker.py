@@ -377,7 +377,7 @@ class TestAnalyzeSymptoms:
     # -- sorting --------------------------------------------------------
 
     def test_suspected_diseases_sorted_by_prevalence_then_score(self):
-        """Results prioritize prevalence tier, then score, then match_count."""
+        """Results sorted by match quality tier, then prevalence, then score."""
         result = analyze_symptoms([
             "vomiting", "lethargy", "diarrhea", "appetite_loss", "fever",
         ])
@@ -389,13 +389,25 @@ class TestAnalyzeSymptoms:
             "rare": 3,
             "unknown": 4,
         }
+
+        def _match_quality_tier(d):
+            pct = d["match_percent"]
+            cnt = d["match_count"]
+            if pct >= 50 or cnt >= 3:
+                return 0
+            if pct >= 25 or cnt >= 2:
+                return 1
+            return 2
+
         for i in range(len(diseases) - 1):
             a, b = diseases[i], diseases[i + 1]
             assert (
+                _match_quality_tier(a),
                 prevalence_priority.get(a["prevalence_tier"], 5),
                 -a["match_percent"],
                 -a["match_count"],
             ) <= (
+                _match_quality_tier(b),
                 prevalence_priority.get(b["prevalence_tier"], 5),
                 -b["match_percent"],
                 -b["match_count"],
