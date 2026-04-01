@@ -686,6 +686,9 @@ SYMPTOM_ALIASES = {
     "穴が開いてる": "ulcers", "穴あき": "ulcers",
     "赤くなってる": "redness_skin", "充血": "redness_skin",
     "出血してる": "redness_skin", "赤い斑点": "redness_skin",
+    "体表が赤い": "redness_skin",
+    "体が赤くなってる": "redness_skin", "赤くなった": "redness_skin",
+    "腹水": "dropsy", "浮腫んでる": "dropsy", "むくんでる": "dropsy",
     "粘液": "mucus_overproduction", "ぬめり": "mucus_overproduction",
     "ヌルヌル": "mucus_overproduction",
     "色が薄くなった": "discoloration", "退色": "discoloration",
@@ -1436,8 +1439,9 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
         "teeth_grinding": ["bruxism", "dental_pain"],
         "abdominal_pain": ["abdominal_distension", "hunched_posture", "bloating"],
-        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
-        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
+        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
+        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "abdominal_pain", "dropsy"],
+        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen", "abdominal_pain", "dropsy"],
         # Neuro
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
         "fainting": ["collapse", "syncope"],
@@ -1585,7 +1589,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         # Amphibian
         "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
         "red_ventrum": ["red_legs", "skin_redness", "hemorrhage"],
-        "edema": ["swelling", "bloating", "ascites"],
+        "edema": ["swelling", "bloating", "ascites", "dropsy"],
         # Effusion
         "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
         "pleural_effusion": ["effusion", "labored_breathing"],
@@ -1606,19 +1610,25 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     # Phase 1: Longest-match-first alias matching (aliases → species symptom IDs)
     # Track consumed character positions to avoid substring double-matching
     # (e.g. "外陰部が腫れてる" should not also match "腫れてる")
+    # Supports multiple occurrences of the same alias in different positions
     _sorted_aliases = sorted(SYMPTOM_ALIASES.keys(), key=len, reverse=True)
     _consumed: set[int] = set()
     for alias in _sorted_aliases:
-        pos = text_lower.find(alias)
-        if pos >= 0:
+        start = 0
+        while start <= len(text_lower) - len(alias):
+            pos = text_lower.find(alias, start)
+            if pos < 0:
+                break
             alias_range = set(range(pos, pos + len(alias)))
             if alias_range & _consumed:
+                start = pos + 1
                 continue
             symptom_id = SYMPTOM_ALIASES[alias]
             resolved = _resolve_id(symptom_id)
             if resolved:
                 matched.add(resolved)
-                _consumed |= alias_range
+            _consumed |= alias_range
+            start = pos + len(alias)
 
     # Phase 2: Direct symptom name matches (ja/en)
     for sym_id, names in symptom_names.items():
@@ -1684,7 +1694,8 @@ def _match_species_symptoms_to_diseases(
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
         "reduced_fecal_output": ["small_fecal_pellets", "constipation", "decreased_fecal_output"],
         "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
-        "bloating": ["abdominal_distension", "abdominal_pain"], "abdominal_distension": ["bloating", "abdominal_pain"],
+        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
+        "bloating": ["abdominal_distension", "abdominal_pain", "dropsy"], "abdominal_distension": ["bloating", "abdominal_pain", "dropsy"],
         "abdominal_pain": ["bloating", "abdominal_distension", "hunched_posture"],
         "hunched_posture": ["abdominal_pain"],
         "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
@@ -1777,7 +1788,7 @@ def _match_species_symptoms_to_diseases(
         "crop_stasis": ["crop_swelling", "ingluvitis"],
         "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
         "red_ventrum": ["red_legs", "skin_redness"],
-        "edema": ["swelling", "bloating", "ascites"],
+        "edema": ["swelling", "bloating", "ascites", "dropsy"],
         "swelling": ["edema", "facial_swelling", "eye_swelling"],
         "rough_coat": ["poor_coat", "dry_skin"],
         "scaly_legs": ["leg_scales", "scaly_face"],
