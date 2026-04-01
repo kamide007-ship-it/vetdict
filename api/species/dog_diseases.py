@@ -1161,6 +1161,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A tick-borne rickettsial disease causing fever, "
                        "lethargy, and blood cell abnormalities.",
         "description_ja": "マダニ媒介のリケッチア感染症で、発熱・倦怠感・血球異常を引き起こします。",
+        "pathophysiology_ja": "マダニ（Rhipicephalus sanguineus）刺咬→Ehrlichia canisが単球・マクロファージに感染→細胞内で封入体（morula）を形成→3相の経過：急性期（1〜3週間：発熱・リンパ節腫大・血小板減少）→無症候キャリア期（数ヶ月〜数年：脾臓でのEhrlichia持続感染）→慢性期（汎血球減少・骨髄低形成・出血傾向→致死的）。免疫複合体沈着→多発性関節炎・糸球体腎炎。",
+        "causes_ja": "Ehrlichia canis（最多、マダニRhipicephalus sanguineus媒介）。日本では西日本を中心に分布。輸入犬・沖縄に多い。慢性キャリア犬が感染源。ジャーマンシェパードは慢性期への進展リスクが高い。",
+        "prevention_ja": "マダニ駆除薬（イソキサゾリン系）の通年投与、散歩後のマダニチェック、海外渡航犬のスクリーニング（4DxSNAP検査）。",
         "urgency": "normal",
     },
     {
@@ -1171,6 +1174,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A tick-borne bacterial infection causing joint pain, "
                        "fever, and platelet abnormalities.",
         "description_ja": "マダニ媒介の細菌感染症で、関節痛・発熱・血小板異常を引き起こします。",
+        "pathophysiology_ja": "A. phagocytophilum：マダニ（Ixodes属）刺咬→好中球に感染→morula形成→免疫介在性血小板減少・多発性関節炎→発熱・跛行・血小板減少。A. platys：血小板に感染→周期的血小板減少症。多くは急性期のみで自然治癒するが、免疫抑制犬では重症化。Lyme病との重複感染（同じIxodes属マダニ媒介）がある。",
+        "causes_ja": "Anaplasma phagocytophilum（Ixodes属マダニ媒介、北半球に分布）、A. platys（R. sanguineus媒介）。日本ではA. phagocytophilumの報告あり。ライム病・バベシア症との共感染に注意。4DxSNAP検査でスクリーニング可能。",
+        "prevention_ja": "マダニ駆除薬の通年投与、マダニ媒介感染症流行地域での注意強化。ドキシサイクリン14日間で治療反応良好。",
         "urgency": "normal",
     },
     {
@@ -1227,6 +1233,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Dilation of the esophagus with loss of motility, "
                        "causing regurgitation (not vomiting) and aspiration risk.",
         "description_ja": "食道の拡張と運動機能低下により、吐き戻しと誤嚥のリスクが生じます。",
+        "pathophysiology_ja": "食道の蠕動運動障害→食道の全般的拡張→食物の口腔側への逆流（吐出、regurgitation：嘔吐と異なり腹部の収縮を伴わない受動的排出）→誤嚥性肺炎（最も重大な合併症、主要な死因）。先天性（食道壁の神経叢発育不全）と後天性（重症筋無力症・甲状腺機能低下症・アジソン病等）に分類。",
+        "causes_ja": "先天性（ワイヤーヘアードフォックステリア・ミニチュアシュナウザーで遺伝性、ジャーマンシェパード・グレートデーンに好発）。後天性：特発性（最多）、重症筋無力症（最も重要な鑑別）、甲状腺機能低下症、アジソン病、鉛中毒、食道炎後。",
+        "prevention_ja": "確実な予防法はない。後天性の場合は基礎疾患（重症筋無力症・甲状腺機能低下症）の検索と治療が必須。管理：立位給餌（Bailey chair、食後10〜15分保持）、高カロリー流動食、誤嚥性肺炎の早期発見・治療。",
         "urgency": "normal",
     },
     {
@@ -1237,6 +1246,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Insufficient production of digestive enzymes by the "
                        "pancreas, leading to malabsorption.",
         "description_ja": "膵臓の消化酵素産生不足により、栄養吸収障害を引き起こします。",
+        "pathophysiology_ja": "膵腺房細胞の90%以上が喪失→消化酵素（リパーゼ・アミラーゼ・プロテアーゼ）の著明な分泌低下→脂肪・蛋白質・炭水化物の消化不全→吸収不良→大量の黄色〜灰白色・脂肪光沢のある軟便（脂肪便）・体重減少・多食。小腸内細菌過増殖（SIBO）の合併が高率。コバラミン（VitB12）欠乏が予後に影響。",
+        "causes_ja": "膵腺房萎縮（PAA、免疫介在性、最多）：ジャーマンシェパードに好発（遺伝性）、ラフコリー。慢性膵炎の末期。膵腫瘍。若齢〜中齢犬に多い（PAA：1〜5歳）。血清TLI（trypsin-like immunoreactivity）<2.5μg/Lで確定診断。",
+        "prevention_ja": "好発犬種の繁殖管理。確定診断後は膵酵素補充療法（パンクレアチン散を毎食混合）が生涯必要。コバラミン補充（注射）、低脂肪・高消化性食。",
         "urgency": "normal",
     },
     {
@@ -1408,6 +1420,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A cosmetic hair loss condition of unknown cause, "
                        "primarily affecting Nordic breeds.",
         "description_ja": "原因不明の脱毛症で、ノルディック系犬種に多く見られます。",
+        "pathophysiology_ja": "病態は完全に解明されていない。毛周期の休止期（telogen）への停止→二次毛（アンダーコート）は残存するが一次毛（ガードヘア）が再生しない→体幹の対称性脱毛。副腎性ホルモン（sex hormone）の不均衡が疑われるが一貫した所見はない。皮膚の色素沈着が進行。全身的には健康で痒みはない。",
+        "causes_ja": "原因不明（「X」は未知の意）。副腎sex hormoneの代謝異常が疑われる。好発犬種：ポメラニアン（最多）、チャウチャウ、サモエド、アラスカンマラミュート、ケースホンド。去勢/避妊済みの若齢〜中齢犬に多い。甲状腺機能低下症・クッシング症候群の除外が必要。",
+        "prevention_ja": "確実な予防法はない。美容的問題であり全身的健康に影響しない。メラトニン（3〜6mg PO BID）で約50%に発毛効果。トリロスタンは一部で有効だが副作用のリスクあり。",
         "urgency": "normal",
     },
     {
@@ -1491,6 +1506,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Separation of the retina from its underlying tissue, "
                        "causing sudden vision loss.",
         "description_ja": "網膜が下層組織から剥離し、突然の視力喪失を引き起こします。",
+        "pathophysiology_ja": "神経網膜が網膜色素上皮（RPE）から剥離→視細胞への栄養供給途絶→視細胞の変性→不可逆的視力喪失。3型分類：(1)裂孔原性（網膜裂孔→硝子体液の網膜下浸入）、(2)漿液性/滲出性（全身性高血圧・ぶどう膜炎・腫瘍→網膜下液の蓄積、犬で最多）、(3)牽引性（硝子体膜の牽引）。急性の突然失明として来院。",
+        "causes_ja": "全身性高血圧（最多：CKD、クッシング、褐色細胞腫に伴う）、ぶどう膜炎、Ehrlichia感染、眼内腫瘍（リンパ腫）、SARDS（網膜変性後の二次的剥離）、白内障手術後、外傷。シーズー・ラサアプソに先天性網膜異形成→剥離の報告。",
+        "prevention_ja": "全身性高血圧の早期発見・管理（amlodipine等）、ぶどう膜炎の適切な治療。突然の失明は緊急眼科受診（網膜再接着の可能性は時間に依存）。",
         "urgency": "emergency",
     },
     # ---- Musculoskeletal ----
@@ -1535,6 +1553,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Self-limiting inflammation of the long bones in "
                        "growing large-breed dogs, causing shifting lameness.",
         "description_ja": "成長期の大型犬の長骨に起こる自己限定的な炎症で、移動性の跛行を引き起こします。",
+        "pathophysiology_ja": "長骨骨幹部の骨髄腔内の炎症→骨内膜の肥厚・骨髄浮腫→骨膜の刺激→深部骨痛。移動性跛行（shifting lameness）が特徴的：日によって異なる肢が跛行する。X線で骨髄腔内の不透過性亢進（骨幹部の雲状影）。自己限定的で通常2〜5ヶ月齢〜18ヶ月齢の間に発症し、2歳までに自然治癒。",
+        "causes_ja": "原因不明。急速な骨成長に伴う骨髄内血管の変化・ストレスが疑われる。大型犬・超大型犬の雄犬（5〜18ヶ月齢）に好発：ジャーマンシェパード（最多）、バセットハウンド、ゴールデン、ラブラドール。遺伝的素因あり。骨肉腫との鑑別が重要。",
+        "prevention_ja": "確実な予防法はない。自己限定的疾患のため対症療法（NSAIDs）で疼痛管理。過度の安静は不要。骨肉腫との鑑別のため経過観察が重要（通常は数週間で自然寛解）。",
         "urgency": "normal",
     },
     {
@@ -1722,6 +1743,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Abnormal fluid accumulation in the chest cavity, "
                        "compressing the lungs.",
         "description_ja": "胸腔内の異常な液体貯留で、肺を圧迫します。",
+        "pathophysiology_ja": "胸腔内への液体貯留→肺の圧排→換気障害→呼吸困難。液体の性状で原因を推定：(1)漏出液（低蛋白）：うっ血性心不全・低アルブミン血症、(2)滲出液（高蛋白・細胞数高）：膿胸・FIP（猫）・腫瘍、(3)乳び液：乳び胸、(4)血性：血管肉腫・外傷・凝固障害。犬では心不全・腫瘍・膿胸が三大原因。",
+        "causes_ja": "うっ血性心不全（右心不全または両心不全）、胸腔内腫瘍（リンパ腫・胸腺腫・肺癌・中皮腫）、膿胸（胸腔内細菌感染）、乳び胸、低アルブミン血症（PLE・肝不全）、外傷性血胸、横隔膜ヘルニア。胸水の細胞診・蛋白定量が原因精査に不可欠。",
+        "prevention_ja": "基礎疾患の適切な管理。呼吸困難の犬は胸部X線→胸腔穿刺（診断＋治療的減圧）を緊急実施。反復性貯留は胸腔ドレーン留置を検討。",
         "urgency": "emergency",
     },
     {
@@ -1732,6 +1756,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Elevated blood pressure in the pulmonary arteries, "
                        "straining the right side of the heart.",
         "description_ja": "肺動脈の血圧上昇により、右心系に負担がかかります。",
+        "pathophysiology_ja": "肺動脈圧の上昇（収縮期>30mmHg）→右心室の圧負荷→右室肥大→右心不全→三尖弁逆流・腹水・頸静脈怒張。原因分類：(1)動脈性PH（特発性、フィラリア症）、(2)左心疾患性（MMVD・DCMの肺うっ血に続発）、(3)呼吸器疾患性（慢性気管支炎・肺線維症）、(4)血栓塞栓性。失神・チアノーゼは重症の徴候。",
+        "causes_ja": "左心疾患（MMVD/DCMに続発、最多）、慢性呼吸器疾患（気管虚脱・慢性気管支炎・肺線維症）、フィラリア症、肺血栓塞栓症、先天性心疾患（Eisenmenger症候群）。特発性は犬では稀。WHWT（肺線維症関連）に好発。",
+        "prevention_ja": "基礎疾患の早期管理（左心疾患・フィラリア予防・慢性呼吸器疾患）。心エコー（三尖弁逆流速度）でスクリーニング。シルデナフィル（PDE5阻害剤）が主要な治療薬。",
         "urgency": "normal",
     },
     # ---- Genetic / Hereditary ----
@@ -1743,6 +1770,9 @@ DISEASES: List[Dict[str, Any]] = [
                        "caused by deficiency of von Willebrand factor. Dogs "
                        "may experience prolonged bleeding, bloody stool/urine, and bruising.",
         "description_ja": "犬で最も多い遺伝性出血性疾患です。フォンウィルブランド因子の異常により、外傷後の出血遷延が起こります。",
+        "pathophysiology_ja": "フォンウィルブランド因子（vWF）の量的/質的異常→一次止血（血小板粘着・凝集）の障害→粘膜出血傾向（鼻出血・歯肉出血・消化管出血・尿路出血・発情期出血遷延）。3型に分類：Type 1（vWF量の低下、最多・軽度）、Type 2（vWF多量体の異常、中等度）、Type 3（vWF完全欠損、重度・致死的出血のリスク）。術前・外傷後に初めて診断されることが多い。",
+        "causes_ja": "常染色体遺伝。Type 1：ドーベルマン（最多、約70%がキャリアまたは罹患）、コーギー、シェルティ、ゴールデン。Type 2：ジャーマンワイヤーヘアードポインター。Type 3：スコティッシュテリア、シェルティ、チェサピークベイレトリーバー。遺伝子検査が可能。",
+        "prevention_ja": "好発犬種のvWF遺伝子検査による繁殖管理、罹患犬の術前にvWF活性測定・デスモプレシン（DDAVP）前投与、止血に影響する薬剤（NSAIDs・アスピリン）の回避。",
         "urgency": "normal",
     },
     {
@@ -1754,6 +1784,9 @@ DISEASES: List[Dict[str, Any]] = [
                        "eventual blindness. Night blindness is often the "
                        "first sign.",
         "description_ja": "網膜が進行性に変性する遺伝性疾患群です。視力が徐々に低下し最終的に失明に至ります。",
+        "pathophysiology_ja": "網膜視細胞（桿体→錐体の順）の進行性変性・消失→暗所視障害（夜盲）→明所視も障害→完全失明。早発型（rod-cone dysplasia：生後数ヶ月で発症）と遅発型（progressive rod-cone degeneration：3〜5歳で発症）に大別。ERG（網膜電図）で早期診断可能。二次性白内障の合併が高率。",
+        "causes_ja": "常染色体劣性遺伝が多い。品種ごとに異なる遺伝子変異：PRCD（プードル・コッカースパニエル・ラブラドール）、PDE6B（アイリッシュセッター）、CNGB1（パピヨン）等。50以上の犬種で報告。遺伝子検査パネルが市販（OptiGen・Embark等）。",
+        "prevention_ja": "繁殖前のDNA検査（品種別のPRA遺伝子パネル）による繁殖管理が最も有効。キャリア同士の交配回避。定期的な眼科検診（CERF/OFA）。治療法はないが、犬は他の感覚で適応し、環境の一貫性を保つことでQOLを維持できる。",
         "urgency": "normal",
     },
     {
@@ -1982,6 +2015,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A tumor of melanocyte cells, most aggressive when "
                        "found in the mouth. Common in senior dogs.",
         "description_ja": "メラノサイト由来の腫瘍で、口腔内発生時に最も悪性度が高いです。",
+        "pathophysiology_ja": "メラノサイトの腫瘍性増殖。発生部位により生物学的挙動が大きく異なる：(1)口腔：最も悪性（転移率80%以上、肺・リンパ節転移）、(2)皮膚（有毛部）：多くは良性、完全切除で治癒、(3)爪床/趾：中〜高悪性度、骨浸潤あり、(4)眼内：中等度悪性。メラニン欠乏型（無色素性）は組織学的に見逃されやすく注意が必要。",
+        "causes_ja": "原因不明。好発犬種（口腔）：コッカースパニエル、スコティッシュテリア、ゴールデン、ミニチュアプードル。爪床：黒色被毛の犬種に多い。皮膚：全犬種。中高齢犬（9〜12歳）。口腔内の色素性腫瘤は全てメラノーマを疑い生検が必要。",
+        "prevention_ja": "確実な予防法はない。口腔内・爪床・皮膚のしこり・色素性病変の早期受診。皮膚メラノーマは早期切除で予後良好。口腔メラノーマは広範囲切除＋メラノーマワクチン（Oncept）の併用を検討。",
         "urgency": "normal",
     },
     {
@@ -1993,6 +2029,9 @@ DISEASES: List[Dict[str, Any]] = [
                        "epithelial cells. UV exposure is a risk factor. "
                        "Early detection and excision are key.",
         "description_ja": "扁平上皮細胞由来の悪性腫瘍です。紫外線がリスク因子で、早期発見と外科的切除が重要です。",
+        "pathophysiology_ja": "扁平上皮細胞の異型増殖→局所浸潤性腫瘤形成→骨破壊（爪床・口腔で顕著）。転移率は発生部位により異なる：皮膚（無色素部位のUV誘発型）は低転移率で予後良好、口腔SCCは扁桃原発が最も高転移率（>90%）、爪床SCCは中等度（黒色犬種に好発）。",
+        "causes_ja": "皮膚：紫外線暴露（色素の薄い犬の腹部・鼻鏡：ダルメシアン、ブルテリア、ピットブル）。口腔：原因不明（扁桃SCCは都市部の犬に多い→大気汚染説あり）。爪床：大型犬の黒色犬種（ラブラドール、プードル、ジャイアントシュナウザー）。",
+        "prevention_ja": "色素の薄い犬のUV暴露制限（日焼け止め使用、日中の屋外活動制限）。皮膚の非治癒性潰瘍・爪床の腫脹・口腔内腫瘤の早期生検。早期切除が治癒の鍵。",
         "urgency": "normal",
     },
     {
@@ -2015,6 +2054,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A malignant tumor of the urinary bladder, most "
                        "common in Scottish Terriers.",
         "description_ja": "膀胱の悪性腫瘍で、スコティッシュテリアに最も多く見られます。",
+        "pathophysiology_ja": "膀胱移行上皮の悪性増殖→膀胱壁への浸潤→膀胱三角部に好発（尿管口を巻き込みやすい）→水腎症・腎後性腎不全。局所リンパ節・肺への転移あり。犬の膀胱腫瘍の>90%がTCC/尿路上皮癌。尿中のVEGFやBRAF V595E変異（犬のTCCの約80%で検出）が早期診断マーカーとして注目。",
+        "causes_ja": "環境因子（除草剤・殺虫剤曝露、特にフェノキシ酢酸系）、遺伝的素因。好発犬種：スコティッシュテリア（リスク18倍）、シェルティ、ビーグル、WHWT、ワイヤーヘアードフォックステリア。雌犬・肥満犬に多い。中高齢犬。",
+        "prevention_ja": "除草剤・殺虫剤への曝露制限（散歩後の足の洗浄、散布直後の芝生回避）、好発犬種のスクリーニング（尿検査・BRAF変異検出・膀胱超音波）。NSAIDs（ピロキシカム・メロキシカム）が腫瘍増殖抑制に有効。",
         "urgency": "normal",
     },
     # ---- Hematologic / Immune ----
@@ -2179,6 +2221,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"stiffness", "seizures", "difficulty_breathing", "anxiety"},
         "description": "A bacterial toxin disease causing severe muscle rigidity and spasms, rare but serious in dogs.",
         "description_ja": "細菌毒素による重度の筋硬直と痙攣を引き起こす疾患で、犬では稀ですが重篤です。",
+        "pathophysiology_ja": "Clostridium tetaniの芽胞が創傷から侵入→嫌気条件下で発芽・増殖→テタノスパスミン（神経毒素）産生→末梢神経の軸索を逆行性に上行→脊髄・脳幹の抑制性介在ニューロン（グリシン・GABA放出）を遮断→拮抗筋の同時収縮→全身性筋硬直（開口障害=trismus・四肢伸展・角弓反張）。犬は人やウマに比べ自然抵抗性が高い（猫はさらに高い）。",
+        "causes_ja": "Clostridium tetani（偏性嫌気性芽胞形成菌）。創傷感染（穿通創・咬傷・術後創）。犬では稀（年間発症率は非常に低い）だが、発症すると致死率10〜50%。潜伏期間5〜21日。局在型（一肢の硬直）から全身型に進行することがある。",
+        "prevention_ja": "創傷の適切なデブリードマンと洗浄、汚染創のメトロニダゾール/ペニシリン予防投与。犬用破傷風ワクチンは市販されていない（人用破傷風トキソイドは禁忌ではないが一般的に不使用）。",
         "urgency": "emergency",
     },
     {
@@ -2442,6 +2487,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"squinting", "eye_redness"},
         "description": "Disruption of sympathetic nerve supply to the eye causing miosis, ptosis, and enophthalmos.",
         "description_ja": "眼への交感神経支配の障害により、縮瞳・眼瞼下垂・眼球陥凹を引き起こします。",
+        "pathophysiology_ja": "交感神経の3ニューロン経路のいずれかの障害→患側眼への交感神経支配喪失→(1)縮瞳（miosis：散瞳筋の弛緩）、(2)眼瞼下垂（ptosis：ミュラー筋の弛緩）、(3)眼球陥凹（enophthalmos：眼窩平滑筋の弛緩）、(4)第三眼瞼突出（瞬膜の弛緩）。犬では節後性（中耳・内耳の病変）が最多。",
+        "causes_ja": "特発性（犬で最多、約50%、自然寛解あり）。中耳炎/内耳炎（節後性）、胸腔腫瘍・頸部外傷（節前性）、脳幹病変（中枢性、稀）。ゴールデンレトリーバー・コッカースパニエルに報告多い。片側性が多い。原因検索（耳鏡検査・CT/MRI・胸部X線）が推奨。",
+        "prevention_ja": "基礎疾患（中耳炎等）の早期治療。特発性は数週間〜数ヶ月で自然回復することが多い。フェニレフリン点眼による薬理学的局在診断が有用。",
         "urgency": "normal",
     },
     {
@@ -2486,6 +2534,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", *_ANY_LIMPING, "appetite_loss"},
         "description": "A bacterial infection of the heart valves causing fever, lameness, and embolic complications.",
         "description_ja": "心臓弁の細菌感染で、発熱・跛行・塞栓性合併症を引き起こします。",
+        "pathophysiology_ja": "菌血症→心臓弁（大動脈弁が最多、僧帽弁）への細菌定着→疣贅（vegetation）形成→弁破壊→弁逆流→急性心不全。疣贅からの塞栓→多臓器塞栓（腎梗塞→血尿、脾梗塞、関節→敗血症性関節炎→跛行、脳→神経症状）。原因不明の発熱（FUO）＋心雑音＋多発性跛行のtriadで疑う。",
+        "causes_ja": "Staphylococcus aureus・Streptococcus・E. coli・Bartonella vinsonii berkhoffii（犬特有）。感染源：歯周病（口腔内菌血症）、尿路感染、皮膚感染、術後菌血症。大型犬の雄犬に好発。大動脈弁下狭窄は大動脈弁への乱流→内皮損傷→感染リスク増大。",
+        "prevention_ja": "歯周病の管理（菌血症の最大の感染源）、重度歯科処置前の抗菌薬予防投与（大動脈弁下狭窄犬）、尿路感染の適切な治療。血液培養（最低3セット）での起因菌同定が治療の鍵。",
         "urgency": "emergency",
     },
     # ---- Respiratory (expanded) ----
@@ -2503,6 +2554,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"sneezing", "nasal_discharge", "eye_redness", "pain_on_touch"},
         "description": "Tumors of the nasal cavity causing chronic nasal discharge, epistaxis, and facial deformity.",
         "description_ja": "鼻腔の腫瘍で、慢性鼻汁・鼻出血・顔面変形を引き起こします。",
+        "pathophysiology_ja": "鼻腔内の上皮性/間葉性腫瘍→鼻腔の閉塞→一側性→両側性の鼻汁（粘液性→血性に進行）。篩骨板への浸潤→脳への直接浸潤→神経症状。顔面の骨破壊→顔面変形・眼球突出。犬の鼻腔腫瘍の約60%が腺癌、20%がSCC、10%が軟骨肉腫。遠隔転移率は低い（10〜20%）が局所浸潤性が高い。",
+        "causes_ja": "原因不明。長頭種（コリー・シェルティ）は短頭種より高リスク（鼻腔粘膜面積が広い）。都市部の犬に多いとの報告（大気汚染の関与示唆）。受動喫煙との関連も指摘。中高齢犬（平均10歳）。一側性の慢性鼻汁が初発症状であることが多い。",
+        "prevention_ja": "確実な予防法はない。一側性の慢性鼻汁・鼻出血は早期にCT→鼻腔内生検で精査。放射線療法（メガボルテージ）が標準治療（MST 12〜18ヶ月）。外科単独は効果不十分。",
         "urgency": "normal",
     },
     {
@@ -2511,6 +2565,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"difficulty_breathing", "coughing", "lethargy", "rapid_breathing"},
         "description": "Rotation of a lung lobe on its axis, cutting off blood supply and causing respiratory distress.",
         "description_ja": "肺葉が軸回転し血流が遮断される緊急疾患で、呼吸困難を引き起こします。",
+        "pathophysiology_ja": "肺葉がその気管支・血管茎を軸に捻転→肺静脈の閉塞（動脈より先に閉塞）→肺葉のうっ血・出血性梗塞→肺葉内の血液貯留による著明な拡大→胸腔内の占拠→呼吸障害。胸水貯留を伴う。右中葉と左前葉に好発。胸部X線で「均一な不透過性増大を示す肺葉」が特徴的。",
+        "causes_ja": "特発性（最多）、胸水貯留後（乳び胸の合併）、肺葉切除後の残存肺の過膨張。アフガンハウンド（深い胸腔）に好発。パグ・ウィペットにも報告。胸水を伴う疾患の治療後に二次的に発症することがある。",
+        "prevention_ja": "確実な予防法はない。胸水治療後の経過観察。診断後は外科的肺葉切除が唯一の治療法。早期手術で予後良好。",
         "urgency": "emergency",
     },
     # ---- Neuro (expanded) ----
@@ -2733,6 +2790,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"bloated_abdomen", "vomiting", "lethargy", "pain_on_touch"},
         "description": "Twisting of the intestines cutting off blood supply, a life-threatening surgical emergency.",
         "description_ja": "腸管の捻転により血流が遮断される致命的な外科的緊急疾患です。",
+        "pathophysiology_ja": "腸間膜根部を軸とした腸管の捻転→腸間膜動静脈の絞扼→広範な腸管虚血・壊死→エンドトキシンの全身循環への流入→敗血症性ショック→DIC→多臓器不全。GDV（胃捻転）と同様に超緊急疾患。致死率は極めて高い（80〜100%）。症状は急性腹症として発症し、数時間で致死的となる。",
+        "causes_ja": "原因は多くの場合不明。ジャーマンシェパード・大型犬に報告が多い。腸管の運動異常、炎症性腸疾患、腸間膜リンパ腫、術後癒着が誘因となることがある。異常に柔軟な腸間膜が解剖学的素因。",
+        "prevention_ja": "確実な予防法はない。急性の激しい腹痛・腹部膨満・ショック徴候は超緊急で外科的介入が必要。広範な腸壊死では予後極めて不良のため安楽死の判断も必要となる場合がある。",
         "urgency": "emergency",
     },
     {
@@ -2760,6 +2820,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "bloody_stool", "lethargy", "appetite_loss", "bloated_abdomen"},
         "description": "Telescoping of one intestinal segment into another, a surgical emergency in puppies.",
         "description_ja": "腸管の一部が隣接部に嵌入する疾患で、子犬の外科的緊急疾患です。",
+        "pathophysiology_ja": "腸管の一部（intussusceptum）が隣接の腸管（intussuscipiens）内に嵌入→血管圧迫→腸壁の虚血・浮腫→さらなる嵌入の進行→腸壊死・穿孔→腹膜炎。空腸-空腸または回腸-盲腸接合部に最も多い。触診でソーセージ様の腫瘤として触知される。腹部エコーで「標的サイン」（target sign）が特徴的。",
+        "causes_ja": "基礎疾患による腸管蠕動異常：パルボウイルス腸炎、腸内寄生虫（回虫）、IBD、異物、腸管腫瘍。子犬（<1歳）に好発。ジャーマンシェパードに多いとの報告。術後（腸管手術後の蠕動異常）にも発生。",
+        "prevention_ja": "基礎疾患（腸管感染症・寄生虫）の早期適切な治療。子犬の定期的な駆虫。嘔吐・血便・腹部膨満の早期受診。外科的整復（manual reduction）または腸管切除吻合が必要。",
         "urgency": "emergency",
     },
     # ---- Endocrine (expanded) ----
@@ -2946,6 +3009,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_panting", "lethargy", "vomiting", "rapid_breathing", "seizures"},
         "description": "Life-threatening hyperthermia from heat exposure, especially in brachycephalic breeds.",
         "description_ja": "高温環境による生命を脅かす高体温症で、短頭種に特に危険です。",
+        "pathophysiology_ja": "高温環境→体温調節機構の破綻→深部体温>41℃→全身性炎症反応症候群（SIRS）→内皮障害→DIC・多臓器不全（腎障害・肝壊死・横紋筋融解・脳浮腫・消化管粘膜壊死）。犬はパンティングが主な放熱手段のため、高温多湿環境では効率が急激に低下。短頭種は上気道閉塞でパンティング効率がさらに低下→致死的。",
+        "causes_ja": "車内放置（最多、車内温度は外気温+20〜30℃に急上昇）、高温下の過度な運動、短頭種（ブルドッグ・パグ・ボストンテリア）、肥満犬、喉頭麻痺犬、厚い被毛の犬種。日本では5〜9月に集中。アスファルト表面温度は気温の1.5〜2倍。",
+        "prevention_ja": "車内への犬の放置禁止（5分でも危険）、高温時の運動制限（早朝・夜間に限定）、常に新鮮な水と日陰の確保、短頭種の特に厳重な温度管理、アスファルト表面の5秒テスト（手の甲で触れて熱ければ散歩中止）。",
         "urgency": "emergency",
     },
     {
@@ -2954,6 +3020,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "stiffness", "difficulty_breathing"},
         "description": "Dangerously low body temperature from cold exposure, especially in small or toy breeds.",
         "description_ja": "低温環境による危険な低体温で、小型犬・トイ犬種に特にリスクが高いです。",
+        "pathophysiology_ja": "深部体温<37℃→軽度（32〜37℃：振戦・末梢血管収縮）→中等度（28〜32℃：振戦停止・徐脈・意識低下・心室性不整脈リスク）→重度（<28℃：心室細動・心停止）。新生子犬は体温調節機構が未熟で特にリスク高。低体温は凝固障害・免疫機能低下・薬物代謝遅延を伴う。",
+        "causes_ja": "環境性（冬季の屋外放置・水中落下）、麻酔後（術中低体温が最多の医原性原因）、新生子犬のケア不足、ショック・敗血症に伴う二次性低体温。リスク犬：小型犬・トイ犬種・被毛の薄い犬種・痩せた犬・高齢犬・新生子犬。",
+        "prevention_ja": "冬季の屋外犬の防寒対策（犬用コート・暖房付き犬小屋）、水場での監視、麻酔中の保温（温風ブランケット・加温輸液）、新生子犬の保温（環境温30〜32℃）。",
         "urgency": "emergency",
     },
     {
@@ -2962,6 +3031,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "rapid_breathing", "fever"},
         "description": "Water aspiration causing pulmonary edema. Secondary drowning can occur hours later.",
         "description_ja": "水の誤嚥による肺水腫で、数時間後に二次的溺水が起こることがあります。",
+        "pathophysiology_ja": "水の気道吸引→肺胞サーファクタントの洗い流し・不活化→肺胞虚脱→低酸素血症。淡水：浸透圧差で水が肺胞→血管内に移動→肺水腫・血液希釈。海水：高浸透圧で血漿が肺胞内に移動→肺水腫。「二次性溺水」（乾性溺水）：初期回復後6〜24時間で肺水腫が遅発性に進行→呼吸不全。",
+        "causes_ja": "プール・池・川・浴槽への落下、遊泳中の疲労。ブルドッグ等の短頭種は体型的に泳ぎが困難。てんかん犬の水辺での発作、高齢犬の筋力低下。冬季の氷上落下。",
+        "prevention_ja": "水辺での常時監視、プールフェンスの設置、泳ぎが苦手な犬種にはライフジャケット着用、てんかん犬の水辺制限。溺水後は無症状でも24時間の観察入院が推奨。",
         "urgency": "emergency",
     },
     {
@@ -2970,10 +3042,16 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"pain_on_touch", "lethargy", "vomiting", "difficulty_breathing", "swollen_joints"},
         "description": "Venomous snake bite causing local swelling, pain, and potentially fatal systemic effects.",
         "description_ja": "毒蛇咬傷による局所腫脹・痛み・致命的な全身影響を引き起こします。",
+        "pathophysiology_ja": "日本：マムシ（Gloydius blomhoffii）→出血毒（メタロプロテアーゼ）＋細胞毒→局所の激しい腫脹・壊死＋全身性凝固障害（DIC）・急性腎障害。ハブ（沖縄）→より重度の組織壊死。北米：ガラガラヘビ→出血毒＋神経毒。咬傷部位は顔面（鼻先・口唇）が最多（犬が蛇を嗅ぐ行動による）。",
+        "causes_ja": "日本：マムシ（本州〜九州に広く分布、4〜10月に活動）、ハブ（沖縄・奄美）。犬は好奇心で蛇に近づくため咬傷リスクが高い。散歩中・庭での遭遇が多い。顔面・前肢に咬傷が多い。",
+        "prevention_ja": "蛇の活動期（春〜秋）の草むら・岩場での注意、リードでの管理、夜間散歩時の注意（マムシは夜行性）。咬傷後は安静にし早急に受診（抗毒素血清の投与が有効な場合がある）。",
         "urgency": "emergency",
     },
     {
         "name": "Bee/Wasp Sting Anaphylaxis",
+        "pathophysiology_ja": "蜂毒蛋白（メリチン・ホスホリパーゼA2等）に対するIgE介在性I型過敏反応→肥満細胞脱顆粒→ヒスタミン・ロイコトリエン大量放出→全身性血管拡張→低血圧性ショック。犬のアナフィラキシーは肝静脈のうっ血が特徴的（人と異なる）→肝腫大・門脈圧亢進→消化管うっ血→血性下痢。局所反応のみのことも多いが、口腔・咽頭刺傷では気道閉塞のリスク。",
+        "causes_ja": "ミツバチ・スズメバチ・アシナガバチの刺傷。犬は口や足で蜂を捕まえようとして刺される。口腔内・咽頭の刺傷は気道浮腫で致死的になりうる。多数刺傷（スズメバチの群れ攻撃）は直接毒性で致死的。アナフィラキシーは過去の感作後（2回目以降）にリスク上昇。",
+        "prevention_ja": "蜂の巣への犬のアクセス制限、蜂が多い場所でのリード管理。過去にアナフィラキシー歴がある犬はエピネフリン自己注射器の携帯を検討。軽度の局所反応は冷却・抗ヒスタミン薬で対応。",
         "name_ja": "蜂刺傷アナフィラキシー",
         "symptoms": {"vomiting", "difficulty_breathing", "lethargy", "skin_redness"},
         "description": "Severe allergic reaction to insect stings causing facial swelling and potential anaphylactic shock.",
@@ -3017,6 +3095,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lumps", "pain_on_touch", *_ANY_LIMPING},
         "description": "A malignant tumor of connective tissue, locally aggressive with high recurrence rate.",
         "description_ja": "結合組織の悪性腫瘍で、局所浸潤性が高く再発率も高いです。",
+        "pathophysiology_ja": "線維芽細胞由来の悪性腫瘍→局所的に浸潤性の増殖→偽被膜を超えた微視的浸潤→不完全切除では高率に再発（60〜70%）。転移率は比較的低い（20〜30%）が、高グレードでは肺転移あり。口腔・四肢・体幹に好発。骨への浸潤もある。放射線誘発性線維肉腫（過去の放射線治療部位）の報告もある。",
+        "causes_ja": "原因不明。ゴールデンレトリーバー・大型犬に好発。中高齢犬。口腔の線維肉腫は犬の口腔腫瘍の第3位。ワクチン接種部位関連（猫では有名だが犬では稀）。",
+        "prevention_ja": "確実な予防法はない。しこりの早期発見・FNA→生検→広範囲切除（2〜3cm以上のマージン）。不完全切除後は追加手術または放射線療法。",
         "urgency": "normal",
     },
     {
@@ -3025,6 +3106,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "pain_on_touch", "excessive_thirst"},
         "description": "A malignant tumor of the anal glands causing elevated calcium levels and straining.",
         "description_ja": "肛門腺の悪性腫瘍で、高カルシウム血症と排便困難を引き起こします。",
+        "pathophysiology_ja": "肛門嚢のアポクリン腺上皮の悪性増殖→肛門周囲の浸潤性腫瘤→仙骨下リンパ節転移（50〜90%で診断時に転移あり）→肺転移。腫瘍随伴性高カルシウム血症（PTHrP産生、約25〜50%）→多飲多尿・腎障害・筋力低下。高Ca血症が初発症状となり偶然発見されることがある。",
+        "causes_ja": "原因不明。中高齢犬（平均10〜11歳）。スパニエル種に好発との報告あるが、全犬種で発生。避妊/去勢との関連は不明確。直腸検査での偶然発見が多い。片側性が多いが両側性もある。",
+        "prevention_ja": "確実な予防法はない。中高齢犬の定期的な直腸検査（肛門嚢の触診）。高Ca血症の犬では本疾患を鑑別に挙げる。外科的切除＋仙骨下リンパ節郭清が標準治療。MST 12〜18ヶ月（手術＋化学療法）。",
         "urgency": "normal",
     },
     {
@@ -3041,6 +3125,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lumps", "coughing", "difficulty_breathing"},
         "description": "A malignant tumor of the thyroid gland, often presenting as a neck mass.",
         "description_ja": "甲状腺の悪性腫瘍で、頸部の腫瘤として発見されることが多いです。",
+        "pathophysiology_ja": "甲状腺濾胞上皮細胞の悪性増殖→頸部の固着性腫瘤→気管・食道・頸静脈への浸潤→呼吸困難・嚥下障害。犬の甲状腺腫瘍の85〜90%が悪性（人とは逆で良性が少ない）。約35〜40%が機能性（甲状腺機能亢進症を伴う）。肺・局所リンパ節への転移率は診断時30〜40%。可動性の場合は予後良好、固着性は予後不良。",
+        "causes_ja": "原因不明。ビーグル、ボクサー、ゴールデンレトリーバーに好発。中高齢犬（9〜11歳）。多くは非機能性で甲状腺ホルモン値は正常。頸部の触診で偶然発見されることが多い。腫瘤がfree（可動性あり）かfixed（固着性）かで手術適応と予後が大きく異なる。",
+        "prevention_ja": "確実な予防法はない。中高齢犬の定期的な頸部触診。可動性のある腫瘤は外科的切除で予後良好（MST >3年）。固着性は放射性ヨウ素療法（I-131）またはドキソルビシン化学療法を検討。",
         "urgency": "normal",
     },
     {
@@ -3164,6 +3251,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "skin_redness", "rapid_breathing", "fever"},
         "description": "Concurrent IMHA and immune-mediated thrombocytopenia, a serious autoimmune condition.",
         "description_ja": "IMHAと免疫介在性血小板減少症の同時発生で、重篤な自己免疫疾患です。",
+        "pathophysiology_ja": "免疫介在性溶血性貧血（IMHA）＋免疫介在性血小板減少症（ITP）の同時発症→赤血球と血小板の両方が自己抗体により破壊→重度貧血＋出血傾向の二重苦。IMHA単独よりも予後不良（致死率40〜70%）。DIC・血栓塞栓症の合併リスクが極めて高い。",
+        "causes_ja": "一次性（特発性自己免疫性、最多）。二次性：腫瘍（リンパ腫）、感染症（Ehrlichia・Babesia）、薬剤性。IMHA好発犬種と同様（コッカースパニエル、プードル、オールドイングリッシュシープドッグ）。中年雌犬に多い。",
+        "prevention_ja": "確実な予防法はない。IMHA治療中の血小板数モニタリングが重要。強力な免疫抑制療法（プレドニゾロン＋ミコフェノール酸モフェチル/シクロスポリン）＋抗血栓療法が必要。輸血サポート。",
         "urgency": "emergency",
     },
     # ---- Urinary (expanded) ----
@@ -3192,6 +3282,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"straining_urinate", "pain_on_touch", "vomiting", "lethargy"},
         "description": "Complete blockage of the urethra by stones or mucus plug, a life-threatening emergency in males.",
         "description_ja": "結石や粘液栓による尿道の完全閉塞で、オス犬では致命的な緊急疾患です。",
+        "pathophysiology_ja": "尿道結石（ストルバイト・シュウ酸カルシウム・尿酸塩）または粘液栓による尿道完全閉塞→排尿不能→膀胱の過伸展→腎後性高窒素血症（BUN・Cre上昇）→高カリウム血症→心室性不整脈・心停止。閉塞後24〜48時間で致死的な代謝異常に進展。雄犬は陰茎骨部位で尿道が狭く閉塞しやすい。",
+        "causes_ja": "尿路結石（最多：ストルバイト・シュウ酸カルシウム）、腫瘍（TCC）、前立腺肥大による尿道圧排、尿道狭窄。雄犬に圧倒的に多い（解剖学的に尿道が長く陰茎骨で狭窄）。ダルメシアン（尿酸塩結石）、ミニチュアシュナウザー（シュウ酸Ca）。",
+        "prevention_ja": "結石再発防止食（ストルバイト：酸性化食、シュウ酸Ca：クエン酸K＋適度な水分摂取）、定期的な尿検査・腹部エコー、十分な飲水量の確保。排尿困難の早期受診が救命に直結。",
         "urgency": "emergency",
     },
     # ---- Dental (expanded) ----
@@ -3343,6 +3436,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "rapid_breathing", "collapse", "appetite_loss"},
         "description": "Inflammation of the heart muscle, often caused by infection, leading to cardiac dysfunction.",
         "description_ja": "心筋の炎症で、しばしば感染により引き起こされ、心機能障害を招きます。",
+        "pathophysiology_ja": "感染性/免疫介在性の心筋炎症→心筋細胞の壊死・線維化→収縮機能障害（急性DCM様）＋不整脈（心室性不整脈が致死的）。急性期：心原性ショック・突然死のリスク。慢性期：拡張型心筋症への進展。外傷性心筋炎（交通事故後24〜72時間に心室性不整脈が出現）が犬で臨床的に重要。",
+        "causes_ja": "感染性：パルボウイルス（新生子犬の心筋型）、トリパノソーマ（Chagas病、南米）、Bartonella、Borrelia。非感染性：外傷性（交通事故後の心筋挫傷→不整脈）、免疫介在性、薬剤性（ドキソルビシン心筋毒性）。犬では外傷性とパルボウイルス性が最も多い。",
+        "prevention_ja": "パルボウイルスワクチンの適切な接種。交通事故犬は48時間のECGモニタリング推奨。ドキソルビシン使用時の総投与量管理（240mg/m²以下）。",
         "urgency": "emergency",
     },
     {
@@ -3532,6 +3628,9 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Cardiac Tamponade",
+        "pathophysiology_ja": "心嚢腔への急速な液体貯留→心嚢内圧が心房圧を超過→心臓の拡張障害→心拍出量の急激な低下→静脈還流障害→Beck三徴（頸静脈怒張・低血圧・心音減弱）→心原性ショック→心停止。急性（血管肉腫破裂・心房裂傷）では少量の液体でも致命的。心嚢穿刺（pericardiocentesis）が緊急的治療。",
+        "causes_ja": "腫瘍性（右心房血管肉腫が最多、心基底部腫瘍、中皮腫）、特発性（良性反復性心嚢水）、心房裂傷（小型犬の左房破裂：MMVD末期）、感染性（犬では稀）、凝固障害。ゴールデンレトリーバー・ジャーマンシェパードに好発（血管肉腫）。",
+        "prevention_ja": "確実な予防法はない。心嚢水の原因精査（心エコー・心嚢液細胞診）が重要。反復性の場合は心嚢膜切除術。腫瘍性は原疾患の予後に依存。",
         "name_ja": "心タンポナーデ",
         "symptoms": {"collapse", "difficulty_breathing", "rapid_breathing", "lethargy", "excessive_panting"},
         "description": "Life-threatening compression of the heart by fluid accumulation in the pericardial sac, requiring emergency drainage.",
@@ -3552,6 +3651,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "lethargy", "difficulty_breathing", "excessive_panting", "rapid_breathing"},
         "description": "A dangerous rapid heart rhythm originating from the ventricles that can lead to sudden death.",
         "description_ja": "心室から発生する危険な頻拍で、突然死につながる可能性があります。",
+        "pathophysiology_ja": "心室筋のリエントリー回路または異常自動能→心室の急速な異所性興奮（HR>160-300/min）→心室充満時間の短縮→心拍出量低下→失神・虚脱。持続性VT→心室細動（VF）→心停止・突然死。犬で最も多い致死性不整脈。R-on-T現象（VPCがT波に乗る）はVFへの移行リスクが最も高い。",
+        "causes_ja": "脾臓血管肉腫（最多の腫瘍性原因）、DCM（ドーベルマン・ボクサーARVC）、GDV（胃捻転に伴う再灌流障害）、心筋炎、電解質異常（高K血症）、薬物中毒（ジゴキシン）、外傷性心筋炎（交通事故後24〜72時間）。",
+        "prevention_ja": "基礎疾患の管理。好発犬種（ドーベルマン・ボクサー）のホルター心電図スクリーニング。VPC>50/日で抗不整脈薬（ソタロール・メキシレチン）を検討。GDV術後は48時間のECGモニタリングが推奨。",
         "urgency": "emergency",
     },
     {
@@ -3560,6 +3662,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "lethargy", "reluctance_move", "excessive_panting", "stiffness"},
         "description": "Complete block of electrical signals from the atria to ventricles, causing dangerously slow heart rate.",
         "description_ja": "心房から心室への電気信号の完全遮断で、危険な徐脈を引き起こします。",
+        "pathophysiology_ja": "房室結節またはHis束の完全な伝導途絶→心房と心室が独立して興奮（AV解離）→心室補充調律（escape rhythm: 20〜40bpm）→著明な徐脈→心拍出量低下→失神（Adams-Stokes発作）・運動不耐性・うっ血性心不全。ECGでP波とQRS波が完全に無関係（AV解離）。",
+        "causes_ja": "特発性線維化（高齢犬で最多）、心筋炎（Borrelia・Trypanosoma）、心筋梗塞、心臓腫瘍（リンパ腫・血管肉腫のAVN浸潤）、先天性。コッカースパニエル・ダックスフンドに報告多い。薬剤性（ジゴキシン中毒・Ca channel blocker過量）は可逆的。",
+        "prevention_ja": "確実な予防法はない。症候性の完全AVブロックはペースメーカー植込みが唯一の根治的治療。一時的にアトロピン・イソプロテレノールで心拍数を維持。原因疾患の治療（感染性の場合は抗菌薬で回復の可能性あり）。",
         "urgency": "emergency",
     },
     # ---- Endocrine ----
@@ -3585,6 +3690,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "stiffness", "lethargy", "anxiety", "excessive_panting"},
         "description": "Deficient parathyroid hormone causing dangerously low blood calcium levels, muscle tremors and seizures.",
         "description_ja": "副甲状腺ホルモンの欠乏により危険な低カルシウム血症、筋肉の震えとけいれんを引き起こします。",
+        "pathophysiology_ja": "PTH分泌低下→腸管Ca吸収低下＋腎Ca再吸収低下＋骨吸収低下→低カルシウム血症（iCa<1.0mmol/L）→神経筋興奮性亢進→筋線維束攣縮・テタニー・全身性けいれん。低Ca血症は心臓の電気的活動にも影響→QT延長→不整脈。同時に高リン血症（腎からのP排泄低下）。",
+        "causes_ja": "医原性（甲状腺手術時の副甲状腺の損傷・除去が最多）、特発性（免疫介在性の副甲状腺破壊）。トイプードル・ラブラドール・ジャーマンシェパードに報告多い。特発性は中年犬に多い。甲状腺手術後24〜72時間でCaモニタリングが必須。",
+        "prevention_ja": "甲状腺手術時の副甲状腺の愛護的温存。術後の血清Ca定期測定。確定後はビタミンD（カルシトリオール0.02〜0.03μg/kg/日）＋経口Caの生涯補充。",
         "urgency": "emergency",
     },
     {
@@ -4216,6 +4324,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"difficulty_breathing", "rapid_breathing", "collapse", "coughing", "lethargy", "excessive_panting"},
         "description": "Blood clot in the pulmonary arteries causing acute respiratory distress; often secondary to other conditions.",
         "description_ja": "肺動脈の血栓による急性呼吸困難で、他の疾患に続発することが多いです。",
+        "pathophysiology_ja": "血栓（全身静脈系からの塞栓、またはin situ形成）が肺動脈を閉塞→肺血管抵抗の急激な上昇→右心負荷→V/Qミスマッチ→低酸素血症→急性呼吸困難。大塊PTEは突然死の原因。犬のPTEはほぼ常に基礎疾患に続発する（独立した疾患としての発症は稀）。",
+        "causes_ja": "IMHA（最多の基礎疾患、PTEがIMHAの主要死因）、クッシング症候群（凝固亢進状態）、DIC、蛋白漏出性腎症/腸症（アンチトロンビンIII喪失）、血管肉腫、敗血症。Virchowの三徴（血管内皮障害・血流停滞・凝固亢進）の全てが犬でも関与。",
+        "prevention_ja": "高リスク疾患（IMHA・PLE/PLN・クッシング）での抗血栓療法（低用量アスピリン＋クロピドグレル）。IMHA治療中は抗血栓薬の併用が標準。急性呼吸困難の犬ではPTEを鑑別に含める。",
         "urgency": "emergency",
     },
     {
@@ -4496,6 +4607,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "abdominal_pain", "vomiting", "lethargy", "collapse", "bloated_abdomen", "dehydration"},
         "description": "Life-threatening inflammation of the peritoneum, often from GI perforation, bile leakage, or ruptured abscess.",
         "description_ja": "腹膜の致死的炎症で、消化管穿孔、胆汁漏出、膿瘍破裂が原因となることが多いです。",
+        "pathophysiology_ja": "腹膜への細菌・化学物質の曝露→急性腹膜炎→大量の炎症性滲出液の腹腔内貯留→全身性炎症反応症候群（SIRS）→敗血症性ショック→多臓器不全。原因：(1)消化管穿孔（異物・潰瘍・腫瘍・術後縫合不全）、(2)胆汁性（胆嚢破裂・胆管損傷）、(3)尿腹（膀胱破裂）、(4)膵臓性（重症膵炎からの波及）。",
+        "causes_ja": "消化管穿孔（異物・NSAID潰瘍・腫瘍が三大原因）、胆嚢粘液嚢腫の破裂、子宮蓄膿症の破裂（開放型→閉鎖型移行時）、術後合併症（腸管吻合部の裂開）。犬ではGDV術後、異物による腸穿孔が多い。",
+        "prevention_ja": "消化管異物の予防、NSAID使用時の消化管保護（オメプラゾール併用）、胆嚢粘液嚢腫の早期発見・予防的胆嚢摘出。急性腹症は緊急開腹探査が必要。",
         "urgency": "emergency",
     },
     {
@@ -4504,6 +4618,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "rapid_breathing", "lethargy", "bloated_abdomen", "excessive_panting"},
         "description": "Free blood in the abdominal cavity from splenic/hepatic mass rupture, trauma, or coagulopathy.",
         "description_ja": "脾臓・肝臓腫瘤の破裂、外傷、凝固障害による腹腔内遊離血液です。",
+        "pathophysiology_ja": "腹腔内への急速な出血→循環血液量の低下→出血性ショック（頻脈・蒼白粘膜・CRT延長・低血圧）。腹部FACTエコー（focused assessment with CT for trauma/triage）で遊離液の迅速検出。腹腔穿刺でPCV>10%の血性液を確認→血腹。自己輸血（autotransfusion：腹腔内血液の回収輸血）が緊急的に有用。",
+        "causes_ja": "脾臓血管肉腫の破裂（最多の非外傷性原因、ゴールデンレトリーバー）、肝臓腫瘤の破裂、外傷（交通事故・落下）、抗凝固性殺鼠剤中毒、脾臓血腫の破裂。脾臓腫瘤の2/3が悪性（血管肉腫）。",
+        "prevention_ja": "好発犬種の定期的腹部エコー。突然の虚脱・粘膜蒼白・腹部膨満は超緊急受診。安定化（輸液・自己輸血）→緊急開腹→脾摘が標準治療。",
         "urgency": "emergency",
     },
     {
@@ -4668,6 +4785,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"pain_on_touch", "stiffness", "reluctance_move", "seizures", "collapse"},
         "description": "Instability between the first and second cervical vertebrae causing spinal cord compression; seen in toy breeds.",
         "description_ja": "第1・第2頸椎間の不安定性で脊髄圧迫を引き起こし、小型犬種に見られます。",
+        "pathophysiology_ja": "環椎（C1）と軸椎（C2）間の靭帯（横靭帯・歯突起靭帯）の先天的欠損/不全＋歯突起の低形成/無形成→環軸椎間の不安定性→頸部屈曲時に軸椎の背側偏位→上位頸髄の圧迫→頸部激痛〜四肢不全麻痺〜呼吸停止（重度）。外傷（軽度のジャンプ・落下でも）で急性増悪のリスク。",
+        "causes_ja": "先天性（歯突起の形成不全・靭帯の欠損が最多）。トイ犬種に好発：ヨークシャーテリア（最多）、チワワ、ポメラニアン、トイプードル、マルチーズ。多くは1歳未満で発症。後天性は外傷・リウマチ性関節炎に伴う。",
+        "prevention_ja": "好発犬種の頸部X線スクリーニング（繁殖前）。罹患犬は首輪禁止（ハーネス使用必須）、ジャンプ・階段昇降の制限、頭部を持ち上げる行動の回避。症候性は外科的固定術（ventral stabilization）が推奨。",
         "urgency": "emergency",
     },
     {
@@ -4732,6 +4852,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"swollen_joints", "fever", "limping_fl", "limping_fr", "limping_rl", "limping_rr", "pain_on_touch", "lethargy"},
         "description": "Bacterial infection of a joint causing acute swelling, heat, pain, and systemic illness.",
         "description_ja": "関節の細菌感染で、急性腫脹、熱感、疼痛、全身症状を引き起こします。",
+        "pathophysiology_ja": "細菌の関節内侵入（血行性・直接外傷性・医原性）→滑膜の急性化膿性炎症→好中球性関節液（混濁・細胞数>40,000/μL）→細菌性プロテアーゼ＋好中球のリソソーム酵素→関節軟骨の急速な破壊→不可逆的関節障害。未治療では数日で関節破壊が進行するため超緊急。",
+        "causes_ja": "血行性播種（感染性心内膜炎・椎間板脊椎炎・菌血症）、穿通創（咬傷・交通事故）、関節手術後の医原性感染、関節内注射後。Staphylococcus（最多）、Streptococcus、E. coli。膝・肘・手根関節に多い。免疫介在性多発性関節炎との鑑別が重要（関節液の培養・グラム染色）。",
+        "prevention_ja": "穿通創の適切なデブリードマン、関節手術時の無菌操作、菌血症源（歯周病・UTI）の管理。関節液の培養＋抗菌薬感受性試験に基づく長期抗菌薬療法（最低4〜6週間）＋関節洗浄が治療の柱。",
         "urgency": "emergency",
     },
     {
@@ -4925,6 +5048,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_rl", "limping_rr", "stiffness", "reluctance_move", "incontinence"},
         "description": "Progressive degenerative disease of the spinal cord causing hind limb weakness.",
         "description_ja": "脊髄の進行性変性疾患で後肢の脱力を引き起こします。",
+        "pathophysiology_ja": "SOD1遺伝子変異→スーパーオキシドジスムターゼ1の異常→脊髄白質（特に胸腰椎領域の背側索・側索）の進行性軸索変性・脱髄→上位運動ニューロン性後肢不全麻痺→進行して下位運動ニューロン性麻痺→前肢にも波及→最終的に呼吸筋障害。人のALS（筋萎縮性側索硬化症）と類似。発症から完全対麻痺まで6〜36ヶ月。非疼痛性。",
+        "causes_ja": "SOD1遺伝子変異（常染色体劣性）。ホモ接合体（A/A）で発症リスクが高い。好発犬種：ジャーマンシェパード（最多）、ウェルシュコーギー・ペンブローク、ボクサー、ロードシアンリッジバック、チェサピークベイレトリーバー。8歳以上で発症。除外診断（IVDD等を除外後）＋SOD1遺伝子検査で臨床診断。確定は剖検時の脊髄病理のみ。",
+        "prevention_ja": "SOD1遺伝子検査による繁殖管理（ホモ接合体犬の繁殖制限）。治療法はないが、リハビリテーション（水泳・車椅子）でQOLと筋量維持。ビタミンE・B群・EPA/DHAの補充が一部で推奨されるがエビデンスは限定的。",
         "urgency": "normal",
     },
     {
@@ -5201,6 +5327,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "vomiting", "bloated_abdomen", "appetite_loss", "collapse"},
         "description": "Leakage of urine into the abdominal cavity.",
         "description_ja": "尿路破裂により尿が腹腔内に漏出する状態です。",
+        "pathophysiology_ja": "尿路（膀胱・尿管・尿道）の破裂→尿の腹腔内漏出→腹膜の化学的炎症→尿中の尿素・クレアチニン・Kが腹腔から再吸収→高窒素血症・高カリウム血症→心不整脈・代謝性アシドーシス。腹腔穿刺液のCre値が血清値の2倍以上で確定診断。外傷後の血尿＋腹部膨満では常にuroleak を疑う。",
+        "causes_ja": "外傷性膀胱破裂（交通事故・落下が最多）、尿道閉塞後の膀胱破裂、医原性（カテーテル挿入・膀胱穿刺時の損傷）、尿管・腎盂の破裂（外傷・結石による閉塞後）。雄犬は尿道結石後の膀胱過伸展→破裂のリスクあり。",
+        "prevention_ja": "外傷犬の尿路損傷の早期評価（造影CT・レトログラードウレスログラフィー）。尿道閉塞の早期解除。外傷後の排尿量・腹部膨満のモニタリング。",
         "urgency": "emergency",
     },
     {
@@ -5209,6 +5338,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "abdominal_pain", "lethargy", "fever", "appetite_loss"},
         "description": "Leakage of bile into the abdomen.",
         "description_ja": "胆嚢または胆管の破裂により胆汁が腹腔に漏出します。",
+        "pathophysiology_ja": "胆嚢破裂（粘液嚢腫・壊死性胆嚢炎）または総胆管の閉塞→壊死→破裂→胆汁の腹腔内漏出→胆汁酸による強い化学性腹膜炎→全身性炎症反応（SIRS）→敗血症性ショック→多臓器不全。胆汁は無菌だが、続発性に細菌感染を伴うことが多い。腹腔穿刺液のビリルビン値が血清値の2倍以上で確定診断。",
+        "causes_ja": "胆嚢粘液嚢腫の破裂（犬で最多の原因）、壊死性胆嚢炎、胆石による総胆管閉塞→壊死、外傷、術後胆管損傷。シェルティ・コッカースパニエル・ミニチュアシュナウザー（粘液嚢腫好発犬種）。",
+        "prevention_ja": "胆嚢粘液嚢腫の早期発見・予防的胆嚢摘出、胆石・胆嚢炎の早期治療。急性腹症＋黄疸は緊急精査→開腹。",
         "urgency": "emergency",
     },
     {
@@ -5279,6 +5411,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"bloody_stool", "constipation", "pain_on_touch", "itching"},
         "description": "Chronic draining tracts around the anus, common in German Shepherds.",
         "description_ja": "肛門周囲の慢性瘻管でジャーマンシェパードに多いです。",
+        "pathophysiology_ja": "肛門周囲の皮膚・肛門嚢・直腸壁の慢性炎症→瘻管（sinus tract）形成→持続的な排膿・出血・悪臭。免疫介在性の要素が大きい（IBDの腸管外症状と類似）。肛門の尾根部位に好発し、尾の位置が低い犬種では通気性低下が悪化因子。排便時の激しい疼痛→しぶり・排便忌避→便秘。",
+        "causes_ja": "免疫介在性の病態（T細胞介在性）。好発：ジャーマンシェパード（圧倒的に多い、約84%）、アイリッシュセッター。低い尾根・広い肛門周囲皮膚皺が解剖学的リスク因子。IBDとの併存あり。食物アレルギーの関与も示唆。",
+        "prevention_ja": "確実な予防法はない。シクロスポリン（5mg/kg/日）が第一選択薬（奏効率80〜90%）。タクロリムス外用併用。食事管理（新奇蛋白食）。外科的治療は免疫抑制療法が無効な場合のみ検討。",
         "urgency": "normal",
     },
     {
@@ -5303,6 +5438,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_rl", "limping_rr", "collapse", "pain_on_touch"},
         "description": "Blood clot lodging in the aorta causing hind limb ischemia.",
         "description_ja": "大動脈に血栓が詰まり後肢の虚血を引き起こします。",
+        "pathophysiology_ja": "大動脈分岐部（鞍状塞栓、saddle thrombus）に血栓が嵌頓→後肢への血流遮断→急性後肢虚血→激しい疼痛・後肢の冷感・大腿動脈拍動消失・爪床のチアノーゼ→横紋筋融解→高K血症・腎障害。犬では猫ほど一般的ではないが、蛋白漏出性腎症・IMHA・クッシング症候群・心疾患に伴う凝固亢進状態で発症。",
+        "causes_ja": "凝固亢進状態：蛋白漏出性腎症/腸症（ATIII喪失）、IMHA、クッシング症候群、DCM、感染性心内膜炎。猫の動脈血栓塞栓症と比較して犬では稀だが、上記基礎疾患がある場合は発症リスクに注意。",
+        "prevention_ja": "高リスク疾患での抗血栓療法（クロピドグレル75mg/日＋低用量アスピリン）。蛋白漏出性腎症ではATIII活性のモニタリング。発症後は血栓溶解・支持療法だが予後は不良。",
         "urgency": "emergency",
     },
     {
@@ -5668,6 +5806,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"drooling", "vomiting", "diarrhea", "seizures", "difficulty_breathing", "excessive_urination"},
         "description": "Cholinesterase inhibitor poisoning causing SLUDGE signs (salivation, lacrimation, urination, defecation, GI distress, emesis).",
         "description_ja": "コリンエステラーゼ阻害剤中毒で、SLUDGE徴候（流涎・流涙・排尿・排便・消化器症状・嘔吐）を引き起こします。",
+        "pathophysiology_ja": "有機リン系化合物→アセチルコリンエステラーゼ（AChE）の不可逆的阻害→シナプス間隙のアセチルコリン蓄積→(1)ムスカリン様作用（SLUDGE/DUMBELS：流涎・流涙・排尿・排便・消化管蠕動亢進・嘔吐＋縮瞳・徐脈・気管支分泌亢進）、(2)ニコチン様作用（筋線維束攣縮→筋麻痺）、(3)中枢作用（不安・けいれん・昏睡）。気管支分泌亢進＋呼吸筋麻痺→呼吸不全が主要死因。",
+        "causes_ja": "有機リン系殺虫剤（マラチオン・ジアジノン・クロルピリホス等）、カーバメート系農薬の経口・経皮・吸入暴露。庭園用殺虫剤の誤食、農薬散布地域での曝露。日本では家庭園芸用殺虫剤に含まれることがある。カーバメート中毒はOPより予後良好（可逆的阻害）。",
+        "prevention_ja": "有機リン系殺虫剤の犬からの隔離、散布後の立入制限、代替殺虫剤の使用。アトロピン（ムスカリン拮抗）＋プラリドキシム（2-PAM、AChE再活性化）が特異的解毒療法。",
         "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "cholinesterase_level"],
     },
