@@ -4067,6 +4067,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "limping_fl", "limping_fr", "limping_rl", "limping_rr", "weight_loss", "excessive_thirst", "excessive_urination"},
         "description": "Cancer of plasma cells in bone marrow causing bone pain, kidney damage, and immunodeficiency.",
         "description_ja": "骨髄の形質細胞の癌で、骨痛、腎障害、免疫不全を引き起こします。",
+        "pathophysiology_ja": "骨髄内の形質細胞の腫瘍性増殖→(1)骨溶解性病変→病的骨折・骨痛、(2)モノクローナルガンマグロブリン血症（Mスパイク）→過粘稠度症候群（網膜出血・神経症状）、(3)ベンスジョーンズ蛋白尿→腎障害、(4)正常免疫グロブリン産生抑制→易感染性。骨髄の腫瘍性占拠→汎血球減少。",
+        "causes_ja": "原因不明。中高齢犬（8〜12歳）。ジャーマンシェパードに報告多い。血清蛋白電気泳動でMスパイク＋骨X線で溶解性病変＋骨髄検査で形質細胞>20%で確定診断。",
+        "prevention_ja": "確実な予防法はない。メルファラン＋プレドニゾロン（MP療法）が標準化学療法。MST 18〜24ヶ月。高Ca血症と過粘稠度症候群は緊急管理が必要。",
         "urgency": "urgent",
     },
     {
@@ -4086,6 +4089,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lumps", "constipation", "bloody_stool", "straining_urinate", "weight_loss"},
         "description": "Malignant perianal gland tumor, more common in neutered males; tends to invade locally and metastasize.",
         "description_ja": "肛門周囲腺の悪性腫瘍で、去勢した雄犬に多く、局所浸潤と転移の傾向があります。",
+        "pathophysiology_ja": "肛門周囲腺（肝様腺）の悪性増殖→局所浸潤→仙骨下リンパ節・肺への転移。良性の肛門周囲腺腫（ホルモン依存性、未去勢雄に多い）とは異なり、腺癌はホルモン非依存性で去勢犬・雌犬にも発生。",
+        "causes_ja": "原因不明。去勢雄犬に多い（腺腫とは対照的）。中高齢犬。ジャーマンシェパード・北極犬種に報告多い。良性腺腫との鑑別は生検が必須。",
+        "prevention_ja": "確実な予防法はない。肛門周囲の腫瘤は早期に生検。広範囲切除＋放射線療法。放射線のみでもMST 2年以上の報告あり。",
         "urgency": "urgent",
     },
     {
@@ -4094,6 +4100,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"nasal_discharge", "sneezing", "difficulty_breathing", "eye_discharge", "appetite_loss"},
         "description": "Lymphoma arising in the nasal cavity, causing chronic nasal discharge, epistaxis, and facial deformity.",
         "description_ja": "鼻腔に発生するリンパ腫で、慢性鼻汁、鼻出血、顔面変形を引き起こします。",
+        "pathophysiology_ja": "鼻腔粘膜のリンパ球の腫瘍性増殖→鼻腔内の腫瘤形成→一側性→両側性の鼻汁（粘液性→血性）→鼻骨の破壊→顔面変形。篩骨板への浸潤→脳への直接浸潤。上皮向性T細胞リンパ腫が犬の鼻腔リンパ腫で最多。鼻腔腺癌との鑑別が生検で必要。",
+        "causes_ja": "原因不明。長頭種に好発（鼻腔腫瘍全般と同様）。中高齢犬。一側性の慢性鼻汁・鼻出血が初発症状。CT→鼻腔内生検で確定診断。",
+        "prevention_ja": "確実な予防法はない。放射線療法＋化学療法（CHOP）が標準。鼻腔リンパ腫は鼻腔腺癌より化学療法への反応が良好でMST 12〜24ヶ月。",
         "urgency": "urgent",
     },
     {
@@ -4125,6 +4134,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "appetite_loss", "skin_lesions", "swelling"},
         "description": "Immune destruction of neutrophils leading to severe susceptibility to bacterial infections.",
         "description_ja": "好中球の免疫介在性破壊で、細菌感染に対する重度の感受性を引き起こします。",
+        "pathophysiology_ja": "抗好中球自己抗体→好中球の破壊促進＋骨髄での成熟阻害→重度の好中球減少（<1,000/μL）→日和見細菌感染のリスク→敗血症。IMHA・ITPとの併発（免疫介在性二〜三系統血球減少症）がある。",
+        "causes_ja": "一次性（特発性、自己免疫性）。二次性：薬剤性（トリメトプリム・サルファ、フェノバルビタール）、パルボウイルス感染、骨髄腫瘍。犬種好発はないが、IMHA/ITP好発犬種と重複。",
+        "prevention_ja": "薬剤誘発性が疑われる場合は原因薬の中止。免疫抑制療法（プレドニゾロン）＋二次感染予防。G-CSF製剤は犬での使用経験が限られる。",
         "urgency": "urgent",
     },
     {
@@ -4133,6 +4145,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "skin_redness", "itching", "hair_loss", "fever"},
         "description": "An autoimmune blistering skin disease where antibodies attack the basement membrane zone.",
         "description_ja": "抗体が基底膜帯を攻撃する自己免疫性水疱性皮膚疾患です。",
+        "pathophysiology_ja": "表皮基底膜帯（BMZ）の構成蛋白（BP180/BP230）に対する自己抗体（IgG）→基底膜の破壊→表皮下水疱の形成→大型の緊満性水疱・びらん→二次感染。天疱瘡（表皮内水疱）とは異なり表皮下水疱（基底膜の破壊）が特徴。口腔・皮膚移行部・腋窩・鼠径部に好発。",
+        "causes_ja": "一次性（特発性自己免疫性）。薬剤誘発性の報告もあり。犬では稀な疾患。コリー・シェルティ・ドーベルマンに報告あり。皮膚生検で表皮下水疱＋基底膜帯のIgG沈着（直接免疫蛍光法）で確定診断。",
+        "prevention_ja": "確実な予防法はない。免疫抑制療法（プレドニゾロン＋アザチオプリン/ミコフェノール酸モフェチル）。天疱瘡より治療反応は良好な場合が多い。",
         "urgency": "urgent",
     },
     {
@@ -4141,6 +4156,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "pain_on_touch", "stiffness", "lethargy", "reluctance_move", "appetite_loss"},
         "description": "Non-infectious inflammation of the meninges caused by immune dysregulation, causing neck pain and fever.",
         "description_ja": "免疫調節障害による非感染性髄膜炎で、頸部痛と発熱を引き起こします。",
+        "pathophysiology_ja": "髄膜への免疫細胞浸潤→無菌性髄膜炎→頸部硬直・激しい疼痛・高熱。SRMAと同スペクトラムの疾患。CSF解析で好中球性/リンパ球性多細胞症。細菌培養陰性が免疫介在性の根拠。",
+        "causes_ja": "原因不明の免疫介在性。SRMA（最も一般的な犬の免疫介在性髄膜炎）と重複する概念。若齢犬に好発。ビーグル・バーニーズに多い。",
+        "prevention_ja": "ステロイド療法で予後良好。プレドニゾロン2mg/kg→6ヶ月以上の漸減が標準。",
         "urgency": "urgent",
     },
     {
@@ -4149,6 +4167,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"eye_redness", "squinting", "skin_lesions", "hair_loss", "eye_discharge"},
         "description": "An autoimmune disease targeting melanocytes causing uveitis, depigmentation of the nose and skin.",
         "description_ja": "メラノサイトを標的とする自己免疫疾患で、ぶどう膜炎と鼻・皮膚の色素脱失を引き起こします。",
+        "pathophysiology_ja": "メラノサイトに対する細胞性免疫反応→(1)両側性肉芽腫性ぶどう膜炎（前部＋後部）→網膜剥離・失明、(2)皮膚・鼻鏡・口唇のメラノサイト破壊→色素脱失・白毛症。眼症状が先行し、皮膚症状が後に出現するのが典型的。",
+        "causes_ja": "メラノサイト特異的抗原に対するT細胞介在性自己免疫疾患。秋田犬（最も好発）、サモエド、シベリアンハスキー、シェルティに好発。若齢〜中齢犬。DLA遺伝子多型との関連が報告。",
+        "prevention_ja": "確実な予防法はない。早期の積極的免疫抑制療法（プレドニゾロン＋アザチオプリン）が視力温存に不可欠。ぶどう膜炎の治療が遅れると二次性緑内障→失明。皮膚色素脱失は美容的問題のみ。",
         "urgency": "urgent",
     },
     {
@@ -4157,6 +4178,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "skin_lesions", "limping_fl", "limping_fr", "limping_rl", "limping_rr", "skin_redness"},
         "description": "An autoimmune condition where antibodies attack red blood cells at low temperatures, causing peripheral tissue necrosis.",
         "description_ja": "低温で赤血球を攻撃する抗体による自己免疫疾患で、末梢組織壊死を引き起こします。",
+        "pathophysiology_ja": "寒冷反応性IgM自己抗体→低温（<37℃）で赤血球を凝集→補体活性化→末梢組織（耳介・尾尖・足趾・鼻鏡）の微小血管閉塞→チアノーゼ→壊死・脱落。温かい環境では凝集が解離するため症状は寒冷曝露後に増悪。",
+        "causes_ja": "一次性（特発性）。二次性：リンパ腫・白血病・慢性感染症に伴う。犬では稀な疾患。冬季に悪化。耳介辺縁・尾尖・足趾の壊死として来院。",
+        "prevention_ja": "寒冷環境の回避が最重要。保温管理。二次性の場合は基礎疾患の治療。プレドニゾロンへの反応は不良なことが多い（IgM抗体はステロイドに抵抗性）。",
         "urgency": "urgent",
     },
     # ---- Toxicoses ----
@@ -4166,6 +4190,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "lethargy", "stiffness", "fever", "limping_rl", "limping_rr", "reluctance_move"},
         "description": "Ingestion of macadamia nuts causing weakness, vomiting, hyperthermia, and hind limb tremors in dogs.",
         "description_ja": "マカダミアナッツの摂取により犬に衰弱、嘔吐、高体温、後肢の震えを引き起こします。",
+        "pathophysiology_ja": "毒性物質は未同定。摂取後6〜24時間で後肢の衰弱・起立不能・振戦→嘔吐・高体温（39.5〜40.5℃）・腹痛。メカニズムは不明だが筋肉・関節への直接毒性またはPG阻害が示唆される。通常24〜48時間で自然回復する自己限定性中毒。致死例の報告はほとんどない。",
+        "causes_ja": "マカダミアナッツの摂取。毒性量は2.4g/kg以上。チョコレートマカダミアクッキー等の複合製品ではチョコレート中毒が加わり重篤化。犬に特異的な中毒（猫では報告なし）。",
+        "prevention_ja": "マカダミアナッツ製品のペットからの隔離。支持療法（輸液・疼痛管理・制吐薬）。チョコレートとの複合摂取は両方の中毒量を計算。",
         "urgency": "urgent",
     },
     {
