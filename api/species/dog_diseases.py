@@ -4641,6 +4641,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"blood_urine", "straining_urinate", "vomiting", "abdominal_pain", "lethargy"},
         "description": "Mineral stones in the kidney pelvis that can cause obstruction, infection, and chronic kidney damage.",
         "description_ja": "腎盂の鉱物結石で、閉塞、感染、慢性腎障害を引き起こす可能性があります。",
+        "pathophysiology_ja": "尿中のミネラル（シュウ酸Ca・リン酸MgNH₄・尿酸塩等）の過飽和→腎盂内での結晶核形成→結石の成長。尿管閉塞→水腎症→腎実質の圧迫壊死→腎不全。慢性の結石は腎盂腎炎の温床。片側/両側性。",
+        "causes_ja": "結石組成による：シュウ酸Ca（最多、溶解不可）、ストルバイト（感染結石、溶解可能）、尿酸塩（ダルメシアン）。高Ca尿症、代謝異常、UTI（ストルバイト形成菌）。腹部エコー・X線で検出。",
+        "prevention_ja": "結石組成に応じた食事療法（シュウ酸Ca：適度な水分・クエン酸K）、UTIの治療、定期的な尿検査・エコー。外科的除去（腎切開・尿管切開）または体外衝撃波砕石術。",
         "urgency": "urgent",
     },
     {
@@ -4649,6 +4652,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"blood_urine", "genital_discharge", "straining_urinate", "excessive_urination"},
         "description": "Protrusion of urethral mucosa beyond the external urethral orifice, seen in young male English Bulldogs.",
         "description_ja": "尿道粘膜が外尿道口を超えて突出する状態で、若い雄のイングリッシュブルドッグに見られます。",
+        "pathophysiology_ja": "尿道粘膜が外尿道口から外方に突出・反転→露出した粘膜の乾燥・浮腫・出血→持続的な陰茎先端からの血性分泌物。排尿困難は通常軽度。性的興奮・排尿時のいきみが誘因。",
+        "causes_ja": "先天性の尿道粘膜の弛緩。イングリッシュブルドッグに最も好発。若齢の雄犬（1歳未満が多い）。ボストンテリア、ヨークシャーテリアにも報告。性的興奮との関連。",
+        "prevention_ja": "去勢手術（性的興奮の減少）。外科的切除（mucosal resection）が根治的治療。凍結手術（cryosurgery）も有効。",
         "urgency": "urgent",
     },
     {
@@ -4679,6 +4685,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"genital_discharge", "blood_urine", "lumps", "straining_urinate"},
         "description": "Tumors of the penis or prepuce including transmissible venereal tumor (TVT) and squamous cell carcinoma.",
         "description_ja": "可移植性性器腫瘍（TVT）や扁平上皮癌を含む陰茎または包皮の腫瘍です。",
+        "pathophysiology_ja": "TVT（可移植性性器腫瘍）：腫瘍細胞自体が感染因子（交尾時に異体間で腫瘍細胞が移植される唯一の天然腫瘍）→陰茎/膣のカリフラワー様腫瘤→血性分泌物。免疫正常犬では自然退縮もある。SCC：包皮/陰茎の上皮性悪性腫瘍。",
+        "causes_ja": "TVT：交尾・社会的接触で腫瘍細胞が直接伝播。野犬・放浪犬に多い。世界的分布（日本でも報告あり）。SCC：慢性刺激・包茎との関連。",
+        "prevention_ja": "TVT：去勢（交尾行動の制御）、放浪犬との接触回避。ビンクリスチン化学療法で90%以上の寛解率。SCC：外科的切除。",
         "urgency": "urgent",
     },
     # ---- Behavioral ----
