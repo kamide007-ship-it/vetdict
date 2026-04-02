@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
     // Restore view from URL hash
     const hash=location.hash.replace("#","");
-    if(hash&&["checker","database","chat","drugs"].includes(hash))switchView(hash);
+    if(hash&&["checker","database","chat","drugs","anesthesia"].includes(hash))switchView(hash);
     // Handle ?species= query param (from sitemap/SEO links)
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
