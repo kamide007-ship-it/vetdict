@@ -1950,6 +1950,30 @@ ANESTHESIA_PROTOCOLS["reptile"] = {
             "notes_ja": "覚醒は非常に遅い（数時間〜24時間）。POTZ上限に加温して代謝を促進。覚醒まで気管チューブを維持し、定期的にIPPVを実施。正向反射の回復で覚醒を確認。",
             "notes": "Recovery is very slow (hours to 24 hr). Warm to upper POTZ to promote metabolism. Maintain ET tube and provide periodic IPPV until recovery. Confirm recovery with righting reflex.",
         },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "5x the medetomidine dose used", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "",
+                 "notes_ja": "α2作動薬使用時の拮抗。効果発現が哺乳類より遅い。前肢にIM（腎門脈系回避）。", "notes": "α2-agonist reversal. Onset slower than in mammals. IM into forelimb (avoid renal portal system)."},
+            ],
+            "notes_ja": "覚醒は非常に遅い（数時間〜24時間以上）。POTZ上限に加温して代謝を促進。気管チューブは正向反射回復まで維持。IPPV（4-6回/min）を定期的に実施。覚醒後はPOTZ環境で24-48時間安静。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
+            "notes": "Recovery is very slow (hours to 24+ hr). Warm to upper POTZ to promote metabolism. Maintain ET tube until righting reflex returns. Periodic IPPV (4-6/min). Post-recovery: rest in POTZ environment for 24-48 hr. Analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.1-0.5 mg/kg", "route": "IC / IV (ventral tail vein)", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。心臓内投与が最も効果的。爬虫類の心臓は3室構造。腹側尾静脈からIVも可能。", "notes": "For CPA. Intracardiac most effective. Reptile heart is 3-chambered. IV via ventral tail vein also possible."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IM", "onset": "1-2 min", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時。爬虫類は長時間無呼吸が可能なため、真の呼吸停止かの判断が重要。", "notes": "For apnea. Reptiles can sustain prolonged apnea; determine if true respiratory arrest."},
+            ],
+            "notes_ja": "爬虫類のCPR: IPPV（4-6回/min）が最優先。心臓マッサージは腹側から。低体温の個体はPOTZ上限まで加温してから死亡判定（低体温で死亡に見えても回復することがある）。",
+            "notes": "Reptile CPR: IPPV (4-6/min) is top priority. Cardiac massage from ventral approach. Warm hypothermic individuals to upper POTZ before pronouncing death (may recover from apparent death).",
+        },
     ],
 }
 
@@ -1967,6 +1991,19 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
         "en": "24-48 hr fast (very slow GI transit).",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "1-2 mg/kg", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "30-60 min",
+                 "notes_ja": "前肢筋肉内。四肢を甲羅から引き出すための軽度鎮静。フルマゼニルで拮抗可。", "notes": "IM into forelimb. Light sedation to extend limbs from shell. Reversible with flumazenil."},
+                {"name": "Alfaxalone (low dose)", "name_ja": "アルファキサロン（低用量）", "dose": "3-5 mg/kg", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "20-40 min",
+                 "notes_ja": "低用量で鎮静。頭部・四肢を引き出して検査。効果発現まで忍耐が必要。", "notes": "Sedation at low dose. Extend head/limbs for examination. Patience needed for onset."},
+            ],
+            "notes_ja": "リクガメの検査は甲羅から頭・四肢を引き出す必要がある。鎮静なしでは困難な場合が多い。POTZ（26-32°C）維持が効果発現に不可欠。全注射は前肢に（腎門脈系回避）。",
+            "notes": "Tortoise examination requires extending head/limbs from shell. Often difficult without sedation. POTZ (26-32°C) maintenance essential for drug onset. All injections into forelimbs (avoid renal portal system).",
+        },
         {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
@@ -1994,6 +2031,17 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             ],
             "notes_ja": "覚醒は6-24時間かかる。POTZ上限に加温。気管チューブは覚醒まで維持。四肢引っ込め反射、頭部引っ込め反射で覚醒判定。",
             "notes": "Recovery takes 6-24 hr. Warm to upper POTZ. Maintain ET tube until recovery. Assess with limb/head withdrawal reflexes.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "5x medetomidine dose", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "",
+                 "notes_ja": "メデトミジン使用時。前肢にIM。", "notes": "For medetomidine reversal. IM into forelimb."},
+            ],
+            "notes_ja": "覚醒は6-24時間以上。POTZ上限（30-32°C）に加温。気管チューブは正向反射回復まで維持。四肢引っ込め反射→頭部引っ込め反射→自発呼吸の順に回復。覚醒後は浅い水場を提供（脱水予防）。",
+            "notes": "Recovery takes 6-24+ hr. Warm to upper POTZ (30-32°C). Maintain ET tube until righting reflex. Recovery sequence: limb withdrawal → head withdrawal → spontaneous breathing. Offer shallow water post-recovery (dehydration prevention).",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -2026,6 +2074,19 @@ ANESTHESIA_PROTOCOLS["snake"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・保定）", "en": "Sedation (Examination/Restraint)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "1-2 mg/kg", "route": "IM (cranial body)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "体の前1/3の筋肉にIM。筋弛緩作用で保定が容易に。攻撃的な個体の検査に有用。", "notes": "IM into cranial 1/3 body musculature. Muscle relaxation facilitates restraint. Useful for examining aggressive individuals."},
+                {"name": "Alfaxalone (low dose)", "name_ja": "アルファキサロン（低用量）", "dose": "3-5 mg/kg", "route": "IM / IV (ventral tail vein)", "onset": "5-15 min", "duration": "20-40 min",
+                 "notes_ja": "低用量で鎮静。IV投与は腹側尾静脈から。", "notes": "Sedation at low dose. IV via ventral tail vein."},
+            ],
+            "notes_ja": "大型ヘビ（ニシキヘビ等）は複数人での保定が必要。毒蛇の鎮静には専門知識が必須。POTZ（25-32°C）維持。注射は前半身に（腎門脈系回避）。",
+            "notes": "Large snakes (pythons) require multiple handlers. Venomous snake sedation requires specialized expertise. POTZ (25-32°C). Inject into cranial body (avoid renal portal system).",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2051,6 +2112,14 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             ],
             "notes_ja": "覚醒は遅い（数時間〜24時間）。POTZ上限に加温。舌のフリッキング（ちらつかせ）の回復が覚醒の指標。毒蛇は完全覚醒を確認するまで取り扱いに注意。",
             "notes": "Recovery is slow (hours to 24 hr). Warm to upper POTZ. Return of tongue flicking indicates recovery. Handle venomous snakes with extreme caution until fully recovered.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は遅い（数時間〜24時間）。POTZ上限に加温。舌のフリッキング（ちらつかせ）回復が覚醒の指標。自発呼吸の回復まで定期的IPPV。毒蛇は完全覚醒を確認するまで防護具着用。覚醒後は水場を提供。",
+            "notes": "Recovery is slow (hours to 24 hr). Warm to upper POTZ. Return of tongue flicking indicates recovery. Periodic IPPV until spontaneous breathing returns. Handle venomous snakes with protective equipment until fully recovered. Offer water post-recovery.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -2083,6 +2152,19 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "1-2 mg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM。軽度鎮静で検査・採血・放射線撮影。フルマゼニルで拮抗可。", "notes": "IM into forelimb. Light sedation for examination, blood collection, radiography. Reversible with flumazenil."},
+                {"name": "Alfaxalone (low dose)", "name_ja": "アルファキサロン（低用量）", "dose": "3-5 mg/kg", "route": "IM (forelimb)", "onset": "10-15 min", "duration": "20-40 min",
+                 "notes_ja": "低用量で鎮静。前肢にIM。", "notes": "Sedation at low dose. IM into forelimb."},
+            ],
+            "notes_ja": "トカゲの保定は尾の自切に注意（多くの種で尾が自切する）。フトアゴヒゲトカゲは比較的おとなしいが、イグアナは攻撃的になることがある。POTZ（25-35°C）維持。",
+            "notes": "Watch for tail autotomy during restraint (many species). Bearded dragons are relatively docile; iguanas can be aggressive. POTZ (25-35°C).",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2109,6 +2191,14 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             ],
             "notes_ja": "覚醒は数時間〜24時間。正向反射の回復で覚醒を判定。覚醒後はPOTZ上限の環境に。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
             "notes": "Recovery: hours to 24 hr. Righting reflex return indicates recovery. Place in upper POTZ environment after recovery. Post-op analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は数時間〜24時間。正向反射の回復で覚醒を判定。POTZ上限の環境で管理。覚醒後は紫外線ランプ（UVB）を再開し代謝を促進。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
+            "notes": "Recovery: hours to 24 hr. Righting reflex return indicates recovery. Manage in upper POTZ environment. Resume UVB lighting post-recovery to promote metabolism. Analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -2182,6 +2272,14 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
             "notes": "Recovery: transfer to fresh dechlorinated water. Confirm righting reflex return. High hypoxia tolerance but prolonged immersion risks pulmonary edema. Monitor in shallow water until full recovery.",
         },
         {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "回復: 新鮮な脱塩素水に移す。正向反射の回復を確認。皮膚を常に湿潤に保つ。完全回復まで浅い水で監視。回復時間: MS-222は5-30分、注射麻酔は数時間。術後鎮痛: メロキシカム0.2 mg/kg SC/ICe q24h。",
+            "notes": "Recovery: transfer to fresh dechlorinated water. Confirm righting reflex return. Keep skin moist at all times. Monitor in shallow water until full recovery. Recovery time: MS-222 5-30 min, injectable hours. Analgesia: meloxicam 0.2 mg/kg SC/ICe q24h.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -2247,6 +2345,14 @@ ANESTHESIA_PROTOCOLS["fish"] = {
             ],
             "notes_ja": "回復: 新鮮な（麻酔薬を含まない）エアレーション水に移す。口を開けて水流を当て、鰓を灌流。正常遊泳の回復まで監視。回復には3-15分。",
             "notes": "Recovery: transfer to fresh (anesthetic-free) aerated water. Direct water flow into mouth to irrigate gills. Monitor until normal swimming resumes. Recovery takes 3-15 min.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "新鮮な（麻酔薬を含まない）エアレーション水に移す。口を開けて水流を鰓に通す（手動灌流）。正常遊泳の回復まで監視。回復時間: 3-15分。回復しない場合は酸素化水の灌流を30分以上継続。術後は清潔な水環境で管理。",
+            "notes": "Transfer to fresh (anesthetic-free) aerated water. Open mouth and direct water flow through gills (manual irrigation). Monitor until normal swimming. Recovery: 3-15 min. If no recovery, continue oxygenated water irrigation for 30+ min. Post-op: manage in clean water environment.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},

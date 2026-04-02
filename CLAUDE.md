@@ -32,7 +32,7 @@ api/
   drug_batch_2.py         — 薬品データ batch 2 + 新薬7剤 (サイトポイント,リブレラ,ソレンシア,ブレンダ,GS-441524,モルヌピラビル,スプレソリン)
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
-  anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 129プロトコル)
+  anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 152プロトコル)
   anesthesia_api.py       — 鎮静・麻酔API Blueprint (3エンドポイント)
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
   species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種)
@@ -73,7 +73,7 @@ scripts/
 - **薬品**: 194 (12種が魚専用, 7種が2026年追加の新薬)
 - **症状エイリアス**: 530+ (SYMPTOM_ALIASES) + 90+ (ID同義語)
 - **対応動物種**: 21 (犬,猫,馬,ウサギ,ハムスター,モルモット,チンチラ,フェレット,ハリネズミ,フクロモモンガ,デグー,鳥,インコ,オウム,爬虫類,リクガメ,ヘビ,トカゲ,両生類,魚,その他)
-- **鎮静・麻酔プロトコル**: 124 (全21種対応、犬猫各11プロトコル、馬11プロトコル、ASA分類付き)
+- **鎮静・麻酔プロトコル**: 152 (全21種対応、犬猫馬各11プロトコル、うさぎ8、ASA分類付き)
 
 ## 診断エンジン
 ### チェックボックス式 (全種)
@@ -337,7 +337,7 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 
 ### 鎮静・麻酔プロトコルタブ新設
 - 新タブ「鎮静・麻酔」を追加（ハンバーガーメニューにも掲載）
-- `api/anesthesia_protocols.py`: 全21種の鎮静・麻酔プロトコルデータ（129プロトコル）
+- `api/anesthesia_protocols.py`: 全21種の鎮静・麻酔プロトコルデータ（152プロトコル）
   - 犬・猫: 鎮静/前投薬/導入/維持/局所・区域麻酔/モニタリング/覚醒/緊急（各9プロトコル）
   - 犬: 短頭種・サイトハウンド・大型犬・ボクサーの品種別注意事項
   - 馬: 立位鎮静（ゴールドスタンダード）、TIVA、覚醒（最危険フェーズ）、MAP≥70 mmHg管理
