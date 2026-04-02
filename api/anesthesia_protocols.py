@@ -486,6 +486,21 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             "notes": "CRI provides stable sedation level. Support head with head stand or sling.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Xylazine + Butorphanol", "name_ja": "キシラジン＋ブトルファノール", "dose": "Xylazine 0.5-1.1 mg/kg + Butorphanol 0.02-0.04 mg/kg", "route": "IV", "onset": "3-5 min", "duration": "30-60 min",
+                 "notes_ja": "馬の前投薬の標準。キシラジンで鎮静・鎮痛、ブトルファノールで内臓痛を補強。十分な頭部下垂を確認してから導入。", "notes": "Standard equine premedication. Xylazine for sedation/analgesia, butorphanol supplements visceral pain control. Confirm adequate head drop before induction."},
+                {"name": "Romifidine + Morphine", "name_ja": "ロミフィジン＋モルヒネ", "dose": "Romifidine 0.04-0.08 mg/kg + Morphine 0.1 mg/kg", "route": "IV (slow)", "onset": "5-10 min", "duration": "45-90 min",
+                 "notes_ja": "ロミフィジンはキシラジンより長時間作用。モルヒネは15分以上かけて緩徐IV（ヒスタミン遊離予防）。必ず鎮静下で投与。", "notes": "Romifidine has longer duration than xylazine. Morphine IV over 15+ min (histamine release prevention). Always administer under sedation."},
+                {"name": "Acepromazine + Xylazine", "name_ja": "アセプロマジン＋キシラジン", "dose": "Acepromazine 0.03-0.05 mg/kg + Xylazine 0.5-1.1 mg/kg", "route": "IV", "onset": "10-20 min", "duration": "60-120 min",
+                 "notes_ja": "長時間手術向け。アセプロマジンは30分前にIM投与も可。低血圧に注意。", "notes": "For longer procedures. Acepromazine can be given IM 30 min prior. Watch for hypotension."},
+            ],
+            "notes_ja": "馬の前投薬は導入前の十分な鎮静確保が最重要目的。不十分な鎮静での導入は倒馬時の外傷リスクを大幅に増加させる。",
+            "notes": "Primary goal of equine premedication is adequate sedation before induction. Insufficient sedation increases trauma risk during recumbency.",
+        },
+        {
             "name": {"ja": "導入（全身麻酔）", "en": "Induction (General Anesthesia)"},
             "category": "induction",
             "risk_level": "high",
@@ -636,6 +651,19 @@ ANESTHESIA_PROTOCOLS["rabbit"] = {
             "notes": "Rabbits can die from restraint stress. Handle gently, always support hindquarters. Dorsal recumbency (trance) carries respiratory depression risk.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Buprenorphine", "name_ja": "ミダゾラム＋ブプレノルフィン", "dose": "0.5-1 mg/kg + 0.02-0.05 mg/kg", "route": "IM/SC/IN", "onset": "10-15 min", "duration": "4-8 hr (buprenorphine)",
+                 "notes_ja": "安全性が高い。鼻腔内（IN）投与も有効（ストレス軽減）。ブプレノルフィンは長時間鎮痛で術後管理に有利。", "notes": "High safety margin. Intranasal (IN) route effective (reduces stress). Buprenorphine provides long-duration analgesia beneficial for post-op management."},
+                {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "50-100 µg/kg + 0.3-0.5 mg/kg", "route": "IM/SC", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "より深い鎮静。IV確保が容易になる。アティパメゾールで拮抗可。アトロピナーゼ産生個体（約30%）ではアトロピンが効きにくい→グリコピロレートを検討。", "notes": "Deeper sedation. Facilitates IV catheter placement. Reversible with atipamezole. Atropinase-producing rabbits (~30%) are resistant to atropine → consider glycopyrrolate."},
+            ],
+            "notes_ja": "ウサギは絶食不要（嘔吐できない）。長時間絶食はGI stasisリスク。アトロピナーゼ（ウサギの約30%が産生）に注意：抗コリン薬はグリコピロレート0.01-0.02 mg/kg SC/IMを使用。",
+            "notes": "No fasting required for rabbits (cannot vomit). Prolonged fasting risks GI stasis. Atropinase (produced by ~30% of rabbits): use glycopyrrolate 0.01-0.02 mg/kg SC/IM instead of atropine.",
+        },
+        {
             "name": {"ja": "前投薬＋導入", "en": "Premedication + Induction"},
             "category": "induction",
             "risk_level": "moderate",
@@ -739,6 +767,28 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Isoflurane (chamber)", "name_ja": "イソフルラン（チャンバー）", "dose": "3-4% induction → 1-2% mask", "route": "Inhalation (chamber/mask)", "onset": "1-3 min", "duration": "As needed",
+                 "notes_ja": "ハムスターの鎮静はチャンバー吸入が最も安全。注射は体格的に困難。", "notes": "Chamber inhalation is safest for hamster sedation. Injection is difficult due to small body size."},
+            ],
+            "notes_ja": "ハムスターの検査・軽処置（爪切り、膿瘍ドレナージ等）に。体温低下が急速のため処置時間を最小限に。頬袋の内容物を事前に除去。",
+            "notes": "For examination and minor procedures (nail trim, abscess drainage). Hypothermia develops rapidly; minimize procedure time. Remove cheek pouch contents beforehand.",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.3-0.5 mg/kg", "route": "SC/IP", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "SC or IP注射。チャンバー吸入導入の前投薬として使用。鎮痛効果あり。", "notes": "SC or IP injection. Used as premedication before chamber induction. Provides analgesia."},
+            ],
+            "notes_ja": "ハムスターは小さいため（30-180g）、用量計算をインスリン用シリンジで正確に。低血糖リスクが高いため絶食は2-4時間以内。頬袋の内容物を事前に除去。",
+            "notes": "Hamsters are tiny (30-180g); use insulin syringes for accurate dosing. High hypoglycemia risk; fast no more than 2-4 hr. Remove cheek pouch contents before anesthesia.",
+        },
+        {
             "name": {"ja": "吸入麻酔（短時間処置）", "en": "Inhalation Anesthesia (Short Procedures)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -765,6 +815,17 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
             "notes": "IP injection in right lower abdomen to avoid organ puncture. Use 26-28G needle.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-2.5%", "route": "Mask / nose cone", "onset": "", "duration": "Continuous",
+                 "notes_ja": "注射導入後またはチャンバー導入後にマスク維持。ハムスターは気管挿管困難のためマスク維持が標準。", "notes": "Mask maintenance after injectable or chamber induction. Intubation is difficult in hamsters; mask maintenance is standard."},
+            ],
+            "notes_ja": "低体温予防が最重要。保温マット（直接接触回避）使用。術中体温を28-30°Cに維持。酸素流量は0.5-1 L/min。5分毎にバイタルサイン確認。",
+            "notes": "Hypothermia prevention is critical. Use warming pad (avoid direct contact). Maintain intraoperative temp 28-30°C. O2 flow 0.5-1 L/min. Check vitals q5min.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -776,6 +837,17 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
             ],
             "notes_ja": "覚醒後は暖かい環境（28-30°C）で回復させる。食事と水を早期に提供。覚醒に時間がかかる場合は体温をまず確認。",
             "notes": "Recover in warm environment (28-30°C). Offer food and water early. If slow recovery, check temperature first.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg (total dose)", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5%に希釈して使用。小型のため総用量に厳格注意（30gハムスターで最大0.15mg）。膿瘍切開ドレナージ、腫瘤切除に。", "notes": "Dilute to 0.5%. Strict total dose control due to small size (max 0.15mg for 30g hamster). For abscess I&D, mass removal."},
+            ],
+            "notes_ja": "ハムスターは小型のため局所麻酔薬の過量投与に注意。全身麻酔の補助として使用し、揮発性麻酔薬の必要量を削減。",
+            "notes": "Watch for local anesthetic overdose due to small body size. Use as GA adjunct to reduce inhalant requirements.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -829,6 +901,19 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             "notes": "Guinea pigs are stress-sensitive. Use towels with cage-mate scent in quiet environment.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Buprenorphine", "name_ja": "ミダゾラム＋ブプレノルフィン", "dose": "0.5-1 mg/kg + 0.03-0.05 mg/kg", "route": "SC/IM", "onset": "10-15 min", "duration": "4-8 hr (buprenorphine)",
+                 "notes_ja": "安全性が高い。ブプレノルフィンは長時間鎮痛。", "notes": "High safety margin. Buprenorphine provides long-duration analgesia."},
+                {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "20-40 µg/kg + 0.2-0.5 mg/kg", "route": "SC/IM", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "より深い鎮静。アティパメゾールで拮抗可能。IV確保時に有用。", "notes": "Deeper sedation. Reversible with atipamezole. Useful for IV catheter placement."},
+            ],
+            "notes_ja": "モルモットへの注射はストレスが大きい。できるだけ1回で必要な薬剤を混合して投与（同一シリンジ）。チオペンタールは禁忌。",
+            "notes": "Injection is stressful for guinea pigs. Mix required drugs in single syringe when possible. Thiopental is contraindicated.",
+        },
+        {
             "name": {"ja": "注射麻酔＋吸入維持", "en": "Injectable Induction + Inhalation Maintenance"},
             "category": "induction",
             "risk_level": "moderate",
@@ -844,6 +929,17 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             "notes": "Due to difficult intubation, V-gel (guinea pig size) is recommended. If attempting intubation, use 14-16G IV catheter as ET tube.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-3%", "route": "Mask / V-gel / ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "V-gel（声門上デバイス）が推奨。気管挿管は極めて困難。マスク維持も可能だが、気道確保の信頼性が低い。", "notes": "V-gel (supraglottic airway) recommended. Intubation is extremely difficult. Mask maintenance possible but less reliable airway."},
+            ],
+            "notes_ja": "モルモットの気管挿管は口腔が小さく口蓋帆が大きいため、盲目挿管またはV-gelが標準。術中はビタミンC補充（50 mg/kg SC）を検討。",
+            "notes": "Guinea pig intubation: small oral cavity and large palatal ostium make blind intubation or V-gel standard. Consider perioperative vitamin C (50 mg/kg SC).",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -855,6 +951,19 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             ],
             "notes_ja": "覚醒後すぐに乾草と水を提供。術後鎮痛: メロキシカム0.5-1.0 mg/kg PO/SC q24h。ビタミンC 50 mg/kg SC/PO。同居個体と早期に戻す（社会的動物）。",
             "notes": "Offer hay and water immediately after recovery. Post-op analgesia: meloxicam 0.5-1.0 mg/kg PO/SC q24h. Vitamin C 50 mg/kg SC/PO. Return to cage-mates early (social animals).",
+        },
+        {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "創傷処置、腫瘤切除に使用。小型のため総用量に注意。", "notes": "For wound care, mass removal. Watch total dose due to small size."},
+                {"name": "EMLA cream", "name_ja": "EMLAクリーム", "dose": "Thin layer", "route": "Topical", "onset": "30-60 min", "duration": "60-120 min",
+                 "notes_ja": "IV留置前の皮膚表面麻酔。30分以上前に塗布。", "notes": "Topical anesthesia before IV catheter placement. Apply 30+ min prior."},
+            ],
+            "notes_ja": "モルモットの疼痛評価は難しい（隠す傾向）。術後鎮痛はメロキシカム0.5-1 mg/kg PO/SC q24hが標準。",
+            "notes": "Guinea pig pain assessment is difficult (prey species). Standard post-op analgesia: meloxicam 0.5-1 mg/kg PO/SC q24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -911,6 +1020,17 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             "notes": "Chinchillas are heat-intolerant (>25°C). Balance cooling and warming during anesthesia.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1 mg/kg + 0.2-0.5 mg/kg", "route": "IM/SC", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "安全性が高い。ファーリング（ストレス脱毛）を軽減するため、保定時間を最小限に。", "notes": "High safety margin. Minimize restraint time to reduce fur slip."},
+            ],
+            "notes_ja": "チンチラは熱中症に弱い（適温15-21°C）。処置室の温度管理に注意。フィプロニルは致死的なため絶対禁忌。",
+            "notes": "Chinchillas are heat-sensitive (optimal 15-21°C). Monitor procedure room temperature. Fipronil is absolutely contraindicated (lethal).",
+        },
+        {
             "name": {"ja": "全身麻酔", "en": "General Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -924,6 +1044,17 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             "notes": "Post-op analgesia: meloxicam 0.3-0.5 mg/kg PO/SC q24h. Fipronil is LETHAL to chinchillas — never use.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-2.5%", "route": "Mask / ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は可能だが困難。マスク維持が一般的。室温を21°C以下に管理（熱中症予防）。", "notes": "Intubation possible but difficult. Mask maintenance is common. Keep room temperature below 21°C (heatstroke prevention)."},
+            ],
+            "notes_ja": "チンチラは熱中症に極めて弱い。術中の加温は控えめに（24°C以下）。保温マットは低温設定で使用。ファーリング（ストレス脱毛）に注意。",
+            "notes": "Chinchillas are extremely heat-sensitive. Intraoperative warming must be conservative (below 24°C). Use warming pad on low setting. Watch for fur slip.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -935,6 +1066,19 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             ],
             "notes_ja": "覚醒は静かで涼しい（20-22°C）環境で。乾草と水を早期に提供。砂浴びは創傷治癒まで中止。",
             "notes": "Recover in quiet, cool (20-22°C) environment. Offer hay and water early. Suspend dust baths until wound healing.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "創傷処置、歯科処置に使用。0.5-1%濃度に希釈。", "notes": "For wound care, dental procedures. Dilute to 0.5-1%."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-8 hr",
+                 "notes_ja": "長時間鎮痛。歯科手術後の術後疼痛管理に有用。", "notes": "Long-duration analgesia. Useful for post-dental surgical pain management."},
+            ],
+            "notes_ja": "チンチラの歯科疾患は頻繁。下顎神経ブロックで歯科処置時の鎮痛を強化可能。術後鎮痛: メロキシカム0.5-1 mg/kg PO/SC q24h。",
+            "notes": "Dental disease is common in chinchillas. Mandibular nerve block can enhance dental procedure analgesia. Post-op: meloxicam 0.5-1 mg/kg PO/SC q24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -991,6 +1135,19 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             "notes": "Ferrets are relatively tolerant of anesthesia. Mask induction possible (isoflurane 3-5%) but watch for excitement/breath-holding.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "10-20 µg/kg + 0.2 mg/kg", "route": "IM/SC", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "フェレットの標準的前投薬。深い鎮静が得られ、IV確保が容易になる。アティパメゾールで拮抗可。", "notes": "Standard ferret premedication. Provides deep sedation facilitating IV catheter placement. Reversible with atipamezole."},
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.3-0.5 mg/kg + 0.2 mg/kg", "route": "IM", "onset": "5-10 min", "duration": "30-45 min",
+                 "notes_ja": "心疾患のあるフェレットに安全。軽度鎮静。", "notes": "Safe for ferrets with cardiac disease. Provides mild sedation."},
+            ],
+            "notes_ja": "フェレットは絶食時間を短く（3-4時間）。インスリノーマ併存時は血糖モニタリング必須。低血糖時は50%デキストロース0.5-1 mL/kg IV希釈投与。",
+            "notes": "Keep fasting short (3-4 hr) in ferrets. Blood glucose monitoring mandatory with concurrent insulinoma. For hypoglycemia: 50% dextrose 0.5-1 mL/kg IV diluted.",
+        },
+        {
             "name": {"ja": "全身麻酔", "en": "General Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1006,6 +1163,19 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             "notes": "Intubation: 2.5-3.5 ET tube. Use laryngoscope (Miller 0-1 blade). Ferret tracheas are long.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "フェレットの気管挿管は比較的容易。2.0-3.5mm非カフETチューブ使用。喉頭痙攣リスクがあるためリドカインスプレー（喉頭に少量局所塗布）推奨。", "notes": "Ferret intubation is relatively easy. Use 2.0-3.5mm uncuffed ET tube. Laryngospasm risk; topical lidocaine spray on larynx recommended."},
+                {"name": "Sevoflurane", "name_ja": "セボフルラン", "dose": "2.5-4%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "イソフルランの代替。やや速い覚醒。", "notes": "Alternative to isoflurane. Slightly faster recovery."},
+            ],
+            "notes_ja": "インスリノーマ併存時は術中血糖モニタリング必須。低血糖（<60 mg/dL）時は5%デキストロースIV点滴を開始。絶食は3-4時間に制限。",
+            "notes": "Blood glucose monitoring mandatory with concurrent insulinoma. Start 5% dextrose IV if hypoglycemic (<60 mg/dL). Limit fasting to 3-4 hr.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1018,6 +1188,19 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             ],
             "notes_ja": "覚醒後すぐに少量の高カロリー食を提供（低血糖予防）。術後鎮痛: メロキシカム0.2 mg/kg PO/SC q24h。",
             "notes": "Offer small amounts of high-calorie food immediately after recovery (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg (total dose)", "route": "Local infiltration / nerve block", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "創傷縫合、腫瘤切除、歯科処置に使用。0.5-1%濃度に希釈。フェレットのリドカイン最大用量は犬より低い。", "notes": "For wound suturing, mass removal, dental procedures. Dilute to 0.5-1%. Max dose lower than dogs."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-8 hr",
+                 "notes_ja": "長時間鎮痛。手術部位への局所浸潤。卵巣子宮摘出術の切開ライン浸潤に有用。", "notes": "Long-duration analgesia. Local infiltration at surgical site. Useful for OVH incision line infiltration."},
+            ],
+            "notes_ja": "フェレットは副腎手術が多い。副腎摘出術ではスプラッシュブロック（術野への局所麻酔薬直接塗布）も検討。",
+            "notes": "Adrenal surgery is common in ferrets. Splash block (direct application of local anesthetic to surgical field) may be considered for adrenalectomy.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1076,6 +1259,17 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             "notes": "Physical examination of hedgehogs is often impossible without sedation. Light sedation uncurls the patient for examination, blood collection, and imaging. Avoid spiny dorsum when measuring vital signs.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1 mg/kg + 0.05-0.2 mg/kg", "route": "IM/SC (inguinal area)", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "棘のない部位（鼠径部、腋窩）にIM注射。チャンバー導入の前投薬として使用可能。", "notes": "IM injection into spine-free areas (inguinal, axillary). Can be used as premedication before chamber induction."},
+            ],
+            "notes_ja": "ハリネズミは丸まるため注射部位が限られる。チャンバー吸入鎮静後にIM注射を行う方法が推奨。",
+            "notes": "Injection sites are limited because hedgehogs curl up. Chamber inhalation sedation followed by IM injection is recommended.",
+        },
+        {
             "name": {"ja": "吸入鎮静・麻酔（最も一般的）", "en": "Inhalation Sedation/Anesthesia (Most Common)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1102,6 +1296,17 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             "notes": "IV access is difficult (cephalic or lateral saphenous vein, 26-28G). IO (tibial, femoral) as emergency alternative.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-3%", "route": "Mask / nose cone", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は非常に困難（口が小さい）。マスク維持が標準。棘のためマスクフィットが難しい場合あり。", "notes": "Intubation is very difficult (small mouth). Mask maintenance is standard. Mask fit may be challenging due to spines."},
+            ],
+            "notes_ja": "ハリネズミは丸まった状態でもチャンバーで吸入麻酔導入可能（最大の利点）。マスク維持中は棘に触れないよう注意。保温環境（28-30°C）維持。",
+            "notes": "Hedgehogs can be induced via chamber even when curled (major advantage). Avoid touching spines during mask maintenance. Maintain warming (28-30°C).",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1113,6 +1318,17 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             ],
             "notes_ja": "覚醒後は暖かい環境（25-27°C）で回復。ミルワーム等の好物で食欲を確認。術後鎮痛: メロキシカム0.2-0.5 mg/kg PO/SC q24h。",
             "notes": "Recover in warm (25-27°C) environment. Check appetite with mealworms or favorite food. Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "腫瘤切除、膿瘍切開に使用。棘のある背面を避けて腹側から注入。0.5%に希釈。", "notes": "For mass removal, abscess I&D. Inject from ventral side, avoiding spiny dorsum. Dilute to 0.5%."},
+            ],
+            "notes_ja": "ハリネズミの腫瘍は非常に多い（有病率50%超）。局所麻酔は全身麻酔の補助として腫瘤切除時に有用。術後鎮痛: メロキシカム0.2-0.5 mg/kg PO/SC q24h。",
+            "notes": "Neoplasia is very common in hedgehogs (prevalence >50%). Local anesthesia is useful as GA adjunct for mass removal. Post-op: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1166,6 +1382,17 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             "notes": "Sugar gliders can be aggressive; sedation is often necessary for examination. Always differentiate from torpor (dormancy state during hypothermia/hypoglycemia). Take care not to damage the patagium (gliding membrane).",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Buprenorphine", "name_ja": "ミダゾラム＋ブプレノルフィン", "dose": "0.5 mg/kg + 0.01-0.03 mg/kg", "route": "IM/SC", "onset": "10-15 min", "duration": "4-8 hr (buprenorphine)",
+                 "notes_ja": "小型のため用量計算を特に正確に。インスリン用シリンジ使用。", "notes": "Precise dose calculation critical due to small size. Use insulin syringe."},
+            ],
+            "notes_ja": "フクロモモンガは社会的動物。可能であれば、同居個体を近くに置いてストレス軽減。膜翼（滑空膜）を傷つけないよう注意。",
+            "notes": "Sugar gliders are social animals. Keep cage-mates nearby if possible to reduce stress. Avoid damaging the patagium (gliding membrane).",
+        },
+        {
             "name": {"ja": "吸入麻酔（推奨）", "en": "Inhalation Anesthesia (Recommended)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1190,6 +1417,17 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             "notes": "Apply small Elizabethan collar to prevent self-mutilation. Provide pouch in recovery environment for stress reduction.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-2.5%", "route": "Mask", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は困難。マスク維持が標準。非常に小型（100-160g）のため薬用量計算に注意。", "notes": "Intubation is difficult. Mask maintenance is standard. Very small (100-160g); careful dose calculation required."},
+            ],
+            "notes_ja": "低体温・低血糖のダブルリスク。保温環境（28-30°C）と術中輸液（維持量の1.5-2倍）で管理。膜翼（滑空膜）を広げた状態で固定しない。",
+            "notes": "Double risk of hypothermia and hypoglycemia. Manage with warming (28-30°C) and intraoperative fluids (1.5-2x maintenance). Do not pin patagium (gliding membrane) in extended position.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1201,6 +1439,17 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             ],
             "notes_ja": "覚醒後は暗く暖かいポーチに入れ、蜂蜜水を提供（低血糖予防）。術後鎮痛: メロキシカム0.2-0.5 mg/kg PO/SC q24h。",
             "notes": "Place in dark, warm pouch after recovery. Offer honey water (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5%に希釈。自咬症（self-mutilation）の創傷デブリードマンや腫瘤切除に。膜翼（パタジウム）を傷つけないよう注意。", "notes": "Dilute to 0.5%. For self-mutilation wound debridement and mass removal. Take care not to damage the patagium."},
+            ],
+            "notes_ja": "フクロモモンガの自咬症は術後ストレスで悪化することがある。局所麻酔で術後痛を軽減し、自咬リスクを低減。エリザベスカラーの検討。",
+            "notes": "Sugar glider self-mutilation may worsen with post-operative stress. Local anesthesia reduces post-op pain and self-mutilation risk. Consider E-collar.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1254,6 +1503,17 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             "notes": "Degu tails are extremely prone to degloving; NEVER grasp the tail during restraint. Social animals — keeping cage-mate nearby reduces stress. Diabetes-prone species; pre-anesthetic blood glucose measurement recommended.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1 mg/kg + 0.2-0.5 mg/kg", "route": "IM/SC", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "安全性高い。尾のdeglovingに注意。", "notes": "High safety margin. Watch for tail degloving."},
+            ],
+            "notes_ja": "デグーは糖尿病体質。術前血糖値を必ず測定。覚醒後に高糖食は避ける。",
+            "notes": "Degus are diabetes-prone. Always check pre-anesthetic blood glucose. Avoid high-sugar foods post-recovery.",
+        },
+        {
             "name": {"ja": "吸入麻酔（推奨）", "en": "Inhalation Anesthesia (Recommended)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1278,6 +1538,17 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             "notes": "Blood glucose monitoring q30min intraoperatively. Hypoglycemia (<60 mg/dL): 5% dextrose infusion. High-sugar diet is contraindicated (worsens diabetes).",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-2.5%", "route": "Mask", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は困難。マスク維持が標準。", "notes": "Intubation is difficult. Mask maintenance is standard."},
+            ],
+            "notes_ja": "デグーは糖尿病体質。術中血糖モニタリングを推奨。尾のdeglovingに注意（保定時に尾を掴まない）。社会的動物のため、同居個体を近くに置くとストレス軽減。",
+            "notes": "Degus are diabetes-prone; intraoperative glucose monitoring recommended. Watch for tail degloving (never grasp tail). Social animals; keeping cage-mate nearby reduces stress.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1290,6 +1561,17 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             ],
             "notes_ja": "覚醒後は乾草と水を提供。糖分の高い果物は厳禁。術後鎮痛: メロキシカム0.3-0.5 mg/kg PO/SC q24h。",
             "notes": "Offer hay and water after recovery. High-sugar fruits are strictly prohibited. Post-op analgesia: meloxicam 0.3-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5-1%に希釈。腫瘤切除、創傷処置に。尾のdegloving修復時にリングブロックが有用。", "notes": "Dilute to 0.5-1%. For mass removal, wound care. Ring block useful for tail degloving repair."},
+            ],
+            "notes_ja": "デグーの尾のdegloving（皮膚剥離）は一般的な外傷。断尾術時にリングブロック＋全身麻酔の併用が推奨。術後鎮痛: メロキシカム0.5-1 mg/kg PO/SC q24h。",
+            "notes": "Tail degloving is a common degu injury. Ring block + GA recommended for tail amputation. Post-op: meloxicam 0.5-1 mg/kg PO/SC q24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1332,6 +1614,19 @@ ANESTHESIA_PROTOCOLS["bird"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1.0 mg/kg + 1-2 mg/kg", "route": "IM (pectoral)", "onset": "5-10 min", "duration": "20-40 min",
+                 "notes_ja": "胸筋にIM注射。軽度鎮静で放射線撮影、爪切り、採血に有用。拮抗可能。", "notes": "IM into pectoral muscle. Light sedation for radiography, nail trim, blood collection. Reversible."},
+                {"name": "Isoflurane (brief)", "name_ja": "イソフルラン（短時間）", "dose": "3-5% induction → 1-2% maintenance", "route": "Mask", "onset": "30-60 sec", "duration": "As needed",
+                 "notes_ja": "マスクでの短時間鎮静。迅速な導入・覚醒。攻撃的な鳥や保定困難な場合に。", "notes": "Brief mask sedation. Rapid induction and recovery. For aggressive birds or difficult restraint."},
+            ],
+            "notes_ja": "鳥の保定は呼吸を妨げないよう注意（胸郭を圧迫しない）。鳥には横隔膜がなく、呼吸は胸壁の動きに依存する。保定中の窒息死リスクあり。",
+            "notes": "Avian restraint must not impede breathing (do not compress thorax). Birds lack a diaphragm; breathing depends on thoracic wall movement. Risk of restraint asphyxiation.",
+        },
+        {
             "name": {"ja": "吸入麻酔（ゴールドスタンダード）", "en": "Inhalation Anesthesia (Gold Standard)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1360,6 +1655,19 @@ ANESTHESIA_PROTOCOLS["bird"] = {
             "notes": "Alpha-2 agonists (xylazine, dexmedetomidine) are generally NOT recommended in birds due to severe cardiovascular depression.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "非カフETチューブ必須（気管輪が完全輪のためカフで壊死リスク）。気嚢システムにより揮発性麻酔薬の取り込みが速い。IPPV準備。", "notes": "Uncuffed ET tube mandatory (complete tracheal rings; cuffed tubes cause necrosis). Air sac system provides rapid volatile agent uptake. IPPV ready."},
+                {"name": "Sevoflurane", "name_ja": "セボフルラン", "dose": "2-4%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "イソフルランの代替。やや速い覚醒。", "notes": "Alternative to isoflurane. Slightly faster recovery."},
+            ],
+            "notes_ja": "鳥類は気嚢システムのため、呼吸停止後も麻酔ガスの吸収が継続する（哺乳類と異なる）。ETCO2モニタリングは非カフチューブのリークで不正確になることがある。呼吸数15-40回/min。",
+            "notes": "Avian air sac system means anesthetic gas absorption continues after apnea (unlike mammals). ETCO2 monitoring may be inaccurate due to uncuffed tube leak. RR 15-40/min.",
+        },
+        {
             "name": {"ja": "モニタリング", "en": "Monitoring Guidelines"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1374,6 +1682,19 @@ ANESTHESIA_PROTOCOLS["bird"] = {
             ],
             "notes_ja": "鳥の麻酔深度評価: 浅い→翼トーン維持、趾反射(+)。適切→翼弛緩、趾反射(-)、眼瞼反射(+)。深すぎ→眼瞼反射(-)、瞳孔散大。",
             "notes": "Avian depth assessment: Light→wing tone present, pedal reflex(+). Adequate→wing relaxed, pedal(-), palpebral(+). Too deep→palpebral(-), dilated pupils.",
+        },
+        {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg (total dose)", "route": "Local infiltration / nerve block", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "翼の骨折修復、腫瘤切除、嗉嚢切開術に使用。0.5%濃度に希釈して使用（過量投与防止）。", "notes": "For wing fracture repair, mass removal, crop surgery. Dilute to 0.5% to prevent overdose."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-6 hr",
+                 "notes_ja": "長時間鎮痛。整形外科手術に有用。", "notes": "Long-duration analgesia. Useful for orthopedic surgery."},
+            ],
+            "notes_ja": "鳥類の局所麻酔は全身麻酔の補助として重要。吸入麻酔薬の必要量を削減し、心血管系への影響を最小化。術後鎮痛: メロキシカム0.5-1 mg/kg PO/IM q12-24h。",
+            "notes": "Avian local anesthesia is important as a GA adjunct. Reduces inhalant requirements, minimizing cardiovascular effects. Post-op: meloxicam 0.5-1 mg/kg PO/IM q12-24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1416,6 +1737,19 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Isoflurane (mask)", "name_ja": "イソフルラン（マスク）", "dose": "3-5% induction → 1-2% maintenance", "route": "Mask", "onset": "30-60 sec", "duration": "As needed",
+                 "notes_ja": "小型鳥のため吸入マスク鎮静が最も一般的。導入が極めて速い。", "notes": "Most common sedation for small birds. Very rapid induction."},
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "0.5-1.0 mg/kg", "route": "IM (pectoral) / IN", "onset": "3-5 min", "duration": "15-30 min",
+                 "notes_ja": "鼻腔内（IN）投与も有効。小型のため胸筋注射は26-27G針使用。", "notes": "Intranasal (IN) route effective. Use 26-27G needle for pectoral IM due to small size."},
+            ],
+            "notes_ja": "インコは非常に小型（30-40g）のため、全ての投与量をインスリン用シリンジで正確に計量。体温低下が急速に起こるため、処置時間を最小限に。",
+            "notes": "Parakeets are very small (30-40g); measure all doses with insulin syringes. Hypothermia develops rapidly; minimize procedure time.",
+        },
+        {
             "name": {"ja": "吸入麻酔", "en": "Inhalation Anesthesia"},
             "category": "induction",
             "risk_level": "high",
@@ -1425,6 +1759,17 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
             ],
             "notes_ja": "セキセイインコ（30-40g）は気管挿管がほぼ不可能。マスク維持が標準。オカメインコ（80-100g）は1.5-2.0mm非カフETチューブが可能な場合あり。",
             "notes": "Budgerigars (30-40g): intubation nearly impossible. Mask maintenance is standard. Cockatiels (80-100g): 1.5-2.0mm uncuffed ET tube may be possible.",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-2.5%", "route": "Mask / air sac tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "インコは小型すぎて気管挿管困難。マスク維持が一般的。重症例では気嚢チューブも選択肢。", "notes": "Parakeets are too small for standard intubation. Mask maintenance is common. Air sac tube is an option for critical cases."},
+            ],
+            "notes_ja": "非常に小型（30-40g）のため、体温低下が極めて急速。保温ランプまたはインキュベーターで30-32°Cを維持。酸素流量は0.5 L/min。手術時間を最小限に。",
+            "notes": "Very small (30-40g); hypothermia develops extremely rapidly. Maintain 30-32°C with heat lamp or incubator. O2 flow 0.5 L/min. Minimize surgical time.",
         },
         {
             "name": {"ja": "鎮痛", "en": "Analgesia"},
@@ -1451,6 +1796,25 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
             ],
             "notes_ja": "覚醒は30秒-2分。インキュベーター（30-32°C）で回復。覚醒時のばたつきによる骨折に注意（タオルで軽く包む）。食事は覚醒後早期に。",
             "notes": "Recovery in 30 sec-2 min. Use incubator (30-32°C). Watch for fractures from flapping during recovery (wrap loosely in towel). Offer food early after recovery.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg (total dose)", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5%に希釈必須。30-40gの小型鳥のため総用量を厳格管理。翼骨折の神経ブロック、腫瘤切除に。", "notes": "Must dilute to 0.5%. Strict total dose control for 30-40g birds. For wing fracture nerve block, mass removal."},
+            ],
+            "notes_ja": "インコは非常に小型のため局所麻酔薬の過量投与リスクが高い。インスリン用シリンジで正確に計量。全身麻酔の補助として使用。",
+            "notes": "Parakeets are very small; high overdose risk with local anesthetics. Use insulin syringes for accurate measurement. Use as GA adjunct.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は極めて速い（1-3分）。インキュベーター（30-32°C）で保温。小型のため低体温が急速に進行。覚醒後に水とシード（粟穂等）を速やかに提供。覚醒時のパニック飛行を防ぐため、暗い環境で覚醒させる。",
+            "notes": "Recovery is extremely rapid (1-3 min). Keep in incubator (30-32°C). Hypothermia progresses rapidly due to small size. Offer water and seeds (millet spray) promptly. Keep in dark environment during recovery to prevent panic flight.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1485,6 +1849,19 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 1-2 mg/kg", "route": "IM (pectoral)", "onset": "5-10 min", "duration": "20-40 min",
+                 "notes_ja": "大型オウム（ヨウム、コンゴウインコ等）のIM鎮静。噛傷リスクがあるため、保定技術に習熟が必要。", "notes": "IM sedation for large parrots (African grey, macaw). Bite risk; restraint expertise required."},
+                {"name": "Isoflurane (mask)", "name_ja": "イソフルラン（マスク）", "dose": "3-5% induction → 1-2% maintenance", "route": "Mask", "onset": "30-60 sec", "duration": "As needed",
+                 "notes_ja": "マスク鎮静。大型オウムはマスクから逃げようとするため、迅速な装着が必要。", "notes": "Mask sedation. Large parrots resist mask; rapid placement required."},
+            ],
+            "notes_ja": "大型オウムの噛む力は非常に強い（コンゴウインコ: 500-700 psi）。鎮静なしの保定は重大な噛傷リスク。攻撃的な個体にはタオルレストレント後にIM注射。",
+            "notes": "Large parrots have extremely strong bite force (macaw: 500-700 psi). Restraint without sedation poses serious bite injury risk. For aggressive birds: towel restraint followed by IM injection.",
+        },
+        {
             "name": {"ja": "吸入麻酔", "en": "Inhalation Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1494,6 +1871,19 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
             ],
             "notes_ja": "大型オウムの保定は厚手の手袋を使用。嘴による重度の咬傷リスクあり。頸部を圧迫しないよう注意（気管の圧迫で窒息）。",
             "notes": "Use thick gloves for large parrot restraint. Risk of severe bite injuries. Avoid cervical compression (tracheal obstruction causes asphyxia).",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "大型オウムは気管挿管容易。非カフETチューブ必須。2.5-5.0 mmサイズ（種による）。IPPV準備。", "notes": "Large parrot intubation is easy. Uncuffed ET tube mandatory. 2.5-5.0 mm size (species-dependent). IPPV ready."},
+                {"name": "Sevoflurane", "name_ja": "セボフルラン", "dose": "2-4%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "やや速い覚醒。コスト高。", "notes": "Slightly faster recovery. Higher cost."},
+            ],
+            "notes_ja": "ヨウム（アフリカングレイ）は低カルシウム血症リスクが高い。術中のカルシウム低下による心停止に注意。10%グルコン酸カルシウム50-100 mg/kg IV slowを準備。",
+            "notes": "African greys have high hypocalcemia risk. Watch for cardiac arrest from intraoperative calcium drop. Have calcium gluconate 10% 50-100 mg/kg IV slow ready.",
         },
         {
             "name": {"ja": "注射麻酔（補助的）", "en": "Injectable Anesthesia (Adjunctive)"},
@@ -1521,6 +1911,27 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
             ],
             "notes_ja": "覚醒は速い（2-5分）。暗い静かな環境（インキュベーター30-32°C）で。大型オウムは覚醒時に暴れることがあるため、止まり木を除去しパッドで保護。",
             "notes": "Recovery is rapid (2-5 min). Dark, quiet environment (incubator 30-32°C). Large parrots may thrash during recovery; remove perches and pad surroundings.",
+        },
+        {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg", "route": "Local infiltration / nerve block", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "翼骨折修復、嗉嚢切開術、腫瘤切除に使用。0.5%に希釈。大型オウムは体格に合わせて用量計算。", "notes": "For wing fracture repair, ingluviotomy, mass removal. Dilute to 0.5%. Calculate doses based on large parrot body weight."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-6 hr",
+                 "notes_ja": "長時間鎮痛。整形外科手術に有用。", "notes": "Long-duration analgesia. Useful for orthopedic surgery."},
+            ],
+            "notes_ja": "大型オウムの整形外科手術（翼骨折、断脚）では局所麻酔ブロックが術後疼痛管理に重要。術後鎮痛: メロキシカム0.5-1 mg/kg PO/IM q12-24h。",
+            "notes": "Local nerve blocks are important for post-op pain management in large parrot orthopedic surgery (wing fracture, limb amputation). Post-op: meloxicam 0.5-1 mg/kg PO/IM q12-24h.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は速い（2-5分）。暗い静かな環境のインキュベーター（28-32°C）で。大型オウムは覚醒時に暴れて翼を損傷することがあるため、パッドで保護。止まり木は除去。ヨウム（アフリカングレイ）は覚醒時のストレスで羽毛引き抜きが悪化することがある。",
+            "notes": "Recovery is rapid (2-5 min). Dark, quiet incubator (28-32°C). Large parrots may thrash and injure wings during recovery; pad surroundings. Remove perches. African greys may worsen feather plucking from recovery stress.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1566,6 +1977,19 @@ ANESTHESIA_PROTOCOLS["reptile"] = {
             ],
             "notes_ja": "爬虫類の鎮静は効果発現まで時間がかかる（10-20分）。POTZ維持が効果発現に不可欠（低体温では薬物代謝が遅延）。全注射は前肢または前半身に（腎門脈系を避ける）。",
             "notes": "Reptile sedation has slow onset (10-20 min). POTZ maintenance is essential for drug onset (hypothermia delays metabolism). All injections into forelimbs or cranial body (avoid renal portal system).",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM（腎門脈系回避）。鎮静・鎮痛・筋弛緩を提供。導入薬の必要量を削減。", "notes": "IM into forelimb (avoid renal portal system). Provides sedation, analgesia, muscle relaxation. Reduces induction agent requirements."},
+                {"name": "Dexmedetomidine", "name_ja": "デクスメデトミジン", "dose": "50-100 µg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "深い鎮静。アティパメゾールで拮抗可。POTZ維持が効果発現に不可欠。", "notes": "Deep sedation. Reversible with atipamezole. POTZ maintenance essential for drug onset."},
+            ],
+            "notes_ja": "爬虫類の前投薬は導入薬の必要量を削減し、より安全な麻酔を実現。全注射は前肢または前半身に（腎門脈系回避）。POTZ維持が効果発現の前提条件。",
+            "notes": "Reptile premedication reduces induction requirements for safer anesthesia. All injections into forelimbs/cranial body (avoid renal portal system). POTZ maintenance is prerequisite for drug onset.",
         },
         {
             "name": {"ja": "注射麻酔（推奨）", "en": "Injectable Anesthesia (Recommended)"},
@@ -1620,6 +2044,30 @@ ANESTHESIA_PROTOCOLS["reptile"] = {
             "notes_ja": "覚醒は非常に遅い（数時間〜24時間）。POTZ上限に加温して代謝を促進。覚醒まで気管チューブを維持し、定期的にIPPVを実施。正向反射の回復で覚醒を確認。",
             "notes": "Recovery is very slow (hours to 24 hr). Warm to upper POTZ to promote metabolism. Maintain ET tube and provide periodic IPPV until recovery. Confirm recovery with righting reflex.",
         },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "5x the medetomidine dose used", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "",
+                 "notes_ja": "α2作動薬使用時の拮抗。効果発現が哺乳類より遅い。前肢にIM（腎門脈系回避）。", "notes": "α2-agonist reversal. Onset slower than in mammals. IM into forelimb (avoid renal portal system)."},
+            ],
+            "notes_ja": "覚醒は非常に遅い（数時間〜24時間以上）。POTZ上限に加温して代謝を促進。気管チューブは正向反射回復まで維持。IPPV（4-6回/min）を定期的に実施。覚醒後はPOTZ環境で24-48時間安静。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
+            "notes": "Recovery is very slow (hours to 24+ hr). Warm to upper POTZ to promote metabolism. Maintain ET tube until righting reflex returns. Periodic IPPV (4-6/min). Post-recovery: rest in POTZ environment for 24-48 hr. Analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.1-0.5 mg/kg", "route": "IC / IV (ventral tail vein)", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。心臓内投与が最も効果的。爬虫類の心臓は3室構造。腹側尾静脈からIVも可能。", "notes": "For CPA. Intracardiac most effective. Reptile heart is 3-chambered. IV via ventral tail vein also possible."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IM", "onset": "1-2 min", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時。爬虫類は長時間無呼吸が可能なため、真の呼吸停止かの判断が重要。", "notes": "For apnea. Reptiles can sustain prolonged apnea; determine if true respiratory arrest."},
+            ],
+            "notes_ja": "爬虫類のCPR: IPPV（4-6回/min）が最優先。心臓マッサージは腹側から。低体温の個体はPOTZ上限まで加温してから死亡判定（低体温で死亡に見えても回復することがある）。",
+            "notes": "Reptile CPR: IPPV (4-6/min) is top priority. Cardiac massage from ventral approach. Warm hypothermic individuals to upper POTZ before pronouncing death (may recover from apparent death).",
+        },
     ],
 }
 
@@ -1638,6 +2086,30 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "1-2 mg/kg", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "30-60 min",
+                 "notes_ja": "前肢筋肉内。四肢を甲羅から引き出すための軽度鎮静。フルマゼニルで拮抗可。", "notes": "IM into forelimb. Light sedation to extend limbs from shell. Reversible with flumazenil."},
+                {"name": "Alfaxalone (low dose)", "name_ja": "アルファキサロン（低用量）", "dose": "3-5 mg/kg", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "20-40 min",
+                 "notes_ja": "低用量で鎮静。頭部・四肢を引き出して検査。効果発現まで忍耐が必要。", "notes": "Sedation at low dose. Extend head/limbs for examination. Patience needed for onset."},
+            ],
+            "notes_ja": "リクガメの検査は甲羅から頭・四肢を引き出す必要がある。鎮静なしでは困難な場合が多い。POTZ（26-32°C）維持が効果発現に不可欠。全注射は前肢に（腎門脈系回避）。",
+            "notes": "Tortoise examination requires extending head/limbs from shell. Often difficult without sedation. POTZ (26-32°C) maintenance essential for drug onset. All injections into forelimbs (avoid renal portal system).",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM。効果発現が遅いため忍耐が必要。POTZ（26-32°C）維持。", "notes": "IM into forelimb. Patience needed for onset. POTZ (26-32°C) maintenance."},
+            ],
+            "notes_ja": "リクガメは四肢を甲羅に引っ込めるため、注射のタイミングは鎮静後が理想。POTZ維持が薬効発現の前提。",
+            "notes": "Tortoises retract limbs into shell; injection timing is ideally after initial sedation. POTZ maintenance is prerequisite for drug effect.",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1653,6 +2125,17 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             "notes": "Head extending from shell indicates onset. Wait for complete limb relaxation. POTZ: 26-32°C (species-dependent).",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "注射導入後に気管挿管して吸入維持。リクガメの声門は舌の付け根。非カフETチューブ使用。IPPV（2-4回/min）が多くの場合必要。", "notes": "After injectable induction, intubate and maintain with inhalation. Tortoise glottis at tongue base. Uncuffed ET tube. IPPV (2-4/min) often required."},
+            ],
+            "notes_ja": "リクガメの肺は甲羅の背側に位置。腹臥位（甲羅を上にした通常姿勢）で換気に問題はない。POTZ低い方で維持（代謝抑制）。体温管理は水を入れたグローブまたは低温保温マットで。",
+            "notes": "Tortoise lungs are dorsal within shell. Sternal recumbency (normal posture, shell up) is fine for ventilation. Maintain at low POTZ (metabolic suppression). Temperature management with water-filled gloves or low-temp warming pad.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1664,6 +2147,17 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             ],
             "notes_ja": "覚醒は6-24時間かかる。POTZ上限に加温。気管チューブは覚醒まで維持。四肢引っ込め反射、頭部引っ込め反射で覚醒判定。",
             "notes": "Recovery takes 6-24 hr. Warm to upper POTZ. Maintain ET tube until recovery. Assess with limb/head withdrawal reflexes.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "5x medetomidine dose", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "",
+                 "notes_ja": "メデトミジン使用時。前肢にIM。", "notes": "For medetomidine reversal. IM into forelimb."},
+            ],
+            "notes_ja": "覚醒は6-24時間以上。POTZ上限（30-32°C）に加温。気管チューブは正向反射回復まで維持。四肢引っ込め反射→頭部引っ込め反射→自発呼吸の順に回復。覚醒後は浅い水場を提供（脱水予防）。",
+            "notes": "Recovery takes 6-24+ hr. Warm to upper POTZ (30-32°C). Maintain ET tube until righting reflex. Recovery sequence: limb withdrawal → head withdrawal → spontaneous breathing. Offer shallow water post-recovery (dehydration prevention).",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1696,6 +2190,30 @@ ANESTHESIA_PROTOCOLS["snake"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・保定）", "en": "Sedation (Examination/Restraint)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "1-2 mg/kg", "route": "IM (cranial body)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "体の前1/3の筋肉にIM。筋弛緩作用で保定が容易に。攻撃的な個体の検査に有用。", "notes": "IM into cranial 1/3 body musculature. Muscle relaxation facilitates restraint. Useful for examining aggressive individuals."},
+                {"name": "Alfaxalone (low dose)", "name_ja": "アルファキサロン（低用量）", "dose": "3-5 mg/kg", "route": "IM / IV (ventral tail vein)", "onset": "5-15 min", "duration": "20-40 min",
+                 "notes_ja": "低用量で鎮静。IV投与は腹側尾静脈から。", "notes": "Sedation at low dose. IV via ventral tail vein."},
+            ],
+            "notes_ja": "大型ヘビ（ニシキヘビ等）は複数人での保定が必要。毒蛇の鎮静には専門知識が必須。POTZ（25-32°C）維持。注射は前半身に（腎門脈系回避）。",
+            "notes": "Large snakes (pythons) require multiple handlers. Venomous snake sedation requires specialized expertise. POTZ (25-32°C). Inject into cranial body (avoid renal portal system).",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (cranial 1/3 body)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "体の前1/3の筋肉にIM。導入薬の必要量を削減。", "notes": "IM into cranial 1/3 body musculature. Reduces induction requirements."},
+            ],
+            "notes_ja": "ヘビは前肢がないため体幹筋にIM注射。前半身に投与（腎門脈系回避）。大型ヘビは複数人で保定しながら注射。毒蛇は専門家が対応。",
+            "notes": "Snakes lack forelimbs; IM injection into body wall musculature. Inject into cranial body (avoid renal portal). Large snakes need multiple handlers. Venomous snakes require specialist handling.",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1711,6 +2229,17 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             "notes": "Breath-holding makes inhalation induction very slow in snakes. Injectable induction transitioning to inhalation is recommended. IV access: ventral tail vein (1/3 from tail tip). POTZ: 25-32°C.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "ヘビの気管挿管は容易（声門が大きく見える）。非カフETチューブ使用。IPPV（2-4回/min）が必要なことが多い。右肺（機能肺）のみで換気。", "notes": "Snake intubation is easy (large visible glottis). Uncuffed ET tube. IPPV (2-4/min) often needed. Ventilation through right lung only (functional lung)."},
+            ],
+            "notes_ja": "ヘビは片肺（右肺が機能肺、左肺は退化）。長時間の無呼吸耐性があるため、自発呼吸の有無だけで麻酔深度を評価しない。心拍数（ドップラー）と筋緊張で判断。",
+            "notes": "Snakes have single functional lung (right; left vestigial). High apnea tolerance means do not assess depth by breathing alone. Use heart rate (Doppler) and muscle tone.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1721,6 +2250,14 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             ],
             "notes_ja": "覚醒は遅い（数時間〜24時間）。POTZ上限に加温。舌のフリッキング（ちらつかせ）の回復が覚醒の指標。毒蛇は完全覚醒を確認するまで取り扱いに注意。",
             "notes": "Recovery is slow (hours to 24 hr). Warm to upper POTZ. Return of tongue flicking indicates recovery. Handle venomous snakes with extreme caution until fully recovered.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は遅い（数時間〜24時間）。POTZ上限に加温。舌のフリッキング（ちらつかせ）回復が覚醒の指標。自発呼吸の回復まで定期的IPPV。毒蛇は完全覚醒を確認するまで防護具着用。覚醒後は水場を提供。",
+            "notes": "Recovery is slow (hours to 24 hr). Warm to upper POTZ. Return of tongue flicking indicates recovery. Periodic IPPV until spontaneous breathing returns. Handle venomous snakes with protective equipment until fully recovered. Offer water post-recovery.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1753,6 +2290,30 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "1-2 mg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM。軽度鎮静で検査・採血・放射線撮影。フルマゼニルで拮抗可。", "notes": "IM into forelimb. Light sedation for examination, blood collection, radiography. Reversible with flumazenil."},
+                {"name": "Alfaxalone (low dose)", "name_ja": "アルファキサロン（低用量）", "dose": "3-5 mg/kg", "route": "IM (forelimb)", "onset": "10-15 min", "duration": "20-40 min",
+                 "notes_ja": "低用量で鎮静。前肢にIM。", "notes": "Sedation at low dose. IM into forelimb."},
+            ],
+            "notes_ja": "トカゲの保定は尾の自切に注意（多くの種で尾が自切する）。フトアゴヒゲトカゲは比較的おとなしいが、イグアナは攻撃的になることがある。POTZ（25-35°C）維持。",
+            "notes": "Watch for tail autotomy during restraint (many species). Bearded dragons are relatively docile; iguanas can be aggressive. POTZ (25-35°C).",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM。尾の自切に注意して保定。POTZ（25-35°C）維持。", "notes": "IM into forelimb. Careful restraint to avoid tail autotomy. POTZ (25-35°C)."},
+            ],
+            "notes_ja": "フトアゴヒゲトカゲは比較的おとなしく注射しやすい。イグアナは攻撃的になることがあり、鎮静後に前投薬するのが安全。",
+            "notes": "Bearded dragons are relatively docile and easy to inject. Iguanas can be aggressive; premedication after initial sedation is safer.",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1768,6 +2329,17 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             "notes": "Bearded dragon: alfaxalone 10 mg/kg IM into forelimb is standard. POTZ: 25-35°C (species-dependent). Leopard gecko: mask inhalation is primary due to small size.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "Mask / ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "フトアゴヒゲトカゲ等の中型種は気管挿管可能。ヒョウモントカゲモドキ等の小型種はマスク維持。IPPV（4-6回/min）。", "notes": "Medium species (bearded dragon) can be intubated. Small species (leopard gecko) use mask. IPPV (4-6/min)."},
+            ],
+            "notes_ja": "トカゲのPOTZ管理が最重要。術中は加温マット（低温設定）でPOTZ低い方を維持。覚醒時はPOTZ上限に加温。尾の自切を防ぐため尾の固定は避ける。",
+            "notes": "Lizard POTZ management is critical. Intraoperative: warming pad (low setting) at low POTZ. Recovery: warm to upper POTZ. Avoid tail fixation to prevent autotomy.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1779,6 +2351,14 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             ],
             "notes_ja": "覚醒は数時間〜24時間。正向反射の回復で覚醒を判定。覚醒後はPOTZ上限の環境に。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
             "notes": "Recovery: hours to 24 hr. Righting reflex return indicates recovery. Place in upper POTZ environment after recovery. Post-op analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は数時間〜24時間。正向反射の回復で覚醒を判定。POTZ上限の環境で管理。覚醒後は紫外線ランプ（UVB）を再開し代謝を促進。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
+            "notes": "Recovery: hours to 24 hr. Righting reflex return indicates recovery. Manage in upper POTZ environment. Resume UVB lighting post-recovery to promote metabolism. Analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1811,6 +2391,17 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "MS-222 (low dose)", "name_ja": "MS-222（低用量）", "dose": "0.5-1 g/L (buffered to pH 7.0)", "route": "Immersion", "onset": "5-10 min", "duration": "Until removed",
+                 "notes_ja": "低用量で鎮静。遊泳活動の低下と色調変化が指標。検査・写真撮影・軽処置に。正向反射は保たれる。", "notes": "Low dose for sedation. Reduced swimming and color change are indicators. For examination, photography, minor procedures. Righting reflex maintained."},
+            ],
+            "notes_ja": "両生類の鎮静は低用量の浸漬麻酔で実施。皮膚を常に湿潤に保つ。脱塩素水を使用。手袋は粉なし（皮膚毒性）。",
+            "notes": "Amphibian sedation is achieved with low-dose immersion. Keep skin moist at all times. Use dechlorinated water. Powder-free gloves (skin toxicity).",
+        },
+        {
             "name": {"ja": "浸漬麻酔（標準法）", "en": "Immersion Anesthesia (Standard)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1839,6 +2430,14 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
             "notes": "Amphibian skin is extremely delicate. Maintain moisture at all times. Wet hands before direct contact.",
         },
         {
+            "name": {"ja": "術中管理", "en": "Intraoperative Management"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "手術は湿らせたガーゼの上で実施。皮膚の乾燥を防ぐため、定期的に脱塩素水をスプレー。麻酔維持が必要な場合は低用量MS-222含有水で湿らせたガーゼを体表に置く。長時間手術では酸素化した水で皮膚を灌流。",
+            "notes": "Surgery on moistened gauze. Spray dechlorinated water regularly to prevent skin desiccation. For anesthesia maintenance, place gauze soaked in low-dose MS-222 solution on body surface. For prolonged procedures, irrigate skin with oxygenated water.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1850,6 +2449,14 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
             ],
             "notes_ja": "回復: 新鮮な脱塩素水に移す。正向反射の回復を確認。低酸素耐性は高いが、長時間の浸漬は肺水腫リスク。完全回復まで浅い水で監視。",
             "notes": "Recovery: transfer to fresh dechlorinated water. Confirm righting reflex return. High hypoxia tolerance but prolonged immersion risks pulmonary edema. Monitor in shallow water until full recovery.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "回復: 新鮮な脱塩素水に移す。正向反射の回復を確認。皮膚を常に湿潤に保つ。完全回復まで浅い水で監視。回復時間: MS-222は5-30分、注射麻酔は数時間。術後鎮痛: メロキシカム0.2 mg/kg SC/ICe q24h。",
+            "notes": "Recovery: transfer to fresh dechlorinated water. Confirm righting reflex return. Keep skin moist at all times. Monitor in shallow water until full recovery. Recovery time: MS-222 5-30 min, injectable hours. Analgesia: meloxicam 0.2 mg/kg SC/ICe q24h.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1881,6 +2488,19 @@ ANESTHESIA_PROTOCOLS["fish"] = {
         "en": "24-48 hr fast (for water quality and GI emptying).",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "MS-222 (low dose)", "name_ja": "MS-222（低用量）", "dose": "25-50 mg/L (buffered)", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
+                 "notes_ja": "低用量で鎮静（Stage I）。遊泳活動低下、刺激に反応あり。輸送、体重測定、写真撮影、表面処置に。", "notes": "Low dose sedation (Stage I). Reduced swimming, responds to stimuli. For transport, weighing, photography, surface procedures."},
+                {"name": "Eugenol (low dose)", "name_ja": "オイゲノール（低用量）", "dose": "20-40 mg/L", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
+                 "notes_ja": "低用量で鎮静。安価で入手しやすい。", "notes": "Low dose sedation. Inexpensive and accessible."},
+            ],
+            "notes_ja": "魚の鎮静は飼育水と同じ水温・pHの麻酔水で実施。エアレーションで酸素供給。鰓蓋運動が規則的で刺激に反応する状態がStage I（鎮静）。",
+            "notes": "Fish sedation in anesthetic water at same temperature/pH as housing water. Aerate for oxygen. Regular opercular movement with response to stimuli = Stage I (sedation).",
+        },
         {
             "name": {"ja": "浸漬麻酔", "en": "Immersion Anesthesia"},
             "category": "induction",
@@ -1917,6 +2537,14 @@ ANESTHESIA_PROTOCOLS["fish"] = {
             ],
             "notes_ja": "回復: 新鮮な（麻酔薬を含まない）エアレーション水に移す。口を開けて水流を当て、鰓を灌流。正常遊泳の回復まで監視。回復には3-15分。",
             "notes": "Recovery: transfer to fresh (anesthetic-free) aerated water. Direct water flow into mouth to irrigate gills. Monitor until normal swimming resumes. Recovery takes 3-15 min.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "新鮮な（麻酔薬を含まない）エアレーション水に移す。口を開けて水流を鰓に通す（手動灌流）。正常遊泳の回復まで監視。回復時間: 3-15分。回復しない場合は酸素化水の灌流を30分以上継続。術後は清潔な水環境で管理。",
+            "notes": "Transfer to fresh (anesthetic-free) aerated water. Open mouth and direct water flow through gills (manual irrigation). Monitor until normal swimming. Recovery: 3-15 min. If no recovery, continue oxygenated water irrigation for 30+ min. Post-op: manage in clean water environment.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1959,6 +2587,21 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             "notes": "For unfamiliar species, use protocols from most closely related known species. Start at low dose and titrate to effect.",
         },
         {
+            "name": {"ja": "一般的な麻酔導入", "en": "General Anesthesia Induction"},
+            "category": "induction",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane (chamber/mask)", "name_ja": "イソフルラン（チャンバー/マスク）", "dose": "3-5% induction → 1-3% maintenance", "route": "Inhalation", "onset": "2-5 min (varies)", "duration": "Continuous",
+                 "notes_ja": "小型種にはチャンバー導入が安全。中型種はマスク導入。気管挿管は種による。", "notes": "Chamber induction safest for small species. Mask for medium species. Intubation species-dependent."},
+                {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "2-10 mg/kg (species-dependent)", "route": "IM/IV", "onset": "5-15 min", "duration": "15-45 min",
+                 "notes_ja": "多くのエキゾチック種で安全に使用可能。用量は種により大きく異なる。文献確認必須。", "notes": "Safe for many exotic species. Dose varies widely by species. Literature review essential."},
+                {"name": "Ketamine + Midazolam", "name_ja": "ケタミン＋ミダゾラム", "dose": "5-30 mg/kg + 0.5-2 mg/kg (species-dependent)", "route": "IM", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "広い安全域。覚醒が粗い場合あり。", "notes": "Wide safety margin. Recovery may be rough."},
+            ],
+            "notes_ja": "未知の種では、最も安全なアプローチを選択: ①吸入麻酔のチャンバー導入、②アルファキサロンIM。低用量から開始し効果を見て追加（titrate to effect）。",
+            "notes": "For unfamiliar species, choose safest approach: (1) inhalation chamber induction, (2) alfaxalone IM. Start low and titrate to effect.",
+        },
+        {
             "name": {"ja": "共通モニタリング指針", "en": "Common Monitoring Guidelines"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1971,6 +2614,19 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             ],
             "notes_ja": "全エキゾチック種共通: (1)正確な体重測定、(2)体温管理、(3)低血糖予防、(4)最小限のストレス。術後鎮痛はメロキシカム（種による用量調整）が第一選択。",
             "notes": "Common to all exotics: (1) accurate weighing, (2) temperature management, (3) hypoglycemia prevention, (4) minimal stress. Meloxicam (dose per species) is first-line post-op analgesic.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.01-0.1 mg/kg (species-dependent)", "route": "IV/IM/IO/IC", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。投与経路は種と体格による。小型種ではIO（骨髄内）が有用。", "notes": "For CPA. Route depends on species and size. IO (intraosseous) useful for small species."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IM", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の呼吸刺激薬。", "notes": "Respiratory stimulant for apnea."},
+            ],
+            "notes_ja": "未知の種のCPR: 体格に合わせた胸骨圧迫＋酸素投与（マスクまたはバッグバルブ）。体温管理。種特異的な文献を事前に確認。",
+            "notes": "CPR for unfamiliar species: chest compressions adapted to body size + oxygen delivery (mask or bag-valve). Temperature management. Review species-specific literature in advance.",
         },
     ],
 }
