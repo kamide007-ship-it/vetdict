@@ -1979,6 +1979,19 @@ ANESTHESIA_PROTOCOLS["reptile"] = {
             "notes": "Reptile sedation has slow onset (10-20 min). POTZ maintenance is essential for drug onset (hypothermia delays metabolism). All injections into forelimbs or cranial body (avoid renal portal system).",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM（腎門脈系回避）。鎮静・鎮痛・筋弛緩を提供。導入薬の必要量を削減。", "notes": "IM into forelimb (avoid renal portal system). Provides sedation, analgesia, muscle relaxation. Reduces induction agent requirements."},
+                {"name": "Dexmedetomidine", "name_ja": "デクスメデトミジン", "dose": "50-100 µg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "深い鎮静。アティパメゾールで拮抗可。POTZ維持が効果発現に不可欠。", "notes": "Deep sedation. Reversible with atipamezole. POTZ maintenance essential for drug onset."},
+            ],
+            "notes_ja": "爬虫類の前投薬は導入薬の必要量を削減し、より安全な麻酔を実現。全注射は前肢または前半身に（腎門脈系回避）。POTZ維持が効果発現の前提条件。",
+            "notes": "Reptile premedication reduces induction requirements for safer anesthesia. All injections into forelimbs/cranial body (avoid renal portal system). POTZ maintenance is prerequisite for drug onset.",
+        },
+        {
             "name": {"ja": "注射麻酔（推奨）", "en": "Injectable Anesthesia (Recommended)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2086,6 +2099,17 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             "notes": "Tortoise examination requires extending head/limbs from shell. Often difficult without sedation. POTZ (26-32°C) maintenance essential for drug onset. All injections into forelimbs (avoid renal portal system).",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (forelimb)", "onset": "15-30 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM。効果発現が遅いため忍耐が必要。POTZ（26-32°C）維持。", "notes": "IM into forelimb. Patience needed for onset. POTZ (26-32°C) maintenance."},
+            ],
+            "notes_ja": "リクガメは四肢を甲羅に引っ込めるため、注射のタイミングは鎮静後が理想。POTZ維持が薬効発現の前提。",
+            "notes": "Tortoises retract limbs into shell; injection timing is ideally after initial sedation. POTZ maintenance is prerequisite for drug effect.",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2099,6 +2123,17 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             ],
             "notes_ja": "リクガメの頭を甲羅から引き出すのが導入の指標。完全に四肢が弛緩するまで待つ。POTZ: 26-32°C（種による）。",
             "notes": "Head extending from shell indicates onset. Wait for complete limb relaxation. POTZ: 26-32°C (species-dependent).",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "注射導入後に気管挿管して吸入維持。リクガメの声門は舌の付け根。非カフETチューブ使用。IPPV（2-4回/min）が多くの場合必要。", "notes": "After injectable induction, intubate and maintain with inhalation. Tortoise glottis at tongue base. Uncuffed ET tube. IPPV (2-4/min) often required."},
+            ],
+            "notes_ja": "リクガメの肺は甲羅の背側に位置。腹臥位（甲羅を上にした通常姿勢）で換気に問題はない。POTZ低い方で維持（代謝抑制）。体温管理は水を入れたグローブまたは低温保温マットで。",
+            "notes": "Tortoise lungs are dorsal within shell. Sternal recumbency (normal posture, shell up) is fine for ventilation. Maintain at low POTZ (metabolic suppression). Temperature management with water-filled gloves or low-temp warming pad.",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
@@ -2168,6 +2203,17 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             "notes": "Large snakes (pythons) require multiple handlers. Venomous snake sedation requires specialized expertise. POTZ (25-32°C). Inject into cranial body (avoid renal portal system).",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (cranial 1/3 body)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "体の前1/3の筋肉にIM。導入薬の必要量を削減。", "notes": "IM into cranial 1/3 body musculature. Reduces induction requirements."},
+            ],
+            "notes_ja": "ヘビは前肢がないため体幹筋にIM注射。前半身に投与（腎門脈系回避）。大型ヘビは複数人で保定しながら注射。毒蛇は専門家が対応。",
+            "notes": "Snakes lack forelimbs; IM injection into body wall musculature. Inject into cranial body (avoid renal portal). Large snakes need multiple handlers. Venomous snakes require specialist handling.",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2181,6 +2227,17 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             ],
             "notes_ja": "ヘビは息止めで吸入麻酔の導入が非常に遅いため、注射麻酔で導入し吸入に移行するのが推奨。IV確保: 腹側尾静脈（心臓から尾側1/3の位置）。POTZ: 25-32°C。",
             "notes": "Breath-holding makes inhalation induction very slow in snakes. Injectable induction transitioning to inhalation is recommended. IV access: ventral tail vein (1/3 from tail tip). POTZ: 25-32°C.",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "ヘビの気管挿管は容易（声門が大きく見える）。非カフETチューブ使用。IPPV（2-4回/min）が必要なことが多い。右肺（機能肺）のみで換気。", "notes": "Snake intubation is easy (large visible glottis). Uncuffed ET tube. IPPV (2-4/min) often needed. Ventilation through right lung only (functional lung)."},
+            ],
+            "notes_ja": "ヘビは片肺（右肺が機能肺、左肺は退化）。長時間の無呼吸耐性があるため、自発呼吸の有無だけで麻酔深度を評価しない。心拍数（ドップラー）と筋緊張で判断。",
+            "notes": "Snakes have single functional lung (right; left vestigial). High apnea tolerance means do not assess depth by breathing alone. Use heart rate (Doppler) and muscle tone.",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
@@ -2246,6 +2303,17 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             "notes": "Watch for tail autotomy during restraint (many species). Bearded dragons are relatively docile; iguanas can be aggressive. POTZ (25-35°C).",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.5-1 mg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "前肢にIM。尾の自切に注意して保定。POTZ（25-35°C）維持。", "notes": "IM into forelimb. Careful restraint to avoid tail autotomy. POTZ (25-35°C)."},
+            ],
+            "notes_ja": "フトアゴヒゲトカゲは比較的おとなしく注射しやすい。イグアナは攻撃的になることがあり、鎮静後に前投薬するのが安全。",
+            "notes": "Bearded dragons are relatively docile and easy to inject. Iguanas can be aggressive; premedication after initial sedation is safer.",
+        },
+        {
             "name": {"ja": "鎮静・麻酔", "en": "Sedation/Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2259,6 +2327,17 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             ],
             "notes_ja": "フトアゴヒゲトカゲ: 前肢筋肉内にアルファキサロン10 mg/kg IMが標準。POTZ: 25-35°C（種による）。ヒョウモントカゲモドキは小型のためマスク吸入が主。",
             "notes": "Bearded dragon: alfaxalone 10 mg/kg IM into forelimb is standard. POTZ: 25-35°C (species-dependent). Leopard gecko: mask inhalation is primary due to small size.",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "Mask / ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "フトアゴヒゲトカゲ等の中型種は気管挿管可能。ヒョウモントカゲモドキ等の小型種はマスク維持。IPPV（4-6回/min）。", "notes": "Medium species (bearded dragon) can be intubated. Small species (leopard gecko) use mask. IPPV (4-6/min)."},
+            ],
+            "notes_ja": "トカゲのPOTZ管理が最重要。術中は加温マット（低温設定）でPOTZ低い方を維持。覚醒時はPOTZ上限に加温。尾の自切を防ぐため尾の固定は避ける。",
+            "notes": "Lizard POTZ management is critical. Intraoperative: warming pad (low setting) at low POTZ. Recovery: warm to upper POTZ. Avoid tail fixation to prevent autotomy.",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
@@ -2312,6 +2391,17 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "MS-222 (low dose)", "name_ja": "MS-222（低用量）", "dose": "0.5-1 g/L (buffered to pH 7.0)", "route": "Immersion", "onset": "5-10 min", "duration": "Until removed",
+                 "notes_ja": "低用量で鎮静。遊泳活動の低下と色調変化が指標。検査・写真撮影・軽処置に。正向反射は保たれる。", "notes": "Low dose for sedation. Reduced swimming and color change are indicators. For examination, photography, minor procedures. Righting reflex maintained."},
+            ],
+            "notes_ja": "両生類の鎮静は低用量の浸漬麻酔で実施。皮膚を常に湿潤に保つ。脱塩素水を使用。手袋は粉なし（皮膚毒性）。",
+            "notes": "Amphibian sedation is achieved with low-dose immersion. Keep skin moist at all times. Use dechlorinated water. Powder-free gloves (skin toxicity).",
+        },
+        {
             "name": {"ja": "浸漬麻酔（標準法）", "en": "Immersion Anesthesia (Standard)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2338,6 +2428,14 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
             ],
             "notes_ja": "両生類は皮膚が非常にデリケート。常に湿潤状態を維持し、直接手で触れる場合は手を水で濡らす。",
             "notes": "Amphibian skin is extremely delicate. Maintain moisture at all times. Wet hands before direct contact.",
+        },
+        {
+            "name": {"ja": "術中管理", "en": "Intraoperative Management"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "手術は湿らせたガーゼの上で実施。皮膚の乾燥を防ぐため、定期的に脱塩素水をスプレー。麻酔維持が必要な場合は低用量MS-222含有水で湿らせたガーゼを体表に置く。長時間手術では酸素化した水で皮膚を灌流。",
+            "notes": "Surgery on moistened gauze. Spray dechlorinated water regularly to prevent skin desiccation. For anesthesia maintenance, place gauze soaked in low-dose MS-222 solution on body surface. For prolonged procedures, irrigate skin with oxygenated water.",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
@@ -2390,6 +2488,19 @@ ANESTHESIA_PROTOCOLS["fish"] = {
         "en": "24-48 hr fast (for water quality and GI emptying).",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "MS-222 (low dose)", "name_ja": "MS-222（低用量）", "dose": "25-50 mg/L (buffered)", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
+                 "notes_ja": "低用量で鎮静（Stage I）。遊泳活動低下、刺激に反応あり。輸送、体重測定、写真撮影、表面処置に。", "notes": "Low dose sedation (Stage I). Reduced swimming, responds to stimuli. For transport, weighing, photography, surface procedures."},
+                {"name": "Eugenol (low dose)", "name_ja": "オイゲノール（低用量）", "dose": "20-40 mg/L", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
+                 "notes_ja": "低用量で鎮静。安価で入手しやすい。", "notes": "Low dose sedation. Inexpensive and accessible."},
+            ],
+            "notes_ja": "魚の鎮静は飼育水と同じ水温・pHの麻酔水で実施。エアレーションで酸素供給。鰓蓋運動が規則的で刺激に反応する状態がStage I（鎮静）。",
+            "notes": "Fish sedation in anesthetic water at same temperature/pH as housing water. Aerate for oxygen. Regular opercular movement with response to stimuli = Stage I (sedation).",
+        },
         {
             "name": {"ja": "浸漬麻酔", "en": "Immersion Anesthesia"},
             "category": "induction",
@@ -2476,6 +2587,21 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             "notes": "For unfamiliar species, use protocols from most closely related known species. Start at low dose and titrate to effect.",
         },
         {
+            "name": {"ja": "一般的な麻酔導入", "en": "General Anesthesia Induction"},
+            "category": "induction",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane (chamber/mask)", "name_ja": "イソフルラン（チャンバー/マスク）", "dose": "3-5% induction → 1-3% maintenance", "route": "Inhalation", "onset": "2-5 min (varies)", "duration": "Continuous",
+                 "notes_ja": "小型種にはチャンバー導入が安全。中型種はマスク導入。気管挿管は種による。", "notes": "Chamber induction safest for small species. Mask for medium species. Intubation species-dependent."},
+                {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "2-10 mg/kg (species-dependent)", "route": "IM/IV", "onset": "5-15 min", "duration": "15-45 min",
+                 "notes_ja": "多くのエキゾチック種で安全に使用可能。用量は種により大きく異なる。文献確認必須。", "notes": "Safe for many exotic species. Dose varies widely by species. Literature review essential."},
+                {"name": "Ketamine + Midazolam", "name_ja": "ケタミン＋ミダゾラム", "dose": "5-30 mg/kg + 0.5-2 mg/kg (species-dependent)", "route": "IM", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "広い安全域。覚醒が粗い場合あり。", "notes": "Wide safety margin. Recovery may be rough."},
+            ],
+            "notes_ja": "未知の種では、最も安全なアプローチを選択: ①吸入麻酔のチャンバー導入、②アルファキサロンIM。低用量から開始し効果を見て追加（titrate to effect）。",
+            "notes": "For unfamiliar species, choose safest approach: (1) inhalation chamber induction, (2) alfaxalone IM. Start low and titrate to effect.",
+        },
+        {
             "name": {"ja": "共通モニタリング指針", "en": "Common Monitoring Guidelines"},
             "category": "monitoring",
             "risk_level": "low",
@@ -2488,6 +2614,19 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             ],
             "notes_ja": "全エキゾチック種共通: (1)正確な体重測定、(2)体温管理、(3)低血糖予防、(4)最小限のストレス。術後鎮痛はメロキシカム（種による用量調整）が第一選択。",
             "notes": "Common to all exotics: (1) accurate weighing, (2) temperature management, (3) hypoglycemia prevention, (4) minimal stress. Meloxicam (dose per species) is first-line post-op analgesic.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.01-0.1 mg/kg (species-dependent)", "route": "IV/IM/IO/IC", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。投与経路は種と体格による。小型種ではIO（骨髄内）が有用。", "notes": "For CPA. Route depends on species and size. IO (intraosseous) useful for small species."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IM", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の呼吸刺激薬。", "notes": "Respiratory stimulant for apnea."},
+            ],
+            "notes_ja": "未知の種のCPR: 体格に合わせた胸骨圧迫＋酸素投与（マスクまたはバッグバルブ）。体温管理。種特異的な文献を事前に確認。",
+            "notes": "CPR for unfamiliar species: chest compressions adapted to body size + oxygen delivery (mask or bag-valve). Temperature management. Review species-specific literature in advance.",
         },
     ],
 }
