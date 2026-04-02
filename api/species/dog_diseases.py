@@ -5297,6 +5297,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"difficulty_breathing", "coughing", "lethargy", "appetite_loss", "rapid_breathing"},
         "description": "Accumulation of chyle in the pleural space without identifiable cause, common in Afghan Hounds and Shiba Inus.",
         "description_ja": "原因不明の胸腔内乳び液貯留で、アフガンハウンドや柴犬に多く見られます。",
+        "pathophysiology_ja": "胸管またはその分枝の障害→乳び液の胸腔内漏出→胸水貯留→肺の圧排→呼吸困難。特発性が犬で60〜70%。乳び液はトリグリセリド高値（>100mg/dL）が診断的。慢性化→線維性胸膜炎（拘束性、不可逆的）。",
+        "causes_ja": "特発性（最多）。二次性：心疾患（右心不全）、縦隔腫瘍、外傷。アフガンハウンド・柴犬に好発。中高齢犬。",
+        "prevention_ja": "確実な予防法はない。低脂肪食＋MCTオイルで乳び産生減少。内科不応例は胸管結紮＋心嚢膜部分切除術。",
         "urgency": "urgent",
     },
     {
@@ -5618,6 +5621,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "weight_loss", "vomiting", "bloated_abdomen", "lethargy"},
         "description": "Dilation of intestinal lymphatics causing protein-losing enteropathy.",
         "description_ja": "腸リンパ管の拡張により蛋白漏出性腸症を引き起こします。",
+        "pathophysiology_ja": "腸粘膜リンパ管の拡張→リンパ液の腸管内漏出→PLE（低アルブミン血症→腹水）、リンパ球減少、低Ca血症。一次性（先天性）と二次性（IBD・腫瘍）に分類。ヨークシャーテリアに最も好発。",
+        "causes_ja": "一次性（ヨークシャーテリア）。二次性：IBD・腸リンパ腫・右心不全。内視鏡生検で拡張リンパ管を確認。",
+        "prevention_ja": "超低脂肪食＋MCTオイルが管理の柱。重症例はプレドニゾロン併用。",
         "urgency": "urgent",
     },
     {
@@ -5659,6 +5665,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "genital_discharge", "swollen_joints", "hair_loss"},
         "description": "Bacterial infection causing reproductive failure.",
         "description_ja": "繁殖障害と椎間板脊椎炎を引き起こす細菌感染症です。",
+        "pathophysiology_ja": "B. canisの性交・経口感染→生殖器への親和性→雌犬：妊娠後期流産。雄犬：精巣上体炎→不妊。椎間板脊椎炎・ぶどう膜炎の合併。人獣共通感染症。",
+        "causes_ja": "Brucella canis。性交・流産産物・尿から排菌。繁殖犬舎で問題。日本でも散発報告あり。",
+        "prevention_ja": "繁殖前RSAT検査。感染犬の繁殖禁止。完全除菌は困難。",
         "urgency": "urgent",
     },
     {
@@ -5678,6 +5687,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"nasal_discharge", "lethargy", "genital_discharge"},
         "description": "Viral infection fatal in neonatal puppies.",
         "description_ja": "新生子犬に致死的なウイルス感染症です。",
+        "pathophysiology_ja": "CHV-1の新生子犬への感染→全身の出血性壊死→致死率ほぼ100%。低体温がウイルス増殖を促進。成犬では軽度の上気道・生殖器症状のみ。",
+        "causes_ja": "CHV-1。産道・母乳・同居犬から新生子犬に感染。成犬の感染率は高い（血清陽性率40〜100%）。",
+        "prevention_ja": "新生子犬の環境温度管理（30〜32℃）。分娩前の母犬の隔離。",
         "urgency": "urgent",
     },
     {
@@ -5697,6 +5709,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"weight_loss", "hair_loss", "skin_lesions", "lethargy", "swollen_joints"},
         "description": "Protozoal disease transmitted by sandflies.",
         "description_ja": "サシチョウバエ媒介の原虫疾患で皮膚と内臓疾患を引き起こします。",
+        "pathophysiology_ja": "Leishmania infantumのサシチョウバエ媒介感染→マクロファージ内で増殖→皮膚型：非掻痒性の落屑性皮膚炎・脱毛。内臓型：脾腫・リンパ節腫大・糸球体腎炎→CKD。免疫複合体沈着→関節炎・ぶどう膜炎。日本では報告なし（地中海沿岸・中南米に流行）。",
+        "causes_ja": "Leishmania infantum（サシチョウバエ媒介）。地中海沿岸・中南米・中東に分布。輸入犬の精査が重要。血行性（輸血）・垂直感染（経胎盤）も報告。",
+        "prevention_ja": "流行地域でのサシチョウバエ対策（防虫首輪・デルタメスリン）。ワクチン（ヨーロッパ：Letifend）。アロプリノール＋メグルミンアンチモネートで治療だが完治は困難。",
         "urgency": "urgent",
     },
     {
@@ -5721,6 +5736,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "circling", "vomiting", "excessive_thirst", "excessive_urination", "lethargy"},
         "description": "Abnormal vascular connection bypassing the liver.",
         "description_ja": "肝臓を迂回する異常な血管接続で肝性脳症を引き起こします。",
+        "pathophysiology_ja": "門脈血が肝臓を迂回→アンモニア等の毒素が全身循環→高アンモニア血症→肝性脳症。先天性（肝外性：小型犬、肝内性：大型犬）と後天性（慢性肝疾患に続発）に分類。",
+        "causes_ja": "先天性（ヨークシャーテリア・マルチーズ・シーズーに好発）。後天性：慢性肝疾患・門脈圧亢進。血清胆汁酸検査でスクリーニング。",
+        "prevention_ja": "好発犬種の繁殖管理。先天性は外科的閉鎖（ameroid constrictor）。後天性は低蛋白食＋ラクツロースで内科管理。",
         "urgency": "urgent",
     },
     {
@@ -5770,6 +5788,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"eye_redness", "squinting", "swelling"},
         "description": "Immune-mediated inflammation of the extraocular muscles.",
         "description_ja": "外眼筋の免疫介在性炎症です。",
+        "pathophysiology_ja": "外眼筋の2M線維への自己免疫反応→急性期：両側性眼球突出・結膜充血（筋腫脹による）。慢性期：外眼筋の線維化→眼球運動制限・斜視。咀嚼筋炎と類似の免疫機序だが侵される筋が異なる。",
+        "causes_ja": "免疫介在性。ゴールデンレトリーバーに好発との報告。両側性の眼球突出で来院。眼窩腫瘍・眼窩膿瘍との鑑別が重要（MRI/CT）。",
+        "prevention_ja": "プレドニゾロンで反応良好。早期治療が線維化予防に重要。",
         "urgency": "urgent",
     },
     {
@@ -5800,6 +5821,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "appetite_loss", "weight_loss", "excessive_thirst", "lethargy"},
         "description": "Chronic inflammation of the liver leading to fibrosis and cirrhosis.",
         "description_ja": "肝臓の慢性炎症で線維化と肝硬変に至ります。",
+        "pathophysiology_ja": "持続的な肝細胞炎症→ステラート細胞活性化→コラーゲン沈着（線維化）→肝硬変→門脈圧亢進→腹水。肝不全（低アルブミン血症・凝固障害・肝性脳症）。銅蓄積性が重要な原因。",
+        "causes_ja": "銅蓄積性（ベドリントンテリア・ラブラドール・ドーベルマン・WHWT）、免疫介在性、薬剤性、感染後。",
+        "prevention_ja": "好発犬種の遺伝子検査・定期的肝酵素モニタリング。銅制限食・D-ペニシラミン。",
         "urgency": "urgent",
     },
     {
@@ -5808,6 +5832,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "appetite_loss", "lethargy", "weight_loss", "excessive_thirst"},
         "description": "Excessive copper accumulation in the liver causing hepatitis.",
         "description_ja": "肝臓への過剰な銅蓄積により肝炎を引き起こします。",
+        "pathophysiology_ja": "銅排泄の遺伝的障害→肝細胞内への銅蓄積→フリーラジカル産生→肝細胞壊死→慢性肝炎→肝硬変。COMMD1（ベドリントンテリア）、ATP7B類似遺伝子の変異。急性の銅放出→急性溶血性発作。",
+        "causes_ja": "遺伝性：ベドリントンテリア（COMMD1）、ラブラドール、ドーベルマン、WHWT。食事性の銅過剰も一因（高銅食の長期給餌）。肝生検で銅定量が確定診断（>400μg/g乾重量で異常）。",
+        "prevention_ja": "好発犬種のCOMMD1遺伝子検査。銅制限食（低銅＋亜鉛サプリ）。D-ペニシラミン（銅キレート剤）。定期的な肝酵素・肝生検モニタリング。",
         "urgency": "urgent",
     },
     {
@@ -5827,6 +5854,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "collapse", "drooling", "anxiety"},
         "description": "Recurrent seizures with no identifiable underlying cause.",
         "description_ja": "原因不明の再発性痙攣発作です。",
+        "pathophysiology_ja": "大脳皮質ニューロンの過剰同期性発火→発作。遺伝的な神経のイオンチャネル異常・GABA/グルタミン酸系の不均衡が基盤。1〜5歳で初回発作が典型的。構造的脳病変なし（除外診断）。",
+        "causes_ja": "遺伝性（多因子性が多い）。好発：ベルジアンシェパード、ラブラドール、ゴールデン、ビーグル、ジャーマンシェパード、ボーダーコリー。1〜5歳で発症。MRI・CSF正常で除外診断。",
+        "prevention_ja": "好発犬種の繁殖管理。フェノバルビタール/レベチラセタム/ゾニサミドで発作頻度を管理。完治は不可能だが70〜80%が薬物でコントロール可能。",
         "urgency": "urgent",
     },
     {
