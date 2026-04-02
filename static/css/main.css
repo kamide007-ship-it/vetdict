@@ -1301,8 +1301,35 @@ button.combination-item:focus-visible {
 .anesthesia-breed-item strong{font-size:.82rem;color:var(--navy-dark)}
 .anesthesia-breed-item p{font-size:.78rem;color:var(--gray-600);margin-top:4px;line-height:1.5}
 .anesthesia-item .drug-head-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+/* Weight-based dose calculator */
+.anesthesia-weight-calc{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #86efac;border-radius:var(--radius);padding:6px 12px}
+.anesthesia-weight-label{font-size:.82rem;font-weight:600;color:#166534;white-space:nowrap}
+.anesthesia-weight-input{width:80px;padding:5px 8px;border:1px solid #86efac;border-radius:6px;font-size:.88rem;font-weight:600;text-align:center;background:#fff;color:var(--navy-dark)}
+.anesthesia-weight-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+.anesthesia-weight-unit{font-size:.82rem;color:#166534;font-weight:600}
+.anesthesia-weight-clear{background:none;border:none;font-size:1.1rem;color:#6b7280;cursor:pointer;padding:2px 4px;line-height:1}
+.anesthesia-weight-clear:hover{color:#dc2626}
+.anesthesia-calc-dose{display:inline-block;margin-top:4px;padding:3px 8px;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:1px solid #86efac;border-radius:6px;font-size:.78rem;font-weight:700;color:#166534}
+.anesthesia-calc-range{font-size:.72rem;color:#6b7280;margin-left:4px}
+/* Emergency protocol button */
+.anesthesia-emergency-btn{display:flex;align-items:center;gap:4px;padding:8px 14px;background:linear-gradient(135deg,#fef2f2,#fee2e2);border:2px solid #fca5a5;border-radius:var(--radius);font-size:.82rem;font-weight:700;color:#991b1b;cursor:pointer;white-space:nowrap;transition:all .15s}
+.anesthesia-emergency-btn:hover{background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#f87171;transform:translateY(-1px)}
+.anesthesia-emergency-btn.active{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;border-color:#991b1b}
+/* Print styles */
+@media print{
+  .header,.hero,.species-section,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  #viewAnesthesia{display:block!important;position:static!important}
+  .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
+  .disease-db-item .disease-detail{display:block!important;max-height:none!important}
+  .disease-db-list{max-height:none!important;overflow:visible!important}
+  .anesthesia-overview{background:#f0f7ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .anesthesia-risk-tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 @media(max-width:600px){
   .anesthesia-drugs-table{font-size:.72rem}
   .anesthesia-drugs-table th,.anesthesia-drugs-table td{padding:6px}
   .anesthesia-monitor-section table{font-size:.72rem}
+  .anesthesia-weight-calc{padding:4px 8px}
+  .anesthesia-weight-input{width:65px;font-size:.82rem}
+  .anesthesia-emergency-btn{padding:6px 10px;font-size:.76rem}
 }
