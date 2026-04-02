@@ -616,6 +616,21 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
             "notes_ja": "覚醒後は暖かい環境（28-30°C）で回復させる。食事と水を早期に提供。覚醒に時間がかかる場合は体温をまず確認。",
             "notes": "Recover in warm environment (28-30°C). Offer food and water early. If slow recovery, check temperature first.",
         },
+        {
+            "name": {"ja": "緊急対応・回復", "en": "Emergency & Recovery"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IP/SC", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の第一選択。舌下1-2滴でも有効。", "notes": "First-line for apnea. 1-2 drops sublingual also effective."},
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.003-0.01 mg/kg", "route": "IP/IO", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "心停止時。IO（脛骨近位端）投与も検討。用量は非常に少量（希釈して使用）。", "notes": "For cardiac arrest. IO (proximal tibia) route an option. Very small doses (dilute before use)."},
+                {"name": "Atropine", "name_ja": "アトロピン", "dose": "0.05 mg/kg", "route": "IP/SC", "onset": "1-2 min", "duration": "15-30 min",
+                 "notes_ja": "徐脈時に使用。", "notes": "For bradycardia."},
+            ],
+            "notes_ja": "CPR: 指先で胸骨圧迫（100-120回/min）。呼気ガス吹き込み（マスク or 細チューブ）。覚醒後は28-30°Cの暖かい環境で、食事と水を速やかに提供。低血糖予防のため50%デキストロースを舌に塗布。",
+            "notes": "CPR: fingertip chest compressions (100-120/min). Ventilate via mask or small tube. After recovery, maintain at 28-30°C, offer food/water promptly. Apply 50% dextrose to tongue for hypoglycemia prevention.",
+        },
     ],
 }
 
@@ -672,6 +687,21 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             "notes_ja": "覚醒後すぐに乾草と水を提供。術後鎮痛: メロキシカム0.5-1.0 mg/kg PO/SC q24h。ビタミンC 50 mg/kg SC/PO。同居個体と早期に戻す（社会的動物）。",
             "notes": "Offer hay and water immediately after recovery. Post-op analgesia: meloxicam 0.5-1.0 mg/kg PO/SC q24h. Vitamin C 50 mg/kg SC/PO. Return to cage-mates early (social animals).",
         },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "2-5 mg/kg", "route": "IV/IP", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の第一選択。", "notes": "First-line for apnea."},
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.003-0.01 mg/kg", "route": "IP/IO", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。チオペンタールは絶対禁忌（致死的心停止）。", "notes": "For CPA. Thiopental is absolutely contraindicated (fatal cardiac arrest)."},
+                {"name": "Glycopyrrolate", "name_ja": "グリコピロレート", "dose": "0.01-0.02 mg/kg", "route": "SC/IM", "onset": "2-3 min", "duration": "30-60 min",
+                 "notes_ja": "徐脈時。アトロピンより副作用が少ない。", "notes": "For bradycardia. Fewer side effects than atropine."},
+            ],
+            "notes_ja": "モルモットのCPR: 胸骨を指先で圧迫（100-120/min）。100% O2でバッグバルブマスク換気。気管挿管困難なためマスク換気が現実的。",
+            "notes": "Guinea pig CPR: fingertip sternal compressions (100-120/min). Bag-valve-mask ventilation with 100% O2. Mask ventilation is practical as intubation is very difficult.",
+        },
     ],
 }
 
@@ -725,6 +755,19 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             ],
             "notes_ja": "覚醒は静かで涼しい（20-22°C）環境で。乾草と水を早期に提供。砂浴びは創傷治癒まで中止。",
             "notes": "Recover in quiet, cool (20-22°C) environment. Offer hay and water early. Suspend dust baths until wound healing.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "2-5 mg/kg", "route": "IP/IV", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の第一選択。", "notes": "First-line for apnea."},
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.003-0.01 mg/kg", "route": "IP/IO", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。用量は希釈して正確に計測。", "notes": "For CPA. Dilute for accurate dosing."},
+            ],
+            "notes_ja": "チンチラは高温（>28°C）に極めて弱い。緊急時も環境温度に注意。覚醒環境は20-22°C。フィプロニルは致死的であり絶対に使用しない。",
+            "notes": "Chinchillas are extremely heat-sensitive (>28°C). Monitor environmental temperature even during emergencies. Recovery environment at 20-22°C. Fipronil is LETHAL — never use.",
         },
     ],
 }
@@ -785,6 +828,21 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             "notes_ja": "覚醒後すぐに少量の高カロリー食を提供（低血糖予防）。術後鎮痛: メロキシカム0.2 mg/kg PO/SC q24h。",
             "notes": "Offer small amounts of high-calorie food immediately after recovery (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2 mg/kg PO/SC q24h.",
         },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Atropine", "name_ja": "アトロピン", "dose": "0.02-0.04 mg/kg", "route": "IV/IM", "onset": "1-2 min", "duration": "15-30 min",
+                 "notes_ja": "徐脈に対する第一選択。", "notes": "First-line for bradycardia."},
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.01 mg/kg", "route": "IV/IO/IT", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。フェレットは犬猫に近い管理が可能。", "notes": "For CPA. Ferrets can be managed similarly to small dogs/cats."},
+                {"name": "50% Dextrose", "name_ja": "50%デキストロース", "dose": "0.5-1 mL/kg (diluted 1:4)", "route": "IV slow", "onset": "1-2 min", "duration": "",
+                 "notes_ja": "インスリノーマによる低血糖発作時の第一選択。必ず希釈して投与。", "notes": "First-line for insulinoma-related hypoglycemic seizures. Always dilute before administration."},
+            ],
+            "notes_ja": "フェレットのCPR: 犬猫に準じる。胸骨圧迫100-120/min。低血糖が疑われる場合はまずデキストロース投与。インスリノーマ手術時は血糖値を30分毎にモニタリング。",
+            "notes": "Ferret CPR: follow small dog/cat protocols. Chest compressions 100-120/min. If hypoglycemia suspected, administer dextrose first. Monitor glucose q30min during insulinoma surgery.",
+        },
     ],
 }
 
@@ -841,6 +899,19 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             "notes_ja": "覚醒後は暖かい環境（25-27°C）で回復。ミルワーム等の好物で食欲を確認。術後鎮痛: メロキシカム0.2-0.5 mg/kg PO/SC q24h。",
             "notes": "Recover in warm (25-27°C) environment. Check appetite with mealworms or favorite food. Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
         },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "2-5 mg/kg", "route": "SC/IP", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の第一選択。棘のない腹側から注射。", "notes": "First-line for apnea. Inject into quill-free ventral skin."},
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.003-0.01 mg/kg", "route": "IP/IO", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。IO: 脛骨近位端。", "notes": "For CPA. IO: proximal tibia."},
+            ],
+            "notes_ja": "ハリネズミのCPR: 棘があるため胸骨圧迫は腹側から。指先で100-120/min。トルポール（低体温休眠）と死亡の鑑別に注意（加温で覚醒するかを確認）。覚醒後25-27°Cの環境で。",
+            "notes": "Hedgehog CPR: quills make dorsal access difficult; compress from ventral side. Fingertip compressions 100-120/min. Differentiate torpor from death (warm and check for arousal). Recover at 25-27°C.",
+        },
     ],
 }
 
@@ -894,6 +965,19 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             ],
             "notes_ja": "覚醒後は暗く暖かいポーチに入れ、蜂蜜水を提供（低血糖予防）。術後鎮痛: メロキシカム0.2-0.5 mg/kg PO/SC q24h。",
             "notes": "Place in dark, warm pouch after recovery. Offer honey water (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "SC/IP", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の第一選択。", "notes": "First-line for apnea."},
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.003-0.01 mg/kg", "route": "IP/IO", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。有袋類特有の薬物代謝差を考慮。", "notes": "For CPA. Consider marsupial-specific differences in drug metabolism."},
+            ],
+            "notes_ja": "フクロモモンガのCPR: 非常に小型のため指先で穏やかに胸骨圧迫。トルポール（低体温休眠）と死亡の鑑別が重要（加温＋刺激で反応確認）。覚醒後は自咬症予防のためエリザベスカラー装着。暗いポーチで回復。",
+            "notes": "Sugar glider CPR: very small; gentle fingertip sternal compressions. Differentiate torpor from death (warm + stimulate to check response). Apply Elizabethan collar after recovery to prevent self-mutilation. Recover in dark pouch.",
         },
     ],
 }
@@ -949,6 +1033,21 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             ],
             "notes_ja": "覚醒後は乾草と水を提供。糖分の高い果物は厳禁。術後鎮痛: メロキシカム0.3-0.5 mg/kg PO/SC q24h。",
             "notes": "Offer hay and water after recovery. High-sugar fruits are strictly prohibited. Post-op analgesia: meloxicam 0.3-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IP", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の第一選択。", "notes": "First-line for apnea."},
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.003-0.01 mg/kg", "route": "IP/IO", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。", "notes": "For CPA."},
+                {"name": "5% Dextrose", "name_ja": "5%デキストロース", "dose": "1-2 mL bolus", "route": "IP/IV", "onset": "1-2 min", "duration": "",
+                 "notes_ja": "低血糖時。糖尿病個体でも急性低血糖はまず補正。", "notes": "For hypoglycemia. Even in diabetic individuals, correct acute hypoglycemia first."},
+            ],
+            "notes_ja": "デグーのCPR: 指先で胸骨圧迫（100-120/min）。尾の脱グローブに注意（尾を掴まない）。覚醒後は糖分を含まない食事を提供（糖尿病悪化予防）。血糖値を確認。",
+            "notes": "Degu CPR: fingertip sternal compressions (100-120/min). Avoid tail (degloving risk — never grab tail). Offer sugar-free food after recovery (prevent diabetes worsening). Check blood glucose.",
         },
     ],
 }
@@ -1088,6 +1187,21 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
             "notes_ja": "覚醒は30秒-2分。インキュベーター（30-32°C）で回復。覚醒時のばたつきによる骨折に注意（タオルで軽く包む）。食事は覚醒後早期に。",
             "notes": "Recovery in 30 sec-2 min. Use incubator (30-32°C). Watch for fractures from flapping during recovery (wrap loosely in towel). Offer food early after recovery.",
         },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.01-0.1 mg/kg", "route": "IV/IO/IT", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。IO: 脛足根骨（尺骨は含気骨のため避ける）。気管内投与も有効。", "notes": "For CPA. IO: tibiotarsus (avoid ulna — pneumatic bone). Intratracheal also effective."},
+                {"name": "Atropine", "name_ja": "アトロピン", "dose": "0.02-0.05 mg/kg", "route": "IV/IO/IM", "onset": "1-2 min", "duration": "15-30 min",
+                 "notes_ja": "徐脈時。", "notes": "For bradycardia."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IO", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時の第一選択。", "notes": "First-line for apnea."},
+            ],
+            "notes_ja": "小型インコ（30-40g）のCPR: 竜骨を親指と人差し指で挟んで圧迫（1-2回/sec）。100% O2でIPPV。低体温が疑われる場合はまず加温。IOアクセスは脛足根骨から（25-28G針）。",
+            "notes": "Small parakeet (30-40g) CPR: compress keel between thumb and forefinger (1-2/sec). IPPV with 100% O2. If hypothermia suspected, warm first. IO access via tibiotarsus (25-28G needle).",
+        },
     ],
 }
 
@@ -1142,6 +1256,21 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
             ],
             "notes_ja": "覚醒は速い（2-5分）。暗い静かな環境（インキュベーター30-32°C）で。大型オウムは覚醒時に暴れることがあるため、止まり木を除去しパッドで保護。",
             "notes": "Recovery is rapid (2-5 min). Dark, quiet environment (incubator 30-32°C). Large parrots may thrash during recovery; remove perches and pad surroundings.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.01-0.1 mg/kg", "route": "IV/IO/IT", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。IO: 脛足根骨または上腕骨遠位端。大型オウムでは血管アクセスが容易。", "notes": "For CPA. IO: tibiotarsus or distal humerus. Vascular access easier in large parrots."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IO", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時。", "notes": "For apnea."},
+                {"name": "Atropine", "name_ja": "アトロピン", "dose": "0.02-0.05 mg/kg", "route": "IV/IO/IM", "onset": "1-2 min", "duration": "15-30 min",
+                 "notes_ja": "徐脈時。", "notes": "For bradycardia."},
+            ],
+            "notes_ja": "大型オウムのCPR: 竜骨を圧迫（1-2回/sec）。気管挿管してIPPV（100% O2）。ヨウム（アフリカングレイ）はカルシウム低下による心停止リスクがあり、10%グルコン酸カルシウム50-100 mg/kg IV slowを検討。",
+            "notes": "Large parrot CPR: keel compressions (1-2/sec). Intubate and IPPV (100% O2). African greys are at risk of cardiac arrest from hypocalcemia; consider calcium gluconate 10% 50-100 mg/kg IV slow.",
         },
     ],
 }
@@ -1258,6 +1387,19 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             "notes_ja": "覚醒は6-24時間かかる。POTZ上限に加温。気管チューブは覚醒まで維持。四肢引っ込め反射、頭部引っ込め反射で覚醒判定。",
             "notes": "Recovery takes 6-24 hr. Warm to upper POTZ. Maintain ET tube until recovery. Assess with limb/head withdrawal reflexes.",
         },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.1-0.5 mg/kg", "route": "IC/IV", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。心臓内（IC）投与が最も効果的。爬虫類の心臓は3室。", "notes": "For CPA. Intracardiac (IC) most effective. Reptile heart is 3-chambered."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IM", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時。爬虫類は長時間無呼吸が可能なため、真の呼吸停止かの判断が重要。", "notes": "For apnea. Reptiles can sustain prolonged apnea; determining true respiratory arrest is important."},
+            ],
+            "notes_ja": "爬虫類のCPR: IPPV（2-4回/min）が最重要。心臓マッサージは腹腔側から。低体温の個体はPOTZ上限まで加温してから判断（低体温で死亡に見えても回復することがある）。",
+            "notes": "Reptile CPR: IPPV (2-4/min) is most critical. Cardiac massage from ventral approach. Warm hypothermic individuals to upper POTZ before pronouncing death (may recover from apparent death when hypothermic).",
+        },
     ],
 }
 
@@ -1301,6 +1443,19 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             ],
             "notes_ja": "覚醒は遅い（数時間〜24時間）。POTZ上限に加温。舌のフリッキング（ちらつかせ）の回復が覚醒の指標。毒蛇は完全覚醒を確認するまで取り扱いに注意。",
             "notes": "Recovery is slow (hours to 24 hr). Warm to upper POTZ. Return of tongue flicking indicates recovery. Handle venomous snakes with extreme caution until fully recovered.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.1-0.5 mg/kg", "route": "IC/IV", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。心臓は体長の1/4-1/3の位置（体の前方寄り）。心臓内投与が有効。", "notes": "For CPA. Heart at 1/4-1/3 body length. Intracardiac injection effective."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IM", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時。", "notes": "For apnea."},
+            ],
+            "notes_ja": "ヘビのCPR: IPPV（2-4回/min、ETチューブ経由）が最優先。心臓マッサージは体前方1/4の腹側から。低体温個体はPOTZ上限に加温してから評価。毒蛇は防護手袋着用。",
+            "notes": "Snake CPR: IPPV (2-4/min via ET tube) is top priority. Cardiac massage from ventral side at cranial 1/4 of body. Warm hypothermic individuals to upper POTZ before assessment. Use protective gloves for venomous species.",
         },
     ],
 }
@@ -1346,6 +1501,19 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             ],
             "notes_ja": "覚醒は数時間〜24時間。正向反射の回復で覚醒を判定。覚醒後はPOTZ上限の環境に。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
             "notes": "Recovery: hours to 24 hr. Righting reflex return indicates recovery. Place in upper POTZ environment after recovery. Post-op analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.1-0.5 mg/kg", "route": "IC/IV", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。心臓内注射。フトアゴヒゲトカゲの心臓は胸骨直後の腹側。", "notes": "For CPA. Intracardiac injection. Bearded dragon heart is ventral, just caudal to sternum."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5-10 mg/kg", "route": "IV/IM", "onset": "30-60 sec", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時。", "notes": "For apnea."},
+            ],
+            "notes_ja": "トカゲのCPR: IPPV（4-6回/min）+ 心臓マッサージ（腹側から）。尾の自切を起こさないよう取り扱い注意。低体温個体はPOTZ上限に加温してから評価。",
+            "notes": "Lizard CPR: IPPV (4-6/min) + cardiac massage (ventral approach). Handle carefully to avoid tail autotomy. Warm hypothermic individuals to upper POTZ before assessment.",
         },
     ],
 }
