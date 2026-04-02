@@ -1614,6 +1614,14 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
             "notes": "Recovery in 30 sec-2 min. Use incubator (30-32°C). Watch for fractures from flapping during recovery (wrap loosely in towel). Offer food early after recovery.",
         },
         {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は極めて速い（1-3分）。インキュベーター（30-32°C）で保温。小型のため低体温が急速に進行。覚醒後に水とシード（粟穂等）を速やかに提供。覚醒時のパニック飛行を防ぐため、暗い環境で覚醒させる。",
+            "notes": "Recovery is extremely rapid (1-3 min). Keep in incubator (30-32°C). Hypothermia progresses rapidly due to small size. Offer water and seeds (millet spray) promptly. Keep in dark environment during recovery to prevent panic flight.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -1645,6 +1653,19 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
         "en": "Medium (200-500g): 2-4 hr. Large (>500g): 4-6 hr. Check crop.",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 1-2 mg/kg", "route": "IM (pectoral)", "onset": "5-10 min", "duration": "20-40 min",
+                 "notes_ja": "大型オウム（ヨウム、コンゴウインコ等）のIM鎮静。噛傷リスクがあるため、保定技術に習熟が必要。", "notes": "IM sedation for large parrots (African grey, macaw). Bite risk; restraint expertise required."},
+                {"name": "Isoflurane (mask)", "name_ja": "イソフルラン（マスク）", "dose": "3-5% induction → 1-2% maintenance", "route": "Mask", "onset": "30-60 sec", "duration": "As needed",
+                 "notes_ja": "マスク鎮静。大型オウムはマスクから逃げようとするため、迅速な装着が必要。", "notes": "Mask sedation. Large parrots resist mask; rapid placement required."},
+            ],
+            "notes_ja": "大型オウムの噛む力は非常に強い（コンゴウインコ: 500-700 psi）。鎮静なしの保定は重大な噛傷リスク。攻撃的な個体にはタオルレストレント後にIM注射。",
+            "notes": "Large parrots have extremely strong bite force (macaw: 500-700 psi). Restraint without sedation poses serious bite injury risk. For aggressive birds: towel restraint followed by IM injection.",
+        },
         {
             "name": {"ja": "吸入麻酔", "en": "Inhalation Anesthesia"},
             "category": "induction",
@@ -1682,6 +1703,14 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
             ],
             "notes_ja": "覚醒は速い（2-5分）。暗い静かな環境（インキュベーター30-32°C）で。大型オウムは覚醒時に暴れることがあるため、止まり木を除去しパッドで保護。",
             "notes": "Recovery is rapid (2-5 min). Dark, quiet environment (incubator 30-32°C). Large parrots may thrash during recovery; remove perches and pad surroundings.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒は速い（2-5分）。暗い静かな環境のインキュベーター（28-32°C）で。大型オウムは覚醒時に暴れて翼を損傷することがあるため、パッドで保護。止まり木は除去。ヨウム（アフリカングレイ）は覚醒時のストレスで羽毛引き抜きが悪化することがある。",
+            "notes": "Recovery is rapid (2-5 min). Dark, quiet incubator (28-32°C). Large parrots may thrash and injure wings during recovery; pad surroundings. Remove perches. African greys may worsen feather plucking from recovery stress.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
