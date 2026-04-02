@@ -651,6 +651,19 @@ ANESTHESIA_PROTOCOLS["rabbit"] = {
             "notes": "Rabbits can die from restraint stress. Handle gently, always support hindquarters. Dorsal recumbency (trance) carries respiratory depression risk.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Buprenorphine", "name_ja": "ミダゾラム＋ブプレノルフィン", "dose": "0.5-1 mg/kg + 0.02-0.05 mg/kg", "route": "IM/SC/IN", "onset": "10-15 min", "duration": "4-8 hr (buprenorphine)",
+                 "notes_ja": "安全性が高い。鼻腔内（IN）投与も有効（ストレス軽減）。ブプレノルフィンは長時間鎮痛で術後管理に有利。", "notes": "High safety margin. Intranasal (IN) route effective (reduces stress). Buprenorphine provides long-duration analgesia beneficial for post-op management."},
+                {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "50-100 µg/kg + 0.3-0.5 mg/kg", "route": "IM/SC", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "より深い鎮静。IV確保が容易になる。アティパメゾールで拮抗可。アトロピナーゼ産生個体（約30%）ではアトロピンが効きにくい→グリコピロレートを検討。", "notes": "Deeper sedation. Facilitates IV catheter placement. Reversible with atipamezole. Atropinase-producing rabbits (~30%) are resistant to atropine → consider glycopyrrolate."},
+            ],
+            "notes_ja": "ウサギは絶食不要（嘔吐できない）。長時間絶食はGI stasisリスク。アトロピナーゼ（ウサギの約30%が産生）に注意：抗コリン薬はグリコピロレート0.01-0.02 mg/kg SC/IMを使用。",
+            "notes": "No fasting required for rabbits (cannot vomit). Prolonged fasting risks GI stasis. Atropinase (produced by ~30% of rabbits): use glycopyrrolate 0.01-0.02 mg/kg SC/IM instead of atropine.",
+        },
+        {
             "name": {"ja": "前投薬＋導入", "en": "Premedication + Induction"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1126,6 +1139,19 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             "notes": "Intubation: 2.5-3.5 ET tube. Use laryngoscope (Miller 0-1 blade). Ferret tracheas are long.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "フェレットの気管挿管は比較的容易。2.0-3.5mm非カフETチューブ使用。喉頭痙攣リスクがあるためリドカインスプレー（喉頭に少量局所塗布）推奨。", "notes": "Ferret intubation is relatively easy. Use 2.0-3.5mm uncuffed ET tube. Laryngospasm risk; topical lidocaine spray on larynx recommended."},
+                {"name": "Sevoflurane", "name_ja": "セボフルラン", "dose": "2.5-4%", "route": "ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "イソフルランの代替。やや速い覚醒。", "notes": "Alternative to isoflurane. Slightly faster recovery."},
+            ],
+            "notes_ja": "インスリノーマ併存時は術中血糖モニタリング必須。低血糖（<60 mg/dL）時は5%デキストロースIV点滴を開始。絶食は3-4時間に制限。",
+            "notes": "Blood glucose monitoring mandatory with concurrent insulinoma. Start 5% dextrose IV if hypoglycemic (<60 mg/dL). Limit fasting to 3-4 hr.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1246,6 +1272,17 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             "notes": "IV access is difficult (cephalic or lateral saphenous vein, 26-28G). IO (tibial, femoral) as emergency alternative.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-3%", "route": "Mask / nose cone", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は非常に困難（口が小さい）。マスク維持が標準。棘のためマスクフィットが難しい場合あり。", "notes": "Intubation is very difficult (small mouth). Mask maintenance is standard. Mask fit may be challenging due to spines."},
+            ],
+            "notes_ja": "ハリネズミは丸まった状態でもチャンバーで吸入麻酔導入可能（最大の利点）。マスク維持中は棘に触れないよう注意。保温環境（28-30°C）維持。",
+            "notes": "Hedgehogs can be induced via chamber even when curled (major advantage). Avoid touching spines during mask maintenance. Maintain warming (28-30°C).",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1343,6 +1380,17 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             ],
             "notes_ja": "術後の自咬症予防のためエリザベスカラー（小型）を装着。ストレス軽減のためポーチ（袋）を回復環境に提供。",
             "notes": "Apply small Elizabethan collar to prevent self-mutilation. Provide pouch in recovery environment for stress reduction.",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-2.5%", "route": "Mask", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は困難。マスク維持が標準。非常に小型（100-160g）のため薬用量計算に注意。", "notes": "Intubation is difficult. Mask maintenance is standard. Very small (100-160g); careful dose calculation required."},
+            ],
+            "notes_ja": "低体温・低血糖のダブルリスク。保温環境（28-30°C）と術中輸液（維持量の1.5-2倍）で管理。膜翼（滑空膜）を広げた状態で固定しない。",
+            "notes": "Double risk of hypothermia and hypoglycemia. Manage with warming (28-30°C) and intraoperative fluids (1.5-2x maintenance). Do not pin patagium (gliding membrane) in extended position.",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
@@ -1444,6 +1492,17 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             "notes": "Blood glucose monitoring q30min intraoperatively. Hypoglycemia (<60 mg/dL): 5% dextrose infusion. High-sugar diet is contraindicated (worsens diabetes).",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-2.5%", "route": "Mask", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は困難。マスク維持が標準。", "notes": "Intubation is difficult. Mask maintenance is standard."},
+            ],
+            "notes_ja": "デグーは糖尿病体質。術中血糖モニタリングを推奨。尾のdeglovingに注意（保定時に尾を掴まない）。社会的動物のため、同居個体を近くに置くとストレス軽減。",
+            "notes": "Degus are diabetes-prone; intraoperative glucose monitoring recommended. Watch for tail degloving (never grasp tail). Social animals; keeping cage-mate nearby reduces stress.",
+        },
+        {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1539,6 +1598,19 @@ ANESTHESIA_PROTOCOLS["bird"] = {
             "notes": "Alpha-2 agonists (xylazine, dexmedetomidine) are generally NOT recommended in birds due to severe cardiovascular depression.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "非カフETチューブ必須（気管輪が完全輪のためカフで壊死リスク）。気嚢システムにより揮発性麻酔薬の取り込みが速い。IPPV準備。", "notes": "Uncuffed ET tube mandatory (complete tracheal rings; cuffed tubes cause necrosis). Air sac system provides rapid volatile agent uptake. IPPV ready."},
+                {"name": "Sevoflurane", "name_ja": "セボフルラン", "dose": "2-4%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "イソフルランの代替。やや速い覚醒。", "notes": "Alternative to isoflurane. Slightly faster recovery."},
+            ],
+            "notes_ja": "鳥類は気嚢システムのため、呼吸停止後も麻酔ガスの吸収が継続する（哺乳類と異なる）。ETCO2モニタリングは非カフチューブのリークで不正確になることがある。呼吸数15-40回/min。",
+            "notes": "Avian air sac system means anesthetic gas absorption continues after apnea (unlike mammals). ETCO2 monitoring may be inaccurate due to uncuffed tube leak. RR 15-40/min.",
+        },
+        {
             "name": {"ja": "モニタリング", "en": "Monitoring Guidelines"},
             "category": "monitoring",
             "risk_level": "low",
@@ -1632,6 +1704,17 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
             "notes": "Budgerigars (30-40g): intubation nearly impossible. Mask maintenance is standard. Cockatiels (80-100g): 1.5-2.0mm uncuffed ET tube may be possible.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-2.5%", "route": "Mask / air sac tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "インコは小型すぎて気管挿管困難。マスク維持が一般的。重症例では気嚢チューブも選択肢。", "notes": "Parakeets are too small for standard intubation. Mask maintenance is common. Air sac tube is an option for critical cases."},
+            ],
+            "notes_ja": "非常に小型（30-40g）のため、体温低下が極めて急速。保温ランプまたはインキュベーターで30-32°Cを維持。酸素流量は0.5 L/min。手術時間を最小限に。",
+            "notes": "Very small (30-40g); hypothermia develops extremely rapidly. Maintain 30-32°C with heat lamp or incubator. O2 flow 0.5 L/min. Minimize surgical time.",
+        },
+        {
             "name": {"ja": "鎮痛", "en": "Analgesia"},
             "category": "premedication",
             "risk_level": "low",
@@ -1720,6 +1803,19 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
             ],
             "notes_ja": "大型オウムの保定は厚手の手袋を使用。嘴による重度の咬傷リスクあり。頸部を圧迫しないよう注意（気管の圧迫で窒息）。",
             "notes": "Use thick gloves for large parrot restraint. Risk of severe bite injuries. Avoid cervical compression (tracheal obstruction causes asphyxia).",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "大型オウムは気管挿管容易。非カフETチューブ必須。2.5-5.0 mmサイズ（種による）。IPPV準備。", "notes": "Large parrot intubation is easy. Uncuffed ET tube mandatory. 2.5-5.0 mm size (species-dependent). IPPV ready."},
+                {"name": "Sevoflurane", "name_ja": "セボフルラン", "dose": "2-4%", "route": "Non-cuffed ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "やや速い覚醒。コスト高。", "notes": "Slightly faster recovery. Higher cost."},
+            ],
+            "notes_ja": "ヨウム（アフリカングレイ）は低カルシウム血症リスクが高い。術中のカルシウム低下による心停止に注意。10%グルコン酸カルシウム50-100 mg/kg IV slowを準備。",
+            "notes": "African greys have high hypocalcemia risk. Watch for cardiac arrest from intraoperative calcium drop. Have calcium gluconate 10% 50-100 mg/kg IV slow ready.",
         },
         {
             "name": {"ja": "注射麻酔（補助的）", "en": "Injectable Anesthesia (Adjunctive)"},
