@@ -2160,6 +2160,17 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             "notes": "Recovery takes 6-24+ hr. Warm to upper POTZ (30-32°C). Maintain ET tube until righting reflex. Recovery sequence: limb withdrawal → head withdrawal → spontaneous breathing. Offer shallow water post-recovery (dehydration prevention).",
         },
         {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "創傷修復、甲羅修復時の鎮痛に。効果発現が哺乳類より遅い場合あり。前肢に注射（腎門脈系回避）。", "notes": "For wound repair, shell repair analgesia. Onset may be slower than mammals. Inject into forelimb (avoid renal portal)."},
+            ],
+            "notes_ja": "リクガメの甲羅には神経が通っており、甲羅修復は痛みを伴う。局所浸潤麻酔で甲羅縁の鎮痛を補強。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM q24-48h。",
+            "notes": "Tortoise shells are innervated; shell repair is painful. Local infiltration provides shell margin analgesia. Post-op: meloxicam 0.2-0.4 mg/kg IM q24-48h.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -2258,6 +2269,17 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             "drugs": [],
             "notes_ja": "覚醒は遅い（数時間〜24時間）。POTZ上限に加温。舌のフリッキング（ちらつかせ）回復が覚醒の指標。自発呼吸の回復まで定期的IPPV。毒蛇は完全覚醒を確認するまで防護具着用。覚醒後は水場を提供。",
             "notes": "Recovery is slow (hours to 24 hr). Warm to upper POTZ. Return of tongue flicking indicates recovery. Periodic IPPV until spontaneous breathing returns. Handle venomous snakes with protective equipment until fully recovered. Offer water post-recovery.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "創傷修復、腫瘤切除時の鎮痛に。前半身に注射（腎門脈系回避）。効果発現が哺乳類より遅い。", "notes": "For wound repair, mass removal analgesia. Inject into cranial body (avoid renal portal). Onset may be slower than mammals."},
+            ],
+            "notes_ja": "ヘビの手術は体腔切開が多い（卵管停滞、腫瘤切除等）。切開ラインへの局所浸潤で術後疼痛を軽減。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM q24-48h。",
+            "notes": "Snake surgery often involves coeliotomy (egg retention, mass removal). Incision line infiltration reduces post-op pain. Analgesia: meloxicam 0.2-0.4 mg/kg IM q24-48h.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -2361,6 +2383,17 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             "notes": "Recovery: hours to 24 hr. Righting reflex return indicates recovery. Manage in upper POTZ environment. Resume UVB lighting post-recovery to promote metabolism. Analgesia: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
         },
         {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "腫瘤切除、創傷修復に。前肢周辺への浸潤。尾の自切を防ぐため尾への注射は避ける。", "notes": "For mass removal, wound repair. Infiltrate around forelimb area. Avoid tail injection to prevent autotomy."},
+            ],
+            "notes_ja": "フトアゴヒゲトカゲの腫瘤切除や膿瘍処置に局所麻酔は有用。トカゲの尾への注射は自切を誘発する可能性があるため避ける。術後鎮痛: メロキシカム0.2-0.4 mg/kg IM/SC q24-48h。",
+            "notes": "Local anesthesia useful for bearded dragon mass removal and abscess treatment. Avoid tail injection in lizards as it may trigger autotomy. Post-op: meloxicam 0.2-0.4 mg/kg IM/SC q24-48h.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -2459,6 +2492,28 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
             "notes": "Recovery: transfer to fresh dechlorinated water. Confirm righting reflex return. Keep skin moist at all times. Monitor in shallow water until full recovery. Recovery time: MS-222 5-30 min, injectable hours. Analgesia: meloxicam 0.2 mg/kg SC/ICe q24h.",
         },
         {
+            "name": {"ja": "局所麻酔・鎮痛", "en": "Local Anesthesia/Analgesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine (topical)", "name_ja": "リドカイン（局所）", "dose": "Max 5 mg/kg", "route": "Topical / Local infiltration (dorsal lymph sac)", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "経皮吸収可能（両生類の皮膚は透過性が高い）。創傷部位への局所塗布。背側リンパ嚢への浸潤も可能。", "notes": "Transcutaneous absorption possible (amphibian skin is highly permeable). Topical application to wound site. Dorsal lymph sac infiltration also possible."},
+            ],
+            "notes_ja": "両生類の皮膚は薬物透過性が高いため、局所麻酔薬の経皮吸収が起こる。全身毒性に注意。術後鎮痛: メロキシカム0.2 mg/kg SC/背側リンパ嚢 q24h。",
+            "notes": "Amphibian skin is highly permeable; local anesthetics are absorbed transcutaneously. Watch for systemic toxicity. Post-op: meloxicam 0.2 mg/kg SC/dorsal lymph sac q24h.",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Butorphanol", "name_ja": "ブトルファノール", "dose": "0.5-1 mg/kg", "route": "SC (dorsal lymph sac) / IM", "onset": "10-20 min", "duration": "2-4 hr",
+                 "notes_ja": "背側リンパ嚢に投与。浸漬麻酔前の鎮痛として使用。手術侵襲が大きい場合に推奨。", "notes": "Administer into dorsal lymph sac. Used as pre-immersion analgesia. Recommended for major surgical procedures."},
+            ],
+            "notes_ja": "両生類の前投薬はオピオイド鎮痛が主。浸漬麻酔の30分前に投与。両生類の疼痛評価は困難だが、鎮痛は倫理的に必須。",
+            "notes": "Amphibian premedication is primarily opioid analgesia. Administer 30 min before immersion anesthesia. Amphibian pain assessment is challenging but analgesia is ethically mandatory.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -2547,6 +2602,25 @@ ANESTHESIA_PROTOCOLS["fish"] = {
             "notes": "Transfer to fresh (anesthetic-free) aerated water. Open mouth and direct water flow through gills (manual irrigation). Monitor until normal swimming. Recovery: 3-15 min. If no recovery, continue oxygenated water irrigation for 30+ min. Post-op: manage in clean water environment.",
         },
         {
+            "name": {"ja": "局所麻酔・鎮痛", "en": "Local Anesthesia/Analgesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "手術部位への局所浸潤。腫瘤切除、鰭修復時に使用。魚では用量データが限られるため低用量で開始。", "notes": "Local infiltration at surgical site. For mass removal, fin repair. Limited dosing data in fish; start with low doses."},
+            ],
+            "notes_ja": "魚の疼痛管理は発展途上の分野。局所麻酔は全身麻酔（浸漬）の補助として手術部位に使用。術後鎮痛: メロキシカム0.1-0.2 mg/kg IM（データ限定的）。",
+            "notes": "Fish pain management is an evolving field. Local anesthesia used as adjunct to immersion GA at surgical site. Post-op: meloxicam 0.1-0.2 mg/kg IM (limited data).",
+        },
+        {
+            "name": {"ja": "前処置", "en": "Pre-procedural Care"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [],
+            "notes_ja": "魚の前処置: 24-48時間絶食で消化管を空に。麻酔水は飼育水と同じ水温・pH・塩分濃度を使用。エアレーションで酸素供給を確保。麻酔前にストレスを最小化（暗い環境、静かな操作）。健康状態の確認（鰓の色、体表の異常、遊泳パターン）。",
+            "notes": "Fish pre-procedure: 24-48 hr fast to empty GI tract. Anesthetic water at same temperature/pH/salinity as housing. Aerate for oxygen. Minimize stress before anesthesia (dark environment, quiet handling). Health assessment (gill color, body surface, swimming pattern).",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -2587,6 +2661,17 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             "notes": "For unfamiliar species, use protocols from most closely related known species. Start at low dose and titrate to effect.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.3-1 mg/kg + 0.2-0.5 mg/kg (species-dependent)", "route": "IM/SC", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "多くのエキゾチック種で安全に使用可能。用量は体格と種による。拮抗可能。", "notes": "Safe for many exotic species. Dose depends on body size and species. Reversible."},
+            ],
+            "notes_ja": "未知の種の前投薬は安全性の高い組み合わせ（ミダゾラム＋ブトルファノール）から開始。低用量で開始し効果を観察。",
+            "notes": "Start with safe combination (midazolam + butorphanol) for unfamiliar species. Begin with low dose and observe effect.",
+        },
+        {
             "name": {"ja": "一般的な麻酔導入", "en": "General Anesthesia Induction"},
             "category": "induction",
             "risk_level": "moderate",
@@ -2602,6 +2687,17 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             "notes": "For unfamiliar species, choose safest approach: (1) inhalation chamber induction, (2) alfaxalone IM. Start low and titrate to effect.",
         },
         {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-3% (species-dependent)", "route": "Mask / ET tube (if possible)", "onset": "", "duration": "Continuous",
+                 "notes_ja": "小型種はマスク維持。中型以上は可能なら気管挿管。酸素流量は体格に合わせて0.5-2 L/min。", "notes": "Mask maintenance for small species. Intubate medium/large species if possible. O2 flow 0.5-2 L/min adjusted to body size."},
+            ],
+            "notes_ja": "共通原則: 体温管理、正確な体重に基づく用量計算、低血糖予防（特に小型種）。術中輸液は維持量の1-2倍。",
+            "notes": "Common principles: temperature management, weight-based dose calculation, hypoglycemia prevention (especially small species). Intraoperative fluids at 1-2x maintenance rate.",
+        },
+        {
             "name": {"ja": "共通モニタリング指針", "en": "Common Monitoring Guidelines"},
             "category": "monitoring",
             "risk_level": "low",
@@ -2614,6 +2710,28 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             ],
             "notes_ja": "全エキゾチック種共通: (1)正確な体重測定、(2)体温管理、(3)低血糖予防、(4)最小限のストレス。術後鎮痛はメロキシカム（種による用量調整）が第一選択。",
             "notes": "Common to all exotics: (1) accurate weighing, (2) temperature management, (3) hypoglycemia prevention, (4) minimal stress. Meloxicam (dose per species) is first-line post-op analgesic.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 2-5 mg/kg (species-dependent)", "route": "Local infiltration", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "0.5-1%に希釈して使用。小型種は総用量に厳格注意。創傷処置、腫瘤切除に。", "notes": "Dilute to 0.5-1%. Strict dose control for small species. For wound care, mass removal."},
+            ],
+            "notes_ja": "局所麻酔は全身麻酔の補助として全てのエキゾチック種で有用。揮発性麻酔薬の必要量を削減し、心血管系への影響を最小化。",
+            "notes": "Local anesthesia is useful as GA adjunct in all exotic species. Reduces inhalant requirements, minimizing cardiovascular effects.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "Same volume as medetomidine/dexmedetomidine used", "route": "IM", "onset": "5-15 min", "duration": "",
+                 "notes_ja": "α2作動薬使用時の拮抗。鎮痛も拮抗するため、他の鎮痛を確保後に。", "notes": "α2-agonist reversal. Also reverses analgesia; ensure alternative analgesia first."},
+            ],
+            "notes_ja": "全エキゾチック種共通: 暖かく静かな環境で覚醒。低体温予防が最優先。覚醒後速やかに水と食事を提供（特に小型種の低血糖予防）。種特異的な正常行動の回復を確認。",
+            "notes": "Common to all exotics: recover in warm, quiet environment. Hypothermia prevention is top priority. Offer water and food promptly after awakening (especially hypoglycemia prevention in small species). Confirm return of species-specific normal behavior.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
