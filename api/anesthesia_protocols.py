@@ -754,6 +754,17 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Isoflurane (chamber)", "name_ja": "イソフルラン（チャンバー）", "dose": "3-4% induction → 1-2% mask", "route": "Inhalation (chamber/mask)", "onset": "1-3 min", "duration": "As needed",
+                 "notes_ja": "ハムスターの鎮静はチャンバー吸入が最も安全。注射は体格的に困難。", "notes": "Chamber inhalation is safest for hamster sedation. Injection is difficult due to small body size."},
+            ],
+            "notes_ja": "ハムスターの検査・軽処置（爪切り、膿瘍ドレナージ等）に。体温低下が急速のため処置時間を最小限に。頬袋の内容物を事前に除去。",
+            "notes": "For examination and minor procedures (nail trim, abscess drainage). Hypothermia develops rapidly; minimize procedure time. Remove cheek pouch contents beforehand.",
+        },
+        {
             "name": {"ja": "前投薬", "en": "Premedication"},
             "category": "premedication",
             "risk_level": "low",
@@ -789,6 +800,17 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
             ],
             "notes_ja": "IP投与は臓器穿刺を避けるため右下腹部に注射。26-28Gの針を使用。",
             "notes": "IP injection in right lower abdomen to avoid organ puncture. Use 26-28G needle.",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1-2.5%", "route": "Mask / nose cone", "onset": "", "duration": "Continuous",
+                 "notes_ja": "注射導入後またはチャンバー導入後にマスク維持。ハムスターは気管挿管困難のためマスク維持が標準。", "notes": "Mask maintenance after injectable or chamber induction. Intubation is difficult in hamsters; mask maintenance is standard."},
+            ],
+            "notes_ja": "低体温予防が最重要。保温マット（直接接触回避）使用。術中体温を28-30°Cに維持。酸素流量は0.5-1 L/min。5分毎にバイタルサイン確認。",
+            "notes": "Hypothermia prevention is critical. Use warming pad (avoid direct contact). Maintain intraoperative temp 28-30°C. O2 flow 0.5-1 L/min. Check vitals q5min.",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
@@ -881,6 +903,17 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             ],
             "notes_ja": "気管挿管が困難なため、V-gel（モルモット用）の使用を推奨。気管挿管を試みる場合は14-16G IV catheterをETチューブ代わりに使用。",
             "notes": "Due to difficult intubation, V-gel (guinea pig size) is recommended. If attempting intubation, use 14-16G IV catheter as ET tube.",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-3%", "route": "Mask / V-gel / ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "V-gel（声門上デバイス）が推奨。気管挿管は極めて困難。マスク維持も可能だが、気道確保の信頼性が低い。", "notes": "V-gel (supraglottic airway) recommended. Intubation is extremely difficult. Mask maintenance possible but less reliable airway."},
+            ],
+            "notes_ja": "モルモットの気管挿管は口腔が小さく口蓋帆が大きいため、盲目挿管またはV-gelが標準。術中はビタミンC補充（50 mg/kg SC）を検討。",
+            "notes": "Guinea pig intubation: small oral cavity and large palatal ostium make blind intubation or V-gel standard. Consider perioperative vitamin C (50 mg/kg SC).",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
@@ -985,6 +1018,17 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             ],
             "notes_ja": "術後鎮痛: メロキシカム0.3-0.5 mg/kg PO/SC q24h。フィプロニルは致死的であり絶対に使用しない。",
             "notes": "Post-op analgesia: meloxicam 0.3-0.5 mg/kg PO/SC q24h. Fipronil is LETHAL to chinchillas — never use.",
+        },
+        {
+            "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "1.5-2.5%", "route": "Mask / ET tube", "onset": "", "duration": "Continuous",
+                 "notes_ja": "気管挿管は可能だが困難。マスク維持が一般的。室温を21°C以下に管理（熱中症予防）。", "notes": "Intubation possible but difficult. Mask maintenance is common. Keep room temperature below 21°C (heatstroke prevention)."},
+            ],
+            "notes_ja": "チンチラは熱中症に極めて弱い。術中の加温は控えめに（24°C以下）。保温マットは低温設定で使用。ファーリング（ストレス脱毛）に注意。",
+            "notes": "Chinchillas are extremely heat-sensitive. Intraoperative warming must be conservative (below 24°C). Use warming pad on low setting. Watch for fur slip.",
         },
         {
             "name": {"ja": "モニタリング・回復", "en": "Monitoring & Recovery"},
