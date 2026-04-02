@@ -1276,3 +1276,33 @@ button.combination-item:focus-visible {
 .related-sym-btn:hover{background:var(--navy);color:var(--white)}
 .related-sym-btn.added{background:var(--green);color:var(--white);border-color:var(--green);cursor:default}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== Anesthesia Protocols Tab ===== */
+.anesthesia-overview{background:linear-gradient(135deg,#f0f7ff,#e8f0fd);border:1px solid #c7d4ea;border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;font-size:.84rem;line-height:1.6;color:var(--navy-dark)}
+.anesthesia-overview-text{margin-bottom:8px}
+.anesthesia-fasting-text{color:var(--navy);font-size:.82rem;padding-top:6px;border-top:1px solid #d4dff0}
+.anesthesia-risk-tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.72rem;font-weight:700;color:#fff;margin-left:6px;vertical-align:middle}
+.anesthesia-notes{font-size:.82rem;color:var(--gray-600);line-height:1.6;padding:8px 0;border-bottom:1px solid var(--gray-200);margin-bottom:10px}
+.anesthesia-drugs-table{margin:10px 0;overflow-x:auto}
+.anesthesia-drugs-table table{width:100%;border-collapse:collapse;font-size:.8rem}
+.anesthesia-drugs-table th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;font-size:.76rem;white-space:nowrap}
+.anesthesia-drugs-table td{padding:8px 10px;border-bottom:1px solid var(--gray-200);vertical-align:top;line-height:1.5}
+.anesthesia-drugs-table tr:nth-child(even):not(.anesthesia-drug-note){background:var(--gray-50)}
+.anesthesia-drug-note td{font-size:.76rem;color:var(--gray-500);padding:4px 10px 8px;border-bottom:1px solid var(--gray-100);background:#fffde6;line-height:1.5}
+.anesthesia-monitor-section{margin-top:12px}
+.anesthesia-monitor-section>strong{display:block;font-size:.84rem;color:var(--navy);margin-bottom:8px}
+.anesthesia-monitor-section table{width:100%;border-collapse:collapse;font-size:.8rem}
+.anesthesia-monitor-section th{background:var(--green);color:#fff;padding:8px 10px;text-align:left;font-weight:600;font-size:.76rem}
+.anesthesia-monitor-section td{padding:8px 10px;border-bottom:1px solid var(--gray-200);vertical-align:top;line-height:1.5}
+.anesthesia-monitor-section tr:nth-child(even){background:var(--gray-50)}
+.anesthesia-breed-section{margin-top:16px;padding:14px;background:linear-gradient(135deg,#fff8e6,#fef3cd);border:1px solid #f0d68a;border-radius:var(--radius)}
+.anesthesia-breed-section h4{font-size:.88rem;color:#92600a;margin-bottom:10px}
+.anesthesia-breed-item{padding:8px 12px;margin-bottom:8px;background:#fff;border-radius:6px;border:1px solid #eed68a}
+.anesthesia-breed-item strong{font-size:.82rem;color:var(--navy-dark)}
+.anesthesia-breed-item p{font-size:.78rem;color:var(--gray-600);margin-top:4px;line-height:1.5}
+.anesthesia-item .drug-head-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+@media(max-width:600px){
+  .anesthesia-drugs-table{font-size:.72rem}
+  .anesthesia-drugs-table th,.anesthesia-drugs-table td{padding:6px}
+  .anesthesia-monitor-section table{font-size:.72rem}
+}

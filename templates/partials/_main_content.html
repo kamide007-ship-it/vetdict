@@ -166,4 +166,25 @@
       </div>
     </div>
   </div>
+
+  <div id="viewAnesthesia" class="hidden" role="tabpanel" aria-labelledby="tab-anesthesia">
+    <div class="card" style="margin-top:20px">
+      <div class="card-header" data-i18n-html="cardAnesthesia">&#128137; 鎮静・麻酔プロトコル</div>
+      <div class="card-body">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+          <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
+            <input type="text" id="anesthesiaSearch" placeholder="薬品名・プロトコルを検索... (例: propofol, ketamine)" data-i18n-ph="anesthesiaSearchPh" aria-label="麻酔プロトコルを検索"/>
+            <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
+          </div>
+          <select id="anesthesiaCategoryFilter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">
+            <option value="" data-i18n="allCategories">全カテゴリ</option>
+          </select>
+        </div>
+        <div id="anesthesiaSpeciesLabel" style="font-size:.82rem;color:var(--gray-500);margin-bottom:8px"></div>
+        <div id="anesthesiaOverview" class="anesthesia-overview" style="display:none"></div>
+        <div id="anesthesiaCount" style="font-size:.76rem;color:var(--gray-500);margin-bottom:8px"></div>
+        <div id="anesthesiaList" class="disease-db-list" style="max-height:700px"></div>
+      </div>
+    </div>
+  </div>
 </div>
