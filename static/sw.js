@@ -2,8 +2,6 @@
 const CACHE_NAME = 'vetdict-v14';
 const STATIC_ASSETS = [
   '/',
-  '/static/css/main.css',
-  '/static/js/app.js',
   '/static/favicon.svg',
   '/static/manifest.json',
 ];
@@ -61,7 +59,25 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets: cache-first with network fallback
+  // Versioned static assets (e.g. app.js?v=5.0.0): network-first to ensure fresh content
+  if (url.pathname.startsWith('/static/') && url.search) {
+    event.respondWith(
+      fetch(event.request).then((response) => {
+        if (response && response.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() =>
+        caches.match(event.request).then((cached) =>
+          cached || new Response('Offline', { status: 503 })
+        )
+      )
+    );
+    return;
+  }
+
+  // Static assets (no query): cache-first with background revalidation
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) {

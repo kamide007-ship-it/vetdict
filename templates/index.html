@@ -42,7 +42,7 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="VetDict">
-<link rel="stylesheet" href="/static/css/main.css"/>
+<link rel="stylesheet" href="/static/css/main.css?v={{ g.asset_ver }}"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -208,7 +208,7 @@ if(!localStorage.getItem('vetdict-analytics-consent')&&!localStorage.getItem('ve
 document.getElementById('cookieAcceptBtn').addEventListener('click',acceptAnalytics);
 document.getElementById('cookieDismissBtn').addEventListener('click',dismissConsent);
 </script>
-<script defer src="/static/js/app.js" nonce="{{ g.csp_nonce }}"></script>
-<script nonce="{{ g.csp_nonce }}">if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}</script>
+<script defer src="/static/js/app.js?v={{ g.asset_ver }}" nonce="{{ g.csp_nonce }}"></script>
+<script nonce="{{ g.csp_nonce }}">if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js?v={{ g.asset_ver }}').catch(()=>{});}</script>
 </body>
 </html>
