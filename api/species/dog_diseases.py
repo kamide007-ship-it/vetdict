@@ -5128,6 +5128,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_fl", "limping_fr", "limping_rl", "limping_rr", "swelling", "lumps", "pain_on_touch"},
         "description": "Malignant tumor of the toe digits, common in large black-coated breeds, causing nail loss and toe swelling.",
         "description_ja": "足趾の悪性腫瘍で、大型の黒い被毛の犬種に多く、爪の脱落と趾の腫脹を引き起こします。",
+        "pathophysiology_ja": "趾骨/爪床の扁平上皮の悪性増殖→趾の腫脹・爪の脱落・潰瘍→骨浸潤（趾骨のP3溶解）。多発性（複数の趾に同時/逐次的に発生）が黒色犬種の特徴。局所リンパ節転移は10〜30%、肺転移は稀。",
+        "causes_ja": "黒色被毛の大型犬に好発：スタンダードプードル（黒）、ラブラドール（黒）、ジャイアントシュナウザー、ゴードンセッター。爪床メラノーマとの鑑別が重要（生検必須）。中高齢犬。",
+        "prevention_ja": "確実な予防法はない。趾の腫脹・爪の脱落は早期にX線＋生検。趾の切断（P3切断）が標準治療で予後良好（単発性のMST 1〜2年）。",
         "urgency": "urgent",
     },
     {
@@ -5144,6 +5147,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "bloated_abdomen", "appetite_loss", "lethargy", "straining_urinate"},
         "description": "Severe chronic dilation of the colon with loss of motility, causing intractable constipation.",
         "description_ja": "結腸の重度の慢性拡張と運動性の喪失で、難治性の便秘を引き起こします。",
+        "pathophysiology_ja": "慢性便秘の放置→結腸壁の平滑筋の不可逆的伸展→蠕動能の喪失→巨大糞塊の形成→排便不能。神経原性（仙骨脊髄損傷）や閉塞性（骨盤骨折後の骨盤腔狭窄）が基礎にあることが多い。",
+        "causes_ja": "慢性便秘の放置、骨盤骨折後の骨盤腔狭窄、神経原性（馬尾症候群）、会陰ヘルニア、甲状腺機能低下症。犬では猫ほど一般的ではない。",
+        "prevention_ja": "慢性便秘の早期管理（高食物繊維食・ラクツロース・シサプリド）。重度は結腸亜全摘術。",
         "urgency": "urgent",
     },
     {
@@ -5160,6 +5166,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lumps", "swelling", "skin_lesions", "lethargy", "weight_loss"},
         "description": "Malignant tumor of the apocrine sweat glands, often found on the limbs or trunk.",
         "description_ja": "アポクリン汗腺の悪性腫瘍で、四肢や体幹に多く見られます。",
+        "pathophysiology_ja": "皮膚のアポクリン汗腺上皮の悪性増殖→浸潤性の皮下腫瘤→局所リンパ節転移・肺転移。肛門嚢のアポクリン腺癌（別エントリ）が犬で最も臨床的に重要なアポクリン腺腫瘍。皮膚のアポクリン腺癌は比較的稀。",
+        "causes_ja": "原因不明。中高齢犬。FNA→生検で確定診断。良性のアポクリン腺腫との鑑別が重要。",
+        "prevention_ja": "確実な予防法はない。広範囲切除が治療の柱。転移がなければ予後は比較的良好。",
         "urgency": "urgent",
     },
     {
@@ -5206,6 +5215,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "nasal_discharge", "difficulty_breathing", "lethargy", "fever"},
         "description": "Irreversible dilation of the bronchi from chronic infection or inflammation, causing recurrent pneumonia.",
         "description_ja": "慢性感染や炎症による気管支の不可逆的拡張で、再発性肺炎を引き起こします。",
+        "pathophysiology_ja": "慢性気管支感染/炎症→気管支壁の弾性組織・軟骨の破壊→不可逆的な気管支拡張→粘液排泄障害→細菌の定着→反復性肺炎の悪循環。先天性（原発性線毛機能不全症/Kartagener症候群）と後天性（慢性気管支炎・異物・誤嚥後）がある。",
+        "causes_ja": "慢性気管支炎の末期、原発性線毛機能不全症（PCD）、異物誤嚥後、反復性誤嚥性肺炎。コッカースパニエル・WHWT に報告多い。CTで気管支拡張を確認（signet ring sign）。",
+        "prevention_ja": "慢性気管支疾患の早期適切な管理。再発性肺炎に対する長期抗菌薬療法・気管支拡張薬・胸部理学療法。",
         "urgency": "urgent",
     },
     {
@@ -5222,6 +5234,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"genital_discharge", "fever", "lethargy", "swelling", "weight_loss"},
         "description": "Brucella canis infection primarily affecting the reproductive system, causing abortion and infertility.",
         "description_ja": "主に生殖器系を侵すブルセラ菌感染で、流産と不妊を引き起こします。",
+        "pathophysiology_ja": "Brucella canisの性交・経口感染→生殖器への親和性→雌犬：妊娠後期（45〜55日目）の流産・死産。雄犬：精巣上体炎→不妊・陰嚢腫大→精巣萎縮。菌血症が長期間持続→椎間板脊椎炎・ぶどう膜炎の合併。人獣共通感染症（人への感染リスクは低いが免疫抑制者は注意）。",
+        "causes_ja": "Brucella canis。性交・流産産物・尿から排菌。繁殖犬舎で問題。日本でも散発的に報告あり。血清学的検査（RSAT→ME-RSAT/AGID確認）でスクリーニング。PCRも有用。",
+        "prevention_ja": "繁殖前のブルセラ検査（RSAT）の義務化。感染犬の繁殖禁止・隔離。去勢/避妊（排菌量を減少）。抗菌薬治療（ミノサイクリン＋ストレプトマイシン）は完全除菌が困難。",
         "urgency": "urgent",
     },
     {
@@ -5246,6 +5261,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"regurgitation", "drooling", "coughing", "difficulty_breathing"},
         "description": "Focal form of myasthenia gravis primarily affecting esophageal muscles, causing megaesophagus and regurgitation.",
         "description_ja": "主に食道筋を侵す重症筋無力症の局所型で、巨大食道と逆流を引き起こします。",
+        "pathophysiology_ja": "抗AChR自己抗体→食道筋のニコチン受容体破壊→食道蠕動障害→巨大食道症→吐出→誤嚥性肺炎（最大の致死要因）。四肢筋は侵されない（局所型の特徴）。犬のMGの約40%が局所型。胸腺腫の合併を精査。",
+        "causes_ja": "免疫介在性（抗AChR抗体）。ゴールデン・ジャーマンシェパード・ダックスフンドに好発。中高齢犬。巨大食道症の犬では抗AChR抗体を測定すべき。約50%が6〜18ヶ月で自然寛解。",
+        "prevention_ja": "確実な予防法はない。立位給餌（Bailey chair）で誤嚥性肺炎を予防。ピリドスチグミンでの対症療法。",
         "urgency": "urgent",
     },
     {
