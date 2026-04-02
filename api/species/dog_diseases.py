@@ -1638,6 +1638,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An inflammatory brain disease of unknown cause, "
                        "primarily affecting small-breed dogs.",
         "description_ja": "原因不明の脳炎症性疾患で、小型犬に多く見られます。",
+        "pathophysiology_ja": "脳・脊髄の血管周囲性単核球浸潤→肉芽腫形成→3型：播種型（急性多巣性、最多）、局在型（腫瘤形成型）、視神経型（急性失明）。MUO（原因不明の髄膜脳脊髄炎）のスペクトラムに含まれる。MRIで多巣性造影病変。",
+        "causes_ja": "原因不明の免疫介在性CNS疾患。小型犬に好発：トイプードル、マルチーズ、チワワ、ダックスフンド。雌犬に多い。中年犬（3〜7歳）。",
+        "prevention_ja": "確実な予防法はない。免疫抑制療法（プレドニゾロン＋シタラビン/プロカルバジン）で管理。播種型MST数ヶ月、局在型MST 1〜3年。",
         "urgency": "urgent",
     },
     # ---- Reproductive ----
@@ -2067,6 +2070,9 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Abnormally low platelet count causing bruising and "
                        "increased bleeding risk.",
         "description_ja": "血小板数の異常低下により、あざや出血リスクが増加します。",
+        "pathophysiology_ja": "血小板数<150,000/μLで血小板減少症と定義。臨床的出血は<50,000/μLで発現。原因分類：(1)産生低下（骨髄疾患・薬剤性）、(2)消費亢進（DIC・重度出血）、(3)破壊亢進（免疫介在性ITP・Ehrlichia感染）、(4)分布異常（脾腫による隔離）。",
+        "causes_ja": "ITP（最多）、DIC、Ehrlichia/Anaplasma感染、骨髄腫瘍（リンパ腫・白血病）、薬剤性（化学療法・エストロゲン）、脾腫。CBCでの偽性血小板減少（EDTA依存性凝集、特にキャバリア）の除外が重要。",
+        "prevention_ja": "基礎疾患の早期管理。マダニ媒介感染症の予防。出血傾向（点状出血・粘膜出血・鼻出血）の早期受診。",
         "urgency": "urgent",
     },
     {
@@ -2185,6 +2191,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "appetite_loss", "nasal_discharge", "fever"},
         "description": "A viral infection causing fatal hemorrhagic disease in neonatal puppies and respiratory/genital symptoms in adults.",
         "description_ja": "新生子犬に致死的な出血性疾患を引き起こし、成犬では呼吸器・生殖器症状を示すウイルス感染症です。",
+        "pathophysiology_ja": "新生子犬（<3週齢）：CHV-1の全身感染→多臓器（腎臓・肝臓・肺・脾臓）の出血性壊死→致死率ほぼ100%。低体温がウイルス増殖を促進（体温<37℃で最適複製）。成犬：上気道・生殖器の潜伏感染→軽度の鼻汁・陰部水疱のみ。妊娠犬の一次感染→流産・死産。",
+        "causes_ja": "犬ヘルペスウイルス1型（CHV-1）。成犬間では性交・鼻汁による接触伝播。新生子犬は産道・母乳・同居犬から感染。成犬の感染率は高い（血清陽性率40〜100%）が臨床症状は稀。繁殖犬舎での新生子犬の連続死亡（fading puppy syndrome）で疑う。",
+        "prevention_ja": "妊娠犬のワクチン接種（ヨーロッパではEurican Herpes 205が使用可、日本未承認）、新生子犬の環境温度管理（30〜32℃に維持→ウイルス複製を抑制）、分娩前3週間の母犬の他犬との接触制限。",
         "urgency": "urgent",
     },
     {
@@ -2213,6 +2222,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "appetite_loss", "swollen_joints", *_ANY_LIMPING},
         "description": "A serious tick-borne rickettsial disease causing fever, joint pain, and potential organ damage.",
         "description_ja": "マダニ媒介のリケッチア感染症で、発熱・関節痛・臓器障害を引き起こします。",
+        "pathophysiology_ja": "Rickettsia rickettsiiのマダニ刺咬→血管内皮細胞への感染→血管炎→血管透過性亢進→浮腫・出血→多臓器障害（皮膚：点状出血/壊死、腎臓：AKI、CNS：脳炎、肺：肺水腫、心臓：心筋炎）。血小板減少・DICの合併が高率。未治療で致死率あり。",
+        "causes_ja": "Rickettsia rickettsii（マダニDermacentor属媒介）。北米に分布（日本では報告なし、類似疾患として日本紅斑熱あり）。犬はマダニ付着後5〜20時間で感染成立。ジャーマンシェパード・ジャーマンショートヘアードポインターが重症化しやすい。",
+        "prevention_ja": "マダニ駆除薬の通年投与、マダニチェック。ドキシサイクリン（5mg/kg BID、14日間）で治療反応良好。日本では日本紅斑熱（R. japonica）の鑑別が必要。",
         "urgency": "urgent",
     },
     {
@@ -2249,6 +2261,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "fever", "lethargy", "weight_loss", "eye_redness"},
         "description": "A systemic fungal infection primarily affecting the lungs and spreading to skin, eyes, and bones.",
         "description_ja": "主に肺を侵し、皮膚・眼・骨に広がる全身性真菌感染症です。",
+        "pathophysiology_ja": "Blastomyces dermatitidisの分生子を吸入→肺胞マクロファージ内で酵母形態に転換→免疫回避→肺の肉芽腫性炎症→血行性播種→皮膚（排膿性結節）・眼（ぶどう膜炎・緑内障）・骨（骨溶解性病変）・リンパ節に播種。",
+        "causes_ja": "Blastomyces dermatitidis（土壌真菌）。北米五大湖地域・ミシシッピ川/オハイオ川流域に分布（日本では報告なし）。湿地帯の有機物豊富な土壌に生息。猟犬・屋外活動犬に好発。大型犬の雄に多い。尿中抗原検査で迅速診断可能。",
+        "prevention_ja": "流行地域での湿地帯・水辺の掘削行動の回避。イトラコナゾール（5mg/kg/日、6ヶ月以上）で治療。眼病変は視力予後に影響。",
         "urgency": "urgent",
     },
     {
@@ -2306,6 +2321,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {*_ANY_LIMPING, "stiffness", "seizures", "reluctance_move"},
         "description": "A protozoal infection causing neuromuscular disease, especially ascending paralysis in puppies.",
         "description_ja": "子犬の上行性麻痺を引き起こす原虫感染症です。",
+        "pathophysiology_ja": "Neospora caninumの経胎盤感染（最も重要な経路）→子犬の神経筋組織への侵入→筋炎・多発性神経根炎→後肢の進行性筋拘縮（rigid extension）→特徴的な「ウサギ飛び」歩様。脳炎も合併。成犬では免疫抑制時に潜伏感染の再活性化→多形性筋炎・CNS症状。",
+        "causes_ja": "Neospora caninum（犬が終宿主）。経胎盤垂直感染（最重要）、中間宿主（牛等）の組織嚢子の経口摂取。子犬の上行性後肢硬直（4〜6ヶ月齢が典型的発症年齢）はネオスポラ症のパスゴモニック（pathognomonic）所見。同腹子犬が複数罹患。",
+        "prevention_ja": "感染母犬からの繁殖制限（経胎盤感染を断つ最重要策）。生肉・内臓の非給餌。クリンダマイシン（10〜20mg/kg BID、4〜6週間）で治療するが、筋拘縮が進行した場合は不可逆的。",
         "urgency": "urgent",
     },
     {
@@ -2460,6 +2478,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"eye_redness", "squinting", "eye_discharge", "pain_on_touch"},
         "description": "Inflammation of the uveal tract causing pain, redness, and potential vision loss.",
         "description_ja": "ぶどう膜の炎症で、痛み・充血・視力低下を引き起こす可能性があります。",
+        "pathophysiology_ja": "虹彩・毛様体（前部ぶどう膜炎/虹彩毛様体炎、犬で最多）または脈絡膜（後部ぶどう膜炎）の炎症→血液眼関門の破綻→房水中に蛋白・細胞（フレア）→縮瞳・眼圧低下→続発性緑内障（虹彩後癒着→瞳孔ブロック）・白内障・水晶体脱臼。慢性化で失明リスク。",
+        "causes_ja": "免疫介在性（最多）、感染性（Ehrlichia・Brucella・Blastomyces・Toxoplasma・CDV・レプトスピラ）、外傷性、水晶体誘発性（白内障手術後/成熟白内障からの蛋白漏出）、腫瘍性（リンパ腫の眼内浸潤）。基礎疾患の検索（全身感染症スクリーニング）が重要。",
+        "prevention_ja": "基礎疾患の管理。マダニ媒介感染症の予防。白内障の適切な管理。ぶどう膜炎の早期治療（局所アトロピン＋ステロイド/NSAIDs点眼）で後遺症を予防。",
         "urgency": "urgent",
     },
     {
@@ -2498,6 +2519,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"anxiety", "hiding", "excessive_thirst", "weight_gain"},
         "description": "Sudden complete blindness with no visible retinal changes initially. No treatment available.",
         "description_ja": "初期には網膜変化なく突然の完全失明を起こす疾患で、治療法はありません。",
+        "pathophysiology_ja": "網膜視細胞（桿体・錐体）の急性のアポトーシス→数日〜数週間で完全失明。初期は眼底検査正常（視細胞の機能喪失が構造変化に先行）。ERG（網膜電図）で消失型（flat ERG）が確定診断。数週〜数ヶ月で網膜萎縮が眼底に出現。免疫介在性の機序が示唆されるが確定されていない。多飲多尿・体重増加等のクッシング様症状を伴うことが多い。",
+        "causes_ja": "原因不明。免疫介在性の網膜視細胞破壊が疑われる。中高齢の雌犬（平均8.5歳）に好発。ダックスフンド・ミニチュアシュナウザー・パグに報告多い。視神経炎との鑑別が重要（MRI＋ERGで鑑別）。",
+        "prevention_ja": "確実な予防法・治療法はない。免疫抑制療法（IVIg）の有効性の報告があるが、エビデンスは限定的。犬は視力以外の感覚で適応できるため、環境の一貫性維持でQOLは保たれる。",
         "urgency": "urgent",
     },
     # ---- Cardiovascular (expanded) ----
@@ -2507,6 +2531,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "seizures", "excessive_panting"},
         "description": "A disorder of the heart's electrical system causing abnormally slow heart rate and fainting.",
         "description_ja": "心臓の電気伝導系障害により、異常な徐脈と失神を引き起こします。",
+        "pathophysiology_ja": "洞結節の機能障害→洞性徐脈・洞停止・洞房ブロック→補充調律が不十分な場合→Adams-Stokes発作（失神）。徐脈-頻脈症候群（brady-tachy syndrome）：徐脈と上室性頻拍が交互に出現→心拍数の急激な変動→失神。ホルター心電図で診断（断続的な徐脈/長い休止を記録）。",
+        "causes_ja": "洞結節の加齢性線維化（最多）。好発犬種：ミニチュアシュナウザー（最も報告が多い）、コッカースパニエル、ダックスフンド、ウエスティ。中高齢犬の雌に多い。甲状腺機能低下症の除外が必要。",
+        "prevention_ja": "確実な予防法はない。症候性（失神を伴う）はペースメーカー植込みが唯一の根治療法。無症候性は経過観察。アトロピン反応試験で洞結節の予備能を評価。",
         "urgency": "urgent",
     },
     {
@@ -2596,6 +2623,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {*_ANY_LIMPING, "pain_on_touch", "reluctance_move"},
         "description": "Sudden spinal cord infarction from disc material, causing acute non-progressive paralysis.",
         "description_ja": "椎間板物質による突然の脊髄梗塞で、急性の非進行性麻痺を引き起こします。",
+        "pathophysiology_ja": "椎間板の線維軟骨物質が脊髄血管に侵入→脊髄の区域性梗塞→急性の非進行性脊髄障害。運動中に超急性発症し、初期の疼痛は数時間で消失。非進行性がIVDDとの重要な鑑別点。MRIで脊髄内T2高信号。",
+        "causes_ja": "原因不明。大型犬・超大型犬に多い（ミニチュアシュナウザーは例外的に好発）。若齢〜中齢犬。運動中の発症が多い。外傷の既往がないことが特徴的。",
+        "prevention_ja": "確実な予防法はない。支持療法・リハビリテーション。軽度〜中等度は予後良好（数週間で改善）。重度（深部痛覚消失）は予後不良。",
         "urgency": "urgent",
     },
     {
@@ -2763,6 +2793,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "appetite_loss", "bloody_stool", "lethargy"},
         "description": "Erosions of the stomach lining often caused by NSAIDs, stress, or liver/kidney disease.",
         "description_ja": "NSAIDs・ストレス・肝腎疾患による胃粘膜のびらんです。",
+        "pathophysiology_ja": "胃粘膜のプロスタグランジン（PGE₂）依存性防御機構の破綻→胃酸（HCl）・ペプシンによる粘膜自己消化→びらん→潰瘍→穿孔（重症例）。吐血（hematemesis：コーヒー残渣様）・メレナ（黒色タール便）が特徴的。肥満細胞腫からのヒスタミン過剰放出→胃酸過分泌も重要な原因。",
+        "causes_ja": "NSAIDs（最多：COX-1阻害による粘膜保護PG減少）、副腎皮質ステロイド、肥満細胞腫（ヒスタミン産生→胃酸過分泌）、肝不全、腎不全（尿毒症性胃炎）、ストレス（重症疾患・手術後）。好発：NSAID長期投与犬、クッシング犬。",
+        "prevention_ja": "NSAID使用時のPPI（オメプラゾール1mg/kg BID）併用、最小有効用量・最短期間のNSAID使用、腎機能低下犬へのNSAID回避。肥満細胞腫犬にはH₂ブロッカー/PPI予防投与。",
         "urgency": "urgent",
     },
     {
@@ -2801,6 +2834,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "constipation", "bloody_stool"},
         "description": "Protrusion of rectal tissue through the anus, often secondary to chronic straining.",
         "description_ja": "慢性の怒責に続発することが多い、肛門からの直腸組織の突出です。",
+        "pathophysiology_ja": "慢性的な怒責（tenesmus）→直腸粘膜または直腸壁全層が肛門から外方に脱出→露出した粘膜の乾燥・浮腫・うっ血→還納困難→組織壊死。粘膜脱出（不完全脱）と全層脱出（完全脱）に分類。脱出組織の色調（赤→暗紫→黒）で壊死の程度を評価。",
+        "causes_ja": "基礎疾患による慢性怒責：腸管寄生虫（子犬で最多の原因）、大腸炎、直腸腫瘍、会陰ヘルニア、前立腺肥大、尿道閉塞。子犬と高齢犬に多い。基礎疾患の治療なしでは再発する。",
+        "prevention_ja": "基礎疾患（寄生虫・大腸炎・泌尿器疾患）の早期治療。脱出直後：高張砂糖水で浮腫を軽減→用手還納→巾着縫合で保持。壊死組織がある場合は外科的切除（直腸切除吻合術）。",
         "urgency": "urgent",
     },
     {
@@ -3006,6 +3042,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "seizures", "lethargy", "appetite_loss"},
         "description": "Chronic or acute lead ingestion causing GI and neurological signs.",
         "description_ja": "鉛の慢性または急性摂取による消化器・神経症状です。",
+        "pathophysiology_ja": "鉛の消化管吸収→ヘム合成阻害（δ-ALA脱水酵素・フェロケラターゼの阻害）→有核赤血球の出現・好塩基性斑点赤血球。CNS：ニューロンのミトコンドリア障害→脳浮腫・脱髄→けいれん・失明・行動変化。GI：平滑筋痙攣→疝痛・嘔吐・下痢。腎尿細管障害。",
+        "causes_ja": "鉛含有ペンキ剥片（古い建物の改装時、最多の原因）、鉛のおもり（釣具・カーテンウェイト）、鉛バッテリー、はんだ、鉛弾。子犬は探索行動で鉛含有物を咀嚼しやすい。血中鉛濃度>40μg/dLで臨床症状、>60μg/dLで重症。",
+        "prevention_ja": "古い塗料の剥離した環境の犬のアクセス制限、建物改装時の犬の隔離、鉛含有物の安全管理。キレート療法（CaEDTA or サクシマー）が治療の柱。",
         "urgency": "urgent",
     },
     # ---- Environmental / Other ----
