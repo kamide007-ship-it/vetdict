@@ -61,9 +61,9 @@ const I18N={
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
-    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・21動物種対応の臨床意思決定支援プラットフォーム。",
+    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・80+麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
     heroCta:"動物種を選択して鑑別診断を開始",heroCtaDb:"疾患データベースを見る",
-    statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",
+    statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",statProtocols:"麻酔プロトコル",
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
     sponsorDesc:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
     sponsorCta:"詳細 →",
@@ -150,9 +150,9 @@ const I18N={
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
-    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
+    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 80+ anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
     heroCta:"Select a species to begin differential diagnosis",heroCtaDb:"Browse Disease Database",
-    statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",
+    statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",statProtocols:"Anesthesia",
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
     sponsorDesc:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     sponsorCta:"Details →",
@@ -425,6 +425,7 @@ function triggerStatsAnimation(instant){
   if(pendingStats.species!==undefined)animateCount(document.getElementById("statSpecies"),pendingStats.species,dur||800);
   if(pendingStats.symptoms!==undefined)animateCount(document.getElementById("statSymptoms"),pendingStats.symptoms,dur||1000);
   if(pendingStats.drugs!==undefined)animateCount(document.getElementById("statDrugs"),pendingStats.drugs,dur||1000);
+  if(pendingStats.protocols!==undefined)animateCount(document.getElementById("statProtocols"),pendingStats.protocols,dur||900);
 }
 
 function animateCount(el,target,duration){
@@ -456,7 +457,8 @@ function loadSpeciesStats(){
         diseases:data.total_diseases||0,
         species:data.total_species||SPECIES.length,
         drugs:data.total_drugs||0,
-        symptoms:sd.symptoms?sd.symptoms.length:0
+        symptoms:sd.symptoms?sd.symptoms.length:0,
+        protocols:80
       };
       renderSpeciesGrid();
       initStatsObserver();
@@ -506,7 +508,8 @@ function setDefaultStats(){
     diseases:7140,
     species:21,
     drugs:228,
-    symptoms:52
+    symptoms:52,
+    protocols:80
   };
   renderSpeciesGrid();
   initStatsObserver();
@@ -2404,8 +2407,9 @@ function renderAnesthesiaOverview(data){
   const ov=document.getElementById("anesthesiaOverview");
   const lb=document.getElementById("anesthesiaSpeciesLabel");
   if(!data||(!data.overview&&!data.species_name)){
-    ov.style.display="none";
-    lb.textContent=t("anesthesiaSelectSpecies");
+    ov.style.display="block";
+    ov.innerHTML=`<div style="text-align:center;padding:16px"><span style="font-size:2rem" aria-hidden="true">&#128137;</span><p style="margin-top:8px;font-size:.88rem;color:var(--navy)">${t("anesthesiaSelectSpecies")}</p></div>`;
+    lb.textContent="";
     return;
   }
   if(data.species_name){
