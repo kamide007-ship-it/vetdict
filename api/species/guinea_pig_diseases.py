@@ -2646,7 +2646,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "モルモットにおけるビタミンA欠乏症の原因: ビタミンA欠乏により上皮組織の角化、繁殖障害、免疫機能低下を引き起こします。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ビタミンA欠乏症はモルモットにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
-        "treatment": "Vitamin A injection species-appropriate dose. Dietary correction (dark leafy greens for herbivores). Treat secondary infections.",
+        "treatment": "Vitamin A species-appropriate dose IM (narrow therapeutic index). Dietary correction. Treat secondary infections.",
         "treatment_ja": "モルモットにおけるビタミンA欠乏症の治療は栄養バランスの是正が中心となる。欠乏状態では食事の改善または治療的サプリメンテーションにより特定の栄養素を補充する。過剰状態では食事制限と臓器障害に対する支持療法を行う。栄養不良動物ではリフィーディング症候群予防のため段階的に是正する。種特異的な食事要求に基づく長期栄養計画を立案する。過不足のない摂取を確保するため定期的に再評価する。",
         "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
         "prevention_ja": "ビタミンA欠乏症の予防には全ての栄養要求を満たす種に適した食事設計、単一食品のみの食事の回避、獣医師との定期的な食事内容の見直し、必要時の適切なサプリメンテーション、種固有の栄養ニーズに関する知識が必要である。",

@@ -181,7 +181,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "内分泌/代謝機能に影響する食事の欠乏または過剰が原因。フクロモモンガの食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "フクロモモンガの内分泌/代謝機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。フクロモモンガの食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
+        "treatment": "Correct diet with adequate protein. Gradual dietary correction.",
         "treatment_ja": "フクロモモンガにおけるタンパク質欠乏症の治療: 原因の鑑別診断に基づく特異的治療。支持療法（輸液・栄養・疼痛管理）。環境管理。定期的なモニタリングと治療調整。",
         "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
         "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",

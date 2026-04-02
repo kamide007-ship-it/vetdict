@@ -2291,7 +2291,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "",
         "pathophysiology": "",
         "pathophysiology_ja": "",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Address underlying stressor. Correct husbandry. Minimize handling. Supportive care.",
         "treatment_ja": "診断に基づく適切な内科的または外科的治療、輸液療法を含む支持療法、疼痛管理、栄養サポート、治療反応の定期的モニタリング。",
         "prevention": "",
         "prevention_ja": "",
