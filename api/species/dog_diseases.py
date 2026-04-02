@@ -5029,6 +5029,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"swelling", "pain_on_touch", "appetite_loss", "fever", "drooling"},
         "description": "Acute immune-mediated inflammation of the muscles of mastication causing painful jaw swelling and trismus.",
         "description_ja": "咀嚼筋の急性免疫介在性炎症で、有痛性の顎の腫脹と開口障害を引き起こします。",
+        "pathophysiology_ja": "咀嚼筋の2M筋線維のミオシン結合蛋白に対する自己抗体→急性の咀嚼筋（側頭筋・咬筋）の炎症性腫脹→開口障害（trismus）・疼痛→摂食困難。慢性化で筋萎縮・線維化→恒常的開口制限。",
+        "causes_ja": "免疫介在性（2M線維ミオシン結合蛋白に対する自己抗体）。大型犬に好発。血清抗2M抗体検査で確定診断。",
+        "prevention_ja": "早期免疫抑制療法（プレドニゾロン1〜2mg/kg/日、4〜6ヶ月漸減）が線維化予防に重要。",
         "urgency": "urgent",
     },
     {
@@ -5037,6 +5040,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"stiffness", "lethargy", "pain_on_touch", "reluctance_move", "fever", "weight_loss"},
         "description": "Immune-mediated inflammation of multiple skeletal muscles causing generalized weakness and muscle pain.",
         "description_ja": "複数の骨格筋の免疫介在性炎症で、全身性の衰弱と筋肉痛を引き起こします。",
+        "pathophysiology_ja": "骨格筋全般の免疫介在性炎症→筋線維の壊死→CK（クレアチンキナーゼ）の著明な上昇→全身性筋力低下・筋痛・運動不耐性。食道筋にも波及→巨大食道症（誤嚥性肺炎のリスク）。一部は腫瘍随伴性（胸腺腫・リンパ腫関連）。",
+        "causes_ja": "免疫介在性（最多）、感染性（Toxoplasma・Neospora・Hepatozoon）、腫瘍随伴性（胸腺腫）。ジャーマンシェパード・ニューファンドランドに報告多い。筋生検で壊死性/炎症性筋障害を確認。",
+        "prevention_ja": "基礎疾患（感染症・腫瘍）の検索。免疫抑制療法（プレドニゾロン＋アザチオプリン）。食道の併発に注意（立位給餌）。",
         "urgency": "urgent",
     },
     {
@@ -5056,6 +5062,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "dehydration", "lethargy"},
         "description": "Deficient ADH production from the pituitary gland causing extreme polyuria and polydipsia.",
         "description_ja": "下垂体からのADH産生不足で、極度の多尿と多飲を引き起こします。",
+        "pathophysiology_ja": "下垂体後葉/視床下部のADH（抗利尿ホルモン/バソプレシン）産生・分泌の障害→腎集合管でのAQP2発現低下→水の再吸収不能→大量の希釈尿（USG<1.008）→脱水→代償性多飲（10〜20倍の飲水量）。水制限試験でADH反応不良、DDAVP試験で尿濃縮を確認。",
+        "causes_ja": "特発性（最多）、下垂体腫瘍（マクロ腺腫）、外傷性（頭部外傷後）、炎症性。先天性は稀。クッシング・腎不全・子宮蓄膿症等の多飲多尿を呈する他疾患の除外が先決。",
+        "prevention_ja": "確実な予防法はない。デスモプレシン（DDAVP点鼻/経口）で尿量コントロール。常に十分な飲水を確保。",
         "urgency": "urgent",
     },
     {
@@ -5064,6 +5073,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "dehydration", "lethargy", "weight_loss"},
         "description": "Kidney unresponsiveness to ADH causing inability to concentrate urine; may be congenital or acquired.",
         "description_ja": "腎臓のADHに対する不応答で尿の濃縮ができない状態で、先天性または後天性です。",
+        "pathophysiology_ja": "腎集合管のADH受容体（V2R）またはAQP2水チャネルの障害→ADHが正常に分泌されても腎臓が反応しない→水の再吸収不能→大量の希釈尿。DDAVPに対する反応なし（中枢性との鑑別点）。後天性が犬では大部分。",
+        "causes_ja": "後天性（最多）：CKD、高Ca血症、低K血症、副腎皮質機能亢進症、肝不全、膿腎症、薬剤性（リチウム等）。先天性：極めて稀。後天性の場合は基礎疾患の治療で改善しうる。",
+        "prevention_ja": "基礎疾患の管理。サイアザイド利尿薬が逆説的に尿量を減少させる（近位尿細管でのNa・水再吸収を増加）。低Na食の併用。",
         "urgency": "urgent",
     },
     {
@@ -5072,6 +5084,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_rl", "limping_rr", "stiffness", "reluctance_move", "pain_on_touch"},
         "description": "Disc-associated form of Wobbler syndrome causing spinal cord compression, common in large breed dogs.",
         "description_ja": "椎間板関連型のウォブラー症候群で脊髄圧迫を引き起こし、大型犬に多く見られます。",
+        "pathophysiology_ja": "頸椎椎間板の変性→腹側からの脊髄圧迫→頸部脊髄症→後肢の運動失調（wobbling gait）＋前肢の短歩様歩行。椎間板関連型はドーベルマン（C5-C7、中高齢犬）に好発。骨関連型はグレートデーン（C3-C5、若齢犬）に好発。MRIで確定診断。",
+        "causes_ja": "椎間板変性→椎間板突出→頸髄の腹側圧迫。ドーベルマン（最も好発、約50%に何らかの頸椎異常）。中高齢犬（6〜9歳）。多部位病変が多い。",
+        "prevention_ja": "確実な予防法はない。内科管理（ステロイド・運動制限・頸部固定）で安定化→改善しない場合は外科的減圧（ventral slot手術・人工椎間板）。",
         "urgency": "urgent",
     },
     {
@@ -5102,6 +5117,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "itching", "hair_loss", "skin_redness", "lumps", "dry_skin"},
         "description": "T-cell lymphoma targeting the skin, causing chronic skin lesions that mimic dermatitis before diagnosis.",
         "description_ja": "皮膚を標的とするT細胞リンパ腫で、診断前は皮膚炎に類似した慢性皮膚病変を引き起こします。",
+        "pathophysiology_ja": "T細胞リンパ球の皮膚上皮への向性（epitheliotropism）→表皮内に腫瘍性T細胞が浸潤（Pautrier微小膿瘍）→びまん性紅斑・落屑→結節・潰瘍に進行。人の菌状息肉症（mycosis fungoides）に相当。初期は皮膚炎に酷似→診断が遅れやすい（平均6〜12ヶ月の診断遅延）。",
+        "causes_ja": "原因不明。中高齢犬。特定の犬種好発は不明確。慢性皮膚炎に対して通常の治療に反応しない場合に疑い→皮膚生検で確定。プレドニゾロンに一時的に反応するため誤診されやすい。",
+        "prevention_ja": "確実な予防法はない。難治性の慢性皮膚炎は早期に生検。ロムスチン（CCNU）/レチノイド/局所ステロイドで管理。予後不良（MST 6〜12ヶ月）。",
         "urgency": "urgent",
     },
     {
