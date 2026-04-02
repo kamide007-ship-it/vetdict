@@ -22,6 +22,7 @@ from api.anesthesia_api import anesthesia_bp
 from api.anesthesia_protocols import (
     ANESTHESIA_CATEGORIES,
     ANESTHESIA_PROTOCOLS,
+    ASA_CLASSIFICATION,
     RISK_LEVELS,
     get_all_species_ids,
     get_protocols_for_species,
@@ -248,6 +249,14 @@ class TestAnesthesiaAPI:
         assert "sedation" in data["categories"]
         assert "induction" in data["categories"]
 
+    def test_categories_endpoint_returns_asa(self, client):
+        """Categories endpoint should include ASA classification."""
+        resp = client.get("/api/anesthesia/categories")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "asa_classification" in data
+        assert "III" in data["asa_classification"]
+
 
 # ---------------------------------------------------------------------------
 # Content quality tests
@@ -317,6 +326,67 @@ class TestContentQuality:
         amp = ANESTHESIA_PROTOCOLS["amphibian"]
         drugs = [d for p in amp["protocols"] for d in p.get("drugs", []) if "MS-222" in d["name"]]
         assert len(drugs) >= 1
+
+    def test_asa_classification_complete(self):
+        """ASA I-V and E should all be present with bilingual descriptions."""
+        assert len(ASA_CLASSIFICATION) == 6
+        for cls in ["I", "II", "III", "IV", "V", "E"]:
+            assert cls in ASA_CLASSIFICATION
+            entry = ASA_CLASSIFICATION[cls]
+            assert "ja" in entry and len(entry["ja"]) > 10
+            assert "en" in entry and len(entry["en"]) > 10
+            assert "risk" in entry
+            assert entry["risk"] in RISK_LEVELS
+            assert "guidance_ja" in entry and len(entry["guidance_ja"]) > 10
+            assert "guidance_en" in entry and len(entry["guidance_en"]) > 10
+
+    def test_asa_risk_escalation(self):
+        """ASA risk should escalate from low to high."""
+        assert ASA_CLASSIFICATION["I"]["risk"] == "low"
+        assert ASA_CLASSIFICATION["II"]["risk"] == "low"
+        assert ASA_CLASSIFICATION["III"]["risk"] == "moderate"
+        assert ASA_CLASSIFICATION["IV"]["risk"] == "high"
+        assert ASA_CLASSIFICATION["V"]["risk"] == "high"
+        assert ASA_CLASSIFICATION["E"]["risk"] == "high"
+
+    def test_dog_cri_protocols(self):
+        """Dog should have CRI analgesia with MLK and fentanyl."""
+        dog = ANESTHESIA_PROTOCOLS["dog"]
+        cri = [p for p in dog["protocols"] if "CRI" in p["name"]["en"]]
+        assert len(cri) >= 1
+        drugs = [d["name"] for p in cri for d in p.get("drugs", [])]
+        assert any("Fentanyl" in d for d in drugs)
+        assert any("MLK" in d for d in drugs)
+        assert any("Ketamine" in d for d in drugs)
+        assert any("Lidocaine" in d for d in drugs)
+
+    def test_dog_tiva_protocols(self):
+        """Dog should have TIVA protocols."""
+        dog = ANESTHESIA_PROTOCOLS["dog"]
+        tiva = [p for p in dog["protocols"] if "TIVA" in p["name"]["en"]]
+        assert len(tiva) >= 1
+        drugs = [d["name"] for p in tiva for d in p.get("drugs", [])]
+        assert any("Propofol" in d for d in drugs)
+        assert any("Alfaxalone" in d for d in drugs)
+
+    def test_cat_cri_no_lidocaine(self):
+        """Cat CRI should NOT include lidocaine (contraindicated)."""
+        cat = ANESTHESIA_PROTOCOLS["cat"]
+        cri = [p for p in cat["protocols"] if "CRI" in p["name"]["en"]]
+        assert len(cri) >= 1
+        drugs = [d["name"] for p in cri for d in p.get("drugs", [])]
+        assert not any("Lidocaine" in d for d in drugs), "Lidocaine CRI is contraindicated in cats"
+        # But notes should mention the contraindication
+        all_notes = " ".join(p.get("notes", "") + p.get("notes_ja", "") for p in cri)
+        assert "contraindicated" in all_notes.lower() or "禁忌" in all_notes
+
+    def test_cat_tiva_alfaxalone_preferred(self):
+        """Cat TIVA should have alfaxalone as preferred option."""
+        cat = ANESTHESIA_PROTOCOLS["cat"]
+        tiva = [p for p in cat["protocols"] if "TIVA" in p["name"]["en"]]
+        assert len(tiva) >= 1
+        drugs = [d["name"] for p in tiva for d in p.get("drugs", [])]
+        assert any("Alfaxalone" in d for d in drugs)
 
     def test_bird_uncuffed_et_tube(self):
         """Bird intubation should specify uncuffed ET tubes."""

@@ -7,6 +7,7 @@ from flask import Blueprint, jsonify, request
 from api.anesthesia_protocols import (
     ANESTHESIA_CATEGORIES,
     ANESTHESIA_PROTOCOLS,
+    ASA_CLASSIFICATION,
     RISK_LEVELS,
     get_all_species_ids,
     get_protocols_for_species,
@@ -91,4 +92,5 @@ def api_anesthesia_categories():
     return jsonify({
         "categories": ANESTHESIA_CATEGORIES,
         "risk_levels": RISK_LEVELS,
+        "asa_classification": ASA_CLASSIFICATION,
     })

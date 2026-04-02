@@ -27,6 +27,51 @@ RISK_LEVELS = {
     "high": {"ja": "高リスク", "en": "High Risk"},
 }
 
+ASA_CLASSIFICATION = {
+    "I": {
+        "ja": "正常で健康な患者。基礎疾患なし。",
+        "en": "Normal healthy patient. No underlying disease.",
+        "risk": "low",
+        "guidance_ja": "標準プロトコルで実施。特別な追加モニタリング不要。",
+        "guidance_en": "Standard protocols. No additional monitoring required.",
+    },
+    "II": {
+        "ja": "軽度の全身疾患を有する患者。肥満、高齢（合併症なし）、軽度心雑音等。",
+        "en": "Patient with mild systemic disease. Obesity, geriatric (no comorbidities), mild heart murmur.",
+        "risk": "low",
+        "guidance_ja": "標準プロトコルで実施。術前血液検査推奨。輸液管理を確実に。",
+        "guidance_en": "Standard protocols. Pre-anesthetic bloodwork recommended. Ensure IV fluid support.",
+    },
+    "III": {
+        "ja": "重度の全身疾患を有する患者。代償性心疾患、中等度脱水、貧血、軽度の発熱等。",
+        "en": "Patient with severe systemic disease. Compensated cardiac disease, moderate dehydration, anemia, mild fever.",
+        "risk": "moderate",
+        "guidance_ja": "用量を25-50%減量。侵襲的血圧モニタリング検討。術前安定化を実施。予備の緊急薬を準備。",
+        "guidance_en": "Reduce doses by 25-50%. Consider invasive BP monitoring. Stabilize before anesthesia. Have emergency drugs drawn up.",
+    },
+    "IV": {
+        "ja": "生命を脅かす重度の全身疾患。非代償性心不全、DIC、重度敗血症、ショック等。",
+        "en": "Patient with severe systemic disease that is a constant threat to life. Decompensated heart failure, DIC, severe sepsis, shock.",
+        "risk": "high",
+        "guidance_ja": "最低用量で慎重に投与（titrate to effect）。侵襲的血圧・CVP必須。昇圧薬を準備。術前に可能な限り安定化。チーム全体で緊急対応の事前確認。",
+        "guidance_en": "Use minimal doses (titrate to effect). Invasive BP and CVP mandatory. Vasopressors ready. Stabilize as much as possible pre-operatively. Brief entire team on emergency protocols.",
+    },
+    "V": {
+        "ja": "手術なしでは24時間以内に死亡が予想される瀕死の患者。GDV、重度外傷、大量出血等。",
+        "en": "Moribund patient not expected to survive 24 hours without surgery. GDV, severe trauma, massive hemorrhage.",
+        "risk": "high",
+        "guidance_ja": "最低限の薬物で意識消失を得る。術前輸液蘇生を並行。フェンタニル/ケタミンの微量投与で導入。揮発性麻酔薬は最低濃度。心肺蘇生の準備を常に。",
+        "guidance_en": "Achieve unconsciousness with minimum drugs. Concurrent fluid resuscitation. Induce with microdoses of fentanyl/ketamine. Minimal volatile agent. CPR setup at all times.",
+    },
+    "E": {
+        "ja": "緊急手術（上記いずれかのクラスに追加）。胃内容物の誤嚥リスク上昇。",
+        "en": "Emergency surgery (appended to any class above). Increased aspiration risk from full stomach.",
+        "risk": "high",
+        "guidance_ja": "迅速導入（RSI）を検討。胃内容物の誤嚥に備え吸引器を準備。十分な前酸素化。絶食不十分を前提に対応。",
+        "guidance_en": "Consider rapid sequence induction (RSI). Have suction ready for aspiration. Adequate preoxygenation. Assume full stomach.",
+    },
+}
+
 ANESTHESIA_PROTOCOLS = {}
 
 # ============================================================
@@ -170,6 +215,46 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "心肺蘇生（CPR）: 胸骨圧迫100-120回/分、2分毎に確認。エピネフリンは3-5分毎に反復投与。RECOVER CPRガイドラインに準拠。",
             "notes": "CPR: chest compressions 100-120/min, check q2min. Epinephrine q3-5min. Follow RECOVER CPR guidelines.",
+        },
+        {
+            "name": {"ja": "CRI鎮痛（持続定量点滴）", "en": "CRI Analgesia (Constant Rate Infusion)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Fentanyl CRI", "name_ja": "フェンタニルCRI", "dose": "2-5 µg/kg/hr (loading: 2-5 µg/kg IV slow)", "route": "IV CRI", "onset": "2-3 min", "duration": "Continuous",
+                 "notes_ja": "最も一般的な術中CRI鎮痛。ボーラス後にCRI開始。徐脈に注意。μオピオイド作動薬。MAC削減30-50%。", "notes": "Most common intraoperative CRI analgesic. Start CRI after loading dose. Watch for bradycardia. µ-opioid agonist. MAC reduction 30-50%."},
+                {"name": "Remifentanil CRI", "name_ja": "レミフェンタニルCRI", "dose": "5-20 µg/kg/hr (no loading dose needed)", "route": "IV CRI", "onset": "1-2 min", "duration": "Continuous (ultra-short acting)",
+                 "notes_ja": "超短時間作用型。中止後3-5分で効果消失。術後鎮痛の移行計画が必須。用量調節が容易。", "notes": "Ultra-short acting. Effect gone within 3-5 min after stopping. Must plan transition to post-op analgesia. Easy dose titration."},
+                {"name": "Ketamine CRI", "name_ja": "ケタミンCRI", "dose": "2-10 µg/kg/min (loading: 0.5 mg/kg IV)", "route": "IV CRI", "onset": "1-2 min", "duration": "Continuous",
+                 "notes_ja": "NMDA受容体拮抗薬。中枢感作（ワインドアップ）を予防。オピオイドとの併用で相乗効果。サブ麻酔用量では交感神経刺激作用。", "notes": "NMDA antagonist. Prevents central sensitization (wind-up). Synergistic with opioids. Sub-anesthetic doses provide sympathetic stimulation."},
+                {"name": "Lidocaine CRI", "name_ja": "リドカインCRI", "dose": "25-50 µg/kg/min (loading: 1-2 mg/kg IV over 10 min)", "route": "IV CRI", "onset": "5-10 min", "duration": "Continuous",
+                 "notes_ja": "全身性鎮痛・抗不整脈・消化管運動促進。開腹術に特に有用。猫には禁忌（心毒性リスク高い）。ローディングは必ず緩徐に投与。", "notes": "Systemic analgesia, anti-arrhythmic, prokinetic. Especially useful for laparotomy. CONTRAINDICATED in cats (high cardiotoxicity risk). Loading dose must be given slowly."},
+                {"name": "MLK (Morphine-Lidocaine-Ketamine)", "name_ja": "MLK（モルヒネ-リドカイン-ケタミン）", "dose": "Morphine 0.1 mg/kg/hr + Lidocaine 25-50 µg/kg/min + Ketamine 2-10 µg/kg/min", "route": "IV CRI (combined)", "onset": "5-10 min", "duration": "Continuous",
+                 "notes_ja": "マルチモーダル鎮痛の代表的プロトコル。3剤を1バッグに混合して投与可能。各薬剤の副作用を低用量で回避しつつ相乗的鎮痛を実現。", "notes": "Gold standard multimodal analgesia CRI. Can combine all 3 in one bag. Synergistic analgesia at lower individual doses minimizes side effects."},
+                {"name": "Dexmedetomidine CRI", "name_ja": "デクスメデトミジンCRI", "dose": "0.5-2 µg/kg/hr", "route": "IV CRI", "onset": "5-10 min", "duration": "Continuous",
+                 "notes_ja": "α2作動薬。鎮静・鎮痛・MAC削減（30-50%）。徐脈・末梢血管収縮あり。心疾患には慎重投与。", "notes": "α2-agonist. Sedation, analgesia, MAC reduction 30-50%. Causes bradycardia and peripheral vasoconstriction. Use cautiously in cardiac patients."},
+            ],
+            "notes_ja": "CRI鎮痛はバランス麻酔の中核。揮発性麻酔薬のMAC削減により心血管系への影響を最小化。シリンジポンプ使用推奨。複数CRIの併用時は各薬剤の相互作用に注意。",
+            "notes": "CRI analgesia is central to balanced anesthesia. MAC reduction minimizes cardiovascular effects of volatile agents. Syringe pump recommended. Monitor drug interactions when combining multiple CRIs.",
+        },
+        {
+            "name": {"ja": "TIVA（全静脈麻酔）", "en": "TIVA (Total Intravenous Anesthesia)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Propofol TIVA", "name_ja": "プロポフォールTIVA", "dose": "0.1-0.4 mg/kg/min (6-24 mg/kg/hr)", "route": "IV CRI", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "短時間処置（<30分）に最適。蓄積性あり、長時間投与では覚醒遅延。脂質含有のため長時間投与で高脂血症リスク。オピオイドCRI併用でプロポフォール減量可能。", "notes": "Best for short procedures (<30 min). Accumulates with prolonged infusion causing delayed recovery. Lipid emulsion may cause hypertriglyceridemia. Combine with opioid CRI to reduce propofol requirements."},
+                {"name": "Alfaxalone TIVA", "name_ja": "アルファキサロンTIVA", "dose": "0.07-0.1 mg/kg/min (4-6 mg/kg/hr)", "route": "IV CRI", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "プロポフォールより蓄積が少ない。中時間処置に適する。神経系疾患の患者に有用（GABA-A作動薬、頭蓋内圧上昇なし）。", "notes": "Less accumulation than propofol. Suitable for medium-duration procedures. Useful in neurological patients (GABA-A agonist, no ICP elevation)."},
+                {"name": "Propofol + Ketamine + Dexmedetomidine", "name_ja": "PKD（プロポフォール-ケタミン-デクスメデトミジン）", "dose": "Propofol 0.1-0.2 mg/kg/min + Ketamine 5-10 µg/kg/min + Dexmedetomidine 1-2 µg/kg/hr", "route": "IV CRI (combined)", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "バランスTIVAの代表例。各薬剤を低用量で併用し、安定した麻酔を維持。揮発性麻酔薬が使用できない環境（野外、MRI等）で有用。", "notes": "Representative balanced TIVA. Low doses of each drug maintain stable anesthesia. Useful when volatile agents unavailable (field, MRI)."},
+            ],
+            "monitoring_params": [
+                {"param": "Jaw tone / Eye position", "target": "Ventromedial rotation = adequate depth", "notes_ja": "吸入麻酔と異なりETCO2以外の麻酔深度指標が重要。顎の弛緩度と眼球位置を継続評価。", "notes": "Unlike inhalant anesthesia, depth monitoring relies more on clinical signs. Continuously assess jaw tone and eye position."},
+                {"param": "HR / BP", "target": "HR 60-120 bpm, MAP ≥60 mmHg", "notes_ja": "TIVAでは揮発性麻酔薬より血圧維持が容易だが、オーバードーズに注意。", "notes": "BP is often better maintained with TIVA vs inhalant, but watch for overdose."},
+            ],
+            "notes_ja": "TIVAは揮発性麻酔薬が使用できない環境（野外手術、MRI、気管・咽頭手術）で不可欠。シリンジポンプ2-3台が理想。酸素供給は別途確保（アンビューバッグ等）。長時間（>1時間）のTIVAでは薬物蓄積に注意。",
+            "notes": "TIVA is essential when volatile agents cannot be used (field surgery, MRI, tracheal/pharyngeal surgery). Ideally use 2-3 syringe pumps. Ensure separate oxygen delivery (Ambu bag). Watch for drug accumulation in prolonged (>1 hr) TIVA.",
         },
     ],
     "breed_considerations": [
@@ -318,6 +403,42 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫のCPR: 胸骨圧迫100-120回/min。小型のため片手での圧迫が可能。新生猫: 鼻口を吸引後、軽い刺激と酸素投与。",
             "notes": "Cat CPR: chest compressions 100-120/min. Single-hand technique possible due to small size. Neonatal kittens: suction nose/mouth, gentle stimulation, and oxygen.",
+        },
+        {
+            "name": {"ja": "CRI鎮痛（持続定量点滴）", "en": "CRI Analgesia (Constant Rate Infusion)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Fentanyl CRI", "name_ja": "フェンタニルCRI", "dose": "2-5 µg/kg/hr (loading: 2 µg/kg IV slow)", "route": "IV CRI", "onset": "2-3 min", "duration": "Continuous",
+                 "notes_ja": "猫の術中CRI鎮痛の第一選択。犬と同用量だが体格に合わせた正確な計算が必須。徐脈に注意。興奮（ユーフォリア）を呈する場合あり。", "notes": "First-line intraoperative CRI analgesic for cats. Same dose range as dogs but precise calculation essential for small body size. Watch for bradycardia. May cause euphoria/excitement."},
+                {"name": "Remifentanil CRI", "name_ja": "レミフェンタニルCRI", "dose": "5-15 µg/kg/hr", "route": "IV CRI", "onset": "1-2 min", "duration": "Continuous (ultra-short acting)",
+                 "notes_ja": "猫でも犬同様に安全に使用可能。中止後速やかに効果消失。術後のブプレノルフィンOTMへの移行を計画。", "notes": "Safe in cats as in dogs. Rapid offset after stopping. Plan transition to buprenorphine OTM for post-op analgesia."},
+                {"name": "Ketamine CRI", "name_ja": "ケタミンCRI", "dose": "2-10 µg/kg/min (loading: 0.5 mg/kg IV)", "route": "IV CRI", "onset": "1-2 min", "duration": "Continuous",
+                 "notes_ja": "NMDA受容体拮抗。猫のワインドアップ予防に有効。オピオイドとの併用が一般的。猫は覚醒時にケタミン後のディスフォリアを呈しやすいため低用量を維持。", "notes": "NMDA antagonist. Effective for wind-up prevention in cats. Commonly combined with opioids. Maintain low doses as cats are prone to ketamine-associated dysphoria during recovery."},
+                {"name": "Dexmedetomidine CRI", "name_ja": "デクスメデトミジンCRI", "dose": "0.5-1 µg/kg/hr", "route": "IV CRI", "onset": "5-10 min", "duration": "Continuous",
+                 "notes_ja": "猫では犬より低用量を使用。鎮静・鎮痛・MAC削減。徐脈・嘔吐に注意。心疾患（HCMなど）の猫には慎重投与。", "notes": "Use lower doses than dogs. Sedation, analgesia, MAC reduction. Watch for bradycardia and vomiting. Use cautiously in cats with cardiac disease (HCM)."},
+            ],
+            "notes_ja": "猫のCRI鎮痛ではリドカインCRIは禁忌（心毒性）。フェンタニル+ケタミンの組み合わせ（FK）が猫のマルチモーダルCRIの標準。シリンジポンプ必須（微量投与の精度確保）。",
+            "notes": "Lidocaine CRI is CONTRAINDICATED in cats (cardiotoxicity). Fentanyl + Ketamine (FK) combination is the standard feline multimodal CRI. Syringe pump mandatory for dosing accuracy at small volumes.",
+        },
+        {
+            "name": {"ja": "TIVA（全静脈麻酔）", "en": "TIVA (Total Intravenous Anesthesia)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Propofol TIVA", "name_ja": "プロポフォールTIVA", "dose": "0.1-0.3 mg/kg/min (6-18 mg/kg/hr)", "route": "IV CRI", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "猫はプロポフォールの代謝が犬より遅い。連日投与は酸化的傷害（ハインツ小体貧血）のリスクあり。短時間処置に限定。", "notes": "Cats metabolize propofol more slowly than dogs. Repeated daily use risks oxidative damage (Heinz body anemia). Limit to short procedures."},
+                {"name": "Alfaxalone TIVA", "name_ja": "アルファキサロンTIVA", "dose": "0.05-0.1 mg/kg/min (3-6 mg/kg/hr)", "route": "IV CRI", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "猫ではプロポフォールより安全なTIVA選択肢。蓄積性が低く、酸化的傷害のリスクなし。中時間処置にも適する。", "notes": "Safer TIVA option than propofol in cats. Less accumulation, no oxidative damage risk. Suitable for medium-duration procedures."},
+                {"name": "Alfaxalone + Fentanyl + Ketamine", "name_ja": "AFK（アルファキサロン-フェンタニル-ケタミン）", "dose": "Alfaxalone 0.05-0.07 mg/kg/min + Fentanyl 3-5 µg/kg/hr + Ketamine 2-5 µg/kg/min", "route": "IV CRI (combined)", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "猫のバランスTIVAの推奨プロトコル。リドカインが使えない猫ではMLKの代替。各薬剤を低用量で併用し、安定した麻酔維持を実現。", "notes": "Recommended balanced TIVA protocol for cats. Alternative to MLK since lidocaine is contraindicated in cats. Low doses of each drug provide stable anesthesia."},
+            ],
+            "monitoring_params": [
+                {"param": "Jaw tone / Eye position", "target": "Ventromedial rotation = adequate depth", "notes_ja": "猫の眼球は犬より小さく、位置判定がやや困難。瞬膜の位置も参考に。", "notes": "Cat eyes are smaller; position assessment can be harder. Third eyelid position is a useful additional indicator."},
+                {"param": "HR / BP", "target": "HR 120-200 bpm, MAP ≥60 mmHg", "notes_ja": "猫は犬より高い心拍数が正常。ドップラーによる血圧測定が猫では容易。", "notes": "Cats have higher baseline HR. Doppler BP measurement is often easier in cats."},
+            ],
+            "notes_ja": "猫のTIVAではアルファキサロンがプロポフォールより推奨される（特に繰り返し使用時）。気管・咽頭手術時のTIVAでは、喉頭痙攣予防のためリドカインスプレー（喉頭に局所塗布、少量）を追加検討。",
+            "notes": "Alfaxalone is preferred over propofol for feline TIVA (especially for repeated use). For tracheal/pharyngeal surgery TIVA, consider topical lidocaine spray on larynx (small amount) to prevent laryngospasm.",
         },
     ],
 }

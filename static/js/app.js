@@ -61,7 +61,7 @@ const I18N={
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
-    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・80+麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
+    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・99麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
     heroCta:"動物種を選択して鑑別診断を開始",heroCtaDb:"疾患データベースを見る",
     statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",statProtocols:"麻酔プロトコル",
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
@@ -92,6 +92,7 @@ const I18N={
     anesthesiaDose:"用量",anesthesiaRoute:"投与経路",anesthesiaOnset:"効果発現",anesthesiaDuration:"持続時間",
     anesthesiaMonitoring:"モニタリング項目",anesthesiaTarget:"目標値",
     anesthesiaBreedConsider:"品種別注意事項",anesthesiaSelectSpecies:"動物種を選択すると、種別の鎮静・麻酔プロトコルが表示されます",
+    anesthesiaAsaTitle:"ASA身体状態分類",anesthesiaAsaGuidance:"麻酔管理指針",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
     allCategories:"全カテゴリ",allSpecies:"全動物種",
     sponsorTagline:"獣医師が考案・国内製造 — 競走馬理化学研究所の検査合格",
@@ -150,7 +151,7 @@ const I18N={
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
-    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 80+ anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
+    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 99 anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
     heroCta:"Select a species to begin differential diagnosis",heroCtaDb:"Browse Disease Database",
     statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",statProtocols:"Anesthesia",
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
@@ -181,6 +182,7 @@ const I18N={
     anesthesiaDose:"Dose",anesthesiaRoute:"Route",anesthesiaOnset:"Onset",anesthesiaDuration:"Duration",
     anesthesiaMonitoring:"Monitoring Parameters",anesthesiaTarget:"Target",
     anesthesiaBreedConsider:"Breed-Specific Considerations",anesthesiaSelectSpecies:"Select a species to view sedation & anesthesia protocols",
+    anesthesiaAsaTitle:"ASA Physical Status Classification",anesthesiaAsaGuidance:"Anesthesia Management Guidance",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
     allCategories:"All Categories",allSpecies:"All Species",
     sponsorTagline:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
@@ -458,7 +460,7 @@ function loadSpeciesStats(){
         species:data.total_species||SPECIES.length,
         drugs:data.total_drugs||0,
         symptoms:sd.symptoms?sd.symptoms.length:0,
-        protocols:80
+        protocols:99
       };
       renderSpeciesGrid();
       initStatsObserver();
@@ -509,7 +511,7 @@ function setDefaultStats(){
     species:21,
     drugs:228,
     symptoms:52,
-    protocols:80
+    protocols:99
   };
   renderSpeciesGrid();
   initStatsObserver();
@@ -2371,7 +2373,7 @@ function renderDrugList(){
 }
 
 /* ===== Anesthesia Protocols ===== */
-let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={};
+let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={},anesthesiaAsaData=null;
 
 function loadAnesthesiaProtocols(){
   const list=document.getElementById("anesthesiaList");
@@ -2388,6 +2390,8 @@ function loadAnesthesiaProtocols(){
     renderAnesthesiaOverview(data);
     renderAnesthesiaList();
   }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
+  /* Fetch ASA classification */
+  fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
   document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
   document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
 }
@@ -2506,6 +2510,23 @@ function renderAnesthesiaList(){
       }).join("")
       +`</div>`;
     list.insertAdjacentHTML("beforeend",breedHtml);
+  }
+
+  /* ASA Classification reference */
+  if(anesthesiaAsaData&&!cat&&!search){
+    const riskColors={low:"#16a34a",moderate:"#ea580c",high:"#dc2626"};
+    const riskLabels={low:t("anesthesiaRiskLow"),moderate:t("anesthesiaRiskModerate"),high:t("anesthesiaRiskHigh")};
+    const asaHtml=`<div class="anesthesia-breed-section"><h4>${t("anesthesiaAsaTitle")}</h4>`
+      +["I","II","III","IV","V","E"].map(cls=>{
+        const a=anesthesiaAsaData[cls];if(!a)return"";
+        const desc=currentLang==="ja"?(a.ja||a.en):(a.en||a.ja);
+        const guidance=currentLang==="ja"?(a.guidance_ja||a.guidance_en):(a.guidance_en||a.guidance_ja);
+        const rc=riskColors[a.risk]||"#6b7280";
+        const rl=riskLabels[a.risk]||"";
+        return`<div class="anesthesia-breed-item"><strong>ASA ${cls}</strong> <span class="anesthesia-risk-tag" style="background:${rc};font-size:.72rem">${escapeHtml(rl)}</span><p>${escapeHtml(desc)}</p><p style="font-size:.8rem;color:var(--gray-600)"><strong>${t("anesthesiaAsaGuidance")}:</strong> ${escapeHtml(guidance)}</p></div>`;
+      }).join("")
+      +`</div>`;
+    list.insertAdjacentHTML("beforeend",asaHtml);
   }
 
   _attachDbItemHandlers(list);
