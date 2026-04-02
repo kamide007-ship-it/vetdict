@@ -4569,6 +4569,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "nasal_discharge", "lethargy", "rapid_breathing"},
         "description": "Allergic lung disease with eosinophilic infiltration causing chronic cough and breathing difficulty.",
         "description_ja": "好酸球浸潤を伴うアレルギー性肺疾患で、慢性咳嗽と呼吸困難を引き起こします。",
+        "pathophysiology_ja": "気管支・肺への好酸球浸潤→気管支粘膜の炎症・粘液過分泌→気管支壁の肥厚→気道閉塞→慢性咳嗽・呼吸困難。BAL（気管支肺胞洗浄）で好酸球>20%が診断的。アレルギー性機序が主因。",
+        "causes_ja": "原因不明だがアレルギー性（環境アレルゲン・寄生虫抗原に対する過敏反応）。シベリアンハスキー・マラミュートに好発との報告。若齢〜中齢犬。肺寄生虫（肺虫・回虫幼虫移行）の除外が必須。",
+        "prevention_ja": "環境アレルゲンの回避。プレドニゾロン（1〜2mg/kg）で反応良好。ステロイド減量困難例はシクロスポリン。",
         "urgency": "urgent",
     },
     {
@@ -4577,6 +4580,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "fever", "lethargy", "appetite_loss", "nasal_discharge"},
         "description": "Replacement of air in lung tissue with fluid, pus, or cellular infiltrate from severe infection or inflammation.",
         "description_ja": "重度の感染や炎症による肺組織の空気が液体、膿、細胞浸潤で置換された状態です。",
+        "pathophysiology_ja": "肺胞内に炎症性滲出液（細菌性肺炎）・膿（肺膿瘍）・血液（肺出血）・腫瘍細胞が充満→肺胞のガス交換能の喪失→低酸素血症。X線で均一な不透過性（肺葉パターン：air bronchogram陽性）。重症細菌性肺炎・誤嚥性肺炎で最も一般的。",
+        "causes_ja": "細菌性肺炎（最多）、誤嚥性肺炎、肺膿瘍、肺出血（凝固障害・肺虫症）、肺腫瘍。不応性肺炎で肺葉切除が必要になることがある。",
+        "prevention_ja": "肺炎の早期適切な治療。培養に基づく抗菌薬選択。不応性硬化の場合は肺葉切除を検討。",
         "urgency": "urgent",
     },
     {
@@ -4613,6 +4619,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "vomiting", "lethargy", "dehydration"},
         "description": "Abnormal kidney development causing early-onset chronic kidney failure in young dogs.",
         "description_ja": "腎臓の異常発達で若い犬に早期発症の慢性腎不全を引き起こします。",
+        "pathophysiology_ja": "胎生期の腎臓の異常発達→未成熟なネフロン・胎児型糸球体の残存→機能的ネフロン数の不足→若齢犬でのCKD早期発症（多飲多尿・成長遅延・嘔吐）。腎生検で胎児型糸球体・原始的尿細管が確認される。",
+        "causes_ja": "先天性/遺伝性。シーズー・ラサアプソ・ソフトコーテッドウィートンテリア・スタンダードプードルに報告。若齢犬（数ヶ月〜2歳）で多飲多尿・成長不良で発見。BUN/Cre上昇＋腎臓の小型化・不整形。",
+        "prevention_ja": "好発犬種の繁殖管理。治療は支持療法（CKDの内科管理）。腎移植は限られた施設で実施。",
         "urgency": "urgent",
     },
     {
@@ -4621,6 +4630,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "lethargy", "vomiting", "bloated_abdomen"},
         "description": "Deposition of amyloid protein in the kidneys causing progressive renal failure; seen in Shar Peis.",
         "description_ja": "腎臓へのアミロイド蛋白沈着で進行性腎不全を引き起こし、シャーペイに多く見られます。",
+        "pathophysiology_ja": "AA型アミロイド蛋白（血清アミロイドA由来）の腎糸球体・尿細管間質への沈着→ネフロンの進行性破壊→蛋白漏出性腎症（PLN）→CKD→腎不全。シャーペイでは家族性シャーペイ熱（反復性発熱・足根関節腫脹）に続発するAA型アミロイドーシスが特徴的。",
+        "causes_ja": "一次性（ALアミロイド、稀）。二次性/反応性（AA型、最多）：慢性炎症性疾患に続発。シャーペイ（家族性シャーペイ熱→AA型アミロイドーシス）に最も好発。ビーグル・イングリッシュフォックスハウンドにも報告。",
+        "prevention_ja": "シャーペイのShar-Pei Fever（反復性発熱）の早期管理（コルヒチン投与がアミロイド沈着を遅延させる可能性）。定期的な尿蛋白・腎機能モニタリング。",
         "urgency": "urgent",
     },
     {
