@@ -2634,6 +2634,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "circling", "head_tilting", "stiffness", "anxiety"},
         "description": "Neurological complications of canine distemper causing seizures and myoclonus.",
         "description_ja": "犬ジステンパーの神経学的合併症で、痙攣とミオクローヌスを引き起こします。",
+        "pathophysiology_ja": "CDV（犬ジステンパーウイルス）の中枢神経系への侵入→脱髄性脳脊髄炎→けいれん（大脳皮質病変）・ミオクローヌス（rhythmic jerking、特に咬筋/側頭筋、ジステンパーに特異的）・運動失調。急性脱髄型（若齢犬、ウイルス直接障害）と慢性型（成犬、免疫介在性脱髄）に分類。Old dog encephalitis（高齢犬のジステンパー脳炎）は稀だが進行性。",
+        "causes_ja": "CDV感染の神経合併症。ワクチン未接種犬・母体移行抗体低下期の子犬に多い。神経症状はウイルス血症後1〜3週間で発症。ミオクローヌスはジステンパーのpathognomonicな所見。PCR（CSF・結膜スワブ）で確定診断。",
+        "prevention_ja": "コアワクチン（MLV CDVワクチン）の適切な接種スケジュール。ワクチン完了前の感染環境回避。発症後の神経症状は不可逆的なことが多い。",
         "urgency": "urgent",
     },
     {
@@ -2713,6 +2716,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"swollen_joints", *_ANY_LIMPING, "lethargy"},
         "description": "Painful bone proliferation in the limbs secondary to intrathoracic disease (usually lung tumors).",
         "description_ja": "胸腔内疾患（主に肺腫瘍）に続発する四肢の骨増殖で、痛みを伴います。",
+        "pathophysiology_ja": "胸腔内腫瘍（肺原発/転移性、食道腫瘍等）→迷走神経の求心路刺激→四肢末梢の骨膜血流増加→骨膜の新生骨形成（柵状骨膜反応：palisading periosteal reaction）→四肢遠位部の有痛性腫脹。原発巣の切除で骨増殖が退縮する（腫瘍随伴症候群の一型）。",
+        "causes_ja": "肺腫瘍（原発性肺癌・肺転移が最多の原因）、食道の肉芽腫/腫瘍（Spirocerca lupi感染→食道肉腫、熱帯地域）、膿胸、心内膜炎。原発巣の精査（胸部X線・CT）が不可欠。四肢の骨膜反応がある犬は必ず胸部を精査すべき。",
+        "prevention_ja": "確実な予防法はない。原発巣の治療（肺葉切除等）で骨膜反応が劇的に改善・消失することがある。疼痛管理（NSAIDs）。",
         "urgency": "urgent",
     },
     # ---- Skin (expanded) ----
@@ -3378,6 +3384,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"sneezing", "nasal_discharge", "coughing"},
         "description": "A congenital defect where the palate doesn't fuse, causing nasal regurgitation in neonates.",
         "description_ja": "口蓋が癒合しない先天性欠損で、新生子犬の鼻逆流を引き起こします。",
+        "pathophysiology_ja": "胎生期の口蓋の正中癒合不全→口腔と鼻腔の交通→授乳時の乳汁の鼻腔逆流→誤嚥性肺炎（最大の致死要因）→成長不良。硬口蓋裂（骨性欠損）と軟口蓋裂があり、軟口蓋裂は見逃されやすい。",
+        "causes_ja": "先天性（多因子遺伝）。短頭種（ブルドッグ、ボストンテリア）に好発。外因性催奇形物質（ステロイド・抗てんかん薬の妊娠初期投与）、葉酸欠乏。出生直後の口腔内検査で発見すべき。",
+        "prevention_ja": "好発犬種の繁殖管理、妊娠犬への催奇形物質の回避、妊娠犬の適切な栄養管理。外科的閉鎖は8〜12週齢以降に実施。手術まではチューブフィーディングで管理。",
         "urgency": "urgent",
     },
     {
@@ -3386,6 +3395,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "circling", "vomiting", "weight_loss"},
         "description": "A congenital vascular anomaly bypassing the liver, causing hepatic encephalopathy.",
         "description_ja": "肝臓を迂回する先天性血管異常で、肝性脳症を引き起こします。",
+        "pathophysiology_ja": "門脈血が肝臓を迂回→アンモニア等の毒素が肝臓で解毒されず全身循環→高アンモニア血症→肝性脳症（旋回運動・けいれん・流涎・昏迷）。食後に増悪（蛋白摂取後のアンモニア産生増加）。肝外性（小型犬に好発）と肝内性（大型犬に好発）に分類。尿酸塩結石を合併。",
+        "causes_ja": "先天性の血管異常。肝外性：ヨークシャーテリア（最多）、マルチーズ、シーズー。肝内性：アイリッシュウルフハウンド、ラブラドール。1歳未満での食後異常行動（食後脳症）で発見されることが多い。血清胆汁酸の食前食後試験でスクリーニング。",
+        "prevention_ja": "好発犬種の繁殖管理。食後の異常行動を示す若齢犬は胆汁酸検査→CT血管造影で確定診断。外科的閉鎖（ameroid constrictor/cellophane band）が根治療法。",
         "urgency": "urgent",
     },
     {
@@ -3410,6 +3422,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"regurgitation", "weight_loss", "coughing", "drooling", "difficulty_breathing"},
         "description": "A vascular ring anomaly compressing the esophagus, causing regurgitation in weaning puppies.",
         "description_ja": "食道を圧迫する血管輪異常で、離乳期の子犬に吐き戻しを引き起こします。",
+        "pathophysiology_ja": "胎生期の右第4大動脈弓が遺残→大動脈・肺動脈・動脈管遺残で食道が環状に絞扼→離乳後に固形食が狭窄部口側に貯留→吐き戻し（regurgitation）→成長不良。狭窄部口側の食道が拡張（二次性巨大食道症）。最も多い血管輪異常はPRAA（95%）。",
+        "causes_ja": "先天性の血管発生異常。ジャーマンシェパード・アイリッシュセッター・ボストンテリアに好発。離乳期（3〜4週齢）に固形食を開始すると吐き戻しで発症。胸部X線で食道の限局的拡張、バリウム造影で確認。",
+        "prevention_ja": "好発犬種の繁殖管理。離乳期の吐き戻しは早期に精査。早期の外科的リング切断が予後良好。術後も二次性巨大食道症が残存する場合は立位給餌で管理。",
         "urgency": "urgent",
     },
     {
@@ -3446,6 +3461,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"swelling", "fever", "appetite_loss", "lethargy"},
         "description": "An immune-mediated skin condition in puppies causing facial swelling and lymph node enlargement.",
         "description_ja": "子犬に発生する免疫介在性皮膚疾患で、顔面の腫脹やリンパ節腫大を引き起こします。",
+        "pathophysiology_ja": "免疫介在性の無菌性肉芽腫性皮膚炎・リンパ節炎。顔面（口唇・眼周囲・耳介）の急性腫脹→膿疱・痂皮→排膿性瘻管形成。下顎リンパ節の著明な腫大（「strangles」の名称の由来）。細菌培養は通常無菌（免疫介在性であり感染性ではない）。瘢痕が残ることがある。",
+        "causes_ja": "原因不明の免疫介在性疾患。3週齢〜4ヶ月齢の子犬に好発。ダックスフンド・ゴールデンレトリーバー・ゴードンセッター・ラブラドールに報告多い。同腹子犬が複数罹患することがある。",
+        "prevention_ja": "確実な予防法はない。プレドニゾロン（2mg/kg/日、3〜4週間漸減）が第一選択。抗菌薬は二次感染がない限り不要。ステロイドの早期開始が瘢痕形成を最小化。",
         "urgency": "urgent",
     },
     {
