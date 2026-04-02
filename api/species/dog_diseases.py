@@ -4445,6 +4445,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "weight_loss", "appetite_loss", "bloody_stool", "lethargy"},
         "description": "Malignant tumor of the intestinal lining, most common in the colon and duodenum of older dogs.",
         "description_ja": "腸管内壁の悪性腫瘍で、高齢犬の結腸と十二指腸に最も多く見られます。",
+        "pathophysiology_ja": "腸管上皮の腺細胞の悪性増殖→環状に増殖し腸管内腔を狭窄（annular型）→部分/完全閉塞→嘔吐・体重減少。潰瘍型は消化管出血→貧血。結腸と十二指腸に好発。局所リンパ節転移が高率。",
+        "causes_ja": "原因不明。中高齢犬（平均9歳）。特定の犬種好発は不明確。慢性の消化器症状（嘔吐・下痢・体重減少）で精査すべき。エコー・内視鏡で診断。",
+        "prevention_ja": "確実な予防法はない。外科的切除（腸管切除吻合）が可能な場合のMSTは10〜15ヶ月。転移があれば予後不良。",
         "urgency": "urgent",
     },
     {
@@ -4453,6 +4456,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "vomiting_after_drinking", "weight_loss", "appetite_loss", "dehydration"},
         "description": "Narrowing of the pyloric outflow of the stomach causing projectile vomiting, seen in brachycephalic breeds.",
         "description_ja": "胃の幽門部の狭窄で噴出性嘔吐を引き起こし、短頭種に多く見られます。",
+        "pathophysiology_ja": "幽門部の粘膜肥厚（先天性）または筋層肥厚（後天性）→胃排出障害→食後の噴出性嘔吐（未消化食物）→体重減少・脱水・低クロール性代謝性アルカローシス（胃酸喪失）。食物は胃から排出されないが水分は通過可能（初期）。",
+        "causes_ja": "先天性：短頭種に好発（ボクサー、ブルドッグ、ボストンテリア）。後天性：慢性胃炎・胃潰瘍・胃腫瘍に続発する幽門筋肥厚。バリウム造影で「string sign」（幽門の糸状通過）。",
+        "prevention_ja": "確実な予防法はない。内科管理（制吐薬・シサプリド）が無効な場合はHeineke-Mikulicz幽門形成術またはFredet-Ramstedt幽門筋切開術。",
         "urgency": "urgent",
     },
     {
@@ -4472,6 +4478,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "appetite_loss", "fever", "lethargy", "abdominal_pain", "weight_loss"},
         "description": "Inflammation of the bile ducts and liver causing fever, jaundice, and abdominal pain.",
         "description_ja": "胆管と肝臓の炎症で、発熱、黄疸、腹痛を引き起こします。",
+        "pathophysiology_ja": "胆管への細菌感染（上行性：十二指腸から）→胆管の炎症・腫脹→胆汁うっ滞→黄疸。炎症が肝実質に波及→胆管肝炎。胆石・胆嚢粘液嚢腫による胆管閉塞が二次感染を促進。犬では猫ほど一般的ではない。",
+        "causes_ja": "上行性細菌感染（E. coli、Clostridium、Enterococcus）が最多。胆石・胆嚢粘液嚢腫・膵炎に続発。猫との違い：犬では好中球性/化膿性が多い（猫はリンパ球性が多い）。",
+        "prevention_ja": "胆嚢疾患の早期管理。培養に基づく抗菌薬療法。胆管閉塞がある場合は外科的減圧。",
         "urgency": "urgent",
     },
     {
@@ -4491,6 +4500,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"appetite_loss", "lethargy", "vomiting", "weight_loss", "bloated_abdomen"},
         "description": "Excessive fat accumulation in the liver causing hepatic dysfunction, often secondary to other diseases.",
         "description_ja": "肝臓への過剰な脂肪蓄積で肝機能障害を引き起こし、他の疾患に続発することが多いです。",
+        "pathophysiology_ja": "肝細胞内への過剰な脂肪蓄積→肝細胞の膨化・機能障害→胆汁うっ滞→黄疸。犬では猫と異なり一次性肝リピドーシスは稀で、ほぼ常に基礎疾患（DM、クッシング、甲状腺機能低下症、膵炎）に続発する。肥満犬にリスク。",
+        "causes_ja": "二次性が大部分：糖尿病、クッシング症候群、甲状腺機能低下症、ステロイド長期投与、肥満。猫のような食欲廃絶による一次性リピドーシスは犬では稀。基礎疾患の精査が不可欠。",
+        "prevention_ja": "基礎疾患（DM・クッシング等）の適切な管理。肥満の予防。ステロイドの最小有効用量での使用。",
         "urgency": "urgent",
     },
     {
@@ -4515,6 +4527,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "weight_loss", "bloated_abdomen", "lethargy", "appetite_loss", "vomiting"},
         "description": "Dilation of intestinal lymphatic vessels causing protein-losing enteropathy and malabsorption.",
         "description_ja": "腸リンパ管の拡張による蛋白漏出性腸症と吸収不良を引き起こします。",
+        "pathophysiology_ja": "腸粘膜リンパ管の拡張→リンパ液（蛋白・脂肪・リンパ球を含む）の腸管内腔への漏出→PLE（低アルブミン血症→腹水・胸水）、低Ca血症、リンパ球減少、低コレステロール血症。一次性（先天性リンパ管異常）と二次性（IBD・腫瘍による閉塞）に分類。",
+        "causes_ja": "一次性（先天性リンパ管異常）：ヨークシャーテリアに最も好発。二次性：IBD・腸リンパ腫・右心不全（リンパ還流障害）。内視鏡生検で拡張したリンパ管を確認。",
+        "prevention_ja": "確実な予防法はない。超低脂肪食（脂肪<10%）＋MCTオイル（リンパ管を経由せず門脈から吸収）が管理の柱。重症例はプレドニゾロン併用。",
         "urgency": "urgent",
     },
     {
@@ -4523,6 +4538,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"regurgitation", "drooling", "weight_loss", "appetite_loss", "vomiting_after_drinking"},
         "description": "Narrowing of the esophagus due to scarring from foreign bodies, caustic substances, or anesthesia reflux.",
         "description_ja": "異物、腐食性物質、麻酔時逆流による瘢痕で食道が狭窄した状態です。",
+        "pathophysiology_ja": "食道壁の全層性損傷→肉芽組織形成→線維性瘢痕→食道内腔の狭窄→固形食の通過障害→吐出（regurgitation）→体重減少。バリウム造影で狭窄部位を確認。",
+        "causes_ja": "麻酔中の胃食道逆流（最多の医原性原因）→逆流性食道炎→瘢痕性狭窄。食道異物の嵌頓後（特に骨片）。化学物質の誤飲。食道手術後。",
+        "prevention_ja": "麻酔時の適切な絶食管理、麻酔中の食道逆流防止（オメプラゾール前投与の検討）。バルーン拡張術（内視鏡下）で狭窄を拡張。複数回の拡張が必要なことが多い。",
         "urgency": "urgent",
     },
     {
