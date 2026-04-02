@@ -4048,6 +4048,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "appetite_loss", "bloody_stool", "lethargy", "excessive_thirst"},
         "description": "NSAID poisoning causing gastric ulceration, kidney failure, and potentially seizures at high doses.",
         "description_ja": "NSAIDの中毒で胃潰瘍、腎不全を引き起こし、高用量ではけいれんの可能性があります。",
+        "pathophysiology_ja": "イブプロフェン→COX-1/COX-2の非選択的阻害→胃粘膜保護PG減少→胃潰瘍・穿孔（25mg/kg以上）。腎臓：輸入細動脈のPG依存性拡張阻害→腎血流低下→AKI（50mg/kg以上）。高用量（>100mg/kg）：CNS症状（けいれん・昏迷）。犬は人より感受性が高く、人用1錠（200mg）でも小型犬には危険。",
+        "causes_ja": "ヒト用イブプロフェン（バファリン・イブ等）の誤食が最多のNSAID中毒。犬は甘いコーティングに引かれて食べやすい。ナプロキセン（犬での半減期72時間と長い）も危険。獣医師処方のNSAID（メロキシカム等）の過量投与でも発症。",
+        "prevention_ja": "ヒト用薬のペットからの完全隔離、薬品の子供・犬からの安全管理。犬用NSAIDは正確な体重に基づく投与量を遵守。腎機能低下犬へのNSAID処方は慎重に。",
         "urgency": "emergency",
     },
     {
@@ -4108,6 +4111,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "seizures", "collapse", "lethargy", "drooling", "difficulty_breathing"},
         "description": "Exposure to cyanotoxins in stagnant water causing rapid onset liver failure or neurotoxicity.",
         "description_ja": "停滞水中のシアノトキシンへの曝露により急速に肝不全または神経毒性を引き起こします。",
+        "pathophysiology_ja": "シアノバクテリア（藍藻）が産生するシアノトキシン：(1)ミクロシスチン（肝毒素）→肝細胞のプロテインフォスファターゼ阻害→急性肝壊死→肝不全（摂取後数時間〜24時間）、(2)アナトキシン-a（神経毒素）→ニコチン性AChR刺激→筋線維束攣縮→呼吸筋麻痺→呼吸停止（摂取後数分〜数時間で致死的、「非常に急速な死」）。致死率は高く、特にアナトキシン型は治療が間に合わないことが多い。",
+        "causes_ja": "温暖期（夏〜初秋）に富栄養化した池・湖・ダム湖・水たまりで大量発生する藍藻ブルーム。犬は水辺で遊ぶ際にブルーム含有水を飲む・藻を舐める。ブルームは緑色のペンキ状の水面の膜として認識できる。日本でもため池・湖沼で報告あり。",
+        "prevention_ja": "藍藻ブルーム発生水域での犬の水泳・飲水禁止。水面が緑色のペンキ状・異臭がする水域を回避。ブルーム情報の確認（自治体・環境省）。曝露後は直ちに全身洗浄し緊急受診。",
         "urgency": "emergency",
     },
     {
@@ -4116,6 +4122,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "drooling", "stiffness", "vomiting", "fever", "excessive_panting"},
         "description": "Toxicity from concentrated permethrin products (typically cat flea products applied to dogs at high doses).",
         "description_ja": "高濃度ペルメトリン製品による中毒（通常は猫用ノミ製品を犬に高用量で適用した場合）。",
+        "pathophysiology_ja": "合成ピレスロイド（ペルメトリン）→ナトリウムチャネルの持続的開放→神経の反復発火→筋線維束攣縮・振戦→全身性けいれん。犬は猫よりグルクロン酸抱合能が高く感受性は低いが、高濃度スポットオン製品（45〜65%ペルメトリン）の大量経皮吸収や経口摂取で中毒。猫の致死的中毒が最も有名だが犬でも過量で発症。",
+        "causes_ja": "高濃度ペルメトリン製品の過量使用、小型犬への大型犬用量の誤用、経口摂取（製品を舐めた場合）。犬用ペルメトリン製品は通常安全だが、体重に対して過量の場合は中毒リスク。猫と同居する犬が猫用に処方された非ペルメトリン製品と間違えて犬用高濃度品を使用するケースも。",
+        "prevention_ja": "製品の正確な体重に基づく適用、猫用と犬用製品の明確な区別・保管、経口摂取防止（塗布後の乾燥まで犬の舐め防止）。",
         "urgency": "emergency",
     },
     {
@@ -4391,6 +4400,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "rapid_breathing", "drooling", "excessive_panting"},
         "description": "Foreign object lodged in the trachea causing acute respiratory distress and violent coughing.",
         "description_ja": "気管内に異物が嵌頓し、急性呼吸困難と激しい咳嗽を引き起こします。",
+        "pathophysiology_ja": "異物（小さなボール・種子・草片・食物片・骨片）の気管内吸引→気道部分閉塞（吸気性喘鳴・呼気時の弁膜効果）→気道粘膜の刺激→激しい咳嗽反射。完全閉塞→窒息→数分で心停止。部分閉塞でも二次的な気管浮腫→閉塞の進行。胸部X線で気管内異物の描出、気管支鏡で確認・除去。",
+        "causes_ja": "小さなボール（スーパーボール等）の誤嚥、植物の種子（草の穂・芒）の吸引、食物片（骨の破片）の誤嚥。活発に遊ぶ若齢犬に多い。口でボールを咥えて遊ぶ際に咽頭に滑り込み気管に入る事故が最多。",
+        "prevention_ja": "犬の口に完全に入るサイズのボール・玩具の使用禁止、骨片の給餌回避、草の穂が多い場所での注意。緊急処置：大型犬はハイムリック法を試みる→気管支鏡的除去が確実。",
         "urgency": "emergency",
     },
     # ---- Urogenital ----
@@ -4539,6 +4551,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "collapse", "rapid_breathing", "lethargy", "vomiting", "skin_redness", "pain_on_touch"},
         "description": "Rapidly progressive systemic infection causing septic shock, organ failure, and necrotizing fasciitis.",
         "description_ja": "敗血症性ショック、臓器不全、壊死性筋膜炎を引き起こす急速進行性の全身感染症です。",
+        "pathophysiology_ja": "Streptococcus canis（β溶血性レンサ球菌）のスーパー抗原（発赤毒素様毒素）→T細胞の大量非特異的活性化→サイトカインストーム（TNF-α、IL-1、IL-6の大量放出）→全身性血管拡張→敗血症性ショック→多臓器不全。壊死性筋膜炎（皮下の急速に進行する壊死）を合併→ガス産生菌との鑑別が必要。24〜48時間で致死的になりうる超急性疾患。",
+        "causes_ja": "Streptococcus canisの深部組織感染→血流播種。感染門戸：咬傷、創傷、術後感染、子宮感染。免疫抑制犬・高齢犬にリスク。犬同士の咬傷後に急速に進行する蜂窩織炎→壊死性筋膜炎のパターンが典型的。",
+        "prevention_ja": "咬傷・創傷の迅速なデブリードマン・洗浄・抗菌薬投与。急速に拡大する蜂窩織炎・高熱・ショック徴候は緊急入院→積極的外科的デブリードマン＋広域抗菌薬（ペニシリン＋クリンダマイシン）。",
         "urgency": "emergency",
     },
     {
@@ -4751,6 +4766,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"difficulty_breathing", "swelling", "coughing", "rapid_breathing", "lethargy"},
         "description": "Tear in the tracheal wall from trauma, bite wounds, or iatrogenic injury causing subcutaneous emphysema.",
         "description_ja": "外傷、咬傷、医原性損傷による気管壁の裂傷で、皮下気腫を引き起こします。",
+        "pathophysiology_ja": "気管壁の裂傷→吸気/呼気時に空気が気管周囲組織に漏出→皮下気腫（頸部・胸部の皮下組織にクレピタス触知）→縦隔気腫→気胸。小さな穿孔は自然治癒しうるが、大きな穿孔は気道の連続性喪失→換気不全。二次細菌感染→縦隔炎のリスク。",
+        "causes_ja": "咬傷（犬同士のケンカ、小型犬が大型犬に噛まれるケースが多い）、気管挿管時の過膨張カフによる医原性損傷、気管チューブのスタイレットによる穿通、外傷（交通事故・首輪の絞扼）。小型犬は気管が脆弱で穿孔リスクが高い。",
+        "prevention_ja": "気管挿管時のカフ圧管理（25cmH₂O以下）、適切なチューブサイズの選択、犬のケンカの予防、首輪よりハーネスの使用（気管への直接的圧力回避）。",
         "urgency": "emergency",
     },
     {
@@ -5082,6 +5100,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"collapse", "limping_rl", "limping_rr", "reluctance_move", "incontinence"},
         "description": "Acute spinal cord infarction caused by fibrocartilaginous embolism.",
         "description_ja": "線維軟骨性物質による急性脊髄梗塞です。",
+        "pathophysiology_ja": "椎間板の線維軟骨物質が脊髄の動脈系または静脈系に侵入→脊髄の区域性梗塞→急性の非進行性脊髄障害。通常運動中に超急性に発症し、初期に疼痛を伴うが数時間以内に疼痛は消失。非進行性（発症後6〜12時間以降は悪化しない）が特徴的でIVDDとの重要な鑑別点。MRIで脊髄内のT2高信号（梗塞巣）。",
+        "causes_ja": "原因は完全に解明されていない。線維軟骨の脊髄血管への侵入経路が不明。運動中の急性発症が多い。大型犬・超大型犬（ミニチュアシュナウザーは小型犬で例外的に好発）。若齢〜中齢犬に多い。外傷の既往がないことが多い。",
+        "prevention_ja": "確実な予防法はない。急性に発症した非進行性の脊髄障害ではFCEを疑いMRI検査。治療は支持療法・リハビリテーション。軽度〜中等度は予後良好（数週間〜数ヶ月で改善）。重度（深部痛覚消失）は予後不良。",
         "urgency": "emergency",
     },
     {
