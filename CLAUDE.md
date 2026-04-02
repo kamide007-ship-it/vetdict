@@ -14,7 +14,7 @@
 - **テスト**: pytest (2,798テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v11)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v13)
 - **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
 - **現状**: OPEN_BETA=true（全機能無料）
@@ -61,7 +61,7 @@ static/
   js/app.js               — 統合JS (I18N + UI + チャット + GA4 + admin/pro制御)
   css/main.css            — 統合CSS (app.cssは削除済み — 絶対に復活させないこと)
   manifest.json           — PWA
-  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v12)
+  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v13)
   robots.txt / sitemap.xml
   og-image.svg            — OGP画像 (1200x630)
 scripts/
