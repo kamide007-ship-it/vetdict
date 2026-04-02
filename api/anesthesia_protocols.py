@@ -839,6 +839,17 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
             "notes": "Recover in warm environment (28-30°C). Offer food and water early. If slow recovery, check temperature first.",
         },
         {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg (total dose)", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5%に希釈して使用。小型のため総用量に厳格注意（30gハムスターで最大0.15mg）。膿瘍切開ドレナージ、腫瘤切除に。", "notes": "Dilute to 0.5%. Strict total dose control due to small size (max 0.15mg for 30g hamster). For abscess I&D, mass removal."},
+            ],
+            "notes_ja": "ハムスターは小型のため局所麻酔薬の過量投与に注意。全身麻酔の補助として使用し、揮発性麻酔薬の必要量を削減。",
+            "notes": "Watch for local anesthetic overdose due to small body size. Use as GA adjunct to reduce inhalant requirements.",
+        },
+        {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
             "category": "recovery",
             "risk_level": "moderate",
@@ -1055,6 +1066,19 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             ],
             "notes_ja": "覚醒は静かで涼しい（20-22°C）環境で。乾草と水を早期に提供。砂浴びは創傷治癒まで中止。",
             "notes": "Recover in quiet, cool (20-22°C) environment. Offer hay and water early. Suspend dust baths until wound healing.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "創傷処置、歯科処置に使用。0.5-1%濃度に希釈。", "notes": "For wound care, dental procedures. Dilute to 0.5-1%."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-8 hr",
+                 "notes_ja": "長時間鎮痛。歯科手術後の術後疼痛管理に有用。", "notes": "Long-duration analgesia. Useful for post-dental surgical pain management."},
+            ],
+            "notes_ja": "チンチラの歯科疾患は頻繁。下顎神経ブロックで歯科処置時の鎮痛を強化可能。術後鎮痛: メロキシカム0.5-1 mg/kg PO/SC q24h。",
+            "notes": "Dental disease is common in chinchillas. Mandibular nerve block can enhance dental procedure analgesia. Post-op: meloxicam 0.5-1 mg/kg PO/SC q24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1296,6 +1320,17 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             "notes": "Recover in warm (25-27°C) environment. Check appetite with mealworms or favorite food. Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
         },
         {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "腫瘤切除、膿瘍切開に使用。棘のある背面を避けて腹側から注入。0.5%に希釈。", "notes": "For mass removal, abscess I&D. Inject from ventral side, avoiding spiny dorsum. Dilute to 0.5%."},
+            ],
+            "notes_ja": "ハリネズミの腫瘍は非常に多い（有病率50%超）。局所麻酔は全身麻酔の補助として腫瘤切除時に有用。術後鎮痛: メロキシカム0.2-0.5 mg/kg PO/SC q24h。",
+            "notes": "Neoplasia is very common in hedgehogs (prevalence >50%). Local anesthesia is useful as GA adjunct for mass removal. Post-op: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
+        },
+        {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
             "category": "recovery",
             "risk_level": "moderate",
@@ -1404,6 +1439,17 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             ],
             "notes_ja": "覚醒後は暗く暖かいポーチに入れ、蜂蜜水を提供（低血糖予防）。術後鎮痛: メロキシカム0.2-0.5 mg/kg PO/SC q24h。",
             "notes": "Place in dark, warm pouch after recovery. Offer honey water (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5%に希釈。自咬症（self-mutilation）の創傷デブリードマンや腫瘤切除に。膜翼（パタジウム）を傷つけないよう注意。", "notes": "Dilute to 0.5%. For self-mutilation wound debridement and mass removal. Take care not to damage the patagium."},
+            ],
+            "notes_ja": "フクロモモンガの自咬症は術後ストレスで悪化することがある。局所麻酔で術後痛を軽減し、自咬リスクを低減。エリザベスカラーの検討。",
+            "notes": "Sugar glider self-mutilation may worsen with post-operative stress. Local anesthesia reduces post-op pain and self-mutilation risk. Consider E-collar.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1515,6 +1561,17 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             ],
             "notes_ja": "覚醒後は乾草と水を提供。糖分の高い果物は厳禁。術後鎮痛: メロキシカム0.3-0.5 mg/kg PO/SC q24h。",
             "notes": "Offer hay and water after recovery. High-sugar fruits are strictly prohibited. Post-op analgesia: meloxicam 0.3-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5-1%に希釈。腫瘤切除、創傷処置に。尾のdegloving修復時にリングブロックが有用。", "notes": "Dilute to 0.5-1%. For mass removal, wound care. Ring block useful for tail degloving repair."},
+            ],
+            "notes_ja": "デグーの尾のdegloving（皮膚剥離）は一般的な外傷。断尾術時にリングブロック＋全身麻酔の併用が推奨。術後鎮痛: メロキシカム0.5-1 mg/kg PO/SC q24h。",
+            "notes": "Tail degloving is a common degu injury. Ring block + GA recommended for tail amputation. Post-op: meloxicam 0.5-1 mg/kg PO/SC q24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1741,6 +1798,17 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
             "notes": "Recovery in 30 sec-2 min. Use incubator (30-32°C). Watch for fractures from flapping during recovery (wrap loosely in towel). Offer food early after recovery.",
         },
         {
+            "name": {"ja": "局所麻酔", "en": "Local Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg (total dose)", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "0.5%に希釈必須。30-40gの小型鳥のため総用量を厳格管理。翼骨折の神経ブロック、腫瘤切除に。", "notes": "Must dilute to 0.5%. Strict total dose control for 30-40g birds. For wing fracture nerve block, mass removal."},
+            ],
+            "notes_ja": "インコは非常に小型のため局所麻酔薬の過量投与リスクが高い。インスリン用シリンジで正確に計量。全身麻酔の補助として使用。",
+            "notes": "Parakeets are very small; high overdose risk with local anesthetics. Use insulin syringes for accurate measurement. Use as GA adjunct.",
+        },
+        {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
             "category": "recovery",
             "risk_level": "moderate",
@@ -1843,6 +1911,19 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
             ],
             "notes_ja": "覚醒は速い（2-5分）。暗い静かな環境（インキュベーター30-32°C）で。大型オウムは覚醒時に暴れることがあるため、止まり木を除去しパッドで保護。",
             "notes": "Recovery is rapid (2-5 min). Dark, quiet environment (incubator 30-32°C). Large parrots may thrash during recovery; remove perches and pad surroundings.",
+        },
+        {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg", "route": "Local infiltration / nerve block", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "翼骨折修復、嗉嚢切開術、腫瘤切除に使用。0.5%に希釈。大型オウムは体格に合わせて用量計算。", "notes": "For wing fracture repair, ingluviotomy, mass removal. Dilute to 0.5%. Calculate doses based on large parrot body weight."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-6 hr",
+                 "notes_ja": "長時間鎮痛。整形外科手術に有用。", "notes": "Long-duration analgesia. Useful for orthopedic surgery."},
+            ],
+            "notes_ja": "大型オウムの整形外科手術（翼骨折、断脚）では局所麻酔ブロックが術後疼痛管理に重要。術後鎮痛: メロキシカム0.5-1 mg/kg PO/IM q12-24h。",
+            "notes": "Local nerve blocks are important for post-op pain management in large parrot orthopedic surgery (wing fracture, limb amputation). Post-op: meloxicam 0.5-1 mg/kg PO/IM q12-24h.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
