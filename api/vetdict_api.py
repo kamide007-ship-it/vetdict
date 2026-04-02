@@ -313,6 +313,7 @@ def generate_csp_nonce():
     forward-compatibility if we re-enable nonce-based CSP later.
     """
     g.csp_nonce = secrets.token_urlsafe(16)
+    g.asset_ver = VERSION
 
 
 @app.after_request
