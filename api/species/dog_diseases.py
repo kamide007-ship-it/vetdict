@@ -3414,6 +3414,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"pain_on_touch", "stiffness", "reluctance_move", "seizures"},
         "description": "Instability between the first two cervical vertebrae causing spinal cord compression in toy breeds.",
         "description_ja": "第1・第2頸椎間の不安定性で、トイ犬種の脊髄圧迫を引き起こします。",
+        "pathophysiology_ja": "環椎-軸椎間の靭帯欠損/不全＋歯突起の低形成→環軸椎間の不安定性→頸部屈曲時に上位頸髄圧迫→頸部激痛〜四肢不全麻痺〜呼吸停止。トイ犬種に好発。首輪禁止・ハーネス使用が必須。",
+        "causes_ja": "先天性（歯突起形成不全・靭帯欠損）。ヨークシャーテリア・チワワ・ポメラニアン・トイプードルに好発。1歳未満で発症が多い。",
+        "prevention_ja": "好発犬種の頸部X線スクリーニング。罹患犬はジャンプ・階段昇降の制限、ハーネス使用。症候性は外科的固定術。",
         "urgency": "urgent",
     },
     {
@@ -3536,6 +3539,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_fl", "limping_fr", "swollen_joints", "pain_on_touch", "reluctance_move"},
         "description": "Breakdown of the carpal ligaments causing the carpus to drop, often from jumping or falling from a height.",
         "description_ja": "手根靭帯の断裂により手根関節が過伸展する状態で、高所からの飛び降りや落下が原因となることが多いです。",
+        "pathophysiology_ja": "掌側手根靭帯の断裂→手根関節の背屈安定性喪失→荷重時に手根関節が掌側に過伸展（plantigrade stance）→足根パッドが接地。靭帯の急性断裂（外傷性）と慢性変性が原因。コリー系のシェルティではフィブリン性多発性関節炎に続発することがある。",
+        "causes_ja": "高所からの落下（最多）、交通事故、激しい運動中の捻挫。中型〜大型犬に多い。シェルティでは免疫介在性多発性関節炎に続発するびまん性靭帯弛緩が原因となることがある。",
+        "prevention_ja": "高所からのジャンプの回避。関節固定術（pancarpal arthrodesis）が根治的治療。ギプス/スプリント固定は不十分なことが多い。",
         "urgency": "urgent",
     },
     {
@@ -3639,6 +3645,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_rl", "limping_rr", "stiffness", "reluctance_move", "incontinence"},
         "description": "A fluid-filled cyst in the spinal canal that compresses the spinal cord, causing progressive hind limb weakness.",
         "description_ja": "脊柱管内の液体で満たされた嚢胞が脊髄を圧迫し、進行性の後肢の衰弱を引き起こします。",
+        "pathophysiology_ja": "くも膜と硬膜の間にCSF充満腔が形成→脊髄の背側圧迫→進行性の上位運動ニューロン型後肢不全麻痺・運動失調。C1〜C3（頸部）とT12〜L2（胸腰部）に好発。MRIで背側の嚢胞性病変として描出。緩徐に進行。",
+        "causes_ja": "先天性のくも膜の癒着/肥厚、後天性の外傷・炎症後の癒着。パグ・フレンチブルドッグ（頸部型）、ロットワイラー（胸腰部型）に報告多い。中年犬に多い。",
+        "prevention_ja": "確実な予防法はない。進行性の後肢運動失調ではMRIで精査。外科的嚢胞有窓術（marsupialization）で改善。",
         "urgency": "urgent",
     },
     {
@@ -3691,6 +3700,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "difficulty_breathing", "bloated_abdomen", "collapse", "coughing"},
         "description": "A congenital malformation of the tricuspid valve causing right-sided heart failure, common in Labrador Retrievers.",
         "description_ja": "三尖弁の先天性奇形で右心不全を引き起こし、ラブラドールレトリバーに多く見られます。",
+        "pathophysiology_ja": "三尖弁尖の形成異常（肥厚・短縮・腱索異常）→三尖弁逆流→右房拡大→右心不全→腹水・頸静脈怒張。重症例ではEbstein奇形様の弁の下方変位。右房拡大→上室性不整脈（心房細動）を高率に合併。",
+        "causes_ja": "先天性。ラブラドールレトリーバー（最も好発）、ジャーマンシェパード、ゴールデンに報告。子犬の心雑音（右心尖部、全収縮期雑音）で発見。心エコーで確定診断。",
+        "prevention_ja": "好発犬種の心臓聴診スクリーニング（繁殖前）。罹患犬の繁殖制限。軽度は経過観察、重度は利尿薬＋ACE阻害薬で心不全管理。",
         "urgency": "urgent",
     },
     {
@@ -3699,6 +3711,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "collapse", "difficulty_breathing", "coughing", "excessive_panting"},
         "description": "A congenital narrowing below the aortic valve causing left ventricular outflow obstruction, common in large breeds.",
         "description_ja": "大動脈弁下の先天性狭窄で左心室流出路閉塞を引き起こし、大型犬に多く見られます。",
+        "pathophysiology_ja": "大動脈弁直下の線維性/線維筋性リングによる左室流出路狭窄→圧較差の増大→左室求心性肥大→心筋酸素需要増大→心筋虚血→失神・運動不耐性。重症（圧較差>80mmHg）→心室性不整脈→突然死リスク。聴診で左心基底部のcrescendo-decrescendo収縮期雑音。",
+        "causes_ja": "先天性（多遺伝子性）。ゴールデンレトリーバー・ニューファンドランド・ロットワイラー・ボクサー・ジャーマンシェパードに好発。出生時には軽度→成長に伴い進行することがある（生後6ヶ月の評価では見逃しのリスク）。",
+        "prevention_ja": "好発犬種の心臓聴診＋心エコースクリーニング（繁殖前、12ヶ月齢以降に再評価推奨）。罹患犬の繁殖制限。重症はβ遮断薬（アテノロール）＋運動制限。バルーン拡張術の長期効果は限定的。",
         "urgency": "urgent",
     },
     {
@@ -3718,6 +3733,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "bloated_abdomen", "collapse"},
         "description": "Right-sided heart failure secondary to chronic lung disease or pulmonary hypertension.",
         "description_ja": "慢性肺疾患または肺高血圧症に続発する右心不全です。",
+        "pathophysiology_ja": "慢性肺疾患/肺高血圧症→肺血管抵抗の持続的上昇→右心室の圧負荷→右室肥大→右心不全→三尖弁逆流・腹水・頸静脈怒張・肝腫大。フィラリア症（日本で重要）、慢性気管支炎、肺線維症、肺血栓塞栓症が犬での主要原因。",
+        "causes_ja": "フィラリア症（日本で最も重要な原因）、慢性気管支炎、肺線維症（WHWT）、肺血栓塞栓症、重度の気管虚脱。基礎にある肺疾患の管理が鍵。",
+        "prevention_ja": "フィラリア予防薬の通年投与、慢性呼吸器疾患の適切な管理。シルデナフィル（肺血管拡張）＋利尿薬＋ピモベンダンで心不全管理。",
         "urgency": "urgent",
     },
     {
