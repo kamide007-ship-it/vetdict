@@ -3590,6 +3590,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "swollen_joints", "limping_fl", "limping_fr", "limping_rl", "limping_rr", "appetite_loss", "lethargy"},
         "description": "Severe form of HOD in rapidly growing large-breed puppies with high fever and significant bone pain.",
         "description_ja": "急速に成長する大型犬の子犬に見られるHODの重症型で、高熱と著しい骨の痛みを伴います。",
+        "pathophysiology_ja": "長骨の骨端線（成長板）の骨化障害→骨端線近位の骨幹端部の壊死性炎症→新生骨の不規則な沈着。X線で骨端線に沿った「二重線」（double physis line）が特徴的。重症型は高熱（40〜41℃）・重度の疼痛・食欲廃絶・骨の永続的変形を伴い、致死的となることもある。",
+        "causes_ja": "原因不明だが、CDVワクチン接種との時間的関連が報告（因果関係は不確定）。急速な成長・過剰栄養（高カルシウム食）が悪化因子。大型犬・超大型犬の子犬（2〜8ヶ月齢）に好発：ワイマラナー、グレートデーン、アイリッシュセッター。",
+        "prevention_ja": "大型犬子犬の適正な栄養管理（過剰カルシウム・過剰カロリーの回避）。重症型はNSAIDs＋輸液・栄養サポート。コルチコステロイドは免疫介在性の要素がある重症例で使用されることがある。",
         "urgency": "urgent",
     },
     {
@@ -3683,6 +3686,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_fl", "limping_fr", "limping_rl", "limping_rr", "pain_on_touch", "stiffness"},
         "description": "A tumor arising from the nerve sheath causing progressive lameness and muscle atrophy in the affected limb.",
         "description_ja": "神経鞘から発生する腫瘍で、患肢の進行性の跛行と筋萎縮を引き起こします。",
+        "pathophysiology_ja": "シュワン細胞/神経線維鞘由来の腫瘍→神経の圧迫・浸潤→進行性の神経機能障害→患肢の筋萎縮・跛行・疼痛。腕神経叢に好発（前肢に多い）→根性徴候（Horner症候群の合併あり）。緩徐に進行。MRIで神経根の肥厚・腫瘤として描出。切除困難な場合が多い（神経構造への浸潤性のため）。",
+        "causes_ja": "原因不明。中高齢犬。特定の犬種好発は不明確だが大型犬に多い。進行性の片側前肢跛行＋筋萎縮で疑う。EMG/神経伝導検査で局在診断→MRIで確認。良性と悪性の両方あり。",
+        "prevention_ja": "確実な予防法はない。早期の広範囲切除（可能な場合）が最良の治療。切除不能例は放射線療法を検討。截肢も選択肢（疼痛緩和目的）。",
         "urgency": "urgent",
     },
     {
@@ -3910,6 +3916,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"eye_redness", "squinting", "circling", "anxiety", "reluctance_move"},
         "description": "Inflammation of the optic nerve causing sudden blindness, often immune-mediated or infectious in origin.",
         "description_ja": "視神経の炎症で突然の失明を引き起こし、免疫介在性や感染性が原因となることが多いです。",
+        "pathophysiology_ja": "視神経の炎症性脱髄/軸索変性→視神経の膨化→急性の片側性/両側性失明。対光反射（PLR）の消失が特徴的（SARDSとの鑑別：SARDSでも初期PLR消失）。MRIで視神経の造影増強・肥厚。ERGは正常（SARDSではflat）が鑑別点。",
+        "causes_ja": "免疫介在性（MUOスペクトラムの一部：GMEの視神経型）、感染性（CDV・Toxoplasma・Ehrlichia・Cryptococcus）、腫瘍の視神経浸潤。全犬種・全年齢で発症。片側性>両側性。突然の失明で来院。",
+        "prevention_ja": "基礎疾患の管理。免疫抑制療法（プレドニゾロン＋アザチオプリン）で早期治療すれば視力回復の可能性あり。感染性の場合は原因微生物に対する特異的治療。",
         "urgency": "urgent",
     },
     {
@@ -3918,6 +3927,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"eye_redness", "squinting", "eye_discharge", "pain_on_touch"},
         "description": "Bleeding into the anterior chamber of the eye, which may indicate trauma, coagulopathy, or intraocular tumor.",
         "description_ja": "眼の前房内の出血で、外傷、凝固障害、または眼内腫瘍を示唆することがあります。",
+        "pathophysiology_ja": "前房内への出血→虹彩・毛様体の血管破綻→前房内の血液貯留→(1)視軸の遮断→視力低下、(2)血液成分による房水流出路の閉塞→二次性緑内障、(3)後癒着の形成。外傷性が最多だが、自然発生例は重大な全身疾患（凝固障害・眼内腫瘍）のサインとして精査が必須。",
+        "causes_ja": "外傷性（最多：頭部打撃・交通事故）。非外傷性：凝固障害（ITP・殺鼠剤中毒・DIC・vWD）、眼内腫瘍（メラノーマ・リンパ腫）、全身性高血圧、網膜剥離、ぶどう膜炎。片眼性の自然発生は眼内腫瘍の除外が必要。",
+        "prevention_ja": "外傷の予防。凝固障害の管理。安静・眼圧モニタリング・アトロピン点眼（後癒着予防）で管理。眼内腫瘍が疑われる場合は眼球エコー→眼球摘出を検討。",
         "urgency": "urgent",
     },
     # ---- Dental / Oral ----
