@@ -2360,7 +2360,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "トカゲにおける卵関連体腔炎の原因: 破裂卵胞や停滞卵による腹膜炎。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "卵関連体腔炎はトカゲにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
+        "treatment": "EMERGENCY: Coeliotomy + lavage under isoflurane. Ceftazidime 20 mg/kg IM q72h + Enrofloxacin 5-10 mg/kg IM q24h. Warmed fluids. OHE/salpingectomy. Prognosis guarded.",
         "treatment_ja": "トカゲにおける卵関連体腔炎の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "卵関連体腔炎の予防には安全で種に適した飼育環境の整備、鋭利物・危険物の除去、適切な取り扱い技術、他の動物との接触時の監視、温度管理、落下防止策が含まれる。",
