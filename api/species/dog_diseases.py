@@ -3168,6 +3168,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "lethargy", "stiffness", "anxiety"},
         "description": "A functional pancreatic tumor overproducing insulin and causing severe hypoglycemia.",
         "description_ja": "インスリンを過剰産生する膵臓の機能性腫瘍で、重度の低血糖を引き起こします。",
+        "pathophysiology_ja": "膵β細胞腫瘍→インスリンの自律的過剰分泌→低血糖（BG<60mg/dL）→脳のグルコース欠乏→脱力・運動失調・けいれん・昏迷。低血糖時にインスリン値が不適切に高値。約50%が悪性で肝臓・リンパ節に転移。",
+        "causes_ja": "膵β細胞の腫瘍性増殖。中高齢犬（8〜12歳）に好発。大型犬（ジャーマンシェパード、アイリッシュセッター、ラブラドール）。空腹時・運動後に低血糖発作が誘発。",
+        "prevention_ja": "確実な予防法はない。空腹時低血糖エピソードの早期受診。少量頻回食（低炭水化物・高蛋白・高脂肪食）で低血糖を最小化。",
         "urgency": "urgent",
     },
     {
@@ -3486,6 +3489,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "appetite_loss", "lethargy", "vomiting"},
         "description": "Severe dilation of the colon resulting in chronic constipation and inability to defecate normally.",
         "description_ja": "結腸の重度な拡張により、慢性便秘と正常な排便不能を引き起こします。",
+        "pathophysiology_ja": "結腸の慢性的な拡張→結腸壁の平滑筋の不可逆的伸展→蠕動能の喪失→糞便の異常貯留→巨大糞塊の形成→排便不能。犬では猫ほど一般的でないが、慢性便秘の放置で進行。",
+        "causes_ja": "慢性便秘の放置（最多）、骨盤骨折後の骨盤腔狭窄、神経原性（仙骨脊髄損傷・馬尾症候群）、甲状腺機能低下症、会陰ヘルニア（直腸偏位）。",
+        "prevention_ja": "慢性便秘の早期管理（高食物繊維食・ラクツロース・シサプリド）。重度は結腸亜全摘術（subtotal colectomy）。",
         "urgency": "urgent",
     },
     {
@@ -3773,6 +3779,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "lethargy", "stiffness", "weight_loss"},
         "description": "Excess aldosterone production causing potassium depletion, muscle weakness, and hypertension.",
         "description_ja": "アルドステロンの過剰産生によりカリウム欠乏、筋力低下、高血圧を引き起こします。",
+        "pathophysiology_ja": "副腎皮質球状層の腫瘍/過形成→アルドステロン過剰分泌→腎遠位尿細管でNa再吸収亢進＋K排泄亢進→低カリウム血症（筋力低下・不整脈）＋高血圧。犬では稀だが副腎腫瘤の鑑別として重要。",
+        "causes_ja": "副腎皮質腺腫/腺癌（片側性が多い）。犬では非常に稀。クッシング症候群・褐色細胞腫との副腎腫瘤の鑑別が重要。",
+        "prevention_ja": "確実な予防法はない。副腎腫瘤発見時のアルドステロン/レニン比測定。外科的副腎摘出が治療の柱。",
         "urgency": "urgent",
     },
     {
@@ -3781,6 +3790,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"weight_gain", "excessive_thirst", "excessive_urination", "lethargy", "stiffness", "difficulty_breathing"},
         "description": "Excessive growth hormone production causing enlargement of body tissues, insulin resistance, and organ dysfunction.",
         "description_ja": "成長ホルモンの過剰産生により体組織の肥大、インスリン抵抗性、臓器機能障害を引き起こします。",
+        "pathophysiology_ja": "成長ホルモン（GH）の自律的過剰産生→IGF-1の上昇→軟部組織の肥大（顔面・四肢・舌）・骨格の過成長（下顎突出）・関節肥厚。GHのインスリン拮抗作用→インスリン抵抗性→糖尿病。犬では外因性プロゲステロン投与や発情周期のプロゲステロンが乳腺GH産生を誘導（猫と異なり下垂体腺腫は稀）。",
+        "causes_ja": "犬：外因性プロゲステロン投与（最多）、未避妊雌犬の発情後期プロゲステロン上昇による乳腺GH産生。下垂体腺腫は犬では稀（猫では最多の原因）。避妊手術またはプロゲステロン中止で改善することが多い。",
+        "prevention_ja": "プロゲステロン製剤の回避、未避妊雌犬でGH過剰が疑われる場合は避妊手術（プロゲステロン由来のGH産生を停止）。",
         "urgency": "urgent",
     },
     {
@@ -3856,6 +3868,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "skin_redness", "swelling", "hair_loss", "fever", "lethargy"},
         "description": "Inflammation and necrosis of blood vessels in the skin caused by immune-mediated reactions or infections.",
         "description_ja": "免疫介在性反応や感染症による皮膚の血管の炎症と壊死です。",
+        "pathophysiology_ja": "皮膚の小血管壁への免疫複合体沈着→補体活性化→好中球浸潤→血管壁壊死（白血球破砕性血管炎）→皮膚の虚血性壊死→潰瘍・痂皮・点状出血。耳介辺縁・足底パッド・尾尖に好発（末梢循環が乏しい部位）。",
+        "causes_ja": "免疫介在性（特発性、最多）、薬剤誘発性（ワクチン後・抗菌薬後）、感染性（Ehrlichia・FeLV関連）、食物アレルギー関連、寒冷凝集素症。狂犬病ワクチン接種部位の局所血管炎が特に知られている。",
+        "prevention_ja": "ワクチン後血管炎の既往犬では同一ワクチンの再接種を慎重に検討。免疫抑制療法（プレドニゾロン＋ダプソン/ペントキシフィリン）。",
         "urgency": "urgent",
     },
     {
@@ -3939,6 +3954,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"drooling", "appetite_loss", "pain_on_touch", "skin_lesions", "weight_loss"},
         "description": "Severe immune-mediated oral mucosal ulceration triggered by contact with dental plaque.",
         "description_ja": "歯垢との接触により誘発される重度の免疫介在性口腔粘膜潰瘍です。",
+        "pathophysiology_ja": "歯垢中の細菌抗原に対する過剰な免疫反応→口腔粘膜（特に歯と接触する頬粘膜・舌背）の激しい潰瘍形成→「kissing ulcers」（歯冠に接する粘膜面の対称性潰瘍）が特徴的。猫の慢性歯肉口内炎（FCGS）の犬版。極度の疼痛→摂食拒否→体重減少。",
+        "causes_ja": "歯垢抗原に対するIV型過敏反応が主因。特定の犬種好発はないが、マルチーズ・キャバリアに報告あり。歯垢除去で一時改善するが再発率が高い。確定診断は口腔粘膜の生検（界面皮膚炎パターン）。",
+        "prevention_ja": "歯垢コントロール（毎日の歯磨き・定期的なスケーリング）。免疫抑制療法（シクロスポリン・プレドニゾロン）。不応性の場合は全臼歯抜歯（猫FCGSと同様のアプローチ）。",
         "urgency": "urgent",
     },
     {
@@ -3994,6 +4012,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "appetite_loss", "weight_loss", "vomiting", "bloated_abdomen", "fever"},
         "description": "Lymphoma primarily affecting the liver, causing hepatomegaly, jaundice, and systemic illness.",
         "description_ja": "主に肝臓を侵すリンパ腫で、肝腫大、黄疸、全身性の病態を引き起こします。",
+        "pathophysiology_ja": "肝臓へのリンパ球の腫瘍性浸潤→びまん性肝腫大→肝機能障害→黄疸・低アルブミン血症・凝固障害。肝酵素（ALT・ALP）の著明な上昇。多中心性リンパ腫の肝浸潤（最多）と原発性肝リンパ腫（稀）がある。",
+        "causes_ja": "多中心性リンパ腫の肝浸潤が最多（犬のリンパ腫の80%は多中心性）。原発性肝リンパ腫は稀。T細胞型はB細胞型より予後不良。中高齢犬。ゴールデン・ボクサーにリンパ腫好発。",
+        "prevention_ja": "確実な予防法はない。CHOP系化学療法（COP/CHOP）で多中心性リンパ腫の寛解率80%、MST 12〜14ヶ月。肝リンパ腫は化学療法への反応が不良なことがある。",
         "urgency": "urgent",
     },
     {
@@ -4002,6 +4023,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "straining_urinate", "lethargy", "excessive_thirst", "weight_loss", "lumps"},
         "description": "Malignant tumor of the anal glands that often causes hypercalcemia and can metastasize to lymph nodes.",
         "description_ja": "肛門腺の悪性腫瘍で、高カルシウム血症を引き起こし、リンパ節に転移することがあります。",
+        "pathophysiology_ja": "肛門嚢アポクリン腺の悪性増殖→仙骨下リンパ節転移（50〜90%）→肺転移。PTHrP産生→腫瘍随伴性高カルシウム血症（25〜50%）→多飲多尿・腎障害・筋力低下。高Ca血症が初発症状として発見されることがある。",
+        "causes_ja": "原因不明。中高齢犬（平均10〜11歳）。スパニエル種に好発との報告。直腸検査で偶然発見されることが多い。高Ca血症の犬では本疾患を鑑別に挙げる。",
+        "prevention_ja": "中高齢犬の定期的な直腸検査（肛門嚢触診）。外科的切除＋仙骨下リンパ節郭清。MST 12〜18ヶ月（手術＋化学療法）。",
         "urgency": "urgent",
     },
     {
@@ -4010,6 +4034,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_fl", "limping_fr", "limping_rl", "limping_rr", "swelling", "pain_on_touch", "lumps"},
         "description": "A malignant tumor of cartilage that can occur in bones, nasal cavity, or ribs.",
         "description_ja": "軟骨の悪性腫瘍で、骨、鼻腔、または肋骨に発生することがあります。",
+        "pathophysiology_ja": "軟骨細胞由来の悪性腫瘍→局所浸潤性の増殖→骨破壊。骨肉腫に次ぐ犬で2番目に多い原発性骨腫瘍。扁平骨（鼻腔・肋骨・骨盤）に好発（骨肉腫は四肢長骨に好発で対照的）。転移率は骨肉腫より低い（20〜30%）。",
+        "causes_ja": "原因不明。大型犬に多い。中高齢犬。鼻腔発生が最多（犬の鼻腔腫瘍の10%）、次いで肋骨・骨盤。骨肉腫との鑑別は生検（軟骨基質の存在）。",
+        "prevention_ja": "確実な予防法はない。広範囲切除が治療の柱（鼻腔は放射線療法）。骨肉腫より緩徐な経過でMSTが長い（鼻腔型：放射線でMST 18〜24ヶ月）。",
         "urgency": "urgent",
     },
     {
@@ -4018,6 +4045,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "weight_loss", "appetite_loss", "rapid_breathing"},
         "description": "Primary lung cancer originating from the glandular tissue of the lung, causing chronic cough and respiratory distress.",
         "description_ja": "肺の腺組織から発生する原発性肺癌で、慢性咳嗽と呼吸困難を引き起こします。",
+        "pathophysiology_ja": "肺胞または気管支の腺上皮の悪性増殖→肺実質内の孤立性腫瘤（最多）→気道閉塞・胸水貯留・肺実質の圧排→慢性咳嗽・呼吸困難。犬の原発性肺腫瘍の75%が腺癌。右肺後葉に好発。転移性肺腫瘍（他臓器からの肺転移）との鑑別が重要。",
+        "causes_ja": "原因不明。受動喫煙との関連が示唆（長頭種で鼻腔フィルターが薄く肺への到達量が多い）。中高齢犬（10〜12歳）。ボクサー・バーニーズに報告多い。偶発的に胸部X線で発見されることが多い。",
+        "prevention_ja": "受動喫煙の回避。慢性咳嗽の高齢犬は胸部X線で精査。孤立性腫瘤で転移なし→肺葉切除でMST 12〜20ヶ月。リンパ節転移ありは予後不良。",
         "urgency": "urgent",
     },
     {
@@ -4026,6 +4056,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "weight_loss", "appetite_loss", "bloody_stool", "lethargy"},
         "description": "A malignant smooth muscle tumor of the intestine causing GI obstruction, bleeding, and weight loss.",
         "description_ja": "腸管の悪性平滑筋腫瘍で、消化管閉塞、出血、体重減少を引き起こします。",
+        "pathophysiology_ja": "腸管壁の平滑筋細胞由来の悪性腫瘍→腸管内腔への突出（部分閉塞）または漿膜側への増殖→消化管出血・閉塞・穿孔。空腸・盲腸に好発。GIST（消化管間質腫瘍）との病理学的鑑別がc-KIT免疫染色で重要（治療法が異なる）。転移率は中等度。",
+        "causes_ja": "原因不明。中高齢犬。GISTとの鑑別：GIST はc-KIT陽性でイマチニブ（TKI）に反応。平滑筋肉腫はc-KIT陰性。腸管の壁内腫瘤として外科的に発見されることが多い。",
+        "prevention_ja": "確実な予防法はない。慢性嘔吐・消化管出血・体重減少の高齢犬は腹部エコーで精査。外科的切除で予後良好（広範囲切除可能な場合のMST >2年）。",
         "urgency": "urgent",
     },
     {
@@ -4034,6 +4067,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "limping_fl", "limping_fr", "limping_rl", "limping_rr", "weight_loss", "excessive_thirst", "excessive_urination"},
         "description": "Cancer of plasma cells in bone marrow causing bone pain, kidney damage, and immunodeficiency.",
         "description_ja": "骨髄の形質細胞の癌で、骨痛、腎障害、免疫不全を引き起こします。",
+        "pathophysiology_ja": "骨髄内の形質細胞の腫瘍性増殖→(1)骨溶解性病変→病的骨折・骨痛、(2)モノクローナルガンマグロブリン血症（Mスパイク）→過粘稠度症候群（網膜出血・神経症状）、(3)ベンスジョーンズ蛋白尿→腎障害、(4)正常免疫グロブリン産生抑制→易感染性。骨髄の腫瘍性占拠→汎血球減少。",
+        "causes_ja": "原因不明。中高齢犬（8〜12歳）。ジャーマンシェパードに報告多い。血清蛋白電気泳動でMスパイク＋骨X線で溶解性病変＋骨髄検査で形質細胞>20%で確定診断。",
+        "prevention_ja": "確実な予防法はない。メルファラン＋プレドニゾロン（MP療法）が標準化学療法。MST 18〜24ヶ月。高Ca血症と過粘稠度症候群は緊急管理が必要。",
         "urgency": "urgent",
     },
     {
@@ -4053,6 +4089,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lumps", "constipation", "bloody_stool", "straining_urinate", "weight_loss"},
         "description": "Malignant perianal gland tumor, more common in neutered males; tends to invade locally and metastasize.",
         "description_ja": "肛門周囲腺の悪性腫瘍で、去勢した雄犬に多く、局所浸潤と転移の傾向があります。",
+        "pathophysiology_ja": "肛門周囲腺（肝様腺）の悪性増殖→局所浸潤→仙骨下リンパ節・肺への転移。良性の肛門周囲腺腫（ホルモン依存性、未去勢雄に多い）とは異なり、腺癌はホルモン非依存性で去勢犬・雌犬にも発生。",
+        "causes_ja": "原因不明。去勢雄犬に多い（腺腫とは対照的）。中高齢犬。ジャーマンシェパード・北極犬種に報告多い。良性腺腫との鑑別は生検が必須。",
+        "prevention_ja": "確実な予防法はない。肛門周囲の腫瘤は早期に生検。広範囲切除＋放射線療法。放射線のみでもMST 2年以上の報告あり。",
         "urgency": "urgent",
     },
     {
@@ -4061,6 +4100,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"nasal_discharge", "sneezing", "difficulty_breathing", "eye_discharge", "appetite_loss"},
         "description": "Lymphoma arising in the nasal cavity, causing chronic nasal discharge, epistaxis, and facial deformity.",
         "description_ja": "鼻腔に発生するリンパ腫で、慢性鼻汁、鼻出血、顔面変形を引き起こします。",
+        "pathophysiology_ja": "鼻腔粘膜のリンパ球の腫瘍性増殖→鼻腔内の腫瘤形成→一側性→両側性の鼻汁（粘液性→血性）→鼻骨の破壊→顔面変形。篩骨板への浸潤→脳への直接浸潤。上皮向性T細胞リンパ腫が犬の鼻腔リンパ腫で最多。鼻腔腺癌との鑑別が生検で必要。",
+        "causes_ja": "原因不明。長頭種に好発（鼻腔腫瘍全般と同様）。中高齢犬。一側性の慢性鼻汁・鼻出血が初発症状。CT→鼻腔内生検で確定診断。",
+        "prevention_ja": "確実な予防法はない。放射線療法＋化学療法（CHOP）が標準。鼻腔リンパ腫は鼻腔腺癌より化学療法への反応が良好でMST 12〜24ヶ月。",
         "urgency": "urgent",
     },
     {
@@ -4092,6 +4134,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "appetite_loss", "skin_lesions", "swelling"},
         "description": "Immune destruction of neutrophils leading to severe susceptibility to bacterial infections.",
         "description_ja": "好中球の免疫介在性破壊で、細菌感染に対する重度の感受性を引き起こします。",
+        "pathophysiology_ja": "抗好中球自己抗体→好中球の破壊促進＋骨髄での成熟阻害→重度の好中球減少（<1,000/μL）→日和見細菌感染のリスク→敗血症。IMHA・ITPとの併発（免疫介在性二〜三系統血球減少症）がある。",
+        "causes_ja": "一次性（特発性、自己免疫性）。二次性：薬剤性（トリメトプリム・サルファ、フェノバルビタール）、パルボウイルス感染、骨髄腫瘍。犬種好発はないが、IMHA/ITP好発犬種と重複。",
+        "prevention_ja": "薬剤誘発性が疑われる場合は原因薬の中止。免疫抑制療法（プレドニゾロン）＋二次感染予防。G-CSF製剤は犬での使用経験が限られる。",
         "urgency": "urgent",
     },
     {
@@ -4100,6 +4145,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "skin_redness", "itching", "hair_loss", "fever"},
         "description": "An autoimmune blistering skin disease where antibodies attack the basement membrane zone.",
         "description_ja": "抗体が基底膜帯を攻撃する自己免疫性水疱性皮膚疾患です。",
+        "pathophysiology_ja": "表皮基底膜帯（BMZ）の構成蛋白（BP180/BP230）に対する自己抗体（IgG）→基底膜の破壊→表皮下水疱の形成→大型の緊満性水疱・びらん→二次感染。天疱瘡（表皮内水疱）とは異なり表皮下水疱（基底膜の破壊）が特徴。口腔・皮膚移行部・腋窩・鼠径部に好発。",
+        "causes_ja": "一次性（特発性自己免疫性）。薬剤誘発性の報告もあり。犬では稀な疾患。コリー・シェルティ・ドーベルマンに報告あり。皮膚生検で表皮下水疱＋基底膜帯のIgG沈着（直接免疫蛍光法）で確定診断。",
+        "prevention_ja": "確実な予防法はない。免疫抑制療法（プレドニゾロン＋アザチオプリン/ミコフェノール酸モフェチル）。天疱瘡より治療反応は良好な場合が多い。",
         "urgency": "urgent",
     },
     {
@@ -4108,6 +4156,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "pain_on_touch", "stiffness", "lethargy", "reluctance_move", "appetite_loss"},
         "description": "Non-infectious inflammation of the meninges caused by immune dysregulation, causing neck pain and fever.",
         "description_ja": "免疫調節障害による非感染性髄膜炎で、頸部痛と発熱を引き起こします。",
+        "pathophysiology_ja": "髄膜への免疫細胞浸潤→無菌性髄膜炎→頸部硬直・激しい疼痛・高熱。SRMAと同スペクトラムの疾患。CSF解析で好中球性/リンパ球性多細胞症。細菌培養陰性が免疫介在性の根拠。",
+        "causes_ja": "原因不明の免疫介在性。SRMA（最も一般的な犬の免疫介在性髄膜炎）と重複する概念。若齢犬に好発。ビーグル・バーニーズに多い。",
+        "prevention_ja": "ステロイド療法で予後良好。プレドニゾロン2mg/kg→6ヶ月以上の漸減が標準。",
         "urgency": "urgent",
     },
     {
@@ -4116,6 +4167,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"eye_redness", "squinting", "skin_lesions", "hair_loss", "eye_discharge"},
         "description": "An autoimmune disease targeting melanocytes causing uveitis, depigmentation of the nose and skin.",
         "description_ja": "メラノサイトを標的とする自己免疫疾患で、ぶどう膜炎と鼻・皮膚の色素脱失を引き起こします。",
+        "pathophysiology_ja": "メラノサイトに対する細胞性免疫反応→(1)両側性肉芽腫性ぶどう膜炎（前部＋後部）→網膜剥離・失明、(2)皮膚・鼻鏡・口唇のメラノサイト破壊→色素脱失・白毛症。眼症状が先行し、皮膚症状が後に出現するのが典型的。",
+        "causes_ja": "メラノサイト特異的抗原に対するT細胞介在性自己免疫疾患。秋田犬（最も好発）、サモエド、シベリアンハスキー、シェルティに好発。若齢〜中齢犬。DLA遺伝子多型との関連が報告。",
+        "prevention_ja": "確実な予防法はない。早期の積極的免疫抑制療法（プレドニゾロン＋アザチオプリン）が視力温存に不可欠。ぶどう膜炎の治療が遅れると二次性緑内障→失明。皮膚色素脱失は美容的問題のみ。",
         "urgency": "urgent",
     },
     {
@@ -4124,6 +4178,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "skin_lesions", "limping_fl", "limping_fr", "limping_rl", "limping_rr", "skin_redness"},
         "description": "An autoimmune condition where antibodies attack red blood cells at low temperatures, causing peripheral tissue necrosis.",
         "description_ja": "低温で赤血球を攻撃する抗体による自己免疫疾患で、末梢組織壊死を引き起こします。",
+        "pathophysiology_ja": "寒冷反応性IgM自己抗体→低温（<37℃）で赤血球を凝集→補体活性化→末梢組織（耳介・尾尖・足趾・鼻鏡）の微小血管閉塞→チアノーゼ→壊死・脱落。温かい環境では凝集が解離するため症状は寒冷曝露後に増悪。",
+        "causes_ja": "一次性（特発性）。二次性：リンパ腫・白血病・慢性感染症に伴う。犬では稀な疾患。冬季に悪化。耳介辺縁・尾尖・足趾の壊死として来院。",
+        "prevention_ja": "寒冷環境の回避が最重要。保温管理。二次性の場合は基礎疾患の治療。プレドニゾロンへの反応は不良なことが多い（IgM抗体はステロイドに抵抗性）。",
         "urgency": "urgent",
     },
     # ---- Toxicoses ----
@@ -4133,6 +4190,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "lethargy", "stiffness", "fever", "limping_rl", "limping_rr", "reluctance_move"},
         "description": "Ingestion of macadamia nuts causing weakness, vomiting, hyperthermia, and hind limb tremors in dogs.",
         "description_ja": "マカダミアナッツの摂取により犬に衰弱、嘔吐、高体温、後肢の震えを引き起こします。",
+        "pathophysiology_ja": "毒性物質は未同定。摂取後6〜24時間で後肢の衰弱・起立不能・振戦→嘔吐・高体温（39.5〜40.5℃）・腹痛。メカニズムは不明だが筋肉・関節への直接毒性またはPG阻害が示唆される。通常24〜48時間で自然回復する自己限定性中毒。致死例の報告はほとんどない。",
+        "causes_ja": "マカダミアナッツの摂取。毒性量は2.4g/kg以上。チョコレートマカダミアクッキー等の複合製品ではチョコレート中毒が加わり重篤化。犬に特異的な中毒（猫では報告なし）。",
+        "prevention_ja": "マカダミアナッツ製品のペットからの隔離。支持療法（輸液・疼痛管理・制吐薬）。チョコレートとの複合摂取は両方の中毒量を計算。",
         "urgency": "urgent",
     },
     {
@@ -4185,6 +4245,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "lethargy", "appetite_loss", "excessive_thirst", "dehydration"},
         "description": "While more dangerous to cats, certain lily species can cause GI upset in dogs; peace lilies cause oral irritation.",
         "description_ja": "猫にはより危険ですが、特定のユリ種は犬に消化器症状を引き起こし、スパティフィラムは口腔刺激を引き起こします。",
+        "pathophysiology_ja": "犬ではLilium属・Hemerocallis属のユリは猫ほど腎毒性を示さないが、大量摂取で消化器症状（嘔吐・下痢）。スパティフィラム（peace lily）・ポトス：シュウ酸カルシウム結晶→口腔粘膜の機械的刺激→流涎・口腔痛・嘔吐。スズラン（Convallaria majalis）：強心配糖体→徐脈・不整脈→犬に致死的。",
+        "causes_ja": "ユリ科植物の摂取。犬ではスズラン中毒が最も危険（強心配糖体コンバラトキシン）。Lilium属は犬には軽度の消化器症状のみ（猫とは全く異なる）。スパティフィラム・ポトスは観葉植物として室内に多い。",
+        "prevention_ja": "スズランの犬からの隔離（庭への植栽回避）、観葉植物の犬の手の届かない場所への配置。スズラン中毒はアトロピン＋ジゴキシン特異的Fab抗体で治療。",
         "urgency": "urgent",
     },
     {
@@ -4261,6 +4324,9 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Spirocerca lupi Infection",
+        "pathophysiology_ja": "糞虫（中間宿主）摂取→L3幼虫が胃壁穿通→大動脈壁を経由して食道壁に到達→食道の肉芽腫形成→肉腫への悪性変化（食道線維肉腫/骨肉腫）。大動脈瘤・肥大性骨症の合併。",
+        "causes_ja": "Spirocerca lupi（食道虫）。中間宿主（糞虫）または待機宿主（トカゲ・カエル・鳥）の摂取。温暖な気候（中東・アフリカ・南米・東南アジア）で流行。日本での報告は少ないが輸入犬に注意。",
+        "prevention_ja": "流行地域でのドラメクチン/イベルメクチンの定期投与。内視鏡で食道内肉芽腫を確認・モニタリング。",
         "name_ja": "食道虫症",
         "symptoms": {"vomiting", "regurgitation", "weight_loss", "coughing", "difficulty_breathing"},
         "description": "Esophageal worm infection forming granulomas that can transform into sarcomas; endemic in warm climates.",
@@ -4273,6 +4339,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "weight_loss", "bloody_stool", "collapse"},
         "description": "Parasitic worm living in the pulmonary arteries and heart, causing coagulopathy, coughing, and potentially fatal bleeding.",
         "description_ja": "肺動脈と心臓に寄生する線虫で、凝固障害、咳嗽、致死的出血を引き起こします。",
+        "pathophysiology_ja": "L3幼虫がカタツムリ（中間宿主）から経口感染→腸管壁穿通→血行性に右心・肺動脈に到達→成虫化→肺動脈の内皮障害→血管炎・肺高血圧→凝固障害（DIC様）→消化管出血・皮下出血・CNS出血。致死的出血が突然発症することがある。",
+        "causes_ja": "Angiostrongylus vasorum（フレンチハートワーム）。カタツムリ・ナメクジ（中間宿主）の摂取。ヨーロッパ（特にイギリス・フランス）で増加傾向。日本での報告は限定的。若齢犬に好発。フィラリアとは異なる寄生虫だが症状が類似。",
+        "prevention_ja": "モキシデクチン含有駆虫薬の月1回投与（流行地域）。カタツムリ・ナメクジとの接触回避。凝固障害を伴う咳嗽犬ではAngiostrongylusを鑑別に含める。",
         "urgency": "urgent",
     },
     {
@@ -4289,6 +4358,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "bloody_stool", "weight_loss", "lethargy", "vomiting", "fever"},
         "description": "Blood fluke infection causing granulomatous inflammation of the intestines and liver.",
         "description_ja": "住血吸虫の感染により腸管と肝臓の肉芽腫性炎症を引き起こします。",
+        "pathophysiology_ja": "Heterobilharzia americanaのセルカリアが経皮感染→門脈系で成虫化→腸管壁・肝臓に虫卵沈着→肉芽腫性炎症→腸壁の肥厚・肝線維化→慢性出血性下痢・体重減少・高Ca血症（肉芽腫からのカルシトリオール産生）。",
+        "causes_ja": "Heterobilharzia americana（北米南部に分布、犬が終宿主）。淡水カタツムリ（中間宿主）から放出されたセルカリアが経皮感染。日本での報告はないが、輸入犬・海外渡航犬に注意。",
+        "prevention_ja": "流行地域の淡水への犬の曝露回避。プラジカンテル＋フェンベンダゾールで治療。",
         "urgency": "urgent",
     },
     # ---- Congenital / Breed-Specific ----
@@ -4298,6 +4370,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "seizures", "vomiting", "appetite_loss", "excessive_thirst", "excessive_urination", "circling"},
         "description": "Acquired abnormal blood vessels bypassing the liver, usually secondary to chronic liver disease and portal hypertension.",
         "description_ja": "慢性肝疾患と門脈圧亢進症に続発する後天性の肝臓を迂回する異常血管です。",
+        "pathophysiology_ja": "慢性肝疾患→門脈圧亢進→門脈系と全身静脈系の間に多発性の側副血行路（acquired portosystemic collaterals）が発達→門脈血が肝臓を迂回→高アンモニア血症→肝性脳症。先天性PSSとは異なり多発性・蛇行性の血管。腹水の合併が高率。",
+        "causes_ja": "慢性肝炎（銅蓄積性・特発性）、肝硬変、門脈の先天的低形成（microphepatica）。基礎にある肝疾患の管理が重要。先天性PSSとは治療アプローチが全く異なる（後天性は外科的閉鎖の適応なし）。",
+        "prevention_ja": "慢性肝疾患の早期管理。肝性脳症は低蛋白食＋ラクツロース＋抗菌薬（メトロニダゾール/ネオマイシン）で内科管理。",
         "urgency": "urgent",
     },
     {
@@ -4314,6 +4389,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "collapse", "difficulty_breathing", "bloated_abdomen", "coughing"},
         "description": "Congenital malformation of the pulmonic valve causing right ventricular outflow obstruction.",
         "description_ja": "肺動脈弁の先天性奇形で右心室流出路閉塞を引き起こします。",
+        "pathophysiology_ja": "肺動脈弁の形態異常（弁尖の肥厚・癒合・弁下/弁上狭窄）→右室流出路閉塞→右室の圧負荷→右室求心性肥大→右心不全（重症例）。圧較差で重症度分類：軽度<50mmHg、中等度50〜80mmHg、重度>80mmHg。犬で3番目に多い先天性心疾患。",
+        "causes_ja": "先天性。ブルドッグ（弁下型が多い）、ビーグル、ボクサー、コッカースパニエル、サモエドに好発。子犬検診時の心雑音（左心基底部のcrescendo-decrescendo収縮期雑音）で発見。",
+        "prevention_ja": "好発犬種の心臓聴診スクリーニング。繁殖前の心エコー。重度はバルーン弁形成術で改善可能。",
         "urgency": "urgent",
     },
     {
@@ -4322,6 +4400,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "collapse", "rapid_breathing"},
         "description": "Congenital malformation of the mitral valve causing mitral regurgitation and left heart failure in young dogs.",
         "description_ja": "僧帽弁の先天性奇形で僧帽弁逆流と若い犬の左心不全を引き起こします。",
+        "pathophysiology_ja": "僧帽弁の先天的形成異常（弁尖の短縮・肥厚、腱索の異常、乳頭筋の奇形）→僧帽弁逆流（MR）→左房拡大→肺うっ血→若齢犬での心不全。加齢性MMVD（粘液腫様変性）とは異なり先天性で若齢犬に発症。",
+        "causes_ja": "先天性。グレートデーン、ジャーマンシェパード、ブルテリア、ゴールデン、ニューファンドランドに報告。若齢犬（1歳未満）で心雑音＋心不全徴候で発見。心エコーで確定診断。",
+        "prevention_ja": "好発犬種の心臓スクリーニング。重度は利尿薬＋ピモベンダン＋ACE阻害薬で心不全管理。僧帽弁修復術は限られた施設で実施可能。",
         "urgency": "urgent",
     },
     {
@@ -4330,6 +4411,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "fever", "weight_loss", "blood_urine", "excessive_panting"},
         "description": "A hereditary enzyme deficiency in English Springer Spaniels and Cocker Spaniels causing hemolytic crises.",
         "description_ja": "イングリッシュスプリンガースパニエルやコッカースパニエルの遺伝性酵素欠損症で、溶血性発作を引き起こします。",
+        "pathophysiology_ja": "PFK-M（筋型ホスホフルクトキナーゼ）遺伝子変異→赤血球内のPFK活性低下→赤血球のATP産生低下→赤血球の脆弱化→アルカローシス（過換気時）で赤血球が溶血→発作性血管内溶血・ヘモグロビン尿。運動後・興奮後・過換気後にトリガー。筋症状は軽度。",
+        "causes_ja": "常染色体劣性遺伝。イングリッシュスプリンガースパニエル・アメリカンコッカースパニエルに特異的。DNA検査（PFK-M遺伝子）でキャリア・罹患犬を同定可能。",
+        "prevention_ja": "DNA検査による繁殖管理（キャリア×キャリアの交配回避）。罹患犬は激しい運動・興奮の回避（溶血発作のトリガー）。",
         "urgency": "urgent",
     },
     {
@@ -4338,6 +4422,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "weight_loss", "excessive_panting", "fever", "appetite_loss"},
         "description": "Hereditary red blood cell enzyme deficiency causing chronic hemolytic anemia, seen in Basenjis and Beagles.",
         "description_ja": "バセンジーやビーグルに見られる遺伝性赤血球酵素欠損症で、慢性溶血性貧血を引き起こします。",
+        "pathophysiology_ja": "PK-R（赤血球型ピルビン酸キナーゼ）遺伝子変異→赤血球の解糖系ATP産生障害→赤血球寿命の短縮→慢性溶血性貧血→代償性骨髄過形成→骨髄線維症→造血不全→致死的。PCV 15〜30%の持続的貧血。脾腫を伴う。",
+        "causes_ja": "常染色体劣性遺伝。バセンジー（最多）、ビーグル、WHWT、チワワ、パグに報告。DNA検査でキャリア同定可能。慢性貧血＋脾腫の若齢犬で疑う。",
+        "prevention_ja": "DNA検査による繁殖管理。治療法はなく支持療法のみ。多くは1〜5歳で骨髄線維症により死亡。",
         "urgency": "urgent",
     },
     # ---- NEW DISEASES BATCH 3 (GI / Respiratory / Urogenital / Behavioral) ----
@@ -4347,6 +4434,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "weight_loss", "appetite_loss", "lethargy", "bloody_stool", "abdominal_pain"},
         "description": "Malignant stomach tumor causing chronic vomiting, weight loss, and GI bleeding; poor prognosis.",
         "description_ja": "慢性嘔吐、体重減少、消化管出血を引き起こす胃の悪性腫瘍で、予後は不良です。",
+        "pathophysiology_ja": "胃粘膜上皮の悪性増殖→胃壁の肥厚・潰瘍形成→幽門閉塞（嘔吐の原因）・消化管出血。胃小弯・幽門部に好発。腺癌が最多。腹膜播種・肝臓転移が高率。診断時に多くが進行期。",
+        "causes_ja": "原因不明。ベルジアンシェパード（ベルジアンタービュレン）に好発との報告。中高齢の雄犬に多い。慢性嘔吐の高齢犬では内視鏡/エコーで精査すべき。ヘリコバクター感染との関連は犬では不明確。",
+        "prevention_ja": "確実な予防法はない。慢性嘔吐・体重減少の高齢犬の早期精査。外科的切除＋化学療法だが予後不良（MST 2〜6ヶ月）。",
         "urgency": "urgent",
     },
     {
@@ -4355,6 +4445,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "weight_loss", "appetite_loss", "bloody_stool", "lethargy"},
         "description": "Malignant tumor of the intestinal lining, most common in the colon and duodenum of older dogs.",
         "description_ja": "腸管内壁の悪性腫瘍で、高齢犬の結腸と十二指腸に最も多く見られます。",
+        "pathophysiology_ja": "腸管上皮の腺細胞の悪性増殖→環状に増殖し腸管内腔を狭窄（annular型）→部分/完全閉塞→嘔吐・体重減少。潰瘍型は消化管出血→貧血。結腸と十二指腸に好発。局所リンパ節転移が高率。",
+        "causes_ja": "原因不明。中高齢犬（平均9歳）。特定の犬種好発は不明確。慢性の消化器症状（嘔吐・下痢・体重減少）で精査すべき。エコー・内視鏡で診断。",
+        "prevention_ja": "確実な予防法はない。外科的切除（腸管切除吻合）が可能な場合のMSTは10〜15ヶ月。転移があれば予後不良。",
         "urgency": "urgent",
     },
     {
@@ -4363,6 +4456,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "vomiting_after_drinking", "weight_loss", "appetite_loss", "dehydration"},
         "description": "Narrowing of the pyloric outflow of the stomach causing projectile vomiting, seen in brachycephalic breeds.",
         "description_ja": "胃の幽門部の狭窄で噴出性嘔吐を引き起こし、短頭種に多く見られます。",
+        "pathophysiology_ja": "幽門部の粘膜肥厚（先天性）または筋層肥厚（後天性）→胃排出障害→食後の噴出性嘔吐（未消化食物）→体重減少・脱水・低クロール性代謝性アルカローシス（胃酸喪失）。食物は胃から排出されないが水分は通過可能（初期）。",
+        "causes_ja": "先天性：短頭種に好発（ボクサー、ブルドッグ、ボストンテリア）。後天性：慢性胃炎・胃潰瘍・胃腫瘍に続発する幽門筋肥厚。バリウム造影で「string sign」（幽門の糸状通過）。",
+        "prevention_ja": "確実な予防法はない。内科管理（制吐薬・シサプリド）が無効な場合はHeineke-Mikulicz幽門形成術またはFredet-Ramstedt幽門筋切開術。",
         "urgency": "urgent",
     },
     {
@@ -4382,6 +4478,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "appetite_loss", "fever", "lethargy", "abdominal_pain", "weight_loss"},
         "description": "Inflammation of the bile ducts and liver causing fever, jaundice, and abdominal pain.",
         "description_ja": "胆管と肝臓の炎症で、発熱、黄疸、腹痛を引き起こします。",
+        "pathophysiology_ja": "胆管への細菌感染（上行性：十二指腸から）→胆管の炎症・腫脹→胆汁うっ滞→黄疸。炎症が肝実質に波及→胆管肝炎。胆石・胆嚢粘液嚢腫による胆管閉塞が二次感染を促進。犬では猫ほど一般的ではない。",
+        "causes_ja": "上行性細菌感染（E. coli、Clostridium、Enterococcus）が最多。胆石・胆嚢粘液嚢腫・膵炎に続発。猫との違い：犬では好中球性/化膿性が多い（猫はリンパ球性が多い）。",
+        "prevention_ja": "胆嚢疾患の早期管理。培養に基づく抗菌薬療法。胆管閉塞がある場合は外科的減圧。",
         "urgency": "urgent",
     },
     {
@@ -4401,6 +4500,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"appetite_loss", "lethargy", "vomiting", "weight_loss", "bloated_abdomen"},
         "description": "Excessive fat accumulation in the liver causing hepatic dysfunction, often secondary to other diseases.",
         "description_ja": "肝臓への過剰な脂肪蓄積で肝機能障害を引き起こし、他の疾患に続発することが多いです。",
+        "pathophysiology_ja": "肝細胞内への過剰な脂肪蓄積→肝細胞の膨化・機能障害→胆汁うっ滞→黄疸。犬では猫と異なり一次性肝リピドーシスは稀で、ほぼ常に基礎疾患（DM、クッシング、甲状腺機能低下症、膵炎）に続発する。肥満犬にリスク。",
+        "causes_ja": "二次性が大部分：糖尿病、クッシング症候群、甲状腺機能低下症、ステロイド長期投与、肥満。猫のような食欲廃絶による一次性リピドーシスは犬では稀。基礎疾患の精査が不可欠。",
+        "prevention_ja": "基礎疾患（DM・クッシング等）の適切な管理。肥満の予防。ステロイドの最小有効用量での使用。",
         "urgency": "urgent",
     },
     {
@@ -4425,6 +4527,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "weight_loss", "bloated_abdomen", "lethargy", "appetite_loss", "vomiting"},
         "description": "Dilation of intestinal lymphatic vessels causing protein-losing enteropathy and malabsorption.",
         "description_ja": "腸リンパ管の拡張による蛋白漏出性腸症と吸収不良を引き起こします。",
+        "pathophysiology_ja": "腸粘膜リンパ管の拡張→リンパ液（蛋白・脂肪・リンパ球を含む）の腸管内腔への漏出→PLE（低アルブミン血症→腹水・胸水）、低Ca血症、リンパ球減少、低コレステロール血症。一次性（先天性リンパ管異常）と二次性（IBD・腫瘍による閉塞）に分類。",
+        "causes_ja": "一次性（先天性リンパ管異常）：ヨークシャーテリアに最も好発。二次性：IBD・腸リンパ腫・右心不全（リンパ還流障害）。内視鏡生検で拡張したリンパ管を確認。",
+        "prevention_ja": "確実な予防法はない。超低脂肪食（脂肪<10%）＋MCTオイル（リンパ管を経由せず門脈から吸収）が管理の柱。重症例はプレドニゾロン併用。",
         "urgency": "urgent",
     },
     {
@@ -4433,6 +4538,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"regurgitation", "drooling", "weight_loss", "appetite_loss", "vomiting_after_drinking"},
         "description": "Narrowing of the esophagus due to scarring from foreign bodies, caustic substances, or anesthesia reflux.",
         "description_ja": "異物、腐食性物質、麻酔時逆流による瘢痕で食道が狭窄した状態です。",
+        "pathophysiology_ja": "食道壁の全層性損傷→肉芽組織形成→線維性瘢痕→食道内腔の狭窄→固形食の通過障害→吐出（regurgitation）→体重減少。バリウム造影で狭窄部位を確認。",
+        "causes_ja": "麻酔中の胃食道逆流（最多の医原性原因）→逆流性食道炎→瘢痕性狭窄。食道異物の嵌頓後（特に骨片）。化学物質の誤飲。食道手術後。",
+        "prevention_ja": "麻酔時の適切な絶食管理、麻酔中の食道逆流防止（オメプラゾール前投与の検討）。バルーン拡張術（内視鏡下）で狭窄を拡張。複数回の拡張が必要なことが多い。",
         "urgency": "urgent",
     },
     {
@@ -4461,6 +4569,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "nasal_discharge", "lethargy", "rapid_breathing"},
         "description": "Allergic lung disease with eosinophilic infiltration causing chronic cough and breathing difficulty.",
         "description_ja": "好酸球浸潤を伴うアレルギー性肺疾患で、慢性咳嗽と呼吸困難を引き起こします。",
+        "pathophysiology_ja": "気管支・肺への好酸球浸潤→気管支粘膜の炎症・粘液過分泌→気管支壁の肥厚→気道閉塞→慢性咳嗽・呼吸困難。BAL（気管支肺胞洗浄）で好酸球>20%が診断的。アレルギー性機序が主因。",
+        "causes_ja": "原因不明だがアレルギー性（環境アレルゲン・寄生虫抗原に対する過敏反応）。シベリアンハスキー・マラミュートに好発との報告。若齢〜中齢犬。肺寄生虫（肺虫・回虫幼虫移行）の除外が必須。",
+        "prevention_ja": "環境アレルゲンの回避。プレドニゾロン（1〜2mg/kg）で反応良好。ステロイド減量困難例はシクロスポリン。",
         "urgency": "urgent",
     },
     {
@@ -4469,6 +4580,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "fever", "lethargy", "appetite_loss", "nasal_discharge"},
         "description": "Replacement of air in lung tissue with fluid, pus, or cellular infiltrate from severe infection or inflammation.",
         "description_ja": "重度の感染や炎症による肺組織の空気が液体、膿、細胞浸潤で置換された状態です。",
+        "pathophysiology_ja": "肺胞内に炎症性滲出液（細菌性肺炎）・膿（肺膿瘍）・血液（肺出血）・腫瘍細胞が充満→肺胞のガス交換能の喪失→低酸素血症。X線で均一な不透過性（肺葉パターン：air bronchogram陽性）。重症細菌性肺炎・誤嚥性肺炎で最も一般的。",
+        "causes_ja": "細菌性肺炎（最多）、誤嚥性肺炎、肺膿瘍、肺出血（凝固障害・肺虫症）、肺腫瘍。不応性肺炎で肺葉切除が必要になることがある。",
+        "prevention_ja": "肺炎の早期適切な治療。培養に基づく抗菌薬選択。不応性硬化の場合は肺葉切除を検討。",
         "urgency": "urgent",
     },
     {
@@ -4505,6 +4619,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "vomiting", "lethargy", "dehydration"},
         "description": "Abnormal kidney development causing early-onset chronic kidney failure in young dogs.",
         "description_ja": "腎臓の異常発達で若い犬に早期発症の慢性腎不全を引き起こします。",
+        "pathophysiology_ja": "胎生期の腎臓の異常発達→未成熟なネフロン・胎児型糸球体の残存→機能的ネフロン数の不足→若齢犬でのCKD早期発症（多飲多尿・成長遅延・嘔吐）。腎生検で胎児型糸球体・原始的尿細管が確認される。",
+        "causes_ja": "先天性/遺伝性。シーズー・ラサアプソ・ソフトコーテッドウィートンテリア・スタンダードプードルに報告。若齢犬（数ヶ月〜2歳）で多飲多尿・成長不良で発見。BUN/Cre上昇＋腎臓の小型化・不整形。",
+        "prevention_ja": "好発犬種の繁殖管理。治療は支持療法（CKDの内科管理）。腎移植は限られた施設で実施。",
         "urgency": "urgent",
     },
     {
@@ -4513,6 +4630,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "lethargy", "vomiting", "bloated_abdomen"},
         "description": "Deposition of amyloid protein in the kidneys causing progressive renal failure; seen in Shar Peis.",
         "description_ja": "腎臓へのアミロイド蛋白沈着で進行性腎不全を引き起こし、シャーペイに多く見られます。",
+        "pathophysiology_ja": "AA型アミロイド蛋白（血清アミロイドA由来）の腎糸球体・尿細管間質への沈着→ネフロンの進行性破壊→蛋白漏出性腎症（PLN）→CKD→腎不全。シャーペイでは家族性シャーペイ熱（反復性発熱・足根関節腫脹）に続発するAA型アミロイドーシスが特徴的。",
+        "causes_ja": "一次性（ALアミロイド、稀）。二次性/反応性（AA型、最多）：慢性炎症性疾患に続発。シャーペイ（家族性シャーペイ熱→AA型アミロイドーシス）に最も好発。ビーグル・イングリッシュフォックスハウンドにも報告。",
+        "prevention_ja": "シャーペイのShar-Pei Fever（反復性発熱）の早期管理（コルヒチン投与がアミロイド沈着を遅延させる可能性）。定期的な尿蛋白・腎機能モニタリング。",
         "urgency": "urgent",
     },
     {
@@ -4521,6 +4641,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"blood_urine", "straining_urinate", "vomiting", "abdominal_pain", "lethargy"},
         "description": "Mineral stones in the kidney pelvis that can cause obstruction, infection, and chronic kidney damage.",
         "description_ja": "腎盂の鉱物結石で、閉塞、感染、慢性腎障害を引き起こす可能性があります。",
+        "pathophysiology_ja": "尿中のミネラル（シュウ酸Ca・リン酸MgNH₄・尿酸塩等）の過飽和→腎盂内での結晶核形成→結石の成長。尿管閉塞→水腎症→腎実質の圧迫壊死→腎不全。慢性の結石は腎盂腎炎の温床。片側/両側性。",
+        "causes_ja": "結石組成による：シュウ酸Ca（最多、溶解不可）、ストルバイト（感染結石、溶解可能）、尿酸塩（ダルメシアン）。高Ca尿症、代謝異常、UTI（ストルバイト形成菌）。腹部エコー・X線で検出。",
+        "prevention_ja": "結石組成に応じた食事療法（シュウ酸Ca：適度な水分・クエン酸K）、UTIの治療、定期的な尿検査・エコー。外科的除去（腎切開・尿管切開）または体外衝撃波砕石術。",
         "urgency": "urgent",
     },
     {
@@ -4529,6 +4652,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"blood_urine", "genital_discharge", "straining_urinate", "excessive_urination"},
         "description": "Protrusion of urethral mucosa beyond the external urethral orifice, seen in young male English Bulldogs.",
         "description_ja": "尿道粘膜が外尿道口を超えて突出する状態で、若い雄のイングリッシュブルドッグに見られます。",
+        "pathophysiology_ja": "尿道粘膜が外尿道口から外方に突出・反転→露出した粘膜の乾燥・浮腫・出血→持続的な陰茎先端からの血性分泌物。排尿困難は通常軽度。性的興奮・排尿時のいきみが誘因。",
+        "causes_ja": "先天性の尿道粘膜の弛緩。イングリッシュブルドッグに最も好発。若齢の雄犬（1歳未満が多い）。ボストンテリア、ヨークシャーテリアにも報告。性的興奮との関連。",
+        "prevention_ja": "去勢手術（性的興奮の減少）。外科的切除（mucosal resection）が根治的治療。凍結手術（cryosurgery）も有効。",
         "urgency": "urgent",
     },
     {
@@ -4559,6 +4685,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"genital_discharge", "blood_urine", "lumps", "straining_urinate"},
         "description": "Tumors of the penis or prepuce including transmissible venereal tumor (TVT) and squamous cell carcinoma.",
         "description_ja": "可移植性性器腫瘍（TVT）や扁平上皮癌を含む陰茎または包皮の腫瘍です。",
+        "pathophysiology_ja": "TVT（可移植性性器腫瘍）：腫瘍細胞自体が感染因子（交尾時に異体間で腫瘍細胞が移植される唯一の天然腫瘍）→陰茎/膣のカリフラワー様腫瘤→血性分泌物。免疫正常犬では自然退縮もある。SCC：包皮/陰茎の上皮性悪性腫瘍。",
+        "causes_ja": "TVT：交尾・社会的接触で腫瘍細胞が直接伝播。野犬・放浪犬に多い。世界的分布（日本でも報告あり）。SCC：慢性刺激・包茎との関連。",
+        "prevention_ja": "TVT：去勢（交尾行動の制御）、放浪犬との接触回避。ビンクリスチン化学療法で90%以上の寛解率。SCC：外科的切除。",
         "urgency": "urgent",
     },
     # ---- Behavioral ----
@@ -4620,6 +4749,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "appetite_loss", "vomiting", "bloated_abdomen", "eye_redness"},
         "description": "Infectious canine hepatitis virus causing liver inflammation, corneal edema ('blue eye'), and coagulopathy.",
         "description_ja": "犬伝染性肝炎ウイルスで肝臓の炎症、角膜浮腫（ブルーアイ）、凝固障害を引き起こします。",
+        "pathophysiology_ja": "CAV-1の経口鼻感染→扁桃リンパ組織で増殖→ウイルス血症→肝細胞・血管内皮への親和性→肝細胞壊死・DIC。回復期の免疫複合体沈着→角膜浮腫（「ブルーアイ」：前部ぶどう膜炎）。重症型は劇症肝炎で24〜48時間以内に死亡。",
+        "causes_ja": "犬アデノウイルス1型。感染犬の尿・唾液・糞便から排泄。ワクチン未接種犬、1歳未満がリスク高。CAV-2ワクチンがCAV-1に交差防御を与える。",
+        "prevention_ja": "コアワクチン（CAV-2含有5種/7種ワクチン）の適切な接種。",
         "urgency": "urgent",
     },
     {
@@ -4655,6 +4787,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "weight_loss", "bloody_stool", "skin_lesions", "lethargy"},
         "description": "Infection by the aquatic oomycete Pythium insidiosum causing GI or cutaneous disease, common in the Gulf states.",
         "description_ja": "水生卵菌ピシウムによる感染で消化管または皮膚疾患を引き起こし、湾岸諸州に多いです。",
+        "pathophysiology_ja": "Pythium insidiosum（真菌ではなく卵菌）の遊走子が皮膚創傷/消化管から侵入→消化管型：胃腸壁の肉芽腫性肥厚→閉塞・出血・蛋白喪失。皮膚型：潰瘍性肉芽腫→排膿性病変。従来の抗真菌薬（アゾール系・AMB）が無効（エルゴステロールを持たないため）。",
+        "causes_ja": "P. insidiosum。温暖な停滞水（池・沼・水田）への曝露。米国湾岸諸州・東南アジア・中南米に分布。日本での報告は非常に稀。ラブラドール・ジャーマンシェパードに報告多い。",
+        "prevention_ja": "停滞水への犬の曝露回避。免疫療法（pythium vaccine）が最も有効な治療。外科的切除の併用。従来の抗真菌薬は無効。",
         "urgency": "urgent",
     },
     {
@@ -4663,6 +4798,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "bloody_stool", "eye_redness", "weight_loss", "lethargy", "skin_lesions"},
         "description": "Rare infection by achlorophyllous algae causing chronic hemorrhagic diarrhea and disseminated disease.",
         "description_ja": "無葉緑素藻類による稀な感染で、慢性出血性下痢と播種性疾患を引き起こします。",
+        "pathophysiology_ja": "Prototheca属（無葉緑素藻類、光合成能を失った緑藻の変異体）の経口/創傷感染→消化管型：大腸の肉芽腫性炎症→慢性出血性大腸炎。播種型：眼（脈絡網膜炎→失明）・皮膚・CNS・腎臓に播種→致死的。免疫抑制が素因。",
+        "causes_ja": "P. zopfii/P. wickerhamii。汚染水・土壌からの感染。コリー・ジャイアントシュナウザーに報告が多い。犬では非常に稀。免疫抑制犬にリスク。確定診断は培養＋組織生検。",
+        "prevention_ja": "確実な予防法はない。抗真菌薬への反応は不良。AMB＋イトラコナゾール/テトラサイクリンの併用が報告されるが予後不良。",
         "urgency": "urgent",
     },
     # ---- NEW DISEASES BATCH 4 (Mixed categories to reach 450+) ----
@@ -4672,6 +4810,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "appetite_loss", "vomiting", "abdominal_pain", "bloated_abdomen"},
         "description": "Focal collection of pus within the liver parenchyma, usually from ascending biliary or hematogenous infection.",
         "description_ja": "肝実質内の局所的な膿の集積で、通常は上行性胆道感染または血行性感染が原因です。",
+        "pathophysiology_ja": "肝実質内への細菌侵入→膿瘍腔の形成。感染経路：(1)上行性胆道感染（胆管炎に続発）、(2)門脈性（腸管感染からの播種）、(3)肝動脈性（菌血症）、(4)直接浸潤（外傷・手術後）。E. coli、Clostridium、嫌気性菌の混合感染。破裂→腹膜炎。",
+        "causes_ja": "胆管炎/胆嚢粘液嚢腫に続発（最多）、門脈経由の腸管感染播種、異物穿通（胃腸管異物の肝臓への穿入）。免疫抑制犬（DM・クッシング）にリスク。腹部エコーで低エコー病変。",
+        "prevention_ja": "胆嚢・胆管疾患の早期管理。培養に基づく長期抗菌薬療法（4〜8週間）。大型膿瘍はエコーガイド下ドレナージまたは外科的切除。",
         "urgency": "urgent",
     },
     {
@@ -4709,6 +4850,9 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Inguinal Hernia",
+        "pathophysiology_ja": "鼠径管を通じた腹腔内容（腸管・膀胱・子宮・大網）の突出→嵌頓（還納不能）→絞扼（血流遮断）→臓器壊死→腹膜炎。先天性（鼠径輪の閉鎖不全）と後天性（外傷・妊娠）に分類。未避妊雌犬に好発。",
+        "causes_ja": "先天性（鼠径輪の開存）。ペキニーズ・バセットハウンド・ウエスティに好発。妊娠後期の雌犬（ホルモン性靭帯弛緩）。雄犬の鼠径ヘルニアは精索に沿って陰嚢ヘルニアに進展することがある。",
+        "prevention_ja": "先天性の場合は小型の非嵌頓性でも外科的閉鎖が推奨（嵌頓のリスク回避）。避妊手術時に同時修復が効率的。",
         "name_ja": "鼠径ヘルニア",
         "symptoms": {"swelling", "pain_on_touch", "vomiting", "lethargy"},
         "description": "Protrusion of abdominal contents through the inguinal canal; may become strangulated requiring emergency surgery.",
@@ -4737,6 +4881,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"nasal_discharge", "sneezing", "pain_on_touch", "appetite_loss", "lethargy"},
         "description": "Fungal infection of the nasal cavity and sinuses causing destructive rhinitis and profuse nasal discharge.",
         "description_ja": "鼻腔と副鼻腔の真菌感染で、破壊性鼻炎と大量の鼻汁を引き起こします。",
+        "pathophysiology_ja": "Aspergillus fumigatusの鼻腔内定着→真菌プラーク形成→鼻甲介の進行性破壊→一側性→両側性の粘液膿性〜血性鼻汁。鼻鏡の色素脱失が特徴的所見。篩骨板への浸潤は稀だが起こりうる。免疫正常犬にも発症する（播種型アスペルギルスとは異なる）。",
+        "causes_ja": "A. fumigatus（最多）。長頭種（ジャーマンシェパード・ゴールデン・ラブラドール）に好発。中年犬。免疫正常犬に発症（播種型は免疫不全犬）。一側性の慢性鼻汁で鑑別に挙げる。CT＋鼻腔内視鏡で真菌プラークを確認。",
+        "prevention_ja": "確実な予防法はない。局所抗真菌療法（鼻腔内クロトリマゾール灌流）が第一選択（治癒率85〜90%）。全身投与のイトラコナゾール単独は効果不十分。",
         "urgency": "urgent",
     },
     {
@@ -4767,6 +4914,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"blood_urine", "straining_urinate", "excessive_urination", "incontinence", "lethargy"},
         "description": "Most common bladder tumor in dogs, causing hematuria and dysuria; Scottish Terriers are predisposed.",
         "description_ja": "犬で最も一般的な膀胱腫瘍で、血尿と排尿困難を引き起こし、スコティッシュテリアに好発します。",
+        "pathophysiology_ja": "膀胱移行上皮の悪性増殖→膀胱三角部に好発（尿管口を巻き込みやすい→水腎症）。BRAF V595E変異が犬TCCの約80%で検出→尿中BRAF変異検出が早期診断マーカー。NSAIDs（ピロキシカム）がCOX-2阻害を介して腫瘍増殖を抑制。",
+        "causes_ja": "環境因子（除草剤・殺虫剤曝露）、遺伝的素因。スコティッシュテリア（リスク18倍）に最も好発。雌犬・肥満犬に多い。中高齢犬。",
+        "prevention_ja": "除草剤曝露の回避（散歩後の足洗浄）。スコティッシュテリアのスクリーニング（尿検査・BRAF変異・膀胱エコー）。ピロキシカム/メロキシカム＋化学療法（ミトキサントロン/ビンブラスチン）。",
         "urgency": "urgent",
     },
     {
@@ -4775,6 +4925,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "weight_loss", "appetite_loss", "abdominal_pain", "lethargy", "bloated_abdomen"},
         "description": "Highly malignant pancreatic tumor with very poor prognosis, often diagnosed at advanced stage.",
         "description_ja": "非常に予後不良な高悪性度の膵腫瘍で、進行期に診断されることが多いです。",
+        "pathophysiology_ja": "膵管上皮/腺房細胞の悪性増殖→膵管閉塞→胆管閉塞→閉塞性黄疸。腫瘍の局所浸潤→十二指腸・腹膜播種。肝臓・肺への早期転移（診断時に大部分が転移あり）。犬の膵腫瘍の90%以上が悪性。インスリノーマ（β細胞腫瘍）とは区別。",
+        "causes_ja": "原因不明。中高齢犬。エアデールテリア・スパニエル種に報告多い。慢性嘔吐・体重減少・腹痛の高齢犬でエコーにより膵腫瘤として発見。",
+        "prevention_ja": "確実な予防法はない。外科的切除が唯一の治療だが、完全切除が可能な症例は少ない。MST 1〜3ヶ月。",
         "urgency": "urgent",
     },
     {
@@ -4783,6 +4936,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_gain", "hair_loss", "lethargy", "excessive_panting"},
         "description": "Benign or malignant tumor of the adrenal gland causing Cushing's syndrome or pheochromocytoma signs.",
         "description_ja": "クッシング症候群または褐色細胞腫の症状を引き起こす副腎の良性または悪性腫瘍です。",
+        "pathophysiology_ja": "副腎皮質腫瘍（腺腫/腺癌）→コルチゾール自律分泌→副腎性クッシング症候群（多飲多尿・腹部膨満・脱毛・筋萎縮）。副腎髄質腫瘍（褐色細胞腫）→カテコラミン過剰→発作性高血圧。後大静脈への浸潤（腺癌・褐色細胞腫）→血栓塞栓症。約50%が悪性。",
+        "causes_ja": "原因不明。中高齢犬（平均10〜11歳）。特定の犬種好発は不明確。クッシング症候群の約15〜20%が副腎腫瘍性（残りは下垂体性PDH）。エコーで片側副腎腫大＋対側副腎萎縮が典型的。",
+        "prevention_ja": "確実な予防法はない。エコーで副腎腫瘤を発見した場合、機能評価（LDDST・ACTH刺激・尿中カテコラミン）→手術適応の判断。副腎摘出術が根治的。術前のフェノキシベンザミン投与（褐色細胞腫の場合）。",
         "urgency": "urgent",
     },
     {
@@ -4791,6 +4947,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "fever", "appetite_loss", "weight_loss", "excessive_panting"},
         "description": "Blood parasite (Mycoplasma haemocanis) attaching to red blood cells, causing anemia in immunocompromised dogs.",
         "description_ja": "赤血球に付着する血液寄生虫で、免疫不全の犬に貧血を引き起こします。",
+        "pathophysiology_ja": "Mycoplasma haemocanis（旧Haemobartonella canis）が赤血球表面に付着→赤血球膜の損傷→脾臓でのopsonization・除去→溶血性貧血。免疫正常犬では通常無症状キャリア。脾摘犬・免疫抑制犬で臨床的貧血を発症。IMHA との併存に注意。",
+        "causes_ja": "M. haemocanis/M. haematoparvum。伝播経路：マダニ（Rhipicephalus sanguineus）、輸血、咬傷。脾摘犬は急性溶血性発作のリスクが高い。PCR検査で確定診断（血液塗抹での検出率は低い）。",
+        "prevention_ja": "マダニ駆除薬の通年投与。輸血前のPCRスクリーニング。脾摘犬の定期的なPCVモニタリング。ドキシサイクリン（5mg/kg BID、14〜28日間）で治療。",
         "urgency": "urgent",
     },
     {
@@ -4870,6 +5029,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"swelling", "pain_on_touch", "appetite_loss", "fever", "drooling"},
         "description": "Acute immune-mediated inflammation of the muscles of mastication causing painful jaw swelling and trismus.",
         "description_ja": "咀嚼筋の急性免疫介在性炎症で、有痛性の顎の腫脹と開口障害を引き起こします。",
+        "pathophysiology_ja": "咀嚼筋の2M筋線維のミオシン結合蛋白に対する自己抗体→急性の咀嚼筋（側頭筋・咬筋）の炎症性腫脹→開口障害（trismus）・疼痛→摂食困難。慢性化で筋萎縮・線維化→恒常的開口制限。",
+        "causes_ja": "免疫介在性（2M線維ミオシン結合蛋白に対する自己抗体）。大型犬に好発。血清抗2M抗体検査で確定診断。",
+        "prevention_ja": "早期免疫抑制療法（プレドニゾロン1〜2mg/kg/日、4〜6ヶ月漸減）が線維化予防に重要。",
         "urgency": "urgent",
     },
     {
@@ -4878,6 +5040,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"stiffness", "lethargy", "pain_on_touch", "reluctance_move", "fever", "weight_loss"},
         "description": "Immune-mediated inflammation of multiple skeletal muscles causing generalized weakness and muscle pain.",
         "description_ja": "複数の骨格筋の免疫介在性炎症で、全身性の衰弱と筋肉痛を引き起こします。",
+        "pathophysiology_ja": "骨格筋全般の免疫介在性炎症→筋線維の壊死→CK（クレアチンキナーゼ）の著明な上昇→全身性筋力低下・筋痛・運動不耐性。食道筋にも波及→巨大食道症（誤嚥性肺炎のリスク）。一部は腫瘍随伴性（胸腺腫・リンパ腫関連）。",
+        "causes_ja": "免疫介在性（最多）、感染性（Toxoplasma・Neospora・Hepatozoon）、腫瘍随伴性（胸腺腫）。ジャーマンシェパード・ニューファンドランドに報告多い。筋生検で壊死性/炎症性筋障害を確認。",
+        "prevention_ja": "基礎疾患（感染症・腫瘍）の検索。免疫抑制療法（プレドニゾロン＋アザチオプリン）。食道の併発に注意（立位給餌）。",
         "urgency": "urgent",
     },
     {
@@ -4897,6 +5062,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "dehydration", "lethargy"},
         "description": "Deficient ADH production from the pituitary gland causing extreme polyuria and polydipsia.",
         "description_ja": "下垂体からのADH産生不足で、極度の多尿と多飲を引き起こします。",
+        "pathophysiology_ja": "下垂体後葉/視床下部のADH（抗利尿ホルモン/バソプレシン）産生・分泌の障害→腎集合管でのAQP2発現低下→水の再吸収不能→大量の希釈尿（USG<1.008）→脱水→代償性多飲（10〜20倍の飲水量）。水制限試験でADH反応不良、DDAVP試験で尿濃縮を確認。",
+        "causes_ja": "特発性（最多）、下垂体腫瘍（マクロ腺腫）、外傷性（頭部外傷後）、炎症性。先天性は稀。クッシング・腎不全・子宮蓄膿症等の多飲多尿を呈する他疾患の除外が先決。",
+        "prevention_ja": "確実な予防法はない。デスモプレシン（DDAVP点鼻/経口）で尿量コントロール。常に十分な飲水を確保。",
         "urgency": "urgent",
     },
     {
@@ -4905,6 +5073,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "dehydration", "lethargy", "weight_loss"},
         "description": "Kidney unresponsiveness to ADH causing inability to concentrate urine; may be congenital or acquired.",
         "description_ja": "腎臓のADHに対する不応答で尿の濃縮ができない状態で、先天性または後天性です。",
+        "pathophysiology_ja": "腎集合管のADH受容体（V2R）またはAQP2水チャネルの障害→ADHが正常に分泌されても腎臓が反応しない→水の再吸収不能→大量の希釈尿。DDAVPに対する反応なし（中枢性との鑑別点）。後天性が犬では大部分。",
+        "causes_ja": "後天性（最多）：CKD、高Ca血症、低K血症、副腎皮質機能亢進症、肝不全、膿腎症、薬剤性（リチウム等）。先天性：極めて稀。後天性の場合は基礎疾患の治療で改善しうる。",
+        "prevention_ja": "基礎疾患の管理。サイアザイド利尿薬が逆説的に尿量を減少させる（近位尿細管でのNa・水再吸収を増加）。低Na食の併用。",
         "urgency": "urgent",
     },
     {
@@ -4913,6 +5084,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_rl", "limping_rr", "stiffness", "reluctance_move", "pain_on_touch"},
         "description": "Disc-associated form of Wobbler syndrome causing spinal cord compression, common in large breed dogs.",
         "description_ja": "椎間板関連型のウォブラー症候群で脊髄圧迫を引き起こし、大型犬に多く見られます。",
+        "pathophysiology_ja": "頸椎椎間板の変性→腹側からの脊髄圧迫→頸部脊髄症→後肢の運動失調（wobbling gait）＋前肢の短歩様歩行。椎間板関連型はドーベルマン（C5-C7、中高齢犬）に好発。骨関連型はグレートデーン（C3-C5、若齢犬）に好発。MRIで確定診断。",
+        "causes_ja": "椎間板変性→椎間板突出→頸髄の腹側圧迫。ドーベルマン（最も好発、約50%に何らかの頸椎異常）。中高齢犬（6〜9歳）。多部位病変が多い。",
+        "prevention_ja": "確実な予防法はない。内科管理（ステロイド・運動制限・頸部固定）で安定化→改善しない場合は外科的減圧（ventral slot手術・人工椎間板）。",
         "urgency": "urgent",
     },
     {
@@ -4943,6 +5117,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "itching", "hair_loss", "skin_redness", "lumps", "dry_skin"},
         "description": "T-cell lymphoma targeting the skin, causing chronic skin lesions that mimic dermatitis before diagnosis.",
         "description_ja": "皮膚を標的とするT細胞リンパ腫で、診断前は皮膚炎に類似した慢性皮膚病変を引き起こします。",
+        "pathophysiology_ja": "T細胞リンパ球の皮膚上皮への向性（epitheliotropism）→表皮内に腫瘍性T細胞が浸潤（Pautrier微小膿瘍）→びまん性紅斑・落屑→結節・潰瘍に進行。人の菌状息肉症（mycosis fungoides）に相当。初期は皮膚炎に酷似→診断が遅れやすい（平均6〜12ヶ月の診断遅延）。",
+        "causes_ja": "原因不明。中高齢犬。特定の犬種好発は不明確。慢性皮膚炎に対して通常の治療に反応しない場合に疑い→皮膚生検で確定。プレドニゾロンに一時的に反応するため誤診されやすい。",
+        "prevention_ja": "確実な予防法はない。難治性の慢性皮膚炎は早期に生検。ロムスチン（CCNU）/レチノイド/局所ステロイドで管理。予後不良（MST 6〜12ヶ月）。",
         "urgency": "urgent",
     },
     {
@@ -4951,6 +5128,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_fl", "limping_fr", "limping_rl", "limping_rr", "swelling", "lumps", "pain_on_touch"},
         "description": "Malignant tumor of the toe digits, common in large black-coated breeds, causing nail loss and toe swelling.",
         "description_ja": "足趾の悪性腫瘍で、大型の黒い被毛の犬種に多く、爪の脱落と趾の腫脹を引き起こします。",
+        "pathophysiology_ja": "趾骨/爪床の扁平上皮の悪性増殖→趾の腫脹・爪の脱落・潰瘍→骨浸潤（趾骨のP3溶解）。多発性（複数の趾に同時/逐次的に発生）が黒色犬種の特徴。局所リンパ節転移は10〜30%、肺転移は稀。",
+        "causes_ja": "黒色被毛の大型犬に好発：スタンダードプードル（黒）、ラブラドール（黒）、ジャイアントシュナウザー、ゴードンセッター。爪床メラノーマとの鑑別が重要（生検必須）。中高齢犬。",
+        "prevention_ja": "確実な予防法はない。趾の腫脹・爪の脱落は早期にX線＋生検。趾の切断（P3切断）が標準治療で予後良好（単発性のMST 1〜2年）。",
         "urgency": "urgent",
     },
     {
@@ -4967,6 +5147,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "bloated_abdomen", "appetite_loss", "lethargy", "straining_urinate"},
         "description": "Severe chronic dilation of the colon with loss of motility, causing intractable constipation.",
         "description_ja": "結腸の重度の慢性拡張と運動性の喪失で、難治性の便秘を引き起こします。",
+        "pathophysiology_ja": "慢性便秘の放置→結腸壁の平滑筋の不可逆的伸展→蠕動能の喪失→巨大糞塊の形成→排便不能。神経原性（仙骨脊髄損傷）や閉塞性（骨盤骨折後の骨盤腔狭窄）が基礎にあることが多い。",
+        "causes_ja": "慢性便秘の放置、骨盤骨折後の骨盤腔狭窄、神経原性（馬尾症候群）、会陰ヘルニア、甲状腺機能低下症。犬では猫ほど一般的ではない。",
+        "prevention_ja": "慢性便秘の早期管理（高食物繊維食・ラクツロース・シサプリド）。重度は結腸亜全摘術。",
         "urgency": "urgent",
     },
     {
@@ -4983,6 +5166,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lumps", "swelling", "skin_lesions", "lethargy", "weight_loss"},
         "description": "Malignant tumor of the apocrine sweat glands, often found on the limbs or trunk.",
         "description_ja": "アポクリン汗腺の悪性腫瘍で、四肢や体幹に多く見られます。",
+        "pathophysiology_ja": "皮膚のアポクリン汗腺上皮の悪性増殖→浸潤性の皮下腫瘤→局所リンパ節転移・肺転移。肛門嚢のアポクリン腺癌（別エントリ）が犬で最も臨床的に重要なアポクリン腺腫瘍。皮膚のアポクリン腺癌は比較的稀。",
+        "causes_ja": "原因不明。中高齢犬。FNA→生検で確定診断。良性のアポクリン腺腫との鑑別が重要。",
+        "prevention_ja": "確実な予防法はない。広範囲切除が治療の柱。転移がなければ予後は比較的良好。",
         "urgency": "urgent",
     },
     {
@@ -5029,6 +5215,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "nasal_discharge", "difficulty_breathing", "lethargy", "fever"},
         "description": "Irreversible dilation of the bronchi from chronic infection or inflammation, causing recurrent pneumonia.",
         "description_ja": "慢性感染や炎症による気管支の不可逆的拡張で、再発性肺炎を引き起こします。",
+        "pathophysiology_ja": "慢性気管支感染/炎症→気管支壁の弾性組織・軟骨の破壊→不可逆的な気管支拡張→粘液排泄障害→細菌の定着→反復性肺炎の悪循環。先天性（原発性線毛機能不全症/Kartagener症候群）と後天性（慢性気管支炎・異物・誤嚥後）がある。",
+        "causes_ja": "慢性気管支炎の末期、原発性線毛機能不全症（PCD）、異物誤嚥後、反復性誤嚥性肺炎。コッカースパニエル・WHWT に報告多い。CTで気管支拡張を確認（signet ring sign）。",
+        "prevention_ja": "慢性気管支疾患の早期適切な管理。再発性肺炎に対する長期抗菌薬療法・気管支拡張薬・胸部理学療法。",
         "urgency": "urgent",
     },
     {
@@ -5045,6 +5234,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"genital_discharge", "fever", "lethargy", "swelling", "weight_loss"},
         "description": "Brucella canis infection primarily affecting the reproductive system, causing abortion and infertility.",
         "description_ja": "主に生殖器系を侵すブルセラ菌感染で、流産と不妊を引き起こします。",
+        "pathophysiology_ja": "Brucella canisの性交・経口感染→生殖器への親和性→雌犬：妊娠後期（45〜55日目）の流産・死産。雄犬：精巣上体炎→不妊・陰嚢腫大→精巣萎縮。菌血症が長期間持続→椎間板脊椎炎・ぶどう膜炎の合併。人獣共通感染症（人への感染リスクは低いが免疫抑制者は注意）。",
+        "causes_ja": "Brucella canis。性交・流産産物・尿から排菌。繁殖犬舎で問題。日本でも散発的に報告あり。血清学的検査（RSAT→ME-RSAT/AGID確認）でスクリーニング。PCRも有用。",
+        "prevention_ja": "繁殖前のブルセラ検査（RSAT）の義務化。感染犬の繁殖禁止・隔離。去勢/避妊（排菌量を減少）。抗菌薬治療（ミノサイクリン＋ストレプトマイシン）は完全除菌が困難。",
         "urgency": "urgent",
     },
     {
@@ -5069,6 +5261,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"regurgitation", "drooling", "coughing", "difficulty_breathing"},
         "description": "Focal form of myasthenia gravis primarily affecting esophageal muscles, causing megaesophagus and regurgitation.",
         "description_ja": "主に食道筋を侵す重症筋無力症の局所型で、巨大食道と逆流を引き起こします。",
+        "pathophysiology_ja": "抗AChR自己抗体→食道筋のニコチン受容体破壊→食道蠕動障害→巨大食道症→吐出→誤嚥性肺炎（最大の致死要因）。四肢筋は侵されない（局所型の特徴）。犬のMGの約40%が局所型。胸腺腫の合併を精査。",
+        "causes_ja": "免疫介在性（抗AChR抗体）。ゴールデン・ジャーマンシェパード・ダックスフンドに好発。中高齢犬。巨大食道症の犬では抗AChR抗体を測定すべき。約50%が6〜18ヶ月で自然寛解。",
+        "prevention_ja": "確実な予防法はない。立位給餌（Bailey chair）で誤嚥性肺炎を予防。ピリドスチグミンでの対症療法。",
         "urgency": "urgent",
     },
     {
