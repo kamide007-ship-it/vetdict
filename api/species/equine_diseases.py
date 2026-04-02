@@ -12460,31 +12460,31 @@ def _enrich_horse_diseases() -> None:
         # Fallback: generate content from existing description for unmatched diseases
         name = disease.name_en or disease.name_ja
         desc = disease.description_ja or disease.name_ja
+        ja_name = disease.name_ja or name
         if not disease.pathophysiology:
             disease.pathophysiology = (
-                f"{name} involves pathological changes in affected equine tissues. "
-                f"{desc} The condition may progress through stages of cellular injury, "
-                f"inflammatory response, and tissue damage if untreated."
+                f"{ja_name}は馬の組織に病理学的変化を引き起こす疾患である。"
+                f"{desc} 未治療の場合、細胞障害、炎症反応、組織損傷の段階を経て進行しうる。"
             )
         if not disease.etiology:
             disease.etiology = (
-                f"The causes of {name.lower()} in horses include predisposing factors "
-                f"related to genetics, conformation, workload, environment, and management. {desc}"
+                f"馬における{ja_name}の原因には、遺伝的素因、体型、"
+                f"運動負荷、環境、飼養管理に関連する要因が含まれる。{desc}"
             )
         if not disease.treatment_protocol and not disease.general_management:
             disease.general_management = (
-                f"Management of {name.lower()} involves addressing the underlying cause, "
-                f"appropriate supportive care, and veterinary-guided therapeutic interventions."
+                f"馬における{ja_name}の管理は、原因への対処、適切な支持療法、"
+                f"獣医師の指導に基づく治療的介入を行う。"
             )
         if not disease.prevention:
             disease.prevention = (
-                "Prevention includes appropriate management, regular veterinary examinations, "
-                "proper nutrition, controlled exercise, and maintaining a safe environment."
+                "適切な飼養管理、定期的な獣医師による健康診断、バランスの取れた栄養管理、"
+                "適度な運動、安全な飼養環境の維持が予防に重要である。"
             )
         if not disease.prognosis:
             disease.prognosis = (
-                "Prognosis depends on severity, timeliness of diagnosis, and response to treatment. "
-                "Early detection and appropriate intervention generally improve outcomes."
+                "予後は重症度、診断の時期、治療への反応に依存する。"
+                "早期発見と適切な介入により転帰が改善する。"
             )
 
 
