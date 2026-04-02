@@ -4245,6 +4245,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "lethargy", "appetite_loss", "excessive_thirst", "dehydration"},
         "description": "While more dangerous to cats, certain lily species can cause GI upset in dogs; peace lilies cause oral irritation.",
         "description_ja": "猫にはより危険ですが、特定のユリ種は犬に消化器症状を引き起こし、スパティフィラムは口腔刺激を引き起こします。",
+        "pathophysiology_ja": "犬ではLilium属・Hemerocallis属のユリは猫ほど腎毒性を示さないが、大量摂取で消化器症状（嘔吐・下痢）。スパティフィラム（peace lily）・ポトス：シュウ酸カルシウム結晶→口腔粘膜の機械的刺激→流涎・口腔痛・嘔吐。スズラン（Convallaria majalis）：強心配糖体→徐脈・不整脈→犬に致死的。",
+        "causes_ja": "ユリ科植物の摂取。犬ではスズラン中毒が最も危険（強心配糖体コンバラトキシン）。Lilium属は犬には軽度の消化器症状のみ（猫とは全く異なる）。スパティフィラム・ポトスは観葉植物として室内に多い。",
+        "prevention_ja": "スズランの犬からの隔離（庭への植栽回避）、観葉植物の犬の手の届かない場所への配置。スズラン中毒はアトロピン＋ジゴキシン特異的Fab抗体で治療。",
         "urgency": "urgent",
     },
     {
@@ -4321,6 +4324,9 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Spirocerca lupi Infection",
+        "pathophysiology_ja": "糞虫（中間宿主）摂取→L3幼虫が胃壁穿通→大動脈壁を経由して食道壁に到達→食道の肉芽腫形成→肉腫への悪性変化（食道線維肉腫/骨肉腫）。大動脈瘤・肥大性骨症の合併。",
+        "causes_ja": "Spirocerca lupi（食道虫）。中間宿主（糞虫）または待機宿主（トカゲ・カエル・鳥）の摂取。温暖な気候（中東・アフリカ・南米・東南アジア）で流行。日本での報告は少ないが輸入犬に注意。",
+        "prevention_ja": "流行地域でのドラメクチン/イベルメクチンの定期投与。内視鏡で食道内肉芽腫を確認・モニタリング。",
         "name_ja": "食道虫症",
         "symptoms": {"vomiting", "regurgitation", "weight_loss", "coughing", "difficulty_breathing"},
         "description": "Esophageal worm infection forming granulomas that can transform into sarcomas; endemic in warm climates.",
@@ -4333,6 +4339,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "weight_loss", "bloody_stool", "collapse"},
         "description": "Parasitic worm living in the pulmonary arteries and heart, causing coagulopathy, coughing, and potentially fatal bleeding.",
         "description_ja": "肺動脈と心臓に寄生する線虫で、凝固障害、咳嗽、致死的出血を引き起こします。",
+        "pathophysiology_ja": "L3幼虫がカタツムリ（中間宿主）から経口感染→腸管壁穿通→血行性に右心・肺動脈に到達→成虫化→肺動脈の内皮障害→血管炎・肺高血圧→凝固障害（DIC様）→消化管出血・皮下出血・CNS出血。致死的出血が突然発症することがある。",
+        "causes_ja": "Angiostrongylus vasorum（フレンチハートワーム）。カタツムリ・ナメクジ（中間宿主）の摂取。ヨーロッパ（特にイギリス・フランス）で増加傾向。日本での報告は限定的。若齢犬に好発。フィラリアとは異なる寄生虫だが症状が類似。",
+        "prevention_ja": "モキシデクチン含有駆虫薬の月1回投与（流行地域）。カタツムリ・ナメクジとの接触回避。凝固障害を伴う咳嗽犬ではAngiostrongylusを鑑別に含める。",
         "urgency": "urgent",
     },
     {
@@ -4349,6 +4358,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "bloody_stool", "weight_loss", "lethargy", "vomiting", "fever"},
         "description": "Blood fluke infection causing granulomatous inflammation of the intestines and liver.",
         "description_ja": "住血吸虫の感染により腸管と肝臓の肉芽腫性炎症を引き起こします。",
+        "pathophysiology_ja": "Heterobilharzia americanaのセルカリアが経皮感染→門脈系で成虫化→腸管壁・肝臓に虫卵沈着→肉芽腫性炎症→腸壁の肥厚・肝線維化→慢性出血性下痢・体重減少・高Ca血症（肉芽腫からのカルシトリオール産生）。",
+        "causes_ja": "Heterobilharzia americana（北米南部に分布、犬が終宿主）。淡水カタツムリ（中間宿主）から放出されたセルカリアが経皮感染。日本での報告はないが、輸入犬・海外渡航犬に注意。",
+        "prevention_ja": "流行地域の淡水への犬の曝露回避。プラジカンテル＋フェンベンダゾールで治療。",
         "urgency": "urgent",
     },
     # ---- Congenital / Breed-Specific ----
@@ -4358,6 +4370,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "seizures", "vomiting", "appetite_loss", "excessive_thirst", "excessive_urination", "circling"},
         "description": "Acquired abnormal blood vessels bypassing the liver, usually secondary to chronic liver disease and portal hypertension.",
         "description_ja": "慢性肝疾患と門脈圧亢進症に続発する後天性の肝臓を迂回する異常血管です。",
+        "pathophysiology_ja": "慢性肝疾患→門脈圧亢進→門脈系と全身静脈系の間に多発性の側副血行路（acquired portosystemic collaterals）が発達→門脈血が肝臓を迂回→高アンモニア血症→肝性脳症。先天性PSSとは異なり多発性・蛇行性の血管。腹水の合併が高率。",
+        "causes_ja": "慢性肝炎（銅蓄積性・特発性）、肝硬変、門脈の先天的低形成（microphepatica）。基礎にある肝疾患の管理が重要。先天性PSSとは治療アプローチが全く異なる（後天性は外科的閉鎖の適応なし）。",
+        "prevention_ja": "慢性肝疾患の早期管理。肝性脳症は低蛋白食＋ラクツロース＋抗菌薬（メトロニダゾール/ネオマイシン）で内科管理。",
         "urgency": "urgent",
     },
     {
@@ -4374,6 +4389,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "collapse", "difficulty_breathing", "bloated_abdomen", "coughing"},
         "description": "Congenital malformation of the pulmonic valve causing right ventricular outflow obstruction.",
         "description_ja": "肺動脈弁の先天性奇形で右心室流出路閉塞を引き起こします。",
+        "pathophysiology_ja": "肺動脈弁の形態異常（弁尖の肥厚・癒合・弁下/弁上狭窄）→右室流出路閉塞→右室の圧負荷→右室求心性肥大→右心不全（重症例）。圧較差で重症度分類：軽度<50mmHg、中等度50〜80mmHg、重度>80mmHg。犬で3番目に多い先天性心疾患。",
+        "causes_ja": "先天性。ブルドッグ（弁下型が多い）、ビーグル、ボクサー、コッカースパニエル、サモエドに好発。子犬検診時の心雑音（左心基底部のcrescendo-decrescendo収縮期雑音）で発見。",
+        "prevention_ja": "好発犬種の心臓聴診スクリーニング。繁殖前の心エコー。重度はバルーン弁形成術で改善可能。",
         "urgency": "urgent",
     },
     {
@@ -4382,6 +4400,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "collapse", "rapid_breathing"},
         "description": "Congenital malformation of the mitral valve causing mitral regurgitation and left heart failure in young dogs.",
         "description_ja": "僧帽弁の先天性奇形で僧帽弁逆流と若い犬の左心不全を引き起こします。",
+        "pathophysiology_ja": "僧帽弁の先天的形成異常（弁尖の短縮・肥厚、腱索の異常、乳頭筋の奇形）→僧帽弁逆流（MR）→左房拡大→肺うっ血→若齢犬での心不全。加齢性MMVD（粘液腫様変性）とは異なり先天性で若齢犬に発症。",
+        "causes_ja": "先天性。グレートデーン、ジャーマンシェパード、ブルテリア、ゴールデン、ニューファンドランドに報告。若齢犬（1歳未満）で心雑音＋心不全徴候で発見。心エコーで確定診断。",
+        "prevention_ja": "好発犬種の心臓スクリーニング。重度は利尿薬＋ピモベンダン＋ACE阻害薬で心不全管理。僧帽弁修復術は限られた施設で実施可能。",
         "urgency": "urgent",
     },
     {
@@ -4390,6 +4411,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "fever", "weight_loss", "blood_urine", "excessive_panting"},
         "description": "A hereditary enzyme deficiency in English Springer Spaniels and Cocker Spaniels causing hemolytic crises.",
         "description_ja": "イングリッシュスプリンガースパニエルやコッカースパニエルの遺伝性酵素欠損症で、溶血性発作を引き起こします。",
+        "pathophysiology_ja": "PFK-M（筋型ホスホフルクトキナーゼ）遺伝子変異→赤血球内のPFK活性低下→赤血球のATP産生低下→赤血球の脆弱化→アルカローシス（過換気時）で赤血球が溶血→発作性血管内溶血・ヘモグロビン尿。運動後・興奮後・過換気後にトリガー。筋症状は軽度。",
+        "causes_ja": "常染色体劣性遺伝。イングリッシュスプリンガースパニエル・アメリカンコッカースパニエルに特異的。DNA検査（PFK-M遺伝子）でキャリア・罹患犬を同定可能。",
+        "prevention_ja": "DNA検査による繁殖管理（キャリア×キャリアの交配回避）。罹患犬は激しい運動・興奮の回避（溶血発作のトリガー）。",
         "urgency": "urgent",
     },
     {
@@ -4398,6 +4422,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "weight_loss", "excessive_panting", "fever", "appetite_loss"},
         "description": "Hereditary red blood cell enzyme deficiency causing chronic hemolytic anemia, seen in Basenjis and Beagles.",
         "description_ja": "バセンジーやビーグルに見られる遺伝性赤血球酵素欠損症で、慢性溶血性貧血を引き起こします。",
+        "pathophysiology_ja": "PK-R（赤血球型ピルビン酸キナーゼ）遺伝子変異→赤血球の解糖系ATP産生障害→赤血球寿命の短縮→慢性溶血性貧血→代償性骨髄過形成→骨髄線維症→造血不全→致死的。PCV 15〜30%の持続的貧血。脾腫を伴う。",
+        "causes_ja": "常染色体劣性遺伝。バセンジー（最多）、ビーグル、WHWT、チワワ、パグに報告。DNA検査でキャリア同定可能。慢性貧血＋脾腫の若齢犬で疑う。",
+        "prevention_ja": "DNA検査による繁殖管理。治療法はなく支持療法のみ。多くは1〜5歳で骨髄線維症により死亡。",
         "urgency": "urgent",
     },
     # ---- NEW DISEASES BATCH 3 (GI / Respiratory / Urogenital / Behavioral) ----
@@ -4407,6 +4434,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "weight_loss", "appetite_loss", "lethargy", "bloody_stool", "abdominal_pain"},
         "description": "Malignant stomach tumor causing chronic vomiting, weight loss, and GI bleeding; poor prognosis.",
         "description_ja": "慢性嘔吐、体重減少、消化管出血を引き起こす胃の悪性腫瘍で、予後は不良です。",
+        "pathophysiology_ja": "胃粘膜上皮の悪性増殖→胃壁の肥厚・潰瘍形成→幽門閉塞（嘔吐の原因）・消化管出血。胃小弯・幽門部に好発。腺癌が最多。腹膜播種・肝臓転移が高率。診断時に多くが進行期。",
+        "causes_ja": "原因不明。ベルジアンシェパード（ベルジアンタービュレン）に好発との報告。中高齢の雄犬に多い。慢性嘔吐の高齢犬では内視鏡/エコーで精査すべき。ヘリコバクター感染との関連は犬では不明確。",
+        "prevention_ja": "確実な予防法はない。慢性嘔吐・体重減少の高齢犬の早期精査。外科的切除＋化学療法だが予後不良（MST 2〜6ヶ月）。",
         "urgency": "urgent",
     },
     {
