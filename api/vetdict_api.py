@@ -212,6 +212,13 @@ except ImportError:
         DRUG_DICTIONARY_AVAILABLE = False
         logger.warning("Drug dictionary module not available")
 
+# Anesthesia protocols blueprint
+try:
+    from api.anesthesia_api import anesthesia_bp
+    app.register_blueprint(anesthesia_bp)
+except ImportError:
+    logger.warning("Anesthesia protocols module not available")
+
 # Analytics blueprint (usage statistics)
 try:
     from api.analytics import analytics_bp, init_analytics

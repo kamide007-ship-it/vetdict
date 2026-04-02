@@ -32,6 +32,8 @@ api/
   drug_batch_2.py         — 薬品データ batch 2 + 新薬7剤 (サイトポイント,リブレラ,ソレンシア,ブレンダ,GS-441524,モルヌピラビル,スプレソリン)
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
+  anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 114プロトコル)
+  anesthesia_api.py       — 鎮静・麻酔API Blueprint (3エンドポイント)
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
   species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種)
   paypal_api.py           — PayPalサブスク + waitlist + メール復元
@@ -59,7 +61,7 @@ static/
   js/app.js               — 統合JS (I18N + UI + チャット + GA4 + admin/pro制御)
   css/main.css            — 統合CSS (app.cssは削除済み — 絶対に復活させないこと)
   manifest.json           — PWA
-  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v2)
+  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v12)
   robots.txt / sitemap.xml
   og-image.svg            — OGP画像 (1200x630)
 scripts/
@@ -71,6 +73,7 @@ scripts/
 - **薬品**: 194 (12種が魚専用, 7種が2026年追加の新薬)
 - **症状エイリアス**: 530+ (SYMPTOM_ALIASES) + 90+ (ID同義語)
 - **対応動物種**: 21 (犬,猫,馬,ウサギ,ハムスター,モルモット,チンチラ,フェレット,ハリネズミ,フクロモモンガ,デグー,鳥,インコ,オウム,爬虫類,リクガメ,ヘビ,トカゲ,両生類,魚,その他)
+- **鎮静・麻酔プロトコル**: 114 (全21種対応、犬猫各11プロトコル、馬10プロトコル、ASA分類付き)
 
 ## 診断エンジン
 ### チェックボックス式 (全種)
@@ -171,7 +174,7 @@ scripts/
 
 ## テスト実行
 ```bash
-python3 -m pytest tests/ -x -q          # 全テスト (2,480)
+python3 -m pytest tests/ -x -q          # 全テスト (2,700+)
 python3 -m pytest tests/test_diagnostic_chat.py -x -q  # チャット診断テスト
 python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 ```
@@ -337,6 +340,33 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - GA4ファネルイベント (funnel_page_load) 追加
 - 統計数値: コピー文をAPIデータと統一 (7,000+疾患/220+薬品)
 - ヒーロー信頼性シグナル: 学術文献数・テスト数・OSS開発を表示
+
+## 2026-04セッション（第2回）で実施した改善
+
+### 鎮静・麻酔プロトコルタブ新設
+- 新タブ「鎮静・麻酔」を追加（ハンバーガーメニューにも掲載）
+- `api/anesthesia_protocols.py`: 全21種の鎮静・麻酔プロトコルデータ（114プロトコル）
+  - 犬・猫: 鎮静/前投薬/導入/維持/局所・区域麻酔/モニタリング/覚醒/緊急（各9プロトコル）
+  - 犬: 短頭種・サイトハウンド・大型犬・ボクサーの品種別注意事項
+  - 馬: 立位鎮静（ゴールドスタンダード）、TIVA、覚醒（最危険フェーズ）、MAP≥70 mmHg管理
+  - うさぎ: V-gel推奨、アトロピナーゼ（30%）、GI stasis予防、EMLA
+  - ハムスター・モルモット・チンチラ・デグー: チャンバー/IP注射、低体温管理
+  - フェレット: インスリノーマ血糖管理、短時間絶食
+  - ハリネズミ: 吸入鎮静（丸まった状態でも可）、棘部位回避
+  - フクロモモンガ: 自咬症予防、トルポール鑑別
+  - 鳥類（鳥・インコ・オウム）: 気嚢システム、非カフETチューブ必須、IPPV準備
+  - 爬虫類（爬虫類・リクガメ・ヘビ・トカゲ）: POTZ管理、腎門脈系回避、覚醒6-24時間
+  - 両生類: MS-222浸漬麻酔、皮膚湿潤維持、背側リンパ嚢注射
+  - 魚: MS-222/オイゲノール浸漬、鰓蓋運動モニタリング、鰓灌流リサーキュレーション
+  - その他エキゾチック: 汎用原則（titrate to effect）
+- `api/anesthesia_api.py`: Flask Blueprint（3エンドポイント）
+  - `GET /api/anesthesia/protocols?species=&category=&search=`
+  - `GET /api/anesthesia/species`
+  - `GET /api/anesthesia/categories`
+- UI: 動物種選択連動、カテゴリフィルター、検索フィルター、薬品テーブル、モニタリングパラメータ表示
+- 日英バイリンガル完全対応
+- テスト: 179件（データ構造検証、API、臨床内容品質チェック）
+- ServiceWorker: CACHE_NAME vetdict-v11→v12
 
 ## 次セッションへの引き継ぎ事項
 
