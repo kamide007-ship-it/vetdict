@@ -4749,6 +4749,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "appetite_loss", "vomiting", "bloated_abdomen", "eye_redness"},
         "description": "Infectious canine hepatitis virus causing liver inflammation, corneal edema ('blue eye'), and coagulopathy.",
         "description_ja": "犬伝染性肝炎ウイルスで肝臓の炎症、角膜浮腫（ブルーアイ）、凝固障害を引き起こします。",
+        "pathophysiology_ja": "CAV-1の経口鼻感染→扁桃リンパ組織で増殖→ウイルス血症→肝細胞・血管内皮への親和性→肝細胞壊死・DIC。回復期の免疫複合体沈着→角膜浮腫（「ブルーアイ」：前部ぶどう膜炎）。重症型は劇症肝炎で24〜48時間以内に死亡。",
+        "causes_ja": "犬アデノウイルス1型。感染犬の尿・唾液・糞便から排泄。ワクチン未接種犬、1歳未満がリスク高。CAV-2ワクチンがCAV-1に交差防御を与える。",
+        "prevention_ja": "コアワクチン（CAV-2含有5種/7種ワクチン）の適切な接種。",
         "urgency": "urgent",
     },
     {
@@ -4784,6 +4787,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "weight_loss", "bloody_stool", "skin_lesions", "lethargy"},
         "description": "Infection by the aquatic oomycete Pythium insidiosum causing GI or cutaneous disease, common in the Gulf states.",
         "description_ja": "水生卵菌ピシウムによる感染で消化管または皮膚疾患を引き起こし、湾岸諸州に多いです。",
+        "pathophysiology_ja": "Pythium insidiosum（真菌ではなく卵菌）の遊走子が皮膚創傷/消化管から侵入→消化管型：胃腸壁の肉芽腫性肥厚→閉塞・出血・蛋白喪失。皮膚型：潰瘍性肉芽腫→排膿性病変。従来の抗真菌薬（アゾール系・AMB）が無効（エルゴステロールを持たないため）。",
+        "causes_ja": "P. insidiosum。温暖な停滞水（池・沼・水田）への曝露。米国湾岸諸州・東南アジア・中南米に分布。日本での報告は非常に稀。ラブラドール・ジャーマンシェパードに報告多い。",
+        "prevention_ja": "停滞水への犬の曝露回避。免疫療法（pythium vaccine）が最も有効な治療。外科的切除の併用。従来の抗真菌薬は無効。",
         "urgency": "urgent",
     },
     {
@@ -4792,6 +4798,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "bloody_stool", "eye_redness", "weight_loss", "lethargy", "skin_lesions"},
         "description": "Rare infection by achlorophyllous algae causing chronic hemorrhagic diarrhea and disseminated disease.",
         "description_ja": "無葉緑素藻類による稀な感染で、慢性出血性下痢と播種性疾患を引き起こします。",
+        "pathophysiology_ja": "Prototheca属（無葉緑素藻類、光合成能を失った緑藻の変異体）の経口/創傷感染→消化管型：大腸の肉芽腫性炎症→慢性出血性大腸炎。播種型：眼（脈絡網膜炎→失明）・皮膚・CNS・腎臓に播種→致死的。免疫抑制が素因。",
+        "causes_ja": "P. zopfii/P. wickerhamii。汚染水・土壌からの感染。コリー・ジャイアントシュナウザーに報告が多い。犬では非常に稀。免疫抑制犬にリスク。確定診断は培養＋組織生検。",
+        "prevention_ja": "確実な予防法はない。抗真菌薬への反応は不良。AMB＋イトラコナゾール/テトラサイクリンの併用が報告されるが予後不良。",
         "urgency": "urgent",
     },
     # ---- NEW DISEASES BATCH 4 (Mixed categories to reach 450+) ----
@@ -4801,6 +4810,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"fever", "lethargy", "appetite_loss", "vomiting", "abdominal_pain", "bloated_abdomen"},
         "description": "Focal collection of pus within the liver parenchyma, usually from ascending biliary or hematogenous infection.",
         "description_ja": "肝実質内の局所的な膿の集積で、通常は上行性胆道感染または血行性感染が原因です。",
+        "pathophysiology_ja": "肝実質内への細菌侵入→膿瘍腔の形成。感染経路：(1)上行性胆道感染（胆管炎に続発）、(2)門脈性（腸管感染からの播種）、(3)肝動脈性（菌血症）、(4)直接浸潤（外傷・手術後）。E. coli、Clostridium、嫌気性菌の混合感染。破裂→腹膜炎。",
+        "causes_ja": "胆管炎/胆嚢粘液嚢腫に続発（最多）、門脈経由の腸管感染播種、異物穿通（胃腸管異物の肝臓への穿入）。免疫抑制犬（DM・クッシング）にリスク。腹部エコーで低エコー病変。",
+        "prevention_ja": "胆嚢・胆管疾患の早期管理。培養に基づく長期抗菌薬療法（4〜8週間）。大型膿瘍はエコーガイド下ドレナージまたは外科的切除。",
         "urgency": "urgent",
     },
     {
@@ -4838,6 +4850,9 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Inguinal Hernia",
+        "pathophysiology_ja": "鼠径管を通じた腹腔内容（腸管・膀胱・子宮・大網）の突出→嵌頓（還納不能）→絞扼（血流遮断）→臓器壊死→腹膜炎。先天性（鼠径輪の閉鎖不全）と後天性（外傷・妊娠）に分類。未避妊雌犬に好発。",
+        "causes_ja": "先天性（鼠径輪の開存）。ペキニーズ・バセットハウンド・ウエスティに好発。妊娠後期の雌犬（ホルモン性靭帯弛緩）。雄犬の鼠径ヘルニアは精索に沿って陰嚢ヘルニアに進展することがある。",
+        "prevention_ja": "先天性の場合は小型の非嵌頓性でも外科的閉鎖が推奨（嵌頓のリスク回避）。避妊手術時に同時修復が効率的。",
         "name_ja": "鼠径ヘルニア",
         "symptoms": {"swelling", "pain_on_touch", "vomiting", "lethargy"},
         "description": "Protrusion of abdominal contents through the inguinal canal; may become strangulated requiring emergency surgery.",
@@ -4866,6 +4881,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"nasal_discharge", "sneezing", "pain_on_touch", "appetite_loss", "lethargy"},
         "description": "Fungal infection of the nasal cavity and sinuses causing destructive rhinitis and profuse nasal discharge.",
         "description_ja": "鼻腔と副鼻腔の真菌感染で、破壊性鼻炎と大量の鼻汁を引き起こします。",
+        "pathophysiology_ja": "Aspergillus fumigatusの鼻腔内定着→真菌プラーク形成→鼻甲介の進行性破壊→一側性→両側性の粘液膿性〜血性鼻汁。鼻鏡の色素脱失が特徴的所見。篩骨板への浸潤は稀だが起こりうる。免疫正常犬にも発症する（播種型アスペルギルスとは異なる）。",
+        "causes_ja": "A. fumigatus（最多）。長頭種（ジャーマンシェパード・ゴールデン・ラブラドール）に好発。中年犬。免疫正常犬に発症（播種型は免疫不全犬）。一側性の慢性鼻汁で鑑別に挙げる。CT＋鼻腔内視鏡で真菌プラークを確認。",
+        "prevention_ja": "確実な予防法はない。局所抗真菌療法（鼻腔内クロトリマゾール灌流）が第一選択（治癒率85〜90%）。全身投与のイトラコナゾール単独は効果不十分。",
         "urgency": "urgent",
     },
     {
@@ -4896,6 +4914,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"blood_urine", "straining_urinate", "excessive_urination", "incontinence", "lethargy"},
         "description": "Most common bladder tumor in dogs, causing hematuria and dysuria; Scottish Terriers are predisposed.",
         "description_ja": "犬で最も一般的な膀胱腫瘍で、血尿と排尿困難を引き起こし、スコティッシュテリアに好発します。",
+        "pathophysiology_ja": "膀胱移行上皮の悪性増殖→膀胱三角部に好発（尿管口を巻き込みやすい→水腎症）。BRAF V595E変異が犬TCCの約80%で検出→尿中BRAF変異検出が早期診断マーカー。NSAIDs（ピロキシカム）がCOX-2阻害を介して腫瘍増殖を抑制。",
+        "causes_ja": "環境因子（除草剤・殺虫剤曝露）、遺伝的素因。スコティッシュテリア（リスク18倍）に最も好発。雌犬・肥満犬に多い。中高齢犬。",
+        "prevention_ja": "除草剤曝露の回避（散歩後の足洗浄）。スコティッシュテリアのスクリーニング（尿検査・BRAF変異・膀胱エコー）。ピロキシカム/メロキシカム＋化学療法（ミトキサントロン/ビンブラスチン）。",
         "urgency": "urgent",
     },
     {
@@ -4904,6 +4925,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "weight_loss", "appetite_loss", "abdominal_pain", "lethargy", "bloated_abdomen"},
         "description": "Highly malignant pancreatic tumor with very poor prognosis, often diagnosed at advanced stage.",
         "description_ja": "非常に予後不良な高悪性度の膵腫瘍で、進行期に診断されることが多いです。",
+        "pathophysiology_ja": "膵管上皮/腺房細胞の悪性増殖→膵管閉塞→胆管閉塞→閉塞性黄疸。腫瘍の局所浸潤→十二指腸・腹膜播種。肝臓・肺への早期転移（診断時に大部分が転移あり）。犬の膵腫瘍の90%以上が悪性。インスリノーマ（β細胞腫瘍）とは区別。",
+        "causes_ja": "原因不明。中高齢犬。エアデールテリア・スパニエル種に報告多い。慢性嘔吐・体重減少・腹痛の高齢犬でエコーにより膵腫瘤として発見。",
+        "prevention_ja": "確実な予防法はない。外科的切除が唯一の治療だが、完全切除が可能な症例は少ない。MST 1〜3ヶ月。",
         "urgency": "urgent",
     },
     {
@@ -4912,6 +4936,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_gain", "hair_loss", "lethargy", "excessive_panting"},
         "description": "Benign or malignant tumor of the adrenal gland causing Cushing's syndrome or pheochromocytoma signs.",
         "description_ja": "クッシング症候群または褐色細胞腫の症状を引き起こす副腎の良性または悪性腫瘍です。",
+        "pathophysiology_ja": "副腎皮質腫瘍（腺腫/腺癌）→コルチゾール自律分泌→副腎性クッシング症候群（多飲多尿・腹部膨満・脱毛・筋萎縮）。副腎髄質腫瘍（褐色細胞腫）→カテコラミン過剰→発作性高血圧。後大静脈への浸潤（腺癌・褐色細胞腫）→血栓塞栓症。約50%が悪性。",
+        "causes_ja": "原因不明。中高齢犬（平均10〜11歳）。特定の犬種好発は不明確。クッシング症候群の約15〜20%が副腎腫瘍性（残りは下垂体性PDH）。エコーで片側副腎腫大＋対側副腎萎縮が典型的。",
+        "prevention_ja": "確実な予防法はない。エコーで副腎腫瘤を発見した場合、機能評価（LDDST・ACTH刺激・尿中カテコラミン）→手術適応の判断。副腎摘出術が根治的。術前のフェノキシベンザミン投与（褐色細胞腫の場合）。",
         "urgency": "urgent",
     },
     {
@@ -4920,6 +4947,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "fever", "appetite_loss", "weight_loss", "excessive_panting"},
         "description": "Blood parasite (Mycoplasma haemocanis) attaching to red blood cells, causing anemia in immunocompromised dogs.",
         "description_ja": "赤血球に付着する血液寄生虫で、免疫不全の犬に貧血を引き起こします。",
+        "pathophysiology_ja": "Mycoplasma haemocanis（旧Haemobartonella canis）が赤血球表面に付着→赤血球膜の損傷→脾臓でのopsonization・除去→溶血性貧血。免疫正常犬では通常無症状キャリア。脾摘犬・免疫抑制犬で臨床的貧血を発症。IMHA との併存に注意。",
+        "causes_ja": "M. haemocanis/M. haematoparvum。伝播経路：マダニ（Rhipicephalus sanguineus）、輸血、咬傷。脾摘犬は急性溶血性発作のリスクが高い。PCR検査で確定診断（血液塗抹での検出率は低い）。",
+        "prevention_ja": "マダニ駆除薬の通年投与。輸血前のPCRスクリーニング。脾摘犬の定期的なPCVモニタリング。ドキシサイクリン（5mg/kg BID、14〜28日間）で治療。",
         "urgency": "urgent",
     },
     {
