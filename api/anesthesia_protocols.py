@@ -486,6 +486,21 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             "notes": "CRI provides stable sedation level. Support head with head stand or sling.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Xylazine + Butorphanol", "name_ja": "キシラジン＋ブトルファノール", "dose": "Xylazine 0.5-1.1 mg/kg + Butorphanol 0.02-0.04 mg/kg", "route": "IV", "onset": "3-5 min", "duration": "30-60 min",
+                 "notes_ja": "馬の前投薬の標準。キシラジンで鎮静・鎮痛、ブトルファノールで内臓痛を補強。十分な頭部下垂を確認してから導入。", "notes": "Standard equine premedication. Xylazine for sedation/analgesia, butorphanol supplements visceral pain control. Confirm adequate head drop before induction."},
+                {"name": "Romifidine + Morphine", "name_ja": "ロミフィジン＋モルヒネ", "dose": "Romifidine 0.04-0.08 mg/kg + Morphine 0.1 mg/kg", "route": "IV (slow)", "onset": "5-10 min", "duration": "45-90 min",
+                 "notes_ja": "ロミフィジンはキシラジンより長時間作用。モルヒネは15分以上かけて緩徐IV（ヒスタミン遊離予防）。必ず鎮静下で投与。", "notes": "Romifidine has longer duration than xylazine. Morphine IV over 15+ min (histamine release prevention). Always administer under sedation."},
+                {"name": "Acepromazine + Xylazine", "name_ja": "アセプロマジン＋キシラジン", "dose": "Acepromazine 0.03-0.05 mg/kg + Xylazine 0.5-1.1 mg/kg", "route": "IV", "onset": "10-20 min", "duration": "60-120 min",
+                 "notes_ja": "長時間手術向け。アセプロマジンは30分前にIM投与も可。低血圧に注意。", "notes": "For longer procedures. Acepromazine can be given IM 30 min prior. Watch for hypotension."},
+            ],
+            "notes_ja": "馬の前投薬は導入前の十分な鎮静確保が最重要目的。不十分な鎮静での導入は倒馬時の外傷リスクを大幅に増加させる。",
+            "notes": "Primary goal of equine premedication is adequate sedation before induction. Insufficient sedation increases trauma risk during recumbency.",
+        },
+        {
             "name": {"ja": "導入（全身麻酔）", "en": "Induction (General Anesthesia)"},
             "category": "induction",
             "risk_level": "high",
@@ -739,6 +754,17 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "1-2 mg/kg + 0.3-0.5 mg/kg", "route": "SC/IP", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "SC or IP注射。チャンバー吸入導入の前投薬として使用。鎮痛効果あり。", "notes": "SC or IP injection. Used as premedication before chamber induction. Provides analgesia."},
+            ],
+            "notes_ja": "ハムスターは小さいため（30-180g）、用量計算をインスリン用シリンジで正確に。低血糖リスクが高いため絶食は2-4時間以内。頬袋の内容物を事前に除去。",
+            "notes": "Hamsters are tiny (30-180g); use insulin syringes for accurate dosing. High hypoglycemia risk; fast no more than 2-4 hr. Remove cheek pouch contents before anesthesia.",
+        },
+        {
             "name": {"ja": "吸入麻酔（短時間処置）", "en": "Inhalation Anesthesia (Short Procedures)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -829,6 +855,19 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             "notes": "Guinea pigs are stress-sensitive. Use towels with cage-mate scent in quiet environment.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Buprenorphine", "name_ja": "ミダゾラム＋ブプレノルフィン", "dose": "0.5-1 mg/kg + 0.03-0.05 mg/kg", "route": "SC/IM", "onset": "10-15 min", "duration": "4-8 hr (buprenorphine)",
+                 "notes_ja": "安全性が高い。ブプレノルフィンは長時間鎮痛。", "notes": "High safety margin. Buprenorphine provides long-duration analgesia."},
+                {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "20-40 µg/kg + 0.2-0.5 mg/kg", "route": "SC/IM", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "より深い鎮静。アティパメゾールで拮抗可能。IV確保時に有用。", "notes": "Deeper sedation. Reversible with atipamezole. Useful for IV catheter placement."},
+            ],
+            "notes_ja": "モルモットへの注射はストレスが大きい。できるだけ1回で必要な薬剤を混合して投与（同一シリンジ）。チオペンタールは禁忌。",
+            "notes": "Injection is stressful for guinea pigs. Mix required drugs in single syringe when possible. Thiopental is contraindicated.",
+        },
+        {
             "name": {"ja": "注射麻酔＋吸入維持", "en": "Injectable Induction + Inhalation Maintenance"},
             "category": "induction",
             "risk_level": "moderate",
@@ -911,6 +950,17 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             "notes": "Chinchillas are heat-intolerant (>25°C). Balance cooling and warming during anesthesia.",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1 mg/kg + 0.2-0.5 mg/kg", "route": "IM/SC", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "安全性が高い。ファーリング（ストレス脱毛）を軽減するため、保定時間を最小限に。", "notes": "High safety margin. Minimize restraint time to reduce fur slip."},
+            ],
+            "notes_ja": "チンチラは熱中症に弱い（適温15-21°C）。処置室の温度管理に注意。フィプロニルは致死的なため絶対禁忌。",
+            "notes": "Chinchillas are heat-sensitive (optimal 15-21°C). Monitor procedure room temperature. Fipronil is absolutely contraindicated (lethal).",
+        },
+        {
             "name": {"ja": "全身麻酔", "en": "General Anesthesia"},
             "category": "induction",
             "risk_level": "moderate",
@@ -989,6 +1039,19 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             ],
             "notes_ja": "フェレットは比較的麻酔に耐性がある。マスク導入も可能（イソフルラン3-5%）だが、興奮・息止めに注意。",
             "notes": "Ferrets are relatively tolerant of anesthesia. Mask induction possible (isoflurane 3-5%) but watch for excitement/breath-holding.",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "10-20 µg/kg + 0.2 mg/kg", "route": "IM/SC", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "フェレットの標準的前投薬。深い鎮静が得られ、IV確保が容易になる。アティパメゾールで拮抗可。", "notes": "Standard ferret premedication. Provides deep sedation facilitating IV catheter placement. Reversible with atipamezole."},
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.3-0.5 mg/kg + 0.2 mg/kg", "route": "IM", "onset": "5-10 min", "duration": "30-45 min",
+                 "notes_ja": "心疾患のあるフェレットに安全。軽度鎮静。", "notes": "Safe for ferrets with cardiac disease. Provides mild sedation."},
+            ],
+            "notes_ja": "フェレットは絶食時間を短く（3-4時間）。インスリノーマ併存時は血糖モニタリング必須。低血糖時は50%デキストロース0.5-1 mL/kg IV希釈投与。",
+            "notes": "Keep fasting short (3-4 hr) in ferrets. Blood glucose monitoring mandatory with concurrent insulinoma. For hypoglycemia: 50% dextrose 0.5-1 mL/kg IV diluted.",
         },
         {
             "name": {"ja": "全身麻酔", "en": "General Anesthesia"},
@@ -1074,6 +1137,17 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             ],
             "notes_ja": "ハリネズミの身体検査は鎮静なしでは困難な場合が多い。軽度鎮静で丸まった状態を解放し、検査・採血・画像診断を実施。棘のある背面を避けてバイタルサイン測定。",
             "notes": "Physical examination of hedgehogs is often impossible without sedation. Light sedation uncurls the patient for examination, blood collection, and imaging. Avoid spiny dorsum when measuring vital signs.",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1 mg/kg + 0.05-0.2 mg/kg", "route": "IM/SC (inguinal area)", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "棘のない部位（鼠径部、腋窩）にIM注射。チャンバー導入の前投薬として使用可能。", "notes": "IM injection into spine-free areas (inguinal, axillary). Can be used as premedication before chamber induction."},
+            ],
+            "notes_ja": "ハリネズミは丸まるため注射部位が限られる。チャンバー吸入鎮静後にIM注射を行う方法が推奨。",
+            "notes": "Injection sites are limited because hedgehogs curl up. Chamber inhalation sedation followed by IM injection is recommended.",
         },
         {
             "name": {"ja": "吸入鎮静・麻酔（最も一般的）", "en": "Inhalation Sedation/Anesthesia (Most Common)"},
@@ -1166,6 +1240,17 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             "notes": "Sugar gliders can be aggressive; sedation is often necessary for examination. Always differentiate from torpor (dormancy state during hypothermia/hypoglycemia). Take care not to damage the patagium (gliding membrane).",
         },
         {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Buprenorphine", "name_ja": "ミダゾラム＋ブプレノルフィン", "dose": "0.5 mg/kg + 0.01-0.03 mg/kg", "route": "IM/SC", "onset": "10-15 min", "duration": "4-8 hr (buprenorphine)",
+                 "notes_ja": "小型のため用量計算を特に正確に。インスリン用シリンジ使用。", "notes": "Precise dose calculation critical due to small size. Use insulin syringe."},
+            ],
+            "notes_ja": "フクロモモンガは社会的動物。可能であれば、同居個体を近くに置いてストレス軽減。膜翼（滑空膜）を傷つけないよう注意。",
+            "notes": "Sugar gliders are social animals. Keep cage-mates nearby if possible to reduce stress. Avoid damaging the patagium (gliding membrane).",
+        },
+        {
             "name": {"ja": "吸入麻酔（推奨）", "en": "Inhalation Anesthesia (Recommended)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1252,6 +1337,17 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             ],
             "notes_ja": "デグーの尾は容易にdegloving（皮膚剥離）するため、保定時に尾を絶対に掴まない。社会性が高い動物のため、ペアの個体を近くに置くとストレス軽減。糖尿病体質のため、術前の血糖値測定を推奨。",
             "notes": "Degu tails are extremely prone to degloving; NEVER grasp the tail during restraint. Social animals — keeping cage-mate nearby reduces stress. Diabetes-prone species; pre-anesthetic blood glucose measurement recommended.",
+        },
+        {
+            "name": {"ja": "前投薬", "en": "Premedication"},
+            "category": "premedication",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1 mg/kg + 0.2-0.5 mg/kg", "route": "IM/SC", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "安全性高い。尾のdeglovingに注意。", "notes": "High safety margin. Watch for tail degloving."},
+            ],
+            "notes_ja": "デグーは糖尿病体質。術前血糖値を必ず測定。覚醒後に高糖食は避ける。",
+            "notes": "Degus are diabetes-prone. Always check pre-anesthetic blood glucose. Avoid high-sugar foods post-recovery.",
         },
         {
             "name": {"ja": "吸入麻酔（推奨）", "en": "Inhalation Anesthesia (Recommended)"},
