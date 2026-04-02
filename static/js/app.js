@@ -93,6 +93,7 @@ const I18N={
     anesthesiaMonitoring:"モニタリング項目",anesthesiaTarget:"目標値",
     anesthesiaBreedConsider:"品種別注意事項",anesthesiaSelectSpecies:"動物種を選択すると、種別の鎮静・麻酔プロトコルが表示されます",
     anesthesiaAsaTitle:"ASA身体状態分類",anesthesiaAsaGuidance:"麻酔管理指針",
+    anesthesiaWeightLabel:"体重",anesthesiaEmergency:"緊急プロトコル",anesthesiaCalcDose:"計算投与量",anesthesiaCalcRange:"範囲",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
     allCategories:"全カテゴリ",allSpecies:"全動物種",
     sponsorTagline:"獣医師が考案・国内製造 — 競走馬理化学研究所の検査合格",
@@ -183,6 +184,7 @@ const I18N={
     anesthesiaMonitoring:"Monitoring Parameters",anesthesiaTarget:"Target",
     anesthesiaBreedConsider:"Breed-Specific Considerations",anesthesiaSelectSpecies:"Select a species to view sedation & anesthesia protocols",
     anesthesiaAsaTitle:"ASA Physical Status Classification",anesthesiaAsaGuidance:"Anesthesia Management Guidance",
+    anesthesiaWeightLabel:"Weight",anesthesiaEmergency:"Emergency",anesthesiaCalcDose:"Calculated Dose",anesthesiaCalcRange:"range",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
     allCategories:"All Categories",allSpecies:"All Species",
     sponsorTagline:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
@@ -2394,6 +2396,22 @@ function loadAnesthesiaProtocols(){
   fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
   document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
   document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
+  /* Weight-based dose calculator */
+  const weightInput=document.getElementById("anesthesiaWeight");
+  if(weightInput){
+    weightInput.addEventListener("input",debounce(renderAnesthesiaList,300));
+    document.getElementById("anesthesiaWeightClear").addEventListener("click",()=>{weightInput.value="";renderAnesthesiaList();});
+  }
+  /* Emergency protocol quick-access */
+  const emergBtn=document.getElementById("anesthesiaEmergencyBtn");
+  if(emergBtn){
+    emergBtn.addEventListener("click",()=>{
+      const catSel=document.getElementById("anesthesiaCategoryFilter");
+      const isActive=emergBtn.classList.toggle("active");
+      if(isActive){catSel.value="emergency";} else {catSel.value="";}
+      renderAnesthesiaList();
+    });
+  }
 }
 
 function reloadAnesthesiaForSpecies(){
@@ -2429,6 +2447,27 @@ function renderAnesthesiaOverview(data){
   } else { ov.style.display="none"; }
 }
 
+/* Parse dose string like "0.2-0.4 mg/kg" and calculate for given weight */
+function calcDoseForWeight(doseStr,weightKg){
+  if(!doseStr||!weightKg||weightKg<=0)return null;
+  /* Match patterns: "0.2 mg/kg", "0.2-0.4 mg/kg", "2-4 μg/kg", "0.5 mL/kg", "5-10 mg/kg IV" */
+  const m=doseStr.match(/(\d+(?:\.\d+)?)\s*[-–~～]\s*(\d+(?:\.\d+)?)\s*(mg|μg|µg|mcg|mL|ml|IU|U)\s*\/\s*kg/i);
+  const s=doseStr.match(/(\d+(?:\.\d+)?)\s*(mg|μg|µg|mcg|mL|ml|IU|U)\s*\/\s*kg/i);
+  if(m){
+    const lo=parseFloat(m[1])*weightKg;
+    const hi=parseFloat(m[2])*weightKg;
+    const unit=m[3].replace(/µg|mcg/i,"μg");
+    return{lo:roundDose(lo),hi:roundDose(hi),unit:unit,isRange:true};
+  }
+  if(s){
+    const val=parseFloat(s[1])*weightKg;
+    const unit=s[2].replace(/µg|mcg/i,"μg");
+    return{lo:roundDose(val),hi:null,unit:unit,isRange:false};
+  }
+  return null;
+}
+function roundDose(v){return v>=10?Math.round(v*10)/10:v>=1?Math.round(v*100)/100:Math.round(v*1000)/1000;}
+
 function renderAnesthesiaList(){
   const list=document.getElementById("anesthesiaList");
   const search=(document.getElementById("anesthesiaSearch").value||"").toLowerCase();
@@ -2454,6 +2493,8 @@ function renderAnesthesiaList(){
 
   const riskLabels={low:t("anesthesiaRiskLow"),moderate:t("anesthesiaRiskModerate"),high:t("anesthesiaRiskHigh")};
   const riskColors={low:"#16a34a",moderate:"#ea580c",high:"#dc2626"};
+  const weightEl=document.getElementById("anesthesiaWeight");
+  const patientWeight=weightEl?parseFloat(weightEl.value):0;
 
   list.innerHTML=protocols.map(p=>{
     const pName=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
@@ -2468,11 +2509,23 @@ function renderAnesthesiaList(){
 
     let drugsHtml="";
     if(p.drugs&&p.drugs.length){
-      drugsHtml=`<div class="anesthesia-drugs-table"><table><thead><tr><th>${currentLang==="ja"?"薬品":"Drug"}</th><th>${t("anesthesiaDose")}</th><th>${t("anesthesiaRoute")}</th><th>${t("anesthesiaOnset")}</th><th>${t("anesthesiaDuration")}</th></tr></thead><tbody>`
+      const hasCalc=patientWeight>0;
+      const calcHeader=hasCalc?`<th>${t("anesthesiaCalcDose")} (${patientWeight}kg)</th>`:"";
+      drugsHtml=`<div class="anesthesia-drugs-table"><table><thead><tr><th>${currentLang==="ja"?"薬品":"Drug"}</th><th>${t("anesthesiaDose")}</th>${calcHeader}<th>${t("anesthesiaRoute")}</th><th>${t("anesthesiaOnset")}</th><th>${t("anesthesiaDuration")}</th></tr></thead><tbody>`
         +p.drugs.map(d=>{
           const dNotes=currentLang==="ja"?(d.notes_ja||d.notes||""):(d.notes||d.notes_ja||"");
-          return`<tr><td><strong>${escapeHtml(d.name||"")}</strong><br/><span class="d-name-ja">${escapeHtml(d.name_ja||"")}</span></td><td>${escapeHtml(d.dose||"")}</td><td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
-          +(dNotes?`<tr class="anesthesia-drug-note"><td colspan="5">${escapeHtml(dNotes)}</td></tr>`:"");
+          let calcCell="";
+          if(hasCalc){
+            const calc=calcDoseForWeight(d.dose,patientWeight);
+            if(calc){
+              calcCell=calc.isRange
+                ?`<td><span class="anesthesia-calc-dose">${calc.lo}–${calc.hi} ${escapeHtml(calc.unit)}</span></td>`
+                :`<td><span class="anesthesia-calc-dose">${calc.lo} ${escapeHtml(calc.unit)}</span></td>`;
+            } else { calcCell=`<td><span style="color:var(--gray-400);font-size:.76rem">—</span></td>`; }
+          }
+          const cols=hasCalc?6:5;
+          return`<tr><td><strong>${escapeHtml(d.name||"")}</strong><br/><span class="d-name-ja">${escapeHtml(d.name_ja||"")}</span></td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
+          +(dNotes?`<tr class="anesthesia-drug-note"><td colspan="${cols}">${escapeHtml(dNotes)}</td></tr>`:"");
         }).join("")
         +`</tbody></table></div>`;
     }
