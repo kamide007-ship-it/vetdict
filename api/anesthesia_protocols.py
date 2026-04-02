@@ -565,6 +565,46 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             "notes_ja": "馬の術中心停止は予後不良。予防（適切な血圧管理、輸液、体位変換）が最重要。",
             "notes": "Intraoperative cardiac arrest in horses carries a very poor prognosis. Prevention (proper BP management, fluids, repositioning) is paramount.",
         },
+        {
+            "name": {"ja": "CRI鎮痛（持続定量点滴）", "en": "CRI Analgesia (Constant Rate Infusion)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Detomidine CRI", "name_ja": "デトミジンCRI", "dose": "10-40 µg/kg/hr (loading: 5-10 µg/kg IV)", "route": "IV CRI", "onset": "3-5 min", "duration": "Continuous",
+                 "notes_ja": "立位鎮静のCRI維持に最適。立位手術（創傷処置、歯科等）で頻用。低用量で軽度鎮静、高用量で深鎮静。", "notes": "Ideal for maintaining standing sedation via CRI. Frequently used for standing procedures (wound care, dentistry). Low doses for light sedation, high doses for deep sedation."},
+                {"name": "Butorphanol CRI", "name_ja": "ブトルファノールCRI", "dose": "13-24 µg/kg/hr (loading: 0.02-0.04 mg/kg IV)", "route": "IV CRI", "onset": "5 min", "duration": "Continuous",
+                 "notes_ja": "内臓痛にはκ作動薬として有効。デトミジンCRIとの併用が一般的。", "notes": "Effective for visceral pain as κ-agonist. Commonly combined with detomidine CRI."},
+                {"name": "Morphine CRI", "name_ja": "モルヒネCRI", "dose": "0.1 mg/kg/hr (loading: 0.1-0.15 mg/kg IV slow over 15 min)", "route": "IV CRI", "onset": "15-20 min", "duration": "Continuous",
+                 "notes_ja": "馬のμオピオイドは興奮・腸管運動低下リスクあり。必ず鎮静下で投与。ローディングは15分以上かけて緩徐投与（ヒスタミン遊離防止）。", "notes": "Equine µ-opioids risk excitation and GI dysmotility. Always administer under sedation. Loading dose over 15+ min (histamine release prevention)."},
+                {"name": "Ketamine CRI", "name_ja": "ケタミンCRI", "dose": "0.4-1.2 mg/kg/hr (loading: 0.2 mg/kg IV)", "route": "IV CRI", "onset": "1-2 min", "duration": "Continuous",
+                 "notes_ja": "体性痛に有効。NMDA拮抗による中枢感作予防。イソフルラン濃度を25-30%削減可能。整形外科手術で特に推奨。", "notes": "Effective for somatic pain. NMDA antagonism prevents central sensitization. Can reduce isoflurane by 25-30%. Particularly recommended for orthopedic surgery."},
+                {"name": "Lidocaine CRI", "name_ja": "リドカインCRI", "dose": "3 mg/kg/hr (loading: 1.3 mg/kg IV over 15 min)", "route": "IV CRI", "onset": "10-15 min", "duration": "Continuous",
+                 "notes_ja": "鎮痛・抗炎症・消化管運動促進。開腹術・疝痛手術に特に有用。筋肉攣縮や心毒性に注意（ローディングは必ず緩徐投与）。", "notes": "Analgesic, anti-inflammatory, prokinetic. Especially useful for laparotomy/colic surgery. Watch for muscle fasciculations and cardiotoxicity (slow loading essential)."},
+                {"name": "Medetomidine CRI", "name_ja": "メデトミジンCRI", "dose": "3.5 µg/kg/hr", "route": "IV CRI", "onset": "5 min", "duration": "Continuous",
+                 "notes_ja": "全身麻酔の補助。吸入麻酔薬のMACを30%削減。アティパメゾールで拮抗可能。徐脈・末梢血管収縮に注意。", "notes": "GA adjunct. Reduces inhalant MAC by ~30%. Reversible with atipamezole. Watch for bradycardia and peripheral vasoconstriction."},
+            ],
+            "notes_ja": "馬のCRI鎮痛は全身麻酔中の吸入麻酔薬濃度削減に不可欠。揮発性麻酔薬は馬の血圧低下の主因であり、CRIによるMAC削減がMAPを改善する。複数CRIの併用（MLK等）も可能だが、用量調整を慎重に。",
+            "notes": "CRI analgesia in horses is essential for reducing inhalant requirements during GA. Volatile agents are the primary cause of equine hypotension, and MAC reduction via CRI improves MAP. Multiple CRIs can be combined (MLK) but dose adjustments must be careful.",
+        },
+        {
+            "name": {"ja": "TIVA / Triple Drip (GKX)", "en": "TIVA / Triple Drip (GKX)"},
+            "category": "maintenance",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Triple Drip (GKX)", "name_ja": "トリプルドリップ（GKX）", "dose": "Guaifenesin 50 mg/mL + Ketamine 1 mg/mL + Xylazine 0.5 mg/mL → 1-2 mL/kg/hr", "route": "IV CRI", "onset": "3-5 min", "duration": "Continuous",
+                 "notes_ja": "馬の野外TIVAのゴールドスタンダード。5%グアイフェネシン1Lにケタミン1g+キシラジン500mgを混合。筋弛緩（グアイフェネシン）+解離麻酔（ケタミン）+鎮静鎮痛（キシラジン）。60-90分以内の手術に適する。長時間は蓄積リスク。", "notes": "Gold standard equine field TIVA. Mix ketamine 1g + xylazine 500mg into 1L of 5% guaifenesin. Muscle relaxation (guaifenesin) + dissociative anesthesia (ketamine) + sedation/analgesia (xylazine). Suitable for procedures up to 60-90 min. Accumulation risk with prolonged use."},
+                {"name": "Propofol TIVA", "name_ja": "プロポフォールTIVA", "dose": "0.15-0.25 mg/kg/min", "route": "IV CRI", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "馬では高コスト（体重あたりの薬液量が膨大）。短時間処置や吸入麻酔不使用環境に限定。覚醒は良好。", "notes": "Very expensive in horses (large drug volumes per body weight). Limited to short procedures or environments without inhalant capability. Good recovery quality."},
+                {"name": "Ketamine + Medetomidine TIVA", "name_ja": "ケタミン＋メデトミジンTIVA", "dose": "Ketamine 3 mg/kg/hr + Medetomidine 3.5 µg/kg/hr", "route": "IV CRI (combined)", "onset": "Immediate (after IV induction)", "duration": "Continuous",
+                 "notes_ja": "GKXの代替TIVA。メデトミジンによる心血管系安定性がキシラジンより優れる。アティパメゾールでα2成分を拮抗可能（覚醒の質向上）。", "notes": "Alternative to GKX. Medetomidine provides better cardiovascular stability than xylazine. α2 component reversible with atipamezole (improves recovery quality)."},
+            ],
+            "monitoring_params": [
+                {"param": "MAP", "target": "≥70 mmHg", "notes_ja": "TIVAでは吸入麻酔より血圧維持が容易。ただし長時間投与では薬物蓄積により血圧低下に注意。", "notes": "BP maintenance is generally better with TIVA than inhalants. However, watch for delayed hypotension from drug accumulation in prolonged procedures."},
+                {"param": "Muscle tone", "target": "Adequate relaxation without movement", "notes_ja": "GKXのグアイフェネシンが主に筋弛緩を担う。不十分な場合はケタミンボーラス（0.5 mg/kg IV）を追加。", "notes": "Guaifenesin in GKX provides primary muscle relaxation. If inadequate, supplement with ketamine bolus (0.5 mg/kg IV)."},
+            ],
+            "notes_ja": "馬のTIVAは野外手術（去勢、創傷修復等）や吸入麻酔装置が利用できない環境で不可欠。GKXが最も一般的で安価。60-90分以上の手術では吸入麻酔への移行を検討。覚醒はα2作動薬のボーラス追加で質を改善できる。",
+            "notes": "Equine TIVA is essential for field surgery (castration, wound repair) or when inhalant equipment is unavailable. GKX is most common and cost-effective. For procedures >60-90 min, consider transition to inhalant. Recovery quality improved with α2-agonist supplementation.",
+        },
     ],
 }
 
@@ -738,6 +778,14 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
             "notes": "Recover in warm environment (28-30°C). Offer food and water early. If slow recovery, check temperature first.",
         },
         {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "低体温が最大のリスク。覚醒まで28-30°Cの加温環境（保温マット+タオル）で管理。覚醒後速やかに水と食事を提供（低血糖予防）。酸素補給を麻酔中止後最低10分継続。平均覚醒時間: 吸入15-30分、注射60-120分。",
+            "notes": "Hypothermia is the greatest risk. Maintain 28-30°C warming environment (heating pad + towel) until recovery. Offer water and food promptly after awakening (hypoglycemia prevention). Continue O2 supplementation for ≥10 min post-anesthesia. Average recovery: inhalant 15-30 min, injectable 60-120 min.",
+        },
+        {
             "name": {"ja": "緊急対応・回復", "en": "Emergency & Recovery"},
             "category": "emergency",
             "risk_level": "high",
@@ -809,6 +857,17 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             "notes": "Offer hay and water immediately after recovery. Post-op analgesia: meloxicam 0.5-1.0 mg/kg PO/SC q24h. Vitamin C 50 mg/kg SC/PO. Return to cage-mates early (social animals).",
         },
         {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "1 mg/kg", "route": "IM/SC", "onset": "5-10 min", "duration": "",
+                 "notes_ja": "メデトミジン/デクスメデトミジン使用時の拮抗薬。鎮痛も拮抗するため、他の鎮痛を確保後に投与。", "notes": "Reversal for medetomidine/dexmedetomidine. Also reverses analgesia; ensure alternative analgesia before administering."},
+            ],
+            "notes_ja": "低体温予防が最優先。加温パッド（直接接触回避）で28-30°Cを維持。術後はビタミンC補充（50 mg/kg SC）を推奨。覚醒後すぐに牧草と水を提供（GI stasis予防）。覚醒時の興奮で骨折リスクあり（モルモットの骨は脆い）。",
+            "notes": "Hypothermia prevention is top priority. Maintain 28-30°C with warming pad (avoid direct contact). Post-op vitamin C supplementation (50 mg/kg SC) recommended. Offer hay and water immediately after awakening (GI stasis prevention). Fracture risk during excited recovery (guinea pigs have fragile bones).",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -876,6 +935,17 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             ],
             "notes_ja": "覚醒は静かで涼しい（20-22°C）環境で。乾草と水を早期に提供。砂浴びは創傷治癒まで中止。",
             "notes": "Recover in quiet, cool (20-22°C) environment. Offer hay and water early. Suspend dust baths until wound healing.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "1 mg/kg", "route": "IM/SC", "onset": "5-10 min", "duration": "",
+                 "notes_ja": "α2作動薬の拮抗。", "notes": "α2-agonist reversal."},
+            ],
+            "notes_ja": "チンチラは熱中症に極めて弱い（適温15-21°C）。加温は24°C以下で管理し、過加温を絶対に避ける。覚醒後は牧草と水を速やかに提供。ファーリング（ストレス脱毛）が発生する場合あり。術後環境は静かで涼しく。",
+            "notes": "Chinchillas are extremely heat-sensitive (optimal 15-21°C). Keep warming below 24°C; absolutely avoid overheating. Offer hay and water promptly after recovery. Fur slip (stress-induced fur loss) may occur. Post-operative environment should be quiet and cool.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -950,6 +1020,17 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             "notes": "Offer small amounts of high-calorie food immediately after recovery (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2 mg/kg PO/SC q24h.",
         },
         {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [
+                {"name": "Atipamezole", "name_ja": "アティパメゾール", "dose": "Same volume as dexmedetomidine used", "route": "IM", "onset": "5-10 min", "duration": "",
+                 "notes_ja": "デクスメデトミジン/メデトミジンの拮抗。", "notes": "Reversal for dexmedetomidine/medetomidine."},
+            ],
+            "notes_ja": "フェレットは低血糖になりやすい（特にインスリノーマ併存時）。覚醒後30分以内に少量の食事を提供。絶食時間を最小限に。加温環境（28-30°C）で管理。覚醒時に活発に動き回るため、安全な環境を確保。",
+            "notes": "Ferrets are prone to hypoglycemia (especially with concurrent insulinoma). Offer small meal within 30 min of recovery. Minimize fasting time. Maintain warming environment (28-30°C). Ferrets become very active during recovery; ensure safe environment.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -981,6 +1062,19 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
         "en": "No fasting required (hypoglycemia risk).",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（丸まった個体の開放）", "en": "Sedation (Uncurling / Examination)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Isoflurane (chamber)", "name_ja": "イソフルラン（チャンバー）", "dose": "3-5% induction → 1.5-3% maintenance", "route": "Inhalation (chamber/mask)", "onset": "2-5 min", "duration": "As needed",
+                 "notes_ja": "丸まった状態のまま吸入チャンバーに入れて鎮静開始。棘があるため注射鎮静は困難。最も一般的なハリネズミの鎮静法。", "notes": "Place curled hedgehog directly in induction chamber. Injection sedation is difficult due to spines. Most common hedgehog sedation method."},
+                {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "1-3 mg/kg", "route": "IM (inguinal/axillary area)", "onset": "5-10 min", "duration": "15-30 min",
+                 "notes_ja": "棘のない部位（鼠径部、腋窩）にIM注射。チャンバー鎮静が困難な場合の代替。", "notes": "IM injection in spine-free areas (inguinal, axillary). Alternative when chamber sedation is difficult."},
+            ],
+            "notes_ja": "ハリネズミの身体検査は鎮静なしでは困難な場合が多い。軽度鎮静で丸まった状態を解放し、検査・採血・画像診断を実施。棘のある背面を避けてバイタルサイン測定。",
+            "notes": "Physical examination of hedgehogs is often impossible without sedation. Light sedation uncurls the patient for examination, blood collection, and imaging. Avoid spiny dorsum when measuring vital signs.",
+        },
         {
             "name": {"ja": "吸入鎮静・麻酔（最も一般的）", "en": "Inhalation Sedation/Anesthesia (Most Common)"},
             "category": "induction",
@@ -1021,6 +1115,14 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             "notes": "Recover in warm (25-27°C) environment. Check appetite with mealworms or favorite food. Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
         },
         {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "覚醒まで28-30°Cを維持。丸まった状態では呼吸状態の評価が困難なため、棘に触れずに胸郭の動きを観察。覚醒後はミルワームや缶詰フードなど嗜好性の高い食事を提供（摂食拒否はストレスの指標）。吸入麻酔からの覚醒は10-20分。",
+            "notes": "Maintain 28-30°C until recovery. Respiratory assessment is difficult when curled; observe thorax movement without touching spines. Offer palatable food (mealworms, canned food) post-recovery — food refusal indicates stress. Inhalant recovery typically 10-20 min.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -1050,6 +1152,19 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
         "en": "2-4 hr food fast only (hypoglycemia risk).",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Isoflurane (chamber)", "name_ja": "イソフルラン（チャンバー）", "dose": "3-5% induction → 1-2% mask maintenance", "route": "Inhalation (chamber/mask)", "onset": "2-4 min", "duration": "As needed",
+                 "notes_ja": "小型のため吸入チャンバーでの鎮静が最も安全。マスク維持に速やかに移行。", "notes": "Chamber induction is safest due to small size. Transition quickly to mask maintenance."},
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5 mg/kg + 0.2 mg/kg", "route": "IM", "onset": "5-10 min", "duration": "20-40 min",
+                 "notes_ja": "軽度鎮静。拮抗可能。トルポール（擬死）との鑑別に注意。", "notes": "Light sedation. Reversible. Distinguish from torpor (physiological dormancy state)."},
+            ],
+            "notes_ja": "フクロモモンガは攻撃的になることがあるため、鎮静が検査に必要な場合が多い。トルポール（低体温・低血糖時の擬死状態）との鑑別を必ず行う。滑空膜を傷つけないよう注意。",
+            "notes": "Sugar gliders can be aggressive; sedation is often necessary for examination. Always differentiate from torpor (dormancy state during hypothermia/hypoglycemia). Take care not to damage the patagium (gliding membrane).",
+        },
         {
             "name": {"ja": "吸入麻酔（推奨）", "en": "Inhalation Anesthesia (Recommended)"},
             "category": "induction",
@@ -1088,6 +1203,14 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             "notes": "Place in dark, warm pouch after recovery. Offer honey water (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2-0.5 mg/kg PO/SC q24h.",
         },
         {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "低体温・低血糖のダブルリスク。28-30°Cの加温環境で管理。覚醒後は果物や蜂蜜水など高カロリー食を少量提供。自咬症（self-mutilation）の既往がある個体は術後のエリザベスカラー着用を検討。覚醒時のパラシュート反射（四肢を広げる）は正常。",
+            "notes": "Double risk of hypothermia and hypoglycemia. Maintain warming at 28-30°C. Offer small amounts of high-calorie food (fruit, honey water) post-recovery. Consider E-collar for individuals with self-mutilation history. Parachuting reflex (spreading limbs) during recovery is normal.",
+        },
+        {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
             "category": "emergency",
             "risk_level": "high",
@@ -1117,6 +1240,19 @@ ANESTHESIA_PROTOCOLS["degu"] = {
         "en": "No fasting required (hypoglycemia risk, especially diabetic individuals).",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Isoflurane (chamber)", "name_ja": "イソフルラン（チャンバー）", "dose": "3-5% induction → 1.5-2.5% mask", "route": "Inhalation (chamber/mask)", "onset": "2-5 min", "duration": "As needed",
+                 "notes_ja": "チャンバー導入が最も安全。マスクに速やかに切り替え。", "notes": "Chamber induction is safest. Transition to mask promptly."},
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1 mg/kg + 0.2-0.5 mg/kg", "route": "IM/SC", "onset": "5-15 min", "duration": "30-60 min",
+                 "notes_ja": "軽度鎮静。拮抗可能。", "notes": "Light sedation. Reversible."},
+            ],
+            "notes_ja": "デグーの尾は容易にdegloving（皮膚剥離）するため、保定時に尾を絶対に掴まない。社会性が高い動物のため、ペアの個体を近くに置くとストレス軽減。糖尿病体質のため、術前の血糖値測定を推奨。",
+            "notes": "Degu tails are extremely prone to degloving; NEVER grasp the tail during restraint. Social animals — keeping cage-mate nearby reduces stress. Diabetes-prone species; pre-anesthetic blood glucose measurement recommended.",
+        },
         {
             "name": {"ja": "吸入麻酔（推奨）", "en": "Inhalation Anesthesia (Recommended)"},
             "category": "induction",
@@ -1154,6 +1290,14 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             ],
             "notes_ja": "覚醒後は乾草と水を提供。糖分の高い果物は厳禁。術後鎮痛: メロキシカム0.3-0.5 mg/kg PO/SC q24h。",
             "notes": "Offer hay and water after recovery. High-sugar fruits are strictly prohibited. Post-op analgesia: meloxicam 0.3-0.5 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "覚醒・回復", "en": "Recovery"},
+            "category": "recovery",
+            "risk_level": "moderate",
+            "drugs": [],
+            "notes_ja": "低体温予防に加温環境（26-28°C）で管理。デグーは糖尿病体質のため、覚醒後の高糖食は避ける（ペレットと牧草を提供）。尾の脱皮損傷（degloving）を防ぐため、尾を絶対に掴まない。覚醒時間: 吸入15-30分。",
+            "notes": "Maintain warming (26-28°C) for hypothermia prevention. Degus are diabetes-prone; avoid high-sugar foods post-recovery (offer pellets and hay). Never grasp the tail to prevent tail degloving injury. Recovery time: inhalant 15-30 min.",
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -1410,6 +1554,19 @@ ANESTHESIA_PROTOCOLS["reptile"] = {
         "en": "Small reptiles: 12-24 hr. Large reptiles: 24-48 hr. Longer fasting needed due to slow GI transit.",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "1-2 mg/kg", "route": "IM (forelimb)", "onset": "10-20 min", "duration": "30-60 min",
+                 "notes_ja": "軽度鎮静。筋弛緩作用あり。前肢に注射（腎門脈系回避）。フルマゼニルで拮抗可能。", "notes": "Light sedation with muscle relaxation. Inject into forelimb (avoid renal portal system). Reversible with flumazenil."},
+                {"name": "Alfaxalone (low dose)", "name_ja": "アルファキサロン（低用量）", "dose": "3-5 mg/kg", "route": "IM (forelimb)", "onset": "10-15 min", "duration": "20-40 min",
+                 "notes_ja": "低用量で鎮静。検査、放射線撮影、採血に適する。前肢に注射。", "notes": "Sedation at low dose. Suitable for examination, radiography, blood collection. Inject into forelimb."},
+            ],
+            "notes_ja": "爬虫類の鎮静は効果発現まで時間がかかる（10-20分）。POTZ維持が効果発現に不可欠（低体温では薬物代謝が遅延）。全注射は前肢または前半身に（腎門脈系を避ける）。",
+            "notes": "Reptile sedation has slow onset (10-20 min). POTZ maintenance is essential for drug onset (hypothermia delays metabolism). All injections into forelimbs or cranial body (avoid renal portal system).",
+        },
         {
             "name": {"ja": "注射麻酔（推奨）", "en": "Injectable Anesthesia (Recommended)"},
             "category": "induction",
@@ -1694,6 +1851,19 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
             "notes_ja": "回復: 新鮮な脱塩素水に移す。正向反射の回復を確認。低酸素耐性は高いが、長時間の浸漬は肺水腫リスク。完全回復まで浅い水で監視。",
             "notes": "Recovery: transfer to fresh dechlorinated water. Confirm righting reflex return. High hypoxia tolerance but prolonged immersion risks pulmonary edema. Monitor in shallow water until full recovery.",
         },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [
+                {"name": "Epinephrine", "name_ja": "エピネフリン", "dose": "0.1-0.5 mg/kg", "route": "IC / dorsal lymph sac", "onset": "Immediate", "duration": "3-5 min",
+                 "notes_ja": "CPA時。背側リンパ嚢への投与が最もアクセスしやすい。心臓内投与も可能（カエル: 腹側正中）。", "notes": "For CPA. Dorsal lymph sac is most accessible route. Intracardiac also possible (frogs: ventral midline)."},
+                {"name": "Doxapram", "name_ja": "ドキサプラム", "dose": "5 mg/kg", "route": "Dorsal lymph sac / IM", "onset": "1-2 min", "duration": "5-10 min",
+                 "notes_ja": "呼吸停止時。", "notes": "For apnea."},
+            ],
+            "notes_ja": "両生類のCPR: 新鮮水に移し、皮膚を湿潤に保つ。口腔/鰓への水流で酸素化。心臓マッサージは腹側から軽い圧迫。低体温個体は加温（飼育適温上限）してから死亡判定。",
+            "notes": "Amphibian CPR: transfer to fresh water, keep skin moist. Oxygenate via water flow over oral/branchial surfaces. Gentle ventral cardiac massage. Warm hypothermic individuals to upper habitat temp before pronouncing death.",
+        },
     ],
 }
 
@@ -1747,6 +1917,14 @@ ANESTHESIA_PROTOCOLS["fish"] = {
             ],
             "notes_ja": "回復: 新鮮な（麻酔薬を含まない）エアレーション水に移す。口を開けて水流を当て、鰓を灌流。正常遊泳の回復まで監視。回復には3-15分。",
             "notes": "Recovery: transfer to fresh (anesthetic-free) aerated water. Direct water flow into mouth to irrigate gills. Monitor until normal swimming resumes. Recovery takes 3-15 min.",
+        },
+        {
+            "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
+            "category": "emergency",
+            "risk_level": "high",
+            "drugs": [],
+            "notes_ja": "Stage IV（鰓蓋運動停止）に達した場合: 直ちに新鮮なエアレーション水に移す。口を開けて鰓に水流を通す（手動灌流）。軽い刺激を与える。回復しない場合は30分以上の灌流を継続（魚は低酸素耐性が高い）。薬物的蘇生は一般的でなく、物理的な鰓灌流が最も効果的。",
+            "notes": "If Stage IV reached (opercular arrest): immediately transfer to fresh aerated water. Open mouth and direct water flow through gills (manual irrigation). Provide gentle stimulation. If no recovery, continue irrigation for 30+ min (fish have high hypoxia tolerance). Pharmacological resuscitation is uncommon; physical gill irrigation is most effective.",
         },
     ],
 }
