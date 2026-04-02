@@ -3168,6 +3168,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"seizures", "lethargy", "stiffness", "anxiety"},
         "description": "A functional pancreatic tumor overproducing insulin and causing severe hypoglycemia.",
         "description_ja": "インスリンを過剰産生する膵臓の機能性腫瘍で、重度の低血糖を引き起こします。",
+        "pathophysiology_ja": "膵β細胞腫瘍→インスリンの自律的過剰分泌→低血糖（BG<60mg/dL）→脳のグルコース欠乏→脱力・運動失調・けいれん・昏迷。低血糖時にインスリン値が不適切に高値。約50%が悪性で肝臓・リンパ節に転移。",
+        "causes_ja": "膵β細胞の腫瘍性増殖。中高齢犬（8〜12歳）に好発。大型犬（ジャーマンシェパード、アイリッシュセッター、ラブラドール）。空腹時・運動後に低血糖発作が誘発。",
+        "prevention_ja": "確実な予防法はない。空腹時低血糖エピソードの早期受診。少量頻回食（低炭水化物・高蛋白・高脂肪食）で低血糖を最小化。",
         "urgency": "urgent",
     },
     {
@@ -3486,6 +3489,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "appetite_loss", "lethargy", "vomiting"},
         "description": "Severe dilation of the colon resulting in chronic constipation and inability to defecate normally.",
         "description_ja": "結腸の重度な拡張により、慢性便秘と正常な排便不能を引き起こします。",
+        "pathophysiology_ja": "結腸の慢性的な拡張→結腸壁の平滑筋の不可逆的伸展→蠕動能の喪失→糞便の異常貯留→巨大糞塊の形成→排便不能。犬では猫ほど一般的でないが、慢性便秘の放置で進行。",
+        "causes_ja": "慢性便秘の放置（最多）、骨盤骨折後の骨盤腔狭窄、神経原性（仙骨脊髄損傷・馬尾症候群）、甲状腺機能低下症、会陰ヘルニア（直腸偏位）。",
+        "prevention_ja": "慢性便秘の早期管理（高食物繊維食・ラクツロース・シサプリド）。重度は結腸亜全摘術（subtotal colectomy）。",
         "urgency": "urgent",
     },
     {
@@ -3773,6 +3779,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "lethargy", "stiffness", "weight_loss"},
         "description": "Excess aldosterone production causing potassium depletion, muscle weakness, and hypertension.",
         "description_ja": "アルドステロンの過剰産生によりカリウム欠乏、筋力低下、高血圧を引き起こします。",
+        "pathophysiology_ja": "副腎皮質球状層の腫瘍/過形成→アルドステロン過剰分泌→腎遠位尿細管でNa再吸収亢進＋K排泄亢進→低カリウム血症（筋力低下・不整脈）＋高血圧。犬では稀だが副腎腫瘤の鑑別として重要。",
+        "causes_ja": "副腎皮質腺腫/腺癌（片側性が多い）。犬では非常に稀。クッシング症候群・褐色細胞腫との副腎腫瘤の鑑別が重要。",
+        "prevention_ja": "確実な予防法はない。副腎腫瘤発見時のアルドステロン/レニン比測定。外科的副腎摘出が治療の柱。",
         "urgency": "urgent",
     },
     {
@@ -3781,6 +3790,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"weight_gain", "excessive_thirst", "excessive_urination", "lethargy", "stiffness", "difficulty_breathing"},
         "description": "Excessive growth hormone production causing enlargement of body tissues, insulin resistance, and organ dysfunction.",
         "description_ja": "成長ホルモンの過剰産生により体組織の肥大、インスリン抵抗性、臓器機能障害を引き起こします。",
+        "pathophysiology_ja": "成長ホルモン（GH）の自律的過剰産生→IGF-1の上昇→軟部組織の肥大（顔面・四肢・舌）・骨格の過成長（下顎突出）・関節肥厚。GHのインスリン拮抗作用→インスリン抵抗性→糖尿病。犬では外因性プロゲステロン投与や発情周期のプロゲステロンが乳腺GH産生を誘導（猫と異なり下垂体腺腫は稀）。",
+        "causes_ja": "犬：外因性プロゲステロン投与（最多）、未避妊雌犬の発情後期プロゲステロン上昇による乳腺GH産生。下垂体腺腫は犬では稀（猫では最多の原因）。避妊手術またはプロゲステロン中止で改善することが多い。",
+        "prevention_ja": "プロゲステロン製剤の回避、未避妊雌犬でGH過剰が疑われる場合は避妊手術（プロゲステロン由来のGH産生を停止）。",
         "urgency": "urgent",
     },
     {
@@ -3856,6 +3868,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "skin_redness", "swelling", "hair_loss", "fever", "lethargy"},
         "description": "Inflammation and necrosis of blood vessels in the skin caused by immune-mediated reactions or infections.",
         "description_ja": "免疫介在性反応や感染症による皮膚の血管の炎症と壊死です。",
+        "pathophysiology_ja": "皮膚の小血管壁への免疫複合体沈着→補体活性化→好中球浸潤→血管壁壊死（白血球破砕性血管炎）→皮膚の虚血性壊死→潰瘍・痂皮・点状出血。耳介辺縁・足底パッド・尾尖に好発（末梢循環が乏しい部位）。",
+        "causes_ja": "免疫介在性（特発性、最多）、薬剤誘発性（ワクチン後・抗菌薬後）、感染性（Ehrlichia・FeLV関連）、食物アレルギー関連、寒冷凝集素症。狂犬病ワクチン接種部位の局所血管炎が特に知られている。",
+        "prevention_ja": "ワクチン後血管炎の既往犬では同一ワクチンの再接種を慎重に検討。免疫抑制療法（プレドニゾロン＋ダプソン/ペントキシフィリン）。",
         "urgency": "urgent",
     },
     {
@@ -3939,6 +3954,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"drooling", "appetite_loss", "pain_on_touch", "skin_lesions", "weight_loss"},
         "description": "Severe immune-mediated oral mucosal ulceration triggered by contact with dental plaque.",
         "description_ja": "歯垢との接触により誘発される重度の免疫介在性口腔粘膜潰瘍です。",
+        "pathophysiology_ja": "歯垢中の細菌抗原に対する過剰な免疫反応→口腔粘膜（特に歯と接触する頬粘膜・舌背）の激しい潰瘍形成→「kissing ulcers」（歯冠に接する粘膜面の対称性潰瘍）が特徴的。猫の慢性歯肉口内炎（FCGS）の犬版。極度の疼痛→摂食拒否→体重減少。",
+        "causes_ja": "歯垢抗原に対するIV型過敏反応が主因。特定の犬種好発はないが、マルチーズ・キャバリアに報告あり。歯垢除去で一時改善するが再発率が高い。確定診断は口腔粘膜の生検（界面皮膚炎パターン）。",
+        "prevention_ja": "歯垢コントロール（毎日の歯磨き・定期的なスケーリング）。免疫抑制療法（シクロスポリン・プレドニゾロン）。不応性の場合は全臼歯抜歯（猫FCGSと同様のアプローチ）。",
         "urgency": "urgent",
     },
     {
@@ -3994,6 +4012,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"lethargy", "appetite_loss", "weight_loss", "vomiting", "bloated_abdomen", "fever"},
         "description": "Lymphoma primarily affecting the liver, causing hepatomegaly, jaundice, and systemic illness.",
         "description_ja": "主に肝臓を侵すリンパ腫で、肝腫大、黄疸、全身性の病態を引き起こします。",
+        "pathophysiology_ja": "肝臓へのリンパ球の腫瘍性浸潤→びまん性肝腫大→肝機能障害→黄疸・低アルブミン血症・凝固障害。肝酵素（ALT・ALP）の著明な上昇。多中心性リンパ腫の肝浸潤（最多）と原発性肝リンパ腫（稀）がある。",
+        "causes_ja": "多中心性リンパ腫の肝浸潤が最多（犬のリンパ腫の80%は多中心性）。原発性肝リンパ腫は稀。T細胞型はB細胞型より予後不良。中高齢犬。ゴールデン・ボクサーにリンパ腫好発。",
+        "prevention_ja": "確実な予防法はない。CHOP系化学療法（COP/CHOP）で多中心性リンパ腫の寛解率80%、MST 12〜14ヶ月。肝リンパ腫は化学療法への反応が不良なことがある。",
         "urgency": "urgent",
     },
     {
@@ -4002,6 +4023,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"constipation", "straining_urinate", "lethargy", "excessive_thirst", "weight_loss", "lumps"},
         "description": "Malignant tumor of the anal glands that often causes hypercalcemia and can metastasize to lymph nodes.",
         "description_ja": "肛門腺の悪性腫瘍で、高カルシウム血症を引き起こし、リンパ節に転移することがあります。",
+        "pathophysiology_ja": "肛門嚢アポクリン腺の悪性増殖→仙骨下リンパ節転移（50〜90%）→肺転移。PTHrP産生→腫瘍随伴性高カルシウム血症（25〜50%）→多飲多尿・腎障害・筋力低下。高Ca血症が初発症状として発見されることがある。",
+        "causes_ja": "原因不明。中高齢犬（平均10〜11歳）。スパニエル種に好発との報告。直腸検査で偶然発見されることが多い。高Ca血症の犬では本疾患を鑑別に挙げる。",
+        "prevention_ja": "中高齢犬の定期的な直腸検査（肛門嚢触診）。外科的切除＋仙骨下リンパ節郭清。MST 12〜18ヶ月（手術＋化学療法）。",
         "urgency": "urgent",
     },
     {
@@ -4010,6 +4034,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_fl", "limping_fr", "limping_rl", "limping_rr", "swelling", "pain_on_touch", "lumps"},
         "description": "A malignant tumor of cartilage that can occur in bones, nasal cavity, or ribs.",
         "description_ja": "軟骨の悪性腫瘍で、骨、鼻腔、または肋骨に発生することがあります。",
+        "pathophysiology_ja": "軟骨細胞由来の悪性腫瘍→局所浸潤性の増殖→骨破壊。骨肉腫に次ぐ犬で2番目に多い原発性骨腫瘍。扁平骨（鼻腔・肋骨・骨盤）に好発（骨肉腫は四肢長骨に好発で対照的）。転移率は骨肉腫より低い（20〜30%）。",
+        "causes_ja": "原因不明。大型犬に多い。中高齢犬。鼻腔発生が最多（犬の鼻腔腫瘍の10%）、次いで肋骨・骨盤。骨肉腫との鑑別は生検（軟骨基質の存在）。",
+        "prevention_ja": "確実な予防法はない。広範囲切除が治療の柱（鼻腔は放射線療法）。骨肉腫より緩徐な経過でMSTが長い（鼻腔型：放射線でMST 18〜24ヶ月）。",
         "urgency": "urgent",
     },
     {
@@ -4018,6 +4045,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "weight_loss", "appetite_loss", "rapid_breathing"},
         "description": "Primary lung cancer originating from the glandular tissue of the lung, causing chronic cough and respiratory distress.",
         "description_ja": "肺の腺組織から発生する原発性肺癌で、慢性咳嗽と呼吸困難を引き起こします。",
+        "pathophysiology_ja": "肺胞または気管支の腺上皮の悪性増殖→肺実質内の孤立性腫瘤（最多）→気道閉塞・胸水貯留・肺実質の圧排→慢性咳嗽・呼吸困難。犬の原発性肺腫瘍の75%が腺癌。右肺後葉に好発。転移性肺腫瘍（他臓器からの肺転移）との鑑別が重要。",
+        "causes_ja": "原因不明。受動喫煙との関連が示唆（長頭種で鼻腔フィルターが薄く肺への到達量が多い）。中高齢犬（10〜12歳）。ボクサー・バーニーズに報告多い。偶発的に胸部X線で発見されることが多い。",
+        "prevention_ja": "受動喫煙の回避。慢性咳嗽の高齢犬は胸部X線で精査。孤立性腫瘤で転移なし→肺葉切除でMST 12〜20ヶ月。リンパ節転移ありは予後不良。",
         "urgency": "urgent",
     },
     {
@@ -4026,6 +4056,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "diarrhea", "weight_loss", "appetite_loss", "bloody_stool", "lethargy"},
         "description": "A malignant smooth muscle tumor of the intestine causing GI obstruction, bleeding, and weight loss.",
         "description_ja": "腸管の悪性平滑筋腫瘍で、消化管閉塞、出血、体重減少を引き起こします。",
+        "pathophysiology_ja": "腸管壁の平滑筋細胞由来の悪性腫瘍→腸管内腔への突出（部分閉塞）または漿膜側への増殖→消化管出血・閉塞・穿孔。空腸・盲腸に好発。GIST（消化管間質腫瘍）との病理学的鑑別がc-KIT免疫染色で重要（治療法が異なる）。転移率は中等度。",
+        "causes_ja": "原因不明。中高齢犬。GISTとの鑑別：GIST はc-KIT陽性でイマチニブ（TKI）に反応。平滑筋肉腫はc-KIT陰性。腸管の壁内腫瘤として外科的に発見されることが多い。",
+        "prevention_ja": "確実な予防法はない。慢性嘔吐・消化管出血・体重減少の高齢犬は腹部エコーで精査。外科的切除で予後良好（広範囲切除可能な場合のMST >2年）。",
         "urgency": "urgent",
     },
     {
