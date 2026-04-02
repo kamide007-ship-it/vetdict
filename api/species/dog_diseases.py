@@ -5196,6 +5196,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_fl", "limping_fr", "limping_rl", "limping_rr", "swelling", "pain_on_touch"},
         "description": "A blood-filled cystic lesion in bone causing expansion, pain, and pathologic fracture risk.",
         "description_ja": "骨内の血液で満たされた嚢胞性病変で、膨張、痛み、病的骨折のリスクを引き起こします。",
+        "pathophysiology_ja": "骨内の血管異常→血液充満腔の形成→骨の膨張性溶解→病的骨折リスク。X線で骨の膨張性溶解像（soap bubble pattern）。骨肉腫との鑑別が重要（生検必須）。",
+        "causes_ja": "原因不明。若齢犬の長骨に好発。骨肉腫・他の骨腫瘍の二次変化として発生することもある。",
+        "prevention_ja": "確実な予防法はない。掻爬＋骨移植で治療。骨肉腫の除外が最重要。",
         "urgency": "urgent",
     },
     {
@@ -5253,6 +5256,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "vomiting", "lethargy"},
         "description": "Hereditary progressive kidney disease in breeds like English Cocker Spaniels, causing early-onset renal failure.",
         "description_ja": "イングリッシュコッカースパニエルなどの犬種の遺伝性進行性腎疾患で、早期発症の腎不全を引き起こします。",
+        "pathophysiology_ja": "遺伝性のネフロン発達異常→若齢犬での進行性CKD。品種ごとに異なる遺伝子変異：COL4A3/A4/A5（コッカースパニエル：X連鎖性/常染色体劣性Alport症候群様）。糸球体基底膜の構造異常→蛋白尿→腎線維化。",
+        "causes_ja": "遺伝性。イングリッシュコッカースパニエル（最多報告）、ブルテリア、サモエド、ドーベルマン。若齢犬（6ヶ月〜2歳）で多飲多尿・蛋白尿で発見。DNA検査が一部犬種で可能。",
+        "prevention_ja": "好発犬種のDNA検査による繁殖管理。CKDの支持療法。",
         "urgency": "urgent",
     },
     {
@@ -5272,6 +5278,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_lesions", "hair_loss", "skin_redness", "lethargy", "appetite_loss", "weight_loss"},
         "description": "Severe crusting dermatitis of the footpads and face associated with liver disease and amino acid deficiency.",
         "description_ja": "肝疾患とアミノ酸欠乏に関連する足裏と顔面の重度の痂皮性皮膚炎です。",
+        "pathophysiology_ja": "重度の肝疾患（肝硬変・肝腫瘍・フェノバルビタール肝毒性）→アミノ酸代謝障害→低アミノ酸血症→表皮の代謝障害→足底パッド・鼻鏡・口唇の著明な角化亢進・痂皮・亀裂・潰瘍。人の壊死性遊走性紅斑（グルカゴノーマ症候群）に類似。エコーでhoneycomb pattern（蜂巣状肝臓）が特徴的。",
+        "causes_ja": "慢性肝疾患（肝硬変が最多）、フェノバルビタール/フェニトインの長期投与による肝毒性、稀にグルカゴノーマ。中高齢犬。シェルティ・WHWT に報告多い。",
+        "prevention_ja": "肝疾患の早期管理。高蛋白食＋アミノ酸輸液で栄養補正。フェノバルビタール使用犬の定期的な肝機能モニタリング。予後不良（MST数ヶ月）。",
         "urgency": "urgent",
     },
     {
@@ -5304,6 +5313,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"dry_skin", "fever", "coughing", "nasal_discharge", "seizures", "lethargy"},
         "description": "Late-stage distemper causing hyperkeratosis of the footpads and nose, with neurological complications.",
         "description_ja": "足裏と鼻の角質増殖を引き起こすジステンパーの後期段階で、神経学的合併症を伴います。",
+        "pathophysiology_ja": "CDV感染の後期→足底パッド・鼻鏡のケラチノサイトへのウイルス持続感染→角化亢進（硬蹠症）。同時に脳の脱髄性脳炎→ミオクローヌス・けいれん。ワクチン未接種犬のジステンパー回復期に出現。",
+        "causes_ja": "CDV感染の後遺症。ワクチン未接種犬・子犬。足底パッドの角質増殖＋神経症状の組み合わせはジステンパーに特徴的。",
+        "prevention_ja": "コアワクチン（CDV MLVワクチン）の適切な接種。発症後は支持療法。神経症状は不可逆的なことが多い。",
         "urgency": "urgent",
     },
     {
@@ -5350,6 +5362,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"stiffness", "reluctance_move", "limping_rl", "limping_rr", "circling"},
         "description": "Cervical spinal cord compression causing wobbly gait in large breed dogs.",
         "description_ja": "頸部脊髄の圧迫により不安定な歩行を引き起こす大型犬の疾患です。",
+        "pathophysiology_ja": "頸椎の椎間板突出（椎間板関連型：ドーベルマン）または骨性狭窄（骨関連型：グレートデーン）→頸部脊髄の腹側圧迫→後肢の運動失調（wobbling gait）＋前肢の短歩様歩行。MRIで確定診断。",
+        "causes_ja": "椎間板関連型：ドーベルマン（C5-C7、中高齢犬）。骨関連型：グレートデーン（C3-C5、若齢犬）。多部位病変が多い。",
+        "prevention_ja": "確実な予防法はない。内科管理（ステロイド・運動制限）→改善しない場合はventral slot手術。",
         "urgency": "urgent",
     },
     {
@@ -5358,6 +5373,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"limping_rl", "limping_rr", "pain_on_touch", "reluctance_move", "incontinence"},
         "description": "Compression of nerve roots at the lumbosacral junction.",
         "description_ja": "腰仙部の神経根圧迫により痛みと尿失禁を引き起こす疾患です。",
+        "pathophysiology_ja": "L7-S1椎間板突出・椎間関節肥厚・椎弓肥厚→馬尾神経根の圧迫→腰仙部痛（尾を下げる・ジャンプ拒否・起立困難）→進行すると尿失禁・便失禁。ジャーマンシェパードの「犬馬尾症候群」。活動的な大型犬の作業犬に多い。",
+        "causes_ja": "変性性（L7-S1椎間板変性＋椎間関節肥厚が最多）。ジャーマンシェパード・ラブラドール・ボーダーコリーに好発。中高齢犬。先天性の腰仙部移行椎も素因。",
+        "prevention_ja": "確実な予防法はない。内科管理（NSAIDs・運動制限・リハビリ）→不応性は外科的減圧（背側椎弓切除術）。",
         "urgency": "urgent",
     },
     {
@@ -5473,6 +5491,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"excessive_thirst", "excessive_urination", "lethargy", "appetite_loss", "vomiting"},
         "description": "Overproduction of parathyroid hormone causing elevated blood calcium.",
         "description_ja": "副甲状腺ホルモンの過剰産生により高カルシウム血症を引き起こします。",
+        "pathophysiology_ja": "副甲状腺腺腫（最多）/過形成→PTHの自律的過剰分泌→骨吸収亢進＋腎Ca再吸収亢進＋腸管Ca吸収亢進→高Ca血症→多飲多尿（腎のADH抵抗性）・腎結石・筋力低下。iCa>1.5mmol/Lで臨床症状。",
+        "causes_ja": "副甲状腺腺腫（約85%）、過形成（約10%）、腺癌（約5%）。ケースホンド・プードルに好発との報告。中高齢犬。偶然の高Ca血症発見で診断されることが多い。リンパ腫・肛門嚢腺癌（PTHrP産生性）との鑑別が重要。",
+        "prevention_ja": "確実な予防法はない。外科的副甲状腺摘出が根治療法。術後の一過性低Ca血症（hungry bone syndrome）に注意。エタノール注入療法や超音波ガイド下熱焼灼も選択肢。",
         "urgency": "urgent",
     },
     {
@@ -5508,6 +5529,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy", "weight_loss", "appetite_loss"},
         "description": "Primary or metastatic lung cancer.",
         "description_ja": "原発性または転移性肺癌で呼吸窮迫を引き起こします。",
+        "pathophysiology_ja": "原発性：肺胞/気管支上皮の悪性増殖→孤立性腫瘤（最多）。転移性：乳腺腫瘍・骨肉腫・血管肉腫等からの血行性転移→多発性結節。犬の原発性肺腫瘍の75%が腺癌。",
+        "causes_ja": "原発性：受動喫煙との関連が示唆。中高齢犬。転移性は原発腫瘍の精査が必要。胸部X線で孤立性vs多発性結節パターンで鑑別。",
+        "prevention_ja": "受動喫煙の回避。原発性孤立性腫瘤→肺葉切除でMST 12〜20ヶ月。転移性は原発腫瘍の管理。",
         "urgency": "urgent",
     },
     {
@@ -5583,6 +5607,9 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vomiting", "bloody_stool", "appetite_loss", "abdominal_pain", "lethargy"},
         "description": "Erosion of the gastric mucosa.",
         "description_ja": "胃粘膜の侵食により嘔吐と黒色便を引き起こします。",
+        "pathophysiology_ja": "胃粘膜防御機構の破綻→胃酸・ペプシンによる粘膜自己消化→びらん→潰瘍→穿孔（重症例）。吐血（hematemesis）・メレナ（黒色タール便）が特徴。肥満細胞腫のヒスタミン過剰放出→胃酸過分泌も重要な原因。",
+        "causes_ja": "NSAIDs（最多）、副腎皮質ステロイド、肥満細胞腫、肝不全、腎不全（尿毒症性胃炎）、ストレス。",
+        "prevention_ja": "NSAID使用時のPPI（オメプラゾール）併用。肥満細胞腫犬にはH₂ブロッカー/PPI予防投与。",
         "urgency": "urgent",
     },
     {
