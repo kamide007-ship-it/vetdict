@@ -61,7 +61,7 @@ const I18N={
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
-    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・171麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
+    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・182麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
     heroCta:"動物種を選択して鑑別診断を開始",heroCtaDb:"疾患データベースを見る",
     statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",statProtocols:"麻酔プロトコル",
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
@@ -151,7 +151,7 @@ const I18N={
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
-    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 171 anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
+    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 182 anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
     heroCta:"Select a species to begin differential diagnosis",heroCtaDb:"Browse Disease Database",
     statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",statProtocols:"Anesthesia",
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
@@ -460,7 +460,7 @@ function loadSpeciesStats(){
         species:data.total_species||SPECIES.length,
         drugs:data.total_drugs||0,
         symptoms:sd.symptoms?sd.symptoms.length:0,
-        protocols:171
+        protocols:182
       };
       renderSpeciesGrid();
       initStatsObserver();
@@ -511,7 +511,7 @@ function setDefaultStats(){
     species:21,
     drugs:228,
     symptoms:52,
-    protocols:171
+    protocols:182
   };
   renderSpeciesGrid();
   initStatsObserver();
