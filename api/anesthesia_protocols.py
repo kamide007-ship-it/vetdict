@@ -896,6 +896,19 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             "notes": "Offer hay and water immediately after recovery. Post-op analgesia: meloxicam 0.5-1.0 mg/kg PO/SC q24h. Vitamin C 50 mg/kg SC/PO. Return to cage-mates early (social animals).",
         },
         {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 5 mg/kg", "route": "Local infiltration", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "創傷処置、腫瘤切除に使用。小型のため総用量に注意。", "notes": "For wound care, mass removal. Watch total dose due to small size."},
+                {"name": "EMLA cream", "name_ja": "EMLAクリーム", "dose": "Thin layer", "route": "Topical", "onset": "30-60 min", "duration": "60-120 min",
+                 "notes_ja": "IV留置前の皮膚表面麻酔。30分以上前に塗布。", "notes": "Topical anesthesia before IV catheter placement. Apply 30+ min prior."},
+            ],
+            "notes_ja": "モルモットの疼痛評価は難しい（隠す傾向）。術後鎮痛はメロキシカム0.5-1 mg/kg PO/SC q24hが標準。",
+            "notes": "Guinea pig pain assessment is difficult (prey species). Standard post-op analgesia: meloxicam 0.5-1 mg/kg PO/SC q24h.",
+        },
+        {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
             "category": "recovery",
             "risk_level": "moderate",
@@ -1081,6 +1094,19 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             ],
             "notes_ja": "覚醒後すぐに少量の高カロリー食を提供（低血糖予防）。術後鎮痛: メロキシカム0.2 mg/kg PO/SC q24h。",
             "notes": "Offer small amounts of high-calorie food immediately after recovery (prevent hypoglycemia). Post-op analgesia: meloxicam 0.2 mg/kg PO/SC q24h.",
+        },
+        {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg (total dose)", "route": "Local infiltration / nerve block", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "創傷縫合、腫瘤切除、歯科処置に使用。0.5-1%濃度に希釈。フェレットのリドカイン最大用量は犬より低い。", "notes": "For wound suturing, mass removal, dental procedures. Dilute to 0.5-1%. Max dose lower than dogs."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-8 hr",
+                 "notes_ja": "長時間鎮痛。手術部位への局所浸潤。卵巣子宮摘出術の切開ライン浸潤に有用。", "notes": "Long-duration analgesia. Local infiltration at surgical site. Useful for OVH incision line infiltration."},
+            ],
+            "notes_ja": "フェレットは副腎手術が多い。副腎摘出術ではスプラッシュブロック（術野への局所麻酔薬直接塗布）も検討。",
+            "notes": "Adrenal surgery is common in ferrets. Splash block (direct application of local anesthetic to surgical field) may be considered for adrenalectomy.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -1428,6 +1454,19 @@ ANESTHESIA_PROTOCOLS["bird"] = {
     },
     "protocols": [
         {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Midazolam + Butorphanol", "name_ja": "ミダゾラム＋ブトルファノール", "dose": "0.5-1.0 mg/kg + 1-2 mg/kg", "route": "IM (pectoral)", "onset": "5-10 min", "duration": "20-40 min",
+                 "notes_ja": "胸筋にIM注射。軽度鎮静で放射線撮影、爪切り、採血に有用。拮抗可能。", "notes": "IM into pectoral muscle. Light sedation for radiography, nail trim, blood collection. Reversible."},
+                {"name": "Isoflurane (brief)", "name_ja": "イソフルラン（短時間）", "dose": "3-5% induction → 1-2% maintenance", "route": "Mask", "onset": "30-60 sec", "duration": "As needed",
+                 "notes_ja": "マスクでの短時間鎮静。迅速な導入・覚醒。攻撃的な鳥や保定困難な場合に。", "notes": "Brief mask sedation. Rapid induction and recovery. For aggressive birds or difficult restraint."},
+            ],
+            "notes_ja": "鳥の保定は呼吸を妨げないよう注意（胸郭を圧迫しない）。鳥には横隔膜がなく、呼吸は胸壁の動きに依存する。保定中の窒息死リスクあり。",
+            "notes": "Avian restraint must not impede breathing (do not compress thorax). Birds lack a diaphragm; breathing depends on thoracic wall movement. Risk of restraint asphyxiation.",
+        },
+        {
             "name": {"ja": "吸入麻酔（ゴールドスタンダード）", "en": "Inhalation Anesthesia (Gold Standard)"},
             "category": "induction",
             "risk_level": "moderate",
@@ -1472,6 +1511,19 @@ ANESTHESIA_PROTOCOLS["bird"] = {
             "notes": "Avian depth assessment: Light→wing tone present, pedal reflex(+). Adequate→wing relaxed, pedal(-), palpebral(+). Too deep→palpebral(-), dilated pupils.",
         },
         {
+            "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
+            "category": "local_regional",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Lidocaine", "name_ja": "リドカイン", "dose": "Max 4 mg/kg (total dose)", "route": "Local infiltration / nerve block", "onset": "5-10 min", "duration": "30-60 min",
+                 "notes_ja": "翼の骨折修復、腫瘤切除、嗉嚢切開術に使用。0.5%濃度に希釈して使用（過量投与防止）。", "notes": "For wing fracture repair, mass removal, crop surgery. Dilute to 0.5% to prevent overdose."},
+                {"name": "Bupivacaine", "name_ja": "ブピバカイン", "dose": "Max 2 mg/kg", "route": "Local infiltration", "onset": "15-20 min", "duration": "4-6 hr",
+                 "notes_ja": "長時間鎮痛。整形外科手術に有用。", "notes": "Long-duration analgesia. Useful for orthopedic surgery."},
+            ],
+            "notes_ja": "鳥類の局所麻酔は全身麻酔の補助として重要。吸入麻酔薬の必要量を削減し、心血管系への影響を最小化。術後鎮痛: メロキシカム0.5-1 mg/kg PO/IM q12-24h。",
+            "notes": "Avian local anesthesia is important as a GA adjunct. Reduces inhalant requirements, minimizing cardiovascular effects. Post-op: meloxicam 0.5-1 mg/kg PO/IM q12-24h.",
+        },
+        {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
             "category": "recovery",
             "risk_level": "moderate",
@@ -1511,6 +1563,19 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
         "en": "1-2 hr only (extremely high hypoglycemia risk). Check crop.",
     },
     "protocols": [
+        {
+            "name": {"ja": "鎮静（検査・軽処置）", "en": "Sedation (Examination/Minor Procedures)"},
+            "category": "sedation",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Isoflurane (mask)", "name_ja": "イソフルラン（マスク）", "dose": "3-5% induction → 1-2% maintenance", "route": "Mask", "onset": "30-60 sec", "duration": "As needed",
+                 "notes_ja": "小型鳥のため吸入マスク鎮静が最も一般的。導入が極めて速い。", "notes": "Most common sedation for small birds. Very rapid induction."},
+                {"name": "Midazolam", "name_ja": "ミダゾラム", "dose": "0.5-1.0 mg/kg", "route": "IM (pectoral) / IN", "onset": "3-5 min", "duration": "15-30 min",
+                 "notes_ja": "鼻腔内（IN）投与も有効。小型のため胸筋注射は26-27G針使用。", "notes": "Intranasal (IN) route effective. Use 26-27G needle for pectoral IM due to small size."},
+            ],
+            "notes_ja": "インコは非常に小型（30-40g）のため、全ての投与量をインスリン用シリンジで正確に計量。体温低下が急速に起こるため、処置時間を最小限に。",
+            "notes": "Parakeets are very small (30-40g); measure all doses with insulin syringes. Hypothermia develops rapidly; minimize procedure time.",
+        },
         {
             "name": {"ja": "吸入麻酔", "en": "Inhalation Anesthesia"},
             "category": "induction",
