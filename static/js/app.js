@@ -2610,8 +2610,8 @@ function toggleDetail(head){
 
 /* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
 function _attachDbItemHandlers(container){
-  container.addEventListener("click",function(e){if(e.target.closest("a"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
-  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")){e.preventDefault();toggleDbItem(item);}}});
+  container.addEventListener("click",function(e){if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
+  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")&&!e.target.closest(".disease-detail.open")){e.preventDefault();toggleDbItem(item);}}});
 }
 
 /* Toggle disease DB item */

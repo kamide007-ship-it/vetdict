@@ -396,3 +396,67 @@ class TestContentQuality:
             for p in bird["protocols"]
         )
         assert "uncuffed" in all_notes.lower() or "非カフ" in all_notes
+
+
+# ---------------------------------------------------------------------------
+# Literature references tests
+# ---------------------------------------------------------------------------
+
+class TestReferences:
+
+    @pytest.mark.parametrize("species", ALL_SPECIES)
+    def test_all_species_have_references(self, species):
+        """Every species should have at least one literature reference."""
+        refs = ANESTHESIA_PROTOCOLS[species].get("references", [])
+        assert len(refs) >= 1, f"{species} has no references"
+
+    @pytest.mark.parametrize("species", ALL_SPECIES)
+    def test_references_are_strings(self, species):
+        """References should be non-empty strings."""
+        refs = ANESTHESIA_PROTOCOLS[species].get("references", [])
+        for r in refs:
+            assert isinstance(r, str) and len(r) > 20, f"Invalid reference in {species}: {r!r}"
+
+    def test_dog_has_authoritative_references(self):
+        """Dog references should include Lumb & Jones or BSAVA."""
+        refs = " ".join(ANESTHESIA_PROTOCOLS["dog"]["references"])
+        assert "Lumb" in refs or "BSAVA" in refs or "Grimm" in refs
+
+    def test_cat_has_aafp_guidelines(self):
+        """Cat references should include AAFP Feline Anesthesia Guidelines."""
+        refs = " ".join(ANESTHESIA_PROTOCOLS["cat"]["references"])
+        assert "AAFP" in refs or "Feline Anesthesia" in refs
+
+    def test_dog_protocols_with_references(self):
+        """Some dog protocols should have protocol-level references."""
+        dog = ANESTHESIA_PROTOCOLS["dog"]
+        proto_with_refs = [p for p in dog["protocols"] if p.get("references")]
+        assert len(proto_with_refs) >= 3, "Dog should have at least 3 protocols with references"
+
+    def test_api_returns_references_for_species(self, client):
+        """API should include references in species-specific response."""
+        resp = client.get("/api/anesthesia/protocols?species=dog")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "references" in data
+        assert len(data["references"]) >= 1
+
+    def test_api_protocol_level_references(self, client):
+        """API should include protocol-level references when present."""
+        resp = client.get("/api/anesthesia/protocols?species=dog")
+        data = resp.get_json()
+        proto_with_refs = [p for p in data["protocols"] if p.get("references")]
+        assert len(proto_with_refs) >= 1
+
+    @pytest.mark.parametrize("species", ["horse", "rabbit", "fish", "reptile"])
+    def test_key_species_have_relevant_references(self, species):
+        """Key species should have species-relevant references."""
+        refs = " ".join(ANESTHESIA_PROTOCOLS[species]["references"])
+        expected = {
+            "horse": ["Equine", "equine", "Johnston", "Muir"],
+            "rabbit": ["Rabbit", "rabbit", "Flecknell", "Varga"],
+            "fish": ["Fish", "fish", "aquatic", "Neiffer"],
+            "reptile": ["Reptile", "reptile", "Heard", "Mader"],
+        }
+        assert any(kw in refs for kw in expected[species]), \
+            f"{species} references missing relevant keywords: {expected[species]}"
