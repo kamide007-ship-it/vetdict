@@ -694,6 +694,10 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .chat-mode-toggle{gap:4px;padding:6px}
   .chat-mode-btn{font-size:.74rem;padding:6px 10px}
   body{padding-bottom:env(safe-area-inset-bottom)}
+  .az-nav{gap:4px;margin-bottom:10px}
+  .az-nav button{padding:6px 8px;font-size:.68rem;min-width:36px;min-height:36px}
+  .az-mode-toggle{font-size:.68rem!important;padding:6px 10px!important}
+  .disease-cat-header{font-size:.78rem;padding:6px 12px;position:sticky;top:0}
   /* Dark mode mobile nav dropdown */
 }
 
