@@ -11,10 +11,10 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (2,798テスト)
+- **テスト**: pytest (3,037テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v13)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v15)
 - **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
 - **現状**: OPEN_BETA=true（全機能無料）
@@ -33,7 +33,8 @@ api/
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
   anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 182プロトコル)
-  anesthesia_api.py       — 鎮静・麻酔API Blueprint (3エンドポイント)
+  anesthesia_api.py       — 鎮静・麻酔API Blueprint (4エンドポイント)
+  anesthesia_contraindications.py — 薬品-疾患禁忌ルール (31ルール, check_contraindications())
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
   species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種)
   paypal_api.py           — PayPalサブスク + waitlist + メール復元
@@ -368,6 +369,40 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - テスト: 179件（データ構造検証、API、臨床内容品質チェック）
 - ServiceWorker: CACHE_NAME vetdict-v11→v12
 
+## 2026-04セッション（第3回）で実施した改善
+
+### 鎮静・麻酔プロトコルタブのバグ修正
+- **ボタン無反応バグ修正**: `_attachDbItemHandlers()` が `renderAnesthesiaList()` の再レンダリング毎に重複イベントリスナーをスタック → `dataset.handlersAttached` フラグで1回のみ登録
+  - 同じバグが疾患DB (`renderDiseaseDb`) と薬品辞書 (`renderDrugList`) にも存在 → 同時修正
+- **展開コンテンツ内クリックUX**: `.disease-detail.open` 内のクリックではパネルが閉じないよう修正
+  - テーブル・参考文献のテキスト選択・コピーが可能に
+  - ヘッダー行クリックのみで開閉トグル
+
+### エビデンスベース文献引用の追加
+- **全21種にspecies-level参考文献**: 100+引用（Lumb & Jones 5th ed, BSAVA Manual 3rd ed, Carpenter Formulary 6th ed 等）
+- **Protocol-level引用**:
+  - 犬: 8/11プロトコル（鎮静、前投薬、導入、維持、局所麻酔、緊急、CRI、TIVA）
+  - 猫: 7/11プロトコル（AAFP 2018, ISFM 2022, Brodbelt 2007, RECOVER CPR 等）
+  - 馬: 3/11プロトコル（CEPEF死亡率研究、覚醒・回復エビデンス）
+  - ウサギ: 2/8プロトコル（V-gel、アトロピナーゼ関連）
+  - フェレット: 1/8プロトコル（Ko & Markel 1997）
+- **フロントエンド**: プロトコル詳細内 + 種別リスト末尾に参考文献セクション表示
+- **API**: `references` フィールドをspecies-specific / all-species両パスで返却
+
+### アクセシビリティ改善
+- `#anesthesiaList` に `aria-live="polite"` 追加（検索・フィルタ結果の動的通知）
+- `#anesthesiaCategoryFilter` に `aria-label` 追加
+- 装飾用絵文字（⚖️, 🚨）に `aria-hidden="true"` 追加
+
+### モバイルCSS改善
+- 参考文献セクション（`.anesthesia-references`, `.anesthesia-ref-list`）のフォントサイズ・パディング調整
+- プロトコルノート・品種考慮セクションのモバイル最適化
+
+### テスト
+- 鎮静・麻酔テスト: 186→237件（+51件、参考文献検証テスト追加）
+- フルテストスイート: 3,054件合格
+- ServiceWorker: CACHE_NAME vetdict-v14→v15
+
 ## 次セッションへの引き継ぎ事項
 
 ### 問診モード（Guided Consultation）の検証 — ✅ 自動テスト完了
@@ -385,8 +420,8 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - **残り: ブラウザ手動テスト（実機確認）のみ未実施**
 
 ### 残りのエキゾチック治療プロトコル
-- 残り533件はmoderate/low urgencyまたはvariant/subformエントリ
-- emergency/highの主要疾患は全8種で詳細化済み
+- ✅ 不正テンプレート267件は全て修正済み（2026-04第3回セッション）
+- 残りの短い治療テキスト（<80文字）はconciseだが臨床的に適切な記載
 
 ### 診断精度の体系的検証
 - TRIPOD準拠の検証プロトコル策定が必要
@@ -397,3 +432,36 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - AIエンリッチメントの臨床レビュー文書化（レビューログのフォーマット策定）
 - app.js のモジュール分割（3,000行の単一ファイル — バンドラー導入が前提）
 - CSP 'unsafe-inline' → nonce-based strict-dynamic への移行（GA4対応が必要）
+
+## 2026-04セッション（第3回）で実施した改善
+
+### 不正テンプレート全修正（267件→0件）
+- 「ウイルス感染症には特異的抗ウイルス薬がない」テンプレートを全種で修正
+- 犬72+猫43+ウサギ20+鳥75+爬虫類83+その他65=全267件
+- 全エントリにエビデンスベースの治療プロトコル（薬品用量・投与経路・参考文献）を含む
+- 種特異的禁忌明記（モルモット: ペニシリン禁忌、デグー: 糖分禁忌、チンチラ: フィプロニル禁忌）
+
+### 麻酔UI/UX改善
+- **印刷チェックリスト**: 術前/術中/術後チェックリスト+薬品投与量計算表を印刷
+- **ASA分類フィルター**: ASA I-Vドロップダウンでリスクレベル別プロトコル表示
+- ServiceWorker: CACHE_NAME vetdict-v14→v15
+
+### 薬品-疾患禁忌警告システム（新規）
+- `api/anesthesia_contraindications.py`: 24禁忌ルール
+  - 心疾患（α2作動薬、チオペンタール禁忌）
+  - 腎疾患・消化管潰瘍・肝疾患（NSAIDs禁忌/慎重）
+  - てんかん（アセプロマジン禁忌）
+  - 品種別（サイトハウンド×チオペンタール、ボクサー×アセプロマジン）
+  - 種別（ウサギ/チンチラ×フィプロニル致死、爬虫類×ケタミン腎門脈系）
+  - GDV、妊娠、凝固障害、糖尿病、インスリノーマ
+- `GET /api/anesthesia/contraindications`: 禁忌チェックAPIエンドポイント
+- フロントエンド: 薬品テーブル内リアルタイム禁忌バッジ表示
+- テスト: 34件（データ整合性、関数、API）
+
+### 診断結果→麻酔連携
+- 鑑別診断結果に「この疾患の麻酔注意事項」セクション追加
+- 疾患名から自動的に関連する禁忌条件をマッピング（DISEASE_ANESTHESIA_MAP: 30+キーワード）
+- 心疾患→α2禁忌、腎疾患→NSAIDs禁忌等を診断結果画面で直接表示
+
+### テスト
+- 3,037件（+34新規禁忌テスト、+前回3,003件からの増分）

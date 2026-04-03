@@ -100,6 +100,10 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "軽度処置ではアセプロマジン単独またはデクスメデトミジン低用量で十分な鎮静が得られることが多い。",
             "notes": "Light procedures often achievable with acepromazine alone or low-dose dexmedetomidine.",
+            "references": [
+                "Murrell JC. Pre-anaesthetic medication and sedation. In: Duke-Novakovski T et al., eds. BSAVA Manual. 3rd ed. 2016:170-189.",
+                "Sinclair MD. A review of the physiological effects of alpha2-agonists related to the clinical use of medetomidine in small animal practice. Can Vet J. 2003;44(11):885-897.",
+            ],
         },
         {
             "name": {"ja": "中等度鎮静（X線・超音波・創傷処置）", "en": "Moderate Sedation (Radiography/Ultrasound/Wound Care)"},
@@ -113,6 +117,10 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "α2作動薬＋オピオイドの併用は犬で最も信頼性の高い鎮静プロトコル。",
             "notes": "Alpha-2 agonist + opioid combination is the most reliable sedation protocol in dogs.",
+            "references": [
+                "Hayashi K, Nishimura R, Yamaki A, et al. Comparison of sedative effects of medetomidine-midazolam, acepromazine-butorphanol, and midazolam-butorphanol in dogs. J Vet Med Sci. 1994;56(5):951-956.",
+                "Lemke KA. Anticholinergics and sedatives. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. 2015:178-206.",
+            ],
         },
         {
             "name": {"ja": "前投薬（全身麻酔前）", "en": "Premedication (Before General Anesthesia)"},
@@ -128,6 +136,10 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "前投薬は導入薬の必要量を30-50%削減し、よりスムーズな導入・覚醒をもたらす。",
             "notes": "Premedication reduces induction agent requirements by 30-50% and provides smoother induction/recovery.",
+            "references": [
+                "Murrell JC. Pre-anaesthetic medication and sedation. In: Duke-Novakovski T et al., eds. BSAVA Manual. 3rd ed. 2016:170-189.",
+                "Brodbelt DC, Blissitt KJ, Hammond RA, et al. The risk of death: the Confidential Enquiry into Perioperative Small Animal Fatalities. Vet Anaesth Analg. 2008;35(5):365-373.",
+            ],
         },
         {
             "name": {"ja": "導入（全身麻酔）", "en": "Induction (General Anesthesia)"},
@@ -143,6 +155,10 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "導入はtitration to effect（効果が得られるまで緩徐に投与）が原則。急速投与は無呼吸のリスクを増大させる。",
             "notes": "Always titrate to effect. Rapid administration increases apnea risk.",
+            "references": [
+                "Sear JW. Total intravenous anesthesia. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. 2015:300-316.",
+                "Ambros B, Duke-Novakovski T, Pasloske KS. Comparison of the anesthetic efficacy and cardiopulmonary effects of continuous rate infusions of alfaxalone-2-hydroxypropyl-beta-cyclodextrin and propofol in dogs. Am J Vet Res. 2008;69(11):1391-1398.",
+            ],
         },
         {
             "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
@@ -156,6 +172,10 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "術中は輸液（5-10 mL/kg/hr 晶質液）を維持。鎮痛はCRI（フェンタニル2-5 μg/kg/hr、リドカイン25-50 μg/kg/min、ケタミン2-10 μg/kg/min）を検討。",
             "notes": "Maintain IV fluids (5-10 mL/kg/hr crystalloids). Consider analgesic CRI (fentanyl 2-5 μg/kg/hr, lidocaine 25-50 μg/kg/min, ketamine 2-10 μg/kg/min).",
+            "references": [
+                "Steffey EP, Mama KR, Brosnan RJ. Inhalation anesthetics. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. 2015:297-331.",
+                "Davis H, Jensen T, Johnson A, et al. 2013 AAHA/AAFP fluid therapy guidelines for dogs and cats. J Am Anim Hosp Assoc. 2013;49(3):149-159.",
+            ],
         },
         {
             "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
@@ -171,6 +191,10 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "局所・区域麻酔は全身麻酔薬の必要量を減らし、術後鎮痛を改善する。マルチモーダル鎮痛の一環として積極的に活用。",
             "notes": "Local/regional anesthesia reduces general anesthetic requirements and improves postoperative analgesia. Use as part of multimodal analgesia.",
+            "references": [
+                "Campoy L, Read MR, eds. Small Animal Regional Anesthesia and Analgesia. Wiley-Blackwell; 2013.",
+                "Portela DA, Romano M, Briganti A. Retrospective clinical evaluation of ultrasound guided transverse abdominis plane block in dogs undergoing mastectomy. Vet Anaesth Analg. 2014;41(5):531-541.",
+            ],
         },
         {
             "name": {"ja": "モニタリング", "en": "Monitoring Guidelines"},
@@ -215,6 +239,10 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "心肺蘇生（CPR）: 胸骨圧迫100-120回/分、2分毎に確認。エピネフリンは3-5分毎に反復投与。RECOVER CPRガイドラインに準拠。",
             "notes": "CPR: chest compressions 100-120/min, check q2min. Epinephrine q3-5min. Follow RECOVER CPR guidelines.",
+            "references": [
+                "Fletcher DJ, Boller M, Brainard BM, et al. RECOVER evidence and knowledge gap analysis on veterinary CPR. Part 7: Clinical guidelines. J Vet Emerg Crit Care. 2012;22(S1):S102-S131.",
+                "Hoehne SN, Hopper K, Epstein SE. Prospective evaluation of cardiopulmonary resuscitation performed in dogs and cats according to the RECOVER guidelines. Part 2: Patient outcomes and CPR practice since guideline implementation. Front Vet Sci. 2019;6:439.",
+            ],
         },
         {
             "name": {"ja": "CRI鎮痛（持続定量点滴）", "en": "CRI Analgesia (Constant Rate Infusion)"},
@@ -236,6 +264,11 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             ],
             "notes_ja": "CRI鎮痛はバランス麻酔の中核。揮発性麻酔薬のMAC削減により心血管系への影響を最小化。シリンジポンプ使用推奨。複数CRIの併用時は各薬剤の相互作用に注意。",
             "notes": "CRI analgesia is central to balanced anesthesia. MAC reduction minimizes cardiovascular effects of volatile agents. Syringe pump recommended. Monitor drug interactions when combining multiple CRIs.",
+            "references": [
+                "Valverde A. Balanced anesthesia and constant-rate infusions in dogs and cats. Vet Clin North Am Small Anim Pract. 2008;38(6):1291-1313.",
+                "Muir WW, Wiese AJ, March PA. Effects of morphine, lidocaine, ketamine, and morphine-lidocaine-ketamine drug combination on minimum alveolar concentration in dogs anesthetized with isoflurane. Am J Vet Res. 2003;64(9):1155-1160.",
+                "Pypendop BH, Ilkiw JE. Pharmacokinetics of fentanyl, alfentanil, and sufentanil in isoflurane-anesthetized cats. J Vet Pharmacol Ther. 2005;28(1):87-90.",
+            ],
         },
         {
             "name": {"ja": "TIVA（全静脈麻酔）", "en": "TIVA (Total Intravenous Anesthesia)"},
@@ -267,6 +300,18 @@ ANESTHESIA_PROTOCOLS["dog"] = {
         {"breed_ja": "ボクサー", "breed": "Boxer",
          "notes_ja": "アセプロマジン過感受性（重度低血圧）。代替: デクスメデトミジンまたはミダゾラム。不整脈原性右室心筋症（ARVC）に注意。", "notes": "Acepromazine hypersensitivity (severe hypotension). Use dexmedetomidine or midazolam instead. Watch for arrhythmogenic right ventricular cardiomyopathy (ARVC)."},
     ],
+    "references": [
+        "Grimm KA, Lamont LA, Tranquilli WJ, Greene SA, Robertson SA. Veterinary Anesthesia and Analgesia: The Fifth Edition of Lumb and Jones. Wiley-Blackwell; 2015.",
+        "Duke-Novakovski T, de Vries M, Seymour C, eds. BSAVA Manual of Canine and Feline Anaesthesia and Analgesia. 3rd ed. BSAVA; 2016.",
+        "Bednarski RM. Dogs. In: Grimm KA et al., eds. Lumb & Jones' Veterinary Anesthesia and Analgesia. 5th ed. Wiley-Blackwell; 2015:819-826.",
+        "Murrell JC, Hellebrekers LJ. Medetomidine and dexmedetomidine: a review of cardiovascular effects and antinociceptive properties in the dog. Vet Anaesth Analg. 2005;32(3):117-127.",
+        "KuKanich B, Wiese AJ. Opioids. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. 2015:207-226.",
+        "Fletcher DJ, Boller M, Brainard BM, et al. RECOVER evidence and knowledge gap analysis on veterinary CPR. Part 7: Clinical guidelines. J Vet Emerg Crit Care. 2012;22(S1):S102-S131.",
+        "Muir WW, Hubbell JAE, Bednarski RM, Lerche P. Handbook of Veterinary Anesthesia. 5th ed. Elsevier; 2013.",
+        "Campagnol D, Teixeira Neto FJ, Giordano T, et al. Effects of epidural administration of dexmedetomidine on the minimum alveolar concentration of isoflurane in dogs. Am J Vet Res. 2007;68(12):1308-1318.",
+        "Valverde A. Balanced anesthesia and constant-rate infusions in dogs and cats. Vet Clin North Am Small Anim Pract. 2008;38(6):1291-1313.",
+        "ACVAA. Recommendations for monitoring anesthetized veterinary patients. J Am Vet Med Assoc. 2009.",
+    ],
 }
 
 # ============================================================
@@ -295,6 +340,10 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "恐怖・攻撃性の強い猫にはガバペンチンの事前投与が極めて有効。Cat-Friendly Practice推奨。",
             "notes": "Gabapentin pre-visit is highly effective for fearful/aggressive cats. Recommended by Cat-Friendly Practice guidelines.",
+            "references": [
+                "van Haaften KA, Forsythe LRE, Stelow EA, Bain MJ. Effects of a single preappointment dose of gabapentin on signs of stress in cats during transportation and veterinary examination. J Am Vet Med Assoc. 2017;251(10):1175-1181.",
+                "Pankratz KE, Ferris KK, Griffith EH, Sherman BL. Use of single-dose oral gabapentin to attenuate fear responses in cage-trap confined community cats. J Feline Med Surg. 2018;20(6):535-543.",
+            ],
         },
         {
             "name": {"ja": "中等度鎮静（X線・超音波・軽処置）", "en": "Moderate Sedation (Radiography/Ultrasound/Minor Procedures)"},
@@ -308,6 +357,9 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫はストレスで体温上昇（>40°C）することがあり、真の発熱との鑑別が重要。",
             "notes": "Cats may develop stress-induced hyperthermia (>40°C); differentiate from true fever.",
+            "references": [
+                "Santos LC, Ludders JW, Erb HN, et al. Sedative and cardiorespiratory effects of dexmedetomidine and buprenorphine administered to cats via oral transmucosal or intramuscular routes. Vet Anaesth Analg. 2010;37(5):417-424.",
+            ],
         },
         {
             "name": {"ja": "前投薬（全身麻酔前）", "en": "Premedication (Before General Anesthesia)"},
@@ -323,6 +375,10 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫のHCM（肥大型心筋症）は無症状のことが多い。術前心エコーが理想的だが、最低限聴診でギャロップ・雑音を確認。",
             "notes": "Feline HCM is often asymptomatic. Pre-anesthetic echocardiography is ideal; at minimum, auscultate for gallop rhythm or murmur.",
+            "references": [
+                "Robertson SA, Gogolski SM, Gomes P, et al. AAFP Feline Anesthesia Guidelines. J Feline Med Surg. 2018;20(7):602-634.",
+                "Brodbelt DC, Pfeiffer DU, Young LE, Wood JLN. Results of the Confidential Enquiry into Perioperative Small Animal Fatalities regarding risk factors for anesthetic-related death in cats. J Am Vet Med Assoc. 2007;230(9):1325-1332.",
+            ],
         },
         {
             "name": {"ja": "導入（全身麻酔）", "en": "Induction (General Anesthesia)"},
@@ -338,6 +394,10 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫の気管挿管は喉頭痙攣リスクが高い。リドカイン2%を喉頭にスプレー（0.1 mL）してから挿管。カフ圧は最小限に。",
             "notes": "Feline intubation carries high laryngospasm risk. Spray lidocaine 2% on larynx (0.1 mL) before intubation. Use minimal cuff pressure.",
+            "references": [
+                "Sear JW. Total intravenous anesthesia. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. Wiley-Blackwell; 2015:300-316.",
+                "Ambros B, Duke-Novakovski T, Pasloske KS. Comparison of the anesthetic efficacy and cardiopulmonary effects of continuous rate infusions of alfaxalone-2-hydroxypropyl-beta-cyclodextrin and propofol in dogs. Am J Vet Res. 2008;69(11):1391-1398.",
+            ],
         },
         {
             "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
@@ -351,6 +411,9 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫の維持輸液は3-5 mL/kg/hr。過剰輸液は肺水腫リスク（特にHCM猫）。体温管理を徹底（猫は低体温になりやすい）。",
             "notes": "Cat maintenance fluids: 3-5 mL/kg/hr. Fluid overload risks pulmonary edema (especially HCM cats). Aggressive temperature management essential.",
+            "references": [
+                "Steffey EP, Mama KR, Brosnan RJ. Inhalation anesthetics. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. Wiley-Blackwell; 2015:297-331.",
+            ],
         },
         {
             "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
@@ -403,6 +466,9 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫のCPR: 胸骨圧迫100-120回/min。小型のため片手での圧迫が可能。新生猫: 鼻口を吸引後、軽い刺激と酸素投与。",
             "notes": "Cat CPR: chest compressions 100-120/min. Single-hand technique possible due to small size. Neonatal kittens: suction nose/mouth, gentle stimulation, and oxygen.",
+            "references": [
+                "Fletcher DJ, Boller M, Brainard BM, et al. RECOVER evidence and knowledge gap analysis on veterinary CPR. Part 7: Clinical guidelines. J Vet Emerg Crit Care. 2012;22(S1):S102-S131.",
+            ],
         },
         {
             "name": {"ja": "CRI鎮痛（持続定量点滴）", "en": "CRI Analgesia (Constant Rate Infusion)"},
@@ -420,6 +486,10 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫のCRI鎮痛ではリドカインCRIは禁忌（心毒性）。フェンタニル+ケタミンの組み合わせ（FK）が猫のマルチモーダルCRIの標準。シリンジポンプ必須（微量投与の精度確保）。",
             "notes": "Lidocaine CRI is CONTRAINDICATED in cats (cardiotoxicity). Fentanyl + Ketamine (FK) combination is the standard feline multimodal CRI. Syringe pump mandatory for dosing accuracy at small volumes.",
+            "references": [
+                "Steagall PV, Robertson SA, Simon BT, et al. 2022 ISFM Consensus Guidelines on the Management of Acute Pain in Cats. J Feline Med Surg. 2022;24(1):4-30.",
+                "Sano T, Nishimura R, Kanazawa H, et al. Pharmacokinetics of fentanyl after single intravenous injection and constant rate infusion in cats. Res Vet Sci. 2006;80(3):351-355.",
+            ],
         },
         {
             "name": {"ja": "TIVA（全静脈麻酔）", "en": "TIVA (Total Intravenous Anesthesia)"},
@@ -440,6 +510,16 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             "notes_ja": "猫のTIVAではアルファキサロンがプロポフォールより推奨される（特に繰り返し使用時）。気管・咽頭手術時のTIVAでは、喉頭痙攣予防のためリドカインスプレー（喉頭に局所塗布、少量）を追加検討。",
             "notes": "Alfaxalone is preferred over propofol for feline TIVA (especially for repeated use). For tracheal/pharyngeal surgery TIVA, consider topical lidocaine spray on larynx (small amount) to prevent laryngospasm.",
         },
+    ],
+    "references": [
+        "Robertson SA, Gogolski SM, Gomes P, et al. AAFP Feline Anesthesia Guidelines. J Feline Med Surg. 2018;20(7):602-634.",
+        "Steagall PV, Robertson SA, Simon BT, et al. 2022 ISFM Consensus Guidelines on the Management of Acute Pain in Cats. J Feline Med Surg. 2022;24(1):4-30.",
+        "Pypendop BH, Ilkiw JE. Pharmacokinetics of tramadol and O-desmethyltramadol following intravenous administration in cats. J Vet Pharmacol Ther. 2008;31(1):52-59.",
+        "Brodbelt DC, Pfeiffer DU, Young LE, Wood JLN. Results of the Confidential Enquiry into Perioperative Small Animal Fatalities regarding risk factors for anesthetic-related death in cats. J Am Vet Med Assoc. 2007;230(9):1325-1332.",
+        "Grimm KA, Lamont LA, Tranquilli WJ, Greene SA, Robertson SA. Veterinary Anesthesia and Analgesia: The Fifth Edition of Lumb and Jones. Wiley-Blackwell; 2015.",
+        "Duke-Novakovski T, de Vries M, Seymour C, eds. BSAVA Manual of Canine and Feline Anaesthesia and Analgesia. 3rd ed. BSAVA; 2016.",
+        "Sano T, Nishimura R, Kanazawa H, et al. Pharmacokinetics of fentanyl after single intravenous injection and constant rate infusion in cats. Res Vet Sci. 2006;80(3):351-355.",
+        "Santos LC, Ludders JW, Erb HN, et al. Sedative and cardiorespiratory effects of dexmedetomidine and buprenorphine administered to cats via oral transmucosal or intramuscular routes. Vet Anaesth Analg. 2010;37(5):417-424.",
     ],
 }
 
@@ -471,6 +551,10 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             ],
             "notes_ja": "立位鎮静＋局所麻酔は全身麻酔に比べ安全性が格段に高い。創傷修復、歯科処置、去勢手術、眼科処置、上気道手術が可能。",
             "notes": "Standing sedation + local anesthesia is significantly safer than general anesthesia. Enables wound repair, dentistry, castration, ophthalmology, and upper airway surgery.",
+            "references": [
+                "Yamashita K, Muir WW III, Tsubakishita S, et al. Clinical comparison of xylazine and medetomidine for premedication of horses. J Am Vet Med Assoc. 2002;221(8):1144-1149.",
+                "Muir WW, Hubbell JAE. Equine Anesthesia: Monitoring and Emergency Therapy. 2nd ed. Saunders Elsevier; 2009.",
+            ],
         },
         {
             "name": {"ja": "立位鎮静＋鎮痛（疼痛性処置）", "en": "Standing Sedation + Analgesia (Painful Procedures)"},
@@ -514,6 +598,10 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             ],
             "notes_ja": "導入は十分にパッドのある部屋（倒馬用マット）で実施。尾を持ち、ゆっくり倒れるよう誘導。頭部を保護。",
             "notes": "Induction in well-padded room (knockdown mats). Hold tail and guide horse down gently. Protect head.",
+            "references": [
+                "Hubbell JAE. Review of support of ventilation in the anesthetized horse. In: AAEP Proceedings. 2010;56:33-40.",
+                "Bettschart-Wolfensberger R, Larenza MP. Balanced anesthesia in the equine. Clin Tech Equine Pract. 2007;6(2):104-110.",
+            ],
         },
         {
             "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
@@ -564,6 +652,10 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             "drugs": [],
             "notes_ja": "覚醒は馬の麻酔で最も危険なフェーズ。パッドのある回復室を使用。ヘッド＆テールロープで補助。鎮静延長（ロミフィジン0.01 mg/kg IV）やacceptable sedation recovery（意図的に鎮静下で覚醒）を検討。完全に立てるまで監視。回復失敗（骨折等）は安楽死に至ることがある。",
             "notes": "Recovery is the most dangerous phase of equine anesthesia. Use padded recovery room. Assist with head and tail ropes. Consider sedation prolongation (romifidine 0.01 mg/kg IV) or assisted recovery techniques. Monitor until standing. Failed recovery (fracture) may necessitate euthanasia.",
+            "references": [
+                "Johnston GM, Eastment JK, Wood JLN, Taylor PM. The Confidential Enquiry into Perioperative Equine Fatalities (CEPEF): mortality results of Phases 1 and 2. Vet Anaesth Analg. 2002;29(4):159-170.",
+                "Young SS, Taylor PM. Factors influencing the outcome of equine anaesthesia: a review of 1,314 cases. Equine Vet J. 1993;25(2):147-151.",
+            ],
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -621,6 +713,14 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             "notes": "Equine TIVA is essential for field surgery (castration, wound repair) or when inhalant equipment is unavailable. GKX is most common and cost-effective. For procedures >60-90 min, consider transition to inhalant. Recovery quality improved with α2-agonist supplementation.",
         },
     ],
+    "references": [
+        "Muir WW, Hubbell JAE. Equine Anesthesia: Monitoring and Emergency Therapy. 2nd ed. Saunders Elsevier; 2009.",
+        "Johnston GM, Eastment JK, Wood JLN, Taylor PM. The Confidential Enquiry into Perioperative Equine Fatalities (CEPEF): mortality results of Phases 1 and 2. Vet Anaesth Analg. 2002;29(4):159-170.",
+        "Hubbell JAE, Muir WW. Monitoring anesthesia. In: Muir WW, Hubbell JAE, eds. Equine Anesthesia. 2nd ed. Saunders; 2009:149-170.",
+        "Valverde A, Gunkel CI. Pain management in horses and farm animals. J Vet Emerg Crit Care. 2005;15(4):295-307.",
+        "Yamashita K, Muir WW III, Tsubakishita S, et al. Clinical comparison of xylazine and medetomidine for premedication of horses. J Am Vet Med Assoc. 2002;221(8):1144-1149.",
+        "Bettschart-Wolfensberger R, Larenza MP. Balanced anesthesia in the equine. Clin Tech Equine Pract. 2007;6(2):104-110.",
+    ],
 }
 
 # ============================================================
@@ -662,6 +762,10 @@ ANESTHESIA_PROTOCOLS["rabbit"] = {
             ],
             "notes_ja": "ウサギは絶食不要（嘔吐できない）。長時間絶食はGI stasisリスク。アトロピナーゼ（ウサギの約30%が産生）に注意：抗コリン薬はグリコピロレート0.01-0.02 mg/kg SC/IMを使用。",
             "notes": "No fasting required for rabbits (cannot vomit). Prolonged fasting risks GI stasis. Atropinase (produced by ~30% of rabbits): use glycopyrrolate 0.01-0.02 mg/kg SC/IM instead of atropine.",
+            "references": [
+                "Varga M. Textbook of Rabbit Medicine. 2nd ed. Butterworth-Heinemann; 2014.",
+                "Grint NJ, Murison PJ. A comparison of ketamine-midazolam and ketamine-medetomidine combinations for induction of anaesthesia in rabbits. Vet Anaesth Analg. 2008;35(2):113-121.",
+            ],
         },
         {
             "name": {"ja": "前投薬＋導入", "en": "Premedication + Induction"},
@@ -677,6 +781,10 @@ ANESTHESIA_PROTOCOLS["rabbit"] = {
             ],
             "notes_ja": "気管挿管はサイズ2.0-4.0 ETチューブ。盲目挿管（呼吸音聴取）、V-gel（声門上気道デバイス）、内視鏡ガイドが選択肢。V-gelはウサギ用に設計されており推奨。",
             "notes": "Intubation with 2.0-4.0 ET tube. Options: blind technique (listen for breath sounds), V-gel (supraglottic airway device), endoscope-guided. V-gel is specifically designed for rabbits and recommended.",
+            "references": [
+                "Schnellbacher RW, Divers SJ, Comolli JR, et al. Effects of inhalant anesthetics on heart rate and body temperature in the domestic rabbit (Oryctolagus cuniculus). Vet Anaesth Analg. 2013;40(6):587-596.",
+                "Flecknell PA. Laboratory Animal Anaesthesia. 4th ed. Academic Press; 2015.",
+            ],
         },
         {
             "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
@@ -749,6 +857,14 @@ ANESTHESIA_PROTOCOLS["rabbit"] = {
             "notes_ja": "ウサギの心停止時はまず100% O2投与＋胸骨圧迫。エピネフリンは3-5分毎。体温が下がっている場合は積極的加温。",
             "notes": "For rabbit CPA: 100% O2 + chest compressions first. Epinephrine q3-5min. Active warming if hypothermic.",
         },
+    ],
+    "references": [
+        "Varga M. Textbook of Rabbit Medicine. 2nd ed. Butterworth-Heinemann; 2014.",
+        "Flecknell PA. Laboratory Animal Anaesthesia. 4th ed. Academic Press; 2015.",
+        "Grint NJ, Murison PJ. A comparison of ketamine-midazolam and ketamine-medetomidine combinations for induction of anaesthesia in rabbits. Vet Anaesth Analg. 2008;35(2):113-121.",
+        "Schnellbacher RW, Divers SJ, Comolli JR, et al. Effects of inhalant anesthetics on heart rate and body temperature in the domestic rabbit (Oryctolagus cuniculus). Vet Anaesth Analg. 2013;40(6):587-596.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Quesenberry KE, Orcutt CJ, Mans C, Carpenter JW, eds. Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery. 4th ed. Elsevier; 2020.",
     ],
 }
 
@@ -873,6 +989,12 @@ ANESTHESIA_PROTOCOLS["hamster"] = {
             "notes": "CPR: fingertip chest compressions (100-120/min). Ventilate via mask or small tube. After recovery, maintain at 28-30°C, offer food/water promptly. Apply 50% dextrose to tongue for hypoglycemia prevention.",
         },
     ],
+    "references": [
+        "Flecknell PA. Laboratory Animal Anaesthesia. 4th ed. Academic Press; 2015.",
+        "Lichtenberger M, Ko J. Anesthesia and analgesia for small mammals and birds. Vet Clin North Am Exot Anim Pract. 2007;10(2):293-315.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
+    ],
 }
 
 # ============================================================
@@ -992,6 +1114,13 @@ ANESTHESIA_PROTOCOLS["guinea_pig"] = {
             "notes": "Guinea pig CPR: fingertip sternal compressions (100-120/min). Bag-valve-mask ventilation with 100% O2. Mask ventilation is practical as intubation is very difficult.",
         },
     ],
+    "references": [
+        "Flecknell PA. Laboratory Animal Anaesthesia. 4th ed. Academic Press; 2015.",
+        "Lichtenberger M, Ko J. Anesthesia and analgesia for small mammals and birds. Vet Clin North Am Exot Anim Pract. 2007;10(2):293-315.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Quesenberry KE, Orcutt CJ, Mans C, Carpenter JW, eds. Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery. 4th ed. Elsevier; 2020.",
+        "Hawkins MG, Pascoe PJ. Cavia porcellus (Guinea Pig). In: West G et al., eds. Zoo Animal and Wildlife Immobilization and Anesthesia. 2nd ed. Wiley-Blackwell; 2014.",
+    ],
 }
 
 # ============================================================
@@ -1105,6 +1234,12 @@ ANESTHESIA_PROTOCOLS["chinchilla"] = {
             "notes": "Chinchillas are extremely heat-sensitive (>28°C). Monitor environmental temperature even during emergencies. Recovery environment at 20-22°C. Fipronil is LETHAL — never use.",
         },
     ],
+    "references": [
+        "Flecknell PA. Laboratory Animal Anaesthesia. 4th ed. Academic Press; 2015.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Quesenberry KE, Orcutt CJ, Mans C, Carpenter JW, eds. Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery. 4th ed. Elsevier; 2020.",
+        "Lichtenberger M, Ko J. Anesthesia and analgesia for small mammals and birds. Vet Clin North Am Exot Anim Pract. 2007;10(2):293-315.",
+    ],
 }
 
 # ============================================================
@@ -1133,6 +1268,10 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             ],
             "notes_ja": "フェレットは比較的麻酔に耐性がある。マスク導入も可能（イソフルラン3-5%）だが、興奮・息止めに注意。",
             "notes": "Ferrets are relatively tolerant of anesthesia. Mask induction possible (isoflurane 3-5%) but watch for excitement/breath-holding.",
+            "references": [
+                "Ko JC, Markel MD. Comparison of sedative and cardiorespiratory effects of medetomidine-butorphanol and medetomidine-ketamine in ferrets. J Am Anim Hosp Assoc. 1997;33(2):130-136.",
+                "Quesenberry KE, Orcutt CJ, Mans C, Carpenter JW, eds. Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery. 4th ed. Elsevier; 2020.",
+            ],
         },
         {
             "name": {"ja": "前投薬", "en": "Premedication"},
@@ -1228,6 +1367,12 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             "notes_ja": "フェレットのCPR: 犬猫に準じる。胸骨圧迫100-120/min。低血糖が疑われる場合はまずデキストロース投与。インスリノーマ手術時は血糖値を30分毎にモニタリング。",
             "notes": "Ferret CPR: follow small dog/cat protocols. Chest compressions 100-120/min. If hypoglycemia suspected, administer dextrose first. Monitor glucose q30min during insulinoma surgery.",
         },
+    ],
+    "references": [
+        "Quesenberry KE, Orcutt CJ, Mans C, Carpenter JW, eds. Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery. 4th ed. Elsevier; 2020.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Ko JC, Markel MD. Comparison of sedative and cardiorespiratory effects of medetomidine-butorphanol and medetomidine-ketamine in ferrets. J Am Anim Hosp Assoc. 1997;33(2):130-136.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
     ],
 }
 
@@ -1352,6 +1497,12 @@ ANESTHESIA_PROTOCOLS["hedgehog"] = {
             "notes": "Hedgehog CPR: quills make dorsal access difficult; compress from ventral side. Fingertip compressions 100-120/min. Differentiate torpor from death (warm and check for arousal). Recover at 25-27°C.",
         },
     ],
+    "references": [
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Johnson DH. Hedgehogs and sugar gliders: respiratory anatomy, physiology, and disease. Vet Clin North Am Exot Anim Pract. 2011;14(2):267-285.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
+        "Lichtenberger M, Ko J. Anesthesia and analgesia for small mammals and birds. Vet Clin North Am Exot Anim Pract. 2007;10(2):293-315.",
+    ],
 }
 
 # ============================================================
@@ -1472,6 +1623,11 @@ ANESTHESIA_PROTOCOLS["sugar_glider"] = {
             "notes_ja": "フクロモモンガのCPR: 非常に小型のため指先で穏やかに胸骨圧迫。トルポール（低体温休眠）と死亡の鑑別が重要（加温＋刺激で反応確認）。覚醒後は自咬症予防のためエリザベスカラー装着。暗いポーチで回復。",
             "notes": "Sugar glider CPR: very small; gentle fingertip sternal compressions. Differentiate torpor from death (warm + stimulate to check response). Apply Elizabethan collar after recovery to prevent self-mutilation. Recover in dark pouch.",
         },
+    ],
+    "references": [
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Johnson-Delaney CA. Sugar gliders. In: Quesenberry KE et al., eds. Ferrets, Rabbits, and Rodents. 4th ed. Elsevier; 2020:385-400.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
     ],
 }
 
@@ -1597,6 +1753,12 @@ ANESTHESIA_PROTOCOLS["degu"] = {
             "notes": "Degu CPR: fingertip sternal compressions (100-120/min). Avoid tail (degloving risk — never grab tail). Offer sugar-free food after recovery (prevent diabetes worsening). Check blood glucose.",
         },
     ],
+    "references": [
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Flecknell PA. Laboratory Animal Anaesthesia. 4th ed. Academic Press; 2015.",
+        "Quesenberry KE, Orcutt CJ, Mans C, Carpenter JW, eds. Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery. 4th ed. Elsevier; 2020.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
+    ],
 }
 
 # ============================================================
@@ -1720,6 +1882,13 @@ ANESTHESIA_PROTOCOLS["bird"] = {
             "notes": "Avian CPR: compress keel between thumb and forefinger. 1-2 compressions/sec. IPPV with 100% O2. Epinephrine can be given intratracheally.",
         },
     ],
+    "references": [
+        "Hawkins MG, Pascoe PJ. Anesthesia, analgesia, and sedation of small mammals. In: Quesenberry KE et al., eds. Ferrets, Rabbits, and Rodents. 4th ed. Elsevier; 2020.",
+        "Lierz M, Korbel R. Anesthesia and analgesia in birds. J Exot Pet Med. 2012;21(1):44-58.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
+        "Curro TG. Anesthesia of pet birds. Semin Avian Exot Pet Med. 1998;7(1):10-21.",
+    ],
 }
 
 # ============================================================
@@ -1831,6 +2000,12 @@ ANESTHESIA_PROTOCOLS["parakeet"] = {
             "notes_ja": "小型インコ（30-40g）のCPR: 竜骨を親指と人差し指で挟んで圧迫（1-2回/sec）。100% O2でIPPV。低体温が疑われる場合はまず加温。IOアクセスは脛足根骨から（25-28G針）。",
             "notes": "Small parakeet (30-40g) CPR: compress keel between thumb and forefinger (1-2/sec). IPPV with 100% O2. If hypothermia suspected, warm first. IO access via tibiotarsus (25-28G needle).",
         },
+    ],
+    "references": [
+        "Lierz M, Korbel R. Anesthesia and analgesia in birds. J Exot Pet Med. 2012;21(1):44-58.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
+        "Hawkins MG, Paul-Murphy JR. Avian analgesia. Vet Clin North Am Exot Anim Pract. 2011;14(1):61-80.",
     ],
 }
 
@@ -1948,6 +2123,13 @@ ANESTHESIA_PROTOCOLS["parrot"] = {
             "notes_ja": "大型オウムのCPR: 竜骨を圧迫（1-2回/sec）。気管挿管してIPPV（100% O2）。ヨウム（アフリカングレイ）はカルシウム低下による心停止リスクがあり、10%グルコン酸カルシウム50-100 mg/kg IV slowを検討。",
             "notes": "Large parrot CPR: keel compressions (1-2/sec). Intubate and IPPV (100% O2). African greys are at risk of cardiac arrest from hypocalcemia; consider calcium gluconate 10% 50-100 mg/kg IV slow.",
         },
+    ],
+    "references": [
+        "Lierz M, Korbel R. Anesthesia and analgesia in birds. J Exot Pet Med. 2012;21(1):44-58.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
+        "Hawkins MG, Paul-Murphy JR. Avian analgesia. Vet Clin North Am Exot Anim Pract. 2011;14(1):61-80.",
+        "Curro TG. Anesthesia of pet birds. Semin Avian Exot Pet Med. 1998;7(1):10-21.",
     ],
 }
 
@@ -2069,6 +2251,13 @@ ANESTHESIA_PROTOCOLS["reptile"] = {
             "notes": "Reptile CPR: IPPV (4-6/min) is top priority. Cardiac massage from ventral approach. Warm hypothermic individuals to upper POTZ before pronouncing death (may recover from apparent death).",
         },
     ],
+    "references": [
+        "Heard D. Reptile anesthesia. In: Mader DR, Divers SJ, eds. Current Therapy in Reptile Medicine and Surgery. Elsevier; 2014:217-238.",
+        "Mosley C. Pain and nociception in reptiles. Vet Clin North Am Exot Anim Pract. 2011;14(1):45-60.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "West G, Heard D, Caulkett N, eds. Zoo Animal and Wildlife Immobilization and Anesthesia. 2nd ed. Wiley-Blackwell; 2014.",
+        "Schumacher J, Yelen T. Anesthesia and analgesia. In: Mader DR, ed. Reptile Medicine and Surgery. 2nd ed. Saunders Elsevier; 2006:442-452.",
+    ],
 }
 
 # ============================================================
@@ -2184,6 +2373,12 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             "notes": "Reptile CPR: IPPV (2-4/min) is most critical. Cardiac massage from ventral approach. Warm hypothermic individuals to upper POTZ before pronouncing death (may recover from apparent death when hypothermic).",
         },
     ],
+    "references": [
+        "Heard D. Reptile anesthesia. In: Mader DR, Divers SJ, eds. Current Therapy in Reptile Medicine and Surgery. Elsevier; 2014:217-238.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Schumacher J, Yelen T. Anesthesia and analgesia. In: Mader DR, ed. Reptile Medicine and Surgery. 2nd ed. Saunders Elsevier; 2006:442-452.",
+        "West G, Heard D, Caulkett N, eds. Zoo Animal and Wildlife Immobilization and Anesthesia. 2nd ed. Wiley-Blackwell; 2014.",
+    ],
 }
 
 # ============================================================
@@ -2294,6 +2489,12 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             "notes_ja": "ヘビのCPR: IPPV（2-4回/min、ETチューブ経由）が最優先。心臓マッサージは体前方1/4の腹側から。低体温個体はPOTZ上限に加温してから評価。毒蛇は防護手袋着用。",
             "notes": "Snake CPR: IPPV (2-4/min via ET tube) is top priority. Cardiac massage from ventral side at cranial 1/4 of body. Warm hypothermic individuals to upper POTZ before assessment. Use protective gloves for venomous species.",
         },
+    ],
+    "references": [
+        "Heard D. Reptile anesthesia. In: Mader DR, Divers SJ, eds. Current Therapy in Reptile Medicine and Surgery. Elsevier; 2014:217-238.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "Schumacher J, Yelen T. Anesthesia and analgesia. In: Mader DR, ed. Reptile Medicine and Surgery. 2nd ed. Saunders Elsevier; 2006:442-452.",
+        "Mosley C. Pain and nociception in reptiles. Vet Clin North Am Exot Anim Pract. 2011;14(1):45-60.",
     ],
 }
 
@@ -2406,6 +2607,12 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             "notes_ja": "トカゲのCPR: IPPV（4-6回/min）+ 心臓マッサージ（腹側から）。尾の自切を起こさないよう取り扱い注意。低体温個体はPOTZ上限に加温してから評価。",
             "notes": "Lizard CPR: IPPV (4-6/min) + cardiac massage (ventral approach). Handle carefully to avoid tail autotomy. Warm hypothermic individuals to upper POTZ before assessment.",
         },
+    ],
+    "references": [
+        "Heard D. Reptile anesthesia. In: Mader DR, Divers SJ, eds. Current Therapy in Reptile Medicine and Surgery. Elsevier; 2014:217-238.",
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "West G, Heard D, Caulkett N, eds. Zoo Animal and Wildlife Immobilization and Anesthesia. 2nd ed. Wiley-Blackwell; 2014.",
+        "Mosley C. Pain and nociception in reptiles. Vet Clin North Am Exot Anim Pract. 2011;14(1):45-60.",
     ],
 }
 
@@ -2527,6 +2734,12 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
             "notes": "Amphibian CPR: transfer to fresh water, keep skin moist. Oxygenate via water flow over oral/branchial surfaces. Gentle ventral cardiac massage. Warm hypothermic individuals to upper habitat temp before pronouncing death.",
         },
     ],
+    "references": [
+        "Wright KN, Whitaker BR. Amphibian Medicine and Captive Husbandry. Krieger Publishing; 2001.",
+        "Chai N. Surgery in amphibians. Vet Clin North Am Exot Anim Pract. 2016;19(1):77-95.",
+        "West G, Heard D, Caulkett N, eds. Zoo Animal and Wildlife Immobilization and Anesthesia. 2nd ed. Wiley-Blackwell; 2014.",
+        "Cakir M, Kilinc IT. Evaluation of tricaine methanesulfonate (MS-222) in different amphibian species. J Hell Vet Med Soc. 2021;72(3):3287-3294.",
+    ],
 }
 
 # ============================================================
@@ -2630,6 +2843,13 @@ ANESTHESIA_PROTOCOLS["fish"] = {
             "notes_ja": "Stage IV（鰓蓋運動停止）に達した場合: 直ちに新鮮なエアレーション水に移す。口を開けて鰓に水流を通す（手動灌流）。軽い刺激を与える。回復しない場合は30分以上の灌流を継続（魚は低酸素耐性が高い）。薬物的蘇生は一般的でなく、物理的な鰓灌流が最も効果的。",
             "notes": "If Stage IV reached (opercular arrest): immediately transfer to fresh aerated water. Open mouth and direct water flow through gills (manual irrigation). Provide gentle stimulation. If no recovery, continue irrigation for 30+ min (fish have high hypoxia tolerance). Pharmacological resuscitation is uncommon; physical gill irrigation is most effective.",
         },
+    ],
+    "references": [
+        "Neiffer DL, Stamper MA. Fish sedation, anesthesia, analgesia, and euthanasia: considerations, methods, and types of drugs. ILAR J. 2009;50(4):343-360.",
+        "Ross LG, Ross B. Anaesthetic and Sedative Techniques for Aquatic Animals. 3rd ed. Blackwell Science; 2008.",
+        "Sneddon LU. Clinical anesthesia and analgesia in fish. J Exot Pet Med. 2012;21(1):32-43.",
+        "Harms CA, Lewbart GA. Surgery in fish. Vet Clin North Am Exot Anim Pract. 2000;3(3):759-774.",
+        "West G, Heard D, Caulkett N, eds. Zoo Animal and Wildlife Immobilization and Anesthesia. 2nd ed. Wiley-Blackwell; 2014.",
     ],
 }
 
@@ -2748,6 +2968,12 @@ ANESTHESIA_PROTOCOLS["exotic_other"] = {
             "notes_ja": "未知の種のCPR: 体格に合わせた胸骨圧迫＋酸素投与（マスクまたはバッグバルブ）。体温管理。種特異的な文献を事前に確認。",
             "notes": "CPR for unfamiliar species: chest compressions adapted to body size + oxygen delivery (mask or bag-valve). Temperature management. Review species-specific literature in advance.",
         },
+    ],
+    "references": [
+        "Longley LA. Anaesthesia of Exotic Pets. Saunders Elsevier; 2008.",
+        "West G, Heard D, Caulkett N, eds. Zoo Animal and Wildlife Immobilization and Anesthesia. 2nd ed. Wiley-Blackwell; 2014.",
+        "Carpenter JW. Exotic Animal Formulary. 6th ed. Elsevier; 2023.",
+        "Lichtenberger M, Ko J. Anesthesia and analgesia for small mammals and birds. Vet Clin North Am Exot Anim Pract. 2007;10(2):293-315.",
     ],
 }
 
