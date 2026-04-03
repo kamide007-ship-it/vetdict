@@ -1508,7 +1508,7 @@ function renderDiseaseDb(){
         ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:""}
       </dl><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
-  _attachDbItemHandlers(list);
+  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
@@ -2371,7 +2371,7 @@ function renderDrugList(){
       </div>
     </div>`;
   }).join("");
-  _attachDbItemHandlers(list);
+  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
 }
 
 /* ===== Anesthesia Protocols ===== */
@@ -2548,7 +2548,7 @@ function renderAnesthesiaList(){
       </div>
       <div class="disease-detail">
         ${notes?`<div class="anesthesia-notes">${escapeHtml(notes)}</div>`:""}
-        ${drugsHtml}${monitorHtml}
+        ${drugsHtml}${monitorHtml}${p.references&&p.references.length?`<div class="anesthesia-references"><strong>${currentLang==="ja"?"参考文献":"References"}</strong><ul>${p.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`:""}
       </div>
     </div>`;
   }).join("");
@@ -2582,7 +2582,13 @@ function renderAnesthesiaList(){
     list.insertAdjacentHTML("beforeend",asaHtml);
   }
 
-  _attachDbItemHandlers(list);
+  /* Species-level references */
+  if(anesthesiaData.references&&anesthesiaData.references.length&&!cat&&!search){
+    const refsHtml=`<div class="anesthesia-breed-section"><h4>${currentLang==="ja"?"参考文献":"References"}</h4><ul class="anesthesia-ref-list">${anesthesiaData.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`;
+    list.insertAdjacentHTML("beforeend",refsHtml);
+  }
+
+  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
 }
 
 /* ===== Shared helpers ===== */

@@ -1300,6 +1300,10 @@ button.combination-item:focus-visible {
 .anesthesia-breed-item{padding:8px 12px;margin-bottom:8px;background:#fff;border-radius:6px;border:1px solid #eed68a}
 .anesthesia-breed-item strong{font-size:.82rem;color:var(--navy-dark)}
 .anesthesia-breed-item p{font-size:.78rem;color:var(--gray-600);margin-top:4px;line-height:1.5}
+.anesthesia-references{margin-top:12px;padding:10px 12px;background:var(--gray-50);border-radius:6px;border:1px solid var(--gray-200)}
+.anesthesia-references>strong{display:block;font-size:.78rem;color:var(--navy);margin-bottom:6px}
+.anesthesia-references ul{margin:0;padding:0 0 0 16px;font-size:.72rem;color:var(--gray-600);line-height:1.6}
+.anesthesia-ref-list{margin:0;padding:0 0 0 16px;font-size:.76rem;color:var(--gray-600);line-height:1.7}
 .anesthesia-item .drug-head-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 /* Weight-based dose calculator */
 .anesthesia-weight-calc{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #86efac;border-radius:var(--radius);padding:6px 12px}
