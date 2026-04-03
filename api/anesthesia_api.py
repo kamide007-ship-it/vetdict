@@ -58,6 +58,7 @@ def api_anesthesia_protocols():
             "fasting": data.get("fasting", {}),
             "protocols": protocols,
             "breed_considerations": data.get("breed_considerations", []),
+            "references": data.get("references", []),
             "categories": ANESTHESIA_CATEGORIES,
             "risk_levels": RISK_LEVELS,
         })
