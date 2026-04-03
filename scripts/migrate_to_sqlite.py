@@ -147,6 +147,22 @@ def migrate_dog_diseases(conn) -> int:
     return count
 
 
+def _is_template_text(value: str | None) -> bool:
+    """Return True if *value* is low-quality template text from enrichment."""
+    if not value:
+        return False
+    # Generic "affects species" description template
+    if "に影響する疾患です。専門的な獣医学的診断と治療が必要です" in value:
+        return True
+    # Generic prognosis template
+    if "予後は良好です。早期発見と適切な治療により、ほとんどの動物は回復します" in value:
+        return True
+    # Causes that just say "affects species"
+    if "に影響を及ぼす疾患である" in value:
+        return True
+    return False
+
+
 def migrate_json_enrichments(conn) -> int:
     """Overlay enrichment data from diseases_all_species.json using name-based matching.
 
@@ -154,6 +170,10 @@ def migrate_json_enrichments(conn) -> int:
     modules.  Previous ID-based matching caused 1,342 records to receive
     enrichment data from the *wrong* disease.  This version matches by
     normalised disease name so only genuinely matching records are updated.
+
+    Template text (generic descriptions/prognoses from the enrichment
+    pipeline) is filtered out so it does not overwrite better data from
+    the Python species modules.
     """
     json_path = ROOT / "diseases_all_species.json"
     if not json_path.exists():
@@ -174,6 +194,12 @@ def migrate_json_enrichments(conn) -> int:
         name = entry.get("name", "")
         if name:
             json_by_name[_norm(name)] = entry
+
+    def _clean(value: str | None) -> str | None:
+        """Return None for template text so COALESCE keeps existing data."""
+        if _is_template_text(value):
+            return None
+        return value
 
     # Iterate over all diseases currently in SQLite and enrich where names match.
     rows = conn.execute("SELECT id, name FROM diseases").fetchall()
@@ -202,18 +228,18 @@ def migrate_json_enrichments(conn) -> int:
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = ?""",
             (
-                entry.get("description"),
-                entry.get("description_ja"),
+                _clean(entry.get("description")),
+                _clean(entry.get("description_ja")),
                 entry.get("pathophysiology"),
                 entry.get("pathophysiology_ja"),
-                entry.get("causes"),
-                entry.get("causes_ja"),
+                _clean(entry.get("causes")),
+                _clean(entry.get("causes_ja")),
                 entry.get("treatment"),
                 entry.get("treatment_ja"),
                 entry.get("prevention"),
                 entry.get("prevention_ja"),
-                entry.get("prognosis"),
-                entry.get("prognosis_ja"),
+                _clean(entry.get("prognosis")),
+                _clean(entry.get("prognosis_ja")),
                 entry.get("enriched_at"),
                 entry.get("enrichment_phase"),
                 db_id,
