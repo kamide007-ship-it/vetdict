@@ -2796,8 +2796,11 @@ function toggleDetail(head){
   if(icon)icon.classList.toggle("rotated",isOpen);
 }
 
-/* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
+/* Attach click/keyboard handlers to .disease-db-item elements via event delegation (once only) */
+let _dbHandlersAttached=false;
 function _attachDbItemHandlers(container){
+  if(_dbHandlersAttached)return;
+  _dbHandlersAttached=true;
   container.addEventListener("click",function(e){if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
   container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")&&!e.target.closest(".disease-detail.open")){e.preventDefault();toggleDbItem(item);}}});
 }
