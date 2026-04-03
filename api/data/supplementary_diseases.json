@@ -11650,7 +11650,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of cervical lymphadenitis (lumps) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in guinea pig.",
-    "diagnosis_ja": "頸部リンパ節炎（Guinea Pig）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Guinea Pigにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "頸部リンパ節炎（Guinea Pig）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Guinea Pigにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "Streptococcus zooepidemicusの頸部リンパ節感染→膿瘍形成（頸部の腫瘤）。モルモットに好発。",
+    "causes_ja": "S. zooepidemicus。口腔粘膜の微小損傷から侵入。不適切な飼料（硬い草の穂等）。",
+    "prevention_ja": "硬い飼料の回避。膿瘍の外科的排膿＋洗浄＋抗菌薬。"
   },
   {
     "name": "Ulcerative Dermatitis",
@@ -22139,7 +22142,10 @@
     "clinical_signs": "Polyuria/polydipsia, weight changes, changes in appetite, lethargy, skin/coat changes, muscle weakness, altered mentation. Specific signs depend on the affected endocrine axis.",
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of fatty liver disease is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in hedgehog.",
-    "diagnosis_ja": "脂肪肝（Hedgehog）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Hedgehogにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "脂肪肝（Hedgehog）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Hedgehogにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "肝臓への過剰脂肪蓄積→肝機能障害→黄疸・食欲不振。肥満ハリネズミに好発。食欲廃絶後に急速に進行。",
+    "causes_ja": "肥満、高脂肪食、食欲廃絶。",
+    "prevention_ja": "適正体重管理（成体250〜400g）。肥満予防。"
   },
   {
     "name": "Endometritis",
