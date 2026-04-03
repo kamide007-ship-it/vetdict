@@ -11,7 +11,7 @@
 
   <!-- Hero Description -->
   <div class="hero-content">
-    <p class="hero-lead" data-i18n-html="heroLead">臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・21動物種対応の臨床意思決定支援プラットフォーム。</p>
+    <p class="hero-lead" data-i18n-html="heroLead">臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・182麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。</p>
     <div class="hero-cta">
       <a href="#speciesSection" class="hero-btn primary" data-i18n="heroCta">動物種を選択して鑑別診断を開始</a>
       <a href="/diseases" class="hero-btn secondary" style="background:transparent;border:2px solid rgba(255,255,255,.5);color:var(--white)" data-i18n="heroCtaDb">疾患データベースを見る</a>
@@ -36,11 +36,22 @@
       <span class="num" id="statDrugs" aria-label="薬品数">-</span>
       <span class="label" data-i18n="statDrugs">薬品数</span>
     </div>
+    <div class="hero-stat">
+      <span class="num" id="statProtocols" aria-label="麻酔プロトコル">-</span>
+      <span class="label" data-i18n="statProtocols">麻酔プロトコル</span>
+    </div>
   </div>
 
-  <!-- Hero Credit -->
+  <!-- Hero Credit — Developer authority -->
   <div class="hero-credit" data-i18n-html="heroCredit">
     開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎 DVM
+  </div>
+  <div class="hero-trust" style="display:flex;justify-content:center;gap:16px;margin-top:8px;font-size:.72rem;color:rgba(255,255,255,.6)">
+    <span data-i18n="heroTrustRef">90+学術文献に基づく</span>
+    <span>|</span>
+    <span data-i18n="heroTrustTests">2,700+自動テスト検証済み</span>
+    <span>|</span>
+    <span data-i18n="heroTrustOss">オープンソース開発</span>
   </div>
 </section>
 
@@ -64,7 +75,7 @@
 
 <section class="landing-chat" id="landingChat">
   <div class="card" style="max-width:680px;margin:0 auto">
-    <div class="card-header" style="background:var(--navy);color:var(--white)">&#128172; <span data-i18n="landingChatTitle">症状をすぐに相談</span></div>
+    <div class="card-header" style="background:var(--navy);color:var(--white)">&#128172; <span data-i18n="landingChatTitle">臨床症状から鑑別診断</span></div>
     <div class="card-body" style="padding:0">
       <div class="chat-messages" id="landingChatMessages" style="height:160px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px">
         <div class="chat-msg bot" data-i18n-html="landingChatHint">臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span></div>

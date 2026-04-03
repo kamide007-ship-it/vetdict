@@ -55,14 +55,15 @@ const I18N={
   ja:{
     skipLink:"メインコンテンツへスキップ",
     logoSub:"獣医師のための臨床意思決定支援",
-    navChecker:"鑑別診断",navDatabase:"疾患データベース",navChat:"臨床相談",navDrugs:"薬品辞書",
-    landingChatTitle:"症状をすぐに相談",
+    navChecker:"鑑別診断",navDatabase:"疾患データベース",navChat:"臨床相談",navDrugs:"薬品辞書",navAnesthesia:"鎮静・麻酔",
+    landingChatTitle:"臨床症状から鑑別診断",
+    heroTrustRef:"138学術文献に基づく",heroTrustTests:"2,700+自動テスト検証済み",heroTrustOss:"オープンソース開発",
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
-    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・21動物種対応の臨床意思決定支援プラットフォーム。",
+    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・182麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
     heroCta:"動物種を選択して鑑別診断を開始",heroCtaDb:"疾患データベースを見る",
-    statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",
+    statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",statProtocols:"麻酔プロトコル",
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
     sponsorDesc:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
     sponsorCta:"詳細 →",
@@ -83,6 +84,25 @@ const I18N={
     guidedSelectCategory:"カテゴリを選んでください",guidedSelectSymptoms:"当てはまる症状を選んでください",
     guidedInterimTitle:"現在の診断候補",guidedFinalTitle:"問診結果",
     cardDrugs:"&#128138; 薬品辞書",
+    cardAnesthesia:"&#128137; 鎮静・麻酔プロトコル",
+    anesthesiaSearchPh:"薬品名・プロトコルを検索... (例: propofol, ketamine, 鎮静)",
+    noAnesthesiaMatch:"該当するプロトコルがありません",
+    anesthesiaOverviewLabel:"概要",anesthesiaFastingLabel:"絶食指針",
+    anesthesiaRiskLow:"低リスク",anesthesiaRiskModerate:"中リスク",anesthesiaRiskHigh:"高リスク",
+    anesthesiaDose:"用量",anesthesiaRoute:"投与経路",anesthesiaOnset:"効果発現",anesthesiaDuration:"持続時間",
+    anesthesiaMonitoring:"モニタリング項目",anesthesiaTarget:"目標値",
+    anesthesiaBreedConsider:"品種別注意事項",anesthesiaSelectSpecies:"動物種を選択すると、種別の鎮静・麻酔プロトコルが表示されます",
+    anesthesiaAsaTitle:"ASA身体状態分類",anesthesiaAsaGuidance:"麻酔管理指針",
+    anesthesiaWeightLabel:"体重",anesthesiaEmergency:"緊急プロトコル",anesthesiaCalcDose:"計算投与量",anesthesiaCalcRange:"範囲",
+    anesthesiaPrint:"麻酔チェックリスト印刷",anesthesiaPrintTitle:"麻酔チェックリスト",
+    anesthesiaPrintPatient:"患者情報",anesthesiaPrintSpecies:"動物種",anesthesiaPrintWeight:"体重",anesthesiaPrintDate:"日付",
+    anesthesiaPrintPreop:"術前チェック",anesthesiaPrintIntraop:"術中チェック",anesthesiaPrintPostop:"術後チェック",
+    anesthesiaPrintPreopItems:"絶食確認,体重測定,血液検査,胸部X線,心電図,静脈カテーテル留置,輸液準備",
+    anesthesiaPrintIntraopItems:"モニター装着（SpO2/ETCO2/ECG/BP）,気管チューブサイズ確認,緊急薬品準備（アトロピン/エピネフリン）,保温装置,輸液速度設定",
+    anesthesiaPrintPostopItems:"抜管タイミング確認,体温モニタリング,疼痛評価,覚醒状態確認,飲水・食事再開時期",
+    anesthesiaAsaFilter:"ASA分類",anesthesiaAsaAll:"全ASA",
+    anesthesiaSafetyTitle:"安全性情報",
+    anesthesiaContraindicated:"禁忌",anesthesiaCaution:"慎重投与",anesthesiaMonitorExtra:"要モニタリング",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
     allCategories:"全カテゴリ",allSpecies:"全動物種",
     sponsorTagline:"獣医師が考案・国内製造 — 競走馬理化学研究所の検査合格",
@@ -135,14 +155,15 @@ const I18N={
   en:{
     skipLink:"Skip to main content",
     logoSub:"Clinical Decision Support for Veterinarians",
-    navChecker:"Differential Dx",navDatabase:"Disease Database",navChat:"Clinical Chat",navDrugs:"Drug Dictionary",
-    landingChatTitle:"Quick Symptom Chat",
+    navChecker:"Differential Dx",navDatabase:"Disease Database",navChat:"Clinical Chat",navDrugs:"Drug Dictionary",navAnesthesia:"Anesthesia",
+    landingChatTitle:"Differential Diagnosis from Clinical Signs",
+    heroTrustRef:"Based on 138 academic references",heroTrustTests:"Verified by 2,700+ automated tests",heroTrustOss:"Open-source development",
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
-    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
+    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 182 anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
     heroCta:"Select a species to begin differential diagnosis",heroCtaDb:"Browse Disease Database",
-    statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",
+    statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",statProtocols:"Anesthesia",
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
     sponsorDesc:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     sponsorCta:"Details →",
@@ -163,6 +184,25 @@ const I18N={
     guidedSelectCategory:"Select a category",guidedSelectSymptoms:"Select symptoms that apply",
     guidedInterimTitle:"Current Candidates",guidedFinalTitle:"Consultation Results",
     cardDrugs:"&#128138; Drug Dictionary",
+    cardAnesthesia:"&#128137; Sedation & Anesthesia Protocols",
+    anesthesiaSearchPh:"Search protocols... (e.g. propofol, ketamine, sedation)",
+    noAnesthesiaMatch:"No matching protocols",
+    anesthesiaOverviewLabel:"Overview",anesthesiaFastingLabel:"Fasting Guidelines",
+    anesthesiaRiskLow:"Low Risk",anesthesiaRiskModerate:"Moderate Risk",anesthesiaRiskHigh:"High Risk",
+    anesthesiaDose:"Dose",anesthesiaRoute:"Route",anesthesiaOnset:"Onset",anesthesiaDuration:"Duration",
+    anesthesiaMonitoring:"Monitoring Parameters",anesthesiaTarget:"Target",
+    anesthesiaBreedConsider:"Breed-Specific Considerations",anesthesiaSelectSpecies:"Select a species to view sedation & anesthesia protocols",
+    anesthesiaAsaTitle:"ASA Physical Status Classification",anesthesiaAsaGuidance:"Anesthesia Management Guidance",
+    anesthesiaWeightLabel:"Weight",anesthesiaEmergency:"Emergency",anesthesiaCalcDose:"Calculated Dose",anesthesiaCalcRange:"range",
+    anesthesiaPrint:"Print Checklist",anesthesiaPrintTitle:"Anesthesia Checklist",
+    anesthesiaPrintPatient:"Patient Information",anesthesiaPrintSpecies:"Species",anesthesiaPrintWeight:"Weight",anesthesiaPrintDate:"Date",
+    anesthesiaPrintPreop:"Preoperative Checklist",anesthesiaPrintIntraop:"Intraoperative Checklist",anesthesiaPrintPostop:"Postoperative Checklist",
+    anesthesiaPrintPreopItems:"Fasting confirmed,Body weight recorded,Blood work,Thoracic radiographs,ECG,IV catheter placed,Fluids prepared",
+    anesthesiaPrintIntraopItems:"Monitors attached (SpO2/ETCO2/ECG/BP),ETT size confirmed,Emergency drugs ready (atropine/epinephrine),Warming device,Fluid rate set",
+    anesthesiaPrintPostopItems:"Extubation timing confirmed,Temperature monitoring,Pain assessment,Recovery status,Water/food resumption timing",
+    anesthesiaAsaFilter:"ASA Class",anesthesiaAsaAll:"All ASA",
+    anesthesiaSafetyTitle:"Safety Information",
+    anesthesiaContraindicated:"Contraindicated",anesthesiaCaution:"Use with Caution",anesthesiaMonitorExtra:"Extra Monitoring",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
     allCategories:"All Categories",allSpecies:"All Species",
     sponsorTagline:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
@@ -265,6 +305,7 @@ function applyLanguage(){
   renderSelectedSymptoms();
   if(allDiseases.length){diseaseNavMode=currentLang==="ja"?"kana":"az";diseaseFilter="";renderAzNav();renderDiseaseDb();}
   if(drugsLoaded)renderDrugList();
+  if(anesthesiaLoaded)reloadAnesthesiaForSpecies();
 }
 
 function setupLanguageToggle(){
@@ -318,7 +359,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
     // Restore view from URL hash
     const hash=location.hash.replace("#","");
-    if(hash&&["checker","database","chat","drugs"].includes(hash))switchView(hash);
+    if(hash&&["checker","database","chat","drugs","anesthesia"].includes(hash))switchView(hash);
     // Handle ?species= query param (from sitemap/SEO links)
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
@@ -406,6 +447,7 @@ function triggerStatsAnimation(instant){
   if(pendingStats.species!==undefined)animateCount(document.getElementById("statSpecies"),pendingStats.species,dur||800);
   if(pendingStats.symptoms!==undefined)animateCount(document.getElementById("statSymptoms"),pendingStats.symptoms,dur||1000);
   if(pendingStats.drugs!==undefined)animateCount(document.getElementById("statDrugs"),pendingStats.drugs,dur||1000);
+  if(pendingStats.protocols!==undefined)animateCount(document.getElementById("statProtocols"),pendingStats.protocols,dur||900);
 }
 
 function animateCount(el,target,duration){
@@ -437,7 +479,8 @@ function loadSpeciesStats(){
         diseases:data.total_diseases||0,
         species:data.total_species||SPECIES.length,
         drugs:data.total_drugs||0,
-        symptoms:sd.symptoms?sd.symptoms.length:0
+        symptoms:sd.symptoms?sd.symptoms.length:0,
+        protocols:182
       };
       renderSpeciesGrid();
       initStatsObserver();
@@ -487,7 +530,8 @@ function setDefaultStats(){
     diseases:7140,
     species:21,
     drugs:228,
-    symptoms:52
+    symptoms:52,
+    protocols:182
   };
   renderSpeciesGrid();
   initStatsObserver();
@@ -555,7 +599,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();loadHusbandry(id);
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();loadHusbandry(id);reloadAnesthesiaForSpecies();
   resetSpeciesChat(id);
   // Reset guided consultation if active
   const guidedCont=document.getElementById("chatGuidedContainer");
@@ -1194,6 +1238,63 @@ function renderScoringDetail(d){
   return html;
 }
 
+/* Map disease name/category to anesthesia condition tags */
+const DISEASE_ANESTHESIA_MAP={
+  /* Keywords in disease name → condition tags */
+  "cardiac":"cardiac_disease","heart":"cardiac_disease","cardiomyopathy":"cardiomyopathy",
+  "hcm":"cat_hcm","dcm":"cardiac_disease","valve":"cardiac_disease","stenosis":"cardiac_disease",
+  "arrhythmia":"cardiac_disease","bradycardia":"bradycardia",
+  "renal":"renal_disease","kidney":"renal_disease","ckd":"ckd","nephro":"renal_disease",
+  "hepatic":"hepatic_disease","liver":"hepatic_disease","lipidosis":"hepatic_lipidosis",
+  "seizure":"seizure","epilep":"epilepsy","convulsion":"seizure",
+  "gastric dilatation":"gdv","gdv":"gdv","bloat":"gdv",
+  "diabetes":"diabetes","diabetic":"diabetes","insulinoma":"insulinoma",
+  "coagulo":"coagulopathy","thrombocyto":"thrombocytopenia","dic":"dic","hemophilia":"coagulopathy",
+  "brachycephalic":"brachycephalic","短頭":"brachycephalic",
+  "laryngeal":"laryngeal_paralysis","tracheal collapse":"upper_airway_obstruction",
+  "pregnancy":"pregnancy","dystocia":"pregnancy","pyometra":"pregnancy",
+  "腎":"renal_disease","心":"cardiac_disease","肝":"hepatic_disease",
+  "てんかん":"epilepsy","痙攣":"seizure","糖尿":"diabetes",
+  "胃拡張":"gdv","妊娠":"pregnancy","難産":"pregnancy",
+};
+function renderAnesthesiaConsiderations(d){
+  if(!anesthesiaContraRules||!anesthesiaContraRules.length)return"";
+  const name=((d.name||"")+" "+(d.name_ja||"")).toLowerCase();
+  /* Find matching condition tags from disease name */
+  const tags=new Set();
+  for(const[kw,tag]of Object.entries(DISEASE_ANESTHESIA_MAP)){
+    if(name.includes(kw.toLowerCase()))tags.add(tag);
+  }
+  if(!tags.size)return"";
+  /* Check all rules against these tags + species */
+  const sp=(currentSpecies||"").toLowerCase();
+  const allTags=new Set([...tags]);
+  if(sp)allTags.add(sp);
+  const warnings=[];
+  const seen=new Set();
+  for(const rule of anesthesiaContraRules){
+    const condMatch=rule.conditions.some(c=>allTags.has(c.toLowerCase()));
+    if(!condMatch)continue;
+    const key=rule.drug_patterns[0]+"|"+rule.severity;
+    if(seen.has(key))continue;
+    seen.add(key);
+    warnings.push(rule);
+  }
+  if(!warnings.length)return"";
+  const sevColors={contraindicated:"#dc2626",caution:"#ea580c",monitor:"#ca8a04"};
+  const sevIcons={contraindicated:"⛔",caution:"⚠️",monitor:"🔍"};
+  const sevLabels={contraindicated:t("anesthesiaContraindicated"),caution:t("anesthesiaCaution"),monitor:t("anesthesiaMonitorExtra")};
+  const title=currentLang==="ja"?"🏥 この疾患の麻酔注意事項":"🏥 Anesthesia Considerations for This Condition";
+  let html=`<div class="detail-anesthesia-notes" style="margin-top:10px;padding:10px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px"><strong style="font-size:.84rem">${title}</strong><div style="margin-top:6px;display:flex;flex-direction:column;gap:4px">`;
+  warnings.slice(0,6).forEach(w=>{
+    const msg=currentLang==="ja"?(w.message_ja||w.message_en):(w.message_en||w.message_ja);
+    const drugs=w.drug_patterns.slice(0,3).join(", ");
+    const sev=w.severity;
+    html+=`<div style="font-size:.8rem;padding:4px 0;border-bottom:1px dotted #fde68a"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> <strong>${escapeHtml(drugs)}</strong>: ${escapeHtml(msg)}</div>`;
+  });
+  html+=`</div></div>`;
+  return html;
+}
 function renderMentionedDrugs(d){
   const drugs=d.mentioned_drugs;
   if(!drugs||!drugs.length)return"";
@@ -1292,6 +1393,7 @@ function renderDiseaseCard(d,data){
       ${renderScoringDetail(d)}
       ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${recTests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("")}</div></div>`:""}
       ${renderMentionedDrugs(d)}
+      ${renderAnesthesiaConsiderations(d)}
       <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>
@@ -1482,7 +1584,7 @@ function renderDiseaseDb(){
         ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:""}
       </dl><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
-  _attachDbItemHandlers(list);
+  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
@@ -1497,7 +1599,7 @@ function renderDiseaseDb(){
 
 function switchView(view){
   trackEvent("switch_view",{view:view});
-  const views=["checker","database","chat","drugs"];
+  const views=["checker","database","chat","drugs","anesthesia"];
   const prefersReduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   views.forEach(v=>{
     const tab=document.getElementById("tab-"+v);
@@ -1510,6 +1612,7 @@ function switchView(view){
   });
   history.replaceState(null,null,"#"+view);
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
+  if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   /* フォーカスを新しいパネルの最初のインタラクティブ要素に移動 */
   const activePanel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
   if(activePanel){const focusable=activePanel.querySelector("input,select,button:not([disabled]),textarea,[tabindex='0']");if(focusable)setTimeout(()=>focusable.focus(),50);}
@@ -1538,7 +1641,7 @@ function setupNavigation(){
   // Listen for hash changes (browser back/forward)
   window.addEventListener("hashchange",()=>{
     const hash=location.hash.replace("#","");
-    if(["checker","database","chat","drugs"].includes(hash))switchView(hash);
+    if(["checker","database","chat","drugs","anesthesia"].includes(hash))switchView(hash);
   });
 }
 
@@ -2040,15 +2143,34 @@ function guidedRenderSymptoms(data){
 }
 
 function guidedRenderInterim(data){
-  // Show current symptom tags
+  // Show current symptom tags (removable)
   const details=data.symptom_details||[];
   if(details.length>0){
-    let tagsHtml='<div class="chat-symptoms-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"選択中の症状: ":"Selected: ")+'</span>';
+    let tagsHtml='<div class="chat-symptoms-tags guided-removable-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"選択中の症状 (×で解除): ":"Selected (tap × to remove): ")+'</span>';
     details.forEach(s=>{
-      tagsHtml+=`<span class="chat-symptom-tag">${currentLang==="ja"?s.name_ja:s.name_en}</span>`;
+      tagsHtml+=`<span class="chat-symptom-tag removable" data-sid="${escapeHtml(s.id)}">${currentLang==="ja"?s.name_ja:s.name_en} <button class="guided-tag-remove" type="button" aria-label="${currentLang==="ja"?"解除":"Remove"}">&times;</button></span>`;
     });
     tagsHtml+='</div>';
     guidedAddMsg(tagsHtml,"bot chat-result");
+    // Wire up removal handlers
+    document.querySelectorAll(".guided-removable-tags .guided-tag-remove").forEach(btn=>{
+      btn.addEventListener("click",function(){
+        const tag=this.closest(".chat-symptom-tag");
+        if(!tag)return;
+        const sid=tag.dataset.sid;
+        guidedState.selectedSymptoms=guidedState.selectedSymptoms.filter(s=>s!==sid);
+        tag.remove();
+        if(guidedState.selectedSymptoms.length>0){
+          // Re-run interim diagnosis with updated symptoms
+          guidedSetActions("");
+          guidedFetch("next_category");
+        } else {
+          // No symptoms left — go back to category selection
+          guidedSetActions("");
+          guidedFetch("start");
+        }
+      });
+    });
   }
 
   // Show disease candidates
@@ -2164,14 +2286,32 @@ function guidedRenderFinalResults(data){
   const diseases=result.suspected_diseases||[];
   const details=data.symptom_details||[];
 
-  // Symptom summary
+  // Symptom summary (removable — re-runs finalize on removal)
   if(details.length>0){
-    let tagsHtml='<div class="chat-symptoms-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"検出症状: ":"Symptoms: ")+'</span>';
+    let tagsHtml='<div class="chat-symptoms-tags guided-removable-tags guided-final-tags"><span class="chat-symptoms-label">'+(currentLang==="ja"?"検出症状 (×で解除して再診断): ":"Symptoms (tap × to remove & re-diagnose): ")+'</span>';
     details.forEach(s=>{
-      tagsHtml+=`<span class="chat-symptom-tag">${escapeHtml(currentLang==="ja"?s.name_ja:s.name_en)}</span>`;
+      tagsHtml+=`<span class="chat-symptom-tag removable" data-sid="${escapeHtml(s.id)}">${escapeHtml(currentLang==="ja"?s.name_ja:s.name_en)} <button class="guided-tag-remove" type="button" aria-label="${currentLang==="ja"?"解除":"Remove"}">&times;</button></span>`;
     });
     tagsHtml+='</div>';
     guidedAddMsg(tagsHtml,"bot chat-result");
+    // Wire up removal handlers
+    document.querySelectorAll(".guided-final-tags .guided-tag-remove").forEach(btn=>{
+      btn.addEventListener("click",function(){
+        const tag=this.closest(".chat-symptom-tag");
+        if(!tag)return;
+        const sid=tag.dataset.sid;
+        guidedState.selectedSymptoms=guidedState.selectedSymptoms.filter(s=>s!==sid);
+        tag.remove();
+        if(guidedState.selectedSymptoms.length>0){
+          // Re-run finalize with updated symptoms
+          guidedSetActions("");
+          guidedFetch("finalize");
+        } else {
+          guidedSetActions("");
+          guidedFetch("start");
+        }
+      });
+    });
   }
 
   // Context info
@@ -2180,6 +2320,16 @@ function guidedRenderFinalResults(data){
   if(data.age_years)ctxParts.push((currentLang==="ja"?"年齢: ":"Age: ")+data.age_years+(currentLang==="ja"?"歳":"y"));
   if(data.pain_score!=null)ctxParts.push((currentLang==="ja"?"疼痛: ":"Pain: ")+data.pain_score+"/4");
   if(ctxParts.length>0)guidedAddMsg(ctxParts.join(" / "),"bot");
+
+  // Low-confidence warning
+  const topPct=diseases.length>0?(diseases[0].match_percent||0):0;
+  const symCount=details.length;
+  if(symCount<=2||topPct<50){
+    const warnMsg=currentLang==="ja"
+      ?`症状${symCount}個での診断です（最高信頼度 ${topPct}%）。症状を追加すると精度が大幅に向上します。`
+      :`Diagnosis based on ${symCount} symptom(s) (top confidence ${topPct}%). Adding more symptoms will significantly improve accuracy.`;
+    guidedAddMsg(`<div class="guided-low-confidence-warn">${escapeHtml(warnMsg)}</div>`,"bot chat-result");
+  }
 
   // Disease results
   if(diseases.length>0){
@@ -2218,8 +2368,11 @@ function guidedRenderFinalResults(data){
   const disclaimer=currentLang==="ja"?rec.next_step_ja:rec.next_step_en;
   if(disclaimer)guidedAddMsg(`<div class="chat-disclaimer">${escapeHtml(disclaimer)}</div>`,"bot chat-result");
 
-  // Restart button
-  guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);
+  // Action buttons: add more symptoms + restart
+  const addMoreLabel=currentLang==="ja"?"+ 症状を追加して再診断":"+ Add symptoms & re-diagnose";
+  guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn primary" id="guidedAddMore">${addMoreLabel}</button><button class="guided-action-btn text" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);
+  const addBtn=document.getElementById("guidedAddMore");
+  if(addBtn)addBtn.addEventListener("click",()=>{guidedSetActions("");guidedFetch("next_category");});
   const rb=document.getElementById("guidedRestartFinal");
   if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
 }
@@ -2294,7 +2447,456 @@ function renderDrugList(){
       </div>
     </div>`;
   }).join("");
-  _attachDbItemHandlers(list);
+  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
+}
+
+/* ===== Anesthesia Protocols ===== */
+let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={},anesthesiaAsaData=null,anesthesiaContraRules=null;
+
+function loadAnesthesiaProtocols(){
+  const list=document.getElementById("anesthesiaList");
+  list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div></div>';
+  const sp=currentSpecies||"";
+  const url=sp?"/api/anesthesia/protocols?species="+encodeURIComponent(sp):"/api/anesthesia/protocols";
+  fetchWithTimeout(url).then(r=>r.json()).then(data=>{
+    anesthesiaData=data;
+    anesthesiaCategories=data.categories||{};
+    anesthesiaLoaded=true;
+    const catSel=document.getElementById("anesthesiaCategoryFilter");
+    catSel.innerHTML=`<option value="">${t("allCategories")}</option>`;
+    Object.entries(anesthesiaCategories).forEach(([k,v])=>{const name=currentLang==="ja"?(v.ja||v.en):(v.en||v.ja);catSel.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(k)}">${escapeHtml(name)}</option>`);});
+    renderAnesthesiaOverview(data);
+    renderAnesthesiaList();
+  }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
+  /* Fetch ASA classification */
+  fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
+  /* Fetch contraindication rules */
+  fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(()=>{});
+  document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
+  document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
+  /* Weight-based dose calculator */
+  const weightInput=document.getElementById("anesthesiaWeight");
+  if(weightInput){
+    weightInput.addEventListener("input",debounce(renderAnesthesiaList,300));
+    document.getElementById("anesthesiaWeightClear").addEventListener("click",()=>{weightInput.value="";renderAnesthesiaList();});
+  }
+  /* Emergency protocol quick-access */
+  const emergBtn=document.getElementById("anesthesiaEmergencyBtn");
+  if(emergBtn){
+    emergBtn.addEventListener("click",()=>{
+      const catSel=document.getElementById("anesthesiaCategoryFilter");
+      const isActive=emergBtn.classList.toggle("active");
+      if(isActive){catSel.value="emergency";} else {catSel.value="";}
+      renderAnesthesiaList();
+    });
+  }
+  /* ASA filter */
+  const asaFilter=document.getElementById("anesthesiaAsaFilter");
+  if(asaFilter)asaFilter.addEventListener("change",renderAnesthesiaList);
+  /* Print checklist */
+  const printBtn=document.getElementById("anesthesiaPrintBtn");
+  if(printBtn)printBtn.addEventListener("click",printAnesthesiaChecklist);
+}
+
+function reloadAnesthesiaForSpecies(){
+  if(!anesthesiaLoaded)return;
+  const sp=currentSpecies||"";
+  const url=sp?"/api/anesthesia/protocols?species="+encodeURIComponent(sp):"/api/anesthesia/protocols";
+  fetchWithTimeout(url).then(r=>r.json()).then(data=>{
+    anesthesiaData=data;
+    renderAnesthesiaOverview(data);
+    renderAnesthesiaList();
+  }).catch(()=>{});
+}
+
+function renderAnesthesiaOverview(data){
+  const ov=document.getElementById("anesthesiaOverview");
+  const lb=document.getElementById("anesthesiaSpeciesLabel");
+  if(!data||(!data.overview&&!data.species_name)){
+    ov.style.display="block";
+    ov.innerHTML=`<div style="text-align:center;padding:16px"><span style="font-size:2rem" aria-hidden="true">&#128137;</span><p style="margin-top:8px;font-size:.88rem;color:var(--navy)">${t("anesthesiaSelectSpecies")}</p></div>`;
+    lb.textContent="";
+    return;
+  }
+  if(data.species_name){
+    const spName=currentLang==="ja"?(data.species_name.ja||data.species_name.en):(data.species_name.en||data.species_name.ja);
+    lb.innerHTML=`<strong>${escapeHtml(spName)}</strong>`;
+  }
+  if(data.overview||data.fasting){
+    const ovText=currentLang==="ja"?(data.overview?.ja||data.overview?.en||""):(data.overview?.en||data.overview?.ja||"");
+    const fastText=currentLang==="ja"?(data.fasting?.ja||data.fasting?.en||""):(data.fasting?.en||data.fasting?.ja||"");
+    ov.style.display="block";
+    ov.innerHTML=`<div class="anesthesia-overview-text"><strong>${t("anesthesiaOverviewLabel")}:</strong> ${escapeHtml(ovText)}</div>`
+      +(fastText?`<div class="anesthesia-fasting-text"><strong>${t("anesthesiaFastingLabel")}:</strong> ${escapeHtml(fastText)}</div>`:"");
+  } else { ov.style.display="none"; }
+}
+
+/* Parse dose string like "0.2-0.4 mg/kg" and calculate for given weight */
+function calcDoseForWeight(doseStr,weightKg){
+  if(!doseStr||!weightKg||weightKg<=0)return null;
+  /* Match patterns: "0.2 mg/kg", "0.2-0.4 mg/kg", "2-4 μg/kg", "0.5 mL/kg", "5-10 mg/kg IV" */
+  const m=doseStr.match(/(\d+(?:\.\d+)?)\s*[-–~～]\s*(\d+(?:\.\d+)?)\s*(mg|μg|µg|mcg|mL|ml|IU|U)\s*\/\s*kg/i);
+  const s=doseStr.match(/(\d+(?:\.\d+)?)\s*(mg|μg|µg|mcg|mL|ml|IU|U)\s*\/\s*kg/i);
+  if(m){
+    const lo=parseFloat(m[1])*weightKg;
+    const hi=parseFloat(m[2])*weightKg;
+    const unit=m[3].replace(/µg|mcg/i,"μg");
+    return{lo:roundDose(lo),hi:roundDose(hi),unit:unit,isRange:true};
+  }
+  if(s){
+    const val=parseFloat(s[1])*weightKg;
+    const unit=s[2].replace(/µg|mcg/i,"μg");
+    return{lo:roundDose(val),hi:null,unit:unit,isRange:false};
+  }
+  return null;
+}
+function roundDose(v){return v>=10?Math.round(v*10)/10:v>=1?Math.round(v*100)/100:Math.round(v*1000)/1000;}
+
+/* Check contraindications for a drug against current species/breed */
+function checkDrugContra(drugName){
+  if(!anesthesiaContraRules||!drugName)return[];
+  const dn=drugName.toLowerCase();
+  const sp=(currentSpecies||"").toLowerCase();
+  const breed=(document.getElementById("breedSelect")||{}).value||"";
+  const tags=new Set();
+  if(sp)tags.add(sp);
+  if(breed)tags.add(breed.toLowerCase());
+  /* Add common species aliases */
+  const spMap={dog:"canine",cat:"feline",horse:"equine",rabbit:"rabbit",hamster:"hamster",ferret:"ferret"};
+  if(spMap[sp])tags.add(spMap[sp]);
+  return anesthesiaContraRules.filter(r=>{
+    const drugMatch=r.drug_patterns.some(p=>dn.includes(p.toLowerCase()));
+    if(!drugMatch)return false;
+    return r.conditions.some(c=>tags.has(c.toLowerCase()));
+  });
+}
+function renderAnesthesiaList(){
+  const list=document.getElementById("anesthesiaList");
+  const search=(document.getElementById("anesthesiaSearch").value||"").toLowerCase();
+  const cat=document.getElementById("anesthesiaCategoryFilter").value;
+  if(!anesthesiaData){list.innerHTML="";return;}
+
+  let protocols=anesthesiaData.protocols||[];
+  /* If no species selected, use results array */
+  if(!protocols.length&&anesthesiaData.results){
+    protocols=anesthesiaData.results.map(r=>({...r.protocol,_species:r.species,_species_name:r.species_name}));
+  }
+  if(cat)protocols=protocols.filter(p=>p.category===cat);
+  const asaVal=(document.getElementById("anesthesiaAsaFilter")||{}).value||"";
+  if(asaVal){
+    const asaRisk={"I":"low","II":"low","III":"moderate","IV":"high","V":"high","E":"high"};
+    const targetRisk=asaRisk[asaVal]||"";
+    if(targetRisk)protocols=protocols.filter(p=>p.risk_level===targetRisk);
+  }
+  if(search){
+    protocols=protocols.filter(p=>{
+      const s=[p.name?.ja||"",p.name?.en||"",p.notes_ja||"",p.notes||""].concat((p.drugs||[]).map(d=>(d.name||"")+" "+(d.name_ja||""))).join(" ").toLowerCase();
+      return s.includes(search);
+    });
+  }
+  const countEl=document.getElementById("anesthesiaCount");
+  countEl.textContent=t("diseaseCount").replace("%filtered%",protocols.length).replace("%total%",anesthesiaData.protocols?.length||anesthesiaData.total||protocols.length);
+
+  if(!protocols.length){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noAnesthesiaMatch")}</div>`;return;}
+
+  const riskLabels={low:t("anesthesiaRiskLow"),moderate:t("anesthesiaRiskModerate"),high:t("anesthesiaRiskHigh")};
+  const riskColors={low:"#16a34a",moderate:"#ea580c",high:"#dc2626"};
+  const weightEl=document.getElementById("anesthesiaWeight");
+  const patientWeight=weightEl?parseFloat(weightEl.value):0;
+
+  list.innerHTML=protocols.map(p=>{
+    const pName=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
+    const catKey=p.category||"";
+    const catInfo=anesthesiaCategories[catKey]||{};
+    const catLabel=currentLang==="ja"?(catInfo.ja||catInfo.en||catKey):(catInfo.en||catInfo.ja||catKey);
+    const risk=p.risk_level||"";
+    const riskLabel=riskLabels[risk]||"";
+    const riskColor=riskColors[risk]||"#6b7280";
+    const notes=currentLang==="ja"?(p.notes_ja||p.notes||""):(p.notes||p.notes_ja||"");
+    const spLabel=p._species_name?(currentLang==="ja"?(p._species_name.ja||""):(p._species_name.en||"")):"";
+
+    let drugsHtml="";
+    if(p.drugs&&p.drugs.length){
+      const hasCalc=patientWeight>0;
+      const calcHeader=hasCalc?`<th>${t("anesthesiaCalcDose")} (${patientWeight}kg)</th>`:"";
+      drugsHtml=`<div class="anesthesia-drugs-table"><table><thead><tr><th>${currentLang==="ja"?"薬品":"Drug"}</th><th>${t("anesthesiaDose")}</th>${calcHeader}<th>${t("anesthesiaRoute")}</th><th>${t("anesthesiaOnset")}</th><th>${t("anesthesiaDuration")}</th></tr></thead><tbody>`
+        +p.drugs.map(d=>{
+          const dNotes=currentLang==="ja"?(d.notes_ja||d.notes||""):(d.notes||d.notes_ja||"");
+          let calcCell="";
+          if(hasCalc){
+            const calc=calcDoseForWeight(d.dose,patientWeight);
+            if(calc){
+              calcCell=calc.isRange
+                ?`<td><span class="anesthesia-calc-dose">${calc.lo}–${calc.hi} ${escapeHtml(calc.unit)}</span></td>`
+                :`<td><span class="anesthesia-calc-dose">${calc.lo} ${escapeHtml(calc.unit)}</span></td>`;
+            } else { calcCell=`<td><span style="color:var(--gray-400);font-size:.76rem">—</span></td>`; }
+          }
+          const cols=hasCalc?6:5;
+          /* Check contraindications */
+          const contras=checkDrugContra(d.name||"");
+          let contraHtml="";
+          if(contras.length){
+            const sevLabels={contraindicated:t("anesthesiaContraindicated"),caution:t("anesthesiaCaution"),monitor:t("anesthesiaMonitorExtra")};
+            const sevColors={contraindicated:"#dc2626",caution:"#ea580c",monitor:"#ca8a04"};
+            const sevIcons={contraindicated:"⛔",caution:"⚠️",monitor:"🔍"};
+            contraHtml=contras.map(c=>{
+              const msg=currentLang==="ja"?(c.message_ja||c.message_en):(c.message_en||c.message_ja);
+              const sev=c.severity||"caution";
+              return`<tr class="anesthesia-contra-row"><td colspan="${cols}"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> ${escapeHtml(msg)}</td></tr>`;
+            }).join("");
+          }
+          return`<tr><td><strong>${escapeHtml(d.name||"")}</strong><br/><span class="d-name-ja">${escapeHtml(d.name_ja||"")}</span></td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
+          +contraHtml
+          +(dNotes?`<tr class="anesthesia-drug-note"><td colspan="${cols}">${escapeHtml(dNotes)}</td></tr>`:"");
+        }).join("")
+        +`</tbody></table></div>`;
+    }
+
+    let monitorHtml="";
+    if(p.monitoring_params&&p.monitoring_params.length){
+      monitorHtml=`<div class="anesthesia-monitor-section"><strong>${t("anesthesiaMonitoring")}</strong><table><thead><tr><th>Parameter</th><th>${t("anesthesiaTarget")}</th><th>Notes</th></tr></thead><tbody>`
+        +p.monitoring_params.map(m=>{
+          const mNotes=currentLang==="ja"?(m.notes_ja||m.notes||""):(m.notes||m.notes_ja||"");
+          return`<tr><td><strong>${escapeHtml(m.param||"")}</strong></td><td>${escapeHtml(m.target||"")}</td><td>${escapeHtml(mNotes)}</td></tr>`;
+        }).join("")
+        +`</tbody></table></div>`;
+    }
+
+    return`<div class="disease-db-item anesthesia-item" role="button" tabindex="0" aria-expanded="false">
+      <div class="drug-head-row">
+        <div class="d-name">${escapeHtml(pName)}${spLabel?` <span class="d-name-ja">(${escapeHtml(spLabel)})</span>`:""}</div>
+        <span class="drug-category-tag">${escapeHtml(catLabel)}</span>
+        ${riskLabel?`<span class="anesthesia-risk-tag" style="background:${riskColor}">${escapeHtml(riskLabel)}</span>`:""}
+      </div>
+      <div class="disease-detail">
+        ${notes?`<div class="anesthesia-notes">${escapeHtml(notes)}</div>`:""}
+        ${drugsHtml}${monitorHtml}${p.references&&p.references.length?`<div class="anesthesia-references"><strong>${currentLang==="ja"?"参考文献":"References"}</strong><ul>${p.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`:""}
+      </div>
+    </div>`;
+  }).join("");
+
+  /* Breed considerations */
+  if(anesthesiaData.breed_considerations&&anesthesiaData.breed_considerations.length&&!cat&&!search){
+    const breedHtml=`<div class="anesthesia-breed-section"><h4>${t("anesthesiaBreedConsider")}</h4>`
+      +anesthesiaData.breed_considerations.map(b=>{
+        const breed=currentLang==="ja"?(b.breed_ja||b.breed):(b.breed||b.breed_ja);
+        const notes=currentLang==="ja"?(b.notes_ja||b.notes):(b.notes||b.notes_ja);
+        return`<div class="anesthesia-breed-item"><strong>${escapeHtml(breed)}</strong><p>${escapeHtml(notes)}</p></div>`;
+      }).join("")
+      +`</div>`;
+    list.insertAdjacentHTML("beforeend",breedHtml);
+  }
+
+  /* ASA Classification reference */
+  if(anesthesiaAsaData&&!cat&&!search){
+    const riskColors={low:"#16a34a",moderate:"#ea580c",high:"#dc2626"};
+    const riskLabels={low:t("anesthesiaRiskLow"),moderate:t("anesthesiaRiskModerate"),high:t("anesthesiaRiskHigh")};
+    const asaHtml=`<div class="anesthesia-breed-section"><h4>${t("anesthesiaAsaTitle")}</h4>`
+      +["I","II","III","IV","V","E"].map(cls=>{
+        const a=anesthesiaAsaData[cls];if(!a)return"";
+        const desc=currentLang==="ja"?(a.ja||a.en):(a.en||a.ja);
+        const guidance=currentLang==="ja"?(a.guidance_ja||a.guidance_en):(a.guidance_en||a.guidance_ja);
+        const rc=riskColors[a.risk]||"#6b7280";
+        const rl=riskLabels[a.risk]||"";
+        return`<div class="anesthesia-breed-item"><strong>ASA ${cls}</strong> <span class="anesthesia-risk-tag" style="background:${rc};font-size:.72rem">${escapeHtml(rl)}</span><p>${escapeHtml(desc)}</p><p style="font-size:.8rem;color:var(--gray-600)"><strong>${t("anesthesiaAsaGuidance")}:</strong> ${escapeHtml(guidance)}</p></div>`;
+      }).join("")
+      +`</div>`;
+    list.insertAdjacentHTML("beforeend",asaHtml);
+  }
+
+  /* Species-level references */
+  if(anesthesiaData.references&&anesthesiaData.references.length&&!cat&&!search){
+    const refsHtml=`<div class="anesthesia-breed-section"><h4>${currentLang==="ja"?"参考文献":"References"}</h4><ul class="anesthesia-ref-list">${anesthesiaData.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`;
+    list.insertAdjacentHTML("beforeend",refsHtml);
+  }
+
+  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
+}
+
+/* Print anesthesia checklist */
+function printAnesthesiaChecklist(){
+  const sp=currentSpecies||"";
+  const weightEl=document.getElementById("anesthesiaWeight");
+  const weight=weightEl?weightEl.value:"";
+  const spLabel=document.getElementById("anesthesiaSpeciesLabel");
+  const spName=spLabel?spLabel.textContent:"";
+  const now=new Date().toLocaleDateString();
+  const preopItems=t("anesthesiaPrintPreopItems").split(",");
+  const intraopItems=t("anesthesiaPrintIntraopItems").split(",");
+  const postopItems=t("anesthesiaPrintPostopItems").split(",");
+  const makeChecklist=(items)=>items.map(i=>`<div class="ck-item"><span class="ck-box">☐</span> ${escapeHtml(i.trim())}</div>`).join("");
+
+  /* Collect currently visible protocols with drugs */
+  const cat=document.getElementById("anesthesiaCategoryFilter").value;
+  let visibleProtocols=[];
+  if(anesthesiaData){
+    let prots=anesthesiaData.protocols||[];
+    if(cat)prots=prots.filter(p=>p.category===cat);
+    visibleProtocols=prots.slice(0,10);
+  }
+  let drugSummary="";
+  if(visibleProtocols.length&&weight){
+    const wKg=parseFloat(weight);
+    drugSummary=visibleProtocols.filter(p=>p.drugs&&p.drugs.length).map(p=>{
+      const pN=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
+      const rows=p.drugs.map(d=>{
+        const calc=calcDoseForWeight(d.dose,wKg);
+        const calcStr=calc?(calc.isRange?`${calc.lo}–${calc.hi} ${calc.unit}`:`${calc.lo} ${calc.unit}`):"—";
+        return`<tr><td>${escapeHtml(d.name||"")}</td><td>${escapeHtml(d.dose||"")}</td><td><strong>${calcStr}</strong></td><td>${escapeHtml(d.route||"")}</td></tr>`;
+      }).join("");
+      return`<h4 style="margin:12px 0 4px">${escapeHtml(pN)}</h4><table><thead><tr><th>Drug</th><th>Dose/kg</th><th>Calculated</th><th>Route</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }).join("");
+  }
+
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t("anesthesiaPrintTitle")}</title>
+<style>body{font-family:sans-serif;padding:20px;font-size:13px;color:#333}
+h2{text-align:center;margin-bottom:4px}h3{margin:16px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}h4{font-size:13px;color:#555}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;border:1px solid #ccc;padding:12px;border-radius:4px}
+.info-grid div{font-size:13px}.info-grid strong{display:inline-block;min-width:60px}
+.ck-item{padding:4px 0;border-bottom:1px dotted #ddd;font-size:13px}.ck-box{font-size:16px;margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}
+th{background:#f0f0f0;font-weight:600}.notes{margin-top:20px;border-top:2px solid #333;padding-top:8px}
+.notes-area{width:100%;height:80px;border:1px solid #ccc;border-radius:4px;margin-top:4px}
+@media print{body{padding:10px}}</style></head><body>
+<h2>${t("anesthesiaPrintTitle")}</h2>
+<div class="info-grid">
+<div><strong>${t("anesthesiaPrintSpecies")}:</strong> ${escapeHtml(spName||sp)}</div>
+<div><strong>${t("anesthesiaPrintWeight")}:</strong> ${escapeHtml(weight?weight+" kg":"_____ kg")}</div>
+<div><strong>${t("anesthesiaPrintDate")}:</strong> ${escapeHtml(now)}</div>
+<div><strong>ASA:</strong> ☐I ☐II ☐III ☐IV ☐V ☐E</div>
+</div>
+${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
+<h3>${t("anesthesiaPrintPreop")}</h3>${makeChecklist(preopItems)}
+<h3>${t("anesthesiaPrintIntraop")}</h3>${makeChecklist(intraopItems)}
+<h3>${t("anesthesiaPrintPostop")}</h3>${makeChecklist(postopItems)}
+<div class="notes"><h3>Notes</h3><div class="notes-area" contenteditable="true"></div></div>
+</body></html>`;
+  const win=window.open("","_blank");
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
+}
+
+/* Print anesthesia checklist */
+function printAnesthesiaChecklist(){
+  const sp=currentSpecies||"";
+  const weightEl=document.getElementById("anesthesiaWeight");
+  const weight=weightEl?weightEl.value:"";
+  const spLabel=document.getElementById("anesthesiaSpeciesLabel");
+  const spName=spLabel?spLabel.textContent:"";
+  const now=new Date().toLocaleDateString();
+  const preopItems=t("anesthesiaPrintPreopItems").split(",");
+  const intraopItems=t("anesthesiaPrintIntraopItems").split(",");
+  const postopItems=t("anesthesiaPrintPostopItems").split(",");
+  const makeChecklist=(items)=>items.map(i=>`<div class="ck-item"><span class="ck-box">☐</span> ${escapeHtml(i.trim())}</div>`).join("");
+
+  /* Collect currently visible protocols with drugs */
+  const cat=document.getElementById("anesthesiaCategoryFilter").value;
+  let visibleProtocols=[];
+  if(anesthesiaData){
+    let prots=anesthesiaData.protocols||[];
+    if(cat)prots=prots.filter(p=>p.category===cat);
+    visibleProtocols=prots.slice(0,10);
+  }
+  let drugSummary="";
+  if(visibleProtocols.length&&weight){
+    const wKg=parseFloat(weight);
+    drugSummary=visibleProtocols.filter(p=>p.drugs&&p.drugs.length).map(p=>{
+      const pN=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
+      const rows=p.drugs.map(d=>{
+        const calc=calcDoseForWeight(d.dose,wKg);
+        const calcStr=calc?(calc.isRange?`${calc.lo}–${calc.hi} ${calc.unit}`:`${calc.lo} ${calc.unit}`):"—";
+        return`<tr><td>${escapeHtml(d.name||"")}</td><td>${escapeHtml(d.dose||"")}</td><td><strong>${calcStr}</strong></td><td>${escapeHtml(d.route||"")}</td></tr>`;
+      }).join("");
+      return`<h4 style="margin:12px 0 4px">${escapeHtml(pN)}</h4><table><thead><tr><th>Drug</th><th>Dose/kg</th><th>Calculated</th><th>Route</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }).join("");
+  }
+
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t("anesthesiaPrintTitle")}</title>
+<style>body{font-family:sans-serif;padding:20px;font-size:13px;color:#333}
+h2{text-align:center;margin-bottom:4px}h3{margin:16px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}h4{font-size:13px;color:#555}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;border:1px solid #ccc;padding:12px;border-radius:4px}
+.info-grid div{font-size:13px}.info-grid strong{display:inline-block;min-width:60px}
+.ck-item{padding:4px 0;border-bottom:1px dotted #ddd;font-size:13px}.ck-box{font-size:16px;margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}
+th{background:#f0f0f0;font-weight:600}.notes{margin-top:20px;border-top:2px solid #333;padding-top:8px}
+.notes-area{width:100%;height:80px;border:1px solid #ccc;border-radius:4px;margin-top:4px}
+@media print{body{padding:10px}}</style></head><body>
+<h2>${t("anesthesiaPrintTitle")}</h2>
+<div class="info-grid">
+<div><strong>${t("anesthesiaPrintSpecies")}:</strong> ${escapeHtml(spName||sp)}</div>
+<div><strong>${t("anesthesiaPrintWeight")}:</strong> ${escapeHtml(weight?weight+" kg":"_____ kg")}</div>
+<div><strong>${t("anesthesiaPrintDate")}:</strong> ${escapeHtml(now)}</div>
+<div><strong>ASA:</strong> ☐I ☐II ☐III ☐IV ☐V ☐E</div>
+</div>
+${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
+<h3>${t("anesthesiaPrintPreop")}</h3>${makeChecklist(preopItems)}
+<h3>${t("anesthesiaPrintIntraop")}</h3>${makeChecklist(intraopItems)}
+<h3>${t("anesthesiaPrintPostop")}</h3>${makeChecklist(postopItems)}
+<div class="notes"><h3>Notes</h3><div class="notes-area" contenteditable="true"></div></div>
+</body></html>`;
+  const win=window.open("","_blank");
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
+}
+
+/* Print anesthesia checklist */
+function printAnesthesiaChecklist(){
+  const sp=currentSpecies||"";
+  const weightEl=document.getElementById("anesthesiaWeight");
+  const weight=weightEl?weightEl.value:"";
+  const spLabel=document.getElementById("anesthesiaSpeciesLabel");
+  const spName=spLabel?spLabel.textContent:"";
+  const now=new Date().toLocaleDateString();
+  const preopItems=t("anesthesiaPrintPreopItems").split(",");
+  const intraopItems=t("anesthesiaPrintIntraopItems").split(",");
+  const postopItems=t("anesthesiaPrintPostopItems").split(",");
+  const makeChecklist=(items)=>items.map(i=>`<div class="ck-item"><span class="ck-box">☐</span> ${escapeHtml(i.trim())}</div>`).join("");
+
+  /* Collect currently visible protocols with drugs */
+  const cat=document.getElementById("anesthesiaCategoryFilter").value;
+  let visibleProtocols=[];
+  if(anesthesiaData){
+    let prots=anesthesiaData.protocols||[];
+    if(cat)prots=prots.filter(p=>p.category===cat);
+    visibleProtocols=prots.slice(0,10);
+  }
+  let drugSummary="";
+  if(visibleProtocols.length&&weight){
+    const wKg=parseFloat(weight);
+    drugSummary=visibleProtocols.filter(p=>p.drugs&&p.drugs.length).map(p=>{
+      const pN=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
+      const rows=p.drugs.map(d=>{
+        const calc=calcDoseForWeight(d.dose,wKg);
+        const calcStr=calc?(calc.isRange?`${calc.lo}–${calc.hi} ${calc.unit}`:`${calc.lo} ${calc.unit}`):"—";
+        return`<tr><td>${escapeHtml(d.name||"")}</td><td>${escapeHtml(d.dose||"")}</td><td><strong>${calcStr}</strong></td><td>${escapeHtml(d.route||"")}</td></tr>`;
+      }).join("");
+      return`<h4 style="margin:12px 0 4px">${escapeHtml(pN)}</h4><table><thead><tr><th>Drug</th><th>Dose/kg</th><th>Calculated</th><th>Route</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }).join("");
+  }
+
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t("anesthesiaPrintTitle")}</title>
+<style>body{font-family:sans-serif;padding:20px;font-size:13px;color:#333}
+h2{text-align:center;margin-bottom:4px}h3{margin:16px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}h4{font-size:13px;color:#555}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;border:1px solid #ccc;padding:12px;border-radius:4px}
+.info-grid div{font-size:13px}.info-grid strong{display:inline-block;min-width:60px}
+.ck-item{padding:4px 0;border-bottom:1px dotted #ddd;font-size:13px}.ck-box{font-size:16px;margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}
+th{background:#f0f0f0;font-weight:600}.notes{margin-top:20px;border-top:2px solid #333;padding-top:8px}
+.notes-area{width:100%;height:80px;border:1px solid #ccc;border-radius:4px;margin-top:4px}
+@media print{body{padding:10px}}</style></head><body>
+<h2>${t("anesthesiaPrintTitle")}</h2>
+<div class="info-grid">
+<div><strong>${t("anesthesiaPrintSpecies")}:</strong> ${escapeHtml(spName||sp)}</div>
+<div><strong>${t("anesthesiaPrintWeight")}:</strong> ${escapeHtml(weight?weight+" kg":"_____ kg")}</div>
+<div><strong>${t("anesthesiaPrintDate")}:</strong> ${escapeHtml(now)}</div>
+<div><strong>ASA:</strong> ☐I ☐II ☐III ☐IV ☐V ☐E</div>
+</div>
+${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
+<h3>${t("anesthesiaPrintPreop")}</h3>${makeChecklist(preopItems)}
+<h3>${t("anesthesiaPrintIntraop")}</h3>${makeChecklist(intraopItems)}
+<h3>${t("anesthesiaPrintPostop")}</h3>${makeChecklist(postopItems)}
+<div class="notes"><h3>Notes</h3><div class="notes-area" contenteditable="true"></div></div>
+</body></html>`;
+  const win=window.open("","_blank");
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
 }
 
 /* ===== Shared helpers ===== */
@@ -2314,10 +2916,13 @@ function toggleDetail(head){
   if(icon)icon.classList.toggle("rotated",isOpen);
 }
 
-/* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
+/* Attach click/keyboard handlers to .disease-db-item elements via event delegation (once only) */
+let _dbHandlersAttached=false;
 function _attachDbItemHandlers(container){
-  container.addEventListener("click",function(e){if(e.target.closest("a"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
-  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")){e.preventDefault();toggleDbItem(item);}}});
+  if(_dbHandlersAttached)return;
+  _dbHandlersAttached=true;
+  container.addEventListener("click",function(e){if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
+  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")&&!e.target.closest(".disease-detail.open")){e.preventDefault();toggleDbItem(item);}}});
 }
 
 /* Toggle disease DB item */

@@ -905,7 +905,7 @@ def diagnostic_chat():
             }
             for sid in all_symptoms
         ]
-    elif species in _SPECIES_DATA:
+    elif species != "dog" and species in _SPECIES_DATA:
         extracted = _extract_species_symptoms(message, species)
         all_symptoms = list(set(extracted + previous_symptoms))
         disease_matches = _match_species_symptoms_to_diseases(
@@ -1480,6 +1480,23 @@ _CATEGORY_LABELS = {
     "renal": {"ja": "腎臓", "en": "Renal"},
     "toxicological": {"ja": "中毒", "en": "Toxicological"},
     "traumatic": {"ja": "外傷", "en": "Traumatic"},
+    # --- 犬・馬・エキゾチック種追加カテゴリ ---
+    "eyes_ears": {"ja": "眼・耳", "en": "Eyes / Ears"},
+    "eye": {"ja": "眼科", "en": "Eye"},
+    "ears": {"ja": "耳", "en": "Ears"},
+    "ocular": {"ja": "眼科", "en": "Ocular"},
+    "oral": {"ja": "口腔", "en": "Oral"},
+    "dental": {"ja": "歯科", "en": "Dental"},
+    "hoof": {"ja": "蹄", "en": "Hoof"},
+    "foal": {"ja": "子馬", "en": "Foal"},
+    "toxic": {"ja": "中毒", "en": "Toxic"},
+    "body": {"ja": "体幹", "en": "Body"},
+    "limb": {"ja": "四肢", "en": "Limbs"},
+    "repository_exam": {"ja": "検査所見", "en": "Exam Findings"},
+    "misc": {"ja": "その他", "en": "Miscellaneous"},
+    "developmental": {"ja": "発育", "en": "Developmental"},
+    "internal": {"ja": "内臓", "en": "Internal"},
+    "cardiac": {"ja": "心臓", "en": "Cardiac"},
 }
 
 
@@ -1544,15 +1561,20 @@ def _suggest_next_categories(
 ) -> list[dict]:
     """Suggest the most informative symptom categories to ask about next.
 
-    Looks at top disease candidates and finds which un-asked categories
-    contain symptoms that would best differentiate between them.
+    Uses differential information scoring: symptoms that best partition the
+    candidate disease set are weighted highest (presence in ~50% of candidates
+    = maximum discriminating power).
     """
     selected_set = set(selected_symptoms)
     answered_set = set(answered_categories)
 
-    # Collect differentiating symptoms from top 10 disease candidates
+    n_candidates = min(len(disease_matches), 10)
+    if n_candidates == 0:
+        return []
+
+    # Count how many of the top candidates contain each additional symptom
     diff_symptoms: dict[str, int] = {}  # symptom_id -> count of diseases containing it
-    for dm in disease_matches[:10]:
+    for dm in disease_matches[:n_candidates]:
         for s in dm.get("additional_disease_symptoms", []):
             if s not in selected_set:
                 diff_symptoms[s] = diff_symptoms.get(s, 0) + 1
@@ -1560,23 +1582,30 @@ def _suggest_next_categories(
     # Map symptom IDs to categories
     sym_cat_map = {s["id"]: s.get("category", "other") for s in all_symptoms}
 
-    # Score each unanswered category by how many differentiating symptoms it has
-    cat_scores: dict[str, int] = {}
+    # Score each symptom by how well it partitions the candidate set.
+    # A symptom present in k out of n candidates has discriminating power:
+    #   score = 4 * p * (1 - p)   where p = k / n
+    # This peaks at 1.0 when p=0.5 (best partition), and is 0 at p=0 or p=1.
+    cat_scores: dict[str, float] = {}
+    cat_symptom_counts: dict[str, int] = {}
     for sid, count in diff_symptoms.items():
         cat = sym_cat_map.get(sid, "other")
         if cat not in answered_set:
-            cat_scores[cat] = cat_scores.get(cat, 0) + count
+            p = count / n_candidates
+            info_score = 4.0 * p * (1.0 - p)
+            cat_scores[cat] = cat_scores.get(cat, 0.0) + info_score
+            cat_symptom_counts[cat] = cat_symptom_counts.get(cat, 0) + 1
 
     # Sort by score descending, return top 3
     sorted_cats = sorted(cat_scores.items(), key=lambda x: x[1], reverse=True)
     result = []
-    for cat, score in sorted_cats[:3]:
+    for cat, _score in sorted_cats[:3]:
         labels = _CATEGORY_LABELS.get(cat, {"ja": cat, "en": cat})
         result.append({
             "id": cat,
             "name_ja": labels["ja"],
             "name_en": labels["en"],
-            "differentiating_count": score,
+            "differentiating_count": cat_symptom_counts.get(cat, 0),
         })
     return result
 
@@ -1755,6 +1784,11 @@ def consultation():
     # Phase: ASK_CONTEXT — ask about onset and age
     # ------------------------------------------------------------------
     if phase == "ask_context":
+        # Species where CSU pain scale is not applicable
+        _NO_PAIN_SPECIES = {
+            "fish", "reptile", "tortoise", "snake", "lizard",
+            "amphibian",
+        }
         questions = []
         if not onset:
             questions.append({
@@ -1779,7 +1813,7 @@ def consultation():
                     {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
                 ],
             })
-        if pain_score is None:
+        if pain_score is None and species not in _NO_PAIN_SPECIES:
             questions.append({
                 "type": "pain_score",
                 "question_ja": "痛みの程度はどのくらいですか？（CSU疼痛スケール 0-4）",

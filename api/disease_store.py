@@ -379,7 +379,18 @@ def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[di
         try:
             import importlib as _il
             _smod = _il.import_module(f"api.species.{species}_diseases")
-            category_map = getattr(_smod, "SYMPTOM_CATEGORIES", {})
+            raw_cats = getattr(_smod, "SYMPTOM_CATEGORIES", {})
+            # Detect format: {symptom_id: category} vs {category: {symptoms: [...]}}
+            if raw_cats:
+                first_val = next(iter(raw_cats.values()))
+                if isinstance(first_val, str):
+                    # Standard format: {symptom_id: category_name}
+                    category_map = raw_cats
+                elif isinstance(first_val, dict) and "symptoms" in first_val:
+                    # Dog-style format: {category: {name_ja, name_en, symptoms: [...]}}
+                    for cat_id, cat_info in raw_cats.items():
+                        for sym_id in cat_info.get("symptoms", []):
+                            category_map[sym_id] = cat_id
         except (ImportError, Exception):
             pass
 
@@ -423,7 +434,17 @@ def get_symptoms_for_species(species: str) -> list[dict]:
     try:
         mod = _importlib.import_module(f"api.species.{species}_diseases")
         sym_names = getattr(mod, "SYMPTOM_NAMES", {})
-        sym_cats = getattr(mod, "SYMPTOM_CATEGORIES", {})
+        raw_cats = getattr(mod, "SYMPTOM_CATEGORIES", {})
+        # Normalize category map format
+        sym_cats: dict[str, str] = {}
+        if raw_cats:
+            first_val = next(iter(raw_cats.values()), None)
+            if isinstance(first_val, str):
+                sym_cats = raw_cats
+            elif isinstance(first_val, dict) and "symptoms" in first_val:
+                for cat_id, cat_info in raw_cats.items():
+                    for s_id in cat_info.get("symptoms", []):
+                        sym_cats[s_id] = cat_id
         if sym_names:
             return sorted(
                 [{"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),

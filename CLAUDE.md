@@ -11,10 +11,10 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (2,790テスト)
+- **テスト**: pytest (3,037テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v11)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v15)
 - **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
 - **現状**: OPEN_BETA=true（全機能無料）
@@ -32,6 +32,9 @@ api/
   drug_batch_2.py         — 薬品データ batch 2 + 新薬7剤 (サイトポイント,リブレラ,ソレンシア,ブレンダ,GS-441524,モルヌピラビル,スプレソリン)
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
+  anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 182プロトコル)
+  anesthesia_api.py       — 鎮静・麻酔API Blueprint (4エンドポイント)
+  anesthesia_contraindications.py — 薬品-疾患禁忌ルール (24ルール, check_contraindications())
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
   species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種)
   paypal_api.py           — PayPalサブスク + waitlist + メール復元
@@ -59,7 +62,7 @@ static/
   js/app.js               — 統合JS (I18N + UI + チャット + GA4 + admin/pro制御)
   css/main.css            — 統合CSS (app.cssは削除済み — 絶対に復活させないこと)
   manifest.json           — PWA
-  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v2)
+  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v13)
   robots.txt / sitemap.xml
   og-image.svg            — OGP画像 (1200x630)
 scripts/
@@ -71,6 +74,7 @@ scripts/
 - **薬品**: 194 (12種が魚専用, 7種が2026年追加の新薬)
 - **症状エイリアス**: 530+ (SYMPTOM_ALIASES) + 90+ (ID同義語)
 - **対応動物種**: 21 (犬,猫,馬,ウサギ,ハムスター,モルモット,チンチラ,フェレット,ハリネズミ,フクロモモンガ,デグー,鳥,インコ,オウム,爬虫類,リクガメ,ヘビ,トカゲ,両生類,魚,その他)
+- **鎮静・麻酔プロトコル**: 182 (全21種対応、全21種が全8カテゴリ完備、犬猫馬各11プロトコル、ASA分類付き)
 
 ## 診断エンジン
 ### チェックボックス式 (全種)
@@ -171,7 +175,7 @@ scripts/
 
 ## テスト実行
 ```bash
-python3 -m pytest tests/ -x -q          # 全テスト (2,480)
+python3 -m pytest tests/ -x -q          # 全テスト (2,700+)
 python3 -m pytest tests/test_diagnostic_chat.py -x -q  # チャット診断テスト
 python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 ```
@@ -279,10 +283,23 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - 診断精度検証・臨床意思決定支援の文献8件追加（TRIPOD、JAMA CDS、NEJM ML等）
 
 ### エキゾチック動物の治療プロトコル詳細化
-- ハムスター: テンプレート治療文 122→36件 (71%改善) — Wet Tail, Tyzzer's, pneumonia等59件を臨床プロトコルに
-- 鳥: テンプレート治療文 212→93件 (56%改善) — Psittacosis, egg binding, lead poisoning等119件
-- ハリネズミ: テンプレート治療文 83→50件 (40%改善) — CHF, proptosis, pyometra等33件
-- フェレット/モルモット/チンチラ/フクロモモンガ/デグー: 進行中
+- ハムスター: テンプレート治療文 122→36件 (71%改善)
+- 鳥: テンプレート治療文 212→93件 (56%改善)
+- ハリネズミ: テンプレート治療文 83→50件 (40%改善)
+- フェレット: 93→61件 (34%改善) — ECE, insulinoma, lymphoma, ADV等
+- モルモット: 141→108件 (23%改善) — scurvy, GI stasis, dysbiosis等（ペニシリン禁忌明記）
+- チンチラ: 113→84件 (26%改善) — dental, fur ring, heatstroke等（フィプロニル致死明記）
+- フクロモモンガ: 80→54件 (33%改善) — Ca deficiency, self-mutilation, MBD等
+- デグー: 75→47件 (37%改善) — diabetes, tail degloving等（糖分禁忌明記）
+- 8種合計: テンプレート839→533件 (36%削減、306件を臨床プロトコルに置換)
+- 猫: 372→177件 (52%改善, 195件詳細化) — emergency+highゼロ達成
+- ウサギ: 203→95件 (53%改善, 108件詳細化)
+- インコ: 180→79件 (56%改善, 101件詳細化)
+- オウム: 118→58件 (51%改善, 60件詳細化)
+- 爬虫類系5種: 計236件詳細化 (reptile/tortoise/snake/lizard/amphibian)
+- その他エキゾチック: 118→45件 (62%改善, 73件詳細化)
+- **全21種合計: 1,853→422件 (77%削減, 1,431件を臨床プロトコルに置換)**
+- emergency+high: 約460件→26件 (94%削減、残りは偽陽性含む)
 
 ### 診断精度UX改善
 - 低信頼度時のUI警告バナー: 症状2個以下 or 最高信頼度<50%で黄色警告を表示
@@ -302,32 +319,75 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - pip-audit にrequirements-dev.txtも追加
 - 依存関係上限ピニング: anthropic<1.0.0, gunicorn<23.0.0, pytest-cov<6.0.0, ruff<1.0.0
 
+### diagnostic_chat.py モジュール分割
+- 4,249行→1,862行 (56%削減) — `api/chat/` パッケージに分割
+- `api/chat/symptom_aliases.py` (992行) — 530+エイリアス辞書
+- `api/chat/disease_matcher.py` (298行) — 疾患マッチングアルゴリズム
+- `api/chat/symptom_extractor.py` (256行) — 症状抽出エンジン
+- `api/chat/supplements.py` (836行) — サプリメントデータ
+- `api/chat/constants.py` (32行) — 種ラベル・定数
+- `api/chat/species_data.py` (28行) — 種モジュール読み込み
+- 後方互換性完全維持（全publicインポートは引き続き動作）
+
+### その他の改善
+- 公開APIレート制限: /api/analyze-symptoms にIP単位60req/min制限
+- iOS PWA対応: apple-touch-icon.png (180x180) + icon-192.png (192x192)
+- ServiceWorker: CACHE_NAME vetdict-v9→v10 更新
+- FAQPage構造化データ: 3問→10問に拡充
+- WCAG: 全入力フィールドにaria-label追加 (5箇所)
+- PayPal str(e)内部情報漏洩修正
+- logger f-string→%s lazy format統一
+- ダークモードCSS残骸削除
+- GA4ファネルイベント (funnel_page_load) 追加
+- 統計数値: コピー文をAPIデータと統一 (7,000+疾患/220+薬品)
+- ヒーロー信頼性シグナル: 学術文献数・テスト数・OSS開発を表示
+
+## 2026-04セッション（第2回）で実施した改善
+
+### 鎮静・麻酔プロトコルタブ新設
+- 新タブ「鎮静・麻酔」を追加（ハンバーガーメニューにも掲載）
+- `api/anesthesia_protocols.py`: 全21種の鎮静・麻酔プロトコルデータ（182プロトコル）
+  - 犬・猫: 鎮静/前投薬/導入/維持/局所・区域麻酔/モニタリング/覚醒/緊急（各9プロトコル）
+  - 犬: 短頭種・サイトハウンド・大型犬・ボクサーの品種別注意事項
+  - 馬: 立位鎮静（ゴールドスタンダード）、TIVA、覚醒（最危険フェーズ）、MAP≥70 mmHg管理
+  - うさぎ: V-gel推奨、アトロピナーゼ（30%）、GI stasis予防、EMLA
+  - ハムスター・モルモット・チンチラ・デグー: チャンバー/IP注射、低体温管理
+  - フェレット: インスリノーマ血糖管理、短時間絶食
+  - ハリネズミ: 吸入鎮静（丸まった状態でも可）、棘部位回避
+  - フクロモモンガ: 自咬症予防、トルポール鑑別
+  - 鳥類（鳥・インコ・オウム）: 気嚢システム、非カフETチューブ必須、IPPV準備
+  - 爬虫類（爬虫類・リクガメ・ヘビ・トカゲ）: POTZ管理、腎門脈系回避、覚醒6-24時間
+  - 両生類: MS-222浸漬麻酔、皮膚湿潤維持、背側リンパ嚢注射
+  - 魚: MS-222/オイゲノール浸漬、鰓蓋運動モニタリング、鰓灌流リサーキュレーション
+  - その他エキゾチック: 汎用原則（titrate to effect）
+- `api/anesthesia_api.py`: Flask Blueprint（3エンドポイント）
+  - `GET /api/anesthesia/protocols?species=&category=&search=`
+  - `GET /api/anesthesia/species`
+  - `GET /api/anesthesia/categories`
+- UI: 動物種選択連動、カテゴリフィルター、検索フィルター、薬品テーブル、モニタリングパラメータ表示
+- 日英バイリンガル完全対応
+- テスト: 179件（データ構造検証、API、臨床内容品質チェック）
+- ServiceWorker: CACHE_NAME vetdict-v11→v12
+
 ## 次セッションへの引き継ぎ事項
 
-### 問診モード（Guided Consultation）の検証 — 最優先
-- `POST /api/diagnostic-chat/consultation` の5フェーズ問診フローは実装済みだが**UI動作確認・ブラウザテストが未実施**
-- テスト項目:
-  1. カテゴリ選択画面の表示・タップ動作
-  2. 症状選択（タップ式）の正常動作
-  3. 中間結果表示の正確性
-  4. 追加カテゴリ提案→追加症状選択フロー
-  5. 発症期間・年齢入力の処理
-  6. 最終結果の表示（analyze_species_symptomsエンジン使用）
-  7. chatModeFree ↔ chatModeGuided 切替時のコンテキスト保持
-  8. モバイル・デスクトップの両方でのレイアウト確認
-- 関連ファイル: `app.js` の `setupGuidedConsultation()`, `guidedFetch()`, `guidedHandleResponse()`
-- 関連CSS: `.guided-category-grid`, `.guided-sym-btn`, `.guided-action-btn`
+### 問診モード（Guided Consultation）の検証 — ✅ 自動テスト完了
+- `POST /api/diagnostic-chat/consultation` の5フェーズ問診フロー: **全21種で自動テスト検証済み**
+- 修正済みバグ:
+  - カテゴリラベルKeyError（fallback辞書にenキー欠落）
+  - finalize種制限（horse等が空結果）
+  - 全種カテゴリ"other"化（disease_store.pyのSYMPTOM_CATEGORIES未読込）
+  - 馬の問診完全不動作（HEALTH_CHECK_ITEMSからfinding_keys構築で修正）
+  - 犬のカテゴリ"other"化（dog-style SYMPTOM_CATEGORIES形式の自動検出・変換）
+  - 犬のinterim候補0件（_GENERIC_SPECIESに犬追加）
+  - 犬の自由入力チャット回帰（species != "dog"で従来パス維持）
+- UX改善: フェッチ中のボタン連打防止、未知phaseフォールバック、カテゴリラベル16件追加
+- テスト: 100件+（フルフロー21種 + エッジケース + 精度パリティ + ヘルパー関数 + disease_store例外処理）
+- **残り: ブラウザ手動テスト（実機確認）のみ未実施**
 
 ### 残りのエキゾチック治療プロトコル
-- ハムスター: 36件のlow urgencyテンプレートが残存 (11%)
-- 鳥: 93件のmoderate/lowテンプレートが残存 (16%)
-- ハリネズミ: 50件のmoderate/lowテンプレートが残存 (20%)
-- フェレット: 93→61件 (22%) — 主要疾患は詳細化済み
-- モルモット: 141→108件 (31%) — emergency/highの主要疾患は詳細化済み
-- チンチラ: 113→84件 (30%) — emergency/highの主要疾患は詳細化済み
-- フクロモモンガ: 80→54件 (24%) — emergency/highの主要疾患は詳細化済み
-- デグー: 75→47件 (23%) — emergency/highの主要疾患は詳細化済み
-- 残り533件はmoderate/low urgencyまたはvariant/subformエントリ
+- ✅ 不正テンプレート267件は全て修正済み（2026-04第3回セッション）
+- 残りの短い治療テキスト（<80文字）はconciseだが臨床的に適切な記載
 
 ### 診断精度の体系的検証
 - TRIPOD準拠の検証プロトコル策定が必要
@@ -336,5 +396,38 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 
 ### その他の残課題
 - AIエンリッチメントの臨床レビュー文書化（レビューログのフォーマット策定）
-- diagnostic_chat.py のモジュール分割（4,244行の巨大ファイル）
-- app.js のモジュール分割（3,000行の単一ファイル）
+- app.js のモジュール分割（3,000行の単一ファイル — バンドラー導入が前提）
+- CSP 'unsafe-inline' → nonce-based strict-dynamic への移行（GA4対応が必要）
+
+## 2026-04セッション（第3回）で実施した改善
+
+### 不正テンプレート全修正（267件→0件）
+- 「ウイルス感染症には特異的抗ウイルス薬がない」テンプレートを全種で修正
+- 犬72+猫43+ウサギ20+鳥75+爬虫類83+その他65=全267件
+- 全エントリにエビデンスベースの治療プロトコル（薬品用量・投与経路・参考文献）を含む
+- 種特異的禁忌明記（モルモット: ペニシリン禁忌、デグー: 糖分禁忌、チンチラ: フィプロニル禁忌）
+
+### 麻酔UI/UX改善
+- **印刷チェックリスト**: 術前/術中/術後チェックリスト+薬品投与量計算表を印刷
+- **ASA分類フィルター**: ASA I-Vドロップダウンでリスクレベル別プロトコル表示
+- ServiceWorker: CACHE_NAME vetdict-v14→v15
+
+### 薬品-疾患禁忌警告システム（新規）
+- `api/anesthesia_contraindications.py`: 24禁忌ルール
+  - 心疾患（α2作動薬、チオペンタール禁忌）
+  - 腎疾患・消化管潰瘍・肝疾患（NSAIDs禁忌/慎重）
+  - てんかん（アセプロマジン禁忌）
+  - 品種別（サイトハウンド×チオペンタール、ボクサー×アセプロマジン）
+  - 種別（ウサギ/チンチラ×フィプロニル致死、爬虫類×ケタミン腎門脈系）
+  - GDV、妊娠、凝固障害、糖尿病、インスリノーマ
+- `GET /api/anesthesia/contraindications`: 禁忌チェックAPIエンドポイント
+- フロントエンド: 薬品テーブル内リアルタイム禁忌バッジ表示
+- テスト: 34件（データ整合性、関数、API）
+
+### 診断結果→麻酔連携
+- 鑑別診断結果に「この疾患の麻酔注意事項」セクション追加
+- 疾患名から自動的に関連する禁忌条件をマッピング（DISEASE_ANESTHESIA_MAP: 30+キーワード）
+- 心疾患→α2禁忌、腎疾患→NSAIDs禁忌等を診断結果画面で直接表示
+
+### テスト
+- 3,037件（+34新規禁忌テスト、+前回3,003件からの増分）
