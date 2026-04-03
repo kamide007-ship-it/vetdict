@@ -736,7 +736,8 @@ def health():
         else:
             checks["database"] = {"status": "ok", "detail": "not configured"}
     except Exception as _e:
-        checks["database"] = {"status": "error", "detail": str(_e)[:200]}
+        logger.error("Health check database error: %s", _e)
+        checks["database"] = {"status": "error", "detail": "database unavailable"}
 
     # Disk space
     try:
@@ -829,6 +830,7 @@ def get_related_symptoms(species):
             try:
                 disease_symptoms = set(_json.loads(row['symptoms']))
             except (ValueError, TypeError):
+                logger.warning("Corrupted symptoms JSON for disease %s", row.get("id", "unknown"))
                 continue
             overlap = disease_symptoms & selected_set
             if overlap:

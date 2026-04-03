@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import json
 import logging
+import threading
 from functools import lru_cache
 from typing import Any
 
@@ -62,6 +63,7 @@ SPECIES_META: dict[str, dict[str, str]] = {
 # ---------------------------------------------------------------------------
 
 _db_ready = False
+_db_init_lock = threading.Lock()
 
 
 def _ensure_db() -> None:
@@ -69,29 +71,30 @@ def _ensure_db() -> None:
     global _db_ready
     if _db_ready:
         return
-    from api.database import init_db
-    init_db()
-    with get_connection() as conn:
-        try:
-            count = conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
-        except Exception:
-            logger.debug("Could not count diseases in SQLite", exc_info=True)
-            count = 0
-    if count == 0:
-        logger.info("diseases table is empty — running auto-migration")
-        try:
-            from scripts.migrate_to_sqlite import main as run_migration
-            run_migration()
-        except Exception:
-            logger.exception("Auto-migration failed")
-    _db_ready = True
+    with _db_init_lock:
+        if _db_ready:
+            return
+        from api.database import init_db
+        init_db()
+        with get_connection() as conn:
+            try:
+                count = conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+            except Exception:
+                logger.debug("Could not count diseases in SQLite", exc_info=True)
+                count = 0
+        if count == 0:
+            logger.info("diseases table is empty — running auto-migration")
+            try:
+                from scripts.migrate_to_sqlite import main as run_migration
+                run_migration()
+            except Exception:
+                logger.exception("Auto-migration failed")
+        _db_ready = True
 
 
 # ---------------------------------------------------------------------------
 # Cache helpers
 # ---------------------------------------------------------------------------
-
-import threading
 
 _cache_version = 0
 _cache_lock = threading.Lock()
