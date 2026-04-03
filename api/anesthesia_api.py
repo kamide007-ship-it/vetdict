@@ -4,6 +4,10 @@ import logging
 
 from flask import Blueprint, jsonify, request
 
+from api.anesthesia_contraindications import (
+    check_contraindications,
+    get_all_contraindications,
+)
 from api.anesthesia_protocols import (
     ANESTHESIA_CATEGORIES,
     ANESTHESIA_PROTOCOLS,
@@ -95,3 +99,39 @@ def api_anesthesia_categories():
         "risk_levels": RISK_LEVELS,
         "asa_classification": ASA_CLASSIFICATION,
     })
+
+
+@anesthesia_bp.route("/api/anesthesia/contraindications", methods=["GET"])
+def api_anesthesia_contraindications():
+    """Check drug-disease contraindications.
+
+    Query params:
+        drug: Drug name to check
+        conditions: Comma-separated condition tags
+        species: Species identifier
+        breed: Breed name
+        all: If "true", return all contraindication rules
+    """
+    if request.args.get("all") == "true":
+        rules = get_all_contraindications()
+        return jsonify({
+            "rules": [
+                {
+                    "drug_patterns": r["drug_patterns"],
+                    "conditions": r["conditions"],
+                    "severity": r["severity"],
+                    "message_ja": r["message_ja"],
+                    "message_en": r["message_en"],
+                }
+                for r in rules
+            ],
+            "total": len(rules),
+        })
+
+    drug = request.args.get("drug", "")
+    conditions = [c.strip() for c in request.args.get("conditions", "").split(",") if c.strip()]
+    species = request.args.get("species", "")
+    breed = request.args.get("breed", "")
+
+    warnings = check_contraindications(drug, conditions, species, breed)
+    return jsonify({"drug": drug, "warnings": warnings, "count": len(warnings)})
