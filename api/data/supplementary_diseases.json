@@ -599,7 +599,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of rabbit hemorrhagic disease (rhd) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ウサギ出血病（RHD）（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ウサギ出血病（RHD）（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "RHDVの経口/経気道感染→劇症壊死性肝炎→DIC→突然死（致死率70〜90%）。RHDV2は全年齢に感染（RHDV1は8週齢以上）。",
+    "causes_ja": "RHDV1/RHDV2（カリシウイルス科）。糞口・飛沫・媒介昆虫で伝播。極めて環境抵抗性が高い。",
+    "prevention_ja": "RHDVワクチン接種（年1〜2回）。日本でも2020年以降RHDV2の発生報告あり。"
   },
   {
     "name": "Rabbit Papillomatosis",
@@ -629,7 +632,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of rabbit papillomatosis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ウサギ乳頭腫症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ウサギ乳頭腫症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ウサギパピローマウイルスの皮膚感染→角質化乳頭腫。口腔型と皮膚型。Shope fibroma virusとは異なる。",
+    "causes_ja": "ウサギパピローマウイルス。自然感染は主にワタオウサギ。飼いウサギでは稀。",
+    "prevention_ja": "感染ウサギとの接触回避。多くは自然退縮。"
   },
   {
     "name": "Rabbit Coronavirus Enteritis",
@@ -661,7 +667,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of rabbit coronavirus enteritis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ウサギコロナウイルス腸炎（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ウサギコロナウイルス腸炎（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ウサギコロナウイルスの腸管感染→下痢。通常軽症だが幼ウサギで重症化リスク。",
+    "causes_ja": "ウサギ腸管コロナウイルス。糞口感染。",
+    "prevention_ja": "環境衛生。支持療法。"
   },
   {
     "name": "Rabbit Poxvirus Infection",
@@ -691,7 +700,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of rabbit poxvirus infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ウサギポックスウイルス感染症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ウサギポックスウイルス感染症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ウサギポックスウイルス感染→皮膚の丘疹・痂皮。通常自己限定性。粘液腫症（Myxomatosis）はより重篤な別疾患。",
+    "causes_ja": "ウサギポックスウイルス。直接接触・媒介昆虫。",
+    "prevention_ja": "感染ウサギの隔離。"
   },
   {
     "name": "Rabbit Oral Papilloma",
@@ -721,7 +733,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of rabbit oral papilloma is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ウサギ口腔乳頭腫（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ウサギ口腔乳頭腫（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ウサギ口腔パピローマウイルスの口腔粘膜感染→口腔内の乳頭状腫瘤。通常良性。",
+    "causes_ja": "ウサギ口腔パピローマウイルス。",
+    "prevention_ja": "通常自然退縮。"
   },
   {
     "name": "Bordetella Bronchiseptica Infection",
@@ -751,7 +766,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of bordetella bronchiseptica infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ボルデテラ気管支敗血症菌感染（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ボルデテラ気管支敗血症菌感染（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "B. bronchisepticaの気道感染→鼻炎・気管支炎・肺炎。Pasteurellaとの混合感染が臨床的に重要。ウサギのスナッフル（snuffles）の一因。",
+    "causes_ja": "B. bronchiseptica。犬・猫・モルモットからの異種間伝播。ストレス・過密飼育で発症。",
+    "prevention_ja": "適切な換気。過密回避。他の動物種（犬・モルモット）との接触制限。"
   },
   {
     "name": "Staphylococcal Dermatitis",
@@ -783,7 +801,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of staphylococcal dermatitis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ブドウ球菌性皮膚炎（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ブドウ球菌性皮膚炎（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "S. aureusの皮膚感染→膿皮症・膿瘍・蜂窩織炎。足底皮膚炎（ソアホック）の二次感染としても重要。",
+    "causes_ja": "S. aureus。皮膚損傷・免疫抑制・不衛生な環境がリスク。",
+    "prevention_ja": "清潔な飼育環境。足底皮膚炎の予防（柔らかい床材）。"
   },
   {
     "name": "Tyzzer's Disease",
@@ -813,7 +834,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of tyzzer's disease is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ティザー病（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "ティザー病（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "Clostridium piliforme感染→腸管・肝臓の壊死性病変→急性下痢→突然死。若齢ウサギ・ストレス下で発症。",
+    "causes_ja": "C. piliforme。芽胞の経口摂取。ストレス・免疫抑制が誘因。",
+    "prevention_ja": "環境衛生。ストレス軽減。治療困難（急性死亡が多い）。"
   },
   {
     "name": "Clostridial Enterotoxemia",
@@ -843,7 +867,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of clostridial enterotoxemia is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "クロストリジウム性腸毒血症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "クロストリジウム性腸毒血症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "Clostridium spiroforme/perfringensの腸管内毒素産生→腸粘膜壊死→重度水様下痢→脱水→急性死亡。抗菌薬使用後の腸内細菌叢撹乱が最大のリスク因子。",
+    "causes_ja": "C. spiroforme/C. perfringens。高炭水化物食・抗菌薬使用後の腸内細菌叢異常。ウサギに禁忌の抗菌薬（アンピシリン経口・リンコマイシン・クリンダマイシン等）。",
+    "prevention_ja": "ウサギに安全な抗菌薬の選択（エンロフロキサシン・トリメトプリム）。高繊維食。禁忌抗菌薬の回避。"
   },
   {
     "name": "Pseudomonas Infection",
@@ -873,7 +900,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of pseudomonas infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "緑膿菌感染症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "緑膿菌感染症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "P. aeruginosaの皮膚/呼吸器/尿路感染→難治性感染症。多剤耐性が問題。",
+    "causes_ja": "P. aeruginosa。汚染水・環境。免疫抑制ウサギ。",
+    "prevention_ja": "環境衛生。培養感受性に基づく抗菌薬選択。"
   },
   {
     "name": "Streptococcal Infection",
@@ -903,7 +933,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of streptococcal infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "連鎖球菌感染症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "連鎖球菌感染症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "Streptococcus属の呼吸器/皮膚/全身感染→肺炎・膿瘍・敗血症。ウサギの日和見感染。",
+    "causes_ja": "S. pyogenes/S. pneumoniae等。ストレス・過密飼育。",
+    "prevention_ja": "ストレス軽減。適切な飼育密度。"
   },
   {
     "name": "Klebsiella Pneumonia",
@@ -933,7 +966,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of klebsiella pneumonia is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "クレブシエラ肺炎（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "クレブシエラ肺炎（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "K. pneumoniaeの呼吸器感染→肺炎・膿瘍。免疫抑制ウサギで日和見感染。",
+    "causes_ja": "K. pneumoniae。環境汚染・免疫抑制。",
+    "prevention_ja": "環境衛生。免疫状態の管理。"
   },
   {
     "name": "Tularemia",
@@ -963,7 +999,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of tularemia is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "野兎病（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "野兎病（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "F. tularensisの感染→リンパ節腫大・肝脾腫・敗血症。ウサギでは急性致死的。人獣共通感染症。",
+    "causes_ja": "F. tularensis。マダニ媒介、感染野生ウサギとの接触。",
+    "prevention_ja": "マダニ予防。野生ウサギとの接触回避。取扱い注意（人獣共通）。"
   },
   {
     "name": "Mycobacteriosis",
@@ -993,7 +1032,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of mycobacteriosis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "マイコバクテリウム症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "マイコバクテリウム症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "M. avium/M. bovisの感染→肉芽腫形成（肺・腸管・肝臓）→慢性消耗。",
+    "causes_ja": "MAC/M. bovis。汚染環境・乳製品。人獣共通リスク。",
+    "prevention_ja": "環境衛生。感染ウサギの安楽死が推奨。"
   },
   {
     "name": "Yersiniosis",
@@ -1023,7 +1065,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of yersiniosis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "エルシニア症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "エルシニア症（Rabbit）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Rabbitにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "Y. pseudotuberculosis感染→腸間膜リンパ節の壊死性肉芽腫→敗血症。急性死亡もある。",
+    "causes_ja": "Y. pseudotuberculosis。野鳥の糞便で汚染された飼料・水から感染。秋〜冬に多い。",
+    "prevention_ja": "飼料・水の野鳥糞便汚染防止。環境衛生。"
   },
   {
     "name": "Proliferative Enteropathy (Lawsonia)",
