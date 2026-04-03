@@ -37,7 +37,7 @@ class TestContraindicationData:
 
     def test_rule_count(self):
         """Ensure we have a reasonable number of rules."""
-        assert len(DRUG_CONTRAINDICATIONS) >= 20
+        assert len(DRUG_CONTRAINDICATIONS) >= 28
 
     def test_severity_distribution(self):
         severities = [r["severity"] for r in DRUG_CONTRAINDICATIONS]
@@ -204,6 +204,46 @@ class TestCheckContraindications:
             "dexmedetomidine", conditions=["insulinoma"]
         )
         assert len(warnings) >= 1
+
+    def test_propofol_cat_caution(self):
+        """Propofol repeated use in cats = caution."""
+        warnings = check_contraindications("propofol", species="cat")
+        assert len(warnings) >= 1
+        assert any(w["severity"] == SEVERITY_CAUTION for w in warnings)
+
+    def test_ketamine_renal(self):
+        warnings = check_contraindications(
+            "ketamine", conditions=["renal_disease"]
+        )
+        assert len(warnings) >= 1
+
+    def test_atropine_glaucoma(self):
+        warnings = check_contraindications(
+            "atropine", conditions=["glaucoma"]
+        )
+        assert len(warnings) >= 1
+        assert any(w["severity"] == SEVERITY_CONTRAINDICATED for w in warnings)
+
+    def test_succinylcholine_hyperkalemia(self):
+        warnings = check_contraindications(
+            "succinylcholine", conditions=["hyperkalemia"]
+        )
+        assert len(warnings) >= 1
+        assert any(w["severity"] == SEVERITY_CONTRAINDICATED for w in warnings)
+
+    def test_alpha2_pheochromocytoma(self):
+        warnings = check_contraindications(
+            "dexmedetomidine", conditions=["pheochromocytoma"]
+        )
+        assert len(warnings) >= 1
+
+    def test_penicillin_guinea_pig(self):
+        """Penicillin + guinea pig = lethal dysbiosis."""
+        warnings = check_contraindications(
+            "amoxicillin", species="guinea_pig"
+        )
+        assert len(warnings) >= 1
+        assert any(w["severity"] == SEVERITY_CONTRAINDICATED for w in warnings)
 
 
 class TestGetAllContraindications:
