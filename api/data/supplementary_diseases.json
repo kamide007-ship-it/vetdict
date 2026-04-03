@@ -24581,7 +24581,10 @@
     "clinical_signs": "Abnormal repetitive behaviors, self-mutilation, feather/fur plucking, aggression, excessive vocalization, pacing, reduced activity, appetite changes, avoidance behaviors.",
     "clinical_signs_ja": "異常反復行動、自傷、羽毛・毛引き、攻撃性、過度の発声、常同歩行、活動量低下、食欲変化、回避行動。",
     "diagnosis": "Diagnosis of self-mutilation is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 行動評価 (Behavioral Assessment), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 環境・飼育評価 (Husbandry Assessment). Differential diagnosis should consider other conditions presenting with similar clinical signs in sugar glider.",
-    "diagnosis_ja": "自傷行為（Sugar Glider）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 行動評価 (Behavioral Assessment), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 環境・飼育評価 (Husbandry Assessment)。Sugar Gliderにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "自傷行為（Sugar Glider）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 行動評価 (Behavioral Assessment), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 環境・飼育評価 (Husbandry Assessment)。Sugar Gliderにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ストレス・退屈・疼痛→自傷行為（特に尾・陰茎・四肢の咬傷）→重度の組織損傷。フクロモモンガで深刻な行動問題。",
+    "causes_ja": "社会的隔離（最重要因子）、退屈、疼痛（泌尿器感染等）、不適切な飼育環境。",
+    "prevention_ja": "ペアまたはグループ飼育（社会的動物）。環境エンリッチメント。疼痛源の除去。"
   },
   {
     "name": "Ick (Stress-Related Dermatitis)",
