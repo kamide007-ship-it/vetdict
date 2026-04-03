@@ -18359,7 +18359,10 @@
     "clinical_signs": "Skin lesions (alopecia, crusting, scaling), nasal discharge, respiratory distress, subcutaneous nodules, lymphadenopathy, fever, weight loss. Systemic mycoses may cause multi-organ involvement.",
     "clinical_signs_ja": "皮膚病変（脱毛、痂皮、鱗屑）、鼻汁、呼吸困難、皮下結節、リンパ節腫大、発熱、体重減少。全身性真菌症では多臓器障害を引き起こしうる。",
     "diagnosis": "Diagnosis of dermatophytosis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "皮膚糸状菌症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "皮膚糸状菌症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "M. canis/Trichophyton属の皮膚感染→ケラチン溶解→円形脱毛・鱗屑。フェレットでは比較的稀。人獣共通。",
+    "causes_ja": "M. canis（最多）。感染動物接触。免疫抑制フェレットにリスク。",
+    "prevention_ja": "感染動物隔離。イトラコナゾール。"
   },
   {
     "name": "Tail Alopecia (Adrenal)",
@@ -18390,7 +18393,10 @@
     "clinical_signs": "Polyuria/polydipsia, weight changes, changes in appetite, lethargy, skin/coat changes, muscle weakness, altered mentation. Specific signs depend on the affected endocrine axis.",
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of tail alopecia (adrenal) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "尾部脱毛（副腎性）（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "尾部脱毛（副腎性）（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "副腎性ステロイド過剰→尾部から始まる対称性脱毛。副腎疾患の初期症状。",
+    "causes_ja": "副腎疾患。季節性脱毛との鑑別が必要。",
+    "prevention_ja": "副腎ホルモンパネルで診断。デスロレリン。"
   },
   {
     "name": "Mast Cell Tumor",
@@ -18422,7 +18428,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of mast cell tumor is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "肥満細胞腫（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "肥満細胞腫（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "皮膚肥満細胞腫瘍。フェレットではほとんどが良性。掻痒を伴う。稀に内臓型（悪性）。",
+    "causes_ja": "原因不明。良性が大部分。犬とは生物学的挙動が異なる。",
+    "prevention_ja": "外科的切除で治癒。"
   },
   {
     "name": "Squamous Cell Carcinoma",
@@ -18454,7 +18463,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of squamous cell carcinoma is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "扁平上皮癌（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "扁平上皮癌（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "皮膚扁平上皮の悪性増殖。フェレットでは比較的稀。局所浸潤性。",
+    "causes_ja": "原因不明。中高齢フェレット。",
+    "prevention_ja": "早期生検。広範囲切除。"
   },
   {
     "name": "Hemangioma",
@@ -18485,7 +18497,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of hemangioma is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "血管腫（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "血管腫（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "血管内皮の良性腫瘍→暗赤色軟性腫瘤。フェレットでは比較的一般的。",
+    "causes_ja": "原因不明。中高齢フェレット。",
+    "prevention_ja": "外科的切除で治癒。"
   },
   {
     "name": "Cardiomyopathy",
@@ -18639,7 +18654,10 @@
     "clinical_signs": "Exercise intolerance, coughing, dyspnea, syncope, ascites, cyanosis, weak pulse, heart murmur or arrhythmia on auscultation, jugular distension.",
     "clinical_signs_ja": "運動不耐性、咳嗽、呼吸困難、失神、腹水、チアノーゼ、脈拍微弱、聴診での心雑音・不整脈、頸静脈怒張。",
     "diagnosis": "Diagnosis of aortic thrombosis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 心臓超音波検査 (Echocardiography), 心電図 (ECG), 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "大動脈血栓症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 心臓超音波検査 (Echocardiography), 心電図 (ECG), 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "大動脈血栓症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 心臓超音波検査 (Echocardiography), 心電図 (ECG), 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "大動脈血栓→後肢虚血・麻痺。心疾患（DCM）に続発。",
+    "causes_ja": "心疾患、凝固亢進状態。フェレットでは稀。",
+    "prevention_ja": "心疾患管理。予後不良。"
   },
   {
     "name": "Pericardial Effusion",
@@ -18698,7 +18716,10 @@
     "clinical_signs": "Polyuria/polydipsia, decreased appetite, weight loss, vomiting, dehydration, uremic breath, oral ulcers, hematuria, stranguria, anuria in obstruction.",
     "clinical_signs_ja": "多尿・多飲、食欲低下、体重減少、嘔吐、脱水、尿毒症性口臭、口腔潰瘍、血尿、排尿困難、閉塞時の無尿。",
     "diagnosis": "Diagnosis of urinary tract infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "尿路感染症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "尿路感染症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "細菌の尿路上行性感染→膀胱炎。副腎疾患による前立腺肥大が素因。",
+    "causes_ja": "E. coli等。副腎疾患がリスク因子。",
+    "prevention_ja": "副腎疾患管理。尿培養に基づく抗菌薬。"
   },
   {
     "name": "Urolithiasis",
@@ -18730,7 +18751,10 @@
     "clinical_signs": "Polyuria/polydipsia, decreased appetite, weight loss, vomiting, dehydration, uremic breath, oral ulcers, hematuria, stranguria, anuria in obstruction.",
     "clinical_signs_ja": "多尿・多飲、食欲低下、体重減少、嘔吐、脱水、尿毒症性口臭、口腔潰瘍、血尿、排尿困難、閉塞時の無尿。",
     "diagnosis": "Diagnosis of urolithiasis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "尿路結石症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "尿路結石症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "尿路結石→膀胱刺激→尿道閉塞（去勢雄でリスク）。ストルバイトが最多。",
+    "causes_ja": "ストルバイト（植物性蛋白食）、シュウ酸Ca。食事組成が結石に直結。",
+    "prevention_ja": "フェレット専用食。穀物主体食の回避。十分な飲水。"
   },
   {
     "name": "Prostatic Disease",
@@ -18760,7 +18784,10 @@
     "clinical_signs": "Vulvar/preputial discharge, dystocia, mammary swelling, infertility, behavioral changes, abdominal distension, straining, egg binding (birds/reptiles).",
     "clinical_signs_ja": "外陰部・包皮分泌物、難産、乳腺腫脹、不妊、行動変化、腹部膨満、怒責、卵づまり（鳥類・爬虫類）。",
     "diagnosis": "Diagnosis of prostatic disease is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 超音波検査 (Ultrasonography), 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 細胞診 (Cytology). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "前立腺疾患（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 超音波検査 (Ultrasonography), 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 細胞診 (Cytology)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "前立腺疾患（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 超音波検査 (Ultrasonography), 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 細胞診 (Cytology)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "副腎性ステロイド過剰→去勢雄の前立腺再肥大/嚢胞化→尿道閉塞。",
+    "causes_ja": "副腎疾患に続発。去勢雄フェレットに好発。",
+    "prevention_ja": "副腎疾患の早期管理。排尿困難は緊急カテーテル。"
   },
   {
     "name": "Cystitis",
@@ -18792,7 +18819,10 @@
     "clinical_signs": "Polyuria/polydipsia, decreased appetite, weight loss, vomiting, dehydration, uremic breath, oral ulcers, hematuria, stranguria, anuria in obstruction.",
     "clinical_signs_ja": "多尿・多飲、食欲低下、体重減少、嘔吐、脱水、尿毒症性口臭、口腔潰瘍、血尿、排尿困難、閉塞時の無尿。",
     "diagnosis": "Diagnosis of cystitis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "膀胱炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "膀胱炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "膀胱の炎症→頻尿・血尿。副腎疾患による尿路変化が素因。",
+    "causes_ja": "細菌性、尿路結石、副腎疾患関連。",
+    "prevention_ja": "副腎疾患管理。尿培養に基づく抗菌薬。"
   },
   {
     "name": "Pancreatic Islet Cell Tumor",
@@ -18824,7 +18854,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of pancreatic islet cell tumor is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "膵島細胞腫瘍（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "膵島細胞腫瘍（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "膵β細胞腫瘍→インスリン過剰→低血糖→脱力・けいれん。フェレットで最も一般的な腫瘍の一つ。",
+    "causes_ja": "原因不明。4歳以上に好発。",
+    "prevention_ja": "少量頻回食。プレドニゾロン/ジアゾキシド。外科的切除。"
   },
   {
     "name": "Hyperadrenocorticism",
@@ -18854,7 +18887,10 @@
     "clinical_signs": "Polyuria/polydipsia, weight changes, changes in appetite, lethargy, skin/coat changes, muscle weakness, altered mentation. Specific signs depend on the affected endocrine axis.",
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of hyperadrenocorticism is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "副腎皮質機能亢進症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "副腎皮質機能亢進症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "副腎皮質の腺腫/腺癌→性ステロイド過剰→脱毛・陰門腫脹・前立腺肥大。犬のクッシングとは異なり性ステロイドが主体。",
+    "causes_ja": "副腎腫瘍。去勢/避妊後のGnRH/LH上昇が一因。",
+    "prevention_ja": "デスロレリン。外科的副腎摘出。"
   },
   {
     "name": "Hypoglycemia (Insulinoma)",
@@ -18885,7 +18921,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of hypoglycemia (insulinoma) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "低血糖症（インスリノーマ）（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "低血糖症（インスリノーマ）（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "膵β細胞腫瘍→インスリン過剰→低血糖→脱力・けいれん。",
+    "causes_ja": "インスリノーマ。4歳以上に好発。",
+    "prevention_ja": "少量頻回食。プレドニゾロン/ジアゾキシド。"
   },
   {
     "name": "Prostatic Cyst",
@@ -18915,7 +18954,10 @@
     "clinical_signs": "Vulvar/preputial discharge, dystocia, mammary swelling, infertility, behavioral changes, abdominal distension, straining, egg binding (birds/reptiles).",
     "clinical_signs_ja": "外陰部・包皮分泌物、難産、乳腺腫脹、不妊、行動変化、腹部膨満、怒責、卵づまり（鳥類・爬虫類）。",
     "diagnosis": "Diagnosis of prostatic cyst is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 超音波検査 (Ultrasonography), 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 細胞診 (Cytology). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "前立腺嚢胞（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 超音波検査 (Ultrasonography), 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 細胞診 (Cytology)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "前立腺嚢胞（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 超音波検査 (Ultrasonography), 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 細胞診 (Cytology)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "副腎疾患→性ステロイド過剰→去勢雄の前立腺嚢胞化→尿道圧迫→排尿困難。",
+    "causes_ja": "副腎疾患に続発。去勢雄フェレット。",
+    "prevention_ja": "副腎疾患の早期治療。排尿困難は緊急カテーテル。"
   },
   {
     "name": "Vulvar Swelling (Adrenal)",
@@ -18945,7 +18987,10 @@
     "clinical_signs": "Polyuria/polydipsia, weight changes, changes in appetite, lethargy, skin/coat changes, muscle weakness, altered mentation. Specific signs depend on the affected endocrine axis.",
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of vulvar swelling (adrenal) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "外陰部腫脹（副腎性）（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "外陰部腫脹（副腎性）（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "副腎からのエストラジオール過剰→避妊済み雌の外陰部腫脹。持続すると骨髄抑制→致死的。",
+    "causes_ja": "副腎腫瘍によるエストロゲン過剰。",
+    "prevention_ja": "副腎疾患の早期治療。CBCモニタリング。"
   },
   {
     "name": "Cryptorchidism",
@@ -19003,7 +19048,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of mammary tumor is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "乳腺腫瘍（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "乳腺腫瘍（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "乳腺上皮の腫瘍。フェレットでは大部分が良性。副腎疾患に関連。",
+    "causes_ja": "副腎疾患によるホルモン刺激。",
+    "prevention_ja": "副腎疾患管理。外科的切除で良好な予後。"
   },
   {
     "name": "Pneumonia",
@@ -19034,7 +19082,10 @@
     "clinical_signs": "Dyspnea, tachypnea, coughing, nasal discharge, open-mouth breathing, wheezing/crackles on auscultation, exercise intolerance, cyanosis, tail-bobbing (birds).",
     "clinical_signs_ja": "呼吸困難、頻呼吸、咳嗽、鼻汁、開口呼吸、聴診でのラ音・断続性ラ音、運動不耐性、チアノーゼ、尾振り呼吸（鳥類）。",
     "diagnosis": "Diagnosis of pneumonia is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "肺炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "肺炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "細菌性/ウイルス性（インフルエンザ・CDV）の肺感染→呼吸困難。",
+    "causes_ja": "インフルエンザ（最多）、CDV、細菌性二次感染。",
+    "prevention_ja": "CDVワクチン。インフルエンザ罹患者との接触回避。"
   },
   {
     "name": "Upper Respiratory Infection",
@@ -19066,7 +19117,10 @@
     "clinical_signs": "Dyspnea, tachypnea, coughing, nasal discharge, open-mouth breathing, wheezing/crackles on auscultation, exercise intolerance, cyanosis, tail-bobbing (birds).",
     "clinical_signs_ja": "呼吸困難、頻呼吸、咳嗽、鼻汁、開口呼吸、聴診でのラ音・断続性ラ音、運動不耐性、チアノーゼ、尾振り呼吸（鳥類）。",
     "diagnosis": "Diagnosis of upper respiratory infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "上部気道感染症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "上部気道感染症（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ウイルス/細菌の上気道感染→くしゃみ・鼻汁。CDVは致死的。",
+    "causes_ja": "インフルエンザ（軽症）、CDV（致死的）、細菌性。",
+    "prevention_ja": "CDVワクチン。インフルエンザ罹患者との接触回避。"
   },
   {
     "name": "Rhinitis",
@@ -19158,7 +19212,10 @@
     "clinical_signs": "Dysphagia, reduced food intake, ptyalism/drooling, facial swelling, weight loss, halitosis, preference for soft foods, teeth chattering, visible tooth abnormalities on examination.",
     "clinical_signs_ja": "嚥下困難、食餌量減少、流涎、顔面腫脹、体重減少、口臭、軟食の選好、歯ぎしり、検査での歯の異常。",
     "diagnosis": "Diagnosis of dental tartar/gingivitis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 口腔内検査 (Oral Examination), 頭部X線検査 (Skull Radiography), 歯科用プローブ検査 (Dental Probing). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "歯石/歯肉炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 口腔内検査 (Oral Examination), 頭部X線検査 (Skull Radiography), 歯科用プローブ検査 (Dental Probing)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "歯石/歯肉炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 口腔内検査 (Oral Examination), 頭部X線検査 (Skull Radiography), 歯科用プローブ検査 (Dental Probing)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "歯垢・歯石蓄積→歯肉炎→歯周病。加齢とともに増加。",
+    "causes_ja": "歯垢蓄積。軟質食がリスク。",
+    "prevention_ja": "硬い食物の給餌。定期的歯科検診。"
   },
   {
     "name": "Broken Tooth",
@@ -19241,7 +19298,10 @@
     "clinical_signs": "Blepharospasm, epiphora, conjunctival hyperemia, corneal opacity, ocular discharge, photophobia, vision changes, enlarged/shrunken globe.",
     "clinical_signs_ja": "眼瞼痙攣、流涙、結膜充血、角膜混濁、眼脂、羞明、視力変化、眼球の腫大・萎縮。",
     "diagnosis": "Diagnosis of conjunctivitis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 眼科検査 (Ophthalmic Examination), フルオレセイン染色 (Fluorescein Stain), 眼圧測定 (Tonometry), シルマー涙液試験 (Schirmer Tear Test). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "結膜炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 眼科検査 (Ophthalmic Examination), フルオレセイン染色 (Fluorescein Stain), 眼圧測定 (Tonometry), シルマー涙液試験 (Schirmer Tear Test)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "結膜炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 眼科検査 (Ophthalmic Examination), フルオレセイン染色 (Fluorescein Stain), 眼圧測定 (Tonometry), シルマー涙液試験 (Schirmer Tear Test)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "結膜の炎症→充血・分泌物。インフルエンザ・CDVの初期症状として重要。",
+    "causes_ja": "ウイルス性（インフルエンザ・CDV）、細菌性、アレルギー性。",
+    "prevention_ja": "CDVワクチン。抗菌点眼。"
   },
   {
     "name": "Retinal Atrophy",
@@ -19328,7 +19388,10 @@
     "clinical_signs": "Seizures, ataxia, head tilt, circling, paralysis/paresis, tremors, altered mentation, abnormal reflexes, nystagmus, behavioral changes.",
     "clinical_signs_ja": "痙攣、運動失調、斜頸、旋回、麻痺・不全麻痺、振戦、意識状態の変化、異常反射、眼振、行動変化。",
     "diagnosis": "Diagnosis of seizures is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 神経学的検査 (Neurological Examination), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 画像診断 (Imaging: X-ray / CT / MRI). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "痙攣発作（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 神経学的検査 (Neurological Examination), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 画像診断 (Imaging: X-ray / CT / MRI)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "痙攣発作（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 神経学的検査 (Neurological Examination), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 画像診断 (Imaging: X-ray / CT / MRI)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "大脳皮質の異常電気活動→けいれん。インスリノーマ関連低血糖が最も一般的な原因。",
+    "causes_ja": "インスリノーマ（最多）、脳炎、中毒、肝性脳症。",
+    "prevention_ja": "インスリノーマ管理。けいれん時はBG測定が最優先。"
   },
   {
     "name": "Fracture",
@@ -19416,7 +19479,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of osteosarcoma is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "骨肉腫（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "骨肉腫（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "骨芽細胞由来の悪性腫瘍。フェレットでは犬ほど一般的でない。転移率は犬より低い報告。",
+    "causes_ja": "原因不明。中高齢フェレット。",
+    "prevention_ja": "四肢腫脹の早期精査。截肢が標準治療。"
   },
   {
     "name": "Disseminated Idiopathic Myofasciitis",
@@ -19446,7 +19512,10 @@
     "clinical_signs": "Pale mucous membranes, weakness, lethargy, tachycardia, tachypnea, petechiae/ecchymoses, prolonged bleeding, splenomegaly, icterus.",
     "clinical_signs_ja": "粘膜蒼白、衰弱、無気力、頻脈、頻呼吸、点状出血・斑状出血、出血延長、脾腫、黄疸。",
     "diagnosis": "Diagnosis of disseminated idiopathic myofasciitis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 全血球計算 (CBC), 血液塗抹検査 (Blood Smear), 凝固系検査 (Coagulation Panel), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "播種性特発性筋膜炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液塗抹検査 (Blood Smear), 凝固系検査 (Coagulation Panel), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "播種性特発性筋膜炎（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液塗抹検査 (Blood Smear), 凝固系検査 (Coagulation Panel), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "全身性筋膜・筋肉の急性炎症→発熱・食欲廃絶・全身疼痛→多臓器不全。フェレット特異的。",
+    "causes_ja": "原因不明。18ヶ月齢未満に好発。",
+    "prevention_ja": "高用量プレドニゾロン＋支持療法。予後不良。"
   },
   {
     "name": "Anemia",
@@ -19476,7 +19545,10 @@
     "clinical_signs": "Pale mucous membranes, weakness, lethargy, tachycardia, tachypnea, petechiae/ecchymoses, prolonged bleeding, splenomegaly, icterus.",
     "clinical_signs_ja": "粘膜蒼白、衰弱、無気力、頻脈、頻呼吸、点状出血・斑状出血、出血延長、脾腫、黄疸。",
     "diagnosis": "Diagnosis of anemia is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 全血球計算 (CBC), 血液塗抹検査 (Blood Smear), 凝固系検査 (Coagulation Panel), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "貧血（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液塗抹検査 (Blood Smear), 凝固系検査 (Coagulation Panel), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "貧血（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液塗抹検査 (Blood Smear), 凝固系検査 (Coagulation Panel), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "赤血球数/Hb低下→組織低酸素。エストロゲン毒性（副腎疾患/発情持続）による骨髄抑制が特に重要。",
+    "causes_ja": "エストロゲン毒性（最重要）、慢性疾患、消化管出血、リンパ腫骨髄浸潤。",
+    "prevention_ja": "適切な時期の避妊手術。副腎疾患の早期管理。"
   },
   {
     "name": "Leukemia",
@@ -19507,7 +19579,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of leukemia is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "白血病（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "白血病（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "造血系の悪性増殖→白血球異常増加＋正常造血抑制。リンパ球性白血病が最多。",
+    "causes_ja": "原因不明。レトロウイルスの関与示唆。",
+    "prevention_ja": "確実な予防法はない。化学療法。"
   },
   {
     "name": "NSAID Toxicity",
@@ -19598,7 +19673,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of skin abscess is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "皮膚膿瘍（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "皮膚膿瘍（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "皮膚の細菌感染→膿瘍形成。フェレット同士のケンカ咬傷後に多い。",
+    "causes_ja": "咬傷後の細菌感染。Staphylococcus/Streptococcus。",
+    "prevention_ja": "咬傷の早期洗浄・抗菌薬。多頭飼育時のケンカ防止。"
   },
   {
     "name": "Wound Infection",
@@ -19630,7 +19708,10 @@
     "clinical_signs": "Pain, swelling, bruising, bleeding, limping/lameness, reduced mobility, wound or tissue damage visible, behavioral changes (hiding, aggression), shock signs in severe cases.",
     "clinical_signs_ja": "疼痛、腫脹、打撲、出血、跛行、運動性低下、創傷・組織損傷の視認、行動変化（隠れる、攻撃性）、重症例ではショック徴候。",
     "diagnosis": "Diagnosis of wound infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "創傷感染（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "創傷感染（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "創傷への細菌侵入→局所感染→蜂窩織炎/膿瘍。",
+    "causes_ja": "外傷・咬傷後の細菌感染。",
+    "prevention_ja": "創傷の迅速な洗浄・消毒。"
   },
   {
     "name": "Stress-Related Illness",
@@ -19716,7 +19797,10 @@
     "clinical_signs": "Polyuria/polydipsia, weight changes, changes in appetite, lethargy, skin/coat changes, muscle weakness, altered mentation. Specific signs depend on the affected endocrine axis.",
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of adrenal-associated alopecia is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "副腎関連脱毛（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "副腎関連脱毛（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "副腎性ステロイド過剰→対称性脱毛（尾部→体幹に進行）。副腎疾患の最も一般的な臨床症状。",
+    "causes_ja": "副腎疾患。3〜4歳以上のフェレットに好発。",
+    "prevention_ja": "副腎ホルモンパネル検査。デスロレリン/副腎摘出。"
   },
   {
     "name": "Ferret Adrenal Disease (FAD)",
@@ -19746,7 +19830,10 @@
     "clinical_signs": "Polyuria/polydipsia, weight changes, changes in appetite, lethargy, skin/coat changes, muscle weakness, altered mentation. Specific signs depend on the affected endocrine axis.",
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of ferret adrenal disease (fad) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in ferret.",
-    "diagnosis_ja": "フェレット副腎疾患（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "フェレット副腎疾患（Ferret）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Ferretにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "副腎皮質の過形成/腺腫/腺癌→性ステロイド過剰→脱毛・陰門腫脹・前立腺肥大。フェレットで最も一般的な内分泌疾患。",
+    "causes_ja": "去勢/避妊後のGnRH/LH上昇→副腎刺激。3〜4歳以上で50%以上が罹患。",
+    "prevention_ja": "デスロレリンインプラント。外科的副腎摘出。"
   },
   {
     "name": "Vaccine-Associated Fibrosarcoma",
