@@ -567,6 +567,8 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
     Searches both English and Japanese fields. Returns results ordered by
     relevance (name match prioritized) then by species and name.
     """
+    if not query or not query.strip():
+        return []
     like_pattern = "%" + query.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
     search_clause = (
         "(name LIKE ? ESCAPE '\\' OR name_ja LIKE ? ESCAPE '\\' OR "

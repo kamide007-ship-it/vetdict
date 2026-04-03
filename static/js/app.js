@@ -1,4 +1,4 @@
-const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
+const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F401}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F9A5}",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F424}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F33F}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
 
 /* ===== Admin / Pro access control ===== */
 // Admin verification handled server-side
@@ -818,8 +818,8 @@ document.addEventListener("input",e=>{if(e.target.matches("#labValuesGrid input"
 
 
 function buildFieldFallback(label,name){
-  if(currentLang==="ja")return `${label}: ${name}について一般的な獣医学情報を確認し、個体の状態に合わせて獣医師が評価してください。`;
-  return `${label}: Review standard veterinary references for ${name} and individualize by clinical assessment.`;
+  if(currentLang==="ja")return `${name}の${label}に関する詳細情報は現在準備中です。`;
+  return `Detailed ${label.toLowerCase()} information for ${name} is being prepared.`;
 }
 
 
