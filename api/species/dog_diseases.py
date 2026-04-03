@@ -2779,7 +2779,10 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_redness", "hair_loss", "dry_skin"},
         "description": "An autoimmune skin disease causing depigmentation and crusting of the nose and face.",
         "description_ja": "鼻と顔面の色素脱失と痂皮を引き起こす自己免疫性皮膚疾患です。",
-        "urgency": "normal",
+                "pathophysiology_ja": "鼻鏡の基底膜帯への自己抗体沈着→鼻鏡の色素脱失・紅斑・潰瘍・痂皮。SLEとは異なり皮膚限局性（全身症状なし）。UV暴露で悪化。",
+        "causes_ja": "免疫介在性。コリー・シェルティ・ジャーマンシェパードに好発。UV暴露が増悪因子。",
+        "prevention_ja": "UV暴露の制限（サンスクリーン・日中の屋内活動）。タクロリムス局所＋テトラサイクリン/ニアシンアミド。",
+"urgency": "normal",
     },
     {
         "name": "Follicular Dysplasia",
@@ -3460,7 +3463,10 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"aggression_change"},
         "description": "Hereditary deafness associated with white coat color and merle pattern, common in Dalmatians.",
         "description_ja": "白色被毛やマール模様と関連する遺伝性聴覚障害で、ダルメシアンに多いです。",
-        "urgency": "normal",
+                "pathophysiology_ja": "蝸牛の発育不全/有毛細胞の退行性変性→感音性難聴。白色被毛・マール遺伝子と関連（メラノサイト欠損→内耳の血管条の発育障害）。BAER検査で確定診断。",
+        "causes_ja": "遺伝性（白色関連遺伝子・マール遺伝子）。ダルメシアン（片側性30%、両側性5%）、ブルテリア、コッカースパニエル。両側性は完全聾。",
+        "prevention_ja": "BAER検査による繁殖前スクリーニング。片側性聾犬の繁殖制限。両側性聾犬は視覚合図でのトレーニング。",
+"urgency": "normal",
     },
     {
         "name": "Atlantoaxial Instability",
