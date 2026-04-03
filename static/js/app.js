@@ -1964,7 +1964,7 @@ function guidedFetch(phase,extra){
     const msgs=document.getElementById("guidedMessages");
     const typing=msgs?.querySelector(".typing-indicator");
     if(typing)typing.remove();
-    guidedAddMsg(t("commError")+" ("+err.message+")","bot");
+    guidedAddMsg(escapeHtml(t("commError")+" ("+err.message+")"),"bot");
     guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
     const rb=document.getElementById("guidedRetryBtn");
     if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
@@ -1974,7 +1974,7 @@ function guidedFetch(phase,extra){
 function guidedHandleResponse(data){
   const lang=currentLang;
   const msgKey=lang==="ja"?"message_ja":"message_en";
-  if(data[msgKey])guidedAddMsg(data[msgKey],"bot");
+  if(data[msgKey])guidedAddMsg(escapeHtml(data[msgKey]),"bot");
 
   if(data.phase==="select_category"){
     guidedRenderCategories(data.categories||[]);
@@ -1987,7 +1987,7 @@ function guidedHandleResponse(data){
   } else if(data.phase==="final_results"){
     guidedRenderFinalResults(data);
   } else if(data.error){
-    guidedAddMsg(data.error,"bot");
+    guidedAddMsg(escapeHtml(data.error),"bot");
     guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
     const rb=document.getElementById("guidedRetryBtn");
     if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
@@ -2682,9 +2682,10 @@ function debounce(fn,ms){let t;return function(...a){clearTimeout(t);t=setTimeou
 
 /* Search text highlight */
 function highlightMatch(text,query){
-  if(!query||!text)return text;
+  if(!query||!text)return escapeHtml(text);
+  const safe=escapeHtml(text);
   const escaped=query.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-  return text.replace(new RegExp(`(${escaped})`,"gi"),'<mark class="search-highlight">$1</mark>');
+  return safe.replace(new RegExp(`(${escaped})`,"gi"),'<mark class="search-highlight">$1</mark>');
 }
 
 /* ===== UI/UX Enhancements ===== */
