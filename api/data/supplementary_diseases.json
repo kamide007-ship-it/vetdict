@@ -29794,7 +29794,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of bile duct carcinoma is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "胆管癌（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "胆管癌（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "肝内胆管上皮の悪性増殖→肝腫大・黄疸。鳥の肝臓腫瘍として比較的多い。",
+    "causes_ja": "原因不明。中高齢鳥。",
+    "prevention_ja": "早期発見困難。支持療法。"
   },
   {
     "name": "Adrenal Tumor",
@@ -30288,7 +30291,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of french molt is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "フレンチモルト（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "フレンチモルト（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ポリオーマウイルスの亜急性型→風切羽・尾羽の脱落/変形→飛翔不能。セキセイインコ幼鳥に特徴的。",
+    "causes_ja": "鳥ポリオーマウイルス。繁殖施設で問題。",
+    "prevention_ja": "PCRスクリーニング。一部は回復。"
   },
   {
     "name": "Polyuria/Polydipsia",
@@ -30591,7 +30597,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of paramyxovirus infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "パラミクソウイルス感染（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "パラミクソウイルス感染（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "PMV-1（ニューカッスル病ウイルス）：呼吸器・消化器・神経症状。家禽で法定伝染病。",
+    "causes_ja": "鳥パラミクソウイルス。飛沫・糞口感染。",
+    "prevention_ja": "新規導入鳥の隔離。家禽ではNDワクチン。"
   },
   {
     "name": "Reovirus Infection",
@@ -30621,7 +30630,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of reovirus infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "レオウイルス感染（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "レオウイルス感染（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "鳥レオウイルス→肝壊死・関節炎。若齢鳥で致死的。",
+    "causes_ja": "鳥レオウイルス。糞口感染。",
+    "prevention_ja": "環境衛生。支持療法。"
   },
   {
     "name": "Adenovirus Infection",
@@ -30651,7 +30663,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of adenovirus infection is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "アデノウイルス感染（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "アデノウイルス感染（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "鳥アデノウイルス→肝壊死（inclusion body hepatitis）。幼鳥で致死的。",
+    "causes_ja": "鳥アデノウイルス。糞口感染。",
+    "prevention_ja": "環境衛生。"
   },
   {
     "name": "Blood Parasites (Haemoproteus)",
@@ -31168,7 +31183,10 @@
     "clinical_signs": "Fever, localized swelling/redness/heat/pain, purulent discharge, lethargy, anorexia, elevated white blood cell count. Specific signs depend on organ system affected.",
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of periorbital abscess is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "眼窩周囲膿瘍（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "眼窩周囲膿瘍（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "眼窩周囲の膿瘍→眼球突出。副鼻腔炎の波及が多い。ビタミンA欠乏が素因。",
+    "causes_ja": "副鼻腔炎からの波及。ビタミンA欠乏がリスク。",
+    "prevention_ja": "ビタミンA欠乏予防（緑黄色野菜・ペレット食）。"
   },
   {
     "name": "Meningitis",
@@ -32366,7 +32384,10 @@
     "clinical_signs": "Fever, lethargy, anorexia, nasal/ocular discharge, respiratory signs, diarrhea/vomiting (depending on tropism), lymphadenopathy, dehydration. Species-specific signs may include skin lesions, neurological signs, or hemorrhage.",
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of pacheco's disease is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "パチェコ病（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "パチェコ病（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "PsHV急性感染→劇症肝壊死→突然死。潜伏感染鳥がストレス時に排菌→集団死。",
+    "causes_ja": "PsHV-1。コニュア・オカメインコが潜伏キャリア。",
+    "prevention_ja": "新規導入鳥の30〜45日間の隔離。"
   },
   {
     "name": "Feather Plucking",
@@ -32581,7 +32602,10 @@
     "clinical_signs": "Skin lesions (alopecia, crusting, scaling), nasal discharge, respiratory distress, subcutaneous nodules, lymphadenopathy, fever, weight loss. Systemic mycoses may cause multi-organ involvement.",
     "clinical_signs_ja": "皮膚病変（脱毛、痂皮、鱗屑）、鼻汁、呼吸困難、皮下結節、リンパ節腫大、発熱、体重減少。全身性真菌症では多臓器障害を引き起こしうる。",
     "diagnosis": "Diagnosis of candidiasis (crop mycosis) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "カンジダ症（そ嚢真菌症）（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "カンジダ症（そ嚢真菌症）（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "C. albicansのそのう粘膜過増殖→白色偽膜→そのう運動低下→食欲不振。雛鳥・抗菌薬後に好発。",
+    "causes_ja": "C. albicans。抗菌薬使用後、免疫抑制、雛鳥。",
+    "prevention_ja": "抗菌薬後のプロバイオティクス。ナイスタチン/フルコナゾール。"
   },
   {
     "name": "Megabacteriosis (AGY)",
@@ -32762,7 +32786,10 @@
     "clinical_signs": "Polyuria/polydipsia, weight changes, changes in appetite, lethargy, skin/coat changes, muscle weakness, altered mentation. Specific signs depend on the affected endocrine axis.",
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of iron storage disease (hemochromatosis) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "鉄蓄積症（ヘモクロマトーシス）（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "鉄蓄積症（ヘモクロマトーシス）（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "肝臓への過剰鉄蓄積→ヘモジデリン沈着→肝細胞障害→肝線維化→肝不全。九官鳥・オオハシ・ムクドリで特に問題。",
+    "causes_ja": "食事性鉄過剰。九官鳥・オオハシに特異的感受性。",
+    "prevention_ja": "低鉄食。柑橘類制限。定期的瀉血。"
   },
   {
     "name": "Fatty Liver Disease",
@@ -33479,7 +33506,10 @@
     "clinical_signs": "Vomiting, diarrhea, anorexia, weight loss, abdominal pain/distension, dehydration, melena or hematochezia, tenesmus, changes in fecal consistency.",
     "clinical_signs_ja": "嘔吐、下痢、食欲不振、体重減少、腹痛・腹部膨満、脱水、黒色便・血便、しぶり、便性状の変化。",
     "diagnosis": "Diagnosis of cloacitis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 糞便検査 (Fecal Examination), 血液生化学検査 (Blood Chemistry Panel), 腹部X線検査 (Abdominal Radiography), 腹部超音波検査 (Abdominal Ultrasonography). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "総排泄腔炎（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 糞便検査 (Fecal Examination), 血液生化学検査 (Blood Chemistry Panel), 腹部X線検査 (Abdominal Radiography), 腹部超音波検査 (Abdominal Ultrasonography)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "総排泄腔炎（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 糞便検査 (Fecal Examination), 血液生化学検査 (Blood Chemistry Panel), 腹部X線検査 (Abdominal Radiography), 腹部超音波検査 (Abdominal Ultrasonography)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "総排泄腔の細菌/真菌/寄生虫感染→発赤・腫脹・分泌物。排泄困難。",
+    "causes_ja": "細菌性・真菌性・寄生虫性。不衛生な環境がリスク。",
+    "prevention_ja": "環境衛生。適切な抗菌/抗真菌療法。"
   },
   {
     "name": "Egg Peritonitis",
@@ -33634,7 +33664,10 @@
     "clinical_signs": "Palpable mass or swelling, weight loss, decreased appetite, lethargy, organ-specific signs depending on tumor location, paraneoplastic syndromes (hypercalcemia, anemia, cachexia).",
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of renal tumor is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "腎腫瘍（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "腎腫瘍（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "腎腺癌/腎芽腫→腎腫大→坐骨神経圧迫→片肢麻痺。セキセイインコに好発。",
+    "causes_ja": "原因不明。セキセイインコの高齢鳥に好発。",
+    "prevention_ja": "片肢麻痺のセキセイインコでは腎腫瘍を疑う。"
   },
   {
     "name": "Renal Failure (Acute)",
@@ -33908,7 +33941,10 @@
     "clinical_signs": "Alopecia, erythema, pruritus, scaling/crusting, papules/pustules, hyperpigmentation, lichenification, secondary excoriation, malodor.",
     "clinical_signs_ja": "脱毛、紅斑、掻痒、鱗屑・痂皮、丘疹・膿疱、色素沈着、苔癬化、二次的擦過傷、悪臭。",
     "diagnosis": "Diagnosis of xanthoma is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 皮膚掻爬検査 (Skin Scraping), 皮膚生検 (Skin Biopsy), 真菌培養 (Fungal Culture), 細胞診 (Cytology). Differential diagnosis should consider other conditions presenting with similar clinical signs in bird.",
-    "diagnosis_ja": "黄色腫（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 皮膚掻爬検査 (Skin Scraping), 皮膚生検 (Skin Biopsy), 真菌培養 (Fungal Culture), 細胞診 (Cytology)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。"
+    "diagnosis_ja": "黄色腫（Bird）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 皮膚掻爬検査 (Skin Scraping), 皮膚生検 (Skin Biopsy), 真菌培養 (Fungal Culture), 細胞診 (Cytology)。Birdにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "皮下の脂質沈着→黄色〜橙色の腫瘤。翼端・胸部に好発。高脂血症・肥満と関連。",
+    "causes_ja": "高脂肪食（シード食過多）、肥満、甲状腺機能低下。",
+    "prevention_ja": "バランスの取れた食事。肥満予防。"
   },
   {
     "name": "Feather Cyst",
