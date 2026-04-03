@@ -1238,6 +1238,63 @@ function renderScoringDetail(d){
   return html;
 }
 
+/* Map disease name/category to anesthesia condition tags */
+const DISEASE_ANESTHESIA_MAP={
+  /* Keywords in disease name → condition tags */
+  "cardiac":"cardiac_disease","heart":"cardiac_disease","cardiomyopathy":"cardiomyopathy",
+  "hcm":"cat_hcm","dcm":"cardiac_disease","valve":"cardiac_disease","stenosis":"cardiac_disease",
+  "arrhythmia":"cardiac_disease","bradycardia":"bradycardia",
+  "renal":"renal_disease","kidney":"renal_disease","ckd":"ckd","nephro":"renal_disease",
+  "hepatic":"hepatic_disease","liver":"hepatic_disease","lipidosis":"hepatic_lipidosis",
+  "seizure":"seizure","epilep":"epilepsy","convulsion":"seizure",
+  "gastric dilatation":"gdv","gdv":"gdv","bloat":"gdv",
+  "diabetes":"diabetes","diabetic":"diabetes","insulinoma":"insulinoma",
+  "coagulo":"coagulopathy","thrombocyto":"thrombocytopenia","dic":"dic","hemophilia":"coagulopathy",
+  "brachycephalic":"brachycephalic","短頭":"brachycephalic",
+  "laryngeal":"laryngeal_paralysis","tracheal collapse":"upper_airway_obstruction",
+  "pregnancy":"pregnancy","dystocia":"pregnancy","pyometra":"pregnancy",
+  "腎":"renal_disease","心":"cardiac_disease","肝":"hepatic_disease",
+  "てんかん":"epilepsy","痙攣":"seizure","糖尿":"diabetes",
+  "胃拡張":"gdv","妊娠":"pregnancy","難産":"pregnancy",
+};
+function renderAnesthesiaConsiderations(d){
+  if(!anesthesiaContraRules||!anesthesiaContraRules.length)return"";
+  const name=((d.name||"")+" "+(d.name_ja||"")).toLowerCase();
+  /* Find matching condition tags from disease name */
+  const tags=new Set();
+  for(const[kw,tag]of Object.entries(DISEASE_ANESTHESIA_MAP)){
+    if(name.includes(kw.toLowerCase()))tags.add(tag);
+  }
+  if(!tags.size)return"";
+  /* Check all rules against these tags + species */
+  const sp=(currentSpecies||"").toLowerCase();
+  const allTags=new Set([...tags]);
+  if(sp)allTags.add(sp);
+  const warnings=[];
+  const seen=new Set();
+  for(const rule of anesthesiaContraRules){
+    const condMatch=rule.conditions.some(c=>allTags.has(c.toLowerCase()));
+    if(!condMatch)continue;
+    const key=rule.drug_patterns[0]+"|"+rule.severity;
+    if(seen.has(key))continue;
+    seen.add(key);
+    warnings.push(rule);
+  }
+  if(!warnings.length)return"";
+  const sevColors={contraindicated:"#dc2626",caution:"#ea580c",monitor:"#ca8a04"};
+  const sevIcons={contraindicated:"⛔",caution:"⚠️",monitor:"🔍"};
+  const sevLabels={contraindicated:t("anesthesiaContraindicated"),caution:t("anesthesiaCaution"),monitor:t("anesthesiaMonitorExtra")};
+  const title=currentLang==="ja"?"🏥 この疾患の麻酔注意事項":"🏥 Anesthesia Considerations for This Condition";
+  let html=`<div class="detail-anesthesia-notes" style="margin-top:10px;padding:10px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px"><strong style="font-size:.84rem">${title}</strong><div style="margin-top:6px;display:flex;flex-direction:column;gap:4px">`;
+  warnings.slice(0,6).forEach(w=>{
+    const msg=currentLang==="ja"?(w.message_ja||w.message_en):(w.message_en||w.message_ja);
+    const drugs=w.drug_patterns.slice(0,3).join(", ");
+    const sev=w.severity;
+    html+=`<div style="font-size:.8rem;padding:4px 0;border-bottom:1px dotted #fde68a"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> <strong>${escapeHtml(drugs)}</strong>: ${escapeHtml(msg)}</div>`;
+  });
+  html+=`</div></div>`;
+  return html;
+}
 function renderMentionedDrugs(d){
   const drugs=d.mentioned_drugs;
   if(!drugs||!drugs.length)return"";
@@ -1336,6 +1393,7 @@ function renderDiseaseCard(d,data){
       ${renderScoringDetail(d)}
       ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${recTests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("")}</div></div>`:""}
       ${renderMentionedDrugs(d)}
+      ${renderAnesthesiaConsiderations(d)}
       <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>
@@ -2653,6 +2711,68 @@ function renderAnesthesiaList(){
   }
 
   if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
+}
+
+/* Print anesthesia checklist */
+function printAnesthesiaChecklist(){
+  const sp=currentSpecies||"";
+  const weightEl=document.getElementById("anesthesiaWeight");
+  const weight=weightEl?weightEl.value:"";
+  const spLabel=document.getElementById("anesthesiaSpeciesLabel");
+  const spName=spLabel?spLabel.textContent:"";
+  const now=new Date().toLocaleDateString();
+  const preopItems=t("anesthesiaPrintPreopItems").split(",");
+  const intraopItems=t("anesthesiaPrintIntraopItems").split(",");
+  const postopItems=t("anesthesiaPrintPostopItems").split(",");
+  const makeChecklist=(items)=>items.map(i=>`<div class="ck-item"><span class="ck-box">☐</span> ${escapeHtml(i.trim())}</div>`).join("");
+
+  /* Collect currently visible protocols with drugs */
+  const cat=document.getElementById("anesthesiaCategoryFilter").value;
+  let visibleProtocols=[];
+  if(anesthesiaData){
+    let prots=anesthesiaData.protocols||[];
+    if(cat)prots=prots.filter(p=>p.category===cat);
+    visibleProtocols=prots.slice(0,10);
+  }
+  let drugSummary="";
+  if(visibleProtocols.length&&weight){
+    const wKg=parseFloat(weight);
+    drugSummary=visibleProtocols.filter(p=>p.drugs&&p.drugs.length).map(p=>{
+      const pN=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
+      const rows=p.drugs.map(d=>{
+        const calc=calcDoseForWeight(d.dose,wKg);
+        const calcStr=calc?(calc.isRange?`${calc.lo}–${calc.hi} ${calc.unit}`:`${calc.lo} ${calc.unit}`):"—";
+        return`<tr><td>${escapeHtml(d.name||"")}</td><td>${escapeHtml(d.dose||"")}</td><td><strong>${calcStr}</strong></td><td>${escapeHtml(d.route||"")}</td></tr>`;
+      }).join("");
+      return`<h4 style="margin:12px 0 4px">${escapeHtml(pN)}</h4><table><thead><tr><th>Drug</th><th>Dose/kg</th><th>Calculated</th><th>Route</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }).join("");
+  }
+
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t("anesthesiaPrintTitle")}</title>
+<style>body{font-family:sans-serif;padding:20px;font-size:13px;color:#333}
+h2{text-align:center;margin-bottom:4px}h3{margin:16px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}h4{font-size:13px;color:#555}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;border:1px solid #ccc;padding:12px;border-radius:4px}
+.info-grid div{font-size:13px}.info-grid strong{display:inline-block;min-width:60px}
+.ck-item{padding:4px 0;border-bottom:1px dotted #ddd;font-size:13px}.ck-box{font-size:16px;margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}
+th{background:#f0f0f0;font-weight:600}.notes{margin-top:20px;border-top:2px solid #333;padding-top:8px}
+.notes-area{width:100%;height:80px;border:1px solid #ccc;border-radius:4px;margin-top:4px}
+@media print{body{padding:10px}}</style></head><body>
+<h2>${t("anesthesiaPrintTitle")}</h2>
+<div class="info-grid">
+<div><strong>${t("anesthesiaPrintSpecies")}:</strong> ${escapeHtml(spName||sp)}</div>
+<div><strong>${t("anesthesiaPrintWeight")}:</strong> ${escapeHtml(weight?weight+" kg":"_____ kg")}</div>
+<div><strong>${t("anesthesiaPrintDate")}:</strong> ${escapeHtml(now)}</div>
+<div><strong>ASA:</strong> ☐I ☐II ☐III ☐IV ☐V ☐E</div>
+</div>
+${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
+<h3>${t("anesthesiaPrintPreop")}</h3>${makeChecklist(preopItems)}
+<h3>${t("anesthesiaPrintIntraop")}</h3>${makeChecklist(intraopItems)}
+<h3>${t("anesthesiaPrintPostop")}</h3>${makeChecklist(postopItems)}
+<div class="notes"><h3>Notes</h3><div class="notes-area" contenteditable="true"></div></div>
+</body></html>`;
+  const win=window.open("","_blank");
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
 }
 
 /* Print anesthesia checklist */
