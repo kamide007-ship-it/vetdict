@@ -2681,6 +2681,68 @@ ${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
 }
 
+/* Print anesthesia checklist */
+function printAnesthesiaChecklist(){
+  const sp=currentSpecies||"";
+  const weightEl=document.getElementById("anesthesiaWeight");
+  const weight=weightEl?weightEl.value:"";
+  const spLabel=document.getElementById("anesthesiaSpeciesLabel");
+  const spName=spLabel?spLabel.textContent:"";
+  const now=new Date().toLocaleDateString();
+  const preopItems=t("anesthesiaPrintPreopItems").split(",");
+  const intraopItems=t("anesthesiaPrintIntraopItems").split(",");
+  const postopItems=t("anesthesiaPrintPostopItems").split(",");
+  const makeChecklist=(items)=>items.map(i=>`<div class="ck-item"><span class="ck-box">☐</span> ${escapeHtml(i.trim())}</div>`).join("");
+
+  /* Collect currently visible protocols with drugs */
+  const cat=document.getElementById("anesthesiaCategoryFilter").value;
+  let visibleProtocols=[];
+  if(anesthesiaData){
+    let prots=anesthesiaData.protocols||[];
+    if(cat)prots=prots.filter(p=>p.category===cat);
+    visibleProtocols=prots.slice(0,10);
+  }
+  let drugSummary="";
+  if(visibleProtocols.length&&weight){
+    const wKg=parseFloat(weight);
+    drugSummary=visibleProtocols.filter(p=>p.drugs&&p.drugs.length).map(p=>{
+      const pN=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
+      const rows=p.drugs.map(d=>{
+        const calc=calcDoseForWeight(d.dose,wKg);
+        const calcStr=calc?(calc.isRange?`${calc.lo}–${calc.hi} ${calc.unit}`:`${calc.lo} ${calc.unit}`):"—";
+        return`<tr><td>${escapeHtml(d.name||"")}</td><td>${escapeHtml(d.dose||"")}</td><td><strong>${calcStr}</strong></td><td>${escapeHtml(d.route||"")}</td></tr>`;
+      }).join("");
+      return`<h4 style="margin:12px 0 4px">${escapeHtml(pN)}</h4><table><thead><tr><th>Drug</th><th>Dose/kg</th><th>Calculated</th><th>Route</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }).join("");
+  }
+
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t("anesthesiaPrintTitle")}</title>
+<style>body{font-family:sans-serif;padding:20px;font-size:13px;color:#333}
+h2{text-align:center;margin-bottom:4px}h3{margin:16px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}h4{font-size:13px;color:#555}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;border:1px solid #ccc;padding:12px;border-radius:4px}
+.info-grid div{font-size:13px}.info-grid strong{display:inline-block;min-width:60px}
+.ck-item{padding:4px 0;border-bottom:1px dotted #ddd;font-size:13px}.ck-box{font-size:16px;margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}
+th{background:#f0f0f0;font-weight:600}.notes{margin-top:20px;border-top:2px solid #333;padding-top:8px}
+.notes-area{width:100%;height:80px;border:1px solid #ccc;border-radius:4px;margin-top:4px}
+@media print{body{padding:10px}}</style></head><body>
+<h2>${t("anesthesiaPrintTitle")}</h2>
+<div class="info-grid">
+<div><strong>${t("anesthesiaPrintSpecies")}:</strong> ${escapeHtml(spName||sp)}</div>
+<div><strong>${t("anesthesiaPrintWeight")}:</strong> ${escapeHtml(weight?weight+" kg":"_____ kg")}</div>
+<div><strong>${t("anesthesiaPrintDate")}:</strong> ${escapeHtml(now)}</div>
+<div><strong>ASA:</strong> ☐I ☐II ☐III ☐IV ☐V ☐E</div>
+</div>
+${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
+<h3>${t("anesthesiaPrintPreop")}</h3>${makeChecklist(preopItems)}
+<h3>${t("anesthesiaPrintIntraop")}</h3>${makeChecklist(intraopItems)}
+<h3>${t("anesthesiaPrintPostop")}</h3>${makeChecklist(postopItems)}
+<div class="notes"><h3>Notes</h3><div class="notes-area" contenteditable="true"></div></div>
+</body></html>`;
+  const win=window.open("","_blank");
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
+}
+
 /* ===== Shared helpers ===== */
 
 /* Toggle detail panel with accessibility */
