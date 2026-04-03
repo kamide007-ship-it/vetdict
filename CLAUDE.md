@@ -369,6 +369,40 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - テスト: 179件（データ構造検証、API、臨床内容品質チェック）
 - ServiceWorker: CACHE_NAME vetdict-v11→v12
 
+## 2026-04セッション（第3回）で実施した改善
+
+### 鎮静・麻酔プロトコルタブのバグ修正
+- **ボタン無反応バグ修正**: `_attachDbItemHandlers()` が `renderAnesthesiaList()` の再レンダリング毎に重複イベントリスナーをスタック → `dataset.handlersAttached` フラグで1回のみ登録
+  - 同じバグが疾患DB (`renderDiseaseDb`) と薬品辞書 (`renderDrugList`) にも存在 → 同時修正
+- **展開コンテンツ内クリックUX**: `.disease-detail.open` 内のクリックではパネルが閉じないよう修正
+  - テーブル・参考文献のテキスト選択・コピーが可能に
+  - ヘッダー行クリックのみで開閉トグル
+
+### エビデンスベース文献引用の追加
+- **全21種にspecies-level参考文献**: 100+引用（Lumb & Jones 5th ed, BSAVA Manual 3rd ed, Carpenter Formulary 6th ed 等）
+- **Protocol-level引用**:
+  - 犬: 8/11プロトコル（鎮静、前投薬、導入、維持、局所麻酔、緊急、CRI、TIVA）
+  - 猫: 7/11プロトコル（AAFP 2018, ISFM 2022, Brodbelt 2007, RECOVER CPR 等）
+  - 馬: 3/11プロトコル（CEPEF死亡率研究、覚醒・回復エビデンス）
+  - ウサギ: 2/8プロトコル（V-gel、アトロピナーゼ関連）
+  - フェレット: 1/8プロトコル（Ko & Markel 1997）
+- **フロントエンド**: プロトコル詳細内 + 種別リスト末尾に参考文献セクション表示
+- **API**: `references` フィールドをspecies-specific / all-species両パスで返却
+
+### アクセシビリティ改善
+- `#anesthesiaList` に `aria-live="polite"` 追加（検索・フィルタ結果の動的通知）
+- `#anesthesiaCategoryFilter` に `aria-label` 追加
+- 装飾用絵文字（⚖️, 🚨）に `aria-hidden="true"` 追加
+
+### モバイルCSS改善
+- 参考文献セクション（`.anesthesia-references`, `.anesthesia-ref-list`）のフォントサイズ・パディング調整
+- プロトコルノート・品種考慮セクションのモバイル最適化
+
+### テスト
+- 鎮静・麻酔テスト: 186→237件（+51件、参考文献検証テスト追加）
+- フルテストスイート: 3,054件合格
+- ServiceWorker: CACHE_NAME vetdict-v14→v15
+
 ## 次セッションへの引き継ぎ事項
 
 ### 問診モード（Guided Consultation）の検証 — ✅ 自動テスト完了

@@ -1341,6 +1341,12 @@ button.combination-item:focus-visible {
   .anesthesia-weight-calc{padding:4px 8px}
   .anesthesia-weight-input{width:65px;font-size:.82rem}
   .anesthesia-emergency-btn{padding:6px 10px;font-size:.76rem}
+  .anesthesia-references{padding:8px 10px}
+  .anesthesia-references ul{font-size:.66rem;padding-left:12px}
+  .anesthesia-ref-list{font-size:.68rem;padding-left:12px}
+  .anesthesia-notes{font-size:.76rem}
+  .anesthesia-breed-section{padding:10px}
+  .anesthesia-breed-item p{font-size:.72rem}
   .anesthesia-print-btn{padding:6px 10px;font-size:.76rem}
   .anesthesia-asa-filter{padding:6px 8px;font-size:.76rem;min-width:70px}
 }
