@@ -1318,6 +1318,8 @@ button.combination-item:focus-visible {
 .anesthesia-asa-filter{padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.82rem;background:var(--white);cursor:pointer;min-width:90px}
 .anesthesia-print-btn{display:flex;align-items:center;gap:4px;padding:8px 14px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:2px solid #7dd3fc;border-radius:var(--radius);font-size:.82rem;font-weight:700;color:#0c4a6e;cursor:pointer;white-space:nowrap;transition:all .15s}
 .anesthesia-print-btn:hover{background:linear-gradient(135deg,#e0f2fe,#bae6fd);border-color:#38bdf8;transform:translateY(-1px)}
+.anesthesia-contra-row td{background:#fef2f2!important;border-left:3px solid #dc2626;font-size:.78rem;color:#991b1b;padding:6px 10px!important}
+.anesthesia-contra-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.72rem;font-weight:700;color:#fff;margin-right:6px;vertical-align:middle}
 /* Print styles */
 @media print{
   .header,.hero,.species-section,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}

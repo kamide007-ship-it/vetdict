@@ -102,6 +102,7 @@ const I18N={
     anesthesiaPrintPostopItems:"抜管タイミング確認,体温モニタリング,疼痛評価,覚醒状態確認,飲水・食事再開時期",
     anesthesiaAsaFilter:"ASA分類",anesthesiaAsaAll:"全ASA",
     anesthesiaSafetyTitle:"安全性情報",
+    anesthesiaContraindicated:"禁忌",anesthesiaCaution:"慎重投与",anesthesiaMonitorExtra:"要モニタリング",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
     allCategories:"全カテゴリ",allSpecies:"全動物種",
     sponsorTagline:"獣医師が考案・国内製造 — 競走馬理化学研究所の検査合格",
@@ -201,6 +202,7 @@ const I18N={
     anesthesiaPrintPostopItems:"Extubation timing confirmed,Temperature monitoring,Pain assessment,Recovery status,Water/food resumption timing",
     anesthesiaAsaFilter:"ASA Class",anesthesiaAsaAll:"All ASA",
     anesthesiaSafetyTitle:"Safety Information",
+    anesthesiaContraindicated:"Contraindicated",anesthesiaCaution:"Use with Caution",anesthesiaMonitorExtra:"Extra Monitoring",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
     allCategories:"All Categories",allSpecies:"All Species",
     sponsorTagline:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
@@ -2391,7 +2393,7 @@ function renderDrugList(){
 }
 
 /* ===== Anesthesia Protocols ===== */
-let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={},anesthesiaAsaData=null;
+let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={},anesthesiaAsaData=null,anesthesiaContraRules=null;
 
 function loadAnesthesiaProtocols(){
   const list=document.getElementById("anesthesiaList");
@@ -2410,6 +2412,8 @@ function loadAnesthesiaProtocols(){
   }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
   /* Fetch ASA classification */
   fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
+  /* Fetch contraindication rules */
+  fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(()=>{});
   document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
   document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
   /* Weight-based dose calculator */
@@ -2490,6 +2494,24 @@ function calcDoseForWeight(doseStr,weightKg){
 }
 function roundDose(v){return v>=10?Math.round(v*10)/10:v>=1?Math.round(v*100)/100:Math.round(v*1000)/1000;}
 
+/* Check contraindications for a drug against current species/breed */
+function checkDrugContra(drugName){
+  if(!anesthesiaContraRules||!drugName)return[];
+  const dn=drugName.toLowerCase();
+  const sp=(currentSpecies||"").toLowerCase();
+  const breed=(document.getElementById("breedSelect")||{}).value||"";
+  const tags=new Set();
+  if(sp)tags.add(sp);
+  if(breed)tags.add(breed.toLowerCase());
+  /* Add common species aliases */
+  const spMap={dog:"canine",cat:"feline",horse:"equine",rabbit:"rabbit",hamster:"hamster",ferret:"ferret"};
+  if(spMap[sp])tags.add(spMap[sp]);
+  return anesthesiaContraRules.filter(r=>{
+    const drugMatch=r.drug_patterns.some(p=>dn.includes(p.toLowerCase()));
+    if(!drugMatch)return false;
+    return r.conditions.some(c=>tags.has(c.toLowerCase()));
+  });
+}
 function renderAnesthesiaList(){
   const list=document.getElementById("anesthesiaList");
   const search=(document.getElementById("anesthesiaSearch").value||"").toLowerCase();
@@ -2552,7 +2574,21 @@ function renderAnesthesiaList(){
             } else { calcCell=`<td><span style="color:var(--gray-400);font-size:.76rem">—</span></td>`; }
           }
           const cols=hasCalc?6:5;
+          /* Check contraindications */
+          const contras=checkDrugContra(d.name||"");
+          let contraHtml="";
+          if(contras.length){
+            const sevLabels={contraindicated:t("anesthesiaContraindicated"),caution:t("anesthesiaCaution"),monitor:t("anesthesiaMonitorExtra")};
+            const sevColors={contraindicated:"#dc2626",caution:"#ea580c",monitor:"#ca8a04"};
+            const sevIcons={contraindicated:"⛔",caution:"⚠️",monitor:"🔍"};
+            contraHtml=contras.map(c=>{
+              const msg=currentLang==="ja"?(c.message_ja||c.message_en):(c.message_en||c.message_ja);
+              const sev=c.severity||"caution";
+              return`<tr class="anesthesia-contra-row"><td colspan="${cols}"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> ${escapeHtml(msg)}</td></tr>`;
+            }).join("");
+          }
           return`<tr><td><strong>${escapeHtml(d.name||"")}</strong><br/><span class="d-name-ja">${escapeHtml(d.name_ja||"")}</span></td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
+          +contraHtml
           +(dNotes?`<tr class="anesthesia-drug-note"><td colspan="${cols}">${escapeHtml(dNotes)}</td></tr>`:"");
         }).join("")
         +`</tbody></table></div>`;
