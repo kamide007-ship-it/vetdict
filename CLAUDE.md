@@ -34,7 +34,7 @@ api/
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
   anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 182プロトコル)
   anesthesia_api.py       — 鎮静・麻酔API Blueprint (4エンドポイント)
-  anesthesia_contraindications.py — 薬品-疾患禁忌ルール (24ルール, check_contraindications())
+  anesthesia_contraindications.py — 薬品-疾患禁忌ルール (31ルール, check_contraindications())
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
   species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種)
   paypal_api.py           — PayPalサブスク + waitlist + メール復元
