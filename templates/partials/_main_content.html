@@ -188,6 +188,15 @@
             <button type="button" id="anesthesiaWeightClear" class="anesthesia-weight-clear" aria-label="Clear weight" title="Clear">&times;</button>
           </div>
           <button type="button" id="anesthesiaEmergencyBtn" class="anesthesia-emergency-btn" aria-label="Emergency protocols">🚨 <span data-i18n="anesthesiaEmergency">緊急プロトコル</span></button>
+          <select id="anesthesiaAsaFilter" class="anesthesia-asa-filter" aria-label="ASA classification filter">
+            <option value="" data-i18n="anesthesiaAsaAll">全ASA</option>
+            <option value="I">ASA I</option>
+            <option value="II">ASA II</option>
+            <option value="III">ASA III</option>
+            <option value="IV">ASA IV</option>
+            <option value="V">ASA V</option>
+          </select>
+          <button type="button" id="anesthesiaPrintBtn" class="anesthesia-print-btn" aria-label="Print checklist">🖨️ <span data-i18n="anesthesiaPrint">麻酔チェックリスト印刷</span></button>
         </div>
         <div id="anesthesiaSpeciesLabel" style="font-size:.82rem;color:var(--gray-500);margin-bottom:8px"></div>
         <div id="anesthesiaOverview" class="anesthesia-overview" style="display:none"></div>

@@ -1315,9 +1315,12 @@ button.combination-item:focus-visible {
 .anesthesia-emergency-btn{display:flex;align-items:center;gap:4px;padding:8px 14px;background:linear-gradient(135deg,#fef2f2,#fee2e2);border:2px solid #fca5a5;border-radius:var(--radius);font-size:.82rem;font-weight:700;color:#991b1b;cursor:pointer;white-space:nowrap;transition:all .15s}
 .anesthesia-emergency-btn:hover{background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#f87171;transform:translateY(-1px)}
 .anesthesia-emergency-btn.active{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;border-color:#991b1b}
+.anesthesia-asa-filter{padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.82rem;background:var(--white);cursor:pointer;min-width:90px}
+.anesthesia-print-btn{display:flex;align-items:center;gap:4px;padding:8px 14px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:2px solid #7dd3fc;border-radius:var(--radius);font-size:.82rem;font-weight:700;color:#0c4a6e;cursor:pointer;white-space:nowrap;transition:all .15s}
+.anesthesia-print-btn:hover{background:linear-gradient(135deg,#e0f2fe,#bae6fd);border-color:#38bdf8;transform:translateY(-1px)}
 /* Print styles */
 @media print{
-  .header,.hero,.species-section,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  .header,.hero,.species-section,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
   #viewAnesthesia{display:block!important;position:static!important}
   .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
   .disease-db-item .disease-detail{display:block!important;max-height:none!important}
@@ -1332,4 +1335,6 @@ button.combination-item:focus-visible {
   .anesthesia-weight-calc{padding:4px 8px}
   .anesthesia-weight-input{width:65px;font-size:.82rem}
   .anesthesia-emergency-btn{padding:6px 10px;font-size:.76rem}
+  .anesthesia-print-btn{padding:6px 10px;font-size:.76rem}
+  .anesthesia-asa-filter{padding:6px 8px;font-size:.76rem;min-width:70px}
 }
