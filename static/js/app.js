@@ -1238,6 +1238,63 @@ function renderScoringDetail(d){
   return html;
 }
 
+/* Map disease name/category to anesthesia condition tags */
+const DISEASE_ANESTHESIA_MAP={
+  /* Keywords in disease name → condition tags */
+  "cardiac":"cardiac_disease","heart":"cardiac_disease","cardiomyopathy":"cardiomyopathy",
+  "hcm":"cat_hcm","dcm":"cardiac_disease","valve":"cardiac_disease","stenosis":"cardiac_disease",
+  "arrhythmia":"cardiac_disease","bradycardia":"bradycardia",
+  "renal":"renal_disease","kidney":"renal_disease","ckd":"ckd","nephro":"renal_disease",
+  "hepatic":"hepatic_disease","liver":"hepatic_disease","lipidosis":"hepatic_lipidosis",
+  "seizure":"seizure","epilep":"epilepsy","convulsion":"seizure",
+  "gastric dilatation":"gdv","gdv":"gdv","bloat":"gdv",
+  "diabetes":"diabetes","diabetic":"diabetes","insulinoma":"insulinoma",
+  "coagulo":"coagulopathy","thrombocyto":"thrombocytopenia","dic":"dic","hemophilia":"coagulopathy",
+  "brachycephalic":"brachycephalic","短頭":"brachycephalic",
+  "laryngeal":"laryngeal_paralysis","tracheal collapse":"upper_airway_obstruction",
+  "pregnancy":"pregnancy","dystocia":"pregnancy","pyometra":"pregnancy",
+  "腎":"renal_disease","心":"cardiac_disease","肝":"hepatic_disease",
+  "てんかん":"epilepsy","痙攣":"seizure","糖尿":"diabetes",
+  "胃拡張":"gdv","妊娠":"pregnancy","難産":"pregnancy",
+};
+function renderAnesthesiaConsiderations(d){
+  if(!anesthesiaContraRules||!anesthesiaContraRules.length)return"";
+  const name=((d.name||"")+" "+(d.name_ja||"")).toLowerCase();
+  /* Find matching condition tags from disease name */
+  const tags=new Set();
+  for(const[kw,tag]of Object.entries(DISEASE_ANESTHESIA_MAP)){
+    if(name.includes(kw.toLowerCase()))tags.add(tag);
+  }
+  if(!tags.size)return"";
+  /* Check all rules against these tags + species */
+  const sp=(currentSpecies||"").toLowerCase();
+  const allTags=new Set([...tags]);
+  if(sp)allTags.add(sp);
+  const warnings=[];
+  const seen=new Set();
+  for(const rule of anesthesiaContraRules){
+    const condMatch=rule.conditions.some(c=>allTags.has(c.toLowerCase()));
+    if(!condMatch)continue;
+    const key=rule.drug_patterns[0]+"|"+rule.severity;
+    if(seen.has(key))continue;
+    seen.add(key);
+    warnings.push(rule);
+  }
+  if(!warnings.length)return"";
+  const sevColors={contraindicated:"#dc2626",caution:"#ea580c",monitor:"#ca8a04"};
+  const sevIcons={contraindicated:"⛔",caution:"⚠️",monitor:"🔍"};
+  const sevLabels={contraindicated:t("anesthesiaContraindicated"),caution:t("anesthesiaCaution"),monitor:t("anesthesiaMonitorExtra")};
+  const title=currentLang==="ja"?"🏥 この疾患の麻酔注意事項":"🏥 Anesthesia Considerations for This Condition";
+  let html=`<div class="detail-anesthesia-notes" style="margin-top:10px;padding:10px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px"><strong style="font-size:.84rem">${title}</strong><div style="margin-top:6px;display:flex;flex-direction:column;gap:4px">`;
+  warnings.slice(0,6).forEach(w=>{
+    const msg=currentLang==="ja"?(w.message_ja||w.message_en):(w.message_en||w.message_ja);
+    const drugs=w.drug_patterns.slice(0,3).join(", ");
+    const sev=w.severity;
+    html+=`<div style="font-size:.8rem;padding:4px 0;border-bottom:1px dotted #fde68a"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> <strong>${escapeHtml(drugs)}</strong>: ${escapeHtml(msg)}</div>`;
+  });
+  html+=`</div></div>`;
+  return html;
+}
 function renderMentionedDrugs(d){
   const drugs=d.mentioned_drugs;
   if(!drugs||!drugs.length)return"";
@@ -1336,6 +1393,7 @@ function renderDiseaseCard(d,data){
       ${renderScoringDetail(d)}
       ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${recTests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("")}</div></div>`:""}
       ${renderMentionedDrugs(d)}
+      ${renderAnesthesiaConsiderations(d)}
       <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
     </div>
