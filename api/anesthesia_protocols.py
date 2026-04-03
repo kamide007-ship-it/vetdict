@@ -1997,7 +1997,7 @@ ANESTHESIA_PROTOCOLS["reptile"] = {
             "risk_level": "moderate",
             "drugs": [
                 {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "5-15 mg/kg", "route": "IV/IM/SC", "onset": "5-15 min (IM)", "duration": "30-90 min",
-                 "notes_ja": "爬虫類で最も推奨される注射麻酔薬。IV投与は腹側尾静脈から。IM投与も有効。", "notes": "Most recommended injectable anesthetic for reptiles. IV via ventral tail vein. IM also effective."},
+                 "notes_ja": "爬虫類で最も推奨される注射麻酔薬。特に小〜中型個体では第一選択。安全域が広く、用量依存的に鎮静→全身麻酔が得られる。IV投与は腹側尾静脈から。IM投与も有効だが効果発現に時間を要する。大型個体では必要薬液量が多くなる点に注意。", "notes": "Most recommended injectable anesthetic for reptiles. First choice for small-to-medium sized individuals due to wide safety margin and dose-dependent sedation-to-GA effect. IV via ventral tail vein. IM also effective but slower onset. Note: large individuals may require high drug volumes."},
                 {"name": "Ketamine + Midazolam", "name_ja": "ケタミン＋ミダゾラム", "dose": "5-30 mg/kg + 0.5-2 mg/kg", "route": "IM", "onset": "10-30 min", "duration": "30-120 min",
                  "notes_ja": "効果発現が遅い。覚醒も遅延する。", "notes": "Slow onset. Recovery also prolonged."},
                 {"name": "Dexmedetomidine + Ketamine + Midazolam", "name_ja": "デクスメデトミジン＋ケタミン＋ミダゾラム", "dose": "50-100 μg/kg + 5-10 mg/kg + 0.5-1 mg/kg", "route": "IM", "onset": "10-20 min", "duration": "60-120 min",
@@ -2115,7 +2115,7 @@ ANESTHESIA_PROTOCOLS["tortoise"] = {
             "risk_level": "moderate",
             "drugs": [
                 {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "10-15 mg/kg", "route": "IM (forelimb) / IV (jugular)", "onset": "10-30 min (IM)", "duration": "30-90 min",
-                 "notes_ja": "前肢筋肉内注射。頸静脈からのIVも可能だが確保困難。効果発現まで忍耐が必要。", "notes": "IM into forelimb. IV via jugular possible but access is difficult. Patience needed for onset."},
+                 "notes_ja": "リクガメで最も推奨される注射麻酔薬。小〜中型個体では第一選択。前肢筋肉内注射。頸静脈からのIVも可能だが確保困難。効果発現まで忍耐が必要（20-30分かかることも）。", "notes": "Most recommended injectable for tortoises. First choice for small-to-medium individuals. IM into forelimb. IV via jugular possible but access difficult. Patience needed for onset (may take 20-30 min)."},
                 {"name": "Ketamine + Medetomidine", "name_ja": "ケタミン＋メデトミジン", "dose": "10-20 mg/kg + 0.1-0.15 mg/kg", "route": "IM", "onset": "15-30 min", "duration": "60-120 min",
                  "notes_ja": "深い鎮静。アティパメゾールで部分拮抗。四肢を甲羅から引き出すのに十分な筋弛緩。", "notes": "Deep sedation. Partially reversible with atipamezole. Sufficient muscle relaxation to extend limbs from shell."},
                 {"name": "Isoflurane (maintenance)", "name_ja": "イソフルラン（維持）", "dose": "1-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
@@ -2230,7 +2230,7 @@ ANESTHESIA_PROTOCOLS["snake"] = {
             "risk_level": "moderate",
             "drugs": [
                 {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "5-15 mg/kg", "route": "IV (ventral tail vein) / IM", "onset": "5-15 min", "duration": "30-90 min",
-                 "notes_ja": "腹側尾静脈からIV。IM投与は前半身の筋肉に。", "notes": "IV via ventral tail vein. IM into cranial body musculature."},
+                 "notes_ja": "ヘビで最も推奨される注射麻酔薬。小〜中型個体では第一選択。腹側尾静脈からIV。IM投与は前半身（体長の前1/3-1/2）の筋肉に。", "notes": "Most recommended injectable for snakes. First choice for small-to-medium individuals. IV via ventral tail vein. IM into cranial body musculature (first 1/3 to 1/2 of body length)."},
                 {"name": "Ketamine + Midazolam", "name_ja": "ケタミン＋ミダゾラム", "dose": "10-20 mg/kg + 1-2 mg/kg", "route": "IM", "onset": "15-30 min", "duration": "60-120 min",
                  "notes_ja": "IM注射は前1/3の体幹筋に。", "notes": "IM injection into cranial 1/3 of body musculature."},
                 {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "Maintenance: 1-3%", "route": "ET tube", "onset": "", "duration": "Continuous",
@@ -2341,7 +2341,7 @@ ANESTHESIA_PROTOCOLS["lizard"] = {
             "risk_level": "moderate",
             "drugs": [
                 {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "5-15 mg/kg", "route": "IV/IM", "onset": "5-15 min (IM)", "duration": "30-60 min",
-                 "notes_ja": "IV: 腹側尾静脈。IM: 前肢。爬虫類で最も推奨。", "notes": "IV: ventral tail vein. IM: forelimb. Most recommended for reptiles."},
+                 "notes_ja": "トカゲで最も推奨される注射麻酔薬。小〜中型個体では第一選択。安全域が広く用量調整しやすい。IV: 腹側尾静脈。IM: 前肢。大型個体では必要薬液量に注意。", "notes": "Most recommended injectable for lizards. First choice for small-to-medium individuals. Wide safety margin, easy to titrate. IV: ventral tail vein. IM: forelimb. Note drug volume in large individuals."},
                 {"name": "Ketamine + Medetomidine", "name_ja": "ケタミン＋メデトミジン", "dose": "10-20 mg/kg + 0.1-0.15 mg/kg", "route": "IM", "onset": "10-20 min", "duration": "60-120 min",
                  "notes_ja": "部分拮抗可。前肢に注射。", "notes": "Partially reversible. Inject into forelimb."},
                 {"name": "Isoflurane", "name_ja": "イソフルラン", "dose": "Maintenance: 1-3%", "route": "Mask / ET tube", "onset": "", "duration": "Continuous",
@@ -2535,8 +2535,8 @@ ANESTHESIA_PROTOCOLS["amphibian"] = {
 ANESTHESIA_PROTOCOLS["fish"] = {
     "species_name": {"ja": "魚", "en": "Fish"},
     "overview": {
-        "ja": "魚の麻酔は水中浸漬法で行う。MS-222（トリカイン）が最も一般的。麻酔深度は4段階（Stage I-IV）で評価。水温・pH・種によって効果が異なる。観賞魚では手術（腫瘤切除、浮袋手術等）が増加している。",
-        "en": "Fish anesthesia is performed via immersion. MS-222 (tricaine) is most common. Depth assessed in 4 stages (I-IV). Effects vary with water temperature, pH, and species. Surgical procedures (mass removal, swim bladder surgery) are increasing in pet fish.",
+        "ja": "魚の麻酔は水中浸漬法で行う。MS-222（トリカイン）が国際的に標準だが国内では高価なため、2-フェノキシエタノールやオイゲノールが実用的な代替薬。麻酔深度は4段階（Stage I-IV）で評価。水温・pH・種によって効果が異なる。観賞魚では手術（腫瘤切除、浮袋手術等）が増加している。",
+        "en": "Fish anesthesia is performed via immersion. MS-222 (tricaine) is the international standard but expensive in Japan; 2-phenoxyethanol and eugenol are practical alternatives. Depth assessed in 4 stages (I-IV). Effects vary with water temperature, pH, and species. Surgical procedures (mass removal, swim bladder surgery) are increasing in pet fish.",
     },
     "fasting": {
         "ja": "24-48時間絶食（水質維持と消化管排出のため）。",
@@ -2549,7 +2549,9 @@ ANESTHESIA_PROTOCOLS["fish"] = {
             "risk_level": "low",
             "drugs": [
                 {"name": "MS-222 (low dose)", "name_ja": "MS-222（低用量）", "dose": "25-50 mg/L (buffered)", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
-                 "notes_ja": "低用量で鎮静（Stage I）。遊泳活動低下、刺激に反応あり。輸送、体重測定、写真撮影、表面処置に。", "notes": "Low dose sedation (Stage I). Reduced swimming, responds to stimuli. For transport, weighing, photography, surface procedures."},
+                 "notes_ja": "低用量で鎮静（Stage I）。遊泳活動低下、刺激に反応あり。輸送、体重測定、写真撮影、表面処置に。国内では高価。", "notes": "Low dose sedation (Stage I). Reduced swimming, responds to stimuli. For transport, weighing, photography, surface procedures."},
+                {"name": "2-Phenoxyethanol (low dose)", "name_ja": "2-フェノキシエタノール（低用量）", "dose": "0.1-0.3 mL/L", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
+                 "notes_ja": "MS-222の実用的代替。国内ではMS-222より安価で入手しやすい。低用量で鎮静（Stage I）。淡水魚・海水魚ともに使用可能。", "notes": "Practical alternative to MS-222. More affordable and accessible in Japan. Low dose for Stage I sedation. Effective in both freshwater and marine fish."},
                 {"name": "Eugenol (low dose)", "name_ja": "オイゲノール（低用量）", "dose": "20-40 mg/L", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
                  "notes_ja": "低用量で鎮静。安価で入手しやすい。", "notes": "Low dose sedation. Inexpensive and accessible."},
             ],
@@ -2566,7 +2568,7 @@ ANESTHESIA_PROTOCOLS["fish"] = {
                 {"name": "Eugenol (Clove oil)", "name_ja": "オイゲノール（クローブオイル）", "dose": "40-100 mg/L", "route": "Immersion", "onset": "3-10 min", "duration": "Until removed",
                  "notes_ja": "エタノールに溶解して使用。安価で入手しやすい。鎮静: 40 mg/L、外科: 60-100 mg/L。", "notes": "Dissolve in ethanol before use. Inexpensive and accessible. Sedation: 40 mg/L, surgical: 60-100 mg/L."},
                 {"name": "2-Phenoxyethanol", "name_ja": "2-フェノキシエタノール", "dose": "0.2-0.5 mL/L", "route": "Immersion", "onset": "3-5 min", "duration": "Until removed",
-                 "notes_ja": "MS-222の代替。一部の種で有効性が高い。", "notes": "Alternative to MS-222. More effective in some species."},
+                 "notes_ja": "MS-222の実用的代替薬。国内ではMS-222が高価なため、コストパフォーマンスに優れる。鎮静: 0.2 mL/L、外科麻酔: 0.3-0.5 mL/L。淡水魚・海水魚ともに使用可能。安全域が比較的広い。", "notes": "Practical alternative to MS-222. More cost-effective, especially in Japan where MS-222 is expensive. Sedation: 0.2 mL/L, surgical: 0.3-0.5 mL/L. Effective in freshwater and marine fish. Relatively wide safety margin."},
             ],
             "notes_ja": "麻酔水は飼育水と同じ水温・pHを使用。酸素供給のためエアレーション。鰓蓋の動き（opercular movement）で麻酔深度を評価。",
             "notes": "Use anesthetic water at same temperature/pH as housing water. Aerate for oxygen. Assess depth by opercular (gill cover) movement.",
