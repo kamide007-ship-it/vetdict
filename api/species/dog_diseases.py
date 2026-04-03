@@ -373,7 +373,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An endocrine disorder with excess thyroid hormone "
                        "production, causing increased metabolism.",
         "description_ja": "甲状腺ホルモンの過剰産生により代謝が亢進する内分泌疾患です。",
-        "urgency": "normal",
+                "pathophysiology_ja": "甲状腺ホルモン（T4）の過剰産生→代謝亢進→体重減少・頻脈・多飲多尿。犬では非常に稀（猫とは対照的）。犬で発症する場合は甲状腺癌が原因であることが多い。",
+        "causes_ja": "機能性甲状腺癌（犬で最多の原因）。犬の特発性甲状腺機能亢進症は極めて稀。甲状腺補充療法の過量投与（医原性）。",
+        "prevention_ja": "甲状腺補充療法中の定期的T4測定。甲状腺腫瘤の早期精査。",
+"urgency": "normal",
     },
     {
         "name": "Cushing's Disease",
@@ -978,7 +981,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Enlargement or infection of the prostate gland "
                        "affecting urination and defecation.",
         "description_ja": "前立腺の肥大や感染により、排尿や排便に影響を与えます。",
-        "urgency": "normal",
+                "pathophysiology_ja": "テストステロン依存性の前立腺過形成→肥大→嚢胞化→感染→膿瘍。未去勢雄犬の6歳以上で80%以上にBPH。前立腺癌は去勢の有無に関係なく発症。",
+        "causes_ja": "BPH（最多、テストステロン依存性）、前立腺炎、前立腺嚢胞、前立腺癌。未去勢雄犬に好発。",
+        "prevention_ja": "去勢手術（BPH予防に最も有効）。定期的な直腸検査。",
+"urgency": "normal",
     },
     {
         "name": "Mange (Demodex/Sarcoptes)",
@@ -999,7 +1005,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A contagious fungal skin infection causing circular "
                        "patches of hair loss and scaling.",
         "description_ja": "円形の脱毛斑と鱗屑を引き起こす伝染性の真菌性皮膚感染症です。",
-        "urgency": "normal",
+                "pathophysiology_ja": "Microsporum canis/Trichophyton属の皮膚感染→ケラチン溶解→円形脱毛・鱗屑・痂皮。人獣共通感染症。犬では若齢・免疫抑制犬に多い。",
+        "causes_ja": "M. canis（最多）。感染動物との接触。免疫抑制犬にリスク。ウッドランプでM. canisの50%が蛍光。",
+        "prevention_ja": "感染動物の隔離。イトラコナゾール（5mg/kg/日、6〜8週間）。環境の徹底消毒。",
+"urgency": "normal",
     },
     {
         "name": "Cancer/Neoplasia",
@@ -1009,7 +1018,10 @@ DISEASES: List[Dict[str, Any]] = [
                        "benign or malignant, potentially spreading to other "
                        "organs.",
         "description_ja": "異常な細胞増殖により腫瘍を形成し、良性または悪性の場合があります。",
-        "urgency": "normal",
+                "pathophysiology_ja": "遺伝子変異の蓄積→制御不能な細胞増殖→良性/悪性腫瘍。犬の腫瘍はヒトと類似の生物学的挙動を示す。犬の死因の約50%が腫瘍関連。",
+        "causes_ja": "多因子性（遺伝的素因・環境因子・加齢）。好発犬種：ゴールデン（リンパ腫・血管肉腫）、ボクサー（肥満細胞腫）、バーニーズ（組織球肉腫）。",
+        "prevention_ja": "定期的健康診断。しこりの早期FNA。好発犬種の健康スクリーニング。",
+"urgency": "normal",
     },
     {
         "name": "Immune-Mediated Hemolytic Anemia",
@@ -1101,7 +1113,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A highly contagious respiratory virus (H3N2/H3N8) "
                        "causing persistent cough, nasal discharge, and fever.",
         "description_ja": "高い伝染性を持つ呼吸器ウイルス（H3N2/H3N8）で、持続する咳・鼻汁・発熱を引き起こします。",
-        "urgency": "normal",
+                "pathophysiology_ja": "犬インフルエンザウイルス（H3N8/H3N2）の経気道感染→気管支上皮の破壊→咳嗽・鼻汁。ほとんどが軽症だが5〜8%で重症肺炎。致死率<10%。",
+        "causes_ja": "CIV H3N8（馬由来）、H3N2（鳥由来、韓国→米国）。高伝染性（感染犬の80%が感染）。ドッグパーク・ペットホテルで集団発生。",
+        "prevention_ja": "CIVワクチン（H3N2/H3N8二価、集団飼育犬に推奨）。感染犬の4週間の隔離。",
+"urgency": "normal",
     },
     {
         "name": "Leptospirosis",
@@ -1151,7 +1166,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An intestinal parasitic infection caused by Giardia "
                        "protozoa, leading to chronic diarrhea.",
         "description_ja": "ジアルジア原虫による腸管寄生虫感染症で、慢性下痢を引き起こします。",
-        "urgency": "normal",
+                "pathophysiology_ja": "Giardia duodenalisの小腸粘膜定着→絨毛の微絨毛障害→吸収不良→間欠的軟便〜水様下痢。嚢子形態で環境中に排出・長期生存。",
+        "causes_ja": "G. duodenalis。糞口感染。汚染水・環境から嚢子を摂取。犬の保菌率は5〜15%。子犬・多頭飼育環境に多い。人獣共通（遺伝子型による）。",
+        "prevention_ja": "フェンベンダゾール（50mg/kg/日、3〜5日間）。環境の清掃・消毒。四級アンモニウム化合物が有効。",
+"urgency": "normal",
     },
     {
         "name": "Ehrlichiosis",
@@ -1209,7 +1227,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An enteric coronavirus causing mild to moderate "
                        "gastrointestinal illness, primarily in puppies.",
         "description_ja": "子犬に多い腸管コロナウイルスで、軽度〜中等度の消化器症状を引き起こします。",
-        "urgency": "normal",
+                "pathophysiology_ja": "犬腸管コロナウイルス（CCoV）の経口感染→小腸絨毛上皮の破壊→軽度〜中等度の下痢。通常自己限定性。パルボウイルスとの混合感染で重症化。",
+        "causes_ja": "CCoV（アルファコロナウイルス）。糞口感染。子犬に多い。成犬では無症状〜軽症。パルボウイルスとの混合感染が臨床的に重要。",
+        "prevention_ja": "環境衛生。ワクチンは存在するがコアワクチンには含まれない（AAHAでは非推奨）。支持療法。",
+"urgency": "normal",
     },
     # ---- Digestive ----
     {
@@ -1365,7 +1386,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Congenital narrowing of the pulmonic valve, restricting "
                        "blood flow to the lungs.",
         "description_ja": "肺動脈弁の先天性狭窄により、肺への血流が制限されます。",
-        "urgency": "normal",
+                "pathophysiology_ja": "肺動脈弁の先天性狭窄→右室流出路閉塞→右室圧負荷→右室求心性肥大。軽度は無症状、重度は失神・運動不耐性。犬で3番目に多い先天性心疾患。",
+        "causes_ja": "先天性。ブルドッグ（弁下型）、ビーグル、ボクサー、コッカースパニエルに好発。",
+        "prevention_ja": "好発犬種の心臓聴診スクリーニング。重度はバルーン弁形成術。",
+"urgency": "normal",
     },
     {
         "name": "Pericardial Effusion",
@@ -1401,7 +1425,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An immune-mediated inflammatory disease targeting the "
                        "sebaceous glands, causing scaling and hair loss.",
         "description_ja": "脂腺を標的とする免疫介在性炎症疾患で、鱗屑と脱毛を引き起こします。",
-        "urgency": "normal",
+                "pathophysiology_ja": "脂腺を標的とする免疫介在性炎症→脂腺の破壊→皮膚の乾燥・鱗屑・脱毛。毛包への脂質供給途絶→被毛の脆弱化・断裂。標準プードル・秋田犬に好発。",
+        "causes_ja": "免疫介在性。標準プードル（常染色体劣性遺伝の疑い）・秋田犬・ビズラ・サモエドに好発。皮膚生検で脂腺の消失＋肉芽腫性炎症を確認。",
+        "prevention_ja": "好発犬種の繁殖管理。シクロスポリン＋オイルバス（局所保湿）で管理。",
+"urgency": "normal",
     },
     {
         "name": "Pemphigus",
@@ -1411,7 +1438,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "An autoimmune skin disease causing blisters and "
                        "erosions on the skin and mucous membranes.",
         "description_ja": "皮膚や粘膜に水疱とびらんを生じる自己免疫性皮膚疾患です。",
-        "urgency": "normal",
+                "pathophysiology_ja": "表皮細胞間接着蛋白（デスモグレイン）に対する自己抗体→棘融解→表皮内水疱・膿疱形成。落葉状天疱瘡（PF、犬で最多）と尋常性天疱瘡（PV、重症型）に分類。",
+        "causes_ja": "一次性（特発性自己免疫性）。薬剤誘発性（トリメトプリム・サルファ等）。PF：秋田犬・チャウチャウに好発。PV：全犬種。",
+        "prevention_ja": "確実な予防法はない。免疫抑制療法（プレドニゾロン＋アザチオプリン）。生涯管理が必要。",
+"urgency": "normal",
     },
     {
         "name": "Alopecia X",
@@ -1533,7 +1563,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Avascular necrosis of the femoral head in small-breed "
                        "puppies, causing hip pain and lameness.",
         "description_ja": "小型犬の子犬に見られる大腿骨頭の無腐性壊死で、股関節の痛みと跛行を引き起こします。",
-        "urgency": "normal",
+                "pathophysiology_ja": "大腿骨頭への血液供給障害→無腐性壊死→大腿骨頭の崩壊・変形→二次性変形性関節症→股関節痛・跛行。小型犬の子犬（4〜11ヶ月齢）に好発。",
+        "causes_ja": "血管閉塞による大腿骨頭の虚血性壊死。原因不明だが遺伝的素因。トイプードル・ミニチュアピンシャー・ヨークシャーテリア・WHWT。",
+        "prevention_ja": "好発犬種の繁殖管理。大腿骨頭切除術（FHO）で疼痛管理。リハビリテーション。",
+"urgency": "normal",
     },
     {
         "name": "Osteochondritis Dissecans (OCD)",
@@ -1543,7 +1576,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "A joint disorder where cartilage separates from the "
                        "underlying bone, common in fast-growing large breeds.",
         "description_ja": "軟骨が骨から剥離する関節疾患で、急速に成長する大型犬に多いです。",
-        "urgency": "normal",
+                "pathophysiology_ja": "成長板の軟骨内骨化障害→軟骨の異常肥厚→深部軟骨の虚血性壊死→軟骨フラップの離断→遊離体→関節炎。肩（最多）・肘・膝・飛節に発生。",
+        "causes_ja": "急速な成長＋過剰栄養（高Ca食）が誘因。大型犬の若齢（4〜8ヶ月齢）。ラブラドール・ゴールデン・グレートデーンに好発。",
+        "prevention_ja": "大型犬子犬の適正な成長速度管理（過剰栄養の回避）。関節鏡でのフラップ除去。",
+"urgency": "normal",
     },
     {
         "name": "Panosteitis",
@@ -1566,7 +1602,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Painful bone disease of rapidly growing large-breed "
                        "puppies, causing swelling near joints.",
         "description_ja": "急速に成長する大型犬の子犬に見られる骨疾患で、関節付近の腫脹を引き起こします。",
-        "urgency": "normal",
+                "pathophysiology_ja": "長骨の骨端線近位の壊死性炎症→新生骨の不規則沈着。X線で二重線（double physis line）。高熱・重度骨痛を伴う。通常自己限定的だが重症型は致死的。",
+        "causes_ja": "原因不明。CDVワクチン接種との時間的関連。急速な成長・過剰栄養。大型犬子犬（2〜8ヶ月齢）。",
+        "prevention_ja": "大型犬子犬の適正栄養管理。NSAIDsで疼痛管理。",
+"urgency": "normal",
     },
     {
         "name": "Wobbler Syndrome",
@@ -1577,7 +1616,10 @@ DISEASES: List[Dict[str, Any]] = [
                        "causing a wobbly gait, common in Great Danes and "
                        "Dobermans.",
         "description_ja": "頸部の脊髄圧迫により不安定な歩様を引き起こし、グレートデーンやドーベルマンに多いです。",
-        "urgency": "normal",
+                "pathophysiology_ja": "頸椎の椎間板突出（ドーベルマン型）または骨性狭窄（グレートデーン型）→頸部脊髄の腹側圧迫→後肢の運動失調（wobbling gait）＋前肢の短歩様歩行。",
+        "causes_ja": "椎間板関連型：ドーベルマン（C5-C7、中高齢犬）。骨関連型：グレートデーン（C3-C5、若齢犬）。",
+        "prevention_ja": "確実な予防法はない。内科管理（ステロイド・運動制限）→ventral slot手術。",
+"urgency": "normal",
     },
     # ---- Neuro ----
     {
@@ -1602,7 +1644,10 @@ DISEASES: List[Dict[str, Any]] = [
                        "skull malformation, especially in Cavalier King "
                        "Charles Spaniels.",
         "description_ja": "頭蓋骨奇形による脊髄内の液体貯留で、キャバリアに特に多く見られます。",
-        "urgency": "normal",
+                "pathophysiology_ja": "後頭骨の低形成→小脳のヘルニア（大孔への嵌頓）→CSF流路閉塞→脊髄中心管の嚢胞性拡張（脊髄空洞症）→頸部疼痛（phantom scratching）・知覚異常。CKCS（キャバリア）で非常に好発。",
+        "causes_ja": "後頭骨低形成（先天性）。CKCS（約95%にMRI異常、約50%に臨床症状）。キングチャールズスパニエル・グリフォンブリュッセロワにも報告。",
+        "prevention_ja": "CKCSの繁殖前MRIスクリーニング（BVA/KC MRI scheme）。NSAIDs/ガバペンチンで疼痛管理。重症は後頭骨減圧術。",
+"urgency": "normal",
     },
     {
         "name": "Cognitive Dysfunction Syndrome (CDS)",
@@ -1651,7 +1696,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Failure of one or both testicles to descend into the "
                        "scrotum, increasing cancer risk.",
         "description_ja": "片方または両方の精巣が陰嚢に下降しない疾患で、腫瘍リスクが上昇します。",
-        "urgency": "normal",
+                "pathophysiology_ja": "片方/両方の精巣が陰嚢に下降しない→腹腔内/鼠径部に停留。停留精巣は腫瘍化リスク13.6倍（セルトリ細胞腫・セミノーマ）。捻転リスクも上昇。",
+        "causes_ja": "遺伝性（多因子性）。トイ犬種・チワワ・ポメラニアン・ヨークシャーテリアに好発。片側性が多い（右>左）。6ヶ月齢までに下降しなければ停留と判断。",
+        "prevention_ja": "停留精巣犬の去勢手術（必須、腫瘍化予防）。罹患犬の繁殖禁止。",
+"urgency": "normal",
     },
     {
         "name": "Mastitis",
@@ -1660,7 +1708,10 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Infection of the mammary glands in nursing females, "
                        "causing swelling, pain, and fever.",
         "description_ja": "授乳中の雌犬の乳腺感染症で、腫脹・痛み・発熱を引き起こします。",
-        "urgency": "normal",
+                "pathophysiology_ja": "授乳中の乳腺への細菌感染（E. coli・Staphylococcus等）→乳腺の腫脹・発赤・疼痛・発熱→膿瘍形成。乳汁中への細菌排出→子犬への感染リスク。",
+        "causes_ja": "授乳中の乳頭損傷→細菌侵入。不衛生な環境。乳汁うっ滞。偽妊娠後にも発症。",
+        "prevention_ja": "清潔な授乳環境。子犬の爪のトリミング（乳頭損傷予防）。適切な抗菌薬＋温罨法。重症は外科的排膿。",
+"urgency": "normal",
     },
     {
         "name": "Eclampsia (Milk Fever)",
@@ -2728,7 +2779,10 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"skin_redness", "hair_loss", "dry_skin"},
         "description": "An autoimmune skin disease causing depigmentation and crusting of the nose and face.",
         "description_ja": "鼻と顔面の色素脱失と痂皮を引き起こす自己免疫性皮膚疾患です。",
-        "urgency": "normal",
+                "pathophysiology_ja": "鼻鏡の基底膜帯への自己抗体沈着→鼻鏡の色素脱失・紅斑・潰瘍・痂皮。SLEとは異なり皮膚限局性（全身症状なし）。UV暴露で悪化。",
+        "causes_ja": "免疫介在性。コリー・シェルティ・ジャーマンシェパードに好発。UV暴露が増悪因子。",
+        "prevention_ja": "UV暴露の制限（サンスクリーン・日中の屋内活動）。タクロリムス局所＋テトラサイクリン/ニアシンアミド。",
+"urgency": "normal",
     },
     {
         "name": "Follicular Dysplasia",
@@ -3409,7 +3463,10 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"aggression_change"},
         "description": "Hereditary deafness associated with white coat color and merle pattern, common in Dalmatians.",
         "description_ja": "白色被毛やマール模様と関連する遺伝性聴覚障害で、ダルメシアンに多いです。",
-        "urgency": "normal",
+                "pathophysiology_ja": "蝸牛の発育不全/有毛細胞の退行性変性→感音性難聴。白色被毛・マール遺伝子と関連（メラノサイト欠損→内耳の血管条の発育障害）。BAER検査で確定診断。",
+        "causes_ja": "遺伝性（白色関連遺伝子・マール遺伝子）。ダルメシアン（片側性30%、両側性5%）、ブルテリア、コッカースパニエル。両側性は完全聾。",
+        "prevention_ja": "BAER検査による繁殖前スクリーニング。片側性聾犬の繁殖制限。両側性聾犬は視覚合図でのトレーニング。",
+"urgency": "normal",
     },
     {
         "name": "Atlantoaxial Instability",
