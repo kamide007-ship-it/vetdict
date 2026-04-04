@@ -1,4 +1,4 @@
-const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F439}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43F}\uFE0F",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F99C}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
+const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F401}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F9A5}",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F424}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F33F}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
 
 /* ===== Admin / Pro access control ===== */
 // Admin verification handled server-side
@@ -123,6 +123,9 @@ const I18N={
     noSymptomsSelected:"症状が選択されていません",
     noDiseasesFound:"一致する疾患は見つかりませんでした",
     loadFailed:"読み込みに失敗しました",
+    retry:"再試行",
+    reload:"再読み込み",
+    networkError:"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。",
     noDiseaseMatch:"該当する疾患がありません",
     noDrugMatch:"該当する薬品がありません",
     errorPrefix:"エラー: ",
@@ -222,6 +225,9 @@ const I18N={
     noSymptomsSelected:"No symptoms selected",
     noDiseasesFound:"No matching diseases found",
     loadFailed:"Failed to load",
+    retry:"Retry",
+    reload:"Reload",
+    networkError:"Failed to connect to server. Please check your network.",
     noDiseaseMatch:"No matching diseases",
     noDrugMatch:"No matching drugs",
     errorPrefix:"Error: ",
@@ -303,7 +309,7 @@ function applyLanguage(){
   renderSpeciesGrid();
   if(symptomData.length)renderSymptomList(symptomData);
   renderSelectedSymptoms();
-  if(allDiseases.length){diseaseNavMode=currentLang==="ja"?"kana":"az";diseaseFilter="";renderAzNav();renderDiseaseDb();}
+  if(allDiseases.length){diseaseNavMode=currentLang==="ja"?"category":"az";diseaseFilter="";renderAzNav();renderDiseaseDb();}
   if(drugsLoaded)renderDrugList();
   if(anesthesiaLoaded)reloadAnesthesiaForSpecies();
 }
@@ -830,8 +836,8 @@ document.addEventListener("input",e=>{if(e.target.matches("#labValuesGrid input"
 
 
 function buildFieldFallback(label,name){
-  if(currentLang==="ja")return `${label}: ${name}について一般的な獣医学情報を確認し、個体の状態に合わせて獣医師が評価してください。`;
-  return `${label}: Review standard veterinary references for ${name} and individualize by clinical assessment.`;
+  if(currentLang==="ja")return `${name}の${label}に関する詳細情報は現在準備中です。`;
+  return `Detailed ${label.toLowerCase()} information for ${name} is being prepared.`;
 }
 
 
@@ -924,7 +930,7 @@ function doAnalyze(){
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
-  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const msg=currentLang==="ja"?"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。":"Failed to connect to server. Please check your network.";const ra=document.getElementById("resultsArea");ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(msg)}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再試行":"Retry"}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);})
+  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);})
   .finally(()=>{btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
 }
 
@@ -1195,9 +1201,9 @@ function loadBreedEcology(species,breedId){
     area.innerHTML=`<div class="breed-ecology-section">
       <div class="breed-ecology-header">🐾 ${bName} ${currentLang==="ja"?"の生態・飼育環境":"Ecology & Husbandry"}</div>
       <div class="breed-ecology-grid">${rows.map(r=>`<div class="breed-ecology-item"><span class="breed-ecology-icon">${r.icon}</span><span class="breed-ecology-label">${r.label}</span><span class="breed-ecology-val">${r.val}</span></div>`).join("")}</div>
-      ${diet?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"食事":"Diet"}:</strong> ${diet}</div>`:""}
-      ${housing?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"飼育環境":"Housing"}:</strong> ${housing}</div>`:""}
-      ${notes?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"特記事項":"Notes"}:</strong> ${notes}</div>`:""}
+      ${diet?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"食事":"Diet"}:</strong> ${escapeHtml(diet)}</div>`:""}
+      ${housing?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"飼育環境":"Housing"}:</strong> ${escapeHtml(housing)}</div>`:""}
+      ${notes?`<div class="breed-ecology-field"><strong>${currentLang==="ja"?"特記事項":"Notes"}:</strong> ${escapeHtml(notes)}</div>`:""}
     </div>`;
   }).catch(()=>{if(area)area.innerHTML="";});
 }
@@ -1446,7 +1452,7 @@ function loadDiseaseDb(species){
   if(!list){console.warn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();}})
-  .catch(()=>{if(requestId===diseaseRequestId&&list){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${currentLang==="ja"?"再読み込み":"Reload"}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
+  .catch(()=>{if(requestId===diseaseRequestId&&list){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
 }
 
 const DISEASE_CATEGORIES={
@@ -1483,7 +1489,7 @@ let diseaseNavMode=null;
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   if(!azNav){console.warn("azNav element not found");return;}
-  if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"kana":"az";
+  if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"category":"az";
   const modeLabels={az:{next:"kana",label:"A-Z",switchLabel:currentLang==="ja"?"あいうえお順へ":"Switch to Kana"},kana:{next:"category",label:currentLang==="ja"?"あいうえお順":"Kana",switchLabel:currentLang==="ja"?"カテゴリ別へ":"Switch to Category"},category:{next:"az",label:currentLang==="ja"?"カテゴリ別":"Category",switchLabel:"A-Z"}};
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
   if(diseaseNavMode==="category"){
@@ -2034,7 +2040,7 @@ function guidedFetch(phase,extra){
     const msgs=document.getElementById("guidedMessages");
     const typing=msgs?.querySelector(".typing-indicator");
     if(typing)typing.remove();
-    guidedAddMsg(t("commError")+" ("+err.message+")","bot");
+    guidedAddMsg(escapeHtml(t("commError")+" ("+err.message+")"),"bot");
     guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
     const rb=document.getElementById("guidedRetryBtn");
     if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
@@ -2044,7 +2050,7 @@ function guidedFetch(phase,extra){
 function guidedHandleResponse(data){
   const lang=currentLang;
   const msgKey=lang==="ja"?"message_ja":"message_en";
-  if(data[msgKey])guidedAddMsg(data[msgKey],"bot");
+  if(data[msgKey])guidedAddMsg(escapeHtml(data[msgKey]),"bot");
 
   if(data.phase==="select_category"){
     guidedRenderCategories(data.categories||[]);
@@ -2057,7 +2063,7 @@ function guidedHandleResponse(data){
   } else if(data.phase==="final_results"){
     guidedRenderFinalResults(data);
   } else if(data.error){
-    guidedAddMsg(data.error,"bot");
+    guidedAddMsg(escapeHtml(data.error),"bot");
     guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn secondary" id="guidedRetryBtn">${currentLang==="ja"?"やり直す":"Start Over"}</button></div>`);
     const rb=document.getElementById("guidedRetryBtn");
     if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
@@ -2916,11 +2922,8 @@ function toggleDetail(head){
   if(icon)icon.classList.toggle("rotated",isOpen);
 }
 
-/* Attach click/keyboard handlers to .disease-db-item elements via event delegation (once only) */
-let _dbHandlersAttached=false;
+/* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
 function _attachDbItemHandlers(container){
-  if(_dbHandlersAttached)return;
-  _dbHandlersAttached=true;
   container.addEventListener("click",function(e){if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);});
   container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")&&!e.target.closest(".disease-detail.open")){e.preventDefault();toggleDbItem(item);}}});
 }
@@ -2993,9 +2996,10 @@ function debounce(fn,ms){let t;return function(...a){clearTimeout(t);t=setTimeou
 
 /* Search text highlight */
 function highlightMatch(text,query){
-  if(!query||!text)return text;
+  if(!query||!text)return escapeHtml(text);
+  const safe=escapeHtml(text);
   const escaped=query.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-  return text.replace(new RegExp(`(${escaped})`,"gi"),'<mark class="search-highlight">$1</mark>');
+  return safe.replace(new RegExp(`(${escaped})`,"gi"),'<mark class="search-highlight">$1</mark>');
 }
 
 /* ===== UI/UX Enhancements ===== */

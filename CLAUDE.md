@@ -369,6 +369,40 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - テスト: 179件（データ構造検証、API、臨床内容品質チェック）
 - ServiceWorker: CACHE_NAME vetdict-v11→v12
 
+## 2026-04セッション（第3回）で実施した改善
+
+### 鎮静・麻酔プロトコルタブのバグ修正
+- **ボタン無反応バグ修正**: `_attachDbItemHandlers()` が `renderAnesthesiaList()` の再レンダリング毎に重複イベントリスナーをスタック → `dataset.handlersAttached` フラグで1回のみ登録
+  - 同じバグが疾患DB (`renderDiseaseDb`) と薬品辞書 (`renderDrugList`) にも存在 → 同時修正
+- **展開コンテンツ内クリックUX**: `.disease-detail.open` 内のクリックではパネルが閉じないよう修正
+  - テーブル・参考文献のテキスト選択・コピーが可能に
+  - ヘッダー行クリックのみで開閉トグル
+
+### エビデンスベース文献引用の追加
+- **全21種にspecies-level参考文献**: 100+引用（Lumb & Jones 5th ed, BSAVA Manual 3rd ed, Carpenter Formulary 6th ed 等）
+- **Protocol-level引用**:
+  - 犬: 8/11プロトコル（鎮静、前投薬、導入、維持、局所麻酔、緊急、CRI、TIVA）
+  - 猫: 7/11プロトコル（AAFP 2018, ISFM 2022, Brodbelt 2007, RECOVER CPR 等）
+  - 馬: 3/11プロトコル（CEPEF死亡率研究、覚醒・回復エビデンス）
+  - ウサギ: 2/8プロトコル（V-gel、アトロピナーゼ関連）
+  - フェレット: 1/8プロトコル（Ko & Markel 1997）
+- **フロントエンド**: プロトコル詳細内 + 種別リスト末尾に参考文献セクション表示
+- **API**: `references` フィールドをspecies-specific / all-species両パスで返却
+
+### アクセシビリティ改善
+- `#anesthesiaList` に `aria-live="polite"` 追加（検索・フィルタ結果の動的通知）
+- `#anesthesiaCategoryFilter` に `aria-label` 追加
+- 装飾用絵文字（⚖️, 🚨）に `aria-hidden="true"` 追加
+
+### モバイルCSS改善
+- 参考文献セクション（`.anesthesia-references`, `.anesthesia-ref-list`）のフォントサイズ・パディング調整
+- プロトコルノート・品種考慮セクションのモバイル最適化
+
+### テスト
+- 鎮静・麻酔テスト: 186→237件（+51件、参考文献検証テスト追加）
+- フルテストスイート: 3,054件合格
+- ServiceWorker: CACHE_NAME vetdict-v14→v15
+
 ## 次セッションへの引き継ぎ事項
 
 ### 問診モード（Guided Consultation）の検証 — ✅ 自動テスト完了
@@ -476,3 +510,77 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 
 ### mojibake修正
 - ORi監視パラメータの「酸素予備能指数」文字化け修正
+
+### ボタン無反応バグ修正（3コンテナ共通）
+- **根本原因**: `_attachDbItemHandlers()` がレンダリング毎に重複リスナーをスタック。偶数回登録→open直後にclose
+- **修正**: per-container `dataset.handlersAttached` フラグで1回のみ登録（`static/js/app.js` 3箇所）
+  - `renderDiseaseDb()` — `#diseaseDbList`
+  - `renderDrugList()` — `#drugList`
+  - `renderAnesthesiaList()` — `#anesthesiaList`
+- **PR #355のグローバルフラグバグも修正**: `let _dbHandlersAttached=false` は3コンテナ中1つ目のみにハンドラ登録→削除
+- **展開コンテンツ内クリックUX**: `.disease-detail.open` 内クリックではパネル閉じない（テーブル・テキスト選択可能に）
+
+### エビデンスベース文献引用の追加
+- **全21種にspecies-level参考文献**: 100+引用（Lumb & Jones 5th ed, BSAVA Manual 3rd ed, Carpenter Formulary 6th ed 等）
+- **Protocol-level引用**: 犬8/猫7/馬3/ウサギ2/フェレット1プロトコル
+- **フロントエンド**: プロトコル詳細内 + 種別リスト末尾に参考文献セクション表示
+- **API**: `references` フィールドを species-specific / all-species 両パスで返却
+- テスト: +51件（参考文献検証）
+
+### 犬行動学疾患13件の最新エビデンス更新
+- **壊れたJAテンプレート修正**: Compulsive Disorder (Canine OCD)、Noise Phobia（「ウイルス感染症の特性に応じて」→正しい治療内容）
+- **英語翻訳追加**: 全13件がEN≠JA（以前はEN=JA=日本語のみ）
+- **短文エントリ拡充**: Compulsive Disorder 54c→588c、Canine Compulsive Flank Sucking 73c→1,135c
+- **対象疾患**:
+  - Separation Anxiety / 分離不安症
+  - Compulsive Disorder (Canine OCD) / 強迫性障害
+  - Noise Phobia / 音響恐怖症
+  - Territorial Aggression / 縄張り性攻撃行動
+  - Fear Aggression / 恐怖性攻撃行動
+  - Resource Guarding / 資源防衛行動
+  - Hyperkinesis (Canine ADHD) / 過活動症
+  - Storm/Noise Anxiety / 雷/騒音不安症
+  - Cognitive Dysfunction Syndrome (CDS) / 認知機能不全症候群
+  - Canine Cognitive Dysfunction Syndrome / 犬認知機能不全症候群
+  - Compulsive Disorder / 強迫性障害
+  - Canine Compulsive Flank Sucking (Doberman) / ドーベルマン強迫性わき腹吸引
+  - Pica / 異食症
+- **引用文献**: AVSAB 2021, Landsberg 2008/2012, Korpivaara 2017, Moon-Fanelli 2007, Overall 2013, Dodman 2010, Herron 2009, Luescher 2003, Simpson 2000, Ruehl 1996
+
+### アクセシビリティ改善
+- `#anesthesiaList` に `aria-live="polite"` 追加
+- `#anesthesiaCategoryFilter` に `aria-label` 追加
+- 装飾用絵文字に `aria-hidden="true"` 追加
+
+### テスト・CI
+- フルテストスイート: 3,088件合格（+51参考文献テスト）
+- ruff lint: 問題なし
+- PR #360 作成: `claude/fix-anesthesia-buttons-jXihE` → `main`
+
+## 次セッションへの引き継ぎ事項（2026-04第4回更新）
+
+### PR #360 マージ待ち
+- ブランチ: `claude/fix-anesthesia-buttons-jXihE`
+- 内容: ボタンバグ修正 + 文献引用 + 禁忌警告 + 犬行動学治療更新
+- テスト: 3,088件全合格
+- URL: https://github.com/kamide007-ship-it/vetdict/pull/360
+
+### 問診モード（Guided Consultation）— ブラウザ手動テスト未実施
+- 自動テスト100件+は全合格（全21種フルフロー＋エッジケース＋精度パリティ）
+- 実機でのUI動作確認のみ未実施
+
+### 残存する「ウイルス感染症」テンプレート
+- `diseases_all_species.json` に67件残存（犬行動学以外の種・カテゴリ）
+- 例: Dental Malocclusion, Cruciate Ligament Injury, Anaplasmosis 等
+- 犬の行動学疾患は全て修正済み
+
+### 診断精度の体系的検証
+- TRIPOD準拠の検証プロトコル策定が必要
+- 感度/特異度/PPV/NPVの定量評価
+- 26テストケースは存在するが、体系的な検証フレームワークは未構築
+
+### その他の残課題
+- AIエンリッチメントの臨床レビュー文書化（レビューログのフォーマット策定）
+- app.js のモジュール分割（3,000行の単一ファイル — バンドラー導入が前提）
+- CSP 'unsafe-inline' → nonce-based strict-dynamic への移行（GA4対応が必要）
+- 依存関係lockfile未導入（pip-compile等）
