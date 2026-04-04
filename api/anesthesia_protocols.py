@@ -80,8 +80,8 @@ ANESTHESIA_PROTOCOLS = {}
 ANESTHESIA_PROTOCOLS["dog"] = {
     "species_name": {"ja": "犬", "en": "Dog"},
     "overview": {
-        "ja": "犬は麻酔に比較的耐性があるが、短頭種（ブルドッグ、パグ等）は上気道閉塞リスクが高い。大型犬はGDV（胃拡張捻転）リスクに注意。サイトハウンド（グレイハウンド等）はチオペンタール感受性が高い。",
-        "en": "Dogs are relatively tolerant of anesthesia, but brachycephalic breeds (Bulldogs, Pugs) have high upper airway obstruction risk. Large breeds require GDV awareness. Sighthounds (Greyhounds) have increased thiopental sensitivity.",
+        "ja": "犬は麻酔に比較的耐性があるが、短頭種（ブルドッグ、パグ等）は上気道閉塞リスクが高い（死亡リスク4倍）。大型犬はGDV（胃拡張捻転）リスクに注意。サイトハウンド（グレイハウンド等）はチオペンタール感受性が高い。日本では2007年のケタミン麻薬指定以降、メデトミジン＋ミダゾラム＋ブトルファノールの非麻薬3剤併用が標準プロトコルとして普及。",
+        "en": "Dogs are relatively tolerant of anesthesia, but brachycephalic breeds (Bulldogs, Pugs) have high upper airway obstruction risk (4x mortality). Large breeds require GDV awareness. Sighthounds (Greyhounds) have increased thiopental sensitivity. Since ketamine was reclassified as a narcotic in Japan (2007), medetomidine + midazolam + butorphanol non-narcotic triple combination has become standard practice.",
     },
     "fasting": {
         "ja": "成犬: 6-8時間絶食、2-4時間絶水。子犬（<8週齢）: 2-4時間絶食（低血糖リスク）。",
@@ -281,8 +281,8 @@ ANESTHESIA_PROTOCOLS["dog"] = {
                 {"param": "Temperature", "target": "37.5-39.0°C", "notes_ja": "低体温は覚醒延長の主要因。加温パッド、温風ブランケット使用。", "notes": "Hypothermia is a major cause of prolonged recovery. Use warming pads and forced-air blankets."},
                 {"param": "ECG", "target": "Normal sinus rhythm", "notes_ja": "不整脈出現時は麻酔深度・電解質・低酸素を確認。", "notes": "On arrhythmia, check depth, electrolytes, and oxygenation."},
             ],
-            "notes_ja": "最低限: SpO2、ETCO2、HR、体温を5分毎に記録。MAP（侵襲的 or 非侵襲的血圧）は外科手術では必須。",
-            "notes": "Minimum: record SpO2, ETCO2, HR, temperature q5min. MAP (invasive or non-invasive) is essential for surgical procedures.",
+            "notes_ja": "最低限: SpO2、ETCO2、HR、体温を5分毎に記録。MAP（侵襲的 or 非侵襲的血圧）は外科手術では必須。パルスオキシメトリー未使用で死亡リスクが約5倍に上昇（Brodbelt et al. 2008）。鎮静後最低3時間は継続モニタリング推奨（死亡の52-60%が3時間以内に発生）。体重2kg未満は死亡リスク16倍。",
+            "notes": "Minimum: record SpO2, ETCO2, HR, temperature q5min. MAP (invasive or non-invasive) is essential for surgical procedures. Absence of pulse oximetry increases mortality ~5x (Brodbelt et al. 2008). Monitor for minimum 3 hours post-sedation (52-60% of fatalities occur within 3 hours). Body weight <2kg carries 16x mortality risk.",
         },
         {
             "name": {"ja": "覚醒・回復", "en": "Recovery"},
@@ -398,12 +398,12 @@ ANESTHESIA_PROTOCOLS["dog"] = {
 ANESTHESIA_PROTOCOLS["cat"] = {
     "species_name": {"ja": "猫", "en": "Cat"},
     "overview": {
-        "ja": "猫は犬に比べ麻酔リスクが高い（喉頭痙攣、低体温、ストレス誘発性高体温）。IM注射による導入が一般的（静脈確保が困難な場合）。短頭種（ペルシャ等）は犬同様の上気道リスクあり。NSAIDsの代謝が犬より遅い（グルクロン酸抱合能力が低い）。",
-        "en": "Cats have higher anesthesia risk than dogs (laryngospasm, hypothermia, stress-induced hyperthermia). IM induction is common when IV access is difficult. Brachycephalic breeds (Persian) carry similar airway risks. NSAIDs are metabolized more slowly (limited glucuronidation).",
+        "ja": "猫は犬に比べ麻酔リスクが高い（喉頭痙攣、低体温、ストレス誘発性高体温）。IM注射による導入が一般的（静脈確保が困難な場合）。短頭種（ペルシャ等）は犬同様の上気道リスクあり。NSAIDsの代謝が犬より遅い（グルクロン酸抱合能力が低い）。HCM（肥大型心筋症）は無症状のことが多く、低用量メデトミジンがLVOTO（左室流出路閉塞）を減弱させる可能性がある。鎮静後3時間以内に死亡の52-60%が発生するため、回復期のモニタリングが重要。",
+        "en": "Cats have higher anesthesia risk than dogs (laryngospasm, hypothermia, stress-induced hyperthermia). IM induction is common when IV access is difficult. Brachycephalic breeds (Persian) carry similar airway risks. NSAIDs are metabolized more slowly (limited glucuronidation). HCM is often asymptomatic; low-dose medetomidine may attenuate LVOTO. 52-60% of fatalities occur within 3 hours post-sedation, making recovery monitoring critical.",
     },
     "fasting": {
-        "ja": "成猫: 6-8時間絶食、2時間絶水。子猫（<8週齢）: 2-4時間絶食。肥満猫の長時間絶食は肝リピドーシスリスク。",
-        "en": "Adults: 6-8 hr food fast, 2 hr water fast. Kittens (<8 wk): 2-4 hr food fast. Prolonged fasting in obese cats risks hepatic lipidosis.",
+        "ja": "成猫: 3-4時間絶食（少量のウェットフード、最新エビデンスでは短縮傾向）、絶水不要。子猫（<8週齢）: 2-4時間絶食。肥満猫の長時間絶食は肝リピドーシスリスク。3-4時間前の少量給餌は胃食道逆流を軽減する。",
+        "en": "Adults: 3-4 hr food fast (small wet food; recent evidence favors shorter fasting), no water restriction. Kittens (<8 wk): 2-4 hr food fast. Prolonged fasting in obese cats risks hepatic lipidosis. Small meal 3-4 hr pre-anesthesia reduces gastroesophageal reflux.",
     },
     "protocols": [
         {
@@ -466,10 +466,13 @@ ANESTHESIA_PROTOCOLS["cat"] = {
                  "notes_ja": "確実な鎮静だが嘔吐の可能性あり（MED高用量群ほどではない）。心拍数低下がやや大きい。",
                  "notes": "Reliable sedation but vomiting possible (less than high-dose MED alone). Slightly greater HR decrease."},
                 {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "DEX 10-20 μg/kg + BTR 0.2-0.4 mg/kg", "route": "IM", "onset": "10-15 min", "duration": "30-45 min",
-                 "notes_ja": "デクスメデトミジンはメデトミジンの活性光学異性体。半量で同等効果。拮抗: アティパメゾール同容量IM。HCM猫には慎重投与。",
-                 "notes": "Dexmedetomidine is the active enantiomer of medetomidine; half dose for equivalent effect. Reverse: atipamezole equal volume IM. Use cautiously in HCM cats."},
+                 "notes_ja": "デクスメデトミジンはメデトミジンの活性光学異性体。半量で同等効果。拮抗: アティパメゾール同容量IM。HCM猫には低用量であれば使用可能（LVOTO減弱の可能性）。ケタミン/チレタミンはHCM猫で禁忌（交感神経刺激）。",
+                 "notes": "Dexmedetomidine is the active enantiomer of medetomidine; half dose for equivalent effect. Reverse: atipamezole equal volume IM. Low-dose may be acceptable in HCM cats (attenuates LVOTO). Ketamine/tiletamine contraindicated in HCM (sympathetic stimulation)."},
+                {"name": "Alfaxalone + Butorphanol", "name_ja": "アルファキサロン＋ブトルファノール", "dose": "ALF 2-5 mg/kg + BTR 0.2 mg/kg", "route": "IM/SC", "onset": "5-15 min", "duration": "35-60 min",
+                 "notes_ja": "非麻薬性の鎮静プロトコル。心エコー、採血、放射性ヨウ素投与等の非侵襲的処置に適する。α2作動薬を使いたくない心疾患猫にも比較的安全。注射量が多いのが欠点。",
+                 "notes": "Non-narcotic sedation protocol. Suitable for echocardiography, venipuncture, radioiodine administration. Relatively safe in cardiac cats where alpha-2 agonists are undesirable. Large injection volume is a drawback."},
             ],
-            "notes_ja": "メデトミジン＋ブトルファノール併用はメデトミジン誘発性嘔吐を予防し、鎮静の質を改善する（住吉ら 2007）。猫では体表面積ベースの投与量計算（μg/m²）がより正確。15分後にイソフルランマスク導入で滑らかな移行が可能。",
+            "notes_ja": "メデトミジン＋ブトルファノール併用はメデトミジン誘発性嘔吐を予防し、鎮静の質を改善する（住吉ら 2007）。猫では体表面積ベースの投与量計算（μg/m²）がより正確。15分後にイソフルランマスク導入で滑らかな移行が可能。パルスオキシメトリー未使用で死亡リスクが5倍に上昇するため、鎮静中も必ず装着。鎮静後最低3時間のモニタリングが推奨（死亡の52-60%が3時間以内に発生）。",
             "notes": "MED-BTR combination prevents MED-induced vomiting and improves sedation quality (Sumiyoshi et al. 2007). Body surface area dosing (μg/m²) is more accurate in cats. Smooth transition to isoflurane mask induction after 15 min.",
             "references": [
                 "Sumiyoshi T, Hara S, Kaneda M. Evaluation of the effective preanesthetic medication method of medetomidine and butorphanol combination in cats. Jpn J Vet Anesth Surg. 2007;38(3&4):43-51.",
@@ -499,6 +502,26 @@ ANESTHESIA_PROTOCOLS["cat"] = {
                 "Yamashita K. ドミトールを見直す — 犬と猫の鎮静・麻酔における安全な使い方. Clinic Note. 2008;4(9):72-77.",
                 "Robertson SA, Taylor PM. Pain management in cats — past, present and future. Part 2. Treatment of pain — clinical pharmacology. J Feline Med Surg. 2004;6(5):321-333.",
                 "Murrell JC. Pre-anaesthetic medication and sedation. In: Duke-Novakovski T et al., eds. BSAVA Manual. 3rd ed. 2016:170-189.",
+            ],
+        },
+        {
+            "name": {"ja": "非麻薬性フルプロトコル（前投薬→導入→維持 全て非麻薬）", "en": "Complete Non-Narcotic Protocol (Premedication→Induction→Maintenance)"},
+            "category": "induction",
+            "risk_level": "low",
+            "drugs": [
+                {"name": "Step 1: Dexmedetomidine + Butorphanol (premedication)", "name_ja": "Step 1: デクスメデトミジン＋ブトルファノール（前投薬）", "dose": "DEX 5 μg/kg + BTR 0.3 mg/kg", "route": "IM", "onset": "10-15 min", "duration": "30-60 min",
+                 "notes_ja": "前投薬として投与。15分待機して十分な鎮静を確認。", "notes": "Administer as premedication. Wait 15 min and confirm adequate sedation."},
+                {"name": "Step 2: Alfaxalone (induction)", "name_ja": "Step 2: アルファキサロン（導入）", "dose": "1-2.5 mg/kg IV (to effect)", "route": "IV (slow)", "onset": "30-60 sec", "duration": "5-15 min",
+                 "notes_ja": "DEX+BTR前投薬後は大幅に減量可能。Titration to effect。気管挿管を実施。", "notes": "Significantly reduced dose after DEX+BTR premedication. Titrate to effect. Proceed to intubation."},
+                {"name": "Step 3: Isoflurane/Sevoflurane (maintenance)", "name_ja": "Step 3: イソフルラン/セボフルラン（維持）", "dose": "Iso 1.0-1.5% / Sevo 2.0-2.5%", "route": "Inhalation", "onset": "Immediate", "duration": "Continuous",
+                 "notes_ja": "前投薬のMAC削減効果で通常より低い濃度で維持可能。術中はブトルファノールCRI（0.1-0.2 mg/kg/hr）の追加を検討。", "notes": "MAC-sparing effect of premedication allows maintenance at lower concentrations. Consider butorphanol CRI (0.1-0.2 mg/kg/hr) intraoperatively."},
+            ],
+            "notes_ja": "全ステップで麻薬指定薬を使用しない完全非麻薬プロトコル。前投薬は完全拮抗可能（アティパメゾール）。日本では2007年のケタミン麻薬指定以降、このタイプのプロトコルが標準として普及。健康な猫（ASA I-II）の避妊去勢手術、歯科処置等の一般手術に十分な麻酔深度が得られる。",
+            "notes": "Complete narcotic-free protocol at every step. Premedication fully reversible (atipamezole). This protocol type has become standard in Japan since ketamine narcotic reclassification in 2007. Provides adequate anesthesia depth for routine procedures (spay/neuter, dental) in healthy cats (ASA I-II).",
+            "references": [
+                "Tamura J, Oyama N, Fukui S, Yamashita K. Comparison of the anesthetic effects between 5 mg/kg of alfaxalone and 10 mg/kg of propofol administered intravenously in cats. J Vet Med Sci. 2021;83(1):73-77.",
+                "Tamura J, Ishizuka T, Fukui S, et al. Sedative effects of intramuscular alfaxalone in cats. J Vet Med Sci. 2015;77(8):897-904.",
+                "Sumiyoshi T, Hara S, Kaneda M. Evaluation of the effective preanesthetic medication method of medetomidine and butorphanol combination in cats. Jpn J Vet Anesth Surg. 2007;38(3&4):43-51.",
             ],
         },
         {
