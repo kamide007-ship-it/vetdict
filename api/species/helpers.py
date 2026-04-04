@@ -323,12 +323,11 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
                 disease["description_ja"] = enrichment["description_ja"]
             if not disease.get("name_ja") and enrichment.get("name_ja"):
                 disease["name_ja"] = enrichment["name_ja"]
-        else:
-            # Generate fallback content for diseases not in JSON
-            fallback = _generate_fallback_content(disease, species)
-            for field, value in fallback.items():
-                if not disease.get(field):
-                    disease[field] = value
+        # Always apply fallback for fields still missing after enrichment
+        fallback = _generate_fallback_content(disease, species)
+        for field, value in fallback.items():
+            if not disease.get(field):
+                disease[field] = value
     return diseases
 
 # Import gender risk data
