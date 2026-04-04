@@ -875,7 +875,7 @@ def diagnostic_chat():
     breed_id = data.get("breed_id")
     age_years = data.get("age_years")
     onset = data.get("onset")  # explicit onset from client
-    previous_symptoms = data.get("previous_symptoms", [])
+    previous_symptoms_raw = data.get("previous_symptoms", [])
     species = data.get("species", "dog")
     pain_score = data.get("pain_score")       # int 1-10 (optional)
     lab_values = data.get("lab_values")       # dict (optional)
@@ -884,6 +884,18 @@ def diagnostic_chat():
 
     if not message:
         return jsonify({"error": "Message required"}), 400
+
+    # Input validation
+    if len(message) > 5000:
+        return jsonify({"error": "Message too long (max 5000 chars)"}), 400
+
+    # Sanitise previous_symptoms: must be a list of short strings
+    if not isinstance(previous_symptoms_raw, list):
+        previous_symptoms_raw = []
+    previous_symptoms = [
+        str(s)[:200] for s in previous_symptoms_raw
+        if isinstance(s, str) and s.strip()
+    ][:100]
 
     # Extract onset/age from message text if not explicitly provided
     detected_onset = extract_onset_from_text(message)
