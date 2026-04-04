@@ -280,7 +280,7 @@ ANESTHESIA_PROTOCOLS["dog"] = {
             "risk_level": "low",
             "drugs": [],
             "monitoring_params": [
-                {"param": "SpO2 / ORi", "target": ">95% (SpO2); ORi 0.0-1.0", "notes_ja": "95%未満は低酸素血症。対応: 酸素流量増加、気道確認、PEEP検討。ORi（��素予備能指数）はSpO2が正常域でも低酸素の早期警告指標となる（Hirokawa et al. 2025, Yamashita lab）。", "notes": "Below 95% indicates hypoxemia. Response: increase O2 flow, check airway, consider PEEP. ORi (Oxygen Reserve Index) serves as early warning of hypoxemia even when SpO2 is normal (Hirokawa et al. 2025, Yamashita lab)."},
+                {"param": "SpO2 / ORi", "target": ">95% (SpO2); ORi 0.0-1.0", "notes_ja": "95%未満は低酸素血症。対応: 酸素流量増加、気道確認、PEEP検討。ORi（酸素予備能指数）はSpO2が正常域でも低酸素の早期警告指標となる（Hirokawa et al. 2025, Yamashita lab）。", "notes": "Below 95% indicates hypoxemia. Response: increase O2 flow, check airway, consider PEEP. ORi (Oxygen Reserve Index) serves as early warning of hypoxemia even when SpO2 is normal (Hirokawa et al. 2025, Yamashita lab)."},
                 {"param": "ETCO2", "target": "35-45 mmHg", "notes_ja": "45超は換気不足（換気量/回数増加）。35未満は過換気。", "notes": "Above 45 indicates hypoventilation. Below 35 indicates hyperventilation."},
                 {"param": "HR", "target": "60-140 bpm", "notes_ja": "徐脈（<60）: アトロピン0.02-0.04 mg/kg IV。頻脈（>160）: 麻酔深度・疼痛確認。", "notes": "Bradycardia (<60): atropine 0.02-0.04 mg/kg IV. Tachycardia (>160): check depth/pain."},
                 {"param": "MAP", "target": "60-100 mmHg", "notes_ja": "MAP<60は臓器灌流不全。対応: 輸液負荷10-20 mL/kg、吸入濃度減少、昇圧剤検討。", "notes": "MAP<60 indicates organ hypoperfusion. Response: fluid bolus, reduce inhalant, consider vasopressors."},
