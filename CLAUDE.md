@@ -32,7 +32,7 @@ api/
   drug_batch_2.py         — 薬品データ batch 2 + 新薬7剤 (サイトポイント,リブレラ,ソレンシア,ブレンダ,GS-441524,モルヌピラビル,スプレソリン)
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
   drug_batch_4.py         — 魚用薬品 (FISH_DRUGS + FISH_SPECIES_INFO_PATCH)
-  anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 182プロトコル)
+  anesthesia_protocols.py — 鎮静・麻酔プロトコルデータ (21種, 188プロトコル)
   anesthesia_api.py       — 鎮静・麻酔API Blueprint (4エンドポイント)
   anesthesia_contraindications.py — 薬品-疾患禁忌ルール (31ルール, check_contraindications())
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
@@ -74,7 +74,7 @@ scripts/
 - **薬品**: 194 (12種が魚専用, 7種が2026年追加の新薬)
 - **症状エイリアス**: 530+ (SYMPTOM_ALIASES) + 90+ (ID同義語)
 - **対応動物種**: 21 (犬,猫,馬,ウサギ,ハムスター,モルモット,チンチラ,フェレット,ハリネズミ,フクロモモンガ,デグー,鳥,インコ,オウム,爬虫類,リクガメ,ヘビ,トカゲ,両生類,魚,その他)
-- **鎮静・麻酔プロトコル**: 182 (全21種対応、全21種が全8カテゴリ完備、犬猫馬各11プロトコル、ASA分類付き)
+- **鎮静・麻酔プロトコル**: 188 (全21種対応、全21種が全8カテゴリ完備、犬猫各14プロトコル、馬13プロトコル、ウサギ11プロトコル、ASA分類付き)
 
 ## 診断エンジン
 ### チェックボックス式 (全種)
@@ -413,7 +413,7 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - ServiceWorker: CACHE_NAME vetdict-v14→v15
 
 ### 薬品-疾患禁忌警告システム（新規）
-- `api/anesthesia_contraindications.py`: 24禁忌ルール
+- `api/anesthesia_contraindications.py`: 31禁忌ルール
   - 心疾患（α2作動薬、チオペンタール禁忌）
   - 腎疾患・消化管潰瘍・肝疾患（NSAIDs禁忌/慎重）
   - てんかん（アセプロマジン禁忌）
@@ -431,3 +431,48 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 
 ### テスト
 - 3,037件（+34新規禁忌テスト、+前回3,003件からの増分）
+
+## 2026-04セッション（第4回）で実施した改善
+
+### 非麻薬性麻酔プロトコル追加（17プロトコル、182→188）
+- **背景**: 2007年ケタミン麻薬指定変更により、日本ではメデトミジン＋ブトルファノール＋ミダゾラムの非麻薬性プロトコルが主流
+- **犬（6プロトコル追加）**:
+  - 非麻薬性鎮静: MED+BTR 10-20 μg/kg、DEX+BTR 5-10 μg/kg、MDZ+BTR 0.2-0.3 mg/kg
+  - 非麻薬性前投薬: MED+BTR+MDZ triple、DEX+BTR+MDZ、ACP+BTR
+  - アルファキサロンIM導入（MED+BTR前投薬後）: 混合筋注プロトコル
+  - ブトルファノールCRI 0.1-0.2 mg/kg/hr、メデトミジンCRI 1-4 μg/kg/hr
+- **猫（8プロトコル追加）**:
+  - BSA投与（Sumiyoshi 2007★）: MED 250 μg/m² + BTR 0.4 mg/kg（HR低下なし、嘔吐なし）
+  - MED 500 μg/m² + BTR 0.2 mg/kg、DEX+BTR、ALF+BTR
+  - 非麻薬性前投薬: MED+BTR+MDZ、DEX+BTR+MDZ、MDZ+BTR
+  - 完全非麻薬性フルプロトコル（3段階: DEX+BTR→Alfaxalone IV→Iso/Sevo）
+  - HCM/LVOTO注意: 低用量MED可（ケタミン/チレタミン禁忌）
+  - 猫絶食時間: 6-8hr→3-4hr（GE逆流エビデンス）
+- **ウサギ（1プロトコル追加）**: 経鼻投与 MED IN 200-500 μg/kg、ALF IN 2-4 mg/kg（MAD使用）
+- **馬（2プロトコル追加）**: MKM-OS（MDZ+ケタミン+MED+O2+セボフルラン）、PMLB-TIVA
+
+### メデトミジン＋デクスメデトミジン併記
+- 日本ではメデトミジン（ドミトール）が多用されるため、全プロトコルセクションにMED/DEX両方を記載
+  - DEX = MED の約半量で同等効果（活性エナンチオマー）
+  - 犬・猫の軽度鎮静、中等度鎮静、前投薬、CRI全てで併記
+  - 商品名: ドミトール（MED）、デクスドミトール（DEX）、アンチセダン（拮抗薬）
+
+### 山下哲郎研究室（136文献）統合
+- researchmap.jp/veterinaryanesthesia から7ページ分をスクレイピング
+- 主要引用: Yamashita (1998, 1999, 2001, 2003, 2004, 2008)
+- 馬のMKM-OS、PMLB-TIVA、MED+GGE-ケタミンCRI+セボフルラン
+- ORi（酸素予備能指数）: Hirokawa et al. 2025（Yamashita lab）
+
+### JSVAS（日本獣医麻酔外科学会）知見統合
+- パルスオキシメトリー未使用で死亡リスク5倍
+- 鎮静後3時間以内に52-60%の死亡発生
+- 2kg未満で死亡リスク16倍、短頭種で4倍
+- 猫アルファキサロン導入: ALF 5 mg/kg IV ≒ プロポフォール 10 mg/kg（Tamura 2021）
+- MAC-sparing CRI（DEX、トラマドール、リドカイン、ブトルファノール）
+
+### 禁忌ルール拡張（24→31ルール）
+- 甲状腺機能低下症、副腎不全、重症筋無力症、緑内障、頭蓋内圧亢進、褐色細胞腫、気道閉塞の7ルール追加
+- 臨床参考文献付き
+
+### mojibake修正
+- ORi監視パラメータの「酸素予備能指数」文字化け修正
