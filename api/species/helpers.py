@@ -233,21 +233,30 @@ def _generate_fallback_content(disease: Dict[str, Any], species: str) -> Dict[st
             f"and potential tissue damage if left untreated."
         )
     if not disease.get("pathophysiology_ja"):
-        content["pathophysiology_ja"] = (
-            f"{name_ja}は罹患組織および臓器系に病理学的変化をもたらす。"
-            f"細胞障害・炎症反応・未治療の場合の組織損傷の段階を経て進行する。"
-            f"早期の病態把握と介入が予後改善の鍵となる。"
-        )
+        # Prefer description_ja over generic template
+        desc_ja = disease.get("description_ja", "")
+        if desc_ja:
+            content["pathophysiology_ja"] = desc_ja
+        else:
+            content["pathophysiology_ja"] = (
+                f"{name_ja}は罹患組織および臓器系に病理学的変化をもたらす。"
+                f"細胞障害・炎症反応・未治療の場合の組織損傷の段階を経て進行する。"
+                f"早期の病態把握と介入が予後改善の鍵となる。"
+            )
     if not disease.get("causes"):
         content["causes"] = (
             f"The causes of {name.lower()} in {species.lower()} include predisposing factors "
             f"related to genetics, environment, diet, and husbandry. {desc}"
         )
     if not disease.get("causes_ja"):
-        content["causes_ja"] = (
-            f"{name_ja}の原因には遺伝的要因、環境要因、食事・飼育管理に関連する素因が含まれる。"
-            f"複数の要因が複合的に作用することが多い。"
-        )
+        desc_ja = disease.get("description_ja", "")
+        if desc_ja:
+            content["causes_ja"] = desc_ja
+        else:
+            content["causes_ja"] = (
+                f"{name_ja}の原因には遺伝的要因、環境要因、食事・飼育管理に関連する素因が含まれる。"
+                f"複数の要因が複合的に作用することが多い。"
+            )
     if not disease.get("treatment"):
         content["treatment"] = (
             f"Treatment of {name.lower()} in {species.lower()} involves addressing the underlying cause, "
