@@ -439,9 +439,9 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             "risk_level": "low",
             "drugs": [
                 {"name": "Medetomidine + Butorphanol", "name_ja": "メデトミジン＋ブトルファノール", "dose": "20-40 μg/kg + 0.2 mg/kg", "route": "IM", "onset": "10-15 min", "duration": "30-45 min",
-                 "notes_ja": "猫の標準的な鎮静プロトコル。日本ではメデトミジン（ドミトール）が広く使用される。心疾患（特にHCM）には慎重に。拮抗: アティパメゾール同容量IM。", "notes": "Standard cat sedation protocol. Medetomidine (Domitor) widely used in Japan. Use cautiously in cardiac disease (especially HCM). Reverse: atipamezole equal volume IM."},
+                 "notes_ja": "猫の標準的な鎮静プロトコル。MED用量で鎮静深度を調整（軽度: 10-20、中等度: 20-40、深: 40-80 μg/kg）。日本ではメデトミジン（ドミトール）が広く使用される。心疾患（特にHCM）には慎重に。拮抗: アティパメゾール同容量IM。", "notes": "Standard cat sedation protocol. Titrate depth via MED dose (light: 10-20, moderate: 20-40, deep: 40-80 μg/kg). Medetomidine (Domitor) widely used in Japan. Use cautiously in cardiac disease (especially HCM). Reverse: atipamezole equal volume IM."},
                 {"name": "Dexmedetomidine + Butorphanol", "name_ja": "デクスメデトミジン＋ブトルファノール", "dose": "10-20 μg/kg + 0.2 mg/kg", "route": "IM", "onset": "10-15 min", "duration": "30-45 min",
-                 "notes_ja": "メデトミジンの半量で同等の鎮静。拮抗: アティパメゾール同容量IM。HCMには慎重に。", "notes": "Half the medetomidine dose for equivalent sedation. Reverse: atipamezole equal volume IM. Use cautiously in HCM."},
+                 "notes_ja": "メデトミジンの半量で同等の鎮静。DEX用量で調整（軽度: 5-10、中等度: 10-20、深: 20-40 μg/kg）。拮抗: アティパメゾール同容量IM。HCMには慎重に。", "notes": "Half the medetomidine dose for equivalent sedation. Titrate depth via DEX dose (light: 5-10, moderate: 10-20, deep: 20-40 μg/kg). Reverse: atipamezole equal volume IM. Use cautiously in HCM."},
                 {"name": "Alfaxalone", "name_ja": "アルファキサロン", "dose": "2-3 mg/kg", "route": "IM", "onset": "5-10 min", "duration": "20-40 min",
                  "notes_ja": "IM投与で確実な鎮静。注射量が多くなる（0.5 mL/kg程度）が、猫では広く使用される。Tamura et al.(2015)により猫でのIM鎮静効果が詳細に評価済み。", "notes": "Reliable sedation via IM. Injection volume is large (~0.5 mL/kg) but widely used in cats. IM sedative effects in cats detailed by Tamura et al. (2015)."},
             ],
