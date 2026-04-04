@@ -447,6 +447,7 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             "notes": "Cats may develop stress-induced hyperthermia (>40°C); differentiate from true fever.",
             "references": [
                 "Tamura J, Ishizuka T, Fukui S, et al. Sedative effects of intramuscular alfaxalone in cats. J Vet Med Sci. 2015;77(8):897-904.",
+                "Santos LC, Ludders JW, Erb HN, et al. Sedative and cardiorespiratory effects of dexmedetomidine and buprenorphine administered to cats via oral transmucosal or intramuscular routes. Vet Anaesth Analg. 2010;37(5):417-424.",
             ],
         },
         {
@@ -465,6 +466,10 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫のHCM（肥大型心筋症）は無症状のことが多い。術前心エコーが理想的だが、最低限聴診でギャロップ・雑音を確認。",
             "notes": "Feline HCM is often asymptomatic. Pre-anesthetic echocardiography is ideal; at minimum, auscultate for gallop rhythm or murmur.",
+            "references": [
+                "Robertson SA, Gogolski SM, Gomes P, et al. AAFP Feline Anesthesia Guidelines. J Feline Med Surg. 2018;20(7):602-634.",
+                "Brodbelt DC, Pfeiffer DU, Young LE, Wood JLN. Results of the Confidential Enquiry into Perioperative Small Animal Fatalities regarding risk factors for anesthetic-related death in cats. J Am Vet Med Assoc. 2007;230(9):1325-1332.",
+            ],
         },
         {
             "name": {"ja": "非麻薬性プロトコル — 鎮静（麻薬を使わない鎮静法）", "en": "Non-Narcotic Sedation Protocol (Narcotic-Free)"},
@@ -552,6 +557,8 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             "notes": "Feline intubation carries high laryngospasm risk. Spray lidocaine 2% on larynx (0.1 mL) before intubation. Use minimal cuff pressure.",
             "references": [
                 "Tamura J, Oyama N, Fukui S, Yamashita K. Comparison of the anesthetic effects between 5 mg/kg of alfaxalone and 10 mg/kg of propofol administered intravenously in cats. J Vet Med Sci. 2021;83(1):73-77.",
+                "Sear JW. Total intravenous anesthesia. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. Wiley-Blackwell; 2015:300-316.",
+                "Ambros B, Duke-Novakovski T, Pasloske KS. Comparison of the anesthetic efficacy and cardiopulmonary effects of continuous rate infusions of alfaxalone-2-hydroxypropyl-beta-cyclodextrin and propofol in dogs. Am J Vet Res. 2008;69(11):1391-1398.",
             ],
         },
         {
@@ -566,6 +573,9 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫の維持輸液は3-5 mL/kg/hr。過剰輸液は肺水腫リスク（特にHCM猫）。体温管理を徹底（猫は低体温になりやすい）。",
             "notes": "Cat maintenance fluids: 3-5 mL/kg/hr. Fluid overload risks pulmonary edema (especially HCM cats). Aggressive temperature management essential.",
+            "references": [
+                "Steffey EP, Mama KR, Brosnan RJ. Inhalation anesthetics. In: Grimm KA et al., eds. Lumb & Jones. 5th ed. Wiley-Blackwell; 2015:297-331.",
+            ],
         },
         {
             "name": {"ja": "局所・区域麻酔", "en": "Local/Regional Anesthesia"},
@@ -618,6 +628,9 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫のCPR: 胸骨圧迫100-120回/min。小型のため片手での圧迫が可能。新生猫: 鼻口を吸引後、軽い刺激と酸素投与。",
             "notes": "Cat CPR: chest compressions 100-120/min. Single-hand technique possible due to small size. Neonatal kittens: suction nose/mouth, gentle stimulation, and oxygen.",
+            "references": [
+                "Fletcher DJ, Boller M, Brainard BM, et al. RECOVER evidence and knowledge gap analysis on veterinary CPR. Part 7: Clinical guidelines. J Vet Emerg Crit Care. 2012;22(S1):S102-S131.",
+            ],
         },
         {
             "name": {"ja": "CRI鎮痛（持続定量点滴）", "en": "CRI Analgesia (Constant Rate Infusion)"},
@@ -637,6 +650,10 @@ ANESTHESIA_PROTOCOLS["cat"] = {
             ],
             "notes_ja": "猫のCRI鎮痛ではリドカインCRIは禁忌（心毒性）。フェンタニル+ケタミンの組み合わせ（FK）が猫のマルチモーダルCRIの標準。シリンジポンプ必須（微量投与の精度確保）。",
             "notes": "Lidocaine CRI is CONTRAINDICATED in cats (cardiotoxicity). Fentanyl + Ketamine (FK) combination is the standard feline multimodal CRI. Syringe pump mandatory for dosing accuracy at small volumes.",
+            "references": [
+                "Steagall PV, Robertson SA, Simon BT, et al. 2022 ISFM Consensus Guidelines on the Management of Acute Pain in Cats. J Feline Med Surg. 2022;24(1):4-30.",
+                "Sano T, Nishimura R, Kanazawa H, et al. Pharmacokinetics of fentanyl after single intravenous injection and constant rate infusion in cats. Res Vet Sci. 2006;80(3):351-355.",
+            ],
         },
         {
             "name": {"ja": "TIVA（全静脈麻酔）", "en": "TIVA (Total Intravenous Anesthesia)"},
@@ -698,6 +715,10 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             ],
             "notes_ja": "立位鎮静＋局所麻酔は全身麻酔に比べ安全性が格段に高い。創傷修復、歯科処置、去勢手術、眼科処置、上気道手術が可能。",
             "notes": "Standing sedation + local anesthesia is significantly safer than general anesthesia. Enables wound repair, dentistry, castration, ophthalmology, and upper airway surgery.",
+            "references": [
+                "Yamashita K, Muir WW III, Tsubakishita S, et al. Clinical comparison of xylazine and medetomidine for premedication of horses. J Am Vet Med Assoc. 2002;221(8):1144-1149.",
+                "Muir WW, Hubbell JAE. Equine Anesthesia: Monitoring and Emergency Therapy. 2nd ed. Saunders Elsevier; 2009.",
+            ],
         },
         {
             "name": {"ja": "立位鎮静＋鎮痛（疼痛性処置）", "en": "Standing Sedation + Analgesia (Painful Procedures)"},
@@ -751,6 +772,8 @@ ANESTHESIA_PROTOCOLS["horse"] = {
                 "Umar MA, Yamashita K, Kushiro T, Muir WW. Evaluation of total intravenous anesthesia with propofol or ketamine-medetomidine-propofol combination in horses. JAVMA. 2006;228(8):1221-1227.",
                 "Yamashita K, Muir WW 3rd, et al. Clinical comparison of xylazine and medetomidine for premedication of horses. JAVMA. 2002;221(8):1144-1149.",
                 "Yamashita K, Muir WW 3rd, et al. Infusion of guaifenesin, ketamine, and medetomidine in combination with inhalation of sevoflurane versus inhalation of sevoflurane alone for anesthesia of horses. JAVMA. 2002;221(8):1150-1155.",
+                "Hubbell JAE. Review of support of ventilation in the anesthetized horse. In: AAEP Proceedings. 2010;56:33-40.",
+                "Bettschart-Wolfensberger R, Larenza MP. Balanced anesthesia in the equine. Clin Tech Equine Pract. 2007;6(2):104-110.",
             ],
         },
         {
@@ -802,6 +825,10 @@ ANESTHESIA_PROTOCOLS["horse"] = {
             "drugs": [],
             "notes_ja": "覚醒は馬の麻酔で最も危険なフェーズ。パッドのある回復室を使用。ヘッド＆テールロープで補助。鎮静延長（ロミフィジン0.01 mg/kg IV）やacceptable sedation recovery（意図的に鎮静下で覚醒）を検討。完全に立てるまで監視。回復失敗（骨折等）は安楽死に至ることがある。",
             "notes": "Recovery is the most dangerous phase of equine anesthesia. Use padded recovery room. Assist with head and tail ropes. Consider sedation prolongation (romifidine 0.01 mg/kg IV) or assisted recovery techniques. Monitor until standing. Failed recovery (fracture) may necessitate euthanasia.",
+            "references": [
+                "Johnston GM, Eastment JK, Wood JLN, Taylor PM. The Confidential Enquiry into Perioperative Equine Fatalities (CEPEF): mortality results of Phases 1 and 2. Vet Anaesth Analg. 2002;29(4):159-170.",
+                "Young SS, Taylor PM. Factors influencing the outcome of equine anaesthesia: a review of 1,314 cases. Equine Vet J. 1993;25(2):147-151.",
+            ],
         },
         {
             "name": {"ja": "緊急対応", "en": "Emergency Protocols"},
@@ -918,6 +945,10 @@ ANESTHESIA_PROTOCOLS["rabbit"] = {
             ],
             "notes_ja": "ウサギは絶食不要（嘔吐できない）。長時間絶食はGI stasisリスク。アトロピナーゼ（ウサギの約30%が産生）に注意：抗コリン薬はグリコピロレート0.01-0.02 mg/kg SC/IMを使用。",
             "notes": "No fasting required for rabbits (cannot vomit). Prolonged fasting risks GI stasis. Atropinase (produced by ~30% of rabbits): use glycopyrrolate 0.01-0.02 mg/kg SC/IM instead of atropine.",
+            "references": [
+                "Varga M. Textbook of Rabbit Medicine. 2nd ed. Butterworth-Heinemann; 2014.",
+                "Grint NJ, Murison PJ. A comparison of ketamine-midazolam and ketamine-medetomidine combinations for induction of anaesthesia in rabbits. Vet Anaesth Analg. 2008;35(2):113-121.",
+            ],
         },
         {
             "name": {"ja": "前投薬＋導入", "en": "Premedication + Induction"},
@@ -933,6 +964,10 @@ ANESTHESIA_PROTOCOLS["rabbit"] = {
             ],
             "notes_ja": "気管挿管はサイズ2.0-4.0 ETチューブ。盲目挿管（呼吸音聴取）、V-gel（声門上気道デバイス）、内視鏡ガイドが選択肢。V-gelはウサギ用に設計されており推奨。",
             "notes": "Intubation with 2.0-4.0 ET tube. Options: blind technique (listen for breath sounds), V-gel (supraglottic airway device), endoscope-guided. V-gel is specifically designed for rabbits and recommended.",
+            "references": [
+                "Schnellbacher RW, Divers SJ, Comolli JR, et al. Effects of inhalant anesthetics on heart rate and body temperature in the domestic rabbit (Oryctolagus cuniculus). Vet Anaesth Analg. 2013;40(6):587-596.",
+                "Flecknell PA. Laboratory Animal Anaesthesia. 4th ed. Academic Press; 2015.",
+            ],
         },
         {
             "name": {"ja": "維持（吸入麻酔）", "en": "Maintenance (Inhalation)"},
@@ -1416,6 +1451,10 @@ ANESTHESIA_PROTOCOLS["ferret"] = {
             ],
             "notes_ja": "フェレットは比較的麻酔に耐性がある。マスク導入も可能（イソフルラン3-5%）だが、興奮・息止めに注意。",
             "notes": "Ferrets are relatively tolerant of anesthesia. Mask induction possible (isoflurane 3-5%) but watch for excitement/breath-holding.",
+            "references": [
+                "Ko JC, Markel MD. Comparison of sedative and cardiorespiratory effects of medetomidine-butorphanol and medetomidine-ketamine in ferrets. J Am Anim Hosp Assoc. 1997;33(2):130-136.",
+                "Quesenberry KE, Orcutt CJ, Mans C, Carpenter JW, eds. Ferrets, Rabbits, and Rodents: Clinical Medicine and Surgery. 4th ed. Elsevier; 2020.",
+            ],
         },
         {
             "name": {"ja": "前投薬", "en": "Premedication"},

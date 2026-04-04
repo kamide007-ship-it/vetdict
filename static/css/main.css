@@ -291,7 +291,8 @@ a:hover{text-decoration:underline}
 .husbandry-subtype .husbandry-grid{padding:12px}
 @media(max-width:600px){.husbandry-grid{grid-template-columns:1fr}}
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
-.disease-db-item:hover{background:var(--green-light)}
+.disease-db-item:active{background:var(--green-light)}
+@media(hover:hover){.disease-db-item:hover{background:var(--green-light)}}
 .disease-db-item .d-name{font-weight:600;font-size:.86rem}
 .disease-db-item .d-name-ja{color:var(--gray-600);font-size:.78rem;margin-left:6px}
 .disease-db-item .d-desc{font-size:.78rem;color:var(--gray-600);margin-top:2px}
@@ -600,7 +601,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 
 /* --- Disease DB improvements --- */
 .disease-db-item{transition:all var(--transition-fast)}
-.disease-db-item:hover{padding-left:18px;background:var(--green-light)}
+@media(hover:hover){.disease-db-item:hover{padding-left:18px;background:var(--green-light)}}
 
 /* --- Footer redesign --- */
 .footer{background:linear-gradient(180deg,var(--navy-dark) 0%,#080f24 100%);padding:0}
@@ -694,6 +695,11 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .chat-mode-toggle{gap:4px;padding:6px}
   .chat-mode-btn{font-size:.74rem;padding:6px 10px}
   body{padding-bottom:env(safe-area-inset-bottom)}
+  .az-nav{gap:4px;margin-bottom:10px}
+  .az-nav button{padding:6px 8px;font-size:.68rem;min-width:36px;min-height:36px}
+  .az-mode-toggle{font-size:.68rem!important;padding:6px 10px!important}
+  .disease-cat-header{font-size:.78rem;padding:6px 12px;position:sticky;top:0}
+  .disease-db-list{max-height:none;overflow-y:visible}
   /* Dark mode mobile nav dropdown */
 }
 
@@ -1341,6 +1347,12 @@ button.combination-item:focus-visible {
   .anesthesia-weight-calc{padding:4px 8px}
   .anesthesia-weight-input{width:65px;font-size:.82rem}
   .anesthesia-emergency-btn{padding:6px 10px;font-size:.76rem}
+  .anesthesia-references{padding:8px 10px}
+  .anesthesia-references ul{font-size:.66rem;padding-left:12px}
+  .anesthesia-ref-list{font-size:.68rem;padding-left:12px}
+  .anesthesia-notes{font-size:.76rem}
+  .anesthesia-breed-section{padding:10px}
+  .anesthesia-breed-item p{font-size:.72rem}
   .anesthesia-print-btn{padding:6px 10px;font-size:.76rem}
   .anesthesia-asa-filter{padding:6px 8px;font-size:.76rem;min-width:70px}
 }

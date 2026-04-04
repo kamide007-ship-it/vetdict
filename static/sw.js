@@ -1,5 +1,5 @@
 // VetDict Service Worker — offline support & caching
-const CACHE_NAME = 'vetdict-v15';
+const CACHE_NAME = 'vetdict-v16';
 const STATIC_ASSETS = [
   '/',
   '/static/favicon.svg',
@@ -32,7 +32,7 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(
       fetch(event.request).catch(() =>
-        new Response(JSON.stringify({ error: 'offline', message: 'ネットワークに接続できません。接続を確認してください。' }), {
+        new Response(JSON.stringify({ error: 'offline', message: 'ネットワークに接続できません。', message_en: 'Network unavailable. Please check your connection.' }), {
           status: 503,
           headers: { 'Content-Type': 'application/json' },
         })
