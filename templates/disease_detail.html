@@ -144,6 +144,107 @@
   </section>
   {% endif %}
 
+  {# Treatment enrichment sections (Phase 1) #}
+
+  {% if disease.prognosis_detailed_ja or disease.prognosis_detailed %}
+  <section>
+    <h2>📊 詳細予後</h2>
+    <div style="background:linear-gradient(135deg,#f0f7ff,#e8f5e9);padding:16px;border-radius:8px;margin-bottom:12px">
+      {% if disease.success_rate is not none %}
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:.9rem;border-bottom:1px solid rgba(0,0,0,.05)">
+        <strong>治療成功率：</strong>
+        <span style="color:var(--green);font-weight:600">{{ (disease.success_rate * 100)|int }}%</span>
+      </div>
+      {% endif %}
+      {% if disease.recovery_timeline_weeks %}
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:.9rem;border-bottom:1px solid rgba(0,0,0,.05)">
+        <strong>平均回復期間：</strong>
+        <span style="color:var(--navy);font-weight:600">{{ disease.recovery_timeline_weeks }}週</span>
+      </div>
+      {% endif %}
+      {% if disease.mortality_rate is not none %}
+      <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:.9rem">
+        <strong>死亡率：</strong>
+        <span style="color:var(--gray-700);font-weight:600">{{ (disease.mortality_rate * 100)|round(2)|string + '%' if disease.mortality_rate > 0 else '<0.1%' }}</span>
+      </div>
+      {% endif %}
+    </div>
+    <p>{{ disease.prognosis_detailed_ja or disease.prognosis_detailed }}</p>
+    {% if disease.prognosis_references %}
+    <details style="margin-top:12px;border-top:1px solid var(--gray-200);padding-top:8px">
+      <summary style="font-size:.82rem;font-weight:600;color:var(--navy);cursor:pointer">📚 参考文献を表示</summary>
+      <ol style="font-size:.75rem;line-height:1.6;padding-left:20px;margin-top:8px;color:var(--gray-600)">
+        {% if disease.prognosis_references.references %}
+        {% for ref in disease.prognosis_references.references %}
+        <li style="margin-bottom:6px">
+          {{ ref.authors|join(', ') }} ({{ ref.year }}).
+          <em>{{ ref.title }}</em>.
+          {% if ref.journal %}<strong>{{ ref.journal }}</strong>{% endif %}
+          {% if ref.volume %}<strong>{{ ref.volume }}</strong>{% endif %}
+          {% if ref.pages %}pp. {{ ref.pages }}{% endif %}.
+          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
+          {% if ref.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ ref.pmid }}/" target="_blank" rel="noopener" style="color:var(--gray-500);text-decoration:none;font-size:.7rem">[PubMed]</a>{% endif %}
+        </li>
+        {% endfor %}
+        {% endif %}
+      </ol>
+    </details>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if disease.rehabilitation_protocol_ja or disease.rehabilitation_protocol %}
+  <section>
+    <h2>🏃 リハビリテーション</h2>
+    <p style="white-space:pre-wrap;line-height:1.8">{{ disease.rehabilitation_protocol_ja or disease.rehabilitation_protocol }}</p>
+    {% if disease.rehabilitation_references %}
+    <details style="margin-top:12px;border-top:1px solid var(--gray-200);padding-top:8px">
+      <summary style="font-size:.82rem;font-weight:600;color:var(--navy);cursor:pointer">📚 参考文献を表示</summary>
+      <ol style="font-size:.75rem;line-height:1.6;padding-left:20px;margin-top:8px;color:var(--gray-600)">
+        {% if disease.rehabilitation_references.references %}
+        {% for ref in disease.rehabilitation_references.references %}
+        <li style="margin-bottom:6px">
+          {{ ref.authors|join(', ') }} ({{ ref.year }}).
+          <em>{{ ref.title }}</em>.
+          {% if ref.journal %}<strong>{{ ref.journal }}</strong>{% endif %}
+          {% if ref.volume %}<strong>{{ ref.volume }}</strong>{% endif %}
+          {% if ref.pages %}pp. {{ ref.pages }}{% endif %}.
+          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
+        </li>
+        {% endfor %}
+        {% endif %}
+      </ol>
+    </details>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if disease.nutrition_management_ja or disease.nutrition_management %}
+  <section>
+    <h2>🥗 栄養学的管理</h2>
+    <p style="white-space:pre-wrap;line-height:1.8">{{ disease.nutrition_management_ja or disease.nutrition_management }}</p>
+    {% if disease.nutrition_references %}
+    <details style="margin-top:12px;border-top:1px solid var(--gray-200);padding-top:8px">
+      <summary style="font-size:.82rem;font-weight:600;color:var(--navy);cursor:pointer">📚 参考文献を表示</summary>
+      <ol style="font-size:.75rem;line-height:1.6;padding-left:20px;margin-top:8px;color:var(--gray-600)">
+        {% if disease.nutrition_references.references %}
+        {% for ref in disease.nutrition_references.references %}
+        <li style="margin-bottom:6px">
+          {{ ref.authors|join(', ') }} ({{ ref.year }}).
+          <em>{{ ref.title }}</em>.
+          {% if ref.journal %}<strong>{{ ref.journal }}</strong>{% endif %}
+          {% if ref.volume %}<strong>{{ ref.volume }}</strong>{% endif %}
+          {% if ref.pages %}pp. {{ ref.pages }}{% endif %}.
+          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
+        </li>
+        {% endfor %}
+        {% endif %}
+      </ol>
+    </details>
+    {% endif %}
+  </section>
+  {% endif %}
+
   {% if mentioned_drugs %}
   <section>
     <h2>関連する薬品</h2>

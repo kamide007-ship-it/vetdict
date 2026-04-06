@@ -73,6 +73,25 @@ CREATE TABLE IF NOT EXISTS diseases (
     recommended_tests TEXT,     -- JSON array
     onset_pattern TEXT,         -- JSON array
     age_predisposition TEXT,    -- JSON array
+
+    -- Treatment enrichment fields (Phase 1 expansion)
+    prognosis_detailed TEXT,                       -- Extended prognosis with recovery timeline
+    prognosis_detailed_ja TEXT,                    -- 日本語版
+    rehabilitation_protocol TEXT,                  -- Evidence-based rehabilitation program
+    rehabilitation_protocol_ja TEXT,               -- 日本語版
+    nutrition_management TEXT,                     -- Nutritional support guidelines
+    nutrition_management_ja TEXT,                  -- 日本語版
+
+    -- Reference citations (JSON format)
+    prognosis_references TEXT,                     -- JSON: [{"id": "...", "title": "...", "journal": "...", "year": ..., "doi": "...", ...}]
+    rehabilitation_references TEXT,                -- JSON: reference list for rehabilitation
+    nutrition_references TEXT,                     -- JSON: reference list for nutrition
+
+    -- Clinical metrics
+    recovery_timeline_weeks INTEGER,               -- Typical recovery period in weeks
+    success_rate REAL,                             -- Treatment success rate (0.0-1.0)
+    mortality_rate REAL,                           -- Mortality rate (0.0-1.0)
+
     enriched_at TEXT,
     enrichment_phase INTEGER,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -133,6 +152,36 @@ def init_db(db_path: str | None = None) -> None:
     """Create all tables and indexes if they don't exist."""
     with get_connection(db_path) as conn:
         conn.executescript(SCHEMA_SQL)
+        _run_migrations(conn)
+
+
+def _run_migrations(conn: sqlite3.Connection) -> None:
+    """Run incremental schema migrations for backward compatibility."""
+    cursor = conn.cursor()
+
+    # Migration 1: Add treatment enrichment columns (Phase 1 expansion)
+    try:
+        cursor.execute("PRAGMA table_info(diseases)")
+        columns = {row[1] for row in cursor.fetchall()}
+
+        if "prognosis_detailed" not in columns:
+            logger.info("Running migration: add treatment enrichment columns")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_detailed TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_detailed_ja TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_protocol TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_protocol_ja TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_management TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_management_ja TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_references TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_references TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_references TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN recovery_timeline_weeks INTEGER")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN success_rate REAL")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN mortality_rate REAL")
+            conn.commit()
+            logger.info("Migration complete: treatment enrichment columns added")
+    except sqlite3.OperationalError as e:
+        logger.warning("Migration skipped (columns may already exist): %s", e)
 
 
 # ---------------------------------------------------------------------------
@@ -141,6 +190,17 @@ def init_db(db_path: str | None = None) -> None:
 
 def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
     """Insert or replace a disease record."""
+
+    # Helper to convert values to JSON string if they're dict/list but should be JSON
+    def _to_json_if_needed(val, is_json_field=False):
+        if val is None:
+            return None
+        if is_json_field and isinstance(val, (dict, list)):
+            return json.dumps(val, ensure_ascii=False)
+        if isinstance(val, (set, list)):
+            return json.dumps(list(val), ensure_ascii=False)
+        return val
+
     conn.execute(
         """INSERT OR REPLACE INTO diseases
            (id, species, name, name_ja, description, description_ja,
@@ -148,8 +208,13 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             treatment, treatment_ja, prevention, prevention_ja,
             prognosis, prognosis_ja, urgency, symptoms,
             recommended_tests, onset_pattern, age_predisposition,
+            prognosis_detailed, prognosis_detailed_ja,
+            rehabilitation_protocol, rehabilitation_protocol_ja,
+            nutrition_management, nutrition_management_ja,
+            prognosis_references, rehabilitation_references, nutrition_references,
+            recovery_timeline_weeks, success_rate, mortality_rate,
             enriched_at, enrichment_phase, updated_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)""",
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)""",
         (
             disease.get("id"),
             disease.get("species"),
@@ -168,10 +233,22 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             disease.get("prognosis"),
             disease.get("prognosis_ja"),
             disease.get("urgency"),
-            json.dumps(sorted(disease["symptoms"])) if isinstance(disease.get("symptoms"), (set, list)) else disease.get("symptoms"),
-            json.dumps(disease["recommended_tests"]) if isinstance(disease.get("recommended_tests"), list) else disease.get("recommended_tests"),
-            json.dumps(sorted(disease["onset_pattern"])) if isinstance(disease.get("onset_pattern"), (set, list)) else disease.get("onset_pattern"),
-            json.dumps(sorted(disease["age_predisposition"])) if isinstance(disease.get("age_predisposition"), (set, list)) else disease.get("age_predisposition"),
+            _to_json_if_needed(disease.get("symptoms"), is_json_field=True),
+            _to_json_if_needed(disease.get("recommended_tests"), is_json_field=True),
+            _to_json_if_needed(disease.get("onset_pattern"), is_json_field=True),
+            _to_json_if_needed(disease.get("age_predisposition"), is_json_field=True),
+            disease.get("prognosis_detailed"),
+            disease.get("prognosis_detailed_ja"),
+            disease.get("rehabilitation_protocol"),
+            disease.get("rehabilitation_protocol_ja"),
+            disease.get("nutrition_management"),
+            disease.get("nutrition_management_ja"),
+            _to_json_if_needed(disease.get("prognosis_references"), is_json_field=True),
+            _to_json_if_needed(disease.get("rehabilitation_references"), is_json_field=True),
+            _to_json_if_needed(disease.get("nutrition_references"), is_json_field=True),
+            disease.get("recovery_timeline_weeks"),
+            disease.get("success_rate"),
+            disease.get("mortality_rate"),
             disease.get("enriched_at"),
             disease.get("enrichment_phase"),
         ),
