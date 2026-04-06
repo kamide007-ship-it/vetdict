@@ -1,15 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <rect width="1200" height="630" fill="#1a3068"/>
-  <text x="600" y="220" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="120" font-weight="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c1840"/>
+      <stop offset="100%" stop-color="#1e3560"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="rgba(34,168,79,0.06)"/>
+      <stop offset="100%" stop-color="rgba(34,168,79,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="0" width="1200" height="5" fill="#22a84f" opacity="0.7"/>
+  <text x="600" y="210" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="108" font-weight="800">
     <tspan fill="#ffffff">Vet</tspan><tspan fill="#22a84f">Dict</tspan>
   </text>
-  <text x="600" y="320" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="36" fill="rgba(255,255,255,0.8)">
-    獣医学疾患データベース
+  <text x="600" y="285" text-anchor="middle" font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="32" fill="rgba(210,220,240,0.9)">
+    獣医師のための臨床意思決定支援ツール
   </text>
-  <text x="600" y="420" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="28" fill="rgba(255,255,255,0.5)">
-    21動物種 · 6,400+疾患 · 194薬品 · 獣医臨床支援
+  <rect x="560" y="310" width="80" height="4" rx="2" fill="#22a84f" opacity="0.7"/>
+  <text x="600" y="490" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="rgba(140,160,200,0.7)">
+    Clinical Decision Support for Veterinary Professionals
   </text>
-  <text x="600" y="560" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="rgba(255,255,255,0.3)">
-    vetdict.info — Developed by Kentaro Kamide, DVM
+  <text x="600" y="570" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="16" fill="rgba(100,120,160,0.6)">
+    vetdict.info
   </text>
+  <rect x="0" y="626" width="1200" height="4" fill="#22a84f" opacity="0.5"/>
 </svg>
