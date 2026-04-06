@@ -39,7 +39,7 @@ VALID_SYMPTOMS: set[str] = {
     "circling", "scratching", "seizures",
     # Urinary / Reproductive
     "straining_urinate", "blood_urine", "incontinence",
-    "genital_discharge",
+    "genital_discharge", "mammary_swelling", "prolonged_estrus",
     # Additional
     "swelling", "collapse", "ear_discharge", "head_shaking",
     "skin_lesions",
@@ -103,6 +103,8 @@ SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "blood_urine": {"ja": "血尿", "en": "Blood in Urine"},
     "incontinence": {"ja": "尿失禁", "en": "Incontinence"},
     "genital_discharge": {"ja": "生殖器分泌物", "en": "Genital Discharge"},
+    "mammary_swelling": {"ja": "乳腺腫脹・乳汁分泌", "en": "Mammary Swelling / Lactation"},
+    "prolonged_estrus": {"ja": "発情異常・発情停止", "en": "Prolonged / Absent Estrus"},
     "swelling": {"ja": "腫れ・浮腫", "en": "Swelling / Edema"},
     "collapse": {"ja": "虚脱・失神", "en": "Collapse / Fainting"},
     "ear_discharge": {"ja": "耳だれ", "en": "Ear Discharge"},
@@ -961,11 +963,16 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "プロゲステロンの慢性的子宮内膜刺激（CEH）＋E. coliの上行性感染（最多）。"
                      "外因性プロゲステロン製剤、エストロゲン投与（交配後避妊）がリスク因子。"
                      "未避妊の中高齢雌犬（特に未経産犬）に好発。",
-        "treatment_ja": "【第一選択】卵巣子宮摘出術（OHE）→緊急手術。術前に循環安定化（輸液、広域抗菌薬）。"
-                        "抗菌薬：アンピシリン＋エンロフロキサシン（E. coli対策）。"
-                        "【内科的治療】繁殖温存が必要な場合のみ：アグレプリストン（抗プロゲステロン薬）"
-                        "＋プロスタグランジンF2α＋抗菌薬。ただし再発率70%以上。"
-                        "閉鎖型は子宮破裂リスクがあり外科が強く推奨。",
+        "treatment_ja": "【第一選択】卵巣子宮摘出術（OHE）→緊急手術。術前に循環安定化（乳酸リンゲル液10〜20mL/kg/hr）、"
+                        "広域抗菌薬（アンピシリン22mg/kg IV q8h ＋ エンロフロキサシン5mg/kg IV q24h, E. coli対策）。"
+                        "【内科的治療 — 繁殖温存例（開放型・全身状態良好）】"
+                        "アグレプリストン（Alizin®; 抗プロゲステロン薬）10mg/kg SC × 2回（day 1・day 3）→子宮頸部拡張と排膿を促進。"
+                        "エンロフロキサシン 5mg/kg PO q24h × 14〜28日（培養感受性に応じて調整）。"
+                        "プロスタグランジンF2α（ジノプロスト 0.025〜0.05mg/kg SC q8〜12h、慎重適用）と併用可。"
+                        "Day 7・14・28に超音波で子宮径の縮小を確認。治療後は次の発情での妊娠を推奨（再発予防）。"
+                        "閉鎖型・重篤例・腎障害合併例は内科治療の適応外 → 緊急OHE優先。"
+                        "再発率：アグレプリストン単独17〜25%（PGF2α併用でさらに低下）。Alizin®: Virbac製品。"
+                        "Reference: Fieni et al. (2006) J Small Anim Pract; Threlfall (2011) Vet Clin North Am.",
         "prognosis_ja": "外科治療：生存率95%以上（敗血症合併がなければ）。"
                         "内科治療：繁殖犬では次の発情での妊娠率50〜60%。再発率が非常に高い。"
                         "敗血症・DIC合併例は予後不良。",
@@ -6996,7 +7003,79 @@ DISEASES: List[Dict[str, Any]] = [
 "urgency": "high",
         "recommended_tests": ["thoracic_xray", "contrast_esophagram"],
     },
+    # ===== REPRODUCTIVE MEDICINE (Breeding Disorders) — 繁殖医学疾患 =====
+    {
+        "name": "Ovarian Hypofunction (Primary Hypoluteoidism)",
+        "name_ja": "卵巣機能低下症（黄体機能不全）",
+        "symptoms": {"prolonged_estrus", "lethargy", "weight_loss"},
+        "description": "Primary ovarian dysfunction characterized by insufficient progesterone production from corpus luteum, resulting in infertility or pregnancy loss.",
+        "description_ja": "黄体からのプロゲステロン産生不足により不妊または妊娠喪失をもたらす一次性卵巣機能不全。",
+        "pathophysiology_ja": "LH surge後の黄体形成不全 → プロゲステロン産生低下（<5ng/mL sustained, normal >10ng/mL）→ 子宮内膜が妊娠維持に必要な環境を形成できない → 受精卵着床失敗または早期胎仔死滅。子宮内膜の分泌変化・血管新生不全。約5-10%の原発性不妊症がこれに該当。",
+        "causes_ja": "一次性：卵巣黄体形成障害（遺伝的素因の可能性）。好発：ボクサー、ドーベルマン、ジャーマンシェパード。加齢による卵巣予備能低下（高齢初産）。栄養不良（極度の低脂肪食、カロリー不足）。持続的ストレス。まれに自己免疫性卵巣炎。",
+        "treatment_ja": "プロゲステロン補充療法：アルトレノゲスト（Regumate®）0.044-0.066mg/kg PO q24h、発情5日目～妊娠28-30日目まで。または天然プロゲステロン25-50mg IM q24-48h。hCG 500-1000 IU IM on day 3-4 post-LH surge。栄養管理：高タンパク・高脂肪食、ビタミンE+セレン補給。複数回交配（day 3, 5, 7 post-LH surge）。血清progesterone測定で治療効果確認（target >10-15ng/mL）。",
+        "prognosis_ja": "ホルモン補充で60-80%の受胎率改善。根本的な卵巣機能不全は完治困難で毎回治療が必要。妊娠維持率：補充なし20-30% → 補充で70-85%。",
+        "prevention_ja": "健全な繁殖犬の選定。適切な体条スコア維持（BCS 5/9）。発情周期の事前ホルモン測定（progesterone day 21 post-estrus）。高栄養価飼料。初産年齢は2-3才齢が最適。Reference: Concannon PW (2011) Theriogenology.",
+        "urgency": "moderate",
+        "recommended_tests": ["serum_progesterone", "lh_surge_timing", "uterine_ultrasound", "endometrial_cytology"],
+    },
+    {
+        "name": "Pseudopregnancy (False Pregnancy / Galactorrhea)",
+        "name_ja": "偽妊娠（想像妊娠）",
+        "symptoms": {"mammary_swelling", "lethargy", "anxiety", "weight_gain"},
+        "description": "Non-pregnant state with behavioral and physical pregnancy signs after estrus, caused by prolonged luteal phase with elevated progesterone.",
+        "description_ja": "発情後の非妊娠状態でも黄体が萎縮せず高プロゲステロン血症が続くことで、妊娠と同様の身体・行動徴候を呈する状態。",
+        "pathophysiology_ja": "黄体期の遷延：正常犬では発情後55-60日で黄体が萎縮しプロゲステロンが低下。偽妊娠では80-90日以上プロゲステロンが維持される（プロラクチン低下障害の可能性）→ 乳腺増生・乳汁分泌（galactorrhea）。行動変化：巣作り行動、他個体への対抗行動。約50-60%の犬で何らかの偽妊娠兆候。",
+        "causes_ja": "生理的黄体期遷延。プロラクチン分泌不全による黄体萎縮遅延。視床下部-下垂体-卵巣軸の機能異常。心理的ストレス・環境変化で悪化。未去勢犬での反復的偽妊娠は習慣化。",
+        "treatment_ja": "【軽症】対症療法：冷罨法、抗ヒスタミン薬による痒み軽減。【中等度以上】カベルゴリン（Cabergoline）1μg/kg PO q12h × 7-14日でプロラクチン抑制。アグレプリストン10mg/kg SC × 2回（day 1・3）でプロゲステロン低下（ただし次発情が3-4週遅延する可能性）。【習慣化例】早期避妊手術（OHE）が最も確実。薬物療法後の再発率30-40%。",
+        "prognosis_ja": "軽症：時間経過で自然軽快（2-4週）。習慣化例：避妊まで反復再発。避妊後の再発率<5%。",
+        "prevention_ja": "習慣化傾向のある個体は早期避妊を推奨。初回偽妊娠後の予防的ホルモン投与は費用対効果低い。Reference: Gobello C (2007) Anim Reprod Sci.",
+        "urgency": "normal",
+        "recommended_tests": ["serum_prolactin", "serum_progesterone", "mammary_ultrasound"],
+    },
+    {
+        "name": "Postpartum Metritis",
+        "name_ja": "産後子宮炎（分娩後子宮内膜炎）",
+        "symptoms": {"genital_discharge", "fever", "lethargy", "appetite_loss"},
+        "description": "Uterine infection within 7-14 days postpartum, typically from retained products of conception or dystocia-related trauma.",
+        "description_ja": "分娩後7-14日以内に発生する子宮内感染症。胎盤停滞・出産遅延による子宮内膜損傷に二次感染が続発。",
+        "pathophysiology_ja": "分娩時の子宮内膜剥離 → 胎盤遺残・臨界死組織の化膿性感染（E. coli, S. aureus, Streptococcus, 嫌気性菌混合）→ 子宮内膜炎・筋層炎。敗血症ショック・エンドトキシン血症のリスク。プロゲステロン依存性の子宮免疫がまだ低下している時期の感染発症。新生仔への感染リスク。",
+        "causes_ja": "胎盤停滞（>30分）、難産（帝王切開後）、長時間の分娩ステージ。子宮穿孔。産褥期の衛生管理不十分。初産・高齢初産での分娩合併症（母体組織損傷大）。栄養不良の母体。",
+        "treatment_ja": "【抗菌療法 — 早期投与必須】セファロスポリン系（セファレキシン25mg/kg PO q6h × 14日）+ エンロフロキサシン（5mg/kg IV q24h × 7日）。培養感受性結果に応じて調整。【補助療法】輸液（乳酸リンゲル10-20mL/kg IV q8-12h）、制吐薬（マロピタント0.1mg/kg IV q24h）。【子宮清掃】physiologic saline 37℃による子宮洗浄を1-2回施行する場合あり（穿孔リスク）。【乳汁相談】授乳継続は一般に安全（抗菌薬乳汁移行リスク確認必須）。",
+        "prognosis_ja": "早期治療で予後良好（80-90%回復）。遅延治療・敗血症合併で予後不良。慢性化すると子宮療着・不妊化。",
+        "prevention_ja": "分娩監視（難産の早期介入）。胎盤排出確認（全胎仔数と胎盤数の一致）。産褥期の衛生的環境維持。栄養価の高い産褥食。難産既往犬の次回妊娠では計画帝王切開を検討。Reference: Tonkonojenkov et al. (2012) Theriogenology.",
+        "urgency": "high",
+        "recommended_tests": ["uterine_culture", "cbcwdp", "blood_biochemistry"],
+    },
+    {
+        "name": "Mastitis (Lactational and Non-lactational)",
+        "name_ja": "乳腺炎（哺乳期・非哺乳期）",
+        "symptoms": {"mammary_swelling", "pain_on_touch", "fever", "lethargy"},
+        "description": "Inflammation of mammary glands, usually bacterial infection during lactation, with swollen, painful, hot glands and systemic signs.",
+        "description_ja": "乳腺の細菌感染に伴う炎症。哺乳期に多いが、偽妊娠や乳房損傷時にも発症。",
+        "pathophysiology_ja": "乳腺管への上行性感染（E. coli, S. aureus, Streptococcus agalactiae最多）。新生仔による過度な乳房吸引→乳管損傷・菌侵入。授乳中断による乳汁貯留→乳腺内圧上昇→細菌増殖。膿汁化・膿瘍形成→敗血症ショック。新生仔への乳汁を通じた病原菌伝播。",
+        "causes_ja": "授乳期の乳房損傷（新生仔の爪、過度なしゃぶり）。衛生管理不十分（分娩舎汚染）。乳房圧迫。栄養不良の母体。偽妊娠時の乳房腫脹を無理にしぼること。",
+        "treatment_ja": "【抗菌療法 — 授乳継続可能な選択】セファロスポリン系（セファレキシン25mg/kg PO q6h）。クリンダマイシン（11mg/kg PO q12h）。【局所対症】冷罨法（患部に冷タオル15分 q3-4h）で炎症軽減。温罨法後マッサージで乳汁排出促進。膿が出現したら新生仔には授乳させない（別乳腺から継続）。【全身療法】NSAIDs（カルプロフェン4.4mg/kg PO q12h）で疼痛・炎症軽減。輸液サポート。【重症例】膿瘍化時は外科的排膿・デブリードマン。",
+        "prognosis_ja": "早期治療で1-2週で改善（80-90%）。遅延治療・膿瘍化では機能喪失乳腺が残存（次妊娠での泌乳機能低下）。敗血症合併例は予後不良。",
+        "prevention_ja": "産褥期の環境衛生（分娩舎の毎日消毒）。新生仔の爪管理。母犬の乳房チェック（毎日）。栄養管理（高タンパク・高脂肪食）。乳房への無理な圧迫・マッサージ禁止。Reference: Veronesi MC (2016) Theriogenology.",
+        "urgency": "high",
+        "recommended_tests": ["mammary_milk_culture", "cbcwdp", "blood_biochemistry"],
+    },
+    {
+        "name": "Female Canine Infertility",
+        "name_ja": "雌犬不妊症（受胎困難・不妊症）",
+        "symptoms": {"prolonged_estrus", "genital_discharge", "weight_loss"},
+        "description": "Inability to conceive despite regular estrous cycles and mating; may be primary (never conceived) or secondary (previously fertile).",
+        "description_ja": "規則的な発情周期と交配があるにもかかわらず受胎できない状態。一次性（経産経験なし）と二次性（以前は妊娠経験あり）に分類。",
+        "pathophysiology_ja": "受胎困難のメカニズムは多因子：(1)排卵障害→受精卵がない、(2)輸卵管障害→精子輸送不全・受精卵移動障害、(3)受精卵着床不全→子宮内膜受容性低下、(4)子宮内膜症→着床環境不適切、(5)免疫学的因子→反復着床失敗、(6)オスの精子問題、(7)交配時期の誤り。約15-20%の不妊症が医学的に説明できない。",
+        "causes_ja": "一次不妊：卵巣機能不全、輸卵管閉塞、先天性生殖器異常。二次不妊：子宮内膜瘢痕化（反復性pyometra、内膜炎）。ホルモン異常（LH不足、progesterone低下）。高齢（7才以上で妊娠維持率低下）。栄養不良。甲状腺機能低下症。肥満。過去の難産・帝王切開。交配技術的問題。",
+        "treatment_ja": "【診断】膣細胞診（keratinization度）& 血清progesterone serial（LH surge day 0→prog <3ng/mL, day 7→15-25ng/mL）。子宮卵巣超音波（排卵確認、形態異常検索）。卵管通通性検査（子宮卵管造影）。子宮内膜細胞診・培養。【排卵誘発】GnRH（Cystorelin 10μg IM）or hCG（1000IU IM）on day 5-7 post-LH surge。【ホルモン補充】Progesterone 25-50mg IM q24-48h × 28-30日（妊娠維持目的）。【交配管理】progesterone測定に基づく最適交配日の決定。複数回交配（day 3, 5, 7 post-LH surge）。人工授精の検討。【オスの評価】精液検査（濃度、運動性、奇形率）が重要。",
+        "prognosis_ja": "一次不妊：治療困難（避妊推奨）。二次不妊（子宮内膜瘢痕化）：妊娠率<30%。排卵障害のみ：60-80%受胎率。若齢初期治療が最良。多くは避妊管理が現実的。",
+        "prevention_ja": "健全な繁殖個体選定（検査基盤不妊症なし）。適切な交配管理（LH surge day +3-5が最適）。高栄養食・適正体重維持。子宮感染予防・早期治療。高齢妊娠の回避（5-6才以前に繁殖終了推奨）。Reference: Concannon PW (2011) Theriogenology.",
+        "urgency": "normal",
+        "recommended_tests": ["vaginal_cytology", "serum_progesterone_serial", "uterine_ovarian_ultrasound", "uterohysterosalpingography", "semen_analysis"],
+    },
 ]
+
 
 TEST_DB: List[Dict[str, Any]] = [
     {
@@ -7347,7 +7426,8 @@ SYMPTOM_CATEGORIES = {
         "circling", "scratching", "seizures"
     ]},
     "urinary": {"name_ja": "泌尿・生殖器", "name_en": "Urinary/Reproductive", "symptoms": [
-        "straining_urinate", "blood_urine", "incontinence", "genital_discharge"
+        "straining_urinate", "blood_urine", "incontinence", "genital_discharge",
+        "mammary_swelling", "prolonged_estrus",
     ]},
     "other": {"name_ja": "その他", "name_en": "Other", "symptoms": [
         "swelling", "collapse", "ear_discharge", "head_shaking", "skin_lesions"
