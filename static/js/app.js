@@ -854,6 +854,35 @@ function sanitizeUrl(value){
   }
 }
 
+function renderOrthopedicReferences(d){
+  const sections=[
+    {key:"prognosis_references",label:currentLang==="ja"?"予後エビデンス":"Prognosis Evidence"},
+    {key:"rehabilitation_references",label:currentLang==="ja"?"リハビリ文献":"Rehabilitation References"},
+    {key:"nutrition_references",label:currentLang==="ja"?"栄養管理文献":"Nutrition References"},
+  ];
+  const rendered=sections.map(sec=>{
+    const refs=(d[sec.key]&&Array.isArray(d[sec.key].references))?d[sec.key].references:[];
+    if(!refs.length)return "";
+    const items=refs.map(r=>{
+      const authors=(Array.isArray(r.authors)&&r.authors.length)
+        ?r.authors[0]+(r.authors.length>1?" et al.":"")
+        :"Unknown";
+      const year=r.year||"";
+      const journal=r.journal?`<em>${escapeHtml(r.journal)}</em>`:"";
+      const vol=r.volume?` ${r.volume}`:""
+      const pages=r.pages?`:${r.pages}`:"";
+      const doi=r.doi?`<a href="https://doi.org/${encodeURIComponent(r.doi)}" target="_blank" rel="noopener" style="color:var(--green);font-size:.78rem">DOI</a>`:"";
+      const pmid=r.pmid?`<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(r.pmid)}/" target="_blank" rel="noopener" style="color:var(--blue,#2563eb);font-size:.78rem">PMID</a>`:"";
+      const evid=r.evidence_level?`<span style="font-size:.75rem;color:var(--gray-500)">[${escapeHtml(r.evidence_level)}]</span>`:"";
+      const links=[doi,pmid].filter(Boolean).join(" ");
+      return `<li style="margin-bottom:4px"><span style="font-weight:600">${escapeHtml(authors)} (${year})</span> ${escapeHtml(r.title||"")}. ${journal}${vol}${pages}. ${links} ${evid}</li>`;
+    }).join("");
+    return `<div style="margin-top:8px"><div style="font-size:.8rem;font-weight:700;color:var(--gray-600);margin-bottom:4px">${sec.label}</div><ul style="list-style:none;padding:0;margin:0;font-size:.82rem;color:var(--gray-700)">${items}</ul></div>`;
+  }).filter(Boolean).join("");
+  if(!rendered)return "";
+  return `<div class="ortho-refs" style="margin-top:12px;padding:10px;background:var(--gray-50,#f9fafb);border-radius:6px;border-left:3px solid var(--green)"><div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin-bottom:6px">📚 ${currentLang==="ja"?"参考文献（エビデンスベース）":"References (Evidence-based)"}</div>${rendered}</div>`;
+}
+
 function renderReferenceLinks(item){
   const refs=(item&&Array.isArray(item.evidence_sources))?item.evidence_sources:[];
   if(!refs.length)return "";
@@ -1599,7 +1628,7 @@ function renderDiseaseDb(){
         ${recoveryWeeks?`<dt>回復期間/Recovery Timeline</dt><dd>${recoveryWeeks}週間 / ${recoveryWeeks} weeks</dd>`:""}
         ${successRate!==undefined?`<dt>成功率/Success Rate</dt><dd>${(successRate*100).toFixed(1)}%</dd>`:""}
         ${mortalityRate!==undefined?`<dt>死亡率/Mortality Rate</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
-      </dl><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
+      </dl>${renderOrthopedicReferences(d)}<div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
   if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
   const shownCount=shown.filter(d=>!d._catHeader).length;
