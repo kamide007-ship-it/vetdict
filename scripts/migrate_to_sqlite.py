@@ -60,8 +60,21 @@ def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
     mod = _load_module(module_path)
     diseases = getattr(mod, "DISEASES", [])
     count = 0
+
+    # Helper to extract ja/en from dict fields
+    def _extract_ja_en(field_val):
+        if isinstance(field_val, dict):
+            return field_val.get("ja"), field_val.get("en")
+        return None, field_val
+
     for i, d in enumerate(diseases):
         disease_id = d.get("id") or f"{species_key}_{i:04d}"
+
+        # Extract ja/en from fields that might be dicts
+        treatment_ja, treatment_en = _extract_ja_en(d.get("treatment"))
+        prevention_ja, prevention_en = _extract_ja_en(d.get("prevention"))
+        prognosis_ja, prognosis_en = _extract_ja_en(d.get("prognosis"))
+
         record = {
             "id": disease_id,
             "species": species_key,
@@ -73,12 +86,12 @@ def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
             "pathophysiology_ja": d.get("pathophysiology_ja"),
             "causes": d.get("causes"),
             "causes_ja": d.get("causes_ja"),
-            "treatment": d.get("treatment"),
-            "treatment_ja": d.get("treatment_ja"),
-            "prevention": d.get("prevention"),
-            "prevention_ja": d.get("prevention_ja"),
-            "prognosis": d.get("prognosis"),
-            "prognosis_ja": d.get("prognosis_ja"),
+            "treatment": treatment_en or d.get("treatment"),
+            "treatment_ja": treatment_ja or d.get("treatment_ja"),
+            "prevention": prevention_en or d.get("prevention"),
+            "prevention_ja": prevention_ja or d.get("prevention_ja"),
+            "prognosis": prognosis_en or d.get("prognosis"),
+            "prognosis_ja": prognosis_ja or d.get("prognosis_ja"),
             "urgency": d.get("urgency"),
             "symptoms": d.get("symptoms", set()),
             "recommended_tests": d.get("recommended_tests", []),
@@ -114,6 +127,17 @@ def migrate_dog_diseases(conn) -> int:
     count = 0
     for i, d in enumerate(diseases):
         disease_id = d.get("id") or f"dog_{i:04d}"
+
+        # Handle fields that might be dict with 'ja'/'en' keys
+        def _extract_ja_en(field_val):
+            if isinstance(field_val, dict):
+                return field_val.get("ja"), field_val.get("en")
+            return None, field_val
+
+        treatment_ja, treatment_en = _extract_ja_en(d.get("treatment"))
+        prevention_ja, prevention_en = _extract_ja_en(d.get("prevention"))
+        prognosis_ja, prognosis_en = _extract_ja_en(d.get("prognosis"))
+
         record = {
             "id": disease_id,
             "species": "dog",
@@ -125,12 +149,12 @@ def migrate_dog_diseases(conn) -> int:
             "pathophysiology_ja": d.get("pathophysiology_ja"),
             "causes": d.get("causes"),
             "causes_ja": d.get("causes_ja"),
-            "treatment": d.get("treatment"),
-            "treatment_ja": d.get("treatment_ja"),
-            "prevention": d.get("prevention"),
-            "prevention_ja": d.get("prevention_ja"),
-            "prognosis": d.get("prognosis"),
-            "prognosis_ja": d.get("prognosis_ja"),
+            "treatment": treatment_en or d.get("treatment"),
+            "treatment_ja": treatment_ja or d.get("treatment_ja"),
+            "prevention": prevention_en or d.get("prevention"),
+            "prevention_ja": prevention_ja or d.get("prevention_ja"),
+            "prognosis": prognosis_en or d.get("prognosis"),
+            "prognosis_ja": prognosis_ja or d.get("prognosis_ja"),
             "urgency": d.get("urgency"),
             "symptoms": d.get("symptoms", set()),
             "recommended_tests": d.get("recommended_tests", []),
@@ -204,11 +228,33 @@ def migrate_json_enrichments(conn) -> int:
     # Iterate over all diseases currently in SQLite and enrich where names match.
     rows = conn.execute("SELECT id, name FROM diseases").fetchall()
     count = 0
+
+    def _extract_ja_en(field_val):
+        if isinstance(field_val, dict):
+            return field_val.get("ja"), field_val.get("en")
+        return None, field_val
+
+    def _to_json_str(field_val):
+        if isinstance(field_val, dict):
+            return json.dumps(field_val, ensure_ascii=False)
+        return field_val
+
     for row in rows:
         db_id, db_name = row["id"], row["name"]
         entry = json_by_name.get(_norm(db_name))
         if not entry:
             continue
+
+        # Handle fields that might be dict with 'ja'/'en' keys
+        treatment_ja, treatment_en = _extract_ja_en(entry.get("treatment"))
+        prevention_ja, prevention_en = _extract_ja_en(entry.get("prevention"))
+        prognosis_ja, prognosis_en = _extract_ja_en(entry.get("prognosis"))
+
+        # Convert dict reference fields to JSON strings
+        prognosis_refs = _to_json_str(entry.get("prognosis_references"))
+        rehab_refs = _to_json_str(entry.get("rehabilitation_references"))
+        nutrition_refs = _to_json_str(entry.get("nutrition_references"))
+
         conn.execute(
             """UPDATE diseases SET
                 description = COALESCE(?, description),
@@ -223,6 +269,18 @@ def migrate_json_enrichments(conn) -> int:
                 prevention_ja = COALESCE(?, prevention_ja),
                 prognosis = COALESCE(?, prognosis),
                 prognosis_ja = COALESCE(?, prognosis_ja),
+                prognosis_detailed = COALESCE(?, prognosis_detailed),
+                prognosis_detailed_ja = COALESCE(?, prognosis_detailed_ja),
+                rehabilitation_protocol = COALESCE(?, rehabilitation_protocol),
+                rehabilitation_protocol_ja = COALESCE(?, rehabilitation_protocol_ja),
+                nutrition_management = COALESCE(?, nutrition_management),
+                nutrition_management_ja = COALESCE(?, nutrition_management_ja),
+                prognosis_references = COALESCE(?, prognosis_references),
+                rehabilitation_references = COALESCE(?, rehabilitation_references),
+                nutrition_references = COALESCE(?, nutrition_references),
+                recovery_timeline_weeks = COALESCE(?, recovery_timeline_weeks),
+                success_rate = COALESCE(?, success_rate),
+                mortality_rate = COALESCE(?, mortality_rate),
                 enriched_at = ?,
                 enrichment_phase = ?,
                 updated_at = CURRENT_TIMESTAMP
@@ -234,12 +292,24 @@ def migrate_json_enrichments(conn) -> int:
                 entry.get("pathophysiology_ja"),
                 _clean(entry.get("causes")),
                 _clean(entry.get("causes_ja")),
-                entry.get("treatment"),
-                entry.get("treatment_ja"),
-                entry.get("prevention"),
-                entry.get("prevention_ja"),
-                _clean(entry.get("prognosis")),
-                _clean(entry.get("prognosis_ja")),
+                treatment_en or entry.get("treatment"),
+                treatment_ja or entry.get("treatment_ja"),
+                prevention_en or entry.get("prevention"),
+                prevention_ja or entry.get("prevention_ja"),
+                _clean(prognosis_en or entry.get("prognosis")),
+                _clean(prognosis_ja or entry.get("prognosis_ja")),
+                entry.get("prognosis_detailed"),
+                entry.get("prognosis_detailed_ja"),
+                entry.get("rehabilitation_protocol"),
+                entry.get("rehabilitation_protocol_ja"),
+                entry.get("nutrition_management"),
+                entry.get("nutrition_management_ja"),
+                prognosis_refs,
+                rehab_refs,
+                nutrition_refs,
+                entry.get("recovery_timeline_weeks"),
+                entry.get("success_rate"),
+                entry.get("mortality_rate"),
                 entry.get("enriched_at"),
                 entry.get("enrichment_phase"),
                 db_id,
@@ -771,7 +841,17 @@ def migrate_equine(conn) -> int:
     mod = _load_module("api.species.equine_diseases")
     disease_db = getattr(mod, "DISEASE_DATABASE", [])
     count = 0
+
+    def _extract_ja_en(field_val):
+        if isinstance(field_val, dict):
+            return field_val.get("ja"), field_val.get("en")
+        return None, field_val
+
     for d in disease_db:
+        treatment_ja, treatment_en = _extract_ja_en(d.treatment_protocol)
+        prevention_ja, prevention_en = _extract_ja_en(d.prevention)
+        prognosis_ja, prognosis_en = _extract_ja_en(d.prognosis)
+
         record = {
             "id": d.id,
             "species": "horse",
@@ -781,9 +861,12 @@ def migrate_equine(conn) -> int:
             "description_ja": d.description_ja,
             "pathophysiology": d.pathophysiology,
             "causes": d.etiology,
-            "treatment": d.treatment_protocol,
-            "prevention": d.prevention,
-            "prognosis": d.prognosis,
+            "treatment": treatment_en or d.treatment_protocol,
+            "treatment_ja": treatment_ja or getattr(d, "treatment_ja", None),
+            "prevention": prevention_en or d.prevention,
+            "prevention_ja": prevention_ja or getattr(d, "prevention_ja", None),
+            "prognosis": prognosis_en or d.prognosis,
+            "prognosis_ja": prognosis_ja or getattr(d, "prognosis_ja", None),
             "urgency": d.urgency or d.severity,
             "symptoms": set(d.associated_findings),
             "recommended_tests": [(e[1] if len(e) > 1 else str(e)) for e in (d.recommended_exams or [])],

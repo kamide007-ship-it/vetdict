@@ -491,6 +491,9 @@ def _row_to_disease_detail(row) -> dict:
     # Parse JSON fields back to lists
     for field in ("symptoms", "recommended_tests", "onset_pattern", "age_predisposition"):
         d[field] = _parse_json_field(d.get(field))
+    # Parse reference JSON fields (enrichment fields)
+    for field in ("prognosis_references", "rehabilitation_references", "nutrition_references"):
+        d[field] = _parse_json_field(d.get(field))
     return d
 
 
