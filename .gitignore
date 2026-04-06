@@ -12,3 +12,4 @@ phase3_enrichment_manifest.json
 diseases_enriched_phase*.json
 qa_report_phase*.json
 diseases_all_species_backup_*.json
+*.backup_*.json
