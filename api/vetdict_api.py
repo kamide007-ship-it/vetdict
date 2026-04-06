@@ -802,27 +802,26 @@ def api_dashboard_stats():
         dict with keys: total_diseases, total_drugs, total_species, total_protocols
     """
     from api.disease_store import get_species_stats
-    from api.anesthesia_protocols import ANESTHESIA_CATEGORIES, get_all_species_ids
 
     # Get disease/drug/species stats
     species_stats = get_species_stats()
 
-    # Count anesthesia protocols: all protocols across all species and categories
+    # Count anesthesia protocols: all protocols across all species
     total_protocols = 0
     try:
+        from api.anesthesia_protocols import get_all_species_ids, get_protocols_for_species
+
         for species_id in get_all_species_ids():
-            # Each species has protocols for each category
-            # We count non-empty protocol entries
             try:
-                from api.anesthesia_api import _get_protocols_for_species
-                protocols = _get_protocols_for_species(species_id, "", "")
-                total_protocols += len(protocols.get('protocols', []))
+                sp_data = get_protocols_for_species(species_id)
+                if sp_data and 'protocols' in sp_data:
+                    total_protocols += len(sp_data['protocols'])
             except Exception:
-                # Fallback: count from ANESTHESIA_PROTOCOLS module directly
+                # Skip species if protocol fetch fails
                 pass
     except Exception as e:
         logger.warning(f"Failed to count anesthesia protocols: {e}")
-        # Fallback to a reasonable estimate (21 species × 8-9 categories avg)
+        # Fallback to last known value
         total_protocols = 188
 
     return {
