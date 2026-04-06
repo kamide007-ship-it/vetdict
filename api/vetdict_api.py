@@ -459,15 +459,25 @@ def _load_diseases(species_key: str) -> list:
 
 def _disease_slug(disease) -> str:
     """Generate a URL-safe slug from a disease dict or dataclass."""
-    name = disease.get("name", "") if isinstance(disease, dict) else getattr(disease, "name", "")
+    if isinstance(disease, dict):
+        name = disease.get("name", "") or disease.get("name_en", "")
+    else:
+        name = getattr(disease, "name", "") or getattr(disease, "name_en", "")
     return _re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
 
 
 def _disease_get(disease, key, default=""):
     """Get attribute from disease dict or dataclass."""
     if isinstance(disease, dict):
-        return disease.get(key, default)
-    return getattr(disease, key, default)
+        val = disease.get(key, default)
+        # Fallback: "name" -> "name_en" for species using name_en (e.g. equine)
+        if not val and key == "name":
+            val = disease.get("name_en", default)
+        return val
+    val = getattr(disease, key, default)
+    if not val and key == "name":
+        val = getattr(disease, "name_en", default)
+    return val
 
 
 @app.route('/sitemap.xml')
@@ -558,9 +568,14 @@ def disease_index(species: str):
     # Build disease list with slugs
     disease_list = []
     for d in diseases:
-        name = d.get("name", "") if isinstance(d, dict) else getattr(d, "name", "")
-        name_ja = d.get("name_ja", "") if isinstance(d, dict) else getattr(d, "name_ja", "")
-        urgency = d.get("urgency", "") if isinstance(d, dict) else getattr(d, "urgency", "")
+        if isinstance(d, dict):
+            name = d.get("name", "") or d.get("name_en", "")
+            name_ja = d.get("name_ja", "")
+            urgency = d.get("urgency", "")
+        else:
+            name = getattr(d, "name", "") or getattr(d, "name_en", "")
+            name_ja = getattr(d, "name_ja", "")
+            urgency = getattr(d, "urgency", "")
         slug = _disease_slug(d)
         if slug:
             disease_list.append({"name": name, "name_ja": name_ja, "urgency": urgency, "slug": slug})
