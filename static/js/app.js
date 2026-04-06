@@ -1458,25 +1458,25 @@ function loadDiseaseDb(species){
 }
 
 const DISEASE_CATEGORIES={
-  infectious:{en:"Infectious",ja:"感染症",keywords:/infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich/i},
-  neoplastic:{en:"Neoplastic",ja:"腫瘍",keywords:/tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas/i},
-  cardiovascular:{en:"Cardiovascular",ja:"循環器",keywords:/cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat/i},
-  respiratory:{en:"Respiratory",ja:"呼吸器",keywords:/respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm/i},
-  gastrointestinal:{en:"Gastrointestinal",ja:"消化器",keywords:/gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit/i},
-  renal:{en:"Renal/Urinary",ja:"泌尿器",keywords:/renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros/i},
-  endocrine:{en:"Endocrine",ja:"内分泌",keywords:/endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal/i},
-  dermatological:{en:"Dermatological",ja:"皮膚",keywords:/dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar/i},
-  neurological:{en:"Neurological",ja:"神経",keywords:/neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia/i},
-  musculoskeletal:{en:"Musculoskeletal",ja:"筋骨格",keywords:/musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro/i},
-  ophthalmological:{en:"Ophthalmological",ja:"眼科",keywords:/ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm/i},
-  hematological:{en:"Hematological",ja:"血液",keywords:/hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit/i},
-  dental:{en:"Dental",ja:"歯科",keywords:/dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast/i},
-  parasitic:{en:"Parasitic",ja:"寄生虫",keywords:/parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas/i},
-  reproductive:{en:"Reproductive",ja:"生殖器",keywords:/reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit/i},
-  toxicological:{en:"Toxicological",ja:"中毒",keywords:/toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol/i},
-  behavioral:{en:"Behavioral",ja:"行動",keywords:/behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia/i},
-  congenital:{en:"Congenital",ja:"先天性",keywords:/congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia/i},
-  immune:{en:"Immune-mediated",ja:"免疫",keywords:/immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom/i},
+  infectious:{en:"Infectious",ja:"感染症",icon:"\uD83E\uDDA0",keywords:/infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich/i},
+  neoplastic:{en:"Neoplastic",ja:"腫瘍",icon:"\uD83D\uDD2C",keywords:/tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas/i},
+  cardiovascular:{en:"Cardiovascular",ja:"循環器",icon:"\u2764\uFE0F",keywords:/cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat/i},
+  respiratory:{en:"Respiratory",ja:"呼吸器",icon:"\uD83E\uDE7A",keywords:/respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm/i},
+  gastrointestinal:{en:"Gastrointestinal",ja:"消化器",icon:"\uD83E\uDDB7",keywords:/gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit/i},
+  renal:{en:"Renal/Urinary",ja:"泌尿器",icon:"\uD83D\uDCA7",keywords:/renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros/i},
+  endocrine:{en:"Endocrine",ja:"内分泌",icon:"\u2696\uFE0F",keywords:/endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal/i},
+  dermatological:{en:"Dermatological",ja:"皮膚",icon:"\uD83E\uDE7B",keywords:/dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar/i},
+  neurological:{en:"Neurological",ja:"神経",icon:"\uD83E\uDDE0",keywords:/neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia/i},
+  musculoskeletal:{en:"Musculoskeletal",ja:"筋骨格",icon:"\uD83E\uDDB4",keywords:/musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro/i},
+  ophthalmological:{en:"Ophthalmological",ja:"眼科",icon:"\uD83D\uDC41\uFE0F",keywords:/ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm/i},
+  hematological:{en:"Hematological",ja:"血液",icon:"\uD83E\uDE78",keywords:/hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit/i},
+  dental:{en:"Dental",ja:"歯科",icon:"\uD83E\uDDB7",keywords:/dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast/i},
+  parasitic:{en:"Parasitic",ja:"寄生虫",icon:"\uD83D\uDC1B",keywords:/parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas/i},
+  reproductive:{en:"Reproductive",ja:"生殖器",icon:"\uD83D\uDC76",keywords:/reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit/i},
+  toxicological:{en:"Toxicological",ja:"中毒",icon:"\u2620\uFE0F",keywords:/toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol/i},
+  behavioral:{en:"Behavioral",ja:"行動",icon:"\uD83E\uDDE0",keywords:/behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia/i},
+  congenital:{en:"Congenital",ja:"先天性",icon:"\uD83E\uDDEC",keywords:/congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia/i},
+  immune:{en:"Immune-mediated",ja:"免疫",icon:"\uD83D\uDEE1\uFE0F",keywords:/immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom/i},
 };
 const DISEASE_CAT_ORDER=["infectious","neoplastic","cardiovascular","respiratory","gastrointestinal","renal","endocrine","dermatological","neurological","musculoskeletal","ophthalmological","hematological","dental","parasitic","reproductive","toxicological","behavioral","congenital","immune"];
 function classifyDisease(d){
@@ -1488,24 +1488,55 @@ function classifyDisease(d){
 }
 
 let diseaseNavMode=null;
+function _buildCatCounts(){
+  const counts={};
+  if(!allDiseases)return counts;
+  allDiseases.forEach(d=>{const c=classifyDisease(d);counts[c]=(counts[c]||0)+1;});
+  return counts;
+}
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
+  const catGrid=document.getElementById("diseaseCategoryGrid");
   if(!azNav){console.warn("azNav element not found");return;}
-  if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"category":"az";
+  if(diseaseNavMode===null)diseaseNavMode="category";
   const modeLabels={az:{next:"kana",label:"A-Z",switchLabel:currentLang==="ja"?"あいうえお順へ":"Switch to Kana"},kana:{next:"category",label:currentLang==="ja"?"あいうえお順":"Kana",switchLabel:currentLang==="ja"?"カテゴリ別へ":"Switch to Category"},category:{next:"az",label:currentLang==="ja"?"カテゴリ別":"Category",switchLabel:"A-Z"}};
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
   if(diseaseNavMode==="category"){
-    const cats=[...DISEASE_CAT_ORDER,"other"];
-    const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}">${escapeHtml(lbl)}</button>`;}).join("");
-    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
+    azNav.style.display="none";
+    if(catGrid){
+      catGrid.style.display="";
+      const counts=_buildCatCounts();
+      const cats=[...DISEASE_CAT_ORDER,"other"];
+      catGrid.innerHTML=`<div class="disease-cat-grid-header"><span>${currentLang==="ja"?"カテゴリで探す":"Browse by Category"}</span><button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button></div><div class="disease-cat-grid-body">`+cats.map(c=>{
+        const cat=DISEASE_CATEGORIES[c];
+        const lbl=currentLang==="ja"?(cat?.ja||"その他"):(cat?.en||"Other");
+        const icon=cat?.icon||"\uD83D\uDCC1";
+        const cnt=counts[c]||0;
+        if(cnt===0)return"";
+        const isActive=diseaseFilter===c;
+        return`<button class="disease-cat-card${isActive?" active":""}" data-cat="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}"><span class="disease-cat-icon" aria-hidden="true">${icon}</span><span class="disease-cat-label">${escapeHtml(lbl)}</span><span class="disease-cat-count">${cnt}</span></button>`;
+      }).join("")+`</div>`;
+      const nextMode=cur.next;
+      catGrid.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
+      catGrid.addEventListener("click",e=>{
+        const btn=e.target.closest(".disease-cat-card[data-cat]");
+        if(!btn)return;
+        const cat=btn.dataset.cat;
+        if(diseaseFilter===cat){diseaseFilter='';btn.classList.remove("active");}
+        else{catGrid.querySelectorAll(".disease-cat-card").forEach(b=>b.classList.remove("active"));btn.classList.add("active");diseaseFilter=cat;}
+        diseaseDisplayLimit=100;renderDiseaseDb();
+      });
+    }
   }else{
+    azNav.style.display="";
+    if(catGrid)catGrid.style.display="none";
     const isAz=diseaseNavMode==="az";
     const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あ か さ た な は ま や ら わ".split(" ");
     azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+    const nextMode=cur.next;
+    azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
+    azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
   }
-  const nextMode=cur.next;
-  azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
-  azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
 }
 
 function filterDiseaseDb(letter){
@@ -1578,8 +1609,13 @@ function renderDiseaseDb(){
     const dPrimary=currentLang==="ja"?dNameJa:dNameEn;
     const dSecondary=currentLang==="ja"?dNameEn:dNameJa;
     const dDesc=desc.substring(0,80)+(desc.length>80?"...":"");
+    const _dCat=d._cat||classifyDisease(d);
+    const _dCatObj=DISEASE_CATEGORIES[_dCat];
+    const _dCatLbl=currentLang==="ja"?(_dCatObj?.ja||"その他"):(_dCatObj?.en||"Other");
+    const _dCatIcon=_dCatObj?.icon||"\uD83D\uDCC1";
     return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
+      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}"><span aria-hidden="true">${_dCatIcon}</span> ${escapeHtml(_dCatLbl)}</span></div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
