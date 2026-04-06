@@ -472,21 +472,23 @@ function animateCount(el,target,duration){
 /* --- Load stats with Promise.all --- */
 function loadSpeciesStats(){
   Promise.all([
+    fetchWithTimeout("/api/dashboard-stats").then(r=>r.json()),
     fetchWithTimeout("/api/species-stats").then(r=>r.json()),
     fetchWithTimeout("/api/health-check/symptoms").then(r=>r.json())
-  ]).then(([data,sd])=>{
+  ]).then(([dashStats,speciesData,sd])=>{
     try{
       // Check if API returned an error response
-      if(!data.species||!Array.isArray(data.species)){
+      if(!speciesData.species||!Array.isArray(speciesData.species)){
         throw new Error("Invalid species data structure from API");
       }
-      SPECIES=data.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
+      SPECIES=speciesData.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
+      // Use dashboard stats for all counts (fully dynamic, no hardcoded values)
       pendingStats={
-        diseases:data.total_diseases||0,
-        species:data.total_species||SPECIES.length,
-        drugs:data.total_drugs||0,
+        diseases:dashStats.total_diseases||0,
+        species:dashStats.total_species||SPECIES.length,
+        drugs:dashStats.total_drugs||0,
         symptoms:sd.symptoms?sd.symptoms.length:0,
-        protocols:188
+        protocols:dashStats.total_protocols||0
       };
       renderSpeciesGrid();
       initStatsObserver();

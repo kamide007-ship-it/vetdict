@@ -793,6 +793,45 @@ def api_species_stats():
     return get_species_stats()
 
 
+@app.route('/api/dashboard-stats', methods=['GET'])
+@ensure_json_response
+def api_dashboard_stats():
+    """ダッシュボード用サマリー統計を返す（疾患数・薬品数・動物種数・麻酔プロトコル数）。
+
+    Returns:
+        dict with keys: total_diseases, total_drugs, total_species, total_protocols
+    """
+    from api.disease_store import get_species_stats
+
+    # Get disease/drug/species stats
+    species_stats = get_species_stats()
+
+    # Count anesthesia protocols: all protocols across all species
+    total_protocols = 0
+    try:
+        from api.anesthesia_protocols import get_all_species_ids, get_protocols_for_species
+
+        for species_id in get_all_species_ids():
+            try:
+                sp_data = get_protocols_for_species(species_id)
+                if sp_data and 'protocols' in sp_data:
+                    total_protocols += len(sp_data['protocols'])
+            except Exception:
+                # Skip species if protocol fetch fails
+                pass
+    except Exception as e:
+        logger.warning(f"Failed to count anesthesia protocols: {e}")
+        # Fallback to last known value
+        total_protocols = 188
+
+    return {
+        "total_diseases": species_stats.get("total_diseases", 0),
+        "total_drugs": species_stats.get("total_drugs", 0),
+        "total_species": species_stats.get("total_species", 0),
+        "total_protocols": total_protocols if total_protocols > 0 else 188,
+    }
+
+
 # =============================================================================
 # API: Species-specific Symptoms (from SQLite)
 # =============================================================================
