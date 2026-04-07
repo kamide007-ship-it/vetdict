@@ -11245,7 +11245,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mastitis (Feline)",
         "name_ja": "猫の乳腺炎",
-        "symptoms": {"swelling", "pain_on_touch", "fever", "lethargy", "appetite_loss", "ear_discharge"},
+        "symptoms": {"swelling", "pain", "fever", "lethargy", "appetite_loss", "ear_discharge"},
         "description": "Acute bacterial infection of mammary tissue in nursing queens. Less common in cats than dogs (5-10% of lactating cats) but tends toward rapid abscess formation and sepsis. Emergency if untreated.",
         "description_ja": "授乳中の母猫の乳腺急性細菌感染症。犬より稀（授乳猫の5-10%）だが膿瘍形成と敗血症への急速進行傾向。無治療で緊急。",
         "urgency": "high",

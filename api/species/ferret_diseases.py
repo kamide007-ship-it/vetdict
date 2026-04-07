@@ -3335,7 +3335,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dystocia",
         "name_ja": "難産",
-        "symptoms": {"straining", "lethargy", "vaginal_discharge", "abdominal_pain", "distress"},
+        "symptoms": {"lethargy", "vaginal_discharge", "abdominal_pain", "pain"},
         "description": "Dystocia in ferrets is a reproductive emergency, though less common than in other rodents. Most dystocia in ferrets results from fetal oversizing or uterine inertia rather than maternal pelvic obstruction.",
         "description_ja": "フェレットの難産は他のげっ歯類ほど一般的ではない産科緊急事態。ほとんどのフェレット難産は母体骨盤閉塞ではなく、胎児超大型化または子宮無力症に由来。",
         "urgency": "emergency",
@@ -3356,7 +3356,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mastitis",
         "name_ja": "乳腺炎",
-        "symptoms": {"swollen_mammary", "redness_mammary", "pain", "fever", "appetite_loss", "lethargy"},
+        "symptoms": {"swelling", "redness", "pain", "fever", "appetite_loss", "lethargy"},
         "description": "Mastitis in ferrets is post-lactation bacterial infection of mammary tissue, ascending through lactiferous ducts. Most common causative organism is Staphylococcus aureus. Dystocia complications and stress increase susceptibility.",
         "description_ja": "フェレットの乳腺炎は産後授乳期の乳腺細菌感染症で、ラクティフェラスダクト経由の上行感染。最一般的な病原体は黄色ブドウ球菌。難産合併症やストレスがリスク因子。",
         "urgency": "high",

@@ -7034,7 +7034,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ovarian Hypofunction (Primary Hypoluteoidism)",
         "name_ja": "卵巣機能低下症（黄体機能不全）",
-        "symptoms": {"prolonged_estrus", "lethargy", "weight_loss", "repeated_cycling_without_conception"},
+        "symptoms": {"prolonged_estrus", "lethargy", "weight_loss"},
         "description": "Primary ovarian dysfunction characterized by insufficient progesterone production from corpus luteum, resulting in infertility or pregnancy loss. Accounts for 5-10% of primary infertility cases. Critical barrier to conception and pregnancy maintenance.",
         "description_ja": "黄体からのプロゲステロン産生不足により不妊または妊娠喪失をもたらす一次性卵巣機能不全。原発性不妊症の5-10%を占める。受胎および妊娠維持の重大な障壁。",
         "urgency": "moderate",
