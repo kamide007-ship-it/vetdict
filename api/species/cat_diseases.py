@@ -4132,7 +4132,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dystocia (Difficult Birth)",
         "name_ja": "難産",
-        "symptoms": {"prolonged_labor", "lethargy", "vocalization_changes", "abdominal_contractions", "vaginal_discharge", "no_kittens_delivered", "excessive_straining"},
+        "symptoms": {"prolonged_labor", "lethargy", "vocalization_changes", "abdominal_contractions", "vaginal_discharge"},
         "description": "Dystocia in cats occurs when parturition cannot be completed normally. Less common than in dogs but requires prompt emergency intervention. Peak occurrence in primiparous queens aged 2-5 years.",
         "description_ja": "猫の難産は正常分娩が完了できない状態。犬より稀だが迅速な緊急対応が必要。初産の2-5歳の雌猫で最頻出。",
         "urgency": "emergency",

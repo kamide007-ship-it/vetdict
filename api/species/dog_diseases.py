@@ -3007,7 +3007,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dystocia",
         "name_ja": "難産",
-        "symptoms": {"anxiety", "excessive_panting", "lethargy", "pain_on_touch", "straining", "no_delivery", "vaginal_discharge"},
+        "symptoms": {"anxiety", "excessive_panting", "lethargy", "pain_on_touch", "abdominal_pain", "genital_discharge"},
         "description": "Difficulty during labor requiring veterinary intervention. Primary dystocia (maternal factors) or secondary dystocia (fetal/obstruction factors). Brachycephalic breeds have 80%+ cesarean rates due to fetal head-to-pelvic mismatch.",
         "description_ja": "分娩困難で獣医学的介入を要する。一次難産（母体因子）または二次難産（胎児/閉塞因子）。短頭種は胎児頭部と母体骨盤の不適合で帝王切開率80%以上。",
         "urgency": "emergency",
