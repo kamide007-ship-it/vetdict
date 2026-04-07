@@ -3713,6 +3713,9 @@ def get_diseases():
             symptoms = d.get("symptoms", [])
             if isinstance(symptoms, set):
                 symptoms = sorted(symptoms)
+            rec_tests = d.get("recommended_tests", [])
+            if isinstance(rec_tests, set):
+                rec_tests = sorted(rec_tests)
             output.append(enrich_disease_content({
                     "name": d.get("name", d.get("name_en", "")),
                     "name_ja": d.get("name_ja", ""),
@@ -3728,8 +3731,9 @@ def get_diseases():
                     "treatment_ja": d.get("treatment_ja", ""),
                     "prognosis": d.get("prognosis", d.get("prognosis_en", "")),
                     "prognosis_ja": d.get("prognosis_ja", ""),
-                    "severity": d.get("severity", ""),
+                    "severity": d.get("urgency", d.get("severity", "")),
                     "symptoms": symptoms,
+                    "recommended_tests": rec_tests,
                 }, species))
 
     # Inject hiragana reading for あいうえお sorting
