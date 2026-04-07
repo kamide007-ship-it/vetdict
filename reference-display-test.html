@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetDict - 参考文献表示テスト</title>
+    <style>
+        :root {
+            --green: #16a34a;
+            --blue: #2563eb;
+            --gray-50: #f9fafb;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: var(--green);
+            margin-bottom: 30px;
+        }
+
+        .test-item {
+            margin-bottom: 40px;
+            border: 1px solid #e5e7eb;
+            padding: 15px;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        .test-item h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            color: #1f2937;
+        }
+
+        .reference-output {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .ortho-refs {
+            margin-top: 12px;
+            padding: 10px;
+            background: var(--gray-50);
+            border-radius: 6px;
+            border-left: 3px solid var(--green);
+        }
+
+        .ortho-refs > div:first-child {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--green);
+            margin-bottom: 6px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+            color: var(--gray-700);
+        }
+
+        li span {
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--green);
+            text-decoration: none;
+            font-size: 0.78rem;
+            margin-right: 8px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 VetDict - 参考文献表示テスト</h1>
+        <p>このページは、フロントエンドの参考文献表示機能をテストしています。</p>
+
+        <div id="test-results"></div>
+    </div>
+
+    <script>
+        // テスト用サンプルデータ
+        const testData = [
+            {
+                id: "dog_diabetes_mellitus",
+                name: "犬の糖尿病",
+                prognosis_references: {
+                    references: [
+                        {
+                            pmid: "41894063",
+                            authors: "Romero JR, Barko P, Suchodolski JS, Williams DA, Ganz HH, Gal A",
+                            title: "Serum metabolomics of diabetic dogs treated with daily administration of a commercially available lyophilized feces preparation",
+                            journal: "Veterinary Research Communications",
+                            year: 2026,
+                            volume: 50,
+                            issue: 3,
+                            pages: "",
+                            doi: "10.1007/s11259-026-11181-9",
+                            evidence_level: "II"
+                        },
+                        {
+                            pmid: "41822230",
+                            authors: "Meij AS, Van Stee LL, Kruitwagen HS, van Nieuwaal-Jubbega RC, Grinwis GCM, Galac S, Meij BP",
+                            title: "Case Report: Treatment of hypersomatotropism in a diabetic dog with transsphenoidal hypophysectomy",
+                            journal: "Frontiers in Veterinary Science",
+                            year: 2026,
+                            volume: 13,
+                            pages: "1740713",
+                            doi: "10.3389/fvets.2026.1740713",
+                            evidence_level: "IV"
+                        }
+                    ]
+                },
+                rehabilitation_references: {
+                    references: [
+                        {
+                            pmid: "41742530",
+                            authors: "Claude R, Mott J, Gilor C",
+                            title: "Spontaneous diabetic remission after acute pancreatitis in a dog",
+                            journal: "Journal of Veterinary Internal Medicine",
+                            year: 2026,
+                            volume: 40,
+                            issue: 1,
+                            doi: "10.1093/jvimsj/aalaf035",
+                            evidence_level: "IV"
+                        }
+                    ]
+                },
+                nutrition_references: {
+                    references: [
+                        {
+                            pmid: "41472082",
+                            authors: "Choi Y, Kim JE, Kim KH, Lee S, Shin CH",
+                            title: "Glucose-Lowering Effects and Safety of Bifidobacterium longum CKD1 in Diabetic Dogs and Cats",
+                            journal: "Microorganisms",
+                            year: 2025,
+                            volume: 13,
+                            issue: 12,
+                            pages: "2881",
+                            doi: "10.3390/microorganisms13122881",
+                            evidence_level: "II"
+                        }
+                    ]
+                }
+            },
+            {
+                id: "cat_feline_pancreatitis",
+                name: "猫の膵炎",
+                prognosis_references: {
+                    references: [
+                        {
+                            pmid: "41876336",
+                            authors: "Cridge H",
+                            title: "Triaditis in Cats: A Multifaceted Syndrome or a Convenient Label?",
+                            journal: "Veterinary Clinics of North America: Small Animal Practice",
+                            year: 2026,
+                            doi: "10.1016/j.cvsm.2026.01.002",
+                            evidence_level: "I"
+                        }
+                    ]
+                },
+                rehabilitation_references: {
+                    references: [
+                        {
+                            pmid: "41876336",
+                            authors: "Cridge H",
+                            title: "Triaditis in Cats: A Multifaceted Syndrome or a Convenient Label?",
+                            journal: "Veterinary Clinics of North America: Small Animal Practice",
+                            year: 2026,
+                            doi: "10.1016/j.cvsm.2026.01.002",
+                            evidence_level: "I"
+                        }
+                    ]
+                },
+                nutrition_references: {
+                    references: [
+                        {
+                            pmid: "41854429",
+                            authors: "Thalmeier S, Jaresova T, Gostelow R, Schofield I, Niessen SJM, Bauer N, Hazuchova K",
+                            title: "Association of inflammation with glycemic control, insulin sensitivity, and beta-cell function in diabetic cats",
+                            journal: "Journal of Veterinary Internal Medicine",
+                            year: 2026,
+                            volume: 40,
+                            issue: 2,
+                            doi: "10.1093/jvimsj/aalag039",
+                            evidence_level: "II"
+                        }
+                    ]
+                }
+            }
+        ];
+
+        let currentLang = "ja";
+
+        // renderOrthopedicReferences関数（app.jsから — 修正版）
+        function renderOrthopedicReferences(d) {
+            const sections = [
+                { key: "prognosis_references", label: currentLang === "ja" ? "予後エビデンス" : "Prognosis Evidence" },
+                { key: "rehabilitation_references", label: currentLang === "ja" ? "リハビリ文献" : "Rehabilitation References" },
+                { key: "nutrition_references", label: currentLang === "ja" ? "栄養管理文献" : "Nutrition References" }
+            ];
+
+            const rendered = sections.map(sec => {
+                const refs = (d[sec.key] && Array.isArray(d[sec.key].references)) ? d[sec.key].references : [];
+                if (!refs.length) return "";
+
+                const items = refs.map(r => {
+                    // Authors: string "FirstAuthor, SecondAuthor, ..." → extract first + " et al."
+                    const authStr = r.authors || "Unknown";
+                    const authors = (typeof authStr === "string" && authStr.length > 0)
+                        ? authStr.split(",")[0].trim() + (authStr.includes(",") ? "" : " et al.")
+                        : "Unknown";
+                    const year = r.year || "";
+                    const journal = r.journal ? `<em>${escapeHtml(r.journal)}</em>` : "";
+                    const vol = r.volume ? ` ${r.volume}` : "";
+                    const pages = r.pages ? `:${r.pages}` : "";
+                    const doi = r.doi ? `<a href="https://doi.org/${encodeURIComponent(r.doi)}" target="_blank" rel="noopener">DOI</a>` : "";
+                    const pmid = r.pmid ? `<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(r.pmid)}/" target="_blank" rel="noopener">PMID</a>` : "";
+                    const evid = r.evidence_level ? `<span style="font-size:.75rem;color:var(--gray-500)">[${escapeHtml(r.evidence_level)}]</span>` : "";
+                    const links = [doi, pmid].filter(Boolean).join(" ");
+
+                    return `<li><span style="font-weight:600">${escapeHtml(authors)} (${year})</span> ${escapeHtml(r.title || "")}. ${journal}${vol}${pages}. ${links} ${evid}</li>`;
+                }).join("");
+
+                return `<div style="margin-top:8px"><div style="font-size:.8rem;font-weight:700;color:var(--gray-600);margin-bottom:4px">${sec.label}</div><ul style="list-style:none;padding:0;margin:0;font-size:.82rem;color:var(--gray-700)">${items}</ul></div>`;
+            }).filter(Boolean).join("");
+
+            if (!rendered) return "";
+            return `<div class="ortho-refs" style="margin-top:12px;padding:10px;background:var(--gray-50,#f9fafb);border-radius:6px;border-left:3px solid var(--green)"><div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin-bottom:6px">📚 ${currentLang === "ja" ? "参考文献（エビデンスベース）" : "References (Evidence-based)"}</div>${rendered}</div>`;
+        }
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // テスト実行
+        function runTests() {
+            const resultsDiv = document.getElementById('test-results');
+            let html = '';
+
+            testData.forEach((disease, index) => {
+                const output = renderOrthopedicReferences(disease);
+                const hasReferences = disease.prognosis_references?.references?.length > 0;
+                const refCount = (disease.prognosis_references?.references?.length || 0) +
+                               (disease.rehabilitation_references?.references?.length || 0) +
+                               (disease.nutrition_references?.references?.length || 0);
+
+                html += `
+                    <div class="test-item">
+                        <h2>テスト ${index + 1}: ${disease.name}</h2>
+                        <p>疾患ID: <code>${disease.id}</code></p>
+                        <p>合計参考文献数: <strong>${refCount}</strong></p>
+                        <div class="reference-output">
+                            ${output || '<span style="color: var(--gray-500);">No references found</span>'}
+                        </div>
+                        <div class="status ${hasReferences ? 'success' : 'error'}">
+                            ${hasReferences ? '✓ 参考文献が正常に表示されました' : '✗ エラー: 参考文献が見つかりません'}
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // ページロード時にテスト実行
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>
