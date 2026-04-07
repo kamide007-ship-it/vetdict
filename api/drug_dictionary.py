@@ -22,6 +22,7 @@ from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 from api.drug_batch_5 import DRUGS_BATCH_5, SPECIES_INFO_PATCH_5
 from api.drug_batch_6 import DRUG_INTERACTIONS_PATCH_6, DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
 from api.drug_batch_7 import CHINCHILLA_SPECIES_PATCH
+from api.drug_batch_8 import DRUGS_BATCH_8
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -61,6 +62,11 @@ DRUG_CATEGORIES: Dict[str, Dict[str, str]] = {
     "muscle_relaxants": {"ja": "筋弛緩薬", "en": "Muscle Relaxants"},
     "hormones": {"ja": "ホルモン薬", "en": "Hormones"},
     "antiseptics": {"ja": "消毒薬", "en": "Antiseptics"},
+    "lactation_support": {"ja": "乳汁分泌促進薬", "en": "Lactation Support Agents"},
+    "reproductive_hormones": {"ja": "生殖ホルモン", "en": "Reproductive Hormones"},
+    "analgesics_lactation": {"ja": "鎮痛・乳汁分泌促進薬", "en": "Analgesics (Lactation Use)"},
+    "anticoagulants": {"ja": "抗凝固薬", "en": "Anticoagulants"},
+    "vitamins_minerals": {"ja": "ビタミン・ミネラル", "en": "Vitamins & Minerals"},
 }
 
 
@@ -1953,6 +1959,13 @@ for _drug_id, _species_patch in CHINCHILLA_SPECIES_PATCH.items():
         for _sp, _info in _species_patch.items():
             if _sp not in _target:
                 _target[_sp] = _info
+
+# バッチ8 繁殖医学薬品を統合（乳汁分泌促進・ホルモン・抗凝固薬等）
+for _drug8 in DRUGS_BATCH_8:
+    if _drug8["id"] not in _existing_ids:
+        DRUGS.append(_drug8)
+        _existing_ids.add(_drug8["id"])
+        _drug_index[_drug8["id"]] = _drug8
 
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}

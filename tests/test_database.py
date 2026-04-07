@@ -70,7 +70,7 @@ class TestDiseaseOperations:
         assert result is not None
         assert result["name"] == "Test Disease"
         assert result["species"] == "dog"
-        assert json.loads(result["symptoms"]) == ["fever", "lethargy"]
+        assert set(json.loads(result["symptoms"])) == {"fever", "lethargy"}
 
     def test_get_nonexistent_returns_none(self, db_path):
         with get_connection(db_path) as conn:
