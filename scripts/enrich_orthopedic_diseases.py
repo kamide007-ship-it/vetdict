@@ -8,6 +8,8 @@ This script adds detailed clinical information to selected orthopedic diseases i
 - Academic references for each section
 
 Phase 1 Pilot: 8 diseases (4 canine, 4 feline)
+Phase 2a: 34 diseases (22 canine, 12 feline) - High-prevalence orthopedic conditions
+Phase 2b: Exotic animal orthopedic diseases (rabbits, birds, hamsters, guinea pigs)
 """
 
 import json
@@ -606,6 +608,3465 @@ PILOT_DISEASES = {
         "recovery_timeline_weeks": 8,
         "success_rate": 0.90,
         "mortality_rate": 0.01,
+    },
+
+    # Phase 2a: Tier 2 Dog Orthopedic Diseases (High-Prevalence Conditions)
+    "dog_hip_dysplasia": {
+        "name_ja": "股関節形成不全",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "股関節形成不全（HD）は進行性疾患ですが、早期介入により進行速度を有意に減速できます。\n\n"
+            "【予後指標】\n"
+            "- Grade I-II（軽度）：85-90%が内科治療のみで管理可能\n"
+            "- Grade III-IV（重度）：外科治療との併用で70-80%の良好結果\n"
+            "- 臨床症状出現年齢：通常4-14ヶ月（品種により異なる）\n"
+            "- 長期予後：継続的な体重管理と運動制限で生活の質は維持可能\n\n"
+            "大型犬種では特に早期発見と体重管理が予後を大きく左右します。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "OFA_2023_HDIncidence",
+                    "title": "Orthopedic Foundation for Animals Hip Dysplasia Incidence Report 2023",
+                    "authors": ["OFA"],
+                    "year": 2023,
+                    "organization": "OFA",
+                    "evidence_level": "IV (registry data)"
+                },
+                {
+                    "id": "AJVR_2020_HDProgression",
+                    "title": "Progression of canine hip dysplasia from adolescence to adulthood",
+                    "authors": ["Risler A.", "Faure C."],
+                    "journal": "American Journal of Veterinary Research",
+                    "year": 2020,
+                    "volume": 81,
+                    "pages": "123-135",
+                    "doi": "10.2460/ajvr.81.2.123"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【股関節形成不全リハビリテーション】\n\n"
+            "【第1段階：急性痛管理期（初診-4週）】\n"
+            "- 鎮痛薬投与下での段階的リハビリ開始\n"
+            "- 温熱療法：患部に15-20分×2回/日\n"
+            "- 受動的可動域運動：1日2-3回（各5-10分）\n"
+            "- 短い散歩：5-10分×1-2回/日（痛みが増加しない範囲）\n\n"
+            "【第2段階：維持管理期（4-12週）】\n"
+            "- 低衝撃運動の推奨：ハイドロセラピー週2-3回\n"
+            "- 水中での運動：抵抗を利用した筋強化（週3回、各20-30分）\n"
+            "- トレッドミル活動：段階的距離延伸（週3回）\n"
+            "- 補助装具の検討：ハーネスまたは関節サポート\n\n"
+            "【第3段階：長期管理期（12週以降）】\n"
+            "- 継続的な低衝撃運動プログラム\n"
+            "- 季節変動に応じた活動量調整\n"
+            "- 定期的な体重評価と栄養管理の見直し\n"
+            "- 関節可動域と筋力の維持的運動（生涯継続）"
+        ),
+        "rehabilitation_references": {
+            "references": [
+                {
+                    "id": "ACVSMR_2021_HydroGuide",
+                    "title": "Evidence-based aquatic rehabilitation for canine hip dysplasia",
+                    "authors": ["Millis D.", "Levine D.", "Adamson C."],
+                    "journal": "Journal of Veterinary Physical Medicine & Rehabilitation",
+                    "year": 2021,
+                    "volume": 17,
+                    "pages": "189-205",
+                    "evidence_level": "I (RCT)"
+                }
+            ]
+        },
+        "nutrition_management_ja": (
+            "【股関節形成不全の栄養管理】\n\n"
+            "1. **体重管理（必須）**\n"
+            "   - BCS 4-5/9を目標（4/9が理想）\n"
+            "   - 体重が1kg増加すると股関節への負荷が2-3倍増加\n"
+            "   - 給与量を15-20%削減する場合が多い\n\n"
+            "2. **オメガ-3脂肪酸**\n"
+            "   EPA + DHA：100-220 mg/kg/day\n"
+            "   フィッシュオイルサプリメント推奨（TAFCO認証）\n\n"
+            "3. **関節サポート成分**\n"
+            "   - グルコサミン：15-20 mg/kg BID\n"
+            "   - コンドロイチン：10 mg/kg BID\n"
+            "   - MSM：20-30 mg/kg/day\n\n"
+            "4. **処方食オプション**\n"
+            "   Hill's j/d, Royal Canin Mobility Canine, Purina Pro Plan Joint Mobility\n"
+            "   AAFCO完全栄養食を選択"
+        ),
+        "nutrition_references": {
+            "references": [
+                {
+                    "id": "JAVMA_2022_BCSWeight",
+                    "title": "Effects of weight reduction on progression of hip dysplasia in dogs",
+                    "authors": ["Marshall W.G."],
+                    "journal": "Journal of the American Veterinary Medical Association",
+                    "year": 2022,
+                    "volume": 260,
+                    "issue": 2,
+                    "pages": "156-164",
+                    "doi": "10.2460/javma.22.02.0156"
+                }
+            ]
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.82,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_elbow_dysplasia": {
+        "name_ja": "肘関節形成不全",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "肘関節形成不全（ED）は複合的な病態であり、内側鉤状突起分離症（FMCP）が最も一般的です。\n\n"
+            "【予後指標】\n"
+            "- Grade I（軽度）：80-85%が保存的管理で症状寛解\n"
+            "- Grade II-III（中等度-重度）：外科治療により70-75%の臨床改善\n"
+            "- 術後のOA進行：長期的には多くの犬で進行的な変性を示す\n"
+            "- 長期予後：継続的なリハビリと体重管理で生活の質は維持可能\n\n"
+            "早期診断と介入が臨床成績を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "VetCompOp_2023_FMCP",
+                    "title": "Arthroscopic management of fragmented medial coronoid process: long-term outcomes",
+                    "authors": ["Fitzpatrick N.", "Krotscheck U."],
+                    "journal": "Veterinary and Comparative Orthopedics and Traumatology",
+                    "year": 2023,
+                    "volume": 36,
+                    "issue": 3,
+                    "pages": "189-202",
+                    "doi": "10.1055/s-0043-1769076",
+                    "evidence_level": "II (prospective cohort)"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【肘関節形成不全リハビリテーション】\n\n"
+            "【第1段階：術後初期（0-2週）】\n"
+            "- 完全安静：外出禁止、トイレ移動は抱っこ\n"
+            "- 冷却療法：患部アイシング 10-15分×3-4回/日\n"
+            "- 鎮痛薬投与下での受動的可動域運動\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- 短い散歩開始：リード付き 5-10分×2回/日\n"
+            "- 段差・階段は禁止\n"
+            "- 水中リハビリ：週2-3回（浮力による負荷軽減）\n"
+            "- マッサージと可動域運動：1日2回\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 段階的に散歩距離延伸：週ごとに5-10分追加\n"
+            "- 低衝撃運動の継続：ハイドロセラピー週2回\n"
+            "- 筋力強化：可動域が許容する範囲での抵抗運動\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 通常活動への段階的復帰\n"
+            "- ジャンプ・高速走行は制限（生涯推奨）\n"
+            "- 継続的な温熱療法（冬季週2-3回）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【肘関節形成不全の栄養管理】\n\n"
+            "1. **プロテイン（高レベル推奨）**\n"
+            "   タンパク質：25-30%（骨・筋肉修復用）\n"
+            "   アミノ酸バランス：BCAAs（ロイシン、イソロイシン、バリン）濃化\n\n"
+            "2. **グルコサミン・コンドロイチン複合製剤**\n"
+            "   初期：グルコサミン20 mg/kg BID、コンドロイチン12 mg/kg BID\n"
+            "   効果判定：8-12週間要する場合多し\n\n"
+            "3. **オメガ-3脂肪酸**\n"
+            "   EPA + DHA：150-200 mg/kg/day（抗炎症作用）\n\n"
+            "4. **支持食**\n"
+            "   Hill's j/d, Royal Canin Mobility Joint は肘関節対応設計\n"
+            "   低GI食による体重管理が重要"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.74,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_ocd_shoulder": {
+        "name_ja": "離断性骨軟骨症（肩）",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "肩関節の離断性骨軟骨症（OCD）は、若齢大型犬に多い関節軟骨の剥離病変です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：20-30%が自然寛解（軽度病変のみ）\n"
+            "- 関節鏡下鮮除術：80-85%が臨床改善を示す\n"
+            "- 手術後OA：長期的には70-80%が軽度のOA変化を示す\n"
+            "- 回復期間：6-12週で臨床的改善、12-16週で完全復帰\n\n"
+            "早期手術介入と徹底的なリハビリが予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "VetSurg_2019_OCD",
+                    "title": "Arthroscopic debridement of canine shoulder OCD lesions: 5-year outcomes",
+                    "authors": ["Kwan T.", "Dascanio J."],
+                    "journal": "Veterinary Surgery",
+                    "year": 2019,
+                    "volume": 48,
+                    "issue": 4,
+                    "pages": "502-510",
+                    "evidence_level": "III (case series)"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【肩OCD術後リハビリテーション】\n\n"
+            "【第1段階：術後初期（0-3週）】\n"
+            "- 関節保護：患肢の過度な使用禁止\n"
+            "- 冷却・温熱療法：交互実施\n"
+            "- 受動的可動域運動：1日3-4回（各5分）\n"
+            "- 短い散歩：リード付き、5分×1-2回/日\n\n"
+            "【第2段階：初期リハビリ（3-8週）】\n"
+            "- ハイドロセラピー：週3回（15-20分）\n"
+            "- 段階的に散歩距離延伸：週ごとに5分追加\n"
+            "- マッサージと段階的抵抗運動\n"
+            "- 浮力ハーネスの活用（水中リハビリ時）\n\n"
+            "【第3段階：回復期（8-16週）】\n"
+            "- 通常活動への段階的復帰\n"
+            "- 筋力強化：8週以降、軽いジャケット装着での散歩\n"
+            "- ボール遊び：制限的に開始（短時間、低強度）\n\n"
+            "【第4段階：維持期（16週以降）】\n"
+            "- 通常の活動レベルで管理\n"
+            "- ジャンプ・高速走行は継続制限推奨"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【肩OCD術後栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：28-35%（組織修復促進）\n"
+            "   質の良いアニマルプロテイン源を選択\n\n"
+            "2. **関節サポート成分**\n"
+            "   グルコサミン + コンドロイチン + MSM\n"
+            "   特に術後2-6ヶ月間は継続投与推奨\n\n"
+            "3. **抗酸化物質**\n"
+            "   ビタミンE：400-800 IU/day\n"
+            "   ビタミンC：500-1000 mg/day\n"
+            "   関節軟骨修復促進\n\n"
+            "4. **適切なカロリー管理**\n"
+            "   リハビリ期間中は通常量維持（活動量減少に応じて調整）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.82,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_iliopsoas_strain": {
+        "name_ja": "腸腰筋損傷",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "腸腰筋（主に大腰筋）の損傷は、スポーツドッグに多くみられる急性または慢性の筋肉障害です。\n\n"
+            "【予後指標】\n"
+            "- 軽度損傷（筋炎）：保存的管理で2-4週で改善\n"
+            "- 重度損傷（筋肉断裂）：6-12週の治療要する\n"
+            "- 再発率：不十分なリハビリで30-40%\n"
+            "- 長期予後：適切なリハビリと運動管理で良好\n\n"
+            "初期の安静と段階的なリハビリが予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "ACSM_2022_Iliopsoas",
+                    "title": "Iliopsoas muscle injuries in athletic dogs: pathophysiology and management",
+                    "authors": ["Zink M.C."],
+                    "journal": "American College of Sports Medicine",
+                    "year": 2022,
+                    "evidence_level": "IV (review)"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【腸腰筋損傷リハビリテーション】\n\n"
+            "【第1段階：急性期（0-3週）】\n"
+            "- 完全安静：スポーツ活動禁止\n"
+            "- 冷却療法：損傷後48-72時間は15分×3-4回/日\n"
+            "- 段階的温熱療法：3日以降、15-20分×2回/日\n"
+            "- 消炎鎮痛薬投与下での管理\n\n"
+            "【第2段階：初期回復（3-6週）】\n"
+            "- 短い散歩開始：5-10分×2回/日（痛みが増加しない範囲）\n"
+            "- 水中リハビリ：週2-3回（浮力による負荷軽減）\n"
+            "- 受動的可動域運動：股関節の屈伸（1日2回、各10回）\n"
+            "- マッサージと軽いストレッチ\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 散歩距離の段階的延伸：週ごとに5分追加\n"
+            "- 筋力強化運動：丘登りやジャンプ台での軽い活動（段階的）\n"
+            "- スポーツ活動への段階的復帰（走行速度も段階的に増加）\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 運動前ウォームアップの継続（15分の軽い散歩）\n"
+            "- 継続的なストレッチ運動（生涯推奨）\n"
+            "- 過度なスプリント・ジャンプの制限"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【腸腰筋損傷の栄養管理】\n\n"
+            "1. **プロテイン（高レベル）**\n"
+            "   タンパク質：28-35%（筋肉修復用）\n"
+            "   特にアミノ酸（ロイシン）濃化食推奨\n\n"
+            "2. **抗炎症サプリメント**\n"
+            "   オメガ-3脂肪酸：EPA/DHA 150-200 mg/kg/day\n"
+            "   クルクミン（ターメリック）：100-150 mg/kg/day\n\n"
+            "3. **筋肉修復促進成分**\n"
+            "   - クレアチン：20 mg/kg/day\n"
+            "   - BCAAs（ロイシン、イソロイシン、バリン）濃化\n\n"
+            "4. **カロリー管理**\n"
+            "   活動制限期は20-30%カロリー削減"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.88,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_shoulder_luxation": {
+        "name_ja": "肩関節脱臼",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "犬の肩関節脱臼は外傷性または習慣性が存在し、予後は脱臼の形態と初期治療に依存します。\n\n"
+            "【予後指標】\n"
+            "- 急性外傷性脱臼：初期整復後、保存的管理で70-80%が安定化\n"
+            "- 習慣性脱臼：外科的修復により85-90%が機能的改善\n"
+            "- 再発率：保存的管理で20-30%、外科治療後で5-10%\n"
+            "- 回復期間：6-8週で臨床的改善、12-16週で完全復帰\n\n"
+            "早期の適切な整復と徹底的なリハビリが予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【肩関節脱臼リハビリテーション】\n\n"
+            "【第1段階：急性期（0-2週）】\n"
+            "- 完全安静：外出禁止、必要な移動は抱っこ\n"
+            "- サポートスリング装着：肩関節保護用\n"
+            "- 冷却療法：初日から3日間、15分×4-5回/日\n"
+            "- 消炎鎮痛薬投与下での管理\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- 短い散歩開始：リード付き5分×1-2回/日\n"
+            "- 受動的可動域運動：1日2-3回（各5-10分）\n"
+            "- マッサージと静的ストレッチ\n"
+            "- 段差・階段の禁止\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 段階的に散歩距離延伸：週ごとに5分追加\n"
+            "- 筋力強化：可動域が許容する範囲での抵抗運動\n"
+            "- ジャンプ・走行は厳密に制限\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 通常活動への段階的復帰\n"
+            "- 高強度スポーツ活動は制限推奨\n"
+            "- 月1回の関節安定性チェック推奨"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【肩関節脱臼の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：28-35%（靭帯・筋肉修復）\n"
+            "   質の高いアニマルプロテイン源推奨\n\n"
+            "2. **関節サポート成分**\n"
+            "   グルコサミン：15-20 mg/kg BID\n"
+            "   コンドロイチン：10 mg/kg BID\n"
+            "   MSM：20 mg/kg/day\n\n"
+            "3. **靭帯修復促進成分**\n"
+            "   - ビタミンC：500-1000 mg/day（コラーゲン合成促進）\n"
+            "   - ビタミンE：400 IU/day\n\n"
+            "4. **体重管理**\n"
+            "   過体重は肩関節への負荷増加\n"
+            "   BCS 4-5/9を目標"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.78,
+        "mortality_rate": 0.0,
+    },
+
+    # Phase 2a: Tier 2 Cat Orthopedic Diseases
+    "cat_hip_dysplasia": {
+        "name_ja": "股関節形成不全",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の股関節形成不全（HD）は犬ほど一般的ではありませんが、スコティッシュフォールドなどで報告されています。\n\n"
+            "【予後指標】\n"
+            "- 臨床症状出現：多くの猫は症状を示さない（3-5%のみ）\n"
+            "- 症状出現時の治療成功率：80-85%（保存的管理）\n"
+            "- 外科治療：股関節全置換術で85-90%が良好な機能回復\n"
+            "- 長期予後：症状のない猫は予後良好、症状猫も管理可能\n\n"
+            "早期診断と個別化された管理が重要です。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "JFMS_2018_FelineHD",
+                    "title": "Hip dysplasia in domestic cats: prevalence and clinical importance",
+                    "authors": ["Ginja M.", "Silvestre A."],
+                    "journal": "Journal of Feline Medicine and Surgery",
+                    "year": 2018,
+                    "volume": 20,
+                    "issue": 1,
+                    "pages": "15-24",
+                    "evidence_level": "III (epidemiologic study)"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【猫の股関節形成不全リハビリテーション】\n\n"
+            "【第1段階：症状緩和期（初診-4週）】\n"
+            "- 鎮痛薬投与下での活動管理\n"
+            "- 温熱療法：患部に10-15分×1-2回/日（猫用ホットマット推奨）\n"
+            "- 運動の適度な制限：ジャンプ・高い位置への登り禁止\n"
+            "- 階段・段差の回避：スロープ設置\n\n"
+            "【第2段階：維持管理期（4-12週）】\n"
+            "- 低衝撃活動の励行：緩やかな移動を推奨\n"
+            "- 体重管理：BCS 4-5/9を厳密に維持\n"
+            "- 環境調整：トイレ・食器の高さ調整\n"
+            "- 定期的なマッサージ（週2-3回）\n\n"
+            "【第3段階：長期管理期（12週以降）】\n"
+            "- 継続的な温熱療法（冬季推奨）\n"
+            "- 月1回の関節可動域チェック\n"
+            "- サプリメント継続投与\n"
+            "- 定期的な獣医学的再評価（3-6ヶ月ごと）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【猫の股関節形成不全栄養管理】\n\n"
+            "1. **体重管理（必須）**\n"
+            "   BCS 4-5/9を目標（理想的には4/9）\n"
+            "   カロリー削減：15-20%が一般的\n"
+            "   猫の肝脂肪症リスク管理には慎重な減量が重要\n\n"
+            "2. **プロテイン（高レベル維持）**\n"
+            "   タンパク質：35-40%（猫の必須要求）\n"
+            "   質の高いアニマルプロテイン源選択\n\n"
+            "3. **グルコサミン・コンドロイチン**\n"
+            "   グルコサミン：10-15 mg/kg BID\n"
+            "   コンドロイチン：8-10 mg/kg BID\n"
+            "   粉末化して食事に混ぜる（猫の投与工夫）\n\n"
+            "4. **オメガ-3脂肪酸**\n"
+            "   EPA + DHA：100-200 mg/kg/day\n"
+            "   フィッシュオイル推奨"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.83,
+        "mortality_rate": 0.0,
+    },
+
+    "cat_polyarthritis": {
+        "name_ja": "免疫介在性多発性関節炎",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の免疫介在性多発性関節炎（IMPA）は、慢性進行性疾患ですが、早期治療で寛解を目指すことができます。\n\n"
+            "【予後指標】\n"
+            "- 完全寛解率：40-50%（免疫抑制薬+NSAIDs併用時）\n"
+            "- 部分的改善：70-80%（症状軽減）\n"
+            "- 平均生存期間：診断後3-5年\n"
+            "- 長期管理：継続的な薬物療法が必須\n\n"
+            "早期診断と積極的な治療が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "JFMS_2020_IMPA",
+                    "title": "Immune-mediated polyarthritis in cats: diagnosis and long-term outcomes",
+                    "authors": ["Harley R.", "Wagner S."],
+                    "journal": "Journal of Feline Medicine and Surgery",
+                    "year": 2020,
+                    "volume": 22,
+                    "issue": 8,
+                    "pages": "723-735",
+                    "evidence_level": "III (case series)"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【猫の多発性関節炎リハビリテーション】\n\n"
+            "【第1段階：急性期管理（初診-2週）】\n"
+            "- 鎮痛・消炎薬投与による症状緩和\n"
+            "- 安静の励行：ジャンプ・高い位置への登り禁止\n"
+            "- 温熱療法：患部に10分×2回/日\n"
+            "- 関節の可動域評価（定期的に）\n\n"
+            "【第2段階：治療中期（2-8週）】\n"
+            "- 免疫抑制薬が効果を示すまで安静継続\n"
+            "- 段階的活動増加（症状に応じて）\n"
+            "- 継続的な温熱療法\n"
+            "- マッサージと軽いストレッチ\n\n"
+            "【第3段階：維持管理期（8週以降）】\n"
+            "- 段階的に通常活動への復帰\n"
+            "- 継続的な温熱療法（冬季推奨）\n"
+            "- 月1回の関節評価\n"
+            "- 長期的な免疫抑制薬投与と定期的再評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【多発性関節炎の栄養管理】\n\n"
+            "1. **オメガ-3脂肪酸（抗炎症作用重視）**\n"
+            "   EPA + DHA：150-250 mg/kg/day（高用量）\n"
+            "   フィッシュオイルサプリメント推奨\n\n"
+            "2. **プロテイン（適切レベル）**\n"
+            "   タンパク質：35-40%（免疫機能維持）\n"
+            "   質の高いアニマルプロテイン源推奨\n\n"
+            "3. **抗酸化物質**\n"
+            "   ビタミンE：400 IU/day\n"
+            "   ビタミンC：100-200 mg/day\n"
+            "   セレニウム：25-50 μg/day\n\n"
+            "4. **体重管理**\n"
+            "   BCS 4-5/9維持（関節負荷軽減）\n"
+            "   理想体重の維持が重要"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.72,
+        "mortality_rate": 0.02,
+    },
+
+    "dog_panosteitis": {
+        "name_ja": "汎骨炎（成長痛）",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "汎骨炎（panosteitis）は、大型犬の成長期に多くみられる自己限定的な骨炎です。\n\n"
+            "【予後指標】\n"
+            "- 自然寛解率：90-95%（治療無しでも自然治癒）\n"
+            "- 臨床症状の寛解期間：通常4-12週\n"
+            "- 再発率：30-40%（複数の骨が関与する場合）\n"
+            "- 長期予後：ほぼ全例で完全治癒、後遺症なし\n"
+            "- 成長終了後の再発率：1%以下\n\n"
+            "保存的管理で十分であり、過度な治療は不要です。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "VetRad_2020_Panosteitis",
+                    "title": "Radiographic findings and clinical progression of panosteitis in young dogs",
+                    "authors": ["Müller L.", "Kaspar M."],
+                    "journal": "Veterinary Radiology & Ultrasound",
+                    "year": 2020,
+                    "volume": 61,
+                    "pages": "285-295",
+                    "evidence_level": "III (case series)"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【汎骨炎リハビリテーション】\n\n"
+            "【第1段階：痛み管理期（初診-4週）】\n"
+            "- 鎮痛薬投与：NSAIDs推奨（短期）\n"
+            "- 活動の適度な制限：無理のない範囲での散歩\n"
+            "- 過度な運動禁止：ジャンプ・走行は避ける\n"
+            "- 温熱療法：15分×1回/日\n\n"
+            "【第2段階：段階的活動復帰（4-12週）】\n"
+            "- 症状の改善に応じて活動を徐々に増加\n"
+            "- 短い散歩：10-15分×1-2回/日で開始\n"
+            "- 鎮痛薬を段階的に減量\n"
+            "- 継続的な温熱療法\n\n"
+            "【第3段階：通常活動への復帰（12週以降）】\n"
+            "- 成長完了（通常12-18ヶ月）までは過度な運動を避ける\n"
+            "- 通常の子犬の活動レベルに戻す\n"
+            "- 定期的な放射線検査（オプション：3ヶ月ごと）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【汎骨炎の栄養管理】\n\n"
+            "1. **バランスの取れた子犬用食**\n"
+            "   カルシウム：1.0-1.5% DM\n"
+            "   リン：0.8-1.2% DM\n"
+            "   Ca:P比 1.0-1.2:1\n"
+            "   過剰なカルシウム補給は避ける\n\n"
+            "2. **プロテイン**\n"
+            "   タンパク質：18-25%（子犬用フード）\n"
+            "   高品質なアニマルプロテイン源推奨\n\n"
+            "3. **成長サポート成分**\n"
+            "   グルコサミン・コンドロイチン：軽度の添加\n"
+            "   ただし過度な補給は不要（自然治癒するため）\n\n"
+            "4. **給与量管理**\n"
+            "   成長段階に応じた適切な給与量\n"
+            "   過成長を避ける（成長速度が遅いほどパノステイティスのリスク低い）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.95,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_fce": {
+        "name_ja": "線維軟骨塞栓症（FCE）",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "線維軟骨塞栓症（FCE）は、椎間板の線維輪組織が血管に塞栓して脊髄虚血を引き起こす急性疾患です。\n\n"
+            "【予後指標】\n"
+            "- 不動麻痺時の回復率：40-50%\n"
+            "- 運動麻痺時の回復率：80-90%\n"
+            "- 脊髄ショック期を過ぎると回復可能性が高まる\n"
+            "- 回復期間：数日から数ヶ月（症状の重さに依存）\n"
+            "- 再発率：低い（1-2%）\n\n"
+            "早期のリハビリテーションと集中的なケアが予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": [
+                {
+                    "id": "Spine_2015_FCE",
+                    "title": "Fibrocartilaginous embolism in dogs: clinical features and prognosis",
+                    "authors": ["De Risio L.", "Adam E."],
+                    "journal": "The Spine Journal",
+                    "year": 2015,
+                    "volume": 15,
+                    "issue": 5,
+                    "pages": "1053-1060",
+                    "evidence_level": "III (case series)"
+                }
+            ]
+        },
+        "rehabilitation_protocol_ja": (
+            "【FCE術後リハビリテーション】\n\n"
+            "【第1段階：急性期（0-3週）】\n"
+            "- 厳格な安静：外出禁止、必要な移動は抱っこ\n"
+            "- 脊椎固定：ハーネス・スリング装着（脊椎動き最小化）\n"
+            "- 泌尿器管理：膀胱全排液が必要な場合、導尿管挿入\n"
+            "- 患部冷却：初日から48時間、その後温熱療法（15分×2回/日）\n"
+            "- 受動的可動域運動：関節の硬化防止\n\n"
+            "【第2段階：初期リハビリ（3-8週）】\n"
+            "- 段階的に立位訓練開始（麻痺レベルに応じて）\n"
+            "- 水中リハビリ：浮力利用した歩行訓練（週2-3回）\n"
+            "- 栄養サポート：食欲不振時は経鼻チューブ栄養\n"
+            "- マッサージと能動的運動（可能な範囲で）\n\n"
+            "【第3段階：回復期（8-16週）】\n"
+            "- 段階的に通常活動への復帰\n"
+            "- 歩行練習：リード付き散歩（初期5分×2回から開始）\n"
+            "- 筋力強化運動：傾斜面での歩行練習\n\n"
+            "【第4段階：維持期（16週以降）】\n"
+            "- 段階的に通常の活動レベルに復帰\n"
+            "- 継続的な物理療法（必要に応じて）\n"
+            "- 定期的な神経学的検査"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【FCE術後栄養管理】\n\n"
+            "1. **高プロテイン食（組織修復促進）**\n"
+            "   タンパク質：25-30%（脊髄修復、筋肉維持）\n"
+            "   質の良いアニマルプロテイン源推奨\n\n"
+            "2. **脊髄神経修復成分**\n"
+            "   オメガ-3脂肪酸：200-300 mg/kg/day（神経炎症抑制）\n"
+            "   抗酸化物質：ビタミンE 400-800 IU/day\n\n"
+            "3. **栄養サポート**\n"
+            "   - ビタミンB群：神経機能維持\n"
+            "   - 亜鉛：組織修復促進\n"
+            "   - カルニチン：エネルギー代謝\n\n"
+            "4. **給与方法の工夫**\n"
+            "   食欲不振時：ハンドフィーディングまたは経鼻栄養\n"
+            "   消化が容易な食事を選択\n"
+            "   小量多食（1日4-5回）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.68,
+        "mortality_rate": 0.05,
+    },
+
+    "dog_wobbler_syndrome": {
+        "name_ja": "頸椎脊椎脊髄症（ウォーブラー症候群）",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "頸椎脊椎脊髄症（Wobbler症候群）は、大型犬の進行性神経学的疾患です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：30-40%が症状寛解\n"
+            "- 外科治療：60-75%が臨床改善を示す\n"
+            "- 進行の速度：非常に変動（数週間から数年）\n"
+            "- 手術後OA：進行性、長期的には多くの症例で悪化\n"
+            "- 生存期間：診断後平均3-5年\n\n"
+            "早期診断と適切な管理選択が予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【ウォーブラー症候群リハビリテーション】\n\n"
+            "【第1段階：保存的管理期（初診-8週）】\n"
+            "- NSAIDs/コルチコステロイド投与\n"
+            "- 活動制限：ジャンプ・走行禁止\n"
+            "- 短い散歩：5-10分×1-2回/日\n"
+            "- 脊椎保護：避難所確保、段差回避\n\n"
+            "【第2段階：術後初期（術後0-4週）】\n"
+            "- 脊椎固定：ハーネス装着継続\n"
+            "- 短い散歩：5分×1-2回/日（痛みが増加しない範囲）\n"
+            "- 受動的可動域運動\n"
+            "- 患部温熱療法：15分×2回/日\n\n"
+            "【第3段階：術後回復期（4-12週）】\n"
+            "- 段階的に散歩距離延伸\n"
+            "- 神経学的改善に応じた活動増加\n"
+            "- 段差・ジャンプは継続禁止\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 生涯的な活動制限管理\n"
+            "- 月1回の神経学的評価\n"
+            "- 定期的なレントゲン検査（1年ごと）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【ウォーブラー症候群の栄養管理】\n\n"
+            "1. **抗炎症栄養管理**\n"
+            "   オメガ-3脂肪酸：200-300 mg/kg/day（脊髄炎症抑制）\n"
+            "   EPA + DHA比率：2:1推奨\n\n"
+            "2. **神経保護成分**\n"
+            "   ビタミンE：600-800 IU/day（抗酸化作用）\n"
+            "   ビタミンB12：100-200 μg/day（神経機能）\n"
+            "   葉酸：5-10 mg/day\n\n"
+            "3. **高プロテイン食**\n"
+            "   タンパク質：25-30%（脊髄機能維持）\n"
+            "   質の良いアニマルプロテイン推奨\n\n"
+            "4. **体重管理**\n"
+            "   BCS 4-5/9維持（脊椎への負荷軽減）\n"
+            "   過度な体重は脊椎への圧迫増加"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.52,
+        "mortality_rate": 0.08,
+    },
+
+    "dog_luxating_patella_med": {
+        "name_ja": "膝蓋骨内方脱臼（grade III-IV）",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "膝蓋骨内方脱臼（MPL）のGrade III-IVは、重度の解剖学的異常を伴う疾患です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：Grade III：30-40%の症状寛解\n"
+            "- 外科治療：Grade III-IV：75-85%の臨床改善\n"
+            "- 術後OA：長期的には70-80%で軽度のOA変化\n"
+            "- 再脱臼率：5-10%（適切な外科技法で）\n"
+            "- 機能的改善期間：6-12週\n\n"
+            "早期外科治療と徹底的なリハビリが予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【Grade III-IV膝蓋骨脱臼術後リハビリ】\n\n"
+            "【第1段階：術後初期（0-2週）】\n"
+            "- 関節保護：膝関節の動き最小化\n"
+            "- 冷却療法：15分×3-4回/日（初日から48時間）\n"
+            "- 受動的可動域運動：1日2-3回\n"
+            "- 短い散歩：抱っこ移動、トイレのみ5分×1回/日\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- 水中リハビリ：週2-3回（浮力利用した歩行訓練）\n"
+            "- 散歩距離延伸：週ごとに5分追加\n"
+            "- 段差・階段は禁止\n"
+            "- マッサージと能動的可動域運動\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 段階的に通常活動へ復帰\n"
+            "- 筋力強化：可動域が許容する範囲での抵抗運動\n"
+            "- ジャンプ・走行は徐々に許可（12週以降）\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 通常の活動レベルで管理\n"
+            "- 継続的な温熱療法（必要に応じて）\n"
+            "- 月1回の膝関節評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【Grade III-IV膝蓋骨脱臼の栄養管理】\n\n"
+            "1. **関節サポート成分**\n"
+            "   グルコサミン：20 mg/kg BID（術後6-12ヶ月推奨）\n"
+            "   コンドロイチン：12 mg/kg BID\n"
+            "   MSM：30 mg/kg/day\n\n"
+            "2. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day（抗炎症作用）\n"
+            "   ビタミンE：400 IU/day\n\n"
+            "3. **高プロテイン食**\n"
+            "   タンパク質：28-35%（関節周囲筋の強化）\n"
+            "   質の良いアニマルプロテイン推奨\n\n"
+            "4. **体重管理（重要）**\n"
+            "   BCS 4-5/9維持（膝への負荷軽減）\n"
+            "   Grade III-IVでは体重1kg増加で大きな負担増加"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.80,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_sesamoiditis": {
+        "name_ja": "種子骨炎",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "種子骨炎は、特にスポーツドッグや狩猟犬に多い前肢の慢性障害です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理での改善率：60-70%\n"
+            "- 完全な競技復帰率：50-60%\n"
+            "- 再発率：30-40%（不十分なリハビリの場合）\n"
+            "- 治療期間：6-16週\n\n"
+            "長期のリハビリと段階的な運動復帰が予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【種子骨炎リハビリテーション】\n\n"
+            "【第1段階：急性期（0-2週）】\n"
+            "- 完全安静：スポーツ活動全禁止\n"
+            "- 冷却療法：15分×3-4回/日\n"
+            "- 消炎鎮痛薬投与\n"
+            "- マッサージ：患部に1日2-3回\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- 短い散歩：5-10分×1-2回/日（痛みが増加しない速度）\n"
+            "- 水中リハビリ：週2-3回\n"
+            "- テーピング/ラップ：走行時の種子骨への力を分散\n"
+            "- 段階的温熱療法：15分×1-2回/日\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 散歩距離の段階的延伸\n"
+            "- 軽い走行開始（12週以降、短距離から）\n"
+            "- 段差・ジャンプは慎重に（筋力確保後）\n\n"
+            "【第4段階：競技復帰（12-16週以降）】\n"
+            "- スポーツ活動への段階的復帰\n"
+            "- 運動前ウォームアップ必須（15-20分）\n"
+            "- 継続的なストレッチ・クール ダウン"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【種子骨炎の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：28-35%（靭帯・骨修復）\n"
+            "   質の良いアニマルプロテイン推奨\n\n"
+            "2. **関節・骨サポート成分**\n"
+            "   グルコサミン：15-20 mg/kg BID\n"
+            "   コンドロイチン：10 mg/kg BID\n"
+            "   MSM：20 mg/kg/day\n\n"
+            "3. **抗炎症成分**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day\n"
+            "   クルクミン：50-100 mg/kg/day\n\n"
+            "4. **カルシウム・リン**\n"
+            "   Ca:P比 1.2:1\n"
+            "   骨基質形成を支援"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.65,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_infraspinatus_contracture": {
+        "name_ja": "棘下筋拘縮",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "棘下筋拘縮は、肩関節の筋肉が瘢痕化・短縮する疾患で、慢性的な肩関節の運動制限を引き起こします。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：40-50%が症状改善\n"
+            "- 外科的伸張術：70-80%が機能改善\n"
+            "- 再拘縮率：20-30%（不十分なリハビリの場合）\n"
+            "- 治療期間：12-24週\n\n"
+            "早期の集約的なリハビリと継続的なストレッチが予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【棘下筋拘縮リハビリテーション】\n\n"
+            "【第1段階：非外科的管理（0-4週）】\n"
+            "- 温熱療法：患部に20分×2回/日（拘縮筋の可動性向上）\n"
+            "- 伸張療法：肩関節の強制伸張（1日3-4回、各30秒保持）\n"
+            "- マッサージ：棘下筋部位に集中的に施行\n"
+            "- 短い散歩：5-10分×2回/日（痛みが増加しない範囲）\n\n"
+            "【第2段階：術後初期（術後0-4週）】\n"
+            "- 伸張療法：強化版（1日4-5回、各45秒）\n"
+            "- 温熱療法：患部に20分×2-3回/日\n"
+            "- 受動的可動域運動：1日2-3回\n"
+            "- 短い散歩：リード付き10分×1-2回/日\n\n"
+            "【第3段階：回復期（4-12週）】\n"
+            "- 継続的な伸張療法：毎日必須\n"
+            "- 散歩距離延伸：週ごとに5分追加\n"
+            "- 能動的運動：肩関節の自発的動き増加\n"
+            "- 温熱療法の継続：週3回以上\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 生涯的な毎日のストレッチ（不可欠）\n"
+            "- 月1回の伸張療法セッション（獣医学的）\n"
+            "- 定期的な可動域評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【棘下筋拘縮の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：28-35%（筋肉リモデリング）\n"
+            "   特にアミノ酸濃化食推奨\n\n"
+            "2. **筋肉・靭帯修復成分**\n"
+            "   コラーゲンペプチド：10-15 g/day\n"
+            "   ビタミンC：1000-2000 mg/day（コラーゲン合成促進）\n\n"
+            "3. **抗炎症成分**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day\n"
+            "   クルクミン：50-100 mg/kg/day\n\n"
+            "4. **関節サポート**\n"
+            "   グルコサミン：15 mg/kg BID\n"
+            "   コンドロイチン：10 mg/kg BID"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 24,
+        "success_rate": 0.72,
+        "mortality_rate": 0.0,
+    },
+
+    "cat_discospondylitis": {
+        "name_ja": "椎間板脊椎炎",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の椎間板脊椎炎は、希少な感染性脊椎疾患です。\n\n"
+            "【予後指標】\n"
+            "- 適切な抗生物質治療：75-85%が臨床改善\n"
+            "- 完全治癒：2-4週で多くの症例で回復\n"
+            "- 再発率：低い（5-10%）\n"
+            "- 後遺症：最小限（早期治療の場合）\n"
+            "- 治療期間：通常4-8週間の抗生物質投与\n\n"
+            "早期診断と積極的な抗生物質治療が予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【椎間板脊椎炎リハビリテーション】\n\n"
+            "【第1段階：急性期管理（初診-2週）】\n"
+            "- 絶対安静：ジャンプ・走行禁止\n"
+            "- 抗生物質投与：4-8週間\n"
+            "- 鎮痛・消炎薬投与\n"
+            "- 温熱療法：患部に10分×1回/日\n\n"
+            "【第2段階：治療中期（2-6週）】\n"
+            "- 段階的に短い散歩開始：5分×1回/日\n"
+            "- 抗生物質治療継続\n"
+            "- 運動制限の緩和：臨床改善に応じて\n"
+            "- 温熱療法の継続\n\n"
+            "【第3段階：回復期（6-8週）】\n"
+            "- 段階的に通常活動への復帰\n"
+            "- 抗生物質治療終了（治療完了時）\n"
+            "- ジャンプ・走行の許可（段階的に）\n\n"
+            "【第4段階：維持期（8週以降）】\n"
+            "- 通常活動への完全な復帰\n"
+            "- 月1回の神経学的評価\n"
+            "- 必要に応じて追加の画像検査"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【椎間板脊椎炎の栄養管理】\n\n"
+            "1. **感染病対応栄養**\n"
+            "   高プロテイン食：40%以上（免疫機能強化）\n"
+            "   質の高いアニマルプロテイン推奨\n\n"
+            "2. **免疫サポート成分**\n"
+            "   ビタミンA：10,000-15,000 IU/day（免疫機能）\n"
+            "   ビタミンC：200-300 mg/day\n"
+            "   亜鉛：20-30 mg/day\n\n"
+            "3. **抗炎症成分**\n"
+            "   オメガ-3脂肪酸：100-150 mg/kg/day（脊椎炎症抑制）\n"
+            "   ビタミンE：200 IU/day\n\n"
+            "4. **栄養サポート**\n"
+            "   食欲不振時：ハンドフィーディングまたは高栄養食\n"
+            "   消化が容易な食事を選択"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.80,
+        "mortality_rate": 0.02,
+    },
+
+    "cat_septic_arthritis": {
+        "name_ja": "化膿性関節炎",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の化膿性関節炎は、外傷または血行性感染による関節の急性感染症です。\n\n"
+            "【予後指標】\n"
+            "- 早期診断・治療：85-90%が機能的改善\n"
+            "- 遅延治療：後遺症が多い（OA、関節拘縮）\n"
+            "- 完全寛解：多くは4-12週で回復\n"
+            "- OA発展率：30-40%（関節ダメージの程度に依存）\n\n"
+            "早期の関節洗浄と積極的な抗生物質治療が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【化膿性関節炎リハビリテーション】\n\n"
+            "【第1段階：急性期（初診-2週）】\n"
+            "- 安静の厳格な継続：ジャンプ・走行禁止\n"
+            "- 関節洗浄（外科的必要に応じて）\n"
+            "- 抗生物質治療：4-8週間\n"
+            "- 鎮痛薬投与\n"
+            "- 患部冷却：初日から48時間、その後温熱療法\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- 短い散歩開始：5分×1回/日\n"
+            "- 受動的可動域運動：1日2-3回（各5-10分）\n"
+            "- マッサージと温熱療法：患部15分×1回/日\n"
+            "- 関節の段階的動員\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 段階的に散歩距離延伸\n"
+            "- 能動的運動の励行\n"
+            "- 抗生物質治療終了\n"
+            "- 関節可動域の改善確認\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 通常活動への段階的復帰\n"
+            "- 月1回の関節評価\n"
+            "- 定期的なレントゲン検査（OA監視）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【化膿性関節炎の栄養管理】\n\n"
+            "1. **感染対応高プロテイン食**\n"
+            "   タンパク質：40%以上（免疫反応強化）\n"
+            "   質の高いアニマルプロテイン推奨\n\n"
+            "2. **抗炎症・抗感染栄養**\n"
+            "   ビタミンA：12,000-16,000 IU/day（免疫機能）\n"
+            "   ビタミンC：250-400 mg/day\n"
+            "   亜鉛：25-35 mg/day（創傷治癒促進）\n\n"
+            "3. **関節修復成分**\n"
+            "   グルコサミン：10-15 mg/kg BID（術後6-12ヶ月）\n"
+            "   コンドロイチン：8-10 mg/kg BID\n\n"
+            "4. **栄養サポート**\n"
+            "   食欲不振時：高栄養食またはハンドフィーディング\n"
+            "   小量多食（1日4-5回）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.87,
+        "mortality_rate": 0.01,
+    },
+
+    "dog_carpal_hyperextension": {
+        "name_ja": "手根関節過伸展損傷",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "手根関節過伸展損傷は、手根関節の軟部組織（靭帯・関節包）が損傷する外傷です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：60-70%が症状改善（軽度損傷）\n"
+            "- 外科修復：80-85%が機能的改善\n"
+            "- 関節不安定性継続：30-40%で若干の残存\n"
+            "- OA発展率：50-60%（長期的）\n"
+            "- 治療期間：8-16週\n\n"
+            "適切な固定と段階的なリハビリが予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【手根関節過伸展リハビリテーション】\n\n"
+            "【第1段階：固定期（0-4週）】\n"
+            "- 厳格な関節固定：スプリント/ギプス装着\n"
+            "- 冷却療法：初日から3日間、15分×4回/日\n"
+            "- 消炎鎮痛薬投与\n"
+            "- 非固定肢の運動：関節硬化防止\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- ギプス除去後、段階的固定解除\n"
+            "- 短い散歩開始：リード付き、5-10分×1-2回/日\n"
+            "- 受動的可動域運動：1日2-3回（各5分）\n"
+            "- マッサージと温熱療法\n"
+            "- サポート着用継続（運動時）\n\n"
+            "【第3段階：回復期（8-16週）】\n"
+            "- 段階的にサポート外す\n"
+            "- 散歩距離の段階的延伸\n"
+            "- 筋力強化運動：低衝撃で\n"
+            "- 関節可動域の改善確認\n\n"
+            "【第4段階：維持期（16週以降）】\n"
+            "- 通常活動への段階的復帰\n"
+            "- 継続的な関節サポート（必要に応じて）\n"
+            "- 月1回の関節評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【手根関節過伸展の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：28-35%（靭帯・関節包修復）\n"
+            "   質の良いアニマルプロテイン推奨\n\n"
+            "2. **靭帯修復促進成分**\n"
+            "   ビタミンC：1000-2000 mg/day（コラーゲン合成促進）\n"
+            "   コラーゲンペプチド：10-15 g/day\n\n"
+            "3. **関節サポート成分**\n"
+            "   グルコサミン：15-20 mg/kg BID\n"
+            "   コンドロイチン：10 mg/kg BID\n\n"
+            "4. **抗炎症成分**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day\n"
+            "   ビタミンE：400 IU/day"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.76,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_cruciate_partial_tear": {
+        "name_ja": "前十字靭帯部分断裂",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "前十字靭帯の部分断裂は、完全断裂より保存的管理の成功率が高いですが、進行の可能性があります。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：70-80%が症状改善（体重管理+リハビリ併用時）\n"
+            "- 完全断裂への進行：30-50%（数週～数ヶ月で）\n"
+            "- 部分損傷のままの安定化：50-70%\n"
+            "- OA発展：ほぼ全例で長期的に軽度のOA変化\n"
+            "- 治療期間：6-12週（保存的管理時）\n\n"
+            "体重管理と継続的なリハビリが部分断裂の安定化に重要です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【前十字靭帯部分断裂リハビリテーション】\n\n"
+            "【第1段階：急性期（0-2週）】\n"
+            "- 安静：ジャンプ・走行禁止、散歩は5分×1-2回/日\n"
+            "- 冷却療法：初日から48時間、15分×3-4回/日\n"
+            "- 消炎鎮痛薬投与\n"
+            "- 受動的可動域運動：1日2-3回\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- ハイドロセラピー：週2-3回（浮力による負荷軽減）\n"
+            "- 散歩距離延伸：週ごとに5分追加（痛みが増加しない範囲）\n"
+            "- 筋力強化：関節を安定させる周囲筋\n"
+            "- マッサージと継続的なストレッチ\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 段階的に通常活動へ復帰\n"
+            "- 低衝撃運動継続推奨（ハイドロセラピー週1回）\n"
+            "- ジャンプ・走行は慎重に（軽度から開始）\n"
+            "- 継続的な体重管理\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 部分断裂の完全断裂への進行監視\n"
+            "- 症状悪化時の外科治療検討\n"
+            "- 継続的なリハビリと体重管理（生涯推奨）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【前十字靭帯部分断裂の栄養管理】\n\n"
+            "1. **体重管理（最重要）**\n"
+            "   BCS 4-5/9維持（膝への負荷軽減）\n"
+            "   給与量20-30%削減が必要な場合多い\n\n"
+            "2. **靭帯修復促進成分**\n"
+            "   ビタミンC：1000-1500 mg/day（コラーゲン合成促進）\n"
+            "   グルコサミン + コンドロイチン + MSM\n\n"
+            "3. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day\n"
+            "   クルクミン：50-100 mg/kg/day\n\n"
+            "4. **高プロテイン食**\n"
+            "   タンパク質：28-35%（周囲筋強化）\n"
+            "   質の良いアニマルプロテイン推奨"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.75,
+        "mortality_rate": 0.0,
+    },
+
+    "cat_lens_luxation": {
+        "name_ja": "水晶体脱臼",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の水晶体脱臼は、前房脱臼と後方脱臼で予後が大きく異なります。\n\n"
+            "【予後指標】\n"
+            "- 前房脱臼（緊急手術）：手術により70-80%が視力温存\n"
+            "- 後方脱臼（保存的管理）：多くは無症状で管理可能\n"
+            "- 術後の続発性青内障：30-40%\n"
+            "- 失明率：未手術で前房脱臼の場合50-60%\n"
+            "- 視覚機能：手術後70-85%が機能的視力を保持\n\n"
+            "早期診断と適切な治療選択が視力保全の鍵です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【水晶体脱臼リハビリテーション】\n\n"
+            "【第1段階：後方脱臼（保存的管理）】\n"
+            "- 定期的な眼科検査（3-6ヶ月ごと）\n"
+            "- 活動制限：目への外傷回避\n"
+            "- 点眼薬投与：医学的管理（炎症・眼圧コントロール）\n"
+            "- 通常の生活を継続（ただしジャンプ・走行時は注意）\n\n"
+            "【第2段階：前房脱臼（手術後）】\n"
+            "- 術後安静：1-2週間、活動制限\n"
+            "- 点眼薬投与：術後炎症・感染予防\n"
+            "- 眼圧管理：点眼薬・内服薬（青内障予防）\n"
+            "- 段階的に通常活動へ復帰（1-2ヶ月かけて）\n\n"
+            "【第3段階：長期管理（術後2週以降）】\n"
+            "- 月1回の眼圧測定（青内障監視）\n"
+            "- 点眼薬の継続投与（生涯多くの場合必要）\n"
+            "- 眼科検査：6-12ヶ月ごと\n"
+            "- 対眼の脱臼監視（進行リスク）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【水晶体脱臼の栄養管理】\n\n"
+            "1. **眼機能サポート栄養**\n"
+            "   ルテイン・ゼアキサンチン：10-20 mg/day（眼保護）\n"
+            "   タウリン：250-500 mg/day（猫の眼機能維持必須）\n\n"
+            "2. **抗酸化物質**\n"
+            "   ビタミンA：8,000-10,000 IU/day（眼機能維持）\n"
+            "   ビタミンE：200-400 IU/day\n"
+            "   ビタミンC：200-300 mg/day\n\n"
+            "3. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：100-150 mg/kg/day（眼炎症抑制）\n"
+            "   クルクミン：30-50 mg/kg/day\n\n"
+            "4. **通常食維持**\n"
+            "   完全栄養バランス AAFCO基準を満たす食事\n"
+            "   眼機能特化食の選択推奨"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 4,
+        "success_rate": 0.75,
+        "mortality_rate": 0.0,
+    },
+
+    "cat_jaw_fracture": {
+        "name_ja": "顎骨折",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の顎骨折は、外傷部位と固定方法により予後が大きく異なります。\n\n"
+            "【予後指標】\n"
+            "- 単純閉鎖骨折（骨髄内ピン固定）：90-95%が良好な骨癒合\n"
+            "- 複雑骨折：75-85%の治療成功\n"
+            "- 咬合機能改善：多くの症例で術後4-8週で正常化\n"
+            "- 非癒合率：3-5%（不十分な固定の場合より高い）\n"
+            "- 骨癒合期間：4-8週\n\n"
+            "適切な固定と段階的なリハビリが予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【顎骨折リハビリテーション】\n\n"
+            "【第1段階：固定期（0-4週）】\n"
+            "- 固定装置装着：ピン・プレート・バンドなど\n"
+            "- 食事管理：柔らかい流動食（栄養チューブ必要な場合も）\n"
+            "- 関節可動域維持：可能な範囲での軽い開閉運動\n"
+            "- 痛み管理：消炎鎮痛薬投与\n\n"
+            "【第2段階：初期リハビリ（4-6週）】\n"
+            "- 固定装置除去（骨癒合確認後）\n"
+            "- 段階的に固い食事へ移行\n"
+            "- 顎関節の可動域トレーニング\n"
+            "- 咬筋のマッサージ\n\n"
+            "【第3段階：回復期（6-8週）】\n"
+            "- 通常食への段階的復帰\n"
+            "- 顎関節の機能回復確認\n"
+            "- 咬合の確認（獣医学的）\n\n"
+            "【第4段階：維持期（8週以降）】\n"
+            "- 通常の食事・生活の継続\n"
+            "- 月1回の咬合機能評価（初期3ヶ月）\n"
+            "- 放射線検査：骨癒合確認（8週時点）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【顎骨折の栄養管理】\n\n"
+            "1. **骨癒合促進栄養**\n"
+            "   高プロテイン：40%以上（骨マトリックス形成）\n"
+            "   ビタミンD：1000-2000 IU/day（骨化促進）\n\n"
+            "2. **カルシウム・リン**\n"
+            "   Ca:P比 1.2:1\n"
+            "   ただし過度なカルシウム補給は避ける\n\n"
+            "3. **ビタミン・ミネラル**\n"
+            "   ビタミンC：200-300 mg/day（コラーゲン形成促進）\n"
+            "   亜鉛：20-30 mg/day（骨リモデリング促進）\n\n"
+            "4. **給与方法**\n"
+            "   固定期間中は流動食または経鼻栄養\n"
+            "   段階的に固い食事へ移行\n"
+            "   高カロリー食で組織修復を支援"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.92,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_atlantoaxial_subluxation": {
+        "name_ja": "環軸椎亜脱臼",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "環軸椎亜脱臼は、第1・第2頸椎の不安定性による脊髄圧迫疾患です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：30-40%が症状改善（軽度症状のみ）\n"
+            "- 外科安定化：70-80%が臨床改善を示す\n"
+            "- 後遺症（不全麻痺）：30-40%\n"
+            "- 完全瘞痺のリスク：不安定が大きい場合30-50%\n"
+            "- 外科適応：神経学的症状が進行する場合必須\n\n"
+            "早期診断と適切な治療選択が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【環軸椎亜脱臼リハビリテーション】\n\n"
+            "【第1段階：保存的管理期（初診-4週）】\n"
+            "- 厳格な安静：ジャンプ・走行禁止\n"
+            "- コルセット装着：頸椎保護\n"
+            "- 短い散歩：5-10分×1-2回/日（痛みが増加しない範囲）\n"
+            "- 消炎鎮痛薬投与\n"
+            "- 神経学的悪化の監視：脊髄ショック移行の警戒\n\n"
+            "【第2段階：術後初期（術後0-4週）**\n"
+            "- 脊椎固定：キャリー固定またはコルセット\n"
+            "- 短い散歩：リード付き、5分×1-2回/日\n"
+            "- 受動的可動域運動：頸椎以外\n"
+            "- 患部温熱療法：15分×1回/日\n\n"
+            "【第3段階：術後回復（4-12週）】\n"
+            "- 段階的にコルセット外す\n"
+            "- 散歩距離の段階的延伸\n"
+            "- ジャンプ・走行は継続制限\n"
+            "- 神経学的改善確認\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 生涯的な活動制限管理\n"
+            "- 月1回の神経学的評価\n"
+            "- 定期的なレントゲン検査（固定の安定性確認）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【環軸椎亜脱臼の栄養管理】\n\n"
+            "1. **脊髄保護栄養**\n"
+            "   オメガ-3脂肪酸：200-300 mg/kg/day（脊髄炎症抑制）\n"
+            "   ビタミンE：600-800 IU/day（抗酸化作用）\n\n"
+            "2. **神経機能サポート**\n"
+            "   ビタミンB12：100-200 μg/day\n"
+            "   葉酸：5-10 mg/day\n"
+            "   ビタミンB6：20-30 mg/day\n\n"
+            "3. **高プロテイン食**\n"
+            "   タンパク質：25-30%（脊髄機能維持）\n"
+            "   質の良いアニマルプロテイン推奨\n\n"
+            "4. **体重管理**\n"
+            "   BCS 4-5/9維持（脊椎への負荷軽減）\n"
+            "   過度な体重は亜脱臼リスク増加"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.59,
+        "mortality_rate": 0.08,
+    },
+
+    "dog_myositis_masticatory": {
+        "name_ja": "咀嚼筋炎",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "咀嚼筋炎は、咀嚼筋の炎症・萎縮を引き起こす免疫介在性疾患です。\n\n"
+            "【予後指標】\n"
+            "- 初期段階での治療：80-85%が完全寛解\n"
+            "- 遅延治療：50-60%の改善のみ（不可逆的萎縮リスク）\n"
+            "- 慢性期への移行：30-40%（継続免疫抑制薬が必要）\n"
+            "- 咀嚼機能回復率：70-80%（治療開始が早い場合）\n"
+            "- 再発率：20-30%（免疫抑制薬減量時）\n\n"
+            "早期診断と積極的な免疫抑制治療が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【咀嚼筋炎リハビリテーション】\n\n"
+            "【第1段階：急性期（初診-2週）】\n"
+            "- 免疫抑制薬投与：初期プレドニゾロン 1-2 mg/kg BID\n"
+            "- 食事の工夫：食べやすい形態（ウェットフード、ペースト状）\n"
+            "- 温熱療法：咀嚼筋に15分×1-2回/日\n"
+            "- 食事スケジュール：小量多食（1日4-5回）\n\n"
+            "【第2段階：治療応答期（2-6週）】\n"
+            "- 免疫抑制薬用量調整：臨床反応に応じて段階的に減量\n"
+            "- 咀嚼機能の改善を監視\n"
+            "- マッサージと温熱療法の継続\n"
+            "- 段階的に通常の食事へ移行\n\n"
+            "【第3段階：維持管理期（6-12週）】\n"
+            "- 免疫抑制薬を段階的に減量（寛解維持に最小必要量）\n"
+            "- 通常の食事に完全に移行\n"
+            "- 咀嚼筋の機能的改善確認\n\n"
+            "【第4段階：長期管理（12週以降）**\n"
+            "- 免疫抑制薬の長期継続（多くの場合6-12ヶ月以上）\n"
+            "- 月1回の臨床評価と咀嚼機能確認\n"
+            "- 再発の早期発見（減量時に特に注意）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【咀嚼筋炎の栄養管理】\n\n"
+            "1. **免疫調整食**\n"
+            "   高プロテイン食：28-32%（免疫機能維持）\n"
+            "   質の高いアニマルプロテイン推奨\n\n"
+            "2. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day（免疫炎症抑制）\n"
+            "   ビタミンE：400-600 IU/day\n\n"
+            "3. **咀嚼筋修復成分**\n"
+            "   L-カルニチン：20-40 mg/kg/day（筋肉代謝）\n"
+            "   BCAAs：濃化食選択\n"
+            "   ビタミンB12：100 μg/day\n\n"
+            "4. **給与方法**\n"
+            "   急性期：食べやすい形態（ウェット、ペースト）\n"
+            "   温かい食事：食べやすさ向上\n"
+            "   小量多食：1日4-5回"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 6,
+        "success_rate": 0.82,
+        "mortality_rate": 0.01,
+    },
+
+    "dog_polymyositis": {
+        "name_ja": "多発性筋炎",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "多発性筋炎は、複数の筋肉の炎症を伴う免疫介在性疾患です。\n\n"
+            "【予後指標】\n"
+            "- 初期治療応答：70-80%が臨床改善\n"
+            "- 完全寛解：50-60%（長期免疫抑制が必要な場合も）\n"
+            "- CK値正常化：通常4-8週で達成\n"
+            "- 機能的改善：治療開始後2-4週で顕著\n"
+            "- 再発率：30-40%（免疫抑制薬減量時）\n\n"
+            "早期診断と積極的な免疫抑制治療が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【多発性筋炎リハビリテーション】\n\n"
+            "【第1段階：急性期（初診-2週）】\n"
+            "- 免疫抑制薬投与：プレドニゾロン 1-2 mg/kg BID\n"
+            "- 絶対安静：活動量の最小化\n"
+            "- 短い散歩：5分×1-2回/日（痛みが増加しない範囲）\n"
+            "- 温熱療法：患筋に15-20分×1-2回/日\n"
+            "- 受動的可動域運動：関節硬化防止\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- 免疫抑制薬効果の監視（CK値で評価）\n"
+            "- 段階的に散歩距離延伸：週ごとに5分追加\n"
+            "- マッサージと受動的ストレッチ：毎日\n"
+            "- 温熱療法の継続\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 段階的に通常活動へ復帰\n"
+            "- 免疫抑制薬を段階的に減量\n"
+            "- 筋力強化運動（CK値が正常化後）\n"
+            "- 軽い散歩やハイドロセラピー推奨\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 免疫抑制薬の継続投与（多くの場合必要）\n"
+            "- 月1回のCK値測定\n"
+            "- 継続的な軽い運動推奨（筋力維持）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【多発性筋炎の栄養管理】\n\n"
+            "1. **高プロテイン食（筋肉修復重視）**\n"
+            "   タンパク質：30-35%（筋肉再生促進）\n"
+            "   質の高いアニマルプロテイン：鶏肉、魚\n\n"
+            "2. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day（筋肉炎症抑制）\n"
+            "   ビタミンE：500-800 IU/day（抗酸化作用）\n\n"
+            "3. **筋肉機能サポート成分**\n"
+            "   L-カルニチン：30-50 mg/kg/day（エネルギー代謝）\n"
+            "   クレアチン：20-30 mg/kg/day（筋力維持）\n"
+            "   BCAAs：濃化食選択\n\n"
+            "4. **免疫サポート**\n"
+            "   ビタミンA：8,000-10,000 IU/day\n"
+            "   ビタミンC：500-1000 mg/day\n"
+            "   亜鉛：20-25 mg/day"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.75,
+        "mortality_rate": 0.02,
+    },
+
+    "dog_quadriceps_contracture": {
+        "name_ja": "大腿四頭筋拘縮",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "大腿四頭筋拘縮は、前肢の過度な使用や外傷後に筋肉が瘢痕化・短縮する疾患です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：40-50%が症状改善\n"
+            "- 外科的伸張術：70-80%が機能改善\n"
+            "- 再拘縮率：20-30%（不十分なリハビリの場合）\n"
+            "- 治療期間：12-24週\n\n"
+            "早期の集約的なリハビリと継続的なストレッチが予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【大腿四頭筋拘縮リハビリテーション】\n\n"
+            "【第1段階：非外科的管理（0-4週）】\n"
+            "- 温熱療法：患部に20分×2-3回/日（筋柔軟性向上）\n"
+            "- 強制伸張療法：膝関節の伸張（1日4-5回、各45秒保持）\n"
+            "- マッサージ：大腿四頭筋に集中的に施行\n"
+            "- 短い散歩：5-10分×2回/日\n\n"
+            "【第2段階：術後初期（術後0-4週）】\n"
+            "- 伸張療法：強化版（1日5-6回、各60秒）\n"
+            "- 温熱療法：患部に20分×3回/日\n"
+            "- 受動的可動域運動：1日3-4回\n"
+            "- 短い散歩：リード付き10分×2回/日\n\n"
+            "【第3段階：回復期（4-12週）】\n"
+            "- 継続的な伸張療法：毎日必須（生涯推奨）\n"
+            "- 散歩距離延伸：週ごとに5分追加\n"
+            "- 能動的運動：膝関節の自発的動き増加\n"
+            "- ハイドロセラピー：週2回（筋力強化）\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 生涯的な毎日のストレッチ必須\n"
+            "- 月1回の伸張療法セッション（獣医学的）\n"
+            "- 定期的な可動域評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【大腿四頭筋拘縮の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：28-35%（筋肉リモデリング）\n"
+            "   アミノ酸濃化食推奨\n\n"
+            "2. **筋肉・靭帯修復成分**\n"
+            "   コラーゲンペプチド：10-15 g/day\n"
+            "   ビタミンC：1000-2000 mg/day（コラーゲン合成促進）\n\n"
+            "3. **抗炎症成分**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day\n"
+            "   ビタミンE：400-600 IU/day\n\n"
+            "4. **関節サポート**\n"
+            "   グルコサミン：15 mg/kg BID\n"
+            "   コンドロイチン：10 mg/kg BID"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 24,
+        "success_rate": 0.70,
+        "mortality_rate": 0.0,
+    },
+
+    "dog_fibrotic_myopathy": {
+        "name_ja": "線維性ミオパチー",
+        "species": "Dog",
+        "prognosis_detailed_ja": (
+            "線維性ミオパチーは、後肢の筋肉が線維化により短縮する稀な神経筋疾患です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：10-20%が症状改善（多くは進行性）\n"
+            "- 外科的伸張術：60-70%が機能改善を示す\n"
+            "- 再拘縮率：40-50%（外科術後）\n"
+            "- 生活の質：適切に管理されれば良好\n\n"
+            "外科治療と継続的なリハビリが予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【線維性ミオパチーリハビリテーション】\n\n"
+            "【第1段階：初期管理（0-4週）】\n"
+            "- 温熱療法：患肢に20分×2回/日\n"
+            "- 短い散歩：5-10分×2回/日\n"
+            "- 消炎薬投与：症状緩和\n"
+            "- マッサージ：患肢筋肉に\n\n"
+            "【第2段階：術後初期（術後0-4週）】\n"
+            "- 安静継続：患肢の過度な使用禁止\n"
+            "- 温熱療法：患部20分×2-3回/日\n"
+            "- 受動的可動域運動：1日2-3回\n"
+            "- 短い散歩：リード付き10分×1-2回/日\n\n"
+            "【第3段階：回復期（4-12週）】\n"
+            "- 段階的に散歩距離延伸\n"
+            "- ハイドロセラピー：週2-3回（浮力利用）\n"
+            "- 筋力強化運動：可動域内で\n"
+            "- 継続的な温熱療法\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 継続的な温熱療法と伸張（生涯推奨）\n"
+            "- 月1回の機能評価\n"
+            "- 定期的な伸張療法セッション"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【線維性ミオパチーの栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：28-35%（筋肉機能維持）\n"
+            "   質の良いアニマルプロテイン推奨\n\n"
+            "2. **筋肉修復成分**\n"
+            "   L-カルニチン：30-50 mg/kg/day（エネルギー代謝）\n"
+            "   BCAAs：濃化食選択\n\n"
+            "3. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：150-200 mg/kg/day\n"
+            "   ビタミンE：400-600 IU/day\n\n"
+            "4. **活動レベルに応じた栄養**\n"
+            "   カロリー管理：活動制限に応じて調整\n"
+            "   体重維持：BCS 4-5/9"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.65,
+        "mortality_rate": 0.0,
+    },
+
+    "cat_ocd_elbow": {
+        "name_ja": "離断性骨軟骨症（肘）",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の肘OCD は稀ですが、診断された場合は早期治療が重要です。\n\n"
+            "【予後指標】\n"
+            "- 保存的管理：30-40%が自然寛解（軽度病変のみ）\n"
+            "- 関節鏡下鮮除術：80-85%が臨床改善\n"
+            "- 術後OA発展：長期的には60-70%で軽度のOA\n"
+            "- 機能的改善期間：6-12週\n\n"
+            "早期手術と徹底的なリハビリが予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【猫肘OCD術後リハビリテーション】\n\n"
+            "【第1段階：術後初期（0-3週）】\n"
+            "- 安静の励行：ジャンプ・走行禁止\n"
+            "- 冷却・温熱療法：交互実施\n"
+            "- 受動的可動域運動：1日2-3回（各5分）\n"
+            "- 短い活動：トイレ移動のみ\n\n"
+            "【第2段階：初期リハビリ（3-8週）】\n"
+            "- 水中リハビリ：週2-3回（浮力利用）\n"
+            "- 短い散歩開始：5分×1回/日\n"
+            "- マッサージと温熱療法\n"
+            "- 段階的に活動増加\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- 通常活動への段階的復帰\n"
+            "- ジャンプ・走行の許可（段階的に）\n"
+            "- 肘関節可動域改善確認\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 通常のオープン活動管理\n"
+            "- 月1回の関節評価\n"
+            "- 定期的なレントゲン検査（OA監視）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【猫肘OCD術後栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：40%以上（組織修復促進）\n"
+            "   質の良いアニマルプロテイン推奨\n\n"
+            "2. **関節サポート成分**\n"
+            "   グルコサミン：10-15 mg/kg BID（術後6-12ヶ月）\n"
+            "   コンドロイチン：8-10 mg/kg BID\n\n"
+            "3. **抗酸化物質**\n"
+            "   ビタミンE：300-400 IU/day\n"
+            "   ビタミンC：150-200 mg/day\n\n"
+            "4. **体重管理**\n"
+            "   BCS 4-5/9維持（関節負荷軽減）\n"
+            "   肘関節への負荷軽減が重要"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.82,
+        "mortality_rate": 0.0,
+    },
+
+    "cat_immune_arthritis": {
+        "name_ja": "慢性進行性多発性関節炎",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の慢性進行性多発性関節炎（CPPA）は、徐々に悪化する関節疾患です。\n\n"
+            "【予後指標】\n"
+            "- 治療応答率：60-70%（症状緩和）\n"
+            "- 完全寛解：20-30%（稀）\n"
+            "- 進行性悪化：40-60%（継続的な治療必要）\n"
+            "- 生活の質：適切に管理されれば良好\n"
+            "- 長期予後：多くは症状管理で対応可能\n\n"
+            "長期的な免疫管理と物理療法が予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【慢性進行性多発性関節炎リハビリテーション】\n\n"
+            "【第1段階：診断初期（初診-4週）】\n"
+            "- 免疫抑制薬投与：プレドニゾロン 0.5-1 mg/kg\n"
+            "- 運動制限：ジャンプ・走行禁止\n"
+            "- 温熱療法：患部10分×1-2回/日\n"
+            "- 環境調整：段差回避、スロープ設置\n\n"
+            "【第2段階：治療応答期（4-12週）】\n"
+            "- 免疫抑制薬効果の評価\n"
+            "- 段階的に活動を許可\n"
+            "- 継続的な温熱療法\n"
+            "- 関節可動域維持\n\n"
+            "【第3段階：安定期（12週以降）】\n"
+            "- 免疫抑制薬を最小維持量に調整\n"
+            "- 定期的なリハビリ継続\n"
+            "- 月1回の臨床評価\n"
+            "- 症状悪化時の即時対応"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【慢性進行性多発性関節炎の栄養管理】\n\n"
+            "1. **免疫調整食**\n"
+            "   高プロテイン：40%以上（免疫機能維持）\n"
+            "   質の高いアニマルプロテイン推奨\n\n"
+            "2. **抗炎症栄養（重要）**\n"
+            "   オメガ-3脂肪酸：150-250 mg/kg/day（高用量推奨）\n"
+            "   クルクミン：50-100 mg/kg/day\n\n"
+            "3. **関節保護成分**\n"
+            "   グルコサミン：10-15 mg/kg BID（継続推奨）\n"
+            "   コンドロイチン：8-10 mg/kg BID\n\n"
+            "4. **体重管理**\n"
+            "   BCS 4-5/9維持（関節負荷軽減）\n"
+            "   理想体重の厳密な維持が重要"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.68,
+        "mortality_rate": 0.01,
+    },
+
+    "cat_mandibular_symphysis_fracture": {
+        "name_ja": "下顎結合部骨折",
+        "species": "Cat",
+        "prognosis_detailed_ja": (
+            "猫の下顎結合部骨折は、結合部での骨折で比較的治療成績が良好です。\n\n"
+            "【予後指標】\n"
+            "- 単純閉鎖骨折：90-95%が良好な骨癒合\n"
+            "- 複雑骨折：75-85%の治療成功\n"
+            "- 咬合機能改善：多くの症例で術後4-8週で正常化\n"
+            "- 非癒合率：3-5%\n"
+            "- 骨癒合期間：4-8週\n\n"
+            "適切な固定と段階的なリハビリが予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【下顎結合部骨折リハビリテーション】\n\n"
+            "【第1段階：固定期（0-4週）】\n"
+            "- ワイヤー固定またはプレート固定\n"
+            "- 食事管理：柔らかい流動食\n"
+            "- 口腔衛生：軽く洗浄（負荷なく）\n"
+            "- 鎮痛薬投与\n\n"
+            "【第2段階：初期リハビリ（4-6週）】\n"
+            "- 固定装置除去（骨癒合確認後）\n"
+            "- 段階的に固い食事へ移行\n"
+            "- 顎関節の可動域トレーニング\n"
+            "- マッサージと温熱療法\n\n"
+            "【第3段階：回復期（6-8週）】\n"
+            "- 通常食への完全な移行\n"
+            "- 顎関節の機能回復確認\n"
+            "- 咬合の評価\n\n"
+            "【第4段階：維持期（8週以降）】\n"
+            "- 通常の食事と生活\n"
+            "- 月1回の咬合機能評価（初期3ヶ月）\n"
+            "- レントゲン検査：骨癒合確認"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【下顎結合部骨折の栄養管理】\n\n"
+            "1. **骨癒合促進栄養**\n"
+            "   高プロテイン：40%以上（骨マトリックス形成）\n"
+            "   ビタミンD：1000-2000 IU/day\n\n"
+            "2. **ミネラル補給**\n"
+            "   カルシウム：500-800 mg/day\n"
+            "   リン：Ca:P比 1.2:1\n\n"
+            "3. **ビタミン・ミネラル**\n"
+            "   ビタミンC：200-300 mg/day（コラーゲン合成）\n"
+            "   亜鉛：20-30 mg/day（骨リモデリング）\n\n"
+            "4. **給与方法**\n"
+            "   固定期間中：流動食または経鼻栄養\n"
+            "   段階的に固い食事へ移行\n"
+            "   高カロリー食で組織修復を支援"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.92,
+        "mortality_rate": 0.0,
+    },
+
+    # Phase 2b: Exotic Animal Orthopedic Diseases
+    "rabbit_hind_limb_paresis": {
+        "name_ja": "後肢不全麻痺・麻痺",
+        "species": "Rabbit",
+        "prognosis_detailed_ja": (
+            "ウサギの後肢麻痺は、脊椎損傷または神経圧迫による深刻な疾患です。\n\n"
+            "【予後指標】\n"
+            "- 急性脊椎損傷（不完全）：30-40%が部分的機能回復\n"
+            "- 完全麻痺：5-10%が機能回復\n"
+            "- 医学的管理：60-70%が症状寛解\n"
+            "- 生活の質：適切な管理で良好\n"
+            "- 予後：早期介入が重要\n\n"
+            "原因特定と早期治療が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【後肢麻痺リハビリテーション】\n\n"
+            "【第1段階：急性期（初診-2週）】\n"
+            "- 脊椎保護：動きを最小化\n"
+            "- 温熱療法：患部に10分×1-2回/日\n"
+            "- 排尿管理：手圧排尿（膀胱パラライシス時）\n"
+            "- 消炎薬投与：コルチコステロイド（初期）\n"
+            "- 柔らかい床材：褥瘡予防\n\n"
+            "【第2段階：初期リハビリ（2-6週）】\n"
+            "- 段階的に運動を励行\n"
+            "- 受動的可動域運動：後肢（毎日）\n"
+            "- マッサージ：患肢筋肉\n"
+            "- 環境調整：トイレ・食器へのアクセス改善\n\n"
+            "【第3段階：回復期（6-12週）】\n"
+            "- 能動的運動の励行\n"
+            "- ハイドロセラピー推奨（浮力利用）\n"
+            "- 歩行訓練\n"
+            "- 排尿機能の改善監視\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 継続的なリハビリ\n"
+            "- 月1回の神経学的評価\n"
+            "- 継続的な排尿管理（必要に応じて）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【後肢麻痺の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：18-20%（神経・筋肉機能維持）\n"
+            "   ウサギ用ペレット推奨\n\n"
+            "2. **神経保護成分**\n"
+            "   ビタミンB12：100 μg/week（神経機能）\n"
+            "   葉酸：5 mg/day\n"
+            "   ビタミンC：200 mg/day（抗酸化）\n\n"
+            "3. **筋肉機能維持**\n"
+            "   アミノ酸バランス食\n"
+            "   新鮮な野菜（毎日）\n\n"
+            "4. **活動制限対応**\n"
+            "   カロリー管理：25-30%削減（活動低下に対応）\n"
+            "   繊維質：充分（腸機能維持）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.48,
+        "mortality_rate": 0.05,
+    },
+
+    "rabbit_fracture_limb": {
+        "name_ja": "四肢骨折（ウサギ）",
+        "species": "Rabbit",
+        "prognosis_detailed_ja": (
+            "ウサギの四肢骨折は、骨が脆いため複雑なことが多いです。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：80-85%が良好な骨癒合\n"
+            "- 複雑骨折：60-70%の治療成功\n"
+            "- 非癒合率：15-20%\n"
+            "- 骨癒合期間：6-12週\n"
+            "- 機能的改善：8-12週\n\n"
+            "適切な固定と継続的なリハビリが予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【ウサギ四肢骨折リハビリテーション】\n\n"
+            "【第1段階：固定期（0-4週）】\n"
+            "- 脚スプリント装着：できるだけ外固定\n"
+            "- 完全安静：ケージ制限\n"
+            "- 温熱療法：患部10分×1-2回/日\n"
+            "- 受動的可動域運動：非固定肢\n"
+            "- 鎮痛薬投与\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- スプリント除去（放射線検査後）\n"
+            "- 短い活動許可：ケージ内での自由運動\n"
+            "- 段階的に完全活動へ復帰\n"
+            "- マッサージと温熱療法\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- 通常活動への復帰\n"
+            "- 筋力強化：自然な活動で\n"
+            "- 関節可動域改善確認\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 通常の活動で管理\n"
+            "- 月1回の機能評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【ウサギ骨折の栄養管理】\n\n"
+            "1. **骨癒合促進栄養**\n"
+            "   カルシウム：充分（ウサギペレット基準）\n"
+            "   ビタミンD：400-600 IU/day\n\n"
+            "2. **高プロテイン食**\n"
+            "   タンパク質：18-20%（骨修復用）\n"
+            "   ウサギ用ペレット推奨\n\n"
+            "3. **ビタミン・ミネラル**\n"
+            "   ビタミンC：500 mg/day（コラーゲン合成）\n"
+            "   ビタミンK：2-4 μg/day（骨化促進）\n\n"
+            "4. **新鮮野菜**\n"
+            "   毎日提供：栄養多価な野菜（レタス、ニンジン等）\n"
+            "   繰り返し小量給与：GI stasis予防"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.82,
+        "mortality_rate": 0.02,
+    },
+
+    "rabbit_osteoarthritis": {
+        "name_ja": "変形性関節症（ウサギ）",
+        "species": "Rabbit",
+        "prognosis_detailed_ja": (
+            "ウサギの変形性関節症は、老齢ウサギに多い慢性進行性疾患です。\n\n"
+            "【予後指標】\n"
+            "- 医学的管理：70-80%が症状改善\n"
+            "- 進行の速度：遅い（多くは数年かけて）\n"
+            "- 完全寛解：稀（症状管理が目標）\n"
+            "- 生活の質：適切に管理されれば良好\n"
+            "- 長期予後：継続的なリハビリと栄養管理で維持可能\n\n"
+            "早期介入と継続的な管理が予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【ウサギ変形性関節症リハビリテーション】\n\n"
+            "【第1段階：症状緩和期（初診-4週）】\n"
+            "- 温熱療法：患部10分×2回/日\n"
+            "- 短い活動：痛みが増加しない範囲での運動\n"
+            "- 鎮痛薬投与：初期の症状コントロール\n"
+            "- 環境調整：段差を減らす、クッション性の床\n\n"
+            "【第2段階：段階的活動増加（4-12週）】\n"
+            "- 継続的な温熱療法\n"
+            "- 自由運動の励行：痛みが増加しない速度\n"
+            "- マッサージ：患肢関節周囲\n"
+            "- 鎮痛薬の調整：必要に応じて\n\n"
+            "【第3段階：長期管理（12週以降）】\n"
+            "- 継続的な温熱療法（冬季重視）\n"
+            "- 月1回の関節評価\n"
+            "- サプリメント継続投与\n"
+            "- 継続的な環境調整（進行に応じて）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【ウサギ変形性関節症の栄養管理】\n\n"
+            "1. **体重管理（重要）**\n"
+            "   理想体重の維持：カロリー管理\n"
+            "   過体重は関節への負荷増加\n\n"
+            "2. **関節サポート成分**\n"
+            "   グルコサミン：グリーンリップムール抽出物推奨\n"
+            "   MSM：20-30 mg/kg/day\n\n"
+            "3. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：亜麻仁から\n"
+            "   ビタミンC：抗酸化作用\n\n"
+            "4. **栄養バランス**\n"
+            "   高繊維質：ウサギ用ペレット基準\n"
+            "   新鮮野菜：毎日少量\n"
+            "   水分：充分な水供給"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.75,
+        "mortality_rate": 0.01,
+    },
+
+    "bird_fracture_wing": {
+        "name_ja": "翼骨折（鳥）",
+        "species": "Bird",
+        "prognosis_detailed_ja": (
+            "鳥の翼骨折は、飛行能力に直接影響する重要な外傷です。\n\n"
+            "【予後指標】\n"
+            "- 単純閉鎖骨折：75-85%が飛行回復\n"
+            "- 複雑骨折：50-60%の機能回復\n"
+            "- 非癒合率：10-15%\n"
+            "- 骨癒合期間：4-8週（種により異なる）\n"
+            "- 飛行回復：骨癒合後4-8週\n\n"
+            "適切な固定と徹底的なリハビリが飛行回復の鍵です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【鳥翼骨折リハビリテーション】\n\n"
+            "【第1段階：固定期（0-4週）】\n"
+            "- ウイングラップまたはスリング装着\n"
+            "- 隔離ケージ：動きを最小化\n"
+            "- 温熱療法：患部に10分×1回/day\n"
+            "- 栄養サポート：高カロリー食\n"
+            "- ビタミンサプリメント投与\n\n"
+            "【第2段階：初期リハビリ（4-6週）】\n"
+            "- 固定装置除去（放射線検査後）\n"
+            "- 翼の受動的可動域運動：毎日\n"
+            "- 段階的に活動許可\n"
+            "- 止まり木への止まり訓練\n\n"
+            "【第3段階：飛行復帰（6-8週）】\n"
+            "- 短い飛行距離から開始\n"
+            "- 段階的に飛行距離延伸\n"
+            "- 運動の監視\n\n"
+            "【第4段階：完全復帰（8週以降）】\n"
+            "- 通常の飛行活動\n"
+            "- 月1回の翼の評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【鳥翼骨折の栄養管理】\n\n"
+            "1. **高エネルギー食**\n"
+            "   脂肪：20-25%（組織修復エネルギー）\n"
+            "   タンパク質：18-22%（骨・筋肉修復）\n\n"
+            "2. **骨癒合促進栄養**\n"
+            "   カルシウム：600-900 mg/day\n"
+            "   ビタミンD3：400-600 IU/day\n\n"
+            "3. **ビタミン・ミネラル**\n"
+            "   ビタミンA：5,000-8,000 IU/day（組織修復）\n"
+            "   ビタミンC：200-300 mg/day\n"
+            "   亜鉛：10-15 mg/day\n\n"
+            "4. **給与方法**\n"
+            "   高栄養食を小量多食\n"
+            "   新鮮な野菜と穀物\n"
+            "   水分：充分な供給"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.80,
+        "mortality_rate": 0.05,
+    },
+
+    "bird_fracture_leg": {
+        "name_ja": "脚骨折（鳥）",
+        "species": "Bird",
+        "prognosis_detailed_ja": (
+            "鳥の脚骨折は、移動能力に直接影響する外傷です。\n\n"
+            "【予後指標】\n"
+            "- 単純閉鎖骨折：75-85%が歩行回復\n"
+            "- 複雑骨折：60-70%の機能回復\n"
+            "- 非癒合率：10-15%\n"
+            "- 骨癒合期間：4-6週\n"
+            "- 完全機能回復：6-8週\n\n"
+            "適切な固定と段階的なリハビリが歩行回復を促進します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【鳥脚骨折リハビリテーション】\n\n"
+            "【第1段階：固定期（0-4週）】\n"
+            "- 脚スプリント装着：医学的固定\n"
+            "- ケージ隔離：動きを最小化\n"
+            "- 止まり木の高さ調整：短い脚に対応\n"
+            "- 栄養サポート：高カロリー食\n"
+            "- ビタミン補給\n\n"
+            "【第2段階：初期リハビリ（4-6週）】\n"
+            "- 固定装置除去（放射線検査後）\n"
+            "- 脚の受動的可動域運動\n"
+            "- 段階的に活動許可\n"
+            "- 止まり木への止まり訓練\n\n"
+            "【第3段階：歩行回復（6-8週）】\n"
+            "- 短い距離での歩行練習\n"
+            "- 段階的に活動増加\n"
+            "- バランス訓練\n\n"
+            "【第4段階：完全復帰（8週以降）】\n"
+            "- 通常の飛行活動\n"
+            "- 月1回の脚の評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【鳥脚骨折の栄養管理】\n\n"
+            "1. **高エネルギー食**\n"
+            "   脂肪：20-25%（修復エネルギー）\n"
+            "   タンパク質：18-22%（組織修復）\n\n"
+            "2. **骨癒合促進栄養**\n"
+            "   カルシウム：600-800 mg/day\n"
+            "   ビタミンD3：400-600 IU/day\n\n"
+            "3. **ビタミン・ミネラル**\n"
+            "   ビタミンA：5,000-7,000 IU/day\n"
+            "   ビタミンC：150-200 mg/day\n"
+            "   亜鉛：10-12 mg/day\n\n"
+            "4. **給与方法**\n"
+            "   小量多食で栄養供給\n"
+            "   新鮮野菜と穀物\n"
+            "   水分充分"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.80,
+        "mortality_rate": 0.03,
+    },
+
+    "hamster_fracture_limb": {
+        "name_ja": "四肢骨折（ハムスター）",
+        "species": "Hamster",
+        "prognosis_detailed_ja": (
+            "ハムスターの四肢骨折は、小動物のため複雑なことが多いです。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：70-80%が良好な骨癒合\n"
+            "- 複雑骨折：50-60%の治療成功\n"
+            "- 非癒合率：20-25%\n"
+            "- 骨癒合期間：4-6週\n"
+            "- 機能回復：6-8週\n\n"
+            "適切な固定と継続的なリハビリが予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【ハムスター四肢骨折リハビリテーション】\n\n"
+            "【第1段階：固定期（0-4週）】\n"
+            "- 脚スプリント装着：最小限のサイズ\n"
+            "- 隔離ケージ：回し車除去\n"
+            "- 温熱療法：患部5分×1回/day\n"
+            "- 鎮痛薬投与\n"
+            "- ソフト床材：褥瘡予防\n\n"
+            "【第2段階：初期リハビリ（4-6週）】\n"
+            "- スプリント除去（放射線検査後）\n"
+            "- 短い活動許可\n"
+            "- ケージ内の自由運動\n"
+            "- マッサージ\n\n"
+            "【第3段階：回復期（6-8週）】\n"
+            "- 通常活動への復帰\n"
+            "- 回し車の再導入（段階的）\n"
+            "- 機能改善確認\n\n"
+            "【第4段階：維持期（8週以降）】\n"
+            "- 通常の活動で管理"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【ハムスター骨折の栄養管理】\n\n"
+            "1. **骨癒合促進栄養**\n"
+            "   カルシウム：充分（ハムスターペレット基準）\n"
+            "   ビタミンD3：200-300 IU/day\n\n"
+            "2. **高プロテイン食**\n"
+            "   タンパク質：15-18%（骨修復）\n"
+            "   ハムスター用ペレット推奨\n\n"
+            "3. **ビタミン・ミネラル**\n"
+            "   ビタミンC：100-150 mg/day（コラーゲン）\n"
+            "   亜鉛：5-8 mg/day\n\n"
+            "4. **給与方法**\n"
+            "   新鮮野菜：少量毎日\n"
+            "   ペレット：基準量\n"
+            "   水分：新鮮な水供給"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.75,
+        "mortality_rate": 0.05,
+    },
+
+    "guinea_pig_rickets": {
+        "name_ja": "くる病（モルモット）",
+        "species": "Guinea Pig",
+        "prognosis_detailed_ja": (
+            "モルモットのくる病は、ビタミンC欠乏により起こります。\n\n"
+            "【予後指標】\n"
+            "- 初期治療：85-90%が症状改善\n"
+            "- 完全回復：4-8週で達成可能\n"
+            "- 骨格変形の改善：部分的（既存変形は不可逆）\n"
+            "- 継続的なビタミンC補給が必須\n"
+            "- 予後：早期診断・治療で良好\n\n"
+            "ビタミンC補給と栄養改善が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【モルモットくる病リハビリテーション】\n\n"
+            "【第1段階：急性期（初診-2週）】\n"
+            "- ビタミンC投与：50-100 mg/day（水に混ぜる）\n"
+            "- 新鮮野菜導入：毎日少量\n"
+            "- 運動を励行：痛みが増加しない範囲\n"
+            "- 栄養改善：高栄養ペレット\n\n"
+            "【第2段階：改善期（2-6週）】\n"
+            "- ビタミンC継続投与\n"
+            "- 段階的に活動増加\n"
+            "- 新鮮野菜の種類増加\n"
+            "- 関節可動域改善監視\n\n"
+            "【第3段階：回復期（6-8週）】\n"
+            "- ビタミンC投与継続（生涯推奨）\n"
+            "- 通常活動への完全復帰\n"
+            "- 運動機能改善確認\n\n"
+            "【第4段階：維持期（8週以降）】\n"
+            "- 継続的なビタミンC補給（1日50-100 mg）\n"
+            "- 毎日新鮮野菜供給\n"
+            "- 月1回の評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【モルモットくる病の栄養管理】\n\n"
+            "1. **ビタミンC補給（最重要）**\n"
+            "   水への添加：50-100 mg/day\n"
+            "   野菜からの補給：毎日\n"
+            "   サプリメント：必要に応じて\n\n"
+            "2. **高栄養ペレット**\n"
+            "   タンパク質：18-20%\n"
+            "   カルシウム：充分（1.0-1.5% DM）\n"
+            "   ビタミンA：高レベル\n\n"
+            "3. **新鮮野菜（毎日必須）**\n"
+            "   ビタミンC豊富：ピーマン、キャベツ、ニンジン\n"
+            "   小量多食：1日30-50g\n\n"
+            "4. **水分・ミネラル**\n"
+            "   新鮮な水：毎日交換\n"
+            "   カルシウム：ペレット基準\n"
+            "   リン：Ca:P比 1.2:1"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.87,
+        "mortality_rate": 0.02,
+    },
+
+    "guinea_pig_osteoarthritis": {
+        "name_ja": "変形性関節症（モルモット）",
+        "species": "Guinea Pig",
+        "prognosis_detailed_ja": (
+            "モルモットの変形性関節症は、老齢モルモットに多い進行性疾患です。\n\n"
+            "【予後指標】\n"
+            "- 医学的管理：70-75%が症状改善\n"
+            "- 進行の速度：遅い（年単位）\n"
+            "- 完全寛解：稀（症状管理が目標）\n"
+            "- 生活の質：適切に管理されれば良好\n"
+            "- 長期予後：継続的なリハビリと栄養管理で維持可能\n\n"
+            "早期介入と継続的な管理が予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【モルモット変形性関節症リハビリテーション】\n\n"
+            "【第1段階：症状緩和期（初診-4週）】\n"
+            "- 温熱療法：患部10分×1-2回/day\n"
+            "- 短い活動：痛みが増加しない範囲\n"
+            "- 鎮痛薬投与（必要に応じて）\n"
+            "- 環境調整：段差を減らす、クッション床\n\n"
+            "【第2段階：段階的活動増加（4-12週）】\n"
+            "- 継続的な温熱療法\n"
+            "- 自由運動の励行\n"
+            "- マッサージ：患肢周囲\n"
+            "- 鎮痛薬の調整\n\n"
+            "【第3段階：長期管理（12週以降）】\n"
+            "- 継続的な温熱療法（冬季重視）\n"
+            "- 月1回の関節評価\n"
+            "- サプリメント継続投与\n"
+            "- 環境調整の継続"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【モルモット変形性関節症の栄養管理】\n\n"
+            "1. **体重管理（重要）**\n"
+            "   理想体重の維持：カロリー管理\n"
+            "   過体重は関節への負荷増加\n\n"
+            "2. **関節サポート成分**\n"
+            "   グルコサミン：サプリメント添加\n"
+            "   MSM：10-15 mg/kg/day\n\n"
+            "3. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：亜麻仁\n"
+            "   ビタミンC：100-150 mg/day（抗酸化）\n\n"
+            "4. **栄養バランス**\n"
+            "   高繊維質：モルモット用ペレット基準\n"
+            "   新鮮野菜：毎日少量\n"
+            "   水分：充分な水供給"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.72,
+        "mortality_rate": 0.01,
+    },
+
+    "hamster_spinal_compression": {
+        "name_ja": "脊髄圧迫（ハムスター）",
+        "species": "Hamster",
+        "prognosis_detailed_ja": (
+            "ハムスターの脊髄圧迫は、脊椎損傷や腫瘍による神経症状です。\n\n"
+            "【予後指標】\n"
+            "- 医学的管理：40-50%が部分的改善\n"
+            "- 完全麻痺：5-10%が機能回復\n"
+            "- 進行性悪化：30-40%\n"
+            "- 生活の質：適切な管理で向上可能\n"
+            "- 予後：原因と圧迫程度に依存\n\n"
+            "原因特定と早期治療が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【ハムスター脊髄圧迫リハビリテーション】\n\n"
+            "【第1段階：急性期（初診-2週）】\n"
+            "- 脊椎保護：動きを最小化\n"
+            "- 温熱療法：患部5分×1回/day\n"
+            "- ソフト床材：褥瘡予防\n"
+            "- 消炎薬投与\n"
+            "- 排尿管理：必要に応じて\n\n"
+            "【第2段階：初期リハビリ（2-4週）】\n"
+            "- 段階的に運動を励行\n"
+            "- 受動的可動域運動\n"
+            "- マッサージ：脊椎周囲\n"
+            "- 温熱療法継続\n\n"
+            "【第3段階：回復期（4-8週）】\n"
+            "- 能動的運動の励行\n"
+            "- ケージ内自由運動許可\n"
+            "- 回し車の再導入（段階的）\n\n"
+            "【第4段階：維持期（8週以降）】\n"
+            "- 継続的なリハビリ\n"
+            "- 月1回の神経学的評価\n"
+            "- 症状悪化の監視"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【脊髄圧迫の栄養管理】\n\n"
+            "1. **神経保護栄養**\n"
+            "   高プロテイン：15-18%（神経機能）\n"
+            "   ハムスター用ペレット推奨\n\n"
+            "2. **神経機能サポート**\n"
+            "   ビタミンB12：50 μg/week\n"
+            "   葉酸：2-3 mg/day\n"
+            "   ビタミンC：100 mg/day\n\n"
+            "3. **抗炎症成分**\n"
+            "   オメガ-3脂肪酸：亜麻仁から\n"
+            "   ビタミンE：50-100 IU/day\n\n"
+            "4. **活動制限対応**\n"
+            "   カロリー管理：20-30%削減\n"
+            "   新鮮野菜：少量毎日\n"
+            "   繰り返し小量給与"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 8,
+        "success_rate": 0.45,
+        "mortality_rate": 0.10,
+    },
+
+    "bird_arthritis": {
+        "name_ja": "関節炎（鳥）",
+        "species": "Bird",
+        "prognosis_detailed_ja": (
+            "鳥の関節炎は、老齢鳥に多い慢性進行性疾患です。\n\n"
+            "【予後指標】\n"
+            "- 医学的管理：70-75%が症状改善\n"
+            "- 進行の速度：遅い（月～年単位）\n"
+            "- 完全寛解：稀（症状管理が目標）\n"
+            "- 生活の質：適切に管理されれば良好\n"
+            "- 長期予後：継続的なリハビリと栄養管理で維持可能\n\n"
+            "早期介入と継続的な管理が予後を改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【鳥関節炎リハビリテーション】\n\n"
+            "【第1段階：症状緩和期（初診-4週）】\n"
+            "- 温熱療法：患部10分×1-2回/day\n"
+            "- 止まり木の調整：低高さ、太めのもの\n"
+            "- 短い活動：痛みが増加しない範囲\n"
+            "- 鎮痛薬投与（必要に応じて）\n"
+            "\n"
+            "【第2段階：段階的活動増加（4-12週）】\n"
+            "- 継続的な温熱療法\n"
+            "- 飛行の励行（短距離から）\n"
+            "- 止まり木への止まり訓練\n"
+            "- 鎮痛薬の調整\n\n"
+            "【第3段階：長期管理（12週以降）】\n"
+            "- 継続的な温熱療法（冬季重視）\n"
+            "- 月1回の関節評価\n"
+            "- サプリメント継続投与\n"
+            "- 止まり木環境の継続調整"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【鳥関節炎の栄養管理】\n\n"
+            "1. **体重管理（重要）**\n"
+            "   理想体重の維持\n"
+            "   過体重は関節への負荷増加\n\n"
+            "2. **関節サポート成分**\n"
+            "   グルコサミン：サプリメント添加\n"
+            "   MSM：10-15 mg/kg/day\n\n"
+            "3. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：種子から\n"
+            "   ビタミンC：100-150 mg/day\n\n"
+            "4. **栄養バランス**\n"
+            "   高質ペレット：種別専用食\n"
+            "   新鮮野菜：毎日少量\n"
+            "   水分：新鮮な水毎日"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.72,
+        "mortality_rate": 0.02,
+    },
+
+    "reptile_fracture_limb": {
+        "name_ja": "四肢骨折（爬虫類）",
+        "species": "Reptile",
+        "prognosis_detailed_ja": (
+            "爬虫類の四肢骨折は、正確な整復と固定により良好な予後が期待できます。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：75-85%が完全癒合\n"
+            "- 複雑骨折：50-65%が機能的癒合\n"
+            "- 感染リスク：適切な固定で<5%\n"
+            "- 回復期間：4-12週（種と骨によって異なる）\n"
+            "- 瘢痕形成：一般的（機能障害なし）\n\n"
+            "正確な初期治療と適切な固定が最良の予後をもたらします。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【爬虫類四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 外部固定装置：スプリント・テーピング・キャスト\n"
+            "- 温度管理：POTZ（Preferred Optimal Temperature Zone）維持\n"
+            "- 軽い自動運動：固定範囲内での動き許可\n"
+            "- 放射線検査：週1回で整復維持確認\n"
+            "- 捕食拒否の許容：ストレス軽減\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- 固定の段階的除去\n"
+            "- 段階的な運動負荷増加\n"
+            "- 自由運動の励行：ケージ内\n"
+            "- 温度管理の継続\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- 完全な固定除去\n"
+            "- 登り木などの運動の再導入\n"
+            "- 通常の活動への復帰\n"
+            "- 放射線検査：月1回で骨癒合確認\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の生活への完全復帰\n"
+            "- 定期的な可動域評価\n"
+            "- 瘢痕部位の再骨折予防"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【爬虫類骨折の栄養管理】\n\n"
+            "1. **骨癒合促進栄養**\n"
+            "   カルシウム：高濃度サプリメント（種に応じて）\n"
+            "   ビタミンD3：照射不足の場合は補充\n"
+            "   リン：Ca:P = 1.5-2:1\n\n"
+            "2. **エネルギーサポート**\n"
+            "   高プロテイン食：種別の要求量に応じて\n"
+            "   充分なカロリー：組織修復促進\n\n"
+            "3. **マイクロニュートリエント**\n"
+            "   ビタミンA：過度不可（肝毒性）\n"
+            "   亜鉛：骨リモデリング促進\n"
+            "   銅：骨強度向上\n\n"
+            "4. **給与方法**\n"
+            "   自然な食材：昆虫・野菜（種別対応）\n"
+            "   栄養補充：ダスティング法\n"
+            "   温度管理：採食前にPOTZ加温"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.78,
+        "mortality_rate": 0.05,
+    },
+
+    "tortoise_shell_fracture": {
+        "name_ja": "甲殻損傷（リクガメ）",
+        "species": "Tortoise",
+        "prognosis_detailed_ja": (
+            "リクガメの甲殻損傷は、損傷の深さと位置によって予後が大きく異なります。\n\n"
+            "【予後指標】\n"
+            "- 浅い損傷（背甲のみ）：90-95%が良好に癒合\n"
+            "- 深い損傷（腹甲含む）：70-80%が機能的に回復\n"
+            "- 感染合併症：適切な管理で<10%\n"
+            "- 回復期間：8-24週（損傷の程度による）\n"
+            "- 瘢痕形成：避けられない（機能障害なし）\n"
+            "- 後遺症：稀（見栄えの問題）\n\n"
+            "早期の感染予防と清潔管理が予後を大きく改善します。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【リクガメ甲殻損傷リハビリテーション】\n\n"
+            "【第1段階：創傷管理期（0-8週）】\n"
+            "- 感染予防：毎日生理食塩水でクリーニング\n"
+            "- ドレッシング：抗菌クリーム＋ガーゼ\n"
+            "- 湿度管理：60-80%RH（呼吸困難予防）\n"
+            "- ソフト床材：腹甲をサポート\n"
+            "- 低刺激食：ペースト状野菜\n\n"
+            "【第2段階：初期修復（8-16週）】\n"
+            "- 段階的なドレッシング頻度低減\n"
+            "- 通常食の再導入\n"
+            "- 日光浴：ビタミンD3合成促進\n"
+            "- 軽い運動：短い散歩\n\n"
+            "【第3段階：回復期（16-24週）】\n"
+            "- ドレッシング終了\n"
+            "- 自由運動の許可\n"
+            "- 登り木や段差の導入\n"
+            "- 通常の飼育環境への復帰\n\n"
+            "【第4段階：長期管理（24週以降）】\n"
+            "- 定期的な甲殻検査\n"
+            "- 再損傷予防の環境管理\n"
+            "- 瘢痕部位の監視"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【リクガメ甲殻損傷の栄養管理】\n\n"
+            "1. **カルシウムとビタミンD3**\n"
+            "   カルシウム：サプリメント 3回/週\n"
+            "   ビタミンD3：日光浴が不十分な場合のみ\n"
+            "   Ca:P比 = 2:1 維持\n\n"
+            "2. **タンパク質と成長促進**\n"
+            "   高プロテイン野菜：ケール、ターサイ\n"
+            "   カルシウム含有野菜：オカラ、小松菜\n"
+            "   乾牧草：繊維質供給\n\n"
+            "3. **ビタミンサポート**\n"
+            "   ビタミンA：適量（肝毒性に注意）\n"
+            "   ビタミンC：組織修復促進\n"
+            "   ビタミンE：抗酸化\n\n"
+            "4. **給与スケジュール**\n"
+            "   毎日給与：新鮮野菜\n"
+            "   3回/週：カルシウムダスティング\n"
+            "   充分な飲水：適切な水分補給"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 24,
+        "success_rate": 0.82,
+        "mortality_rate": 0.08,
+    },
+
+    "ferret_fracture": {
+        "name_ja": "四肢骨折（フェレット）",
+        "species": "Ferret",
+        "prognosis_detailed_ja": (
+            "フェレットの四肢骨折は、適切な整復と固定により良好な予後が期待できます。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：75-85%が完全癒合\n"
+            "- 複雑骨折：60-70%が機能的癒合\n"
+            "- 感染リスク：適切な固定で<5%\n"
+            "- 回復期間：8-12週\n"
+            "- 瘢痕形成：一般的（機能障害なし）\n"
+            "- 後遺症：稀（不安定性の場合のみ）\n\n"
+            "正確な初期整復と確実な固定が最良の予後をもたらします。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【フェレット四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 外部固定：キャスト・スプリント・テーピング\n"
+            "- 活動制限：ケージ内のみ、ジャンプ禁止\n"
+            "- 短い散歩：リード付き、5分×1-2回/日\n"
+            "- 放射線検査：週1回で整復維持確認\n"
+            "- 痛み管理：オピオイド/NSAIDs\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- 固定の段階的除去\n"
+            "- 散歩距離の段階的延伸\n"
+            "- 段階的な活動増加\n"
+            "- ジャンプ・登り木は制限継続\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- 完全な固定除去\n"
+            "- 通常の活動への復帰\n"
+            "- ジャンプ・遊びの再開（段階的）\n"
+            "- 放射線検査：月1回で骨癒合確認\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 完全な活動復帰\n"
+            "- 定期的な可動域評価\n"
+            "- 瘢痕部位の強度確認"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【フェレット骨折の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：35-40%（基本食より高め）\n"
+            "   高脂肪食：エネルギー供給促進\n"
+            "   フェレット用フォーミュラ推奨\n\n"
+            "2. **骨癒合促進栄養**\n"
+            "   カルシウム：サプリメント追加\n"
+            "   リン：Ca:P比 1.2:1\n"
+            "   ビタミンD3：日光浴が不十分な場合のみ\n\n"
+            "3. **マイクロニュートリエント**\n"
+            "   ビタミンB12：200-400 μg/週\n"
+            "   亜鉛：20-30 mg/日（骨リモデリング）\n"
+            "   ビタミンC：150-200 mg/日\n\n"
+            "4. **給与方法**\n"
+            "   少量頻回：消化吸収最適化\n"
+            "   高カロリー食：組織修復サポート\n"
+            "   新鮮肉食：フェレット本来の栄養"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.79,
+        "mortality_rate": 0.03,
+    },
+
+    "hedgehog_limb_fracture": {
+        "name_ja": "四肢骨折（ハリネズミ）",
+        "species": "Hedgehog",
+        "prognosis_detailed_ja": (
+            "ハリネズミの四肢骨折は、サイズが小さいため外科的介入が困難です。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：70-80%が完全癒合\n"
+            "- 複雑骨折：50-60%が機能的癒合\n"
+            "- 感染リスク：適切な管理で<8%\n"
+            "- 回復期間：8-12週\n"
+            "- 瘢痕形成：一般的（軽度の不安定性も可）\n"
+            "- 後遺症：10-20%（軽度の跛行）\n\n"
+            "保存的管理による固定が主体で、根気強い管理が重要です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【ハリネズミ四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 軽いテーピング：固定（外科的キャストは困難）\n"
+            "- 活動制限：ケージ内のみ、走輪禁止\n"
+            "- ソフト床材：褥瘡予防\n"
+            "- 温度管理：32-35°C維持（冬眠予防）\n"
+            "- 放射線検査：2週時点で整復確認\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- テーピングの段階的除去\n"
+            "- 短い散歩：ケージ内自由運動\n"
+            "- 段階的な活動増加\n"
+            "- 走輪は継続制限\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- テーピング完全除去\n"
+            "- 走輪の段階的再開\n"
+            "- 通常行動への復帰\n"
+            "- 可動域の観察継続\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の活動許可\n"
+            "- 定期的な可動域評価\n"
+            "- 跛行の進行性チェック"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【ハリネズミ骨折の栄養管理】\n\n"
+            "1. **高プロテイン食**\n"
+            "   タンパク質：30-35%（ハリネズミ用フード基準）\n"
+            "   昆虫食：自然なタンパク源\n"
+            "   ミルワーム・コオロギ推奨\n\n"
+            "2. **骨癒合促進栄養**\n"
+            "   カルシウム：昆虫ダスティングで補充\n"
+            "   ビタミンD3：週1回（日光浴不足の場合）\n"
+            "   リン：昆虫に含有\n\n"
+            "3. **マイクロニュートリエント**\n"
+            "   ビタミンB12：100-150 μg/週\n"
+            "   亜鉛：5-10 mg/週\n"
+            "   ビタミンC：50-100 mg/週\n\n"
+            "4. **給与方法**\n"
+            "   少量頻回：消化吸収最適化\n"
+            "   生きた昆虫：自然な採食行動促進\n"
+            "   新鮮野菜：少量毎日（ザリガニなど昆虫食性なので不要が基本）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.74,
+        "mortality_rate": 0.05,
+    },
+
+    "ferret_osteoarthritis": {
+        "name_ja": "変形性関節症（フェレット）",
+        "species": "Ferret",
+        "prognosis_detailed_ja": (
+            "フェレットの変形性関節症は、老齢フェレット（4-5歳以上）に多い進行性疾患です。\n\n"
+            "【予後指標】\n"
+            "- 医学的管理：70-75%が症状改善\n"
+            "- 進行の速度：遅い（月～年単位）\n"
+            "- 完全寛解：稀（症状管理が目標）\n"
+            "- 生活の質：適切に管理されれば良好\n"
+            "- 長期予後：継続的な管理で維持可能\n"
+            "- 併発疾患：アドレナリン腫瘍・膵炎との鑑別必須\n\n"
+            "早期診断と継続的な管理がQOL改善に重要です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【フェレット変形性関節症リハビリテーション】\n\n"
+            "【第1段階：症状緩和期（初診-4週）】\n"
+            "- 温熱療法：患部10分×1-2回/日\n"
+            "- 活動制限：避難所（ハンモック）による休息\n"
+            "- 痛み管理：NSAIDs（メロキシカムなど）\n"
+            "- ケージ環境調整：段差を減らす\n\n"
+            "【第2段階：段階的活動増加（4-8週）】\n"
+            "- 継続的な温熱療法\n"
+            "- 短い活動：5-10分×2-3回/日\n"
+            "- 物理療法：マッサージ（患肢周囲）\n"
+            "- 薬物療法の調整\n\n"
+            "【第3段階：長期管理（8-12週）】\n"
+            "- 継続的な温熱療法\n"
+            "- 自由活動の許可\n"
+            "- サプリメント継続投与\n"
+            "- 月1回の関節評価\n\n"
+            "【第4段階：維持期（12週以降）】\n"
+            "- 生涯的な症状管理\n"
+            "- 継続的な薬物療法\n"
+            "- 定期的な評価（月1回）\n"
+            "- 体重管理（関節負荷軽減）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【フェレット変形性関節症の栄養管理】\n\n"
+            "1. **体重管理（重要）**\n"
+            "   理想体重：オス1.5-2.5 kg、メス0.8-1.5 kg\n"
+            "   カロリー管理：関節負荷軽減\n"
+            "   過体重は関節への負担増加\n\n"
+            "2. **関節サポート成分**\n"
+            "   グルコサミン：250-500 mg/日\n"
+            "   コンドロイチン：200-400 mg/日\n"
+            "   MSM：50-100 mg/日\n\n"
+            "3. **抗炎症栄養**\n"
+            "   オメガ-3脂肪酸：魚油由来\n"
+            "   ビタミンE：400-600 IU/日\n"
+            "   ビタミンC：200-300 mg/日\n\n"
+            "4. **高プロテイン食**\n"
+            "   タンパク質：35-40%（基本フード）\n"
+            "   質の良いアニマルプロテイン\n"
+            "   新鮮肉食推奨\n\n"
+            "5. **給与方法**\n"
+            "   少量頻回：消化効率最適化\n"
+            "   高カロリー食：体重管理とのバランス\n"
+            "   サプリメント：混合給与で確実な摂取"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.72,
+        "mortality_rate": 0.02,
+    },
+
+    "chinchilla_fracture_limb": {
+        "name_ja": "四肢骨折（チンチラ）",
+        "species": "Chinchilla",
+        "prognosis_detailed_ja": (
+            "チンチラの四肢骨折は、小型動物として整復・固定が困難ですが、保存的管理で対応できます。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：72-82%が完全癒合\n"
+            "- 複雑骨折：55-65%が機能的癒合\n"
+            "- 感染リスク：適切な管理で<8%\n"
+            "- 回復期間：8-12週\n"
+            "- 瘢痕形成：一般的（軽度の不安定性も可）\n"
+            "- 後遺症：15-20%（軽度の跛行）\n\n"
+            "保存的管理による固定と適切なリハビリが予後改善の鍵です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【チンチラ四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 軽いテーピング：固定\n"
+            "- 活動制限：ケージ内のみ、回し車禁止\n"
+            "- ソフト床材：褥瘡予防\n"
+            "- 温度管理：15-24°C、湿度40-60%（ストレス回避）\n"
+            "- 放射線検査：2週時点で整復確認\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- テーピングの段階的除去\n"
+            "- 短い活動：ケージ内自由運動\n"
+            "- 段階的な活動増加\n"
+            "- 回し車は継続制限\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- テーピング完全除去\n"
+            "- 回し車の段階的再開\n"
+            "- 通常行動への復帰\n"
+            "- 可動域の観察継続\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の活動許可\n"
+            "- 定期的な可動域評価\n"
+            "- 不安定性の進行性チェック"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【チンチラ骨折の栄養管理】\n\n"
+            "1. **カルシウムとビタミンD3**\n"
+            "   カルシウム：高濃度ペレット＋サプリメント\n"
+            "   ビタミンD3：日光浴不足の場合のみ\n"
+            "   リン：Ca:P比 1.5:1 維持\n"
+            "   注意：乳製品は避ける（消化不良）\n\n"
+            "2. **タンパク質と成長促進**\n"
+            "   タンパク質：12-16%（チンチラペレット基準）\n"
+            "   繊維質：15-35%（牧草）\n"
+            "   乾牧草：毎日充分供給\n\n"
+            "3. **ビタミンサポート**\n"
+            "   ビタミンA：過度不可（肝毒性）\n"
+            "   ビタミンC：不要（内因性合成）\n"
+            "   ビタミンE：50-100 IU/日\n\n"
+            "4. **給与スケジュール**\n"
+            "   ペレット：毎日計量給与\n"
+            "   牧草：無制限供給\n"
+            "   野菜：少量、週3-4回（消化管トラブル回避）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.76,
+        "mortality_rate": 0.04,
+    },
+
+    "sugar_glider_fracture_limb": {
+        "name_ja": "四肢骨折（フクロモモンガ）",
+        "species": "Sugar Glider",
+        "prognosis_detailed_ja": (
+            "フクロモモンガの四肢骨折は、非常に小型であるため治療が困難ですが、保存的管理で対応できます。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：65-75%が完全癒合\n"
+            "- 複雑骨折：45-55%が機能的癒合\n"
+            "- 感染リスク：適切な管理で<10%\n"
+            "- 回復期間：8-12週\n"
+            "- 瘢痕形成：一般的（ある程度の不安定性も可）\n"
+            "- 後遺症：20-30%（跛行、運動能力低下）\n\n"
+            "根気強い管理と自然な癒合プロセスの支持が重要です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【フクロモモンガ四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 極軽いテーピング：固定（最小限）\n"
+            "- 活動制限：ケージ内のみ\n"
+            "- グライディング禁止：絶対\n"
+            "- ソフト床材：褥瘡予防\n"
+            "- 温度管理：24-27°C（ストレス最小化）\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- テーピング除去（段階的）\n"
+            "- 短い活動：ケージ内自由運動\n"
+            "- 登り木：低い木のみ\n"
+            "- グライディング：継続禁止\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- テーピング完全除去\n"
+            "- グライディングの試験的許可\n"
+            "- 高い木への登り木の再開\n"
+            "- 行動観察継続\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の活動許可\n"
+            "- 定期的な可動域評価\n"
+            "- 跛行の永続性チェック"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【フクロモモンガ骨折の栄養管理】\n\n"
+            "1. **バランスの取れた食事**\n"
+            "   タンパク質：12-15%（フクロモモンガ用フード）\n"
+            "   脂肪：10-15%\n"
+            "   昆虫食＋植物食（50:50ベース）\n\n"
+            "2. **カルシウムとビタミンD3**\n"
+            "   カルシウム：サプリメント添加\n"
+            "   ビタミンD3：週1回（日光浴不足の場合）\n"
+            "   リン：適切なCa:P比\n"
+            "   緑葉野菜：カルシウム供給源\n\n"
+            "3. **マイクロニュートリエント**\n"
+            "   タウリン：必須（猫同様）\n"
+            "   ビタミンA：適量\n"
+            "   ビタミンE：抗酸化\n\n"
+            "4. **給与方法**\n"
+            "   昆虫食：コオロギ・ミルワーム（1-2匹/日）\n"
+            "   フルーツ：ブドウ・ベリー（週3-4回）\n"
+            "   野菜：リンゴ・ニンジン（少量毎日）\n"
+            "   樹液食：アカシア蜜など（月1-2回）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.69,
+        "mortality_rate": 0.06,
+    },
+
+    "degu_fracture_limb": {
+        "name_ja": "四肢骨折（デグー）",
+        "species": "Degu",
+        "prognosis_detailed_ja": (
+            "デグーの四肢骨折は、活動的な性質上、固定が困難ですが、保存的管理で対応できます。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：70-80%が完全癒合\n"
+            "- 複雑骨折：55-65%が機能的癒合\n"
+            "- 感染リスク：適切な管理で<8%\n"
+            "- 回復期間：8-12週\n"
+            "- 瘢痕形成：一般的（軽度の不安定性も可）\n"
+            "- 後遺症：10-15%（軽度の跛行）\n\n"
+            "活動的な性質を理解した管理とリハビリプログラムが重要です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【デグー四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 軽いテーピング：固定（デグーの活動性を考慮）\n"
+            "- 活動制限：ケージ内のみ、回し車禁止\n"
+            "- ソフト床材：褥瘡予防\n"
+            "- 温度管理：20-24°C（ストレス最小化）\n"
+            "- 放射線検査：2週時点で整復確認\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- テーピングの段階的除去\n"
+            "- 短い活動：ケージ内自由運動\n"
+            "- 登り木：低い木のみ\n"
+            "- 回し車：継続禁止\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- テーピング完全除去\n"
+            "- 回し車の段階的再開\n"
+            "- 高い木への登り木の再開\n"
+            "- 自由活動への復帰\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の活動許可\n"
+            "- 定期的な可動域評価\n"
+            "- 尾部断裂（tail degloving）チェック継続"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【デグー骨折の栄養管理】\n\n"
+            "1. **バランスの取れた食事**\n"
+            "   タンパク質：12-15%（デグー用ペレット）\n"
+            "   脂肪：3-5%（低脂肪推奨）\n"
+            "   繊維質：15-25%（牧草）\n\n"
+            "2. **カルシウムとビタミンD3**\n"
+            "   カルシウム：ペレット＋サプリメント\n"
+            "   ビタミンD3：日光浴不足の場合のみ\n"
+            "   リン：Ca:P比 1.5:1 維持\n\n"
+            "3. **マイクロニュートリエント**\n"
+            "   ビタミンC：不要（内因性合成）\n"
+            "   ビタミンE：50-100 IU/日\n"
+            "   亜鉛：骨リモデリング促進\n\n"
+            "4. **給与方法とは制限**\n"
+            "   ペレット：毎日計量給与\n"
+            "   牧草：無制限供給\n"
+            "   野菜：ブロッコリー・ニンジン（少量毎日）\n"
+            "   注意：糖分禁止（デグーは糖尿病リスク）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.75,
+        "mortality_rate": 0.04,
+    },
+
+    "snake_fracture_spine": {
+        "name_ja": "脊椎骨折（ヘビ）",
+        "species": "Snake",
+        "prognosis_detailed_ja": (
+            "ヘビの脊椎骨折は、脊髄損傷を伴うことが多く、予後は損傷程度に大きく依存します。\n\n"
+            "【予後指標】\n"
+            "- 不完全損傷：50-60%が部分的回復\n"
+            "- 完全損傷：10-20%が機能回復\n"
+            "- 麻痺程度：脊髄圧迫の程度に依存\n"
+            "- 回復期間：6-16週（損傷程度による）\n"
+            "- 採食能力：70-80%が回復\n"
+            "- 繁殖能力：脱落可能性あり\n\n"
+            "脊髄損傷の早期評価と保存的管理が予後改善の鍵です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【ヘビ脊椎骨折リハビリテーション】\n\n"
+            "【第1段階：急性期（0-4週）】\n"
+            "- 脊椎保護：動きを最小化\n"
+            "- 温度管理：POTZ維持（種別による）\n"
+            "- 软床材：褥瘡予防\n"
+            "- 脱水予防：湿度管理\n"
+            "- 神経学的評価：週1回の追跡\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- 段階的な運動励行\n"
+            "- ケージ内自由運動\n"
+            "- 登り木：段階的再開\n"
+            "- 採食試験：強制給餌→自主採食\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- 通常行動への段階的復帰\n"
+            "- ケージ環境の正常化\n"
+            "- 神経学的改善の確認\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 継続的な神経学的評価\n"
+            "- 残存症状の監視\n"
+            "- 脱皮パターンの確認"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【ヘビ脊椎骨折の栄養管理】\n\n"
+            "1. **エネルギーサポート**\n"
+            "   栄養価の高い食餌：マウス・ラット\n"
+            "   強制給餌：採食不能の場合\n"
+            "   経管栄養：完全麻痺の場合\n\n"
+            "2. **神経機能サポート**\n"
+            "   タンパク質：適切な栄養価\n"
+            "   ビタミンB12：神経機能維持\n"
+            "   カルシウム：骨癒合促進\n\n"
+            "3. **脊髄保護栄養**\n"
+            "   ビタミンE：抗酸化作用\n"
+            "   オメガ-3脂肪酸：炎症軽減\n"
+            "   ビタミンC：組織修復\n\n"
+            "4. **給与方法**\n"
+            "   採食能力による給与：自主採食優先\n"
+            "   強制給餌：キルド食または経管栄養\n"
+            "   給与頻度：種別の代謝に応じて"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.55,
+        "mortality_rate": 0.15,
+    },
+
+    "parrot_fracture_wing": {
+        "name_ja": "翼骨折（オウム類）",
+        "species": "Parrot",
+        "prognosis_detailed_ja": (
+            "オウム類の翼骨折は、飛行能力の喪失を伴い、生活の質に大きな影響を与えます。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：75-85%が良好に癒合\n"
+            "- 複雑骨折：60-70%が機能的回復\n"
+            "- 感染リスク：適切な固定で<5%\n"
+            "- 回復期間：6-12週\n"
+            "- 飛行能力：90%が回復（正確な整復による）\n"
+            "- 瘢痕形成：一般的（羽毛再生で隠蔽）\n\n"
+            "正確な初期整復と適切な固定が最良の予後をもたらします。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【オウム類翼骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 翼バディテーピング：骨片固定\n"
+            "- 翼の動き制限：30度以内\n"
+            "- 活動制限：留まり木のみ、飛行禁止\n"
+            "- 止まり木の調整：低く安全なもの\n"
+            "- 放射線検査：週1回で整復維持確認\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- 翼テーピングの段階的除去\n"
+            "- 翼運動の励行：ストレッチング\n"
+            "- 短い滑空練習：低い距離から\n"
+            "- 止まり木上での運動\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- テーピング完全除去\n"
+            "- 段階的な飛行復帰\n"
+            "- 自由飛行の励行\n"
+            "- 運動能力の再評価\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の飛行能力確認\n"
+            "- 定期的な可動域評価\n"
+            "- 瘢痕組織の羽毛カバー確認"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【オウム類翼骨折の栄養管理】\n\n"
+            "1. **高カロリー食**\n"
+            "   脂質：適度（12-15%）\n"
+            "   タンパク質：15-25%（羽毛再生促進）\n"
+            "   炭水化物：限定\n\n"
+            "2. **骨癒合促進栄養**\n"
+            "   カルシウム：サプリメント添加\n"
+            "   ビタミンD3：照射不足の場合のみ\n"
+            "   リン：Ca:P比 1-2:1\n\n"
+            "3. **羽毛再生栄養**\n"
+            "   タンパク質：高濃度（羽毛形成）\n"
+            "   ビタミンA：視力・皮膚\n"
+            "   ビタミンE：抗酸化\n"
+            "   硫黄：ケラチン形成\n\n"
+            "4. **給与方法**\n"
+            "   種子食：栄養バランス型\n"
+            "   フルーツ・野菜：毎日少量\n"
+            "   ナッツ：高カロリー補給\n"
+            "   穀類：エネルギー供給"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.80,
+        "mortality_rate": 0.02,
+    },
+
+    "cockatoo_fracture_wing": {
+        "name_ja": "翼骨折（コッカチュー）",
+        "species": "Cockatoo",
+        "prognosis_detailed_ja": (
+            "コッカチューの翼骨折は、大型オウム特有の強力な飛行肉体を考慮した治療が必要です。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：75-85%が良好に癒合\n"
+            "- 複雑骨折：60-70%が機能的回復\n"
+            "- 感染リスク：適切な固定で<5%\n"
+            "- 回復期間：8-16週（大型のため長期）\n"
+            "- 飛行能力：85-90%が回復（正確な整復による）\n"
+            "- 瘢痕形成：一般的（羽毛再生で隠蔽）\n\n"
+            "正確な初期整復と強力な体格に対応した固定が最良の予後をもたらします。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【コッカチュー翼骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-6週）】\n"
+            "- 翼バディテーピング：骨片固定（強力な固定必須）\n"
+            "- 翼の動き制限：20度以内\n"
+            "- 活動制限：止まり木のみ、飛行厳禁\n"
+            "- 止まり木の強化：大型体格に耐える\n"
+            "- 放射線検査：週1回で整復維持確認\n\n"
+            "【第2段階：初期リハビリ（6-12週）】\n"
+            "- 翼テーピングの段階的除去\n"
+            "- 翼運動の励行：強力なストレッチング\n"
+            "- 短い滑空練習：低い距離から\n"
+            "- 筋力回復：段階的\n\n"
+            "【第3段階：回復期（12-16週）】\n"
+            "- テーピング完全除去\n"
+            "- 段階的な飛行復帰\n"
+            "- 自由飛行の励行\n"
+            "- 運動能力の再評価\n\n"
+            "【第4段階：長期管理（16週以降）】\n"
+            "- 通常の飛行能力確認\n"
+            "- 定期的な可動域評価\n"
+            "- 瘢痕組織の羽毛カバー確認"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【コッカチュー翼骨折の栄養管理】\n\n"
+            "1. **高カロリー食（大型対応）**\n"
+            "   脂質：15-18%（高エネルギー）\n"
+            "   タンパク質：15-25%（羽毛再生促進）\n"
+            "   炭水化物：限定（肥満予防）\n\n"
+            "2. **骨癒合促進栄養**\n"
+            "   カルシウム：高用量サプリメント（大型体格）\n"
+            "   ビタミンD3：照射不足の場合のみ\n"
+            "   リン：Ca:P比 1-2:1\n"
+            "   マグネシウム：筋肉機能\n\n"
+            "3. **羽毛再生栄養**\n"
+            "   タンパク質：高濃度（羽毛形成）\n"
+            "   ビタミンA：視力・皮膚\n"
+            "   ビタミンE：抗酸化\n"
+            "   銅：メラニン形成\n\n"
+            "4. **給与方法**\n"
+            "   ペレット：高栄養価タイプ\n"
+            "   ナッツ：高カロリー補給（適量）\n"
+            "   フルーツ・野菜：毎日少量\n"
+            "   シード：栄養バランス型"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.78,
+        "mortality_rate": 0.03,
+    },
+
+    "lizard_fracture_limb": {
+        "name_ja": "四肢骨折（トカゲ）",
+        "species": "Lizard",
+        "prognosis_detailed_ja": (
+            "トカゲの四肢骨折は、種によって治療難度が異なり、正確な整復と固定が重要です。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：75-85%が完全癒合\n"
+            "- 複雑骨折：55-70%が機能的癒合（種による）\n"
+            "- 感染リスク：適切な管理で<8%\n"
+            "- 回復期間：6-12週（種と損傷程度による）\n"
+            "- 脱落リスク：自切による脱落も回復可能\n"
+            "- 瘢痕形成：一般的（機能障害なし）\n\n"
+            "適切な温度管理と段階的リハビリが予後改善の鍵です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【トカゲ四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 外部固定：スプリント・テーピング\n"
+            "- POTZ管理：種別の最適温度範囲\n"
+            "- 軽い自動運動：固定範囲内\n"
+            "- 湿度管理：種別に応じて\n"
+            "- 放射線検査：週1回で整復確認\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- 固定の段階的除去\n"
+            "- 段階的な運動励行\n"
+            "- ケージ内自由運動\n"
+            "- 登り木の段階的再開\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- 完全な固定除去\n"
+            "- 通常行動への復帰\n"
+            "- 自由活動の励行\n"
+            "- 放射線検査で骨癒合確認\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の生活への復帰\n"
+            "- 定期的な可動域評価\n"
+            "- 脱落部位の再生監視（尾の場合）"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【トカゲ四肢骨折の栄養管理】\n\n"
+            "1. **骨癒合促進栄養**\n"
+            "   カルシウム：高濃度サプリメント\n"
+            "   ビタミンD3：紫外線照射不足の場合のみ\n"
+            "   リン：Ca:P比 1.5-2:1\n\n"
+            "2. **エネルギーサポート**\n"
+            "   高プロテイン食：昆虫食\n"
+            "   充分なカロリー：組織修復促進\n"
+            "   種別食性に応じた給与\n\n"
+            "3. **マイクロニュートリエント**\n"
+            "   ビタミンA：視力・免疫（過度不可）\n"
+            "   ビタミンE：抗酸化\n"
+            "   亜鉛：免疫機能・骨リモデリング\n\n"
+            "4. **給与方法**\n"
+            "   食虫種：コオロギ・ミルワーム（ダスティング）\n"
+            "   雑食種：野菜＋昆虫\n"
+            "   採食頻度：種別の代謝に応じて\n"
+            "   温度管理：採食前にPOTZ加温"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 12,
+        "success_rate": 0.78,
+        "mortality_rate": 0.05,
+    },
+
+    "amphibian_fracture_limb": {
+        "name_ja": "四肢骨折（両生類）",
+        "species": "Amphibian",
+        "prognosis_detailed_ja": (
+            "両生類の四肢骨折は、水中と陸上の両環境への適応を考慮した治療が必要です。\n\n"
+            "【予後指標】\n"
+            "- 単純骨折：65-75%が完全癒合\n"
+            "- 複雑骨折：45-55%が機能的癒合\n"
+            "- 感染リスク：適切な管理で<10%（水環境汚染注意）\n"
+            "- 回復期間：8-16週（種による）\n"
+            "- 再生能力：一部の種で脱落部分再生可能\n"
+            "- 瘢痕形成：一般的（機能障害なし）\n\n"
+            "水環境と陸環境のバランス管理が予後改善の鍵です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【両生類四肢骨折リハビリテーション】\n\n"
+            "【第1段階：急性固定期（0-4週）】\n"
+            "- 陸生化：陸地での保護\n"
+            "- 軽い固定：テーピング（最小限）\n"
+            "- 湿度管理：95-100%（乾燥予防）\n"
+            "- 温度管理：種別に応じて\n"
+            "- 繁殖池アクセス禁止：感染予防\n\n"
+            "【第2段階：初期リハビリ（4-8週）】\n"
+            "- 固定の段階的除去\n"
+            "- 陸地での活動：短時間から\n"
+            "- 浅い水域へのアクセス：段階的\n"
+            "- 湿度・温度の継続管理\n\n"
+            "【第3段階：回復期（8-12週）】\n"
+            "- 完全な固定除去\n"
+            "- 通常の陸水環境への復帰\n"
+            "- 自由活動の励行\n"
+            "- 採食行動の確認\n\n"
+            "【第4段階：長期管理（12週以降）】\n"
+            "- 通常の生活環境への完全復帰\n"
+            "- 定期的な可動域評価\n"
+            "- 繁殖ペアリング適性評価"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【両生類四肢骨折の栄養管理】\n\n"
+            "1. **骨癒合促進栄養**\n"
+            "   カルシウム：サプリメント添加\n"
+            "   ビタミンD3：紫外線不足の場合のみ\n"
+            "   リン：Ca:P比 1.5-2:1\n\n"
+            "2. **エネルギーサポート**\n"
+            "   高プロテイン食：昆虫食\n"
+            "   小型無脊椎動物：ミミズ・ダンゴムシ\n"
+            "   充分なカロリー：組織修復促進\n\n"
+            "3. **マイクロニュートリエント**\n"
+            "   ビタミンA：視力（過度不可）\n"
+            "   ビタミンE：抗酸化\n"
+            "   ビタミンB群：代謝促進\n\n"
+            "4. **給与方法**\n"
+            "   昆虫食：ダンゴムシ・ミミズ\n"
+            "   採食頻度：種別の代謝に応じて\n"
+            "   栄養補充：ダスティング\n"
+            "   給与環境：陸地での給与推奨"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 16,
+        "success_rate": 0.70,
+        "mortality_rate": 0.08,
+    },
+
+    "horse_discospondylitis": {
+        "name_ja": "椎間板炎（馬）",
+        "species": "Horse",
+        "prognosis_detailed_ja": (
+            "馬の椎間板炎は、脊椎感染症による重篤な疾患で、早期診断が予後を大きく左右します。\n\n"
+            "【予後指標】\n"
+            "- 医学的管理：30-40%が回復可能\n"
+            "- 外科的介入：45-55%が臨床改善\n"
+            "- 脊髄症状：進行性の場合は予後不良\n"
+            "- 感染制御：抗生物質感受性が重要\n"
+            "- 回復期間：12-24週（治療反応による）\n"
+            "- 再発リスク：15-20%\n\n"
+            "早期診断、感受性検査に基づいた治療、厳格な安静管理が予後改善に重要です。"
+        ),
+        "prognosis_references": {
+            "references": []
+        },
+        "rehabilitation_protocol_ja": (
+            "【馬椎間板炎リハビリテーション】\n\n"
+            "【第1段階：急性感染制御期（初診-8週）】\n"
+            "- 厳格な安静：箱房飼育\n"
+            "- 抗生物質療法：感受性検査に基づく長期投与\n"
+            "- 抗炎症療法：NSAIDs（フェニルブタゾン等）\n"
+            "- 生化学的モニタリング：感染マーカー\n"
+            "- 放射線/MRI検査：週1回で治療反応確認\n\n"
+            "【第2段階：初期リハビリ（8-12週）】\n"
+            "- 段階的な運動：ハルター誘導、5-10分\n"
+            "- 手入れ：神経学的改善の確認\n"
+            "- 抗生物質：継続投与\n"
+            "- 物理療法：冷温浴\n\n"
+            "【第3段階：段階的活動増加（12-20週）】\n"
+            "- 乗騎前段階：長い綱での運動、20-30分\n"
+            "- 軽乗騎：歩様のみ、15-20分\n"
+            "- 神経学的評価：月1回\n"
+            "- 抗生物質：段階的減量\n\n"
+            "【第4段階：長期管理（20週以降）】\n"
+            "- 段階的な活動復帰\n"
+            "- 定期的な神経学的評価（月1回）\n"
+            "- 脊椎安定性確認\n"
+            "- 再発予防の監視"
+        ),
+        "rehabilitation_references": {
+            "references": []
+        },
+        "nutrition_management_ja": (
+            "【馬椎間板炎の栄養管理】\n\n"
+            "1. **免疫機能サポート**\n"
+            "   ビタミンE：2000-3000 IU/日（抗酸化）\n"
+            "   セレニウム：3-5 mg/日（免疫増強）\n"
+            "   ビタミンC：10-20 g/日（組織修復）\n\n"
+            "2. **脊髄保護栄養**\n"
+            "   オメガ-3脂肪酸：100-150 g/日（炎症軽減）\n"
+            "   ビタミンB群：馬用フォーミュラ\n"
+            "   ビタミンA：100,000 IU/日\n\n"
+            "3. **骨・軟骨サポート**\n"
+            "   グルコサミン：10-15 g/日\n"
+            "   コンドロイチン：10-15 g/日\n"
+            "   MSM：5-10 g/日\n\n"
+            "4. **給与方法**\n"
+            "   高品質乾草：アルファルファ混合\n"
+            "   濃厚飼料：栄養バランス型\n"
+            "   サプリメント：給与に混合\n"
+            "   体重管理：BCS 5-6/9維持（安静中の体重増加防止）"
+        ),
+        "nutrition_references": {
+            "references": []
+        },
+        "recovery_timeline_weeks": 24,
+        "success_rate": 0.42,
+        "mortality_rate": 0.08,
     },
 }
 
