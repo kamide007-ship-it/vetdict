@@ -1,4 +1,4 @@
-const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F401}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F9A5}",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F424}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F33F}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
+const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F43E}",chinchilla:"\u{1F43E}",ferret:"\u{1F43E}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43E}",degu:"\u{1F43E}",bird:"\u{1F426}",parakeet:"\u{1F424}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F43E}"};
 
 /* ===== Admin / Pro access control ===== */
 // Admin verification handled server-side
@@ -61,7 +61,7 @@ const I18N={
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
-    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>7,000+疾患・220+薬品・182麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
+    heroLead:"臨床症状から鑑別疾患リストを即座に生成。<br/>6,393疾患・194薬品・188麻酔プロトコル・21動物種対応の臨床意思決定支援プラットフォーム。",
     heroCta:"動物種を選択して鑑別診断を開始",heroCtaDb:"疾患データベースを見る",
     statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",statProtocols:"麻酔プロトコル",
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
@@ -164,7 +164,7 @@ const I18N={
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
-    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>7,000+ diseases \u00b7 220+ drugs \u00b7 182 anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
+    heroLead:"Instantly generate differential diagnosis lists from clinical signs.<br/>6,393 diseases \u00b7 194 drugs \u00b7 188 anesthesia protocols \u00b7 21 species \u2014 a clinical decision support platform for veterinary professionals.",
     heroCta:"Select a species to begin differential diagnosis",heroCtaDb:"Browse Disease Database",
     statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",statProtocols:"Anesthesia",
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
@@ -472,21 +472,23 @@ function animateCount(el,target,duration){
 /* --- Load stats with Promise.all --- */
 function loadSpeciesStats(){
   Promise.all([
+    fetchWithTimeout("/api/dashboard-stats").then(r=>r.json()),
     fetchWithTimeout("/api/species-stats").then(r=>r.json()),
     fetchWithTimeout("/api/health-check/symptoms").then(r=>r.json())
-  ]).then(([data,sd])=>{
+  ]).then(([dashStats,speciesData,sd])=>{
     try{
       // Check if API returned an error response
-      if(!data.species||!Array.isArray(data.species)){
+      if(!speciesData.species||!Array.isArray(speciesData.species)){
         throw new Error("Invalid species data structure from API");
       }
-      SPECIES=data.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
+      SPECIES=speciesData.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
+      // Use dashboard stats for all counts (fully dynamic, no hardcoded values)
       pendingStats={
-        diseases:data.total_diseases||0,
-        species:data.total_species||SPECIES.length,
-        drugs:data.total_drugs||0,
+        diseases:dashStats.total_diseases||0,
+        species:dashStats.total_species||SPECIES.length,
+        drugs:dashStats.total_drugs||0,
         symptoms:sd.symptoms?sd.symptoms.length:0,
-        protocols:182
+        protocols:dashStats.total_protocols||0
       };
       renderSpeciesGrid();
       initStatsObserver();
@@ -515,12 +517,12 @@ function setDefaultStats(){
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:656,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:414,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:285,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F439}",diseases:308,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43F}\uFE0F",diseases:246,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F9A1}",diseases:241,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:246,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:241,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:210,drugs:0,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43F}\uFE0F",diseases:188,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F42D}",diseases:178,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:188,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:479,drugs:0,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
     {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:402,drugs:0,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
     {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:251,drugs:0,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
@@ -530,14 +532,14 @@ function setDefaultStats(){
     {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:218,drugs:0,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:215,drugs:0,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:25,drugs:23,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
-    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:250,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:250,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:7140,
+    diseases:6393,
     species:21,
-    drugs:228,
+    drugs:194,
     symptoms:52,
-    protocols:182
+    protocols:188
   };
   renderSpeciesGrid();
   initStatsObserver();
@@ -1515,24 +1517,54 @@ function classifyDisease(d){
 }
 
 let diseaseNavMode=null;
+function _buildCatCounts(){
+  const counts={};
+  if(!allDiseases)return counts;
+  allDiseases.forEach(d=>{const c=classifyDisease(d);counts[c]=(counts[c]||0)+1;});
+  return counts;
+}
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
+  const catGrid=document.getElementById("diseaseCategoryGrid");
   if(!azNav){console.warn("azNav element not found");return;}
-  if(diseaseNavMode===null)diseaseNavMode=currentLang==="ja"?"category":"az";
+  if(diseaseNavMode===null)diseaseNavMode="category";
   const modeLabels={az:{next:"kana",label:"A-Z",switchLabel:currentLang==="ja"?"あいうえお順へ":"Switch to Kana"},kana:{next:"category",label:currentLang==="ja"?"あいうえお順":"Kana",switchLabel:currentLang==="ja"?"カテゴリ別へ":"Switch to Category"},category:{next:"az",label:currentLang==="ja"?"カテゴリ別":"Category",switchLabel:"A-Z"}};
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
   if(diseaseNavMode==="category"){
-    const cats=[...DISEASE_CAT_ORDER,"other"];
-    const catBtns=cats.map(c=>{const lbl=currentLang==="ja"?(DISEASE_CATEGORIES[c]?.ja||"その他"):(DISEASE_CATEGORIES[c]?.en||"Other");return`<button data-letter="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}">${escapeHtml(lbl)}</button>`;}).join("");
-    azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+catBtns;
+    azNav.style.display="none";
+    if(catGrid){
+      catGrid.style.display="";
+      const counts=_buildCatCounts();
+      const cats=[...DISEASE_CAT_ORDER,"other"];
+      catGrid.innerHTML=`<div class="disease-cat-grid-header"><span>${currentLang==="ja"?"カテゴリで探す":"Browse by Category"}</span><button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button></div><div class="disease-cat-grid-body">`+cats.map(c=>{
+        const cat=DISEASE_CATEGORIES[c];
+        const lbl=currentLang==="ja"?(cat?.ja||"その他"):(cat?.en||"Other");
+        const cnt=counts[c]||0;
+        if(cnt===0)return"";
+        const isActive=diseaseFilter===c;
+        return`<button class="disease-cat-card${isActive?" active":""}" data-cat="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}"><span class="disease-cat-label">${escapeHtml(lbl)}</span><span class="disease-cat-count">${cnt}</span></button>`;
+      }).join("")+`</div>`;
+      const nextMode=cur.next;
+      catGrid.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
+      catGrid.addEventListener("click",e=>{
+        const btn=e.target.closest(".disease-cat-card[data-cat]");
+        if(!btn)return;
+        const cat=btn.dataset.cat;
+        if(diseaseFilter===cat){diseaseFilter='';btn.classList.remove("active");}
+        else{catGrid.querySelectorAll(".disease-cat-card").forEach(b=>b.classList.remove("active"));btn.classList.add("active");diseaseFilter=cat;}
+        diseaseDisplayLimit=100;renderDiseaseDb();
+      });
+    }
   }else{
+    azNav.style.display="";
+    if(catGrid)catGrid.style.display="none";
     const isAz=diseaseNavMode==="az";
     const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あ か さ た な は ま や ら わ".split(" ");
     azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
+    const nextMode=cur.next;
+    azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
+    azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
   }
-  const nextMode=cur.next;
-  azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
-  azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
 }
 
 function filterDiseaseDb(letter){
@@ -1611,8 +1643,12 @@ function renderDiseaseDb(){
     const successRate=d.success_rate;
     const mortalityRate=d.mortality_rate;
     const hasEnrichment=rehab||nutrition||recoveryWeeks||successRate!==undefined;
+    const _dCat=d._cat||classifyDisease(d);
+    const _dCatObj=DISEASE_CATEGORIES[_dCat];
+    const _dCatLbl=currentLang==="ja"?(_dCatObj?.ja||"その他"):(_dCatObj?.en||"Other");
     return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
+      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span></div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>

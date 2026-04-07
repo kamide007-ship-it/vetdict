@@ -274,6 +274,20 @@ a:hover{text-decoration:underline}
 .az-mode-toggle:hover{opacity:.85;background:var(--green)!important;color:var(--white)!important}
 .az-nav button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 
+/* --- Disease Category Grid --- */
+.disease-cat-grid{margin-bottom:14px}
+.disease-cat-grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.disease-cat-grid-header span{font-size:.82rem;font-weight:700;color:var(--navy)}
+.disease-cat-grid-header .az-mode-toggle{background:var(--green);color:var(--white);border:none;padding:4px 12px;border-radius:6px;font-size:.72rem;font-weight:600;cursor:pointer;font-family:var(--font)}
+.disease-cat-grid-header .az-mode-toggle:hover{opacity:.85}
+.disease-cat-grid-body{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}
+.disease-cat-card{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white);cursor:pointer;transition:all .15s;text-align:center;font-family:var(--font)}
+.disease-cat-card:hover{border-color:var(--navy);background:var(--gray-50);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.disease-cat-card.active{border-color:var(--navy);background:var(--navy);color:var(--white)}
+.disease-cat-card.active .disease-cat-count{background:rgba(255,255,255,.25);color:var(--white)}
+.disease-cat-label{font-size:.7rem;font-weight:600;line-height:1.2}
+.disease-cat-count{font-size:.62rem;font-weight:700;background:var(--gray-100);color:var(--gray-600);padding:1px 6px;border-radius:8px;min-width:20px}
+
 /* --- Disease DB --- */
 .disease-cat-header{padding:8px 14px;font-size:.82rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:1}
 .husbandry-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px}
@@ -295,6 +309,8 @@ a:hover{text-decoration:underline}
 @media(hover:hover){.disease-db-item:hover{background:var(--green-light)}}
 .disease-db-item .d-name{font-weight:600;font-size:.86rem}
 .disease-db-item .d-name-ja{color:var(--gray-600);font-size:.78rem;margin-left:6px}
+.disease-db-item .d-meta{margin-top:3px}
+.d-cat-badge{display:inline-block;font-size:.66rem;font-weight:600;padding:1px 8px;border-radius:10px;background:var(--gray-100);color:var(--gray-600);line-height:1.6}
 .disease-db-item .d-desc{font-size:.78rem;color:var(--gray-600);margin-top:2px}
 .disease-db-list{max-height:500px;overflow-y:auto}
 .quality-badge{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:10px;font-size:.7rem;font-weight:700}
@@ -695,6 +711,10 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .chat-mode-toggle{gap:4px;padding:6px}
   .chat-mode-btn{font-size:.74rem;padding:6px 10px}
   body{padding-bottom:env(safe-area-inset-bottom)}
+  .disease-cat-grid-body{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:4px}
+  .disease-cat-card{padding:8px 4px}
+  .disease-cat-label{font-size:.64rem}
+  .disease-cat-count{font-size:.58rem}
   .az-nav{gap:4px;margin-bottom:10px}
   .az-nav button{padding:6px 8px;font-size:.68rem;min-width:36px;min-height:36px}
   .az-mode-toggle{font-size:.68rem!important;padding:6px 10px!important}
