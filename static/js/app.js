@@ -1,4 +1,4 @@
-const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F401}",chinchilla:"\u{1F43F}\uFE0F",ferret:"\u{1F9A1}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F9A5}",degu:"\u{1F42D}",bird:"\u{1F426}",parakeet:"\u{1F424}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F33F}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F999}"};
+const SPECIES_ICONS={dog:"\u{1F415}",cat:"\u{1F408}",horse:"\u{1F434}",rabbit:"\u{1F407}",hamster:"\u{1F439}",guinea_pig:"\u{1F43E}",chinchilla:"\u{1F43E}",ferret:"\u{1F43E}",hedgehog:"\u{1F994}",sugar_glider:"\u{1F43E}",degu:"\u{1F43E}",bird:"\u{1F426}",parakeet:"\u{1F424}",parrot:"\u{1F99C}",reptile:"\u{1F98E}",tortoise:"\u{1F422}",snake:"\u{1F40D}",lizard:"\u{1F98E}",amphibian:"\u{1F438}",fish:"\u{1F41F}",exotic_other:"\u{1F43E}"};
 
 /* ===== Admin / Pro access control ===== */
 // Admin verification handled server-side
@@ -517,12 +517,12 @@ function setDefaultStats(){
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:656,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:414,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:285,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F439}",diseases:308,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43F}\uFE0F",diseases:246,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F9A1}",diseases:241,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:246,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:241,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:210,drugs:0,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43F}\uFE0F",diseases:188,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F42D}",diseases:178,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:188,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:479,drugs:0,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
     {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:402,drugs:0,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
     {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:251,drugs:0,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
@@ -532,7 +532,7 @@ function setDefaultStats(){
     {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:218,drugs:0,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:215,drugs:0,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:25,drugs:23,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
-    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F999}",diseases:250,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:250,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
     diseases:6393,
@@ -1458,25 +1458,25 @@ function loadDiseaseDb(species){
 }
 
 const DISEASE_CATEGORIES={
-  infectious:{en:"Infectious",ja:"感染症",icon:"\uD83E\uDDA0",keywords:/infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich/i},
-  neoplastic:{en:"Neoplastic",ja:"腫瘍",icon:"\uD83D\uDD2C",keywords:/tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas/i},
-  cardiovascular:{en:"Cardiovascular",ja:"循環器",icon:"\u2764\uFE0F",keywords:/cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat/i},
-  respiratory:{en:"Respiratory",ja:"呼吸器",icon:"\uD83E\uDE7A",keywords:/respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm/i},
-  gastrointestinal:{en:"Gastrointestinal",ja:"消化器",icon:"\uD83E\uDDB7",keywords:/gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit/i},
-  renal:{en:"Renal/Urinary",ja:"泌尿器",icon:"\uD83D\uDCA7",keywords:/renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros/i},
-  endocrine:{en:"Endocrine",ja:"内分泌",icon:"\u2696\uFE0F",keywords:/endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal/i},
-  dermatological:{en:"Dermatological",ja:"皮膚",icon:"\uD83E\uDE7B",keywords:/dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar/i},
-  neurological:{en:"Neurological",ja:"神経",icon:"\uD83E\uDDE0",keywords:/neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia/i},
-  musculoskeletal:{en:"Musculoskeletal",ja:"筋骨格",icon:"\uD83E\uDDB4",keywords:/musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro/i},
-  ophthalmological:{en:"Ophthalmological",ja:"眼科",icon:"\uD83D\uDC41\uFE0F",keywords:/ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm/i},
-  hematological:{en:"Hematological",ja:"血液",icon:"\uD83E\uDE78",keywords:/hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit/i},
-  dental:{en:"Dental",ja:"歯科",icon:"\uD83E\uDDB7",keywords:/dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast/i},
-  parasitic:{en:"Parasitic",ja:"寄生虫",icon:"\uD83D\uDC1B",keywords:/parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas/i},
-  reproductive:{en:"Reproductive",ja:"生殖器",icon:"\uD83D\uDC76",keywords:/reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit/i},
-  toxicological:{en:"Toxicological",ja:"中毒",icon:"\u2620\uFE0F",keywords:/toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol/i},
-  behavioral:{en:"Behavioral",ja:"行動",icon:"\uD83E\uDDE0",keywords:/behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia/i},
-  congenital:{en:"Congenital",ja:"先天性",icon:"\uD83E\uDDEC",keywords:/congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia/i},
-  immune:{en:"Immune-mediated",ja:"免疫",icon:"\uD83D\uDEE1\uFE0F",keywords:/immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom/i},
+  infectious:{en:"Infectious",ja:"感染症",keywords:/infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich/i},
+  neoplastic:{en:"Neoplastic",ja:"腫瘍",keywords:/tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas/i},
+  cardiovascular:{en:"Cardiovascular",ja:"循環器",keywords:/cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat/i},
+  respiratory:{en:"Respiratory",ja:"呼吸器",keywords:/respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm/i},
+  gastrointestinal:{en:"Gastrointestinal",ja:"消化器",keywords:/gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit/i},
+  renal:{en:"Renal/Urinary",ja:"泌尿器",keywords:/renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros/i},
+  endocrine:{en:"Endocrine",ja:"内分泌",keywords:/endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal/i},
+  dermatological:{en:"Dermatological",ja:"皮膚",keywords:/dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar/i},
+  neurological:{en:"Neurological",ja:"神経",keywords:/neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia/i},
+  musculoskeletal:{en:"Musculoskeletal",ja:"筋骨格",keywords:/musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro/i},
+  ophthalmological:{en:"Ophthalmological",ja:"眼科",keywords:/ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm/i},
+  hematological:{en:"Hematological",ja:"血液",keywords:/hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit/i},
+  dental:{en:"Dental",ja:"歯科",keywords:/dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast/i},
+  parasitic:{en:"Parasitic",ja:"寄生虫",keywords:/parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas/i},
+  reproductive:{en:"Reproductive",ja:"生殖器",keywords:/reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit/i},
+  toxicological:{en:"Toxicological",ja:"中毒",keywords:/toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol/i},
+  behavioral:{en:"Behavioral",ja:"行動",keywords:/behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia/i},
+  congenital:{en:"Congenital",ja:"先天性",keywords:/congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia/i},
+  immune:{en:"Immune-mediated",ja:"免疫",keywords:/immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom/i},
 };
 const DISEASE_CAT_ORDER=["infectious","neoplastic","cardiovascular","respiratory","gastrointestinal","renal","endocrine","dermatological","neurological","musculoskeletal","ophthalmological","hematological","dental","parasitic","reproductive","toxicological","behavioral","congenital","immune"];
 function classifyDisease(d){
@@ -1510,11 +1510,10 @@ function renderAzNav(){
       catGrid.innerHTML=`<div class="disease-cat-grid-header"><span>${currentLang==="ja"?"カテゴリで探す":"Browse by Category"}</span><button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button></div><div class="disease-cat-grid-body">`+cats.map(c=>{
         const cat=DISEASE_CATEGORIES[c];
         const lbl=currentLang==="ja"?(cat?.ja||"その他"):(cat?.en||"Other");
-        const icon=cat?.icon||"\uD83D\uDCC1";
         const cnt=counts[c]||0;
         if(cnt===0)return"";
         const isActive=diseaseFilter===c;
-        return`<button class="disease-cat-card${isActive?" active":""}" data-cat="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}"><span class="disease-cat-icon" aria-hidden="true">${icon}</span><span class="disease-cat-label">${escapeHtml(lbl)}</span><span class="disease-cat-count">${cnt}</span></button>`;
+        return`<button class="disease-cat-card${isActive?" active":""}" data-cat="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}"><span class="disease-cat-label">${escapeHtml(lbl)}</span><span class="disease-cat-count">${cnt}</span></button>`;
       }).join("")+`</div>`;
       const nextMode=cur.next;
       catGrid.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
@@ -1612,10 +1611,9 @@ function renderDiseaseDb(){
     const _dCat=d._cat||classifyDisease(d);
     const _dCatObj=DISEASE_CATEGORIES[_dCat];
     const _dCatLbl=currentLang==="ja"?(_dCatObj?.ja||"その他"):(_dCatObj?.en||"Other");
-    const _dCatIcon=_dCatObj?.icon||"\uD83D\uDCC1";
     return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
-      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}"><span aria-hidden="true">${_dCatIcon}</span> ${escapeHtml(_dCatLbl)}</span></div>
+      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span></div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
