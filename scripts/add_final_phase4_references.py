@@ -99,7 +99,7 @@ def main():
     save_diseases_json(db_path, diseases)
 
     print(f"\n✓ {added} 疾患に最終参考文献を追加しました")
-    print(f"✓ データベースを保存しました")
+    print("✓ データベースを保存しました")
 
     # Final statistics
     print("\n" + "=" * 80)
@@ -114,7 +114,7 @@ def main():
     print(f"✓ 最終カバレッジ: {coverage_pct}%")
 
     if coverage_pct == 100:
-        print(f"\n🎉 **100% カバレッジ達成！**")
+        print("\n🎉 **100% カバレッジ達成！**")
     else:
         print(f"\n⚠️ カバレッジ: {coverage_pct}% (目標: 100%)")
 

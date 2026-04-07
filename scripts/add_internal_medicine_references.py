@@ -300,41 +300,41 @@ REFERENCE_MAP = {
 def patch_references():
     """Patch Phase 3 disease references into diseases_all_species.json"""
     diseases_file = Path(__file__).parent.parent / "diseases_all_species.json"
-    
+
     with open(diseases_file, "r", encoding="utf-8") as f:
         diseases = json.load(f)
-    
+
     patched = 0
-    
+
     for disease in diseases:
         disease_id = disease.get("id", "").lower()
-        
+
         if disease_id not in REFERENCE_MAP:
             continue
-        
+
         refs = REFERENCE_MAP[disease_id]
-        
+
         # Patch prognosis references
         if "prognosis_references" not in disease:
             disease["prognosis_references"] = {"references": []}
         disease["prognosis_references"]["references"] = refs["prognosis"]
-        
+
         # Patch rehabilitation references
         if "rehabilitation_references" not in disease:
             disease["rehabilitation_references"] = {"references": []}
         disease["rehabilitation_references"]["references"] = refs["rehabilitation"]
-        
+
         # Patch nutrition references
         if "nutrition_references" not in disease:
             disease["nutrition_references"] = {"references": []}
         disease["nutrition_references"]["references"] = refs["nutrition"]
-        
+
         patched += 1
-    
+
     # Save patched data
     with open(diseases_file, "w", encoding="utf-8") as f:
         json.dump(diseases, f, ensure_ascii=False, indent=2)
-    
+
     print(f"✓ Patched {patched} Phase 3 diseases with PubMed references")
 
 

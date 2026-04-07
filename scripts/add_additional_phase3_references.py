@@ -308,12 +308,12 @@ def main():
             skipped_count += 1
             logger.warning(f"⊘ Disease {disease_id} not found in database")
 
-    logger.info(f"\nSaving patched database...")
+    logger.info("\nSaving patched database...")
     save_diseases_json(diseases, db_path)
 
-    logger.info(f"\n" + "="*60)
-    logger.info(f"Additional Phase 3 Reference Patching Complete")
-    logger.info(f"="*60)
+    logger.info("\n" + "="*60)
+    logger.info("Additional Phase 3 Reference Patching Complete")
+    logger.info("="*60)
     logger.info(f"Patched: {patched_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Skipped: {skipped_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Database saved to: {db_path}")

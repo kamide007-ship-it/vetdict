@@ -303,7 +303,7 @@ def main():
     save_diseases_json(db_path, diseases)
 
     print(f"\n✓ {added} 疾患に参考文献を追加しました")
-    print(f"✓ データベースを保存しました")
+    print("✓ データベースを保存しました")
 
 if __name__ == '__main__':
     main()
