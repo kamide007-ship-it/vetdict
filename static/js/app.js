@@ -866,8 +866,10 @@ function renderOrthopedicReferences(d){
     const refs=(d[sec.key]&&Array.isArray(d[sec.key].references))?d[sec.key].references:[];
     if(!refs.length)return "";
     const items=refs.map(r=>{
-      const authors=(Array.isArray(r.authors)&&r.authors.length)
-        ?r.authors[0]+(r.authors.length>1?" et al.":"")
+      // Authors: string "FirstAuthor, SecondAuthor, ..." → extract first + " et al."
+      const authStr=r.authors||"Unknown";
+      const authors=(typeof authStr==="string"&&authStr.length>0)
+        ?authStr.split(",")[0].trim()+(authStr.includes(",")?"":" et al.")
         :"Unknown";
       const year=r.year||"";
       const journal=r.journal?`<em>${escapeHtml(r.journal)}</em>`:"";
