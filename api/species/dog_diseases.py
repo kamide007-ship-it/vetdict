@@ -1732,7 +1732,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Eclampsia (Milk Fever)",
         "name_ja": "子癇（産褥テタニー）",
-        "symptoms": {"seizures", "anxiety", "excessive_panting", "stiffness", "tremors", "muscle_spasms", "fever", "lethargy", "reluctance_to_move"},
+        "symptoms": {"seizures", "anxiety", "excessive_panting", "stiffness", "fever", "lethargy", "reluctance_move"},
         "description": "Life-threatening hypocalcemia in nursing mothers, causing neuromuscular hyperexcitability, tremors, and seizures. Peak incidence 1-3 weeks post-partum. High mortality (10-40%) if untreated or delayed.",
         "description_ja": "授乳中の母犬の生命脅かす低カルシウム血症。神経筋過興奮性、振戦、けいれんを引き起こす。産褥1-3週間がピーク。無治療または遅延で高死亡率（10-40%）。",
         "urgency": "emergency",
