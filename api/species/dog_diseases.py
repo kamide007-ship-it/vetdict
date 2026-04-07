@@ -1711,7 +1711,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mastitis",
         "name_ja": "乳腺炎",
-        "symptoms": {"fever", "lethargy", "appetite_loss", "pain_on_touch", "swollen_mammary_glands", "redness", "vaginal_discharge"},
+        "symptoms": {"fever", "lethargy", "appetite_loss", "pain_on_touch", "mammary_swelling", "skin_redness", "genital_discharge"},
         "description": "Acute bacterial infection of mammary tissue in nursing females. Post-partum complication causing fever, swelling, pain, and potential systemic toxicity. If untreated, progresses to abscess, septicemia, or septic shock.",
         "description_ja": "授乳中の母犬の乳腺急性細菌感染症。産褥合併症で発熱、腫脹、疼痛、潜在的全身毒性。無治療で膿瘍、敗血症、または敗血性ショックに進行。",
         "urgency": "high",
