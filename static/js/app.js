@@ -1633,7 +1633,7 @@ function renderDiseaseDb(){
     const causes=pk(d.causes_ja,d.causes)||buildFieldFallback(t("dtCauses"),diseaseName);
     const prevention=pk(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
     const treatment=pk(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
-    const prognosis=pk(d.prognosis_detailed_ja,d.prognosis_detailed,d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
+    const prognosis=pk(d.prognosis_detailed_ja,d.prognosis_detailed)||pk(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
     const dNameEn=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
     const dPrimary=currentLang==="ja"?dNameJa:dNameEn;
@@ -3015,6 +3015,8 @@ function toggleDbItem(el){
     if(isOpen){
       const nameEl=el.querySelector(".d-name");
       trackEvent("view_disease_detail",{species:currentSpecies,disease:(nameEl?nameEl.textContent:"").substring(0,80)});
+      /* Scroll the opened item into view after transition starts */
+      requestAnimationFrame(()=>{el.scrollIntoView({behavior:"smooth",block:"nearest"});});
       /* Lazy-load drug info on first open */
       if(!detail.dataset.drugsLoaded){
         detail.dataset.drugsLoaded="1";

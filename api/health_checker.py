@@ -3728,7 +3728,7 @@ def get_diseases():
                     "treatment_ja": d.get("treatment_ja", ""),
                     "prognosis": d.get("prognosis", d.get("prognosis_en", "")),
                     "prognosis_ja": d.get("prognosis_ja", ""),
-                    "severity": d.get("severity", ""),
+                    "severity": d.get("urgency", d.get("severity", "")),
                     "symptoms": symptoms,
                 }, species))
 
