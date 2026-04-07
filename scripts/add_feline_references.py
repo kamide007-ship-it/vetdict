@@ -277,29 +277,29 @@ FELINE_REFERENCE_MAP = {
 def patch_feline_references():
     """Patch Phase 3 feline disease references"""
     diseases_file = Path(__file__).parent.parent / "diseases_all_species.json"
-    
+
     with open(diseases_file, "r", encoding="utf-8") as f:
         diseases = json.load(f)
-    
+
     patched = 0
-    
+
     for disease in diseases:
         disease_id = disease.get("id", "").lower()
-        
+
         if disease_id not in FELINE_REFERENCE_MAP:
             continue
-        
+
         refs = FELINE_REFERENCE_MAP[disease_id]
-        
+
         disease["prognosis_references"]["references"] = refs["prognosis"]
         disease["rehabilitation_references"]["references"] = refs["rehabilitation"]
         disease["nutrition_references"]["references"] = refs["nutrition"]
-        
+
         patched += 1
-    
+
     with open(diseases_file, "w", encoding="utf-8") as f:
         json.dump(diseases, f, ensure_ascii=False, indent=2)
-    
+
     print(f"✓ Patched {patched} Phase 3 feline diseases with PubMed references")
 
 
