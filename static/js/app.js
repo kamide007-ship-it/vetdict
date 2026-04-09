@@ -388,6 +388,13 @@ document.addEventListener("DOMContentLoaded",async()=>{
         if(e.key==="Enter"||e.key===" "){e.preventDefault();refHeader.click();}
       });
     }
+    /* Attach click/keyboard handlers to all DB list containers at init (event delegation).
+       These containers exist in static HTML and never get replaced — only their innerHTML changes.
+       Attaching once at init avoids timing issues with async data loading. */
+    ["diseaseDbList","drugList","anesthesiaList"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el&&!el.dataset.handlersAttached){el.dataset.handlersAttached="1";_attachDbItemHandlers(el);}
+    });
     /* Returning user welcome */
     showReturningUserBanner();
   }catch(e){
@@ -1668,7 +1675,6 @@ function renderDiseaseDb(){
         ${mortalityRate!==undefined?`<dt>死亡率/Mortality Rate</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
       </dl>${renderOrthopedicReferences(d)}<div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
-  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
@@ -2531,7 +2537,6 @@ function renderDrugList(){
       </div>
     </div>`;
   }).join("");
-  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
 }
 
 /* ===== Anesthesia Protocols ===== */
@@ -2793,8 +2798,6 @@ function renderAnesthesiaList(){
     const refsHtml=`<div class="anesthesia-breed-section"><h4>${currentLang==="ja"?"参考文献":"References"}</h4><ul class="anesthesia-ref-list">${anesthesiaData.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`;
     list.insertAdjacentHTML("beforeend",refsHtml);
   }
-
-  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
 }
 
 /* Print anesthesia checklist */
