@@ -3737,3 +3737,81 @@ function triggerMultiDiseaseAnalysis() {
   }
 }
 
+/**
+ * Global Search Box
+ */
+(function initGlobalSearch() {
+  const searchInput=document.getElementById('globalSearch');
+  const searchResults=document.getElementById('globalSearchResults');
+  if(!searchInput||!searchResults)return;
+
+  let searchTimer;
+  let currentLang='ja';
+
+  // Detect language
+  const langBtns=document.querySelectorAll('.lang-toggle button');
+  langBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      currentLang=btn.getAttribute('data-lang');
+    });
+  });
+
+  // Search listener
+  searchInput.addEventListener('input',function(e){
+    clearTimeout(searchTimer);
+    const query=e.target.value.trim();
+
+    if(query.length<2){
+      searchResults.style.display='none';
+      return;
+    }
+
+    searchTimer=setTimeout(()=>{
+      fetchWithTimeout(`/api/diseases?q=${encodeURIComponent(query)}&limit=8`)
+        .then(r=>{
+          if(!r.ok)throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
+        .then(data=>{
+          const diseases=data.diseases||[];
+          if(diseases.length===0){
+            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">見つかりませんでした</div>';
+          }else{
+            const html=diseases.map((d,idx)=>`
+              <a href="/diseases/${encodeURIComponent(d.species)}/${encodeURIComponent(d.slug||slugify(d.name))}"
+                 class="search-result-item"
+                 role="option"
+                 aria-selected="false"
+                 data-disease-id="${escapeHtml(d.id)}">
+                <strong>${escapeHtml(d.name_ja||d.name)}</strong>
+                <span class="search-result-species">${escapeHtml(d.species)}</span>
+              </a>
+            `).join('');
+            searchResults.innerHTML=html;
+          }
+          searchResults.style.display='block';
+        })
+        .catch(err=>{
+          console.warn('Global search error:',err);
+          searchResults.innerHTML='<div style="padding:12px;color:var(--red);text-align:center">エラーが発生しました</div>';
+          searchResults.style.display='block';
+        });
+    },300);
+  });
+
+  // Close on ESC
+  searchInput.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      searchResults.style.display='none';
+      searchInput.value='';
+    }
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.global-search-container')){
+      searchResults.style.display='none';
+    }
+  });
+})();
+

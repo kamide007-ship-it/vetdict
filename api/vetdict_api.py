@@ -1385,6 +1385,33 @@ def api_common_diseases(species):
     return {"species": species, "common_diseases": result}
 
 
+@app.route('/api/diseases', methods=['GET'])
+@ensure_json_response
+def api_search_diseases():
+    """Global search endpoint for diseases.
+
+    Query params:
+      - q: search query (required, min 2 chars)
+      - species: optional species filter
+      - limit: max results (default 20)
+    """
+    query = request.args.get('q', '').strip()
+    species = request.args.get('species', None)
+    limit = min(int(request.args.get('limit', '20')), 100)  # Max 100 results
+
+    if len(query) < 2:
+        return {'error': 'Query must be at least 2 characters', 'diseases': []}, 400
+
+    from api.disease_store import search_diseases, _disease_slug
+    results = search_diseases(query, species=species, limit=limit)
+
+    # Add slug to each result
+    for disease in results:
+        disease['slug'] = _disease_slug(disease)
+
+    return {'diseases': results}
+
+
 # =============================================================================
 # API: RECO2 / RECO3 (AI Integrity Control)
 # =============================================================================
