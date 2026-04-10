@@ -1388,17 +1388,19 @@ def api_common_diseases(species):
 @app.route('/api/diseases', methods=['GET'])
 @ensure_json_response
 def api_search_diseases():
-    """Global search endpoint for diseases with multiple keyword + species filter support.
+    """Global search endpoint for diseases with keyword + species + category filters.
 
     Query params:
       - q: search query (space-separated keywords, each required)
       - species: optional species filter (comma-separated for multiple, e.g. 'dog,cat,horse')
+      - category: optional symptom category filter (e.g. 'respiratory', 'digestive')
       - limit: max results (default 20, max 100)
 
     Returns: diseases list with name, name_ja, species, slug, urgency
     """
     query = request.args.get('q', '').strip()
     species_param = request.args.get('species', '').strip()
+    category_param = request.args.get('category', '').strip()
     limit = min(int(request.args.get('limit', '20')), 100)  # Max 100 results
 
     if len(query) < 2:
@@ -1410,7 +1412,7 @@ def api_search_diseases():
     species_list = [s.strip() for s in species_param.split(',') if s.strip()] if species_param else []
 
     # Search all species first, then filter if needed
-    all_results = search_diseases(query, species=None, limit=limit * 2)  # Get more to account for filtering
+    all_results = search_diseases(query, species=None, category=category_param if category_param else None, limit=limit * 2)
 
     # Filter by species if specified
     if species_list:
@@ -1423,7 +1425,13 @@ def api_search_diseases():
     for disease in results:
         disease['slug'] = _disease_slug(disease)
 
-    return {'diseases': results, 'query': query, 'count': len(results), 'species_filter': species_list}
+    return {
+        'diseases': results,
+        'query': query,
+        'count': len(results),
+        'species_filter': species_list,
+        'category_filter': category_param if category_param else None,
+    }
 
 
 # =============================================================================

@@ -3966,5 +3966,127 @@ function triggerMultiDiseaseAnalysis() {
       }
     });
   }
+
+  // Category filter functionality
+  let selectedCategory='';
+  const categoryFilterBtn=document.getElementById('categoryFilterBtn');
+  const categoryFilterPanel=document.getElementById('categoryFilterPanel');
+  const categoryFilterList=document.getElementById('categoryFilterList');
+  const categoryFilterCloseBtn=document.getElementById('categoryFilterCloseBtn');
+  const categoryFilterResetBtn=document.getElementById('categoryFilterResetBtn');
+
+  if(categoryFilterBtn&&categoryFilterPanel){
+    const categories=[
+      {id:'respiratory',name_ja:'呼吸器'},
+      {id:'digestive',name_ja:'消化器'},
+      {id:'neurological',name_ja:'神経'},
+      {id:'musculoskeletal',name_ja:'運動器'},
+      {id:'dermatological',name_ja:'皮膚'},
+      {id:'urinary',name_ja:'泌尿器'},
+      {id:'ophthalmological',name_ja:'眼'},
+      {id:'cardiovascular',name_ja:'循環器'},
+      {id:'endocrine',name_ja:'内分泌'},
+      {id:'behavioral',name_ja:'行動'},
+      {id:'reproductive',name_ja:'繁殖'},
+      {id:'general',name_ja:'全身'},
+      {id:'other',name_ja:'その他'}
+    ];
+
+    function initCategoryFilterList(){
+      const html=categories.map(cat=>`
+        <div class="filter-checkbox ${selectedCategory===cat.id?'active':''}">
+          <input type="radio" name="category-filter" id="filter-cat-${cat.id}" value="${cat.id}" ${selectedCategory===cat.id?'checked':''}>
+          <label for="filter-cat-${cat.id}">${escapeHtml(cat.name_ja)}</label>
+        </div>
+      `).join('');
+      categoryFilterList.innerHTML=html;
+
+      document.querySelectorAll('#categoryFilterList input[type="radio"]').forEach(rb=>{
+        rb.addEventListener('change',function(){
+          selectedCategory=this.value;
+          document.querySelectorAll('#categoryFilterList .filter-checkbox').forEach(el=>{
+            el.classList.remove('active');
+          });
+          this.closest('.filter-checkbox').classList.add('active');
+          performFilteredSearch();
+        });
+      });
+    }
+
+    // Override performFilteredSearch to include category
+    const originalPerformFilteredSearch=performFilteredSearch;
+    function performFilteredSearchWithCategory(){
+      const query=searchInput.value.trim();
+      if(query.length<2)return;
+
+      const speciesParam=selectedSpecies.size>0?Array.from(selectedSpecies).join(','):'';
+      let url=`/api/diseases?q=${encodeURIComponent(query)}&limit=8`;
+      if(speciesParam)url+=`&species=${encodeURIComponent(speciesParam)}`;
+      if(selectedCategory)url+=`&category=${encodeURIComponent(selectedCategory)}`;
+
+      fetchWithTimeout(url)
+        .then(r=>{
+          if(!r.ok)throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
+        .then(data=>{
+          const diseases=data.diseases||[];
+
+          if(diseases.length===0){
+            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">キーワード「'+escapeHtml(data.query)+'」に一致する疾患が見つかりませんでした</div>';
+          }else{
+            const html=diseases.map((d,idx)=>{
+              const urgencyColor={emergency:'var(--red)',high:'var(--orange)',moderate:'var(--gray-500)',low:'var(--gray-500)'}[d.urgency]||'var(--gray-500)';
+              return `
+              <a href="/diseases/${encodeURIComponent(d.species)}/${encodeURIComponent(d.slug||slugify(d.name))}"
+                 class="search-result-item"
+                 role="option"
+                 aria-selected="false"
+                 data-disease-id="${escapeHtml(d.id)}"
+                 title="${escapeHtml(d.name)}">
+                <div style="flex:1">
+                  <strong>${escapeHtml(d.name_ja||d.name)}</strong>
+                  ${d.name_ja?'<div style="font-size:.8rem;color:var(--gray-500)">'+escapeHtml(d.name)+'</div>':''}
+                </div>
+                <span class="search-result-species">${escapeHtml(d.species)}</span>
+                ${d.urgency?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+urgencyColor+';margin-left:8px" title="'+escapeHtml(d.urgency)+'"></span>':''}
+              </a>
+            `}).join('');
+            searchResults.innerHTML=html;
+          }
+          searchResults.style.display='block';
+        })
+        .catch(err=>{
+          console.warn('Filtered search error:',err);
+          searchResults.innerHTML='<div style="padding:12px;color:var(--red);text-align:center">エラーが発生しました</div>';
+          searchResults.style.display='block';
+        });
+    }
+
+    performFilteredSearch=performFilteredSearchWithCategory;
+
+    categoryFilterBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      if(categoryFilterPanel.style.display==='none'){
+        initCategoryFilterList();
+        categoryFilterPanel.style.display='block';
+      }else{
+        categoryFilterPanel.style.display='none';
+      }
+    });
+
+    categoryFilterCloseBtn.addEventListener('click',function(){
+      categoryFilterPanel.style.display='none';
+    });
+
+    categoryFilterResetBtn.addEventListener('click',function(){
+      selectedCategory='';
+      document.querySelectorAll('#categoryFilterList input[type="radio"]').forEach(rb=>{
+        rb.checked=false;
+        rb.closest('.filter-checkbox').classList.remove('active');
+      });
+      performFilteredSearch();
+    });
+  }
 })();
 

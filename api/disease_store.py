@@ -564,7 +564,31 @@ def get_disease_detail(disease_id: str) -> dict | None:
     return _row_to_disease_detail(row)
 
 
-def search_diseases(query: str, species: str | None = None, limit: int = 50) -> list[dict]:
+def _infer_disease_categories(disease: dict, species: str) -> set[str]:
+    """Infer disease categories from its symptoms."""
+    symptoms_json = disease.get('symptoms')
+    if not symptoms_json:
+        return {'other'}
+
+    try:
+        symptom_ids = json.loads(symptoms_json)
+    except (json.JSONDecodeError, TypeError):
+        return {'other'}
+
+    # Get symptom info for species to extract categories
+    symptoms = get_symptoms_for_species(species)
+    symptom_cats = {s['id']: s.get('category', 'other') for s in symptoms}
+
+    categories = set()
+    for sym_id in symptom_ids:
+        cat = symptom_cats.get(sym_id, 'other')
+        if cat:
+            categories.add(cat)
+
+    return categories if categories else {'other'}
+
+
+def search_diseases(query: str, species: str | None = None, category: str | None = None, limit: int = 50) -> list[dict]:
     """Search diseases by name, description, treatment, and other fields.
 
     Searches both English and Japanese fields with multiple keyword support.
@@ -605,7 +629,7 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
     with get_connection() as conn:
         if species:
             query_str = (
-                "SELECT id, species, name, name_ja, urgency FROM diseases "
+                "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
                 "WHERE " + search_clause + " AND species = ? ORDER BY name LIMIT ?"
             )
             rows = conn.execute(
@@ -614,7 +638,7 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
             ).fetchall()
         else:
             query_str = (
-                "SELECT id, species, name, name_ja, urgency FROM diseases "
+                "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
                 "WHERE " + search_clause + " ORDER BY species, name LIMIT ?"
             )
             rows = conn.execute(
@@ -622,10 +646,11 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
                 [*params, limit],
             ).fetchall()
 
-    # Score results for better relevance ranking
+    # Score results for better relevance ranking + category filtering
     results = []
     for row in rows:
         result = _row_to_disease_summary(row)
+        row_species = row.get("species", "")
         score = 0
         name = (result.get("name") or "").lower()
         name_ja = (result.get("name_ja") or "").lower()
@@ -639,6 +664,13 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
                 score += 100
             # For each additional match in name, add points
             score += name.count(kw_lower) * 10
+
+        # Category filtering
+        if category:
+            # Infer disease categories from symptoms
+            disease_cats = _infer_disease_categories(dict(row), row_species)
+            if category not in disease_cats:
+                continue  # Skip if category doesn't match
 
         results.append((score, result))
 
