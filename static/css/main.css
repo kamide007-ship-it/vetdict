@@ -185,7 +185,7 @@ a:hover{text-decoration:underline}
 .match-badge.high{background:#dcfce7;color:#166534}
 .match-badge.moderate{background:#fef3c7;color:#92400e}
 .match-badge.low{background:#fee2e2;color:#991b1b}
-.disease-detail{max-height:0;overflow:hidden;padding:0 16px;border-top:0 solid transparent;background:var(--gray-50);font-size:.82rem;line-height:1.7;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .3s ease,border-top .2s ease;opacity:0}
+.disease-detail{max-height:0;overflow:hidden;padding:0 16px;border-top:0 solid transparent;background:var(--gray-50);font-size:.82rem;line-height:1.7;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .3s ease,border-top .2s ease,opacity .2s ease;opacity:0}
 .disease-detail.open{max-height:3000px;padding:16px;border-top:1px solid var(--gray-100);opacity:1}
 .disease-detail dt{font-weight:700;color:var(--navy);margin-top:6px;font-size:.8rem}
 .disease-detail dd{margin-left:0;color:var(--gray-700)}

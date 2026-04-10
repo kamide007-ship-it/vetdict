@@ -29,6 +29,17 @@
 .index-page .subtitle{color:var(--gray-600);font-size:.9rem;margin-bottom:20px}
 .index-page .search-box{width:100%;padding:10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.9rem;margin-bottom:16px;box-sizing:border-box}
 .index-page .search-box:focus{border-color:var(--green);outline:none}
+.cat-filter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-bottom:20px}
+.cat-filter-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white);cursor:pointer;transition:all .15s;text-align:center;font-family:var(--font);font-size:.78rem}
+.cat-filter-btn:hover{border-color:var(--navy);background:var(--gray-50);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.cat-filter-btn.active{border-color:var(--navy);background:var(--navy);color:var(--white)}
+.cat-filter-btn.active .cat-count{background:rgba(255,255,255,.25);color:var(--white)}
+.cat-filter-label{font-weight:600;line-height:1.2}
+.cat-count{font-size:.7rem;color:var(--gray-500);background:var(--gray-100);padding:1px 6px;border-radius:8px;min-width:20px}
+.cat-filter-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cat-filter-header span{font-size:.82rem;font-weight:700;color:var(--navy)}
+.cat-active-indicator{font-size:.82rem;color:var(--gray-500);margin-bottom:12px;display:none}
+.cat-active-indicator .cat-clear{color:var(--green);cursor:pointer;text-decoration:underline;margin-left:6px;border:none;background:none;font-size:.82rem;font-family:var(--font)}
 .disease-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
 .disease-link{display:block;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);text-decoration:none;color:var(--gray-800);transition:all .15s;font-size:.86rem;border-left:3px solid var(--gray-300)}
 .disease-link:hover{border-color:var(--green);box-shadow:var(--shadow-sm);background:var(--gray-50)}
@@ -39,6 +50,11 @@
 .disease-link.urgency-moderate{border-left-color:#3b82f6}
 .index-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin:24px 0}
 .index-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none;font-size:.92rem}
+.disease-count-info{font-size:.76rem;color:var(--gray-500);margin-bottom:8px}
+@media(max-width:600px){
+  .cat-filter-grid{grid-template-columns:repeat(auto-fill,minmax(75px,1fr));gap:4px}
+  .cat-filter-btn{padding:8px 4px;font-size:.72rem}
+}
 </style>
 {% endblock %}
 
@@ -55,7 +71,26 @@
   <h1>{{ species_ja }}（{{ species_en }}）の疾患一覧</h1>
   <p class="subtitle">{{ count }}件の疾患が登録されています</p>
 
-  <input type="text" class="search-box" id="diseaseSearch" placeholder="疾患名で検索... (例: 肺炎, malocclusion)">
+  <input type="text" class="search-box" id="diseaseSearch" placeholder="疾患名で検索... (例: 肺炎, malocclusion)" aria-label="疾患名で検索">
+
+  <div class="cat-filter-header">
+    <span>カテゴリで探す</span>
+  </div>
+  <div class="cat-filter-grid" id="catFilterGrid">
+    {% for cat in categories %}
+    <button class="cat-filter-btn" data-cat="{{ cat.id }}" aria-label="{{ cat.ja }}">
+      <span class="cat-filter-label">{{ cat.ja }}</span>
+      <span class="cat-count">{{ cat.count }}</span>
+    </button>
+    {% endfor %}
+  </div>
+
+  <div class="cat-active-indicator" id="catActiveIndicator">
+    <span id="catActiveLabel"></span>
+    <button class="cat-clear" id="catClear">解除</button>
+  </div>
+
+  <div class="disease-count-info" id="diseaseCountInfo"></div>
 
   <div class="cta-box">
     <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">{{ species_ja }}の症状から鑑別診断を行う</p>
@@ -64,7 +99,7 @@
 
   <div class="disease-grid" id="diseaseGrid">
     {% for d in diseases %}
-    <a href="/diseases/{{ species }}/{{ d.slug }}" class="disease-link urgency-{{ d.urgency }}" data-name="{{ d.name|lower }}" data-name-ja="{{ d.name_ja|lower }}">
+    <a href="/diseases/{{ species }}/{{ d.slug }}" class="disease-link urgency-{{ d.urgency }}" data-name="{{ d.name|lower }}" data-name-ja="{{ (d.name_ja or '')|lower }}" data-cat="{{ d.category }}">
       <span class="d-ja">{{ d.name_ja or d.name }}</span>
       <span class="d-en">{{ d.name }}</span>
     </a>
@@ -85,12 +120,74 @@
 </div>
 
 <script nonce="{{ g.csp_nonce }}">
-document.getElementById('diseaseSearch').addEventListener('input', function() {
-  const q = this.value.toLowerCase();
-  document.querySelectorAll('.disease-link').forEach(function(el) {
-    const match = el.dataset.name.includes(q) || el.dataset.nameJa.includes(q);
-    el.style.display = match ? '' : 'none';
+(function(){
+  var activeCat = '';
+  var searchInput = document.getElementById('diseaseSearch');
+  var grid = document.getElementById('catFilterGrid');
+  var indicator = document.getElementById('catActiveIndicator');
+  var activeLabel = document.getElementById('catActiveLabel');
+  var clearBtn = document.getElementById('catClear');
+  var countInfo = document.getElementById('diseaseCountInfo');
+  var total = {{ count }};
+
+  function filterDiseases(){
+    var q = (searchInput.value || '').toLowerCase();
+    var shown = 0;
+    document.querySelectorAll('.disease-link').forEach(function(el){
+      var matchSearch = !q || el.dataset.name.includes(q) || el.dataset.nameJa.includes(q);
+      var matchCat = !activeCat || el.dataset.cat === activeCat;
+      var visible = matchSearch && matchCat;
+      el.style.display = visible ? '' : 'none';
+      if(visible) shown++;
+    });
+    if(activeCat || q){
+      countInfo.textContent = shown + '件 / ' + total + '件を表示';
+    } else {
+      countInfo.textContent = '';
+    }
+  }
+
+  searchInput.addEventListener('input', filterDiseases);
+
+  // Pre-select category from URL ?category= parameter (linked from hub page)
+  var urlCat = new URLSearchParams(window.location.search).get('category');
+  if(urlCat){
+    var catBtn = grid.querySelector('.cat-filter-btn[data-cat="' + urlCat + '"]');
+    if(catBtn){
+      activeCat = urlCat;
+      catBtn.classList.add('active');
+      activeLabel.textContent = catBtn.querySelector('.cat-filter-label').textContent + 'の疾患を表示中';
+      indicator.style.display = '';
+      filterDiseases();
+      // Scroll to the category grid
+      grid.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  grid.addEventListener('click', function(e){
+    var btn = e.target.closest('.cat-filter-btn[data-cat]');
+    if(!btn) return;
+    var cat = btn.dataset.cat;
+    if(activeCat === cat){
+      activeCat = '';
+      btn.classList.remove('active');
+      indicator.style.display = 'none';
+    } else {
+      grid.querySelectorAll('.cat-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCat = cat;
+      activeLabel.textContent = btn.querySelector('.cat-filter-label').textContent + 'の疾患を表示中';
+      indicator.style.display = '';
+    }
+    filterDiseases();
   });
-});
+
+  clearBtn.addEventListener('click', function(){
+    activeCat = '';
+    grid.querySelectorAll('.cat-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    indicator.style.display = 'none';
+    filterDiseases();
+  });
+})();
 </script>
 {% endblock %}
