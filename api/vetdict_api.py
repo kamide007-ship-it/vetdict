@@ -1388,12 +1388,14 @@ def api_common_diseases(species):
 @app.route('/api/diseases', methods=['GET'])
 @ensure_json_response
 def api_search_diseases():
-    """Global search endpoint for diseases.
+    """Global search endpoint for diseases with multiple keyword support.
 
     Query params:
-      - q: search query (required, min 2 chars)
+      - q: search query (space-separated keywords, each required)
       - species: optional species filter
-      - limit: max results (default 20)
+      - limit: max results (default 20, max 100)
+
+    Returns: diseases list with name, name_ja, species, slug, urgency
     """
     query = request.args.get('q', '').strip()
     species = request.args.get('species', None)
@@ -1409,7 +1411,7 @@ def api_search_diseases():
     for disease in results:
         disease['slug'] = _disease_slug(disease)
 
-    return {'diseases': results}
+    return {'diseases': results, 'query': query, 'count': len(results)}
 
 
 # =============================================================================

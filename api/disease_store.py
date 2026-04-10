@@ -567,24 +567,42 @@ def get_disease_detail(disease_id: str) -> dict | None:
 def search_diseases(query: str, species: str | None = None, limit: int = 50) -> list[dict]:
     """Search diseases by name, description, treatment, and other fields.
 
-    Searches both English and Japanese fields. Returns results ordered by
-    relevance (name match prioritized) then by species and name.
+    Searches both English and Japanese fields with multiple keyword support.
+    Each keyword must appear in at least one field (AND logic).
+    Results are ranked by relevance (name match prioritized).
     """
     if not query or not query.strip():
         return []
-    like_pattern = "%" + query.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
-    search_clause = (
-        "(name LIKE ? ESCAPE '\\' OR name_ja LIKE ? ESCAPE '\\' OR "
-        "description LIKE ? ESCAPE '\\' OR description_ja LIKE ? ESCAPE '\\' OR "
-        "treatment LIKE ? ESCAPE '\\' OR treatment_ja LIKE ? ESCAPE '\\' OR "
-        "prevention LIKE ? ESCAPE '\\' OR prevention_ja LIKE ? ESCAPE '\\' OR "
-        "pathophysiology LIKE ? ESCAPE '\\' OR pathophysiology_ja LIKE ? ESCAPE '\\')"
-    )
+
+    # Split query into keywords (space-separated)
+    keywords = [k.strip() for k in query.split() if k.strip()]
+    if not keywords:
+        return []
+
+    # Escape special characters
+    def escape_like(s):
+        return s.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+
+    # Build AND clauses for each keyword (each must match at least one field)
+    and_clauses = []
+    params = []
+    for keyword in keywords:
+        like_pattern = "%" + escape_like(keyword) + "%"
+        # OR within each keyword (match any field)
+        or_clause = (
+            "(name LIKE ? ESCAPE '\\' OR name_ja LIKE ? ESCAPE '\\' OR "
+            "description LIKE ? ESCAPE '\\' OR description_ja LIKE ? ESCAPE '\\' OR "
+            "treatment LIKE ? ESCAPE '\\' OR treatment_ja LIKE ? ESCAPE '\\' OR "
+            "prevention LIKE ? ESCAPE '\\' OR prevention_ja LIKE ? ESCAPE '\\' OR "
+            "pathophysiology LIKE ? ESCAPE '\\' OR pathophysiology_ja LIKE ? ESCAPE '\\')"
+        )
+        and_clauses.append(or_clause)
+        # Add same pattern 10 times (one for each field)
+        params.extend([like_pattern] * 10)
+
+    search_clause = " AND ".join(f"({c})" for c in and_clauses)
 
     with get_connection() as conn:
-        # Prepare search parameters (one for each field)
-        search_params = [like_pattern] * 10
-
         if species:
             query_str = (
                 "SELECT id, species, name, name_ja, urgency FROM diseases "
@@ -592,7 +610,7 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
             )
             rows = conn.execute(
                 query_str,
-                [*search_params, species, limit],
+                [*params, species, limit],
             ).fetchall()
         else:
             query_str = (
@@ -601,9 +619,32 @@ def search_diseases(query: str, species: str | None = None, limit: int = 50) -> 
             )
             rows = conn.execute(
                 query_str,
-                [*search_params, limit],
+                [*params, limit],
             ).fetchall()
-    return [_row_to_disease_summary(r) for r in rows]
+
+    # Score results for better relevance ranking
+    results = []
+    for row in rows:
+        result = _row_to_disease_summary(row)
+        score = 0
+        name = (result.get("name") or "").lower()
+        name_ja = (result.get("name_ja") or "").lower()
+
+        # Score: name matches are prioritized
+        for keyword in keywords:
+            kw_lower = keyword.lower()
+            if kw_lower in name:
+                score += 100  # Exact name match is highest priority
+            if kw_lower in name_ja:
+                score += 100
+            # For each additional match in name, add points
+            score += name.count(kw_lower) * 10
+
+        results.append((score, result))
+
+    # Sort by score (descending), then by name
+    results.sort(key=lambda x: (-x[0], x[1].get("name", "")))
+    return [r[1] for r in results]
 
 
 def get_diseases_by_symptom(

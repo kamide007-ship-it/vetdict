@@ -3781,19 +3781,46 @@ function triggerMultiDiseaseAnalysis() {
         })
         .then(data=>{
           const diseases=data.diseases||[];
+          const queryKeywords=data.query?.toLowerCase().split(/\s+/).filter(k=>k)||[];
+
           if(diseases.length===0){
-            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">見つかりませんでした</div>';
+            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">キーワード「'+escapeHtml(data.query)+'」に一致する疾患が見つかりませんでした</div>';
           }else{
-            const html=diseases.map((d,idx)=>`
+            const html=diseases.map((d,idx)=>{
+              // Determine which field matched the keyword
+              const name=(d.name||'').toLowerCase();
+              const name_ja=(d.name_ja||'').toLowerCase();
+              let matchInfo='';
+              for(const kw of queryKeywords){
+                if(name.includes(kw)||name_ja.includes(kw)){
+                  matchInfo=kw;
+                  break;
+                }
+              }
+
+              // Urgency badge color
+              const urgencyColor={
+                'emergency':'var(--red)',
+                'high':'var(--orange)',
+                'moderate':'var(--gray-500)',
+                'low':'var(--gray-500)'
+              }[d.urgency]||'var(--gray-500)';
+
+              return `
               <a href="/diseases/${encodeURIComponent(d.species)}/${encodeURIComponent(d.slug||slugify(d.name))}"
                  class="search-result-item"
                  role="option"
                  aria-selected="false"
-                 data-disease-id="${escapeHtml(d.id)}">
-                <strong>${escapeHtml(d.name_ja||d.name)}</strong>
+                 data-disease-id="${escapeHtml(d.id)}"
+                 title="${escapeHtml(d.name)}">
+                <div style="flex:1">
+                  <strong>${escapeHtml(d.name_ja||d.name)}</strong>
+                  ${d.name_ja?'<div style="font-size:.8rem;color:var(--gray-500)">'+escapeHtml(d.name)+'</div>':''}
+                </div>
                 <span class="search-result-species">${escapeHtml(d.species)}</span>
+                ${d.urgency?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+urgencyColor+';margin-left:8px" title="'+escapeHtml(d.urgency)+'"></span>':''}
               </a>
-            `).join('');
+            `}).join('');
             searchResults.innerHTML=html;
           }
           searchResults.style.display='block';
