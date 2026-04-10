@@ -1397,6 +1397,46 @@ button.combination-item:focus-visible {
   .anesthesia-overview{background:#f0f7ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .anesthesia-risk-tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+/* Mobile responsive search and filters */
+@media(max-width:640px){
+  .global-search-container{max-width:none;min-width:100px;flex:1}
+  .global-search-input{font-size:.8rem;padding:6px 10px}
+  .search-filter-btn{width:24px;height:24px;padding:4px}
+  .search-filter-btn svg{width:14px;height:14px}
+  .global-search-results{max-height:300px;font-size:.8rem}
+  .search-result-item{padding:8px 10px}
+  .search-result-item strong{font-size:.8rem;margin-bottom:0}
+  .search-result-species{font-size:.7rem}
+  .species-filter-panel{max-width:calc(100vw - 20px);min-width:200px;right:auto;left:10px}
+  .category-filter-panel{max-width:calc(100vw - 20px);min-width:200px;right:10px}
+  .filter-header h3{font-size:.85rem}
+  .filter-close{width:20px;height:20px;font-size:1.3rem}
+  .species-filter-list,.category-filter-list{max-height:250px}
+  .filter-checkbox{padding:6px;font-size:.8rem}
+  .filter-checkbox label{font-size:.8rem}
+}
+
+@media(max-width:480px){
+  .header-inner{padding:8px 12px;gap:8px}
+  .global-search-container{max-width:none}
+  .global-search-input{font-size:.75rem;padding:5px 8px}
+  .search-filter-btn{width:20px;height:20px;padding:2px}
+  .search-filter-btn svg{width:12px;height:12px}
+  .header-nav{font-size:.7rem}
+  .header-nav button{padding:6px 10px;font-size:.7rem}
+  .logo-sub{font-size:.6rem}
+}
+
+@media print{
+  .header,.hero,.species-section,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  #viewAnesthesia{display:block!important;position:static!important}
+  .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
+  .disease-db-item .disease-detail{display:block!important;max-height:none!important}
+  .disease-db-list{max-height:none!important;overflow:visible!important}
+  .anesthesia-overview{background:#f0f7ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .anesthesia-risk-tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
 @media(max-width:600px){
   .anesthesia-drugs-table{font-size:.72rem}
   .anesthesia-drugs-table th,.anesthesia-drugs-table td{padding:6px}

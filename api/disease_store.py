@@ -108,6 +108,7 @@ def invalidate_cache() -> None:
         get_species_stats.cache_clear()
         get_urgency_stats.cache_clear()
         _get_symptoms_for_species_cached.cache_clear()
+        _symptom_category_cache.clear()  # Clear category cache
 
 
 # ---------------------------------------------------------------------------
@@ -564,8 +565,26 @@ def get_disease_detail(disease_id: str) -> dict | None:
     return _row_to_disease_detail(row)
 
 
+# Cache for symptom categories by species (performance optimization)
+_symptom_category_cache: dict[str, dict[str, str]] = {}
+
+
+def _get_symptom_categories_for_species(species: str) -> dict[str, str]:
+    """Get cached symptom ID -> category mapping for a species."""
+    if species in _symptom_category_cache:
+        return _symptom_category_cache[species]
+
+    symptoms = get_symptoms_for_species(species)
+    symptom_cats = {s['id']: s.get('category', 'other') for s in symptoms}
+    _symptom_category_cache[species] = symptom_cats
+    return symptom_cats
+
+
 def _infer_disease_categories(disease: dict, species: str) -> set[str]:
-    """Infer disease categories from its symptoms."""
+    """Infer disease categories from its symptoms.
+
+    Uses cached symptom category mappings for performance.
+    """
     symptoms_json = disease.get('symptoms')
     if not symptoms_json:
         return {'other'}
@@ -575,9 +594,8 @@ def _infer_disease_categories(disease: dict, species: str) -> set[str]:
     except (json.JSONDecodeError, TypeError):
         return {'other'}
 
-    # Get symptom info for species to extract categories
-    symptoms = get_symptoms_for_species(species)
-    symptom_cats = {s['id']: s.get('category', 'other') for s in symptoms}
+    # Get cached symptom category mapping
+    symptom_cats = _get_symptom_categories_for_species(species)
 
     categories = set()
     for sym_id in symptom_ids:
