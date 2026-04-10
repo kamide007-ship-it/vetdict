@@ -291,13 +291,29 @@ def _generate_fallback_content(disease: Dict[str, Any], species: str) -> Dict[st
     return content
 
 
+_TEMPLATE_MARKERS = (
+    "適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持",
+    "適切な飼育管理、バランスの取れた栄養、定期的な獣医師による健康診断",
+    "Proper husbandry, balanced nutrition, regular veterinary",
+    "involves pathological changes in affected tissues and organ systems",
+    "Prognosis depends on severity, timeliness of diagnosis",
+)
+
+
+def _is_template_text(value: str) -> bool:
+    """Return True if the value contains known template/boilerplate text."""
+    if not value:
+        return False
+    return any(marker in value for marker in _TEMPLATE_MARKERS)
+
+
 def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[str, Any]]:
     """Merge enrichment fields from JSON into a species module's DISEASES list.
 
-    Only fills in fields that are missing or empty in the module definition,
-    preserving any hand-curated content already present.  Uses multi-level
-    matching (exact → normalized → cross-species) before falling back to
-    generated template content.
+    Fills in fields that are missing, empty, or contain template text in the
+    module definition, preserving any hand-curated content already present.
+    Uses multi-level matching (exact → normalized → cross-species) before
+    falling back to generated template content.
 
     Also appends supplementary diseases (from supplementary_diseases.json) that
     exist in the JSON database but not yet in the module's DISEASES list, so
@@ -317,8 +333,11 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
         enrichment = _find_enrichment(species, disease.get("name", ""))
         if enrichment:
             for field in _ENRICHMENT_FIELDS:
-                if not disease.get(field) and enrichment.get(field):
-                    disease[field] = enrichment[field]
+                current = disease.get(field, "")
+                replacement = enrichment.get(field, "")
+                # Replace if empty OR if current is template but replacement is not
+                if (not current and replacement) or (_is_template_text(current) and replacement and not _is_template_text(replacement)):
+                    disease[field] = replacement
             if not disease.get("description_ja") and enrichment.get("description_ja"):
                 disease["description_ja"] = enrichment["description_ja"]
             if not disease.get("name_ja") and enrichment.get("name_ja"):
