@@ -107,10 +107,12 @@
   function filterSpecies(){
     var visibleCount = 0;
     cards.forEach(function(card){
+      var baseHref = '/diseases/' + card.dataset.species;
       if(!activeCat){
         card.style.display = '';
         card.querySelector('.sp-count').style.display = '';
         card.querySelector('.sp-cat-count').style.display = 'none';
+        card.href = baseHref;
         visibleCount++;
       } else {
         var cats = JSON.parse(card.dataset.cats || '{}');
@@ -121,6 +123,7 @@
           var catLabel = card.querySelector('.sp-cat-count');
           catLabel.textContent = catCount + '疾患';
           catLabel.style.display = '';
+          card.href = baseHref + '?category=' + activeCat;
           visibleCount++;
         } else {
           card.style.display = 'none';
