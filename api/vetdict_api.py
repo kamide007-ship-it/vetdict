@@ -1388,30 +1388,42 @@ def api_common_diseases(species):
 @app.route('/api/diseases', methods=['GET'])
 @ensure_json_response
 def api_search_diseases():
-    """Global search endpoint for diseases with multiple keyword support.
+    """Global search endpoint for diseases with multiple keyword + species filter support.
 
     Query params:
       - q: search query (space-separated keywords, each required)
-      - species: optional species filter
+      - species: optional species filter (comma-separated for multiple, e.g. 'dog,cat,horse')
       - limit: max results (default 20, max 100)
 
     Returns: diseases list with name, name_ja, species, slug, urgency
     """
     query = request.args.get('q', '').strip()
-    species = request.args.get('species', None)
+    species_param = request.args.get('species', '').strip()
     limit = min(int(request.args.get('limit', '20')), 100)  # Max 100 results
 
     if len(query) < 2:
         return {'error': 'Query must be at least 2 characters', 'diseases': []}, 400
 
     from api.disease_store import search_diseases, _disease_slug
-    results = search_diseases(query, species=species, limit=limit)
+
+    # Parse multiple species (comma-separated)
+    species_list = [s.strip() for s in species_param.split(',') if s.strip()] if species_param else []
+
+    # Search all species first, then filter if needed
+    all_results = search_diseases(query, species=None, limit=limit * 2)  # Get more to account for filtering
+
+    # Filter by species if specified
+    if species_list:
+        all_results = [d for d in all_results if d.get('species') in species_list]
+
+    # Limit results
+    results = all_results[:limit]
 
     # Add slug to each result
     for disease in results:
         disease['slug'] = _disease_slug(disease)
 
-    return {'diseases': results, 'query': query, 'count': len(results)}
+    return {'diseases': results, 'query': query, 'count': len(results), 'species_filter': species_list}
 
 
 # =============================================================================

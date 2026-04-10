@@ -7,12 +7,32 @@
       </div>
     </a>
     <div class="global-search-container">
-      <input type="search" id="globalSearch"
-             placeholder="疾患を検索..."
-             aria-label="疾患を検索"
-             class="global-search-input"
-             autocomplete="off">
+      <div class="search-input-group">
+        <input type="search" id="globalSearch"
+               placeholder="疾患を検索..."
+               aria-label="疾患を検索"
+               class="global-search-input"
+               autocomplete="off">
+        <button class="search-filter-btn" id="searchFilterBtn"
+                aria-label="動物種でフィルター"
+                title="動物種で絞り込み"
+                type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M22 3H2l8 9.46v7.54l6 2v-9.54L22 3z"/>
+          </svg>
+        </button>
+      </div>
       <div id="globalSearchResults" class="global-search-results" style="display:none" role="listbox"></div>
+      <div id="speciesFilterPanel" class="species-filter-panel" style="display:none" role="dialog" aria-label="動物種フィルター">
+        <div class="filter-header">
+          <h3>動物種で絞り込み</h3>
+          <button class="filter-close" id="filterCloseBtn" type="button" aria-label="閉じる">×</button>
+        </div>
+        <div id="speciesFilterList" class="species-filter-list"></div>
+        <div class="filter-actions">
+          <button id="filterResetBtn" class="filter-reset-btn" type="button">リセット</button>
+        </div>
+      </div>
     </div>
     <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mainNav" id="hamburgerBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>

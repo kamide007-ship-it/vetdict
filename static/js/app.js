@@ -3847,5 +3847,124 @@ function triggerMultiDiseaseAnalysis() {
       searchResults.style.display='none';
     }
   });
+
+  // Filter functionality
+  let selectedSpecies=new Set();
+
+  const filterBtn=document.getElementById('searchFilterBtn');
+  const filterPanel=document.getElementById('speciesFilterPanel');
+  const speciesFilterList=document.getElementById('speciesFilterList');
+  const filterCloseBtn=document.getElementById('filterCloseBtn');
+  const filterResetBtn=document.getElementById('filterResetBtn');
+
+  if(filterBtn&&filterPanel){
+    // Initialize species filter list
+    function initFilterList(){
+      const speciesOrder=['dog','cat','horse','rabbit','hamster','guinea_pig','chinchilla','ferret','hedgehog','sugar_glider','degu','bird','parakeet','parrot','reptile','tortoise','snake','lizard','amphibian','fish','exotic_other'];
+      const speciesNames={dog:'犬',cat:'猫',horse:'馬',rabbit:'うさぎ',hamster:'ハムスター',guinea_pig:'モルモット',chinchilla:'チンチラ',ferret:'フェレット',hedgehog:'ハリネズミ',sugar_glider:'フクロモモンガ',degu:'デグー',bird:'鳥',parakeet:'インコ',parrot:'オウム',reptile:'爬虫類',tortoise:'リクガメ',snake:'ヘビ',lizard:'トカゲ',amphibian:'両生類',fish:'魚',exotic_other:'その他エキゾチック'};
+
+      const html=speciesOrder.map(sp=>`
+        <div class="filter-checkbox ${selectedSpecies.has(sp)?'active':''}">
+          <input type="checkbox" id="filter-${sp}" value="${sp}" ${selectedSpecies.has(sp)?'checked':''}>
+          <label for="filter-${sp}">${SPECIES_ICONS[sp]||'🐾'} ${speciesNames[sp]}</label>
+        </div>
+      `).join('');
+      speciesFilterList.innerHTML=html;
+
+      // Attach listeners
+      document.querySelectorAll('#speciesFilterList input[type="checkbox"]').forEach(cb=>{
+        cb.addEventListener('change',function(){
+          if(this.checked){
+            selectedSpecies.add(this.value);
+          }else{
+            selectedSpecies.delete(this.value);
+          }
+          this.closest('.filter-checkbox').classList.toggle('active');
+          performFilteredSearch();
+        });
+      });
+    }
+
+    // Perform filtered search
+    function performFilteredSearch(){
+      const query=searchInput.value.trim();
+      if(query.length<2)return;
+
+      const speciesParam=selectedSpecies.size>0?Array.from(selectedSpecies).join(','):'';
+      const url=speciesParam
+        ?`/api/diseases?q=${encodeURIComponent(query)}&species=${encodeURIComponent(speciesParam)}&limit=8`
+        :`/api/diseases?q=${encodeURIComponent(query)}&limit=8`;
+
+      fetchWithTimeout(url)
+        .then(r=>{
+          if(!r.ok)throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
+        .then(data=>{
+          const diseases=data.diseases||[];
+          const queryKeywords=data.query?.toLowerCase().split(/\s+/).filter(k=>k)||[];
+
+          if(diseases.length===0){
+            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">キーワード「'+escapeHtml(data.query)+'」に一致する疾患が見つかりませんでした</div>';
+          }else{
+            const html=diseases.map((d,idx)=>{
+              const urgencyColor={emergency:'var(--red)',high:'var(--orange)',moderate:'var(--gray-500)',low:'var(--gray-500)'}[d.urgency]||'var(--gray-500)';
+              return `
+              <a href="/diseases/${encodeURIComponent(d.species)}/${encodeURIComponent(d.slug||slugify(d.name))}"
+                 class="search-result-item"
+                 role="option"
+                 aria-selected="false"
+                 data-disease-id="${escapeHtml(d.id)}"
+                 title="${escapeHtml(d.name)}">
+                <div style="flex:1">
+                  <strong>${escapeHtml(d.name_ja||d.name)}</strong>
+                  ${d.name_ja?'<div style="font-size:.8rem;color:var(--gray-500)">'+escapeHtml(d.name)+'</div>':''}
+                </div>
+                <span class="search-result-species">${escapeHtml(d.species)}</span>
+                ${d.urgency?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+urgencyColor+';margin-left:8px" title="'+escapeHtml(d.urgency)+'"></span>':''}
+              </a>
+            `}).join('');
+            searchResults.innerHTML=html;
+          }
+          searchResults.style.display='block';
+        })
+        .catch(err=>{
+          console.warn('Filtered search error:',err);
+          searchResults.innerHTML='<div style="padding:12px;color:var(--red);text-align:center">エラーが発生しました</div>';
+          searchResults.style.display='block';
+        });
+    }
+
+    // Filter panel toggle
+    filterBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      if(filterPanel.style.display==='none'){
+        initFilterList();
+        filterPanel.style.display='block';
+      }else{
+        filterPanel.style.display='none';
+      }
+    });
+
+    filterCloseBtn.addEventListener('click',function(){
+      filterPanel.style.display='none';
+    });
+
+    filterResetBtn.addEventListener('click',function(){
+      selectedSpecies.clear();
+      document.querySelectorAll('#speciesFilterList input[type="checkbox"]').forEach(cb=>{
+        cb.checked=false;
+        cb.closest('.filter-checkbox').classList.remove('active');
+      });
+      performFilteredSearch();
+    });
+
+    // Close filter panel when clicking outside
+    document.addEventListener('click',function(e){
+      if(!e.target.closest('.global-search-container')){
+        filterPanel.style.display='none';
+      }
+    });
+  }
 })();
 
