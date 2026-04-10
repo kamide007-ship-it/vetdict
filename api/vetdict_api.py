@@ -1406,7 +1406,7 @@ def api_search_diseases():
     if len(query) < 2:
         return {'error': 'Query must be at least 2 characters', 'diseases': []}, 400
 
-    from api.disease_store import search_diseases, _disease_slug
+    from api.disease_store import _disease_slug, search_diseases
 
     # Parse multiple species (comma-separated)
     species_list = [s.strip() for s in species_param.split(',') if s.strip()] if species_param else []
