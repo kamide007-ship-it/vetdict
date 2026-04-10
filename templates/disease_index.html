@@ -149,6 +149,21 @@
 
   searchInput.addEventListener('input', filterDiseases);
 
+  // Pre-select category from URL ?category= parameter (linked from hub page)
+  var urlCat = new URLSearchParams(window.location.search).get('category');
+  if(urlCat){
+    var catBtn = grid.querySelector('.cat-filter-btn[data-cat="' + urlCat + '"]');
+    if(catBtn){
+      activeCat = urlCat;
+      catBtn.classList.add('active');
+      activeLabel.textContent = catBtn.querySelector('.cat-filter-label').textContent + 'の疾患を表示中';
+      indicator.style.display = '';
+      filterDiseases();
+      // Scroll to the category grid
+      grid.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
   grid.addEventListener('click', function(e){
     var btn = e.target.closest('.cat-filter-btn[data-cat]');
     if(!btn) return;

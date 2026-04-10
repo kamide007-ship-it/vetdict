@@ -534,19 +534,47 @@ def diseases_hub():
 
     species_list = []
     total_diseases = 0
+    category_totals: dict[str, int] = {}
     for sp_id in _DISEASE_MODULES:
         if sp_id not in SPECIES_META:
             continue
         meta = SPECIES_META[sp_id]
-        count = len(_load_diseases(sp_id))
+        diseases = _load_diseases(sp_id)
+        count = len(diseases)
         total_diseases += count
+
+        # Per-species category breakdown
+        sp_cats: dict[str, int] = {}
+        for d in diseases:
+            dd = d if isinstance(d, dict) else {
+                "name": getattr(d, "name", ""),
+                "name_ja": getattr(d, "name_ja", ""),
+                "description": getattr(d, "description", ""),
+            }
+            cat = _classify_disease_dict(dd)
+            sp_cats[cat] = sp_cats.get(cat, 0) + 1
+            category_totals[cat] = category_totals.get(cat, 0) + 1
+
         species_list.append({
             "id": sp_id, "name_ja": meta.get("name_ja", sp_id),
             "name_en": meta.get("name_en", sp_id.title()), "count": count,
             "icon": _SPECIES_ICONS.get(sp_id, "\U0001F43E"),
+            "categories": sp_cats,
         })
     species_list.sort(key=lambda x: x["count"], reverse=True)
-    return render_template('diseases_hub.html', species=species_list, total=total_diseases)
+
+    # Build ordered category list
+    categories = []
+    for cat_id in _DISEASE_CAT_ORDER + ["other"]:
+        cnt = category_totals.get(cat_id, 0)
+        if cnt > 0:
+            ja, en = _DISEASE_CAT_LABELS.get(cat_id, ("その他", "Other"))
+            categories.append({"id": cat_id, "ja": ja, "en": en, "count": cnt})
+
+    return render_template(
+        'diseases_hub.html', species=species_list,
+        categories=categories, total=total_diseases,
+    )
 
 
 # Disease category classification (mirrors DISEASE_CATEGORIES in app.js)
@@ -759,6 +787,32 @@ def disease_detail(species: str, disease_slug: str):
     except Exception:
         pass
 
+    # Classify this disease's category
+    disease_cat = _classify_disease_dict(disease)
+    cat_ja, cat_en = _DISEASE_CAT_LABELS.get(disease_cat, ("その他", "Other"))
+
+    # Find same-category diseases for navigation
+    same_cat_diseases = []
+    for d in diseases:
+        d_name = _disease_get(d, "name", "")
+        if d_name == disease.get("name"):
+            continue
+        dd = {
+            "name": d_name,
+            "name_ja": _disease_get(d, "name_ja", ""),
+            "description": _disease_get(d, "description", ""),
+        }
+        if _classify_disease_dict(dd) == disease_cat:
+            slug = _disease_slug(d)
+            if slug:
+                same_cat_diseases.append({
+                    "name": d_name,
+                    "name_ja": dd["name_ja"],
+                    "slug": slug,
+                })
+    same_cat_diseases.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
+    same_cat_diseases = same_cat_diseases[:12]
+
     return render_template(
         'disease_detail.html',
         disease=disease,
@@ -769,6 +823,10 @@ def disease_detail(species: str, disease_slug: str):
         related_diseases=related,
         mentioned_drugs=mentioned_drugs,
         pubmed_refs=pubmed_refs,
+        disease_category=disease_cat,
+        disease_category_ja=cat_ja,
+        disease_category_en=cat_en,
+        same_category_diseases=same_cat_diseases,
     )
 
 
