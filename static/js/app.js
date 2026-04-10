@@ -3885,15 +3885,15 @@ function triggerMultiDiseaseAnalysis() {
       });
     }
 
-    // Perform filtered search
+    // Perform filtered search (with species and category support)
     function performFilteredSearch(){
       const query=searchInput.value.trim();
       if(query.length<2)return;
 
       const speciesParam=selectedSpecies.size>0?Array.from(selectedSpecies).join(','):'';
-      const url=speciesParam
-        ?`/api/diseases?q=${encodeURIComponent(query)}&species=${encodeURIComponent(speciesParam)}&limit=8`
-        :`/api/diseases?q=${encodeURIComponent(query)}&limit=8`;
+      let url=`/api/diseases?q=${encodeURIComponent(query)}&limit=8`;
+      if(speciesParam)url+=`&species=${encodeURIComponent(speciesParam)}`;
+      if(typeof selectedCategory!=='undefined'&&selectedCategory)url+=`&category=${encodeURIComponent(selectedCategory)}`;
 
       fetchWithTimeout(url)
         .then(r=>{
@@ -4012,58 +4012,6 @@ function triggerMultiDiseaseAnalysis() {
         });
       });
     }
-
-    // Override performFilteredSearch to include category
-    const originalPerformFilteredSearch=performFilteredSearch;
-    function performFilteredSearchWithCategory(){
-      const query=searchInput.value.trim();
-      if(query.length<2)return;
-
-      const speciesParam=selectedSpecies.size>0?Array.from(selectedSpecies).join(','):'';
-      let url=`/api/diseases?q=${encodeURIComponent(query)}&limit=8`;
-      if(speciesParam)url+=`&species=${encodeURIComponent(speciesParam)}`;
-      if(selectedCategory)url+=`&category=${encodeURIComponent(selectedCategory)}`;
-
-      fetchWithTimeout(url)
-        .then(r=>{
-          if(!r.ok)throw new Error(`HTTP ${r.status}`);
-          return r.json();
-        })
-        .then(data=>{
-          const diseases=data.diseases||[];
-
-          if(diseases.length===0){
-            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">キーワード「'+escapeHtml(data.query)+'」に一致する疾患が見つかりませんでした</div>';
-          }else{
-            const html=diseases.map((d,idx)=>{
-              const urgencyColor={emergency:'var(--red)',high:'var(--orange)',moderate:'var(--gray-500)',low:'var(--gray-500)'}[d.urgency]||'var(--gray-500)';
-              return `
-              <a href="/diseases/${encodeURIComponent(d.species)}/${encodeURIComponent(d.slug||slugify(d.name))}"
-                 class="search-result-item"
-                 role="option"
-                 aria-selected="false"
-                 data-disease-id="${escapeHtml(d.id)}"
-                 title="${escapeHtml(d.name)}">
-                <div style="flex:1">
-                  <strong>${escapeHtml(d.name_ja||d.name)}</strong>
-                  ${d.name_ja?'<div style="font-size:.8rem;color:var(--gray-500)">'+escapeHtml(d.name)+'</div>':''}
-                </div>
-                <span class="search-result-species">${escapeHtml(d.species)}</span>
-                ${d.urgency?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+urgencyColor+';margin-left:8px" title="'+escapeHtml(d.urgency)+'"></span>':''}
-              </a>
-            `}).join('');
-            searchResults.innerHTML=html;
-          }
-          searchResults.style.display='block';
-        })
-        .catch(err=>{
-          console.warn('Filtered search error:',err);
-          searchResults.innerHTML='<div style="padding:12px;color:var(--red);text-align:center">エラーが発生しました</div>';
-          searchResults.style.display='block';
-        });
-    }
-
-    performFilteredSearch=performFilteredSearchWithCategory;
 
     categoryFilterBtn.addEventListener('click',function(e){
       e.preventDefault();
