@@ -549,6 +549,58 @@ def diseases_hub():
     return render_template('diseases_hub.html', species=species_list, total=total_diseases)
 
 
+# Disease category classification (mirrors DISEASE_CATEGORIES in app.js)
+_DISEASE_CAT_ORDER = [
+    "infectious", "neoplastic", "cardiovascular", "respiratory",
+    "gastrointestinal", "renal", "endocrine", "dermatological",
+    "neurological", "musculoskeletal", "ophthalmological", "hematological",
+    "dental", "parasitic", "reproductive", "toxicological",
+    "behavioral", "congenital", "immune",
+]
+_DISEASE_CAT_PATTERNS = {
+    "infectious": _re.compile(r"infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich", _re.IGNORECASE),
+    "neoplastic": _re.compile(r"tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas", _re.IGNORECASE),
+    "cardiovascular": _re.compile(r"cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat", _re.IGNORECASE),
+    "respiratory": _re.compile(r"respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm", _re.IGNORECASE),
+    "gastrointestinal": _re.compile(r"gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit", _re.IGNORECASE),
+    "renal": _re.compile(r"renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros", _re.IGNORECASE),
+    "endocrine": _re.compile(r"endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal", _re.IGNORECASE),
+    "dermatological": _re.compile(r"dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar", _re.IGNORECASE),
+    "neurological": _re.compile(r"neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia", _re.IGNORECASE),
+    "musculoskeletal": _re.compile(r"musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro", _re.IGNORECASE),
+    "ophthalmological": _re.compile(r"ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm", _re.IGNORECASE),
+    "hematological": _re.compile(r"hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit", _re.IGNORECASE),
+    "dental": _re.compile(r"dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast", _re.IGNORECASE),
+    "parasitic": _re.compile(r"parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas", _re.IGNORECASE),
+    "reproductive": _re.compile(r"reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit", _re.IGNORECASE),
+    "toxicological": _re.compile(r"toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol", _re.IGNORECASE),
+    "behavioral": _re.compile(r"behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia", _re.IGNORECASE),
+    "congenital": _re.compile(r"congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia", _re.IGNORECASE),
+    "immune": _re.compile(r"immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom", _re.IGNORECASE),
+}
+_DISEASE_CAT_LABELS = {
+    "infectious": ("感染症", "Infectious"), "neoplastic": ("腫瘍", "Neoplastic"),
+    "cardiovascular": ("循環器", "Cardiovascular"), "respiratory": ("呼吸器", "Respiratory"),
+    "gastrointestinal": ("消化器", "Gastrointestinal"), "renal": ("泌尿器", "Renal/Urinary"),
+    "endocrine": ("内分泌", "Endocrine"), "dermatological": ("皮膚", "Dermatological"),
+    "neurological": ("神経", "Neurological"), "musculoskeletal": ("筋骨格", "Musculoskeletal"),
+    "ophthalmological": ("眼科", "Ophthalmological"), "hematological": ("血液", "Hematological"),
+    "dental": ("歯科", "Dental"), "parasitic": ("寄生虫", "Parasitic"),
+    "reproductive": ("生殖器", "Reproductive"), "toxicological": ("中毒", "Toxicological"),
+    "behavioral": ("行動", "Behavioral"), "congenital": ("先天性", "Congenital"),
+    "immune": ("免疫", "Immune-mediated"), "other": ("その他", "Other"),
+}
+
+
+def _classify_disease_dict(d: dict) -> str:
+    """Classify a disease dict into a category using keyword regex."""
+    text = "%s %s %s" % (d.get("name", ""), d.get("name_ja", ""), d.get("description", ""))
+    for cat_id in _DISEASE_CAT_ORDER:
+        if _DISEASE_CAT_PATTERNS[cat_id].search(text):
+            return cat_id
+    return "other"
+
+
 @app.route('/diseases/<species>')
 def disease_index(species: str):
     """Server-rendered disease index page per species for SEO.
@@ -565,26 +617,40 @@ def disease_index(species: str):
     sp_meta = SPECIES_META[species_key]
     diseases = _load_diseases(species_key)
 
-    # Build disease list with slugs
+    # Build disease list with slugs and categories
     disease_list = []
+    category_counts: dict[str, int] = {}
     for d in diseases:
         if isinstance(d, dict):
             name = d.get("name", "") or d.get("name_en", "")
             name_ja = d.get("name_ja", "")
             urgency = d.get("urgency", "")
+            description = d.get("description", "")
         else:
             name = getattr(d, "name", "") or getattr(d, "name_en", "")
             name_ja = getattr(d, "name_ja", "")
             urgency = getattr(d, "urgency", "")
+            description = getattr(d, "description", "")
         slug = _disease_slug(d)
         if slug:
-            disease_list.append({"name": name, "name_ja": name_ja, "urgency": urgency, "slug": slug})
+            cat = _classify_disease_dict({"name": name, "name_ja": name_ja, "description": description})
+            category_counts[cat] = category_counts.get(cat, 0) + 1
+            disease_list.append({"name": name, "name_ja": name_ja, "urgency": urgency, "slug": slug, "category": cat})
 
     disease_list.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
+
+    # Build ordered category list with counts
+    categories = []
+    for cat_id in _DISEASE_CAT_ORDER + ["other"]:
+        cnt = category_counts.get(cat_id, 0)
+        if cnt > 0:
+            ja, en = _DISEASE_CAT_LABELS.get(cat_id, ("その他", "Other"))
+            categories.append({"id": cat_id, "ja": ja, "en": en, "count": cnt})
 
     return render_template(
         'disease_index.html',
         diseases=disease_list,
+        categories=categories,
         species=species_key,
         species_ja=sp_meta.get("name_ja", species_key),
         species_en=sp_meta.get("name_en", species_key.title()),
