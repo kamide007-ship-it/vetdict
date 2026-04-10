@@ -527,6 +527,69 @@ def dynamic_sitemap():
     return Response('\n'.join(lines), mimetype='application/xml')
 
 
+@app.route('/diseases/search')
+def diseases_search():
+    """Cross-species disease search page."""
+    from api.disease_store import SPECIES_META
+
+    query = request.args.get('q', '').strip()
+    if not query or len(query) < 2:
+        return render_template(
+            'diseases_search.html', query=query, results=[],
+            total_results=0, searched=bool(query),
+        )
+
+    q_lower = query.lower()
+    results = []
+    for sp_id in _DISEASE_MODULES:
+        if sp_id not in SPECIES_META:
+            continue
+        meta = SPECIES_META[sp_id]
+        sp_name_ja = meta.get("name_ja", sp_id)
+        sp_name_en = meta.get("name_en", sp_id.title())
+        icon = _SPECIES_ICONS.get(sp_id, "\U0001F43E")
+        diseases = _load_diseases(sp_id)
+        matches = []
+        for d in diseases:
+            if isinstance(d, dict):
+                name = d.get("name", "") or ""
+                name_ja = d.get("name_ja", "") or ""
+                desc = d.get("description", "") or ""
+                urgency = d.get("urgency", "")
+            else:
+                name = getattr(d, "name", "") or ""
+                name_ja = getattr(d, "name_ja", "") or ""
+                desc = getattr(d, "description", "") or ""
+                urgency = getattr(d, "urgency", "")
+            if q_lower in name.lower() or q_lower in name_ja.lower():
+                slug = _disease_slug(d)
+                if slug:
+                    cat = _classify_disease_dict({"name": name, "name_ja": name_ja, "description": desc})
+                    cat_ja = _DISEASE_CAT_LABELS.get(cat, ("その他",))[0]
+                    matches.append({
+                        "name": name, "name_ja": name_ja,
+                        "slug": slug, "urgency": urgency,
+                        "category": cat, "category_ja": cat_ja,
+                    })
+        if matches:
+            matches.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
+            results.append({
+                "species_id": sp_id,
+                "species_ja": sp_name_ja,
+                "species_en": sp_name_en,
+                "icon": icon,
+                "diseases": matches,
+                "count": len(matches),
+            })
+    results.sort(key=lambda x: -x["count"])
+    total_results = sum(r["count"] for r in results)
+
+    return render_template(
+        'diseases_search.html', query=query, results=results,
+        total_results=total_results, searched=True,
+    )
+
+
 @app.route('/diseases')
 def diseases_hub():
     """Top-level diseases hub page listing all 21 species with disease counts."""
