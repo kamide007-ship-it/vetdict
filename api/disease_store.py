@@ -668,7 +668,7 @@ def search_diseases(query: str, species: str | None = None, category: str | None
     results = []
     for row in rows:
         result = _row_to_disease_summary(row)
-        row_species = row.get("species", "")
+        row_species = row["species"]
         score = 0
         name = (result.get("name") or "").lower()
         name_ja = (result.get("name_ja") or "").lower()
