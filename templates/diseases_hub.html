@@ -16,14 +16,32 @@
 .hub-page{max-width:900px;margin:0 auto;padding:20px 20px 60px}
 .hub-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
 .hub-page .subtitle{color:var(--gray-600);font-size:.9rem;margin-bottom:24px}
+.hub-cat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.hub-cat-header span{font-size:.92rem;font-weight:700;color:var(--navy)}
+.hub-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-bottom:24px}
+.hub-cat-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white);cursor:pointer;transition:all .15s;text-align:center;font-family:var(--font);font-size:.78rem}
+.hub-cat-btn:hover{border-color:var(--navy);background:var(--gray-50);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.hub-cat-btn.active{border-color:var(--navy);background:var(--navy);color:var(--white)}
+.hub-cat-btn.active .hub-cat-count{background:rgba(255,255,255,.25);color:var(--white)}
+.hub-cat-label{font-weight:600;line-height:1.2}
+.hub-cat-count{font-size:.7rem;color:var(--gray-500);background:var(--gray-100);padding:1px 6px;border-radius:8px;min-width:20px}
+.hub-cat-active{font-size:.82rem;color:var(--gray-500);margin-bottom:12px;display:none}
+.hub-cat-active .hub-cat-clear{color:var(--green);cursor:pointer;text-decoration:underline;margin-left:6px;border:none;background:none;font-size:.82rem;font-family:var(--font)}
 .species-hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
 .species-hub-card{display:block;padding:16px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--gray-800);transition:all .2s;text-align:center}
 .species-hub-card:hover{border-color:var(--green);box-shadow:var(--shadow-md);transform:translateY(-2px)}
 .species-hub-card .sp-name{font-size:1.1rem;font-weight:700;color:var(--navy);display:block}
 .species-hub-card .sp-en{font-size:.78rem;color:var(--gray-500);display:block;margin-bottom:6px}
 .species-hub-card .sp-count{font-size:.86rem;color:var(--green);font-weight:600}
+.species-hub-card .sp-cat-count{font-size:.76rem;color:var(--gray-500);display:none;margin-top:2px}
 .hub-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin:28px 0}
 .hub-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none}
+@media(max-width:600px){
+  .hub-cat-grid{grid-template-columns:repeat(auto-fill,minmax(75px,1fr));gap:4px}
+  .hub-cat-btn{padding:8px 4px;font-size:.72rem}
+  .species-hub-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+  .species-hub-card{padding:12px}
+}
 </style>
 {% endblock %}
 
@@ -37,14 +55,31 @@
     <a href="/#checker">症状チェッカーを使う</a>
   </div>
 
-  <h2 style="font-size:1.1rem;color:var(--navy);margin-bottom:12px">動物種から探す</h2>
-  <div class="species-hub-grid">
+  <div class="hub-cat-header">
+    <span>カテゴリで探す</span>
+  </div>
+  <div class="hub-cat-grid" id="hubCatGrid">
+    {% for cat in categories %}
+    <button class="hub-cat-btn" data-cat="{{ cat.id }}" aria-label="{{ cat.ja }}">
+      <span class="hub-cat-label">{{ cat.ja }}</span>
+      <span class="hub-cat-count">{{ cat.count }}</span>
+    </button>
+    {% endfor %}
+  </div>
+  <div class="hub-cat-active" id="hubCatActive">
+    <span id="hubCatActiveLabel"></span>
+    <button class="hub-cat-clear" id="hubCatClear">解除</button>
+  </div>
+
+  <h2 style="font-size:1.1rem;color:var(--navy);margin-bottom:12px" id="speciesHeading">動物種から探す</h2>
+  <div class="species-hub-grid" id="speciesGrid">
     {% for sp in species %}
-    <a href="/diseases/{{ sp.id }}" class="species-hub-card">
-      <span style="font-size:2rem;display:block;margin-bottom:4px">{{ sp.icon }}</span>
+    <a href="/diseases/{{ sp.id }}" class="species-hub-card" data-species="{{ sp.id }}" data-cats='{{ sp.categories | tojson }}'>
+      <span style="font-size:2rem;display:block;margin-bottom:4px" aria-hidden="true">{{ sp.icon }}</span>
       <span class="sp-name">{{ sp.name_ja }}</span>
       <span class="sp-en">{{ sp.name_en }}</span>
       <span class="sp-count">{{ sp.count }}疾患</span>
+      <span class="sp-cat-count"></span>
     </a>
     {% endfor %}
   </div>
@@ -59,4 +94,68 @@
     VetDict は獣医師（DVM）が開発した臨床支援ツールです。
   </p>
 </div>
+
+<script nonce="{{ g.csp_nonce }}">
+(function(){
+  var activeCat = '';
+  var grid = document.getElementById('hubCatGrid');
+  var indicator = document.getElementById('hubCatActive');
+  var activeLabel = document.getElementById('hubCatActiveLabel');
+  var clearBtn = document.getElementById('hubCatClear');
+  var cards = document.querySelectorAll('.species-hub-card');
+
+  function filterSpecies(){
+    var visibleCount = 0;
+    cards.forEach(function(card){
+      var baseHref = '/diseases/' + card.dataset.species;
+      if(!activeCat){
+        card.style.display = '';
+        card.querySelector('.sp-count').style.display = '';
+        card.querySelector('.sp-cat-count').style.display = 'none';
+        card.href = baseHref;
+        visibleCount++;
+      } else {
+        var cats = JSON.parse(card.dataset.cats || '{}');
+        var catCount = cats[activeCat] || 0;
+        if(catCount > 0){
+          card.style.display = '';
+          card.querySelector('.sp-count').style.display = 'none';
+          var catLabel = card.querySelector('.sp-cat-count');
+          catLabel.textContent = catCount + '疾患';
+          catLabel.style.display = '';
+          card.href = baseHref + '?category=' + activeCat;
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  grid.addEventListener('click', function(e){
+    var btn = e.target.closest('.hub-cat-btn[data-cat]');
+    if(!btn) return;
+    var cat = btn.dataset.cat;
+    if(activeCat === cat){
+      activeCat = '';
+      btn.classList.remove('active');
+      indicator.style.display = 'none';
+    } else {
+      grid.querySelectorAll('.hub-cat-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCat = cat;
+      activeLabel.textContent = btn.querySelector('.hub-cat-label').textContent + 'の疾患がある動物種を表示中';
+      indicator.style.display = '';
+    }
+    filterSpecies();
+  });
+
+  clearBtn.addEventListener('click', function(){
+    activeCat = '';
+    grid.querySelectorAll('.hub-cat-btn').forEach(function(b){ b.classList.remove('active'); });
+    indicator.style.display = 'none';
+    filterSpecies();
+  });
+})();
+</script>
 {% endblock %}
