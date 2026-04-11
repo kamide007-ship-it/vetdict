@@ -232,12 +232,26 @@ def migrate_json_enrichments(conn) -> int:
     def _extract_ja_en(field_val):
         if isinstance(field_val, dict):
             return field_val.get("ja"), field_val.get("en")
+        # If it's a list, convert to JSON string
+        if isinstance(field_val, list):
+            return None, json.dumps(field_val, ensure_ascii=False) if field_val else None
         return None, field_val
 
     def _to_json_str(field_val):
         if isinstance(field_val, dict):
             return json.dumps(field_val, ensure_ascii=False)
+        # If it's already a list, convert to JSON
+        if isinstance(field_val, list):
+            return json.dumps(field_val, ensure_ascii=False) if field_val else None
         return field_val
+
+    def _ensure_string_or_none(val):
+        """Convert lists to JSON strings, keep strings as-is, return None for empty."""
+        if val is None:
+            return None
+        if isinstance(val, list):
+            return json.dumps(val, ensure_ascii=False) if val else None
+        return val
 
     for row in rows:
         db_id, db_name = row["id"], row["name"]
@@ -288,22 +302,22 @@ def migrate_json_enrichments(conn) -> int:
             (
                 _clean(entry.get("description")),
                 _clean(entry.get("description_ja")),
-                entry.get("pathophysiology"),
-                entry.get("pathophysiology_ja"),
+                _ensure_string_or_none(entry.get("pathophysiology")),
+                _ensure_string_or_none(entry.get("pathophysiology_ja")),
                 _clean(entry.get("causes")),
                 _clean(entry.get("causes_ja")),
-                treatment_en or entry.get("treatment"),
-                treatment_ja or entry.get("treatment_ja"),
-                prevention_en or entry.get("prevention"),
-                prevention_ja or entry.get("prevention_ja"),
-                _clean(prognosis_en or entry.get("prognosis")),
-                _clean(prognosis_ja or entry.get("prognosis_ja")),
-                entry.get("prognosis_detailed"),
-                entry.get("prognosis_detailed_ja"),
-                entry.get("rehabilitation_protocol"),
-                entry.get("rehabilitation_protocol_ja"),
-                entry.get("nutrition_management"),
-                entry.get("nutrition_management_ja"),
+                _ensure_string_or_none(treatment_en or entry.get("treatment")),
+                _ensure_string_or_none(treatment_ja or entry.get("treatment_ja")),
+                _ensure_string_or_none(prevention_en or entry.get("prevention")),
+                _ensure_string_or_none(prevention_ja or entry.get("prevention_ja")),
+                _clean(_ensure_string_or_none(prognosis_en or entry.get("prognosis"))),
+                _clean(_ensure_string_or_none(prognosis_ja or entry.get("prognosis_ja"))),
+                _ensure_string_or_none(entry.get("prognosis_detailed")),
+                _ensure_string_or_none(entry.get("prognosis_detailed_ja")),
+                _ensure_string_or_none(entry.get("rehabilitation_protocol")),
+                _ensure_string_or_none(entry.get("rehabilitation_protocol_ja")),
+                _ensure_string_or_none(entry.get("nutrition_management")),
+                _ensure_string_or_none(entry.get("nutrition_management_ja")),
                 prognosis_refs,
                 rehab_refs,
                 nutrition_refs,

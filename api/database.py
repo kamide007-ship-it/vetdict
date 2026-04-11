@@ -201,6 +201,13 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             return json.dumps(list(val), ensure_ascii=False)
         return val
 
+    def _ensure_string(val):
+        """Convert list fields to strings or JSON if needed."""
+        if isinstance(val, list):
+            # If it's a list, convert to JSON representation
+            return json.dumps(val, ensure_ascii=False) if val else None
+        return val
+
     conn.execute(
         """INSERT OR REPLACE INTO diseases
            (id, species, name, name_ja, description, description_ja,
@@ -220,29 +227,29 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             disease.get("species"),
             disease.get("name"),
             disease.get("name_ja"),
-            disease.get("description"),
-            disease.get("description_ja"),
-            disease.get("pathophysiology"),
-            disease.get("pathophysiology_ja"),
-            disease.get("causes"),
-            disease.get("causes_ja"),
-            disease.get("treatment"),
-            disease.get("treatment_ja"),
-            disease.get("prevention"),
-            disease.get("prevention_ja"),
-            disease.get("prognosis"),
-            disease.get("prognosis_ja"),
+            _ensure_string(disease.get("description")),
+            _ensure_string(disease.get("description_ja")),
+            _ensure_string(disease.get("pathophysiology")),
+            _ensure_string(disease.get("pathophysiology_ja")),
+            _ensure_string(disease.get("causes")),
+            _ensure_string(disease.get("causes_ja")),
+            _ensure_string(disease.get("treatment")),
+            _ensure_string(disease.get("treatment_ja")),
+            _ensure_string(disease.get("prevention")),
+            _ensure_string(disease.get("prevention_ja")),
+            _ensure_string(disease.get("prognosis")),
+            _ensure_string(disease.get("prognosis_ja")),
             disease.get("urgency"),
             _to_json_if_needed(disease.get("symptoms"), is_json_field=True),
             _to_json_if_needed(disease.get("recommended_tests"), is_json_field=True),
             _to_json_if_needed(disease.get("onset_pattern"), is_json_field=True),
             _to_json_if_needed(disease.get("age_predisposition"), is_json_field=True),
-            disease.get("prognosis_detailed"),
-            disease.get("prognosis_detailed_ja"),
-            disease.get("rehabilitation_protocol"),
-            disease.get("rehabilitation_protocol_ja"),
-            disease.get("nutrition_management"),
-            disease.get("nutrition_management_ja"),
+            _ensure_string(disease.get("prognosis_detailed")),
+            _ensure_string(disease.get("prognosis_detailed_ja")),
+            _ensure_string(disease.get("rehabilitation_protocol")),
+            _ensure_string(disease.get("rehabilitation_protocol_ja")),
+            _ensure_string(disease.get("nutrition_management")),
+            _ensure_string(disease.get("nutrition_management_ja")),
             _to_json_if_needed(disease.get("prognosis_references"), is_json_field=True),
             _to_json_if_needed(disease.get("rehabilitation_references"), is_json_field=True),
             _to_json_if_needed(disease.get("nutrition_references"), is_json_field=True),
