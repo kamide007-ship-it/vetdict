@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}{% if searched %}「{{ query }}」の検索結果 ({{ total_results }}件){% else %}疾患検索{% endif %} | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="21動物種・7,000+疾患を横断検索。疾患名（日本語・英語）で検索できます。">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://vetdict.info/diseases/search">
+<style>
+.search-page{max-width:900px;margin:0 auto;padding:20px 20px 60px}
+.search-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:16px}
+.search-form{display:flex;gap:8px;margin-bottom:20px}
+.search-form input{flex:1;padding:12px 16px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.95rem;box-sizing:border-box}
+.search-form input:focus{border-color:var(--green);outline:none}
+.search-form button{padding:12px 24px;background:var(--navy);color:var(--white);border:none;border-radius:var(--radius);font-weight:700;font-size:.9rem;cursor:pointer;white-space:nowrap}
+.search-form button:hover{opacity:.9}
+.search-summary{font-size:.86rem;color:var(--gray-600);margin-bottom:20px}
+.search-summary strong{color:var(--navy)}
+.sp-result{margin-bottom:24px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden}
+.sp-result-header{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);cursor:pointer}
+.sp-result-header:hover{background:var(--gray-100)}
+.sp-result-icon{font-size:1.4rem}
+.sp-result-name{font-weight:700;color:var(--navy);font-size:.95rem}
+.sp-result-en{font-size:.78rem;color:var(--gray-500);margin-left:4px}
+.sp-result-count{margin-left:auto;font-size:.78rem;color:var(--green);font-weight:600;background:#e8f5e9;padding:2px 8px;border-radius:10px}
+.sp-result-diseases{padding:0}
+.sp-result-diseases.collapsed{display:none}
+.disease-result{display:flex;align-items:baseline;gap:8px;padding:10px 16px;border-bottom:1px solid var(--gray-100);text-decoration:none;color:var(--gray-800);transition:background .1s;font-size:.86rem}
+.disease-result:last-child{border-bottom:none}
+.disease-result:hover{background:#f0f7ff}
+.disease-result .dr-ja{font-weight:600}
+.disease-result .dr-en{color:var(--gray-500);font-size:.78rem}
+.disease-result .dr-cat{font-size:.7rem;color:#1565c0;background:#e3f2fd;padding:1px 6px;border-radius:4px;margin-left:auto;white-space:nowrap}
+.disease-result.urgency-emergency .dr-ja{color:#c62828}
+.disease-result.urgency-high .dr-ja{color:#e65100}
+.no-results{text-align:center;padding:40px 20px;color:var(--gray-500)}
+.no-results .big-icon{font-size:3rem;display:block;margin-bottom:12px}
+.search-hints{font-size:.82rem;color:var(--gray-500);margin-top:12px;line-height:1.6}
+.search-hints code{background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:.78rem}
+.back-link{display:inline-block;font-size:.86rem;color:var(--navy);text-decoration:none;margin-bottom:16px;font-weight:600}
+.back-link:hover{color:var(--green)}
+@media(max-width:600px){
+  .search-form{flex-direction:column}
+  .search-form button{width:100%}
+  .disease-result{flex-wrap:wrap;gap:4px}
+  .disease-result .dr-cat{margin-left:0}
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="search-page">
+  <a href="/diseases" class="back-link">← 疾患データベースに戻る</a>
+  <h1>全動物種の疾患を検索</h1>
+
+  <form class="search-form" action="/diseases/search" method="get">
+    <input type="text" name="q" value="{{ query }}" placeholder="疾患名で検索... (例: pneumonia, 腎臓, fracture)" aria-label="疾患名で検索" autofocus>
+    <button type="submit">検索</button>
+  </form>
+
+  {% if searched %}
+    {% if total_results > 0 %}
+    <div class="search-summary">
+      「<strong>{{ query }}</strong>」の検索結果: <strong>{{ total_results }}件</strong>（{{ results|length }}動物種）
+    </div>
+
+    {% for sp in results %}
+    <div class="sp-result">
+      <div class="sp-result-header" data-toggle="sp-{{ sp.species_id }}">
+        <span class="sp-result-icon" aria-hidden="true">{{ sp.icon }}</span>
+        <span class="sp-result-name">{{ sp.species_ja }}</span>
+        <span class="sp-result-en">{{ sp.species_en }}</span>
+        <span class="sp-result-count">{{ sp.count }}件</span>
+      </div>
+      <div class="sp-result-diseases" id="sp-{{ sp.species_id }}">
+        {% for d in sp.diseases %}
+        <a href="/diseases/{{ sp.species_id }}/{{ d.slug }}" class="disease-result urgency-{{ d.urgency }}">
+          <span class="dr-ja">{{ d.name_ja or d.name }}</span>
+          <span class="dr-en">{{ d.name }}</span>
+          <span class="dr-cat">{{ d.category_ja }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <div class="no-results">
+      <span class="big-icon" aria-hidden="true">🔍</span>
+      <p>「<strong>{{ query }}</strong>」に一致する疾患は見つかりませんでした</p>
+      <div class="search-hints">
+        検索のヒント:<br>
+        <code>pneumonia</code> <code>fracture</code> <code>腎臓</code> <code>心臓</code> <code>皮膚</code><br>
+        日本語・英語どちらでも検索できます
+      </div>
+    </div>
+    {% endif %}
+
+  {% else %}
+  <div class="no-results">
+    <span class="big-icon" aria-hidden="true">📚</span>
+    <p>21動物種・7,000+疾患を横断検索できます</p>
+    <div class="search-hints">
+      検索例:<br>
+      <code>pneumonia</code> <code>fracture</code> <code>腎臓</code> <code>心臓</code> <code>diabetes</code> <code>皮膚炎</code>
+    </div>
+  </div>
+  {% endif %}
+
+  <p style="font-size:.76rem;color:var(--gray-500);margin-top:32px;text-align:center">
+    ※ 本データベースは獣医学的参考資料です。実際の診療は必ず獣医師にご相談ください。
+  </p>
+</div>
+
+<script nonce="{{ g.csp_nonce }}">
+document.querySelectorAll('.sp-result-header[data-toggle]').forEach(function(header){
+  header.addEventListener('click', function(){
+    var target = document.getElementById(this.dataset.toggle);
+    if(target) target.classList.toggle('collapsed');
+  });
+});
+</script>
+{% endblock %}
