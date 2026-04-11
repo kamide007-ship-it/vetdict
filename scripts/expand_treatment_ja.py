@@ -13,9 +13,9 @@ Rules:
 """
 
 import json
+import os
 import re
 import sys
-import os
 
 JSON_PATH = os.path.join(os.path.dirname(__file__), '..', 'diseases_all_species.json')
 JSON_PATH = os.path.abspath(JSON_PATH)
@@ -45,7 +45,7 @@ def main():
         else:
             before_150_plus += 1
 
-    print(f"\n=== BEFORE ===")
+    print("\n=== BEFORE ===")
     print(f"  treatment_ja < 80c:    {before_under_80}")
     print(f"  treatment_ja 80-149c:  {before_80_149}")
     print(f"  treatment_ja >= 150c:  {before_150_plus}")
@@ -82,7 +82,7 @@ def main():
         d['treatment_ja'] = treatment_en
         updated_count += 1
 
-    print(f"\n=== UPDATE SUMMARY ===")
+    print("\n=== UPDATE SUMMARY ===")
     print(f"  Qualifying entries (80-149c):        {before_80_149}")
     print(f"  Updated (EN longer → replaced):      {updated_count}")
     print(f"  Skipped (EN same/shorter length):     {skipped_same_or_shorter}")
@@ -101,7 +101,7 @@ def main():
         else:
             after_150_plus += 1
 
-    print(f"\n=== AFTER ===")
+    print("\n=== AFTER ===")
     print(f"  treatment_ja < 80c:    {after_under_80}")
     print(f"  treatment_ja 80-149c:  {after_80_149}")
     print(f"  treatment_ja >= 150c:  {after_150_plus}")
