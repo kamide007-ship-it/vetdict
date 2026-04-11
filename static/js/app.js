@@ -388,6 +388,13 @@ document.addEventListener("DOMContentLoaded",async()=>{
         if(e.key==="Enter"||e.key===" "){e.preventDefault();refHeader.click();}
       });
     }
+    /* Attach click/keyboard handlers to all DB list containers at init (event delegation).
+       These containers exist in static HTML and never get replaced — only their innerHTML changes.
+       Attaching once at init avoids timing issues with async data loading. */
+    ["diseaseDbList","drugList","anesthesiaList"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el&&!el.dataset.handlersAttached){el.dataset.handlersAttached="1";_attachDbItemHandlers(el);}
+    });
     /* Returning user welcome */
     showReturningUserBanner();
   }catch(e){
@@ -847,6 +854,13 @@ function escapeHtml(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
 }
 
+function slugify(text){
+  return String(text??"")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/^-+|-+$/g,"");
+}
+
 function sanitizeUrl(value){
   try{
     const url=new URL(String(value??""),window.location.origin);
@@ -866,8 +880,10 @@ function renderOrthopedicReferences(d){
     const refs=(d[sec.key]&&Array.isArray(d[sec.key].references))?d[sec.key].references:[];
     if(!refs.length)return "";
     const items=refs.map(r=>{
-      const authors=(Array.isArray(r.authors)&&r.authors.length)
-        ?r.authors[0]+(r.authors.length>1?" et al.":"")
+      // Authors: string "FirstAuthor, SecondAuthor, ..." → extract first + " et al."
+      const authStr=r.authors||"Unknown";
+      const authors=(typeof authStr==="string"&&authStr.length>0)
+        ?authStr.split(",")[0].trim()+(authStr.includes(",")?"":" et al.")
         :"Unknown";
       const year=r.year||"";
       const journal=r.journal?`<em>${escapeHtml(r.journal)}</em>`:"";
@@ -1631,7 +1647,7 @@ function renderDiseaseDb(){
     const causes=pk(d.causes_ja,d.causes)||buildFieldFallback(t("dtCauses"),diseaseName);
     const prevention=pk(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
     const treatment=pk(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
-    const prognosis=pk(d.prognosis_detailed_ja,d.prognosis_detailed,d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
+    const prognosis=pk(d.prognosis_detailed_ja,d.prognosis_detailed)||pk(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
     const dNameEn=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
     const dPrimary=currentLang==="ja"?dNameJa:dNameEn;
@@ -1666,7 +1682,6 @@ function renderDiseaseDb(){
         ${mortalityRate!==undefined?`<dt>死亡率/Mortality Rate</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
       </dl>${renderOrthopedicReferences(d)}<div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
     </div>`}).join("");
-  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
@@ -2529,7 +2544,6 @@ function renderDrugList(){
       </div>
     </div>`;
   }).join("");
-  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
 }
 
 /* ===== Anesthesia Protocols ===== */
@@ -2791,8 +2805,6 @@ function renderAnesthesiaList(){
     const refsHtml=`<div class="anesthesia-breed-section"><h4>${currentLang==="ja"?"参考文献":"References"}</h4><ul class="anesthesia-ref-list">${anesthesiaData.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`;
     list.insertAdjacentHTML("beforeend",refsHtml);
   }
-
-  if(!list.dataset.handlersAttached){list.dataset.handlersAttached="1";_attachDbItemHandlers(list);}
 }
 
 /* Print anesthesia checklist */
@@ -3013,6 +3025,8 @@ function toggleDbItem(el){
     if(isOpen){
       const nameEl=el.querySelector(".d-name");
       trackEvent("view_disease_detail",{species:currentSpecies,disease:(nameEl?nameEl.textContent:"").substring(0,80)});
+      /* Scroll the opened item into view after transition starts */
+      requestAnimationFrame(()=>{el.scrollIntoView({behavior:"smooth",block:"nearest"});});
       /* Lazy-load drug info on first open */
       if(!detail.dataset.drugsLoaded){
         detail.dataset.drugsLoaded="1";
@@ -3723,4 +3737,298 @@ function triggerMultiDiseaseAnalysis() {
     window.multiDiseaseUI.performMultiDiseaseAnalysis();
   }
 }
+
+/**
+ * Global Search Box
+ */
+(function initGlobalSearch() {
+  const searchInput=document.getElementById('globalSearch');
+  const searchResults=document.getElementById('globalSearchResults');
+  if(!searchInput||!searchResults)return;
+
+  let searchTimer;
+  let currentLang='ja';
+
+  // Detect language
+  const langBtns=document.querySelectorAll('.lang-toggle button');
+  langBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      currentLang=btn.getAttribute('data-lang');
+    });
+  });
+
+  // Search listener
+  searchInput.addEventListener('input',function(e){
+    clearTimeout(searchTimer);
+    const query=e.target.value.trim();
+
+    if(query.length<2){
+      searchResults.style.display='none';
+      return;
+    }
+
+    searchTimer=setTimeout(()=>{
+      fetchWithTimeout(`/api/diseases?q=${encodeURIComponent(query)}&limit=8`)
+        .then(r=>{
+          if(!r.ok)throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
+        .then(data=>{
+          const diseases=data.diseases||[];
+          const queryKeywords=data.query?.toLowerCase().split(/\s+/).filter(k=>k)||[];
+
+          if(diseases.length===0){
+            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">キーワード「'+escapeHtml(data.query)+'」に一致する疾患が見つかりませんでした</div>';
+          }else{
+            const html=diseases.map((d,idx)=>{
+              // Determine which field matched the keyword
+              const name=(d.name||'').toLowerCase();
+              const name_ja=(d.name_ja||'').toLowerCase();
+              let matchInfo='';
+              for(const kw of queryKeywords){
+                if(name.includes(kw)||name_ja.includes(kw)){
+                  matchInfo=kw;
+                  break;
+                }
+              }
+
+              // Urgency badge color
+              const urgencyColor={
+                'emergency':'var(--red)',
+                'high':'var(--orange)',
+                'moderate':'var(--gray-500)',
+                'low':'var(--gray-500)'
+              }[d.urgency]||'var(--gray-500)';
+
+              return `
+              <a href="/diseases/${encodeURIComponent(d.species)}/${encodeURIComponent(d.slug||slugify(d.name))}"
+                 class="search-result-item"
+                 role="option"
+                 aria-selected="false"
+                 data-disease-id="${escapeHtml(d.id)}"
+                 title="${escapeHtml(d.name)}">
+                <div style="flex:1">
+                  <strong>${escapeHtml(d.name_ja||d.name)}</strong>
+                  ${d.name_ja?'<div style="font-size:.8rem;color:var(--gray-500)">'+escapeHtml(d.name)+'</div>':''}
+                </div>
+                <span class="search-result-species">${escapeHtml(d.species)}</span>
+                ${d.urgency?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+urgencyColor+';margin-left:8px" title="'+escapeHtml(d.urgency)+'"></span>':''}
+              </a>
+            `}).join('');
+            searchResults.innerHTML=html;
+          }
+          searchResults.style.display='block';
+        })
+        .catch(err=>{
+          console.warn('Global search error:',err);
+          searchResults.innerHTML='<div style="padding:12px;color:var(--red);text-align:center">エラーが発生しました</div>';
+          searchResults.style.display='block';
+        });
+    },300);
+  });
+
+  // Close on ESC
+  searchInput.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      searchResults.style.display='none';
+      searchInput.value='';
+    }
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.global-search-container')){
+      searchResults.style.display='none';
+    }
+  });
+
+  // Filter functionality
+  let selectedSpecies=new Set();
+
+  const filterBtn=document.getElementById('searchFilterBtn');
+  const filterPanel=document.getElementById('speciesFilterPanel');
+  const speciesFilterList=document.getElementById('speciesFilterList');
+  const filterCloseBtn=document.getElementById('filterCloseBtn');
+  const filterResetBtn=document.getElementById('filterResetBtn');
+
+  if(filterBtn&&filterPanel){
+    // Initialize species filter list
+    function initFilterList(){
+      const speciesOrder=['dog','cat','horse','rabbit','hamster','guinea_pig','chinchilla','ferret','hedgehog','sugar_glider','degu','bird','parakeet','parrot','reptile','tortoise','snake','lizard','amphibian','fish','exotic_other'];
+      const speciesNames={dog:'犬',cat:'猫',horse:'馬',rabbit:'うさぎ',hamster:'ハムスター',guinea_pig:'モルモット',chinchilla:'チンチラ',ferret:'フェレット',hedgehog:'ハリネズミ',sugar_glider:'フクロモモンガ',degu:'デグー',bird:'鳥',parakeet:'インコ',parrot:'オウム',reptile:'爬虫類',tortoise:'リクガメ',snake:'ヘビ',lizard:'トカゲ',amphibian:'両生類',fish:'魚',exotic_other:'その他エキゾチック'};
+
+      const html=speciesOrder.map(sp=>`
+        <div class="filter-checkbox ${selectedSpecies.has(sp)?'active':''}">
+          <input type="checkbox" id="filter-${sp}" value="${sp}" ${selectedSpecies.has(sp)?'checked':''}>
+          <label for="filter-${sp}">${SPECIES_ICONS[sp]||'🐾'} ${speciesNames[sp]}</label>
+        </div>
+      `).join('');
+      speciesFilterList.innerHTML=html;
+
+      // Attach listeners
+      document.querySelectorAll('#speciesFilterList input[type="checkbox"]').forEach(cb=>{
+        cb.addEventListener('change',function(){
+          if(this.checked){
+            selectedSpecies.add(this.value);
+          }else{
+            selectedSpecies.delete(this.value);
+          }
+          this.closest('.filter-checkbox').classList.toggle('active');
+          performFilteredSearch();
+        });
+      });
+    }
+
+    // Perform filtered search (with species and category support)
+    function performFilteredSearch(){
+      const query=searchInput.value.trim();
+      if(query.length<2)return;
+
+      const speciesParam=selectedSpecies.size>0?Array.from(selectedSpecies).join(','):'';
+      let url=`/api/diseases?q=${encodeURIComponent(query)}&limit=8`;
+      if(speciesParam)url+=`&species=${encodeURIComponent(speciesParam)}`;
+      if(typeof selectedCategory!=='undefined'&&selectedCategory)url+=`&category=${encodeURIComponent(selectedCategory)}`;
+
+      fetchWithTimeout(url)
+        .then(r=>{
+          if(!r.ok)throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
+        .then(data=>{
+          const diseases=data.diseases||[];
+          const queryKeywords=data.query?.toLowerCase().split(/\s+/).filter(k=>k)||[];
+
+          if(diseases.length===0){
+            searchResults.innerHTML='<div style="padding:12px;color:var(--gray-500);text-align:center">キーワード「'+escapeHtml(data.query)+'」に一致する疾患が見つかりませんでした</div>';
+          }else{
+            const html=diseases.map((d,idx)=>{
+              const urgencyColor={emergency:'var(--red)',high:'var(--orange)',moderate:'var(--gray-500)',low:'var(--gray-500)'}[d.urgency]||'var(--gray-500)';
+              return `
+              <a href="/diseases/${encodeURIComponent(d.species)}/${encodeURIComponent(d.slug||slugify(d.name))}"
+                 class="search-result-item"
+                 role="option"
+                 aria-selected="false"
+                 data-disease-id="${escapeHtml(d.id)}"
+                 title="${escapeHtml(d.name)}">
+                <div style="flex:1">
+                  <strong>${escapeHtml(d.name_ja||d.name)}</strong>
+                  ${d.name_ja?'<div style="font-size:.8rem;color:var(--gray-500)">'+escapeHtml(d.name)+'</div>':''}
+                </div>
+                <span class="search-result-species">${escapeHtml(d.species)}</span>
+                ${d.urgency?'<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+urgencyColor+';margin-left:8px" title="'+escapeHtml(d.urgency)+'"></span>':''}
+              </a>
+            `}).join('');
+            searchResults.innerHTML=html;
+          }
+          searchResults.style.display='block';
+        })
+        .catch(err=>{
+          console.warn('Filtered search error:',err);
+          searchResults.innerHTML='<div style="padding:12px;color:var(--red);text-align:center">エラーが発生しました</div>';
+          searchResults.style.display='block';
+        });
+    }
+
+    // Filter panel toggle
+    filterBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      if(filterPanel.style.display==='none'){
+        initFilterList();
+        filterPanel.style.display='block';
+      }else{
+        filterPanel.style.display='none';
+      }
+    });
+
+    filterCloseBtn.addEventListener('click',function(){
+      filterPanel.style.display='none';
+    });
+
+    filterResetBtn.addEventListener('click',function(){
+      selectedSpecies.clear();
+      document.querySelectorAll('#speciesFilterList input[type="checkbox"]').forEach(cb=>{
+        cb.checked=false;
+        cb.closest('.filter-checkbox').classList.remove('active');
+      });
+      performFilteredSearch();
+    });
+
+    // Close filter panel when clicking outside
+    document.addEventListener('click',function(e){
+      if(!e.target.closest('.global-search-container')){
+        filterPanel.style.display='none';
+      }
+    });
+  }
+
+  // Category filter functionality
+  let selectedCategory='';
+  const categoryFilterBtn=document.getElementById('categoryFilterBtn');
+  const categoryFilterPanel=document.getElementById('categoryFilterPanel');
+  const categoryFilterList=document.getElementById('categoryFilterList');
+  const categoryFilterCloseBtn=document.getElementById('categoryFilterCloseBtn');
+  const categoryFilterResetBtn=document.getElementById('categoryFilterResetBtn');
+
+  if(categoryFilterBtn&&categoryFilterPanel){
+    const categories=[
+      {id:'respiratory',name_ja:'呼吸器'},
+      {id:'digestive',name_ja:'消化器'},
+      {id:'neurological',name_ja:'神経'},
+      {id:'musculoskeletal',name_ja:'運動器'},
+      {id:'dermatological',name_ja:'皮膚'},
+      {id:'urinary',name_ja:'泌尿器'},
+      {id:'ophthalmological',name_ja:'眼'},
+      {id:'cardiovascular',name_ja:'循環器'},
+      {id:'endocrine',name_ja:'内分泌'},
+      {id:'behavioral',name_ja:'行動'},
+      {id:'reproductive',name_ja:'繁殖'},
+      {id:'general',name_ja:'全身'},
+      {id:'other',name_ja:'その他'}
+    ];
+
+    function initCategoryFilterList(){
+      const html=categories.map(cat=>`
+        <div class="filter-checkbox ${selectedCategory===cat.id?'active':''}">
+          <input type="radio" name="category-filter" id="filter-cat-${cat.id}" value="${cat.id}" ${selectedCategory===cat.id?'checked':''}>
+          <label for="filter-cat-${cat.id}">${escapeHtml(cat.name_ja)}</label>
+        </div>
+      `).join('');
+      categoryFilterList.innerHTML=html;
+
+      document.querySelectorAll('#categoryFilterList input[type="radio"]').forEach(rb=>{
+        rb.addEventListener('change',function(){
+          selectedCategory=this.value;
+          document.querySelectorAll('#categoryFilterList .filter-checkbox').forEach(el=>{
+            el.classList.remove('active');
+          });
+          this.closest('.filter-checkbox').classList.add('active');
+          performFilteredSearch();
+        });
+      });
+    }
+
+    categoryFilterBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      if(categoryFilterPanel.style.display==='none'){
+        initCategoryFilterList();
+        categoryFilterPanel.style.display='block';
+      }else{
+        categoryFilterPanel.style.display='none';
+      }
+    });
+
+    categoryFilterCloseBtn.addEventListener('click',function(){
+      categoryFilterPanel.style.display='none';
+    });
+
+    categoryFilterResetBtn.addEventListener('click',function(){
+      selectedCategory='';
+      document.querySelectorAll('#categoryFilterList input[type="radio"]').forEach(rb=>{
+        rb.checked=false;
+        rb.closest('.filter-checkbox').classList.remove('active');
+      });
+      performFilteredSearch();
+    });
+  }
+})();
 

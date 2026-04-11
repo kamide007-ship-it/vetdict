@@ -1338,6 +1338,15 @@ DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
         {"drug": "ketoconazole/itraconazole", "effect": "Increased cisapride levels; risk of cardiac arrhythmia (QT prolongation)", "effect_ja": "シサプリド濃度上昇。心不整脈リスク（QT延長）"},
         {"drug": "erythromycin", "effect": "Increased cisapride levels via CYP3A4 inhibition; arrhythmia risk", "effect_ja": "CYP3A4阻害でシサプリド濃度上昇。不整脈リスク"},
     ],
+    "mosapride": [
+        {"drug": "erythromycin", "effect": "Additive prokinetic effect; increased mosapride levels via CYP3A4 inhibition", "effect_ja": "消化管運動促進の相加作用。CYP3A4阻害でモサプリド濃度上昇"},
+        {"drug": "anticholinergics", "effect": "Antagonistic on GI motility; reduces mosapride efficacy", "effect_ja": "消化管運動に対して拮抗。モサプリドの効果低下"},
+    ],
+    "scopolamine_butylbromide": [
+        {"drug": "metoclopramide/cisapride/mosapride", "effect": "Antagonistic on GI motility; concurrent use reduces prokinetic efficacy", "effect_ja": "消化管運動に対して拮抗。併用により消化管運動促進薬の効果が低下"},
+        {"drug": "antihistamines/tricyclic antidepressants", "effect": "Additive anticholinergic effects (tachycardia, dry mouth, urinary retention)", "effect_ja": "抗コリン作用の相加（頻脈、口渇、尿閉）"},
+        {"drug": "potassium chloride (oral)", "effect": "Delayed GI transit may increase risk of GI mucosal ulceration from KCl tablets", "effect_ja": "消化管通過遅延により塩化カリウム錠剤による消化管粘膜潰瘍リスク増加"},
+    ],
     "amlodipine": [
         {"drug": "ACE inhibitors", "effect": "Additive hypotension (often used together therapeutically)", "effect_ja": "低血圧の相加作用（治療的に併用されることが多い）"},
         {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},

@@ -51,10 +51,14 @@
 .disease-page .disease-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .disease-page .meta-tag{padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600}
 .meta-species{background:#e8f5e9;color:#2e7d32}
+.meta-category{background:#e3f2fd;color:#1565c0}
 .meta-urgency-emergency{background:#ffebee;color:#c62828}
 .meta-urgency-high{background:#fff3e0;color:#e65100}
 .meta-urgency-moderate{background:#fff8e1;color:#f57f17}
 .meta-urgency-low{background:#e8f5e9;color:#2e7d32}
+.same-cat-nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.same-cat-link{display:inline-block;padding:5px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:6px;text-decoration:none;color:var(--gray-700);font-size:.82rem;transition:all .15s}
+.same-cat-link:hover{border-color:var(--green);background:#f0f7ff;color:var(--navy)}
 .disease-page section{margin-bottom:24px}
 .disease-page section h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--gray-200)}
 .disease-page section p{font-size:.9rem;line-height:1.8;color:var(--gray-700)}
@@ -81,6 +85,7 @@
 
   <div class="disease-meta">
     <span class="meta-tag meta-species">{{ species_ja }} ({{ species_en }})</span>
+    <span class="meta-tag meta-category">{{ disease_category_ja }}</span>
     {% if disease.urgency %}
     <span class="meta-tag meta-urgency-{{ disease.urgency }}">
       {% if disease.urgency == 'emergency' %}緊急{% elif disease.urgency == 'high' %}重度{% elif disease.urgency == 'moderate' %}中等度{% else %}軽度{% endif %}
@@ -272,6 +277,20 @@
       </li>
       {% endfor %}
     </ol>
+  </section>
+  {% endif %}
+
+  {% if same_category_diseases %}
+  <section style="margin-top:24px">
+    <h2>{{ disease_category_ja }}の他の疾患（{{ species_ja }}）</h2>
+    <div class="same-cat-nav">
+      {% for sd in same_category_diseases %}
+      <a href="/diseases/{{ species }}/{{ sd.slug }}" class="same-cat-link">{{ sd.name_ja or sd.name }}</a>
+      {% endfor %}
+    </div>
+    <div style="margin-top:8px">
+      <a href="/diseases/{{ species }}" style="font-size:.78rem;color:var(--green);text-decoration:none;font-weight:600">{{ species_ja }}の全疾患を見る →</a>
+    </div>
   </section>
   {% endif %}
 
