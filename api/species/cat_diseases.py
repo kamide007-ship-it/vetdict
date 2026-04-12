@@ -1083,20 +1083,42 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "increased_appetite", "lethargy", "plantigrade_stance"},
-        "description": "Diabetes Mellitus is a metabolic disorder affecting glucose regulation and energy metabolism.",
-        "description_ja": "インスリン欠乏または抵抗性による血糖調節障害です。",
+        "description": "Most feline DM (>90%) is Type 2 (insulin resistance + progressive β-cell dysfunction from islet amyloid deposition). Clinical signs: PU/PD, polyphagia, weight loss, plantigrade stance (diabetic neuropathy). Diabetic remission is achievable in 25-85% of newly diagnosed cats with tight glycemic control and low-carbohydrate diet — a unique feature of feline DM not seen in dogs.",
+        "description_ja": "猫の糖尿病は90%以上が2型（インスリン抵抗性 + 膵島アミロイド沈着による進行性β細胞機能低下）。症状: 多飲多尿、多食、体重減少、後肢の蹠行（糖尿病性ニューロパチー）。新規診断猫の25-85%で糖尿病寛解（remission）が達成可能 — これは犬にはない猫特有の特徴である。",
         "urgency": "high",
         "recommended_tests": ["blood_glucose", "fructosamine", "urinalysis", "blood_chemistry", "complete_blood_count"],
-        "causes": "Caused by impaired insulin production or insulin resistance, often associated with obesity, genetic predisposition, and dietary factors.",
-        "causes_ja": "猫におけるDiabetes Mellitusの原因: Diabetes Mellitusは猫に影響を及ぼす疾患である。Diabetes Mellitus",
+        "causes": "Most cases (>90%) are Type 2 with insulin resistance and progressive β-cell dysfunction from islet amyloid polypeptide (IAPP) deposition. Risk factors: obesity (3-5x risk), age (>10 years), male sex (2x risk), Burmese breed predisposition (genetic), physical inactivity, glucocorticoid administration, hypersomatotropism (acromegaly — 25% of feline DM cases per Niessen JFMS 2015), hyperthyroidism, chronic pancreatitis, hyperadrenocorticism.",
+        "causes_ja": "90%以上が2型糖尿病で、インスリン抵抗性と膵島アミロイドポリペプチド（IAPP）沈着による進行性β細胞機能低下が原因。リスク因子: 肥満（3-5倍リスク）、加齢（>10歳）、雄（2倍リスク）、バーミーズ種（遺伝的素因）、運動不足、グルココルチコイド投与、末端肥大症（hypersomatotropism — 猫糖尿病の25%、Niessen et al. JFMS 2015）、甲状腺機能亢進症、慢性膵炎、副腎皮質機能亢進症。",
         "pathophysiology": "Impaired insulin production or action leads to persistent hyperglycemia, causing osmotic diuresis, cellular energy deficit, and progressive damage to vascular endothelium, nerves, and organs.",
         "pathophysiology_ja": "猫の糖尿病は主に2型であり、インスリン抵抗性と膵島へのアミロイド（膵島アミロイドポリペプチド）沈着による進行性のβ細胞機能障害を特徴とする。慢性的な高血糖はグルコース毒性を引き起こし、β細胞機能とインスリン分泌をさらに障害する。持続的な高血糖は浸透圧利尿による多尿・多飲、多食にもかかわらず体重減少を引き起こし、未治療では糖尿病性ケトアシドーシスに進行する可能性がある。",
-        "treatment": "Insulin: Glargine (Lantus) 0.25-0.5 IU/kg SC q12h (preferred first-line in cats — highest remission rate) OR ProZinc (PZI) 0.2-0.5 IU/kg SC q12h. Low-carbohydrate, high-protein diet (essential for diabetic remission in cats). Blood glucose curves q1-2 weeks during stabilization (target nadir 80-150 mg/dL). Fructosamine q2-4 weeks (target <450 umol/L). Goal: diabetic remission (achievable in 25-85% of newly diagnosed cats with tight glycemic control + low-carb diet). Reduce insulin dose as remission approaches (watch for Somogyi effect). Monitor for diabetic ketoacidosis: lethargy, vomiting, acetone breath. Home glucose monitoring (ear prick) encouraged.",
-        "treatment_ja": "グラルギン（ランタス）またはプロタミン亜鉛インスリン（ProZinc）を1〜2 IU/匹、1日2回皮下投与で開始し、連続血糖曲線に基づき用量を調整する。高タンパク・低炭水化物食に切り替え、食後高血糖を軽減しインスリン感受性を改善する。肥満の是正に取り組み、早期の積極的な血糖管理により30〜50%の猫で達成可能な糖尿病寛解を目指してモニタリングを継続する。",
-        "prevention": "バランスの取れた食事と適切な運動による適正体重の維持、定期的な健康モニタリング、高糖質・高脂肪食の回避が予防に重要である。",
-        "prevention_ja": "バランスの取れた食事；健康的な体重管理；定期的な健康診断",
-        "prognosis": "適切な管理と飼い主の協力により予後は概ね良好。コントロール不良の糖尿病は重篤な合併症を引き起こす。",
-        "prognosis_ja": "糖尿病の予後: 多くの内分泌疾患は適切な薬物療法で長期管理可能。定期的なホルモン値モニタリングと用量調整が重要。",
+        "treatment": "Insulin: Glargine (Lantus) 0.25-0.5 IU/kg SC q12h (preferred first-line in cats — highest remission rate) OR ProZinc (PZI) 0.2-0.5 IU/kg SC q12h. Low-carbohydrate, high-protein diet (essential for diabetic remission in cats). Blood glucose curves q1-2 weeks during stabilization (target nadir 80-150 mg/dL). Fructosamine q2-4 weeks (target <450 umol/L). Goal: diabetic remission (achievable in 25-85% of newly diagnosed cats with tight glycemic control + low-carb diet). Reduce insulin dose as remission approaches (watch for Somogyi effect). Monitor for diabetic ketoacidosis: lethargy, vomiting, acetone breath. Home glucose monitoring (ear prick) encouraged. NEW: Bexagliflozin (Bexacat) and velagliflozin — SGLT2 inhibitors FDA-approved 2022-2024 for newly diagnosed non-ketotic diabetic cats.",
+        "treatment_ja": "【インスリン療法（第一選択）】 グラルギン（ランタス） 0.25-0.5 IU/kg SC q12h "
+                        "— 猫の第一選択（最高の寛解率、Roomp & Rand JFMS 2009）。"
+                        "代替: プロタミン亜鉛インスリン（ProZinc） 0.2-0.5 IU/kg SC q12h、"
+                        "デテミル（レベミル） 0.25-0.5 IU/kg SC q12h。"
+                        "【食事療法（寛解の鍵）】 高蛋白・低炭水化物食（炭水化物 <12% ME）— "
+                        "Hill's m/d、Royal Canin Diabetic、Purina DM等。"
+                        "Bennett JFMS 2006: 低炭水化物食 + インスリンで寛解率68%（高炭水化物食41%）。"
+                        "【新規SGLT2阻害薬（2022-2024 FDA承認）】 "
+                        "ベクサグリフロジン（ベクサキャット®、Bexacat） 15 mg/匹 PO q24h、"
+                        "ベラグリフロジン（センベルゴ®、Senvelgo） 1 mg/kg PO q24h — "
+                        "新規診断・非ケトーシス猫に対して経口投与で血糖管理可能（インスリン不要）。"
+                        "ただしDKAリスクあり — ケトン体監視必須、既存ケトン症例には禁忌。"
+                        "【血糖モニタリング】 12時間血糖曲線 q1-2週間（安定化期）、"
+                        "目標nadir 80-150 mg/dL。フルクトサミン q2-4週間（目標 <450 μmol/L）。"
+                        "FreeStyle Libre フラッシュグルコース測定（連続血糖測定）が普及 — "
+                        "Corradini et al. JVIM 2016で猫での精度・有用性を確認。"
+                        "在宅血糖測定（耳穿刺）を強く推奨。"
+                        "【寛解誘導戦略】 早期の積極的血糖管理（診断後6ヶ月以内）が寛解率を最大化。"
+                        "寛解の徴候（持続的低血糖傾向）でインスリンを段階的に減量・中止。"
+                        "Somogyi効果（インスリン誘発性高血糖）の鑑別に注意。"
+                        "【併発疾患の検索】 末端肥大症（IGF-1測定 — 猫DMの25%）、"
+                        "膵炎（fPLI）、甲状腺機能亢進症（T4）、副腎皮質機能亢進症の除外。"
+                        "【DKA移行の監視】 嗜眠、嘔吐、アセトン臭、尿ケトン陽性 → 緊急対応。",
+        "prevention": "Maintain ideal body weight (obesity is the strongest modifiable risk factor — 3-5x DM risk). Regular exercise. Avoid unnecessary glucocorticoid use. Annual senior wellness exams from age 7. Monitor predisposed breeds (Burmese).",
+        "prevention_ja": "適正体重の維持（肥満は最大の修正可能リスク因子で糖尿病リスクを3-5倍に増加）。定期的な運動。不必要なグルココルチコイド使用の回避。7歳以降の年次シニア健康診断。素因を持つ品種（バーミーズ）のモニタリング。",
+        "prognosis": "Good with appropriate management. Remission achievable in 25-85% of cats (highest with early diagnosis + glargine + low-carb diet, Roomp & Rand JFMS 2009). Median survival 17 months from diagnosis (Goossens et al. 1998); however, survival has improved significantly with modern management. Permanent diabetes manageable long-term with twice-daily insulin and dietary management.",
+        "prognosis_ja": "適切な管理下で予後良好。寛解率25-85%（早期診断 + グラルギン + 低炭水化物食で最大、Roomp & Rand JFMS 2009）。診断後の生存期間中央値17ヶ月（Goossens et al. 1998）— ただし現代の管理法により大幅に改善。永続的糖尿病でも1日2回インスリン + 食事管理で長期管理可能。",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
