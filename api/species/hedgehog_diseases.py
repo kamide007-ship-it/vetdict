@@ -741,20 +741,31 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Wobbly Hedgehog Syndrome (WHS)",
         "name_ja": "ふらつき症候群（WHS）",
         "symptoms": {"ataxia", "hindlimb_weakness", "muscle_wasting", "falling_over", "progressive_paralysis", "weight_loss"},
-        "description": "Wobbly Hedgehog Syndrome (WHS) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
-        "description_ja": "ハリネズミ特有の進行性脱髄疾患で、後肢の麻痺から全身へ進行します。遺伝性で治療法はありません。",
+        "description": "Progressive demyelinating neurological disease unique to African pygmy hedgehogs (Atelerix albiventris). Affects 1 in 10 captive hedgehogs in some studies. Onset typically 2-3 years (range 6 months to 7 years). Progressive ascending paralysis from hindlimbs, no cure exists. Suspected hereditary etiology with autosomal recessive inheritance pattern.",
+        "description_ja": "アフリカハリネズミ（Atelerix albiventris）に特有の進行性脱髄性神経疾患。一部の研究では飼育下ハリネズミの10匹に1匹が罹患。発症は通常2-3歳（範囲6ヶ月-7歳）。後肢から始まる進行性上行性麻痺、治療法なし。常染色体劣性遺伝が疑われる遺伝性疾患。",
         "urgency": "high",
         "recommended_tests": ["neurological_exam", "physical_exam", "histopathology_postmortem"],
-        "causes": "Caused by progressive deterioration of neurological tissue due to aging, chronic wear, or cumulative damage. Contributing factors include genetic predisposition, chronic inflammation, oxidative stress, and suboptimal husbandry conditions. In hedgehog, captive management practices and dietary factors may accelerate degenerative changes.",
-        "causes_ja": "加齢・慢性的摩耗・累積的損傷による神経系組織の進行性劣化が原因。遺伝的素因・慢性炎症・酸化ストレス・不適切な飼育条件が寄与。ハリネズミの飼育管理と食事因子が変性変化を加速しうる。",
-        "pathophysiology": "Progressive degenerative changes in neurological tissue of hedgehog involve gradual loss of cellular structure and function. Mechanisms include oxidative stress, chronic inflammation, cellular senescence, and impaired tissue repair. Age-related changes, cumulative environmental insults, and genetic predisposition contribute to disease progression. In hedgehog, degenerative conditions may be exacerbated by captive management practices and dietary factors.",
-        "pathophysiology_ja": "ハリネズミの神経系組織における進行性変性変化は、細胞構造と機能の漸進的喪失を伴う。酸化ストレス・慢性炎症・細胞老化・組織修復障害が関与する。加齢変化・累積的環境侵襲・遺伝的素因が疾患進行に寄与する。飼育管理と食事要因が変性疾患を悪化させうる。",
+        "causes": "Etiology remains unknown but strongly suspected to be hereditary (autosomal recessive). Histopathology shows spongiform vacuolation and demyelination of white matter throughout CNS, similar to human leukodystrophies. Differential diagnoses must be excluded: spinal cord trauma, neoplasia (lymphoma, glioma), nutritional deficiency, hypocalcemia, hepatic encephalopathy, vestibular disease, intervertebral disc disease, organ failure. Definitive diagnosis is post-mortem only via histopathology.",
+        "causes_ja": "病因は不明だが遺伝性（常染色体劣性）が強く疑われる。組織病理ではヒト白質ジストロフィーに類似した中枢神経系白質の海綿状空胞化と脱髄が観察される。鑑別診断（必須）: 脊髄外傷、腫瘍（リンパ腫、グリオーマ）、栄養不良、低Ca血症、肝性脳症、前庭疾患、椎間板疾患、臓器不全。確定診断は剖検時の組織病理のみで可能。",
+        "pathophysiology": "Progressive demyelination and spongiform vacuolation of white matter in the cerebellum, brainstem, and spinal cord. Histologically resembles human leukodystrophies (e.g., Krabbe disease). Loss of myelin sheaths impairs nerve conduction, causing progressive ascending motor dysfunction starting in pelvic limbs and advancing cranially. Eventually affects forelimbs, then leads to inability to roll into a defensive ball, anorexia, and death from respiratory or feeding failure. Disease course typically 6-19 months from symptom onset to death.",
+        "pathophysiology_ja": "小脳・脳幹・脊髄の白質における進行性脱髄と海綿状空胞化。組織学的にはヒト白質ジストロフィー（例: Krabbe病）に類似。ミエリン鞘の喪失により神経伝導が障害され、後肢から始まる進行性上行性運動障害が前肢へと進展。最終的に防御姿勢（ボール状に丸まる）が不能となり、食欲廃絶、呼吸不全または採食不能による死に至る。症状発症から死亡までの経過は通常6-19ヶ月。",
         "treatment": "No cure exists. Supportive care with pain management (meloxicam), vitamin E supplementation, physiotherapy (warm water exercise), assisted feeding, and environmental modifications. Euthanasia consideration when QOL deteriorates significantly.",
-        "treatment_ja": "WHSは根治療法なし。対症療法とQOL維持が中心。1. 疼痛管理: メロキシカム0.2mg/kg PO q24h。2. サプリメント: ビタミンE 10IU/kg/日、ビタミンB群。3. 理学療法: ぬるま湯での水中歩行運動（筋萎縮遅延）。4. 栄養: 高栄養食、シリンジ給餌（自力摂食困難時）、体重モニタリング。5. 環境: バリアフリー化、保温25-28℃、滑りにくい床面。6. 安楽死の検討: 自力で食事・飲水不能、持続的な疼痛、著しいQOL低下時。罹患個体は繁殖除外。",
-        "prevention": "No specific prevention. Affected animals should be excluded from breeding programs.",
-        "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "変性疾患の予後は進行速度と管理可能性に依存する。緩徐進行性の場合、適切な対症療法とQOL管理で長期生存が可能。急速進行性の場合は予後不良。定期的な再評価と治療調整が重要。",
+        "treatment_ja": "WHSは根治療法なし。対症療法とQOL維持が中心。"
+                        "(1) 疼痛管理: メロキシカム 0.2 mg/kg PO q24h（長期使用時は腎・肝機能監視）。"
+                        "(2) サプリメント: ビタミンE 10 IU/kg/日（神経保護目的）、ビタミンB群、L-カルニチン。"
+                        "(3) 理学療法: ぬるま湯（38-40℃、深さ2-3 cm）での水中歩行運動 5-10分 1日1-2回（筋萎縮遅延）。"
+                        "(4) 栄養管理: 高カロリー・高蛋白食、シリンジ給餌（Oxbow Critical Care、缶詰子猫食等）、"
+                        "体重モニタリング週1回、脱水補正（皮下輸液 LRS 10-20 mL/kg q12-24h）。"
+                        "(5) 環境改善: バリアフリー化（段差除去、低い食器・水入れ）、"
+                        "保温 25-28℃、滑りにくい床面（タオル、フリース）、"
+                        "排泄補助（清潔維持、皮膚ただれ予防）。"
+                        "(6) 安楽死の検討: 自力で食事・飲水不能、持続的疼痛、著しいQOL低下、"
+                        "防御姿勢不能、呼吸困難、褥瘡などQOLが回復不能なほど低下した場合。"
+                        "(7) 罹患個体は繁殖プログラムから完全除外（遺伝性のため）。",
+        "prevention": "No proven prevention exists (suspected hereditary degenerative disease). Strict exclusion of affected animals AND their parents/siblings from breeding programs is essential to reduce population prevalence. Pedigree tracking recommended.",
+        "prevention_ja": "確実な予防法はない（遺伝性進行性脱髄疾患と推定）。罹患個体およびその親・同腹仔を繁殖プログラムから完全除外することが集団内有病率の低減に必須。血統管理（ペディグリー追跡）を推奨。栄養・飼育管理改善でも本症は予防できないが、合併する栄養性ニューロパチーや変性疾患を鑑別するために適切な飼育管理は重要。",
+        "prognosis": "Uniformly fatal. Time from symptom onset to death is typically 6-19 months (median ~15 months). No treatment alters disease course. Quality of life deteriorates progressively as paralysis ascends. Early supportive care may extend survival but not change ultimate outcome.",
+        "prognosis_ja": "予後は一律に致死的。症状発症から死亡までの期間は通常6-19ヶ月（中央値約15ヶ月）。疾患経過を変える治療はない。麻痺が上行するにつれQOLは進行性に低下。早期の支持療法は生存期間を延長できるが最終転帰は変えられない。",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
