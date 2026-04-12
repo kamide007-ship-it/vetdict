@@ -564,20 +564,20 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Feline Pancreatitis",
         "name_ja": "猫の膵炎",
         "symptoms": {"vomiting", "appetite_loss", "lethargy", "abdominal_pain", "dehydration", "fever"},
-        "description": "Feline Pancreatitis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
-        "description_ja": "膵臓の炎症で、腹痛、嘔吐、全身症状を引き起こします。",
+        "description": "Inflammation of the pancreas, more often chronic and subclinical in cats than acute. Frequently part of feline triaditis (concurrent pancreatitis + cholangitis + IBD) due to shared anatomic biliary-pancreatic duct. Cardinal sign in cats is anorexia, NOT vomiting (unlike dogs). High prevalence (>40% of cats at necropsy show histologic pancreatitis).",
+        "description_ja": "膵臓の炎症で、猫では犬と異なり慢性・無症候性の経過が多い。胆管・膵管が共通開口する解剖により、しばしば「三臓器炎症（triaditis）」 — 膵炎・胆管炎・IBDの三炎合併として発生する。猫の主徴は食欲不振であり、嘔吐は犬ほど顕著でない。剖検では40%超の猫に組織学的膵炎が確認される高有病率疾患。",
         "urgency": "high",
         "recommended_tests": ["feline_pancreatic_lipase", "abdominal_ultrasound", "complete_blood_count", "blood_chemistry"],
-        "causes": "Caused by pancreatic inflammation, often triggered by dietary indiscretion, infection, or metabolic disorders.",
-        "causes_ja": "猫における猫の膵炎の原因: 膵臓の炎症で、腹痛、嘔吐、全身症状を引き起こします。",
-        "pathophysiology": "Premature intrapancreatic activation of trypsinogen triggers autodigestion of pancreatic parenchyma, releasing inflammatory mediators and causing local necrosis. In cats, pancreatitis frequently occurs concurrently with cholangitis and IBD (triaditis) due to the shared biliary-pancreatic duct anatomy. Severe cases progress to systemic inflammatory response, DIC, and multi-organ failure.",
-        "pathophysiology_ja": "猫の膵炎は猫における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
-        "treatment": "NPO only if actively vomiting; otherwise early enteral nutrition (critical — unlike dogs). IV fluid therapy (LRS) to correct dehydration and electrolytes. Pain management: buprenorphine 0.02 mg/kg buccal q8h (essential). Antiemetic: maropitant 1 mg/kg SC/IV q24h. Appetite stimulant: mirtazapine 1.88 mg/cat PO or transdermal q48h. Rule out triaditis (concurrent IBD + cholangitis). Monitor PLI/lipase. Cobalamin supplementation (250 mcg SC weekly x 6 weeks) if deficient. Hepatic lipidosis prevention through early nutritional support is critical. Avoid corticosteroids acutely unless concurrent IBD confirmed.",
-        "treatment_ja": "1. 輸液療法: LRS/生理食塩水で脱水補正（維持量＋喪失量）。重症例はショック量（45 mL/kg/h）から開始。2. 疼痛管理: ブプレノルフィン0.01-0.03 mg/kg IV/IM q6-8h（第一選択）。重症ではフェンタニルCRI 2-5 μg/kg/h。3. 制吐薬: マロピタント（セレニア）1 mg/kg SC q24h。オンダンセトロン0.1-0.5 mg/kg IV q8-12h。4. 早期栄養介入（猫の膵炎では重要）: 入院12-24時間後に少量の消化の良い食事。経鼻食道チューブまたは食道チューブの検討。絶食は肝リピドーシスのリスク。5. 三臓器炎（トライアダイティス）合併の確認: 胆管炎にはアンピシリン/スルバクタム30 mg/kg IV q8h、IBD疑いにはプレドニゾロン1-2 mg/kg PO q24h。6. 膵酵素・fPLI・腹部エコーでモニタリング。",
-        "prevention": "適切な食事管理、異物誤飲の防止、定期的な消化器系の健康チェック。",
-        "prevention_ja": "猫の膵炎の予防: 定期的な健康診断。適切な栄養管理。ストレスの軽減。清潔な飼育環境の維持。異常の早期発見・早期受診。",
-        "prognosis": "予後は疾患の重症度、治療介入の時期、治療への反応に依存する。早期診断と適切な治療により転帰が改善する。",
-        "prognosis_ja": "猫の膵炎の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
+        "causes": "Most cases are idiopathic. Identified causes/triggers: triaditis (IBD, cholangitis), trauma (HBC), toxins (organophosphates, zinc), infectious (Toxoplasma, FIP, FHV-1, FCV, liver flukes), drugs (azathioprine, sulfa drugs, asparaginase), hypercalcemia, ischemia (post-anesthesia, hypotension), pancreatic neoplasia. Unlike dogs, dietary indiscretion and obesity are NOT major risk factors in cats.",
+        "causes_ja": "多くは特発性。確認されている原因・誘因: 三臓器炎症（IBD、胆管炎合併）、外傷（交通事故）、毒物（有機リン、亜鉛）、感染症（トキソプラズマ、FIP、FHV-1、FCV、肝吸虫）、薬物（アザチオプリン、サルファ剤、L-アスパラギナーゼ）、高Ca血症、虚血（麻酔後・低血圧）、膵腫瘍。犬と異なり食事不摂生や肥満は主要リスク因子ではない。",
+        "pathophysiology": "Premature intrapancreatic activation of trypsinogen to trypsin triggers autodigestion of pancreatic parenchyma, releasing inflammatory mediators (TNF-α, IL-1, IL-6) and causing local necrosis. In cats, the shared biliary-pancreatic duct (cats have one common channel opening at the major duodenal papilla, unlike dogs) allows ascending infection/inflammation between the pancreas, biliary tree, and duodenum — explaining the high prevalence of triaditis. Chronic pancreatitis causes progressive fibrosis and may lead to exocrine pancreatic insufficiency (EPI) and/or diabetes mellitus from islet destruction. Severe acute cases progress to SIRS, DIC, hepatic lipidosis from anorexia, and multi-organ failure.",
+        "pathophysiology_ja": "膵管内でのトリプシノーゲンからトリプシンへの早期活性化により膵実質の自己消化が起こり、炎症性メディエーター（TNF-α、IL-1、IL-6）が放出され局所壊死を生じる。猫は犬と異なり、胆管と膵管が大十二指腸乳頭で共通開口するため、膵臓・胆道・十二指腸間の上行性炎症・感染が起こりやすく、三臓器炎症（triaditis）の高頻度発症の解剖学的基盤となる。慢性膵炎では進行性線維化により膵外分泌不全（EPI）や糖尿病（島細胞破壊）に進展しうる。重症急性例ではSIRS、DIC、食欲不振による肝リピドーシス、多臓器不全に進行する。",
+        "treatment": "【EARLY ENTERAL NUTRITION IS CRITICAL — DO NOT WITHHOLD FOOD】 Unlike dogs, NPO is contraindicated in cats due to hepatic lipidosis risk. (1) IV fluid therapy: LRS to correct dehydration (40-60 mL/kg/day, more if severe), maintain perfusion. (2) Pain management: buprenorphine 0.02-0.03 mg/kg buccal/IV q6-8h (essential — cats hide pain), or methadone 0.1-0.3 mg/kg IV q4h for severe cases. (3) Antiemetic: maropitant 1 mg/kg SC/IV q24h, ondansetron 0.5 mg/kg IV/PO q8-12h. (4) Early enteral nutrition within 24-48h: nasoesophageal or esophagostomy tube if not eating voluntarily. NO low-fat diet restriction (unlike dogs). (5) Appetite stimulant: mirtazapine 1.88 mg/cat PO/transdermal q48h, capromorelin 2 mg/kg PO q24h. (6) Workup for triaditis: hepatic enzymes, bile acids, cobalamin/folate, abdominal ultrasound. If cholangitis: ampicillin/sulbactam 30 mg/kg IV q8h x 4-6 weeks. If IBD confirmed: prednisolone 1-2 mg/kg PO q12h. (7) Cobalamin supplementation 250 mcg SC weekly x 6 weeks then monthly if deficient (common in chronic pancreatitis/IBD). (8) Avoid corticosteroids acutely unless concurrent IBD confirmed. Monitor fPLI, abdominal ultrasound.",
+        "treatment_ja": "【早期経腸栄養が重要 — 絶食は禁忌】 猫では犬と異なり、絶食（NPO）は肝リピドーシスを誘発するため禁忌。(1) 輸液療法: LRSで脱水補正（40-60 mL/kg/日、重症ではそれ以上）、組織灌流維持。(2) 疼痛管理: ブプレノルフィン 0.02-0.03 mg/kg buccal/IV q6-8h（猫は疼痛を隠すため必須）、重症ではメサドン 0.1-0.3 mg/kg IV q4h。(3) 制吐薬: マロピタント 1 mg/kg SC/IV q24h、オンダンセトロン 0.5 mg/kg IV/PO q8-12h。(4) 24-48時間以内の早期経腸栄養: 自発採食しない場合は経鼻食道または食道瘻チューブ留置。低脂肪食への制限は不要（犬と異なる点）。(5) 食欲刺激: ミルタザピン 1.88 mg/匹 PO/経皮（ミラタズ）q48h、カプロモレリン 2 mg/kg PO q24h。(6) 三臓器炎症（triaditis）の検索: 肝酵素、胆汁酸、コバラミン/葉酸、腹部超音波検査。胆管炎合併: アンピシリン/スルバクタム 30 mg/kg IV q8h × 4-6週間。IBD確定例: プレドニゾロン 1-2 mg/kg PO q12h。(7) コバラミン補充: 慢性膵炎・IBDで欠乏が一般的、250 μg SC 週1回 × 6週間 → その後月1回。(8) 急性期のコルチコステロイドはIBD合併確定時のみ使用。fPLI・腹部エコーで経過観察。",
+        "prevention": "Limited prevention available due to often idiopathic etiology. Manage concurrent IBD/cholangitis. Avoid known pancreatotoxic drugs. Routine senior wellness exams with fPLI screening for high-risk cats. Maintain normal body condition.",
+        "prevention_ja": "特発性の症例が多く確立された予防法は限定的。併発するIBD・胆管炎の管理。膵毒性薬物（有機リン、亜鉛、L-アスパラギナーゼ等）の回避。高リスク猫ではfPLIを含む年次シニア健康診断。適正体重の維持。",
+        "prognosis": "Variable. Mild chronic pancreatitis: good with management. Severe acute necrotizing pancreatitis: guarded to poor, mortality 20-40% (Bazelle Vet Surg 2017). Concurrent hepatic lipidosis or DIC worsens prognosis. Many cats develop chronic recurrent pancreatitis. Long-term complications include EPI, diabetes mellitus, and persistent triaditis.",
+        "prognosis_ja": "変動あり。軽度慢性膵炎は管理下で予後良好。重度急性壊死性膵炎は予後注意〜不良で死亡率20-40%（Bazelle Vet Surg 2017）。肝リピドーシスやDIC合併で予後悪化。慢性再発性膵炎に進展する例が多い。長期合併症: 膵外分泌不全（EPI）、糖尿病、持続的な三臓器炎症。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -840,20 +840,29 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Chronic Kidney Disease (CKD)",
         "name_ja": "慢性腎臓病",
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "appetite_loss", "vomiting", "dehydration", "poor_coat"},
-        "description": "Chronic Kidney Disease (CKD) is a renal condition affecting kidney function and fluid-electrolyte balance.",
-        "description_ja": "腎機能の進行性かつ不可逆的な低下で、高齢猫に非常に多い疾患です。",
+        "description": "Progressive, irreversible loss of nephron function affecting up to 30-40% of cats over 10 years and 50% over 15 years (Marino et al. JFMS 2014). Most common chronic disease in geriatric cats. Classified by IRIS staging 1-4 based on serum creatinine, SDMA, and substaging by proteinuria and blood pressure.",
+        "description_ja": "ネフロンの進行性かつ不可逆的な機能喪失。10歳超の猫の30-40%、15歳超では50%が罹患する高齢猫で最多の慢性疾患（Marino et al. JFMS 2014）。IRIS分類では血清クレアチニン、SDMA値で病期1-4に分類され、蛋白尿と血圧でサブステージが決定される。",
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "urinalysis", "urine_protein_creatinine_ratio", "abdominal_ultrasound", "blood_pressure_measurement"],
-        "causes": "",
-        "causes_ja": "",
-        "pathophysiology": "",
-        "pathophysiology_ja": "",
-        "treatment": "IV fluid therapy, dietary modification (renal diet), phosphate binders, anti-emetics, ACE inhibitors for proteinuria, erythropoietin for anemia, and regular monitoring of renal parameters.",
-        "treatment_ja": "輸液療法、食事療法（腎臓食）、リン吸着剤、制吐薬、ACE阻害薬、貧血に対するエリスロポエチン。腎パラメーターの定期的モニタリング。",
-        "prevention": "",
-        "prevention_ja": "",
-        "prognosis": "Guarded long-term prognosis. Disease progression can be slowed with appropriate management, but CKD is irreversible. Regular monitoring extends quality and duration of life.",
-        "prognosis_ja": "長期的には予後要注意〜不良。適切な管理で進行を遅延させることは可能だが、CKDは不可逆的。定期的モニタリングで生活の質を維持。",
+        "causes": "Multifactorial: chronic tubulointerstitial nephritis (most common in cats), glomerulonephropathy, polycystic kidney disease (PKD, especially Persian/Exotic), renal lymphoma, amyloidosis (Abyssinian, Siamese), chronic pyelonephritis, ureteral obstruction, hypertensive nephropathy, post-AKI, congenital renal dysplasia, FIV/FeLV-associated. Many cases are idiopathic with age-related nephron loss.",
+        "causes_ja": "多因子性: 慢性尿細管間質性腎炎（猫で最多）、糸球体腎症、多発性嚢胞腎（PKD、特にペルシャ・エキゾチック）、腎リンパ腫、アミロイドーシス（アビシニアン・シャム）、慢性腎盂腎炎、尿管閉塞、高血圧性腎症、AKI後遺症、先天性腎異形成、FIV/FeLV関連。多くは加齢性のネフロン喪失による特発性。",
+        "pathophysiology": "Progressive nephron loss leads to compensatory hyperfiltration in remaining nephrons, causing glomerular hypertension and sclerosis - a self-perpetuating cycle. Loss of >75% of nephrons causes clinical signs. Phosphate retention triggers FGF-23 elevation and secondary renal hyperparathyroidism, with vascular and soft-tissue calcification. Decreased erythropoietin causes non-regenerative anemia. Cats uniquely develop concentrated urine until late stages, masking early disease - hence importance of SDMA which rises with 25-40% nephron loss versus 75% for creatinine.",
+        "pathophysiology_ja": "ネフロンの進行性喪失により残存ネフロンの代償性過濾過が生じ、糸球体高血圧と硬化を引き起こす自己増殖性のサイクルとなる。ネフロン75%超喪失で臨床症状が出現。リン貯留がFGF-23上昇と二次性腎性上皮小体機能亢進症を誘発し、血管・軟部組織の石灰化を引き起こす。エリスロポエチン低下により非再生性貧血。猫は晩期まで尿濃縮能が保たれるため早期発見が困難 — SDMAはネフロン25-40%喪失で上昇し、クレアチニン（75%喪失で上昇）より早期診断に有用。",
+        "treatment": "【IRIS 2023 Staging-Based Therapy】 All stages: increase water intake (wet food, fountains), avoid nephrotoxic drugs. Stage 1-2: renal diet, monitor q3-6 months. Stage 2-3: renal diet (Hill's k/d, Royal Canin Renal, Purina NF — restricted phosphorus and protein, omega-3s, B vitamins). Phosphate binders if PO4 above target (Stage 2: <4.5, Stage 3: <5.0, Stage 4: <6.0 mg/dL). Telmisartan 1-2 mg/kg PO q24h FIRST-LINE for proteinuria UPC >0.4 (ISFM 2020, Sent et al. JVIM 2015) — superior to benazepril. Amlodipine 0.1-0.4 mg/kg PO q24h for hypertension (SBP >160 mmHg). Mirtazapine 1.88 mg/cat PO q48h or transdermal (Mirataz) for appetite. Maropitant 1 mg/kg SC q24h, ondansetron 0.5 mg/kg PO q12h for nausea. SQ fluids 100-150 mL LRS q24-72h at home for dehydration. Darbepoetin 0.45-1 μg/kg SC weekly for HCT <20% with iron supplementation. Calcitriol 1.5-3.5 ng/kg PO q24h for severe hyperparathyroidism. Potassium supplementation if hypokalemic (potassium gluconate 2-6 mEq/cat/day).",
+        "treatment_ja": "【IRIS 2023 病期別治療（ISFM 2020 Guidelines, ISFM Sparkes JFMS 2016 準拠）】 全病期: 飲水量増加（ウェットフード・循環式水飲み器）、腎毒性薬物の回避。Stage 1-2: 腎臓療法食、3-6ヶ月毎のモニタリング。Stage 2-3: 腎臓療法食（Hill's k/d、Royal Canin Renal、Purina NF — 低リン・低蛋白・ω-3脂肪酸添加・ビタミンB群強化）。"
+                        "【高P血症対策】 IRIS病期別Pターゲット: Stage 2: <4.5 mg/dL、Stage 3: <5.0 mg/dL、Stage 4: <6.0 mg/dL。リン吸着剤: 水酸化アルミニウム 30-90 mg/kg/日、炭酸ランタン 30 mg/kg/日 食事と共に投与。"
+                        "【蛋白尿対策（UPC>0.4で介入）】 テルミサルタン 1-2 mg/kg PO q24h を第一選択（ISFM 2020、Sent et al. JVIM 2015 — ベナゼプリルより優れた蛋白尿抑制）。"
+                        "【高血圧対策】 SBP >160 mmHg持続でアムロジピン 0.1-0.4 mg/kg PO q24h（猫の高血圧治療の第一選択、テルミサルタンも降圧効果あり）。"
+                        "【消化器症状】 制吐: マロピタント 1 mg/kg SC q24h、オンダンセトロン 0.5 mg/kg PO/IV q8-12h。胃粘膜保護: オメプラゾール 1 mg/kg PO q12-24h、ファモチジン 0.5-1 mg/kg PO q12-24h。"
+                        "【食欲不振】 ミルタザピン 1.88 mg/匹 PO q48h または経皮ミラタズ®（FDA承認）、カプロモレリン 2 mg/kg PO q24h。"
+                        "【脱水補正】 在宅皮下輸液 LRS 100-150 mL q24-72h（家族指導）。"
+                        "【腎性貧血】 HCT<20%でダルベポエチン 0.45-1 μg/kg SC 週1回、鉄補充必須（鉄欠乏で抗EPO抗体産生リスク）。"
+                        "【二次性上皮小体機能亢進症】 カルシトリオール 1.5-3.5 ng/kg PO q24h（夜間空腹時）。"
+                        "【低K血症対策】 グルコン酸カリウム 2-6 mEq/匹/日 PO（IRIS 3-4で頻発）。",
+        "prevention": "Annual senior wellness exams from age 7 with creatinine, SDMA, BUN, electrolytes, urinalysis (USG, UPC). Avoid nephrotoxic drugs (NSAIDs, aminoglycosides, lily ingestion). Maintain hydration (wet food, fresh water sources). Treat hypertension and proteinuria early. Annual blood pressure measurement in cats over 10 years.",
+        "prevention_ja": "7歳以降の年次シニア健康診断（クレアチニン、SDMA、BUN、電解質、尿検査 — USG・UPC含む）。腎毒性薬物の回避（NSAIDs、アミノグリコシド系、ユリ摂取）。水分摂取の維持（ウェットフード、新鮮な水）。高血圧と蛋白尿の早期治療。10歳超の猫は年次血圧測定を推奨。",
+        "prognosis": "IRIS Stage 1: median survival >3 years. Stage 2: median survival ~1100 days (3 years). Stage 3: median survival 350-700 days. Stage 4: median survival 35-100 days (Boyd et al. JVIM 2008, Syme et al. JVIM 2006). UPC >0.4 and SBP >160 mmHg are independent negative prognostic factors. Aggressive management can significantly extend survival.",
+        "prognosis_ja": "IRIS Stage 1: 中央生存期間>3年。Stage 2: 中央生存期間約1100日（3年）。Stage 3: 中央生存期間350-700日。Stage 4: 中央生存期間35-100日（Boyd et al. JVIM 2008、Syme et al. JVIM 2006）。UPC>0.4およびSBP>160 mmHgは独立した予後不良因子。積極的管理により生存期間の有意な延長が可能。",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
@@ -1074,20 +1083,42 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "increased_appetite", "lethargy", "plantigrade_stance"},
-        "description": "Diabetes Mellitus is a metabolic disorder affecting glucose regulation and energy metabolism.",
-        "description_ja": "インスリン欠乏または抵抗性による血糖調節障害です。",
+        "description": "Most feline DM (>90%) is Type 2 (insulin resistance + progressive β-cell dysfunction from islet amyloid deposition). Clinical signs: PU/PD, polyphagia, weight loss, plantigrade stance (diabetic neuropathy). Diabetic remission is achievable in 25-85% of newly diagnosed cats with tight glycemic control and low-carbohydrate diet — a unique feature of feline DM not seen in dogs.",
+        "description_ja": "猫の糖尿病は90%以上が2型（インスリン抵抗性 + 膵島アミロイド沈着による進行性β細胞機能低下）。症状: 多飲多尿、多食、体重減少、後肢の蹠行（糖尿病性ニューロパチー）。新規診断猫の25-85%で糖尿病寛解（remission）が達成可能 — これは犬にはない猫特有の特徴である。",
         "urgency": "high",
         "recommended_tests": ["blood_glucose", "fructosamine", "urinalysis", "blood_chemistry", "complete_blood_count"],
-        "causes": "Caused by impaired insulin production or insulin resistance, often associated with obesity, genetic predisposition, and dietary factors.",
-        "causes_ja": "猫におけるDiabetes Mellitusの原因: Diabetes Mellitusは猫に影響を及ぼす疾患である。Diabetes Mellitus",
+        "causes": "Most cases (>90%) are Type 2 with insulin resistance and progressive β-cell dysfunction from islet amyloid polypeptide (IAPP) deposition. Risk factors: obesity (3-5x risk), age (>10 years), male sex (2x risk), Burmese breed predisposition (genetic), physical inactivity, glucocorticoid administration, hypersomatotropism (acromegaly — 25% of feline DM cases per Niessen JFMS 2015), hyperthyroidism, chronic pancreatitis, hyperadrenocorticism.",
+        "causes_ja": "90%以上が2型糖尿病で、インスリン抵抗性と膵島アミロイドポリペプチド（IAPP）沈着による進行性β細胞機能低下が原因。リスク因子: 肥満（3-5倍リスク）、加齢（>10歳）、雄（2倍リスク）、バーミーズ種（遺伝的素因）、運動不足、グルココルチコイド投与、末端肥大症（hypersomatotropism — 猫糖尿病の25%、Niessen et al. JFMS 2015）、甲状腺機能亢進症、慢性膵炎、副腎皮質機能亢進症。",
         "pathophysiology": "Impaired insulin production or action leads to persistent hyperglycemia, causing osmotic diuresis, cellular energy deficit, and progressive damage to vascular endothelium, nerves, and organs.",
         "pathophysiology_ja": "猫の糖尿病は主に2型であり、インスリン抵抗性と膵島へのアミロイド（膵島アミロイドポリペプチド）沈着による進行性のβ細胞機能障害を特徴とする。慢性的な高血糖はグルコース毒性を引き起こし、β細胞機能とインスリン分泌をさらに障害する。持続的な高血糖は浸透圧利尿による多尿・多飲、多食にもかかわらず体重減少を引き起こし、未治療では糖尿病性ケトアシドーシスに進行する可能性がある。",
-        "treatment": "Insulin: Glargine (Lantus) 0.25-0.5 IU/kg SC q12h (preferred first-line in cats — highest remission rate) OR ProZinc (PZI) 0.2-0.5 IU/kg SC q12h. Low-carbohydrate, high-protein diet (essential for diabetic remission in cats). Blood glucose curves q1-2 weeks during stabilization (target nadir 80-150 mg/dL). Fructosamine q2-4 weeks (target <450 umol/L). Goal: diabetic remission (achievable in 25-85% of newly diagnosed cats with tight glycemic control + low-carb diet). Reduce insulin dose as remission approaches (watch for Somogyi effect). Monitor for diabetic ketoacidosis: lethargy, vomiting, acetone breath. Home glucose monitoring (ear prick) encouraged.",
-        "treatment_ja": "グラルギン（ランタス）またはプロタミン亜鉛インスリン（ProZinc）を1〜2 IU/匹、1日2回皮下投与で開始し、連続血糖曲線に基づき用量を調整する。高タンパク・低炭水化物食に切り替え、食後高血糖を軽減しインスリン感受性を改善する。肥満の是正に取り組み、早期の積極的な血糖管理により30〜50%の猫で達成可能な糖尿病寛解を目指してモニタリングを継続する。",
-        "prevention": "バランスの取れた食事と適切な運動による適正体重の維持、定期的な健康モニタリング、高糖質・高脂肪食の回避が予防に重要である。",
-        "prevention_ja": "バランスの取れた食事；健康的な体重管理；定期的な健康診断",
-        "prognosis": "適切な管理と飼い主の協力により予後は概ね良好。コントロール不良の糖尿病は重篤な合併症を引き起こす。",
-        "prognosis_ja": "糖尿病の予後: 多くの内分泌疾患は適切な薬物療法で長期管理可能。定期的なホルモン値モニタリングと用量調整が重要。",
+        "treatment": "Insulin: Glargine (Lantus) 0.25-0.5 IU/kg SC q12h (preferred first-line in cats — highest remission rate) OR ProZinc (PZI) 0.2-0.5 IU/kg SC q12h. Low-carbohydrate, high-protein diet (essential for diabetic remission in cats). Blood glucose curves q1-2 weeks during stabilization (target nadir 80-150 mg/dL). Fructosamine q2-4 weeks (target <450 umol/L). Goal: diabetic remission (achievable in 25-85% of newly diagnosed cats with tight glycemic control + low-carb diet). Reduce insulin dose as remission approaches (watch for Somogyi effect). Monitor for diabetic ketoacidosis: lethargy, vomiting, acetone breath. Home glucose monitoring (ear prick) encouraged. NEW: Bexagliflozin (Bexacat) and velagliflozin — SGLT2 inhibitors FDA-approved 2022-2024 for newly diagnosed non-ketotic diabetic cats.",
+        "treatment_ja": "【インスリン療法（第一選択）】 グラルギン（ランタス） 0.25-0.5 IU/kg SC q12h "
+                        "— 猫の第一選択（最高の寛解率、Roomp & Rand JFMS 2009）。"
+                        "代替: プロタミン亜鉛インスリン（ProZinc） 0.2-0.5 IU/kg SC q12h、"
+                        "デテミル（レベミル） 0.25-0.5 IU/kg SC q12h。"
+                        "【食事療法（寛解の鍵）】 高蛋白・低炭水化物食（炭水化物 <12% ME）— "
+                        "Hill's m/d、Royal Canin Diabetic、Purina DM等。"
+                        "Bennett JFMS 2006: 低炭水化物食 + インスリンで寛解率68%（高炭水化物食41%）。"
+                        "【新規SGLT2阻害薬（2022-2024 FDA承認）】 "
+                        "ベクサグリフロジン（ベクサキャット®、Bexacat） 15 mg/匹 PO q24h、"
+                        "ベラグリフロジン（センベルゴ®、Senvelgo） 1 mg/kg PO q24h — "
+                        "新規診断・非ケトーシス猫に対して経口投与で血糖管理可能（インスリン不要）。"
+                        "ただしDKAリスクあり — ケトン体監視必須、既存ケトン症例には禁忌。"
+                        "【血糖モニタリング】 12時間血糖曲線 q1-2週間（安定化期）、"
+                        "目標nadir 80-150 mg/dL。フルクトサミン q2-4週間（目標 <450 μmol/L）。"
+                        "FreeStyle Libre フラッシュグルコース測定（連続血糖測定）が普及 — "
+                        "Corradini et al. JVIM 2016で猫での精度・有用性を確認。"
+                        "在宅血糖測定（耳穿刺）を強く推奨。"
+                        "【寛解誘導戦略】 早期の積極的血糖管理（診断後6ヶ月以内）が寛解率を最大化。"
+                        "寛解の徴候（持続的低血糖傾向）でインスリンを段階的に減量・中止。"
+                        "Somogyi効果（インスリン誘発性高血糖）の鑑別に注意。"
+                        "【併発疾患の検索】 末端肥大症（IGF-1測定 — 猫DMの25%）、"
+                        "膵炎（fPLI）、甲状腺機能亢進症（T4）、副腎皮質機能亢進症の除外。"
+                        "【DKA移行の監視】 嗜眠、嘔吐、アセトン臭、尿ケトン陽性 → 緊急対応。",
+        "prevention": "Maintain ideal body weight (obesity is the strongest modifiable risk factor — 3-5x DM risk). Regular exercise. Avoid unnecessary glucocorticoid use. Annual senior wellness exams from age 7. Monitor predisposed breeds (Burmese).",
+        "prevention_ja": "適正体重の維持（肥満は最大の修正可能リスク因子で糖尿病リスクを3-5倍に増加）。定期的な運動。不必要なグルココルチコイド使用の回避。7歳以降の年次シニア健康診断。素因を持つ品種（バーミーズ）のモニタリング。",
+        "prognosis": "Good with appropriate management. Remission achievable in 25-85% of cats (highest with early diagnosis + glargine + low-carb diet, Roomp & Rand JFMS 2009). Median survival 17 months from diagnosis (Goossens et al. 1998); however, survival has improved significantly with modern management. Permanent diabetes manageable long-term with twice-daily insulin and dietary management.",
+        "prognosis_ja": "適切な管理下で予後良好。寛解率25-85%（早期診断 + グラルギン + 低炭水化物食で最大、Roomp & Rand JFMS 2009）。診断後の生存期間中央値17ヶ月（Goossens et al. 1998）— ただし現代の管理法により大幅に改善。永続的糖尿病でも1日2回インスリン + 食事管理で長期管理可能。",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },

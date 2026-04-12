@@ -4983,20 +4983,33 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Sour Crop (Fermentative Ingluvitis)",
         "name_ja": "酸敗嗉嚢（発酵性嗉嚢炎）",
         "symptoms": {"appetite_loss", "crop_distension", "lethargy", "regurgitation", "sour_crop_odor"},
-        "description": "Sour Crop (Fermentative Ingluvitis) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
-        "description_ja": "嗉嚢内の細菌・酵母発酵により悪臭を伴う膨満と吐き戻しを生じる。",
+        "description": "Stasis and fermentation of crop contents by overgrowth of bacteria (E. coli, Clostridium) and yeast (Candida albicans), causing distension, malodor, and regurgitation. Common in hand-fed neonates, debilitated birds, and birds with underlying disease causing crop hypomotility.",
+        "description_ja": "嗉嚢内容物のうっ滞と細菌（大腸菌、クロストリジウム）・酵母（カンジダ）異常増殖による発酵で、嗉嚢の膨満、悪臭、吐き戻しを生じる。挿し餌中の雛、衰弱鳥、嗉嚢の運動障害をきたす基礎疾患を持つ鳥に多い。",
         "urgency": "moderate",
         "recommended_tests": ["crop_cytology", "gram_stain", "crop_culture"],
-        "causes": "Multifactorial etiology associated with Sour Crop (Fermentative Ingluvitis); may involve genetic predisposition, environmental factors, infectious agents, and/or metabolic dysfunction.",
-        "causes_ja": "鳥における酸敗嗉嚢（発酵性嗉嚢炎）の原因: 嗉嚢内の細菌・酵母発酵により悪臭を伴う膨満と吐き戻しを生じる。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "酸敗嗉嚢（発酵性嗉嚢炎）は鳥における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "鳥における酸敗嗉嚢（発酵性嗉嚢炎）の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "酸敗嗉嚢（発酵性嗉嚢炎）の予防には適切な衛生管理・消毒、利用可能なワクチン接種、創傷の迅速な処置、ストレス軽減、適切な換気、感染動物の隔離が含まれる。",
-        "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
-        "prognosis_ja": "酸敗嗉嚢（発酵性嗉嚢炎）の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
+        "causes": "Crop stasis from multiple causes: hand-feeding cold formula or improper temperature/consistency, overfeeding, hypothermia (chilled chicks), systemic disease (PDD, heavy metal toxicosis, septicemia), foreign body, crop burn, neoplasia. Allows bacterial overgrowth (E. coli, Clostridium) and yeast (Candida albicans) fermentation. Risk factors: very young or weak birds, recent antibiotic therapy (predisposes to candidiasis), stress, immunosuppression.",
+        "causes_ja": "嗉嚢のうっ滞が原因。誘因: 冷たいフォーミュラ・不適切な温度や粘度での挿し餌、過剰給餌、低体温（冷えた雛）、全身性疾患（PDD、重金属中毒、敗血症）、異物、嗉嚢熱傷、腫瘍。これにより細菌（大腸菌、クロストリジウム）と酵母（カンジダ）の異常増殖と発酵が起こる。リスク因子: 若齢・衰弱鳥、近年の抗生物質投与（カンジダ症を誘発）、ストレス、免疫抑制。",
+        "pathophysiology": "Crop motility dysfunction allows ingesta to stagnate, creating an anaerobic, warm environment ideal for bacterial and yeast overgrowth. Fermentation produces gas (distension), organic acids (malodor), and irritating byproducts that further impair crop function. Yeast (especially Candida albicans) is commonly involved as an opportunist after antibiotic disruption of normal flora. Untreated, leads to ingluvitis, esophagitis, and potentially aspiration pneumonia from regurgitation.",
+        "pathophysiology_ja": "嗉嚢の運動機能障害により食物が停滞し、嫌気性かつ温かい細菌・酵母増殖に適した環境が形成される。発酵によりガス産生（嗉嚢膨満）、有機酸産生（悪臭）、炎症性副産物が生じ、嗉嚢機能をさらに障害する。酵母（特にCandida albicans）は抗生物質による正常細菌叢の破綻後に日和見的に増殖する。未治療では嗉嚢炎、食道炎、吐き戻しによる誤嚥性肺炎に至る。",
+        "treatment": "(1) Crop emptying via crop wash/lavage with warm saline (gentle, slow). (2) Empty crop fully before re-feeding. (3) Identify and treat underlying cause (warm hypothermic chicks to 38-39C, correct feeding technique). (4) Antifungal: nystatin 300,000 IU/kg PO q12h x 7-14 days (Candida) — first choice for sour crop. (5) Antibiotic if bacterial: amoxicillin/clavulanate 125 mg/kg PO q12h, or based on culture. (6) Supportive: warm fluids subcutaneously, easily digestible diet (slow refeeding), probiotics. (7) Avoid corticosteroids. (8) Monitor for aspiration pneumonia. (9) For chronic recurrent cases: assess for PDD (pp7 immunohistochemistry), heavy metal toxicosis (zinc/lead), neoplasia.",
+        "treatment_ja": "(1) 嗉嚢洗浄: 温生理食塩水（38-39℃）でゆっくり洗浄、内容物を完全に排出。"
+                        "(2) 完全に空にしてから再給餌を再開。"
+                        "(3) 基礎原因の特定と対処: 低体温の雛を38-39℃に保温、給餌技術の修正。"
+                        "(4) 抗真菌薬: ナイスタチン 300,000 IU/kg PO q12h × 7-14日（カンジダ） — "
+                        "酸敗嗉嚢の第一選択。重症例にはフルコナゾール 5-10 mg/kg PO q24h。"
+                        "(5) 細菌性が示唆されればアモキシシリン/クラブラン酸 125 mg/kg PO q12h、"
+                        "または培養感受性試験に基づく抗生物質。"
+                        "(6) 支持療法: 温輸液（皮下）、消化の良い食事（少量から段階的再給餌）、"
+                        "プロバイオティクス（Lactobacillus等）。"
+                        "(7) コルチコステロイドは避ける（カンジダ増悪）。"
+                        "(8) 誤嚥性肺炎の監視。"
+                        "(9) 慢性再発例の精査: PDD（pp7免疫組織化学）、重金属中毒（亜鉛・鉛測定）、腫瘍の鑑別。"
+                        "(10) 嗉嚢マッサージ（軽い圧迫）— 排出促進に有用な場合あり。"
+                        "(11) Carpenter Exotic Animal Formulary 6th ed 推奨用量に準拠。",
+        "prevention": "Use proper hand-feeding technique: formula at 38-39°C, appropriate consistency, allow crop to empty between feedings. Maintain ambient temperature for chicks (28-32°C for weaned birds, higher for unfeathered chicks). Avoid prolonged or unnecessary antibiotic use. Hygiene of feeding implements. Identify and address underlying systemic disease promptly.",
+        "prevention_ja": "適切な挿し餌技術: フォーミュラ温度38-39℃、適切な粘度、給餌間で嗉嚢を空にする。雛の環境温度維持（離乳後 28-32℃、無羽の雛はより高温）。長期・不必要な抗生物質使用を避ける。給餌器具の衛生管理。基礎疾患の早期検索と治療。",
+        "prognosis": "Good with prompt treatment and addressing underlying cause. Recurrence is common if predisposing factors are not corrected. Severe or chronic cases may develop ingluvitis, fibrosis, or aspiration pneumonia. Untreated cases (especially in chicks) can be fatal within 24-48 hours.",
+        "prognosis_ja": "迅速な治療と基礎原因の対処で予後良好。素因が改善されないと再発が一般的。重度・慢性例では嗉嚢炎、線維化、誤嚥性肺炎を合併する可能性。未治療例（特に雛）では24-48時間以内に致死的となる。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
