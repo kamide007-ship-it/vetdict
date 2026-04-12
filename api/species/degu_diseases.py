@@ -25,20 +25,30 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
         "symptoms": {"polyuria", "polydipsia", "weight_loss", "lethargy", "hyperglycemia"},
-        "description": "Diabetes Mellitus is a metabolic disorder affecting glucose regulation and energy metabolism.",
-        "description_ja": "デグーは糖を代謝できず、糖尿病は非常に多い。多飲多尿や体重減少を引き起こす。",
+        "description": "Degus have a unique metabolic vulnerability to dietary sugars due to absent or low pancreatic glucokinase activity. Dietary sugar (fruit, treats, raisins) rapidly causes diabetes — a condition essentially universal in degus fed inappropriate diets. Cataracts (often bilateral) are the most common and earliest visible complication, frequently preceding clinical hyperglycemia diagnosis.",
+        "description_ja": "デグーは膵β細胞のグルコキナーゼ活性が低いか欠如しているため、食事中糖質に対して特異な代謝的脆弱性を持つ。食事性糖質（果物、おやつ、レーズン等）により糖尿病が急速に発症 — 不適切な食事を与えられたデグーではほぼ普遍的に発症する疾患。白内障（しばしば両側性）が最も多く最も早期に視認できる合併症で、臨床的高血糖の診断より先に発見されることが多い。",
         "urgency": "high",
         "recommended_tests": ["blood_glucose", "urinalysis", "fructosamine"],
-        "causes": "Degus are unable to metabolize sugars, making them extremely prone to diabetes. High-sugar or high-carbohydrate diets, obesity, sedentary lifestyle, and genetic predisposition are the primary causes.",
-        "causes_ja": "デグーにおける糖尿病の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
-        "pathophysiology": "Impaired insulin production or action leads to persistent hyperglycemia, causing osmotic diuresis, cellular energy deficit, and progressive damage to vascular endothelium, nerves, and organs.",
-        "pathophysiology_ja": "糖尿病はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
-        "treatment": "Insulin therapy with dose titration based on glucose curves, dietary management with consistent high-fiber meals, regular blood glucose monitoring, and management of concurrent conditions.",
-        "treatment_ja": "デグーにおける糖尿病の治療は基礎となるホルモン・代謝異常を標的とする。ホルモン補充療法または抑制療法により生理的バランスを回復する。食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、臓器機能マーカーの定期的モニタリングにより用量調整を行う。二次的合併症（臓器障害、感染）の併行管理が不可欠である。長期または生涯にわたる治療が必要な場合がある。",
-        "prevention": "Prevention includes maintaining appropriate body weight through balanced diet and adequate exercise, regular health monitoring, and avoiding high-sugar/high-fat foods.",
-        "prevention_ja": "糖尿病の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
-        "prognosis": "Fair to good with dedicated owner compliance and proper insulin management. Uncontrolled diabetes leads to serious complications including ketoacidosis.",
-        "prognosis_ja": "糖尿病の予後: 多くの内分泌疾患は適切な薬物療法で長期管理可能。定期的なホルモン値モニタリングと用量調整が重要。",
+        "causes": "Degus have absent or low pancreatic β-cell glucokinase activity, making them unable to properly metabolize dietary sugars. Any high-sugar food (fruits, raisins, commercial treats, sweet vegetables, honey, sugar-containing pellets) rapidly induces hyperglycemia and progressive β-cell exhaustion. Risk factors: inappropriate diet (most common — pet stores often sell sugary food), obesity, lack of exercise, age >2 years.",
+        "causes_ja": "デグーは膵β細胞のグルコキナーゼ活性が欠如または低下しているため、食事中の糖質を適切に代謝できない。高糖質食（果物、レーズン、市販おやつ、甘い野菜、蜂蜜、糖含有ペレット）はいずれも急速に高血糖と進行性のβ細胞疲弊を引き起こす。リスク因子: 不適切な食事（最多 — ペットショップでは糖含有食品を販売することが多い）、肥満、運動不足、2歳以上。",
+        "pathophysiology": "Genetically determined glucokinase deficiency in pancreatic β-cells impairs glucose-stimulated insulin secretion. When fed dietary sugars (fructose, sucrose, glucose), degus cannot mount an adequate insulin response, leading to persistent hyperglycemia, glycation of lens proteins (cataracts develop within weeks-months), osmotic diuresis (PU/PD), weight loss despite polyphagia, and eventually β-cell failure. Diabetic neuropathy and progressive renal damage also occur. The disease in degus is essentially Type 2 with both insulin resistance and impaired secretion.",
+        "pathophysiology_ja": "遺伝的に決定された膵β細胞のグルコキナーゼ欠損によりブドウ糖刺激インスリン分泌が障害される。食事性糖質（果糖、ショ糖、ブドウ糖）を給与されると、デグーは適切なインスリン反応を起こせず、持続的高血糖、水晶体蛋白の糖化（白内障が数週間〜数ヶ月で発生）、浸透圧利尿（多飲多尿）、多食にもかかわらず体重減少、最終的にβ細胞不全に至る。糖尿病性ニューロパチーや進行性の腎障害も発生する。デグーの糖尿病は本質的に2型であり、インスリン抵抗性とインスリン分泌障害の両方を呈する。",
+        "treatment": "Diabetes in degus is largely preventable but difficult to reverse. Strict dietary modification: ZERO sugar (no fruit, no treats, no raisins, no carrots), grass hay (timothy, orchard grass) ad libitum, sugar-free degu pellets, occasional dark leafy greens. Insulin therapy is rarely effective in degus due to the underlying genetic defect — focus on dietary correction. Cataract surgery may be considered for visual rehabilitation. Monitor weight, glucose, and screen for complications.",
+        "treatment_ja": "デグーの糖尿病は予防可能であるが治癒は困難。"
+                        "(1) 厳格な食事制限（治療の根幹）: 完全にゼロ糖 — 果物・おやつ・レーズン・人参を含む全ての糖含有食品を排除。"
+                        "牧草（チモシー、オーチャードグラス）の自由給餌、無糖デグー用ペレット、時々濃い葉物野菜（ロメインレタス、タンポポの葉等）。"
+                        "(2) インスリン療法: 遺伝的なグルコキナーゼ欠損が基礎にあるため、デグーではインスリン投与の効果は限定的。"
+                        "重症例で試行可能だが、用量調整が難しく低血糖リスクあり。レギュラーまたは長時間作用型インスリン 0.1-1 IU/匹 SC を試行的に投与。"
+                        "(3) 白内障管理: 視覚回復には眼科医による白内障手術を検討（早期段階では有効）。"
+                        "進行性白内障による失明への適応支援（環境整備）。"
+                        "(4) 体重・血糖モニタリング: 月1回以上の体重測定、フルクトサミンによる長期血糖管理評価。"
+                        "(5) 合併症スクリーニング: 腎機能（BUN/Cre）、糖尿病性ニューロパチーの兆候。"
+                        "(6) 他のデグーへの教育: 同居デグーが感染症ではないが食事を共有する場合は全頭に同じ食事制限を適用。"
+                        "(7) 飼い主教育: ペットショップ販売の市販フードにも糖類が含まれることが多いため成分表確認を指導。",
+        "prevention": "Diabetes in degus is HIGHLY PREVENTABLE through proper diet. NEVER feed fruit, raisins, sweet vegetables, sugar-containing treats, or sweet pellets. Provide unlimited hay (timothy, orchard grass), small amounts of degu-specific sugar-free pellets, and dark leafy greens. Ensure adequate exercise. Annual vet exam with eye examination from 1 year of age (early cataract = early DM).",
+        "prevention_ja": "デグーの糖尿病は適切な食事により高度に予防可能。**絶対に与えてはいけない**: 果物、レーズン、甘い野菜（人参、サツマイモ等）、糖含有おやつ、甘いペレット。**与えるべき**: 牧草の無制限給餌（チモシー、オーチャードグラス）、デグー専用無糖ペレットを少量、濃い葉物野菜。十分な運動環境（回し車、広いケージ）。1歳以降の年次健康診断（眼検査含む — 早期白内障 = 早期糖尿病）。飼い主教育が最重要 — ペットショップ販売の市販フード成分表を必ず確認。",
+        "prognosis": "Variable. Early diagnosis with strict dietary correction can stabilize disease but cataracts already present are usually irreversible without surgery. Reversal of established diabetes is uncommon due to underlying genetic defect. Untreated diabetes leads to blindness, neuropathy, weight loss, and reduced lifespan. Median survival significantly shortened compared to non-diabetic degus.",
+        "prognosis_ja": "予後はさまざま。早期診断と厳格な食事制限で疾患の安定化は可能だが、既に発生した白内障は手術なしでは通常不可逆。基礎にある遺伝的欠損のため確立した糖尿病の寛解は稀。未治療では失明、ニューロパチー、体重減少、寿命短縮に至る。糖尿病デグーの生存期間中央値は非罹患デグーと比較して有意に短い。",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },

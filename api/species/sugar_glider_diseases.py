@@ -26,19 +26,28 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Metabolic Bone Disease (MBD)",
         "name_ja": "代謝性骨疾患（MBD）",
         "symptoms": {"weakness", "bone_deformity", "seizures", "hind_leg_paralysis", "fractures"},
-        "description": "Metabolic Bone Disease (MBD) is a metabolic disorder caused by calcium-phosphorus imbalance and/or vitamin D3 deficiency, leading to progressive skeletal demineralization, pathological fractures, and deformities.",
-        "description_ja": "カルシウム・リン比の不均衡やビタミンD3欠乏により骨が脆弱化する非常に多い疾患。",
+        "description": "Most common nutritional disease in captive sugar gliders. Calcium-phosphorus imbalance from inadequate diet (high-insect, low-calcium diets are the primary cause) leads to nutritional secondary hyperparathyroidism, skeletal demineralization, pathological fractures, and life-threatening hypocalcemic seizures. Often presents as acute paralysis or seizures in apparently healthy animals.",
+        "description_ja": "飼育下フクロモモンガで最も多い栄養性疾患。不適切な食事（昆虫主体・低カルシウム食）によるCa/P比の不均衡から栄養性二次性上皮小体機能亢進症が発生し、骨脱灰、病的骨折、生命を脅かす低カルシウム血症性発作を引き起こす。一見健康な個体に急性麻痺や発作として発症することが多い。",
         "urgency": "high",
         "recommended_tests": ["blood_calcium", "blood_phosphorus", "radiographs", "blood_chemistry"],
-        "causes_ja": "筋骨格系機能に影響する食事の欠乏または過剰が原因。両生類の食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "両生類の筋骨格系機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。両生類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
-        "treatment": "Calcium supplementation (calcium gluconate IV for acute cases, oral calcium for chronic), vitamin D3 supplementation, UVB lighting correction, dietary calcium-phosphorus ratio optimization.",
-        "treatment_ja": "フクロモモンガにおける代謝性骨疾患（MBD）の治療: 原因の鑑別（画像診断/CSF分析）。抗けいれん薬（発作がある場合）。支持療法（輸液・栄養・安静）。理学療法（回復期）。",
-        "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
-        "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
-        "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
-        "prognosis_ja": "栄養疾患の予後は欠乏/過剰の程度と是正の速やかさに依存する。早期発見と食事是正で予後良好。重度の栄養障害や不可逆的な組織損傷がある場合は予後慎重。適切な食事指導が再発予防の鍵。",
+        "causes": "Inadequate dietary calcium-to-phosphorus ratio (target 1.5-2:1). Insect-only diets (mealworms, crickets) are the primary cause — insects are very low in calcium and high in phosphorus. Vitamin D3 deficiency from lack of UVB exposure. Inappropriate fruit/honey-heavy diets. Reproductive demands (lactating females). Lack of calcium-supplemented insects (gut-loading or dusting).",
+        "causes_ja": "食事中Ca:P比の不適切（目標1.5-2:1）。昆虫のみの食事（ミルワーム、コオロギ）が主要原因 — 昆虫はCa含量が極めて低くP含量が高い。UVB曝露不足によるビタミンD3欠乏。果物・蜂蜜過剰の不適切な食事。繁殖時の負担（授乳期メス）。Ca強化（gut-loadingまたはdusting）されていない昆虫の給餌。",
+        "pathophysiology": "Calcium deficiency triggers PTH release, mobilizing calcium from bone (osteoclastic resorption). Chronic stimulation leads to fibrous osteodystrophy, cortical thinning, and pathological fractures. Severe acute hypocalcemia causes neuromuscular hyperexcitability, leading to tetany, seizures, and cardiac arrhythmias. Vitamin D3 deficiency further impairs intestinal calcium absorption, perpetuating the cycle.",
+        "pathophysiology_ja": "Ca欠乏により上皮小体ホルモン（PTH）が分泌され、骨からのCa動員（破骨細胞性吸収）が促進される。慢性的刺激により線維性骨異栄養症、皮質骨菲薄化、病的骨折が生じる。重度急性低Ca血症は神経筋過剰興奮を引き起こし、テタニー、発作、心不整脈を誘発。ビタミンD3欠乏は腸管Ca吸収をさらに障害し悪循環を形成する。フクロモモンガは有袋類特有の高Ca要求性があり、本症に脆弱。",
+        "treatment": "Acute hypocalcemic seizures: calcium gluconate 10% 50-100 mg/kg slow IV (with cardiac monitoring) or SC diluted; benzodiazepines for seizure control. Chronic management: oral calcium supplementation (calcium carbonate or glubionate 10-20 mg/kg PO q12h), vitamin D3 supplementation, UVB lighting (5-10% UVB tube, 10-12 hr/day), dietary correction to BML (Bourbon Modified Leadbeater's) or HPW (Wombaroo High Protein Supplement) diets with proper Ca:P ratio.",
+        "treatment_ja": "【急性低Ca血症性発作】 グルコン酸Ca 10% 50-100 mg/kg 緩徐IV（心電図モニタリング下）または希釈SC、ベンゾジアゼピン系による発作コントロール（ジアゼパム 0.5-1 mg/kg IV）、保温、補液（LRS 10-20 mL/kg SC）。"
+                        "【慢性管理】 (1) Ca補充: 炭酸Caまたはグルビオン酸Ca 10-20 mg/kg PO q12h、"
+                        "(2) ビタミンD3補充: 100-500 IU/kg PO 週2-3回、"
+                        "(3) UVB照明: 5-10% UVB蛍光灯 10-12時間/日 設置（30 cm距離）、"
+                        "(4) 食事療法: BML（Bourbon Modified Leadbeater's）または HPW（Wombaroo High Protein Supplement）等の"
+                        "適切なCa:P比の処方食への変更、果物・蜜の過剰給与を制限、Ca:P比 1.5-2:1 を目標、"
+                        "(5) 昆虫はCa強化（カルシウムパウダーでdusting、または高Ca食でgut-loading）してから給餌、"
+                        "(6) 重症例の安静・骨折部位の固定。"
+                        "【参考】 Carpenter Exotic Animal Formulary 5th ed、Johnson-Delaney Exotic Companion Medicine。",
+        "prevention": "Provide balanced diet from acquisition (BML, HPW, or Wombaroo Pet Glider). Ca:P ratio 1.5-2:1. Calcium-dust insects before feeding. UVB lighting. Limit fruit/honey to <20% of diet. Annual veterinary exam with blood calcium screening.",
+        "prevention_ja": "入手時から適切な食事を給与（BML、HPW、Wombaroo Pet Glider等）。Ca:P比 1.5-2:1。昆虫はCaダストしてから給餌。UVB照明設置。果物・蜂蜜は食事の20%以下に制限。年次健康診断（血清Ca測定含む）。飼い主への食事教育が最も重要な予防策。",
+        "prognosis": "Variable. Mild cases with early intervention recover well. Severe cases with seizures or pathological fractures have guarded prognosis. Healed fractures may have permanent deformity. Recurrence common without strict dietary management. Hypocalcemic seizures can be fatal if not treated promptly.",
+        "prognosis_ja": "予後は症例により異なる。軽症で早期介入例は良好に回復。発作や病的骨折を伴う重症例は予後注意。治癒した骨折部位に永続的な変形が残る場合あり。厳格な食事管理を行わないと再発が一般的。低Ca血症性発作は迅速な治療なしでは致死的となりうる。",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"young"},
     },
