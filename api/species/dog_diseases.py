@@ -1457,11 +1457,49 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"coughing", "difficulty_breathing", "lethargy",
                       "bloated_abdomen", "weight_loss"},
         "description": "Heart muscle weakens and enlarges, reducing the "
-                       "heart's pumping ability and leading to heart failure.",
-        "description_ja": "心筋が弱くなり拡大することで、ポンプ機能が低下し心不全に至ります。",
-        "pathophysiology_ja": "心筋細胞の変性・線維化→心室壁の菲薄化・心室拡大→収縮力低下（FS<20%）→心拍出量低下→神経体液性代償機構（RAAS活性化）→体液貯留→うっ血性心不全。心房細動の合併が多い。突然死（心室頻拍）のリスク。",
-        "causes_ja": "特発性（最多）、遺伝性（ドーベルマン：PDK4/TTN遺伝子変異）、タウリン/L-カルニチン欠乏（コッカースパニエル等）、穀物フリーダイエット関連（FDA調査中）。好発：ドーベルマン、グレートデーン、ボクサー、アイリッシュウルフハウンド。",
-        "prevention_ja": "好発犬種の定期的心臓スクリーニング（心エコー・ホルター心電図）、適切な栄養（タウリン・L-カルニチン含有食）、穀物フリーダイエットの回避。",
+                       "heart's pumping ability and leading to heart failure. "
+                       "Second most common acquired heart disease in dogs after MMVD. "
+                       "Strong breed predisposition; recently associated with grain-free diets.",
+        "description_ja": "心筋が弱くなり拡大することでポンプ機能が低下し心不全に至る。"
+                          "犬で2番目に多い後天性心疾患（MMVDに次ぐ）。強い犬種素因あり。"
+                          "近年は穀物フリーダイエットとの関連がFDA調査中。",
+        "pathophysiology_ja": "心筋細胞の変性・線維化→心室壁の菲薄化・心室拡大→収縮力低下（FS<20%）→心拍出量低下"
+                              "→神経体液性代償機構（RAAS活性化）→体液貯留→うっ血性心不全。"
+                              "心房細動の合併が多い。突然死（心室頻拍）のリスク。",
+        "causes_ja": "特発性（最多）、遺伝性（ドーベルマン：PDK4/TTN遺伝子変異、グレートデーン、ボクサーARVC）、"
+                     "タウリン/L-カルニチン欠乏（コッカースパニエル、ニューファンドランド、ゴールデン等）、"
+                     "穀物フリー/豆類含有ダイエット関連（FDA-CVM 2018-2024調査中、Freeman et al. JVIM 2018報告）。"
+                     "好発：ドーベルマン、グレートデーン、ボクサー、アイリッシュウルフハウンド。",
+        "treatment_ja": "【ACVIM Consensus Stage-Based Therapy】 "
+                        "【オカルト期/Stage B（無症候性、心エコー異常のみ）】 "
+                        "ピモベンダン 0.25-0.3 mg/kg PO q12h を開始（PROTECT trial Summerfield JVIM 2012、ドーベルマン137頭RCT、"
+                        "心不全/突然死までの期間が718日 → 1441日に延長）。"
+                        "ACE阻害薬（ベナゼプリル 0.25-0.5 mg/kg PO q24h）併用検討。"
+                        "ホルター心電図でVPC>50/日ならソタロール 1-3 mg/kg PO q12h またはメキシレチン 5-8 mg/kg PO q8h。"
+                        "【Stage C（CHF症状あり/既往）】 "
+                        "(1) ピモベンダン 0.25-0.3 mg/kg PO q12h（収縮力増強・血管拡張）。"
+                        "(2) フロセミド 1-2 mg/kg PO q8-12h（急性期はIV/IM 2-4 mg/kg q1-4h）。"
+                        "(3) ACE阻害薬（ベナゼプリル 0.25-0.5 mg/kg PO q24h）。"
+                        "(4) スピロノラクトン 1-2 mg/kg PO q12-24h。"
+                        "(5) 心房細動合併時: ジルチアゼム 0.5-1 mg/kg PO q8h またはジゴキシン 0.003 mg/kg PO q12h"
+                        "（HR<140 bpm目標、ジゴキシン濃度モニタリング 0.5-1 ng/mL）。"
+                        "(6) 急性肺水腫: 酸素療法、フロセミドIV、ブトルファノール 0.2-0.4 mg/kg IV、"
+                        "重症例にはニトロプルシドCRI 1-10 μg/kg/min（血圧監視下）。"
+                        "【栄養管理】 タウリン補充 500-1000 mg PO q12h（コッカースパニエル、グレインフリー食関連例で有効）、"
+                        "L-カルニチン 50-100 mg/kg PO q8-12h、適切な犬種別食事への変更（穀物含有・AAFCO準拠フード）。"
+                        "FDAレポート: 治療食変更で心機能改善が報告されている。"
+                        "【不整脈管理】 ボクサーARVC・ドーベルマンVT: ソタロール 1-3 mg/kg PO q12h（第一選択）、"
+                        "メキシレチン 5-8 mg/kg PO q8h（追加可）、アミオダロン 10 mg/kg PO q24h × 7日 → 5 mg/kg q24h（難治例）。"
+                        "【モニタリング】 定期心エコー、ホルター心電図、生化学（電解質）、血圧測定。",
+        "prognosis_ja": "ドーベルマン（最重症）: ピモベンダン治療下でCHF発症までの中央期間1441日（PROTECT trial）。"
+                        "Stage C発症後の生存期間中央値は通常6-12ヶ月。"
+                        "心房細動・心室頻拍合併例では予後悪化（突然死リスク）。"
+                        "タウリン欠乏型・グレインフリー関連は栄養是正で部分的可逆性あり（数ヶ月-1年）。"
+                        "予後不良因子: 重度LV拡大、低駆出率、難治性心室性不整脈、持続性心房細動、低Na血症。",
+        "prevention_ja": "好発犬種の定期的心臓スクリーニング（心エコー・ホルター心電図 — ドーベルマンは年次推奨）、"
+                         "適切な栄養（タウリン・L-カルニチン含有食、AAFCO準拠商業食）、"
+                         "穀物フリー/豆類主体ダイエットの回避（FDA-CVM 2018-2024警告）、"
+                         "繁殖個体の遺伝子検査（PDK4/TTN変異）。",
         "urgency": "urgent",
     },
     {
@@ -2018,13 +2056,43 @@ DISEASES: List[Dict[str, Any]] = [
         "name_ja": "僧帽弁閉鎖不全症",
         "symptoms": {"coughing", "difficulty_breathing", "lethargy",
                       "excessive_panting"},
-        "description": "Progressive degeneration of the mitral valve causing "
+        "description": "Progressive myxomatous degeneration of the mitral valve causing "
                        "blood regurgitation. The most common acquired heart "
-                       "disease in dogs.",
-        "description_ja": "僧帽弁の進行性変性により血液が逆流する疾患です。犬で最も多い後天性心疾患です。",
-        "pathophysiology_ja": "僧帽弁尖の粘液腫様変性→弁の肥厚・伸長→弁尖の逸脱・腱索断裂→僧帽弁逆流（MR）→左房拡大→肺静脈うっ血→肺水腫。左房拡大→左主気管支圧排→咳嗽。心房細動の合併。ACVIM Stage A〜D分類。",
-        "causes_ja": "加齢性弁変性（最多）。病因不明だが遺伝的要因が示唆。好発：CKCS（若齢発症）、マルチーズ、ダックスフンド、チワワ、ポメラニアン等の小型犬。全犬の75%が心不全の原因。",
-        "prevention_ja": "確実な予防法はないが、CKCSの繁殖プロトコル（心臓聴診・心エコースクリーニング）、定期的な心臓聴診（年1回以上）で早期発見。肥満予防。",
+                       "disease in dogs (>75% of acquired cardiac disease). "
+                       "Highly prevalent in small breeds, especially Cavalier King Charles Spaniels.",
+        "description_ja": "僧帽弁の進行性粘液腫様変性により血液が逆流する疾患。犬で最も多い後天性心疾患（後天性心疾患の75%以上）。"
+                          "小型犬、特にキャバリア・キング・チャールズ・スパニエル（CKCS）に高頻度で発症。",
+        "pathophysiology_ja": "僧帽弁尖の粘液腫様変性→弁の肥厚・伸長→弁尖の逸脱・腱索断裂→僧帽弁逆流（MR）→左房拡大→肺静脈うっ血→肺水腫。"
+                              "左房拡大→左主気管支圧排→咳嗽。心房細動の合併。ACVIM Stage A〜D分類（Keene et al. JVIM 2019）。",
+        "causes_ja": "加齢性弁変性（最多）。病因不明だが遺伝的要因が示唆。好発：CKCS（若齢発症）、マルチーズ、ダックスフンド、チワワ、ポメラニアン等の小型犬。全犬の心不全原因の75%を占める。",
+        "treatment_ja": "【ACVIM Consensus Stage-Based Therapy (Keene et al. JVIM 2019)】 "
+                        "【Stage A（リスク品種だが心雑音なし）】 治療不要。年1回の心臓聴診。"
+                        "【Stage B1（心雑音あり、心拡大なし）】 治療不要。6-12ヶ月毎の心エコー。"
+                        "【Stage B2（心雑音あり、心拡大あり — LA/Ao≥1.6、LVIDDN≥1.7、VHS>10.5）】 "
+                        "**ピモベンダン 0.25-0.3 mg/kg PO q12h を開始**（食前30分、空腹時投与）。"
+                        "EPIC trial（Boswood et al. JVIM 2016、360頭、RCT）でCHF発症までの中央期間が"
+                        "766日 → 1228日に延長（約15ヶ月延長、HR 0.64、P=.0038）。"
+                        "【Stage C（CHF症状あり/既往）】 "
+                        "(1) フロセミド 1-2 mg/kg PO q8-12h（急性期はIV/IM 2-4 mg/kg q1-4h、効果まで反復）"
+                        "→ 維持量へ漸減。トラセミド 0.1-0.2 mg/kg PO q24h（フロセミド無効例）。"
+                        "(2) ピモベンダン 0.25-0.3 mg/kg PO q12h 継続。"
+                        "(3) ACE阻害薬: ベナゼプリル 0.25-0.5 mg/kg PO q24h またはエナラプリル 0.5 mg/kg PO q12-24h。"
+                        "(4) スピロノラクトン 1-2 mg/kg PO q12-24h（RAAS抑制、低K血症対策）。"
+                        "(5) 肺水腫の急性管理: 酸素療法、フロセミドIV、ブトルファノール 0.2-0.4 mg/kg IV（鎮静・呼吸数低下）、"
+                        "重症例にはニトロプルシドCRI 1-10 μg/kg/min（血圧監視下）。"
+                        "【Stage D（難治性CHF）】 上記の用量強化、フロセミドCRI 0.66-1 mg/kg/h、"
+                        "シルデナフィル 1-2 mg/kg PO q8h（肺高血圧合併時）、トラセミド、低Na食、緩和ケア検討。"
+                        "【咳の管理】 気管支圧排による咳にはハイドロコドン 0.22 mg/kg PO q6-12h またはブトルファノール 0.05-0.1 mg/kg PO q6-12h。"
+                        "【併発心房細動】 ジルチアゼム 0.5-1 mg/kg PO q8h またはジゴキシン 0.003 mg/kg PO q12h（HR<160 bpm目標）。"
+                        "【モニタリング】 Stage B2: 6ヶ月毎の心エコー、Stage C: 2-4週間毎の電解質・腎機能・血圧、肺水腫再燃の早期発見。",
+        "prognosis_ja": "Stage B1: 多くは長期間（数年）無症状で経過。"
+                        "Stage B2: ピモベンダン治療下でCHF発症までの中央期間1228日（約3.4年、EPIC trial）。"
+                        "Stage C（CHF発症後）: 適切な治療で生存期間中央値9-12ヶ月、最適管理例で2年超も。"
+                        "Stage D（難治性）: 生存期間中央値1-3ヶ月。"
+                        "予後不良因子: 重度MR、左房著明拡大、肺高血圧合併、腎機能低下、低ナトリウム血症、難治性肺水腫。",
+        "prevention_ja": "確実な予防法はないが、CKCSの繁殖プロトコル（4歳以前の繁殖個体の心臓聴診・心エコースクリーニング）、"
+                         "定期的な心臓聴診（年1回以上、リスク品種では半年毎）で早期発見。肥満予防。"
+                         "心雑音検出時の早期心エコー検査。",
         "urgency": "normal",
     },
     {
