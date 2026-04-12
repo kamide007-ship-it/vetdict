@@ -2499,11 +2499,17 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "D3合成のためのUVB照射不足。",
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "vitamin_D3_level", "husbandry_review"],
-        "causes_ja": "両生類における紫外線不足症の原因: D3合成にUVBが必要な種における紫外線不足。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "紫外線不足症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
-        "treatment": "Dietary correction with species-appropriate balanced nutrition, specific vitamin/mineral supplementation, and monitoring for clinical improvement.",
-        "treatment_ja": "両生類における紫外線不足症の治療は栄養バランスの是正が中心となる。欠乏状態では食事の改善または治療的サプリメンテーションにより特定の栄養素を補充する。過剰状態では食事制限と臓器障害に対する支持療法を行う。栄養不良動物ではリフィーディング症候群予防のため段階的に是正する。種特異的な食事要求に基づく長期栄養計画を立案する。過不足のない摂取を確保するため定期的に再評価する。",
+        "causes_ja": "UVB照射不足が原因。トカゲ（特に昼行性種：フトアゴヒゲトカゲ、グリーンイグアナ、エボシカメレオン等）はビタミンD3合成にUVB（290-315 nm）を必須とする。原因: UVBランプの未設置、ガラス・プラスチック越しの照射（UVBを遮断）、UVBランプの寿命超過（6-12ヶ月で交換必要）、距離が遠すぎる、自然太陽光の不足（屋内飼育）、暗色基質や隠れ家の偏好、栄養性二次性上皮小体機能亢進症（NSHP）の進行。",
+        "pathophysiology": "Diurnal lizards require UVB radiation (290-315 nm) for cutaneous synthesis of previtamin D3, which is then converted to vitamin D3 (cholecalciferol) and ultimately to calcitriol (1,25-dihydroxyvitamin D3) — the active form essential for intestinal calcium absorption. Without adequate UVB exposure, D3 synthesis fails, leading to hypocalcemia, secondary nutritional hyperparathyroidism, fibrous osteodystrophy, and metabolic bone disease (MBD). Some species (nocturnal geckos) may meet D3 needs through dietary sources alone, but most diurnal lizards strictly require UVB.",
+        "pathophysiology_ja": "昼行性トカゲはプロビタミンD3の皮膚での合成にUVB照射（290-315 nm）を必要とする。皮膚で合成されたプロビタミンD3はビタミンD3（コレカルシフェロール）を経て活性型のカルシトリオール（1,25-ジヒドロキシビタミンD3）に変換され、腸管からのCa吸収に必須となる。UVB曝露不足によりD3合成が破綻し、低Ca血症、栄養性二次性上皮小体機能亢進症（NSHP）、線維性骨異栄養症、代謝性骨疾患（MBD）に至る。夜行性ヤモリ等の一部種は食事からD3を充足できるが、ほとんどの昼行性トカゲはUVBが必須である。",
+        "treatment": "Install proper UVB lighting (5.0-12.0 UVB tube, distance per manufacturer specs typically 25-30 cm), no glass/plastic between light and animal, replace UVB tubes q6-12 months. Provide unfiltered sunlight when possible. Calcium supplementation (calcium gluconate IV/SC for acute hypocalcemia, calcium carbonate dusting on insects). Vitamin D3 supplementation 400-1000 IU/kg PO weekly (caution with hypervitaminosis). Address concurrent MBD. Long-term husbandry correction.",
+        "treatment_ja": "(1) 適切なUVB照明の設置: 5.0-12.0 UVB蛍光灯（種により選択）、メーカー指示距離（通常25-30 cm）、ガラス・プラスチック越しは禁止。"
+                        "(2) UVBランプの定期交換: 6-12ヶ月毎（蛍光灯の劣化により出力が低下）。"
+                        "(3) 自然太陽光の利用: 可能であれば直射日光（ガラス越しではない）への定期曝露。"
+                        "(4) Ca補充: 急性低Ca血症にはグルコン酸Ca 100 mg/kg IV/SC、餌昆虫へのCaパウダーダスティング。"
+                        "(5) ビタミンD3補充: 400-1000 IU/kg PO 週1回（過剰症に注意）。"
+                        "(6) 併発するMBDの治療。"
+                        "(7) 飼育環境の長期改善: 適切な温度勾配、隠れ家の配置（ただしUVB遮断を避ける）、飼い主教育。",
         "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
         "prevention_ja": "紫外線不足症の予防には全ての栄養要求を満たす種に適した食事設計、単一食品のみの食事の回避、獣医師との定期的な食事内容の見直し、必要時の適切なサプリメンテーション、種固有の栄養ニーズに関する知識が必要である。",
         "prognosis": "Good with dietary correction and supplementation. Clinical signs typically improve within weeks of appropriate nutrition. Severe cases may have residual deficits.",

@@ -577,11 +577,19 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "腎機能障害や高タンパク食により尿酸結晶が内臓に沈着する疾患。",
         "urgency": "high",
         "recommended_tests": ["blood uric acid levels", "radiography"],
-        "causes_ja": "両生類における痛風（内臓型）の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
-        "pathophysiology": "Gout (Visceral) is a metabolic/endocrine disorder. Gout (Visceral) The underlying pathology involves dysregulation of hormonal feedback loops, enzyme activity, or substrate metabolism. This leads to imbalances in circulating hormone levels, electrolytes, or metabolic intermediates that affect cellular function across multiple organ systems. Compensatory mechanisms may temporarily maintain homeostasis but eventually decompensate, leading to progressive clinical deterioration and multi-organ effects.",
-        "pathophysiology_ja": "痛風（内臓型）は両生類における代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
-        "treatment": "Appropriate medical or surgical intervention based on diagnosis, supportive care with IV fluids as needed, pain management, nutritional support, and regular monitoring of treatment response.",
-        "treatment_ja": "両生類における痛風（内臓型）の治療は基礎となるホルモン・代謝異常を標的とする。ホルモン補充療法または抑制療法により生理的バランスを回復する。食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、臓器機能マーカーの定期的モニタリングにより用量調整を行う。二次的合併症（臓器障害、感染）の併行管理が不可欠である。長期または生涯にわたる治療が必要な場合がある。",
+        "causes_ja": "高蛋白食（高プロテイン市販フード、動物性蛋白の過剰給餌）、慢性腎不全（最多）、脱水、ビタミンA欠乏、腎毒性薬物（アミノグリコシド、NSAIDs）、ヘルペスウイルス感染、シュウ酸蓄積。鳥類は哺乳類と異なり尿酸を主要窒素老廃物として排泄するため、腎機能低下時に高尿酸血症と組織への沈着を起こしやすい。",
+        "pathophysiology": "Birds excrete uric acid as the primary nitrogenous waste (uricotelism). Renal dysfunction causes hyperuricemia, leading to deposition of monosodium urate crystals on serosal surfaces of viscera (pericardium, liver, spleen, kidneys, peritoneum). Visceral gout is typically a terminal condition reflecting chronic renal failure. Death often occurs from cardiac tamponade, multi-organ urate deposition, or progressive renal failure.",
+        "pathophysiology_ja": "鳥類は哺乳類と異なり尿酸を主要窒素老廃物として排泄する（uricotelism）。腎機能障害により高尿酸血症が生じ、内臓表面（心膜、肝臓、脾臓、腎臓、腹膜）に尿酸ナトリウム結晶が沈着する。内臓痛風は通常、慢性腎不全を反映する終末期病態であり、心タンポナーデ、多臓器尿酸沈着、進行性腎不全により死亡することが多い。",
+        "treatment": "Visceral gout is usually terminal and treatment is largely supportive. Aggressive fluid therapy (warm SC LRS 50 mL/kg q12h or IO/IV in critical cases). Allopurinol controversial in birds (some studies show worsening of hyperuricemia in budgerigars due to xanthine oxidase pathway differences) — use with caution. Colchicine 0.04 mg/kg PO q12-24h. Low-protein diet (NOT zero protein — birds need adequate protein). Address underlying renal dysfunction. Pain management: meloxicam contraindicated (nephrotoxic), use opioids (butorphanol 1-3 mg/kg IM q6-8h). Prognosis is poor.",
+        "treatment_ja": "内臓痛風は通常終末期病態であり治療は主に対症療法。"
+                        "(1) 積極的輸液療法: 温LRS 50 mL/kg SC q12h、重症例は骨内輸液（IO）または静注（IV）。"
+                        "(2) アロプリノール: 鳥類での使用は議論がある — セキセイインコではキサンチンオキシダーゼ経路の差異により高尿酸血症を悪化させる報告あり。慎重に使用。"
+                        "(3) コルヒチン 0.04 mg/kg PO q12-24h（炎症抑制）。"
+                        "(4) 低蛋白食（ゼロ蛋白ではない — 鳥類は適切な蛋白量が必要）。"
+                        "(5) 基礎腎疾患の治療。"
+                        "(6) 疼痛管理: メロキシカム禁忌（腎毒性）、オピオイド使用（ブトルファノール 1-3 mg/kg IM q6-8h）。"
+                        "(7) 環境改善: 静かで温かい環境、ストレス最小化。"
+                        "(8) 家族カウンセリング: 予後不良であり、QOL低下時は安楽死を検討。",
         "prevention": "Prevention of gout (visceral) includes appropriate diet formulation, regular health monitoring with blood work, maintaining healthy body weight, avoiding excessive treats or inappropriate foods, and early intervention when subclinical changes are detected.",
         "prevention_ja": "痛風（内臓型）の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
@@ -597,11 +605,18 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "関節への尿酸結晶沈着により、有痛性の腫脹と跛行を引き起こす。",
         "urgency": "high",
         "recommended_tests": ["blood uric acid levels", "radiography", "joint aspirate"],
-        "causes_ja": "両生類における痛風（関節型）の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "痛風（関節型）は両生類における代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
-        "treatment": "Appropriate medical or surgical intervention based on diagnosis, supportive care with IV fluids as needed, pain management, nutritional support, and regular monitoring of treatment response.",
-        "treatment_ja": "両生類における痛風（関節型）の治療は基礎となるホルモン・代謝異常を標的とする。ホルモン補充療法または抑制療法により生理的バランスを回復する。食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、臓器機能マーカーの定期的モニタリングにより用量調整を行う。二次的合併症（臓器障害、感染）の併行管理が不可欠である。長期または生涯にわたる治療が必要な場合がある。",
+        "causes_ja": "慢性高尿酸血症（脱水、慢性腎不全、高蛋白食、ビタミンA欠乏、腎毒性薬物）。関節型は内臓型より緩徐に発症し、長期高尿酸血症を反映する。鳥類特有の尿酸代謝（uricotelism）により哺乳類より高頻度に発症する。",
+        "pathophysiology": "Chronic hyperuricemia leads to deposition of urate crystals (tophi) within and around joints, particularly the digits (phalanges). The crystals incite a foreign-body inflammatory response, causing swelling, lameness, and chronic pain. Articular gout is more chronic and slowly progressive than visceral gout but is often a manifestation of underlying renal disease.",
+        "pathophysiology_ja": "慢性高尿酸血症により関節内および関節周囲に尿酸結晶（痛風結節、tophi）が沈着し、特に趾骨周囲に発生する。結晶が異物炎症反応を誘発し、腫脹、跛行、慢性疼痛を引き起こす。関節型は内臓型より慢性的・緩徐進行性だが、しばしば基礎にある腎疾患の現れである。",
+        "treatment": "(1) Urate tophi drainage if very large (rarely curative). (2) Allopurinol (use cautiously in budgerigars). (3) Colchicine 0.04 mg/kg PO q12-24h. (4) Low-protein diet. (5) Pain management: opioids preferred (butorphanol). (6) Address renal disease. (7) Environmental modifications (smooth perches, easy access to food/water). Long-term management; refractory cases may require euthanasia for QOL.",
+        "treatment_ja": "(1) 大型痛風結節のドレナージ（治癒的ではない）。"
+                        "(2) アロプリノール（セキセイインコでは慎重使用）。"
+                        "(3) コルヒチン 0.04 mg/kg PO q12-24h。"
+                        "(4) 低蛋白食。"
+                        "(5) 疼痛管理: オピオイド優先（ブトルファノール 1-3 mg/kg IM q6-8h）、メロキシカム禁忌（腎毒性）。"
+                        "(6) 基礎腎疾患の治療と輸液維持。"
+                        "(7) 環境改善: 滑らかな止まり木、食事・水へのアクセス容易化。"
+                        "(8) 長期管理が必要、難治例ではQOLを考慮した安楽死を検討。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "痛風（関節型）の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",

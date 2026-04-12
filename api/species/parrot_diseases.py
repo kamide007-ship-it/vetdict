@@ -357,10 +357,18 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "抗生物質使用や免疫抑制に続発するカンジダ・アルビカンスの過剰増殖。嗉嚢と口腔に多い。",
         "urgency": "moderate",
         "recommended_tests": ["crop wash cytology", "fungal culture", "gram stain"],
-        "causes_ja": "両生類におけるカンジダ症の原因: 胞子吸入、直接接種、粘膜コロニー形成による真菌感染。免疫抑制、多湿環境、換気不良、長期抗菌薬使用が感受性を高める。",
-        "pathophysiology_ja": "カンジダ症は両生類における真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "両生類におけるカンジダ症の治療には全身性抗真菌薬療法が必要である。アゾール系抗真菌薬（フルコナゾール、イトラコナゾール、ケトコナゾール）またはアムホテリシンBが菌種と重症度に応じて使用される。治療期間は完全な除菌のため通常長期間（数週間〜数ヶ月）を要する。表在性感染には局所抗真菌剤を併用する。環境消毒により再感染リスクを低減する。長期アゾール療法中は肝機能をモニタリングする。",
+        "causes_ja": "Candida albicansの過剰増殖。誘因: 抗生物質長期投与による正常細菌叢の破綻（最多）、免疫抑制（PBFD、PDD、若雛、栄養不良）、不適切な挿し餌技術、嗉嚢のうっ滞、栄養不良（特にビタミンA欠乏）、ストレス、糖含有食品の過剰給餌、不衛生な飼育環境、過密。",
+        "pathophysiology_ja": "オウムでは正常細菌叢が抗生物質や免疫抑制により破綻すると、Candida albicansが日和見的に過剰増殖し、嗉嚢、口腔、消化管粘膜にコロニーを形成する。粘膜上皮への接着と菌糸侵入により上皮損傷、炎症、ターキッシュタオル様の白色プラークを形成。重症例では消化管全長に進展し、播種性カンジダ症を引き起こすことがある。雛では特に嗉嚢炎・嗉嚢うっ滞として致死的となる可能性がある。",
+        "treatment": "Nystatin 300,000 IU/kg PO q8-12h x 7-14 days (first-line, not absorbed systemically — ideal for crop/oral candidiasis). For systemic disease: fluconazole 5-10 mg/kg PO q24h x 2-4 weeks. Severe cases: itraconazole 5-10 mg/kg PO q24h. Address underlying cause (stop unnecessary antibiotics, improve nutrition, correct hand-feeding technique). Crop emptying if stasis. Probiotics. Vitamin A supplementation if deficient. Strict hygiene of feeding implements.",
+        "treatment_ja": "(1) ナイスタチン 300,000 IU/kg PO q8-12h × 7-14日 — 第一選択（全身吸収されないため嗉嚢・口腔カンジダ症に理想的）。"
+                        "(2) 全身性疾患: フルコナゾール 5-10 mg/kg PO q24h × 2-4週間。"
+                        "(3) 重症例: イトラコナゾール 5-10 mg/kg PO q24h（肝機能監視）。"
+                        "(4) 基礎原因への対処: 不必要な抗生物質の中止、栄養改善、挿し餌技術の修正。"
+                        "(5) 嗉嚢うっ滞があれば嗉嚢洗浄。"
+                        "(6) プロバイオティクス（Lactobacillus等）の併用。"
+                        "(7) ビタミンA欠乏例にはビタミンA補充。"
+                        "(8) 給餌器具の厳格な衛生管理（毎回煮沸消毒）。"
+                        "(9) 環境改善: 過密回避、換気改善、清潔な飲水。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "カンジダ症の予防には適切な環境湿度・温度の維持、良好な換気、過密の回避、定期的な清掃・消毒、罹患個体の隔離、適切な栄養による免疫機能の維持が含まれる。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
