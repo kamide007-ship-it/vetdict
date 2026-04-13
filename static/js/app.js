@@ -1555,17 +1555,14 @@ function renderAzNav(){
       }).join("")+`</div>`;
       const nextMode=cur.next;
       catGrid.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
-      if(!catGrid.dataset.handlersAttached){
-        catGrid.dataset.handlersAttached="1";
-        catGrid.addEventListener("click",e=>{
-          const btn=e.target.closest(".disease-cat-card[data-cat]");
-          if(!btn)return;
-          const cat=btn.dataset.cat;
-          if(diseaseFilter===cat){diseaseFilter='';btn.classList.remove("active");}
-          else{catGrid.querySelectorAll(".disease-cat-card").forEach(b=>b.classList.remove("active"));btn.classList.add("active");diseaseFilter=cat;}
-          diseaseDisplayLimit=100;renderDiseaseDb();
-        });
-      }
+      catGrid.addEventListener("click",e=>{
+        const btn=e.target.closest(".disease-cat-card[data-cat]");
+        if(!btn)return;
+        const cat=btn.dataset.cat;
+        if(diseaseFilter===cat){diseaseFilter='';btn.classList.remove("active");}
+        else{catGrid.querySelectorAll(".disease-cat-card").forEach(b=>b.classList.remove("active"));btn.classList.add("active");diseaseFilter=cat;}
+        diseaseDisplayLimit=100;renderDiseaseDb();
+      });
     }
   }else{
     azNav.style.display="";
@@ -1575,10 +1572,7 @@ function renderAzNav(){
     azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
     const nextMode=cur.next;
     azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
-    if(!azNav.dataset.handlersAttached){
-      azNav.dataset.handlersAttached="1";
-      azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
-    }
+    azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
   }
 }
 
