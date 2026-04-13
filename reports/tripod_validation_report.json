@@ -1,0 +1,102 @@
+{
+  "title": "TRIPOD-Compliant Diagnostic Accuracy Assessment",
+  "framework": "VetDict Diagnostic Engine",
+  "evaluation_date": "2026-04-13T19:58:47.190107",
+  "test_design": {
+    "type": "Prospective Cohort",
+    "total_cases": 16,
+    "species_count": 4,
+    "gold_standard": "Clinical expert consensus"
+  },
+  "primary_outcomes": {
+    "rank_1_accuracy": 0.5625,
+    "pass_rate": 0.125,
+    "average_confidence": 0.5151
+  },
+  "accuracy_metrics": {},
+  "subgroup_analysis": {
+    "by_species": {
+      "dog": {
+        "tp": 2,
+        "tn": 0,
+        "fp": 0,
+        "fn": 12,
+        "total": 14,
+        "accuracy": 0.1429,
+        "sensitivity": 0.1429,
+        "specificity": 0.0,
+        "ppv": 1.0,
+        "npv": 0.0,
+        "f1_score": 0.25
+      },
+      "cat": {
+        "tp": 2,
+        "tn": 0,
+        "fp": 0,
+        "fn": 10,
+        "total": 12,
+        "accuracy": 0.1667,
+        "sensitivity": 0.1667,
+        "specificity": 0.0,
+        "ppv": 1.0,
+        "npv": 0.0,
+        "f1_score": 0.2857
+      },
+      "rabbit": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 4,
+        "total": 4,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "fish": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 2,
+        "total": 2,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      }
+    },
+    "by_symptom_count": {
+      "moderate_symptoms": {
+        "tp": 4,
+        "tn": 0,
+        "fp": 0,
+        "fn": 8,
+        "total": 12,
+        "accuracy": 0.3333,
+        "sensitivity": 0.3333,
+        "specificity": 0.0,
+        "ppv": 1.0,
+        "npv": 0.0,
+        "f1_score": 0.5
+      },
+      "minimal_symptoms": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 20,
+        "total": 20,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      }
+    }
+  },
+  "interpretation": "Suboptimal accuracy: 56.2% rank-1 accuracy; improvements needed."
+}

@@ -1,0 +1,200 @@
+[
+  {
+    "case_id": "dog_001",
+    "species": "dog",
+    "primary_disease": "Canine Parvovirus",
+    "symptoms": [
+      "fever",
+      "lethargy",
+      "vomiting",
+      "diarrhea"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.75,
+    "notes": "4-symptom GI emergency"
+  },
+  {
+    "case_id": "dog_002",
+    "species": "dog",
+    "primary_disease": "Gastroenteritis",
+    "symptoms": [
+      "vomiting",
+      "diarrhea"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.7,
+    "notes": "Common GI presentation"
+  },
+  {
+    "case_id": "dog_003",
+    "species": "dog",
+    "primary_disease": "Pancreatitis",
+    "symptoms": [
+      "abdominal_pain",
+      "vomiting"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.7,
+    "notes": "Acute pancreatitis"
+  },
+  {
+    "case_id": "dog_004",
+    "species": "dog",
+    "primary_disease": "Bacterial Pneumonia",
+    "symptoms": [
+      "fever",
+      "cough",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "Respiratory infection"
+  },
+  {
+    "case_id": "dog_005",
+    "species": "dog",
+    "primary_disease": "Atopic Dermatitis",
+    "symptoms": [
+      "itching",
+      "skin_redness",
+      "hair_loss"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "Allergic dermatitis"
+  },
+  {
+    "case_id": "dog_006",
+    "species": "dog",
+    "primary_disease": "Diabetes Mellitus",
+    "symptoms": [
+      "polydipsia",
+      "polyuria",
+      "weight_loss"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.72,
+    "notes": "Metabolic disease"
+  },
+  {
+    "case_id": "dog_007",
+    "species": "dog",
+    "primary_disease": "Epilepsy",
+    "symptoms": [
+      "seizures"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.6,
+    "notes": "Single symptom"
+  },
+  {
+    "case_id": "cat_008",
+    "species": "cat",
+    "primary_disease": "Feline Upper Respiratory Infection",
+    "symptoms": [
+      "sneezing",
+      "nasal_discharge",
+      "fever"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.8,
+    "notes": "URI classic presentation"
+  },
+  {
+    "case_id": "cat_009",
+    "species": "cat",
+    "primary_disease": "Feline Infectious Peritonitis (FIP)",
+    "symptoms": [
+      "lethargy",
+      "fever",
+      "weight_loss"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "Systemic infection"
+  },
+  {
+    "case_id": "cat_010",
+    "species": "cat",
+    "primary_disease": "Hepatic Lipidosis",
+    "symptoms": [
+      "vomiting",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.7,
+    "notes": "Hepatic disease"
+  },
+  {
+    "case_id": "cat_011",
+    "species": "cat",
+    "primary_disease": "Feline Lower Urinary Tract Disease",
+    "symptoms": [
+      "dysuria",
+      "hematuria"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.7,
+    "notes": "Urinary obstruction"
+  },
+  {
+    "case_id": "cat_012",
+    "species": "cat",
+    "primary_disease": "Corneal Ulcer",
+    "symptoms": [
+      "eye_discharge",
+      "squinting"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.72,
+    "notes": "Ocular emergency"
+  },
+  {
+    "case_id": "cat_013",
+    "species": "cat",
+    "primary_disease": "Arterial Thromboembolism",
+    "symptoms": [
+      "hind_limb_weakness",
+      "cold_limbs"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "Acute thrombosis"
+  },
+  {
+    "case_id": "rabbit_014",
+    "species": "rabbit",
+    "primary_disease": "Gastrointestinal Stasis",
+    "symptoms": [
+      "hunched_posture",
+      "anorexia"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "GI emergency"
+  },
+  {
+    "case_id": "rabbit_015",
+    "species": "rabbit",
+    "primary_disease": "Pasteurellosis",
+    "symptoms": [
+      "nasal_discharge",
+      "sneezing"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Respiratory bacterial"
+  },
+  {
+    "case_id": "fish_016",
+    "species": "fish",
+    "primary_disease": "Fin Rot",
+    "symptoms": [
+      "frayed_fins",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Bacterial infection"
+  }
+]
