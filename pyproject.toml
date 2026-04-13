@@ -49,8 +49,7 @@ ignore = [
     "SIM108", # if-else-block-instead-of-if-exp (readability preference)
 ]
 
-# Strict mode options
-fail-unexamined-exception-handlers = true
+# Unfixable rules (manual review required)
 unfixable = ["F841", "F842"]  # Unused variables must be manually fixed
 
 [tool.ruff.lint.isort]
