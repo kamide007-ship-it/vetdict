@@ -1055,6 +1055,7 @@ DISEASES: List[Dict[str, Any]] = [
         "recommended_tests": ["physical_exam", "fine_needle_aspirate", "blood_vitamin_a_levels"],
         "causes": "Caseous abscess of the tympanic cavity associated with hypovitaminosis A, particularly common in box turtles.",
         "causes_ja": "爬虫類における耳膿瘍（中耳膿瘍）の原因: 中耳・鼓膜の膿瘍で、水棲ガメに多い。",
+        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "耳膿瘍（中耳膿瘍）は爬虫類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "treatment": "Appropriate antimicrobial therapy based on culture and sensitivity testing, surgical drainage or debridement if indicated, IV fluid therapy, pain management, and monitoring for treatment response.",
         "treatment_ja": "爬虫類における耳膿瘍（中耳膿瘍）の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
