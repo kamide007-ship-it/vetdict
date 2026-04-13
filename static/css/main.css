@@ -1455,3 +1455,66 @@ button.combination-item:focus-visible {
   .anesthesia-print-btn{padding:6px 10px;font-size:.76rem}
   .anesthesia-asa-filter{padding:6px 8px;font-size:.76rem;min-width:70px}
 }
+
+/* === Mobile display cutoff fix ===
+   `.card { overflow:hidden }` (line 162) clips any long unbroken English
+   token — drug compounds, disease names, citation URLs, DOIs — on narrow
+   viewports, hiding the right edge of the content. Wrap long tokens at
+   any character so the text reflows inside the card instead of being
+   clipped. Also wrap the wide anesthesia monitor table in a horizontal
+   scroll container, and protect the page from cumulative horizontal
+   overflow on small screens. */
+.disease-detail dd,
+.disease-detail dt,
+.disease-detail p,
+.disease-detail pre,
+.disease-db-item .d-name,
+.disease-db-item .d-name-ja,
+.disease-db-item .d-desc,
+.disease-head .disease-name,
+.disease-head .disease-name-ja,
+.detail-section-body,
+.detail-matched,
+.detail-tests,
+.clinical-field-text,
+.chat-msg,
+.chat-disease-name,
+.chat-disease-name-en,
+.chat-disease-desc,
+.chat-disease-matched,
+.chat-no-match,
+.chat-no-symptoms,
+.chat-symptom-tag,
+.references li,
+.ref-category li,
+.anesthesia-references li,
+.anesthesia-ref-list li,
+.ortho-refs li,
+.missing-note,
+.anesthesia-notes,
+.anesthesia-breed-item p,
+.guided-cat-name,
+.guided-sym-btn,
+.guided-context-opt,
+.search-result-item,
+.sponsor-product p,
+.sponsor-product h4{
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.anesthesia-monitor-section{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.anesthesia-monitor-section table{min-width:100%}
+.card img,.card video,.card iframe,.disease-detail img{max-width:100%;height:auto}
+@media(max-width:600px){
+  html,body{overflow-x:hidden}
+  .references{padding:16px 14px}
+  .ref-category{padding:12px 14px}
+  .ref-header{padding:12px 14px}
+  .footer-inner{padding:24px 14px 16px}
+  .footer-bottom{padding:12px 14px}
+  .main-content{padding:0 14px 32px}
+  .species-section{padding:24px 14px 8px}
+  .sponsor-banner{padding:12px 14px 0}
+  .sponsor-section{padding:16px 14px 8px}
+  .anesthesia-references ul,.anesthesia-ref-list{padding-left:18px}
+}
