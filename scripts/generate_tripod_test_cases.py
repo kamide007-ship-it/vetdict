@@ -16,150 +16,88 @@ from api.chat.symptom_extractor import _extract_species_symptoms
 from api.chat.disease_matcher import _match_species_symptoms_to_diseases
 
 
-# Define test scenarios for each species
+# Define comprehensive test scenarios for each species
 TEST_SCENARIOS = {
     'dog': [
         # GI conditions
-        {
-            'symptoms': ['fever', 'lethargy', 'vomiting', 'diarrhea'],
-            'expected_disease': 'Canine Parvovirus',
-            'confidence_threshold': 0.75,
-            'notes': '4-symptom GI emergency'
-        },
-        {
-            'symptoms': ['vomiting', 'diarrhea'],
-            'expected_disease': 'Gastroenteritis',
-            'confidence_threshold': 0.70,
-            'notes': 'Common GI presentation'
-        },
-        {
-            'symptoms': ['abdominal_pain', 'vomiting'],
-            'expected_disease': 'Pancreatitis',
-            'confidence_threshold': 0.70,
-            'notes': 'Acute pancreatitis'
-        },
+        {'symptoms': ['fever', 'lethargy', 'vomiting', 'diarrhea'], 'expected_disease': 'Canine Parvovirus', 'confidence_threshold': 0.75, 'notes': 'GI emergency'},
+        {'symptoms': ['vomiting', 'diarrhea'], 'expected_disease': 'Gastroenteritis', 'confidence_threshold': 0.70, 'notes': 'Common GI'},
+        {'symptoms': ['abdominal_pain', 'vomiting'], 'expected_disease': 'Pancreatitis', 'confidence_threshold': 0.70, 'notes': 'Acute pancreatitis'},
+        {'symptoms': ['abdominal_distension', 'vomiting', 'lethargy'], 'expected_disease': 'Bloat', 'confidence_threshold': 0.72, 'notes': 'Gastric dilatation'},
         # Respiratory conditions
-        {
-            'symptoms': ['fever', 'cough', 'lethargy'],
-            'expected_disease': 'Bacterial Pneumonia',
-            'confidence_threshold': 0.68,
-            'notes': 'Respiratory infection'
-        },
-        # Orthopedic
-        {
-            'symptoms': ['lameness', 'joint_pain'],
-            'expected_disease': 'Hip Dysplasia',
-            'confidence_threshold': 0.65,
-            'notes': 'Chronic orthopedic'
-        },
+        {'symptoms': ['fever', 'cough', 'lethargy'], 'expected_disease': 'Bacterial Pneumonia', 'confidence_threshold': 0.68, 'notes': 'Respiratory infection'},
+        {'symptoms': ['cough', 'nasal_discharge'], 'expected_disease': 'Kennel Cough', 'confidence_threshold': 0.65, 'notes': 'Infectious tracheobronchitis'},
         # Skin
-        {
-            'symptoms': ['itching', 'skin_redness', 'hair_loss'],
-            'expected_disease': 'Atopic Dermatitis',
-            'confidence_threshold': 0.68,
-            'notes': 'Allergic dermatitis'
-        },
+        {'symptoms': ['itching', 'skin_redness', 'hair_loss'], 'expected_disease': 'Atopic Dermatitis', 'confidence_threshold': 0.68, 'notes': 'Allergic dermatitis'},
+        {'symptoms': ['itching', 'skin_lesions'], 'expected_disease': 'Mange', 'confidence_threshold': 0.65, 'notes': 'Parasitic skin disease'},
         # Metabolic
-        {
-            'symptoms': ['polydipsia', 'polyuria', 'weight_loss'],
-            'expected_disease': 'Diabetes Mellitus',
-            'confidence_threshold': 0.72,
-            'notes': 'Metabolic disease'
-        },
+        {'symptoms': ['polydipsia', 'polyuria', 'weight_loss'], 'expected_disease': 'Diabetes Mellitus', 'confidence_threshold': 0.72, 'notes': 'Metabolic disease'},
+        # Cardiac
+        {'symptoms': ['lethargy', 'cough', 'exercise_intolerance'], 'expected_disease': 'Heart Failure', 'confidence_threshold': 0.68, 'notes': 'Cardiac dysfunction'},
         # Neurological
-        {
-            'symptoms': ['seizures'],
-            'expected_disease': 'Epilepsy',
-            'confidence_threshold': 0.60,
-            'notes': 'Single symptom'
-        },
+        {'symptoms': ['seizures'], 'expected_disease': 'Epilepsy', 'confidence_threshold': 0.60, 'notes': 'Single symptom'},
+        {'symptoms': ['head_tilt', 'nystagmus'], 'expected_disease': 'Vestibular Disease', 'confidence_threshold': 0.65, 'notes': 'Neurological disorder'},
+        # Urinary
+        {'symptoms': ['dysuria', 'urinary_straining'], 'expected_disease': 'Urinary Tract Infection', 'confidence_threshold': 0.65, 'notes': 'Bacterial UTI'},
     ],
     'cat': [
         # Respiratory
-        {
-            'symptoms': ['sneezing', 'nasal_discharge', 'fever'],
-            'expected_disease': 'Feline Upper Respiratory Infection',
-            'confidence_threshold': 0.80,
-            'notes': 'URI classic presentation'
-        },
+        {'symptoms': ['sneezing', 'nasal_discharge', 'fever'], 'expected_disease': 'Feline Upper Respiratory Infection', 'confidence_threshold': 0.80, 'notes': 'URI classic'},
+        {'symptoms': ['cough', 'respiratory_distress'], 'expected_disease': 'Asthma', 'confidence_threshold': 0.68, 'notes': 'Feline asthma'},
         # Infectious
-        {
-            'symptoms': ['lethargy', 'fever', 'weight_loss'],
-            'expected_disease': 'Feline Infectious Peritonitis (FIP)',
-            'confidence_threshold': 0.68,
-            'notes': 'Systemic infection'
-        },
+        {'symptoms': ['lethargy', 'fever', 'weight_loss'], 'expected_disease': 'Feline Infectious Peritonitis (FIP)', 'confidence_threshold': 0.68, 'notes': 'Systemic infection'},
         # GI
-        {
-            'symptoms': ['vomiting', 'lethargy'],
-            'expected_disease': 'Hepatic Lipidosis',
-            'confidence_threshold': 0.70,
-            'notes': 'Hepatic disease'
-        },
+        {'symptoms': ['vomiting', 'lethargy'], 'expected_disease': 'Hepatic Lipidosis', 'confidence_threshold': 0.70, 'notes': 'Hepatic disease'},
+        {'symptoms': ['vomiting', 'anorexia'], 'expected_disease': 'Gastroenteritis', 'confidence_threshold': 0.65, 'notes': 'GI inflammation'},
         # Urinary
-        {
-            'symptoms': ['dysuria', 'hematuria'],
-            'expected_disease': 'Feline Lower Urinary Tract Disease',
-            'confidence_threshold': 0.70,
-            'notes': 'Urinary obstruction'
-        },
+        {'symptoms': ['dysuria', 'hematuria'], 'expected_disease': 'Feline Lower Urinary Tract Disease', 'confidence_threshold': 0.70, 'notes': 'FLUTD'},
         # Endocrine
-        {
-            'symptoms': ['weight_loss', 'polyphagia'],
-            'expected_disease': 'Hyperthyroidism',
-            'confidence_threshold': 0.70,
-            'notes': 'Metabolic disease'
-        },
+        {'symptoms': ['weight_loss', 'polyphagia'], 'expected_disease': 'Hyperthyroidism', 'confidence_threshold': 0.70, 'notes': 'Thyroid dysfunction'},
+        {'symptoms': ['lethargy', 'weight_gain'], 'expected_disease': 'Hypothyroidism', 'confidence_threshold': 0.65, 'notes': 'Low thyroid'},
         # Ocular
-        {
-            'symptoms': ['eye_discharge', 'squinting'],
-            'expected_disease': 'Corneal Ulcer',
-            'confidence_threshold': 0.72,
-            'notes': 'Ocular emergency'
-        },
+        {'symptoms': ['eye_discharge', 'squinting'], 'expected_disease': 'Corneal Ulcer', 'confidence_threshold': 0.72, 'notes': 'Ocular emergency'},
         # Cardiovascular
-        {
-            'symptoms': ['hind_limb_weakness', 'cold_limbs'],
-            'expected_disease': 'Arterial Thromboembolism',
-            'confidence_threshold': 0.68,
-            'notes': 'Acute thrombosis'
-        },
+        {'symptoms': ['hind_limb_weakness', 'cold_limbs'], 'expected_disease': 'Arterial Thromboembolism', 'confidence_threshold': 0.68, 'notes': 'Acute thrombosis'},
+        # Renal
+        {'symptoms': ['polydipsia', 'polyuria', 'weight_loss'], 'expected_disease': 'Chronic Kidney Disease', 'confidence_threshold': 0.70, 'notes': 'CKD'},
     ],
     'rabbit': [
-        {
-            'symptoms': ['hunched_posture', 'anorexia'],
-            'expected_disease': 'Gastrointestinal Stasis',
-            'confidence_threshold': 0.68,
-            'notes': 'GI emergency'
-        },
-        {
-            'symptoms': ['nasal_discharge', 'sneezing'],
-            'expected_disease': 'Pasteurellosis',
-            'confidence_threshold': 0.65,
-            'notes': 'Respiratory bacterial'
-        },
+        {'symptoms': ['hunched_posture', 'anorexia'], 'expected_disease': 'Gastrointestinal Stasis', 'confidence_threshold': 0.68, 'notes': 'GI emergency'},
+        {'symptoms': ['nasal_discharge', 'sneezing'], 'expected_disease': 'Pasteurellosis', 'confidence_threshold': 0.65, 'notes': 'Respiratory bacterial'},
+        {'symptoms': ['head_tilt', 'circling'], 'expected_disease': 'Encephalitozoon cuniculi', 'confidence_threshold': 0.62, 'notes': 'Parasitic neurological'},
+        {'symptoms': ['drooling', 'anorexia'], 'expected_disease': 'Dental Disease', 'confidence_threshold': 0.65, 'notes': 'Malocclusion'},
+        {'symptoms': ['lethargy', 'fever'], 'expected_disease': 'Bacterial Infection', 'confidence_threshold': 0.60, 'notes': 'Systemic infection'},
     ],
-    'fish': [
-        {
-            'symptoms': ['white_spots', 'respiratory_distress'],
-            'expected_disease': 'Ichthyophthirius multifiliis (White Spot Disease)',
-            'confidence_threshold': 0.68,
-            'notes': 'Parasitic fish disease'
-        },
-        {
-            'symptoms': ['frayed_fins', 'lethargy'],
-            'expected_disease': 'Fin Rot',
-            'confidence_threshold': 0.65,
-            'notes': 'Bacterial infection'
-        },
+    'guinea_pig': [
+        {'symptoms': ['lethargy', 'bleeding_gums'], 'expected_disease': 'Scurvy', 'confidence_threshold': 0.68, 'notes': 'Vitamin C deficiency'},
+        {'symptoms': ['respiratory_distress', 'lethargy'], 'expected_disease': 'Respiratory Infection', 'confidence_threshold': 0.65, 'notes': 'Bacterial pneumonia'},
+    ],
+    'hamster': [
+        {'symptoms': ['facial_swelling', 'drooling'], 'expected_disease': 'Cheek Pouch Impaction', 'confidence_threshold': 0.65, 'notes': 'Hamster-specific'},
+        {'symptoms': ['diarrhea', 'lethargy'], 'expected_disease': 'Wet Tail', 'confidence_threshold': 0.62, 'notes': 'Diarrheal disease'},
+    ],
+    'ferret': [
+        {'symptoms': ['lethargy', 'ataxia'], 'expected_disease': 'Insulinoma', 'confidence_threshold': 0.65, 'notes': 'Hypoglycemia'},
+        {'symptoms': ['lethargy', 'hair_loss'], 'expected_disease': 'Adrenal Disease', 'confidence_threshold': 0.62, 'notes': 'Endocrine disorder'},
     ],
     'bird': [
-        {
-            'symptoms': ['respiratory_distress', 'cough'],
-            'expected_disease': 'Avian Respiratory Disease',
-            'confidence_threshold': 0.65,
-            'notes': 'Respiratory infection'
-        },
+        {'symptoms': ['respiratory_distress', 'lethargy'], 'expected_disease': 'Respiratory Infection', 'confidence_threshold': 0.65, 'notes': 'Avian respiratory'},
+        {'symptoms': ['regurgitation', 'lethargy'], 'expected_disease': 'Crop Stasis', 'confidence_threshold': 0.62, 'notes': 'GI disorder'},
+    ],
+    'fish': [
+        {'symptoms': ['white_spots', 'lethargy'], 'expected_disease': 'Ichthyophthirius', 'confidence_threshold': 0.68, 'notes': 'White spot disease'},
+        {'symptoms': ['frayed_fins', 'lethargy'], 'expected_disease': 'Fin Rot', 'confidence_threshold': 0.65, 'notes': 'Bacterial infection'},
+        {'symptoms': ['abdominal_distension', 'lethargy'], 'expected_disease': 'Dropsy', 'confidence_threshold': 0.62, 'notes': 'Systemic infection'},
+    ],
+    'reptile': [
+        {'symptoms': ['respiratory_distress'], 'expected_disease': 'Respiratory Infection', 'confidence_threshold': 0.60, 'notes': 'Respiratory disease'},
+        {'symptoms': ['lameness', 'jaw_swelling'], 'expected_disease': 'Metabolic Bone Disease', 'confidence_threshold': 0.65, 'notes': 'Nutritional disorder'},
+    ],
+    'parakeet': [
+        {'symptoms': ['respiratory_distress', 'cough'], 'expected_disease': 'Respiratory Infection', 'confidence_threshold': 0.62, 'notes': 'Avian respiratory'},
+    ],
+    'parrot': [
+        {'symptoms': ['feather_plucking', 'lethargy'], 'expected_disease': 'Behavioral Disorder', 'confidence_threshold': 0.60, 'notes': 'Psychological stress'},
     ],
 }
 

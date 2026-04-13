@@ -11,7 +11,7 @@
     ],
     "expected_rank": 1,
     "confidence_threshold": 0.75,
-    "notes": "4-symptom GI emergency"
+    "notes": "GI emergency"
   },
   {
     "case_id": "dog_002",
@@ -23,7 +23,7 @@
     ],
     "expected_rank": 1,
     "confidence_threshold": 0.7,
-    "notes": "Common GI presentation"
+    "notes": "Common GI"
   },
   {
     "case_id": "dog_003",
@@ -40,6 +40,19 @@
   {
     "case_id": "dog_004",
     "species": "dog",
+    "primary_disease": "Bloat",
+    "symptoms": [
+      "abdominal_distension",
+      "vomiting",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.72,
+    "notes": "Gastric dilatation"
+  },
+  {
+    "case_id": "dog_005",
+    "species": "dog",
     "primary_disease": "Bacterial Pneumonia",
     "symptoms": [
       "fever",
@@ -51,7 +64,19 @@
     "notes": "Respiratory infection"
   },
   {
-    "case_id": "dog_005",
+    "case_id": "dog_006",
+    "species": "dog",
+    "primary_disease": "Kennel Cough",
+    "symptoms": [
+      "cough",
+      "nasal_discharge"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Infectious tracheobronchitis"
+  },
+  {
+    "case_id": "dog_007",
     "species": "dog",
     "primary_disease": "Atopic Dermatitis",
     "symptoms": [
@@ -64,7 +89,19 @@
     "notes": "Allergic dermatitis"
   },
   {
-    "case_id": "dog_006",
+    "case_id": "dog_008",
+    "species": "dog",
+    "primary_disease": "Mange",
+    "symptoms": [
+      "itching",
+      "skin_lesions"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Parasitic skin disease"
+  },
+  {
+    "case_id": "dog_009",
     "species": "dog",
     "primary_disease": "Diabetes Mellitus",
     "symptoms": [
@@ -77,7 +114,20 @@
     "notes": "Metabolic disease"
   },
   {
-    "case_id": "dog_007",
+    "case_id": "dog_010",
+    "species": "dog",
+    "primary_disease": "Heart Failure",
+    "symptoms": [
+      "lethargy",
+      "cough",
+      "exercise_intolerance"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "Cardiac dysfunction"
+  },
+  {
+    "case_id": "dog_011",
     "species": "dog",
     "primary_disease": "Epilepsy",
     "symptoms": [
@@ -88,7 +138,7 @@
     "notes": "Single symptom"
   },
   {
-    "case_id": "cat_008",
+    "case_id": "cat_012",
     "species": "cat",
     "primary_disease": "Feline Upper Respiratory Infection",
     "symptoms": [
@@ -98,10 +148,22 @@
     ],
     "expected_rank": 1,
     "confidence_threshold": 0.8,
-    "notes": "URI classic presentation"
+    "notes": "URI classic"
   },
   {
-    "case_id": "cat_009",
+    "case_id": "cat_013",
+    "species": "cat",
+    "primary_disease": "Asthma",
+    "symptoms": [
+      "cough",
+      "respiratory_distress"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "Feline asthma"
+  },
+  {
+    "case_id": "cat_014",
     "species": "cat",
     "primary_disease": "Feline Infectious Peritonitis (FIP)",
     "symptoms": [
@@ -114,7 +176,7 @@
     "notes": "Systemic infection"
   },
   {
-    "case_id": "cat_010",
+    "case_id": "cat_015",
     "species": "cat",
     "primary_disease": "Hepatic Lipidosis",
     "symptoms": [
@@ -126,7 +188,19 @@
     "notes": "Hepatic disease"
   },
   {
-    "case_id": "cat_011",
+    "case_id": "cat_016",
+    "species": "cat",
+    "primary_disease": "Gastroenteritis",
+    "symptoms": [
+      "vomiting",
+      "anorexia"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "GI inflammation"
+  },
+  {
+    "case_id": "cat_017",
     "species": "cat",
     "primary_disease": "Feline Lower Urinary Tract Disease",
     "symptoms": [
@@ -135,10 +209,22 @@
     ],
     "expected_rank": 1,
     "confidence_threshold": 0.7,
-    "notes": "Urinary obstruction"
+    "notes": "FLUTD"
   },
   {
-    "case_id": "cat_012",
+    "case_id": "cat_018",
+    "species": "cat",
+    "primary_disease": "Hypothyroidism",
+    "symptoms": [
+      "lethargy",
+      "weight_gain"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Low thyroid"
+  },
+  {
+    "case_id": "cat_019",
     "species": "cat",
     "primary_disease": "Corneal Ulcer",
     "symptoms": [
@@ -150,7 +236,7 @@
     "notes": "Ocular emergency"
   },
   {
-    "case_id": "cat_013",
+    "case_id": "cat_020",
     "species": "cat",
     "primary_disease": "Arterial Thromboembolism",
     "symptoms": [
@@ -162,7 +248,20 @@
     "notes": "Acute thrombosis"
   },
   {
-    "case_id": "rabbit_014",
+    "case_id": "cat_021",
+    "species": "cat",
+    "primary_disease": "Chronic Kidney Disease",
+    "symptoms": [
+      "polydipsia",
+      "polyuria",
+      "weight_loss"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.7,
+    "notes": "CKD"
+  },
+  {
+    "case_id": "rabbit_022",
     "species": "rabbit",
     "primary_disease": "Gastrointestinal Stasis",
     "symptoms": [
@@ -174,7 +273,7 @@
     "notes": "GI emergency"
   },
   {
-    "case_id": "rabbit_015",
+    "case_id": "rabbit_023",
     "species": "rabbit",
     "primary_disease": "Pasteurellosis",
     "symptoms": [
@@ -186,7 +285,151 @@
     "notes": "Respiratory bacterial"
   },
   {
-    "case_id": "fish_016",
+    "case_id": "rabbit_024",
+    "species": "rabbit",
+    "primary_disease": "Encephalitozoon cuniculi",
+    "symptoms": [
+      "head_tilt",
+      "circling"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.62,
+    "notes": "Parasitic neurological"
+  },
+  {
+    "case_id": "rabbit_025",
+    "species": "rabbit",
+    "primary_disease": "Dental Disease",
+    "symptoms": [
+      "drooling",
+      "anorexia"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Malocclusion"
+  },
+  {
+    "case_id": "rabbit_026",
+    "species": "rabbit",
+    "primary_disease": "Bacterial Infection",
+    "symptoms": [
+      "lethargy",
+      "fever"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.6,
+    "notes": "Systemic infection"
+  },
+  {
+    "case_id": "guinea_pig_027",
+    "species": "guinea_pig",
+    "primary_disease": "Scurvy",
+    "symptoms": [
+      "lethargy",
+      "bleeding_gums"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "Vitamin C deficiency"
+  },
+  {
+    "case_id": "guinea_pig_028",
+    "species": "guinea_pig",
+    "primary_disease": "Respiratory Infection",
+    "symptoms": [
+      "respiratory_distress",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Bacterial pneumonia"
+  },
+  {
+    "case_id": "hamster_029",
+    "species": "hamster",
+    "primary_disease": "Cheek Pouch Impaction",
+    "symptoms": [
+      "facial_swelling",
+      "drooling"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Hamster-specific"
+  },
+  {
+    "case_id": "hamster_030",
+    "species": "hamster",
+    "primary_disease": "Wet Tail",
+    "symptoms": [
+      "diarrhea",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.62,
+    "notes": "Diarrheal disease"
+  },
+  {
+    "case_id": "ferret_031",
+    "species": "ferret",
+    "primary_disease": "Insulinoma",
+    "symptoms": [
+      "lethargy",
+      "ataxia"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Hypoglycemia"
+  },
+  {
+    "case_id": "ferret_032",
+    "species": "ferret",
+    "primary_disease": "Adrenal Disease",
+    "symptoms": [
+      "lethargy",
+      "hair_loss"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.62,
+    "notes": "Endocrine disorder"
+  },
+  {
+    "case_id": "bird_033",
+    "species": "bird",
+    "primary_disease": "Respiratory Infection",
+    "symptoms": [
+      "respiratory_distress",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Avian respiratory"
+  },
+  {
+    "case_id": "bird_034",
+    "species": "bird",
+    "primary_disease": "Crop Stasis",
+    "symptoms": [
+      "regurgitation",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.62,
+    "notes": "GI disorder"
+  },
+  {
+    "case_id": "fish_035",
+    "species": "fish",
+    "primary_disease": "Ichthyophthirius",
+    "symptoms": [
+      "white_spots",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.68,
+    "notes": "White spot disease"
+  },
+  {
+    "case_id": "fish_036",
     "species": "fish",
     "primary_disease": "Fin Rot",
     "symptoms": [
@@ -196,5 +439,53 @@
     "expected_rank": 1,
     "confidence_threshold": 0.65,
     "notes": "Bacterial infection"
+  },
+  {
+    "case_id": "fish_037",
+    "species": "fish",
+    "primary_disease": "Dropsy",
+    "symptoms": [
+      "abdominal_distension",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.62,
+    "notes": "Systemic infection"
+  },
+  {
+    "case_id": "reptile_038",
+    "species": "reptile",
+    "primary_disease": "Metabolic Bone Disease",
+    "symptoms": [
+      "lameness",
+      "jaw_swelling"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Nutritional disorder"
+  },
+  {
+    "case_id": "parakeet_039",
+    "species": "parakeet",
+    "primary_disease": "Respiratory Infection",
+    "symptoms": [
+      "respiratory_distress",
+      "cough"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.62,
+    "notes": "Avian respiratory"
+  },
+  {
+    "case_id": "parrot_040",
+    "species": "parrot",
+    "primary_disease": "Behavioral Disorder",
+    "symptoms": [
+      "feather_plucking",
+      "lethargy"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.6,
+    "notes": "Psychological stress"
   }
 ]
