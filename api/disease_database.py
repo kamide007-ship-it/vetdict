@@ -98,12 +98,51 @@ class DiseaseDatabase:
         try:
             cursor = conn.cursor()
             cursor.execute(
-                """SELECT d.id, d.name_en, d.name_ja, d.species, d.urgency
+                """SELECT d.id, d.name_en, d.name_ja, d.species, d.urgency, d.severity_score
                    FROM diseases d
                    WHERE d.id IN (
                        SELECT id FROM diseases_fts WHERE diseases_fts MATCH ?
-                   ) LIMIT ?""",
+                   )
+                   ORDER BY d.urgency DESC, d.severity_score DESC
+                   LIMIT ?""",
                 (query, limit)
+            )
+            return [dict(row) for row in cursor.fetchall()]
+        except sqlite3.OperationalError as e:
+            logger.error(f"FTS5 search error: {e}, query: {query}")
+            return []
+        finally:
+            conn.close()
+
+    def search_by_name_en(self, name: str, limit: int = 20) -> List[Dict[str, Any]]:
+        """Search for diseases by English name (contains match)"""
+        conn = self._get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute(
+                """SELECT id, name_en, name_ja, species, urgency, severity_score
+                   FROM diseases
+                   WHERE name_en LIKE ?
+                   ORDER BY urgency DESC
+                   LIMIT ?""",
+                (f"%{name}%", limit)
+            )
+            return [dict(row) for row in cursor.fetchall()]
+        finally:
+            conn.close()
+
+    def search_by_name_ja(self, name: str, limit: int = 20) -> List[Dict[str, Any]]:
+        """Search for diseases by Japanese name (contains match)"""
+        conn = self._get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute(
+                """SELECT id, name_en, name_ja, species, urgency, severity_score
+                   FROM diseases
+                   WHERE name_ja LIKE ?
+                   ORDER BY urgency DESC
+                   LIMIT ?""",
+                (f"%{name}%", limit)
             )
             return [dict(row) for row in cursor.fetchall()]
         finally:
