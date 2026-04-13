@@ -9,11 +9,11 @@ Phase 1: Emergency 617件の treatment_en を Claude API で翻訳
 """
 
 import json
-import os
-import sys
 import time
 from pathlib import Path
+
 from anthropic import Anthropic
+
 
 def load_data():
     """Load disease database"""
@@ -34,7 +34,7 @@ def extract_emergency_to_translate(diseases):
 def build_translation_prompt(batch_cases):
     """Build prompt for batch translation"""
     cases_text = ""
-    for idx, (db_idx, disease_data) in enumerate(batch_cases, 1):
+    for idx, (_db_idx, disease_data) in enumerate(batch_cases, 1):
         cases_text += f"""
 【Case {idx}】
 Species: {disease_data['species']}
@@ -125,7 +125,7 @@ def apply_translations(diseases, to_translate, translations_by_batch):
             if case_num:
                 all_translations[case_num] = trans.get('treatment_en', '')
 
-    for case_num, (db_idx, disease_data) in enumerate(to_translate, 1):
+    for case_num, (db_idx, _disease_data) in enumerate(to_translate, 1):
         if case_num in all_translations:
             diseases[db_idx]['treatment_en'] = all_translations[case_num]
             updated_count += 1
