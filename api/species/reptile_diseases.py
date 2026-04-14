@@ -3043,6 +3043,7 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "細菌・ウイルス・飼育管理因子の複合による多因子性慢性呼吸器疾患。",
         "urgency": "high",
         "recommended_tests": ["tracheal_wash", "bacterial_culture", "PCR_panel", "radiography"],
+        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "トカゲにおける慢性呼吸器疾患複合の原因: 多因子性慢性呼吸器疾患。",
         "pathophysiology": "Inflammation and exudate accumulation in airways or alveoli impair gas exchange, leading to hypoxemia. Mucosal damage reduces clearance mechanisms, promoting secondary infection.",
         "pathophysiology_ja": "慢性呼吸器疾患複合はトカゲにおける呼吸器疾患である。気道、肺実質、または胸膜腔の炎症、閉塞、または機能障害を伴う。ガス交換の障害により低酸素血症および高炭酸ガス血症の可能性がある。炎症性滲出液、粘液蓄積、構造変化が有効な換気を低下させる。代償性頻呼吸により呼吸仕事量と代謝要求が増加する。重症例は呼吸不全に進行し緊急介入が必要となりうる。",
