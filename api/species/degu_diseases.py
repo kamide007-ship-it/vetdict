@@ -75,10 +75,48 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおけるインスリン抵抗性の原因: 慢性的なインスリン抵抗性により、正常なインスリン値にもかかわらず持続的な高血糖が起こる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "インスリン抵抗性はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "デグーにおけるインスリン抵抗性の治療は基礎となるホルモン・代謝異常を標的とする。ホルモン補充療法または抑制療法により生理的バランスを回復する。食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、臓器機能マーカーの定期的モニタリングにより用量調整を行う。二次的合併症（臓器障害、感染）の併行管理が不可欠である。長期または生涯にわたる治療が必要な場合がある。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "インスリン抵抗性の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
+        "treatment": "DIETARY MANAGEMENT (CORNERSTONE): Degus are uniquely susceptible to insulin resistance due to "
+                    "evolutionary adaptation to arid, low-sugar environments. STRICT elimination of all simple "
+                    "sugars — no fruit, no commercial treats with sugar/molasses/honey, no root vegetables "
+                    "(carrots, sweet potato). Diet: unlimited timothy hay (≥80% of diet), small amount of "
+                    "degu-specific pellets (sugar-free formulation), limited fresh vegetables (dark leafy "
+                    "greens only — kale, dandelion, chicory). WEIGHT MANAGEMENT: Target body weight 170-300g "
+                    "(Syrian degu/O. degus). Weigh weekly on gram scale. Increase exercise opportunities — "
+                    "running wheel (≥25 cm diameter, solid surface), supervised out-of-cage time. MONITORING: "
+                    "Blood glucose measurement via glucometer (ear vein or tail prick) — target <200 mg/dL "
+                    "fasting. Fructosamine level reflects 2-3 week glycemic control. Urine dipstick for "
+                    "glucosuria (early indicator). PHARMACOLOGICAL: Insulin therapy is NOT recommended in "
+                    "degus — dietary management alone is the standard approach. Glipizide and other oral "
+                    "hypoglycemics have not been validated and risk severe hypoglycemia. COMPLICATION "
+                    "MANAGEMENT: Monitor for cataracts (bilateral lens opacity — common sequela of chronic "
+                    "hyperglycemia in degus, reported in up to 30% of diabetic individuals). Peripheral "
+                    "neuropathy may present as hind limb weakness. Hepatic lipidosis from chronic metabolic "
+                    "derangement. References: Edwards (2009) Vet Clin North Am Exot Anim Pract; Jekl et al. "
+                    "(2011) J Small Anim Pract; Quesenberry & Carpenter (2012) Ferrets, Rabbits, and "
+                    "Rodents 3rd ed.",
+        "treatment_ja": "【食事管理（最重要）】デグーは乾燥・低糖環境への進化的適応により、インスリン抵抗性に"
+                        "非常に罹患しやすい。全ての単糖類を厳格に排除 — 果物、糖分/糖蜜/蜂蜜を含む市販おやつ、"
+                        "根菜類（ニンジン・サツマイモ）は全て禁忌。食事: チモシー牧草を無制限（食事の≥80%）、"
+                        "デグー専用ペレット少量（無糖配合）、限定的な新鮮野菜（葉野菜のみ — ケール、タンポポ、"
+                        "チコリ）。【体重管理】目標体重170-300g。週1回グラム秤で計量。運動機会の増加 — "
+                        "回し車（直径≥25cm、無隙間表面）、ケージ外の監視下自由時間。【モニタリング】血糖値測定"
+                        "（耳静脈または尾尖穿刺） — 空腹時目標<200 mg/dL。フルクトサミンで2-3週間の血糖管理を"
+                        "反映。尿糖検査（早期指標）。【薬物療法】デグーにインスリン療法は推奨されない — "
+                        "食事管理単独が標準的アプローチ。グリピジド等の経口血糖降下薬は検証されておらず、"
+                        "重篤な低血糖のリスクあり。【合併症管理】白内障モニタリング（両側水晶体混濁 — "
+                        "慢性高血糖デグーの最大30%で報告）。末梢神経障害は後肢虚弱として発現しうる。"
+                        "参考文献: Edwards (2009); Jekl et al. (2011); Quesenberry & Carpenter (2012).",
+        "prevention": "STRICT DIETARY CONTROL is the primary prevention strategy. No fruit, no sugar-containing "
+                      "treats, no root vegetables, no commercial rodent treats with added sugars. Timothy hay-based "
+                      "diet (≥80%). Sugar-free degu-specific pellets only. Regular blood glucose screening at "
+                      "veterinary visits (every 6-12 months). Maintain healthy body weight through adequate exercise "
+                      "(running wheel, supervised play time). Owner education is critical — many owners unknowingly "
+                      "feed inappropriate high-sugar foods. Avoid sudden dietary changes. "
+                      "Reference: Edwards (2009) Vet Clin North Am Exot Anim Pract.",
+        "prevention_ja": "厳格な食事管理が最も重要な予防策。果物、糖分含有おやつ、根菜類、糖分添加の市販ラット/マウス"
+                         "用おやつは全て禁忌。チモシー牧草ベースの食事（≥80%）。無糖デグー専用ペレットのみ。"
+                         "獣医診察時の定期的血糖スクリーニング（6-12ヶ月ごと）。適切な運動による健康体重維持。"
+                         "飼い主教育が不可欠 — 多くの飼い主が知らずに不適切な高糖食を与えている。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "インスリン抵抗性の予後: 多くの内分泌疾患は適切な薬物療法で長期管理可能。定期的なホルモン値モニタリングと用量調整が重要。",
         "onset_pattern": {"acute", "subacute"},
@@ -386,10 +424,44 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "ストレスや退屈による過度な毛繕いで、自身や同居個体の毛が薄くなる。",
         "urgency": "low",
         "recommended_tests": ["behavioral_assessment", "skin_scraping"],
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "診断に基づく適切な内科的または外科的治療、輸液療法を含む支持療法、疼痛管理、栄養サポート、治療反応の定期的モニタリング。",
-        "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
-        "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
+        "treatment": "Barbering in degus is primarily a behavioral/psychogenic condition — medical treatment alone "
+                    "is insufficient without addressing underlying causes. BEHAVIORAL ASSESSMENT: (1) Identify "
+                    "stressor — overcrowding, insufficient enrichment, social hierarchy conflicts, small cage "
+                    "size, boredom. Degus are highly social and require group housing (minimum 2, ideally 3-4), "
+                    "but social stress can trigger barbering. (2) Differentiate self-barbering from allo-barbering "
+                    "(dominant degu barbering cage-mates — observe interactions). ENVIRONMENTAL MODIFICATION: "
+                    "Larger cage (minimum 80×50×100 cm for 2-3 degus), multiple levels, running wheel (≥25 cm "
+                    "solid surface), dust bath (chinchilla sand) 2-3× weekly, foraging opportunities (scatter "
+                    "feed in hay), tunnels, chew toys (untreated wood blocks, pumice stone). SOCIAL MANAGEMENT: "
+                    "If allo-barbering identified, separate aggressor temporarily. Reintroduce after cage "
+                    "rearrangement. If persistent, permanent separation may be needed. MEDICAL RULE-OUT: "
+                    "Skin scraping to exclude Demodex/dermatophytosis. Fungal culture (DTM). If pruritus "
+                    "present — treat underlying dermatological cause rather than behavior. PHARMACOLOGICAL "
+                    "(LAST RESORT): Not well studied in degus. Fluoxetine 1-2 mg/kg PO q24h has been "
+                    "extrapolated from other rodent species for refractory cases, but evidence is anecdotal. "
+                    "References: Jekl & Redrobe (2013) BSAVA Manual of Rodents and Ferrets; "
+                    "Quesenberry & Carpenter (2012).",
+        "treatment_ja": "バーバリングは主に行動学的/心因性の状態であり、根本原因への対処なしに薬物療法だけでは"
+                        "不十分。【行動評価】(1) ストレス源の特定 — 過密飼育、エンリッチメント不足、社会的"
+                        "順位争い、小さなケージ、退屈。デグーは高度に社会的で群れ飼育が必要（最低2頭、理想は"
+                        "3-4頭）だが、社会的ストレスがバーバリングを誘発しうる。(2) 自己バーバリングと他個体"
+                        "バーバリング（優位個体が同居個体を毛繕い）の鑑別 — 行動観察。【環境修正】大型ケージ"
+                        "（2-3頭で最低80×50×100cm）、多段構造、回し車（≥25cm無隙間表面）、砂浴び（チンチラ用"
+                        "サンド）週2-3回、フォレージング（牧草に餌を散布）、トンネル、かじり木。【社会管理】"
+                        "他個体バーバリングが判明したら攻撃者を一時的に隔離。ケージ再配置後に再導入。持続する"
+                        "場合は恒久的分離。【医学的除外】皮膚掻爬でデモデックス/皮膚糸状菌症を除外。真菌培養"
+                        "（DTM）。掻痒がある場合は行動ではなく基礎皮膚疾患を治療。【薬物療法（最終手段）】"
+                        "デグーでは十分に研究されていない。フルオキセチン1-2 mg/kg PO q24hが他の齧歯類から"
+                        "外挿されているが、エビデンスは逸話的。",
+        "prognosis": "Good prognosis when underlying behavioral/environmental cause is identified and corrected. "
+                     "Hair regrowth occurs within 4-6 weeks after stressor removal. Refractory cases with "
+                     "persistent self-barbering despite environmental modification carry a guarded prognosis — "
+                     "may indicate underlying chronic pain or anxiety disorder. Allo-barbering usually resolves "
+                     "with social restructuring. No direct impact on lifespan unless secondary skin infections "
+                     "develop from excoriated areas.",
+        "prognosis_ja": "行動学的/環境的原因が特定・是正されれば予後良好。ストレス源除去後4-6週間で毛の再生。"
+                        "環境修正にもかかわらず持続する自己バーバリングは予後慎重 — 慢性疼痛や不安障害が基礎に"
+                        "ある可能性。他個体バーバリングは社会的再構築で通常改善。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -506,10 +578,43 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "加齢・慢性的摩耗・累積的損傷による筋骨格系組織の進行性劣化が原因。遺伝的素因・慢性炎症・酸化ストレス・不適切な飼育条件が寄与。デグーの飼育管理と食事因子が変性変化を加速しうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "デグーの筋骨格系組織における進行性変性変化は、細胞構造と機能の漸進的喪失を伴う。酸化ストレス・慢性炎症・細胞老化・組織修復障害が関与する。加齢変化・累積的環境侵襲・遺伝的素因が疾患進行に寄与する。飼育管理と食事要因が変性疾患を悪化させうる。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける変形性関節症の治療: 疼痛管理。骨折は外科的固定または保存的管理（ケージレスト）。関節疾患は抗炎症薬+体重管理。リハビリテーション。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
+        "treatment": "PAIN MANAGEMENT (PRIMARY GOAL): Meloxicam 1-2 mg/kg PO/SC q24h — first-line NSAID for "
+                    "degus, well tolerated for long-term use. Start at lower dose and titrate based on response. "
+                    "Tramadol 5-10 mg/kg PO q12h for additional analgesia in moderate-severe cases. "
+                    "Buprenorphine 0.05-0.1 mg/kg SC q8-12h for acute flare-ups. WEIGHT MANAGEMENT: Obesity "
+                    "exacerbates joint disease — target ideal body weight (170-300g). Strict timothy hay diet, "
+                    "no sugar/fruit (diabetes prevention AND weight control). ENVIRONMENTAL MODIFICATION: "
+                    "Lower cage platforms (reduce jumping height to ≤15 cm between levels). Ramps instead of "
+                    "ladders between levels. Soft bedding (paper-based, deep layer). Remove running wheel if "
+                    "lameness is severe — replace with gentle exercise opportunities. Maintain ambient "
+                    "temperature 20-22°C (cold worsens joint stiffness). JOINT SUPPORT SUPPLEMENTS: "
+                    "Glucosamine/chondroitin (extrapolated from other species — limited evidence in degus). "
+                    "Omega-3 fatty acids (flaxseed, minimal amount). RADIOGRAPHIC MONITORING: Periodic "
+                    "radiographs to assess disease progression. Differentiate from metabolic bone disease "
+                    "(MBD) — check calcium, phosphorus, vitamin D status. SURGICAL INTERVENTION: Rarely "
+                    "indicated in degus due to small size and anesthesia risk. Joint luxation may require "
+                    "reduction. Severe cases with poor quality of life — consider humane euthanasia. "
+                    "NOTE: Oral β-lactam antibiotics are CONTRAINDICATED in degus (fatal dysbiosis). "
+                    "References: Quesenberry & Carpenter (2012); Jekl & Redrobe (2013) BSAVA Manual.",
+        "treatment_ja": "【疼痛管理（主要目標）】メロキシカム1-2 mg/kg PO/SC q24h — デグーの第一選択NSAID、"
+                        "長期使用で忍容性良好。低用量から開始し反応に基づき漸増。トラマドール5-10 mg/kg "
+                        "PO q12h（中等度〜重度の追加鎮痛）。ブプレノルフィン0.05-0.1 mg/kg SC q8-12h"
+                        "（急性増悪時）。【体重管理】肥満は関節疾患を悪化 — 理想体重（170-300g）を目標。"
+                        "チモシー牧草厳格食（糖尿病予防＋体重管理）。【環境修正】ケージ段差を低く（レベル間"
+                        "≤15cm）。梯子の代わりにスロープ。柔らかい床材（紙製、厚い層）。重度跛行時は回し車を"
+                        "撤去。室温20-22°C維持（寒冷は関節硬直を悪化）。【関節サポート】グルコサミン/"
+                        "コンドロイチン（他種からの外挿）。オメガ3脂肪酸（亜麻仁、少量）。【画像モニタリング】"
+                        "定期的X線で進行評価。代謝性骨疾患（MBD）との鑑別 — Ca/P/VitD確認。【外科】"
+                        "デグーでは小型サイズと麻酔リスクにより稀。注: 経口βラクタム系抗菌薬は禁忌。",
+        "prevention": "Maintain healthy body weight through appropriate timothy hay-based diet and regular exercise. "
+                      "Provide cage with appropriate platform heights (reduce impact on joints). Avoid obesity — "
+                      "the most modifiable risk factor. No sugar/fruit (prevents diabetes which exacerbates "
+                      "degenerative conditions). Adequate calcium and vitamin D for bone health. Regular "
+                      "veterinary checkups including mobility assessment in senior degus (>4 years). "
+                      "Reference: Jekl & Redrobe (2013) BSAVA Manual of Rodents and Ferrets.",
+        "prevention_ja": "チモシー牧草ベースの適切な食事と運動による健康体重維持。適切な段差のケージ設計。"
+                         "肥満回避（最も修正可能なリスク因子）。糖分/果物禁止（変性疾患を悪化させる糖尿病予防）。"
+                         "骨の健康のための適切なカルシウムとビタミンD。高齢デグー（>4歳）の定期健診で運動機能評価。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "変性疾患の予後は進行速度と管理可能性に依存する。緩徐進行性の場合、適切な対症療法とQOL管理で長期生存が可能。急速進行性の場合は予後不良。定期的な再評価と治療調整が重要。",
         "onset_pattern": {"chronic"},
@@ -636,10 +741,47 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "Exotic Otherにおける非特異的下痢（Exotic Other）の原因: その他エキゾチックにおける代謝性の消化器系疾患。非特異的下痢は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "非特異的下痢（Exotic Other）はExotic Otherにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "デグーにおける下痢（非特異的）の治療: 脱水補正が最優先: 皮下補液（乳酸リンゲル液）50-100ml/kg/日、分割投与。食事療法: チモシー干し草中心に戻す（糖分の多い食事を排除、デグーは糖尿病素因あり）。プロバイオティクスの補給。原因が細菌性の場合: エンロフロキサシン5-10mg/kg PO q12h（7-10日間）。腹部不快感がある場合: メロキシカム1-2mg/kg PO/SC q24h。糞便検査で寄生虫を除外。食事変更は段階的に（7日以上かけて）。体重モニタリング。注: 経口βラクタム系抗菌薬は禁忌。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "下痢（非特異的）の予防: 適切な食事管理（急激な食事変更を避ける）。繊維質の適切な摂取。異物誤食の予防。定期的な糞便検査。",
+        "treatment": "FLUID RESUSCITATION (PRIORITY): Subcutaneous fluids — warmed lactated Ringer's solution "
+                    "50-100 mL/kg/day in divided doses (2-3 sites, maximum 10 mL per site). Reassess hydration "
+                    "q6-8h. Severe dehydration (>8%): IV access via lateral tail vein or jugular — 0.9% NaCl "
+                    "or LRS at maintenance + deficit replacement. DIETARY MANAGEMENT: Return to strict timothy "
+                    "hay-based diet — eliminate all sugar-containing foods (CRITICAL in degus due to diabetes "
+                    "predisposition — hyperglycemia worsens GI dysbiosis). Offer fresh water ad libitum. "
+                    "If anorexic: syringe-feeding with Critical Care for Herbivores (Oxbow) 50-80 mL/kg/day "
+                    "in divided doses q4-6h. PROBIOTICS: Saccharomyces boulardii or Lactobacillus spp. — "
+                    "help restore hindgut fermentation microbiome. ANTIBIOTICS (if bacterial etiology "
+                    "suspected): Enrofloxacin 5-10 mg/kg PO/SC q12h × 7-10 days (first-line). "
+                    "Trimethoprim-sulfa 15-30 mg/kg PO q12h (alternative). CONTRAINDICATED: Oral β-lactam "
+                    "antibiotics (penicillins, cephalosporins, amoxicillin) — cause fatal Clostridial "
+                    "dysbiosis and enterotoxemia in degus and other hindgut fermenters. PAIN MANAGEMENT: "
+                    "Meloxicam 1-2 mg/kg PO/SC q24h for abdominal discomfort. Simethicone 1-2 mL/kg PO "
+                    "q8h for gas accumulation. DIAGNOSTIC WORKUP: Fecal flotation and direct smear for "
+                    "parasites (Giardia, coccidia, helminths). Fecal culture if persistent or bloody. "
+                    "Dietary change must be gradual (>7 days transition). Daily body weight monitoring "
+                    "(>2% daily loss warrants aggressive intervention). References: Quesenberry & "
+                    "Carpenter (2012); Jekl & Redrobe (2013) BSAVA Manual.",
+        "treatment_ja": "【脱水補正（最優先）】皮下補液 — 加温乳酸リンゲル液50-100 mL/kg/日を分割投与"
+                        "（2-3箇所、1箇所最大10mL）。水和状態をq6-8hで再評価。重度脱水（>8%）: 外側尾静脈"
+                        "または頸静脈からIVアクセス。【食事管理】チモシー牧草ベースの厳格食に戻す — 糖分を"
+                        "含む食品は全て排除（デグーの糖尿病素因により極めて重要 — 高血糖が腸内細菌叢異常を"
+                        "悪化）。食欲がない場合: 草食動物用クリティカルケア（Oxbow）50-80 mL/kg/日をシリンジ"
+                        "給餌。【プロバイオティクス】後腸発酵マイクロバイオームの回復を補助。【抗菌薬（細菌性"
+                        "が疑われる場合）】エンロフロキサシン5-10 mg/kg PO/SC q12h × 7-10日（第一選択）。"
+                        "TMS 15-30 mg/kg PO q12h（代替）。禁忌: 経口βラクタム系抗菌薬（ペニシリン、"
+                        "セファロスポリン、アモキシシリン） — デグーで致死的なクロストリジウム性腸管毒素症を"
+                        "引き起こす。【疼痛管理】メロキシカム1-2 mg/kg PO/SC q24h。シメチコン1-2 mL/kg "
+                        "PO q8h（ガス貯留時）。【検査】糞便浮遊法・直接塗抹で寄生虫検索。食事変更は段階的に"
+                        "（>7日間の移行期間）。毎日の体重モニタリング。",
+        "prevention": "Maintain stable timothy hay-based diet — avoid sudden dietary changes (transition over "
+                      "≥7 days). Ensure adequate fiber intake (timothy hay ad libitum). Strictly avoid sugar "
+                      "and fruit (diabetes predisposition disrupts GI microbiome). Fresh water always available. "
+                      "Regular fecal examination (every 6-12 months). Quarantine new degus for 2-4 weeks before "
+                      "introduction. Stress reduction through appropriate group housing and environmental "
+                      "enrichment. Clean cage regularly (every 3-5 days). "
+                      "Reference: Quesenberry & Carpenter (2012) Ferrets, Rabbits, and Rodents 3rd ed.",
+        "prevention_ja": "チモシー牧草ベースの安定した食事維持 — 急激な食事変更を避ける（≥7日間の移行期間）。"
+                         "適切な繊維質摂取（チモシー牧草の自由摂取）。糖分と果物の厳格な回避。新鮮な水を常時"
+                         "提供。定期的な糞便検査（6-12ヶ月ごと）。新規個体は2-4週間の隔離。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "下痢（非特異的）の予後: 急性消化器疾患は多くが治療に良好に反応。閉塞性疾患は早期外科介入で予後良好。慢性疾患は食事管理で長期管理可能。",
         "onset_pattern": {"acute", "subacute"},
@@ -1018,10 +1160,43 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーの神経系に影響する正確な原因は不明または多因子性。遺伝的素因・環境因子・免疫調節異常・不顕性感染・代謝障害が寄与因子として考えられる。個々の症例での主原因特定にはさらなる調査が必要。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "デグーの神経系に影響する正確な病態生理は完全には解明されていない。遺伝的素因・環境因子・免疫調節異常を含む多因子性メカニズムが関与すると考えられる。神経系組織における炎症性・代謝性・構造的変化が進行性の臨床徴候をもたらす。デグーにおける疾患メカニズムの完全な解明にはさらなる研究が必要。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける前庭疾患の治療: 原因の鑑別（画像診断/CSF分析）。抗けいれん薬（発作がある場合）。支持療法（輸液・栄養・安静）。理学療法（回復期）。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
+        "treatment": "IDENTIFY UNDERLYING CAUSE: (1) Otitis interna/media — most common treatable cause. "
+                    "Otoscopic examination, skull radiographs, ideally CT/MRI for bulla assessment. Treat with "
+                    "systemic antibiotics: enrofloxacin 5-10 mg/kg PO/SC q12h × 21-28 days (excellent CNS "
+                    "penetration), or trimethoprim-sulfa 15-30 mg/kg PO q12h. Topical ear treatment if "
+                    "tympanic membrane intact. (2) Encephalitozoon cuniculi — reported in degus; treat with "
+                    "fenbendazole 20 mg/kg PO q24h × 28 days (inhibits microsporidial replication). "
+                    "(3) Central causes (cerebrovascular accident, neoplasia) — poor prognosis, supportive "
+                    "care only. SUPPORTIVE CARE: Anti-nausea/vertigo: maropitant (Cerenia) 1 mg/kg SC q24h "
+                    "× 3-5 days (reduces vestibular nausea). Meclizine 2-12 mg/kg PO q24h (antihistamine "
+                    "vestibular suppressant — extrapolated). Maintain hydration: SC fluids 50-100 mL/kg/day "
+                    "if not eating/drinking. Syringe feeding if anorexic: Critical Care for Herbivores q4-6h. "
+                    "ENVIRONMENTAL SAFETY: Padded cage with low platforms (prevent fall injuries during "
+                    "ataxia). Remove running wheel temporarily. Place food/water at floor level. Quiet, "
+                    "dim environment reduces vestibular stimulation. PAIN MANAGEMENT: Meloxicam 1-2 mg/kg "
+                    "PO/SC q24h. RECOVERY: Vestibular compensation typically occurs over 2-4 weeks even "
+                    "without complete resolution of underlying cause. Residual head tilt may persist "
+                    "permanently but does not affect quality of life. NOTE: Oral β-lactam antibiotics are "
+                    "CONTRAINDICATED in degus. References: Quesenberry & Carpenter (2012); Jekl & "
+                    "Redrobe (2013) BSAVA Manual.",
+        "treatment_ja": "【原因の特定】(1) 内耳炎/中耳炎 — 最も一般的な治療可能な原因。耳鏡検査、頭蓋X線、"
+                        "理想的にはCT/MRIで鼓室評価。全身性抗菌薬: エンロフロキサシン5-10 mg/kg PO/SC q12h "
+                        "× 21-28日（優れたCNS浸透性）、またはTMS 15-30 mg/kg PO q12h。(2) エンセファリト"
+                        "ゾーン・クニクリ — デグーでも報告あり; フェンベンダゾール20 mg/kg PO q24h × 28日。"
+                        "(3) 中枢性（脳血管障害、腫瘍）— 予後不良、支持療法のみ。【支持療法】制吐/めまい: "
+                        "マロピタント1 mg/kg SC q24h × 3-5日。メクリジン2-12 mg/kg PO q24h。水和維持: "
+                        "食欲がなければ皮下補液。シリンジ給餌。【環境安全】パッド付きケージ、低い段差（運動失調"
+                        "中の転落防止）。回し車を一時的に撤去。食餌・水を床面に配置。静かで薄暗い環境。"
+                        "【回復】前庭代償は通常2-4週間で起こる。残存する斜頸は永続する場合があるがQOLに影響"
+                        "しない。注: 経口βラクタム系抗菌薬はデグーでは禁忌。",
+        "prevention": "Prompt treatment of ear infections (otitis externa) before progression to otitis media/"
+                      "interna. Maintain clean, well-ventilated cage to reduce respiratory and ear infection risk. "
+                      "Quarantine new animals for 2-4 weeks (E. cuniculi transmission risk). Avoid overcrowding "
+                      "and stress. Regular health checks — early detection of head tilt or balance abnormalities. "
+                      "Reference: Quesenberry & Carpenter (2012).",
+        "prevention_ja": "耳感染症（外耳炎）の迅速な治療で中耳炎/内耳炎への進行を予防。清潔で換気の良いケージ"
+                         "維持。新規動物の2-4週間隔離（E. cuniculi伝播リスク）。過密飼育とストレスの回避。"
+                         "定期健診 — 斜頸やバランス異常の早期発見。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
         "onset_pattern": {"acute", "subacute"},
