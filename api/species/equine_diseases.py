@@ -65,6 +65,18 @@ class Disease:
     etiology: str = ""  # 病因・原因
     pathophysiology: str = ""  # 病態生理
     treatment_protocol: str = ""  # 治療プロトコル(獣医師向け)
+    # ---- 日本語版フィールド (i18n対応) ----
+    # これらは `asdict` で disease_detail.html テンプレートに渡され、
+    # `disease.prevention_ja or disease.prevention` のフォールバックを
+    # 正しく動作させる。空の場合は英語版がそのまま使われる。
+    pathophysiology_ja: str = ""  # 病態生理（日本語）
+    etiology_ja: str = ""  # 病因・原因（日本語）
+    treatment_protocol_ja: str = ""  # 治療プロトコル（日本語）
+    prevention_ja: str = ""  # 予防策（日本語）
+    prognosis_ja: str = ""  # 予後（日本語）
+    clinical_signs_detail_ja: str = ""  # 臨床徴候（日本語）
+    risk_factors_ja: str = ""  # リスク因子（日本語）
+    general_management_ja: str = ""  # 管理方針（日本語）
 
     def reference_links(self) -> list[dict[str, str]]:
         """外部参照リンクを生成(症例写真・イラスト付きページへ)"""
@@ -12455,7 +12467,13 @@ DISEASE_DATABASE: list[Disease] = [
 # Enrich horse diseases from diseases_all_species.json
 # ---------------------------------------------------------------------------
 def _enrich_horse_diseases() -> None:
-    """Fill empty dataclass fields from the JSON database."""
+    """Fill empty dataclass fields from the JSON database.
+
+    Populates both English (e.g. `prevention`) and Japanese (e.g. `prevention_ja`)
+    fields so that `disease_detail.html` and the SPA can render the correct
+    language without falling back across languages. Preserves any hand-curated
+    Japanese text already on the dataclass (e.g. inline `prevention="..."`).
+    """
     import json
     import os
     db_path = os.path.join(
@@ -12466,29 +12484,55 @@ def _enrich_horse_diseases() -> None:
         with open(db_path, encoding="utf-8") as f:
             all_data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        return
+        all_data = []
     lookup: dict[str, dict] = {}
     for entry in all_data:
         if entry.get("species") == "Horse":
             lookup[entry.get("name", "")] = entry
 
-    field_map = {
-        "pathophysiology": "pathophysiology",
-        "etiology": "causes",
-        "treatment_protocol": "treatment",
-        "prevention": "prevention",
-        "prognosis": "prognosis",
-        "clinical_signs_detail": "clinical_signs",
-        "risk_factors": "causes",
-    }
+    # (dataclass field, JSON English key, JSON Japanese key)
+    # For each field, we populate the English-named dataclass field from the
+    # JSON Japanese column if the inline text is empty AND the inline text
+    # isn't already Japanese. This preserves the existing behavior of showing
+    # Japanese content in the primary locale while also populating the
+    # explicit `_ja` companion fields on the dataclass for disease_detail.html.
+    field_map = (
+        ("pathophysiology", "pathophysiology", "pathophysiology_ja"),
+        ("etiology", "causes", "causes_ja"),
+        ("treatment_protocol", "treatment", "treatment_ja"),
+        ("prevention", "prevention", "prevention_ja"),
+        ("prognosis", "prognosis", "prognosis_ja"),
+        ("clinical_signs_detail", "clinical_signs", "clinical_signs_ja"),
+        ("risk_factors", "causes", "causes_ja"),
+    )
     for disease in DISEASE_DATABASE:
-        enrichment = lookup.get(disease.name_en)
-        if enrichment:
-            for dc_field, json_field in field_map.items():
-                if not getattr(disease, dc_field, None) and enrichment.get(json_field):
-                    setattr(disease, dc_field, enrichment[json_field])
-            if not disease.general_management and enrichment.get("treatment"):
-                disease.general_management = enrichment["treatment"]
+        enrichment = lookup.get(disease.name_en) or {}
+        for dc_field, en_key, ja_key in field_map:
+            current = getattr(disease, dc_field, "") or ""
+            ja_val = enrichment.get(ja_key) or ""
+            en_val = enrichment.get(en_key) or ""
+            # Primary (display) field: prefer hand-curated inline → Japanese JSON → English JSON
+            if not current:
+                if ja_val:
+                    setattr(disease, dc_field, ja_val)
+                elif en_val:
+                    setattr(disease, dc_field, en_val)
+            # Companion `_ja` field: always populated from JSON Japanese,
+            # falling back to inline (which may already be Japanese),
+            # so asdict() produces both `prevention` and `prevention_ja`.
+            ja_attr = f"{dc_field}_ja"
+            if hasattr(disease, ja_attr) and not getattr(disease, ja_attr, ""):
+                setattr(disease, ja_attr, ja_val or getattr(disease, dc_field, "") or "")
+
+        if not disease.general_management and enrichment.get("treatment_ja"):
+            disease.general_management = enrichment["treatment_ja"]
+        elif not disease.general_management and enrichment.get("treatment"):
+            disease.general_management = enrichment["treatment"]
+        if not disease.general_management_ja and enrichment.get("treatment_ja"):
+            disease.general_management_ja = enrichment["treatment_ja"]
+        elif not disease.general_management_ja and disease.general_management:
+            disease.general_management_ja = disease.general_management
+
         # Fallback: generate content from existing description for unmatched diseases
         name = disease.name_en or disease.name_ja
         desc = disease.description_ja or disease.name_ja
@@ -12498,26 +12542,42 @@ def _enrich_horse_diseases() -> None:
                 f"{ja_name}は馬の組織に病理学的変化を引き起こす疾患である。"
                 f"{desc} 未治療の場合、細胞障害、炎症反応、組織損傷の段階を経て進行しうる。"
             )
+        if not disease.pathophysiology_ja:
+            disease.pathophysiology_ja = disease.pathophysiology
         if not disease.etiology:
             disease.etiology = (
                 f"馬における{ja_name}の原因には、遺伝的素因、体型、"
                 f"運動負荷、環境、飼養管理に関連する要因が含まれる。{desc}"
             )
+        if not disease.etiology_ja:
+            disease.etiology_ja = disease.etiology
         if not disease.treatment_protocol and not disease.general_management:
             disease.general_management = (
                 f"馬における{ja_name}の管理は、原因への対処、適切な支持療法、"
                 f"獣医師の指導に基づく治療的介入を行う。"
             )
+        if not disease.treatment_protocol_ja and disease.treatment_protocol:
+            disease.treatment_protocol_ja = disease.treatment_protocol
+        if not disease.general_management_ja and disease.general_management:
+            disease.general_management_ja = disease.general_management
         if not disease.prevention:
             disease.prevention = (
                 "適切な飼養管理、定期的な獣医師による健康診断、バランスの取れた栄養管理、"
                 "適度な運動、安全な飼養環境の維持が予防に重要である。"
             )
+        if not disease.prevention_ja:
+            disease.prevention_ja = disease.prevention
         if not disease.prognosis:
             disease.prognosis = (
                 "予後は重症度、診断の時期、治療への反応に依存する。"
                 "早期発見と適切な介入により転帰が改善する。"
             )
+        if not disease.prognosis_ja:
+            disease.prognosis_ja = disease.prognosis
+        if not disease.clinical_signs_detail_ja and disease.clinical_signs_detail:
+            disease.clinical_signs_detail_ja = disease.clinical_signs_detail
+        if not disease.risk_factors_ja and disease.risk_factors:
+            disease.risk_factors_ja = disease.risk_factors
 
 
 _enrich_horse_diseases()
