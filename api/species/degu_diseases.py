@@ -2716,10 +2716,42 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける認知機能障害（老齢性）の原因: 高齢デグーの加齢関連認知機能低下で、行動変化と社会的引きこもりを引き起こします。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "認知機能障害（老齢性）はデグーにおける神経疾患である。炎症、変性、圧迫、または血管障害による中枢・末梢神経系の損傷を伴う。解剖学的位置に応じて運動機能、感覚処理、自律神経調節、認知状態に影響を及ぼす。脱髄、軸索変性、ニューロン喪失は不可逆的な場合がある。浮腫や腫瘤性病変による頭蓋内圧亢進は脳幹ヘルニアを引き起こしうる。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "デグーにおける認知機能障害（老齢性）の治療: 環境エンリッチメントが中心（認知刺激: 新しいおもちゃ、フォレジングパズル、探索活動の促進）。食事療法: 抗酸化物質豊富な食事（ビタミンE、オメガ3脂肪酸の補給）。デグーは糖尿病素因があるため血糖管理が重要: 低糖質食の維持。社会的刺激の維持（群れ飼育の継続）。安全なケージ環境: 落下防止（棚板の段差縮小、ランプの設置）。併発疾患（関節炎等）がある場合: メロキシカム1-2mg/kg PO/SC q24h。定期的な体重測定と行動評価。根治療法はなく、進行緩和と生活の質維持が目標。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "認知機能障害（老齢性）の予防: 定期的な健康診断。適切な栄養管理。ストレスの軽減。清潔な飼育環境の維持。異常の早期発見・早期受診。",
+        "treatment": "NO CURATIVE TREATMENT — management is palliative, focused on slowing decline and maintaining "
+                    "quality of life. Closely related to Alzheimer's-like disease but represents the clinical "
+                    "syndrome in aged degus. (1) ENVIRONMENTAL ENRICHMENT: Novel objects rotated weekly, "
+                    "foraging puzzles (scatter food in hay to stimulate searching behavior), multiple levels "
+                    "with safe access (ramps, not ladders). Maintain CONSISTENT basic cage layout — disoriented "
+                    "degus need familiar spatial cues. (2) SOCIAL HOUSING: Continue group housing — social "
+                    "interaction is the most potent cognitive stimulus for this colonial species. Do NOT isolate "
+                    "a cognitively declining degu from its group unless aggression occurs. (3) DIETARY "
+                    "MANAGEMENT: Antioxidant supplementation — vitamin E (alpha-tocopherol) 1-5 mg/degu PO "
+                    "q24h. Omega-3 (DHA) supplementation. STRICT sugar-free, timothy hay-based diet — chronic "
+                    "hyperglycemia accelerates cognitive decline. (4) COMORBIDITY MANAGEMENT: Joint pain: "
+                    "meloxicam 1-2 mg/kg PO/SC q24h. Dental issues: regular dental check (elodont teeth may "
+                    "overgrow if reduced chewing activity). Weight monitoring: cognitive decline often "
+                    "accompanied by reduced food intake. (5) SAFETY MODIFICATIONS: Reduce platform heights "
+                    "(≤10 cm between levels), pad edges, remove hazardous obstacles. Place food/water at "
+                    "multiple accessible locations. (6) QUALITY OF LIFE ASSESSMENT: Regular monitoring of "
+                    "eating, drinking, grooming, social interaction, response to stimuli. Progressive "
+                    "unresponsiveness or inability to eat/drink warrants euthanasia discussion. "
+                    "References: Inestrosa et al. (2005); van Groen et al. (2011) Curr Alzheimer Res.",
+        "treatment_ja": "【根治的治療なし — 進行緩和とQOL維持が目標】(1) 環境エンリッチメント: 新規物品の"
+                        "週1回ローテーション、フォレージングパズル。基本的ケージレイアウトは一貫性維持。"
+                        "(2) 社会的飼育の継続: 群れ飼育が最も強力な認知刺激。認知機能低下個体を群れから"
+                        "隔離しない。(3) 食事管理: ビタミンE 1-5 mg/個体 q24h。オメガ3（DHA）。"
+                        "厳格な無糖・チモシー牧草ベース食。(4) 併存症管理: 関節痛にメロキシカム"
+                        "1-2 mg/kg PO/SC q24h。常生歯の定期チェック。体重モニタリング。"
+                        "(5) 安全性改善: 段差≤10cm、パッド付きエッジ。食餌・水を複数箇所に配置。"
+                        "(6) QOL評価: 食餌・飲水・毛繕い・社会的交流・刺激への反応を定期監視。",
+        "prevention": "Lifelong glycemic control through sugar-free, timothy hay-based diet (chronic hyperglycemia "
+                      "is the most significant modifiable risk factor for accelerated cognitive decline in degus). "
+                      "Environmental enrichment throughout life (cognitive reserve hypothesis). Social housing "
+                      "mandatory. Regular exercise. Antioxidant-rich dietary components. Avoid chronic stress "
+                      "and social isolation. Regular health monitoring in senior degus (>5 years). "
+                      "Reference: Inestrosa et al. (2005); Ardiles et al. (2012).",
+        "prevention_ja": "生涯を通じた血糖管理（無糖・チモシー牧草ベース食 — 慢性高血糖がデグーの認知機能低下"
+                         "を加速する最も重要な修正可能リスク因子）。生涯を通じた環境エンリッチメント。"
+                         "社会的飼育必須。定期運動。抗酸化物質豊富な食事。高齢デグー（>5歳）の定期健康モニタリング。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "認知機能障害（老齢性）の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"chronic"},
@@ -2733,8 +2765,31 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "慢性高血糖による神経損傷で、進行性の後肢脱力と運動失調を引き起こします。",
         "urgency": "moderate",
         "recommended_tests": ["neurological_exam", "blood_glucose", "physical_exam"],
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "血糖曲線に基づくインスリン療法、一貫した高繊維食による食事管理、定期的な血糖モニタリング、併存疾患の管理。",
+        "treatment": "PRIMARY: Glycemic control through STRICT dietary management — this is the ONLY validated "
+                    "approach for managing diabetic neuropathy in degus. Eliminate ALL sugar-containing foods. "
+                    "Timothy hay ≥80% of diet, sugar-free degu pellets, dark leafy greens only. Target fasting "
+                    "blood glucose <200 mg/dL. Monitor fructosamine q4-8 weeks. NOTE: Insulin therapy is NOT "
+                    "standard in degus — dietary management alone is the approach. NEUROPATHIC PAIN MANAGEMENT: "
+                    "Gabapentin 5-10 mg/kg PO q8-12h (first-line for neuropathic pain — extrapolated from "
+                    "other species; start low, titrate based on response). Meloxicam 1-2 mg/kg PO/SC q24h "
+                    "(anti-inflammatory, addresses concurrent musculoskeletal pain). SUPPORTIVE CARE: "
+                    "B-vitamin supplementation (B1/thiamine, B6/pyridoxine, B12/cobalamin) — extrapolated "
+                    "from human diabetic neuropathy management. Physical therapy: gentle massage, passive "
+                    "range of motion exercises for affected limbs. ENVIRONMENTAL MODIFICATION: Lower cage "
+                    "platforms (≤10 cm between levels), ramps instead of ladders, soft padded bedding. Remove "
+                    "running wheel if severe ataxia (fall risk). Place food/water at floor level. MONITORING: "
+                    "Neurological assessment q2-4 weeks — check proprioception, withdrawal reflexes, muscle "
+                    "mass. Concurrent screening for diabetic cataracts, retinopathy, nephropathy. "
+                    "PROGNOSIS NOTE: Nerve damage is often partially irreversible once established; early "
+                    "glycemic control is critical to prevent progression. "
+                    "References: Edwards (2009) Vet Clin Exot Anim; Jekl et al. (2011).",
+        "treatment_ja": "【最重要: 厳格な食事管理による血糖コントロール】糖分を含む全食品の排除。チモシー牧草"
+                        "≥80%。空腹時血糖<200 mg/dL目標。デグーではインスリン療法は標準的でない。"
+                        "【神経障害性疼痛管理】ガバペンチン5-10 mg/kg PO q8-12h（神経障害性疼痛の第一選択 — "
+                        "他種からの外挿）。メロキシカム1-2 mg/kg PO/SC q24h。【補助】ビタミンB群サプリメント。"
+                        "理学療法。【環境修正】ケージ段差≤10cm、スロープ、パッド付き床材。重度運動失調時は"
+                        "回し車撤去。食餌・水を床面に配置。【モニタリング】神経学的評価q2-4週。白内障・"
+                        "網膜症・腎症の併存症スクリーニング。神経損傷は確立後は部分的に不可逆 — 早期血糖管理が重要。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute", "subacute"},
@@ -2794,10 +2849,37 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける膝蓋骨脱臼の原因: 膝蓋骨の脱臼で間欠的な跛行を引き起こします。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "膝蓋骨脱臼はデグーにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける膝蓋骨脱臼の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "膝蓋骨脱臼の予防には安全で種に適した飼育環境の整備、鋭利物・危険物の除去、適切な取り扱い技術、他の動物との接触時の監視、温度管理、落下防止策が含まれる。",
+        "treatment": "CONSERVATIVE MANAGEMENT (Grade I-II): Meloxicam 1-2 mg/kg PO/SC q24h for pain and "
+                    "inflammation (first-line). Weight management — obesity exacerbates luxation. Environmental "
+                    "modification: reduce jumping heights, provide ramps, soft bedding. Activity restriction "
+                    "during acute episodes (cage rest in single-level cage × 2-4 weeks). Most grade I-II "
+                    "luxations in degus are managed conservatively. SURGICAL MANAGEMENT (Grade III-IV or "
+                    "refractory): Technically challenging in degus due to small body size (<300g). Trochlear "
+                    "sulcoplasty, tibial tuberosity transposition, or lateral imbrication — referral to "
+                    "exotic orthopedic specialist recommended. Isoflurane anesthesia (chamber induction 3-4%, "
+                    "maintenance 1.5-2.5%, 37°C heated pad). Post-operative: meloxicam 1-2 mg/kg q24h × "
+                    "7-14 days, cage rest × 4-6 weeks, gradual return to activity. CONCURRENT ASSESSMENT: "
+                    "Radiographs to evaluate trochlear groove depth and bony abnormalities. Assess for "
+                    "concurrent metabolic bone disease (MBD) — check calcium, phosphorus, vitamin D (poor "
+                    "mineralization contributes to patellar instability). Rule out diabetic neuropathy "
+                    "as contributing factor for hind limb dysfunction. NOTE: Oral β-lactam antibiotics "
+                    "CONTRAINDICATED if perioperative antibiotics needed — use enrofloxacin 5-10 mg/kg. "
+                    "References: Quesenberry & Carpenter (2012); Jekl & Redrobe (2013).",
+        "treatment_ja": "【保存的管理（Grade I-II）】メロキシカム1-2 mg/kg PO/SC q24h。体重管理。環境修正: "
+                        "ジャンプ高さ低減、スロープ、柔らかい床材。急性期は活動制限（単段ケージで2-4週間の"
+                        "ケージレスト）。大多数のGrade I-IIは保存的管理。【外科（Grade III-IV）】デグーの"
+                        "小型体サイズにより技術的困難 — エキゾチック整形外科専門医への紹介推奨。イソフルラン"
+                        "麻酔。術後: メロキシカム7-14日、ケージレスト4-6週。【併存評価】X線で滑車溝深度評価。"
+                        "MBD（Ca/P/VitD）の除外。糖尿病性神経障害の鑑別。周術期抗菌薬が必要な場合は"
+                        "エンロフロキサシン（経口βラクタム系禁忌）。",
+        "prevention": "Maintain ideal body weight through timothy hay-based diet (obesity worsens patellar "
+                      "instability). Provide cage with appropriate platform heights to reduce impact on joints. "
+                      "Adequate dietary calcium, phosphorus, and vitamin D for strong bone mineralization. "
+                      "Avoid breeding from animals with known orthopedic abnormalities. Safe cage design — "
+                      "no gaps where limbs could get trapped. Reference: Quesenberry & Carpenter (2012).",
+        "prevention_ja": "チモシー牧草ベース食による理想体重維持（肥満が膝蓋骨不安定性を悪化）。適切な段差の"
+                         "ケージ設計。適切なCa/P/VitDの食事摂取。既知の整形外科的異常を持つ個体の繁殖回避。"
+                         "四肢が挟まるような隙間のない安全なケージ設計。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "膝蓋骨脱臼の予後: 骨折は適切な固定で予後良好。変性性疾患は進行性だが疼痛管理でQOL維持可能。若齢動物は回復力が高い。",
         "onset_pattern": {"acute", "subacute"},
@@ -2815,10 +2897,39 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける回し車による外傷の原因: 不適切な回し車（金網、スポーク付き）による尾の皮膚剥離、四肢骨折、擦過傷です。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "回し車による外傷はデグーにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける回し車による外傷の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
-        "prevention": "Prevention includes providing safe housing, appropriate handling techniques, supervised exercise, and removal of environmental hazards.",
-        "prevention_ja": "回し車による外傷の予防には安全で種に適した飼育環境の整備、鋭利物・危険物の除去、適切な取り扱い技術、他の動物との接触時の監視、温度管理、落下防止策が含まれる。",
+        "treatment": "THREE COMMON INJURY TYPES require different management: (1) TAIL DEGLOVING (most common): "
+                    "Clean wound with warm saline irrigation. If only skin/fur lost (no bone exposed): topical "
+                    "silver sulfadiazine cream q12-24h, non-adherent dressing if tolerated, systemic antibiotics "
+                    "— enrofloxacin 5-10 mg/kg PO q12h × 7-14 days (oral β-lactams CONTRAINDICATED). If bone "
+                    "exposed: tail amputation under isoflurane anesthesia at next viable vertebral segment "
+                    "(chamber induction 3-4%, maintenance 1.5-2.5%, 37°C heated pad). Tail skin does NOT "
+                    "regenerate in degus (similar to tail degloving — the fur sheath strips off). Pain: "
+                    "meloxicam 1-2 mg/kg PO/SC q24h × 5-7 days, buprenorphine 0.05-0.1 mg/kg SC q8-12h "
+                    "acutely. (2) LIMB FRACTURE: Radiographs to assess fracture type and location. Simple "
+                    "fractures: external coaptation with padded splint or tape splint × 3-4 weeks. Complex/ "
+                    "comminuted: surgical fixation (intramedullary pin or external fixator — referral to "
+                    "exotic specialist). Amputation may be necessary for severely comminuted fractures — degus "
+                    "function well on 3 limbs. (3) FOOT/LIMB ABRASIONS: Clean with chlorhexidine 0.05%, "
+                    "topical antibiotic ointment, soft padded bedding until healed. CRITICAL: Immediately "
+                    "REPLACE the offending wheel with a solid-surface wheel ≥25 cm diameter (no mesh, no "
+                    "spokes, no rungs). References: Quesenberry & Carpenter (2012); Jekl & Redrobe (2013).",
+        "treatment_ja": "3つの一般的な外傷タイプの管理: (1) 尾部脱皮（最多）: 温生理食塩水で洗浄。皮膚/毛のみ"
+                        "喪失（骨露出なし）: 銀スルファジアジンクリーム局所 q12-24h、エンロフロキサシン"
+                        "5-10 mg/kg PO q12h × 7-14日（経口βラクタム系禁忌）。骨露出: イソフルラン麻酔下で"
+                        "次の viable椎骨セグメントでの尾切断。デグーの尾皮膚は再生しない。疼痛: メロキシカム"
+                        "1-2 mg/kg q24h、ブプレノルフィン0.05-0.1 mg/kg SC q8-12h。(2) 四肢骨折: "
+                        "X線評価。単純骨折: パッド付き副子 × 3-4週。複雑骨折: 外科的固定または断脚。"
+                        "デグーは3本脚で十分機能可能。(3) 足/四肢擦過傷: クロルヘキシジン0.05%で清拭、"
+                        "抗菌軟膏。重要: 原因となった回し車を直ちに無隙間表面の≥25cm径回し車に交換。",
+        "prevention": "USE ONLY SOLID-SURFACE EXERCISE WHEELS — ≥25 cm diameter for degus (30 cm preferred for "
+                      "adults). NEVER use wire mesh wheels, spoked wheels, or slatted wheels — these cause tail "
+                      "degloving, limb entrapment, and foot abrasions. Check wheel daily for damage or wobbling. "
+                      "Saucer-style wheels are a safe alternative. Running track should be wide enough for the "
+                      "animal (≥8 cm running surface). Multiple degus may need multiple wheels to prevent "
+                      "competition-related injuries. Reference: Jekl & Redrobe (2013) BSAVA Manual.",
+        "prevention_ja": "無隙間表面の回し車のみ使用 — 直径≥25cm（成体は30cm推奨）。金網・スポーク・スラットの"
+                         "回し車は絶対に使用しない。毎日の車両点検。ソーサー型回し車も安全な代替。走行面幅"
+                         "≥8cm。複数のデグーには複数の回し車。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "回し車による外傷の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"acute", "subacute"},
@@ -2893,10 +3004,47 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける社会的ストレス（単独飼育）の原因: 単独飼育による慢性ストレス。デグーは高度に社会的な動物で、群れで飼育する必要があります。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "社会的ストレス（単独飼育）はデグーにおける行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "デグーにおける社会的ストレス（単独飼育）の治療: 最も重要な治療は同性のコンパニオンの導入（デグーは高度な社会的動物で群れ飼育が必須）。ペア導入は中立的な環境で段階的に実施（スプリットケージ法: 仕切り越しに1-2週間馴化）。環境エンリッチメント: 大型ケージ（最低80×50×80cm以上）、回し車（直径30cm以上）、噛み木、砂浴び、フォレジングおもちゃ。食事改善: 高品質チモシー干し草自由摂取、適量のペレット、新鮮な水。免疫低下がある場合: ビタミン補給。自傷行動（バーバリング）がひどい場合: メロキシカム1-2mg/kg PO/SC q24h。ストレス関連の体重減少時は栄養補助。行動改善の評価: 4-8週間。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "社会的ストレス（単独飼育）の予防: 定期的な健康診断。適切な栄養管理。ストレスの軽減。清潔な飼育環境の維持。異常の早期発見・早期受診。",
+        "treatment": "THE MOST IMPORTANT TREATMENT IS COMPANION INTRODUCTION — degus are obligately social "
+                    "colonial animals and single housing is a welfare concern. (1) COMPANION INTRODUCTION "
+                    "(PRIMARY): Introduce a same-sex companion (to prevent breeding). Use split-cage method: "
+                    "mesh divider allowing visual, olfactory, and auditory contact for 1-2 weeks before full "
+                    "contact. Swap sides daily to mix scents. Neutral territory for first meeting (clean, "
+                    "unfamiliar cage with new bedding). Supervise initial interactions — mild chasing/mounting "
+                    "is normal dominance behavior; separate only if drawing blood. Ideal: introduce young degu "
+                    "(3-6 months) to established adult. Group of 3-4 is optimal (natural colony size). "
+                    "(2) ENVIRONMENTAL ENRICHMENT: Large cage (minimum 80×50×100 cm for 2-3 degus), multiple "
+                    "levels with ramps, ≥2 running wheels (≥25 cm solid surface), dust bath (chinchilla sand) "
+                    "2-3× weekly, foraging opportunities (scatter feed), tunnels, chew toys, multiple hiding "
+                    "spots. (3) DIETARY IMPROVEMENT: Timothy hay ad libitum, appropriate sugar-free pellets, "
+                    "fresh water. Vitamin supplementation if immunocompromised. (4) SYMPTOMATIC TREATMENT: "
+                    "Self-barbering: meloxicam 1-2 mg/kg PO/SC q24h if skin lesions present. Weight loss: "
+                    "syringe feeding with Critical Care if needed. (5) BEHAVIORAL MONITORING: Assess "
+                    "improvement over 4-8 weeks after companion introduction. Look for resumption of "
+                    "grooming, vocalizations (degus have >15 distinct calls), and play behavior. "
+                    "If companion introduction is truly impossible (severe aggression): maximize environmental "
+                    "enrichment and human interaction — but this is SUBOPTIMAL and not recommended long-term. "
+                    "References: Ebensperger & Caiozzi (2002) Rev Chilena Hist Nat; Long (2007) The Degu "
+                    "Handbook; Quesenberry & Carpenter (2012).",
+        "treatment_ja": "【最も重要な治療はコンパニオンの導入】デグーは社会性が義務的な群れ動物であり、単独飼育は"
+                        "動物福祉上の問題。(1) 仲間の導入（最重要）: 同性の個体を導入。スプリットケージ法: "
+                        "メッシュ仕切りで1-2週間の視覚/嗅覚/聴覚接触後にフルコンタクト。毎日側面を交換して"
+                        "匂いを混合。初対面は中立領域で。軽い追いかけ/マウンティングは正常な優位行動。"
+                        "理想: 若い個体（3-6ヶ月）を成体に紹介。3-4頭が最適。(2) 環境エンリッチメント: "
+                        "大型ケージ（最低80×50×100cm）、回し車≥2台、砂浴び週2-3回、フォレージング。"
+                        "(3) 食事改善: チモシー牧草自由摂取。(4) 対症療法: 自己バーバリングにメロキシカム"
+                        "1-2 mg/kg。体重減少にクリティカルケア。(5) 行動モニタリング: 仲間導入後4-8週間で"
+                        "評価。毛繕い、発声（デグーは15種以上の異なる鳴き声を持つ）、遊び行動の再開を確認。"
+                        "仲間導入が不可能な場合: 環境エンリッチメント最大化 — だし長期的には次善策であり"
+                        "推奨されない。",
+        "prevention": "NEVER house degus alone — they are obligately social colonial animals. Minimum pair, ideally "
+                      "3-4 same-sex group. When one member of a pair dies, introduce a new companion within 2-4 "
+                      "weeks (grieving degus decline rapidly). Obtain degus in established pairs/groups from "
+                      "breeders when possible. Provide adequate space, enrichment, and resources (food bowls, "
+                      "water bottles, hiding spots) to prevent social stress even in groups. "
+                      "Reference: Ebensperger & Caiozzi (2002); Long (2007) The Degu Handbook.",
+        "prevention_ja": "デグーを絶対に単独飼育しない — 社会性が義務的な群れ動物。最低ペア、理想は3-4頭の"
+                         "同性グループ。ペアの一方が死亡したら2-4週間以内に新しい仲間を導入（喪に服すデグーは"
+                         "急速に衰退）。可能であればブリーダーから確立されたペア/グループで入手。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "社会的ストレス（単独飼育）の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"acute", "subacute"},
