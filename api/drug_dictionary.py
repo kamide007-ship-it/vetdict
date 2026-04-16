@@ -23,6 +23,7 @@ from api.drug_batch_5 import DRUGS_BATCH_5, SPECIES_INFO_PATCH_5
 from api.drug_batch_6 import DRUG_INTERACTIONS_PATCH_6, DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
 from api.drug_batch_7 import CHINCHILLA_SPECIES_PATCH
 from api.drug_batch_8 import DRUGS_BATCH_8
+from api.drug_batch_9 import DRUGS_BATCH_9
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -1968,6 +1969,13 @@ for _drug8 in DRUGS_BATCH_8:
         DRUGS.append(_drug8)
         _existing_ids.add(_drug8["id"])
         _drug_index[_drug8["id"]] = _drug8
+
+# バッチ9 ISCAID尿路感染症ガイドライン薬品を統合（ホスホマイシン、カルバペネム等）
+for _drug9 in DRUGS_BATCH_9:
+    if _drug9["id"] not in _existing_ids:
+        DRUGS.append(_drug9)
+        _existing_ids.add(_drug9["id"])
+        _drug_index[_drug9["id"]] = _drug9
 
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
