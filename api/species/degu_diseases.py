@@ -3083,10 +3083,41 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーの眼科に影響する正確な原因は不明または多因子性。遺伝的素因・環境因子・免疫調節異常・不顕性感染・代謝障害が寄与因子として考えられる。個々の症例での主原因特定にはさらなる調査が必要。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "デグーの眼科に影響する正確な病態生理は完全には解明されていない。遺伝的素因・環境因子・免疫調節異常を含む多因子性メカニズムが関与すると考えられる。眼科組織における炎症性・代謝性・構造的変化が進行性の臨床徴候をもたらす。デグーにおける疾患メカニズムの完全な解明にはさらなる研究が必要。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける緑内障の治療: 原因の鑑別（フルオレセイン染色/シルマー試験/眼圧測定）。局所抗菌薬点眼。抗炎症薬。基礎疾患の管理。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
+        "treatment": "EMERGENCY — elevated IOP causes irreversible retinal/optic nerve damage within hours. "
+                    "MEDICAL MANAGEMENT (FIRST-LINE): Topical latanoprost 0.005% — 1 drop affected eye q12-24h "
+                    "(prostaglandin analog, increases uveoscleral outflow; may not be effective in all rodent "
+                    "species). Topical dorzolamide 2% — 1 drop q8-12h (carbonic anhydrase inhibitor, reduces "
+                    "aqueous production). Topical timolol 0.5% — 1 drop q12h (beta-blocker, reduces aqueous "
+                    "production; use with caution in small rodents due to systemic absorption). Systemic "
+                    "mannitol 1-2 g/kg IV over 20 min (osmotic diuretic for acute IOP crisis — only in "
+                    "hospital setting). PAIN MANAGEMENT: Meloxicam 1-2 mg/kg PO/SC q24h. Buprenorphine "
+                    "0.05-0.1 mg/kg SC q8-12h for acute ocular pain. RULE OUT UNDERLYING CAUSE: Uveitis "
+                    "(anterior chamber flare, miosis) — topical prednisolone acetate 1% q6-8h if uveitis "
+                    "confirmed. Lens luxation — may require surgical intervention. Diabetic cataracts — "
+                    "common in degus, may contribute to lens-induced uveitis → secondary glaucoma. SURGICAL: "
+                    "Enucleation for end-stage painful blind eye — definitive treatment for unresponsive "
+                    "glaucoma. Under isoflurane anesthesia (37°C heated pad). Degus adapt well to monocular "
+                    "vision. Post-operative: meloxicam × 5-7 days, enrofloxacin 5-10 mg/kg PO q12h × 7 days "
+                    "(oral β-lactams CONTRAINDICATED). MONITORING: Tonometry at each visit to track IOP "
+                    "response. Normal IOP in rodents approximately 10-20 mmHg. "
+                    "References: Williams (2012) Vet Ophthalmol; Quesenberry & Carpenter (2012).",
+        "treatment_ja": "【緊急 — 眼圧上昇は数時間以内に不可逆的な網膜/視神経損傷を引き起こす】"
+                        "【内科管理（第一選択）】ラタノプロスト0.005%点眼 q12-24h。ドルゾラミド2%点眼 "
+                        "q8-12h。チモロール0.5%点眼 q12h（小型齧歯類では全身吸収に注意）。急性IOP危機: "
+                        "マンニトール1-2 g/kg IV（入院下のみ）。【疼痛管理】メロキシカム1-2 mg/kg。"
+                        "ブプレノルフィン0.05-0.1 mg/kg SC q8-12h。【原因除外】ぶどう膜炎（プレドニゾロン"
+                        "点眼）。水晶体脱臼。糖尿病性白内障（デグーで一般的 → 水晶体誘発性ぶどう膜炎 → "
+                        "続発性緑内障）。【外科】末期の有痛性盲目眼には眼球摘出が根治的治療。イソフルラン"
+                        "麻酔（37℃加温パッド）。デグーは単眼視でよく適応。術後: メロキシカム5-7日、"
+                        "エンロフロキサシン5-10 mg/kg q12h × 7日（経口βラクタム系禁忌）。",
+        "prevention": "No specific prevention for primary glaucoma. Prompt treatment of uveitis and ocular "
+                      "infections reduces secondary glaucoma risk. Optimal glycemic control prevents diabetic "
+                      "cataracts which can lead to lens-induced uveitis and secondary glaucoma. Regular "
+                      "ophthalmic examination in senior degus and diabetic degus. "
+                      "Reference: Williams (2012) Vet Ophthalmol.",
+        "prevention_ja": "原発性緑内障の特異的予防法はない。ぶどう膜炎と眼感染症の迅速な治療で続発性緑内障"
+                         "リスクを軽減。最適な血糖管理で糖尿病性白内障を予防。高齢デグーと糖尿病デグーの"
+                         "定期眼科検査。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
         "onset_pattern": {"chronic"},
@@ -3100,10 +3131,40 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "デグー間の縄張り攻撃性で、特に確立されたグループに新しいメンバーを導入する際に見られます。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "wound_assessment", "behavioral_assessment"],
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "診断に基づく適切な内科的または外科的治療、輸液療法を含む支持療法、疼痛管理、栄養サポート、治療反応の定期的モニタリング。",
-        "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
-        "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
+        "treatment": "IMMEDIATE: Separate fighting degus to prevent further injury. Assess all involved animals "
+                    "for bite wounds. WOUND MANAGEMENT: Clean wounds with warm saline irrigation. Chlorhexidine "
+                    "0.05% for superficial wounds. Deep puncture wounds or abscesses: lance and drain under "
+                    "isoflurane anesthesia if needed, flush with saline. Systemic antibiotics for infected "
+                    "wounds: enrofloxacin 5-10 mg/kg PO/SC q12h × 7-14 days (oral β-lactams CONTRAINDICATED). "
+                    "Pain: meloxicam 1-2 mg/kg PO/SC q24h × 3-5 days. BEHAVIORAL MANAGEMENT — ROOT CAUSE: "
+                    "(1) Improper introduction: Reintroduce using split-cage method (mesh divider × 1-2 weeks, "
+                    "swap sides daily, neutral territory for first full contact). (2) Overcrowding: Ensure "
+                    "adequate cage size (minimum 80×50×100 cm for 2-3 degus). Provide multiple of each resource "
+                    "(food bowls, water bottles, hiding spots, wheels) — resource competition triggers aggression. "
+                    "(3) Hormonal: Intact males may fight — consider castration (reduces territorial aggression "
+                    "within 4-8 weeks). (4) Insufficient enrichment: Boredom increases aggression — add foraging "
+                    "opportunities, tunnels, multiple levels. (5) Established hierarchy disruption: Adding or "
+                    "removing a member destabilizes group dynamics — monitor closely for 2-4 weeks. If aggression "
+                    "is severe and persistent despite reintroduction attempts, permanent separation is necessary. "
+                    "Do NOT leave fighting degus together — injuries can be fatal. "
+                    "References: Long (2007) The Degu Handbook; Quesenberry & Carpenter (2012).",
+        "treatment_ja": "【即時】争っているデグーを分離し更なる外傷を防止。全関係個体の咬傷を評価。"
+                        "【創傷管理】温生理食塩水で洗浄。クロルヘキシジン0.05%。深い刺傷/膿瘍: イソフルラン"
+                        "麻酔下で切開排膿。感染創: エンロフロキサシン5-10 mg/kg PO/SC q12h × 7-14日"
+                        "（経口βラクタム系禁忌）。疼痛: メロキシカム1-2 mg/kg q24h。【行動管理 — 根本原因】"
+                        "(1) 不適切な導入: スプリットケージ法で再導入。(2) 過密飼育: 適切なケージサイズ確保、"
+                        "各リソースを複数設置。(3) ホルモン: 未去勢雄は争い — 去勢検討（4-8週間で縄張り攻撃性"
+                        "低減）。(4) エンリッチメント不足。(5) 確立された序列の撹乱。重度で持続的な攻撃性は"
+                        "恒久的分離が必要。争っているデグーを一緒にしない — 外傷は致死的になりうる。",
+        "prognosis": "Good prognosis for bite wound healing with appropriate treatment. Behavioral prognosis "
+                     "depends on underlying cause: improper introduction (good with proper split-cage method), "
+                     "resource competition (good with environmental modification), hormonal aggression (good "
+                     "with castration). Some individuals are temperamentally incompatible and require permanent "
+                     "separation. Severe bite wounds with deep tissue involvement carry risk of abscess formation "
+                     "and sepsis if untreated.",
+        "prognosis_ja": "適切な治療で咬傷治癒の予後良好。行動学的予後は原因による: 不適切な導入（適切な"
+                        "スプリットケージ法で良好）、リソース競合（環境修正で良好）、ホルモン性攻撃（去勢で"
+                        "良好）。一部の個体は気質的に不適合で恒久的分離が必要。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -3119,8 +3180,33 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける甲状腺機能低下症の原因: 甲状腺ホルモン産生の低下による代謝低下と体重増加です。",
         "pathophysiology": "Hypothyroidism is a metabolic/endocrine disorder. Reduced thyroid hormone production causing metabolic slowdown and weight gain. The underlying pathology involves dysregulation of hormonal feedback loops, enzyme activity, or substrate metabolism. This leads to imbalances in circulating hormone levels, electrolytes, or metabolic intermediates that affect cellular function across multiple organ systems. Compensatory mechanisms may temporarily maintain homeostasis but eventually decompensate, leading to progressive clinical deterioration and multi-organ effects.",
         "pathophysiology_ja": "甲状腺機能低下症はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "デグーにおける甲状腺機能低下症の治療は基礎となるホルモン・代謝異常を標的とする。ホルモン補充療法または抑制療法により生理的バランスを回復する。食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、臓器機能マーカーの定期的モニタリングにより用量調整を行う。二次的合併症（臓器障害、感染）の併行管理が不可欠である。長期または生涯にわたる治療が必要な場合がある。",
+        "treatment": "IMPORTANT NOTE: True hypothyroidism is rare and poorly documented in degus. Differential "
+                    "diagnosis of lethargy, obesity, and poor coat should first rule out diabetes mellitus "
+                    "(much more common in degus), malnutrition, chronic stress, and aging-related decline. "
+                    "DIAGNOSTIC CONFIRMATION: Total T4 and free T4 measurement (reference ranges not well "
+                    "established for degus — interpret cautiously; extrapolate from rat/guinea pig reference "
+                    "ranges). TSH stimulation test (limited availability for exotic species). THYROID HORMONE "
+                    "REPLACEMENT: Levothyroxine (L-thyroxine) 10-20 μg/kg PO q24h — starting dose, titrate "
+                    "based on clinical response and T4 monitoring q2-4 weeks. Administer on empty stomach "
+                    "30-60 minutes before feeding for optimal absorption. MONITORING: T4 levels q4-8 weeks "
+                    "during dose adjustment, then q3-6 months once stable. Watch for signs of iatrogenic "
+                    "hyperthyroidism (tachycardia, weight loss, restlessness, polyphagia). WEIGHT MANAGEMENT: "
+                    "Timothy hay-based diet (≥80%), no sugar/fruit (concurrent diabetes risk). Increased "
+                    "exercise as activity improves with treatment. CONCURRENT DISEASE: Screen for diabetes "
+                    "mellitus (blood glucose, fructosamine) — hypothyroidism may worsen insulin resistance. "
+                    "Skin/coat condition should improve within 4-8 weeks of adequate replacement. Lifelong "
+                    "treatment is typically required. "
+                    "References: Quesenberry & Carpenter (2012); Edwards (2009) Vet Clin Exot Anim.",
+        "treatment_ja": "【重要】真の甲状腺機能低下症はデグーではまれで、十分に文書化されていない。沈鬱、肥満、"
+                        "被毛不良の鑑別診断として、まず糖尿病（デグーで遥かに一般的）、栄養不良、慢性ストレス、"
+                        "加齢変化を除外すべき。【診断確定】総T4と遊離T4測定（デグーの基準値は確立されていない "
+                        "— ラット/モルモットの基準値から外挿して慎重に解釈）。TSH刺激試験。"
+                        "【甲状腺ホルモン補充】レボチロキシン10-20 μg/kg PO q24h — 開始用量、臨床反応と"
+                        "T4モニタリングに基づき漸増（q2-4週）。空腹時投与（給餌30-60分前）。"
+                        "【モニタリング】用量調整中はT4をq4-8週、安定後q3-6ヶ月。医原性甲状腺機能亢進症の"
+                        "徴候に注意（頻脈、体重減少、多食）。【体重管理】チモシー牧草ベース食、糖分禁忌。"
+                        "【併存症】糖尿病スクリーニング — 甲状腺機能低下がインスリン抵抗性を悪化させうる。"
+                        "生涯にわたる治療が通常必要。",
         "prevention": "Prevention of hypothyroidism includes appropriate diet formulation, regular health monitoring with blood work, maintaining healthy body weight, avoiding excessive treats or inappropriate foods, and early intervention when subclinical changes are detected.",
         "prevention_ja": "甲状腺機能低下症の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
