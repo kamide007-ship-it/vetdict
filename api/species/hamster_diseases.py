@@ -3759,12 +3759,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "ハムスターにおけるメラノサイトーマの原因: 色素性結節として現れるメラノサイトの良性腫瘍で、ハムスターに多い。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "メラノサイトーマはハムスターにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "ハムスターにおけるメラノサイトーマの治療: 原因の鑑別（真菌培養/皮膚掻爬/細胞診）。感染性は適切な抗菌薬/抗真菌薬。アレルギー性は原因除去+対症療法。環境改善・衛生管理。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "メラノサイトーマの予防は限定的であるが、ホルモン依存性腫瘍軽減のための避妊・去勢手術、既知の発癌物質の回避、早期発見のための定期健診、適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。",
-        "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
-        "prognosis_ja": "メラノサイトーマの予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
+        "treatment": "NOTE: This entry overlaps with Dermal Melanocytoma (see separate entry for comprehensive details). Melanocytoma is the most common skin tumor in Syrian hamsters. Benign melanocytic proliferation forming well-circumscribed pigmented nodules. Clinical management: identical to Dermal Melanocytoma entry. FNA for initial assessment — melanin-laden cells with uniform nuclei distinguish from malignant melanoma (nuclear atypia, high mitotic rate). Small, stable, non-ulcerated melanocytomas: observation with q4-8 week monitoring acceptable. Surgical excision: recommended when mass is >10 mm, growing, ulcerated, or diagnosis uncertain. Isoflurane anesthesia, 5-10 mm margins, 5-0/6-0 absorbable suture closure. Post-op: meloxicam 0.2 mg/kg PO/SC q24h × 3-5 days. Submit for histopathology — benign melanocytoma vs. malignant melanoma distinction is critical for prognosis. If malignant melanoma confirmed: stage with thoracic radiographs and abdominal ultrasound. No established chemotherapy for hamster melanoma. References: Pour et al. (1979), Percy & Barthold (2007), Ernst et al. (2018).",
+        "treatment_ja": "注: このエントリは皮膚メラノサイトーマ（別エントリの包括的詳細参照）と重複。メラノサイトーマはシリアンハムスターで最も多い皮膚腫瘍。良性メラノサイト増殖が境界明瞭な色素性結節を形成。臨床管理: 皮膚メラノサイトーマエントリと同一。FNAで初期評価——均一核のメラニン含有細胞が悪性メラノーマ（核異型、高有糸分裂率）と鑑別。小型・安定・非潰瘍性メラノサイトーマ: q4-8週モニタリングで経過観察可。外科切除: >10mm、増大、潰瘍化、診断不確実時推奨。イソフルラン麻酔、5-10mmマージン、5-0/6-0吸収糸。術後: メロキシカム0.2mg/kg PO/SC q24h×3-5日。病理提出——良性メラノサイトーマvs悪性メラノーマの鑑別が予後に決定的。悪性確定時: 胸部X線＋腹部超音波でステージング。ハムスターメラノーマの化学療法は未確立。参考文献: Pour et al. (1979), Percy & Barthold (2007), Ernst et al. (2018)。",
+        "prevention": "No specific prevention — genetic predisposition. Regular skin examination during handling for early detection of pigmented masses. Prompt veterinary evaluation of any new, rapidly growing, or changing lesion.",
+        "prevention_ja": "特異的予防なし——遺伝的素因。ハンドリング時の定期的皮膚観察で色素性腫瘤の早期発見。新規・急速増大・変化する病変の速やかな獣医評価。",
+        "prognosis": "Excellent for benign melanocytoma — surgical excision curative with <5% recurrence. >90% of hamster melanocytic tumors are benign. Malignant melanoma: poor (locally aggressive, metastatic potential, no effective chemotherapy).",
+        "prognosis_ja": "良性メラノサイトーマの予後は優れている——外科切除で治癒、再発<5%。ハムスターのメラノサイト腫瘍の>90%は良性。悪性メラノーマ: 不良（局所浸潤性、転移能、有効な化学療法なし）。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -3843,12 +3843,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "ハムスターにおける心筋変性の原因: 加齢に伴う心筋変性と線維化により心機能障害が起こる。",
         "pathophysiology": "Myocardial dysfunction impairs cardiac output through reduced contractility, abnormal relaxation, or rhythm disturbances. Compensatory mechanisms eventually fail, leading to congestive heart failure.",
         "pathophysiology_ja": "心筋変性はハムスターにおける循環器疾患である。心臓、大血管、または末梢血管系の構造的・機能的異常を伴う。心拍出量の低下、弁膜機能障害、調律異常により組織灌流が障害される。代償機構（神経ホルモン活性化、心室リモデリング）が一時的に機能を維持するが、進行性の心筋劣化を引き起こす。心不全、血栓塞栓症、突然死が進行期疾患の潜在的結果である。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "ハムスターにおける心筋変性の治療: 利尿薬: フロセミド1-10mg/kg PO/IM q12h（うっ血徴候がある場合）。ACE阻害薬: エナラプリル0.5mg/kg PO q24h。強心薬: ピモベンダン0.1-0.3mg/kg PO q12h。抗酸化サプリメント: ビタミンE、CoQ10の補給。低ナトリウム食。適度な活動（過度な運動は制限）。酸素補給（チアノーゼ時）。ストレスの最小化。定期的な心エコー・胸部X線でモニタリング。進行性疾患であり、QOL維持が治療目標。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "心筋変性の予防: 定期的な心臓検査（聴診、心エコー）。リスク品種のスクリーニング。適切な体重管理と運動量。低ナトリウム食（心不全リスク群）。",
-        "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
-        "prognosis_ja": "心筋変性の予後: 基礎心疾患の種類と重症度による。軽度は適切な内科管理で長期生存可能。重度心不全は予後要注意。定期的な心エコーによるモニタリングが重要。",
+        "treatment": "Cardiac myodegeneration is extremely common in aged hamsters (>18 months) — prevalence approaches 70-90% in hamsters >2 years at necropsy. Characterized by progressive myocardial fiber degeneration, fibrosis, and calcification leading to dilated cardiomyopathy and congestive heart failure (CHF). Syrian hamsters (BIO 14.6 cardiomyopathic strain) are a well-established animal model for human dilated cardiomyopathy. Clinical signs often subtle until advanced: reduced activity, increased respiratory rate/effort, cyanosis of extremities (ears, feet), abdominal distension (ascites), sudden death. Diagnosis: auscultation — gallop rhythm, murmur, arrhythmia (limited value in hamsters due to high heart rate 300-600 bpm). Thoracic radiographs: cardiomegaly (vertebral heart score), pulmonary edema, pleural effusion. Echocardiography (if available with high-frequency probe ≥15 MHz): reduced fractional shortening (<25%), chamber dilation, wall thinning. ECG: arrhythmias, ST changes. TREATMENT (palliative — disease is progressive and incurable): furosemide 1-4 mg/kg PO/IM q8-12h for CHF signs (pulmonary edema, pleural effusion, ascites) — start at low dose, titrate up as needed. Monitor for dehydration. Emergency furosemide: 2-4 mg/kg IM for acute dyspnea. ACE inhibitor: enalapril 0.5 mg/kg PO q12-24h or benazepril 0.5 mg/kg PO q24h — reduces afterload and slows cardiac remodeling. Pimobendan 0.1-0.3 mg/kg PO q12h — inodilator, improves contractility and reduces afterload; considered standard of care for DCM in other species. Oxygen supplementation: flow-by or chamber (40-60% FiO2) for dyspneic patients. If pleural effusion: thoracocentesis (25G butterfly needle, 7th-9th intercostal space) — may be both diagnostic and therapeutic. Nutritional support: low-sodium diet (avoid high-salt treats), ensure adequate caloric intake (cardiac cachexia common), omega-3 fatty acids. Antioxidant supplementation: vitamin E 1-2 mg/hamster PO q24h, CoQ10 2-5 mg/hamster PO q24h (some evidence of myocardial benefit in cardiomyopathic hamster models). Taurine supplementation: 100-250 mg/kg PO q24h (taurine deficiency-associated DCM documented in other species). Environment: minimize stress, limit exercise (remove wheel during decompensation), avoid temperature extremes, quiet location. Monitoring: respiratory rate at rest (>80/min concerning), body weight (fluid retention vs. cachexia), appetite, activity level. Recheck q2-4 weeks during stabilization, then monthly. References: Bajusz (1969) cardiomyopathic hamster, Homburger et al. (1962), Percy & Barthold (2007), Keeble & Meredith (2009).",
+        "treatment_ja": "心筋変性は高齢ハムスター（>18ヶ月）で極めて多く、剖検で>2歳の70-90%に認められる。進行性心筋線維変性・線維化・石灰化が特徴で、拡張型心筋症（DCM）とうっ血性心不全（CHF）に至る。シリアンハムスター（BIO 14.6心筋症系統）はヒトDCMの確立された動物モデル。臨床徴候は進行まで微妙: 活動性低下、呼吸数/努力増加、末梢チアノーゼ（耳・足）、腹部膨満（腹水）、突然死。【診断】聴診——ギャロップリズム、雑音、不整脈（高心拍数300-600bpmのため限界あり）。胸部X線: 心拡大（VHS）、肺水腫、胸水。心エコー（≥15MHz高周波プローブ）: 短縮率低下（<25%）、心腔拡大、壁菲薄化。心電図: 不整脈、ST変化。【治療（緩和的——進行性・不治）】フロセミド1-4mg/kg PO/IM q8-12h（CHF徴候——肺水腫、胸水、腹水時）——低用量開始、必要に応じて漸増。脱水モニタ。緊急フロセミド: 2-4mg/kg IM（急性呼吸困難）。ACE阻害薬: エナラプリル0.5mg/kg PO q12-24hまたはベナゼプリル0.5mg/kg PO q24h——後負荷軽減・心臓リモデリング遅延。ピモベンダン0.1-0.3mg/kg PO q12h——強心・血管拡張薬、収縮力改善と後負荷軽減; DCMの標準治療。酸素補給: 呼吸困難時流量投与またはチャンバー（40-60% FiO2）。胸水: 胸腔穿刺（25G蝶針、第7-9肋間）——診断的かつ治療的。栄養: 低ナトリウム食（高塩おやつ回避）、十分なカロリー摂取確保（心臓悪液質が多い）、オメガ3脂肪酸。抗酸化サプリ: ビタミンE 1-2mg/匹 PO q24h、CoQ10 2-5mg/匹 PO q24h（心筋症ハムスターモデルで一部心筋保護エビデンス）。タウリン: 100-250mg/kg PO q24h（タウリン欠乏性DCMが他種で報告）。環境: ストレス最小化、代償不全時は運動制限（ホイール撤去）、温度極端回避、静かな場所。モニタ: 安静時呼吸数（>80/分は要注意）、体重（水分貯留vs悪液質）、食欲、活動性。安定化期間q2-4週、その後月1回再検。参考文献: Bajusz (1969), Homburger et al. (1962), Percy & Barthold (2007), Keeble & Meredith (2009)。",
+        "prevention": "No specific prevention for age-related cardiac myodegeneration — it is essentially an aging process. Maintain healthy body weight (obesity increases cardiac workload). Provide adequate exercise (solid-surface wheel) during healthy period. Balanced diet with omega-3 fatty acids and antioxidants. Avoid breeding from known cardiomyopathic lines. Annual wellness examination for hamsters >18 months should include thoracic auscultation.",
+        "prevention_ja": "加齢性心筋変性の特異的予防はない——本質的に老化プロセス。適正体重維持（肥満は心臓負荷増加）。健康期には十分な運動（ソリッドサーフェスホイール）。オメガ3脂肪酸と抗酸化物質を含むバランスの取れた食事。既知の心筋症系統からの繁殖回避。18ヶ月以上のハムスターの年1回ウェルネス検診に胸部聴診を含めるべき。",
+        "prognosis": "Guarded to poor — cardiac myodegeneration is progressive and irreversible. Asymptomatic/early stage with medical management: may survive months with acceptable quality of life. Symptomatic CHF (dyspnea, ascites, pleural effusion): poor — median survival weeks to low months with aggressive medical management. Acute decompensation with pulmonary edema: grave. Given hamster lifespan (2-3 years), cardiac myodegeneration in an animal >2 years must be considered in context of overall life expectancy. Focus is on quality of life, not cure.",
+        "prognosis_ja": "要注意〜不良——心筋変性は進行性で不可逆。無症候性/早期で内科管理: 許容できるQOLで数ヶ月生存の可能性。症候性CHF（呼吸困難、腹水、胸水）: 不良——積極的内科管理で生存期間中央値数週〜数ヶ月。肺水腫を伴う急性代償不全: 極めて不良。ハムスター寿命（2-3年）を考慮し>2歳の心筋変性は全体的余命の文脈で評価。治癒ではなくQOLに焦点。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -3907,12 +3907,76 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "ハムスターにおける側腹腺過形成の原因: シリアンハムスターの雄に多い側腹臭腺の良性肥大と過角化。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "側腹腺過形成はハムスターにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "ハムスターにおける側腹腺過形成の治療: 多くの場合は良性で治療不要（正常なアンドロゲン依存性の生理的変化）。過角化・痂皮がある場合: 温水で愛護的に軟化除去。二次感染がある場合: 患部をクロルヘキシジン0.05%で清拭、エンロフロキサシン10mg/kg PO q12h（7日間）。炎症がひどい場合: メロキシカム0.2mg/kg PO/SC q24h。腫瘍との鑑別: 急速に増大する場合や潰瘍化がある場合は細胞診/生検。去勢手術で縮小が期待できる。経過観察で十分なことが多い。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "側腹腺過形成の予防: 定期的な健康診断。適切な栄養管理。ストレスの軽減。清潔な飼育環境の維持。異常の早期発見・早期受診。",
-        "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
-        "prognosis_ja": "側腹腺過形成の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
+        "treatment": "Flank gland hyperplasia is typically a benign, androgen-dependent physiological change "
+                    "requiring no treatment in most cases. The paired costovertebral (flank/hip) scent glands "
+                    "are pigmented sebaceous glands used for territorial marking, more prominent in intact males. "
+                    "CONSERVATIVE MANAGEMENT (majority of cases): No intervention needed for mild hyperplasia "
+                    "without secondary complications. Gentle cleansing with warm saline if crusting or keratin "
+                    "debris accumulates. Avoid aggressive scrubbing — tissue is delicate and iatrogenic trauma "
+                    "worsens inflammation. HYPERKERATOSIS/CRUSTING: Soften with warm water compresses for "
+                    "2-3 minutes, then gently remove loosened debris with cotton-tipped applicator. Apply "
+                    "chlorhexidine 0.05% solution to prevent secondary bacterial colonization. Repeat 2-3 "
+                    "times weekly as needed. SECONDARY BACTERIAL INFECTION: Chlorhexidine 0.05% topical "
+                    "cleansing q12-24h. Systemic antibiotics if cellulitis present: enrofloxacin 5-10 mg/kg "
+                    "PO/SC q12h × 7-14 days, or trimethoprim-sulfa 15-30 mg/kg PO q12h. INFLAMMATION: "
+                    "Meloxicam 0.2 mg/kg PO/SC q24h × 3-5 days. CASTRATION: Reduces androgen stimulation "
+                    "and typically results in significant gland size reduction within 4-8 weeks. Consider "
+                    "in cases of recurrent secondary infection, marked hyperplasia causing discomfort, or "
+                    "owner concern about cosmetic appearance. Isoflurane anesthesia — chamber induction "
+                    "3-4%, maintenance 1.5-2.5% via nose cone, body temperature maintenance on 37°C heated "
+                    "pad. NEOPLASTIC DIFFERENTIATION: If rapid enlargement, ulceration, asymmetry, or "
+                    "color change — perform FNA cytology ± incisional biopsy. Flank gland adenoma/carcinoma "
+                    "reported rarely; surgical excision with 1-2 mm margins indicated for neoplastic "
+                    "transformation. References: Harkness & Wagner (1995) Biology and Medicine of Rabbits "
+                    "and Rodents 4th ed; Percy & Barthold (2007) Pathology of Laboratory Rodents and "
+                    "Rabbits 3rd ed; Quesenberry & Carpenter (2012) Ferrets, Rabbits, and Rodents 3rd ed.",
+        "treatment_ja": "側腹腺過形成は多くの場合、良性のアンドロゲン依存性の生理的変化であり治療不要。"
+                        "肋椎部（側腹部/腰部）の対の臭腺は色素沈着した脂腺で、縄張りマーキングに使用され、"
+                        "未去勢雄でより顕著。【保存的管理（大多数の症例）】軽度の過形成で二次的合併症がなければ"
+                        "介入不要。痂皮・角化物の蓄積があれば温生理食塩水で優しく清拭。組織は脆弱なため"
+                        "強い擦過は避ける — 医原性外傷が炎症を悪化させる。【過角化・痂皮】温水湿布で2-3分"
+                        "軟化後、綿棒で緩んだデブリを愛護的に除去。クロルヘキシジン0.05%溶液を塗布し二次"
+                        "細菌感染を予防。週2-3回を必要に応じて繰り返す。【二次細菌感染】クロルヘキシジン"
+                        "0.05%局所清拭 q12-24h。蜂窩織炎がある場合は全身性抗菌薬: エンロフロキサシン"
+                        "5-10 mg/kg PO/SC q12h × 7-14日間、またはトリメトプリム・スルファ15-30 mg/kg "
+                        "PO q12h。【炎症】メロキシカム0.2 mg/kg PO/SC q24h × 3-5日間。【去勢手術】"
+                        "アンドロゲン刺激を低減し、4-8週間以内に腺サイズの有意な縮小が期待できる。再発性"
+                        "二次感染、著明な過形成による不快感、または外観上の問題がある場合に検討。イソフルラン"
+                        "麻酔 — チャンバー導入3-4%、ノーズコーン維持1.5-2.5%、37℃加温パッドで体温維持。"
+                        "【腫瘍との鑑別】急速な増大、潰瘍化、非対称性、色調変化がある場合 → FNA細胞診"
+                        "±切開生検。側腹腺腺腫/腺癌の報告はまれだが、腫瘍性変化には1-2mm マージンでの"
+                        "外科的切除が適応。参考文献: Harkness & Wagner (1995) Biology and Medicine of "
+                        "Rabbits and Rodents 4th ed; Percy & Barthold (2007) Pathology of Laboratory "
+                        "Rodents and Rabbits 3rd ed; Quesenberry & Carpenter (2012) Ferrets, Rabbits, "
+                        "and Rodents 3rd ed.",
+        "prevention": "No specific prevention for flank gland hyperplasia as it is a normal androgen-dependent "
+                      "physiological change. Elective castration in young males reduces gland prominence. "
+                      "Maintain clean bedding (change every 3-5 days) to minimize secondary bacterial "
+                      "contamination. Avoid abrasive bedding materials (cedar/pine shavings) that may "
+                      "irritate gland tissue. Regular monitoring of gland size and appearance during "
+                      "routine health checks — note any asymmetry, rapid enlargement, or ulceration "
+                      "that may indicate neoplastic transformation. Owners should be educated that "
+                      "pigmented flank glands are normal anatomy, especially prominent in intact male "
+                      "Syrian hamsters, and do not require treatment unless complications develop.",
+        "prevention_ja": "側腹腺過形成は正常なアンドロゲン依存性の生理的変化であり、特異的な予防法はない。"
+                         "若齢での選択的去勢手術により腺の顕著化を軽減できる。清潔な床材の維持（3-5日ごとに"
+                         "交換）で二次細菌感染を最小限に。研磨性の床材（スギ/マツのチップ）は腺組織を刺激する"
+                         "ため避ける。定期健康チェック時に腺のサイズと外観をモニタリング — 非対称性、急速な"
+                         "増大、潰瘍化は腫瘍性変化を示唆する可能性あり。飼い主教育: 色素沈着した側腹腺は"
+                         "正常な解剖構造であり、特に未去勢雄のシリアンハムスターで顕著で、合併症がなければ"
+                         "治療は不要であることを説明。",
+        "prognosis": "Excellent prognosis. Flank gland hyperplasia is a benign, non-progressive condition "
+                     "in most cases. The glands naturally regress with aging and declining testosterone "
+                     "levels. Castration results in significant regression within 4-8 weeks in most cases. "
+                     "Secondary bacterial infection resolves with appropriate antimicrobial therapy. "
+                     "Neoplastic transformation (flank gland adenoma or carcinoma) is rare; when it occurs, "
+                     "surgical excision is usually curative for adenomas. Carcinoma has potential for local "
+                     "invasion but distant metastasis is uncommon. No impact on lifespan in uncomplicated cases.",
+        "prognosis_ja": "予後は極めて良好。側腹腺過形成は大多数の症例で良性・非進行性の状態。加齢と"
+                        "テストステロン低下に伴い腺は自然退縮する。去勢手術により多くの症例で4-8週間以内に"
+                        "有意な退縮が得られる。二次細菌感染は適切な抗菌療法で消退。腫瘍性変化（側腹腺腺腫"
+                        "または腺癌）はまれで、腺腫は外科的切除で治癒的。腺癌は局所浸潤の可能性があるが"
+                        "遠隔転移はまれ。合併症のない症例では寿命への影響なし。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
