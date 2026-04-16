@@ -2062,10 +2062,41 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける盲腸嵌頓の原因: 脱水や低繊維食による乾燥した内容物の盲腸嵌頓です。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "盲腸嵌頓はデグーにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける盲腸嵌頓の治療は栄養バランスの是正が中心となる。欠乏状態では食事の改善または治療的サプリメンテーションにより特定の栄養素を補充する。過剰状態では食事制限と臓器障害に対する支持療法を行う。栄養不良動物ではリフィーディング症候群予防のため段階的に是正する。種特異的な食事要求に基づく長期栄養計画を立案する。過不足のない摂取を確保するため定期的に再評価する。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "盲腸嵌頓の予防には全ての栄養要求を満たす種に適した食事設計、単一食品のみの食事の回避、獣医師との定期的な食事内容の見直し、必要時の適切なサプリメンテーション、種固有の栄養ニーズに関する知識が必要である。",
+        "treatment": "EMERGENCY MANAGEMENT: Cecal impaction in degus is a potentially life-threatening condition "
+                    "requiring immediate intervention. (1) AGGRESSIVE REHYDRATION: SC fluids — warmed LRS "
+                    "60-100 mL/kg/day in divided doses q6-8h. Severely dehydrated: IV access (lateral tail "
+                    "vein) for fluid bolus 10-15 mL/kg over 15-20 min, then maintenance. Oral hydration via "
+                    "syringe if conscious and able to swallow. (2) GI MOTILITY STIMULATION: Metoclopramide "
+                    "0.5 mg/kg PO/SC q8-12h (ONLY after ruling out complete obstruction on radiographs). "
+                    "Cisapride 0.5-1 mg/kg PO q8-12h (prokinetic — may be more effective for large bowel "
+                    "motility). Simethicone 1-2 mL/kg PO q8h for gas accumulation. (3) DIETARY MANAGEMENT: "
+                    "Unlimited timothy hay ad libitum (fiber drives cecal motility). Syringe feeding with "
+                    "Critical Care for Herbivores (Oxbow) 50-80 mL/kg/day if anorexic — adding water to "
+                    "increase moisture content. Fresh leafy greens for hydration (romaine, cilantro — NO "
+                    "sugar-containing foods). (4) PAIN MANAGEMENT: Meloxicam 1-2 mg/kg PO/SC q24h. "
+                    "Buprenorphine 0.05-0.1 mg/kg SC q8-12h for severe abdominal pain. (5) GENTLE ABDOMINAL "
+                    "MASSAGE: May help break up impacted cecal contents. (6) WARM WATER/SALINE ENEMA: "
+                    "5-10 mL warmed saline via soft rubber catheter (extreme care — fragile intestinal wall). "
+                    "SURGICAL INTERVENTION: Rarely successful in degus due to small body size and anesthetic "
+                    "risk. Consider only if medical management fails after 24-48h and imaging confirms "
+                    "complete obstruction. NOTE: Oral β-lactam antibiotics CONTRAINDICATED. "
+                    "References: Quesenberry & Carpenter (2012); Harkness et al. (2010).",
+        "treatment_ja": "【緊急管理】盲腸嵌頓は致死的になりうる緊急状態。(1) 積極的な水分補給: 皮下補液 — "
+                        "加温LRS 60-100 mL/kg/日を6-8時間ごとに分割。重度脱水: IVアクセス。経口補水も可能なら"
+                        "併用。(2) 消化管運動促進: メトクロプラミド0.5 mg/kg PO/SC q8-12h（X線で完全閉塞を"
+                        "除外後のみ）。シサプリド0.5-1 mg/kg PO q8-12h。シメチコン1-2 mL/kg PO q8h。"
+                        "(3) 食事管理: チモシー牧草の無制限提供。食欲がなければクリティカルケアのシリンジ給餌"
+                        "（水分を多めに混合）。(4) 疼痛管理: メロキシカム1-2 mg/kg PO/SC q24h。ブプレノルフィン"
+                        "0.05-0.1 mg/kg SC q8-12h。(5) 腹部マッサージ。(6) 温生理食塩水浣腸: 5-10mLを"
+                        "軟質カテーテルで（腸壁が脆弱なため極度の注意）。外科は体サイズと麻酔リスクにより稀。"
+                        "経口βラクタム系は禁忌。",
+        "prevention": "Unlimited timothy hay access at all times (fiber drives cecal motility). Adequate fresh water "
+                      "always available (multiple water sources). No sugar/fruit/starchy treats (dysbiosis risk). "
+                      "Regular exercise to stimulate GI motility. Avoid dehydration — water bottle should be "
+                      "checked daily for function. Monitor fecal output daily — decreased pellet size/quantity is "
+                      "an early warning sign. Reference: Quesenberry & Carpenter (2012).",
+        "prevention_ja": "チモシー牧草の常時無制限提供（繊維が盲腸運動を駆動）。新鮮な水の常時提供（複数の"
+                         "水源）。糖分/果物/でんぷん質おやつ禁忌。定期的な運動。脱水回避。毎日の糞便量モニタリング。",
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "盲腸嵌頓の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"acute", "subacute"},
@@ -2104,10 +2135,41 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける肝コクシジウム症の原因: 肝臓に影響するコクシジウム感染で、胆管過形成と肝不全の可能性があります。",
         "pathophysiology": "Hepatocellular damage impairs metabolic, synthetic, and detoxification functions. Progressive injury leads to inflammation, fibrosis, and potential hepatic failure with systemic consequences.",
         "pathophysiology_ja": "肝コクシジウム症はデグーにおける寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける肝コクシジウム症の治療には、同定された寄生虫に応じた適切な駆虫薬が必要である。一部の駆虫薬は特定の種に有毒であるため、種に適した用量設定が重要である。全てのライフステージを排除するため複数回投与が必要な場合がある。環境消毒と接触動物の治療で再感染を防止する。貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "肝コクシジウム症の予防には定期的な予防駆虫、環境衛生と糞便除去、新規動物の隔離・検査、ベクター防除、中間宿主や汚染環境への曝露回避が含まれる。",
+        "treatment": "ANTICOCCIDIAL THERAPY: Toltrazuril 25 mg/kg PO q24h × 3 days, repeat after 7-day "
+                    "interval (first-line for Eimeria spp. — targets all intracellular stages). Alternative: "
+                    "sulfadimethoxine 25-50 mg/kg PO q24h × 10-14 days (bacteriostatic, less effective against "
+                    "hepatic forms than toltrazuril). Trimethoprim-sulfa 15-30 mg/kg PO q12h × 14-21 days "
+                    "(alternative sulfonamide). HEPATIC SUPPORT: Hepatoprotective agents — silymarin (milk "
+                    "thistle extract) 4-15 mg/kg PO q12h (antioxidant, anti-inflammatory, stabilizes "
+                    "hepatocyte membranes). SAMe (S-adenosylmethionine) 20 mg/kg PO q24h on empty stomach "
+                    "(hepatic glutathione precursor). Ursodiol 10-15 mg/kg PO q24h (choleretic, reduces "
+                    "bile duct obstruction from hyperplasia). SUPPORTIVE CARE: SC fluids 50-100 mL/kg/day "
+                    "for dehydration. Syringe feeding if anorexic. Meloxicam 1-2 mg/kg PO/SC q24h for "
+                    "discomfort. MONITORING: Blood chemistry (ALT, ALP, bilirubin, albumin) q2-4 weeks to "
+                    "assess hepatic function and treatment response. Fecal flotation q2 weeks to confirm "
+                    "oocyst elimination. ENVIRONMENTAL DECONTAMINATION: Remove all bedding, clean cage with "
+                    "10% ammonia solution or steam (oocysts are resistant to most disinfectants), daily "
+                    "fecal removal to break reinfection cycle. Treat ALL in-contact degus simultaneously. "
+                    "NOTE: Oral β-lactam antibiotics CONTRAINDICATED. "
+                    "References: Quesenberry & Carpenter (2012); Taylor et al. (2016) Veterinary Parasitology.",
+        "treatment_ja": "【抗コクシジウム療法】トルトラズリル25 mg/kg PO q24h × 3日間、7日後に再投与（Eimeria "
+                        "spp.の第一選択 — 全細胞内ステージを標的）。代替: スルファジメトキシン25-50 mg/kg "
+                        "PO q24h × 10-14日。TMS 15-30 mg/kg PO q12h × 14-21日。【肝保護】シリマリン（ミルク"
+                        "シスル）4-15 mg/kg PO q12h。SAMe 20 mg/kg PO q24h（空腹時）。ウルソジオール"
+                        "10-15 mg/kg PO q24h（胆管過形成による閉塞軽減）。【支持療法】皮下補液、シリンジ"
+                        "給餌、メロキシカム1-2 mg/kg。【モニタリング】血液化学（ALT/ALP/ビリルビン/アルブミン）"
+                        "を2-4週ごと。糞便浮遊法を2週ごと。【環境除染】10%アンモニア溶液またはスチームで消毒"
+                        "（オーシストは大部分の消毒剤に耐性）。全接触デグーを同時治療。経口βラクタム系禁忌。",
+        "prevention": "Strict hygiene — daily fecal removal from cage to prevent oocyst sporulation (requires "
+                      "24-48h in environment to become infective). Clean cage thoroughly with steam or 10% "
+                      "ammonia (oocysts resist most chemical disinfectants). Quarantine new degus for 2-4 weeks "
+                      "with fecal flotation examination before introduction. Avoid overcrowding (increases "
+                      "fecal-oral transmission). Stress reduction (stress-induced immunosuppression increases "
+                      "susceptibility). Regular fecal screening every 6-12 months. "
+                      "Reference: Taylor et al. (2016) Veterinary Parasitology.",
+        "prevention_ja": "厳格な衛生管理 — 毎日の糞便除去（オーシストが感染性になるのに環境中で24-48時間必要）。"
+                         "スチームまたは10%アンモニアでケージ消毒。新規デグーの2-4週間隔離と糞便検査。"
+                         "過密飼育回避。ストレス軽減。6-12ヶ月ごとの定期糞便検査。",
         "prognosis": "Variable. Hepatic lipidosis has a fair prognosis with early aggressive nutritional support. Chronic liver disease is guarded depending on underlying cause and degree of fibrosis.",
         "prognosis_ja": "肝コクシジウム症の予後: 原因と重症度による。急性肝疾患は早期治療で回復可能。慢性肝疾患は長期管理で QOL 維持可能。肝不全は予後不良。",
         "onset_pattern": {"acute", "subacute"},
@@ -2356,10 +2418,37 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーの心血管系に影響する正確な原因は不明または多因子性。遺伝的素因・環境因子・免疫調節異常・不顕性感染・代謝障害が寄与因子として考えられる。個々の症例での主原因特定にはさらなる調査が必要。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "デグーの心血管系に影響する正確な病態生理は完全には解明されていない。遺伝的素因・環境因子・免疫調節異常を含む多因子性メカニズムが関与すると考えられる。心血管系組織における炎症性・代謝性・構造的変化が進行性の臨床徴候をもたらす。デグーにおける疾患メカニズムの完全な解明にはさらなる研究が必要。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける心嚢液貯留の治療: 心エコーで基礎心疾患を評価。利尿薬（フロセミド）で肺水腫管理。ACE阻害薬で後負荷軽減。不整脈があれば抗不整脈薬。安静・低Na食。定期心エコーでモニタリング。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
+        "treatment": "EMERGENCY if cardiac tamponade (obstructive shock, collapse, severe dyspnea). "
+                    "PERICARDIOCENTESIS: Under isoflurane anesthesia (chamber induction 3-4%, maintenance "
+                    "1.5-2.5%, body temperature maintenance 37°C heated pad), ultrasound-guided needle "
+                    "aspiration of pericardial fluid (22-25G needle). Submit fluid for cytology and culture. "
+                    "TECHNICALLY VERY CHALLENGING in degus due to small body size (<300g) — referral to "
+                    "exotic specialist strongly recommended. MEDICAL MANAGEMENT: Furosemide 1-4 mg/kg "
+                    "PO/SC/IM q8-12h (reduce preload/fluid accumulation). Enalapril 0.5 mg/kg PO q24h "
+                    "(ACE inhibitor, afterload reduction). Pimobendan 0.1-0.3 mg/kg PO q12h (positive "
+                    "inotrope/vasodilator — if concurrent systolic dysfunction). TREAT UNDERLYING CAUSE: "
+                    "Infectious pericarditis: enrofloxacin 5-10 mg/kg PO q12h × 14-21 days (oral β-lactams "
+                    "CONTRAINDICATED). Neoplastic: palliative care, prognosis poor. Metabolic (diabetic "
+                    "cardiomyopathy): optimize glycemic control. OXYGEN SUPPLEMENTATION: Flow-by O2 "
+                    "at 1-2 L/min during acute respiratory distress. MONITORING: Echocardiography q2-4 "
+                    "weeks to assess effusion recurrence. Activity restriction — minimize stress and "
+                    "exertion. References: Quesenberry & Carpenter (2012); Keeble & Meredith (2009) "
+                    "BSAVA Manual of Rodents and Ferrets.",
+        "treatment_ja": "心タンポナーデ（閉塞性ショック、虚脱、重度呼吸困難）は緊急。【心嚢穿刺】イソフルラン"
+                        "麻酔下��超音波ガイド下でのニードル吸引。デグーの小さい体サイズ（<300g）により"
+                        "技術的に非常に困難 — エキゾチック専門医への紹介を強く推奨。【内科管理】フロセミド"
+                        "1-4 mg/kg PO/SC/IM q8-12h。エナラプリル0.5 mg/kg PO q24h。ピモベンダン"
+                        "0.1-0.3 mg/kg PO q12h（収縮機能障害併発時）。【原因治療】感染性: エンロフロキサシン"
+                        "5-10 mg/kg PO q12h × 14-21日（経口βラクタム系禁忌）。腫瘍性: 緩和ケア。代謝性: "
+                        "血��管理最適化。【酸素】フローバイO2 1-2 L/min。心エコーで2-4週ごとモニタリング。",
+        "prevention": "No specific prevention for idiopathic pericardial effusion. Optimal glycemic control in "
+                      "diabetic degus reduces risk of diabetic cardiomyopathy. Regular health monitoring in "
+                      "senior degus (>4 years). Prompt treatment of respiratory and systemic infections. "
+                      "Maintain appropriate environmental temperature (20-22°C) — cold stress may exacerbate "
+                      "cardiac conditions. Reference: Quesenberry & Carpenter (2012).",
+        "prevention_ja": "特発性心嚢液貯留の特異的予防法はない。糖尿病デグーでは最適な血糖管理で糖尿病性"
+                         "心筋症リスクを軽減。高齢デグー（>4歳）の定期健康モニタリング。適切な環���温度維持"
+                         "（20-22°C）。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
         "onset_pattern": {"acute", "subacute"},
@@ -2440,10 +2529,36 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける脂肪腫の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "脂肪腫はデグーにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける脂肪腫の治療: 原因の鑑別診断に基づく特異的治療。支持療法（輸液・栄養・疼痛管理）。環境管理。定期的なモニタリングと治療調整。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "脂肪腫の予防は限定的であるが、ホルモン依存性腫瘍軽減のための避妊・去勢手術、既知の発癌物質の回避、早期発見のための定期健診、適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。",
+        "treatment": "CONSERVATIVE MANAGEMENT (most cases): Lipomas are benign and typically require no treatment "
+                    "if small, non-growing, and not interfering with movement or function. Monitor size monthly — "
+                    "measure with calipers or photograph for comparison. SURGICAL EXCISION: Indicated when: "
+                    "mass is rapidly growing, restricting movement, ulcerated, or causing discomfort; if FNA "
+                    "cytology is equivocal (must rule out liposarcoma). Procedure under isoflurane anesthesia "
+                    "(chamber induction 3-4%, nose cone maintenance 1.5-2.5%, 37°C heated pad — hypothermia "
+                    "risk in degus <200g). Blunt dissection along capsule plane for complete excision. Submit "
+                    "for histopathology to confirm benign diagnosis. DIAGNOSTIC: FNA (fine needle aspirate) "
+                    "for initial assessment — expect mature adipocytes with no atypia. If spindle cells or "
+                    "pleomorphic cells present → excisional biopsy to rule out liposarcoma or infiltrative "
+                    "lipoma. WEIGHT MANAGEMENT: Obesity predisposes to lipoma formation — maintain ideal body "
+                    "weight (170-300g) on strict timothy hay-based diet, no sugar/fruit. POST-OPERATIVE: "
+                    "Meloxicam 1-2 mg/kg PO/SC q24h × 3-5 days. Wound check at 5-7 days. Skin sutures "
+                    "(if used) removal at 10-14 days. Recurrence at same site is uncommon for simple lipomas. "
+                    "References: Quesenberry & Carpenter (2012); Percy & Barthold (2007).",
+        "treatment_ja": "【保存的管理（大多数の症例）】脂肪腫は良性で、小型・非増大・運動/機能に影響がなければ"
+                        "通常治療不要。月1回のサイズモニタリング。【外科的切除】適応: 急速増大、運動制限、"
+                        "潰瘍化、不快感がある場合; FNA細胞診が不確定の場��（脂肪肉腫の除外必須）。"
+                        "イソフルラン麻酔下で被膜に沿った鈍的剥離による完全切除。病理組織検査に提出。"
+                        "【診断】FNAで成熟脂肪細胞を確認（異型性なし）。紡錘形細胞や多形性細胞がある場合は"
+                        "切除生検。【体重管理】肥満は脂肪腫の素因 — チモシー牧草ベースの厳格食で理想体重維持。"
+                        "【術後】メロキシカム1-2 mg/kg PO/SC q24h × 3-5日。5-7日で創傷チェック。",
+        "prevention": "Maintain ideal body weight (170-300g) through timothy hay-based diet and regular exercise. "
+                      "Obesity is the most significant modifiable risk factor for lipoma development. No "
+                      "sugar/fruit (diabetes AND obesity prevention). Regular physical examination to detect "
+                      "new masses early. No specific pharmacological prevention available. "
+                      "Reference: Percy & Barthold (2007) Pathology of Laboratory Rodents 3rd ed.",
+        "prevention_ja": "チモシー牧草ベース食と運動による理想体重（170-300g）の維持。肥満は脂肪腫の最も重要な"
+                         "修正可能リスク因子。糖分/果物禁忌（糖尿病と肥満の両方を��防）。新しい腫瘤の早期発見"
+                         "のための定期身体検査。",
         "prognosis": "Good prognosis. Benign condition that may be managed conservatively or with surgical excision.",
         "prognosis_ja": "脂肪腫の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"chronic"},
@@ -2545,10 +2660,45 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおけるアルツハイマー様疾患の原因: ヒトのアルツハイマー病に類似したベータアミロイド斑を持つデグーの加齢性神経変性疾患。デグーはこの疾患の自然モデルです。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "アルツハイマー様疾患はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "デグーにおけるアルツハイマー様疾患の治療は基礎となるホルモン・代謝異常を標的とする。ホルモン補充療法または抑制療法により生理的バランスを回復する。食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、臓器機能マーカーの定期的モニタリングにより用量調整を行う。二次的合併症（臓器障害、感染）の併行管理が不可欠である。長期または生涯にわたる治療が必要な場合がある。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "アルツハイマー様疾患の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
+        "treatment": "NO CURATIVE TREATMENT — degus are a natural model of Alzheimer's-like disease, developing "
+                    "beta-amyloid plaques and tau protein hyperphosphorylation with aging (Inestrosa et al. 2005). "
+                    "SUPPORTIVE/PALLIATIVE MANAGEMENT: (1) ENVIRONMENTAL ENRICHMENT: Maintain social housing "
+                    "(cognitive stimulation through social interaction is critical in this highly social species). "
+                    "Provide novel objects, foraging opportunities, running wheel — cognitive enrichment may slow "
+                    "decline. Maintain CONSISTENT cage layout — disoriented degus rely on spatial memory; avoid "
+                    "rearranging. (2) GLYCEMIC CONTROL: Chronic hyperglycemia accelerates beta-amyloid "
+                    "deposition and cognitive decline in degus. Strict timothy hay-based diet, no sugar/fruit. "
+                    "Monitor blood glucose regularly. (3) ANTIOXIDANT SUPPLEMENTATION: Vitamin E "
+                    "(alpha-tocopherol) 1-5 mg/degu PO q24h (reduces oxidative stress associated with "
+                    "neurodegeneration — extrapolated from rodent AD models). Omega-3 fatty acids (DHA) — "
+                    "limited evidence but potential neuroprotective effects. (4) PHARMACOLOGICAL (EXPERIMENTAL, "
+                    "limited clinical evidence in degus): Selegiline (MAO-B inhibitor) — used in canine "
+                    "cognitive dysfunction, not validated in degus. Memantine (NMDA antagonist) — studied "
+                    "in degu research models. No approved treatments for companion degus. (5) QUALITY OF LIFE "
+                    "MONITORING: Assess eating, drinking, social interaction, grooming, mobility regularly. "
+                    "Progressive loss of function may warrant humane euthanasia discussion. "
+                    "References: Inestrosa et al. (2005) Mol Neurodegener; van Groen et al. (2011) "
+                    "Curr Alzheimer Res; Ardiles et al. (2012) Neurobiol Aging.",
+        "treatment_ja": "【根治的治療法なし】デグーはアルツハイマー様疾患の自然モデルであり、加齢とともに"
+                        "βアミロイド斑とタウタンパク質のリン酸化亢進を発症する（Inestrosa et al. 2005）。"
+                        "【支持/緩和管理】(1) 環境エンリッチメント: 社会的飼育の維持（この高度に社会的な種では"
+                        "社会的相互作用による認知刺激が重要）。新規物品、フォレージング、回し車の提供。一貫した"
+                        "ケージレイアウト維持 — 見当識障害のあるデグーは空間記憶に依存。(2) 血糖管理: 慢性"
+                        "高血糖がβアミロイド沈着と認知機能低下を加速。チモシー牧草厳格食。(3) 抗酸化サプリ: "
+                        "ビタミンE 1-5 mg/個体 PO q24h。オメガ3脂肪酸（DHA）— エビデンス限定的だが神経保護"
+                        "効果の可能性。(4) 薬物療法（実験的、デグーでの臨床エビデンス限定的）: セレギリン、"
+                        "メマンチン — 研究モデルで検討。コンパニオンデグーでの承認治療はない。(5) QOL "
+                        "モニタリング: 食餌・飲水・社会的交流・毛繕い・運動能力を定期評価。",
+        "prevention": "No proven prevention for age-related beta-amyloid accumulation. However, glycemic control "
+                      "is strongly associated with reduced neurodegeneration — strict sugar-free, timothy hay-based "
+                      "diet throughout life. Environmental enrichment and social housing may provide cognitive "
+                      "reserve that delays clinical onset. Regular exercise (running wheel). Antioxidant-rich "
+                      "diet components (dark leafy greens, herbs). Avoid chronic stress and social isolation. "
+                      "References: Inestrosa et al. (2005); Ardiles et al. (2012) Neurobiol Aging.",
+        "prevention_ja": "加齢に伴うβアミロイド蓄積の確立された予防法はない。ただし血糖管理は神経変性の減少と"
+                         "強く関連 — 生涯を通じた無糖・チモシー牧草ベース食。環境エンリッチメントと社会的"
+                         "飼育が認知予備能を提供し臨床発症を遅延させる可能性。定期的な運動。抗酸化物質豊富な"
+                         "食事成分。慢性ストレスと社会的孤立の回避。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "アルツハイマー様疾患の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"acute", "subacute"},
