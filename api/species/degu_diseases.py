@@ -1302,8 +1302,31 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおけるビタミンC欠乏症（壊血病）の原因: 食事中のビタミンC不足により壊血病を発症することがある。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ビタミンC欠乏症（壊血病）はデグーにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおけるビタミンC欠乏症（壊血病）の治療は栄養バランスの是正が中心となる。欠乏状態では食事の改善または治療的サプリメンテーションにより特定の栄養素を補充する。過剰状態では食事制限と臓器障害に対する支持療法を行う。栄養不良動物ではリフィーディング症候群予防のため段階的に是正する。種特異的な食事要求に基づく長期栄養計画を立案する。過不足のない摂取を確保するため定期的に再評価する。",
+        "treatment": "IMPORTANT NOTE: Unlike guinea pigs, degus CAN synthesize vitamin C endogenously. True scurvy "
+                    "is rare in degus but may occur under severe stress, chronic illness, or extremely poor diet. "
+                    "ACUTE SUPPLEMENTATION: Ascorbic acid 50-100 mg/kg PO q24h × 7-14 days (dissolve in water "
+                    "or administer directly via syringe — vitamin C degrades rapidly in water, replace daily). "
+                    "Alternatively, injectable vitamin C 50 mg/kg SC q24h × 5-7 days for severe cases with "
+                    "anorexia. DIETARY CORRECTION: Ensure access to vitamin C-rich vegetables — dark leafy "
+                    "greens (kale, parsley, dandelion greens), bell peppers (GREEN only — red/yellow have more "
+                    "sugar, AVOID in degus due to diabetes risk). Timothy hay should remain the dietary "
+                    "base (≥80%). Small amounts of fresh herbs (cilantro, basil). CRITICAL: NO fruit — even "
+                    "citrus fruits that are vitamin C-rich are CONTRAINDICATED in degus due to high sugar "
+                    "content. PAIN MANAGEMENT: Meloxicam 1-2 mg/kg PO/SC q24h for joint pain/swelling. "
+                    "SUPPORTIVE CARE: SC fluids if dehydrated. Syringe feeding with Critical Care for "
+                    "Herbivores if anorexic. RULE OUT: Concurrent diabetes (blood glucose), dental disease "
+                    "(oral exam), and other nutritional deficiencies (calcium, vitamin D). Differential "
+                    "diagnosis includes MBD, osteoarthritis, and periodontal disease. "
+                    "References: Quesenberry & Carpenter (2012); Edwards (2009) Vet Clin Exot Anim.",
+        "treatment_ja": "【重要】モルモットと異なり、デグーは内因性にビタミンCを合成可能。真の壊血病はまれだが、"
+                        "重度のストレス・慢性疾患・極端な食事不良で発生しうる。【急性補充】アスコルビン酸"
+                        "50-100 mg/kg PO q24h × 7-14日（水に溶解またはシリンジで直接投与 — ビタミンCは水中で"
+                        "急速に分解、毎日交換）。重症例: 注射用ビタミンC 50 mg/kg SC q24h × 5-7日。"
+                        "【食事是正】ビタミンC豊富な野菜: 葉野菜（ケール、パセリ、タンポポ）、ピーマン（緑のみ"
+                        " — 赤/黄は糖分が多くデグーでは糖尿病リスクにより回避）。チモシー牧草を食事の基盤に"
+                        "維持（≥80%）。重要: 果物は禁忌 — 柑橘類もビタミンC豊富だが高糖分のためデグーでは禁忌。"
+                        "【疼痛管理】メロキシカム1-2 mg/kg PO/SC q24h。【鑑別診断】MBD、変形性関節症、"
+                        "歯周病との鑑別。",
         "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
         "prevention_ja": "ビタミンC欠乏症（壊血病）の予防には全ての栄養要求を満たす種に適した食事設計、単一食品のみの食事の回避、獣医師との定期的な食事内容の見直し、必要時の適切なサプリメンテーション、種固有の栄養ニーズに関する知識が必要である。",
         "prognosis": "Good with dietary correction and supplementation. Clinical signs typically improve within weeks of appropriate nutrition. Severe cases may have residual deficits.",
@@ -1437,8 +1460,32 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける糖尿病性網膜症の原因: 慢性高血糖による進行性の網膜損傷で失明を引き起こします。",
         "pathophysiology": "Diabetic Retinopathy is a metabolic/endocrine disorder. Progressive retinal damage from chronic hyperglycaemia causing blindness. The underlying pathology involves dysregulation of hormonal feedback loops, enzyme activity, or substrate metabolism. This leads to imbalances in circulating hormone levels, electrolytes, or metabolic intermediates that affect cellular function across multiple organ systems. Compensatory mechanisms may temporarily maintain homeostasis but eventually decompensate, leading to progressive clinical deterioration and multi-organ effects.",
         "pathophysiology_ja": "糖尿病性網膜症はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "デグーにおける糖尿病性網膜症の治療は基礎となるホルモン・代謝異常を標的とする。ホルモン補充療法または抑制療法により生理的バランスを回復する。食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、臓器機能マーカーの定期的モニタリングにより用量調整を行う。二次的合併症（臓器障害、感染）の併行管理が不可欠である。長期または生涯にわたる治療が必要な場合がある。",
+        "treatment": "NO DIRECT TREATMENT for retinopathy itself — focus on glycemic control to halt progression. "
+                    "GLYCEMIC MANAGEMENT (PRIMARY): Strict dietary control — eliminate ALL sugar-containing foods, "
+                    "timothy hay-based diet (≥80%), no fruit, no root vegetables, no commercial treats with "
+                    "added sugars. Target fasting blood glucose <200 mg/dL. Monitor fructosamine levels q4-8 "
+                    "weeks (reflects 2-3 week average glycemic control). NOTE: Insulin therapy is not standard "
+                    "practice in degus — dietary management alone is the approach. OPHTHALMIC MONITORING: "
+                    "Fundoscopic examination every 2-3 months to track retinal changes. Slit lamp examination "
+                    "for concurrent diabetic cataracts (reported in up to 30% of diabetic degus — bilateral "
+                    "lens opacity). ENVIRONMENTAL ADAPTATION: If visual impairment confirmed — maintain "
+                    "consistent cage layout, avoid rearranging furniture, use auditory/olfactory cues, pad "
+                    "sharp edges. Degus compensate well for vision loss using whiskers, auditory, and "
+                    "olfactory senses (highly social communication). Remove dangerous heights/drops from cage. "
+                    "CONCURRENT COMPLICATIONS: Screen for diabetic nephropathy (urinalysis for proteinuria), "
+                    "peripheral neuropathy (hind limb proprioception), hepatic lipidosis. PROGNOSIS: Retinal "
+                    "damage is largely irreversible once established. Early glycemic control is the ONLY "
+                    "effective intervention. References: Edwards (2009) Vet Clin Exot Anim; Jekl et al. "
+                    "(2011) J Small Anim Pract.",
+        "treatment_ja": "【網膜症自体の直接治療法はない — 進行を停止させるための血糖管理に焦点】"
+                        "【血糖管理（最重要）】厳格な食事管理 — 糖分を含む全食品の排除、チモシー牧草ベース食"
+                        "（≥80%）、果物・根菜・糖分添加おやつ禁忌。空腹時血糖<200 mg/dLを目標。フルクトサミン"
+                        "を4-8週ごとにモニタリング。注: デグーではインスリン療法は標準的実践ではない — "
+                        "食事管理が唯一のアプローチ。【眼科モニタリング】眼底検査を2-3ヶ月ごとに実施。細隙灯"
+                        "検査で併発する糖尿病性白内障を確認（糖尿病デグーの最大30%で報告）。【環境適応】視覚"
+                        "障害が確認されたら — ケージレイアウトを一定に維持、聴覚/嗅覚の手がかりを利用、"
+                        "危険な高さ/落下を排除。【併存症スクリーニング】糖尿病性腎症、末梢神経障害、肝リピドーシス。"
+                        "網膜損傷は確立後はほぼ不可逆 — 早期血糖管理が唯一の有効介入。",
         "prevention": "Prevention of diabetic retinopathy includes appropriate diet formulation, regular health monitoring with blood work, maintaining healthy body weight, avoiding excessive treats or inappropriate foods, and early intervention when subclinical changes are detected.",
         "prevention_ja": "糖尿病性網膜症の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
@@ -1584,10 +1631,44 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおけるエナメル質形成不全の原因: エナメル質形成の発達障害で、骨折しやすい弱く変色した歯になります。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "エナメル質形成不全はデグーにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおけるエナメル質形成不全の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "エナメル質形成不全の予防には安全で種に適した飼育環境の整備、鋭利物・危険物の除去、適切な取り扱い技術、他の動物との接触時の監視、温度管理、落下防止策が含まれる。",
+        "treatment": "Degus have open-rooted (elodont) teeth that grow continuously — enamel hypoplasia affects "
+                    "tooth integrity and wear patterns. DENTAL MANAGEMENT: Regular dental examination under "
+                    "isoflurane anesthesia (chamber induction 3-4%, nose cone maintenance 1.5-2.5%, body "
+                    "temperature maintenance on 37°C heated pad — degus are prone to hypothermia at <200g). "
+                    "Trim overgrown or maloccluded teeth with high-speed dental burr (NEVER use nail clippers "
+                    "— causes longitudinal fractures). File sharp enamel points causing oral trauma. DIETARY "
+                    "SUPPORT: Unlimited timothy hay — essential for continuous tooth wear. Providing hard "
+                    "chewing materials (untreated wood blocks, pumice stone, hay cubes) to promote natural "
+                    "wear. If unable to eat due to dental pain: syringe feeding with Critical Care for "
+                    "Herbivores (Oxbow) 50-80 mL/kg/day. PAIN MANAGEMENT: Meloxicam 1-2 mg/kg PO/SC q24h. "
+                    "Buprenorphine 0.05-0.1 mg/kg SC q8-12h for acute dental pain. INFECTION PREVENTION: "
+                    "If fractured teeth expose pulp — antibiotics: enrofloxacin 5-10 mg/kg PO q12h × 7-14 "
+                    "days (oral β-lactams CONTRAINDICATED). NUTRITIONAL CORRECTION: Ensure adequate calcium "
+                    "(0.6-1.0% of diet), phosphorus (correct Ca:P ratio 1.5-2:1), and vitamin D for proper "
+                    "enamel mineralization. Affected teeth may need periodic trimming every 4-8 weeks. "
+                    "MONITORING: Regular oral exams every 2-3 months. Watch for weight loss, drooling, "
+                    "food dropping, teeth grinding (bruxism) as signs of dental pain. "
+                    "References: Crossley (2003) Vet Clin Exot Anim; Jekl & Redrobe (2013) BSAVA Manual.",
+        "treatment_ja": "デグーは常生歯（開放歯根）を持ち、歯は継続的に伸長 — エナメル質形成不全は歯の完全性と"
+                        "摩耗パターンに影響。【歯科管理】イソフルラン麻酔下での定期歯科検査（チャンバー導入"
+                        "3-4%、ノーズコーン維持1.5-2.5%、37℃加温パッドで体温維持）。過成長/不正咬合歯は"
+                        "高速歯科バーでトリミング（爪切りは絶対に使用しない — 縦断骨折の原因）。口腔外傷を"
+                        "引き起こす鋭いエナメルポイントを研磨。【食事支持】チモシー牧草の無制限提供 — 継続的な"
+                        "歯の摩耗に不可欠。硬いかじり材（無処理木材、軽石、牧草キューブ）。歯痛で食事困難な"
+                        "場合: クリティカルケアのシリンジ給餌。【疼痛管理】メロキシカム1-2 mg/kg PO/SC q24h。"
+                        "ブプレノルフィン0.05-0.1 mg/kg SC q8-12h。【感染予防】歯牙破折で歯髄露出時: "
+                        "エンロフロキサシン5-10 mg/kg PO q12h × 7-14日（経口βラクタム系は禁忌）。"
+                        "【栄養是正】適切なCa（0.6-1.0%）、P（Ca:P比1.5-2:1）、VitDの確保。4-8週ごとの"
+                        "定期トリミングが必要な場合あり。",
+        "prevention": "Ensure timothy hay-based diet for continuous natural tooth wear. Provide appropriate "
+                      "chewing materials (untreated wood, pumice, hay cubes). Adequate dietary calcium, "
+                      "phosphorus, and vitamin D for proper enamel development. Avoid breeding from animals "
+                      "with known dental abnormalities (genetic component). Regular oral examinations every "
+                      "3-6 months — early detection of malocclusion allows timely intervention. "
+                      "Reference: Crossley (2003) Vet Clin Exot Anim; Jekl & Redrobe (2013).",
+        "prevention_ja": "チモシー牧草ベースの食事で継続的な自然摩耗を確保。適切なかじり材の提供。"
+                         "エナメル質発育のための適切なCa/P/VitD。既知の歯科異常を持つ個体の繁殖回避"
+                         "（遺伝的要素）。3-6ヶ月ごとの定期口腔検査。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "エナメル質形成不全の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"acute", "subacute"},
@@ -1664,10 +1745,41 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "広範な脱毛を引き起こす重度の自己または社会的バーバリング。ストレス、退屈、栄養欠乏を示す可能性があります。",
         "urgency": "moderate",
         "recommended_tests": ["physical_exam", "behavioral_assessment", "diet_review"],
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
-        "treatment_ja": "診断に基づく適切な内科的または外科的治療、輸液療法を含む支持療法、疼痛管理、栄養サポート、治療反応の定期的モニタリング。",
-        "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
-        "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
+        "treatment": "Severe barbering in degus indicates significant behavioral distress or underlying medical condition "
+                    "requiring comprehensive intervention. MEDICAL RULE-OUT (FIRST): Skin scraping for mites "
+                    "(Demodex, Sarcoptes). Dermatophyte culture (DTM) — Trichophyton mentagrophytes most common "
+                    "in degus. Skin biopsy if pruritic lesions present. Blood glucose (diabetes-related "
+                    "dermatopathy). Diet review for nutritional deficiencies. ENVIRONMENTAL OVERHAUL: Larger "
+                    "cage (minimum 80×50×100 cm), multiple levels with ramps, ≥2 running wheels (solid surface, "
+                    "≥25 cm diameter), dust bath (chinchilla sand) 2-3× weekly, foraging enrichment (scatter "
+                    "timothy hay/herbs), multiple hiding spots, chew toys. SOCIAL MANAGEMENT: Degus are "
+                    "obligately social — single housing causes severe stress. Minimum pair, ideally 3-4 "
+                    "same-sex group. If allo-barbering: identify dominant aggressor via video observation, "
+                    "temporary separation with visual/olfactory contact, reintroduce in neutral territory. "
+                    "PHARMACOLOGICAL (LAST RESORT, limited evidence): Fluoxetine 1-2 mg/kg PO q24h "
+                    "(extrapolated from rodent models — monitor for anorexia). WOUND CARE for excoriated "
+                    "areas: Chlorhexidine 0.05% topical. If secondary infection: enrofloxacin 5-10 mg/kg "
+                    "PO q12h × 7-14 days (oral β-lactams CONTRAINDICATED). Elizabethan collar rarely "
+                    "practical in degus due to small size. References: Jekl & Redrobe (2013) BSAVA Manual; "
+                    "Quesenberry & Carpenter (2012).",
+        "treatment_ja": "重度のバーバリングは著しい行動学的ストレスまたは基礎疾患を示唆し、包括的介入が必要。"
+                        "【医学的除外（最優先）】皮膚掻爬でダニ検査。皮膚糸状菌培養（DTM）。血糖（糖尿病関連"
+                        "皮膚症）。食事レビュー。【環境の全面改善】大型ケージ（最低80×50×100cm）、スロープ付き"
+                        "多段構造、回し車≥2台、砂浴び週2-3回、フォレージング、複数の隠れ場所、かじり木。"
+                        "【社会管理】デグーは社会性が必須 — 単独飼育は重度ストレス。最低ペア、理想は3-4頭の"
+                        "同性グループ。他個体バーバリング: ビデオ観察で優位個体を特定、一時隔離。【薬物療法"
+                        "（最終手段）】フルオキセチン1-2 mg/kg PO q24h（齧歯類モデルからの外挿）。"
+                        "【創傷ケア】擦過部位のクロルヘキシジン0.05%。二次感染: エンロフロキサシン"
+                        "5-10 mg/kg PO q12h × 7-14日（経口βラクタム系禁忌）。",
+        "prognosis": "Guarded to fair depending on chronicity and underlying cause. Recent-onset barbering with "
+                     "identifiable stressor has good prognosis after environmental correction (hair regrowth in "
+                     "4-8 weeks). Chronic self-barbering (>6 months) may become a stereotypic behavior pattern "
+                     "that persists even after stressor removal. Allo-barbering from dominant cage-mates may "
+                     "require permanent social restructuring. Secondary skin infections are manageable but may "
+                     "recur if barbering continues. No impact on lifespan unless severe self-mutilation occurs.",
+        "prognosis_ja": "慢性度と原因により予後慎重〜やや良好。最近発症でストレス源が特定できれば環境是正後に"
+                        "予後良好（4-8週間で毛の再生）。慢性自己バーバリング（>6ヶ月）はストレス源除去後も"
+                        "持続する常同行動パターンとなりうる。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -1872,10 +1984,46 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "デグーにおける盲腸細菌叢異常の原因: 経口摂取、吸入、経皮接触による有毒物質への曝露。有毒植物、化学物質、重金属、汚染食物/水、不適切な薬物使用が原因。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "盲腸細菌叢異常はデグーにおける中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
-        "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
-        "treatment_ja": "デグーにおける盲腸細菌叢異常の治療には迅速な除染と支持療法が必要である。摂取直後であれば催吐（種にとって安全な場合）または胃洗浄により吸収を低減する。活性炭は多くの毒素を吸着する。特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1、アセトアミノフェンにN-アセチルシステイン）。積極的な輸液療法で腎排泄を促進し灌流を維持する。臓器特異的障害（肝、腎、神経）をモニタリングし治療する。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "盲腸細菌叢異常の予防には有毒物質へのアクセス制限・除去、ペット安全な製品の使用、環境からの有毒植物の除去、薬剤・化学物質の適切な保管、屋外アクセス時の監視、種固有の中毒に関する飼い主教育が必要である。",
+        "treatment": "Cecal dysbiosis is a potentially life-threatening condition in degus as hindgut fermenters — "
+                    "disruption of the cecal microbiome leads to pathogenic Clostridial overgrowth and "
+                    "enterotoxemia. IMMEDIATE MANAGEMENT: (1) FLUID RESUSCITATION: SC fluids — warmed LRS "
+                    "50-100 mL/kg/day in divided doses. IV access for severe cases. (2) DIETARY CORRECTION "
+                    "(CRITICAL): Eliminate ALL offending foods — return to strict timothy hay-based diet. "
+                    "No sugar, no fruit, no commercial treats, no starchy foods. Timothy hay should constitute "
+                    "≥80% of diet. Fresh water ad libitum. If anorexic: syringe feeding with Critical Care "
+                    "for Herbivores (Oxbow) 50-80 mL/kg/day q4-6h. (3) PROBIOTICS: Saccharomyces boulardii "
+                    "or mixed Lactobacillus/Bifidobacterium preparations to restore commensal flora. Transfaunation "
+                    "(cecal contents from healthy degu) has been described anecdotally. (4) GI MOTILITY SUPPORT: "
+                    "Simethicone 1-2 mL/kg PO q8h for gas accumulation. Metoclopramide 0.5 mg/kg PO/SC "
+                    "q8-12h if ileus suspected (rule out obstruction first). (5) PAIN MANAGEMENT: Meloxicam "
+                    "1-2 mg/kg PO/SC q24h for abdominal discomfort. (6) ANTIBIOTICS — USE WITH EXTREME "
+                    "CAUTION: Only if secondary bacterial infection confirmed. Metronidazole 10-20 mg/kg "
+                    "PO q12h × 5-7 days (targets anaerobic Clostridial overgrowth specifically). "
+                    "ABSOLUTELY CONTRAINDICATED: Oral β-lactam antibiotics (amoxicillin, ampicillin, "
+                    "penicillin, cephalosporins) — these are the most common CAUSE of cecal dysbiosis "
+                    "in degus and other hindgut fermenters, causing fatal Clostridial enterotoxemia. "
+                    "References: Quesenberry & Carpenter (2012); Harkness et al. (2010) Biology and "
+                    "Medicine of Rabbits and Rodents 5th ed.",
+        "treatment_ja": "盲腸内細菌叢異常はデグーのような後腸発酵動物では致死的になりうる — 盲腸マイクロバイオーム"
+                        "の撹乱が病原性クロストリジウムの過剰増殖と腸管毒素症を引き起こす。【即時管理】"
+                        "(1) 皮下補液: 加温LRS 50-100 mL/kg/日。(2) 食事是正（最重要）: 原因食品の全排除 — "
+                        "チモシー牧草厳格食に戻す。糖分・果物・おやつ・でんぷん質食品は全て禁忌。食欲がない場合: "
+                        "クリティカルケアのシリンジ給餌。(3) プロバイオティクス: S. boulardiiまたは混合乳酸菌。"
+                        "健康デグーの盲腸内容物の移植（トランスファウネーション）も報告あり。"
+                        "(4) 消化管運動支持: シメチコン1-2 mL/kg PO q8h。メトクロプラミド0.5 mg/kg "
+                        "PO/SC q8-12h（閉塞を除外後）。(5) 疼痛管理: メロキシカム1-2 mg/kg PO/SC q24h。"
+                        "(6) 抗菌薬 — 極度に慎重に使用: メトロニダゾール10-20 mg/kg PO q12h × 5-7日"
+                        "（嫌気性クロストリジウムに特異的）。絶対禁忌: 経口βラクタム系抗菌薬 — これらは"
+                        "デグーの盲腸内細菌叢異常の最も一般的な原因であり、致死的な腸管毒素症を引き起こす。",
+        "prevention": "Strict timothy hay-based diet (≥80%) — the single most important preventive measure. "
+                      "No sugar, no fruit, no starchy treats (critical for diabetes AND cecal health). Gradual "
+                      "dietary changes only (≥7 day transition). AVOID oral β-lactam antibiotics at all costs — "
+                      "use enrofloxacin or trimethoprim-sulfa for infections requiring antibiotics. Minimize "
+                      "stress (appropriate group housing, environmental enrichment). Fresh water always available. "
+                      "Reference: Quesenberry & Carpenter (2012); Harkness et al. (2010).",
+        "prevention_ja": "チモシー牧草ベースの厳格食（≥80%）が最も重要な予防策。糖分・果物・でんぷん質おやつ禁忌"
+                         "（糖尿病予防と盲腸健康の両方に重要）。食事変更は段階的に（≥7日間の移行期間）。"
+                         "経口βラクタム系抗菌薬は絶対に避ける。ストレス軽減（適切な群れ飼育、環境エンリッチメント）。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
         "prognosis_ja": "盲腸内細菌叢異常の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
         "onset_pattern": {"acute", "subacute"},
