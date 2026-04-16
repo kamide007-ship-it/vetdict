@@ -297,6 +297,7 @@ _TEMPLATE_MARKERS = (
     "Proper husbandry, balanced nutrition, regular veterinary",
     "involves pathological changes in affected tissues and organ systems",
     "Prognosis depends on severity, timeliness of diagnosis",
+    "Amphibianにおける",
 )
 
 
