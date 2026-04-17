@@ -1391,7 +1391,7 @@ button.combination-item:focus-visible {
 .anesthesia-contra-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.72rem;font-weight:700;color:#fff;margin-right:6px;vertical-align:middle}
 /* Print styles */
 @media print{
-  .header,.hero,.species-section,.quick-nav-strip,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
   #viewAnesthesia{display:block!important;position:static!important}
   .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
   .disease-db-item .disease-detail{display:block!important;max-height:none!important}
@@ -1430,7 +1430,7 @@ button.combination-item:focus-visible {
 }
 
 @media print{
-  .header,.hero,.species-section,.quick-nav-strip,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
   #viewAnesthesia{display:block!important;position:static!important}
   .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
   .disease-db-item .disease-detail{display:block!important;max-height:none!important}
@@ -1515,6 +1515,23 @@ button.combination-item:focus-visible {
 .quick-nav-btn:active{transform:translateY(0)}
 .quick-nav-btn:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 .quick-nav-icon{font-size:1.1rem}
+
+/* Cross-navigation links in disease detail */
+.cross-nav-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid var(--gray-200)}
+.cross-nav-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;font-size:.8rem;font-weight:600;border-radius:6px;text-decoration:none;cursor:pointer;transition:all var(--transition-normal)}
+.cross-nav-btn.drug-nav-link{background:#f0f7ff;border:1px solid #bfdbfe;color:var(--navy)}
+.cross-nav-btn.drug-nav-link:hover{background:#dbeafe;border-color:#93c5fd}
+.cross-nav-btn.anesthesia-nav-link{background:#faf5ff;border:1px solid #e9d5ff;color:#7c3aed}
+.cross-nav-btn.anesthesia-nav-link:hover{background:#f3e8ff;border-color:#c4b5fd}
+
+/* Floating navigation button */
+.floating-nav{position:fixed;bottom:24px;right:24px;z-index:999;opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .3s,transform .3s}
+.floating-nav.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.floating-nav-toggle{width:48px;height:48px;border-radius:50%;background:var(--navy);color:var(--white);border:none;cursor:pointer;box-shadow:0 4px 16px rgba(26,48,104,.35);display:flex;align-items:center;justify-content:center;transition:all var(--transition-normal)}
+.floating-nav-toggle:hover{background:var(--navy-light);transform:scale(1.08)}
+.floating-nav-menu{position:absolute;bottom:56px;right:0;display:flex;flex-direction:column;gap:4px;background:var(--white);border-radius:var(--radius-lg);box-shadow:0 8px 32px rgba(0,0,0,.18);padding:6px;min-width:160px;animation:fade-tab-in .2s ease-out}
+.floating-nav-item{display:flex;align-items:center;gap:8px;padding:10px 14px;background:none;border:none;font-size:.84rem;font-weight:500;color:var(--gray-700);cursor:pointer;border-radius:var(--radius);white-space:nowrap;transition:background .15s}
+.floating-nav-item:hover{background:var(--gray-100);color:var(--navy)}
 
 /* Clickable hero stats */
 .hero-stat-clickable{cursor:pointer;transition:all var(--transition-normal);border-radius:8px;padding:8px 12px}
