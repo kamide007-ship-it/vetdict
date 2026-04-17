@@ -305,4 +305,171 @@ DRUGS_BATCH_9: list[dict] = [
         "contraindications": "Growing animals. Seizure disorders. Cats. HP-CIA — approved veterinary fluoroquinolones should be used preferentially. Not for prostatitis.",
         "contraindications_ja": "成長期動物。痙攣性障害。猫。HP-CIA — 承認済み動物用フルオロキノロンを優先使用。前立腺炎には不可。",
     },
+    # ------------------------------------------------------------------
+    # Minocycline (HIA) — Tetracycline for MRSP pyoderma
+    # ------------------------------------------------------------------
+    {
+        "id": "minocycline",
+        "name": "Minocycline",
+        "name_ja": "ミノサイクリン",
+        "category": "antibiotics",
+        "mechanism": "Second-generation tetracycline. Binds 30S ribosomal subunit to inhibit protein synthesis. Bacteriostatic. More lipophilic than doxycycline — better tissue penetration including skin and prostate. Active against many MRSP (methicillin-resistant Staphylococcus pseudintermedius) strains.",
+        "mechanism_ja": "第2世代テトラサイクリン。30Sリボソームサブユニットに結合しタンパク質合成を阻害。静菌性。ドキシサイクリンより脂溶性が高く、皮膚・前立腺への組織移行性が良好。多くのMRSP（メチシリン耐性スタフィロコッカス・シュードインターメディウス）株に有効。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Pyoderma: 5-10 mg/kg PO q12h; PK-PD optimal: 5 mg/kg PO q12h with food",
+                "dosage_ja": "膿皮症: 5-10 mg/kg 経口 12時間ごと; PK-PD最適: 5 mg/kg 経口 12時間ごと 食事とともに",
+                "notes": "Important for MRSP pyoderma treatment. ADR rate 21.0% (Minouchi 2024): vomiting 66.7%, soft stool/diarrhea 33.3%, anorexia 28.6%. Give with food to improve absorption and reduce GI upset. PK-PD data supports 5 mg/kg q12h (Maaland 2014). Higher oral bioavailability than doxycycline in dogs. Not high-concentration urinary excretion — not ideal for UTI.",
+                "notes_ja": "MRSP膿皮症治療に重要。副作用発現率21.0%（箕内ら 2024）: 嘔吐66.7%、軟便・下痢33.3%、食欲不振28.6%。食事とともに投与し吸収改善・消化器症状軽減。PK-PDデータは5 mg/kg 12時間ごとを支持（Maaland 2014）。犬ではドキシサイクリンより経口バイオアベイラビリティが高い。高濃度で尿中排泄されないためUTIには不向き。",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "5-12.5 mg/kg PO q12h",
+                "dosage_ja": "5-12.5 mg/kg 経口 12時間ごと",
+                "notes": "Less esophageal stricture risk than doxycycline. Give with food. Limited feline-specific PK data.",
+                "notes_ja": "ドキシサイクリンより食道狭窄リスクが低い。食事とともに投与。猫特異的PKデータは限定的。",
+            },
+        },
+        "side_effects": [
+            "Vomiting (66.7% of ADR cases — Minouchi 2024)",
+            "Soft stool/diarrhea (33.3%)",
+            "Anorexia (28.6%)",
+            "Vestibular signs (rare)",
+            "Tooth discoloration (young animals)",
+        ],
+        "side_effects_ja": [
+            "嘔吐（副作用発現例の66.7% — 箕内ら 2024）",
+            "軟便・下痢（33.3%）",
+            "食欲不振（28.6%）",
+            "前庭症状（稀）",
+            "歯の変色（幼若動物）",
+        ],
+        "contraindications": "Pregnancy (teratogenic). Growing animals (tooth/bone discoloration). Hepatic insufficiency. Known tetracycline hypersensitivity.",
+        "contraindications_ja": "妊娠（催奇形性）。成長期動物（歯・骨の変色）。肝機能不全。テトラサイクリン過敏症。",
+    },
 ]
+
+# ---------------------------------------------------------------------------
+# UTI-specific notes patch for existing drugs (ISCAID 2019 Table 3)
+# Appends UTI indication/dosing info to existing notes fields.
+# ---------------------------------------------------------------------------
+ISCAID_UTI_NOTES_PATCH: dict[str, dict[str, dict[str, str]]] = {
+    "amoxicillin": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] First-line for sporadic bacterial cystitis. 11-15 mg/kg PO q8-12h. Primarily excreted in active form in urine. Klebsiella spp. are resistant. Not recommended for pyelonephritis or prostatitis. Treatment duration: 3-5 days.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 散発性細菌性膀胱炎の第一選択薬。11-15 mg/kg 経口 8-12時間ごと。主に活性型のまま尿中排泄。クレブシエラ属は耐性。腎盂腎炎・前立腺炎には推奨されない。治療期間: 3-5日。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] First-line when bacterial cystitis is confirmed by culture. Same dosing as dogs. Note: most cats with LUTS do NOT have bacterial cystitis (FIC is more common).",
+            "notes_ja_append": " [UTI/ISCAID 2019] 細菌培養で膀胱炎が確認された場合の第一選択薬。犬と同じ用量。注意: LUTS猫の大多数は細菌性膀胱炎ではない（FICがより一般的）。",
+        },
+    },
+    "amoxicillin_clavulanate": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 12.5-25 mg/kg PO q12h (total product dose). Use when plain amoxicillin is unavailable or local susceptibility data shows high amoxicillin resistance with preserved amox/clav susceptibility. Not recommended for pyelonephritis or prostatitis.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 12.5-25 mg/kg 経口 12時間ごと（総製品用量）。アモキシシリン単剤が入手困難な場合、または地域の感受性データでアモキシシリン耐性率が高くアモキシシリン/クラブラン酸感受性が高い場合に使用。腎盂腎炎・前立腺炎には推奨されない。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] Same indications as amoxicillin for confirmed bacterial cystitis. Await culture results before initiating antibiotics in cats with LUTS.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 確認された細菌性膀胱炎にはアモキシシリンと同じ適応。LUTS猫では培養結果を待ってから抗菌薬開始。",
+        },
+    },
+    "amikacin": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 15-30 mg/kg IV/IM/SC q24h. Reserve for MDR infections. Potentially nephrotoxic — avoid in renal impairment. Caution with concurrent nephrotoxic drugs (NSAIDs). Low pH may reduce aminoglycoside activity.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 15-30 mg/kg IV/IM/SC 24時間ごと。多剤耐性感染症に限定。腎毒性の可能性 — 腎機能障害では避ける。腎毒性薬（NSAIDs等）との併用注意。低pHはアミノグリコシド活性を低下させうる。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] 10-14 mg/kg IV/IM/SC q24h. Same MDR-only indications. Cats more sensitive to nephrotoxicity.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 10-14 mg/kg IV/IM/SC 24時間ごと。多剤耐性感染症のみ。猫は腎毒性に対してより感受性が高い。",
+        },
+    },
+    "cephalexin": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 12-25 mg/kg PO q12h. Narrow activity spectrum. Enterococcus spp. are resistant. CLSI revised breakpoint to <16 mcg/mL (consistent with human medicine). [Pyoderma ADR/Minouchi 2024] ADR rate 8.5% (13/153 dogs): soft stool/diarrhea 53.8%, vomiting 46.2%, anorexia 7.7%. Lowest ADR rate among cephalexin, minocycline, fosfomycin.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 12-25 mg/kg 経口 12時間ごと。活性スペクトルは狭い。エンテロコッカス属は耐性。CLSIブレイクポイント16 μg/mL未満に修正。[膿皮症ADR/箕内ら 2024] 副作用発現率8.5%（13/153頭）: 軟便・下痢53.8%、嘔吐46.2%、食欲不振7.7%。CEX/MINO/FOM中最低の副作用率。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] Same dosing as dogs. For confirmed bacterial cystitis only.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 犬と同じ用量。確認された細菌性膀胱炎にのみ。",
+        },
+    },
+    "cefovecin": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 8 mg/kg SC single injection; may repeat once at 7-14 days. NOT recommended for routine use — duration and spectrum exceed typical needs. Use only when oral treatment is impossible. Enterococcus spp. are resistant. PK supports 14-day duration in dogs.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 8 mg/kg 皮下 単回注射; 7-14日後に1回反復可。常用は推奨されない — 持続時間・スペクトルが通常必要以上。経口投与不可能な場合のみ使用。エンテロコッカス属は耐性。犬でPKは14日間の投与期間を支持。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] Same dose as dogs. PK supports 21-day duration in cats. Reserve for situations where oral dosing is not possible.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 犬と同じ用量。猫のPKは21日間の投与期間を支持。経口投与不可能な場合に限定。",
+        },
+    },
+    "ceftiofur": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 2 mg/kg SC q12-24h. Approved for canine bacterial cystitis in some regions. Enterococcus spp. are resistant. HP-CIA classification.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 2 mg/kg 皮下 12-24時間ごと。一部地域で犬の細菌性膀胱炎に承認。エンテロコッカス属は耐性。HP-CIA分類。",
+        },
+    },
+    "chloramphenicol": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 40-50 mg/kg PO q8h. Reserve for MDR infections with no other options. Not first-line for pyelonephritis or prostatitis.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 40-50 mg/kg 経口 8時間ごと。他に選択肢がない多剤耐性感染症にのみ。腎盂腎炎・前立腺炎の第一選択ではない。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] 12.5-20 mg/kg PO q12h (max 50 mg/cat). Bone marrow suppression risk with prolonged use (>28 days). Idiosyncratic aplastic anemia risk to humans — avoid contact.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 12.5-20 mg/kg 経口 12時間ごと（最大50 mg/猫）。長期使用（28日超）で骨髄抑制リスク。ヒトへの特異体質性再生不良性貧血リスク — 接触を避ける。",
+        },
+    },
+    "doxycycline": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 5 mg/kg PO q12h. Not excreted in high concentrations in urine, but may reach effective levels against some pathogens. Reserve for infections where pathogens are resistant to drugs excreted in active form in urine.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 5 mg/kg 経口 12時間ごと。高濃度で尿中排泄されないが、一部の病原菌に対する有効濃度に達することがある。活性型のまま尿中排泄される薬剤に耐性の病原体による感染症に限定。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] Same dosing as dogs. Esophageal ulcer risk — follow dosing recommendations carefully (give with food/water, avoid dry pilling).",
+            "notes_ja_append": " [UTI/ISCAID 2019] 犬と同じ用量。食道潰瘍リスク — 投与方法に注意（食事/水とともに、乾燥投与を避ける）。",
+        },
+    },
+    "enrofloxacin": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 5-20 mg/kg PO q24h. Primarily excreted in active form in urine. Reserve for documented resistant infections. First-line empirical choice for pyelonephritis and prostatitis (upper dose range). Not recommended for Enterococcus spp.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 5-20 mg/kg 経口 24時間ごと。主に活性型のまま尿中排泄。記録された耐性感染症に限定。腎盂腎炎・前立腺炎の経験的第一選択（高用量域）。エンテロコッカス属には推奨されない。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] 5 mg/kg PO q24h MAXIMUM. Retinopathy risk — avoid if possible. Use alternative fluoroquinolones or non-fluoroquinolone agents preferentially.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 5 mg/kg 経口 24時間ごと 最大。網膜症リスク — 可能なら避ける。代替フルオロキノロンまたは非フルオロキノロン薬を優先使用。",
+        },
+    },
+    "marbofloxacin": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 2.7-5.5 mg/kg PO q24h. Primarily excreted in active form in urine. First-line for pyelonephritis. First-choice for prostate-involving infections (excellent prostatic penetration). Not recommended for Enterococcus spp. HP-CIA classification.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 2.7-5.5 mg/kg 経口 24時間ごと。主に活性型のまま尿中排泄。腎盂腎炎の第一選択薬。前立腺感染症の第一選択（優れた前立腺移行性）。エンテロコッカス属には推奨されない。HP-CIA分類。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] Same dosing as dogs. Monitor for retinopathy (fluoroquinolone class effect in cats).",
+            "notes_ja_append": " [UTI/ISCAID 2019] 犬と同じ用量。網膜症に注意（猫のフルオロキノロンクラスエフェクト）。",
+        },
+    },
+    "pradofloxacin": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 3-5 mg/kg PO q24h. Evidence-based for canine bacterial cystitis. Higher activity against some bacteria than conventional fluoroquinolones (enrofloxacin, marbofloxacin). Excellent first-line for pyelonephritis, especially in cats. Not for Enterococcus.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 3-5 mg/kg 経口 24時間ごと。犬の細菌性膀胱炎にエビデンスあり。従来のフルオロキノロン（エンロフロキサシン、マルボフロキサシン）より一部の細菌に対する活性が高い。特に猫の腎盂腎炎の第一選択薬として優れる。エンテロコッカスには無効。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] 3-5 mg/kg (tablets) or 5-7.5 mg/kg (suspension) PO q24h. Theoretically excellent first-line for feline pyelonephritis. Not for Enterococcus.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 3-5 mg/kg（錠剤）または 5-7.5 mg/kg（懸濁液）経口 24時間ごと。理論的に猫の腎盂腎炎の第一選択として優れる。エンテロコッカスには無効。",
+        },
+    },
+    "trimethoprim_sulfa": {
+        "dog": {
+            "notes_append": " [UTI/ISCAID 2019] 15-30 mg/kg PO q12h (total product dose). Appropriate first-line or empirical choice for UTI. Prostatitis treatment option (good prostatic penetration via trimethoprim, though sulfadiazine levels low in prostatic tissue). Long-term use (>7 days): baseline Schirmer tear test + regular re-evaluation + owner monitoring for ocular discharge. Avoid in dogs prone to KCS, hepatic disease, hypersensitivity. Controversial activity against urinary Enterococcus — avoid.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 15-30 mg/kg 経口 12時間ごと（総製品用量）。UTIの適切な第一選択または経験的選択薬。前立腺炎の治療選択肢（トリメトプリムの良好な前立腺移行性、ただしスルファジアジンの前立腺組織濃度は低い）。長期使用（7日超）: ベースラインのシルマー涙液検査 + 定期再評価 + 飼い主による眼分泌物モニタリング。KCS傾向犬・肝疾患・過敏症では避ける。尿中エンテロコッカスに対する活性は議論あり — 避ける。",
+        },
+        "cat": {
+            "notes_append": " [UTI/ISCAID 2019] Same dosing as dogs. Appropriate first-line for confirmed bacterial cystitis.",
+            "notes_ja_append": " [UTI/ISCAID 2019] 犬と同じ用量。確認された細菌性膀胱炎の適切な第一選択。",
+        },
+    },
+}
+

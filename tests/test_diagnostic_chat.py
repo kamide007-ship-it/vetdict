@@ -39,6 +39,8 @@ _KNOWN_ALIAS_MISMATCHES = {
     "joint_pain_or_stiffness",
     "lumps_and_bumps",
     "paralysis_or_paresis",
+    "cloudy_urine",
+    "foul_smelling_urine",
 }
 
 
