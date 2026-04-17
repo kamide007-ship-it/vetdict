@@ -153,6 +153,7 @@ const I18N={
     emptyStateSelectBtn:"動物種を選択する",
     breadcrumbHome:"トップ",breadcrumbNoSpecies:"動物種未選択",
     kbdShortcutsHint:"キーボード: Ctrl+1〜5でタブ切替",
+    globalSearchPh:"疾患・薬品を検索...",
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
@@ -265,6 +266,7 @@ const I18N={
     emptyStateSelectBtn:"Select a species",
     breadcrumbHome:"Home",breadcrumbNoSpecies:"No species selected",
     kbdShortcutsHint:"Keyboard: Ctrl+1-5 to switch tabs",
+    globalSearchPh:"Search diseases & drugs...",
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
@@ -2077,6 +2079,12 @@ function navigateToDrug(drugName){
   if(input){input.value=drugName;input.dispatchEvent(new Event("input"));}
   const panel=document.getElementById("viewDrugs");
   if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+  setTimeout(()=>{
+    const list=document.getElementById("drugList");
+    if(!list)return;
+    const first=list.querySelector(".disease-db-item");
+    if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);
+  },350);
 }
 
 function navigateToDiseaseDb(query){
@@ -2085,6 +2093,12 @@ function navigateToDiseaseDb(query){
   if(input){input.value=query;input.dispatchEvent(new Event("input"));}
   const panel=document.getElementById("viewDatabase");
   if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+  setTimeout(()=>{
+    const list=document.getElementById("diseaseDbList");
+    if(!list)return;
+    const first=list.querySelector(".disease-db-item");
+    if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);
+  },350);
 }
 
 function switchView(view){
