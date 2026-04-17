@@ -146,6 +146,11 @@ const I18N={
     quickNavDiseaseDb:"疾患データベース",quickNavDrugs:"薬品辞書",quickNavChat:"臨床相談",quickNavAnesthesia:"鎮静・麻酔",quickNavChecker:"鑑別診断",
     quickNavPrompt:"機能を選択してください",
     quickNavDefault:"データベースを直接閲覧",
+    emptyStateSelectSpecies:"動物種を選択してください",
+    emptyStateDiseaseDb:"動物種を選択すると、その種に対応する疾患データベースが表示されます",
+    emptyStateDrugs:"薬品辞書は動物種に関わらず全薬品を表示できます",
+    emptyStateAnesthesia:"動物種を選択すると、種別の鎮静・麻酔プロトコルが表示されます",
+    emptyStateSelectBtn:"動物種を選択する",
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
@@ -251,6 +256,11 @@ const I18N={
     quickNavDiseaseDb:"Disease Database",quickNavDrugs:"Drug Dictionary",quickNavChat:"Clinical Chat",quickNavAnesthesia:"Anesthesia",quickNavChecker:"Differential Dx",
     quickNavPrompt:"Select a feature",
     quickNavDefault:"Browse databases directly",
+    emptyStateSelectSpecies:"Select a species",
+    emptyStateDiseaseDb:"Select a species to view its disease database",
+    emptyStateDrugs:"The drug dictionary shows all drugs regardless of species",
+    emptyStateAnesthesia:"Select a species to view sedation & anesthesia protocols",
+    emptyStateSelectBtn:"Select a species",
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
@@ -370,6 +380,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     if(symptomSearch)symptomSearch.addEventListener("input",debounce(()=>{renderSymptomList(symptomData);if(symptomSearch.value.length>=2)trackEvent("symptom_search",{species:currentSpecies,query:symptomSearch.value.substring(0,50)});},300));
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
+    setupGlobalSearch();
     // Restore view from URL hash
     const hash=location.hash.replace("#","");
     if(hash&&["checker","database","chat","drugs","anesthesia"].includes(hash))switchView(hash);
@@ -474,6 +485,51 @@ function setupFloatingNav(){
   window.addEventListener("scroll",()=>{
     if(!ticking){requestAnimationFrame(()=>{fab.classList.toggle("visible",window.scrollY>400);ticking=false;});ticking=true;}
   },{passive:true});
+}
+
+function setupGlobalSearch(){
+  const input=document.getElementById("globalSearch");
+  const results=document.getElementById("globalSearchResults");
+  if(!input||!results)return;
+  let debounceTimer=null;
+  input.addEventListener("input",()=>{
+    clearTimeout(debounceTimer);
+    const q=input.value.trim().toLowerCase();
+    if(q.length<2){results.style.display="none";results.innerHTML="";return;}
+    debounceTimer=setTimeout(()=>{
+      const matches=[];
+      allDiseases.forEach(d=>{
+        const name=(d.name||"").toLowerCase();
+        const nameJa=(d.name_ja||"").toLowerCase();
+        if(name.includes(q)||nameJa.includes(q)){matches.push({type:"disease",name:d.name,name_ja:d.name_ja});}
+      });
+      allDrugs.forEach(d=>{
+        const name=(d.name||"").toLowerCase();
+        const nameJa=(d.name_ja||"").toLowerCase();
+        if(name.includes(q)||nameJa.includes(q)){matches.push({type:"drug",name:d.name,name_ja:d.name_ja});}
+      });
+      if(matches.length===0){results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;results.style.display="block";return;}
+      results.innerHTML=matches.slice(0,15).map(m=>{
+        const icon=m.type==="disease"?"\u{1F4D6}":"\u{1F48A}";
+        const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
+        const sub=currentLang==="ja"?(m.name||""):(m.name_ja||"");
+        const typeLabel=m.type==="disease"?(currentLang==="ja"?"疾患":"Disease"):(currentLang==="ja"?"薬品":"Drug");
+        return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""} <span class="search-result-type">${typeLabel}</span></div>`;
+      }).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"");
+      results.style.display="block";
+    },200);
+  });
+  results.addEventListener("click",e=>{
+    const item=e.target.closest(".search-result-item");
+    if(!item||!item.dataset.type)return;
+    if(item.dataset.type==="disease"){navigateToDiseaseDb(item.dataset.name);}
+    else{navigateToDrug(item.dataset.name);}
+    input.value="";results.style.display="none";
+  });
+  document.addEventListener("click",e=>{if(!input.contains(e.target)&&!results.contains(e.target)){results.style.display="none";}});
+  input.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){results.style.display="none";input.blur();}
+  });
 }
 
 function showReturningUserBanner(){
@@ -664,7 +720,7 @@ function renderSpeciesGrid(){
         <div class="name">${primary}</div>
         <div class="count">${secondary}</div>
         ${desc?`<div class="species-desc">${desc}</div>`:""}
-        <div class="count" style="margin-top:2px">${sp.diseases}${dLabel}${sp.drugs?' · '+sp.drugs+drLabel:''}</div>
+        <div class="species-stats"><span>\u{1F4CB} ${sp.diseases} ${dLabel}</span>${sp.drugs?`<span>\u{1F48A} ${sp.drugs} ${drLabel}</span>`:""}</div>
       </div>`}).join("");
   }
   grid.innerHTML=html;
@@ -1740,7 +1796,11 @@ function renderDiseaseDb(){
   }
   const totalCount=filtered.filter(d=>!d._catHeader).length;
   document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",totalCount).replace("%total%",allDiseases.length);
-  if(totalCount===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;return;}
+  if(totalCount===0){
+    if(!currentSpecies&&!search){list.innerHTML=renderEmptyState("database");}
+    else{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;}
+    return;
+  }
   const pk=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
   const shown=filtered.slice(0,diseaseDisplayLimit);
   list.innerHTML=shown.map(d=>{
@@ -1798,6 +1858,12 @@ function renderDiseaseDb(){
   }
 }
 
+function renderEmptyState(tab){
+  const icons={database:"\u{1F4D6}",drugs:"\u{1F48A}",anesthesia:"\u{1F489}"};
+  const msgs={database:t("emptyStateDiseaseDb"),drugs:t("emptyStateDrugs"),anesthesia:t("emptyStateAnesthesia")};
+  return`<div class="empty-state-prompt"><span class="empty-state-icon" aria-hidden="true">${icons[tab]||"\u{1F50D}"}</span><p class="empty-state-title">${t("emptyStateSelectSpecies")}</p><p class="empty-state-desc">${msgs[tab]||""}</p><button class="empty-state-btn" onclick="document.getElementById('speciesSection').scrollIntoView({behavior:'smooth',block:'start'})">${t("emptyStateSelectBtn")}</button></div>`;
+}
+
 function navigateToDrug(drugName){
   switchView("drugs");
   const input=document.getElementById("drugSearch");
@@ -1833,9 +1899,14 @@ function switchView(view){
   /* フォーカスを新しいパネルの最初のインタラクティブ要素に移動 */
   const activePanel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
   if(activePanel){const focusable=activePanel.querySelector("input,select,button:not([disabled]),textarea,[tabindex='0']");if(focusable)setTimeout(()=>focusable.focus(),50);}
-  /* モバイル: ハンバーガーメニューを閉じる */
+  /* モバイル: ハンバーガーメニューを閉じる + コンテンツへスクロール */
   const nav=document.getElementById("mainNav");
-  if(nav&&nav.classList.contains("open")){nav.classList.remove("open");const hb=document.querySelector(".hamburger");if(hb)hb.setAttribute("aria-expanded","false");}
+  if(nav&&nav.classList.contains("open")){
+    nav.classList.remove("open");
+    const hb=document.querySelector(".hamburger");
+    if(hb)hb.setAttribute("aria-expanded","false");
+    if(activePanel)setTimeout(()=>activePanel.scrollIntoView({behavior:"smooth",block:"start"}),100);
+  }
 }
 
 function setupNavigation(){
@@ -2730,7 +2801,7 @@ function renderAnesthesiaOverview(data){
   const lb=document.getElementById("anesthesiaSpeciesLabel");
   if(!data||(!data.overview&&!data.species_name)){
     ov.style.display="block";
-    ov.innerHTML=`<div style="text-align:center;padding:16px"><span style="font-size:2rem" aria-hidden="true">&#128137;</span><p style="margin-top:8px;font-size:.88rem;color:var(--navy)">${t("anesthesiaSelectSpecies")}</p></div>`;
+    ov.innerHTML=renderEmptyState("anesthesia");
     lb.textContent="";
     return;
   }
