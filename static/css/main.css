@@ -1518,6 +1518,10 @@ button.combination-item:focus-visible {
 .quick-nav-btn:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 .quick-nav-icon{font-size:1.1rem}
 
+/* Diagnosis history */
+.history-item{transition:background var(--transition-fast)}
+.history-item:hover{background:var(--gray-50)}
+
 /* Empty state prompt */
 .empty-state-prompt{text-align:center;padding:32px 20px}
 .empty-state-icon{font-size:2.5rem;display:block;margin-bottom:12px}

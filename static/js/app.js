@@ -753,7 +753,7 @@ function selectSpecies(id){
   const sp=SPECIES.find(s=>s.id===id);
   if(sp&&typeof showToast==="function"){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
   const resultsArea=document.getElementById("resultsArea");
-  if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>${renderHistoryPanel()}`;
+  if(resultsArea){resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>${renderHistoryPanel()}`;attachHistoryHandlers(resultsArea);}
   renderQuickNav(id);
 }
 
@@ -1361,7 +1361,35 @@ function renderHistoryPanel(){
     const top=h.topDiseases&&h.topDiseases[0]?(currentLang==="ja"?(h.topDiseases[0].name_ja||h.topDiseases[0].name):h.topDiseases[0].name):"";
     return`<div class="history-item" data-id="${h.id}" style="padding:8px 12px;border-bottom:1px solid var(--gray-100);cursor:pointer;font-size:.82rem"><span>${icon}</span> <strong>${escapeHtml(spName)}</strong> <span style="color:var(--gray-500)">${date}</span><br><span style="color:var(--navy)">${escapeHtml(top)}</span> <span style="color:var(--gray-400)">${h.symptoms?h.symptoms.length:0}症状</span></div>`;
   }).join("");
-  return`<div class="history-panel" style="margin-top:12px"><div style="font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 12px;border-bottom:2px solid var(--green)">${currentLang==="ja"?"📋 診断履歴":"📋 Diagnosis History"}</div>${items}</div>`;
+  return`<div class="history-panel" style="margin-top:12px"><div style="font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 12px;border-bottom:2px solid var(--green)">${currentLang==="ja"?"📋 診断履歴":"📋 Diagnosis History"}</div>${items}<div class="history-actions" style="padding:6px 12px;display:flex;justify-content:flex-end"><button class="history-clear-btn" style="font-size:.72rem;color:var(--gray-400);background:none;border:none;cursor:pointer;text-decoration:underline">${currentLang==="ja"?"履歴をクリア":"Clear history"}</button></div></div>`;
+}
+
+function attachHistoryHandlers(container){
+  container.querySelectorAll(".history-item").forEach(item=>{
+    item.addEventListener("click",()=>{
+      const id=Number(item.dataset.id);
+      const history=loadDiagnosisHistory();
+      const entry=history.find(h=>h.id===id);
+      if(!entry)return;
+      if(entry.species&&entry.species!==currentSpecies)selectSpecies(entry.species);
+      if(entry.symptoms&&entry.symptoms.length){
+        selectedSymptoms.clear();
+        entry.symptoms.forEach(s=>selectedSymptoms.add(s));
+        renderSelectedSymptoms();
+        renderSymptomList(symptomData);
+        const analyzeBtn=document.getElementById("analyzeBtn");
+        if(analyzeBtn){analyzeBtn.disabled=false;analyzeBtn.click();}
+      }
+    });
+  });
+  const clearBtn=container.querySelector(".history-clear-btn");
+  if(clearBtn){clearBtn.addEventListener("click",e=>{
+    e.stopPropagation();
+    try{localStorage.removeItem("vetdict-history");}catch(e){}
+    const panel=container.querySelector(".history-panel");
+    if(panel)panel.remove();
+    if(typeof showToast==="function")showToast(currentLang==="ja"?"履歴をクリアしました":"History cleared","success");
+  });}
 }
 
 function loadCommonDiseases(species){
