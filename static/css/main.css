@@ -240,7 +240,10 @@ a:hover{text-decoration:underline}
 .match-badge.moderate{background:#fef3c7;color:#92400e}
 .match-badge.low{background:#fee2e2;color:#991b1b}
 .disease-detail{max-height:0;overflow:hidden;padding:0 16px;border-top:0 solid transparent;background:var(--gray-50);font-size:.82rem;line-height:1.7;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .3s ease,border-top .2s ease,opacity .2s ease;opacity:0}
-.disease-detail.open{max-height:3000px;padding:16px;border-top:1px solid var(--gray-100);opacity:1}
+.disease-detail.open{max-height:3000px;padding:16px;border-top:1px solid var(--gray-100);opacity:1;position:relative}
+.detail-close-btn{position:absolute;top:8px;right:8px;background:var(--gray-100);border:none;width:28px;height:28px;border-radius:50%;font-size:.9rem;color:var(--gray-500);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--transition-fast),color var(--transition-fast);z-index:2}
+.detail-close-btn:hover{background:var(--gray-200);color:var(--navy)}
+.detail-close-btn:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 .disease-detail dt{font-weight:700;color:var(--navy);margin-top:6px;font-size:.8rem}
 .disease-detail dd{margin-left:0;color:var(--gray-700)}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -442,6 +445,10 @@ a:hover{text-decoration:underline}
 .chat-followup-btn.answered:not(.selected){opacity:.4;cursor:default}
 .chat-msg.bot-brief{font-size:.72rem;color:var(--gray-500);padding:4px 12px;font-style:italic}
 .chat-disclaimer{font-size:.66rem;color:var(--gray-400);margin-top:8px;text-align:center}
+.chat-quick-suggestions{margin-top:8px}
+.chat-quick-label{display:block;font-size:.72rem;color:var(--gray-400);margin-bottom:4px}
+.chat-quick-btn{display:inline-block;padding:5px 12px;margin:2px;background:var(--white);border:1px solid var(--gray-200);border-radius:16px;font-size:.76rem;cursor:pointer;color:var(--navy);font-family:var(--font);transition:all var(--transition-fast)}
+.chat-quick-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .landing-chat-continue{text-align:center;padding:6px 0}
 .landing-continue-btn{background:var(--green);color:var(--white);border:none;padding:8px 20px;border-radius:20px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:var(--font);transition:background var(--transition-fast),transform var(--transition-fast)}
 .landing-continue-btn:hover{background:var(--green-dark,#1a9f40);transform:scale(1.03)}
@@ -602,6 +609,7 @@ a:hover{text-decoration:underline}
 .drug-species-card{font-size:.76rem;padding:4px 8px;border-radius:4px;border:1px solid}
 .drug-species-card.drug-safe{background:#f0fdf4;border-color:#bbf7d0}
 .drug-species-card.drug-unsafe{background:#fef2f2;border-color:#fecaca}
+.drug-species-card.drug-species-highlight{box-shadow:0 0 0 2px var(--navy);border-color:var(--navy);font-weight:600;order:-1}
 .drug-interaction-tag{display:inline-block;margin:2px 4px 2px 0;padding:2px 6px;background:#fef2f2;border-radius:4px;font-size:.76rem}
 
 /* --- Typing indicator --- */

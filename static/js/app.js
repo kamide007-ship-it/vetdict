@@ -1370,7 +1370,7 @@ function createShareWidget(diseases){
   w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button><button class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
   w.querySelector(".share-btn.twitter").addEventListener("click",function(){trackEvent("share_results",{method:"twitter",species:currentSpecies});});
   w.querySelector(".share-btn.line").addEventListener("click",function(){trackEvent("share_results",{method:"line",species:currentSpecies});});
-  w.querySelector(".share-btn.copy").addEventListener("click",function(){navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{this.textContent=t("shareCopied");trackEvent("share_results",{method:"copy",species:currentSpecies});});});
+  w.querySelector(".share-btn.copy").addEventListener("click",function(){const btn=this;const origText=btn.textContent;navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{btn.textContent=t("shareCopied");trackEvent("share_results",{method:"copy",species:currentSpecies});setTimeout(()=>{btn.textContent=origText;},2000);});});
   w.querySelector(".share-btn.copy-full").addEventListener("click",function(){navigator.clipboard.writeText(fullText).then(()=>{this.textContent=t("shareCopied");trackEvent("share_results",{method:"copy_full",species:currentSpecies});setTimeout(()=>{this.textContent=currentLang==="ja"?"詳細コピー":"Copy Full";},2000);});});
   return w;
 }
@@ -2165,6 +2165,28 @@ function setupChat(){
   if(chatInput)chatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendChatMessage();});
   if(landingChatSend)landingChatSend.addEventListener("click",()=>sendLandingChat());
   if(landingChatInput)landingChatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendLandingChat();});
+  addChatQuickSuggestions();
+}
+
+function addChatQuickSuggestions(){
+  const welcome=document.getElementById("chatWelcome");
+  if(!welcome||welcome.querySelector(".chat-quick-suggestions"))return;
+  const suggestions=currentLang==="ja"
+    ?["犬 嘔吐 食欲不振","猫 くしゃみ 鼻水 目やに","犬 多飲多尿 体重減少","猫 血尿 頻尿","ウサギ 食べない お腹が張っている"]
+    :["dog vomiting lethargy","cat sneezing nasal discharge","dog PU/PD weight loss","cat hematuria stranguria","rabbit anorexia bloating"];
+  const div=document.createElement("div");
+  div.className="chat-quick-suggestions";
+  div.innerHTML=`<span class="chat-quick-label">${currentLang==="ja"?"💬 タップで入力:":"💬 Quick input:"}</span>`
+    +suggestions.map(s=>`<button class="chat-quick-btn">${s}</button>`).join("");
+  div.querySelectorAll(".chat-quick-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const input=document.getElementById("chatInput");
+      const send=document.getElementById("chatSend");
+      if(input)input.value=btn.textContent;
+      if(send)send.click();
+    });
+  });
+  welcome.appendChild(div);
 }
 function stripGuidanceFromResponse(response,guidance){
   if(!response||!guidance)return response||"";
@@ -2968,7 +2990,7 @@ function renderDrugList(){
         ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${escapeHtml(di.drug)}: ${escapeHtml(currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja))}</span>`).join("")}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
       </div>
@@ -3458,12 +3480,24 @@ function toggleDbItem(el){
   if(detail){
     const isOpen=detail.classList.toggle("open");
     el.setAttribute("aria-expanded",isOpen);
+    const nameEl=el.querySelector(".d-name")||el.querySelector(".disease-name");
+    const diseaseName=nameEl?(nameEl.textContent||"").trim().substring(0,80):"";
+    el.setAttribute("aria-label",isOpen?(currentLang==="ja"?`${diseaseName}を閉じる`:`Close ${diseaseName}`):(currentLang==="ja"?`${diseaseName}の詳細を見る`:`View ${diseaseName} details`));
     if(isOpen){
-      const nameEl=el.querySelector(".d-name");
-      trackEvent("view_disease_detail",{species:currentSpecies,disease:(nameEl?nameEl.textContent:"").substring(0,80)});
-      /* Scroll the opened item into view after transition starts */
-      requestAnimationFrame(()=>{el.scrollIntoView({behavior:"smooth",block:"nearest"});});
-      /* Lazy-load drug info on first open */
+      trackEvent("view_disease_detail",{species:currentSpecies,disease:diseaseName});
+      if(!detail.querySelector(".detail-close-btn")){
+        const closeBtn=document.createElement("button");
+        closeBtn.className="detail-close-btn";
+        closeBtn.setAttribute("aria-label",currentLang==="ja"?"閉じる":"Close");
+        closeBtn.textContent="\u2715";
+        closeBtn.addEventListener("click",e=>{e.stopPropagation();toggleDbItem(el);});
+        detail.prepend(closeBtn);
+      }
+      requestAnimationFrame(()=>{
+        el.scrollIntoView({behavior:"smooth",block:"nearest"});
+        const firstFocusable=detail.querySelector("a,button,[tabindex='0']");
+        if(firstFocusable)setTimeout(()=>firstFocusable.focus(),300);
+      });
       if(!detail.dataset.drugsLoaded){
         detail.dataset.drugsLoaded="1";
         _loadDbItemDrugs(detail);
