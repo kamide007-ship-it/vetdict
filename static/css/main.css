@@ -47,6 +47,18 @@ a:hover{text-decoration:underline}
 .hamburger:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 .hamburger svg{display:block;width:24px;height:24px;color:var(--white)}
 
+/* --- Breadcrumb Bar --- */
+.breadcrumb-bar{background:linear-gradient(90deg,rgba(26,48,104,.06),rgba(26,48,104,.02));border-bottom:1px solid var(--gray-200);position:sticky;top:52px;z-index:99;font-size:.78rem}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;padding:6px 20px;display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto}
+.breadcrumb-item{color:var(--gray-500);white-space:nowrap}
+.breadcrumb-home{color:var(--navy);text-decoration:none;cursor:pointer;font-weight:500;transition:color var(--transition-fast)}
+.breadcrumb-home:hover{color:var(--green);text-decoration:none}
+.breadcrumb-species{cursor:pointer;transition:color var(--transition-fast)}
+.breadcrumb-species:hover{color:var(--navy)}
+.breadcrumb-species-active{color:var(--navy);font-weight:600}
+.breadcrumb-current{color:var(--green);font-weight:600}
+.breadcrumb-sep{color:var(--gray-300);font-size:.72rem;user-select:none}
+
 /* --- Global Search --- */
 .global-search-container{position:relative;flex:1;max-width:300px;min-width:150px}
 .search-input-group{position:relative;display:flex;align-items:center}
@@ -730,7 +742,10 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   @keyframes dropdown-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
   .header-nav.open{display:flex}
   .header-nav button{text-align:left;padding:12px 16px;border-radius:8px}
+  .header-nav button[aria-selected="true"]{background:rgba(34,168,79,.15);color:var(--green);border-left:3px solid var(--green);font-weight:700;box-shadow:none}
   .hamburger{display:block}
+  .breadcrumb-bar{top:46px;font-size:.72rem}
+  .breadcrumb-inner{padding:5px 12px}
   .hero{padding:40px 16px 36px}
   .hero-title{font-size:2.2rem}
   .hero-lead{font-size:.88rem}
@@ -1393,7 +1408,7 @@ button.combination-item:focus-visible {
 .anesthesia-contra-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.72rem;font-weight:700;color:#fff;margin-right:6px;vertical-align:middle}
 /* Print styles */
 @media print{
-  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.breadcrumb-bar,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
   #viewAnesthesia{display:block!important;position:static!important}
   .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
   .disease-db-item .disease-detail{display:block!important;max-height:none!important}
@@ -1432,7 +1447,7 @@ button.combination-item:focus-visible {
 }
 
 @media print{
-  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.breadcrumb-bar,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
   #viewAnesthesia{display:block!important;position:static!important}
   .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
   .disease-db-item .disease-detail{display:block!important;max-height:none!important}

@@ -151,6 +151,8 @@ const I18N={
     emptyStateDrugs:"薬品辞書は動物種に関わらず全薬品を表示できます",
     emptyStateAnesthesia:"動物種を選択すると、種別の鎮静・麻酔プロトコルが表示されます",
     emptyStateSelectBtn:"動物種を選択する",
+    breadcrumbHome:"トップ",breadcrumbNoSpecies:"動物種未選択",
+    kbdShortcutsHint:"キーボード: Ctrl+1〜5でタブ切替",
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
@@ -261,6 +263,8 @@ const I18N={
     emptyStateDrugs:"The drug dictionary shows all drugs regardless of species",
     emptyStateAnesthesia:"Select a species to view sedation & anesthesia protocols",
     emptyStateSelectBtn:"Select a species",
+    breadcrumbHome:"Home",breadcrumbNoSpecies:"No species selected",
+    kbdShortcutsHint:"Keyboard: Ctrl+1-5 to switch tabs",
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
@@ -329,6 +333,7 @@ function applyLanguage(){
   if(drugsLoaded)renderDrugList();
   if(anesthesiaLoaded)reloadAnesthesiaForSpecies();
   if(document.getElementById("quickNavStrip"))renderQuickNav(currentSpecies||null);
+  updateBreadcrumb();
 }
 
 function setupLanguageToggle(){
@@ -353,7 +358,7 @@ function trackEvent(name,params){
   if(typeof gtag==="function") gtag("event",name,params||{});
 }
 
-let currentSpecies=null,selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
+let currentSpecies=null,currentView="checker",selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 let symptomSortMode="category";
 
@@ -427,6 +432,10 @@ document.addEventListener("DOMContentLoaded",async()=>{
     setupHeroStats();
     /* Always-visible quick-nav strip (shows default label pre-selection) */
     renderQuickNav(null);
+    /* Breadcrumb bar below header */
+    updateBreadcrumb();
+    /* Keyboard shortcuts for tab switching */
+    setupKeyboardShortcuts();
     /* Floating navigation button */
     setupFloatingNav();
     /* Returning user welcome */
@@ -755,6 +764,7 @@ function selectSpecies(id){
   const resultsArea=document.getElementById("resultsArea");
   if(resultsArea){resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>${renderHistoryPanel()}`;attachHistoryHandlers(resultsArea);}
   renderQuickNav(id);
+  updateBreadcrumb();
 }
 
 function renderQuickNav(speciesId){
@@ -788,6 +798,68 @@ function renderQuickNav(speciesId){
   ];
   strip.innerHTML=`<div class="quick-nav-label">${labelHtml}</div><div class="quick-nav-buttons">${items.map(i=>`<button class="quick-nav-btn" data-view="${i.view}"><span class="quick-nav-icon" aria-hidden="true">${i.icon}</span><span>${i.label}</span></button>`).join("")}</div>`;
   strip.classList.add("visible");
+}
+
+const VIEW_LABELS={
+  checker:{ja:"鑑別診断",en:"Differential Dx"},
+  database:{ja:"疾患データベース",en:"Disease Database"},
+  chat:{ja:"臨床相談",en:"Clinical Chat"},
+  drugs:{ja:"薬品辞書",en:"Drug Dictionary"},
+  anesthesia:{ja:"鎮静・麻酔",en:"Anesthesia"}
+};
+
+function updateBreadcrumb(){
+  let bar=document.getElementById("breadcrumbBar");
+  if(!bar){
+    bar=document.createElement("div");
+    bar.id="breadcrumbBar";
+    bar.className="breadcrumb-bar";
+    bar.setAttribute("aria-label","Breadcrumb");
+    const header=document.querySelector(".header");
+    if(header)header.after(bar);else return;
+  }
+  const sp=currentSpecies?SPECIES.find(s=>s.id===currentSpecies):null;
+  const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):t("breadcrumbNoSpecies");
+  const spIcon=currentSpecies?SPECIES_ICONS[currentSpecies]||"":"";
+  const viewLabel=(VIEW_LABELS[currentView]||{})[currentLang==="ja"?"ja":"en"]||currentView;
+  bar.innerHTML=`<nav class="breadcrumb-inner" aria-label="Breadcrumb">`
+    +`<a href="#" class="breadcrumb-item breadcrumb-home" data-action="home">${t("breadcrumbHome")}</a>`
+    +`<span class="breadcrumb-sep" aria-hidden="true">/</span>`
+    +`<span class="breadcrumb-item breadcrumb-species${currentSpecies?" breadcrumb-species-active":""}" data-action="species">${spIcon?`<span aria-hidden="true">${spIcon}</span> `:""}${escapeHtml(spLabel)}</span>`
+    +`<span class="breadcrumb-sep" aria-hidden="true">/</span>`
+    +`<span class="breadcrumb-item breadcrumb-current" aria-current="page">${escapeHtml(viewLabel)}</span>`
+    +`</nav>`;
+  if(!bar._listening){
+    bar._listening=true;
+    bar.addEventListener("click",breadcrumbClick);
+  }
+}
+
+function breadcrumbClick(e){
+  const item=e.target.closest("[data-action]");
+  if(!item)return;
+  e.preventDefault();
+  if(item.dataset.action==="home"){
+    window.scrollTo({top:0,behavior:"smooth"});
+  }else if(item.dataset.action==="species"){
+    const sp=document.getElementById("speciesSection");
+    if(sp)sp.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+}
+
+function setupKeyboardShortcuts(){
+  const viewMap=["checker","database","chat","drugs","anesthesia"];
+  document.addEventListener("keydown",e=>{
+    if(!e.ctrlKey&&!e.metaKey)return;
+    if(e.target.matches("input,textarea,select,[contenteditable]"))return;
+    const num=parseInt(e.key,10);
+    if(num>=1&&num<=5){
+      e.preventDefault();
+      switchView(viewMap[num-1]);
+      const panel=document.getElementById("view"+viewMap[num-1].charAt(0).toUpperCase()+viewMap[num-1].slice(1));
+      if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+  });
 }
 
 function resetSpeciesChat(species){
@@ -1910,6 +1982,7 @@ function navigateToDiseaseDb(query){
 
 function switchView(view){
   trackEvent("switch_view",{view:view});
+  currentView=view;
   const views=["checker","database","chat","drugs","anesthesia"];
   const prefersReduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   views.forEach(v=>{
@@ -1922,6 +1995,7 @@ function switchView(view){
     }
   });
   history.replaceState(null,null,"#"+view);
+  updateBreadcrumb();
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   /* フォーカスを新しいパネルの最初のインタラクティブ要素に移動 */
