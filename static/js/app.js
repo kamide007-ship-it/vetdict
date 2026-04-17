@@ -165,6 +165,8 @@ const I18N={
     feedbackThanks:"フィードバックありがとうございます。",
     shareResults:"鑑別診断結果を共有",shareCopy:"コピー",shareCopied:"コピー済み",
     husbandryTitle:"飼育環境ガイド",husbandryTemp:"適正温度",husbandryHumidity:"適正湿度",husbandryHousing:"飼育環境",husbandryDiet:"食事",husbandryEnrichment:"エンリッチメント",husbandrySocial:"社会性",husbandryNotes:"その他の注意",husbandryLoading:"飼育環境情報を読み込み中...",husbandryError:"飼育環境情報の取得に失敗しました",
+    offlineBanner:"オフラインです — 一部機能が制限されます",
+    mobileNavChecker:"鑑別",mobileNavDatabase:"疾患DB",mobileNavChat:"相談",mobileNavDrugs:"薬品",mobileNavAnesthesia:"麻酔",
   },
   en:{
     skipLink:"Skip to main content",
@@ -278,6 +280,8 @@ const I18N={
     feedbackThanks:"Thank you for your feedback.",
     shareResults:"Share results",shareCopy:"Copy",shareCopied:"Copied!",
     husbandryTitle:"Care Environment Guide",husbandryTemp:"Temperature",husbandryHumidity:"Humidity",husbandryHousing:"Housing",husbandryDiet:"Diet",husbandryEnrichment:"Enrichment",husbandrySocial:"Socialization",husbandryNotes:"Additional Notes",husbandryLoading:"Loading care information...",husbandryError:"Failed to load care information",
+    offlineBanner:"You are offline — Some features may be limited",
+    mobileNavChecker:"Dx",mobileNavDatabase:"Diseases",mobileNavChat:"Chat",mobileNavDrugs:"Drugs",mobileNavAnesthesia:"Anesth.",
   }
 };
 
@@ -336,6 +340,10 @@ function applyLanguage(){
   if(anesthesiaLoaded)reloadAnesthesiaForSpecies();
   if(document.getElementById("quickNavStrip"))renderQuickNav(currentSpecies||null);
   updateBreadcrumb();
+  const mbn=document.getElementById("mobileBottomNav");
+  if(mbn){const views=["checker","database","chat","drugs","anesthesia"];mbn.querySelectorAll("button[data-view]").forEach((btn,i)=>{const sp=btn.querySelector("span");if(sp)sp.textContent=t("mobileNav"+views[i].charAt(0).toUpperCase()+views[i].slice(1));});}
+  const ob=document.getElementById("offlineBanner");
+  if(ob)ob.textContent=t("offlineBanner");
 }
 
 function setupLanguageToggle(){
@@ -440,6 +448,12 @@ document.addEventListener("DOMContentLoaded",async()=>{
     setupKeyboardShortcuts();
     /* Floating navigation button */
     setupFloatingNav();
+    /* Mobile bottom tab bar */
+    setupMobileBottomNav();
+    /* Swipe gesture for tab switching */
+    setupSwipeGesture();
+    /* Offline indicator */
+    setupOfflineIndicator();
     /* Returning user welcome */
     showReturningUserBanner();
   }catch(e){
@@ -987,6 +1001,86 @@ function setupKeyboardShortcuts(){
       if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
     }
   });
+}
+
+function setupMobileBottomNav(){
+  if(document.getElementById("mobileBottomNav"))return;
+  const views=["checker","database","chat","drugs","anesthesia"];
+  const icons={
+    checker:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>',
+    database:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
+    chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>',
+    drugs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-6 9h6m-6 4h6"/></svg>',
+    anesthesia:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+  };
+  const nav=document.createElement("nav");
+  nav.id="mobileBottomNav";
+  nav.className="mobile-bottom-nav";
+  nav.setAttribute("aria-label",currentLang==="ja"?"メインナビゲーション":"Main navigation");
+  views.forEach(v=>{
+    const btn=document.createElement("button");
+    btn.dataset.view=v;
+    btn.className=v===currentView?"active":"";
+    btn.innerHTML=icons[v]+'<span>'+t("mobileNav"+v.charAt(0).toUpperCase()+v.slice(1))+'</span>';
+    btn.setAttribute("aria-label",t("mobileNav"+v.charAt(0).toUpperCase()+v.slice(1)));
+    nav.appendChild(btn);
+  });
+  nav.addEventListener("click",e=>{
+    const btn=e.target.closest("button[data-view]");
+    if(!btn)return;
+    switchView(btn.dataset.view);
+    const panel=document.getElementById("view"+btn.dataset.view.charAt(0).toUpperCase()+btn.dataset.view.slice(1));
+    if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+  document.body.appendChild(nav);
+}
+
+function updateMobileBottomNav(){
+  const nav=document.getElementById("mobileBottomNav");
+  if(!nav)return;
+  nav.querySelectorAll("button[data-view]").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.view===currentView);
+  });
+}
+
+function setupSwipeGesture(){
+  const views=["checker","database","chat","drugs","anesthesia"];
+  let touchStartX=0,touchStartY=0,touchStartTime=0;
+  document.addEventListener("touchstart",e=>{
+    if(e.target.closest(".chat-container,#chatGuidedContainer,.global-search-results,input,textarea,select"))return;
+    touchStartX=e.touches[0].clientX;
+    touchStartY=e.touches[0].clientY;
+    touchStartTime=Date.now();
+  },{passive:true});
+  document.addEventListener("touchend",e=>{
+    if(e.target.closest(".chat-container,#chatGuidedContainer,.global-search-results,input,textarea,select"))return;
+    const dx=e.changedTouches[0].clientX-touchStartX;
+    const dy=e.changedTouches[0].clientY-touchStartY;
+    const dt=Date.now()-touchStartTime;
+    if(Math.abs(dx)<60||Math.abs(dy)>Math.abs(dx)*0.7||dt>500)return;
+    const idx=views.indexOf(currentView);
+    if(idx<0)return;
+    let nextIdx=-1;
+    if(dx<-60&&idx<views.length-1)nextIdx=idx+1;
+    else if(dx>60&&idx>0)nextIdx=idx-1;
+    if(nextIdx>=0){
+      switchView(views[nextIdx]);
+      const panel=document.getElementById("view"+views[nextIdx].charAt(0).toUpperCase()+views[nextIdx].slice(1));
+      if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+  },{passive:true});
+}
+
+function setupOfflineIndicator(){
+  const banner=document.createElement("div");
+  banner.className="offline-banner";
+  banner.id="offlineBanner";
+  banner.textContent=t("offlineBanner");
+  document.body.prepend(banner);
+  function update(){banner.classList.toggle("visible",!navigator.onLine);}
+  window.addEventListener("online",update);
+  window.addEventListener("offline",update);
+  update();
 }
 
 function resetSpeciesChat(species){
@@ -2136,6 +2230,7 @@ function switchView(view){
   });
   history.replaceState(null,null,"#"+view);
   updateBreadcrumb();
+  updateMobileBottomNav();
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   /* フォーカスを新しいパネルの最初のインタラクティブ要素に移動 */
