@@ -76,6 +76,9 @@ a:hover{text-decoration:underline}
 .search-result-item strong{font-weight:600;display:block;margin-bottom:2px}
 .search-result-species{font-size:.75rem;color:var(--gray-500);font-weight:600;margin-left:8px;padding-left:8px;white-space:nowrap}
 
+.search-filter-btn.filter-active{background:rgba(34,168,79,.25);color:var(--green)}
+.search-filter-btn.filter-active svg{stroke:var(--green)}
+
 /* Species Filter Panel */
 .species-filter-panel{position:absolute;top:calc(100% + 4px);right:0;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;z-index:999;box-shadow:var(--shadow-lg);min-width:220px;max-width:280px}
 .filter-header{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--gray-200)}

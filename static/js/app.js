@@ -496,27 +496,35 @@ function setupFloatingNav(){
   },{passive:true});
 }
 
+let globalSearchSpeciesFilter=null;
+let globalSearchTypeFilter=null;
+
 function setupGlobalSearch(){
   const input=document.getElementById("globalSearch");
   const results=document.getElementById("globalSearchResults");
   if(!input||!results)return;
   let debounceTimer=null;
-  input.addEventListener("input",()=>{
+  function runSearch(){
     clearTimeout(debounceTimer);
     const q=input.value.trim().toLowerCase();
     if(q.length<2){results.style.display="none";results.innerHTML="";return;}
     debounceTimer=setTimeout(()=>{
       const matches=[];
-      allDiseases.forEach(d=>{
-        const name=(d.name||"").toLowerCase();
-        const nameJa=(d.name_ja||"").toLowerCase();
-        if(name.includes(q)||nameJa.includes(q)){matches.push({type:"disease",name:d.name,name_ja:d.name_ja});}
-      });
-      allDrugs.forEach(d=>{
-        const name=(d.name||"").toLowerCase();
-        const nameJa=(d.name_ja||"").toLowerCase();
-        if(name.includes(q)||nameJa.includes(q)){matches.push({type:"drug",name:d.name,name_ja:d.name_ja});}
-      });
+      if(globalSearchTypeFilter!=="drug"){
+        allDiseases.forEach(d=>{
+          const name=(d.name||"").toLowerCase();
+          const nameJa=(d.name_ja||"").toLowerCase();
+          if(name.includes(q)||nameJa.includes(q)){matches.push({type:"disease",name:d.name,name_ja:d.name_ja});}
+        });
+      }
+      if(globalSearchTypeFilter!=="disease"){
+        allDrugs.forEach(d=>{
+          if(globalSearchSpeciesFilter&&d.species_info&&!d.species_info[globalSearchSpeciesFilter])return;
+          const name=(d.name||"").toLowerCase();
+          const nameJa=(d.name_ja||"").toLowerCase();
+          if(name.includes(q)||nameJa.includes(q)){matches.push({type:"drug",name:d.name,name_ja:d.name_ja});}
+        });
+      }
       if(matches.length===0){results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;results.style.display="block";return;}
       results.innerHTML=matches.slice(0,15).map(m=>{
         const icon=m.type==="disease"?"\u{1F4D6}":"\u{1F48A}";
@@ -527,7 +535,8 @@ function setupGlobalSearch(){
       }).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"");
       results.style.display="block";
     },200);
-  });
+  }
+  input.addEventListener("input",runSearch);
   results.addEventListener("click",e=>{
     const item=e.target.closest(".search-result-item");
     if(!item||!item.dataset.type)return;
@@ -535,10 +544,108 @@ function setupGlobalSearch(){
     else{navigateToDrug(item.dataset.name);}
     input.value="";results.style.display="none";
   });
-  document.addEventListener("click",e=>{if(!input.contains(e.target)&&!results.contains(e.target)){results.style.display="none";}});
+  document.addEventListener("click",e=>{
+    if(!input.contains(e.target)&&!results.contains(e.target))results.style.display="none";
+    const spPanel=document.getElementById("speciesFilterPanel");
+    const catPanel=document.getElementById("categoryFilterPanel");
+    if(spPanel&&!spPanel.contains(e.target)&&!e.target.closest("#searchFilterBtn"))spPanel.style.display="none";
+    if(catPanel&&!catPanel.contains(e.target)&&!e.target.closest("#categoryFilterBtn"))catPanel.style.display="none";
+  });
   input.addEventListener("keydown",e=>{
     if(e.key==="Escape"){results.style.display="none";input.blur();}
   });
+  setupSearchFilters(runSearch);
+}
+
+function setupSearchFilters(runSearch){
+  const spBtn=document.getElementById("searchFilterBtn");
+  const spPanel=document.getElementById("speciesFilterPanel");
+  const spList=document.getElementById("speciesFilterList");
+  const spClose=document.getElementById("filterCloseBtn");
+  const spReset=document.getElementById("filterResetBtn");
+  const catBtn=document.getElementById("categoryFilterBtn");
+  const catPanel=document.getElementById("categoryFilterPanel");
+  const catList=document.getElementById("categoryFilterList");
+  const catClose=document.getElementById("categoryFilterCloseBtn");
+  const catReset=document.getElementById("categoryFilterResetBtn");
+
+  if(spBtn&&spPanel&&spList){
+    spBtn.addEventListener("click",()=>{
+      const show=spPanel.style.display==="none";
+      spPanel.style.display=show?"block":"none";
+      if(catPanel)catPanel.style.display="none";
+      if(show)renderSpeciesFilterList();
+    });
+    if(spClose)spClose.addEventListener("click",()=>{spPanel.style.display="none";});
+    if(spReset)spReset.addEventListener("click",()=>{
+      globalSearchSpeciesFilter=null;
+      spBtn.classList.remove("filter-active");
+      renderSpeciesFilterList();
+      runSearch();
+    });
+    spList.addEventListener("click",e=>{
+      const item=e.target.closest(".filter-checkbox");
+      if(!item)return;
+      const id=item.dataset.species;
+      if(globalSearchSpeciesFilter===id){globalSearchSpeciesFilter=null;spBtn.classList.remove("filter-active");}
+      else{globalSearchSpeciesFilter=id;spBtn.classList.add("filter-active");selectSpecies(id);}
+      renderSpeciesFilterList();
+      spPanel.style.display="none";
+      runSearch();
+    });
+  }
+
+  if(catBtn&&catPanel&&catList){
+    catBtn.addEventListener("click",()=>{
+      const show=catPanel.style.display==="none";
+      catPanel.style.display=show?"block":"none";
+      if(spPanel)spPanel.style.display="none";
+      if(show)renderCategoryFilterList();
+    });
+    if(catClose)catClose.addEventListener("click",()=>{catPanel.style.display="none";});
+    if(catReset)catReset.addEventListener("click",()=>{
+      globalSearchTypeFilter=null;
+      catBtn.classList.remove("filter-active");
+      renderCategoryFilterList();
+      runSearch();
+    });
+    catList.addEventListener("click",e=>{
+      const item=e.target.closest(".filter-checkbox");
+      if(!item)return;
+      const type=item.dataset.type;
+      if(globalSearchTypeFilter===type){globalSearchTypeFilter=null;catBtn.classList.remove("filter-active");}
+      else{globalSearchTypeFilter=type;catBtn.classList.add("filter-active");}
+      renderCategoryFilterList();
+      catPanel.style.display="none";
+      runSearch();
+    });
+  }
+}
+
+function renderSpeciesFilterList(){
+  const list=document.getElementById("speciesFilterList");
+  if(!list)return;
+  list.innerHTML=SPECIES.map(sp=>{
+    const active=globalSearchSpeciesFilter===sp.id?"active":"";
+    const checked=globalSearchSpeciesFilter===sp.id?"checked":"";
+    const label=currentLang==="ja"?sp.name:sp.nameEn;
+    return`<div class="filter-checkbox ${active}" data-species="${sp.id}"><input type="radio" name="speciesFilter" ${checked} tabindex="-1"/><label>${sp.icon} ${escapeHtml(label)}</label></div>`;
+  }).join("");
+}
+
+function renderCategoryFilterList(){
+  const list=document.getElementById("categoryFilterList");
+  if(!list)return;
+  const types=[
+    {type:"disease",icon:"\u{1F4D6}",ja:"疾患のみ",en:"Diseases only"},
+    {type:"drug",icon:"\u{1F48A}",ja:"薬品のみ",en:"Drugs only"}
+  ];
+  list.innerHTML=types.map(t=>{
+    const active=globalSearchTypeFilter===t.type?"active":"";
+    const checked=globalSearchTypeFilter===t.type?"checked":"";
+    const label=currentLang==="ja"?t.ja:t.en;
+    return`<div class="filter-checkbox ${active}" data-type="${t.type}"><input type="radio" name="typeFilter" ${checked} tabindex="-1"/><label>${t.icon} ${label}</label></div>`;
+  }).join("");
 }
 
 function showReturningUserBanner(){
