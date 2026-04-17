@@ -145,6 +145,7 @@ const I18N={
     speciesCardDisease:"疾患",speciesCardDrug:"薬品",
     quickNavDiseaseDb:"疾患データベース",quickNavDrugs:"薬品辞書",quickNavChat:"臨床相談",quickNavAnesthesia:"鎮静・麻酔",quickNavChecker:"鑑別診断",
     quickNavPrompt:"機能を選択してください",
+    quickNavDefault:"データベースを直接閲覧",
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
@@ -249,6 +250,7 @@ const I18N={
     speciesCardDisease:"diseases",speciesCardDrug:"drugs",
     quickNavDiseaseDb:"Disease Database",quickNavDrugs:"Drug Dictionary",quickNavChat:"Clinical Chat",quickNavAnesthesia:"Anesthesia",quickNavChecker:"Differential Dx",
     quickNavPrompt:"Select a feature",
+    quickNavDefault:"Browse databases directly",
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
@@ -316,6 +318,7 @@ function applyLanguage(){
   if(allDiseases.length){diseaseNavMode=currentLang==="ja"?"category":"az";diseaseFilter="";renderAzNav();renderDiseaseDb();}
   if(drugsLoaded)renderDrugList();
   if(anesthesiaLoaded)reloadAnesthesiaForSpecies();
+  if(document.getElementById("quickNavStrip"))renderQuickNav(currentSpecies||null);
 }
 
 function setupLanguageToggle(){
@@ -411,6 +414,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
     }
     /* Hero stats: clickable navigation */
     setupHeroStats();
+    /* Always-visible quick-nav strip (shows default label pre-selection) */
+    renderQuickNav(null);
     /* Returning user welcome */
     showReturningUserBanner();
   }catch(e){
@@ -682,8 +687,10 @@ function renderQuickNav(speciesId){
       }
     });
   }
-  const sp=SPECIES.find(s=>s.id===speciesId);
-  const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):speciesId;
+  const sp=speciesId?SPECIES.find(s=>s.id===speciesId):null;
+  const labelHtml=sp
+    ?`<span class="quick-nav-species">${escapeHtml(currentLang==="ja"?sp.name:sp.nameEn)}</span> — ${t("quickNavPrompt")}`
+    :`${t("quickNavDefault")}`;
   const items=[
     {view:"checker",icon:"\u2611\uFE0F",label:t("quickNavChecker")},
     {view:"database",icon:"\u{1F4D6}",label:t("quickNavDiseaseDb")},
@@ -691,7 +698,7 @@ function renderQuickNav(speciesId){
     {view:"chat",icon:"\u{1F4AC}",label:t("quickNavChat")},
     {view:"anesthesia",icon:"\u{1F489}",label:t("quickNavAnesthesia")},
   ];
-  strip.innerHTML=`<div class="quick-nav-label"><span class="quick-nav-species">${escapeHtml(spLabel)}</span> — ${t("quickNavPrompt")}</div><div class="quick-nav-buttons">${items.map(i=>`<button class="quick-nav-btn" data-view="${i.view}"><span class="quick-nav-icon" aria-hidden="true">${i.icon}</span><span>${i.label}</span></button>`).join("")}</div>`;
+  strip.innerHTML=`<div class="quick-nav-label">${labelHtml}</div><div class="quick-nav-buttons">${items.map(i=>`<button class="quick-nav-btn" data-view="${i.view}"><span class="quick-nav-icon" aria-hidden="true">${i.icon}</span><span>${i.label}</span></button>`).join("")}</div>`;
   strip.classList.add("visible");
 }
 
