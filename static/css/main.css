@@ -442,6 +442,9 @@ a:hover{text-decoration:underline}
 .chat-followup-btn.answered:not(.selected){opacity:.4;cursor:default}
 .chat-msg.bot-brief{font-size:.72rem;color:var(--gray-500);padding:4px 12px;font-style:italic}
 .chat-disclaimer{font-size:.66rem;color:var(--gray-400);margin-top:8px;text-align:center}
+.landing-chat-continue{text-align:center;padding:6px 0}
+.landing-continue-btn{background:var(--green);color:var(--white);border:none;padding:8px 20px;border-radius:20px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:var(--font);transition:background var(--transition-fast),transform var(--transition-fast)}
+.landing-continue-btn:hover{background:var(--green-dark,#1a9f40);transform:scale(1.03)}
 
 /* --- Chat Mode Toggle --- */
 .chat-mode-toggle{display:flex;gap:4px;padding:8px 12px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}

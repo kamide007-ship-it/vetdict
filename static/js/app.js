@@ -2181,6 +2181,22 @@ function sendLandingChat(){
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
+    const continueBtn=document.createElement("div");
+    continueBtn.className="landing-chat-continue";
+    continueBtn.innerHTML=`<button class="landing-continue-btn">${currentLang==="ja"?"臨床相談で詳しく相談する →":"Continue in Clinical Chat →"}</button>`;
+    continueBtn.querySelector("button").addEventListener("click",()=>{
+      switchView("chat");
+      const mainMsgs=document.getElementById("chatMessages");
+      if(mainMsgs){
+        const clones=msgs.querySelectorAll(".chat-msg");
+        clones.forEach(c=>{if(!c.classList.contains("typing-indicator")){const cl=c.cloneNode(true);mainMsgs.appendChild(cl);}});
+        mainMsgs.scrollTop=mainMsgs.scrollHeight;
+      }
+      const chatPanel=document.getElementById("viewChat");
+      if(chatPanel)chatPanel.scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    msgs.appendChild(continueBtn);
+    msgs.scrollTop=msgs.scrollHeight;
   })
   .catch(err=>{
     loading.remove();
