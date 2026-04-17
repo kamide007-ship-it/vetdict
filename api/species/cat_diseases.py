@@ -4807,16 +4807,45 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "過剰なカロリー摂取、運動不足（完全室内飼育）、避妊/去勢後の代謝低下、"
                      "自由給餌（ad lib feeding）、高炭水化物食。"
                      "品種素因：雑種猫、ブリティッシュショートヘア。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "WEIGHT MANAGEMENT PROGRAM: Safe weight loss rate is 0.5-2% body weight per week — rapid "
+                    "weight loss is CONTRAINDICATED due to risk of hepatic lipidosis (potentially fatal in cats). "
+                    "DIETARY THERAPY: Prescription weight management diets (Hill's Metabolic, Royal Canin Satiety "
+                    "Support, or Purina OM) — high protein (>40% ME from protein), moderate fat, increased fiber "
+                    "for satiety. Start at 80% of current maintenance calories, then adjust based on biweekly "
+                    "weigh-ins. Target caloric intake typically 60-70% of RER at ideal body weight. Calculate "
+                    "RER: 70 × (ideal BW in kg)^0.75 kcal/day. Transition to new diet over 7-10 days. "
+                    "NEVER allow complete fasting — even 2-3 days of anorexia can trigger hepatic lipidosis "
+                    "in obese cats. ENVIRONMENTAL ENRICHMENT: Food puzzles, interactive toys, vertical spaces "
+                    "(cat trees), scheduled play sessions 10-15 min × 2-3 times daily to increase activity. "
+                    "MONITORING: Monthly body weight and BCS (9-point scale) assessment. Target BCS 4-5/9. "
+                    "Expected weight loss: 1-2% per week. If weight loss stalls, reassess caloric intake and "
+                    "rule out hypothyroidism (rare in cats) or other metabolic disease. PHARMACOLOGICAL: "
+                    "Dirlotapide not approved for cats. No approved feline weight loss drugs currently available. "
+                    "COMORBIDITY MANAGEMENT: Screen for and manage concurrent diabetes mellitus (insulin "
+                    "sensitivity may improve with weight loss — some diabetic cats achieve remission), "
+                    "osteoarthritis (meloxicam 0.05 mg/kg PO q24h long-term if needed), and lower urinary "
+                    "tract disease. References: AAHA Weight Management Guidelines (2014); German (2006) "
+                    "J Feline Med Surg; Laflamme (1997) BCS system.",
         "treatment_ja": "安全な減量速度は週0.5〜2%体重（急速減量は肝リピドーシスのリスク）。"
                         "減量用療法食（Hill's Metabolic, Royal Canin Satiety等）。"
                         "現維持カロリーの80%からスタート→徐々に調整。"
                         "環境エンリッチメント（フードパズル・おもちゃ）で活動量増加。"
                         "月1回の体重・BCS測定。絶食は絶対に避ける。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
+        "prognosis": "Good prognosis with appropriate management and owner compliance. Weight loss of 1-2% per "
+                     "week is achievable with dietary modification and environmental enrichment. Insulin sensitivity "
+                     "improves with weight loss — some diabetic cats achieve complete remission of diabetes mellitus "
+                     "after reaching ideal body weight. Osteoarthritis symptoms and FLUTD risk also decrease. "
+                     "CRITICAL WARNING: Rapid weight loss or anorexia in obese cats carries high risk of hepatic "
+                     "lipidosis, which has 50-60% mortality even with aggressive treatment. Lifelong weight "
+                     "management is essential to prevent regain.",
         "prognosis_ja": "適切な管理で予後良好。減量によりインスリン感受性が改善し"
                         "糖尿病が寛解する場合もある。急速減量は肝リピドーシスのリスク。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
+        "prevention": "Measured portion feeding — avoid free-choice (ad libitum) feeding. Reduce caloric "
+                      "intake 10-20% after spay/neuter (metabolic rate decreases ~25-30%). Scheduled meal "
+                      "times (2-3 meals per day). Environmental enrichment to encourage physical activity. "
+                      "Regular BCS assessment at every veterinary visit. Early intervention when BCS reaches "
+                      "6/9 (overweight threshold). Owner education on appropriate treat limits (<10% of "
+                      "daily calories). Reference: WSAVA Global Nutrition Guidelines.",
         "prevention_ja": "給餌量の計量管理。自由給餌を避ける。食事時間制限。"
                          "避妊/去勢後のカロリー10〜20%削減。環境エンリッチメント。"
                          "定期的なBCS評価。",
@@ -4843,17 +4872,53 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "ストレス（環境変化・多頭飼育・トイレの問題・引越し・来客）、"
                      "室内飼育、肥満、飲水量不足、ドライフード主体の食事。"
                      "性格的に神経質な猫に多い。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "MULTIMODAL ENVIRONMENTAL MODIFICATION (MEMO) is the cornerstone of FIC management — "
+                    "the single most effective intervention (Buffington 2011). (1) STRESS SOURCE IDENTIFICATION "
+                    "AND REMOVAL: Assess household stressors (inter-cat conflict, environmental changes, owner "
+                    "schedule disruption, construction noise). (2) LITTER BOX OPTIMIZATION: n+1 rule (one more "
+                    "box than number of cats), placed in quiet, accessible locations, cleaned daily, unscented "
+                    "clumping litter preferred, uncovered boxes often preferred. (3) DIETARY MODIFICATION: "
+                    "Transition to wet food (increases water intake by 50-100%, dilutes urine irritants). "
+                    "Prescription urinary diets (Hill's c/d Stress, Royal Canin Urinary S/O + Calm). "
+                    "Water fountains to encourage drinking. Target USG <1.035. (4) FELIWAY (synthetic feline "
+                    "facial pheromone F3 fraction) diffuser — reduces stress-related behaviors; place in "
+                    "core areas where cat spends most time. (5) ENVIRONMENTAL ENRICHMENT: Vertical spaces, "
+                    "hiding spots, scratching posts, interactive play sessions, predictable routine. "
+                    "(6) ACUTE EPISODE PAIN MANAGEMENT: Buprenorphine 0.01-0.03 mg/kg OTM (oral transmucosal) "
+                    "q6-8h × 3-5 days — excellent feline bioavailability via OTM route (≈60%). Meloxicam "
+                    "0.05-0.1 mg/kg PO q24h × 3-5 days for anti-inflammatory effect. (7) URETHRAL "
+                    "OBSTRUCTION (MALE CATS — EMERGENCY): IV catheterization under sedation (medetomidine "
+                    "5-10 μg/kg + butorphanol 0.2 mg/kg IV/IM), urinary catheter (3.5F tomcat catheter or "
+                    "3.5F red rubber), closed collection system × 24-48h, post-obstructive diuresis monitoring "
+                    "(IV LRS 2-4 mL/kg/h), electrolyte correction (hyperkalemia: calcium gluconate 10% "
+                    "0.5-1 mL/kg slow IV if ECG changes). (8) REFRACTORY CASES: Amitriptyline 2.5-5 mg/cat "
+                    "PO q24h (anticholinergic + analgesic properties, only for chronic recurrent FIC after "
+                    "MEMO failure). GAG supplementation (Elmiron/pentosan polysulfate 2 mg/kg SC twice "
+                    "weekly — limited evidence but anecdotally helpful). References: Buffington (2011) "
+                    "JFMS MEMO protocol; Westropp & Buffington (2004); ISFM FLUTD Guidelines (2016).",
         "treatment_ja": "環境修正（MEMO: Multimodal Environmental MOdification）が最重要。"
                         "(1)ストレス源の特定と除去、(2)トイレ環境改善（猫数+1個、静かな場所）、"
                         "(3)ウェットフード主体の食事（飲水量増加）、"
                         "(4)フェリウェイ（合成猫フェロモン）拡散器、"
                         "(5)環境エンリッチメント、(6)急性期の疼痛管理（ブプレノルフィン）。"
                         "雄猫の尿道閉塞時は緊急カテーテル処置。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
+        "prognosis": "Acute episodes are often self-limiting (resolve within 3-7 days with or without treatment). "
+                     "However, recurrence rate is high — approximately 50% within 12 months without environmental "
+                     "modification. With full MEMO protocol implementation, recurrence rate decreases to 10-20%. "
+                     "Urethral obstruction in male cats (plug or spasm) carries 5-10% mortality if untreated "
+                     "within 24-48 hours due to hyperkalemia and post-renal azotemia. Perineal urethrostomy "
+                     "may be considered for cats with recurrent obstruction (>2 episodes) but does not prevent "
+                     "FIC episodes — only prevents obstruction. Long-term prognosis is good with committed "
+                     "environmental management.",
         "prognosis_ja": "自然軽快することが多い（急性エピソードは数日〜1週間で改善）。"
                         "再発率が高い（1年以内に50%）。環境修正で再発率を大幅低減。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
+        "prevention": "Environmental enrichment and stress reduction are the primary preventive strategies. "
+                      "Appropriate litter box management (n+1 rule, daily cleaning, unscented clumping litter). "
+                      "Wet food-based diet to increase water intake and reduce urine concentration. Water "
+                      "fountains to encourage drinking. Feliway diffusers in multi-cat households. Predictable "
+                      "daily routine. Avoid sudden environmental changes. Gradual introduction of new cats, "
+                      "people, or furniture. Regular play sessions for stress relief. Reference: Buffington "
+                      "(2011) MEMO protocol; ISFM FLUTD Guidelines (2016).",
         "prevention_ja": "環境エンリッチメント。ストレス軽減。適切なトイレ管理。"
                          "ウェットフード。十分な飲水量。フェリウェイ。",
         "urgency": "moderate",
@@ -11251,11 +11316,35 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "猫は交配誘発排卵動物だが、交配なしで心理的刺激や環境変化で排卵が起こる場合がある。黄体期の遷延→高プロゲステロン血症→乳腺増生・乳汁分泌。行動：巣作り行動・求愛行動低下・多飲。犬ほど一般的ではないが報告あり。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "交配なしの排卵（猫では稀）。黄体期遷延。多妊娠の自然流産後。視床下部-下垂体-卵巣軸の機能異常。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "MILD CASES: Supportive care and observation — signs typically resolve spontaneously within "
+                    "2-3 weeks as progesterone levels decline. Discourage nesting behavior (remove nesting "
+                    "materials). Avoid mammary stimulation (Elizabethan collar if self-nursing). Cold compresses "
+                    "to mammae if lactation is significant. MODERATE TO SEVERE CASES: Progesterone receptor "
+                    "antagonist — aglepristone (Alizin) 10 mg/kg SC × 2 doses on days 1 and 3 (terminates "
+                    "luteal phase, rapid resolution of signs within 3-5 days). Prolactin inhibitor — "
+                    "cabergoline 5 μg/kg PO q24h × 5-7 days (suppresses lactation and behavioral signs; "
+                    "preferred over bromocriptine due to fewer GI side effects in cats). Alternative: "
+                    "metergoline 0.1 mg/kg PO q12h × 7 days. RECURRENT CASES: Ovariectomy (OVE) or "
+                    "ovariohysterectomy (OVH) is the definitive treatment — eliminates recurrence. "
+                    "Recommended if pseudopregnancy occurs repeatedly (≥2 episodes). IMPORTANT NOTE: "
+                    "Feline pseudopregnancy is less common than canine due to induced ovulation in cats — "
+                    "spontaneous ovulation without mating can occur from environmental stimulation (presence "
+                    "of intact males, light cycle changes, social stimulation in multi-cat households). "
+                    "References: Verstegen (1998) J Reprod Fertil Suppl; Feldman & Nelson (2004) Canine "
+                    "and Feline Endocrinology and Reproduction 3rd ed.",
         "treatment_ja": "軽症：対症療法で自然軽快を待つ（2-3週）。中等症以上：プロゲステロン低下（アグレプリストン10mg/kg SC × 2回, day 1・3）or カベルゴリン1μg/kg PO q12h × 7-14日。習慣化例は避妊手術（OVE）推奨。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
+        "prognosis": "Mild cases: Spontaneous resolution within 2-3 weeks. After ovariectomy/OVH, recurrence "
+                     "is virtually eliminated. Medical treatment with cabergoline or aglepristone provides rapid "
+                     "resolution but does not prevent future episodes if the queen remains intact. Overall "
+                     "prognosis is excellent — pseudopregnancy is a self-limiting condition with no significant "
+                     "long-term health consequences. Mammary hyperplasia associated with repeated pseudopregnancy "
+                     "may rarely predispose to mammary neoplasia (controversial).",
         "prognosis_ja": "軽症：自然軽快。避妊後は再発ほぼなし。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
+        "prevention": "Elective ovariectomy (OVE) or ovariohysterectomy (OVH) is the most effective prevention. "
+                      "Early spaying recommended if pseudopregnancy tendency is identified. Minimize exposure "
+                      "to intact males (visual, olfactory, auditory stimulation can trigger spontaneous ovulation "
+                      "in susceptible queens). Consistent light cycle management in breeding catteries. "
+                      "Reference: Feldman & Nelson (2004) Canine and Feline Endocrinology 3rd ed.",
         "prevention_ja": "定期避妊手術（卵巣切除 or 卵巣子宮摘出）。習慣化傾向がある場合は早期避妊推奨。",
         "urgency": "normal",
         "recommended_tests": ["serum_progesterone", "abdominal_ultrasound"],
@@ -11270,11 +11359,36 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "卵巣嚢胞（fluid-filled structure）の発生→ホルモン分泌異常。エストロゲン産生嚢胞の場合、持続的エストロゲン分泌→持続性発情（estrus持続期間>3週）。排卵が起こらない（anovulation）か、排卵後も黄体形成が不完全。猫では交配誘発排卵だが、嚢胞がある場合は刺激への反応性が変化。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "卵巣嚢胞の形成機序は不明だが、LH surge異常との関連が疑われる。多妊娠中の流産後。病的卵巣機能（腫瘍など）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "MEDICAL MANAGEMENT: (1) Ovulation induction — hCG (human chorionic gonadotropin) 250-500 IU "
+                    "IM single dose to induce ovulation and subsequent luteal phase, temporarily resolving "
+                    "estrus signs. Alternatively, GnRH agonist (gonadorelin) 25 μg IM single dose. Medical "
+                    "therapy provides temporary resolution only — cysts typically recur after luteal regression. "
+                    "(2) Deslorelin (Suprelorin) 4.7 mg SC implant — GnRH agonist that initially stimulates "
+                    "then downregulates gonadotropin release; may suppress cyst activity for 6-12 months. "
+                    "SURGICAL MANAGEMENT (DEFINITIVE): Ovariectomy (OVE) or ovariohysterectomy (OVH) is the "
+                    "definitive treatment and is recommended for all non-breeding queens with ovarian cysts. "
+                    "Submit ovarian tissue for histopathology — differentiate follicular cysts from luteal "
+                    "cysts, granulosa cell tumors, and ovarian carcinoma. PERSISTENT ESTRUS COMPLICATIONS: "
+                    "Prolonged hyperestrogenism can cause endometrial hyperplasia, pyometra, bone marrow "
+                    "suppression (estrogen-induced pancytopenia at very high levels), and behavioral issues "
+                    "(vocalization, urine spraying, aggression). Monitor CBC if estrus persists >3 weeks "
+                    "for evidence of bone marrow toxicity. BREEDING QUEENS: Cyst aspiration under "
+                    "ultrasound guidance may be attempted to preserve breeding function, but recurrence "
+                    "is common. References: Johnston et al. (2001) Canine and Feline Theriogenology; "
+                    "Feldman & Nelson (2004) Canine and Feline Endocrinology 3rd ed.",
         "treatment_ja": "【内科的】hCG投与で排卵促進（500IU IM）。GnRH投与（20μg IM）。ホルモン療法は一時的効果。【外科的】卵巣切除（OVE）or 卵巣子宮摘出（OVH）が根本的解決。多くの場合、避妊手術を推奨。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
+        "prognosis": "Definitive cure with ovariectomy/OVH — excellent prognosis post-surgery. Medical therapy "
+                     "alone has high recurrence rate as cysts reform after hormonal effects wane. Prolonged "
+                     "hyperestrogenism (>3-4 weeks) carries risk of bone marrow suppression — potentially "
+                     "life-threatening if pancytopenia develops. Granulosa cell tumors (must be differentiated "
+                     "from simple cysts on histopathology) may be malignant with metastatic potential. "
+                     "Breeding prognosis after unilateral cystectomy is guarded.",
         "prognosis_ja": "避妊手術で完治。内科治療のみでは再発傾向。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
+        "prevention": "Elective ovariectomy or OVH for non-breeding queens eliminates ovarian cyst risk. "
+                      "In breeding queens, regular ultrasound monitoring of ovarian structure during estrous "
+                      "cycle management. Prompt evaluation of persistent estrus (>7-10 days without mating) "
+                      "or nymphomania. Healthy pregnancy management to reduce anovulatory cycle risk. "
+                      "Reference: Johnston et al. (2001) Canine and Feline Theriogenology.",
         "prevention_ja": "定期避妊手術。多妊娠の健全な管理。",
         "urgency": "normal",
         "recommended_tests": ["abdominal_ultrasound", "serum_estradiol", "serum_lh"],
@@ -11289,11 +11403,47 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "分娩時の子宮内膜剥離 → 胎仔遺残（one or more kittens not expelled）or胎盤遺残→化膿性感染。猫での産褥合併症は犬より稀だが、発症時は急速に敗血症ショックに進行する傾向。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "胎仔遺残（最多原因）。胎盤停滞。低カルシウム血症による子宮無力症。子宮破裂。多母体妊娠（>6匹）での分娩ストレス。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "DIAGNOSTIC WORKUP: Abdominal ultrasound is essential to confirm retained fetuses or placental "
+                    "tissue. Abdominal radiographs to assess fetal mineralization (retained fetuses). CBC/chemistry "
+                    "panel — expect neutrophilia with left shift, possible toxic changes. Blood culture if "
+                    "sepsis suspected. MEDICAL THERAPY: (1) ANTIBIOTICS — broad-spectrum empirical pending "
+                    "culture: cephalexin 25 mg/kg PO q6-8h × 14-21 days (good uterine penetration) PLUS "
+                    "enrofloxacin 5 mg/kg IV/SC q24h × 7-14 days (gram-negative coverage). Alternative: "
+                    "amoxicillin-clavulanate 12.5-25 mg/kg PO q12h + metronidazole 10-15 mg/kg PO q12h "
+                    "(anaerobic coverage). Adjust based on uterine culture and sensitivity. (2) IV FLUID "
+                    "THERAPY: LRS or Normosol-R 40-60 mL/kg/day (aggressive if septic shock — bolus "
+                    "10-20 mL/kg over 15-20 min, then maintenance). Electrolyte and acid-base correction. "
+                    "(3) UTERINE EVACUATION (if no retained fetus): Aglepristone (Alizin) 10 mg/kg SC × 2 "
+                    "doses on days 1 and 3 (progesterone receptor blocker, promotes cervical relaxation and "
+                    "uterine content expulsion). Alternatively, low-dose oxytocin 0.25-0.5 IU/cat IM q2-4h "
+                    "(CAUTION: only after confirming cervix is open on ultrasound; risk of uterine rupture "
+                    "if cervix closed). (4) ANALGESIA: Buprenorphine 0.01-0.02 mg/kg OTM q6-8h (pain "
+                    "management critical for recovery). Meloxicam 0.1 mg/kg PO q24h × 3-5 days (ensure "
+                    "adequate hydration before NSAIDs). SURGICAL THERAPY: OVH is indicated for: retained "
+                    "fetuses confirmed on imaging, failure to respond to medical therapy within 24-48h, "
+                    "uterine rupture or peritonitis, non-breeding queen, severe sepsis. NURSING KITTEN "
+                    "MANAGEMENT: Separate kittens from queen if queen is febrile >40°C or receiving "
+                    "metronidazole. Hand-rear with kitten milk replacer q2-3h. Resume nursing once queen "
+                    "is afebrile and on safe antibiotics (cephalexin, amoxicillin) for >24h. "
+                    "References: Pretzer (2008) Theriogenology; Davidson (2006) Vet Clin North Am Small "
+                    "Anim Pract; Johnston et al. (2001) Canine and Feline Theriogenology.",
         "treatment_ja": "【診断】腹部超音波で胎仔・胎盤遺残の確認が重要。X線（放射線不透過物質確認）。【治療】抗菌療法：セファロスポリン系（セファレキシン25mg/kg PO q6h × 14日）+ エンロフロキサシン5mg/kg IV q24h × 7日。輸液サポート。【外科】子宮内容物遺残が確実な場合はOVHを検討。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
+        "prognosis": "Good prognosis with early diagnosis and aggressive treatment. Metritis diagnosed and "
+                     "treated within 24-48h of onset has >90% survival rate. Delayed treatment (>3-5 days) "
+                     "significantly increases risk of septic shock, peritonitis, and DIC — mortality rises "
+                     "to 20-40%. Uterine rupture is a life-threatening complication requiring emergency surgery. "
+                     "Future breeding prognosis after successful medical treatment is fair — some queens develop "
+                     "endometrial scarring affecting implantation. OVH eliminates recurrence risk. Kittens "
+                     "from affected queens should be monitored for neonatal sepsis.",
         "prognosis_ja": "早期治療で予後良好。遅延で敗血症ショック進行。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
+        "prevention": "Parturition monitoring — confirm passage of all fetuses and placentas (count placentas "
+                      "vs. kittens). Post-partum veterinary examination within 24-48h of delivery recommended "
+                      "for high-risk queens. Abdominal palpation or ultrasound to rule out retained tissue. "
+                      "Risk management for large litters (>6 kittens) — increased dystocia and retention risk. "
+                      "Maintain clean whelping environment — change bedding daily during first week post-partum. "
+                      "Adequate nutrition during lactation (2-4× maintenance caloric needs). Monitor queen for "
+                      "fever, malodorous discharge, or lethargy in the first 7-10 days post-partum. "
+                      "Reference: Johnston et al. (2001) Canine and Feline Theriogenology.",
         "prevention_ja": "分娩監視（全胎仔数・胎盤数の確認）。多胎妊娠（>6匹）でのリスク管理。産褥期の環境衛生。",
         "urgency": "high",
         "recommended_tests": ["abdominal_ultrasound", "uterine_culture", "cbcwdp"],
