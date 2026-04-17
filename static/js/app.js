@@ -143,6 +143,8 @@ const I18N={
     sponsorVetLabel:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
     productDetails:"製品詳細 \u2192",
     speciesCardDisease:"疾患",speciesCardDrug:"薬品",
+    quickNavDiseaseDb:"疾患データベース",quickNavDrugs:"薬品辞書",quickNavChat:"臨床相談",quickNavAnesthesia:"鎮静・麻酔",quickNavChecker:"鑑別診断",
+    quickNavPrompt:"機能を選択してください",
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     metabSupport:"代謝サポート",aminoAcid:"アミノ酸",digestSupport:"消化管サポート",jointSupport:"関節・運動器",
@@ -245,6 +247,8 @@ const I18N={
     sponsorVetLabel:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     productDetails:"Product details \u2192",
     speciesCardDisease:"diseases",speciesCardDrug:"drugs",
+    quickNavDiseaseDb:"Disease Database",quickNavDrugs:"Drug Dictionary",quickNavChat:"Clinical Chat",quickNavAnesthesia:"Anesthesia",quickNavChecker:"Differential Dx",
+    quickNavPrompt:"Select a feature",
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     metabSupport:"Metabolic Support",aminoAcid:"Amino Acids",digestSupport:"Digestive Support",jointSupport:"Joint & Mobility",
@@ -395,12 +399,45 @@ document.addEventListener("DOMContentLoaded",async()=>{
       const el=document.getElementById(id);
       if(el&&!el.dataset.handlersAttached){el.dataset.handlersAttached="1";_attachDbItemHandlers(el);}
     });
+    /* Hero CTA: in-app database tab navigation */
+    const heroDbBtn=document.querySelector(".hero-btn.secondary");
+    if(heroDbBtn){
+      heroDbBtn.addEventListener("click",e=>{
+        e.preventDefault();
+        switchView("database");
+        const dbPanel=document.getElementById("viewDatabase");
+        if(dbPanel)dbPanel.scrollIntoView({behavior:"smooth",block:"start"});
+      });
+    }
+    /* Hero stats: clickable navigation */
+    setupHeroStats();
     /* Returning user welcome */
     showReturningUserBanner();
   }catch(e){
     console.error("Error in DOMContentLoaded:",e);
   }
 });
+
+function setupHeroStats(){
+  const mapping={statDiseases:"database",statDrugs:"drugs",statProtocols:"anesthesia"};
+  Object.entries(mapping).forEach(([id,view])=>{
+    const stat=document.getElementById(id);
+    if(!stat)return;
+    const wrapper=stat.closest(".hero-stat");
+    if(!wrapper)return;
+    wrapper.classList.add("hero-stat-clickable");
+    wrapper.setAttribute("role","button");
+    wrapper.setAttribute("tabindex","0");
+    wrapper.addEventListener("click",()=>{
+      switchView(view);
+      const panel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
+      if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    wrapper.addEventListener("keydown",e=>{
+      if(e.key==="Enter"||e.key===" "){e.preventDefault();wrapper.click();}
+    });
+  });
+}
 
 function showReturningUserBanner(){
   const history=loadDiagnosisHistory();
@@ -624,6 +661,38 @@ function selectSpecies(id){
   if(sp&&typeof showToast==="function"){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
   const resultsArea=document.getElementById("resultsArea");
   if(resultsArea)resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>${renderHistoryPanel()}`;
+  renderQuickNav(id);
+}
+
+function renderQuickNav(speciesId){
+  let strip=document.getElementById("quickNavStrip");
+  if(!strip){
+    strip=document.createElement("div");
+    strip.id="quickNavStrip";
+    strip.className="quick-nav-strip";
+    const speciesSection=document.getElementById("speciesSection");
+    if(speciesSection)speciesSection.after(strip);
+    else return;
+    strip.addEventListener("click",e=>{
+      const btn=e.target.closest(".quick-nav-btn");
+      if(btn&&btn.dataset.view){
+        switchView(btn.dataset.view);
+        const panel=document.getElementById("view"+btn.dataset.view.charAt(0).toUpperCase()+btn.dataset.view.slice(1));
+        if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+      }
+    });
+  }
+  const sp=SPECIES.find(s=>s.id===speciesId);
+  const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):speciesId;
+  const items=[
+    {view:"checker",icon:"\u2611\uFE0F",label:t("quickNavChecker")},
+    {view:"database",icon:"\u{1F4D6}",label:t("quickNavDiseaseDb")},
+    {view:"drugs",icon:"\u{1F48A}",label:t("quickNavDrugs")},
+    {view:"chat",icon:"\u{1F4AC}",label:t("quickNavChat")},
+    {view:"anesthesia",icon:"\u{1F489}",label:t("quickNavAnesthesia")},
+  ];
+  strip.innerHTML=`<div class="quick-nav-label"><span class="quick-nav-species">${escapeHtml(spLabel)}</span> — ${t("quickNavPrompt")}</div><div class="quick-nav-buttons">${items.map(i=>`<button class="quick-nav-btn" data-view="${i.view}"><span class="quick-nav-icon" aria-hidden="true">${i.icon}</span><span>${i.label}</span></button>`).join("")}</div>`;
+  strip.classList.add("visible");
 }
 
 function resetSpeciesChat(species){
