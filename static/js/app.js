@@ -517,6 +517,31 @@ function setupFloatingNav(){
 let globalSearchSpeciesFilter=null;
 let globalSearchTypeFilter=null;
 
+function saveRecentSearch(type,name,nameJa){
+  try{
+    let recent=JSON.parse(localStorage.getItem("vetdict-recent-searches")||"[]");
+    recent=recent.filter(r=>r.name!==name);
+    recent.unshift({type,name,name_ja:nameJa,ts:Date.now()});
+    if(recent.length>8)recent.length=8;
+    localStorage.setItem("vetdict-recent-searches",JSON.stringify(recent));
+  }catch(e){}
+}
+function getRecentSearches(){
+  try{return JSON.parse(localStorage.getItem("vetdict-recent-searches")||"[]");}catch(e){return[];}
+}
+function showRecentSearches(results){
+  const recent=getRecentSearches();
+  if(!recent.length){results.style.display="none";return;}
+  const title=currentLang==="ja"?"最近の検索":"Recent searches";
+  results.innerHTML=`<div class="search-recent-title" style="padding:8px 14px;font-size:.72rem;color:var(--gray-400);font-weight:600;border-bottom:1px solid var(--gray-100)">${title}</div>`+
+    recent.map(m=>{
+      const icon=m.type==="disease"?"\u{1F4D6}":"\u{1F48A}";
+      const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
+      return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||"")}">${icon} ${escapeHtml(label)}</div>`;
+    }).join("");
+  results.style.display="block";
+}
+
 function setupGlobalSearch(){
   const input=document.getElementById("globalSearch");
   const results=document.getElementById("globalSearchResults");
@@ -525,7 +550,11 @@ function setupGlobalSearch(){
   function runSearch(){
     clearTimeout(debounceTimer);
     const q=input.value.trim().toLowerCase();
-    if(q.length<2){results.style.display="none";results.innerHTML="";return;}
+    if(q.length<2){
+      if(document.activeElement===input)showRecentSearches(results);
+      else{results.style.display="none";results.innerHTML="";}
+      return;
+    }
     debounceTimer=setTimeout(()=>{
       const matches=[];
       if(globalSearchTypeFilter!=="drug"){
@@ -549,15 +578,17 @@ function setupGlobalSearch(){
         const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
         const sub=currentLang==="ja"?(m.name||""):(m.name_ja||"");
         const typeLabel=m.type==="disease"?(currentLang==="ja"?"疾患":"Disease"):(currentLang==="ja"?"薬品":"Drug");
-        return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""} <span class="search-result-type">${typeLabel}</span></div>`;
+        return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""} <span class="search-result-type">${typeLabel}</span></div>`;
       }).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"");
       results.style.display="block";
     },200);
   }
   input.addEventListener("input",runSearch);
+  input.addEventListener("focus",()=>{if(input.value.trim().length<2)showRecentSearches(results);});
   results.addEventListener("click",e=>{
     const item=e.target.closest(".search-result-item");
     if(!item||!item.dataset.type)return;
+    saveRecentSearch(item.dataset.type,item.dataset.name,item.dataset.nameJa||"");
     if(item.dataset.type==="disease"){navigateToDiseaseDb(item.dataset.name);}
     else{navigateToDrug(item.dataset.name);}
     input.value="";results.style.display="none";
