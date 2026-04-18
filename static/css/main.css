@@ -156,6 +156,8 @@ a:hover{text-decoration:underline}
 .species-section{max-width:1200px;margin:0 auto;padding:28px 20px 12px}
 .section-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .section-title::before{content:'';width:4px;height:18px;background:var(--green);border-radius:2px;display:inline-block}
+.species-filter-input{display:block;width:100%;max-width:360px;margin:0 auto 16px;padding:10px 16px;border:2px solid var(--gray-200);border-radius:20px;font-size:.84rem;font-family:var(--font);background:var(--white);outline:none;transition:border-color var(--transition-fast),box-shadow var(--transition-fast)}
+.species-filter-input:focus{border-color:var(--navy-light);box-shadow:0 0 0 3px rgba(42,74,143,.1)}
 .species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
 .species-group-label{grid-column:1/-1;font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 0 2px;border-bottom:2px solid var(--green);margin-top:8px}
 .species-group-label:first-child{margin-top:0}
@@ -210,6 +212,12 @@ a:hover{text-decoration:underline}
 .selected-tag .remove{cursor:pointer;opacity:.8;font-weight:700;background:none;border:none;color:inherit;font-size:.88rem;padding:0 2px;font-family:var(--font);transition:opacity var(--transition-fast),transform var(--transition-fast)}
 .selected-tag .remove:hover{opacity:1;transform:scale(1.2)}
 
+/* --- Results sort bar --- */
+.results-sort-bar{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.results-sort-btn{padding:5px 12px;border:1px solid var(--gray-200);border-radius:16px;font-size:.74rem;font-weight:500;background:var(--white);color:var(--gray-600);cursor:pointer;transition:all var(--transition-fast);font-family:var(--font)}
+.results-sort-btn:hover{border-color:var(--navy);color:var(--navy)}
+.results-sort-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+
 /* --- Results --- */
 .results-empty{text-align:center;padding:48px 20px;color:var(--gray-500);background:linear-gradient(180deg,var(--gray-50),transparent);border-radius:var(--radius-lg)}
 .results-empty .big-icon{font-size:3rem;margin-bottom:12px;display:block;opacity:.4;animation:float-icon 3s ease-in-out infinite}
@@ -222,6 +230,7 @@ a:hover{text-decoration:underline}
 .disease-result:hover{box-shadow:var(--shadow-md);border-color:var(--gray-300)}
 .disease-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;gap:10px;transition:background var(--transition-fast)}
 .disease-head:hover{background:var(--gray-50)}
+.disease-head:focus-visible{outline:2px solid var(--navy-light);outline-offset:-2px;border-radius:var(--radius)}
 .disease-head-info{flex:1;min-width:0}
 .disease-name-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px}
 .disease-head .disease-name{font-weight:700;font-size:.88rem}
@@ -365,6 +374,7 @@ a:hover{text-decoration:underline}
 @media(max-width:600px){.husbandry-grid{grid-template-columns:1fr}}
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
 .disease-db-item:active{background:var(--green-light)}
+.disease-db-item:focus-visible{outline:2px solid var(--navy-light);outline-offset:-2px}
 @media(hover:hover){.disease-db-item:hover{background:var(--green-light)}}
 .disease-db-item .d-name{font-weight:600;font-size:.86rem}
 .disease-db-item .d-name-ja{color:var(--gray-600);font-size:.78rem;margin-left:6px}
