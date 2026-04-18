@@ -3557,6 +3557,71 @@ def _analyze_symptoms(breed_id, symptom_ids, age_years=None, onset=None):
 # ---------------------------------------------------------------------------
 
 
+_SYMPTOM_NAME_CACHE: dict[str, dict[str, dict[str, str]]] = {}
+
+
+def _get_species_symptom_names(species: str) -> dict[str, dict[str, str]]:
+    """Return {symptom_id: {'ja': ..., 'en': ...}} for the given species.
+
+    Horse uses HEALTH_CHECK_ITEMS (id, ja, en) tuples; all other species use
+    SYMPTOM_NAMES dicts. Results are cached after first load.
+    """
+    if species in _SYMPTOM_NAME_CACHE:
+        return _SYMPTOM_NAME_CACHE[species]
+
+    names: dict[str, dict[str, str]] = {}
+    try:
+        if species == "horse":
+            try:
+                from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+            except ImportError:
+                from species.equine_diseases import HEALTH_CHECK_ITEMS  # type: ignore
+            for _cat, items in HEALTH_CHECK_ITEMS.items():
+                for sid, ja_name, en_name in items:
+                    names[sid] = {"ja": ja_name, "en": en_name}
+        else:
+            import importlib
+            mod_name = "dog_diseases" if species == "dog" else f"{species}_diseases"
+            try:
+                mod = importlib.import_module(f"api.species.{mod_name}")
+            except ImportError:
+                mod = importlib.import_module(f"species.{mod_name}")
+            sn = getattr(mod, "SYMPTOM_NAMES", {}) or {}
+            for sid, entry in sn.items():
+                if isinstance(entry, dict):
+                    names[sid] = {"ja": entry.get("ja", sid), "en": entry.get("en", sid)}
+    except Exception:
+        pass
+
+    _SYMPTOM_NAME_CACHE[species] = names
+    return names
+
+
+def _build_symptoms_display(symptoms, species: str) -> list[dict[str, str]]:
+    """Translate a list of symptom IDs into display entries with ja/en names."""
+    if not symptoms:
+        return []
+    if isinstance(symptoms, dict):
+        ids = list(symptoms.keys())
+    elif isinstance(symptoms, (list, tuple, set)):
+        ids = list(symptoms)
+    else:
+        return []
+    name_map = _get_species_symptom_names(species)
+    out: list[dict[str, str]] = []
+    for sid in ids:
+        if not isinstance(sid, str):
+            continue
+        entry = name_map.get(sid)
+        if entry:
+            out.append({"id": sid, "name_ja": entry["ja"], "name_en": entry["en"]})
+        else:
+            # Fallback: humanize the id (e.g. "resp_cough" -> "Resp Cough")
+            pretty = sid.replace("_", " ").title()
+            out.append({"id": sid, "name_ja": pretty, "name_en": pretty})
+    return out
+
+
 @health_bp.route("/symptoms", methods=["GET"])
 def get_symptoms():
     """Return all symptoms, optionally filtered by category."""
@@ -3673,6 +3738,7 @@ def get_diseases():
                     "prognosis_ja": d.get("prognosis_ja", ""),
                     "severity": d.get("urgency", d.get("severity", "")),
                     "symptoms": symptoms,
+                    "symptoms_display": _build_symptoms_display(symptoms, "dog"),
                 }, "dog"))
     elif species == "horse":
         try:
@@ -3701,6 +3767,7 @@ def get_diseases():
                     "prognosis_ja": _ga(d, "prognosis"),
                     "severity": _ga(d, "severity"),
                     "symptoms": findings,
+                    "symptoms_display": _build_symptoms_display(findings, "horse"),
                 }, "horse"))
     else:
         import importlib
@@ -3733,6 +3800,7 @@ def get_diseases():
                     "prognosis_ja": d.get("prognosis_ja", ""),
                     "severity": d.get("urgency", d.get("severity", "")),
                     "symptoms": symptoms,
+                    "symptoms_display": _build_symptoms_display(symptoms, species),
                     "recommended_tests": rec_tests,
                 }, species))
 
