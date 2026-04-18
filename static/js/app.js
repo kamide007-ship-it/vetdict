@@ -287,6 +287,8 @@ const I18N={
 
 function t(key){return (I18N[currentLang]&&I18N[currentLang][key])||key;}
 
+function haptic(ms){try{if(navigator.vibrate)navigator.vibrate(ms||10);}catch(e){}}
+
 function fetchWithTimeout(url,opts={},timeoutMs=10000){
   const ctrl=new AbortController();
   const timer=setTimeout(()=>ctrl.abort(),timeoutMs);
@@ -1028,6 +1030,7 @@ function setupMobileBottomNav(){
   nav.addEventListener("click",e=>{
     const btn=e.target.closest("button[data-view]");
     if(!btn)return;
+    haptic(10);
     switchView(btn.dataset.view);
     const panel=document.getElementById("view"+btn.dataset.view.charAt(0).toUpperCase()+btn.dataset.view.slice(1));
     if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
@@ -1064,6 +1067,7 @@ function setupSwipeGesture(){
     if(dx<-60&&idx<views.length-1)nextIdx=idx+1;
     else if(dx>60&&idx>0)nextIdx=idx-1;
     if(nextIdx>=0){
+      haptic(15);
       switchView(views[nextIdx]);
       const panel=document.getElementById("view"+views[nextIdx].charAt(0).toUpperCase()+views[nextIdx].slice(1));
       if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
