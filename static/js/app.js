@@ -2467,26 +2467,31 @@ function _sendSymptomUpdate(symptomId,confirmed){
 }
 
 function sendChatMessage(){
-  const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;input.value="";
+  const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;
+  const sendBtn=document.getElementById("chatSend");
+  input.value="";input.disabled=true;if(sendBtn)sendBtn.disabled=true;
   trackEvent("chat_message",{species:currentSpecies||"dog",message_length:text.length});
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  const slowTimer=setTimeout(()=>{loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span><div style="font-size:.72rem;color:var(--gray-400);margin-top:4px">'+(currentLang==="ja"?"解析中...":"Analyzing...")+'</div>';},3000);
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
-    loading.remove();
+    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
-    // Update accumulated symptoms
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
-    // Render rich response
     renderChatResult(msgs,data);
   })
   .catch(err=>{
-    loading.remove();
+    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
     console.error("Chat error:",err);
     trackEvent("api_error",{endpoint:"diagnostic-chat",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});
-    addChatMsg(t("commError")+" ("+err.message+")","bot");
+    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";
+    const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
+    errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
+    errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendChatMessage();});
+    msgs.appendChild(errDiv);msgs.scrollTop=msgs.scrollHeight;
   });
 }
 
@@ -3150,6 +3155,20 @@ function loadDrugDictionary(){
   document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
   document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
   document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
+  const dwInput=document.getElementById("drugWeight");
+  if(dwInput)dwInput.addEventListener("input",debounce(renderDrugList,300));
+}
+
+function parseDoseRange(doseText){
+  const m=doseText.match(/([\d.]+)\s*[-–~～]\s*([\d.]+)\s*mg\/kg/i);
+  if(m)return{min:parseFloat(m[1]),max:parseFloat(m[2]),unit:"mg"};
+  const m2=doseText.match(/([\d.]+)\s*mg\/kg/i);
+  if(m2)return{min:parseFloat(m2[1]),max:parseFloat(m2[1]),unit:"mg"};
+  const m3=doseText.match(/([\d.]+)\s*[-–~～]\s*([\d.]+)\s*[μµu]g\/kg/i);
+  if(m3)return{min:parseFloat(m3[1]),max:parseFloat(m3[2]),unit:"µg"};
+  const m4=doseText.match(/([\d.]+)\s*[μµu]g\/kg/i);
+  if(m4)return{min:parseFloat(m4[1]),max:parseFloat(m4[1]),unit:"µg"};
+  return null;
 }
 
 function renderDrugList(){
@@ -3157,6 +3176,8 @@ function renderDrugList(){
   const search=(document.getElementById("drugSearch").value||"").toLowerCase();
   const cat=document.getElementById("drugCategoryFilter").value;
   const species=document.getElementById("drugSpeciesFilter").value;
+  const wCalc=document.getElementById("drugWeightCalc");
+  if(wCalc)wCalc.style.display=species?"flex":"none";
   let filtered=allDrugs;
   if(cat)filtered=filtered.filter(d=>d.category===cat);
   if(species)filtered=filtered.filter(d=>d.species_info&&d.species_info[species]);
@@ -3172,7 +3193,17 @@ function renderDrugList(){
       const safeLabel=si.safe?`<span class="drug-safe-label">\u2713 ${t("safe")}</span>`:`<span class="drug-unsafe-label">\u2717 ${t("contraindicated")}</span>`;
       const doseText=currentLang==="ja"?(si.dosage_ja||si.dosage||"N/A"):(si.dosage||si.dosage_ja||"N/A");
       const noteText=currentLang==="ja"?(si.notes_ja||si.notes||""):(si.notes||si.notes_ja||"");
-      dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${escapeHtml(doseText)}<br/><span class="drug-dosage-note">${escapeHtml(noteText)}</span></div>`;
+      const wt=parseFloat((document.getElementById("drugWeight")||{}).value)||0;
+      const parsed=parseDoseRange(si.dosage||si.dosage_ja||"");
+      let calcHtml="";
+      if(wt>0&&parsed){
+        const lo=(parsed.min*wt).toFixed(parsed.unit==="µg"?0:1);
+        const hi=(parsed.max*wt).toFixed(parsed.unit==="µg"?0:1);
+        calcHtml=lo===hi
+          ?`<div class="drug-calc-dose">${currentLang==="ja"?"計算投与量":"Calculated"}: ${lo} ${parsed.unit} (${wt}kg)</div>`
+          :`<div class="drug-calc-dose">${currentLang==="ja"?"計算投与量":"Calculated"}: ${lo}–${hi} ${parsed.unit} (${wt}kg)</div>`;
+      }
+      dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${escapeHtml(doseText)}${calcHtml}<br/><span class="drug-dosage-note">${escapeHtml(noteText)}</span></div>`;
     }
     const catLabel=drugCategories[d.category]?(currentLang==="ja"?(drugCategories[d.category].ja||drugCategories[d.category].en):(drugCategories[d.category].en||drugCategories[d.category].ja)):(currentLang==="ja"?(d.category_ja||d.category):(d.category||d.category_ja));
     const sponsorBadge=d.sponsor?'<span class="sponsor-badge-tag">Sponsor</span>':"";

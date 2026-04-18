@@ -605,6 +605,10 @@ a:hover{text-decoration:underline}
 .drug-head-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
 .drug-category-tag{font-size:.7rem;padding:2px 8px;background:var(--gray-100);color:var(--navy);border-radius:10px;font-weight:600;flex-shrink:0}
 .sponsor-badge-tag{font-size:.65rem;padding:2px 8px;background:var(--green);color:#fff;border-radius:10px;margin-left:6px;font-weight:600}
+.drug-weight-calc{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #86efac;border-radius:var(--radius);padding:6px 12px;margin-bottom:10px}
+.drug-weight-input{width:70px;padding:6px 8px;border:2px solid var(--gray-200);border-radius:6px;font-size:.86rem;font-family:var(--font);text-align:center}
+.drug-weight-input:focus{border-color:var(--green);outline:none;box-shadow:0 0 0 2px rgba(34,168,79,.15)}
+.drug-calc-dose{font-size:.72rem;color:var(--green-dark);font-weight:600;margin-top:2px}
 .drug-dosage-box{margin-top:4px;font-size:.8rem;padding:6px 10px;border-radius:6px}
 .drug-dosage-box.drug-safe{background:#f0fdf4}
 .drug-dosage-box.drug-unsafe{background:#fef2f2}
