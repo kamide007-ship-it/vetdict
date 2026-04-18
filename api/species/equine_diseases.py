@@ -12472,23 +12472,32 @@ def _enrich_horse_diseases() -> None:
         if entry.get("species") == "Horse":
             lookup[entry.get("name", "")] = entry
 
+    # Prefer Japanese _ja fields from the enrichment JSON. The non-_ja keys contain
+    # generic English templates; _ja keys contain curated Japanese clinical text.
     field_map = {
-        "pathophysiology": "pathophysiology",
-        "etiology": "causes",
-        "treatment_protocol": "treatment",
-        "prevention": "prevention",
-        "prognosis": "prognosis",
-        "clinical_signs_detail": "clinical_signs",
-        "risk_factors": "causes",
+        "pathophysiology": ("pathophysiology_ja", "pathophysiology"),
+        "etiology": ("causes_ja", "causes"),
+        "treatment_protocol": ("treatment_ja", "treatment"),
+        "prevention": ("prevention_ja", "prevention"),
+        "prognosis": ("prognosis_ja", "prognosis"),
+        "clinical_signs_detail": ("clinical_signs_ja", "clinical_signs"),
+        "risk_factors": ("causes_ja", "causes"),
     }
     for disease in DISEASE_DATABASE:
         enrichment = lookup.get(disease.name_en)
         if enrichment:
-            for dc_field, json_field in field_map.items():
-                if not getattr(disease, dc_field, None) and enrichment.get(json_field):
-                    setattr(disease, dc_field, enrichment[json_field])
-            if not disease.general_management and enrichment.get("treatment"):
-                disease.general_management = enrichment["treatment"]
+            for dc_field, json_fields in field_map.items():
+                if getattr(disease, dc_field, None):
+                    continue
+                for jf in json_fields:
+                    val = enrichment.get(jf)
+                    if val:
+                        setattr(disease, dc_field, val)
+                        break
+            if not disease.general_management:
+                val = enrichment.get("treatment_ja") or enrichment.get("treatment")
+                if val:
+                    disease.general_management = val
         # Fallback: generate content from existing description for unmatched diseases
         name = disease.name_en or disease.name_ja
         desc = disease.description_ja or disease.name_ja
