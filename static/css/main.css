@@ -202,7 +202,17 @@ a:hover{text-decoration:underline}
 .symptom-item[aria-checked="true"]{background:#dbeafe;font-weight:600;border-left:3px solid var(--navy)}
 .symptom-item .sym-icon{width:20px;height:20px;border-radius:50%;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;transition:all var(--transition-fast)}
 .symptom-item[aria-checked="true"] .sym-icon{background:var(--navy);border-color:var(--navy);color:var(--white);transform:scale(1.1)}
-.symptom-cat{background:var(--gray-50);padding:6px 12px;font-size:.74rem;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;z-index:1}
+.symptom-cat-group{border-bottom:1px solid var(--gray-100)}
+.symptom-cat-group summary{list-style:none}
+.symptom-cat-group summary::-webkit-details-marker{display:none}
+.symptom-cat{background:var(--gray-50);padding:8px 12px;font-size:.74rem;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;z-index:1;cursor:pointer;display:flex;align-items:center;gap:6px;user-select:none;transition:background var(--transition-fast)}
+.symptom-cat:hover{background:var(--gray-100)}
+.cat-chevron{margin-left:auto;width:16px;height:16px;transition:transform .2s}
+.cat-chevron::before{content:"";display:block;width:7px;height:7px;border-right:2px solid var(--gray-500);border-bottom:2px solid var(--gray-500);transform:rotate(-45deg);margin:4px auto}
+.symptom-cat-group[open] .cat-chevron::before{transform:rotate(45deg)}
+.cat-badge{font-size:.64rem;font-weight:700;background:var(--navy);color:var(--white);padding:1px 6px;border-radius:10px;min-width:16px;text-align:center}
+.symptom-cat-items{animation:cat-expand .2s ease-out}
+@keyframes cat-expand{from{opacity:0;max-height:0}to{opacity:1;max-height:2000px}}
 
 /* --- Selected symptoms --- */
 .selected-symptoms{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;min-height:32px}
@@ -211,6 +221,33 @@ a:hover{text-decoration:underline}
 @keyframes tag-in{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
 .selected-tag .remove{cursor:pointer;opacity:.8;font-weight:700;background:none;border:none;color:inherit;font-size:.88rem;padding:0 2px;font-family:var(--font);transition:opacity var(--transition-fast),transform var(--transition-fast)}
 .selected-tag .remove:hover{opacity:1;transform:scale(1.2)}
+.clear-all-btn{display:inline-flex;align-items:center;padding:5px 12px;border-radius:20px;font-size:.74rem;font-weight:500;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-200);cursor:pointer;font-family:var(--font);transition:all var(--transition-fast)}
+.clear-all-btn:hover{background:var(--red);color:var(--white);border-color:var(--red)}
+
+/* --- Floating symptom counter --- */
+.symptom-floater{position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(20px);z-index:100;background:var(--navy);color:var(--white);padding:8px 20px;border-radius:20px;font-size:.78rem;font-weight:600;box-shadow:0 4px 16px rgba(26,48,104,.3);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;-webkit-tap-highlight-color:transparent}
+.symptom-floater.visible{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){.symptom-floater{bottom:76px}}
+
+/* --- Checker progress indicator --- */
+.checker-progress{display:flex;align-items:center;justify-content:center;gap:0;padding:16px 12px 8px;margin-bottom:8px}
+.progress-step{display:flex;align-items:center;gap:6px;opacity:.45;transition:opacity .25s}
+.progress-step .step-num{width:28px;height:28px;border-radius:50%;background:var(--gray-200);color:var(--gray-600);display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:700;transition:background .25s,color .25s}
+.progress-step .step-label{font-size:.76rem;font-weight:500;color:var(--gray-500);transition:color .25s}
+.progress-step.active{opacity:1}
+.progress-step.active .step-num{background:var(--navy);color:var(--white)}
+.progress-step.active .step-label{color:var(--navy);font-weight:700}
+.progress-step.completed{opacity:1}
+.progress-step.completed .step-num{background:var(--green);color:var(--white)}
+.progress-step.completed .step-label{color:var(--green)}
+.progress-line{width:32px;height:2px;background:var(--gray-200);margin:0 6px;transition:background .25s}
+.progress-line.done{background:var(--green)}
+@media(max-width:600px){
+  .checker-progress{padding:12px 8px 4px;gap:0}
+  .progress-step .step-num{width:24px;height:24px;font-size:.68rem}
+  .progress-step .step-label{font-size:.68rem}
+  .progress-line{width:20px}
+}
 
 /* --- Results sort bar --- */
 .results-sort-bar{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}

@@ -169,6 +169,7 @@ const I18N={
     mobileNavChecker:"鑑別",mobileNavDatabase:"疾患DB",mobileNavChat:"相談",mobileNavDrugs:"薬品",mobileNavAnesthesia:"麻酔",
     sortByConfidence:"信頼度順",sortBySeverity:"重症度順",sortByDefault:"標準",
     speciesFilterPh:"動物種を検索...",
+    stepSpecies:"動物種",stepSymptoms:"症状",stepResults:"結果",
   },
   en:{
     skipLink:"Skip to main content",
@@ -286,6 +287,7 @@ const I18N={
     mobileNavChecker:"Dx",mobileNavDatabase:"Diseases",mobileNavChat:"Chat",mobileNavDrugs:"Drugs",mobileNavAnesthesia:"Anesth.",
     sortByConfidence:"By Confidence",sortBySeverity:"By Severity",sortByDefault:"Default",
     speciesFilterPh:"Filter species...",
+    stepSpecies:"Species",stepSymptoms:"Symptoms",stepResults:"Results",
   }
 };
 
@@ -462,6 +464,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
     setupOfflineIndicator();
     /* Returning user welcome */
     showReturningUserBanner();
+    /* Escape key closes expanded panels */
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"){const open=document.querySelector(".disease-detail.open");if(open){const item=open.closest(".disease-db-item");if(item)toggleDbItem(item);}}});
   }catch(e){
     console.error("Error in DOMContentLoaded:",e);
   }
@@ -861,6 +865,7 @@ function setDefaultStats(){
 function renderSpeciesGrid(){
   const grid=document.getElementById("speciesGrid");
   if(!grid){console.warn("speciesGrid element not found");return;}
+  if(!currentSpecies)updateCheckerProgress(1);
   const section=document.getElementById("speciesSection");
   if(section&&!section.querySelector(".species-filter-input")){
     const filterInput=document.createElement("input");
@@ -938,7 +943,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();loadHusbandry(id);reloadAnesthesiaForSpecies();
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();loadHusbandry(id);reloadAnesthesiaForSpecies();updateCheckerProgress(2);
   resetSpeciesChat(id);
   // Reset guided consultation if active
   const guidedCont=document.getElementById("chatGuidedContainer");
@@ -1271,8 +1276,13 @@ function renderSymptomList(symptoms){
     for(const[cat,items]of Object.entries(categories)){
       const filtered=items.filter(matchSearch);
       if(!filtered.length)continue;
-      html+=`<div class="symptom-cat" role="heading" aria-level="4">${catLabels[cat]||cat}</div>`;
+      const hasSelected=filtered.some(s=>selectedSymptoms.has(s.id));
+      const selCount=filtered.filter(s=>selectedSymptoms.has(s.id)).length;
+      const badge=selCount?` <span class="cat-badge">${selCount}</span>`:"";
+      const open=search||hasSelected?"open":"";
+      html+=`<details class="symptom-cat-group" ${open}><summary class="symptom-cat" role="heading" aria-level="4">${catLabels[cat]||cat}${badge}<span class="cat-chevron" aria-hidden="true"></span></summary><div class="symptom-cat-items">`;
       for(const s of filtered)html+=mkItem(s);
+      html+=`</div></details>`;
     }
   }else{
     const sorted=symptoms.filter(matchSearch).slice().sort((a,b)=>{const an=currentLang==="ja"?(a.name_ja||a.name_en||""):(a.name_en||a.name_ja||"");const bn=currentLang==="ja"?(b.name_ja||b.name_en||""):(b.name_en||b.name_ja||"");return an.localeCompare(bn,currentLang==="ja"?"ja":"en");});
@@ -1289,10 +1299,39 @@ function toggleSymptom(id){const adding=!selectedSymptoms.has(id);if(adding)sele
 
 function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
-  if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;return;}
+  if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;updateSymptomFloater(0);return;}
   btn.disabled=false;
-  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${escapeHtml(label)} <button class="remove" type="button" aria-label="${escapeHtml(ariaLabel)}" data-id="${escapeHtml(id)}">&times;</button></span>`;}).join("");
+  const clearLabel=currentLang==="ja"?"全解除":"Clear All";
+  area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${escapeHtml(label)} <button class="remove" type="button" aria-label="${escapeHtml(ariaLabel)}" data-id="${escapeHtml(id)}">&times;</button></span>`;}).join("")+`<button class="clear-all-btn" type="button">${clearLabel}</button>`;
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
+  const clearBtn=area.querySelector(".clear-all-btn");
+  if(clearBtn)clearBtn.addEventListener("click",()=>{selectedSymptoms.clear();renderSymptomList(symptomData);renderSelectedSymptoms();});
+  updateSymptomFloater(selectedSymptoms.size);
+}
+
+function updateSymptomFloater(count){
+  let floater=document.getElementById("symptomFloater");
+  if(count<1){if(floater)floater.classList.remove("visible");return;}
+  if(!floater){
+    floater=document.createElement("div");floater.id="symptomFloater";floater.className="symptom-floater";
+    document.body.appendChild(floater);
+    floater.addEventListener("click",()=>{const area=document.getElementById("selectedSymptoms");if(area)area.scrollIntoView({behavior:"smooth",block:"center"});});
+  }
+  floater.textContent=currentLang==="ja"?`${count}個の症状を選択中`:`${count} symptom${count>1?"s":""} selected`;
+  floater.classList.add("visible");
+}
+
+function updateCheckerProgress(step){
+  const cp=document.getElementById("checkerProgress");if(!cp)return;
+  const steps=cp.querySelectorAll(".progress-step");
+  const lines=cp.querySelectorAll(".progress-line");
+  steps.forEach(s=>{
+    const n=parseInt(s.dataset.step,10);
+    s.classList.remove("active","completed");
+    if(n<step)s.classList.add("completed");
+    else if(n===step)s.classList.add("active");
+  });
+  lines.forEach((l,i)=>{l.classList.toggle("done",i<step-1);});
 }
 
 function collectPainScore(){
@@ -1553,6 +1592,7 @@ function createShareWidget(diseases){
 }
 
 function renderResults(data){
+  updateCheckerProgress(3);
   const area=document.getElementById("resultsArea");
   const diseases=data.suspected_diseases||data.possible_conditions||[];
   const diseasesByPhase=data.suspected_diseases_by_phase||{};
