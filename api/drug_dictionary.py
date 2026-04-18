@@ -1651,7 +1651,7 @@ DRUGS: List[Dict[str, Any]] = [
     {
         "id": "ecvn_for_antioxidant",
         "name": "For Antioxidant (Equine & Canine Vet Nutrition)",
-        "name_ja": "For Antioxidant（Equine & Canine Vet Nutrition）",
+        "name_ja": "フォー・アンチオキシダント（抗酸化／Equine & Canine Vet Nutrition）",
         "category": "supplements",
         "mechanism": "Antioxidant complex combining astaxanthin (potent carotenoid antioxidant from microalgae), melon-derived SOD, vitamin E (tocopherol), and cysteine (glutathione precursor). Provides multi-pathway oxidative stress protection.",
         "mechanism_ja": "アスタキサンチン（微細藻類由来の強力なカロテノイド抗酸化物質）、メロン由来SOD、ビタミンE（トコフェロール）、システイン（グルタチオン前駆体）を組み合わせた抗酸化複合体。多経路の酸化ストレス防御を提供。",
@@ -1675,7 +1675,7 @@ DRUGS: List[Dict[str, Any]] = [
     {
         "id": "ecvn_for_joint",
         "name": "For Joint (Equine & Canine Vet Nutrition)",
-        "name_ja": "For Joint（Equine & Canine Vet Nutrition）",
+        "name_ja": "フォー・ジョイント（関節ケア／Equine & Canine Vet Nutrition）",
         "category": "supplements",
         "mechanism": "Joint support supplement with high-dose MSM (methylsulfonylmethane) for anti-inflammatory and connective tissue support, combined with glucosamine and chondroitin precursors for cartilage maintenance.",
         "mechanism_ja": "高容量MSM（メチルスルフォニルメタン）による抗炎症・結合組織サポートに、グルコサミン・コンドロイチン前駆体を組み合わせた関節サポートサプリメント。",
