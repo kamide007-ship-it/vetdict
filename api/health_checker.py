@@ -3597,6 +3597,54 @@ def _get_species_symptom_names(species: str) -> dict[str, dict[str, str]]:
     return names
 
 
+def _humanize_test_id(tid: str) -> str:
+    """Convert a snake_case test id to a readable label.
+
+    Preserves entries that already contain Japanese characters or parenthetical
+    English glosses (e.g. 'KOH直接鏡検 (KOH Direct Exam)'). For snake_case IDs,
+    replaces underscores with spaces and title-cases Latin segments while
+    keeping common abbreviations (CBC, PCR, MRI, CT, ECG) uppercase.
+    """
+    if not tid or not isinstance(tid, str):
+        return tid
+    import re
+    # If contains CJK or spaces, leave as-is
+    if re.search(r"[\u3000-\u9fff]", tid) or " " in tid:
+        return tid
+    if "_" not in tid:
+        return tid
+    parts = tid.split("_")
+    keep_upper = {"cbc", "pcr", "mri", "ct", "ecg", "ekg", "hiv", "fiv", "felv", "fip",
+                  "igg", "igm", "ige", "aids", "hplc", "usg", "pbfd", "bmbv", "bsa",
+                  "acth", "ast", "alt", "alp", "crp", "ldh", "cpk", "tsh", "t3", "t4",
+                  "lh", "fsh", "adh"}
+    out_parts = []
+    for p in parts:
+        if p.lower() in keep_upper:
+            out_parts.append(p.upper())
+        else:
+            out_parts.append(p.capitalize())
+    return " ".join(out_parts)
+
+
+def _build_recommended_tests_display(tests, species: str) -> list[dict[str, str]]:
+    """Build display list for recommended_tests. Uses humanized labels for
+    snake_case IDs. Preserves existing Japanese/mixed labels."""
+    if not tests:
+        return []
+    if isinstance(tests, (list, tuple, set)):
+        ids = list(tests)
+    else:
+        return []
+    out: list[dict[str, str]] = []
+    for tid in ids:
+        if not isinstance(tid, str) or not tid:
+            continue
+        label = _humanize_test_id(tid)
+        out.append({"id": tid, "name_ja": label, "name_en": label})
+    return out
+
+
 def _build_symptoms_display(symptoms, species: str) -> list[dict[str, str]]:
     """Translate a list of symptom IDs into display entries with ja/en names."""
     if not symptoms:
@@ -3739,6 +3787,7 @@ def get_diseases():
                     "severity": d.get("urgency", d.get("severity", "")),
                     "symptoms": symptoms,
                     "symptoms_display": _build_symptoms_display(symptoms, "dog"),
+                    "recommended_tests_display": _build_recommended_tests_display(d.get("recommended_tests") or [], "dog"),
                 }, "dog"))
     elif species == "horse":
         try:
@@ -3750,6 +3799,18 @@ def get_diseases():
 
         for d in DISEASE_DATABASE:
             findings = _ga(d, "associated_findings", [])
+            exams = _ga(d, "recommended_exams", []) or []
+            # Horse uses (priority, ja, en) tuples; convert to display list
+            exams_display = []
+            exams_flat = []
+            for item in exams:
+                if isinstance(item, tuple) and len(item) >= 3:
+                    _prio, ja_name, en_name = item[0], item[1], item[2]
+                    exams_display.append({"id": en_name, "name_ja": ja_name, "name_en": en_name})
+                    exams_flat.append(en_name)
+                elif isinstance(item, str):
+                    exams_display.append({"id": item, "name_ja": item, "name_en": item})
+                    exams_flat.append(item)
             output.append(enrich_disease_content({
                     "name": _ga(d, "name_en"),
                     "name_ja": _ga(d, "name_ja"),
@@ -3768,6 +3829,8 @@ def get_diseases():
                     "severity": _ga(d, "severity"),
                     "symptoms": findings,
                     "symptoms_display": _build_symptoms_display(findings, "horse"),
+                    "recommended_tests": exams_flat,
+                    "recommended_tests_display": exams_display,
                 }, "horse"))
     else:
         import importlib
@@ -3802,6 +3865,7 @@ def get_diseases():
                     "symptoms": symptoms,
                     "symptoms_display": _build_symptoms_display(symptoms, species),
                     "recommended_tests": rec_tests,
+                    "recommended_tests_display": _build_recommended_tests_display(rec_tests, species),
                 }, species))
 
     # Inject hiragana reading for あいうえお sorting
