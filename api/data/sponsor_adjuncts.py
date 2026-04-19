@@ -18,8 +18,26 @@ applicable diseases in the VetDict database:
   Applied to conditions requiring broad tissue/muscle repair and
   convalescent nutrition: post-surgical recovery, trauma, IVDD/spinal
   disease, cachexia, senior sarcopenia, cancer supportive care, chronic
-  wounds, and severe infections. Complements For Joint where muscle
-  wasting coexists.
+  wounds, severe infections, hepatic disease (MSM donates sulfur for
+  glutathione synthesis; BCAAs support hepatic encephalopathy), and
+  CKD (BCAA-rich profile preserves lean muscle while moderating
+  nitrogen load). Complements For Joint where muscle wasting coexists.
+
+- **NMN Mitochondria Assist** (NMN + cysteine + α-lipoic acid + psyllium
+  + probiotics): NMN is converted to NAD+ in vivo, activating sirtuin
+  pathways and restoring mitochondrial function. Applied to conditions
+  involving mitochondrial dysfunction / cellular aging: cognitive
+  dysfunction, degenerative myelopathy, epilepsy, endocrinopathies
+  (DM, Cushing's, hypothyroidism), cardiomyopathy (DCM, mitral valve
+  disease), senior ophthalmic disease (cataract, PRA, glaucoma),
+  hepatic disease, and CKD.
+
+- **Prebiotics + Probiotics + Psyllium (CP Powder)**: Soluble fiber plus
+  live cultures for GI motility, microbiome restoration, and gut-
+  immune axis modulation. Applied to colic (sand/constipation),
+  GDV recovery, pancreatitis, IBD, diarrhea/gastroenteritis,
+  portosystemic shunt (reduces gut ammonia), allergic dermatitis
+  (gut-immune axis), and CKD (uremic toxin binding).
 
 All three products are labeled primarily for dogs and horses; adjunct
 mentions in other species indicate optional supportive use based on the
@@ -88,6 +106,40 @@ _MSM_AMINO_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
+# NMN Mitochondria Assist: mitochondrial dysfunction, cellular aging,
+# metabolic/endocrine disease, cardiomyopathy, senior ophthalmic/neurologic
+# disease. NMN is converted to NAD+ and activates sirtuins.
+_NMN_PATTERNS = re.compile(
+    r"cognitive dysfunc|\bCDS\b|dementia|degenerative myelop|\bDM\b|wobbler|"
+    r"epilep|seizure|hypothyroid|cushing|hyperadrenocort|diabet|\bDKA\b|"
+    r"obesity|\bobese\b|dilated cardiomyop|\bDCM\b|hypertrophic cardiomyop|"
+    r"\bHCM\b|mitral valve|mvd\b|valvular|congestive heart|aortic stenos|"
+    r"patent ductus|cataract|progressive retinal|\bPRA\b|glaucoma|"
+    r"hepatic|hepatopath|\bliver\b|cirrhos|cholang|"
+    r"chronic kidney|\bCKD\b|\bIMHA\b|autoimmune hemolytic|"
+    r"認知機能|認知障害|変性性脊髄症|てんかん|痙攣|甲状腺機能低下|"
+    r"クッシング|糖尿病|肥満|拡張型心筋症|肥大型心筋症|僧帽弁|心不全|"
+    r"大動脈狭窄|動脈管開存|白内障|進行性網膜萎縮|緑内障|肝疾患|肝炎|"
+    r"肝硬変|慢性腎臓病|免疫介在性溶血|溶血性貧血",
+    re.IGNORECASE,
+)
+
+# Prebiotics + Probiotics + Psyllium (CP Powder): GI motility, microbiome,
+# gut-immune axis.
+_PREBIOTIC_PATTERNS = re.compile(
+    r"colic|gastroenterit|enterit|diarrh|constipat|megacolon|megaesophag|"
+    r"\bGDV\b|gastric dilat|bloat|pancreatit|\bIBD\b|inflammatory bowel|"
+    r"chronic enteropath|food allerg|food sensitivit|atopic dermatit|"
+    r"allergic dermatit|portosystem|hepatic encephalop|urolithi|"
+    r"\bstruvite\b|calcium oxal|cystit|sand colic|impact|"
+    r"chronic kidney|\bCKD\b|uremia|uraemia|dysbios|"
+    r"疝痛|胃腸炎|腸炎|下痢|便秘|巨大結腸|巨大食道|胃拡張|胃捻転|"
+    r"膵炎|炎症性腸疾患|慢性腸症|食物アレルギー|アトピー性皮膚炎|"
+    r"アレルギー性皮膚炎|門脈体循環シャント|肝性脳症|尿石症|ストラバイト|"
+    r"シュウ酸カルシウム|膀胱炎|砂疝|便塞|慢性腎臓病|尿毒症|腸内細菌叢",
+    re.IGNORECASE,
+)
+
 # Species for which each product is indicated.
 # Joint = mammals (MSM safety profile).
 # Antioxidant = mammals + birds (broad antioxidant safety).
@@ -109,6 +161,21 @@ _MSM_AMINO_SPECIES = frozenset({
     "parrot", "exotic_other",
 })
 
+# NMN Mitochondria Assist: mammals primarily. NAD+ biology is universal but
+# product formulation is mammalian-focused.
+_NMN_SPECIES = frozenset({
+    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
+    "chinchilla", "hedgehog", "sugar_glider", "degu", "exotic_other",
+})
+
+# Prebiotics + Probiotics + Psyllium (CP Powder): mammals + birds for GI
+# support. Herbivores/hindgut fermenters especially benefit.
+_PREBIOTIC_SPECIES = frozenset({
+    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
+    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
+    "parrot", "exotic_other",
+})
+
 
 # ---------------------------------------------------------------------------
 # Adjunct text
@@ -119,6 +186,8 @@ _MSM_AMINO_SPECIES = frozenset({
 _MARKER_JOINT = "[ECVN:Joint]"
 _MARKER_ANTIOX = "[ECVN:Antiox]"
 _MARKER_MSM_AMINO = "[ECVN:MSM-Amino]"
+_MARKER_NMN = "[ECVN:NMN]"
+_MARKER_PREBIOTIC = "[ECVN:Prebiotic]"
 
 _JOINT_JA = (
     " [ECVN:Joint] 補助療法: For Joint（高容量MSM + グルコサミン/コンドロイチン前駆体配合、"
@@ -159,6 +228,35 @@ _MSM_AMINO_EN = (
     "glutathione synthesis) and CKD (BCAA-rich profile helps preserve lean muscle while moderating "
     "nitrogen load). Synergistic with For Joint when muscle wasting coexists. "
     "Note: use with caution in end-stage hepatic or renal failure (protein load)."
+)
+
+_NMN_JA = (
+    " [ECVN:NMN] 補助療法: NMN-ミトコンドリアアシスト（NMN + システイン + α-リポ酸 + "
+    "サイリウム + プロバイオティクス配合、Equine & Canine Vet Nutrition）を細胞エネルギー代謝・"
+    "サーチュイン活性化・抗老化サポートとして併用可能。ミトコンドリア機能低下が病態に関与する"
+    "認知機能不全・変性性神経疾患・内分泌疾患・心筋症・加齢性眼疾患・CKDで検討。"
+)
+_NMN_EN = (
+    " [ECVN:NMN] Adjunct: NMN Mitochondria Assist (NMN + cysteine + α-lipoic acid + psyllium + "
+    "probiotics; Equine & Canine Vet Nutrition) — optional supportive therapy for cellular energy "
+    "metabolism, sirtuin activation, and anti-aging support. Consider for conditions with "
+    "mitochondrial dysfunction: cognitive dysfunction, degenerative neurologic disease, "
+    "endocrinopathy, cardiomyopathy, age-related ophthalmic disease, and CKD."
+)
+
+_PREBIOTIC_JA = (
+    " [ECVN:Prebiotic] 補助療法: プレバイオティクス&プロバイオティクス&サイリウム（CPパウダー系、"
+    "Equine & Canine Vet Nutrition）を消化管運動改善・腸内細菌叢正常化・腸管バリア強化として"
+    "併用可能。砂疝・便秘・IBD・下痢・膵炎後・門脈体循環シャント（腸内アンモニア抑制）・"
+    "食物アレルギー・腸腎連関でのCKD尿毒素排出促進に寄与。※完全腸閉塞では禁忌。"
+)
+_PREBIOTIC_EN = (
+    " [ECVN:Prebiotic] Adjunct: Prebiotics + Probiotics + Psyllium (CP Powder line; Equine & "
+    "Canine Vet Nutrition) — optional supportive therapy for GI motility, microbiome restoration, "
+    "and intestinal barrier function. Consider for sand/constipation colic, IBD, diarrhea, "
+    "post-pancreatitis recovery, portosystemic shunt (reduces gut ammonia), food allergy, and "
+    "CKD (gut-kidney axis for uremic toxin removal). Contraindicated in complete intestinal "
+    "obstruction."
 )
 
 
@@ -224,6 +322,12 @@ def apply_sponsor_adjuncts_dict(disease: Dict[str, Any], species: str) -> Dict[s
     if sp in _MSM_AMINO_SPECIES and _MSM_AMINO_PATTERNS.search(text):
         disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _MSM_AMINO_JA, _MARKER_MSM_AMINO)
         disease["treatment"] = _append_once(disease.get("treatment"), _MSM_AMINO_EN, _MARKER_MSM_AMINO)
+    if sp in _NMN_SPECIES and _NMN_PATTERNS.search(text):
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _NMN_JA, _MARKER_NMN)
+        disease["treatment"] = _append_once(disease.get("treatment"), _NMN_EN, _MARKER_NMN)
+    if sp in _PREBIOTIC_SPECIES and _PREBIOTIC_PATTERNS.search(text):
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _PREBIOTIC_JA, _MARKER_PREBIOTIC)
+        disease["treatment"] = _append_once(disease.get("treatment"), _PREBIOTIC_EN, _MARKER_PREBIOTIC)
     return disease
 
 
@@ -257,3 +361,11 @@ def apply_sponsor_adjuncts_obj(disease_obj: Any) -> None:
         _set("treatment_protocol", _MSM_AMINO_JA, _MARKER_MSM_AMINO)
         if getattr(disease_obj, "general_management", ""):
             _set("general_management", _MSM_AMINO_JA, _MARKER_MSM_AMINO)
+    if _NMN_PATTERNS.search(text):
+        _set("treatment_protocol", _NMN_JA, _MARKER_NMN)
+        if getattr(disease_obj, "general_management", ""):
+            _set("general_management", _NMN_JA, _MARKER_NMN)
+    if _PREBIOTIC_PATTERNS.search(text):
+        _set("treatment_protocol", _PREBIOTIC_JA, _MARKER_PREBIOTIC)
+        if getattr(disease_obj, "general_management", ""):
+            _set("general_management", _PREBIOTIC_JA, _MARKER_PREBIOTIC)
