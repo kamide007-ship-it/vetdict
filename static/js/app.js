@@ -932,7 +932,20 @@ function renderSpeciesGrid(){
   });
   grid.addEventListener("keydown",e=>{
     const card=e.target.closest(".species-card");
-    if(card&&(e.key==="Enter"||e.key===" ")){e.preventDefault();selectSpecies(card.dataset.species);}
+    if(!card)return;
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();selectSpecies(card.dataset.species);return;}
+    if(["ArrowRight","ArrowLeft","ArrowDown","ArrowUp"].includes(e.key)){
+      e.preventDefault();
+      const cards=[...grid.querySelectorAll('.species-card:not([style*="display: none"])')];
+      const idx=cards.indexOf(card);if(idx<0)return;
+      const cols=Math.round(grid.offsetWidth/(card.offsetWidth||1))||3;
+      let next=-1;
+      if(e.key==="ArrowRight")next=idx+1;
+      else if(e.key==="ArrowLeft")next=idx-1;
+      else if(e.key==="ArrowDown")next=idx+cols;
+      else if(e.key==="ArrowUp")next=idx-cols;
+      if(next>=0&&next<cards.length){cards[next].focus();haptic(5);}
+    }
   });
 }
 
@@ -1150,6 +1163,9 @@ function setupOfflineIndicator(){
   window.addEventListener("online",update);
   window.addEventListener("offline",update);
   update();
+  const prog=document.createElement("div");
+  prog.className="reading-progress";prog.id="readingProgress";
+  document.body.appendChild(prog);
 }
 
 function resetSpeciesChat(species){
@@ -3850,18 +3866,28 @@ function highlightMatch(text,query){
   },{passive:true});
 })();
 
-/* --- Scroll-to-top button --- */
+/* --- Scroll-to-top button with progress ring --- */
 (function(){
   const btn=document.createElement("button");
   btn.className="scroll-top";
   btn.setAttribute("aria-label","Scroll to top");
-  btn.innerHTML="\u2191";
+  btn.innerHTML='<svg class="scroll-progress-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2"/><circle class="scroll-progress-arc" cx="18" cy="18" r="16" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53" transform="rotate(-90 18 18)"/></svg><span class="scroll-arrow">\u2191</span>';
   document.body.appendChild(btn);
+  const arc=btn.querySelector(".scroll-progress-arc");
+  const circ=2*Math.PI*16;
   let ticking=false;
   window.addEventListener("scroll",()=>{
-    if(!ticking){requestAnimationFrame(()=>{btn.classList.toggle("visible",window.scrollY>400);ticking=false;});ticking=true;}
+    if(!ticking){requestAnimationFrame(()=>{
+      const scrollH=document.documentElement.scrollHeight-window.innerHeight;
+      const pct=scrollH>0?Math.min(window.scrollY/scrollH,1):0;
+      btn.classList.toggle("visible",window.scrollY>400);
+      if(arc)arc.style.strokeDashoffset=circ*(1-pct);
+      const rp=document.getElementById("readingProgress");
+      if(rp)rp.style.width=(pct*100)+"%";
+      ticking=false;
+    });ticking=true;}
   },{passive:true});
-  btn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+  btn.addEventListener("click",()=>{haptic(10);window.scrollTo({top:0,behavior:"smooth"});});
 })();
 
 /* --- Fade-in sections on scroll --- */
