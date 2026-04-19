@@ -52,10 +52,18 @@ _ANTIOX_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
-# MSM + Amino Complete: tissue repair, muscle maintenance, convalescence.
+# MSM + Amino Complete: tissue repair, muscle maintenance, convalescence,
+# and hepatic/renal nutritional support.
+#   - MSM is an organic sulfur donor supporting glutathione synthesis
+#     (hepatoprotective, renoprotective against oxidative injury).
+#   - Essential amino acid blend (especially BCAAs) is used clinically for
+#     hepatic encephalopathy support, chronic liver disease, and to offset
+#     muscle wasting in CKD ("keto-analog" style nutrition).
 # Broader than For Joint — includes trauma, post-surgical recovery, neurologic
-# (IVDD/spinal) and cachexia/sarcopenia. Deliberately excludes pure infectious
-# disease unless accompanied by muscle loss or prolonged convalescence.
+# (IVDD/spinal), cachexia/sarcopenia, hepatic and renal disease (mild-to-
+# moderate; caution in end-stage failure due to protein load). Deliberately
+# excludes pure infectious disease unless accompanied by muscle loss or
+# prolonged convalescence.
 _MSM_AMINO_PATTERNS = re.compile(
     r"osteoarthrit|arthrit|\bjoint\b|hip dyspl|elbow dyspl|patellar|patella|"
     r"cruciate|\bOCD\b|osteochondr|spondylos|\bIVDD\b|intervertebral disc|"
@@ -64,10 +72,19 @@ _MSM_AMINO_PATTERNS = re.compile(
     r"myositis|rhabdomyol|muscle\s+(wasting|atroph)|sarcopen|cachex|"
     r"fracture|\btrauma\w*|wound healing|chronic wound|decubit|"
     r"malnutrit|debilit|convalescen|post.?surg|"
+    # Hepatic: MSM (sulfur/glutathione) + amino acid nutritional support
+    r"hepatic|hepatopath|\bliver\b|cirrhos|hepatic lipidos|cholang|"
+    r"hepatic encephalop|portosystem|hepatitis|"
+    # Renal: BCAA/keto-analog nutrition + antioxidant support for CKD
+    r"chronic kidney|\bCKD\b|renal failure|nephropath|\bnephritis\b|"
+    r"uremia|uraemia|azotemi|glomerulonephr|pyelonephr|renal insuff|"
     r"関節炎|関節|股関節|肘関節|膝蓋骨|十字靱帯|十字靭帯|離断性骨軟骨症|"
     r"脊椎症|椎間板|脊髄|変性性脊髄症|半月板|腱炎|腱|靭帯|筋炎|"
     r"筋萎縮|筋肉減少|悪液質|骨折|外傷|創傷|褥瘡|栄養失調|衰弱|"
-    r"回復期|術後",
+    r"回復期|術後|"
+    # 肝・腎 (Japanese)
+    r"肝疾患|肝炎|肝硬変|肝リピドーシス|肝性脳症|門脈体循環シャント|"
+    r"胆管肝炎|慢性腎臓病|腎不全|腎症|尿毒症|糸球体腎炎|腎盂腎炎",
     re.IGNORECASE,
 )
 
@@ -128,14 +145,20 @@ _ANTIOX_EN = (
 _MSM_AMINO_JA = (
     " [ECVN:MSM-Amino] 補助療法: MSM＋アミノコンプリート（高容量MSM + 必須アミノ酸複合体、"
     "Equine & Canine Vet Nutrition）を組織修復・筋肉維持・回復期栄養として併用可能。"
-    "術後回復・外傷・椎間板疾患・悪液質・サルコペニアなど、広範な組織修復と"
-    "アミノ酸補給が有用な病態で検討。For Jointとの併用で関節＋筋肉の相乗効果。"
+    "筋骨格・神経（IVDD等）・術後回復・悪液質・サルコペニアに加え、"
+    "肝疾患ではMSMの硫黄供与によるグルタチオン合成サポート、"
+    "CKDではBCAA中心のアミノ酸補給による筋肉維持・タンパク質代謝負荷軽減の観点で検討。"
+    "For Jointとの併用で関節＋筋肉の相乗効果。"
+    "※重度肝/腎不全では蛋白/アミノ酸負荷に留意し慎重投与。"
 )
 _MSM_AMINO_EN = (
     " [ECVN:MSM-Amino] Adjunct: MSM + Amino Complete (high-dose MSM + essential amino acid blend; "
     "Equine & Canine Vet Nutrition) — optional supportive therapy for broad tissue repair, muscle "
     "maintenance, and convalescent nutrition. Indicated for post-surgical recovery, trauma, IVDD, "
-    "cachexia, and sarcopenia. Synergistic with For Joint when muscle wasting coexists."
+    "cachexia, and sarcopenia. Also supportive for hepatic disease (MSM donates sulfur for "
+    "glutathione synthesis) and CKD (BCAA-rich profile helps preserve lean muscle while moderating "
+    "nitrogen load). Synergistic with For Joint when muscle wasting coexists. "
+    "Note: use with caution in end-stage hepatic or renal failure (protein load)."
 )
 
 
