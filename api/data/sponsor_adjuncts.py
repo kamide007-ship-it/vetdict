@@ -39,7 +39,26 @@ applicable diseases in the VetDict database:
   portosystemic shunt (reduces gut ammonia), allergic dermatitis
   (gut-immune axis), and CKD (uremic toxin binding).
 
-All three products are labeled primarily for dogs and horses; adjunct
+- **Canine Vet Relax & CBD**: Full-spectrum CBD for chronic pain,
+  anxiety, refractory epilepsy, and end-of-life comfort. Applied to
+  OA/IVDD pain, wobbler syndrome, laryngeal paralysis stress, and
+  separation/noise anxiety.
+
+- **Canine Vet Protain**: Protein + collagen precursor supplement for
+  cancer cachexia (lymphoma, hemangiosarcoma, osteosarcoma, mammary
+  tumor), post-orthopedic surgery, and muscle preservation during
+  weight loss.
+
+- **Canine Vet Booster & Relax**: Adaptogenic vitality supplement for
+  convalescence from viral infection, hypothyroidism/Addison's energy
+  support, and senior fatigue.
+
+- **Kamide Milk**: Highly digestible liquid nutrition for anorexic /
+  critical-care patients. Applied to parvo/influenza recovery,
+  pancreatitis, megaesophagus, hepatic lipidosis prevention in cats,
+  and GI stasis in rabbits.
+
+All products are labeled primarily for dogs and horses; adjunct
 mentions in other species indicate optional supportive use based on the
 ingredient profile. The mentions are appended to existing treatment
 text and never replace curated clinical content.
@@ -140,6 +159,56 @@ _PREBIOTIC_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
+# Canine Vet Relax & CBD: chronic pain, anxiety, seizure, end-of-life comfort.
+_RELAX_CBD_PATTERNS = re.compile(
+    r"osteoarthrit|\barthrit|\bIVDD\b|intervertebral disc|disc disease|"
+    r"wobbler|lumbar.?sacral|laryngeal paraly|separation anxiety|"
+    r"noise phobia|storm phobia|thunderstorm|generalized anxiety|"
+    r"\bepilep|seizure|refractory seizure|status epilepticus|"
+    r"cancer pain|end.?of.?life|palliative|chronic pain|"
+    r"変形性関節症|関節炎|椎間板|脊髄|ウォブラー|腰仙部|喉頭麻痺|"
+    r"分離不安|騒音恐怖|雷恐怖|全般性不安|てんかん|痙攣|難治性痙攣|"
+    r"がん性疼痛|終末期|緩和ケア|慢性疼痛",
+    re.IGNORECASE,
+)
+
+# Canine Vet Protain: cancer cachexia, muscle preservation, post-orthopedic.
+_PROTAIN_PATTERNS = re.compile(
+    r"lymphom|hemangiosarcom|osteosarcom|mammary.*(tumor|neopl)|"
+    r"squamous cell carcinom|mast cell tumor|"
+    r"cruciate|\bTPLO\b|patellar|hip dyspl|elbow dyspl|"
+    r"cachex|sarcopen|muscle wast|obesit|\bobese\b|weight.loss|"
+    r"リンパ腫|血管肉腫|骨肉腫|乳腺腫瘍|扁平上皮癌|肥満細胞腫|"
+    r"十字靱帯|十字靭帯|膝蓋骨|股関節形成不全|肘関節形成不全|"
+    r"悪液質|サルコペニア|筋肉減少|筋萎縮|肥満|減量",
+    re.IGNORECASE,
+)
+
+# Canine Vet Booster & Relax: convalescence, fatigue, adrenal/thyroid support.
+_BOOSTER_PATTERNS = re.compile(
+    r"canine distemp|parvovir|feline panleuk|feline pneumon|"
+    r"upper respiratory|influenza|\bURI\b|kennel cough|"
+    r"hypothyroid|hyperthyroid|addison|hypoadrenocort|"
+    r"chronic fatigue|debilit|convalescen|poor performance|"
+    r"犬ジステンパー|パルボ|汎白血球減少|上部気道感染|"
+    r"ケンネルコフ|甲状腺機能低下|甲状腺機能亢進|アジソン|"
+    r"副腎皮質機能低下|慢性疲労|衰弱|回復期",
+    re.IGNORECASE,
+)
+
+# Kamide Milk: anorexia, critical care feeding, liquid nutrition.
+_KAMIDE_MILK_PATTERNS = re.compile(
+    r"parvovir|canine distemp|influenza|pancreatit|megaesophag|"
+    r"hepatic lipidos|\bGI stasis|gastrointestinal stasis|"
+    r"anorexia|inappetence|cachex|hepatic encephalop|"
+    r"orphan|foaling complic|neonat|failure of passive transfer|\bFPT\b|"
+    r"feeding tube|enteral nutri|"
+    r"パルボ|犬ジステンパー|インフルエンザ|膵炎|巨大食道|肝リピドーシス|"
+    r"消化管うっ滞|食欲不振|食欲低下|悪液質|肝性脳症|"
+    r"孤児|分娩合併|新生児|初乳不足|経管栄養",
+    re.IGNORECASE,
+)
+
 # Species for which each product is indicated.
 # Joint = mammals (MSM safety profile).
 # Antioxidant = mammals + birds (broad antioxidant safety).
@@ -176,6 +245,31 @@ _PREBIOTIC_SPECIES = frozenset({
     "parrot", "exotic_other",
 })
 
+# Canine Vet Relax & CBD: CBD safety is best characterized in dogs; extended
+# cautiously to cat/horse/rabbit/ferret where the product is indicated.
+_RELAX_CBD_SPECIES = frozenset({
+    "dog", "cat", "horse", "rabbit", "ferret",
+})
+
+# Canine Vet Protain: mammalian tissue/muscle protein supplementation.
+_PROTAIN_SPECIES = frozenset({
+    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
+    "chinchilla", "hedgehog", "sugar_glider", "degu", "exotic_other",
+})
+
+# Canine Vet Booster & Relax: vitality supplement for mammals.
+_BOOSTER_SPECIES = frozenset({
+    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
+    "chinchilla", "hedgehog", "sugar_glider", "degu", "exotic_other",
+})
+
+# Kamide Milk: critical care liquid nutrition — mammals + birds.
+_KAMIDE_MILK_SPECIES = frozenset({
+    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
+    "chinchilla", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
+    "parrot", "exotic_other",
+})
+
 
 # ---------------------------------------------------------------------------
 # Adjunct text
@@ -188,6 +282,10 @@ _MARKER_ANTIOX = "[ECVN:Antiox]"
 _MARKER_MSM_AMINO = "[ECVN:MSM-Amino]"
 _MARKER_NMN = "[ECVN:NMN]"
 _MARKER_PREBIOTIC = "[ECVN:Prebiotic]"
+_MARKER_RELAX_CBD = "[ECVN:Relax-CBD]"
+_MARKER_PROTAIN = "[ECVN:Protain]"
+_MARKER_BOOSTER = "[ECVN:Booster]"
+_MARKER_KAMIDE_MILK = "[ECVN:Kamide-Milk]"
 
 _JOINT_JA = (
     " [ECVN:Joint] 補助療法: For Joint（高容量MSM + グルコサミン/コンドロイチン前駆体配合、"
@@ -259,6 +357,59 @@ _PREBIOTIC_EN = (
     "obstruction."
 )
 
+_RELAX_CBD_JA = (
+    " [ECVN:Relax-CBD] 補助療法: Canine Vet Relax & CBD（フルスペクトラムCBD、"
+    "Equine & Canine Vet Nutrition）を慢性疼痛・不安・難治性てんかん・終末期緩和ケアとして"
+    "併用可能。内因性カンナビノイド系を介し疼痛知覚/不安/発作閾値を調節。"
+    "※肝代謝（CYP450）のため肝機能障害時は慎重。CYP450阻害薬併用薬の血中濃度に注意。"
+)
+_RELAX_CBD_EN = (
+    " [ECVN:Relax-CBD] Adjunct: Canine Vet Relax & CBD (full-spectrum CBD; Equine & Canine Vet "
+    "Nutrition) — optional supportive therapy for chronic pain, anxiety, refractory epilepsy, "
+    "and end-of-life palliative care via endocannabinoid modulation. "
+    "Note: hepatic metabolism (CYP450) — use cautiously with hepatic dysfunction and monitor "
+    "concurrent CYP450-metabolized drugs."
+)
+
+_PROTAIN_JA = (
+    " [ECVN:Protain] 補助療法: Canine Vet Protain（高品質タンパク質+コラーゲン前駆体、"
+    "Equine & Canine Vet Nutrition）をがん悪液質・術後筋肉維持・減量中の除脂肪体重維持として"
+    "併用可能。必須アミノ酸とヒドロキシプロリンが結合組織と筋肉の同化をサポート。"
+    "※重度肝/腎不全では蛋白負荷に留意。"
+)
+_PROTAIN_EN = (
+    " [ECVN:Protain] Adjunct: Canine Vet Protain (high-quality protein + collagen precursors; "
+    "Equine & Canine Vet Nutrition) — optional supportive therapy for cancer cachexia, "
+    "post-surgical muscle preservation, and lean-mass retention during weight loss. "
+    "Note: caution with severe hepatic or renal failure (protein load)."
+)
+
+_BOOSTER_JA = (
+    " [ECVN:Booster] 補助療法: Canine Vet Booster & Relax（アダプトゲン+Bビタミン複合体、"
+    "Equine & Canine Vet Nutrition）をウイルス感染後回復・甲状腺/副腎疾患のエネルギー不足・"
+    "高齢期慢性疲労の活力サポートとして併用可能。"
+)
+_BOOSTER_EN = (
+    " [ECVN:Booster] Adjunct: Canine Vet Booster & Relax (adaptogens + B-complex; Equine & Canine "
+    "Vet Nutrition) — optional supportive therapy for post-viral convalescence, energy support in "
+    "thyroid/adrenal endocrinopathy, and senior chronic fatigue."
+)
+
+_KAMIDE_MILK_JA = (
+    " [ECVN:Kamide-Milk] 補助療法: カミデミルク（消化吸収しやすい流動性栄養、"
+    "Equine & Canine Vet Nutrition）を食欲不振・クリティカルケア給餌・経管栄養として併用可能。"
+    "猫肝リピドーシスの熱量早期投与、ウサギGI stasisのシリンジ給餌、膵炎（低脂肪）、"
+    "巨大食道の液体給餌に有用。※完全腸閉塞では禁忌、重症膵炎は低脂肪配合を使用。"
+)
+_KAMIDE_MILK_EN = (
+    " [ECVN:Kamide-Milk] Adjunct: Kamide Milk (highly digestible liquid nutrition; Equine & Canine "
+    "Vet Nutrition) — optional supportive therapy for anorexia, critical-care feeding, and enteral/ "
+    "tube feeding. Useful for early caloric intake in feline hepatic lipidosis, syringe feeding in "
+    "rabbit GI stasis, pancreatitis (low-fat), and megaesophagus (liquid swallows easier). "
+    "Contraindicated in complete intestinal obstruction; use reduced-fat version in severe "
+    "pancreatitis."
+)
+
 
 # ---------------------------------------------------------------------------
 # Matching helpers
@@ -328,6 +479,18 @@ def apply_sponsor_adjuncts_dict(disease: Dict[str, Any], species: str) -> Dict[s
     if sp in _PREBIOTIC_SPECIES and _PREBIOTIC_PATTERNS.search(text):
         disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _PREBIOTIC_JA, _MARKER_PREBIOTIC)
         disease["treatment"] = _append_once(disease.get("treatment"), _PREBIOTIC_EN, _MARKER_PREBIOTIC)
+    if sp in _RELAX_CBD_SPECIES and _RELAX_CBD_PATTERNS.search(text):
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _RELAX_CBD_JA, _MARKER_RELAX_CBD)
+        disease["treatment"] = _append_once(disease.get("treatment"), _RELAX_CBD_EN, _MARKER_RELAX_CBD)
+    if sp in _PROTAIN_SPECIES and _PROTAIN_PATTERNS.search(text):
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _PROTAIN_JA, _MARKER_PROTAIN)
+        disease["treatment"] = _append_once(disease.get("treatment"), _PROTAIN_EN, _MARKER_PROTAIN)
+    if sp in _BOOSTER_SPECIES and _BOOSTER_PATTERNS.search(text):
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _BOOSTER_JA, _MARKER_BOOSTER)
+        disease["treatment"] = _append_once(disease.get("treatment"), _BOOSTER_EN, _MARKER_BOOSTER)
+    if sp in _KAMIDE_MILK_SPECIES and _KAMIDE_MILK_PATTERNS.search(text):
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _KAMIDE_MILK_JA, _MARKER_KAMIDE_MILK)
+        disease["treatment"] = _append_once(disease.get("treatment"), _KAMIDE_MILK_EN, _MARKER_KAMIDE_MILK)
     return disease
 
 
@@ -369,3 +532,19 @@ def apply_sponsor_adjuncts_obj(disease_obj: Any) -> None:
         _set("treatment_protocol", _PREBIOTIC_JA, _MARKER_PREBIOTIC)
         if getattr(disease_obj, "general_management", ""):
             _set("general_management", _PREBIOTIC_JA, _MARKER_PREBIOTIC)
+    if _RELAX_CBD_PATTERNS.search(text):
+        _set("treatment_protocol", _RELAX_CBD_JA, _MARKER_RELAX_CBD)
+        if getattr(disease_obj, "general_management", ""):
+            _set("general_management", _RELAX_CBD_JA, _MARKER_RELAX_CBD)
+    if _PROTAIN_PATTERNS.search(text):
+        _set("treatment_protocol", _PROTAIN_JA, _MARKER_PROTAIN)
+        if getattr(disease_obj, "general_management", ""):
+            _set("general_management", _PROTAIN_JA, _MARKER_PROTAIN)
+    if _BOOSTER_PATTERNS.search(text):
+        _set("treatment_protocol", _BOOSTER_JA, _MARKER_BOOSTER)
+        if getattr(disease_obj, "general_management", ""):
+            _set("general_management", _BOOSTER_JA, _MARKER_BOOSTER)
+    if _KAMIDE_MILK_PATTERNS.search(text):
+        _set("treatment_protocol", _KAMIDE_MILK_JA, _MARKER_KAMIDE_MILK)
+        if getattr(disease_obj, "general_management", ""):
+            _set("general_management", _KAMIDE_MILK_JA, _MARKER_KAMIDE_MILK)
