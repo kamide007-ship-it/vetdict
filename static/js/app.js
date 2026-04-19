@@ -2179,16 +2179,19 @@ function renderAzNav(){
         const isActive=diseaseFilter===c;
         return`<button class="disease-cat-card${isActive?" active":""}" data-cat="${escapeHtml(c)}" aria-label="${escapeHtml(lbl)}"><span class="disease-cat-label">${escapeHtml(lbl)}</span><span class="disease-cat-count">${cnt}</span></button>`;
       }).join("")+`</div>`;
-      const nextMode=cur.next;
-      catGrid.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
-      catGrid.addEventListener("click",e=>{
-        const btn=e.target.closest(".disease-cat-card[data-cat]");
-        if(!btn)return;
-        const cat=btn.dataset.cat;
-        if(diseaseFilter===cat){diseaseFilter='';btn.classList.remove("active");}
-        else{catGrid.querySelectorAll(".disease-cat-card").forEach(b=>b.classList.remove("active"));btn.classList.add("active");diseaseFilter=cat;}
-        diseaseDisplayLimit=100;renderDiseaseDb();
-      });
+      const toggleBtn=catGrid.querySelector(".az-mode-toggle");
+      if(toggleBtn)toggleBtn.addEventListener("click",function(){diseaseNavMode=cur.next;diseaseFilter='';renderAzNav();renderDiseaseDb();});
+      if(!catGrid.dataset.handlersAttached){
+        catGrid.dataset.handlersAttached="1";
+        catGrid.addEventListener("click",e=>{
+          const btn=e.target.closest(".disease-cat-card[data-cat]");
+          if(!btn)return;
+          const cat=btn.dataset.cat;
+          if(diseaseFilter===cat){diseaseFilter='';btn.classList.remove("active");}
+          else{catGrid.querySelectorAll(".disease-cat-card").forEach(b=>b.classList.remove("active"));btn.classList.add("active");diseaseFilter=cat;}
+          diseaseDisplayLimit=100;renderDiseaseDb();
+        });
+      }
     }
   }else{
     azNav.style.display="";
@@ -2196,9 +2199,12 @@ function renderAzNav(){
     const isAz=diseaseNavMode==="az";
     const letters=isAz?"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""):"あ か さ た な は ま や ら わ".split(" ");
     azNav.innerHTML=`<button class="az-mode-toggle" aria-label="Switch sort mode">${cur.switchLabel}</button><button class="active" data-letter="" aria-label="Show all">ALL</button>`+letters.map(l=>`<button data-letter="${l}" aria-label="Filter by ${l}">${l}</button>`).join("");
-    const nextMode=cur.next;
-    azNav.querySelector(".az-mode-toggle").addEventListener("click",function(){diseaseNavMode=nextMode;diseaseFilter='';renderAzNav();renderDiseaseDb();});
-    azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
+    const toggleBtn=azNav.querySelector(".az-mode-toggle");
+    if(toggleBtn)toggleBtn.addEventListener("click",function(){diseaseNavMode=cur.next;diseaseFilter='';renderAzNav();renderDiseaseDb();});
+    if(!azNav.dataset.handlersAttached){
+      azNav.dataset.handlersAttached="1";
+      azNav.addEventListener("click",e=>{const btn=e.target.closest("button[data-letter]");if(btn)filterDiseaseDb(btn.dataset.letter);});
+    }
   }
 }
 
@@ -2296,8 +2302,8 @@ function renderDiseaseDb(){
         <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
         <dt>${t("dtTreatment")}</dt><dd>${escapeHtml(treatment)}</dd>
         <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
-        ${d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:""}
-        ${d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:""}
+        ${(d.symptoms_display&&d.symptoms_display.length)?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(d.symptoms_display.map(s=>currentLang==="ja"?(s.name_ja||s.id):(s.name_en||s.id)).join("、"))}</dd>`:(d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:"")}
+        ${(d.recommended_tests_display&&d.recommended_tests_display.length)?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests_display.map(x=>currentLang==="ja"?(x.name_ja||x.id):(x.name_en||x.id)).join("、"))}</dd>`:(d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:"")}
         ${rehab?`<dt>リハビリテーション/Rehabilitation</dt><dd><pre style="white-space:pre-wrap;font-family:inherit;margin:0">${escapeHtml(rehab)}</pre></dd>`:""}
         ${nutrition?`<dt>栄養管理/Nutrition Management</dt><dd><pre style="white-space:pre-wrap;font-family:inherit;margin:0">${escapeHtml(nutrition)}</pre></dd>`:""}
         ${recoveryWeeks?`<dt>回復期間/Recovery Timeline</dt><dd>${recoveryWeeks}週間 / ${recoveryWeeks} weeks</dd>`:""}

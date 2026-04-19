@@ -1328,7 +1328,7 @@ DISEASES: List[Dict[str, Any]] = [
         "treatment": "Treatment should be tailored to the specific condition and includes appropriate medical or surgical intervention, supportive care, pain management, and regular monitoring of treatment response.",
         "treatment_ja": "鳥におけるヨウ素欠乏症の治療: ルゴール液（ヨウ素補充）の飲水への添加（1滴/250ml、2週間）が第一選択。重症例では経口ヨウ化ナトリウムカリウム。食事改善（ペレット食への移行、ヨウ素含有食品の追加）。甲状腺腫による呼吸困難時は保温・酸素補給。長期的にはバランスの取れた食事管理で再発を予防。",
         "prevention": "Prevention includes providing a balanced, species-appropriate diet with adequate vitamins and minerals, appropriate UVB lighting where needed, and regular nutritional assessment.",
-        "prevention_ja": "Prevention includes appropriate management, regular veterinary examinations, proper nutrition, controlled exercise, and maintaining a safe environment.",
+        "prevention_ja": "適切な飼育管理、定期的な獣医師による健康診断、適正な栄養、ストレスの最小化、安全で清潔な飼育環境の維持により予防可能である。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "Prognosis depends on severity, timeliness of diagnosis, and response to treatment. Early detection and appropriate intervention generally improve outcomes.",
         "onset_pattern": {"acute", "subacute"},

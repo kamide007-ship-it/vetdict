@@ -1119,7 +1119,7 @@ DISEASES: List[Dict[str, Any]] = [
         "treatment": "Calcium gluconate 50-100 mg/kg SC/IM slowly. Oral calcium supplement. UVB lighting. Dietary correction. Vitamin D3 supplementation. Vitamin C. Most common in pregnant/lactating sows.",
         "treatment_ja": "モルモットにおける低カルシウム血症の治療: 急性期はグルコン酸カルシウムの緩徐静注（50-100mg/kg）で心電図モニタリング下に投与。経口カルシウム補充（炭酸カルシウム等）とビタミンD3の併用。授乳中の雌では離乳または人工哺育への切替を検討。食事改善（カルシウム含有量の適正化、アルファルファ干草の追加）。定期的な血中カルシウム濃度のモニタリング。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "Prevention includes appropriate management, regular veterinary examinations, proper nutrition, controlled exercise, and maintaining a safe environment.",
+        "prevention_ja": "適切な飼育管理、定期的な獣医師による健康診断、適正な栄養、ストレスの最小化、安全で清潔な飼育環境の維持により予防可能である。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "Prognosis depends on severity, timeliness of diagnosis, and response to treatment. Early detection and appropriate intervention generally improve outcomes.",
         "onset_pattern": {"acute", "subacute"},

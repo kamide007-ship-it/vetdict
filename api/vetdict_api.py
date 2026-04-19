@@ -1522,7 +1522,10 @@ def api_search_diseases():
     query = request.args.get('q', '').strip()
     species_param = request.args.get('species', '').strip()
     category_param = request.args.get('category', '').strip()
-    limit = min(int(request.args.get('limit', '20')), 100)  # Max 100 results
+    try:
+        limit = max(1, min(int(request.args.get('limit', '20')), 100))
+    except (ValueError, TypeError):
+        limit = 20
 
     if len(query) < 2:
         return {'error': 'Query must be at least 2 characters', 'diseases': []}, 400
