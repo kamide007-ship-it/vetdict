@@ -1,6 +1,6 @@
 """Sponsor product adjunct annotations for disease treatment fields.
 
-Equine & Canine Vet Nutrition (https://www.caninevet.jp/) provides two
+Equine & Canine Vet Nutrition (https://www.caninevet.jp/) provides three
 supplement products currently referenced as adjunct therapy across
 applicable diseases in the VetDict database:
 
@@ -14,7 +14,14 @@ applicable diseases in the VetDict database:
   kidney disease, hepatic disease, atopic dermatitis, immune-mediated
   disease, and cognitive dysfunction syndrome in mammals and birds.
 
-Both products are labeled primarily for dogs and horses; adjunct
+- **MSM + Amino Complete** (high-dose MSM + essential amino acid blend):
+  Applied to conditions requiring broad tissue/muscle repair and
+  convalescent nutrition: post-surgical recovery, trauma, IVDD/spinal
+  disease, cachexia, senior sarcopenia, cancer supportive care, chronic
+  wounds, and severe infections. Complements For Joint where muscle
+  wasting coexists.
+
+All three products are labeled primarily for dogs and horses; adjunct
 mentions in other species indicate optional supportive use based on the
 ingredient profile. The mentions are appended to existing treatment
 text and never replace curated clinical content.
@@ -45,6 +52,25 @@ _ANTIOX_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
+# MSM + Amino Complete: tissue repair, muscle maintenance, convalescence.
+# Broader than For Joint — includes trauma, post-surgical recovery, neurologic
+# (IVDD/spinal) and cachexia/sarcopenia. Deliberately excludes pure infectious
+# disease unless accompanied by muscle loss or prolonged convalescence.
+_MSM_AMINO_PATTERNS = re.compile(
+    r"osteoarthrit|arthrit|\bjoint\b|hip dyspl|elbow dyspl|patellar|patella|"
+    r"cruciate|\bOCD\b|osteochondr|spondylos|\bIVDD\b|intervertebral disc|"
+    r"disc disease|spinal cord|degenerative myelop|\bDM\b|wobbler|"
+    r"meniscal|meniscus|tendinit|\btendon\b|ligament|desmit|myopath|"
+    r"myositis|rhabdomyol|muscle\s+(wasting|atroph)|sarcopen|cachex|"
+    r"fracture|\btrauma\w*|wound healing|chronic wound|decubit|"
+    r"malnutrit|debilit|convalescen|post.?surg|"
+    r"関節炎|関節|股関節|肘関節|膝蓋骨|十字靱帯|十字靭帯|離断性骨軟骨症|"
+    r"脊椎症|椎間板|脊髄|変性性脊髄症|半月板|腱炎|腱|靭帯|筋炎|"
+    r"筋萎縮|筋肉減少|悪液質|骨折|外傷|創傷|褥瘡|栄養失調|衰弱|"
+    r"回復期|術後",
+    re.IGNORECASE,
+)
+
 # Species for which each product is indicated.
 # Joint = mammals (MSM safety profile).
 # Antioxidant = mammals + birds (broad antioxidant safety).
@@ -59,33 +85,57 @@ _ANTIOX_SPECIES = frozenset({
     "parrot", "exotic_other",
 })
 
+# MSM + Amino Complete: mammals + birds (amino acids broadly safe).
+_MSM_AMINO_SPECIES = frozenset({
+    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
+    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
+    "parrot", "exotic_other",
+})
+
 
 # ---------------------------------------------------------------------------
 # Adjunct text
 # ---------------------------------------------------------------------------
 
-_MARKER = "[ECVN Adjunct]"  # Idempotency marker; prevents double-injection.
+# Product-specific idempotency markers prevent double-injection on re-import
+# while still allowing multiple different products to co-exist on one disease.
+_MARKER_JOINT = "[ECVN:Joint]"
+_MARKER_ANTIOX = "[ECVN:Antiox]"
+_MARKER_MSM_AMINO = "[ECVN:MSM-Amino]"
 
 _JOINT_JA = (
-    " [ECVN Adjunct] 補助療法: For Joint（高容量MSM + グルコサミン/コンドロイチン前駆体配合、"
+    " [ECVN:Joint] 補助療法: For Joint（高容量MSM + グルコサミン/コンドロイチン前駆体配合、"
     "Equine & Canine Vet Nutrition）を関節軟骨保護・抗炎症サポートとして併用可能。"
     "長期管理において製品ラベルの体重別用量を参照。"
 )
 _JOINT_EN = (
-    " [ECVN Adjunct] Adjunct: For Joint (high-dose MSM + glucosamine/chondroitin precursors; "
+    " [ECVN:Joint] Adjunct: For Joint (high-dose MSM + glucosamine/chondroitin precursors; "
     "Equine & Canine Vet Nutrition) — optional supportive therapy for articular cartilage "
     "protection and anti-inflammatory support. Refer to product label for body-weight dosing."
 )
 
 _ANTIOX_JA = (
-    " [ECVN Adjunct] 補助療法: For Antioxidant（アスタキサンチン + メロン由来SOD + VitE + "
+    " [ECVN:Antiox] 補助療法: For Antioxidant（アスタキサンチン + メロン由来SOD + VitE + "
     "システイン配合、Equine & Canine Vet Nutrition）を抗酸化ストレス・免疫サポートとして併用可能。"
     "酸化ストレスが病態に関与する慢性疾患の補助栄養介入として検討。"
 )
 _ANTIOX_EN = (
-    " [ECVN Adjunct] Adjunct: For Antioxidant (astaxanthin + melon SOD + vitamin E + cysteine; "
+    " [ECVN:Antiox] Adjunct: For Antioxidant (astaxanthin + melon SOD + vitamin E + cysteine; "
     "Equine & Canine Vet Nutrition) — optional supportive therapy for oxidative stress and immune "
     "function in chronic conditions where oxidative injury contributes to pathogenesis."
+)
+
+_MSM_AMINO_JA = (
+    " [ECVN:MSM-Amino] 補助療法: MSM＋アミノコンプリート（高容量MSM + 必須アミノ酸複合体、"
+    "Equine & Canine Vet Nutrition）を組織修復・筋肉維持・回復期栄養として併用可能。"
+    "術後回復・外傷・椎間板疾患・悪液質・サルコペニアなど、広範な組織修復と"
+    "アミノ酸補給が有用な病態で検討。For Jointとの併用で関節＋筋肉の相乗効果。"
+)
+_MSM_AMINO_EN = (
+    " [ECVN:MSM-Amino] Adjunct: MSM + Amino Complete (high-dose MSM + essential amino acid blend; "
+    "Equine & Canine Vet Nutrition) — optional supportive therapy for broad tissue repair, muscle "
+    "maintenance, and convalescent nutrition. Indicated for post-surgical recovery, trauma, IVDD, "
+    "cachexia, and sarcopenia. Synergistic with For Joint when muscle wasting coexists."
 )
 
 
@@ -105,10 +155,13 @@ def _disease_text(disease: Dict[str, Any]) -> str:
     return " ".join(parts)
 
 
-def _append_once(current: Any, suffix: str) -> str:
-    """Append suffix to current string if the adjunct marker is not already present."""
+def _append_once(current: Any, suffix: str, marker: str) -> str:
+    """Append suffix to current string if its product marker is not already present.
+
+    Each product uses a distinct marker so multiple adjuncts can coexist.
+    """
     base = current if isinstance(current, str) else ""
-    if _MARKER in base:
+    if marker and marker in base:
         return base
     return (base.rstrip() + suffix) if base else suffix.lstrip()
 
@@ -140,11 +193,14 @@ def apply_sponsor_adjuncts_dict(disease: Dict[str, Any], species: str) -> Dict[s
     sp = _normalize_species(species)
     text = _disease_text(disease)
     if sp in _JOINT_SPECIES and _JOINT_PATTERNS.search(text):
-        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _JOINT_JA)
-        disease["treatment"] = _append_once(disease.get("treatment"), _JOINT_EN)
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _JOINT_JA, _MARKER_JOINT)
+        disease["treatment"] = _append_once(disease.get("treatment"), _JOINT_EN, _MARKER_JOINT)
     if sp in _ANTIOX_SPECIES and _ANTIOX_PATTERNS.search(text):
-        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _ANTIOX_JA)
-        disease["treatment"] = _append_once(disease.get("treatment"), _ANTIOX_EN)
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _ANTIOX_JA, _MARKER_ANTIOX)
+        disease["treatment"] = _append_once(disease.get("treatment"), _ANTIOX_EN, _MARKER_ANTIOX)
+    if sp in _MSM_AMINO_SPECIES and _MSM_AMINO_PATTERNS.search(text):
+        disease["treatment_ja"] = _append_once(disease.get("treatment_ja"), _MSM_AMINO_JA, _MARKER_MSM_AMINO)
+        disease["treatment"] = _append_once(disease.get("treatment"), _MSM_AMINO_EN, _MARKER_MSM_AMINO)
     return disease
 
 
@@ -160,17 +216,21 @@ def apply_sponsor_adjuncts_obj(disease_obj: Any) -> None:
     desc_ja = getattr(disease_obj, "description_ja", "") or ""
     text = f"{name_en} {name_ja} {desc_ja}"
 
-    def _set(attr: str, suffix: str) -> None:
+    def _set(attr: str, suffix: str, marker: str) -> None:
         cur = getattr(disease_obj, attr, "") or ""
-        if _MARKER in cur:
+        if marker in cur:
             return
         setattr(disease_obj, attr, (cur.rstrip() + suffix) if cur else suffix.lstrip())
 
     if _JOINT_PATTERNS.search(text):
-        _set("treatment_protocol", _JOINT_JA)
+        _set("treatment_protocol", _JOINT_JA, _MARKER_JOINT)
         if getattr(disease_obj, "general_management", ""):
-            _set("general_management", _JOINT_JA)
+            _set("general_management", _JOINT_JA, _MARKER_JOINT)
     if _ANTIOX_PATTERNS.search(text):
-        _set("treatment_protocol", _ANTIOX_JA)
+        _set("treatment_protocol", _ANTIOX_JA, _MARKER_ANTIOX)
         if getattr(disease_obj, "general_management", ""):
-            _set("general_management", _ANTIOX_JA)
+            _set("general_management", _ANTIOX_JA, _MARKER_ANTIOX)
+    if _MSM_AMINO_PATTERNS.search(text):
+        _set("treatment_protocol", _MSM_AMINO_JA, _MARKER_MSM_AMINO)
+        if getattr(disease_obj, "general_management", ""):
+            _set("general_management", _MSM_AMINO_JA, _MARKER_MSM_AMINO)
