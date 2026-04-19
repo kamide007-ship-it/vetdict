@@ -806,9 +806,9 @@ DISEASE_DATABASE: list[Disease] = [
             (2, "血液検査(CBC)", "Blood Work (CBC)"),
         ],
         merck_url=_MERCK + "internal+parasites+horses",
-        treatment_protocol="疝痛管理：経鼻胃管挿入による胃減圧、輸液療法(乳酸リンゲル液または高張食塩水)。鎮痛薬：フルニキシンメグルミン 1.1 mg/kg IV、キシラジン 0.3-0.5 mg/kg IV、ブトルファノール 0.02-0.04 mg/kg IV。結腸便秘に流動パラフィンを経鼻胃管で投与。消化管運動促進薬(リドカイン 1.3 mg/kg IVボーラス後 0.05 mg/kg/min CRI)。絞扼性病変・大結腸捻転・治療抵抗性便秘には外科的探索(開腹術)。術後：輸液、抗菌薬、段階的再給餌。胃潰瘍管理：オメプラゾール 4 mg/kg PO SID。",
-        clinical_signs_detail="腹痛徴候(パーリング、フランク注視、転がり、起臥反復)、食欲不振、排便減少・停止、下痢、腹部膨満、腸蠕動音異常(減弱/亢進/消失)、脱水、頻脈",
-        risk_factors="急な飼料変更、砂地での採食、歯科疾患、寄生虫感染、ストレス(輸送・環境変化)、運動不足、脱水、NSAIDs長期投与(胃潰瘍リスク)",
+        treatment_protocol="【診断】糞便虫卵計測(FEC、McMasterまたはMini-FLOTAC法)で250-500 EPG以上をhigh shedder、200未満をlow shedderと区分(AAEP Internal Parasite Control Guidelines 2019)。小円虫幼虫型(cyathostominosis)疑いは血清フィブリノーゲン・アルブミン・腹部エコーで評価。条虫はELISA血清抗体または糞便PCR(虫卵検出感度低)。【選択的駆虫(AAEP推奨)】high shedder馬のみ年2-3回駆虫し、低耐性集団を温存。【第一選択薬】モキシデクチン 0.4 mg/kg PO(円虫成虫+幼虫型に有効、24時間以内に虫体排出、作用期間12-16週)、またはイベルメクチン 0.2 mg/kg PO(円虫成虫、8-10週)。【条虫対策】プラジカンテル 1 mg/kg PO(Anoplocephala perfoliataに有効)をイベルメクチン/モキシデクチンと合剤で年1-2回(秋)。【幼虫型小円虫症(larval cyathostominosis)】モキシデクチン 0.4 mg/kg PO(粘膜内嚢胞期幼虫に唯一有効)、またはフェンベンダゾール 10 mg/kg PO SID × 5日間(power pac)。重症例には低用量プレドニゾロン 0.5-1 mg/kg PO SID × 5-7日漸減で過剰炎症反応を抑制(Peregrine et al. EVJ 2014)。【支持療法】蛋白漏出性腸症にはIV輸液・血漿輸血、貧血にはダルベポエチン等を適宜。【駆虫抵抗性モニタリング】駆虫14日後のFEC reduction testで90%未満なら抵抗性疑い(Nielsen et al. Vet Parasitol 2022)。【飼養管理】糞便除去 週2回、ローテーション放牧、過密放牧回避、新入馬の検疫と駆虫。参考: Reed/Bayly/Sellon Equine Internal Medicine 4th ed 2018, AAEP Parasite Control Guidelines 2019。",
+        clinical_signs_detail="慢性的な体重減少(給餌量にも関わらず痩せる)、被毛粗剛・艶消失、軽度-中等度下痢(cyathostominosisでは水様)、発育遅延(若馬)、軽度反復性疝痛、腹部膨満(重度寄生例)、低蛋白血症による下腹部浮腫、幼虫型小円虫症では急性重度下痢・発熱・急激な体重減少・低アルブミン血症。条虫感染は回盲部閉塞・重積の素因",
+        risk_factors="若齢馬(<3歳)・高齢馬(>20歳)の感受性、高密度放牧、不適切な糞便管理、頻回駆虫による薬剤耐性獲得(イベルメクチン/モキシデクチン耐性円虫が米欧で増加)、ローテーション放牧未実施、新入馬の検疫不足、湿潤気候(虫卵生存延長)、condition score低下、既存免疫低下",
     ),
     # ================================================================
     # 呼吸器 (Respiratory) — 4疾患
