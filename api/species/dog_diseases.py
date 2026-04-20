@@ -243,7 +243,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "犬パルボウイルス2型（CPV-2a, 2b, 2c亜型）。糞口経路で感染し、環境中で数ヶ月〜1年以上生存可能。"
                      "ワクチン未接種、母体移行抗体の低下期、免疫抑制状態がリスク因子。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "No specific antiviral therapy; supportive care is the cornerstone. (1) Aggressive IV fluid therapy (lactated Ringer's, crystalloids + colloids) to correct dehydration and electrolyte imbalances. (2) Anti-emetics: maropitant 1 mg/kg IV q24h. (3) Broad-spectrum antibiotics (ampicillin 22 mg/kg IV q8h + enrofloxacin 5-10 mg/kg IV q24h) for secondary bacterial infection prevention. (4) Nutritional support: early enteral nutrition recommended (within 24-48h). FFP transfusion and anti-endotoxin antibodies considered for severe cases. Monitor WBC, glucose, and electrolytes q12-24h.",
         "treatment_ja": "特異的抗ウイルス薬はなく、支持療法が主体。(1)積極的な輸液療法（乳酸リンゲル液、晶質液＋膠質液）、"
                         "(2)制吐薬（マロピタント0.1mg/kg IV q24h）、(3)広域抗菌薬（アンピシリン＋エンロフロキサシン等）で二次感染予防、"
                         "(4)栄養サポート（早期経腸栄養が推奨）。重症例ではFFP輸血や抗エンドトキシン抗体も検討。",
@@ -271,7 +271,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "犬ジステンパーウイルス（CDV）。飛沫感染・直接接触で伝播。"
                      "ワクチン未接種犬、免疫不全犬、3〜6ヶ月齢の子犬が高リスク。フェレット等の野生動物も感受性あり。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "No specific antiviral therapy. Supportive care is the mainstay: (1) Broad-spectrum antibiotics for secondary bacterial infection control (ampicillin 22 mg/kg IV q8h + enrofloxacin 5-10 mg/kg IV q24h). (2) IV fluid therapy and nutritional management. (3) Anticonvulsants for neurological signs: diazepam 0.5-1 mg/kg IV for acute seizures, phenobarbital 2-4 mg/kg PO q12h for maintenance. Interferon therapy has been reported but evidence is limited. Isolate affected dogs. Disinfect environment (CDV is fragile but highly contagious via aerosol).",
         "treatment_ja": "特異的治療薬なし。支持療法が主体：(1)広域抗菌薬で二次細菌感染の制御、(2)輸液・栄養管理、"
                         "(3)抗痙攣薬（ジアゼパム、フェノバルビタール）で神経症状の管理。"
                         "インターフェロン投与の報告もあるが、エビデンスは限定的。",
@@ -300,7 +300,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "Bordetella bronchiseptica（最主要）、犬パラインフルエンザウイルス、犬アデノウイルス2型、"
                      "犬呼吸器コロナウイルス、マイコプラズマ等の混合感染。多頭飼育、ストレス、換気不良がリスク因子。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Mild cases: self-limiting (1-3 weeks), antitussive therapy (butorphanol 0.5-1 mg/kg PO q6-12h or hydrocodone 0.22 mg/kg PO q8-12h), environmental management (humidification, rest, avoid collar pressure — use harness). Moderate-severe cases or secondary bacterial infection: doxycycline 5 mg/kg PO q12h for 10-14 days, or azithromycin 5-10 mg/kg PO q24h for 5 days. Nebulization with sterile saline ± gentamicin for lower airway involvement. If bronchopneumonia develops: hospitalize for IV antibiotics, oxygen therapy, and monitoring.",
         "treatment_ja": "軽症例：自然回復（1〜3週間）、鎮咳薬（ブトルファノール）、環境整備（加湿・安静）。"
                         "重症例・二次感染：ドキシサイクリン(5mg/kg BID 10〜14日)またはアジスロマイシン。"
                         "ネブライザー療法も有効。気管支肺炎への進展時は入院管理。",
@@ -328,7 +328,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "明確な単一原因は不明。リスク因子：大型深胸種、一日一食の大量給餌、食後直後の運動、"
                      "早食い、エアロファジア（空気嚥下）、加齢、GDVの家族歴、ストレス・不安気質。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "CRITICAL EMERGENCY: (1) Shock resuscitation: aggressive IV crystalloid fluid therapy (60-90 mL/kg/hr), vasopressors if needed. (2) Gastric decompression: orogastric tube passage or percutaneous trocarization. (3) After stabilization: emergency exploratory laparotomy → gastric derotation + incisional gastropexy (prevents 80% recurrence), resection of necrotic gastric wall, splenectomy if splenic torsion present. (4) Post-operative: continuous ECG monitoring for reperfusion-induced ventricular arrhythmias (lidocaine 2 mg/kg IV bolus, then 40-80 μg/kg/min CRI), electrolyte correction (especially potassium), monitoring for DIC.",
         "treatment_ja": "【超緊急】(1)ショック治療：大量輸液（晶質液60-90mL/kg/hr）、(2)胃減圧（経口胃管または経皮的穿刺脱気）、"
                         "(3)安定化後に緊急開腹手術→胃の整復＋胃固定術（gastropexy）、壊死組織の切除、脾摘（必要時）。"
                         "(4)術後：心電図モニター（再灌流性心室性不整脈にリドカイン）、電解質補正。",
@@ -358,7 +358,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "高脂肪食・ゴミ漁り（最多）、副腎皮質機能亢進症、甲状腺機能低下症、高脂血症、"
                      "薬物（アザチオプリン、L-アスパラギナーゼ、臭化カリウム等）、膵管閉塞、外傷。"
                      "多くは特発性。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "(1) NPO initially → early enteral nutrition (recommended within 24-48 hours, start with small frequent low-fat meals). (2) Aggressive IV fluid therapy (lactated Ringer's, adjust rate based on dehydration). (3) Analgesia: maropitant 1 mg/kg IV q24h (anti-emetic + visceral pain relief), buprenorphine 0.01-0.02 mg/kg IV q6-8h, fentanyl CRI 2-5 μg/kg/hr for severe pain. (4) Anti-emetics: maropitant + ondansetron 0.1-0.5 mg/kg IV q8-12h for refractory cases. (5) Antibiotics only if infectious complications (avoid routine use). Chronic cases: ultra-low-fat diet (<10% fat DM) + pancreatic enzyme supplementation. Monitor cPLI/DGGR lipase, amylase, and electrolytes.",
         "treatment_ja": "(1)絶食→早期経腸栄養（24〜48時間以内に少量から開始が推奨）、"
                         "(2)積極的輸液療法、(3)鎮痛：マロピタント（制吐＋内臓痛緩和）、ブプレノルフィン、"
                         "フェンタニルCRI、(4)制吐薬：マロピタント＋オンダンセトロン（難治例）、"
@@ -387,7 +387,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "リンパ球性甲状腺炎（自己免疫性、最多）、特発性甲状腺萎縮、"
                      "稀に甲状腺腫瘍、医原性（放射性ヨード治療後、抗甲状腺薬）。遺伝的素因あり。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Levothyroxine (L-T4) 0.02 mg/kg PO q12h (lifelong therapy). Recheck T4 levels 4-8 weeks after initiation for dose adjustment (measure 4-6h post-pill). Activity improvement within 1-2 weeks; skin and coat improvement takes 4-6 months. Regular thyroid function monitoring every 6-12 months. Once stabilized, annual monitoring is sufficient.",
         "treatment_ja": "レボチロキシン（L-T4）0.02mg/kg BID経口投与（生涯投与）。"
                         "投与開始4〜8週後にT4値を再検査し用量調整。活動性改善は1〜2週間、"
                         "皮膚・被毛改善は4〜6ヶ月かかる。定期的な甲状腺機能モニタリング（6ヶ月〜1年毎）。",
@@ -431,7 +431,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "下垂体微小腺腫（PDH、最多）、副腎皮質腫瘍（腺腫・腺癌）、"
                      "医原性（長期ステロイド投与）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "[PDH (first-line)] Trilostane 1-3 mg/kg PO q12h (administer with food) → monitor at 10-14 days, 1 month, 3 months, then q3-6 months. BID dosing provides better clinical control than SID (Vaughan et al. JAVMA 2008). [Monitoring] (1) Clinical signs (PU/PD/polyphagia improvement), (2) Pre-pill cortisol (target 1.4-5.4 μg/dL = 40-150 nmol/L) — reported superior to ACTH stim test (Macfarlane Vet Rec 2016), (3) 3h post-pill cortisol optional, (4) ACTH stim test (traditional, post-ACTH target 1.5-5.4 μg/dL) — recommended only when clinically unwell, (5) Electrolytes (Na/K), liver enzymes (ALP, ALT), blood pressure. [Alternative] Mitotane (o,p'-DDD) — more side effects, now second-line. [AT (adrenal tumor)] Surgical adrenalectomy is curative when feasible. Pre-operative trilostane for cortisol suppression reduces perioperative risk. Metastatic/inoperable cases: trilostane or mitotane. [Iatrogenic] Gradual steroid taper (rapid withdrawal risks Addisonian crisis).",
         "treatment_ja": "【PDH（第一選択）】 トリロスタン 1-3 mg/kg PO q12h 開始（食後投与）→ "
                         "10-14日後・1ヶ月後・3ヶ月後・以降3-6ヶ月毎にモニタリング。"
                         "近年の用量推奨は1日2回投与（BID）が SID より臨床コントロールが良好（Vaughan et al. JAVMA 2008）。"
@@ -474,7 +474,19 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "免疫介在性副腎皮質炎（原発性、最多）、医原性（長期ステロイド投与の急な中止）、"
                      "肉芽腫性疾患（真菌症等）、副腎出血、転移性腫瘍。稀に下垂体性（二次性）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "ACUTE ADDISONIAN CRISIS: (1) Aggressive fluid resuscitation: 0.9% NaCl 40-80 mL/kg/hr IV (first 1-2 hours) → taper to maintenance. Correct Na gradually. "
+                     "(2) Glucocorticoids: dexamethasone sodium phosphate 0.1-0.5 mg/kg IV (does not interfere with cortisol assay — can administer before ACTH stim test) "
+                     "or hydrocortisone sodium succinate 0.5-1 mg/kg/hr CRI. "
+                     "(3) Hyperkalemia: saline IV usually sufficient; if K>7.5 mEq/L or ECG abnormalities: 10% calcium gluconate 0.5-1.5 mL/kg slow IV (cardioprotection) + "
+                     "regular insulin 0.25-0.5 IU/kg IV + 50% dextrose 1-2 g/IU insulin. "
+                     "(4) Hypoglycemia: 50% dextrose 0.5-1 mL/kg IV bolus, then 2.5-5% dextrose-supplemented fluids. "
+                     "(5) Confirm diagnosis with ACTH stimulation test. "
+                     "LONG-TERM MAINTENANCE: (1) Mineralocorticoid: DOCP (desoxycorticosterone pivalate) 1.5 mg/kg SC q25-30 days — "
+                     "low-dose protocol now preferred (Sieber-Ruckstuhl et al. JVIM 2019): median 1.1 mg/kg (range 0.7-1.8) after 2-3 months titration. "
+                     "Alternative: fludrocortisone 0.01-0.02 mg/kg PO q12-24h (oral, cheaper, but greater electrolyte fluctuation). "
+                     "(2) Glucocorticoid: prednisolone 0.05-0.1 mg/kg PO SID (physiologic replacement — avoid excess causing iatrogenic Cushing's). "
+                     "MONITORING: electrolytes at 10-14 days and 25 days post-DOCP, then q3-6 months when stable. Target Na/K ratio 27-32. "
+                     "STRESS DOSE: increase prednisolone 2-5× for surgery, travel, illness.",
         "treatment_ja": "【急性アジソンクリーゼ】 (1) 急速輸液: 0.9% 生理食塩水 40-80 mL/kg/hr IV "
                         "（最初の1-2時間）→ 維持量へ。Na補正は緩徐に。"
                         "(2) グルココルチコイド: デキサメタゾン Na リン酸 0.1-0.5 mg/kg IV "
@@ -522,7 +534,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "免疫介在性膵β細胞破壊（犬の1型DM、最多）、慢性膵炎による二次性、"
                      "発情後の黄体期プロゲステロン→GH過剰（未避妊雌犬）、"
                      "副腎皮質機能亢進症、長期ステロイド投与。肥満はリスク因子。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Lifelong insulin therapy: intermediate-acting insulin (NPH or Vetsulin/Caninsulin) 0.25-0.5 IU/kg SC q12h. Dose adjustment based on serial blood glucose curves (q8-12h sampling over 12-24h). Dietary management: high-fiber, low-fat diet, consistent feeding times and amounts. Intact females: ovariohysterectomy recommended (removes progesterone-mediated insulin resistance). DKA: hospitalization, regular insulin CRI (0.05-0.1 IU/kg/hr), aggressive IV fluid therapy, electrolyte correction (especially potassium supplementation). Monitor for cataracts (>75% incidence) — surgical lens extraction can restore vision.",
         "treatment_ja": "インスリン療法（生涯）：中間型インスリン（NPH、Vetsulin/Caninsulin）0.25〜0.5IU/kg BID SC。"
                         "血糖曲線で用量調整。食事管理：高繊維・低脂肪食、一定時間・一定量の給餌。"
                         "未避妊雌犬は避妊手術（プロゲステロンによるインスリン抵抗性解除）。"
@@ -551,7 +563,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "大腸菌（最多）、ブドウ球菌、プロテウス、クレブシエラ等の上行性感染。"
                      "リスク因子：雌犬、免疫抑制（糖尿病、クッシング、ステロイド投与）、尿石症、解剖学的異常。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Urine culture and sensitivity-guided antibiotic selection is ideal (cystocentesis for uncontaminated sample). Empiric therapy: amoxicillin-clavulanate 12.5-25 mg/kg PO q12h for 7-14 days (simple UTI) or 4-6 weeks (complicated UTI). Alternatives: trimethoprim-sulfa 15-30 mg/kg PO q12h, enrofloxacin 5-10 mg/kg PO q24h. Confirm clearance with urine culture 1 week post-treatment. Concurrent management of underlying disease is critical (diabetes, Cushing's, urolithiasis). Adequate hydration encouraged.",
         "treatment_ja": "尿培養＋感受性試験に基づく抗菌薬選択が理想。経験的治療：アモキシシリン/クラブラン酸"
                         "（12.5〜25mg/kg BID）7〜14日間。複雑性UTIは4〜6週間投与。"
                         "治療終了1週間後に尿培養で陰性確認。基礎疾患の同時管理が重要。",
@@ -580,7 +592,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "食事（高ミネラル食）、飲水量不足、尿路感染（ストラバイト形成促進）、"
                      "遺伝的素因（シスチン尿症等）、代謝異常。犬種素因あり。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Stone analysis is essential for treatment planning. Struvite: medical dissolution possible with dissolution diet (Hill's s/d or equivalent) + concurrent UTI treatment — stones dissolve in 2-4 weeks. Calcium oxalate: medical dissolution NOT possible → surgical removal (cystotomy). Urate: allopurinol 10-15 mg/kg PO q12h + low-purine diet. Cystine: 2-mercaptopropionylglycine (2-MPG) + alkalinization. Recurrence prevention: therapeutic diet + adequate water intake + regular urinalysis and imaging (radiograph/ultrasound q3-6 months).",
         "treatment_ja": "結石分析が治療方針決定に必須。"
                         "ストラバイト：溶解食（Hill's s/d等）＋尿路感染治療で内科的溶解可能。"
                         "シュウ酸カルシウム：内科的溶解不可→外科的摘出（膀胱切開術）。"
@@ -611,7 +623,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "尿路感染（ウレアーゼ産生菌）が最大の原因。"
                      "アルカリ尿、高ミネラル食、飲水量不足も寄与。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Medical dissolution is possible (a major advantage of struvite stones in dogs). (1) Treat UTI with culture-guided antibiotics (amoxicillin-clavulanate 12.5-25 mg/kg PO q12h is common empiric choice). (2) Dissolution diet (Hill's s/d, Royal Canin S/O, or equivalent) → dissolution begins in 2-4 weeks. (3) Monthly radiograph/ultrasound monitoring until stone dissolution confirmed. (4) Continue dissolution diet for 2-4 weeks after stone disappearance. Large stones or urethral obstruction: surgical removal (cystotomy). Urethral obstruction in males: retrograde urohydropulsion to push stones back into bladder before cystotomy.",
         "treatment_ja": "内科的溶解が可能（犬のストラバイト結石の大きな利点）。"
                         "(1)適切な抗菌薬で尿路感染を治療（培養感受性試験に基づく）、"
                         "(2)溶解食（Hill's s/d, Royal Canin S/O等）→2〜4週間で溶解開始、"
@@ -644,7 +656,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "高カルシウム食・高シュウ酸食（ほうれん草等）、代謝性アシドーシス、"
                      "副甲状腺機能亢進症、特発性高カルシウム尿症、遺伝的素因。"
                      "尿酸性化食の過剰使用も原因。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Medical dissolution NOT possible → surgical removal is standard treatment. (1) Cystotomy for stone removal. (2) Post-operative stone analysis for definitive diagnosis. (3) Recurrence prevention diet (Hill's u/d, Royal Canin U/C, or equivalent — moderate protein, low oxalate, low sodium). (4) Potassium citrate 75 mg/kg PO q12h for urine alkalinization (target pH 7.0-7.5). (5) Hydrochlorothiazide 2-4 mg/kg PO q12h to reduce urinary calcium excretion. (6) Radiograph/ultrasound monitoring q3-6 months for early recurrence detection.",
         "treatment_ja": "内科的溶解不可→外科的摘出が標準治療。"
                         "(1)膀胱切開術で結石摘出、(2)術後結石分析で確定診断、"
                         "(3)再発予防食（Hill's u/d, Royal Canin U/C等）、"
@@ -678,7 +690,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "ダルメシアン（SLC2A9変異、品種特異的）、門脈体循環シャント、"
                      "高プリン食（内臓肉等）。イングリッシュブルドッグ、"
                      "ロシアンブラックテリアでも報告あり。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Medical dissolution possible in some cases. (1) Low-purine diet (Hill's u/d or equivalent). (2) Allopurinol 10-15 mg/kg PO q12h — xanthine oxidase inhibitor to reduce uric acid production. (3) Urine alkalinization with potassium citrate (target pH 7.0-7.5). (4) Ensure adequate water intake. Portosystemic shunt dogs: shunt ligation is the definitive treatment. Large stones: surgical removal (cystotomy). Dalmatians have genetic predisposition (SLC2A9 mutation) and require lifelong management.",
         "treatment_ja": "内科的溶解が可能な場合あり。"
                         "(1)低プリン食（Hill's u/d等）、(2)アロプリノール（10〜15mg/kg BID）"
                         "→キサンチンオキシダーゼ阻害で尿酸産生抑制、"
@@ -713,7 +725,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "加齢性変化（最多）、慢性糸球体腎炎、腎アミロイドーシス、先天性腎異形成、"
                      "慢性腎盂腎炎、腎結石、NSAID等の腎毒性薬物、レプトスピラ症後遺症。"
                      "コッカースパニエル、シーズー、ブルテリアに遺伝的素因。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "[Goal] No curative therapy. Disease progression control and symptom management per IRIS Staging Guidelines 2023. [All stages] (1) Renal diet — recommended from Stage 2: low phosphorus (Stage 2: <0.3%, Stage 3-4: <0.2% DM), moderate protein restriction (high-quality protein), low sodium, omega-3 fatty acid supplementation (Hill's k/d, Royal Canin Renal, Purina NF). (2) Ensure adequate water intake — free access, multiple water stations, wet food. (3) Avoid nephrotoxic drugs — NSAIDs, aminoglycosides, contrast agents. [Proteinuria (UPC >0.5)] (1) Telmisartan 1 mg/kg PO q24h — IRIS 2023 first-line recommendation (ARB not affected by ACE escape, superior proteinuria reduction vs benazepril — Lourenço et al. JVIM 2020). (2) ACE inhibitor: benazepril 0.25-0.5 mg/kg PO q24h — can combine with telmisartan. [Hyperphosphatemia] Stage-specific targets (Stage 2: P <4.6, Stage 3: <5.0, Stage 4: <6.0 mg/dL). Phosphate binders: aluminum hydroxide 30-90 mg/kg/day with food. [Hypertension] SBP >160 mmHg: amlodipine 0.1-0.4 mg/kg PO q24h. [GI symptoms] Anti-emetics: maropitant 1 mg/kg PO/SC q24h. [Anorexia] Mirtazapine or capromorelin (Entyce) 3 mg/kg PO q24h (FDA-approved for dogs). [Renal anemia] Stage 3-4, HCT <25%: darbepoetin 0.45-1 μg/kg SC weekly + iron supplementation. [Dehydration] Home SC fluids: LRS 10-20 mL/kg q24-48h.",
         "treatment_ja": "【目標】根治療法なし。進行抑制と症状管理が目標。IRIS Staging Guidelines 2023 に準拠。"
                         "【全Stageで実施】 (1) 腎臓療法食 — Stage 2以降で推奨。"
                         "低リン（Stage 2: <0.3%、Stage 3-4: <0.2% DM）、"
@@ -771,7 +783,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "慢性肝炎（免疫介在性、銅蓄積性、特発性）、急性肝障害（薬物性、中毒性）、"
                      "門脈体循環シャント（先天性/後天性）、肝腫瘍、胆管疾患、感染症（レプトスピラ等）。"
                      "ベドリントンテリアの銅蓄積症は常染色体劣性遺伝。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Treatment based on underlying cause. Chronic hepatitis: immunosuppressive therapy (prednisolone 1-2 mg/kg PO q12h initially, taper ± azathioprine 2 mg/kg PO q24h), ursodeoxycholic acid (15 mg/kg/day PO for hepatoprotection/choleresis), SAMe (20 mg/kg PO q24h on empty stomach for hepatocyte protection). Copper storage disease: D-penicillamine 10-15 mg/kg PO q12h on empty stomach + low-copper diet. Hepatic encephalopathy: low-protein diet, lactulose (0.5 mL/kg PO q8-12h, titrate to soft stool) for ammonia reduction, metronidazole 7.5 mg/kg PO q12h. Ascites: furosemide 2-4 mg/kg PO q12h + spironolactone 1-2 mg/kg PO q12h, sodium restriction. Monitor liver enzymes, albumin, bile acids, coagulation times regularly.",
         "treatment_ja": "原因に応じた治療。慢性肝炎：免疫抑制療法（プレドニゾロン±アザチオプリン）、"
                         "ウルソデオキシコール酸（15mg/kg/日、肝保護・利胆）、SAMe（肝細胞保護）、"
                         "銅蓄積症にはD-ペニシラミン＋低銅食。"
@@ -804,7 +816,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "僧帽弁粘液腫様変性（MMVD/MVD、小型犬で最多）、拡張型心筋症（DCM、大型犬）、"
                      "心膜疾患、先天性心疾患（PDA、PS、SAS等）、心筋炎、フィラリア症。"
                      "キャバリア、チワワ、マルチーズ等にMMVD好発。ドーベルマン、ボクサーにDCM好発。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "ACVIM 2019 staging: Stage B2 (asymptomatic with cardiomegaly): pimobendan 0.25 mg/kg PO BID (EPIC trial — delays onset of CHF by ~15 months). "
+                     "Stage C (symptomatic CHF): furosemide 2-4 mg/kg PO BID-TID + pimobendan 0.25 mg/kg BID + ACE inhibitor (benazepril 0.5 mg/kg SID-BID or enalapril 0.5 mg/kg BID). Add spironolactone 1-2 mg/kg BID. "
+                     "Stage D (refractory): escalate diuretics (furosemide up to 4-6 mg/kg TID + hydrochlorothiazide 1-2 mg/kg BID), add hydralazine or amlodipine for afterload reduction. "
+                     "Acute pulmonary edema: oxygen supplementation + furosemide 2-4 mg/kg IV bolus (repeat q1-2h as needed) + pimobendan IV/PO. "
+                     "Atrial fibrillation: diltiazem 1.5-3.5 mg/kg PO TID ± digoxin 0.005-0.008 mg/kg PO BID (target serum 0.8-1.5 ng/mL). "
+                     "Sodium-restricted diet. Exercise restriction proportional to disease stage.",
         "treatment_ja": "Stage B2（無症候性だが心拡大あり）：ピモベンダン(0.25mg/kg BID)で心不全発症を遅延。"
                         "Stage C（症候性CHF）：フロセミド(2〜4mg/kg BID〜TID)＋ピモベンダン＋ACE阻害薬(ベナゼプリル)。"
                         "Stage D（難治性）：利尿薬の増量、スピロノラクトン追加、ヒドララジン追加。"
@@ -836,7 +853,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "環境アレルゲン（ハウスダストマイト、花粉、カビ胞子等）が主因。"
                      "食物アレルゲン（牛肉、鶏肉、小麦、乳製品等）との併発も多い（30%）。"
                      "遺伝的素因、皮膚バリア機能障害がベース。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Multimodal approach per ICADA 2015 guidelines: (1) Allergen avoidance (environmental control). "
+                     "(2) Pharmacotherapy — oclacitinib (Apoquel) 0.4-0.6 mg/kg PO BID × 14 days then SID (JAK inhibitor, rapid onset 4-24h); lokivetmab (Cytopoint) 2 mg/kg SC monthly (anti-IL-31 mAb). "
+                     "Short-course prednisolone 0.5-1 mg/kg for acute severe flares only (taper over 7-14 days). Cyclosporine 5 mg/kg PO SID (onset 4-6 weeks) as alternative. "
+                     "(3) Skin care — ceramide-containing shampoos and moisturizers 1-2×/week to restore epidermal barrier. "
+                     "(4) Secondary infection management — cephalexin 22-30 mg/kg PO BID for Staphylococcus pyoderma; itraconazole 5 mg/kg PO SID for Malassezia dermatitis. "
+                     "(5) Allergen-specific immunotherapy (ASIT) — sole disease-modifying therapy (60-70% success rate, requires 6-12 months for full effect). "
+                     "Elimination diet trial (8-12 weeks, novel protein or hydrolyzed) to rule out food allergy (30% comorbidity).",
         "treatment_ja": "多角的アプローチ：(1)アレルゲン回避（環境整備）、"
                         "(2)薬物療法—オクラシチニブ（アポキル0.4〜0.6mg/kg BID→SID）、"
                         "ロキベトマブ（サイトポイント2mg/kg SC月1回）が第一選択。重症急性期のみ短期プレドニゾロン。"
@@ -868,7 +891,14 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "一次因子：アトピー性皮膚炎（最多）、食物アレルギー、耳ダニ（Otodectes cynotis）、異物（草の実）。"
                      "素因：垂れ耳、多毛耳道、狭窄耳道、水泳。二次感染：マラセチア、ブドウ球菌、緑膿菌。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Ear cytology first (essential for directed therapy). "
+                     "Malassezia otitis: miconazole or clotrimazole-containing otic preparations BID × 7-14 days. "
+                     "Bacterial (cocci): polymyxin B/neomycin + dexamethasone otic BID × 7-14 days. "
+                     "Pseudomonas: Tris-EDTA ear flush to disrupt biofilm + fluoroquinolone otic (enrofloxacin/marbofloxacin) BID × 14-21 days. "
+                     "Ear cleaning with chlorhexidine-based solution (avoid if tympanic membrane ruptured — use saline only). "
+                     "Severe cases: systemic antibiotics (culture-guided) + oral prednisolone 0.5-1 mg/kg × 7-14 days for canal edema reduction. "
+                     "End-stage ear (canal calcification): total ear canal ablation with lateral bulla osteotomy (TECA-LBO). "
+                     "Critical: concurrent management of underlying disease (atopic dermatitis in >75% of chronic cases). Food elimination trial if recurrent.",
         "treatment_ja": "耳細胞診（cytology）で原因菌同定→適切な点耳薬選択。"
                         "マラセチア性：ミコナゾール/クロトリマゾール含有点耳薬。"
                         "細菌性：フルオロキノロン含有点耳薬。緑膿菌：トリスEDTA洗浄＋フルオロキノロン。"
@@ -962,7 +992,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "多因子遺伝（遺伝率0.2〜0.6）。環境因子：急速な成長、過剰カロリー摂取、"
                      "成長期の過度な運動。大型犬種に圧倒的に多い。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Conservative (mild-moderate): weight management (single most important intervention), controlled low-impact exercise (swimming, leash walks), "
+                     "NSAIDs (carprofen 4.4 mg/kg SID or meloxicam 0.1 mg/kg SID long-term with periodic renal/hepatic monitoring), "
+                     "joint supplements (glucosamine/chondroitin, omega-3 EPA/DHA). Bedinvetmab (Librela) 0.5 mg/kg SC monthly as NSAID alternative for chronic pain. "
+                     "Physical rehabilitation (hydrotherapy, therapeutic exercises). "
+                     "Surgical options — juvenile (<6 months): juvenile pubic symphysiodesis (JPS); young dogs (<12 months): double/triple pelvic osteotomy (DPO/TPO) if minimal OA. "
+                     "Adults with severe OA: total hip replacement (THR — gold standard, near-normal function) or femoral head ostectomy (FHO — salvage procedure for smaller dogs or when THR unavailable). "
+                     "Gabapentin 5-10 mg/kg BID-TID as adjunctive for neuropathic pain component.",
         "treatment_ja": "保存療法：体重管理（最重要）、適度な運動（水泳推奨）、NSAIDs（カルプロフェン、メロキシカム）、"
                         "関節サプリメント（グルコサミン＋コンドロイチン）、理学療法。"
                         "外科：若齢犬—JPS、DPO/TPO、FHO。成犬—人工股関節全置換術（THR、根治的）、FHO。",
@@ -992,7 +1028,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "軟骨異栄養性犬種の遺伝的素因（Hansen I型）。加齢性変性（Hansen II型）。"
                      "肥満、階段昇降、ジャンプ等の物理的負荷が誘発因子。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Grade I-II (pain, ambulatory): strict cage rest 4-6 weeks, NSAIDs (carprofen 4.4 mg/kg SID or meloxicam 0.1 mg/kg SID), "
+                     "gabapentin 5-10 mg/kg PO BID-TID for neuropathic pain, methocarbamol 22-44 mg/kg PO BID-TID as muscle relaxant. "
+                     "Grade III-V (paresis/paralysis): emergency surgical decompression — hemilaminectomy (thoracolumbar) or ventral slot (cervical) within 24-48 hours. "
+                     "Post-operative rehabilitation: hydrotherapy (underwater treadmill), passive range of motion, assisted standing/walking. "
+                     "Grade V (loss of deep pain perception >48 hours): surgical success rate <5%, discuss prognosis carefully with owner. "
+                     "Status epilepticus from disc extrusion: diazepam 0.5-1 mg/kg IV. "
+                     "Recurrence rate 30-50% with conservative management; owner education on ramp use, weight control, and activity restriction essential for chondrodystrophic breeds.",
         "treatment_ja": "Grade I〜II（疼痛・歩行可能）：ケージレスト4〜6週間、NSAIDs、ガバペンチン、筋弛緩薬。"
                         "Grade III〜V（麻痺・深部痛覚消失）：緊急外科手術（片側椎弓切除術/腹側減圧術）→"
                         "術後リハビリテーション（水中トレッドミル、理学療法）。"
@@ -1024,7 +1066,15 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "特発性（遺伝性、最多）：多くの犬種で遺伝的背景が示唆されている。"
                      "構造的原因（脳腫瘍、脳炎、外傷、水頭症）や代謝性原因（低血糖、肝性脳症、"
                      "電解質異常）を除外した上で診断。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Lifelong antiepileptic drug (AED) therapy (initiate when ≥2 seizures in 6 months, cluster seizures, or status epilepticus): "
+                     "phenobarbital 2.5-5 mg/kg PO BID (first-line; target serum 15-40 μg/mL; monitor q6 months with serum levels + liver panel). "
+                     "Potassium bromide 20-40 mg/kg/day PO (monotherapy or add-on; target serum 100-300 mg/dL; steady state 3-4 months; avoid high-salt diets). "
+                     "Levetiracetam 20 mg/kg PO TID (newer option, minimal hepatotoxicity, ideal for hepatic compromise). "
+                     "Zonisamide 5-10 mg/kg PO BID (alternative add-on). "
+                     "Status epilepticus emergency: diazepam 0.5-1 mg/kg IV/IR (repeat up to 3 doses) → levetiracetam 60 mg/kg IV loading dose → "
+                     "phenobarbital 2-4 mg/kg IV q20-30min to effect or CRI if refractory. "
+                     "Midazolam 0.2 mg/kg IM/IN as alternative benzodiazepine (faster IM onset). "
+                     "Owner education: seizure diary, rectal diazepam for at-home cluster seizures. Never abruptly discontinue AEDs.",
         "treatment_ja": "抗てんかん薬による生涯管理：フェノバルビタール（2.5〜5mg/kg BID、第一選択）、"
                         "臭化カリウム（20〜40mg/kg/日、単独or併用）、レベチラセタム（20mg/kg TID、新規薬）。"
                         "血中薬物濃度モニタリング（フェノバルビタール15〜40μg/mL）。"
@@ -1058,7 +1108,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "末梢性：特発性（老齢犬、最多）、中耳炎/内耳炎、甲状腺機能低下症、耳毒性薬物。"
                      "中枢性：脳腫瘍、脳炎（GME等）、脳血管障害（脳梗塞・出血）、外傷。"
                      "特発性前庭疾患は高齢犬（12歳以上）に好発。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Idiopathic vestibular disease (most common): symptomatic treatment — maropitant 1 mg/kg PO/SC SID for nausea, meclizine 25 mg/dog PO BID. "
+                     "Short-term diazepam 0.2-0.5 mg/kg PO BID for severe anxiety/disorientation (2-3 days only). "
+                     "Most improve within 72 hours, full recovery in 2-3 weeks. Supportive care: assisted walking (sling/harness), non-slip mats, "
+                     "elevated food/water bowls, padded bedding to prevent decubital ulcers. Hand-feeding if unable to eat unassisted. "
+                     "Otitis media/interna: systemic antibiotics 4-6 weeks (culture-guided; fluoroquinolones or potentiated penicillins for CNS penetration) ± TECA-LBO for refractory cases. "
+                     "Central vestibular disease: treat underlying cause — brain tumor (prednisolone 1-2 mg/kg + lomustine/radiation), meningoencephalitis (immunosuppressive protocol: prednisolone + cytarabine or cyclosporine). "
+                     "Hypothyroidism-associated: levothyroxine supplementation (improvement expected within weeks). Residual mild head tilt is common and rarely affects QOL.",
         "treatment_ja": "特発性前庭疾患：対症療法（制吐薬マロピタント、ジアゼパム短期間で過度の不安に対して）。"
                         "多くは2〜3週間で自然改善。支持療法（補助歩行、スリップ防止マット、給餌補助）。"
                         "中耳炎性：抗菌薬長期投与（4〜6週間）±手術（TECA-LBO）。"
@@ -1107,7 +1163,15 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "Dirofilaria immitis。蚊（Aedes, Culex, Anopheles等）が中間宿主。"
                      "感染犬の血液中のミクロフィラリア→蚊体内でL3に発育→新たな犬への感染。"
                      "屋外飼育犬、予防薬未投与犬がハイリスク。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "AHS 2014 protocol: Pre-treatment: doxycycline 10 mg/kg PO BID × 4 weeks (eliminates Wolbachia endosymbiont, weakens worms) + start monthly macrocyclic lactone preventive. "
+                     "Adulticide: melarsomine dihydrochloride (Immiticide) 2.5 mg/kg deep IM (lumbar epaxial muscles) — 3-dose protocol: "
+                     "1st injection → 30 days rest → 2nd + 3rd injections 24 hours apart. "
+                     "Strict exercise restriction 6-8 weeks after each injection (dead worm pulmonary thromboembolism prevention). "
+                     "Prednisolone 0.5 mg/kg PO SID tapering over 4 weeks to reduce pulmonary inflammation. "
+                     "Caval syndrome (acute massive worm burden): surgical worm extraction via jugular venotomy (emergency). "
+                     "Class 1-2 (mild-moderate): standard protocol. Class 3 (severe): stabilize with cage rest, prednisone, and monthly preventive before adulticide. "
+                     "Slow-kill method (preventive-only) NOT recommended by AHS — promotes macrocyclic lactone resistance. "
+                     "Post-treatment antigen testing at 6 and 12 months.",
         "treatment_ja": "【成虫駆除】メラルソミン（イミティサイド）2.5mg/kg 深部筋注×3回（AHSプロトコール）。"
                         "駆除前：ドキシサイクリン（10mg/kg BID 4週間、共生菌Wolbachia駆除）"
                         "＋予防薬開始（ミクロフィラリア対策）。"
@@ -1159,7 +1223,15 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "プロゲステロンの慢性的子宮内膜刺激（CEH）＋E. coliの上行性感染（最多）。"
                      "外因性プロゲステロン製剤、エストロゲン投与（交配後避妊）がリスク因子。"
                      "未避妊の中高齢雌犬（特に未経産犬）に好発。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "FIRST-LINE: emergency ovariohysterectomy (OHE). Pre-operative stabilization: LRS 10-20 mL/kg/hr IV, "
+                     "broad-spectrum antibiotics (ampicillin 22 mg/kg IV q8h + enrofloxacin 5 mg/kg IV q24h — targeting E. coli). "
+                     "MEDICAL (breeding dogs, open-cervix, stable): aglepristone (Alizin; anti-progesterone) 10 mg/kg SC × 2 doses (day 1 and day 3) — promotes cervical dilation and uterine drainage. "
+                     "Enrofloxacin 5 mg/kg PO q24h × 14-28 days (adjust per C&S). "
+                     "PGF2α (dinoprost 0.025-0.05 mg/kg SC q8-12h, with caution) may be combined. "
+                     "Ultrasound monitoring at days 7, 14, 28 to confirm uterine diameter reduction. "
+                     "Breeding at next estrus recommended to prevent recurrence. Recurrence rate: aglepristone alone 17-25% (lower with PGF2α combination). "
+                     "CONTRAINDICATIONS for medical: closed-cervix pyometra, severe systemic illness, renal compromise → emergency OHE. "
+                     "Ref: Fieni et al. (2006) J Small Anim Pract; Threlfall (2011) Vet Clin North Am.",
         "treatment_ja": "【第一選択】卵巣子宮摘出術（OHE）→緊急手術。術前に循環安定化（乳酸リンゲル液10〜20mL/kg/hr）、"
                         "広域抗菌薬（アンピシリン22mg/kg IV q8h ＋ エンロフロキサシン5mg/kg IV q24h, E. coli対策）。"
                         "【内科的治療 — 繁殖温存例（開放型・全身状態良好）】"
@@ -1265,7 +1337,19 @@ DISEASES: List[Dict[str, Any]] = [
                      "二次性（30%）：薬物（セファロスポリン等）、感染症（バベシア、エーリキア）、"
                      "腫瘍（リンパ腫）、ワクチン接種後、蜂刺症。"
                      "免疫介在性血小板減少症（ITP）との併発=エバンス症候群。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Per ACVIM Consensus Statement 2019 (Swann/Garden et al. JVIM 2019): "
+                     "DIAGNOSIS: saline agglutination test + spherocytosis + positive direct Coombs test. "
+                     "IMMUNOSUPPRESSION (first-line): prednisolone 2 mg/kg PO q24h (max 60 mg/day) → gradual taper over 4-6 months. "
+                     "SECOND-LINE (severe hemolysis, transfusion-dependent, steroid-refractory/contraindicated, relapse): "
+                     "mycophenolate mofetil (MMF) 10 mg/kg PO q12h, OR cyclosporine 5-10 mg/kg PO q24h, OR azathioprine 2 mg/kg PO q24h × 1-2 weeks then q48h, "
+                     "OR human IVIg 0.5-1.5 g/kg IV single dose (severe cases). "
+                     "ANTITHROMBOTIC (MANDATORY per ACVIM 2019 for ALL IMHA cases): "
+                     "(1) rivaroxaban 1-2 mg/kg PO q24h (oral factor Xa inhibitor, preferred), "
+                     "(2) clopidogrel 10 mg/kg PO loading then 2 mg/kg q24h, "
+                     "(3) clopidogrel + low-dose aspirin 0.5-1 mg/kg q24h, or LMWH (enoxaparin 0.8-1 mg/kg SC q6-8h). "
+                     "SUPPORTIVE: pRBC transfusion (PCV <15% or rapid decline), oxygen, conservative fluid therapy. "
+                     "MONITORING: PCV/HCT q12-24h (first 48-72h), biochemistry, urinalysis, BP. "
+                     "Discontinue antithrombotics after ≥6 months remission. Splenectomy as last resort for drug-refractory cases.",
         "treatment_ja": "【ACVIM Consensus Statement 2019（Swann/Garden et al. JVIM 2019）】"
                         "【診断確定】 自己凝集（生食試験）+ 球状赤血球 + 直接クームス試験陽性。"
                         "【免疫抑制療法（第一選択）】 プレドニゾロン 2 mg/kg PO q24h（最大60 mg/日）"
@@ -1311,7 +1395,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "食餌性（ゴミ漁り、食事変更、過食、腐敗食）が最多。"
                      "感染性（パルボウイルス、コロナウイルス、サルモネラ、カンピロバクター、ジアルジア）。"
                      "ストレス性、薬物性（NSAIDs、抗菌薬）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "MILD: early low-fat diet preferred over 24-hour fasting. Boiled chicken breast + white rice in small frequent meals (4-6×/day). "
+                     "Antiemetic: maropitant 1 mg/kg IV/SC q24h (first-line). "
+                     "Diarrhea management: probiotics (E. faecium SF68/FortiFlora, S. boulardii), prebiotics (FOS, MOS), psyllium fiber 1-2 tsp/10kg per meal. "
+                     "Adsorbent (smectite). Antibiotics ONLY when bacterial infection confirmed (unnecessary use worsens dysbiosis). "
+                     "MODERATE-SEVERE: IV fluids (LRS 40-60 mL/kg/day), electrolyte correction. "
+                     "SEVERE (HGE/AHDS): aggressive fluid resuscitation, antibiotics only if sepsis risk. Rule out parvovirus (SNAP test). "
+                     "PARASITIC: fenbendazole 50 mg/kg PO q24h × 3 days. Giardia: metronidazole 25 mg/kg PO q12h × 5 days or fenbendazole 50 mg/kg × 5 days.",
         "treatment_ja": "【軽症】早期低脂肪食が推奨（24時間絶食より）。茹で鶏胸肉＋白米を少量頻回（1日4-6回）。"
                         "制吐薬：マロピタント 1 mg/kg IV/SC q24h（第一選択）。"
                         "下痢管理：プロバイオティクス（E. faecium SF68＝FortiFlora、S. boulardii）、"
@@ -1345,7 +1435,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "遺伝的に決定された頭蓋骨構造の短縮。短頭種犬全般に見られる。"
                      "重症度は品種と個体により異なる。肥満、高温多湿環境、過度の興奮が症状を増悪させる。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Surgical correction (recommended at young age, ideally at time of neuter): alaeplasty (stenotic nares widening), staphylectomy (elongated soft palate resection), "
+                     "laryngeal sacculectomy (everted saccules). Stage III laryngeal collapse may require permanent tracheostomy. "
+                     "Medical management: weight control (single most important factor), cool environment, avoid excitement/heat stress, short leash walks only. "
+                     "Acute respiratory distress: oxygen supplementation, sedation (butorphanol 0.2 mg/kg IV/IM ± acepromazine 0.01-0.02 mg/kg), "
+                     "dexamethasone 0.1-0.2 mg/kg IV for airway edema, emergency intubation if needed. "
+                     "Post-operative: monitor for swelling/aspiration 24-48h, short course prednisolone 0.5 mg/kg for 3-5 days.",
         "treatment_ja": "外科矯正（若齢時に推奨）：外鼻孔拡大術（alaeplasty）、軟口蓋切除術（staphylectomy）、"
                         "喉頭小嚢切除術。二次的喉頭虚脱（Stage III）では永久気管切開が必要な場合も。"
                         "内科管理：体重管理（最重要）、涼しい環境、興奮回避、短時間の散歩。"
@@ -1396,7 +1491,11 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "Leptospira interrogans（L. canicola, L. icterohaemorrhagiae, L. pomona, L. grippotyphosa等）。"
                      "感染動物（ネズミ、野生動物）の尿に汚染された水・土壌との接触。"
                      "外飼い犬、狩猟犬、水辺活動犬がハイリスク。人にも感染する（人獣共通感染症）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Two-phase antibiotic therapy: Phase 1 (leptospiremia): ampicillin 20 mg/kg IV TID or penicillin G 25,000-40,000 IU/kg IV q12h. "
+                     "Phase 2 (renal carrier elimination): doxycycline 5 mg/kg PO BID × 2-3 weeks. "
+                     "Supportive care: aggressive IV fluid therapy for AKI (oliguria management critical — monitor urine output, consider furosemide 2-4 mg/kg IV or mannitol if oliguric), "
+                     "electrolyte correction, antiemetics (maropitant 1 mg/kg). Dialysis (hemodialysis/peritoneal) for anuric renal failure. "
+                     "Hepatic support for liver involvement. ZOONOTIC — strict hygiene: owner counseling on handwashing, urine handling precautions, PPE for staff.",
         "treatment_ja": "急性期：ペニシリン系（アンピシリン20mg/kg IV TID）で菌血症を制御→"
                         "その後ドキシサイクリン（5mg/kg BID 2〜3週間）で腎排菌を停止。"
                         "支持療法：AKIに対する積極的輸液（乏尿期の管理が重要）、電解質補正、"
@@ -1528,7 +1627,15 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "腸管粘膜の免疫調節障害→常在腸内細菌叢に対する過剰な免疫応答→リンパ球・形質細胞浸潤（リンパ球形質細胞性が最多）→粘膜障害・絨毛萎縮→吸収不良。蛋白漏出性腸症（PLE）を合併する場合は低アルブミン血症。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "正確な原因は不明。遺伝的素因・腸内細菌叢異常・食物抗原に対する免疫異常が複合。確定診断には内視鏡生検が必須（リンパ腫との鑑別が重要）。好発：ジャーマンシェパード、バセンジー、シャーペイ。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Stepwise approach: Step 1: dietary trial (novel protein or hydrolyzed diet × 6-8 weeks). "
+                     "Psyllium fiber 1-2 tsp/10kg per meal (promotes mucosal repair via short-chain fatty acid production). "
+                     "Step 2: metronidazole 10-15 mg/kg PO q12h (immunomodulatory + antimicrobial). "
+                     "Step 3: prednisolone 1-2 mg/kg PO q12h → taper over 8-12 weeks. "
+                     "Budesonide 3 mg/m² PO q24h (topical action, fewer systemic side effects than prednisolone). "
+                     "Refractory: chlorambucil 4-6 mg/m² PO q14d, azathioprine 2 mg/kg PO q24-48h, or cyclosporine 5 mg/kg PO q12h. "
+                     "Probiotics: E. faecium SF68 (FortiFlora), S. boulardii, FOS/MOS. "
+                     "Cobalamin supplementation if low: 250-1500 μg SC q7d. Fecal microbiota transplantation (FMT) under investigation. "
+                     "Endoscopic biopsy essential for histologic classification (lymphocytic-plasmacytic most common; rule out alimentary lymphoma).",
         "treatment_ja": "【段階的治療】第1段階：食事療法（新奇蛋白食/加水分解蛋白食×6-8週）。"
                         "サイリウム 1-2 tsp/10kg/食 — 短鎖脂肪酸で粘膜修復促進。"
                         "第2段階：メトロニダゾール 10-15 mg/kg PO q12h（免疫調節＋抗菌）。"
@@ -1613,7 +1720,15 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "Clostridium perfringens（netF毒素陽性株）が最も有力な原因菌。"
                      "ストレス、食餌性因子、免疫学的要因も関与。明確な原因は不明で特発性とされることが多い。"
                      "小型犬に好発（体質的要因の関与を示唆）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "EMERGENCY: (1) Aggressive IV fluid therapy is top priority: crystalloids (LRS 60-90 mL/kg/day, shock bolus 20 mL/kg) + "
+                     "colloids (hetastarch 10-20 mL/kg/day). PCV >60% (hemoconcentration) is typical. "
+                     "(2) Antiemetics: maropitant 1 mg/kg IV/SC q24h; refractory cases ondansetron 0.1-0.5 mg/kg IV q8-12h. "
+                     "(3) Antibiotics: ampicillin 22 mg/kg IV q8h + metronidazole 10-15 mg/kg IV q12h. "
+                     "Per Unterer (2011) RCT, no significant benefit in mild-moderate cases → reserve for febrile/leukopenic patients. "
+                     "(4) Early enteral nutrition: low-fat highly digestible diet in small frequent meals once vomiting controlled. "
+                     "DIET: Hill's i/d or similar for 2-3 weeks post-recovery. Psyllium 1-2 tsp/10kg per meal for stool normalization. "
+                     "PROBIOTICS: E. faecium SF68 (FortiFlora), S. boulardii, FOS/MOS. "
+                     "Transfusion if PCV <20%. DIC monitoring (platelets, PT/APTT, D-dimer).",
         "treatment_ja": "【緊急治療】(1)積極的静脈輸液が最優先：晶質液（乳酸リンゲル液 60-90 mL/kg/日、ショック時ボーラス 20 mL/kg）"
                         "＋膠質液（ヘタスターチ 10-20 mL/kg/日）。PCV>60%（血液濃縮）が典型。"
                         "(2)制吐薬：マロピタント 1 mg/kg IV/SC q24h。難治性にはオンダンセトロン 0.1-0.5 mg/kg IV q8-12h。"
@@ -1643,7 +1758,15 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "大腸粘膜の炎症→水分・電解質吸収障害→少量頻回の粘液/血液混じり軟便。テネスムス（しぶり）が特徴的。急性：ストレス性・食餌性・感染性。慢性：IBD・好酸球性腸炎・組織球性潰瘍性大腸炎（ボクサー）。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "急性：食餌性（不適切な食物・食物不耐性）、ストレス性、Clostridium/Campylobacter感染、鞭虫。慢性：IBD、食物アレルギー、好酸球性腸炎。好発：ボクサー（組織球性潰瘍性大腸炎）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "ACUTE COLITIS: brief fast (12-24h) then highly digestible low-residue diet. "
+                     "Metronidazole 10-15 mg/kg PO q12h × 5-7 days (empiric first-line). "
+                     "Psyllium fiber 1-4 tsp per meal — particularly effective for large bowel diarrhea, promotes mucosal repair via butyrate production. "
+                     "Probiotics (E. faecium SF68, S. boulardii), prebiotics (FOS, MOS). "
+                     "CHRONIC COLITIS: novel protein or hydrolyzed diet trial × 8 weeks. "
+                     "IBD-type: prednisolone 1 mg/kg PO q24h → taper, budesonide 3 mg/m² PO q24h. "
+                     "Histiocytic ulcerative colitis (Boxers): enrofloxacin 5-10 mg/kg PO q24h × 6-8 weeks (curative in many cases). "
+                     "Sulfasalazine 20-40 mg/kg PO q8-12h (colon-specific anti-inflammatory; monitor for KCS side effect). "
+                     "Endoscopy + biopsy for histologic classification. FMT (fecal microbiota transplantation) emerging as adjunctive therapy.",
         "treatment_ja": "【急性大腸炎】短時間の絶食（12-24h）後に高消化性・低残渣食。"
                         "メトロニダゾール（10-15 mg/kg PO q12h×5-7日）が経験的第一選択。"
                         "サイリウム（Psyllium 1-4 tsp/食、または 0.1-0.6 g/kg/日）— 大腸性下痢に特に有効、短鎖脂肪酸（酪酸）で粘膜修復促進（Leib JVIM 2000）。"
@@ -1700,7 +1823,20 @@ DISEASES: List[Dict[str, Any]] = [
                      "タウリン/L-カルニチン欠乏（コッカースパニエル、ニューファンドランド、ゴールデン等）、"
                      "穀物フリー/豆類含有ダイエット関連（FDA-CVM 2018-2024調査中、Freeman et al. JVIM 2018報告）。"
                      "好発：ドーベルマン、グレートデーン、ボクサー、アイリッシュウルフハウンド。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "ACVIM Consensus Stage-Based Therapy: "
+                     "OCCULT/STAGE B (asymptomatic, echocardiographic abnormalities only): pimobendan 0.25-0.3 mg/kg PO q12h "
+                     "(PROTECT trial, Summerfield JVIM 2012: Doberman RCT n=137, time to CHF/sudden death 718→1441 days). "
+                     "ACE inhibitor (benazepril 0.25-0.5 mg/kg PO q24h) consider adding. "
+                     "Holter: if VPCs >50/day → sotalol 1-3 mg/kg PO q12h or mexiletine 5-8 mg/kg PO q8h. "
+                     "STAGE C (CHF symptoms): (1) pimobendan 0.25-0.3 mg/kg PO q12h, (2) furosemide 1-2 mg/kg PO q8-12h (acute: IV/IM 2-4 mg/kg q1-4h), "
+                     "(3) ACE inhibitor, (4) spironolactone 1-2 mg/kg PO q12-24h. "
+                     "Atrial fibrillation: diltiazem 0.5-1 mg/kg PO q8h or digoxin 0.003 mg/kg PO q12h (target HR <140, serum 0.5-1 ng/mL). "
+                     "Acute pulmonary edema: O2, furosemide IV, butorphanol 0.2-0.4 mg/kg IV; severe: nitroprusside CRI 1-10 μg/kg/min with BP monitoring. "
+                     "NUTRITION: taurine 500-1000 mg PO q12h (Cocker Spaniels, grain-free diet-associated), L-carnitine 50-100 mg/kg PO q8-12h, "
+                     "switch to grain-inclusive AAFCO-compliant diet. FDA-CVM 2018-2024: cardiac function improvement reported after diet change. "
+                     "ARRHYTHMIA (Boxer ARVC, Doberman VT): sotalol 1-3 mg/kg PO q12h (first-line), mexiletine 5-8 mg/kg PO q8h (add-on), "
+                     "amiodarone 10 mg/kg PO q24h × 7d then 5 mg/kg (refractory). "
+                     "MONITORING: serial echocardiography, Holter, biochemistry (electrolytes), blood pressure.",
         "treatment_ja": "【ACVIM Consensus Stage-Based Therapy】 "
                         "【オカルト期/Stage B（無症候性、心エコー異常のみ）】 "
                         "ピモベンダン 0.25-0.3 mg/kg PO q12h を開始（PROTECT trial Summerfield JVIM 2012、ドーベルマン137頭RCT、"
@@ -2384,7 +2520,11 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "先天性・発達性（多因子遺伝、最多）。稀に外傷性。"
                      "内側脱臼（MPL）が小型犬の90%を占め、両側性が50%。"
                      "外側脱臼（LPL）は大型犬に多い。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Grade 1: conservative management (weight control, joint supplements, moderate exercise), monitoring. "
+                     "Grade 2-4: surgical correction recommended. Procedures: trochlear sulcoplasty (wedge or block recession) + "
+                     "medial joint capsule imbrication + tibial tuberosity transposition, typically combined. "
+                     "Severe skeletal deformity: corrective osteotomy (femoral and/or tibial). "
+                     "Post-operative rehabilitation 6-8 weeks. NSAIDs (carprofen, meloxicam) for perioperative pain management.",
         "treatment_ja": "Grade 1：保存療法（体重管理、関節サプリメント、適度な運動）で経過観察。"
                         "Grade 2〜4：外科矯正が推奨。術式：滑車溝形成術（溝深化術）＋"
                         "内側関節包縫縮＋脛骨粗面転位術の組み合わせ。"
@@ -2413,7 +2553,23 @@ DISEASES: List[Dict[str, Any]] = [
                               "左房拡大→左主気管支圧排→咳嗽。心房細動の合併。ACVIM Stage A〜D分類（Keene et al. JVIM 2019）。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "加齢性弁変性（最多）。病因不明だが遺伝的要因が示唆。好発：CKCS（若齢発症）、マルチーズ、ダックスフンド、チワワ、ポメラニアン等の小型犬。全犬の心不全原因の75%を占める。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "ACVIM Consensus Stage-Based Therapy (Keene et al. JVIM 2019): "
+                     "Stage A (at-risk breed, no murmur): no treatment, annual cardiac auscultation. "
+                     "Stage B1 (murmur, no cardiomegaly): no treatment, echocardiogram q6-12 months. "
+                     "Stage B2 (murmur + cardiomegaly — LA/Ao ≥1.6, LVIDDN ≥1.7, VHS >10.5): "
+                     "pimobendan 0.25-0.3 mg/kg PO q12h (30 min before food). "
+                     "EPIC trial (Boswood JVIM 2016, n=360 RCT): median time to CHF 766→1228 days (HR 0.64, P=.0038). "
+                     "Stage C (CHF symptoms): (1) furosemide 1-2 mg/kg PO q8-12h (acute: IV 2-4 mg/kg q1-4h), "
+                     "torasemide 0.1-0.2 mg/kg PO q24h if furosemide-refractory. "
+                     "(2) Pimobendan 0.25-0.3 mg/kg q12h continued. "
+                     "(3) ACE inhibitor: benazepril 0.25-0.5 mg/kg q24h or enalapril 0.5 mg/kg q12-24h. "
+                     "(4) Spironolactone 1-2 mg/kg q12-24h. "
+                     "(5) Acute pulmonary edema: O2, furosemide IV, butorphanol 0.2-0.4 mg/kg IV; severe: nitroprusside CRI 1-10 μg/kg/min with BP monitoring. "
+                     "Stage D (refractory CHF): dose escalation, furosemide CRI 0.66-1 mg/kg/h, sildenafil 1-2 mg/kg PO q8h (pulmonary hypertension), "
+                     "torasemide, sodium-restricted diet, consider palliative care. "
+                     "Cough (mainstem bronchus compression): hydrocodone 0.22 mg/kg PO q6-12h or butorphanol 0.05-0.1 mg/kg PO q6-12h. "
+                     "Atrial fibrillation: diltiazem 0.5-1 mg/kg PO q8h or digoxin 0.003 mg/kg q12h (target HR <160). "
+                     "MONITORING: Stage B2 q6mo echo, Stage C q2-4wk electrolytes/renal/BP.",
         "treatment_ja": "【ACVIM Consensus Stage-Based Therapy (Keene et al. JVIM 2019)】 "
                         "【Stage A（リスク品種だが心雑音なし）】 治療不要。年1回の心臓聴診。"
                         "【Stage B1（心雑音あり、心拡大なし）】 治療不要。6-12ヶ月毎の心エコー。"
@@ -2495,7 +2651,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "常染色体劣性遺伝（Type I：ニューファンドランド等）、"
                      "常染色体優性遺伝（Type II-A/B：ミニチュアピンシャー等）。"
                      "SLC3A1またはSLC7A9遺伝子変異が原因。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Urine alkalinization: potassium citrate 75 mg/kg PO BID (target urine pH 7.0-7.5) to increase cystine solubility. "
+                     "Thiol drugs: tiopronin (2-MPG) 15-20 mg/kg PO BID — converts cystine to more soluble mixed disulfide compounds. "
+                     "D-penicillamine 10-15 mg/kg PO BID (alternative, more side effects). "
+                     "Low-protein diet + increased water intake (target USG <1.020). "
+                     "Large stones: surgical removal (cystotomy). Urethral obstruction: emergency catheterization or retrohydropulsion. "
+                     "Lifelong management required. Genetic testing for breeding management recommended (SLC3A1/SLC7A9 mutations).",
         "treatment_ja": "尿アルカリ化（クエン酸カリウム 75mg/kg BID）→シスチン溶解度上昇。"
                         "チオプロニン（2-MPG、15〜20mg/kg BID）→シスチンをより可溶性の化合物に変換。"
                         "低タンパク食＋十分な飲水。大結石は外科的摘出（膀胱切開術）。"
@@ -2527,7 +2688,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "明確な原因は不明。遺伝的素因（犬種好発性）、慢性的な抗原刺激、"
                      "紫外線暴露（皮膚型HSA）が示唆されている。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Splenic HSA: emergency splenectomy → adjuvant chemotherapy (doxorubicin-based, 5-6 cycles). "
+                     "Cardiac HSA: pericardiocentesis (emergency for tamponade) → pericardiectomy ± chemotherapy. "
+                     "Chemotherapy: doxorubicin 30 mg/m² IV q3wk ± cyclophosphamide or vincristine (VAC protocol). "
+                     "Metronomic chemotherapy (low-dose cyclophosphamide + piroxicam) reported for maintenance. "
+                     "Hemorrhagic shock: pRBC transfusion + aggressive crystalloid/colloid resuscitation. "
+                     "Autotransfusion of abdominal blood (if no DIC) can be lifesaving in emergency. "
+                     "Dermal HSA (skin-confined): wide surgical excision may be curative.",
         "treatment_ja": "脾臓HSA：緊急脾摘→術後化学療法（ドキソルビシンベース、5〜6サイクル）。"
                         "心臓HSA：心膜穿刺（緊急）→心膜切除±化学療法。"
                         "化学療法：ドキソルビシン(30mg/m² IV q3w)±シクロフォスファミド or ビンクリスチン。"
@@ -2557,7 +2724,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "明確な原因は不明。遺伝的素因、免疫抑制、環境因子（除草剤2,4-D暴露との疫学的関連報告）。"
                      "T細胞型はB細胞型より予後不良。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Multidrug chemotherapy is standard of care: CHOP protocol (cyclophosphamide, doxorubicin [hydroxydaunorubicin], vincristine [Oncovin], prednisolone) "
+                     "over 19-25 weeks. Remission rate 80-90%. "
+                     "UW-Madison 25-week CHOP is the most widely used protocol. "
+                     "Single-agent prednisolone: if chemotherapy declined (median survival 1-2 months only). "
+                     "Relapse/rescue protocols: CCNU (lomustine) 70-90 mg/m² PO q3wk, rabacfosadine (Tanovea) 1 mg/kg IV q3wk (for relapsed B-cell lymphoma). "
+                     "Alimentary lymphoma: surgical resection ± chemotherapy. "
+                     "Staging: FNA of enlarged nodes (diagnostic), thoracic radiographs, abdominal ultrasound, CBC/chemistry, immunophenotyping (B vs T cell).",
         "treatment_ja": "多剤併用化学療法が標準：CHOPプロトコール（シクロフォスファミド、ドキソルビシン、"
                         "ビンクリスチン、プレドニゾロン）19〜25週。寛解率80〜90%。"
                         "単剤プレドニゾロン：化学療法非実施の場合（中央生存期間1〜2ヶ月）。"
@@ -2588,7 +2761,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "明確な原因は不明。大型犬の急速な骨成長、骨内固定材の存在、慢性骨炎、"
                      "放射線照射後が報告されている。遺伝的素因あり。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Standard: amputation of affected limb + adjuvant chemotherapy (carboplatin 300 mg/m² IV q3wk × 4-6 cycles, "
+                     "or alternating doxorubicin 30 mg/m² + carboplatin). >90% of dogs adapt well to three-legged ambulation. "
+                     "Limb-sparing surgery: cortical allograft or endoprosthesis — for distal radius OSA when amputation declined (infection rate ~40%). "
+                     "Pain management: NSAIDs (carprofen, meloxicam), gabapentin 5-10 mg/kg TID, tramadol 5 mg/kg BID-TID, "
+                     "bisphosphonates (pamidronate 1-2 mg/kg IV q4wk for bone pain). "
+                     "Palliative radiation therapy (2-4 fractions): pain relief in ~70% when amputation not pursued. "
+                     "Staging: thoracic radiographs (3 views) for pulmonary metastasis assessment.",
         "treatment_ja": "標準治療：患肢切断＋術後化学療法（カルボプラチン30mg/m² IV q3w×4〜6回、"
                         "またはドキソルビシン＋カルボプラチン交互投与）。"
                         "四肢温存手術（limb-sparing surgery）：切断を望まない場合。"
@@ -2620,7 +2799,13 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "明確な原因は不明。c-KIT遺伝子変異（特に内部タンデム重複、ITD）が約30%で検出。"
                      "遺伝的素因（犬種好発性）。慢性炎症との関連も示唆。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Low grade (Kiupel): wide surgical excision (2 cm lateral margins + one fascial plane deep) is first-line treatment. "
+                     "Incomplete margins: revision surgery or adjuvant radiation therapy (48-54 Gy). "
+                     "High grade / metastatic: surgery + adjuvant chemotherapy (vinblastine 2 mg/m² IV weekly × 4-6 + prednisolone 2 mg/kg → taper). "
+                     "Tyrosine kinase inhibitors: toceranib (Palladia) 2.75 mg/kg PO every other day — effective for c-KIT mutation-positive or unresectable tumors (response rate ~40%). "
+                     "Degranulation management: H1 blocker (diphenhydramine 2-4 mg/kg) + H2 blocker (famotidine 0.5-1 mg/kg PO BID) perioperatively and for symptomatic tumors. "
+                     "Omeprazole 1 mg/kg PO SID for GI ulceration risk. "
+                     "c-KIT mutation testing on biopsy recommended for treatment planning.",
         "treatment_ja": "低悪性度（Kiupel Low grade）：外科切除（2cmマージン＋深部筋膜一層）が第一選択。"
                         "マージン不十分：追加切除または放射線療法。"
                         "高悪性度/転移陽性：外科＋補助化学療法（ビンブラスチン＋プレドニゾロン）。"
@@ -3817,7 +4002,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "ネギ属植物の摂取：生・加熱・乾燥いずれの形態でも毒性あり。"
                      "オニオンスープ、ハンバーグ、すき焼き等の料理、ベビーフード（オニオンパウダー含有）。"
                      "ニンニクはタマネギの3〜5倍の毒性。秋田犬・柴犬は品種感受性が高い。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Within 2 hours of ingestion: induce emesis (3% hydrogen peroxide 1-2 mL/kg PO, max 45 mL) + activated charcoal (1-2 g/kg PO). "
+                     "Post-hemolytic anemia development: blood transfusion (pRBC if PCV <15%), oxygen therapy, IV fluid support. "
+                     "Methemoglobinemia: N-acetylcysteine (loading 140 mg/kg PO/IV, then 70 mg/kg q6h × 7 doses). "
+                     "No specific antidote exists — supportive care is mainstay. Serial CBC monitoring for PCV decline and Heinz body formation (peak at 3-5 days). "
+                     "Note: Akita and Shiba Inu have breed-specific increased sensitivity to oxidative damage. "
+                     "Garlic is 3-5× more toxic per gram than onion.",
         "treatment_ja": "摂取2時間以内：催吐（3%過酸化水素1〜2mL/kg PO）＋活性炭。"
                         "すでに貧血発症後：輸血（PCV<15%）、酸素療法、輸液。"
                         "メトヘモグロビン血症：N-アセチルシステイン（初回140mg/kg→70mg/kg q6h）。"
@@ -3891,7 +4081,22 @@ DISEASES: List[Dict[str, Any]] = [
                               "重症度は体温そのものではなく、SIRS・臓器障害の程度で評価される（VetCompass clinical grading 2021）。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "車内放置（最多、車内温度は外気温+20〜30℃に急上昇）、高温下の過度な運動、短頭種（ブルドッグ・パグ・ボストンテリア）、肥満犬、喉頭麻痺犬、厚い被毛の犬種。日本では5〜9月に集中。アスファルト表面温度は気温の1.5〜2倍。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "CRITICAL PRINCIPLE: Cool First, Transport Second — pre-hospital cooling reduces mortality from 49% to 19% (Hall et al. Sci Rep 2020). "
+                     "ON-SITE COOLING (most important): (1) Cold water immersion (gold standard) — submerge body in cool water (15-25°C), keep head above water. "
+                     "(2) Cold water spray + strong fan (evaporative cooling) if immersion impossible. "
+                     "(3) Ice packs to neck, axillae, inguinal regions (supplementary). "
+                     "Target: stop cooling at rectal temp 39.5°C (103°F) to prevent overshoot hypothermia. "
+                     "Do NOT use ice water enemas or alcohol spray (vasoconstriction impairs heat dissipation). "
+                     "IN-HOSPITAL EMERGENCY: (1) Airway: intubate brachycephalic breeds if needed, O2 supplementation. "
+                     "(2) IV fluids: balanced crystalloids (LRS), shock bolus 30 mL/kg → reassess (caution: excess fluids → cerebral/pulmonary edema). "
+                     "(3) Continuous monitoring: temp q5-10min, BP, SpO2, ECG. "
+                     "(4) Labs: CBC, chemistry (BUN, Cre, ALT, AST, CK), PT/aPTT, electrolytes, blood gas, lactate. "
+                     "(5) Antibiotics for bacterial translocation risk: ampicillin/sulbactam 30 mg/kg IV q8h. "
+                     "(6) Antiemetics: maropitant 1 mg/kg SC, ondansetron 0.5 mg/kg IV q8-12h. "
+                     "(7) GI protection: omeprazole 1 mg/kg IV q12h, sucralfate 0.5-1 g PO q8h. "
+                     "(8) Seizures: diazepam 0.5-1 mg/kg IV, levetiracetam 20 mg/kg IV q8h. "
+                     "(9) DIC: FFP 10-15 mL/kg IV. (10) AKI: urine output monitoring (>1-2 mL/kg/h target). "
+                     "(11) Rhabdomyolysis: urine alkalinization, aggressive fluids, CK monitoring. ICU 24-72h for severe cases.",
         "treatment_ja": "【最重要原則】 ❶ 即時の積極的冷却 ❷ 輸送より冷却を優先（"
                         "「Cool First, Transport Second」）— Hall Sci Rep 2020で病院搬送前の冷却により"
                         "死亡率が49% → 19%に低下することが実証された。"
@@ -5684,7 +5889,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "EPI（最多の基礎疾患）、解剖学的異常（盲管症候群/blind loop）、腸管運動障害、"
                      "免疫不全。基礎疾患の治療なしでは再発する。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Antibiotics: tylosin 25 mg/kg PO q12h × 6 weeks (first-line, lower relapse rate). "
+                     "Metronidazole 10-15 mg/kg PO q12h × 4 weeks (second-line; watch for neurotoxicity — vestibular signs, ataxia). "
+                     "Diet: highly digestible low-fat food + psyllium 1-2 tsp/10kg per meal. "
+                     "Probiotics: E. faecium SF68 (FortiFlora), S. boulardii, FOS/MOS. "
+                     "Cobalamin supplementation if low: 250-1500 μg SC q7d × 6 weeks → taper. "
+                     "Essential: investigate underlying cause — serum TLI for EPI (most common association), anatomical abnormalities (blind loop syndrome).",
         "treatment_ja": "【抗菌薬】チロシン 25 mg/kg PO q12h×6週（第一選択、再発率低い）。"
                         "メトロニダゾール 10-15 mg/kg PO q12h×4週（第二選択）。"
                         "【食事療法】高消化性・低脂肪食＋サイリウム 1-2 tsp/10kg/食。"
@@ -5712,7 +5922,14 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "腸内細菌叢の不均衡（ディスバイオーシス）。免疫調節異常。遺伝的素因（ジャーマンシェパード）。"
                      "糞便検査・血液検査で他の原因を除外後、抗菌薬への反応で診断。"
                      "内視鏡生検でIBDとの鑑別が重要。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Antibiotics (first-line): metronidazole 10-15 mg/kg PO q12h × 4-6 weeks (effective against anaerobes, immunomodulatory properties). "
+                     "Monitor for neurotoxicity (vestibular signs, ataxia) with prolonged use. "
+                     "Second-line: tylosin 15-25 mg/kg PO q12h × 6-8 weeks (lower relapse rate, better long-term safety profile). "
+                     "Diet: highly digestible low-fat diet + novel protein or hydrolyzed protein trial. "
+                     "Psyllium fiber 1-2 tsp/10kg per meal (soluble fiber fermented to short-chain fatty acids, promotes mucosal repair). "
+                     "Probiotics: E. faecium SF68 (FortiFlora), S. boulardii, FOS/MOS. "
+                     "Cobalamin supplementation if low: 250-1500 μg SC q7d. "
+                     "Endoscopic biopsy important to differentiate from IBD (which requires immunosuppression).",
         "treatment_ja": "【抗菌薬療法】第一選択：メトロニダゾール（10-15 mg/kg PO q12h×4-6週）— 嫌気性菌に有効、免疫調節作用あり。"
                         "神経毒性（前庭症状・運動失調）に注意。"
                         "第二選択：チロシン（タイロシン 15-25 mg/kg PO q12h×6-8週）— 再発率低く長期安全性良好。"
@@ -8435,7 +8652,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "食物アレルギー/不耐性、腸内細菌叢異常（ディスバイオーシス）、粘膜免疫異常。"
                      "好発：ジャーマンシェパード（ARE）、バセンジー（免疫増殖性腸症）、ヨークシャーテリア（PLE）。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Stepwise approach: Step 1 (FRE ~50%): dietary trial (novel protein or hydrolyzed diet × 6-8 weeks). "
+                     "Psyllium 1-2 tsp/10kg per meal for fiber supplementation (short-chain fatty acid production promotes mucosal repair). "
+                     "Step 2 (ARE ~20-30%): metronidazole 10-15 mg/kg PO q12h × 4-6 weeks, or tylosin 15-25 mg/kg PO q12h × 6-8 weeks (lower relapse). "
+                     "Step 3: diet + antibiotics non-responsive → IBD likely → prednisolone 1-2 mg/kg PO q12-24h → taper. "
+                     "Probiotics: E. faecium SF68, S. boulardii, FOS/MOS. FMT for refractory cases. "
+                     "Cobalamin: 250-1500 μg SC q7d if low. CCECAI/CIBDAI scores for severity and treatment response assessment.",
         "treatment_ja": "【段階的アプローチ】第1段階：食事療法（新奇蛋白食/加水分解蛋白食×6-8週）。"
                         "サイリウム 1-2 tsp/10kg/食で食物繊維補給（短鎖脂肪酸で粘膜修復促進）。"
                         "第2段階（ARE）：メトロニダゾール 10-15 mg/kg PO q12h×4-6週、"
@@ -8466,7 +8688,12 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "先天的な肝内微小血管の発達異常。遺伝的素因（小型テリア犬種）。"
                      "PSSの修復術後に残存する微小シャントとしても見られることがある。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Most cases require no treatment (asymptomatic). Symptomatic cases: hepatic support diet (moderate protein, high-quality protein sources), "
+                     "ursodeoxycholic acid 10-15 mg/kg PO SID (choleretic, hepatoprotective), SAMe 20 mg/kg PO SID on empty stomach, "
+                     "lactulose 0.5 mL/kg PO q8-12h (if hyperammonemia present). "
+                     "No surgical indication (microscopic vascular anomaly, not correctable surgically). "
+                     "Differentiation from PSS is the most critical diagnostic step — bile acids testing, abdominal ultrasound, "
+                     "CT angiography or portal scintigraphy if needed to confirm absence of macroscopic shunt.",
         "treatment_ja": "多くは治療不要（無症候性の場合）。症候性の場合：肝臓サポート食（低〜中タンパク・高品質タンパク）、"
                         "ウルソデオキシコール酸、SAMe、ラクツロース（高アンモニア血症時）。"
                         "外科適応なし（微小血管の異常であり手術で矯正不可）。PSSとの鑑別診断が最も重要。",
@@ -8663,7 +8890,11 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "黄体期の遷延：正常犬では発情後55-60日で黄体が萎縮しプロゲステロンが低下。偽妊娠では80-90日以上プロゲステロンが維持される（プロラクチン低下障害の可能性）→ 乳腺増生・乳汁分泌（galactorrhea）。行動変化：巣作り行動、他個体への対抗行動。約50-60%の犬で何らかの偽妊娠兆候。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "生理的黄体期遷延。プロラクチン分泌不全による黄体萎縮遅延。視床下部-下垂体-卵巣軸の機能異常。心理的ストレス・環境変化で悪化。未去勢犬での反復的偽妊娠は習慣化。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "Mild: symptomatic care — cold compresses to mammary glands, antihistamines for pruritus. Self-limiting in 2-4 weeks. "
+                     "Moderate-severe: cabergoline 1 μg/kg PO q12h × 7-14 days (prolactin suppression, most effective medical therapy). "
+                     "Aglepristone 10 mg/kg SC × 2 doses (day 1 and 3) to reduce progesterone (note: may delay next estrus by 3-4 weeks). "
+                     "Recurrent/habitual cases: early OHE (spay) is the most definitive solution. "
+                     "Drug relapse rate 30-40% without OHE. Ref: Gobello C (2007) Anim Reprod Sci.",
         "treatment_ja": "【軽症】対症療法：冷罨法、抗ヒスタミン薬による痒み軽減。【中等度以上】カベルゴリン（Cabergoline）1μg/kg PO q12h × 7-14日でプロラクチン抑制。アグレプリストン10mg/kg SC × 2回（day 1・3）でプロゲステロン低下（ただし次発情が3-4週遅延する可能性）。【習慣化例】早期避妊手術（OHE）が最も確実。薬物療法後の再発率30-40%。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "軽症：時間経過で自然軽快（2-4週）。習慣化例：避妊まで反復再発。避妊後の再発率<5%。",
@@ -8682,7 +8913,11 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "分娩時の子宮内膜剥離 → 胎盤遺残・臨界死組織の化膿性感染（E. coli, S. aureus, Streptococcus, 嫌気性菌混合）→ 子宮内膜炎・筋層炎。敗血症ショック・エンドトキシン血症のリスク。プロゲステロン依存性の子宮免疫がまだ低下している時期の感染発症。新生仔への感染リスク。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "胎盤停滞（>30分）、難産（帝王切開後）、長時間の分娩ステージ。子宮穿孔。産褥期の衛生管理不十分。初産・高齢初産での分娩合併症（母体組織損傷大）。栄養不良の母体。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "ANTIBIOTICS (early administration essential): cephalosporin (cephalexin 25 mg/kg PO q6h × 14 days) + enrofloxacin 5 mg/kg IV q24h × 7 days. "
+                     "Adjust per C&S results. Supportive: IV fluids (LRS 10-20 mL/kg q8-12h), maropitant 1 mg/kg IV q24h. "
+                     "Uterine lavage with warm physiologic saline (37°C) may be performed 1-2 times if retained products suspected (perforation risk). "
+                     "Nursing: generally safe to continue — verify antibiotic milk excretion compatibility. "
+                     "If septic/refractory: emergency OHE. Ref: Tonkonojenkov et al. (2012) Theriogenology.",
         "treatment_ja": "【抗菌療法 — 早期投与必須】セファロスポリン系（セファレキシン25mg/kg PO q6h × 14日）+ エンロフロキサシン（5mg/kg IV q24h × 7日）。培養感受性結果に応じて調整。【補助療法】輸液（乳酸リンゲル10-20mL/kg IV q8-12h）、制吐薬（マロピタント0.1mg/kg IV q24h）。【子宮清掃】physiologic saline 37℃による子宮洗浄を1-2回施行する場合あり（穿孔リスク）。【乳汁相談】授乳継続は一般に安全（抗菌薬乳汁移行リスク確認必須）。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "早期治療で予後良好（80-90%回復）。遅延治療・敗血症合併で予後不良。慢性化すると子宮療着・不妊化。",
@@ -8701,7 +8936,13 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "乳腺管への上行性感染（E. coli, S. aureus, Streptococcus agalactiae最多）。新生仔による過度な乳房吸引→乳管損傷・菌侵入。授乳中断による乳汁貯留→乳腺内圧上昇→細菌増殖。膿汁化・膿瘍形成→敗血症ショック。新生仔への乳汁を通じた病原菌伝播。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "授乳期の乳房損傷（新生仔の爪、過度なしゃぶり）。衛生管理不十分（分娩舎汚染）。乳房圧迫。栄養不良の母体。偽妊娠時の乳房腫脹を無理にしぼること。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "ANTIBIOTICS (nursing-safe choices): cephalexin 25 mg/kg PO q6h, or clindamycin 11 mg/kg PO q12h. "
+                     "Adjust per milk C&S results. "
+                     "LOCAL: cold compresses (15 min q3-4h) to reduce inflammation. Warm compresses followed by gentle massage to promote milk drainage. "
+                     "If pus present: do NOT nurse from affected gland (continue from unaffected glands). "
+                     "SYSTEMIC: NSAIDs (carprofen 4.4 mg/kg PO q12h) for pain and inflammation. IV fluid support if systemically ill. "
+                     "SEVERE: surgical drainage and debridement of abscessated glands. "
+                     "Ref: Veronesi MC (2016) Theriogenology.",
         "treatment_ja": "【抗菌療法 — 授乳継続可能な選択】セファロスポリン系（セファレキシン25mg/kg PO q6h）。クリンダマイシン（11mg/kg PO q12h）。【局所対症】冷罨法（患部に冷タオル15分 q3-4h）で炎症軽減。温罨法後マッサージで乳汁排出促進。膿が出現したら新生仔には授乳させない（別乳腺から継続）。【全身療法】NSAIDs（カルプロフェン4.4mg/kg PO q12h）で疼痛・炎症軽減。輸液サポート。【重症例】膿瘍化時は外科的排膿・デブリードマン。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "早期治療で1-2週で改善（80-90%）。遅延治療・膿瘍化では機能喪失乳腺が残存（次妊娠での泌乳機能低下）。敗血症合併例は予後不良。",
@@ -8720,7 +8961,14 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "受胎困難のメカニズムは多因子：(1)排卵障害→受精卵がない、(2)輸卵管障害→精子輸送不全・受精卵移動障害、(3)受精卵着床不全→子宮内膜受容性低下、(4)子宮内膜症→着床環境不適切、(5)免疫学的因子→反復着床失敗、(6)オスの精子問題、(7)交配時期の誤り。約15-20%の不妊症が医学的に説明できない。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "一次不妊：卵巣機能不全、輸卵管閉塞、先天性生殖器異常。二次不妊：子宮内膜瘢痕化（反復性pyometra、内膜炎）。ホルモン異常（LH不足、progesterone低下）。高齢（7才以上で妊娠維持率低下）。栄養不良。甲状腺機能低下症。肥満。過去の難産・帝王切開。交配技術的問題。",
-        "treatment": "Appropriate treatment based on specific diagnosis, supportive care, dietary optimization, environmental management, and regular follow-up monitoring.",
+        "treatment": "DIAGNOSIS: vaginal cytology (keratinization degree) + serial serum progesterone (LH surge day 0: prog <3 ng/mL, day 7: 15-25 ng/mL). "
+                     "Uterine/ovarian ultrasound (confirm ovulation, assess morphology). Hysterosalpingography for tubal patency. Uterine cytology/culture. "
+                     "OVULATION INDUCTION: GnRH (Cystorelin 10 μg IM) or hCG 1000 IU IM on day 5-7 post-LH surge. "
+                     "HORMONAL SUPPORT: progesterone 25-50 mg IM q24-48h × 28-30 days (pregnancy maintenance if luteal insufficiency). "
+                     "BREEDING MANAGEMENT: optimal timing based on serial progesterone measurement. "
+                     "Multiple matings (days 3, 5, 7 post-LH surge). Consider artificial insemination (TCI or surgical). "
+                     "MALE EVALUATION: semen analysis (concentration, motility, morphology) is essential part of workup. "
+                     "Ref: Concannon PW (2011) Theriogenology.",
         "treatment_ja": "【診断】膣細胞診（keratinization度）& 血清progesterone serial（LH surge day 0→prog <3ng/mL, day 7→15-25ng/mL）。子宮卵巣超音波（排卵確認、形態異常検索）。卵管通通性検査（子宮卵管造影）。子宮内膜細胞診・培養。【排卵誘発】GnRH（Cystorelin 10μg IM）or hCG（1000IU IM）on day 5-7 post-LH surge。【ホルモン補充】Progesterone 25-50mg IM q24-48h × 28-30日（妊娠維持目的）。【交配管理】progesterone測定に基づく最適交配日の決定。複数回交配（day 3, 5, 7 post-LH surge）。人工授精の検討。【オスの評価】精液検査（濃度、運動性、奇形率）が重要。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "一次不妊：治療困難（避妊推奨）。二次不妊（子宮内膜瘢痕化）：妊娠率<30%。排卵障害のみ：60-80%受胎率。若齢初期治療が最良。多くは避妊管理が現実的。",

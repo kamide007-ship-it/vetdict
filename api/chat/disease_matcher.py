@@ -172,12 +172,19 @@ def _match_species_symptoms_to_diseases(
             symptom_disease_count[s] = symptom_disease_count.get(s, 0) + 1
     total_diseases = max(len(diseases), 1)
 
+    _weight_cache: dict[str, float] = {}
+
     def _compute_weight(sym_id: str) -> float:
         """Higher weight for symptoms that appear in fewer diseases (more specific)."""
+        cached = _weight_cache.get(sym_id)
+        if cached is not None:
+            return cached
         count = symptom_disease_count.get(sym_id, 1)
         # IDF-inspired: log(N / count) + 1, clamped to [1.0, 3.0]
         idf = math.log(total_diseases / max(count, 1)) + 1.0
-        return max(1.0, min(idf, 3.0))
+        weight = max(1.0, min(idf, 3.0))
+        _weight_cache[sym_id] = weight
+        return weight
 
     user_weights = {s: _compute_weight(s) for s in symptom_set}
     total_user_weight = sum(user_weights.values())
