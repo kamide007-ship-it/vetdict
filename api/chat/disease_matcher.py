@@ -204,9 +204,8 @@ def _match_species_symptoms_to_diseases(
         weighted_recall = matched_weight / total_user_weight if total_user_weight > 0 else 0
 
         # --- Coverage (how much of the disease's symptom profile is covered) ---
-        disease_weights = {s: _compute_weight(s) for s in disease_symptoms}
-        total_disease_weight = sum(disease_weights.values())
-        covered_weight = sum(disease_weights.get(s, 1.0) for s in matched)
+        total_disease_weight = sum(_compute_weight(s) for s in disease_symptoms)
+        covered_weight = sum(_compute_weight(s) for s in matched)
         coverage = covered_weight / total_disease_weight if total_disease_weight > 0 else 0
 
         # --- Harmonic mean base score ---

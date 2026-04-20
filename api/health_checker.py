@@ -6,12 +6,29 @@ symptom-to-disease matching using Jaccard similarity, and diagnostic
 test recommendations based on real veterinary medical knowledge.
 """
 
+import importlib
 import json
+import logging
 import os
+import re
+from functools import lru_cache
 
 from flask import Blueprint, jsonify, request
 
 from api.content_quality import enrich_disease_content
+
+logger = logging.getLogger(__name__)
+
+# Regex to detect CJK characters (Japanese, Chinese, Korean) in IDs.
+_CJK_PATTERN = re.compile(r"[\u3000-\u9fff]")
+
+# Medical abbreviations that should remain uppercase when humanizing snake_case IDs.
+_KEEP_UPPER_ABBREVIATIONS = frozenset({
+    "cbc", "pcr", "mri", "ct", "ecg", "ekg", "hiv", "fiv", "felv", "fip",
+    "igg", "igm", "ige", "aids", "hplc", "usg", "pbfd", "bmbv", "bsa",
+    "acth", "ast", "alt", "alp", "crp", "ldh", "cpk", "tsh", "t3", "t4",
+    "lh", "fsh", "adh",
+})
 
 # ---------------------------------------------------------------------------
 # Japanese name reading lookup for あいうえお sorting
@@ -3580,7 +3597,6 @@ def _get_species_symptom_names(species: str) -> dict[str, dict[str, str]]:
                 for sid, ja_name, en_name in items:
                     names[sid] = {"ja": ja_name, "en": en_name}
         else:
-            import importlib
             mod_name = "dog_diseases" if species == "dog" else f"{species}_diseases"
             try:
                 mod = importlib.import_module(f"api.species.{mod_name}")
@@ -3590,13 +3606,14 @@ def _get_species_symptom_names(species: str) -> dict[str, dict[str, str]]:
             for sid, entry in sn.items():
                 if isinstance(entry, dict):
                     names[sid] = {"ja": entry.get("ja", sid), "en": entry.get("en", sid)}
-    except Exception:
-        pass
+    except (ImportError, AttributeError, ValueError, TypeError) as exc:
+        logger.warning("Could not load symptom names for species=%s: %s", species, exc)
 
     _SYMPTOM_NAME_CACHE[species] = names
     return names
 
 
+@lru_cache(maxsize=2048)
 def _humanize_test_id(tid: str) -> str:
     """Convert a snake_case test id to a readable label.
 
@@ -3607,20 +3624,15 @@ def _humanize_test_id(tid: str) -> str:
     """
     if not tid or not isinstance(tid, str):
         return tid
-    import re
     # If contains CJK or spaces, leave as-is
-    if re.search(r"[\u3000-\u9fff]", tid) or " " in tid:
+    if _CJK_PATTERN.search(tid) or " " in tid:
         return tid
     if "_" not in tid:
         return tid
     parts = tid.split("_")
-    keep_upper = {"cbc", "pcr", "mri", "ct", "ecg", "ekg", "hiv", "fiv", "felv", "fip",
-                  "igg", "igm", "ige", "aids", "hplc", "usg", "pbfd", "bmbv", "bsa",
-                  "acth", "ast", "alt", "alp", "crp", "ldh", "cpk", "tsh", "t3", "t4",
-                  "lh", "fsh", "adh"}
     out_parts = []
     for p in parts:
-        if p.lower() in keep_upper:
+        if p.lower() in _KEEP_UPPER_ABBREVIATIONS:
             out_parts.append(p.upper())
         else:
             out_parts.append(p.capitalize())
