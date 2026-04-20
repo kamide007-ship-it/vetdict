@@ -12665,6 +12665,19 @@ def _enrich_horse_diseases() -> None:
 
 _enrich_horse_diseases()
 
+
+def _apply_horse_sponsor_adjuncts() -> None:
+    """Append sponsor adjunct notes to applicable horse diseases."""
+    try:
+        from api.data.sponsor_adjuncts import apply_sponsor_adjuncts_obj
+    except ImportError:
+        return
+    for disease in DISEASE_DATABASE:
+        apply_sponsor_adjuncts_obj(disease)
+
+
+_apply_horse_sponsor_adjuncts()
+
 # ルックアップ用辞書
 _DISEASE_BY_ID: dict[str, Disease] = {d.id: d for d in DISEASE_DATABASE}
 
