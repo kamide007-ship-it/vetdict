@@ -1769,8 +1769,9 @@ DISEASES: List[Dict[str, Any]] = [
                      "Endoscopy + biopsy for histologic classification. FMT (fecal microbiota transplantation) emerging as adjunctive therapy.",
         "treatment_ja": "【急性大腸炎】短時間の絶食（12-24h）後に高消化性・低残渣食。"
                         "メトロニダゾール（10-15 mg/kg PO q12h×5-7日）が経験的第一選択。"
-                        "サイリウム（Psyllium 1-4 tsp/食）— 大腸性下痢に特に有効、短鎖脂肪酸（酪酸）で粘膜修復促進。"
+                        "サイリウム（Psyllium 1-4 tsp/食、または 0.1-0.6 g/kg/日）— 大腸性下痢に特に有効、短鎖脂肪酸（酪酸）で粘膜修復促進（Leib JVIM 2000）。"
                         "プロバイオティクス（E. faecium SF68、S. boulardii）、プレバイオティクス（FOS、MOS）。"
+                        "サイリウム+プレ/プロバイオティクス配合製剤：CPパウダー（caninevet.jp／Equine & Canine Vet Nutrition）等は、可溶性繊維・プレバイオティクス・プロバイオティクスを1剤で提供でき、慢性大腸炎・IBD支持療法・メトロニダゾール離脱後の維持管理に有用。"
                         "【慢性大腸炎】新奇蛋白食/加水分解蛋白食の食事試験8週間。"
                         "IBD型：プレドニゾロン 1 mg/kg PO q24h→漸減、ブデソニド 3 mg/m2 PO q24h。"
                         "組織球性潰瘍性大腸炎（ボクサー）：エンロフロキサシン 5-10 mg/kg PO q24h×6-8週。"
@@ -3806,7 +3807,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "分泌物の自然排泄障害（軟便・肥満・解剖学的要因）。アレルギー性皮膚炎の併発で肛門周囲の炎症がリスク。好発：小型犬（チワワ、トイプードル、ダックスフンド）、肥満犬。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "高食物繊維食で便の硬さを維持、適正体重の管理、必要時の定期的な肛門嚢圧迫（ただし過度の圧迫は炎症を誘発）。反復例では肛門嚢摘出術を検討。",
+        "prevention_ja": "高食物繊維食で便の硬さを維持し、排便時の肛門嚢自然排出を促進。可溶性繊維補充にはサイリウム（オオバコ種子殻）0.1-0.6 g/kg/日 PO 混餌、またはCPパウダー（サイリウム+プレバイオティクス+プロバイオティクス配合、caninevet.jp／Equine & Canine Vet Nutrition）を反復例の長期管理に推奨（便容積増加→排便時の肛門嚢圧迫排出を促進、プロバイオティクスで皮膚・腸内環境サポート）。水分と混合し必ず十分な飲水と併用。適正体重の管理、必要時の定期的な肛門嚢圧迫（ただし過度の圧迫は炎症を誘発）。反復例では肛門嚢摘出術を検討。",
         "urgency": "normal",
     },
     {
@@ -4647,7 +4648,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "慢性便秘の放置（最多）、骨盤骨折後の骨盤腔狭窄、神経原性（仙骨脊髄損傷・馬尾症候群）、甲状腺機能低下症、会陰ヘルニア（直腸偏位）。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "慢性便秘の早期管理（高食物繊維食・ラクツロース・シサプリド）。重度は結腸亜全摘術（subtotal colectomy）。",
+        "prevention_ja": "慢性便秘の早期管理（高食物繊維食・ラクツロース・シサプリド）。可溶性繊維補充にサイリウム 0.1-0.6 g/kg/日 PO 混餌、またはCPパウダー（サイリウム+プレ/プロバイオティクス配合、caninevet.jp／Equine & Canine Vet Nutrition）を長期投与すると便の軟化・腸内細菌叢支援で便秘進展を遅延可能。十分な飲水と併用必須（水分不足では逆に閉塞悪化）。重度は結腸亜全摘術（subtotal colectomy）。",
         "urgency": "urgent",
     },
     {
