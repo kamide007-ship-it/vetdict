@@ -245,14 +245,14 @@ a:hover{text-decoration:underline}
 .detail-close-btn:hover{background:var(--gray-200);color:var(--navy)}
 .detail-close-btn:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
 .disease-detail dt{font-weight:700;color:var(--navy);margin-top:6px;font-size:.8rem}
-.disease-detail dd{margin-left:0;color:var(--gray-700)}
+.disease-detail dd{margin-left:0;color:var(--gray-700);white-space:pre-wrap}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:768px){.detail-grid{grid-template-columns:1fr}}
 .detail-section{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:10px 12px;transition:border-color var(--transition-fast)}
 .detail-section:hover{border-color:var(--gray-300)}
 .detail-section-header{font-weight:700;font-size:.78rem;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:5px}
 .detail-icon{font-size:.9rem}
-.detail-section-body{font-size:.8rem;color:var(--gray-700);line-height:1.6}
+.detail-section-body{font-size:.8rem;color:var(--gray-700);line-height:1.6;white-space:pre-wrap}
 .detail-matched{margin-top:10px;padding:8px 12px;background:rgba(26,48,104,.04);border-radius:var(--radius);font-size:.8rem}
 .detail-tests{margin-top:6px;padding:8px 12px;background:rgba(34,168,79,.04);border-radius:var(--radius);font-size:.8rem}
 /* --- Clinical details accordion --- */
