@@ -1639,6 +1639,7 @@ function createShareWidget(diseases){
 
 function renderResults(data){
   updateCheckerProgress(3);
+  _cardIndex=0;
   const area=document.getElementById("resultsArea");
   const diseases=data.suspected_diseases||data.possible_conditions||[];
   const diseasesByPhase=data.suspected_diseases_by_phase||{};
@@ -2022,6 +2023,7 @@ function renderMentionedDrugs(d){
   return html;
 }
 
+let _cardIndex=0;
 function renderDiseaseCard(d,data){
   const nameEn=d.name||d.name_ja||"",nameJa=d.name_ja||"";
   const name=currentLang==="ja"?(nameJa||nameEn):nameEn;
@@ -2047,7 +2049,8 @@ function renderDiseaseCard(d,data){
   const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
 
   const urgencyIcon=likelihood==="high"?"\u26A0\uFE0F":likelihood==="moderate"?"\u{1F7E1}":"\u{1F7E2}";
-  let html=`<div class="disease-result disease-${escapeHtml(likelihood)}">
+  const delay=Math.min(_cardIndex++*60,600);
+  let html=`<div class="disease-result disease-${escapeHtml(likelihood)}" style="animation-delay:${delay}ms">
     <div class="disease-head" role="button" tabindex="0" aria-expanded="false">
       <div class="disease-head-info">
         <div class="disease-name-row">
@@ -3248,7 +3251,14 @@ function loadDrugDictionary(){
   document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
   document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
   const dwInput=document.getElementById("drugWeight");
-  if(dwInput)dwInput.addEventListener("input",debounce(renderDrugList,300));
+  if(dwInput){
+    const saved=localStorage.getItem("vetdict-drug-weight");
+    if(saved)dwInput.value=saved;
+    dwInput.addEventListener("input",debounce(()=>{
+      if(dwInput.value)localStorage.setItem("vetdict-drug-weight",dwInput.value);
+      renderDrugList();
+    },300));
+  }
 }
 
 function parseDoseRange(doseText){
@@ -3946,14 +3956,51 @@ renderSpeciesGrid=function(){
 /* --- Dark mode removed for better mobile readability --- */
 
 /* --- Toast utility --- */
+/* --- PWA Install prompt (A2HS) --- */
+(function(){
+  let deferredPrompt=null;
+  window.addEventListener("beforeinstallprompt",e=>{
+    e.preventDefault();deferredPrompt=e;
+    if(localStorage.getItem("vetdict-pwa-dismissed"))return;
+    setTimeout(()=>{if(!deferredPrompt)return;
+      let banner=document.getElementById("pwaInstallBanner");
+      if(banner)return;
+      banner=document.createElement("div");banner.id="pwaInstallBanner";banner.className="pwa-install-banner";
+      const isJa=typeof currentLang!=="undefined"&&currentLang==="ja";
+      banner.innerHTML=`<span class="pwa-icon">📲</span><span class="pwa-text">${isJa?"VetDictをアプリとしてインストール":"Install VetDict as an app"}</span><button class="pwa-install-btn">${isJa?"インストール":"Install"}</button><button class="pwa-dismiss-btn" aria-label="Dismiss">✕</button>`;
+      document.body.appendChild(banner);
+      requestAnimationFrame(()=>banner.classList.add("visible"));
+      banner.querySelector(".pwa-install-btn").addEventListener("click",()=>{
+        banner.classList.remove("visible");deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(c=>{if(c.outcome==="accepted"){localStorage.setItem("vetdict-pwa-dismissed","1");}deferredPrompt=null;});
+      });
+      banner.querySelector(".pwa-dismiss-btn").addEventListener("click",()=>{
+        banner.classList.remove("visible");localStorage.setItem("vetdict-pwa-dismissed","1");
+      });
+    },5000);
+  });
+  window.addEventListener("appinstalled",()=>{const b=document.getElementById("pwaInstallBanner");if(b)b.remove();});
+})();
+
+const _toastQueue=[];let _toastBusy=false;
 function showToast(msg,type,duration){
   type=type||"";duration=duration||2500;
-  let toast=document.querySelector(".toast");
-  if(!toast){toast=document.createElement("div");toast.className="toast";document.body.appendChild(toast);}
-  toast.textContent=msg;toast.className="toast"+(type?" "+type:"");
-  requestAnimationFrame(()=>{toast.classList.add("show");});
+  _toastQueue.push({msg,type,duration});
+  if(!_toastBusy)_drainToastQueue();
+}
+function _drainToastQueue(){
+  if(!_toastQueue.length){_toastBusy=false;return;}
+  _toastBusy=true;
+  const{msg,type,duration}=_toastQueue.shift();
+  const icons={success:"✓",error:"✕",warning:"⚠",info:"ℹ"};
+  let toast=document.getElementById("vetdictToast");
+  if(!toast){toast=document.createElement("div");toast.id="vetdictToast";toast.className="toast";document.body.appendChild(toast);}
+  const icon=icons[type]?"<span class=\"toast-icon\">"+icons[type]+"</span>":"";
+  toast.innerHTML=icon+"<span class=\"toast-msg\">"+escapeHtml(msg)+"</span>";
+  toast.className="toast"+(type?" "+type:"");
+  requestAnimationFrame(()=>toast.classList.add("show"));
   clearTimeout(toast._timer);
-  toast._timer=setTimeout(()=>toast.classList.remove("show"),duration);
+  toast._timer=setTimeout(()=>{toast.classList.remove("show");setTimeout(_drainToastQueue,300);},duration);
 }
 // === multidisease-combinations.js ===
 /**
