@@ -199,9 +199,11 @@ a:hover{text-decoration:underline}
 .symptom-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:all var(--transition-fast);font-size:.84rem;min-height:44px}
 .symptom-item:hover{background:var(--green-light);padding-left:16px}
 .symptom-item:focus-visible{outline:2px solid var(--navy-light);outline-offset:-2px}
-.symptom-item[aria-checked="true"]{background:#dbeafe;font-weight:600;border-left:3px solid var(--navy)}
+.symptom-item[aria-checked="true"]{background:#dbeafe;font-weight:600;border-left:3px solid var(--navy);animation:sym-check .25s ease-out}
 .symptom-item .sym-icon{width:20px;height:20px;border-radius:50%;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;transition:all var(--transition-fast)}
-.symptom-item[aria-checked="true"] .sym-icon{background:var(--navy);border-color:var(--navy);color:var(--white);transform:scale(1.1)}
+.symptom-item[aria-checked="true"] .sym-icon{background:var(--navy);border-color:var(--navy);color:var(--white);animation:sym-icon-pop .3s ease-out}
+@keyframes sym-check{from{background:#dbeafe}50%{background:#bfdbfe}to{background:#dbeafe}}
+@keyframes sym-icon-pop{0%{transform:scale(.6)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
 .symptom-cat-group{border-bottom:1px solid var(--gray-100)}
 .symptom-cat-group summary{list-style:none}
 .symptom-cat-group summary::-webkit-details-marker{display:none}
@@ -1694,6 +1696,28 @@ button.combination-item:focus-visible {
 .swipe-indicator.visible{opacity:1}
 
 /* --- Offline banner --- */
+/* --- Keyboard shortcut hint button --- */
+.kb-hint-btn{background:none;border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:2px 6px;cursor:pointer;color:rgba(255,255,255,.6);font-family:var(--font);transition:all var(--transition-fast);margin-left:4px}
+.kb-hint-btn:hover{border-color:rgba(255,255,255,.5);color:var(--white)}
+.kb-hint-btn kbd{font-family:var(--font);font-size:.72rem;font-weight:600;pointer-events:none}
+@media(max-width:600px){.kb-hint-btn{display:none}}
+
+/* --- Keyboard shortcuts panel --- */
+.kb-shortcuts-panel{position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;backdrop-filter:blur(4px)}
+.kb-shortcuts-panel.visible{opacity:1;pointer-events:auto}
+.kb-shortcuts-inner{background:var(--white);border-radius:var(--radius-lg);box-shadow:0 16px 48px rgba(0,0,0,.25);max-width:420px;width:90%;max-height:80vh;overflow-y:auto;animation:fade-tab-in .25s ease-out}
+.kb-shortcuts-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.kb-shortcuts-header h3{margin:0;font-size:1rem;font-weight:700;color:var(--navy)}
+.kb-close{background:none;border:none;font-size:1.1rem;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:var(--radius)}
+.kb-close:hover{color:var(--navy);background:var(--gray-100)}
+.kb-shortcuts-body{padding:16px 20px}
+.kb-group{margin-bottom:16px}
+.kb-group:last-child{margin-bottom:0}
+.kb-title{font-size:.72rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.kb-row{display:flex;align-items:center;gap:12px;padding:6px 0}
+.kb-row kbd{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:3px 8px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:4px;font-family:var(--font);font-size:.76rem;font-weight:600;color:var(--gray-700);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.kb-row span{font-size:.84rem;color:var(--gray-600)}
+
 /* --- Reading progress bar --- */
 .reading-progress{position:fixed;top:0;left:0;height:3px;background:var(--green);z-index:10000;width:0;transition:none;pointer-events:none}
 

@@ -464,8 +464,25 @@ document.addEventListener("DOMContentLoaded",async()=>{
     setupOfflineIndicator();
     /* Returning user welcome */
     showReturningUserBanner();
-    /* Escape key closes expanded panels */
-    document.addEventListener("keydown",e=>{if(e.key==="Escape"){const open=document.querySelector(".disease-detail.open");if(open){const item=open.closest(".disease-db-item");if(item)toggleDbItem(item);}}});
+    /* Global keyboard shortcuts */
+    document.addEventListener("keydown",e=>{
+      if(e.target.matches("input,textarea,select,[contenteditable]"))return;
+      if(e.key==="Escape"){
+        const kb=document.getElementById("kbShortcutsPanel");
+        if(kb&&kb.classList.contains("visible")){kb.classList.remove("visible");return;}
+        const open=document.querySelector(".disease-detail.open");
+        if(open){const item=open.closest(".disease-db-item");if(item)toggleDbItem(item);}
+        return;
+      }
+      if(e.key==="?"){toggleKbShortcuts();return;}
+      if(e.key==="/"&&!e.ctrlKey&&!e.metaKey){e.preventDefault();const gs=document.getElementById("globalSearchInput");if(gs){gs.focus();gs.select();}return;}
+      if(e.key>="1"&&e.key<="5"&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+        const views=["checker","database","chat","drugs","anesthesia"];
+        switchView(views[parseInt(e.key,10)-1]);return;
+      }
+    });
+    const kbBtn=document.getElementById("kbHintBtn");
+    if(kbBtn)kbBtn.addEventListener("click",toggleKbShortcuts);
   }catch(e){
     console.error("Error in DOMContentLoaded:",e);
   }
@@ -1153,6 +1170,19 @@ function setupSwipeGesture(){
   },{passive:true});
 }
 
+function toggleKbShortcuts(){
+  let panel=document.getElementById("kbShortcutsPanel");
+  if(!panel){
+    panel=document.createElement("div");panel.id="kbShortcutsPanel";panel.className="kb-shortcuts-panel";
+    const isJa=currentLang==="ja";
+    panel.innerHTML=`<div class="kb-shortcuts-inner"><div class="kb-shortcuts-header"><h3>${isJa?"キーボードショートカット":"Keyboard Shortcuts"}</h3><button class="kb-close" aria-label="Close">✕</button></div><div class="kb-shortcuts-body"><div class="kb-group"><div class="kb-title">${isJa?"ナビゲーション":"Navigation"}</div><div class="kb-row"><kbd>1</kbd><span>${isJa?"症状チェッカー":"Symptom Checker"}</span></div><div class="kb-row"><kbd>2</kbd><span>${isJa?"疾患データベース":"Disease Database"}</span></div><div class="kb-row"><kbd>3</kbd><span>${isJa?"AIチャット":"AI Chat"}</span></div><div class="kb-row"><kbd>4</kbd><span>${isJa?"薬品辞書":"Drug Dictionary"}</span></div><div class="kb-row"><kbd>5</kbd><span>${isJa?"鎮静・麻酔":"Anesthesia"}</span></div></div><div class="kb-group"><div class="kb-title">${isJa?"操作":"Actions"}</div><div class="kb-row"><kbd>/</kbd><span>${isJa?"検索にフォーカス":"Focus search"}</span></div><div class="kb-row"><kbd>Esc</kbd><span>${isJa?"パネルを閉じる":"Close panel"}</span></div><div class="kb-row"><kbd>?</kbd><span>${isJa?"このヘルプ":"This help"}</span></div><div class="kb-row"><kbd>←→↑↓</kbd><span>${isJa?"動物種グリッドを移動":"Navigate species grid"}</span></div></div></div></div>`;
+    document.body.appendChild(panel);
+    panel.querySelector(".kb-close").addEventListener("click",()=>panel.classList.remove("visible"));
+    panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("visible");});
+  }
+  panel.classList.toggle("visible");
+}
+
 function setupOfflineIndicator(){
   const banner=document.createElement("div");
   banner.className="offline-banner";
@@ -1311,7 +1341,7 @@ function renderSymptomList(symptoms){
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
 }
 
-function toggleSymptom(id){const adding=!selectedSymptoms.has(id);if(adding)selectedSymptoms.add(id);else selectedSymptoms.delete(id);renderSelectedSymptoms();renderSymptomList(symptomData);if(adding)trackEvent("add_symptom",{species:currentSpecies,symptom:id,total:selectedSymptoms.size});}
+function toggleSymptom(id){const adding=!selectedSymptoms.has(id);if(adding)selectedSymptoms.add(id);else selectedSymptoms.delete(id);haptic(adding?12:6);renderSelectedSymptoms();renderSymptomList(symptomData);if(adding)trackEvent("add_symptom",{species:currentSpecies,symptom:id,total:selectedSymptoms.size});}
 
 function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
