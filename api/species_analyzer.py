@@ -320,6 +320,25 @@ def analyze_horse(
         elif u == "moderate" and c.get("match_percent", 0) >= 50 and severity == "low":
             severity = "moderate"
 
+    # Build symptom_names lookup for frontend display (translates raw IDs
+    # like "resp_cough" to {"ja": "咳が出る", "en": "Cough"} in the UI).
+    used_symptoms: set[str] = set(symptoms)
+    for cond in possible_conditions:
+        used_symptoms.update(cond.get("matching_symptoms", []) or [])
+        used_symptoms.update(cond.get("missing_key_symptoms", []) or [])
+    symptom_names_lookup: Dict[str, Dict[str, str]] = {}
+    try:
+        from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+        id_to_name: Dict[str, Dict[str, str]] = {}
+        for _cat, items in HEALTH_CHECK_ITEMS.items():
+            for sid, ja_name, en_name in items:
+                id_to_name[sid] = {"ja": ja_name, "en": en_name}
+        for sid in used_symptoms:
+            if sid in id_to_name:
+                symptom_names_lookup[sid] = id_to_name[sid]
+    except ImportError:
+        pass
+
     return {
         "possible_conditions": possible_conditions,
         "suspected_diseases": possible_conditions,
@@ -337,6 +356,7 @@ def analyze_horse(
         "lab_values": lab_values,
         "vaccination_adjustment_applied": len(vaccine_preventable) > 0,
         "vaccine_preventable_excluded": len(vaccine_preventable) > 0,
+        "symptom_names": symptom_names_lookup,
     }
 
 
