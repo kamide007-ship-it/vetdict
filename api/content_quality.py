@@ -22,6 +22,54 @@ REQUIRED_FIELDS = [
     "prognosis",
 ]
 
+SPECIES_NAME_JA = {
+    "dog": "犬",
+    "cat": "猫",
+    "horse": "馬",
+    "rabbit": "ウサギ",
+    "hamster": "ハムスター",
+    "guinea_pig": "モルモット",
+    "chinchilla": "チンチラ",
+    "ferret": "フェレット",
+    "hedgehog": "ハリネズミ",
+    "sugar_glider": "フクロモモンガ",
+    "degu": "デグー",
+    "bird": "鳥",
+    "parakeet": "インコ",
+    "parrot": "オウム",
+    "reptile": "爬虫類",
+    "tortoise": "リクガメ",
+    "snake": "ヘビ",
+    "lizard": "トカゲ",
+    "amphibian": "両生類",
+    "fish": "魚",
+    "exotic_other": "その他エキゾチック動物",
+}
+
+SPECIES_NAME_EN = {
+    "dog": "dogs",
+    "cat": "cats",
+    "horse": "horses",
+    "rabbit": "rabbits",
+    "hamster": "hamsters",
+    "guinea_pig": "guinea pigs",
+    "chinchilla": "chinchillas",
+    "ferret": "ferrets",
+    "hedgehog": "hedgehogs",
+    "sugar_glider": "sugar gliders",
+    "degu": "degus",
+    "bird": "birds",
+    "parakeet": "parakeets",
+    "parrot": "parrots",
+    "reptile": "reptiles",
+    "tortoise": "tortoises",
+    "snake": "snakes",
+    "lizard": "lizards",
+    "amphibian": "amphibians",
+    "fish": "fish",
+    "exotic_other": "exotic animals",
+}
+
 def _text(v: Any) -> str:
     if v is None:
         return ""
@@ -30,19 +78,31 @@ def _text(v: Any) -> str:
     return str(v).strip()
 
 
-def _symptom_text(symptoms: Any, limit: int = 5) -> str:
-    if isinstance(symptoms, dict):
-        vals = list(symptoms.keys())
-    elif isinstance(symptoms, (list, tuple, set)):
-        vals = [str(x) for x in symptoms]
+def _symptom_text(symptoms: Any, limit: int = 5, lang: str = "en", display_entries: Any = None) -> str:
+    """Render a short list of symptoms for narrative fields.
+
+    If display_entries is provided (list of {id, name_ja, name_en}), use the
+    translated names to avoid raw IDs like 'resp_cough' in generated text.
+    """
+    if display_entries and isinstance(display_entries, (list, tuple)):
+        key = "name_ja" if lang == "ja" else "name_en"
+        vals = [str(e.get(key) or e.get("id") or "") for e in display_entries if isinstance(e, dict)]
+        vals = [v for v in vals if v]
     else:
-        vals = [str(symptoms)] if symptoms else []
-    vals = [v for v in vals if v]
+        if isinstance(symptoms, dict):
+            vals = list(symptoms.keys())
+        elif isinstance(symptoms, (list, tuple, set)):
+            vals = [str(x) for x in symptoms]
+        else:
+            vals = [str(symptoms)] if symptoms else []
+        vals = [v for v in vals if v]
     if not vals:
-        return "clinical signs"
+        return "clinical signs" if lang != "ja" else "臨床徴候"
+    sep = "、" if lang == "ja" else ", "
+    suffix = (f" (+{len(vals)-limit}件)" if lang == "ja" else f" (+{len(vals)-limit} more)")
     if len(vals) <= limit:
-        return ", ".join(vals)
-    return ", ".join(vals[:limit]) + f" (+{len(vals)-limit} more)"
+        return sep.join(vals)
+    return sep.join(vals[:limit]) + suffix
 
 
 def _reference_numbers_text(reference_numbers: List[int]) -> str:
@@ -116,7 +176,12 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
     out = dict(disease)
     name_ja = _text(out.get("name_ja")) or _text(out.get("name")) or "疾患"
     name_en = _text(out.get("name")) or _text(out.get("name_ja")) or "Disease"
-    sym_text = _symptom_text(out.get("symptoms"))
+    # Translate species key ("horse") to readable names for narrative text
+    species_ja = SPECIES_NAME_JA.get(species, species)
+    species_en = SPECIES_NAME_EN.get(species, species)
+    display_entries = out.get("symptoms_display")
+    sym_text_ja = _symptom_text(out.get("symptoms"), lang="ja", display_entries=display_entries)
+    sym_text_en = _symptom_text(out.get("symptoms"), lang="en", display_entries=display_entries)
     reference_numbers = _merge_reference_numbers(out, species)
 
     missing: List[str] = []
@@ -128,7 +193,7 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
         en_val = _text(out.get(en_key))
 
         if not ja_val:
-            out[ja_key] = _fallback(field, name_ja, species, sym_text, "ja")
+            out[ja_key] = _fallback(field, name_ja, species_ja, sym_text_ja, "ja")
             missing.append(ja_key)
         else:
             sourced.append(ja_key)
@@ -138,24 +203,24 @@ def enrich_disease_content(disease: Dict[str, Any], species: str) -> Dict[str, A
             if ja_content:
                 out[en_key] = ja_content
             else:
-                out[en_key] = _fallback(field, name_ja, species, sym_text, "ja")
+                out[en_key] = _fallback(field, name_ja, species_ja, sym_text_ja, "ja")
             missing.append(en_key)
         else:
             sourced.append(en_key)
 
     if not _text(out.get("symptoms_summary_ja")):
-        out["symptoms_summary_ja"] = _symptom_summary(name_ja, sym_text, species, "ja")
+        out["symptoms_summary_ja"] = _symptom_summary(name_ja, sym_text_ja, species_ja, "ja")
         missing.append("symptoms_summary_ja")
     else:
         sourced.append("symptoms_summary_ja")
     if not _text(out.get("symptoms_summary")):
-        out["symptoms_summary"] = _symptom_summary(name_en, sym_text, species, "en")
+        out["symptoms_summary"] = _symptom_summary(name_en, sym_text_en, species_en, "en")
         missing.append("symptoms_summary")
     else:
         sourced.append("symptoms_summary")
 
-    out["literature_summary_ja"] = _literature_summary(name_ja, species, sym_text, reference_numbers, "ja")
-    out["literature_summary"] = _literature_summary(name_en, species, sym_text, reference_numbers, "en")
+    out["literature_summary_ja"] = _literature_summary(name_ja, species_ja, sym_text_ja, reference_numbers, "ja")
+    out["literature_summary"] = _literature_summary(name_en, species_en, sym_text_en, reference_numbers, "en")
     out["literature_summary_references"] = reference_numbers[:8]
 
     bilingual_required_fields = len(REQUIRED_FIELDS) * 2

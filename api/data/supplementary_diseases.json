@@ -1,7 +1,7 @@
 [
   {
     "name": "Chronic Kidney Disease",
-    "name_ja": "Chronic Kidney Disease（Cat）",
+    "name_ja": "慢性腎臓病（CKD）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -28,11 +28,11 @@
     "clinical_signs_ja": "多尿・多飲、食欲低下、体重減少、嘔吐、脱水、尿毒症性口臭、口腔潰瘍、血尿、排尿困難、閉塞時の無尿。",
     "diagnosis": "Diagnosis of chronic kidney disease is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Chronic Kidney Disease（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel: BUN/Creatinine), 尿検査 (Urinalysis), 超音波検査 (Ultrasonography), 全血球計算 (CBC)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Chronic Kidney Disease in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Heartworm Disease",
-    "name_ja": "Heartworm Disease（Cat）",
+    "name_ja": "心糸状虫症",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -61,11 +61,11 @@
     "clinical_signs_ja": "掻痒、皮膚病変、脱毛・脱羽、下痢、体重減少、貧血、被毛・羽毛の悪化、寄生虫・虫卵の目視、重度寄生では腹部膨満が見られる。",
     "diagnosis": "Diagnosis of heartworm disease is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Heartworm Disease（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Heartworm Disease in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Asthma",
-    "name_ja": "Asthma（Cat）",
+    "name_ja": "喘息",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -92,11 +92,11 @@
     "clinical_signs_ja": "呼吸困難、頻呼吸、咳嗽、鼻汁、開口呼吸、聴診でのラ音・断続性ラ音、運動不耐性、チアノーゼ、尾振り呼吸（鳥類）。",
     "diagnosis": "Diagnosis of asthma is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Asthma（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 胸部X線検査 (Thoracic Radiography), 全血球計算 (CBC), 気管洗浄液検査 (Tracheal Wash / BAL), 血液ガス分析 (Blood Gas Analysis)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Asthma in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Gingivitis and Periodontal Disease",
-    "name_ja": "Gingivitis and Periodontal Disease（Cat）",
+    "name_ja": "歯肉炎・歯周病",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -122,11 +122,11 @@
     "clinical_signs_ja": "嚥下困難、食餌量減少、流涎、顔面腫脹、体重減少、口臭、軟食の選好、歯ぎしり、検査での歯の異常。",
     "diagnosis": "Diagnosis of gingivitis and periodontal disease is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 口腔内検査 (Oral Examination), 頭部X線検査 (Skull Radiography), 歯科用プローブ検査 (Dental Probing). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Gingivitis and Periodontal Disease（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 口腔内検査 (Oral Examination), 頭部X線検査 (Skull Radiography), 歯科用プローブ検査 (Dental Probing)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Gingivitis and Periodontal Disease in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Infection (Cat)",
-    "name_ja": "Cardiovascular Infection (Cat)（Cat）",
+    "name_ja": "心血管系感染症（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -153,11 +153,11 @@
     "clinical_signs_ja": "臨床徴候は疾患過程と罹患臓器により異なる。食欲、活動量、外見の変化が一般的な徴候である。特異的な検査所見に基づき追加検査を進める。",
     "diagnosis": "Diagnosis of cardiovascular infection (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 身体検査 (Physical Examination), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Infection (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 身体検査 (Physical Examination), 尿検査 (Urinalysis)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Infection (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Inflammation (Cat)",
-    "name_ja": "Cardiovascular Inflammation (Cat)（Cat）",
+    "name_ja": "心血管系炎症（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -184,11 +184,11 @@
     "clinical_signs_ja": "臨床徴候は疾患過程と罹患臓器により異なる。食欲、活動量、外見の変化が一般的な徴候である。特異的な検査所見に基づき追加検査を進める。",
     "diagnosis": "Diagnosis of cardiovascular inflammation (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 身体検査 (Physical Examination), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Inflammation (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 身体検査 (Physical Examination), 尿検査 (Urinalysis)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Inflammation (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Neoplasia (Cat)",
-    "name_ja": "Cardiovascular Neoplasia (Cat)（Cat）",
+    "name_ja": "心血管系腫瘍（猫）",
     "species": "Cat",
     "symptoms": [
       "abdominal_distension",
@@ -216,11 +216,11 @@
     "clinical_signs_ja": "触知可能な腫瘤・腫脹、体重減少、食欲低下、無気力、腫瘍部位に応じた臓器特異的徴候、腫瘍随伴症候群（高カルシウム血症、貧血、悪液質）。",
     "diagnosis": "Diagnosis of cardiovascular neoplasia (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Neoplasia (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細胞診 (Cytology / FNA), 組織生検 (Biopsy / Histopathology), 画像診断 (Imaging: X-ray / Ultrasound), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Neoplasia (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Metabolic Disease (Cat)",
-    "name_ja": "Cardiovascular Metabolic Disease (Cat)（Cat）",
+    "name_ja": "心血管系代謝性疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -247,11 +247,11 @@
     "clinical_signs_ja": "多尿・多飲、体重変化、食欲変化、無気力、皮膚・被毛変化、筋力低下、意識状態の変化。特異的徴候は障害された内分泌軸に依存する。",
     "diagnosis": "Diagnosis of cardiovascular metabolic disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Metabolic Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), ホルモン検査 (Hormone Assay), 全血球計算 (CBC), 尿検査 (Urinalysis)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Metabolic Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Nutritional Deficiency (Cat)",
-    "name_ja": "Cardiovascular Nutritional Deficiency (Cat)（Cat）",
+    "name_ja": "心血管系栄養欠乏症（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -278,11 +278,11 @@
     "clinical_signs_ja": "成長不良、体重減少/肥満、被毛の悪化、無気力、骨格異常（MBD）、衰弱、繁殖障害、欠乏または過剰な栄養素に関連した臓器特異的徴候。",
     "diagnosis": "Diagnosis of cardiovascular nutritional deficiency (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), 全血球計算 (CBC), 食事内容の評価 (Dietary Assessment), X線検査 (Radiography). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Nutritional Deficiency (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), 全血球計算 (CBC), 食事内容の評価 (Dietary Assessment), X線検査 (Radiography)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Nutritional Deficiency (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Genetic Disorder (Cat)",
-    "name_ja": "Cardiovascular Genetic Disorder (Cat)（Cat）",
+    "name_ja": "心血管系遺伝性疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "deformity",
@@ -309,11 +309,11 @@
     "clinical_signs_ja": "出生時または幼少期からの徴候：発育不良、解剖学的異常、発達遅延、臓器機能障害、CNS関与時の痙攣。",
     "diagnosis": "Diagnosis of cardiovascular genetic disorder (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: X線検査 (Radiography), 超音波検査 (Ultrasonography), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Genetic Disorder (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 超音波検査 (Ultrasonography), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Genetic Disorder (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Autoimmune Disease (Cat)",
-    "name_ja": "Cardiovascular Autoimmune Disease (Cat)（Cat）",
+    "name_ja": "心血管系自己免疫疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -340,11 +340,11 @@
     "clinical_signs_ja": "皮膚病変（痂皮、潰瘍、水疱）、関節痛・腫脹、粘膜びらん、発熱、無気力、リンパ節腫大、標的組織に応じた臓器特異的機能障害。",
     "diagnosis": "Diagnosis of cardiovascular autoimmune disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 自己抗体検査 (Autoantibody Test), 皮膚生検 (Skin Biopsy). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Autoimmune Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 自己抗体検査 (Autoantibody Test), 皮膚生検 (Skin Biopsy)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Autoimmune Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Degenerative Disease (Cat)",
-    "name_ja": "Cardiovascular Degenerative Disease (Cat)（Cat）",
+    "name_ja": "心血管系変性疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -371,11 +371,11 @@
     "clinical_signs_ja": "臨床徴候は疾患過程と罹患臓器により異なる。食欲、活動量、外見の変化が一般的な徴候である。特異的な検査所見に基づき追加検査を進める。",
     "diagnosis": "Diagnosis of cardiovascular degenerative disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 身体検査 (Physical Examination), 尿検査 (Urinalysis). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Degenerative Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 身体検査 (Physical Examination), 尿検査 (Urinalysis)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Degenerative Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Traumatic Injury (Cat)",
-    "name_ja": "Cardiovascular Traumatic Injury (Cat)（Cat）",
+    "name_ja": "心血管系外傷（猫）",
     "species": "Cat",
     "symptoms": [
       "abdominal_pain",
@@ -402,11 +402,11 @@
     "clinical_signs_ja": "疼痛、腫脹、打撲、出血、跛行、運動性低下、創傷・組織損傷の視認、行動変化（隠れる、攻撃性）、重症例ではショック徴候。",
     "diagnosis": "Diagnosis of cardiovascular traumatic injury (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Traumatic Injury (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Traumatic Injury (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Behavioral Disorder (Cat)",
-    "name_ja": "Cardiovascular Behavioral Disorder (Cat)（Cat）",
+    "name_ja": "心血管系行動障害（猫）",
     "species": "Cat",
     "symptoms": [
       "aggression",
@@ -433,11 +433,11 @@
     "clinical_signs_ja": "異常反復行動、自傷、羽毛・毛引き、攻撃性、過度の発声、常同歩行、活動量低下、食欲変化、回避行動。",
     "diagnosis": "Diagnosis of cardiovascular behavioral disorder (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 行動評価 (Behavioral Assessment), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 環境・飼育評価 (Husbandry Assessment). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Behavioral Disorder (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 行動評価 (Behavioral Assessment), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 環境・飼育評価 (Husbandry Assessment)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Behavioral Disorder (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Infectious Disease (Cat)",
-    "name_ja": "Cardiovascular Infectious Disease (Cat)（Cat）",
+    "name_ja": "心血管系感染性疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -464,11 +464,11 @@
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of cardiovascular infectious disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Infectious Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Infectious Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Parasitic Disease (Cat)",
-    "name_ja": "Cardiovascular Parasitic Disease (Cat)（Cat）",
+    "name_ja": "心血管系寄生虫感染症（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -495,11 +495,11 @@
     "clinical_signs_ja": "掻痒、皮膚病変、脱毛・脱羽、下痢、体重減少、貧血、被毛・羽毛の悪化、寄生虫・虫卵の目視、重度寄生では腹部膨満が見られる。",
     "diagnosis": "Diagnosis of cardiovascular parasitic disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Parasitic Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Parasitic Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Viral Disease (Cat)",
-    "name_ja": "Cardiovascular Viral Disease (Cat)（Cat）",
+    "name_ja": "心血管系ウイルス性疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -526,11 +526,11 @@
     "clinical_signs_ja": "発熱、無気力、食欲不振、鼻汁・眼脂、呼吸器症状、下痢・嘔吐（指向性により異なる）、リンパ節腫大、脱水。種特異的徴候として皮膚病変、神経症状、出血が見られることがある。",
     "diagnosis": "Diagnosis of cardiovascular viral disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Viral Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: PCR検査 (PCR Test), 血清抗体検査 (Serology / Antibody Test), 全血球計算 (CBC), ウイルス分離培養 (Virus Isolation)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Viral Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Bacterial Disease (Cat)",
-    "name_ja": "Cardiovascular Bacterial Disease (Cat)（Cat）",
+    "name_ja": "心血管系細菌性疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "appetite_loss",
@@ -557,11 +557,11 @@
     "clinical_signs_ja": "発熱、局所の腫脹・発赤・熱感・疼痛、膿性分泌物、無気力、食欲不振、白血球数増加。臓器特異的な徴候は罹患臓器系に依存する。",
     "diagnosis": "Diagnosis of cardiovascular bacterial disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Bacterial Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 細菌培養・感受性試験 (Culture & Sensitivity), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), グラム染色 (Gram Stain)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Bacterial Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Cardiovascular Fungal Disease (Cat)",
-    "name_ja": "Cardiovascular Fungal Disease (Cat)（Cat）",
+    "name_ja": "心血管系真菌性疾患（猫）",
     "species": "Cat",
     "symptoms": [
       "draining_wound",
@@ -588,7 +588,7 @@
     "clinical_signs_ja": "皮膚病変（脱毛、痂皮、鱗屑）、鼻汁、呼吸困難、皮下結節、リンパ節腫大、発熱、体重減少。全身性真菌症では多臓器障害を引き起こしうる。",
     "diagnosis": "Diagnosis of cardiovascular fungal disease (cat) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology). Differential diagnosis should consider other conditions presenting with similar clinical signs in cat.",
     "diagnosis_ja": "Cardiovascular Fungal Disease (Cat)（Cat）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology)。Catにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "Cardiovascular Fungal Disease (Cat) in Cat"
+    "pathophysiology_ja": ""
   },
   {
     "name": "Rabbit Hemorrhagic Disease (RHD)",

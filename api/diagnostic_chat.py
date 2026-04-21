@@ -23,6 +23,7 @@ permitted by the Veterinary Practice Act (獣医師法).
 
 import logging
 import os
+import threading
 from typing import Any, Dict, Optional
 
 from flask import Blueprint, jsonify, request
@@ -44,11 +45,18 @@ _SYMPTOMS_BY_ID: dict = {s["id"]: s for s in SYMPTOMS}
 # AI-powered symptom extraction (Phase 1)
 _AI_EXTRACTION_ENABLED = os.getenv("VETDICT_USE_AI_SYMPTOM_EXTRACTION", "false").lower() == "true"
 _AI_EXTRACTOR = None
+_AI_EXTRACTOR_LOCK = threading.Lock()
 
 def _get_ai_extractor():
-    """Lazy-load AI extractor singleton."""
+    """Lazy-load AI extractor singleton (thread-safe)."""
     global _AI_EXTRACTOR
-    if _AI_EXTRACTOR is None and _AI_EXTRACTION_ENABLED:
+    if _AI_EXTRACTOR is not None:
+        return _AI_EXTRACTOR if _AI_EXTRACTOR else None
+    if not _AI_EXTRACTION_ENABLED:
+        return None
+    with _AI_EXTRACTOR_LOCK:
+        if _AI_EXTRACTOR is not None:
+            return _AI_EXTRACTOR if _AI_EXTRACTOR else None
         try:
             from api.ai import SymptomExtractor
             from api.config_constants import (
@@ -66,7 +74,7 @@ def _get_ai_extractor():
             ai_confidence = float(os.getenv("AI_SYMPTOM_CONFIDENCE", AI_SYMPTOM_CONFIDENCE_THRESHOLD))
             ai_fallback = os.getenv("AI_SYMPTOM_FALLBACK", "true").lower() == "true"
 
-            _AI_EXTRACTOR = SymptomExtractor(
+            extractor = SymptomExtractor(
                 api_key=os.getenv("ANTHROPIC_API_KEY"),
                 model=ai_model,
                 timeout=ai_timeout,
@@ -76,7 +84,8 @@ def _get_ai_extractor():
                 fallback_enabled=ai_fallback,
                 manual_aliases=SYMPTOM_ALIASES if 'SYMPTOM_ALIASES' in globals() else {},
             )
-            _AI_EXTRACTOR.set_valid_symptom_ids(SYMPTOM_IDS)
+            extractor.set_valid_symptom_ids(SYMPTOM_IDS)
+            _AI_EXTRACTOR = extractor
             logger.info("AI symptom extractor initialized (model=%s, timeout=%ss)", ai_model, ai_timeout)
         except Exception as e:
             logger.warning("Failed to initialize AI extractor: %s", e)
