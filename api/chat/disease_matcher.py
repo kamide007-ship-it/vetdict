@@ -7,6 +7,154 @@ negative evidence penalties, urgency boosts, and prevalence correction.
 import math
 
 from api.chat.species_data import _SPECIES_DATA
+from api.species import prevalence_data as _prev_mod
+
+# Synonym expansion table shared across species — bridges concept-equivalent IDs
+# (e.g. fin_rot ↔ frayed_fins, hair_loss ↔ alopecia, polydipsia ↔ excessive_thirst).
+# Hoisted to module scope so the dict literal isn't rebuilt on every call.
+_SYN: dict[str, list[str]] = {
+    "frayed_fins": ["fin_rot"], "fin_rot": ["frayed_fins"],
+    "redness_skin": ["fin_hemorrhage", "hemorrhage", "skin_redness"], "fin_hemorrhage": ["redness_skin"],
+    "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
+    "loss_of_appetite": ["appetite_loss", "anorexia"], "appetite_loss": ["loss_of_appetite", "anorexia"],
+    "anorexia": ["loss_of_appetite", "appetite_loss"],
+    "constipation": ["reduced_fecal_output", "small_fecal_pellets", "decreased_fecal_output"],
+    "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
+    "reduced_fecal_output": ["small_fecal_pellets", "constipation", "decreased_fecal_output"],
+    "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
+    "bloating": ["abdominal_distension", "abdominal_pain"], "abdominal_distension": ["bloating", "abdominal_pain"],
+    "abdominal_pain": ["bloating", "abdominal_distension", "hunched_posture"],
+    "hunched_posture": ["abdominal_pain"],
+    "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
+    "frequent_urination": ["excessive_urination", "polyuria", "increased_urination"],
+    "excessive_urination": ["frequent_urination", "polyuria", "increased_urination"],
+    "increased_urination": ["excessive_urination", "frequent_urination", "polyuria"],
+    "excessive_thirst": ["polydipsia", "increased_thirst"],
+    "increased_thirst": ["excessive_thirst", "polydipsia"],
+    "polydipsia": ["excessive_thirst", "increased_thirst"],
+    "polyuria": ["excessive_urination", "frequent_urination", "increased_urination"],
+    "hair_loss": ["alopecia", "scaling", "quill_loss", "severe_quill_loss", "feather_loss", "circular_hair_loss"],
+    "circular_hair_loss": ["hair_loss", "alopecia"],
+    "alopecia": ["hair_loss", "circular_hair_loss"],
+    "feather_loss": ["hair_loss", "feather_plucking"],
+    "feather_plucking": ["feather_loss", "self_mutilation"],
+    "skin_lesions": ["scaling", "dermatitis", "skin_rash", "crusting", "thick_crusting", "flaky_skin", "dry_skin", "shell_discoloration", "shell_pitting", "skin_crusting"],
+    "scaly_skin": ["scaling", "dandruff", "skin_crusting", "dry_skin"],
+    "skin_crusting": ["scaling", "scaly_skin", "dandruff"],
+    "scaling": ["skin_lesions", "dandruff", "scaly_skin"],
+    "dandruff": ["scaling", "scaly_skin", "skin_crusting"],
+    "itching": ["pruritus", "scratching", "mild_itching", "ear_scratching"],
+    "pruritus": ["itching", "scratching", "mild_itching", "ear_scratching"],
+    "cloudy_eyes": ["cloudy_eye", "cloudiness_in_eyes", "corneal_cloudiness", "corneal_opacity"],
+    "cloudy_eye": ["cloudy_eyes", "corneal_cloudiness", "corneal_opacity"],
+    "corneal_opacity": ["corneal_cloudiness", "cloudy_eyes", "cloudy_eye"],
+    "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye"],
+    "tearing": ["excessive_tearing", "epiphora"], "excessive_tearing": ["tearing", "epiphora"],
+    "vision_loss": ["blindness", "cloudy_eye", "cataracts"],
+    "open_mouth_breathing": ["respiratory_distress", "labored_breathing"],
+    "labored_breathing": ["respiratory_distress", "open_mouth_breathing", "dyspnea"],
+    "respiratory_distress": ["labored_breathing", "open_mouth_breathing", "dyspnea"],
+    "wheezing": ["coughing", "labored_breathing", "respiratory_distress"],
+    "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots", "fractures", "bone_deformity", "soft_shell", "shell_softening"],
+    "bone_deformity": ["soft_bones", "limb_deformity", "shell_deformity", "fractures", "swollen_limbs"],
+    "shell_softening": ["soft_shell", "soft_bones", "shell_deformity"],
+    "soft_shell": ["shell_softening", "soft_bones", "shell_deformity"],
+    "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],
+    "head_tilt": ["vestibular_signs", "torticollis"],
+    "fluffed_feathers": ["feather_fluffing"],
+    "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_limb_paralysis"],
+    "paralysis": ["hind_limb_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
+    "sudden_paralysis": ["hind_limb_paralysis", "paralysis", "paralysis_or_paresis"],
+    "hind_limb_paralysis": ["paralysis", "sudden_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
+    "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye", "eye_protrusion"],
+    "eye_protrusion": ["eye_swelling", "eye_bulging", "pop_eye", "exophthalmos", "bulging_eye", "proptosis"],
+    "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "enlarged_eye", "proptosis"],
+    "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
+    "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "enlarged_eye", "proptosis"],
+    "jaundice": ["icterus", "yellow_skin"],
+    "vomiting": ["regurgitation", "crop_stasis"],
+    "regurgitation": ["vomiting"],
+    "head_shaking": ["head_bobbing"],
+    "gill_swelling": ["gill_redness"],
+    "gill_paleness": ["gill_necrosis"],
+    "nystagmus": ["head_tilt", "rolling"],
+    "ataxia": ["tremors", "incoordination", "wobbling", "stumbling", "mild_ataxia"],
+    "tremors": ["ataxia", "shaking", "muscle_twitching"],
+    "wobbling": ["ataxia", "incoordination", "stumbling"],
+    "ear_discharge": ["ear_infection", "otitis", "ear_mites"],
+    "blood_in_urine": ["hematuria", "uterine_bleeding"],
+    "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
+    "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
+    "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
+    "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis", "hind_leg_weakness"],
+    "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis", "hind_leg_weakness"],
+    "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis"],
+    "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
+    "sneezing": ["nasal_discharge"],
+    "wet_tail": ["diarrhea"], "diarrhea": ["wet_tail"],
+    "poor_coat": ["hair_loss", "dry_skin"], "dry_skin": ["poor_coat", "flaky_skin", "scaling"],
+    "flaky_skin": ["dry_skin", "scaling", "crusting"],
+    "thinning_skin": ["hair_loss"],
+    "darkened_coloration": ["dark_coloration", "discoloration"],
+    "dark_coloration": ["darkened_coloration", "discoloration"],
+    "cold_limbs": ["cold_extremities"], "cold_extremities": ["cold_limbs"],
+    "self_mutilation": ["self_chewing", "feather_plucking"],
+    "self_chewing": ["self_mutilation"],
+    "behavioral_change": ["behavioral_changes", "aggression"],
+    "behavioral_changes": ["behavioral_change"],
+    "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
+    "pleural_effusion": ["effusion", "abdominal_distension"],
+    "ascites": ["effusion", "abdominal_distension", "bloating", "dropsy"],
+    "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
+    "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
+    "dental_overgrowth": ["overgrown_teeth", "malocclusion", "visible_tooth_overgrowth"],
+    "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
+    "dysecdysis": ["retained_shed", "retained_skin", "shedding_problems"],
+    "retained_shed": ["dysecdysis", "retained_skin"],
+    "retained_skin": ["dysecdysis", "retained_shed"],
+    "crop_swelling": ["crop_stasis", "ingluvitis"],
+    "crop_stasis": ["crop_swelling", "ingluvitis"],
+    "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
+    "red_ventrum": ["red_legs", "skin_redness"],
+    "edema": ["swelling", "bloating", "ascites"],
+    "swelling": ["edema", "facial_swelling", "eye_swelling"],
+    "rough_coat": ["poor_coat", "dry_skin"],
+    "scaly_legs": ["leg_scales", "scaly_face"],
+    "leg_scales": ["scaly_legs", "scaly_face"],
+    "scaly_face": ["scaly_legs", "leg_scales", "crusty_beak"],
+    "hole_in_head": ["head_erosion", "head_pitting"],
+}
+
+# Prevalence tier multipliers (region-aware data is loaded per call by species).
+_PREVALENCE_MULTIPLIER: dict[str, float] = {
+    "very_common": 1.35,
+    "common": 1.125,
+    "uncommon": 0.875,
+    "rare": 0.70,
+}
+
+# Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.
+# Cached after first call since the disease data is loaded at module import
+# time and doesn't change at runtime.
+_SPECIES_IDF_CACHE: dict[str, tuple[dict[str, int], int]] = {}
+
+
+def _get_species_idf(species: str, diseases: list) -> tuple[dict[str, int], int]:
+    """Return (symptom_disease_count, total_diseases) for a species, cached.
+
+    The disease list is fixed at module load — counting how often each symptom
+    appears across all diseases is a one-shot computation per species.
+    """
+    cached = _SPECIES_IDF_CACHE.get(species)
+    if cached is not None:
+        return cached
+    counts: dict[str, int] = {}
+    for disease in diseases:
+        for s in disease.get("symptoms", set()):
+            counts[s] = counts.get(s, 0) + 1
+    total = max(len(diseases), 1)
+    _SPECIES_IDF_CACHE[species] = (counts, total)
+    return counts, total
 
 
 def _match_species_symptoms_to_diseases(
@@ -32,120 +180,7 @@ def _match_species_symptoms_to_diseases(
     if not sp_data or not symptom_ids:
         return []
 
-    # Expand user symptoms with synonyms for better disease matching
-    # Synonym map for matching (shared concepts across species)
-    _SYN = {
-        "frayed_fins": ["fin_rot"], "fin_rot": ["frayed_fins"],
-        "redness_skin": ["fin_hemorrhage", "hemorrhage", "skin_redness"], "fin_hemorrhage": ["redness_skin"],
-        "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
-        "loss_of_appetite": ["appetite_loss", "anorexia"], "appetite_loss": ["loss_of_appetite", "anorexia"],
-        "anorexia": ["loss_of_appetite", "appetite_loss"],
-        "constipation": ["reduced_fecal_output", "small_fecal_pellets", "decreased_fecal_output"],
-        "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
-        "reduced_fecal_output": ["small_fecal_pellets", "constipation", "decreased_fecal_output"],
-        "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
-        "bloating": ["abdominal_distension", "abdominal_pain"], "abdominal_distension": ["bloating", "abdominal_pain"],
-        "abdominal_pain": ["bloating", "abdominal_distension", "hunched_posture"],
-        "hunched_posture": ["abdominal_pain"],
-        "excessive_drooling": ["drooling"], "drooling": ["excessive_drooling"],
-        "frequent_urination": ["excessive_urination", "polyuria", "increased_urination"],
-        "excessive_urination": ["frequent_urination", "polyuria", "increased_urination"],
-        "increased_urination": ["excessive_urination", "frequent_urination", "polyuria"],
-        "excessive_thirst": ["polydipsia", "increased_thirst"],
-        "increased_thirst": ["excessive_thirst", "polydipsia"],
-        "polydipsia": ["excessive_thirst", "increased_thirst"],
-        "polyuria": ["excessive_urination", "frequent_urination", "increased_urination"],
-        "hair_loss": ["alopecia", "scaling", "quill_loss", "severe_quill_loss", "feather_loss", "circular_hair_loss"],
-        "circular_hair_loss": ["hair_loss", "alopecia"],
-        "alopecia": ["hair_loss", "circular_hair_loss"],
-        "feather_loss": ["hair_loss", "feather_plucking"],
-        "feather_plucking": ["feather_loss", "self_mutilation"],
-        "skin_lesions": ["scaling", "dermatitis", "skin_rash", "crusting", "thick_crusting", "flaky_skin", "dry_skin", "shell_discoloration", "shell_pitting", "skin_crusting"],
-        "scaly_skin": ["scaling", "dandruff", "skin_crusting", "dry_skin"],
-        "skin_crusting": ["scaling", "scaly_skin", "dandruff"],
-        "scaling": ["skin_lesions", "dandruff", "scaly_skin"],
-        "dandruff": ["scaling", "scaly_skin", "skin_crusting"],
-        "itching": ["pruritus", "scratching", "mild_itching", "ear_scratching"],
-        "pruritus": ["itching", "scratching", "mild_itching", "ear_scratching"],
-        "cloudy_eyes": ["cloudy_eye", "cloudiness_in_eyes", "corneal_cloudiness", "corneal_opacity"],
-        "cloudy_eye": ["cloudy_eyes", "corneal_cloudiness", "corneal_opacity"],
-        "corneal_opacity": ["corneal_cloudiness", "cloudy_eyes", "cloudy_eye"],
-        "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye"],
-        "tearing": ["excessive_tearing", "epiphora"], "excessive_tearing": ["tearing", "epiphora"],
-        "vision_loss": ["blindness", "cloudy_eye", "cataracts"],
-        "open_mouth_breathing": ["respiratory_distress", "labored_breathing"],
-        "labored_breathing": ["respiratory_distress", "open_mouth_breathing", "dyspnea"],
-        "respiratory_distress": ["labored_breathing", "open_mouth_breathing", "dyspnea"],
-        "wheezing": ["coughing", "labored_breathing", "respiratory_distress"],
-        "soft_bones": ["bone_weakness", "jaw_softening", "shell_soft_spots", "fractures", "bone_deformity", "soft_shell", "shell_softening"],
-        "bone_deformity": ["soft_bones", "limb_deformity", "shell_deformity", "fractures", "swollen_limbs"],
-        "shell_softening": ["soft_shell", "soft_bones", "shell_deformity"],
-        "soft_shell": ["shell_softening", "soft_bones", "shell_deformity"],
-        "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],
-        "head_tilt": ["vestibular_signs", "torticollis"],
-        "fluffed_feathers": ["feather_fluffing"],
-        "paralysis_or_paresis": ["paralysis", "paresis", "hind_limb_weakness", "posterior_paresis", "progressive_paralysis", "hindlimb_weakness", "hind_limb_paralysis"],
-        "paralysis": ["hind_limb_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
-        "sudden_paralysis": ["hind_limb_paralysis", "paralysis", "paralysis_or_paresis"],
-        "hind_limb_paralysis": ["paralysis", "sudden_paralysis", "paralysis_or_paresis", "hind_limb_weakness"],
-        "eye_swelling": ["periorbital_swelling", "swollen_eyes", "blepharitis", "pop_eye", "exophthalmia", "exophthalmos", "bulging_eye", "eye_bulging", "enlarged_eye", "eye_protrusion"],
-        "eye_protrusion": ["eye_swelling", "eye_bulging", "pop_eye", "exophthalmos", "bulging_eye", "proptosis"],
-        "eye_bulging": ["eye_protrusion", "eye_swelling", "pop_eye", "exophthalmos", "enlarged_eye", "proptosis"],
-        "enlarged_eye": ["eye_bulging", "eye_swelling", "exophthalmos", "pop_eye", "eye_protrusion"],
-        "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "enlarged_eye", "proptosis"],
-        "jaundice": ["icterus", "yellow_skin"],
-        "vomiting": ["regurgitation", "crop_stasis"],
-        "regurgitation": ["vomiting"],
-        "head_shaking": ["head_bobbing"],
-        "gill_swelling": ["gill_redness"],
-        "gill_paleness": ["gill_necrosis"],
-        "nystagmus": ["head_tilt", "rolling"],
-        "ataxia": ["tremors", "incoordination", "wobbling", "stumbling", "mild_ataxia"],
-        "tremors": ["ataxia", "shaking", "muscle_twitching"],
-        "wobbling": ["ataxia", "incoordination", "stumbling"],
-        "ear_discharge": ["ear_infection", "otitis", "ear_mites"],
-        "blood_in_urine": ["hematuria", "uterine_bleeding"],
-        "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
-        "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
-        "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
-        "hind_limb_weakness": ["hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis", "progressive_paralysis", "hind_leg_weakness"],
-        "hindlimb_weakness": ["hind_limb_weakness", "posterior_paresis", "hind_limb_paralysis", "hind_leg_weakness"],
-        "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis", "hind_limb_paralysis"],
-        "swollen_eyes": ["eye_swelling", "periorbital_swelling"],
-        "sneezing": ["nasal_discharge"],
-        "wet_tail": ["diarrhea"], "diarrhea": ["wet_tail"],
-        "poor_coat": ["hair_loss", "dry_skin"], "dry_skin": ["poor_coat", "flaky_skin", "scaling"],
-        "flaky_skin": ["dry_skin", "scaling", "crusting"],
-        "thinning_skin": ["hair_loss"],
-        "darkened_coloration": ["dark_coloration", "discoloration"],
-        "dark_coloration": ["darkened_coloration", "discoloration"],
-        "cold_limbs": ["cold_extremities"], "cold_extremities": ["cold_limbs"],
-        "self_mutilation": ["self_chewing", "feather_plucking"],
-        "self_chewing": ["self_mutilation"],
-        "behavioral_change": ["behavioral_changes", "aggression"],
-        "behavioral_changes": ["behavioral_change"],
-        "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
-        "pleural_effusion": ["effusion", "abdominal_distension"],
-        "ascites": ["effusion", "abdominal_distension", "bloating", "dropsy"],
-        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
-        "overgrown_teeth": ["dental_overgrowth", "incisor_overgrowth", "molar_overgrowth", "malocclusion", "visible_tooth_overgrowth"],
-        "dental_overgrowth": ["overgrown_teeth", "malocclusion", "visible_tooth_overgrowth"],
-        "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
-        "dysecdysis": ["retained_shed", "retained_skin", "shedding_problems"],
-        "retained_shed": ["dysecdysis", "retained_skin"],
-        "retained_skin": ["dysecdysis", "retained_shed"],
-        "crop_swelling": ["crop_stasis", "ingluvitis"],
-        "crop_stasis": ["crop_swelling", "ingluvitis"],
-        "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
-        "red_ventrum": ["red_legs", "skin_redness"],
-        "edema": ["swelling", "bloating", "ascites"],
-        "swelling": ["edema", "facial_swelling", "eye_swelling"],
-        "rough_coat": ["poor_coat", "dry_skin"],
-        "scaly_legs": ["leg_scales", "scaly_face"],
-        "leg_scales": ["scaly_legs", "scaly_face"],
-        "scaly_face": ["scaly_legs", "leg_scales", "crusty_beak"],
-        "hole_in_head": ["head_erosion", "head_pitting"],
-    }
+    # Expand user symptoms with synonyms for better disease matching.
     expanded_set = set(symptom_ids)
     for sid in symptom_ids:
         for alt in _SYN.get(sid, []):
@@ -154,23 +189,11 @@ def _match_species_symptoms_to_diseases(
     diseases = sp_data["diseases"]
 
     # --- Load prevalence data for this species (region-aware) ---
-    from api.species import prevalence_data as _prev_mod
     _region = "jp" if lang == "ja" else ("intl" if lang else "")
     _prevalence = _prev_mod.get_prevalence_for_species(species, region=_region)
-    _PREVALENCE_MULTIPLIER = {
-        "very_common": 1.35,
-        "common": 1.125,
-        "uncommon": 0.875,
-        "rare": 0.70,
-    }
 
-    # --- Build per-symptom specificity for this species ---
-    # Count how many diseases each symptom appears in (IDF-like).
-    symptom_disease_count: dict[str, int] = {}
-    for disease in diseases:
-        for s in disease.get("symptoms", set()):
-            symptom_disease_count[s] = symptom_disease_count.get(s, 0) + 1
-    total_diseases = max(len(diseases), 1)
+    # --- Build per-symptom specificity for this species (cached) ---
+    symptom_disease_count, total_diseases = _get_species_idf(species, diseases)
 
     _weight_cache: dict[str, float] = {}
 
@@ -301,5 +324,3 @@ def _match_species_symptoms_to_diseases(
 
     matches.sort(key=lambda m: m["similarity_score"], reverse=True)
     return matches
-
-
