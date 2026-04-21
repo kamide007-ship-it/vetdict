@@ -2367,7 +2367,7 @@ function renderChatResult(container,data){
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
         ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${escapeHtml(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))}</div>`:""}
-        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">\u4e00\u81f4: ${c.matched_symptoms.map(s=>escapeHtml(s)).join(", ")}</div>`:""}
+        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">${currentLang==="ja"?"\u4e00\u81f4: ":"Matched: "}${escapeHtml(c.matched_symptoms.map(sid=>{const f=(symptoms||[]).find(s=>s&&s.id===sid);return f?(currentLang==="ja"?(f.name_ja||f.name_en||sid):(f.name_en||f.name_ja||sid)):sid;}).join(", "))}</div>`:""}
         ${c.mentioned_drugs&&c.mentioned_drugs.length?renderMentionedDrugs(c):""}
       `;
       listDiv.appendChild(card);
