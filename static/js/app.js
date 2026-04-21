@@ -1430,6 +1430,21 @@ function escapeHtml(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
 }
 
+function renderTreatmentWithAdjunct(text){
+  const raw=String(text??"");
+  const marker="[ECVN:Block]";
+  const idx=raw.indexOf(marker);
+  if(idx===-1) return escapeHtml(raw);
+  const main=raw.slice(0,idx).replace(/\s+$/,"");
+  const adjunct=raw.slice(idx+marker.length).replace(/^\s+/,"");
+  const adjHtml=escapeHtml(adjunct).replace(
+    /caninevet\.jp/g,
+    '<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">caninevet.jp</a>'
+  );
+  const mainHtml=main?escapeHtml(main):"";
+  return `${mainHtml}<div class="ecvn-adjunct-block" role="note" aria-label="ECVN adjunct options">${adjHtml}</div>`;
+}
+
 function sanitizeUrl(value){
   try{
     const url=new URL(String(value??""),window.location.origin);
@@ -2049,7 +2064,7 @@ function renderDiseaseCard(d,data){
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")}</div>
-          <div class="detail-section-body">${escapeHtml(treatment)}</div>
+          <div class="detail-section-body">${renderTreatmentWithAdjunct(treatment)}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F6E1}\uFE0F</span> ${t("dtPrevention")}</div>
@@ -2300,7 +2315,7 @@ function renderDiseaseDb(){
         <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
         <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
         <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
-        <dt>${t("dtTreatment")}</dt><dd>${escapeHtml(treatment)}</dd>
+        <dt>${t("dtTreatment")}</dt><dd>${renderTreatmentWithAdjunct(treatment)}</dd>
         <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
         ${(d.symptoms_display&&d.symptoms_display.length)?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(d.symptoms_display.map(s=>currentLang==="ja"?(s.name_ja||s.id):(s.name_en||s.id)).join("、"))}</dd>`:(d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:"")}
         ${(d.recommended_tests_display&&d.recommended_tests_display.length)?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests_display.map(x=>currentLang==="ja"?(x.name_ja||x.id):(x.name_en||x.id)).join("、"))}</dd>`:(d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:"")}
