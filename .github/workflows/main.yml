@@ -31,23 +31,18 @@ jobs:
           fi
 
           echo "count=${#files[@]}" >> "$GITHUB_OUTPUT"
-          {
-            echo "files<<EOF"
-            printf '%s
-' "${files[@]}"
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${files[@]}" > .changed-python-files.txt
       - name: ruff lint (changed files)
         if: ${{ steps.changed_python.outputs.count != '0' }}
         shell: bash
         run: |
-          mapfile -t files <<< "${{ steps.changed_python.outputs.files }}"
-          ruff check "${files[@]}"
+          mapfile -t files < .changed-python-files.txt
+          ruff check "${files[@]}" --config pyproject.toml
       - name: ruff format check (changed files)
         if: ${{ steps.changed_python.outputs.count != '0' }}
         shell: bash
         run: |
-          mapfile -t files <<< "${{ steps.changed_python.outputs.files }}"
+          mapfile -t files < .changed-python-files.txt
           ruff format "${files[@]}" --check
       - name: no Python changes
         if: ${{ steps.changed_python.outputs.count == '0' }}
