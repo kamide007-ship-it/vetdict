@@ -11,14 +11,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - run: pip install ruff
-      - name: ruff lint (strict)
-        run: ruff check . --select=E,W,F,I,B,SIM,C90,N
-      - name: ruff format check
-        run: ruff format . --check
+      - name: detect changed Python files
+        id: changed_python
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git fetch origin "${{ github.base_ref }}" --force
+            mapfile -t files < <(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.py')
+          # GitHub uses the all-zero null SHA for initial pushes.
+          elif [[ -n "${{ github.event.before }}" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+            mapfile -t files < <(git diff --name-only --diff-filter=ACMR "${{ github.event.before }}...HEAD" -- '*.py')
+          else
+            mapfile -t files < <(git ls-files '*.py')
+          fi
+
+          echo "count=${#files[@]}" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${files[@]}" > .changed-python-files.txt
+      - name: ruff lint (changed files)
+        if: ${{ steps.changed_python.outputs.count != '0' }}
+        shell: bash
+        run: |
+          mapfile -t files < .changed-python-files.txt
+          ruff check "${files[@]}"
+      - name: ruff format check (changed files)
+        if: ${{ steps.changed_python.outputs.count != '0' }}
+        shell: bash
+        run: |
+          mapfile -t files < .changed-python-files.txt
+          ruff format "${files[@]}" --check
+      - name: no Python changes
+        if: ${{ steps.changed_python.outputs.count == '0' }}
+        run: echo 'No Python files changed; skipping Ruff checks.'
 
   secret-scan:
     runs-on: ubuntu-latest
