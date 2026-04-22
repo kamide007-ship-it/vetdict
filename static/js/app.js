@@ -1779,7 +1779,7 @@ function renderResults(data){
     if(mode==="confidence")sorted.sort((a,b)=>(b.match_percent||b.confidence||0)-(a.match_percent||a.confidence||0));
     else if(mode==="severity")sorted.sort((a,b)=>(sevOrder[a.severity]??4)-(sevOrder[b.severity]??4));
     const cardsArea=contentDiv.querySelector(".results-cards-area");
-    if(cardsArea){cardsArea.innerHTML="";sorted.forEach(d=>{cardsArea.insertAdjacentHTML("beforeend",renderDiseaseCard(d,data));});}
+    if(cardsArea){cardsArea.innerHTML="";_cardIndex=0;sorted.forEach(d=>{cardsArea.insertAdjacentHTML("beforeend",renderDiseaseCard(d,data));});}
   });
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
@@ -3268,9 +3268,11 @@ function loadDrugDictionary(){
   const dwInput=document.getElementById("drugWeight");
   if(dwInput){
     const saved=localStorage.getItem("vetdict-drug-weight");
-    if(saved)dwInput.value=saved;
+    if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;
     dwInput.addEventListener("input",debounce(()=>{
-      if(dwInput.value)localStorage.setItem("vetdict-drug-weight",dwInput.value);
+      const v=dwInput.value.trim();
+      if(v===""){localStorage.removeItem("vetdict-drug-weight");}
+      else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
       renderDrugList();
     },300));
   }
@@ -3985,21 +3987,23 @@ renderSpeciesGrid=function(){
       banner.innerHTML=`<span class="pwa-icon">📲</span><span class="pwa-text">${isJa?"VetDictをアプリとしてインストール":"Install VetDict as an app"}</span><button class="pwa-install-btn">${isJa?"インストール":"Install"}</button><button class="pwa-dismiss-btn" aria-label="Dismiss">✕</button>`;
       document.body.appendChild(banner);
       requestAnimationFrame(()=>banner.classList.add("visible"));
+      const removeBanner=()=>{banner.classList.remove("visible");setTimeout(()=>banner.remove(),300);};
       banner.querySelector(".pwa-install-btn").addEventListener("click",()=>{
-        banner.classList.remove("visible");deferredPrompt.prompt();
+        removeBanner();deferredPrompt.prompt();
         deferredPrompt.userChoice.then(c=>{if(c.outcome==="accepted"){localStorage.setItem("vetdict-pwa-dismissed","1");}deferredPrompt=null;});
       });
       banner.querySelector(".pwa-dismiss-btn").addEventListener("click",()=>{
-        banner.classList.remove("visible");localStorage.setItem("vetdict-pwa-dismissed","1");
+        removeBanner();localStorage.setItem("vetdict-pwa-dismissed","1");
       });
     },5000);
   });
   window.addEventListener("appinstalled",()=>{const b=document.getElementById("pwaInstallBanner");if(b)b.remove();});
 })();
 
-const _toastQueue=[];let _toastBusy=false;
+const _toastQueue=[];let _toastBusy=false;const _TOAST_MAX_QUEUE=5;
 function showToast(msg,type,duration){
   type=type||"";duration=duration||2500;
+  if(_toastQueue.length>=_TOAST_MAX_QUEUE)_toastQueue.shift();
   _toastQueue.push({msg,type,duration});
   if(!_toastBusy)_drainToastQueue();
 }
