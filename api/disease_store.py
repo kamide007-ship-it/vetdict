@@ -121,7 +121,7 @@ def _fallback_disease_counts() -> dict[str, int]:
     counts: dict[str, int] = {}
 
     # Map species id -> module info
-    _MODULE_MAP = {
+    _module_map = {
         "dog": ("api.species.dog_diseases", "DISEASES"),
         "horse": ("api.species.equine_diseases", "DISEASE_DATABASE"),
         "cat": ("api.species.cat_diseases", "DISEASES"),
@@ -146,7 +146,7 @@ def _fallback_disease_counts() -> dict[str, int]:
     }
 
     import importlib
-    for sp_id, (mod_path, attr) in _MODULE_MAP.items():
+    for sp_id, (mod_path, attr) in _module_map.items():
         try:
             mod = importlib.import_module(mod_path)
             data = getattr(mod, attr, [])

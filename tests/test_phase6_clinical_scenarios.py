@@ -11,7 +11,7 @@ from api.ai.multidisease_question_generator import MultiDiseaseQuestionGenerator
 from api.ai.symptom_context_engine import AmbiguitySolver
 
 
-class TestScenario_CanineHipVsArthritis:
+class TestScenarioCanineHipVsArthritis:
     """Scenario 1: Differentiating Hip Dysplasia from Osteoarthritis in a senior dog.
 
     Clinical presentation:
@@ -127,7 +127,7 @@ class TestScenario_CanineHipVsArthritis:
         assert isinstance(result_old, dict)
 
 
-class TestScenario_FelinePancreatitisVsGastroenteritis:
+class TestScenarioFelinePancreatitisVsGastroenteritis:
     """Scenario 2: Differentiating Pancreatitis from Gastroenteritis in a cat.
 
     Clinical presentation:
@@ -231,7 +231,7 @@ class TestScenario_FelinePancreatitisVsGastroenteritis:
         assert "disease_candidates_count" in result
 
 
-class TestScenario_MultipleJointDisease:
+class TestScenarioMultipleJointDisease:
     """Scenario 3: Multiple joint involvement - Hip Dysplasia + Elbow Dysplasia.
 
     Clinical presentation:
@@ -282,7 +282,7 @@ class TestScenario_MultipleJointDisease:
         assert result["disease_candidates_count"] == 2
 
 
-class TestScenario_AmbiguousOnsetTiming:
+class TestScenarioAmbiguousOnsetTiming:
     """Scenario 4: Onset timing distinguishes acute vs chronic disease.
 
     Question: When symptoms started - sudden vs gradual - can distinguish

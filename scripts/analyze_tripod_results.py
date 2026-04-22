@@ -20,7 +20,7 @@ from api.chat.disease_matcher import _match_species_symptoms_to_diseases
 from api.chat.symptom_extractor import _extract_species_symptoms
 
 
-def analyze_diagnostic_failures():
+def analyze_diagnostic_failures():  # noqa: C901
     """Analyze test cases to identify improvement opportunities"""
 
     print("=" * 100)

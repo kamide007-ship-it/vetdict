@@ -919,11 +919,11 @@ def health():
     # Database connectivity + integrity check
     import time as _time
     try:
-        from api.database import DB_PATH as _db_path
-        _db_file = Path(_db_path)
+        from api.database import DB_PATH
+        _db_file = Path(DB_PATH)
         if _db_file.exists() and _db_file.stat().st_size > 0:
             _t0 = _time.monotonic()
-            _conn = _sqlite3.connect(_db_path, timeout=5.0)
+            _conn = _sqlite3.connect(DB_PATH, timeout=5.0)
             _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
             _integrity = _conn.execute("PRAGMA quick_check").fetchone()[0]
             _conn.close()
@@ -1157,7 +1157,7 @@ def _attach_mentioned_drugs(result, species):
 
 @app.route('/api/analyze-symptoms', methods=['POST'])
 @ensure_json_response
-def api_analyze_symptoms():
+def api_analyze_symptoms():  # noqa: C901
     """症状チェック → 疾患・検査リスト（全動物種対応）"""
     rate_err = _check_public_rate_limit()
     if rate_err:
@@ -1176,22 +1176,22 @@ def api_analyze_symptoms():
         return error, status
 
     # Input size limits to prevent abuse
-    MAX_SYMPTOMS = 50
-    MAX_STRING_LEN = 256
-    MAX_VACCINES = 20
-    MAX_LAB_VALUES = 50
+    max_symptoms = 50
+    max_string_len = 256
+    max_vaccines = 20
+    max_lab_values = 50
 
-    if len(symptoms) > MAX_SYMPTOMS:
-        return {'error': f'Too many symptoms (max {MAX_SYMPTOMS})'}, 400
-    if any(len(s) > MAX_STRING_LEN for s in symptoms):
-        return {'error': f'Symptom ID too long (max {MAX_STRING_LEN} chars)'}, 400
+    if len(symptoms) > max_symptoms:
+        return {'error': f'Too many symptoms (max {max_symptoms})'}, 400
+    if any(len(s) > max_string_len for s in symptoms):
+        return {'error': f'Symptom ID too long (max {max_string_len} chars)'}, 400
 
     species = data.get('species', 'dog')
-    if isinstance(species, str) and len(species) > MAX_STRING_LEN:
+    if isinstance(species, str) and len(species) > max_string_len:
         return {'error': 'species value too long'}, 400
     age_stage = data.get('age_stage')
     breed = data.get('breed')
-    if isinstance(breed, str) and len(breed) > MAX_STRING_LEN:
+    if isinstance(breed, str) and len(breed) > max_string_len:
         return {'error': 'breed value too long'}, 400
     onset = data.get('onset')  # "acute" | "subacute" | "chronic"
     age_years = data.get('age_years')  # numeric age in years
@@ -1229,8 +1229,8 @@ def api_analyze_symptoms():
         vaccines, error, status = _normalize_string_list(vaccines_raw, 'vaccines')
         if error:
             return error, status
-        if len(vaccines) > MAX_VACCINES:
-            return {'error': f'Too many vaccines (max {MAX_VACCINES})'}, 400
+        if len(vaccines) > max_vaccines:
+            return {'error': f'Too many vaccines (max {max_vaccines})'}, 400
 
     # Coerce age_years to float and validate range
     if age_years is not None:
@@ -1246,11 +1246,11 @@ def api_analyze_symptoms():
     if lab_values_raw is not None:
         if not isinstance(lab_values_raw, dict):
             return {'error': 'lab_values must be a JSON object'}, 400
-        if len(lab_values_raw) > MAX_LAB_VALUES:
-            return {'error': f'Too many lab values (max {MAX_LAB_VALUES})'}, 400
+        if len(lab_values_raw) > max_lab_values:
+            return {'error': f'Too many lab values (max {max_lab_values})'}, 400
         lab_values = {}
         for k, v in lab_values_raw.items():
-            if not isinstance(k, str) or len(k) > MAX_STRING_LEN:
+            if not isinstance(k, str) or len(k) > max_string_len:
                 return {'error': 'lab_values keys must be strings'}, 400
             with contextlib.suppress(ValueError, TypeError):
                 lab_values[str(k)] = float(v)
@@ -1485,10 +1485,10 @@ def api_common_diseases(species):
     prev = SPECIES_PREVALENCE.get(species, {})
     # Load disease data to get Japanese names
     try:
-        from api.diagnostic_chat import _SPECIES_DATA
+        from api.diagnostic_chat import _SPECIES_DATA as _species_data  # noqa: N811
     except ImportError:
-        _SPECIES_DATA = {}
-    sp_data = _SPECIES_DATA.get(species, {})
+        _species_data = {}
+    sp_data = _species_data.get(species, {})
     diseases_list = sp_data.get("diseases", [])
     name_map = {}
     for d in diseases_list:

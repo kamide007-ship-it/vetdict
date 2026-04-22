@@ -2816,7 +2816,7 @@ def _fuzzy_boost_lookup(
     return best_multiplier
 
 
-def analyze_symptoms_generic(
+def analyze_symptoms_generic(  # noqa: C901
     symptoms: List[str],
     diseases: List[Dict[str, Any]],
     symptom_names: Dict[str, Dict[str, str]],
@@ -2968,11 +2968,11 @@ def analyze_symptoms_generic(
             pass
 
     # Load vaccination status handler for score adjustment
-    _VaccinationStatusHandler = None
+    _vaccination_handler_cls = None
     if vaccination_status:
         try:
             from api.data.vaccination_protection import VaccinationStatusHandler
-            _VaccinationStatusHandler = VaccinationStatusHandler
+            _vaccination_handler_cls = VaccinationStatusHandler
         except ImportError:
             pass
 
@@ -3231,10 +3231,10 @@ def analyze_symptoms_generic(
 
     # Apply vaccination status adjustment (reduce confidence for vaccine-preventable diseases)
     vaccination_adjustment_applied = False
-    if _VaccinationStatusHandler and vaccination_status:
+    if _vaccination_handler_cls and vaccination_status:
         for entry in suspected:
             original = entry["match_percent"]
-            adjusted, applied = _VaccinationStatusHandler.apply_vaccination_adjustment(
+            adjusted, applied = _vaccination_handler_cls.apply_vaccination_adjustment(
                 entry["name"], original, vaccination_status
             )
             if applied:

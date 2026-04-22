@@ -52,6 +52,9 @@ ignore = [
 # Unfixable rules (manual review required)
 unfixable = ["F841", "F842"]  # Unused variables must be manually fixed
 
+[tool.ruff.lint.mccabe]
+max-complexity = 30
+
 [tool.ruff.lint.isort]
 known-first-party = ["api"]
 

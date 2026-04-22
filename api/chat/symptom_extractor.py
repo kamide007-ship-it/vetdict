@@ -23,7 +23,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
 
     # Cross-species ID mapping: dog aliases use "loss_of_appetite" but many
     # species modules use "appetite_loss", "anorexia", etc. for the same concept.
-    _ID_SYNONYMS: dict[str, list[str]] = {
+    _id_synonyms: dict[str, list[str]] = {
         # Appetite
         "loss_of_appetite": ["appetite_loss", "anorexia", "poor_appetite", "decreased_appetite"],
         "appetite_loss": ["loss_of_appetite", "anorexia", "poor_appetite", "decreased_appetite"],
@@ -210,7 +210,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         """Return the symptom ID that exists in this species' SYMPTOM_NAMES."""
         if sid in symptom_names:
             return sid
-        for alt in _ID_SYNONYMS.get(sid, []):
+        for alt in _id_synonyms.get(sid, []):
             if alt in symptom_names:
                 return alt
         return None

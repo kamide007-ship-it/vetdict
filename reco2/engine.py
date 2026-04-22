@@ -14,15 +14,15 @@ from reco2.store import load_state, save_state
 logger = logging.getLogger(__name__)
 
 
-def _euclidean_distance(I: Dict[str, float], P: Dict[str, Dict[str, float]]) -> float:
-    """推論(I)と証拠(P)のユークリッド距離"""
-    keys = sorted(set(I.keys()) & set(P.keys()))
+def _euclidean_distance(inference: Dict[str, float], profile: Dict[str, Dict[str, float]]) -> float:
+    """推論(inference)と証拠(profile)のユークリッド距離"""
+    keys = sorted(set(inference.keys()) & set(profile.keys()))
     if not keys:
-        keys = sorted(set(I.keys()) | set(P.keys()))
+        keys = sorted(set(inference.keys()) | set(profile.keys()))
     s = 0.0
     for k in keys:
-        i = float(I.get(k, 0.0))
-        e = P.get(k, {})
+        i = float(inference.get(k, 0.0))
+        e = profile.get(k, {})
         m = float(e.get("median", 0.0)) if isinstance(e, dict) else 0.0
         d = i - m
         s += d * d
@@ -55,14 +55,14 @@ def _beta(purity: float) -> float:
         return 1.0
     return max(0.5, purity)
 
-def _temperature(T_base: float, k: float, D: float) -> float:
-    """T = T_base * exp(-k * D)"""
-    T = T_base * math.exp(-k * D)
-    return max(0.1, T)
+def _temperature(t_base: float, k: float, dist: float) -> float:
+    """t = t_base * exp(-k * dist)"""
+    t = t_base * math.exp(-k * dist)
+    return max(0.1, t)
 
-def _integrity(T_final: float, alpha: float, beta: float) -> float:
-    """ψ = (1/T) * α * β"""
-    return (1.0 / T_final) * alpha * beta
+def _integrity(t_final: float, alpha: float, beta: float) -> float:
+    """ψ = (1/t) * α * β"""
+    return (1.0 / t_final) * alpha * beta
 
 
 def _apply_ai_confidence_to_psi(
@@ -166,17 +166,17 @@ def evaluate_payload(
         context = adjust_context_from_ai(context, ai_result)
 
     state = load_state()
-    D = _euclidean_distance({k: float(v) for k, v in inference.items()}, evidence)
+    dist = _euclidean_distance({k: float(v) for k, v in inference.items()}, evidence)
     k = float(state.get("k", 1.5))
     eta = float(state.get("eta", 0.01))
-    T_base = float(state.get("T_base", 0.8))
+    t_base = float(state.get("T_base", 0.8))
 
     cms = _context_match_score(context)
     purity = _purity(context)
     alpha = _alpha(cms)
     beta = _beta(purity)
-    T = _temperature(T_base, k, D)
-    psi = _integrity(T, alpha, beta)
+    temp = _temperature(t_base, k, dist)
+    psi = _integrity(temp, alpha, beta)
 
     # Apply AI confidence multiplier to psi if available
     psi_multiplier = None
@@ -194,7 +194,7 @@ def evaluate_payload(
 
     entry = {
         "session_id": session_id, "ts": ts, "domain": domain,
-        "D": round(D, 6), "T": round(T, 6), "psi": round(psi, 6),
+        "D": round(dist, 6), "T": round(temp, 6), "psi": round(psi, 6),
         "verdict": verdict, "reward": None, "feedback": None,
     }
     _append_session_log(state, entry)
@@ -206,8 +206,8 @@ def evaluate_payload(
     st2 = load_state()
     result = {
         "session_id": session_id,
-        "deviation": round(D, 6),
-        "temperature": round(T, 6),
+        "deviation": round(dist, 6),
+        "temperature": round(temp, 6),
         "integrity": round(psi, 6),
         "confidence_adjusted": round(conf_adj, 6),
         "verdict": verdict,
@@ -245,7 +245,7 @@ def record_feedback(payload: Dict[str, Any]):
     if fb not in ("good", "bad", "recalculate"):
         return {"error": "invalid_feedback"}, 400
 
-    R = 1.0 if fb == "good" else (0.3 if fb == "recalculate" else -1.0)
+    reward = 1.0 if fb == "good" else (0.3 if fb == "recalculate" else -1.0)
     state = load_state()
     used = state.get("used_session_ids", {})
     if not isinstance(used, dict):
@@ -256,15 +256,15 @@ def record_feedback(payload: Dict[str, Any]):
     used[session_id] = _now_iso()
     state["used_session_ids"] = used
     eta = float(state.get("eta", 0.01))
-    W_old = _get_domain_weight(state, domain)
-    W_new = W_old + (eta * R)
-    _set_domain_weight(state, domain, W_new)
+    w_old = _get_domain_weight(state, domain)
+    w_new = w_old + (eta * reward)
+    _set_domain_weight(state, domain, w_new)
 
     logs = state.get("session_logs", [])
     if isinstance(logs, list):
         for i in range(len(logs) - 1, -1, -1):
             if logs[i].get("session_id") == session_id:
-                logs[i]["reward"] = R
+                logs[i]["reward"] = reward
                 logs[i]["feedback"] = fb
                 break
         state["session_logs"] = logs
@@ -287,7 +287,7 @@ def record_feedback(payload: Dict[str, Any]):
         import logging
         logging.getLogger(__name__).debug(f"Learning store recording failed: {e}")
 
-    return {"status": "recorded", "reward": R, "new_weight": round(W_new, 6), "domain": domain}
+    return {"status": "recorded", "reward": reward, "new_weight": round(w_new, 6), "domain": domain}
 
 def _clamp(x: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, x))
@@ -299,35 +299,35 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
         return {"adjusted": False, "reason": "no_logs", "new_k": state.get("k", 1.5), "new_eta": state.get("eta", 0.01)}
 
     window = logs[-10:] if len(logs) >= 10 else logs[:]
-    Ds = [float(x.get("D", 0.0)) for x in window]
-    Rs = [x.get("reward", 0.0) for x in window if x.get("reward") is not None]
+    ds = [float(x.get("D", 0.0)) for x in window]
+    rs = [x.get("reward", 0.0) for x in window if x.get("reward") is not None]
     psis = [float(x.get("psi", 0.0)) for x in window]
-    avgD = sum(Ds) / max(1, len(Ds))
-    sumR = sum(float(r) for r in Rs)
-    avgPsi = sum(psis) / max(1, len(psis))
+    avg_d = sum(ds) / max(1, len(ds))
+    sum_r = sum(float(r) for r in rs)
+    avg_psi = sum(psis) / max(1, len(psis))
 
     k = float(state.get("k", 1.5))
     eta = float(state.get("eta", 0.01))
     adjusted = False
     reasons = []
 
-    if avgD > 0.3 and sumR < 0:
+    if avg_d > 0.3 and sum_r < 0:
         k += 0.1
         eta *= 1.05
         adjusted = True
-        reasons.append("avgD>0.3 & sumR<0 -> strictify")
-    if avgD < 0.1 and sumR > 0:
+        reasons.append("avg_d>0.3 & sum_r<0 -> strictify")
+    if avg_d < 0.1 and sum_r > 0:
         k -= 0.05
         adjusted = True
-        reasons.append("avgD<0.1 & sumR>0 -> relax")
-    if avgD > 0.3 and sumR > 0:
+        reasons.append("avg_d<0.1 & sum_r>0 -> relax")
+    if avg_d > 0.3 and sum_r > 0:
         eta *= 1.02
         adjusted = True
-        reasons.append("avgD>0.3 & sumR>0 -> learn faster")
-    if avgPsi < 0.5:
+        reasons.append("avg_d>0.3 & sum_r>0 -> learn faster")
+    if avg_psi < 0.5:
         k += 0.05
         adjusted = True
-        reasons.append("avgPsi<0.5 -> tighten")
+        reasons.append("avg_psi<0.5 -> tighten")
 
     k = _clamp(k, float(state.get("k_min", 0.5)), float(state.get("k_max", 5.0)))
     eta = _clamp(eta, float(state.get("eta_min", 0.001)), float(state.get("eta_max", 0.1)))
@@ -360,7 +360,7 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
                 current_k=k,
                 current_eta=eta,
                 learning_data=learning_data,
-                window_stats={"avgD": avgD, "sumR": sumR, "avgPsi": avgPsi},
+                window_stats={"avg_d": avg_d, "sum_r": sum_r, "avg_psi": avg_psi},
                 ai_accuracy=ai_accuracy,
             )
 
@@ -407,7 +407,7 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
         "adjusted": adjusted,
         "reason": "; ".join(reasons) if reasons else "no_change",
         "new_k": round(k, 6), "new_eta": round(eta, 6),
-        "window": {"avgD": round(avgD, 6), "sumR": round(sumR, 6), "avgPsi": round(avgPsi, 6), "window_size": len(window)},
+        "window": {"avg_d": round(avg_d, 6), "sum_r": round(sum_r, 6), "avg_psi": round(avg_psi, 6), "window_size": len(window)},
         "manual": manual,
         "learning_insights": learning_insights,
     }
@@ -415,10 +415,10 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
 def get_status() -> Dict[str, Any]:
     state = load_state()
     logs = state.get("session_logs", [])
-    avgD = 0.0
+    avg_d = 0.0
     if isinstance(logs, list) and logs:
         slice_ = logs[-200:]
-        avgD = sum(float(x.get("D", 0.0)) for x in slice_) / max(1, len(slice_))
+        avg_d = sum(float(x.get("D", 0.0)) for x in slice_) / max(1, len(slice_))
     dist = {"reliable": 0, "moderate": 0, "suspect": 0}
     if isinstance(logs, list):
         for x in logs[-200:]:
@@ -437,7 +437,7 @@ def get_status() -> Dict[str, Any]:
     domains.sort(key=lambda x: (-x["weight"], x["domain"]))
     return {
         "k": float(state.get("k", 1.5)), "eta": float(state.get("eta", 0.01)),
-        "total_sessions": total_sessions, "avg_deviation": round(avgD, 6),
+        "total_sessions": total_sessions, "avg_deviation": round(avg_d, 6),
         "to_next_patrol": to_next, "domains": domains,
         "verdict_distribution": dist, "verdict_distribution_pct": dist_pct,
         "ranges": {

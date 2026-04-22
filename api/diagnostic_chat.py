@@ -1806,7 +1806,7 @@ def consultation():
     # ------------------------------------------------------------------
     if phase == "ask_context":
         # Species where CSU pain scale is not applicable
-        _NO_PAIN_SPECIES = {
+        _no_pain_species = {
             "fish", "reptile", "tortoise", "snake", "lizard",
             "amphibian",
         }
@@ -1834,7 +1834,7 @@ def consultation():
                     {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
                 ],
             })
-        if pain_score is None and species not in _NO_PAIN_SPECIES:
+        if pain_score is None and species not in _no_pain_species:
             questions.append({
                 "type": "pain_score",
                 "question_ja": "痛みの程度はどのくらいですか？（CSU疼痛スケール 0-4）",

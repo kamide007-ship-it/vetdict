@@ -188,7 +188,7 @@ class TestJSValidation:
 class TestJavaScriptClasses:
     """Test JavaScript class structure."""
 
-    def test_multiDiseaseUIHandler_class_exists(self):
+    def test_multidisease_ui_handler_class_exists(self):
         """Test that MultiDiseaseUIHandler class is defined."""
         js_path = PROJECT_ROOT / "static" / "js" / "multidisease-ui.js"
         js_content = js_path.read_text()

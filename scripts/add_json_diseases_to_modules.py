@@ -277,8 +277,8 @@ def main():
         }
 
     # Also handle Cat
-    from api.species.cat_diseases import DISEASES as cat_diseases
-    from api.species.cat_diseases import SYMPTOM_NAMES as cat_symptoms
+    from api.species.cat_diseases import DISEASES as cat_diseases  # noqa: N811
+    from api.species.cat_diseases import SYMPTOM_NAMES as cat_symptoms  # noqa: N811
     cat_patterns = learn_patterns(cat_diseases)
     species_data["Cat"] = {
         "mod_name": "cat_diseases",

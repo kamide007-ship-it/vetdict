@@ -1499,7 +1499,7 @@ def _disease_detail_text(
 # Public API
 # ---------------------------------------------------------------------------
 
-def analyze_symptoms(
+def analyze_symptoms(  # noqa: C901
     symptoms: list[str],
     *,
     breed: str | None = None,
@@ -1570,30 +1570,32 @@ def analyze_symptoms(
     # Load extended symptom combinations
     try:
         from api.data.symptom_combinations import (
-            EXTENDED_SYMPTOM_PAIR_BOOST,
-            SYMPTOM_TRIPLE_BOOST,
+            EXTENDED_SYMPTOM_PAIR_BOOST as extended_symptom_pair_boost,  # noqa: N811
+        )
+        from api.data.symptom_combinations import (
+            SYMPTOM_TRIPLE_BOOST as symptom_triple_boost,  # noqa: N811
         )
     except ImportError:
-        EXTENDED_SYMPTOM_PAIR_BOOST = {}
-        SYMPTOM_TRIPLE_BOOST = {}
+        extended_symptom_pair_boost = {}
+        symptom_triple_boost = {}
 
     # Load clinical frequency data (symptom presentation rates by region)
     try:
-        from api.data.clinical_frequency import CLINICAL_FREQUENCY
+        from api.data.clinical_frequency import CLINICAL_FREQUENCY as clinical_frequency  # noqa: N811
     except ImportError:
-        CLINICAL_FREQUENCY = {}
+        clinical_frequency = {}
 
     # Load evidence-based scoring
     try:
-        from api.ai.evidence_calculator import EvidenceScorer
+        from api.ai.evidence_calculator import EvidenceScorer as evidence_scorer_cls  # noqa: N813
     except ImportError:
-        EvidenceScorer = None
+        evidence_scorer_cls = None
 
     # Load vaccination protection data
     try:
-        from api.data.vaccination_protection import VaccinationStatusHandler
+        from api.data.vaccination_protection import VaccinationStatusHandler as vaccination_handler_cls  # noqa: N813
     except ImportError:
-        VaccinationStatusHandler = None
+        vaccination_handler_cls = None
 
     # Load vaccine-preventable diseases mapping
     vaccine_preventable: set[str] = set()
@@ -1606,7 +1608,7 @@ def analyze_symptoms(
             pass
 
     pair_boosts: dict[str, float] = {}
-    all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **EXTENDED_SYMPTOM_PAIR_BOOST}
+    all_pair_boosts = {**SYMPTOM_PAIR_BOOST, **extended_symptom_pair_boost}
     for pair, disease_boosts in all_pair_boosts.items():
         if pair.issubset(symptom_set):
             for disease_name, multiplier in disease_boosts.items():
@@ -1615,8 +1617,8 @@ def analyze_symptoms(
 
     # Pre-compute triple boosts
     triple_boosts: dict[str, float] = {}
-    if len(symptom_set) >= 3 and SYMPTOM_TRIPLE_BOOST:
-        for triple, disease_boosts in SYMPTOM_TRIPLE_BOOST.items():
+    if len(symptom_set) >= 3 and symptom_triple_boost:
+        for triple, disease_boosts in symptom_triple_boost.items():
             if triple.issubset(symptom_set):
                 for disease_name, multiplier in disease_boosts.items():
                     if disease_name not in triple_boosts or multiplier > triple_boosts[disease_name]:
@@ -1629,14 +1631,14 @@ def analyze_symptoms(
 
     # Load gender risk data
     try:
-        from api.data.gender_prevalence import GENDER_RISK_MULTIPLIERS
+        from api.data.gender_prevalence import GENDER_RISK_MULTIPLIERS as gender_risk_multipliers  # noqa: N811
     except ImportError:
-        GENDER_RISK_MULTIPLIERS = {}
+        gender_risk_multipliers = {}
 
     # Pre-compute gender risk for dog species
     gender_risk: dict[str, float] = {}
-    if gender and GENDER_RISK_MULTIPLIERS:
-        species_genders = GENDER_RISK_MULTIPLIERS.get("dog", {})
+    if gender and gender_risk_multipliers:
+        species_genders = gender_risk_multipliers.get("dog", {})
         for disease_name, gender_mults in species_genders.items():
             if gender in gender_mults:
                 mult = gender_mults[gender]
@@ -1726,7 +1728,7 @@ def analyze_symptoms(
 
         # Apply clinical frequency boost (matching symptoms that commonly present)
         clinical_frequency_multiplier = 1.0
-        disease_frequency = CLINICAL_FREQUENCY.get(disease["name"], {})
+        disease_frequency = clinical_frequency.get(disease["name"], {})
         if disease_frequency:
             frequency_values = [
                 symptom_frequency.get("global_average")
@@ -1900,7 +1902,7 @@ def analyze_symptoms(
 
     # Apply evidence-based confidence adjustment (Phase 4)
     # Use evidence as a direct boost multiplier to the existing match_percent
-    if EvidenceScorer:
+    if evidence_scorer_cls:
         from api.data.disease_evidence import EvidenceRetriever
 
         for disease in suspected:
@@ -1925,13 +1927,13 @@ def analyze_symptoms(
     # Apply vaccination status adjustment (Phase 4 enhancement)
     # Reduce confidence for vaccine-preventable diseases if vaccinated
     vaccination_adjustment_applied = False
-    if VaccinationStatusHandler and vaccination_status:
+    if vaccination_handler_cls and vaccination_status:
         for disease in suspected:
             disease_name = disease["name"]
             original_match_percent = disease["match_percent"]
 
             # Apply vaccination adjustment
-            adjusted_percent, adjustment_applied = VaccinationStatusHandler.apply_vaccination_adjustment(
+            adjusted_percent, adjustment_applied = vaccination_handler_cls.apply_vaccination_adjustment(
                 disease_name, original_match_percent, vaccination_status
             )
 
