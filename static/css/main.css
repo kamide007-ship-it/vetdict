@@ -802,7 +802,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 @media print{
   .header,.hero,.sponsor-banner,.landing-chat,.species-section,.footer,
   .share-widget,.feedback-widget,.print-results-btn,.az-nav,.hamburger,
-  .history-panel,.tab-nav-wrap{display:none!important}
+  .history-panel,.tab-nav-wrap,.pwa-install-banner,.kb-shortcuts-panel,.reading-progress,.scroll-top,.symptom-floater,.toast,.mobile-bottom-nav,.offline-banner{display:none!important}
   body{background:#fff;font-size:11pt;padding:0}
   .main-content{display:block!important}
   #viewChecker{display:block!important}
@@ -1504,7 +1504,7 @@ button.combination-item:focus-visible {
 .anesthesia-contra-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.72rem;font-weight:700;color:#fff;margin-right:6px;vertical-align:middle}
 /* Print styles */
 @media print{
-  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.breadcrumb-bar,.mobile-bottom-nav,.offline-banner,.reading-progress,.scroll-top,.symptom-floater,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.breadcrumb-bar,.mobile-bottom-nav,.offline-banner,.reading-progress,.scroll-top,.symptom-floater,.pwa-install-banner,.kb-shortcuts-panel,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
   #viewAnesthesia{display:block!important;position:static!important}
   .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
   .disease-db-item .disease-detail{display:block!important;max-height:none!important}
@@ -1543,7 +1543,7 @@ button.combination-item:focus-visible {
 }
 
 @media print{
-  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.breadcrumb-bar,.mobile-bottom-nav,.offline-banner,.reading-progress,.scroll-top,.symptom-floater,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
+  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.breadcrumb-bar,.mobile-bottom-nav,.offline-banner,.reading-progress,.scroll-top,.symptom-floater,.pwa-install-banner,.kb-shortcuts-panel,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
   #viewAnesthesia{display:block!important;position:static!important}
   .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
   .disease-db-item .disease-detail{display:block!important;max-height:none!important}

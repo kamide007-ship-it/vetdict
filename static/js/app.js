@@ -1301,7 +1301,7 @@ function loadSymptoms(species){
     });
   }).catch(()=>{
     if(requestId!==symptomRequestId)return;
-    document.getElementById("symptomList").innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;
+    const sl=document.getElementById("symptomList");if(sl)sl.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;
   });
 }
 
@@ -1564,7 +1564,7 @@ function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
   showRelatedSuggestions();
   trackEvent("analyze_symptoms",{species:currentSpecies,symptom_count:selectedSymptoms.size});
-  const btn=document.getElementById("analyzeBtn");btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;
+  const btn=document.getElementById("analyzeBtn");if(btn){btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;}
   const progress=document.getElementById("analyzeProgress");
   if(progress)progress.classList.add("active");
   const payload={species:currentSpecies,symptoms:[...selectedSymptoms],lang:currentLang};
@@ -1577,8 +1577,8 @@ function doAnalyze(){
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
-  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);})
-  .finally(()=>{clearTimeout(slowTimer);btn.disabled=false;btn.textContent=t("analyzeBtn");if(progress)progress.classList.remove("active");});
+  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);}})
+  .finally(()=>{clearTimeout(slowTimer);if(btn){btn.disabled=false;btn.textContent=t("analyzeBtn");}if(progress)progress.classList.remove("active");});
 }
 
 function createResultsDisclaimer(){
@@ -2293,7 +2293,7 @@ function renderDiseaseDb(){
     filtered=filtered.slice().sort(sortFn);
   }
   const totalCount=filtered.filter(d=>!d._catHeader).length;
-  document.getElementById("diseaseDbCount").textContent=t("diseaseCount").replace("%filtered%",totalCount).replace("%total%",allDiseases.length);
+  const dbCountEl=document.getElementById("diseaseDbCount");if(dbCountEl)dbCountEl.textContent=t("diseaseCount").replace("%filtered%",totalCount).replace("%total%",allDiseases.length);
   if(totalCount===0){
     if(!currentSpecies&&!search){list.innerHTML=renderEmptyState("database");}
     else{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;}
