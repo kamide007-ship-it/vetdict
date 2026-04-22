@@ -11,10 +11,10 @@
 ## 技術スタック
 - **Backend**: Flask (Python 3.11) + SQLite
 - **Frontend**: バニラJS (SPA) + CSS (single file)
-- **テスト**: pytest (3,037テスト)
+- **テスト**: pytest (3,094テスト)
 - **Lint**: ruff (pyproject.toml)
 - **CI/CD**: GitHub Actions (lint → test → security audit)
-- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v15)
+- **PWA**: manifest.json + ServiceWorker (sw.js, CACHE_NAME=vetdict-v25)
 - **Analytics**: GA4 (G-D8LSEGW9ZX) + カスタムイベント5種
 - **決済**: PayPal Subscriptions API (Plan: P-5FB7289813535813HNHCF4OA)
 - **現状**: OPEN_BETA=true（全機能無料）
@@ -23,11 +23,9 @@
 ```
 api/
   vetdict_api.py          — メインFlaskアプリ + ルーティング + CSPヘッダー
-  diagnostic_chat.py      — チャット診断エンジン (症状抽出 + 疾患マッチング)
-                            SYMPTOM_ALIASES (500+), _ID_SYNONYMS (80+),
-                            _extract_species_symptoms(), _match_species_symptoms_to_diseases()
-  health_checker.py       — 犬用症状チェッカー (チェックボックス)
-  drug_dictionary.py      — 薬品辞書API + Blueprint
+  diagnostic_chat.py      — チャット診断エンジン（api/chat/ パッケージに分割済み）
+  health_checker.py       — 症状チェッカー (全21種対応、_build_symptoms_display/_build_recommended_tests_display ヘルパー)
+  drug_dictionary.py      — 薬品辞書API + Blueprint (250薬品、ECVN 11種含む)
   drug_batch_1.py         — 薬品データ batch 1
   drug_batch_2.py         — 薬品データ batch 2 + 新薬7剤 (サイトポイント,リブレラ,ソレンシア,ブレンダ,GS-441524,モルヌピラビル,スプレソリン)
   drug_batch_3.py         — 動物種別投与量パッチ (SPECIES_INFO_PATCH)
@@ -37,15 +35,27 @@ api/
   anesthesia_api.py       — 鎮静・麻酔API Blueprint (4エンドポイント)
   anesthesia_contraindications.py — 薬品-疾患禁忌ルール (31ルール, check_contraindications())
   disease_store.py        — SQLite疾患ストア + fallback（未マイグレーション種は自動fallback）
-  species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種)
+  species_analyzer.py     — マルチ種の症状解析ルーティング (SPECIES_HANDLERS: 21種、symptom_names_lookupも返却)
+  content_quality.py      — 疾患コンテンツ補完 (SPECIES_NAME_JA/EN、_symptom_text lang対応)
   paypal_api.py           — PayPalサブスク + waitlist + メール復元
   auth.py                 — API認証
+  chat/
+    symptom_aliases.py    — SYMPTOM_ALIASES 530+ 口語表現マッピング
+    disease_matcher.py    — 疾患マッチングアルゴリズム
+    symptom_extractor.py  — 症状抽出エンジン
+    supplements.py        — サプリメントデータ
+    constants.py          — 種ラベル・定数
+    species_data.py       — 種モジュール読み込み
+  data/
+    sponsor_adjuncts.py   — ECVNスポンサー製品注入 (9製品、_PRODUCTS レジストリ、コンパクトブロック [ECVN:Block])
+    supplementary_diseases.json — 猫等の補足疾患データ
   species/
-    fish_diseases.py      — 魚病 25疾患 48症状 + SYMPTOM_CATEGORIES
-    cat_diseases.py       — 猫
-    rabbit_diseases.py    — ウサギ
-    ... (21種)
-    helpers.py            — 共通解析関数 (analyze_symptoms_generic)
+    fish_diseases.py      — 魚病 28疾患 + SYMPTOM_CATEGORIES
+    cat_diseases.py       — 猫 543疾患
+    rabbit_diseases.py    — ウサギ 453疾患
+    equine_diseases.py    — 馬 737疾患（Disease dataclass + HEALTH_CHECK_ITEMS + _enrich_horse_diseases）
+    ... (全21種)
+    helpers.py            — 共通解析関数 (analyze_symptoms_generic, enrich_diseases)
     prevalence_data.py    — 種別有病率（猫: FHV-1=very_common, Chlamydia=common 等）
 templates/
   index.html              — メインSPA (GA4, PWA, OGP, Schema.org, defer JS)
@@ -63,7 +73,7 @@ static/
   js/app.js               — 統合JS (I18N + UI + チャット + GA4 + admin/pro制御)
   css/main.css            — 統合CSS (app.cssは削除済み — 絶対に復活させないこと)
   manifest.json           — PWA
-  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v13)
+  sw.js                   — ServiceWorker (CACHE_NAME=vetdict-v25)
   robots.txt / sitemap.xml
   og-image.svg            — OGP画像 (1200x630)
 scripts/
@@ -558,13 +568,111 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - ruff lint: 問題なし
 - PR #360 作成: `claude/fix-anesthesia-buttons-jXihE` → `main`
 
-## 次セッションへの引き継ぎ事項（2026-04第4回更新）
+## 2026-04セッション（第5回）で実施した改善
 
-### PR #360 マージ待ち
-- ブランチ: `claude/fix-anesthesia-buttons-jXihE`
-- 内容: ボタンバグ修正 + 文献引用 + 禁忌警告 + 犬行動学治療更新
-- テスト: 3,088件全合格
-- URL: https://github.com/kamide007-ship-it/vetdict/pull/360
+### カテゴリソートバグ修正
+- 疾患DB内のカテゴリボタン・AZナビが再レンダリング毎にイベントリスナーを重複登録
+- `catGrid.dataset.handlersAttached` / `azNav.dataset.handlersAttached` ガード追加
+- 同様の重複登録バグが3コンテナ（diseaseDb, drug, anesthesia）にも存在し、第4回までに修正済み
+
+### 馬疾患の日本語翻訳完全対応
+- `_enrich_horse_diseases()` の field_map を `_ja` JSONフィールド優先に修正
+  - `etiology` ← `causes_ja` > `causes`
+  - `prevention` ← `prevention_ja` > `prevention`
+  - `prognosis` ← `prognosis_ja` > `prognosis`
+  - `pathophysiology` ← `pathophysiology_ja` > `pathophysiology`
+  - `treatment_protocol` ← `treatment_ja` > `treatment`
+- SQLite実測（全7,139疾患）で JA主要フィールド（causes/prevention/prognosis/pathophysiology/treatment）英語残存 **0件** を確認
+
+### 症状・検査IDの日本語名表示
+- `health_checker.py` に追加:
+  - `_get_species_symptom_names(species)` — HEALTH_CHECK_ITEMS（馬）/ SYMPTOM_NAMES（他）から翻訳ルックアップ構築（キャッシュ済み）
+  - `_build_symptoms_display(symptoms, species)` — `[{id, name_ja, name_en}]` 形式
+  - `_humanize_test_id(tid)` — snake_case→人間可読（CBC/PCR/MRI等は保持）
+  - `_build_recommended_tests_display(tests, species)` — 翻訳済み検査リスト
+- API追加フィールド: `symptoms_display`, `recommended_tests_display`
+- フロントエンド: `d.symptoms_display` / `d.recommended_tests_display` から現言語の名前を表示（生ID `resp_cough` を「咳」に）
+- 馬分岐では `recommended_exams` tuples から `recommended_tests` も返却
+
+### 症状サマリー翻訳対応
+- `content_quality.py` に追加:
+  - `SPECIES_NAME_JA` / `SPECIES_NAME_EN` 辞書（全21種: "horse"→"馬", "dog"→"犬"等）
+  - `_symptom_text(..., lang, display_entries)` — 翻訳された症状名を使ったナラティブ生成
+  - `enrich_disease_content()` で `species_ja`/`species_en` を導出して全ナラティブ生成関数に伝搬
+- 「horseのX」のような英語混じり表現を「馬のX」に修正
+
+### `species_analyzer.py`: symptom_names_lookup 返却
+- `analyze_horse()` が `symptom_names: {id: {ja, en}}` 形式のルックアップを返却
+- フロントエンドで任意の場所から症状名を翻訳可能に
+
+### ECVN（Equine & Canine Vet Nutrition）スポンサー製品統合
+- **`api/data/sponsor_adjuncts.py`** 新規作成（551行→191行にコンパクト化）
+- **9製品のレジストリ `_PRODUCTS`**:
+  1. **For Joint** (MSM+グルコサミン/コンドロイチン) — 関節軟骨保護・抗炎症
+  2. **For Antioxidant** (アスタキサンチン+SOD+VitE+システイン) — 抗酸化・慢性疾患免疫サポート
+  3. **MSM+アミノコンプリート** (MSM+BCAA中心アミノ酸) — 組織修復・筋肉維持・肝腎栄養サポート
+  4. **NMN ミトコンドリアアシスト** (NMN+α-リポ酸+システイン+プロバイオ) — 細胞エネルギー代謝・サーチュイン活性化
+  5. **CPパウダー** (プレバイオ+プロバイオ+サイリウム) — 腸内細菌叢正常化・腸管バリア強化
+  6. **Relax & CBD** (フルスペクトラムCBD) — 慢性疼痛・不安・難治性てんかん・緩和ケア
+  7. **Protain** (高品質タンパク質+コラーゲン前駆体) — がん悪液質・術後筋肉維持
+  8. **Booster & Relax** (アダプトゲン+Bビタミン) — ウイルス後回復・内分泌疾患エネルギー補給
+  9. **カミデミルク** (消化吸収しやすい流動性栄養) — 食欲不振・クリティカルケア・経管栄養
+- **疾患名・説明の正規表現パターンマッチング** で適応疾患を自動検出
+- **動物種フィルタ**（例: Relax & CBDは犬猫馬ウサギフェレットのみ）
+- **コンパクトブロック形式**: 単一マーカー `[ECVN:Block]` + 箇条書き + 注意事項
+  - 最大8製品マッチ時: 655文字（旧形式1,726文字から62%削減）
+  - フォーマット:
+    ```
+    [ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】
+    • 製品名 (成分): 適応
+    • ...
+    ※製品名: 注意事項
+    ```
+- **dict / dataclass 両対応**: `apply_sponsor_adjuncts_dict()` / `apply_sponsor_adjuncts_obj()`
+- **`api/species/helpers.py`** の `enrich_diseases()` 末尾でフック（try/except ImportError）
+- **`api/species/equine_diseases.py`** の `_enrich_horse_diseases()` 末尾でも適用
+
+### ECVN補助療法ブロックの視覚的分離
+- `static/js/app.js`: `renderTreatmentWithAdjunct(text)` ヘルパー追加
+  - `[ECVN:Block]` マーカーで splitしてメイン治療プロトコルから分離
+  - caninevet.jp を自動的にクリック可能リンク化
+  - `role="note"` + `aria-label="ECVN adjunct options"`
+- `static/css/main.css`:
+  - `.ecvn-adjunct-block` — 緑のleft border + 薄緑背景で「参考情報」として視覚的区別
+  - `.detail-section-body` / `.disease-detail dd` に `white-space: pre-wrap` 追加（箇条書き改行対応）
+- 使用箇所: 鑑別診断結果ビュー（line 1802）+ 疾患DB詳細パネル（line 2053）
+
+### 疾患数の実測値への整合
+- CLAUDE.md 6,393 → **7,139** に訂正（SQLiteマイグレーション実測）
+- 内訳: 犬584, 猫543, 馬737, うさぎ453, ハムスター320, モルモット348, チンチラ277, フェレット278, ハリネズミ243, フクロモモンガ221, デグー200, 鳥551, インコ459, オウム282, 爬虫類285, リクガメ287, ヘビ248, トカゲ249, 両生類257, 魚28, その他289
+- 薬品数 245 → **250** に更新（ECVN 11製品反映）
+
+### チャット候補カードの一致症状日本語化
+- 自由入力チャットで `resp_cough` のような生の症状IDが表示されていた
+- `symptom_details` からルックアップを構築して翻訳（問診モードと同じパターン）
+- `一致:` / `Matched:` ラベルも `currentLang` に応じて切替
+
+### テスト・CI
+- フルテストスイート: **3,094件合格**
+- ruff lint: 問題なし
+- ServiceWorker: `CACHE_NAME` v22 → **v25** （複数回更新）
+- ブランチ: `claude/fix-sorting-translate-jp-sUWGl`（main 未マージ）
+
+## 次セッションへの引き継ぎ事項（2026-04第5回更新）
+
+### 現行ブランチ `claude/fix-sorting-translate-jp-sUWGl`
+- 内容: カテゴリソート修正 + 馬JA翻訳 + 症状/検査ID表示 + ECVN 9製品統合 + コンパクトブロック + 視覚的分離 + チャット一致症状翻訳
+- テスト: 3,094件全合格
+- 未PR（必要に応じて作成）
+
+### ECVN製品の追加候補
+- 現在9製品統合済み。追加候補があれば `_PRODUCTS` レジストリに追記:
+  - `pattern`（疾患名・説明の正規表現）
+  - `species`（対応動物種 frozenset）
+  - `name_ja` / `name_en`, `ingredients_ja` / `ingredients_en`
+  - `indication_ja` / `indication_en`
+  - 任意の `caution_ja` / `caution_en`
+- 薬品辞書 `api/drug_dictionary.py` にも `ecvn_*` エントリを追加
 
 ### 問診モード（Guided Consultation）— ブラウザ手動テスト未実施
 - 自動テスト100件+は全合格（全21種フルフロー＋エッジケース＋精度パリティ）
