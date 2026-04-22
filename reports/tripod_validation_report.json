@@ -1,0 +1,193 @@
+{
+  "title": "TRIPOD-Compliant Diagnostic Accuracy Assessment",
+  "framework": "VetDict Diagnostic Engine",
+  "evaluation_date": "2026-04-13T20:10:05.618755",
+  "test_design": {
+    "type": "Prospective Cohort",
+    "total_cases": 40,
+    "species_count": 11,
+    "gold_standard": "Clinical expert consensus"
+  },
+  "primary_outcomes": {
+    "rank_1_accuracy": 0.65,
+    "pass_rate": 0.05,
+    "average_confidence": 0.4742
+  },
+  "accuracy_metrics": {},
+  "subgroup_analysis": {
+    "by_species": {
+      "dog": {
+        "tp": 2,
+        "tn": 0,
+        "fp": 0,
+        "fn": 20,
+        "total": 22,
+        "accuracy": 0.0909,
+        "sensitivity": 0.0909,
+        "specificity": 0.0,
+        "ppv": 1.0,
+        "npv": 0.0,
+        "f1_score": 0.1667
+      },
+      "cat": {
+        "tp": 2,
+        "tn": 0,
+        "fp": 0,
+        "fn": 18,
+        "total": 20,
+        "accuracy": 0.1,
+        "sensitivity": 0.1,
+        "specificity": 0.0,
+        "ppv": 1.0,
+        "npv": 0.0,
+        "f1_score": 0.1818
+      },
+      "rabbit": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 10,
+        "total": 10,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "guinea_pig": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 4,
+        "total": 4,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "hamster": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 4,
+        "total": 4,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "ferret": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 4,
+        "total": 4,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "bird": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 4,
+        "total": 4,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "fish": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 6,
+        "total": 6,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "reptile": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 2,
+        "total": 2,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "parakeet": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 2,
+        "total": 2,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      },
+      "parrot": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 2,
+        "total": 2,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      }
+    },
+    "by_symptom_count": {
+      "moderate_symptoms": {
+        "tp": 4,
+        "tn": 0,
+        "fp": 0,
+        "fn": 14,
+        "total": 18,
+        "accuracy": 0.2222,
+        "sensitivity": 0.2222,
+        "specificity": 0.0,
+        "ppv": 1.0,
+        "npv": 0.0,
+        "f1_score": 0.3636
+      },
+      "minimal_symptoms": {
+        "tp": 0,
+        "tn": 0,
+        "fp": 0,
+        "fn": 62,
+        "total": 62,
+        "accuracy": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.0,
+        "ppv": 0.0,
+        "npv": 0.0,
+        "f1_score": 0.0
+      }
+    }
+  },
+  "interpretation": "Suboptimal accuracy: 65.0% rank-1 accuracy; improvements needed."
+}
