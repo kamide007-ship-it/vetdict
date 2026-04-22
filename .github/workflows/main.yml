@@ -22,8 +22,9 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git fetch origin "${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
+            git fetch origin "${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}" --force
             mapfile -t files < <(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.py')
+          # GitHub uses the all-zero null SHA for initial pushes.
           elif [[ -n "${{ github.event.before }}" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
             mapfile -t files < <(git diff --name-only --diff-filter=ACMR "${{ github.event.before }}...HEAD" -- '*.py')
           else
@@ -37,7 +38,7 @@ jobs:
         shell: bash
         run: |
           mapfile -t files < .changed-python-files.txt
-          ruff check "${files[@]}" --config pyproject.toml
+          ruff check "${files[@]}"
       - name: ruff format check (changed files)
         if: ${{ steps.changed_python.outputs.count != '0' }}
         shell: bash
