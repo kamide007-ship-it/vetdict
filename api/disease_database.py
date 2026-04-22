@@ -5,11 +5,10 @@ Flask API integration for SQLite diseases database
 Provides optimized query methods for the new SQLite schema
 """
 
-import json
 import logging
 import sqlite3
 from pathlib import Path
-from typing import Optional, List, Dict, Any
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 

@@ -32,9 +32,9 @@ Metrics:
 
 import json
 import logging
-from dataclasses import dataclass
-from typing import List, Dict, Any, Tuple
 from collections import defaultdict
+from dataclasses import dataclass
+from typing import Any, Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
 

@@ -11,11 +11,12 @@ New endpoints provide fast queries with caching:
 """
 
 import logging
-from flask import Blueprint, jsonify, request, abort
 
+from flask import Blueprint, abort, jsonify, request
+
+from api.caching import CACHE_TIMEOUTS, cache
 from api.disease_database import DiseaseDatabase
 from api.disease_search import DiseaseFullTextSearch
-from api.caching import cache, CACHE_TIMEOUTS
 
 logger = logging.getLogger(__name__)
 

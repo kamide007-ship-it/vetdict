@@ -12,7 +12,7 @@ Cache keys are structured by query type for efficient invalidation
 
 import logging
 from functools import wraps
-from typing import Optional, Callable, Any
+from typing import Any, Callable
 
 from flask_caching import Cache
 

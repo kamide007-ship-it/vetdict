@@ -11,13 +11,13 @@ Analyzes TRIPOD validation results to identify:
 
 import json
 import sys
-from pathlib import Path
 from collections import defaultdict
+from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from api.chat.symptom_extractor import _extract_species_symptoms
 from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+from api.chat.symptom_extractor import _extract_species_symptoms
 
 
 def analyze_diagnostic_failures():
@@ -109,7 +109,7 @@ def analyze_diagnostic_failures():
                 species_failures[species].append(failure)
 
     # Print summary
-    print(f"\n📊 FAILURE SUMMARY")
+    print("\n📊 FAILURE SUMMARY")
     print(f"  Symptom Extraction Issues: {len(symptom_extraction_issues)}")
     print(f"  Rank Issues (correct disease not in top): {len(rank_issues)}")
     print(f"  Confidence Issues (correct disease too low): {len(confidence_issues)}")
@@ -151,7 +151,7 @@ def analyze_diagnostic_failures():
 
     # Print species-specific analysis
     if species_failures:
-        print(f"\n🔬 SPECIES-SPECIFIC DIAGNOSTIC CHALLENGES")
+        print("\n🔬 SPECIES-SPECIFIC DIAGNOSTIC CHALLENGES")
         for species in sorted(species_failures.keys()):
             issues = species_failures[species]
             print(f"\n  {species.upper()} ({len(issues)} failures)")
@@ -165,15 +165,15 @@ def analyze_diagnostic_failures():
                 print(f"    ... and {len(issues) - 3} more")
 
     # Print metrics summary
-    print(f"\n" + "=" * 100)
+    print("\n" + "=" * 100)
     print("METRICS SUMMARY FROM VALIDATION REPORT")
     print("=" * 100)
-    print(f"\nPrimary Outcomes:")
+    print("\nPrimary Outcomes:")
     print(f"  Rank-1 Accuracy: {report['primary_outcomes']['rank_1_accuracy']:.1%}")
     print(f"  Pass Rate: {report['primary_outcomes']['pass_rate']:.1%}")
     print(f"  Average Confidence: {report['primary_outcomes']['average_confidence']:.1%}")
 
-    print(f"\nBy Species Sensitivity (TP/(TP+FN)):")
+    print("\nBy Species Sensitivity (TP/(TP+FN)):")
     for species, metrics in sorted(report['subgroup_analysis']['by_species'].items()):
         if metrics['total'] > 0:
             print(
@@ -181,7 +181,7 @@ def analyze_diagnostic_failures():
                 f"({metrics['tp']}/{metrics['total']} cases)"
             )
 
-    print(f"\nBy Symptom Count:")
+    print("\nBy Symptom Count:")
     for category, metrics in sorted(report['subgroup_analysis']['by_symptom_count'].items()):
         if metrics['total'] > 0:
             print(
@@ -190,7 +190,7 @@ def analyze_diagnostic_failures():
             )
 
     # Recommendations
-    print(f"\n" + "=" * 100)
+    print("\n" + "=" * 100)
     print("IMPROVEMENT RECOMMENDATIONS")
     print("=" * 100)
 
@@ -224,7 +224,7 @@ def analyze_diagnostic_failures():
         for rec in recommendations:
             print(f"\n{rec}")
 
-    print(f"\n" + "=" * 100)
+    print("\n" + "=" * 100)
 
 
 if __name__ == '__main__':

@@ -7,13 +7,14 @@ using TRIPOD framework metrics.
 """
 
 import json
-import pytest
 from pathlib import Path
 
+import pytest
+
 from api.tripod_validation import (
-    DiagnosticValidationFramework,
-    DiagnosticTestCase,
     ConfusionMatrix,
+    DiagnosticTestCase,
+    DiagnosticValidationFramework,
 )
 
 
@@ -258,8 +259,8 @@ class TestDiagnosticValidationFramework:
             tripod_framework.add_test_case(case)
 
         # Record results
-        tripod_framework.record_result(f'Dog_001', 1, 0.85)
-        tripod_framework.record_result(f'Cat_001', 2, 0.60)
+        tripod_framework.record_result('Dog_001', 1, 0.85)
+        tripod_framework.record_result('Cat_001', 2, 0.60)
 
         metrics = tripod_framework.calculate_metrics()
 

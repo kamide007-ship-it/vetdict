@@ -17,8 +17,8 @@ This script:
 import json
 import sqlite3
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 # Schema definition (extracted from design)
 SCHEMA_SQL = """

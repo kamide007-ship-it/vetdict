@@ -8,7 +8,7 @@ AND/OR operators, fuzzy matching, and ranking
 
 import logging
 import sqlite3
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 

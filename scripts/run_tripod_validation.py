@@ -13,9 +13,9 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from api.tripod_validation import DiagnosticValidationFramework
-from api.chat.symptom_extractor import _extract_species_symptoms
 from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+from api.chat.symptom_extractor import _extract_species_symptoms
+from api.tripod_validation import DiagnosticValidationFramework
 
 
 def run_diagnostic_validation():
@@ -113,7 +113,7 @@ def run_diagnostic_validation():
             if i % 10 == 0:
                 print(f"  ERROR at [{i:3d}] {case.case_id}: {str(e)}")
 
-    print(f"\n✓ Diagnostic engine execution complete")
+    print("\n✓ Diagnostic engine execution complete")
     print(f"  Passed: {passed_count}")
     print(f"  Failed: {failed_count}")
 
@@ -169,7 +169,7 @@ def run_diagnostic_validation():
     print(f"Test Design: {report['test_design']['type']}")
     print(f"Total Cases: {report['test_design']['total_cases']}")
     print(f"Species Count: {report['test_design']['species_count']}")
-    print(f"\nPrimary Outcomes:")
+    print("\nPrimary Outcomes:")
     print(f"  Rank-1 Accuracy: {report['primary_outcomes']['rank_1_accuracy']:.1%}")
     print(f"  Pass Rate: {report['primary_outcomes']['pass_rate']:.1%}")
     print(f"  Average Confidence: {report['primary_outcomes']['average_confidence']:.2%}")

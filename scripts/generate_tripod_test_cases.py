@@ -12,9 +12,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from api.chat.symptom_extractor import _extract_species_symptoms
 from api.chat.disease_matcher import _match_species_symptoms_to_diseases
-
+from api.chat.symptom_extractor import _extract_species_symptoms
 
 # Define comprehensive test scenarios for each species
 TEST_SCENARIOS = {
