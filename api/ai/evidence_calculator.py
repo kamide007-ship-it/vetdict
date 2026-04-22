@@ -126,17 +126,13 @@ class EvidenceScorer:
             demographic_adjustment=demographic_adjustment,
             weighted_demographic_component=demographic_component,
             final_confidence=final_confidence,
-            calculation_notes=cls._build_notes(
-                evidence_level, evidence_multiplier, demographic_adjustment
-            ),
+            calculation_notes=cls._build_notes(evidence_level, evidence_multiplier, demographic_adjustment),
         )
 
         return final_confidence, breakdown
 
     @staticmethod
-    def _build_notes(
-        evidence_level: int, evidence_multiplier: float, demographic_adjustment: float
-    ) -> str:
+    def _build_notes(evidence_level: int, evidence_multiplier: float, demographic_adjustment: float) -> str:
         """Build human-readable notes about score calculation."""
         level_desc = {
             1: "RCT/Meta-analysis (strongest)",

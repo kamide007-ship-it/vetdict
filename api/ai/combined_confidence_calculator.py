@@ -33,16 +33,12 @@ class ConfidenceBreakdown:
         """Serialize to dictionary."""
         return {
             "diseases": self.diseases,
-            "individual_confidences": {
-                d: round(c, 3) for d, c in self.individual_confidences.items()
-            },
+            "individual_confidences": {d: round(c, 3) for d, c in self.individual_confidences.items()},
             "symptom_allocation": self.symptom_allocation,
             "comorbidity_multiplier": round(self.comorbidity_multiplier, 3),
             "independence_penalty": round(self.independence_penalty, 3),
             "bayesian_posterior": round(self.bayesian_posterior, 3),
-            "evidence_integration_scores": {
-                d: round(s, 3) for d, s in self.evidence_integration_scores.items()
-            },
+            "evidence_integration_scores": {d: round(s, 3) for d, s in self.evidence_integration_scores.items()},
             "final_confidence": round(self.final_confidence, 3),
             "confidence_sources": self.confidence_sources,
             "explanation_en": self.explanation_en,
@@ -322,9 +318,7 @@ class CombinedConfidenceCalculator:
         # Overlap ratio: how much allocated symptoms are shared
         shared_count = 0
         for symptom in all_allocated:
-            disease_count = sum(
-                1 for d in diseases if symptom in allocated_per_disease[d]
-            )
+            disease_count = sum(1 for d in diseases if symptom in allocated_per_disease[d])
             if disease_count > 1:
                 shared_count += 1
 
@@ -369,9 +363,7 @@ class CombinedConfidenceCalculator:
                     key = (d1, d2)
                     reverse_key = (d2, d1)
 
-                    prob = comorbidity_data.get(
-                        key, comorbidity_data.get(reverse_key, None)
-                    )
+                    prob = comorbidity_data.get(key, comorbidity_data.get(reverse_key, None))
                     if prob:
                         multiplier *= prob
 
@@ -461,10 +453,7 @@ class CombinedConfidenceCalculator:
         parts = []
 
         # Individual confidences
-        conf_parts = [
-            f"{d}: {individual_confidences.get(d, 0.0):.1%}"
-            for d in diseases
-        ]
+        conf_parts = [f"{d}: {individual_confidences.get(d, 0.0):.1%}" for d in diseases]
         parts.append(f"Individual confidences: {', '.join(conf_parts)}")
 
         # Symptom allocation
@@ -501,10 +490,7 @@ class CombinedConfidenceCalculator:
         parts = []
 
         # Individual confidences
-        conf_parts = [
-            f"{d}: {individual_confidences.get(d, 0.0):.1%}"
-            for d in diseases
-        ]
+        conf_parts = [f"{d}: {individual_confidences.get(d, 0.0):.1%}" for d in diseases]
         parts.append(f"個別信頼度: {', '.join(conf_parts)}")
 
         # Comorbidity factor

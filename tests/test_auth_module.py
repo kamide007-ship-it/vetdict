@@ -11,7 +11,6 @@ Tests the following components:
 - require_internal_api_access decorator
 """
 
-
 from api.auth import (
     AuditLogger,
     AuthConfig,
@@ -192,13 +191,13 @@ class TestClientIP:
         from werkzeug.test import EnvironBuilder
 
         app = Flask(__name__)
-        builder = EnvironBuilder(environ_base={'REMOTE_ADDR': '192.168.1.100'})
+        builder = EnvironBuilder(environ_base={"REMOTE_ADDR": "192.168.1.100"})
         env = builder.get_environ()
 
         with app.test_request_context(environ_base=env):
             client_ip = ClientIP()
             ip = client_ip.get_client_ip()
-            assert ip == '192.168.1.100'
+            assert ip == "192.168.1.100"
 
     def test_get_client_ip_from_x_forwarded_for(self):
         """Test getting client IP from X-Forwarded-For header."""
@@ -206,12 +205,10 @@ class TestClientIP:
 
         app = Flask(__name__)
 
-        with app.test_request_context(
-            headers={'X-Forwarded-For': '203.0.113.1, 198.51.100.1, 192.0.2.1'}
-        ):
+        with app.test_request_context(headers={"X-Forwarded-For": "203.0.113.1, 198.51.100.1, 192.0.2.1"}):
             client_ip = ClientIP()
             ip = client_ip.get_client_ip()
-            assert ip == '203.0.113.1'  # First IP in list
+            assert ip == "203.0.113.1"  # First IP in list
 
     def test_get_client_ip_fallback_to_remote_addr(self):
         """Test fallback to remote_addr when X-Forwarded-For is not present."""
@@ -219,10 +216,10 @@ class TestClientIP:
 
         app = Flask(__name__)
 
-        with app.test_request_context(environ_base={'REMOTE_ADDR': '192.168.1.100'}):
+        with app.test_request_context(environ_base={"REMOTE_ADDR": "192.168.1.100"}):
             client_ip = ClientIP()
             ip = client_ip.get_client_ip()
-            assert ip == '192.168.1.100'
+            assert ip == "192.168.1.100"
 
 
 class TestAuditLogger:
@@ -233,9 +230,9 @@ class TestAuditLogger:
         logger = AuditLogger(enabled=True)
         logger.log_auth_attempt(
             success=True,
-            method='bearer_token',
-            client_ip='192.168.1.1',
-            reason='valid_token',
+            method="bearer_token",
+            client_ip="192.168.1.1",
+            reason="valid_token",
         )
         # Should log something (behavior depends on logging setup)
 
@@ -244,9 +241,9 @@ class TestAuditLogger:
         logger = AuditLogger(enabled=False)
         logger.log_auth_attempt(
             success=True,
-            method='bearer_token',
-            client_ip='192.168.1.1',
-            reason='valid_token',
+            method="bearer_token",
+            client_ip="192.168.1.1",
+            reason="valid_token",
         )
         # Should not log when disabled
 

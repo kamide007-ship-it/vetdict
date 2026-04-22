@@ -26,16 +26,18 @@ class Phase1BatchProcessor:
         self.client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
         self.manifest_path = Path(__file__).parent.parent / "phase1_enrichment_manifest.json"
         self.db_path = Path(__file__).parent.parent / "diseases_all_species.json"
-        self.enriched_db_path = Path(__file__).parent.parent / f"diseases_enriched_phase1_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        self.enriched_db_path = (
+            Path(__file__).parent.parent / f"diseases_enriched_phase1_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
 
     def load_manifest(self):
         """Load the enrichment manifest."""
-        with open(self.manifest_path, 'r', encoding='utf-8') as f:
+        with open(self.manifest_path, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def load_diseases(self):
         """Load diseases from the database."""
-        with open(self.db_path, 'r', encoding='utf-8') as f:
+        with open(self.db_path, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def retrieve_batch_results(self, batch_id) -> List[Dict]:
@@ -48,15 +50,11 @@ class Phase1BatchProcessor:
                 status = "errored"
 
                 # Extract content from successful results
-                if hasattr(result.result, 'message') and result.result.message and result.result.message.content:
-                        content = result.result.message.content[0].text
-                        status = "succeeded"
+                if hasattr(result.result, "message") and result.result.message and result.result.message.content:
+                    content = result.result.message.content[0].text
+                    status = "succeeded"
 
-                results.append({
-                    "custom_id": custom_id,
-                    "content": content,
-                    "status": status
-                })
+                results.append({"custom_id": custom_id, "content": content, "status": status})
             return results
         except Exception as e:
             print(f"❌ Error retrieving batch {batch_id}: {e}")
@@ -71,27 +69,27 @@ class Phase1BatchProcessor:
             pass
 
         # Try extracting JSON from markdown code blocks
-        match = re.search(r'```(?:json)?\s*(\{[\s\S]*)', response_text, re.DOTALL)
+        match = re.search(r"```(?:json)?\s*(\{[\s\S]*)", response_text, re.DOTALL)
         if match:
             json_text = match.group(1).rstrip()
             # Remove trailing code block marker if present
-            if json_text.endswith('```'):
+            if json_text.endswith("```"):
                 json_text = json_text[:-3].rstrip()
         else:
             # Find JSON object in response
-            start = response_text.find('{')
+            start = response_text.find("{")
             if start == -1:
                 return None
             json_text = response_text[start:].rstrip()
 
         # Handle truncated/incomplete JSON
         # Strategy: Remove everything after the last complete value
-        if not json_text.endswith('}'):
+        if not json_text.endswith("}"):
             # Find the last closing quote and comma pattern
             # Remove everything after the last ', (complete key-value pair)
             last_comma_quote = -1
             for i in range(len(json_text) - 1, -1, -1):
-                if i > 0 and json_text[i-1:i+1] == '",':
+                if i > 0 and json_text[i - 1 : i + 1] == '",':
                     last_comma_quote = i + 1
                     break
 
@@ -99,13 +97,13 @@ class Phase1BatchProcessor:
                 # Keep everything up to and including the last complete value
                 json_text = json_text[:last_comma_quote].rstrip()
                 # Remove the trailing comma
-                if json_text.endswith(','):
+                if json_text.endswith(","):
                     json_text = json_text[:-1]
 
             # Add closing braces for any open braces
-            brace_count = json_text.count('{') - json_text.count('}')
+            brace_count = json_text.count("{") - json_text.count("}")
             if brace_count > 0:
-                json_text += '}' * brace_count
+                json_text += "}" * brace_count
 
         try:
             return json.loads(json_text)
@@ -120,10 +118,7 @@ class Phase1BatchProcessor:
         print("PROCESSING BATCH RESULTS")
         print("=" * 70)
 
-        enriched_data = {
-            "Cat": {},
-            "Horse": {}
-        }
+        enriched_data = {"Cat": {}, "Horse": {}}
         error_log = []
 
         # Build disease ID mappings by species
@@ -141,7 +136,7 @@ class Phase1BatchProcessor:
             species_errored = 0
 
             for i, batch_id in enumerate(species_data.get("batch_ids", [])):
-                print(f"  Batch {i+1}: {batch_id[:30]}...")
+                print(f"  Batch {i + 1}: {batch_id[:30]}...")
 
                 results = self.retrieve_batch_results(batch_id)
                 print(f"    Retrieved {len(results)} results")
@@ -165,22 +160,26 @@ class Phase1BatchProcessor:
                             enriched_data[species][actual_disease_id] = parsed
                             species_succeeded += 1
                         else:
-                            error_log.append({
+                            error_log.append(
+                                {
+                                    "custom_id": result["custom_id"],
+                                    "actual_id": actual_disease_id,
+                                    "species": species,
+                                    "batch_id": batch_id,
+                                    "error": "Failed to parse JSON",
+                                }
+                            )
+                            species_errored += 1
+                    else:
+                        error_log.append(
+                            {
                                 "custom_id": result["custom_id"],
                                 "actual_id": actual_disease_id,
                                 "species": species,
                                 "batch_id": batch_id,
-                                "error": "Failed to parse JSON"
-                            })
-                            species_errored += 1
-                    else:
-                        error_log.append({
-                            "custom_id": result["custom_id"],
-                            "actual_id": actual_disease_id,
-                            "species": species,
-                            "batch_id": batch_id,
-                            "error": "API error or empty response or invalid ID"
-                        })
+                                "error": "API error or empty response or invalid ID",
+                            }
+                        )
                         species_errored += 1
 
             print(f"  Results: {species_succeeded} succeeded, {species_errored} errored")
@@ -188,10 +187,7 @@ class Phase1BatchProcessor:
         return {
             "enriched_data": enriched_data,
             "error_log": error_log,
-            "stats": {
-                "total_succeeded": sum(len(v) for v in enriched_data.values()),
-                "total_errored": len(error_log)
-            }
+            "stats": {"total_succeeded": sum(len(v) for v in enriched_data.values()), "total_errored": len(error_log)},
         }
 
     def integrate_enrichment(self, diseases: List[Dict], enriched_data: Dict) -> List[Dict]:
@@ -213,9 +209,18 @@ class Phase1BatchProcessor:
                 enriched = enriched_data[species][disease_id]
 
                 # Update fields
-                for field in ["pathophysiology", "pathophysiology_ja", "causes", "causes_ja",
-                             "treatment", "treatment_ja", "prevention", "prevention_ja",
-                             "prognosis", "prognosis_ja"]:
+                for field in [
+                    "pathophysiology",
+                    "pathophysiology_ja",
+                    "causes",
+                    "causes_ja",
+                    "treatment",
+                    "treatment_ja",
+                    "prevention",
+                    "prevention_ja",
+                    "prognosis",
+                    "prognosis_ja",
+                ]:
                     if field in enriched and enriched[field]:
                         disease[field] = enriched[field]
 
@@ -229,7 +234,7 @@ class Phase1BatchProcessor:
 
     def save_enriched_database(self, diseases: List[Dict]):
         """Save enriched database to file."""
-        with open(self.enriched_db_path, 'w', encoding='utf-8') as f:
+        with open(self.enriched_db_path, "w", encoding="utf-8") as f:
             json.dump(diseases, f, ensure_ascii=False, indent=2)
         print(f"✓ Enriched database saved: {self.enriched_db_path}")
 
@@ -265,12 +270,14 @@ class Phase1BatchProcessor:
         print("\nResults Summary:")
         print(f"  Succeeded: {results['stats']['total_succeeded']}")
         print(f"  Errored: {results['stats']['total_errored']}")
-        print(f"  Success rate: {100 * results['stats']['total_succeeded'] / max(results['stats']['total_succeeded'] + results['stats']['total_errored'], 1):.1f}%")
+        print(
+            f"  Success rate: {100 * results['stats']['total_succeeded'] / max(results['stats']['total_succeeded'] + results['stats']['total_errored'], 1):.1f}%"
+        )
 
         if results["error_log"]:
             print(f"\nErrors ({len(results['error_log'])}):")
             for i, error in enumerate(results["error_log"][:10]):  # Show first 10
-                print(f"  {i+1}. {error['custom_id']} ({error['species']}): {error['error']}")
+                print(f"  {i + 1}. {error['custom_id']} ({error['species']}): {error['error']}")
             if len(results["error_log"]) > 10:
                 print(f"  ... and {len(results['error_log']) - 10} more")
 

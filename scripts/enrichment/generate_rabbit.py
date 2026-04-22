@@ -29,7 +29,7 @@ DISEASES = [
         "prevention": "Vaccination with RHDV1 and RHDV2 vaccines (initial dose at 10 weeks, booster at 12 months, then annually); Strict biosecurity measures including quarantine of new rabbits for 14 days; Insect control; Disinfection with 10% bleach or potassium peroxymonosulfate; Avoid contact with wild rabbits",
         "prevention_ja": "RHDV1およびRHDV2ワクチン接種（初回10週齢、12ヶ月後に追加接種、以後年1回）；新規ウサギの14日間検疫を含む厳格なバイオセキュリティ対策；昆虫駆除；10%次亜塩素酸ナトリウムまたはペルオキソ一硫酸カリウムによる消毒；野生ウサギとの接触回避",
         "prognosis": "Peracute and acute forms carry a mortality rate of 70-90% in unvaccinated rabbits. RHDV2 has a somewhat lower mortality (5-70%) but affects a wider age range including kittens. Rabbits that survive acute infection may develop chronic hepatitis. Vaccinated rabbits have excellent prognosis with near-complete protection.",
-        "prognosis_ja": "超急性・急性型では未接種ウサギの死亡率は70-90%。RHDV2はやや低い死亡率（5-70%）だが、子ウサギを含むより広い年齢層に影響する。急性感染を生存したウサギは慢性肝炎を発症する可能性がある。ワクチン接種済みウサギの予後はほぼ完全な防御により良好。"
+        "prognosis_ja": "超急性・急性型では未接種ウサギの死亡率は70-90%。RHDV2はやや低い死亡率（5-70%）だが、子ウサギを含むより広い年齢層に影響する。急性感染を生存したウサギは慢性肝炎を発症する可能性がある。ワクチン接種済みウサギの予後はほぼ完全な防御により良好。",
     },
     {
         "name": "Myxomatosis",
@@ -51,7 +51,7 @@ DISEASES = [
         "prevention": "Vaccination with myxomatosis vaccine (Nobivac Myxo-RHD Plus or equivalent; initial dose at 5 weeks, annual boosters); Mosquito and flea control (environmental insecticides, insect-proof housing); Quarantine of new rabbits; Avoid contact with wild rabbits; Use of insect netting on outdoor enclosures",
         "prevention_ja": "粘液腫症ワクチン接種（Nobivac Myxo-RHD Plus等；初回5週齢、年1回追加接種）；蚊・ノミ駆除（環境殺虫剤、防虫住居）；新規ウサギの検疫；野生ウサギとの接触回避；屋外エンクロージャーへの防虫ネット使用",
         "prognosis": "Classic virulent strains carry >99% mortality in naive European rabbits. Attenuated strains in endemic areas have 30-50% mortality. Amyxomatous (respiratory) form has near 100% mortality. With intensive supportive care, some rabbits with milder strains may survive. Recovered rabbits develop lifelong immunity.",
-        "prognosis_ja": "古典的強毒株ではナイーブなヨーロッパウサギの死亡率は99%以上。流行地域の弱毒株では死亡率30-50%。無粘液腫型（呼吸器型）はほぼ100%の致死率。集中的な支持療法により軽度の株に感染した一部のウサギは生存可能。回復したウサギは終生免疫を獲得する。"
+        "prognosis_ja": "古典的強毒株ではナイーブなヨーロッパウサギの死亡率は99%以上。流行地域の弱毒株では死亡率30-50%。無粘液腫型（呼吸器型）はほぼ100%の致死率。集中的な支持療法により軽度の株に感染した一部のウサギは生存可能。回復したウサギは終生免疫を獲得する。",
     },
     {
         "name": "Encephalitozoonosis",
@@ -73,7 +73,7 @@ DISEASES = [
         "prevention": "Hygiene: regular cage cleaning and disinfection (10% bleach effective); Minimize urine contamination of food and water; Quarantine new rabbits and test serology; Reduce stress to prevent reactivation of latent infections; Avoid overcrowding; No vaccine available",
         "prevention_ja": "衛生管理：定期的なケージ清掃・消毒（10%次亜塩素酸ナトリウムが有効）；飼料・水の尿汚染を最小化；新規ウサギの検疫と血清学検査；潜伏感染の再活性化防止のためストレス軽減；過密飼育の回避；ワクチンは利用不可",
         "prognosis": "Variable depending on organ involvement and severity. Mild vestibular signs may resolve with treatment over 2-8 weeks, though residual head tilt often persists. Renal disease is progressive and may lead to chronic kidney failure. Phacoclastic uveitis requires lifelong management or enucleation. Early treatment with fenbendazole significantly improves outcomes. Subclinical carriers may never develop disease.",
-        "prognosis_ja": "臓器障害と重症度により変動。軽度の前庭症状は治療により2-8週間で改善する場合があるが、残存する斜頸が持続することが多い。腎疾患は進行性で慢性腎不全に至る可能性がある。水晶体崩壊性ぶどう膜炎は終生管理または眼球摘出が必要。フェンベンダゾールによる早期治療で予後は大幅に改善。無症候性保菌者は発症しない場合がある。"
+        "prognosis_ja": "臓器障害と重症度により変動。軽度の前庭症状は治療により2-8週間で改善する場合があるが、残存する斜頸が持続することが多い。腎疾患は進行性で慢性腎不全に至る可能性がある。水晶体崩壊性ぶどう膜炎は終生管理または眼球摘出が必要。フェンベンダゾールによる早期治療で予後は大幅に改善。無症候性保菌者は発症しない場合がある。",
     },
     {
         "name": "Rabbit Papillomatosis",
@@ -95,7 +95,7 @@ DISEASES = [
         "prevention": "Arthropod vector control; Minimize skin abrasions; Quarantine new rabbits; Avoid contact with wild cottontail rabbits",
         "prevention_ja": "節足動物ベクター駆除；皮膚擦過傷の最小化；新規ウサギの検疫；野生ワタオウサギとの接触回避",
         "prognosis": "Good in domestic rabbits as lesions typically regress spontaneously. In cottontail rabbits, risk of malignant transformation to squamous cell carcinoma (up to 25% of cases). Surgically excised lesions rarely recur. Immunocompromised rabbits may develop persistent or progressive lesions.",
-        "prognosis_ja": "家庭ウサギでは病変が通常自然退縮するため予後良好。ワタオウサギでは扁平上皮癌への悪性転化リスクあり（症例の最大25%）。外科的に切除された病変の再発は稀。免疫不全ウサギでは持続性または進行性の病変を発症する可能性がある。"
+        "prognosis_ja": "家庭ウサギでは病変が通常自然退縮するため予後良好。ワタオウサギでは扁平上皮癌への悪性転化リスクあり（症例の最大25%）。外科的に切除された病変の再発は稀。免疫不全ウサギでは持続性または進行性の病変を発症する可能性がある。",
     },
     {
         "name": "Rabbit Poxvirus Infection",
@@ -117,7 +117,7 @@ DISEASES = [
         "prevention": "Mosquito control; Avoid contact with wild rabbits; Quarantine and screening of new animals",
         "prevention_ja": "蚊駆除；野生ウサギとの接触回避；新規動物の検疫・スクリーニング",
         "prognosis": "Generally good in domestic rabbits with self-limiting lesions resolving in 2-4 weeks. Young or immunosuppressed rabbits may develop more severe systemic disease. Shope fibroma in cottontail rabbits is benign and resolves spontaneously.",
-        "prognosis_ja": "家庭ウサギでは2-4週間で自己限定性病変が消退し予後は一般的に良好。幼若または免疫抑制ウサギではより重篤な全身疾患を発症する可能性がある。ワタオウサギのショープ線維腫は良性で自然消退する。"
+        "prognosis_ja": "家庭ウサギでは2-4週間で自己限定性病変が消退し予後は一般的に良好。幼若または免疫抑制ウサギではより重篤な全身疾患を発症する可能性がある。ワタオウサギのショープ線維腫は良性で自然消退する。",
     },
     {
         "name": "Rotavirus Enteritis",
@@ -139,7 +139,7 @@ DISEASES = [
         "prevention": "Gradual weaning over 2-3 weeks; Maintain clean environment; Ensure adequate colostrum intake; Minimize stress during weaning; Proper hygiene and disinfection of breeding facilities",
         "prevention_ja": "2-3週間かけた段階的離乳；清潔な環境維持；十分な初乳摂取の確保；離乳時のストレス最小化；繁殖施設の適切な衛生管理と消毒",
         "prognosis": "Mild cases recover within 3-5 days with supportive care. Severe dehydration in neonates can be fatal (mortality 10-30% in outbreaks). Co-infection with other enteric pathogens worsens prognosis. Surviving rabbits develop protective immunity.",
-        "prognosis_ja": "軽症例は支持療法により3-5日で回復する。新生児の重度脱水は致死的となりうる（流行時の死亡率10-30%）。他の腸管病原体との混合感染は予後を悪化させる。生存したウサギは防御免疫を獲得する。"
+        "prognosis_ja": "軽症例は支持療法により3-5日で回復する。新生児の重度脱水は致死的となりうる（流行時の死亡率10-30%）。他の腸管病原体との混合感染は予後を悪化させる。生存したウサギは防御免疫を獲得する。",
     },
     {
         "name": "Coronavirus Enteritis",
@@ -161,7 +161,7 @@ DISEASES = [
         "prevention": "Strict hygiene; Quarantine of new rabbits; Stress reduction; Avoid overcrowding; Regular disinfection",
         "prevention_ja": "厳格な衛生管理；新規ウサギの検疫；ストレス軽減；過密飼育の回避；定期的消毒",
         "prognosis": "Most immunocompetent adult rabbits recover within 5-10 days. Young, stressed, or immunocompromised rabbits have higher mortality. Co-infections significantly worsen outcomes.",
-        "prognosis_ja": "ほとんどの免疫正常成体ウサギは5-10日で回復する。幼若、ストレス下、免疫不全ウサギの死亡率は高い。混合感染は予後を著しく悪化させる。"
+        "prognosis_ja": "ほとんどの免疫正常成体ウサギは5-10日で回復する。幼若、ストレス下、免疫不全ウサギの死亡率は高い。混合感染は予後を著しく悪化させる。",
     },
 ]
 

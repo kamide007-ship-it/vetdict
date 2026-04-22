@@ -17,9 +17,7 @@ def test_validate_claude_response_valid():
     }
     symptom_ids = {"coughing", "nasal_discharge", "fever"}
 
-    is_valid, symptoms, msg = validate_claude_response(
-        response, symptom_ids, confidence_threshold=0.7
-    )
+    is_valid, symptoms, msg = validate_claude_response(response, symptom_ids, confidence_threshold=0.7)
 
     assert is_valid is True
     assert symptoms == ["coughing", "nasal_discharge"]
@@ -34,9 +32,7 @@ def test_validate_claude_response_low_confidence():
     }
     symptom_ids = {"coughing"}
 
-    is_valid, symptoms, msg = validate_claude_response(
-        response, symptom_ids, confidence_threshold=0.7
-    )
+    is_valid, symptoms, msg = validate_claude_response(response, symptom_ids, confidence_threshold=0.7)
 
     assert is_valid is False
     assert "confidence" in msg.lower()
@@ -50,9 +46,7 @@ def test_validate_claude_response_invalid_symptom():
     }
     symptom_ids = {"coughing", "nasal_discharge"}
 
-    is_valid, symptoms, msg = validate_claude_response(
-        response, symptom_ids, confidence_threshold=0.7
-    )
+    is_valid, symptoms, msg = validate_claude_response(response, symptom_ids, confidence_threshold=0.7)
 
     # Should be valid but return only valid symptoms
     assert is_valid is True
@@ -68,9 +62,7 @@ def test_validate_claude_response_missing_field():
     }
     symptom_ids = {"coughing"}
 
-    is_valid, symptoms, msg = validate_claude_response(
-        response, symptom_ids, confidence_threshold=0.7
-    )
+    is_valid, symptoms, msg = validate_claude_response(response, symptom_ids, confidence_threshold=0.7)
 
     assert is_valid is False
     assert "extracted_symptoms" in msg.lower()
@@ -78,9 +70,7 @@ def test_validate_claude_response_missing_field():
 
 def test_validate_claude_response_invalid_type():
     """Test validation fails when response is not dict."""
-    is_valid, symptoms, msg = validate_claude_response(
-        "not a dict", {"coughing"}, confidence_threshold=0.7
-    )
+    is_valid, symptoms, msg = validate_claude_response("not a dict", {"coughing"}, confidence_threshold=0.7)
 
     assert is_valid is False
 

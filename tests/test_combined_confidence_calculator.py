@@ -124,9 +124,7 @@ class TestCombinedConfidenceCalculator:
 
         # Check that allocated symptoms are from detected
         all_allocated = set(hd_symptoms) | set(oa_symptoms)
-        assert all_allocated.issubset(
-            set(["limping", "pain", "stiffness"])
-        )
+        assert all_allocated.issubset(set(["limping", "pain", "stiffness"]))
 
     def test_independence_penalty_calculation(self):
         """Test that symptom overlap results in penalty."""

@@ -109,9 +109,7 @@ class TestMultiDiseaseQuestionGenerator:
         )
 
         assert len(questions) > 0
-        assert all(
-            isinstance(q, DiagnosticQuestion) for q in questions
-        )
+        assert all(isinstance(q, DiagnosticQuestion) for q in questions)
         # Questions should target the diseases
         for q in questions:
             assert len(q.target_diseases) > 0
@@ -306,9 +304,7 @@ class TestQuestionSequenceOptimizer:
             # First question should have high information gain
             first_gain = optimized[0].information_gain
             # Should be at least as good as average
-            average_gain = sum(q.information_gain for q in sample_questions) / len(
-                sample_questions
-            )
+            average_gain = sum(q.information_gain for q in sample_questions) / len(sample_questions)
             assert first_gain >= average_gain * 0.8
 
     def test_optimized_sequence_limits_length(self, sample_questions):

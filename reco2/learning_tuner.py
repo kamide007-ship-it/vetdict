@@ -147,7 +147,7 @@ class LearningTuner:
             # Strong negative feedback → increase eta (learn faster from corrections)
             return {
                 "score": -0.002,
-                "message": f"Frequent corrections ({(1-good_ratio):.0%}) → adjust eta",
+                "message": f"Frequent corrections ({(1 - good_ratio):.0%}) → adjust eta",
             }
 
         return {"score": 0, "message": ""}
@@ -157,10 +157,7 @@ class LearningTuner:
         patterns = learning_data.get("symptom_disease_patterns", [])
 
         # Count stable, high-accuracy patterns
-        stable_patterns = [
-            p for p in patterns
-            if p.get("sample_count", 0) >= 5 and p.get("accuracy_rate", 0) > 0.8
-        ]
+        stable_patterns = [p for p in patterns if p.get("sample_count", 0) >= 5 and p.get("accuracy_rate", 0) > 0.8]
 
         if len(stable_patterns) < 3:
             return {"score": 0, "message": ""}
@@ -179,9 +176,7 @@ class LearningTuner:
             return {"score": 0}
 
         # Calculate average effectiveness
-        effective_count = sum(
-            1 for i in impacts if i.get("verdict_accuracy", 0) > 0.8
-        )
+        effective_count = sum(1 for i in impacts if i.get("verdict_accuracy", 0) > 0.8)
 
         if effective_count == 0:
             return {"score": -0.02}
@@ -214,9 +209,7 @@ class LearningTuner:
             "personalization": 0.15,
         }
 
-        weighted_signal = sum(
-            signals.get(key, 0) * weight for key, weight in weights.items()
-        )
+        weighted_signal = sum(signals.get(key, 0) * weight for key, weight in weights.items())
 
         # Cap adjustment per cycle (stability)
         max_adjustment = 0.1

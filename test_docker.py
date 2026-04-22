@@ -11,26 +11,26 @@ import yaml
 
 def test_dockerfile_exists():
     """Check that Dockerfile exists"""
-    assert Path('Dockerfile').exists(), "Missing Dockerfile"
-    assert Path('Dockerfile.prod').exists(), "Missing Dockerfile.prod"
+    assert Path("Dockerfile").exists(), "Missing Dockerfile"
+    assert Path("Dockerfile.prod").exists(), "Missing Dockerfile.prod"
     print("✓ Dockerfiles exist")
 
 
 def test_dockerfile_content():
     """Validate Dockerfile content"""
-    with open('Dockerfile', 'r') as f:
+    with open("Dockerfile", "r") as f:
         content = f.read()
 
     required = [
-        'FROM python:3.11-slim',
-        'WORKDIR /app',
-        'COPY requirements.txt',
-        'RUN pip install',
-        'COPY . .',
-        'USER appuser',
-        'HEALTHCHECK',
-        'EXPOSE 8000',
-        'EXPOSE 3000'
+        "FROM python:3.11-slim",
+        "WORKDIR /app",
+        "COPY requirements.txt",
+        "RUN pip install",
+        "COPY . .",
+        "USER appuser",
+        "HEALTHCHECK",
+        "EXPOSE 8000",
+        "EXPOSE 3000",
     ]
 
     for item in required:
@@ -40,67 +40,61 @@ def test_dockerfile_content():
 
 def test_docker_compose_structure():
     """Validate docker-compose.yml structure"""
-    with open('docker-compose.yml', 'r') as f:
+    with open("docker-compose.yml", "r") as f:
         config = yaml.safe_load(f)
 
-    assert 'services' in config, "Missing services section"
-    assert 'vetdict' in config['services'], "Missing vetdict service"
-    assert 'networks' in config, "Missing networks section"
-    assert 'volumes' in config, "Missing volumes section"
+    assert "services" in config, "Missing services section"
+    assert "vetdict" in config["services"], "Missing vetdict service"
+    assert "networks" in config, "Missing networks section"
+    assert "volumes" in config, "Missing volumes section"
 
     print("✓ docker-compose.yml structure valid")
 
 
 def test_docker_compose_services():
     """Validate docker-compose services"""
-    with open('docker-compose.yml', 'r') as f:
+    with open("docker-compose.yml", "r") as f:
         config = yaml.safe_load(f)
 
-    services = config['services']
+    services = config["services"]
 
     # Check main service
-    vetdict = services['vetdict']
-    assert 'build' in vetdict, "Missing build configuration"
-    assert 'ports' in vetdict, "Missing ports"
-    assert 'environment' in vetdict, "Missing environment"
-    assert 'healthcheck' in vetdict, "Missing healthcheck"
+    vetdict = services["vetdict"]
+    assert "build" in vetdict, "Missing build configuration"
+    assert "ports" in vetdict, "Missing ports"
+    assert "environment" in vetdict, "Missing environment"
+    assert "healthcheck" in vetdict, "Missing healthcheck"
 
     # Check optional services
-    assert 'db' in services, "Missing database service"
-    assert 'cache' in services, "Missing cache service"
-    assert 'nginx' in services, "Missing nginx service"
+    assert "db" in services, "Missing database service"
+    assert "cache" in services, "Missing cache service"
+    assert "nginx" in services, "Missing nginx service"
 
     print("✓ All services configured")
 
 
 def test_docker_compose_healthcheck():
     """Validate healthcheck configuration"""
-    with open('docker-compose.yml', 'r') as f:
+    with open("docker-compose.yml", "r") as f:
         config = yaml.safe_load(f)
 
-    healthcheck = config['services']['vetdict']['healthcheck']
-    assert 'test' in healthcheck, "Missing healthcheck test"
-    assert 'interval' in healthcheck, "Missing interval"
-    assert 'timeout' in healthcheck, "Missing timeout"
-    assert 'retries' in healthcheck, "Missing retries"
+    healthcheck = config["services"]["vetdict"]["healthcheck"]
+    assert "test" in healthcheck, "Missing healthcheck test"
+    assert "interval" in healthcheck, "Missing interval"
+    assert "timeout" in healthcheck, "Missing timeout"
+    assert "retries" in healthcheck, "Missing retries"
 
     print("✓ Healthcheck properly configured")
 
 
 def test_env_example():
     """Validate .env.example file"""
-    assert Path('.env.example').exists(), "Missing .env.example"
+    assert Path(".env.example").exists(), "Missing .env.example"
 
-    with open('.env.example', 'r') as f:
+    with open(".env.example", "r") as f:
         content = f.read()
 
-    required = [
-        'ENVIRONMENT',
-        'API_PORT',
-        'WEB_PORT',
-        'DB_USER',
-        'DB_PASSWORD'
-    ]
+    required = ["ENVIRONMENT", "API_PORT", "WEB_PORT", "DB_USER", "DB_PASSWORD"]
 
     for item in required:
         assert item in content, f"Missing environment variable: {item}"
@@ -109,18 +103,18 @@ def test_env_example():
 
 def test_nginx_config():
     """Validate nginx configuration"""
-    assert Path('nginx.conf').exists(), "Missing nginx.conf"
+    assert Path("nginx.conf").exists(), "Missing nginx.conf"
 
-    with open('nginx.conf', 'r') as f:
+    with open("nginx.conf", "r") as f:
         content = f.read()
 
     required = [
-        'upstream api_backend',
-        'upstream web_backend',
-        'location /api/',
-        'location /static/',
-        'ssl_certificate',
-        'gzip on'
+        "upstream api_backend",
+        "upstream web_backend",
+        "location /api/",
+        "location /static/",
+        "ssl_certificate",
+        "gzip on",
     ]
 
     for item in required:
@@ -130,18 +124,12 @@ def test_nginx_config():
 
 def test_dockerignore():
     """Validate .dockerignore"""
-    assert Path('.dockerignore').exists(), "Missing .dockerignore"
+    assert Path(".dockerignore").exists(), "Missing .dockerignore"
 
-    with open('.dockerignore', 'r') as f:
+    with open(".dockerignore", "r") as f:
         content = f.read()
 
-    required = [
-        '__pycache__',
-        '.git',
-        '.pytest_cache',
-        'venv',
-        '.env'
-    ]
+    required = ["__pycache__", ".git", ".pytest_cache", "venv", ".env"]
 
     for item in required:
         assert item in content, f"Missing in .dockerignore: {item}"
@@ -150,25 +138,19 @@ def test_dockerignore():
 
 def test_docker_documentation():
     """Validate DOCKER.md exists"""
-    assert Path('DOCKER.md').exists(), "Missing DOCKER.md"
+    assert Path("DOCKER.md").exists(), "Missing DOCKER.md"
 
-    with open('DOCKER.md', 'r') as f:
+    with open("DOCKER.md", "r") as f:
         content = f.read()
 
-    sections = [
-        'Quick Start',
-        'Docker Compose Setup',
-        'Production Build',
-        'Health Checks',
-        'Troubleshooting'
-    ]
+    sections = ["Quick Start", "Docker Compose Setup", "Production Build", "Health Checks", "Troubleshooting"]
 
     for section in sections:
         assert section in content, f"Missing section: {section}"
         print(f"✓ {section}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("=" * 70)
     print("VetDict Docker Configuration Tests")
     print("=" * 70)

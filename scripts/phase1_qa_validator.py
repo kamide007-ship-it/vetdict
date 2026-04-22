@@ -27,13 +27,15 @@ class Phase1QAValidator:
 
         self.enriched_db_path = Path(enriched_db_path)
         self.original_db_path = Path(__file__).parent.parent / "diseases_all_species.json"
-        self.qa_report_path = Path(__file__).parent.parent / f"qa_report_phase1_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        self.qa_report_path = (
+            Path(__file__).parent.parent / f"qa_report_phase1_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
 
     def load_databases(self):
         """Load both original and enriched databases."""
-        with open(self.enriched_db_path, 'r', encoding='utf-8') as f:
+        with open(self.enriched_db_path, "r", encoding="utf-8") as f:
             enriched = json.load(f)
-        with open(self.original_db_path, 'r', encoding='utf-8') as f:
+        with open(self.original_db_path, "r", encoding="utf-8") as f:
             original = json.load(f)
         return original, enriched
 
@@ -49,16 +51,25 @@ class Phase1QAValidator:
             "prevention": disease.get("prevention", ""),
             "prevention_ja": disease.get("prevention_ja", ""),
             "prognosis": disease.get("prognosis", ""),
-            "prognosis_ja": disease.get("prognosis_ja", "")
+            "prognosis_ja": disease.get("prognosis_ja", ""),
         }
         return {field: bool(value) for field, value in fields.items()}
 
     def check_field_length(self, disease: Dict) -> Dict:
         """Check if field lengths are reasonable (2-3 sentences)."""
         validations = {}
-        for field in ["pathophysiology", "pathophysiology_ja", "causes", "causes_ja",
-                     "treatment", "treatment_ja", "prevention", "prevention_ja",
-                     "prognosis", "prognosis_ja"]:
+        for field in [
+            "pathophysiology",
+            "pathophysiology_ja",
+            "causes",
+            "causes_ja",
+            "treatment",
+            "treatment_ja",
+            "prevention",
+            "prevention_ja",
+            "prognosis",
+            "prognosis_ja",
+        ]:
             value = disease.get(field, "")
             if not value:
                 validations[field] = "empty"
@@ -77,7 +88,7 @@ class Phase1QAValidator:
             ("causes", "causes_ja"),
             ("treatment", "treatment_ja"),
             ("prevention", "prevention_ja"),
-            ("prognosis", "prognosis_ja")
+            ("prognosis", "prognosis_ja"),
         ]
         balance = {}
         for en, ja in pairs:
@@ -104,7 +115,7 @@ class Phase1QAValidator:
             "symptoms may include",
             "treatment involves",
             "should be",
-            "is important"
+            "is important",
         ]
 
         for field in ["pathophysiology", "causes", "treatment", "prevention", "prognosis"]:
@@ -132,13 +143,7 @@ class Phase1QAValidator:
         print(f"\nValidating sample of {sample_size} diseases...")
         print("-" * 70)
 
-        results = {
-            "total_sampled": sample_size,
-            "passed": 0,
-            "failed": 0,
-            "issues": [],
-            "details": {}
-        }
+        results = {"total_sampled": sample_size, "passed": 0, "failed": 0, "issues": [], "details": {}}
 
         for i, disease in enumerate(sample, 1):
             disease_id = disease.get("id")
@@ -163,20 +168,22 @@ class Phase1QAValidator:
             else:
                 results["failed"] += 1
                 status = "✗"
-                results["issues"].append({
-                    "disease_id": disease_id,
-                    "disease_name": disease_name,
-                    "field_presence": field_presence,
-                    "field_lengths": field_length,
-                    "terminology_issues": terminology_issues
-                })
+                results["issues"].append(
+                    {
+                        "disease_id": disease_id,
+                        "disease_name": disease_name,
+                        "field_presence": field_presence,
+                        "field_lengths": field_length,
+                        "terminology_issues": terminology_issues,
+                    }
+                )
 
             results["details"][disease_id] = {
                 "name": disease_name,
                 "status": "pass" if passed else "fail",
                 "field_presence": field_presence,
                 "field_lengths": field_length,
-                "bilingual_balance": bilingual
+                "bilingual_balance": bilingual,
             }
 
             print(f"  {status} {i:2d}. {disease_name[:50]}")
@@ -216,26 +223,55 @@ class Phase1QAValidator:
             "pass_rate": pass_rate,
             "results": sample_results,
             "metrics": {
-                "fields_completion": 100 * len([d for d in enriched if d.get("enrichment_phase") == 1 and all(d.get(f) for f in [
-                    "pathophysiology", "pathophysiology_ja", "causes", "causes_ja",
-                    "treatment", "treatment_ja", "prevention", "prevention_ja",
-                    "prognosis", "prognosis_ja"
-                ])]) / max(phase1_count, 1),
-                "bilingual_coverage": 100 * len([d for d in enriched if d.get("enrichment_phase") == 1 and any(
-                    d.get(en) and d.get(ja) for en, ja in [
-                        ("pathophysiology", "pathophysiology_ja"),
-                        ("causes", "causes_ja"),
-                        ("treatment", "treatment_ja"),
-                        ("prevention", "prevention_ja"),
-                        ("prognosis", "prognosis_ja")
+                "fields_completion": 100
+                * len(
+                    [
+                        d
+                        for d in enriched
+                        if d.get("enrichment_phase") == 1
+                        and all(
+                            d.get(f)
+                            for f in [
+                                "pathophysiology",
+                                "pathophysiology_ja",
+                                "causes",
+                                "causes_ja",
+                                "treatment",
+                                "treatment_ja",
+                                "prevention",
+                                "prevention_ja",
+                                "prognosis",
+                                "prognosis_ja",
+                            ]
+                        )
                     ]
-                )]) / max(phase1_count, 1)
+                )
+                / max(phase1_count, 1),
+                "bilingual_coverage": 100
+                * len(
+                    [
+                        d
+                        for d in enriched
+                        if d.get("enrichment_phase") == 1
+                        and any(
+                            d.get(en) and d.get(ja)
+                            for en, ja in [
+                                ("pathophysiology", "pathophysiology_ja"),
+                                ("causes", "causes_ja"),
+                                ("treatment", "treatment_ja"),
+                                ("prevention", "prevention_ja"),
+                                ("prognosis", "prognosis_ja"),
+                            ]
+                        )
+                    ]
+                )
+                / max(phase1_count, 1),
             },
-            "recommendations": self._generate_recommendations(sample_results)
+            "recommendations": self._generate_recommendations(sample_results),
         }
 
         # Save report
-        with open(self.qa_report_path, 'w', encoding='utf-8') as f:
+        with open(self.qa_report_path, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
 
         print(f"✓ QA report saved: {self.qa_report_path}")
@@ -254,8 +290,8 @@ class Phase1QAValidator:
             print(f"\nIssues Found ({len(sample_results['issues'])}):")
             for issue in sample_results["issues"][:5]:
                 print(f"  - {issue['disease_name'][:40]}")
-                if issue['terminology_issues']:
-                    for term_issue in issue['terminology_issues'][:2]:
+                if issue["terminology_issues"]:
+                    for term_issue in issue["terminology_issues"][:2]:
                         print(f"    • {term_issue}")
 
         print("\nNext steps:")

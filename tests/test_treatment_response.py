@@ -9,7 +9,7 @@ import sys
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from api.ai.treatment_response_predictor import (
     TreatmentKnowledgeBase,
@@ -78,20 +78,14 @@ class TestTreatmentKnowledgeBase:
 
     def test_get_specific_treatment(self):
         """Test retrieving specific treatment."""
-        treatment = TreatmentKnowledgeBase.get_treatment(
-            "Pancreatitis",
-            "Supportive Care (IV fluids, rest, diet)"
-        )
+        treatment = TreatmentKnowledgeBase.get_treatment("Pancreatitis", "Supportive Care (IV fluids, rest, diet)")
 
         assert treatment is not None
         assert treatment.disease == "Pancreatitis"
 
     def test_get_specific_treatment_not_found(self):
         """Test retrieving non-existent treatment."""
-        treatment = TreatmentKnowledgeBase.get_treatment(
-            "Pancreatitis",
-            "Non-existent Treatment"
-        )
+        treatment = TreatmentKnowledgeBase.get_treatment("Pancreatitis", "Non-existent Treatment")
 
         assert treatment is None
 
@@ -344,7 +338,7 @@ class TestTreatmentResponsePredictor:
         stats = predictor.get_treatment_statistics()
 
         assert stats["total_outcomes"] == 3
-        assert stats["success_rate"] == pytest.approx(2/3, abs=0.01)
+        assert stats["success_rate"] == pytest.approx(2 / 3, abs=0.01)
 
     def test_confidence_level(self, predictor):
         """Test confidence level in predictions."""

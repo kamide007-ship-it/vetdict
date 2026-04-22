@@ -55,8 +55,13 @@ def init_analytics():
         conn.executescript(ANALYTICS_SCHEMA)
 
 
-def record_api_call(endpoint: str, method: str = "GET", species: str | None = None,
-                    status_code: int = 200, response_time_ms: float = 0.0) -> None:
+def record_api_call(
+    endpoint: str,
+    method: str = "GET",
+    species: str | None = None,
+    status_code: int = 200,
+    response_time_ms: float = 0.0,
+) -> None:
     """Record a single API call."""
     try:
         with _get_analytics_conn() as conn:
@@ -70,6 +75,7 @@ def record_api_call(endpoint: str, method: str = "GET", species: str | None = No
 
 def track_request(f):
     """Decorator to automatically record API usage."""
+
     @wraps(f)
     def wrapper(*args, **kwargs):
         start = time.monotonic()
@@ -90,12 +96,14 @@ def track_request(f):
             response_time_ms=round(elapsed, 2),
         )
         return result
+
     return wrapper
 
 
 # ---------------------------------------------------------------------------
 # Analytics API endpoints
 # ---------------------------------------------------------------------------
+
 
 @analytics_bp.route("/summary", methods=["GET"])
 def analytics_summary():
@@ -109,21 +117,21 @@ def analytics_summary():
             "SELECT species, COUNT(*) as cnt FROM api_usage WHERE species IS NOT NULL GROUP BY species ORDER BY cnt DESC"
         ).fetchall()
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        today_count = conn.execute(
-            "SELECT COUNT(*) FROM api_usage WHERE created_at >= ?", (today,)
-        ).fetchone()[0]
+        today_count = conn.execute("SELECT COUNT(*) FROM api_usage WHERE created_at >= ?", (today,)).fetchone()[0]
         avg_response = conn.execute(
             "SELECT AVG(response_time_ms) FROM api_usage WHERE response_time_ms > 0"
         ).fetchone()[0]
 
-    return jsonify({
-        "success": True,
-        "total_requests": total,
-        "today_requests": today_count,
-        "avg_response_time_ms": round(avg_response or 0, 2),
-        "top_endpoints": {r["endpoint"]: r["cnt"] for r in by_endpoint},
-        "by_species": {r["species"]: r["cnt"] for r in by_species},
-    })
+    return jsonify(
+        {
+            "success": True,
+            "total_requests": total,
+            "today_requests": today_count,
+            "avg_response_time_ms": round(avg_response or 0, 2),
+            "top_endpoints": {r["endpoint"]: r["cnt"] for r in by_endpoint},
+            "by_species": {r["species"]: r["cnt"] for r in by_species},
+        }
+    )
 
 
 @analytics_bp.route("/daily", methods=["GET"])
@@ -136,7 +144,9 @@ def analytics_daily():
                WHERE created_at >= date('now', '-30 days')
                GROUP BY day ORDER BY day"""
         ).fetchall()
-    return jsonify({
-        "success": True,
-        "daily": {r["day"]: r["cnt"] for r in rows},
-    })
+    return jsonify(
+        {
+            "success": True,
+            "daily": {r["day"]: r["cnt"] for r in rows},
+        }
+    )

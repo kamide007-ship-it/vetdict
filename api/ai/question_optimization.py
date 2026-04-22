@@ -77,9 +77,7 @@ class EntropyCalculator:
 
         # Extract match percentages
         match_dict = {
-            d.get("name", ""): max(0, d.get("match_percent", 0))
-            for d in diseases_with_matches
-            if d.get("name")
+            d.get("name", ""): max(0, d.get("match_percent", 0)) for d in diseases_with_matches if d.get("name")
         }
 
         # Normalize to probabilities
@@ -123,9 +121,7 @@ class EntropyCalculator:
         overlap = target_set & disease_set
 
         # Probability is weighted by disease probabilities
-        overlap_prob = sum(
-            prior_probabilities.get(d, 0) for d in overlap if d in disease_set
-        )
+        overlap_prob = sum(prior_probabilities.get(d, 0) for d in overlap if d in disease_set)
 
         if answer_value.lower() in ("yes", "positive", "true", "1"):
             return overlap_prob
@@ -157,9 +153,7 @@ class EntropyCalculator:
         # Estimate probabilities
         disease_names = [d.get("name", "") for d in current_diseases if d.get("name")]
 
-        prob_yes = cls.estimated_answer_probability(
-            disease_names, question_targets, current_probs, answer_value="yes"
-        )
+        prob_yes = cls.estimated_answer_probability(disease_names, question_targets, current_probs, answer_value="yes")
         prob_no = 1.0 - prob_yes
 
         # Estimate entropy after positive answer
@@ -176,9 +170,7 @@ class EntropyCalculator:
             # Normalize
             total_yes = sum(boosted_probs_yes.values())
             if total_yes > 0:
-                boosted_probs_yes = {
-                    k: v / total_yes for k, v in boosted_probs_yes.items()
-                }
+                boosted_probs_yes = {k: v / total_yes for k, v in boosted_probs_yes.items()}
             expected_entropy_yes = cls.calculate_entropy(boosted_probs_yes)
         else:
             expected_entropy_yes = current_entropy
@@ -196,26 +188,20 @@ class EntropyCalculator:
             # Normalize
             total_no = sum(boosted_probs_no.values())
             if total_no > 0:
-                boosted_probs_no = {
-                    k: v / total_no for k, v in boosted_probs_no.items()
-                }
+                boosted_probs_no = {k: v / total_no for k, v in boosted_probs_no.items()}
             expected_entropy_no = cls.calculate_entropy(boosted_probs_no)
         else:
             expected_entropy_no = current_entropy
 
         # Calculate expected entropy after question
-        expected_entropy = (
-            prob_yes * expected_entropy_yes + prob_no * expected_entropy_no
-        )
+        expected_entropy = prob_yes * expected_entropy_yes + prob_no * expected_entropy_no
 
         # Information gain = entropy reduction
         information_gain = current_entropy - expected_entropy
 
         # Normalize IG to 0-1 scale (max entropy for N items is log2(N))
         max_entropy = math.log2(len(disease_names)) if len(disease_names) > 1 else 1.0
-        effectiveness_score = (
-            information_gain / max_entropy if max_entropy > 0 else 0.0
-        )
+        effectiveness_score = information_gain / max_entropy if max_entropy > 0 else 0.0
         effectiveness_score = max(0.0, min(effectiveness_score, 1.0))  # Clamp to [0,1]
 
         return EntropyMetrics(
@@ -273,7 +259,5 @@ def calculate_question_entropy_reduction(
     Returns:
         Information gain (entropy reduction) score
     """
-    metrics = EntropyCalculator.calculate_information_gain(
-        question_id, question_targets, suspected_diseases
-    )
+    metrics = EntropyCalculator.calculate_information_gain(question_id, question_targets, suspected_diseases)
     return metrics.information_gain

@@ -91,9 +91,7 @@ Ensure medical accuracy appropriate for veterinary professionals."""
 
         # Extract JSON from response
         try:
-            response_text = next(
-                (b.text for b in response.content if b.type == "text"), ""
-            )
+            response_text = next((b.text for b in response.content if b.type == "text"), "")
             # Try to extract JSON from the response
             json_start = response_text.find("{")
             json_end = response_text.rfind("}") + 1
@@ -145,13 +143,10 @@ Ensure medical accuracy appropriate for veterinary professionals."""
         return {
             "total": len(diseases),
             "complete": complete,
-            "complete_percentage": round((complete / len(diseases) * 100), 1)
-            if diseases
-            else 0,
+            "complete_percentage": round((complete / len(diseases) * 100), 1) if diseases else 0,
             "incomplete": len(incomplete),
             "field_coverage": {
-                k: round((v / len(diseases) * 100), 1) if diseases else 0
-                for k, v in field_counts.items()
+                k: round((v / len(diseases) * 100), 1) if diseases else 0 for k, v in field_counts.items()
             },
             "sample_incomplete": incomplete[:10],
         }
@@ -175,9 +170,7 @@ def main():
         print(f"  {field}: {coverage}%")
 
     # Enrich a sample incomplete disease
-    sample_incomplete = next(
-        (d for d in _DISEASE_DB if not d.get("pathophysiology")), None
-    )
+    sample_incomplete = next((d for d in _DISEASE_DB if not d.get("pathophysiology")), None)
     if sample_incomplete:
         print(f"\n--- Enriching: {sample_incomplete.get('name')} ---")
         enriched = enricher.enrich_single_disease(sample_incomplete.copy())

@@ -223,12 +223,6 @@ class TestCrossBatchIntegrity:
 
     def test_total_drug_count(self):
         """Sanity check: combined drug count is reasonable."""
-        total = (
-            len(DRUGS_BATCH_1)
-            + len(DRUGS_BATCH_2)
-            + len(FISH_DRUGS)
-            + len(DRUGS_BATCH_5)
-            + len(DRUGS_BATCH_6)
-        )
+        total = len(DRUGS_BATCH_1) + len(DRUGS_BATCH_2) + len(FISH_DRUGS) + len(DRUGS_BATCH_5) + len(DRUGS_BATCH_6)
         # Should have a substantial number of drugs
         assert total >= 30, f"Only {total} drugs across all batches"

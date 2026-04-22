@@ -3,16 +3,44 @@
 from api.species_husbandry import HUSBANDRY_DATA
 
 # Required fields for every species entry
-_REQUIRED_FIELDS = {"name", "name_ja", "temperature", "humidity", "housing", "diet", "enrichment", "socialization", "notes"}
+_REQUIRED_FIELDS = {
+    "name",
+    "name_ja",
+    "temperature",
+    "humidity",
+    "housing",
+    "diet",
+    "enrichment",
+    "socialization",
+    "notes",
+}
 
 # Each text field must have both en and ja keys
 _BILINGUAL_FIELDS = {"temperature", "humidity", "housing", "diet", "enrichment", "socialization", "notes"}
 
 # All 21 species from CLAUDE.md
 _EXPECTED_SPECIES = {
-    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
-    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet", "parrot",
-    "reptile", "tortoise", "snake", "lizard", "amphibian", "fish", "exotic_other",
+    "dog",
+    "cat",
+    "horse",
+    "rabbit",
+    "hamster",
+    "guinea_pig",
+    "chinchilla",
+    "ferret",
+    "hedgehog",
+    "sugar_glider",
+    "degu",
+    "bird",
+    "parakeet",
+    "parrot",
+    "reptile",
+    "tortoise",
+    "snake",
+    "lizard",
+    "amphibian",
+    "fish",
+    "exotic_other",
 }
 
 

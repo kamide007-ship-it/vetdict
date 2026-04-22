@@ -4,7 +4,6 @@ from api.errors import AnalysisError, AnalysisUnavailableError, DataCorruptionEr
 
 
 class TestAnalysisError:
-
     def test_is_exception(self):
         assert issubclass(AnalysisError, Exception)
 
@@ -20,7 +19,6 @@ class TestAnalysisError:
 
 
 class TestAnalysisUnavailableError:
-
     def test_is_analysis_error(self):
         assert issubclass(AnalysisUnavailableError, AnalysisError)
 
@@ -30,7 +28,6 @@ class TestAnalysisUnavailableError:
 
 
 class TestDataCorruptionError:
-
     def test_is_exception(self):
         assert issubclass(DataCorruptionError, Exception)
 

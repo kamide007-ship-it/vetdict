@@ -36,6 +36,7 @@ MODULE = "api.showdog_api"
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture(scope="module")
 def client():
     """Shared test client; suitable for stateless GET/POST tests."""
@@ -47,8 +48,8 @@ def client():
 # Module-level constants
 # ---------------------------------------------------------------------------
 
-class TestModuleConstants:
 
+class TestModuleConstants:
     def test_version_is_string(self):
         assert isinstance(showdog_mod.VERSION, str)
         assert len(showdog_mod.VERSION) > 0
@@ -65,6 +66,7 @@ class TestModuleConstants:
 
     def test_build_date_format(self):
         import re
+
         assert re.match(r"^\d{4}-\d{2}-\d{2}$", showdog_mod.BUILD), (
             f"BUILD '{showdog_mod.BUILD}' is not YYYY-MM-DD format"
         )
@@ -86,8 +88,8 @@ class TestModuleConstants:
 # GET /api/health
 # ---------------------------------------------------------------------------
 
-class TestHealthEndpoint:
 
+class TestHealthEndpoint:
     def test_returns_200(self, client):
         assert client.get("/api/health").status_code == 200
 
@@ -136,8 +138,8 @@ class TestHealthEndpoint:
 # POST /api/analyze-symptoms — input validation
 # ---------------------------------------------------------------------------
 
-class TestAnalyzeSymptomsValidation:
 
+class TestAnalyzeSymptomsValidation:
     def test_missing_body_returns_400(self, client):
         resp = client.post(
             "/api/analyze-symptoms",
@@ -172,8 +174,8 @@ class TestAnalyzeSymptomsValidation:
 # POST /api/analyze-symptoms — successful dispatch (dog)
 # ---------------------------------------------------------------------------
 
-class TestAnalyzeSymptomsSuccessfulDog:
 
+class TestAnalyzeSymptomsSuccessfulDog:
     def test_dog_default_species_returns_200(self, client):
         with patch(f"{MODULE}.analyze_symptoms", return_value={"diseases": [], "tests": []}):
             resp = client.post("/api/analyze-symptoms", json={"symptoms": ["vomiting"]})
@@ -219,8 +221,8 @@ class TestAnalyzeSymptomsSuccessfulDog:
 # POST /api/analyze-symptoms — non-dog species dispatch
 # ---------------------------------------------------------------------------
 
-class TestAnalyzeSymptomsNonDog:
 
+class TestAnalyzeSymptomsNonDog:
     def test_cat_uses_species_analyzer(self, client):
         mock_fn = MagicMock(return_value={"diseases": [], "tests": []})
         with patch(f"{MODULE}.analyze_species_symptoms", mock_fn):
@@ -265,15 +267,14 @@ class TestAnalyzeSymptomsNonDog:
 # RECO2 routes — module unavailable  →  503
 # ---------------------------------------------------------------------------
 
+
 class TestReco2UnavailableRoutes:
     """All RECO2/RECO3 routes must return 503 when RECO2_AVAILABLE is False."""
 
     def _assert_503(self, client, method, path, **kwargs):
         with patch(f"{MODULE}.RECO2_AVAILABLE", False):
             resp = client.get(path, **kwargs) if method == "GET" else client.post(path, **kwargs)
-        assert resp.status_code == 503, (
-            f"{method} {path} returned {resp.status_code}, expected 503"
-        )
+        assert resp.status_code == 503, f"{method} {path} returned {resp.status_code}, expected 503"
         assert "error" in resp.get_json()
 
     def test_status_returns_503(self, client):
@@ -308,8 +309,8 @@ class TestReco2UnavailableRoutes:
 # GET /api/status
 # ---------------------------------------------------------------------------
 
-class TestReco2StatusRoute:
 
+class TestReco2StatusRoute:
     def test_returns_200(self, client):
         with patch(f"{MODULE}.reco2_get_status", return_value={"status": "ok"}):
             resp = client.get("/api/status")
@@ -331,8 +332,8 @@ class TestReco2StatusRoute:
 # GET /api/logs
 # ---------------------------------------------------------------------------
 
-class TestReco2LogsRoute:
 
+class TestReco2LogsRoute:
     def test_returns_200(self, client):
         with patch(f"{MODULE}.reco2_get_logs", return_value={"logs": []}):
             resp = client.get("/api/logs")
@@ -361,8 +362,8 @@ class TestReco2LogsRoute:
 # POST /api/evaluate
 # ---------------------------------------------------------------------------
 
-class TestReco2EvaluateRoute:
 
+class TestReco2EvaluateRoute:
     def test_returns_200_with_payload(self, client):
         with patch(f"{MODULE}.reco2_evaluate_payload", return_value={"result": "pass"}):
             resp = client.post("/api/evaluate", json={"input": "test"})
@@ -384,8 +385,8 @@ class TestReco2EvaluateRoute:
 # POST /api/feedback
 # ---------------------------------------------------------------------------
 
-class TestReco2FeedbackRoute:
 
+class TestReco2FeedbackRoute:
     def test_returns_200(self, client):
         with patch(f"{MODULE}.reco2_record_feedback", return_value={"recorded": True}):
             resp = client.post("/api/feedback", json={"rating": 5})
@@ -413,8 +414,8 @@ class TestReco2FeedbackRoute:
 # POST /api/patrol
 # ---------------------------------------------------------------------------
 
-class TestReco2PatrolRoute:
 
+class TestReco2PatrolRoute:
     def test_returns_200(self, client):
         with patch(f"{MODULE}.reco2_patrol", return_value={"patrolled": True}):
             resp = client.post("/api/patrol", json={})
@@ -431,8 +432,8 @@ class TestReco2PatrolRoute:
 # POST /api/r3/analyze_input
 # ---------------------------------------------------------------------------
 
-class TestReco3AnalyzeInputRoute:
 
+class TestReco3AnalyzeInputRoute:
     def test_returns_200_with_text(self, client):
         with patch(f"{MODULE}.input_gate") as mock_gate:
             mock_gate.analyze.return_value = {"score": 0.0, "flags": []}
@@ -486,8 +487,8 @@ class TestReco3AnalyzeInputRoute:
 # POST /api/r3/analyze_output
 # ---------------------------------------------------------------------------
 
-class TestReco3AnalyzeOutputRoute:
 
+class TestReco3AnalyzeOutputRoute:
     def test_returns_200_with_text(self, client):
         with patch(f"{MODULE}.output_gate") as mock_gate:
             mock_gate.analyze.return_value = {"score": 0.0, "flags": []}
@@ -532,8 +533,8 @@ class TestReco3AnalyzeOutputRoute:
 # POST /api/r3/chat
 # ---------------------------------------------------------------------------
 
-class TestReco3ChatRoute:
 
+class TestReco3ChatRoute:
     def _mock_orch(self, return_value=None):
         mock_orch = MagicMock()
         mock_orch.process.return_value = return_value or {"response": "ok"}
@@ -584,8 +585,8 @@ class TestReco3ChatRoute:
 # GET /api/r3/config
 # ---------------------------------------------------------------------------
 
-class TestReco3ConfigRoute:
 
+class TestReco3ConfigRoute:
     def test_returns_200(self, client):
         with (
             patch(f"{MODULE}.load_reco2_config", return_value={}),
@@ -616,8 +617,8 @@ class TestReco3ConfigRoute:
 # ensure_json_response decorator
 # ---------------------------------------------------------------------------
 
-class TestEnsureJsonResponseDecorator:
 
+class TestEnsureJsonResponseDecorator:
     def test_success_response_includes_version(self, client):
         with patch(f"{MODULE}.reco2_get_status", return_value={"status": "ok"}):
             data = client.get("/api/status").get_json()
@@ -646,8 +647,8 @@ class TestEnsureJsonResponseDecorator:
 # Security headers (after_request hook)
 # ---------------------------------------------------------------------------
 
-class TestSecurityHeaders:
 
+class TestSecurityHeaders:
     def test_x_content_type_options(self, client):
         resp = client.get("/api/health")
         assert resp.headers.get("X-Content-Type-Options") == "nosniff"
@@ -679,8 +680,8 @@ class TestSecurityHeaders:
 # Static file routes
 # ---------------------------------------------------------------------------
 
-class TestStaticFileRoutes:
 
+class TestStaticFileRoutes:
     def test_index_route_registered(self):
         rules = {rule.rule for rule in APP.url_map.iter_rules()}
         assert "/" in rules
@@ -717,8 +718,8 @@ class TestStaticFileRoutes:
 # Error handlers
 # ---------------------------------------------------------------------------
 
-class TestErrorHandlers:
 
+class TestErrorHandlers:
     def test_unknown_api_path_returns_404(self, client):
         resp = client.get("/api/totally/unknown/route/xyz")
         # Flask may return 404 directly or via the static_files catch-all
@@ -740,8 +741,8 @@ class TestErrorHandlers:
 # URL rule coverage / HTTP method constraints
 # ---------------------------------------------------------------------------
 
-class TestUrlRules:
 
+class TestUrlRules:
     @pytest.fixture(autouse=True)
     def _rules(self):
         self.rules = {rule.rule for rule in APP.url_map.iter_rules()}

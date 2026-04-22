@@ -21,8 +21,7 @@ class TestMultiDiseaseAnalyzer:
                 "name_ja": "股関節形成不全",
                 "symptoms": ["limping", "pain", "reluctance_to_exercise"],
                 "pathophysiology": (
-                    "Abnormal hip joint development causes pain and limping. "
-                    "Primary symptoms appear early."
+                    "Abnormal hip joint development causes pain and limping. Primary symptoms appear early."
                 ),
                 "severity_score": 0.7,
                 "complications": ["osteoarthritis"],
@@ -32,8 +31,7 @@ class TestMultiDiseaseAnalyzer:
                 "name_ja": "変形性関節症",
                 "symptoms": ["stiffness", "limping", "reduced_mobility"],
                 "pathophysiology": (
-                    "Cartilage degeneration causes stiffness and limping. "
-                    "Develops gradually over time."
+                    "Cartilage degeneration causes stiffness and limping. Develops gradually over time."
                 ),
                 "severity_score": 0.6,
                 "complications": [],
@@ -42,10 +40,7 @@ class TestMultiDiseaseAnalyzer:
                 "name": "Ligament Tear",
                 "name_ja": "靭帯損傷",
                 "symptoms": ["acute_pain", "swelling", "lameness"],
-                "pathophysiology": (
-                    "Traumatic ligament injury causes acute pain and swelling. "
-                    "Sudden onset."
-                ),
+                "pathophysiology": ("Traumatic ligament injury causes acute pain and swelling. Sudden onset."),
                 "severity_score": 0.8,
                 "complications": [],
             },
@@ -125,9 +120,7 @@ class TestMultiDiseaseAnalyzer:
             suspected_diseases=[
                 {"name": "Disease A", "match_percent": 90},
             ],
-            disease_database=[
-                {"name": "Disease A", "symptoms": ["symptom1"]}
-            ],
+            disease_database=[{"name": "Disease A", "symptoms": ["symptom1"]}],
         )
 
         # Single symptom and single disease should not enable multi-disease

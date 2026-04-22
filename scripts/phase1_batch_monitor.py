@@ -27,7 +27,7 @@ class Phase1BatchMonitor:
 
     def load_manifest(self):
         """Load the enrichment manifest."""
-        with open(self.manifest_path, 'r', encoding='utf-8') as f:
+        with open(self.manifest_path, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def check_batch_status(self, batch_id):
@@ -40,15 +40,11 @@ class Phase1BatchMonitor:
                 "request_counts": {
                     "processing": batch.request_counts.processing,
                     "succeeded": batch.request_counts.succeeded,
-                    "errored": batch.request_counts.errored
-                }
+                    "errored": batch.request_counts.errored,
+                },
             }
         except Exception as e:
-            return {
-                "id": batch_id,
-                "status": "error",
-                "error": str(e)
-            }
+            return {"id": batch_id, "status": "error", "error": str(e)}
 
     def monitor_phase1(self, interval=30, max_wait_hours=6):
         """Monitor Phase 1 batches until completion."""
@@ -105,7 +101,9 @@ class Phase1BatchMonitor:
                         print(f"  ⏳ {species:10s} {batch_id[:20]}... - PROCESSING ({pct:.0f}% complete)")
                         all_completed = False
                     elif status == "succeeded":
-                        print(f"  ✅ {species:10s} {batch_id[:20]}... - COMPLETED ({counts.get('succeeded', 0)} succeeded, {counts.get('errored', 0)} errors)")
+                        print(
+                            f"  ✅ {species:10s} {batch_id[:20]}... - COMPLETED ({counts.get('succeeded', 0)} succeeded, {counts.get('errored', 0)} errors)"
+                        )
                         completed_batches[batch_id] = status_info
                     else:
                         print(f"  ⚠️  {species:10s} {batch_id[:20]}... - {status.upper()}")

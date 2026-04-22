@@ -29,7 +29,7 @@ def temp_instance_dir():
 def learning_store(temp_instance_dir):
     """Create fresh learning store for each test."""
     # Clear module state
-    store._instance_dir.cache_clear() if hasattr(store._instance_dir, 'cache_clear') else None
+    store._instance_dir.cache_clear() if hasattr(store._instance_dir, "cache_clear") else None
 
     store_instance = LearningDataStore()
     # Reset state cache
@@ -373,9 +373,7 @@ class TestPatternPruning:
 
         # Manually set old timestamp
         state = learning_store._get_state()
-        old_date = (datetime.now(timezone.utc) - timedelta(days=100)).isoformat(
-            timespec="seconds"
-        )
+        old_date = (datetime.now(timezone.utc) - timedelta(days=100)).isoformat(timespec="seconds")
         state["learning_metrics"]["symptom_disease_patterns"][0]["last_updated"] = old_date
         learning_store._save_state()
 
@@ -445,7 +443,7 @@ class TestDataPersistence:
             json.dump(old_state, f)
 
         # Load and verify migration
-        store._instance_dir.cache_clear() if hasattr(store._instance_dir, 'cache_clear') else None
+        store._instance_dir.cache_clear() if hasattr(store._instance_dir, "cache_clear") else None
         store_instance = LearningDataStore()
         store_instance._state = None
 

@@ -2,43 +2,116 @@ import math
 from typing import Any, Dict, List, Tuple
 
 _AMBIGUITY_JA = [
-    "なんか", "とか", "なんとなく", "適当に", "いい感じに", "うまく",
-    "よしなに", "それっぽく", "ざっくり", "てきとう", "ふわっと",
-    "なんでもいい", "おまかせ", "どうにか",
+    "なんか",
+    "とか",
+    "なんとなく",
+    "適当に",
+    "いい感じに",
+    "うまく",
+    "よしなに",
+    "それっぽく",
+    "ざっくり",
+    "てきとう",
+    "ふわっと",
+    "なんでもいい",
+    "おまかせ",
+    "どうにか",
 ]
 _AMBIGUITY_EN = [
-    "something like", "somehow", "whatever", "kind of", "sort of",
-    "just do it", "figure it out", "make it work",
-    "anything", "stuff", "things",
+    "something like",
+    "somehow",
+    "whatever",
+    "kind of",
+    "sort of",
+    "just do it",
+    "figure it out",
+    "make it work",
+    "anything",
+    "stuff",
+    "things",
 ]
 _ASSERTION_JA = [
-    "絶対", "必ず", "断言して", "確実に", "100%", "間違いない",
-    "保証して", "確定で", "例外なく", "完全に正しい",
+    "絶対",
+    "必ず",
+    "断言して",
+    "確実に",
+    "100%",
+    "間違いない",
+    "保証して",
+    "確定で",
+    "例外なく",
+    "完全に正しい",
 ]
 _ASSERTION_EN = [
-    "absolutely", "definitely", "guarantee", "must be", "certainly",
-    "without doubt", "100%", "always true", "never wrong", "prove that",
+    "absolutely",
+    "definitely",
+    "guarantee",
+    "must be",
+    "certainly",
+    "without doubt",
+    "100%",
+    "always true",
+    "never wrong",
+    "prove that",
 ]
 _EMOTION_JA = [
-    "急いで", "今すぐ", "早く", "できないの", "使えない",
-    "お願いだから", "頼むから", "なんで", "いい加減にして",
-    "ふざけるな", "ちゃんとして", "まだ", "いつまで",
+    "急いで",
+    "今すぐ",
+    "早く",
+    "できないの",
+    "使えない",
+    "お願いだから",
+    "頼むから",
+    "なんで",
+    "いい加減にして",
+    "ふざけるな",
+    "ちゃんとして",
+    "まだ",
+    "いつまで",
 ]
 _EMOTION_EN = [
-    "hurry", "asap", "right now", "useless",
-    "please just", "why can't", "come on",
-    "seriously", "for god's sake", "how hard can it be",
+    "hurry",
+    "asap",
+    "right now",
+    "useless",
+    "please just",
+    "why can't",
+    "come on",
+    "seriously",
+    "for god's sake",
+    "how hard can it be",
 ]
 _UNREALISTIC_JA = [
-    "全て解決", "完璧に", "一瞬で", "万能な", "無限に",
-    "失敗しない", "バグのない", "最強の", "究極の", "永久に",
-    "全自動で", "ワンクリックで", "何でもできる",
+    "全て解決",
+    "完璧に",
+    "一瞬で",
+    "万能な",
+    "無限に",
+    "失敗しない",
+    "バグのない",
+    "最強の",
+    "究極の",
+    "永久に",
+    "全自動で",
+    "ワンクリックで",
+    "何でもできる",
 ]
 _UNREALISTIC_EN = [
-    "solve everything", "perfect", "instantly", "omnipotent", "infinite",
-    "never fail", "bug-free", "ultimate", "forever",
-    "fully automatic", "one click", "do anything", "solve all",
+    "solve everything",
+    "perfect",
+    "instantly",
+    "omnipotent",
+    "infinite",
+    "never fail",
+    "bug-free",
+    "ultimate",
+    "forever",
+    "fully automatic",
+    "one click",
+    "do anything",
+    "solve all",
 ]
+
 
 def _count_hits(text: str, words: List[str]) -> int:
     t = text.lower()
@@ -49,15 +122,19 @@ def _count_hits(text: str, words: List[str]) -> int:
         c += t.count(w.lower())
     return c
 
+
 def _saturating_score(count: int, sensitivity: float = 1.0) -> float:
     # Spec: tanh(count / 3.0 * sensitivity)
     return math.tanh((count / 3.0) * sensitivity)
 
-def analyze(text: str,
-            w_ambiguity: float = 0.20,
-            w_assertion: float = 0.25,
-            w_emotion: float = 0.30,
-            w_unrealistic: float = 0.25) -> Dict[str, Any]:
+
+def analyze(
+    text: str,
+    w_ambiguity: float = 0.20,
+    w_assertion: float = 0.25,
+    w_emotion: float = 0.30,
+    w_unrealistic: float = 0.25,
+) -> Dict[str, Any]:
     if not isinstance(text, str):
         text = str(text or "")
 
@@ -119,6 +196,7 @@ def analyze(text: str,
         "temperature_modifier": t_mod,
         "warnings": warnings,
     }
+
 
 def rebuild_prompt(user_input: str, analysis: Dict[str, Any]) -> Tuple[str, str]:
     level = (analysis or {}).get("risk_level", "low")

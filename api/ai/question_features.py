@@ -164,9 +164,7 @@ class QuestionFeatureExtractor:
                 fatigue += 0.6
 
         # Penalty for question type burden
-        question_burden = QuestionFeatureExtractor.QUESTION_TYPE_BURDEN.get(
-            question_type, 0.5
-        )
+        question_burden = QuestionFeatureExtractor.QUESTION_TYPE_BURDEN.get(question_type, 0.5)
         fatigue += question_burden * 0.3  # 30% weight for burden
 
         return min(fatigue, 1.0)  # Cap at 1.0
@@ -230,9 +228,7 @@ class QuestionFeatureExtractor:
         Returns:
             Diversity score (0-1, higher = more diverse)
         """
-        question_category = QuestionFeatureExtractor.QUESTION_CATEGORIES.get(
-            question_id, "other"
-        )
+        question_category = QuestionFeatureExtractor.QUESTION_CATEGORIES.get(question_id, "other")
 
         # Count categories already asked
         asked_categories = {}
@@ -283,16 +279,10 @@ class QuestionFeatureExtractor:
         """
         # Calculate each feature
         coverage = cls.calculate_coverage_score(question_targets, candidate_diseases)
-        differentiator = cls.calculate_answer_specificity(
-            question_targets, target_diseases_per_answer
-        )
+        differentiator = cls.calculate_answer_specificity(question_targets, target_diseases_per_answer)
         specificity = differentiator  # Reuse
-        fatigue = cls.calculate_fatigue_penalty(
-            question_id, previously_asked, question_type, last_asked_times
-        )
-        alignment = cls.calculate_symptom_alignment(
-            question_id, symptom_implications, detected_symptoms
-        )
+        fatigue = cls.calculate_fatigue_penalty(question_id, previously_asked, question_type, last_asked_times)
+        alignment = cls.calculate_symptom_alignment(question_id, symptom_implications, detected_symptoms)
         diversity = cls.calculate_category_diversity(question_id, list(previously_asked))
 
         return QuestionFeatures(

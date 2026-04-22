@@ -12,7 +12,9 @@ from datetime import datetime
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent / "diseases_all_species.json"
-BACKUP_PATH = DB_PATH.parent / f"diseases_all_species.backup_before_ortho_refs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+BACKUP_PATH = (
+    DB_PATH.parent / f"diseases_all_species.backup_before_ortho_refs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+)
 
 # ---------------------------------------------------------------------------
 # Reference definitions
@@ -946,10 +948,7 @@ def main() -> None:
         prog_count = len(REFERENCE_MAP[d]["prognosis_references"])
         rehab_count = len(REFERENCE_MAP[d]["rehabilitation_references"])
         nutr_count = len(REFERENCE_MAP[d]["nutrition_references"])
-        print(
-            f"  {d:55s}  "
-            f"prognosis={prog_count}  rehab={rehab_count}  nutrition={nutr_count}"
-        )
+        print(f"  {d:55s}  prognosis={prog_count}  rehab={rehab_count}  nutrition={nutr_count}")
 
     if missing_diseases:
         print(f"\nMissing (not found in DB): {len(missing_diseases)}")

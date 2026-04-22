@@ -45,7 +45,7 @@ PILOT_DISEASES = {
                     "pages": "234-245",
                     "doi": "10.2460/javma.2024.02.234",
                     "pmid": "38234567",
-                    "evidence_level": "I (RCT)"
+                    "evidence_level": "I (RCT)",
                 },
                 {
                     "id": "VetSurg_2023_Whitehall",
@@ -57,8 +57,8 @@ PILOT_DISEASES = {
                     "issue": 5,
                     "pages": "E15-E28",
                     "doi": "10.1111/vsu.13944",
-                    "evidence_level": "III (review)"
-                }
+                    "evidence_level": "III (review)",
+                },
             ]
         },
         "rehabilitation_protocol_ja": (
@@ -88,7 +88,7 @@ PILOT_DISEASES = {
                     "volume": 19,
                     "pages": "45-62",
                     "doi": "10.1111/vpm.12345",
-                    "evidence_level": "I (systematic review)"
+                    "evidence_level": "I (systematic review)",
                 },
                 {
                     "id": "AAHA_2021_Aging",
@@ -97,8 +97,8 @@ PILOT_DISEASES = {
                     "year": 2021,
                     "organization": "AAHA",
                     "url": "https://www.aaha.org/guidelines/",
-                    "evidence_level": "IV (guidelines)"
-                }
+                    "evidence_level": "IV (guidelines)",
+                },
             ]
         },
         "nutrition_management_ja": (
@@ -130,7 +130,7 @@ PILOT_DISEASES = {
                     "pages": "67-70",
                     "doi": "10.2460/javma.236.1.67",
                     "pmid": "20043801",
-                    "evidence_level": "I (RCT)"
+                    "evidence_level": "I (RCT)",
                 },
                 {
                     "id": "EqVetJ_2011_McIlwraith",
@@ -142,15 +142,14 @@ PILOT_DISEASES = {
                     "issue": 5,
                     "pages": "600-606",
                     "doi": "10.1111/j.2042-3306.2011.00294.x",
-                    "evidence_level": "II (case-control)"
-                }
+                    "evidence_level": "II (case-control)",
+                },
             ]
         },
         "recovery_timeline_weeks": 12,
         "success_rate": 0.80,
         "mortality_rate": 0.0,
     },
-
     "dog_cruciate_ligament_injury": {
         "name_ja": "前十字靱帯損傷",
         "species": "Dog",
@@ -175,7 +174,7 @@ PILOT_DISEASES = {
                     "issue": 8,
                     "pages": "1450-1462",
                     "doi": "10.1111/vsu.13679",
-                    "evidence_level": "I (systematic review)"
+                    "evidence_level": "I (systematic review)",
                 }
             ]
         },
@@ -206,7 +205,7 @@ PILOT_DISEASES = {
                     "issue": 4,
                     "pages": "643-658",
                     "doi": "10.1016/j.cvsm.2020.04.002",
-                    "evidence_level": "IV (review)"
+                    "evidence_level": "IV (review)",
                 }
             ]
         },
@@ -231,7 +230,7 @@ PILOT_DISEASES = {
                     "authors": ["AAFCO"],
                     "year": 2021,
                     "organization": "AAFCO",
-                    "evidence_level": "IV (guidelines)"
+                    "evidence_level": "IV (guidelines)",
                 }
             ]
         },
@@ -239,7 +238,6 @@ PILOT_DISEASES = {
         "success_rate": 0.90,
         "mortality_rate": 0.0,
     },
-
     "dog_patellar_luxation": {
         "name_ja": "膝蓋骨脱臼",
         "species": "Dog",
@@ -264,7 +262,7 @@ PILOT_DISEASES = {
                     "issue": 2,
                     "pages": "199-209",
                     "doi": "10.1111/vsu.13174",
-                    "evidence_level": "III (review)"
+                    "evidence_level": "III (review)",
                 }
             ]
         },
@@ -291,7 +289,7 @@ PILOT_DISEASES = {
                     "volume": 48,
                     "issue": 5,
                     "pages": "733-750",
-                    "doi": "10.1016/j.cvsm.2018.05.002"
+                    "doi": "10.1016/j.cvsm.2018.05.002",
                 }
             ]
         },
@@ -307,14 +305,11 @@ PILOT_DISEASES = {
             "3. **処方食の検討**\n"
             "   Hill's j/d、Royal Canin Mobility等の関節サポート食"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.85,
         "mortality_rate": 0.0,
     },
-
     "dog_intervertebral_disc_disease_ivdd": {
         "name_ja": "椎間板ヘルニア",
         "species": "Dog",
@@ -340,7 +335,7 @@ PILOT_DISEASES = {
                     "issue": "S1",
                     "pages": "33-43",
                     "doi": "10.1111/vsu.13266",
-                    "evidence_level": "II (cohort)"
+                    "evidence_level": "II (cohort)",
                 }
             ]
         },
@@ -371,7 +366,7 @@ PILOT_DISEASES = {
                     "volume": 33,
                     "issue": 2,
                     "pages": "353-367",
-                    "doi": "10.1111/jvim.15362"
+                    "doi": "10.1111/jvim.15362",
                 }
             ]
         },
@@ -388,14 +383,11 @@ PILOT_DISEASES = {
             "   理想体重維持が脊椎への荷重軽減に重要\n"
             "   カロリー削減：20-30%（安静中）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.70,
         "mortality_rate": 0.02,
     },
-
     # Feline diseases
     "cat_cranial_cruciate_ligament_rupture": {
         "name_ja": "前十字靭帯断裂",
@@ -417,7 +409,7 @@ PILOT_DISEASES = {
                     "year": 2021,
                     "volume": 50,
                     "pages": "1450-1462",
-                    "evidence_level": "III (review)"
+                    "evidence_level": "III (review)",
                 }
             ]
         },
@@ -432,23 +424,15 @@ PILOT_DISEASES = {
             "【第3段階（8-12週）】\n"
             "- 通常活動へ復帰"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
-            "【栄養管理】\n"
-            "- 高蛋白：40-45%\n"
-            "- オメガ-3：500-800 mg/day\n"
-            "- 体重管理：カロリー削減は慎重に"
+            "【栄養管理】\n- 高蛋白：40-45%\n- オメガ-3：500-800 mg/day\n- 体重管理：カロリー削減は慎重に"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.83,
         "mortality_rate": 0.0,
     },
-
     "cat_osteoarthritis_degenerative_joint_disease": {
         "name_ja": "変形性関節症（OA）",
         "species": "Cat",
@@ -472,7 +456,7 @@ PILOT_DISEASES = {
                     "issue": 5,
                     "pages": "1628-1639",
                     "doi": "10.1111/jvim.16574",
-                    "evidence_level": "III (review)"
+                    "evidence_level": "III (review)",
                 }
             ]
         },
@@ -498,7 +482,7 @@ PILOT_DISEASES = {
                     "authors": ["International Society of Feline Medicine"],
                     "year": 2020,
                     "organization": "ISFM",
-                    "evidence_level": "IV (guidelines)"
+                    "evidence_level": "IV (guidelines)",
                 }
             ]
         },
@@ -524,7 +508,7 @@ PILOT_DISEASES = {
                     "title": "AAFCO Feline Nutrient Profiles",
                     "authors": ["AAFCO"],
                     "year": 2021,
-                    "evidence_level": "IV (guidelines)"
+                    "evidence_level": "IV (guidelines)",
                 }
             ]
         },
@@ -532,7 +516,6 @@ PILOT_DISEASES = {
         "success_rate": 0.70,
         "mortality_rate": 0.0,
     },
-
     "cat_fracture": {
         "name_ja": "骨折",
         "species": "Cat",
@@ -555,7 +538,7 @@ PILOT_DISEASES = {
                     "year": 2021,
                     "volume": 7,
                     "pages": "45-62",
-                    "evidence_level": "IV (review)"
+                    "evidence_level": "IV (review)",
                 }
             ]
         },
@@ -573,9 +556,7 @@ PILOT_DISEASES = {
             "- 通常活動への段階的復帰\n"
             "- 筋力強化：軽い運動を段階的に増加"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【骨癒合促進栄養管理】\n\n"
             "1. **高蛋白食**\n"
@@ -601,7 +582,7 @@ PILOT_DISEASES = {
                     "year": 2015,
                     "volume": 246,
                     "issue": 1,
-                    "pages": "54-60"
+                    "pages": "54-60",
                 }
             ]
         },
@@ -609,7 +590,6 @@ PILOT_DISEASES = {
         "success_rate": 0.90,
         "mortality_rate": 0.01,
     },
-
     # Phase 2a: Tier 2 Dog Orthopedic Diseases (High-Prevalence Conditions)
     "dog_hip_dysplasia": {
         "name_ja": "股関節形成不全",
@@ -631,7 +611,7 @@ PILOT_DISEASES = {
                     "authors": ["OFA"],
                     "year": 2023,
                     "organization": "OFA",
-                    "evidence_level": "IV (registry data)"
+                    "evidence_level": "IV (registry data)",
                 },
                 {
                     "id": "AJVR_2020_HDProgression",
@@ -641,8 +621,8 @@ PILOT_DISEASES = {
                     "year": 2020,
                     "volume": 81,
                     "pages": "123-135",
-                    "doi": "10.2460/ajvr.81.2.123"
-                }
+                    "doi": "10.2460/ajvr.81.2.123",
+                },
             ]
         },
         "rehabilitation_protocol_ja": (
@@ -673,7 +653,7 @@ PILOT_DISEASES = {
                     "year": 2021,
                     "volume": 17,
                     "pages": "189-205",
-                    "evidence_level": "I (RCT)"
+                    "evidence_level": "I (RCT)",
                 }
             ]
         },
@@ -705,7 +685,7 @@ PILOT_DISEASES = {
                     "volume": 260,
                     "issue": 2,
                     "pages": "156-164",
-                    "doi": "10.2460/javma.22.02.0156"
+                    "doi": "10.2460/javma.22.02.0156",
                 }
             ]
         },
@@ -713,7 +693,6 @@ PILOT_DISEASES = {
         "success_rate": 0.82,
         "mortality_rate": 0.0,
     },
-
     "dog_elbow_dysplasia": {
         "name_ja": "肘関節形成不全",
         "species": "Dog",
@@ -738,7 +717,7 @@ PILOT_DISEASES = {
                     "issue": 3,
                     "pages": "189-202",
                     "doi": "10.1055/s-0043-1769076",
-                    "evidence_level": "II (prospective cohort)"
+                    "evidence_level": "II (prospective cohort)",
                 }
             ]
         },
@@ -762,9 +741,7 @@ PILOT_DISEASES = {
             "- ジャンプ・高速走行は制限（生涯推奨）\n"
             "- 継続的な温熱療法（冬季週2-3回）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【肘関節形成不全の栄養管理】\n\n"
             "1. **プロテイン（高レベル推奨）**\n"
@@ -779,14 +756,11 @@ PILOT_DISEASES = {
             "   Hill's j/d, Royal Canin Mobility Joint は肘関節対応設計\n"
             "   低GI食による体重管理が重要"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.74,
         "mortality_rate": 0.0,
     },
-
     "dog_ocd_shoulder": {
         "name_ja": "離断性骨軟骨症（肩）",
         "species": "Dog",
@@ -810,7 +784,7 @@ PILOT_DISEASES = {
                     "volume": 48,
                     "issue": 4,
                     "pages": "502-510",
-                    "evidence_level": "III (case series)"
+                    "evidence_level": "III (case series)",
                 }
             ]
         },
@@ -834,9 +808,7 @@ PILOT_DISEASES = {
             "- 通常の活動レベルで管理\n"
             "- ジャンプ・高速走行は継続制限推奨"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【肩OCD術後栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -852,14 +824,11 @@ PILOT_DISEASES = {
             "4. **適切なカロリー管理**\n"
             "   リハビリ期間中は通常量維持（活動量減少に応じて調整）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.82,
         "mortality_rate": 0.0,
     },
-
     "dog_iliopsoas_strain": {
         "name_ja": "腸腰筋損傷",
         "species": "Dog",
@@ -880,7 +849,7 @@ PILOT_DISEASES = {
                     "authors": ["Zink M.C."],
                     "journal": "American College of Sports Medicine",
                     "year": 2022,
-                    "evidence_level": "IV (review)"
+                    "evidence_level": "IV (review)",
                 }
             ]
         },
@@ -905,9 +874,7 @@ PILOT_DISEASES = {
             "- 継続的なストレッチ運動（生涯推奨）\n"
             "- 過度なスプリント・ジャンプの制限"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【腸腰筋損傷の栄養管理】\n\n"
             "1. **プロテイン（高レベル）**\n"
@@ -922,14 +889,11 @@ PILOT_DISEASES = {
             "4. **カロリー管理**\n"
             "   活動制限期は20-30%カロリー削減"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.88,
         "mortality_rate": 0.0,
     },
-
     "dog_shoulder_luxation": {
         "name_ja": "肩関節脱臼",
         "species": "Dog",
@@ -942,9 +906,7 @@ PILOT_DISEASES = {
             "- 回復期間：6-8週で臨床的改善、12-16週で完全復帰\n\n"
             "早期の適切な整復と徹底的なリハビリが予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【肩関節脱臼リハビリテーション】\n\n"
             "【第1段階：急性期（0-2週）】\n"
@@ -966,9 +928,7 @@ PILOT_DISEASES = {
             "- 高強度スポーツ活動は制限推奨\n"
             "- 月1回の関節安定性チェック推奨"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【肩関節脱臼の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -985,14 +945,11 @@ PILOT_DISEASES = {
             "   過体重は肩関節への負荷増加\n"
             "   BCS 4-5/9を目標"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.78,
         "mortality_rate": 0.0,
     },
-
     # Phase 2a: Tier 2 Cat Orthopedic Diseases
     "cat_hip_dysplasia": {
         "name_ja": "股関節形成不全",
@@ -1017,7 +974,7 @@ PILOT_DISEASES = {
                     "volume": 20,
                     "issue": 1,
                     "pages": "15-24",
-                    "evidence_level": "III (epidemiologic study)"
+                    "evidence_level": "III (epidemiologic study)",
                 }
             ]
         },
@@ -1039,9 +996,7 @@ PILOT_DISEASES = {
             "- サプリメント継続投与\n"
             "- 定期的な獣医学的再評価（3-6ヶ月ごと）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【猫の股関節形成不全栄養管理】\n\n"
             "1. **体重管理（必須）**\n"
@@ -1059,14 +1014,11 @@ PILOT_DISEASES = {
             "   EPA + DHA：100-200 mg/kg/day\n"
             "   フィッシュオイル推奨"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.83,
         "mortality_rate": 0.0,
     },
-
     "cat_polyarthritis": {
         "name_ja": "免疫介在性多発性関節炎",
         "species": "Cat",
@@ -1090,7 +1042,7 @@ PILOT_DISEASES = {
                     "volume": 22,
                     "issue": 8,
                     "pages": "723-735",
-                    "evidence_level": "III (case series)"
+                    "evidence_level": "III (case series)",
                 }
             ]
         },
@@ -1112,9 +1064,7 @@ PILOT_DISEASES = {
             "- 月1回の関節評価\n"
             "- 長期的な免疫抑制薬投与と定期的再評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【多発性関節炎の栄養管理】\n\n"
             "1. **オメガ-3脂肪酸（抗炎症作用重視）**\n"
@@ -1131,14 +1081,11 @@ PILOT_DISEASES = {
             "   BCS 4-5/9維持（関節負荷軽減）\n"
             "   理想体重の維持が重要"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.72,
         "mortality_rate": 0.02,
     },
-
     "dog_panosteitis": {
         "name_ja": "汎骨炎（成長痛）",
         "species": "Dog",
@@ -1162,7 +1109,7 @@ PILOT_DISEASES = {
                     "year": 2020,
                     "volume": 61,
                     "pages": "285-295",
-                    "evidence_level": "III (case series)"
+                    "evidence_level": "III (case series)",
                 }
             ]
         },
@@ -1183,9 +1130,7 @@ PILOT_DISEASES = {
             "- 通常の子犬の活動レベルに戻す\n"
             "- 定期的な放射線検査（オプション：3ヶ月ごと）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【汎骨炎の栄養管理】\n\n"
             "1. **バランスの取れた子犬用食**\n"
@@ -1203,14 +1148,11 @@ PILOT_DISEASES = {
             "   成長段階に応じた適切な給与量\n"
             "   過成長を避ける（成長速度が遅いほどパノステイティスのリスク低い）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.95,
         "mortality_rate": 0.0,
     },
-
     "dog_fce": {
         "name_ja": "線維軟骨塞栓症（FCE）",
         "species": "Dog",
@@ -1235,7 +1177,7 @@ PILOT_DISEASES = {
                     "volume": 15,
                     "issue": 5,
                     "pages": "1053-1060",
-                    "evidence_level": "III (case series)"
+                    "evidence_level": "III (case series)",
                 }
             ]
         },
@@ -1261,9 +1203,7 @@ PILOT_DISEASES = {
             "- 継続的な物理療法（必要に応じて）\n"
             "- 定期的な神経学的検査"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【FCE術後栄養管理】\n\n"
             "1. **高プロテイン食（組織修復促進）**\n"
@@ -1281,14 +1221,11 @@ PILOT_DISEASES = {
             "   消化が容易な食事を選択\n"
             "   小量多食（1日4-5回）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.68,
         "mortality_rate": 0.05,
     },
-
     "dog_wobbler_syndrome": {
         "name_ja": "頸椎脊椎脊髄症（ウォーブラー症候群）",
         "species": "Dog",
@@ -1302,9 +1239,7 @@ PILOT_DISEASES = {
             "- 生存期間：診断後平均3-5年\n\n"
             "早期診断と適切な管理選択が予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【ウォーブラー症候群リハビリテーション】\n\n"
             "【第1段階：保存的管理期（初診-8週）】\n"
@@ -1326,9 +1261,7 @@ PILOT_DISEASES = {
             "- 月1回の神経学的評価\n"
             "- 定期的なレントゲン検査（1年ごと）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【ウォーブラー症候群の栄養管理】\n\n"
             "1. **抗炎症栄養管理**\n"
@@ -1345,14 +1278,11 @@ PILOT_DISEASES = {
             "   BCS 4-5/9維持（脊椎への負荷軽減）\n"
             "   過度な体重は脊椎への圧迫増加"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.52,
         "mortality_rate": 0.08,
     },
-
     "dog_luxating_patella_med": {
         "name_ja": "膝蓋骨内方脱臼（grade III-IV）",
         "species": "Dog",
@@ -1366,9 +1296,7 @@ PILOT_DISEASES = {
             "- 機能的改善期間：6-12週\n\n"
             "早期外科治療と徹底的なリハビリが予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【Grade III-IV膝蓋骨脱臼術後リハビリ】\n\n"
             "【第1段階：術後初期（0-2週）】\n"
@@ -1390,9 +1318,7 @@ PILOT_DISEASES = {
             "- 継続的な温熱療法（必要に応じて）\n"
             "- 月1回の膝関節評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【Grade III-IV膝蓋骨脱臼の栄養管理】\n\n"
             "1. **関節サポート成分**\n"
@@ -1409,14 +1335,11 @@ PILOT_DISEASES = {
             "   BCS 4-5/9維持（膝への負荷軽減）\n"
             "   Grade III-IVでは体重1kg増加で大きな負担増加"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.80,
         "mortality_rate": 0.0,
     },
-
     "dog_sesamoiditis": {
         "name_ja": "種子骨炎",
         "species": "Dog",
@@ -1429,9 +1352,7 @@ PILOT_DISEASES = {
             "- 治療期間：6-16週\n\n"
             "長期のリハビリと段階的な運動復帰が予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【種子骨炎リハビリテーション】\n\n"
             "【第1段階：急性期（0-2週）】\n"
@@ -1453,9 +1374,7 @@ PILOT_DISEASES = {
             "- 運動前ウォームアップ必須（15-20分）\n"
             "- 継続的なストレッチ・クール ダウン"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【種子骨炎の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -1472,14 +1391,11 @@ PILOT_DISEASES = {
             "   Ca:P比 1.2:1\n"
             "   骨基質形成を支援"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.65,
         "mortality_rate": 0.0,
     },
-
     "dog_infraspinatus_contracture": {
         "name_ja": "棘下筋拘縮",
         "species": "Dog",
@@ -1492,9 +1408,7 @@ PILOT_DISEASES = {
             "- 治療期間：12-24週\n\n"
             "早期の集約的なリハビリと継続的なストレッチが予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【棘下筋拘縮リハビリテーション】\n\n"
             "【第1段階：非外科的管理（0-4週）】\n"
@@ -1517,9 +1431,7 @@ PILOT_DISEASES = {
             "- 月1回の伸張療法セッション（獣医学的）\n"
             "- 定期的な可動域評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【棘下筋拘縮の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -1535,14 +1447,11 @@ PILOT_DISEASES = {
             "   グルコサミン：15 mg/kg BID\n"
             "   コンドロイチン：10 mg/kg BID"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 24,
         "success_rate": 0.72,
         "mortality_rate": 0.0,
     },
-
     "cat_discospondylitis": {
         "name_ja": "椎間板脊椎炎",
         "species": "Cat",
@@ -1556,9 +1465,7 @@ PILOT_DISEASES = {
             "- 治療期間：通常4-8週間の抗生物質投与\n\n"
             "早期診断と積極的な抗生物質治療が予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【椎間板脊椎炎リハビリテーション】\n\n"
             "【第1段階：急性期管理（初診-2週）】\n"
@@ -1580,9 +1487,7 @@ PILOT_DISEASES = {
             "- 月1回の神経学的評価\n"
             "- 必要に応じて追加の画像検査"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【椎間板脊椎炎の栄養管理】\n\n"
             "1. **感染病対応栄養**\n"
@@ -1599,14 +1504,11 @@ PILOT_DISEASES = {
             "   食欲不振時：ハンドフィーディングまたは高栄養食\n"
             "   消化が容易な食事を選択"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.80,
         "mortality_rate": 0.02,
     },
-
     "cat_septic_arthritis": {
         "name_ja": "化膿性関節炎",
         "species": "Cat",
@@ -1619,9 +1521,7 @@ PILOT_DISEASES = {
             "- OA発展率：30-40%（関節ダメージの程度に依存）\n\n"
             "早期の関節洗浄と積極的な抗生物質治療が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【化膿性関節炎リハビリテーション】\n\n"
             "【第1段階：急性期（初診-2週）】\n"
@@ -1645,9 +1545,7 @@ PILOT_DISEASES = {
             "- 月1回の関節評価\n"
             "- 定期的なレントゲン検査（OA監視）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【化膿性関節炎の栄養管理】\n\n"
             "1. **感染対応高プロテイン食**\n"
@@ -1664,14 +1562,11 @@ PILOT_DISEASES = {
             "   食欲不振時：高栄養食またはハンドフィーディング\n"
             "   小量多食（1日4-5回）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.87,
         "mortality_rate": 0.01,
     },
-
     "dog_carpal_hyperextension": {
         "name_ja": "手根関節過伸展損傷",
         "species": "Dog",
@@ -1685,9 +1580,7 @@ PILOT_DISEASES = {
             "- 治療期間：8-16週\n\n"
             "適切な固定と段階的なリハビリが予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【手根関節過伸展リハビリテーション】\n\n"
             "【第1段階：固定期（0-4週）】\n"
@@ -1711,9 +1604,7 @@ PILOT_DISEASES = {
             "- 継続的な関節サポート（必要に応じて）\n"
             "- 月1回の関節評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【手根関節過伸展の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -1729,14 +1620,11 @@ PILOT_DISEASES = {
             "   オメガ-3脂肪酸：150-200 mg/kg/day\n"
             "   ビタミンE：400 IU/day"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.76,
         "mortality_rate": 0.0,
     },
-
     "dog_cruciate_partial_tear": {
         "name_ja": "前十字靭帯部分断裂",
         "species": "Dog",
@@ -1750,9 +1638,7 @@ PILOT_DISEASES = {
             "- 治療期間：6-12週（保存的管理時）\n\n"
             "体重管理と継続的なリハビリが部分断裂の安定化に重要です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【前十字靭帯部分断裂リハビリテーション】\n\n"
             "【第1段階：急性期（0-2週）】\n"
@@ -1775,9 +1661,7 @@ PILOT_DISEASES = {
             "- 症状悪化時の外科治療検討\n"
             "- 継続的なリハビリと体重管理（生涯推奨）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【前十字靭帯部分断裂の栄養管理】\n\n"
             "1. **体重管理（最重要）**\n"
@@ -1793,14 +1677,11 @@ PILOT_DISEASES = {
             "   タンパク質：28-35%（周囲筋強化）\n"
             "   質の良いアニマルプロテイン推奨"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.75,
         "mortality_rate": 0.0,
     },
-
     "cat_lens_luxation": {
         "name_ja": "水晶体脱臼",
         "species": "Cat",
@@ -1814,9 +1695,7 @@ PILOT_DISEASES = {
             "- 視覚機能：手術後70-85%が機能的視力を保持\n\n"
             "早期診断と適切な治療選択が視力保全の鍵です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【水晶体脱臼リハビリテーション】\n\n"
             "【第1段階：後方脱臼（保存的管理）】\n"
@@ -1835,9 +1714,7 @@ PILOT_DISEASES = {
             "- 眼科検査：6-12ヶ月ごと\n"
             "- 対眼の脱臼監視（進行リスク）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【水晶体脱臼の栄養管理】\n\n"
             "1. **眼機能サポート栄養**\n"
@@ -1854,14 +1731,11 @@ PILOT_DISEASES = {
             "   完全栄養バランス AAFCO基準を満たす食事\n"
             "   眼機能特化食の選択推奨"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 4,
         "success_rate": 0.75,
         "mortality_rate": 0.0,
     },
-
     "cat_jaw_fracture": {
         "name_ja": "顎骨折",
         "species": "Cat",
@@ -1875,9 +1749,7 @@ PILOT_DISEASES = {
             "- 骨癒合期間：4-8週\n\n"
             "適切な固定と段階的なリハビリが予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【顎骨折リハビリテーション】\n\n"
             "【第1段階：固定期（0-4週）】\n"
@@ -1899,9 +1771,7 @@ PILOT_DISEASES = {
             "- 月1回の咬合機能評価（初期3ヶ月）\n"
             "- 放射線検査：骨癒合確認（8週時点）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【顎骨折の栄養管理】\n\n"
             "1. **骨癒合促進栄養**\n"
@@ -1918,14 +1788,11 @@ PILOT_DISEASES = {
             "   段階的に固い食事へ移行\n"
             "   高カロリー食で組織修復を支援"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.92,
         "mortality_rate": 0.0,
     },
-
     "dog_atlantoaxial_subluxation": {
         "name_ja": "環軸椎亜脱臼",
         "species": "Dog",
@@ -1939,9 +1806,7 @@ PILOT_DISEASES = {
             "- 外科適応：神経学的症状が進行する場合必須\n\n"
             "早期診断と適切な治療選択が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【環軸椎亜脱臼リハビリテーション】\n\n"
             "【第1段階：保存的管理期（初診-4週）】\n"
@@ -1965,9 +1830,7 @@ PILOT_DISEASES = {
             "- 月1回の神経学的評価\n"
             "- 定期的なレントゲン検査（固定の安定性確認）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【環軸椎亜脱臼の栄養管理】\n\n"
             "1. **脊髄保護栄養**\n"
@@ -1984,14 +1847,11 @@ PILOT_DISEASES = {
             "   BCS 4-5/9維持（脊椎への負荷軽減）\n"
             "   過度な体重は亜脱臼リスク増加"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.59,
         "mortality_rate": 0.08,
     },
-
     "dog_myositis_masticatory": {
         "name_ja": "咀嚼筋炎",
         "species": "Dog",
@@ -2005,9 +1865,7 @@ PILOT_DISEASES = {
             "- 再発率：20-30%（免疫抑制薬減量時）\n\n"
             "早期診断と積極的な免疫抑制治療が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【咀嚼筋炎リハビリテーション】\n\n"
             "【第1段階：急性期（初診-2週）】\n"
@@ -2029,9 +1887,7 @@ PILOT_DISEASES = {
             "- 月1回の臨床評価と咀嚼機能確認\n"
             "- 再発の早期発見（減量時に特に注意）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【咀嚼筋炎の栄養管理】\n\n"
             "1. **免疫調整食**\n"
@@ -2049,14 +1905,11 @@ PILOT_DISEASES = {
             "   温かい食事：食べやすさ向上\n"
             "   小量多食：1日4-5回"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 6,
         "success_rate": 0.82,
         "mortality_rate": 0.01,
     },
-
     "dog_polymyositis": {
         "name_ja": "多発性筋炎",
         "species": "Dog",
@@ -2070,9 +1923,7 @@ PILOT_DISEASES = {
             "- 再発率：30-40%（免疫抑制薬減量時）\n\n"
             "早期診断と積極的な免疫抑制治療が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【多発性筋炎リハビリテーション】\n\n"
             "【第1段階：急性期（初診-2週）】\n"
@@ -2096,9 +1947,7 @@ PILOT_DISEASES = {
             "- 月1回のCK値測定\n"
             "- 継続的な軽い運動推奨（筋力維持）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【多発性筋炎の栄養管理】\n\n"
             "1. **高プロテイン食（筋肉修復重視）**\n"
@@ -2116,14 +1965,11 @@ PILOT_DISEASES = {
             "   ビタミンC：500-1000 mg/day\n"
             "   亜鉛：20-25 mg/day"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.75,
         "mortality_rate": 0.02,
     },
-
     "dog_quadriceps_contracture": {
         "name_ja": "大腿四頭筋拘縮",
         "species": "Dog",
@@ -2136,9 +1982,7 @@ PILOT_DISEASES = {
             "- 治療期間：12-24週\n\n"
             "早期の集約的なリハビリと継続的なストレッチが予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【大腿四頭筋拘縮リハビリテーション】\n\n"
             "【第1段階：非外科的管理（0-4週）】\n"
@@ -2161,9 +2005,7 @@ PILOT_DISEASES = {
             "- 月1回の伸張療法セッション（獣医学的）\n"
             "- 定期的な可動域評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【大腿四頭筋拘縮の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -2179,14 +2021,11 @@ PILOT_DISEASES = {
             "   グルコサミン：15 mg/kg BID\n"
             "   コンドロイチン：10 mg/kg BID"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 24,
         "success_rate": 0.70,
         "mortality_rate": 0.0,
     },
-
     "dog_fibrotic_myopathy": {
         "name_ja": "線維性ミオパチー",
         "species": "Dog",
@@ -2199,9 +2038,7 @@ PILOT_DISEASES = {
             "- 生活の質：適切に管理されれば良好\n\n"
             "外科治療と継続的なリハビリが予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【線維性ミオパチーリハビリテーション】\n\n"
             "【第1段階：初期管理（0-4週）】\n"
@@ -2224,9 +2061,7 @@ PILOT_DISEASES = {
             "- 月1回の機能評価\n"
             "- 定期的な伸張療法セッション"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【線維性ミオパチーの栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -2242,14 +2077,11 @@ PILOT_DISEASES = {
             "   カロリー管理：活動制限に応じて調整\n"
             "   体重維持：BCS 4-5/9"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.65,
         "mortality_rate": 0.0,
     },
-
     "cat_ocd_elbow": {
         "name_ja": "離断性骨軟骨症（肘）",
         "species": "Cat",
@@ -2262,9 +2094,7 @@ PILOT_DISEASES = {
             "- 機能的改善期間：6-12週\n\n"
             "早期手術と徹底的なリハビリが予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【猫肘OCD術後リハビリテーション】\n\n"
             "【第1段階：術後初期（0-3週）】\n"
@@ -2286,9 +2116,7 @@ PILOT_DISEASES = {
             "- 月1回の関節評価\n"
             "- 定期的なレントゲン検査（OA監視）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【猫肘OCD術後栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -2304,14 +2132,11 @@ PILOT_DISEASES = {
             "   BCS 4-5/9維持（関節負荷軽減）\n"
             "   肘関節への負荷軽減が重要"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.82,
         "mortality_rate": 0.0,
     },
-
     "cat_immune_arthritis": {
         "name_ja": "慢性進行性多発性関節炎",
         "species": "Cat",
@@ -2325,9 +2150,7 @@ PILOT_DISEASES = {
             "- 長期予後：多くは症状管理で対応可能\n\n"
             "長期的な免疫管理と物理療法が予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【慢性進行性多発性関節炎リハビリテーション】\n\n"
             "【第1段階：診断初期（初診-4週）】\n"
@@ -2346,9 +2169,7 @@ PILOT_DISEASES = {
             "- 月1回の臨床評価\n"
             "- 症状悪化時の即時対応"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【慢性進行性多発性関節炎の栄養管理】\n\n"
             "1. **免疫調整食**\n"
@@ -2364,14 +2185,11 @@ PILOT_DISEASES = {
             "   BCS 4-5/9維持（関節負荷軽減）\n"
             "   理想体重の厳密な維持が重要"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.68,
         "mortality_rate": 0.01,
     },
-
     "cat_mandibular_symphysis_fracture": {
         "name_ja": "下顎結合部骨折",
         "species": "Cat",
@@ -2385,9 +2203,7 @@ PILOT_DISEASES = {
             "- 骨癒合期間：4-8週\n\n"
             "適切な固定と段階的なリハビリが予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【下顎結合部骨折リハビリテーション】\n\n"
             "【第1段階：固定期（0-4週）】\n"
@@ -2409,9 +2225,7 @@ PILOT_DISEASES = {
             "- 月1回の咬合機能評価（初期3ヶ月）\n"
             "- レントゲン検査：骨癒合確認"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【下顎結合部骨折の栄養管理】\n\n"
             "1. **骨癒合促進栄養**\n"
@@ -2428,14 +2242,11 @@ PILOT_DISEASES = {
             "   段階的に固い食事へ移行\n"
             "   高カロリー食で組織修復を支援"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.92,
         "mortality_rate": 0.0,
     },
-
     # Phase 2b: Exotic Animal Orthopedic Diseases
     "rabbit_hind_limb_paresis": {
         "name_ja": "後肢不全麻痺・麻痺",
@@ -2450,9 +2261,7 @@ PILOT_DISEASES = {
             "- 予後：早期介入が重要\n\n"
             "原因特定と早期治療が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【後肢麻痺リハビリテーション】\n\n"
             "【第1段階：急性期（初診-2週）】\n"
@@ -2476,9 +2285,7 @@ PILOT_DISEASES = {
             "- 月1回の神経学的評価\n"
             "- 継続的な排尿管理（必要に応じて）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【後肢麻痺の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -2495,14 +2302,11 @@ PILOT_DISEASES = {
             "   カロリー管理：25-30%削減（活動低下に対応）\n"
             "   繊維質：充分（腸機能維持）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.48,
         "mortality_rate": 0.05,
     },
-
     "rabbit_fracture_limb": {
         "name_ja": "四肢骨折（ウサギ）",
         "species": "Rabbit",
@@ -2516,9 +2320,7 @@ PILOT_DISEASES = {
             "- 機能的改善：8-12週\n\n"
             "適切な固定と継続的なリハビリが予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【ウサギ四肢骨折リハビリテーション】\n\n"
             "【第1段階：固定期（0-4週）】\n"
@@ -2540,9 +2342,7 @@ PILOT_DISEASES = {
             "- 通常の活動で管理\n"
             "- 月1回の機能評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【ウサギ骨折の栄養管理】\n\n"
             "1. **骨癒合促進栄養**\n"
@@ -2558,14 +2358,11 @@ PILOT_DISEASES = {
             "   毎日提供：栄養多価な野菜（レタス、ニンジン等）\n"
             "   繰り返し小量給与：GI stasis予防"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.82,
         "mortality_rate": 0.02,
     },
-
     "rabbit_osteoarthritis": {
         "name_ja": "変形性関節症（ウサギ）",
         "species": "Rabbit",
@@ -2579,9 +2376,7 @@ PILOT_DISEASES = {
             "- 長期予後：継続的なリハビリと栄養管理で維持可能\n\n"
             "早期介入と継続的な管理が予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【ウサギ変形性関節症リハビリテーション】\n\n"
             "【第1段階：症状緩和期（初診-4週）】\n"
@@ -2600,9 +2395,7 @@ PILOT_DISEASES = {
             "- サプリメント継続投与\n"
             "- 継続的な環境調整（進行に応じて）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【ウサギ変形性関節症の栄養管理】\n\n"
             "1. **体重管理（重要）**\n"
@@ -2619,14 +2412,11 @@ PILOT_DISEASES = {
             "   新鮮野菜：毎日少量\n"
             "   水分：充分な水供給"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.75,
         "mortality_rate": 0.01,
     },
-
     "bird_fracture_wing": {
         "name_ja": "翼骨折（鳥）",
         "species": "Bird",
@@ -2640,9 +2430,7 @@ PILOT_DISEASES = {
             "- 飛行回復：骨癒合後4-8週\n\n"
             "適切な固定と徹底的なリハビリが飛行回復の鍵です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【鳥翼骨折リハビリテーション】\n\n"
             "【第1段階：固定期（0-4週）】\n"
@@ -2664,9 +2452,7 @@ PILOT_DISEASES = {
             "- 通常の飛行活動\n"
             "- 月1回の翼の評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【鳥翼骨折の栄養管理】\n\n"
             "1. **高エネルギー食**\n"
@@ -2684,14 +2470,11 @@ PILOT_DISEASES = {
             "   新鮮な野菜と穀物\n"
             "   水分：充分な供給"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.80,
         "mortality_rate": 0.05,
     },
-
     "bird_fracture_leg": {
         "name_ja": "脚骨折（鳥）",
         "species": "Bird",
@@ -2705,9 +2488,7 @@ PILOT_DISEASES = {
             "- 完全機能回復：6-8週\n\n"
             "適切な固定と段階的なリハビリが歩行回復を促進します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【鳥脚骨折リハビリテーション】\n\n"
             "【第1段階：固定期（0-4週）】\n"
@@ -2729,9 +2510,7 @@ PILOT_DISEASES = {
             "- 通常の飛行活動\n"
             "- 月1回の脚の評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【鳥脚骨折の栄養管理】\n\n"
             "1. **高エネルギー食**\n"
@@ -2749,14 +2528,11 @@ PILOT_DISEASES = {
             "   新鮮野菜と穀物\n"
             "   水分充分"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.80,
         "mortality_rate": 0.03,
     },
-
     "hamster_fracture_limb": {
         "name_ja": "四肢骨折（ハムスター）",
         "species": "Hamster",
@@ -2770,9 +2546,7 @@ PILOT_DISEASES = {
             "- 機能回復：6-8週\n\n"
             "適切な固定と継続的なリハビリが予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【ハムスター四肢骨折リハビリテーション】\n\n"
             "【第1段階：固定期（0-4週）】\n"
@@ -2793,9 +2567,7 @@ PILOT_DISEASES = {
             "【第4段階：維持期（8週以降）】\n"
             "- 通常の活動で管理"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【ハムスター骨折の栄養管理】\n\n"
             "1. **骨癒合促進栄養**\n"
@@ -2812,14 +2584,11 @@ PILOT_DISEASES = {
             "   ペレット：基準量\n"
             "   水分：新鮮な水供給"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.75,
         "mortality_rate": 0.05,
     },
-
     "guinea_pig_rickets": {
         "name_ja": "くる病（モルモット）",
         "species": "Guinea Pig",
@@ -2833,9 +2602,7 @@ PILOT_DISEASES = {
             "- 予後：早期診断・治療で良好\n\n"
             "ビタミンC補給と栄養改善が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【モルモットくる病リハビリテーション】\n\n"
             "【第1段階：急性期（初診-2週）】\n"
@@ -2857,9 +2624,7 @@ PILOT_DISEASES = {
             "- 毎日新鮮野菜供給\n"
             "- 月1回の評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【モルモットくる病の栄養管理】\n\n"
             "1. **ビタミンC補給（最重要）**\n"
@@ -2878,14 +2643,11 @@ PILOT_DISEASES = {
             "   カルシウム：ペレット基準\n"
             "   リン：Ca:P比 1.2:1"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.87,
         "mortality_rate": 0.02,
     },
-
     "guinea_pig_osteoarthritis": {
         "name_ja": "変形性関節症（モルモット）",
         "species": "Guinea Pig",
@@ -2899,9 +2661,7 @@ PILOT_DISEASES = {
             "- 長期予後：継続的なリハビリと栄養管理で維持可能\n\n"
             "早期介入と継続的な管理が予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【モルモット変形性関節症リハビリテーション】\n\n"
             "【第1段階：症状緩和期（初診-4週）】\n"
@@ -2920,9 +2680,7 @@ PILOT_DISEASES = {
             "- サプリメント継続投与\n"
             "- 環境調整の継続"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【モルモット変形性関節症の栄養管理】\n\n"
             "1. **体重管理（重要）**\n"
@@ -2939,14 +2697,11 @@ PILOT_DISEASES = {
             "   新鮮野菜：毎日少量\n"
             "   水分：充分な水供給"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.72,
         "mortality_rate": 0.01,
     },
-
     "hamster_spinal_compression": {
         "name_ja": "脊髄圧迫（ハムスター）",
         "species": "Hamster",
@@ -2960,9 +2715,7 @@ PILOT_DISEASES = {
             "- 予後：原因と圧迫程度に依存\n\n"
             "原因特定と早期治療が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【ハムスター脊髄圧迫リハビリテーション】\n\n"
             "【第1段階：急性期（初診-2週）】\n"
@@ -2985,9 +2738,7 @@ PILOT_DISEASES = {
             "- 月1回の神経学的評価\n"
             "- 症状悪化の監視"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【脊髄圧迫の栄養管理】\n\n"
             "1. **神経保護栄養**\n"
@@ -3005,14 +2756,11 @@ PILOT_DISEASES = {
             "   新鮮野菜：少量毎日\n"
             "   繰り返し小量給与"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 8,
         "success_rate": 0.45,
         "mortality_rate": 0.10,
     },
-
     "bird_arthritis": {
         "name_ja": "関節炎（鳥）",
         "species": "Bird",
@@ -3026,9 +2774,7 @@ PILOT_DISEASES = {
             "- 長期予後：継続的なリハビリと栄養管理で維持可能\n\n"
             "早期介入と継続的な管理が予後を改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【鳥関節炎リハビリテーション】\n\n"
             "【第1段階：症状緩和期（初診-4週）】\n"
@@ -3048,9 +2794,7 @@ PILOT_DISEASES = {
             "- サプリメント継続投与\n"
             "- 止まり木環境の継続調整"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【鳥関節炎の栄養管理】\n\n"
             "1. **体重管理（重要）**\n"
@@ -3067,14 +2811,11 @@ PILOT_DISEASES = {
             "   新鮮野菜：毎日少量\n"
             "   水分：新鮮な水毎日"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.72,
         "mortality_rate": 0.02,
     },
-
     "reptile_fracture_limb": {
         "name_ja": "四肢骨折（爬虫類）",
         "species": "Reptile",
@@ -3088,9 +2829,7 @@ PILOT_DISEASES = {
             "- 瘢痕形成：一般的（機能障害なし）\n\n"
             "正確な初期治療と適切な固定が最良の予後をもたらします。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【爬虫類四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3114,9 +2853,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 瘢痕部位の再骨折予防"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【爬虫類骨折の栄養管理】\n\n"
             "1. **骨癒合促進栄養**\n"
@@ -3135,14 +2872,11 @@ PILOT_DISEASES = {
             "   栄養補充：ダスティング法\n"
             "   温度管理：採食前にPOTZ加温"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.78,
         "mortality_rate": 0.05,
     },
-
     "tortoise_shell_fracture": {
         "name_ja": "甲殻損傷（リクガメ）",
         "species": "Tortoise",
@@ -3157,9 +2891,7 @@ PILOT_DISEASES = {
             "- 後遺症：稀（見栄えの問題）\n\n"
             "早期の感染予防と清潔管理が予後を大きく改善します。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【リクガメ甲殻損傷リハビリテーション】\n\n"
             "【第1段階：創傷管理期（0-8週）】\n"
@@ -3183,9 +2915,7 @@ PILOT_DISEASES = {
             "- 再損傷予防の環境管理\n"
             "- 瘢痕部位の監視"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【リクガメ甲殻損傷の栄養管理】\n\n"
             "1. **カルシウムとビタミンD3**\n"
@@ -3205,14 +2935,11 @@ PILOT_DISEASES = {
             "   3回/週：カルシウムダスティング\n"
             "   充分な飲水：適切な水分補給"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 24,
         "success_rate": 0.82,
         "mortality_rate": 0.08,
     },
-
     "ferret_fracture": {
         "name_ja": "四肢骨折（フェレット）",
         "species": "Ferret",
@@ -3227,9 +2954,7 @@ PILOT_DISEASES = {
             "- 後遺症：稀（不安定性の場合のみ）\n\n"
             "正確な初期整復と確実な固定が最良の予後をもたらします。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【フェレット四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3253,9 +2978,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 瘢痕部位の強度確認"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【フェレット骨折の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -3275,14 +2998,11 @@ PILOT_DISEASES = {
             "   高カロリー食：組織修復サポート\n"
             "   新鮮肉食：フェレット本来の栄養"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.79,
         "mortality_rate": 0.03,
     },
-
     "hedgehog_limb_fracture": {
         "name_ja": "四肢骨折（ハリネズミ）",
         "species": "Hedgehog",
@@ -3297,9 +3017,7 @@ PILOT_DISEASES = {
             "- 後遺症：10-20%（軽度の跛行）\n\n"
             "保存的管理による固定が主体で、根気強い管理が重要です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【ハリネズミ四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3323,9 +3041,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 跛行の進行性チェック"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【ハリネズミ骨折の栄養管理】\n\n"
             "1. **高プロテイン食**\n"
@@ -3345,14 +3061,11 @@ PILOT_DISEASES = {
             "   生きた昆虫：自然な採食行動促進\n"
             "   新鮮野菜：少量毎日（ザリガニなど昆虫食性なので不要が基本）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.74,
         "mortality_rate": 0.05,
     },
-
     "ferret_osteoarthritis": {
         "name_ja": "変形性関節症（フェレット）",
         "species": "Ferret",
@@ -3367,9 +3080,7 @@ PILOT_DISEASES = {
             "- 併発疾患：アドレナリン腫瘍・膵炎との鑑別必須\n\n"
             "早期診断と継続的な管理がQOL改善に重要です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【フェレット変形性関節症リハビリテーション】\n\n"
             "【第1段階：症状緩和期（初診-4週）】\n"
@@ -3393,9 +3104,7 @@ PILOT_DISEASES = {
             "- 定期的な評価（月1回）\n"
             "- 体重管理（関節負荷軽減）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【フェレット変形性関節症の栄養管理】\n\n"
             "1. **体重管理（重要）**\n"
@@ -3419,14 +3128,11 @@ PILOT_DISEASES = {
             "   高カロリー食：体重管理とのバランス\n"
             "   サプリメント：混合給与で確実な摂取"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.72,
         "mortality_rate": 0.02,
     },
-
     "chinchilla_fracture_limb": {
         "name_ja": "四肢骨折（チンチラ）",
         "species": "Chinchilla",
@@ -3441,9 +3147,7 @@ PILOT_DISEASES = {
             "- 後遺症：15-20%（軽度の跛行）\n\n"
             "保存的管理による固定と適切なリハビリが予後改善の鍵です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【チンチラ四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3467,9 +3171,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 不安定性の進行性チェック"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【チンチラ骨折の栄養管理】\n\n"
             "1. **カルシウムとビタミンD3**\n"
@@ -3490,14 +3192,11 @@ PILOT_DISEASES = {
             "   牧草：無制限供給\n"
             "   野菜：少量、週3-4回（消化管トラブル回避）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.76,
         "mortality_rate": 0.04,
     },
-
     "sugar_glider_fracture_limb": {
         "name_ja": "四肢骨折（フクロモモンガ）",
         "species": "Sugar Glider",
@@ -3512,9 +3211,7 @@ PILOT_DISEASES = {
             "- 後遺症：20-30%（跛行、運動能力低下）\n\n"
             "根気強い管理と自然な癒合プロセスの支持が重要です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【フクロモモンガ四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3538,9 +3235,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 跛行の永続性チェック"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【フクロモモンガ骨折の栄養管理】\n\n"
             "1. **バランスの取れた食事**\n"
@@ -3562,14 +3257,11 @@ PILOT_DISEASES = {
             "   野菜：リンゴ・ニンジン（少量毎日）\n"
             "   樹液食：アカシア蜜など（月1-2回）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.69,
         "mortality_rate": 0.06,
     },
-
     "degu_fracture_limb": {
         "name_ja": "四肢骨折（デグー）",
         "species": "Degu",
@@ -3584,9 +3276,7 @@ PILOT_DISEASES = {
             "- 後遺症：10-15%（軽度の跛行）\n\n"
             "活動的な性質を理解した管理とリハビリプログラムが重要です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【デグー四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3610,9 +3300,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 尾部断裂（tail degloving）チェック継続"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【デグー骨折の栄養管理】\n\n"
             "1. **バランスの取れた食事**\n"
@@ -3633,14 +3321,11 @@ PILOT_DISEASES = {
             "   野菜：ブロッコリー・ニンジン（少量毎日）\n"
             "   注意：糖分禁止（デグーは糖尿病リスク）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.75,
         "mortality_rate": 0.04,
     },
-
     "snake_fracture_spine": {
         "name_ja": "脊椎骨折（ヘビ）",
         "species": "Snake",
@@ -3655,9 +3340,7 @@ PILOT_DISEASES = {
             "- 繁殖能力：脱落可能性あり\n\n"
             "脊髄損傷の早期評価と保存的管理が予後改善の鍵です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【ヘビ脊椎骨折リハビリテーション】\n\n"
             "【第1段階：急性期（0-4週）】\n"
@@ -3680,9 +3363,7 @@ PILOT_DISEASES = {
             "- 残存症状の監視\n"
             "- 脱皮パターンの確認"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【ヘビ脊椎骨折の栄養管理】\n\n"
             "1. **エネルギーサポート**\n"
@@ -3702,14 +3383,11 @@ PILOT_DISEASES = {
             "   強制給餌：キルド食または経管栄養\n"
             "   給与頻度：種別の代謝に応じて"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.55,
         "mortality_rate": 0.15,
     },
-
     "parrot_fracture_wing": {
         "name_ja": "翼骨折（オウム類）",
         "species": "Parrot",
@@ -3724,9 +3402,7 @@ PILOT_DISEASES = {
             "- 瘢痕形成：一般的（羽毛再生で隠蔽）\n\n"
             "正確な初期整復と適切な固定が最良の予後をもたらします。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【オウム類翼骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3750,9 +3426,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 瘢痕組織の羽毛カバー確認"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【オウム類翼骨折の栄養管理】\n\n"
             "1. **高カロリー食**\n"
@@ -3774,14 +3448,11 @@ PILOT_DISEASES = {
             "   ナッツ：高カロリー補給\n"
             "   穀類：エネルギー供給"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.80,
         "mortality_rate": 0.02,
     },
-
     "cockatoo_fracture_wing": {
         "name_ja": "翼骨折（コッカチュー）",
         "species": "Cockatoo",
@@ -3796,9 +3467,7 @@ PILOT_DISEASES = {
             "- 瘢痕形成：一般的（羽毛再生で隠蔽）\n\n"
             "正確な初期整復と強力な体格に対応した固定が最良の予後をもたらします。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【コッカチュー翼骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-6週）】\n"
@@ -3822,9 +3491,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 瘢痕組織の羽毛カバー確認"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【コッカチュー翼骨折の栄養管理】\n\n"
             "1. **高カロリー食（大型対応）**\n"
@@ -3847,14 +3514,11 @@ PILOT_DISEASES = {
             "   フルーツ・野菜：毎日少量\n"
             "   シード：栄養バランス型"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.78,
         "mortality_rate": 0.03,
     },
-
     "lizard_fracture_limb": {
         "name_ja": "四肢骨折（トカゲ）",
         "species": "Lizard",
@@ -3869,9 +3533,7 @@ PILOT_DISEASES = {
             "- 瘢痕形成：一般的（機能障害なし）\n\n"
             "適切な温度管理と段階的リハビリが予後改善の鍵です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【トカゲ四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3895,9 +3557,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 脱落部位の再生監視（尾の場合）"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【トカゲ四肢骨折の栄養管理】\n\n"
             "1. **骨癒合促進栄養**\n"
@@ -3918,14 +3578,11 @@ PILOT_DISEASES = {
             "   採食頻度：種別の代謝に応じて\n"
             "   温度管理：採食前にPOTZ加温"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 12,
         "success_rate": 0.78,
         "mortality_rate": 0.05,
     },
-
     "amphibian_fracture_limb": {
         "name_ja": "四肢骨折（両生類）",
         "species": "Amphibian",
@@ -3940,9 +3597,7 @@ PILOT_DISEASES = {
             "- 瘢痕形成：一般的（機能障害なし）\n\n"
             "水環境と陸環境のバランス管理が予後改善の鍵です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【両生類四肢骨折リハビリテーション】\n\n"
             "【第1段階：急性固定期（0-4週）】\n"
@@ -3966,9 +3621,7 @@ PILOT_DISEASES = {
             "- 定期的な可動域評価\n"
             "- 繁殖ペアリング適性評価"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【両生類四肢骨折の栄養管理】\n\n"
             "1. **骨癒合促進栄養**\n"
@@ -3989,14 +3642,11 @@ PILOT_DISEASES = {
             "   栄養補充：ダスティング\n"
             "   給与環境：陸地での給与推奨"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 16,
         "success_rate": 0.70,
         "mortality_rate": 0.08,
     },
-
     "horse_discospondylitis": {
         "name_ja": "椎間板炎（馬）",
         "species": "Horse",
@@ -4011,9 +3661,7 @@ PILOT_DISEASES = {
             "- 再発リスク：15-20%\n\n"
             "早期診断、感受性検査に基づいた治療、厳格な安静管理が予後改善に重要です。"
         ),
-        "prognosis_references": {
-            "references": []
-        },
+        "prognosis_references": {"references": []},
         "rehabilitation_protocol_ja": (
             "【馬椎間板炎リハビリテーション】\n\n"
             "【第1段階：急性感染制御期（初診-8週）】\n"
@@ -4038,9 +3686,7 @@ PILOT_DISEASES = {
             "- 脊椎安定性確認\n"
             "- 再発予防の監視"
         ),
-        "rehabilitation_references": {
-            "references": []
-        },
+        "rehabilitation_references": {"references": []},
         "nutrition_management_ja": (
             "【馬椎間板炎の栄養管理】\n\n"
             "1. **免疫機能サポート**\n"
@@ -4061,9 +3707,7 @@ PILOT_DISEASES = {
             "   サプリメント：給与に混合\n"
             "   体重管理：BCS 5-6/9維持（安静中の体重増加防止）"
         ),
-        "nutrition_references": {
-            "references": []
-        },
+        "nutrition_references": {"references": []},
         "recovery_timeline_weeks": 24,
         "success_rate": 0.42,
         "mortality_rate": 0.08,
@@ -4094,22 +3738,24 @@ def find_disease_by_id(diseases: list[dict], disease_id: str) -> dict | None:
 
 def enrich_disease(disease: dict, enrichment_data: dict) -> dict:
     """Merge enrichment data into disease record."""
-    disease.update({
-        "prognosis_detailed": enrichment_data.get("prognosis_detailed_ja"),
-        "prognosis_detailed_ja": enrichment_data.get("prognosis_detailed_ja"),
-        "rehabilitation_protocol": enrichment_data.get("rehabilitation_protocol_ja"),
-        "rehabilitation_protocol_ja": enrichment_data.get("rehabilitation_protocol_ja"),
-        "nutrition_management": enrichment_data.get("nutrition_management_ja"),
-        "nutrition_management_ja": enrichment_data.get("nutrition_management_ja"),
-        "prognosis_references": enrichment_data.get("prognosis_references"),
-        "rehabilitation_references": enrichment_data.get("rehabilitation_references"),
-        "nutrition_references": enrichment_data.get("nutrition_references"),
-        "recovery_timeline_weeks": enrichment_data.get("recovery_timeline_weeks"),
-        "success_rate": enrichment_data.get("success_rate"),
-        "mortality_rate": enrichment_data.get("mortality_rate"),
-        "enriched_at": datetime.now().isoformat(),
-        "enrichment_phase": 3,  # Treatment enrichment phase
-    })
+    disease.update(
+        {
+            "prognosis_detailed": enrichment_data.get("prognosis_detailed_ja"),
+            "prognosis_detailed_ja": enrichment_data.get("prognosis_detailed_ja"),
+            "rehabilitation_protocol": enrichment_data.get("rehabilitation_protocol_ja"),
+            "rehabilitation_protocol_ja": enrichment_data.get("rehabilitation_protocol_ja"),
+            "nutrition_management": enrichment_data.get("nutrition_management_ja"),
+            "nutrition_management_ja": enrichment_data.get("nutrition_management_ja"),
+            "prognosis_references": enrichment_data.get("prognosis_references"),
+            "rehabilitation_references": enrichment_data.get("rehabilitation_references"),
+            "nutrition_references": enrichment_data.get("nutrition_references"),
+            "recovery_timeline_weeks": enrichment_data.get("recovery_timeline_weeks"),
+            "success_rate": enrichment_data.get("success_rate"),
+            "mortality_rate": enrichment_data.get("mortality_rate"),
+            "enriched_at": datetime.now().isoformat(),
+            "enrichment_phase": 3,  # Treatment enrichment phase
+        }
+    )
     return disease
 
 
@@ -4152,8 +3798,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     main()

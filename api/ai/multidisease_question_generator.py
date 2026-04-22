@@ -64,18 +64,27 @@ class MultiDiseaseQuestionGenerator:
     SYMPTOM_SEVERITY_TEMPLATES = [
         ("On a scale of 1-10, how severe is {symptom}?", "1～10のスケールで、{symptom}の重症度はどの程度ですか？"),
         ("Is the {symptom} constant or intermittent?", "{symptom}は常にありますか、それとも間欠的ですか？"),
-        ("Is the {symptom} worsening, stable, or improving?", "{symptom}は悪化していますか、安定していますか、それとも改善していますか？"),
+        (
+            "Is the {symptom} worsening, stable, or improving?",
+            "{symptom}は悪化していますか、安定していますか、それとも改善していますか？",
+        ),
     ]
 
     SYMPTOM_CHARACTER_TEMPLATES = [
-        ("Describe the character of {symptom} (e.g., sharp, dull, cramping)", "{symptom}の性状を説明してください（例：鋭い、鈍い、けいれん性）"),
+        (
+            "Describe the character of {symptom} (e.g., sharp, dull, cramping)",
+            "{symptom}の性状を説明してください（例：鋭い、鈍い、けいれん性）",
+        ),
         ("Is there {related_finding} accompanying {symptom}?", "{symptom}に伴い{related_finding}がありますか？"),
         ("What triggers or worsens {symptom}?", "{symptom}のトリガーまたは悪化させるものは何ですか？"),
     ]
 
     CONTEXTUAL_TEMPLATES = [
         ("Has the animal had {medical_event} recently?", "ペットは最近{medical_event}を経験しましたか？"),
-        ("Are there other animals in the household with similar symptoms?", "家族内に似たような症状のある他の動物がいますか？"),
+        (
+            "Are there other animals in the household with similar symptoms?",
+            "家族内に似たような症状のある他の動物がいますか？",
+        ),
         ("Any recent changes in diet or environment?", "食事や環境に最近の変化がありますか？"),
     ]
 
@@ -101,9 +110,7 @@ class MultiDiseaseQuestionGenerator:
         """
 
         # Find key differentiating features
-        diff_features = cls._find_differentiating_features(
-            disease_a, disease_b, disease_database
-        )
+        diff_features = cls._find_differentiating_features(disease_a, disease_b, disease_database)
 
         if not diff_features:
             return None
@@ -115,9 +122,7 @@ class MultiDiseaseQuestionGenerator:
         )
 
         # Generate question from feature
-        question = cls._create_question_from_feature(
-            best_feature, disease_a, disease_b
-        )
+        question = cls._create_question_from_feature(best_feature, disease_a, disease_b)
 
         return question
 
@@ -393,9 +398,7 @@ class DiscriminativeQuestionRanker:
         score += question.information_gain * 0.3
 
         # Bonus if targets current disease focus
-        target_match = sum(
-            1 for d in question.target_diseases if d in diseases
-        )
+        target_match = sum(1 for d in question.target_diseases if d in diseases)
         score += (target_match / max(len(question.target_diseases), 1)) * 0.2
 
         return min(1.0, max(0.0, score))

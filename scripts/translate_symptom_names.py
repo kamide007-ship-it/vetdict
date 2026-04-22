@@ -3,6 +3,7 @@
 
 Usage: python3 scripts/translate_symptom_names.py
 """
+
 import re
 import sys
 from pathlib import Path

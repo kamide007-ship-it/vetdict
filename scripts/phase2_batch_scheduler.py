@@ -77,24 +77,21 @@ class Phase2Scheduler:
                 "treatment": {
                     "status": "pending",
                     "batches": {},
-                    "stats": {"total": 0, "submitted": 0, "completed": 0}
+                    "stats": {"total": 0, "submitted": 0, "completed": 0},
                 },
                 "prevention": {
                     "status": "pending",
                     "batches": {},
-                    "stats": {"total": 0, "submitted": 0, "completed": 0}
+                    "stats": {"total": 0, "submitted": 0, "completed": 0},
                 },
                 "prognosis": {
                     "status": "pending",
                     "batches": {},
-                    "stats": {"total": 0, "submitted": 0, "completed": 0}
-                }
+                    "stats": {"total": 0, "submitted": 0, "completed": 0},
+                },
             },
             "species_status": {},
-            "recovery_state": {
-                "last_successful_batch": None,
-                "last_checkpoint": None
-            }
+            "recovery_state": {"last_successful_batch": None, "last_checkpoint": None},
         }
 
         print("✓ Created new manifest")
@@ -149,11 +146,7 @@ class Phase2Scheduler:
         stages = ["treatment", "prevention", "prognosis"]
 
         for stage in stages:
-            plan[stage] = {
-                "stage": stage,
-                "total_diseases": 0,
-                "species_details": []
-            }
+            plan[stage] = {"stage": stage, "total_diseases": 0, "species_details": []}
 
             # Sort by priority
             for species_name, _ in self.SPECIES_PRIORITY:
@@ -165,12 +158,14 @@ class Phase2Scheduler:
 
                 if incomplete:
                     num_batches = (len(incomplete) + self.BATCH_SIZE - 1) // self.BATCH_SIZE
-                    plan[stage]["species_details"].append({
-                        "species": species_name,
-                        "disease_count": len(incomplete),
-                        "batch_count": num_batches,
-                        "batch_size": self.BATCH_SIZE
-                    })
+                    plan[stage]["species_details"].append(
+                        {
+                            "species": species_name,
+                            "disease_count": len(incomplete),
+                            "batch_count": num_batches,
+                            "batch_size": self.BATCH_SIZE,
+                        }
+                    )
                     plan[stage]["total_diseases"] += len(incomplete)
 
         return plan
@@ -179,9 +174,9 @@ class Phase2Scheduler:
         """Display enrichment scheduling plan."""
         plan = self.create_scheduling_plan()
 
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("PHASE 2 ENRICHMENT SCHEDULING PLAN")
-        print("="*70)
+        print("=" * 70)
 
         for stage_name in ["treatment", "prevention", "prognosis"]:
             stage_plan = plan[stage_name]
@@ -195,9 +190,9 @@ class Phase2Scheduler:
                 cost = sp_detail["disease_count"] * 0.025  # ~$0.025 per disease
                 print(f"   └─ Est. cost: ${cost:.2f}")
 
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("EXECUTION SEQUENCE")
-        print("="*70)
+        print("=" * 70)
         print("""
 1. treatment (治療): Treatment protocols and medication approaches
 2. prevention (予防): Preventive measures and vaccination strategies
@@ -222,9 +217,9 @@ Total estimated time: 8-12 hours of API processing
             print(f"❌ Invalid stage: {stage}")
             return
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"PHASE 2 ENRICHMENT - STAGE: {stage.upper()}")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         # Initialize manifest if needed
         if not self.manifest.get("started_at"):
@@ -251,9 +246,7 @@ Total estimated time: 8-12 hours of API processing
             print(f"\n📤 {species_name}: Enriching {len(incomplete)} diseases")
 
             # Create batches for this species
-            batches = self.enricher.create_phase2_batch_requests(
-                incomplete, stage=stage, batch_size=self.BATCH_SIZE
-            )
+            batches = self.enricher.create_phase2_batch_requests(incomplete, stage=stage, batch_size=self.BATCH_SIZE)
 
             if max_batches and batch_counter >= max_batches:
                 print(f"   (Stopping at {max_batches} batches for testing)")
@@ -265,8 +258,7 @@ Total estimated time: 8-12 hours of API processing
 
                 try:
                     batch_id = self.enricher.submit_batch(
-                        batch_requests,
-                        description=f"{species_name} {stage} batch {batch_num}/{len(batches)}"
+                        batch_requests, description=f"{species_name} {stage} batch {batch_num}/{len(batches)}"
                     )
 
                     # Track batch in manifest
@@ -277,7 +269,7 @@ Total estimated time: 8-12 hours of API processing
                         "disease_count": len(batch_requests),
                         "submitted_at": datetime.now().isoformat(),
                         "status": "submitted",
-                        "results": None
+                        "results": None,
                     }
 
                     total_submitted += len(batch_requests)
@@ -296,12 +288,12 @@ Total estimated time: 8-12 hours of API processing
                 "stage": stage,
                 "incomplete_count": len(incomplete),
                 "batches_submitted": len(batches),
-                "status": "submitted"
+                "status": "submitted",
             }
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("SUBMISSION SUMMARY")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
         print(f"Stage: {stage}")
         print(f"Batches submitted: {batch_counter}")
         print(f"Total diseases: {total_submitted}")
@@ -318,9 +310,9 @@ Total estimated time: 8-12 hours of API processing
             print("❌ No batches found. Run 'start' command first.")
             return
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("PHASE 2 BATCH STATUS")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         for stage_name in ["treatment", "prevention", "prognosis"]:
             stage_data = self.manifest["stages"].get(stage_name, {})
@@ -344,19 +336,21 @@ Total estimated time: 8-12 hours of API processing
                     try:
                         api_status = self.enricher.check_batch_status(batch_id)
                         print(f"       API Status: {api_status['status']}")
-                        total_processed = api_status['request_counts']['succeeded'] + api_status['request_counts']['errored']
+                        total_processed = (
+                            api_status["request_counts"]["succeeded"] + api_status["request_counts"]["errored"]
+                        )
                         print(f"       Processed: {total_processed}/{batch_info.get('disease_count')}")
                         print(f"       Succeeded: {api_status['request_counts']['succeeded']}")
-                        if api_status['request_counts']['errored'] > 0:
+                        if api_status["request_counts"]["errored"] > 0:
                             print(f"       Errored: {api_status['request_counts']['errored']}")
                     except Exception as e:
                         print(f"       Error checking API status: {e}")
 
     def retrieve_results(self, batch_id: str = None):
         """Retrieve and integrate results from completed batches."""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("PHASE 2 RESULT RETRIEVAL")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         if batch_id:
             # Retrieve specific batch
@@ -442,10 +436,7 @@ Total estimated time: 8-12 hours of API processing
 
             # Update manifest
             batch_info["status"] = "completed"
-            batch_info["results"] = {
-                "succeeded": succeeded,
-                "failed": failed
-            }
+            batch_info["results"] = {"succeeded": succeeded, "failed": failed}
             batch_info["completed_at"] = datetime.now().isoformat()
 
             self.manifest["stages"][stage_name]["stats"]["completed"] += 1
@@ -462,11 +453,12 @@ Total estimated time: 8-12 hours of API processing
 
     def validate_quality(self):
         """Run QA validation on Phase 2 enriched data."""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("PHASE 2 QUALITY ASSURANCE VALIDATION")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         from api.phase2_qa_validator import Phase2QAValidator
+
         Phase2QAValidator()
 
         # Sample validation
@@ -475,6 +467,7 @@ Total estimated time: 8-12 hours of API processing
 
         # Get diverse sample
         import random
+
         sample = random.sample(self.diseases, sample_size)
 
         results = {
@@ -511,8 +504,9 @@ def main():
 
     # start command
     start_parser = subparsers.add_parser("start", help="Start Phase 2 enrichment")
-    start_parser.add_argument("--stage", choices=["treatment", "prevention", "prognosis"],
-                             default="treatment", help="Which stage to process")
+    start_parser.add_argument(
+        "--stage", choices=["treatment", "prevention", "prognosis"], default="treatment", help="Which stage to process"
+    )
     start_parser.add_argument("--max-batches", type=int, help="Max batches to submit (for testing)")
 
     # status command

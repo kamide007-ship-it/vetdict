@@ -7,16 +7,21 @@ from typing import Any, Dict
 def _project_root() -> str:
     return os.path.dirname(os.path.dirname(__file__))
 
+
 def _instance_dir() -> str:
     # Test-friendly override
     return os.environ.get("RECO3_INSTANCE_DIR") or os.path.join(_project_root(), "instance")
 
+
 def state_path() -> str:
     return os.path.join(_instance_dir(), "resonance_state.json")
 
+
 def _now_iso() -> str:
     import datetime
+
     return datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat(timespec="seconds")
+
 
 def default_state() -> Dict[str, Any]:
     return {
@@ -55,10 +60,12 @@ def default_state() -> Dict[str, Any]:
         "updated_at": _now_iso(),
     }
 
+
 def _secure_dir(path: str) -> None:
     """ディレクトリを owner-only にする (macOS/Linux)"""
     with contextlib.suppress(OSError):
         os.chmod(path, 0o700)
+
 
 def ensure_state_file() -> None:
     d = _instance_dir()
@@ -67,6 +74,7 @@ def ensure_state_file() -> None:
     sp = state_path()
     if not os.path.exists(sp):
         save_state(default_state())
+
 
 def load_state() -> Dict[str, Any]:
     ensure_state_file()
@@ -99,6 +107,7 @@ def load_state() -> Dict[str, Any]:
         save_state(state)
 
     return state
+
 
 def save_state(state: Dict[str, Any]) -> None:
     state["updated_at"] = _now_iso()

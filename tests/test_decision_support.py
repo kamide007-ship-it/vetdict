@@ -1,6 +1,5 @@
 """Tests for decision_support.py - Advanced Decision Support Engine (Stage 6)."""
 
-
 from api.ai.decision_support import (
     _OWNER_INSTRUCTIONS,
     FOLLOW_UP_DEFAULTS,
@@ -17,6 +16,7 @@ from api.ai.risk_stratifier import RiskStratificationResult, RiskTier
 from api.ai.treatment_response_predictor import TreatmentResponse
 
 # ── Helpers ──────────────────────────────────────────────────────────
+
 
 def _risk_result(tier=RiskTier.MODERATE, score=50.0, hosp_risk=0.4, **kw):
     defaults = {
@@ -70,8 +70,8 @@ def _treatment(name="Fluid therapy", success=0.7, **kw):
 
 # ── Data integrity ──────────────────────────────────────────────────
 
-class TestDataIntegrity:
 
+class TestDataIntegrity:
     def test_pathway_rules_cover_all_tiers(self):
         for tier in RiskTier:
             assert tier in PATHWAY_RULES
@@ -94,8 +94,8 @@ class TestDataIntegrity:
 
 # ── Dataclass to_dict ───────────────────────────────────────────────
 
-class TestClinicalAlert:
 
+class TestClinicalAlert:
     def test_to_dict(self):
         a = ClinicalAlert(AlertSeverity.WARNING, "test msg", "risk")
         d = a.to_dict()
@@ -105,7 +105,6 @@ class TestClinicalAlert:
 
 
 class TestFollowUpSchedule:
-
     def test_to_dict(self):
         f = FollowUpSchedule(next_visit_days=7, visit_type="recheck")
         d = f.to_dict()
@@ -115,7 +114,6 @@ class TestFollowUpSchedule:
 
 
 class TestDecisionSupportResult:
-
     def test_to_dict(self):
         r = DecisionSupportResult(
             clinical_pathway=ClinicalPathway.INPATIENT,
@@ -137,30 +135,22 @@ class TestDecisionSupportResult:
 
 # ── Pathway selection ───────────────────────────────────────────────
 
-class TestSelectPathway:
 
+class TestSelectPathway:
     def test_low_tier(self):
-        p = DecisionSupportEngine._select_pathway(
-            RiskTier.LOW, _prognosis(), 3.0
-        )
+        p = DecisionSupportEngine._select_pathway(RiskTier.LOW, _prognosis(), 3.0)
         assert p == ClinicalPathway.OUTPATIENT_CONSERVATIVE
 
     def test_moderate_tier(self):
-        p = DecisionSupportEngine._select_pathway(
-            RiskTier.MODERATE, _prognosis(), 4.0
-        )
+        p = DecisionSupportEngine._select_pathway(RiskTier.MODERATE, _prognosis(), 4.0)
         assert p == ClinicalPathway.OUTPATIENT_ACTIVE
 
     def test_high_tier(self):
-        p = DecisionSupportEngine._select_pathway(
-            RiskTier.HIGH, _prognosis(), 7.0
-        )
+        p = DecisionSupportEngine._select_pathway(RiskTier.HIGH, _prognosis(), 7.0)
         assert p == ClinicalPathway.INPATIENT
 
     def test_critical_tier(self):
-        p = DecisionSupportEngine._select_pathway(
-            RiskTier.CRITICAL, _prognosis(), 9.0
-        )
+        p = DecisionSupportEngine._select_pathway(RiskTier.CRITICAL, _prognosis(), 9.0)
         assert p == ClinicalPathway.EMERGENCY
 
     def test_palliative_override(self):
@@ -172,48 +162,56 @@ class TestSelectPathway:
         assert p == ClinicalPathway.PALLIATIVE
 
     def test_moderate_high_severity_day_hospital(self):
-        p = DecisionSupportEngine._select_pathway(
-            RiskTier.MODERATE, _prognosis(), 7.0
-        )
+        p = DecisionSupportEngine._select_pathway(RiskTier.MODERATE, _prognosis(), 7.0)
         assert p == ClinicalPathway.DAY_HOSPITAL
 
 
 # ── Alert generation ────────────────────────────────────────────────
 
-class TestGenerateAlerts:
 
+class TestGenerateAlerts:
     def test_critical_tier_alert(self):
         alerts = DecisionSupportEngine._generate_alerts(
             _risk_result(tier=RiskTier.CRITICAL, score=90),
-            _prognosis(), [], 8.0,
+            _prognosis(),
+            [],
+            8.0,
         )
         assert any(a.severity == AlertSeverity.CRITICAL for a in alerts)
 
     def test_high_tier_alert(self):
         alerts = DecisionSupportEngine._generate_alerts(
             _risk_result(tier=RiskTier.HIGH, score=70),
-            _prognosis(), [], 6.0,
+            _prognosis(),
+            [],
+            6.0,
         )
         assert any(a.severity == AlertSeverity.URGENT for a in alerts)
 
     def test_high_hospitalization_alert(self):
         alerts = DecisionSupportEngine._generate_alerts(
             _risk_result(hosp_risk=0.8),
-            _prognosis(), [], 5.0,
+            _prognosis(),
+            [],
+            5.0,
         )
         assert any("hospitalization" in a.message.lower() for a in alerts)
 
     def test_mortality_alert(self):
         alerts = DecisionSupportEngine._generate_alerts(
             _risk_result(),
-            _prognosis(mortality=0.4), [], 5.0,
+            _prognosis(mortality=0.4),
+            [],
+            5.0,
         )
         assert any("mortality" in a.message.lower() for a in alerts)
 
     def test_low_recovery_alert(self):
         alerts = DecisionSupportEngine._generate_alerts(
             _risk_result(),
-            _prognosis(recovery=0.2), [], 5.0,
+            _prognosis(recovery=0.2),
+            [],
+            5.0,
         )
         assert any("recovery" in a.message.lower() for a in alerts)
 
@@ -228,7 +226,10 @@ class TestGenerateAlerts:
 
     def test_high_severity_alert(self):
         alerts = DecisionSupportEngine._generate_alerts(
-            _risk_result(), _prognosis(), [], 9.0,
+            _risk_result(),
+            _prognosis(),
+            [],
+            9.0,
         )
         assert any("severity" in a.message.lower() for a in alerts)
 
@@ -244,100 +245,79 @@ class TestGenerateAlerts:
 
 # ── Follow-up schedule ──────────────────────────────────────────────
 
-class TestBuildFollowUp:
 
+class TestBuildFollowUp:
     def test_low_tier_follow_up(self):
-        fu = DecisionSupportEngine._build_follow_up(
-            RiskTier.LOW, "Gastroenteritis", _prognosis()
-        )
+        fu = DecisionSupportEngine._build_follow_up(RiskTier.LOW, "Gastroenteritis", _prognosis())
         assert fu.next_visit_days == 14
         assert fu.visit_type == "recheck"
 
     def test_critical_tier_follow_up(self):
-        fu = DecisionSupportEngine._build_follow_up(
-            RiskTier.CRITICAL, "Lymphoma", _prognosis()
-        )
+        fu = DecisionSupportEngine._build_follow_up(RiskTier.CRITICAL, "Lymphoma", _prognosis())
         assert fu.next_visit_days == 1
 
     def test_chronic_note(self):
-        fu = DecisionSupportEngine._build_follow_up(
-            RiskTier.MODERATE, "CKD", _prognosis(recovery=0.3)
-        )
+        fu = DecisionSupportEngine._build_follow_up(RiskTier.MODERATE, "CKD", _prognosis(recovery=0.3))
         assert "chronic" in fu.notes.lower()
 
     def test_disease_in_notes(self):
-        fu = DecisionSupportEngine._build_follow_up(
-            RiskTier.LOW, "Hip Dysplasia", _prognosis()
-        )
+        fu = DecisionSupportEngine._build_follow_up(RiskTier.LOW, "Hip Dysplasia", _prognosis())
         assert "Hip Dysplasia" in fu.notes
 
 
 # ── Referral assessment ─────────────────────────────────────────────
 
-class TestAssessReferral:
 
+class TestAssessReferral:
     def test_critical_tier_referral(self):
-        rec, reason = DecisionSupportEngine._assess_referral(
-            RiskTier.CRITICAL, _prognosis(), 8.0
-        )
+        rec, reason = DecisionSupportEngine._assess_referral(RiskTier.CRITICAL, _prognosis(), 8.0)
         assert rec is True
         assert "Critical" in reason
 
     def test_high_tier_severe_referral(self):
-        rec, reason = DecisionSupportEngine._assess_referral(
-            RiskTier.HIGH, _prognosis(), 8.0
-        )
+        rec, reason = DecisionSupportEngine._assess_referral(RiskTier.HIGH, _prognosis(), 8.0)
         assert rec is True
 
     def test_high_mortality_referral(self):
-        rec, reason = DecisionSupportEngine._assess_referral(
-            RiskTier.MODERATE, _prognosis(mortality=0.5), 5.0
-        )
+        rec, reason = DecisionSupportEngine._assess_referral(RiskTier.MODERATE, _prognosis(mortality=0.5), 5.0)
         assert rec is True
         assert "mortality" in reason.lower()
 
     def test_low_risk_no_referral(self):
-        rec, reason = DecisionSupportEngine._assess_referral(
-            RiskTier.LOW, _prognosis(), 3.0
-        )
+        rec, reason = DecisionSupportEngine._assess_referral(RiskTier.LOW, _prognosis(), 3.0)
         assert rec is False
         assert reason == ""
 
 
 # ── Hospitalization assessment ──────────────────────────────────────
 
-class TestAssessHospitalization:
 
+class TestAssessHospitalization:
     def test_critical_tier(self):
-        assert DecisionSupportEngine._assess_hospitalization(
-            _risk_result(tier=RiskTier.CRITICAL), _prognosis()
-        ) is True
+        assert DecisionSupportEngine._assess_hospitalization(_risk_result(tier=RiskTier.CRITICAL), _prognosis()) is True
 
     def test_high_hosp_risk(self):
-        assert DecisionSupportEngine._assess_hospitalization(
-            _risk_result(hosp_risk=0.7), _prognosis()
-        ) is True
+        assert DecisionSupportEngine._assess_hospitalization(_risk_result(hosp_risk=0.7), _prognosis()) is True
 
     def test_high_mortality(self):
-        assert DecisionSupportEngine._assess_hospitalization(
-            _risk_result(), _prognosis(mortality=0.5)
-        ) is True
+        assert DecisionSupportEngine._assess_hospitalization(_risk_result(), _prognosis(mortality=0.5)) is True
 
     def test_low_risk_no_hospitalization(self):
-        assert DecisionSupportEngine._assess_hospitalization(
-            _risk_result(tier=RiskTier.LOW, hosp_risk=0.2),
-            _prognosis(mortality=0.02),
-        ) is False
+        assert (
+            DecisionSupportEngine._assess_hospitalization(
+                _risk_result(tier=RiskTier.LOW, hosp_risk=0.2),
+                _prognosis(mortality=0.02),
+            )
+            is False
+        )
 
 
 # ── Owner instructions ──────────────────────────────────────────────
 
-class TestOwnerInstructions:
 
+class TestOwnerInstructions:
     def test_includes_disease(self):
-        instr = DecisionSupportEngine._generate_owner_instructions(
-            RiskTier.LOW, "Pancreatitis", []
-        )
+        instr = DecisionSupportEngine._generate_owner_instructions(RiskTier.LOW, "Pancreatitis", [])
         assert any("Pancreatitis" in i for i in instr)
 
     def test_includes_treatment(self):
@@ -347,50 +327,59 @@ class TestOwnerInstructions:
         assert any("IV Fluids" in i for i in instr)
 
     def test_critical_has_emergency(self):
-        instr = DecisionSupportEngine._generate_owner_instructions(
-            RiskTier.CRITICAL, "X", []
-        )
+        instr = DecisionSupportEngine._generate_owner_instructions(RiskTier.CRITICAL, "X", [])
         assert any("emergency" in i.lower() for i in instr)
 
 
 # ── Clinical summary ────────────────────────────────────────────────
 
-class TestGenerateSummary:
 
+class TestGenerateSummary:
     def test_contains_disease(self):
         s = DecisionSupportEngine._generate_summary(
-            "Pancreatitis", RiskTier.MODERATE,
+            "Pancreatitis",
+            RiskTier.MODERATE,
             ClinicalPathway.OUTPATIENT_ACTIVE,
-            _prognosis(), [_treatment()],
+            _prognosis(),
+            [_treatment()],
         )
         assert "Pancreatitis" in s
 
     def test_contains_tier(self):
         s = DecisionSupportEngine._generate_summary(
-            "X", RiskTier.HIGH, ClinicalPathway.INPATIENT,
-            _prognosis(), [_treatment()],
+            "X",
+            RiskTier.HIGH,
+            ClinicalPathway.INPATIENT,
+            _prognosis(),
+            [_treatment()],
         )
         assert "HIGH" in s
 
     def test_contains_treatment(self):
         s = DecisionSupportEngine._generate_summary(
-            "X", RiskTier.LOW, ClinicalPathway.OUTPATIENT_CONSERVATIVE,
-            _prognosis(), [_treatment(name="Surgery")],
+            "X",
+            RiskTier.LOW,
+            ClinicalPathway.OUTPATIENT_CONSERVATIVE,
+            _prognosis(),
+            [_treatment(name="Surgery")],
         )
         assert "Surgery" in s
 
     def test_no_treatments_fallback(self):
         s = DecisionSupportEngine._generate_summary(
-            "X", RiskTier.LOW, ClinicalPathway.OUTPATIENT_CONSERVATIVE,
-            _prognosis(), [],
+            "X",
+            RiskTier.LOW,
+            ClinicalPathway.OUTPATIENT_CONSERVATIVE,
+            _prognosis(),
+            [],
         )
         assert "supportive care" in s
 
 
 # ── Full integration ────────────────────────────────────────────────
 
-class TestGenerateDecisionSupport:
 
+class TestGenerateDecisionSupport:
     def test_returns_result(self):
         engine = DecisionSupportEngine()
         result = engine.generate_decision_support(

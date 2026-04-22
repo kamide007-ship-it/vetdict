@@ -105,51 +105,62 @@ CREATE TABLE IF NOT EXISTS migration_metadata (
 );
 """
 
+
 def load_json_diseases(json_path):
     """Load diseases from JSON file"""
     print(f"📂 Loading diseases from {json_path}...")
-    with open(json_path, 'r', encoding='utf-8') as f:
+    with open(json_path, "r", encoding="utf-8") as f:
         diseases = json.load(f)
     print(f"✓ Loaded {len(diseases)} diseases")
     return diseases
 
+
 def transform_disease(disease_json):
     """Transform JSON disease record to SQLite tuple"""
     return (
-        disease_json.get('id', ''),
-        disease_json.get('species', ''),
-        disease_json.get('name', ''),
-        disease_json.get('name_ja', ''),
-        disease_json.get('pathophysiology', ''),
-        disease_json.get('pathophysiology_ja', ''),
-        disease_json.get('causes', ''),
-        disease_json.get('causes_ja', ''),
-        disease_json.get('clinical_signs', ''),
-        disease_json.get('clinical_signs_ja', ''),
-        disease_json.get('diagnosis', ''),
-        disease_json.get('diagnosis_ja', ''),
-        disease_json.get('treatment', ''),
-        disease_json.get('treatment_ja', ''),
-        disease_json.get('treatment_duration_weeks'),
-        disease_json.get('prognosis', ''),
-        disease_json.get('prognosis_ja', ''),
-        disease_json.get('prevention', ''),
-        disease_json.get('prevention_ja', ''),
-        disease_json.get('transmission', ''),
-        disease_json.get('transmission_ja', ''),
-        json.dumps(disease_json.get('symptoms', []), ensure_ascii=False) if disease_json.get('symptoms') else None,
-        json.dumps(disease_json.get('recommended_tests', []), ensure_ascii=False) if disease_json.get('recommended_tests') else None,
-        disease_json.get('urgency', 'normal'),
-        disease_json.get('severity_score'),
-        disease_json.get('estimated_cost_level', ''),
-        disease_json.get('hospitalization_likelihood', ''),
-        disease_json.get('monitoring_frequency', ''),
-        json.dumps(disease_json.get('prognosis_references', {}), ensure_ascii=False) if disease_json.get('prognosis_references') else None,
-        json.dumps(disease_json.get('nutrition_references', {}), ensure_ascii=False) if disease_json.get('nutrition_references') else None,
-        json.dumps(disease_json.get('rehabilitation_references', {}), ensure_ascii=False) if disease_json.get('rehabilitation_references') else None,
-        disease_json.get('enriched_at', ''),
-        disease_json.get('enrichment_phase'),
+        disease_json.get("id", ""),
+        disease_json.get("species", ""),
+        disease_json.get("name", ""),
+        disease_json.get("name_ja", ""),
+        disease_json.get("pathophysiology", ""),
+        disease_json.get("pathophysiology_ja", ""),
+        disease_json.get("causes", ""),
+        disease_json.get("causes_ja", ""),
+        disease_json.get("clinical_signs", ""),
+        disease_json.get("clinical_signs_ja", ""),
+        disease_json.get("diagnosis", ""),
+        disease_json.get("diagnosis_ja", ""),
+        disease_json.get("treatment", ""),
+        disease_json.get("treatment_ja", ""),
+        disease_json.get("treatment_duration_weeks"),
+        disease_json.get("prognosis", ""),
+        disease_json.get("prognosis_ja", ""),
+        disease_json.get("prevention", ""),
+        disease_json.get("prevention_ja", ""),
+        disease_json.get("transmission", ""),
+        disease_json.get("transmission_ja", ""),
+        json.dumps(disease_json.get("symptoms", []), ensure_ascii=False) if disease_json.get("symptoms") else None,
+        json.dumps(disease_json.get("recommended_tests", []), ensure_ascii=False)
+        if disease_json.get("recommended_tests")
+        else None,
+        disease_json.get("urgency", "normal"),
+        disease_json.get("severity_score"),
+        disease_json.get("estimated_cost_level", ""),
+        disease_json.get("hospitalization_likelihood", ""),
+        disease_json.get("monitoring_frequency", ""),
+        json.dumps(disease_json.get("prognosis_references", {}), ensure_ascii=False)
+        if disease_json.get("prognosis_references")
+        else None,
+        json.dumps(disease_json.get("nutrition_references", {}), ensure_ascii=False)
+        if disease_json.get("nutrition_references")
+        else None,
+        json.dumps(disease_json.get("rehabilitation_references", {}), ensure_ascii=False)
+        if disease_json.get("rehabilitation_references")
+        else None,
+        disease_json.get("enriched_at", ""),
+        disease_json.get("enrichment_phase"),
     )
+
 
 def migrate_to_sqlite(db_path, json_diseases):
     """Perform migration to SQLite"""
@@ -262,26 +273,32 @@ def migrate_to_sqlite(db_path, json_diseases):
             raise ValueError(f"Mismatch! Expected {len(json_diseases)}, got {db_count}")
 
         # Record migration metadata
-        cursor.execute("""
+        cursor.execute(
+            """
         INSERT OR REPLACE INTO migration_metadata (key, value, updated_at)
         VALUES ('last_migration', ?, CURRENT_TIMESTAMP)
-        """, (datetime.now().isoformat(),))
-        cursor.execute("""
+        """,
+            (datetime.now().isoformat(),),
+        )
+        cursor.execute(
+            """
         INSERT OR REPLACE INTO migration_metadata (key, value, updated_at)
         VALUES ('disease_count', ?, CURRENT_TIMESTAMP)
-        """, (str(db_count),))
+        """,
+            (str(db_count),),
+        )
         conn.commit()
 
         # Test queries
         print("\n🧪 Testing queries...")
 
         # Test 1: Lookup by ID
-        result = cursor.execute("SELECT name_en, species FROM diseases WHERE id = ?", ('cat_0001',)).fetchone()
+        result = cursor.execute("SELECT name_en, species FROM diseases WHERE id = ?", ("cat_0001",)).fetchone()
         if result:
             print(f"  ✓ Lookup by ID: {result[0]} ({result[1]})")
 
         # Test 2: Filter by species
-        count = cursor.execute("SELECT COUNT(*) FROM diseases WHERE species = ?", ('Cat',)).fetchone()[0]
+        count = cursor.execute("SELECT COUNT(*) FROM diseases WHERE species = ?", ("Cat",)).fetchone()[0]
         print(f"  ✓ Filter by species (Cat): {count} diseases")
 
         # Test 3: Filter by urgency
@@ -290,6 +307,7 @@ def migrate_to_sqlite(db_path, json_diseases):
 
         # Test 4: Index performance check
         import time
+
         start = time.time()
         cursor.execute("SELECT COUNT(*) FROM diseases WHERE species = 'Dog' AND urgency = 'emergency'")
         elapsed = (time.time() - start) * 1000
@@ -305,12 +323,13 @@ def migrate_to_sqlite(db_path, json_diseases):
     finally:
         conn.close()
 
+
 def main():
     # Paths
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
-    json_path = repo_root / 'diseases_all_species.json'
-    db_path = repo_root / 'diseases.db'
+    json_path = repo_root / "diseases_all_species.json"
+    db_path = repo_root / "diseases.db"
 
     print("=" * 60)
     print("VetDict: JSON → SQLite Migration")
@@ -325,7 +344,7 @@ def main():
 
     # Create backup of existing DB if present
     if db_path.exists():
-        backup_path = repo_root / f'diseases.db.backup_{datetime.now().strftime("%Y%m%d_%H%M%S")}'
+        backup_path = repo_root / f"diseases.db.backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         print(f"💾 Backing up existing database to {backup_path.name}...")
         db_path.rename(backup_path)
 
@@ -341,5 +360,6 @@ def main():
         print("\n❌ Migration failed. Restore from backup if needed.")
         sys.exit(1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

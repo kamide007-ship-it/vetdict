@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class ModelType(Enum):
     """Types of ML models."""
+
     GRADIENT_BOOSTING = "xgboost"  # XGBoost
     NEURAL_NETWORK = "neural_net"  # TensorFlow/Keras
     LOGISTIC_REGRESSION = "logistic"
@@ -27,6 +28,7 @@ class ModelType(Enum):
 @dataclass
 class DiagnosisRecord:
     """Single diagnosis record for model training."""
+
     case_id: str
     symptoms: List[str]
     initial_predictions: Dict[str, float]  # disease -> confidence
@@ -64,6 +66,7 @@ class DiagnosisRecord:
 @dataclass
 class ModelMetrics:
     """Performance metrics for a model."""
+
     accuracy: float
     precision: Dict[str, float]  # disease -> precision
     recall: Dict[str, float]  # disease -> recall
@@ -87,6 +90,7 @@ class ModelMetrics:
 @dataclass
 class BayesianPrior:
     """Bayesian prior for disease probability."""
+
     disease: str
     prior_probability: float  # P(disease) in population
     likelihood_given_symptoms: float  # P(symptoms | disease)
@@ -97,9 +101,7 @@ class BayesianPrior:
         """Update posterior using Bayesian formula."""
         # P(disease | symptoms) = P(symptoms | disease) * P(disease) / P(symptoms)
         # Simplified version without evidence normalization
-        self.posterior_probability = (
-            self.likelihood_given_symptoms * self.prior_probability
-        )
+        self.posterior_probability = self.likelihood_given_symptoms * self.prior_probability
         # Clamp to [0, 1]
         self.posterior_probability = max(0, min(1, self.posterior_probability))
 
@@ -181,19 +183,17 @@ class DiagnosisFeedbackCollector:
                 "correct_predictions_percent": 0,
             }
 
-        correct = sum(
-            1 for r in self.records
-            if r.final_diagnosis_confirmed
-        )
+        correct = sum(1 for r in self.records if r.final_diagnosis_confirmed)
 
         unique_vets = len(set(r.veterinarian_id for r in self.records))
         unique_clinics = len(set(r.clinic_id for r in self.records))
         unique_diseases = len(set(r.actual_diagnosis for r in self.records))
 
-        avg_confidence = sum(
-            max(r.initial_predictions.values())
-            for r in self.records if r.initial_predictions
-        ) / len(self.records) if self.records else 0
+        avg_confidence = (
+            sum(max(r.initial_predictions.values()) for r in self.records if r.initial_predictions) / len(self.records)
+            if self.records
+            else 0
+        )
 
         return {
             "total_records": len(self.records),
@@ -202,9 +202,7 @@ class DiagnosisFeedbackCollector:
             "unique_clinics": unique_clinics,
             "unique_diseases": unique_diseases,
             "average_confidence": round(avg_confidence, 4),
-            "correct_predictions_percent": round(
-                (correct / len(self.records) * 100) if self.records else 0, 2
-            ),
+            "correct_predictions_percent": round((correct / len(self.records) * 100) if self.records else 0, 2),
         }
 
     def to_json(self) -> str:
@@ -260,19 +258,19 @@ class FeatureEngineer:
 
         # Patient features
         features["patient_age"] = record.patient_age
-        features["patient_age_squared"] = record.patient_age ** 2
+        features["patient_age_squared"] = record.patient_age**2
 
         # Severity features
         features["severity_score"] = record.severity_score
-        features["severity_squared"] = record.severity_score ** 2
+        features["severity_squared"] = record.severity_score**2
 
         # Confidence features
         if record.initial_predictions:
             max_confidence = max(record.initial_predictions.values())
             features["max_initial_confidence"] = max_confidence
-            features["avg_initial_confidence"] = sum(
-                record.initial_predictions.values()
-            ) / len(record.initial_predictions)
+            features["avg_initial_confidence"] = sum(record.initial_predictions.values()) / len(
+                record.initial_predictions
+            )
             features["confidence_entropy"] = FeatureEngineer._calculate_entropy(
                 list(record.initial_predictions.values())
             )
@@ -285,15 +283,11 @@ class FeatureEngineer:
             "rabbit": 4.0,
             "other": 0.0,
         }
-        features["species_code"] = species_map.get(
-            record.patient_species.lower(), 0.0
-        )
+        features["species_code"] = species_map.get(record.patient_species.lower(), 0.0)
 
         # Treatment response encoding
         response_map = {"good": 1.0, "fair": 0.5, "poor": 0.0, None: 0.0}
-        features["treatment_response_code"] = response_map.get(
-            record.treatment_response, 0.0
-        )
+        features["treatment_response_code"] = response_map.get(record.treatment_response, 0.0)
 
         return features
 
@@ -360,9 +354,7 @@ class AdaptiveConfidenceCalculator:
 
         # Calculate calibration adjustment
         if record.initial_predictions:
-            record.initial_predictions.get(
-                record.actual_diagnosis, 0.0
-            )
+            record.initial_predictions.get(record.actual_diagnosis, 0.0)
             if record.final_diagnosis_confirmed:
                 # Increase calibration for correct predictions
                 self.vet_calibrations[record.veterinarian_id] *= 1.01
@@ -392,11 +384,13 @@ class AdaptiveConfidenceCalculator:
 
         self.species_adjustments[record.patient_species][record.actual_diagnosis] += 1.0
 
-    def adjust_predictions(self,
-                          initial_predictions: Dict[str, float],
-                          veterinarian_id: Optional[str] = None,
-                          clinic_id: Optional[str] = None,
-                          species: Optional[str] = None) -> Dict[str, float]:
+    def adjust_predictions(
+        self,
+        initial_predictions: Dict[str, float],
+        veterinarian_id: Optional[str] = None,
+        clinic_id: Optional[str] = None,
+        species: Optional[str] = None,
+    ) -> Dict[str, float]:
         """Adjust predictions using learned patterns.
 
         Args:
@@ -413,10 +407,7 @@ class AdaptiveConfidenceCalculator:
         # Apply veterinarian calibration
         if veterinarian_id and veterinarian_id in self.vet_calibrations:
             calibration = self.vet_calibrations[veterinarian_id]
-            adjusted = {
-                disease: min(1.0, conf * calibration)
-                for disease, conf in adjusted.items()
-            }
+            adjusted = {disease: min(1.0, conf * calibration) for disease, conf in adjusted.items()}
 
         # Apply clinic-specific adjustments
         if clinic_id and clinic_id in self.clinic_patterns:
@@ -427,7 +418,7 @@ class AdaptiveConfidenceCalculator:
                 for disease in adjusted:
                     prevalence = clinic_diseases.get(disease, 0.0) / total_cases
                     # Boost confidence if disease is common in clinic
-                    adjusted[disease] *= (1.0 + prevalence * 0.2)
+                    adjusted[disease] *= 1.0 + prevalence * 0.2
                     adjusted[disease] = min(1.0, adjusted[disease])
 
         # Apply species-specific adjustments
@@ -439,7 +430,7 @@ class AdaptiveConfidenceCalculator:
                 for disease in adjusted:
                     prevalence = species_diseases.get(disease, 0.0) / total_cases
                     # Boost confidence if disease is common in species
-                    adjusted[disease] *= (1.0 + prevalence * 0.15)
+                    adjusted[disease] *= 1.0 + prevalence * 0.15
                     adjusted[disease] = min(1.0, adjusted[disease])
 
         # Normalize so sum ≤ 1.0
@@ -472,9 +463,7 @@ class AdaptiveConfidenceCalculator:
 
         for disease in diseases:
             disease_records = [r for r in records if r.actual_diagnosis == disease]
-            predicted_correct = sum(
-                1 for r in disease_records if r.final_diagnosis_confirmed
-            )
+            predicted_correct = sum(1 for r in disease_records if r.final_diagnosis_confirmed)
 
             if disease_records:
                 precision[disease] = predicted_correct / len(disease_records)
@@ -482,8 +471,7 @@ class AdaptiveConfidenceCalculator:
 
                 if precision[disease] + recall[disease] > 0:
                     f1_score[disease] = (
-                        2 * (precision[disease] * recall[disease])
-                        / (precision[disease] + recall[disease])
+                        2 * (precision[disease] * recall[disease]) / (precision[disease] + recall[disease])
                     )
                 else:
                     f1_score[disease] = 0.0
@@ -553,9 +541,7 @@ class AdaptiveConfidenceCalculator:
         """
         records = self.feedback_collector.records
         if len(records) < 20:
-            logger.warning(
-                f"Insufficient records for training (need ≥20, have {len(records)})"
-            )
+            logger.warning(f"Insufficient records for training (need ≥20, have {len(records)})")
             return False
 
         logger.info(f"Training {model_type.value} model with {len(records)} records")
@@ -603,15 +589,12 @@ class AdaptiveConfidenceCalculator:
             "vet_id": vet_id,
             "records": len(records),
             "accuracy": round(accuracy, 4),
-            "calibration_factor": round(
-                self.vet_calibrations.get(vet_id, 1.0), 4
-            ),
+            "calibration_factor": round(self.vet_calibrations.get(vet_id, 1.0), 4),
             "avg_confidence": round(
-                sum(
-                    max(r.initial_predictions.values())
-                    for r in records if r.initial_predictions
-                ) / len(records) if records else 0,
-                4
+                sum(max(r.initial_predictions.values()) for r in records if r.initial_predictions) / len(records)
+                if records
+                else 0,
+                4,
             ),
         }
 
@@ -628,35 +611,23 @@ class AdaptiveConfidenceCalculator:
         # Get top diseases in clinic
         disease_counts = {}
         for record in records:
-            disease_counts[record.actual_diagnosis] = (
-                disease_counts.get(record.actual_diagnosis, 0) + 1
-            )
+            disease_counts[record.actual_diagnosis] = disease_counts.get(record.actual_diagnosis, 0) + 1
 
-        top_diseases = sorted(
-            disease_counts.items(), key=lambda x: x[1], reverse=True
-        )[:5]
+        top_diseases = sorted(disease_counts.items(), key=lambda x: x[1], reverse=True)[:5]
 
         return {
             "clinic_id": clinic_id,
             "records": len(records),
             "accuracy": round(accuracy, 4),
-            "top_diseases": [
-                {"disease": d, "count": c} for d, c in top_diseases
-            ],
+            "top_diseases": [{"disease": d, "count": c} for d, c in top_diseases],
         }
 
     def to_dict(self) -> Dict:
         """Export calculator state to dict."""
         return {
             "feedback_statistics": self.get_feedback_statistics(),
-            "veterinarian_calibrations": {
-                vet_id: round(cal, 4)
-                for vet_id, cal in self.vet_calibrations.items()
-            },
+            "veterinarian_calibrations": {vet_id: round(cal, 4) for vet_id, cal in self.vet_calibrations.items()},
             "models": self.models,
-            "metrics": {
-                model_type: metrics.to_dict()
-                for model_type, metrics in self.metrics.items()
-            },
+            "metrics": {model_type: metrics.to_dict() for model_type, metrics in self.metrics.items()},
             "last_trained": self.last_trained.isoformat() if self.last_trained else None,
         }

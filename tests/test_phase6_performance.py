@@ -121,15 +121,9 @@ class TestMemoryUsage:
 
     def test_many_disease_candidates(self):
         """Test handling of many disease candidates."""
-        many_candidates = [
-            {"name": f"Disease_{i}", "match_percent": 50 - i}
-            for i in range(30)
-        ]
+        many_candidates = [{"name": f"Disease_{i}", "match_percent": 50 - i} for i in range(30)]
 
-        disease_db = [
-            {"name": f"Disease_{i}", "symptoms": ["symptom_1"]}
-            for i in range(30)
-        ]
+        disease_db = [{"name": f"Disease_{i}", "symptoms": ["symptom_1"]} for i in range(30)]
 
         result = MultiDiseaseAnalyzer.analyze_for_multidisease(
             symptom_ids=["symptom_1"],
@@ -158,10 +152,7 @@ class TestScalability:
 
         # Larger number
         result_large = MultiDiseaseDetector.generate_multidisease_candidates(
-            suspected_diseases=[
-                {"name": f"Disease_{i}", "match_percent": 70 - i * 2}
-                for i in range(10)
-            ],
+            suspected_diseases=[{"name": f"Disease_{i}", "match_percent": 70 - i * 2} for i in range(10)],
             detected_symptoms=["symptom_1", "symptom_2"],
             patient_context=None,
         )

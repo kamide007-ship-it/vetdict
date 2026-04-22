@@ -75,6 +75,7 @@ class TestParameterSuggestions:
         }
 
         from api.ai.accuracy_tracker import AIAccuracyTracker
+
         AIAccuracyTracker()
         ai_accuracy = {
             "status": "ready",
@@ -160,7 +161,9 @@ class TestParameterSuggestions:
 
         learning_data = {
             "feedback_records": learning_store_instance._get_state()["learning_metrics"]["feedback_records"],
-            "symptom_disease_patterns": learning_store_instance._get_state()["learning_metrics"]["symptom_disease_patterns"],
+            "symptom_disease_patterns": learning_store_instance._get_state()["learning_metrics"][
+                "symptom_disease_patterns"
+            ],
             "personalization_impact": [],
         }
 
@@ -309,9 +312,7 @@ class TestApplyTuning:
             "confidence_score": 0.75,
         }
 
-        adjusted, reason = tuner.apply_learning_driven_tuning(
-            state, learning_signals, min_confidence=0.7
-        )
+        adjusted, reason = tuner.apply_learning_driven_tuning(state, learning_signals, min_confidence=0.7)
 
         assert adjusted is True
         assert state["k"] == 1.55
@@ -326,9 +327,7 @@ class TestApplyTuning:
             "confidence_score": 0.5,
         }
 
-        adjusted, reason = tuner.apply_learning_driven_tuning(
-            state, learning_signals, min_confidence=0.7
-        )
+        adjusted, reason = tuner.apply_learning_driven_tuning(state, learning_signals, min_confidence=0.7)
 
         assert adjusted is False
         assert state["k"] == 1.5  # Unchanged
@@ -344,9 +343,7 @@ class TestApplyTuning:
         }
 
         # The suggestion should be clamped in suggest_parameter_adjustments
-        adjusted, reason = tuner.apply_learning_driven_tuning(
-            state, learning_signals, min_confidence=0.7
-        )
+        adjusted, reason = tuner.apply_learning_driven_tuning(state, learning_signals, min_confidence=0.7)
 
         assert adjusted is True
         # Values should be set as suggested (caller responsible for bounds)
@@ -391,7 +388,9 @@ class TestAffectedDomains:
                 )
 
         learning_data = {
-            "symptom_disease_patterns": learning_store_instance._get_state()["learning_metrics"]["symptom_disease_patterns"],
+            "symptom_disease_patterns": learning_store_instance._get_state()["learning_metrics"][
+                "symptom_disease_patterns"
+            ],
         }
 
         domains = tuner._get_affected_domains(learning_data)

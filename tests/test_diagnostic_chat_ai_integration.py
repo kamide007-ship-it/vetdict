@@ -146,6 +146,7 @@ class TestDiagnosticChatAIIntegration:
         """Test that diagnostic_chat module imports correctly."""
         try:
             from api.diagnostic_chat import diagnostic_bp, evaluate_with_ai_confidence
+
             assert diagnostic_bp is not None
             assert callable(evaluate_with_ai_confidence)
         except ImportError:
@@ -156,10 +157,11 @@ class TestDiagnosticChatAIIntegration:
         """Test that AI extractor lazy-loading doesn't crash."""
         try:
             from api.diagnostic_chat import _get_ai_extractor
+
             # Should not raise exception
             extractor = _get_ai_extractor()
             # Can be None if disabled or unavailable
-            assert extractor is None or hasattr(extractor, 'extract')
+            assert extractor is None or hasattr(extractor, "extract")
         except ImportError:
             pytest.skip("Required modules not available")
 
@@ -167,10 +169,11 @@ class TestDiagnosticChatAIIntegration:
         """Test that expected helper functions exist in diagnostic_chat."""
         try:
             from api import diagnostic_chat
+
             # Should have these functions
-            assert hasattr(diagnostic_chat, 'extract_symptoms_from_text')
-            assert hasattr(diagnostic_chat, 'match_symptoms_to_diseases')
-            assert hasattr(diagnostic_chat, 'evaluate_with_ai_confidence')
+            assert hasattr(diagnostic_chat, "extract_symptoms_from_text")
+            assert hasattr(diagnostic_chat, "match_symptoms_to_diseases")
+            assert hasattr(diagnostic_chat, "evaluate_with_ai_confidence")
         except ImportError:
             pytest.skip("Flask not available")
 
@@ -200,6 +203,7 @@ class TestPhase2CIntegrationSignatures:
         """Test that AI extractor functionality is available."""
         try:
             from api.diagnostic_chat import _get_ai_extractor
+
             assert callable(_get_ai_extractor)
         except ImportError:
             pytest.skip("Flask not available")
@@ -268,9 +272,7 @@ class TestPhase2CDataFlow:
             "method": "claude",
             "cache_hit": False,
             "fallback_used": False,
-            "interactions": [
-                {"pair": ["coughing", "fever"], "weight": 0.5, "boost_factor": 0.08}
-            ],
+            "interactions": [{"pair": ["coughing", "fever"], "weight": 0.5, "boost_factor": 0.08}],
             "personalization": {
                 "age_stage": "senior",
                 "extracted_age_years": 8.5,

@@ -180,9 +180,7 @@ class TestAnalyzeWithConfidence:
 
     def test_analyze_with_high_confidence(self):
         """Test analyze with high confidence."""
-        result = output_gate.analyze(
-            "This might definitely work and always succeed.", confidence=0.9
-        )
+        result = output_gate.analyze("This might definitely work and always succeed.", confidence=0.9)
 
         assert "psi_modifier_adjusted" in result
         assert result["psi_modifier_adjusted"] > result["psi_modifier"]
@@ -190,9 +188,7 @@ class TestAnalyzeWithConfidence:
 
     def test_analyze_with_low_confidence(self):
         """Test analyze with low confidence."""
-        result = output_gate.analyze(
-            "This will definitely work.", confidence=0.3
-        )
+        result = output_gate.analyze("This will definitely work.", confidence=0.3)
 
         assert "psi_modifier_adjusted" in result
         assert result["psi_modifier_adjusted"] < result["psi_modifier"]

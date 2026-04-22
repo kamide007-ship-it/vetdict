@@ -15,8 +15,14 @@ DRUG_CONTRAINDICATIONS = [
     # === Cardiovascular ===
     {
         "drug_patterns": ["dexmedetomidine", "medetomidine", "デクスメデトミジン", "メデトミジン"],
-        "conditions": ["cardiac_disease", "heart_failure", "cardiomyopathy",
-                       "aortic_stenosis", "pulmonic_stenosis", "bradycardia"],
+        "conditions": [
+            "cardiac_disease",
+            "heart_failure",
+            "cardiomyopathy",
+            "aortic_stenosis",
+            "pulmonic_stenosis",
+            "bradycardia",
+        ],
         "severity": SEVERITY_CONTRAINDICATED,
         "message_ja": "α2作動薬は心疾患に禁忌。徐脈・高度房室ブロック・心拍出量低下のリスク。代替: ブトルファノール/ミダゾラム",
         "message_en": "Alpha-2 agonists contraindicated in cardiac disease. Risk of bradycardia, AV block, decreased cardiac output. Alternative: butorphanol/midazolam",
@@ -37,25 +43,37 @@ DRUG_CONTRAINDICATIONS = [
     },
     # === GI / Hepatic ===
     {
-        "drug_patterns": ["nsaid", "meloxicam", "carprofen", "firocoxib",
-                          "メロキシカム", "カルプロフェン", "フィロコキシブ"],
+        "drug_patterns": [
+            "nsaid",
+            "meloxicam",
+            "carprofen",
+            "firocoxib",
+            "メロキシカム",
+            "カルプロフェン",
+            "フィロコキシブ",
+        ],
         "conditions": ["renal_disease", "kidney_failure", "ckd", "aki"],
         "severity": SEVERITY_CONTRAINDICATED,
         "message_ja": "NSAIDsは腎疾患に禁忌。腎血流低下による急性腎障害のリスク。代替: オピオイド（ブトルファノール、ブプレノルフィン）",
         "message_en": "NSAIDs contraindicated in renal disease. Risk of acute kidney injury from decreased renal blood flow. Alternative: opioids (butorphanol, buprenorphine)",
     },
     {
-        "drug_patterns": ["nsaid", "meloxicam", "carprofen", "firocoxib",
-                          "メロキシカム", "カルプロフェン", "フィロコキシブ"],
-        "conditions": ["gi_ulcer", "gi_bleeding", "gastric_ulcer",
-                       "inflammatory_bowel_disease"],
+        "drug_patterns": [
+            "nsaid",
+            "meloxicam",
+            "carprofen",
+            "firocoxib",
+            "メロキシカム",
+            "カルプロフェン",
+            "フィロコキシブ",
+        ],
+        "conditions": ["gi_ulcer", "gi_bleeding", "gastric_ulcer", "inflammatory_bowel_disease"],
         "severity": SEVERITY_CONTRAINDICATED,
         "message_ja": "NSAIDsは消化管潰瘍・出血に禁忌。消化管出血悪化のリスク。代替: オピオイド鎮痛",
         "message_en": "NSAIDs contraindicated in GI ulceration/bleeding. Risk of worsening GI hemorrhage. Alternative: opioid analgesia",
     },
     {
-        "drug_patterns": ["nsaid", "meloxicam", "carprofen",
-                          "メロキシカム", "カルプロフェン"],
+        "drug_patterns": ["nsaid", "meloxicam", "carprofen", "メロキシカム", "カルプロフェン"],
         "conditions": ["hepatic_disease", "liver_failure", "hepatic_lipidosis"],
         "severity": SEVERITY_CAUTION,
         "message_ja": "NSAIDsは肝疾患で慎重投与。肝代謝低下により薬物蓄積のリスク。用量減量を検討",
@@ -64,8 +82,7 @@ DRUG_CONTRAINDICATIONS = [
     # === Respiratory ===
     {
         "drug_patterns": ["morphine", "モルヒネ"],
-        "conditions": ["respiratory_disease", "upper_airway_obstruction",
-                       "brachycephalic", "laryngeal_paralysis"],
+        "conditions": ["respiratory_disease", "upper_airway_obstruction", "brachycephalic", "laryngeal_paralysis"],
         "severity": SEVERITY_CAUTION,
         "message_ja": "モルヒネは呼吸器疾患で慎重投与。呼吸抑制・ヒスタミン遊離リスク。低用量から開始し呼吸モニタリング必須",
         "message_en": "Morphine: use with caution in respiratory disease. Risk of respiratory depression and histamine release. Start low dose, monitor respiration closely",
@@ -130,16 +147,28 @@ DRUG_CONTRAINDICATIONS = [
     },
     # === Endocrine / Metabolic ===
     {
-        "drug_patterns": ["dexmedetomidine", "medetomidine", "xylazine",
-                          "デクスメデトミジン", "メデトミジン", "キシラジン"],
+        "drug_patterns": [
+            "dexmedetomidine",
+            "medetomidine",
+            "xylazine",
+            "デクスメデトミジン",
+            "メデトミジン",
+            "キシラジン",
+        ],
         "conditions": ["diabetes", "diabetic_ketoacidosis", "糖尿病"],
         "severity": SEVERITY_CAUTION,
         "message_ja": "α2作動薬は糖尿病で慎重投与。インスリン分泌抑制により高血糖を悪化させるリスク。血糖モニタリング必須",
         "message_en": "Alpha-2 agonists: use with caution in diabetes. Risk of worsening hyperglycemia via insulin suppression. Monitor blood glucose",
     },
     {
-        "drug_patterns": ["dexmedetomidine", "medetomidine", "xylazine",
-                          "デクスメデトミジン", "メデトミジン", "キシラジン"],
+        "drug_patterns": [
+            "dexmedetomidine",
+            "medetomidine",
+            "xylazine",
+            "デクスメデトミジン",
+            "メデトミジン",
+            "キシラジン",
+        ],
         "conditions": ["insulinoma", "インスリノーマ"],
         "severity": SEVERITY_MONITOR,
         "message_ja": "α2作動薬はインスリノーマで血糖変動を引き起こす可能性。術中の血糖モニタリング（30分毎）を推奨",
@@ -155,10 +184,8 @@ DRUG_CONTRAINDICATIONS = [
     },
     # === Coagulopathy ===
     {
-        "drug_patterns": ["nsaid", "meloxicam", "carprofen",
-                          "メロキシカム", "カルプロフェン"],
-        "conditions": ["coagulopathy", "thrombocytopenia", "dic",
-                       "凝固障害", "血小板減少症"],
+        "drug_patterns": ["nsaid", "meloxicam", "carprofen", "メロキシカム", "カルプロフェン"],
+        "conditions": ["coagulopathy", "thrombocytopenia", "dic", "凝固障害", "血小板減少症"],
         "severity": SEVERITY_CONTRAINDICATED,
         "message_ja": "NSAIDsは凝固障害・血小板減少症に禁忌。出血リスク増大。代替: オピオイド鎮痛",
         "message_en": "NSAIDs contraindicated in coagulopathy/thrombocytopenia. Increased bleeding risk. Alternative: opioid analgesia",
@@ -239,8 +266,7 @@ DRUG_CONTRAINDICATIONS = [
         "message_en": "Tiletamine/zolazepam (Telazol): slow renal excretion in cats causes prolonged recovery. Near-contraindicated in cats with renal disease. Use lower dose than dogs. Ref: Carpenter (2018)",
     },
     {
-        "drug_patterns": ["penicillin", "ペニシリン", "amoxicillin", "アモキシシリン",
-                          "ampicillin", "アンピシリン"],
+        "drug_patterns": ["penicillin", "ペニシリン", "amoxicillin", "アモキシシリン", "ampicillin", "アンピシリン"],
         "conditions": ["guinea_pig", "モルモット"],
         "severity": SEVERITY_CONTRAINDICATED,
         "message_ja": "ペニシリン系抗菌薬はモルモットに禁忌。致死性の腸内細菌叢破壊（dysbiosis）を引き起こす。代替: エンロフロキサシン、TMS。参考: Quesenberry & Carpenter (2020)",
@@ -283,11 +309,13 @@ def check_contraindications(drug_name, conditions=None, species=None, breed=None
         cond_match = any(c.lower() in all_tags for c in rule["conditions"])
         if not cond_match:
             continue
-        warnings.append({
-            "severity": rule["severity"],
-            "message_ja": rule["message_ja"],
-            "message_en": rule["message_en"],
-        })
+        warnings.append(
+            {
+                "severity": rule["severity"],
+                "message_ja": rule["message_ja"],
+                "message_en": rule["message_en"],
+            }
+        )
 
     return warnings
 

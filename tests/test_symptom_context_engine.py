@@ -82,8 +82,7 @@ class TestSymptomContextualizer:
                 "name_ja": "腸炎",
                 "symptoms": ["vomiting", "diarrhea", "lethargy"],
                 "pathophysiology": (
-                    "Viral or bacterial infection causes gastric inflammation. "
-                    "Vomiting is a common secondary symptom."
+                    "Viral or bacterial infection causes gastric inflammation. Vomiting is a common secondary symptom."
                 ),
                 "severity_score": 0.5,
                 "prevalence_score": 0.6,
@@ -171,18 +170,14 @@ class TestAmbiguitySolver:
             {
                 "name": "Pancreatitis",
                 "symptoms": ["vomiting", "abdominal_pain", "anorexia", "lethargy"],
-                "pathophysiology": (
-                    "Primary symptom: acute abdominal pain. "
-                    "Vomiting is common secondary symptom."
-                ),
+                "pathophysiology": ("Primary symptom: acute abdominal pain. Vomiting is common secondary symptom."),
                 "severity_score": 0.8,
             },
             {
                 "name": "Gastroenteritis",
                 "symptoms": ["vomiting", "diarrhea", "lethargy", "fever"],
                 "pathophysiology": (
-                    "Infection causes gastroenteritis. Vomiting appears early. "
-                    "Main symptom is diarrhea."
+                    "Infection causes gastroenteritis. Vomiting appears early. Main symptom is diarrhea."
                 ),
                 "severity_score": 0.5,
             },
@@ -190,8 +185,7 @@ class TestAmbiguitySolver:
                 "name": "Hepatitis",
                 "symptoms": ["jaundice", "lethargy", "anorexia", "vomiting"],
                 "pathophysiology": (
-                    "Liver inflammation leads to multiple symptoms. "
-                    "Vomiting is secondary manifestation."
+                    "Liver inflammation leads to multiple symptoms. Vomiting is secondary manifestation."
                 ),
                 "severity_score": 0.7,
             },
@@ -226,9 +220,7 @@ class TestAmbiguitySolver:
         )
 
         # "vomiting" is present in 3 diseases (ambiguous)
-        vomiting_report = next(
-            (r for r in reports if r.symptom_id == "vomiting"), None
-        )
+        vomiting_report = next((r for r in reports if r.symptom_id == "vomiting"), None)
         assert vomiting_report is not None
 
         # Ambiguity score should be moderate to high (appears in multiple diseases)
@@ -242,9 +234,7 @@ class TestAmbiguitySolver:
             disease_database=sample_diseases,
         )
 
-        vomiting_report = next(
-            (r for r in reports if r.symptom_id == "vomiting"), None
-        )
+        vomiting_report = next((r for r in reports if r.symptom_id == "vomiting"), None)
         assert vomiting_report is not None
 
         # High ambiguity should recommend clarification
@@ -265,9 +255,7 @@ class TestAmbiguitySolver:
             disease_database=sample_diseases,
         )
 
-        vomiting_report = next(
-            (r for r in reports if r.symptom_id == "vomiting"), None
-        )
+        vomiting_report = next((r for r in reports if r.symptom_id == "vomiting"), None)
         assert vomiting_report is not None
 
         # If clarification is recommended, should have questions
@@ -332,9 +320,7 @@ class TestAmbiguitySolver:
             disease_database=sample_diseases,
         )
 
-        vomiting_report = next(
-            (r for r in reports if r.symptom_id == "vomiting"), None
-        )
+        vomiting_report = next((r for r in reports if r.symptom_id == "vomiting"), None)
         assert vomiting_report is not None
         assert vomiting_report.predominant_disease is not None
         assert vomiting_report.predominant_disease in [
@@ -351,9 +337,7 @@ class TestAmbiguitySolver:
             disease_database=sample_diseases,
         )
 
-        vomiting_report = next(
-            (r for r in reports if r.symptom_id == "vomiting"), None
-        )
+        vomiting_report = next((r for r in reports if r.symptom_id == "vomiting"), None)
         assert vomiting_report is not None
         assert len(vomiting_report.competing_diseases) > 0
 
@@ -380,10 +364,7 @@ class TestSymptomContextIntegration:
             {
                 "name": "Osteoarthritis",
                 "symptoms": ["limping", "stiffness", "joint_pain"],
-                "pathophysiology": (
-                    "Cartilage degeneration causes joint pain. "
-                    "Limping occurs as consequence of pain."
-                ),
+                "pathophysiology": ("Cartilage degeneration causes joint pain. Limping occurs as consequence of pain."),
                 "severity_score": 0.5,
             },
         ]

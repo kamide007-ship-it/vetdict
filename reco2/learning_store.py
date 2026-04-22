@@ -99,9 +99,7 @@ class LearningDataStore:
         self._update_symptom_disease_patterns(state, feedback)
         self._update_personalization_impact(state, feedback)
 
-    def _update_ai_accuracy_metrics(
-        self, state: Dict[str, Any], feedback: FeedbackRecord
-    ) -> None:
+    def _update_ai_accuracy_metrics(self, state: Dict[str, Any], feedback: FeedbackRecord) -> None:
         """Update AI extraction accuracy metrics from feedback."""
         metrics = state["learning_metrics"]
         domain = feedback.disease_domain or "general"
@@ -148,21 +146,19 @@ class LearningDataStore:
         incorrect = domain_entry.get("incorrect_extractions", 0)
         old_avg_failed = domain_entry["avg_confidence_failed"]
         if not is_correct:
-            domain_entry["avg_confidence_failed"] = (old_avg_failed * (incorrect - 1) + feedback.ai_confidence) / incorrect
+            domain_entry["avg_confidence_failed"] = (
+                old_avg_failed * (incorrect - 1) + feedback.ai_confidence
+            ) / incorrect
 
         # Calculate calibration and rates
         correct = domain_entry["correct_extractions"]
         total = domain_entry["total_extractions"]
-        domain_entry["confidence_calibration"] = (
-            correct / total if total > 0 else 0.0
-        )
+        domain_entry["confidence_calibration"] = correct / total if total > 0 else 0.0
 
         domain_entry["last_updated"] = store._now_iso()
         self._save_state()
 
-    def _update_symptom_disease_patterns(
-        self, state: Dict[str, Any], feedback: FeedbackRecord
-    ) -> None:
+    def _update_symptom_disease_patterns(self, state: Dict[str, Any], feedback: FeedbackRecord) -> None:
         """Update learned symptom-disease patterns."""
         if not feedback.extracted_symptoms:
             return
@@ -178,12 +174,7 @@ class LearningDataStore:
 
         # Find or create pattern
         pattern = next(
-            (
-                p
-                for p in patterns
-                if (tuple(sorted(p.get("symptoms", []))), p.get("disease_id"))
-                == pattern_key
-            ),
+            (p for p in patterns if (tuple(sorted(p.get("symptoms", []))), p.get("disease_id")) == pattern_key),
             None,
         )
 
@@ -204,28 +195,21 @@ class LearningDataStore:
             old_count = pattern["sample_count"]
             new_count = old_count + 1
             old_accuracy = pattern["accuracy_rate"]
-            pattern["accuracy_rate"] = (
-                (old_accuracy * old_count + (1.0 if is_correct else 0.0))
-                / new_count
-            )
+            pattern["accuracy_rate"] = (old_accuracy * old_count + (1.0 if is_correct else 0.0)) / new_count
             pattern["sample_count"] = new_count
             pattern["last_updated"] = store._now_iso()
 
         metrics["symptom_disease_patterns"] = patterns
         self._save_state()
 
-    def _update_personalization_impact(
-        self, state: Dict[str, Any], feedback: FeedbackRecord
-    ) -> None:
+    def _update_personalization_impact(self, state: Dict[str, Any], feedback: FeedbackRecord) -> None:
         """Update personalization effectiveness metrics."""
         # Personalization data comes from ai_result
         # For now, we track general personalization impact
         # (more detailed tracking would require ai_result metadata)
         pass
 
-    def get_symptom_disease_patterns(
-        self, symptom_ids: Optional[List[str]] = None
-    ) -> List[Dict[str, Any]]:
+    def get_symptom_disease_patterns(self, symptom_ids: Optional[List[str]] = None) -> List[Dict[str, Any]]:
         """
         Retrieve learned symptom-disease relationships.
 
@@ -241,11 +225,7 @@ class LearningDataStore:
 
         if symptom_ids:
             # Filter to patterns containing all specified symptoms
-            patterns = [
-                p
-                for p in patterns
-                if all(sid in p.get("symptoms", []) for sid in symptom_ids)
-            ]
+            patterns = [p for p in patterns if all(sid in p.get("symptoms", []) for sid in symptom_ids)]
 
         # Sort by accuracy and sample count
         return sorted(
@@ -278,9 +258,7 @@ class LearningDataStore:
 
         return metrics[:limit]
 
-    def get_personalization_impact(
-        self, age_stage: Optional[str] = None
-    ) -> List[Dict[str, Any]]:
+    def get_personalization_impact(self, age_stage: Optional[str] = None) -> List[Dict[str, Any]]:
         """
         Analyze personalization effectiveness.
 
@@ -317,20 +295,12 @@ class LearningDataStore:
         patterns = metrics.get("symptom_disease_patterns", [])
 
         before_count = len(patterns)
-        patterns = [
-            p
-            for p in patterns
-            if datetime.fromisoformat(p.get("last_updated", "2000-01-01"))
-            > cutoff_date
-        ]
+        patterns = [p for p in patterns if datetime.fromisoformat(p.get("last_updated", "2000-01-01")) > cutoff_date]
         metrics["symptom_disease_patterns"] = patterns
 
         feedback_records = metrics.get("feedback_records", [])
         feedback_records = [
-            f
-            for f in feedback_records
-            if datetime.fromisoformat(f.get("timestamp", "2000-01-01"))
-            > cutoff_date
+            f for f in feedback_records if datetime.fromisoformat(f.get("timestamp", "2000-01-01")) > cutoff_date
         ]
         metrics["feedback_records"] = feedback_records
 
@@ -358,9 +328,7 @@ class LearningDataStore:
             "total_patterns_learned": len(patterns),
             "total_extractions": total_extractions,
             "total_correct_extractions": total_correct,
-            "overall_accuracy": (
-                total_correct / total_extractions if total_extractions > 0 else 0.0
-            ),
+            "overall_accuracy": (total_correct / total_extractions if total_extractions > 0 else 0.0),
             "domains_tracked": len(accuracy_data),
             "last_update": metrics.get("last_update"),
         }

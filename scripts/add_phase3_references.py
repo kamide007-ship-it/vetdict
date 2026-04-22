@@ -29,7 +29,7 @@ REF_DIABETES_JAVMA_2026_1 = {
     "issue": 3,
     "doi": "10.1007/s11259-026-11181-9",
     "pages": "",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_DIABETES_FRONTIERS_2026 = {
@@ -42,7 +42,7 @@ REF_DIABETES_FRONTIERS_2026 = {
     "issue": "",
     "pages": "1740713",
     "doi": "10.3389/fvets.2026.1740713",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_DIABETES_IMMUNOLOGY_2026 = {
@@ -55,7 +55,7 @@ REF_DIABETES_IMMUNOLOGY_2026 = {
     "issue": "",
     "pages": "1759373",
     "doi": "10.3389/fimmu.2026.1759373",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_DIABETES_JVIM_2026 = {
@@ -68,7 +68,7 @@ REF_DIABETES_JVIM_2026 = {
     "issue": 1,
     "doi": "10.1093/jvimsj/aalaf035",
     "pages": "",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_DIABETES_MICROORGANISMS_2025 = {
@@ -81,7 +81,7 @@ REF_DIABETES_MICROORGANISMS_2025 = {
     "issue": 12,
     "pages": "2881",
     "doi": "10.3390/microorganisms13122881",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -97,7 +97,7 @@ REF_HYPOTHYROID_CHOLECYSTITIS_2026 = {
     "issue": 1,
     "pages": "38-46",
     "doi": "10.1055/a-2768-1145",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_HYPOTHYROID_IMMUNE_2025 = {
@@ -110,7 +110,7 @@ REF_HYPOTHYROID_IMMUNE_2025 = {
     "issue": "",
     "pages": "1662178",
     "doi": "10.3389/fvets.2025.1662178",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_HYPOTHYROID_BOXER_2025 = {
@@ -123,7 +123,7 @@ REF_HYPOTHYROID_BOXER_2025 = {
     "issue": 1,
     "pages": "34",
     "doi": "10.1186/s12917-025-04931-5",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_HYPOTHYROID_DIARRHEA_2026 = {
@@ -136,7 +136,7 @@ REF_HYPOTHYROID_DIARRHEA_2026 = {
     "issue": "",
     "pages": "106507",
     "doi": "10.1016/j.tvjl.2025.106507",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -152,7 +152,7 @@ REF_CKD_AMMONIA_2026 = {
     "issue": 1,
     "pages": "",
     "doi": "10.1093/jvimsj/aalaf016",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_CKD_GREECE_2025 = {
@@ -165,7 +165,7 @@ REF_CKD_GREECE_2025 = {
     "issue": "",
     "pages": "1601044",
     "doi": "10.3389/fvets.2025.1601044",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_CKD_LEISHMANIOSIS_2025 = {
@@ -178,7 +178,7 @@ REF_CKD_LEISHMANIOSIS_2025 = {
     "issue": 5,
     "pages": "436",
     "doi": "10.3390/vetsci12050436",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_CKD_FELINE_BICARBONATE_2025 = {
@@ -191,7 +191,7 @@ REF_CKD_FELINE_BICARBONATE_2025 = {
     "issue": 11,
     "pages": "1097",
     "doi": "10.3390/vetsci12111097",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_CKD_ALUMINUM_2025 = {
@@ -204,7 +204,7 @@ REF_CKD_ALUMINUM_2025 = {
     "issue": 1,
     "pages": "",
     "doi": "10.1186/s12917-025-04788-8",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -220,7 +220,7 @@ REF_CHF_RAAS_2023 = {
     "issue": 6,
     "pages": "1353-1366",
     "doi": "10.1016/j.cvsm.2023.05.015",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_CHF_MMVD_2024 = {
@@ -233,7 +233,7 @@ REF_CHF_MMVD_2024 = {
     "issue": 5,
     "pages": "",
     "doi": "10.1111/jvim.17234",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_CHF_FUROSEMIDE_2023 = {
@@ -246,7 +246,7 @@ REF_CHF_FUROSEMIDE_2023 = {
     "issue": 4,
     "pages": "AR123-AR131",
     "doi": "10.2460/ajvr.23.02.0034",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -262,7 +262,7 @@ REF_PANCREATITIS_DIABETES_2026 = {
     "issue": 1,
     "doi": "10.1093/jvimsj/aalaf035",
     "pages": "",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_PANCREATITIS_FAT_2025 = {
@@ -275,7 +275,7 @@ REF_PANCREATITIS_FAT_2025 = {
     "issue": 3,
     "pages": "e1234",
     "doi": "10.1002/vms3.1234",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_PANCREATITIS_AMYLASE_2025 = {
@@ -288,7 +288,7 @@ REF_PANCREATITIS_AMYLASE_2025 = {
     "issue": "",
     "pages": "1645823",
     "doi": "10.3389/fvets.2025.1645823",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -304,7 +304,7 @@ REF_ATOPY_LYMPHFOOD_2025 = {
     "issue": "",
     "pages": "1657869",
     "doi": "10.3389/fvets.2025.1657869",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_ATOPY_BURDEN_2025 = {
@@ -317,7 +317,7 @@ REF_ATOPY_BURDEN_2025 = {
     "issue": 6,
     "pages": "338-349",
     "doi": "10.1055/a-2712-9246",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_ATOPY_PODODERMATITIS_2026 = {
@@ -330,7 +330,7 @@ REF_ATOPY_PODODERMATITIS_2026 = {
     "issue": "",
     "pages": "e009225",
     "doi": "10.29374/2527-2179.bjvm009225",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 # ============================================================================
@@ -346,7 +346,7 @@ REF_EPILEPSY_RETROSPECTIVE_2026 = {
     "issue": "",
     "pages": "1723038",
     "doi": "10.3389/fvets.2026.1723038",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_EPILEPSY_IMEPITOIN_2026 = {
@@ -359,7 +359,7 @@ REF_EPILEPSY_IMEPITOIN_2026 = {
     "issue": "",
     "pages": "1770972",
     "doi": "10.3389/fvets.2026.1770972",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_EPILEPSY_THROMBOELASTOGRAPHY_2024 = {
@@ -372,7 +372,7 @@ REF_EPILEPSY_THROMBOELASTOGRAPHY_2024 = {
     "issue": 4,
     "pages": "385-391",
     "doi": "10.1111/vcp.13380",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_EPILEPSY_MICROBIOTA_2024 = {
@@ -385,7 +385,7 @@ REF_EPILEPSY_MICROBIOTA_2024 = {
     "issue": "",
     "pages": "1385469",
     "doi": "10.3389/fvets.2024.1385469",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_EPILEPSY_LEVETIRACETAM_2024 = {
@@ -398,7 +398,7 @@ REF_EPILEPSY_LEVETIRACETAM_2024 = {
     "issue": 4,
     "pages": "2249-2256",
     "doi": "10.1111/jvim.17128",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -414,7 +414,7 @@ REF_FELINE_HYPERTHYROID_SDMA_2026 = {
     "issue": 2,
     "pages": "",
     "doi": "10.1177/1098612X261418859",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_FELINE_HYPERTHYROID_NEURO_2022 = {
@@ -427,7 +427,7 @@ REF_FELINE_HYPERTHYROID_NEURO_2022 = {
     "issue": 4,
     "pages": "146-149",
     "doi": "10.1111/avj.13140",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_FELINE_HYPERTHYROID_QOL_2020 = {
@@ -440,7 +440,7 @@ REF_FELINE_HYPERTHYROID_QOL_2020 = {
     "issue": 5,
     "pages": "1065-1084",
     "doi": "10.1016/j.cvsm.2020.06.004",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_FELINE_HYPERTHYROID_CARBIMAZOLE_2016 = {
@@ -453,7 +453,7 @@ REF_FELINE_HYPERTHYROID_CARBIMAZOLE_2016 = {
     "issue": 2,
     "pages": "",
     "doi": "10.1177/2055116916668198",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 # ============================================================================
@@ -469,7 +469,7 @@ REF_FIP_GS441524_2026_1 = {
     "issue": 3,
     "pages": "337",
     "doi": "10.3390/pathogens15030337",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_FIP_GS441524_TDM_2026 = {
@@ -482,7 +482,7 @@ REF_FIP_GS441524_TDM_2026 = {
     "issue": 3,
     "pages": "291",
     "doi": "10.3390/pathogens15030291",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_FIP_REMDESIVIR_INDUCTION_2026 = {
@@ -495,7 +495,7 @@ REF_FIP_REMDESIVIR_INDUCTION_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.1177/1098612X261435376",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_FIP_LYMPHOMA_2026 = {
@@ -508,7 +508,7 @@ REF_FIP_LYMPHOMA_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.1177/1098612X261434629",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 # ============================================================================
@@ -537,7 +537,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE HYPOTHYROIDISM
     "dog_hypothyroidism": {
         "prognosis_references": {
@@ -560,7 +559,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE CKD
     "dog_kidney_disease_ckd": {
         "prognosis_references": {
@@ -584,7 +582,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE CHF
     "dog_heart_disease_chf": {
         "prognosis_references": {
@@ -607,7 +604,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE PANCREATITIS
     "dog_pancreatitis": {
         "prognosis_references": {
@@ -630,7 +626,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE ATOPY
     "dog_allergic_dermatitis": {
         "prognosis_references": {
@@ -653,7 +648,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE EPILEPSY
     "dog_idiopathic_epilepsy": {
         "prognosis_references": {
@@ -677,7 +671,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE HYPERTHYROIDISM (Hypertrophic Cardiomyopathy form)
     "cat_feline_hyperthyroid_cardiomyopathy": {
         "prognosis_references": {
@@ -700,7 +693,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE FIP
     "cat_feline_infectious_peritonitis_fip_-_wet_form": {
         "prognosis_references": {
@@ -725,21 +717,25 @@ REFERENCE_MAP = {
     },
 }
 
+
 def load_diseases_json(file_path):
     """Load diseases from JSON file."""
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_diseases_json(data, file_path):
     """Save diseases to JSON file."""
-    with open(file_path, 'w', encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
 
 def add_references_to_disease(disease, references_data):
     """Add references to a disease record (working with list items)."""
     for ref_type, ref_content in references_data.items():
         if ref_type in disease:
             disease[ref_type] = ref_content
+
 
 def main():
     """Patch Phase 3 disease references into database."""
@@ -756,7 +752,7 @@ def main():
         # Find disease in list by id field
         found = False
         for disease in diseases:
-            if disease.get('id') == disease_id:
+            if disease.get("id") == disease_id:
                 add_references_to_disease(disease, references_data)
                 patched_count += 1
                 logger.info(f"✓ Patched {disease_id} with references")
@@ -770,16 +766,14 @@ def main():
     logger.info("\nSaving patched database...")
     save_diseases_json(diseases, db_path)
 
-    logger.info("\n" + "="*60)
+    logger.info("\n" + "=" * 60)
     logger.info("Phase 3 Reference Patching Complete")
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info(f"Patched: {patched_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Skipped: {skipped_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Database saved to: {db_path}")
 
+
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(message)s'
-    )
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     main()

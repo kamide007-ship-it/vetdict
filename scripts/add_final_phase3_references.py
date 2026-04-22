@@ -27,7 +27,7 @@ REF_FELINE_DISCOSPONDYLITIS_2025 = {
     "issue": 2,
     "pages": "",
     "doi": "10.1177/20551169251349741",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_FELINE_DISCOSPONDYLITIS_IMAGING_2020 = {
@@ -40,7 +40,7 @@ REF_FELINE_DISCOSPONDYLITIS_IMAGING_2020 = {
     "issue": 7,
     "pages": "631-640",
     "doi": "10.1177/1098612X19869705",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_FELINE_SEPTIC_ARTHRITIS_2025 = {
@@ -53,7 +53,7 @@ REF_FELINE_SEPTIC_ARTHRITIS_2025 = {
     "issue": 8,
     "pages": "1725",
     "doi": "10.3390/microorganisms13081725",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 # ============================================================================
@@ -69,7 +69,7 @@ REF_RABBIT_ENCEPHALITOZOON_REVIEW_2026 = {
     "issue": 2,
     "pages": "346",
     "doi": "10.3390/ani16020346",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_RABBIT_ENCEPHALITOZOON_SURVEY_2024 = {
@@ -82,7 +82,7 @@ REF_RABBIT_ENCEPHALITOZOON_SURVEY_2024 = {
     "issue": 22,
     "pages": "3295",
     "doi": "10.3390/ani14223295",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_RABBIT_ENCEPHALITOZOON_CASE_2024 = {
@@ -95,7 +95,7 @@ REF_RABBIT_ENCEPHALITOZOON_CASE_2024 = {
     "issue": 12,
     "pages": "1122",
     "doi": "10.3390/pathogens13121122",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 # ============================================================================
@@ -111,7 +111,7 @@ REF_BIRD_ASPERGILLOSIS_REVIEW_2025 = {
     "issue": 6,
     "pages": "",
     "doi": "10.1002/vms3.70605",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_BIRD_ASPERGILLOSIS_CRISPR_2026 = {
@@ -124,7 +124,7 @@ REF_BIRD_ASPERGILLOSIS_CRISPR_2026 = {
     "issue": 1,
     "pages": "",
     "doi": "10.1007/s42770-026-01889-w",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_BIRD_ASPERGILLOSIS_FEED_2025 = {
@@ -137,7 +137,7 @@ REF_BIRD_ASPERGILLOSIS_FEED_2025 = {
     "issue": 6,
     "pages": "597",
     "doi": "10.3390/vetsci12060597",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -153,7 +153,7 @@ REF_REPTILE_PNEUMONIA_PYTHON_2025 = {
     "issue": 6,
     "pages": "549",
     "doi": "10.3390/antibiotics14060549",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_REPTILE_PNEUMONIA_PSEUDOMONAS_2023 = {
@@ -166,7 +166,7 @@ REF_REPTILE_PNEUMONIA_PSEUDOMONAS_2023 = {
     "issue": 3,
     "pages": "2403-2412",
     "doi": "10.1007/s42770-023-01038-7",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_REPTILE_PNEUMONIA_REVIEW_2021 = {
@@ -179,7 +179,7 @@ REF_REPTILE_PNEUMONIA_REVIEW_2021 = {
     "issue": 2,
     "pages": "321-340",
     "doi": "10.1016/j.cvex.2021.01.003",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 # ============================================================================
@@ -195,7 +195,7 @@ REF_HAMSTER_ADRENAL_PATHOLOGY_2009 = {
     "issue": "",
     "pages": "",
     "doi": "",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_HAMSTER_ADRENAL_ENDOCRINE_2016 = {
@@ -208,7 +208,7 @@ REF_HAMSTER_ADRENAL_ENDOCRINE_2016 = {
     "issue": "",
     "pages": "",
     "doi": "",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -224,7 +224,7 @@ REF_FERRET_ADRENAL_GNRH_2013 = {
     "issue": 41,
     "pages": "4619-4623",
     "doi": "10.1016/j.vaccine.2013.07.016",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_FERRET_ADRENAL_DIAGNOSTIC_2010 = {
@@ -237,7 +237,7 @@ REF_FERRET_ADRENAL_DIAGNOSTIC_2010 = {
     "issue": 3,
     "pages": "439-452",
     "doi": "10.1016/j.cvex.2010.05.008",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_FERRET_ADRENAL_GONADECTOMY_2006 = {
@@ -250,7 +250,7 @@ REF_FERRET_ADRENAL_GONADECTOMY_2006 = {
     "issue": 2,
     "pages": "97-117",
     "doi": "10.1354/vp.43-2-97",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -266,7 +266,7 @@ REF_HEDGEHOG_UTERINE_YTHDC2_2025 = {
     "issue": "",
     "pages": "155879",
     "doi": "10.1016/j.prp.2025.155879",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_HEDGEHOG_UTERINE_SHH_2024 = {
@@ -279,7 +279,7 @@ REF_HEDGEHOG_UTERINE_SHH_2024 = {
     "issue": 19,
     "pages": "10443",
     "doi": "10.3390/ijms251910443",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -295,7 +295,7 @@ REF_GUINEA_PIG_PNEUMONIA_INFLUENZA_2023 = {
     "issue": "",
     "pages": "e00356-23",
     "doi": "10.1128/jvi.00356-23",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_GUINEA_PIG_PNEUMONIA_RHODOCOCCUS_2018 = {
@@ -308,7 +308,7 @@ REF_GUINEA_PIG_PNEUMONIA_RHODOCOCCUS_2018 = {
     "issue": "",
     "pages": "",
     "doi": "10.1016/j.vetmic.2017.11.019",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -334,7 +334,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE SEPTIC ARTHRITIS
     "cat_septic_arthritis": {
         "prognosis_references": {
@@ -353,7 +352,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # RABBIT ENCEPHALITOZOON CUNICULI
     "rabbit_encephalitozoon_cuniculi_e._cuniculi": {
         "prognosis_references": {
@@ -375,7 +373,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # BIRD ASPERGILLOSIS
     "bird_aspergillosis_–_chronic_granulomatous_form": {
         "prognosis_references": {
@@ -398,7 +395,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # REPTILE BACTERIAL PNEUMONIA
     "reptile_bacterial_pneumonia_chronic": {
         "prognosis_references": {
@@ -420,7 +416,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # HAMSTER ADRENAL TUMOR
     "hamster_adrenal_tumor": {
         "prognosis_references": {
@@ -440,7 +435,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FERRET ADRENAL TUMOR
     "ferret_adrenal_tumor_adenoma": {
         "prognosis_references": {
@@ -462,7 +456,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # HEDGEHOG UTERINE ADENOCARCINOMA
     "hedgehog_uterine_adenocarcinoma": {
         "prognosis_references": {
@@ -482,7 +475,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # GUINEA PIG BACTERIAL PNEUMONIA
     "guinea_pig_bacterial_pneumonia": {
         "prognosis_references": {
@@ -504,21 +496,25 @@ REFERENCE_MAP = {
     },
 }
 
+
 def load_diseases_json(file_path):
     """Load diseases from JSON file (list format)."""
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_diseases_json(data, file_path):
     """Save diseases to JSON file."""
-    with open(file_path, 'w', encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
 
 def add_references_to_disease(disease, references_data):
     """Add references to a disease record (working with list items)."""
     for ref_type, ref_content in references_data.items():
         if ref_type in disease:
             disease[ref_type] = ref_content
+
 
 def main():
     """Patch final Phase 3 disease references into database."""
@@ -535,7 +531,7 @@ def main():
         # Find disease in list by id field
         found = False
         for disease in diseases:
-            if disease.get('id') == disease_id:
+            if disease.get("id") == disease_id:
                 add_references_to_disease(disease, references_data)
                 patched_count += 1
                 logger.info(f"✓ Patched {disease_id} with references")
@@ -549,16 +545,14 @@ def main():
     logger.info("\nSaving patched database...")
     save_diseases_json(diseases, db_path)
 
-    logger.info("\n" + "="*60)
+    logger.info("\n" + "=" * 60)
     logger.info("Final Phase 3 Reference Patching Complete")
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info(f"Patched: {patched_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Skipped: {skipped_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Database saved to: {db_path}")
 
+
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(message)s'
-    )
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     main()

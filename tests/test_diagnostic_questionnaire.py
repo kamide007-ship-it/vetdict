@@ -72,47 +72,33 @@ class TestGenerateQuestions:
         assert result == []
 
     def test_single_disease_returns_empty(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            [make_disease("Pancreatitis", 80)], []
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions([make_disease("Pancreatitis", 80)], [])
         assert result == []
 
     def test_returns_list_of_diagnostic_questions(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            MANY_DISEASES, ["vomiting"], limit=3
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions(MANY_DISEASES, ["vomiting"], limit=3)
         assert isinstance(result, list)
         for q in result:
             assert isinstance(q, DiagnosticQuestion)
 
     def test_respects_limit(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            MANY_DISEASES, ["vomiting"], limit=2
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions(MANY_DISEASES, ["vomiting"], limit=2)
         assert len(result) <= 2
 
     def test_default_limit_three(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            MANY_DISEASES, ["vomiting"]
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions(MANY_DISEASES, ["vomiting"])
         assert len(result) <= 3
 
     def test_ml_path_with_two_diseases(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            FEW_DISEASES, ["vomiting"], use_ml=True
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions(FEW_DISEASES, ["vomiting"], use_ml=True)
         assert isinstance(result, list)
 
     def test_traditional_path_with_two_diseases(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            FEW_DISEASES, ["vomiting"], use_ml=False
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions(FEW_DISEASES, ["vomiting"], use_ml=False)
         assert isinstance(result, list)
 
     def test_use_ml_false_uses_traditional(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            MANY_DISEASES, [], use_ml=False, limit=3
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions(MANY_DISEASES, [], use_ml=False, limit=3)
         for q in result:
             assert isinstance(q, DiagnosticQuestion)
             assert q.id in DiagnosticQuestionnaireEngine.QUESTION_TEMPLATES
@@ -127,9 +113,7 @@ class TestGenerateQuestions:
         assert isinstance(result, list)
 
     def test_limit_zero_returns_empty_or_limited(self):
-        result = DiagnosticQuestionnaireEngine.generate_questions(
-            MANY_DISEASES, [], limit=0
-        )
+        result = DiagnosticQuestionnaireEngine.generate_questions(MANY_DISEASES, [], limit=0)
         assert len(result) == 0
 
 
@@ -140,17 +124,13 @@ class TestGenerateQuestions:
 
 class TestGenerateQuestionsTraditional:
     def test_returns_diagnostic_questions(self):
-        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(
-            MANY_DISEASES, limit=3
-        )
+        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(MANY_DISEASES, limit=3)
         assert isinstance(questions, list)
         for q in questions:
             assert isinstance(q, DiagnosticQuestion)
 
     def test_question_fields_populated(self):
-        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(
-            MANY_DISEASES, limit=3
-        )
+        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(MANY_DISEASES, limit=3)
         for q in questions:
             assert q.id
             assert q.question_ja
@@ -162,17 +142,13 @@ class TestGenerateQuestionsTraditional:
             assert q.reasoning_en
 
     def test_limit_respected(self):
-        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(
-            MANY_DISEASES, limit=1
-        )
+        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(MANY_DISEASES, limit=1)
         assert len(questions) <= 1
 
     def test_no_match_diseases_returns_fewer_or_zero(self):
         # Diseases that no template targets
         diseases = [make_disease("RareAlienDisease", 100), make_disease("AnotherAlienDisease", 50)]
-        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(
-            diseases, limit=3
-        )
+        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(diseases, limit=3)
         # No question should match → empty list
         assert questions == []
 
@@ -182,15 +158,11 @@ class TestGenerateQuestionsTraditional:
             make_disease("Canine Parvovirus", 80),
             make_disease("XAlienDisease", 50),
         ]
-        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(
-            diseases, limit=3
-        )
+        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(diseases, limit=3)
         assert len(questions) > 0
 
     def test_sorted_by_priority_descending(self):
-        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(
-            MANY_DISEASES, limit=5
-        )
+        questions = DiagnosticQuestionnaireEngine._generate_questions_traditional(MANY_DISEASES, limit=5)
         priorities = [q.priority for q in questions]
         assert priorities == sorted(priorities, reverse=True)
 
@@ -244,9 +216,7 @@ class TestGenerateQuestionsML:
 
 class TestUpdateDiseasesFromAnswer:
     def test_unknown_question_id_returns_unchanged(self):
-        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(
-            MANY_DISEASES, "nonexistent_question", "yes"
-        )
+        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(MANY_DISEASES, "nonexistent_question", "yes")
         assert result == MANY_DISEASES
 
     def test_yes_answer_increases_confidence(self):
@@ -254,9 +224,7 @@ class TestUpdateDiseasesFromAnswer:
             make_disease("Canine Parvovirus", 100),
             make_disease("Pancreatitis", 50),
         ]
-        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(
-            diseases, "blood_in_vomit", "yes"
-        )
+        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(diseases, "blood_in_vomit", "yes")
         parvovirus = next(d for d in result if d["name"] == "Canine Parvovirus")
         # blood_in_vomit targets Canine Parvovirus → should increase
         assert parvovirus["match_percent"] > 100
@@ -266,9 +234,7 @@ class TestUpdateDiseasesFromAnswer:
             make_disease("Canine Parvovirus", 100),
             make_disease("Pancreatitis", 50),
         ]
-        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(
-            diseases, "blood_in_vomit", "no"
-        )
+        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(diseases, "blood_in_vomit", "no")
         parvovirus = next(d for d in result if d["name"] == "Canine Parvovirus")
         assert parvovirus["match_percent"] < 100
 
@@ -276,9 +242,7 @@ class TestUpdateDiseasesFromAnswer:
         diseases = [
             make_disease("Canine Parvovirus", 100),
         ]
-        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(
-            diseases, "blood_in_vomit", "maybe"
-        )
+        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(diseases, "blood_in_vomit", "maybe")
         parvovirus = next(d for d in result if d["name"] == "Canine Parvovirus")
         assert parvovirus["match_percent"] == 100
 
@@ -287,9 +251,7 @@ class TestUpdateDiseasesFromAnswer:
             make_disease("Kidney Disease (CKD)", 80),
             make_disease("Canine Parvovirus", 50),
         ]
-        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(
-            diseases, "blood_in_vomit", "yes"
-        )
+        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(diseases, "blood_in_vomit", "yes")
         kidney = next(d for d in result if d["name"] == "Kidney Disease (CKD)")
         # blood_in_vomit doesn't target Kidney Disease → unchanged
         assert kidney["match_percent"] == 80
@@ -299,18 +261,14 @@ class TestUpdateDiseasesFromAnswer:
             make_disease("Canine Parvovirus", 50),
             make_disease("Pancreatitis", 80),
         ]
-        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(
-            diseases, "blood_in_vomit", "yes"
-        )
+        result = DiagnosticQuestionnaireEngine.update_diseases_from_answer(diseases, "blood_in_vomit", "yes")
         percentages = [d["match_percent"] for d in result]
         assert percentages == sorted(percentages, reverse=True)
 
     def test_does_not_mutate_input(self):
         diseases = [make_disease("Canine Parvovirus", 80)]
         original_percent = diseases[0]["match_percent"]
-        DiagnosticQuestionnaireEngine.update_diseases_from_answer(
-            diseases, "blood_in_vomit", "yes"
-        )
+        DiagnosticQuestionnaireEngine.update_diseases_from_answer(diseases, "blood_in_vomit", "yes")
         # Original list should be unchanged
         assert diseases[0]["match_percent"] == original_percent
 

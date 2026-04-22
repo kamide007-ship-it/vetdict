@@ -279,6 +279,7 @@ def main():
     # Also handle Cat
     from api.species.cat_diseases import DISEASES as cat_diseases  # noqa: N811
     from api.species.cat_diseases import SYMPTOM_NAMES as cat_symptoms  # noqa: N811
+
     cat_patterns = learn_patterns(cat_diseases)
     species_data["Cat"] = {
         "mod_name": "cat_diseases",
@@ -305,10 +306,7 @@ def main():
             continue  # Already in module
 
         category = classify_disease(name, jd.get("description", ""))
-        symptoms = infer_symptoms(
-            name, jd.get("description", ""), category,
-            sd["patterns"], sd["symptom_ids"]
-        )
+        symptoms = infer_symptoms(name, jd.get("description", ""), category, sd["patterns"], sd["symptom_ids"])
 
         entry = generate_module_entry(jd, category, symptoms, sd["symptom_ids"])
         new_entries_by_species[sp].append(entry)
@@ -323,7 +321,9 @@ def main():
         mod_name = sd["mod_name"]
         mod_path = os.path.join(ROOT, "api", "species", f"{mod_name}.py")
 
-        print(f"  {sp}: +{len(entries)} diseases (was {len(sd['existing_names'])}, now {len(sd['existing_names']) + len(entries)})")
+        print(
+            f"  {sp}: +{len(entries)} diseases (was {len(sd['existing_names'])}, now {len(sd['existing_names']) + len(entries)})"
+        )
 
         # Generate Python code for new entries
         new_code_lines = []
@@ -340,7 +340,7 @@ def main():
             new_code_lines.append("    {")
             new_code_lines.append(f'        "name": "{name_escaped}",')
             new_code_lines.append(f'        "name_ja": "{name_ja_escaped}",')
-            new_code_lines.append(f"        \"symptoms\": {{{symptoms_str}}},")
+            new_code_lines.append(f'        "symptoms": {{{symptoms_str}}},')
             new_code_lines.append(f'        "description": "{desc_escaped}",')
             new_code_lines.append(f'        "urgency": "{entry["urgency"]}",')
             new_code_lines.append("    },")

@@ -140,11 +140,7 @@ class TestFeedbackQuality:
                 disease_domain="general",
             )
 
-        feedback_records = (
-            learning_store_instance._get_state()
-            .get("learning_metrics", {})
-            .get("feedback_records", [])
-        )
+        feedback_records = learning_store_instance._get_state().get("learning_metrics", {}).get("feedback_records", [])
 
         good_count = sum(1 for f in feedback_records if f.get("feedback_type") == "good")
         bad_count = sum(1 for f in feedback_records if f.get("feedback_type") == "bad")
@@ -252,11 +248,7 @@ class TestInsightsGeneration:
             disease_domain="orthopedics",
         )
 
-        feedback_records = (
-            learning_store_instance._get_state()
-            .get("learning_metrics", {})
-            .get("feedback_records", [])
-        )
+        feedback_records = learning_store_instance._get_state().get("learning_metrics", {}).get("feedback_records", [])
 
         assert len(feedback_records) == 1
         record = feedback_records[0]
@@ -278,9 +270,7 @@ class TestPersonalizationImpact:
 
     def test_personalization_filtering(self, learning_store_instance):
         """Test filtering personalization by age stage."""
-        impacts = learning_store_instance.get_personalization_impact(
-            age_stage="senior"
-        )
+        impacts = learning_store_instance.get_personalization_impact(age_stage="senior")
 
         # Should return list (even if empty for missing data)
         assert isinstance(impacts, list)

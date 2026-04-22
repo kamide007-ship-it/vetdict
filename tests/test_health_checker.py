@@ -89,23 +89,17 @@ class TestDiseaseDatabase:
         """Every symptom referenced in a disease must exist in SYMPTOM_IDS."""
         for d in DISEASES:
             for symptom_id in d["symptoms"]:
-                assert symptom_id in SYMPTOM_IDS, (
-                    f"Disease '{d['id']}' references unknown symptom '{symptom_id}'"
-                )
+                assert symptom_id in SYMPTOM_IDS, f"Disease '{d['id']}' references unknown symptom '{symptom_id}'"
 
     def test_all_severities_are_valid(self):
         valid_severities = set(SEVERITY_WEIGHTS.keys())
         for d in DISEASES:
-            assert d["severity"] in valid_severities, (
-                f"Disease '{d['id']}' has invalid severity '{d['severity']}'"
-            )
+            assert d["severity"] in valid_severities, f"Disease '{d['id']}' has invalid severity '{d['severity']}'"
 
     def test_breed_risks_are_positive(self):
         for d in DISEASES:
             for breed, risk in d["breed_risks"].items():
-                assert risk > 0, (
-                    f"Disease '{d['id']}' has non-positive risk {risk} for breed '{breed}'"
-                )
+                assert risk > 0, f"Disease '{d['id']}' has non-positive risk {risk} for breed '{breed}'"
 
 
 # ============================================================================
@@ -187,9 +181,7 @@ class TestAnalyzeSymptoms:
 
     def test_breed_risk_multiplier_applied(self):
         """French bulldog should have elevated risk for BOAS."""
-        results_with_breed = _analyze_symptoms(
-            "french_bulldog", ["labored_breathing", "wheezing"]
-        )
+        results_with_breed = _analyze_symptoms("french_bulldog", ["labored_breathing", "wheezing"])
         results_no_breed = _analyze_symptoms("", ["labored_breathing", "wheezing"])
 
         # Find BOAS in both
@@ -292,7 +284,6 @@ def client(app):
 
 
 class TestGetSymptomsRoute:
-
     def test_returns_all_symptoms(self, client):
         resp = client.get("/api/health-check/symptoms")
         assert resp.status_code == 200
@@ -312,7 +303,6 @@ class TestGetSymptomsRoute:
 
 
 class TestGetOnsetOptionsRoute:
-
     def test_returns_onset_and_age(self, client):
         resp = client.get("/api/health-check/onset-options")
         assert resp.status_code == 200
@@ -334,7 +324,6 @@ class TestGetOnsetOptionsRoute:
 
 
 class TestGetDiseasesRoute:
-
     def test_dog_default(self, client):
         resp = client.get("/api/health-check/diseases")
         assert resp.status_code == 200
@@ -362,7 +351,6 @@ class TestGetDiseasesRoute:
 
 
 class TestDiseaseQualityReportRoute:
-
     def test_returns_report(self, client):
         resp = client.get("/api/health-check/disease-quality-report")
         assert resp.status_code == 200
@@ -381,7 +369,6 @@ class TestDiseaseQualityReportRoute:
 
 
 class TestAnalyzeRoute:
-
     def test_valid_analysis(self, client):
         resp = client.post(
             "/api/health-check/analyze",
@@ -474,8 +461,12 @@ class TestAnalyzeRoute:
             "/api/health-check/analyze",
             json={
                 "symptoms": [
-                    "vomiting", "diarrhea", "blood_in_stool",
-                    "lethargy", "loss_of_appetite", "fever",
+                    "vomiting",
+                    "diarrhea",
+                    "blood_in_stool",
+                    "lethargy",
+                    "loss_of_appetite",
+                    "fever",
                 ],
             },
         )
@@ -492,7 +483,6 @@ class TestAnalyzeRoute:
 
 
 class TestBreedRisksRoute:
-
     def test_known_breed(self, client):
         resp = client.get("/api/health-check/breed-risks/french_bulldog")
         assert resp.status_code == 200

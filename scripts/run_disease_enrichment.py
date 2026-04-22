@@ -62,7 +62,7 @@ def cmd_submit():
     # Submit batches
     batch_ids = []
     for i, batch_requests in enumerate(batches):
-        print(f"Submitting batch {i+1}/{len(batches)}...")
+        print(f"Submitting batch {i + 1}/{len(batches)}...")
         batch_id = enricher.submit_batch(batch_requests)
         batch_ids.append(batch_id)
 
@@ -94,9 +94,7 @@ def cmd_status(*batch_ids):
     for batch_id in batch_ids:
         batch = enricher.client.messages.batches.retrieve(batch_id)
 
-        status_emoji = (
-            "🟢" if batch.processing_status == "ended" else "🟡"
-        )
+        status_emoji = "🟢" if batch.processing_status == "ended" else "🟡"
         print(f"{status_emoji} Batch: {batch_id}")
         print(f"  Status:       {batch.processing_status}")
         print(f"  Processing:   {batch.request_counts.processing}")
@@ -137,10 +135,7 @@ def cmd_retrieve(batch_id: str):
     diseases = enricher.process_batch_results(batch_id, _DISEASE_DB)
 
     # Save enriched database
-    output_path = (
-        Path(__file__).parent.parent
-        / f"enriched_diseases_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    )
+    output_path = Path(__file__).parent.parent / f"enriched_diseases_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(diseases, f, ensure_ascii=False, indent=2)
@@ -153,6 +148,7 @@ def cmd_retrieve(batch_id: str):
     print("=" * 70)
 
     from api.disease_content_enricher import DiseaseEnricher
+
     enricher_summary = DiseaseEnricher()
     status = enricher_summary.get_enrichment_status(diseases)
 

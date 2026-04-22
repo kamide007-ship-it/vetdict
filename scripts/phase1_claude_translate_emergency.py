@@ -17,19 +17,21 @@ from anthropic import Anthropic
 
 def load_data():
     """Load disease database"""
-    db_path = Path(__file__).parent.parent / 'diseases_all_species.json'
-    with open(db_path, 'r', encoding='utf-8') as f:
+    db_path = Path(__file__).parent.parent / "diseases_all_species.json"
+    with open(db_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def extract_emergency_to_translate(diseases):
     """Extract emergency cases without EN treatment"""
     to_translate = []
     for i, disease_data in enumerate(diseases):
-        if disease_data.get('urgency') == 'emergency':
-            treatment_en = disease_data.get('treatment_en')
+        if disease_data.get("urgency") == "emergency":
+            treatment_en = disease_data.get("treatment_en")
             if not treatment_en or not treatment_en.strip():
                 to_translate.append((i, disease_data))
     return to_translate
+
 
 def build_translation_prompt(batch_cases):
     """Build prompt for batch translation"""
@@ -37,11 +39,11 @@ def build_translation_prompt(batch_cases):
     for idx, (_db_idx, disease_data) in enumerate(batch_cases, 1):
         cases_text += f"""
 【Case {idx}】
-Species: {disease_data['species']}
-Disease: {disease_data['name_ja']}  (EN: {disease_data.get('name_en', '')})
+Species: {disease_data["species"]}
+Disease: {disease_data["name_ja"]}  (EN: {disease_data.get("name_en", "")})
 Urgency: emergency
 Treatment (JA):
-{disease_data['treatment_ja']}
+{disease_data["treatment_ja"]}
 
 ---
 """
@@ -73,6 +75,7 @@ Output format (JSON array):
 ]
 """
 
+
 def translate_batch(client, batch_cases, batch_num, total_batches):
     """Translate a batch using Claude API"""
     prompt = build_translation_prompt(batch_cases)
@@ -81,14 +84,7 @@ def translate_batch(client, batch_cases, batch_num, total_batches):
 
     try:
         message = client.messages.create(
-            model="claude-opus-4-6",
-            max_tokens=4000,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
+            model="claude-opus-4-6", max_tokens=4000, messages=[{"role": "user", "content": prompt}]
         )
 
         response_text = message.content[0].text
@@ -98,7 +94,8 @@ def translate_batch(client, batch_cases, batch_num, total_batches):
         except json.JSONDecodeError:
             # Try to extract JSON from response
             import re
-            json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
+
+            json_match = re.search(r"\[.*\]", response_text, re.DOTALL)
             if json_match:
                 translations = json.loads(json_match.group())
             else:
@@ -112,6 +109,7 @@ def translate_batch(client, batch_cases, batch_num, total_batches):
         print(f"  ✗ Error in batch {batch_num}: {e}")
         return []
 
+
 def apply_translations(diseases, to_translate, translations_by_batch):
     """Apply translations back to database"""
     updated_count = 0
@@ -121,18 +119,19 @@ def apply_translations(diseases, to_translate, translations_by_batch):
     all_translations = {}
     for batch_translations in translations_by_batch:
         for trans in batch_translations:
-            case_num = trans.get('case')
+            case_num = trans.get("case")
             if case_num:
-                all_translations[case_num] = trans.get('treatment_en', '')
+                all_translations[case_num] = trans.get("treatment_en", "")
 
     for case_num, (db_idx, _disease_data) in enumerate(to_translate, 1):
         if case_num in all_translations:
-            diseases[db_idx]['treatment_en'] = all_translations[case_num]
+            diseases[db_idx]["treatment_en"] = all_translations[case_num]
             updated_count += 1
         else:
             failed_count += 1
 
     return updated_count, failed_count
+
 
 def main():
     # Load data
@@ -150,7 +149,7 @@ def main():
 
     # Process in batches
     batch_size = 10
-    batches = [to_translate[i:i+batch_size] for i in range(0, len(to_translate), batch_size)]
+    batches = [to_translate[i : i + batch_size] for i in range(0, len(to_translate), batch_size)]
     translations_by_batch = []
 
     print(f"\n📋 Processing {len(batches)} batches...")
@@ -166,24 +165,30 @@ def main():
     print(f"  ✗ Failed: {failed} cases")
 
     # Save updated database
-    db_path = Path(__file__).parent.parent / 'diseases_all_species.json'
-    with open(db_path, 'w', encoding='utf-8') as f:
+    db_path = Path(__file__).parent.parent / "diseases_all_species.json"
+    with open(db_path, "w", encoding="utf-8") as f:
         json.dump(diseases, f, ensure_ascii=False, indent=2)
     print(f"\n✓ Database updated: {db_path}")
 
     # Log results
-    log_path = Path(__file__).parent.parent / 'translation_phase1_log.json'
-    with open(log_path, 'w', encoding='utf-8') as f:
-        json.dump({
-            'phase': 'Phase 1: Emergency',
-            'total_cases': len(to_translate),
-            'batch_size': batch_size,
-            'batches_processed': len(batches),
-            'updated': updated,
-            'failed': failed,
-            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
-        }, f, ensure_ascii=False, indent=2)
+    log_path = Path(__file__).parent.parent / "translation_phase1_log.json"
+    with open(log_path, "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "phase": "Phase 1: Emergency",
+                "total_cases": len(to_translate),
+                "batch_size": batch_size,
+                "batches_processed": len(batches),
+                "updated": updated,
+                "failed": failed,
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            },
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
     print(f"✓ Log saved: {log_path}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

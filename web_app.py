@@ -16,20 +16,20 @@ class SPAHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         """Handle GET requests with SPA fallback"""
         # Serve static files from the static directory
-        self.path = f'/static{self.path}' if not self.path.startswith('/static') else self.path
+        self.path = f"/static{self.path}" if not self.path.startswith("/static") else self.path
 
         # For any path, try to serve the file
         try:
             # Remove /static prefix to get actual file path
-            file_path = self.path.replace('/static/', '').replace('/static', '')
+            file_path = self.path.replace("/static/", "").replace("/static", "")
 
-            if file_path.startswith('/'):
+            if file_path.startswith("/"):
                 file_path = file_path[1:]
 
             if not file_path:
-                file_path = 'index.html'
+                file_path = "index.html"
 
-            full_path = Path('static') / file_path
+            full_path = Path("static") / file_path
 
             if full_path.exists() and full_path.is_file():
                 # Serve the file
@@ -38,14 +38,14 @@ class SPAHandler(http.server.SimpleHTTPRequestHandler):
             pass
 
         # For root or non-existent paths, serve index.html
-        self.path = '/static/index.html'
+        self.path = "/static/index.html"
         return super().do_GET()
 
     def end_headers(self):
         """Add CORS headers"""
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
-        self.send_header('Cache-Control', 'no-cache')
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+        self.send_header("Cache-Control", "no-cache")
         super().end_headers()
 
     def log_message(self, format, *args):
@@ -53,10 +53,10 @@ class SPAHandler(http.server.SimpleHTTPRequestHandler):
         print(f"[{self.client_address[0]}] {format % args}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-    port = int(os.getenv('PORT', 3000))
+    port = int(os.getenv("PORT", 3000))
     handler = SPAHandler
 
     with socketserver.TCPServer(("", port), handler) as httpd:

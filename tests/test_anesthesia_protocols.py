@@ -30,16 +30,34 @@ from api.anesthesia_protocols import (
 )
 
 ALL_SPECIES = [
-    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig",
-    "chinchilla", "ferret", "hedgehog", "sugar_glider", "degu",
-    "bird", "parakeet", "parrot", "reptile", "tortoise", "snake",
-    "lizard", "amphibian", "fish", "exotic_other",
+    "dog",
+    "cat",
+    "horse",
+    "rabbit",
+    "hamster",
+    "guinea_pig",
+    "chinchilla",
+    "ferret",
+    "hedgehog",
+    "sugar_glider",
+    "degu",
+    "bird",
+    "parakeet",
+    "parrot",
+    "reptile",
+    "tortoise",
+    "snake",
+    "lizard",
+    "amphibian",
+    "fish",
+    "exotic_other",
 ]
 
 
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture(scope="module")
 def app():
@@ -57,6 +75,7 @@ def client(app):
 # ---------------------------------------------------------------------------
 # Data structure tests
 # ---------------------------------------------------------------------------
+
 
 class TestAnesthesiaData:
     """Validate the ANESTHESIA_PROTOCOLS data structure."""
@@ -142,8 +161,8 @@ class TestAnesthesiaData:
 # Utility function tests
 # ---------------------------------------------------------------------------
 
-class TestUtilityFunctions:
 
+class TestUtilityFunctions:
     def test_get_all_species_ids(self):
         ids = get_all_species_ids()
         assert len(ids) == 21
@@ -186,8 +205,8 @@ class TestUtilityFunctions:
 # API endpoint tests
 # ---------------------------------------------------------------------------
 
-class TestAnesthesiaAPI:
 
+class TestAnesthesiaAPI:
     def test_get_protocols_no_species(self, client):
         resp = client.get("/api/anesthesia/protocols")
         assert resp.status_code == 200
@@ -262,8 +281,8 @@ class TestAnesthesiaAPI:
 # Content quality tests
 # ---------------------------------------------------------------------------
 
-class TestContentQuality:
 
+class TestContentQuality:
     def test_dog_propofol_dosage(self):
         """Verify propofol dose is clinically accurate for dogs."""
         dog = ANESTHESIA_PROTOCOLS["dog"]
@@ -309,10 +328,7 @@ class TestContentQuality:
     def test_chinchilla_fipronil_warning(self):
         """Chinchilla protocols should warn about fipronil."""
         chin = ANESTHESIA_PROTOCOLS["chinchilla"]
-        all_notes = " ".join(
-            p.get("notes", "") + p.get("notes_ja", "")
-            for p in chin["protocols"]
-        )
+        all_notes = " ".join(p.get("notes", "") + p.get("notes_ja", "") for p in chin["protocols"])
         assert "fipronil" in all_notes.lower() or "フィプロニル" in all_notes
 
     def test_ferret_insulinoma_glucose(self):
@@ -391,10 +407,7 @@ class TestContentQuality:
     def test_bird_uncuffed_et_tube(self):
         """Bird intubation should specify uncuffed ET tubes."""
         bird = ANESTHESIA_PROTOCOLS["bird"]
-        all_notes = " ".join(
-            p.get("notes", "") + p.get("notes_ja", "")
-            for p in bird["protocols"]
-        )
+        all_notes = " ".join(p.get("notes", "") + p.get("notes_ja", "") for p in bird["protocols"])
         assert "uncuffed" in all_notes.lower() or "非カフ" in all_notes
 
 
@@ -402,8 +415,8 @@ class TestContentQuality:
 # Literature references tests
 # ---------------------------------------------------------------------------
 
-class TestReferences:
 
+class TestReferences:
     @pytest.mark.parametrize("species", ALL_SPECIES)
     def test_all_species_have_references(self, species):
         """Every species should have at least one literature reference."""
@@ -458,5 +471,6 @@ class TestReferences:
             "fish": ["Fish", "fish", "aquatic", "Neiffer"],
             "reptile": ["Reptile", "reptile", "Heard", "Mader"],
         }
-        assert any(kw in refs for kw in expected[species]), \
+        assert any(kw in refs for kw in expected[species]), (
             f"{species} references missing relevant keywords: {expected[species]}"
+        )

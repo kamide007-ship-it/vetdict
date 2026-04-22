@@ -66,7 +66,9 @@ class AIAccuracyTracker:
             # Accuracy: TP / (TP + FP + FN)
             total_errors = len(false_positives) + len(false_negatives)
             accuracy_score = (
-                1.0 if total_errors == 0 else max(0.0, 1.0 - (total_errors / len(correct_set)))
+                1.0
+                if total_errors == 0
+                else max(0.0, 1.0 - (total_errors / len(correct_set)))
                 if correct_symptoms
                 else (1.0 if is_correct else 0.0)
             )
@@ -141,9 +143,7 @@ class AIAccuracyTracker:
             }
 
         # Calculate overall calibration across domains
-        overall_calibration = sum(
-            m.get("confidence_calibration", 0) for m in calibrations
-        ) / len(calibrations)
+        overall_calibration = sum(m.get("confidence_calibration", 0) for m in calibrations) / len(calibrations)
 
         return {
             "domains": [m["domain"] for m in calibrations],
@@ -197,9 +197,7 @@ class AIAccuracyTracker:
             "symptom_id": symptom_id,
             "total_patterns": len(patterns),
             "patterns": patterns[:10],  # Top 10 patterns
-            "overall_accuracy": sum(p.get("accuracy_rate", 0) for p in patterns) / len(patterns)
-            if patterns
-            else 0.0,
+            "overall_accuracy": sum(p.get("accuracy_rate", 0) for p in patterns) / len(patterns) if patterns else 0.0,
             "status": "ready",
         }
 

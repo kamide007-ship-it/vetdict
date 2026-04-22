@@ -33,7 +33,7 @@ class Phase1AutoExecutor:
 
     def load_manifest(self):
         """Load the enrichment manifest."""
-        with open(self.manifest_path, 'r', encoding='utf-8') as f:
+        with open(self.manifest_path, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def check_all_batches_complete(self) -> bool:
@@ -55,16 +55,16 @@ class Phase1AutoExecutor:
     def run_script(self, script_name: str, description: str) -> bool:
         """Run a Python script and capture output."""
         script_path = self.script_dir / script_name
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"{description}")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         try:
             result = subprocess.run(
                 [sys.executable, str(script_path)],
                 capture_output=False,
                 text=True,
-                timeout=1800  # 30 minutes timeout
+                timeout=1800,  # 30 minutes timeout
             )
             return result.returncode == 0
         except subprocess.TimeoutExpired:
@@ -106,7 +106,9 @@ class Phase1AutoExecutor:
 
                         if status in ["succeeded", "ended"]:
                             counts = batch.request_counts
-                            print(f"  ✅ {species:10s} - COMPLETED ({counts.succeeded} succeeded, {counts.errored} errors)")
+                            print(
+                                f"  ✅ {species:10s} - COMPLETED ({counts.succeeded} succeeded, {counts.errored} errors)"
+                            )
                         elif status == "processing":
                             counts = batch.request_counts
                             total = counts.processing + counts.succeeded + counts.errored

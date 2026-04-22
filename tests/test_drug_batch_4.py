@@ -1,10 +1,17 @@
 """Tests for api/drug_batch_4.py — Fish-specific medications."""
 
-
 from api.drug_batch_4 import FISH_DRUGS, FISH_SPECIES_INFO_PATCH
 
-REQUIRED_DRUG_FIELDS = {"id", "name", "name_ja", "category", "category_ja",
-                        "description", "description_ja", "species_info"}
+REQUIRED_DRUG_FIELDS = {
+    "id",
+    "name",
+    "name_ja",
+    "category",
+    "category_ja",
+    "description",
+    "description_ja",
+    "species_info",
+}
 REQUIRED_SPECIES_INFO_FIELDS = {"safe", "dosage", "dosage_ja", "notes", "notes_ja"}
 
 
@@ -31,14 +38,18 @@ class TestFishDrugs:
 
     def test_all_drugs_have_fish_safe_true(self):
         for drug in FISH_DRUGS:
-            assert drug["species_info"]["fish"]["safe"] is True, (
-                f"{drug['id']} should be safe for fish"
-            )
+            assert drug["species_info"]["fish"]["safe"] is True, f"{drug['id']} should be safe for fish"
 
     def test_known_drugs_present(self):
         ids = {d["id"] for d in FISH_DRUGS}
-        expected = {"methylene_blue", "malachite_green", "formalin_fish",
-                    "copper_sulfate", "potassium_permanganate", "oxylinic_acid"}
+        expected = {
+            "methylene_blue",
+            "malachite_green",
+            "formalin_fish",
+            "copper_sulfate",
+            "potassium_permanganate",
+            "oxylinic_acid",
+        }
         assert expected.issubset(ids)
 
 

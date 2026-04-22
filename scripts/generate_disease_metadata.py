@@ -36,7 +36,7 @@ class DiseaseMetadataGenerator:
         "Bird": 308,
         "Rabbit": 271,
         "Parakeet": 251,
-        "Others": 2148  # 14 other species combined (expanded to reach 4,806 total)
+        "Others": 2148,  # 14 other species combined (expanded to reach 4,806 total)
     }
 
     # Common diseases per species (veterinary medicine knowledge base)
@@ -119,7 +119,7 @@ class DiseaseMetadataGenerator:
             "Orthopedic Issues (Multiple)",
             "Behavioral Issues (Multiple)",
             # ... will generate more to reach 1,148
-        ]
+        ],
     }
 
     def __init__(self):
@@ -168,9 +168,17 @@ class DiseaseMetadataGenerator:
     def _get_random_organ(self, species: str) -> str:
         """Get organs relevant to specific species."""
         organs = [
-            "Respiratory", "Digestive", "Urinary", "Cardiovascular",
-            "Nervous", "Musculoskeletal", "Endocrine", "Integumentary",
-            "Reproductive", "Hepatic", "Renal"
+            "Respiratory",
+            "Digestive",
+            "Urinary",
+            "Cardiovascular",
+            "Nervous",
+            "Musculoskeletal",
+            "Endocrine",
+            "Integumentary",
+            "Reproductive",
+            "Hepatic",
+            "Renal",
         ]
         return organs[hash(species) % len(organs)]
 

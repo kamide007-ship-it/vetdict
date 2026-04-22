@@ -18,5 +18,5 @@ except ImportError:
     from api.showdog_api import app, is_debug_mode_enabled
 
 if __name__ == "__main__":
-    port = int(os.getenv('PORT') or 5000)
+    port = int(os.getenv("PORT") or 5000)
     app.run(host="0.0.0.0", port=port, debug=is_debug_mode_enabled())

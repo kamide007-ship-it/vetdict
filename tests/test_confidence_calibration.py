@@ -47,9 +47,7 @@ class TestCalibrationFactor:
         # Should return neutral factor with no data
         assert factor == 1.0
 
-    def test_calibration_factor_insufficient_samples(
-        self, calibrator, learning_store_instance
-    ):
+    def test_calibration_factor_insufficient_samples(self, calibrator, learning_store_instance):
         """Test calibration factor with insufficient samples."""
         # Record only 5 feedback entries
         for i in range(5):
@@ -67,9 +65,7 @@ class TestCalibrationFactor:
         # Should return neutral factor with insufficient data
         assert factor == 1.0
 
-    def test_calibration_factor_overconfident(
-        self, calibrator, learning_store_instance
-    ):
+    def test_calibration_factor_overconfident(self, calibrator, learning_store_instance):
         """Test calibration when AI is overconfident."""
         # Record 25 good feedback (accuracy 100%)
         for i in range(25):
@@ -86,9 +82,7 @@ class TestCalibrationFactor:
         factor = calibrator.get_calibration_factor(0.9, domain="general")
         assert factor >= 1.0
 
-    def test_calibration_factor_underconfident(
-        self, calibrator, learning_store_instance
-    ):
+    def test_calibration_factor_underconfident(self, calibrator, learning_store_instance):
         """Test calibration when AI is underconfident."""
         # Record 25 entries: 20 good, 5 bad
         for i in range(20):
@@ -103,7 +97,7 @@ class TestCalibrationFactor:
 
         for i in range(5):
             learning_store_instance.record_feedback_learning(
-                session_id=f"test_{20+i:02d}",
+                session_id=f"test_{20 + i:02d}",
                 feedback_type="bad",
                 ai_result={"confidence": 0.5},
                 reco2_verdict="test",
@@ -115,9 +109,7 @@ class TestCalibrationFactor:
         factor = calibrator.get_calibration_factor(0.5, domain="general")
         assert factor > 1.0
 
-    def test_calibration_factor_domain_specific(
-        self, calibrator, learning_store_instance
-    ):
+    def test_calibration_factor_domain_specific(self, calibrator, learning_store_instance):
         """Test domain-specific calibration factors."""
         # Orthopedics: high accuracy
         for i in range(25):
@@ -168,9 +160,7 @@ class TestExtractExtractionCalibration:
         assert result["calibration_factor"] == 1.0
         assert result["confidence"] == 0.85
 
-    def test_calibrate_extraction_with_data(
-        self, calibrator, learning_store_instance
-    ):
+    def test_calibrate_extraction_with_data(self, calibrator, learning_store_instance):
         """Test calibration with learned data."""
         # Build high-accuracy domain
         for i in range(25):
@@ -233,9 +223,7 @@ class TestCalibrationReport:
         assert report["status"] == "no_data"
         assert len(report["domains"]) == 0
 
-    def test_calibration_report_multiple_domains(
-        self, calibrator, learning_store_instance
-    ):
+    def test_calibration_report_multiple_domains(self, calibrator, learning_store_instance):
         """Test calibration report with multiple domains."""
         # Domain 1: good data
         for i in range(25):
@@ -263,14 +251,10 @@ class TestCalibrationReport:
 
         assert report["status"] == "ready"
         # Should include domain1 (sufficient data)
-        domain1_report = next(
-            (d for d in report["domains"] if d["domain"] == "domain1"), None
-        )
+        domain1_report = next((d for d in report["domains"] if d["domain"] == "domain1"), None)
         assert domain1_report is not None
 
-    def test_calibration_report_identifies_overconfident(
-        self, calibrator, learning_store_instance
-    ):
+    def test_calibration_report_identifies_overconfident(self, calibrator, learning_store_instance):
         """Test that report identifies overconfident domains."""
         # Record overconfident data: high confidence, low accuracy
         for i in range(20):
@@ -286,9 +270,7 @@ class TestCalibrationReport:
         report = calibrator.get_calibration_report()
 
         # Should identify the domain as having calibration issues
-        domain_report = next(
-            (d for d in report["domains"] if d["domain"] == "general"), None
-        )
+        domain_report = next((d for d in report["domains"] if d["domain"] == "general"), None)
         assert domain_report is not None
 
 
@@ -300,9 +282,7 @@ class TestShouldApplyCalibration:
         should_apply = calibrator.should_apply_calibration(domain="general")
         assert should_apply is False
 
-    def test_should_apply_calibration_insufficient_samples(
-        self, calibrator, learning_store_instance
-    ):
+    def test_should_apply_calibration_insufficient_samples(self, calibrator, learning_store_instance):
         """Test that calibration is not applied with insufficient samples."""
         for i in range(5):
             learning_store_instance.record_feedback_learning(
@@ -317,9 +297,7 @@ class TestShouldApplyCalibration:
         should_apply = calibrator.should_apply_calibration(domain="general")
         assert should_apply is False
 
-    def test_should_apply_calibration_sufficient_data(
-        self, calibrator, learning_store_instance
-    ):
+    def test_should_apply_calibration_sufficient_data(self, calibrator, learning_store_instance):
         """Test that calibration is applied with sufficient data."""
         for i in range(25):
             learning_store_instance.record_feedback_learning(

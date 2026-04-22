@@ -16,7 +16,7 @@ jobs:
           python-version: '3.11'
       - run: pip install ruff
       - name: ruff lint (strict)
-        run: ruff check . --select=E,W,F,I,B,SIM,C90,N
+        run: ruff check .
       - name: ruff format check
         run: ruff format . --check
 

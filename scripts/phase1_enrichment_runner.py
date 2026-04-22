@@ -35,24 +35,32 @@ class Phase1EnrichmentRunner:
 
     def load_diseases(self):
         """Load diseases from the main database."""
-        with open(self.db_path, 'r', encoding='utf-8') as f:
+        with open(self.db_path, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def filter_by_species(self, diseases, species_list):
         """Filter diseases by species and check enrichment status."""
         filtered = []
         for disease in diseases:
-            if disease.get('species') not in species_list:
+            if disease.get("species") not in species_list:
                 continue
 
             # Skip if all fields are already populated
-            if all(disease.get(f) for f in [
-                'pathophysiology', 'pathophysiology_ja',
-                'causes', 'causes_ja',
-                'treatment', 'treatment_ja',
-                'prevention', 'prevention_ja',
-                'prognosis', 'prognosis_ja'
-            ]):
+            if all(
+                disease.get(f)
+                for f in [
+                    "pathophysiology",
+                    "pathophysiology_ja",
+                    "causes",
+                    "causes_ja",
+                    "treatment",
+                    "treatment_ja",
+                    "prevention",
+                    "prevention_ja",
+                    "prognosis",
+                    "prognosis_ja",
+                ]
+            ):
                 continue
 
             filtered.append(disease)
@@ -61,16 +69,13 @@ class Phase1EnrichmentRunner:
 
     def create_enrichment_prompt(self, disease, species, include_references=True):
         """Create an enrichment prompt with species-specific context."""
-        disease_name = disease.get('name', 'Unknown')
-        disease_name_ja = disease.get('name_ja', disease_name)
-        description = disease.get('description', '')
-        species = disease.get('species', 'Unknown')
+        disease_name = disease.get("name", "Unknown")
+        disease_name_ja = disease.get("name_ja", disease_name)
+        description = disease.get("description", "")
+        species = disease.get("species", "Unknown")
 
         # Species-specific references
-        references = {
-            'Cat': [1, 2, 8, 12, 43, 44, 45, 46],
-            'Horse': [3, 11, 38, 39, 40, 41]
-        }
+        references = {"Cat": [1, 2, 8, 12, 43, 44, 45, 46], "Horse": [3, 11, 38, 39, 40, 41]}
 
         ref_list = references.get(species, [])
         ref_str = f"\n\nReferences: {ref_list}" if include_references and ref_list else ""
@@ -115,8 +120,8 @@ Ensure medical accuracy appropriate for veterinary professionals."""
 
         # Filter Cat and Horse diseases
         print("\n[2/5] Filtering Cat and Horse diseases...")
-        cat_diseases = self.filter_by_species(all_diseases, ['Cat'])
-        horse_diseases = self.filter_by_species(all_diseases, ['Horse'])
+        cat_diseases = self.filter_by_species(all_diseases, ["Cat"])
+        horse_diseases = self.filter_by_species(all_diseases, ["Horse"])
 
         print(f"✓ Found {len(cat_diseases)} incomplete Cat diseases")
         print(f"✓ Found {len(horse_diseases)} incomplete Horse diseases")
@@ -144,15 +149,15 @@ Ensure medical accuracy appropriate for veterinary professionals."""
                     "disease_count": len(cat_diseases),
                     "batch_count": len(cat_batches),
                     "batch_ids": [],
-                    "status": "pending"
+                    "status": "pending",
                 },
                 "Horse": {
                     "disease_count": len(horse_diseases),
                     "batch_count": len(horse_batches),
                     "batch_ids": [],
-                    "status": "pending"
-                }
-            }
+                    "status": "pending",
+                },
+            },
         }
 
         # Submit Cat batches
@@ -161,10 +166,10 @@ Ensure medical accuracy appropriate for veterinary professionals."""
             try:
                 batch_id = enricher.submit_batch(batch)
                 manifest["species"]["Cat"]["batch_ids"].append(batch_id)
-                print(f"  ✓ Cat batch {i+1}/{len(cat_batches)}: {batch_id}")
+                print(f"  ✓ Cat batch {i + 1}/{len(cat_batches)}: {batch_id}")
                 time.sleep(1)  # Rate limiting
             except Exception as e:
-                print(f"  ✗ Error submitting Cat batch {i+1}: {e}")
+                print(f"  ✗ Error submitting Cat batch {i + 1}: {e}")
 
         # Submit Horse batches
         print("\nSubmitting Horse enrichment batches...")
@@ -172,14 +177,14 @@ Ensure medical accuracy appropriate for veterinary professionals."""
             try:
                 batch_id = enricher.submit_batch(batch)
                 manifest["species"]["Horse"]["batch_ids"].append(batch_id)
-                print(f"  ✓ Horse batch {i+1}/{len(horse_batches)}: {batch_id}")
+                print(f"  ✓ Horse batch {i + 1}/{len(horse_batches)}: {batch_id}")
                 time.sleep(1)  # Rate limiting
             except Exception as e:
-                print(f"  ✗ Error submitting Horse batch {i+1}: {e}")
+                print(f"  ✗ Error submitting Horse batch {i + 1}: {e}")
 
         # Save manifest
         print("\n[5/5] Saving enrichment manifest...")
-        with open(self.manifest_path, 'w', encoding='utf-8') as f:
+        with open(self.manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, ensure_ascii=False, indent=2)
         print(f"✓ Manifest saved: {self.manifest_path}")
 

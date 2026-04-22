@@ -152,22 +152,24 @@ def find_disease_by_id(diseases: list, disease_id: str):
 
 
 def enrich_disease(disease: dict, enrichment_data: dict) -> dict:
-    disease.update({
-        "prognosis_detailed": enrichment_data.get("prognosis_detailed_ja"),
-        "prognosis_detailed_ja": enrichment_data.get("prognosis_detailed_ja"),
-        "rehabilitation_protocol": enrichment_data.get("rehabilitation_protocol_ja"),
-        "rehabilitation_protocol_ja": enrichment_data.get("rehabilitation_protocol_ja"),
-        "nutrition_management": enrichment_data.get("nutrition_management_ja"),
-        "nutrition_management_ja": enrichment_data.get("nutrition_management_ja"),
-        "prognosis_references": enrichment_data.get("prognosis_references"),
-        "rehabilitation_references": enrichment_data.get("rehabilitation_references"),
-        "nutrition_references": enrichment_data.get("nutrition_references"),
-        "recovery_timeline_weeks": enrichment_data.get("recovery_timeline_weeks"),
-        "success_rate": enrichment_data.get("success_rate"),
-        "mortality_rate": enrichment_data.get("mortality_rate"),
-        "enriched_at": datetime.now().isoformat(),
-        "enrichment_phase": 3,
-    })
+    disease.update(
+        {
+            "prognosis_detailed": enrichment_data.get("prognosis_detailed_ja"),
+            "prognosis_detailed_ja": enrichment_data.get("prognosis_detailed_ja"),
+            "rehabilitation_protocol": enrichment_data.get("rehabilitation_protocol_ja"),
+            "rehabilitation_protocol_ja": enrichment_data.get("rehabilitation_protocol_ja"),
+            "nutrition_management": enrichment_data.get("nutrition_management_ja"),
+            "nutrition_management_ja": enrichment_data.get("nutrition_management_ja"),
+            "prognosis_references": enrichment_data.get("prognosis_references"),
+            "rehabilitation_references": enrichment_data.get("rehabilitation_references"),
+            "nutrition_references": enrichment_data.get("nutrition_references"),
+            "recovery_timeline_weeks": enrichment_data.get("recovery_timeline_weeks"),
+            "success_rate": enrichment_data.get("success_rate"),
+            "mortality_rate": enrichment_data.get("mortality_rate"),
+            "enriched_at": datetime.now().isoformat(),
+            "enrichment_phase": 3,
+        }
+    )
     return disease
 
 
@@ -207,8 +209,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     main()

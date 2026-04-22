@@ -15,105 +15,186 @@ from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
-    "bad_odor": "skin", "burn_marks": "skin",
-    "crusting": "skin", "draining_wound": "skin",
-    "greasy_coat": "skin", "hair_loss": "skin",
-    "iris_color_change": "skin", "itching": "skin",
-    "itching_around_anus": "skin", "lumps": "skin",
-    "miliary_dermatitis": "skin", "nail_abnormalities": "skin",
-    "non_healing_wound": "skin", "paw_swelling": "skin",
-    "petechiae": "skin", "poor_coat": "skin",
-    "scaling": "skin", "singed_whiskers": "skin",
-    "skin_fragility": "skin", "skin_lesions": "skin",
-    "skin_twitching": "skin", "subcutaneous_mass": "skin",
-    "ulcerated_mass": "skin", "visible_parasites": "skin",
+    "bad_odor": "skin",
+    "burn_marks": "skin",
+    "crusting": "skin",
+    "draining_wound": "skin",
+    "greasy_coat": "skin",
+    "hair_loss": "skin",
+    "iris_color_change": "skin",
+    "itching": "skin",
+    "itching_around_anus": "skin",
+    "lumps": "skin",
+    "miliary_dermatitis": "skin",
+    "nail_abnormalities": "skin",
+    "non_healing_wound": "skin",
+    "paw_swelling": "skin",
+    "petechiae": "skin",
+    "poor_coat": "skin",
+    "scaling": "skin",
+    "singed_whiskers": "skin",
+    "skin_fragility": "skin",
+    "skin_lesions": "skin",
+    "skin_twitching": "skin",
+    "subcutaneous_mass": "skin",
+    "ulcerated_mass": "skin",
+    "visible_parasites": "skin",
     # 眼
-    "blindness": "eyes", "conjunctivitis": "eyes",
-    "cloudiness_in_eyes": "eyes", "corneal_cloudiness": "eyes",
-    "corneal_ulcer": "eyes", "dilated_pupils": "eyes",
-    "enlarged_eye": "eyes", "excessive_tearing": "eyes",
-    "eye_changes": "eyes", "eye_discharge": "eyes",
-    "eye_pain": "eyes", "eye_redness": "eyes",
-    "night_blindness": "eyes", "third_eyelid_protrusion": "eyes",
+    "blindness": "eyes",
+    "conjunctivitis": "eyes",
+    "cloudiness_in_eyes": "eyes",
+    "corneal_cloudiness": "eyes",
+    "corneal_ulcer": "eyes",
+    "dilated_pupils": "eyes",
+    "enlarged_eye": "eyes",
+    "excessive_tearing": "eyes",
+    "eye_changes": "eyes",
+    "eye_discharge": "eyes",
+    "eye_pain": "eyes",
+    "eye_redness": "eyes",
+    "night_blindness": "eyes",
+    "third_eyelid_protrusion": "eyes",
     # 耳
-    "ear_discharge": "ears", "ear_droop": "ears",
-    "ear_inflammation": "ears", "ear_tip_lesions": "ears",
-    "hearing_loss": "ears", "head_shaking": "ears",
+    "ear_discharge": "ears",
+    "ear_droop": "ears",
+    "ear_inflammation": "ears",
+    "ear_tip_lesions": "ears",
+    "hearing_loss": "ears",
+    "head_shaking": "ears",
     "scratching_ears": "ears",
     # 呼吸器
-    "coughing": "respiratory", "labored_breathing": "respiratory",
-    "nasal_discharge": "respiratory", "noisy_breathing": "respiratory",
-    "open_mouth_breathing": "respiratory", "sneezing": "respiratory",
-    "snoring": "respiratory", "voice_change": "respiratory",
+    "coughing": "respiratory",
+    "labored_breathing": "respiratory",
+    "nasal_discharge": "respiratory",
+    "noisy_breathing": "respiratory",
+    "open_mouth_breathing": "respiratory",
+    "sneezing": "respiratory",
+    "snoring": "respiratory",
+    "voice_change": "respiratory",
     "wheezing": "respiratory",
     # 消化器・口腔
-    "acetone_breath": "digestive", "appetite_loss": "digestive",
-    "bad_breath": "digestive", "bloody_stool": "digestive",
-    "constipation": "digestive", "diarrhea": "digestive",
-    "difficulty_eating": "digestive", "difficulty_swallowing": "digestive",
-    "drooling": "digestive", "eating_non_food": "digestive",
-    "flatulence": "digestive", "fecal_incontinence": "digestive",
-    "gagging": "digestive", "increased_appetite": "digestive",
-    "oral_masses": "digestive", "oral_ulcers": "digestive",
-    "pale_stool": "digestive", "prognathia": "digestive",
-    "regurgitation": "digestive", "scooting": "digestive",
-    "stomatitis": "digestive", "straining_to_defecate": "digestive",
-    "tooth_loss": "digestive", "visible_tissue_protrusion": "digestive",
-    "visible_worms": "digestive", "vomiting": "digestive",
+    "acetone_breath": "digestive",
+    "appetite_loss": "digestive",
+    "bad_breath": "digestive",
+    "bloody_stool": "digestive",
+    "constipation": "digestive",
+    "diarrhea": "digestive",
+    "difficulty_eating": "digestive",
+    "difficulty_swallowing": "digestive",
+    "drooling": "digestive",
+    "eating_non_food": "digestive",
+    "flatulence": "digestive",
+    "fecal_incontinence": "digestive",
+    "gagging": "digestive",
+    "increased_appetite": "digestive",
+    "oral_masses": "digestive",
+    "oral_ulcers": "digestive",
+    "pale_stool": "digestive",
+    "prognathia": "digestive",
+    "regurgitation": "digestive",
+    "scooting": "digestive",
+    "stomatitis": "digestive",
+    "straining_to_defecate": "digestive",
+    "tooth_loss": "digestive",
+    "visible_tissue_protrusion": "digestive",
+    "visible_worms": "digestive",
+    "vomiting": "digestive",
     # 骨格・四肢
-    "deformity": "musculoskeletal", "enlarged_head": "musculoskeletal",
-    "hind_limb_paralysis": "musculoskeletal", "lameness": "musculoskeletal",
-    "non_weight_bearing": "musculoskeletal", "short_thick_tail": "musculoskeletal",
+    "deformity": "musculoskeletal",
+    "enlarged_head": "musculoskeletal",
+    "hind_limb_paralysis": "musculoskeletal",
+    "lameness": "musculoskeletal",
+    "non_weight_bearing": "musculoskeletal",
+    "short_thick_tail": "musculoskeletal",
     "stiffness": "musculoskeletal",
     # 神経
-    "ataxia": "neurological", "circling": "neurological",
-    "decreased_reflexes": "neurological", "disorientation": "neurological",
-    "facial_nerve_paralysis": "neurological", "facial_twitching": "neurological",
-    "falling": "neurological", "head_pressing": "neurological",
-    "head_tilt": "neurological", "jaw_drop": "neurological",
-    "limp_tail": "neurological", "muscle_spasms": "neurological",
-    "nystagmus": "neurological", "paralysis": "neurological",
-    "seizures": "neurological", "tremors": "neurological",
+    "ataxia": "neurological",
+    "circling": "neurological",
+    "decreased_reflexes": "neurological",
+    "disorientation": "neurological",
+    "facial_nerve_paralysis": "neurological",
+    "facial_twitching": "neurological",
+    "falling": "neurological",
+    "head_pressing": "neurological",
+    "head_tilt": "neurological",
+    "jaw_drop": "neurological",
+    "limp_tail": "neurological",
+    "muscle_spasms": "neurological",
+    "nystagmus": "neurological",
+    "paralysis": "neurological",
+    "seizures": "neurological",
+    "tremors": "neurological",
     "ventroflexion_of_neck": "neurological",
     # 泌尿器・生殖器
-    "bloody_urine": "urinary", "dark_urine": "urinary",
-    "decreased_urination": "urinary", "excessive_urination": "urinary",
-    "frequent_urination": "urinary", "inappropriate_urination": "urinary",
-    "mammary_masses": "urinary", "prolonged_labor": "urinary",
-    "straining_to_urinate": "urinary", "swollen_testicle": "urinary",
-    "urinary_incontinence": "urinary", "vaginal_discharge": "urinary",
+    "bloody_urine": "urinary",
+    "dark_urine": "urinary",
+    "decreased_urination": "urinary",
+    "excessive_urination": "urinary",
+    "frequent_urination": "urinary",
+    "inappropriate_urination": "urinary",
+    "mammary_masses": "urinary",
+    "prolonged_labor": "urinary",
+    "straining_to_urinate": "urinary",
+    "swollen_testicle": "urinary",
+    "urinary_incontinence": "urinary",
+    "vaginal_discharge": "urinary",
     # 循環器
-    "bradycardia": "cardiovascular", "cold_extremities": "cardiovascular",
-    "collapse": "cardiovascular", "cyanosis": "cardiovascular",
-    "exercise_intolerance": "cardiovascular", "heart_murmur": "cardiovascular",
-    "irregular_heartbeat": "cardiovascular", "muffled_heart_sounds": "cardiovascular",
+    "bradycardia": "cardiovascular",
+    "cold_extremities": "cardiovascular",
+    "collapse": "cardiovascular",
+    "cyanosis": "cardiovascular",
+    "exercise_intolerance": "cardiovascular",
+    "heart_murmur": "cardiovascular",
+    "irregular_heartbeat": "cardiovascular",
+    "muffled_heart_sounds": "cardiovascular",
     "pleural_effusion": "cardiovascular",
     # 体型・全身
-    "abdominal_distension": "body", "abdominal_contractions": "body",
-    "abdominal_pain": "body", "chin_swelling": "body",
-    "dehydration": "body", "dry_nose": "body",
-    "facial_swelling": "body", "lip_swelling": "body",
-    "muscle_wasting": "body", "stunted_growth": "body",
-    "swelling": "body", "weight_gain": "body",
+    "abdominal_distension": "body",
+    "abdominal_contractions": "body",
+    "abdominal_pain": "body",
+    "chin_swelling": "body",
+    "dehydration": "body",
+    "dry_nose": "body",
+    "facial_swelling": "body",
+    "lip_swelling": "body",
+    "muscle_wasting": "body",
+    "stunted_growth": "body",
+    "swelling": "body",
+    "weight_gain": "body",
     "weight_loss": "body",
     # 行動・活動
-    "aggression": "behavior", "behavioral_changes": "behavior",
-    "decreased_activity": "behavior", "excessive_grooming": "behavior",
-    "hiding": "behavior", "hyperactivity": "behavior",
-    "jaw_chattering": "behavior", "lethargy": "behavior",
-    "muscle_weakness": "behavior", "night_waking": "behavior",
-    "pain": "behavior", "pawing_at_face": "behavior",
-    "plantigrade_stance": "behavior", "reluctance_to_jump": "behavior",
-    "self_mutilation": "behavior", "skipping_gait": "behavior",
-    "squinting": "behavior", "tail_chasing": "behavior",
-    "vocalization_changes": "behavior", "weakness": "behavior",
+    "aggression": "behavior",
+    "behavioral_changes": "behavior",
+    "decreased_activity": "behavior",
+    "excessive_grooming": "behavior",
+    "hiding": "behavior",
+    "hyperactivity": "behavior",
+    "jaw_chattering": "behavior",
+    "lethargy": "behavior",
+    "muscle_weakness": "behavior",
+    "night_waking": "behavior",
+    "pain": "behavior",
+    "pawing_at_face": "behavior",
+    "plantigrade_stance": "behavior",
+    "reluctance_to_jump": "behavior",
+    "self_mutilation": "behavior",
+    "skipping_gait": "behavior",
+    "squinting": "behavior",
+    "tail_chasing": "behavior",
+    "vocalization_changes": "behavior",
+    "weakness": "behavior",
     "wool_sucking": "behavior",
     # 内科・血液
-    "bleeding": "internal", "bleeding_gums": "internal",
-    "bloody_discharge": "internal", "excessive_thirst": "internal",
-    "fever": "internal", "hyperthermia": "internal",
-    "hypothermia": "internal", "jaundice": "internal",
-    "lymph_node_enlargement": "internal", "pale_gums": "internal",
+    "bleeding": "internal",
+    "bleeding_gums": "internal",
+    "bloody_discharge": "internal",
+    "excessive_thirst": "internal",
+    "fever": "internal",
+    "hyperthermia": "internal",
+    "hypothermia": "internal",
+    "jaundice": "internal",
+    "lymph_node_enlargement": "internal",
+    "pale_gums": "internal",
     "recurrent_infections": "internal",
 }
 
@@ -221,7 +302,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nasopharyngeal Polyp",
         "name_ja": "鼻咽頭ポリープ",
-        "symptoms": {"sneezing", "nasal_discharge", "noisy_breathing", "head_shaking", "ear_discharge", "difficulty_swallowing"},
+        "symptoms": {
+            "sneezing",
+            "nasal_discharge",
+            "noisy_breathing",
+            "head_shaking",
+            "ear_discharge",
+            "difficulty_swallowing",
+        },
         "description": "Nasopharyngeal Polyp is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "鼻咽頭または中耳の良性炎症性腫瘤で、鼻閉塞や耳の問題を引き起こします。",
         "causes": "Benign inflammatory growths originating from the middle ear or Eustachian tube mucosa. Exact etiology is unknown but may follow chronic otitis media, upper respiratory infection (FHV-1, FCV), or ascending pharyngeal infection. Most common in young cats (1-5 years).",
@@ -329,7 +417,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hypertrophic Cardiomyopathy (HCM)",
         "name_ja": "肥大型心筋症",
-        "symptoms": {"labored_breathing", "lethargy", "open_mouth_breathing", "heart_murmur", "collapse", "hind_limb_paralysis"},
+        "symptoms": {
+            "labored_breathing",
+            "lethargy",
+            "open_mouth_breathing",
+            "heart_murmur",
+            "collapse",
+            "hind_limb_paralysis",
+        },
         "description": "Most common feline cardiac disease (~15% of all cats, up to 30% in some breeds). Characterized by left ventricular concentric hypertrophy in absence of identifiable cause. Risk of CHF, arterial thromboembolism (ATE), and sudden death. Now classified by ACVIM Consensus 2020 stages A-D (Luis Fuentes et al. JVIM 2020).",
         "description_ja": "猫で最も多い心臓病（全猫の約15%、一部品種では30%まで）。原因不明の左室求心性肥厚を特徴とする。うっ血性心不全（CHF）、動脈血栓塞栓症（ATE）、突然死のリスクあり。現在はACVIM Consensus 2020により病期A-Dに分類される（Luis Fuentes et al. JVIM 2020）。",
         "urgency": "high",
@@ -350,7 +445,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dilated Cardiomyopathy (DCM)",
         "name_ja": "拡張型心筋症",
-        "symptoms": {"labored_breathing", "lethargy", "appetite_loss", "heart_murmur", "collapse", "abdominal_distension"},
+        "symptoms": {
+            "labored_breathing",
+            "lethargy",
+            "appetite_loss",
+            "heart_murmur",
+            "collapse",
+            "abdominal_distension",
+        },
         "description": "Dilated Cardiomyopathy (DCM) is a cardiovascular condition affecting cardiac function and hemodynamic stability.",
         "description_ja": "心室の拡大と収縮力低下を引き起こす心筋症で、タウリン欠乏と関連することがあります。",
         "urgency": "high",
@@ -567,7 +669,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Inflammation of the pancreas, more often chronic and subclinical in cats than acute. Frequently part of feline triaditis (concurrent pancreatitis + cholangitis + IBD) due to shared anatomic biliary-pancreatic duct. Cardinal sign in cats is anorexia, NOT vomiting (unlike dogs). High prevalence (>40% of cats at necropsy show histologic pancreatitis).",
         "description_ja": "膵臓の炎症で、猫では犬と異なり慢性・無症候性の経過が多い。胆管・膵管が共通開口する解剖により、しばしば「三臓器炎症（triaditis）」 — 膵炎・胆管炎・IBDの三炎合併として発生する。猫の主徴は食欲不振であり、嘔吐は犬ほど顕著でない。剖検では40%超の猫に組織学的膵炎が確認される高有病率疾患。",
         "urgency": "high",
-        "recommended_tests": ["feline_pancreatic_lipase", "abdominal_ultrasound", "complete_blood_count", "blood_chemistry"],
+        "recommended_tests": [
+            "feline_pancreatic_lipase",
+            "abdominal_ultrasound",
+            "complete_blood_count",
+            "blood_chemistry",
+        ],
         "causes": "Most cases are idiopathic. Identified causes/triggers: triaditis (IBD, cholangitis), trauma (HBC), toxins (organophosphates, zinc), infectious (Toxoplasma, FIP, FHV-1, FCV, liver flukes), drugs (azathioprine, sulfa drugs, asparaginase), hypercalcemia, ischemia (post-anesthesia, hypotension), pancreatic neoplasia. Unlike dogs, dietary indiscretion and obesity are NOT major risk factors in cats.",
         "causes_ja": "多くは特発性。確認されている原因・誘因: 三臓器炎症（IBD、胆管炎合併）、外傷（交通事故）、毒物（有機リン、亜鉛）、感染症（トキソプラズマ、FIP、FHV-1、FCV、肝吸虫）、薬物（アザチオプリン、サルファ剤、L-アスパラギナーゼ）、高Ca血症、虚血（麻酔後・低血圧）、膵腫瘍。犬と異なり食事不摂生や肥満は主要リスク因子ではない。",
         "pathophysiology": "Premature intrapancreatic activation of trypsinogen to trypsin triggers autodigestion of pancreatic parenchyma, releasing inflammatory mediators (TNF-α, IL-1, IL-6) and causing local necrosis. In cats, the shared biliary-pancreatic duct (cats have one common channel opening at the major duodenal papilla, unlike dogs) allows ascending infection/inflammation between the pancreas, biliary tree, and duodenum — explaining the high prevalence of triaditis. Chronic pancreatitis causes progressive fibrosis and may lead to exocrine pancreatic insufficiency (EPI) and/or diabetes mellitus from islet destruction. Severe acute cases progress to SIRS, DIC, hepatic lipidosis from anorexia, and multi-organ failure.",
@@ -588,7 +695,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Most common feline hepatic disease, characterized by massive triglyceride accumulation in hepatocytes triggered by prolonged anorexia (typically >3 days). Without aggressive nutritional intervention, leads to acute liver failure. Curable with early aggressive feeding via assisted nutrition.",
         "description_ja": "猫で最も多い肝疾患。長期の食欲不振（通常3日以上）により肝細胞内に大量のトリグリセリドが蓄積する病態。積極的な栄養介入なしでは急性肝不全に至るが、早期の強制栄養療法で治癒可能。",
         "urgency": "emergency",
-        "recommended_tests": ["blood_chemistry", "liver_enzymes", "abdominal_ultrasound", "liver_biopsy", "coagulation_panel"],
+        "recommended_tests": [
+            "blood_chemistry",
+            "liver_enzymes",
+            "abdominal_ultrasound",
+            "liver_biopsy",
+            "coagulation_panel",
+        ],
         "causes": "Triggered by prolonged anorexia/hyporexia (>3 days) in obese or normal-weight cats. Underlying causes (~95% of cases): pancreatitis, cholangiohepatitis, IBD/triaditis, neoplasia, diabetes mellitus, FIP, hyperthyroidism, dietary changes, stress (boarding, new pet), or upper airway obstruction preventing eating. Idiopathic in ~5%. Obesity is a major risk factor due to large adipose stores available for mobilization.",
         "causes_ja": "肥満または正常体重猫の長期食欲不振・低食欲（3日超）が引き金。基礎疾患は約95%の症例に存在: 膵炎、胆管肝炎、IBD/三炎症（triaditis）、腫瘍、糖尿病、FIP、甲状腺機能亢進症、食事変更、ストレス（預かり・新規ペット）、上気道閉塞による摂食不能。約5%は特発性。肥満は脂肪動員の貯蔵が大きいため主要なリスク因子。",
         "pathophysiology": "Anorexia triggers massive peripheral fat mobilization to the liver as the primary energy source. Hepatic uptake of free fatty acids (FFAs) overwhelms beta-oxidation and VLDL export capacity, causing reesterification to triglycerides and intracellular accumulation (steatosis). Cats have inherent limitations in hepatic VLDL synthesis (low apolipoprotein B-100 production) and protein synthesis, making them uniquely susceptible. Hepatocyte ballooning impairs cholestasis (jaundice), bile acid metabolism, ammonia clearance (hepatic encephalopathy), and clotting factor synthesis (vitamin K-responsive coagulopathy).",
@@ -609,7 +722,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Cholangitis / Cholangiohepatitis is a hepatic condition affecting liver function and metabolism.",
         "description_ja": "胆管と周囲の肝組織の炎症で、猫に多い疾患です。",
         "urgency": "high",
-        "recommended_tests": ["blood_chemistry", "liver_enzymes", "abdominal_ultrasound", "liver_biopsy", "bile_culture"],
+        "recommended_tests": [
+            "blood_chemistry",
+            "liver_enzymes",
+            "abdominal_ultrasound",
+            "liver_biopsy",
+            "bile_culture",
+        ],
         "causes": "Caused by hepatic dysfunction from infection, toxin exposure, metabolic disease, lipidosis, or neoplasia.",
         "causes_ja": "猫における胆管炎・胆管肝炎の原因: 胆管と周囲の肝組織の炎症で、猫に多い疾患です。",
         "pathophysiology": "Hepatocellular damage impairs metabolic, synthetic, and detoxification functions. Progressive injury leads to inflammation, fibrosis, and potential hepatic failure with systemic consequences.",
@@ -647,7 +766,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Megacolon",
         "name_ja": "巨大結腸症",
-        "symptoms": {"constipation", "straining_to_defecate", "appetite_loss", "vomiting", "lethargy", "abdominal_distension"},
+        "symptoms": {
+            "constipation",
+            "straining_to_defecate",
+            "appetite_loss",
+            "vomiting",
+            "lethargy",
+            "abdominal_distension",
+        },
         "description": "Megacolon is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "結腸の慢性的な拡張と運動機能の喪失により、重度の便秘を引き起こします。",
         "urgency": "high",
@@ -714,7 +840,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Triaditis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "膵臓、肝臓・胆管、腸管の同時炎症で、猫に特有の疾患です。",
         "urgency": "high",
-        "recommended_tests": ["feline_pancreatic_lipase", "blood_chemistry", "abdominal_ultrasound", "intestinal_biopsy"],
+        "recommended_tests": [
+            "feline_pancreatic_lipase",
+            "blood_chemistry",
+            "abdominal_ultrasound",
+            "intestinal_biopsy",
+        ],
         "causes": "Concurrent inflammation of the pancreas, liver/biliary tract, and small intestine, unique to cats due to the shared anatomy of the common bile duct and pancreatic duct at the major duodenal papilla. Ascending bacterial infection from the duodenum, IBD-driven immune dysregulation, and cholangitis are proposed mechanisms.",
         "causes_ja": "猫における三臓器炎の原因: 膵臓、肝臓・胆管、腸管の同時炎症で、猫に特有の疾患です。",
         "pathophysiology": "The unique feline anatomy where the common bile duct and pancreatic duct merge at the major duodenal papilla facilitates bidirectional spread of inflammation between liver, pancreas, and duodenum. IBD-driven mucosal barrier dysfunction allows bacterial translocation into the biliary and pancreatic ducts, while cholangitis and pancreatitis exacerbate intestinal inflammation. This triad of concurrent organ inflammation produces compounding systemic effects including jaundice, maldigestion, and malabsorption.",
@@ -839,26 +970,40 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Chronic Kidney Disease (CKD)",
         "name_ja": "慢性腎臓病",
-        "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "appetite_loss", "vomiting", "dehydration", "poor_coat"},
+        "symptoms": {
+            "excessive_thirst",
+            "excessive_urination",
+            "weight_loss",
+            "appetite_loss",
+            "vomiting",
+            "dehydration",
+            "poor_coat",
+        },
         "description": "Progressive, irreversible loss of nephron function affecting up to 30-40% of cats over 10 years and 50% over 15 years (Marino et al. JFMS 2014). Most common chronic disease in geriatric cats. Classified by IRIS staging 1-4 based on serum creatinine, SDMA, and substaging by proteinuria and blood pressure.",
         "description_ja": "ネフロンの進行性かつ不可逆的な機能喪失。10歳超の猫の30-40%、15歳超では50%が罹患する高齢猫で最多の慢性疾患（Marino et al. JFMS 2014）。IRIS分類では血清クレアチニン、SDMA値で病期1-4に分類され、蛋白尿と血圧でサブステージが決定される。",
         "urgency": "high",
-        "recommended_tests": ["blood_chemistry", "urinalysis", "urine_protein_creatinine_ratio", "abdominal_ultrasound", "blood_pressure_measurement"],
+        "recommended_tests": [
+            "blood_chemistry",
+            "urinalysis",
+            "urine_protein_creatinine_ratio",
+            "abdominal_ultrasound",
+            "blood_pressure_measurement",
+        ],
         "causes": "Multifactorial: chronic tubulointerstitial nephritis (most common in cats), glomerulonephropathy, polycystic kidney disease (PKD, especially Persian/Exotic), renal lymphoma, amyloidosis (Abyssinian, Siamese), chronic pyelonephritis, ureteral obstruction, hypertensive nephropathy, post-AKI, congenital renal dysplasia, FIV/FeLV-associated. Many cases are idiopathic with age-related nephron loss.",
         "causes_ja": "多因子性: 慢性尿細管間質性腎炎（猫で最多）、糸球体腎症、多発性嚢胞腎（PKD、特にペルシャ・エキゾチック）、腎リンパ腫、アミロイドーシス（アビシニアン・シャム）、慢性腎盂腎炎、尿管閉塞、高血圧性腎症、AKI後遺症、先天性腎異形成、FIV/FeLV関連。多くは加齢性のネフロン喪失による特発性。",
         "pathophysiology": "Progressive nephron loss leads to compensatory hyperfiltration in remaining nephrons, causing glomerular hypertension and sclerosis - a self-perpetuating cycle. Loss of >75% of nephrons causes clinical signs. Phosphate retention triggers FGF-23 elevation and secondary renal hyperparathyroidism, with vascular and soft-tissue calcification. Decreased erythropoietin causes non-regenerative anemia. Cats uniquely develop concentrated urine until late stages, masking early disease - hence importance of SDMA which rises with 25-40% nephron loss versus 75% for creatinine.",
         "pathophysiology_ja": "ネフロンの進行性喪失により残存ネフロンの代償性過濾過が生じ、糸球体高血圧と硬化を引き起こす自己増殖性のサイクルとなる。ネフロン75%超喪失で臨床症状が出現。リン貯留がFGF-23上昇と二次性腎性上皮小体機能亢進症を誘発し、血管・軟部組織の石灰化を引き起こす。エリスロポエチン低下により非再生性貧血。猫は晩期まで尿濃縮能が保たれるため早期発見が困難 — SDMAはネフロン25-40%喪失で上昇し、クレアチニン（75%喪失で上昇）より早期診断に有用。",
         "treatment": "【IRIS 2023 Staging-Based Therapy】 All stages: increase water intake (wet food, fountains), avoid nephrotoxic drugs. Stage 1-2: renal diet, monitor q3-6 months. Stage 2-3: renal diet (Hill's k/d, Royal Canin Renal, Purina NF — restricted phosphorus and protein, omega-3s, B vitamins). Phosphate binders if PO4 above target (Stage 2: <4.5, Stage 3: <5.0, Stage 4: <6.0 mg/dL). Telmisartan 1-2 mg/kg PO q24h FIRST-LINE for proteinuria UPC >0.4 (ISFM 2020, Sent et al. JVIM 2015) — superior to benazepril. Amlodipine 0.1-0.4 mg/kg PO q24h for hypertension (SBP >160 mmHg). Mirtazapine 1.88 mg/cat PO q48h or transdermal (Mirataz) for appetite. Maropitant 1 mg/kg SC q24h, ondansetron 0.5 mg/kg PO q12h for nausea. SQ fluids 100-150 mL LRS q24-72h at home for dehydration. Darbepoetin 0.45-1 μg/kg SC weekly for HCT <20% with iron supplementation. Calcitriol 1.5-3.5 ng/kg PO q24h for severe hyperparathyroidism. Potassium supplementation if hypokalemic (potassium gluconate 2-6 mEq/cat/day).",
         "treatment_ja": "【IRIS 2023 病期別治療（ISFM 2020 Guidelines, ISFM Sparkes JFMS 2016 準拠）】 全病期: 飲水量増加（ウェットフード・循環式水飲み器）、腎毒性薬物の回避。Stage 1-2: 腎臓療法食、3-6ヶ月毎のモニタリング。Stage 2-3: 腎臓療法食（Hill's k/d、Royal Canin Renal、Purina NF — 低リン・低蛋白・ω-3脂肪酸添加・ビタミンB群強化）。"
-                        "【高P血症対策】 IRIS病期別Pターゲット: Stage 2: <4.5 mg/dL、Stage 3: <5.0 mg/dL、Stage 4: <6.0 mg/dL。リン吸着剤: 水酸化アルミニウム 30-90 mg/kg/日、炭酸ランタン 30 mg/kg/日 食事と共に投与。"
-                        "【蛋白尿対策（UPC>0.4で介入）】 テルミサルタン 1-2 mg/kg PO q24h を第一選択（ISFM 2020、Sent et al. JVIM 2015 — ベナゼプリルより優れた蛋白尿抑制）。"
-                        "【高血圧対策】 SBP >160 mmHg持続でアムロジピン 0.1-0.4 mg/kg PO q24h（猫の高血圧治療の第一選択、テルミサルタンも降圧効果あり）。"
-                        "【消化器症状】 制吐: マロピタント 1 mg/kg SC q24h、オンダンセトロン 0.5 mg/kg PO/IV q8-12h。胃粘膜保護: オメプラゾール 1 mg/kg PO q12-24h、ファモチジン 0.5-1 mg/kg PO q12-24h。"
-                        "【食欲不振】 ミルタザピン 1.88 mg/匹 PO q48h または経皮ミラタズ®（FDA承認）、カプロモレリン 2 mg/kg PO q24h。"
-                        "【脱水補正】 在宅皮下輸液 LRS 100-150 mL q24-72h（家族指導）。"
-                        "【腎性貧血】 HCT<20%でダルベポエチン 0.45-1 μg/kg SC 週1回、鉄補充必須（鉄欠乏で抗EPO抗体産生リスク）。"
-                        "【二次性上皮小体機能亢進症】 カルシトリオール 1.5-3.5 ng/kg PO q24h（夜間空腹時）。"
-                        "【低K血症対策】 グルコン酸カリウム 2-6 mEq/匹/日 PO（IRIS 3-4で頻発）。",
+        "【高P血症対策】 IRIS病期別Pターゲット: Stage 2: <4.5 mg/dL、Stage 3: <5.0 mg/dL、Stage 4: <6.0 mg/dL。リン吸着剤: 水酸化アルミニウム 30-90 mg/kg/日、炭酸ランタン 30 mg/kg/日 食事と共に投与。"
+        "【蛋白尿対策（UPC>0.4で介入）】 テルミサルタン 1-2 mg/kg PO q24h を第一選択（ISFM 2020、Sent et al. JVIM 2015 — ベナゼプリルより優れた蛋白尿抑制）。"
+        "【高血圧対策】 SBP >160 mmHg持続でアムロジピン 0.1-0.4 mg/kg PO q24h（猫の高血圧治療の第一選択、テルミサルタンも降圧効果あり）。"
+        "【消化器症状】 制吐: マロピタント 1 mg/kg SC q24h、オンダンセトロン 0.5 mg/kg PO/IV q8-12h。胃粘膜保護: オメプラゾール 1 mg/kg PO q12-24h、ファモチジン 0.5-1 mg/kg PO q12-24h。"
+        "【食欲不振】 ミルタザピン 1.88 mg/匹 PO q48h または経皮ミラタズ®（FDA承認）、カプロモレリン 2 mg/kg PO q24h。"
+        "【脱水補正】 在宅皮下輸液 LRS 100-150 mL q24-72h（家族指導）。"
+        "【腎性貧血】 HCT<20%でダルベポエチン 0.45-1 μg/kg SC 週1回、鉄補充必須（鉄欠乏で抗EPO抗体産生リスク）。"
+        "【二次性上皮小体機能亢進症】 カルシトリオール 1.5-3.5 ng/kg PO q24h（夜間空腹時）。"
+        "【低K血症対策】 グルコン酸カリウム 2-6 mEq/匹/日 PO（IRIS 3-4で頻発）。",
         "prevention": "Annual senior wellness exams from age 7 with creatinine, SDMA, BUN, electrolytes, urinalysis (USG, UPC). Avoid nephrotoxic drugs (NSAIDs, aminoglycosides, lily ingestion). Maintain hydration (wet food, fresh water sources). Treat hypertension and proteinuria early. Annual blood pressure measurement in cats over 10 years.",
         "prevention_ja": "7歳以降の年次シニア健康診断（クレアチニン、SDMA、BUN、電解質、尿検査 — USG・UPC含む）。腎毒性薬物の回避（NSAIDs、アミノグリコシド系、ユリ摂取）。水分摂取の維持（ウェットフード、新鮮な水）。高血圧と蛋白尿の早期治療。10歳超の猫は年次血圧測定を推奨。",
         "prognosis": "IRIS Stage 1: median survival >3 years. Stage 2: median survival ~1100 days (3 years). Stage 3: median survival 350-700 days. Stage 4: median survival 35-100 days (Boyd et al. JVIM 2008, Syme et al. JVIM 2006). UPC >0.4 and SBP >160 mmHg are independent negative prognostic factors. Aggressive management can significantly extend survival.",
@@ -869,7 +1014,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Acute Kidney Injury (AKI)",
         "name_ja": "急性腎障害",
-        "symptoms": {"vomiting", "appetite_loss", "lethargy", "dehydration", "excessive_urination", "decreased_urination"},
+        "symptoms": {
+            "vomiting",
+            "appetite_loss",
+            "lethargy",
+            "dehydration",
+            "excessive_urination",
+            "decreased_urination",
+        },
         "description": "Acute Kidney Injury (AKI) involves traumatic injury requiring assessment of damage extent and appropriate stabilization and repair.",
         "description_ja": "毒素、感染、閉塞による腎機能の突然の喪失で、治療により回復の可能性があります。",
         "urgency": "emergency",
@@ -890,7 +1042,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Lower Urinary Tract Disease (FLUTD)",
         "name_ja": "猫下部尿路疾患",
-        "symptoms": {"bloody_urine", "straining_to_urinate", "frequent_urination", "inappropriate_urination", "vocalization_changes", "excessive_grooming"},
+        "symptoms": {
+            "bloody_urine",
+            "straining_to_urinate",
+            "frequent_urination",
+            "inappropriate_urination",
+            "vocalization_changes",
+            "excessive_grooming",
+        },
         "description": "Feline Lower Urinary Tract Disease (FLUTD) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "膀胱と尿道に影響する疾患群で、痛みを伴う異常な排尿を引き起こします。",
         "urgency": "high",
@@ -911,7 +1070,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Urinary Obstruction (Blocked Cat)",
         "name_ja": "尿道閉塞",
-        "symptoms": {"straining_to_urinate", "vocalization_changes", "vomiting", "lethargy", "abdominal_pain", "decreased_urination"},
+        "symptoms": {
+            "straining_to_urinate",
+            "vocalization_changes",
+            "vomiting",
+            "lethargy",
+            "abdominal_pain",
+            "decreased_urination",
+        },
         "description": "A life-threatening emergency in male cats caused by complete urethral obstruction (mucoid-crystalline plugs, calculi, or urethral spasm), preventing urine outflow. Death from hyperkalemic cardiac arrest can occur within 24-72 hours without intervention.",
         "description_ja": "尿道の完全閉塞により排尿不能となる致死的緊急疾患で、オス猫に多い。粘液結晶栓子、結石、または尿道痙攣が原因。未治療では24-72時間以内に高K血症性心停止に至る。",
         "urgency": "emergency",
@@ -932,7 +1098,13 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Urolithiasis (Bladder Stones)",
         "name_ja": "尿路結石症",
-        "symptoms": {"bloody_urine", "straining_to_urinate", "frequent_urination", "inappropriate_urination", "abdominal_pain"},
+        "symptoms": {
+            "bloody_urine",
+            "straining_to_urinate",
+            "frequent_urination",
+            "inappropriate_urination",
+            "abdominal_pain",
+        },
         "description": "Urolithiasis (Bladder Stones) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "尿路内の鉱物結石形成により、刺激、閉塞、痛みを引き起こします。",
         "urgency": "high",
@@ -974,7 +1146,13 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Idiopathic Cystitis (FIC)",
         "name_ja": "猫特発性膀胱炎",
-        "symptoms": {"bloody_urine", "straining_to_urinate", "frequent_urination", "inappropriate_urination", "excessive_grooming"},
+        "symptoms": {
+            "bloody_urine",
+            "straining_to_urinate",
+            "frequent_urination",
+            "inappropriate_urination",
+            "excessive_grooming",
+        },
         "description": "Feline Idiopathic Cystitis (FIC) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "原因不明の膀胱の無菌性炎症で、ストレスと関連することが多いです。",
         "urgency": "moderate",
@@ -999,7 +1177,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Renal Lymphoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "腎臓に影響するリンパ腫で、しばしば両側性に生じ進行性腎不全を引き起こします。",
         "urgency": "high",
-        "recommended_tests": ["abdominal_ultrasound", "fine_needle_aspirate", "blood_chemistry", "complete_blood_count"],
+        "recommended_tests": [
+            "abdominal_ultrasound",
+            "fine_needle_aspirate",
+            "blood_chemistry",
+            "complete_blood_count",
+        ],
         "causes": "Caused by neoplastic cell proliferation; etiology is often multifactorial including genetic predisposition, age, hormonal influences, and environmental factors.",
         "causes_ja": "猫における腎リンパ腫の原因: 腎臓に影響するリンパ腫で、しばしば両側性に生じ進行性腎不全を引き起こします。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
@@ -1061,11 +1244,27 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hyperthyroidism",
         "name_ja": "甲状腺機能亢進症",
-        "symptoms": {"weight_loss", "excessive_thirst", "excessive_urination", "vomiting", "diarrhea", "hyperactivity", "increased_appetite", "poor_coat", "heart_murmur"},
+        "symptoms": {
+            "weight_loss",
+            "excessive_thirst",
+            "excessive_urination",
+            "vomiting",
+            "diarrhea",
+            "hyperactivity",
+            "increased_appetite",
+            "poor_coat",
+            "heart_murmur",
+        },
         "description": "Hyperthyroidism is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "甲状腺ホルモンの過剰産生で、高齢猫で最も多い内分泌疾患です。",
         "urgency": "moderate",
-        "recommended_tests": ["thyroid_panel", "blood_chemistry", "complete_blood_count", "blood_pressure_measurement", "urinalysis"],
+        "recommended_tests": [
+            "thyroid_panel",
+            "blood_chemistry",
+            "complete_blood_count",
+            "blood_pressure_measurement",
+            "urinalysis",
+        ],
         "causes": "Caused by excessive thyroid hormone production, usually due to thyroid adenoma or hyperplasia.",
         "causes_ja": "正確な原因はまだ十分に解明されていませんが、年齢、食事内容、飼育環境などの複雑な要素が関係していると考えられています。加齢に伴う甲状腺組織の変性が主な要因であり、10歳を超える猫で発症が著しく増加します。特に中年以降の猫に多く見られます。",
         "pathophysiology": "Autonomous thyroid hormone overproduction (T4/T3) from adenomatous hyperplasia or adenoma increases basal metabolic rate in all tissues. Cardiac effects include tachycardia, hypertrophic cardiomyopathy, and systemic hypertension. Hypermetabolism causes weight loss despite polyphagia, protein catabolism, and increased intestinal motility producing vomiting and diarrhea. Hyperthyroidism may mask concurrent CKD by maintaining renal blood flow through hyperdynamic circulation.",
@@ -1082,7 +1281,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
-        "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "increased_appetite", "lethargy", "plantigrade_stance"},
+        "symptoms": {
+            "excessive_thirst",
+            "excessive_urination",
+            "weight_loss",
+            "increased_appetite",
+            "lethargy",
+            "plantigrade_stance",
+        },
         "description": "Most feline DM (>90%) is Type 2 (insulin resistance + progressive β-cell dysfunction from islet amyloid deposition). Clinical signs: PU/PD, polyphagia, weight loss, plantigrade stance (diabetic neuropathy). Diabetic remission is achievable in 25-85% of newly diagnosed cats with tight glycemic control and low-carbohydrate diet — a unique feature of feline DM not seen in dogs.",
         "description_ja": "猫の糖尿病は90%以上が2型（インスリン抵抗性 + 膵島アミロイド沈着による進行性β細胞機能低下）。症状: 多飲多尿、多食、体重減少、後肢の蹠行（糖尿病性ニューロパチー）。新規診断猫の25-85%で糖尿病寛解（remission）が達成可能 — これは犬にはない猫特有の特徴である。",
         "urgency": "high",
@@ -1093,28 +1299,28 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology_ja": "猫の糖尿病は主に2型であり、インスリン抵抗性と膵島へのアミロイド（膵島アミロイドポリペプチド）沈着による進行性のβ細胞機能障害を特徴とする。慢性的な高血糖はグルコース毒性を引き起こし、β細胞機能とインスリン分泌をさらに障害する。持続的な高血糖は浸透圧利尿による多尿・多飲、多食にもかかわらず体重減少を引き起こし、未治療では糖尿病性ケトアシドーシスに進行する可能性がある。",
         "treatment": "Insulin: Glargine (Lantus) 0.25-0.5 IU/kg SC q12h (preferred first-line in cats — highest remission rate) OR ProZinc (PZI) 0.2-0.5 IU/kg SC q12h. Low-carbohydrate, high-protein diet (essential for diabetic remission in cats). Blood glucose curves q1-2 weeks during stabilization (target nadir 80-150 mg/dL). Fructosamine q2-4 weeks (target <450 umol/L). Goal: diabetic remission (achievable in 25-85% of newly diagnosed cats with tight glycemic control + low-carb diet). Reduce insulin dose as remission approaches (watch for Somogyi effect). Monitor for diabetic ketoacidosis: lethargy, vomiting, acetone breath. Home glucose monitoring (ear prick) encouraged. NEW: Bexagliflozin (Bexacat) and velagliflozin — SGLT2 inhibitors FDA-approved 2022-2024 for newly diagnosed non-ketotic diabetic cats.",
         "treatment_ja": "【インスリン療法（第一選択）】 グラルギン（ランタス） 0.25-0.5 IU/kg SC q12h "
-                        "— 猫の第一選択（最高の寛解率、Roomp & Rand JFMS 2009）。"
-                        "代替: プロタミン亜鉛インスリン（ProZinc） 0.2-0.5 IU/kg SC q12h、"
-                        "デテミル（レベミル） 0.25-0.5 IU/kg SC q12h。"
-                        "【食事療法（寛解の鍵）】 高蛋白・低炭水化物食（炭水化物 <12% ME）— "
-                        "Hill's m/d、Royal Canin Diabetic、Purina DM等。"
-                        "Bennett JFMS 2006: 低炭水化物食 + インスリンで寛解率68%（高炭水化物食41%）。"
-                        "【新規SGLT2阻害薬（2022-2024 FDA承認）】 "
-                        "ベクサグリフロジン（ベクサキャット®、Bexacat） 15 mg/匹 PO q24h、"
-                        "ベラグリフロジン（センベルゴ®、Senvelgo） 1 mg/kg PO q24h — "
-                        "新規診断・非ケトーシス猫に対して経口投与で血糖管理可能（インスリン不要）。"
-                        "ただしDKAリスクあり — ケトン体監視必須、既存ケトン症例には禁忌。"
-                        "【血糖モニタリング】 12時間血糖曲線 q1-2週間（安定化期）、"
-                        "目標nadir 80-150 mg/dL。フルクトサミン q2-4週間（目標 <450 μmol/L）。"
-                        "FreeStyle Libre フラッシュグルコース測定（連続血糖測定）が普及 — "
-                        "Corradini et al. JVIM 2016で猫での精度・有用性を確認。"
-                        "在宅血糖測定（耳穿刺）を強く推奨。"
-                        "【寛解誘導戦略】 早期の積極的血糖管理（診断後6ヶ月以内）が寛解率を最大化。"
-                        "寛解の徴候（持続的低血糖傾向）でインスリンを段階的に減量・中止。"
-                        "Somogyi効果（インスリン誘発性高血糖）の鑑別に注意。"
-                        "【併発疾患の検索】 末端肥大症（IGF-1測定 — 猫DMの25%）、"
-                        "膵炎（fPLI）、甲状腺機能亢進症（T4）、副腎皮質機能亢進症の除外。"
-                        "【DKA移行の監視】 嗜眠、嘔吐、アセトン臭、尿ケトン陽性 → 緊急対応。",
+        "— 猫の第一選択（最高の寛解率、Roomp & Rand JFMS 2009）。"
+        "代替: プロタミン亜鉛インスリン（ProZinc） 0.2-0.5 IU/kg SC q12h、"
+        "デテミル（レベミル） 0.25-0.5 IU/kg SC q12h。"
+        "【食事療法（寛解の鍵）】 高蛋白・低炭水化物食（炭水化物 <12% ME）— "
+        "Hill's m/d、Royal Canin Diabetic、Purina DM等。"
+        "Bennett JFMS 2006: 低炭水化物食 + インスリンで寛解率68%（高炭水化物食41%）。"
+        "【新規SGLT2阻害薬（2022-2024 FDA承認）】 "
+        "ベクサグリフロジン（ベクサキャット®、Bexacat） 15 mg/匹 PO q24h、"
+        "ベラグリフロジン（センベルゴ®、Senvelgo） 1 mg/kg PO q24h — "
+        "新規診断・非ケトーシス猫に対して経口投与で血糖管理可能（インスリン不要）。"
+        "ただしDKAリスクあり — ケトン体監視必須、既存ケトン症例には禁忌。"
+        "【血糖モニタリング】 12時間血糖曲線 q1-2週間（安定化期）、"
+        "目標nadir 80-150 mg/dL。フルクトサミン q2-4週間（目標 <450 μmol/L）。"
+        "FreeStyle Libre フラッシュグルコース測定（連続血糖測定）が普及 — "
+        "Corradini et al. JVIM 2016で猫での精度・有用性を確認。"
+        "在宅血糖測定（耳穿刺）を強く推奨。"
+        "【寛解誘導戦略】 早期の積極的血糖管理（診断後6ヶ月以内）が寛解率を最大化。"
+        "寛解の徴候（持続的低血糖傾向）でインスリンを段階的に減量・中止。"
+        "Somogyi効果（インスリン誘発性高血糖）の鑑別に注意。"
+        "【併発疾患の検索】 末端肥大症（IGF-1測定 — 猫DMの25%）、"
+        "膵炎（fPLI）、甲状腺機能亢進症（T4）、副腎皮質機能亢進症の除外。"
+        "【DKA移行の監視】 嗜眠、嘔吐、アセトン臭、尿ケトン陽性 → 緊急対応。",
         "prevention": "Maintain ideal body weight (obesity is the strongest modifiable risk factor — 3-5x DM risk). Regular exercise. Avoid unnecessary glucocorticoid use. Annual senior wellness exams from age 7. Monitor predisposed breeds (Burmese).",
         "prevention_ja": "適正体重の維持（肥満は最大の修正可能リスク因子で糖尿病リスクを3-5倍に増加）。定期的な運動。不必要なグルココルチコイド使用の回避。7歳以降の年次シニア健康診断。素因を持つ品種（バーミーズ）のモニタリング。",
         "prognosis": "Good with appropriate management. Remission achievable in 25-85% of cats (highest with early diagnosis + glargine + low-carb diet, Roomp & Rand JFMS 2009). Median survival 17 months from diagnosis (Goossens et al. 1998); however, survival has improved significantly with modern management. Permanent diabetes manageable long-term with twice-daily insulin and dietary management.",
@@ -1129,7 +1335,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Life-threatening complication of uncontrolled diabetes mellitus characterized by severe insulin deficiency, ketone body accumulation, metabolic acidosis, and dehydration. Most common emergency presentation of feline DM, often precipitated by concurrent disease.",
         "description_ja": "制御不能な糖尿病の生命を脅かす合併症。重度のインスリン欠乏、ケトン体蓄積、代謝性アシドーシス、脱水を特徴とする。猫の糖尿病の最も一般的な救急発症形態であり、しばしば併発疾患により誘発される。",
         "urgency": "emergency",
-        "recommended_tests": ["blood_glucose", "blood_gas_analysis", "urinalysis", "electrolyte_panel", "complete_blood_count"],
+        "recommended_tests": [
+            "blood_glucose",
+            "blood_gas_analysis",
+            "urinalysis",
+            "electrolyte_panel",
+            "complete_blood_count",
+        ],
         "causes": "Severe absolute or relative insulin deficiency precipitated by: (1) newly diagnosed/untreated DM, (2) concurrent illness causing insulin resistance (pancreatitis, infection/UTI, cholangiohepatitis, hyperthyroidism, neoplasia), (3) inadequate insulin dosing, missed doses, or insulin antibodies, (4) glucocorticoid administration. ~70% of feline DKA cases have a concurrent disease (Bruskiewicz et al. JAAHA 1997).",
         "causes_ja": "重度の絶対的または相対的インスリン欠乏が原因で、以下により誘発される: (1)新規診断または未治療の糖尿病、(2)インスリン抵抗性を引き起こす併発疾患（膵炎、感染症/UTI、胆管肝炎、甲状腺機能亢進症、腫瘍）、(3)インスリン投与不足、投与忘れ、インスリン抗体、(4)グルココルチコイド投与。猫DKA症例の約70%に併発疾患が存在する（Bruskiewicz et al. JAAHA 1997）。",
         "pathophysiology": "Absolute or relative insulin deficiency combined with counter-regulatory hormone excess (glucagon, cortisol, catecholamines) drives uncontrolled hepatic gluconeogenesis and lipolysis. Free fatty acid oxidation produces ketone bodies (acetoacetate, beta-hydroxybutyrate, acetone) that exceed buffering and renal excretion capacity, causing profound metabolic acidosis. Osmotic diuresis from hyperglycemia leads to severe dehydration and electrolyte depletion (potassium, phosphate), producing lethargy, vomiting, Kussmaul respiration, and potentially fatal cardiovascular collapse.",
@@ -1150,7 +1362,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Hyperaldosteronism (Conn's Syndrome) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "副腎腫瘍からのアルドステロン過剰産生で、高血圧と低カリウム血症を引き起こします。",
         "urgency": "high",
-        "recommended_tests": ["aldosterone_level", "potassium_level", "blood_pressure_measurement", "adrenal_ultrasound", "ct_scan"],
+        "recommended_tests": [
+            "aldosterone_level",
+            "potassium_level",
+            "blood_pressure_measurement",
+            "adrenal_ultrasound",
+            "ct_scan",
+        ],
         "causes": "Autonomous aldosterone overproduction from adrenal cortical adenoma or carcinoma (unilateral or bilateral). Less commonly caused by bilateral adrenal hyperplasia. Excess aldosterone promotes sodium retention and potassium wasting, leading to systemic hypertension and hypokalemic myopathy. Increasingly recognized in older cats.",
         "causes_ja": "猫における高アルドステロン症の原因: 副腎腫瘍からのアルドステロン過剰産生で、高血圧と低カリウム血症を引き起こします。",
         "pathophysiology": "Autonomous aldosterone hypersecretion from an adrenocortical tumor acts on the distal renal tubule, promoting sodium and water retention while increasing potassium excretion. Resultant hypokalemia causes skeletal muscle weakness (cervical ventroflexion, episodic collapse) and predisposes to cardiac arrhythmias. Sodium retention and volume expansion produce systemic hypertension with secondary target organ damage to the eyes, kidneys, and brain.",
@@ -1167,7 +1385,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Acromegaly (Hypersomatotropism)",
         "name_ja": "先端巨大症",
-        "symptoms": {"increased_appetite", "weight_gain", "excessive_thirst", "excessive_urination", "enlarged_head", "prognathia"},
+        "symptoms": {
+            "increased_appetite",
+            "weight_gain",
+            "excessive_thirst",
+            "excessive_urination",
+            "enlarged_head",
+            "prognathia",
+        },
         "description": "Acromegaly (Hypersomatotropism) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "下垂体腫瘍からの過剰な成長ホルモン産生で、インスリン抵抗性糖尿病を引き起こすことが多いです。",
         "urgency": "high",
@@ -1209,11 +1434,23 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hyperadrenocorticism (Cushing's Disease)",
         "name_ja": "副腎皮質機能亢進症",
-        "symptoms": {"excessive_thirst", "excessive_urination", "increased_appetite", "abdominal_distension", "skin_fragility", "hair_loss"},
+        "symptoms": {
+            "excessive_thirst",
+            "excessive_urination",
+            "increased_appetite",
+            "abdominal_distension",
+            "skin_fragility",
+            "hair_loss",
+        },
         "description": "Hyperadrenocorticism (Cushing's Disease) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "コルチゾールの過剰産生で、猫では稀ですが皮膚脆弱性や糖尿病を引き起こします。",
         "urgency": "high",
-        "recommended_tests": ["acth_stimulation_test", "low_dose_dexamethasone_suppression", "abdominal_ultrasound", "blood_chemistry"],
+        "recommended_tests": [
+            "acth_stimulation_test",
+            "low_dose_dexamethasone_suppression",
+            "abdominal_ultrasound",
+            "blood_chemistry",
+        ],
         "causes": "Caused by excessive adrenal hormone production, often due to adrenal neoplasia or hyperplasia.",
         "causes_ja": "猫における副腎皮質機能亢進症の原因: コルチゾールの過剰産生で、猫では稀ですが皮膚脆弱性や糖尿病を引き起こします。",
         "pathophysiology": "Chronic cortisol excess from pituitary-dependent or adrenal-dependent disease causes insulin resistance (concurrent diabetes mellitus in >80% of feline cases), protein catabolism, and dermal collagen degeneration. Extreme skin fragility (feline skin syndrome) with spontaneous tearing is a hallmark feature unique to cats. Immunosuppression increases infection susceptibility, while hepatomegaly, muscle wasting, and abdominal distension develop from protein catabolism and fat redistribution.",
@@ -1254,7 +1491,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Immunodeficiency Virus (FIV)",
         "name_ja": "猫免疫不全ウイルス感染症",
-        "symptoms": {"weight_loss", "fever", "appetite_loss", "lethargy", "lymph_node_enlargement", "recurrent_infections", "stomatitis"},
+        "symptoms": {
+            "weight_loss",
+            "fever",
+            "appetite_loss",
+            "lethargy",
+            "lymph_node_enlargement",
+            "recurrent_infections",
+            "stomatitis",
+        },
         "description": "Feline Immunodeficiency Virus (FIV) is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "免疫系を攻撃するレトロウイルス感染症で、主に咬傷を通じて感染します。",
         "urgency": "high",
@@ -1275,7 +1520,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Leukemia Virus (FeLV)",
         "name_ja": "猫白血病ウイルス感染症",
-        "symptoms": {"weight_loss", "fever", "appetite_loss", "lethargy", "pale_gums", "lymph_node_enlargement", "recurrent_infections"},
+        "symptoms": {
+            "weight_loss",
+            "fever",
+            "appetite_loss",
+            "lethargy",
+            "pale_gums",
+            "lymph_node_enlargement",
+            "recurrent_infections",
+        },
         "description": "Feline Leukemia Virus (FeLV) is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "免疫抑制、貧血、リンパ腫を引き起こすレトロウイルス感染症で、密接な接触で感染します。",
         "urgency": "high",
@@ -1296,11 +1549,25 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Infectious Peritonitis (FIP) - Wet Form",
         "name_ja": "猫伝染性腹膜炎（ウェット型）",
-        "symptoms": {"abdominal_distension", "fever", "lethargy", "appetite_loss", "weight_loss", "labored_breathing", "jaundice"},
+        "symptoms": {
+            "abdominal_distension",
+            "fever",
+            "lethargy",
+            "appetite_loss",
+            "weight_loss",
+            "labored_breathing",
+            "jaundice",
+        },
         "description": "Effusive (wet) form of FIP characterized by protein-rich serous effusions in the peritoneal and/or pleural cavities. Once uniformly fatal, now curable in 80-95% of cases with antiviral therapy (GS-441524).",
         "description_ja": "コロナウイルスの変異により体腔内（腹腔・胸腔）に高蛋白漿液性貯留を引き起こす滲出型FIP。以前は致死率100%であったが、抗ウイルス薬（GS-441524）により現在は80-95%の寛解率を達成。",
         "urgency": "emergency",
-        "recommended_tests": ["rivalta_test", "fluid_analysis", "coronavirus_titer", "pcr_test", "protein_electrophoresis"],
+        "recommended_tests": [
+            "rivalta_test",
+            "fluid_analysis",
+            "coronavirus_titer",
+            "pcr_test",
+            "protein_electrophoresis",
+        ],
         "causes": "Mutation of feline enteric coronavirus (FECV) to the virulent FIPV biotype, enabling macrophage tropism and systemic dissemination. Immune complex deposition triggers complement-mediated vasculitis, producing protein-rich effusions. Risk factors: young age (<2 years), stress, multi-cat households, FeLV co-infection, genetic predisposition (purebreds: Birman, Ragdoll, Bengal).",
         "causes_ja": "猫腸管コロナウイルス（FECV）からの変異により病原性FIPVが生じ、マクロファージ向性を獲得して全身に播種する。免疫複合体沈着が補体介在性血管炎を誘発し、高蛋白滲出液を産生。リスク因子: 若齢（<2歳）、ストレス、多頭飼育環境、FeLV合併感染、遺伝的素因（純血種: バーマン、ラグドール、ベンガル）。",
         "pathophysiology": "Mutant feline coronavirus acquires macrophage tropism and disseminates systemically within infected monocytes. Antibody-dependent enhancement (ADE) paradoxically increases viral uptake. Immune complex deposition in vessel walls triggers complement-mediated vasculitis, producing the characteristic high-protein, straw-colored, viscous peritoneal/pleural effusions (Rivalta-positive, A:G ratio <0.4).",
@@ -1317,7 +1584,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Infectious Peritonitis (FIP) - Dry Form",
         "name_ja": "猫伝染性腹膜炎（ドライ型）",
-        "symptoms": {"fever", "weight_loss", "appetite_loss", "lethargy", "eye_changes", "ataxia", "seizures", "jaundice"},
+        "symptoms": {
+            "fever",
+            "weight_loss",
+            "appetite_loss",
+            "lethargy",
+            "eye_changes",
+            "ataxia",
+            "seizures",
+            "jaundice",
+        },
         "description": "Non-effusive (dry/granulomatous) form of FIP with pyogranulomatous lesions in organs (eyes, CNS, kidneys, mesenteric LN) without significant effusions. Now curable with GS-441524 antiviral therapy.",
         "description_ja": "FIPの肉芽腫型（非滲出型）。眼、中枢神経系、腎臓、腸間膜リンパ節などに膿性肉芽腫病変を形成し、貯留液は少ない。GS-441524抗ウイルス療法により治癒可能となった。",
         "urgency": "emergency",
@@ -1359,7 +1635,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Herpesvirus (FHV-1) Infection",
         "name_ja": "猫ヘルペスウイルス感染症",
-        "symptoms": {"sneezing", "nasal_discharge", "eye_discharge", "conjunctivitis", "corneal_ulcer", "fever", "appetite_loss"},
+        "symptoms": {
+            "sneezing",
+            "nasal_discharge",
+            "eye_discharge",
+            "conjunctivitis",
+            "corneal_ulcer",
+            "fever",
+            "appetite_loss",
+        },
         "description": "Feline Herpesvirus (FHV-1) Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "上気道感染と眼疾患を引き起こす一般的なウイルスで、生涯潜伏感染します。",
         "urgency": "moderate",
@@ -1506,7 +1790,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Rabies",
         "name_ja": "狂犬病",
-        "symptoms": {"aggression", "behavioral_changes", "paralysis", "drooling", "seizures", "ataxia", "vocalization_changes"},
+        "symptoms": {
+            "aggression",
+            "behavioral_changes",
+            "paralysis",
+            "drooling",
+            "seizures",
+            "ataxia",
+            "vocalization_changes",
+        },
         "description": "Rabies is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "中枢神経系に影響する致死的ウイルス疾患で、人に感染する可能性があります。",
         "urgency": "emergency",
@@ -1740,11 +2032,23 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Atopic Dermatitis",
         "name_ja": "アトピー性皮膚炎",
-        "symptoms": {"itching", "hair_loss", "skin_lesions", "excessive_grooming", "miliary_dermatitis", "ear_inflammation"},
+        "symptoms": {
+            "itching",
+            "hair_loss",
+            "skin_lesions",
+            "excessive_grooming",
+            "miliary_dermatitis",
+            "ear_inflammation",
+        },
         "description": "Atopic Dermatitis is a dermatological condition affecting the skin, coat, or integumentary system.",
         "description_ja": "花粉、ダニ、カビなどの環境アレルゲンによるアレルギー性皮膚疾患です。",
         "urgency": "moderate",
-        "recommended_tests": ["intradermal_allergy_test", "serum_allergy_test", "skin_biopsy", "elimination_diet_trial"],
+        "recommended_tests": [
+            "intradermal_allergy_test",
+            "serum_allergy_test",
+            "skin_biopsy",
+            "elimination_diet_trial",
+        ],
         "causes": "Caused by skin inflammation from bacterial infection, allergic reaction, parasites, environmental irritants, or autoimmune disease.",
         "causes_ja": "猫におけるアトピー性皮膚炎の原因: 花粉、ダニ、カビなどの環境アレルゲンによるアレルギー性皮膚疾患です。",
         "pathophysiology": "Percutaneous absorption of environmental allergens (dust mites, pollens, mold spores) through a defective epidermal barrier triggers IgE-mediated mast cell degranulation and Th2-polarized immune response in genetically predisposed cats. Unlike dogs, feline atopy presents as non-seasonal or seasonal pruritus manifesting as miliary dermatitis, symmetric self-induced alopecia, head and neck excoriations, or eosinophilic granuloma complex lesions rather than typical canine atopic distribution patterns.",
@@ -1974,7 +2278,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Hyperesthesia Syndrome",
         "name_ja": "猫知覚過敏症候群",
-        "symptoms": {"skin_twitching", "excessive_grooming", "aggression", "vocalization_changes", "tail_chasing", "self_mutilation"},
+        "symptoms": {
+            "skin_twitching",
+            "excessive_grooming",
+            "aggression",
+            "vocalization_changes",
+            "tail_chasing",
+            "self_mutilation",
+        },
         "description": "Feline Hyperesthesia Syndrome is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "皮膚の波打ち、過度のグルーミング、興奮を特徴とする原因不明のエピソード性行動障害です。",
         "urgency": "moderate",
@@ -2020,7 +2331,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Spinal Cord Lymphoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "脊髄に影響するリンパ腫で、進行性の麻痺を引き起こし、FeLV陽性猫に多いです。",
         "urgency": "high",
-        "recommended_tests": ["mri_spine", "cerebrospinal_fluid_analysis", "fiv_felv_snap_test", "complete_blood_count"],
+        "recommended_tests": [
+            "mri_spine",
+            "cerebrospinal_fluid_analysis",
+            "fiv_felv_snap_test",
+            "complete_blood_count",
+        ],
         "causes": "Caused by neoplastic cell proliferation; etiology is often multifactorial including genetic predisposition, age, hormonal influences, and environmental factors.",
         "causes_ja": "猫における脊髄リンパ腫の原因: 脊髄に影響するリンパ腫で、進行性の麻痺を引き起こし、FeLV陽性猫に多いです。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
@@ -2233,7 +2549,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Myasthenia Gravis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "筋力低下と疲労を引き起こす自己免疫性神経筋疾患です。",
         "urgency": "high",
-        "recommended_tests": ["acetylcholine_receptor_antibody_test", "electromyography", "chest_xray", "edrophonium_test"],
+        "recommended_tests": [
+            "acetylcholine_receptor_antibody_test",
+            "electromyography",
+            "chest_xray",
+            "edrophonium_test",
+        ],
         "causes": "Acquired form: autoimmune production of antibodies against nicotinic acetylcholine receptors (AChR) at the neuromuscular junction, causing impaired neuromuscular transmission. Congenital form (rare): deficiency of AChR without autoantibodies. May be associated with thymoma or other cranial mediastinal masses. Abyssinian and Somali breeds may be predisposed.",
         "causes_ja": "猫における重症筋無力症の原因: 筋力低下と疲労を引き起こす自己免疫性神経筋疾患です。",
         "pathophysiology": "Autoantibodies against nicotinic acetylcholine receptors at the neuromuscular junction impair synaptic transmission, causing fatigable skeletal muscle weakness; focal forms commonly affect esophageal muscles causing megaesophagus.",
@@ -2295,7 +2616,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Corneal Ulcer",
         "name_ja": "角膜潰瘍",
-        "symptoms": {"squinting", "excessive_tearing", "eye_discharge", "eye_redness", "eye_pain", "corneal_cloudiness"},
+        "symptoms": {
+            "squinting",
+            "excessive_tearing",
+            "eye_discharge",
+            "eye_redness",
+            "eye_pain",
+            "corneal_cloudiness",
+        },
         "description": "Corneal Ulcer is an ophthalmic condition affecting the eye or surrounding structures.",
         "description_ja": "角膜表面のびらんで、ヘルペスウイルス、外傷、異物が原因となることが多いです。",
         "urgency": "high",
@@ -2320,7 +2648,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Uveitis is an ophthalmic condition affecting the eye or surrounding structures.",
         "description_ja": "ぶどう膜の炎症で、FIP、FeLV、FIV、トキソプラズマ症、リンパ腫と関連することがあります。",
         "urgency": "high",
-        "recommended_tests": ["ophthalmic_exam", "tonometry", "fiv_felv_snap_test", "toxoplasma_titer", "blood_chemistry"],
+        "recommended_tests": [
+            "ophthalmic_exam",
+            "tonometry",
+            "fiv_felv_snap_test",
+            "toxoplasma_titer",
+            "blood_chemistry",
+        ],
         "causes": "Caused by ocular disease from infection, trauma, genetic predisposition, metabolic disorders, or age-related changes.",
         "causes_ja": "猫におけるぶどう膜炎の原因: ぶどう膜の炎症で、FIP、FeLV、FIV、トキソプラズマ症、リンパ腫と関連することがあります。",
         "pathophysiology": "Inflammation of the uveal tract (iris, ciliary body, choroid) from infectious, immune-mediated, or neoplastic causes disrupts the blood-aqueous barrier, causing aqueous flare, miosis, and secondary complications including glaucoma.",
@@ -2491,7 +2825,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Multicentric Lymphoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "全身の複数のリンパ節に影響するリンパ腫です。",
         "urgency": "high",
-        "recommended_tests": ["lymph_node_aspirate", "complete_blood_count", "blood_chemistry", "chest_xray", "abdominal_ultrasound"],
+        "recommended_tests": [
+            "lymph_node_aspirate",
+            "complete_blood_count",
+            "blood_chemistry",
+            "chest_xray",
+            "abdominal_ultrasound",
+        ],
         "causes": "Caused by neoplastic cell proliferation; etiology is often multifactorial including genetic predisposition, age, hormonal influences, and environmental factors.",
         "causes_ja": "猫における多中心型リンパ腫の原因: 全身の複数のリンパ節に影響するリンパ腫です。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
@@ -2508,7 +2848,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Squamous Cell Carcinoma (Oral)",
         "name_ja": "口腔扁平上皮癌",
-        "symptoms": {"drooling", "difficulty_swallowing", "oral_masses", "weight_loss", "appetite_loss", "bloody_discharge"},
+        "symptoms": {
+            "drooling",
+            "difficulty_swallowing",
+            "oral_masses",
+            "weight_loss",
+            "appetite_loss",
+            "bloody_discharge",
+        },
         "description": "Squamous Cell Carcinoma (Oral) is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "猫で最も多い悪性口腔腫瘍で、攻撃的な経過をたどります。",
         "urgency": "high",
@@ -2617,7 +2964,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Mast Cell Tumor (Visceral/Splenic) is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "脾臓や腸に影響する攻撃的な肥満細胞腫瘍です。",
         "urgency": "high",
-        "recommended_tests": ["abdominal_ultrasound", "fine_needle_aspirate", "complete_blood_count", "blood_chemistry"],
+        "recommended_tests": [
+            "abdominal_ultrasound",
+            "fine_needle_aspirate",
+            "complete_blood_count",
+            "blood_chemistry",
+        ],
         "causes": "Caused by neoplastic cell proliferation; etiology is often multifactorial including genetic predisposition, age, hormonal influences, and environmental factors.",
         "causes_ja": "猫における肥満細胞腫（内臓/脾臓型）の原因: 脾臓や腸に影響する攻撃的な肥満細胞腫瘍です。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
@@ -2634,7 +2986,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nasal Tumor (Adenocarcinoma/Lymphoma)",
         "name_ja": "鼻腔腫瘍",
-        "symptoms": {"nasal_discharge", "sneezing", "facial_swelling", "bloody_discharge", "noisy_breathing", "eye_discharge"},
+        "symptoms": {
+            "nasal_discharge",
+            "sneezing",
+            "facial_swelling",
+            "bloody_discharge",
+            "noisy_breathing",
+            "eye_discharge",
+        },
         "description": "Nasal Tumor (Adenocarcinoma/Lymphoma) is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "鼻腔内の腫瘍で、慢性的な鼻水と顔面変形を引き起こします。",
         "urgency": "high",
@@ -2746,7 +3105,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Immune-Mediated Hemolytic Anemia (IMHA) is a hematological condition characterized by decreased red blood cell mass or hemoglobin concentration.",
         "description_ja": "赤血球の自己免疫性破壊による生命を脅かす貧血です。",
         "urgency": "emergency",
-        "recommended_tests": ["complete_blood_count", "reticulocyte_count", "coombs_test", "blood_smear", "blood_chemistry"],
+        "recommended_tests": [
+            "complete_blood_count",
+            "reticulocyte_count",
+            "coombs_test",
+            "blood_smear",
+            "blood_chemistry",
+        ],
         "causes": "Autoimmune destruction of red blood cells by IgG or IgM antibodies and/or complement activation. May be primary (idiopathic) or secondary to infections (FeLV, hemoplasma, FIP), drugs (methimazole, propylthiouracil), neoplasia, or blood transfusion reactions. Less common in cats than dogs. Positive Coombs test or saline agglutination confirms immune-mediated mechanism.",
         "causes_ja": "猫における免疫介在性溶血性貧血の原因: 赤血球の自己免疫性破壊による生命を脅かす貧血です。",
         "pathophysiology": "Autoantibodies (IgG/IgM) target erythrocyte surface antigens, causing complement-mediated intravascular hemolysis or extravascular phagocytosis by splenic and hepatic macrophages, leading to acute regenerative anemia.",
@@ -2763,7 +3128,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Infectious Anemia (Hemoplasma)",
         "name_ja": "猫伝染性貧血（ヘモプラズマ症）",
-        "symptoms": {"pale_gums", "lethargy", "fever", "weight_loss", "appetite_loss", "jaundice", "weakness", "labored_breathing"},        "description": "マイコプラズマ属が赤血球に寄生して引き起こす貧血です。",
+        "symptoms": {
+            "pale_gums",
+            "lethargy",
+            "fever",
+            "weight_loss",
+            "appetite_loss",
+            "jaundice",
+            "weakness",
+            "labored_breathing",
+        },
+        "description": "マイコプラズマ属が赤血球に寄生して引き起こす貧血です。",
         "description_ja": "マイコプラズマ属が赤血球に寄生して引き起こす貧血です。",
         "urgency": "high",
         "recommended_tests": ["complete_blood_count", "blood_smear", "hemoplasma_pcr", "reticulocyte_count"],
@@ -2829,7 +3204,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Non-Regenerative Anemia is a hematological condition characterized by decreased red blood cell mass or hemoglobin concentration.",
         "description_ja": "骨髄の反応が不十分な貧血で、CKD、FeLV、骨髄疾患が原因となることが多いです。",
         "urgency": "high",
-        "recommended_tests": ["complete_blood_count", "reticulocyte_count", "blood_chemistry", "bone_marrow_biopsy", "fiv_felv_snap_test"],
+        "recommended_tests": [
+            "complete_blood_count",
+            "reticulocyte_count",
+            "blood_chemistry",
+            "bone_marrow_biopsy",
+            "fiv_felv_snap_test",
+        ],
         "causes": "Inadequate bone marrow erythropoietic response. Most common cause is chronic kidney disease (reduced erythropoietin production). Other causes include FeLV-associated pure red cell aplasia or myelosuppression, chronic inflammatory disease (anemia of chronic disease), myelophthisis from neoplasia (lymphoma, leukemia), iron deficiency, and drug toxicity (chloramphenicol, chemotherapeutics).",
         "causes_ja": "猫における非再生性貧血の原因: 骨髄の反応が不十分な貧血で、CKD、FeLV、骨髄疾患が原因となることが多いです。",
         "pathophysiology": "Inadequate erythropoiesis from bone marrow suppression (FeLV, chronic disease, myelophthisis) or erythropoietin deficiency (CKD) results in anemia without appropriate reticulocyte response.",
@@ -2850,7 +3231,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Polycythemia is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "赤血球数の異常な増加により血液粘度が上昇する疾患です。",
         "urgency": "high",
-        "recommended_tests": ["complete_blood_count", "erythropoietin_level", "blood_gas_analysis", "abdominal_ultrasound"],
+        "recommended_tests": [
+            "complete_blood_count",
+            "erythropoietin_level",
+            "blood_gas_analysis",
+            "abdominal_ultrasound",
+        ],
         "causes": "Relative polycythemia from dehydration (most common). Absolute polycythemia is either secondary (appropriate EPO response to chronic hypoxia from cardiac/pulmonary disease, or inappropriate EPO secretion from renal tumors, hydronephrosis) or primary (polycythemia vera, a myeloproliferative neoplasm of erythroid precursors, which is rare in cats).",
         "causes_ja": "猫における赤血球増多症の原因: 赤血球数の異常な増加により血液粘度が上昇する疾患です。",
         "pathophysiology": "Primary polycythemia results from autonomous erythroid proliferation; secondary forms arise from EPO overproduction due to hypoxia or EPO-secreting tumors. Elevated PCV increases blood viscosity, causing thrombosis and impaired microcirculation.",
@@ -2954,7 +3340,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Chronic Gingivostomatitis",
         "name_ja": "猫慢性歯肉口内炎",
-        "symptoms": {"stomatitis", "drooling", "difficulty_eating", "appetite_loss", "weight_loss", "bad_breath", "pain"},
+        "symptoms": {
+            "stomatitis",
+            "drooling",
+            "difficulty_eating",
+            "appetite_loss",
+            "weight_loss",
+            "bad_breath",
+            "pain",
+        },
         "description": "Feline Chronic Gingivostomatitis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "歯肉と口腔粘膜の重度の慢性炎症で、激しい痛みと食事困難を引き起こします。",
         "urgency": "high",
@@ -3020,7 +3414,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Anxiety Disorder",
         "name_ja": "猫の不安障害",
-        "symptoms": {"hiding", "inappropriate_urination", "excessive_grooming", "aggression", "appetite_loss", "vocalization_changes"},
+        "symptoms": {
+            "hiding",
+            "inappropriate_urination",
+            "excessive_grooming",
+            "aggression",
+            "appetite_loss",
+            "vocalization_changes",
+        },
         "description": "Feline Anxiety Disorder is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "慢性的な不安により、不適切な排泄、隠れる行動、過度のグルーミングなどの行動変化を引き起こします。",
         "urgency": "low",
@@ -3041,11 +3442,24 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Cognitive Dysfunction Syndrome",
         "name_ja": "猫の認知機能障害症候群",
-        "symptoms": {"disorientation", "vocalization_changes", "inappropriate_urination", "behavioral_changes", "night_waking", "appetite_loss"},
+        "symptoms": {
+            "disorientation",
+            "vocalization_changes",
+            "inappropriate_urination",
+            "behavioral_changes",
+            "night_waking",
+            "appetite_loss",
+        },
         "description": "Feline Cognitive Dysfunction Syndrome is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "高齢猫の加齢に伴う認知機能低下で、混乱と行動変化を引き起こします。",
         "urgency": "low",
-        "recommended_tests": ["physical_exam", "blood_chemistry", "thyroid_panel", "urinalysis", "blood_pressure_measurement"],
+        "recommended_tests": [
+            "physical_exam",
+            "blood_chemistry",
+            "thyroid_panel",
+            "urinalysis",
+            "blood_pressure_measurement",
+        ],
         "causes": "Age-related neurodegenerative disorder analogous to Alzheimer's disease in humans. Characterized by accumulation of beta-amyloid plaques, perivascular infiltrates, neuronal loss, gliosis, and oxidative damage in the brain. Affects cats typically over 11-15 years of age. Vascular changes and reduced cerebral blood flow contribute to progressive cognitive decline.",
         "causes_ja": "猫における猫の認知機能障害症候群の原因: 高齢猫の加齢に伴う認知機能低下で、混乱と行動変化を引き起こします。",
         "pathophysiology": "Age-related neuronal loss, beta-amyloid plaque deposition, and oxidative damage in the aging feline brain cause progressive cognitive decline manifesting as disorientation, altered sleep-wake cycles, and behavioral changes.",
@@ -3446,7 +3860,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Plague (Yersinia pestis)",
         "name_ja": "ペスト",
-        "symptoms": {"fever", "lymph_node_enlargement", "lethargy", "appetite_loss", "labored_breathing", "draining_wound"},
+        "symptoms": {
+            "fever",
+            "lymph_node_enlargement",
+            "lethargy",
+            "appetite_loss",
+            "labored_breathing",
+            "draining_wound",
+        },
         "description": "Plague (Yersinia pestis) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "げっ歯類のノミを介して伝播する細菌性人獣共通感染症で、猫に重度の全身症状を引き起こします。",
         "urgency": "emergency",
@@ -3551,7 +3972,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mycobacterial Infection (Feline Tuberculosis)",
         "name_ja": "猫マイコバクテリウム感染症",
-        "symptoms": {"skin_lesions", "non_healing_wound", "lymph_node_enlargement", "weight_loss", "labored_breathing", "lethargy"},
+        "symptoms": {
+            "skin_lesions",
+            "non_healing_wound",
+            "lymph_node_enlargement",
+            "weight_loss",
+            "labored_breathing",
+            "lethargy",
+        },
         "description": "Mycobacterial Infection (Feline Tuberculosis) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "マイコバクテリウム属による慢性感染症で、肉芽腫性皮膚病変と全身症状を引き起こします。",
         "urgency": "high",
@@ -3575,7 +4003,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hypothyroidism (Iatrogenic)",
         "name_ja": "甲状腺機能低下症（医原性）",
-        "symptoms": {"lethargy", "weight_gain", "poor_coat", "constipation", "hypothermia", "decreased_activity", "hair_loss", "bradycardia"},
+        "symptoms": {
+            "lethargy",
+            "weight_gain",
+            "poor_coat",
+            "constipation",
+            "hypothermia",
+            "decreased_activity",
+            "hair_loss",
+            "bradycardia",
+        },
         "description": "Hypothyroidism (Iatrogenic) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "甲状腺ホルモン低値で、通常は甲状腺機能亢進症の過剰治療による医原性です。",
         "urgency": "moderate",
@@ -3617,11 +4054,25 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hypercalcemia",
         "name_ja": "高カルシウム血症",
-        "symptoms": {"appetite_loss", "vomiting", "excessive_thirst", "excessive_urination", "lethargy", "constipation", "weight_loss"},
+        "symptoms": {
+            "appetite_loss",
+            "vomiting",
+            "excessive_thirst",
+            "excessive_urination",
+            "lethargy",
+            "constipation",
+            "weight_loss",
+        },
         "description": "Hypercalcemia is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "腫瘍、腎臓病、または特発性の原因による血中カルシウム値の上昇です。",
         "urgency": "high",
-        "recommended_tests": ["blood_chemistry", "ionized_calcium", "parathyroid_hormone", "chest_xray", "abdominal_ultrasound"],
+        "recommended_tests": [
+            "blood_chemistry",
+            "ionized_calcium",
+            "parathyroid_hormone",
+            "chest_xray",
+            "abdominal_ultrasound",
+        ],
         "causes": "Idiopathic hypercalcemia is the most common cause in cats (unlike dogs). Other causes include neoplasia (lymphoma producing PTHrP), primary hyperparathyroidism, CKD (tertiary hyperparathyroidism), granulomatous disease, vitamin D toxicosis (rodenticide ingestion, calcipotriol), and hypoadrenocorticism. Feline idiopathic hypercalcemia may be related to dietary factors.",
         "causes_ja": "猫における高カルシウム血症の原因: 腫瘍、腎臓病、または特発性の原因による血中カルシウム値の上昇です。",
         "pathophysiology": "Elevated ionized calcium from neoplasia (PTHrP-secreting lymphoma), primary hyperparathyroidism, or granulomatous disease impairs renal concentrating ability and causes soft tissue mineralization, cardiac arrhythmias, and neuromuscular dysfunction.",
@@ -3680,11 +4131,25 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Portosystemic Shunt",
         "name_ja": "門脈体循環シャント",
-        "symptoms": {"stunted_growth", "disorientation", "seizures", "drooling", "vomiting", "excessive_urination", "behavioral_changes"},
+        "symptoms": {
+            "stunted_growth",
+            "disorientation",
+            "seizures",
+            "drooling",
+            "vomiting",
+            "excessive_urination",
+            "behavioral_changes",
+        },
         "description": "Portosystemic Shunt is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "肝臓を迂回する異常血管により毒素が蓄積する疾患で、先天性または後天性があります。",
         "urgency": "high",
-        "recommended_tests": ["bile_acids", "ammonia_level", "abdominal_ultrasound", "blood_chemistry", "ct_angiography"],
+        "recommended_tests": [
+            "bile_acids",
+            "ammonia_level",
+            "abdominal_ultrasound",
+            "blood_chemistry",
+            "ct_angiography",
+        ],
         "causes": "Congenital (most common in cats): abnormal vascular communication bypassing the liver, allowing portal blood to enter systemic circulation directly. Typically a single extrahepatic shunt. Acquired portosystemic shunts develop secondary to portal hypertension from chronic hepatic disease. Hepatic encephalopathy results from failure to clear ammonia, aromatic amino acids, and other enteric toxins.",
         "causes_ja": "猫における門脈体循環シャントの原因: 肝臓を迂回する異常血管により毒素が蓄積する疾患で、先天性または後天性があります。",
         "pathophysiology": "Anomalous vascular connection bypasses hepatic sinusoidal circulation, shunting portal blood directly into systemic circulation; unmetabolized toxins (ammonia, aromatic amino acids) cause hepatic encephalopathy and impaired hepatic growth.",
@@ -3729,7 +4194,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Heartworm-Associated Respiratory Disease (HARD) is a parasitic condition that causes clinical signs ranging from subclinical to severe systemic disease.",
         "description_ja": "成虫が存在しなくても未熟フィラリアにより肺の炎症が生じる疾患です。",
         "urgency": "moderate",
-        "recommended_tests": ["chest_xray", "heartworm_antibody_test", "bronchoalveolar_lavage", "complete_blood_count"],
+        "recommended_tests": [
+            "chest_xray",
+            "heartworm_antibody_test",
+            "bronchoalveolar_lavage",
+            "complete_blood_count",
+        ],
         "causes": "Caused by Dirofilaria immitis transmitted by mosquito bite. In cats, even immature/dying heartworms provoke severe eosinophilic and neutrophilic pulmonary inflammation. Cats are atypical hosts with low worm burden (1-3 worms) but intense immune-mediated pulmonary arteritis. The inflammatory response to arriving L5 larvae and young adults, or to worm death, causes the characteristic respiratory signs even without mature adult worms.",
         "causes_ja": "猫におけるフィラリア関連呼吸器疾患の原因: 成虫が存在しなくても未熟フィラリアにより肺の炎症が生じる疾患です。",
         "pathophysiology": "Myocardial dysfunction impairs cardiac output through reduced contractility, abnormal relaxation, or rhythm disturbances. Compensatory mechanisms eventually fail, leading to congestive heart failure.",
@@ -3878,7 +4348,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dysautonomia (Key-Gaskell Syndrome)",
         "name_ja": "自律神経障害（キー・ガスケル症候群）",
-        "symptoms": {"dilated_pupils", "constipation", "regurgitation", "decreased_urination", "dry_nose", "third_eyelid_protrusion"},
+        "symptoms": {
+            "dilated_pupils",
+            "constipation",
+            "regurgitation",
+            "decreased_urination",
+            "dry_nose",
+            "third_eyelid_protrusion",
+        },
         "description": "Dysautonomia (Key-Gaskell Syndrome) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "自律神経系の変性により広範な自律神経障害を引き起こす疾患です。",
         "urgency": "high",
@@ -3989,7 +4466,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Herpesviral Keratitis",
         "name_ja": "猫ヘルペスウイルス性角膜炎",
-        "symptoms": {"squinting", "excessive_tearing", "corneal_cloudiness", "eye_pain", "eye_discharge", "corneal_ulcer"},
+        "symptoms": {
+            "squinting",
+            "excessive_tearing",
+            "corneal_cloudiness",
+            "eye_pain",
+            "eye_discharge",
+            "corneal_ulcer",
+        },
         "description": "Feline Herpesviral Keratitis is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "猫ヘルペスウイルス1型の再活性化による慢性または再発性の角膜炎です。",
         "urgency": "moderate",
@@ -4142,7 +4626,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyometra",
         "name_ja": "子宮蓄膿症",
-        "symptoms": {"vaginal_discharge", "lethargy", "appetite_loss", "excessive_thirst", "vomiting", "abdominal_distension", "fever"},
+        "symptoms": {
+            "vaginal_discharge",
+            "lethargy",
+            "appetite_loss",
+            "excessive_thirst",
+            "vomiting",
+            "abdominal_distension",
+            "fever",
+        },
         "description": "Pyometra is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "未避妊の雌猫の子宮の生命を脅かす細菌感染症で、緊急手術が必要です。",
         "urgency": "emergency",
@@ -4163,11 +4655,23 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dystocia (Difficult Birth)",
         "name_ja": "難産",
-        "symptoms": {"prolonged_labor", "lethargy", "vocalization_changes", "abdominal_contractions", "vaginal_discharge"},
+        "symptoms": {
+            "prolonged_labor",
+            "lethargy",
+            "vocalization_changes",
+            "abdominal_contractions",
+            "vaginal_discharge",
+        },
         "description": "Dystocia in cats occurs when parturition cannot be completed normally. Less common than in dogs but requires prompt emergency intervention. Peak occurrence in primiparous queens aged 2-5 years.",
         "description_ja": "猫の難産は正常分娩が完了できない状態。犬より稀だが迅速な緊急対応が必要。初産の2-5歳の雌猫で最頻出。",
         "urgency": "emergency",
-        "recommended_tests": ["abdominal_xray", "abdominal_ultrasound", "blood_chemistry", "physical_exam", "fetal_heart_monitoring"],
+        "recommended_tests": [
+            "abdominal_xray",
+            "abdominal_ultrasound",
+            "blood_chemistry",
+            "physical_exam",
+            "fetal_heart_monitoring",
+        ],
         "causes": "PRIMARY (uterine inertia 50-60% of cases): inadequate myometrial contractions, secondary to hypocalcemia, oxytocin dysfunction, fatigue, obesity. SECONDARY (40-50%): fetal oversize, malpresentation (breech/transverse—more common in cats than dogs), fetal abnormality (hydrocephalus, anasarca), pelvic abnormality (rare in cats, but pelvic fracture history), uterine torsion (rare). Risk factors: primigravida queens, age >8 years, very young queens (<1.5 years), obesity, poor body condition, pregnancy toxemia history.",
         "causes_ja": "一次難産（子宮無力症50-60%）：不十分な筋層収縮で低カルシウム血症、オキシトシン機能障害、疲労、肥満に続発。二次難産（40-50%）：胎児過大、奇異位（骨盤位/横位—犬より猫で一般的）、胎児奇形（水頭症、浮腫）、骨盤異常（猫で稀だが骨盤骨折既往）、子宮捻転（稀）。リスク因子：初産雌、>8歳、非常に若い雌（<1.5歳）、肥満、不良体況、妊娠中毒症既往。",
         "pathophysiology": "PRIMARY: Myometrial contractions fail to generate sufficient force, may result from hypocalcemia, exhaustion, hormonal dysfunction, uterine dysfunction from obesity or aging. Cervix may fail to dilate completely. Kittens present normally but cannot advance through birth canal. SECONDARY: Fetus diameter exceeds maternal pelvic diameter or birth canal at any level (inlet, mid-pelvis, outlet). Normal stage 1 labor (restlessness, nesting) occurs, stage 2 (active straining) begins but no kitten delivered within 30-60 minutes of visible straining. Prolonged obstruction (>4-6 hours) causes fetal hypoxia, uterine ischemia, maternal metabolic acidosis, potential uterine rupture. Fetal death and maceration occur within 12-24 hours of obstructed labor; maternal sepsis/DIC develops if uterus ruptures.",
@@ -4379,7 +4883,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Acetaminophen (Paracetamol) Toxicosis",
         "name_ja": "アセトアミノフェン中毒",
-        "symptoms": {"cyanosis", "labored_breathing", "lethargy", "facial_swelling", "jaundice", "dark_urine", "vomiting"},
+        "symptoms": {
+            "cyanosis",
+            "labored_breathing",
+            "lethargy",
+            "facial_swelling",
+            "jaundice",
+            "dark_urine",
+            "vomiting",
+        },
         "description": "Acetaminophen (Paracetamol) Toxicosis is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "猫には低用量でも極めて有毒で、メトヘモグロビン血症と肝壊死を引き起こします。",
         "urgency": "emergency",
@@ -4557,7 +5069,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Systemic Lupus Erythematosus (SLE) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "関節炎、皮膚疾患、臓器障害を引き起こす多臓器性自己免疫疾患です。",
         "urgency": "high",
-        "recommended_tests": ["antinuclear_antibody_test", "complete_blood_count", "blood_chemistry", "urinalysis", "joint_fluid_analysis"],
+        "recommended_tests": [
+            "antinuclear_antibody_test",
+            "complete_blood_count",
+            "blood_chemistry",
+            "urinalysis",
+            "joint_fluid_analysis",
+        ],
         "causes": "Autoimmune disorder with loss of self-tolerance leading to production of antinuclear antibodies and immune complex deposition in multiple organs. Genetic predisposition, UV exposure, viral infections, and drug reactions may trigger disease.",
         "causes_ja": "猫における全身性エリテマトーデスの原因: 関節炎、皮膚疾患、臓器障害を引き起こす多臓器性自己免疫疾患です。",
         "pathophysiology": "Autoantibody production against nuclear antigens forms immune complexes that deposit in skin, joints, kidneys, and blood vessels, triggering complement-mediated inflammation and multi-organ damage.",
@@ -4578,7 +5096,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Immune-Mediated Thrombocytopenia (ITP) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "血小板の自己免疫性破壊により出血傾向と紫斑を引き起こします。",
         "urgency": "high",
-        "recommended_tests": ["complete_blood_count", "blood_smear", "coagulation_panel", "bone_marrow_biopsy", "fiv_felv_snap_test"],
+        "recommended_tests": [
+            "complete_blood_count",
+            "blood_smear",
+            "coagulation_panel",
+            "bone_marrow_biopsy",
+            "fiv_felv_snap_test",
+        ],
         "causes": "Autoantibodies (IgG) directed against platelet surface glycoproteins cause accelerated platelet destruction by splenic macrophages. May be primary (idiopathic) or secondary to FeLV, FIV, Mycoplasma haemofelis, drug reactions, or neoplasia.",
         "causes_ja": "猫における免疫介在性血小板減少症の原因: 血小板の自己免疫性破壊により出血傾向と紫斑を引き起こします。",
         "pathophysiology": "Autoantibodies (IgG) bind to platelet surface glycoproteins, leading to Fc receptor-mediated phagocytosis by splenic and hepatic macrophages, causing accelerated platelet destruction and hemorrhagic diathesis.",
@@ -4620,7 +5144,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Immune-Mediated Polyarthritis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "滑膜に対する免疫介在性攻撃による非びらん性関節炎です。",
         "urgency": "high",
-        "recommended_tests": ["joint_fluid_analysis", "complete_blood_count", "antinuclear_antibody_test", "joint_xray"],
+        "recommended_tests": [
+            "joint_fluid_analysis",
+            "complete_blood_count",
+            "antinuclear_antibody_test",
+            "joint_xray",
+        ],
         "causes": "Immune complex deposition in synovial membranes causing non-erosive polyarthritis. May be idiopathic, or secondary to chronic infections (calicivirus, Mycoplasma), neoplasia, drug reactions, or other immune-mediated diseases (SLE).",
         "causes_ja": "猫における免疫介在性多発性関節炎の原因: 滑膜に対する免疫介在性攻撃による非びらん性関節炎です。",
         "pathophysiology": "Immune complex deposition in synovial membranes triggers complement activation and neutrophilic infiltration, causing non-erosive polyarthritis with joint effusion, synovial hypertrophy, and pain in multiple joints.",
@@ -4724,7 +5253,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pituitary Tumor",
         "name_ja": "下垂体腫瘍",
-        "symptoms": {"behavioral_changes", "blindness", "seizures", "increased_appetite", "excessive_thirst", "excessive_urination"},
+        "symptoms": {
+            "behavioral_changes",
+            "blindness",
+            "seizures",
+            "increased_appetite",
+            "excessive_thirst",
+            "excessive_urination",
+        },
         "description": "Pituitary Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "下垂体の腫瘍でホルモン不均衡と神経症状を引き起こす可能性があります。",
         "urgency": "high",
@@ -4748,7 +5284,13 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Separation Anxiety",
         "name_ja": "分離不安",
-        "symptoms": {"vocalization_changes", "inappropriate_urination", "excessive_grooming", "appetite_loss", "hiding"},
+        "symptoms": {
+            "vocalization_changes",
+            "inappropriate_urination",
+            "excessive_grooming",
+            "appetite_loss",
+            "hiding",
+        },
         "description": "Separation Anxiety is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "飼い主からの分離時に生じる苦痛で、破壊的または不安な行動を引き起こします。",
         "urgency": "low",
@@ -4796,59 +5338,59 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"weight_gain", "lethargy", "exercise_intolerance", "labored_breathing"},
         "description": "Excessive body fat accumulation, the most common nutritional disorder in cats.",
         "description_ja": "猫で最も多い栄養障害。室内飼育猫の30〜40%が肥満または過体重。"
-                          "BCS 7/9以上を肥満と判定。糖尿病・肝リピドーシス・関節疾患・"
-                          "下部尿路疾患のリスク因子。肥満猫が食欲廃絶すると肝リピドーシスを発症するため注意。",
+        "BCS 7/9以上を肥満と判定。糖尿病・肝リピドーシス・関節疾患・"
+        "下部尿路疾患のリスク因子。肥満猫が食欲廃絶すると肝リピドーシスを発症するため注意。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "慢性的なエネルギー過剰→白色脂肪組織の蓄積→"
-                              "アディポカイン分泌異常→インスリン抵抗性（糖尿病リスク4倍）→"
-                              "慢性低度炎症。猫は犬と異なりタンパク質代謝依存が高く、"
-                              "絶食時に肝臓への脂肪動員が急速→肝リピドーシスのリスク。",
+        "アディポカイン分泌異常→インスリン抵抗性（糖尿病リスク4倍）→"
+        "慢性低度炎症。猫は犬と異なりタンパク質代謝依存が高く、"
+        "絶食時に肝臓への脂肪動員が急速→肝リピドーシスのリスク。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "過剰なカロリー摂取、運動不足（完全室内飼育）、避妊/去勢後の代謝低下、"
-                     "自由給餌（ad lib feeding）、高炭水化物食。"
-                     "品種素因：雑種猫、ブリティッシュショートヘア。",
+        "自由給餌（ad lib feeding）、高炭水化物食。"
+        "品種素因：雑種猫、ブリティッシュショートヘア。",
         "treatment": "WEIGHT MANAGEMENT PROGRAM: Safe weight loss rate is 0.5-2% body weight per week — rapid "
-                    "weight loss is CONTRAINDICATED due to risk of hepatic lipidosis (potentially fatal in cats). "
-                    "DIETARY THERAPY: Prescription weight management diets (Hill's Metabolic, Royal Canin Satiety "
-                    "Support, or Purina OM) — high protein (>40% ME from protein), moderate fat, increased fiber "
-                    "for satiety. Start at 80% of current maintenance calories, then adjust based on biweekly "
-                    "weigh-ins. Target caloric intake typically 60-70% of RER at ideal body weight. Calculate "
-                    "RER: 70 × (ideal BW in kg)^0.75 kcal/day. Transition to new diet over 7-10 days. "
-                    "NEVER allow complete fasting — even 2-3 days of anorexia can trigger hepatic lipidosis "
-                    "in obese cats. ENVIRONMENTAL ENRICHMENT: Food puzzles, interactive toys, vertical spaces "
-                    "(cat trees), scheduled play sessions 10-15 min × 2-3 times daily to increase activity. "
-                    "MONITORING: Monthly body weight and BCS (9-point scale) assessment. Target BCS 4-5/9. "
-                    "Expected weight loss: 1-2% per week. If weight loss stalls, reassess caloric intake and "
-                    "rule out hypothyroidism (rare in cats) or other metabolic disease. PHARMACOLOGICAL: "
-                    "Dirlotapide not approved for cats. No approved feline weight loss drugs currently available. "
-                    "COMORBIDITY MANAGEMENT: Screen for and manage concurrent diabetes mellitus (insulin "
-                    "sensitivity may improve with weight loss — some diabetic cats achieve remission), "
-                    "osteoarthritis (meloxicam 0.05 mg/kg PO q24h long-term if needed), and lower urinary "
-                    "tract disease. References: AAHA Weight Management Guidelines (2014); German (2006) "
-                    "J Feline Med Surg; Laflamme (1997) BCS system.",
+        "weight loss is CONTRAINDICATED due to risk of hepatic lipidosis (potentially fatal in cats). "
+        "DIETARY THERAPY: Prescription weight management diets (Hill's Metabolic, Royal Canin Satiety "
+        "Support, or Purina OM) — high protein (>40% ME from protein), moderate fat, increased fiber "
+        "for satiety. Start at 80% of current maintenance calories, then adjust based on biweekly "
+        "weigh-ins. Target caloric intake typically 60-70% of RER at ideal body weight. Calculate "
+        "RER: 70 × (ideal BW in kg)^0.75 kcal/day. Transition to new diet over 7-10 days. "
+        "NEVER allow complete fasting — even 2-3 days of anorexia can trigger hepatic lipidosis "
+        "in obese cats. ENVIRONMENTAL ENRICHMENT: Food puzzles, interactive toys, vertical spaces "
+        "(cat trees), scheduled play sessions 10-15 min × 2-3 times daily to increase activity. "
+        "MONITORING: Monthly body weight and BCS (9-point scale) assessment. Target BCS 4-5/9. "
+        "Expected weight loss: 1-2% per week. If weight loss stalls, reassess caloric intake and "
+        "rule out hypothyroidism (rare in cats) or other metabolic disease. PHARMACOLOGICAL: "
+        "Dirlotapide not approved for cats. No approved feline weight loss drugs currently available. "
+        "COMORBIDITY MANAGEMENT: Screen for and manage concurrent diabetes mellitus (insulin "
+        "sensitivity may improve with weight loss — some diabetic cats achieve remission), "
+        "osteoarthritis (meloxicam 0.05 mg/kg PO q24h long-term if needed), and lower urinary "
+        "tract disease. References: AAHA Weight Management Guidelines (2014); German (2006) "
+        "J Feline Med Surg; Laflamme (1997) BCS system.",
         "treatment_ja": "安全な減量速度は週0.5〜2%体重（急速減量は肝リピドーシスのリスク）。"
-                        "減量用療法食（Hill's Metabolic, Royal Canin Satiety等）。"
-                        "現維持カロリーの80%からスタート→徐々に調整。"
-                        "環境エンリッチメント（フードパズル・おもちゃ）で活動量増加。"
-                        "月1回の体重・BCS測定。絶食は絶対に避ける。",
+        "減量用療法食（Hill's Metabolic, Royal Canin Satiety等）。"
+        "現維持カロリーの80%からスタート→徐々に調整。"
+        "環境エンリッチメント（フードパズル・おもちゃ）で活動量増加。"
+        "月1回の体重・BCS測定。絶食は絶対に避ける。",
         "prognosis": "Good prognosis with appropriate management and owner compliance. Weight loss of 1-2% per "
-                     "week is achievable with dietary modification and environmental enrichment. Insulin sensitivity "
-                     "improves with weight loss — some diabetic cats achieve complete remission of diabetes mellitus "
-                     "after reaching ideal body weight. Osteoarthritis symptoms and FLUTD risk also decrease. "
-                     "CRITICAL WARNING: Rapid weight loss or anorexia in obese cats carries high risk of hepatic "
-                     "lipidosis, which has 50-60% mortality even with aggressive treatment. Lifelong weight "
-                     "management is essential to prevent regain.",
+        "week is achievable with dietary modification and environmental enrichment. Insulin sensitivity "
+        "improves with weight loss — some diabetic cats achieve complete remission of diabetes mellitus "
+        "after reaching ideal body weight. Osteoarthritis symptoms and FLUTD risk also decrease. "
+        "CRITICAL WARNING: Rapid weight loss or anorexia in obese cats carries high risk of hepatic "
+        "lipidosis, which has 50-60% mortality even with aggressive treatment. Lifelong weight "
+        "management is essential to prevent regain.",
         "prognosis_ja": "適切な管理で予後良好。減量によりインスリン感受性が改善し"
-                        "糖尿病が寛解する場合もある。急速減量は肝リピドーシスのリスク。",
+        "糖尿病が寛解する場合もある。急速減量は肝リピドーシスのリスク。",
         "prevention": "Measured portion feeding — avoid free-choice (ad libitum) feeding. Reduce caloric "
-                      "intake 10-20% after spay/neuter (metabolic rate decreases ~25-30%). Scheduled meal "
-                      "times (2-3 meals per day). Environmental enrichment to encourage physical activity. "
-                      "Regular BCS assessment at every veterinary visit. Early intervention when BCS reaches "
-                      "6/9 (overweight threshold). Owner education on appropriate treat limits (<10% of "
-                      "daily calories). Reference: WSAVA Global Nutrition Guidelines.",
+        "intake 10-20% after spay/neuter (metabolic rate decreases ~25-30%). Scheduled meal "
+        "times (2-3 meals per day). Environmental enrichment to encourage physical activity. "
+        "Regular BCS assessment at every veterinary visit. Early intervention when BCS reaches "
+        "6/9 (overweight threshold). Owner education on appropriate treat limits (<10% of "
+        "daily calories). Reference: WSAVA Global Nutrition Guidelines.",
         "prevention_ja": "給餌量の計量管理。自由給餌を避ける。食事時間制限。"
-                         "避妊/去勢後のカロリー10〜20%削減。環境エンリッチメント。"
-                         "定期的なBCS評価。",
+        "避妊/去勢後のカロリー10〜20%削減。環境エンリッチメント。"
+        "定期的なBCS評価。",
         "urgency": "normal",
         "recommended_tests": ["physical_exam", "serum_chemistry", "thyroid_panel", "urinalysis"],
         "onset_pattern": {"chronic"},
@@ -4857,70 +5399,76 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Idiopathic Cystitis (FIC)",
         "name_ja": "猫特発性膀胱炎（FIC）",
-        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination",
-                      "inappropriate_urination", "vocalization_changes", "excessive_grooming"},
+        "symptoms": {
+            "straining_to_urinate",
+            "bloody_urine",
+            "frequent_urination",
+            "inappropriate_urination",
+            "vocalization_changes",
+            "excessive_grooming",
+        },
         "description": "Stress-related sterile inflammation of the bladder, the most common cause of FLUTD in cats under 10 years.",
         "description_ja": "ストレス関連の無菌性膀胱炎。10歳未満の猫のFLUTDの55〜65%を占める最多原因。"
-                          "血尿・頻尿・不適切排泄が特徴。尿培養は陰性。"
-                          "再発率が高く、ストレス管理が治療の中心。",
+        "血尿・頻尿・不適切排泄が特徴。尿培養は陰性。"
+        "再発率が高く、ストレス管理が治療の中心。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "慢性ストレス→視床下部-下垂体-副腎系の異常活性化→"
-                              "膀胱粘膜のGAG層（グリコサミノグリカン層）菲薄化→"
-                              "尿中刺激物質が膀胱壁を直接刺激→神経原性炎症→"
-                              "疼痛・頻尿・血尿。ヒトの間質性膀胱炎に類似。",
+        "膀胱粘膜のGAG層（グリコサミノグリカン層）菲薄化→"
+        "尿中刺激物質が膀胱壁を直接刺激→神経原性炎症→"
+        "疼痛・頻尿・血尿。ヒトの間質性膀胱炎に類似。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "ストレス（環境変化・多頭飼育・トイレの問題・引越し・来客）、"
-                     "室内飼育、肥満、飲水量不足、ドライフード主体の食事。"
-                     "性格的に神経質な猫に多い。",
+        "室内飼育、肥満、飲水量不足、ドライフード主体の食事。"
+        "性格的に神経質な猫に多い。",
         "treatment": "MULTIMODAL ENVIRONMENTAL MODIFICATION (MEMO) is the cornerstone of FIC management — "
-                    "the single most effective intervention (Buffington 2011). (1) STRESS SOURCE IDENTIFICATION "
-                    "AND REMOVAL: Assess household stressors (inter-cat conflict, environmental changes, owner "
-                    "schedule disruption, construction noise). (2) LITTER BOX OPTIMIZATION: n+1 rule (one more "
-                    "box than number of cats), placed in quiet, accessible locations, cleaned daily, unscented "
-                    "clumping litter preferred, uncovered boxes often preferred. (3) DIETARY MODIFICATION: "
-                    "Transition to wet food (increases water intake by 50-100%, dilutes urine irritants). "
-                    "Prescription urinary diets (Hill's c/d Stress, Royal Canin Urinary S/O + Calm). "
-                    "Water fountains to encourage drinking. Target USG <1.035. (4) FELIWAY (synthetic feline "
-                    "facial pheromone F3 fraction) diffuser — reduces stress-related behaviors; place in "
-                    "core areas where cat spends most time. (5) ENVIRONMENTAL ENRICHMENT: Vertical spaces, "
-                    "hiding spots, scratching posts, interactive play sessions, predictable routine. "
-                    "(6) ACUTE EPISODE PAIN MANAGEMENT: Buprenorphine 0.01-0.03 mg/kg OTM (oral transmucosal) "
-                    "q6-8h × 3-5 days — excellent feline bioavailability via OTM route (≈60%). Meloxicam "
-                    "0.05-0.1 mg/kg PO q24h × 3-5 days for anti-inflammatory effect. (7) URETHRAL "
-                    "OBSTRUCTION (MALE CATS — EMERGENCY): IV catheterization under sedation (medetomidine "
-                    "5-10 μg/kg + butorphanol 0.2 mg/kg IV/IM), urinary catheter (3.5F tomcat catheter or "
-                    "3.5F red rubber), closed collection system × 24-48h, post-obstructive diuresis monitoring "
-                    "(IV LRS 2-4 mL/kg/h), electrolyte correction (hyperkalemia: calcium gluconate 10% "
-                    "0.5-1 mL/kg slow IV if ECG changes). (8) REFRACTORY CASES: Amitriptyline 2.5-5 mg/cat "
-                    "PO q24h (anticholinergic + analgesic properties, only for chronic recurrent FIC after "
-                    "MEMO failure). GAG supplementation (Elmiron/pentosan polysulfate 2 mg/kg SC twice "
-                    "weekly — limited evidence but anecdotally helpful). References: Buffington (2011) "
-                    "JFMS MEMO protocol; Westropp & Buffington (2004); ISFM FLUTD Guidelines (2016).",
+        "the single most effective intervention (Buffington 2011). (1) STRESS SOURCE IDENTIFICATION "
+        "AND REMOVAL: Assess household stressors (inter-cat conflict, environmental changes, owner "
+        "schedule disruption, construction noise). (2) LITTER BOX OPTIMIZATION: n+1 rule (one more "
+        "box than number of cats), placed in quiet, accessible locations, cleaned daily, unscented "
+        "clumping litter preferred, uncovered boxes often preferred. (3) DIETARY MODIFICATION: "
+        "Transition to wet food (increases water intake by 50-100%, dilutes urine irritants). "
+        "Prescription urinary diets (Hill's c/d Stress, Royal Canin Urinary S/O + Calm). "
+        "Water fountains to encourage drinking. Target USG <1.035. (4) FELIWAY (synthetic feline "
+        "facial pheromone F3 fraction) diffuser — reduces stress-related behaviors; place in "
+        "core areas where cat spends most time. (5) ENVIRONMENTAL ENRICHMENT: Vertical spaces, "
+        "hiding spots, scratching posts, interactive play sessions, predictable routine. "
+        "(6) ACUTE EPISODE PAIN MANAGEMENT: Buprenorphine 0.01-0.03 mg/kg OTM (oral transmucosal) "
+        "q6-8h × 3-5 days — excellent feline bioavailability via OTM route (≈60%). Meloxicam "
+        "0.05-0.1 mg/kg PO q24h × 3-5 days for anti-inflammatory effect. (7) URETHRAL "
+        "OBSTRUCTION (MALE CATS — EMERGENCY): IV catheterization under sedation (medetomidine "
+        "5-10 μg/kg + butorphanol 0.2 mg/kg IV/IM), urinary catheter (3.5F tomcat catheter or "
+        "3.5F red rubber), closed collection system × 24-48h, post-obstructive diuresis monitoring "
+        "(IV LRS 2-4 mL/kg/h), electrolyte correction (hyperkalemia: calcium gluconate 10% "
+        "0.5-1 mL/kg slow IV if ECG changes). (8) REFRACTORY CASES: Amitriptyline 2.5-5 mg/cat "
+        "PO q24h (anticholinergic + analgesic properties, only for chronic recurrent FIC after "
+        "MEMO failure). GAG supplementation (Elmiron/pentosan polysulfate 2 mg/kg SC twice "
+        "weekly — limited evidence but anecdotally helpful). References: Buffington (2011) "
+        "JFMS MEMO protocol; Westropp & Buffington (2004); ISFM FLUTD Guidelines (2016).",
         "treatment_ja": "環境修正（MEMO: Multimodal Environmental MOdification）が最重要。"
-                        "(1)ストレス源の特定と除去、(2)トイレ環境改善（猫数+1個、静かな場所）、"
-                        "(3)ウェットフード主体の食事（飲水量増加）、"
-                        "(4)フェリウェイ（合成猫フェロモン）拡散器、"
-                        "(5)環境エンリッチメント、(6)急性期の疼痛管理（ブプレノルフィン）。"
-                        "雄猫の尿道閉塞時は緊急カテーテル処置。",
+        "(1)ストレス源の特定と除去、(2)トイレ環境改善（猫数+1個、静かな場所）、"
+        "(3)ウェットフード主体の食事（飲水量増加）、"
+        "(4)フェリウェイ（合成猫フェロモン）拡散器、"
+        "(5)環境エンリッチメント、(6)急性期の疼痛管理（ブプレノルフィン）。"
+        "雄猫の尿道閉塞時は緊急カテーテル処置。",
         "prognosis": "Acute episodes are often self-limiting (resolve within 3-7 days with or without treatment). "
-                     "However, recurrence rate is high — approximately 50% within 12 months without environmental "
-                     "modification. With full MEMO protocol implementation, recurrence rate decreases to 10-20%. "
-                     "Urethral obstruction in male cats (plug or spasm) carries 5-10% mortality if untreated "
-                     "within 24-48 hours due to hyperkalemia and post-renal azotemia. Perineal urethrostomy "
-                     "may be considered for cats with recurrent obstruction (>2 episodes) but does not prevent "
-                     "FIC episodes — only prevents obstruction. Long-term prognosis is good with committed "
-                     "environmental management.",
+        "However, recurrence rate is high — approximately 50% within 12 months without environmental "
+        "modification. With full MEMO protocol implementation, recurrence rate decreases to 10-20%. "
+        "Urethral obstruction in male cats (plug or spasm) carries 5-10% mortality if untreated "
+        "within 24-48 hours due to hyperkalemia and post-renal azotemia. Perineal urethrostomy "
+        "may be considered for cats with recurrent obstruction (>2 episodes) but does not prevent "
+        "FIC episodes — only prevents obstruction. Long-term prognosis is good with committed "
+        "environmental management.",
         "prognosis_ja": "自然軽快することが多い（急性エピソードは数日〜1週間で改善）。"
-                        "再発率が高い（1年以内に50%）。環境修正で再発率を大幅低減。",
+        "再発率が高い（1年以内に50%）。環境修正で再発率を大幅低減。",
         "prevention": "Environmental enrichment and stress reduction are the primary preventive strategies. "
-                      "Appropriate litter box management (n+1 rule, daily cleaning, unscented clumping litter). "
-                      "Wet food-based diet to increase water intake and reduce urine concentration. Water "
-                      "fountains to encourage drinking. Feliway diffusers in multi-cat households. Predictable "
-                      "daily routine. Avoid sudden environmental changes. Gradual introduction of new cats, "
-                      "people, or furniture. Regular play sessions for stress relief. Reference: Buffington "
-                      "(2011) MEMO protocol; ISFM FLUTD Guidelines (2016).",
+        "Appropriate litter box management (n+1 rule, daily cleaning, unscented clumping litter). "
+        "Wet food-based diet to increase water intake and reduce urine concentration. Water "
+        "fountains to encourage drinking. Feliway diffusers in multi-cat households. Predictable "
+        "daily routine. Avoid sudden environmental changes. Gradual introduction of new cats, "
+        "people, or furniture. Regular play sessions for stress relief. Reference: Buffington "
+        "(2011) MEMO protocol; ISFM FLUTD Guidelines (2016).",
         "prevention_ja": "環境エンリッチメント。ストレス軽減。適切なトイレ管理。"
-                         "ウェットフード。十分な飲水量。フェリウェイ。",
+        "ウェットフード。十分な飲水量。フェリウェイ。",
         "urgency": "moderate",
         "recommended_tests": ["urinalysis", "urine_culture", "abdominal_ultrasound"],
         "onset_pattern": {"acute", "subacute"},
@@ -4953,7 +5501,13 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Saddle Nose Deformity (Brachycephalic Airway Syndrome)",
         "name_ja": "短頭種気道症候群",
-        "symptoms": {"noisy_breathing", "sneezing", "labored_breathing", "exercise_intolerance", "open_mouth_breathing"},
+        "symptoms": {
+            "noisy_breathing",
+            "sneezing",
+            "labored_breathing",
+            "exercise_intolerance",
+            "open_mouth_breathing",
+        },
         "description": "Saddle Nose Deformity (Brachycephalic Airway Syndrome) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "ペルシャやヒマラヤンなどの短頭種における上気道閉塞で、慢性的な呼吸困難を引き起こします。",
         "urgency": "moderate",
@@ -4995,7 +5549,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Orofacial Pain Syndrome",
         "name_ja": "猫口顔面疼痛症候群",
-        "symptoms": {"pain", "self_mutilation", "drooling", "vocalization_changes", "difficulty_eating", "excessive_grooming"},
+        "symptoms": {
+            "pain",
+            "self_mutilation",
+            "drooling",
+            "vocalization_changes",
+            "difficulty_eating",
+            "excessive_grooming",
+        },
         "description": "Feline Orofacial Pain Syndrome is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "顔と口の不快感と自傷行為を引き起こす神経障害性疼痛で、バーミーズ猫に多いです。",
         "urgency": "moderate",
@@ -5397,7 +5958,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Peritonitis (Septic)",
         "name_ja": "猫腹膜炎（化膿性）",
-        "symptoms": {"abdominal_pain", "fever", "vomiting", "abdominal_distension", "lethargy", "collapse", "dehydration"},
+        "symptoms": {
+            "abdominal_pain",
+            "fever",
+            "vomiting",
+            "abdominal_distension",
+            "lethargy",
+            "collapse",
+            "dehydration",
+        },
         "description": "Feline Peritonitis (Septic) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "腸管穿孔や術後合併症による腹腔内の細菌感染です。",
         "urgency": "emergency",
@@ -5443,7 +6012,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Feline Megaesophagus is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "食道の拡張と運動低下により慢性的な吐出と誤嚥リスクを引き起こします。",
         "urgency": "moderate",
-        "recommended_tests": ["chest_xray", "barium_swallow", "complete_blood_count", "acetylcholine_receptor_antibody"],
+        "recommended_tests": [
+            "chest_xray",
+            "barium_swallow",
+            "complete_blood_count",
+            "acetylcholine_receptor_antibody",
+        ],
         "causes": "Congenital (vascular ring anomaly, idiopathic) or acquired from myasthenia gravis, dysautonomia, lead toxicity, or esophageal stricture. Rare in cats compared to dogs. Loss of esophageal peristalsis leads to chronic food retention and regurgitation.",
         "causes_ja": "猫における猫巨大食道症の原因: 食道の拡張と運動低下により慢性的な吐出と誤嚥リスクを引き起こします。",
         "pathophysiology": "Loss of esophageal peristaltic function due to neuromuscular dysfunction (myenteric plexus degeneration or vagal nerve damage) causes esophageal dilation, food retention, regurgitation, and aspiration pneumonia risk.",
@@ -5628,7 +6202,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Autonomic Neuropathy",
         "name_ja": "猫自律神経障害",
-        "symptoms": {"dilated_pupils", "constipation", "regurgitation", "dry_nose", "decreased_urination", "bradycardia"},
+        "symptoms": {
+            "dilated_pupils",
+            "constipation",
+            "regurgitation",
+            "dry_nose",
+            "decreased_urination",
+            "bradycardia",
+        },
         "description": "Feline Autonomic Neuropathy is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "自律神経系の機能障害で、複数の臓器系に影響を及ぼします。",
         "urgency": "moderate",
@@ -5670,7 +6251,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Tetanus",
         "name_ja": "猫破傷風",
-        "symptoms": {"muscle_spasms", "stiffness", "jaw_chattering", "hyperthermia", "seizures", "difficulty_swallowing"},
+        "symptoms": {
+            "muscle_spasms",
+            "stiffness",
+            "jaw_chattering",
+            "hyperthermia",
+            "seizures",
+            "difficulty_swallowing",
+        },
         "description": "Feline Tetanus is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "破傷風菌毒素による稀な感染症で、重度の筋硬直を引き起こします。",
         "urgency": "emergency",
@@ -5796,34 +6384,40 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Calcium Oxalate Urolithiasis",
         "name_ja": "猫シュウ酸カルシウム尿路結石症",
-        "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "vocalization_changes", "appetite_loss"},
+        "symptoms": {
+            "straining_to_urinate",
+            "bloody_urine",
+            "frequent_urination",
+            "vocalization_changes",
+            "appetite_loss",
+        },
         "description": "Feline Calcium Oxalate Urolithiasis is a nutritional or metabolic disorder caused by dietary imbalance or deficiency.",
         "description_ja": "猫で最も多い尿石症の一つ。内科的溶解が不可能で外科的摘出が必要。"
-                          "中高齢の雄猫、ペルシャ、ヒマラヤン、ブリティッシュショートヘアに好発。"
-                          "近年ストラバイトから置き換わり増加傾向。",
+        "中高齢の雄猫、ペルシャ、ヒマラヤン、ブリティッシュショートヘアに好発。"
+        "近年ストラバイトから置き換わり増加傾向。",
         "urgency": "high",
         "recommended_tests": ["urinalysis", "abdominal_xray", "abdominal_ultrasound", "serum_calcium"],
         "causes": "Hypercalciuria, hyperoxaluria, acidic urine, low water intake, genetic predisposition.",
         "causes_ja": "高カルシウム尿症、高シュウ酸尿症、酸性尿、飲水量不足、遺伝的素因。"
-                     "過度の尿酸性化食（ストラバイト予防の過剰対応）も一因。"
-                     "副甲状腺機能亢進症による高カルシウム血症も検索すべき。",
+        "過度の尿酸性化食（ストラバイト予防の過剰対応）も一因。"
+        "副甲状腺機能亢進症による高カルシウム血症も検索すべき。",
         "pathophysiology": "Supersaturation of urine with calcium and oxalate ions leads to crystal nucleation and stone growth in acidic urine.",
         "pathophysiology_ja": "尿中のカルシウムイオンとシュウ酸イオンが過飽和→結晶核形成→結石成長。"
-                              "酸性尿でシュウ酸カルシウムの溶解度が低下し結石形成が促進される。"
-                              "膀胱・腎盂・尿管に形成。尿管結石は猫で急増しており緊急性が高い。",
+        "酸性尿でシュウ酸カルシウムの溶解度が低下し結石形成が促進される。"
+        "膀胱・腎盂・尿管に形成。尿管結石は猫で急増しており緊急性が高い。",
         "treatment": "Surgical removal required; medical dissolution is not possible.",
         "treatment_ja": "内科的溶解不可→外科的摘出が標準。"
-                        "(1)膀胱切開術で膀胱結石摘出、(2)尿管結石：SUBシステム（皮下尿管バイパス）"
-                        "または尿管ステント留置、(3)術後療法食（Royal Canin S/O, Hill's c/d等）、"
-                        "(4)飲水量増加（ウェットフード主体）、(5)クエン酸カリウムで尿pH 6.5〜7.0維持。"
-                        "iCa（イオン化カルシウム）高値の場合は原因精査。",
+        "(1)膀胱切開術で膀胱結石摘出、(2)尿管結石：SUBシステム（皮下尿管バイパス）"
+        "または尿管ステント留置、(3)術後療法食（Royal Canin S/O, Hill's c/d等）、"
+        "(4)飲水量増加（ウェットフード主体）、(5)クエン酸カリウムで尿pH 6.5〜7.0維持。"
+        "iCa（イオン化カルシウム）高値の場合は原因精査。",
         "prevention": "Adequate hydration, wet food diet, avoid excessive urinary acidification.",
         "prevention_ja": "ウェットフード主体の食事で飲水量確保。過度の尿酸性化を避ける。"
-                         "療法食（結石予防食）。3〜6ヶ月毎のX線/超音波モニタリング。"
-                         "血清カルシウム値の定期測定。",
+        "療法食（結石予防食）。3〜6ヶ月毎のX線/超音波モニタリング。"
+        "血清カルシウム値の定期測定。",
         "prognosis": "Recurrence rate 30-50% within 3 years. Lifelong monitoring required.",
         "prognosis_ja": "外科的摘出後の短期予後は良好。再発率が高い（3年以内に30〜50%）。"
-                        "尿管結石の場合SUBシステム管理が必要。生涯の食事管理とモニタリングが必須。",
+        "尿管結石の場合SUBシステム管理が必要。生涯の食事管理とモニタリングが必須。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -5833,33 +6427,33 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "inappropriate_urination"},
         "description": "Feline Struvite Urolithiasis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "リン酸マグネシウムアンモニウム（ストラバイト）結石。"
-                          "猫では犬と異なり無菌性（感染非関連）が多い。"
-                          "内科的溶解が可能。若齢〜中齢猫に多い。",
+        "猫では犬と異なり無菌性（感染非関連）が多い。"
+        "内科的溶解が可能。若齢〜中齢猫に多い。",
         "urgency": "high",
         "recommended_tests": ["urinalysis", "urine_culture", "abdominal_xray", "abdominal_ultrasound"],
         "causes": "Alkaline urine, high mineral diet, insufficient water intake. Unlike dogs, usually sterile (non-infection related).",
         "causes_ja": "アルカリ尿（pH>6.8）、高ミネラル食（マグネシウム・リン過剰）、飲水量不足。"
-                     "犬と異なり猫では無菌性ストラバイトが主（尿路感染は少数）。"
-                     "ドライフード主体の食事がリスク因子。",
+        "犬と異なり猫では無菌性ストラバイトが主（尿路感染は少数）。"
+        "ドライフード主体の食事がリスク因子。",
         "pathophysiology": "Supersaturation of urine with magnesium, ammonium, and phosphate in alkaline conditions leads to crystal nucleation and stone formation.",
         "pathophysiology_ja": "アルカリ尿中でマグネシウム・アンモニウム・リン酸が過飽和→"
-                              "結晶核形成→結石成長。猫では無菌性が多く、食事性の尿pH上昇が主因。"
-                              "結石が膀胱粘膜を刺激→血尿・頻尿。雄猫では尿道閉塞のリスクあり。",
+        "結晶核形成→結石成長。猫では無菌性が多く、食事性の尿pH上昇が主因。"
+        "結石が膀胱粘膜を刺激→血尿・頻尿。雄猫では尿道閉塞のリスクあり。",
         "treatment": "Medical dissolution possible with acidifying diet.",
         "treatment_ja": "内科的溶解が可能（シュウ酸カルシウムとの最大の違い）。"
-                        "(1)溶解食（Hill's s/d, Royal Canin S/O等）→2〜5週間で溶解、"
-                        "(2)尿路感染が併存する場合は適切な抗菌薬併用、"
-                        "(3)溶解確認まで2〜4週毎のX線モニタリング、"
-                        "(4)溶解後は維持食（c/d等）に切替。"
-                        "尿道閉塞時は緊急カテーテル処置＋入院管理。"
-                        "大結石や溶解不応例は膀胱切開術。",
+        "(1)溶解食（Hill's s/d, Royal Canin S/O等）→2〜5週間で溶解、"
+        "(2)尿路感染が併存する場合は適切な抗菌薬併用、"
+        "(3)溶解確認まで2〜4週毎のX線モニタリング、"
+        "(4)溶解後は維持食（c/d等）に切替。"
+        "尿道閉塞時は緊急カテーテル処置＋入院管理。"
+        "大結石や溶解不応例は膀胱切開術。",
         "prevention": "Wet food based diet, urinary health diet, adequate hydration.",
         "prevention_ja": "ウェットフード主体の食事。尿路健康維持食。"
-                         "十分な飲水量（給水器、フードへの加水）。"
-                         "定期的な尿検査でpH・結晶の有無をモニタリング。",
+        "十分な飲水量（給水器、フードへの加水）。"
+        "定期的な尿検査でpH・結晶の有無をモニタリング。",
         "prognosis": "Good with dietary dissolution; recurrence manageable with proper diet.",
         "prognosis_ja": "溶解食で良好に管理可能。再発予防には生涯の食事管理が必要。"
-                        "尿道閉塞を繰り返す雄猫では会陰尿道造瘻術を検討。",
+        "尿道閉塞を繰り返す雄猫では会陰尿道造瘻術を検討。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -5869,29 +6463,34 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "vocalization_changes"},
         "description": "Cystine stone formation due to hereditary renal tubular reabsorption defect in cats.",
         "description_ja": "腎尿細管でのシスチン再吸収障害による遺伝性尿石症。"
-                          "猫では犬に比べ稀だが、シャム、ドメスティックショートヘアで報告あり。"
-                          "雄猫に多く、尿道閉塞のリスクがある。",
+        "猫では犬に比べ稀だが、シャム、ドメスティックショートヘアで報告あり。"
+        "雄猫に多く、尿道閉塞のリスクがある。",
         "urgency": "high",
-        "recommended_tests": ["urinalysis", "stone_analysis", "abdominal_xray", "abdominal_ultrasound", "urine_amino_acid_analysis"],
+        "recommended_tests": [
+            "urinalysis",
+            "stone_analysis",
+            "abdominal_xray",
+            "abdominal_ultrasound",
+            "urine_amino_acid_analysis",
+        ],
         "causes": "Hereditary defect in renal tubular cystine reabsorption (SLC3A1/SLC7A9 mutations).",
         "causes_ja": "腎近位尿細管のアミノ酸トランスポーター（SLC3A1/SLC7A9）の遺伝子変異。"
-                     "シスチンの再吸収障害→尿中シスチン濃度上昇→結石形成。",
+        "シスチンの再吸収障害→尿中シスチン濃度上昇→結石形成。",
         "pathophysiology": "Defective proximal renal tubular reabsorption of cystine leads to cystinuria and stone formation in acidic urine.",
         "pathophysiology_ja": "腎近位尿細管のシスチントランスポーター異常→シスチン再吸収障害→"
-                              "尿中シスチン過排泄→酸性尿中でシスチンが析出→結晶化→結石形成。"
-                              "シスチンは全アミノ酸中で最も水溶性が低い。",
+        "尿中シスチン過排泄→酸性尿中でシスチンが析出→結晶化→結石形成。"
+        "シスチンは全アミノ酸中で最も水溶性が低い。",
         "treatment": "Urinary alkalinization, thiopronin, dietary management, surgical removal for large stones.",
         "treatment_ja": "尿アルカリ化（クエン酸カリウム）でシスチン溶解度を上昇させる。"
-                        "チオプロニン（2-MPG）でシスチンを可溶性化合物に変換。"
-                        "低タンパク食＋十分な飲水で尿希釈。"
-                        "大結石は外科的摘出（膀胱切開術）。"
-                        "尿道閉塞時は緊急カテーテル処置。",
+        "チオプロニン（2-MPG）でシスチンを可溶性化合物に変換。"
+        "低タンパク食＋十分な飲水で尿希釈。"
+        "大結石は外科的摘出（膀胱切開術）。"
+        "尿道閉塞時は緊急カテーテル処置。",
         "prevention": "Dietary protein restriction, adequate hydration, urinary alkalinization.",
         "prevention_ja": "低タンパク食、十分な飲水量（ウェットフード主体）、尿アルカリ化。"
-                         "定期的な尿検査・画像検査でモニタリング。",
+        "定期的な尿検査・画像検査でモニタリング。",
         "prognosis": "Manageable with lifelong therapy; recurrence possible without treatment.",
-        "prognosis_ja": "適切な内科管理で再発率を低減可能。生涯の管理が必要。"
-                        "繁殖管理のための遺伝子検査が推奨される。",
+        "prognosis_ja": "適切な内科管理で再発率を低減可能。生涯の管理が必要。繁殖管理のための遺伝子検査が推奨される。",
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"adult", "senior"},
     },
@@ -5901,26 +6500,30 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"straining_to_urinate", "bloody_urine", "frequent_urination", "appetite_loss"},
         "description": "Ammonium urate stone formation in cats, often associated with portosystemic shunts or liver disease.",
         "description_ja": "尿酸アンモニウム結石。猫では門脈体循環シャント（PSS）や"
-                          "肝疾患に伴うことが多い。エジプシャンマウ、シャムで報告あり。",
+        "肝疾患に伴うことが多い。エジプシャンマウ、シャムで報告あり。",
         "urgency": "high",
-        "recommended_tests": ["urinalysis", "stone_analysis", "abdominal_ultrasound", "liver_function_tests", "bile_acids", "ammonia_level"],
+        "recommended_tests": [
+            "urinalysis",
+            "stone_analysis",
+            "abdominal_ultrasound",
+            "liver_function_tests",
+            "bile_acids",
+            "ammonia_level",
+        ],
         "causes": "Portosystemic shunt, liver disease, high purine diet.",
-        "causes_ja": "門脈体循環シャント（先天性・後天性）、肝疾患による尿酸代謝異常、"
-                     "高プリン食（内臓肉等）。",
+        "causes_ja": "門脈体循環シャント（先天性・後天性）、肝疾患による尿酸代謝異常、高プリン食（内臓肉等）。",
         "pathophysiology": "Impaired hepatic conversion of uric acid to allantoin combined with hyperammonemia leads to urate stone formation.",
         "pathophysiology_ja": "肝臓での尿酸→アラントインへの変換障害→血中尿酸上昇→高尿酸尿症。"
-                              "門脈シャントによる高アンモニア血症も寄与→尿酸アンモニウム結石形成。",
+        "門脈シャントによる高アンモニア血症も寄与→尿酸アンモニウム結石形成。",
         "treatment": "Address underlying liver disease/shunt; allopurinol, low purine diet.",
         "treatment_ja": "基礎疾患（門脈シャント・肝疾患）の治療が根本。"
-                        "門脈シャント：外科的結紮（アメロイドコンストリクター等）。"
-                        "アロプリノール（猫での使用は犬より注意が必要）、低プリン食、"
-                        "尿アルカリ化。大結石は外科的摘出。",
+        "門脈シャント：外科的結紮（アメロイドコンストリクター等）。"
+        "アロプリノール（猫での使用は犬より注意が必要）、低プリン食、"
+        "尿アルカリ化。大結石は外科的摘出。",
         "prevention": "Treat underlying hepatic disease; low purine diet; adequate hydration.",
-        "prevention_ja": "基礎疾患の管理、低プリン食、十分な飲水量。"
-                         "門脈シャント修正後も定期的な尿検査・画像検査。",
+        "prevention_ja": "基礎疾患の管理、低プリン食、十分な飲水量。門脈シャント修正後も定期的な尿検査・画像検査。",
         "prognosis": "Depends on underlying cause; fair to good with shunt correction.",
-        "prognosis_ja": "基礎疾患の管理次第。門脈シャント結紮後は結石形成リスク低下。"
-                        "肝疾患が進行性の場合は予後注意。",
+        "prognosis_ja": "基礎疾患の管理次第。門脈シャント結紮後は結石形成リスク低下。肝疾患が進行性の場合は予後注意。",
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"young", "adult"},
     },
@@ -6116,7 +6719,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Adrenal Tumor",
         "name_ja": "猫副腎腫瘍",
-        "symptoms": {"excessive_thirst", "excessive_urination", "weight_gain", "hair_loss", "muscle_weakness", "abdominal_distension"},
+        "symptoms": {
+            "excessive_thirst",
+            "excessive_urination",
+            "weight_gain",
+            "hair_loss",
+            "muscle_weakness",
+            "abdominal_distension",
+        },
         "description": "Feline Adrenal Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "副腎の腫瘍でホルモン不均衡と様々な全身症状を引き起こします。",
         "urgency": "high",
@@ -6158,7 +6768,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Pheochromocytoma",
         "name_ja": "猫褐色細胞腫",
-        "symptoms": {"hyperactivity", "excessive_thirst", "collapse", "irregular_heartbeat", "tremors", "labored_breathing"},
+        "symptoms": {
+            "hyperactivity",
+            "excessive_thirst",
+            "collapse",
+            "irregular_heartbeat",
+            "tremors",
+            "labored_breathing",
+        },
         "description": "Feline Pheochromocytoma is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "副腎髄質のカテコラミン分泌腫瘍で、発作性高血圧を引き起こします。",
         "urgency": "high",
@@ -6410,7 +7027,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Hyperparathyroidism (Primary)",
         "name_ja": "猫原発性副甲状腺機能亢進症",
-        "symptoms": {"excessive_thirst", "excessive_urination", "appetite_loss", "vomiting", "lethargy", "muscle_weakness"},
+        "symptoms": {
+            "excessive_thirst",
+            "excessive_urination",
+            "appetite_loss",
+            "vomiting",
+            "lethargy",
+            "muscle_weakness",
+        },
         "description": "Feline Hyperparathyroidism (Primary) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "副甲状腺ホルモンの過剰分泌で高カルシウム血症と二次的腎障害を引き起こします。",
         "urgency": "high",
@@ -6641,7 +7265,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Histoplasmosis",
         "name_ja": "猫ヒストプラズマ症",
-        "symptoms": {"weight_loss", "fever", "labored_breathing", "coughing", "diarrhea", "eye_changes", "skin_lesions"},
+        "symptoms": {
+            "weight_loss",
+            "fever",
+            "labored_breathing",
+            "coughing",
+            "diarrhea",
+            "eye_changes",
+            "skin_lesions",
+        },
         "description": "Feline Histoplasmosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "Histoplasma capsulatumによる全身性真菌感染で、肺と消化管に多く影響します。",
         "urgency": "high",
@@ -6662,7 +7294,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Blastomycosis",
         "name_ja": "猫ブラストミセス症",
-        "symptoms": {"labored_breathing", "coughing", "skin_lesions", "draining_wound", "fever", "weight_loss", "blindness"},
+        "symptoms": {
+            "labored_breathing",
+            "coughing",
+            "skin_lesions",
+            "draining_wound",
+            "fever",
+            "weight_loss",
+            "blindness",
+        },
         "description": "Feline Blastomycosis is a fungal infection that can affect skin, respiratory, or systemic organs.",
         "description_ja": "Blastomyces dermatitidisによる全身性真菌感染で、肺、皮膚、眼に影響します。",
         "urgency": "high",
@@ -6872,7 +7512,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Leishmaniasis",
         "name_ja": "猫リーシュマニア症",
-        "symptoms": {"skin_lesions", "weight_loss", "lymph_node_enlargement", "hair_loss", "non_healing_wound", "eye_changes"},
+        "symptoms": {
+            "skin_lesions",
+            "weight_loss",
+            "lymph_node_enlargement",
+            "hair_loss",
+            "non_healing_wound",
+            "eye_changes",
+        },
         "description": "Feline Leishmaniasis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "リーシュマニア属による原虫感染で、皮膚型および内臓型疾患を引き起こします。",
         "urgency": "moderate",
@@ -7527,7 +8174,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Feline Pure Red Cell Aplasia is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "赤芽球前駆細胞の免疫介在性破壊で重度の非再生性貧血を引き起こします。",
         "urgency": "high",
-        "recommended_tests": ["complete_blood_count", "bone_marrow_aspirate", "reticulocyte_count", "fiv_felv_snap_test"],
+        "recommended_tests": [
+            "complete_blood_count",
+            "bone_marrow_aspirate",
+            "reticulocyte_count",
+            "fiv_felv_snap_test",
+        ],
         "causes": "Immune-mediated selective destruction of erythroid precursors in bone marrow. Often associated with FeLV infection (subgroup C), recombinant erythropoietin therapy, or idiopathic. Results in severe non-regenerative anemia.",
         "causes_ja": "猫における猫赤芽球癆の原因: 赤芽球前駆細胞の免疫介在性破壊で重度の非再生性貧血を引き起こします。",
         "pathophysiology": "Autoantibodies or cytotoxic T cells selectively destroy erythroid precursors in bone marrow while sparing myeloid and megakaryocytic lineages, causing severe non-regenerative anemia with absent reticulocyte response.",
@@ -7586,7 +8238,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Histiocytic Sarcoma",
         "name_ja": "猫組織球性肉腫",
-        "symptoms": {"weight_loss", "lethargy", "appetite_loss", "lymph_node_enlargement", "lameness", "labored_breathing"},
+        "symptoms": {
+            "weight_loss",
+            "lethargy",
+            "appetite_loss",
+            "lymph_node_enlargement",
+            "lameness",
+            "labored_breathing",
+        },
         "description": "Feline Histiocytic Sarcoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "組織球由来の攻撃的な腫瘍で、急速な播種と予後不良が特徴です。",
         "urgency": "high",
@@ -7796,11 +8455,22 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Acquired Myasthenia Gravis",
         "name_ja": "猫後天性重症筋無力症",
-        "symptoms": {"muscle_weakness", "regurgitation", "exercise_intolerance", "ventroflexion_of_neck", "labored_breathing"},
+        "symptoms": {
+            "muscle_weakness",
+            "regurgitation",
+            "exercise_intolerance",
+            "ventroflexion_of_neck",
+            "labored_breathing",
+        },
         "description": "Feline Acquired Myasthenia Gravis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "神経筋接合部のアセチルコリン受容体の自己免疫性破壊です。",
         "urgency": "high",
-        "recommended_tests": ["acetylcholine_receptor_antibody", "electrodiagnostics", "chest_xray", "edrophonium_test"],
+        "recommended_tests": [
+            "acetylcholine_receptor_antibody",
+            "electrodiagnostics",
+            "chest_xray",
+            "edrophonium_test",
+        ],
         "causes": "Autoantibodies against nicotinic acetylcholine receptors at the neuromuscular junction causing impaired neuromuscular transmission. May be associated with thymoma (paraneoplastic form) or idiopathic. Rare in cats.",
         "causes_ja": "猫における猫後天性重症筋無力症の原因: 神経筋接合部のアセチルコリン受容体の自己免疫性破壊です。",
         "pathophysiology": "Autoantibodies against postsynaptic acetylcholine receptors at the neuromuscular junction impair signal transmission, causing fatigable skeletal muscle weakness.",
@@ -8048,7 +8718,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Smoke Inhalation Injury",
         "name_ja": "猫煙吸入障害",
-        "symptoms": {"coughing", "labored_breathing", "cyanosis", "nasal_discharge", "eye_discharge", "singed_whiskers"},
+        "symptoms": {
+            "coughing",
+            "labored_breathing",
+            "cyanosis",
+            "nasal_discharge",
+            "eye_discharge",
+            "singed_whiskers",
+        },
         "description": "Feline Smoke Inhalation Injury involves traumatic injury requiring assessment of damage extent and appropriate stabilization and repair.",
         "description_ja": "煙と有毒ガスの吸入による気道の熱傷および化学的損傷です。",
         "urgency": "emergency",
@@ -8321,7 +8998,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Vitamin D Toxicosis",
         "name_ja": "猫ビタミンD中毒",
-        "symptoms": {"vomiting", "excessive_thirst", "excessive_urination", "lethargy", "appetite_loss", "muscle_weakness"},
+        "symptoms": {
+            "vomiting",
+            "excessive_thirst",
+            "excessive_urination",
+            "lethargy",
+            "appetite_loss",
+            "muscle_weakness",
+        },
         "description": "Feline Vitamin D Toxicosis is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "コレカルシフェロール殺鼠剤やサプリメント過量摂取による高カルシウム血症で腎石灰化を引き起こします。",
         "urgency": "emergency",
@@ -8720,7 +9404,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Congestive Heart Failure",
         "name_ja": "猫うっ血性心不全",
-        "symptoms": {"labored_breathing", "open_mouth_breathing", "coughing", "lethargy", "appetite_loss", "abdominal_distension"},
+        "symptoms": {
+            "labored_breathing",
+            "open_mouth_breathing",
+            "coughing",
+            "lethargy",
+            "appetite_loss",
+            "abdominal_distension",
+        },
         "description": "Feline Congestive Heart Failure is a cardiovascular condition affecting cardiac function and hemodynamic stability.",
         "description_ja": "心臓が十分な拍出量を維持できず、肺や腹部に液体が貯留する状態です。",
         "urgency": "emergency",
@@ -9140,7 +9831,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Chronic Pain Syndrome",
         "name_ja": "猫慢性疼痛症候群",
-        "symptoms": {"hiding", "appetite_loss", "aggression", "vocalization_changes", "reluctance_to_jump", "excessive_grooming"},
+        "symptoms": {
+            "hiding",
+            "appetite_loss",
+            "aggression",
+            "vocalization_changes",
+            "reluctance_to_jump",
+            "excessive_grooming",
+        },
         "description": "Feline Chronic Pain Syndrome is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "変形性関節症、歯科疾患、神経障害性の原因による持続的な疼痛で行動変化を引き起こします。",
         "urgency": "moderate",
@@ -9354,7 +10052,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Feline Necrotizing Fasciitis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "急速に進行する軟部組織感染で筋膜壊死と全身毒性を引き起こします。",
         "urgency": "emergency",
-        "recommended_tests": ["surgical_exploration", "bacterial_culture", "complete_blood_count", "blood_gas_analysis"],
+        "recommended_tests": [
+            "surgical_exploration",
+            "bacterial_culture",
+            "complete_blood_count",
+            "blood_gas_analysis",
+        ],
         "causes": "Rapidly progressive polymicrobial or Group A streptococcal infection of subcutaneous tissue and fascia, often following penetrating wounds, bite injuries, or surgical sites; immunosuppression and diabetes are predisposing factors.",
         "causes_ja": "猫における猫壊死性筋膜炎の原因: 急速に進行する軟部組織感染で筋膜壊死と全身毒性を引き起こします。",
         "pathophysiology": "Rapidly spreading bacterial infection along fascial planes (often polymicrobial including anaerobes) causes extensive tissue necrosis, systemic toxemia, and septic shock.",
@@ -10130,7 +10833,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Dysautonomia (Key-Gaskell Syndrome) - Acute",
         "name_ja": "猫自律神経障害（キー・ガスケル症候群）急性型",
-        "symptoms": {"dilated_pupils", "constipation", "vomiting", "dry_nose", "decreased_urination", "third_eyelid_protrusion", "regurgitation"},
+        "symptoms": {
+            "dilated_pupils",
+            "constipation",
+            "vomiting",
+            "dry_nose",
+            "decreased_urination",
+            "third_eyelid_protrusion",
+            "regurgitation",
+        },
         "description": "Feline Dysautonomia (Key-Gaskell Syndrome) - Acute is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "急性自律神経系不全で、両側散瞳・乾燥粘膜・消化管停滞を引き起こします。",
         "urgency": "emergency",
@@ -10741,7 +11452,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Penile Urethral Obstruction",
         "name_ja": "猫陰茎尿道閉塞",
-        "symptoms": {"straining_to_urinate", "vocalization_changes", "lethargy", "vomiting", "abdominal_pain", "collapse"},
+        "symptoms": {
+            "straining_to_urinate",
+            "vocalization_changes",
+            "lethargy",
+            "vomiting",
+            "abdominal_pain",
+            "collapse",
+        },
         "description": "Feline Penile Urethral Obstruction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "結晶尿・粘液栓・尿道痙攣による陰茎尿道の完全閉塞です。",
         "urgency": "emergency",
@@ -11119,7 +11837,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Toxic Megacolon",
         "name_ja": "猫中毒性巨大結腸症",
-        "symptoms": {"constipation", "straining_to_defecate", "vomiting", "abdominal_distension", "collapse", "lethargy"},
+        "symptoms": {
+            "constipation",
+            "straining_to_defecate",
+            "vomiting",
+            "abdominal_distension",
+            "collapse",
+            "lethargy",
+        },
         "description": "Feline Toxic Megacolon is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "長期の宿便による全身毒性を伴う重度の結腸拡張で、緊急介入が必要です。",
         "urgency": "emergency",
@@ -11224,7 +11949,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Chronic Kidney Disease Stage IV (IRIS)",
         "name_ja": "猫慢性腎臓病ステージIV（IRIS）",
-        "symptoms": {"vomiting", "appetite_loss", "weight_loss", "lethargy", "dehydration", "oral_ulcers", "bad_breath"},
+        "symptoms": {
+            "vomiting",
+            "appetite_loss",
+            "weight_loss",
+            "lethargy",
+            "dehydration",
+            "oral_ulcers",
+            "bad_breath",
+        },
         "description": "Feline Chronic Kidney Disease Stage IV (IRIS) is a renal condition affecting kidney function and fluid-electrolyte balance.",
         "description_ja": "高窒素血症（クレアチニン>5.0 mg/dL）と尿毒症クリーゼを伴う末期腎疾患です。",
         "urgency": "high",
@@ -11317,34 +12050,34 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "交配なしの排卵（猫では稀）。黄体期遷延。多妊娠の自然流産後。視床下部-下垂体-卵巣軸の機能異常。",
         "treatment": "MILD CASES: Supportive care and observation — signs typically resolve spontaneously within "
-                    "2-3 weeks as progesterone levels decline. Discourage nesting behavior (remove nesting "
-                    "materials). Avoid mammary stimulation (Elizabethan collar if self-nursing). Cold compresses "
-                    "to mammae if lactation is significant. MODERATE TO SEVERE CASES: Progesterone receptor "
-                    "antagonist — aglepristone (Alizin) 10 mg/kg SC × 2 doses on days 1 and 3 (terminates "
-                    "luteal phase, rapid resolution of signs within 3-5 days). Prolactin inhibitor — "
-                    "cabergoline 5 μg/kg PO q24h × 5-7 days (suppresses lactation and behavioral signs; "
-                    "preferred over bromocriptine due to fewer GI side effects in cats). Alternative: "
-                    "metergoline 0.1 mg/kg PO q12h × 7 days. RECURRENT CASES: Ovariectomy (OVE) or "
-                    "ovariohysterectomy (OVH) is the definitive treatment — eliminates recurrence. "
-                    "Recommended if pseudopregnancy occurs repeatedly (≥2 episodes). IMPORTANT NOTE: "
-                    "Feline pseudopregnancy is less common than canine due to induced ovulation in cats — "
-                    "spontaneous ovulation without mating can occur from environmental stimulation (presence "
-                    "of intact males, light cycle changes, social stimulation in multi-cat households). "
-                    "References: Verstegen (1998) J Reprod Fertil Suppl; Feldman & Nelson (2004) Canine "
-                    "and Feline Endocrinology and Reproduction 3rd ed.",
+        "2-3 weeks as progesterone levels decline. Discourage nesting behavior (remove nesting "
+        "materials). Avoid mammary stimulation (Elizabethan collar if self-nursing). Cold compresses "
+        "to mammae if lactation is significant. MODERATE TO SEVERE CASES: Progesterone receptor "
+        "antagonist — aglepristone (Alizin) 10 mg/kg SC × 2 doses on days 1 and 3 (terminates "
+        "luteal phase, rapid resolution of signs within 3-5 days). Prolactin inhibitor — "
+        "cabergoline 5 μg/kg PO q24h × 5-7 days (suppresses lactation and behavioral signs; "
+        "preferred over bromocriptine due to fewer GI side effects in cats). Alternative: "
+        "metergoline 0.1 mg/kg PO q12h × 7 days. RECURRENT CASES: Ovariectomy (OVE) or "
+        "ovariohysterectomy (OVH) is the definitive treatment — eliminates recurrence. "
+        "Recommended if pseudopregnancy occurs repeatedly (≥2 episodes). IMPORTANT NOTE: "
+        "Feline pseudopregnancy is less common than canine due to induced ovulation in cats — "
+        "spontaneous ovulation without mating can occur from environmental stimulation (presence "
+        "of intact males, light cycle changes, social stimulation in multi-cat households). "
+        "References: Verstegen (1998) J Reprod Fertil Suppl; Feldman & Nelson (2004) Canine "
+        "and Feline Endocrinology and Reproduction 3rd ed.",
         "treatment_ja": "軽症：対症療法で自然軽快を待つ（2-3週）。中等症以上：プロゲステロン低下（アグレプリストン10mg/kg SC × 2回, day 1・3）or カベルゴリン1μg/kg PO q12h × 7-14日。習慣化例は避妊手術（OVE）推奨。",
         "prognosis": "Mild cases: Spontaneous resolution within 2-3 weeks. After ovariectomy/OVH, recurrence "
-                     "is virtually eliminated. Medical treatment with cabergoline or aglepristone provides rapid "
-                     "resolution but does not prevent future episodes if the queen remains intact. Overall "
-                     "prognosis is excellent — pseudopregnancy is a self-limiting condition with no significant "
-                     "long-term health consequences. Mammary hyperplasia associated with repeated pseudopregnancy "
-                     "may rarely predispose to mammary neoplasia (controversial).",
+        "is virtually eliminated. Medical treatment with cabergoline or aglepristone provides rapid "
+        "resolution but does not prevent future episodes if the queen remains intact. Overall "
+        "prognosis is excellent — pseudopregnancy is a self-limiting condition with no significant "
+        "long-term health consequences. Mammary hyperplasia associated with repeated pseudopregnancy "
+        "may rarely predispose to mammary neoplasia (controversial).",
         "prognosis_ja": "軽症：自然軽快。避妊後は再発ほぼなし。",
         "prevention": "Elective ovariectomy (OVE) or ovariohysterectomy (OVH) is the most effective prevention. "
-                      "Early spaying recommended if pseudopregnancy tendency is identified. Minimize exposure "
-                      "to intact males (visual, olfactory, auditory stimulation can trigger spontaneous ovulation "
-                      "in susceptible queens). Consistent light cycle management in breeding catteries. "
-                      "Reference: Feldman & Nelson (2004) Canine and Feline Endocrinology 3rd ed.",
+        "Early spaying recommended if pseudopregnancy tendency is identified. Minimize exposure "
+        "to intact males (visual, olfactory, auditory stimulation can trigger spontaneous ovulation "
+        "in susceptible queens). Consistent light cycle management in breeding catteries. "
+        "Reference: Feldman & Nelson (2004) Canine and Feline Endocrinology 3rd ed.",
         "prevention_ja": "定期避妊手術（卵巣切除 or 卵巣子宮摘出）。習慣化傾向がある場合は早期避妊推奨。",
         "urgency": "normal",
         "recommended_tests": ["serum_progesterone", "abdominal_ultrasound"],
@@ -11360,35 +12093,35 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "卵巣嚢胞の形成機序は不明だが、LH surge異常との関連が疑われる。多妊娠中の流産後。病的卵巣機能（腫瘍など）。",
         "treatment": "MEDICAL MANAGEMENT: (1) Ovulation induction — hCG (human chorionic gonadotropin) 250-500 IU "
-                    "IM single dose to induce ovulation and subsequent luteal phase, temporarily resolving "
-                    "estrus signs. Alternatively, GnRH agonist (gonadorelin) 25 μg IM single dose. Medical "
-                    "therapy provides temporary resolution only — cysts typically recur after luteal regression. "
-                    "(2) Deslorelin (Suprelorin) 4.7 mg SC implant — GnRH agonist that initially stimulates "
-                    "then downregulates gonadotropin release; may suppress cyst activity for 6-12 months. "
-                    "SURGICAL MANAGEMENT (DEFINITIVE): Ovariectomy (OVE) or ovariohysterectomy (OVH) is the "
-                    "definitive treatment and is recommended for all non-breeding queens with ovarian cysts. "
-                    "Submit ovarian tissue for histopathology — differentiate follicular cysts from luteal "
-                    "cysts, granulosa cell tumors, and ovarian carcinoma. PERSISTENT ESTRUS COMPLICATIONS: "
-                    "Prolonged hyperestrogenism can cause endometrial hyperplasia, pyometra, bone marrow "
-                    "suppression (estrogen-induced pancytopenia at very high levels), and behavioral issues "
-                    "(vocalization, urine spraying, aggression). Monitor CBC if estrus persists >3 weeks "
-                    "for evidence of bone marrow toxicity. BREEDING QUEENS: Cyst aspiration under "
-                    "ultrasound guidance may be attempted to preserve breeding function, but recurrence "
-                    "is common. References: Johnston et al. (2001) Canine and Feline Theriogenology; "
-                    "Feldman & Nelson (2004) Canine and Feline Endocrinology 3rd ed.",
+        "IM single dose to induce ovulation and subsequent luteal phase, temporarily resolving "
+        "estrus signs. Alternatively, GnRH agonist (gonadorelin) 25 μg IM single dose. Medical "
+        "therapy provides temporary resolution only — cysts typically recur after luteal regression. "
+        "(2) Deslorelin (Suprelorin) 4.7 mg SC implant — GnRH agonist that initially stimulates "
+        "then downregulates gonadotropin release; may suppress cyst activity for 6-12 months. "
+        "SURGICAL MANAGEMENT (DEFINITIVE): Ovariectomy (OVE) or ovariohysterectomy (OVH) is the "
+        "definitive treatment and is recommended for all non-breeding queens with ovarian cysts. "
+        "Submit ovarian tissue for histopathology — differentiate follicular cysts from luteal "
+        "cysts, granulosa cell tumors, and ovarian carcinoma. PERSISTENT ESTRUS COMPLICATIONS: "
+        "Prolonged hyperestrogenism can cause endometrial hyperplasia, pyometra, bone marrow "
+        "suppression (estrogen-induced pancytopenia at very high levels), and behavioral issues "
+        "(vocalization, urine spraying, aggression). Monitor CBC if estrus persists >3 weeks "
+        "for evidence of bone marrow toxicity. BREEDING QUEENS: Cyst aspiration under "
+        "ultrasound guidance may be attempted to preserve breeding function, but recurrence "
+        "is common. References: Johnston et al. (2001) Canine and Feline Theriogenology; "
+        "Feldman & Nelson (2004) Canine and Feline Endocrinology 3rd ed.",
         "treatment_ja": "【内科的】hCG投与で排卵促進（500IU IM）。GnRH投与（20μg IM）。ホルモン療法は一時的効果。【外科的】卵巣切除（OVE）or 卵巣子宮摘出（OVH）が根本的解決。多くの場合、避妊手術を推奨。",
         "prognosis": "Definitive cure with ovariectomy/OVH — excellent prognosis post-surgery. Medical therapy "
-                     "alone has high recurrence rate as cysts reform after hormonal effects wane. Prolonged "
-                     "hyperestrogenism (>3-4 weeks) carries risk of bone marrow suppression — potentially "
-                     "life-threatening if pancytopenia develops. Granulosa cell tumors (must be differentiated "
-                     "from simple cysts on histopathology) may be malignant with metastatic potential. "
-                     "Breeding prognosis after unilateral cystectomy is guarded.",
+        "alone has high recurrence rate as cysts reform after hormonal effects wane. Prolonged "
+        "hyperestrogenism (>3-4 weeks) carries risk of bone marrow suppression — potentially "
+        "life-threatening if pancytopenia develops. Granulosa cell tumors (must be differentiated "
+        "from simple cysts on histopathology) may be malignant with metastatic potential. "
+        "Breeding prognosis after unilateral cystectomy is guarded.",
         "prognosis_ja": "避妊手術で完治。内科治療のみでは再発傾向。",
         "prevention": "Elective ovariectomy or OVH for non-breeding queens eliminates ovarian cyst risk. "
-                      "In breeding queens, regular ultrasound monitoring of ovarian structure during estrous "
-                      "cycle management. Prompt evaluation of persistent estrus (>7-10 days without mating) "
-                      "or nymphomania. Healthy pregnancy management to reduce anovulatory cycle risk. "
-                      "Reference: Johnston et al. (2001) Canine and Feline Theriogenology.",
+        "In breeding queens, regular ultrasound monitoring of ovarian structure during estrous "
+        "cycle management. Prompt evaluation of persistent estrus (>7-10 days without mating) "
+        "or nymphomania. Healthy pregnancy management to reduce anovulatory cycle risk. "
+        "Reference: Johnston et al. (2001) Canine and Feline Theriogenology.",
         "prevention_ja": "定期避妊手術。多妊娠の健全な管理。",
         "urgency": "normal",
         "recommended_tests": ["abdominal_ultrasound", "serum_estradiol", "serum_lh"],
@@ -11404,46 +12137,46 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "胎仔遺残（最多原因）。胎盤停滞。低カルシウム血症による子宮無力症。子宮破裂。多母体妊娠（>6匹）での分娩ストレス。",
         "treatment": "DIAGNOSTIC WORKUP: Abdominal ultrasound is essential to confirm retained fetuses or placental "
-                    "tissue. Abdominal radiographs to assess fetal mineralization (retained fetuses). CBC/chemistry "
-                    "panel — expect neutrophilia with left shift, possible toxic changes. Blood culture if "
-                    "sepsis suspected. MEDICAL THERAPY: (1) ANTIBIOTICS — broad-spectrum empirical pending "
-                    "culture: cephalexin 25 mg/kg PO q6-8h × 14-21 days (good uterine penetration) PLUS "
-                    "enrofloxacin 5 mg/kg IV/SC q24h × 7-14 days (gram-negative coverage). Alternative: "
-                    "amoxicillin-clavulanate 12.5-25 mg/kg PO q12h + metronidazole 10-15 mg/kg PO q12h "
-                    "(anaerobic coverage). Adjust based on uterine culture and sensitivity. (2) IV FLUID "
-                    "THERAPY: LRS or Normosol-R 40-60 mL/kg/day (aggressive if septic shock — bolus "
-                    "10-20 mL/kg over 15-20 min, then maintenance). Electrolyte and acid-base correction. "
-                    "(3) UTERINE EVACUATION (if no retained fetus): Aglepristone (Alizin) 10 mg/kg SC × 2 "
-                    "doses on days 1 and 3 (progesterone receptor blocker, promotes cervical relaxation and "
-                    "uterine content expulsion). Alternatively, low-dose oxytocin 0.25-0.5 IU/cat IM q2-4h "
-                    "(CAUTION: only after confirming cervix is open on ultrasound; risk of uterine rupture "
-                    "if cervix closed). (4) ANALGESIA: Buprenorphine 0.01-0.02 mg/kg OTM q6-8h (pain "
-                    "management critical for recovery). Meloxicam 0.1 mg/kg PO q24h × 3-5 days (ensure "
-                    "adequate hydration before NSAIDs). SURGICAL THERAPY: OVH is indicated for: retained "
-                    "fetuses confirmed on imaging, failure to respond to medical therapy within 24-48h, "
-                    "uterine rupture or peritonitis, non-breeding queen, severe sepsis. NURSING KITTEN "
-                    "MANAGEMENT: Separate kittens from queen if queen is febrile >40°C or receiving "
-                    "metronidazole. Hand-rear with kitten milk replacer q2-3h. Resume nursing once queen "
-                    "is afebrile and on safe antibiotics (cephalexin, amoxicillin) for >24h. "
-                    "References: Pretzer (2008) Theriogenology; Davidson (2006) Vet Clin North Am Small "
-                    "Anim Pract; Johnston et al. (2001) Canine and Feline Theriogenology.",
+        "tissue. Abdominal radiographs to assess fetal mineralization (retained fetuses). CBC/chemistry "
+        "panel — expect neutrophilia with left shift, possible toxic changes. Blood culture if "
+        "sepsis suspected. MEDICAL THERAPY: (1) ANTIBIOTICS — broad-spectrum empirical pending "
+        "culture: cephalexin 25 mg/kg PO q6-8h × 14-21 days (good uterine penetration) PLUS "
+        "enrofloxacin 5 mg/kg IV/SC q24h × 7-14 days (gram-negative coverage). Alternative: "
+        "amoxicillin-clavulanate 12.5-25 mg/kg PO q12h + metronidazole 10-15 mg/kg PO q12h "
+        "(anaerobic coverage). Adjust based on uterine culture and sensitivity. (2) IV FLUID "
+        "THERAPY: LRS or Normosol-R 40-60 mL/kg/day (aggressive if septic shock — bolus "
+        "10-20 mL/kg over 15-20 min, then maintenance). Electrolyte and acid-base correction. "
+        "(3) UTERINE EVACUATION (if no retained fetus): Aglepristone (Alizin) 10 mg/kg SC × 2 "
+        "doses on days 1 and 3 (progesterone receptor blocker, promotes cervical relaxation and "
+        "uterine content expulsion). Alternatively, low-dose oxytocin 0.25-0.5 IU/cat IM q2-4h "
+        "(CAUTION: only after confirming cervix is open on ultrasound; risk of uterine rupture "
+        "if cervix closed). (4) ANALGESIA: Buprenorphine 0.01-0.02 mg/kg OTM q6-8h (pain "
+        "management critical for recovery). Meloxicam 0.1 mg/kg PO q24h × 3-5 days (ensure "
+        "adequate hydration before NSAIDs). SURGICAL THERAPY: OVH is indicated for: retained "
+        "fetuses confirmed on imaging, failure to respond to medical therapy within 24-48h, "
+        "uterine rupture or peritonitis, non-breeding queen, severe sepsis. NURSING KITTEN "
+        "MANAGEMENT: Separate kittens from queen if queen is febrile >40°C or receiving "
+        "metronidazole. Hand-rear with kitten milk replacer q2-3h. Resume nursing once queen "
+        "is afebrile and on safe antibiotics (cephalexin, amoxicillin) for >24h. "
+        "References: Pretzer (2008) Theriogenology; Davidson (2006) Vet Clin North Am Small "
+        "Anim Pract; Johnston et al. (2001) Canine and Feline Theriogenology.",
         "treatment_ja": "【診断】腹部超音波で胎仔・胎盤遺残の確認が重要。X線（放射線不透過物質確認）。【治療】抗菌療法：セファロスポリン系（セファレキシン25mg/kg PO q6h × 14日）+ エンロフロキサシン5mg/kg IV q24h × 7日。輸液サポート。【外科】子宮内容物遺残が確実な場合はOVHを検討。",
         "prognosis": "Good prognosis with early diagnosis and aggressive treatment. Metritis diagnosed and "
-                     "treated within 24-48h of onset has >90% survival rate. Delayed treatment (>3-5 days) "
-                     "significantly increases risk of septic shock, peritonitis, and DIC — mortality rises "
-                     "to 20-40%. Uterine rupture is a life-threatening complication requiring emergency surgery. "
-                     "Future breeding prognosis after successful medical treatment is fair — some queens develop "
-                     "endometrial scarring affecting implantation. OVH eliminates recurrence risk. Kittens "
-                     "from affected queens should be monitored for neonatal sepsis.",
+        "treated within 24-48h of onset has >90% survival rate. Delayed treatment (>3-5 days) "
+        "significantly increases risk of septic shock, peritonitis, and DIC — mortality rises "
+        "to 20-40%. Uterine rupture is a life-threatening complication requiring emergency surgery. "
+        "Future breeding prognosis after successful medical treatment is fair — some queens develop "
+        "endometrial scarring affecting implantation. OVH eliminates recurrence risk. Kittens "
+        "from affected queens should be monitored for neonatal sepsis.",
         "prognosis_ja": "早期治療で予後良好。遅延で敗血症ショック進行。",
         "prevention": "Parturition monitoring — confirm passage of all fetuses and placentas (count placentas "
-                      "vs. kittens). Post-partum veterinary examination within 24-48h of delivery recommended "
-                      "for high-risk queens. Abdominal palpation or ultrasound to rule out retained tissue. "
-                      "Risk management for large litters (>6 kittens) — increased dystocia and retention risk. "
-                      "Maintain clean whelping environment — change bedding daily during first week post-partum. "
-                      "Adequate nutrition during lactation (2-4× maintenance caloric needs). Monitor queen for "
-                      "fever, malodorous discharge, or lethargy in the first 7-10 days post-partum. "
-                      "Reference: Johnston et al. (2001) Canine and Feline Theriogenology.",
+        "vs. kittens). Post-partum veterinary examination within 24-48h of delivery recommended "
+        "for high-risk queens. Abdominal palpation or ultrasound to rule out retained tissue. "
+        "Risk management for large litters (>6 kittens) — increased dystocia and retention risk. "
+        "Maintain clean whelping environment — change bedding daily during first week post-partum. "
+        "Adequate nutrition during lactation (2-4× maintenance caloric needs). Monitor queen for "
+        "fever, malodorous discharge, or lethargy in the first 7-10 days post-partum. "
+        "Reference: Johnston et al. (2001) Canine and Feline Theriogenology.",
         "prevention_ja": "分娩監視（全胎仔数・胎盤数の確認）。多胎妊娠（>6匹）でのリスク管理。産褥期の環境衛生。",
         "urgency": "high",
         "recommended_tests": ["abdominal_ultrasound", "uterine_culture", "cbcwdp"],
@@ -11455,7 +12188,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Acute bacterial infection of mammary tissue in nursing queens. Less common in cats than dogs (5-10% of lactating cats) but tends toward rapid abscess formation and sepsis. Emergency if untreated.",
         "description_ja": "授乳中の母猫の乳腺急性細菌感染症。犬より稀（授乳猫の5-10%）だが膿瘍形成と敗血症への急速進行傾向。無治療で緊急。",
         "urgency": "high",
-        "recommended_tests": ["physical_exam", "milk_culture", "culture_sensitivity", "blood_panel", "abdominal_ultrasound"],
+        "recommended_tests": [
+            "physical_exam",
+            "milk_culture",
+            "culture_sensitivity",
+            "blood_panel",
+            "abdominal_ultrasound",
+        ],
         "causes": "Bacterial infection (E. coli most common, followed by Staphylococcus aureus, Streptococcus, Pasteurella) ascends via lactiferous ducts through nipple trauma. Risk factors: kitten nail trauma to nipples (more significant in cats due to kitten vigor), milk stasis (inadequate nursing/removal, kitten weakness), poor hygiene (contaminated bedding), malnutrition (inadequate protein/fat), concurrent illness (dystocia, metritis, hypocalcemia), obesity, small litter size paradoxically (if <2 kittens, less nursing stimulus = more stasis).",
         "causes_ja": "細菌感染（E. coli最多、次にStaphylococcus aureus、Streptococcus、Pasteurella）が乳頭損傷経由でラクティフェラスダクト経由で上行感染。リスク因子：仔猫爪での乳頭損傷（仔猫活力で猫で顕著）、乳汁うっ滞（不十分な授乳/搾乳、仔猫虚弱）、不衛生（汚れた床材）、栄養不良（蛋白/脂肪欠乏）、併存疾患（難産、子宮内膜炎、低カルシウム血症）、肥満、小さい産仔数逆説的（<2子猫の場合、授乳刺激が少ない=うっ滞が多い）。",
         "pathophysiology": "Bacteria breach mammary epithelium via nipple trauma, invade lactiferous ducts, trigger acute inflammation (neutrophil infiltration, cytokine release). Bacterial toxins cause tissue necrosis, abscess formation. Milk stasis increases bacterial proliferation (optimal growth medium—high protein, fat, lactose). Systemic absorption of bacterial endotoxins/exotoxins causes fever, malaise, leukocytosis. RAPID PROGRESSION IN CATS: cats' smaller body size and higher metabolic rate allow faster bacterial multiplication. Abscess formation occurs within 24-48 hours (vs. 3-5 days in dogs). If untreated >3-5 days: septic shock (tachycardia >200, MM pale/muddy, CRT >2 sec), potential bacteremia with septicemia, DIC. Infected milk consumed by nursing kittens may cause kitten sepsis/diarrhea.",
@@ -11650,6 +12389,32 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Cat")
 
 
-def analyze_symptoms(symptoms, age_stage="", breed=None, *, onset=None, age_years=None, species=None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None):
+def analyze_symptoms(
+    symptoms,
+    age_stage="",
+    breed=None,
+    *,
+    onset=None,
+    age_years=None,
+    species=None,
+    lab_values: dict | None = None,
+    gender=None,
+    vaccines=None,
+    vaccination_status=None,
+):
     """猫の症状から鑑別診断候補を算出する。"""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("cat", {}))
+    return analyze_symptoms_generic(
+        symptoms,
+        DISEASES,
+        SYMPTOM_NAMES,
+        ADVICE,
+        onset=onset,
+        age_years=age_years,
+        breed=breed,
+        species=species,
+        lab_values=lab_values,
+        gender=gender,
+        vaccines=vaccines,
+        vaccination_status=vaccination_status,
+        prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("cat", {}),
+    )

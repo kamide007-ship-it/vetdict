@@ -27,7 +27,7 @@ REF_GDV_SPLENIC_2026 = {
     "issue": "",
     "pages": "1788740",
     "doi": "10.3389/fvets.2026.1788740",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_GDV_ACIDBASE_2026 = {
@@ -40,7 +40,7 @@ REF_GDV_ACIDBASE_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.1111/vec.70108",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_GDV_AKI_MORTALITY_2026 = {
@@ -53,7 +53,7 @@ REF_GDV_AKI_MORTALITY_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.2460/javma.25.11.0716",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_GDV_LAPAROSCOPIC_2025 = {
@@ -66,7 +66,7 @@ REF_GDV_LAPAROSCOPIC_2025 = {
     "issue": "",
     "pages": "1614761",
     "doi": "10.3389/fvets.2025.1614761",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_GDV_RISK_2026 = {
@@ -79,7 +79,7 @@ REF_GDV_RISK_2026 = {
     "issue": 4,
     "pages": "",
     "doi": "10.2460/javma.25.09.0609",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -95,7 +95,7 @@ REF_CANCER_MEDIASTIAL_2026 = {
     "issue": 4,
     "pages": "414-420",
     "doi": "",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_CANCER_ICU_SURVIVAL_2026 = {
@@ -108,7 +108,7 @@ REF_CANCER_ICU_SURVIVAL_2026 = {
     "issue": 2,
     "pages": "",
     "doi": "10.1111/vec.70105",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_CANCER_VINBLASTINE_2026 = {
@@ -121,7 +121,7 @@ REF_CANCER_VINBLASTINE_2026 = {
     "issue": 2,
     "pages": "",
     "doi": "10.1093/jvimsj/aalag050",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -137,7 +137,7 @@ REF_LIVER_PANCREATITIS_DIABETES_2026 = {
     "issue": "",
     "pages": "",
     "doi": "",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_LIVER_BILIARY_DISEASE_2024 = {
@@ -150,7 +150,7 @@ REF_LIVER_BILIARY_DISEASE_2024 = {
     "issue": "",
     "pages": "",
     "doi": "",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 # ============================================================================
@@ -166,7 +166,7 @@ REF_HEARTWORM_CREDELIO_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.1186/s13071-026-07379-0",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_HEARTWORM_PAKISTAN_2026 = {
@@ -179,7 +179,7 @@ REF_HEARTWORM_PAKISTAN_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.17420/ap72.549",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_HEARTWORM_CHEMOTHERAPY_2026 = {
@@ -192,7 +192,7 @@ REF_HEARTWORM_CHEMOTHERAPY_2026 = {
     "issue": 1,
     "pages": "",
     "doi": "10.1186/s13071-026-07327-y",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 # ============================================================================
@@ -208,7 +208,7 @@ REF_VESTIBULAR_PENLIGHT_2025 = {
     "issue": 4,
     "pages": "e70182",
     "doi": "10.1111/jvim.70182",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_VESTIBULAR_EPENDYMAL_2024 = {
@@ -221,7 +221,7 @@ REF_VESTIBULAR_EPENDYMAL_2024 = {
     "issue": 1,
     "pages": "25-30",
     "doi": "10.5326/JAAHA-MS-7373",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_VESTIBULAR_CSF_2021 = {
@@ -234,7 +234,7 @@ REF_VESTIBULAR_CSF_2021 = {
     "issue": 10,
     "pages": "e557",
     "doi": "10.1002/vetr.557",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -250,7 +250,7 @@ REF_IMHA_HYPERBILIRUBINEMIA_2026 = {
     "issue": 1,
     "pages": "",
     "doi": "10.1093/jvimsj/aalaf034",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_IMHA_TRANSFUSION_2025 = {
@@ -263,7 +263,7 @@ REF_IMHA_TRANSFUSION_2025 = {
     "issue": 5,
     "pages": "551-563",
     "doi": "10.1111/vec.70034",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_IMHA_STEM_CELLS_2025 = {
@@ -276,7 +276,7 @@ REF_IMHA_STEM_CELLS_2025 = {
     "issue": 19,
     "pages": "413-418",
     "doi": "10.1177/15473287251375491",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -292,7 +292,7 @@ REF_BLADDER_STONES_RADIOGRAPHY_2025 = {
     "issue": 6,
     "pages": "e70252",
     "doi": "10.1111/jvim.70252",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_BLADDER_STONES_IRAQ_2025 = {
@@ -305,7 +305,7 @@ REF_BLADDER_STONES_IRAQ_2025 = {
     "issue": 11,
     "pages": "5926-5935",
     "doi": "10.5455/OVJ.2025.v15.i11.47",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -321,7 +321,7 @@ REF_PYOMETRA_ORGANOIDS_2025 = {
     "issue": 4,
     "pages": "",
     "doi": "10.1530/RAF-24-0134",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_PYOMETRA_LAPAROSCOPIC_2025 = {
@@ -334,7 +334,7 @@ REF_PYOMETRA_LAPAROSCOPIC_2025 = {
     "issue": 2,
     "pages": "187",
     "doi": "10.3390/ani15020187",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_PYOMETRA_BACTERIA_2025 = {
@@ -347,7 +347,7 @@ REF_PYOMETRA_BACTERIA_2025 = {
     "issue": "",
     "pages": "110362",
     "doi": "10.1016/j.vetmic.2024.110362",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -363,7 +363,7 @@ REF_FELINE_AKI_CRRT_2026 = {
     "issue": "",
     "pages": "106548",
     "doi": "10.1016/j.tvjl.2026.106548",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_FELINE_AKI_BICARBONATE_2025 = {
@@ -376,7 +376,7 @@ REF_FELINE_AKI_BICARBONATE_2025 = {
     "issue": 11,
     "pages": "1097",
     "doi": "10.3390/vetsci12111097",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -392,7 +392,7 @@ REF_FELINE_HCM_BEXAGLIFLOZIN_2026 = {
     "issue": "",
     "pages": "1791139",
     "doi": "10.3389/fvets.2026.1791139",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_FELINE_HCM_CARVEDILOL_2026 = {
@@ -405,7 +405,7 @@ REF_FELINE_HCM_CARVEDILOL_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.1177/1098612X261433060",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_FELINE_HCM_PHENOTYPES_2026 = {
@@ -418,7 +418,7 @@ REF_FELINE_HCM_PHENOTYPES_2026 = {
     "issue": 1,
     "pages": "",
     "doi": "10.1093/jvimsj/aalag006",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -434,7 +434,7 @@ REF_FELINE_PANCREATITIS_TRIADITIS_2026 = {
     "issue": "",
     "pages": "",
     "doi": "10.1016/j.cvsm.2026.01.002",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 REF_FELINE_PANCREATITIS_INFLAMMATION_2026 = {
@@ -447,7 +447,7 @@ REF_FELINE_PANCREATITIS_INFLAMMATION_2026 = {
     "issue": 2,
     "pages": "",
     "doi": "10.1093/jvimsj/aalag039",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -463,7 +463,7 @@ REF_FELINE_LIPIDOSIS_AMINO_ACIDS_2026 = {
     "issue": 1,
     "pages": "38-42",
     "doi": "10.5326/JAAHA-MS-7508",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_FELINE_LIPIDOSIS_NUTRITION_2024 = {
@@ -476,7 +476,7 @@ REF_FELINE_LIPIDOSIS_NUTRITION_2024 = {
     "issue": 6,
     "pages": "3144-3152",
     "doi": "10.1111/jvim.17200",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_FELINE_LIPIDOSIS_SPECIES_2025 = {
@@ -489,7 +489,7 @@ REF_FELINE_LIPIDOSIS_SPECIES_2025 = {
     "issue": 1,
     "pages": "E46-E61",
     "doi": "10.1152/ajpendo.00014.2024",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 # ============================================================================
@@ -505,7 +505,7 @@ REF_FELINE_LEUKEMIA_CHEMOTHERAPY_2022 = {
     "issue": 1,
     "pages": "9-13",
     "doi": "10.1002/vms3.646",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_FELINE_LEUKEMIA_MANAGEMENT_2020 = {
@@ -518,7 +518,7 @@ REF_FELINE_LEUKEMIA_MANAGEMENT_2020 = {
     "issue": "",
     "pages": "",
     "doi": "",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -547,7 +547,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE CANCER
     "dog_cancer_neoplasia": {
         "prognosis_references": {
@@ -570,7 +569,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE LIVER DISEASE
     "dog_liver_disease": {
         "prognosis_references": {
@@ -591,7 +589,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE HEARTWORM
     "dog_heartworm_disease": {
         "prognosis_references": {
@@ -613,7 +610,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE VESTIBULAR
     "dog_vestibular_disease": {
         "prognosis_references": {
@@ -636,7 +632,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE IMHA
     "dog_immune-mediated_hemolytic_anemia_imha": {
         "prognosis_references": {
@@ -659,7 +654,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE BLADDER STONES
     "dog_bladder_stones": {
         "prognosis_references": {
@@ -680,7 +674,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CANINE PYOMETRA
     "dog_pyometra": {
         "prognosis_references": {
@@ -701,7 +694,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE AKI
     "cat_acute_kidney_injury_aki": {
         "prognosis_references": {
@@ -722,7 +714,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE HCM
     "cat_hypertrophic_cardiomyopathy_hcm": {
         "prognosis_references": {
@@ -745,7 +736,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE PANCREATITIS
     "cat_feline_pancreatitis": {
         "prognosis_references": {
@@ -766,7 +756,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE HEPATIC LIPIDOSIS
     "cat_hepatic_lipidosis_fatty_liver_disease": {
         "prognosis_references": {
@@ -788,7 +777,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE LEUKEMIA
     "cat_leukemia": {
         "prognosis_references": {
@@ -810,21 +798,25 @@ REFERENCE_MAP = {
     },
 }
 
+
 def load_diseases_json(file_path):
     """Load diseases from JSON file (list format)."""
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_diseases_json(data, file_path):
     """Save diseases to JSON file."""
-    with open(file_path, 'w', encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
 
 def add_references_to_disease(disease, references_data):
     """Add references to a disease record (working with list items)."""
     for ref_type, ref_content in references_data.items():
         if ref_type in disease:
             disease[ref_type] = ref_content
+
 
 def main():
     """Patch extended Phase 3 disease references into database."""
@@ -841,7 +833,7 @@ def main():
         # Find disease in list by id field
         found = False
         for disease in diseases:
-            if disease.get('id') == disease_id:
+            if disease.get("id") == disease_id:
                 add_references_to_disease(disease, references_data)
                 patched_count += 1
                 logger.info(f"✓ Patched {disease_id} with references")
@@ -855,16 +847,14 @@ def main():
     logger.info("\nSaving patched database...")
     save_diseases_json(diseases, db_path)
 
-    logger.info("\n" + "="*60)
+    logger.info("\n" + "=" * 60)
     logger.info("Extended Phase 3 Reference Patching Complete")
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info(f"Patched: {patched_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Skipped: {skipped_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Database saved to: {db_path}")
 
+
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(message)s'
-    )
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     main()

@@ -11,10 +11,26 @@ from api.species_analyzer import (
 
 # All 20 non-dog species (dog is handled specially)
 _NON_DOG_SPECIES = [
-    "cat", "rabbit", "hamster", "chinchilla", "guinea_pig",
-    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
-    "parrot", "reptile", "tortoise", "snake", "lizard", "amphibian",
-    "fish", "exotic_other", "horse",
+    "cat",
+    "rabbit",
+    "hamster",
+    "chinchilla",
+    "guinea_pig",
+    "ferret",
+    "hedgehog",
+    "sugar_glider",
+    "degu",
+    "bird",
+    "parakeet",
+    "parrot",
+    "reptile",
+    "tortoise",
+    "snake",
+    "lizard",
+    "amphibian",
+    "fish",
+    "exotic_other",
+    "horse",
 ]
 
 
@@ -24,7 +40,6 @@ _NON_DOG_SPECIES = [
 
 
 class TestSpeciesHandlers:
-
     def test_all_21_species_registered(self):
         expected = {"dog"} | set(_NON_DOG_SPECIES)
         assert set(SPECIES_HANDLERS.keys()) == expected
@@ -48,7 +63,6 @@ class TestSpeciesHandlers:
 
 
 class TestAnalyzeSpeciesSymptoms:
-
     def test_unsupported_species_raises(self):
         with pytest.raises(ValueError, match="Unsupported"):
             analyze_species_symptoms("unicorn", ["pain"])
@@ -64,7 +78,8 @@ class TestAnalyzeSpeciesSymptoms:
 
     def test_dog_with_all_params(self):
         result = analyze_species_symptoms(
-            "dog", ["vomiting"],
+            "dog",
+            ["vomiting"],
             breed="french_bulldog",
             onset="acute",
             age_years=5.0,
@@ -74,7 +89,8 @@ class TestAnalyzeSpeciesSymptoms:
 
     def test_cat_routing_with_params(self):
         result = analyze_species_symptoms(
-            "cat", ["vomiting", "lethargy"],
+            "cat",
+            ["vomiting", "lethargy"],
             onset="acute",
             age_years=8.0,
             gender="male",
@@ -105,7 +121,6 @@ class TestAnalyzeSpeciesSymptoms:
 
 
 class TestResultStructure:
-
     def test_cat_result_has_suspected_diseases(self):
         result = analyze_species_symptoms("cat", ["vomiting", "lethargy", "anorexia"])
         assert "suspected_diseases" in result
@@ -147,7 +162,6 @@ class TestResultStructure:
 
 
 class TestAnalyzeHorse:
-
     def test_returns_dict(self):
         result = analyze_horse(["colic_signs"])
         assert isinstance(result, dict)
@@ -193,7 +207,6 @@ class TestAnalyzeHorse:
 
 
 class TestHorseCategory:
-
     def test_viral(self):
         assert _horse_category("Equine Herpesvirus", "") == "viral"
 

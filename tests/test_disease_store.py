@@ -39,44 +39,53 @@ def db_path(tmp_path, monkeypatch):
 
     with get_connection(path) as conn:
         # Insert sample diseases
-        upsert_disease(conn, {
-            "id": "cat_0001",
-            "species": "cat",
-            "name": "Feline Asthma",
-            "name_ja": "猫喘息",
-            "description": "Chronic airway disease",
-            "treatment": "Corticosteroids and bronchodilators",
-            "treatment_ja": "コルチコステロイドと気管支拡張薬",
-            "prevention": "Reduce airborne irritants",
-            "prevention_ja": "空気中の刺激物を減らす",
-            "prognosis": "Manageable long term",
-            "prognosis_ja": "長期管理可能",
-            "urgency": "high",
-            "symptoms": {"coughing", "wheezing"},
-            "recommended_tests": ["chest_xray", "cbc"],
-        })
-        upsert_disease(conn, {
-            "id": "cat_0002",
-            "species": "cat",
-            "name": "Feline Pneumonia",
-            "name_ja": "猫肺炎",
-            "description": "Lung infection",
-            "treatment": "Antibiotics and oxygen therapy",
-            "urgency": "high",
-            "symptoms": {"coughing", "fever"},
-            "recommended_tests": ["chest_xray"],
-        })
-        upsert_disease(conn, {
-            "id": "dog_0001",
-            "species": "dog",
-            "name": "Canine Parvovirus",
-            "name_ja": "犬パルボウイルス感染症",
-            "description": "Viral gastroenteritis",
-            "treatment": "Supportive care",
-            "urgency": "emergency",
-            "symptoms": {"vomiting", "diarrhea"},
-            "recommended_tests": ["parvo_snap"],
-        })
+        upsert_disease(
+            conn,
+            {
+                "id": "cat_0001",
+                "species": "cat",
+                "name": "Feline Asthma",
+                "name_ja": "猫喘息",
+                "description": "Chronic airway disease",
+                "treatment": "Corticosteroids and bronchodilators",
+                "treatment_ja": "コルチコステロイドと気管支拡張薬",
+                "prevention": "Reduce airborne irritants",
+                "prevention_ja": "空気中の刺激物を減らす",
+                "prognosis": "Manageable long term",
+                "prognosis_ja": "長期管理可能",
+                "urgency": "high",
+                "symptoms": {"coughing", "wheezing"},
+                "recommended_tests": ["chest_xray", "cbc"],
+            },
+        )
+        upsert_disease(
+            conn,
+            {
+                "id": "cat_0002",
+                "species": "cat",
+                "name": "Feline Pneumonia",
+                "name_ja": "猫肺炎",
+                "description": "Lung infection",
+                "treatment": "Antibiotics and oxygen therapy",
+                "urgency": "high",
+                "symptoms": {"coughing", "fever"},
+                "recommended_tests": ["chest_xray"],
+            },
+        )
+        upsert_disease(
+            conn,
+            {
+                "id": "dog_0001",
+                "species": "dog",
+                "name": "Canine Parvovirus",
+                "name_ja": "犬パルボウイルス感染症",
+                "description": "Viral gastroenteritis",
+                "treatment": "Supportive care",
+                "urgency": "emergency",
+                "symptoms": {"vomiting", "diarrhea"},
+                "recommended_tests": ["parvo_snap"],
+            },
+        )
         # Insert sample symptoms
         upsert_symptom(conn, "cat_coughing", "Coughing", "咳", "cat")
         upsert_symptom(conn, "cat_wheezing", "Wheezing", "喘鳴", "cat")
@@ -283,13 +292,16 @@ class TestCacheInvalidation:
         stats1 = get_species_stats()
         # Add a new disease directly
         with get_connection(db_path) as conn:
-            upsert_disease(conn, {
-                "id": "cat_9999",
-                "species": "cat",
-                "name": "Test Disease",
-                "name_ja": "テスト疾患",
-                "symptoms": set(),
-            })
+            upsert_disease(
+                conn,
+                {
+                    "id": "cat_9999",
+                    "species": "cat",
+                    "name": "Test Disease",
+                    "name_ja": "テスト疾患",
+                    "symptoms": set(),
+                },
+            )
         # Before invalidation, cache returns old data
         stats_cached = get_species_stats()
         assert stats_cached["total_diseases"] == stats1["total_diseases"]
@@ -303,10 +315,12 @@ class TestCacheInvalidation:
 # Diseases API endpoint tests
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def client(db_path):
     """Create a Flask test client with the diseases blueprint."""
     from api.vetdict_api import app
+
     app.config["TESTING"] = True
     return app.test_client()
 
@@ -399,15 +413,34 @@ class TestSpeciesMetaConsistency:
 
     def test_species_meta_has_21_entries(self):
         from api.disease_store import SPECIES_META
+
         assert len(SPECIES_META) == 21
 
     def test_all_expected_species_present(self):
         from api.disease_store import SPECIES_META
+
         expected = {
-            "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig",
-            "chinchilla", "ferret", "hedgehog", "sugar_glider", "degu",
-            "bird", "parakeet", "parrot", "reptile", "tortoise",
-            "snake", "lizard", "amphibian", "fish", "exotic_other",
+            "dog",
+            "cat",
+            "horse",
+            "rabbit",
+            "hamster",
+            "guinea_pig",
+            "chinchilla",
+            "ferret",
+            "hedgehog",
+            "sugar_glider",
+            "degu",
+            "bird",
+            "parakeet",
+            "parrot",
+            "reptile",
+            "tortoise",
+            "snake",
+            "lizard",
+            "amphibian",
+            "fish",
+            "exotic_other",
         }
         assert set(SPECIES_META.keys()) == expected
 

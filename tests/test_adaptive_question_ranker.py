@@ -343,11 +343,11 @@ class TestApplyDiversityConstraint:
     def test_longer_list_reordered(self):
         questions = [
             self._make_rq("vomiting_frequency", 0.9),  # gastrointestinal
-            self._make_rq("blood_in_vomit", 0.85),      # gastrointestinal
-            self._make_rq("diarrhea_consistency", 0.8), # gastrointestinal
-            self._make_rq("cough_type", 0.75),          # respiratory
-            self._make_rq("urine_color", 0.7),          # urinary
-            self._make_rq("onset_timeline", 0.65),      # systemic
+            self._make_rq("blood_in_vomit", 0.85),  # gastrointestinal
+            self._make_rq("diarrhea_consistency", 0.8),  # gastrointestinal
+            self._make_rq("cough_type", 0.75),  # respiratory
+            self._make_rq("urine_color", 0.7),  # urinary
+            self._make_rq("onset_timeline", 0.65),  # systemic
         ]
         result = AdaptiveQuestionRanker._apply_diversity_constraint(questions)
         assert len(result) == len(questions)
@@ -391,9 +391,7 @@ class TestBuildSymptomImplications:
 class TestUpdateWeightsFromFeedback:
     def test_returns_copy_of_weights(self):
         weights = {"information_gain": 0.4, "coverage": 0.15}
-        updated = AdaptiveQuestionRanker.update_weights_from_feedback(
-            weights, {"q1": 0.9}
-        )
+        updated = AdaptiveQuestionRanker.update_weights_from_feedback(weights, {"q1": 0.9})
         assert updated == weights
         # Ensure it's a copy, not the same object
         assert updated is not weights

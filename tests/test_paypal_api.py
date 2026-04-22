@@ -194,9 +194,7 @@ class TestRestoreSubscription:
     def test_restore_no_matching_subscription(self, tmp_path):
         db_path = tmp_path / "subs.db"
         with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
-            resp = self.client.post(
-                "/api/paypal/restore", json={"email": "nobody@example.com"}
-            )
+            resp = self.client.post("/api/paypal/restore", json={"email": "nobody@example.com"})
         assert resp.status_code == 200
         data = resp.get_json()
         assert data["active"] is False
@@ -215,9 +213,7 @@ class TestRestoreSubscription:
             finally:
                 conn.close()
 
-            resp = self.client.post(
-                "/api/paypal/restore", json={"email": "vet@example.com"}
-            )
+            resp = self.client.post("/api/paypal/restore", json={"email": "vet@example.com"})
         data = resp.get_json()
         assert data["active"] is True
         assert data["subscription_id"] == "I-RESTORE"
@@ -235,9 +231,7 @@ class TestRestoreSubscription:
             finally:
                 conn.close()
 
-            resp = self.client.post(
-                "/api/paypal/restore", json={"email": "ex@example.com"}
-            )
+            resp = self.client.post("/api/paypal/restore", json={"email": "ex@example.com"})
         assert resp.get_json()["active"] is False
 
 
@@ -270,18 +264,14 @@ class TestVerifySubscription:
             finally:
                 conn.close()
 
-            resp = self.client.post(
-                "/api/paypal/verify", json={"subscription_id": "I-VERIFY"}
-            )
+            resp = self.client.post("/api/paypal/verify", json={"subscription_id": "I-VERIFY"})
         data = resp.get_json()
         assert data["active"] is True
 
     def test_verify_inactive(self, tmp_path):
         db_path = tmp_path / "subs.db"
         with patch("api.paypal_api._SUBSCRIBERS_DB", db_path):
-            resp = self.client.post(
-                "/api/paypal/verify", json={"subscription_id": "I-MISSING"}
-            )
+            resp = self.client.post("/api/paypal/verify", json={"subscription_id": "I-MISSING"})
         assert resp.get_json()["active"] is False
 
 
@@ -508,9 +498,7 @@ class TestWaitlistEndpoints:
     def test_join_waitlist_success(self, tmp_path):
         db_path = tmp_path / "wl.db"
         with patch("api.paypal_api._WAITLIST_DB", db_path):
-            resp = self.client.post(
-                "/api/paypal/waitlist", json={"email": "vet@example.com"}
-            )
+            resp = self.client.post("/api/paypal/waitlist", json={"email": "vet@example.com"})
         assert resp.status_code == 200
         data = resp.get_json()
         assert data["status"] == "ok"
@@ -519,12 +507,8 @@ class TestWaitlistEndpoints:
     def test_join_waitlist_duplicate_ignored(self, tmp_path):
         db_path = tmp_path / "wl.db"
         with patch("api.paypal_api._WAITLIST_DB", db_path):
-            self.client.post(
-                "/api/paypal/waitlist", json={"email": "vet@example.com"}
-            )
-            resp = self.client.post(
-                "/api/paypal/waitlist", json={"email": "vet@example.com"}
-            )
+            self.client.post("/api/paypal/waitlist", json={"email": "vet@example.com"})
+            resp = self.client.post("/api/paypal/waitlist", json={"email": "vet@example.com"})
         assert resp.get_json()["total"] == 1
 
     def test_get_waitlist_unauthorized(self):

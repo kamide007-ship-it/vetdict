@@ -23,6 +23,7 @@ from api.routes.clinical_api import ClinicalAPIHandler, clinical_bp, register_cl
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def mock_engine():
     """Return a simple Mock that stands in for UnifiedClinicalEngine."""
@@ -110,8 +111,8 @@ COMBINATIONS_VALID = {
 # POST /api/clinical/analysis — comprehensive analysis
 # ---------------------------------------------------------------------------
 
-class TestPostComprehensiveAnalysis:
 
+class TestPostComprehensiveAnalysis:
     def test_valid_data_returns_200(self, client):
         resp = client.post("/api/clinical/analysis", json=COMPREHENSIVE_VALID)
         assert resp.status_code == 200
@@ -120,9 +121,17 @@ class TestPostComprehensiveAnalysis:
         assert data["case_id"] == "case_001"
 
     def test_optional_fields_omitted_returns_200(self, client):
-        payload = {k: COMPREHENSIVE_VALID[k] for k in
-                   ["case_id", "patient_age", "patient_species",
-                    "symptoms", "disease_severity", "initial_predictions"]}
+        payload = {
+            k: COMPREHENSIVE_VALID[k]
+            for k in [
+                "case_id",
+                "patient_age",
+                "patient_species",
+                "symptoms",
+                "disease_severity",
+                "initial_predictions",
+            ]
+        }
         resp = client.post("/api/clinical/analysis", json=payload)
         assert resp.status_code == 200
 
@@ -182,8 +191,8 @@ class TestPostComprehensiveAnalysis:
 # GET /api/clinical/cases/<case_id>
 # ---------------------------------------------------------------------------
 
-class TestGetCaseById:
 
+class TestGetCaseById:
     def test_returns_200(self, client):
         resp = client.get("/api/clinical/cases/case_001")
         assert resp.status_code == 200
@@ -217,8 +226,8 @@ class TestGetCaseById:
 # GET /api/clinical/differential
 # ---------------------------------------------------------------------------
 
-class TestGetDifferentialDiagnoses:
 
+class TestGetDifferentialDiagnoses:
     def test_returns_200_with_defaults(self, client):
         resp = client.get("/api/clinical/differential")
         assert resp.status_code == 200
@@ -227,9 +236,7 @@ class TestGetDifferentialDiagnoses:
         assert "differentials" in data
 
     def test_returns_200_with_query_params(self, client):
-        resp = client.get(
-            "/api/clinical/differential?symptoms=vomiting,lethargy&age=3.0&species=cat"
-        )
+        resp = client.get("/api/clinical/differential?symptoms=vomiting,lethargy&age=3.0&species=cat")
         assert resp.status_code == 200
         data = resp.get_json()
         assert data["patient"]["age"] == 3.0
@@ -262,16 +269,15 @@ class TestGetDifferentialDiagnoses:
 # POST /api/clinical/outcomes — record outcome
 # ---------------------------------------------------------------------------
 
-class TestPostRecordOutcome:
 
+class TestPostRecordOutcome:
     def test_valid_data_returns_200(self, client):
         resp = client.post("/api/clinical/outcomes", json=OUTCOME_VALID)
         assert resp.status_code == 200
         assert resp.get_json()["status"] == "success"
 
     def test_minimal_valid_data_returns_200(self, client):
-        resp = client.post("/api/clinical/outcomes",
-                           json={"case_id": "c1", "actual_diagnosis": "Pancreatitis"})
+        resp = client.post("/api/clinical/outcomes", json={"case_id": "c1", "actual_diagnosis": "Pancreatitis"})
         assert resp.status_code == 200
 
     def test_missing_case_id_returns_400(self, client):
@@ -307,8 +313,8 @@ class TestPostRecordOutcome:
 # POST /api/clinical/prognosis
 # ---------------------------------------------------------------------------
 
-class TestPostPredictPrognosis:
 
+class TestPostPredictPrognosis:
     def test_valid_data_returns_200(self, client):
         resp = client.post("/api/clinical/prognosis", json=PROGNOSIS_VALID)
         assert resp.status_code == 200
@@ -359,8 +365,8 @@ class TestPostPredictPrognosis:
 # POST /api/clinical/treatment/predict
 # ---------------------------------------------------------------------------
 
-class TestPostPredictTreatmentResponse:
 
+class TestPostPredictTreatmentResponse:
     def test_valid_data_returns_200(self, client):
         resp = client.post("/api/clinical/treatment/predict", json=TREATMENT_PREDICT_VALID)
         assert resp.status_code == 200
@@ -406,8 +412,8 @@ class TestPostPredictTreatmentResponse:
 # POST /api/clinical/treatment/recommend
 # ---------------------------------------------------------------------------
 
-class TestPostRecommendTreatments:
 
+class TestPostRecommendTreatments:
     def test_valid_data_returns_200(self, client):
         resp = client.post("/api/clinical/treatment/recommend", json=TREATMENT_RECOMMEND_VALID)
         assert resp.status_code == 200
@@ -448,8 +454,8 @@ class TestPostRecommendTreatments:
 # POST /api/clinical/combinations/analyze
 # ---------------------------------------------------------------------------
 
-class TestPostAnalyzeCombinations:
 
+class TestPostAnalyzeCombinations:
     def test_valid_data_returns_200(self, client):
         resp = client.post("/api/clinical/combinations/analyze", json=COMBINATIONS_VALID)
         assert resp.status_code == 200
@@ -458,8 +464,9 @@ class TestPostAnalyzeCombinations:
         assert data["diseases"] == COMBINATIONS_VALID["diseases"]
 
     def test_exactly_two_diseases_returns_200(self, client):
-        resp = client.post("/api/clinical/combinations/analyze",
-                           json={"diseases": ["Pancreatitis", "Diabetes Mellitus"]})
+        resp = client.post(
+            "/api/clinical/combinations/analyze", json={"diseases": ["Pancreatitis", "Diabetes Mellitus"]}
+        )
         assert resp.status_code == 200
 
     def test_missing_diseases_key_returns_400(self, client):
@@ -467,8 +474,7 @@ class TestPostAnalyzeCombinations:
         assert resp.status_code == 400
 
     def test_only_one_disease_returns_400(self, client):
-        resp = client.post("/api/clinical/combinations/analyze",
-                           json={"diseases": ["Pancreatitis"]})
+        resp = client.post("/api/clinical/combinations/analyze", json={"diseases": ["Pancreatitis"]})
         assert resp.status_code == 400
 
     def test_empty_diseases_list_returns_400(self, client):
@@ -498,8 +504,8 @@ class TestPostAnalyzeCombinations:
 # GET /api/clinical/stats
 # ---------------------------------------------------------------------------
 
-class TestGetSystemStatistics:
 
+class TestGetSystemStatistics:
     def test_returns_200(self, client):
         resp = client.get("/api/clinical/stats")
         assert resp.status_code == 200
@@ -538,8 +544,8 @@ class TestGetSystemStatistics:
 # GET /api/clinical/stats/veterinarian/<vet_id>
 # ---------------------------------------------------------------------------
 
-class TestGetVeterinarianStats:
 
+class TestGetVeterinarianStats:
     def test_returns_200(self, client):
         resp = client.get("/api/clinical/stats/veterinarian/vet_001")
         assert resp.status_code == 200
@@ -576,8 +582,8 @@ class TestGetVeterinarianStats:
 # GET /api/clinical/stats/clinic/<clinic_id>
 # ---------------------------------------------------------------------------
 
-class TestGetClinicStats:
 
+class TestGetClinicStats:
     def test_returns_200(self, client):
         resp = client.get("/api/clinical/stats/clinic/clinic_001")
         assert resp.status_code == 200
@@ -614,8 +620,8 @@ class TestGetClinicStats:
 # POST /api/clinical/models/train
 # ---------------------------------------------------------------------------
 
-class TestPostTrainModels:
 
+class TestPostTrainModels:
     def test_returns_200(self, client):
         resp = client.post("/api/clinical/models/train", json={})
         assert resp.status_code == 200
@@ -654,8 +660,8 @@ class TestPostTrainModels:
 # GET /api/clinical/cases/<case_id>/summary
 # ---------------------------------------------------------------------------
 
-class TestGetClinicalSummary:
 
+class TestGetClinicalSummary:
     def test_returns_200(self, client):
         resp = client.get("/api/clinical/cases/case_001/summary")
         assert resp.status_code == 200
@@ -692,6 +698,7 @@ class TestGetClinicalSummary:
 # ---------------------------------------------------------------------------
 # register_clinical_routes — URL rule coverage
 # ---------------------------------------------------------------------------
+
 
 class TestRegisterClinicalRoutes:
     """Verify that register_clinical_routes creates all expected URL rules."""
@@ -748,10 +755,7 @@ class TestRegisterClinicalRoutes:
 
     def test_total_route_count(self, registered_app):
         """Exactly 13 clinical routes should be registered (excludes Flask's static)."""
-        clinical_rules = [
-            r for r in self._url_rules(registered_app)
-            if r.startswith("/api/clinical")
-        ]
+        clinical_rules = [r for r in self._url_rules(registered_app) if r.startswith("/api/clinical")]
         assert len(clinical_rules) == 13
 
     def test_analysis_accepts_post(self, registered_app):
@@ -779,8 +783,8 @@ class TestRegisterClinicalRoutes:
 # clinical_bp Blueprint object
 # ---------------------------------------------------------------------------
 
-class TestClinicalBlueprint:
 
+class TestClinicalBlueprint:
     def test_blueprint_name(self):
         assert clinical_bp.name == "clinical"
 
@@ -792,8 +796,8 @@ class TestClinicalBlueprint:
 # ClinicalAPIHandler — direct unit tests
 # ---------------------------------------------------------------------------
 
-class TestClinicalAPIHandlerInit:
 
+class TestClinicalAPIHandlerInit:
     def test_stores_engine(self, mock_engine):
         h = ClinicalAPIHandler(engine=mock_engine)
         assert h.engine is mock_engine

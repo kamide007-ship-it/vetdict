@@ -24,7 +24,7 @@ RABBIT_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2021,
                 "doi": "10.1016/B978-0-323-66558-7.00001-4",
-                "evidence_level": "III"
+                "evidence_level": "III",
             },
             {
                 "pmid": "26535169",
@@ -33,8 +33,8 @@ RABBIT_REFERENCES = {
                 "journal": "BSAVA",
                 "year": 2016,
                 "doi": "10.22233/20160908",
-                "evidence_level": "III"
-            }
+                "evidence_level": "III",
+            },
         ]
     },
     "respiratory": {
@@ -46,7 +46,7 @@ RABBIT_REFERENCES = {
                 "journal": "Journal of Exotic Pet Medicine",
                 "year": 2019,
                 "doi": "10.1053/j.jepm.2019.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -59,7 +59,7 @@ RABBIT_REFERENCES = {
                 "journal": "Veterinary Clinics of North America: Exotic Animal Practice",
                 "year": 2021,
                 "doi": "10.1016/j.cvex.2021.04.005",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -72,7 +72,7 @@ RABBIT_REFERENCES = {
                 "journal": "Veterinary Microbiology",
                 "year": 2019,
                 "doi": "10.1016/j.vetmic.2019.10.020",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -85,7 +85,7 @@ RABBIT_REFERENCES = {
                 "journal": "Journal of Exotic Pet Medicine",
                 "year": 2020,
                 "doi": "10.1053/j.jepm.2020.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -98,10 +98,10 @@ RABBIT_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2016,
                 "doi": "10.1016/B978-0-7020-5246-0.00001-7",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
-    }
+    },
 }
 
 # Bird references
@@ -115,7 +115,7 @@ BIRD_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2019,
                 "doi": "10.1016/B978-0-323-55156-0.00001-7",
-                "evidence_level": "III"
+                "evidence_level": "III",
             },
             {
                 "pmid": "26535169",
@@ -124,8 +124,8 @@ BIRD_REFERENCES = {
                 "journal": "BSAVA",
                 "year": 2016,
                 "doi": "10.22233/20160908",
-                "evidence_level": "III"
-            }
+                "evidence_level": "III",
+            },
         ]
     },
     "respiratory": {
@@ -137,7 +137,7 @@ BIRD_REFERENCES = {
                 "journal": "Veterinary Clinics of North America: Exotic Animal Practice",
                 "year": 2020,
                 "doi": "10.1016/j.cvex.2020.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -150,7 +150,7 @@ BIRD_REFERENCES = {
                 "journal": "Journal of Exotic Pet Medicine",
                 "year": 2019,
                 "doi": "10.1053/j.jepm.2019.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -163,7 +163,7 @@ BIRD_REFERENCES = {
                 "journal": "Wiley-Blackwell",
                 "year": 2013,
                 "doi": "10.1002/9781118884348",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -176,7 +176,7 @@ BIRD_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2016,
                 "doi": "10.1016/B978-0-7020-5246-0.00001-7",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -189,93 +189,111 @@ BIRD_REFERENCES = {
                 "journal": "Journal of Exotic Pet Medicine",
                 "year": 2020,
                 "doi": "10.1053/j.jepm.2020.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
-    }
+    },
 }
+
 
 def load_diseases_json(filepath):
     """Load diseases database"""
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_diseases_json(filepath, diseases):
     """Save diseases database"""
-    with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         json.dump(diseases, f, ensure_ascii=False, indent=2)
+
 
 def categorize_rabbit_disease(disease_name):
     """Categorize rabbit disease based on name keywords"""
-    name = (disease_name or '').lower()
+    name = (disease_name or "").lower()
 
     keywords = {
-        'respiratory': ['respiratory', 'pneumonia', 'rhinitis', 'sinusitis', 'cough', 'airway', 'sneezing'],
-        'digestive': ['digestive', 'gastric', 'duodenal', 'jejunal', 'colonic', 'cecal', 'colic', 'gi', 'stasis', 'hepatic', 'liver'],
-        'infectious': ['hemorrhagic', 'myxoma', 'pasteurella', 'viral', 'bacterial', 'infection', 'sepsis', 'fever'],
-        'orthopedic': ['fracture', 'arthritis', 'orthopedic', 'limb', 'bone', 'spine', 'luxation'],
-        'parasitic': ['parasitic', 'parasite', 'mite', 'louse', 'worm', 'coccidial', 'toxoplasma'],
+        "respiratory": ["respiratory", "pneumonia", "rhinitis", "sinusitis", "cough", "airway", "sneezing"],
+        "digestive": [
+            "digestive",
+            "gastric",
+            "duodenal",
+            "jejunal",
+            "colonic",
+            "cecal",
+            "colic",
+            "gi",
+            "stasis",
+            "hepatic",
+            "liver",
+        ],
+        "infectious": ["hemorrhagic", "myxoma", "pasteurella", "viral", "bacterial", "infection", "sepsis", "fever"],
+        "orthopedic": ["fracture", "arthritis", "orthopedic", "limb", "bone", "spine", "luxation"],
+        "parasitic": ["parasitic", "parasite", "mite", "louse", "worm", "coccidial", "toxoplasma"],
     }
 
     for category, kw_list in keywords.items():
         if any(kw in name for kw in kw_list):
             return category
 
-    return 'general'
+    return "general"
+
 
 def categorize_bird_disease(disease_name):
     """Categorize bird disease based on name keywords"""
-    name = (disease_name or '').lower()
+    name = (disease_name or "").lower()
 
     keywords = {
-        'respiratory': ['respiratory', 'pneumonia', 'aspergill', 'sinusitis', 'cough', 'airway'],
-        'digestive': ['digestive', 'gastric', 'crop', 'cloaca', 'hepatic', 'pancre', 'gi'],
-        'infectious': ['viral', 'bacterial', 'infection', 'sepsis', 'poxvirus', 'polyoma', 'adeno'],
-        'parasitic': ['parasitic', 'parasite', 'mite', 'louse', 'worm', 'coccidia', 'giardia'],
-        'behavioral': ['behavior', 'feather', 'psittacosis', 'aggression', 'aggress', 'scream', 'stress'],
+        "respiratory": ["respiratory", "pneumonia", "aspergill", "sinusitis", "cough", "airway"],
+        "digestive": ["digestive", "gastric", "crop", "cloaca", "hepatic", "pancre", "gi"],
+        "infectious": ["viral", "bacterial", "infection", "sepsis", "poxvirus", "polyoma", "adeno"],
+        "parasitic": ["parasitic", "parasite", "mite", "louse", "worm", "coccidia", "giardia"],
+        "behavioral": ["behavior", "feather", "psittacosis", "aggression", "aggress", "scream", "stress"],
     }
 
     for category, kw_list in keywords.items():
         if any(kw in name for kw in kw_list):
             return category
 
-    return 'general'
+    return "general"
+
 
 def add_references_to_disease(disease):
     """Add references based on species"""
-    species = disease.get('species')
+    species = disease.get("species")
 
-    if species == 'Rabbit':
-        category = categorize_rabbit_disease(disease.get('name'))
-        refs = RABBIT_REFERENCES.get(category, RABBIT_REFERENCES['general'])
-    elif species in ['Bird', 'Parakeet', 'Parrot']:
-        category = categorize_bird_disease(disease.get('name'))
-        refs = BIRD_REFERENCES.get(category, BIRD_REFERENCES['general'])
+    if species == "Rabbit":
+        category = categorize_rabbit_disease(disease.get("name"))
+        refs = RABBIT_REFERENCES.get(category, RABBIT_REFERENCES["general"])
+    elif species in ["Bird", "Parakeet", "Parrot"]:
+        category = categorize_bird_disease(disease.get("name"))
+        refs = BIRD_REFERENCES.get(category, BIRD_REFERENCES["general"])
     else:
         return False
 
     # Initialize reference fields
-    for ref_type in ['prognosis_references', 'rehabilitation_references', 'nutrition_references']:
+    for ref_type in ["prognosis_references", "rehabilitation_references", "nutrition_references"]:
         if ref_type not in disease:
-            disease[ref_type] = {'references': []}
-        if not disease[ref_type].get('references'):
-            disease[ref_type]['references'] = []
+            disease[ref_type] = {"references": []}
+        if not disease[ref_type].get("references"):
+            disease[ref_type]["references"] = []
 
     # Add references
-    if not disease['prognosis_references']['references']:
-        disease['prognosis_references']['references'] = refs['references'].copy()
+    if not disease["prognosis_references"]["references"]:
+        disease["prognosis_references"]["references"] = refs["references"].copy()
 
-    if category in ['respiratory', 'digestive', 'infectious', 'parasitic']:
-        if not disease['rehabilitation_references']['references']:
-            disease['rehabilitation_references']['references'] = refs['references'][:1]
-        if not disease['nutrition_references']['references']:
-            disease['nutrition_references']['references'] = refs['references'][:1]
+    if category in ["respiratory", "digestive", "infectious", "parasitic"]:
+        if not disease["rehabilitation_references"]["references"]:
+            disease["rehabilitation_references"]["references"] = refs["references"][:1]
+        if not disease["nutrition_references"]["references"]:
+            disease["nutrition_references"]["references"] = refs["references"][:1]
 
     return True
 
+
 def main():
     # File paths
-    db_path = os.path.join(os.path.dirname(__file__), '..', 'diseases_all_species.json')
+    db_path = os.path.join(os.path.dirname(__file__), "..", "diseases_all_species.json")
 
     print("=" * 80)
     print("Phase 4B: Rabbit + Bird Diseases - Reference Integration")
@@ -285,11 +303,11 @@ def main():
     diseases = load_diseases_json(db_path)
 
     # Filter target diseases
-    target_species = ['Rabbit', 'Bird', 'Parakeet', 'Parrot']
-    target_diseases = [d for d in diseases if d.get('species') in target_species]
+    target_species = ["Rabbit", "Bird", "Parakeet", "Parrot"]
+    target_diseases = [d for d in diseases if d.get("species") in target_species]
     print(f"\nTarget diseases: {len(target_diseases)}")
     for species in target_species:
-        count = len([d for d in target_diseases if d.get('species') == species])
+        count = len([d for d in target_diseases if d.get("species") == species])
         if count > 0:
             print(f"  {species}: {count}")
 
@@ -305,5 +323,6 @@ def main():
     print(f"\n✓ {added} 疾患に参考文献を追加しました")
     print("✓ データベースを保存しました")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -9,7 +9,7 @@ import sys
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from api.ai.adaptive_confidence_calculator import (
     AdaptiveConfidenceCalculator,
@@ -406,9 +406,7 @@ class TestAdaptiveConfidenceCalculator:
         calculator.vet_calibrations["vet_001"] = 1.2
 
         predictions = {"Disease_A": 0.75, "Disease_B": 0.60}
-        adjusted = calculator.adjust_predictions(
-            predictions, veterinarian_id="vet_001"
-        )
+        adjusted = calculator.adjust_predictions(predictions, veterinarian_id="vet_001")
 
         # Adjusted confidence should be adjusted (may be higher or normalized)
         assert "Disease_A" in adjusted
@@ -420,10 +418,7 @@ class TestAdaptiveConfidenceCalculator:
             calculator.add_diagnosis_feedback(record)
 
         predictions = {"Disease_A": 0.5, "Disease_B": 0.5}
-        adjusted = calculator.adjust_predictions(
-            predictions,
-            clinic_id="clinic_0"
-        )
+        adjusted = calculator.adjust_predictions(predictions, clinic_id="clinic_0")
 
         # Should be normalized
         assert sum(adjusted.values()) <= 1.01  # Allow small floating point error
@@ -434,10 +429,7 @@ class TestAdaptiveConfidenceCalculator:
             calculator.add_diagnosis_feedback(record)
 
         predictions = {"Disease_A": 0.5, "Disease_B": 0.5}
-        adjusted = calculator.adjust_predictions(
-            predictions,
-            species="dog"
-        )
+        adjusted = calculator.adjust_predictions(predictions, species="dog")
 
         # Should be adjusted based on dog patterns
         assert len(adjusted) == 2

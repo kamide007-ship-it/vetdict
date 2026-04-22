@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Add 6 new horse stereotypic behavior entries."""
+
 import json
 
 with open("diseases_all_species.json", "r") as f:
@@ -70,7 +71,11 @@ NEW_ENTRIES = [
         "category": "misc",
         "transmission": "Not transmissible. Despite common belief, observational learning of crib-biting from other horses has been disproven by controlled studies.",
         "transmission_ja": "伝播しない。他の馬を見て学習するという一般的な通説は対照研究で否定されている。",
-        "recommended_tests": ["胃内視鏡検査 (Gastroscopy)", "歯科検査 (Dental Examination)", "血液生化学検査 (Blood Chemistry Panel)"],
+        "recommended_tests": [
+            "胃内視鏡検査 (Gastroscopy)",
+            "歯科検査 (Dental Examination)",
+            "血液生化学検査 (Blood Chemistry Panel)",
+        ],
         "symptoms": ["behavioral_changes", "weight_loss", "poor_body_condition", "dental_abnormalities"],
         "differential_diagnosis": "Rule out gastric ulcers, dental pain, GI discomfort as primary causes triggering the behavior.",
         "severity_score": 2,
@@ -146,7 +151,11 @@ NEW_ENTRIES = [
         "category": "misc",
         "transmission": "Not transmissible. Social facilitation has not been demonstrated in controlled studies.",
         "transmission_ja": "伝播しない。対照研究で社会的促進は実証されていない。",
-        "recommended_tests": ["行動観察 (Behavioral Assessment)", "神経学的検査 (Neurological Examination)", "装蹄評価 (Farrier Assessment)"],
+        "recommended_tests": [
+            "行動観察 (Behavioral Assessment)",
+            "神経学的検査 (Neurological Examination)",
+            "装蹄評価 (Farrier Assessment)",
+        ],
         "symptoms": ["behavioral_changes", "weight_loss", "lameness"],
         "differential_diagnosis": "Neurological conditions (EPM, wobblers), vestibular disease, pain-related shifting.",
         "severity_score": 2,
@@ -212,7 +221,11 @@ NEW_ENTRIES = [
         "category": "misc",
         "transmission": "Not transmissible.",
         "transmission_ja": "伝播しない。",
-        "recommended_tests": ["行動観察 (Behavioral Assessment)", "歩様検査 (Lameness Examination)", "装蹄評価 (Farrier Assessment)"],
+        "recommended_tests": [
+            "行動観察 (Behavioral Assessment)",
+            "歩様検査 (Lameness Examination)",
+            "装蹄評価 (Farrier Assessment)",
+        ],
         "symptoms": ["behavioral_changes", "weight_loss", "lameness"],
         "differential_diagnosis": "Colic, neurological disease, pain, vestibular dysfunction.",
         "severity_score": 2,

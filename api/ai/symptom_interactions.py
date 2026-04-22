@@ -54,8 +54,7 @@ class SymptomInteractionMatrix:
                 self.pair_weights[pair] = weight
 
         logger.info(
-            f"Built SymptomInteractionMatrix: "
-            f"{len(self.pair_weights)} pairs with frequency >= {self.min_frequency}"
+            f"Built SymptomInteractionMatrix: {len(self.pair_weights)} pairs with frequency >= {self.min_frequency}"
         )
 
     def get_pair_weight(self, symptom_a: str, symptom_b: str) -> float:
@@ -72,9 +71,7 @@ class SymptomInteractionMatrix:
         pair_key = frozenset({symptom_a, symptom_b})
         return self.pair_weights.get(pair_key, 0.0)
 
-    def find_interactions(
-        self, symptoms: List[str], weight_threshold: float = 0.1
-    ) -> List[Dict[str, Any]]:
+    def find_interactions(self, symptoms: List[str], weight_threshold: float = 0.1) -> List[Dict[str, Any]]:
         """
         Find all high-weight interactions in a symptom set.
 
@@ -273,13 +270,10 @@ class TripleInteractionMatrix:
                 self.triple_weights[triple] = weight
 
         logger.info(
-            f"Built TripleInteractionMatrix: "
-            f"{len(self.triple_weights)} triples with frequency >= {self.min_frequency}"
+            f"Built TripleInteractionMatrix: {len(self.triple_weights)} triples with frequency >= {self.min_frequency}"
         )
 
-    def find_triple_interactions(
-        self, symptoms: List[str], weight_threshold: float = 0.05
-    ) -> List[Dict[str, Any]]:
+    def find_triple_interactions(self, symptoms: List[str], weight_threshold: float = 0.05) -> List[Dict[str, Any]]:
         """
         Find all high-weight triple interactions in a symptom set.
 

@@ -18,7 +18,10 @@ class Phase1Integration:
 
     def __init__(self):
         self.db_path = Path(__file__).parent.parent / "diseases_all_species.json"
-        self.backup_path = Path(__file__).parent.parent / f"diseases_all_species_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        self.backup_path = (
+            Path(__file__).parent.parent
+            / f"diseases_all_species_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
 
         # Find the most recent enriched database
         enriched_files = list(Path(__file__).parent.parent.glob("diseases_enriched_phase1_*.json"))
@@ -34,9 +37,9 @@ class Phase1Integration:
 
     def load_databases(self):
         """Load both original and enriched databases."""
-        with open(self.db_path, 'r', encoding='utf-8') as f:
+        with open(self.db_path, "r", encoding="utf-8") as f:
             original = json.load(f)
-        with open(self.enriched_db_path, 'r', encoding='utf-8') as f:
+        with open(self.enriched_db_path, "r", encoding="utf-8") as f:
             enriched = json.load(f)
         return original, enriched
 
@@ -52,9 +55,18 @@ class Phase1Integration:
                 enriched_disease = enriched_map[disease_id]
 
                 # Update all enrichment fields
-                for field in ["pathophysiology", "pathophysiology_ja", "causes", "causes_ja",
-                             "treatment", "treatment_ja", "prevention", "prevention_ja",
-                             "prognosis", "prognosis_ja"]:
+                for field in [
+                    "pathophysiology",
+                    "pathophysiology_ja",
+                    "causes",
+                    "causes_ja",
+                    "treatment",
+                    "treatment_ja",
+                    "prevention",
+                    "prevention_ja",
+                    "prognosis",
+                    "prognosis_ja",
+                ]:
                     if field in enriched_disease and enriched_disease[field]:
                         disease[field] = enriched_disease[field]
 
@@ -72,15 +84,33 @@ class Phase1Integration:
         print(f"  Original database: {len(original)} diseases")
         print(f"  Enriched database: {len(enriched)} diseases")
         print(f"  Merged count: {merged_count}")
-        print(f"  Size unchanged: {len(original) == len(enriched)} ✓" if len(original) == len(enriched) else "  Size mismatch: ✗")
+        print(
+            f"  Size unchanged: {len(original) == len(enriched)} ✓"
+            if len(original) == len(enriched)
+            else "  Size mismatch: ✗"
+        )
 
         # Check field coverage
         phase1_diseases = [d for d in original if d.get("enrichment_phase") == 1]
-        avg_fields = sum(sum(1 for f in [
-            "pathophysiology", "pathophysiology_ja", "causes", "causes_ja",
-            "treatment", "treatment_ja", "prevention", "prevention_ja",
-            "prognosis", "prognosis_ja"
-        ] if d.get(f)) for d in phase1_diseases) / max(len(phase1_diseases), 1)
+        avg_fields = sum(
+            sum(
+                1
+                for f in [
+                    "pathophysiology",
+                    "pathophysiology_ja",
+                    "causes",
+                    "causes_ja",
+                    "treatment",
+                    "treatment_ja",
+                    "prevention",
+                    "prevention_ja",
+                    "prognosis",
+                    "prognosis_ja",
+                ]
+                if d.get(f)
+            )
+            for d in phase1_diseases
+        ) / max(len(phase1_diseases), 1)
 
         print(f"  Phase 1 diseases: {len(phase1_diseases)}")
         print(f"  Avg fields populated: {avg_fields:.1f}/10")
@@ -89,7 +119,7 @@ class Phase1Integration:
 
     def save_merged_database(self, original):
         """Save merged database as main database."""
-        with open(self.db_path, 'w', encoding='utf-8') as f:
+        with open(self.db_path, "w", encoding="utf-8") as f:
             json.dump(original, f, ensure_ascii=False, indent=2)
         print(f"✓ Merged database saved: {self.db_path}")
 

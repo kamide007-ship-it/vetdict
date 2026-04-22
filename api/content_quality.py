@@ -2,6 +2,7 @@
 
 Provides deterministic enrichment for disease narrative fields and completeness scoring.
 """
+
 from __future__ import annotations
 
 from typing import Any, Dict, List
@@ -29,10 +30,7 @@ REQUIRED_FIELDS = [
 _SPECIES_NAME_JA_OVERRIDES = {
     "exotic_other": "その他エキゾチック動物",
 }
-SPECIES_NAME_JA = {
-    k: _SPECIES_NAME_JA_OVERRIDES.get(k, v["ja"])
-    for k, v in SPECIES_LABELS.items()
-}
+SPECIES_NAME_JA = {k: _SPECIES_NAME_JA_OVERRIDES.get(k, v["ja"]) for k, v in SPECIES_LABELS.items()}
 
 # EN narrative form: plural ("In dogs, ...") rather than the singular UI label.
 _SPECIES_NAME_EN_PLURAL_OVERRIDES = {
@@ -42,9 +40,9 @@ _SPECIES_NAME_EN_PLURAL_OVERRIDES = {
     "sugar_glider": "sugar gliders",
 }
 SPECIES_NAME_EN = {
-    k: _SPECIES_NAME_EN_PLURAL_OVERRIDES.get(k, v["en"].lower() + "s")
-    for k, v in SPECIES_LABELS.items()
+    k: _SPECIES_NAME_EN_PLURAL_OVERRIDES.get(k, v["en"].lower() + "s") for k, v in SPECIES_LABELS.items()
 }
+
 
 def _text(v: Any) -> str:
     if v is None:
@@ -129,6 +127,7 @@ def _fallback(field: str, name: str, species: str, symptoms: str, lang: str) -> 
             "prognosis": f"Prognosis for {name} varies by severity, comorbidity burden, and time to treatment initiation.",
         }
     return templates[field]
+
 
 def _merge_reference_numbers(out: Dict[str, Any], species: str) -> List[int]:
     raw_numbers = out.get("references") or out.get("reference_numbers") or []

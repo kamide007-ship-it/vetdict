@@ -85,9 +85,7 @@ class TestQuestionFeatures:
 
 class TestCalculateCoverageScore:
     def test_empty_candidates_returns_zero(self):
-        score = QuestionFeatureExtractor.calculate_coverage_score(
-            ["Canine Parvovirus"], []
-        )
+        score = QuestionFeatureExtractor.calculate_coverage_score(["Canine Parvovirus"], [])
         assert score == 0.0
 
     def test_empty_targets_returns_zero(self):
@@ -100,9 +98,7 @@ class TestCalculateCoverageScore:
         assert score == pytest.approx(1.0)
 
     def test_no_overlap(self):
-        score = QuestionFeatureExtractor.calculate_coverage_score(
-            ["NonExistentDisease"], CANDIDATES
-        )
+        score = QuestionFeatureExtractor.calculate_coverage_score(["NonExistentDisease"], CANDIDATES)
         assert score == 0.0
 
     def test_partial_overlap(self):
@@ -112,9 +108,7 @@ class TestCalculateCoverageScore:
 
     def test_candidates_without_name_ignored(self):
         candidates_no_name = [{"match_percent": 50}, make_disease("Canine Parvovirus")]
-        score = QuestionFeatureExtractor.calculate_coverage_score(
-            ["Canine Parvovirus"], candidates_no_name
-        )
+        score = QuestionFeatureExtractor.calculate_coverage_score(["Canine Parvovirus"], candidates_no_name)
         # Only 1 valid candidate; 1 overlaps → 1/1 = 1.0
         assert score == pytest.approx(1.0)
 
@@ -126,15 +120,11 @@ class TestCalculateCoverageScore:
 
 class TestCalculateAnswerSpecificity:
     def test_less_than_two_answers_low_specificity(self):
-        score = QuestionFeatureExtractor.calculate_answer_specificity(
-            ["DiseaseA"], {"yes": ["DiseaseA"]}
-        )
+        score = QuestionFeatureExtractor.calculate_answer_specificity(["DiseaseA"], {"yes": ["DiseaseA"]})
         assert score == pytest.approx(0.1)
 
     def test_empty_answer_types_low_specificity(self):
-        score = QuestionFeatureExtractor.calculate_answer_specificity(
-            ["DiseaseA"], {}
-        )
+        score = QuestionFeatureExtractor.calculate_answer_specificity(["DiseaseA"], {})
         assert score == pytest.approx(0.1)
 
     def test_equal_distribution_high_gini(self):
@@ -182,48 +172,34 @@ class TestCalculateAnswerSpecificity:
 class TestCalculateFatiguePenalty:
     def test_not_asked_only_burden(self):
         # Question never asked → fatigue = 0 + burden * 0.3
-        score = QuestionFeatureExtractor.calculate_fatigue_penalty(
-            "q1", set(), "binary"
-        )
+        score = QuestionFeatureExtractor.calculate_fatigue_penalty("q1", set(), "binary")
         expected_burden = QuestionFeatureExtractor.QUESTION_TYPE_BURDEN["binary"] * 0.3
         assert score == pytest.approx(expected_burden)
 
     def test_asked_no_timestamps(self):
-        score = QuestionFeatureExtractor.calculate_fatigue_penalty(
-            "q1", {"q1"}, "binary"
-        )
+        score = QuestionFeatureExtractor.calculate_fatigue_penalty("q1", {"q1"}, "binary")
         # 0.6 for recently asked + 0.2*0.3 for binary burden
         expected = 0.6 + QuestionFeatureExtractor.QUESTION_TYPE_BURDEN["binary"] * 0.3
         assert score == pytest.approx(min(expected, 1.0))
 
     def test_asked_with_timestamps_recent(self):
         now = time.time()
-        score = QuestionFeatureExtractor.calculate_fatigue_penalty(
-            "q1", {"q1"}, "binary", last_asked_times={"q1": now}
-        )
+        score = QuestionFeatureExtractor.calculate_fatigue_penalty("q1", {"q1"}, "binary", last_asked_times={"q1": now})
         # Very recent → high penalty, capped at 1.0
         assert 0.0 < score <= 1.0
 
     def test_multiselect_higher_burden_than_binary(self):
-        binary_score = QuestionFeatureExtractor.calculate_fatigue_penalty(
-            "q1", set(), "binary"
-        )
-        multi_score = QuestionFeatureExtractor.calculate_fatigue_penalty(
-            "q1", set(), "multiselect"
-        )
+        binary_score = QuestionFeatureExtractor.calculate_fatigue_penalty("q1", set(), "binary")
+        multi_score = QuestionFeatureExtractor.calculate_fatigue_penalty("q1", set(), "multiselect")
         assert multi_score > binary_score
 
     def test_capped_at_one(self):
         # Previously asked with no timestamp → max fatigue scenario
-        score = QuestionFeatureExtractor.calculate_fatigue_penalty(
-            "q1", {"q1"}, "numeric"
-        )
+        score = QuestionFeatureExtractor.calculate_fatigue_penalty("q1", {"q1"}, "numeric")
         assert score <= 1.0
 
     def test_unknown_type_defaults_to_0_5_burden(self):
-        score = QuestionFeatureExtractor.calculate_fatigue_penalty(
-            "q1", set(), "unknown_type"
-        )
+        score = QuestionFeatureExtractor.calculate_fatigue_penalty("q1", set(), "unknown_type")
         expected = 0.5 * 0.3
         assert score == pytest.approx(expected)
 
@@ -241,16 +217,12 @@ class TestCalculateSymptomAlignment:
     }
 
     def test_unknown_question_returns_zero(self):
-        score = QuestionFeatureExtractor.calculate_symptom_alignment(
-            "unknown_q", self.IMPLICATIONS, {"vomiting"}
-        )
+        score = QuestionFeatureExtractor.calculate_symptom_alignment("unknown_q", self.IMPLICATIONS, {"vomiting"})
         assert score == 0.0
 
     def test_empty_related_symptoms_returns_zero(self):
         implications = {"vaccine_status": []}
-        score = QuestionFeatureExtractor.calculate_symptom_alignment(
-            "vaccine_status", implications, {"fever"}
-        )
+        score = QuestionFeatureExtractor.calculate_symptom_alignment("vaccine_status", implications, {"fever"})
         assert score == 0.0
 
     def test_full_overlap_returns_one(self):
@@ -261,15 +233,11 @@ class TestCalculateSymptomAlignment:
 
     def test_partial_overlap(self):
         # fever_present relates to fever and lethargy; only fever detected
-        score = QuestionFeatureExtractor.calculate_symptom_alignment(
-            "fever_present", self.IMPLICATIONS, {"fever"}
-        )
+        score = QuestionFeatureExtractor.calculate_symptom_alignment("fever_present", self.IMPLICATIONS, {"fever"})
         assert score == pytest.approx(0.5)
 
     def test_no_overlap_returns_zero(self):
-        score = QuestionFeatureExtractor.calculate_symptom_alignment(
-            "cough_type", self.IMPLICATIONS, {"vomiting"}
-        )
+        score = QuestionFeatureExtractor.calculate_symptom_alignment("cough_type", self.IMPLICATIONS, {"vomiting"})
         assert score == 0.0
 
     def test_score_range(self):
@@ -286,45 +254,33 @@ class TestCalculateSymptomAlignment:
 
 class TestCalculateCategoryDiversity:
     def test_not_asked_returns_one(self):
-        score = QuestionFeatureExtractor.calculate_category_diversity(
-            "vomiting_frequency", []
-        )
+        score = QuestionFeatureExtractor.calculate_category_diversity("vomiting_frequency", [])
         assert score == pytest.approx(1.0)
 
     def test_different_category_asked_returns_one(self):
         # Asked cough_type (respiratory), asking vomiting_frequency (gastrointestinal)
-        score = QuestionFeatureExtractor.calculate_category_diversity(
-            "vomiting_frequency", ["cough_type"]
-        )
+        score = QuestionFeatureExtractor.calculate_category_diversity("vomiting_frequency", ["cough_type"])
         assert score == pytest.approx(1.0)
 
     def test_same_category_reduces_diversity(self):
         # blood_in_vomit is also gastrointestinal
-        score = QuestionFeatureExtractor.calculate_category_diversity(
-            "vomiting_frequency", ["blood_in_vomit"]
-        )
+        score = QuestionFeatureExtractor.calculate_category_diversity("vomiting_frequency", ["blood_in_vomit"])
         assert score < 1.0
 
     def test_diversity_decreases_with_more_same_category(self):
-        score_one = QuestionFeatureExtractor.calculate_category_diversity(
-            "vomiting_frequency", ["blood_in_vomit"]
-        )
+        score_one = QuestionFeatureExtractor.calculate_category_diversity("vomiting_frequency", ["blood_in_vomit"])
         score_two = QuestionFeatureExtractor.calculate_category_diversity(
             "vomiting_frequency", ["blood_in_vomit", "diarrhea_consistency"]
         )
         assert score_two < score_one
 
     def test_unknown_question_category_other(self):
-        score = QuestionFeatureExtractor.calculate_category_diversity(
-            "unknown_question", []
-        )
+        score = QuestionFeatureExtractor.calculate_category_diversity("unknown_question", [])
         assert score == pytest.approx(1.0)
 
     def test_score_range(self):
         asked = ["blood_in_vomit", "diarrhea_consistency", "vomiting_frequency"]
-        score = QuestionFeatureExtractor.calculate_category_diversity(
-            "vomiting_frequency", asked
-        )
+        score = QuestionFeatureExtractor.calculate_category_diversity("vomiting_frequency", asked)
         assert 0.0 < score <= 1.0
 
 

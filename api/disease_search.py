@@ -12,7 +12,7 @@ from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 
-DB_PATH = str(__import__('pathlib').Path(__file__).resolve().parent.parent / 'diseases.db')
+DB_PATH = str(__import__("pathlib").Path(__file__).resolve().parent.parent / "diseases.db")
 
 
 class DiseaseFullTextSearch:
@@ -45,7 +45,7 @@ class DiseaseFullTextSearch:
                    )
                    ORDER BY d.urgency DESC, d.severity_score DESC
                    LIMIT ?""",
-                (query, limit)
+                (query, limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         except sqlite3.OperationalError as e:
@@ -79,15 +79,13 @@ class DiseaseFullTextSearch:
                    FROM diseases
                    WHERE name_en LIKE ? OR name_ja LIKE ?
                    LIMIT ?""",
-                (f"%{name}%", f"%{name}%", limit)
+                (f"%{name}%", f"%{name}%", limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         finally:
             conn.close()
 
-    def search_symptoms(
-        self, symptom_keywords: List[str], mode: str = "any", limit: int = 20
-    ) -> List[Dict[str, Any]]:
+    def search_symptoms(self, symptom_keywords: List[str], mode: str = "any", limit: int = 20) -> List[Dict[str, Any]]:
         """
         Search for diseases by symptoms
 
@@ -103,9 +101,7 @@ class DiseaseFullTextSearch:
 
         return self.simple_search(fts_query, limit)
 
-    def search_with_species_filter(
-        self, query: str, species: str, limit: int = 20
-    ) -> List[Dict[str, Any]]:
+    def search_with_species_filter(self, query: str, species: str, limit: int = 20) -> List[Dict[str, Any]]:
         """
         Full-text search with species filter
 
@@ -122,7 +118,7 @@ class DiseaseFullTextSearch:
                    )
                    ORDER BY d.urgency DESC
                    LIMIT ?""",
-                (species, query, limit)
+                (species, query, limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         except sqlite3.OperationalError as e:
@@ -143,7 +139,7 @@ class DiseaseFullTextSearch:
             cursor.execute(
                 """SELECT DISTINCT name_en FROM diseases
                    WHERE name_en LIKE ? LIMIT ?""",
-                (f"{partial}%", limit)
+                (f"{partial}%", limit),
             )
             return [row[0] for row in cursor.fetchall()]
         finally:

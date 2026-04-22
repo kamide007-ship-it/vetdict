@@ -9,30 +9,30 @@ import re
 
 def test_api_file_structure():
     """Test that fastapi_app.py has proper structure"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
     required = [
-        'class DiseaseResponse',
-        'class PaginatedResponse',
-        'class SearchResponse',
-        'class HealthResponse',
-        'class StatsResponse',
-        'class ErrorResponse',
-        'class SpeciesResponse',
-        'async def health_check',
-        'async def list_diseases',
-        'async def search_diseases',
-        'async def get_disease',
-        'async def list_species',
-        'async def get_statistics',
-        'def custom_openapi()',
+        "class DiseaseResponse",
+        "class PaginatedResponse",
+        "class SearchResponse",
+        "class HealthResponse",
+        "class StatsResponse",
+        "class ErrorResponse",
+        "class SpeciesResponse",
+        "async def health_check",
+        "async def list_diseases",
+        "async def search_diseases",
+        "async def get_disease",
+        "async def list_species",
+        "async def get_statistics",
+        "def custom_openapi()",
         'tags=["Health"]',
         'tags=["Diseases"]',
         'tags=["Metadata"]',
-        'response_model=',
-        'Field(..., description=',
-        'json_schema_extra'
+        "response_model=",
+        "Field(..., description=",
+        "json_schema_extra",
     ]
 
     for item in required:
@@ -42,11 +42,11 @@ def test_api_file_structure():
 
 def test_models_have_documentation():
     """Test that all models have Field descriptions"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
     # Find all model definitions
-    model_pattern = r'class \w+Response\(BaseModel\):'
+    model_pattern = r"class \w+Response\(BaseModel\):"
     models = re.findall(model_pattern, content)
 
     assert len(models) >= 7, f"Expected at least 7 models, found {len(models)}"
@@ -55,20 +55,20 @@ def test_models_have_documentation():
 
 def test_endpoints_have_summaries():
     """Test that all endpoints have summary fields"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    endpoints = re.findall(r'@app\.get\([^)]+\)', content)
+    endpoints = re.findall(r"@app\.get\([^)]+\)", content)
 
     for endpoint in endpoints:
-        assert 'summary=' in endpoint or 'Summary' in endpoint, f"Missing summary: {endpoint}"
+        assert "summary=" in endpoint or "Summary" in endpoint, f"Missing summary: {endpoint}"
 
     print(f"✓ All {len(endpoints)} endpoints have summaries")
 
 
 def test_endpoints_have_descriptions():
     """Test that all endpoints have docstrings"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
     # Find function definitions with preceding decorators
@@ -81,47 +81,42 @@ def test_endpoints_have_descriptions():
 
 def test_models_have_examples():
     """Test that models have json_schema_extra examples"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    examples = content.count('json_schema_extra')
+    examples = content.count("json_schema_extra")
     assert examples >= 7, f"Expected at least 7 examples, found {examples}"
     print(f"✓ {examples} response models have example schemas")
 
 
 def test_api_responses_documented():
     """Test that endpoints document possible responses"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    response_docs = content.count('responses={')
+    response_docs = content.count("responses={")
     assert response_docs > 0, "Endpoints should document response codes"
     print(f"✓ {response_docs} endpoints document response codes")
 
 
 def test_query_parameters_documented():
     """Test that query parameters have descriptions"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    assert 'Query(...,' in content, "Query parameters not documented"
-    assert 'description=' in content, "Query parameter descriptions missing"
-    assert 'example=' in content, "Query parameter examples missing"
+    assert "Query(...," in content, "Query parameters not documented"
+    assert "description=" in content, "Query parameter descriptions missing"
+    assert "example=" in content, "Query parameter examples missing"
 
     print("✓ Query parameters documented with descriptions and examples")
 
 
 def test_tags_organized():
     """Test that endpoints are organized with tags"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    tags = [
-        'tags=["Health"]',
-        'tags=["Diseases"]',
-        'tags=["Metadata"]',
-        'tags=["Root"]'
-    ]
+    tags = ['tags=["Health"]', 'tags=["Diseases"]', 'tags=["Metadata"]', 'tags=["Root"]']
 
     for tag in tags:
         assert tag in content, f"Missing tag: {tag}"
@@ -130,11 +125,11 @@ def test_tags_organized():
 
 def test_openapi_customization():
     """Test that custom_openapi function exists"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    assert 'def custom_openapi()' in content, "Missing custom_openapi function"
-    assert 'app.openapi = custom_openapi' in content, "OpenAPI not assigned"
+    assert "def custom_openapi()" in content, "Missing custom_openapi function"
+    assert "app.openapi = custom_openapi" in content, "OpenAPI not assigned"
     assert '"servers"' in content, "Server information not documented"
     assert '"tags"' in content, "Tag descriptions not added"
 
@@ -143,28 +138,28 @@ def test_openapi_customization():
 
 def test_cors_configured():
     """Test CORS configuration"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    assert 'CORSMiddleware' in content, "CORS not configured"
-    assert 'allow_origins' in content, "CORS origins not configured"
+    assert "CORSMiddleware" in content, "CORS not configured"
+    assert "allow_origins" in content, "CORS origins not configured"
 
     print("✓ CORS middleware configured")
 
 
 def test_error_handling():
     """Test error handling in endpoints"""
-    with open('fastapi_app.py', 'r') as f:
+    with open("fastapi_app.py", "r") as f:
         content = f.read()
 
-    assert 'HTTPException' in content, "HTTPException not used"
-    assert 'status_code=' in content, "Status codes not specified"
-    assert 'detail=' in content, "Error details not provided"
+    assert "HTTPException" in content, "HTTPException not used"
+    assert "status_code=" in content, "Status codes not specified"
+    assert "detail=" in content, "Error details not provided"
 
     print("✓ Error handling implemented with HTTPException")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("=" * 70)
     print("VetDict API Documentation Tests")
     print("=" * 70)

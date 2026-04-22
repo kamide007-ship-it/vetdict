@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Update horse behavioral diseases: 2 existing + 6 new stereotypic behaviors."""
+
 import json
 
 with open("diseases_all_species.json", "r") as f:

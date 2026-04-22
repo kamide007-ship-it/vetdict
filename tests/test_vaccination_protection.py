@@ -10,6 +10,7 @@ from api.data.vaccination_protection import (
 # VaccineProtection dataclass
 # ===================================================================
 
+
 class TestVaccineProtection:
     def test_to_dict_keys(self):
         vp = VaccineProtection(
@@ -68,6 +69,7 @@ class TestVaccineProtection:
 # VACCINATION_PROTECTION database integrity
 # ===================================================================
 
+
 class TestVaccinationProtectionDatabase:
     def test_database_nonempty(self):
         assert len(VACCINATION_PROTECTION) > 0
@@ -78,9 +80,7 @@ class TestVaccinationProtectionDatabase:
 
     def test_disease_name_matches_key(self):
         for key, vp in VACCINATION_PROTECTION.items():
-            assert vp.disease_name == key, (
-                f"Key '{key}' doesn't match disease_name '{vp.disease_name}'"
-            )
+            assert vp.disease_name == key, f"Key '{key}' doesn't match disease_name '{vp.disease_name}'"
 
     def test_protection_effectiveness_in_range(self):
         for name, vp in VACCINATION_PROTECTION.items():
@@ -118,6 +118,7 @@ class TestVaccinationProtectionDatabase:
 # ===================================================================
 # VaccinationStatusHandler
 # ===================================================================
+
 
 class TestGetVaccinationProtection:
     def test_known_disease_returns_protection(self):
@@ -216,9 +217,7 @@ class TestApplyVaccinationAdjustment:
         assert adjusted == int(100 * 0.05)  # 5% remaining
 
     def test_returns_tuple(self):
-        result = VaccinationStatusHandler.apply_vaccination_adjustment(
-            "Rabies", 50, vaccination_status="current"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_adjustment("Rabies", 50, vaccination_status="current")
         assert isinstance(result, tuple)
         assert len(result) == 2
 
@@ -233,9 +232,7 @@ class TestApplyVaccinationToDiseases:
 
     def test_current_status_adjusts_preventable(self):
         diseases = self._sample_diseases()
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="current"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="current")
         assert len(result) == 3
         parvo = next(d for d in result if d["name"] == "Canine Parvovirus")
         assert parvo["vaccination_adjustment_applied"] is True
@@ -244,42 +241,32 @@ class TestApplyVaccinationToDiseases:
 
     def test_unknown_disease_not_adjusted(self):
         diseases = self._sample_diseases()
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="current"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="current")
         unknown = next(d for d in result if d["name"] == "Unknown Disease")
         assert unknown["vaccination_adjustment_applied"] is False
         assert unknown["match_percent"] == 50
 
     def test_outdated_status_no_adjustment_applied(self):
         diseases = self._sample_diseases()
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="outdated"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="outdated")
         # With outdated status, apply_vaccination_adjustment returns no adjustment
         for d in result:
             assert d["vaccination_adjustment_applied"] is False
 
     def test_none_status_returns_unchanged(self):
         diseases = self._sample_diseases()
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status=None
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status=None)
         # No vaccination_status → returns diseases unchanged
         assert result == diseases
 
     def test_empty_status_returns_unchanged(self):
         diseases = self._sample_diseases()
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status=""
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="")
         assert result == diseases
 
     def test_invalid_status_returns_unchanged(self):
         diseases = self._sample_diseases()
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="unknown_status"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="unknown_status")
         assert result == diseases
 
     def test_none_vaccination_status_default(self):
@@ -289,41 +276,31 @@ class TestApplyVaccinationToDiseases:
 
     def test_original_dicts_not_mutated(self):
         diseases = [{"name": "Canine Parvovirus", "match_percent": 80}]
-        _ = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="current"
-        )
+        _ = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="current")
         # Original dict untouched
         assert diseases[0]["match_percent"] == 80
         assert "vaccination_adjustment_applied" not in diseases[0]
 
     def test_empty_diseases_list(self):
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            [], vaccination_status="current"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases([], vaccination_status="current")
         assert result == []
 
     def test_none_status_applies_no_adjustment_on_outdated(self):
         diseases = [{"name": "Rabies", "match_percent": 90}]
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="none"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="none")
         rabies = result[0]
         # "none" is in the valid set but apply_vaccination_adjustment("none") => no adjustment
         assert rabies["vaccination_adjustment_applied"] is False
 
     def test_returns_copies_not_originals(self):
         diseases = [{"name": "Rabies", "match_percent": 90}]
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="current"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="current")
         # Result items are copies
         assert result[0] is not diseases[0]
 
     def test_distemper_adjustment_correct(self):
         diseases = [{"name": "Canine Distemper", "match_percent": 100}]
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="current"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="current")
         assert result[0]["match_percent"] == int(100 * 0.1)  # confidence_reduction=0.1
 
     def test_feline_diseases_adjusted(self):
@@ -331,8 +308,6 @@ class TestApplyVaccinationToDiseases:
             {"name": "Feline Panleukopenia", "match_percent": 70},
             {"name": "Feline Rabies", "match_percent": 50},
         ]
-        result = VaccinationStatusHandler.apply_vaccination_to_diseases(
-            diseases, vaccination_status="current"
-        )
+        result = VaccinationStatusHandler.apply_vaccination_to_diseases(diseases, vaccination_status="current")
         for d in result:
             assert d["vaccination_adjustment_applied"] is True

@@ -34,7 +34,6 @@ def client(app):
 
 
 class TestGetAccuracyMetrics:
-
     def test_returns_200(self, client):
         resp = client.get("/api/learning/accuracy")
         assert resp.status_code == 200
@@ -45,7 +44,6 @@ class TestGetAccuracyMetrics:
 
 
 class TestGetLearnedPatterns:
-
     def test_returns_200(self, client):
         resp = client.get("/api/learning/patterns")
         assert resp.status_code == 200
@@ -56,7 +54,6 @@ class TestGetLearnedPatterns:
 
 
 class TestGetPersonalizationImpact:
-
     def test_returns_200(self, client):
         resp = client.get("/api/learning/personalization")
         assert resp.status_code == 200
@@ -67,7 +64,6 @@ class TestGetPersonalizationImpact:
 
 
 class TestGetTuningHistory:
-
     def test_returns_200(self, client):
         resp = client.get("/api/learning/tuning-history")
         assert resp.status_code == 200
@@ -78,7 +74,6 @@ class TestGetTuningHistory:
 
 
 class TestGetFeedbackQuality:
-
     def test_returns_200(self, client):
         resp = client.get("/api/learning/feedback-quality")
         assert resp.status_code == 200
@@ -90,7 +85,6 @@ class TestGetFeedbackQuality:
 
 
 class TestGetCombinedInsights:
-
     def test_returns_200(self, client):
         resp = client.get("/api/learning/insights")
         assert resp.status_code == 200
@@ -102,24 +96,29 @@ class TestGetCombinedInsights:
 
 
 class TestRecordFeedback:
-
     def test_record_good_feedback(self, client):
-        resp = client.post("/api/learning/feedback", json={
-            "session_id": "test-123",
-            "feedback": "good",
-            "domain": "orthopedics",
-        })
+        resp = client.post(
+            "/api/learning/feedback",
+            json={
+                "session_id": "test-123",
+                "feedback": "good",
+                "domain": "orthopedics",
+            },
+        )
         assert resp.status_code == 201
         data = resp.get_json()
         assert data["status"] == "recorded"
 
     def test_record_with_ai_result(self, client):
-        resp = client.post("/api/learning/feedback", json={
-            "session_id": "test-789",
-            "feedback": "good",
-            "ai_result": {"symptoms": ["vomiting"], "confidence": 0.8},
-            "correct_symptoms": ["vomiting"],
-        })
+        resp = client.post(
+            "/api/learning/feedback",
+            json={
+                "session_id": "test-789",
+                "feedback": "good",
+                "ai_result": {"symptoms": ["vomiting"], "confidence": 0.8},
+                "correct_symptoms": ["vomiting"],
+            },
+        )
         assert resp.status_code == 201
         data = resp.get_json()
         assert "ai_feedback" in data
@@ -130,7 +129,6 @@ class TestRecordFeedback:
 
 
 class TestGenerateFeedbackRecommendations:
-
     def test_low_rate(self):
         recs = _generate_feedback_recommendations(0.1, 30)
         assert any("Increase" in r for r in recs)
@@ -145,21 +143,24 @@ class TestGenerateFeedbackRecommendations:
 
 
 class TestGenerateAccuracyInsights:
-
     def test_correct_extraction(self):
         insights = _generate_accuracy_insights({"is_correct": True})
         assert any("accurate" in i for i in insights)
 
     def test_false_positives(self):
-        insights = _generate_accuracy_insights({
-            "false_positives": ["a", "b"],
-        })
+        insights = _generate_accuracy_insights(
+            {
+                "false_positives": ["a", "b"],
+            }
+        )
         assert any("2 symptoms" in i for i in insights)
 
     def test_false_negatives(self):
-        insights = _generate_accuracy_insights({
-            "false_negatives": ["c"],
-        })
+        insights = _generate_accuracy_insights(
+            {
+                "false_negatives": ["c"],
+            }
+        )
         assert any("Missed 1" in i for i in insights)
 
     def test_empty_evaluation(self):

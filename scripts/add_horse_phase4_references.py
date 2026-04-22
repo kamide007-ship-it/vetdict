@@ -27,7 +27,7 @@ EQUINE_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2020,
                 "doi": "10.1016/B978-0-323-55447-9.00001-X",
-                "evidence_level": "III"
+                "evidence_level": "III",
             },
             {
                 "pmid": "25735133",
@@ -36,8 +36,8 @@ EQUINE_REFERENCES = {
                 "journal": "Equine Veterinary Education",
                 "year": 2022,
                 "doi": "10.1111/eve.13711",
-                "evidence_level": "III"
-            }
+                "evidence_level": "III",
+            },
         ]
     },
     "orthopedic": {
@@ -49,7 +49,7 @@ EQUINE_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2019,
                 "doi": "10.1016/B978-0-323-55447-9.00050-1",
-                "evidence_level": "III"
+                "evidence_level": "III",
             },
             {
                 "pmid": "28821200",
@@ -58,8 +58,8 @@ EQUINE_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2018,
                 "doi": "10.1016/B978-0-323-55447-9.00014-8",
-                "evidence_level": "III"
-            }
+                "evidence_level": "III",
+            },
         ]
     },
     "respiratory": {
@@ -71,7 +71,7 @@ EQUINE_REFERENCES = {
                 "journal": "Equine Veterinary Journal",
                 "year": 2020,
                 "doi": "10.1111/evj.13188",
-                "evidence_level": "III"
+                "evidence_level": "III",
             },
             {
                 "pmid": "30462516",
@@ -80,8 +80,8 @@ EQUINE_REFERENCES = {
                 "journal": "Veterinary Clinics of North America: Equine Practice",
                 "year": 2019,
                 "doi": "10.1016/j.cveq.2019.08.001",
-                "evidence_level": "III"
-            }
+                "evidence_level": "III",
+            },
         ]
     },
     "dermatology": {
@@ -93,7 +93,7 @@ EQUINE_REFERENCES = {
                 "journal": "The Veterinary Clinics of North America. Equine Practice",
                 "year": 2020,
                 "doi": "10.1016/j.cveq.2020.06.005",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -106,7 +106,7 @@ EQUINE_REFERENCES = {
                 "journal": "Veterinary Clinics of North America: Equine Practice",
                 "year": 2020,
                 "doi": "10.1016/j.cveq.2020.04.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -119,7 +119,7 @@ EQUINE_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2018,
                 "doi": "10.1016/B978-0-323-55447-9.00042-2",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -132,7 +132,7 @@ EQUINE_REFERENCES = {
                 "journal": "Equine Veterinary Journal",
                 "year": 2020,
                 "doi": "10.1111/evj.13266",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -145,81 +145,148 @@ EQUINE_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2018,
                 "doi": "10.1016/B978-0-323-55447-9.00025-2",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
-    }
+    },
 }
+
 
 def load_diseases_json(filepath):
     """Load diseases database"""
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_diseases_json(filepath, diseases):
     """Save diseases database"""
-    with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         json.dump(diseases, f, ensure_ascii=False, indent=2)
+
 
 def categorize_disease(disease_name):
     """Categorize horse disease based on name keywords"""
-    name = (disease_name or '').lower()
+    name = (disease_name or "").lower()
 
     keywords = {
-        'orthopedic': ['lameness', 'laminitis', 'navicular', 'fracture', 'arthritis', 'tendon',
-                      'ligament', 'hoof', 'sole', 'frog', 'coffin', 'fetlock', 'stifle', 'hip',
-                      'shoulder', 'elbow', 'carpus', 'tarsus', 'splint', 'spavin', 'osselets'],
-        'respiratory': ['respiratory', 'pneumonia', 'influenza', 'rhinitis', 'sinusitis',
-                       'laryngeal', 'heaves', 'lung', 'airway', 'cough', 'strangles'],
-        'dermatology': ['dermat', 'skin', 'mane', 'tail', 'coat', 'rain scald', 'sweet itch',
-                       'mud fever', 'thrush', 'rainrot'],
-        'reproduction': ['reproductive', 'breeding', 'foal', 'mare', 'stallion', 'pregnancy',
-                        'lactation', 'uterine', 'ovarian', 'dystocia'],
-        'ophthalmology': ['eye', 'ocular', 'ophthal', 'cornea', 'cataract', 'uvea', 'retina'],
-        'neurology': ['neurologic', 'neuro', 'ataxia', 'wobbler', 'seizure', 'brain', 'spinal',
-                     'protozoal', 'epm'],
-        'internal_medicine': ['colic', 'gastric', 'duodenal', 'jejunal', 'colonic', 'cecal',
-                            'liver', 'kidney', 'urinary', 'diabetes', 'cushings', 'thyroid'],
+        "orthopedic": [
+            "lameness",
+            "laminitis",
+            "navicular",
+            "fracture",
+            "arthritis",
+            "tendon",
+            "ligament",
+            "hoof",
+            "sole",
+            "frog",
+            "coffin",
+            "fetlock",
+            "stifle",
+            "hip",
+            "shoulder",
+            "elbow",
+            "carpus",
+            "tarsus",
+            "splint",
+            "spavin",
+            "osselets",
+        ],
+        "respiratory": [
+            "respiratory",
+            "pneumonia",
+            "influenza",
+            "rhinitis",
+            "sinusitis",
+            "laryngeal",
+            "heaves",
+            "lung",
+            "airway",
+            "cough",
+            "strangles",
+        ],
+        "dermatology": [
+            "dermat",
+            "skin",
+            "mane",
+            "tail",
+            "coat",
+            "rain scald",
+            "sweet itch",
+            "mud fever",
+            "thrush",
+            "rainrot",
+        ],
+        "reproduction": [
+            "reproductive",
+            "breeding",
+            "foal",
+            "mare",
+            "stallion",
+            "pregnancy",
+            "lactation",
+            "uterine",
+            "ovarian",
+            "dystocia",
+        ],
+        "ophthalmology": ["eye", "ocular", "ophthal", "cornea", "cataract", "uvea", "retina"],
+        "neurology": ["neurologic", "neuro", "ataxia", "wobbler", "seizure", "brain", "spinal", "protozoal", "epm"],
+        "internal_medicine": [
+            "colic",
+            "gastric",
+            "duodenal",
+            "jejunal",
+            "colonic",
+            "cecal",
+            "liver",
+            "kidney",
+            "urinary",
+            "diabetes",
+            "cushings",
+            "thyroid",
+        ],
     }
 
     for category, kw_list in keywords.items():
         if any(kw in name for kw in kw_list):
             return category
 
-    return 'general'
+    return "general"
+
 
 def add_references_to_horse_disease(disease):
     """Add references to a horse disease"""
-    if disease.get('species') != 'Horse':
+    if disease.get("species") != "Horse":
         return False
 
-    category = categorize_disease(disease.get('name'))
-    refs = EQUINE_REFERENCES.get(category, EQUINE_REFERENCES['general'])
+    category = categorize_disease(disease.get("name"))
+    refs = EQUINE_REFERENCES.get(category, EQUINE_REFERENCES["general"])
 
     # Initialize reference fields if missing
-    for ref_type in ['prognosis_references', 'rehabilitation_references', 'nutrition_references']:
+    for ref_type in ["prognosis_references", "rehabilitation_references", "nutrition_references"]:
         if ref_type not in disease:
-            disease[ref_type] = {'references': []}
-        if not disease[ref_type].get('references'):
-            disease[ref_type]['references'] = []
+            disease[ref_type] = {"references": []}
+        if not disease[ref_type].get("references"):
+            disease[ref_type]["references"] = []
 
     # Add references strategically
     # Prognosis: always add general references
-    if not disease['prognosis_references']['references']:
-        disease['prognosis_references']['references'] = refs['references'].copy()
+    if not disease["prognosis_references"]["references"]:
+        disease["prognosis_references"]["references"] = refs["references"].copy()
 
     # Rehabilitation & Nutrition: add for specific categories
-    if category in ['orthopedic', 'respiratory', 'reproduction']:
-        if not disease['rehabilitation_references']['references']:
-            disease['rehabilitation_references']['references'] = refs['references'][:1]
-        if not disease['nutrition_references']['references']:
-            disease['nutrition_references']['references'] = refs['references'][:1]
+    if category in ["orthopedic", "respiratory", "reproduction"]:
+        if not disease["rehabilitation_references"]["references"]:
+            disease["rehabilitation_references"]["references"] = refs["references"][:1]
+        if not disease["nutrition_references"]["references"]:
+            disease["nutrition_references"]["references"] = refs["references"][:1]
 
     return True
 
+
 def main():
     # File paths
-    db_path = os.path.join(os.path.dirname(__file__), '..', 'diseases_all_species.json')
+    db_path = os.path.join(os.path.dirname(__file__), "..", "diseases_all_species.json")
 
     print("=" * 80)
     print("Phase 4A: Horse Diseases - Reference Integration")
@@ -229,7 +296,7 @@ def main():
     diseases = load_diseases_json(db_path)
 
     # Filter Horse diseases
-    horse_diseases = [d for d in diseases if d.get('species') == 'Horse']
+    horse_diseases = [d for d in diseases if d.get("species") == "Horse"]
     print(f"\nTotal Horse diseases: {len(horse_diseases)}")
 
     # Add references
@@ -251,11 +318,12 @@ def main():
 
     category_counts = {}
     for disease in horse_diseases:
-        cat = categorize_disease(disease.get('name'))
+        cat = categorize_disease(disease.get("name"))
         category_counts[cat] = category_counts.get(cat, 0) + 1
 
     for cat, count in sorted(category_counts.items(), key=lambda x: -x[1]):
         print(f"  {cat}: {count} 疾患")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

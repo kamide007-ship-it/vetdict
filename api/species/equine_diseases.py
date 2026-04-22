@@ -76,7 +76,11 @@ class Disease:
             # HorseDVM: /disease/[slug] — 写真・イラスト付き疾患ページ
             slug = _re.sub(r"[^a-z0-9]+", "-", self.name_en.lower()).strip("-")
             links.append(
-                {"label": "HorseDVM", "url": f"https://horsedvm.com/disease/{slug}", "desc": "症例写真・イラスト付き解説"}
+                {
+                    "label": "HorseDVM",
+                    "url": f"https://horsedvm.com/disease/{slug}",
+                    "desc": "症例写真・イラスト付き解説",
+                }
             )
             # EquiMed: /diseases-and-conditions/reference/[slug]
             links.append(
@@ -604,7 +608,14 @@ DISEASE_DATABASE: list[Disease] = [
         "hoof",
         "moderate",
         "蹄内の細菌感染による膿瘍形成。急性跛行を呈する。",
-        ["hoof_abscess", "hoof_heat", "limb_digital_pulse", "limb_lameness_fore", "limb_lameness_hind", "hoof_discharge"],
+        [
+            "hoof_abscess",
+            "hoof_heat",
+            "limb_digital_pulse",
+            "limb_lameness_fore",
+            "limb_lameness_hind",
+            "hoof_discharge",
+        ],
         urgency="urgent",
         recommended_exams=[
             (1, "蹄圧テスト", "Hoof Tester Examination"),
@@ -674,7 +685,13 @@ DISEASE_DATABASE: list[Disease] = [
         "hoof",
         "severe",
         "蹄舟骨とその周囲構造の慢性変性疾患。前肢に多い。",
-        ["hoof_navicular", "limb_lameness_fore", "limb_digital_pulse", "limb_flexion_positive", "repo_navicular_change"],
+        [
+            "hoof_navicular",
+            "limb_lameness_fore",
+            "limb_digital_pulse",
+            "limb_flexion_positive",
+            "repo_navicular_change",
+        ],
         urgency="routine",
         recommended_exams=[
             (1, "X線検査(蹄骨・舟状骨)", "Radiography (Navicular)"),
@@ -847,7 +864,7 @@ DISEASE_DATABASE: list[Disease] = [
         ],
         merck_url=_MERCK + "laryngeal+hemiplegia+horses",
         treatment_protocol="外科的：喉頭形成術(tie-back：左披裂軟骨固定)+喉室切除(ventriculectomy)。保存的(軽症)：経過観察。喉室切除単独(Grade II-III)。レーザー(喉室粘膜蒸散)。レースパフォーマンス評価(動的内視鏡)。術後合併症：誤嚥性肺炎(5-10%)。術後復帰率70%。左反回神経麻痺。",
-        clinical_signs_detail="運動時の吸気性喘鳴(\"roaring\")、運動不耐性(特にスピード/distance work)、軽度〜中等度の運動後咳嗽、安静時症状なし。馬主が騎乗時の異常呼吸音に気付くことが多い。重症(Grade IV)では完全麻痺で吸気性高音性ストリドール、激運動後の虚脱・チアノーゼ。聴診的には頸部喉頭部直上で喘鳴最大",
+        clinical_signs_detail='運動時の吸気性喘鳴("roaring")、運動不耐性(特にスピード/distance work)、軽度〜中等度の運動後咳嗽、安静時症状なし。馬主が騎乗時の異常呼吸音に気付くことが多い。重症(Grade IV)では完全麻痺で吸気性高音性ストリドール、激運動後の虚脱・チアノーゼ。聴診的には頸部喉頭部直上で喘鳴最大',
         risk_factors="大型品種(Thoroughbred、Standardbred、Warmblood、Draft)、体高>16ハンド、雄馬>雌馬、3-7歳発症好発、ハイパフォーマンス競技(レース・障害飛越)、左反回神経走行が長い解剖学的素因、過去の頸部外傷・喉嚢感染合併例、家族性集積示唆(遺伝子検査研究中、Boyko et al. 2014)",
     ),
     Disease(
@@ -2238,7 +2255,13 @@ DISEASE_DATABASE: list[Disease] = [
         "neurological",
         "severe",
         "頸椎の狭窄・不安定性による脊髄圧迫。若齢の急成長馬に多い。後肢優位の運動失調。",
-        ["neuro_ataxia", "neuro_proprioceptive_deficit", "limb_lameness_hind", "body_muscle_atrophy", "neuro_hyperesthesia"],
+        [
+            "neuro_ataxia",
+            "neuro_proprioceptive_deficit",
+            "limb_lameness_hind",
+            "body_muscle_atrophy",
+            "neuro_hyperesthesia",
+        ],
         age_predisposition="young",
         urgency="urgent",
         recommended_exams=[
@@ -2284,7 +2307,13 @@ DISEASE_DATABASE: list[Disease] = [
         "neurological",
         "moderate",
         "三叉神経痛に起因する不随意の頭部振り。光感受性型が多い。",
-        ["neuro_behavior_change", "neuro_hyperesthesia", "neuro_photophobia", "dental_bit_resistance", "resp_nostril_flare"],
+        [
+            "neuro_behavior_change",
+            "neuro_hyperesthesia",
+            "neuro_photophobia",
+            "dental_bit_resistance",
+            "resp_nostril_flare",
+        ],
         urgency="routine",
         recommended_exams=[
             (1, "神経学的検査", "Neurological Examination"),
@@ -2625,7 +2654,14 @@ DISEASE_DATABASE: list[Disease] = [
         "toxic",
         "critical",
         "リシン含有のヒマの種子。重度の消化器症状・臓器障害。",
-        ["tox_plant_ingestion", "tox_gi_signs", "dig_bloody_stool", "dig_diarrhea", "gen_dehydration", "gen_tachycardia"],
+        [
+            "tox_plant_ingestion",
+            "tox_gi_signs",
+            "dig_bloody_stool",
+            "dig_diarrhea",
+            "gen_dehydration",
+            "gen_tachycardia",
+        ],
         urgency="emergency",
         recommended_exams=[(1, "血液検査", "Blood Work"), (2, "腹部超音波", "Abdominal Ultrasound")],
         merck_url=_MERCK + "castor+bean+toxicity",
@@ -2640,7 +2676,13 @@ DISEASE_DATABASE: list[Disease] = [
         "toxic",
         "moderate",
         "アルサイククローバーによる光線過敏症・肝障害。レッドクローバーによる流涎症。",
-        ["tox_plant_ingestion", "tox_photosensitization", "tox_hepatic_signs", "dig_salivation", "skin_photosensitivity"],
+        [
+            "tox_plant_ingestion",
+            "tox_photosensitization",
+            "tox_hepatic_signs",
+            "dig_salivation",
+            "skin_photosensitivity",
+        ],
         urgency="routine",
         recommended_exams=[(1, "肝酵素検査", "Liver Enzymes"), (2, "牧草地調査", "Pasture Survey")],
         merck_url=_MERCK + "clover+toxicity+horses",
@@ -2798,7 +2840,11 @@ DISEASE_DATABASE: list[Disease] = [
             "tox_abdominal_pain",
         ],
         urgency="emergency",
-        recommended_exams=[(1, "心電図", "ECG"), (2, "心筋トロポニン", "Cardiac Troponin"), (3, "飼料分析", "Feed Analysis")],
+        recommended_exams=[
+            (1, "心電図", "ECG"),
+            (2, "心筋トロポニン", "Cardiac Troponin"),
+            (3, "飼料分析", "Feed Analysis"),
+        ],
         merck_url=_MERCK + "monensin+toxicity+horses",
         treatment_protocol="特異的解毒剤なし。即時摂取中止。活性炭。ビタミンE(10,000IU/日)+セレン(筋注：心筋保護)。輸液療法。心電図モニタリング(不整脈)。心筋壊死は不可逆(予後不良)。LD50：2-3mg/kg(馬は最も感受性の高い動物種)。飼料の厳格な品質管理。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -2828,7 +2874,10 @@ DISEASE_DATABASE: list[Disease] = [
         "硝酸塩過剰の飼料・水による。メトヘモグロビン血症。チアノーゼ。",
         ["tox_known_exposure", "gen_pale_mucosa", "tox_respiratory_distress", "gen_tachycardia", "tox_sudden_onset"],
         urgency="emergency",
-        recommended_exams=[(1, "メトヘモグロビン", "Methemoglobin Level"), (2, "飼料・水質分析", "Feed/Water Analysis")],
+        recommended_exams=[
+            (1, "メトヘモグロビン", "Methemoglobin Level"),
+            (2, "飼料・水質分析", "Feed/Water Analysis"),
+        ],
         merck_url=_MERCK + "nitrate+toxicity+horses",
         treatment_protocol="メチレンブルー4-15mg/kg IV(1%溶液)でメトヘモグロビンを還元ヘモグロビンに変換。酸素吸入。輸液。活性炭(未吸収分)。硝酸塩飼料の除去。亜硝酸塩(NO2)がHbのFe2+→Fe3+に酸化。チョコレート色の血液が特徴的。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -2841,7 +2890,14 @@ DISEASE_DATABASE: list[Disease] = [
         "toxic",
         "severe",
         "フェニルブタゾン・フルニキシン等の過量投与。胃潰瘍・腎障害・右背側大腸潰瘍。",
-        ["tox_known_exposure", "tox_gi_signs", "tox_renal_signs", "dig_colic_signs", "dig_bloody_stool", "gen_poor_appetite"],
+        [
+            "tox_known_exposure",
+            "tox_gi_signs",
+            "tox_renal_signs",
+            "dig_colic_signs",
+            "dig_bloody_stool",
+            "gen_poor_appetite",
+        ],
         urgency="urgent",
         recommended_exams=[(1, "血液検査(BUN/Cr/蛋白)", "Blood (BUN/Cr/Protein)"), (2, "胃内視鏡", "Gastroscopy")],
         merck_url=_MERCK + "nsaid+toxicity+horses",
@@ -2953,7 +3009,14 @@ DISEASE_DATABASE: list[Disease] = [
         "toxic",
         "critical",
         "枯葉の摂取による酸化的溶血。メトヘモグロビン血症・ハインツ小体性貧血。",
-        ["tox_plant_ingestion", "tox_hemolysis", "body_dark_urine", "gen_pale_mucosa", "gen_tachycardia", "gen_icterus"],
+        [
+            "tox_plant_ingestion",
+            "tox_hemolysis",
+            "body_dark_urine",
+            "gen_pale_mucosa",
+            "gen_tachycardia",
+            "gen_icterus",
+        ],
         urgency="emergency",
         recommended_exams=[(1, "CBC(ハインツ小体)", "CBC (Heinz Bodies)"), (2, "PCV/TP", "PCV/Total Protein")],
         merck_url=_MERCK + "red+maple+toxicity+horses",
@@ -3083,7 +3146,14 @@ DISEASE_DATABASE: list[Disease] = [
         "infectious",
         "critical",
         "Clostridium botulinum毒素。弛緩性麻痺。嚥下困難・舌麻痺が特徴。",
-        ["gen_recumbent", "neuro_cranial_nerve", "dig_salivation", "neuro_tremor", "gen_lethargy", "body_muscle_atrophy"],
+        [
+            "gen_recumbent",
+            "neuro_cranial_nerve",
+            "dig_salivation",
+            "neuro_tremor",
+            "gen_lethargy",
+            "body_muscle_atrophy",
+        ],
         urgency="emergency",
         recommended_exams=[(1, "毒素検出", "Toxin Detection"), (2, "筋電図", "Electromyography")],
         merck_url=_MERCK + "botulism+horses",
@@ -3304,7 +3374,14 @@ DISEASE_DATABASE: list[Disease] = [
         "infectious",
         "moderate",
         "Corynebacterium pseudotuberculosis。胸部・腹部の膿瘍。",
-        ["body_swelling", "gen_fever", "gen_lethargy", "gen_poor_appetite", "repo_leukocytosis", "repo_hyperfibrinogenemia"],
+        [
+            "body_swelling",
+            "gen_fever",
+            "gen_lethargy",
+            "gen_poor_appetite",
+            "repo_leukocytosis",
+            "repo_hyperfibrinogenemia",
+        ],
         urgency="urgent",
         recommended_exams=[(1, "膿瘍穿刺・培養", "Abscess Aspiration / Culture"), (2, "血清学検査", "Serology")],
         merck_url=_MERCK + "pigeon+fever+horses",
@@ -3397,7 +3474,10 @@ DISEASE_DATABASE: list[Disease] = [
         "コウモリ由来リッサウイルス。狂犬病類似の神経症状。豪州。",
         ["neuro_behavior_change", "neuro_aggression", "neuro_ataxia", "gen_fever", "dig_salivation"],
         urgency="emergency",
-        recommended_exams=[(1, "直接蛍光抗体法", "Direct Fluorescent Antibody"), (2, "脳組織検査", "Brain Tissue Exam")],
+        recommended_exams=[
+            (1, "直接蛍光抗体法", "Direct Fluorescent Antibody"),
+            (2, "脳組織検査", "Brain Tissue Exam"),
+        ],
         merck_url=_MERCK + "australian+bat+lyssavirus",
         treatment_protocol="治療法なし(致死的リッサウイルス)。安楽死。狂犬病類縁ウイルス。暴露疑い動物の検疫(6ヶ月)。人への暴露：狂犬病PEP(暴露後予防)適応。オーストラリア限定。コウモリ接触歴の確認。",
         clinical_signs_detail="狂犬病と同様の臨床経過: 潜伏期数週間-数ヶ月(咬傷部位から中枢神経系への軸索輸送)。前駆期: 発熱・行動変化・不安・感覚過敏。興奮期: 攻撃性・水恐怖・光恐怖・流涎・発作。麻痺期: 弛緩性麻痺・嚥下困難→昏睡→死亡。豪州以外では発生しない疾患",
@@ -3709,7 +3789,13 @@ DISEASE_DATABASE: list[Disease] = [
         "musculoskeletal",
         "moderate",
         "繋靭帯脚部の損傷。球節部の腫脹・跛行。",
-        ["limb_tendon_swelling", "limb_effusion_fetlock", "limb_lameness_fore", "limb_lameness_hind", "limb_flexion_positive"],
+        [
+            "limb_tendon_swelling",
+            "limb_effusion_fetlock",
+            "limb_lameness_fore",
+            "limb_lameness_hind",
+            "limb_flexion_positive",
+        ],
         urgency="urgent",
         recommended_exams=[(1, "超音波検査", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "suspensory+branch+desmitis",
@@ -3839,7 +3925,14 @@ DISEASE_DATABASE: list[Disease] = [
         "digestive",
         "critical",
         "自律神経系の変性疾患。消化管麻痺。英国・北欧に多い。致死率高い。",
-        ["dig_reduced_gut", "dig_colic_signs", "dig_gastric_reflux", "gen_sweating", "gen_tachycardia", "gen_poor_appetite"],
+        [
+            "dig_reduced_gut",
+            "dig_colic_signs",
+            "dig_gastric_reflux",
+            "gen_sweating",
+            "gen_tachycardia",
+            "gen_poor_appetite",
+        ],
         urgency="emergency",
         recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasound"), (2, "回腸生検", "Ileal Biopsy")],
         merck_url=_MERCK + "equine+grass+sickness",
@@ -3963,9 +4056,18 @@ DISEASE_DATABASE: list[Disease] = [
         "respiratory",
         "severe",
         "EHV-5関連の進行性肺線維症。運動不耐性・体重減少。",
-        ["resp_labored_breathing", "gen_weight_loss", "resp_exercise_intolerance", "gen_fever", "resp_abnormal_lung_sounds"],
+        [
+            "resp_labored_breathing",
+            "gen_weight_loss",
+            "resp_exercise_intolerance",
+            "gen_fever",
+            "resp_abnormal_lung_sounds",
+        ],
         urgency="urgent",
-        recommended_exams=[(1, "胸部X線", "Thoracic Radiographs"), (2, "BAL(気管支肺胞洗浄)", "Bronchoalveolar Lavage")],
+        recommended_exams=[
+            (1, "胸部X線", "Thoracic Radiographs"),
+            (2, "BAL(気管支肺胞洗浄)", "Bronchoalveolar Lavage"),
+        ],
         merck_url=_MERCK + "equine+multinodular+pulmonary+fibrosis",
         treatment_protocol="バレシクロビル30mg/kg PO q8h(EHV-5関連)。コルチコステロイド(デキサメタゾン0.04-0.1mg/kg IV→プレドニゾロンPO漸減)。気管支拡張薬(クレンブテロール)。酸素療法(重症)。予後不良(進行性肺線維化)。BAL/肺生検で確定。",
         clinical_signs_detail="数週〜数ヶ月の進行性体重減少、運動不耐性、間欠的発熱(38.5-40°C)、慢性咳嗽(湿性〜乾性)、頻呼吸(>20/分)、安静時呼吸困難、聴診で両側性crackle・呼気時wheeze、二次感染による粘液膿性鼻汁、嗜眠・食欲低下、後期はチアノーゼ・低酸素症。胸部X線で多発結節影 + びまん性間質性パターンが診断的特徴",
@@ -3984,7 +4086,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "nasopharyngeal+cicatrix+syndrome",
         treatment_protocol="外科的切除(内視鏡的レーザー or CO2レーザー)。瘢痕組織のステント(拡張維持)。コルチコステロイド局所注射(再瘢痕予防)。バルーン拡張(再狭窄)。予後はguarded(再発率高い)。乾燥地域(米国南西部)に好発。",
         clinical_signs_detail="数ヶ月〜年単位の緩徐進行性運動不耐性、運動時stridor(吸気・呼気両方)、特徴的「snoring」音、慢性鼻汁(粘液膿性、両側性)、咳嗽、嚥下違和感。重症Grade III-IV:安静時呼吸困難、運動時collapse、激運動時チアノーゼ。地理的endemic地域(米国南西部・メキシコ・南アフリカ)居住歴。内視鏡で咽頭瘢痕帯・狭窄、軟口蓋・arch瘢痕。発熱なし(感染合併時のみ)",
-    risk_factors="米国南西部・メキシコ・南アフリカ等の特定endemic地域居住(Texas・Oklahoma・New Mexico高頻度)、暑く乾燥気候、特定アレルゲン暴露(crested wheat grass・russian thistle等)、粉塵・カビ慢性吸入、年齢中年〜高齢発症好発、品種偏り報告なし、雄≧雌、同地域複数馬での集積示唆(環境要因 > 遺伝)、長期厩舎飼養、過去の上気道炎症慢性化",
+        risk_factors="米国南西部・メキシコ・南アフリカ等の特定endemic地域居住(Texas・Oklahoma・New Mexico高頻度)、暑く乾燥気候、特定アレルゲン暴露(crested wheat grass・russian thistle等)、粉塵・カビ慢性吸入、年齢中年〜高齢発症好発、品種偏り報告なし、雄≧雌、同地域複数馬での集積示唆(環境要因 > 遺伝)、長期厩舎飼養、過去の上気道炎症慢性化",
     ),
     Disease(
         "rp_nasal_polyp",
@@ -4008,7 +4110,13 @@ DISEASE_DATABASE: list[Disease] = [
         "respiratory",
         "critical",
         "重度の肺障害。敗血症・吸引・中毒に続発。予後不良。",
-        ["resp_labored_breathing", "resp_abnormal_lung_sounds", "gen_tachycardia", "gen_tachypnea", "resp_nostril_flare"],
+        [
+            "resp_labored_breathing",
+            "resp_abnormal_lung_sounds",
+            "gen_tachycardia",
+            "gen_tachypnea",
+            "resp_nostril_flare",
+        ],
         urgency="emergency",
         recommended_exams=[(1, "血液ガス分析", "Blood Gas Analysis"), (2, "胸部超音波", "Thoracic Ultrasound")],
         merck_url=_MERCK + "acute+respiratory+distress+syndrome+horses",
@@ -4028,7 +4136,10 @@ DISEASE_DATABASE: list[Disease] = [
         "環境アレルゲンへの過敏反応。慢性搔痒・蕁麻疹。",
         ["skin_itching", "skin_hives", "skin_lesions", "skin_hair_loss"],
         urgency="routine",
-        recommended_exams=[(1, "皮内テスト", "Intradermal Skin Test"), (2, "アレルゲン特異的IgE", "Allergen-Specific IgE")],
+        recommended_exams=[
+            (1, "皮内テスト", "Intradermal Skin Test"),
+            (2, "アレルゲン特異的IgE", "Allergen-Specific IgE"),
+        ],
         merck_url=_MERCK + "atopic+dermatitis+horses",
         treatment_protocol="環境管理(アレルゲン回避)。抗ヒスタミン(セチリジン0.2-0.4mg/kg PO BID)。デキサメタゾン(急性増悪)。吸入コルチコステロイド(皮膚型には限定的)。減感作療法(アレルギー検査後：IDAT/血清学)。必須脂肪酸(オメガ3/6)。シクロスポリン(重症：コスト高)。",
         clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒(擦り付け)、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全(過剰肉芽・proud flesh)、光過敏症",
@@ -4296,7 +4407,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "cataracts+horses",
         treatment_protocol="水晶体摘出術(phacoemulsification：超音波乳化吸引)。全身麻酔下。術後：アトロピン+抗菌+抗炎症点眼。術前評価(ERG：網膜機能+超音波：硝子体)。術後ぶどう膜炎管理(NSAIDs全身+点眼)。予後良好(視力回復70-80%：ERU合併なし)。先天性/外傷性/ERU続発性。",
         clinical_signs_detail="白色～灰色の水晶体混濁(部分的または完全)、瞳孔からのtapetal reflex低下・消失、視覚障害(障害物回避困難、特に暗所・新環境)、menace reflex陰性(成熟白内障)、前方障害物への衝突、転倒、ハンドラーへの接近困難、子馬では屈折異常による発育遅延・授乳困難、ERU続発例では後癒着・光彩変色合併、両眼性または片眼性、成熟度により急性～慢性進行、疼痛・充血は通常なし(ERU合併除く)、老齢馬で両眼性進行多い",
-    risk_factors="先天性(特にSaddlebred・Thoroughbred・Belgian・Morgan・子馬に多い、常染色体優性/劣性遺伝)、ERU続発(最大後天性原因、慢性炎症による水晶体代謝障害)、外傷性(穿通傷・鈍的外傷)、UV曝露(老齢馬)、糖尿病(稀)、中毒(キサントフィル・特定飼料)、老齢性(>15歳、加齢変性)、放射線治療後、長期ステロイド局所使用、代謝性(電解質異常)",
+        risk_factors="先天性(特にSaddlebred・Thoroughbred・Belgian・Morgan・子馬に多い、常染色体優性/劣性遺伝)、ERU続発(最大後天性原因、慢性炎症による水晶体代謝障害)、外傷性(穿通傷・鈍的外傷)、UV曝露(老齢馬)、糖尿病(稀)、中毒(キサントフィル・特定飼料)、老齢性(>15歳、加齢変性)、放射線治療後、長期ステロイド局所使用、代謝性(電解質異常)",
     ),
     Disease(
         "ey_eosinophilic",
@@ -4432,7 +4543,13 @@ DISEASE_DATABASE: list[Disease] = [
         "neurological",
         "severe",
         "馬尾神経の炎症性脱髄。尾の弛緩・排尿排便障害・会陰部無感覚。",
-        ["neuro_ataxia", "neuro_proprioceptive_deficit", "uri_dysuria", "dig_rectal_straining", "repro_perineal_laceration"],
+        [
+            "neuro_ataxia",
+            "neuro_proprioceptive_deficit",
+            "uri_dysuria",
+            "dig_rectal_straining",
+            "repro_perineal_laceration",
+        ],
         urgency="urgent",
         recommended_exams=[(1, "神経検査", "Neurological Exam"), (2, "CSF分析", "CSF Analysis")],
         merck_url=_MERCK + "cauda+equina+neuritis+horses",
@@ -4679,7 +4796,11 @@ DISEASE_DATABASE: list[Disease] = [
             "repo_ecg_abnormal",
         ],
         urgency="emergency",
-        recommended_exams=[(1, "心エコー", "Echocardiography"), (2, "心電図", "ECG"), (3, "胸部X線", "Thoracic Radiographs")],
+        recommended_exams=[
+            (1, "心エコー", "Echocardiography"),
+            (2, "心電図", "ECG"),
+            (3, "胸部X線", "Thoracic Radiographs"),
+        ],
         merck_url=_MERCK + "heart+failure+horses",
         treatment_protocol="フロセミド1-2mg/kg IV q6-12h(うっ血管理)。ジゴキシン0.0022mg/kg IV/0.011mg/kg PO BID(心収縮力)。ACE阻害薬(ベナゼプリル0.5mg/kg PO SID)。安静。低Na食。胸水/腹水ドレナージ(大量貯留時)。原因治療(弁膜症/心筋炎/AFib)。予後不良(進行性)。",
         clinical_signs_detail="運動不耐性(初期徴候)、労作性呼吸困難・頻呼吸(安静時>20/分)、咳(肺水腫)、頻脈(>60 bpm安静時)、頸静脈拍動・怒張(右心不全)、腹下・四肢の浮腫、腹水(重度右心不全)、粘膜蒼白/チアノーゼ、CRT>2秒、末梢冷感、夜間多尿・起立不能、食欲不振・体重減少",
@@ -4787,7 +4908,11 @@ DISEASE_DATABASE: list[Disease] = [
         "高リン・低カルシウム飼料による。顔面骨腫脹(ビッグヘッド病)。",
         ["dental_facial_swelling", "limb_lameness_fore", "limb_lameness_hind", "body_swelling"],
         urgency="urgent",
-        recommended_exams=[(1, "血清Ca/P", "Serum Ca/P"), (2, "X線検査", "Radiographs"), (3, "飼料分析", "Feed Analysis")],
+        recommended_exams=[
+            (1, "血清Ca/P", "Serum Ca/P"),
+            (2, "X線検査", "Radiographs"),
+            (3, "飼料分析", "Feed Analysis"),
+        ],
         merck_url=_MERCK + "nutritional+secondary+hyperparathyroidism+horses",
         treatment_protocol="食餌補正(Ca:P比 2:1に修正)。VitD3補給(穀物ベース食→不足)。Ca補給(石灰�ite/DCP)。運動(骨負荷)。X線で骨密度改善モニタリング。顔面腫脹(bran disease/big head)が特徴。穀物過剰/草不足の飼養管理が原因。回復には数ヶ月。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -4917,7 +5042,11 @@ DISEASE_DATABASE: list[Disease] = [
         "分娩進行異常。胎位・胎勢異常。緊急処置が必要。",
         ["repro_dystocia", "repro_vulvar_discharge", "gen_sweating", "gen_tachycardia", "repro_prolonged_labor"],
         urgency="emergency",
-        recommended_exams=[(1, "膣内検査(胎位確認)", "Vaginal Exam (Fetal Position)"), (2, "超音波検査", "Ultrasound"), (3, "直腸検査", "Rectal Palpation")],
+        recommended_exams=[
+            (1, "膣内検査(胎位確認)", "Vaginal Exam (Fetal Position)"),
+            (2, "超音波検査", "Ultrasound"),
+            (3, "直腸検査", "Rectal Palpation"),
+        ],
         merck_url=_MERCK + "dystocia+horses",
         pathophysiology="正常分娩は3ステージ：第1段(陣痛開始)、第2段(胎仔娩出、通常<30分)、第3段(胎盤排出、通常<3時間)。難産は胎位異常(後肢先進のみ正常)、胎勢異常(背屈)、産道狭窄(ペルビスサイズ不適合)、陣痛減弱(高齢牝馬)で発生。子馬は牝馬産道より大きく、娩出には複雑な回転が必須。第2段が>30分続くと子馬酸素欠乏リスク極大。",
         treatment_protocol="【緊急初期評価】(1)胎位確認：膣内検査で後肢確認(正常=両後肢先進)。異常：前肢背屈→前肢屈曲矯正、後肢側軸→回転矯正、横位→帝王切開。(2)産道適合性：膣内検査で産道狭窄判定(子馬大型、ペルビス小型)。不適合→帝王切開。(3)陣痛評価：有効陣痛確認(子馬進行なし>15分)。【保存的管理(第2段開始15分以内)】(1)鎮痛・鎮静：トランキライザー+鎮痛薬。アセプロマジン 0.04 mg/kg IV(禁忌：ショック)。ブチルファノール 0.02-0.04 mg/kg IV q4h。(2)ルブリカント：食塩水100 mL + 液体パラフィン500 mL＋エストロゲンクリーム（子宮弛緩化）。頻回注入。(3)牽引補助：2-3回の吸気時に緩やかに牽引（無理な力は禁物→産道破裂）。頭部が見えたら加速。(4)監視：胎仔心音(100-150 bpm正常)、産道スキンテスト(血液徴候)。【外科的介入(15-30分無進行)】帝王切開：下腹部正中切開。牝馬に麻酔(メデトミジン+ブチルファノール+ミダゾラム鎮静→アルファキサロンIV導入)。麻酔下で(1)臍帯異常確認、(2)子馬出産(呼吸管理)、(3)胎盤剥離、(4)層状閉鎖(腹膜、筋層、皮膚)。術後：ICU管理、抗菌薬(ペニシリンG 20,000 IU/kg IV q6h + ジェンタマイシン 6.6 mg/kg IV SID)、NSAID(フェニルブタゾン 2-4 mg/kg PO BID)、乳酸値・電解質監視、蹄葉炎予防(ヘパリン40-100 IU/kg IV)。",
@@ -5031,7 +5160,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "lethal+white+overo+syndrome",
         treatment_protocol="根治治療なし(致死的：先天性無神経節巨大結腸)。安楽死。EDNRB遺伝子変異(常染色体劣性)。オヴェロ白毛パターンの交配(Oo × Oo → OO 25%)。ペイント/APHA。遺伝子検査で保因者同定必須(frame overo)。",
         clinical_signs_detail="(1)出生時：全身完全白色被毛(まれに耳・背線に小有色斑)、青色虹彩(blue eyes)、薄ピンク色鼻部・粘膜(色素欠如)、外見上は活発で起立・哺乳良好、(2)生後12-24時間：胎便排泄なし(meconium非排泄)、進行性腹部膨満(無蠕動でガス・液体貯留)、(3)24-48時間：強烈な疝痛(横臥・転がり・後肢蹴り・歯軋り)、頻脈(>100/min)、頻呼吸、脱水、嘔吐様鼻腔逆流、(4)48-72時間：腸管壊死・敗血症性ショック・低体温・虚脱・死亡。腹部X線で結腸ガス充満・無排便確認",
-        risk_factors="【遺伝】Frame Overo色素パターン両親(EDNRB Ile118Lys変異、heterozygote N/O)、両親ともFrame OveroでF×F交配時25%が罹患(Lethal White)。【品種】American Paint Horse(Frame Overo line)、Pinto、Quarter Horse(Cropout)、Spanish Mustang、Miniature Horse、まれにThoroughbred系Cropout。【血統】Mitchell Frame Overo line、Rebel Cause line等。【他白色パターン】Sabino(SB1)・Tobiano(KIT)・Splashed White(MITF/PAX3)は別変異で非致死、Frame Overoのみ致死。【見た目だけでは判別不能】"
+        risk_factors="【遺伝】Frame Overo色素パターン両親(EDNRB Ile118Lys変異、heterozygote N/O)、両親ともFrame OveroでF×F交配時25%が罹患(Lethal White)。【品種】American Paint Horse(Frame Overo line)、Pinto、Quarter Horse(Cropout)、Spanish Mustang、Miniature Horse、まれにThoroughbred系Cropout。【血統】Mitchell Frame Overo line、Rebel Cause line等。【他白色パターン】Sabino(SB1)・Tobiano(KIT)・Splashed White(MITF/PAX3)は別変異で非致死、Frame Overoのみ致死。【見た目だけでは判別不能】",
     ),
     Disease(
         "fl_madd",
@@ -5134,7 +5263,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "failure+passive+transfer+foals",
         treatment_protocol="血漿輸血(20-40mL/kg IV：IgG>800mg/dL目標)。12時間以内→経口良質初乳(母馬/凍結保存)1-2L。IgG測定(SNAP/RID：24hで確認)。12h以降は消化管吸収不可→IV血漿のみ。感染予防(抗菌薬)。衛生管理。IgG<200mg/dLは完全失敗→高リスク。",
         clinical_signs_detail="単純FPT(感染合併なし)：(1)無症状(臨床上気付かれない、IgG測定で初めて判明)、(2)母乳哺乳・元気・体温・行動すべて正常、(3)起立・吸啜遅延の病歴あることも(母馬乳房早期漏出など)。FPT＋敗血症併発(進行例)：(1)生後24-72時間で発熱・低体温・嗜眠、(2)関節腫脹・下痢・呼吸促迫・臍帯感染、(3)IgG <400 mg/dL+SIRS徴候。リスクシグナル：母馬の分娩前乳汁漏出・乳房不発達、初乳量不足、起立/吸啜遅延、初産/高齢/双子妊娠、低品質初乳(Brix<22%)",
-        risk_factors="【母馬要因】(1)乳房早期漏出(分娩前の透明乳汁喪失で初乳IgG希釈・流出)、(2)無乳・乳房不発達(初産・高齢・栄養不良)、(3)初産・高齢(>16歳)母馬、(4)母馬死産・分娩直後死亡・産後拒否、(5)Fescue toxicosis(分娩前tall fescue摂取によるエンドファイト中毒、無乳・初乳品質低下)、(6)双子妊娠(初乳量分散)、(7)母馬早産・難産で初乳産生不足。【子馬要因】(1)起立遅延(>2時間、HIE/NMS・未熟出生)、(2)吸啜不全(力弱・反射欠如、未熟出生・神経症状)、(3)未熟出生(<320日、肠管エンテロサイト未熟)、(4)双子(分娩順差・体格差で吸啜不利)、(5)早期分離(母馬死亡・拒否で哺乳機会喪失)。【初乳品質】(1)初乳IgG <3,000 mg/dL(Brix<22%、初産・栄養不良で低)、(2)冷凍保存初乳の解凍方法不適切(電子レンジ加熱で抗体破壊)、(3)汚染初乳(乳房炎)。【飼養管理】(1)分娩監視不在(未確認の早期漏出・吸啜不全)、(2)分娩後の初乳摂取確認怠慢、(3)IgG測定スクリーニング不実施、(4)血漿バンク未備蓄"
+        risk_factors="【母馬要因】(1)乳房早期漏出(分娩前の透明乳汁喪失で初乳IgG希釈・流出)、(2)無乳・乳房不発達(初産・高齢・栄養不良)、(3)初産・高齢(>16歳)母馬、(4)母馬死産・分娩直後死亡・産後拒否、(5)Fescue toxicosis(分娩前tall fescue摂取によるエンドファイト中毒、無乳・初乳品質低下)、(6)双子妊娠(初乳量分散)、(7)母馬早産・難産で初乳産生不足。【子馬要因】(1)起立遅延(>2時間、HIE/NMS・未熟出生)、(2)吸啜不全(力弱・反射欠如、未熟出生・神経症状)、(3)未熟出生(<320日、肠管エンテロサイト未熟)、(4)双子(分娩順差・体格差で吸啜不利)、(5)早期分離(母馬死亡・拒否で哺乳機会喪失)。【初乳品質】(1)初乳IgG <3,000 mg/dL(Brix<22%、初産・栄養不良で低)、(2)冷凍保存初乳の解凍方法不適切(電子レンジ加熱で抗体破壊)、(3)汚染初乳(乳房炎)。【飼養管理】(1)分娩監視不在(未確認の早期漏出・吸啜不全)、(2)分娩後の初乳摂取確認怠慢、(3)IgG測定スクリーニング不実施、(4)血漿バンク未備蓄",
     ),
     Disease(
         "fl_septic_arthritis",
@@ -5154,7 +5283,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "septic+arthritis+foals",
         treatment_protocol="関節洗浄(温生食：through-and-through lavage)+全身抗菌薬(セファロスポリン/アミカシン)。関節内抗菌薬注入(アミカシン250mg)。輸液(敗血症管理)。NSAIDs(疼痛)。関節鏡(デブリードマン)。血漿(FPT補正)。X線(骨髄炎評価)。予後は関節数・菌血症の程度による。",
         clinical_signs_detail="(1)単/多関節腫脹(腕節・膝関節・球節・飛節好発、しばしば左右非対称・複数関節)、(2)関節周囲熱感・疼痛・触診反応、(3)跛行(支柱性または完全非荷重・3本足歩行)、(4)関節屈伸抵抗・他動運動制限、(5)発熱(>39°C、新生子は変動大)、(6)嗜眠・元気消失・哺乳量低下、(7)横臥位時間延長・起立しにくい、(8)頻脈・頻呼吸(SIRS)、(9)臍帯感染徴候(臍炎・尿膜管開存)、(10)他敗血症徴候(下痢・肺炎・髄膜炎)合併多い。生後1-30日(平均7-14日)発症が大半",
-        risk_factors="【主因】(1)FPT(IgG<400-800、血行性感染リスク10-20倍)、(2)新生子敗血症既往(50-70%が併発)、(3)臍帯感染・尿膜管感染(直接感染源)、(4)肺炎・腸炎(血行播種源)、(5)先行HIE/NMS・未熟出生(免疫脆弱)。【病原体】Streptococcus(zooepidemicus, equi)、E. coli、Klebsiella、Enterobacter、Salmonella、Actinobacillus、Staphylococcus(まれにMRSA)、嫌気性菌(Bacteroides等)、Rhodococcus equi(月齢進むと)。【飼養】(1)不衛生分娩環境(汚染敷藁、消毒不十分stall)、(2)臍帯処理不適切、(3)集団飼育子馬接触、(4)輸送ストレス、(5)離乳ストレス。【医原性】(1)関節注射時の汚染(まれ)、(2)IV catheter感染による菌血症、(3)不適切な関節穿刺手技"
+        risk_factors="【主因】(1)FPT(IgG<400-800、血行性感染リスク10-20倍)、(2)新生子敗血症既往(50-70%が併発)、(3)臍帯感染・尿膜管感染(直接感染源)、(4)肺炎・腸炎(血行播種源)、(5)先行HIE/NMS・未熟出生(免疫脆弱)。【病原体】Streptococcus(zooepidemicus, equi)、E. coli、Klebsiella、Enterobacter、Salmonella、Actinobacillus、Staphylococcus(まれにMRSA)、嫌気性菌(Bacteroides等)、Rhodococcus equi(月齢進むと)。【飼養】(1)不衛生分娩環境(汚染敷藁、消毒不十分stall)、(2)臍帯処理不適切、(3)集団飼育子馬接触、(4)輸送ストレス、(5)離乳ストレス。【医原性】(1)関節注射時の汚染(まれ)、(2)IV catheter感染による菌血症、(3)不適切な関節穿刺手技",
     ),
     # ════════════════════════════════════════
     # IMMUNE (6 new)
@@ -5184,7 +5313,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["body_muscle_atrophy", "body_stiffness", "gen_recumbent", "imm_autoimmune_response"],
         common_breeds="クォーターホース",
         urgency="urgent",
-        recommended_exams=[(1, "CK/AST", "CK/AST"), (2, "筋生検", "Muscle Biopsy"), (3, "遺伝子検査", "Genetic Testing")],
+        recommended_exams=[
+            (1, "CK/AST", "CK/AST"),
+            (2, "筋生検", "Muscle Biopsy"),
+            (3, "遺伝子検査", "Genetic Testing"),
+        ],
         merck_url=_MERCK + "immune+mediated+myositis+horses",
         treatment_protocol="デキサメタゾン0.1mg/kg IV SID×3-5日→プレドニゾロンPO漸減。QH(クオーターホース)：MYH1変異関連→免疫介在性急速筋萎縮。輸液(腎保護：ミオグロビン尿症時)。NSAIDs(疼痛)。ビタミンE補給。安静(急性期)→緩徐な運動復帰。CK/AST/ミオグロビンモニタリング。再発率あり(トリガー：感染/ワクチン/ストレス)。",
         clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑(皮膚出血斑)、貧血(粘膜蒼白)、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
@@ -6353,7 +6486,14 @@ DISEASE_DATABASE: list[Disease] = [
         "digestive",
         "critical",
         "大結腸の360度以上回転。激烈な疝痛。緊急手術。",
-        ["dig_colic_signs", "gen_tachycardia", "gen_dehydration", "dig_reduced_gut", "dig_flehmen", "gen_prolonged_crt"],
+        [
+            "dig_colic_signs",
+            "gen_tachycardia",
+            "gen_dehydration",
+            "dig_reduced_gut",
+            "dig_flehmen",
+            "gen_prolonged_crt",
+        ],
         urgency="emergency",
         recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹水検査", "Peritoneal Fluid")],
         merck_url=_MERCK + "large+colon+volvulus+horses",
@@ -6371,7 +6511,14 @@ DISEASE_DATABASE: list[Disease] = [
         "digestive",
         "critical",
         "小腸の血行遮断。急性激烈疝痛。緊急手術。",
-        ["dig_colic_signs", "gen_tachycardia", "dig_reduced_gut", "gen_dehydration", "dig_flehmen", "gen_prolonged_crt"],
+        [
+            "dig_colic_signs",
+            "gen_tachycardia",
+            "dig_reduced_gut",
+            "gen_dehydration",
+            "dig_flehmen",
+            "gen_prolonged_crt",
+        ],
         urgency="emergency",
         recommended_exams=[(1, "超音波", "Abdominal Ultrasound"), (2, "腹水検査", "Peritoneal Fluid")],
         merck_url=_MERCK + "small+intestinal+strangulation+horses",
@@ -6738,7 +6885,7 @@ DISEASE_DATABASE: list[Disease] = [
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "tracheal+collapse+horses",
         treatment_protocol="気管内ステント留置(金属メッシュステント)。外科的(気管輪外固定：prosthetic rings)。気管支拡張薬(クレンブテロール)。環境管理(低塵)。ミニチュアホース/ポニーに好発。重症呼吸困難→気管切開(緊急)。予後はguarded(ステント合併症：肉芽/移動)。",
-        clinical_signs_detail="慢性発作性咳嗽(\"goose honk\"様、ストレス・運動・興奮で誘発)、運動不耐性、運動時stridor(extra-thoracic虚脱は吸気時、intra-thoracic虚脱は呼気時)、頸部触診で気管圧痛・触知可能な凹凸、激運動時のチアノーゼ・collapse(重症)、安静時呼吸困難(Grade III-IV)。ミニチュアホース・ポニーの先天性は若齢から発症。聴診で気管音の異常乱流音",
+        clinical_signs_detail='慢性発作性咳嗽("goose honk"様、ストレス・運動・興奮で誘発)、運動不耐性、運動時stridor(extra-thoracic虚脱は吸気時、intra-thoracic虚脱は呼気時)、頸部触診で気管圧痛・触知可能な凹凸、激運動時のチアノーゼ・collapse(重症)、安静時呼吸困難(Grade III-IV)。ミニチュアホース・ポニーの先天性は若齢から発症。聴診で気管音の異常乱流音',
         risk_factors="ミニチュアホース・Shetlandポニー(先天性気管軟骨形成不全、Aleman 2008で報告集積)、外傷既往(頸部打撲、ロープ縊頸、輸送中外傷)、過去の長期気管内挿管(全身麻酔・ICU)、気管腫瘍・嚢胞合併、肥満、慢性呼吸器疾患による気管粘膜慢性炎症、性別偏り報告なし、品種素因あり(犬の様な決定的品種好発はなし)",
     ),
     # ── Skin (sk) 追加 15 ──
@@ -7891,7 +8038,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "neonatal+isoerythrolysis+horses",
         treatment_protocol="【焦点：輸血管理・予防プロトコル】(本項はNI診断確定後の輸血実施・繁殖予防策に焦点。臨床診断はfl_ni参照)。【輸血ドナー選定】(1)血液型適合：Aa・Qa陰性ドナー(Thoroughbred ドナーバンク、AAEP・大学病院)、母馬血清で交差適合試験(major/minor cross-match)、両試験陰性確認。(2)Coombs検査陰性ドナー馬。(3)妊娠歴・輸血歴のない雄馬または未経産雌馬が理想(感作リスク低)。(4)病歴：感染症・薬物治療歴なし、健康診断クリア。【輸血製剤の準備】(1)洗浄赤血球(Washed RBC):母血液 → 遠心分離(2,500g 15分) → 上清廃棄 → 等張食塩水で再懸濁 → 3回洗浄 → 抗体・血漿成分除去 → 母馬赤血球を子馬に安全輸血可能。母乳経路と異なり、洗浄RBCには抗体含まれない。10-15 mL/kg IV、1-2時間で。(2)交差適合済全血(Cross-matched whole blood):ドナー馬から採血(クエン酸ナトリウム抗凝固、子馬体重×8-15 mL)、フィルター付き輸液セットでIV、1-2時間で。(3)Oxyglobin(ヘモグロビンベース酸素運搬液) 10-30 mL/kg IV：輸血困難時の一時的酸素運搬補助。馬での適応外使用(extralabel)。(4)凍結保存血の使用：解凍に時間要、緊急時不適。【輸血実施プロトコル】(1)輸血前準備：18-16Gカテーテル頸静脈留置、加温(37-38°C)、フィルター付きセット使用。(2)初期速度：最初の20分は0.1-0.2 mL/kg/min(輸血反応観察、頻脈・震え・蕁麻疹・体温上昇監視)、問題なければ1-2 mL/kg/minへ増速、合計1-2時間で投与完了。(3)輸血反応対応：症状出現時即時中止、ジフェンヒドラミン 1-2 mg/kg IV、デキサメタゾン 0.05-0.1 mg/kg IV、必要時アドレナリン 0.01-0.02 mg/kg IM(アナフィラキシー)。(4)効果判定：輸血直後・24時間目にPCV・TP測定、PCV>15%維持確認、不足時は追加輸血。【輸血後管理】(1)PCV/TP・血糖・乳酸を6-12時間毎モニタリング。(2)輸液(乳酸リンゲル液 4 mL/kg/hr、過剰輸液による稀釈性貧血回避)、酸素補給(SpO2<90%で経鼻カニューレ5-10 L/min)。(3)鉄補充は通常不要(再生性貧血で骨髄活性化)。(4)コルチコステロイド使用は議論あり(免疫抑制で残存抗体作用低減期待だが感染リスク)、デキサメタゾン 0.05-0.1 mg/kg IV q12h × 2-3日が一般的。【母乳再開】輸血後、初乳吸収閉鎖(36-48時間齢)以降に母乳再開可能、それまで代用乳または陰性ドナー馬乳/牛初乳で哺乳。【繁殖予防プロトコル(再発防止)】(1)NI発症母馬は次回以降の全妊娠で抗体陽性とみなし管理。(2)妊娠最終月(8.5-11ヶ月目)の血清抗赤血球抗体スクリーニング(Aa/Qa screen、商業ラボ：Maine Equine Reference Lab、UCD VGL等)。(3)抗体陽性確認時：分娩予定日近づいたら準備：(a)stall待機・24時間監視、(b)分娩立会い、(c)出生後即座に母馬乳房閉鎖(マスキングテープで乳頭被覆)、(d)子馬を母馬から分離、(e)代用乳または事前確保のドナー馬初乳/牛初乳を経鼻胃管で哺乳、(f)24-36時間後にJFA陰性確認後、母乳許可。(4)種馬選定：陽性母馬には Aa・Qa陰性種馬を選択(血液型情報入手可能な種馬）。(5)母馬輸血歴・前回NI歴の記録保管。【参考文献】Boyle et al. JVIM 2005；Polkes et al. JVIM 2008；Wilkerson et al. AAEP Proc 2000；MacLeay J Equine Vet Sci 2001(JFA)；Equine Neonatal Medicine (Knottenbelt 2004) Ch.16；Robinson/Sprayberry Current Therapy 7th ed Ch.156。",
         clinical_signs_detail="輸血対象例の徴候：(1)PCV<15%(重症)または<20%(中等症)、(2)粘膜蒼白(白磁様)、(3)頻脈(>140/min)・頻呼吸(>50/min)、(4)虚脱・起立困難、(5)乳酸>4 mmol/L(末梢酸素運搬不足)、(6)黄疸(舌・強膜・歯肉・耳介の濃黄色)、(7)暗赤色尿(ヘモグロビン尿)、(8)精神状態：嗜眠・昏迷。輸血後24時間で多くの症状改善",
-        risk_factors="【輸血リスク】(1)同一血液型でも軽度溶血反応リスク残存、(2)頻回輸血で輸血反応・感作蓄積、(3)Oxyglobin使用は循環過負荷リスク。【予防失敗要因】(1)母馬抗体スクリーニング未実施、(2)抗体陽性母馬に母乳継続、(3)分娩監視なしで自然哺乳、(4)前回NI発症母馬の記録不在、(5)Mule妊娠での無検査(Donkey Factor約10%発症リスク)、(6)異なる種馬と継続交配で抗体価上昇"
+        risk_factors="【輸血リスク】(1)同一血液型でも軽度溶血反応リスク残存、(2)頻回輸血で輸血反応・感作蓄積、(3)Oxyglobin使用は循環過負荷リスク。【予防失敗要因】(1)母馬抗体スクリーニング未実施、(2)抗体陽性母馬に母乳継続、(3)分娩監視なしで自然哺乳、(4)前回NI発症母馬の記録不在、(5)Mule妊娠での無検査(Donkey Factor約10%発症リスク)、(6)異なる種馬と継続交配で抗体価上昇",
     ),
     Disease(
         "fl_septicemia",
@@ -7931,7 +8078,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "failure+passive+transfer+horses",
         treatment_protocol="12h以内：良質初乳PO(1-2L)→24h IgG再検。12h以降：血漿輸血(20-40mL/kg IV)。目標IgG>800mg/dL。SNAP/RIDテスト。感染予防(抗菌薬：IgG<200)。衛生管理。",
         clinical_signs_detail="多くは無症状(IgG測定で初めて判明)。リスクシグナル：(1)母馬の分娩前透明乳汁漏出(初乳IgG喪失)、(2)母馬乳房発達不全・無乳、(3)子馬起立遅延(>2時間)・吸啜遅延(>4時間)、(4)初乳摂取量視覚的不足、(5)初産母馬/高齢母馬/双子分娩、(6)早産(<320日)、(7)母馬死亡・拒否。FPT＋感染合併時のみ：発熱・嗜眠・関節腫脹・下痢など敗血症徴候出現",
-        risk_factors="【母馬】乳房早期漏出(分娩前2週間以内)、無乳・乳房不発達、初産(<3歳)、高齢(>16歳)、双子妊娠、Fescue toxicosis、栄養不良、ワクチン未接種、産後死亡・拒否。【子馬】起立/吸啜遅延、未熟出生(<320日)、低体重、HIE/NMS併発、低体温・低血糖、双子(分娩順差)。【初乳品質】Brix<22%(初産・栄養不良)、不適切な解凍(電子レンジで抗体破壊)、汚染初乳(乳房炎)。【飼養管理】分娩監視不在、初乳摂取量未確認、IgG測定スクリーニング不実施、初乳バンク・血漿バンク未備蓄、緊急時対応プロトコル不在"
+        risk_factors="【母馬】乳房早期漏出(分娩前2週間以内)、無乳・乳房不発達、初産(<3歳)、高齢(>16歳)、双子妊娠、Fescue toxicosis、栄養不良、ワクチン未接種、産後死亡・拒否。【子馬】起立/吸啜遅延、未熟出生(<320日)、低体重、HIE/NMS併発、低体温・低血糖、双子(分娩順差)。【初乳品質】Brix<22%(初産・栄養不良)、不適切な解凍(電子レンジで抗体破壊)、汚染初乳(乳房炎)。【飼養管理】分娩監視不在、初乳摂取量未確認、IgG測定スクリーニング不実施、初乳バンク・血漿バンク未備蓄、緊急時対応プロトコル不在",
     ),
     Disease(
         "fl_uroperitoneum",
@@ -7946,7 +8093,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "uroperitoneum+foals",
         treatment_protocol="腹腔ドレナージ(高K血症補正のため先に)。電解質補正(高K→ブドウ糖+インスリンIV/NaHCO3)。輸液(循環維持)。外科的修復(膀胱/尿管縫合：全身麻酔下)。術後尿カテーテル3-5日。予後良好(手術成功時85-90%)。雄子馬に好発。",
         clinical_signs_detail="(1)生後2-5日齢発症(時に7日まで)、最初は健常で外見、ある日進行性悪化、(2)進行性腹部膨満(腹側膨らみ、波動感)、(3)排尿頻度減少・尿線細い・尿失禁、(4)嗜眠・元気消失・哺乳量低下→最終的に哺乳停止、(5)頻呼吸(横隔膜圧排)、頻脈(初期)から徐脈(高K血症進行で)、(6)CRT延長・蒼白〜チアノーゼ粘膜、(7)震え・筋脱力(高K血症)、心調律異常(致死的不整脈)、(8)虚脱・横臥・痙攣(終末期)、(9)排便減少(便秘)。Cr/Na/K異常+腹水Cr/血清Cr>2:1で確定診断",
-        risk_factors="【性別】雄子馬>>雌子馬(尿道長・解剖学的素因)。【品種】Thoroughbred・Standardbred(品種素因または管理関連バイアス)。【分娩】難産・分娩遷延、急速分娩で腹圧急上昇、満杯膀胱状態での産道圧迫。【先天性】膀胱頂部発達異常・尿膜管嚢腫。【感染性(後発例、>7日齢)】敗血症性尿道炎・敗血症性膀胱炎による組織壊死性破裂。【医原性(まれ)】不適切な腹圧操作・カテーテル挿入損傷"
+        risk_factors="【性別】雄子馬>>雌子馬(尿道長・解剖学的素因)。【品種】Thoroughbred・Standardbred(品種素因または管理関連バイアス)。【分娩】難産・分娩遷延、急速分娩で腹圧急上昇、満杯膀胱状態での産道圧迫。【先天性】膀胱頂部発達異常・尿膜管嚢腫。【感染性(後発例、>7日齢)】敗血症性尿道炎・敗血症性膀胱炎による組織壊死性破裂。【医原性(まれ)】不適切な腹圧操作・カテーテル挿入損傷",
     ),
     Disease(
         "fl_patent_urachus",
@@ -7961,7 +8108,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "patent+urachus+foals",
         treatment_protocol="硝酸銀塗布(外部開口部：化学的焼灼)。クロルヘキシジン/ポビドンヨード臍帯消毒(BID)。抗菌薬(感染合併)。持続性/感染性→外科的切除(臍帯遺残切除+膀胱頂部修復)。予後良好(適切な管理で)。",
         clinical_signs_detail="(1)臍帯断端からの間欠的または持続的な尿滴下(撫でる・腹圧かける・排尿時に確認)、(2)臍帯断端湿潤・粘液様付着・痂皮、(3)腹側被毛の黄色変色・脱毛(尿による化学的損傷)、(4)腹側皮膚スカルディング(びらん・発赤・潰瘍、長期間漏出例)、(5)その他症状なし(無感染単純例は活発・哺乳良好・体温正常)、(6)感染合併時：臍帯断端腫脹・熱感・分泌物、発熱・元気消失(fl_patent_urachus_foalへ移行)。多くは生後3-14日齢発症",
-        risk_factors="【先天性】胎児期の尿膜管未閉鎖、子宮内発育遅延、未熟出生。【後天性】(1)不適切な臍帯処理(過剰なヨードチンキ・強腐食消毒で組織壊死)、(2)清潔不良な分娩環境(感染で組織融解)、(3)横臥位時間長い子馬(未熟出生・HIE/NMS)、(4)便秘・尿閉(膀胱内圧上昇で開通)、(5)膀胱炎・尿道炎合併。【誘発】子馬の臍帯部噛み行動、母馬の過度な舐め、放牧地汚染、stall衛生不良"
+        risk_factors="【先天性】胎児期の尿膜管未閉鎖、子宮内発育遅延、未熟出生。【後天性】(1)不適切な臍帯処理(過剰なヨードチンキ・強腐食消毒で組織壊死)、(2)清潔不良な分娩環境(感染で組織融解)、(3)横臥位時間長い子馬(未熟出生・HIE/NMS)、(4)便秘・尿閉(膀胱内圧上昇で開通)、(5)膀胱炎・尿道炎合併。【誘発】子馬の臍帯部噛み行動、母馬の過度な舐め、放牧地汚染、stall衛生不良",
     ),
     Disease(
         "fl_umbilical_hernia",
@@ -7976,7 +8123,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "umbilical+hernia+foals",
         treatment_protocol="小型(<4cm)：多くは自然閉鎖(6ヶ月まで待機)。弾性バンド圧迫(ヘルニアベルト)。大型(>4cm)/嵌頓リスク→外科的修復(メッシュ/直接縫合)。嵌頓→緊急手術。予後良好(手術で95%以上成功)。",
         clinical_signs_detail="(1)臍部腹側中線の柔らかい還納可能な膨らみ(出生時または生後数日-数週で出現)、(2)サイズ：典型的に直径2-5 cm、まれに10 cm以上、(3)子馬を仰向けにすると還納(reducible)、立位で再脱出、(4)その他症状なし(活発、哺乳良好、体温正常、体重増加正常)、(5)膨らみ皮膚は正常(発赤・温感・疼痛なし)、(6)強嵌頓徴候(緊急)：還納不能、激しい疝痛、嘔吐様逆流、膨らみの硬化・温感・色調変化、(7)時間経過：6-12ヶ月で多くは自然閉鎖",
-        risk_factors="【先天性】臍輪閉鎖不全(発達異常)、家族歴(遺伝的素因可能性、Thoroughbred系で頻度高い)、双子妊娠、未熟出生。【続発性】(1)不適切な臍帯処理(過度な牽引で臍輪損傷)、(2)臍帯感染(omphalitis)による組織融解→欠損拡大、(3)産後ストレス(咳嗽・嘔吐・便秘で腹圧上昇)、(4)未熟出生で組織脆弱。【他先天性異常合併】尿膜管異常・臍動脈/静脈感染・他臍部発達異常"
+        risk_factors="【先天性】臍輪閉鎖不全(発達異常)、家族歴(遺伝的素因可能性、Thoroughbred系で頻度高い)、双子妊娠、未熟出生。【続発性】(1)不適切な臍帯処理(過度な牽引で臍輪損傷)、(2)臍帯感染(omphalitis)による組織融解→欠損拡大、(3)産後ストレス(咳嗽・嘔吐・便秘で腹圧上昇)、(4)未熟出生で組織脆弱。【他先天性異常合併】尿膜管異常・臍動脈/静脈感染・他臍部発達異常",
     ),
     Disease(
         "fl_umbilical_infection",
@@ -7991,7 +8138,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "umbilical+infection+foals",
         treatment_protocol="臍帯消毒(クロルヘキシジン/ポビドンヨード：BID)。全身抗菌薬(ペニシリン+ゲンタマイシン/アミカシン)。超音波で臍帯遺残構造評価(膿瘍/膀胱管/臍動脈/臍静脈)。膿瘍→外科的切除(臍帯遺残摘出)。敗血症リスク(関節/肝)。",
         clinical_signs_detail="(1)臍帯断端腫脹・熱感・疼痛・触診反応(子馬が嫌がる)、(2)臍帯部分泌物(膿性・血性・悪臭・大量)、痂皮、周囲皮膚発赤、(3)発熱(>39°C、変動性、初期は微熱)または進行で低体温、(4)嗜眠・元気消失・哺乳量低下、(5)関節腫脹・跛行(化膿性関節炎合併、20-30%)、(6)頻脈・頻呼吸(SIRS)、(7)腹部膨満・腹水(腹膜炎進行例)、(8)黄疸(肝膿瘍合併)、(9)肺炎徴候(咳嗽・呼吸促迫、播種感染)、(10)他敗血症徴候(下痢・髄膜炎)。生後3-21日(平均7-14日)発症が大半",
-        risk_factors="【主因】(1)不衛生な分娩環境(汚染敷藁、消毒不十分stall、放牧地分娩)、(2)不適切な臍帯処理(処理なし・強腐食消毒剤[強ヨードチンキ・フェノール]使用で組織壊死)、(3)FPT(IgG<400-800、感染リスク10倍)、(4)母馬胎盤炎(絨毛膜炎)、子宮内感染、(5)出生時の長期間の臍帯ぶら下がり・母馬による過度の舐め。【子馬要因】未熟/過熟出生(免疫脆弱)、HIE/NMS(横臥位時間長い→臍帯汚染)、双子、低体温・低血糖。【飼養管理】集団飼育(感染圧高)、輸送ストレス、夏季高温多湿(細菌繁殖)、stall清掃頻度不足、新生子衛生プロトコル不在"
+        risk_factors="【主因】(1)不衛生な分娩環境(汚染敷藁、消毒不十分stall、放牧地分娩)、(2)不適切な臍帯処理(処理なし・強腐食消毒剤[強ヨードチンキ・フェノール]使用で組織壊死)、(3)FPT(IgG<400-800、感染リスク10倍)、(4)母馬胎盤炎(絨毛膜炎)、子宮内感染、(5)出生時の長期間の臍帯ぶら下がり・母馬による過度の舐め。【子馬要因】未熟/過熟出生(免疫脆弱)、HIE/NMS(横臥位時間長い→臍帯汚染)、双子、低体温・低血糖。【飼養管理】集団飼育(感染圧高)、輸送ストレス、夏季高温多湿(細菌繁殖)、stall清掃頻度不足、新生子衛生プロトコル不在",
     ),
     Disease(
         "fl_premature_foal",
@@ -8006,7 +8153,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "premature+foal+horses",
         treatment_protocol="NICU管理。酸素(鼻カヌラ)。輸液(ブドウ糖5-10%+電解質)。経管栄養(哺乳不能時：母乳/ミルクリプレーサー q2h)。IgG確認→血漿輸血(FPT)。呼吸器支持(界面活性剤：実験的)。関節・骨端軟化の保護(バンテージ)。体温管理(保温ランプ)。感染予防。予後は在胎週数による(>320日：fair)。",
         clinical_signs_detail="(1)体重不足(Thoroughbred<40 kg、正常50-55 kg)、(2)絹毛様被毛(silky coat、短く薄い)、(3)耳折れ垂れ(floppy ears、軟骨未熟)、(4)柔らかい乳様蹄殻(eponychium残存)、(5)歯肉薄ピンク・切歯未萌出、(6)関節弛緩(後肢過伸展、腱靭弛緩)、(7)起立遅延(>3時間)・吸啜反射弱、(8)体温調節障害(低体温<37°C)、(9)血糖維持障害(低血糖<60 mg/dL)、(10)頭部丸い・顔貌幼弱、(11)X線で手根骨・足根骨不完全骨化(grade I-IV)、(12)血液N:L比<1.0(成熟>2.0)、低コルチゾール反応",
-        risk_factors="【母馬】胎盤炎(絨毛膜炎、Streptococcus・Nocardia)、子宮疾患、栄養不良、Cushing症候群(PPID)、双子妊娠、過熟妊娠、高齢母馬(>16歳)、初産母馬、ホルモン異常、Fescue toxicosis(無乳・乳頭発達不全)。【胎仔】双子、子宮内発育遅延(IUGR)、先天異常。【誘発】母馬発熱・敗血症、ストレス・輸送、外傷、低栄養、医原性早期分娩誘発"
+        risk_factors="【母馬】胎盤炎(絨毛膜炎、Streptococcus・Nocardia)、子宮疾患、栄養不良、Cushing症候群(PPID)、双子妊娠、過熟妊娠、高齢母馬(>16歳)、初産母馬、ホルモン異常、Fescue toxicosis(無乳・乳頭発達不全)。【胎仔】双子、子宮内発育遅延(IUGR)、先天異常。【誘発】母馬発熱・敗血症、ストレス・輸送、外傷、低栄養、医原性早期分娩誘発",
     ),
     Disease(
         "fl_hypoxic_ischemic_encephalopathy",
@@ -8021,7 +8168,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "hypoxic+ischemic+encephalopathy+foals",
         treatment_protocol="Madigan squeeze法(胸部圧迫20分)。輸液(脱水・電解質補正)。酸素(鼻カヌラ)。ジアゼパム0.1-0.2mg/kg IV(痙���)。経管栄養(q2-4h)。IgG確認→血漿(FPT率高い)。膀胱カテーテル(排尿反射消失時)。抗菌薬(二次感染予防)。予後良好(80%以上が回復：適切な支持療法)。",
         clinical_signs_detail="出生直後または数時間-3日以内発症：(1)吸啜反射欠如/減弱・哺乳意欲喪失、(2)母馬認識障害(母馬を識別せず哺乳しない)、(3)異常行動：無目的徘徊、横臥昏睡、犬座位(ポーティング)、空仰ぎ(stargazing)、自分の周りを回る(circling)、(4)発作：全身強直性間代性発作、部分発作、咀嚼様発作、(5)吠え様発声・異常鳴き声、(6)興奮と抑うつの周期的変動、(7)体温調節障害(高熱または低体温)、(8)瞳孔散大・対光反射減弱・眼球振盪、(9)眼瞼内反症・角膜潰瘍合併多い、(10)誤嚥性肺炎リスク(嚥下障害)、(11)反射異常(膝反射・後肢屈伸反射亢進または消失)、(12)体温調節不良",
-        risk_factors="【周産期】難産(分娩遷延>40分)・産道狭窄、急速分娩(<10分、産道圧迫不足→神経ステロイド調節不全説)、帝王切開、双子分娩、臍帯巻絡、胎便着色羊水。【母馬】胎盤炎(絨毛膜炎、StreptococcusまたはNocardia)、母馬発熱・敗血症・疝痛、母馬高齢/初産、栄養不良、低マグネシウム血症、PPID/Cushing。【胎仔】未熟/過熟出生、子宮内発育遅延(IUGR)、双子、胎盤剥離、心血管異常。【遺伝】Thoroughbred・Standardbredで頻度高い(品種素因または管理関連バイアス)。【併発】FPT(IgG<400)・敗血症で重症化、低血糖・低体温で予後悪化"
+        risk_factors="【周産期】難産(分娩遷延>40分)・産道狭窄、急速分娩(<10分、産道圧迫不足→神経ステロイド調節不全説)、帝王切開、双子分娩、臍帯巻絡、胎便着色羊水。【母馬】胎盤炎(絨毛膜炎、StreptococcusまたはNocardia)、母馬発熱・敗血症・疝痛、母馬高齢/初産、栄養不良、低マグネシウム血症、PPID/Cushing。【胎仔】未熟/過熟出生、子宮内発育遅延(IUGR)、双子、胎盤剥離、心血管異常。【遺伝】Thoroughbred・Standardbredで頻度高い(品種素因または管理関連バイアス)。【併発】FPT(IgG<400)・敗血症で重症化、低血糖・低体温で予後悪化",
     ),
     Disease(
         "fl_meconium_aspiration",
@@ -8036,7 +8183,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "meconium+aspiration+foals",
         treatment_protocol="酸素(鼻カヌラ/CPAP)。気管支拡張薬(エピネフリン吸入)。界面活性剤(実験的)。抗菌薬(二次性肺炎予防)。輸液+経管栄養。IPPV(人工呼吸：重症)。予後はguarded(呼吸不全の重症度による)。",
         clinical_signs_detail="出生直後から：(1)呼吸促迫(>40-60/min、正常<30)、(2)努力性呼吸：鼻翼呼吸、胸部陥没呼吸、肋間筋使用、(3)口腔・鼻孔・舌・羊水・被毛の胎便着色(yellow-green to dark green、特徴的)、(4)チアノーゼ(舌・粘膜青紫、SpO2<85%)、(5)湿性ラ音・捻髪音(肺野聴診)、(6)嗜眠・吸啜反射弱・哺乳意欲低下、(7)低体温(<37°C)、(8)頻脈(>140/min)→徐脈(終末期)、(9)代謝性アシドーシス徴候(蒼白、毛細管再充満時間延長)、(10)発作・神経症状(HIE/NMS合併、20-40%)、(11)胸部X線で両側びまん性陰影",
-        risk_factors="【母馬】過熟妊娠(>340日)、胎盤炎(Streptococcus・Nocardia)、母馬発熱・敗血症、栄養不良、PPID/Cushing、難産・分娩遷延、急速分娩、薬物投与(子宮収縮薬不適切使用)。【胎仔】子宮内低酸素ストレス(IUGR、胎盤機能不全、双子)、過熟胎仔(成熟しすぎ→腸管成熟で胎便排出)、臍帯巻絡、胎位異常。【分娩】難産、急速分娩(産道圧迫で胎仔低酸素)、外科的介入(帝王切開での吸引前に呼吸開始)。【環境】分娩監視不在(MSAF早期発見・吸引機会逸失)、新生子蘇生設備不足"
+        risk_factors="【母馬】過熟妊娠(>340日)、胎盤炎(Streptococcus・Nocardia)、母馬発熱・敗血症、栄養不良、PPID/Cushing、難産・分娩遷延、急速分娩、薬物投与(子宮収縮薬不適切使用)。【胎仔】子宮内低酸素ストレス(IUGR、胎盤機能不全、双子)、過熟胎仔(成熟しすぎ→腸管成熟で胎便排出)、臍帯巻絡、胎位異常。【分娩】難産、急速分娩(産道圧迫で胎仔低酸素)、外科的介入(帝王切開での吸引前に呼吸開始)。【環境】分娩監視不在(MSAF早期発見・吸引機会逸失)、新生子蘇生設備不足",
     ),
     Disease(
         "fl_rhodococcus_pneumonia",
@@ -8051,7 +8198,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "rhodococcus+pneumonia+foals",
         treatment_protocol="アジスロマイシン10mg/kg PO SID×5日→q48h(又はクラリスロマイシン7.5mg/kg PO BID)+リファンピシン5mg/kg PO BID×4-12週。超音波で肺膿瘍モニタリング。輸液(脱水時)。NSAIDs。下痢管理(マクロライド性)。リファンピシン肝毒性モニタリング。1-6ヶ月齢に好発。予後はfair-good(早期治療)。",
         clinical_signs_detail="(1)1-6ヶ月齢発症(典型2-4ヶ月齢)、(2)発熱(38.6-40.5°C、変動性、しばしば微熱で見落とし)、(3)咳嗽(初期乾性→湿性、運動・興奮で誘発)、(4)粘液膿性鼻汁(両側性、間欠的)、(5)呼吸促迫(>40/min)、努力性呼吸、(6)肺野聴診：湿性ラ音・捻髪音・無呼吸領域、(7)体重減少・成長停滞・哺乳量減少、(8)嗜眠・元気消失・運動耐容能低下、(9)関節炎(腫脹・跛行、髄外型20-30%)、(10)下痢(腸管型、慢性微熱+体重減少)、(11)眼前脳膿瘍・髄膜炎徴候(まれ)、(12)CBC白血球増多・フィブリノーゲン著明上昇",
-        risk_factors="【環境】(1)エンデミック農場(R. equi常在土壌・厩肥)、(2)夏季(6-9月、温暖・乾燥)、(3)塵埃多い馬牧場(吸入暴露)、(4)放牧地過密、(5)清掃・換気不良stall、(6)集団飼育(同腹子複数感染)。【宿主】(1)1-6ヶ月齢(免疫未熟期、母由来抗体減衰時期)、(2)未熟出生・未熟成熟、(3)FPT(IgG<800)併発で重症化リスク。【病原体】VapAプラスミド保有株(virulent strain)、土壌中の長期生存(数年)、糞便経口/吸入感染。【飼養】HIP予防プロトコル不在エンデミック農場、超音波スクリーニング体制不在、新規導入馬の検疫不徹底"
+        risk_factors="【環境】(1)エンデミック農場(R. equi常在土壌・厩肥)、(2)夏季(6-9月、温暖・乾燥)、(3)塵埃多い馬牧場(吸入暴露)、(4)放牧地過密、(5)清掃・換気不良stall、(6)集団飼育(同腹子複数感染)。【宿主】(1)1-6ヶ月齢(免疫未熟期、母由来抗体減衰時期)、(2)未熟出生・未熟成熟、(3)FPT(IgG<800)併発で重症化リスク。【病原体】VapAプラスミド保有株(virulent strain)、土壌中の長期生存(数年)、糞便経口/吸入感染。【飼養】HIP予防プロトコル不在エンデミック農場、超音波スクリーニング体制不在、新規導入馬の検疫不徹底",
     ),
     Disease(
         "fl_foal_heat_diarrhea",
@@ -8066,7 +8213,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "foal+heat+diarrhea",
         treatment_protocol="通常治療不要(自己限定性：7-14日齢)。母乳継続。肛門周囲の清拭(皮膚保護：ワセリン)。脱水時のみ輸液/経口補液。重症→感染性原因の除外(培養/PCR)。予後良好。",
         clinical_signs_detail="(1)生後7-15日齢発症(典型10-12日齢、母馬産後初発情と一致)、(2)水様〜軟便(黄褐色、しばしば泥状)、(3)軽度肛門周囲被毛汚染・皮膚刺激、(4)発熱なし(<38.5°C、典型は完全正常)、(5)活発・哺乳意欲正常・体重増加維持、(6)脱水なし(皮膚張力正常、口腔湿潤)、(7)心拍・呼吸数正常、(8)腹部触診正常(疼痛・膨満なし)、(9)持続2-7日で自然治癒。【リスクシグナル(他疾患鑑別必要)】発熱・嗜眠・血便・粘液便・脱水・体重減少・>7日持続・<7日齢発症・複数子馬同時発生",
-        risk_factors="【生理学的】(1)生後7-15日齢の腸管マイクロバイオーム確立期、(2)初乳→成乳移行(乳組成変化)、(3)腸絨毛pinocytosis停止と腸管成熟、(4)母馬糞便coprophagy開始(腸内菌叢確立)。【誤診リスク要因(他疾患見落とし要因)】(1)分娩監視不在で発症時期不明確、(2)体温測定不実施(発熱見逃し)、(3)子馬の活気・哺乳量未確認、(4)集団発生未認識、(5)IgG測定不実施(FPT見逃しで感染リスク高い)。【感染性下痢発症リスク(誤診時)】FPT、不衛生環境、母馬感染、集団飼育、ロタウイルス未ワクチン母馬"
+        risk_factors="【生理学的】(1)生後7-15日齢の腸管マイクロバイオーム確立期、(2)初乳→成乳移行(乳組成変化)、(3)腸絨毛pinocytosis停止と腸管成熟、(4)母馬糞便coprophagy開始(腸内菌叢確立)。【誤診リスク要因(他疾患見落とし要因)】(1)分娩監視不在で発症時期不明確、(2)体温測定不実施(発熱見逃し)、(3)子馬の活気・哺乳量未確認、(4)集団発生未認識、(5)IgG測定不実施(FPT見逃しで感染リスク高い)。【感染性下痢発症リスク(誤診時)】FPT、不衛生環境、母馬感染、集団飼育、ロタウイルス未ワクチン母馬",
     ),
     Disease(
         "fl_rotavirus",
@@ -8081,7 +8228,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "rotavirus+foals",
         treatment_protocol="輸液(乳酸リンゲル+5%ブドウ糖IV：中等度以上)。経口補液(軽症)。電解質補正(NaHCO3)。母乳継続(絶乳不要)。プロバイオティクス(Saccharomyces)。スクラルファート(腸粘膜保護)。隔離+消毒(次亜塩素酸)。予後良好(3-7日で回復)。妊娠末期母馬ワクチンで移行抗体。",
         clinical_signs_detail="(1)5-35日齢発症(ピーク7-21日齢)、(2)急性水様下痢(透明〜黄褐色、酸臭、悪臭、しばしば噴出性)、(3)発熱(初期38.5-40°C、進行で正常〜低体温)、(4)嗜眠・元気消失・哺乳意欲低下→哺乳停止、(5)進行性脱水(皮膚張力低下、口腔乾燥、毛細管再充満時間延長>3秒、眼窩陥没)、(6)頻脈(>120/min)→徐脈(終末期)、(7)代謝性アシドーシス徴候(深い呼吸、虚脱)、(8)体重減少、(9)肛門周囲皮膚汚染・発赤・スカルディング、(10)腹部膨満・軽度疝痛、(11)集団発生(同腹子・stall子馬同時、エンデミック農場)、(12)時に嘔吐様鼻腔逆流",
-        risk_factors="【宿主】(1)5-35日齢の月齢(腸管成熟期、母由来抗体減衰時期)、(2)未ワクチン母馬の子馬(初乳経由防御抗体不足)、(3)FPT(IgG<800、感染率・重症化率高)、(4)未熟出生・低体重子馬。【環境】(1)エンデミック繁殖牧場(ロタウイルス常在)、(2)集団飼育(感染圧高、糞口感染)、(3)清潔不良stall・敷藁、(4)消毒不徹底(エンベロープなしで耐性高)、(5)新規子馬導入(免疫naive)、(6)母馬の症状なきウイルス排泄(carrier)、(7)ヒト・機材を介した間接感染。【ウイルス】Group A最頻、Group B/C 報告少、G3・G14血清型主、感染力高、糞便中に大量排出(>10^11 viral particles/g)、低温・乾燥環境で長期生存"
+        risk_factors="【宿主】(1)5-35日齢の月齢(腸管成熟期、母由来抗体減衰時期)、(2)未ワクチン母馬の子馬(初乳経由防御抗体不足)、(3)FPT(IgG<800、感染率・重症化率高)、(4)未熟出生・低体重子馬。【環境】(1)エンデミック繁殖牧場(ロタウイルス常在)、(2)集団飼育(感染圧高、糞口感染)、(3)清潔不良stall・敷藁、(4)消毒不徹底(エンベロープなしで耐性高)、(5)新規子馬導入(免疫naive)、(6)母馬の症状なきウイルス排泄(carrier)、(7)ヒト・機材を介した間接感染。【ウイルス】Group A最頻、Group B/C 報告少、G3・G14血清型主、感染力高、糞便中に大量排出(>10^11 viral particles/g)、低温・乾燥環境で長期生存",
     ),
     Disease(
         "fl_clostridial_enteritis",
@@ -8096,7 +8243,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "clostridial+enteritis+foals",
         treatment_protocol="メトロニダゾール15mg/kg PO TID(Clostridium perfringens/difficile)。大量輸液。血漿(内毒素血症)。フルニキシン低用量(0.25mg/kg IV q8h)。抗毒素(利用可能なら)。予後不良(壊死性腸炎：致死率高い)。C. perfringens type C→β毒素→出血性壊死性腸炎。",
         clinical_signs_detail="(1)<7日齢発症(典型2-5日齢)、(2)急性血様水様下痢(暗赤色〜黒色、悪臭、頻便、粘液血便)、(3)強い疝痛(横臥・転がり・歯軋り・後肢蹴り・呻き)、(4)腹部膨満(腸管壊死・ガス充満)、(5)急速進行性脱水・ショック(蒼白粘膜、CRT延長>3秒、頻脈>140、頻呼吸>50)、(6)発熱(初期38.5-40°C)→急速低体温(<37°C、進行・予後不良)、(7)嗜眠→虚脱→意識消失、(8)哺乳停止、(9)突然死(発症数時間以内、特にC. perfringens type C・無症候性発見)、(10)肛門周囲血便汚染、(11)腹部触診で疼痛・腸管拡張・液体貯留、(12)DIC徴候(粘膜点状出血、出血性下痢)",
-        risk_factors="【宿主】(1)<7日齢の月齢(腸内菌叢未確立期、Clostridium過増殖容易)、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生・低体重・低体温子馬。【病原体素因】(1)C. perfringens type C(β-toxin産生、最重症、エンデミック農場で散発)、(2)C. perfringens type A(土壌・腸内常在、ストレスで増殖)、(3)C. difficile(母馬周産期抗菌薬使用後の子馬で発症、院内感染、市中感染)。【環境】(1)不衛生分娩環境(汚染敷藁・stall)、(2)エンデミック繁殖牧場、(3)集団飼育・密集飼育、(4)消毒不徹底(芽胞耐性高)、(5)母馬糞便汚染、(6)夏季高温多湿(細菌繁殖)。【医原性】(1)母馬の周産期抗菌薬使用(C. difficile・腸内菌叢攪乱)、(2)子馬への早期不必要な抗菌薬投与、(3)経鼻胃管不衛生使用。【遺伝・品種】Thoroughbred・Standardbredでエンデミック農場頻度高い"
+        risk_factors="【宿主】(1)<7日齢の月齢(腸内菌叢未確立期、Clostridium過増殖容易)、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生・低体重・低体温子馬。【病原体素因】(1)C. perfringens type C(β-toxin産生、最重症、エンデミック農場で散発)、(2)C. perfringens type A(土壌・腸内常在、ストレスで増殖)、(3)C. difficile(母馬周産期抗菌薬使用後の子馬で発症、院内感染、市中感染)。【環境】(1)不衛生分娩環境(汚染敷藁・stall)、(2)エンデミック繁殖牧場、(3)集団飼育・密集飼育、(4)消毒不徹底(芽胞耐性高)、(5)母馬糞便汚染、(6)夏季高温多湿(細菌繁殖)。【医原性】(1)母馬の周産期抗菌薬使用(C. difficile・腸内菌叢攪乱)、(2)子馬への早期不必要な抗菌薬投与、(3)経鼻胃管不衛生使用。【遺伝・品種】Thoroughbred・Standardbredでエンデミック農場頻度高い",
     ),
     Disease(
         "fl_flexural_deformity",
@@ -8111,7 +8258,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "flexural+deformity+foals",
         treatment_protocol="先天性(軽度)：oxytetracycline 44mg/kg IV slow(腱弛緩：1-3回)。トーエクステンション装蹄(プラスチックエクステンション)。スプリント(副木)。重症→外科的(下方橈側手根伸筋腱/浅趾屈腱切断)。輸液(OTC腎毒性リスク)。��後は重症度による(軽症：良好、重症：guarded)。",
         clinical_signs_detail="(1)出生時から関節屈曲位(伸展不能または不完全伸展)、(2)球節型：踵浮き、ナックリング(球節背側接地)、立位困難、(3)冠関節型：蹄先のみ接地、踵浮き上がり(toe-walking)、club foot形成、(4)手根型：前肢手根関節屈曲、立位困難・転倒、(5)球節+手根複合型：起立完全不能、横臥位継続、(6)他動運動での関節伸展抵抗(軽度=容易伸展、重度=完全固定)、(7)接地パターン異常・歩様異常、(8)同側または両側性、しばしば左右非対称、(9)X線で関節角度異常(球節<160°)、(10)時に未熟出生関連徴候(絹毛様被毛、floppy ears、骨化不全)併発",
-        risk_factors="【母馬妊娠中要因】(1)胎位異常(横位、後肢前頭位)、(2)胎仔成長空間制限(双子・小型母馬・大型胎仔)、(3)子宮疾患・絨毛膜炎、(4)母馬栄養失調、(5)毒性物質曝露(植物毒・農薬・薬物)、(6)Sudangrass/Sorghum摂取、(7)妊娠後期の運動制限、(8)感染症(EHV-1、Lupinus、locoweed)。【胎仔要因】(1)未熟/過熟出生、(2)低酸素ストレス、(3)子宮内発育遅延(IUGR)、(4)双子、(5)先天性神経筋疾患、(6)遺伝的素因(family clusters報告)。【品種素因】Thoroughbred・Quarter Horse・Standardbred・Warmbloodで多発、近親交配で頻度上昇可能性。【後天性誘発(本項対象外だが鑑別重要)】2-12ヶ月齢発症 — 急速成長(過剰栄養)、慢性疼痛(蹄部障害)、運動不足(fl_flexural_deformity_acquired参照)"
+        risk_factors="【母馬妊娠中要因】(1)胎位異常(横位、後肢前頭位)、(2)胎仔成長空間制限(双子・小型母馬・大型胎仔)、(3)子宮疾患・絨毛膜炎、(4)母馬栄養失調、(5)毒性物質曝露(植物毒・農薬・薬物)、(6)Sudangrass/Sorghum摂取、(7)妊娠後期の運動制限、(8)感染症(EHV-1、Lupinus、locoweed)。【胎仔要因】(1)未熟/過熟出生、(2)低酸素ストレス、(3)子宮内発育遅延(IUGR)、(4)双子、(5)先天性神経筋疾患、(6)遺伝的素因(family clusters報告)。【品種素因】Thoroughbred・Quarter Horse・Standardbred・Warmbloodで多発、近親交配で頻度上昇可能性。【後天性誘発(本項対象外だが鑑別重要)】2-12ヶ月齢発症 — 急速成長(過剰栄養)、慢性疼痛(蹄部障害)、運動不足(fl_flexural_deformity_acquired参照)",
     ),
     # ── Immune (im) 追加 8 ──
     Disease(
@@ -9084,7 +9231,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "perinatal+asphyxia+foals",
         treatment_protocol="Madigan squeeze法(胸部ロープ圧迫20分)。酸素(鼻カヌラ)。輸液(ブドウ糖含有)。ジアゼパム(痙攣)。経管栄養(q2-4h)。IgG確認→血漿輸血。膀胱カテーテル(排尿障害時)。抗菌薬(二次感染予防)。予後良好(80%+回復)。",
         clinical_signs_detail="出生時：(1)心拍数異常(<80/min:中等度、<40/min:重度)、(2)呼吸異常(無呼吸、不規則、努力性、ガスピング)、(3)粘膜色異常(蒼白、チアノーゼ青紫)、(4)反射減弱・消失(鼻孔刺激、瞼反射、肢収縮反射)、(5)筋緊張低下・弛緩(横臥位、四肢動かず)、(6)Apgar様score≤4(重症仮死)、(7)時に羊水胎便着色(MSAF)、(8)体温調節障害(低体温)、(9)後発症状(数時間後)：意識障害、発作、吸啜反射欠如、哺乳意欲喪失(NMS/HIE発症徴候)、(10)代謝性アシドーシス徴候(虚脱、高乳酸)、(11)多臓器障害(腎不全、肝障害、DIC、消化管障害)",
-        risk_factors="【分娩関連】(1)難産(分娩遷延>40分、産道狭窄、骨盤狭小)、(2)急速分娩(<10分、産道圧迫不足)、(3)胎位異常(横位、後肢前頭位)、(4)臍帯巻絡(頸部・体幹・四肢)、(5)胎盤剥離(早期剥離・部分剥離)、(6)双子分娩、(7)帝王切開(麻酔影響)、(8)誘発分娩(オキシトシン過剰)。【母馬要因】(1)胎盤炎(絨毛膜炎、Streptococcus・Nocardia)、(2)母馬発熱・敗血症・疝痛、(3)母馬高齢/初産・栄養不良、(4)PPID/Cushing、(5)Fescue toxicosis(エンドファイト中毒、無乳・延長妊娠)、(6)子宮疾患既往。【胎仔要因】(1)未熟出生(<320日)、(2)過熟出生(>340日)、(3)子宮内発育遅延(IUGR)、(4)双子(共有栄養不足)、(5)先天性奇形・遺伝病。【環境】(1)分娩監視不在(早期介入機会逸失)、(2)NICU設備不足、(3)獣医対応の遅延、(4)スタッフのNRP教育不足"
+        risk_factors="【分娩関連】(1)難産(分娩遷延>40分、産道狭窄、骨盤狭小)、(2)急速分娩(<10分、産道圧迫不足)、(3)胎位異常(横位、後肢前頭位)、(4)臍帯巻絡(頸部・体幹・四肢)、(5)胎盤剥離(早期剥離・部分剥離)、(6)双子分娩、(7)帝王切開(麻酔影響)、(8)誘発分娩(オキシトシン過剰)。【母馬要因】(1)胎盤炎(絨毛膜炎、Streptococcus・Nocardia)、(2)母馬発熱・敗血症・疝痛、(3)母馬高齢/初産・栄養不良、(4)PPID/Cushing、(5)Fescue toxicosis(エンドファイト中毒、無乳・延長妊娠)、(6)子宮疾患既往。【胎仔要因】(1)未熟出生(<320日)、(2)過熟出生(>340日)、(3)子宮内発育遅延(IUGR)、(4)双子(共有栄養不足)、(5)先天性奇形・遺伝病。【環境】(1)分娩監視不在(早期介入機会逸失)、(2)NICU設備不足、(3)獣医対応の遅延、(4)スタッフのNRP教育不足",
     ),
     Disease(
         "fl_lethal_white_syndrome",
@@ -9099,7 +9246,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "lethal+white+overo+syndrome",
         treatment_protocol="根治不可(致死的先天性無神経節巨大結腸)。安楽死。EDNRB遺伝子変異。frame overo × frame overo交配(25%発症)。白色毛被・虹彩色素欠乏。生後数時間で疝痛症状。遺伝子検査で保因者同定必須。",
         clinical_signs_detail="(1)出生時から外見正常で活発、起立・哺乳良好、(2)全身ほぼ完全白色被毛(時に背線・耳基部・頸部に小有色斑)、青色虹彩、薄ピンク色鼻部、(3)生後12-24時間：胎便排泄なし(meconium非排泄)、(4)24-48時間：腹部膨満、進行性疝痛、頻脈、頻呼吸、嘔吐様逆流、X線で多発ガス充満腸管、(5)48-72時間：腸管壊死、敗血症性ショック、低体温、虚脱、死亡。症状発見時は既に手遅れであり、出生時のPCR検査即時依頼+結果判明前の動物福祉的早期安楽死が推奨される。【繁殖管理での発見】Frame Overo×Frame Overo交配の事前PCR検査で罹患リスク予測可能、PCR結果開示で予防可能",
-        risk_factors="【遺伝】両親ともFrame Overo色素パターン(EDNRB Ile118Lys変異heterozygote、N/O)、F×F交配時25%が罹患(homozygote、O/O、Lethal White)。両親保因者で必発リスク。【品種】American Paint Horse(Frame Overo line、保因率94%)、Pinto、Quarter Horse(Cropout、保因率2.7%)、Spanish Mustang、Miniature Horse、Pony of America、まれにThoroughbred系Cropout。【血統】Mitchell Frame Overo line、Rebel Cause line、Sun Frost line等。【繁殖管理失敗要因】(1)両親PCR検査未実施、(2)種馬広告に遺伝子型非表示、(3)繁殖契約に遺伝子型記載なし、(4)Frame Overo×Frame Overoのリスク認識不足、(5)輸入精液・胚の検査未確認、(6)Sabino・Tobiano・Splashed White等他白色変異との誤鑑別。【見た目だけで判別不能】Frame Overoは他白色パターンと表現型重複多く、PCR検査が必須"
+        risk_factors="【遺伝】両親ともFrame Overo色素パターン(EDNRB Ile118Lys変異heterozygote、N/O)、F×F交配時25%が罹患(homozygote、O/O、Lethal White)。両親保因者で必発リスク。【品種】American Paint Horse(Frame Overo line、保因率94%)、Pinto、Quarter Horse(Cropout、保因率2.7%)、Spanish Mustang、Miniature Horse、Pony of America、まれにThoroughbred系Cropout。【血統】Mitchell Frame Overo line、Rebel Cause line、Sun Frost line等。【繁殖管理失敗要因】(1)両親PCR検査未実施、(2)種馬広告に遺伝子型非表示、(3)繁殖契約に遺伝子型記載なし、(4)Frame Overo×Frame Overoのリスク認識不足、(5)輸入精液・胚の検査未確認、(6)Sabino・Tobiano・Splashed White等他白色変異との誤鑑別。【見た目だけで判別不能】Frame Overoは他白色パターンと表現型重複多く、PCR検査が必須",
     ),
     # ── Additional Hoof ──
     Disease(
@@ -9510,7 +9657,11 @@ DISEASE_DATABASE: list[Disease] = [
         "膝関節の半月板の損傷。跛行と関節液貯留。",
         ["limb_lameness_hind", "limb_effusion_stifle", "limb_crepitus"],
         urgency="urgent",
-        recommended_exams=[(1, "超音波検査", "Ultrasonography"), (2, "関節鏡検査", "Arthroscopy"), (3, "MRI検査", "MRI")],
+        recommended_exams=[
+            (1, "超音波検査", "Ultrasonography"),
+            (2, "関節鏡検査", "Arthroscopy"),
+            (3, "MRI検査", "MRI"),
+        ],
         merck_url=_MERCK + "meniscal+injury+horses",
         treatment_protocol="関節鏡下デブリードマン(損傷半月板の部分切除)。NSAIDs(フェニルブタゾン)。関節内HA+コルチコステロイド(術後)。超音波検査で確定診断。MRIでさらに正確な評価。術後リハビリ(段階的運動復帰3-6ヶ月)。予後はguarded(完全な競技復帰は50-60%)。内側半月板が多い。",
         clinical_signs_detail="跛行(前肢/後肢)、関節腫脹・熱感・疼痛、屈曲試験陽性、運動時の硬さ・歩様異常、患肢の挙上・免荷、筋萎縮、触診での圧痛、可動域制限",
@@ -9834,7 +9985,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["resp_cough", "resp_labored_breathing", "resp_nostril_flare", "resp_exercise_intolerance"],
         age_predisposition="senior",
         urgency="urgent",
-        recommended_exams=[(1, "気管支肺胞洗浄液(BAL)", "BAL"), (2, "内視鏡検査", "Endoscopy"), (3, "X線検査", "Radiography")],
+        recommended_exams=[
+            (1, "気管支肺胞洗浄液(BAL)", "BAL"),
+            (2, "内視鏡検査", "Endoscopy"),
+            (3, "X線検査", "Radiography"),
+        ],
         merck_url=_MERCK + "recurrent+airway+obstruction+horses",
         treatment_protocol="環境管理が最重要(低塵：soaked hay/haylage、紙ベッド、放牧)。デキサメタゾン0.04-0.1mg/kg IV/IM(急性増悪)→プレドニゾロン1mg/kg PO→漸減。吸入コルチコステロイド(フルチカゾン/ベクロメタゾン：AeroHippus)。クレンブテロール0.8μg/kg PO BID(気管支拡張)。イプラトロピウム吸入(急性気管支痙攣)。慢性管理(環境+吸入療法)。",
         clinical_signs_detail="安静時呼吸困難(2相性呼気・abdominal lift)、明瞭なヒーブライン(外腹斜筋慢性肥大)、湿性持続咳嗽、粘液膿性鼻汁(両側性、運動・興奮で増加)、聴診で呼気性wheeze・後肺野crackle、鼻翼呼吸、運動不耐性著明、体重減少(慢性化)、発熱なし。BAL好中球>25%、Δpleural pressure >15 cmH2O。冬季舎飼期に増悪、夏季放牧で部分寛解(SPAOPDは逆パターン)",
@@ -9864,10 +10019,13 @@ DISEASE_DATABASE: list[Disease] = [
         "反回神経麻痺による披裂軟骨の麻痺。吸気性喘鳴。左側に好発。",
         ["resp_stridor", "resp_exercise_intolerance", "resp_cough_at_exercise"],
         urgency="routine",
-        recommended_exams=[(1, "内視鏡検査(安静時・運動時)", "Endoscopy (Resting & Dynamic)"), (2, "喉頭超音波", "Laryngeal Ultrasonography")],
+        recommended_exams=[
+            (1, "内視鏡検査(安静時・運動時)", "Endoscopy (Resting & Dynamic)"),
+            (2, "喉頭超音波", "Laryngeal Ultrasonography"),
+        ],
         merck_url=_MERCK + "laryngeal+hemiplegia+horses",
         treatment_protocol="喉頭形成術(tie-back：左披裂軟骨固定)+喉室切除(ventriculectomy)。Grade I-II：経過観察。Grade III：喉室切除単独。Grade IV-V：tie-back。動的内視鏡(treadmill)で確定(standing vs exercising grade)。術後復帰率70%。誤嚥性肺炎リスク5-10%。",
-        clinical_signs_detail="レース・スピードワーク中の特徴的吸気性喘鳴(\"roaring\")、運動不耐性(特に最終1/4でのfade)、最大努力時のhead extension・努力性吸気、競技後の咳嗽。安静時は無症状(高グレードのみ吸気時喘鳴)。重度Grade IV:激運動中の急性呼吸困難・collapse・チアノーゼ。動的内視鏡で運動中のCAD収縮失敗・披裂蓋崩壊を確認。CAD筋萎縮(超音波エコー輝度上昇)",
+        clinical_signs_detail='レース・スピードワーク中の特徴的吸気性喘鳴("roaring")、運動不耐性(特に最終1/4でのfade)、最大努力時のhead extension・努力性吸気、競技後の咳嗽。安静時は無症状(高グレードのみ吸気時喘鳴)。重度Grade IV:激運動中の急性呼吸困難・collapse・チアノーゼ。動的内視鏡で運動中のCAD収縮失敗・披裂蓋崩壊を確認。CAD筋萎縮(超音波エコー輝度上昇)',
         risk_factors="Thoroughbred(レース界発生率6-8%)、Standardbred、Warmblood、Draft品種(体高>16ハンド)、雄馬(去勢馬含む)>雌馬、3-7歳のレース・スポーツ初期発症、左反回神経の解剖学的長距離(大動脈弓巻き付き)、家族集積性(遺伝関与示唆、Boyko 2014)、過去の頸部外傷・手術歴、酸化ストレス・遺伝的アクソノパチー素因",
     ),
     Disease(
@@ -9909,7 +10067,11 @@ DISEASE_DATABASE: list[Disease] = [
         "肺と胸膜の同時感染。長距離輸送後に好発。高熱・呼吸困難。",
         ["resp_labored_breathing", "gen_fever", "resp_bilateral_discharge", "gen_lethargy", "gen_poor_appetite"],
         urgency="emergency",
-        recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸部X線", "Thoracic Radiography"), (3, "胸水穿刺・培養", "Thoracocentesis & Culture")],
+        recommended_exams=[
+            (1, "胸部超音波", "Thoracic Ultrasonography"),
+            (2, "胸部X線", "Thoracic Radiography"),
+            (3, "胸水穿刺・培養", "Thoracocentesis & Culture"),
+        ],
         merck_url=_MERCK + "pleuropneumonia+horses",
         treatment_protocol="広域抗菌薬(ペニシリン+ゲンタマイシン+メトロニダゾール)×4-8週。胸腔ドレナージ(胸腔チューブ留置)。胸腔洗浄(温生食+ヘパリン)。NSAIDs。輸液+栄養補助。超音波で胸水量モニタリング。長期治療(4-8週)。予後fair(早期治療：60-70%生存)。",
         clinical_signs_detail="長距離輸送後3-7日内の発熱(>39°C)・食欲廃絶・元気消失、頻呼吸(>30/分)・呼吸困難、湿性咳嗽、粘液膿性〜膿性鼻汁(両側性)、胸部聴診で両側捻髪音・Dull percussion(胸水貯留)、胸部痛(肘外転姿勢・pleural rub)、下腹部浮腫、頚静脈怒張(心原性除外)、敗血症徴候(lactate>3、SAA>2000、粘膜色変化)、頻脈(>60/分)",
@@ -9924,7 +10086,11 @@ DISEASE_DATABASE: list[Disease] = [
         "細菌感染による肺炎。Streptococcus属が主要原因菌。",
         ["resp_abnormal_lung_sounds", "gen_fever", "resp_bilateral_discharge", "resp_cough", "gen_lethargy"],
         urgency="urgent",
-        recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "気管洗浄液培養", "Transtracheal Wash & Culture"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "胸部超音波", "Thoracic Ultrasonography"),
+            (2, "気管洗浄液培養", "Transtracheal Wash & Culture"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "bacterial+pneumonia+horses",
         treatment_protocol="抗菌薬(培養感受性に基づく)：ペニシリン22,000IU/kg IV q6h+ゲンタマイシン6.6mg/kg IV SID。TMP-SMZ 30mg/kg PO BID(軽症/外来)。気管支拡張薬(クレンブテロール)。NSAIDs。輸液。安静(4-6週)。経気管吸引(TTA)で培養。X線/超音波でフォローアップ。",
         clinical_signs_detail="発熱(>39°C、数日連続)、湿性咳嗽(粘液膿性〜膿性喀痰)、両側性鼻汁(粘液膿性、運動・興奮で増加)、頻呼吸(>20-30/分)、努力性呼吸(中等度)、聴診で局所〜びまん性crackle・wheeze・呼吸音減弱(consolidation部位)、頻脈(>50/分、敗血症)、食欲低下・嗜眠、運動不耐性、慢性化で体重減少。胸膜痛なし(肘外転姿勢なし — pleuropneumoniaとの鑑別点)、敗血症徴候(粘膜変色・lactate上昇)",
@@ -9939,7 +10105,11 @@ DISEASE_DATABASE: list[Disease] = [
         "真菌(Aspergillus等)による肺炎。免疫抑制馬に発生。",
         ["resp_abnormal_lung_sounds", "gen_fever", "gen_weight_loss", "resp_cough"],
         urgency="urgent",
-        recommended_exams=[(1, "胸部X線", "Thoracic Radiography"), (2, "気管洗浄液培養", "Transtracheal Wash & Culture"), (3, "血清学検査", "Serology")],
+        recommended_exams=[
+            (1, "胸部X線", "Thoracic Radiography"),
+            (2, "気管洗浄液培養", "Transtracheal Wash & Culture"),
+            (3, "血清学検査", "Serology"),
+        ],
         merck_url=_MERCK + "fungal+pneumonia+horses",
         treatment_protocol="イトラコナゾール5mg/kg PO BID×4-12週。アムホテリシンB 0.3-0.5mg/kg IV 2日おき(重症：腎毒性モニタリング)。免疫抑制の評価(PPID等)。支持療法(気管支拡張+NSAIDs)。予後不良(免疫不全が基礎)。Aspergillus/Coccidioides。",
         clinical_signs_detail="慢性発熱(間欠的、抗菌薬不応が特徴)、進行性体重減少(数週〜数ヶ月)、慢性湿性咳嗽(粘液膿性〜膿性喀痰)、両側性鼻汁(粘液膿性〜血性)、運動不耐性著明、頻呼吸、聴診で局所〜びまん性crackle・wheeze・呼吸音減弱、嗜眠・食欲低下、Coccidioidomycosisで地理的暴露歴 + 関節痛・皮膚病変併発、Blastomycosisで皮膚潰瘍・骨病変、Cryptococcosisで中枢神経症状(脳膜炎)併発可能",
@@ -9984,7 +10154,10 @@ DISEASE_DATABASE: list[Disease] = [
         "胸腔内の出血貯留。外傷や腫瘍で発生。",
         ["resp_labored_breathing", "gen_tachycardia", "gen_pale_mucosa", "resp_abnormal_lung_sounds"],
         urgency="emergency",
-        recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸水穿刺・検査", "Thoracocentesis & Analysis")],
+        recommended_exams=[
+            (1, "胸部超音波", "Thoracic Ultrasonography"),
+            (2, "胸水穿刺・検査", "Thoracocentesis & Analysis"),
+        ],
         merck_url=_MERCK + "hemothorax+horses",
         treatment_protocol="胸腔穿刺+ドレナージ。輸血(大量出血：PCV<15%)。輸液(循環維持)。原因治療(外傷/肺腫瘍/凝固障害)。胸腔チューブ留置。開胸手術(活動性出血)。凝固パネル評価。",
         clinical_signs_detail="急性発症の重度呼吸困難 + 失血性ショック徴候(粘膜蒼白、CRT延長>3秒、頻脈>80/分、頻呼吸>40/分、低血圧)、両側性または片側性胸部聴診で呼吸音減弱・消失 + 打診でdullness(液体貯留)、外傷例では胸壁皮下血腫・刺傷視認、新生物性では既往の体重減少・腫瘤触知、ガッタラルポーチ起源では鼻出血既往併発、嗜眠〜虚脱(失血進行)、HCT急速低下(<20%)、乳酸上昇(>3)、出血ショックの全身症状",
@@ -9999,7 +10172,11 @@ DISEASE_DATABASE: list[Disease] = [
         "上気道感染の合併症としての副鼻腔炎。",
         ["resp_unilateral_discharge", "dental_facial_swelling", "resp_nasal_discharge"],
         urgency="routine",
-        recommended_exams=[(1, "頭部X線", "Skull Radiography"), (2, "内視鏡検査", "Endoscopy"), (3, "CT検査", "CT Scan")],
+        recommended_exams=[
+            (1, "頭部X線", "Skull Radiography"),
+            (2, "内視鏡検査", "Endoscopy"),
+            (3, "CT検査", "CT Scan"),
+        ],
         merck_url=_MERCK + "sinusitis+horses",
         treatment_protocol="抗菌薬(TMP-SMZ 30mg/kg PO BID×2-4週)。副鼻腔洗浄(トレパネーション→温生食/ポビドンヨード)。カテーテル留置(毎日洗浄)。NSAIDs。X線/CTで病変評価。重症(骨フラップ手術で肉芽/膿除去)。",
         clinical_signs_detail="片側性慢性鼻汁(粘液膿性、無臭〜軽度臭、歯原性の腐敗臭は不在 — 重要鑑別点)、片側性顔面腫脹(軽度、歯原性ほど顕著ではない)、軽度発熱(38.5-39°C)、軽度頸部リンパ節腫大、運動不耐性軽度、頭部叩打音で罹患側dull、慢性化で体重減少・全身衰弱、咳嗽・嚥下違和感は軽度。歯科検査・X線で歯根尖周囲膿瘍を除外確認することが診断に必須",
@@ -10014,7 +10191,11 @@ DISEASE_DATABASE: list[Disease] = [
         "歯根感染に続発する副鼻腔炎。悪臭を伴う片側性鼻汁。",
         ["resp_unilateral_discharge", "dental_facial_swelling", "dental_bad_breath"],
         urgency="urgent",
-        recommended_exams=[(1, "頭部X線", "Skull Radiography"), (2, "CT検査", "CT Scan"), (3, "内視鏡検査", "Endoscopy")],
+        recommended_exams=[
+            (1, "頭部X線", "Skull Radiography"),
+            (2, "CT検査", "CT Scan"),
+            (3, "内視鏡検査", "Endoscopy"),
+        ],
         merck_url=_MERCK + "dental+sinusitis+horses",
         treatment_protocol="原因歯抜歯(口腔or副鼻腔側アプローチ)。副鼻腔洗浄(トレパネーション)。抗菌薬(ペニシリン/TMP-SMZ)×4-6週。CT(歯根膿瘍・副鼻腔病変の関連評価)。骨フラップ(重症)。歯原性副鼻腔炎が馬の二次性副鼻腔炎の最多原因。",
         clinical_signs_detail="片側性慢性鼻汁(粘液膿性、強い腐敗臭が特徴 — 原発性と最重要鑑別点!)、片側性顔面腫脹(罹患歯対応部位、上顎臼歯108-110/208-210相応)、口臭(halitosis)、咀嚼困難・偏咀嚼・落とし食い(quidding)、軽度〜中等度発熱、頸部リンパ節腫大、頭部叩打音で罹患側dull、頬部触診で疼痛、口腔内検査で罹患歯の動揺・破折・歯周ポケット深化(>5 mm)、長期化で体重減少",
@@ -10029,7 +10210,11 @@ DISEASE_DATABASE: list[Disease] = [
         "副鼻腔内の嚢胞形成。顔面変形や鼻汁。",
         ["resp_unilateral_discharge", "dental_facial_swelling"],
         urgency="routine",
-        recommended_exams=[(1, "頭部X線", "Skull Radiography"), (2, "CT検査", "CT Scan"), (3, "内視鏡検査", "Endoscopy")],
+        recommended_exams=[
+            (1, "頭部X線", "Skull Radiography"),
+            (2, "CT検査", "CT Scan"),
+            (3, "内視鏡検査", "Endoscopy"),
+        ],
         merck_url=_MERCK + "sinus+cyst+horses",
         treatment_protocol="外科的切除(骨フラップ：副鼻腔アプローチ)。CT/MRIで範囲評価。嚢胞壁完全除去(再発予防)。術後洗浄。抗菌薬。顔面変形・鼻閉塞・片側鼻汁。予後良好(完全切除時)。",
         clinical_signs_detail="複雑性副鼻腔嚢胞:大型・進行性顔面腫脹(明瞭な骨性硬度・非対称)、眼球突出または下方変位(眼窩圧迫)、両側性鼻孔気流低下、慢性的嚢胞液性鼻汁(粘性・茶褐色・無臭)、咽頭狭窄症状(stridor・嚥下困難)、慢性疼痛(顔面神経刺激)、長期化で体重減少著明・全身衰弱。新生物との鑑別重要(CT・組織学的精査必須)、術後再発例では既往手術瘢痕・癒着所見",
@@ -10044,7 +10229,11 @@ DISEASE_DATABASE: list[Disease] = [
         "食物や液体の誤嚥による肺炎。食道閉塞(チョーク)後に好発。",
         ["resp_abnormal_lung_sounds", "gen_fever", "resp_cough", "resp_labored_breathing", "gen_lethargy"],
         urgency="emergency",
-        recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "胸部X線", "Thoracic Radiography"), (3, "気管洗浄液培養", "Transtracheal Wash & Culture")],
+        recommended_exams=[
+            (1, "胸部超音波", "Thoracic Ultrasonography"),
+            (2, "胸部X線", "Thoracic Radiography"),
+            (3, "気管洗浄液培養", "Transtracheal Wash & Culture"),
+        ],
         merck_url=_MERCK + "aspiration+pneumonia+horses",
         treatment_protocol="広域抗菌薬(ペニシリン+ゲンタマイシン+メトロニダゾール)。気管支拡張薬(クレンブテロール)。NSAIDs。酸素療法(重症)。輸液。頭部挙上(再誤嚥予防)。原因精査(choke/嚥下障害/全身麻酔後/経鼻胃管ミス)。BAL/TTA培養。予後はguarded(壊死性肺炎→不良)。",
         clinical_signs_detail="急性発症の発熱(>39.5°C、しばしば>40°C)、湿性湿性咳嗽(粘液膿性〜膿性〜飼料片混入喀痰、特徴的)、両側性鼻汁(膿性、しばしば腐敗臭、飼料粒子混入)、頻呼吸(>30-40/分)、努力性呼吸、聴診で両側性(腹側優位)crackle・wheeze・呼吸音減弱、頻脈(>60/分、敗血症)、嗜眠・食欲廃絶、運動不耐性、Magdesian 2008の食道閉塞既往(直近24-72時間 — 重要病歴)、嚥下機能不全の併発症状、低酸素症徴候(チアノーゼ・粘膜変色・lactate上昇)。死亡率高(30-60%)",
@@ -10166,7 +10355,11 @@ DISEASE_DATABASE: list[Disease] = [
         "大結腸の360度以上の捻転。激しい疝痛と急速なショック進行。",
         ["dig_colic_signs", "gen_tachycardia", "gen_sweating", "gen_recumbent", "gen_dehydration"],
         urgency="emergency",
-        recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹水穿刺", "Abdominocentesis"), (3, "腹部超音波", "Abdominal Ultrasonography")],
+        recommended_exams=[
+            (1, "直腸検査", "Rectal Examination"),
+            (2, "腹水穿刺", "Abdominocentesis"),
+            (3, "腹部超音波", "Abdominal Ultrasonography"),
+        ],
         merck_url=_MERCK + "large+colon+volvulus+horses",
         treatment_protocol="緊急開腹手術(360°以上)。大結腸の整復→生存性評価(漿膜色・蠕動・壁厚)。壊死時：大結腸切除95%+空腸-小結腸吻合。術前：大量輸液+高張食塩水+フルニキシン。術後蹄葉炎予防(冷却48-72h)。致死率40-60%。繁殖牝馬に好発(分娩前後)。",
         clinical_signs_detail="急性激烈疝痛(鎮痛薬に反応しない重度痛、転がり・蹴り・起臥反復)、頻脈>60-100/min、発汗、CRT延長>4秒、粘膜充血→紫暗色、急速腹部膨満(特に左下腹部)、経鼻胃管で軽度反流、腸蠕動音消失、進行で虚脱・起立不能。発症後4-6時間で腸管壊死進行",
@@ -10212,7 +10405,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["dig_colic_signs", "gen_tachycardia", "dig_gastric_reflux", "gen_dehydration"],
         age_predisposition="senior",
         urgency="emergency",
-        recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "腹水穿刺", "Abdominocentesis")],
+        recommended_exams=[
+            (1, "直腸検査", "Rectal Examination"),
+            (2, "腹部超音波", "Abdominal Ultrasonography"),
+            (3, "腹水穿刺", "Abdominocentesis"),
+        ],
         merck_url=_MERCK + "pedunculated+lipoma+horses",
         treatment_protocol="緊急開腹手術。茎の結紮→絞扼腸管の評価(壊死部切除+吻合)。術前大量輸液+フルニキシン。術後リドカインCRI(イレウス予防)。術後生存率50-70%。高齢馬(>15歳)に好発。体腔内の偶発的(非茎付き)脂肪腫は通常問題なし。",
         clinical_signs_detail="高齢馬(15歳以上、中央値18-20歳)の急性激烈疝痛、薬剤反応不良、持続性頻脈>60-80/min、発汗、経鼻胃管で大量胃液反流(緑色〜黄色、4-10 L)、直腸検査で中央〜右下腹部に拡張小腸ループ触知、腹部超音波で小腸拡張・壁肥厚、腹水血性、乳酸高値、進行で粘膜暗紫・CRT延長・虚脱",
@@ -10257,7 +10454,11 @@ DISEASE_DATABASE: list[Disease] = [
         "食道の拡張と運動機能障害。嚥下困難と誤嚥性肺炎のリスク。",
         ["dig_salivation", "gen_weight_loss", "resp_cough", "gen_poor_appetite"],
         urgency="urgent",
-        recommended_exams=[(1, "内視鏡検査", "Endoscopy"), (2, "バリウム造影", "Barium Swallow"), (3, "胸部X線", "Thoracic Radiography")],
+        recommended_exams=[
+            (1, "内視鏡検査", "Endoscopy"),
+            (2, "バリウム造影", "Barium Swallow"),
+            (3, "胸部X線", "Thoracic Radiography"),
+        ],
         merck_url=_MERCK + "megaesophagus+horses",
         treatment_protocol="根治治療困難(食道運動障害)。軟食/スラリー食の高位給餌。メトクロプラミド0.1mg/kg IV q6h(消化管運動促進)。ベサネコール0.025mg/kg SC。誤嚥性肺炎予防(給餌後30分頭部挙上)。原因精査(迷走神経障害/鉛中毒/筋疾患)。予後不良(進行性)。",
         clinical_signs_detail="慢性嚥下困難・食物残留性鼻排出(食後短時間内)、持続性流涎、重度体重減少、反復性咳嗽(誤嚥性肺炎)、食事時の頭頸部伸展姿勢・苦悶、食事時間著明延長、食欲は残存も摂食できない、胸部X線で誤嚥像・拡張食道陰影、進行で脱水・栄養失調・衰弱。Friesianでは若齢発症",
@@ -10272,7 +10473,11 @@ DISEASE_DATABASE: list[Disease] = [
         "肝臓への脂肪蓄積。肥満ポニー・ロバの絶食時に好発。",
         ["gen_lethargy", "gen_poor_appetite", "gen_icterus", "neuro_behavior_change"],
         urgency="urgent",
-        recommended_exams=[(1, "血液生化学検査", "Serum Biochemistry"), (2, "肝臓超音波", "Hepatic Ultrasonography"), (3, "肝生検", "Liver Biopsy")],
+        recommended_exams=[
+            (1, "血液生化学検査", "Serum Biochemistry"),
+            (2, "肝臓超音波", "Hepatic Ultrasonography"),
+            (3, "肝生検", "Liver Biopsy"),
+        ],
         merck_url=_MERCK + "hepatic+lipidosis+horses",
         treatment_protocol="原因疾患治療(飢餓/ストレス/内分泌異常)。ブドウ糖5-10%持続IV。インスリン0.1-0.4IU/kg IM BID(脂肪分解抑制)。ヘパリン100IU/kg IV(リポ蛋白リパーゼ活性化)。SAMe(肝保護)。経管栄養(食欲不振時)。ポニー/ロバに好発。血清TGモニタリング。",
         clinical_signs_detail="沈鬱・嗜眠・食欲不振(初期、非特異的)、脱水、黄疸(軽度〜重度)、筋振戦、軽度〜中等度疝痛、口臭、糖質代謝異常(低血糖または高血糖)、進行で肝性脳症(沈鬱、行動変化、運動失調、頭押し付け、昏睡)、血清採取で明らかな乳白色(脂血症)、腹部超音波で肝腫大・高エコー化、子馬・ミニチュア・ロバで急速進行、牝馬では泌乳低下",
@@ -10287,7 +10492,11 @@ DISEASE_DATABASE: list[Disease] = [
         "肝不全による中枢神経障害。意識障害・徘徊・圧迫行動。",
         ["neuro_behavior_change", "neuro_ataxia", "gen_icterus", "gen_weight_loss"],
         urgency="emergency",
-        recommended_exams=[(1, "血液生化学検査", "Serum Biochemistry"), (2, "血中アンモニア", "Blood Ammonia"), (3, "肝臓超音波", "Hepatic Ultrasonography")],
+        recommended_exams=[
+            (1, "血液生化学検査", "Serum Biochemistry"),
+            (2, "血中アンモニア", "Blood Ammonia"),
+            (3, "肝臓超音波", "Hepatic Ultrasonography"),
+        ],
         merck_url=_MERCK + "hepatic+encephalopathy+horses",
         treatment_protocol="ラクツロース0.3mL/kg PO BID-TID(腸内アンモニア吸収抑制)。ネオマイシン10-20mg/kg PO BID(ウレアーゼ産生菌抑制)。ブドウ糖10%持続IV。低蛋白食。マンニトール0.5-1g/kg IV(脳浮腫)。ジアゼパム(痙攣)。安全な環境(暗い馬房：刺激軽減)。原因肝疾患の治療。",
         clinical_signs_detail="軽度(Grade 1-2):行動変化(無気力、攻撃性)、食欲変動、沈鬱、軽度運動失調、軽度精神状態変化。中等度(Grade 3):頭押し付け(壁・物体に頭を押し付ける特徴的行動)、円形歩行(circling)、盲目様行動、過度発声、無反応、軽度痙攣、咀嚼困難。重度(Grade 4):昏睡、起立不能、痙攣、瞳孔反射低下、呼吸抑制。併発:黄疸、体重減少、光過敏症、出血傾向、腹水",
@@ -10302,7 +10511,11 @@ DISEASE_DATABASE: list[Disease] = [
         "Clostridium perfringens/difficileによる急性大腸炎。抗菌薬投与後に好発。",
         ["dig_diarrhea", "gen_fever", "gen_tachycardia", "gen_dehydration", "dig_bloody_stool"],
         urgency="emergency",
-        recommended_exams=[(1, "糞便培養・毒素検出", "Fecal Culture & Toxin Assay"), (2, "血液検査", "CBC"), (3, "腹部超音波", "Abdominal Ultrasonography")],
+        recommended_exams=[
+            (1, "糞便培養・毒素検出", "Fecal Culture & Toxin Assay"),
+            (2, "血液検査", "CBC"),
+            (3, "腹部超音波", "Abdominal Ultrasonography"),
+        ],
         merck_url=_MERCK + "clostridial+colitis+horses",
         treatment_protocol="メトロニダゾール15-25mg/kg PO TID(Clostridium difficile/perfringens)。大量輸液(40-80mL/kg/日)。コロイド(ヘタスターチ/血漿)。フルニキシン低用量0.25mg/kg IV q8h。ポリミキシンB 6,000IU/kg IV BID。蹄葉炎予防(冷却)。糞便毒素検査(toxin A/B ELISA)。厳格隔離。",
         clinical_signs_detail="急性発症(抗菌薬投与4-21日後が典型的、C.diff関連)、プロフュース水様〜血様下痢(出血性が特徴、ジェット排泄)、重度腹痛(薬剤反応不良)、高熱(39-41℃)または急速低体温(ショック進行)、頻脈(80-120)、重度脱水、粘膜色暗赤〜紫(エンドトキシン)、CRT>3秒、沈鬱・起立困難、急速体重減少、低アルブミン浮腫、蹄葉炎徴候(発症3-7日)、子馬では急速死亡",
@@ -10347,7 +10560,11 @@ DISEASE_DATABASE: list[Disease] = [
         "十二指腸〜空腸の重度炎症。大量の胃液逆流。蹄葉炎リスク。",
         ["dig_colic_signs", "dig_gastric_reflux", "gen_tachycardia", "gen_dehydration", "gen_fever"],
         urgency="emergency",
-        recommended_exams=[(1, "経鼻胃管(減圧)", "Nasogastric Intubation"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "経鼻胃管(減圧)", "Nasogastric Intubation"),
+            (2, "腹部超音波", "Abdominal Ultrasonography"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "proximal+enteritis+horses",
         treatment_protocol="経鼻胃管持続吸引(4-8L/回、q2-4h)。大量輸液(60-120mL/kg/日)。フルニキシン低用量0.25mg/kg IV q8h。ポリミキシンB 6,000IU/kg IV BID。電解質補正(低Cl/低K/代謝性アルカローシス)。蹄葉炎予防(冷却)。経鼻胃管留置。TPN(>5日間の絶食)。胃逆流>2L/2hで手術との鑑別。3-7日で自然軽快。",
         clinical_signs_detail="急性重度疝痛(数時間以内に発症)、大量胃液反流(>8-20 L/24h、経鼻胃管連続排出、緑色〜褐色、飼料繊維混入)、頻脈60-100/min、発熱(38.5-40.5℃)、脱水、食欲廃絶、腸蠕動音減弱、粘膜充血→進行で紫暗色、低アルブミンによる浮腫、48-72時間以内に蹄葉炎徴候(両前肢跛行・熱感・digital pulse、重要な予後因子)",
@@ -10362,7 +10579,11 @@ DISEASE_DATABASE: list[Disease] = [
         "小腸の腸間膜軸での捻転。激しい疝痛と急速な悪化。",
         ["dig_colic_signs", "gen_tachycardia", "dig_gastric_reflux", "gen_sweating"],
         urgency="emergency",
-        recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "腹水穿刺", "Abdominocentesis")],
+        recommended_exams=[
+            (1, "直腸検査", "Rectal Examination"),
+            (2, "腹部超音波", "Abdominal Ultrasonography"),
+            (3, "腹水穿刺", "Abdominocentesis"),
+        ],
         merck_url=_MERCK + "small+intestinal+volvulus+horses",
         treatment_protocol="緊急開腹手術。捻転整復→腸管生存性評価→壊死部切除+端々吻合。術前大量輸液+高張食塩水。フルニキシン1.1mg/kg IV。術後リドカインCRI。経鼻胃管(胃液吸引)。蹄葉炎予防(冷却)。術後生存率50-70%。癒着予防(カルボキシメチルセルロース)。",
         clinical_signs_detail="発症即時の激烈疝痛(鎮痛薬完全不応、激しい転がり・蹴り・起臥反復)、急速進行する頻脈(発症後30分-1時間で>80)、発汗、経鼻胃管で大量胃液反流(急速発達、6-10 L/2-4時間)、直腸検査で広範な拡張無蠕動性小腸触知(捻転範囲広い)、腹部超音波で小腸全長拡張+重度壁肥厚+腹水、乳酸急上昇、粘膜暗紫・CRT>5秒、数時間でショック・虚脱",
@@ -10377,7 +10598,10 @@ DISEASE_DATABASE: list[Disease] = [
         "胃の急性拡張。穀物過食やイレウスで発生。胃破裂のリスク。",
         ["dig_colic_signs", "gen_tachycardia", "gen_sweating", "dig_bloat"],
         urgency="emergency",
-        recommended_exams=[(1, "経鼻胃管(減圧)", "Nasogastric Intubation"), (2, "腹部超音波", "Abdominal Ultrasonography")],
+        recommended_exams=[
+            (1, "経鼻胃管(減圧)", "Nasogastric Intubation"),
+            (2, "腹部超音波", "Abdominal Ultrasonography"),
+        ],
         merck_url=_MERCK + "gastric+dilatation+horses",
         treatment_protocol="緊急経鼻胃管減圧(最重要：胃破裂予防)。輸液(ショック対応)。フルニキシン1.1mg/kg IV。トロカール穿刺(鼓張：左傍腰部)。原因精査(前方腸炎/イレウス/閉塞)。胃液量>4Lで腸閉塞疑い。胃破裂(心拍>80bpm+疼痛消失)は致死的。",
         clinical_signs_detail="急性重度疝痛(激しい転がり・蹴り・起臥反復)、腹部膨満(特に左上腹部視覚的膨満)、呼吸促迫・浅速呼吸(横隔膜圧迫)、頻脈60-100/min、発汗、経鼻胃管挿入で大量胃液・ガス排出(5-15 L以上、診断確定)、発熱(続発性で原因疾患依存)、粘膜充血→紫暗色、CRT延長、進行で虚脱。胃破裂前兆は突然の疝痛軽減 + 急速ショック(致命的)",
@@ -10410,7 +10634,11 @@ DISEASE_DATABASE: list[Disease] = [
         "真菌による皮膚感染。円形脱毛と痂皮。接触感染。",
         ["skin_hair_loss", "skin_crusting", "skin_lesions"],
         urgency="routine",
-        recommended_exams=[(1, "真菌培養", "Fungal Culture"), (2, "ウッド灯検査", "Wood's Lamp"), (3, "皮膚掻爬", "Skin Scraping")],
+        recommended_exams=[
+            (1, "真菌培養", "Fungal Culture"),
+            (2, "ウッド灯検査", "Wood's Lamp"),
+            (3, "皮膚掻爬", "Skin Scraping"),
+        ],
         merck_url=_MERCK + "dermatophytosis+horses",
         treatment_protocol="局所抗真菌(ミコナゾール/クロトリマゾール：BID×14-21日)。全身(グリセオフルビン10mg/kg PO SID×4-6週)。エンイルコナゾール洗浄。馬具/ブラシ消毒(次亜塩素酸)。隔離(人獣共通感染症)。Trichophyton equinum。自然治癒(6-12週)あり。",
         clinical_signs_detail="脱毛、鱗屑、痂皮形成、掻痒(擦り付け)、蕁麻疹、結節・腫瘤、皮膚潰瘍、浮腫、創傷の治癒不全(過剰肉芽・proud flesh)、光過敏症",
@@ -10639,7 +10867,10 @@ DISEASE_DATABASE: list[Disease] = [
         "角膜上皮の欠損。外傷が最多の原因。",
         ["eye_squinting", "eye_tearing", "eye_cloudiness"],
         urgency="urgent",
-        recommended_exams=[(1, "フルオレセイン染色", "Fluorescein Staining"), (2, "細隙灯検査", "Slit Lamp Examination")],
+        recommended_exams=[
+            (1, "フルオレセイン染色", "Fluorescein Staining"),
+            (2, "細隙灯検査", "Slit Lamp Examination"),
+        ],
         merck_url=_MERCK + "corneal+ulcer+horses",
         treatment_protocol="抗菌点眼(トブラマイシン/オフロキサシン q6h)。アトロピン1%点眼 q8-12h(疼痛)。NSAIDs全身。フルオレセイン染色(進行評価：24-48h毎)。サブパルペブラルカテーテル(非協力的な馬)。治癒：5-7日。コルチコステロイド禁忌(感染悪化/溶解リスク)。",
         clinical_signs_detail="急性発症の流涙、強い羞明・眼瞼痙攣(耳介眼瞼神経ブロック必要)、結膜充血・浮腫、第三眼瞼突出、角膜浮腫(局所的blue halo、直径3-10 mm)、フルオレセイン取り込み陽性(表在性は境界明瞭)、ローズベンガル陽性、反射性ぶどう膜炎徴候(縮瞳・前房フレア・軽度低眼圧)、漿液性～粘液膿性眼脂、神経血管新生(慢性化で角膜輪部から進入)",
@@ -10654,7 +10885,11 @@ DISEASE_DATABASE: list[Disease] = [
         "角膜実質の溶解を伴う深部潰瘍。穿孔のリスク。緊急治療が必要。",
         ["eye_squinting", "eye_tearing", "eye_cloudiness", "eye_discharge"],
         urgency="emergency",
-        recommended_exams=[(1, "フルオレセイン染色", "Fluorescein Staining"), (2, "角膜培養・感受性", "Corneal Culture & Sensitivity"), (3, "細隙灯検査", "Slit Lamp Examination")],
+        recommended_exams=[
+            (1, "フルオレセイン染色", "Fluorescein Staining"),
+            (2, "角膜培養・感受性", "Corneal Culture & Sensitivity"),
+            (3, "細隙灯検査", "Slit Lamp Examination"),
+        ],
         merck_url=_MERCK + "melting+corneal+ulcer+horses",
         treatment_protocol="緊急：セラム点眼 q1-2h(コラゲナーゼ阻害)。抗菌点眼(トブラマイシン+セファゾリン q1-2h)。アトロピン1%。NSAIDs全身。結膜フラップ(descemetocele/穿孔リスク)。角膜移植(大型穿孔)。抗真菌(真菌疑い：ナタマイシン/ボリコナゾール)。サブパルペブラルカテーテル必須。入院管理。",
         clinical_signs_detail="強度の眼瞼痙攣・羞明(耳介眼瞼神経ブロック必要)、多量の粘液膿性眼脂、結膜充血・浮腫、第三眼瞼突出、角膜の白色～灰色融解病変(gelatinous/melting appearance)、デスメ膨隆(descemetocele：中央透明、周囲白色環)、実質浮腫と新血管新生、前房蓄膿(hypopyon)、著明な前房フレア、縮瞳、低眼圧(<10 mmHg)、Seidel陽性の場合は穿孔、急速な進行(24-48時間で穿孔可能)",
@@ -10669,7 +10904,11 @@ DISEASE_DATABASE: list[Disease] = [
         "反復性の前部ぶどう膜炎。失明の主要原因。Leptospira関連。",
         ["eye_squinting", "eye_tearing", "eye_cloudiness", "eye_uveitis_signs"],
         urgency="urgent",
-        recommended_exams=[(1, "眼科検査", "Complete Ophthalmic Examination"), (2, "眼超音波", "Ocular Ultrasonography"), (3, "レプトスピラ検査", "Leptospira Testing")],
+        recommended_exams=[
+            (1, "眼科検査", "Complete Ophthalmic Examination"),
+            (2, "眼超音波", "Ocular Ultrasonography"),
+            (3, "レプトスピラ検査", "Leptospira Testing"),
+        ],
         merck_url=_MERCK + "equine+recurrent+uveitis",
         treatment_protocol="急性発作：アトロピン+NSAIDs全身+局所+コルチコステロイド点眼。再発予防：硝子体内シクロスポリンインプラント(suprachoroidal CsA device：最も効果的)。硝子体切除(vitrectomy)。ドキシサイクリン10mg/kg PO BID(Leptospira)。月桃blindness。Appaloosa/ウォームブラッドに好発。",
         clinical_signs_detail="反復発作歴(月単位・年単位の間隔で再燃)、急性期：強度の羞明・眼瞼痙攣、流涙、結膜充血、角膜浮腫(びまん性青白い)、前房フレア/蓄膿、縮瞳、低眼圧。慢性期：後癒着(festooned・花弁状pupil)、虹彩色素変化(heterochromia)、白内障(後皮質下が早期)、硝子体混濁・変性、butterfly脈絡網膜瘢痕(病理学的特徴)、視神経蒼白、網膜剥離、角膜帯状変性、続発性緑内障、phthisis bulbi(末期、眼球萎縮)、失明、Appaloosa好発",
@@ -10699,7 +10938,10 @@ DISEASE_DATABASE: list[Disease] = [
         "水晶体の混濁。先天性・後天性(ぶどう膜炎続発)。",
         ["eye_cloudiness"],
         urgency="routine",
-        recommended_exams=[(1, "眼科検査", "Complete Ophthalmic Examination"), (2, "眼超音波", "Ocular Ultrasonography")],
+        recommended_exams=[
+            (1, "眼科検査", "Complete Ophthalmic Examination"),
+            (2, "眼超音波", "Ocular Ultrasonography"),
+        ],
         merck_url=_MERCK + "cataract+horses",
         treatment_protocol="超音波水晶体乳化吸引術(phacoemulsification)。全身麻酔。術前ERG+超音波。術後管理(アトロピン+抗菌+NSAID点眼×4-8週)。ERU合併→術後ぶどう膜炎リスク高。視力回復率70-80%。先天性/外傷性/ERU続発性。",
         clinical_signs_detail="白色～灰色の水晶体混濁(部分的または完全)、tapetal reflex低下・消失、視覚障害(障害物回避困難・転倒・接近困難)、menace reflex陰性(成熟白内障)、障害物衝突、恐怖反応増加、子馬で発育遅延・授乳困難、ERU続発例で後癒着・花弁状瞳孔・虹彩色素変化合併、両眼性または片眼性、進行の早さ多彩(先天性静的～加齢性徐々)、疼痛・充血はERU合併以外通常なし、老齢馬で両眼性緩徐進行",
@@ -10730,7 +10972,10 @@ DISEASE_DATABASE: list[Disease] = [
         "結膜の炎症。アレルギー・感染・異物で発生。",
         ["eye_discharge", "eye_swelling", "eye_tearing"],
         urgency="routine",
-        recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "結膜スワブ培養", "Conjunctival Swab Culture")],
+        recommended_exams=[
+            (1, "眼科検査", "Ophthalmic Examination"),
+            (2, "結膜スワブ培養", "Conjunctival Swab Culture"),
+        ],
         merck_url=_MERCK + "conjunctivitis+horses",
         treatment_protocol="原因治療(感染/アレルギー/異物)。抗菌点眼(トブラマイシン q6-8h)。温生食洗浄。フライマスク(ハエ/粉塵)。アレルギー性→抗ヒスタミン/コルチコステロイド点眼。異物→除去+抗菌。",
         clinical_signs_detail="結膜充血(片眼または両眼)、浮腫(chemosis)、漿液性～粘液膿性眼脂、流涙、軽度～中等度の眼瞼痙攣・羞明、第三眼瞼突出、結膜濾胞(子馬・慢性Mycoplasma例)、フルオレセイン陰性(単純結膜炎)、結膜下出血(時に外傷性)、角膜は通常透明、両眼性発症はアレルギー性・感染性・全身疾患示唆、片眼性は外傷・異物・局所感染、夏季発症はアレルギー性・寄生虫性、子馬で濾胞性多発、瞼皮膚炎(慢性流涙)",
@@ -10745,7 +10990,10 @@ DISEASE_DATABASE: list[Disease] = [
         "眼瞼の裂傷。外傷(フック・金属)で発生。早期修復が重要。",
         ["eye_swelling", "eye_discharge", "skin_wound"],
         urgency="emergency",
-        recommended_exams=[(1, "眼科検査", "Complete Ophthalmic Examination"), (2, "フルオレセイン染色", "Fluorescein Staining")],
+        recommended_exams=[
+            (1, "眼科検査", "Complete Ophthalmic Examination"),
+            (2, "フルオレセイン染色", "Fluorescein Staining"),
+        ],
         merck_url=_MERCK + "eyelid+laceration+horses",
         treatment_protocol="緊急縫合(眼瞼は血液供給豊富→壊死組織最小限の切除で1次縫合)。2層縫合(結膜+皮膚)。眼瞼縁のアライメント(正確な合わせ)。デトミジン鎮静+局所麻酔(auriculopalpebral+supraorbital nerve block)。抗菌薬(全身+点眼)。テタヌス予防。NSAIDs。",
         clinical_signs_detail="眼瞼の裂傷(部分層または全層、上下眼瞼・内眼角)、出血(時に多量)、組織のhanging flap・tissue avulsion、眼瞼縁の関与有無で予後が大きく異なる、強い疼痛・眼瞼痙攣、流涙、結膜露出、第三眼瞼突出、続発性角膜潰瘍・露出性角膜炎(高頻度合併)、眼脂、眼球周囲血腫・浮腫、外傷源(フック・釘・金属・木片)、汚染度多様、複合外傷の可能性(眼窩骨折・眼球破裂)、馬の場合急速に組織壊死進行・自己外傷悪化リスク",
@@ -10776,7 +11024,10 @@ DISEASE_DATABASE: list[Disease] = [
         "鼻涙管の閉塞。持続性の流涙。先天性または後天性。",
         ["eye_tearing", "eye_discharge"],
         urgency="routine",
-        recommended_exams=[(1, "鼻涙管洗浄", "Nasolacrimal Duct Flush"), (2, "フルオレセイン通過試験", "Fluorescein Passage Test")],
+        recommended_exams=[
+            (1, "鼻涙管洗浄", "Nasolacrimal Duct Flush"),
+            (2, "フルオレセイン通過試験", "Fluorescein Passage Test"),
+        ],
         merck_url=_MERCK + "nasolacrimal+duct+obstruction+horses",
         treatment_protocol="鼻涙管洗浄(カテーテル：鼻側/眼側から温生食フラッシュ)。鎮静下。抗菌点眼(二次感染)。反復洗浄(再閉塞)。先天性閉鎖→バルーン拡張/外科的開口(dacryocystorhinostomy)。流涙(epiphora)が主徴。",
         clinical_signs_detail="持続性epiphora(片側または両側)、慢性漿液性～粘液膿性眼脂、眼瞼皮膚炎・脱毛(涙液持続曝露によるmoisture dermatitis)、内眼角の流涙染色(tear staining、しばしば茶色)、続発性結膜炎、軽度～中等度の不快感、稀に角膜炎合併、Jones試験陰性(フルオレセイン鼻孔到達なし、診断的)、涙嚢造影で閉塞部位特定、子馬の先天性で生後数週から発症、成馬の後天性は副鼻腔・歯科疾患・腫瘍が原因、片眼性が多い(後天性)、両眼性は先天性に多い、Friesian・Standardbred素因",
@@ -10795,7 +11046,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["neuro_ataxia", "neuro_proprioceptive_deficit", "limb_lameness_hind"],
         age_predisposition="adult",
         urgency="urgent",
-        recommended_exams=[(1, "頚部X線", "Cervical Radiography"), (2, "脊髄造影", "Myelography"), (3, "CT検査", "CT Scan")],
+        recommended_exams=[
+            (1, "頚部X線", "Cervical Radiography"),
+            (2, "脊髄造影", "Myelography"),
+            (3, "CT検査", "CT Scan"),
+        ],
         merck_url=_MERCK + "wobbler+syndrome+horses",
         treatment_protocol="NSAIDs(フェニルブタゾン2.2mg/kg PO BID)。関節突起周囲ステロイド注射(超音波ガイド下)。DMSO 1g/kg IV(急性浮腫)。外科的椎弓切除(dorsal laminectomy)は限定的。加齢性OAによる圧迫(C5-C7が好発)。管理(運動制限+抗炎症)で安定化可能。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10810,7 +11065,11 @@ DISEASE_DATABASE: list[Disease] = [
         "蚊媒介性のウエストナイルウイルスによる脳脊髄炎。",
         ["neuro_ataxia", "gen_fever", "neuro_tremor", "neuro_behavior_change", "gen_recumbent"],
         urgency="emergency",
-        recommended_exams=[(1, "血清学検査(IgM)", "Serology (IgM)"), (2, "脳脊髄液検査", "CSF Analysis"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "血清学検査(IgM)", "Serology (IgM)"),
+            (2, "脳脊髄液検査", "CSF Analysis"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "west+nile+virus+horses",
         treatment_protocol="支持療法。フルニキシン1.1mg/kg IV。DMSO 1g/kg IV(脳浮腫)。ジアゼパム(痙攣)。輸液。起立不能馬のスリング管理。致死率30-40%。後遺症(運動失調)20-30%。予防：不活化ワクチン(年2回)。蚊対策。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10825,7 +11084,10 @@ DISEASE_DATABASE: list[Disease] = [
         "狂犬病ウイルスによる致死的脳炎。行動変化・進行性麻痺。人獣共通感染症。",
         ["neuro_behavior_change", "neuro_aggression", "neuro_ataxia", "neuro_facial_paralysis", "gen_recumbent"],
         urgency="emergency",
-        recommended_exams=[(1, "死後検査(蛍光抗体法)", "Postmortem FA Test"), (2, "臨床診断(除外診断)", "Clinical Diagnosis (Rule-out)")],
+        recommended_exams=[
+            (1, "死後検査(蛍光抗体法)", "Postmortem FA Test"),
+            (2, "臨床診断(除外診断)", "Clinical Diagnosis (Rule-out)"),
+        ],
         merck_url=_MERCK + "rabies+horses",
         treatment_protocol="治療法なし(致死的リッサウイルス)。安楽死。届出義務疾病。人への暴露対応(PEP)。脳FA検査(死後確定)。予防：不活化ワクチン年1回。行動変化(攻撃性/沈うつ)→急速進行→死亡。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10840,7 +11102,11 @@ DISEASE_DATABASE: list[Disease] = [
         "Clostridium botulinum毒素による弛緩性麻痺。腐敗飼料で発生。",
         ["neuro_tremor", "gen_recumbent", "gen_lethargy", "dig_salivation", "neuro_tail_paralysis"],
         urgency="emergency",
-        recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "血清毒素検出", "Serum Toxin Detection"), (3, "飼料検査", "Feed Analysis")],
+        recommended_exams=[
+            (1, "臨床診断", "Clinical Diagnosis"),
+            (2, "血清毒素検出", "Serum Toxin Detection"),
+            (3, "飼料検査", "Feed Analysis"),
+        ],
         merck_url=_MERCK + "botulism+horses",
         treatment_protocol="ボツリヌス抗毒素(早期投与が鍵)。ペニシリンG 22,000IU/kg IV q6h(消化管内増殖型)。経管栄養(嚥下障害)。輸液。起立不能馬のスリング管理。呼吸モニタリング(横隔膜麻痺→人工呼吸)。汚染サイレージ/干し草除去。致死率は型による(成馬:30-90%)。トキソイドワクチン(予防：type B)。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10870,7 +11136,11 @@ DISEASE_DATABASE: list[Disease] = [
         "後肢の過屈曲歩様。特発性またはオーストラリア型(中毒性)。",
         ["limb_lameness_hind", "neuro_ataxia"],
         urgency="routine",
-        recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "筋生検", "Muscle Biopsy"), (3, "EMG検査", "Electromyography")],
+        recommended_exams=[
+            (1, "臨床診断", "Clinical Diagnosis"),
+            (2, "筋生検", "Muscle Biopsy"),
+            (3, "EMG検査", "Electromyography"),
+        ],
         merck_url=_MERCK + "stringhalt+horses",
         treatment_protocol="外科的外側趾伸筋腱切除(myotenectomy)。フェニトイン15mg/kg PO BID。特発性(片側)：手術で80%改善。Australian stringhalt(両側/集団)：原因草(Hypochaeris radicata)除去→自然回復6-18ヶ月。鑑別：shivers/EPM/脊髄疾患。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10915,7 +11185,11 @@ DISEASE_DATABASE: list[Disease] = [
         "三叉神経の過敏による反復性の頭部振り。光・運動で増悪。",
         ["neuro_behavior_change", "neuro_hyperesthesia"],
         urgency="routine",
-        recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "頭部CT", "Head CT"), (3, "内視鏡検査", "Endoscopy")],
+        recommended_exams=[
+            (1, "臨床診断", "Clinical Diagnosis"),
+            (2, "頭部CT", "Head CT"),
+            (3, "内視鏡検査", "Endoscopy"),
+        ],
         merck_url=_MERCK + "headshaking+horses",
         treatment_protocol="シプロヘプタジン0.3mg/kg PO BID。カルバマゼピン4mg/kg PO BID。ガバペンチン5-20mg/kg PO BID(神経障害性疼痛)。ノーズネット(70%改善)。PENS(後篩骨神経電気刺激)。光線性：UVカットマスク。季節性(春夏)が60%。鑑別：歯科/耳/ガターポーチ。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10931,7 +11205,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["body_back_pain", "limb_lameness_fore", "body_stiffness"],
         age_predisposition="senior",
         urgency="routine",
-        recommended_exams=[(1, "頚部X線", "Cervical Radiography"), (2, "超音波ガイド下注射", "Ultrasound-Guided Injection"), (3, "核医学検査", "Nuclear Scintigraphy")],
+        recommended_exams=[
+            (1, "頚部X線", "Cervical Radiography"),
+            (2, "超音波ガイド下注射", "Ultrasound-Guided Injection"),
+            (3, "核医学検査", "Nuclear Scintigraphy"),
+        ],
         merck_url=_MERCK + "cervical+facet+arthropathy+horses",
         treatment_protocol="関節突起周囲コルチコステロイド注射(超音波/X線ガイド下)。NSAIDs(フェニルブタゾン2.2mg/kg PO BID)。DMSO 1g/kg IV(急性浮腫)。物理療法(レーザー/衝撃波)。頸部の柔軟性運動。重症(脊髄圧迫)→外科的減圧(dorsal laminectomy)。C5-C7が好発。加齢性。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10946,7 +11224,11 @@ DISEASE_DATABASE: list[Disease] = [
         "フモニシン(Fusariumカビ毒)による大脳白質壊死。",
         ["neuro_ataxia", "neuro_behavior_change", "neuro_circling", "neuro_seizure"],
         urgency="emergency",
-        recommended_exams=[(1, "血液生化学検査", "Serum Biochemistry"), (2, "飼料検査(フモニシン)", "Feed Analysis (Fumonisin)"), (3, "MRI検査", "MRI")],
+        recommended_exams=[
+            (1, "血液生化学検査", "Serum Biochemistry"),
+            (2, "飼料検査(フモニシン)", "Feed Analysis (Fumonisin)"),
+            (3, "MRI検査", "MRI"),
+        ],
         merck_url=_MERCK + "leukoencephalomalacia+horses",
         treatment_protocol="特異的治療なし(フモニシンB1：馬白質脳軟化症/ELEM)。DMSO 1g/kg IV(脳浮腫)。デキサメタゾン0.1mg/kg IV。フルニキシン。ジアゼパム(痙攣)。汚染トウモロコシ飼料除去。致死率80-100%。フモニシンB1>10ppm。予後非常に不良。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10976,7 +11258,11 @@ DISEASE_DATABASE: list[Disease] = [
         "肩甲上神経の損傷による棘上筋・棘下筋の萎縮。",
         ["body_muscle_atrophy", "limb_lameness_fore", "body_asymmetry"],
         urgency="routine",
-        recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "超音波検査", "Ultrasonography"), (3, "EMG検査", "Electromyography")],
+        recommended_exams=[
+            (1, "臨床診断", "Clinical Diagnosis"),
+            (2, "超音波検査", "Ultrasonography"),
+            (3, "EMG検査", "Electromyography"),
+        ],
         merck_url=_MERCK + "suprascapular+nerve+paralysis+horses",
         treatment_protocol="安静(6-12ヶ月：神経再生)。NSAIDs(急性期疼痛)。肩甲上神経除圧術(外科的：神経周囲の瘢痕組織除去)。電気刺激(筋萎縮防止)。棘上筋・棘下筋の萎縮(Sweeney shoulder)が特徴。外傷(肩への直接打撃/harness injury)。予後fair(部分回復が多い)。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -10991,7 +11277,11 @@ DISEASE_DATABASE: list[Disease] = [
         "橈骨神経の損傷。上腕骨骨折や長時間の横臥で発生。前肢の伸展不能。",
         ["limb_lameness_fore", "body_muscle_atrophy"],
         urgency="urgent",
-        recommended_exams=[(1, "神経学的検査", "Neurological Examination"), (2, "X線検査", "Radiography"), (3, "EMG検査", "Electromyography")],
+        recommended_exams=[
+            (1, "神経学的検査", "Neurological Examination"),
+            (2, "X線検査", "Radiography"),
+            (3, "EMG検査", "Electromyography"),
+        ],
         merck_url=_MERCK + "radial+nerve+paralysis+horses",
         treatment_protocol="原因除去(上腕骨骨折/圧迫麻痺)。NSAIDs+DMSO(浮腫軽減)。スプリント(足の背屈位保護)。電気刺激(筋萎縮防止)。理学療法。全身麻酔後の圧迫麻痺(recumbency neuropathy)が最多原因。回復：軽症(数日-数週)、重症(3-6ヶ月/不可逆)。",
         clinical_signs_detail="運動失調、旋回運動、頭部傾斜、眼振、起立不能・沈鬱、筋痙攣・強直、嚥下困難、顔面神経麻痺、尾や肛門の弛緩、異常行動",
@@ -11055,7 +11345,11 @@ DISEASE_DATABASE: list[Disease] = [
         "心房性または心室性の期外収縮。安静時の不整脈。",
         ["cardio_irregular_rhythm"],
         urgency="routine",
-        recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "ホルター心電図", "Holter Monitoring"), (3, "心臓超音波", "Echocardiography")],
+        recommended_exams=[
+            (1, "心電図", "Electrocardiography"),
+            (2, "ホルター心電図", "Holter Monitoring"),
+            (3, "心臓超音波", "Echocardiography"),
+        ],
         merck_url=_MERCK + "premature+beats+horses",
         treatment_protocol="APCs(心房性期外収縮)：単発・安静時→生理的(経過観察)。VPCs(心室性期外収縮)：原因精査(電解質/心筋炎/弁膜症)。頻発VPC(>1/min)→リドカイン0.25-0.5mg/kg IV。電解質補正(K/Mg)。24hホルターで評価。パフォーマンス低下との関連評価。",
         clinical_signs_detail="聴診で偶発的な不規則な心拍(強い心音＋補償性休止)、多くは無症状で健康診断の偶発所見、頻発例(>30/時)では運動不耐性・パフォーマンス低下、症候性は稀だが失神・虚脱、心室性連続性頻拍への進行リスク、基礎疾患随伴症状(心筋炎の発熱、心不全の浮腫等)",
@@ -11070,7 +11364,11 @@ DISEASE_DATABASE: list[Disease] = [
         "心室起源の持続性頻脈。心筋疾患や電解質異常で発生。突然死のリスク。",
         ["cardio_irregular_rhythm", "gen_tachycardia", "cardio_syncope", "cardio_weak_pulse"],
         urgency="emergency",
-        recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "心臓超音波", "Echocardiography"), (3, "血液生化学検査", "Serum Biochemistry")],
+        recommended_exams=[
+            (1, "心電図", "Electrocardiography"),
+            (2, "心臓超音波", "Echocardiography"),
+            (3, "血液生化学検査", "Serum Biochemistry"),
+        ],
         merck_url=_MERCK + "ventricular+tachycardia+horses",
         treatment_protocol="緊急：リドカイン0.25-0.5mg/kg IVボーラス→CRI 20-50μg/kg/min。アミオダロン5mg/kg IV over 1hr(リドカイン不応)。MgSO4 25-50mg/kg IV(Torsades)。プロカインアミド25-35mg/kg IV slow。原因治療(電解質/心筋炎/毒素)。DC cardioversion(難治性)。予後は原因による。",
         clinical_signs_detail="著明な持続性頻脈(120-280 bpm)、運動不耐性・急性虚脱、意識消失・失神(syncope)、横臥・沈鬱、粘膜蒼白・チアノーゼ、CRT>3秒、弱脈または触知困難、冷感肢、発汗、呼吸促迫、突然死(VF進行)、心不全合併時は浮腫・頸静脈拍動、原因疾患(心筋炎)随伴症状(発熱、食欲不振、運動不耐性)",
@@ -11115,7 +11413,11 @@ DISEASE_DATABASE: list[Disease] = [
         "慢性肺疾患による右心不全。運動不耐性・末梢浮腫。",
         ["cardio_exercise_intolerance", "cardio_peripheral_edema", "cardio_jugular_pulse", "resp_labored_breathing"],
         urgency="urgent",
-        recommended_exams=[(1, "心臓超音波", "Echocardiography"), (2, "心電図", "Electrocardiography"), (3, "胸部X線", "Thoracic Radiography")],
+        recommended_exams=[
+            (1, "心臓超音波", "Echocardiography"),
+            (2, "心電図", "Electrocardiography"),
+            (3, "胸部X線", "Thoracic Radiography"),
+        ],
         merck_url=_MERCK + "cor+pulmonale+horses",
         treatment_protocol="原因肺疾患治療(RAO/EMPF/肺高血圧)。フロセミド1-2mg/kg IV/PO(右心不全)。酸素療法。気管支拡張薬(クレンブテロール：RAO)。コルチコステロイド(RAO)。環境管理(低塵)。予後は原因肺疾患の可逆性による。",
         clinical_signs_detail="運動不耐性(進行性)、労作性呼吸困難・安静時頻呼吸(>20/分)、慢性咳(RAO合併)、喘鳴・気管狭窄音、右心不全徴候(頸静脈怒張・拍動、末梢浮腫：腹下・胸下・四肢、腹水)、チアノーゼ(重症例)、発汗、体重減少、腹式呼吸・ヒービーライン(RAO典型)、二次性TRの収縮期雑音、運動時の虚脱(まれ)",
@@ -11178,7 +11480,11 @@ DISEASE_DATABASE: list[Disease] = [
         "胎盤の感染性炎症。早期流産・弱い子馬の原因。",
         ["repro_vulvar_discharge", "repro_abortion", "repro_udder_changes"],
         urgency="emergency",
-        recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography"), (2, "血液検査(プロジェステロン)", "Progesterone Assay"), (3, "培養", "Culture")],
+        recommended_exams=[
+            (1, "経直腸超音波", "Transrectal Ultrasonography"),
+            (2, "血液検査(プロジェステロン)", "Progesterone Assay"),
+            (3, "培養", "Culture"),
+        ],
         merck_url=_MERCK + "placentitis+horses",
         treatment_protocol="抗菌薬(TMP-SMZ+ペニシリン)。アルトレノジェスト0.044mg/kg PO SID(妊娠維持)。ペントキシフィリン8.5mg/kg PO BID。NSAIDs低用量。超音波CTUP(>8mm異常)。安静。Nocardiosis/Streptococcus関連の上行性感染が多い。",
         clinical_signs_detail="外陰部からの排出物(膿性/血性)、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常(微弱/強直)、後産停滞、外陰部の損傷、行動変化(落ち着きのなさ)",
@@ -11223,7 +11529,11 @@ DISEASE_DATABASE: list[Disease] = [
         "子宮内膜の炎症。不妊の主要原因。交配後・慢性型がある。",
         ["repro_vulvar_discharge", "repro_irregular_cycle"],
         urgency="routine",
-        recommended_exams=[(1, "子宮スワブ培養", "Uterine Swab Culture"), (2, "経直腸超音波", "Transrectal Ultrasonography"), (3, "子宮生検", "Uterine Biopsy")],
+        recommended_exams=[
+            (1, "子宮スワブ培養", "Uterine Swab Culture"),
+            (2, "経直腸超音波", "Transrectal Ultrasonography"),
+            (3, "子宮生検", "Uterine Biopsy"),
+        ],
         merck_url=_MERCK + "endometritis+horses",
         treatment_protocol="子宮洗浄(温生食1-2L→排出→繰り返し)。オキシトシン10-20IU IV/IM(子宮収縮)。子宮内抗菌薬(培養感受性に基づく)。クロプロステノール(PGF2α)。Caslick手術(空気吸引予防)。慢性→子宮内ケトプロフェン/DMSO。susceptible mare management(交配→洗浄→オキシトシンのタイミング管理)。",
         clinical_signs_detail="外陰部からの排出物(膿性/血性)、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常(微弱/強直)、後産停滞、外陰部の損傷、行動変化(落ち着きのなさ)",
@@ -11238,7 +11548,10 @@ DISEASE_DATABASE: list[Disease] = [
         "子宮内の膿貯留。頚管閉鎖を伴う。",
         ["repro_vulvar_discharge", "gen_lethargy", "gen_fever"],
         urgency="urgent",
-        recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography"), (2, "子宮スワブ培養", "Uterine Swab Culture")],
+        recommended_exams=[
+            (1, "経直腸超音波", "Transrectal Ultrasonography"),
+            (2, "子宮スワブ培養", "Uterine Swab Culture"),
+        ],
         merck_url=_MERCK + "pyometra+horses",
         treatment_protocol="子宮頸管拡張(エストロジェン前処置)。PGF2α(クロプロステノール250μg IM)で子宮収縮+排出。子宮洗浄(大量温生食：繰り返し)。抗菌薬(全身+子宮内)。原因精査(子宮頸管閉鎖/fibrosis)。繁殖予後はguarded(子宮内膜損傷の程度による)。",
         clinical_signs_detail="外陰部からの排出物(膿性/血性)、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常(微弱/強直)、後産停滞、外陰部の損傷、行動変化(落ち着きのなさ)",
@@ -11284,7 +11597,11 @@ DISEASE_DATABASE: list[Disease] = [
         "精巣の陰嚢内への下降不全。片側または両側。行動問題の原因。",
         ["repro_testicular_swelling", "neuro_aggression"],
         urgency="routine",
-        recommended_exams=[(1, "経直腸超音波", "Transrectal Ultrasonography"), (2, "ホルモン検査(テストステロン)", "Testosterone Assay"), (3, "腹腔鏡検査", "Laparoscopy")],
+        recommended_exams=[
+            (1, "経直腸超音波", "Transrectal Ultrasonography"),
+            (2, "ホルモン検査(テストステロン)", "Testosterone Assay"),
+            (3, "腹腔鏡検査", "Laparoscopy"),
+        ],
         merck_url=_MERCK + "cryptorchidism+horses",
         treatment_protocol="腹腔鏡下停留精巣摘出(第一選択)。開腹手術(鼠径/傍正中)。hCG刺激試験(1,000-10,000IU IV→60-120分後テストステロン測定)でprevious gelding vs cryptorchidの鑑別。片側→対側は正常精巣去勢も同時。全身麻酔。",
         clinical_signs_detail="外陰部からの排出物(膿性/血性)、乳房腫脹・乳汁漏出、妊娠馬の早産徴候、陣痛異常(微弱/強直)、後産停滞、外陰部の損傷、行動変化(落ち着きのなさ)",
@@ -11407,7 +11724,11 @@ DISEASE_DATABASE: list[Disease] = [
         "S. equi subsp. equiによる上気道感染。顎下リンパ節膿瘍形成。",
         ["gen_fever", "gen_swollen_lymph", "resp_bilateral_discharge", "gen_poor_appetite", "gen_lethargy"],
         urgency="urgent",
-        recommended_exams=[(1, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"), (2, "超音波検査(リンパ節)", "Lymph Node Ultrasonography"), (3, "鼻腔洗浄培養", "Nasopharyngeal Wash Culture")],
+        recommended_exams=[
+            (1, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"),
+            (2, "超音波検査(リンパ節)", "Lymph Node Ultrasonography"),
+            (3, "鼻腔洗浄培養", "Nasopharyngeal Wash Culture"),
+        ],
         merck_url=_MERCK + "strangles+horses",
         treatment_protocol="膿瘍成熟前：ペニシリンG 22,000IU/kg IM BID×10日(Streptococcus equi)。膿瘍成熟後：切開排膿(温湿布で成熟促進)→ドレナージ。キャリアの同定(PCR/培養：鼻咽頭/ガターポーチ洗浄)。隔離+消毒。合併症(purpura/bastard strangles)に注意。ワクチン(弱毒生/経鼻)。",
         clinical_signs_detail="急性発熱(39.5-41°C)、食欲廃絶、嚥下困難、頭頸部の強制姿勢、両側性漿液性→粘膿性鼻汁、顎下リンパ節・咽後リンパ節の腫脹→波動形成→自壊・排膿(2-4週後)、頸部・咽喉浮腫(重症例で呼吸困難)、嗄声・喘鳴(気道圧迫)、哺乳拒否(幼駒)",
@@ -11422,7 +11743,11 @@ DISEASE_DATABASE: list[Disease] = [
         "腺疫の転移型。腹腔内・肺・脳などにリンパ節膿瘍が形成。",
         ["gen_fever", "gen_weight_loss", "gen_lethargy", "gen_poor_appetite"],
         urgency="emergency",
-        recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasonography"), (2, "血液検査", "CBC"), (3, "血清学検査", "Serology")],
+        recommended_exams=[
+            (1, "腹部超音波", "Abdominal Ultrasonography"),
+            (2, "血液検査", "CBC"),
+            (3, "血清学検査", "Serology"),
+        ],
         merck_url=_MERCK + "bastard+strangles+horses",
         treatment_protocol="長期ペニシリン治療(4-6週)＋メトロニダゾール。体腔内膿瘍の超音波ガイド下ドレナージ。免疫介在性合併症(purpura hemorrhagica)にデキサメタゾン0.1mg/kg IV。予後guarded-poor(内臓膿瘍の位置による)。原因：初感染後の血行性播種。",
         clinical_signs_detail="慢性消耗性経過、体重減少、持続性不規則発熱、沈鬱・食欲不振、腹痛(腹腔内膿瘍)、呼吸困難(肺膿瘍)、神経症状(脳・脊椎膿瘍)、筋壊死(筋肉内膿瘍)、腹囲膨満(腹腔内膿瘍)、四肢浮腫(リンパ管炎合併)、免疫介在性血管炎(パープルプレイグ)の皮膚出血性病変",
@@ -11468,7 +11793,11 @@ DISEASE_DATABASE: list[Disease] = [
         "EHV-1の神経型。血管炎による脊髄障害。後躯麻痺。",
         ["gen_fever", "neuro_ataxia", "neuro_proprioceptive_deficit", "uri_dysuria", "gen_recumbent"],
         urgency="emergency",
-        recommended_exams=[(1, "血液PCR", "Blood PCR"), (2, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"), (3, "脳脊髄液検査", "CSF Analysis")],
+        recommended_exams=[
+            (1, "血液PCR", "Blood PCR"),
+            (2, "鼻腔スワブPCR", "Nasopharyngeal Swab PCR"),
+            (3, "脳脊髄液検査", "CSF Analysis"),
+        ],
         merck_url=_MERCK + "equine+herpesvirus+myeloencephalopathy",
         treatment_protocol="バレシクロビル30mg/kg PO q8h(初期48時間以内に開始)。DMSO 1g/kg IV q24h×3-5日。デキサメタゾン0.1mg/kg IV(急性期短期)。起立不能馬：スリング+膀胱カテーテル+深い敷料。輸液。厳格隔離(ウイルス排泄2-3週)。致死率30-50%。",
         clinical_signs_detail="発熱→2-10日後に急性神経症状発現が典型経過、後躯運動失調(Grade 1-4)、後肢衰弱・起立困難(Grade 3-4)、膀胱麻痺・尿閉(特徴的：会陰部感覚麻痺)、肛門括約筋弛緩、鼻汁・咳嗽(先行呼吸器症状)、沈鬱、体幹・頸部の低感覚、前肢も障害される重症例、集団発生(1農場で複数頭が数日以内に発症)",
@@ -11483,7 +11812,11 @@ DISEASE_DATABASE: list[Disease] = [
         "Rhodococcus equiの成馬での日和見感染。免疫抑制馬に発生。",
         ["gen_fever", "gen_weight_loss", "resp_cough", "gen_lethargy"],
         urgency="urgent",
-        recommended_exams=[(1, "気管洗浄液培養", "Transtracheal Wash Culture"), (2, "胸部超音波", "Thoracic Ultrasonography"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "気管洗浄液培養", "Transtracheal Wash Culture"),
+            (2, "胸部超音波", "Thoracic Ultrasonography"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "rhodococcus+equi+horses",
         treatment_protocol="成馬のR. equi感染は免疫不全を示唆。アジスロマイシン10mg/kg PO q48h+リファンピシン5mg/kg PO BID×6-12週。免疫状態の評価(PPID等)。肺膿瘍の超音波/X線モニタリング。排膿(可能なら)。予後は免疫状態に依存。",
         clinical_signs_detail="慢性消耗性・不規則発熱、著明な体重減少、沈鬱・食欲低下、湿性咳嗽(肺膿瘍形成)、呼吸困難・頻呼吸、腸間膜リンパ節膿瘍による腹痛・下痢(腸管型)、骨髄炎・関節炎による跛行、免疫抑制の証拠(高齢・クッシング病・長期コルチコステロイド投与歴)",
@@ -11498,7 +11831,11 @@ DISEASE_DATABASE: list[Disease] = [
         "Leptospira属菌による全身感染。腎炎・ぶどう膜炎・流産の原因。",
         ["gen_fever", "gen_icterus", "eye_uveitis_signs", "repro_abortion", "uri_discolored_urine"],
         urgency="urgent",
-        recommended_exams=[(1, "血清学検査(MAT)", "Microscopic Agglutination Test"), (2, "尿PCR", "Urine PCR"), (3, "血液生化学", "Serum Biochemistry")],
+        recommended_exams=[
+            (1, "血清学検査(MAT)", "Microscopic Agglutination Test"),
+            (2, "尿PCR", "Urine PCR"),
+            (3, "血液生化学", "Serum Biochemistry"),
+        ],
         merck_url=_MERCK + "leptospirosis+horses",
         treatment_protocol="ペニシリンG 22,000IU/kg IV q6h×7-14日(急性期)。ドキシサイクリン10mg/kg PO BID×21日(腎キャリア排除)。輸液(腎保護)。NSAIDs。周期性眼炎(ERU)への進展に注意(抗Leptospira抗体が房水中に蓄積)。妊娠馬：流産リスク。",
         clinical_signs_detail="急性全身型：高熱、黄疸(溶血性)、血色素尿、点状出血、沈鬱、食欲廃絶、急性腎不全(乏尿~無尿)。眼型(ERU)：急性/再発性ブドウ膜炎(縮瞳・流涙・霧視・角膜混濁)、慢性ブドウ膜炎→失明。繁殖型：妊娠後期の流産(突然死産・ミイラ化)。重症型：ショック・DIC・多臓器不全",
@@ -11513,7 +11850,11 @@ DISEASE_DATABASE: list[Disease] = [
         "C. pseudotuberculosisによるリンパ管炎・膿瘍形成。肢の腫脹。",
         ["limb_filling", "gen_fever", "body_swelling", "gen_swollen_lymph"],
         urgency="urgent",
-        recommended_exams=[(1, "膿汁培養", "Abscess Culture"), (2, "血清学検査", "Serology"), (3, "超音波検査", "Ultrasonography")],
+        recommended_exams=[
+            (1, "膿汁培養", "Abscess Culture"),
+            (2, "血清学検査", "Serology"),
+            (3, "超音波検査", "Ultrasonography"),
+        ],
         merck_url=_MERCK + "ulcerative+lymphangitis+horses",
         treatment_protocol="潰瘍性リンパ管炎。局所創傷管理(洗浄+排膿)。TMP-SMZ 30mg/kg PO BID×3-4週(Corynebacterium pseudotuberculosis)。ペニシリン(代替)。リンパ管の腫脹にDMSO外用+包帯。隔離。予後fair(長期治療が必要)。",
         clinical_signs_detail="一側性後肢(球節上部~下腿部)の急性腫脹・熱感・疼痛、皮下を走行するリンパ管の硬結(ビーズ様)、リンパ管に沿った複数の膿瘍結節形成、自壊・潰瘍化(膿性排出物)、著明な跛行、微熱~中等度発熱、慢性化すると下肢の象皮病様変形",
@@ -11528,7 +11869,11 @@ DISEASE_DATABASE: list[Disease] = [
         "C. pseudotuberculosisの内臓型。肝臓・肺に膿瘍形成。",
         ["gen_fever", "gen_weight_loss", "gen_lethargy", "gen_poor_appetite"],
         urgency="urgent",
-        recommended_exams=[(1, "腹部超音波", "Abdominal Ultrasonography"), (2, "血清学検査(SHI)", "Synergistic Hemolysis Inhibition Test"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "腹部超音波", "Abdominal Ultrasonography"),
+            (2, "血清学検査(SHI)", "Synergistic Hemolysis Inhibition Test"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "pigeon+fever+internal+horses",
         treatment_protocol="長期抗菌薬(TMP-SMZ 30mg/kg PO BID×4-8週)。超音波ガイド下膿瘍ドレナージ(腹腔内/胸腔内)。輸液+栄養補助。血清学的モニタリング(synergistic hemolysis inhibition test)。予後guarded(内部膿瘍は死亡率30-40%)。",
         clinical_signs_detail="体重減少(最重要所見、数週~数ヶ月で著明)、慢性不規則発熱、沈鬱・食欲不振、腹痛・繰り返す疝痛(腹腔内膿瘍)、呼吸困難(肺型)、筋肉内膿瘍による跛行・疼痛、体表型膿瘍を欠く(内臓型のみ)、腹部超音波での内臓膿瘍が診断根拠",
@@ -11558,7 +11903,11 @@ DISEASE_DATABASE: list[Disease] = [
         "マダニ媒介性のアナプラズマ感染。発熱・下肢浮腫・運動失調。",
         ["gen_fever", "limb_filling", "gen_lethargy", "gen_icterus", "gen_poor_appetite"],
         urgency="urgent",
-        recommended_exams=[(1, "血液塗抹(封入体)", "Blood Smear (Morulae)"), (2, "血液PCR", "Blood PCR"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "血液塗抹(封入体)", "Blood Smear (Morulae)"),
+            (2, "血液PCR", "Blood PCR"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "equine+anaplasmosis",
         treatment_protocol="オキシテトラサイクリン7mg/kg IV SID×5-7日(特効薬)。NSAIDs(発熱・四肢浮腫)。輸液(脱水時)。48時間以内に解熱(治療反応で診断的)。マダニ対策(環境管理+忌避剤)。予後良好。",
         clinical_signs_detail="突発的発熱(39-41°C)、沈鬱・食欲不振、前下肢浮腫(肢端浮腫が最も特徴的)、黄疸(溶血性・肝炎性)、運動失調(後肢主体)、点状出血・皮膚出血(血小板減少)、頻脈、血液塗抹でのmorulae(好中球内封入体)確認で確定診断",
@@ -11573,7 +11922,11 @@ DISEASE_DATABASE: list[Disease] = [
         "Babesia caballi / Theileria equiによるマダニ媒介性血液寄生虫症。",
         ["gen_fever", "gen_icterus", "gen_pale_mucosa", "uri_discolored_urine", "gen_lethargy"],
         urgency="urgent",
-        recommended_exams=[(1, "血液塗抹", "Blood Smear"), (2, "血液PCR", "Blood PCR"), (3, "血清学検査(cELISA)", "cELISA Serology")],
+        recommended_exams=[
+            (1, "血液塗抹", "Blood Smear"),
+            (2, "血液PCR", "Blood PCR"),
+            (3, "血清学検査(cELISA)", "cELISA Serology"),
+        ],
         merck_url=_MERCK + "equine+piroplasmosis",
         treatment_protocol="イミドカルブジプロピオナート(B. caballi：2.4mg/kg IM×2回、T. equi：4mg/kg IM×4回)。アトロピン前投薬。輸血(重症貧血)。輸液。T.equiキャリア馬は国際移動制限。届出義務疾病。マダニ対策。",
         clinical_signs_detail="高熱(40-41°C)、溶血性貧血(青白い~黄疸粘膜)、血色素尿(ヘモグロビン尿症、特徴的：赤褐色~暗褐色尿)、重篤な沈鬱・食欲廃絶、頻脈・頻呼吸、浮腫(腹側・四肢)、脾腫(触診・超音波)、腹痛、急性腎不全(重症例)、血液塗抹での赤血球内原虫確認が確定診断",
@@ -11588,7 +11941,11 @@ DISEASE_DATABASE: list[Disease] = [
         "Burkholderia malleiによる法定伝染病。結節・潰瘍・鼻汁。人獣共通感染症。",
         ["resp_nasal_discharge", "gen_fever", "gen_swollen_lymph", "skin_lesions", "gen_weight_loss"],
         urgency="emergency",
-        recommended_exams=[(1, "マレイン反応", "Mallein Test"), (2, "血清学検査(CF)", "Complement Fixation Test"), (3, "培養", "Culture")],
+        recommended_exams=[
+            (1, "マレイン反応", "Mallein Test"),
+            (2, "血清学検査(CF)", "Complement Fixation Test"),
+            (3, "培養", "Culture"),
+        ],
         merck_url=_MERCK + "glanders+horses",
         treatment_protocol="安楽死(Burkholderia mallei：エンドポイント疾病)。治療不可。厳格な隔離・消毒・汚染物焼却。マレイン検査(皮内/点眼)。届出義務(第一種法定伝染病)。人獣共通感染症(高致死率)。",
         clinical_signs_detail="肺型(急性)：高熱・重度呼吸困難・粘膿性鼻汁(両側)・肺結節形成。鼻腔型(慢性)：鼻腔粘膜の特徴的潰瘍・結節→星状瘢痕形成・血膿性鼻汁・膿性鼻汁。皮膚型(ファーシー)：皮膚リンパ管に沿ったビーズ状結節・潰瘍(ファーシーと呼ばれる)。混合型が多い。顎下・頸部リンパ節腫脹・化膿",
@@ -11603,7 +11960,11 @@ DISEASE_DATABASE: list[Disease] = [
         "馬動脈炎ウイルスによる全身性血管炎。浮腫・発熱・流産。",
         ["gen_fever", "limb_filling", "body_ventral_edema", "repro_abortion", "resp_nasal_discharge"],
         urgency="urgent",
-        recommended_exams=[(1, "血液PCR", "Blood PCR"), (2, "ペア血清", "Paired Serology"), (3, "ウイルス分離", "Virus Isolation")],
+        recommended_exams=[
+            (1, "血液PCR", "Blood PCR"),
+            (2, "ペア血清", "Paired Serology"),
+            (3, "ウイルス分離", "Virus Isolation"),
+        ],
         merck_url=_MERCK + "equine+viral+arteritis",
         treatment_protocol="支持療法。NSAIDs(発熱・浮腫)。フロセミド1mg/kg IV(肺水腫/四肢浮腫)。安静。種雄馬の精液中ウイルス排泄モニタリング。隔離21日。ワクチン(弱毒生：未妊娠馬のみ)。届出義務疾病。",
         clinical_signs_detail="発熱(39-41°C)、沈鬱、食欲不振、鼻汁(漿液性)、眼結膜炎・眼周囲浮腫(特徴的)、四肢浮腫(全肢)、陰嚢・陰茎浮腫(雄馬)、腹側皮下浮腫、皮膚蕁麻疹様発疹、繁殖牝馬の流産(妊娠後期、突然)、呼吸器症状(幼駒で重篤:肺炎)、軽症例は不顕性感染",
@@ -11637,7 +11998,11 @@ DISEASE_DATABASE: list[Disease] = [
         "インスリン調節障害・肥満・蹄葉炎リスク。イージーキーパーに好発。",
         ["body_fat_deposits", "body_neck_crest", "hoof_laminitis_signs", "gen_polydipsia"],
         urgency="routine",
-        recommended_exams=[(1, "インスリン動態検査", "Dynamic Insulin Test"), (2, "血糖値", "Blood Glucose"), (3, "ACTH検査", "ACTH Assay")],
+        recommended_exams=[
+            (1, "インスリン動態検査", "Dynamic Insulin Test"),
+            (2, "血糖値", "Blood Glucose"),
+            (3, "ACTH検査", "ACTH Assay"),
+        ],
         merck_url=_MERCK + "equine+metabolic+syndrome",
         treatment_protocol="食餌管理(NSC<10%：soaked hay/低糖草)。運動プログラム(漸増)。体重減量(BCS 5/9)。ベラグリフロジン0.3mg/kg PO SID(SGLT2阻害薬：FDA承認2022)。蹄葉炎予防・管理(冷却/装蹄)。インスリン動態検査(OGT/OST)。放牧制限(高NSC時期：春/秋の午後)。クレスティネックスコア評価。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -11699,7 +12064,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["body_muscle_fasciculation", "gen_sweating", "neuro_tremor", "gen_recumbent"],
         common_breeds="クォーターホース",
         urgency="emergency",
-        recommended_exams=[(1, "血中カリウム", "Serum Potassium"), (2, "遺伝子検査", "Genetic Testing"), (3, "心電図", "Electrocardiography")],
+        recommended_exams=[
+            (1, "血中カリウム", "Serum Potassium"),
+            (2, "遺伝子検査", "Genetic Testing"),
+            (3, "心電図", "Electrocardiography"),
+        ],
         merck_url=_MERCK + "hyperkalemic+periodic+paralysis+horses",
         treatment_protocol="急性発作：ブドウ糖50% 60-120mL IV+インスリン0.1-0.2IU/kg IV。NaHCO3 1mEq/kg IV。Ca gluconate(心保護)。慢性管理：アセタゾラミド3mg/kg PO BID。食餌(K<1%DM)。アルファルファ制限。穀物ベース飼料。規則的運動。SCN4A変異(QH/AQHA)。遺伝子検査必須。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -11715,7 +12084,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["body_stiffness", "body_muscle_fasciculation", "body_dark_urine", "gen_sweating"],
         common_breeds="クォーターホース、ドラフト種",
         urgency="urgent",
-        recommended_exams=[(1, "血中CK・AST", "Serum CK & AST"), (2, "遺伝子検査(GYS1)", "Genetic Testing (GYS1)"), (3, "筋生検", "Muscle Biopsy")],
+        recommended_exams=[
+            (1, "血中CK・AST", "Serum CK & AST"),
+            (2, "遺伝子検査(GYS1)", "Genetic Testing (GYS1)"),
+            (3, "筋生検", "Muscle Biopsy"),
+        ],
         merck_url=_MERCK + "polysaccharide+storage+myopathy+horses",
         treatment_protocol="食餌(NSC<10%、脂肪20-25%カロリー：コーン油/ライスブラン)。規則的運動(毎日20分以上)。ターンアウト(24h放牧が理想)。急性期：安静+輸液(腎保護)+フルニキシン+アセプロマジン。GYS1遺伝子検査(PSSM1)。筋生検(PAS染色)。ドラフト種/QH/ウォームブラッドに好発。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -11730,7 +12103,11 @@ DISEASE_DATABASE: list[Disease] = [
         "運動後の筋肉壊死。筋硬直・ミオグロビン尿。多因子性。",
         ["body_stiffness", "body_dark_urine", "gen_sweating", "gen_tachycardia", "body_muscle_fasciculation"],
         urgency="urgent",
-        recommended_exams=[(1, "血中CK・AST", "Serum CK & AST"), (2, "尿検査(ミオグロビン)", "Urinalysis (Myoglobin)"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "血中CK・AST", "Serum CK & AST"),
+            (2, "尿検査(ミオグロビン)", "Urinalysis (Myoglobin)"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "exertional+rhabdomyolysis+horses",
         treatment_protocol="急性：安静(絶対移動禁止)。大量輸液(4-6mL/kg/hr)。フルニキシン1.1mg/kg IV。アセプロマジン0.02-0.04mg/kg IV(筋血流改善)。ダントロレン2-4mg/kg PO。DMSO 1g/kg IV。CK/AST/尿ミオグロビンモニタリング。慢性管理：高脂肪・低NSC食+規則的運動+VitE+Se。原因鑑別(PSSM/RER/MFM)。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -11745,7 +12122,10 @@ DISEASE_DATABASE: list[Disease] = [
         "甲状腺ホルモンの低下。真の原発性は稀。子馬では甲状腺腫を伴うことがある。",
         ["body_poor_coat", "gen_lethargy", "gen_weight_loss"],
         urgency="routine",
-        recommended_exams=[(1, "甲状腺ホルモン(T3, T4)", "Thyroid Hormones (T3, T4)"), (2, "TSH刺激試験", "TSH Stimulation Test")],
+        recommended_exams=[
+            (1, "甲状腺ホルモン(T3, T4)", "Thyroid Hormones (T3, T4)"),
+            (2, "TSH刺激試験", "TSH Stimulation Test"),
+        ],
         merck_url=_MERCK + "hypothyroidism+horses",
         treatment_protocol="レボチロキシン20-48μg/kg PO SID。真の甲状腺機能低下は稀(新生子馬を除く)。多くはEMS/PPID/非甲状腺疾患症候群(NTI)による二次性低T4。原疾患治療が優先。新生子馬の先天性甲状腺機能低下→レボチロキシン+支持療法。T4モニタリング。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -11760,7 +12140,10 @@ DISEASE_DATABASE: list[Disease] = [
         "コルチゾール過剰分泌。PPID関連または外因性(ステロイド投与)。",
         ["body_muscle_atrophy", "gen_polydipsia", "gen_polyuria", "hoof_laminitis_signs"],
         urgency="routine",
-        recommended_exams=[(1, "血中ACTH", "Basal ACTH"), (2, "デキサメサゾン抑制試験", "Dexamethasone Suppression Test")],
+        recommended_exams=[
+            (1, "血中ACTH", "Basal ACTH"),
+            (2, "デキサメサゾン抑制試験", "Dexamethasone Suppression Test"),
+        ],
         merck_url=_MERCK + "hyperadrenocorticism+horses",
         treatment_protocol="ペルゴリド(PPID治療と同義)。馬の副腎皮質機能亢進はほぼ全てPPID(下垂体中葉腫大)による。ACTH測定+TRH刺激試験で確定。蹄葉炎管理。多毛症。免疫低下管理。ペルゴリド0.002mg/kg PO SID→用量漸増。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -11776,7 +12159,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["body_stiffness", "body_muscle_atrophy", "gen_recumbent", "body_dark_urine"],
         age_predisposition="young",
         urgency="urgent",
-        recommended_exams=[(1, "血中CK・AST", "Serum CK & AST"), (2, "血中ビタミンE", "Serum Vitamin E"), (3, "全血セレン", "Whole Blood Selenium")],
+        recommended_exams=[
+            (1, "血中CK・AST", "Serum CK & AST"),
+            (2, "血中ビタミンE", "Serum Vitamin E"),
+            (3, "全血セレン", "Whole Blood Selenium"),
+        ],
         merck_url=_MERCK + "nutritional+myodegeneration+horses",
         treatment_protocol="セレン+ビタミンE注射(BoSe/MuSe：0.055mL/kg IM)。ビタミンE 10,000IU/日PO。輸液(ミオグロビン尿→腎保護)。NSAIDs(疼痛)。白筋症(White Muscle Disease)。子馬に好発(数日-数ヶ月齢)。Se欠乏地域。CK/AST上昇。心筋型は予後不良。骨格筋型は支持療法で回復可能。",
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
@@ -11840,7 +12227,11 @@ DISEASE_DATABASE: list[Disease] = [
         "歯根周囲の膿瘍。顔面腫脹・副鼻腔炎・瘻管形成。",
         ["dental_facial_swelling", "dental_bad_breath", "resp_unilateral_discharge"],
         urgency="urgent",
-        recommended_exams=[(1, "歯科X線", "Dental Radiography"), (2, "頭部CT", "Head CT"), (3, "口腔検査", "Oral Examination")],
+        recommended_exams=[
+            (1, "歯科X線", "Dental Radiography"),
+            (2, "頭部CT", "Head CT"),
+            (3, "口腔検査", "Oral Examination"),
+        ],
         merck_url=_MERCK + "tooth+root+abscess+horses",
         treatment_protocol="抜歯(口腔側/副鼻腔フラップ/repulsion)。抗菌薬(ペニシリン+メトロニダゾール×2-4週)。副鼻腔洗浄(上顎)。排膿管理(下顎フィスチュラ)。CT/X線で根尖病変確認。術後フォローアップ(空洞の食物詰まり管理)。",
         clinical_signs_detail="咀嚼困難(キッディング)、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁(片側性)、顔面腫脹",
@@ -11887,7 +12278,11 @@ DISEASE_DATABASE: list[Disease] = [
         "歯の異常な萌出位置。食物の詰まりと歯周病のリスク。",
         ["dental_quidding", "dental_facial_swelling"],
         urgency="routine",
-        recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "歯科X線", "Dental Radiography"), (3, "頭部CT", "Head CT")],
+        recommended_exams=[
+            (1, "口腔検査", "Oral Examination"),
+            (2, "歯科X線", "Dental Radiography"),
+            (3, "頭部CT", "Head CT"),
+        ],
         merck_url=_MERCK + "displaced+tooth+horses",
         treatment_protocol="抜歯(変位/不正萌出歯)。フローティング(対合歯管理)。抗菌薬(感染合併)。NSAIDs。X線/CTで位置確認。隣接歯への影響評価。定期モニタリング。",
         clinical_signs_detail="咀嚼困難(キッディング)、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁(片側性)、顔面腫脹",
@@ -11932,7 +12327,11 @@ DISEASE_DATABASE: list[Disease] = [
         "歯周組織の炎症・破壊。歯間離開に続発することが多い。",
         ["dental_bad_breath", "dental_quidding", "gen_weight_loss", "gen_poor_appetite"],
         urgency="routine",
-        recommended_exams=[(1, "口腔検査", "Oral Examination"), (2, "歯科X線", "Dental Radiography"), (3, "歯周ポケット探査", "Periodontal Probing")],
+        recommended_exams=[
+            (1, "口腔検査", "Oral Examination"),
+            (2, "歯科X線", "Dental Radiography"),
+            (3, "歯周ポケット探査", "Periodontal Probing"),
+        ],
         merck_url=_MERCK + "periodontal+disease+horses",
         treatment_protocol="歯周ポケット洗浄(クロルヘキシジン)。ジアステマ管理(拡大→自浄作用)。食物残渣除去。局所/全身抗菌薬。フローティング(不正咬合修正)。進行→抜歯。定期的歯科ケア(3-6ヶ月毎)。口臭・排膿・片側咀嚼が主徴。",
         clinical_signs_detail="咀嚼困難(キッディング)、流涎、口臭、採食速度低下・選り好み、体重減少、頭部の傾斜摂食、鼻汁(片側性)、顔面腫脹",
@@ -11950,7 +12349,11 @@ DISEASE_DATABASE: list[Disease] = [
         "牛用飼料に含まれるイオノフォアの誤食。心筋壊死。馬は極めて感受性が高い。",
         ["gen_tachycardia", "cardio_irregular_rhythm", "gen_sweating", "gen_recumbent", "gen_poor_appetite"],
         urgency="emergency",
-        recommended_exams=[(1, "血中CK・cTnI", "Serum CK & Cardiac Troponin I"), (2, "心電図", "Electrocardiography"), (3, "心臓超音波", "Echocardiography")],
+        recommended_exams=[
+            (1, "血中CK・cTnI", "Serum CK & Cardiac Troponin I"),
+            (2, "心電図", "Electrocardiography"),
+            (3, "心臓超音波", "Echocardiography"),
+        ],
         merck_url=_MERCK + "ionophore+toxicosis+horses",
         treatment_protocol="即時摂取中止。特異的解毒剤なし。ビタミンE(10,000IU/日)+セレン筋注(心筋保護)。活性炭。心電図持続モニタリング。輸液。安静(心臓負荷軽減)。心筋壊死は不可逆(予後不良)。モネンシン/ラサロシド。馬は最も感受性高い動物種。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -11965,7 +12368,10 @@ DISEASE_DATABASE: list[Disease] = [
         "有機リン系殺虫剤による中毒。コリンエステラーゼ阻害。流涎・筋攣縮。",
         ["dig_salivation", "body_muscle_fasciculation", "neuro_tremor", "dig_diarrhea", "gen_sweating"],
         urgency="emergency",
-        recommended_exams=[(1, "血中コリンエステラーゼ活性", "Serum Cholinesterase Activity"), (2, "毒物分析", "Toxicological Analysis")],
+        recommended_exams=[
+            (1, "血中コリンエステラーゼ活性", "Serum Cholinesterase Activity"),
+            (2, "毒物分析", "Toxicological Analysis"),
+        ],
         merck_url=_MERCK + "organophosphate+toxicosis+horses",
         treatment_protocol="アトロピン0.1-0.2mg/kg IV(ムスカリン症状)。2-PAM 20mg/kg IV slow(24h以内)。ジアゼパム0.05-0.2mg/kg IV(痙攣/不安)。皮膚曝露：石鹸水で洗浄。呼吸管理。汚染除去。長期曝露(有機リン遅発性神経障害OPIDN)は不可逆。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -11980,7 +12386,11 @@ DISEASE_DATABASE: list[Disease] = [
         "キョウチクトウの強心配糖体による中毒。不整脈・突然死。",
         ["cardio_irregular_rhythm", "gen_tachycardia", "dig_colic_signs", "dig_diarrhea"],
         urgency="emergency",
-        recommended_exams=[(1, "心電図", "Electrocardiography"), (2, "血液生化学", "Serum Biochemistry"), (3, "毒物分析", "Toxicological Analysis")],
+        recommended_exams=[
+            (1, "心電図", "Electrocardiography"),
+            (2, "血液生化学", "Serum Biochemistry"),
+            (3, "毒物分析", "Toxicological Analysis"),
+        ],
         merck_url=_MERCK + "oleander+toxicosis+horses",
         treatment_protocol="活性炭(緊急投与)。アトロピン(徐脈)。リドカイン(VT)。Digoxin-Fab抗体(利用可能なら)。心電図持続モニタリング。輸液+電解質管理(特にK+)。予後不良。全植物部位(葉/花/茎/根)が有毒。煙の吸入でも中毒。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -11995,7 +12405,10 @@ DISEASE_DATABASE: list[Disease] = [
         "ドングリ・オーク樹皮のタンニンによる腎障害・消化器障害。",
         ["dig_colic_signs", "dig_constipation", "uri_discolored_urine", "gen_dehydration"],
         urgency="urgent",
-        recommended_exams=[(1, "血液生化学(BUN, Cr)", "Serum Biochemistry (BUN, Creatinine)"), (2, "尿検査", "Urinalysis")],
+        recommended_exams=[
+            (1, "血液生化学(BUN, Cr)", "Serum Biochemistry (BUN, Creatinine)"),
+            (2, "尿検査", "Urinalysis"),
+        ],
         merck_url=_MERCK + "oak+toxicosis+horses",
         treatment_protocol="タンニン(オーク)腎毒性。輸液療法(4-6mL/kg/hr：腎保護)。活性炭+流動パラフィン(消化管除染)。フルニキシン(疼痛・腹痛)。腎機能モニタリング(BUN/Cre/尿検査)。放牧管理(ドングリ・オーク葉へのアクセス制限)。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -12025,7 +12438,11 @@ DISEASE_DATABASE: list[Disease] = [
         "ソルガム・スーダングラスのシアン化合物による脊髄・膀胱障害。",
         ["neuro_ataxia", "uri_dysuria", "uri_stranguria", "neuro_tail_paralysis"],
         urgency="urgent",
-        recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "膀胱超音波", "Bladder Ultrasonography"), (3, "飼料分析", "Feed Analysis")],
+        recommended_exams=[
+            (1, "臨床診断", "Clinical Diagnosis"),
+            (2, "膀胱超音波", "Bladder Ultrasonography"),
+            (3, "飼料分析", "Feed Analysis"),
+        ],
         merck_url=_MERCK + "sorghum+cystitis+horses",
         treatment_protocol="曝露源除去(ソルガム/スーダングラス牧草)。膀胱管理：カテーテル排尿(膀胱弛緩時)、抗菌薬(膀胱炎)。神経障害(後肢失調)：部分回復可能(数ヶ月)。NSAIDs。ビタミンB群。シアン配糖体→中枢/末梢神経障害。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -12040,7 +12457,10 @@ DISEASE_DATABASE: list[Disease] = [
         "硝酸塩の過剰摂取によるメトヘモグロビン血症。チアノーゼ・呼吸困難。",
         ["gen_tachypnea", "gen_pale_mucosa", "gen_tachycardia", "resp_labored_breathing"],
         urgency="emergency",
-        recommended_exams=[(1, "血中メトヘモグロビン", "Blood Methemoglobin"), (2, "飼料・水質分析", "Feed & Water Analysis")],
+        recommended_exams=[
+            (1, "血中メトヘモグロビン", "Blood Methemoglobin"),
+            (2, "飼料・水質分析", "Feed & Water Analysis"),
+        ],
         merck_url=_MERCK + "nitrate+toxicosis+horses",
         treatment_protocol="メチレンブルー4-15mg/kg IV(1%溶液、メトHb還元)。酸素吸入(鼻カヌラ)。輸液療法。原因飼料除去。硝酸塩含量モニタリング(>1%DM：危険)。妊娠馬の流産リスク。予後はメトHb濃度による(<30%：予後良好)。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -12055,7 +12475,11 @@ DISEASE_DATABASE: list[Disease] = [
         "Aspergillus属のカビ毒(アフラトキシン)による肝障害。汚染穀物で発生。",
         ["gen_icterus", "gen_weight_loss", "gen_poor_appetite", "gen_lethargy"],
         urgency="urgent",
-        recommended_exams=[(1, "血液生化学(肝酵素)", "Serum Biochemistry (Liver Enzymes)"), (2, "飼料検査", "Feed Analysis"), (3, "肝生検", "Liver Biopsy")],
+        recommended_exams=[
+            (1, "血液生化学(肝酵素)", "Serum Biochemistry (Liver Enzymes)"),
+            (2, "飼料検査", "Feed Analysis"),
+            (3, "肝生検", "Liver Biopsy"),
+        ],
         merck_url=_MERCK + "aflatoxin+toxicosis+horses",
         treatment_protocol="汚染飼料除去。活性炭/ベントナイト(吸着剤)。肝支持(SAMe/シリマリン/ビタミンE)。輸液+ブドウ糖(肝機能支持)。慢性免疫抑制に注意。飼料品質管理。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -12070,7 +12494,11 @@ DISEASE_DATABASE: list[Disease] = [
         "NSAIDの過量投与による消化管潰瘍・腎障害。右背側結腸炎。",
         ["dig_colic_signs", "dig_diarrhea", "uri_discolored_urine", "gen_poor_appetite", "body_ventral_edema"],
         urgency="urgent",
-        recommended_exams=[(1, "血液生化学", "Serum Biochemistry"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "胃内視鏡", "Gastroscopy")],
+        recommended_exams=[
+            (1, "血液生化学", "Serum Biochemistry"),
+            (2, "腹部超音波", "Abdominal Ultrasonography"),
+            (3, "胃内視鏡", "Gastroscopy"),
+        ],
         merck_url=_MERCK + "nsaid+toxicosis+horses",
         treatment_protocol="原因薬剤中止。オメプラゾール4mg/kg PO SID(胃酸抑制)。スクラルファート12mg/kg PO TID(粘膜保護)。ミソプロストール5μg/kg PO TID(PG補充)。右背結腸炎(RDC)：輸液+コロイド+メトロニダゾール15mg/kg PO TID。腎保護輸液(4mL/kg/hr)。蛋白漏出性腸症に血漿輸血。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -12085,7 +12513,11 @@ DISEASE_DATABASE: list[Disease] = [
         "アミノグリコシド系抗菌薬による急性導尿細管壊死。",
         ["uri_discolored_urine", "gen_dehydration", "gen_poor_appetite", "gen_lethargy"],
         urgency="urgent",
-        recommended_exams=[(1, "血液生化学(BUN, Cr)", "Serum Biochemistry (BUN, Creatinine)"), (2, "尿検査", "Urinalysis"), (3, "GGT:クレアチニン比", "Urine GGT:Creatinine Ratio")],
+        recommended_exams=[
+            (1, "血液生化学(BUN, Cr)", "Serum Biochemistry (BUN, Creatinine)"),
+            (2, "尿検査", "Urinalysis"),
+            (3, "GGT:クレアチニン比", "Urine GGT:Creatinine Ratio"),
+        ],
         merck_url=_MERCK + "aminoglycoside+nephrotoxicity+horses",
         treatment_protocol="薬剤即時中止。輸液療法(4-6mL/kg/hr：腎灌流維持)。フロセミド1mg/kg IV(乏尿時)。腎機能モニタリング(Cre/BUN/GGT尿)。電解質補正(低K/低Mg)。SID投与(QD dosing)で毒性リスク低減。トラフ濃度<2μg/mLに維持。",
         clinical_signs_detail="急性：流涎、疝痛症状、下痢、震顫、痙攣、虚脱。慢性：体重減少、被毛粗剛、光過敏症、黄疸、沈鬱、運動失調、肝/腎機能障害の徴候",
@@ -12104,11 +12536,15 @@ DISEASE_DATABASE: list[Disease] = [
         ["foal_jaundice", "foal_lethargy", "gen_pale_mucosa", "gen_tachycardia", "uri_discolored_urine"],
         age_predisposition="young",
         urgency="emergency",
-        recommended_exams=[(1, "血液検査(PCV)", "CBC (PCV)"), (2, "血液型判定", "Blood Typing"), (3, "ジャウンディスフォールアガー試験", "Jaundiced Foal Agglutination Test")],
+        recommended_exams=[
+            (1, "血液検査(PCV)", "CBC (PCV)"),
+            (2, "血液型判定", "Blood Typing"),
+            (3, "ジャウンディスフォールアガー試験", "Jaundiced Foal Agglutination Test"),
+        ],
         merck_url=_MERCK + "neonatal+isoerythrolysis+horses",
         treatment_protocol="母馬初乳禁乳(24-36h)。代替初乳(別母馬/凍結)。輸血(PCV<12%：洗浄赤血球)。輸液(腎保護)。酸素。黄疸・貧血・血色素尿。予防：分娩前母馬Aa/Qa抗体検査。JCテスト。",
         clinical_signs_detail="(1)出生時は外見正常で活発、起立・哺乳良好、(2)生後12-24時間：進行性沈鬱・嗜眠・哺乳量減少、(3)生後24-48時間：黄疸(舌・強膜・歯肉・耳介の濃黄色着色)、暗赤色〜茶褐色尿(ヘモグロビン尿、特徴的)、(4)粘膜蒼白(初期は気付きにくく進行性)、(5)頻脈(>120/min)・頻呼吸(>40/min)、(6)毛細管再充満時間延長(>3秒)、(7)体温正常または軽度低下、(8)虚脱・横臥(重症例)、(9)時に発作・神経症状(高ビリルビン血症性脳症)、(10)母馬は正常(無症状)、(11)PCV急速低下(<15%重症)、(12)スライド標本で自家凝集像、(13)JFA test 1:16以上陽性",
-        risk_factors="【母馬要因】(1)経産母馬(前回妊娠で胎仔赤血球抗原に感作)、(2)前回NI発症母馬(以後の妊娠でリスク高)、(3)母馬輸血歴(他血液型抗原に感作)、(4)Thoroughbred・Standardbred(Aa・Qa血液型不適合多い)、(5)Mule妊娠(雄ロバ×雌馬、Donkey Factor抗原で約10%発症リスク)、(6)母馬同種輸血経験(同一血液型確認失敗)。【血液型不適合】(1)Aa血液型：父Aa(+)/母Aa(-)、(2)Qa血液型：父Qa(+)/母Qa(-)、(3)Db、Ua等他抗原。【予防失敗要因】(1)妊娠最終月の抗体スクリーニング未実施、(2)抗体陽性母馬での母乳継続、(3)Mule妊娠での無検査、(4)分娩監視不在(初乳摂取制限機会逸失)、(5)前回NI歴の記録不在"
+        risk_factors="【母馬要因】(1)経産母馬(前回妊娠で胎仔赤血球抗原に感作)、(2)前回NI発症母馬(以後の妊娠でリスク高)、(3)母馬輸血歴(他血液型抗原に感作)、(4)Thoroughbred・Standardbred(Aa・Qa血液型不適合多い)、(5)Mule妊娠(雄ロバ×雌馬、Donkey Factor抗原で約10%発症リスク)、(6)母馬同種輸血経験(同一血液型確認失敗)。【血液型不適合】(1)Aa血液型：父Aa(+)/母Aa(-)、(2)Qa血液型：父Qa(+)/母Qa(-)、(3)Db、Ua等他抗原。【予防失敗要因】(1)妊娠最終月の抗体スクリーニング未実施、(2)抗体陽性母馬での母乳継続、(3)Mule妊娠での無検査、(4)分娩監視不在(初乳摂取制限機会逸失)、(5)前回NI歴の記録不在",
     ),
     Disease(
         "fl_ruptured_bladder_foal",
@@ -12120,11 +12556,15 @@ DISEASE_DATABASE: list[Disease] = [
         ["foal_ruptured_bladder", "body_abdominal_distension", "foal_lethargy", "gen_dehydration"],
         age_predisposition="young",
         urgency="emergency",
-        recommended_exams=[(1, "腹水穿刺(クレアチニン比)", "Abdominocentesis (Creatinine Ratio)"), (2, "腹部超音波", "Abdominal Ultrasonography"), (3, "血液生化学", "Serum Biochemistry")],
+        recommended_exams=[
+            (1, "腹水穿刺(クレアチニン比)", "Abdominocentesis (Creatinine Ratio)"),
+            (2, "腹部超音波", "Abdominal Ultrasonography"),
+            (3, "血液生化学", "Serum Biochemistry"),
+        ],
         merck_url=_MERCK + "ruptured+bladder+foal",
         treatment_protocol="電解質補正(高K→ブドウ糖+インスリン/NaHCO3)。腹腔穿刺ド��ナージ(術前)。外科的修復(膀胱縫合)。輸液。術後尿カテーテル3-5日。予後良好(85-90%)。雄子馬に好発(2-7日齢)。腹部膨満+排尿困難。",
         clinical_signs_detail="(1)生後2-5日齢発症(時に7日まで、>1週齢は感染性敗血症性が多い)、(2)雄子馬の発症が大半(雄:雌=4-5:1)、(3)最初は健常で外見、ある日進行性悪化、(4)進行性腹部膨満(腹側膨らみ、波動感)、(5)排尿頻度減少・尿線細い・尿失禁、(6)嗜眠・元気消失・哺乳量低下→最終的に哺乳停止、(7)頻呼吸(横隔膜圧排)、頻脈(初期)から徐脈(高K血症進行で)、(8)CRT延長・蒼白〜チアノーゼ粘膜、(9)震え・筋脱力(高K血症)、心調律異常(致死的不整脈)、(10)虚脱・横臥・痙攣(終末期)、(11)排便減少(便秘)、(12)Cr/Na/K異常+腹水Cr/血清Cr>2:1で確定診断",
-        risk_factors="【性別】雄子馬>>雌子馬(尿道長・解剖学的素因、4-5:1の発症比)。【品種】Thoroughbred・Standardbred(品種素因または管理関連バイアス)。【分娩】難産・分娩遷延、急速分娩で腹圧急上昇、満杯膀胱状態での産道圧迫、双子分娩、難産後の腹圧過剰。【先天性】膀胱頂部発達異常・尿膜管嚢腫・尿膜管未閉鎖。【感染性(後発例、>7日齢)】敗血症性尿道炎・敗血症性膀胱炎による組織壊死性破裂、不衛生分娩環境、FPT併発で感染リスク。【医原性(まれ)】不適切な腹圧操作・カテーテル挿入損傷、尿道カテーテル留置時の損傷"
+        risk_factors="【性別】雄子馬>>雌子馬(尿道長・解剖学的素因、4-5:1の発症比)。【品種】Thoroughbred・Standardbred(品種素因または管理関連バイアス)。【分娩】難産・分娩遷延、急速分娩で腹圧急上昇、満杯膀胱状態での産道圧迫、双子分娩、難産後の腹圧過剰。【先天性】膀胱頂部発達異常・尿膜管嚢腫・尿膜管未閉鎖。【感染性(後発例、>7日齢)】敗血症性尿道炎・敗血症性膀胱炎による組織壊死性破裂、不衛生分娩環境、FPT併発で感染リスク。【医原性(まれ)】不適切な腹圧操作・カテーテル挿入損傷、尿道カテーテル留置時の損傷",
     ),
     Disease(
         "fl_angular_limb_deformity",
@@ -12140,7 +12580,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "angular+limb+deformity+foal",
         treatment_protocol="軽度(内反/外反<10°)：管理装蹄(ヒールエクステンション/ラテラルトリム)。グルーオンシュー。中等度→経骨膜ストリッピング(periosteal stripping：成長促進)。重症→一時的骨橋固定(transphyseal screw：成長抑制)。手術タイミング：2-4週齢(手根)、4-8週齢(足根)。成長板閉鎖前に介入必須。",
         clinical_signs_detail="(1)出生時または生後数週間-数ヶ月で発見、(2)立位背側方向から評価で四肢遠位部の内側または外側偏位、(3)Carpus valgus(手根外反、最頻、前肢、肢遠位部が外側偏位)、(4)Carpus varus(手根内反、まれ、内側偏位)、(5)Tarsus valgus/varus(後肢)、(6)Fetlock valgus/varus(球節)、(7)蹄の偏摩耗パターン(内側または外側)、(8)歩様異常(進行例、跛行・偏位歩様)、(9)関節可動域は通常正常、(10)関節弛緩合併可能性(関節支持靭帯緩み)、(11)未熟出生例で立方骨未熟・carpal valgus進行、(12)X線で関節角度異常(>5°軽度、>15°重度)、(13)その他症状なし(活発、哺乳良好、体重増加正常)",
-        risk_factors="【先天性】(1)未熟出生(立方骨・骨端骨未熟)、(2)双子妊娠(子宮内スペース制限・胎位異常)、(3)子宮内発育遅延(IUGR)、(4)関節弛緩(joint laxity、関節支持靭帯緩み)、(5)遺伝的素因(family clusters、レース系統で頻度高い)、(6)分娩時外傷。【後天性】(1)急速成長期の不均衡負荷(成長板成長不均衡)、(2)過剰栄養(高蛋白・高エネルギー、急速成長促進)、(3)Ca:P比異常・微量元素不足、(4)外傷・反復ストレス(運動過剰)、(5)蹄ケア不足(偏摩耗放置)、(6)感染性骨成長板障害(まれ)。【品種素因】Thoroughbred・Quarter Horse・Warmblood・Standardbred・Pony breedsで多発、レース系統で頻度高い。【飼養管理】(1)定期的蹄ケア不在、(2)成長期の栄養管理不適切、(3)早期発見・早期介入機会逸失、(4)過密放牧(運動不足→筋骨不均衡発達)"
+        risk_factors="【先天性】(1)未熟出生(立方骨・骨端骨未熟)、(2)双子妊娠(子宮内スペース制限・胎位異常)、(3)子宮内発育遅延(IUGR)、(4)関節弛緩(joint laxity、関節支持靭帯緩み)、(5)遺伝的素因(family clusters、レース系統で頻度高い)、(6)分娩時外傷。【後天性】(1)急速成長期の不均衡負荷(成長板成長不均衡)、(2)過剰栄養(高蛋白・高エネルギー、急速成長促進)、(3)Ca:P比異常・微量元素不足、(4)外傷・反復ストレス(運動過剰)、(5)蹄ケア不足(偏摩耗放置)、(6)感染性骨成長板障害(まれ)。【品種素因】Thoroughbred・Quarter Horse・Warmblood・Standardbred・Pony breedsで多発、レース系統で頻度高い。【飼養管理】(1)定期的蹄ケア不在、(2)成長期の栄養管理不適切、(3)早期発見・早期介入機会逸失、(4)過密放牧(運動不足→筋骨不均衡発達)",
     ),
     Disease(
         "fl_flexural_deformity_acquired",
@@ -12156,7 +12596,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "flexural+deformity+foal",
         treatment_protocol="【焦点：後天性屈腱拘縮】(本項は2-12ヶ月齢に発症する後天性。出生時からの先天性はfl_flexural_deformity参照)。【疾患概要】Acquired Flexural Deformity(後天性屈腱拘縮)は2-12ヶ月齢の若齢馬に発生する関節屈曲拘縮で、急速成長・栄養過剰・慢性疼痛・運動不足等が原因。深屈腱(DDFT)・浅屈腱(SDFT)・副指屈腱の機能的短縮で発症。Thoroughbred・Quarter Horse・Warmbloodのレース・ショーホースで頻度高い。発症年齢別に2タイプ：(1)Type I(冠関節型/club foot)：1-6ヶ月齢、deep digital flexor tendon短縮、club foot形成、(2)Type II(球節型)：12-18ヶ月齢、SDFT・DDFT短縮、knuckling。【病因仮説】(1)急速成長(growth spurt)：骨成長>腱成長で相対的腱短縮、(2)過剰栄養(高蛋白・高エネルギー飼料、急速成長促進)、(3)Ca:P比異常・微量元素不足(銅・亜鉛欠乏で結合組織成熟不良)、(4)慢性疼痛(蹄部障害・OCD・骨関節症)→疼痛回避姿勢→腱長短縮、(5)運動不足(stall confined・小放牧)→腱伸展機会不足、(6)遺伝的素因(family clusters、Thoroughbredで頻度高)。【臨床診断】(1)病歴：2-12ヶ月齢、徐々進行性発症(数週間-数ヶ月)、急速成長期、栄養過剰歴、stall confinement、club foot進行、跛行発症、レース系統。(2)身体検査：(a)立位での蹄角度評価(正常前肢50-55°、後肢55-60°、club foot>60°、>75°重度)、(b)蹄形評価(narrow heel、long toe、boxy hoof shape、heel-toe angle異常)、(c)肢の他動運動可動域評価(passive range of motion、抵抗強度)、(d)歩様評価(toe walking、ナックリング、跛行度)、(e)関節弛緩・腫脹評価(他疾患鑑別)、(f)蹄の偏摩耗パターン。(3)X線撮影：(a)患肢側面像(lateral view、立位、体重負荷)、(b)蹄角度測定(P3 angle vs ground)、(c)冠関節型：P3背側角度上昇・heel sinking、(d)球節型：球節背側角度減少(<170°)、(e)P3周囲骨溶解・骨膜反応(慢性疼痛・適合変化)、(f)健側との比較。(4)Type I (Club foot)分類(Redden):Grade 1(背壁角度差<3°、軽度)、Grade 2(3-5°差)、Grade 3(5-8°差)、Grade 4(>8°差、重度)。(5)鑑別診断：(a)先天性屈腱拘縮(出生時から、fl_flexural_deformity)、(b)肢蹄部疼痛由来代償姿勢(慢性蹄叶炎、navicular disease)、(c)関節炎・OCD、(d)骨折、(e)感染性関節炎、(f)Joint laxity(関節弛緩、過伸展で別問題)。【保存的治療(軽-中等度、Grade 1-2)】(1)栄養管理：高蛋白・高エネルギー飼料の制限、適切なCa:P比(1.5:1〜2:1)、微量元素(Cu 80-160 mg/日、Zn 400-600 mg/日)補充、母乳哺乳継続(若齢)、徐々に固形飼料移行・量制限、急速成長抑制が最重要。(2)蹄ケア(corrective trimming):(a)Type I(冠関節型)：蹄先削り(toe trim)、heel削り抑え、定期的削蹄(3-4週毎)、(b)Toe extension shoe装着で踵接地促進、(c)Heel wedge応用(慎重、過剰回避)、(d)Reverse shoe・Egg bar shoe(Type II球節型)で球節伸展支持、(e)獣医・専門蹄鉄職人の連携。(3)運動管理：(a)制限放牧(small paddock、平坦地、毎日4-8時間)、stall rest避ける(運動不足で拘縮悪化)、(b)定期的他動運動(passive stretching、1日2-3回、5-10分)、(c)整地のlonging運動(短時間、浅いarc)。(4)NSAIDs(疼痛軽減・炎症抑制):フルニキシン 0.5-1.1 mg/kg PO/IV q12-24h(短期、最大1-2週、腎機能監視)、フィロコキシブ 0.1 mg/kg PO SID(より安全、長期可能)、子馬の慢性疼痛による拘縮発症阻止。(5)オキシテトラサイクリン IV(若齢例で試行):44 mg/kg IV、3-5日連続、生後2-3ヶ月までは効果あり、それ以降は効果限定的(Madison 1994)。腎機能監視・十分な輸液併用必須。【外科介入(中-重度、Grade 3-4、保存療法失敗)】(1)Inferior Check Ligament Desmotomy (ICL desmotomy、Type I 冠関節型に最も有効):(a)副指屈腱(accessory ligament of DDFT、check ligament)を切断、(b)DDFTの相対的延長効果、(c)立位 sedation+局所麻酔または全身麻酔下、外側または内側侧アプローチ、内視鏡下も可能、(d)術後副木3-4週、リハビリ4-8週、(e)成功率75-90%(Type I Grade 1-3)、Grade 4で60-75%、(f)早期手術(Grade 3進行前)が成功率高い。(2)Superior Check Ligament Desmotomy(SDFT用、Type II球節型):副指浅屈腱(accessory ligament of SDFT)切断、DDFT切断併用も可能。(3)Deep Digital Flexor Tenotomy(重度Grade 4・保存治療失敗):DDFT直接切断、最終手段、機能的歩行回復の可能性あるが競技復帰困難。(4)術後管理：副木3-4週(角度漸進的伸展)、抗菌薬5-7日、box rest 4-6週、リハビリ運動(制限放牧→徐々にlonging→自由運動)、月1回X線・歩様評価。(5)蹄ケア継続：手術後も削蹄・装蹄継続、再発予防。【モニタリング】月1回の蹄角度測定・写真記録、X線(変化追跡)、歩様評価、栄養管理見直し、放牧時間調整。【予後】軽度(Grade 1-2)で90-95%が保存療法で改善、中等度(Grade 3)外科介入後80-90%機能回復、重度(Grade 4)60-75%、競技馬の機能評価：club foot軽度残存はレース可能、Grade 3-4永続化で競技力低下・引退リスク、早期発見・早期介入(Grade進行前)が予後最大の改善因子。再発リスク：栄養管理失敗・蹄ケア不在で再発15-25%。【予防】(1)成長期の栄養管理：高蛋白・高エネルギー飼料制限(過剰成長回避)、適切なCa:P比、微量元素バランス、(2)定期的蹄ケア(月1回削蹄、専門蹄鉄職人)、(3)十分な運動機会(放牧・小走り運動、stall confinementは最小限)、(4)定期的な歩様・蹄角度評価(月1回、成長期)、(5)早期介入(Grade 1-2時の保存療法で重症化予防)、(6)慢性疼痛源(蹄叶炎・OCD)の早期治療、(7)レース系統繁殖管理(family history評価)。【参考文献】Redden Equine Lamping Vet 2003(Club foot分類); Auer & Stick Equine Surgery 4th ed Ch.99(外科手技); McIlwraith & Trotter Joint Disease in the Horse 2nd ed; Madison et al. Aust Vet J 1994(オキシテトラサイクリン); Hunt Equine Vet J 1990(成長期管理); Robinson/Sprayberry Current Therapy 7th ed Ch.156; Equine Neonatal Medicine (Knottenbelt 2004) Ch.11; AAEP Foal Management Guidelines。",
         clinical_signs_detail="(1)2-12ヶ月齢発症(Type I冠関節型1-6ヶ月、Type II球節型12-18ヶ月)、(2)徐々進行性発症(数週間-数ヶ月)、(3)Type I(club foot)：蹄角度上昇(>60°、正常50-55°)、narrow heel・long toe・boxy hoof形成、heel sinking、(4)Type II(球節型)：球節屈曲位(<170°)、knuckling(球節背側接地)、toe walking、(5)他動運動での関節伸展抵抗(腱拘縮確認)、(6)歩様異常：toe walking、跛行(進行例)、運動性能低下、(7)蹄の偏摩耗(Type I 蹄先過剰摩耗)、(8)関節可動域は通常維持(他動運動で部分伸展可能)、(9)左右非対称性(片側性が多い、両側性も可能)、(10)X線でP3背側角度異常・heel sinking、(11)その他症状なし(活発、哺乳良好、体重増加正常〜過剰)、(12)疼痛はあるが軽度(慢性的)",
-        risk_factors="【主因】(1)急速成長(growth spurt期、骨成長>腱成長で相対的腱短縮)、(2)過剰栄養(高蛋白・高エネルギー飼料、急速成長促進、特に12-15%蛋白濃縮飼料の過剰給与)、(3)Ca:P比異常(Ca過剰またはP過剰、目標1.5:1〜2:1)、(4)微量元素不足(銅・亜鉛欠乏で結合組織成熟不良、コラーゲン架橋形成障害)、(5)慢性疼痛(蹄部障害・OCD・骨関節症・感染性関節炎)→疼痛回避姿勢→腱長短縮、(6)運動不足(stall confined・小放牧、腱伸展機会不足、急速成長と運動不足の組み合わせが特に危険)。【遺伝】(1)Thoroughbred・Quarter Horse・Warmblood・Standardbred・Saddlebredで頻度高い、(2)Family clusters(レース系統内の集積、近親交配で頻度上昇可能性)、(3)親個体の屈腱拘縮歴。【飼養管理】(1)成長期の栄養管理不適切(濃縮飼料過剰・粗飼料不足)、(2)定期的蹄ケア不在(月1回削蹄が標準)、(3)早期発見・早期介入機会逸失、(4)stall confinement(運動不足→腱拘縮悪化)、(5)レース系統で早期トレーニング開始(成長板未閉鎖時の過剰負荷)。【誘発】(1)突然の運動量増加、(2)蹄叶炎・OCD・関節炎の未治療、(3)栄養変更(離乳・濃縮飼料導入時)"
+        risk_factors="【主因】(1)急速成長(growth spurt期、骨成長>腱成長で相対的腱短縮)、(2)過剰栄養(高蛋白・高エネルギー飼料、急速成長促進、特に12-15%蛋白濃縮飼料の過剰給与)、(3)Ca:P比異常(Ca過剰またはP過剰、目標1.5:1〜2:1)、(4)微量元素不足(銅・亜鉛欠乏で結合組織成熟不良、コラーゲン架橋形成障害)、(5)慢性疼痛(蹄部障害・OCD・骨関節症・感染性関節炎)→疼痛回避姿勢→腱長短縮、(6)運動不足(stall confined・小放牧、腱伸展機会不足、急速成長と運動不足の組み合わせが特に危険)。【遺伝】(1)Thoroughbred・Quarter Horse・Warmblood・Standardbred・Saddlebredで頻度高い、(2)Family clusters(レース系統内の集積、近親交配で頻度上昇可能性)、(3)親個体の屈腱拘縮歴。【飼養管理】(1)成長期の栄養管理不適切(濃縮飼料過剰・粗飼料不足)、(2)定期的蹄ケア不在(月1回削蹄が標準)、(3)早期発見・早期介入機会逸失、(4)stall confinement(運動不足→腱拘縮悪化)、(5)レース系統で早期トレーニング開始(成長板未閉鎖時の過剰負荷)。【誘発】(1)突然の運動量増加、(2)蹄叶炎・OCD・関節炎の未治療、(3)栄養変更(離乳・濃縮飼料導入時)",
     ),
     Disease(
         "fl_gastric_ulcer_foal",
@@ -12199,11 +12639,15 @@ DISEASE_DATABASE: list[Disease] = [
         ["foal_diarrhea", "foal_fever", "foal_lethargy", "gen_dehydration"],
         age_predisposition="young",
         urgency="emergency",
-        recommended_exams=[(1, "糞便培養・PCR", "Fecal Culture & PCR"), (2, "血液検査", "CBC"), (3, "血液生化学", "Serum Biochemistry")],
+        recommended_exams=[
+            (1, "糞便培養・PCR", "Fecal Culture & PCR"),
+            (2, "血液検査", "CBC"),
+            (3, "血液生化学", "Serum Biochemistry"),
+        ],
         merck_url=_MERCK + "enterocolitis+foal",
         treatment_protocol="【疾患概要】Foal Enterocolitis(子馬腸炎)は重症急性下痢症候群、複数原因(細菌・ウイルス・原虫・寄生虫)による腸壁・大腸壁の炎症性病変、しばしば多原因性の混合感染、新生子の高致死率疾患(20-40%)。生後数日〜6ヶ月齢で発症、繁殖牧場での流行が問題。FPT・不衛生環境を背景に発生。【主要病原体】(1)細菌：Salmonella spp.(NTS、ヒト感染リスク高)、Clostridium perfringens types A/B/C、Clostridium difficile(現C. difficiles)、Lawsonia intracellularis(post-weaning)、E. coli(まれ単独)、Enterococcus、(2)ウイルス：Rotavirus(最頻ウイルス性、5-35日齢)、Coronavirus(rare)、(3)原虫：Cryptosporidium parvum(免疫不全子馬で重症)、Eimeria leukart(まれ)、Giardia(まれ)、(4)寄生虫：Strongyloides westeri(2-7週齢)、Strongylus、Parascaris equorum(post-weaning)、(5)その他：栄養性(粗飼料急変・過剰摂取)、ストレス、抗菌薬関連(C. difficile素因)。【臨床診断】(1)病歴：発症年齢(数日〜6ヶ月)、急性 vs 慢性下痢、複数子馬同時発生(集団発生)、繁殖牧場、母馬の症状、最近の抗菌薬使用、ワクチン歴、放牧地・水源、stress events(輸送・離乳・天候)。(2)所見：(a)急性下痢(水様〜出血性、悪臭・色・硬さ)、(b)発熱(>38.5°C)/低体温(進行)、(c)嗜眠・哺乳意欲低下、(d)脱水(皮膚張力低下、口腔乾燥、CRT延長>3秒)、(e)頻脈・頻呼吸、(f)代謝性アシドーシス徴候、(g)疝痛(腹痛、横臥・転がり)、(h)体重減少、(i)肛門周囲スカルディング、(j)腹部膨満(進行例、腸壊死・ガス産生)、(k)時に発作・意識障害(敗血症・髄膜炎合併)。(3)CBC：白血球減少→増多、好中球未熟核左方移動、トキシック顆粒、フィブリノーゲン上昇(>500)、SAA上昇(>1,000 μg/mL)、血小板減少(DIC)、ヘマトクリット上昇(脱水)。(4)血液生化学：代謝性アシドーシス(pH<7.2、HCO3<15)、低Na/K血症(腸管喪失)、低Ca血症、BUN/Cr上昇(脱水)、低タンパク血症(慢性化)、肝酵素上昇、低血糖。(5)糞便検査(包括的アプローチ、複数原因可能性):(a)細菌培養 — Salmonella selective (XLD、Hektoen、selenite)、C. perfringens (CCFA)、C. difficile(CCFA+cefoxitin)、(b)毒素ELISA — C. perfringens enterotoxin (CPE)、C. difficile toxin A/B、(c)PCR — Salmonella、Lawsonia、C. perfringens (α/β/ε-toxin gene)、C. difficile (tcdA, tcdB)、Rotavirus、Cryptosporidium、(d)抗原検出 — Rotavirus ELISA SNAP test、Cryptosporidium抗原、(e)寄生虫卵検査 — Strongyloides、Strongylus、Parascaris、(f)細胞診 — 好中球・白血球・血液・細菌形態。(6)血液培養：菌血症評価(Salmonella、C. perfringens時に陽性)。(7)腹部超音波：腸壁肥厚(>5 mm)、ガス充満、腹水、フリーガス(腸穿孔)、(8)IgG測定：FPT併発確認(感染リスク・重症化)。(9)鑑別診断：個別感染症の特定 — fl_rotavirus(ロタウイルス)、fl_clostridial_enteritis(クロストリジウム)、fl_foal_heat_diarrhea(発情下痢、軽度自然治癒)、Salmonellosis(NTS、ヒト感染リスク注意)、Lawsonia(増殖性腸症、post-weaning)、Cryptosporidium(免疫不全子馬)、寄生虫性下痢、栄養性下痢、ストレス性下痢、Tyzzer病(肝壊死合併)。【緊急治療(支持療法主体、原因特定後特異的治療追加)】(1)輸液療法(最重要・最優先):脱水評価(軽<5%、中5-8%、重>10%、ショック>15%):(a)軽度：経口補液(電解質液、Pedialyte類似商品)1-3 L PO via 経鼻胃管 q4-6h。(b)中等-重度：IV補液 — 乳酸リンゲル液または PlasmaLyte 4-6 mL/kg/hr 持続、ショック時20 mL/kgボーラス×3まで(最初の30-60分)、補正後維持4 mL/kg/hr+下痢喪失分追加(下痢量×1.5)。コロイド(VetStarch 5-10 mL/kg)併用考慮。(2)電解質補正：(a)KCl 20-40 mEq/L 輸液に添加、経口補液にもK含有(0.5-1 mEq/kg/日)、(b)重炭酸補正：重炭酸ナトリウム 1-2 mEq/kg IV(pH<7.1で)、(c)Ca補充(低Ca血症時)：Ca gluconate 0.5-1 mL/kg IV slow。(3)抗菌薬(原因特定または重症SIRS時、培養待たず即時開始):(a)経験的初期治療：セフチオフル 5 mg/kg IV q12h(broad-spectrum、子馬第一選択)、または ペニシリンG 22,000 U/kg IV q6h+アミカシン 25 mg/kg IV SID(腎機能監視)。(b)Clostridium疑い(<7日齢、出血性下痢、毒素陽性):メトロニダゾール 15-25 mg/kg IV q8h(または PO/PR)+ペニシリン併用。(c)Salmonella(培養確認):セフチオフル または トリメトプリム-スルファ 30 mg/kg PO BID または エンロフロキサシン 5-7.5 mg/kg PO/IV SID(関節軟骨毒性慎重)。(d)Lawsonia(post-weaning):オキシテトラサイクリン 6.6 mg/kg IV BID または マクロライド (アジスロマイシン 10 mg/kg PO SID)。(e)Cryptosporidium：パロモマイシン 100 mg/kg PO SID、ニタゾキサニド 1.5 g PO SID(若齢用量調整)。(f)期間：原因・重症度に応じ5-14日。(4)血糖維持：5%デキストロース併用 2-4 mg/kg/min。(5)IgG補正(<800で血漿輸血 20-40 mL/kg)。(6)抗潰瘍：オメプラゾール 4 mg/kg PO SID、スクラルファート 1-2 g PO QID。(7)粘膜保護：スメクタイト(Bio-Sponge) 50-100 g PO BID、活性炭 1 g/kg PO BID(短期)。(8)プロバイオティクス(補助):Saccharomyces boulardii、Lactobacillus、効果限定的だが安全。(9)抗下痢薬：ロペラミド 0.05-0.1 mg/kg PO q6-8h(短期、まれに使用、感染性下痢では原則回避)。(10)昇圧薬(MAP<60持続)：ドブタミン 5-10 μg/kg/min IV CRI、ノルエピネフリン 0.1-1 μg/kg/min。(11)栄養：母乳継続が望ましい(中止しない、栄養・抗体維持)、無理なら経鼻胃管 母乳/代用乳 100-150 mL/kg/日、絶食必要時はTPN(48-72h以上)。(12)疼痛管理：ブトルファノール 0.02-0.04 mg/kg IV q4-6h、フルニキシン 0.5-1.1 mg/kg IV q12h(腎機能補正後、慎重)。(13)肛門周囲皮膚保護：温水洗浄 q2-4h、亜鉛酸化亜鉛軟膏。(14)モニタリング：体温q4h、心拍・呼吸q2-4h、血糖q4-6h、乳酸・血液ガスq6-12h、IgG q12-24h、CBC・電解質q12-24h、体重・尿量、神経症状連続評価、糞便量・色・性状記録。【感染管理(集団発生対策、Salmonella・C. difficile重要)】隔離(stall別・人員機材分離)、防護衣・手袋・長靴・足浴(消毒：4-6%次亜塩素酸ナトリウム、Clostridium/Salmonella芽胞耐性で蒸気滅菌推奨)、stall消毒(漂白剤 1:10 希釈)、母馬・子馬の同時隔離(感染性7-21日)、ヒト感染リスク説明(Salmonella、Cryptosporidium人獣共通感染症)。【予後】軽症(原因特定・早期治療・FPTなし)で生存率80-90%、重症(複数原因・敗血症・DIC・腸穿孔・C. perfringens type C・Salmonellosis)50-70%、無治療または遅延治療<40%。早期発見・原因特定・適切支持療法が予後最大の改善因子。後遺症：成長遅延(慢性化)、二次性ラクターゼ欠乏(数週)、再発リスク(慢性Salmonella carrier、Lawsonia)。【予防】(1)清潔分娩環境・良好衛生管理、(2)出生6h以内初乳1L摂取確認・12hでIgG測定→<800で血漿輸血、(3)母馬ワクチン(Rotavirus、E. coli、必要時C. perfringens type C)、(4)エンデミック農場の徹底感染管理、(5)寄生虫管理(母馬・子馬の駆虫プログラム)、(6)栄養管理(離乳ストレス・突然の飼料変更回避)、(7)早期警報システム(複数子馬下痢発症時の即時検査)、(8)Lawsonia ワクチン(エンデミック農場、post-weaning子馬)、(9)新規導入馬の検疫・スクリーニング。【参考文献】Magdesian Vet Clin North Am Equine Pract 2005(treatment overview); Slovis et al. JVIM 2014(modern治療); Frederick et al. JVIM 2009(microbiome); Pusterla et al. JVIM 2012(diagnostic approach); Equine Neonatal Medicine (Knottenbelt 2004) Ch.10; Robinson/Sprayberry Current Therapy 7th ed Ch.156; AAEP Foal Diarrhea Guidelines。",
         clinical_signs_detail="(1)急性下痢(水様〜出血性、悪臭、頻便)、(2)発熱(>38.5°C、初期38.5-40.5°C)→進行で低体温、(3)嗜眠・哺乳意欲低下→哺乳停止、(4)進行性脱水(皮膚張力低下、口腔乾燥、CRT延長>3秒、眼窩陥没)、(5)頻脈(>120/min)→徐脈(終末期)、(6)頻呼吸(>40/min)、(7)代謝性アシドーシス徴候(深い呼吸、虚脱)、(8)体重減少、(9)肛門周囲スカルディング(発赤・潰瘍)、(10)腹部膨満・疝痛(腸壊死・ガス産生)、(11)集団発生(同腹子・stall子馬同時、エンデミック農場)、(12)時に意識障害・発作(敗血症・髄膜炎合併)、(13)虚脱(終末期)",
-        risk_factors="【宿主】(1)新生子〜6ヶ月齢、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生・低体重子馬、(4)未ワクチン母馬の子馬。【環境】(1)エンデミック繁殖牧場、(2)集団飼育・密集飼育、(3)清潔不良stall・敷藁・水源、(4)消毒不徹底、(5)母馬糞便汚染、(6)夏季高温多湿(細菌繁殖)、(7)新規子馬導入(免疫naive)。【病原体素因】(1)Salmonella(NTS、ヒト感染リスク、carrier母馬)、(2)C. perfringens(土壌・腸内常在、ストレスで増殖)、(3)C. difficile(母馬周産期抗菌薬使用後)、(4)Rotavirus(母馬未ワクチン)、(5)Cryptosporidium(免疫不全子馬で重症)、(6)Lawsonia(post-weaning、放牧地共有)。【医原性】(1)母馬の周産期不必要な抗菌薬使用、(2)子馬への早期不必要な抗菌薬投与、(3)経鼻胃管不衛生使用、(4)突然の飼料変更(離乳ストレス)。【人獣共通感染症リスク】Salmonella・Cryptosporidium・Giardiaはヒトに感染可能"
+        risk_factors="【宿主】(1)新生子〜6ヶ月齢、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生・低体重子馬、(4)未ワクチン母馬の子馬。【環境】(1)エンデミック繁殖牧場、(2)集団飼育・密集飼育、(3)清潔不良stall・敷藁・水源、(4)消毒不徹底、(5)母馬糞便汚染、(6)夏季高温多湿(細菌繁殖)、(7)新規子馬導入(免疫naive)。【病原体素因】(1)Salmonella(NTS、ヒト感染リスク、carrier母馬)、(2)C. perfringens(土壌・腸内常在、ストレスで増殖)、(3)C. difficile(母馬周産期抗菌薬使用後)、(4)Rotavirus(母馬未ワクチン)、(5)Cryptosporidium(免疫不全子馬で重症)、(6)Lawsonia(post-weaning、放牧地共有)。【医原性】(1)母馬の周産期不必要な抗菌薬使用、(2)子馬への早期不必要な抗菌薬投与、(3)経鼻胃管不衛生使用、(4)突然の飼料変更(離乳ストレス)。【人獣共通感染症リスク】Salmonella・Cryptosporidium・Giardiaはヒトに感染可能",
     ),
     Disease(
         "fl_septic_arthritis_foal",
@@ -12215,11 +12659,15 @@ DISEASE_DATABASE: list[Disease] = [
         ["foal_joint_swelling", "foal_fever", "foal_lethargy", "limb_lameness_fore"],
         age_predisposition="young",
         urgency="emergency",
-        recommended_exams=[(1, "関節液分析・培養", "Synovial Fluid Analysis & Culture"), (2, "X線検査", "Radiography"), (3, "血液培養", "Blood Culture")],
+        recommended_exams=[
+            (1, "関節液分析・培養", "Synovial Fluid Analysis & Culture"),
+            (2, "X線検査", "Radiography"),
+            (3, "血液培養", "Blood Culture"),
+        ],
         merck_url=_MERCK + "septic+arthritis+foal",
         treatment_protocol="【焦点：骨髄炎合併・多関節性・慢性化】(本項は重症化したsepticarthritis-osteomyelitis複合体・多関節性・慢性化例。早期単一関節例はfl_septic_arthritis参照)。【疾患概要】Septic Arthritis-Osteomyelitis Complex(化膿性関節炎-骨髄炎複合体)は新生子敗血症の最重症合併症の一つ。Steel分類のType E(epiphyseal、骨端骨炎)、Type P(physeal、成長板感染)、Type T(tarsal、足根骨感染)で骨組織まで感染拡大、慢性化・多関節性発症、機能的予後不良。発症は1-3週齢が多いが、慢性例は数ヶ月持続。【骨髄炎の発症経路】(1)血行性播種(敗血症から続発、最頻、Type E/P)、(2)関節炎からの骨組織直接波及(Type S→Type E/P、治療遅延例)、(3)外傷性(穿刺・関節注射、まれ)。【臨床診断】(1)病歴：FPT(IgG<400-800)、敗血症既往、化膿性関節炎の不適切治療、長期持続跛行、複数関節腫脹、発熱反復、慢性削痩、過去の関節穿刺感染、不衛生分娩環境。(2)所見：(a)単/多関節腫脹(腕節・膝関節・球節・飛節好発、しばしば左右非対称・複数関節)、(b)関節熱感・疼痛・硬結、(c)跛行(支柱性または非荷重・3本足歩行、慢性化で骨関節症性)、(d)関節屈伸抵抗・他動運動制限・捻髪音、(e)発熱(>39°C、変動性)、慢性化で正常〜微熱、(f)嗜眠・哺乳量低下→慢性削痩、(g)頻脈・頻呼吸(SIRS)、(h)横臥位時間延長・起立しにくい、(i)瘻孔形成・分泌物(慢性化、関節包から皮膚へ)、(j)他敗血症徴候(下痢・肺炎・髄膜炎)合併、(k)骨成長板感染で患肢の成長異常・短縮・angular deformity進行。(3)関節穿刺(必須・無菌処置):滑液濁度・膿性、WBC>30,000/μL(typical 50,000-200,000)、好中球>90%(toxic変化)、粘度低下、グラム染色(細菌陽性30-50%、慢性化で陽性率低下)、好気/嫌気培養(感受性試験必須、嫌気培養も)、PCR(細菌16S rRNA)。(4)血液培養(複数本、抗菌薬投与前):敗血症評価、慢性例で陽性率低下。(5)CBC：白血球増多(>20,000)・好中球増多・左方移動・フィブリノーゲン>500・SAA>1,000 μg/mL、慢性化で軽度上昇のみ、貧血(慢性炎症)。(6)X線(2方向、必須):急性期は正常〜軟部組織腫脹、5-7日後変化:(a)関節包腫脹・関節腔狭小化、(b)骨端骨溶解(Type E、典型lytic lesion)、(c)成長板不規則・拡大(Type P)、(d)足根骨溶解・collapse(Type T)、(e)骨膜反応・骨破壊・骨硬化、(f)骨片形成(severe例)。(7)関節超音波：滑膜肥厚(>3 mm)・関節液量増加(echogenic、線維性沈着物)、骨表面irregular、骨膜挙上、瘻孔追跡。(8)CT/MRI(理想・成獣・大学病院):骨内膿瘍・骨端骨壊死・成長板感染の詳細評価、術前計画、深部病変検出。(9)骨シンチグラフィ(99mTc-MDP):多発骨髄炎スクリーニング、活動性病変検出、慢性期評価。(10)IgG測定：FPT併発で<800多い、補正治療要。(11)鑑別診断：外傷性関節炎(滑液WBC<5,000)、新生子骨軟骨症、未熟児骨形成不全、HIE関連起立困難、骨折、リウマチ様関節炎(まれ)。【治療(緊急対応・長期戦)】(1)全身性抗菌薬(培養結果待たず即時開始、最低6-8週、骨髄炎は4-12週):(a)経験的初期治療：ペニシリンG 22,000-44,000 U/kg IV q6h+アミカシン 25 mg/kg IV SID、または セフチオフル 5 mg/kg IV q12h(NICU第一選択)、骨組織浸透の良い薬剤(クリンダマイシン、トリメトプリム-スルファ、フルオロキノロン)併用考慮。(b)培養結果(48-72h)で感受性に基づき調整：MRSAにイミペネム 10-15 mg/kg IV q8h、E. coli/Klebsiellaにアミカシン+セフタジジム、嫌気性疑いにメトロニダゾール 15 mg/kg PO/PR q8h追加。(c)IV投与は最低3-4週、経口移行(セフポドキシム 10 mg/kg PO BID、エンロフロキサシン 5-7.5 mg/kg PO SID、トリメトプリム-スルファ 30 mg/kg PO BID、クリンダマイシン 5 mg/kg PO QID)で6-12週継続、X線・SAA・臨床症状改善まで。(2)関節内治療(必須):(a)関節洗浄(arthrocentesis lavage):無菌的に14-16Gカテーテルで滑液吸引→生理食塩水/乳酸リンゲル液 2-5 L で関節腔灌流、初日と必要に応じ48-72h毎反復。慢性化例でも継続。(b)関節内アミカシン 250-500 mg(またはゲンタマイシン 250 mg、セフチオフル 150 mg)を関節洗浄後注入、24時間毎×3-5日、その後週1-2回、感受性に基づく。(c)重症・慢性化例：関節鏡下灌流デブリードマン(arthroscopic lavage)、フィブリン・壊死組織除去、骨片除去、洗浄チューブ留置で持続灌流(72-96h)、毎日関節内抗菌薬注入。(3)Regional Limb Perfusion (RLP)(必須・高濃度局所投与):アミカシン 1-2 g(子馬体重に応じ)を生食60 mLで希釈、駆血帯下肢に静脈/骨内投与、30分間維持、24-48時間毎反復(5-10回)。骨髄内濃度高、骨組織浸透促進。(4)骨内灌流(intraosseous perfusion):骨髄内に直接抗菌薬注入、骨髄炎で有効、専用カニューレ使用、難治例。(5)外科的デブリードマン(severe・骨髄炎・骨片例):(a)切開排膿・腐骨除去、(b)Wound vacuum-assisted closure(VAC)応用、(c)骨片移植(autograft、まれ)。(6)IgG補正(FPT併発時):血漿輸血 20-40 mL/kg IV、IgG>800維持。(7)抗炎症・疼痛管理：フルニキシン 0.5-1.1 mg/kg IV q12h(腎機能要監視、最大3-5日急性期、慢性期はフィロコキシブ0.1 mg/kg PO SIDへ移行)、ブトルファノール 0.02-0.04 mg/kg IV q4-6h、トラマドール 2-4 mg/kg PO q8-12h(オピオイド代替)、HA(ヒアルロン酸)関節内 20 mg(炎症落ち着き後の関節保護)。(8)支持療法：輸液 4-6 mL/kg/hr、栄養維持(慢性化で代用乳・TPN)、抗潰瘍(オメプラゾール 4 mg/kg PO SID)。(9)制限運動：箱入れ安静2-6週(関節保護)、その後制限放牧、リハビリ運動(プールスイミング、water treadmill、関節可動域維持)、長期的活動制限。(10)四肢支持：副木・包帯(関節保護、体重負荷分散)、必要時hoof care(蹄叶炎対策)。(11)関節固定術(arthrodesis、最終手段):重症慢性化・治療不応例(複数関節破壊、機能完全喪失)、特定関節(球節・冠関節)で実施可能、機能的歩行回復目標、レース不可。【モニタリング】滑液WBC・培養毎週、SAA・フィブリノーゲン週1-2回、X線/超音波2-4週毎(骨改善追跡)、跛行・関節腫脹連続評価、Long-term:6-12ヶ月のX線フォロー(成長板・骨形態)。【予後】早期診断治療(急性期Type E/Pで6週内)で機能的回復率50-70%、Type Sのみで70-85%、慢性化・多関節性・骨髄炎・MRSA感染・治療遅延(>72h)で予後悪化(<40%)、四肢機能不全・成長板損傷・将来の骨関節症・angular limb deformity進行リスク残存。重症慢性化例で関節固定術後機能回復可能例あり。レース系統では多くがレース引退。【予防】(1)FPT予防(出生6h以内初乳1L、12hでIgG測定、<800で血漿輸血)、(2)清潔分娩環境、(3)臍帯処理(2%クロルヘキシジン浸漬 q4-6h × 24-48h)、(4)敗血症の早期治療(関節炎発症前の血液培養・抗菌薬)、(5)関節炎発症時の即時診断・治療(発症48時間以内の関節穿刺・全身+局所抗菌薬)、(6)不必要な関節注射回避。【参考文献】Steel CM AAEP Proc 1999(分類); Bertone FA et al. Vet Surg 1992(治療); Schneider et al. Equine Vet J 1992(関節内アミカシン); Wilson et al. Vet Surg 2003(RLP); Reef Vet Clin North Am 1990(超音波); Equine Neonatal Medicine (Knottenbelt 2004) Ch.18; Robinson/Sprayberry Current Therapy 7th ed Ch.156; AAEP Foal Lameness Guidelines。",
         clinical_signs_detail="(1)単/多関節腫脹(腕節・膝関節・球節・飛節好発、しばしば左右非対称・複数関節、慢性化で複数関節)、(2)関節周囲熱感・疼痛・硬結・触診反応、(3)跛行(支柱性または完全非荷重・3本足歩行、慢性化で骨関節症性)、(4)関節屈伸抵抗・他動運動制限・捻髪音(骨破壊)、(5)発熱(>39°C、変動性、慢性化で正常〜微熱)、(6)嗜眠・元気消失・哺乳量低下→慢性削痩、(7)瘻孔形成・分泌物(慢性化、関節包から皮膚へ)、(8)横臥位時間延長・起立しにくい、(9)頻脈・頻呼吸(SIRS、急性期)、(10)患肢成長異常・短縮・angular deformity進行(成長板感染、Type P)、(11)他敗血症徴候(下痢・肺炎・髄膜炎)合併、(12)X線で骨溶解・骨膜反応・成長板異常・関節腔狭小化",
-        risk_factors="【主因】(1)FPT(IgG<400-800、血行性感染リスク10-20倍)、(2)新生子敗血症既往(50-70%が併発)、(3)臍帯感染・尿膜管感染(直接感染源)、(4)肺炎・腸炎(血行播種源)、(5)化膿性関節炎の不適切治療(治療遅延・短期間抗菌薬・関節洗浄不足→骨髄炎進行)、(6)先行HIE/NMS・未熟出生(免疫脆弱)。【病原体】Streptococcus(zooepidemicus, equi)、E. coli、Klebsiella、Enterobacter、Salmonella、Actinobacillus、Staphylococcus(MRSA含む)、嫌気性菌(Bacteroides、Clostridium)、Rhodococcus equi(月齢進むと、髄外Rhodococcus肺炎合併型)。【飼養】(1)不衛生分娩環境、(2)臍帯処理不適切、(3)集団飼育子馬接触、(4)輸送ストレス、(5)離乳ストレス、(6)stall清掃頻度不足。【医原性】(1)関節注射時の汚染、(2)IV catheter感染による菌血症、(3)不適切な関節穿刺手技、(4)初期抗菌薬選択の不適切(MRSAに無効な薬剤)、(5)抗菌薬期間短縮(再発・慢性化リスク)"
+        risk_factors="【主因】(1)FPT(IgG<400-800、血行性感染リスク10-20倍)、(2)新生子敗血症既往(50-70%が併発)、(3)臍帯感染・尿膜管感染(直接感染源)、(4)肺炎・腸炎(血行播種源)、(5)化膿性関節炎の不適切治療(治療遅延・短期間抗菌薬・関節洗浄不足→骨髄炎進行)、(6)先行HIE/NMS・未熟出生(免疫脆弱)。【病原体】Streptococcus(zooepidemicus, equi)、E. coli、Klebsiella、Enterobacter、Salmonella、Actinobacillus、Staphylococcus(MRSA含む)、嫌気性菌(Bacteroides、Clostridium)、Rhodococcus equi(月齢進むと、髄外Rhodococcus肺炎合併型)。【飼養】(1)不衛生分娩環境、(2)臍帯処理不適切、(3)集団飼育子馬接触、(4)輸送ストレス、(5)離乳ストレス、(6)stall清掃頻度不足。【医原性】(1)関節注射時の汚染、(2)IV catheter感染による菌血症、(3)不適切な関節穿刺手技、(4)初期抗菌薬選択の不適切(MRSAに無効な薬剤)、(5)抗菌薬期間短縮(再発・慢性化リスク)",
     ),
     Disease(
         "fl_pneumonia_foal",
@@ -12231,11 +12679,15 @@ DISEASE_DATABASE: list[Disease] = [
         ["foal_respiratory_distress", "foal_fever", "foal_lethargy", "resp_cough"],
         age_predisposition="young",
         urgency="urgent",
-        recommended_exams=[(1, "胸部超音波", "Thoracic Ultrasonography"), (2, "気管洗浄液培養", "Transtracheal Wash Culture"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "胸部超音波", "Thoracic Ultrasonography"),
+            (2, "気管洗浄液培養", "Transtracheal Wash Culture"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "pneumonia+foal",
         treatment_protocol="【疾患概要】Foal Pneumonia(子馬細菌性肺炎)は新生子〜6ヶ月齢の子馬の重要な呼吸器疾患。Streptococcus equi subsp. zooepidemicus が最頻原因菌(50-70%)、Rhodococcus equi(1-6ヶ月齢、別項fl_rhodococcus_pneumonia参照)、Klebsiella、E. coli、Pasteurella、Pseudomonas、Actinobacillus、Mycoplasma、Pneumocystis carinii(免疫不全)、嫌気性菌など多様。発症率5-10%(NICU子馬)、エンデミック農場で集団発生、致死率10-30%(早期治療なし)。【病態生理】(1)血行性播種(敗血症から続発、新生子早期):菌血症→肺血管→肺炎、(2)吸入感染(月齢進むと):環境細菌の上気道〜下気道下降、(3)誤嚥性肺炎(嚥下障害、HIE/NMS、未熟出生):粘液・乳吸引、(4)胎盤炎・経胎盤感染(出生時から肺炎)、(5)合併要因：FPT(IgG<800、感染リスク10倍)、未熟出生(肺成熟不全・界面活性剤不足)、ストレス、寒冷曝露。【臨床診断】(1)病歴：発症年齢(数日齢〜6ヶ月)、急性 vs 亜急性、複数子馬同時発生、繁殖牧場、母馬胎盤異常、FPT、HIE/NMS既往、最近のストレス・輸送・天候。(2)所見：(a)発熱(>38.5°C、初期38.5-40.5°C、進行で低体温)、(b)咳嗽(乾性〜湿性、運動・興奮で誘発)、(c)鼻汁(粘液性〜膿性、初期片側→両側、悪臭可能)、(d)呼吸促迫(>40-60/min)、努力性呼吸(鼻翼呼吸、胸部陥没、肋間筋使用)、(e)肺野聴診：湿性ラ音・捻髪音・喘鳴・無呼吸領域、(f)嗜眠・哺乳意欲低下→哺乳停止、(g)成長停滞・体重減少、(h)頻脈・代謝性アシドーシス、(i)チアノーゼ(severe例、SpO2<90%)、(j)他敗血症徴候(関節炎・下痢・髄膜炎)合併、(k)Rhodococcus特徴：1-6ヶ月齢、亜急性経過、抗菌薬部分奏効、慢性微熱(別項参照)。(3)胸部聴診(必須・スクリーニング):全肺野評価、湿性ラ音(consolidation)、捻髪音(無気肺)、喘鳴(気管支狭窄)、呼吸音減弱・無呼吸(consolidation/effusion)、両側性 vs 片側性。(4)胸部X線(2方向、必須):(a)気管支肺炎パターン(両側下肺野・周辺軟部陰影、Streptococcus zooepidemicus、E. coli)、(b)結節性病変(R. equi)、(c)間質性パターン(ウイルス性、Pneumocystis)、(d)胸水(まれ、まれにEffusive pleuritis)、(e)無気肺・consolidation。(5)胸部超音波(必須・補助):末梢肺野評価、consolidation・無気肺・abscess・胸水・cometシ尾候(B-lines、間質性肺炎)、Rhodococcus結節(末梢低エコー結節)、評価しやすく繰り返し可能、X線より高感度な末梢病変検出。(6)気管洗浄(transtracheal wash, TTW):無菌採取(咽頭汚染回避、皮膚消毒・局所麻酔・カテーテル挿入)、細胞診(化膿性炎症、好中球>90%、細菌内貪食)、グラム染色、好気/嫌気培養(感受性試験)、PCR(R. equi VapA、Mycoplasma)。BAL(bronchoalveolar lavage、若齢子馬で実施可、より周辺病変サンプル)。(7)CBC：白血球増多/減少、好中球未熟核左方移動、トキシック顆粒、フィブリノーゲン上昇(>500)、SAA上昇(>1,000 μg/mL)、貧血(慢性化)。(8)血液生化学：低タンパク血症、肝酵素上昇、BUN/Cr上昇(脱水)、低血糖。(9)血液培養(複数本、抗菌薬投与前):菌血症評価。(10)血液ガス(動脈血推奨):低酸素血症(PaO2<60)、高炭酸ガス血症(PaCO2>50)、A-aDO2勾配上昇。(11)IgG測定：FPT併発確認、感染リスク・重症化評価。(12)鑑別診断：(a)R. equi肺炎(1-6ヶ月、結節性、別治療プロトコル)、(b)誤嚥性肺炎(嚥下障害歴、左前肺野好発)、(c)ウイルス性肺炎(EHV-1、インフルエンザ、間質性、PCR)、(d)寄生虫性肺炎(Parascaris equorum、好酸球増多)、(e)Pneumocystis carinii(免疫不全、間質性、TTW陽性)、(f)肺水腫(うっ血性心不全、心エコー)、(g)気胸・血胸(外傷)、(h)肺出血(EIPH子馬、まれ)。【治療(緊急対応)】(1)抗菌薬(培養結果待たず即時開始、最低3-4週):(a)経験的初期治療(新生子・若齢)：セフチオフル 5 mg/kg IV q12h(broad-spectrum)、または ペニシリンG 22,000 U/kg IV q6h+アミカシン 25 mg/kg IV SID、または セフタジジム 5 mg/kg IV q8h(重症・グラム陰性疑い)、嫌気性疑いにメトロニダゾール 15 mg/kg PO/PR q8h追加。(b)Rhodococcus equi疑い(1-6ヶ月、結節性、亜急性):リファンピン 5-10 mg/kg PO BID + アジスロマイシン 10 mg/kg PO SID または クラリスロマイシン 7.5 mg/kg PO BID(別項参照)、4-9週継続。(c)Mycoplasma：マクロライド(アジスロマイシン)、フルオロキノロン慎重(若齢関節軟骨毒性)。(d)Pneumocystis carinii：トリメトプリム-スルファ 30 mg/kg PO BID 高用量、3-4週。(e)培養結果(48-72h)で感受性に基づき調整。(f)IV投与は最低2-3週、経口移行で4-6週継続、X線・SAA・臨床症状改善まで。(2)酸素補給(SpO2<92%で必須):経鼻カニューレ 5-15 L/min、必要時マスク酸素・気管挿管+人工換気(severe例、PaO2<50)、加湿酸素推奨。(3)輸液：乳酸リンゲル液 4-6 mL/kg/hr、脱水補正、循環支持、低血圧時昇圧薬(ドブタミン 5-10 μg/kg/min CRI)。(4)気管支拡張薬：(a)アルブテロール 1-2 puff inhaler q6h(MDI+spacer device)、(b)ブロムヘキシン 0.05 mg/kg IV q12h、(c)テオフィリン 6 mg/kg PO BID(慎重、心毒性)、(d)スピロソルピン 0.001 mg/kg PO SID(LABA、慢性例)。(5)粘液溶解薬：N-アセチルシステイン 5-10 mL nebulizer q6-8h、生理食塩水nebulization q4-6h、ヨウ化ナトリウム 20-40 mg/kg IV(まれ、現代では使用減少)。(6)抗炎症：フルニキシン 0.5-1.1 mg/kg IV q12h(発熱・炎症、最大3-5日、腎機能監視)、ケトプロフェン 2.2 mg/kg IV/IM SID。(7)IgG補正(<800で血漿輸血 20-40 mL/kg)。(8)抗潰瘍：オメプラゾール 4 mg/kg PO SID。(9)栄養：母乳継続(理想)、無理なら経鼻胃管 母乳/代用乳 100-150 mL/kg/日、TPN(severe例)。(10)体位管理：腹臥位推奨(肺機能最大化)、頻回体位変換(2時間毎)、肺物理療法(coupage、percussion 2-4時間毎、胸部マッサージ)。(11)鎮咳薬：通常使用しない(咳は防御反射、痰排出促進)、severe・睡眠妨害例のみ慎重(コデイン)。(12)胸腔ドレナージ(胸水合併severe例):ペリトニアルダイアリシスカテーテル、抗菌薬入りドレナージ、胸腔抗菌薬注入(セフチオフル200 mg)。(13)モニタリング：体温q4h、心拍・呼吸・SpO2 q2-4h、聴診1-2回/日、CBC・SAA q24h、X線・超音波 1-2週毎、血液ガス変化評価、IgG q12-24h。【感染管理(集団発生対策)】隔離(stall別・人員機材分離)、防護衣・手袋(R. equi 人感染稀)、stall消毒、母馬・子馬の同時隔離、新規子馬導入の遅延、エンデミック農場の換気・塵埃管理。【予後】軽-中等症(早期診断・適切抗菌薬・FPTなし)で生存率80-95%、重症(severe consolidation、敗血症併発、PaO2<50、Rhodococcus複雑型、Pneumocystis)50-75%、致死的(>30%)で多臓器不全・誤嚥性。後遺症：肺機能低下(運動耐容能減少)、慢性肺線維化、レース成績影響可能性(議論)。早期介入(発症48時間以内)が予後最大の改善因子。【予防】(1)FPT予防(出生6h以内初乳1L、12hでIgG測定→<800で血漿輸血)、(2)清潔分娩環境、(3)エンデミック農場(R. equi)管理、(4)Hyperimmune plasma予防(R. equi、エンデミック農場)、(5)母馬ワクチン(EHV-1、インフルエンザ)、(6)寒冷曝露・換気不良回避、(7)母馬胎盤炎の早期治療(子馬経胎盤感染予防)、(8)早期警報システム(複数子馬発症時の即時検査・治療)、(9)新規導入馬の検疫・スクリーニング。【参考文献】Wilson Vet Clin North Am Equine Pract 2014; Hoffman Equine Vet Educ 1996(treatment); Slovis et al. JVIM 2017(超音波診断); Equine Neonatal Medicine (Knottenbelt 2004) Ch.7; Robinson/Sprayberry Current Therapy 7th ed Ch.156; AAEP Foal Respiratory Guidelines。",
         clinical_signs_detail="(1)発症年齢(数日齢〜6ヶ月、ピーク2週-3ヶ月)、(2)発熱(>38.5°C、初期38.5-40.5°C、進行で低体温)、(3)咳嗽(乾性〜湿性、運動・興奮・夜間で誘発、Rhodococcus例で間欠的)、(4)鼻汁(粘液性〜膿性、初期片側→両側、悪臭可能)、(5)呼吸促迫(>40-60/min、正常<30)、努力性呼吸(鼻翼呼吸、胸部陥没、肋間筋使用)、(6)肺野聴診：湿性ラ音・捻髪音・喘鳴・無呼吸領域、(7)嗜眠・元気消失・哺乳意欲低下→哺乳停止、(8)成長停滞・体重減少、(9)頻脈(>120/min)、(10)代謝性アシドーシス徴候、(11)チアノーゼ(severe例、SpO2<90%)、(12)他敗血症徴候(関節炎・下痢・髄膜炎)合併、(13)Rhodococcus特徴：亜急性、慢性微熱、結節性肺病変、抗菌薬部分奏効",
-        risk_factors="【宿主】(1)新生子〜6ヶ月齢、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生(肺成熟不全・界面活性剤不足)、(4)HIE/NMS既往(嚥下障害→誤嚥性)、(5)未ワクチン母馬の子馬。【環境】(1)エンデミック繁殖牧場(R. equi、Streptococcus)、(2)集団飼育・密集飼育、(3)塵埃多い環境(R. equi吸入)、(4)換気不良stall、(5)寒冷曝露、(6)輸送ストレス、(7)夏季高温多湿(R. equi 6-9月ピーク)。【病原体素因】(1)Streptococcus zooepidemicus(常在菌、ストレスで発症、最頻)、(2)R. equi(1-6ヶ月、エンデミック農場、土壌常在)、(3)E. coli・Klebsiella(新生子敗血症由来)、(4)Mycoplasma(若齢、慢性化)、(5)Pneumocystis carinii(免疫不全)、(6)嫌気性菌(誤嚥性)。【飼養管理】(1)母馬の周産期管理不在、(2)新生子衛生プロトコル不在、(3)早期発見体制不足、(4)ワクチンプログラム不徹底、(5)R. equi予防(HIP)未実施"
+        risk_factors="【宿主】(1)新生子〜6ヶ月齢、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生(肺成熟不全・界面活性剤不足)、(4)HIE/NMS既往(嚥下障害→誤嚥性)、(5)未ワクチン母馬の子馬。【環境】(1)エンデミック繁殖牧場(R. equi、Streptococcus)、(2)集団飼育・密集飼育、(3)塵埃多い環境(R. equi吸入)、(4)換気不良stall、(5)寒冷曝露、(6)輸送ストレス、(7)夏季高温多湿(R. equi 6-9月ピーク)。【病原体素因】(1)Streptococcus zooepidemicus(常在菌、ストレスで発症、最頻)、(2)R. equi(1-6ヶ月、エンデミック農場、土壌常在)、(3)E. coli・Klebsiella(新生子敗血症由来)、(4)Mycoplasma(若齢、慢性化)、(5)Pneumocystis carinii(免疫不全)、(6)嫌気性菌(誤嚥性)。【飼養管理】(1)母馬の周産期管理不在、(2)新生子衛生プロトコル不在、(3)早期発見体制不足、(4)ワクチンプログラム不徹底、(5)R. equi予防(HIP)未実施",
     ),
     Disease(
         "fl_hernia_umbilical",
@@ -12251,7 +12703,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "umbilical+hernia+foal",
         treatment_protocol="小型(<4cm)：自然閉鎖待機(6ヶ月齢まで)。弾性バンド圧迫。大型/非還納性→外科的修復。嵌頓→緊急手術(腸管生存性評価)。予後良好(95%+成功)。",
         clinical_signs_detail="単純大型ヘルニア(緊急性なし、外科予定):(1)臍部腹側中線の柔らかい還納可能な膨らみ、直径>5 cm、(2)子馬を仰向けで還納、立位で再脱出、(3)その他症状なし。【嵌頓・絞扼ヘルニア(緊急、即時手術)】:(1)膨らみの還納不能、(2)急激な腫脹拡大、(3)温感・発赤・触診反応、(4)強い疝痛(横臥・転がり・歯軋り・後肢蹴り・呻き)、(5)嘔吐様鼻腔逆流、(6)哺乳停止・元気消失、(7)頻脈(>140/min)・頻呼吸(>50/min)・脱水・shock徴候、(8)皮膚色調変化(青紫・黒色化、絞扼進行)、(9)発熱→低体温(終末期)、(10)超音波で還納不能腸管・腸壁肥厚・血流消失。【感染ヘルニア(omphalitis合併)】:発熱、温感・発赤、分泌物、嗜眠、感染源(臍動脈/静脈・尿膜管)合併",
-        risk_factors="【先天性】臍輪閉鎖不全(発達異常)、家族歴(遺伝的素因、Thoroughbredで頻度高)、双子妊娠、未熟出生、組織脆弱。【続発性悪化】(1)不適切な臍帯処理(過度な牽引・強腐食消毒で臍輪損傷)、(2)臍帯感染(omphalitis)による組織融解→欠損拡大、(3)産後ストレス(咳嗽・嘔吐・便秘で腹圧上昇)、(4)未熟出生で組織脆弱。【嵌頓・絞扼リスク要因】(1)欠損径2-5 cm(腸ループが入り込んで嵌頓しやすいサイズ)、(2)成長期(腸管サイズ拡大)、(3)外傷・打撲(臍部直接衝撃)、(4)便秘・疝痛(腹圧急上昇)、(5)激しい運動(若齢ヤング期)、(6)欠損縁の硬化(慢性化で還納困難)。【他先天性異常合併】尿膜管異常・臍動脈/静脈感染・他臍部発達異常で外科介入時の同時切除必要"
+        risk_factors="【先天性】臍輪閉鎖不全(発達異常)、家族歴(遺伝的素因、Thoroughbredで頻度高)、双子妊娠、未熟出生、組織脆弱。【続発性悪化】(1)不適切な臍帯処理(過度な牽引・強腐食消毒で臍輪損傷)、(2)臍帯感染(omphalitis)による組織融解→欠損拡大、(3)産後ストレス(咳嗽・嘔吐・便秘で腹圧上昇)、(4)未熟出生で組織脆弱。【嵌頓・絞扼リスク要因】(1)欠損径2-5 cm(腸ループが入り込んで嵌頓しやすいサイズ)、(2)成長期(腸管サイズ拡大)、(3)外傷・打撲(臍部直接衝撃)、(4)便秘・疝痛(腹圧急上昇)、(5)激しい運動(若齢ヤング期)、(6)欠損縁の硬化(慢性化で還納困難)。【他先天性異常合併】尿膜管異常・臍動脈/静脈感染・他臍部発達異常で外科介入時の同時切除必要",
     ),
     Disease(
         "fl_patent_urachus_foal",
@@ -12267,7 +12719,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "patent+urachus+foal",
         treatment_protocol="臍帯消毒(クロルヘキシジン/ポビドンヨードBID)。硝酸銀塗布(化学的焼灼)。抗菌薬(感染合併)。難治性/感染性→外科的臍帯遺残切除+膀胱頂部修復。尿が臍から漏出。予後良好。",
         clinical_signs_detail="(1)臍帯断端腫脹・熱感・疼痛・触診反応(子馬が嫌がる)、(2)臍帯部分泌物(膿性・血性・悪臭・大量)、痂皮、周囲皮膚発赤・潰瘍、(3)持続的な尿漏出+感染兆候、(4)発熱(>39°C、変動性、初期は微熱)または進行で低体温、(5)嗜眠・元気消失・哺乳量低下、(6)関節腫脹・跛行(化膿性関節炎合併、20-40%)、(7)頻脈・頻呼吸(SIRS)、(8)腹部膨満・腹水(腹膜炎進行例)、(9)黄疸(肝膿瘍合併)、(10)肺炎徴候(咳嗽・呼吸促迫、播種感染)、(11)他敗血症徴候(下痢・髄膜炎)、(12)被毛黄変・スカルディング(慢性尿漏出)。生後3-21日(平均7-14日)発症が大半、急性悪化",
-        risk_factors="【先行要因】(1)単純患在性尿膜管(無治療または不適切局所治療→感染合併)、(2)組織壊死(不適切臍帯処理:過度なヨードチンキ・強腐食消毒)、(3)横臥位時間長い子馬(未熟出生・HIE/NMS、汚染暴露)。【感染源】(1)不衛生な分娩環境(汚染敷藁・消毒不徹底stall・放牧地分娩)、(2)母馬胎盤炎(絨毛膜炎、子宮内感染)、(3)母馬による過度の舐め(口腔細菌伝播)、(4)集団飼育子馬接触、(5)夏季高温多湿(細菌繁殖)、(6)stall清掃頻度不足。【宿主免疫】(1)FPT(IgG<400-800、感染リスク10倍)、(2)未熟出生(免疫脆弱)、(3)新生子敗血症既往。【医原性】(1)硝酸銀焼灼の不適切タイミング(感染進行中の使用)、(2)抗菌薬選択不適切(嫌気性菌カバー不足)、(3)外科介入の遅延(膿瘍進行・敗血症拡大)"
+        risk_factors="【先行要因】(1)単純患在性尿膜管(無治療または不適切局所治療→感染合併)、(2)組織壊死(不適切臍帯処理:過度なヨードチンキ・強腐食消毒)、(3)横臥位時間長い子馬(未熟出生・HIE/NMS、汚染暴露)。【感染源】(1)不衛生な分娩環境(汚染敷藁・消毒不徹底stall・放牧地分娩)、(2)母馬胎盤炎(絨毛膜炎、子宮内感染)、(3)母馬による過度の舐め(口腔細菌伝播)、(4)集団飼育子馬接触、(5)夏季高温多湿(細菌繁殖)、(6)stall清掃頻度不足。【宿主免疫】(1)FPT(IgG<400-800、感染リスク10倍)、(2)未熟出生(免疫脆弱)、(3)新生子敗血症既往。【医原性】(1)硝酸銀焼灼の不適切タイミング(感染進行中の使用)、(2)抗菌薬選択不適切(嫌気性菌カバー不足)、(3)外科介入の遅延(膿瘍進行・敗血症拡大)",
     ),
     Disease(
         "fl_meconium_impaction_foal",
@@ -12283,7 +12735,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "meconium+impaction+foal",
         treatment_protocol="温水浣腸(初期：温生食/DSS希釈)。アセチルシステイン浣腸(4%：粘液溶解)。フルニキシン0.5mg/kg IV(疼痛)。輸液。経鼻胃管からヒマシ油/DSS。難治性→全身麻酔下浣腸/手術。予後良好(適切な管理で90%+)。正常排胎便は生後3h以内。",
         clinical_signs_detail="(1)生後4-48時間齢発症(典型12-24時間、出生直後は健常で哺乳良好)、(2)雄子馬>>雌子馬の発症比(3:1、雄の骨盤・直腸狭窄)、(3)徐々に進行性疝痛(横臥・転がり・歯軋り・後肢蹴り・呻き、軽-中等度)、(4)腹部膨満(進行性、ガス・便貯留)、(5)排便なしまたは小量・困難、(6)肛門周囲の胎便汚染なし(排泄不在の徴候)、(7)哺乳量低下→哺乳停止(進行で)、(8)頻脈・頻呼吸(疝痛強い時)、(9)直腸検査で硬い便塊触知(典型)、(10)時に嘔吐様鼻腔逆流(severe例)、(11)体温正常または軽度低下、(12)X線で結腸内ガス充満・便塊影、(13)他原因鑑別(uroperitoneum、敗血症、Lethal White)が重要",
-        risk_factors="【性別】雄子馬>>雌子馬(3:1、雄の骨盤狭窄・直腸短い・狭い、解剖学的素因)。【品種】Thoroughbred・Quarter Horse・Standardbred・Warmblood(品種素因または管理関連バイアス)。【月齢】生後4-48時間以内発症がピーク(典型12-24時間)。【宿主要因】(1)初乳摂取遅延・不足(緩下作用低下)、(2)未熟出生(腸管成熟不足、蠕動弱い)、(3)母乳不足(代用乳哺乳・拒否母馬)、(4)双子(競合で哺乳量不足)、(5)脱水(胎便粘稠化)、(6)体型(雄・骨盤狭窄)、(7)stress(分娩・母馬死亡・輸送)、(8)HIE/NMS(神経学的腸管motility障害)。【管理要因】(1)分娩監視不在(出生後の観察怠慢)、(2)排便確認怠慢(出生後12-24時間)、(3)初乳摂取確認怠慢、(4)Phosphate enema予防使用なし。【鑑別重要】Lethal White Overo Syndromeは類似症状(白色子馬+疝痛+排便なし)だが致死的、Frame Overo×Frame Overo繁殖個体での出生時にPCR確認"
+        risk_factors="【性別】雄子馬>>雌子馬(3:1、雄の骨盤狭窄・直腸短い・狭い、解剖学的素因)。【品種】Thoroughbred・Quarter Horse・Standardbred・Warmblood(品種素因または管理関連バイアス)。【月齢】生後4-48時間以内発症がピーク(典型12-24時間)。【宿主要因】(1)初乳摂取遅延・不足(緩下作用低下)、(2)未熟出生(腸管成熟不足、蠕動弱い)、(3)母乳不足(代用乳哺乳・拒否母馬)、(4)双子(競合で哺乳量不足)、(5)脱水(胎便粘稠化)、(6)体型(雄・骨盤狭窄)、(7)stress(分娩・母馬死亡・輸送)、(8)HIE/NMS(神経学的腸管motility障害)。【管理要因】(1)分娩監視不在(出生後の観察怠慢)、(2)排便確認怠慢(出生後12-24時間)、(3)初乳摂取確認怠慢、(4)Phosphate enema予防使用なし。【鑑別重要】Lethal White Overo Syndromeは類似症状(白色子馬+疝痛+排便なし)だが致死的、Frame Overo×Frame Overo繁殖個体での出生時にPCR確認",
     ),
     Disease(
         "fl_prematurity",
@@ -12299,7 +12751,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "prematurity+foal",
         treatment_protocol="NICU管理。酸素。輸液(ブドウ糖5-10%+電解質)。経管栄養(q2h：母乳/リプレーサー)。IgG→血漿。呼吸器支持。関節・骨端軟化の保護(バンテージ)。体温管理(保温)。感染予防。在胎320日以下→予後不良。",
         clinical_signs_detail="(1)体重不足(Thoroughbred<40 kg、正常50-55 kg)、(2)絹毛様被毛(silky coat、短く薄い)、(3)耳折れ垂れ(floppy ears、軟骨未熟)、(4)柔らかい乳様蹄殻(eponychium残存)、(5)歯肉薄ピンク・切歯未萌出、(6)関節弛緩(後肢過伸展、腱靭弛緩)・屈腱拘縮、(7)起立遅延(>3時間)・吸啜反射弱・哺乳意欲低下、(8)体温調節障害(低体温<37°C、要保温)、(9)血糖維持障害(低血糖<60 mg/dL、要持続的補正)、(10)頭部丸い・顔貌幼弱、(11)X線で手根骨・足根骨不完全骨化(grade I-IV)、(12)血液N:L比<1.0(成熟>2.0)、低コルチゾール反応、(13)Apgar様score低下、(14)入院期間長期(数週間-数ヶ月)、(15)複数合併症リスク(RDS・敗血症・低血糖・FPT・関節弛緩・骨化不全)",
-        risk_factors="【母馬】胎盤炎(絨毛膜炎、Streptococcus・Nocardia)、子宮疾患、栄養不良、Cushing症候群(PPID)、双子妊娠、過熟妊娠、高齢母馬(>16歳)、初産母馬、ホルモン異常(progesterone不足)、Fescue toxicosis(無乳・乳頭発達不全・延長妊娠)、母馬発熱・敗血症・疝痛、輸送ストレス、ワクチン未接種。【胎仔】双子、子宮内発育遅延(IUGR)、先天異常、低酸素ストレス、胎盤剥離。【誘発】母馬発熱・敗血症、ストレス・輸送、外傷、低栄養、医原性早期分娩誘発、誤った妊娠日数管理、急速分娩。【飼養管理】(1)分娩監視不在、(2)NICU設備不足・不在、(3)獣医対応の遅延、(4)スタッフ未熟児ケア教育不足、(5)血漿バンク・代用乳備蓄不在、(6)早期発見プロトコル未確立"
+        risk_factors="【母馬】胎盤炎(絨毛膜炎、Streptococcus・Nocardia)、子宮疾患、栄養不良、Cushing症候群(PPID)、双子妊娠、過熟妊娠、高齢母馬(>16歳)、初産母馬、ホルモン異常(progesterone不足)、Fescue toxicosis(無乳・乳頭発達不全・延長妊娠)、母馬発熱・敗血症・疝痛、輸送ストレス、ワクチン未接種。【胎仔】双子、子宮内発育遅延(IUGR)、先天異常、低酸素ストレス、胎盤剥離。【誘発】母馬発熱・敗血症、ストレス・輸送、外傷、低栄養、医原性早期分娩誘発、誤った妊娠日数管理、急速分娩。【飼養管理】(1)分娩監視不在、(2)NICU設備不足・不在、(3)獣医対応の遅延、(4)スタッフ未熟児ケア教育不足、(5)血漿バンク・代用乳備蓄不在、(6)早期発見プロトコル未確立",
     ),
     Disease(
         "fl_failure_passive_transfer_foal",
@@ -12315,7 +12767,7 @@ DISEASE_DATABASE: list[Disease] = [
         merck_url=_MERCK + "failure+passive+transfer+foal",
         treatment_protocol="12h以内→良質初乳PO。12h以降→血漿IV(20-40mL/kg)。IgG目標>800mg/dL。SNAP/RIDテスト。IgG<200→complete failure→高リスク(抗菌薬��用)。衛生管理徹底。",
         clinical_signs_detail="多くは無症状(IgG測定で初めて判明、要スクリーニング)。血漿輸血対象例の所見：(1)IgG<400 mg/dL(完全FPT)、(2)IgG 400-800+リスク要因(SIRS・敗血症徴候)、(3)輸血効果判定：12-24時間後のIgG>800達成。輸血関連徴候観察：(1)輸血反応(頻脈・蕁麻疹・震え・呼吸困難)2-5%、(2)Type I allergic反応最頻、(3)即時対応(中止・抗ヒスタミン・ステロイド)で改善。FPT＋感染合併進行例:発熱・嗜眠・関節腫脹・下痢・敗血症徴候、IgG補正＋抗菌薬・支持療法併用",
-        risk_factors="【血漿輸血の必要性が高いリスク】(1)母馬乳房早期漏出(初乳IgG喪失)、(2)母馬無乳・乳房不発達、(3)母馬死産・産後拒否、(4)未熟出生(<320日)、(5)起立/吸啜遅延、(6)IgG <400(完全FPT)、(7)敗血症徴候(SIRS、関節炎、下痢、肺炎)。【輸血失敗・反応リスク】(1)血漿製剤不適切保管(温度管理不良で抗体破壊)、(2)解凍方法不適切(電子レンジで抗体破壊)、(3)初期投与速度過剰(輸血反応リスク)、(4)モニタリング不在(反応見逃し)、(5)非HIP製剤使用(IgG含量不足)、(6)血液型不適合(感染症伝播・輸血反応)、(7)反復輸血(感作蓄積・反応リスク蓄積)。【予防失敗要因】(1)IgG測定スクリーニング未実施、(2)初乳バンク未備蓄、(3)血漿バンク未備蓄、(4)スタッフ輸血手技未熟、(5)緊急時対応プロトコル不在"
+        risk_factors="【血漿輸血の必要性が高いリスク】(1)母馬乳房早期漏出(初乳IgG喪失)、(2)母馬無乳・乳房不発達、(3)母馬死産・産後拒否、(4)未熟出生(<320日)、(5)起立/吸啜遅延、(6)IgG <400(完全FPT)、(7)敗血症徴候(SIRS、関節炎、下痢、肺炎)。【輸血失敗・反応リスク】(1)血漿製剤不適切保管(温度管理不良で抗体破壊)、(2)解凍方法不適切(電子レンジで抗体破壊)、(3)初期投与速度過剰(輸血反応リスク)、(4)モニタリング不在(反応見逃し)、(5)非HIP製剤使用(IgG含量不足)、(6)血液型不適合(感染症伝播・輸血反応)、(7)反復輸血(感作蓄積・反応リスク蓄積)。【予防失敗要因】(1)IgG測定スクリーニング未実施、(2)初乳バンク未備蓄、(3)血漿バンク未備蓄、(4)スタッフ輸血手技未熟、(5)緊急時対応プロトコル不在",
     ),
     Disease(
         "fl_perinatal_asphyxia2",
@@ -12327,11 +12779,15 @@ DISEASE_DATABASE: list[Disease] = [
         ["foal_seizure", "foal_weak_suckle", "foal_lethargy", "foal_failure_stand"],
         age_predisposition="young",
         urgency="emergency",
-        recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "血液ガス分析", "Blood Gas Analysis"), (3, "血液検査", "CBC")],
+        recommended_exams=[
+            (1, "臨床診断", "Clinical Diagnosis"),
+            (2, "血液ガス分析", "Blood Gas Analysis"),
+            (3, "血液検査", "CBC"),
+        ],
         merck_url=_MERCK + "perinatal+asphyxia+foal",
         treatment_protocol="【焦点：NMS/dummy foal回復管理・神経学的支持】(本項は周産期仮死後の脳症発症・dummy foal症候群回復期管理。急性蘇生プロトコルはfl_perinatal_asphyxiaを参照)。【疾患概要】Perinatal Asphyxia Syndrome(PAS)/Neonatal Maladjustment Syndrome(NMS、別名Dummy Foal、Wanderer、Sleeper)/Hypoxic-Ischemic Encephalopathy(HIE)はすべて周産期低酸素・虚血イベント後の脳機能障害症候群、急性蘇生後の神経学的回復管理が中心。Madigan & Aleman(2013)の「持続的胎児様意識状態」説、神経ステロイド異常持続(progesterone・pregnenolone)の説提唱。Madigan squeeze technique(2015)で多くの症例が改善可能。【臨床診断(典型的経過)】(1)病歴：難産・胎盤異常・周産期ストレスイベント、急性蘇生(fl_perinatal_asphyxia)後、24時間以内の意識・行動異常出現。(2)発症パターン：(a)出生直後発症型(immediate-onset, 重度低酸素):出生後数時間以内に意識・吸啜反射欠如・痙攣、(b)Delayed-onset型(典型、より多い):出生後24-48時間以内に進行性発症、最初は哺乳良好だが徐々に異常行動。(3)異常行動・神経症状(典型):(a)吸啜反射欠如/減弱・哺乳意欲喪失、(b)母馬認識障害(母馬を識別せず・哺乳しない)、(c)無目的徘徊(「wanderer」型)、(d)横臥昏睡(「sleeper」型)、(e)犬座位(ポーティング、posterior dog-sitting position)、(f)空仰ぎ(stargazing)、(g)自分の周りを回る(circling、wallseeking)、(h)発作(全身強直性間代性、部分発作、咀嚼様、頻度不定)、(i)吠え様発声(barking)、異常鳴き声、(j)興奮と抑うつの周期的変動、(k)体温調節障害、(l)瞳孔散大・対光反射減弱、(m)誤嚥性肺炎リスク(嚥下障害)、(n)眼科：眼瞼内反症・角膜潰瘍合併多い。(4)血液ガス・生化学：代謝性アシドーシス(pH<7.2、HCO3<15)、乳酸>4 mmol/L、低/高血糖、低/高Na・K血症、AST/CK上昇(筋障害)、Creatinine上昇(腎障害)、肝酵素上昇。(5)IgG測定：FPT併発多い(<800)、補正必須。(6)頭部超音波(<3週、泉門開存)・MRI(研究施設、<10日齢):脳浮腫・出血・基底核損傷評価、予後判定。(7)EEG(研究レベル):発作活動評価。(8)鑑別診断：(a)新生子敗血症(発熱・低血糖・IgG低下・血液培養陽性)、(b)低血糖単独(<40)、(c)頭蓋内出血(硬膜下血腫・くも膜下出血、外傷)、(d)髄膜炎・脳炎(発熱・CSF異常)、(e)Lavender Foal Syndrome(Arabian系統+被毛色希釈+重度神経症状、PCR診断)、(f)Lethal White(Frame Overo×Frame Overo+全身白色+疝痛)、(g)他先天性脳奇形、(h)代謝性脳症、(i)中毒(母馬植物毒摂取)。【治療(NMS回復管理)】(1)Madigan Squeeze Technique(必須・第一選択、2015年Madigan/Aleman提唱):(a)目的：体幹圧迫で産道圧迫を再現し、神経ステロイド低下→意識覚醒、(b)手技：柔軟ロープ(2-3 cm幅、長さ約4-5 m)を子馬体幹周囲(胸郭・腹部)にループ状に巻き、ハーネス様にする、両手で締め上げて20分間圧迫(均等な圧、子馬を立位または横臥位で保持)、(c)効果判定：圧迫中・解放後の意識覚醒・吸啜反射復活・正常行動の出現、(d)成功率：軽-中等症で30-60%奏効、即時効果(1回で改善)が多い、(e)反復可能(8-12時間後に再施行)、無侵襲・安全、(f)注意：強すぎる圧迫は呼吸障害・筋障害リスク、必ずトレーニング受けた獣医・スタッフが実施。(2)抗痙攣薬(発作管理):(a)急性発作 — ジアゼパム 0.05-0.2 mg/kg IV(slow、効果1-3分、4時間持続)、効果なし→ミダゾラム 0.04-0.1 mg/kg IV、(b)持続発作 — ミダゾラム CRI 0.02-0.1 mg/kg/hr、(c)再発予防 — フェノバルビタール 5-10 mg/kg IV q12h(loading)→3-5 mg/kg IV q12h(maintenance、therapeutic level 15-40 μg/mL)、(d)代替 — レベチラセタム 30-50 mg/kg PO/IV q8h(腎排泄、安全、新生子適応外だが使用報告あり)、(e)severe例 — プロポフォール CRI(0.1-0.3 mg/kg/min IV、難治性status epilepticus)、(f)発作頻度・重症度・原因(代謝性 vs 構造的)で選択。(3)抗炎症・脳浮腫対策:(a)DMSO 1 g/kg IV(10%希釈、24時間毎、3-5日、抗酸化・抗浮腫効果)、(b)マンニトール 0.25-1 g/kg IV(slow、脳ヘルニア徴候・頭蓋内圧上昇時)、(c)ヒドロコルチゾン 1-4 mg/kg IV(副腎不全併発時、HIE関連内分泌異常)、(d)コルチコステロイド一般使用は議論的(感染リスク、効果限定的)。(4)抗酸化療法：ビタミンE 25-50 IU/kg PO q12h、チアミン(B1) 5-10 mg/kg IM SID、ナイアシン 10 mg/kg PO SID。(5)代謝性アシドーシス補正：重炭酸ナトリウム 1-2 mEq/kg IV(slow、pH<7.1で)。(6)輸液：乳酸リンゲル液 4-6 mL/kg/hr、過剰輸液回避(脳浮腫リスク)、Ca含有避け(発作誘発)、Naバランス慎重(急速変動で中心橋脱髄リスク)。(7)栄養：(a)吸啜反射欠如時 — 経鼻胃管で代用乳/母乳 50-100 mL/kg/日(2-3時間毎少量)、(b)Madigan squeeze奏効・吸啜回復時 — 母乳哺乳再開、(c)血糖維持(80-150、5%デキストロース併用)、(d)誤嚥リスク高 — 上半身挙上、嚥下評価、(e)TPN(severe・48-72h以上絶食):30-40 kcal/kg/日。(8)抗菌薬予防(敗血症併発リスク高、約30%):セフチオフル 5 mg/kg IM/IV q12h、または ペニシリン 22,000 U/kg IV q6h+アミカシン 25 mg/kg IV SID(腎機能監視)。(9)IgG補正(<800 mg/dLで血漿輸血 20-40 mL/kg)。(10)眼科チェック・治療：内反症(eyelid inversion)・角膜潰瘍合併多い、人工涙液 q2-4h、エリトロマイシン軟膏 q6h、内反症は手術修正(Hotz-Celsus法、回復後)。(11)体位管理・褥瘡予防：頻回体位変換(2-4時間毎)、軟らかい敷藁、上肢支持、肺機能維持(腹臥位推奨)。(12)モニタリング(intensive):意識レベル(GCS adapted for foal)・吸啜反射・体温・血糖・乳酸・血液ガス・神経反射(膝反射・後肢屈伸)を q4-12h、発作回数・期間記録、CBC・電解質・IgG q24h、EEG(可能なら)。【回復経過と予後】(1)軽症(1-3日で意識・吸啜回復、Madigan squeeze奏効):生存率90-95%、長期予後正常、成体パフォーマンス健常。(2)中等症(3-7日で回復、軽度発作・行動異常):生存率70-85%、軽度神経学的後遺症残存可能性、概ね正常成長。(3)重症(48時間以上昏睡、持続発作、難治性アシドーシス、基底核損傷MRI):生存率30-50%、長期神経学的後遺症(行動異常・知覚過敏・学習障害・運動失調)残存リスク高、競技力低下。(4)Madigan squeeze奏効例で短時間(20分以内)覚醒、無効例は重症化マーカー(基底核・海馬不可逆損傷)。【長期管理】(1)発作再発監視(数週-数ヶ月、抗痙攣薬漸減)、(2)神経評価定期(月1回)、(3)知能・行動正常性確認(離乳・社会化期)、(4)競技訓練適応評価(2-3歳)。【予防】難産対策(分娩監視・適切な助産・帝王切開タイミング)、母馬発熱・胎盤炎の早期治療、出生直後のApgarスコア評価、リスク母馬の分娩前モニタリング、NICU設備整備、スタッフ教育(NRP-Equine + Madigan squeeze training)。【参考文献】Aleman et al. JVIM 2013(神経ステロイド説); Madigan & Aleman J Equine Vet Sci 2017(squeeze technique); Slovis Equine Vet Educ 2010(治療); Vaala AAEP Proc 1995; Lyle-Dugas et al. JVIM 2017(蘇生成績); Equine Neonatal Medicine (Knottenbelt 2004) Ch.5; Robinson/Sprayberry Current Therapy 7th ed Ch.156; AAEP Foal Resuscitation Guidelines。",
         clinical_signs_detail="出生直後または24-48時間以内発症：(1)吸啜反射欠如/減弱・哺乳意欲喪失、(2)母馬認識障害(母馬を識別せず哺乳しない)、(3)異常行動：無目的徘徊(「wanderer」型)、横臥昏睡(「sleeper」型)、犬座位(ポーティング)、空仰ぎ(stargazing)、自分の周りを回る(circling, wallseeking)、(4)発作：全身強直性間代性発作、部分発作、咀嚼様発作、(5)吠え様発声・異常鳴き声(barking)、(6)興奮と抑うつの周期的変動、(7)体温調節障害(高熱または低体温)、(8)瞳孔散大・対光反射減弱・眼球振盪、(9)眼瞼内反症・角膜潰瘍合併多い、(10)誤嚥性肺炎リスク(嚥下障害)、(11)反射異常(膝反射・後肢屈伸反射亢進または消失)、(12)Madigan squeeze奏効例で短時間覚醒、(13)血液ガス代謝性アシドーシス、IgG <800多い",
-        risk_factors="【周産期】(1)難産(分娩遷延>40分)・産道狭窄、(2)急速分娩(<10分、産道圧迫不足→神経ステロイド調節不全説)、(3)帝王切開、(4)双子分娩、(5)臍帯巻絡、(6)胎便着色羊水(MSAF)、(7)胎盤剥離・絨毛膜炎。【母馬】(1)胎盤炎(StreptococcusまたはNocardia)、(2)母馬発熱・敗血症・疝痛、(3)母馬高齢/初産・栄養不良、(4)PPID/Cushing、(5)Fescue toxicosis(エンドファイト中毒)、(6)低マグネシウム血症。【胎仔】未熟/過熟出生、子宮内発育遅延(IUGR)、双子、先天性異常。【遺伝】Thoroughbred・Standardbredで頻度高い(品種素因または管理関連バイアス)。【併発】FPT(IgG<400)・敗血症で重症化、低血糖・低体温で予後悪化、誤嚥性肺炎合併で長期入院。【鑑別重要】Lavender Foal Syndrome(Arabian、被毛色希釈)、Lethal White(全身白色、Frame Overo×Frame Overo)、敗血症性脳症との鑑別必須"
+        risk_factors="【周産期】(1)難産(分娩遷延>40分)・産道狭窄、(2)急速分娩(<10分、産道圧迫不足→神経ステロイド調節不全説)、(3)帝王切開、(4)双子分娩、(5)臍帯巻絡、(6)胎便着色羊水(MSAF)、(7)胎盤剥離・絨毛膜炎。【母馬】(1)胎盤炎(StreptococcusまたはNocardia)、(2)母馬発熱・敗血症・疝痛、(3)母馬高齢/初産・栄養不良、(4)PPID/Cushing、(5)Fescue toxicosis(エンドファイト中毒)、(6)低マグネシウム血症。【胎仔】未熟/過熟出生、子宮内発育遅延(IUGR)、双子、先天性異常。【遺伝】Thoroughbred・Standardbredで頻度高い(品種素因または管理関連バイアス)。【併発】FPT(IgG<400)・敗血症で重症化、低血糖・低体温で予後悪化、誤嚥性肺炎合併で長期入院。【鑑別重要】Lavender Foal Syndrome(Arabian、被毛色希釈)、Lethal White(全身白色、Frame Overo×Frame Overo)、敗血症性脳症との鑑別必須",
     ),
     Disease(
         "fl_tyzzers_disease",
@@ -12343,11 +12799,14 @@ DISEASE_DATABASE: list[Disease] = [
         ["foal_lethargy", "foal_fever", "foal_diarrhea", "gen_icterus"],
         age_predisposition="young",
         urgency="emergency",
-        recommended_exams=[(1, "血液生化学(肝酵素)", "Serum Biochemistry (Liver Enzymes)"), (2, "剖検(確定診断)", "Necropsy (Definitive Diagnosis)")],
+        recommended_exams=[
+            (1, "血液生化学(肝酵素)", "Serum Biochemistry (Liver Enzymes)"),
+            (2, "剖検(確定診断)", "Necropsy (Definitive Diagnosis)"),
+        ],
         merck_url=_MERCK + "tyzzer+disease+foal",
         treatment_protocol="【疾患概要】Tyzzer's Disease(ティザー病)はClostridium piliforme(旧Bacillus piliformis)による急性壊死性肝炎で、7-42日齢(典型10-21日齢)の子馬に発症する稀ながら致死率>95%の致命的疾患。生前診断は困難、しばしば突然死で発見、剖検診断が大半。世界中で散発的報告あるが、Kentucky(米)で発生集積、繁殖牧場で散発。文献的に治療成功例は10例未満。【病原体】(1)Clostridium piliforme：偏在性嫌気性グラム陰性桿菌、芽胞形成、運動性ペリトリックス鞭毛、土壌・齧歯類腸管に広く分布、(2)感染経路：経口(汚染水・飼料)、肝臓・腸管・心筋に親和性、(3)肝細胞内増殖→急性壊死性肝炎、心筋炎、腸炎、(4)種特異的に致死性差(子馬・若齢動物で重症)。【臨床診断(困難、剖検頼り)】(1)病歴：7-42日齢(典型10-21日齢)、急性発症、出生時は健常で哺乳良好、突然元気低下→数時間で急変・死亡、繁殖牧場・エンデミック地域、過去の同農場発症歴。(2)所見(発症期):(a)突然の沈うつ・嗜眠・元気消失、(b)発熱(>40°C)→急速進行で低体温(<37°C)、(c)頻脈(>140/min)、頻呼吸(>50/min)、(d)哺乳停止、(e)黄疸(舌・強膜・歯肉・耳介の黄色着色、肝壊死進行で)、(f)下痢(時に血様)、(g)発作・神経症状(肝性脳症、終末期)、(h)虚脱・横臥位・意識消失、(i)死亡(発症2-48時間以内、平均8-12時間)、(j)発見時すでに死亡が多い(突然死)。(3)CBC：白血球増多(40,000-80,000/μL)、好中球未熟核左方移動、トキシック顆粒、フィブリノーゲン上昇、貧血(慢性化なし、急性で短期)、血小板減少(DIC)、ヘマトクリット上昇(脱水)。(4)血液生化学(diagnostic key):(a)肝酵素著明上昇(AST > 5,000 U/L、ALT > 1,000 U/L、GGT > 1,000 U/L、特徴的)、(b)ビリルビン著明上昇(>10 mg/dL、混合型)、(c)グルコース<40 mg/dL(肝gluconeogenesis障害、典型・予後不良マーカー)、(d)血液凝固異常(prolonged PT/PTT、low fibrinogen、肝合成障害+DIC)、(e)BUN/Cr上昇(脱水)、(f)代謝性アシドーシス、乳酸上昇、(g)低タンパク血症(肝合成障害)、(h)アンモニア上昇(肝性脳症)。(5)血液培養：通常陰性(嫌気性・組織内増殖)。(6)肝生検(無菌的、生前診断):Warthin-Starry銀染色 or Giemsa染色で肝細胞内Clostridium piliforme silver-positive bacilli確認、PCR(C. piliforme特異的)。リスク：肝内出血(凝固異常)、必要時のみ。(7)PCR(肝組織・血液):16S rRNA・C. piliforme特異的primer、感度・特異度高、現代診断の主流(Borchers et al. 2006)。(8)血清学：IgG・IgM抗体ELISA(研究施設のみ、急性期診断には不適)。(9)肝シンチグラフィ・超音波(高エコー領域・壊死巣):限定的な情報。(10)鑑別診断：(a)他細菌性肝炎(Salmonella、E. coli)、(b)新生子敗血症単独(全身性、肝局所所見少)、(c)EHV-1新生子感染(肝壊死合併、PCR陽性)、(d)アフラトキシン中毒(母馬飼料、AST上昇)、(e)アシドフィルス中毒(肝中毒)、(f)他原因急性肝不全、(g)新生子イクテロヘモグロビン尿症(NI)、(h)急性敗血症性ショック。(11)剖検(diagnostic gold standard、多くの場合確定診断):(a)肝臓：腫大・出血・点状-斑状壊死巣(milky white spots、典型、最大1-3 cm)、(b)心筋：壊死巣・出血、(c)腸壁：粘膜壊死・潰瘍、(d)組織学：肝細胞内銀染色陽性桿菌、急性壊死性肝炎・心筋炎・腸炎、(e)PCR(組織):確定診断。【治療(極めて困難、ほぼ無効、対症療法のみ)】(1)早期発見が唯一の希望：症状発現〜数時間以内の積極治療でわずかに生存例(<5%)。(2)抗菌薬(培養結果待たず即時開始、生前診断極稀):(a)第一選択 — メトロニダゾール 15-25 mg/kg IV q8h(嫌気性活性、組織浸透良)、+ペニシリンG 22,000-44,000 U/kg IV q6h、+アミカシン 25 mg/kg IV SID。(b)代替 — オキシテトラサイクリン 6.6 mg/kg IV BID、テトラサイクリン系(C. piliformeに有効報告)、ドキシサイクリン 10 mg/kg PO BID。(c)期間 — 最低7-10日、生存例で2-3週、ただし多くは数時間以内に死亡。(3)肝庇護療法：(a)シリマリン(milk thistle extract) 5-10 mg/kg PO BID、(b)SAMe(S-adenosylmethionine) 20 mg/kg PO SID、(c)ビタミンE 25-50 IU/kg PO q12h(抗酸化)、(d)ビタミンK1 0.5-1 mg/kg SC q12h(凝固因子合成支援)。(4)循環支持・輸液：乳酸リンゲル液 4-6 mL/kg/hr、ショック時20 mL/kgボーラス、コロイド(VetStarch)、デキストロース 5% 含有(低血糖補正、必須)。(5)血糖維持(critical):50%デキストロース 1-2 mL/kg IVボーラス→5-10%デキストロース 4-6 mL/kg/hr CRI(低血糖<40で)、目標>80 mg/dL、肝gluconeogenesis障害で持続的補充必要。(6)新鮮凍結血漿(FFP):20-40 mL/kg IV(凝固因子補充、DIC対応、肝合成因子補給)。(7)血漿輸血(IgG補正):FPT併発時 20-40 mL/kg IV。(8)抗痙攣薬(肝性脳症発作時):ジアゼパム 0.05-0.2 mg/kg IV、慎重(肝代謝・呼吸抑制)。(9)アンモニア低下：(a)ラクトロース 0.1-0.5 mL/kg PO/PR q6-8h(腸内アンモニア吸収低下)、(b)ネオマイシン 10-20 mg/kg PO BID(腸内菌叢改変、腎毒性慎重)。(10)抗酸化・抗炎症:DMSO 1 g/kg IV(10%希釈、24時間毎、3-5日)、フルニキシン 0.5 mg/kg IV q12h(慎重、腎・肝障害悪化リスク)。(11)栄養：母乳継続(可能なら)、経鼻胃管 母乳/代用乳(嚥下困難時)、TPN(severe例、肝障害で慎重)。(12)昇圧薬(MAP<60持続):ドブタミン 5-10 μg/kg/min IV CRI、ノルエピネフリン。(13)モニタリング(intensive):血糖q1-2h、肝酵素q12h、PT/PTT・フィブリノーゲンq12h、ビリルビン・乳酸・血液ガスq6-12h、神経症状連続評価、CBC・電解質q12h。【感染管理(エンデミック農場)】隔離(stall別・人員機材分離)、防護衣・手袋(C. piliforme人感染稀だが用心)、stall消毒(漂白剤、芽胞耐性で蒸気滅菌推奨)、母馬・子馬同時隔離、母馬の検査(便・血清抗体)、過去発症stall・放牧地の徹底消毒(芽胞長期生存)。【予後】予後絶対不良、致死率>95%、生前診断・早期治療成功例は文献上10例未満。発症から死亡まで平均8-12時間、最大48時間。生存例も長期肝障害・成長遅延残存可能性。剖検診断が大半、所有者への遺伝カウンセリング・繁殖管理推奨。【予防】(1)清潔分娩環境(消毒・清潔敷藁、過去発症農場で特に徹底)、(2)出生6h以内初乳1L摂取・12hでIgG測定→<800で血漿輸血、(3)母馬の管理(適切栄養・ストレス軽減・ワクチン)、(4)エンデミック農場での子馬の早期糞便観察・体温測定、(5)新規導入馬の検疫・スクリーニング、(6)齧歯類駆除(C. piliforme源)、(7)放牧地共有時の他馬発症監視、(8)早期警報システム(複数子馬突然死発症時の即時剖検・PCR検査)、(9)母馬・繁殖個体の系譜記録(family clusters可能性)。【参考文献】Tyzzer JA Med Res 1917(初期記載); Borchers et al. JVIM 2006(PCR診断); Whitwell J Comp Pathol 1976(子馬報告); Saunders et al. Vet Rec 1995(治療試行); Equine Neonatal Medicine (Knottenbelt 2004) Ch.10; Robinson/Sprayberry Current Therapy 7th ed Ch.156; Carrigan & Dawkins Aust Vet J 1991(疫学)。",
         clinical_signs_detail="(1)7-42日齢発症(典型10-21日齢)、(2)出生時は健常で哺乳良好、(3)急性発症：突然の沈うつ・嗜眠・元気消失、(4)発熱(>40°C)→急速進行で低体温(<37°C、終末期)、(5)頻脈(>140/min)、頻呼吸(>50/min)、(6)哺乳停止、(7)黄疸(舌・強膜・歯肉・耳介の黄色着色、肝壊死進行で)、(8)下痢(時に血様)、(9)発作・神経症状(肝性脳症、終末期、頭部圧迫姿勢・昏迷・意識消失)、(10)虚脱・横臥位、(11)死亡(発症2-48時間以内、平均8-12時間、しばしば突然死)、(12)血液生化学：肝酵素著明上昇(AST > 5,000)、ビリルビン>10、グルコース<40(典型)、凝固異常、(13)発見時すでに死亡が多い(突然死)、剖検診断が大半",
-        risk_factors="【宿主】(1)7-42日齢(典型10-21日齢、若齢免疫未熟期)、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生・低体重子馬。【病原体】Clostridium piliforme(土壌・齧歯類常在、芽胞長期生存)、エンデミック農場・地域(Kentucky米で集積)。【環境】(1)エンデミック繁殖牧場(過去発症歴)、(2)汚染水源・飼料(齧歯類による汚染)、(3)stall・放牧地の不衛生、(4)消毒不徹底(芽胞耐性で蒸気滅菌推奨)、(5)齧歯類過密(感染源)、(6)夏季高温多湿(細菌繁殖)、(7)母馬糞便汚染。【発症パターン】(1)散発的(エンデミック農場で年1-数例)、(2)集団発生(まれ、複数子馬同時)、(3)family clusters(同腹子・同農場個体)、遺伝的素因可能性。【誘発】(1)出生後のストレス(輸送・離乳・天候)、(2)母馬周産期抗菌薬使用(腸内菌叢攪乱・C. piliforme増殖)、(3)子馬早期接触(集団飼育)。【予防失敗要因】(1)エンデミック農場の認識不在、(2)早期発見・剖検診断・PCR確認の遅延、(3)母馬・繁殖個体の系譜記録不在、(4)他施設発症情報の共有不足"
+        risk_factors="【宿主】(1)7-42日齢(典型10-21日齢、若齢免疫未熟期)、(2)FPT(IgG<800、感染リスク・重症化大)、(3)未熟出生・低体重子馬。【病原体】Clostridium piliforme(土壌・齧歯類常在、芽胞長期生存)、エンデミック農場・地域(Kentucky米で集積)。【環境】(1)エンデミック繁殖牧場(過去発症歴)、(2)汚染水源・飼料(齧歯類による汚染)、(3)stall・放牧地の不衛生、(4)消毒不徹底(芽胞耐性で蒸気滅菌推奨)、(5)齧歯類過密(感染源)、(6)夏季高温多湿(細菌繁殖)、(7)母馬糞便汚染。【発症パターン】(1)散発的(エンデミック農場で年1-数例)、(2)集団発生(まれ、複数子馬同時)、(3)family clusters(同腹子・同農場個体)、遺伝的素因可能性。【誘発】(1)出生後のストレス(輸送・離乳・天候)、(2)母馬周産期抗菌薬使用(腸内菌叢攪乱・C. piliforme増殖)、(3)子馬早期接触(集団飼育)。【予防失敗要因】(1)エンデミック農場の認識不在、(2)早期発見・剖検診断・PCR確認の遅延、(3)母馬・繁殖個体の系譜記録不在、(4)他施設発症情報の共有不足",
     ),
     # ================================================================
     # 追加泌尿器疾患 (Urinary) — 追加10疾患
@@ -12376,7 +12835,11 @@ DISEASE_DATABASE: list[Disease] = [
         "腎盂・腎実質の細菌感染。上行性感染が多い。",
         ["gen_fever", "uri_renal_pain", "uri_hematuria", "gen_weight_loss"],
         urgency="urgent",
-        recommended_exams=[(1, "尿検査・培養", "Urinalysis & Culture"), (2, "腎臓超音波", "Renal Ultrasonography"), (3, "血液生化学", "Serum Biochemistry")],
+        recommended_exams=[
+            (1, "尿検査・培養", "Urinalysis & Culture"),
+            (2, "腎臓超音波", "Renal Ultrasonography"),
+            (3, "血液生化学", "Serum Biochemistry"),
+        ],
         merck_url=_MERCK + "pyelonephritis+horses",
         treatment_protocol="長期抗菌薬(4-6週)：TMP-SMZ/エンロフロキサシン。輸液(腎灌流維持)。結石/閉塞の外科的除去。超音波で腎盂拡張モニタリング。片側膿腎症→腎摘出。対側腎機能確認必須。BUN/Cre/尿検査で治療効果判定。",
         clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭(尿毒症臭)、沈鬱",
@@ -12406,7 +12869,11 @@ DISEASE_DATABASE: list[Disease] = [
         "膀胱内の結石。炭酸カルシウム結石が最多。排尿困難・血尿。",
         ["uri_urolithiasis_signs", "uri_hematuria", "uri_stranguria", "uri_dysuria"],
         urgency="urgent",
-        recommended_exams=[(1, "直腸検査", "Rectal Examination"), (2, "膀胱超音波", "Bladder Ultrasonography"), (3, "内視鏡検査", "Cystoscopy")],
+        recommended_exams=[
+            (1, "直腸検査", "Rectal Examination"),
+            (2, "膀胱超音波", "Bladder Ultrasonography"),
+            (3, "内視鏡検査", "Cystoscopy"),
+        ],
         merck_url=_MERCK + "urolithiasis+horses",
         treatment_protocol="雌馬：経尿道的摘出(鉗子/バスケット)。砕石術(電気水圧式)。雄馬：会陰部尿道切開+膀胱切開。腹腔鏡補助下膀胱切開(低侵襲)。術後抗菌薬+膀胱洗浄。CaCO3結石が最多。食餌管理(Ca制限)。再発モニタリング。",
         clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭(尿毒症臭)、沈鬱",
@@ -12421,7 +12888,11 @@ DISEASE_DATABASE: list[Disease] = [
         "尿道内の結石嵌頓。排尿不能。雄に好発。",
         ["uri_stranguria", "uri_dysuria", "dig_colic_signs"],
         urgency="emergency",
-        recommended_exams=[(1, "臨床診断", "Clinical Diagnosis"), (2, "超音波検査", "Ultrasonography"), (3, "内視鏡検査", "Urethroscopy")],
+        recommended_exams=[
+            (1, "臨床診断", "Clinical Diagnosis"),
+            (2, "超音波検査", "Ultrasonography"),
+            (3, "内視鏡検査", "Urethroscopy"),
+        ],
         merck_url=_MERCK + "urethral+calculus+horses",
         treatment_protocol="逆行性水圧洗浄(尿道カテーテル)。砕石(レーザー/電気水圧式)。会陰部尿道切開(雄馬)。術後抗菌薬。膀胱内結石の同時評価・除去。鎮痙薬(ブスコパン)。NSAIDs。再発予防(食餌管理)。",
         clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭(尿毒症臭)、沈鬱",
@@ -12451,7 +12922,11 @@ DISEASE_DATABASE: list[Disease] = [
         "腎毒性物質(NSAID・アミノグリコシド・重金属)による急性尿細管壊死。",
         ["uri_discolored_urine", "gen_dehydration", "gen_poor_appetite"],
         urgency="emergency",
-        recommended_exams=[(1, "血液生化学(BUN, Cr)", "Serum Biochemistry (BUN, Creatinine)"), (2, "尿検査", "Urinalysis"), (3, "腎臓超音波", "Renal Ultrasonography")],
+        recommended_exams=[
+            (1, "血液生化学(BUN, Cr)", "Serum Biochemistry (BUN, Creatinine)"),
+            (2, "尿検査", "Urinalysis"),
+            (3, "腎臓超音波", "Renal Ultrasonography"),
+        ],
         merck_url=_MERCK + "toxic+nephrosis+horses",
         treatment_protocol="原因毒素除去(NSAID/アミノグリコシド/重金属/オーク)。大量輸液(4-6mL/kg/hr：腎灌流維持)。フロセミド1mg/kg IV(乏尿)。電解質補正。腎機能モニタリング(BUN/Cre/GGT尿)。NAC(アミノグリコシド腎毒性：実験的)。予後は毒素・曝露量による。",
         clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭(尿毒症臭)、沈鬱",
@@ -12467,7 +12942,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["gen_weight_loss", "gen_poor_appetite", "uri_discolored_urine"],
         age_predisposition="young",
         urgency="urgent",
-        recommended_exams=[(1, "腎臓超音波", "Renal Ultrasonography"), (2, "血液生化学", "Serum Biochemistry"), (3, "腎生検", "Renal Biopsy")],
+        recommended_exams=[
+            (1, "腎臓超音波", "Renal Ultrasonography"),
+            (2, "血液生化学", "Serum Biochemistry"),
+            (3, "腎生検", "Renal Biopsy"),
+        ],
         merck_url=_MERCK + "renal+dysplasia+horses",
         treatment_protocol="根治不可(先天性形成異常)。支持療法(慢性腎不全管理)。輸液(脱水補正)。低蛋白食。片側→対側代償(無症状の場合あり)。両側→予後不良(進行性腎不全)。超音波で腎サイズ・構造評価。子馬で発見されることが多い。",
         clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭(尿毒症臭)、沈鬱",
@@ -12482,7 +12961,11 @@ DISEASE_DATABASE: list[Disease] = [
         "免疫複合体による糸球体の炎症。蛋白尿・浮腫。",
         ["body_ventral_edema", "gen_weight_loss", "uri_discolored_urine"],
         urgency="urgent",
-        recommended_exams=[(1, "尿検査(蛋白/クレアチニン比)", "Urinalysis (UPC Ratio)"), (2, "血液生化学", "Serum Biochemistry"), (3, "腎生検", "Renal Biopsy")],
+        recommended_exams=[
+            (1, "尿検査(蛋白/クレアチニン比)", "Urinalysis (UPC Ratio)"),
+            (2, "血液生化学", "Serum Biochemistry"),
+            (3, "腎生検", "Renal Biopsy"),
+        ],
         merck_url=_MERCK + "glomerulonephritis+horses",
         treatment_protocol="原因疾患治療(感染/免疫介在性)。免疫抑制(デキサメタゾン0.04-0.1mg/kg IV：免疫介在性)。輸液。ACE阻害薬(蛋白尿軽減：ベナゼプリル：馬での使用限定的)。抗菌薬(感染性)。腎生検で確定。予後は原因・蛋白尿の程度による。",
         clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭(尿毒症臭)、沈鬱",
@@ -12498,7 +12981,11 @@ DISEASE_DATABASE: list[Disease] = [
         ["uri_hematuria", "uri_stranguria", "gen_weight_loss"],
         age_predisposition="senior",
         urgency="urgent",
-        recommended_exams=[(1, "膀胱超音波", "Bladder Ultrasonography"), (2, "内視鏡検査(膀胱鏡)", "Cystoscopy"), (3, "生検", "Biopsy")],
+        recommended_exams=[
+            (1, "膀胱超音波", "Bladder Ultrasonography"),
+            (2, "内視鏡検査(膀胱鏡)", "Cystoscopy"),
+            (3, "生検", "Biopsy"),
+        ],
         merck_url=_MERCK + "bladder+neoplasia+horses",
         treatment_protocol="SCC最多。膀胱鏡+生検で確定。外科的切除(部分膀胱切除)。シスプラチン局所注射。姑息的管理(疼痛・血尿コントロール)。予後不良(進行期で発見されることが多い)。慢性血尿・頻尿・体重減少が主徴。",
         clinical_signs_detail="排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭(尿毒症臭)、沈鬱",
@@ -12531,7 +13018,10 @@ DISEASE_DATABASE: list[Disease] = [
         "自己抗体による血小板破壊。点状出血・鼻出血。",
         ["gen_pale_mucosa", "resp_epistaxis", "skin_lesions"],
         urgency="urgent",
-        recommended_exams=[(1, "血液検査(血小板数)", "CBC (Platelet Count)"), (2, "骨髄検査", "Bone Marrow Aspiration")],
+        recommended_exams=[
+            (1, "血液検査(血小板数)", "CBC (Platelet Count)"),
+            (2, "骨髄検査", "Bone Marrow Aspiration"),
+        ],
         merck_url=_MERCK + "immune+mediated+thrombocytopenia+horses",
         treatment_protocol="デキサメタゾン0.1-0.2mg/kg IV SID→漸減。アザチオプリン(ステロイド不応)。安静(出血予防)。血小板数モニタリング。原因精査(薬物/感染/腫瘍)。血小板輸血(緊急出血時)。予後はfair(ステロイド反応性)。",
         clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑(皮膚出血斑)、貧血(粘膜蒼白)、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
@@ -12546,7 +13036,11 @@ DISEASE_DATABASE: list[Disease] = [
         "血管壁の免疫介在性炎症。四肢浮腫・皮膚壊死。Strep感染後に好発。",
         ["limb_filling", "skin_lesions", "gen_fever", "body_ventral_edema"],
         urgency="urgent",
-        recommended_exams=[(1, "皮膚生検", "Skin Biopsy"), (2, "血液検査", "CBC"), (3, "血清蛋白電気泳動", "Serum Protein Electrophoresis")],
+        recommended_exams=[
+            (1, "皮膚生検", "Skin Biopsy"),
+            (2, "血液検査", "CBC"),
+            (3, "血清蛋白電気泳動", "Serum Protein Electrophoresis"),
+        ],
         merck_url=_MERCK + "vasculitis+horses",
         treatment_protocol="デキサメタゾン0.1-0.2mg/kg IV SID→漸減。ペントキシフィリン8.5mg/kg PO BID(微小循環改善)。原因除去(感染/薬物/免疫複合体)。創傷管理(壊死組織デブリードマン)。包帯(浮腫軽減)。NSAIDs(疼痛)。皮膚生検(白血球破砕性血管炎)。蹄葉炎モニタリング。",
         clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑(皮膚出血斑)、貧血(粘膜蒼白)、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
@@ -12576,7 +13070,11 @@ DISEASE_DATABASE: list[Disease] = [
         "多臓器の肉芽腫性炎症。皮膚・消化管・呼吸器を侵す。",
         ["gen_weight_loss", "skin_lesions", "gen_poor_appetite", "body_poor_coat"],
         urgency="urgent",
-        recommended_exams=[(1, "生検", "Biopsy"), (2, "血液検査", "CBC"), (3, "腹部超音波", "Abdominal Ultrasonography")],
+        recommended_exams=[
+            (1, "生検", "Biopsy"),
+            (2, "血液検査", "CBC"),
+            (3, "腹部超音波", "Abdominal Ultrasonography"),
+        ],
         merck_url=_MERCK + "granulomatous+disease+horses",
         treatment_protocol="デキサメタゾン0.1-0.2mg/kg IV SID→プレドニゾロンPO漸減。アザチオプリン(ステロイドスペアリング)。生検(非乾酪性肉芽腫)。多臓器(皮膚/腸管/肝/肺)。鑑別(Mycobacterium/真菌/腫瘍)。予後guarded(進行性の場合)。Systemic granulomatous disease。",
         clinical_signs_detail="反復性蕁麻疹、全身性浮腫、紫斑(皮膚出血斑)、貧血(粘膜蒼白)、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少",
@@ -12585,6 +13083,7 @@ DISEASE_DATABASE: list[Disease] = [
     # ===== EQUINE REPRODUCTIVE MEDICINE - NOTE: Equine diseases in development =====
 ]
 
+
 # ---------------------------------------------------------------------------
 # Enrich horse diseases from diseases_all_species.json
 # ---------------------------------------------------------------------------
@@ -12592,6 +13091,7 @@ def _enrich_horse_diseases() -> None:
     """Fill empty dataclass fields from the JSON database."""
     import json
     import os
+
     db_path = os.path.join(
         os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
         "diseases_all_species.json",
@@ -12648,8 +13148,7 @@ def _enrich_horse_diseases() -> None:
             )
         if not disease.treatment_protocol and not disease.general_management:
             disease.general_management = (
-                f"馬における{ja_name}の管理は、原因への対処、適切な支持療法、"
-                f"獣医師の指導に基づく治療的介入を行う。"
+                f"馬における{ja_name}の管理は、原因への対処、適切な支持療法、獣医師の指導に基づく治療的介入を行う。"
             )
         if not disease.prevention:
             disease.prevention = (
@@ -12658,8 +13157,7 @@ def _enrich_horse_diseases() -> None:
             )
         if not disease.prognosis:
             disease.prognosis = (
-                "予後は重症度、診断の時期、治療への反応に依存する。"
-                "早期発見と適切な介入により転帰が改善する。"
+                "予後は重症度、診断の時期、治療への反応に依存する。早期発見と適切な介入により転帰が改善する。"
             )
 
 

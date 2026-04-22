@@ -17,16 +17,16 @@ import os
 import re
 import sys
 
-JSON_PATH = os.path.join(os.path.dirname(__file__), '..', 'diseases_all_species.json')
+JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "diseases_all_species.json")
 JSON_PATH = os.path.abspath(JSON_PATH)
 
 # Japanese text must contain at least one hiragana, katakana, or kanji character
-_JP_RE = re.compile(r'[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]')
+_JP_RE = re.compile(r"[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]")
 
 
 def main():
     print(f"Reading {JSON_PATH} ...")
-    with open(JSON_PATH, 'r', encoding='utf-8') as f:
+    with open(JSON_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     total = len(data)
@@ -37,7 +37,7 @@ def main():
     before_80_149 = 0
     before_150_plus = 0
     for d in data:
-        tja_len = len(d.get('treatment_ja', ''))
+        tja_len = len(d.get("treatment_ja", ""))
         if tja_len < 80:
             before_under_80 += 1
         elif tja_len < 150:
@@ -56,14 +56,14 @@ def main():
     skipped_no_treatment = 0
 
     for d in data:
-        tja = d.get('treatment_ja', '')
+        tja = d.get("treatment_ja", "")
         tja_len = len(tja)
 
         # Only target 80-149 character range
         if tja_len < 80 or tja_len >= 150:
             continue
 
-        treatment_en = d.get('treatment', '')
+        treatment_en = d.get("treatment", "")
 
         if not treatment_en or not isinstance(treatment_en, str):
             skipped_no_treatment += 1
@@ -79,7 +79,7 @@ def main():
             continue
 
         # Replace treatment_ja with the longer treatment field
-        d['treatment_ja'] = treatment_en
+        d["treatment_ja"] = treatment_en
         updated_count += 1
 
     print("\n=== UPDATE SUMMARY ===")
@@ -93,7 +93,7 @@ def main():
     after_80_149 = 0
     after_150_plus = 0
     for d in data:
-        tja_len = len(d.get('treatment_ja', ''))
+        tja_len = len(d.get("treatment_ja", ""))
         if tja_len < 80:
             after_under_80 += 1
         elif tja_len < 150:
@@ -112,12 +112,12 @@ def main():
 
     # --- Write back ---
     print(f"\nWriting updated data to {JSON_PATH} ...")
-    with open(JSON_PATH, 'w', encoding='utf-8') as f:
+    with open(JSON_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print("Done.")
 
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

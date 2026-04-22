@@ -12,6 +12,7 @@ from reco2.confidence_adapter import create_ai_confidence_context
 def reload_engine():
     """Reload engine before each test to ensure clean state."""
     import reco2.store as store
+
     importlib.reload(store)
     importlib.reload(engine)
     yield
@@ -71,15 +72,11 @@ class TestApplyAIConfidenceToPsi:
         psi = 1.0
 
         # Out of range high
-        adjusted_psi, multiplier = engine._apply_ai_confidence_to_psi(
-            psi, {"confidence": 1.5}
-        )
+        adjusted_psi, multiplier = engine._apply_ai_confidence_to_psi(psi, {"confidence": 1.5})
         assert multiplier <= 1.2
 
         # Out of range low
-        adjusted_psi, multiplier = engine._apply_ai_confidence_to_psi(
-            psi, {"confidence": -0.5}
-        )
+        adjusted_psi, multiplier = engine._apply_ai_confidence_to_psi(psi, {"confidence": -0.5})
         assert multiplier >= 0.6
 
     def test_preserves_positive_psi(self):
@@ -483,7 +480,5 @@ class TestAIConfidenceInFeedback:
         assert session_id is not None
 
         # Verify we can give feedback on this session
-        feedback = engine.record_feedback(
-            {"session_id": session_id, "domain": "test", "feedback": "good"}
-        )
+        feedback = engine.record_feedback({"session_id": session_id, "domain": "test", "feedback": "good"})
         assert feedback["status"] == "recorded"

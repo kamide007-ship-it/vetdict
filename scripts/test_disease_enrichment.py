@@ -34,6 +34,7 @@ def test_enrichment():
     # Load disease database
     try:
         from api.species.dog_diseases import DISEASES as _DISEASE_DB
+
         print(f"✓ Loaded {len(_DISEASE_DB)} diseases")
     except Exception as e:
         print(f"✗ Failed to load disease database: {e}")
@@ -117,6 +118,7 @@ def test_enrichment():
     except Exception as e:
         print(f"✗ Enrichment failed: {e}")
         import traceback
+
         traceback.print_exc()
         return False
 

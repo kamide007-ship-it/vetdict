@@ -472,4 +472,3 @@ ISCAID_UTI_NOTES_PATCH: dict[str, dict[str, dict[str, str]]] = {
         },
     },
 }
-

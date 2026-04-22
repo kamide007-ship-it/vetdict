@@ -34,6 +34,7 @@ from api.drug_dictionary import (
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture(scope="module")
 def app():
     """Minimal Flask application with drug_bp registered."""
@@ -116,6 +117,7 @@ def test_drug_categories_nsaids_values():
 # DRUGS list / data structure tests
 # ---------------------------------------------------------------------------
 
+
 def test_drugs_is_non_empty_list():
     assert isinstance(DRUGS, list)
     assert len(DRUGS) > 0
@@ -132,24 +134,16 @@ def test_every_drug_has_required_fields():
 
 def test_every_drug_category_is_known():
     for drug in DRUGS:
-        assert drug["category"] in DRUG_CATEGORIES, (
-            f"Drug '{drug['id']}' has unknown category '{drug['category']}'"
-        )
+        assert drug["category"] in DRUG_CATEGORIES, f"Drug '{drug['id']}' has unknown category '{drug['category']}'"
 
 
 def test_drug_species_info_structure():
     """Each species entry must have at least 'safe' and 'dosage' keys."""
     for drug in DRUGS:
         for species, info in drug.get("species_info", {}).items():
-            assert "safe" in info, (
-                f"Drug '{drug['id']}' / species '{species}' missing 'safe'"
-            )
-            assert "dosage" in info, (
-                f"Drug '{drug['id']}' / species '{species}' missing 'dosage'"
-            )
-            assert isinstance(info["safe"], bool), (
-                f"Drug '{drug['id']}' / species '{species}': 'safe' must be bool"
-            )
+            assert "safe" in info, f"Drug '{drug['id']}' / species '{species}' missing 'safe'"
+            assert "dosage" in info, f"Drug '{drug['id']}' / species '{species}' missing 'dosage'"
+            assert isinstance(info["safe"], bool), f"Drug '{drug['id']}' / species '{species}': 'safe' must be bool"
 
 
 def test_amoxicillin_present_and_correct():
@@ -177,6 +171,7 @@ def test_all_drug_ids_unique():
 # ---------------------------------------------------------------------------
 # search_drugs() tests
 # ---------------------------------------------------------------------------
+
 
 def test_search_drugs_returns_list():
     result = search_drugs("")
@@ -233,9 +228,7 @@ def test_search_drugs_with_species_dog_excludes_unsafe():
     # All returned drugs must be safe for dogs
     for drug in result:
         info = drug["species_info"].get("dog", {})
-        assert info.get("safe") is True, (
-            f"Drug '{drug['id']}' returned for 'dog' but is not safe"
-        )
+        assert info.get("safe") is True, f"Drug '{drug['id']}' returned for 'dog' but is not safe"
 
 
 def test_search_drugs_with_species_rabbit_excludes_amoxicillin():
@@ -255,9 +248,7 @@ def test_search_drugs_species_with_no_species_info_excluded():
     # A drug with no rabbit entry at all should be excluded when filtering by rabbit
     result = search_drugs("", species="rabbit")
     for drug in result:
-        assert "rabbit" in drug.get("species_info", {}), (
-            f"Drug '{drug['id']}' has no rabbit info but was returned"
-        )
+        assert "rabbit" in drug.get("species_info", {}), f"Drug '{drug['id']}' has no rabbit info but was returned"
 
 
 def test_search_drugs_combined_query_and_category():
@@ -286,6 +277,7 @@ def test_search_drugs_none_query_treated_as_empty():
 # ---------------------------------------------------------------------------
 # get_drugs_by_category() tests
 # ---------------------------------------------------------------------------
+
 
 def test_get_drugs_by_category_antibiotics():
     result = get_drugs_by_category("antibiotics")
@@ -327,6 +319,7 @@ def test_get_drugs_by_category_all_categories_return_lists():
 # get_drugs_by_species() tests
 # ---------------------------------------------------------------------------
 
+
 def test_get_drugs_by_species_dog_returns_list():
     result = get_drugs_by_species("dog")
     assert isinstance(result, list)
@@ -336,9 +329,7 @@ def test_get_drugs_by_species_dog_returns_list():
 def test_get_drugs_by_species_dog_all_have_species_dosage():
     result = get_drugs_by_species("dog")
     for drug in result:
-        assert "_species_dosage" in drug, (
-            f"Drug '{drug['id']}' missing '_species_dosage' key"
-        )
+        assert "_species_dosage" in drug, f"Drug '{drug['id']}' missing '_species_dosage' key"
 
 
 def test_get_drugs_by_species_dog_species_dosage_structure():
@@ -403,14 +394,13 @@ def test_get_drugs_by_species_unknown_species_returns_empty():
 def test_get_drugs_by_species_only_includes_drugs_with_that_species():
     result = get_drugs_by_species("hamster")
     for drug in result:
-        assert "hamster" in drug.get("species_info", {}), (
-            f"Drug '{drug['id']}' has no hamster info but was returned"
-        )
+        assert "hamster" in drug.get("species_info", {}), f"Drug '{drug['id']}' has no hamster info but was returned"
 
 
 # ---------------------------------------------------------------------------
 # get_drug_by_id() tests
 # ---------------------------------------------------------------------------
+
 
 def test_get_drug_by_id_amoxicillin():
     drug = get_drug_by_id("amoxicillin")
@@ -457,6 +447,7 @@ def test_get_drug_by_id_case_sensitive():
 # ---------------------------------------------------------------------------
 # Flask route tests
 # ---------------------------------------------------------------------------
+
 
 class TestApiListDrugs:
     def test_get_all_drugs_status_200(self, client):
@@ -649,6 +640,5 @@ class TestApiDrugCategories:
         for cat in data["categories"]:
             expected = len([d for d in DRUGS if d["category"] == cat["id"]])
             assert cat["count"] == expected, (
-                f"Category '{cat['id']}' count mismatch: "
-                f"got {cat['count']}, expected {expected}"
+                f"Category '{cat['id']}' count mismatch: got {cat['count']}, expected {expected}"
             )

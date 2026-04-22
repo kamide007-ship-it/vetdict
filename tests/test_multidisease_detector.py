@@ -14,6 +14,7 @@ from api.ai.multidisease_detector import (
 
 # ── Helper factories ─────────────────────────────────────────────────
 
+
 def _disease(name, match_percent=50, **kwargs):
     d = {"name": name, "match_percent": match_percent}
     d.update(kwargs)
@@ -33,8 +34,8 @@ def _combo(diseases, confidence=0.5, **kwargs):
 
 # ── DiseaseCombination dataclass ─────────────────────────────────────
 
-class TestDiseaseCombination:
 
+class TestDiseaseCombination:
     def test_to_dict_keys(self):
         combo = _combo(["A", "B"], confidence=0.65)
         d = combo.to_dict()
@@ -59,8 +60,8 @@ class TestDiseaseCombination:
 
 # ── MultiDiseaseDetector.should_explore_multidisease ─────────────────
 
-class TestShouldExploreMultidisease:
 
+class TestShouldExploreMultidisease:
     def test_too_few_symptoms(self):
         result = MultiDiseaseDetector.should_explore_multidisease(
             detected_symptoms=["s1", "s2"],
@@ -122,8 +123,8 @@ class TestShouldExploreMultidisease:
 
 # ── MultiDiseaseDetector.generate_multidisease_candidates ────────────
 
-class TestGenerateMultidiseaseCandidates:
 
+class TestGenerateMultidiseaseCandidates:
     def test_fewer_than_2_diseases(self):
         combos = MultiDiseaseDetector.generate_multidisease_candidates(
             suspected_diseases=[_disease("A", 80)],
@@ -183,8 +184,8 @@ class TestGenerateMultidiseaseCandidates:
 
 # ── MultiDiseaseDetector._calculate_interaction_effect ────────────────
 
-class TestInteractionEffect:
 
+class TestInteractionEffect:
     def test_zero_symptoms(self):
         effect = MultiDiseaseDetector._calculate_interaction_effect("A", "B", 0, 0)
         assert effect == 0.0
@@ -204,8 +205,8 @@ class TestInteractionEffect:
 
 # ── MultiDiseaseDetector.validate_combination ────────────────────────
 
-class TestValidateCombination:
 
+class TestValidateCombination:
     def test_validate_returns_tuple(self):
         combo = _combo(["Hip Dysplasia", "Osteoarthritis"])
         valid, reason = MultiDiseaseDetector.validate_combination(combo)
@@ -220,8 +221,8 @@ class TestValidateCombination:
 
 # ── MultiDiseaseDetector.rank_combinations_by_likelihood ─────────────
 
-class TestRankCombinations:
 
+class TestRankCombinations:
     def test_ranks_descending(self):
         combos = [
             _combo(["A", "B"], confidence=0.3),
@@ -239,8 +240,8 @@ class TestRankCombinations:
 
 # ── MultiDiseaseDetector.estimate_symptom_allocation ─────────────────
 
-class TestEstimateSymptomAllocation:
 
+class TestEstimateSymptomAllocation:
     def test_returns_dict(self):
         alloc = MultiDiseaseDetector.estimate_symptom_allocation(
             diseases=["A", "B"],
@@ -253,8 +254,8 @@ class TestEstimateSymptomAllocation:
 
 # ── MultiDiseaseDetector.apply_ambiguity_adjustment ──────────────────
 
-class TestApplyAmbiguityAdjustment:
 
+class TestApplyAmbiguityAdjustment:
     def test_adjustment_reduces_confidence(self):
         combo = _combo(["A", "B"], confidence=0.8)
         adjusted = MultiDiseaseDetector.apply_ambiguity_adjustment(combo, 0.7)
@@ -270,8 +271,8 @@ class TestApplyAmbiguityAdjustment:
 
 # ── MultiDiseaseSession ─────────────────────────────────────────────
 
-class TestMultiDiseaseSession:
 
+class TestMultiDiseaseSession:
     def test_init(self):
         combo = _combo(["A", "B"], confidence=0.6)
         session = MultiDiseaseSession(
@@ -316,8 +317,8 @@ class TestMultiDiseaseSession:
 
 # ── Explanation generation ───────────────────────────────────────────
 
-class TestExplanations:
 
+class TestExplanations:
     def test_explanation_ja_with_mechanism(self):
         exp = MultiDiseaseDetector._generate_explanation_ja("A", "B", None)
         assert "組み合わせ" in exp
@@ -329,8 +330,8 @@ class TestExplanations:
 
 # ── _classify_symptom_system ─────────────────────────────────────────
 
-class TestClassifySymptomSystem:
 
+class TestClassifySymptomSystem:
     def test_respiratory_symptom(self):
         systems = _classify_symptom_system("coughing")
         assert "respiratory" in systems
@@ -385,37 +386,39 @@ class TestClassifySymptomSystem:
 
 # ── should_explore_multidisease body-system clustering ───────────────
 
-class TestShouldExploreBodySystemClustering:
 
+class TestShouldExploreBodySystemClustering:
     def test_multi_system_symptoms_trigger(self):
         """Symptoms spanning 2+ body systems should trigger multi-disease."""
         symptoms = [
-            "coughing", "sneezing", "nasal_discharge",  # respiratory
-            "vomiting", "diarrhea",  # gastrointestinal
+            "coughing",
+            "sneezing",
+            "nasal_discharge",  # respiratory
+            "vomiting",
+            "diarrhea",  # gastrointestinal
         ]
         diseases = [
             _disease("DiseaseA", 60),
             _disease("DiseaseB", 55),
         ]
-        result = MultiDiseaseDetector.should_explore_multidisease(
-            symptoms, diseases
-        )
+        result = MultiDiseaseDetector.should_explore_multidisease(symptoms, diseases)
         assert result is True
 
     def test_single_system_symptoms_no_trigger(self):
         """Symptoms all in one system should not trigger via clustering."""
         symptoms = [
-            "coughing", "sneezing", "nasal_discharge",
-            "wheezing", "breathing_difficulty",
+            "coughing",
+            "sneezing",
+            "nasal_discharge",
+            "wheezing",
+            "breathing_difficulty",
         ]
         # Two diseases with very different confidence (spread >= 0.15)
         diseases = [
             _disease("DiseaseA", 80),
             _disease("DiseaseB", 30),
         ]
-        result = MultiDiseaseDetector.should_explore_multidisease(
-            symptoms, diseases
-        )
+        result = MultiDiseaseDetector.should_explore_multidisease(symptoms, diseases)
         # Single system + wide confidence spread → no trigger
         assert result is False
 
@@ -423,16 +426,14 @@ class TestShouldExploreBodySystemClustering:
         """Even multi-system, <5 symptoms is rejected."""
         symptoms = ["coughing", "vomiting", "limping"]
         diseases = [_disease("A", 50), _disease("B", 50)]
-        result = MultiDiseaseDetector.should_explore_multidisease(
-            symptoms, diseases
-        )
+        result = MultiDiseaseDetector.should_explore_multidisease(symptoms, diseases)
         assert result is False
 
 
 # ── estimate_symptom_allocation with disease_symptom_sets ────────────
 
-class TestBayesianSymptomAllocation:
 
+class TestBayesianSymptomAllocation:
     def test_unique_symptoms_assigned_correctly(self):
         """Symptoms unique to one disease go to that disease."""
         alloc = MultiDiseaseDetector.estimate_symptom_allocation(

@@ -13,7 +13,6 @@ Covers:
 All tests are pure in-process (no database, no API keys, no network).
 """
 
-
 from api.species.helpers import (
     ADVICE,
     SPECIES_BREEDS,
@@ -99,6 +98,7 @@ ALL_DISEASES = [
 # 1. _compute_severity
 # =============================================================================
 
+
 class TestComputeSeverity:
     """Tests for _compute_severity(suspected)."""
 
@@ -174,6 +174,7 @@ class TestComputeSeverity:
 # 2. analyze_symptoms_generic
 # =============================================================================
 
+
 class TestAnalyzeSymptomsGeneric:
     """Tests for analyze_symptoms_generic(...)."""
 
@@ -210,8 +211,13 @@ class TestAnalyzeSymptomsGeneric:
     def test_each_suspected_entry_has_required_keys(self):
         result = self._call(["vomiting", "diarrhea"])
         required = {
-            "name", "name_ja", "likelihood", "match_percent",
-            "color_class", "matching_symptoms", "match_count",
+            "name",
+            "name_ja",
+            "likelihood",
+            "match_percent",
+            "color_class",
+            "matching_symptoms",
+            "match_count",
             "total_symptoms",
         }
         for entry in result["suspected_diseases"]:
@@ -295,12 +301,8 @@ class TestAnalyzeSymptomsGeneric:
     def test_acute_onset_boosts_acute_disease(self):
         result_acute = self._call(["vomiting", "diarrhea", "lethargy"], onset="acute")
         result_chronic = self._call(["vomiting", "diarrhea", "lethargy"], onset="chronic")
-        gi_acute = next(
-            (d for d in result_acute["suspected_diseases"] if d["name"] == "Gastroenteritis"), None
-        )
-        gi_chronic = next(
-            (d for d in result_chronic["suspected_diseases"] if d["name"] == "Gastroenteritis"), None
-        )
+        gi_acute = next((d for d in result_acute["suspected_diseases"] if d["name"] == "Gastroenteritis"), None)
+        gi_chronic = next((d for d in result_chronic["suspected_diseases"] if d["name"] == "Gastroenteritis"), None)
         # Gastroenteritis has onset_pattern={"acute"}, so acute should score >= chronic
         if gi_acute and gi_chronic:
             assert gi_acute["match_percent"] >= gi_chronic["match_percent"]
@@ -492,6 +494,7 @@ class TestAnalyzeSymptomsGeneric:
 # 2b. Edge Cases for analyze_symptoms_generic
 # =============================================================================
 
+
 class TestAnalyzeSymptomsGenericEdgeCases:
     """Edge cases: empty inputs, no matches, etc."""
 
@@ -600,6 +603,7 @@ class TestAnalyzeSymptomsGenericEdgeCases:
 # 3. ADVICE dict structure
 # =============================================================================
 
+
 class TestAdviceDict:
     """Validate the ADVICE module-level constant."""
 
@@ -628,14 +632,28 @@ class TestAdviceDict:
 # 4. SPECIES_BREEDS data validation
 # =============================================================================
 
+
 class TestSpeciesBreeds:
     """Validate the SPECIES_BREEDS module-level constant."""
 
     EXPECTED_SPECIES = {
-        "cat", "rabbit", "hamster", "ferret", "guinea_pig",
-        "chinchilla", "hedgehog", "bird", "parakeet", "parrot",
-        "reptile", "tortoise", "snake", "lizard", "amphibian",
-        "sugar_glider", "degu",
+        "cat",
+        "rabbit",
+        "hamster",
+        "ferret",
+        "guinea_pig",
+        "chinchilla",
+        "hedgehog",
+        "bird",
+        "parakeet",
+        "parrot",
+        "reptile",
+        "tortoise",
+        "snake",
+        "lizard",
+        "amphibian",
+        "sugar_glider",
+        "degu",
     }
 
     def test_expected_species_present(self):
@@ -644,18 +662,14 @@ class TestSpeciesBreeds:
 
     def test_each_species_has_nonempty_breed_list(self):
         for species, breeds in SPECIES_BREEDS.items():
-            assert isinstance(breeds, list) and len(breeds) > 0, (
-                f"SPECIES_BREEDS[{species}] should be a non-empty list"
-            )
+            assert isinstance(breeds, list) and len(breeds) > 0, f"SPECIES_BREEDS[{species}] should be a non-empty list"
 
     def test_each_breed_has_required_keys(self):
         required = {"id", "name", "name_ja", "risk"}
         for species, breeds in SPECIES_BREEDS.items():
             for breed in breeds:
                 missing = required - breed.keys()
-                assert not missing, (
-                    f"Breed {breed.get('id')} in {species} missing keys: {missing}"
-                )
+                assert not missing, f"Breed {breed.get('id')} in {species} missing keys: {missing}"
 
     def test_breed_id_is_nonempty_string(self):
         for _species, breeds in SPECIES_BREEDS.items():
@@ -704,6 +718,7 @@ class TestSpeciesBreeds:
 # =============================================================================
 # 5. compute_lab_boosts
 # =============================================================================
+
 
 class TestComputeLabBoosts:
     """Tests for compute_lab_boosts(lab_values)."""
@@ -781,9 +796,7 @@ class TestComputeLabBoosts:
     def test_result_values_are_positive_floats(self):
         result = compute_lab_boosts({"bun": 60.0, "glucose": 300.0, "alt": 500.0})
         for disease, multiplier in result.items():
-            assert isinstance(multiplier, float) and multiplier > 0, (
-                f"Invalid multiplier {multiplier} for {disease}"
-            )
+            assert isinstance(multiplier, float) and multiplier > 0, f"Invalid multiplier {multiplier} for {disease}"
 
     def test_lab_values_at_exactly_threshold_are_normal(self):
         # Boundary: exactly at high_threshold (not strictly greater) -> normal
@@ -794,6 +807,7 @@ class TestComputeLabBoosts:
 # =============================================================================
 # 6. _fuzzy_boost_lookup
 # =============================================================================
+
 
 class TestFuzzyBoostLookup:
     """Tests for _fuzzy_boost_lookup(disease_name, boost_dict)."""

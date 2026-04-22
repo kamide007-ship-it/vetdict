@@ -8,7 +8,7 @@ import sys
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from api.ai.multidisease_expander import (
     DiseaseInteraction,
@@ -117,10 +117,8 @@ class TestUnifiedClinicalEngine:
 
         # Should have logged multiple workflow stages
         assert len(engine.workflow_log) > 0
-        assert any(log[1] == DiagnosticWorkflow.INITIAL_ASSESSMENT
-                  for log in engine.workflow_log)
-        assert any(log[1] == DiagnosticWorkflow.TREATMENT_PLANNING
-                  for log in engine.workflow_log)
+        assert any(log[1] == DiagnosticWorkflow.INITIAL_ASSESSMENT for log in engine.workflow_log)
+        assert any(log[1] == DiagnosticWorkflow.TREATMENT_PLANNING for log in engine.workflow_log)
 
     def test_record_diagnosis_outcome(self, engine, sample_interaction_matrix):
         """Test outcome recording."""
@@ -260,8 +258,10 @@ class TestUnifiedClinicalEngine:
         if diagnosis.treatment_recommendations:
             # Should be sorted by success probability
             for i in range(len(diagnosis.treatment_recommendations) - 1):
-                assert (diagnosis.treatment_recommendations[i].success_probability >=
-                       diagnosis.treatment_recommendations[i + 1].success_probability)
+                assert (
+                    diagnosis.treatment_recommendations[i].success_probability
+                    >= diagnosis.treatment_recommendations[i + 1].success_probability
+                )
 
     def test_monitoring_plan_generation(self, engine, sample_interaction_matrix):
         """Test monitoring plan generation."""
@@ -298,9 +298,7 @@ class TestUnifiedClinicalEngine:
         )
 
         high_conf_predictions = {"Pancreatitis": 0.95}
-        high_diagnosis = engine.comprehensive_analysis(
-            high_conf_case, high_conf_predictions
-        )
+        high_diagnosis = engine.comprehensive_analysis(high_conf_case, high_conf_predictions)
 
         # Low confidence case
         low_conf_case = ClinicalCase(
@@ -312,9 +310,7 @@ class TestUnifiedClinicalEngine:
         )
 
         low_conf_predictions = {"Disease_A": 0.45, "Disease_B": 0.40}
-        low_diagnosis = engine.comprehensive_analysis(
-            low_conf_case, low_conf_predictions
-        )
+        low_diagnosis = engine.comprehensive_analysis(low_conf_case, low_conf_predictions)
 
         # High confidence case should have higher confidence level
         assert high_diagnosis.confidence_level >= low_diagnosis.confidence_level
@@ -345,8 +341,7 @@ class TestUnifiedClinicalEngine:
         # Differentials should exist and be sorted
         assert len(diagnosis.differential_diagnoses) > 0
         for i in range(len(diagnosis.differential_diagnoses) - 1):
-            assert (diagnosis.differential_diagnoses[i][1] >=
-                   diagnosis.differential_diagnoses[i + 1][1])
+            assert diagnosis.differential_diagnoses[i][1] >= diagnosis.differential_diagnoses[i + 1][1]
 
     def test_to_dict_export(self, engine, sample_interaction_matrix):
         """Test exporting engine state."""

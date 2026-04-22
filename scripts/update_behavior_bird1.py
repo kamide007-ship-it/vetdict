@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Update bird behavioral disease treatments - batch 1 (10 entries)."""
+
 import json
 
 with open("diseases_all_species.json", "r") as f:

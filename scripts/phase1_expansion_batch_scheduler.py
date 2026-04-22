@@ -69,8 +69,8 @@ class Phase1ExpansionScheduler:
             "statistics": {
                 "total_diseases": sum(self.EXPANSION_SPECIES.values()),
                 "total_cost_estimate": sum(self.EXPANSION_SPECIES.values()) * 0.025,
-                "total_standard_cost": sum(self.EXPANSION_SPECIES.values()) * 0.05
-            }
+                "total_standard_cost": sum(self.EXPANSION_SPECIES.values()) * 0.05,
+            },
         }
 
     def _save_manifest(self):
@@ -175,7 +175,7 @@ class Phase1ExpansionScheduler:
                     "status": "processing",
                     "total_requests": total_requests,
                     "disease_count": len(species_diseases),
-                    "estimated_cost": len(species_diseases) * 0.025
+                    "estimated_cost": len(species_diseases) * 0.025,
                 }
 
                 batch_ids_by_species[species] = batch_ids
@@ -192,7 +192,7 @@ class Phase1ExpansionScheduler:
                 self.batch_tracking["batches"][species] = {
                     "status": "failed",
                     "error": str(e),
-                    "failed_at": datetime.now().isoformat()
+                    "failed_at": datetime.now().isoformat(),
                 }
 
         self._save_manifest()
@@ -246,8 +246,7 @@ class Phase1ExpansionScheduler:
 
                     print(f"  {status_emoji} {batch_id}")
                     print(f"     Status: {batch.processing_status}")
-                    print(f"     Succeeded: {batch.request_counts.succeeded} | "
-                          f"Errored: {batch.request_counts.errored}")
+                    print(f"     Succeeded: {batch.request_counts.succeeded} | Errored: {batch.request_counts.errored}")
 
                     if batch.processing_status != "ended":
                         all_completed = False

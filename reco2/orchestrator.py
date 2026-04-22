@@ -41,7 +41,9 @@ class Orchestrator:
             "llm_model": None,
         }
 
-    def process(self, user_input: str, domain: str = "general", context: Optional[Dict[str, Any]] = None, max_tokens: int = 1024) -> Dict[str, Any]:
+    def process(
+        self, user_input: str, domain: str = "general", context: Optional[Dict[str, Any]] = None, max_tokens: int = 1024
+    ) -> Dict[str, Any]:
         cfg = load_config()
         self.PSI_REGEN_THRESHOLD = float(cfg.get("psi_regen_threshold", self.PSI_REGEN_THRESHOLD))
         self.PSI_ANNOT_THRESHOLD = float(cfg.get("psi_annot_threshold", self.PSI_ANNOT_THRESHOLD))
@@ -127,7 +129,9 @@ class Orchestrator:
             "llm_model": res.get("model"),
         }
 
+
 _instance: Optional[Orchestrator] = None
+
 
 def get_orchestrator() -> Orchestrator:
     global _instance
@@ -135,6 +139,7 @@ def get_orchestrator() -> Orchestrator:
         cfg = load_config()
         _instance = Orchestrator(create_adapter(cfg.get("llm_adapter", "dummy"), model=cfg.get("llm_model", "")))
     return _instance
+
 
 def set_orchestrator(orch: Orchestrator) -> None:
     global _instance

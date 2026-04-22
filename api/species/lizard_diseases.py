@@ -22,7 +22,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Metabolic Bone Disease (MBD)",
         "name_ja": "代謝性骨疾患（MBD）",
-        "symptoms": {"soft_bones", "tremors", "weakness", "lethargy", "fractures", "swollen_limbs", "jaw_softening", "anorexia", "rubber_jaw"},
+        "symptoms": {
+            "soft_bones",
+            "tremors",
+            "weakness",
+            "lethargy",
+            "fractures",
+            "swollen_limbs",
+            "jaw_softening",
+            "anorexia",
+            "rubber_jaw",
+        },
         "description": "Metabolic Bone Disease (MBD) is a metabolic disorder caused by calcium-phosphorus imbalance and/or vitamin D3 deficiency, leading to progressive skeletal demineralization, pathological fractures, and deformities.",
         "description_ja": "飼育下のトカゲで最も多い栄養性疾患で、カルシウム不足、リン比の不均衡、UVB不足が原因です。",
         "urgency": "high",
@@ -206,7 +216,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Atadenovirus Infection (ADV)",
         "name_ja": "アタデノウイルス感染症（ADV）",
-        "symptoms": {"anorexia", "lethargy", "diarrhea", "neurological_signs", "weight_loss", "liver_enlargement", "sudden_death", "failure_to_thrive"},
+        "symptoms": {
+            "anorexia",
+            "lethargy",
+            "diarrhea",
+            "neurological_signs",
+            "weight_loss",
+            "liver_enlargement",
+            "sudden_death",
+            "failure_to_thrive",
+        },
         "description": "Atadenovirus Infection (ADV) is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "フトアゴヒゲトカゲに非常に多いウイルス感染症で、肝炎、腸炎、免疫抑制を引き起こし、幼体では致死的です。",
         "urgency": "high",
@@ -294,7 +313,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
         "name_ja": "黄色真菌症（CANV）",
-        "symptoms": {"yellow_skin_patches", "skin_lesions", "crusty_patches", "dysecdysis", "anorexia", "lethargy", "skin_necrosis"},
+        "symptoms": {
+            "yellow_skin_patches",
+            "skin_lesions",
+            "crusty_patches",
+            "dysecdysis",
+            "anorexia",
+            "lethargy",
+            "skin_necrosis",
+        },
         "description": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "主にフトアゴヒゲトカゲに影響する高侵攻性で致死的な真菌感染症で、深部皮膚壊死を引き起こします。",
         "urgency": "emergency",
@@ -361,7 +388,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pneumonia (Lower Respiratory Infection)",
         "name_ja": "肺炎（下部呼吸器感染症）",
-        "symptoms": {"open_mouth_breathing", "respiratory_distress", "wheezing", "nasal_discharge", "lethargy", "anorexia", "mucus_in_mouth"},
+        "symptoms": {
+            "open_mouth_breathing",
+            "respiratory_distress",
+            "wheezing",
+            "nasal_discharge",
+            "lethargy",
+            "anorexia",
+            "mucus_in_mouth",
+        },
         "description": "Pneumonia (Lower Respiratory Infection) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "未治療の場合に生命を脅かす可能性のある肺の細菌・真菌感染症です。",
         "urgency": "high",
@@ -925,7 +960,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Egg Binding (Dystocia)",
         "name_ja": "卵塞（難産）",
-        "symptoms": {"straining", "anorexia", "lethargy", "abdominal_swelling", "restlessness", "cloacal_swelling", "digging_behavior"},
+        "symptoms": {
+            "straining",
+            "anorexia",
+            "lethargy",
+            "abdominal_swelling",
+            "restlessness",
+            "cloacal_swelling",
+            "digging_behavior",
+        },
         "description": "Egg Binding (Dystocia) is a reproductive condition affecting fertility, gestation, or parturition.",
         "description_ja": "カルシウム不足、産卵場所の欠如、過大卵により卵を産めない状態です。",
         "urgency": "emergency",
@@ -1084,7 +1127,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dehydration",
         "name_ja": "脱水症",
-        "symptoms": {"sunken_eyes", "wrinkled_skin", "decreased_skin_elasticity", "lethargy", "anorexia", "dry_mucous_membranes"},
+        "symptoms": {
+            "sunken_eyes",
+            "wrinkled_skin",
+            "decreased_skin_elasticity",
+            "lethargy",
+            "anorexia",
+            "dry_mucous_membranes",
+        },
         "description": "Dehydration is a condition of inadequate body fluid volume requiring fluid replacement therapy.",
         "description_ja": "流れる水から飲水を好む種（カメレオン）などで多い水分摂取不足です。",
         "urgency": "moderate",
@@ -1497,7 +1547,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"young", "adult", "senior"},
     },
-
     # ── 追加疾患 (Additional Diseases) ──
     {
         "name": "Nidovirus Infection",
@@ -2804,8 +2853,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
-
-
     # ── 追加疾患2 ──
     {
         "name": "Photosensitization Dermatitis",
@@ -2870,32 +2917,31 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Infectious Stomatitis (Mouth Rot)",
         "name_ja": "感染性口内炎（マウスロット）",
-        "symptoms": {"mouth_lesions", "anorexia", "oral_discharge",
-                      "swollen_jaw", "lethargy", "weight_loss"},
+        "symptoms": {"mouth_lesions", "anorexia", "oral_discharge", "swollen_jaw", "lethargy", "weight_loss"},
         "description": "Bacterial infection of the oral cavity, one of the most common diseases in captive lizards.",
         "description_ja": "口腔内の細菌感染症。飼育下トカゲで最も多い疾患の一つ。"
-                          "Pseudomonas, Aeromonas, Klebsiella等のグラム陰性菌が主要な起因菌。"
-                          "初期は粘膜の発赤・点状出血、進行するとチーズ状壊死物質の蓄積・骨溶解。",
+        "Pseudomonas, Aeromonas, Klebsiella等のグラム陰性菌が主要な起因菌。"
+        "初期は粘膜の発赤・点状出血、進行するとチーズ状壊死物質の蓄積・骨溶解。",
         "pathophysiology": "Opportunistic bacteria invade oral mucosa compromised by stress, trauma, or immunosuppression, causing necrotizing inflammation.",
         "pathophysiology_ja": "ストレス・外傷・免疫低下→口腔粘膜のバリア破綻→"
-                              "日和見菌（Pseudomonas, Aeromonas等）の侵入→壊死性炎症→"
-                              "チーズ状壊死物質（カゼイン様）の形成→骨浸潤（顎骨骨髄炎）→"
-                              "血行性播種で敗血症・肺炎。",
+        "日和見菌（Pseudomonas, Aeromonas等）の侵入→壊死性炎症→"
+        "チーズ状壊死物質（カゼイン様）の形成→骨浸潤（顎骨骨髄炎）→"
+        "血行性播種で敗血症・肺炎。",
         "causes": "Stress, immunosuppression, inappropriate husbandry (low temperature, low humidity), oral trauma, vitamin C/A deficiency.",
         "causes_ja": "不適切な飼育環境（低温・低湿度）、ストレス、口腔内外傷（吻端擦過等）、"
-                     "ビタミンA欠乏、免疫低下。基礎疾患の存在が多い。",
+        "ビタミンA欠乏、免疫低下。基礎疾患の存在が多い。",
         "treatment": "Debridement, topical and systemic antibiotics based on culture and sensitivity.",
         "treatment_ja": "壊死組織のデブリードマン（毎日〜隔日）＋ポビドンヨード/クロルヘキシジン洗浄。"
-                        "局所抗菌薬（シルバースルファジアジンクリーム）。"
-                        "全身性抗菌薬：培養感受性試験に基づき選択（セフタジジム20mg/kg q72h IM、"
-                        "エンロフロキサシン5〜10mg/kg SID）。"
-                        "飼育環境の適正化（温度・湿度）。ビタミンA補給。",
+        "局所抗菌薬（シルバースルファジアジンクリーム）。"
+        "全身性抗菌薬：培養感受性試験に基づき選択（セフタジジム20mg/kg q72h IM、"
+        "エンロフロキサシン5〜10mg/kg SID）。"
+        "飼育環境の適正化（温度・湿度）。ビタミンA補給。",
         "prevention": "Proper husbandry (correct temperature/humidity), minimize stress, balanced nutrition.",
         "prevention_ja": "適切な温度・湿度管理。ストレス最小化。バランスの取れた食事。"
-                         "口腔外傷の防止（飼育ケージの安全確認）。定期的な口腔チェック。",
+        "口腔外傷の防止（飼育ケージの安全確認）。定期的な口腔チェック。",
         "prognosis": "Good if mild and caught early; guarded with bone involvement.",
         "prognosis_ja": "軽度は早期治療で予後良好。骨浸潤がある場合は予後慎重〜不良。"
-                        "全身性敗血症に進行した場合は予後不良。基礎疾患の改善が鍵。",
+        "全身性敗血症に進行した場合は予後不良。基礎疾患の改善が鍵。",
         "urgency": "moderate",
         "recommended_tests": ["oral_exam", "bacterial_culture_sensitivity", "radiographs", "complete_blood_count"],
         "onset_pattern": {"acute", "subacute"},
@@ -2904,34 +2950,33 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
         "name_ja": "黄色真菌症（CANV感染症）",
-        "symptoms": {"skin_discoloration", "skin_lesions", "shedding_problems",
-                      "weight_loss", "lethargy", "anorexia"},
+        "symptoms": {"skin_discoloration", "skin_lesions", "shedding_problems", "weight_loss", "lethargy", "anorexia"},
         "description": "Aggressive dermatomycosis caused by CANV complex, particularly devastating in bearded dragons.",
         "description_ja": "Nannizziopsis vriesii（CANV）複合体による侵襲性真菌性皮膚疾患。"
-                          "フトアゴヒゲトカゲに特に多い。黄色〜褐色の痂皮形成、皮膚壊死が特徴。"
-                          "治療困難で致死率が高い。近年飼育下爬虫類で増加傾向。",
+        "フトアゴヒゲトカゲに特に多い。黄色〜褐色の痂皮形成、皮膚壊死が特徴。"
+        "治療困難で致死率が高い。近年飼育下爬虫類で増加傾向。",
         "pathophysiology": "CANV invades deep dermis and subcutaneous tissue, causing granulomatous inflammation and tissue necrosis. Can disseminate to internal organs.",
         "pathophysiology_ja": "CANV真菌が真皮深層・皮下組織に侵入→肉芽腫性炎症→"
-                              "組織壊死→黄色〜褐色痂皮形成。深部浸潤→筋肉・骨への波及。"
-                              "全身播種で内臓（肝臓・肺等）にも肉芽腫形成→致死的。",
+        "組織壊死→黄色〜褐色痂皮形成。深部浸潤→筋肉・骨への波及。"
+        "全身播種で内臓（肝臓・肺等）にも肉芽腫形成→致死的。",
         "causes": "Nannizziopsis vriesii complex. Predisposing factors: immunosuppression, poor husbandry, stress, contact with infected animals.",
         "causes_ja": "Nannizziopsis vriesii（CANV）複合体。免疫低下、不適切な飼育環境、"
-                     "ストレス、感染個体との接触。真菌胞子の環境中での長期残存。",
+        "ストレス、感染個体との接触。真菌胞子の環境中での長期残存。",
         "treatment": "Aggressive antifungal therapy; often poor response to treatment.",
         "treatment_ja": "長期の抗真菌薬投与が必要だが反応は限定的。"
-                        "ボリコナゾール（10mg/kg SID PO）が最も推奨される。"
-                        "テルビナフィン（10〜15mg/kg SID）を併用する場合もある。"
-                        "局所：壊死組織のデブリードマン＋抗真菌クリーム。"
-                        "最低3〜6ヶ月の治療期間。感染個体の厳格な隔離。"
-                        "飼育器具の徹底消毒（次亜塩素酸等）。",
+        "ボリコナゾール（10mg/kg SID PO）が最も推奨される。"
+        "テルビナフィン（10〜15mg/kg SID）を併用する場合もある。"
+        "局所：壊死組織のデブリードマン＋抗真菌クリーム。"
+        "最低3〜6ヶ月の治療期間。感染個体の厳格な隔離。"
+        "飼育器具の徹底消毒（次亜塩素酸等）。",
         "prevention": "Quarantine new animals, proper hygiene, stress reduction, optimal husbandry.",
         "prevention_ja": "新規導入個体の検疫（最低90日）。飼育環境の衛生管理。"
-                         "適切な温度・湿度管理。ストレス最小化。"
-                         "感染個体の使用器具は他個体と共有しない。",
+        "適切な温度・湿度管理。ストレス最小化。"
+        "感染個体の使用器具は他個体と共有しない。",
         "prognosis": "Guarded to poor; high mortality even with aggressive treatment.",
         "prognosis_ja": "慎重〜不良。治療しても致死率が高い（50%以上）。"
-                        "早期の局所病変に限局している場合は外科的切除＋抗真菌薬で改善例あり。"
-                        "全身播種例は予後不良。",
+        "早期の局所病変に限局している場合は外科的切除＋抗真菌薬で改善例あり。"
+        "全身播種例は予後不良。",
         "urgency": "high",
         "recommended_tests": ["skin_biopsy", "fungal_culture", "histopathology", "pcr"],
         "onset_pattern": {"subacute", "chronic"},
@@ -2942,98 +2987,170 @@ DISEASES: List[Dict[str, Any]] = [
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
-    "skin_lesions": "skin", "skin_sloughing": "skin",
-    "skin_hemorrhage": "skin", "yellow_skin_patches": "skin",
-    "crusty_patches": "skin", "dysecdysis": "skin",
+    "skin_lesions": "skin",
+    "skin_sloughing": "skin",
+    "skin_hemorrhage": "skin",
+    "yellow_skin_patches": "skin",
+    "crusty_patches": "skin",
+    "dysecdysis": "skin",
     "shedding_problems": "skin",
-    "skin_necrosis": "skin", "scale_discoloration": "skin",
-    "mucus_in_mouth": "skin", "skin_irritation": "skin",
-    "visible_mites": "skin", "visible_parasites": "skin",
-    "visible_larvae": "skin", "foul_odor": "skin",
-    "retained_skin": "skin", "skin_constriction": "skin",
-    "toe_discoloration": "skin", "tail_wound": "skin",
-    "skin_burns": "skin", "blisters": "skin",
-    "skin_redness": "skin", "firm_mass": "skin",
-    "nose_abrasion": "skin", "wrinkled_skin": "skin",
-    "decreased_skin_elasticity": "skin", "petechia": "skin",
-    "ulcerated_mass": "skin", "color_change": "skin",
-    "granulomatous_lesions": "skin", "crusty_nodules": "skin",
-    "crusty_scales": "skin", "dark_skin_masses": "skin",
-    "dermatitis": "skin", "discoloration": "skin",
-    "orange_red_clusters": "skin", "palpable_mass": "skin",
-    "papular_dermatitis": "skin", "poor_wound_healing": "skin",
-    "skin_blistering": "skin", "skin_color_changes": "skin",
-    "skin_discoloration": "skin", "skin_masses": "skin",
-    "skin_nodules": "skin", "skin_papillomas": "skin",
-    "skin_ulceration": "skin", "soft_mass": "skin",
+    "skin_necrosis": "skin",
+    "scale_discoloration": "skin",
+    "mucus_in_mouth": "skin",
+    "skin_irritation": "skin",
+    "visible_mites": "skin",
+    "visible_parasites": "skin",
+    "visible_larvae": "skin",
+    "foul_odor": "skin",
+    "retained_skin": "skin",
+    "skin_constriction": "skin",
+    "toe_discoloration": "skin",
+    "tail_wound": "skin",
+    "skin_burns": "skin",
+    "blisters": "skin",
+    "skin_redness": "skin",
+    "firm_mass": "skin",
+    "nose_abrasion": "skin",
+    "wrinkled_skin": "skin",
+    "decreased_skin_elasticity": "skin",
+    "petechia": "skin",
+    "ulcerated_mass": "skin",
+    "color_change": "skin",
+    "granulomatous_lesions": "skin",
+    "crusty_nodules": "skin",
+    "crusty_scales": "skin",
+    "dark_skin_masses": "skin",
+    "dermatitis": "skin",
+    "discoloration": "skin",
+    "orange_red_clusters": "skin",
+    "palpable_mass": "skin",
+    "papular_dermatitis": "skin",
+    "poor_wound_healing": "skin",
+    "skin_blistering": "skin",
+    "skin_color_changes": "skin",
+    "skin_discoloration": "skin",
+    "skin_masses": "skin",
+    "skin_nodules": "skin",
+    "skin_papillomas": "skin",
+    "skin_ulceration": "skin",
+    "soft_mass": "skin",
     "ulceration": "skin",
-    "visible_leeches": "skin", "wart_like_growths": "skin",
+    "visible_leeches": "skin",
+    "wart_like_growths": "skin",
     # 眼
-    "swollen_eyes": "eyes", "conjunctivitis": "eyes",
-    "eye_discharge": "eyes", "cloudy_eyes": "eyes",
-    "eye_swelling": "eyes", "bulging_eye": "eyes",
+    "swollen_eyes": "eyes",
+    "conjunctivitis": "eyes",
+    "eye_discharge": "eyes",
+    "cloudy_eyes": "eyes",
+    "eye_swelling": "eyes",
+    "bulging_eye": "eyes",
     "sunken_eyes": "eyes",
     "white_corneal_deposits": "eyes",
     # 呼吸器
-    "respiratory_distress": "respiratory", "nasal_discharge": "respiratory",
-    "wheezing": "respiratory", "open_mouth_breathing": "respiratory",
+    "respiratory_distress": "respiratory",
+    "nasal_discharge": "respiratory",
+    "wheezing": "respiratory",
+    "open_mouth_breathing": "respiratory",
     "pneumonia": "respiratory",
     # 消化器・口腔
-    "anorexia": "digestive", "rubber_jaw": "digestive",
-    "diarrhea": "digestive", "mouth_lesions": "digestive",
-    "stomatitis": "digestive", "drooling": "digestive",
+    "anorexia": "digestive",
+    "rubber_jaw": "digestive",
+    "diarrhea": "digestive",
+    "mouth_lesions": "digestive",
+    "stomatitis": "digestive",
+    "drooling": "digestive",
     "oral_discharge": "oral",
-    "oral_hemorrhage": "digestive", "bloody_stool": "digestive",
-    "straining": "digestive", "constipation": "digestive",
-    "regurgitation": "digestive", "tissue_prolapse": "digestive",
-    "intestinal_obstruction": "digestive", "mouth_rot": "digestive",
-    "oral_mucus": "digestive", "poor_appetite": "digestive",
+    "oral_hemorrhage": "digestive",
+    "bloody_stool": "digestive",
+    "straining": "digestive",
+    "constipation": "digestive",
+    "regurgitation": "digestive",
+    "tissue_prolapse": "digestive",
+    "intestinal_obstruction": "digestive",
+    "mouth_rot": "digestive",
+    "oral_mucus": "digestive",
+    "poor_appetite": "digestive",
     "segments_in_stool": "digestive",
     # 骨格・四肢
-    "soft_bones": "musculoskeletal", "fractures": "musculoskeletal",
-    "jaw_softening": "musculoskeletal", "lameness": "musculoskeletal",
-    "swollen_joints": "musculoskeletal", "joint_pain": "musculoskeletal",
+    "soft_bones": "musculoskeletal",
+    "fractures": "musculoskeletal",
+    "jaw_softening": "musculoskeletal",
+    "lameness": "musculoskeletal",
+    "swollen_joints": "musculoskeletal",
+    "joint_pain": "musculoskeletal",
     "bone_swelling": "musculoskeletal",
-    "bone_weakness": "musculoskeletal", "hind_limb_swelling": "musculoskeletal",
-    "hind_limb_weakness": "musculoskeletal", "inability_to_use_limb": "musculoskeletal",
+    "bone_weakness": "musculoskeletal",
+    "hind_limb_swelling": "musculoskeletal",
+    "hind_limb_weakness": "musculoskeletal",
+    "inability_to_use_limb": "musculoskeletal",
     "swelling_at_fracture": "musculoskeletal",
     # 神経
-    "tremors": "neurological", "muscle_twitching": "neurological",
-    "seizures": "neurological", "neurological_signs": "neurological",
-    "head_tilt": "neurological", "circling": "neurological",
-    "stargazing": "neurological", "paralysis": "neurological",
-    "slow_reflexes": "neurological", "ataxia": "neurological",
-    "loss_of_tail_function": "neurological", "vestibular_signs": "neurological",
+    "tremors": "neurological",
+    "muscle_twitching": "neurological",
+    "seizures": "neurological",
+    "neurological_signs": "neurological",
+    "head_tilt": "neurological",
+    "circling": "neurological",
+    "stargazing": "neurological",
+    "paralysis": "neurological",
+    "slow_reflexes": "neurological",
+    "ataxia": "neurological",
+    "loss_of_tail_function": "neurological",
+    "vestibular_signs": "neurological",
     # 泌尿器・生殖器
-    "excessive_urination": "urinary", "swollen_femoral_pores": "urinary",
+    "excessive_urination": "urinary",
+    "swollen_femoral_pores": "urinary",
     "tissue_protruding_from_cloaca": "urinary",
     # 体型・全身
-    "swollen_limbs": "body", "weight_loss": "body",
-    "poor_body_condition": "body", "excessive_weight": "body",
-    "fat_deposits": "body", "failure_to_thrive": "body",
-    "edema": "body", "facial_swelling": "body",
-    "body_swelling": "body", "dehydration": "body",
-    "toe_swelling": "body", "swelling": "body",
-    "abdominal_swelling": "body", "cloacal_swelling": "body",
-    "dry_mucous_membranes": "body", "organ_enlargement": "body",
-    "head_swelling": "body", "swollen_jaw": "body",
-    "generalized_swelling": "body", "muscle_wasting": "body",
-    "rapid_growth": "body", "swelling_behind_jaw": "body",
+    "swollen_limbs": "body",
+    "weight_loss": "body",
+    "poor_body_condition": "body",
+    "excessive_weight": "body",
+    "fat_deposits": "body",
+    "failure_to_thrive": "body",
+    "edema": "body",
+    "facial_swelling": "body",
+    "body_swelling": "body",
+    "dehydration": "body",
+    "toe_swelling": "body",
+    "swelling": "body",
+    "abdominal_swelling": "body",
+    "cloacal_swelling": "body",
+    "dry_mucous_membranes": "body",
+    "organ_enlargement": "body",
+    "head_swelling": "body",
+    "swollen_jaw": "body",
+    "generalized_swelling": "body",
+    "muscle_wasting": "body",
+    "rapid_growth": "body",
+    "swelling_behind_jaw": "body",
     # 行動・活動
-    "weakness": "behavior", "lethargy": "behavior",
-    "difficulty_moving": "behavior", "excessive_soaking": "behavior",
-    "restlessness": "behavior", "digging_behavior": "behavior",
-    "abnormal_posture": "behavior", "hiding_behavior": "behavior",
-    "glass_surfing": "behavior", "pain_response": "behavior",
-    "muscle_weakness": "behavior", "pain": "behavior",
+    "weakness": "behavior",
+    "lethargy": "behavior",
+    "difficulty_moving": "behavior",
+    "excessive_soaking": "behavior",
+    "restlessness": "behavior",
+    "digging_behavior": "behavior",
+    "abnormal_posture": "behavior",
+    "hiding_behavior": "behavior",
+    "glass_surfing": "behavior",
+    "pain_response": "behavior",
+    "muscle_weakness": "behavior",
+    "pain": "behavior",
     # 緊急
-    "sudden_death": "emergency", "unconsciousness": "emergency",
+    "sudden_death": "emergency",
+    "unconsciousness": "emergency",
     # 内科・血液
-    "excessive_thirst": "internal", "liver_enlargement": "internal",
-    "swollen_gums": "internal", "jaundice": "internal",
-    "gout_tophi": "internal", "bleeding": "internal",
-    "anemia": "internal", "immunosuppression": "internal",
-    "pale_mucous_membranes": "internal", "septicemia": "internal",
+    "excessive_thirst": "internal",
+    "liver_enlargement": "internal",
+    "swollen_gums": "internal",
+    "jaundice": "internal",
+    "gout_tophi": "internal",
+    "bleeding": "internal",
+    "anemia": "internal",
+    "immunosuppression": "internal",
+    "pale_mucous_membranes": "internal",
+    "septicemia": "internal",
     # 一般
 }
 
@@ -3141,7 +3258,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "head_swelling": {"ja": "頭部の腫脹", "en": "Head swelling"},
     "swollen_femoral_pores": {"ja": "大腿孔の腫脹", "en": "Swollen femoral pores"},
     "granulomatous_lesions": {"ja": "肉芽腫性病変", "en": "Granulomatous lesions"},
-
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
     "anemia": {"ja": "貧血", "en": "Anemia"},
     "ataxia": {"ja": "運動失調", "en": "Ataxia"},
@@ -3201,7 +3317,19 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Lizard")
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None) -> Dict[str, Any]:
+def analyze_symptoms(
+    symptoms: List[str],
+    age_stage: str = "",
+    breed: str | None = None,
+    *,
+    onset: str | None = None,
+    age_years: float | None = None,
+    species: str | None = None,
+    lab_values: dict | None = None,
+    gender=None,
+    vaccines=None,
+    vaccination_status=None,
+) -> Dict[str, Any]:
     """Analyze lizard symptoms and return suspected diseases.
 
     Parameters
@@ -3218,4 +3346,18 @@ def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None
     dict
         Analysis result in the standard differential diagnosis format.
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("lizard", {}))
+    return analyze_symptoms_generic(
+        symptoms,
+        DISEASES,
+        SYMPTOM_NAMES,
+        ADVICE,
+        onset=onset,
+        age_years=age_years,
+        breed=breed,
+        species=species,
+        lab_values=lab_values,
+        gender=gender,
+        vaccines=vaccines,
+        vaccination_status=vaccination_status,
+        prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("lizard", {}),
+    )

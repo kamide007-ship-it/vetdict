@@ -1,6 +1,5 @@
 """Tests for evidence_calculator.py - Evidence-based confidence scoring."""
 
-
 from api.ai.evidence_calculator import (
     EvidenceBreakdown,
     EvidenceScorer,
@@ -9,7 +8,6 @@ from api.ai.evidence_calculator import (
 
 
 class TestEvidenceBreakdown:
-
     def test_to_dict_keys(self):
         eb = EvidenceBreakdown(
             disease_name="Test",
@@ -45,7 +43,6 @@ class TestEvidenceBreakdown:
 
 
 class TestCalculateEvidenceScore:
-
     def test_returns_tuple(self):
         score, breakdown = EvidenceScorer.calculate_evidence_score("Test Disease", 0.7)
         assert isinstance(score, float)
@@ -67,7 +64,9 @@ class TestCalculateEvidenceScore:
 
     def test_use_evidence_false(self):
         score, breakdown = EvidenceScorer.calculate_evidence_score(
-            "Test", 0.5, use_evidence=False,
+            "Test",
+            0.5,
+            use_evidence=False,
         )
         assert breakdown.evidence_level == 4
         assert breakdown.evidence_multiplier == 1.0
@@ -88,7 +87,6 @@ class TestCalculateEvidenceScore:
 
 
 class TestBuildNotes:
-
     def test_level_1_description(self):
         notes = EvidenceScorer._build_notes(1, 1.4, 1.0)
         assert "RCT" in notes
@@ -120,7 +118,6 @@ class TestBuildNotes:
 
 
 class TestScoreMultipleDiseases:
-
     def test_returns_list(self):
         diseases = [
             {"name": "Disease A", "match_percent": 70},
@@ -148,7 +145,8 @@ class TestScoreMultipleDiseases:
         diseases = [{"name": "Test", "match_percent": 50}]
         adjustments = {"Test": 1.3}
         result = EvidenceScorer.score_multiple_diseases(
-            diseases, demographic_adjustments=adjustments,
+            diseases,
+            demographic_adjustments=adjustments,
         )
         assert len(result) == 1
 
@@ -159,7 +157,6 @@ class TestScoreMultipleDiseases:
 
 
 class TestApplyEvidenceAdjustment:
-
     def test_returns_dict(self):
         disease = {"name": "Test", "match_percent": 70}
         result = EvidenceScorer.apply_evidence_adjustment(disease)
@@ -178,7 +175,6 @@ class TestApplyEvidenceAdjustment:
 
 
 class TestBuildConfidenceBreakdownResponse:
-
     def test_returns_dict(self):
         result = build_confidence_breakdown_response("Test Disease", 0.7)
         assert isinstance(result, dict)

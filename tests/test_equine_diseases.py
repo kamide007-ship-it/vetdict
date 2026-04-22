@@ -20,6 +20,7 @@ from api.species.equine_diseases import (
 # DISEASE_DATABASE integrity tests
 # ===================================================================
 
+
 class TestDiseaseDatabase:
     def test_database_is_nonempty(self):
         assert len(DISEASE_DATABASE) > 0
@@ -47,16 +48,12 @@ class TestDiseaseDatabase:
 
     def test_category_values_nonempty(self):
         for d in DISEASE_DATABASE:
-            assert isinstance(d.category, str) and d.category.strip(), (
-                f"{d.id} has empty category"
-            )
+            assert isinstance(d.category, str) and d.category.strip(), f"{d.id} has empty category"
 
     def test_age_predisposition_valid(self):
         valid = {"young", "adult", "senior", ""}
         for d in DISEASE_DATABASE:
-            assert d.age_predisposition in valid, (
-                f"{d.id} has invalid age_predisposition: {d.age_predisposition}"
-            )
+            assert d.age_predisposition in valid, f"{d.id} has invalid age_predisposition: {d.age_predisposition}"
 
     def test_urgency_valid(self):
         valid = {"emergency", "urgent", "routine", "soon", ""}
@@ -65,16 +62,12 @@ class TestDiseaseDatabase:
 
     def test_associated_findings_are_lists(self):
         for d in DISEASE_DATABASE:
-            assert isinstance(d.associated_findings, list), (
-                f"{d.id}.associated_findings is not a list"
-            )
+            assert isinstance(d.associated_findings, list), f"{d.id}.associated_findings is not a list"
 
     def test_recommended_exams_structure(self):
         for d in DISEASE_DATABASE:
             for exam in d.recommended_exams:
-                assert isinstance(exam, tuple) and len(exam) == 3, (
-                    f"{d.id} recommended_exams entry malformed: {exam}"
-                )
+                assert isinstance(exam, tuple) and len(exam) == 3, f"{d.id} recommended_exams entry malformed: {exam}"
                 priority, name_ja, name_en = exam
                 assert isinstance(priority, int), f"{d.id} priority not int"
 
@@ -96,6 +89,7 @@ class TestDiseaseDatabase:
 # HEALTH_CHECK_ITEMS integrity
 # ===================================================================
 
+
 class TestHealthCheckItems:
     def test_health_check_is_dict(self):
         assert isinstance(HEALTH_CHECK_ITEMS, dict)
@@ -114,17 +108,14 @@ class TestHealthCheckItems:
                 assert isinstance(key, str) and key, f"Bad key in {category}: {key!r}"
 
     def test_no_duplicate_finding_keys(self):
-        all_keys = [
-            key
-            for items in HEALTH_CHECK_ITEMS.values()
-            for key, _, _ in items
-        ]
+        all_keys = [key for items in HEALTH_CHECK_ITEMS.values() for key, _, _ in items]
         assert len(all_keys) == len(set(all_keys)), "Duplicate finding keys in HEALTH_CHECK_ITEMS"
 
 
 # ===================================================================
 # IDF / label helpers
 # ===================================================================
+
 
 class TestFindingIDF:
     def test_idf_dict_nonempty(self):
@@ -150,6 +141,7 @@ class TestFindingIDF:
 # _confidence_level helper
 # ===================================================================
 
+
 class TestConfidenceLevel:
     def test_high_threshold(self):
         assert _confidence_level(65.0) == "high"
@@ -170,6 +162,7 @@ class TestConfidenceLevel:
 # ===================================================================
 # generate_differential_diagnosis
 # ===================================================================
+
 
 class TestGenerateDifferentialDiagnosis:
     def test_empty_findings_returns_empty(self):
@@ -221,17 +214,15 @@ class TestGenerateDifferentialDiagnosis:
         result = generate_differential_diagnosis(findings)
         ocd = next(r for r in result if r.disease.id == "ms_ocd")
         assert ocd.match_count == 4
-        assert sorted(ocd.matched_findings) == sorted([
-            "limb_joint_swelling", "limb_ocd_signs", "limb_flexion_positive", "repo_ocd_xray"
-        ])
+        assert sorted(ocd.matched_findings) == sorted(
+            ["limb_joint_swelling", "limb_ocd_signs", "limb_flexion_positive", "repo_ocd_xray"]
+        )
 
     def test_match_ratio_in_range(self):
         findings = {"limb_joint_swelling", "limb_ocd_signs"}
         result = generate_differential_diagnosis(findings)
         for item in result:
-            assert 0.0 <= item.match_ratio <= 1.2, (
-                f"match_ratio {item.match_ratio} out of range for {item.disease.id}"
-            )
+            assert 0.0 <= item.match_ratio <= 1.2, f"match_ratio {item.match_ratio} out of range for {item.disease.id}"
 
     def test_age_stage_young_boosts_young_diseases(self):
         # OCD is age_predisposition="young"
@@ -283,9 +274,14 @@ class TestGenerateDifferentialDiagnosis:
     def test_rule_out_note_populated_when_penalty_high(self):
         # Many highly specific findings from one disease, others have absent high-IDF findings
         findings = {
-            "hoof_laminitis_signs", "limb_digital_pulse", "hoof_heat",
-            "gen_fever", "gen_lethargy", "gen_weight_loss",
-            "body_neck_crest", "body_fat_deposits",
+            "hoof_laminitis_signs",
+            "limb_digital_pulse",
+            "hoof_heat",
+            "gen_fever",
+            "gen_lethargy",
+            "gen_weight_loss",
+            "body_neck_crest",
+            "body_fat_deposits",
         }
         result = generate_differential_diagnosis(findings)
         # Function should run; some items may have rule_out_note
@@ -338,9 +334,16 @@ class TestGenerateDifferentialDiagnosis:
     def test_large_finding_set(self):
         # Provide a large set of findings across categories
         findings = {
-            "gen_fever", "gen_lethargy", "resp_cough", "resp_nasal_discharge",
-            "limb_joint_swelling", "limb_lameness_fore", "hoof_heat",
-            "dig_colic_signs", "neuro_ataxia", "skin_lesions",
+            "gen_fever",
+            "gen_lethargy",
+            "resp_cough",
+            "resp_nasal_discharge",
+            "limb_joint_swelling",
+            "limb_lameness_fore",
+            "hoof_heat",
+            "dig_colic_signs",
+            "neuro_ataxia",
+            "skin_lesions",
         }
         result = generate_differential_diagnosis(findings)
         assert len(result) > 0
@@ -367,8 +370,7 @@ class TestGenerateDifferentialDiagnosis:
         # The line is covered when absent_key_findings include raw finding IDs not in _FINDING_LABEL_JA
         # This happens for repository_exam keys that may not be in HEALTH_CHECK_ITEMS
         # We just need 3+ checked findings to trigger the absence penalty path
-        findings = {"gen_fever", "gen_lethargy", "gen_weight_loss",
-                    "resp_cough", "resp_nasal_discharge"}
+        findings = {"gen_fever", "gen_lethargy", "gen_weight_loss", "resp_cough", "resp_nasal_discharge"}
         result = generate_differential_diagnosis(findings)
         # Just ensure it runs; rule_out_note path covered
         assert isinstance(result, list)
@@ -386,6 +388,7 @@ class TestGenerateDifferentialDiagnosis:
 # ===================================================================
 # Disease.reference_links()
 # ===================================================================
+
 
 class TestDiseaseReferenceLinks:
     def test_reference_links_with_name_en(self):
@@ -449,6 +452,7 @@ class TestDiseaseReferenceLinks:
 # ===================================================================
 # Helper functions: get_disease, get_diseases_by_category, get_all_categories
 # ===================================================================
+
 
 class TestHelperFunctions:
     def test_get_disease_known_id(self):

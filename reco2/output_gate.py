@@ -6,37 +6,77 @@ from typing import Any, Dict, List, Optional
 logger = logging.getLogger(__name__)
 
 _CONTRADICTION_PAIRS = [
-    ("必ず", "かもしれません"), ("絶対に", "可能性があります"),
-    ("確実に", "不確実"), ("always", "sometimes"),
-    ("never", "occasionally"), ("definitely", "might"),
+    ("必ず", "かもしれません"),
+    ("絶対に", "可能性があります"),
+    ("確実に", "不確実"),
+    ("always", "sometimes"),
+    ("never", "occasionally"),
+    ("definitely", "might"),
     ("100%", "uncertain"),
 ]
 
 _SOFTEN_JA = [
-    ("必ず", "多くの場合"), ("絶対に", "ほぼ"),
-    ("間違いなく", "おそらく"), ("確実に", "高い確率で"),
+    ("必ず", "多くの場合"),
+    ("絶対に", "ほぼ"),
+    ("間違いなく", "おそらく"),
+    ("確実に", "高い確率で"),
 ]
 _SOFTEN_EN = [
-    ("definitely", "likely"), ("absolutely", "very likely"),
-    ("certainly", "probably"), ("always", "typically"),
+    ("definitely", "likely"),
+    ("absolutely", "very likely"),
+    ("certainly", "probably"),
+    ("always", "typically"),
     ("never", "rarely"),
 ]
 
 _ASSERT_TOKENS = [
-    "必ず", "絶対", "間違いなく", "確実", "100%",
-    "definitely", "absolutely", "certainly", "always", "never",
+    "必ず",
+    "絶対",
+    "間違いなく",
+    "確実",
+    "100%",
+    "definitely",
+    "absolutely",
+    "certainly",
+    "always",
+    "never",
 ]
 
 _PROVOCATIVE = [
-    "バカ", "アホ", "ふざけるな", "舐めるな", "ゴミ",
-    "使えない", "役に立たない",
-    "idiot", "stupid", "shut up", "trash", "useless",
+    "バカ",
+    "アホ",
+    "ふざけるな",
+    "舐めるな",
+    "ゴミ",
+    "使えない",
+    "役に立たない",
+    "idiot",
+    "stupid",
+    "shut up",
+    "trash",
+    "useless",
 ]
 
 _EVIDENCE_MARKERS = [
-    "出典", "引用", "根拠", "データ", "論文", "参考", "URL", "リンク",
-    "source", "citation", "evidence", "data", "paper", "study", "link", "http://", "https://",
+    "出典",
+    "引用",
+    "根拠",
+    "データ",
+    "論文",
+    "参考",
+    "URL",
+    "リンク",
+    "source",
+    "citation",
+    "evidence",
+    "data",
+    "paper",
+    "study",
+    "link",
+    "http://",
+    "https://",
 ]
+
 
 def _count_hits(text: str, words: List[str]) -> int:
     t = text.lower()
@@ -47,8 +87,10 @@ def _count_hits(text: str, words: List[str]) -> int:
         c += t.count(w.lower())
     return c
 
+
 def _saturating_score(count: int, sensitivity: float = 1.0) -> float:
     return math.tanh((count / 3.0) * sensitivity)
+
 
 def _contradiction_hits(text: str) -> int:
     t = text.lower()
@@ -57,6 +99,7 @@ def _contradiction_hits(text: str) -> int:
         if a.lower() in t and b.lower() in t:
             hits += 1
     return hits
+
 
 def analyze(
     text: str,
@@ -100,12 +143,7 @@ def analyze(
     s_contra = _saturating_score(contra_hits, sensitivity=1.5)
     s_prov = _saturating_score(prov_count, sensitivity=1.3)
 
-    post_d = (
-        (s_assert * w_assertion)
-        + (s_evgap * w_evidence)
-        + (s_contra * w_contradiction)
-        + (s_prov * w_provocative)
-    )
+    post_d = (s_assert * w_assertion) + (s_evgap * w_evidence) + (s_contra * w_contradiction) + (s_prov * w_provocative)
     psi_mod = max(0.3, 1.0 - post_d * 0.7)
 
     # Adjust psi modifier if confidence provided
@@ -148,6 +186,7 @@ def analyze(
         result["adjusted_text"] = _adjust_assertion_strength(text, confidence)
 
     return result
+
 
 def soften(text: str) -> str:
     if not isinstance(text, str):
@@ -217,9 +256,7 @@ def _adjust_assertion_strength(
         for a, b in hedges:
             out = re.sub(
                 re.escape(a),
-                lambda match, replacement=b: _apply_case_pattern(match.group(0), replacement)
-                if replacement
-                else "",
+                lambda match, replacement=b: _apply_case_pattern(match.group(0), replacement) if replacement else "",
                 out,
                 flags=re.IGNORECASE,
             )
@@ -229,9 +266,7 @@ def _adjust_assertion_strength(
     return text
 
 
-def _adjust_psi_modifier_by_confidence(
-    psi_mod: float, confidence: Optional[float] = None
-) -> float:
+def _adjust_psi_modifier_by_confidence(psi_mod: float, confidence: Optional[float] = None) -> float:
     """
     Adjust psi modifier based on AI confidence.
 
@@ -266,8 +301,7 @@ def _adjust_psi_modifier_by_confidence(
     adjusted = max(0.3, min(adjusted, 1.0))
 
     logger.debug(
-        f"Adjusted psi_modifier by confidence: "
-        f"base={psi_mod:.3f}, confidence={confidence:.3f}, adjusted={adjusted:.3f}"
+        f"Adjusted psi_modifier by confidence: base={psi_mod:.3f}, confidence={confidence:.3f}, adjusted={adjusted:.3f}"
     )
 
     return adjusted

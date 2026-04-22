@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 class TreatmentModality(Enum):
     """Types of treatment modalities."""
+
     PHARMACOLOGICAL = "pharmacological"
     SURGICAL = "surgical"
     BEHAVIORAL = "behavioral"
@@ -27,6 +28,7 @@ class TreatmentModality(Enum):
 
 class TreatmentAdherence(Enum):
     """Treatment adherence levels."""
+
     EXCELLENT = "excellent"
     GOOD = "good"
     FAIR = "fair"
@@ -37,6 +39,7 @@ class TreatmentAdherence(Enum):
 @dataclass
 class TreatmentOption:
     """A specific treatment option for a disease."""
+
     name: str
     modality: TreatmentModality
     disease: str
@@ -70,6 +73,7 @@ class TreatmentOption:
 @dataclass
 class TreatmentResponse:
     """Prediction of treatment response."""
+
     disease: str
     treatment_name: str
     success_probability: float  # 0-1
@@ -338,14 +342,16 @@ class TreatmentResponsePredictor:
         self.predictions: Dict[Tuple[str, str], TreatmentResponse] = {}
         self.outcome_history: List[Tuple[str, str, bool]] = []
 
-    def predict_treatment_response(self,
-                                   disease: str,
-                                   treatment_name: str,
-                                   patient_age: float,
-                                   comorbidities: List[str] = None,
-                                   prior_treatments: List[str] = None,
-                                   owner_compliance_likelihood: float = 0.7,
-                                   disease_severity: float = 5.0) -> Optional[TreatmentResponse]:
+    def predict_treatment_response(
+        self,
+        disease: str,
+        treatment_name: str,
+        patient_age: float,
+        comorbidities: List[str] = None,
+        prior_treatments: List[str] = None,
+        owner_compliance_likelihood: float = 0.7,
+        disease_severity: float = 5.0,
+    ) -> Optional[TreatmentResponse]:
         """Predict response to specific treatment.
 
         Args:
@@ -404,9 +410,7 @@ class TreatmentResponsePredictor:
         alternatives = self._get_alternative_treatments(disease, treatment_name)
 
         # Assess risk-benefit
-        risk_benefit = self._assess_risk_benefit(
-            success_prob, treatment.side_effects_probability, disease_severity
-        )
+        risk_benefit = self._assess_risk_benefit(success_prob, treatment.side_effects_probability, disease_severity)
 
         # Generate recommendations
         recommendations = self._generate_recommendations(
@@ -431,13 +435,14 @@ class TreatmentResponsePredictor:
         self.predictions[(disease, treatment_name)] = response
         return response
 
-    def predict_all_treatments(self,
-                              disease: str,
-                              patient_age: float,
-                              comorbidities: List[str] = None,
-                              owner_compliance_likelihood: float = 0.7,
-                              disease_severity: float = 5.0
-                              ) -> List[TreatmentResponse]:
+    def predict_all_treatments(
+        self,
+        disease: str,
+        patient_age: float,
+        comorbidities: List[str] = None,
+        owner_compliance_likelihood: float = 0.7,
+        disease_severity: float = 5.0,
+    ) -> List[TreatmentResponse]:
         """Predict response to all available treatments for disease.
 
         Args:
@@ -483,10 +488,9 @@ class TreatmentResponsePredictor:
         # More severe disease = lower treatment success
         return 1.0 - (disease_severity * 0.05)  # 5% per severity point
 
-    def _predict_side_effects(self,
-                             treatment: TreatmentOption,
-                             comorbidities: List[str],
-                             patient_age: float) -> List[str]:
+    def _predict_side_effects(
+        self, treatment: TreatmentOption, comorbidities: List[str], patient_age: float
+    ) -> List[str]:
         """Predict likely side effects."""
         side_effects = []
 
@@ -522,9 +526,7 @@ class TreatmentResponsePredictor:
         else:
             return "months"
 
-    def _calculate_confidence_interval(self,
-                                      probability: float,
-                                      disease: str) -> Tuple[float, float]:
+    def _calculate_confidence_interval(self, probability: float, disease: str) -> Tuple[float, float]:
         """Calculate 95% confidence interval."""
         import math
 
@@ -542,16 +544,10 @@ class TreatmentResponsePredictor:
     def _get_alternative_treatments(self, disease: str, current_treatment: str) -> List[str]:
         """Get alternative treatment options."""
         options = TreatmentKnowledgeBase.get_treatment_options(disease)
-        alternatives = [
-            o.name for o in options
-            if o.name != current_treatment
-        ]
+        alternatives = [o.name for o in options if o.name != current_treatment]
         return alternatives[:3]  # Return top 3 alternatives
 
-    def _assess_risk_benefit(self,
-                            success_prob: float,
-                            side_effect_prob: float,
-                            disease_severity: float) -> str:
+    def _assess_risk_benefit(self, success_prob: float, side_effect_prob: float, disease_severity: float) -> str:
         """Assess risk-benefit ratio."""
         # Risk = side effect probability + disease severity factor
         risk = side_effect_prob + (disease_severity * 0.05)
@@ -603,11 +599,9 @@ class TreatmentResponsePredictor:
 
         return min(1.0, confidence)
 
-    def _generate_recommendations(self,
-                                 treatment: TreatmentOption,
-                                 success_prob: float,
-                                 compliance: float,
-                                 comorbidities: List[str]) -> List[str]:
+    def _generate_recommendations(
+        self, treatment: TreatmentOption, success_prob: float, compliance: float, comorbidities: List[str]
+    ) -> List[str]:
         """Generate clinical recommendations."""
         recommendations = []
 
@@ -623,16 +617,11 @@ class TreatmentResponsePredictor:
 
         for contraindication in treatment.contraindications:
             if contraindication.lower() in [c.lower() for c in comorbidities]:
-                recommendations.append(
-                    f"Use caution due to {contraindication.lower()}"
-                )
+                recommendations.append(f"Use caution due to {contraindication.lower()}")
 
         return recommendations
 
-    def record_outcome(self,
-                      disease: str,
-                      treatment_name: str,
-                      success: bool):
+    def record_outcome(self, disease: str, treatment_name: str, success: bool):
         """Record actual treatment outcome for learning.
 
         Args:

@@ -130,9 +130,7 @@ class TestCodeQuality:
             if "os.environ" in content or "os.getenv" in content:
                 continue
             for pattern in patterns:
-                assert pattern not in content.lower(), (
-                    f"Potential hardcoded secret ({pattern}) in {py_file.name}"
-                )
+                assert pattern not in content.lower(), f"Potential hardcoded secret ({pattern}) in {py_file.name}"
 
     def test_proper_error_handling(self):
         """Test error handling is implemented (try/except or conditional checks)."""
@@ -142,9 +140,7 @@ class TestCodeQuality:
         # Module should handle errors via try/except or input validation checks
         has_try_except = "try:" in content and "except" in content
         has_validation = "if not" in content or "validate_request" in content
-        assert has_try_except or has_validation, (
-            "Should have error handling (try/except or input validation)"
-        )
+        assert has_try_except or has_validation, "Should have error handling (try/except or input validation)"
 
     def test_no_sql_injection_vulnerabilities(self):
         """Test no SQL injection patterns in source code."""
@@ -159,9 +155,7 @@ class TestCodeQuality:
                 content = py_file.read_text()
                 # Check for dangerous SQL patterns (f-string interpolation in queries)
                 select_fstring = 'f"SELECT' in content or "f'SELECT" in content
-                assert not select_fstring, (
-                    f"Avoid f-strings in SQL in {py_file.name}"
-                )
+                assert not select_fstring, f"Avoid f-strings in SQL in {py_file.name}"
 
 
 class TestAPICompliance:
@@ -370,10 +364,7 @@ class TestProductionReadiness:
         ]
 
         # At least one should exist
-        found = any(
-            repo_path(cfg).exists()
-            for cfg in config_examples
-        )
+        found = any(repo_path(cfg).exists() for cfg in config_examples)
         assert found, "Production config example should exist"
 
     def test_deployment_script_considerations(self):

@@ -10,6 +10,7 @@ import pytest
 @pytest.fixture(scope="module")
 def drugs():
     from api.drug_dictionary import DRUGS
+
     return {d["id"]: d for d in DRUGS}
 
 
@@ -45,8 +46,7 @@ def test_oral_beta_lactam_contraindicated_for_hindgut_fermenters(drugs, drug_id,
     if sp_info is None:
         pytest.skip(f"No {species} data for {drug_id}")
     assert sp_info["safe"] is False, (
-        f"{drug_id} is marked safe=True for {species} — "
-        f"oral beta-lactams cause fatal dysbiosis in hindgut fermenters"
+        f"{drug_id} is marked safe=True for {species} — oral beta-lactams cause fatal dysbiosis in hindgut fermenters"
     )
 
 
@@ -66,8 +66,7 @@ def test_lincosamide_macrolide_contraindicated_chinchilla(drugs, drug_id):
     if sp_info is None:
         pytest.skip(f"No chinchilla data for {drug_id}")
     assert sp_info["safe"] is False, (
-        f"{drug_id} is marked safe=True for chinchilla — "
-        f"lincosamides/macrolides cause fatal enterotoxemia"
+        f"{drug_id} is marked safe=True for chinchilla — lincosamides/macrolides cause fatal enterotoxemia"
     )
 
 
@@ -82,10 +81,7 @@ def test_fipronil_contraindicated_chinchilla(drugs):
     sp_info = drug.get("species_info", {}).get("chinchilla")
     if sp_info is None:
         pytest.skip("No chinchilla data for fipronil")
-    assert sp_info["safe"] is False, (
-        "Fipronil is marked safe=True for chinchilla — "
-        "reported fatalities in chinchillas"
-    )
+    assert sp_info["safe"] is False, "Fipronil is marked safe=True for chinchilla — reported fatalities in chinchillas"
 
 
 # =========================================================================
@@ -98,13 +94,9 @@ def test_enrofloxacin_cat_retinal_toxicity_warning(drugs):
     cat_info = drug.get("species_info", {}).get("cat")
     assert cat_info is not None, "No cat data for enrofloxacin"
     notes = (cat_info.get("notes", "") + cat_info.get("notes_ja", "")).lower()
-    assert "retin" in notes or "網膜" in notes, (
-        "Enrofloxacin cat notes must warn about retinal toxicity"
-    )
+    assert "retin" in notes or "網膜" in notes, "Enrofloxacin cat notes must warn about retinal toxicity"
     dosage = cat_info.get("dosage", "")
-    assert "5" in dosage, (
-        "Enrofloxacin cat dosage must indicate 5 mg/kg max"
-    )
+    assert "5" in dosage, "Enrofloxacin cat dosage must indicate 5 mg/kg max"
 
 
 # =========================================================================
@@ -117,9 +109,7 @@ def test_metronidazole_cat_neurotoxicity_warning(drugs):
     cat_info = drug.get("species_info", {}).get("cat")
     assert cat_info is not None, "No cat data for metronidazole"
     notes = (cat_info.get("notes", "") + cat_info.get("notes_ja", "")).lower()
-    assert "neuro" in notes or "神経" in notes, (
-        "Metronidazole cat notes must warn about neurotoxicity"
-    )
+    assert "neuro" in notes or "神経" in notes, "Metronidazole cat notes must warn about neurotoxicity"
 
 
 # =========================================================================
@@ -133,10 +123,7 @@ def test_permethrin_contraindicated_cats(drugs):
     cat_info = drug.get("species_info", {}).get("cat")
     if cat_info is None:
         pytest.skip("No cat data for permethrin")
-    assert cat_info["safe"] is False, (
-        "Permethrin is marked safe=True for cats — "
-        "pyrethroids are lethal to cats"
-    )
+    assert cat_info["safe"] is False, "Permethrin is marked safe=True for cats — pyrethroids are lethal to cats"
 
 
 # =========================================================================

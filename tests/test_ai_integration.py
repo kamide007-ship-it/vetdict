@@ -76,6 +76,7 @@ def test_ai_extractor_initialization():
         import importlib
 
         import api.diagnostic_chat as dc_module
+
         importlib.reload(dc_module)
 
         # Should not raise an error
@@ -138,9 +139,7 @@ def test_ai_extraction_with_real_api():
     with patch.dict(os.environ, {"VETDICT_USE_AI_SYMPTOM_EXTRACTION": "true"}):
         importlib.reload(dc_module)
 
-        result = dc_module.extract_symptoms_from_text(
-            "My dog has been coughing for 3 days"
-        )
+        result = dc_module.extract_symptoms_from_text("My dog has been coughing for 3 days")
 
         assert isinstance(result, list)
         # May have coughing ID or fallback to empty

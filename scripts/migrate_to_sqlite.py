@@ -368,7 +368,19 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "ウイルス株と免疫状態に依存；早期治療で予後改善；若齢・高齢・免疫不全動物はリスク高",
     },
     "infectious_bacterial": {
-        "keywords": ["bacteria", "bacterial", "abscess", "cellulitis", "sepsis", "streptococ", "staphylococ", "leptospir", "pasteurell", "bordetella", "mycoplasm"],
+        "keywords": [
+            "bacteria",
+            "bacterial",
+            "abscess",
+            "cellulitis",
+            "sepsis",
+            "streptococ",
+            "staphylococ",
+            "leptospir",
+            "pasteurell",
+            "bordetella",
+            "mycoplasm",
+        ],
         "treatment": [
             "Appropriate antibiotic therapy based on culture and sensitivity testing",
             "Surgical drainage of abscesses when indicated",
@@ -393,7 +405,23 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "適切な抗菌薬の早期投与で一般的に良好；治療遅延で合併症リスク増大",
     },
     "parasitic": {
-        "keywords": ["parasite", "parasitic", "worm", "helminth", "mite", "lice", "tick", "flea", "coccidia", "giardia", "mange", "scabies", "tapeworm", "pinworm", "roundworm"],
+        "keywords": [
+            "parasite",
+            "parasitic",
+            "worm",
+            "helminth",
+            "mite",
+            "lice",
+            "tick",
+            "flea",
+            "coccidia",
+            "giardia",
+            "mange",
+            "scabies",
+            "tapeworm",
+            "pinworm",
+            "roundworm",
+        ],
         "treatment": [
             "Appropriate antiparasitic medications targeting the specific parasite",
             "Environmental decontamination to break the parasite lifecycle",
@@ -418,7 +446,19 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "適切な駆虫治療で一般的に良好；寄生虫量と臓器障害の程度に依存",
     },
     "metabolic": {
-        "keywords": ["diabetes", "obesity", "thyroid", "hyperthyroid", "hypothyroid", "cushing", "addison", "metabolic", "ketoacid", "lipidosis", "hepatic lipid"],
+        "keywords": [
+            "diabetes",
+            "obesity",
+            "thyroid",
+            "hyperthyroid",
+            "hypothyroid",
+            "cushing",
+            "addison",
+            "metabolic",
+            "ketoacid",
+            "lipidosis",
+            "hepatic lipid",
+        ],
         "treatment": [
             "Medical management targeting the specific metabolic imbalance",
             "Dietary modification with species-appropriate therapeutic diet",
@@ -443,7 +483,19 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "多くの代謝疾患は生涯管理で制御可能；早期発見と飼い主の協力が予後を左右",
     },
     "neoplastic": {
-        "keywords": ["cancer", "tumor", "tumour", "neoplasm", "carcinoma", "lymphoma", "melanoma", "sarcoma", "adenocarcinoma", "fibrosarcoma", "mast cell"],
+        "keywords": [
+            "cancer",
+            "tumor",
+            "tumour",
+            "neoplasm",
+            "carcinoma",
+            "lymphoma",
+            "melanoma",
+            "sarcoma",
+            "adenocarcinoma",
+            "fibrosarcoma",
+            "mast cell",
+        ],
         "treatment": [
             "Surgical excision with wide margins where feasible",
             "Chemotherapy protocols appropriate for the tumor type",
@@ -468,7 +520,17 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "腫瘍の種類・グレード・ステージにより大きく異なる；早期発見と完全切除が最良の結果",
     },
     "nutritional": {
-        "keywords": ["deficiency", "malnutrition", "nutritional", "vitamin", "calcium", "phosphorus", "metabolic bone", "rickets", "scurvy"],
+        "keywords": [
+            "deficiency",
+            "malnutrition",
+            "nutritional",
+            "vitamin",
+            "calcium",
+            "phosphorus",
+            "metabolic bone",
+            "rickets",
+            "scurvy",
+        ],
         "treatment": [
             "Dietary correction with balanced, species-appropriate nutrition",
             "Supplementation of deficient vitamins or minerals",
@@ -492,7 +554,19 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "早期発見と食事改善で一般的に良好；慢性欠乏は不可逆的損傷の可能性あり",
     },
     "respiratory": {
-        "keywords": ["respiratory", "lung", "pneumonia", "bronch", "asthma", "airway", "pleural", "trachea", "rhinitis", "sinusitis", "dyspnea"],
+        "keywords": [
+            "respiratory",
+            "lung",
+            "pneumonia",
+            "bronch",
+            "asthma",
+            "airway",
+            "pleural",
+            "trachea",
+            "rhinitis",
+            "sinusitis",
+            "dyspnea",
+        ],
         "treatment": [
             "Oxygen therapy for respiratory distress",
             "Bronchodilators for airway constriction",
@@ -517,7 +591,23 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "原因と重症度に依存；急性呼吸器疾患は治療反応良好；慢性疾患は長期管理が必要な場合あり",
     },
     "gastrointestinal": {
-        "keywords": ["gastrointestinal", "diarrhea", "vomiting", "enteritis", "colitis", "ibd", "pancreatitis", "gastritis", "bloat", "obstruction", "ileus", "constipation", "prolapse", "intussusception", "megacolon"],
+        "keywords": [
+            "gastrointestinal",
+            "diarrhea",
+            "vomiting",
+            "enteritis",
+            "colitis",
+            "ibd",
+            "pancreatitis",
+            "gastritis",
+            "bloat",
+            "obstruction",
+            "ileus",
+            "constipation",
+            "prolapse",
+            "intussusception",
+            "megacolon",
+        ],
         "treatment": [
             "Fluid therapy to correct dehydration and electrolyte imbalances",
             "Dietary management with easily digestible food",
@@ -543,7 +633,18 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "急性・合併症のない消化器疾患は一般的に良好；慢性疾患は継続的な食事管理が必要",
     },
     "dermatologic": {
-        "keywords": ["dermatitis", "skin", "allergic", "mange", "ringworm", "fungal", "alopecia", "pyoderma", "pododermatitis", "bumblefoot"],
+        "keywords": [
+            "dermatitis",
+            "skin",
+            "allergic",
+            "mange",
+            "ringworm",
+            "fungal",
+            "alopecia",
+            "pyoderma",
+            "pododermatitis",
+            "bumblefoot",
+        ],
         "treatment": [
             "Topical and/or systemic medications targeting the underlying cause",
             "Antifungal therapy for fungal infections",
@@ -568,7 +669,17 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "適切な治療で多くの皮膚疾患は良好；アレルギー性皮膚疾患は長期管理が必要なことが多い",
     },
     "urinary": {
-        "keywords": ["urinary", "kidney", "renal", "bladder", "calculi", "urolithiasis", "cystitis", "nephritis", "flutd"],
+        "keywords": [
+            "urinary",
+            "kidney",
+            "renal",
+            "bladder",
+            "calculi",
+            "urolithiasis",
+            "cystitis",
+            "nephritis",
+            "flutd",
+        ],
         "treatment": [
             "Fluid therapy to support renal function and hydration",
             "Dietary modification with therapeutic renal or urinary diets",
@@ -593,7 +704,16 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "疾患の種類とステージにより異なる；急性泌尿器疾患は治療反応良好なことが多い；慢性腎臓病は長期管理が必要",
     },
     "cardiovascular": {
-        "keywords": ["cardiac", "heart", "cardiovascular", "cardiomyopathy", "murmur", "arrhythmia", "thromboembolism", "endocard"],
+        "keywords": [
+            "cardiac",
+            "heart",
+            "cardiovascular",
+            "cardiomyopathy",
+            "murmur",
+            "arrhythmia",
+            "thromboembolism",
+            "endocard",
+        ],
         "treatment": [
             "Cardiac medications (ACE inhibitors, diuretics, positive inotropes) as indicated",
             "Antiarrhythmic therapy for rhythm disturbances",
@@ -618,7 +738,18 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "心疾患の種類とステージに依存；早期発見と内科管理で生存期間を大幅に延長可能；進行した心不全は予後不良",
     },
     "neurologic": {
-        "keywords": ["seizure", "epilepsy", "neurologic", "neurological", "paralysis", "paresis", "vestibular", "neuropathy", "encephalitis", "meningitis"],
+        "keywords": [
+            "seizure",
+            "epilepsy",
+            "neurologic",
+            "neurological",
+            "paralysis",
+            "paresis",
+            "vestibular",
+            "neuropathy",
+            "encephalitis",
+            "meningitis",
+        ],
         "treatment": [
             "Anticonvulsant therapy for seizure control",
             "Anti-inflammatory therapy for inflammatory CNS disease",
@@ -643,7 +774,20 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "基礎疾患により異なる；特発性てんかんは投薬で一般的に管理可能；構造的脳病変は予後不良の場合あり",
     },
     "musculoskeletal": {
-        "keywords": ["fracture", "arthritis", "osteo", "bone", "joint", "luxation", "dislocation", "dysplasia", "spondyl", "ligament", "tendon", "lameness"],
+        "keywords": [
+            "fracture",
+            "arthritis",
+            "osteo",
+            "bone",
+            "joint",
+            "luxation",
+            "dislocation",
+            "dysplasia",
+            "spondyl",
+            "ligament",
+            "tendon",
+            "lameness",
+        ],
         "treatment": [
             "Pain management with analgesics and anti-inflammatories",
             "Surgical stabilization for fractures and luxations",
@@ -667,7 +811,19 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "疾患と治療法に依存；単純骨折は適切な固定で良好に治癒；変性性関節疾患は長期管理が必要",
     },
     "ophthalmic": {
-        "keywords": ["eye", "ocular", "conjunctiv", "cataract", "glaucoma", "ulcer", "keratitis", "uveitis", "proptosis", "entropion", "ectropion"],
+        "keywords": [
+            "eye",
+            "ocular",
+            "conjunctiv",
+            "cataract",
+            "glaucoma",
+            "ulcer",
+            "keratitis",
+            "uveitis",
+            "proptosis",
+            "entropion",
+            "ectropion",
+        ],
         "treatment": [
             "Topical ophthalmic medications (antibiotics, anti-inflammatories, lubricants)",
             "Systemic medications for severe or systemic ophthalmic disease",
@@ -715,7 +871,17 @@ _ENRICHMENT_TEMPLATES = {
         "prognosis_ja": "定期的な歯科ケアと早期介入で良好；未治療の歯科疾患は全身感染に進展する可能性あり",
     },
     "reproductive": {
-        "keywords": ["reproductive", "uterine", "pyometra", "dystocia", "mastitis", "testicular", "ovarian", "pregnancy", "prolapse"],
+        "keywords": [
+            "reproductive",
+            "uterine",
+            "pyometra",
+            "dystocia",
+            "mastitis",
+            "testicular",
+            "ovarian",
+            "pregnancy",
+            "prolapse",
+        ],
         "treatment": [
             "Surgical intervention (ovariohysterectomy for pyometra, C-section for dystocia)",
             "Antibiotics for reproductive tract infections",
@@ -769,10 +935,22 @@ def _classify_disease(name: str, description: str) -> str:
     """Classify a disease into a template category by keyword matching."""
     text = f"{name} {description}".lower()
     category_order = [
-        "neoplastic", "metabolic", "musculoskeletal", "ophthalmic", "dental",
-        "reproductive", "neurologic", "cardiovascular", "urinary",
-        "dermatologic", "gastrointestinal", "respiratory", "nutritional",
-        "infectious_viral", "infectious_bacterial", "parasitic",
+        "neoplastic",
+        "metabolic",
+        "musculoskeletal",
+        "ophthalmic",
+        "dental",
+        "reproductive",
+        "neurologic",
+        "cardiovascular",
+        "urinary",
+        "dermatologic",
+        "gastrointestinal",
+        "respiratory",
+        "nutritional",
+        "infectious_viral",
+        "infectious_bacterial",
+        "parasitic",
     ]
     for cat in category_order:
         if cat in _ENRICHMENT_TEMPLATES:
@@ -963,18 +1141,24 @@ def main(db_path: str | None = None):
         symptom_count = conn.execute("SELECT COUNT(*) FROM symptoms").fetchone()[0]
 
         # Field coverage report
-        t_count = conn.execute("SELECT COUNT(*) FROM diseases WHERE treatment IS NOT NULL AND treatment != ''").fetchone()[0]
-        p_count = conn.execute("SELECT COUNT(*) FROM diseases WHERE prevention IS NOT NULL AND prevention != ''").fetchone()[0]
-        pr_count = conn.execute("SELECT COUNT(*) FROM diseases WHERE prognosis IS NOT NULL AND prognosis != ''").fetchone()[0]
+        t_count = conn.execute(
+            "SELECT COUNT(*) FROM diseases WHERE treatment IS NOT NULL AND treatment != ''"
+        ).fetchone()[0]
+        p_count = conn.execute(
+            "SELECT COUNT(*) FROM diseases WHERE prevention IS NOT NULL AND prevention != ''"
+        ).fetchone()[0]
+        pr_count = conn.execute(
+            "SELECT COUNT(*) FROM diseases WHERE prognosis IS NOT NULL AND prognosis != ''"
+        ).fetchone()[0]
 
         print("\n" + "=" * 60)
         print("Migration complete!")
         print(f"  Diseases:    {total_count}")
         print(f"  Symptoms:    {symptom_count}")
         print(f"  Drugs:       {drug_count}")
-        print(f"  Treatment:   {t_count}/{total_count} ({100*t_count//total_count}%)")
-        print(f"  Prevention:  {p_count}/{total_count} ({100*p_count//total_count}%)")
-        print(f"  Prognosis:   {pr_count}/{total_count} ({100*pr_count//total_count}%)")
+        print(f"  Treatment:   {t_count}/{total_count} ({100 * t_count // total_count}%)")
+        print(f"  Prevention:  {p_count}/{total_count} ({100 * p_count // total_count}%)")
+        print(f"  Prognosis:   {pr_count}/{total_count} ({100 * pr_count // total_count}%)")
         print("=" * 60)
 
 

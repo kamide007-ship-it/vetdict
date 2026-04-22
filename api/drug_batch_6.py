@@ -104,7 +104,13 @@ DRUGS_BATCH_6: list[dict] = [
                 "notes_ja": "難治性低血圧に。過度の血管収縮に注意",
             },
         },
-        "side_effects": ["peripheral vasoconstriction", "tissue ischemia", "hypertension", "bradycardia", "GI cramping"],
+        "side_effects": [
+            "peripheral vasoconstriction",
+            "tissue ischemia",
+            "hypertension",
+            "bradycardia",
+            "GI cramping",
+        ],
         "side_effects_ja": ["末梢血管収縮", "組織虚血", "高血圧", "徐脈", "消化管攣縮"],
         "contraindications": "Chronic nephritis with nitrogen retention. Ischemic heart disease (relative).",
         "contraindications_ja": "窒素貯留を伴う慢性腎炎。虚血性心疾患（相対的禁忌）。",
@@ -277,7 +283,12 @@ DRUGS_BATCH_6: list[dict] = [
                 "notes_ja": "リンパ腫に。CBC・肝機能を厳密にモニター",
             },
         },
-        "side_effects": ["myelosuppression (cumulative)", "hepatotoxicity (cumulative, dose-limiting)", "GI upset", "anorexia"],
+        "side_effects": [
+            "myelosuppression (cumulative)",
+            "hepatotoxicity (cumulative, dose-limiting)",
+            "GI upset",
+            "anorexia",
+        ],
         "side_effects_ja": ["骨髄抑制（累積性）", "肝毒性（累積性、用量制限因子）", "消化器症状", "食欲不振"],
         "contraindications": "Pre-existing hepatic disease (ALT >3x ULN). Severe myelosuppression. Do not handle with bare hands (cytotoxic).",
         "contraindications_ja": "既存の肝疾患（ALT >正常上限3倍）。重度の骨髄抑制。素手で取り扱わないこと（細胞毒性）。",
@@ -626,7 +637,14 @@ DRUGS_BATCH_6: list[dict] = [
                 "notes_ja": "ケタミン-キシラジンプロトコルの一部。呼吸抑制を厳密にモニター",
             },
         },
-        "side_effects": ["bradycardia", "respiratory depression", "hyperglycemia", "vomiting (dogs/cats)", "bloat (horses)", "muscle tremors"],
+        "side_effects": [
+            "bradycardia",
+            "respiratory depression",
+            "hyperglycemia",
+            "vomiting (dogs/cats)",
+            "bloat (horses)",
+            "muscle tremors",
+        ],
         "side_effects_ja": ["徐脈", "呼吸抑制", "高血糖", "嘔吐（犬/猫）", "鼓脹（馬）", "筋振戦"],
         "contraindications": "Severe cardiac disease. Last trimester of pregnancy (oxytocic effect). GI obstruction (vomiting risk). Do not use IV in cats.",
         "contraindications_ja": "重度の心疾患。妊娠末期（子宮収縮作用）。消化管閉塞（嘔吐リスク）。猫に静注不可。",
@@ -657,7 +675,14 @@ DRUGS_BATCH_6: list[dict] = [
                 "notes_ja": "犬では殆ど使用しない。デクスメデトミジンが推奨。主に研究用途",
             },
         },
-        "side_effects": ["bradycardia", "AV block", "respiratory depression", "sweating (horses)", "ataxia", "penile prolapse (horses)"],
+        "side_effects": [
+            "bradycardia",
+            "AV block",
+            "respiratory depression",
+            "sweating (horses)",
+            "ataxia",
+            "penile prolapse (horses)",
+        ],
         "side_effects_ja": ["徐脈", "房室ブロック", "呼吸抑制", "発汗（馬）", "運動失調", "陰茎脱出（馬）"],
         "contraindications": "Severe cardiac disease. Last trimester pregnancy. Not for food-producing horses in some jurisdictions. Reversal: atipamezole.",
         "contraindications_ja": "重度の心疾患。妊娠末期。一部法域で食用馬には使用不可。拮抗: アチパメゾール。",
@@ -829,7 +854,14 @@ DRUGS_BATCH_6: list[dict] = [
                 "notes_ja": "慎重に使用。ウサギは免疫抑制に感受性が高い。短期使用のみ",
             },
         },
-        "side_effects": ["PU/PD", "polyphagia", "iatrogenic Cushing's", "diabetes (cats)", "GI ulceration", "immunosuppression"],
+        "side_effects": [
+            "PU/PD",
+            "polyphagia",
+            "iatrogenic Cushing's",
+            "diabetes (cats)",
+            "GI ulceration",
+            "immunosuppression",
+        ],
         "side_effects_ja": ["多飲多尿", "多食", "医原性クッシング症候群", "糖尿病（猫）", "消化管潰瘍", "免疫抑制"],
         "contraindications": "Systemic fungal infections. Diabetes mellitus (relative). GI ulceration. Active infections without antibiotic coverage.",
         "contraindications_ja": "全身性真菌感染症。糖尿病（相対的禁忌）。消化管潰瘍。抗菌薬カバーのない活動性感染症。",
@@ -1237,31 +1269,79 @@ SPECIES_INFO_PATCH_6: dict[str, dict[str, dict]] = {
 # ---------------------------------------------------------------------------
 DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
     "enrofloxacin": [
-        {"drug": "theophylline", "effect": "Inhibits theophylline metabolism; risk of toxicity", "effect_ja": "テオフィリン代謝阻害。中毒リスク"},
+        {
+            "drug": "theophylline",
+            "effect": "Inhibits theophylline metabolism; risk of toxicity",
+            "effect_ja": "テオフィリン代謝阻害。中毒リスク",
+        },
         {"drug": "NSAIDs", "effect": "Increased seizure risk", "effect_ja": "痙攣リスク増加"},
-        {"drug": "sucralfate", "effect": "Reduced absorption if given concurrently; separate by 2h", "effect_ja": "同時投与で吸収低下。2時間間隔を空ける"},
+        {
+            "drug": "sucralfate",
+            "effect": "Reduced absorption if given concurrently; separate by 2h",
+            "effect_ja": "同時投与で吸収低下。2時間間隔を空ける",
+        },
         {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
     ],
     "metronidazole": [
-        {"drug": "phenobarbital", "effect": "Increased metronidazole clearance", "effect_ja": "メトロニダゾールのクリアランス増加"},
+        {
+            "drug": "phenobarbital",
+            "effect": "Increased metronidazole clearance",
+            "effect_ja": "メトロニダゾールのクリアランス増加",
+        },
         {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
         {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
     ],
     "doxycycline": [
-        {"drug": "antacids/sucralfate", "effect": "Chelation reduces absorption; separate by 2-3h", "effect_ja": "キレート化で吸収低下。2-3時間間隔を空ける"},
-        {"drug": "phenobarbital", "effect": "Decreased doxycycline half-life", "effect_ja": "ドキシサイクリン半減期短縮"},
+        {
+            "drug": "antacids/sucralfate",
+            "effect": "Chelation reduces absorption; separate by 2-3h",
+            "effect_ja": "キレート化で吸収低下。2-3時間間隔を空ける",
+        },
+        {
+            "drug": "phenobarbital",
+            "effect": "Decreased doxycycline half-life",
+            "effect_ja": "ドキシサイクリン半減期短縮",
+        },
         {"drug": "methotrexate", "effect": "Increased methotrexate toxicity", "effect_ja": "メトトレキサート毒性増加"},
     ],
     "itraconazole": [
-        {"drug": "cyclosporine", "effect": "Markedly increases cyclosporine levels; reduce dose by 50%", "effect_ja": "シクロスポリン濃度を著明に上昇。用量50%減量"},
-        {"drug": "midazolam/diazepam", "effect": "Prolonged sedation via CYP3A4 inhibition", "effect_ja": "CYP3A4阻害で鎮静延長"},
-        {"drug": "antacids/H2 blockers", "effect": "Reduced absorption (needs acidic pH)", "effect_ja": "吸収低下（酸性pHが必要）"},
-        {"drug": "ivermectin", "effect": "Increased ivermectin levels; neurotoxicity risk", "effect_ja": "イベルメクチン濃度上昇。神経毒性リスク"},
+        {
+            "drug": "cyclosporine",
+            "effect": "Markedly increases cyclosporine levels; reduce dose by 50%",
+            "effect_ja": "シクロスポリン濃度を著明に上昇。用量50%減量",
+        },
+        {
+            "drug": "midazolam/diazepam",
+            "effect": "Prolonged sedation via CYP3A4 inhibition",
+            "effect_ja": "CYP3A4阻害で鎮静延長",
+        },
+        {
+            "drug": "antacids/H2 blockers",
+            "effect": "Reduced absorption (needs acidic pH)",
+            "effect_ja": "吸収低下（酸性pHが必要）",
+        },
+        {
+            "drug": "ivermectin",
+            "effect": "Increased ivermectin levels; neurotoxicity risk",
+            "effect_ja": "イベルメクチン濃度上昇。神経毒性リスク",
+        },
     ],
     "ketoconazole": [
-        {"drug": "cyclosporine", "effect": "Increases cyclosporine levels (used therapeutically to reduce dose)", "effect_ja": "シクロスポリン濃度上昇（用量削減目的で治療的併用あり）"},
-        {"drug": "antacids/H2 blockers", "effect": "Reduced absorption (needs acidic pH)", "effect_ja": "吸収低下（酸性pHが必要）"},
-        {"drug": "ivermectin", "effect": "Increased ivermectin levels via P-gp inhibition", "effect_ja": "P-gp阻害でイベルメクチン濃度上昇"},
+        {
+            "drug": "cyclosporine",
+            "effect": "Increases cyclosporine levels (used therapeutically to reduce dose)",
+            "effect_ja": "シクロスポリン濃度上昇（用量削減目的で治療的併用あり）",
+        },
+        {
+            "drug": "antacids/H2 blockers",
+            "effect": "Reduced absorption (needs acidic pH)",
+            "effect_ja": "吸収低下（酸性pHが必要）",
+        },
+        {
+            "drug": "ivermectin",
+            "effect": "Increased ivermectin levels via P-gp inhibition",
+            "effect_ja": "P-gp阻害でイベルメクチン濃度上昇",
+        },
     ],
     "fluconazole": [
         {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
@@ -1271,63 +1351,167 @@ DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
     "gentamicin": [
         {"drug": "furosemide", "effect": "Synergistic nephro/ototoxicity", "effect_ja": "腎毒性・耳毒性の相乗作用"},
         {"drug": "amphotericin_b", "effect": "Additive nephrotoxicity", "effect_ja": "腎毒性の相加作用"},
-        {"drug": "neuromuscular blockers", "effect": "Potentiated neuromuscular blockade", "effect_ja": "神経筋遮断の増強"},
+        {
+            "drug": "neuromuscular blockers",
+            "effect": "Potentiated neuromuscular blockade",
+            "effect_ja": "神経筋遮断の増強",
+        },
         {"drug": "NSAIDs", "effect": "Increased nephrotoxicity risk", "effect_ja": "腎毒性リスク増加"},
     ],
     "chloramphenicol": [
-        {"drug": "phenobarbital", "effect": "Mutual interaction: chloramphenicol increases phenobarbital levels; phenobarbital decreases chloramphenicol levels", "effect_ja": "相互作用: クロラムフェニコールがフェノバルビタール濃度を上昇、フェノバルビタールがクロラムフェニコール濃度を低下"},
-        {"drug": "cyclophosphamide", "effect": "Delayed metabolism of cyclophosphamide", "effect_ja": "シクロホスファミドの代謝遅延"},
+        {
+            "drug": "phenobarbital",
+            "effect": "Mutual interaction: chloramphenicol increases phenobarbital levels; phenobarbital decreases chloramphenicol levels",
+            "effect_ja": "相互作用: クロラムフェニコールがフェノバルビタール濃度を上昇、フェノバルビタールがクロラムフェニコール濃度を低下",
+        },
+        {
+            "drug": "cyclophosphamide",
+            "effect": "Delayed metabolism of cyclophosphamide",
+            "effect_ja": "シクロホスファミドの代謝遅延",
+        },
     ],
     "meloxicam": [
-        {"drug": "other NSAIDs", "effect": "Increased GI ulceration risk; never combine", "effect_ja": "消化管潰瘍リスク増加。絶対に併用しない"},
-        {"drug": "corticosteroids", "effect": "Markedly increased GI ulceration risk", "effect_ja": "消化管潰瘍リスクが著明に増加"},
-        {"drug": "furosemide", "effect": "Reduced diuretic efficacy; nephrotoxicity risk", "effect_ja": "利尿効果低下。腎毒性リスク"},
-        {"drug": "ACE inhibitors", "effect": "Reduced antihypertensive effect; renal risk", "effect_ja": "降圧効果低下。腎リスク"},
+        {
+            "drug": "other NSAIDs",
+            "effect": "Increased GI ulceration risk; never combine",
+            "effect_ja": "消化管潰瘍リスク増加。絶対に併用しない",
+        },
+        {
+            "drug": "corticosteroids",
+            "effect": "Markedly increased GI ulceration risk",
+            "effect_ja": "消化管潰瘍リスクが著明に増加",
+        },
+        {
+            "drug": "furosemide",
+            "effect": "Reduced diuretic efficacy; nephrotoxicity risk",
+            "effect_ja": "利尿効果低下。腎毒性リスク",
+        },
+        {
+            "drug": "ACE inhibitors",
+            "effect": "Reduced antihypertensive effect; renal risk",
+            "effect_ja": "降圧効果低下。腎リスク",
+        },
     ],
     "gabapentin": [
-        {"drug": "opioids", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
-        {"drug": "antacids", "effect": "Reduced gabapentin absorption by 20%", "effect_ja": "ガバペンチン吸収約20%低下"},
+        {
+            "drug": "opioids",
+            "effect": "Additive sedation and respiratory depression",
+            "effect_ja": "鎮静・呼吸抑制の相加作用",
+        },
+        {
+            "drug": "antacids",
+            "effect": "Reduced gabapentin absorption by 20%",
+            "effect_ja": "ガバペンチン吸収約20%低下",
+        },
     ],
     "tramadol": [
         {"drug": "SSRIs/MAOIs", "effect": "Serotonin syndrome risk", "effect_ja": "セロトニン症候群リスク"},
         {"drug": "other opioids", "effect": "Additive CNS depression", "effect_ja": "中枢抑制の相加作用"},
-        {"drug": "ondansetron", "effect": "May reduce tramadol analgesic efficacy", "effect_ja": "トラマドール鎮痛効果低下の可能性"},
+        {
+            "drug": "ondansetron",
+            "effect": "May reduce tramadol analgesic efficacy",
+            "effect_ja": "トラマドール鎮痛効果低下の可能性",
+        },
     ],
     "phenobarbital": [
-        {"drug": "chloramphenicol", "effect": "Increased phenobarbital levels", "effect_ja": "フェノバルビタール濃度上昇"},
+        {
+            "drug": "chloramphenicol",
+            "effect": "Increased phenobarbital levels",
+            "effect_ja": "フェノバルビタール濃度上昇",
+        },
         {"drug": "doxycycline", "effect": "Decreased doxycycline half-life", "effect_ja": "ドキシサイクリン半減期短縮"},
         {"drug": "cyclosporine", "effect": "Decreased cyclosporine levels", "effect_ja": "シクロスポリン濃度低下"},
         {"drug": "corticosteroids", "effect": "Increased steroid metabolism", "effect_ja": "ステロイド代謝促進"},
-        {"drug": "metronidazole", "effect": "Increased metronidazole clearance", "effect_ja": "メトロニダゾールクリアランス増加"},
+        {
+            "drug": "metronidazole",
+            "effect": "Increased metronidazole clearance",
+            "effect_ja": "メトロニダゾールクリアランス増加",
+        },
     ],
     "cyclosporine": [
-        {"drug": "ketoconazole/itraconazole", "effect": "Markedly increases cyclosporine levels (used therapeutically)", "effect_ja": "シクロスポリン濃度を著明に上昇（治療的に利用）"},
+        {
+            "drug": "ketoconazole/itraconazole",
+            "effect": "Markedly increases cyclosporine levels (used therapeutically)",
+            "effect_ja": "シクロスポリン濃度を著明に上昇（治療的に利用）",
+        },
         {"drug": "phenobarbital", "effect": "Decreased cyclosporine levels", "effect_ja": "シクロスポリン濃度低下"},
         {"drug": "NSAIDs", "effect": "Additive nephrotoxicity", "effect_ja": "腎毒性の相加作用"},
-        {"drug": "metoclopramide", "effect": "Increased cyclosporine absorption", "effect_ja": "シクロスポリン吸収増加"},
+        {
+            "drug": "metoclopramide",
+            "effect": "Increased cyclosporine absorption",
+            "effect_ja": "シクロスポリン吸収増加",
+        },
     ],
     "furosemide": [
-        {"drug": "aminoglycosides", "effect": "Synergistic ototoxicity and nephrotoxicity", "effect_ja": "耳毒性・腎毒性の相乗作用"},
-        {"drug": "ACE inhibitors", "effect": "Risk of hypotension; start ACEi at low dose", "effect_ja": "低血圧リスク。ACE阻害薬は低用量から開始"},
+        {
+            "drug": "aminoglycosides",
+            "effect": "Synergistic ototoxicity and nephrotoxicity",
+            "effect_ja": "耳毒性・腎毒性の相乗作用",
+        },
+        {
+            "drug": "ACE inhibitors",
+            "effect": "Risk of hypotension; start ACEi at low dose",
+            "effect_ja": "低血圧リスク。ACE阻害薬は低用量から開始",
+        },
         {"drug": "NSAIDs", "effect": "Reduced diuretic efficacy", "effect_ja": "利尿効果の低下"},
-        {"drug": "digoxin", "effect": "Hypokalemia potentiates digoxin toxicity", "effect_ja": "低カリウム血症でジゴキシン毒性増強"},
+        {
+            "drug": "digoxin",
+            "effect": "Hypokalemia potentiates digoxin toxicity",
+            "effect_ja": "低カリウム血症でジゴキシン毒性増強",
+        },
     ],
     "digoxin": [
-        {"drug": "furosemide", "effect": "Hypokalemia increases digoxin toxicity risk", "effect_ja": "低カリウム血症でジゴキシン毒性リスク増加"},
+        {
+            "drug": "furosemide",
+            "effect": "Hypokalemia increases digoxin toxicity risk",
+            "effect_ja": "低カリウム血症でジゴキシン毒性リスク増加",
+        },
         {"drug": "metoclopramide", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
-        {"drug": "amiodarone", "effect": "Doubled digoxin levels; reduce digoxin dose by 50%", "effect_ja": "ジゴキシン濃度が2倍に。ジゴキシン用量50%減量"},
-        {"drug": "verapamil/diltiazem", "effect": "Increased digoxin levels and additive bradycardia", "effect_ja": "ジゴキシン濃度上昇と徐脈の相加作用"},
+        {
+            "drug": "amiodarone",
+            "effect": "Doubled digoxin levels; reduce digoxin dose by 50%",
+            "effect_ja": "ジゴキシン濃度が2倍に。ジゴキシン用量50%減量",
+        },
+        {
+            "drug": "verapamil/diltiazem",
+            "effect": "Increased digoxin levels and additive bradycardia",
+            "effect_ja": "ジゴキシン濃度上昇と徐脈の相加作用",
+        },
     ],
     "omeprazole": [
-        {"drug": "ketoconazole/itraconazole", "effect": "Reduced absorption of azole antifungals (need acidic pH)", "effect_ja": "アゾール系抗真菌薬の吸収低下（酸性pHが必要）"},
-        {"drug": "clopidogrel", "effect": "May reduce clopidogrel activation via CYP2C19 inhibition", "effect_ja": "CYP2C19阻害でクロピドグレル活性化低下の可能性"},
-        {"drug": "sucralfate", "effect": "Give omeprazole 30 min before sucralfate", "effect_ja": "オメプラゾールをスクラルファートの30分前に投与"},
+        {
+            "drug": "ketoconazole/itraconazole",
+            "effect": "Reduced absorption of azole antifungals (need acidic pH)",
+            "effect_ja": "アゾール系抗真菌薬の吸収低下（酸性pHが必要）",
+        },
+        {
+            "drug": "clopidogrel",
+            "effect": "May reduce clopidogrel activation via CYP2C19 inhibition",
+            "effect_ja": "CYP2C19阻害でクロピドグレル活性化低下の可能性",
+        },
+        {
+            "drug": "sucralfate",
+            "effect": "Give omeprazole 30 min before sucralfate",
+            "effect_ja": "オメプラゾールをスクラルファートの30分前に投与",
+        },
     ],
     "sucralfate": [
-        {"drug": "fluoroquinolones", "effect": "Chelation reduces FQ absorption by 50-70%; separate by 2h", "effect_ja": "キレート化でFQ吸収50-70%低下。2時間間隔を空ける"},
-        {"drug": "doxycycline", "effect": "Reduced doxycycline absorption; separate by 2-3h", "effect_ja": "ドキシサイクリン吸収低下。2-3時間間隔を空ける"},
+        {
+            "drug": "fluoroquinolones",
+            "effect": "Chelation reduces FQ absorption by 50-70%; separate by 2h",
+            "effect_ja": "キレート化でFQ吸収50-70%低下。2時間間隔を空ける",
+        },
+        {
+            "drug": "doxycycline",
+            "effect": "Reduced doxycycline absorption; separate by 2-3h",
+            "effect_ja": "ドキシサイクリン吸収低下。2-3時間間隔を空ける",
+        },
         {"drug": "digoxin", "effect": "Reduced digoxin absorption", "effect_ja": "ジゴキシン吸収低下"},
-        {"drug": "levothyroxine", "effect": "Reduced thyroid hormone absorption; separate by 2h", "effect_ja": "甲状腺ホルモン吸収低下。2時間間隔を空ける"},
+        {
+            "drug": "levothyroxine",
+            "effect": "Reduced thyroid hormone absorption; separate by 2h",
+            "effect_ja": "甲状腺ホルモン吸収低下。2時間間隔を空ける",
+        },
     ],
     "metoclopramide": [
         {"drug": "opioids", "effect": "Antagonistic on GI motility", "effect_ja": "消化管運動に対して拮抗"},
@@ -1335,163 +1519,439 @@ DRUG_INTERACTIONS_PATCH_6: dict[str, list[dict]] = {
         {"drug": "cyclosporine", "effect": "Increased cyclosporine absorption", "effect_ja": "シクロスポリン吸収増加"},
     ],
     "cisapride": [
-        {"drug": "ketoconazole/itraconazole", "effect": "Increased cisapride levels; risk of cardiac arrhythmia (QT prolongation)", "effect_ja": "シサプリド濃度上昇。心不整脈リスク（QT延長）"},
-        {"drug": "erythromycin", "effect": "Increased cisapride levels via CYP3A4 inhibition; arrhythmia risk", "effect_ja": "CYP3A4阻害でシサプリド濃度上昇。不整脈リスク"},
+        {
+            "drug": "ketoconazole/itraconazole",
+            "effect": "Increased cisapride levels; risk of cardiac arrhythmia (QT prolongation)",
+            "effect_ja": "シサプリド濃度上昇。心不整脈リスク（QT延長）",
+        },
+        {
+            "drug": "erythromycin",
+            "effect": "Increased cisapride levels via CYP3A4 inhibition; arrhythmia risk",
+            "effect_ja": "CYP3A4阻害でシサプリド濃度上昇。不整脈リスク",
+        },
     ],
     "mosapride": [
-        {"drug": "erythromycin", "effect": "Additive prokinetic effect; increased mosapride levels via CYP3A4 inhibition", "effect_ja": "消化管運動促進の相加作用。CYP3A4阻害でモサプリド濃度上昇"},
-        {"drug": "anticholinergics", "effect": "Antagonistic on GI motility; reduces mosapride efficacy", "effect_ja": "消化管運動に対して拮抗。モサプリドの効果低下"},
+        {
+            "drug": "erythromycin",
+            "effect": "Additive prokinetic effect; increased mosapride levels via CYP3A4 inhibition",
+            "effect_ja": "消化管運動促進の相加作用。CYP3A4阻害でモサプリド濃度上昇",
+        },
+        {
+            "drug": "anticholinergics",
+            "effect": "Antagonistic on GI motility; reduces mosapride efficacy",
+            "effect_ja": "消化管運動に対して拮抗。モサプリドの効果低下",
+        },
     ],
     "scopolamine_butylbromide": [
-        {"drug": "metoclopramide/cisapride/mosapride", "effect": "Antagonistic on GI motility; concurrent use reduces prokinetic efficacy", "effect_ja": "消化管運動に対して拮抗。併用により消化管運動促進薬の効果が低下"},
-        {"drug": "antihistamines/tricyclic antidepressants", "effect": "Additive anticholinergic effects (tachycardia, dry mouth, urinary retention)", "effect_ja": "抗コリン作用の相加（頻脈、口渇、尿閉）"},
-        {"drug": "potassium chloride (oral)", "effect": "Delayed GI transit may increase risk of GI mucosal ulceration from KCl tablets", "effect_ja": "消化管通過遅延により塩化カリウム錠剤による消化管粘膜潰瘍リスク増加"},
+        {
+            "drug": "metoclopramide/cisapride/mosapride",
+            "effect": "Antagonistic on GI motility; concurrent use reduces prokinetic efficacy",
+            "effect_ja": "消化管運動に対して拮抗。併用により消化管運動促進薬の効果が低下",
+        },
+        {
+            "drug": "antihistamines/tricyclic antidepressants",
+            "effect": "Additive anticholinergic effects (tachycardia, dry mouth, urinary retention)",
+            "effect_ja": "抗コリン作用の相加（頻脈、口渇、尿閉）",
+        },
+        {
+            "drug": "potassium chloride (oral)",
+            "effect": "Delayed GI transit may increase risk of GI mucosal ulceration from KCl tablets",
+            "effect_ja": "消化管通過遅延により塩化カリウム錠剤による消化管粘膜潰瘍リスク増加",
+        },
     ],
     "amlodipine": [
-        {"drug": "ACE inhibitors", "effect": "Additive hypotension (often used together therapeutically)", "effect_ja": "低血圧の相加作用（治療的に併用されることが多い）"},
+        {
+            "drug": "ACE inhibitors",
+            "effect": "Additive hypotension (often used together therapeutically)",
+            "effect_ja": "低血圧の相加作用（治療的に併用されることが多い）",
+        },
         {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
     ],
     "pimobendan": [
-        {"drug": "beta-blockers", "effect": "May partially antagonize inotropic effect", "effect_ja": "強心作用を部分的に拮抗する可能性"},
-        {"drug": "verapamil/diltiazem", "effect": "Additive negative chronotropic effects; use cautiously", "effect_ja": "陰性変時作用の相加。慎重に使用"},
+        {
+            "drug": "beta-blockers",
+            "effect": "May partially antagonize inotropic effect",
+            "effect_ja": "強心作用を部分的に拮抗する可能性",
+        },
+        {
+            "drug": "verapamil/diltiazem",
+            "effect": "Additive negative chronotropic effects; use cautiously",
+            "effect_ja": "陰性変時作用の相加。慎重に使用",
+        },
     ],
     "acepromazine": [
         {"drug": "opioids", "effect": "Additive sedation and hypotension", "effect_ja": "鎮静・低血圧の相加作用"},
-        {"drug": "epinephrine", "effect": "Reversed pressor response (epinephrine reversal); use norepinephrine instead", "effect_ja": "昇圧反応の逆転（エピネフリン逆転）。ノルエピネフリンを代わりに使用"},
+        {
+            "drug": "epinephrine",
+            "effect": "Reversed pressor response (epinephrine reversal); use norepinephrine instead",
+            "effect_ja": "昇圧反応の逆転（エピネフリン逆転）。ノルエピネフリンを代わりに使用",
+        },
         {"drug": "organophosphates", "effect": "Potentiated toxicity", "effect_ja": "毒性増強"},
     ],
     "dexmedetomidine": [
-        {"drug": "opioids", "effect": "Synergistic sedation; dose reduction of both drugs recommended", "effect_ja": "鎮静の相乗作用。両薬の用量削減を推奨"},
-        {"drug": "ketamine", "effect": "Commonly combined; balanced anesthesia protocol", "effect_ja": "頻繁に併用。バランス麻酔プロトコル"},
-        {"drug": "other alpha-2 agonists", "effect": "Do not combine; additive cardiovascular depression", "effect_ja": "併用不可。心血管系抑制の相加作用"},
+        {
+            "drug": "opioids",
+            "effect": "Synergistic sedation; dose reduction of both drugs recommended",
+            "effect_ja": "鎮静の相乗作用。両薬の用量削減を推奨",
+        },
+        {
+            "drug": "ketamine",
+            "effect": "Commonly combined; balanced anesthesia protocol",
+            "effect_ja": "頻繁に併用。バランス麻酔プロトコル",
+        },
+        {
+            "drug": "other alpha-2 agonists",
+            "effect": "Do not combine; additive cardiovascular depression",
+            "effect_ja": "併用不可。心血管系抑制の相加作用",
+        },
     ],
     "ivermectin": [
-        {"drug": "ketoconazole/itraconazole", "effect": "Increased ivermectin levels via P-gp/CYP3A4 inhibition; neurotoxicity risk", "effect_ja": "P-gp/CYP3A4阻害でイベルメクチン濃度上昇。神経毒性リスク"},
-        {"drug": "spinosad", "effect": "Increased ivermectin toxicity; do not combine with high-dose ivermectin", "effect_ja": "イベルメクチン毒性増加。高用量イベルメクチンとの併用不可"},
+        {
+            "drug": "ketoconazole/itraconazole",
+            "effect": "Increased ivermectin levels via P-gp/CYP3A4 inhibition; neurotoxicity risk",
+            "effect_ja": "P-gp/CYP3A4阻害でイベルメクチン濃度上昇。神経毒性リスク",
+        },
+        {
+            "drug": "spinosad",
+            "effect": "Increased ivermectin toxicity; do not combine with high-dose ivermectin",
+            "effect_ja": "イベルメクチン毒性増加。高用量イベルメクチンとの併用不可",
+        },
     ],
     "clindamycin": [
-        {"drug": "erythromycin/azithromycin", "effect": "Antagonistic binding at same ribosomal site; do not combine", "effect_ja": "同一リボソーム部位での拮抗結合。併用不可"},
-        {"drug": "neuromuscular blockers", "effect": "Potentiated neuromuscular blockade", "effect_ja": "神経筋遮断の増強"},
+        {
+            "drug": "erythromycin/azithromycin",
+            "effect": "Antagonistic binding at same ribosomal site; do not combine",
+            "effect_ja": "同一リボソーム部位での拮抗結合。併用不可",
+        },
+        {
+            "drug": "neuromuscular blockers",
+            "effect": "Potentiated neuromuscular blockade",
+            "effect_ja": "神経筋遮断の増強",
+        },
     ],
     "azithromycin": [
-        {"drug": "clindamycin", "effect": "Antagonistic ribosomal binding; do not combine", "effect_ja": "リボソーム結合の拮抗。併用不可"},
+        {
+            "drug": "clindamycin",
+            "effect": "Antagonistic ribosomal binding; do not combine",
+            "effect_ja": "リボソーム結合の拮抗。併用不可",
+        },
         {"drug": "cyclosporine", "effect": "Increased cyclosporine levels", "effect_ja": "シクロスポリン濃度上昇"},
         {"drug": "digoxin", "effect": "Increased digoxin levels", "effect_ja": "ジゴキシン濃度上昇"},
     ],
     "prednisolone": [
-        {"drug": "NSAIDs", "effect": "Markedly increased GI ulceration risk; avoid concurrent use", "effect_ja": "消化管潰瘍リスクが著明に増加。併用を避ける"},
-        {"drug": "insulin", "effect": "Antagonizes insulin effect; may require dose increase", "effect_ja": "インスリン効果を拮抗。増量が必要な場合あり"},
+        {
+            "drug": "NSAIDs",
+            "effect": "Markedly increased GI ulceration risk; avoid concurrent use",
+            "effect_ja": "消化管潰瘍リスクが著明に増加。併用を避ける",
+        },
+        {
+            "drug": "insulin",
+            "effect": "Antagonizes insulin effect; may require dose increase",
+            "effect_ja": "インスリン効果を拮抗。増量が必要な場合あり",
+        },
         {"drug": "furosemide", "effect": "Additive hypokalemia", "effect_ja": "低カリウム血症の相加作用"},
-        {"drug": "phenobarbital", "effect": "Increased steroid metabolism; may need higher dose", "effect_ja": "ステロイド代謝促進。増量が必要な場合あり"},
+        {
+            "drug": "phenobarbital",
+            "effect": "Increased steroid metabolism; may need higher dose",
+            "effect_ja": "ステロイド代謝促進。増量が必要な場合あり",
+        },
     ],
     "dexamethasone": [
-        {"drug": "NSAIDs", "effect": "Markedly increased GI ulceration risk", "effect_ja": "消化管潰瘍リスクが著明に増加"},
+        {
+            "drug": "NSAIDs",
+            "effect": "Markedly increased GI ulceration risk",
+            "effect_ja": "消化管潰瘍リスクが著明に増加",
+        },
         {"drug": "insulin", "effect": "Antagonizes insulin effect", "effect_ja": "インスリン効果を拮抗"},
-        {"drug": "phenobarbital", "effect": "Increased dexamethasone clearance", "effect_ja": "デキサメタゾンのクリアランス増加"},
+        {
+            "drug": "phenobarbital",
+            "effect": "Increased dexamethasone clearance",
+            "effect_ja": "デキサメタゾンのクリアランス増加",
+        },
         {"drug": "furosemide", "effect": "Additive hypokalemia", "effect_ja": "低カリウム血症の相加作用"},
     ],
     "carprofen": [
-        {"drug": "other NSAIDs", "effect": "Never combine; marked GI ulceration risk", "effect_ja": "絶対に併用しない。消化管潰瘍リスクの著明な増加"},
-        {"drug": "corticosteroids", "effect": "Increased GI ulceration risk; 5-day washout recommended", "effect_ja": "消化管潰瘍リスク増加。5日間の休薬期間を推奨"},
-        {"drug": "ACE inhibitors", "effect": "Reduced antihypertensive effect; renal risk", "effect_ja": "降圧効果低下。腎リスク"},
+        {
+            "drug": "other NSAIDs",
+            "effect": "Never combine; marked GI ulceration risk",
+            "effect_ja": "絶対に併用しない。消化管潰瘍リスクの著明な増加",
+        },
+        {
+            "drug": "corticosteroids",
+            "effect": "Increased GI ulceration risk; 5-day washout recommended",
+            "effect_ja": "消化管潰瘍リスク増加。5日間の休薬期間を推奨",
+        },
+        {
+            "drug": "ACE inhibitors",
+            "effect": "Reduced antihypertensive effect; renal risk",
+            "effect_ja": "降圧効果低下。腎リスク",
+        },
         {"drug": "furosemide", "effect": "Reduced diuretic efficacy", "effect_ja": "利尿効果低下"},
     ],
     "firocoxib": [
-        {"drug": "other NSAIDs", "effect": "Never combine; increased GI/renal toxicity", "effect_ja": "絶対に併用しない。消化管/腎毒性増加"},
+        {
+            "drug": "other NSAIDs",
+            "effect": "Never combine; increased GI/renal toxicity",
+            "effect_ja": "絶対に併用しない。消化管/腎毒性増加",
+        },
         {"drug": "corticosteroids", "effect": "Increased GI ulceration risk", "effect_ja": "消化管潰瘍リスク増加"},
         {"drug": "ACE inhibitors", "effect": "Reduced renal blood flow", "effect_ja": "腎血流低下"},
     ],
     "butorphanol": [
-        {"drug": "pure mu agonists", "effect": "Partial antagonism of morphine/fentanyl analgesia", "effect_ja": "モルヒネ/フェンタニルの鎮痛を部分的に拮抗"},
-        {"drug": "alpha-2 agonists", "effect": "Synergistic sedation (commonly combined)", "effect_ja": "鎮静の相乗作用（頻繁に併用）"},
-        {"drug": "other CNS depressants", "effect": "Additive CNS/respiratory depression", "effect_ja": "中枢/呼吸抑制の相加作用"},
+        {
+            "drug": "pure mu agonists",
+            "effect": "Partial antagonism of morphine/fentanyl analgesia",
+            "effect_ja": "モルヒネ/フェンタニルの鎮痛を部分的に拮抗",
+        },
+        {
+            "drug": "alpha-2 agonists",
+            "effect": "Synergistic sedation (commonly combined)",
+            "effect_ja": "鎮静の相乗作用（頻繁に併用）",
+        },
+        {
+            "drug": "other CNS depressants",
+            "effect": "Additive CNS/respiratory depression",
+            "effect_ja": "中枢/呼吸抑制の相加作用",
+        },
     ],
     "buprenorphine": [
-        {"drug": "pure mu agonists", "effect": "May partially antagonize full mu agonist analgesia", "effect_ja": "完全μ作動薬の鎮痛を部分的に拮抗する可能性"},
-        {"drug": "other CNS depressants", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
-        {"drug": "MAOIs", "effect": "Potentially fatal interaction; avoid", "effect_ja": "致死的な相互作用の可能性。避ける"},
+        {
+            "drug": "pure mu agonists",
+            "effect": "May partially antagonize full mu agonist analgesia",
+            "effect_ja": "完全μ作動薬の鎮痛を部分的に拮抗する可能性",
+        },
+        {
+            "drug": "other CNS depressants",
+            "effect": "Additive sedation and respiratory depression",
+            "effect_ja": "鎮静・呼吸抑制の相加作用",
+        },
+        {
+            "drug": "MAOIs",
+            "effect": "Potentially fatal interaction; avoid",
+            "effect_ja": "致死的な相互作用の可能性。避ける",
+        },
     ],
     "ketamine": [
-        {"drug": "alpha-2 agonists", "effect": "Synergistic sedation/analgesia; commonly combined", "effect_ja": "鎮静/鎮痛の相乗作用。頻繁に併用"},
-        {"drug": "benzodiazepines", "effect": "Smooth induction/recovery; commonly combined", "effect_ja": "滑らかな導入/覚醒。頻繁に併用"},
-        {"drug": "chloramphenicol", "effect": "Prolonged ketamine effect (inhibits metabolism)", "effect_ja": "ケタミン効果延長（代謝阻害）"},
+        {
+            "drug": "alpha-2 agonists",
+            "effect": "Synergistic sedation/analgesia; commonly combined",
+            "effect_ja": "鎮静/鎮痛の相乗作用。頻繁に併用",
+        },
+        {
+            "drug": "benzodiazepines",
+            "effect": "Smooth induction/recovery; commonly combined",
+            "effect_ja": "滑らかな導入/覚醒。頻繁に併用",
+        },
+        {
+            "drug": "chloramphenicol",
+            "effect": "Prolonged ketamine effect (inhibits metabolism)",
+            "effect_ja": "ケタミン効果延長（代謝阻害）",
+        },
     ],
     "diazepam": [
-        {"drug": "other CNS depressants", "effect": "Additive sedation and respiratory depression", "effect_ja": "鎮静・呼吸抑制の相加作用"},
-        {"drug": "ketoconazole/itraconazole", "effect": "Prolonged sedation via CYP3A4 inhibition", "effect_ja": "CYP3A4阻害で鎮静延長"},
+        {
+            "drug": "other CNS depressants",
+            "effect": "Additive sedation and respiratory depression",
+            "effect_ja": "鎮静・呼吸抑制の相加作用",
+        },
+        {
+            "drug": "ketoconazole/itraconazole",
+            "effect": "Prolonged sedation via CYP3A4 inhibition",
+            "effect_ja": "CYP3A4阻害で鎮静延長",
+        },
         {"drug": "phenobarbital", "effect": "Enhanced CNS depression", "effect_ja": "中枢抑制の増強"},
     ],
     "insulin_vetsulin": [
-        {"drug": "corticosteroids", "effect": "Antagonize insulin effect; may need dose increase", "effect_ja": "インスリン効果を拮抗。用量増加が必要な場合あり"},
-        {"drug": "thiazide diuretics", "effect": "Hyperglycemic effect; may increase insulin requirement", "effect_ja": "高血糖作用。インスリン必要量増加の可能性"},
-        {"drug": "beta-blockers", "effect": "May mask hypoglycemia signs (tachycardia)", "effect_ja": "低血糖兆候（頻脈）を隠蔽する可能性"},
+        {
+            "drug": "corticosteroids",
+            "effect": "Antagonize insulin effect; may need dose increase",
+            "effect_ja": "インスリン効果を拮抗。用量増加が必要な場合あり",
+        },
+        {
+            "drug": "thiazide diuretics",
+            "effect": "Hyperglycemic effect; may increase insulin requirement",
+            "effect_ja": "高血糖作用。インスリン必要量増加の可能性",
+        },
+        {
+            "drug": "beta-blockers",
+            "effect": "May mask hypoglycemia signs (tachycardia)",
+            "effect_ja": "低血糖兆候（頻脈）を隠蔽する可能性",
+        },
     ],
     "methimazole": [
-        {"drug": "warfarin", "effect": "Altered anticoagulant effect as thyroid status changes", "effect_ja": "甲状腺状態の変化に伴い抗凝固作用が変動"},
-        {"drug": "digoxin", "effect": "Digoxin levels change with thyroid normalization", "effect_ja": "甲状腺機能正常化に伴いジゴキシン濃度が変動"},
+        {
+            "drug": "warfarin",
+            "effect": "Altered anticoagulant effect as thyroid status changes",
+            "effect_ja": "甲状腺状態の変化に伴い抗凝固作用が変動",
+        },
+        {
+            "drug": "digoxin",
+            "effect": "Digoxin levels change with thyroid normalization",
+            "effect_ja": "甲状腺機能正常化に伴いジゴキシン濃度が変動",
+        },
     ],
     "trilostane": [
-        {"drug": "ACE inhibitors", "effect": "Additive aldosterone suppression; hyperkalemia risk", "effect_ja": "アルドステロン抑制の相加作用。高カリウム血症リスク"},
-        {"drug": "potassium-sparing diuretics", "effect": "Risk of life-threatening hyperkalemia", "effect_ja": "生命を脅かす高カリウム血症のリスク"},
+        {
+            "drug": "ACE inhibitors",
+            "effect": "Additive aldosterone suppression; hyperkalemia risk",
+            "effect_ja": "アルドステロン抑制の相加作用。高カリウム血症リスク",
+        },
+        {
+            "drug": "potassium-sparing diuretics",
+            "effect": "Risk of life-threatening hyperkalemia",
+            "effect_ja": "生命を脅かす高カリウム血症のリスク",
+        },
         {"drug": "ketoconazole", "effect": "Additive adrenal suppression", "effect_ja": "副腎抑制の相加作用"},
     ],
     "enalapril": [
-        {"drug": "NSAIDs", "effect": "Reduced antihypertensive effect; increased renal risk", "effect_ja": "降圧効果低下。腎リスク増加"},
+        {
+            "drug": "NSAIDs",
+            "effect": "Reduced antihypertensive effect; increased renal risk",
+            "effect_ja": "降圧効果低下。腎リスク増加",
+        },
         {"drug": "potassium-sparing diuretics", "effect": "Risk of hyperkalemia", "effect_ja": "高カリウム血症リスク"},
-        {"drug": "furosemide", "effect": "First-dose hypotension; start ACEi low", "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始"},
+        {
+            "drug": "furosemide",
+            "effect": "First-dose hypotension; start ACEi low",
+            "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始",
+        },
     ],
     "benazepril": [
-        {"drug": "NSAIDs", "effect": "Reduced antihypertensive effect; increased renal risk", "effect_ja": "降圧効果低下。腎リスク増加"},
+        {
+            "drug": "NSAIDs",
+            "effect": "Reduced antihypertensive effect; increased renal risk",
+            "effect_ja": "降圧効果低下。腎リスク増加",
+        },
         {"drug": "potassium-sparing diuretics", "effect": "Risk of hyperkalemia", "effect_ja": "高カリウム血症リスク"},
-        {"drug": "furosemide", "effect": "First-dose hypotension; start ACEi low", "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始"},
+        {
+            "drug": "furosemide",
+            "effect": "First-dose hypotension; start ACEi low",
+            "effect_ja": "初回投与時低血圧。ACE阻害薬は低用量から開始",
+        },
     ],
     "amoxicillin": [
-        {"drug": "methotrexate", "effect": "Reduced methotrexate clearance; toxicity risk", "effect_ja": "メトトレキサートクリアランス低下。毒性リスク"},
+        {
+            "drug": "methotrexate",
+            "effect": "Reduced methotrexate clearance; toxicity risk",
+            "effect_ja": "メトトレキサートクリアランス低下。毒性リスク",
+        },
         {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
     ],
     "amoxicillin_clavulanate": [
-        {"drug": "methotrexate", "effect": "Reduced methotrexate clearance; toxicity risk", "effect_ja": "メトトレキサートクリアランス低下。毒性リスク"},
+        {
+            "drug": "methotrexate",
+            "effect": "Reduced methotrexate clearance; toxicity risk",
+            "effect_ja": "メトトレキサートクリアランス低下。毒性リスク",
+        },
         {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
     ],
     "trimethoprim_sulfa": [
-        {"drug": "ACE inhibitors", "effect": "Risk of hyperkalemia (trimethoprim acts like K-sparing diuretic)", "effect_ja": "高カリウム血症リスク（トリメトプリムがK保持性利尿薬様に作用）"},
+        {
+            "drug": "ACE inhibitors",
+            "effect": "Risk of hyperkalemia (trimethoprim acts like K-sparing diuretic)",
+            "effect_ja": "高カリウム血症リスク（トリメトプリムがK保持性利尿薬様に作用）",
+        },
         {"drug": "warfarin", "effect": "Enhanced anticoagulant effect", "effect_ja": "抗凝固作用の増強"},
-        {"drug": "methotrexate", "effect": "Additive folate antagonism; increased toxicity", "effect_ja": "葉酸拮抗の相加作用。毒性増加"},
+        {
+            "drug": "methotrexate",
+            "effect": "Additive folate antagonism; increased toxicity",
+            "effect_ja": "葉酸拮抗の相加作用。毒性増加",
+        },
         {"drug": "phenytoin", "effect": "Increased phenytoin levels", "effect_ja": "フェニトイン濃度上昇"},
     ],
     "ondansetron": [
-        {"drug": "tramadol", "effect": "May reduce tramadol analgesic efficacy", "effect_ja": "トラマドール鎮痛効果低下の可能性"},
-        {"drug": "apomorphine", "effect": "Blocks emetic effect of apomorphine", "effect_ja": "アポモルフィンの催吐効果を遮断"},
-        {"drug": "QT-prolonging drugs", "effect": "Additive QT prolongation risk", "effect_ja": "QT延長リスクの相加作用"},
+        {
+            "drug": "tramadol",
+            "effect": "May reduce tramadol analgesic efficacy",
+            "effect_ja": "トラマドール鎮痛効果低下の可能性",
+        },
+        {
+            "drug": "apomorphine",
+            "effect": "Blocks emetic effect of apomorphine",
+            "effect_ja": "アポモルフィンの催吐効果を遮断",
+        },
+        {
+            "drug": "QT-prolonging drugs",
+            "effect": "Additive QT prolongation risk",
+            "effect_ja": "QT延長リスクの相加作用",
+        },
     ],
     "famotidine": [
-        {"drug": "ketoconazole/itraconazole", "effect": "Reduced azole absorption (need acidic pH)", "effect_ja": "アゾール系吸収低下（酸性pHが必要）"},
-        {"drug": "sucralfate", "effect": "Reduced famotidine absorption; separate by 2h", "effect_ja": "ファモチジン吸収低下。2時間間隔を空ける"},
+        {
+            "drug": "ketoconazole/itraconazole",
+            "effect": "Reduced azole absorption (need acidic pH)",
+            "effect_ja": "アゾール系吸収低下（酸性pHが必要）",
+        },
+        {
+            "drug": "sucralfate",
+            "effect": "Reduced famotidine absorption; separate by 2h",
+            "effect_ja": "ファモチジン吸収低下。2時間間隔を空ける",
+        },
     ],
     "mannitol": [
-        {"drug": "furosemide", "effect": "Additive diuresis; risk of dehydration/electrolyte imbalance", "effect_ja": "利尿の相加作用。脱水/電解質異常のリスク"},
+        {
+            "drug": "furosemide",
+            "effect": "Additive diuresis; risk of dehydration/electrolyte imbalance",
+            "effect_ja": "利尿の相加作用。脱水/電解質異常のリスク",
+        },
         {"drug": "lithium", "effect": "Increased lithium clearance", "effect_ja": "リチウムクリアランス増加"},
     ],
     "levetiracetam": [
-        {"drug": "phenobarbital", "effect": "Commonly combined; may slightly increase clearance", "effect_ja": "頻繁に併用。クリアランスがやや増加する可能性"},
-        {"drug": "potassium_bromide", "effect": "Can be combined safely for multi-drug seizure control", "effect_ja": "多剤てんかん管理で安全に併用可能"},
+        {
+            "drug": "phenobarbital",
+            "effect": "Commonly combined; may slightly increase clearance",
+            "effect_ja": "頻繁に併用。クリアランスがやや増加する可能性",
+        },
+        {
+            "drug": "potassium_bromide",
+            "effect": "Can be combined safely for multi-drug seizure control",
+            "effect_ja": "多剤てんかん管理で安全に併用可能",
+        },
     ],
     "sildenafil": [
-        {"drug": "nitrates", "effect": "Severe life-threatening hypotension; absolutely contraindicated", "effect_ja": "重度の生命を脅かす低血圧。絶対禁忌"},
+        {
+            "drug": "nitrates",
+            "effect": "Severe life-threatening hypotension; absolutely contraindicated",
+            "effect_ja": "重度の生命を脅かす低血圧。絶対禁忌",
+        },
         {"drug": "alpha-blockers", "effect": "Additive hypotension", "effect_ja": "低血圧の相加作用"},
-        {"drug": "bosentan", "effect": "Bosentan reduces sildenafil levels; may combine with dose adjustment", "effect_ja": "ボセンタンがシルデナフィル濃度を低下。用量調整で併用可"},
+        {
+            "drug": "bosentan",
+            "effect": "Bosentan reduces sildenafil levels; may combine with dose adjustment",
+            "effect_ja": "ボセンタンがシルデナフィル濃度を低下。用量調整で併用可",
+        },
     ],
     "clopidogrel": [
-        {"drug": "omeprazole", "effect": "May reduce clopidogrel activation; use famotidine instead", "effect_ja": "クロピドグレル活性化低下の可能性。ファモチジンを代わりに使用"},
+        {
+            "drug": "omeprazole",
+            "effect": "May reduce clopidogrel activation; use famotidine instead",
+            "effect_ja": "クロピドグレル活性化低下の可能性。ファモチジンを代わりに使用",
+        },
         {"drug": "NSAIDs", "effect": "Increased bleeding risk", "effect_ja": "出血リスク増加"},
-        {"drug": "aspirin", "effect": "Additive antiplatelet effect (sometimes used together for ATE in cats)", "effect_ja": "抗血小板作用の相加（猫のATEで併用されることあり）"},
+        {
+            "drug": "aspirin",
+            "effect": "Additive antiplatelet effect (sometimes used together for ATE in cats)",
+            "effect_ja": "抗血小板作用の相加（猫のATEで併用されることあり）",
+        },
     ],
     "ampicillin": [
-        {"drug": "aminoglycosides", "effect": "Synergistic antibacterial effect but do not mix in same syringe (inactivation)", "effect_ja": "抗菌作用の相乗効果だが同一シリンジで混合不可（失活）"},
+        {
+            "drug": "aminoglycosides",
+            "effect": "Synergistic antibacterial effect but do not mix in same syringe (inactivation)",
+            "effect_ja": "抗菌作用の相乗効果だが同一シリンジで混合不可（失活）",
+        },
         {"drug": "allopurinol", "effect": "Increased risk of skin rash", "effect_ja": "皮疹リスク増加"},
     ],
     "lactulose": [
-        {"drug": "antacids", "effect": "May reduce lactulose efficacy by altering colonic pH", "effect_ja": "結腸pHの変化でラクツロース有効性低下の可能性"},
-        {"drug": "neomycin", "effect": "May reduce lactulose efficacy (kills bacteria needed for metabolism)", "effect_ja": "代謝に必要な細菌を殺すためラクツロース有効性低下の可能性"},
+        {
+            "drug": "antacids",
+            "effect": "May reduce lactulose efficacy by altering colonic pH",
+            "effect_ja": "結腸pHの変化でラクツロース有効性低下の可能性",
+        },
+        {
+            "drug": "neomycin",
+            "effect": "May reduce lactulose efficacy (kills bacteria needed for metabolism)",
+            "effect_ja": "代謝に必要な細菌を殺すためラクツロース有効性低下の可能性",
+        },
     ],
 }

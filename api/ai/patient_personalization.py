@@ -174,9 +174,7 @@ class SeverityInference:
             "mild" | "moderate" | "severe"
         """
         # Check for urgent symptoms (override other factors)
-        urgent_count = sum(
-            1 for sid in symptom_ids if any(u in sid for u in SeverityInference.URGENT_SYMPTOMS)
-        )
+        urgent_count = sum(1 for sid in symptom_ids if any(u in sid for u in SeverityInference.URGENT_SYMPTOMS))
 
         if urgent_count > 0:
             return "severe"
@@ -241,10 +239,7 @@ class PersonalizationEngine:
             if patient_context.age_stage in multipliers:
                 mult = multipliers[patient_context.age_stage]
                 adjusted *= mult
-                logger.debug(
-                    f"Age adjustment for {disease_name}: "
-                    f"{base_confidence} * {mult} = {adjusted}"
-                )
+                logger.debug(f"Age adjustment for {disease_name}: {base_confidence} * {mult} = {adjusted}")
 
         # Apply gender-based multiplier
         if patient_context.gender and GENDER_RISK_MULTIPLIERS:
@@ -305,9 +300,7 @@ class PersonalizationEngine:
         return personalized
 
     @classmethod
-    def build_context_from_text(
-        cls, text: str, symptoms: List[str]
-    ) -> PatientContext:
+    def build_context_from_text(cls, text: str, symptoms: List[str]) -> PatientContext:
         """
         Build complete patient context from text and symptoms.
 
@@ -339,9 +332,7 @@ class PersonalizationEngine:
         return context
 
 
-def personalize_extraction_result(
-    extraction_result: Dict[str, Any], text: str
-) -> Dict[str, Any]:
+def personalize_extraction_result(extraction_result: Dict[str, Any], text: str) -> Dict[str, Any]:
     """
     Enhance extraction result with personalization data.
 

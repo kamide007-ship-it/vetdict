@@ -149,10 +149,7 @@ class DiagnosticSession:
             return False
 
         # Check if top candidate exceeds confidence threshold
-        top_match = max(
-            (d.get("match_percent", 0) / 100.0)
-            for d in self.current_candidates
-        )
+        top_match = max((d.get("match_percent", 0) / 100.0) for d in self.current_candidates)
 
         if top_match >= self.confidence_threshold:
             return False

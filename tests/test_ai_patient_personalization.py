@@ -137,9 +137,7 @@ class TestPersonalizationEngine:
     def test_personalize_senior_dog_hip_dysplasia(self):
         """Test age-based confidence adjustment for senior."""
         context = PatientContext(age_stage="senior", severity="moderate")
-        adjusted = PersonalizationEngine.personalize_disease_confidence(
-            "hip_dysplasia", 0.65, context
-        )
+        adjusted = PersonalizationEngine.personalize_disease_confidence("hip_dysplasia", 0.65, context)
 
         # Should be boosted for senior dogs
         assert adjusted > 0.65
@@ -147,9 +145,7 @@ class TestPersonalizationEngine:
     def test_personalize_puppy_hypoglycemia(self):
         """Test age-based confidence adjustment for puppy."""
         context = PatientContext(age_stage="puppy", severity="moderate")
-        adjusted = PersonalizationEngine.personalize_disease_confidence(
-            "hypoglycemia", 0.55, context
-        )
+        adjusted = PersonalizationEngine.personalize_disease_confidence("hypoglycemia", 0.55, context)
 
         # Should be boosted for puppies
         assert adjusted > 0.55
@@ -158,9 +154,7 @@ class TestPersonalizationEngine:
         """Test personalization with unknown disease (no multiplier)."""
         context = PatientContext(age_stage="adult", severity="moderate")
         original = 0.70
-        adjusted = PersonalizationEngine.personalize_disease_confidence(
-            "unknown_disease", original, context
-        )
+        adjusted = PersonalizationEngine.personalize_disease_confidence("unknown_disease", original, context)
 
         # Should only apply severity multiplier (1.0 for moderate)
         assert adjusted == original
@@ -168,9 +162,7 @@ class TestPersonalizationEngine:
     def test_personalize_severe_symptom(self):
         """Test severity-based confidence boost."""
         context = PatientContext(age_stage="adult", severity="severe")
-        adjusted = PersonalizationEngine.personalize_disease_confidence(
-            "generic_disease", 0.70, context
-        )
+        adjusted = PersonalizationEngine.personalize_disease_confidence("generic_disease", 0.70, context)
 
         # Severe should boost confidence (1.15x)
         assert adjusted > 0.70
@@ -178,9 +170,7 @@ class TestPersonalizationEngine:
     def test_personalize_mild_symptom(self):
         """Test severity-based confidence reduction."""
         context = PatientContext(age_stage="adult", severity="mild")
-        adjusted = PersonalizationEngine.personalize_disease_confidence(
-            "generic_disease", 0.70, context
-        )
+        adjusted = PersonalizationEngine.personalize_disease_confidence("generic_disease", 0.70, context)
 
         # Mild should reduce confidence (0.85x)
         assert adjusted < 0.70
@@ -188,9 +178,7 @@ class TestPersonalizationEngine:
     def test_personalize_confidence_capped(self):
         """Test confidence is capped at 1.0."""
         context = PatientContext(age_stage="senior", severity="severe")
-        adjusted = PersonalizationEngine.personalize_disease_confidence(
-            "hip_dysplasia", 0.95, context
-        )
+        adjusted = PersonalizationEngine.personalize_disease_confidence("hip_dysplasia", 0.95, context)
 
         assert adjusted <= 1.0
 
@@ -198,9 +186,7 @@ class TestPersonalizationEngine:
         """Test confidence is floored at 0.0."""
         context = PatientContext(age_stage="puppy", severity="mild")
         # Some disease with heavy negative adjustment
-        adjusted = PersonalizationEngine.personalize_disease_confidence(
-            "cognitive_dysfunction", 0.05, context
-        )
+        adjusted = PersonalizationEngine.personalize_disease_confidence("cognitive_dysfunction", 0.05, context)
 
         assert adjusted >= 0.0
 

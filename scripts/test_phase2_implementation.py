@@ -25,9 +25,9 @@ def test_imports():
 
 def test_batch_enricher():
     """Test batch enricher module."""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("TEST 1: Phase 2 Batch Enricher")
-    print("="*70)
+    print("=" * 70)
 
     enricher = Phase2BatchEnricher()
     print("✓ Phase2BatchEnricher instantiated")
@@ -39,7 +39,7 @@ def test_batch_enricher():
         "name_ja": "テスト病",
         "species": "Cat",
         "description": "A test disease for validation",
-        "pathophysiology": "Test pathophysiology"
+        "pathophysiology": "Test pathophysiology",
     }
 
     # Test prompt generation
@@ -76,9 +76,9 @@ def test_batch_enricher():
 
 def test_qa_validator():
     """Test QA validator module."""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("TEST 2: Phase 2 QA Validator")
-    print("="*70)
+    print("=" * 70)
 
     validator = Phase2QAValidator()
     print("✓ Phase2QAValidator instantiated")
@@ -93,7 +93,7 @@ def test_qa_validator():
         "prevention": "Vaccination recommended for kittens at 8-12 weeks with booster shots. Testing before introduction to new environments and isolation of positive cats.",
         "prevention_ja": "仔猫の予防接種（8-12週齢）とブースター接種が推奨されます。新しい環境への導入前の検査と陽性猫の隔離が重要です。",
         "prognosis": "Prognosis is poor for persistent infections, with survival typically 3-4 years. Some cats may achieve abortive or regressive infection with better outcomes. Regular monitoring is essential.",
-        "prognosis_ja": "持続感染の予後は不良で、通常3～4年の生存期間が期待されます。一部の猫は中止性または退行性感染を達成し、より良い予後が得られます。定期的な監視が不可欠です。"
+        "prognosis_ja": "持続感染の予後は不良で、通常3～4年の生存期間が期待されます。一部の猫は中止性または退行性感染を達成し、より良い予後が得られます。定期的な監視が不可欠です。",
     }
 
     try:
@@ -132,9 +132,9 @@ def test_qa_validator():
 
 def test_recovery_manager():
     """Test recovery manager module."""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("TEST 3: Phase 2 Recovery Manager")
-    print("="*70)
+    print("=" * 70)
 
     manager = Phase2RecoveryManager()
     print("✓ Phase2RecoveryManager instantiated")
@@ -163,9 +163,9 @@ def test_recovery_manager():
 
 def test_data_loading():
     """Test disease database loading."""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("TEST 4: Disease Database Loading")
-    print("="*70)
+    print("=" * 70)
 
     database_path = project_root / "diseases_all_species.json"
 
@@ -185,9 +185,9 @@ def test_data_loading():
         prognosis_count = sum(1 for d in diseases if d.get("prognosis"))
 
         print("\nCurrent Phase 2 Enrichment Status:")
-        print(f"  Treatment: {treatment_count}/{len(diseases)} ({100*treatment_count/len(diseases):.1f}%)")
-        print(f"  Prevention: {prevention_count}/{len(diseases)} ({100*prevention_count/len(diseases):.1f}%)")
-        print(f"  Prognosis: {prognosis_count}/{len(diseases)} ({100*prognosis_count/len(diseases):.1f}%)")
+        print(f"  Treatment: {treatment_count}/{len(diseases)} ({100 * treatment_count / len(diseases):.1f}%)")
+        print(f"  Prevention: {prevention_count}/{len(diseases)} ({100 * prevention_count / len(diseases):.1f}%)")
+        print(f"  Prognosis: {prognosis_count}/{len(diseases)} ({100 * prognosis_count / len(diseases):.1f}%)")
 
         # Sample a few diseases
         print("\nSample disease:")
@@ -196,9 +196,11 @@ def test_data_loading():
         print(f"  Name: {sample.get('name')}")
         print(f"  Species: {sample.get('species')}")
         print(f"  Phase 1 complete: {bool(sample.get('pathophysiology') and sample.get('causes'))}")
-        print(f"  Phase 2 fields: treatment={bool(sample.get('treatment'))}, "
-              f"prevention={bool(sample.get('prevention'))}, "
-              f"prognosis={bool(sample.get('prognosis'))}")
+        print(
+            f"  Phase 2 fields: treatment={bool(sample.get('treatment'))}, "
+            f"prevention={bool(sample.get('prevention'))}, "
+            f"prognosis={bool(sample.get('prognosis'))}"
+        )
 
     except Exception as e:
         print(f"❌ Database loading failed: {e}")
@@ -210,9 +212,9 @@ def test_data_loading():
 
 def main():
     """Run all tests."""
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("PHASE 2 IMPLEMENTATION TEST SUITE")
-    print("="*70)
+    print("=" * 70)
 
     results = []
 
@@ -229,9 +231,9 @@ def main():
     results.append(("Database Loading", test_data_loading()))
 
     # Summary
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("TEST SUMMARY")
-    print("="*70)
+    print("=" * 70)
 
     for test_name, passed in results:
         status = "✅ PASSED" if passed else "❌ FAILED"

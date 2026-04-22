@@ -17,6 +17,7 @@ from reco2.llm_adapter import (
 # DummyAdapter
 # ===================================================================
 
+
 class TestDummyAdapter:
     def test_name_property(self):
         adapter = DummyAdapter()
@@ -63,6 +64,7 @@ class TestDummyAdapter:
 # ===================================================================
 # ClaudeAdapter – no network calls
 # ===================================================================
+
 
 class TestClaudeAdapter:
     def test_name_property(self):
@@ -202,7 +204,10 @@ class TestClaudeAdapter:
 
     def test_generate_network_error_propagates(self):
         adapter = ClaudeAdapter(api_key="test-key")
-        with patch("urllib.request.urlopen", side_effect=Exception("Network error")), pytest.raises(Exception, match="Network error"):
+        with (
+            patch("urllib.request.urlopen", side_effect=Exception("Network error")),
+            pytest.raises(Exception, match="Network error"),
+        ):
             adapter.generate("prompt")
 
     def test_extra_kwargs_ignored(self):
@@ -213,6 +218,7 @@ class TestClaudeAdapter:
 # ===================================================================
 # OpenAIAdapter – no network calls
 # ===================================================================
+
 
 class TestOpenAIAdapter:
     def test_name_property(self):
@@ -314,7 +320,10 @@ class TestOpenAIAdapter:
 
     def test_generate_network_error_propagates(self):
         adapter = OpenAIAdapter(api_key="test-key")
-        with patch("urllib.request.urlopen", side_effect=Exception("Connection refused")), pytest.raises(Exception, match="Connection refused"):
+        with (
+            patch("urllib.request.urlopen", side_effect=Exception("Connection refused")),
+            pytest.raises(Exception, match="Connection refused"),
+        ):
             adapter.generate("prompt")
 
     def test_generate_message_not_dict(self):
@@ -338,6 +347,7 @@ class TestOpenAIAdapter:
 # ===================================================================
 # create_adapter factory
 # ===================================================================
+
 
 class TestCreateAdapter:
     def test_dummy_by_name(self):

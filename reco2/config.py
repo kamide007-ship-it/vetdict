@@ -14,28 +14,44 @@ except ImportError:
 def _project_root() -> str:
     return os.path.dirname(os.path.dirname(__file__))
 
+
 def _instance_dir() -> str:
     return os.environ.get("RECO3_INSTANCE_DIR") or os.path.join(_project_root(), "instance")
+
 
 def config_path() -> str:
     return os.path.join(_instance_dir(), "config.json")
 
+
 _DEFAULTS: Dict[str, Any] = {
-    "host": "0.0.0.0", "port": 5001, "debug": False,
-    "api_key_enabled": False, "api_keys": [],
-    "llm_adapter": "dummy", "llm_model": "",
-    "psi_regen_threshold": 0.50, "psi_annot_threshold": 0.80,
-    "max_regen_attempts": 2, "base_temperature": 0.7,
-    "input_w_ambiguity": 0.20, "input_w_assertion": 0.25,
-    "input_w_emotion": 0.30, "input_w_unrealistic": 0.25,
-    "output_w_assertion": 0.30, "output_w_evidence": 0.30,
-    "output_w_contradiction": 0.25, "output_w_provocative": 0.15,
-    "agent_proxy_port": RECO3_PROXY_PORT_DEFAULT, "agent_proxy_bind": RECO3_PROXY_BIND_DEFAULT,
+    "host": "0.0.0.0",
+    "port": 5001,
+    "debug": False,
+    "api_key_enabled": False,
+    "api_keys": [],
+    "llm_adapter": "dummy",
+    "llm_model": "",
+    "psi_regen_threshold": 0.50,
+    "psi_annot_threshold": 0.80,
+    "max_regen_attempts": 2,
+    "base_temperature": 0.7,
+    "input_w_ambiguity": 0.20,
+    "input_w_assertion": 0.25,
+    "input_w_emotion": 0.30,
+    "input_w_unrealistic": 0.25,
+    "output_w_assertion": 0.30,
+    "output_w_evidence": 0.30,
+    "output_w_contradiction": 0.25,
+    "output_w_provocative": 0.15,
+    "agent_proxy_port": RECO3_PROXY_PORT_DEFAULT,
+    "agent_proxy_bind": RECO3_PROXY_BIND_DEFAULT,
 }
+
 
 def _secure_file(path: str) -> None:
     with contextlib.suppress(OSError):
         os.chmod(path, 0o600)
+
 
 def ensure_config() -> None:
     d = _instance_dir()
@@ -52,6 +68,7 @@ def ensure_config() -> None:
             json.dump(cfg, f, ensure_ascii=False, indent=2)
         _secure_file(p)
 
+
 def load_config() -> Dict[str, Any]:
     ensure_config()
     with open(config_path(), "r", encoding="utf-8") as f:
@@ -60,6 +77,7 @@ def load_config() -> Dict[str, Any]:
     for k, v in _DEFAULTS.items():
         cfg.setdefault(k, v)
     return cfg
+
 
 def public_config(cfg: Dict[str, Any] | None = None) -> Dict[str, Any]:
     cfg = dict(cfg or load_config())

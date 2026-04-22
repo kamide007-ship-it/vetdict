@@ -29,9 +29,7 @@ class AIConfidenceContext:
             self.metadata = {}
 
 
-def adjust_context_from_ai(
-    context: Dict[str, Any], ai_result: Dict[str, Any]
-) -> Dict[str, Any]:
+def adjust_context_from_ai(context: Dict[str, Any], ai_result: Dict[str, Any]) -> Dict[str, Any]:
     """
     Merge AI extraction result into RECO2 context.
 
@@ -86,9 +84,7 @@ def adjust_context_from_ai(
         personalization_factor = age_factor + (severity_factor * 0.5)
 
     # Calculate combined confidence
-    combined_conf = calculate_combined_confidence(
-        base_conf, interaction_boost, personalization_factor
-    )
+    combined_conf = calculate_combined_confidence(base_conf, interaction_boost, personalization_factor)
 
     # Update context with AI-enhanced confidence
     updated_context["confidence"] = combined_conf
@@ -223,9 +219,7 @@ def create_ai_confidence_context(ai_result: Dict[str, Any]) -> AIConfidenceConte
 
         personalization_factor = age_factor + (severity_factor * 0.5)
 
-    combined = calculate_combined_confidence(
-        base_conf, interaction_boost, personalization_factor
-    )
+    combined = calculate_combined_confidence(base_conf, interaction_boost, personalization_factor)
 
     return AIConfidenceContext(
         symptom_extraction_confidence=base_conf,

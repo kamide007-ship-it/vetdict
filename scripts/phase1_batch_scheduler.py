@@ -44,12 +44,12 @@ class Phase1Scheduler:
 
     # Species priority (count threshold defines high/medium/low priority)
     SPECIES_PRIORITY = {
-        "Horse": 1,      # 736 expected
-        "Dog": 2,        # 576 current
-        "Cat": 3,        # 516 expected
-        "Bird": 4,       # 308 expected
-        "Rabbit": 5,     # 271 expected
-        "Parakeet": 6,   # 251 expected
+        "Horse": 1,  # 736 expected
+        "Dog": 2,  # 576 current
+        "Cat": 3,  # 516 expected
+        "Bird": 4,  # 308 expected
+        "Rabbit": 5,  # 271 expected
+        "Parakeet": 6,  # 251 expected
     }
 
     def __init__(self):
@@ -63,12 +63,7 @@ class Phase1Scheduler:
         if self.manifest_path.exists():
             with open(self.manifest_path, "r") as f:
                 return json.load(f)
-        return {
-            "started_at": None,
-            "batches": {},
-            "species_order": [],
-            "statistics": {}
-        }
+        return {"started_at": None, "batches": {}, "species_order": [], "statistics": {}}
 
     def _save_manifest(self):
         """Save batch tracking manifest."""
@@ -111,7 +106,7 @@ class Phase1Scheduler:
                 "complete_diseases": len(diseases) - len(incomplete),
                 "completion_percentage": 100 * (len(diseases) - len(incomplete)) / len(diseases) if diseases else 0,
                 "estimated_cost": len(incomplete) * 0.025,  # 50% batch discount
-                "batch_size": len(incomplete)
+                "batch_size": len(incomplete),
             }
 
         return dict(sorted(plan.items(), key=lambda x: x[1]["priority"]))
@@ -131,8 +126,10 @@ class Phase1Scheduler:
         for species, info in plan.items():
             if info["incomplete_diseases"] > 0:
                 print(f"  {info['priority']}. {species}")
-                print(f"     Total: {info['total_diseases']} | Complete: {info['complete_diseases']} | "
-                      f"Incomplete: {info['incomplete_diseases']} ({info['completion_percentage']:.1f}% complete)")
+                print(
+                    f"     Total: {info['total_diseases']} | Complete: {info['complete_diseases']} | "
+                    f"Incomplete: {info['incomplete_diseases']} ({info['completion_percentage']:.1f}% complete)"
+                )
                 print(f"     Est. Cost: ${info['estimated_cost']:.2f}")
                 print()
                 total_incomplete += info["incomplete_diseases"]
@@ -198,15 +195,17 @@ class Phase1Scheduler:
                     "submitted_at": datetime.now().isoformat(),
                     "status": "processing",
                     "total_requests": total_requests,
-                    "estimated_cost": info["estimated_cost"]
+                    "estimated_cost": info["estimated_cost"],
                 }
 
-                batch_schedule.append({
-                    "species": species,
-                    "priority": priority,
-                    "batch_ids": batch_ids,
-                    "submitted_at": datetime.now().isoformat()
-                })
+                batch_schedule.append(
+                    {
+                        "species": species,
+                        "priority": priority,
+                        "batch_ids": batch_ids,
+                        "submitted_at": datetime.now().isoformat(),
+                    }
+                )
 
                 print(f"✓ {len(batch_ids)} batch(es) submitted")
                 print(f"    Batch IDs: {', '.join(batch_ids[:2])}{'...' if len(batch_ids) > 2 else ''}")
@@ -221,7 +220,7 @@ class Phase1Scheduler:
                 self.batch_tracking["batches"][species] = {
                     "status": "failed",
                     "error": str(e),
-                    "failed_at": datetime.now().isoformat()
+                    "failed_at": datetime.now().isoformat(),
                 }
 
         self._save_manifest()
@@ -230,7 +229,9 @@ class Phase1Scheduler:
         print("PHASE 1 SUBMISSION COMPLETE")
         print("=" * 80)
         print(f"\nSubmitted {len(batch_schedule)} batches for {len(batch_schedule)} species")
-        print(f"Total cost: ${sum(b['estimated_cost'] for b in self.batch_tracking['batches'].values() if 'estimated_cost' in b):.2f}")
+        print(
+            f"Total cost: ${sum(b['estimated_cost'] for b in self.batch_tracking['batches'].values() if 'estimated_cost' in b):.2f}"
+        )
         print("\nNext steps:")
         print("  1. Monitor batches with: python scripts/phase1_batch_scheduler.py status")
         print("  2. Retrieve results when ready: python scripts/phase1_batch_scheduler.py retrieve <batch_id>")
@@ -264,9 +265,11 @@ class Phase1Scheduler:
 
                     print(f"  {status_emoji} Batch: {batch_id}")
                     print(f"     Status: {batch.processing_status}")
-                    print(f"     Processing: {batch.request_counts.processing} | "
-                          f"Succeeded: {batch.request_counts.succeeded} | "
-                          f"Errored: {batch.request_counts.errored}")
+                    print(
+                        f"     Processing: {batch.request_counts.processing} | "
+                        f"Succeeded: {batch.request_counts.succeeded} | "
+                        f"Errored: {batch.request_counts.errored}"
+                    )
 
                     if batch.processing_status != "ended":
                         all_completed = False
@@ -337,6 +340,7 @@ class Phase1Scheduler:
         except Exception as e:
             print(f"✗ Error: {e}")
             import traceback
+
             traceback.print_exc()
 
 

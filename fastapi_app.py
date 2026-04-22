@@ -19,8 +19,10 @@ from pydantic import BaseModel, Field
 # Pydantic Models
 # ============================================================================
 
+
 class DiseaseResponse(BaseModel):
     """Disease data model for API responses"""
+
     id: str = Field(..., description="Unique disease identifier (e.g., 'cat_0001')")
     name: str = Field(..., description="Disease name in English")
     name_ja: Optional[str] = Field(None, description="Disease name in Japanese")
@@ -83,6 +85,7 @@ class DiseaseResponse(BaseModel):
 
 class PaginatedResponse(BaseModel):
     """Paginated API response with pagination metadata"""
+
     total: int = Field(..., description="Total number of items in database")
     page: int = Field(..., description="Current page number (1-indexed)")
     page_size: int = Field(..., description="Number of items per page")
@@ -90,35 +93,23 @@ class PaginatedResponse(BaseModel):
     data: List[DiseaseResponse] = Field(..., description="List of diseases for current page")
 
     class Config:
-        json_schema_extra = {
-            "example": {
-                "total": 4230,
-                "page": 1,
-                "page_size": 10,
-                "total_pages": 423,
-                "data": []
-            }
-        }
+        json_schema_extra = {"example": {"total": 4230, "page": 1, "page_size": 10, "total_pages": 423, "data": []}}
 
 
 class SearchResponse(BaseModel):
     """Search results response"""
+
     query: str = Field(..., description="The search query string")
     total_results: int = Field(..., description="Number of results found")
     results: List[DiseaseResponse] = Field(..., description="Matching disease records")
 
     class Config:
-        json_schema_extra = {
-            "example": {
-                "query": "diabetes",
-                "total_results": 5,
-                "results": []
-            }
-        }
+        json_schema_extra = {"example": {"query": "diabetes", "total_results": 5, "results": []}}
 
 
 class HealthResponse(BaseModel):
     """Health check response"""
+
     status: str = Field(..., description="Service status (healthy/degraded/unhealthy)")
     total_diseases: int = Field(..., description="Total number of diseases in database")
     species_count: int = Field(..., description="Number of unique species")
@@ -130,13 +121,14 @@ class HealthResponse(BaseModel):
                 "status": "healthy",
                 "total_diseases": 4230,
                 "species_count": 6,
-                "timestamp": "2024-03-16T12:34:56Z"
+                "timestamp": "2024-03-16T12:34:56Z",
             }
         }
 
 
 class StatsResponse(BaseModel):
     """Database statistics response"""
+
     total_diseases: int = Field(..., description="Total number of disease records")
     total_species: int = Field(..., description="Number of unique animal species")
     species_breakdown: dict = Field(..., description="Disease count per species")
@@ -153,15 +145,16 @@ class StatsResponse(BaseModel):
                     "Horse": 650,
                     "Bird": 750,
                     "Rabbit": 430,
-                    "Parakeet": 350
+                    "Parakeet": 350,
                 },
-                "timestamp": "2024-03-16T12:34:56Z"
+                "timestamp": "2024-03-16T12:34:56Z",
             }
         }
 
 
 class ErrorResponse(BaseModel):
     """Standard error response"""
+
     error: str = Field(..., description="Error type/code")
     detail: str = Field(..., description="Detailed error message")
     status_code: int = Field(..., description="HTTP status code")
@@ -173,23 +166,19 @@ class ErrorResponse(BaseModel):
                 "error": "NOT_FOUND",
                 "detail": "Disease with ID 'cat_9999' not found",
                 "status_code": 404,
-                "timestamp": "2024-03-16T12:34:56Z"
+                "timestamp": "2024-03-16T12:34:56Z",
             }
         }
 
 
 class SpeciesResponse(BaseModel):
     """Species list response"""
+
     total: int = Field(..., description="Number of species")
     species: List[str] = Field(..., description="List of available species")
 
     class Config:
-        json_schema_extra = {
-            "example": {
-                "total": 6,
-                "species": ["Bird", "Cat", "Dog", "Horse", "Parakeet", "Rabbit"]
-            }
-        }
+        json_schema_extra = {"example": {"total": 6, "species": ["Bird", "Cat", "Dog", "Horse", "Parakeet", "Rabbit"]}}
 
 
 # ============================================================================
@@ -237,12 +226,9 @@ All responses are in JSON format with consistent schema structure.
     contact={
         "name": "VetDict API Support",
         "url": "https://github.com/kamide007/vetdict",
-        "email": "support@vetdict.local"
+        "email": "support@vetdict.local",
     },
-    license_info={
-        "name": "MIT License",
-        "url": "https://opensource.org/licenses/MIT"
-    }
+    license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
 )
 
 # CORS configuration
@@ -273,7 +259,7 @@ def load_diseases_data() -> List[dict]:
     if not data_file.exists():
         raise FileNotFoundError(f"Data file not found: {data_file}")
 
-    with open(data_file, 'r', encoding='utf-8') as f:
+    with open(data_file, "r", encoding="utf-8") as f:
         _diseases_data = json.load(f)
 
     return _diseases_data
@@ -286,8 +272,8 @@ def build_index() -> tuple[dict, set]:
         return _diseases_index, _species_set
 
     diseases = load_diseases_data()
-    _diseases_index = {d['id']: d for d in diseases}
-    _species_set = {d.get('species', 'Unknown') for d in diseases}
+    _diseases_index = {d["id"]: d for d in diseases}
+    _species_set = {d.get("species", "Unknown") for d in diseases}
 
     return _diseases_index, _species_set
 
@@ -296,15 +282,13 @@ def build_index() -> tuple[dict, set]:
 # API Endpoints
 # ============================================================================
 
+
 @app.get(
     "/api/health",
     response_model=HealthResponse,
     tags=["Health"],
     summary="Health Check",
-    responses={
-        200: {"description": "Service is healthy"},
-        503: {"description": "Service is degraded or unhealthy"}
-    }
+    responses={200: {"description": "Service is healthy"}, 503: {"description": "Service is degraded or unhealthy"}},
 )
 async def health_check() -> HealthResponse:
     """
@@ -323,7 +307,7 @@ async def health_check() -> HealthResponse:
         status="healthy",
         total_diseases=len(diseases),
         species_count=len(species),
-        timestamp=datetime.utcnow().isoformat() + "Z"
+        timestamp=datetime.utcnow().isoformat() + "Z",
     )
 
 
@@ -334,8 +318,8 @@ async def health_check() -> HealthResponse:
     summary="Search Diseases",
     responses={
         200: {"description": "Successfully retrieved search results"},
-        400: {"description": "Invalid search parameters"}
-    }
+        400: {"description": "Invalid search parameters"},
+    },
 )
 async def search_diseases(
     q: str = Query(..., min_length=1, description="Search query (case-insensitive)", example="diabetes"),
@@ -344,8 +328,8 @@ async def search_diseases(
         "name",
         pattern="^(name|description|species)$",
         description="Search field: 'name' (disease name), 'description' (description text), or 'species' (animal species)",
-        example="name"
-    )
+        example="name",
+    ),
 ) -> SearchResponse:
     """
     Search diseases using full-text search across multiple fields.
@@ -378,26 +362,22 @@ async def search_diseases(
 
     for disease in diseases:
         if search_type == "name":
-            search_field = disease.get('name', '').lower()
+            search_field = disease.get("name", "").lower()
             if query_lower in search_field:
                 results.append(disease)
         elif search_type == "description":
-            search_field = disease.get('description', '').lower()
+            search_field = disease.get("description", "").lower()
             if query_lower in search_field:
                 results.append(disease)
         elif search_type == "species":
-            search_field = disease.get('species', '').lower()
+            search_field = disease.get("species", "").lower()
             if query_lower == search_field:
                 results.append(disease)
 
         if len(results) >= limit:
             break
 
-    return SearchResponse(
-        query=q,
-        total_results=len(results),
-        results=[DiseaseResponse(**d) for d in results[:limit]]
-    )
+    return SearchResponse(query=q, total_results=len(results), results=[DiseaseResponse(**d) for d in results[:limit]])
 
 
 @app.get(
@@ -408,13 +388,13 @@ async def search_diseases(
     responses={
         200: {"description": "Successfully retrieved disease list"},
         400: {"description": "Invalid query parameters"},
-        404: {"description": "Page exceeds total pages"}
-    }
+        404: {"description": "Page exceeds total pages"},
+    },
 )
 async def list_diseases(
     page: int = Query(1, ge=1, description="Page number (1-indexed)", example=1),
     page_size: int = Query(20, ge=1, le=100, description="Items per page (max 100)", example=20),
-    species: Optional[str] = Query(None, description="Filter by species (e.g., 'Cat', 'Dog')", example="Cat")
+    species: Optional[str] = Query(None, description="Filter by species (e.g., 'Cat', 'Dog')", example="Cat"),
 ) -> PaginatedResponse:
     """
     List all diseases with pagination and optional filtering.
@@ -437,7 +417,7 @@ async def list_diseases(
 
     # Filter by species if provided
     if species:
-        diseases = [d for d in diseases if d.get('species') == species]
+        diseases = [d for d in diseases if d.get("species") == species]
 
     # Calculate pagination
     total = len(diseases)
@@ -446,10 +426,7 @@ async def list_diseases(
     end_idx = start_idx + page_size
 
     if page > total_pages and total > 0:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Page {page} exceeds total pages {total_pages}"
-        )
+        raise HTTPException(status_code=404, detail=f"Page {page} exceeds total pages {total_pages}")
 
     paginated_data = diseases[start_idx:end_idx]
 
@@ -458,7 +435,7 @@ async def list_diseases(
         page=page,
         page_size=page_size,
         total_pages=total_pages,
-        data=[DiseaseResponse(**d) for d in paginated_data]
+        data=[DiseaseResponse(**d) for d in paginated_data],
     )
 
 
@@ -467,13 +444,10 @@ async def list_diseases(
     response_model=DiseaseResponse,
     tags=["Diseases"],
     summary="Get Disease Details",
-    responses={
-        200: {"description": "Disease found and returned"},
-        404: {"description": "Disease not found"}
-    }
+    responses={200: {"description": "Disease found and returned"}, 404: {"description": "Disease not found"}},
 )
 async def get_disease(
-    disease_id: str = Query(..., description="Unique disease identifier", example="cat_0001")
+    disease_id: str = Query(..., description="Unique disease identifier", example="cat_0001"),
 ) -> DiseaseResponse:
     """
     Retrieve comprehensive information about a specific disease.
@@ -505,10 +479,7 @@ async def get_disease(
     index, _ = build_index()
 
     if disease_id not in index:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Disease with ID '{disease_id}' not found"
-        )
+        raise HTTPException(status_code=404, detail=f"Disease with ID '{disease_id}' not found")
 
     disease_data = index[disease_id]
     return DiseaseResponse(**disease_data)
@@ -519,9 +490,7 @@ async def get_disease(
     response_model=SpeciesResponse,
     tags=["Metadata"],
     summary="List Species",
-    responses={
-        200: {"description": "Successfully retrieved species list"}
-    }
+    responses={200: {"description": "Successfully retrieved species list"}},
 )
 async def list_species() -> SpeciesResponse:
     """
@@ -546,10 +515,7 @@ async def list_species() -> SpeciesResponse:
     _, species = build_index()
     sorted_species = sorted(list(species))
 
-    return SpeciesResponse(
-        total=len(sorted_species),
-        species=sorted_species
-    )
+    return SpeciesResponse(total=len(sorted_species), species=sorted_species)
 
 
 @app.get(
@@ -557,9 +523,7 @@ async def list_species() -> SpeciesResponse:
     response_model=StatsResponse,
     tags=["Metadata"],
     summary="Database Statistics",
-    responses={
-        200: {"description": "Successfully retrieved statistics"}
-    }
+    responses={200: {"description": "Successfully retrieved statistics"}},
 )
 async def get_statistics() -> StatsResponse:
     """
@@ -586,14 +550,14 @@ async def get_statistics() -> StatsResponse:
     # Count by species
     species_counts = {}
     for disease in diseases:
-        sp = disease.get('species', 'Unknown')
+        sp = disease.get("species", "Unknown")
         species_counts[sp] = species_counts.get(sp, 0) + 1
 
     return StatsResponse(
         total_diseases=len(diseases),
         total_species=len(species),
         species_breakdown=species_counts,
-        timestamp=datetime.utcnow().isoformat() + "Z"
+        timestamp=datetime.utcnow().isoformat() + "Z",
     )
 
 
@@ -601,14 +565,8 @@ async def get_statistics() -> StatsResponse:
 # Root Endpoint
 # ============================================================================
 
-@app.get(
-    "/",
-    tags=["Root"],
-    summary="API Root",
-    responses={
-        200: {"description": "API information and endpoints"}
-    }
-)
+
+@app.get("/", tags=["Root"], summary="API Root", responses={200: {"description": "API information and endpoints"}})
 async def root():
     """
     VetDict API root endpoint.
@@ -628,60 +586,51 @@ async def root():
     - **Species**: `/api/species` - Available species list
     - **Stats**: `/api/stats` - Database statistics
     """
-    return JSONResponse({
-        "name": "VetDict REST API",
-        "version": "2.1.0",
-        "description": "Multi-Species Veterinary Disease Database",
-        "status": "operational",
-        "documentation": {
-            "swagger": "/api/docs",
-            "redoc": "/api/redoc",
-            "openapi": "/api/openapi.json"
-        },
-        "endpoints": {
-            "health": {
-                "method": "GET",
-                "url": "/api/health",
-                "description": "Service health check"
+    return JSONResponse(
+        {
+            "name": "VetDict REST API",
+            "version": "2.1.0",
+            "description": "Multi-Species Veterinary Disease Database",
+            "status": "operational",
+            "documentation": {"swagger": "/api/docs", "redoc": "/api/redoc", "openapi": "/api/openapi.json"},
+            "endpoints": {
+                "health": {"method": "GET", "url": "/api/health", "description": "Service health check"},
+                "list_diseases": {
+                    "method": "GET",
+                    "url": "/api/diseases",
+                    "description": "List all diseases with pagination",
+                },
+                "search_diseases": {
+                    "method": "GET",
+                    "url": "/api/diseases/search",
+                    "description": "Search diseases by name, description, or species",
+                },
+                "get_disease": {
+                    "method": "GET",
+                    "url": "/api/diseases/{disease_id}",
+                    "description": "Get specific disease details",
+                },
+                "list_species": {
+                    "method": "GET",
+                    "url": "/api/species",
+                    "description": "Get list of available species",
+                },
+                "statistics": {"method": "GET", "url": "/api/stats", "description": "Get database statistics"},
             },
-            "list_diseases": {
-                "method": "GET",
-                "url": "/api/diseases",
-                "description": "List all diseases with pagination"
+            "examples": {
+                "browse_diseases": "/api/diseases?page=1&page_size=20",
+                "search": "/api/diseases/search?q=diabetes&limit=10",
+                "filter_by_species": "/api/diseases?species=Cat",
+                "get_specific_disease": "/api/diseases/cat_0001",
             },
-            "search_diseases": {
-                "method": "GET",
-                "url": "/api/diseases/search",
-                "description": "Search diseases by name, description, or species"
-            },
-            "get_disease": {
-                "method": "GET",
-                "url": "/api/diseases/{disease_id}",
-                "description": "Get specific disease details"
-            },
-            "list_species": {
-                "method": "GET",
-                "url": "/api/species",
-                "description": "Get list of available species"
-            },
-            "statistics": {
-                "method": "GET",
-                "url": "/api/stats",
-                "description": "Get database statistics"
-            }
-        },
-        "examples": {
-            "browse_diseases": "/api/diseases?page=1&page_size=20",
-            "search": "/api/diseases/search?q=diabetes&limit=10",
-            "filter_by_species": "/api/diseases?species=Cat",
-            "get_specific_disease": "/api/diseases/cat_0001"
         }
-    })
+    )
 
 
 # ============================================================================
 # Custom OpenAPI Schema
 # ============================================================================
+
 
 def custom_openapi():
     """Generate custom OpenAPI schema with extended documentation"""
@@ -699,14 +648,8 @@ def custom_openapi():
 
     # Add server information
     openapi_schema["servers"] = [
-        {
-            "url": "http://localhost:8000",
-            "description": "Development server"
-        },
-        {
-            "url": "https://api.vetdict.example.com",
-            "description": "Production server"
-        }
+        {"url": "http://localhost:8000", "description": "Development server"},
+        {"url": "https://api.vetdict.example.com", "description": "Production server"},
     ]
 
     # Add common parameters
@@ -716,42 +659,30 @@ def custom_openapi():
             "in": "query",
             "description": "Page number (1-indexed)",
             "required": False,
-            "schema": {"type": "integer", "default": 1, "minimum": 1}
+            "schema": {"type": "integer", "default": 1, "minimum": 1},
         },
         "page_size": {
             "name": "page_size",
             "in": "query",
             "description": "Items per page (max 100)",
             "required": False,
-            "schema": {"type": "integer", "default": 20, "minimum": 1, "maximum": 100}
+            "schema": {"type": "integer", "default": 20, "minimum": 1, "maximum": 100},
         },
         "species": {
             "name": "species",
             "in": "query",
             "description": "Filter by species",
             "required": False,
-            "schema": {"type": "string"}
-        }
+            "schema": {"type": "string"},
+        },
     }
 
     # Add tags with descriptions
     openapi_schema["tags"] = [
-        {
-            "name": "Health",
-            "description": "Health check and service status endpoints"
-        },
-        {
-            "name": "Diseases",
-            "description": "Disease browsing, searching, and detail endpoints"
-        },
-        {
-            "name": "Metadata",
-            "description": "Database metadata and statistics endpoints"
-        },
-        {
-            "name": "Root",
-            "description": "API root and information endpoint"
-        }
+        {"name": "Health", "description": "Health check and service status endpoints"},
+        {"name": "Diseases", "description": "Disease browsing, searching, and detail endpoints"},
+        {"name": "Metadata", "description": "Database metadata and statistics endpoints"},
+        {"name": "Root", "description": "API root and information endpoint"},
     ]
 
     app.openapi_schema = openapi_schema
@@ -764,6 +695,7 @@ app.openapi = custom_openapi
 # ============================================================================
 # Startup Event
 # ============================================================================
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -780,9 +712,5 @@ async def startup_event():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(
-        "fastapi_app:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True
-    )
+
+    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8000, reload=True)

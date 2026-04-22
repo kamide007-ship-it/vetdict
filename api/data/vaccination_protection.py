@@ -36,7 +36,6 @@ class VaccineProtection:
 # Maps disease names to vaccination protection information
 VACCINATION_PROTECTION: Dict[str, VaccineProtection] = {
     # ==================== DOG DISEASES ====================
-
     "Canine Parvovirus": VaccineProtection(
         disease_name="Canine Parvovirus",
         vaccine_names=["DHPP", "DPP", "5-in-1", "Parvovirus"],
@@ -86,9 +85,7 @@ VACCINATION_PROTECTION: Dict[str, VaccineProtection] = {
         confidence_reduction=0.35,
         notes="Non-core vaccine. Part of kennel cough prevention.",
     ),
-
     # ==================== CAT DISEASES ====================
-
     "Feline Panleukopenia": VaccineProtection(
         disease_name="Feline Panleukopenia",
         vaccine_names=["FVRCP", "3-in-1"],
@@ -124,9 +121,7 @@ VACCINATION_PROTECTION: Dict[str, VaccineProtection] = {
         confidence_reduction=0.25,
         notes="Non-core vaccine. Some protection; risk-based.",
     ),
-
     # ==================== RABBIT DISEASES ====================
-
     "Rabbit Myxomatosis": VaccineProtection(
         disease_name="Rabbit Myxomatosis",
         vaccine_names=["Myxomatosis"],
@@ -141,9 +136,7 @@ VACCINATION_PROTECTION: Dict[str, VaccineProtection] = {
         confidence_reduction=0.15,
         notes="Vaccine available. Provides strong protection.",
     ),
-
     # ==================== FERRET DISEASES ====================
-
     "Ferret Distemper": VaccineProtection(
         disease_name="Ferret Distemper",
         vaccine_names=["Distemper", "CDV"],
@@ -165,9 +158,7 @@ class VaccinationStatusHandler:
     """Handles vaccination status and disease confidence adjustment."""
 
     @classmethod
-    def get_vaccination_protection(
-        cls, disease_name: str
-    ) -> Optional[VaccineProtection]:
+    def get_vaccination_protection(cls, disease_name: str) -> Optional[VaccineProtection]:
         """
         Get vaccination protection information for a disease.
 
@@ -180,9 +171,7 @@ class VaccinationStatusHandler:
         return VACCINATION_PROTECTION.get(disease_name)
 
     @classmethod
-    def get_confidence_reduction(
-        cls, disease_name: str, default: float = 1.0
-    ) -> float:
+    def get_confidence_reduction(cls, disease_name: str, default: float = 1.0) -> float:
         """
         Get confidence reduction factor if vaccinated for a disease.
 

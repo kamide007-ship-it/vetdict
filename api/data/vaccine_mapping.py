@@ -181,9 +181,7 @@ VACCINE_TYPES: dict[str, dict[str, object]] = {
 
 VACCINES_BY_SPECIES = {
     species: [
-        vaccine_id
-        for vaccine_id, vaccine_data in VACCINE_TYPES.items()
-        if species in vaccine_data.get("species", [])
+        vaccine_id for vaccine_id, vaccine_data in VACCINE_TYPES.items() if species in vaccine_data.get("species", [])
     ]
     for species in {"dog", "cat", "ferret", "rabbit", "horse"}
 }
@@ -192,11 +190,7 @@ VACCINES_BY_SPECIES = {
 def get_vaccines_for_species(species: str) -> dict[str, dict[str, object]]:
     """Return all known vaccines for a species."""
     vaccine_ids = VACCINES_BY_SPECIES.get(species, [])
-    return {
-        vaccine_id: VACCINE_TYPES[vaccine_id]
-        for vaccine_id in vaccine_ids
-        if vaccine_id in VACCINE_TYPES
-    }
+    return {vaccine_id: VACCINE_TYPES[vaccine_id] for vaccine_id in vaccine_ids if vaccine_id in VACCINE_TYPES}
 
 
 def get_preventable_diseases(vaccine_ids: list[str]) -> set[str]:

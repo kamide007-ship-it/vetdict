@@ -27,7 +27,7 @@ REF_FELINE_IMMUNE_ARTHRITIS_2022 = {
     "issue": 10,
     "pages": "e401-e410",
     "doi": "10.1177/1098612X221107783",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -43,7 +43,7 @@ REF_FELINE_JAW_COMPOSITE_2025 = {
     "issue": 3,
     "pages": "",
     "doi": "10.1177/1098612X251314346",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_FELINE_JAW_3D_PLATING_2024 = {
@@ -56,7 +56,7 @@ REF_FELINE_JAW_3D_PLATING_2024 = {
     "issue": 5,
     "pages": "",
     "doi": "10.1177/1098612X241243134",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 REF_FELINE_JAW_BIOMECHANICS_2026 = {
@@ -69,7 +69,7 @@ REF_FELINE_JAW_BIOMECHANICS_2026 = {
     "issue": 2,
     "pages": "135-145",
     "doi": "10.1177/08987564251384715",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 # ============================================================================
@@ -85,7 +85,7 @@ REF_CHINCHILLA_COLONIC_FOREIGN_2022 = {
     "issue": 8,
     "pages": "1121-1127",
     "doi": "10.1292/jvms.22-0104",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_CHINCHILLA_GI_SURGERY_2017 = {
@@ -98,7 +98,7 @@ REF_CHINCHILLA_GI_SURGERY_2017 = {
     "issue": "",
     "pages": "",
     "doi": "10.1016/j.exotics.2021.12.001",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -114,7 +114,7 @@ REF_DEGU_ATHEROSCLEROSIS_2010 = {
     "issue": 1,
     "pages": "48-54",
     "doi": "10.1016/j.atherosclerosis.2010.06.004",
-    "evidence_level": "II"
+    "evidence_level": "II",
 }
 
 REF_DEGU_METABOLIC_2016 = {
@@ -127,7 +127,7 @@ REF_DEGU_METABOLIC_2016 = {
     "issue": "",
     "pages": "",
     "doi": "",
-    "evidence_level": "III"
+    "evidence_level": "III",
 }
 
 # ============================================================================
@@ -143,7 +143,7 @@ REF_SUGAR_GLIDER_HEMOCHROMATOSIS_2023 = {
     "issue": 2,
     "pages": "194-198",
     "doi": "10.1292/jvms.22-0361",
-    "evidence_level": "IV"
+    "evidence_level": "IV",
 }
 
 REF_SUGAR_GLIDER_DISEASE_REVIEW = {
@@ -156,7 +156,7 @@ REF_SUGAR_GLIDER_DISEASE_REVIEW = {
     "issue": "",
     "pages": "",
     "doi": "",
-    "evidence_level": "I"
+    "evidence_level": "I",
 }
 
 # ============================================================================
@@ -181,7 +181,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # FELINE JAW FRACTURE
     "cat_jaw_fracture": {
         "prognosis_references": {
@@ -203,7 +202,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # CHINCHILLA CECAL TORSION
     "chinchilla_cecal_torsion": {
         "prognosis_references": {
@@ -223,7 +221,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # DEGU INSULIN RESISTANCE
     "degu_insulin_resistance": {
         "prognosis_references": {
@@ -244,7 +241,6 @@ REFERENCE_MAP = {
             ]
         },
     },
-
     # SUGAR GLIDER IRON STORAGE DISEASE
     "sugar_glider_iron_storage_disease_hemochromatosis": {
         "prognosis_references": {
@@ -266,21 +262,25 @@ REFERENCE_MAP = {
     },
 }
 
+
 def load_diseases_json(file_path):
     """Load diseases from JSON file (list format)."""
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_diseases_json(data, file_path):
     """Save diseases to JSON file."""
-    with open(file_path, 'w', encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
 
 def add_references_to_disease(disease, references_data):
     """Add references to a disease record (working with list items)."""
     for ref_type, ref_content in references_data.items():
         if ref_type in disease:
             disease[ref_type] = ref_content
+
 
 def main():
     """Patch additional Phase 3 disease references into database."""
@@ -297,7 +297,7 @@ def main():
         # Find disease in list by id field
         found = False
         for disease in diseases:
-            if disease.get('id') == disease_id:
+            if disease.get("id") == disease_id:
                 add_references_to_disease(disease, references_data)
                 patched_count += 1
                 logger.info(f"✓ Patched {disease_id} with references")
@@ -311,16 +311,14 @@ def main():
     logger.info("\nSaving patched database...")
     save_diseases_json(diseases, db_path)
 
-    logger.info("\n" + "="*60)
+    logger.info("\n" + "=" * 60)
     logger.info("Additional Phase 3 Reference Patching Complete")
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info(f"Patched: {patched_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Skipped: {skipped_count}/{len(REFERENCE_MAP)} diseases")
     logger.info(f"Database saved to: {db_path}")
 
+
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(message)s'
-    )
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     main()

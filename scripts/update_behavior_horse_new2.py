@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Add 3 more horse behavioral entries: wood chewing, coprophagy, equine anxiety."""
+
 import json
 
 with open("diseases_all_species.json", "r") as f:
@@ -62,7 +63,11 @@ NEW_ENTRIES = [
         "category": "misc",
         "transmission": "Not transmissible.",
         "transmission_ja": "伝播しない。",
-        "recommended_tests": ["血液生化学検査 (Blood Chemistry Panel)", "微量ミネラル検査 (Trace Mineral Panel)", "歯科検査 (Dental Examination)"],
+        "recommended_tests": [
+            "血液生化学検査 (Blood Chemistry Panel)",
+            "微量ミネラル検査 (Trace Mineral Panel)",
+            "歯科検査 (Dental Examination)",
+        ],
         "symptoms": ["behavioral_changes", "dental_abnormalities"],
         "differential_diagnosis": "Crib-biting (distinct: involves neck arching and air swallowing), pica, nutritional deficiency.",
         "severity_score": 1,
@@ -125,7 +130,11 @@ NEW_ENTRIES = [
         "category": "misc",
         "transmission": "Not transmissible as a behavior. However, coprophagy facilitates parasite transmission.",
         "transmission_ja": "行動としては伝播しない。ただし食糞により寄生虫の伝播が促進される。",
-        "recommended_tests": ["糞便虫卵検査 (Fecal Egg Count)", "血液生化学検査 (Blood Chemistry Panel)", "飼料分析 (Feed Analysis)"],
+        "recommended_tests": [
+            "糞便虫卵検査 (Fecal Egg Count)",
+            "血液生化学検査 (Blood Chemistry Panel)",
+            "飼料分析 (Feed Analysis)",
+        ],
         "symptoms": ["behavioral_changes", "poor_body_condition", "weight_loss"],
         "differential_diagnosis": "Nutritional deficiency, pica, boredom-related behavior, GI disease.",
         "severity_score": 1,
@@ -198,7 +207,11 @@ NEW_ENTRIES = [
         "category": "misc",
         "transmission": "Not transmissible.",
         "transmission_ja": "伝播しない。",
-        "recommended_tests": ["行動評価 (Behavioral Assessment)", "歩様検査 (Lameness Examination)", "血液生化学検査 (Blood Chemistry Panel)"],
+        "recommended_tests": [
+            "行動評価 (Behavioral Assessment)",
+            "歩様検査 (Lameness Examination)",
+            "血液生化学検査 (Blood Chemistry Panel)",
+        ],
         "symptoms": ["behavioral_changes", "sweating", "vocalization"],
         "differential_diagnosis": "Pain-related reluctance, musculoskeletal injury, visual impairment, neurological conditions.",
         "severity_score": 2,

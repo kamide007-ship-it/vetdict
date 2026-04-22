@@ -220,9 +220,7 @@ CLINICAL_SIGNS_TEMPLATES: dict[str, str] = {
         "後産停滞、外陰部の損傷、行動変化（落ち着きのなさ）"
     ),
     "infectious": (
-        "発熱、沈鬱、食欲不振、リンパ節腫脹、"
-        "鼻汁・眼脂、下痢、体重減少、"
-        "皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難"
+        "発熱、沈鬱、食欲不振、リンパ節腫脹、鼻汁・眼脂、下痢、体重減少、皮膚病変（潰瘍・結節・膿瘍）、跛行、呼吸困難"
     ),
     "metabolic": (
         "多飲多尿、体重減少/肥満、被毛粗剛・脱毛、"
@@ -245,20 +243,10 @@ CLINICAL_SIGNS_TEMPLATES: dict[str, str] = {
         "下痢（子馬下痢）、呼吸促迫、歩行異常"
     ),
     "immune": (
-        "反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、"
-        "貧血（粘膜蒼白）、黄疸、発熱、"
-        "皮膚潰瘍・壊死、関節炎、体重減少"
+        "反復性蕁麻疹、全身性浮腫、紫斑（皮膚出血斑）、貧血（粘膜蒼白）、黄疸、発熱、皮膚潰瘍・壊死、関節炎、体重減少"
     ),
-    "oncology": (
-        "局所腫脹・腫瘤、潰瘍化、出血、"
-        "体重減少（悪液質）、臓器特異的症状、"
-        "リンパ節腫脹、疼痛、運動制限"
-    ),
-    "urinary": (
-        "排尿困難・頻尿・血尿、尿流の途絶・尿閉、"
-        "腎部の圧痛、多飲多尿、体重減少、"
-        "浮腫、口臭（尿毒症臭）、沈鬱"
-    ),
+    "oncology": ("局所腫脹・腫瘤、潰瘍化、出血、体重減少（悪液質）、臓器特異的症状、リンパ節腫脹、疼痛、運動制限"),
+    "urinary": ("排尿困難・頻尿・血尿、尿流の途絶・尿閉、腎部の圧痛、多飲多尿、体重減少、浮腫、口臭（尿毒症臭）、沈鬱"),
     "misc": (
         "疾患特異的な臨床徴候に加え、"
         "一般的所見として発熱、食欲不振、沈鬱、体重減少、"
@@ -291,9 +279,7 @@ RISK_FACTORS_TEMPLATES: dict[str, str] = {
         "NSAIDs長期投与（胃潰瘍リスク）"
     ),
     "skin": (
-        "湿潤環境、不衛生な飼育条件、昆虫曝露、"
-        "免疫低下、アレルギー体質、外傷、"
-        "日光曝露（白い皮膚部位）、ストレス"
+        "湿潤環境、不衛生な飼育条件、昆虫曝露、免疫低下、アレルギー体質、外傷、日光曝露（白い皮膚部位）、ストレス"
     ),
     "eye": (
         "Appaloosa品種（ERU好発）、外傷（牧草片・埃）、"
@@ -306,9 +292,7 @@ RISK_FACTORS_TEMPLATES: dict[str, str] = {
         "外傷、寄生虫感染（Halicephalobus）、中毒植物への曝露"
     ),
     "cardiovascular": (
-        "高齢馬、激しい運動（競走馬）、先天性心疾患、"
-        "感染症の併発（心内膜炎リスク）、電解質異常、"
-        "ストレス、品種的素因"
+        "高齢馬、激しい運動（競走馬）、先天性心疾患、感染症の併発（心内膜炎リスク）、電解質異常、ストレス、品種的素因"
     ),
     "reproductive": (
         "高齢繁殖牝馬、不適切な衛生管理（交配・分娩時）、"
@@ -351,9 +335,7 @@ RISK_FACTORS_TEMPLATES: dict[str, str] = {
         "加齢、遺伝的素因、慢性刺激/炎症"
     ),
     "urinary": (
-        "高齢馬、高カルシウム飼料、脱水傾向、"
-        "尿路感染の既往、膀胱麻痺（馬尾症候群）、"
-        "長期安静（横臥）、品種的素因"
+        "高齢馬、高カルシウム飼料、脱水傾向、尿路感染の既往、膀胱麻痺（馬尾症候群）、長期安静（横臥）、品種的素因"
     ),
     "misc": (
         "個々の疾患に特異的なリスク因子に依存。"
@@ -367,7 +349,9 @@ def main():
     """Generate enrichment and patch the equine_diseases.py file."""
     filepath = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "api", "species", "equine_diseases.py",
+        "api",
+        "species",
+        "equine_diseases.py",
     )
 
     with open(filepath, encoding="utf-8") as f:
@@ -386,7 +370,7 @@ def main():
         line = lines[i]
 
         # Detect Disease( opening
-        m = re.match(r'^(\s*)Disease\(\s*$', line)
+        m = re.match(r"^(\s*)Disease\(\s*$", line)
         if m:
             in_disease_block = True
             # Next line should be the ID
@@ -402,7 +386,7 @@ def main():
             continue
 
         # Detect closing of Disease( block - the ")," or ")" line
-        if in_disease_block and re.match(r'^\s*\),?\s*$', line):
+        if in_disease_block and re.match(r"^\s*\),?\s*$", line):
             # Check if we need to add missing fields
             disease_obj = disease_map.get(current_disease_id)
             if disease_obj:

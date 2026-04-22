@@ -35,10 +35,7 @@ class TestDatabaseSchema:
     def test_init_creates_tables(self, db_path):
         with get_connection(db_path) as conn:
             tables = [
-                r[0]
-                for r in conn.execute(
-                    "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
-                ).fetchall()
+                r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").fetchall()
             ]
         assert "diseases" in tables
         assert "drugs" in tables
@@ -132,8 +129,20 @@ class TestDrugOperations:
         "side_effects": ["GI upset", "diarrhea"],
         "side_effects_ja": ["消化器症状", "下痢"],
         "species_info": {
-            "dog": {"safe": True, "dosage": "10-20 mg/kg", "dosage_ja": "10-20 mg/kg", "notes": "Safe", "notes_ja": "安全"},
-            "rabbit": {"safe": False, "dosage": "N/A", "dosage_ja": "使用不可", "notes": "Contraindicated", "notes_ja": "禁忌"},
+            "dog": {
+                "safe": True,
+                "dosage": "10-20 mg/kg",
+                "dosage_ja": "10-20 mg/kg",
+                "notes": "Safe",
+                "notes_ja": "安全",
+            },
+            "rabbit": {
+                "safe": False,
+                "dosage": "N/A",
+                "dosage_ja": "使用不可",
+                "notes": "Contraindicated",
+                "notes_ja": "禁忌",
+            },
         },
     }
 
@@ -167,8 +176,10 @@ class TestAdminAPI:
     @pytest.fixture()
     def client(self, db_path, monkeypatch):
         import api.database
+
         monkeypatch.setattr(api.database, "DB_PATH", db_path)
         from api.vetdict_api import app
+
         app.config["TESTING"] = True
         with app.test_client() as c:
             yield c
@@ -229,8 +240,7 @@ class TestAdminAPI:
 
     def test_bulk_import(self, client):
         diseases = [
-            {"id": f"bulk_{i}", "species": "dog", "name": f"Disease {i}", "name_ja": f"疾患{i}"}
-            for i in range(5)
+            {"id": f"bulk_{i}", "species": "dog", "name": f"Disease {i}", "name_ja": f"疾患{i}"} for i in range(5)
         ]
         resp = client.post("/api/admin/import", json={"diseases": diseases})
         assert resp.status_code == 201

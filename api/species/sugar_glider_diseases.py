@@ -232,7 +232,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Self-mutilation / Behavioral ───────────────────────────────────────
     {
         "name": "Self-mutilation",
@@ -241,14 +240,20 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Self-mutilation in sugar gliders is a serious behavioral pathology characterized by compulsive self-directed injury to tail, limbs, genitalia, and skin. CRITICAL: Sugar gliders are obligate social animals with complex social hierarchies; solitary housing is the PRIMARY cause of self-mutilation (occurs in 40-60% of solitarily-housed sugar gliders vs. <5% in properly paired/grouped animals). Self-mutilation is NOT simple boredom or attention-seeking; it represents severe emotional distress equivalent to self-injurious behavior in primates. Untreated self-mutilation progresses to severe tissue destruction, infection, sepsis, and potential death.",
         "description_ja": "フクロモモンガの自傷行為は尻尾、四肢、生殖器、皮膚への強迫的な自己指向性損傷が特徴の重篤な行動病理。重大：フクロモモンガは強制的に社会的動物で複雑な社会階層を持つ；単独飼育は自傷行為の主要因（単独飼育フクロモモンガの40-60%対適切にペアリング/グループ化された<5%）。自傷行為は単純な退屈や注目請求ではなく；サルの自傷行為と等価な重大な感情的苦痛を表す。未治療の自傷行為は重篤な組織破壊、感染、敗血症、潜在的死亡に進行。",
         "urgency": "high",
-        "recommended_tests": ["behavioral_assessment", "physical_exam", "pain_evaluation", "blood_work", "wound_culture"],
+        "recommended_tests": [
+            "behavioral_assessment",
+            "physical_exam",
+            "pain_evaluation",
+            "blood_work",
+            "wound_culture",
+        ],
         "causes": "SELF-MUTILATION IN SUGAR GLIDERS—PRIMARY CAUSE (95%+ of cases): Social isolation/solitary housing—sugar gliders are obligate social; HPA axis dysregulation from isolation. SECONDARY: pain (dental disease 10%), nutritional deficiency (calcium, vitamin D3), photic stress (disrupted light cycle), environmental stress (cold <22°C, inadequate enrichment), genetic predisposition, developmental trauma (early weaning <8 weeks).",
         "causes_ja": "フクロモモンガの自傷行為—主要原因（症例の95%以上）：社会的孤立/単独飼育—フクロモモンガは強制的に社会的；隔離からのHPA軸機能障害。二次：疼痛（歯疾患10%）、栄養不足（カルシウム、ビタミンD3）、光ストレス、環境ストレス、遺伝学的素因、発達トラウマ。",
         "pathophysiology": "SELF-MUTILATION PATHOPHYSIOLOGY: (1) ACUTE STRESS PHASE (days 1-7)—social separation triggers HPA axis activation, catecholamine surge, acute behavioral distress. (2) CHRONIC STRESS ADAPTATION (weeks 1-4)—chronically elevated cortisol, tonic HPA activation, serotonin depletion, dopamine dysregulation, GABA reduction. (3) COMPULSIVE BEHAVIOR EMERGENCE (weeks 4-12)—prefrontal cortex atrophy, amygdala hypertrophy, loss of inhibitory control; self-directed biting begins. (4) REINFORCEMENT OF SELF-INJURY (weeks 12+)—self-biting provides endogenous opioid release from tissue injury, creating self-reinforcing cycle (addiction-like pattern). (5) TISSUE DAMAGE & INFECTION—repeated trauma creates open wounds; secondary bacterial infection common (Staph, Strep); risk of sepsis if untreated 2-4 weeks. (6) NEUROBIOLOGICAL ADDICTION—pathological brain state similar to substance addiction: incentive sensitization (wound sight triggers compulsion), dysregulated reward circuitry (injury-induced opioids become primary reward), behavioral escalation despite harm.",
         "pathophysiology_ja": "フクロモモンガの自傷行為病態生理：(1) 急性ストレス相（1-7日）。(2) 慢性ストレス適応相（1-4週）。(3) 強迫行動出現相（4-12週）。(4) 自傷強化（12週以上）。(5) 組織損傷と感染相。(6) 自傷への神経生物学的依存。",
         "treatment": "SUGAR GLIDER SELF-MUTILATION TREATMENT PROTOCOL: (1) WOUND MANAGEMENT: E-collar or body wrap (prevent continued trauma). Chlorhexidine 0.05-0.12% wash q12h, topical antibiotic q12h. Monitor for infection; if purulent drainage, culture + systemic antibiotics (enrofloxacin 10 mg/kg q12h × 7-14 days). Severe tissue loss may require surgical amputation at next joint. (2) MANDATORY SOCIAL HOUSING (CRITICAL): Pair with compatible glider (same age/sex preferred; 3-4 week introduction protocol). Prognosis: 70-80% dramatic improvement within 2-4 weeks of pairing (polyuria/polydipsia resolve within days, self-mutilation ceases, normal behavior re-emerges). 10-15% slower improvement (6-8 weeks). 5-10% fail to pair. (3) PHARMACOLOGICAL SUPPORT (adjunct to social housing, NOT substitute): (a) SSRI first-line: Fluoxetine 1-2 mg/kg PO q24h × 4-12 weeks (onset 2-4 weeks); alternatives Paroxetine 0.5-1 mg/kg q24h or Sertraline 0.5-1.5 mg/kg q24h. (b) Anti-anxiety: Gabapentin 5-10 mg/kg q8-12h × 2-4 weeks (for acute anxiety during housing changes). (c) Atypical antipsychotics if persistent compulsive behavior: Risperidone 0.5-1 mg/kg q24h or Haloperidol 0.1-0.2 mg/kg q12h. (4) ENVIRONMENTAL OPTIMIZATION: Temperature 22-26°C, humidity 50-60%, nocturnal photoperiod (dim 12-14h, dark 10-12h), enrichment (nesting materials, hiding spots, foraging, branches), social interaction (daily gentle contact if tolerated). (5) PAIN ASSESSMENT: dental exam (malocclusion, tooth disease extraction/filing), urogenital exam (penile hair ring removal under sedation), dermatologic exam (ectoparasites/mites: treat with ivermectin). Analgesia: meloxicam 0.2-0.3 mg/kg q24h × 5-7 days if pain identified. (6) NUTRITIONAL OPTIMIZATION: Calcium 0.6-1.0% diet (1:1-2:1 Ca:P ratio), vitamin D3 (UVB exposure 2-3h/week), protein 15-20%, vitamin C 100-200 mg/kg/day, omega-3 supplementation (50-100 mg/kg/day). (7) BEHAVIORAL MONITORING (4-8 weeks): assess response (expect 50%+ episode reduction by 4 weeks), wound healing, social interaction, appetite/activity. If inadequate by 8 weeks: adjust medication, reassess compatibility. (8) SURGICAL INTERVENTION (rare): partial tail amputation if auto-mutilation threatens gangrene.",
         "treatment_ja": "フクロモモンガ自傷行為治療プロトコル：(1) 創傷管理。(2) 強制的な社会的飼育（重大）。(3) 薬理学的サポート。(4) 環境最適化。(5) 疼痛評価。(6) 栄養最適化。(7) 行動監視。(8) 外科的介入。",
-        "prevention": "SELF-MUTILATION PREVENTION (preventable in >95% with proper housing): (1) OBLIGATE SOCIAL HOUSING—MANDATORY from juvenile age: NEVER house gliders solitarily; pairing/trio housing standard care. Genetic companions (siblings) preferred; compatible unrelated gliders acceptable with 3-4 week introduction. Spay/neuter if mixed-sex pairing. (2) EARLY SOCIALIZATION (critical developmental period): kits with littermates through weaning (separation before 8 weeks increases lifetime risk); post-weaning maintain with peers to develop social skills. (3) HOUSING ENVIRONMENT: minimum 36\"L×24\"W×24\"H per pair (larger better), multiple shelters (≥3), nesting materials, enrichment (branches, foraging), temperature 22-26°C, humidity 50-60%, nocturnal photoperiod, stable dark/light cycle. (4) NUTRITION FOR BEHAVIORAL HEALTH: calcium 0.6-1.0%, vitamin D3 (UVB exposure), complete nutrition, omega-3 supplementation. (5) VETERINARY SCREENING: baseline dental exam at 12 weeks, annual exams (dental, behavior), early SSRI trial if anxiety emerges. (6) GENETICS/SELECTION: avoid breeding animals with personal/family self-mutilation history; maintain genetic diversity; select for 'easy-pairing' temperaments. (7) HUMAN HANDLING: minimize handling of shy animals; allow slow acclimation to new environments. (8) EARLY INTERVENTION: animals showing excessive vocalization, anxiety → social enrichment + prophylactic SSRI trial before self-mutilation escalates. (9) COMPANION COMPATIBILITY: ongoing monitoring of pair dynamics; prevent bullying of aging/ill gliders.",
+        "prevention": 'SELF-MUTILATION PREVENTION (preventable in >95% with proper housing): (1) OBLIGATE SOCIAL HOUSING—MANDATORY from juvenile age: NEVER house gliders solitarily; pairing/trio housing standard care. Genetic companions (siblings) preferred; compatible unrelated gliders acceptable with 3-4 week introduction. Spay/neuter if mixed-sex pairing. (2) EARLY SOCIALIZATION (critical developmental period): kits with littermates through weaning (separation before 8 weeks increases lifetime risk); post-weaning maintain with peers to develop social skills. (3) HOUSING ENVIRONMENT: minimum 36"L×24"W×24"H per pair (larger better), multiple shelters (≥3), nesting materials, enrichment (branches, foraging), temperature 22-26°C, humidity 50-60%, nocturnal photoperiod, stable dark/light cycle. (4) NUTRITION FOR BEHAVIORAL HEALTH: calcium 0.6-1.0%, vitamin D3 (UVB exposure), complete nutrition, omega-3 supplementation. (5) VETERINARY SCREENING: baseline dental exam at 12 weeks, annual exams (dental, behavior), early SSRI trial if anxiety emerges. (6) GENETICS/SELECTION: avoid breeding animals with personal/family self-mutilation history; maintain genetic diversity; select for \'easy-pairing\' temperaments. (7) HUMAN HANDLING: minimize handling of shy animals; allow slow acclimation to new environments. (8) EARLY INTERVENTION: animals showing excessive vocalization, anxiety → social enrichment + prophylactic SSRI trial before self-mutilation escalates. (9) COMPANION COMPATIBILITY: ongoing monitoring of pair dynamics; prevent bullying of aging/ill gliders.',
         "prevention_ja": "フクロモモンガ自傷行為予防（適切な飼育で95%以上で予防可能）：(1) 強制的な社会的飼育。(2) 早期社会化。(3) 飼育環境。(4) 行動衛生のための栄養。(5) 獣医学的スクリーニング。(6) 遺伝学と選択。(7) ヒトハンドリング。(8) 早期介入。(9) コンパニオン互換性。",
         "prognosis": "EXCELLENT (>90% resolution) if caught early (<4 weeks) with IMMEDIATE social housing. 2-4 weeks dramatic improvement (wounds heal, self-injury ceases, normal behavior returns). Excellent long-term if housing maintained permanently (recurrence <5%). GOOD (70-85%) if 4-12 weeks before intervention; requires SSRI support; 6-8 weeks recovery; functional quality of life good. GUARDED (40-60%) if delayed >3 months; requires pairing+SSRI+support; 3-4 month recovery; possible persistent mild self-mutilation/scarring. POOR (<30% or euthanasia consideration) if extreme presentation (severe auto-amputation, gangrene, sepsis), failed pairing, severe comorbidities, poor owner compliance. SPECIAL: (1) Brain neuroplasticity—recovery possible even in severe cases. (2) Chronic residual anxiety—many need lifetime SSRI. (3) Separation sensitivity—mandatory permanent pairing. (4) Trauma memory—residual hypervigilance even post-recovery. (5) Long-term—most treated gliders 5-8 year lifespan with normal quality of life.",
         "prognosis_ja": "優秀（>90%）早期(<4週)で直ちに社会的飼育。良好（70-85%）。慎重（40-60%）。不良（<30%）。特別：(1) 脳神経可塑性。(2) 慢性残存不安。(3) 分離感受性。(4) トラウマ記憶。(5) 長期見通し。",
@@ -288,8 +293,8 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "フクロモモンガにおけるうつ・ストレス症候群の原因: 孤立やストレス下のグライダーに見られる不活発・食欲不振を主徴とする行動症候群。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "うつ・ストレス症候群はフクロモモンガにおける栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
-        "treatment": "SUGAR GLIDER DEPRESSION/STRESS SYNDROME TREATMENT: (1) SOCIAL INTERVENTION (CRITICAL—PRIMARY TREATMENT): Sugar gliders are OBLIGATE social animals; solitary housing is the #1 cause of depression. Pair with compatible conspecific (same-sex or neutered opposite-sex preferred; 3-4 week gradual introduction protocol using adjacent cages → shared pouch → supervised cohabitation → unsupervised). Expect 70-80% dramatic improvement within 2-4 weeks of successful pairing. (2) ENVIRONMENTAL OPTIMIZATION: Large vertical cage (minimum 36\"×24\"×48\" per pair), multiple sleeping pouches (≥3), nesting materials (fleece strips), foraging enrichment (hide food in puzzle feeders, scatter feed insects), climbing branches/ropes, exercise wheel (12\" solid-surface). Temperature 24-27°C, humidity 40-60%. Nocturnal photoperiod: 12-14h dim light, 10-12h complete darkness. Avoid bright light during dark period. Minimize noise/vibration during day (sleeping period). (3) PHARMACOTHERAPY (adjunct to social/environmental—NOT substitute): First-line SSRI: fluoxetine 1-2 mg/kg PO q24h (onset 2-4 weeks, trial 8-12 weeks). Alternative: sertraline 0.5-1.5 mg/kg PO q24h. Anxiolytic bridge: gabapentin 5-10 mg/kg PO q8-12h × 2-4 weeks (immediate anxiety relief while SSRI takes effect). Trazodone 2-5 mg/kg PO q12-24h as alternative anxiolytic. (4) NUTRITIONAL SUPPORT: Ensure adequate diet (anorexia common in depression). Syringe-feed if intake <50% normal × 2 days. BML or TPG diet with variety of fruits/insects. Omega-3 fatty acids 50-100 mg/kg/day (may support neurological health). (5) HUMAN BONDING (supplementary—NOT substitute for conspecific companionship): Carry in bonding pouch 2-4h during owner's daytime. Gentle handling during dusk (natural activity onset). Offer treats (mealworm, honey) from hand. (6) PAIN/MEDICAL RULE-OUT: Complete physical exam (dental disease, urinary tract, GI). Blood work (CBC, chemistry). Radiographs if indicated. Treat any underlying medical condition contributing to lethargy/inappetence. (7) MONITORING: Daily food intake/weight log. Behavioral assessment q2 weeks (activity level, social interaction, self-grooming, vocalization patterns). SSRI dose adjustment at 4-6 weeks if insufficient response. Ref: Johnson-Delaney 2006, Brust 2013.",
-        "treatment_ja": "フクロモモンガうつ・ストレス症候群治療プロトコル：(1) 社会的介入（重大—一次治療）：フクロモモンガは強制的な社会性動物；単独飼育がうつの第1原因。同種の相性の良い個体とペアリング（同性または去勢済み異性が望ましい；隣接ケージ→共有ポーチ→監視下同居→非監視同居の3-4週間段階的導入プロトコル）。成功したペアリング後2-4週間で70-80%の劇的改善が期待される。(2) 環境最適化：大型縦型ケージ（ペアあたり最小36\"×24\"×48\"）、複数スリーピングポーチ（≥3）、営巣材料（フリースストリップ）、フォレジングエンリッチメント（パズルフィーダーに食物隠し・昆虫散布給餌）、登攀用枝/ロープ、回し車（12\"ソリッドサーフェス）。温度24-27°C、湿度40-60%。夜行性光周期：12-14h薄明、10-12h完全暗闇。暗期の明るい光を避ける。日中（睡眠時間帯）の騒音/振動を最小化。(3) 薬物療法（社会的/環境的介入の補助—代替ではない）：第一選択SSRI：フルオキセチン1-2 mg/kg PO q24h（効果発現2-4週、試験期間8-12週）。代替：セルトラリン0.5-1.5 mg/kg PO q24h。抗不安ブリッジ：ガバペンチン5-10 mg/kg PO q8-12h×2-4週間（SSRI効果発現までの即効性不安緩和）。トラゾドン2-5 mg/kg PO q12-24h（代替抗不安薬）。(4) 栄養サポート：十分な食事確保（うつでは食欲不振が一般的）。摂食量が正常の50%未満×2日ならシリンジ給餌。BMLまたはTPG食に多様な果物/昆虫。オメガ3脂肪酸50-100 mg/kg/日（神経学的健康サポート）。(5) ヒトとの絆形成（補助的—同種コンパニオンの代替ではない）：飼い主の日中にボンディングポーチで2-4時間携帯。薄暮時（自然な活動開始時）に穏やかなハンドリング。手からおやつ（ミルワーム・蜂蜜）提供。(6) 疼痛/医学的除外：完全身体検査（歯疾患・泌尿器・消化管）。血液検査（CBC・化学検査）。必要に応じレントゲン。嗜眠/食欲不振に寄与する基礎疾患の治療。(7) モニタリング：毎日の摂食量/体重記録。2週毎の行動評価（活動レベル・社会的交流・セルフグルーミング・発声パターン）。4-6週で不十分な反応ならSSRI用量調整。参考文献：Johnson-Delaney 2006, Brust 2013。",
+        "treatment": 'SUGAR GLIDER DEPRESSION/STRESS SYNDROME TREATMENT: (1) SOCIAL INTERVENTION (CRITICAL—PRIMARY TREATMENT): Sugar gliders are OBLIGATE social animals; solitary housing is the #1 cause of depression. Pair with compatible conspecific (same-sex or neutered opposite-sex preferred; 3-4 week gradual introduction protocol using adjacent cages → shared pouch → supervised cohabitation → unsupervised). Expect 70-80% dramatic improvement within 2-4 weeks of successful pairing. (2) ENVIRONMENTAL OPTIMIZATION: Large vertical cage (minimum 36"×24"×48" per pair), multiple sleeping pouches (≥3), nesting materials (fleece strips), foraging enrichment (hide food in puzzle feeders, scatter feed insects), climbing branches/ropes, exercise wheel (12" solid-surface). Temperature 24-27°C, humidity 40-60%. Nocturnal photoperiod: 12-14h dim light, 10-12h complete darkness. Avoid bright light during dark period. Minimize noise/vibration during day (sleeping period). (3) PHARMACOTHERAPY (adjunct to social/environmental—NOT substitute): First-line SSRI: fluoxetine 1-2 mg/kg PO q24h (onset 2-4 weeks, trial 8-12 weeks). Alternative: sertraline 0.5-1.5 mg/kg PO q24h. Anxiolytic bridge: gabapentin 5-10 mg/kg PO q8-12h × 2-4 weeks (immediate anxiety relief while SSRI takes effect). Trazodone 2-5 mg/kg PO q12-24h as alternative anxiolytic. (4) NUTRITIONAL SUPPORT: Ensure adequate diet (anorexia common in depression). Syringe-feed if intake <50% normal × 2 days. BML or TPG diet with variety of fruits/insects. Omega-3 fatty acids 50-100 mg/kg/day (may support neurological health). (5) HUMAN BONDING (supplementary—NOT substitute for conspecific companionship): Carry in bonding pouch 2-4h during owner\'s daytime. Gentle handling during dusk (natural activity onset). Offer treats (mealworm, honey) from hand. (6) PAIN/MEDICAL RULE-OUT: Complete physical exam (dental disease, urinary tract, GI). Blood work (CBC, chemistry). Radiographs if indicated. Treat any underlying medical condition contributing to lethargy/inappetence. (7) MONITORING: Daily food intake/weight log. Behavioral assessment q2 weeks (activity level, social interaction, self-grooming, vocalization patterns). SSRI dose adjustment at 4-6 weeks if insufficient response. Ref: Johnson-Delaney 2006, Brust 2013.',
+        "treatment_ja": 'フクロモモンガうつ・ストレス症候群治療プロトコル：(1) 社会的介入（重大—一次治療）：フクロモモンガは強制的な社会性動物；単独飼育がうつの第1原因。同種の相性の良い個体とペアリング（同性または去勢済み異性が望ましい；隣接ケージ→共有ポーチ→監視下同居→非監視同居の3-4週間段階的導入プロトコル）。成功したペアリング後2-4週間で70-80%の劇的改善が期待される。(2) 環境最適化：大型縦型ケージ（ペアあたり最小36"×24"×48"）、複数スリーピングポーチ（≥3）、営巣材料（フリースストリップ）、フォレジングエンリッチメント（パズルフィーダーに食物隠し・昆虫散布給餌）、登攀用枝/ロープ、回し車（12"ソリッドサーフェス）。温度24-27°C、湿度40-60%。夜行性光周期：12-14h薄明、10-12h完全暗闇。暗期の明るい光を避ける。日中（睡眠時間帯）の騒音/振動を最小化。(3) 薬物療法（社会的/環境的介入の補助—代替ではない）：第一選択SSRI：フルオキセチン1-2 mg/kg PO q24h（効果発現2-4週、試験期間8-12週）。代替：セルトラリン0.5-1.5 mg/kg PO q24h。抗不安ブリッジ：ガバペンチン5-10 mg/kg PO q8-12h×2-4週間（SSRI効果発現までの即効性不安緩和）。トラゾドン2-5 mg/kg PO q12-24h（代替抗不安薬）。(4) 栄養サポート：十分な食事確保（うつでは食欲不振が一般的）。摂食量が正常の50%未満×2日ならシリンジ給餌。BMLまたはTPG食に多様な果物/昆虫。オメガ3脂肪酸50-100 mg/kg/日（神経学的健康サポート）。(5) ヒトとの絆形成（補助的—同種コンパニオンの代替ではない）：飼い主の日中にボンディングポーチで2-4時間携帯。薄暮時（自然な活動開始時）に穏やかなハンドリング。手からおやつ（ミルワーム・蜂蜜）提供。(6) 疼痛/医学的除外：完全身体検査（歯疾患・泌尿器・消化管）。血液検査（CBC・化学検査）。必要に応じレントゲン。嗜眠/食欲不振に寄与する基礎疾患の治療。(7) モニタリング：毎日の摂食量/体重記録。2週毎の行動評価（活動レベル・社会的交流・セルフグルーミング・発声パターン）。4-6週で不十分な反応ならSSRI用量調整。参考文献：Johnson-Delaney 2006, Brust 2013。',
         "prevention": "MANDATORY social housing—never house sugar gliders alone. Pair or group housing from juvenile age (introduction at 8-12 weeks ideal). Provide large vertical cage with enrichment (foraging toys, climbing structures, multiple pouches). Maintain consistent nocturnal photoperiod (12h dark minimum). Minimize daytime disturbance. Balanced nutrition (BML/TPG diet). Daily gentle human interaction during dusk. Monitor for early behavioral changes (reduced vocalization, decreased activity, appetite changes). Avoid housing near predator species (cats, dogs, ferrets—chronic stress). Annual veterinary behavioral assessment.",
         "prevention_ja": "強制的な社会的飼育—フクロモモンガを絶対に単独飼育しない。幼若期からペアまたはグループ飼育（8-12週での導入が理想的）。エンリッチメント付き大型縦型ケージ提供（フォレジングトイ・登攀構造・複数ポーチ）。一貫した夜行性光周期維持（最低12時間暗闇）。日中の妨害を最小化。バランスの取れた栄養（BML/TPG食）。薄暮時に毎日穏やかな人間との交流。早期行動変化のモニタリング（発声減少・活動低下・食欲変化）。捕食者種（猫・犬・フェレット—慢性ストレス）の近くでの飼育を避ける。年1回の獣医師行動評価。",
         "prognosis": "Excellent (>85%) if primary cause is social isolation and compatible companion introduced within 4 weeks of onset. Dramatic improvement in 2-4 weeks (appetite returns, activity increases, normal vocalizations resume). Good (70-80%) with environmental optimization alone if mild/recent onset. Guarded (50-60%) if chronic (>3 months)—may require long-term SSRI; residual anxiety possible. Poor if unable to pair (no compatible companion available, severe aggression)—lifetime pharmacological management required. Key prognostic factor: owner willingness to provide social housing. Self-mutilation progression: if depression escalates to self-injury, prognosis worsens significantly (see Self-mutilation entry). Lifespan impact: untreated chronic depression reduces lifespan from normal 10-15 years to 3-5 years.",
@@ -297,7 +302,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Dermatological ─────────────────────────────────────────────────────
     {
         "name": "Skin Abscess",
@@ -371,7 +375,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Parasitic ──────────────────────────────────────────────────────────
     {
         "name": "Giardiasis",
@@ -493,7 +496,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Respiratory ────────────────────────────────────────────────────────
     {
         "name": "Upper Respiratory Infection",
@@ -558,7 +560,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Gastrointestinal ───────────────────────────────────────────────────
     {
         "name": "Diarrhea (Non-specific)",
@@ -680,7 +681,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Dental ─────────────────────────────────────────────────────────────
     {
         "name": "Dental Disease / Tartar Buildup",
@@ -745,7 +745,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Ophthalmological ───────────────────────────────────────────────────
     {
         "name": "Cataracts",
@@ -831,7 +830,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Reproductive ───────────────────────────────────────────────────────
     {
         "name": "Penile Paraphimosis",
@@ -932,7 +930,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Neurological ───────────────────────────────────────────────────────
     {
         "name": "Seizures (MBD-related)",
@@ -1012,7 +1009,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Renal / Urinary ────────────────────────────────────────────────────
     {
         "name": "Chronic Kidney Disease",
@@ -1077,7 +1073,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Hepatic ────────────────────────────────────────────────────────────
     {
         "name": "Hepatic Lipidosis (Fatty Liver)",
@@ -1115,7 +1110,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Neoplasia ──────────────────────────────────────────────────────────
     {
         "name": "Lymphoma",
@@ -1201,7 +1195,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
-
     # ── Musculoskeletal ────────────────────────────────────────────────────
     {
         "name": "Limb Fracture",
@@ -1260,7 +1253,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     # ── Cardiac ────────────────────────────────────────────────────────────
     {
         "name": "Cardiomyopathy",
@@ -1283,7 +1275,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
-
     # ── Other ──────────────────────────────────────────────────────────────
     {
         "name": "Heat Stroke",
@@ -2420,7 +2411,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "夜間発声（バーキング）はフクロモモンガにおける行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
         "treatment": "NOCTURNAL VOCALIZATION (BARKING) IN SUGAR GLIDERS: (1) RULE OUT MEDICAL CAUSES: Physical exam to exclude pain (dental disease, urinary tract, musculoskeletal). Blood work if systemic signs present. Note: some barking is NORMAL nocturnal behavior—treatment only needed if excessive/disruptive. (2) SOCIAL INTERVENTION (most effective): If singly housed—provide compatible companion (barking is often a 'contact call' to locate colony members). Introduction protocol: adjacent cages x 1 week, shared pouch x 1 week, supervised cohabitation, then full cohabitation. Expect 60-80% reduction in barking within 2-4 weeks of successful pairing. (3) ENVIRONMENTAL ENRICHMENT: Large vertical cage with foraging opportunities (scatter feed, puzzle feeders). Exercise wheel (12\" solid-surface). Variety of sleeping pouches. Branches, ropes for climbing. Rotate toys weekly. (4) BEHAVIORAL MANAGEMENT: Provide food at dusk (barking often peaks at feeding time). Consistent schedule (sugar gliders are crepuscular/nocturnal—active at dusk and throughout night). Bonding pouch time during owner's evening hours (2-4h). Do NOT reinforce barking by giving attention/treats when barking occurs (inadvertent positive reinforcement). (5) PHARMACOLOGICAL (rarely needed): If barking persists despite companion + enrichment + medical workup—gabapentin 5-10 mg/kg PO q12h x 2-4 weeks (mild anxiolytic). Fluoxetine 1-2 mg/kg PO q24h only if anxiety-driven (not for normal vocalization). (6) OWNER EDUCATION: Barking is a species-typical behavior—complete elimination is unrealistic and undesirable. Goal is to reduce excessive barking, not silence the animal. Relocate cage away from bedrooms if noise is primary complaint. Ref: Johnson-Delaney 2006, Brust 2013.",
-        "treatment_ja": "フクロモモンガの夜間発声（バーキング）治療：(1) 医学的原因の除外：疼痛の除外のため身体検査（歯疾患・泌尿器・筋骨格系）。全身症状あれば血液検査。注：一部のバーキングは正常な夜行性行動—過度/妨害的な場合のみ治療が必要。(2) 社会的介入（最も効果的）：単独飼育なら相性の良いコンパニオンを提供（バーキングはしばしばコロニーメンバーを探す「コンタクトコール」）。導入プロトコル：隣接ケージ×1週、共有ポーチ×1週、監視下同居、完全同居。成功したペアリング後2-4週で60-80%のバーキング減少が期待。(3) 環境エンリッチメント：フォレジング機会付き大型縦型ケージ。回し車（12\"ソリッドサーフェス）。多様なスリーピングポーチ。枝・ロープ。週1回トイローテーション。(4) 行動管理：薄暮時に食事提供（バーキングは給餌時にピーク）。一貫したスケジュール。飼い主の夕方時間にボンディングポーチタイム（2-4h）。バーキング時に注目/おやつを与えない（不注意な正の強化）。(5) 薬理学的（稀に必要）：コンパニオン+エンリッチメント+医学的ワークアップにもかかわらず持続—ガバペンチン5-10 mg/kg PO q12h×2-4週（軽度抗不安）。不安駆動の場合のみフルオキセチン1-2 mg/kg PO q24h（正常発声には不可）。(6) 飼い主教育：バーキングは種特異的行動—完全な排除は非現実的で望ましくない。目標は過度のバーキングの低減。騒音が主要苦情なら寝室からケージを移動。参考文献：Johnson-Delaney 2006, Brust 2013。",
+        "treatment_ja": 'フクロモモンガの夜間発声（バーキング）治療：(1) 医学的原因の除外：疼痛の除外のため身体検査（歯疾患・泌尿器・筋骨格系）。全身症状あれば血液検査。注：一部のバーキングは正常な夜行性行動—過度/妨害的な場合のみ治療が必要。(2) 社会的介入（最も効果的）：単独飼育なら相性の良いコンパニオンを提供（バーキングはしばしばコロニーメンバーを探す「コンタクトコール」）。導入プロトコル：隣接ケージ×1週、共有ポーチ×1週、監視下同居、完全同居。成功したペアリング後2-4週で60-80%のバーキング減少が期待。(3) 環境エンリッチメント：フォレジング機会付き大型縦型ケージ。回し車（12"ソリッドサーフェス）。多様なスリーピングポーチ。枝・ロープ。週1回トイローテーション。(4) 行動管理：薄暮時に食事提供（バーキングは給餌時にピーク）。一貫したスケジュール。飼い主の夕方時間にボンディングポーチタイム（2-4h）。バーキング時に注目/おやつを与えない（不注意な正の強化）。(5) 薬理学的（稀に必要）：コンパニオン+エンリッチメント+医学的ワークアップにもかかわらず持続—ガバペンチン5-10 mg/kg PO q12h×2-4週（軽度抗不安）。不安駆動の場合のみフルオキセチン1-2 mg/kg PO q24h（正常発声には不可）。(6) 飼い主教育：バーキングは種特異的行動—完全な排除は非現実的で望ましくない。目標は過度のバーキングの低減。騒音が主要苦情なら寝室からケージを移動。参考文献：Johnson-Delaney 2006, Brust 2013。',
         "prevention": "Social housing from juvenile age (prevents isolation-driven barking). Adequate environmental enrichment. Consistent nocturnal schedule (food at dusk, dark period for sleeping). Bonding pouch time daily. Noise expectations counseling for prospective owners (sugar gliders are NOT silent pets). Appropriate cage placement (away from bedrooms).",
         "prevention_ja": "幼若期からの社会的飼育（孤立駆動のバーキングを予防）。十分な環境エンリッチメント。一貫した夜行性スケジュール（薄暮時に食事、睡眠用暗期）。毎日のボンディングポーチタイム。見込み飼い主への騒音予測カウンセリング（フクロモモンガは静かなペットではない）。適切なケージ配置（寝室から離す）。",
         "prognosis": "Excellent if barking due to loneliness and companion introduced (60-80% reduction in 2-4 weeks). Good with environmental enrichment and schedule optimization. Some nocturnal vocalization is normal and expected—'treatment success' means manageable levels, not silence. Pharmacological intervention rarely needed and should not be first-line.",
@@ -2668,37 +2659,36 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Self-Mutilation Syndrome",
         "name_ja": "自咬症（セルフミューティレーション）",
-        "symptoms": {"self_mutilation", "hair_loss", "skin_lesions", "bleeding",
-                      "lethargy", "behavioral_changes"},
+        "symptoms": {"self_mutilation", "hair_loss", "skin_lesions", "bleeding", "lethargy", "behavioral_changes"},
         "description": "Compulsive self-injuring behavior, one of the most serious welfare issues in captive sugar gliders.",
         "description_ja": "フクロモモンガ飼育で最も深刻な行動障害。ストレス・孤独・疼痛が原因で"
-                          "自身の体（特に陰嚢・四肢・尾・膜翼）を噛む自傷行為。"
-                          "単頭飼育・不適切な環境で多発。重症例は四肢切断に至る。",
+        "自身の体（特に陰嚢・四肢・尾・膜翼）を噛む自傷行為。"
+        "単頭飼育・不適切な環境で多発。重症例は四肢切断に至る。",
         "pathophysiology": "Chronic stress, social isolation, or pain triggers compulsive self-directed biting, causing progressive tissue damage.",
         "pathophysiology_ja": "慢性ストレス・社会的孤立・疼痛→コルチゾール持続上昇→"
-                              "異常行動（常同行動）としての自咬開始→組織損傷→"
-                              "疼痛→さらなる自咬の悪循環。神経内分泌系の恒常性破綻。"
-                              "雄の去勢後（特に陰嚢）に多い。",
+        "異常行動（常同行動）としての自咬開始→組織損傷→"
+        "疼痛→さらなる自咬の悪循環。神経内分泌系の恒常性破綻。"
+        "雄の去勢後（特に陰嚢）に多い。",
         "causes": "Social isolation (single housing), chronic stress, boredom, pain, inadequate space, post-surgical complications.",
         "causes_ja": "単頭飼育（最大のリスク因子）、不十分な環境エンリッチメント、"
-                     "狭いケージ、疼痛（歯科疾患・外傷等の基礎疾患）、"
-                     "去勢術後の陰嚢自咬、飼い主の過剰な接触・不規則な生活リズム。",
+        "狭いケージ、疼痛（歯科疾患・外傷等の基礎疾患）、"
+        "去勢術後の陰嚢自咬、飼い主の過剰な接触・不規則な生活リズム。",
         "treatment": "Address underlying cause; environmental enrichment; companion animal; pain management; E-collar.",
         "treatment_ja": "原因の特定と対処が最優先。"
-                        "(1)単頭飼育→同種の同居個体を導入（段階的に）、"
-                        "(2)環境エンリッチメント（広いケージ・隠れ家・フォレジング）、"
-                        "(3)疼痛管理（メロキシカム0.2mg/kg SID）、"
-                        "(4)エリザベスカラー（自咬防止、短期間）、"
-                        "(5)重症例：ジアゼパム（0.5〜1mg/kg）or フルオキセチンの短期使用、"
-                        "(6)壊死組織のデブリードマン・抗菌薬。",
+        "(1)単頭飼育→同種の同居個体を導入（段階的に）、"
+        "(2)環境エンリッチメント（広いケージ・隠れ家・フォレジング）、"
+        "(3)疼痛管理（メロキシカム0.2mg/kg SID）、"
+        "(4)エリザベスカラー（自咬防止、短期間）、"
+        "(5)重症例：ジアゼパム（0.5〜1mg/kg）or フルオキセチンの短期使用、"
+        "(6)壊死組織のデブリードマン・抗菌薬。",
         "prevention": "Social housing (pairs/groups), adequate cage size, enrichment, proper diet.",
         "prevention_ja": "ペアまたはグループ飼育（単頭飼育を避ける）。"
-                         "十分なケージサイズ（最低60×60×90cm以上）。"
-                         "環境エンリッチメント。適切な光周期（夜行性を尊重）。"
-                         "バランスの取れた食事。",
+        "十分なケージサイズ（最低60×60×90cm以上）。"
+        "環境エンリッチメント。適切な光周期（夜行性を尊重）。"
+        "バランスの取れた食事。",
         "prognosis": "Variable; depends on severity and ability to address root cause.",
         "prognosis_ja": "原因が改善可能な場合は予後良好（社会的パートナーの導入等）。"
-                        "慢性化した自咬行動は矯正困難。四肢壊死例は切断後も再発リスクあり。",
+        "慢性化した自咬行動は矯正困難。四肢壊死例は切断後も再発リスクあり。",
         "urgency": "high",
         "recommended_tests": ["physical_exam", "behavioral_assessment", "complete_blood_count"],
         "onset_pattern": {"subacute", "chronic"},
@@ -2707,31 +2697,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Aflatoxicosis",
         "name_ja": "アフラトキシン中毒",
-        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "diarrhea",
-                      "jaundice", "sudden_death"},
+        "symptoms": {"poor_appetite", "lethargy", "weight_loss", "diarrhea", "jaundice", "sudden_death"},
         "description": "Toxic hepatopathy from ingestion of aflatoxin-contaminated food, particularly corn and peanuts.",
         "description_ja": "カビ毒（アフラトキシン）に汚染された食品の摂取による肝臓障害。"
-                          "トウモロコシ・ピーナッツ・穀物が主な汚染源。"
-                          "フクロモモンガは小型動物のため微量でも致死的。急性肝不全を引き起こす。",
+        "トウモロコシ・ピーナッツ・穀物が主な汚染源。"
+        "フクロモモンガは小型動物のため微量でも致死的。急性肝不全を引き起こす。",
         "pathophysiology": "Aflatoxin B1 is metabolized in the liver to a reactive epoxide that binds DNA and proteins, causing hepatocellular necrosis and carcinogenesis.",
         "pathophysiology_ja": "アフラトキシンB1が肝臓でCYP450により活性代謝物（エポキシド）に変換→"
-                              "DNA・タンパク質への共有結合→肝細胞壊死・アポトーシス→"
-                              "急性肝不全。慢性曝露では肝線維化・肝細胞癌のリスク。"
-                              "小型動物では体重あたりの毒素量が大きく感受性が高い。",
+        "DNA・タンパク質への共有結合→肝細胞壊死・アポトーシス→"
+        "急性肝不全。慢性曝露では肝線維化・肝細胞癌のリスク。"
+        "小型動物では体重あたりの毒素量が大きく感受性が高い。",
         "causes": "Aflatoxins (B1, B2, G1, G2) produced by Aspergillus flavus/parasiticus in stored grains, corn, peanuts.",
         "causes_ja": "Aspergillus flavus/parasiticusが産生するアフラトキシン。"
-                     "不適切に保管されたトウモロコシ・ピーナッツ・穀物が汚染源。"
-                     "高温多湿環境でカビが増殖しやすい。",
+        "不適切に保管されたトウモロコシ・ピーナッツ・穀物が汚染源。"
+        "高温多湿環境でカビが増殖しやすい。",
         "treatment": "No antidote; supportive care with hepatoprotectants and fluids.",
         "treatment_ja": "特異的解毒薬なし。支持療法が中心。"
-                        "輸液療法、肝保護薬（シリマリン）、ビタミンK（凝固障害時）、"
-                        "強制給餌、保温。汚染食品の即座の除去。",
+        "輸液療法、肝保護薬（シリマリン）、ビタミンK（凝固障害時）、"
+        "強制給餌、保温。汚染食品の即座の除去。",
         "prevention": "Fresh, high-quality food; proper storage; avoid moldy food items.",
         "prevention_ja": "新鮮で高品質な食材の使用。穀物・ナッツ類の適切な保管（密閉・低温・乾燥）。"
-                         "カビの生えた食品は即座に廃棄。信頼できるメーカーのフードを使用。",
+        "カビの生えた食品は即座に廃棄。信頼できるメーカーのフードを使用。",
         "prognosis": "Poor in acute cases; guarded with chronic exposure.",
         "prognosis_ja": "急性中毒は予後不良（致死率高い）。慢性曝露でも肝障害が進行性。"
-                        "早期の汚染源除去＋支持療法で改善する場合あり。",
+        "早期の汚染源除去＋支持療法で改善する場合あり。",
         "urgency": "emergency",
         "recommended_tests": ["serum_chemistry", "complete_blood_count", "liver_biopsy", "aflatoxin_food_testing"],
         "onset_pattern": {"acute", "chronic"},
@@ -2747,121 +2736,212 @@ DISEASES: List[Dict[str, Any]] = [
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
-    "rough_coat": "skin", "poor_wound_healing": "skin",
-    "skin_tenting": "skin", "open_wounds": "skin",
-    "hair_loss": "skin", "patchy_fur": "skin",
-    "skin_redness": "skin", "crusty_skin": "skin",
-    "scaly_skin": "skin", "itching": "skin",
-    "scratching": "skin", "circular_lesions": "skin",
-    "skin_infections": "skin", "skin_mass": "skin",
-    "ulceration": "skin", "odor": "skin",
-    "flea_dirt": "skin", "bumping_into_objects": "skin",
-    "membrane_tear": "skin", "scratching_ear": "skin",
-    "abdominal_mass": "skin", "abscess": "skin",
+    "rough_coat": "skin",
+    "poor_wound_healing": "skin",
+    "skin_tenting": "skin",
+    "open_wounds": "skin",
+    "hair_loss": "skin",
+    "patchy_fur": "skin",
+    "skin_redness": "skin",
+    "crusty_skin": "skin",
+    "scaly_skin": "skin",
+    "itching": "skin",
+    "scratching": "skin",
+    "circular_lesions": "skin",
+    "skin_infections": "skin",
+    "skin_mass": "skin",
+    "ulceration": "skin",
+    "odor": "skin",
+    "flea_dirt": "skin",
+    "bumping_into_objects": "skin",
+    "membrane_tear": "skin",
+    "scratching_ear": "skin",
+    "abdominal_mass": "skin",
+    "abscess": "skin",
     "bite_wounds": "skin",
-    "bleeding_from_mass": "skin", "cloacal_mass": "skin",
-    "enlarged_scent_gland": "skin", "excessive_oily_secretion": "skin",
-    "foul_odor": "skin", "foul_odor_from_pouch": "skin",
-    "gum_redness": "skin", "hair_loss_on_head": "skin",
-    "hair_thinning": "skin", "intense_itching": "skin",
-    "odorous_discharge": "skin", "poor_coat": "skin",
-    "pouch_redness": "skin", "scent_gland_mass": "skin",
-    "severe_hair_loss": "skin", "skin_crusting": "skin",
-    "skin_lesions": "skin", "skin_masses": "skin",
-    "skin_thickening": "skin", "skin_wounds": "skin",
-    "tail_injury": "skin", "tail_tissue_loss": "skin",
-    "torn_membrane": "skin", "wound_on_membrane": "skin",
+    "bleeding_from_mass": "skin",
+    "cloacal_mass": "skin",
+    "enlarged_scent_gland": "skin",
+    "excessive_oily_secretion": "skin",
+    "foul_odor": "skin",
+    "foul_odor_from_pouch": "skin",
+    "gum_redness": "skin",
+    "hair_loss_on_head": "skin",
+    "hair_thinning": "skin",
+    "intense_itching": "skin",
+    "odorous_discharge": "skin",
+    "poor_coat": "skin",
+    "pouch_redness": "skin",
+    "scent_gland_mass": "skin",
+    "severe_hair_loss": "skin",
+    "skin_crusting": "skin",
+    "skin_lesions": "skin",
+    "skin_masses": "skin",
+    "skin_thickening": "skin",
+    "skin_wounds": "skin",
+    "tail_injury": "skin",
+    "tail_tissue_loss": "skin",
+    "torn_membrane": "skin",
+    "wound_on_membrane": "skin",
     # 眼
-    "sunken_eyes": "eyes", "cloudy_eyes": "eyes",
-    "vision_loss": "eyes", "eye_discharge": "eyes",
-    "eye_redness": "eyes", "eye_swelling": "eyes",
-    "pawing_at_eye": "eyes", "eye_protrusion": "eyes",
+    "sunken_eyes": "eyes",
+    "cloudy_eyes": "eyes",
+    "vision_loss": "eyes",
+    "eye_discharge": "eyes",
+    "eye_redness": "eyes",
+    "eye_swelling": "eyes",
+    "pawing_at_eye": "eyes",
+    "eye_protrusion": "eyes",
     # 耳
     "ear_discharge": "ears",
     # 呼吸器
-    "sneezing": "respiratory", "nasal_discharge": "respiratory",
-    "respiratory_distress": "respiratory", "rapid_breathing": "respiratory",
-    "coughing": "respiratory", "pneumonia": "respiratory",
+    "sneezing": "respiratory",
+    "nasal_discharge": "respiratory",
+    "respiratory_distress": "respiratory",
+    "rapid_breathing": "respiratory",
+    "coughing": "respiratory",
+    "pneumonia": "respiratory",
     # 消化器・口腔
-    "poor_appetite": "digestive", "diarrhea": "digestive",
-    "bloating": "digestive", "bloody_stool": "digestive",
-    "visible_worms_in_stool": "digestive", "reduced_fecal_output": "digestive",
-    "straining": "digestive", "vomiting": "digestive",
-    "tissue_protrusion_anus": "digestive", "drooling": "digestive",
-    "bad_breath": "digestive", "teeth_grinding": "digestive",
+    "poor_appetite": "digestive",
+    "diarrhea": "digestive",
+    "bloating": "digestive",
+    "bloody_stool": "digestive",
+    "visible_worms_in_stool": "digestive",
+    "reduced_fecal_output": "digestive",
+    "straining": "digestive",
+    "vomiting": "digestive",
+    "tissue_protrusion_anus": "digestive",
+    "drooling": "digestive",
+    "bad_breath": "digestive",
+    "teeth_grinding": "digestive",
     "difficulty_eating": "digestive",
-    "foul_breath": "digestive", "loose_teeth": "digestive",
+    "foul_breath": "digestive",
+    "loose_teeth": "digestive",
     "oral_plaques": "digestive",
     # 骨格・四肢
-    "bone_deformity": "musculoskeletal", "fractures": "musculoskeletal",
-    "lameness": "musculoskeletal", "limb_deformity": "musculoskeletal",
-    "bone_pain": "musculoskeletal", "deformities": "musculoskeletal",
-    "exposed_bone": "musculoskeletal", "hind_limb_lameness": "musculoskeletal",
+    "bone_deformity": "musculoskeletal",
+    "fractures": "musculoskeletal",
+    "lameness": "musculoskeletal",
+    "limb_deformity": "musculoskeletal",
+    "bone_pain": "musculoskeletal",
+    "deformities": "musculoskeletal",
+    "exposed_bone": "musculoskeletal",
+    "hind_limb_lameness": "musculoskeletal",
     "hind_limb_weakness": "musculoskeletal",
-    "limb_swelling": "musculoskeletal", "pathological_fracture": "musculoskeletal",
+    "limb_swelling": "musculoskeletal",
+    "pathological_fracture": "musculoskeletal",
     "soft_bones": "musculoskeletal",
     # 神経
-    "seizures": "neurological", "tremors": "neurological",
-    "muscle_twitching": "neurological", "hind_leg_paralysis": "neurological",
-    "dragging_legs": "neurological", "disorientation": "neurological",
-    "head_tilt": "neurological", "circling": "neurological",
-    "nystagmus": "neurological", "ataxia": "neurological",
-    "balance_loss": "neurological", "neurological_signs": "neurological",
-    "opisthotonos": "neurological", "unresponsiveness": "neurological",
+    "seizures": "neurological",
+    "tremors": "neurological",
+    "muscle_twitching": "neurological",
+    "hind_leg_paralysis": "neurological",
+    "dragging_legs": "neurological",
+    "disorientation": "neurological",
+    "head_tilt": "neurological",
+    "circling": "neurological",
+    "nystagmus": "neurological",
+    "ataxia": "neurological",
+    "balance_loss": "neurological",
+    "neurological_signs": "neurological",
+    "opisthotonos": "neurological",
+    "unresponsiveness": "neurological",
     # 泌尿器・生殖器
-    "penile_protrusion": "urinary", "tissue_protrusion_cloaca": "urinary",
-    "vaginal_discharge": "urinary", "mammary_swelling": "urinary",
-    "mammary_mass": "urinary", "incontinence": "urinary",
-    "polyuria": "urinary", "blood_in_urine": "urinary",
-    "frequent_urination": "urinary", "cloacal_discharge": "urinary",
-    "exposed_penis": "urinary", "foul_smelling_urine": "urinary",
-    "joey_stuck_in_cloaca": "urinary", "penile_injury": "urinary",
-    "penile_tissue_loss": "urinary", "straining_to_urinate": "urinary",
+    "penile_protrusion": "urinary",
+    "tissue_protrusion_cloaca": "urinary",
+    "vaginal_discharge": "urinary",
+    "mammary_swelling": "urinary",
+    "mammary_mass": "urinary",
+    "incontinence": "urinary",
+    "polyuria": "urinary",
+    "blood_in_urine": "urinary",
+    "frequent_urination": "urinary",
+    "cloacal_discharge": "urinary",
+    "exposed_penis": "urinary",
+    "foul_smelling_urine": "urinary",
+    "joey_stuck_in_cloaca": "urinary",
+    "penile_injury": "urinary",
+    "penile_tissue_loss": "urinary",
+    "straining_to_urinate": "urinary",
     "vaginal_bleeding": "urinary",
     # 循環器
-    "cyanosis": "cardiovascular", "collapse": "cardiovascular",
-    "exercise_intolerance": "cardiovascular", "muffled_heart_sounds": "cardiovascular",
+    "cyanosis": "cardiovascular",
+    "collapse": "cardiovascular",
+    "exercise_intolerance": "cardiovascular",
+    "muffled_heart_sounds": "cardiovascular",
     # 体型・全身
-    "weight_loss": "body", "weight_gain": "body",
-    "muscle_wasting": "body", "dehydration": "body",
-    "dry_mucous_membranes": "body", "swelling": "body",
-    "facial_swelling": "body", "joey_failure_to_thrive": "body",
+    "weight_loss": "body",
+    "weight_gain": "body",
+    "muscle_wasting": "body",
+    "dehydration": "body",
+    "dry_mucous_membranes": "body",
+    "swelling": "body",
+    "facial_swelling": "body",
+    "joey_failure_to_thrive": "body",
     "lymph_node_swelling": "body",
-    "abdominal_distension": "body", "abdominal_pain": "body",
-    "ascites": "body", "edema": "body",
-    "membrane_swelling": "body", "mild_swelling": "body",
-    "obesity": "body", "progressive_weight_loss": "body",
-    "rapid_growth": "body", "splenomegaly": "body",
-    "stunted_growth": "body", "swelling_around_cloaca": "body",
+    "abdominal_distension": "body",
+    "abdominal_pain": "body",
+    "ascites": "body",
+    "edema": "body",
+    "membrane_swelling": "body",
+    "mild_swelling": "body",
+    "obesity": "body",
+    "progressive_weight_loss": "body",
+    "rapid_growth": "body",
+    "splenomegaly": "body",
+    "stunted_growth": "body",
+    "swelling_around_cloaca": "body",
     "toe_swelling": "body",
     # 行動・活動
-    "weakness": "behavior", "lethargy": "behavior",
-    "reduced_activity": "behavior", "difficulty_gliding": "behavior",
-    "self_chewing": "behavior", "stress_behavior": "behavior",
-    "over_grooming": "behavior", "pain": "behavior",
-    "squinting": "behavior", "loss_of_balance": "behavior",
-    "reluctance_to_move": "behavior", "abandoned_joey": "behavior",
-    "attention_seeking": "behavior", "behavioral_changes": "behavior",
-    "cold_body": "behavior", "curled_posture": "behavior",
-    "decreased_activity": "behavior", "excessive_barking": "behavior",
-    "inability_to_climb": "behavior", "inability_to_glide": "behavior",
-    "joey_on_cage_floor": "behavior", "licking_foot": "behavior",
-    "licking_genital_area": "behavior", "membrane_chewing": "behavior",
-    "nighttime_activity": "behavior", "restlessness": "behavior",
-    "self_grooming_obsessive": "behavior", "self_mutilation": "behavioral",
+    "weakness": "behavior",
+    "lethargy": "behavior",
+    "reduced_activity": "behavior",
+    "difficulty_gliding": "behavior",
+    "self_chewing": "behavior",
+    "stress_behavior": "behavior",
+    "over_grooming": "behavior",
+    "pain": "behavior",
+    "squinting": "behavior",
+    "loss_of_balance": "behavior",
+    "reluctance_to_move": "behavior",
+    "abandoned_joey": "behavior",
+    "attention_seeking": "behavior",
+    "behavioral_changes": "behavior",
+    "cold_body": "behavior",
+    "curled_posture": "behavior",
+    "decreased_activity": "behavior",
+    "excessive_barking": "behavior",
+    "inability_to_climb": "behavior",
+    "inability_to_glide": "behavior",
+    "joey_on_cage_floor": "behavior",
+    "licking_foot": "behavior",
+    "licking_genital_area": "behavior",
+    "membrane_chewing": "behavior",
+    "nighttime_activity": "behavior",
+    "restlessness": "behavior",
+    "self_grooming_obsessive": "behavior",
+    "self_mutilation": "behavioral",
     "stress_signs": "behavior",
     "tail_chewing": "behavior",
     # 緊急
-    "sudden_death_risk": "emergency", "joey_death": "emergency",
+    "sudden_death_risk": "emergency",
+    "joey_death": "emergency",
     "sudden_death": "emergency",
     # 内科・血液
-    "bleeding": "internal", "discharge": "internal",
-    "fever": "internal", "polydipsia": "internal",
-    "jaundice": "internal", "anemia": "internal",
-    "bleeding_from_cloaca": "internal", "bleeding_from_gland": "internal",
-    "bleeding_from_mouth": "internal", "discharge_from_membrane": "internal",
-    "hepatitis": "internal", "hypothermic_joey": "internal",
-    "immunosuppression": "internal", "pouch_discharge": "internal",
+    "bleeding": "internal",
+    "discharge": "internal",
+    "fever": "internal",
+    "polydipsia": "internal",
+    "jaundice": "internal",
+    "anemia": "internal",
+    "bleeding_from_cloaca": "internal",
+    "bleeding_from_gland": "internal",
+    "bleeding_from_mouth": "internal",
+    "discharge_from_membrane": "internal",
+    "hepatitis": "internal",
+    "hypothermic_joey": "internal",
+    "immunosuppression": "internal",
+    "pouch_discharge": "internal",
     "recurrent_infections": "internal",
 }
 
@@ -2977,7 +3057,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     # Ear
     "scratching_ear": {"ja": "耳を掻く", "en": "Scratching Ear"},
     "ear_discharge": {"ja": "耳漏", "en": "Ear Discharge"},
-
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
     "abandoned_joey": {"ja": "放棄された仔", "en": "Abandoned Joey"},
     "abdominal_distension": {"ja": "腹部膨満", "en": "Abdominal distension"},
@@ -3103,4 +3182,18 @@ def analyze_symptoms(
     vaccination_status=None,
 ) -> Dict[str, Any]:
     """Run differential diagnosis for sugar gliders based on reported symptoms."""
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("sugar_glider", {}))
+    return analyze_symptoms_generic(
+        symptoms,
+        DISEASES,
+        SYMPTOM_NAMES,
+        ADVICE,
+        onset=onset,
+        age_years=age_years,
+        breed=breed,
+        species=species,
+        lab_values=lab_values,
+        gender=gender,
+        vaccines=vaccines,
+        vaccination_status=vaccination_status,
+        prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("sugar_glider", {}),
+    )

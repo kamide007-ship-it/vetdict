@@ -152,9 +152,7 @@ class ComorbidityScorer:
         # P(A and B | symptoms) = P(A|S) * P(B|S) * coexistence_prob * (1 - symptom_penalty)
         symptom_penalty = symptom_overlap_ratio * 0.3  # Up to 30% penalty for overlap
 
-        combined_confidence = (
-            confidence_a * confidence_b * comorbidity_prob * (1.0 - symptom_penalty)
-        )
+        combined_confidence = confidence_a * confidence_b * comorbidity_prob * (1.0 - symptom_penalty)
 
         # Ensure result is in valid range
         combined_confidence = max(0.0, min(combined_confidence, 1.0))
@@ -166,9 +164,7 @@ class ComorbidityScorer:
             "comorbidity_probability": round(comorbidity_prob, 3),
             "symptom_overlap_penalty": round(symptom_penalty, 3),
             "combined_confidence": round(combined_confidence, 3),
-            "formula_explanation": (
-                "combined = P(A|S) × P(B|S) × coexistence_prob × (1 - overlap_penalty)"
-            ),
+            "formula_explanation": ("combined = P(A|S) × P(B|S) × coexistence_prob × (1 - overlap_penalty)"),
         }
 
         return combined_confidence, breakdown

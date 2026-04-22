@@ -1,6 +1,5 @@
 """Tests for risk_stratifier.py - Patient risk stratification."""
 
-
 from api.ai.risk_stratifier import (
     _DEFAULT_RISK_PROFILE,
     DISEASE_RISK_PROFILES,
@@ -26,8 +25,8 @@ def _factors(**kwargs):
 
 # ── Data integrity ───────────────────────────────────────────────────
 
-class TestDataIntegrity:
 
+class TestDataIntegrity:
     def test_risk_thresholds_cover_full_range(self):
         assert RISK_THRESHOLDS["low"][0] == 0
         assert RISK_THRESHOLDS["critical"][1] == 100
@@ -37,8 +36,13 @@ class TestDataIntegrity:
             assert tier in TIER_INTERVENTIONS
 
     def test_disease_profiles_have_required_keys(self):
-        required = ["base_risk_score", "severity_weight", "age_risk_per_year",
-                     "hospitalization_base", "comorbidity_penalties"]
+        required = [
+            "base_risk_score",
+            "severity_weight",
+            "age_risk_per_year",
+            "hospitalization_base",
+            "comorbidity_penalties",
+        ]
         for name, profile in DISEASE_RISK_PROFILES.items():
             for key in required:
                 assert key in profile, f"{name} missing {key}"
@@ -50,8 +54,8 @@ class TestDataIntegrity:
 
 # ── RiskAssessmentFactors ────────────────────────────────────────────
 
-class TestRiskAssessmentFactors:
 
+class TestRiskAssessmentFactors:
     def test_to_dict(self):
         f = _factors()
         d = f.to_dict()
@@ -67,8 +71,8 @@ class TestRiskAssessmentFactors:
 
 # ── RiskStratificationResult ────────────────────────────────────────
 
-class TestRiskStratificationResult:
 
+class TestRiskStratificationResult:
     def test_to_dict(self):
         r = RiskStratificationResult(
             risk_tier=RiskTier.HIGH,
@@ -83,8 +87,8 @@ class TestRiskStratificationResult:
 
 # ── RiskTier ─────────────────────────────────────────────────────────
 
-class TestRiskTier:
 
+class TestRiskTier:
     def test_values(self):
         assert RiskTier.LOW.value == "low"
         assert RiskTier.MODERATE.value == "moderate"
@@ -94,8 +98,8 @@ class TestRiskTier:
 
 # ── RiskStratifier ───────────────────────────────────────────────────
 
-class TestStratifyRisk:
 
+class TestStratifyRisk:
     def test_returns_result(self):
         rs = RiskStratifier()
         result = rs.stratify_risk(_factors())
@@ -103,28 +107,32 @@ class TestStratifyRisk:
 
     def test_low_risk_case(self):
         rs = RiskStratifier()
-        result = rs.stratify_risk(_factors(
-            disease="Hip Dysplasia",
-            disease_severity=2.0,
-            patient_age=3.0,
-            comorbidities=[],
-            recovery_probability=0.9,
-            complication_risk=0.05,
-            mortality_risk=0.0,
-        ))
+        result = rs.stratify_risk(
+            _factors(
+                disease="Hip Dysplasia",
+                disease_severity=2.0,
+                patient_age=3.0,
+                comorbidities=[],
+                recovery_probability=0.9,
+                complication_risk=0.05,
+                mortality_risk=0.0,
+            )
+        )
         assert result.risk_tier == RiskTier.LOW
 
     def test_critical_risk_case(self):
         rs = RiskStratifier()
-        result = rs.stratify_risk(_factors(
-            disease="Lymphoma",
-            disease_severity=9.0,
-            patient_age=12.0,
-            comorbidities=["Chronic Kidney Disease", "Anemia"],
-            recovery_probability=0.2,
-            complication_risk=0.6,
-            mortality_risk=0.4,
-        ))
+        result = rs.stratify_risk(
+            _factors(
+                disease="Lymphoma",
+                disease_severity=9.0,
+                patient_age=12.0,
+                comorbidities=["Chronic Kidney Disease", "Anemia"],
+                recovery_probability=0.2,
+                complication_risk=0.6,
+                mortality_risk=0.4,
+            )
+        )
         assert result.risk_tier == RiskTier.CRITICAL
 
     def test_score_in_valid_range(self):
@@ -151,9 +159,11 @@ class TestStratifyRisk:
     def test_comorbidities_increase_risk(self):
         rs = RiskStratifier()
         no_comorb = rs.stratify_risk(_factors(comorbidities=[]))
-        with_comorb = rs.stratify_risk(_factors(
-            comorbidities=["Diabetes Mellitus", "Chronic Kidney Disease"],
-        ))
+        with_comorb = rs.stratify_risk(
+            _factors(
+                comorbidities=["Diabetes Mellitus", "Chronic Kidney Disease"],
+            )
+        )
         assert with_comorb.risk_score > no_comorb.risk_score
 
     def test_age_senior_increases_risk(self):
@@ -186,7 +196,6 @@ class TestStratifyRisk:
 
 
 class TestDetermineRiskTier:
-
     def test_low_tier(self):
         assert RiskStratifier._determine_risk_tier(15) == RiskTier.LOW
 
@@ -210,7 +219,6 @@ class TestDetermineRiskTier:
 
 
 class TestAgeAdjustment:
-
     def test_puppy(self):
         adj = RiskStratifier._calculate_age_adjustment(0.5, _DEFAULT_RISK_PROFILE)
         assert adj > 0
@@ -229,11 +237,8 @@ class TestAgeAdjustment:
 
 
 class TestComorbidityPenalty:
-
     def test_no_comorbidities(self):
-        penalty = RiskStratifier._calculate_comorbidity_penalty(
-            [], DISEASE_RISK_PROFILES["Pancreatitis"]
-        )
+        penalty = RiskStratifier._calculate_comorbidity_penalty([], DISEASE_RISK_PROFILES["Pancreatitis"])
         assert penalty == 0.0
 
     def test_known_comorbidity(self):
@@ -250,7 +255,6 @@ class TestComorbidityPenalty:
 
 
 class TestHospitalizationRisk:
-
     def test_high_severity_boosts(self):
         factors_high = _factors(disease_severity=9.0)
         factors_low = _factors(disease_severity=3.0)
@@ -267,7 +271,6 @@ class TestHospitalizationRisk:
 
 
 class TestIdentifyRiskFactors:
-
     def test_high_severity_listed(self):
         factors = _factors(disease_severity=8.0)
         rf = RiskStratifier._identify_risk_factors(factors, _DEFAULT_RISK_PROFILE)
@@ -290,15 +293,10 @@ class TestIdentifyRiskFactors:
 
 
 class TestMonitoringRecommendations:
-
     def test_critical_tier_has_emergency(self):
-        recs = RiskStratifier._generate_monitoring_recommendations(
-            RiskTier.CRITICAL, _factors()
-        )
+        recs = RiskStratifier._generate_monitoring_recommendations(RiskTier.CRITICAL, _factors())
         assert any("emergency" in r.lower() for r in recs)
 
     def test_low_tier_has_routine(self):
-        recs = RiskStratifier._generate_monitoring_recommendations(
-            RiskTier.LOW, _factors()
-        )
+        recs = RiskStratifier._generate_monitoring_recommendations(RiskTier.LOW, _factors())
         assert any("Routine" in r for r in recs)

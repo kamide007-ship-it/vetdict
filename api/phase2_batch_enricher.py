@@ -150,15 +150,8 @@ Important:
             request = Request(
                 custom_id=f"disease-{disease.get('id', i)}-{stage}",
                 params=MessageCreateParamsNonStreaming(
-                    model=self.model,
-                    max_tokens=768,
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ]
-                )
+                    model=self.model, max_tokens=768, messages=[{"role": "user", "content": prompt}]
+                ),
             )
             current_batch.append(request)
 
@@ -171,9 +164,7 @@ Important:
 
         return batches
 
-    def submit_batch(
-        self, requests: List[Request], description: str = ""
-    ) -> str:
+    def submit_batch(self, requests: List[Request], description: str = "") -> str:
         """Submit a batch to the Anthropic Batches API.
 
         Args:
@@ -186,9 +177,7 @@ Important:
         if not requests:
             raise ValueError("No requests to submit")
 
-        batch = self.client.messages.batches.create(
-            requests=requests
-        )
+        batch = self.client.messages.batches.create(requests=requests)
 
         print(f"✓ Submitted batch {batch.id}: {description}")
         print(f"  Requests: {len(requests)}")
@@ -209,21 +198,17 @@ Important:
 
         # Build request counts - only include attributes that exist
         request_counts = {
-            "succeeded": getattr(batch.request_counts, 'succeeded', 0),
-            "errored": getattr(batch.request_counts, 'errored', 0)
+            "succeeded": getattr(batch.request_counts, "succeeded", 0),
+            "errored": getattr(batch.request_counts, "errored", 0),
         }
 
         # Add optional fields if they exist
-        if hasattr(batch.request_counts, 'expired'):
+        if hasattr(batch.request_counts, "expired"):
             request_counts["expired"] = batch.request_counts.expired
-        if hasattr(batch.request_counts, 'cancel_requested'):
+        if hasattr(batch.request_counts, "cancel_requested"):
             request_counts["cancel_requested"] = batch.request_counts.cancel_requested
 
-        return {
-            "id": batch.id,
-            "status": batch.processing_status,
-            "request_counts": request_counts
-        }
+        return {"id": batch.id, "status": batch.processing_status, "request_counts": request_counts}
 
     def retrieve_batch_results(self, batch_id: str) -> List[dict]:
         """Retrieve results from a completed batch.
@@ -266,36 +251,37 @@ Important:
 
                             parsed_json = json.loads(json_str)
 
-                        results.append({
-                            "custom_id": result.custom_id,
-                            "status": "succeeded",
-                            "data": parsed_json
-                        })
+                        results.append({"custom_id": result.custom_id, "status": "succeeded", "data": parsed_json})
                     except (json.JSONDecodeError, IndexError) as e:
-                        results.append({
-                            "custom_id": result.custom_id,
-                            "status": "parse_error",
-                            "error": str(e),
-                            "raw_text": message_content.text
-                        })
+                        results.append(
+                            {
+                                "custom_id": result.custom_id,
+                                "status": "parse_error",
+                                "error": str(e),
+                                "raw_text": message_content.text,
+                            }
+                        )
                 else:
-                    results.append({
-                        "custom_id": result.custom_id,
-                        "status": "unexpected_content_type",
-                        "content_type": message_content.type
-                    })
+                    results.append(
+                        {
+                            "custom_id": result.custom_id,
+                            "status": "unexpected_content_type",
+                            "content_type": message_content.type,
+                        }
+                    )
 
             elif result.result.type == "errored":
-                results.append({
-                    "custom_id": result.custom_id,
-                    "status": "errored",
-                    "error": result.result.error.message if hasattr(result.result.error, 'message') else str(result.result.error)
-                })
+                results.append(
+                    {
+                        "custom_id": result.custom_id,
+                        "status": "errored",
+                        "error": result.result.error.message
+                        if hasattr(result.result.error, "message")
+                        else str(result.result.error),
+                    }
+                )
 
             elif result.result.type == "expired":
-                results.append({
-                    "custom_id": result.custom_id,
-                    "status": "expired"
-                })
+                results.append({"custom_id": result.custom_id, "status": "expired"})
 
         return results

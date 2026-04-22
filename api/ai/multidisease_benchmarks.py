@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
 # Add parent directory to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from api.ai.multidisease_expander import (
     DiseaseInteraction,
@@ -25,6 +25,7 @@ from api.ai.multidisease_expander import (
 @dataclass
 class BenchmarkResult:
     """Result of a single benchmark."""
+
     test_name: str
     dataset_size: int
     num_combinations: int
@@ -47,8 +48,7 @@ class BenchmarkSuite:
     def __init__(self):
         self.results: List[BenchmarkResult] = []
 
-    def generate_disease_interactions(self,
-                                     num_diseases: int) -> Dict[Tuple[str, str], DiseaseInteraction]:
+    def generate_disease_interactions(self, num_diseases: int) -> Dict[Tuple[str, str], DiseaseInteraction]:
         """Generate synthetic disease interaction matrix.
 
         Args:
@@ -98,13 +98,13 @@ class BenchmarkSuite:
 
             # Select subset for expansion
             all_diseases = []
-            for (d1, d2) in interactions:
+            for d1, d2 in interactions:
                 if d1 not in all_diseases:
                     all_diseases.append(d1)
                 if d2 not in all_diseases:
                     all_diseases.append(d2)
 
-            expand_diseases = all_diseases[:min(6, len(all_diseases))]
+            expand_diseases = all_diseases[: min(6, len(all_diseases))]
 
             start_time = time.time()
             patterns = expander.expand_combinations(expand_diseases, min_combined_prob=0.1)
@@ -122,8 +122,10 @@ class BenchmarkSuite:
             )
 
             self.results.append(result)
-            print(f"Size: {size:3d} | Time: {elapsed_ms:8.2f}ms | "
-                  f"Combos: {num_combinations:4d} | Speed: {cps:8.1f} combos/sec")
+            print(
+                f"Size: {size:3d} | Time: {elapsed_ms:8.2f}ms | "
+                f"Combos: {num_combinations:4d} | Speed: {cps:8.1f} combos/sec"
+            )
 
     def benchmark_complexity_calculation(self):
         """Benchmark complexity score calculation."""
@@ -135,13 +137,10 @@ class BenchmarkSuite:
 
         # Create test combinations of varying sizes
         sizes = [2, 3, 4, 5, 6]
-        all_diseases = list(set(
-            d for pair in interactions
-            for d in pair
-        ))[:15]
+        all_diseases = list(set(d for pair in interactions for d in pair))[:15]
 
         for size in sizes:
-            test_combos = [tuple(all_diseases[i:i+size]) for i in range(5)]
+            test_combos = [tuple(all_diseases[i : i + size]) for i in range(5)]
 
             start_time = time.time()
             for combo in test_combos:
@@ -159,8 +158,10 @@ class BenchmarkSuite:
             )
 
             self.results.append(result)
-            print(f"Combo Size: {size} | Time: {elapsed_ms:8.2f}ms | "
-                  f"Calcs: {len(test_combos):4d} | Speed: {cps:8.1f} calcs/sec")
+            print(
+                f"Combo Size: {size} | Time: {elapsed_ms:8.2f}ms | "
+                f"Calcs: {len(test_combos):4d} | Speed: {cps:8.1f} calcs/sec"
+            )
 
     def benchmark_rule_mining(self):
         """Benchmark association rule mining."""
@@ -174,14 +175,11 @@ class BenchmarkSuite:
             expander = MultiDiseaseExpander(interactions)
 
             # Generate patterns
-            all_diseases = list(set(
-                d for pair in interactions
-                for d in pair
-            ))[:12]
+            all_diseases = list(set(d for pair in interactions for d in pair))[:12]
 
             patterns = []
             for i in range(0, min(count, len(all_diseases) - 2)):
-                diseases = tuple(all_diseases[i:i+3])
+                diseases = tuple(all_diseases[i : i + 3])
                 pattern = expander._score_combination(diseases)
                 if pattern:
                     patterns.append(pattern)
@@ -204,8 +202,10 @@ class BenchmarkSuite:
             )
 
             self.results.append(result)
-            print(f"Patterns: {len(patterns):3d} | Time: {elapsed_ms:8.2f}ms | "
-                  f"Rules: {len(rules):4d} | Speed: {rps:8.1f} rules/sec")
+            print(
+                f"Patterns: {len(patterns):3d} | Time: {elapsed_ms:8.2f}ms | "
+                f"Rules: {len(rules):4d} | Speed: {rps:8.1f} rules/sec"
+            )
 
     def benchmark_clustering(self):
         """Benchmark disease clustering."""
@@ -233,8 +233,10 @@ class BenchmarkSuite:
             )
 
             self.results.append(result)
-            print(f"Diseases: {size:3d} | Time: {elapsed_ms:8.2f}ms | "
-                  f"Clusters: {num_clusters:3d} | Speed: {cps:8.1f} diseases/sec")
+            print(
+                f"Diseases: {size:3d} | Time: {elapsed_ms:8.2f}ms | "
+                f"Clusters: {num_clusters:3d} | Speed: {cps:8.1f} diseases/sec"
+            )
 
     def benchmark_network_analysis(self):
         """Benchmark network analysis."""
@@ -245,13 +247,10 @@ class BenchmarkSuite:
         expander = MultiDiseaseExpander(interactions)
 
         # Generate patterns first
-        all_diseases = list(set(
-            d for pair in interactions
-            for d in pair
-        ))[:12]
+        all_diseases = list(set(d for pair in interactions for d in pair))[:12]
 
         for i in range(0, len(all_diseases) - 2):
-            diseases = tuple(all_diseases[i:i+3])
+            diseases = tuple(all_diseases[i : i + 3])
             expander._score_combination(diseases)
 
         # Benchmark analysis
@@ -296,9 +295,11 @@ class BenchmarkSuite:
 
             total_mb = (matrix_size + expander_size) / (1024 * 1024)
 
-            print(f"Size: {size:3d} | Matrix: {matrix_size:10d} bytes | "
-                  f"Expander: {expander_size:10d} bytes | "
-                  f"Total: {total_mb:6.2f} MB")
+            print(
+                f"Size: {size:3d} | Matrix: {matrix_size:10d} bytes | "
+                f"Expander: {expander_size:10d} bytes | "
+                f"Total: {total_mb:6.2f} MB"
+            )
 
     def run_all_benchmarks(self):
         """Run all benchmarks."""

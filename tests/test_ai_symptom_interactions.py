@@ -156,9 +156,7 @@ def test_interaction_scorer_score_symptom_set(sample_diseases):
     scorer = InteractionScorer(matrix)
 
     symptoms = ["coughing", "fever"]
-    confidence, interactions = scorer.score_symptom_set(
-        symptoms, base_confidence=0.80
-    )
+    confidence, interactions = scorer.score_symptom_set(symptoms, base_confidence=0.80)
 
     assert 0.0 <= confidence <= 1.0
     assert isinstance(interactions, list)
@@ -171,9 +169,7 @@ def test_interaction_scorer_no_boost_with_no_interactions(sample_diseases):
 
     # Single symptom has no interactions
     symptoms = ["nasal_discharge"]
-    confidence, interactions = scorer.score_symptom_set(
-        symptoms, base_confidence=0.80
-    )
+    confidence, interactions = scorer.score_symptom_set(symptoms, base_confidence=0.80)
 
     # Confidence should not change without interactions
     assert confidence == 0.80
@@ -188,9 +184,7 @@ def test_interaction_scorer_boost_applied(sample_diseases):
     # fever + coughing is a strong pair (appears in 2 diseases)
     symptoms = ["coughing", "fever"]
     base_conf = 0.80
-    confidence, interactions = scorer.score_symptom_set(
-        symptoms, base_confidence=base_conf, max_boost=0.15
-    )
+    confidence, interactions = scorer.score_symptom_set(symptoms, base_confidence=base_conf, max_boost=0.15)
 
     if interactions:  # If interaction found, confidence should be higher
         assert confidence > base_conf
@@ -204,9 +198,7 @@ def test_interaction_scorer_capped_at_one(sample_diseases):
 
     # High base confidence + boost should not exceed 1.0
     symptoms = ["coughing", "fever"]
-    confidence, _ = scorer.score_symptom_set(
-        symptoms, base_confidence=0.95, max_boost=0.20
-    )
+    confidence, _ = scorer.score_symptom_set(symptoms, base_confidence=0.95, max_boost=0.20)
 
     assert confidence <= 1.0
 

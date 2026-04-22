@@ -207,11 +207,7 @@ def build_synth_description(entry: dict) -> str:
     parts: list[str] = []
 
     causes = entry.get("causes_ja") or ""
-    if (
-        causes
-        and not is_template_pathophysiology(causes)
-        and not is_template_causes(causes)
-    ):
+    if causes and not is_template_pathophysiology(causes) and not is_template_causes(causes):
         causes_summary = extract_summary(causes, min_chars=50, max_chars=160)
         if causes_summary:
             parts.append(causes_summary)
@@ -316,9 +312,7 @@ def main() -> None:
             continue
 
         # 出典トラッキング
-        if entry.get("pathophysiology_ja") and not is_template_pathophysiology(
-            entry["pathophysiology_ja"]
-        ):
+        if entry.get("pathophysiology_ja") and not is_template_pathophysiology(entry["pathophysiology_ja"]):
             stats["filled_from_patho"] += 1
         else:
             stats["filled_from_synth"] += 1

@@ -14,6 +14,7 @@ from api.ai.symptom_interactions import (
 # Fixtures
 # ===================================================================
 
+
 @pytest.fixture
 def diseases_with_triples():
     """Diseases where each has 3+ symptoms to produce triple interactions."""
@@ -58,6 +59,7 @@ def small_diseases():
 # ===================================================================
 # TripleInteractionMatrix – _build_matrix and basic structure
 # ===================================================================
+
 
 class TestTripleInteractionMatrix:
     def test_init_with_triple_diseases(self, diseases_with_triples):
@@ -122,6 +124,7 @@ class TestTripleInteractionMatrix:
 # TripleInteractionMatrix – find_triple_interactions
 # ===================================================================
 
+
 class TestFindTripleInteractions:
     def test_returns_empty_for_fewer_than_3_symptoms(self, diseases_with_triples):
         matrix = TripleInteractionMatrix(diseases_with_triples)
@@ -132,9 +135,7 @@ class TestFindTripleInteractions:
     def test_finds_known_triple(self, diseases_with_triples):
         matrix = TripleInteractionMatrix(diseases_with_triples)
         # fever+cough+lethargy appears in 3 diseases → high weight
-        interactions = matrix.find_triple_interactions(
-            ["fever", "cough", "lethargy"], weight_threshold=0.0
-        )
+        interactions = matrix.find_triple_interactions(["fever", "cough", "lethargy"], weight_threshold=0.0)
         assert len(interactions) > 0
         triples_found = [frozenset(i["triple"]) for i in interactions]
         assert frozenset({"fever", "cough", "lethargy"}) in triples_found
@@ -172,18 +173,14 @@ class TestFindTripleInteractions:
 
     def test_boost_factor_is_weight_times_020(self, diseases_with_triples):
         matrix = TripleInteractionMatrix(diseases_with_triples)
-        interactions = matrix.find_triple_interactions(
-            ["fever", "cough", "lethargy"], weight_threshold=0.0
-        )
+        interactions = matrix.find_triple_interactions(["fever", "cough", "lethargy"], weight_threshold=0.0)
         for i in interactions:
             expected_boost = round(i["weight"] * 0.20, 3)
             assert i["boost_factor"] == expected_boost
 
     def test_triple_sorted_alphabetically(self, diseases_with_triples):
         matrix = TripleInteractionMatrix(diseases_with_triples)
-        interactions = matrix.find_triple_interactions(
-            ["fever", "cough", "lethargy"], weight_threshold=0.0
-        )
+        interactions = matrix.find_triple_interactions(["fever", "cough", "lethargy"], weight_threshold=0.0)
         for i in interactions:
             assert i["triple"] == sorted(i["triple"])
 
@@ -216,6 +213,7 @@ class TestFindTripleInteractions:
 # ===================================================================
 # SymptomInteractionMatrix – empty/edge cases not in existing tests
 # ===================================================================
+
 
 class TestSymptomInteractionMatrixEdgeCases:
     def test_empty_disease_list(self):
@@ -264,6 +262,7 @@ class TestSymptomInteractionMatrixEdgeCases:
 # InteractionScorer – edge cases
 # ===================================================================
 
+
 class TestInteractionScorerEdgeCases:
     def test_score_capped_at_one(self):
         diseases = [
@@ -274,9 +273,7 @@ class TestInteractionScorerEdgeCases:
         matrix = SymptomInteractionMatrix(diseases, min_frequency=1)
         scorer = InteractionScorer(matrix)
         # Very high base confidence
-        confidence, interactions = scorer.score_symptom_set(
-            ["a", "b"], base_confidence=0.99, max_boost=0.5
-        )
+        confidence, interactions = scorer.score_symptom_set(["a", "b"], base_confidence=0.99, max_boost=0.5)
         assert confidence <= 1.0
 
     def test_score_empty_symptoms(self):
@@ -300,12 +297,11 @@ class TestInteractionScorerEdgeCases:
 # analyze_symptom_interactions – edge cases
 # ===================================================================
 
+
 class TestAnalyzeSymptomInteractionsEdgeCases:
     def test_with_min_frequency_1(self):
         diseases = [{"id": "d1", "symptoms": {"fever", "cough", "lethargy"}}]
-        result = analyze_symptom_interactions(
-            ["fever", "cough"], diseases, min_frequency=1
-        )
+        result = analyze_symptom_interactions(["fever", "cough"], diseases, min_frequency=1)
         assert result["interaction_count"] >= 1
         assert result["strongest_pair"] is not None
 
@@ -333,12 +329,8 @@ class TestAnalyzeSymptomInteractionsEdgeCases:
             {"id": "d1", "symptoms": {"a", "b"}},
             {"id": "d2", "symptoms": {"a", "b"}},
         ]
-        result_low = analyze_symptom_interactions(
-            ["a", "b"], diseases, min_frequency=1, weight_threshold=0.0
-        )
-        result_high = analyze_symptom_interactions(
-            ["a", "b"], diseases, min_frequency=1, weight_threshold=0.99
-        )
+        result_low = analyze_symptom_interactions(["a", "b"], diseases, min_frequency=1, weight_threshold=0.0)
+        result_high = analyze_symptom_interactions(["a", "b"], diseases, min_frequency=1, weight_threshold=0.99)
         assert result_high["interaction_count"] <= result_low["interaction_count"]
 
     def test_empty_symptoms_list(self):

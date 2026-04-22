@@ -39,33 +39,25 @@ class TestAPIHandlerCacheIntegration:
     @pytest.fixture
     def mock_detector(self):
         """Mock MultiDiseaseDetector."""
-        with patch(
-            "api.ai.multidisease_api_handler.MultiDiseaseDetector"
-        ) as mock:
+        with patch("api.ai.multidisease_api_handler.MultiDiseaseDetector") as mock:
             yield mock
 
     @pytest.fixture
     def mock_confidence_calculator(self):
         """Mock CombinedConfidenceCalculator."""
-        with patch(
-            "api.ai.multidisease_api_handler.CombinedConfidenceCalculator"
-        ) as mock:
+        with patch("api.ai.multidisease_api_handler.CombinedConfidenceCalculator") as mock:
             yield mock
 
     @pytest.fixture
     def mock_question_generator(self):
         """Mock MultiDiseaseQuestionGenerator."""
-        with patch(
-            "api.ai.multidisease_api_handler.MultiDiseaseQuestionGenerator"
-        ) as mock:
+        with patch("api.ai.multidisease_api_handler.MultiDiseaseQuestionGenerator") as mock:
             yield mock
 
     @pytest.fixture
     def mock_question_ranker(self):
         """Mock DiscriminativeQuestionRanker."""
-        with patch(
-            "api.ai.multidisease_api_handler.DiscriminativeQuestionRanker"
-        ) as mock:
+        with patch("api.ai.multidisease_api_handler.DiscriminativeQuestionRanker") as mock:
             yield mock
 
     def test_analyze_without_cache_enabled(
@@ -110,9 +102,7 @@ class TestAPIHandlerCacheIntegration:
 
     def test_response_includes_cache_indicator(self, sample_data):
         """Test that response indicates if caching was used."""
-        with patch(
-            "api.ai.multidisease_api_handler.MultiDiseaseDetector"
-        ) as mock_detector:
+        with patch("api.ai.multidisease_api_handler.MultiDiseaseDetector") as mock_detector:
             mock_detector.should_explore_multidisease.return_value = False
 
             response = MultiDiseaseAnalyzer.analyze_for_multidisease(
@@ -141,9 +131,7 @@ class TestSymptomMappingBuilding:
             },
         ]
 
-        mapping = MultiDiseaseAnalyzer._build_symptom_mapping(
-            symptom_ids, disease_names, disease_database
-        )
+        mapping = MultiDiseaseAnalyzer._build_symptom_mapping(symptom_ids, disease_names, disease_database)
 
         assert "symptom1" in mapping
         assert "symptom2" in mapping
@@ -156,9 +144,7 @@ class TestSymptomMappingBuilding:
         disease_names = ["Disease A"]
         disease_database = []
 
-        mapping = MultiDiseaseAnalyzer._build_symptom_mapping(
-            symptom_ids, disease_names, disease_database
-        )
+        mapping = MultiDiseaseAnalyzer._build_symptom_mapping(symptom_ids, disease_names, disease_database)
 
         assert "symptom1" in mapping
         assert len(mapping["symptom1"]) == 0

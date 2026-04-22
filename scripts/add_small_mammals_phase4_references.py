@@ -24,7 +24,7 @@ SMALL_MAMMAL_REFERENCES = {
                 "journal": "Elsevier",
                 "year": 2021,
                 "doi": "10.1016/B978-0-323-66558-7.00001-4",
-                "evidence_level": "III"
+                "evidence_level": "III",
             },
             {
                 "pmid": "26535169",
@@ -33,8 +33,8 @@ SMALL_MAMMAL_REFERENCES = {
                 "journal": "BSAVA",
                 "year": 2016,
                 "doi": "10.22233/20160908",
-                "evidence_level": "III"
-            }
+                "evidence_level": "III",
+            },
         ]
     },
     "infectious": {
@@ -46,7 +46,7 @@ SMALL_MAMMAL_REFERENCES = {
                 "journal": "Journal of Exotic Pet Medicine",
                 "year": 2019,
                 "doi": "10.1053/j.jepm.2019.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -59,7 +59,7 @@ SMALL_MAMMAL_REFERENCES = {
                 "journal": "Veterinary Clinics of North America: Exotic Animal Practice",
                 "year": 2019,
                 "doi": "10.1016/j.cvex.2019.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -72,7 +72,7 @@ SMALL_MAMMAL_REFERENCES = {
                 "journal": "Journal of Exotic Pet Medicine",
                 "year": 2020,
                 "doi": "10.1053/j.jepm.2020.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
     },
@@ -85,73 +85,88 @@ SMALL_MAMMAL_REFERENCES = {
                 "journal": "Veterinary Clinics of North America: Exotic Animal Practice",
                 "year": 2020,
                 "doi": "10.1016/j.cvex.2020.01.001",
-                "evidence_level": "III"
+                "evidence_level": "III",
             }
         ]
-    }
+    },
 }
+
 
 def load_diseases_json(filepath):
     """Load diseases database"""
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_diseases_json(filepath, diseases):
     """Save diseases database"""
-    with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         json.dump(diseases, f, ensure_ascii=False, indent=2)
+
 
 def categorize_small_mammal_disease(disease_name):
     """Categorize small mammal disease based on name keywords"""
-    name = (disease_name or '').lower()
+    name = (disease_name or "").lower()
 
     keywords = {
-        'respiratory': ['respiratory', 'pneumonia', 'sinusitis', 'rhinitis', 'cough', 'airway', 'lung'],
-        'infectious': ['viral', 'bacterial', 'infection', 'sepsis', 'fever', 'virus', 'disease', 'parasitic', 'parasite'],
-        'nutritional': ['nutritional', 'vitamin', 'scurvy', 'metabolic', 'mbd', 'calcium', 'phosphorus', 'deficiency'],
-        'behavioral': ['behavior', 'self-injury', 'feather', 'aggress', 'scream', 'stress', 'anxiety', 'wound'],
+        "respiratory": ["respiratory", "pneumonia", "sinusitis", "rhinitis", "cough", "airway", "lung"],
+        "infectious": [
+            "viral",
+            "bacterial",
+            "infection",
+            "sepsis",
+            "fever",
+            "virus",
+            "disease",
+            "parasitic",
+            "parasite",
+        ],
+        "nutritional": ["nutritional", "vitamin", "scurvy", "metabolic", "mbd", "calcium", "phosphorus", "deficiency"],
+        "behavioral": ["behavior", "self-injury", "feather", "aggress", "scream", "stress", "anxiety", "wound"],
     }
 
     for category, kw_list in keywords.items():
         if any(kw in name for kw in kw_list):
             return category
 
-    return 'general'
+    return "general"
+
 
 def add_references_to_small_mammal_disease(disease):
     """Add references to a small mammal disease"""
-    small_mammal_species = ['Ferret', 'Chinchilla', 'Hamster', 'Guinea Pig', 'Hedgehog', 'Sugar Glider']
+    small_mammal_species = ["Ferret", "Chinchilla", "Hamster", "Guinea Pig", "Hedgehog", "Sugar Glider"]
 
-    if disease.get('species') not in small_mammal_species:
+    if disease.get("species") not in small_mammal_species:
         return False
 
     # Skip if already has references
-    if disease.get('prognosis_references', {}).get('references'):
+    if disease.get("prognosis_references", {}).get("references"):
         return False
 
     # Initialize reference fields
-    for ref_type in ['prognosis_references', 'rehabilitation_references', 'nutrition_references']:
+    for ref_type in ["prognosis_references", "rehabilitation_references", "nutrition_references"]:
         if ref_type not in disease:
-            disease[ref_type] = {'references': []}
+            disease[ref_type] = {"references": []}
 
     # Determine references to add
-    category = categorize_small_mammal_disease(disease.get('name'))
-    refs = SMALL_MAMMAL_REFERENCES.get(category, SMALL_MAMMAL_REFERENCES['general'])
+    category = categorize_small_mammal_disease(disease.get("name"))
+    refs = SMALL_MAMMAL_REFERENCES.get(category, SMALL_MAMMAL_REFERENCES["general"])
 
     # Add references
-    disease['prognosis_references']['references'] = refs['references'].copy()
-    if len(refs['references']) > 1:
-        disease['rehabilitation_references']['references'] = refs['references'][:1]
-        disease['nutrition_references']['references'] = refs['references'][1:2]
+    disease["prognosis_references"]["references"] = refs["references"].copy()
+    if len(refs["references"]) > 1:
+        disease["rehabilitation_references"]["references"] = refs["references"][:1]
+        disease["nutrition_references"]["references"] = refs["references"][1:2]
     else:
-        disease['rehabilitation_references']['references'] = refs['references'].copy()
-        disease['nutrition_references']['references'] = refs['references'].copy()
+        disease["rehabilitation_references"]["references"] = refs["references"].copy()
+        disease["nutrition_references"]["references"] = refs["references"].copy()
 
     return True
 
+
 def main():
     # File paths
-    db_path = os.path.join(os.path.dirname(__file__), '..', 'diseases_all_species.json')
+    db_path = os.path.join(os.path.dirname(__file__), "..", "diseases_all_species.json")
 
     print("=" * 80)
     print("Phase 4E: Small Mammals - Complete Reference Coverage")
@@ -161,11 +176,15 @@ def main():
     diseases = load_diseases_json(db_path)
 
     # Filter target diseases
-    small_mammal_species = ['Ferret', 'Chinchilla', 'Hamster', 'Guinea Pig', 'Hedgehog', 'Sugar Glider']
-    target_diseases = [d for d in diseases if d.get('species') in small_mammal_species and not d.get('prognosis_references', {}).get('references')]
+    small_mammal_species = ["Ferret", "Chinchilla", "Hamster", "Guinea Pig", "Hedgehog", "Sugar Glider"]
+    target_diseases = [
+        d
+        for d in diseases
+        if d.get("species") in small_mammal_species and not d.get("prognosis_references", {}).get("references")
+    ]
     print(f"\nTarget diseases (without references): {len(target_diseases)}")
     for species in small_mammal_species:
-        count = len([d for d in target_diseases if d.get('species') == species])
+        count = len([d for d in target_diseases if d.get("species") == species])
         if count > 0:
             print(f"  {species}: {count}")
 
@@ -188,11 +207,12 @@ def main():
 
     category_counts = {}
     for disease in target_diseases:
-        cat = categorize_small_mammal_disease(disease.get('name'))
+        cat = categorize_small_mammal_disease(disease.get("name"))
         category_counts[cat] = category_counts.get(cat, 0) + 1
 
     for cat, count in sorted(category_counts.items(), key=lambda x: -x[1]):
         print(f"  {cat}: {count} 疾患")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -20,221 +20,724 @@ JSON_PATH = os.path.join(ROOT, "diseases_all_species.json")
 
 _CATEGORY_KEYWORDS: dict[str, list[str]] = {
     "viral": [
-        "virus", "viral", "herpes", "parvo", "corona", "distemper", "influenza",
-        "calici", "retrovirus", "adenovirus", "polyoma", "pox", "borna",
-        "paramyxo", "rotavirus", "nidovirus", "reovirus", "fiv", "felv",
-        "hiv", "rabies", "myxomato", "ebola", "west nile", "encephalomyelit",
-        "hemorrhagic disease", "papillomatosis", "papilloma", "newcastle",
-        "pacheco", "french molt", "aleutian disease", "pbfd",
-        "beak and feather disease", "budgerigar fledgling", "inclusion body disease",
-        "ibd", "fledgling disease", "wasting disease",
+        "virus",
+        "viral",
+        "herpes",
+        "parvo",
+        "corona",
+        "distemper",
+        "influenza",
+        "calici",
+        "retrovirus",
+        "adenovirus",
+        "polyoma",
+        "pox",
+        "borna",
+        "paramyxo",
+        "rotavirus",
+        "nidovirus",
+        "reovirus",
+        "fiv",
+        "felv",
+        "hiv",
+        "rabies",
+        "myxomato",
+        "ebola",
+        "west nile",
+        "encephalomyelit",
+        "hemorrhagic disease",
+        "papillomatosis",
+        "papilloma",
+        "newcastle",
+        "pacheco",
+        "french molt",
+        "aleutian disease",
+        "pbfd",
+        "beak and feather disease",
+        "budgerigar fledgling",
+        "inclusion body disease",
+        "ibd",
+        "fledgling disease",
+        "wasting disease",
     ],
     "bacterial": [
-        "bacterial", "bacteria", "streptococc", "staphylococc", "clostrid",
-        "pasteurell", "bordetella", "mycobacter", "salmonell", "leptospir",
-        "chlamyd", "bartonell", "helicobacter", "campylobacter", "e. coli",
-        "escherichia", "borrelios", "tyzzer", "abscess", "pyometra", "septic",
-        "otitis", "kennel cough", "strangles", "glanders", "actinomyc",
-        "nocardia", "erysipel", "brucell", "listeri", "psittacosis",
-        "treponema", "syphilis", "pseudomonas", "tularemia", "yersinia",
-        "yersiniosis", "klebsiella", "cellulitis", "peritonitis", "tuberculosis",
-        "mycoplasma", "nocardiosis", "proliferative enteropathy", "lawsonia",
-        "proliferative bowel", "wet tail", "proliferative ileitis",
-        "aeromonas", "citrobacter", "rickettsial", "pneumocystis",
-        "vent disease", "cervical lymphadenitis", "air sacculit",
-        "salpingitis", "scent gland infection", "pouch infection",
-        "ear infection", "feather follicle infection", "flagellate",
-        "entamoeba", "red leg syndrome", "dermocystidium",
-        "chrysosporium", "canv", "nannizziopsis", "ichthyophonus",
-        "mycoplasma agassizii", "infectious disease",
-        "neonatal infection", "beak rot",
+        "bacterial",
+        "bacteria",
+        "streptococc",
+        "staphylococc",
+        "clostrid",
+        "pasteurell",
+        "bordetella",
+        "mycobacter",
+        "salmonell",
+        "leptospir",
+        "chlamyd",
+        "bartonell",
+        "helicobacter",
+        "campylobacter",
+        "e. coli",
+        "escherichia",
+        "borrelios",
+        "tyzzer",
+        "abscess",
+        "pyometra",
+        "septic",
+        "otitis",
+        "kennel cough",
+        "strangles",
+        "glanders",
+        "actinomyc",
+        "nocardia",
+        "erysipel",
+        "brucell",
+        "listeri",
+        "psittacosis",
+        "treponema",
+        "syphilis",
+        "pseudomonas",
+        "tularemia",
+        "yersinia",
+        "yersiniosis",
+        "klebsiella",
+        "cellulitis",
+        "peritonitis",
+        "tuberculosis",
+        "mycoplasma",
+        "nocardiosis",
+        "proliferative enteropathy",
+        "lawsonia",
+        "proliferative bowel",
+        "wet tail",
+        "proliferative ileitis",
+        "aeromonas",
+        "citrobacter",
+        "rickettsial",
+        "pneumocystis",
+        "vent disease",
+        "cervical lymphadenitis",
+        "air sacculit",
+        "salpingitis",
+        "scent gland infection",
+        "pouch infection",
+        "ear infection",
+        "feather follicle infection",
+        "flagellate",
+        "entamoeba",
+        "red leg syndrome",
+        "dermocystidium",
+        "chrysosporium",
+        "canv",
+        "nannizziopsis",
+        "ichthyophonus",
+        "mycoplasma agassizii",
+        "infectious disease",
+        "neonatal infection",
+        "beak rot",
     ],
     "fungal": [
-        "fungal", "fungus", "mycosis", "aspergill", "candida", "dermatophyt",
-        "ringworm", "malassezia", "cryptococcus", "histoplasm", "blastomyc",
-        "sporotrich", "zygomyc", "mucormyc", "saprolegn", "chromomyc",
-        "megabacteriosis", "macrorhabdus",
-        "candidiasis", "cryptococcosis", "oral candidiasis",
-        "batrachochytrium", "bsal",
+        "fungal",
+        "fungus",
+        "mycosis",
+        "aspergill",
+        "candida",
+        "dermatophyt",
+        "ringworm",
+        "malassezia",
+        "cryptococcus",
+        "histoplasm",
+        "blastomyc",
+        "sporotrich",
+        "zygomyc",
+        "mucormyc",
+        "saprolegn",
+        "chromomyc",
+        "megabacteriosis",
+        "macrorhabdus",
+        "candidiasis",
+        "cryptococcosis",
+        "oral candidiasis",
+        "batrachochytrium",
+        "bsal",
     ],
     "parasitic": [
-        "parasit", "mite", "flea", "tick", "worm", "coccidia", "giardia",
-        "cryptosporid", "toxoplasm", "mange", "demodex", "sarcoptes",
-        "encephalitozoon", "nematode", "cestode", "trematode", "hookworm",
-        "roundworm", "whipworm", "heartworm", "pinworm", "tapeworm",
-        "strongyl", "ascarid", "cuterebra", "myiasis", "flystrike",
-        "acariasis", "cheyletiella", "caparinia", "ixodes", "babesia",
-        "leishmania", "trypanosoma", "theileria", "haemoproteus",
-        "coccidiosis", "leishmaniosis", "leucocytozoon", "sarcocyst",
-        "cnemidocoptes", "scaly face", "plasmodium", "malaria",
-        "static lice", "gliricola", "enteric flagellate",
+        "parasit",
+        "mite",
+        "flea",
+        "tick",
+        "worm",
+        "coccidia",
+        "giardia",
+        "cryptosporid",
+        "toxoplasm",
+        "mange",
+        "demodex",
+        "sarcoptes",
+        "encephalitozoon",
+        "nematode",
+        "cestode",
+        "trematode",
+        "hookworm",
+        "roundworm",
+        "whipworm",
+        "heartworm",
+        "pinworm",
+        "tapeworm",
+        "strongyl",
+        "ascarid",
+        "cuterebra",
+        "myiasis",
+        "flystrike",
+        "acariasis",
+        "cheyletiella",
+        "caparinia",
+        "ixodes",
+        "babesia",
+        "leishmania",
+        "trypanosoma",
+        "theileria",
+        "haemoproteus",
+        "coccidiosis",
+        "leishmaniosis",
+        "leucocytozoon",
+        "sarcocyst",
+        "cnemidocoptes",
+        "scaly face",
+        "plasmodium",
+        "malaria",
+        "static lice",
+        "gliricola",
+        "enteric flagellate",
     ],
     "neoplastic": [
-        "tumor", "tumour", "cancer", "neoplas", "carcinoma", "lymphoma",
-        "sarcoma", "melanoma", "adenoma", "fibroma", "lipoma", "mesothelioma",
-        "hemangio", "mast cell", "leukemia", "malignant", "benign mass",
-        "thymoma", "insulinoma", "pheochromocytoma", "osteosarcoma",
-        "chondrosarcoma", "squamous cell", "basal cell", "schwannoma",
-        "meningioma", "glioma", "seminoma", "leiomyoma",
-        "plasmacytoma", "trichoblastoma", "trichoepithelioma",
-        "trichofolliculoma", "chordoma", "polyfolliculosis",
+        "tumor",
+        "tumour",
+        "cancer",
+        "neoplas",
+        "carcinoma",
+        "lymphoma",
+        "sarcoma",
+        "melanoma",
+        "adenoma",
+        "fibroma",
+        "lipoma",
+        "mesothelioma",
+        "hemangio",
+        "mast cell",
+        "leukemia",
+        "malignant",
+        "benign mass",
+        "thymoma",
+        "insulinoma",
+        "pheochromocytoma",
+        "osteosarcoma",
+        "chondrosarcoma",
+        "squamous cell",
+        "basal cell",
+        "schwannoma",
+        "meningioma",
+        "glioma",
+        "seminoma",
+        "leiomyoma",
+        "plasmacytoma",
+        "trichoblastoma",
+        "trichoepithelioma",
+        "trichofolliculoma",
+        "chordoma",
+        "polyfolliculosis",
         "choanal papilloma",
     ],
     "metabolic": [
-        "metaboli", "diabet", "hypothyroid", "hyperthyroid", "cushing",
-        "addison", "hypoglycemia", "hyperglycemia", "ketoacidosis",
-        "hypercalcemia", "hypocalcemia", "hyperkalemia", "hypokalemia",
-        "acidosis", "alkalosis", "gout", "amyloid", "hemochromatosis",
-        "insulin", "adrenal", "pituitary", "thyroid", "hyperparathyroid",
-        "hypoparathyroid", "hepatic lipidosis", "fatty liver", "lipidosis",
-        "ketosis", "hyperphosphatemia", "hyperadrenocorticism",
-        "endocrine", "hypernatremia", "hyponatremia", "hypersplenism",
+        "metaboli",
+        "diabet",
+        "hypothyroid",
+        "hyperthyroid",
+        "cushing",
+        "addison",
+        "hypoglycemia",
+        "hyperglycemia",
+        "ketoacidosis",
+        "hypercalcemia",
+        "hypocalcemia",
+        "hyperkalemia",
+        "hypokalemia",
+        "acidosis",
+        "alkalosis",
+        "gout",
+        "amyloid",
+        "hemochromatosis",
+        "insulin",
+        "adrenal",
+        "pituitary",
+        "thyroid",
+        "hyperparathyroid",
+        "hypoparathyroid",
+        "hepatic lipidosis",
+        "fatty liver",
+        "lipidosis",
+        "ketosis",
+        "hyperphosphatemia",
+        "hyperadrenocorticism",
+        "endocrine",
+        "hypernatremia",
+        "hyponatremia",
+        "hypersplenism",
         "atherosclerosis",
     ],
     "nutritional": [
-        "deficien", "nutrit", "vitamin", "malnutrit", "hypovitamin",
-        "hypervitamin", "scurvy", "rickets", "mbd", "calcium", "phosphorus",
-        "iodine", "iron storage", "obesity", "anorexia", "cachexia",
-        "thiamine", "selenium", "copper", "zinc defic",
-        "failure to thrive", "muscle wasting", "dehydration",
+        "deficien",
+        "nutrit",
+        "vitamin",
+        "malnutrit",
+        "hypovitamin",
+        "hypervitamin",
+        "scurvy",
+        "rickets",
+        "mbd",
+        "calcium",
+        "phosphorus",
+        "iodine",
+        "iron storage",
+        "obesity",
+        "anorexia",
+        "cachexia",
+        "thiamine",
+        "selenium",
+        "copper",
+        "zinc defic",
+        "failure to thrive",
+        "muscle wasting",
+        "dehydration",
     ],
     "toxic": [
-        "toxic", "poison", "toxicosis", "intoxicat", "envenomation",
-        "aflatoxin", "lead poison", "zinc toxic", "organophosph",
-        "anticoagulant rodenticide", "plant toxic", "heavy metal",
-        "pyrethrin", "ivermectin toxic", "nsaid toxic", "chocolate",
-        "xylitol", "lily toxic", "acetaminophen",
-        "enterotoxemia", "dysbiosis",
+        "toxic",
+        "poison",
+        "toxicosis",
+        "intoxicat",
+        "envenomation",
+        "aflatoxin",
+        "lead poison",
+        "zinc toxic",
+        "organophosph",
+        "anticoagulant rodenticide",
+        "plant toxic",
+        "heavy metal",
+        "pyrethrin",
+        "ivermectin toxic",
+        "nsaid toxic",
+        "chocolate",
+        "xylitol",
+        "lily toxic",
+        "acetaminophen",
+        "enterotoxemia",
+        "dysbiosis",
     ],
     "traumatic": [
-        "trauma", "fracture", "injury", "wound", "burn", "bite wound",
-        "laceration", "contusion", "luxation", "dislocation", "prolapse",
-        "rupture", "perforation", "tear", "avulsion", "foreign body",
-        "heatstroke", "hypothermia", "frostbite", "drowning", "electrocution",
-        "shell fracture", "beak fracture", "tail degloving",
-        "heat stroke", "hyperthermia", "thermal shock", "constriction band",
-        "toe necrosis", "tail necrosis", "toe loss", "necrosis",
-        "retained shed", "dysecdysis", "retained spectacle",
-        "spectacle retention", "fur slip", "hay poke",
-        "desiccation", "gas bubble disease", "thread", "tourniquet",
-        "hypovolemic shock", "stroke",
+        "trauma",
+        "fracture",
+        "injury",
+        "wound",
+        "burn",
+        "bite wound",
+        "laceration",
+        "contusion",
+        "luxation",
+        "dislocation",
+        "prolapse",
+        "rupture",
+        "perforation",
+        "tear",
+        "avulsion",
+        "foreign body",
+        "heatstroke",
+        "hypothermia",
+        "frostbite",
+        "drowning",
+        "electrocution",
+        "shell fracture",
+        "beak fracture",
+        "tail degloving",
+        "heat stroke",
+        "hyperthermia",
+        "thermal shock",
+        "constriction band",
+        "toe necrosis",
+        "tail necrosis",
+        "toe loss",
+        "necrosis",
+        "retained shed",
+        "dysecdysis",
+        "retained spectacle",
+        "spectacle retention",
+        "fur slip",
+        "hay poke",
+        "desiccation",
+        "gas bubble disease",
+        "thread",
+        "tourniquet",
+        "hypovolemic shock",
+        "stroke",
     ],
     "dental": [
-        "dental", "tooth", "molar", "incisor", "periodontal", "malocclusion",
-        "slobbers", "stomatitis", "gingivitis", "oral mass", "epulis",
-        "tooth root", "dental abscess", "jaw", "mandibular", "maxillary",
-        "beak overgrowth", "nail overgrowth", "hoof overgrowth",
+        "dental",
+        "tooth",
+        "molar",
+        "incisor",
+        "periodontal",
+        "malocclusion",
+        "slobbers",
+        "stomatitis",
+        "gingivitis",
+        "oral mass",
+        "epulis",
+        "tooth root",
+        "dental abscess",
+        "jaw",
+        "mandibular",
+        "maxillary",
+        "beak overgrowth",
+        "nail overgrowth",
+        "hoof overgrowth",
         "nasal hyperkeratosis",
     ],
     "autoimmune": [
-        "autoimmun", "immune-mediat", "pemphigus", "lupus", "immunodeficien",
-        "allergic", "allergy", "atopic", "anaphyla", "hypersensitiv",
-        "immune thrombocytopenia", "imha", "itp", "myasthenia",
-        "eosinophilic granuloma", "transfusion reaction",
+        "autoimmun",
+        "immune-mediat",
+        "pemphigus",
+        "lupus",
+        "immunodeficien",
+        "allergic",
+        "allergy",
+        "atopic",
+        "anaphyla",
+        "hypersensitiv",
+        "immune thrombocytopenia",
+        "imha",
+        "itp",
+        "myasthenia",
+        "eosinophilic granuloma",
+        "transfusion reaction",
     ],
     "cardiovascular": [
-        "cardiac", "heart", "cardiomyopath", "arrhythm", "murmur",
-        "pericardial", "endocardit", "congestive", "hypertension",
-        "thromboembol", "aortic", "mitral", "tricuspid", "atrial",
-        "ventricular", "myocarditis", "vasculitis",
+        "cardiac",
+        "heart",
+        "cardiomyopath",
+        "arrhythm",
+        "murmur",
+        "pericardial",
+        "endocardit",
+        "congestive",
+        "hypertension",
+        "thromboembol",
+        "aortic",
+        "mitral",
+        "tricuspid",
+        "atrial",
+        "ventricular",
+        "myocarditis",
+        "vasculitis",
         "chylothorax",
     ],
     "respiratory": [
-        "pneumonia", "respiratory", "bronchit", "asthma", "pleural",
-        "rhinitis", "sinusitis", "tracheitis", "dyspnea", "pulmonary",
-        "pneumothorax", "pyothorax", "aspiration", "tracheal collapse",
-        "laryngeal", "brachycephalic airway",
-        "air sac cyst", "tracheal stenosis", "stenotic nares",
-        "nasopharyngeal stenosis", "lung lobe consolidation",
+        "pneumonia",
+        "respiratory",
+        "bronchit",
+        "asthma",
+        "pleural",
+        "rhinitis",
+        "sinusitis",
+        "tracheitis",
+        "dyspnea",
+        "pulmonary",
+        "pneumothorax",
+        "pyothorax",
+        "aspiration",
+        "tracheal collapse",
+        "laryngeal",
+        "brachycephalic airway",
+        "air sac cyst",
+        "tracheal stenosis",
+        "stenotic nares",
+        "nasopharyngeal stenosis",
+        "lung lobe consolidation",
         "runny nose syndrome",
     ],
     "renal": [
-        "renal", "kidney", "nephrit", "urolithiasis", "cystitis", "urinary",
-        "bladder", "urolith", "nephropathy", "glomerulo", "pyelonephrit",
-        "hydronephrosis", "polycystic kidney", "ckd", "aki",
-        "nephrocalcinosis", "uroabdomen",
+        "renal",
+        "kidney",
+        "nephrit",
+        "urolithiasis",
+        "cystitis",
+        "urinary",
+        "bladder",
+        "urolith",
+        "nephropathy",
+        "glomerulo",
+        "pyelonephrit",
+        "hydronephrosis",
+        "polycystic kidney",
+        "ckd",
+        "aki",
+        "nephrocalcinosis",
+        "uroabdomen",
     ],
     "gastrointestinal": [
-        "gastric", "intestin", "enteritis", "colitis", "bloat", "stasis",
-        "ileus", "obstruct", "impaction", "constipat", "diarrhea",
-        "gastroenter", "pancreatit", "hepatic", "liver", "cholangitis",
-        "megacolon", "intussusception", "cecal", "crop", "proventric",
-        "cloac", "esophag", "megaesophagus", "regurgit",
-        "trichobezoar", "ascites", "hepatitis", "pyloric stenosis",
-        "inflammatory bowel", "salivary mucocele", "perianal fistula",
-        "rectal polyp", "chronic vomiting", "protein-losing enteropathy",
-        "pancreatic exocrine", "exocrine pancreatic",
+        "gastric",
+        "intestin",
+        "enteritis",
+        "colitis",
+        "bloat",
+        "stasis",
+        "ileus",
+        "obstruct",
+        "impaction",
+        "constipat",
+        "diarrhea",
+        "gastroenter",
+        "pancreatit",
+        "hepatic",
+        "liver",
+        "cholangitis",
+        "megacolon",
+        "intussusception",
+        "cecal",
+        "crop",
+        "proventric",
+        "cloac",
+        "esophag",
+        "megaesophagus",
+        "regurgit",
+        "trichobezoar",
+        "ascites",
+        "hepatitis",
+        "pyloric stenosis",
+        "inflammatory bowel",
+        "salivary mucocele",
+        "perianal fistula",
+        "rectal polyp",
+        "chronic vomiting",
+        "protein-losing enteropathy",
+        "pancreatic exocrine",
+        "exocrine pancreatic",
     ],
     "reproductive": [
-        "reproduct", "dystocia", "mastitis", "metritis", "pregnancy",
-        "testicular", "ovarian", "uterine", "mammary", "eclampsia",
-        "infertil", "egg binding", "egg yolk", "penile", "vaginal",
-        "vulvar", "cryptorchid", "phimosis", "paraphimosis",
-        "orchitis", "endometrial hyperplasia", "agalactia", "aborted litter",
-        "cystic ovary", "egg peritonitis", "chronic egg laying",
-        "retained egg", "salpingit", "neonatal mortality", "vaginitis",
-        "prostatic", "prostate", "egg retention", "chronic egg lay",
+        "reproduct",
+        "dystocia",
+        "mastitis",
+        "metritis",
+        "pregnancy",
+        "testicular",
+        "ovarian",
+        "uterine",
+        "mammary",
+        "eclampsia",
+        "infertil",
+        "egg binding",
+        "egg yolk",
+        "penile",
+        "vaginal",
+        "vulvar",
+        "cryptorchid",
+        "phimosis",
+        "paraphimosis",
+        "orchitis",
+        "endometrial hyperplasia",
+        "agalactia",
+        "aborted litter",
+        "cystic ovary",
+        "egg peritonitis",
+        "chronic egg laying",
+        "retained egg",
+        "salpingit",
+        "neonatal mortality",
+        "vaginitis",
+        "prostatic",
+        "prostate",
+        "egg retention",
+        "chronic egg lay",
         "egg layer syndrome",
     ],
     "neurological": [
-        "neurolog", "seizure", "epilepsy", "vestibular", "encephalit",
-        "meningit", "neuropath", "paralysis", "paresis", "ataxia",
-        "myelopath", "intervertebral", "ivdd", "disc disease", "spondylosis",
-        "head tilt", "tremor", "torticollis", "hydrocephalus", "syringomyelia",
-        "wobbler", "cauda equina", "lumbosacral stenosis", "dysautonomia",
-        "cognitive dysfunction", "chiari", "atlantoaxial", "manx syndrome",
-        "spinal arachnoid", "dancing doberman", "multisystem degeneration",
+        "neurolog",
+        "seizure",
+        "epilepsy",
+        "vestibular",
+        "encephalit",
+        "meningit",
+        "neuropath",
+        "paralysis",
+        "paresis",
+        "ataxia",
+        "myelopath",
+        "intervertebral",
+        "ivdd",
+        "disc disease",
+        "spondylosis",
+        "head tilt",
+        "tremor",
+        "torticollis",
+        "hydrocephalus",
+        "syringomyelia",
+        "wobbler",
+        "cauda equina",
+        "lumbosacral stenosis",
+        "dysautonomia",
+        "cognitive dysfunction",
+        "chiari",
+        "atlantoaxial",
+        "manx syndrome",
+        "spinal arachnoid",
+        "dancing doberman",
+        "multisystem degeneration",
     ],
     "dermatological": [
-        "dermatit", "skin", "alopecia", "pyoderma", "folliculit",
-        "acne", "sebaceous", "eczema", "pruritus", "hot spot",
-        "pododermatit", "bumblefoot", "shell rot", "scale rot",
-        "feather cyst", "xanthoma", "cutaneous",
-        "blister disease", "algae growth", "cere hypertrophy",
-        "flank gland hyperplasia", "scent gland hyperplasia",
-        "scent gland inflammation", "interdigital cyst", "furuncle",
-        "wing tip edema", "nasal bridge swelling", "periorbital swelling", "feather follicle cyst",
-        "boar glue", "grease gland",
+        "dermatit",
+        "skin",
+        "alopecia",
+        "pyoderma",
+        "folliculit",
+        "acne",
+        "sebaceous",
+        "eczema",
+        "pruritus",
+        "hot spot",
+        "pododermatit",
+        "bumblefoot",
+        "shell rot",
+        "scale rot",
+        "feather cyst",
+        "xanthoma",
+        "cutaneous",
+        "blister disease",
+        "algae growth",
+        "cere hypertrophy",
+        "flank gland hyperplasia",
+        "scent gland hyperplasia",
+        "scent gland inflammation",
+        "interdigital cyst",
+        "furuncle",
+        "wing tip edema",
+        "nasal bridge swelling",
+        "periorbital swelling",
+        "feather follicle cyst",
+        "boar glue",
+        "grease gland",
     ],
     "ophthalmic": [
-        "ophthalm", "cataract", "glaucoma", "uveitis", "corneal",
-        "conjunctivit", "keratitis", "eye", "retinal", "proptosis",
-        "entropion", "ectropion", "cherry eye", "iris", "lens luxation",
-        "panophthalmitis", "dacryocystitis",
-        "symblepharon", "pseudopterygium", "conjunctival overgrowth",
+        "ophthalm",
+        "cataract",
+        "glaucoma",
+        "uveitis",
+        "corneal",
+        "conjunctivit",
+        "keratitis",
+        "eye",
+        "retinal",
+        "proptosis",
+        "entropion",
+        "ectropion",
+        "cherry eye",
+        "iris",
+        "lens luxation",
+        "panophthalmitis",
+        "dacryocystitis",
+        "symblepharon",
+        "pseudopterygium",
+        "conjunctival overgrowth",
         "cholesteatoma",
     ],
     "orthopedic": [
-        "arthrit", "osteo", "dysplasia", "luxat", "tendon", "ligament",
-        "lameness", "laminitis", "navicular", "spavin", "splint",
-        "bone", "joint", "synovitis", "bursitis", "cruciate",
-        "patellar", "hip", "elbow", "spondyl", "kyphosis", "lordosis",
+        "arthrit",
+        "osteo",
+        "dysplasia",
+        "luxat",
+        "tendon",
+        "ligament",
+        "lameness",
+        "laminitis",
+        "navicular",
+        "spavin",
+        "splint",
+        "bone",
+        "joint",
+        "synovitis",
+        "bursitis",
+        "cruciate",
+        "patellar",
+        "hip",
+        "elbow",
+        "spondyl",
+        "kyphosis",
+        "lordosis",
         "pyramiding",
-        "pes varus", "orthopedic", "foot rot",
+        "pes varus",
+        "orthopedic",
+        "foot rot",
     ],
     "congenital": [
-        "congeni", "genetic", "heredit", "inherited", "developmental",
-        "portosystemic shunt", "cleft", "atresia", "ectopic", "patent ductus",
-        "megaesophagus congenital", "polydactyly",
+        "congeni",
+        "genetic",
+        "heredit",
+        "inherited",
+        "developmental",
+        "portosystemic shunt",
+        "cleft",
+        "atresia",
+        "ectopic",
+        "patent ductus",
+        "megaesophagus congenital",
+        "polydactyly",
         "hernia",
     ],
     "behavioral": [
-        "behavior", "stress", "anxiety", "aggression", "self-mutilat",
-        "feather pluck", "fur chew", "bar chew", "pica", "stereotyp",
-        "overgrooming", "compulsive", "phobia", "separation anxiety",
-        "vocalization", "screaming", "barking", "hibernation attempt",
-        "torpor", "nocturnal vocalization",
+        "behavior",
+        "stress",
+        "anxiety",
+        "aggression",
+        "self-mutilat",
+        "feather pluck",
+        "fur chew",
+        "bar chew",
+        "pica",
+        "stereotyp",
+        "overgrooming",
+        "compulsive",
+        "phobia",
+        "separation anxiety",
+        "vocalization",
+        "screaming",
+        "barking",
+        "hibernation attempt",
+        "torpor",
+        "nocturnal vocalization",
     ],
     "hematological": [
-        "anemia", "anaemia", "thrombocytopenia", "polycythemia",
-        "pancytopenia", "hemolytic", "disseminated intravascular",
-        "coagulation", "splenomegaly", "splenic enlargement",
-        "hematological", "red urine", "polyuria", "polydipsia",
-        "multi-organ failure", "chronic wasting", "axolotl floating",
-        "temporal gland", "apocrine gland cyst", "anal gland",
+        "anemia",
+        "anaemia",
+        "thrombocytopenia",
+        "polycythemia",
+        "pancytopenia",
+        "hemolytic",
+        "disseminated intravascular",
+        "coagulation",
+        "splenomegaly",
+        "splenic enlargement",
+        "hematological",
+        "red urine",
+        "polyuria",
+        "polydipsia",
+        "multi-organ failure",
+        "chronic wasting",
+        "axolotl floating",
+        "temporal gland",
+        "apocrine gland cyst",
+        "anal gland",
         "disseminated idiopathic myofasciitis",
-        "sialometaplasia", "edema", "anasarca", "splenic torsion",
-        "hemorrhagic syndrome", "lymph sac",
+        "sialometaplasia",
+        "edema",
+        "anasarca",
+        "splenic torsion",
+        "hemorrhagic syndrome",
+        "lymph sac",
     ],
 }
 
@@ -271,7 +774,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。"
         "自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が"
         "免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、"
-        "免疫抑制により二次的な細菌・真菌感染のリスクが高まる。"
+        "免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
     ),
     "bacterial": (
         "{name} is a bacterial infection in {species}. {desc} "
@@ -287,7 +790,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "免疫回避戦略などの病原性メカニズムを介して侵入する。"
         "好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。"
         "組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。"
-        "菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。"
+        "菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
     ),
     "fungal": (
         "{name} is a fungal infection in {species}. {desc} "
@@ -302,7 +805,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、"
         "肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。"
         "感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。"
-        "慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。"
+        "慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
     ),
     "parasitic": (
         "{name} is a parasitic condition in {species}. {desc} "
@@ -318,7 +821,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、"
         "宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、"
         "機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。"
-        "重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。"
+        "重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
     ),
     "neoplastic": (
         "{name} is a neoplastic condition in {species}. {desc} "
@@ -334,7 +837,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、"
         "局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または"
         "血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの"
-        "腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。"
+        "腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
     ),
     "metabolic": (
         "{name} is a metabolic/endocrine disorder in {species}. {desc} "
@@ -349,7 +852,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が"
         "複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に"
         "恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と"
-        "多臓器への影響を引き起こす。"
+        "多臓器への影響を引き起こす。",
     ),
     "nutritional": (
         "{name} is a nutritional disorder in {species}. {desc} "
@@ -364,7 +867,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする"
         "生化学的経路が障害され、細胞機能障害を引き起こす。"
         "過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。"
-        "種特異的な食事要求により、適切な栄養管理が予防に不可欠である。"
+        "種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
     ),
     "toxic": (
         "{name} is a toxicological condition in {species}. {desc} "
@@ -380,7 +883,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "特定のメカニズムを通じて細胞プロセスを障害する。"
         "標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、"
         "神経系、消化管が一般的である。用量依存的に無症候性変化から"
-        "劇症型臓器不全まで幅広い影響を及ぼす。"
+        "劇症型臓器不全まで幅広い影響を及ぼす。",
     ),
     "traumatic": (
         "{name} is a traumatic/mechanical condition in {species}. {desc} "
@@ -395,7 +898,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。"
         "重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、"
         "進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、"
-        "リモデリングの各段階を経る。"
+        "リモデリングの各段階を経る。",
     ),
     "dental": (
         "{name} is a dental/oral condition in {species}. {desc} "
@@ -410,7 +913,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "異常な歯の成長・摩耗パターンは不正咬合、歯根伸長、根尖膿瘍形成を"
         "引き起こしうる。歯周病は細菌バイオフィルムの蓄積、歯肉炎症、"
         "歯周付着の進行性喪失を伴う。歯科疾患による疼痛は食欲低下、"
-        "選択的摂食、体重減少、流涎として現れることが多い。"
+        "選択的摂食、体重減少、流涎として現れることが多い。",
     ),
     "autoimmune": (
         "{name} is an immune-mediated condition in {species}. {desc} "
@@ -425,7 +928,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "自己免疫疾患では自己寛容の喪失により抗体または細胞性免疫による"
         "宿主組織の破壊が生じる。アレルギー疾患ではIgE介在性または"
         "遅延型過敏反応により組織炎症が生じる。慢性炎症過程はT細胞調節障害、"
-        "自己抗体産生、補体活性化、標的臓器の進行性組織損傷を伴う。"
+        "自己抗体産生、補体活性化、標的臓器の進行性組織損傷を伴う。",
     ),
     "cardiovascular": (
         "{name} is a cardiovascular disorder in {species}. {desc} "
@@ -441,7 +944,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "心拍出量の低下、弁膜機能障害、調律異常により組織灌流が障害される。"
         "代償機構（神経ホルモン活性化、心室リモデリング）が一時的に機能を維持するが、"
         "進行性の心筋劣化を引き起こす。心不全、血栓塞栓症、突然死が"
-        "進行期疾患の潜在的結果である。"
+        "進行期疾患の潜在的結果である。",
     ),
     "respiratory": (
         "{name} is a respiratory disorder in {species}. {desc} "
@@ -456,7 +959,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "ガス交換の障害により低酸素血症および高炭酸ガス血症の可能性がある。"
         "炎症性滲出液、粘液蓄積、構造変化が有効な換気を低下させる。"
         "代償性頻呼吸により呼吸仕事量と代謝要求が増加する。"
-        "重症例は呼吸不全に進行し緊急介入が必要となりうる。"
+        "重症例は呼吸不全に進行し緊急介入が必要となりうる。",
     ),
     "renal": (
         "{name} is a renal/urinary disorder in {species}. {desc} "
@@ -471,7 +974,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "腎疾患は糸球体濾過、尿細管再吸収・分泌、およびホルモン機能"
         "（エリスロポエチン、カルシトリオール、レニン）を障害する。"
         "進行性のネフロン喪失により高窒素血症、電解質異常、酸塩基障害が生じる。"
-        "下部尿路疾患は閉塞、尿石症、上行感染を引き起こしうる。"
+        "下部尿路疾患は閉塞、尿石症、上行感染を引き起こしうる。",
     ),
     "gastrointestinal": (
         "{name} is a gastrointestinal disorder in {species}. {desc} "
@@ -486,7 +989,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、"
         "細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または"
         "亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸"
-        "フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。"
+        "フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
     ),
     "reproductive": (
         "{name} is a reproductive disorder in {species}. {desc} "
@@ -502,7 +1005,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "性ホルモンの調節障害は生殖器官の嚢胞性変化、過形成、または腫瘍形成を"
         "引き起こしうる。産科的合併症は機械的閉塞や代謝異常を引き起こし、"
         "母体と産子の両方を脅かす。生殖器の二次細菌感染は全身性敗血症に"
-        "進行しうる。"
+        "進行しうる。",
     ),
     "neurological": (
         "{name} is a neurological disorder in {species}. {desc} "
@@ -518,7 +1021,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "解剖学的位置に応じて運動機能、感覚処理、自律神経調節、"
         "認知状態に影響を及ぼす。脱髄、軸索変性、ニューロン喪失は"
         "不可逆的な場合がある。浮腫や腫瘤性病変による頭蓋内圧亢進は"
-        "脳幹ヘルニアを引き起こしうる。"
+        "脳幹ヘルニアを引き起こしうる。",
     ),
     "dermatological": (
         "{name} is a dermatological condition in {species}. {desc} "
@@ -533,7 +1036,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が"
         "促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が"
         "掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、"
-        "苔癬化、色素沈着、線維化が生じる。"
+        "苔癬化、色素沈着、線維化が生じる。",
     ),
     "ophthalmic": (
         "{name} is an ophthalmic condition in {species}. {desc} "
@@ -547,7 +1050,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "眼球、付属器、または視覚経路に影響を及ぼす炎症性、変性、"
         "または構造的変化を伴う。眼内炎症は血液房水関門・血液網膜関門を破壊し、"
         "蛋白漏出、細胞浸潤、視力喪失の可能性がある。眼圧上昇は視神経と"
-        "網膜神経節細胞を損傷する。角膜潰瘍はデスメ膜瘤や穿孔に進行しうる。"
+        "網膜神経節細胞を損傷する。角膜潰瘍はデスメ膜瘤や穿孔に進行しうる。",
     ),
     "orthopedic": (
         "{name} is an orthopedic/musculoskeletal condition in {species}. {desc} "
@@ -561,7 +1064,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "骨、関節、または支持軟部組織の構造的損傷、変性変化、"
         "発達異常を伴う。軟骨変性、軟骨下骨リモデリング、滑膜炎が"
         "関節疾患を特徴づける。腱・靭帯損傷は機械的安定性を障害する。"
-        "疼痛、跛行、運動性低下がQOLに大きく影響する特徴的な臨床徴候である。"
+        "疼痛、跛行、運動性低下がQOLに大きく影響する特徴的な臨床徴候である。",
     ),
     "congenital": (
         "{name} is a congenital/genetic condition in {species}. {desc} "
@@ -576,7 +1079,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、"
         "構造タンパク質、調節経路に影響しうる。出生時に存在するか、"
         "動物の成長に伴い発現する場合がある。選択的交配により"
-        "特定の品種・系統で遺伝性疾患の有病率が高まることがある。"
+        "特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
     ),
     "behavioral": (
         "{name} is a behavioral condition in {species}. {desc} "
@@ -593,7 +1096,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、"
         "基礎疾患が行動異常を惹起・悪化させることがある。"
         "慢性ストレスは視床下部-下垂体-副腎系を活性化し、"
-        "コルチゾール上昇と免疫抑制を引き起こす。"
+        "コルチゾール上昇と免疫抑制を引き起こす。",
     ),
     "hematological": (
         "{name} is a hematological/systemic condition in {species}. {desc} "
@@ -609,7 +1112,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "骨髄障害、脾臓隔離、消費性凝固障害、末梢破壊機構が関与しうる。"
         "酸素運搬能の低下（貧血）、止血不全（血小板減少症、DIC）、"
         "異常な細胞増殖（多血症）により組織灌流と臓器機能が障害される。"
-        "肝、腎、心血管系の二次的臓器障害が発生しうる。"
+        "肝、腎、心血管系の二次的臓器障害が発生しうる。",
     ),
     "general": (
         "{name} is a clinical condition affecting {species}. {desc} "
@@ -625,7 +1128,7 @@ _PATHO_TEMPLATES: dict[str, tuple[str, str]] = {
         "細胞障害は炎症メディエーター放出、免疫活性化、代償性生理的調整を含む"
         "局所的・全身的応答を惹起する。疾患の進行は継続的な組織損傷と"
         "生体の修復能力のバランスに依存する。適切な介入がなければ、"
-        "線維化、機能障害、二次的合併症を含む慢性変化が生じうる。"
+        "線維化、機能障害、二次的合併症を含む慢性変化が生じうる。",
     ),
 }
 
@@ -643,7 +1146,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "解熱鎮痛薬で発熱と不快感を管理する。広域抗菌薬で二次細菌感染を予防・治療する。"
         "食欲不振時の補助給餌を含む栄養サポートが不可欠である。"
         "免疫賦活剤やインターフェロンが有効な場合がある。"
-        "感受性個体への伝播防止のため罹患個体を隔離する。"
+        "感受性個体への伝播防止のため罹患個体を隔離する。",
     ),
     "bacterial": (
         "Treatment of {name_l} in {species_l} requires targeted antimicrobial therapy based on "
@@ -656,7 +1159,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。"
         "抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。"
         "膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。"
-        "支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。"
+        "支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
     ),
     "fungal": (
         "Treatment of {name_l} in {species_l} requires systemic antifungal therapy. Azole "
@@ -669,7 +1172,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "アゾール系抗真菌薬（フルコナゾール、イトラコナゾール、ケトコナゾール）または"
         "アムホテリシンBが菌種と重症度に応じて使用される。治療期間は完全な除菌のため"
         "通常長期間（数週間〜数ヶ月）を要する。表在性感染には局所抗真菌剤を併用する。"
-        "環境消毒により再感染リスクを低減する。長期アゾール療法中は肝機能をモニタリングする。"
+        "環境消毒により再感染リスクを低減する。長期アゾール療法中は肝機能をモニタリングする。",
     ),
     "parasitic": (
         "Treatment of {name_l} in {species_l} requires appropriate antiparasitic medication "
@@ -682,7 +1185,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "駆虫薬が必要である。一部の駆虫薬は特定の種に有毒であるため、"
         "種に適した用量設定が重要である。全てのライフステージを排除するため"
         "複数回投与が必要な場合がある。環境消毒と接触動物の治療で再感染を防止する。"
-        "貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。"
+        "貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。",
     ),
     "neoplastic": (
         "Treatment of {name_l} in {species_l} depends on tumor type, location, and stage. "
@@ -695,7 +1198,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "アクセス可能な固形腫瘍には十分なマージンを確保した外科的切除が第一選択である。"
         "全身性腫瘍、不完全切除、転移性疾患には化学療法が適応となりうる。"
         "放射線療法は局所的な腫瘍制御を提供できる。根治療法が困難な場合は"
-        "疼痛管理、栄養サポート、QOL維持に焦点を当てた緩和ケアを行う。"
+        "疼痛管理、栄養サポート、QOL維持に焦点を当てた緩和ケアを行う。",
     ),
     "metabolic": (
         "Treatment of {name_l} in {species_l} targets the underlying hormonal or metabolic "
@@ -709,7 +1212,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "食事療法で代謝疾患の栄養面に対処する。ホルモンレベル、血糖、電解質、"
         "臓器機能マーカーの定期的モニタリングにより用量調整を行う。"
         "二次的合併症（臓器障害、感染）の併行管理が不可欠である。"
-        "長期または生涯にわたる治療が必要な場合がある。"
+        "長期または生涯にわたる治療が必要な場合がある。",
     ),
     "nutritional": (
         "Treatment of {name_l} in {species_l} centers on correcting the nutritional imbalance. "
@@ -723,7 +1226,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "過剰状態では食事制限と臓器障害に対する支持療法を行う。"
         "栄養不良動物ではリフィーディング症候群予防のため段階的に是正する。"
         "種特異的な食事要求に基づく長期栄養計画を立案する。"
-        "過不足のない摂取を確保するため定期的に再評価する。"
+        "過不足のない摂取を確保するため定期的に再評価する。",
     ),
     "toxic": (
         "Treatment of {name_l} in {species_l} requires rapid decontamination and supportive "
@@ -738,7 +1241,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "活性炭は多くの毒素を吸着する。特異的解毒剤がある場合は投与する"
         "（例：抗凝固性殺鼠剤にビタミンK1、アセトアミノフェンにN-アセチルシステイン）。"
         "積極的な輸液療法で腎排泄を促進し灌流を維持する。"
-        "臓器特異的障害（肝、腎、神経）をモニタリングし治療する。"
+        "臓器特異的障害（肝、腎、神経）をモニタリングし治療する。",
     ),
     "traumatic": (
         "Treatment of {name_l} in {species_l} prioritizes stabilization, pain management, "
@@ -752,7 +1255,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。"
         "創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。"
         "汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。"
-        "遅発性合併症をモニタリングする。"
+        "遅発性合併症をモニタリングする。",
     ),
     "dental": (
         "Treatment of {name_l} in {species_l} requires dental examination under sedation "
@@ -767,7 +1270,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "根尖膿瘍には排膿、デブリードマン、全身性抗菌薬が必要である。"
         "歯周病治療にはスケーリング、研磨、重度罹患歯の抜歯を含む。"
         "種に適した鎮痛薬による疼痛管理が不可欠である。"
-        "食事の調整により回復を促進し再発を予防する。"
+        "食事の調整により回復を促進し再発を予防する。",
     ),
     "autoimmune": (
         "Treatment of {name_l} in {species_l} involves immunosuppressive or immunomodulatory "
@@ -783,7 +1286,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "ステロイド温存薬（アザチオプリン、シクロスポリン、ミコフェノール酸モフェチル）を"
         "併用する場合がある。アレルギー疾患にはアレルゲン回避、抗ヒスタミン薬、"
         "免疫療法を行う。医原性免疫抑制の合併症をモニタリングする。"
-        "再発防止のため段階的に減量する。"
+        "再発防止のため段階的に減量する。",
     ),
     "hematological": (
         "Treatment of {name_l} in {species_l} requires identifying and addressing the "
@@ -798,7 +1301,7 @@ _TREAT_TEMPLATES: dict[str, tuple[str, str]] = {
         "凝固障害には新鮮凍結血漿、ビタミンK、または特定の凝固因子補充が必要な場合がある。"
         "免疫介在性破壊には免疫抑制療法が適応となる。"
         "酸素補充、輸液、栄養サポート、連続血液検査による血液学的パラメータの"
-        "モニタリングを含む支持療法を行う。"
+        "モニタリングを含む支持療法を行う。",
     ),
 }
 
@@ -809,14 +1312,14 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "and avoiding contact with known carriers or contaminated environments.",
         "{name_ja}の予防にはワクチン接種（利用可能な場合）、新規・病気動物の隔離、"
         "厳格なバイオセキュリティ対策、適切な消毒プロトコル、"
-        "既知のキャリアや汚染環境との接触回避が含まれる。"
+        "既知のキャリアや汚染環境との接触回避が含まれる。",
     ),
     "bacterial": (
         "Prevention of {name_l} includes maintaining good hygiene and sanitation, "
         "appropriate vaccination where available, prompt treatment of wounds, "
         "stress reduction, proper ventilation, and quarantine of infected animals.",
         "{name_ja}の予防には適切な衛生管理・消毒、利用可能なワクチン接種、"
-        "創傷の迅速な処置、ストレス軽減、適切な換気、感染動物の隔離が含まれる。"
+        "創傷の迅速な処置、ストレス軽減、適切な換気、感染動物の隔離が含まれる。",
     ),
     "fungal": (
         "Prevention of {name_l} includes maintaining appropriate environmental humidity "
@@ -825,7 +1328,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "health through proper nutrition.",
         "{name_ja}の予防には適切な環境湿度・温度の維持、良好な換気、"
         "過密の回避、定期的な清掃・消毒、罹患個体の隔離、"
-        "適切な栄養による免疫機能の維持が含まれる。"
+        "適切な栄養による免疫機能の維持が含まれる。",
     ),
     "parasitic": (
         "Prevention of {name_l} includes regular prophylactic antiparasitic treatment, "
@@ -834,7 +1337,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "or contaminated environments.",
         "{name_ja}の予防には定期的な予防駆虫、環境衛生と糞便除去、"
         "新規動物の隔離・検査、ベクター防除、中間宿主や汚染環境への"
-        "曝露回避が含まれる。"
+        "曝露回避が含まれる。",
     ),
     "neoplastic": (
         "Prevention of {name_l} is limited but includes spaying/neutering to reduce "
@@ -843,7 +1346,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "breeding to reduce genetic predisposition where applicable.",
         "{name_ja}の予防は限定的であるが、ホルモン依存性腫瘍軽減のための"
         "避妊・去勢手術、既知の発癌物質の回避、早期発見のための定期健診、"
-        "適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。"
+        "適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。",
     ),
     "metabolic": (
         "Prevention of {name_l} includes appropriate diet formulation, regular health "
@@ -852,7 +1355,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "are detected.",
         "{name_ja}の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、"
         "健康体重の維持、過剰なおやつや不適切な食事の回避、"
-        "無症候性変化の早期発見時の迅速な介入が含まれる。"
+        "無症候性変化の早期発見時の迅速な介入が含まれる。",
     ),
     "nutritional": (
         "Prevention of {name_l} requires species-appropriate diet formulation meeting "
@@ -861,7 +1364,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "and education on species-specific nutritional needs.",
         "{name_ja}の予防には全ての栄養要求を満たす種に適した食事設計、"
         "単一食品のみの食事の回避、獣医師との定期的な食事内容の見直し、"
-        "必要時の適切なサプリメンテーション、種固有の栄養ニーズに関する知識が必要である。"
+        "必要時の適切なサプリメンテーション、種固有の栄養ニーズに関する知識が必要である。",
     ),
     "toxic": (
         "Prevention of {name_l} requires removing or securing access to toxic substances, "
@@ -870,7 +1373,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "and owner education on species-specific toxicities.",
         "{name_ja}の予防には有毒物質へのアクセス制限・除去、ペット安全な製品の使用、"
         "環境からの有毒植物の除去、薬剤・化学物質の適切な保管、"
-        "屋外アクセス時の監視、種固有の中毒に関する飼い主教育が必要である。"
+        "屋外アクセス時の監視、種固有の中毒に関する飼い主教育が必要である。",
     ),
     "traumatic": (
         "Prevention of {name_l} includes providing a safe, species-appropriate enclosure, "
@@ -878,7 +1381,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "interactions with other animals, temperature regulation, and fall prevention.",
         "{name_ja}の予防には安全で種に適した飼育環境の整備、鋭利物・危険物の除去、"
         "適切な取り扱い技術、他の動物との接触時の監視、"
-        "温度管理、落下防止策が含まれる。"
+        "温度管理、落下防止策が含まれる。",
     ),
     "dental": (
         "Prevention of {name_l} includes providing appropriate chewing materials and diet "
@@ -886,7 +1389,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "developing malocclusion, and dietary roughage appropriate for the species.",
         "{name_ja}の予防には自然な歯の摩耗を促進する適切な咀嚼材と食事、"
         "定期的な歯科検査、発生しつつある不正咬合の早期矯正、"
-        "種に適した食物繊維の提供が含まれる。"
+        "種に適した食物繊維の提供が含まれる。",
     ),
     "autoimmune": (
         "Prevention of {name_l} is limited as the underlying immune dysregulation may "
@@ -896,7 +1399,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "{name_ja}の予防は基礎となる免疫調節障害に遺伝的要素がある場合は限定的である。"
         "環境トリガーとストレスの最小化、既知アレルゲンの回避、"
         "最適な栄養の維持、定期的な健康モニタリング、フレアの早期治療で"
-        "リスクを低減する。"
+        "リスクを低減する。",
     ),
     "hematological": (
         "Prevention of {name_l} includes regular health monitoring with complete blood "
@@ -908,7 +1411,7 @@ _PREV_TEMPLATES: dict[str, tuple[str, str]] = {
         "既知のトリガー（毒素、感染性病原体）への曝露の最小化、"
         "適切なワクチン接種と寄生虫予防、血液学的副作用が知られる薬剤の回避、"
         "粘膜蒼白、点状出血、原因不明の無気力などの初期徴候に対する"
-        "迅速な獣医学的対応が含まれる。"
+        "迅速な獣医学的対応が含まれる。",
     ),
 }
 
@@ -922,7 +1425,7 @@ _DEFAULT_TREAT = (
     "{species}における{name_ja}の治療は原因への対処、適切な支持療法、"
     "臨床徴候の管理を行う。種に適した薬物療法、食事の最適化、"
     "環境調整が主要な治療要素である。定期的なフォローアップにより"
-    "治療効果を確認し用量調整を行う。"
+    "治療効果を確認し用量調整を行う。",
 )
 
 _DEFAULT_PREV = (
@@ -931,7 +1434,7 @@ _DEFAULT_PREV = (
     "clean living conditions, and prompt attention to early clinical signs.",
     "{name_ja}の予防には適切な飼育管理、種に合ったバランスの取れた栄養、"
     "定期的な健康診断、ストレスの最小化、清潔な生活環境の維持、"
-    "初期臨床徴候への迅速な対応が含まれる。"
+    "初期臨床徴候への迅速な対応が含まれる。",
 )
 
 # Urgency-specific prognosis
@@ -945,7 +1448,7 @@ _PROGNOSIS: dict[str, tuple[str, str]] = {
         "{name_ja}の予後は即座の獣医学的介入がなければ慎重〜不良である。"
         "積極的かつ迅速な治療により生存率は改善するが、原因、"
         "来院時の重症度、宿主免疫状態により異なる。"
-        "生存例でも長期後遺症が生じうる。重症例や未治療例では死亡率が高い。"
+        "生存例でも長期後遺症が生じうる。重症例や未治療例では死亡率が高い。",
     ),
     "high": (
         "Prognosis for {name_l} depends on the rapidity of diagnosis and initiation of "
@@ -956,7 +1459,7 @@ _PROGNOSIS: dict[str, tuple[str, str]] = {
         "{name_ja}の予後は診断の迅速さと適切な治療の開始に依存する。"
         "迅速な治療により多くの症例が数日〜数週間で著明な改善を示す。"
         "治療の遅延は合併症リスクを高め予後を悪化させうる。"
-        "長期管理が必要な場合や再発する場合がある。"
+        "長期管理が必要な場合や再発する場合がある。",
     ),
     "moderate": (
         "Prognosis for {name_l} is generally fair to good with appropriate management. "
@@ -967,7 +1470,7 @@ _PROGNOSIS: dict[str, tuple[str, str]] = {
         "{name_ja}の予後は適切な管理により一般的にやや良好〜良好である。"
         "早期診断された症例の多くは治療に良好に反応する。"
         "慢性例や再発例では長期管理が必要だが、概ね許容できるQOLを維持できる。"
-        "定期的なモニタリングにより合併症の早期発見・対処が可能となる。"
+        "定期的なモニタリングにより合併症の早期発見・対処が可能となる。",
     ),
     "low": (
         "Prognosis for {name_l} is generally good to excellent with appropriate care. "
@@ -976,7 +1479,7 @@ _PROGNOSIS: dict[str, tuple[str, str]] = {
         "uncommon when the condition is addressed promptly.",
         "{name_ja}の予後は適切なケアにより一般的に良好〜優秀である。"
         "治療により多くの症例が完全に回復し、適切な管理変更により"
-        "再発を予防できる。迅速に対処された場合、長期合併症は稀である。"
+        "再発を予防できる。迅速に対処された場合、長期合併症は稀である。",
     ),
 }
 
@@ -1049,10 +1552,7 @@ def enrich_disease(d: dict) -> dict:
 
     # Causes
     d["causes"] = f"Causes of {name_l} in {species_l}: {desc}"
-    d["causes_ja"] = (
-        f"{species}における{name_ja}の原因: "
-        f"{d.get('description_ja') or desc}"
-    )
+    d["causes_ja"] = f"{species}における{name_ja}の原因: {d.get('description_ja') or desc}"
 
     # Diagnosis
     tests = d.get("recommended_tests") or []
@@ -1076,8 +1576,7 @@ def enrich_disease(d: dict) -> dict:
             f"workup. Findings guide selection of confirmatory tests."
         )
         d["diagnosis_ja"] = (
-            f"{name_ja}の診断は臨床像、詳細な病歴、身体検査、"
-            f"および適切な検査に基づく。所見により確定検査を選択する。"
+            f"{name_ja}の診断は臨床像、詳細な病歴、身体検査、および適切な検査に基づく。所見により確定検査を選択する。"
         )
 
     # Prevention

@@ -48,8 +48,7 @@ class PrecomputedDiseaseMeta:
 
         self._cache_timestamp = datetime.utcnow()
         logger.info(
-            f"Built disease metadata: {len(self._disease_cache)} diseases, "
-            f"{len(self._symptom_index)} unique symptoms"
+            f"Built disease metadata: {len(self._disease_cache)} diseases, {len(self._symptom_index)} unique symptoms"
         )
 
     def get_diseases_with_symptom(self, symptom_id: str) -> set:

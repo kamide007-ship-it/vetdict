@@ -51,9 +51,7 @@ class Phase2BatchProcessor:
         with open(self.database_path, "w") as f:
             json.dump(diseases, f, indent=2)
 
-    def process_batch_results(
-        self, batch_id: str, stage: str = "treatment"
-    ) -> Tuple[int, int, int]:
+    def process_batch_results(self, batch_id: str, stage: str = "treatment") -> Tuple[int, int, int]:
         """Process results from a single batch and integrate into database.
 
         Args:
@@ -156,7 +154,7 @@ class Phase2BatchProcessor:
             manifest["stages"][stage]["batches"][batch_id]["results"] = {
                 "succeeded": succeeded,
                 "failed": failed,
-                "errors": error_count
+                "errors": error_count,
             }
             self.save_manifest(manifest)
 
@@ -175,9 +173,9 @@ class Phase2BatchProcessor:
             print("❌ No batches found in manifest")
             return
 
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("PROCESSING ALL COMPLETED BATCHES")
-        print("="*70)
+        print("=" * 70)
 
         total_succeeded = 0
         total_failed = 0
@@ -217,9 +215,9 @@ class Phase2BatchProcessor:
                 total_errors += errs
                 processed_count += 1
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("PROCESSING SUMMARY")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
         print(f"Batches processed: {processed_count}")
         print(f"Total succeeded: {total_succeeded}")
         print(f"Total failed: {total_failed}")
@@ -227,9 +225,9 @@ class Phase2BatchProcessor:
 
     def validate_processed_data(self):
         """Run QA validation on processed Phase 2 data."""
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("VALIDATING PHASE 2 DATA QUALITY")
-        print("="*70)
+        print("=" * 70)
 
         diseases = self.load_diseases()
         report = self.validator.run_full_validation(diseases)
@@ -242,16 +240,12 @@ class Phase2BatchProcessor:
         manifest = self.load_manifest()
         diseases = self.load_diseases()
 
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("PHASE 2 ENRICHMENT SUMMARY")
-        print("="*70)
+        print("=" * 70)
 
         # Count enriched diseases
-        enriched_counts = {
-            "treatment": 0,
-            "prevention": 0,
-            "prognosis": 0
-        }
+        enriched_counts = {"treatment": 0, "prevention": 0, "prognosis": 0}
 
         for disease in diseases:
             for field in enriched_counts:
@@ -285,8 +279,7 @@ def main():
     # process command
     process_parser = subparsers.add_parser("process", help="Process batch results")
     process_parser.add_argument("batch_id", help="Batch ID to process")
-    process_parser.add_argument("--stage", default="treatment",
-                                choices=["treatment", "prevention", "prognosis"])
+    process_parser.add_argument("--stage", default="treatment", choices=["treatment", "prevention", "prognosis"])
 
     # process-all command
     subparsers.add_parser("process-all", help="Process all completed batches")

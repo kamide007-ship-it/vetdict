@@ -28,6 +28,7 @@ def _euclidean_distance(inference: Dict[str, float], profile: Dict[str, Dict[str
         s += d * d
     return math.sqrt(s)
 
+
 def _context_match_score(context: Dict[str, Any]) -> float:
     conf = float(context.get("confidence", 0.0))
     conf = max(0.0, min(1.0, conf))
@@ -41,33 +42,36 @@ def _context_match_score(context: Dict[str, Any]) -> float:
     score -= 0.04 * warnings
     return max(0.0, min(1.0, score))
 
+
 def _purity(context: Dict[str, Any]) -> float:
     s = _context_match_score(context)
     if not bool(context.get("domain_known", False)):
         s *= 0.90
     return max(0.0, min(1.0, s))
 
+
 def _alpha(context_match_score: float) -> float:
     return 1.0 + (context_match_score * 0.2)
+
 
 def _beta(purity: float) -> float:
     if purity > 0.8:
         return 1.0
     return max(0.5, purity)
 
+
 def _temperature(t_base: float, k: float, dist: float) -> float:
     """t = t_base * exp(-k * dist)"""
     t = t_base * math.exp(-k * dist)
     return max(0.1, t)
+
 
 def _integrity(t_final: float, alpha: float, beta: float) -> float:
     """ψ = (1/t) * α * β"""
     return (1.0 / t_final) * alpha * beta
 
 
-def _apply_ai_confidence_to_psi(
-    psi: float, ai_result: Optional[Dict[str, Any]]
-) -> Tuple[float, Optional[float]]:
+def _apply_ai_confidence_to_psi(psi: float, ai_result: Optional[Dict[str, Any]]) -> Tuple[float, Optional[float]]:
     """
     Apply AI confidence multiplier to psi if AI result available.
 
@@ -100,6 +104,7 @@ def _apply_ai_confidence_to_psi(
 
     return adjusted_psi, multiplier
 
+
 def _verdict_from_psi(psi: float) -> Tuple[str, str]:
     if psi >= 1.2:
         return "reliable", "信頼できる"
@@ -107,13 +112,16 @@ def _verdict_from_psi(psi: float) -> Tuple[str, str]:
         return "moderate", "ふつう"
     return "suspect", "あやしい"
 
+
 def _now_iso() -> str:
     return datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat(timespec="seconds")
+
 
 def _confidence_adjusted(base_conf: float, psi: float) -> float:
     base_conf = max(0.0, min(1.0, float(base_conf)))
     factor = max(0.6, min(1.25, psi / 1.2))
     return max(0.0, min(1.0, base_conf * factor))
+
 
 def _get_domain_weight(state: Dict[str, Any], domain: str) -> float:
     dom = state.get("domains", {})
@@ -123,10 +131,12 @@ def _get_domain_weight(state: Dict[str, Any], domain: str) -> float:
     except Exception:
         return 1.0
 
+
 def _set_domain_weight(state: Dict[str, Any], domain: str, w: float) -> None:
     if "domains" not in state or not isinstance(state["domains"], dict):
         state["domains"] = {}
     state["domains"][domain] = float(w)
+
 
 def _append_session_log(state: Dict[str, Any], entry: Dict[str, Any]) -> None:
     logs = state.get("session_logs", [])
@@ -137,9 +147,8 @@ def _append_session_log(state: Dict[str, Any], entry: Dict[str, Any]) -> None:
         logs = logs[-2000:]
     state["session_logs"] = logs
 
-def evaluate_payload(
-    payload: Dict[str, Any], ai_result: Optional[Dict[str, Any]] = None
-) -> Dict[str, Any]:
+
+def evaluate_payload(payload: Dict[str, Any], ai_result: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
     Evaluate payload with optional AI confidence enhancement.
 
@@ -193,9 +202,15 @@ def evaluate_payload(
     total_sessions = state["total_sessions"]
 
     entry = {
-        "session_id": session_id, "ts": ts, "domain": domain,
-        "D": round(dist, 6), "T": round(temp, 6), "psi": round(psi, 6),
-        "verdict": verdict, "reward": None, "feedback": None,
+        "session_id": session_id,
+        "ts": ts,
+        "domain": domain,
+        "D": round(dist, 6),
+        "T": round(temp, 6),
+        "psi": round(psi, 6),
+        "verdict": verdict,
+        "reward": None,
+        "feedback": None,
     }
     _append_session_log(state, entry)
     save_state(state)
@@ -221,7 +236,7 @@ def evaluate_payload(
             "purity": round(purity, 6),
             "alpha": round(alpha, 6),
             "beta": round(beta, 6),
-        }
+        },
     }
 
     # Include AI confidence metadata if present
@@ -231,6 +246,7 @@ def evaluate_payload(
             result["meta"]["ai_psi_multiplier"] = round(psi_multiplier, 3)
 
     return result
+
 
 def record_feedback(payload: Dict[str, Any]):
     if not isinstance(payload, dict):
@@ -273,6 +289,7 @@ def record_feedback(payload: Dict[str, Any]):
     # Phase 3: Record learning signal for continuous improvement
     try:
         from reco2.learning_store import LearningDataStore
+
         learning_store = LearningDataStore()
         learning_store.record_feedback_learning(
             session_id=session_id,
@@ -285,12 +302,15 @@ def record_feedback(payload: Dict[str, Any]):
     except Exception as e:
         # Graceful degradation: learning not critical to feedback recording
         import logging
+
         logging.getLogger(__name__).debug(f"Learning store recording failed: {e}")
 
     return {"status": "recorded", "reward": reward, "new_weight": round(w_new, 6), "domain": domain}
 
+
 def _clamp(x: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, x))
+
 
 def patrol(manual: bool = True) -> Dict[str, Any]:
     state = load_state()
@@ -347,13 +367,18 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
 
             # Get current learning signals
             learning_data = learning_store._get_state().get("learning_metrics", {})
-            ai_accuracy = {
-                "status": "ready" if learning_data.get("ai_extraction_accuracy") else "no_data",
-                "overall_accuracy": sum(
-                    m.get("correct_extractions", 0) / max(m.get("total_extractions", 1), 1)
-                    for m in learning_data.get("ai_extraction_accuracy", [])
-                ) / max(len(learning_data.get("ai_extraction_accuracy", [])), 1),
-            } if learning_data.get("ai_extraction_accuracy") else {"status": "no_data"}
+            ai_accuracy = (
+                {
+                    "status": "ready" if learning_data.get("ai_extraction_accuracy") else "no_data",
+                    "overall_accuracy": sum(
+                        m.get("correct_extractions", 0) / max(m.get("total_extractions", 1), 1)
+                        for m in learning_data.get("ai_extraction_accuracy", [])
+                    )
+                    / max(len(learning_data.get("ai_extraction_accuracy", [])), 1),
+                }
+                if learning_data.get("ai_extraction_accuracy")
+                else {"status": "no_data"}
+            )
 
             # Get tuning suggestions
             suggestions = tuner.suggest_parameter_adjustments(
@@ -379,10 +404,7 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
                     state["eta"] = eta
                     save_state(state)
                     adjusted = True
-                    reasons.append(
-                        f"learning_tuning: k {old_k:.2f}→{k:.2f}, "
-                        f"eta {old_eta:.4f}→{eta:.4f}"
-                    )
+                    reasons.append(f"learning_tuning: k {old_k:.2f}→{k:.2f}, eta {old_eta:.4f}→{eta:.4f}")
 
                 learning_insights = {
                     "learning_applied": True,
@@ -400,17 +422,25 @@ def patrol(manual: bool = True) -> Dict[str, Any]:
         except Exception as e:
             # Graceful degradation: learning tuning not critical
             import logging
+
             logging.getLogger(__name__).debug(f"Learning-driven tuning failed: {e}")
             learning_insights = {"learning_applied": False, "error": str(e)}
 
     return {
         "adjusted": adjusted,
         "reason": "; ".join(reasons) if reasons else "no_change",
-        "new_k": round(k, 6), "new_eta": round(eta, 6),
-        "window": {"avg_d": round(avg_d, 6), "sum_r": round(sum_r, 6), "avg_psi": round(avg_psi, 6), "window_size": len(window)},
+        "new_k": round(k, 6),
+        "new_eta": round(eta, 6),
+        "window": {
+            "avg_d": round(avg_d, 6),
+            "sum_r": round(sum_r, 6),
+            "avg_psi": round(avg_psi, 6),
+            "window_size": len(window),
+        },
         "manual": manual,
         "learning_insights": learning_insights,
     }
+
 
 def get_status() -> Dict[str, Any]:
     state = load_state()
@@ -436,15 +466,20 @@ def get_status() -> Dict[str, Any]:
             domains.append({"domain": d, "weight": float(w)})
     domains.sort(key=lambda x: (-x["weight"], x["domain"]))
     return {
-        "k": float(state.get("k", 1.5)), "eta": float(state.get("eta", 0.01)),
-        "total_sessions": total_sessions, "avg_deviation": round(avg_d, 6),
-        "to_next_patrol": to_next, "domains": domains,
-        "verdict_distribution": dist, "verdict_distribution_pct": dist_pct,
+        "k": float(state.get("k", 1.5)),
+        "eta": float(state.get("eta", 0.01)),
+        "total_sessions": total_sessions,
+        "avg_deviation": round(avg_d, 6),
+        "to_next_patrol": to_next,
+        "domains": domains,
+        "verdict_distribution": dist,
+        "verdict_distribution_pct": dist_pct,
         "ranges": {
             "k": [float(state.get("k_min", 0.5)), float(state.get("k_max", 5.0))],
             "eta": [float(state.get("eta_min", 0.001)), float(state.get("eta_max", 0.1))],
-        }
+        },
     }
+
 
 def get_logs(limit: int = 50) -> List[Dict[str, Any]]:
     state = load_state()

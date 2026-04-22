@@ -15,9 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "diseases_all_species.json"
 
-GENERIC_DD_EN = (
-    "Rule out other conditions with similar clinical presentation through diagnostic testing."
-)
+GENERIC_DD_EN = "Rule out other conditions with similar clinical presentation through diagnostic testing."
 GENERIC_DD_JA = "類似した臨床像を呈する他疾患を診断検査により除外する。"
 
 # 個別翻訳マップ

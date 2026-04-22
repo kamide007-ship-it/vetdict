@@ -89,7 +89,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Intestinal Obstruction": 1.6,
         "Foreign Body Obstruction": 1.5,
     },
-
     # ========== URINARY/RENAL PATTERNS ==========
     # 多飲+頻尿
     frozenset({"excessive_thirst", "frequent_urination"}): {
@@ -132,7 +131,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Bladder Stones": 1.8,
         "Urinary Tract Infection": 1.5,
     },
-
     # ========== RESPIRATORY PATTERNS ==========
     # 咳+呼吸困難
     frozenset({"coughing", "labored_breathing"}): {
@@ -169,7 +167,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Hemothorax": 1.8,
         "Shock": 2.0,
     },
-
     # ========== CARDIOVASCULAR PATTERNS ==========
     # 失神+運動不耐性
     frozenset({"fainting", "exercise_intolerance"}): {
@@ -194,7 +191,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Congestive Heart Failure": 2.5,
         "Aortic Stenosis": 2.0,
     },
-
     # ========== NEUROLOGICAL PATTERNS ==========
     # けいれん+よだれ
     frozenset({"seizures", "excessive_drooling"}): {
@@ -221,7 +217,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Encephalitis": 2.0,
         "Meningitis": 2.0,
     },
-
     # ========== HEMATOLOGIC PATTERNS ==========
     # 蒼白粘膜+無気力
     frozenset({"pale_gums", "lethargy"}): {
@@ -242,7 +237,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Immune-Mediated Hemolytic Anemia": 2.0,
         "Liver Disease": 1.8,
     },
-
     # ========== LYMPHATIC/IMMUNE PATTERNS ==========
     # 発熱+リンパ節腫脹
     frozenset({"fever", "swollen_lymph_nodes"}): {
@@ -256,7 +250,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Lymphoma": 1.5,
         "Abscess": 1.5,
     },
-
     # ========== MUSCULOSKELETAL PATTERNS ==========
     # 跛行+関節痛
     frozenset({"lameness_or_limping", "joint_pain_or_stiffness"}): {
@@ -277,7 +270,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Dislocation": 1.8,
         "Cruciate Ligament Injury": 1.6,
     },
-
     # ========== OCULAR PATTERNS ==========
     # 目の白濁+目の充血
     frozenset({"cloudiness_in_eyes", "redness_in_eyes"}): {
@@ -295,7 +287,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Corneal Ulcer": 2.0,
         "Uveitis": 1.8,
     },
-
     # ========== DERMATOLOGIC PATTERNS ==========
     # 掻痒+脱毛
     frozenset({"itching", "hair_loss"}): {
@@ -315,7 +306,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Bacterial Infection": 1.8,
         "Fungal Infection": 1.8,
     },
-
     # ========== SYSTEMIC PATTERNS ==========
     # 体重減少+食欲不振
     frozenset({"weight_loss", "loss_of_appetite"}): {
@@ -344,7 +334,6 @@ EXTENDED_SYMPTOM_PAIR_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Sepsis": 2.0,
         "Inflammatory Disease": 1.5,
     },
-
     # ========== REPRODUCTIVE PATTERNS ==========
     # 多飲+排尿困難（膿尿症）
     frozenset({"excessive_thirst", "straining_to_urinate"}): {
@@ -376,7 +365,6 @@ SYMPTOM_TRIPLE_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Canine Parvovirus": 2.5,
         "Hemorrhagic Gastroenteritis (HGE)": 2.0,
     },
-
     # GDV signature: 嘔吐+腹部膨満+虚脱
     frozenset({"vomiting", "bloating", "collapse"}): {
         "Gastric Dilatation-Volvulus (GDV/Bloat)": 3.0,
@@ -384,7 +372,6 @@ SYMPTOM_TRIPLE_BOOST: Dict[frozenset, Dict[str, float]] = {
     frozenset({"vomiting", "bloated_abdomen", "collapse"}): {
         "Gastric Dilatation-Volvulus (GDV/Bloat)": 3.0,
     },
-
     # Pancreatitis: 嘔吐+腹痛+食欲不振
     frozenset({"vomiting", "abdominal_pain", "loss_of_appetite"}): {
         "Pancreatitis": 2.5,
@@ -392,7 +379,6 @@ SYMPTOM_TRIPLE_BOOST: Dict[frozenset, Dict[str, float]] = {
     frozenset({"vomiting", "abdominal_pain", "appetite_loss"}): {
         "Pancreatitis": 2.5,
     },
-
     # Heart failure: 咳+呼吸困難+運動不耐性
     frozenset({"coughing", "difficulty_breathing", "exercise_intolerance"}): {
         "Heart Disease/CHF": 2.5,
@@ -403,14 +389,12 @@ SYMPTOM_TRIPLE_BOOST: Dict[frozenset, Dict[str, float]] = {
         "Heart Disease/CHF": 2.5,
         "Congestive Heart Failure": 2.5,
     },
-
     # Meningitis/Encephalitis: けいれん+発熱+無気力
     frozenset({"seizures", "fever", "lethargy"}): {
         "Meningitis": 2.5,
         "Encephalitis": 2.5,
         "Rabies": 1.8,
     },
-
     # Pyometra: 発熱+多飲+腹部膨満
     frozenset({"fever", "excessive_thirst", "bloated_abdomen"}): {
         "Pyometra": 2.5,
@@ -418,7 +402,6 @@ SYMPTOM_TRIPLE_BOOST: Dict[frozenset, Dict[str, float]] = {
     frozenset({"fever", "excessive_thirst", "bloating"}): {
         "Pyometra": 2.5,
     },
-
     # Diabetes: 多飲+頻尿+体重減少
     frozenset({"excessive_thirst", "frequent_urination", "weight_loss"}): {
         "Diabetes Mellitus": 2.5,
@@ -426,24 +409,20 @@ SYMPTOM_TRIPLE_BOOST: Dict[frozenset, Dict[str, float]] = {
     frozenset({"excessive_thirst", "excessive_urination", "weight_loss"}): {
         "Diabetes Mellitus": 2.5,
     },
-
     # Hemolytic Anemia: 黄疸+蒼白粘膜+無気力
     frozenset({"jaundice", "pale_gums", "lethargy"}): {
         "Immune-Mediated Hemolytic Anemia": 2.5,
         "Hemolytic Anemia": 2.0,
     },
-
     # Hepatic Encephalopathy: 黄疸+意識障害+けいれん
     frozenset({"jaundice", "disorientation", "seizures"}): {
         "Hepatic Encephalopathy": 2.5,
     },
-
     # CKD: 多飲+頻尿+体重減少
     frozenset({"excessive_thirst", "frequent_urination", "weight_loss"}): {
         "Kidney Disease (CKD)": 2.5,
         "Feline Chronic Kidney Disease (CKD)": 2.5,
     },
-
     # Urinary obstruction: 血尿+排尿困難+腹痛
     frozenset({"blood_in_urine", "straining_to_urinate", "abdominal_pain"}): {
         "Urethral Obstruction": 2.5,
@@ -452,12 +431,10 @@ SYMPTOM_TRIPLE_BOOST: Dict[frozenset, Dict[str, float]] = {
     frozenset({"bloody_urine", "straining_to_urinate", "abdominal_pain"}): {
         "Urethral Obstruction": 2.5,
     },
-
     # IBD: 下痢+嘔吐+体重減少
     frozenset({"diarrhea", "vomiting", "weight_loss"}): {
         "Inflammatory Bowel Disease (IBD)": 2.5,
     },
-
     # Rodenticide poisoning: 出血+蒼白粘膜+虚脱
     frozenset({"bleeding", "pale_gums", "collapse"}): {
         "Rodenticide Poisoning": 3.0,

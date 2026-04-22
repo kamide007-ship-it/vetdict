@@ -21,7 +21,7 @@ from api.disease_search import DiseaseFullTextSearch
 logger = logging.getLogger(__name__)
 
 # Create blueprint
-diseases_bp = Blueprint('diseases', __name__, url_prefix='/api/diseases')
+diseases_bp = Blueprint("diseases", __name__, url_prefix="/api/diseases")
 
 # Initialize data access layers
 db = DiseaseDatabase()
@@ -30,8 +30,9 @@ fts = DiseaseFullTextSearch()
 
 # --- Disease Detail Endpoints ---
 
-@diseases_bp.route('/<disease_id>', methods=['GET'])
-@cache.cached(timeout=CACHE_TIMEOUTS['disease_detail'])
+
+@diseases_bp.route("/<disease_id>", methods=["GET"])
+@cache.cached(timeout=CACHE_TIMEOUTS["disease_detail"])
 def get_disease_detail(disease_id: str):
     """
     Get detailed information for a single disease
@@ -60,8 +61,9 @@ def get_disease_detail(disease_id: str):
 
 # --- Search Endpoints ---
 
-@diseases_bp.route('/search', methods=['GET'])
-@cache.cached(timeout=CACHE_TIMEOUTS['fts_search'], query_string=True)
+
+@diseases_bp.route("/search", methods=["GET"])
+@cache.cached(timeout=CACHE_TIMEOUTS["fts_search"], query_string=True)
 def search_diseases():
     """
     Full-text search for diseases
@@ -93,12 +95,12 @@ def search_diseases():
     """
     import time
 
-    query = request.args.get('q', '').strip()
+    query = request.args.get("q", "").strip()
     if not query:
         abort(400, description="Query parameter 'q' is required")
 
-    limit = min(int(request.args.get('limit', 20)), 100)
-    species = request.args.get('species')
+    limit = min(int(request.args.get("limit", 20)), 100)
+    species = request.args.get("species")
 
     start_time = time.time()
 
@@ -110,18 +112,20 @@ def search_diseases():
 
     elapsed_ms = (time.time() - start_time) * 1000
 
-    return jsonify({
-        'query': query,
-        'species_filter': species,
-        'results': results,
-        'count': len(results),
-        'limit': limit,
-        'execution_time_ms': round(elapsed_ms, 2),
-    })
+    return jsonify(
+        {
+            "query": query,
+            "species_filter": species,
+            "results": results,
+            "count": len(results),
+            "limit": limit,
+            "execution_time_ms": round(elapsed_ms, 2),
+        }
+    )
 
 
-@diseases_bp.route('/by-name', methods=['GET'])
-@cache.cached(timeout=CACHE_TIMEOUTS['search_results'], query_string=True)
+@diseases_bp.route("/by-name", methods=["GET"])
+@cache.cached(timeout=CACHE_TIMEOUTS["search_results"], query_string=True)
 def search_by_name():
     """
     Search for diseases by name (prefix match)
@@ -135,30 +139,33 @@ def search_by_name():
         GET /api/diseases/by-name?name=leukemia
         GET /api/diseases/by-name?name=白血病&language=ja
     """
-    name = request.args.get('name', '').strip()
+    name = request.args.get("name", "").strip()
     if not name:
         abort(400, description="Query parameter 'name' is required")
 
-    language = request.args.get('language', 'en').lower()
-    limit = min(int(request.args.get('limit', 20)), 100)
+    language = request.args.get("language", "en").lower()
+    limit = min(int(request.args.get("limit", 20)), 100)
 
-    if language == 'ja':
+    if language == "ja":
         results = db.search_by_name_ja(name, limit)
     else:
         results = db.search_by_name_en(name, limit)
 
-    return jsonify({
-        'name': name,
-        'language': language,
-        'results': results,
-        'count': len(results),
-    })
+    return jsonify(
+        {
+            "name": name,
+            "language": language,
+            "results": results,
+            "count": len(results),
+        }
+    )
 
 
 # --- Filter Endpoints ---
 
-@diseases_bp.route('/by-species/<species>', methods=['GET'])
-@cache.cached(timeout=CACHE_TIMEOUTS['disease_list'], query_string=True)
+
+@diseases_bp.route("/by-species/<species>", methods=["GET"])
+@cache.cached(timeout=CACHE_TIMEOUTS["disease_list"], query_string=True)
 def get_by_species(species: str):
     """
     Get all diseases for a specific species
@@ -170,18 +177,20 @@ def get_by_species(species: str):
             "count": 537
         }
     """
-    limit = min(int(request.args.get('limit', 100)), 1000)
+    limit = min(int(request.args.get("limit", 100)), 1000)
     results = db.search_by_species(species, limit)
 
-    return jsonify({
-        'species': species,
-        'results': results,
-        'count': len(results),
-    })
+    return jsonify(
+        {
+            "species": species,
+            "results": results,
+            "count": len(results),
+        }
+    )
 
 
-@diseases_bp.route('/by-urgency/<urgency>', methods=['GET'])
-@cache.cached(timeout=CACHE_TIMEOUTS['urgency_stats'], query_string=True)
+@diseases_bp.route("/by-urgency/<urgency>", methods=["GET"])
+@cache.cached(timeout=CACHE_TIMEOUTS["urgency_stats"], query_string=True)
 def get_by_urgency(urgency: str):
     """
     Get all diseases by urgency level
@@ -195,18 +204,20 @@ def get_by_urgency(urgency: str):
             "count": 617
         }
     """
-    limit = min(int(request.args.get('limit', 100)), 1000)
+    limit = min(int(request.args.get("limit", 100)), 1000)
     results = db.search_by_urgency(urgency, limit)
 
-    return jsonify({
-        'urgency': urgency,
-        'results': results,
-        'count': len(results),
-    })
+    return jsonify(
+        {
+            "urgency": urgency,
+            "results": results,
+            "count": len(results),
+        }
+    )
 
 
-@diseases_bp.route('/by-species-urgency', methods=['GET'])
-@cache.cached(timeout=CACHE_TIMEOUTS['disease_list'], query_string=True)
+@diseases_bp.route("/by-species-urgency", methods=["GET"])
+@cache.cached(timeout=CACHE_TIMEOUTS["disease_list"], query_string=True)
 def get_by_species_urgency():
     """
     Get diseases filtered by species AND urgency
@@ -218,27 +229,30 @@ def get_by_species_urgency():
     Example:
         GET /api/diseases/by-species-urgency?species=Dog&urgency=emergency
     """
-    species = request.args.get('species')
-    urgency = request.args.get('urgency')
+    species = request.args.get("species")
+    urgency = request.args.get("urgency")
 
     if not species or not urgency:
         abort(400, description="Both 'species' and 'urgency' parameters required")
 
-    limit = min(int(request.args.get('limit', 100)), 1000)
+    limit = min(int(request.args.get("limit", 100)), 1000)
     results = db.search_by_species_and_urgency(species, urgency, limit)
 
-    return jsonify({
-        'species': species,
-        'urgency': urgency,
-        'results': results,
-        'count': len(results),
-    })
+    return jsonify(
+        {
+            "species": species,
+            "urgency": urgency,
+            "results": results,
+            "count": len(results),
+        }
+    )
 
 
 # --- Statistics Endpoints ---
 
-@diseases_bp.route('/stats', methods=['GET'])
-@cache.cached(timeout=CACHE_TIMEOUTS['species_stats'])
+
+@diseases_bp.route("/stats", methods=["GET"])
+@cache.cached(timeout=CACHE_TIMEOUTS["species_stats"])
 def get_stats():
     """
     Get database statistics
@@ -250,23 +264,27 @@ def get_stats():
             "by_urgency": {"emergency": 617, "high": 2615, "normal": 3217}
         }
     """
-    return jsonify({
-        'total_count': db.get_total_disease_count(),
-        'by_species': db.get_species_stats(),
-        'by_urgency': db.get_urgency_stats(),
-    })
+    return jsonify(
+        {
+            "total_count": db.get_total_disease_count(),
+            "by_species": db.get_species_stats(),
+            "by_urgency": db.get_urgency_stats(),
+        }
+    )
 
 
-@diseases_bp.route('/health', methods=['GET'])
+@diseases_bp.route("/health", methods=["GET"])
 def health_check():
     """Health check endpoint for monitoring"""
     try:
         count = db.get_total_disease_count()
-        return jsonify({
-            'status': 'healthy',
-            'database': 'SQLite',
-            'disease_count': count,
-        })
+        return jsonify(
+            {
+                "status": "healthy",
+                "database": "SQLite",
+                "disease_count": count,
+            }
+        )
     except Exception as e:
         logger.error(f"Health check failed: {e}")
         abort(503, description="Database connection failed")

@@ -161,9 +161,7 @@ class TestCalibrationCurve:
         assert result["status"] == "insufficient_data"
         assert result["overall_calibration"] == 0.0
 
-    def test_calibration_curve_insufficient_samples(
-        self, tracker, learning_store_instance
-    ):
+    def test_calibration_curve_insufficient_samples(self, tracker, learning_store_instance):
         """Test calibration curve with insufficient samples."""
         # Record only 5 feedback entries
         for i in range(5):

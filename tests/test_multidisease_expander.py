@@ -11,7 +11,7 @@ from typing import Dict, Tuple
 import pytest
 
 # Add API path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from api.ai.multidisease_expander import (
     CombinationPattern,
@@ -273,9 +273,7 @@ class TestMultiDiseaseExpander:
             ("A", "B"): InteractionType.CASCADE,
             ("B", "C"): InteractionType.CASCADE,
         }
-        desc = expander._generate_mechanism_description(
-            ("A", "B", "C"), cascade_interactions
-        )
+        desc = expander._generate_mechanism_description(("A", "B", "C"), cascade_interactions)
         assert "cascade" in desc.lower()
 
         # Synergistic pattern
@@ -283,23 +281,17 @@ class TestMultiDiseaseExpander:
             ("A", "B"): InteractionType.SYNERGISTIC,
             ("B", "C"): InteractionType.SYNERGISTIC,
         }
-        desc = expander._generate_mechanism_description(
-            ("A", "B", "C"), synergistic_interactions
-        )
+        desc = expander._generate_mechanism_description(("A", "B", "C"), synergistic_interactions)
         assert "synergistic" in desc.lower()
 
     def test_clinical_significance_assessment(self, sample_interactions):
         """Test clinical significance assessment."""
         expander = MultiDiseaseExpander(sample_interactions)
 
-        high_sig = expander._assess_clinical_significance(
-            ("A", "B", "C"), combined_prob=0.65, complexity=75
-        )
+        high_sig = expander._assess_clinical_significance(("A", "B", "C"), combined_prob=0.65, complexity=75)
         assert "High significance" in high_sig
 
-        low_sig = expander._assess_clinical_significance(
-            ("A", "B", "C"), combined_prob=0.15, complexity=25
-        )
+        low_sig = expander._assess_clinical_significance(("A", "B", "C"), combined_prob=0.15, complexity=25)
         assert "Low significance" in low_sig or "Rare" in low_sig
 
     def test_get_pattern_retrieval(self, sample_interactions):
@@ -343,9 +335,7 @@ class TestMultiDiseaseExpander:
         expander = MultiDiseaseExpander(sample_interactions)
 
         # Populate some patterns
-        expander.expand_combinations(
-            ["Hip Dysplasia", "Osteoarthritis", "Canine Cognitive Dysfunction"]
-        )
+        expander.expand_combinations(["Hip Dysplasia", "Osteoarthritis", "Canine Cognitive Dysfunction"])
 
         network = expander.analyze_disease_network()
 
@@ -424,14 +414,10 @@ class TestInteractionRuleMiner:
 
     def test_rule_filtering_by_confidence(self, sample_patterns):
         """Test rule filtering by confidence threshold."""
-        miner_strict = InteractionRuleMiner(
-            min_support=0.1, min_confidence=0.8
-        )
+        miner_strict = InteractionRuleMiner(min_support=0.1, min_confidence=0.8)
         rules_strict = miner_strict.mine_rules(sample_patterns)
 
-        miner_loose = InteractionRuleMiner(
-            min_support=0.1, min_confidence=0.3
-        )
+        miner_loose = InteractionRuleMiner(min_support=0.1, min_confidence=0.3)
         rules_loose = miner_loose.mine_rules(sample_patterns)
 
         # Stricter threshold should have fewer rules
@@ -527,8 +513,7 @@ class TestIntegration:
         # Orthopedic should have cascade interactions
         if ortho_patterns:
             cascades = sum(
-                1 for itype in ortho_patterns[0].interaction_types.values()
-                if itype == InteractionType.CASCADE
+                1 for itype in ortho_patterns[0].interaction_types.values() if itype == InteractionType.CASCADE
             )
             assert cascades > 0
 
