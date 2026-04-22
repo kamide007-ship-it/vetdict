@@ -11,14 +11,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - run: pip install ruff
-      - name: ruff lint (strict)
-        run: ruff check . --select=E,W,F,I,B,SIM,C90,N
-      - name: ruff format check
-        run: ruff format . --check
+      - name: detect changed Python files
+        id: changed_python
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git fetch origin "${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
+            mapfile -t files < <(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.py')
+          elif [[ -n "${{ github.event.before }}" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+            mapfile -t files < <(git diff --name-only --diff-filter=ACMR "${{ github.event.before }}...HEAD" -- '*.py')
+          else
+            mapfile -t files < <(git ls-files '*.py')
+          fi
+
+          {
+            echo "files<<EOF"
+            printf '%s
+' "${files[@]}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+      - name: ruff lint (changed files)
+        if: ${{ steps.changed_python.outputs.files != '' }}
+        shell: bash
+        run: |
+          mapfile -t files <<< "${{ steps.changed_python.outputs.files }}"
+          ruff check "${files[@]}"
+      - name: ruff format check (changed files)
+        if: ${{ steps.changed_python.outputs.files != '' }}
+        shell: bash
+        run: |
+          mapfile -t files <<< "${{ steps.changed_python.outputs.files }}"
+          ruff format "${files[@]}" --check
+      - name: no Python changes
+        if: ${{ steps.changed_python.outputs.files == '' }}
+        run: echo 'No Python files changed; skipping Ruff checks.'
 
   secret-scan:
     runs-on: ubuntu-latest

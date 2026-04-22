@@ -245,7 +245,7 @@ def record_feedback(payload: Dict[str, Any]):
     if fb not in ("good", "bad", "recalculate"):
         return {"error": "invalid_feedback"}, 400
 
-    r = 1.0 if fb == "good" else (0.3 if fb == "recalculate" else -1.0)
+    R = 1.0 if fb == "good" else (0.3 if fb == "recalculate" else -1.0)
     state = load_state()
     used = state.get("used_session_ids", {})
     if not isinstance(used, dict):
@@ -257,14 +257,14 @@ def record_feedback(payload: Dict[str, Any]):
     state["used_session_ids"] = used
     eta = float(state.get("eta", 0.01))
     W_old = _get_domain_weight(state, domain)
-    W_new = W_old + (eta * r)
+    W_new = W_old + (eta * R)
     _set_domain_weight(state, domain, W_new)
 
     logs = state.get("session_logs", [])
     if isinstance(logs, list):
         for i in range(len(logs) - 1, -1, -1):
             if logs[i].get("session_id") == session_id:
-                logs[i]["reward"] = r
+                logs[i]["reward"] = R
                 logs[i]["feedback"] = fb
                 break
         state["session_logs"] = logs
@@ -287,7 +287,7 @@ def record_feedback(payload: Dict[str, Any]):
         import logging
         logging.getLogger(__name__).debug(f"Learning store recording failed: {e}")
 
-    return {"status": "recorded", "reward": r, "new_weight": round(W_new, 6), "domain": domain}
+    return {"status": "recorded", "reward": R, "new_weight": round(W_new, 6), "domain": domain}
 
 def _clamp(x: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, x))
