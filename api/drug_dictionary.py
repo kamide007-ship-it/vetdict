@@ -23,6 +23,7 @@ from api.drug_batch_5 import DRUGS_BATCH_5, SPECIES_INFO_PATCH_5
 from api.drug_batch_6 import DRUG_INTERACTIONS_PATCH_6, DRUGS_BATCH_6, SPECIES_INFO_PATCH_6
 from api.drug_batch_7 import CHINCHILLA_SPECIES_PATCH
 from api.drug_batch_8 import DRUGS_BATCH_8
+from api.drug_batch_9 import DRUGS_BATCH_9, ISCAID_UTI_NOTES_PATCH
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -1586,8 +1587,17 @@ DRUGS: List[Dict[str, Any]] = [
         "formulations": ["Powder (mix with feed)"],
         "formulations_ja": ["粉末（飼料に混合）"],
         "species_info": {
-            "dog": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "Veterinarian-formulated NMN supplement with NMN 5000mg, Cysteine 10500mg, α-Lipoic acid 1700mg per package. Supports cellular energy, anti-aging, and gut health. Manufactured in Japan, tested by Racing Chemistry Laboratory.", "notes_ja": "獣医師考案のNMNサプリメント。NMN5000mg、システイン10500mg、α-リポ酸1700mg配合。細胞エネルギー・抗老化・腸内環境をサポート。国内製造、競走馬理化学研究所検査合格。"},
-            "horse": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "Safe for all stages of horses. Passed Racing Chemistry Laboratory testing - suitable for competition horses.", "notes_ja": "あらゆるステージの馬に安全。競走馬理化学研究所検査合格 - 競技馬にも使用可能。"},
+            "dog": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "NMN 5000mg + Cysteine 10500mg + α-Lipoic acid 1700mg per package. Supports cellular energy, anti-aging, cognitive dysfunction (CDS), cardiomyopathy (DCM/MVD), CKD, and senior ophthalmic disease. Manufactured in Japan, tested by Racing Chemistry Laboratory.", "notes_ja": "NMN5000mg + システイン10500mg + α-リポ酸1700mg配合。細胞エネルギー・抗老化・認知機能不全（CDS）・心筋症（DCM/僧帽弁疾患）・CKD・加齢性眼疾患をサポート。国内製造、競走馬理化学研究所検査合格。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For senior cats with CDS, HCM, CKD, diabetes, and age-related retinal degeneration. Mitochondrial support is particularly relevant in feline CKD and HCM pathogenesis.", "notes_ja": "CDS、HCM、CKD、糖尿病、加齢性網膜変性の高齢猫に。ミトコンドリアサポートは猫CKDとHCMの病態に特に関連。"},
+            "horse": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "Safe for all stages. Applications: PPID (Cushing's), EMS, senior horse performance support, and chronic fatigue. Passed Racing Chemistry Laboratory testing — suitable for competition horses.", "notes_ja": "あらゆるステージに安全。PPID（クッシング）、EMS、高齢馬のパフォーマンス維持、慢性疲労に。競走馬理化学研究所検査合格 - 競技馬にも使用可能。"},
+            "rabbit": {"safe": True, "dosage": "Refer to product label; adjust for body weight", "dosage_ja": "製品ラベル参照。体重に応じて調整", "notes": "For senior rabbits with chronic conditions, cognitive decline, and age-related cardiac disease.", "notes_ja": "慢性疾患、認知機能低下、加齢性心疾患の高齢ウサギに。"},
+            "ferret": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Supportive for insulinoma, cardiomyopathy, and senior cognitive issues in ferrets.", "notes_ja": "フェレットのインスリノーマ、心筋症、高齢期の認知機能問題の支持療法に。"},
+            "hamster": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior hamsters with cardiac or metabolic disease.", "notes_ja": "心疾患や代謝性疾患の高齢ハムスターに。"},
+            "guinea_pig": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Adjunct for senior guinea pigs with cardiac or cognitive decline. Does not replace vitamin C supplementation.", "notes_ja": "心機能や認知機能の低下した高齢モルモットの併用療法。ビタミンC補給の代替にはならない。"},
+            "chinchilla": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior chinchillas with cardiac or hepatic disease.", "notes_ja": "心疾患や肝疾患の高齢チンチラに。"},
+            "hedgehog": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Supportive for WHS (mitochondrial neuronal support), cardiomyopathy, and neoplasia in hedgehogs.", "notes_ja": "ハリネズミのWHS（ミトコンドリア神経支持）、心筋症、腫瘍の支持療法に。"},
+            "sugar_glider": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior sugar gliders with metabolic or neurologic concerns.", "notes_ja": "代謝性・神経学的問題のある高齢フクロモモンガに。"},
+            "degu": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior degus with diabetes, cardiomyopathy, or cataract.", "notes_ja": "糖尿病、心筋症、白内障の高齢デグーに。"},
         },
         "side_effects": ["generally well tolerated"],
         "side_effects_ja": ["一般的に忍容性良好"],
@@ -1636,7 +1646,19 @@ DRUGS: List[Dict[str, Any]] = [
         "formulations_ja": ["粉末（飼料に混合）"],
         "species_info": {
             "horse": {"safe": True, "dosage": "50 g/day PO mixed with feed", "dosage_ja": "50 g/日 経口 飼料に混合", "notes": "Indicated for sand colic, constipation colic, and general GI motility support. At 50g/day dosing, produces well-hydrated, soft fecal balls. Contains psyllium + prebiotics + probiotics.", "notes_ja": "砂疝、便秘疝、消化管運動サポートに適応。50g/日投与で保水量の多いモチモチしたボロを確認。サイリウム+プレバイオティクス+プロバイオティクス配合。"},
-            "dog": {"safe": True, "dosage": "Refer to product label (Prebiotics & Probiotics & Psyllium formulation)", "dosage_ja": "製品ラベル参照（プレバイオティクス&プロバイオティクス&サイリウム配合）", "notes": "Canine version available as Prebiotics & Probiotics & Psyllium. Supports constipation, loose stool, and GI comfort.", "notes_ja": "犬用はプレバイオティクス&プロバイオティクス&サイリウムとして展開。便秘、軟便、消化管の快適さをサポート。"},
+            "dog": {"safe": True, "dosage": "Refer to product label (Prebiotics & Probiotics & Psyllium formulation)", "dosage_ja": "製品ラベル参照（プレバイオティクス&プロバイオティクス&サイリウム配合）", "notes": "For constipation, diarrhea, IBD, post-pancreatitis recovery, atopy (gut-immune axis), and CKD (uremic toxin binding).", "notes_ja": "便秘、下痢、IBD、膵炎後の回復、アトピー（腸腎連関）、CKD（尿毒素排出促進）に。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For constipation (common in senior cats), megacolon adjunct, IBD, and CKD support. Psyllium is well-tolerated in cats.", "notes_ja": "便秘（高齢猫で頻発）、巨大結腸症の併用、IBD、CKDサポートに。サイリウムは猫で忍容性良好。"},
+            "rabbit": {"safe": True, "dosage": "Refer to product label; adjust for body weight", "dosage_ja": "製品ラベル参照。体重に応じて調整", "notes": "Beneficial for GI stasis prevention and recovery, hairball management, and dysbiosis. Critical for hindgut fermenters.", "notes_ja": "GI stasisの予防と回復、ヘアボール管理、腸内細菌叢異常症に有益。後腸発酵動物に重要。"},
+            "guinea_pig": {"safe": True, "dosage": "Refer to product label; adjust for body weight", "dosage_ja": "製品ラベル参照。体重に応じて調整", "notes": "For GI dysbiosis (especially post-antibiotic), constipation, and hindgut fermentation support. Critical for hindgut fermenters.", "notes_ja": "腸内細菌叢異常（特に抗菌薬投与後）、便秘、後腸発酵サポートに。後腸発酵動物に重要。"},
+            "chinchilla": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For GI stasis, dysbiosis, and constipation in chinchillas.", "notes_ja": "チンチラのGI stasis、腸内細菌叢異常、便秘に。"},
+            "hamster": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For constipation, wet tail (proliferative ileitis) recovery, and dysbiosis.", "notes_ja": "便秘、ウェットテイル（増殖性回腸炎）回復期、腸内細菌叢異常に。"},
+            "ferret": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For ECE/chronic diarrhea, IBD, and Helicobacter-associated gastritis recovery.", "notes_ja": "ECE/慢性下痢、IBD、ヘリコバクター関連胃炎の回復期に。"},
+            "hedgehog": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For constipation and GI dysbiosis in hedgehogs.", "notes_ja": "便秘、腸内細菌叢異常のハリネズミに。"},
+            "sugar_glider": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For diarrhea, constipation, and dysbiosis.", "notes_ja": "下痢、便秘、腸内細菌叢異常に。"},
+            "degu": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For GI stasis, constipation, and hindgut support. Critical for hindgut fermenters.", "notes_ja": "GI stasis、便秘、後腸サポートに。後腸発酵動物に重要。"},
+            "bird": {"safe": True, "dosage": "Refer to product label; adjust for body size", "dosage_ja": "製品ラベル参照。体格に応じて調整", "notes": "For crop stasis, diarrhea, and post-antibiotic dysbiosis in birds.", "notes_ja": "鳥のそのう停滞、下痢、抗菌薬投与後の腸内細菌叢異常に。"},
+            "parakeet": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For dysbiosis and chronic GI issues in budgerigars.", "notes_ja": "セキセイインコの腸内細菌叢異常、慢性GI問題に。"},
+            "parrot": {"safe": True, "dosage": "Refer to product label; adjust for body size", "dosage_ja": "製品ラベル参照。体格に応じて調整", "notes": "For crop stasis, PDD support, and dysbiosis in parrots.", "notes_ja": "オウムのそのう停滞、PDD支持療法、腸内細菌叢異常に。"},
         },
         "side_effects": ["generally well tolerated", "increased fecal water content (expected therapeutic effect)"],
         "side_effects_ja": ["一般的に忍容性良好", "糞便含水量の増加（期待される治療効果）"],
@@ -1650,7 +1672,7 @@ DRUGS: List[Dict[str, Any]] = [
     {
         "id": "ecvn_for_antioxidant",
         "name": "For Antioxidant (Equine & Canine Vet Nutrition)",
-        "name_ja": "For Antioxidant（Equine & Canine Vet Nutrition）",
+        "name_ja": "フォー・アンチオキシダント（抗酸化／Equine & Canine Vet Nutrition）",
         "category": "supplements",
         "mechanism": "Antioxidant complex combining astaxanthin (potent carotenoid antioxidant from microalgae), melon-derived SOD, vitamin E (tocopherol), and cysteine (glutathione precursor). Provides multi-pathway oxidative stress protection.",
         "mechanism_ja": "アスタキサンチン（微細藻類由来の強力なカロテノイド抗酸化物質）、メロン由来SOD、ビタミンE（トコフェロール）、システイン（グルタチオン前駆体）を組み合わせた抗酸化複合体。多経路の酸化ストレス防御を提供。",
@@ -1660,7 +1682,19 @@ DRUGS: List[Dict[str, Any]] = [
         "formulations_ja": ["粉末 / 錠剤"],
         "species_info": {
             "dog": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "Supports skin health, coat quality, immune function, and anti-aging. Astaxanthin is 6000x more potent than vitamin C as an antioxidant.", "notes_ja": "皮膚の健康、被毛の質、免疫機能、抗老化をサポート。アスタキサンチンはビタミンCの6000倍の抗酸化力。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "Adjunct for CKD, hepatic disease, atopic dermatitis, and senior support. Astaxanthin and VitE safety well-established in cats.", "notes_ja": "CKD・肝疾患・アトピー性皮膚炎・シニアサポートの併用療法。アスタキサンチンとビタミンEの猫での安全性は確立されている。"},
             "horse": {"safe": True, "dosage": "Refer to product label", "dosage_ja": "製品ラベル参照", "notes": "Astaxanthin and amino acids for cosmetic improvement and reproductive support.", "notes_ja": "アスタキサンチンとアミノ酸によるコズミ改善と繁殖サポート。"},
+            "rabbit": {"safe": True, "dosage": "Refer to product label; adjust for body weight", "dosage_ja": "製品ラベル参照。体重に応じて調整", "notes": "Supportive for GI stasis recovery, skin/coat issues, and senior rabbits with oxidative stress.", "notes_ja": "GI stasis回復期、皮膚・被毛不良、酸化ストレス関連の高齢ウサギに。"},
+            "ferret": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "Adjunct for adrenal disease, insulinoma, and chronic inflammatory conditions.", "notes_ja": "副腎疾患、インスリノーマ、慢性炎症性疾患の併用療法。"},
+            "hamster": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior hamsters with oxidative stress-related conditions. Monitor for dosing accuracy.", "notes_ja": "酸化ストレス関連疾患の高齢ハムスターに。用量の正確性に注意。"},
+            "guinea_pig": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Adjunct for skin disease, chronic inflammation, and GI issues. Complements vitamin C supplementation.", "notes_ja": "皮膚疾患、慢性炎症、GI問題の併用療法。ビタミンC補給と併用で相乗効果。"},
+            "chinchilla": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For dental, skin, and GI-related oxidative stress in chinchillas.", "notes_ja": "チンチラの歯科・皮膚・GI関連の酸化ストレスサポート。"},
+            "hedgehog": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Adjunct for WHS, neoplasia, and chronic inflammatory conditions.", "notes_ja": "WHS、腫瘍、慢性炎症性疾患の併用療法。"},
+            "sugar_glider": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Supportive for chronic stress/self-mutilation and senior conditions.", "notes_ja": "慢性ストレス・自咬症、高齢期の支持療法。"},
+            "degu": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior degus with diabetes, dental disease, or chronic conditions. Note: avoid high sugar supplements.", "notes_ja": "糖尿病、歯科疾患、慢性疾患の高齢デグーに。高糖分サプリは避ける。"},
+            "bird": {"safe": True, "dosage": "Refer to product label; adjust for body size", "dosage_ja": "製品ラベル参照。体格に応じて調整", "notes": "Supportive for chronic viral infections, feather/skin issues, and senior birds.", "notes_ja": "慢性ウイルス感染、羽毛・皮膚問題、高齢鳥の支持療法。"},
+            "parakeet": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For PBFD, polyomavirus, and chronic feather plucking.", "notes_ja": "PBFD、ポリオーマウイルス、慢性羽毛毟りに。"},
+            "parrot": {"safe": True, "dosage": "Refer to product label; adjust for body size", "dosage_ja": "製品ラベル参照。体格に応じて調整", "notes": "For PBFD, proventricular dilatation disease, and atherosclerosis management.", "notes_ja": "PBFD、腺胃拡張症、動脈硬化症の管理に。"},
         },
         "side_effects": ["generally well tolerated"],
         "side_effects_ja": ["一般的に忍容性良好"],
@@ -1674,7 +1708,7 @@ DRUGS: List[Dict[str, Any]] = [
     {
         "id": "ecvn_for_joint",
         "name": "For Joint (Equine & Canine Vet Nutrition)",
-        "name_ja": "For Joint（Equine & Canine Vet Nutrition）",
+        "name_ja": "フォー・ジョイント（関節ケア／Equine & Canine Vet Nutrition）",
         "category": "supplements",
         "mechanism": "Joint support supplement with high-dose MSM (methylsulfonylmethane) for anti-inflammatory and connective tissue support, combined with glucosamine and chondroitin precursors for cartilage maintenance.",
         "mechanism_ja": "高容量MSM（メチルスルフォニルメタン）による抗炎症・結合組織サポートに、グルコサミン・コンドロイチン前駆体を組み合わせた関節サポートサプリメント。",
@@ -1684,7 +1718,16 @@ DRUGS: List[Dict[str, Any]] = [
         "formulations_ja": ["粉末 / 錠剤"],
         "species_info": {
             "dog": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "For osteoarthritis, hip/elbow dysplasia, post-surgical joint recovery, and active/working dogs.", "notes_ja": "変形性関節症、股関節/肘関節形成不全、術後の関節回復、活動的な犬・使役犬に。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For feline OA (underdiagnosed — >60% cats >12y), post-trauma joint recovery, and senior mobility support.", "notes_ja": "猫のOA（12歳以上の60%以上で罹患 — 診断不足傾向）、外傷後の関節回復、高齢猫の運動機能サポートに。"},
             "horse": {"safe": True, "dosage": "Refer to product label - high-dose MSM formulation", "dosage_ja": "製品ラベル参照 - 高容量MSM配合", "notes": "Designed for equine joint, muscle, and tendon support. High-dose MSM is the key differentiator.", "notes_ja": "馬の関節・筋肉・腱のサポート用に設計。高容量MSMが特徴。"},
+            "rabbit": {"safe": True, "dosage": "Refer to product label; adjust for body weight", "dosage_ja": "製品ラベル参照。体重に応じて調整", "notes": "For spondylosis (very common in senior rabbits) and OA. Environmental enrichment (ramps, soft bedding) is equally important.", "notes_ja": "脊椎症（高齢ウサギで非常に一般的）、OAに。環境改善（スロープ、軟質寝具）も同様に重要。"},
+            "ferret": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For OA, intervertebral disc disease, and post-surgical recovery in ferrets.", "notes_ja": "フェレットのOA、椎間板疾患、術後回復に。"},
+            "hamster": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior hamsters with joint stiffness or traumatic musculoskeletal conditions.", "notes_ja": "関節硬直や外傷性筋骨格疾患の高齢ハムスターに。"},
+            "guinea_pig": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Adjunct for pododermatitis-associated inflammation, OA, and post-trauma recovery.", "notes_ja": "足底皮膚炎関連の炎症、OA、外傷後回復の併用療法。"},
+            "chinchilla": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior chinchillas with OA or traumatic joint injury.", "notes_ja": "OAや外傷性関節損傷の高齢チンチラに。"},
+            "hedgehog": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For WHS-related mobility issues (palliative), OA, and fracture recovery.", "notes_ja": "WHS関連の運動機能障害（緩和）、OA、骨折回復に。"},
+            "sugar_glider": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For metabolic bone disease (Ca deficiency) recovery and traumatic joint injury.", "notes_ja": "代謝性骨疾患（Ca欠乏）回復期、外傷性関節損傷に。"},
+            "degu": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior degus with OA. Avoid concurrent high-sugar supplements.", "notes_ja": "OAの高齢デグーに。高糖分サプリの併用は避ける。"},
         },
         "side_effects": ["generally well tolerated", "mild GI upset at initiation (rare)"],
         "side_effects_ja": ["一般的に忍容性良好", "開始時の軽度消化器症状（まれ）"],
@@ -1693,6 +1736,42 @@ DRUGS: List[Dict[str, Any]] = [
         "drug_interactions": [],
         "sponsor": True,
         "sponsor_url": "https://www.caninevet.jp/",
+        "sponsor_name": "Equine & Canine Vet Nutrition",
+    },
+    {
+        "id": "ecvn_msm_amino_complete",
+        "name": "MSM + Amino Complete (Equine & Canine Vet Nutrition)",
+        "name_ja": "MSM＋アミノコンプリート（Equine & Canine Vet Nutrition）",
+        "category": "supplements",
+        "mechanism": "Combination product featuring high-dose MSM (methylsulfonylmethane) as an organic sulfur donor for glutathione synthesis (hepatoprotective, renoprotective against oxidative injury) and anti-inflammatory / connective tissue support, paired with a comprehensive essential amino acid complex (BCAAs, lysine, methionine, arginine, etc.) for tissue repair, muscle maintenance, and convalescent nutrition. Clinical use spans musculoskeletal/neurologic recovery (OA, IVDD, post-surgical), hepatic disease (BCAAs support hepatic encephalopathy management; sulfur-containing AAs support glutathione), and CKD (BCAA-rich profile helps preserve lean muscle while moderating nitrogen load). Differs from For Joint by emphasizing broad tissue/muscle repair plus hepatic/renal nutritional support rather than cartilage-specific support.",
+        "mechanism_ja": "高容量MSM（メチルスルフォニルメタン）を有機硫黄ドナーとして提供し、グルタチオン合成サポート（肝・腎の酸化ストレス防御）と抗炎症・結合組織サポートを発揮。必須アミノ酸複合体（BCAA、リジン、メチオニン、アルギニン等）を組織修復・筋肉維持・回復期栄養として組み合わせた複合製品。臨床応用は筋骨格・神経系回復（OA・IVDD・術後）に加え、肝疾患（BCAAは肝性脳症管理を支援、含硫アミノ酸はグルタチオン合成に寄与）、CKD（BCAA中心のアミノ酸構成で窒素負荷を抑えつつ除脂肪体重を維持）にも及ぶ。For Jointと異なり関節軟骨特化ではなく、広範な組織・筋肉修復＋肝腎の栄養サポートに焦点。",
+        "routes": ["PO"],
+        "routes_ja": ["経口"],
+        "formulations": ["Powder / Tablets"],
+        "formulations_ja": ["粉末 / 錠剤"],
+        "species_info": {
+            "dog": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "For OA, hip/elbow dysplasia, IVDD, post-surgical recovery, cachexia, senior sarcopenia, convalescence, chronic hepatic disease (MSM sulfur for glutathione + BCAA for encephalopathy), and CKD nutritional support (BCAA-rich AAs preserve lean muscle). Complements For Joint when muscle wasting coexists.", "notes_ja": "OA、股関節/肘関節形成不全、IVDD、術後回復、悪液質、シニアの筋肉減少症、回復期、慢性肝疾患（MSMの硫黄がグルタチオン合成をサポート、BCAAは肝性脳症管理に寄与）、CKDの栄養支持療法（BCAA中心で除脂肪体重を維持）に。筋肉減少を伴う場合はFor Jointと併用で相乗効果。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For senior sarcopenia, feline OA, post-surgical recovery, CKD-associated muscle wasting (IRIS stages 2-3; BCAA-rich AAs moderate nitrogen load), hepatic lipidosis recovery, and cholangiohepatitis support. MSM donates sulfur for glutathione synthesis. Note: cats have unique taurine/methionine requirements.", "notes_ja": "高齢サルコペニア、猫のOA、術後回復、CKD関連筋肉減少（IRIS 2-3期；BCAA中心で窒素負荷を抑制）、肝リピドーシスの回復期、胆管肝炎の支持療法に。MSMの硫黄がグルタチオン合成をサポート。注：猫は独自のタウリン/メチオニン要求性あり。"},
+            "horse": {"safe": True, "dosage": "Refer to product label - high-dose MSM formulation", "dosage_ja": "製品ラベル参照 - 高容量MSM配合", "notes": "For tendinitis, suspensory desmitis, post-training muscle recovery, wound healing, and equine hepatic/renal disease supportive nutrition. Synergistic with For Joint for comprehensive musculoskeletal support.", "notes_ja": "腱炎、繋靱帯炎、調教後の筋肉回復、創傷治癒、馬の肝腎疾患の栄養支持に。For Jointと併用で筋骨格全体のサポートに相乗効果。"},
+            "rabbit": {"safe": True, "dosage": "Refer to product label; adjust for body weight", "dosage_ja": "製品ラベル参照。体重に応じて調整", "notes": "For GI stasis recovery, post-surgical care, OA with muscle wasting, and convalescence. Amino acids support hindgut fermentation.", "notes_ja": "GI stasis回復期、術後ケア、筋肉減少を伴うOA、回復期に。アミノ酸が後腸発酵をサポート。"},
+            "ferret": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For insulinoma-related muscle wasting, post-adrenalectomy recovery, and lymphoma supportive care.", "notes_ja": "インスリノーマ関連の筋肉減少、副腎摘出後の回復、リンパ腫の支持療法に。"},
+            "hamster": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For senior hamsters with muscle wasting and post-trauma recovery.", "notes_ja": "筋肉減少や外傷後回復の高齢ハムスターに。"},
+            "guinea_pig": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For pododermatitis healing, post-trauma recovery, and senior mobility support. Does not replace vitamin C supplementation.", "notes_ja": "足底皮膚炎の治癒、外傷後回復、高齢期の運動機能サポートに。ビタミンC補給の代替にはならない。"},
+            "chinchilla": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For fur ring injury, dental disease recovery, and convalescence after GI/dental surgery.", "notes_ja": "ファーリング損傷、歯科疾患回復期、GI/歯科術後の回復期に。"},
+            "hedgehog": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For WHS supportive care, post-surgical recovery, and neoplasia-related cachexia.", "notes_ja": "WHS支持療法、術後回復、腫瘍関連悪液質に。"},
+            "sugar_glider": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For metabolic bone disease recovery, self-mutilation wound healing, and convalescence.", "notes_ja": "代謝性骨疾患回復期、自咬症の創傷治癒、回復期に。"},
+            "degu": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For tail degloving recovery, post-surgical care, and OA-related muscle loss in seniors.", "notes_ja": "尾剥離後の回復、術後ケア、高齢デグーのOA関連筋肉減少に。"},
+            "bird": {"safe": True, "dosage": "Refer to product label; adjust for body size", "dosage_ja": "製品ラベル参照。体格に応じて調整", "notes": "For post-surgical tissue repair, wound healing after trauma, and convalescence from chronic infection.", "notes_ja": "術後の組織修復、外傷後の創傷治癒、慢性感染からの回復期に。"},
+            "parakeet": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For feather-pluck tissue repair, wound healing, and convalescence.", "notes_ja": "羽毛毟り組織修復、創傷治癒、回復期に。"},
+            "parrot": {"safe": True, "dosage": "Refer to product label; adjust for body size", "dosage_ja": "製品ラベル参照。体格に応じて調整", "notes": "For post-surgical tissue repair, chronic wound healing, and supportive care for chronic infections.", "notes_ja": "術後の組織修復、慢性創傷の治癒、慢性感染の支持療法に。"},
+        },
+        "side_effects": ["generally well tolerated", "mild GI upset at initiation (rare)"],
+        "side_effects_ja": ["一般的に忍容性良好", "開始時の軽度消化器症状（まれ）"],
+        "contraindications": "None known at recommended doses. Use with caution in severe hepatic or renal failure (protein/amino acid load).",
+        "contraindications_ja": "推奨用量では特に知られていない。重度の肝/腎不全ではタンパク質・アミノ酸負荷に注意し慎重に使用。",
+        "drug_interactions": [],
+        "sponsor": True,
+        "sponsor_url": "https://www.caninevet.jp/canineサプリメント/msm-アミノコンプリート/",
         "sponsor_name": "Equine & Canine Vet Nutrition",
     },
     {
@@ -1715,6 +1794,114 @@ DRUGS: List[Dict[str, Any]] = [
         "side_effects_ja": ["一般的に忍容性良好"],
         "contraindications": "Not for deep or arterial bleeding.",
         "contraindications_ja": "深部出血や動脈出血には使用不可。",
+        "drug_interactions": [],
+        "sponsor": True,
+        "sponsor_url": "https://www.caninevet.jp/",
+        "sponsor_name": "Equine & Canine Vet Nutrition",
+    },
+    {
+        "id": "ecvn_relax_cbd",
+        "name": "Canine Vet Relax & CBD (Equine & Canine Vet Nutrition)",
+        "name_ja": "Canine Vet Relax & CBD（Equine & Canine Vet Nutrition）",
+        "category": "supplements",
+        "mechanism": "Full-spectrum CBD (cannabidiol) supplement combined with calming botanicals. CBD acts on the endocannabinoid system (CB1/CB2 receptors) to modulate pain perception, anxiety, seizure threshold, and inflammation without psychoactive effects (negligible THC).",
+        "mechanism_ja": "フルスペクトラムCBD（カンナビジオール）とリラックス系ボタニカルの複合製品。CBDは内因性カンナビノイド系（CB1/CB2受容体）に作用し、疼痛知覚・不安・発作閾値・炎症を調節。精神作用は無視できるレベル（THC極微量）。",
+        "routes": ["PO"],
+        "routes_ja": ["経口"],
+        "formulations": ["Oil / Capsules"],
+        "formulations_ja": ["オイル／カプセル"],
+        "species_info": {
+            "dog": {"safe": True, "dosage": "Refer to product label; typical range 0.5-2 mg/kg PO q12h", "dosage_ja": "製品ラベル参照。一般的には0.5-2 mg/kg 経口 12時間毎", "notes": "For chronic pain (OA, IVDD, cancer), anxiety (separation, noise phobia), refractory epilepsy (CBD increases seizure threshold — Epidiolex evidence class), and end-of-life comfort care. Monitor liver enzymes with long-term use.", "notes_ja": "慢性疼痛（OA・IVDD・がん）、不安（分離不安・騒音恐怖）、難治性てんかん（CBDが発作閾値を上昇 — Epidiolexエビデンスクラス）、ターミナルケアに。長期使用時は肝酵素モニタリング。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose 0.1-0.5 mg/kg PO q12h", "dosage_ja": "製品ラベル参照。0.1-0.5 mg/kg 経口 12時間毎で低用量開始", "notes": "For chronic pain and anxiety in cats. Cats are slower CBD metabolizers — start low. Monitor for ataxia/sedation.", "notes_ja": "猫の慢性疼痛と不安に。猫はCBD代謝が遅いため低用量から開始。運動失調・鎮静に注意。"},
+            "horse": {"safe": True, "dosage": "Refer to product label; higher mg doses for body mass", "dosage_ja": "製品ラベル参照。体格に応じた高用量", "notes": "For anxiety (transport, stall rest), chronic musculoskeletal pain, and behavioral issues. Check FEI/competition regulations on CBD.", "notes_ja": "不安（輸送・厩舎安静）、慢性筋骨格痛、行動問題に。CBDに関するFEI・競技規則を確認。"},
+            "rabbit": {"safe": True, "dosage": "Very low dose; refer to product label", "dosage_ja": "極低用量。製品ラベル参照", "notes": "For chronic pain (OA, spondylosis) and stress management. Limited species-specific data — use conservatively.", "notes_ja": "慢性疼痛（OA・脊椎症）とストレス管理に。種特異データ限定のため慎重に使用。"},
+            "ferret": {"safe": True, "dosage": "Very low dose; refer to product label", "dosage_ja": "極低用量。製品ラベル参照", "notes": "For chronic pain and anxiety in ferrets with adrenal disease or lymphoma.", "notes_ja": "副腎疾患やリンパ腫のフェレットの慢性疼痛・不安に。"},
+        },
+        "side_effects": ["mild sedation", "mild GI upset", "elevated liver enzymes (long-term)"],
+        "side_effects_ja": ["軽度鎮静", "軽度消化器症状", "肝酵素上昇（長期使用）"],
+        "contraindications": "Severe hepatic dysfunction (CBD is hepatically metabolized via CYP450). Caution with concurrent CYP450 inhibitors.",
+        "contraindications_ja": "重度肝機能障害（CBDはCYP450代謝）。CYP450阻害薬併用時は注意。",
+        "drug_interactions": [{"drug": "CYP450 substrates (e.g., phenobarbital, warfarin)", "effect": "CBD inhibits CYP450 enzymes; may increase levels of co-administered drugs", "effect_ja": "CBDはCYP450を阻害し、併用薬の血中濃度を上昇させる可能性"}],
+        "sponsor": True,
+        "sponsor_url": "https://www.caninevet.jp/",
+        "sponsor_name": "Equine & Canine Vet Nutrition",
+    },
+    {
+        "id": "ecvn_protain",
+        "name": "Canine Vet Protain (Equine & Canine Vet Nutrition)",
+        "name_ja": "Canine Vet Protain（Equine & Canine Vet Nutrition）",
+        "category": "supplements",
+        "mechanism": "High-quality protein supplement with collagen synthesis precursors. Designed to maintain lean muscle mass during weight loss, cancer cachexia, and post-surgical recovery. Provides essential amino acids and hydroxyproline for collagen/connective tissue support.",
+        "mechanism_ja": "高品質タンパク質とコラーゲン合成前駆体を配合したサプリメント。減量中・がん悪液質・術後回復期の除脂肪体重維持に設計。必須アミノ酸とヒドロキシプロリンによる結合組織・コラーゲンサポートを提供。",
+        "routes": ["PO"],
+        "routes_ja": ["経口"],
+        "formulations": ["Powder (mix with feed)"],
+        "formulations_ja": ["粉末（飼料に混合）"],
+        "species_info": {
+            "dog": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "For cancer cachexia (lymphoma, hemangiosarcoma, osteosarcoma, mammary tumor), post-orthopedic surgery (cruciate ligament repair), and obesity management (preserves muscle during weight loss).", "notes_ja": "がん悪液質（リンパ腫・血管肉腫・骨肉腫・乳腺腫瘍）、整形外科術後（十字靱帯修復）、肥満管理（減量中の筋肉維持）に。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For feline cancer cachexia, post-surgical recovery, and senior muscle maintenance. Note: cats require higher protein intake than dogs — verify adequate total protein.", "notes_ja": "猫のがん悪液質、術後回復、高齢期の筋肉維持に。注：猫は犬より高タンパク要求。総タンパク摂取量を確認。"},
+            "horse": {"safe": True, "dosage": "Refer to product label", "dosage_ja": "製品ラベル参照", "notes": "For equine post-surgical recovery, muscle wasting, and athletic conditioning.", "notes_ja": "馬の術後回復、筋萎縮、競技馬のコンディショニングに。"},
+        },
+        "side_effects": ["generally well tolerated"],
+        "side_effects_ja": ["一般的に忍容性良好"],
+        "contraindications": "Severe hepatic or renal failure (protein load).",
+        "contraindications_ja": "重度の肝・腎不全（タンパク負荷）。",
+        "drug_interactions": [],
+        "sponsor": True,
+        "sponsor_url": "https://www.caninevet.jp/",
+        "sponsor_name": "Equine & Canine Vet Nutrition",
+    },
+    {
+        "id": "ecvn_booster_relax",
+        "name": "Canine Vet Booster & Relax (Equine & Canine Vet Nutrition)",
+        "name_ja": "Canine Vet Booster & Relax（Equine & Canine Vet Nutrition）",
+        "category": "supplements",
+        "mechanism": "Vitality restoration supplement combining adaptogens, B-complex vitamins, and calming botanicals. Supports energy metabolism and immune function during convalescence while modulating stress response.",
+        "mechanism_ja": "アダプトゲン、Bビタミン複合体、リラックス系ボタニカルを配合した活力回復サプリメント。回復期のエネルギー代謝と免疫機能をサポートしつつ、ストレス応答を調整。",
+        "routes": ["PO"],
+        "routes_ja": ["経口"],
+        "formulations": ["Powder / Capsules"],
+        "formulations_ja": ["粉末／カプセル"],
+        "species_info": {
+            "dog": {"safe": True, "dosage": "Refer to product label for body weight-based dosing", "dosage_ja": "体重に応じた製品ラベルの用量を参照", "notes": "For convalescence from viral infection (distemper, parvo), hypothyroidism energy support, Addison's adjunct, and general fatigue in senior dogs.", "notes_ja": "ウイルス感染（ジステンパー・パルボ）からの回復期、甲状腺機能低下症のエネルギーサポート、アジソン病の補助療法、高齢犬の一般的疲労に。"},
+            "cat": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For post-infection recovery and chronic fatigue in senior cats.", "notes_ja": "感染後の回復期、高齢猫の慢性疲労に。"},
+            "horse": {"safe": True, "dosage": "Refer to product label", "dosage_ja": "製品ラベル参照", "notes": "For fatigue, post-exercise recovery, and convalescence.", "notes_ja": "疲労、運動後回復、病後回復期に。"},
+        },
+        "side_effects": ["generally well tolerated"],
+        "side_effects_ja": ["一般的に忍容性良好"],
+        "contraindications": "None known at recommended doses.",
+        "contraindications_ja": "推奨用量では特に知られていない。",
+        "drug_interactions": [],
+        "sponsor": True,
+        "sponsor_url": "https://www.caninevet.jp/",
+        "sponsor_name": "Equine & Canine Vet Nutrition",
+    },
+    {
+        "id": "ecvn_kamide_milk",
+        "name": "Kamide Milk (Equine & Canine Vet Nutrition)",
+        "name_ja": "カミデミルク（Equine & Canine Vet Nutrition）",
+        "category": "supplements",
+        "mechanism": "Easily digestible liquid nutrition formulation. Designed for critical care / convalescent feeding with highly bioavailable protein, moderate fat, and complete micronutrients. Suitable for syringe/tube feeding.",
+        "mechanism_ja": "消化吸収しやすい流動性栄養製品。生体利用率の高いタンパク質、適度な脂質、完全な微量栄養素を配合し、クリティカルケア・回復期給餌向けに設計。シリンジ・経管投与に適応。",
+        "routes": ["PO", "NG tube", "E tube"],
+        "routes_ja": ["経口", "経鼻胃管", "食道瘻管"],
+        "formulations": ["Liquid / Powder (reconstitute)"],
+        "formulations_ja": ["液体／粉末（溶解型）"],
+        "species_info": {
+            "dog": {"safe": True, "dosage": "Refer to product label; typical 50-100 kcal/kg/day in recovery", "dosage_ja": "製品ラベル参照。回復期は50-100 kcal/kg/日が目安", "notes": "For anorexic/inappetent dogs, post-viral convalescence (parvo, distemper), pancreatitis (low-fat, easy digestion), megaesophagus (liquid swallows easier), and critical care feeding.", "notes_ja": "食欲不振・食欲低下犬、ウイルス感染後の回復期（パルボ・ジステンパー）、膵炎（低脂肪で消化しやすい）、巨大食道（液体は嚥下しやすい）、クリティカルケア給餌に。"},
+            "cat": {"safe": True, "dosage": "Refer to product label", "dosage_ja": "製品ラベル参照", "notes": "For feline hepatic lipidosis (must feed calories early), anorexia, post-surgical feeding, and tube feeding support. Prevents hepatic lipidosis in anorexic cats.", "notes_ja": "猫の肝リピドーシス（早期の熱量投与が重要）、食欲不振、術後給餌、経管栄養サポートに。食欲不振猫の肝リピドーシスを予防。"},
+            "horse": {"safe": True, "dosage": "Refer to product label for foals/convalescent horses", "dosage_ja": "子馬・回復期馬向けは製品ラベル参照", "notes": "For orphan/rejected foals, post-surgical enteral feeding, and convalescent nutrition in horses unable to eat solid feed.", "notes_ja": "孤児・母馬拒絶の子馬、術後経腸栄養、固形飼料を摂取できない回復期の馬に。"},
+            "rabbit": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Critical care feeding for anorexic rabbits with GI stasis. Syringe-feed to maintain gut motility.", "notes_ja": "GI stasisの食欲不振ウサギのクリティカルケア給餌。シリンジ給餌で腸運動を維持。"},
+            "ferret": {"safe": True, "dosage": "Refer to product label; start at low dose", "dosage_ja": "製品ラベル参照。低用量から開始", "notes": "For anorexic ferrets with insulinoma (prevents hypoglycemia) or post-surgical recovery.", "notes_ja": "インスリノーマ（低血糖予防）や術後回復の食欲不振フェレットに。"},
+            "hamster": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For critical care feeding of debilitated hamsters.", "notes_ja": "衰弱したハムスターのクリティカルケア給餌に。"},
+            "guinea_pig": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "For anorexic guinea pigs with GI stasis or dental disease.", "notes_ja": "GI stasisや歯科疾患の食欲不振モルモットに。"},
+            "chinchilla": {"safe": True, "dosage": "Minimal dose; refer to product label", "dosage_ja": "最小量。製品ラベル参照", "notes": "Critical care feeding for chinchillas with dental or GI disease.", "notes_ja": "歯科・消化器疾患のチンチラのクリティカルケア給餌に。"},
+            "bird": {"safe": True, "dosage": "Refer to product label; adjust for body size", "dosage_ja": "製品ラベル参照。体格に応じて調整", "notes": "For hand-feeding chicks, anorexic adults, and crop feeding during illness.", "notes_ja": "雛の人工育雛、食欲不振成鳥、疾病時のそのう給餌に。"},
+        },
+        "side_effects": ["generally well tolerated", "osmotic diarrhea if diluted incorrectly"],
+        "side_effects_ja": ["一般的に忍容性良好", "希釈不適切時の浸透圧性下痢"],
+        "contraindications": "Complete intestinal obstruction. Severe pancreatitis (use reduced-fat version).",
+        "contraindications_ja": "完全腸閉塞。重症膵炎では低脂肪配合を使用。",
         "drug_interactions": [],
         "sponsor": True,
         "sponsor_url": "https://www.caninevet.jp/",
@@ -1968,6 +2155,24 @@ for _drug8 in DRUGS_BATCH_8:
         DRUGS.append(_drug8)
         _existing_ids.add(_drug8["id"])
         _drug_index[_drug8["id"]] = _drug8
+
+# バッチ9 ISCAID尿路感染症ガイドライン薬品を統合（ホスホマイシン、カルバペネム等）
+for _drug9 in DRUGS_BATCH_9:
+    if _drug9["id"] not in _existing_ids:
+        DRUGS.append(_drug9)
+        _existing_ids.add(_drug9["id"])
+        _drug_index[_drug9["id"]] = _drug9
+
+# バッチ9 ISCAID UTI投与ノートを既存薬品に追記
+for _drug_id, _species_notes in ISCAID_UTI_NOTES_PATCH.items():
+    if _drug_id in _drug_index:
+        _si = _drug_index[_drug_id].get("species_info", {})
+        for _sp, _patch in _species_notes.items():
+            if _sp in _si:
+                if "notes_append" in _patch and "notes" in _si[_sp]:
+                    _si[_sp]["notes"] += _patch["notes_append"]
+                if "notes_ja_append" in _patch and "notes_ja" in _si[_sp]:
+                    _si[_sp]["notes_ja"] += _patch["notes_ja_append"]
 
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}

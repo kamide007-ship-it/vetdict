@@ -3,6 +3,7 @@ __pycache__/
 instance/
 .coverage
 *.db
+*.db.backup_*
 venv/
 
 # Phase enrichment runtime files
@@ -13,3 +14,4 @@ diseases_enriched_phase*.json
 qa_report_phase*.json
 diseases_all_species_backup_*.json
 *.backup_*.json
+*.json.backup_*

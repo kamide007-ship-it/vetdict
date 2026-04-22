@@ -297,6 +297,7 @@ _TEMPLATE_MARKERS = (
     "Proper husbandry, balanced nutrition, regular veterinary",
     "involves pathological changes in affected tissues and organ systems",
     "Prognosis depends on severity, timeliness of diagnosis",
+    "Amphibianにおける",
 )
 
 
@@ -347,6 +348,12 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
         for field, value in fallback.items():
             if not disease.get(field):
                 disease[field] = value
+        # Sponsor product adjunct annotations for applicable diseases
+        try:
+            from api.data.sponsor_adjuncts import apply_sponsor_adjuncts_dict
+            apply_sponsor_adjuncts_dict(disease, species)
+        except ImportError:
+            pass
     return diseases
 
 # Import gender risk data

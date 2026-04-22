@@ -13,8 +13,11 @@
 
 from __future__ import annotations
 
-from typing import Callable, Dict, List
+import inspect
+from functools import lru_cache
+from typing import Any, Callable, Dict, List
 
+from api.data.vaccine_mapping import get_preventable_diseases
 from api.species.amphibian_diseases import analyze_symptoms as analyze_amphibian
 from api.species.bird_diseases import analyze_symptoms as analyze_bird
 
@@ -31,10 +34,11 @@ from api.species.fish_diseases import analyze_symptoms as analyze_fish
 from api.species.guinea_pig_diseases import analyze_symptoms as analyze_guinea_pig
 from api.species.hamster_diseases import analyze_symptoms as analyze_hamster
 from api.species.hedgehog_diseases import analyze_symptoms as analyze_hedgehog
-from api.species.helpers import _find_enrichment
+from api.species.helpers import _find_enrichment, _fuzzy_boost_lookup, compute_lab_boosts
 from api.species.lizard_diseases import analyze_symptoms as analyze_lizard
 from api.species.parakeet_diseases import analyze_symptoms as analyze_parakeet
 from api.species.parrot_diseases import analyze_symptoms as analyze_parrot
+from api.species.prevalence_data import get_prevalence_for_species
 from api.species.rabbit_diseases import analyze_symptoms as analyze_rabbit
 from api.species.reptile_diseases import analyze_symptoms as analyze_reptile
 from api.species.snake_diseases import analyze_symptoms as analyze_snake
@@ -65,6 +69,24 @@ _HORSE_TRANS_DEFAULT = (
     "Not directly transmissible between horses in most cases.",
     "ほとんどの場合、馬間で直接伝播しない。",
 )
+
+
+@lru_cache(maxsize=1)
+def _horse_symptom_id_to_name() -> Dict[str, Dict[str, str]]:
+    """Build the {symptom_id: {ja, en}} lookup for horse HEALTH_CHECK_ITEMS once.
+
+    Used to translate raw IDs like 'resp_cough' into display names. Equine items
+    are static at module load, so a 1-slot lru_cache is sufficient.
+    """
+    try:
+        from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+    except ImportError:
+        return {}
+    out: Dict[str, Dict[str, str]] = {}
+    for _cat, items in HEALTH_CHECK_ITEMS.items():
+        for sid, ja_name, en_name in items:
+            out[sid] = {"ja": ja_name, "en": en_name}
+    return out
 
 
 def _horse_category(name: str, desc: str) -> str:
@@ -125,20 +147,12 @@ def analyze_horse(
     vaccine_preventable: set = set()
     vaccine_list = [str(v) for v in (vaccines or []) if v]
     if vaccine_list:
-        try:
-            from api.data.vaccine_mapping import get_preventable_diseases
-            vaccine_preventable = get_preventable_diseases(vaccine_list)
-        except ImportError:
-            pass
+        vaccine_preventable = get_preventable_diseases(vaccine_list)
 
     # Lab boosts for horse
     lab_boosts: Dict[str, float] = {}
     if lab_values:
-        try:
-            from api.species.helpers import compute_lab_boosts
-            lab_boosts = compute_lab_boosts(lab_values, species="horse")
-        except ImportError:
-            pass
+        lab_boosts = compute_lab_boosts(lab_values, species="horse")
 
     possible_conditions = []
     recommended_tests: List[str] = []
@@ -175,7 +189,6 @@ def analyze_horse(
         # Apply lab boost if available
         lab_multiplier = 1.0
         if lab_boosts:
-            from api.species.helpers import _fuzzy_boost_lookup
             lab_multiplier = min(_fuzzy_boost_lookup(name, lab_boosts), 1.5)
             if lab_multiplier == 1.0:
                 lab_multiplier = min(_fuzzy_boost_lookup(name_en, lab_boosts), 1.5)
@@ -320,6 +333,17 @@ def analyze_horse(
         elif u == "moderate" and c.get("match_percent", 0) >= 50 and severity == "low":
             severity = "moderate"
 
+    # Build symptom_names lookup for frontend display (translates raw IDs
+    # like "resp_cough" to {"ja": "咳が出る", "en": "Cough"} in the UI).
+    used_symptoms: set[str] = set(symptoms)
+    for cond in possible_conditions:
+        used_symptoms.update(cond.get("matching_symptoms", []) or [])
+        used_symptoms.update(cond.get("missing_key_symptoms", []) or [])
+    id_to_name = _horse_symptom_id_to_name()
+    symptom_names_lookup: Dict[str, Dict[str, str]] = {
+        sid: id_to_name[sid] for sid in used_symptoms if sid in id_to_name
+    }
+
     return {
         "possible_conditions": possible_conditions,
         "suspected_diseases": possible_conditions,
@@ -337,6 +361,7 @@ def analyze_horse(
         "lab_values": lab_values,
         "vaccination_adjustment_applied": len(vaccine_preventable) > 0,
         "vaccine_preventable_excluded": len(vaccine_preventable) > 0,
+        "symptom_names": symptom_names_lookup,
     }
 
 
@@ -365,6 +390,35 @@ SPECIES_HANDLERS: Dict[str, Callable[[List[str], str | None], Dict]] = {
     "exotic_other": analyze_exotic_other,
     "horse": analyze_horse,
 }
+
+
+@lru_cache(maxsize=None)
+def _handler_kwargs(handler: Callable) -> frozenset[str]:
+    """Return parameter names accepted by a handler (excluding positionals).
+
+    Cached per-handler so we introspect signatures once, then filter optional
+    kwargs deterministically instead of catching TypeError repeatedly.
+    Returns an "all-accepting" sentinel via a special marker if the handler
+    declares **kwargs.
+    """
+    try:
+        sig = inspect.signature(handler)
+    except (TypeError, ValueError):
+        return frozenset()
+    names: set[str] = set()
+    for p in sig.parameters.values():
+        if p.kind == inspect.Parameter.VAR_KEYWORD:
+            return frozenset({"*"})  # accepts everything
+        if p.kind in (inspect.Parameter.KEYWORD_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD):
+            names.add(p.name)
+    return frozenset(names)
+
+
+def _filter_kwargs(handler: Callable, candidates: Dict[str, Any]) -> Dict[str, Any]:
+    accepted = _handler_kwargs(handler)
+    if "*" in accepted:
+        return candidates
+    return {k: v for k, v in candidates.items() if k in accepted}
 
 
 def analyze_species_symptoms(
@@ -405,11 +459,10 @@ def analyze_species_symptoms(
     species_key = (species or "dog").lower()
     if species_key not in SPECIES_HANDLERS:
         raise ValueError(f"Unsupported species: {species}")
-    # Load region-aware prevalence map
-    from api.species.prevalence_data import get_prevalence_for_species
+    # Load region-aware prevalence map (forwarded to handlers that accept it).
     _region = "jp" if lang == "ja" else ("intl" if lang else "")
     _prevalence_map = get_prevalence_for_species(species_key, region=_region)
-    # 犬: 全パラメータを渡す
+    # 犬: 全パラメータを直接渡す（シグネチャが固定）
     if species_key == "dog":
         return analyze_dog(
             symptoms,
@@ -421,47 +474,16 @@ def analyze_species_symptoms(
             vaccines=vaccines,
             vaccination_status=vaccination_status,
         )
-    elif species_key == "horse":
-        handler = SPECIES_HANDLERS[species_key]
-        return handler(
-            symptoms, age_stage,
-            breed=breed, onset=onset, age_years=age_years,
-            species=species_key,
-            lab_values=lab_values,
-            gender=gender,
-            vaccines=vaccines,
-            vaccination_status=vaccination_status,
-        )
-    else:
-        handler = SPECIES_HANDLERS[species_key]
-        # Try passing all params including vaccination and prevalence; fall back gracefully
-        # if the species handler hasn't been updated to accept them yet.
-        try:
-            return handler(
-                symptoms, age_stage,
-                breed=breed, onset=onset, age_years=age_years,
-                species=species_key,
-                lab_values=lab_values,
-                gender=gender,
-                vaccines=vaccines,
-                vaccination_status=vaccination_status,
-                prevalence_map=_prevalence_map,
-            )
-        except TypeError:
-            try:
-                return handler(
-                    symptoms, age_stage,
-                    breed=breed, onset=onset, age_years=age_years,
-                    species=species_key,
-                    lab_values=lab_values,
-                    gender=gender,
-                    prevalence_map=_prevalence_map,
-                )
-            except TypeError:
-                return handler(
-                    symptoms, age_stage,
-                    breed=breed, onset=onset, age_years=age_years,
-                    species=species_key,
-                    lab_values=lab_values,
-                    gender=gender,
-                )
+    handler = SPECIES_HANDLERS[species_key]
+    candidate_kwargs: Dict[str, Any] = {
+        "breed": breed,
+        "onset": onset,
+        "age_years": age_years,
+        "species": species_key,
+        "lab_values": lab_values,
+        "gender": gender,
+        "vaccines": vaccines,
+        "vaccination_status": vaccination_status,
+        "prevalence_map": _prevalence_map,
+    }
+    return handler(symptoms, age_stage, **_filter_kwargs(handler, candidate_kwargs))

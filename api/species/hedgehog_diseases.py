@@ -258,7 +258,7 @@ DISEASES: List[Dict[str, Any]] = [
         "treatment": "Surgical excision with wide margins (>=1 cm) under isoflurane anesthesia is first-line. Cryotherapy is an alternative for small superficial lesions. Limb tumors may require amputation. Adjuvant carboplatin (150 mg/m2 IV q3-4wk) may be considered for incompletely excised tumors. Palliative care with meloxicam (0.2 mg/kg PO SID) for pain; tramadol (2-5 mg/kg PO BID) for moderate-severe pain. Nutritional support essential.",
         "treatment_ja": "ハリネズミの皮膚扁平上皮癌: イソフルラン麻酔下で十分なマージン(1cm以上)を確保した外科的切除が第一選択。小型表在性病変には凍結療法も選択肢。四肢腫瘍では断脚が必要な場合がある。不完全切除例にはカルボプラチン(150mg/m2 IV 3-4週毎)の補助化学療法を検討。疼痛管理: メロキシカム(0.2mg/kg PO SID)、中等度以上の痛みにはトラマドール(2-5mg/kg PO BID)。栄養サポート必須。",
         "prevention": "Prevention is limited for most neoplastic conditions. Regular health examinations facilitate early detection. Spaying/neutering may reduce risk of hormone-dependent tumors.",
-        "prevention_ja": "Prevention includes appropriate management, regular veterinary examinations, proper nutrition, controlled exercise, and maintaining a safe environment.",
+        "prevention_ja": "適切な飼育管理、定期的な獣医師による健康診断、適正な栄養、ストレスの最小化、安全で清潔な飼育環境の維持により予防可能である。",
         "prognosis": "Prognosis depends on tumor type, staging, and response to treatment. Early detection improves outcomes. Malignant tumors carry a guarded to poor long-term prognosis.",
         "prognosis_ja": "Prognosis depends on severity, timeliness of diagnosis, and response to treatment. Early detection and appropriate intervention generally improve outcomes.",
         "onset_pattern": {"chronic"},

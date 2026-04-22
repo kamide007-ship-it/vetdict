@@ -38,6 +38,8 @@ select = [
     "I",      # isort (import ordering)
     "B",      # flake8-bugbear
     "SIM",    # flake8-simplify
+    "C90",    # McCabe complexity
+    "N",      # pep8-naming
 ]
 ignore = [
     "E501",   # line too long (handled gradually)
@@ -47,6 +49,9 @@ ignore = [
     "SIM108", # if-else-block-instead-of-if-exp (readability preference)
 ]
 
+# Unfixable rules (manual review required)
+unfixable = ["F841", "F842"]  # Unused variables must be manually fixed
+
 [tool.ruff.lint.isort]
 known-first-party = ["api"]
 
@@ -55,7 +60,30 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-addopts = "-v --tb=short"
+addopts = "-v --tb=short --cov=api --cov-fail-under=60 --cov-report=term-missing"
 filterwarnings = [
     "ignore::DeprecationWarning",
 ]
+
+[tool.coverage.run]
+source = ["api"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+    "*/venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+precision = 2
+skip_covered = false

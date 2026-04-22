@@ -15,7 +15,10 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install ruff
-      - run: ruff check .
+      - name: ruff lint (strict)
+        run: ruff check . --select=E,W,F,I,B,SIM,C90,N
+      - name: ruff format check
+        run: ruff format . --check
 
   secret-scan:
     runs-on: ubuntu-latest
