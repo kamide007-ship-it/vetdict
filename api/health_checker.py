@@ -621,68 +621,68 @@ SEVERITY_WEIGHTS = {
 # "chronic" = weeks/months or persistent.
 
 _DISEASE_ONSET_BY_ID: dict[str, set[str]] = {
-    "brachycephalic_airway_syndrome":   {"chronic"},
-    "canine_parvovirus":                {"acute"},
-    "canine_distemper":                 {"acute", "subacute"},
-    "kennel_cough":                     {"acute", "subacute"},
-    "canine_influenza":                 {"acute"},
-    "gdv_bloat":                        {"acute"},
-    "hip_dysplasia":                    {"chronic"},
-    "elbow_dysplasia":                  {"chronic"},
-    "ivdd":                             {"acute", "chronic"},
-    "degenerative_myelopathy":          {"chronic"},
-    "epilepsy":                         {"acute"},
-    "atopic_dermatitis":                {"subacute", "chronic"},
-    "pyoderma":                         {"acute", "subacute"},
-    "demodex_mange":                    {"subacute", "chronic"},
-    "allergic_dermatitis":              {"subacute", "chronic"},
-    "hypothyroidism":                   {"chronic"},
-    "cushings_disease":                 {"chronic"},
-    "addisons_disease":                 {"acute", "chronic"},
-    "diabetes_mellitus":                {"chronic"},
-    "chronic_kidney_disease":           {"chronic"},
-    "urinary_stones":                   {"subacute", "chronic"},
-    "dcm":                              {"chronic"},
-    "mitral_valve_disease":             {"chronic"},
-    "pda":                              {"chronic"},
-    "cataracts":                        {"chronic"},
-    "glaucoma":                         {"acute", "chronic"},
-    "pra":                              {"chronic"},
-    "cherry_eye":                       {"acute"},
-    "pancreatitis":                     {"acute", "chronic"},
-    "ibd":                              {"chronic"},
-    "liver_disease":                    {"subacute", "chronic"},
-    "hemangiosarcoma":                  {"acute", "chronic"},
-    "lymphoma":                         {"subacute", "chronic"},
-    "osteosarcoma":                     {"subacute", "chronic"},
-    "mast_cell_tumor":                  {"subacute", "chronic"},
-    "patellar_luxation":                {"acute", "chronic"},
-    "cruciate_ligament_rupture":        {"acute"},
-    "laryngeal_paralysis":              {"chronic"},
-    "megaesophagus":                    {"chronic"},
-    "von_willebrand_disease":           {"acute"},
-    "imha":                             {"acute", "subacute"},
-    "portosystemic_shunt":              {"chronic"},
-    "wobbler_syndrome":                 {"subacute", "chronic"},
-    "legg_calve_perthes":               {"subacute", "chronic"},
-    "syringomyelia":                    {"chronic"},
-    "tracheal_collapse":                {"chronic"},
-    "subaortic_stenosis":               {"chronic"},
-    "arvc":                             {"chronic"},
-    "entropion":                        {"chronic"},
-    "ectropion":                        {"chronic"},
-    "lens_luxation":                    {"acute"},
-    "corneal_dystrophy":                {"chronic"},
-    "retinal_dysplasia":                {"chronic"},
-    "collie_eye_anomaly":               {"chronic"},
-    "pug_encephalitis":                 {"acute", "subacute"},
-    "cerebellar_ataxia":                {"chronic"},
-    "epi":                              {"chronic"},
-    "familial_nephropathy":             {"chronic"},
-    "hemolytic_anemia":                 {"acute", "subacute"},
-    "sebaceous_adenitis":               {"chronic"},
-    "dermatomyositis":                  {"subacute", "chronic"},
-    "alopecia_x":                       {"chronic"},
+    "brachycephalic_airway_syndrome": {"chronic"},
+    "canine_parvovirus": {"acute"},
+    "canine_distemper": {"acute", "subacute"},
+    "kennel_cough": {"acute", "subacute"},
+    "canine_influenza": {"acute"},
+    "gdv_bloat": {"acute"},
+    "hip_dysplasia": {"chronic"},
+    "elbow_dysplasia": {"chronic"},
+    "ivdd": {"acute", "chronic"},
+    "degenerative_myelopathy": {"chronic"},
+    "epilepsy": {"acute"},
+    "atopic_dermatitis": {"subacute", "chronic"},
+    "pyoderma": {"acute", "subacute"},
+    "demodex_mange": {"subacute", "chronic"},
+    "allergic_dermatitis": {"subacute", "chronic"},
+    "hypothyroidism": {"chronic"},
+    "cushings_disease": {"chronic"},
+    "addisons_disease": {"acute", "chronic"},
+    "diabetes_mellitus": {"chronic"},
+    "chronic_kidney_disease": {"chronic"},
+    "urinary_stones": {"subacute", "chronic"},
+    "dcm": {"chronic"},
+    "mitral_valve_disease": {"chronic"},
+    "pda": {"chronic"},
+    "cataracts": {"chronic"},
+    "glaucoma": {"acute", "chronic"},
+    "pra": {"chronic"},
+    "cherry_eye": {"acute"},
+    "pancreatitis": {"acute", "chronic"},
+    "ibd": {"chronic"},
+    "liver_disease": {"subacute", "chronic"},
+    "hemangiosarcoma": {"acute", "chronic"},
+    "lymphoma": {"subacute", "chronic"},
+    "osteosarcoma": {"subacute", "chronic"},
+    "mast_cell_tumor": {"subacute", "chronic"},
+    "patellar_luxation": {"acute", "chronic"},
+    "cruciate_ligament_rupture": {"acute"},
+    "laryngeal_paralysis": {"chronic"},
+    "megaesophagus": {"chronic"},
+    "von_willebrand_disease": {"acute"},
+    "imha": {"acute", "subacute"},
+    "portosystemic_shunt": {"chronic"},
+    "wobbler_syndrome": {"subacute", "chronic"},
+    "legg_calve_perthes": {"subacute", "chronic"},
+    "syringomyelia": {"chronic"},
+    "tracheal_collapse": {"chronic"},
+    "subaortic_stenosis": {"chronic"},
+    "arvc": {"chronic"},
+    "entropion": {"chronic"},
+    "ectropion": {"chronic"},
+    "lens_luxation": {"acute"},
+    "corneal_dystrophy": {"chronic"},
+    "retinal_dysplasia": {"chronic"},
+    "collie_eye_anomaly": {"chronic"},
+    "pug_encephalitis": {"acute", "subacute"},
+    "cerebellar_ataxia": {"chronic"},
+    "epi": {"chronic"},
+    "familial_nephropathy": {"chronic"},
+    "hemolytic_anemia": {"acute", "subacute"},
+    "sebaceous_adenitis": {"chronic"},
+    "dermatomyositis": {"subacute", "chronic"},
+    "alopecia_x": {"chronic"},
 }
 
 # ---------------------------------------------------------------------------
@@ -1961,8 +1961,11 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["xray", "ofa_radiograph"],
         "breed_risks": {
-            "yorkshire_terrier": 2.5, "poodle_miniature": 2.0, "chihuahua": 1.8,
-            "west_highland_white_terrier": 2.0, "manchester_terrier": 1.8,
+            "yorkshire_terrier": 2.5,
+            "poodle_miniature": 2.0,
+            "chihuahua": 1.8,
+            "west_highland_white_terrier": 2.0,
+            "manchester_terrier": 1.8,
         },
     },
     {
@@ -1975,8 +1978,10 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["mri", "emg", "csf_analysis"],
         "breed_risks": {
-            "cavalier_king_charles": 3.0, "brussels_griffon": 2.0,
-            "chihuahua": 1.5, "maltese": 1.3,
+            "cavalier_king_charles": 3.0,
+            "brussels_griffon": 2.0,
+            "chihuahua": 1.5,
+            "maltese": 1.3,
         },
     },
     {
@@ -1989,9 +1994,14 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["xray", "endoscopy", "ct_scan"],
         "breed_risks": {
-            "yorkshire_terrier": 2.5, "pomeranian": 2.5, "chihuahua": 2.0,
-            "toy_poodle": 2.0, "shih_tzu": 1.8, "maltese": 1.8,
-            "pug": 1.5, "lhasa_apso": 1.5,
+            "yorkshire_terrier": 2.5,
+            "pomeranian": 2.5,
+            "chihuahua": 2.0,
+            "toy_poodle": 2.0,
+            "shih_tzu": 1.8,
+            "maltese": 1.8,
+            "pug": 1.5,
+            "lhasa_apso": 1.5,
         },
     },
     # ---- Cardiac ----
@@ -2005,8 +2015,12 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["echocardiogram", "ecg", "xray"],
         "breed_risks": {
-            "golden_retriever": 2.5, "newfoundland": 2.5, "rottweiler": 2.0,
-            "boxer": 1.8, "german_shepherd": 1.5, "bull_terrier": 1.5,
+            "golden_retriever": 2.5,
+            "newfoundland": 2.5,
+            "rottweiler": 2.0,
+            "boxer": 1.8,
+            "german_shepherd": 1.5,
+            "bull_terrier": 1.5,
         },
     },
     {
@@ -2019,7 +2033,8 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["ecg", "echocardiogram", "genetic_testing"],
         "breed_risks": {
-            "boxer": 3.0, "english_bulldog": 1.5,
+            "boxer": 3.0,
+            "english_bulldog": 1.5,
         },
     },
     # ---- Eye ----
@@ -2033,9 +2048,14 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["cerf_exam", "fluorescein_stain"],
         "breed_risks": {
-            "shar_pei": 3.0, "chow_chow": 2.5, "english_bulldog": 2.0,
-            "rottweiler": 1.8, "great_dane": 1.5, "labrador_retriever": 1.3,
-            "saint_bernard": 2.0, "bloodhound": 2.0,
+            "shar_pei": 3.0,
+            "chow_chow": 2.5,
+            "english_bulldog": 2.0,
+            "rottweiler": 1.8,
+            "great_dane": 1.5,
+            "labrador_retriever": 1.3,
+            "saint_bernard": 2.0,
+            "bloodhound": 2.0,
         },
     },
     {
@@ -2048,8 +2068,12 @@ DISEASES = [
         "severity": "low",
         "recommended_tests": ["cerf_exam"],
         "breed_risks": {
-            "bloodhound": 2.5, "basset_hound": 2.5, "saint_bernard": 2.0,
-            "great_dane": 1.8, "english_bulldog": 1.5, "cocker_spaniel": 1.5,
+            "bloodhound": 2.5,
+            "basset_hound": 2.5,
+            "saint_bernard": 2.0,
+            "great_dane": 1.8,
+            "english_bulldog": 1.5,
+            "cocker_spaniel": 1.5,
         },
     },
     {
@@ -2062,9 +2086,12 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["cerf_exam", "tonometry", "genetic_testing"],
         "breed_risks": {
-            "jack_russell_terrier": 3.0, "miniature_bull_terrier": 2.5,
-            "sealyham_terrier": 2.5, "wire_fox_terrier": 2.0,
-            "tibetan_terrier": 2.0, "border_collie": 1.5,
+            "jack_russell_terrier": 3.0,
+            "miniature_bull_terrier": 2.5,
+            "sealyham_terrier": 2.5,
+            "wire_fox_terrier": 2.0,
+            "tibetan_terrier": 2.0,
+            "border_collie": 1.5,
         },
     },
     {
@@ -2077,8 +2104,12 @@ DISEASES = [
         "severity": "low",
         "recommended_tests": ["cerf_exam", "fluorescein_stain"],
         "breed_risks": {
-            "siberian_husky": 2.5, "samoyed": 2.0, "shetland_sheepdog": 1.8,
-            "beagle": 1.5, "cavalier_king_charles": 1.5, "airedale_terrier": 1.5,
+            "siberian_husky": 2.5,
+            "samoyed": 2.0,
+            "shetland_sheepdog": 1.8,
+            "beagle": 1.5,
+            "cavalier_king_charles": 1.5,
+            "airedale_terrier": 1.5,
         },
     },
     {
@@ -2091,8 +2122,10 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["cerf_exam", "genetic_testing"],
         "breed_risks": {
-            "labrador_retriever": 2.0, "english_springer_spaniel": 2.0,
-            "american_cocker_spaniel": 1.8, "cavalier_king_charles": 1.5,
+            "labrador_retriever": 2.0,
+            "english_springer_spaniel": 2.0,
+            "american_cocker_spaniel": 1.8,
+            "cavalier_king_charles": 1.5,
             "golden_retriever": 1.3,
         },
     },
@@ -2106,8 +2139,11 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["cerf_exam", "genetic_testing"],
         "breed_risks": {
-            "collie": 3.0, "shetland_sheepdog": 2.5, "border_collie": 2.0,
-            "australian_shepherd": 1.8, "nova_scotia_duck_tolling_retriever": 1.5,
+            "collie": 3.0,
+            "shetland_sheepdog": 2.5,
+            "border_collie": 2.0,
+            "australian_shepherd": 1.8,
+            "nova_scotia_duck_tolling_retriever": 1.5,
         },
     },
     # ---- Neurological ----
@@ -2121,7 +2157,9 @@ DISEASES = [
         "severity": "emergency",
         "recommended_tests": ["mri", "csf_analysis", "cbc", "blood_chemistry"],
         "breed_risks": {
-            "pug": 3.0, "maltese": 1.3, "chihuahua": 1.3,
+            "pug": 3.0,
+            "maltese": 1.3,
+            "chihuahua": 1.3,
         },
     },
     {
@@ -2134,8 +2172,10 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["mri", "genetic_testing", "csf_analysis"],
         "breed_risks": {
-            "american_staffordshire_terrier": 2.0, "scottish_terrier": 2.0,
-            "old_english_sheepdog": 1.8, "gordon_setter": 1.8,
+            "american_staffordshire_terrier": 2.0,
+            "scottish_terrier": 2.0,
+            "old_english_sheepdog": 1.8,
+            "gordon_setter": 1.8,
         },
     },
     # ---- Gastrointestinal ----
@@ -2149,7 +2189,9 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["blood_chemistry", "fecal_exam", "ultrasound"],
         "breed_risks": {
-            "german_shepherd": 3.0, "rough_collie": 2.0, "chow_chow": 1.5,
+            "german_shepherd": 3.0,
+            "rough_collie": 2.0,
+            "chow_chow": 1.5,
             "cavalier_king_charles": 1.3,
         },
     },
@@ -2164,8 +2206,10 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["blood_chemistry", "urinalysis", "ultrasound", "genetic_testing"],
         "breed_risks": {
-            "english_cocker_spaniel": 3.0, "bull_terrier": 2.5,
-            "basenji": 2.0, "soft_coated_wheaten_terrier": 2.0,
+            "english_cocker_spaniel": 3.0,
+            "bull_terrier": 2.5,
+            "basenji": 2.0,
+            "soft_coated_wheaten_terrier": 2.0,
         },
     },
     # ---- Hematologic ----
@@ -2179,9 +2223,12 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["cbc", "coombs_test", "blood_chemistry", "urinalysis"],
         "breed_risks": {
-            "cocker_spaniel": 2.5, "english_springer_spaniel": 2.0,
-            "old_english_sheepdog": 1.8, "irish_setter": 1.5,
-            "miniature_schnauzer": 1.5, "poodle": 1.3,
+            "cocker_spaniel": 2.5,
+            "english_springer_spaniel": 2.0,
+            "old_english_sheepdog": 1.8,
+            "irish_setter": 1.5,
+            "miniature_schnauzer": 1.5,
+            "poodle": 1.3,
         },
     },
     # ---- Dermatologic ----
@@ -2195,8 +2242,11 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["skin_biopsy", "skin_scraping"],
         "breed_risks": {
-            "standard_poodle": 3.0, "akita": 2.5, "samoyed": 2.0,
-            "vizsla": 1.8, "german_shepherd": 1.3,
+            "standard_poodle": 3.0,
+            "akita": 2.5,
+            "samoyed": 2.0,
+            "vizsla": 1.8,
+            "german_shepherd": 1.3,
         },
     },
     {
@@ -2209,7 +2259,8 @@ DISEASES = [
         "severity": "moderate",
         "recommended_tests": ["skin_biopsy", "emg", "genetic_testing"],
         "breed_risks": {
-            "shetland_sheepdog": 3.0, "collie": 3.0,
+            "shetland_sheepdog": 3.0,
+            "collie": 3.0,
             "beauceron": 1.5,
         },
     },
@@ -2223,8 +2274,12 @@ DISEASES = [
         "severity": "low",
         "recommended_tests": ["skin_biopsy", "thyroid_panel", "blood_chemistry"],
         "breed_risks": {
-            "pomeranian": 3.0, "alaskan_malamute": 2.0, "siberian_husky": 1.5,
-            "samoyed": 1.5, "chow_chow": 1.5, "miniature_poodle": 1.3,
+            "pomeranian": 3.0,
+            "alaskan_malamute": 2.0,
+            "siberian_husky": 1.5,
+            "samoyed": 1.5,
+            "chow_chow": 1.5,
+            "miniature_poodle": 1.3,
         },
     },
 ]
@@ -3152,6 +3207,7 @@ import math as _math
 # Symptoms appearing in few diseases are more diagnostically specific.
 # IDF = log(N / df) where N = total diseases, df = # diseases containing symptom
 
+
 def _build_symptom_idf():
     """Compute IDF weights for all symptoms across the disease database."""
     n_diseases = len(DISEASES)
@@ -3175,29 +3231,60 @@ _SYMPTOM_IDF = _build_symptom_idf()
 
 _SYMPTOM_SPECIFICITY = {
     # Pathognomonic / very high specificity
-    "bloating": 3.0, "blood_in_stool": 2.5, "blood_in_urine": 2.5,
-    "seizures": 2.5, "paralysis": 2.8, "jaundice": 2.8,
-    "head_tilting": 2.5, "circling": 2.5, "fainting": 2.5,
-    "reverse_sneezing": 2.2, "incontinence": 2.2,
-    "cloudiness_in_eyes": 2.5, "pale_gums": 2.5,
+    "bloating": 3.0,
+    "blood_in_stool": 2.5,
+    "blood_in_urine": 2.5,
+    "seizures": 2.5,
+    "paralysis": 2.8,
+    "jaundice": 2.8,
+    "head_tilting": 2.5,
+    "circling": 2.5,
+    "fainting": 2.5,
+    "reverse_sneezing": 2.2,
+    "incontinence": 2.2,
+    "cloudiness_in_eyes": 2.5,
+    "pale_gums": 2.5,
     # High specificity
-    "tremors": 2.0, "muscle_wasting": 2.0, "joint_swelling": 2.0,
-    "hot_spots": 2.0, "lumps_bumps": 2.0, "excessive_drooling": 1.8,
-    "straining_to_urinate": 2.0, "eye_swelling": 1.8,
-    "swollen_lymph_nodes": 2.2, "squinting": 1.8,
+    "tremors": 2.0,
+    "muscle_wasting": 2.0,
+    "joint_swelling": 2.0,
+    "hot_spots": 2.0,
+    "lumps_bumps": 2.0,
+    "excessive_drooling": 1.8,
+    "straining_to_urinate": 2.0,
+    "eye_swelling": 1.8,
+    "swollen_lymph_nodes": 2.2,
+    "squinting": 1.8,
     # Moderate specificity
-    "coughing": 1.2, "sneezing": 1.2, "nasal_discharge": 1.3,
-    "labored_breathing": 1.5, "wheezing": 1.5,
-    "diarrhea": 1.1, "vomiting": 1.0, "constipation": 1.5,
-    "limping": 1.3, "stiffness": 1.3, "skin_rashes": 1.3,
-    "itching": 1.1, "hair_loss": 1.2, "dry_skin": 1.3,
-    "redness_in_eyes": 1.3, "eye_discharge": 1.2,
-    "frequent_urination": 1.5, "excessive_thirst": 1.5,
-    "rapid_breathing": 1.4, "exercise_intolerance": 1.5,
-    "aggression": 1.5, "excessive_licking": 1.3,
+    "coughing": 1.2,
+    "sneezing": 1.2,
+    "nasal_discharge": 1.3,
+    "labored_breathing": 1.5,
+    "wheezing": 1.5,
+    "diarrhea": 1.1,
+    "vomiting": 1.0,
+    "constipation": 1.5,
+    "limping": 1.3,
+    "stiffness": 1.3,
+    "skin_rashes": 1.3,
+    "itching": 1.1,
+    "hair_loss": 1.2,
+    "dry_skin": 1.3,
+    "redness_in_eyes": 1.3,
+    "eye_discharge": 1.2,
+    "frequent_urination": 1.5,
+    "excessive_thirst": 1.5,
+    "rapid_breathing": 1.4,
+    "exercise_intolerance": 1.5,
+    "aggression": 1.5,
+    "excessive_licking": 1.3,
     # Low specificity (non-specific signs)
-    "lethargy": 0.6, "loss_of_appetite": 0.6, "fever": 0.8,
-    "weight_loss": 0.7, "anxiety": 0.8, "reluctance_to_move": 0.9,
+    "lethargy": 0.6,
+    "loss_of_appetite": 0.6,
+    "fever": 0.8,
+    "weight_loss": 0.7,
+    "anxiety": 0.8,
+    "reluctance_to_move": 0.9,
 }
 
 # --- Pathognomonic symptom clusters ---
@@ -3243,16 +3330,20 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"fainting", "exercise_intolerance", "coughing"}), "dcm", 1.7),
     (frozenset({"fainting", "exercise_intolerance", "rapid_breathing"}), "mitral_valve_disease", 1.7),
     # Diabetes: excessive thirst + frequent urination + weight loss + loss_of_appetite
-    (frozenset({"excessive_thirst", "frequent_urination", "weight_loss", "loss_of_appetite"}), "diabetes_mellitus", 1.9),
+    (
+        frozenset({"excessive_thirst", "frequent_urination", "weight_loss", "loss_of_appetite"}),
+        "diabetes_mellitus",
+        1.9,
+    ),
 ]
 
 # --- Prevalence tiers (prior probability weights) ---
 # Common diseases should rank higher when evidence is ambiguous.
 _PREVALENCE_PRIOR = {
     "very_common": 1.15,  # seen daily in practice
-    "common": 1.08,       # seen weekly
-    "uncommon": 0.95,     # seen monthly
-    "rare": 0.85,         # seen < 1x/year
+    "common": 1.08,  # seen weekly
+    "uncommon": 0.95,  # seen monthly
+    "rare": 0.85,  # seen < 1x/year
 }
 
 # --- Age-based disease category multipliers ---
@@ -3264,32 +3355,33 @@ for _d in DISEASES:
     _syms = set(_d["symptoms"])
     tags = set()
     # Infectious diseases (typically affect young)
-    if _did in ("canine_parvovirus", "canine_distemper", "kennel_cough",
-                "canine_influenza", "leptospirosis"):
+    if _did in ("canine_parvovirus", "canine_distemper", "kennel_cough", "canine_influenza", "leptospirosis"):
         tags.add("infectious")
     # Congenital / developmental
-    if _did in ("hip_dysplasia", "elbow_dysplasia", "patellar_luxation",
-                "portosystemic_shunt", "pda", "cherry_eye"):
+    if _did in ("hip_dysplasia", "elbow_dysplasia", "patellar_luxation", "portosystemic_shunt", "pda", "cherry_eye"):
         tags.add("congenital")
     # Degenerative / age-related
-    if _did in ("degenerative_myelopathy", "wobbler_syndrome", "cataracts",
-                "laryngeal_paralysis", "vestibular_disease",
-                "chronic_kidney_disease", "liver_disease"):
+    if _did in (
+        "degenerative_myelopathy",
+        "wobbler_syndrome",
+        "cataracts",
+        "laryngeal_paralysis",
+        "vestibular_disease",
+        "chronic_kidney_disease",
+        "liver_disease",
+    ):
         tags.add("degenerative")
     # Neoplastic (cancer)
-    if _did in ("hemangiosarcoma", "lymphoma", "osteosarcoma",
-                "mast_cell_tumor", "melanoma"):
+    if _did in ("hemangiosarcoma", "lymphoma", "osteosarcoma", "mast_cell_tumor", "melanoma"):
         tags.add("neoplastic")
     # Endocrine / metabolic
-    if _did in ("hypothyroidism", "cushings_disease", "diabetes_mellitus",
-                "addisons_disease", "pancreatitis", "ibd"):
+    if _did in ("hypothyroidism", "cushings_disease", "diabetes_mellitus", "addisons_disease", "pancreatitis", "ibd"):
         tags.add("metabolic")
     # Cardiac
     if _did in ("dcm", "mitral_valve_disease", "pda"):
         tags.add("cardiac")
     # Autoimmune
-    if _did in ("hemolytic_anemia", "immune_mediated_thrombocytopenia",
-                "pemphigus", "lupus", "dermatomyositis"):
+    if _did in ("hemolytic_anemia", "immune_mediated_thrombocytopenia", "pemphigus", "lupus", "dermatomyositis"):
         tags.add("autoimmune")
     # Neurological
     if "seizures" in _syms or "paralysis" in _syms or "head_tilting" in _syms:
@@ -3298,22 +3390,38 @@ for _d in DISEASES:
 
 # Age multiplier matrix: {age_bracket: {category_tag: multiplier}}
 _AGE_MULTIPLIERS = {
-    "puppy": {    # < 1 year
-        "infectious": 1.5, "congenital": 1.4, "autoimmune": 0.8,
-        "neoplastic": 0.5, "degenerative": 0.4, "metabolic": 0.7,
+    "puppy": {  # < 1 year
+        "infectious": 1.5,
+        "congenital": 1.4,
+        "autoimmune": 0.8,
+        "neoplastic": 0.5,
+        "degenerative": 0.4,
+        "metabolic": 0.7,
     },
-    "young": {    # 1-3 years
-        "infectious": 1.2, "congenital": 1.3, "autoimmune": 1.1,
-        "neoplastic": 0.6, "degenerative": 0.5, "metabolic": 0.8,
+    "young": {  # 1-3 years
+        "infectious": 1.2,
+        "congenital": 1.3,
+        "autoimmune": 1.1,
+        "neoplastic": 0.6,
+        "degenerative": 0.5,
+        "metabolic": 0.8,
     },
-    "adult": {    # 4-7 years
-        "infectious": 1.0, "congenital": 0.8, "autoimmune": 1.1,
-        "neoplastic": 1.1, "degenerative": 0.9, "metabolic": 1.3,
+    "adult": {  # 4-7 years
+        "infectious": 1.0,
+        "congenital": 0.8,
+        "autoimmune": 1.1,
+        "neoplastic": 1.1,
+        "degenerative": 0.9,
+        "metabolic": 1.3,
         "cardiac": 1.2,
     },
-    "senior": {   # 8+ years
-        "infectious": 0.9, "congenital": 0.6, "autoimmune": 1.0,
-        "neoplastic": 1.6, "degenerative": 1.5, "metabolic": 1.3,
+    "senior": {  # 8+ years
+        "infectious": 0.9,
+        "congenital": 0.6,
+        "autoimmune": 1.0,
+        "neoplastic": 1.6,
+        "degenerative": 1.5,
+        "metabolic": 1.3,
         "cardiac": 1.4,
     },
 }
@@ -3529,10 +3637,7 @@ def _analyze_symptoms(breed_id, symptom_ids, age_years=None, onset=None):
                 "matched_symptoms": sorted(matched),
                 "matched_count": len(matched),
                 "total_disease_symptoms": len(disease_symptoms),
-                "missing_key_symptoms": sorted(
-                    s for s in missing
-                    if _SYMPTOM_SPECIFICITY.get(s, 1.0) >= 1.5
-                ),
+                "missing_key_symptoms": sorted(s for s in missing if _SYMPTOM_SPECIFICITY.get(s, 1.0) >= 1.5),
                 "recommended_tests": rec_tests,
                 # Diagnostic transparency
                 "scoring_detail": {
@@ -3581,6 +3686,7 @@ def _get_species_symptom_names(species: str) -> dict[str, dict[str, str]]:
                     names[sid] = {"ja": ja_name, "en": en_name}
         else:
             import importlib
+
             mod_name = "dog_diseases" if species == "dog" else f"{species}_diseases"
             try:
                 mod = importlib.import_module(f"api.species.{mod_name}")
@@ -3608,16 +3714,47 @@ def _humanize_test_id(tid: str) -> str:
     if not tid or not isinstance(tid, str):
         return tid
     import re
+
     # If contains CJK or spaces, leave as-is
     if re.search(r"[\u3000-\u9fff]", tid) or " " in tid:
         return tid
     if "_" not in tid:
         return tid
     parts = tid.split("_")
-    keep_upper = {"cbc", "pcr", "mri", "ct", "ecg", "ekg", "hiv", "fiv", "felv", "fip",
-                  "igg", "igm", "ige", "aids", "hplc", "usg", "pbfd", "bmbv", "bsa",
-                  "acth", "ast", "alt", "alp", "crp", "ldh", "cpk", "tsh", "t3", "t4",
-                  "lh", "fsh", "adh"}
+    keep_upper = {
+        "cbc",
+        "pcr",
+        "mri",
+        "ct",
+        "ecg",
+        "ekg",
+        "hiv",
+        "fiv",
+        "felv",
+        "fip",
+        "igg",
+        "igm",
+        "ige",
+        "aids",
+        "hplc",
+        "usg",
+        "pbfd",
+        "bmbv",
+        "bsa",
+        "acth",
+        "ast",
+        "alt",
+        "alp",
+        "crp",
+        "ldh",
+        "cpk",
+        "tsh",
+        "t3",
+        "t4",
+        "lh",
+        "fsh",
+        "adh",
+    }
     out_parts = []
     for p in parts:
         if p.lower() in keep_upper:
@@ -3689,69 +3826,71 @@ def get_symptoms():
 @health_bp.route("/onset-options", methods=["GET"])
 def get_onset_options():
     """Return available onset (time-course) and age-range options for the UI."""
-    return jsonify({
-        "onset": {
-            "label_ja": "発症時期",
-            "label_en": "Onset / Time Course",
-            "description_ja": "症状がいつ頃から始まったかを選択してください",
-            "description_en": "Select when the symptoms started",
-            "options": [
-                {
-                    "id": "acute",
-                    "label_ja": "急性（24時間以内）",
-                    "label_en": "Acute (within 24 hours)",
-                    "description_ja": "突然発症した症状",
-                    "description_en": "Sudden onset symptoms",
-                },
-                {
-                    "id": "subacute",
-                    "label_ja": "亜急性（数日〜1週間）",
-                    "label_en": "Subacute (days to ~1 week)",
-                    "description_ja": "数日かけて徐々に現れた症状",
-                    "description_en": "Symptoms developed over several days",
-                },
-                {
-                    "id": "chronic",
-                    "label_ja": "慢性（2週間以上）",
-                    "label_en": "Chronic (2 weeks or more)",
-                    "description_ja": "長期間にわたり持続している症状",
-                    "description_en": "Persistent symptoms over weeks/months",
-                },
-            ],
-        },
-        "age_range": {
-            "label_ja": "年齢",
-            "label_en": "Age",
-            "description_ja": "動物の年齢を選択してください",
-            "description_en": "Select the animal's age range",
-            "options": [
-                {
-                    "id": "puppy",
-                    "label_ja": "子犬（1歳未満）",
-                    "label_en": "Puppy (under 1 year)",
-                    "age_range": [0, 1],
-                },
-                {
-                    "id": "young",
-                    "label_ja": "若齢（1〜3歳）",
-                    "label_en": "Young (1–3 years)",
-                    "age_range": [1, 3],
-                },
-                {
-                    "id": "adult",
-                    "label_ja": "成犬（3〜7歳）",
-                    "label_en": "Adult (3–7 years)",
-                    "age_range": [3, 7],
-                },
-                {
-                    "id": "senior",
-                    "label_ja": "高齢（7歳以上）",
-                    "label_en": "Senior (7+ years)",
-                    "age_range": [7, 20],
-                },
-            ],
-        },
-    })
+    return jsonify(
+        {
+            "onset": {
+                "label_ja": "発症時期",
+                "label_en": "Onset / Time Course",
+                "description_ja": "症状がいつ頃から始まったかを選択してください",
+                "description_en": "Select when the symptoms started",
+                "options": [
+                    {
+                        "id": "acute",
+                        "label_ja": "急性（24時間以内）",
+                        "label_en": "Acute (within 24 hours)",
+                        "description_ja": "突然発症した症状",
+                        "description_en": "Sudden onset symptoms",
+                    },
+                    {
+                        "id": "subacute",
+                        "label_ja": "亜急性（数日〜1週間）",
+                        "label_en": "Subacute (days to ~1 week)",
+                        "description_ja": "数日かけて徐々に現れた症状",
+                        "description_en": "Symptoms developed over several days",
+                    },
+                    {
+                        "id": "chronic",
+                        "label_ja": "慢性（2週間以上）",
+                        "label_en": "Chronic (2 weeks or more)",
+                        "description_ja": "長期間にわたり持続している症状",
+                        "description_en": "Persistent symptoms over weeks/months",
+                    },
+                ],
+            },
+            "age_range": {
+                "label_ja": "年齢",
+                "label_en": "Age",
+                "description_ja": "動物の年齢を選択してください",
+                "description_en": "Select the animal's age range",
+                "options": [
+                    {
+                        "id": "puppy",
+                        "label_ja": "子犬（1歳未満）",
+                        "label_en": "Puppy (under 1 year)",
+                        "age_range": [0, 1],
+                    },
+                    {
+                        "id": "young",
+                        "label_ja": "若齢（1〜3歳）",
+                        "label_en": "Young (1–3 years)",
+                        "age_range": [1, 3],
+                    },
+                    {
+                        "id": "adult",
+                        "label_ja": "成犬（3〜7歳）",
+                        "label_en": "Adult (3–7 years)",
+                        "age_range": [3, 7],
+                    },
+                    {
+                        "id": "senior",
+                        "label_ja": "高齢（7歳以上）",
+                        "label_en": "Senior (7+ years)",
+                        "age_range": [7, 20],
+                    },
+                ],
+            },
+        }
+    )
 
 
 @health_bp.route("/diseases", methods=["GET"])
@@ -3769,31 +3908,39 @@ def get_diseases():
             symptoms = d.get("symptoms", set())
             if isinstance(symptoms, set):
                 symptoms = sorted(symptoms)
-            output.append(enrich_disease_content({
-                    "name": d.get("name", ""),
-                    "name_ja": d.get("name_ja", ""),
-                    "description": d.get("description", ""),
-                    "description_ja": d.get("description_ja", ""),
-                    "pathophysiology": d.get("pathophysiology", ""),
-                    "pathophysiology_ja": d.get("pathophysiology_ja", ""),
-                    "causes": d.get("causes", ""),
-                    "causes_ja": d.get("causes_ja", ""),
-                    "prevention": d.get("prevention", ""),
-                    "prevention_ja": d.get("prevention_ja", ""),
-                    "treatment": d.get("treatment", ""),
-                    "treatment_ja": d.get("treatment_ja", ""),
-                    "prognosis": d.get("prognosis", ""),
-                    "prognosis_ja": d.get("prognosis_ja", ""),
-                    "severity": d.get("urgency", d.get("severity", "")),
-                    "symptoms": symptoms,
-                    "symptoms_display": _build_symptoms_display(symptoms, "dog"),
-                    "recommended_tests_display": _build_recommended_tests_display(d.get("recommended_tests") or [], "dog"),
-                }, "dog"))
+            output.append(
+                enrich_disease_content(
+                    {
+                        "name": d.get("name", ""),
+                        "name_ja": d.get("name_ja", ""),
+                        "description": d.get("description", ""),
+                        "description_ja": d.get("description_ja", ""),
+                        "pathophysiology": d.get("pathophysiology", ""),
+                        "pathophysiology_ja": d.get("pathophysiology_ja", ""),
+                        "causes": d.get("causes", ""),
+                        "causes_ja": d.get("causes_ja", ""),
+                        "prevention": d.get("prevention", ""),
+                        "prevention_ja": d.get("prevention_ja", ""),
+                        "treatment": d.get("treatment", ""),
+                        "treatment_ja": d.get("treatment_ja", ""),
+                        "prognosis": d.get("prognosis", ""),
+                        "prognosis_ja": d.get("prognosis_ja", ""),
+                        "severity": d.get("urgency", d.get("severity", "")),
+                        "symptoms": symptoms,
+                        "symptoms_display": _build_symptoms_display(symptoms, "dog"),
+                        "recommended_tests_display": _build_recommended_tests_display(
+                            d.get("recommended_tests") or [], "dog"
+                        ),
+                    },
+                    "dog",
+                )
+            )
     elif species == "horse":
         try:
             from api.species.equine_diseases import DISEASE_DATABASE
         except ImportError:
             from species.equine_diseases import DISEASE_DATABASE
+
         def _ga(obj, attr, default=""):
             return getattr(obj, attr, default) if not isinstance(obj, dict) else obj.get(attr, default)
 
@@ -3811,29 +3958,35 @@ def get_diseases():
                 elif isinstance(item, str):
                     exams_display.append({"id": item, "name_ja": item, "name_en": item})
                     exams_flat.append(item)
-            output.append(enrich_disease_content({
-                    "name": _ga(d, "name_en"),
-                    "name_ja": _ga(d, "name_ja"),
-                    "description": _ga(d, "clinical_signs_detail"),
-                    "description_ja": _ga(d, "description_ja"),
-                    "pathophysiology": "",
-                    "pathophysiology_ja": _ga(d, "pathophysiology"),
-                    "causes": "",
-                    "causes_ja": _ga(d, "etiology") or _ga(d, "risk_factors"),
-                    "prevention": "",
-                    "prevention_ja": _ga(d, "prevention"),
-                    "treatment": "",
-                    "treatment_ja": _ga(d, "treatment_protocol") or _ga(d, "general_management"),
-                    "prognosis": "",
-                    "prognosis_ja": _ga(d, "prognosis"),
-                    "severity": _ga(d, "severity"),
-                    "symptoms": findings,
-                    "symptoms_display": _build_symptoms_display(findings, "horse"),
-                    "recommended_tests": exams_flat,
-                    "recommended_tests_display": exams_display,
-                }, "horse"))
+            output.append(
+                enrich_disease_content(
+                    {
+                        "name": _ga(d, "name_en"),
+                        "name_ja": _ga(d, "name_ja"),
+                        "description": _ga(d, "clinical_signs_detail"),
+                        "description_ja": _ga(d, "description_ja"),
+                        "pathophysiology": "",
+                        "pathophysiology_ja": _ga(d, "pathophysiology"),
+                        "causes": "",
+                        "causes_ja": _ga(d, "etiology") or _ga(d, "risk_factors"),
+                        "prevention": "",
+                        "prevention_ja": _ga(d, "prevention"),
+                        "treatment": "",
+                        "treatment_ja": _ga(d, "treatment_protocol") or _ga(d, "general_management"),
+                        "prognosis": "",
+                        "prognosis_ja": _ga(d, "prognosis"),
+                        "severity": _ga(d, "severity"),
+                        "symptoms": findings,
+                        "symptoms_display": _build_symptoms_display(findings, "horse"),
+                        "recommended_tests": exams_flat,
+                        "recommended_tests_display": exams_display,
+                    },
+                    "horse",
+                )
+            )
     else:
         import importlib
+
         try:
             mod = importlib.import_module(f"api.species.{species}_diseases")
         except ImportError:
@@ -3846,27 +3999,32 @@ def get_diseases():
             rec_tests = d.get("recommended_tests", [])
             if isinstance(rec_tests, set):
                 rec_tests = sorted(rec_tests)
-            output.append(enrich_disease_content({
-                    "name": d.get("name", d.get("name_en", "")),
-                    "name_ja": d.get("name_ja", ""),
-                    "description": d.get("description", d.get("description_en", "")),
-                    "description_ja": d.get("description_ja", ""),
-                    "pathophysiology": d.get("pathophysiology", d.get("pathophysiology_en", "")),
-                    "pathophysiology_ja": d.get("pathophysiology_ja", ""),
-                    "causes": d.get("causes", d.get("causes_en", "")),
-                    "causes_ja": d.get("causes_ja", ""),
-                    "prevention": d.get("prevention", d.get("prevention_en", "")),
-                    "prevention_ja": d.get("prevention_ja", ""),
-                    "treatment": d.get("treatment", d.get("treatment_en", "")),
-                    "treatment_ja": d.get("treatment_ja", ""),
-                    "prognosis": d.get("prognosis", d.get("prognosis_en", "")),
-                    "prognosis_ja": d.get("prognosis_ja", ""),
-                    "severity": d.get("urgency", d.get("severity", "")),
-                    "symptoms": symptoms,
-                    "symptoms_display": _build_symptoms_display(symptoms, species),
-                    "recommended_tests": rec_tests,
-                    "recommended_tests_display": _build_recommended_tests_display(rec_tests, species),
-                }, species))
+            output.append(
+                enrich_disease_content(
+                    {
+                        "name": d.get("name", d.get("name_en", "")),
+                        "name_ja": d.get("name_ja", ""),
+                        "description": d.get("description", d.get("description_en", "")),
+                        "description_ja": d.get("description_ja", ""),
+                        "pathophysiology": d.get("pathophysiology", d.get("pathophysiology_en", "")),
+                        "pathophysiology_ja": d.get("pathophysiology_ja", ""),
+                        "causes": d.get("causes", d.get("causes_en", "")),
+                        "causes_ja": d.get("causes_ja", ""),
+                        "prevention": d.get("prevention", d.get("prevention_en", "")),
+                        "prevention_ja": d.get("prevention_ja", ""),
+                        "treatment": d.get("treatment", d.get("treatment_en", "")),
+                        "treatment_ja": d.get("treatment_ja", ""),
+                        "prognosis": d.get("prognosis", d.get("prognosis_en", "")),
+                        "prognosis_ja": d.get("prognosis_ja", ""),
+                        "severity": d.get("urgency", d.get("severity", "")),
+                        "symptoms": symptoms,
+                        "symptoms_display": _build_symptoms_display(symptoms, species),
+                        "recommended_tests": rec_tests,
+                        "recommended_tests_display": _build_recommended_tests_display(rec_tests, species),
+                    },
+                    species,
+                )
+            )
 
     # Inject hiragana reading for あいうえお sorting
     for item in output:
@@ -3895,13 +4053,15 @@ def disease_quality_report():
     for d in with_missing:
         for f in d.get("missing_fields", []):
             top_missing[f] = top_missing.get(f, 0) + 1
-    return jsonify({
-        "species": species,
-        "total_diseases": total,
-        "average_completeness": avg,
-        "diseases_with_missing_fields": len(with_missing),
-        "missing_field_counts": dict(sorted(top_missing.items(), key=lambda x: x[1], reverse=True)),
-    })
+    return jsonify(
+        {
+            "species": species,
+            "total_diseases": total,
+            "average_completeness": avg,
+            "diseases_with_missing_fields": len(with_missing),
+            "missing_field_counts": dict(sorted(top_missing.items(), key=lambda x: x[1], reverse=True)),
+        }
+    )
 
 
 @health_bp.route("/analyze", methods=["POST"])
@@ -4020,7 +4180,7 @@ def analyze():
                 "name_en": "Kentaro Kaimide, DVM",
                 "clinic_ja": "南相馬動物病院",
                 "clinic_en": "Minamisoma Veterinary Clinic",
-                "url": "https://www.minamisoma-vet.com/"
+                "url": "https://www.minamisoma-vet.com/",
             },
         }
     )
@@ -4072,9 +4232,7 @@ def get_breed_risks(breed_id):
         response["breed_name_ja"] = genetic_data["name_ja"]
         response["breed_name_en"] = genetic_data["name_en"]
         response["dna_tests"] = genetic_data["dna_tests"]
-        response["screening_recommendations"] = genetic_data[
-            "screening_recommendations"
-        ]
+        response["screening_recommendations"] = genetic_data["screening_recommendations"]
     else:
         response["breed_name_ja"] = None
         response["breed_name_en"] = None

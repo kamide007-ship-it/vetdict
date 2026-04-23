@@ -73,11 +73,20 @@ def _horse_category(name: str, desc: str) -> str:
     for cat in ("viral", "bacterial", "fungal", "parasitic"):
         keywords = {
             "viral": ["virus", "viral", "herpes", "influenza", "ehv", "eav", "wnv", "rabies"],
-            "bacterial": ["bacterial", "streptococc", "staphylococc", "clostrid", "salmonell",
-                          "rhodococc", "strangles", "abscess", "septic", "cellulitis"],
+            "bacterial": [
+                "bacterial",
+                "streptococc",
+                "staphylococc",
+                "clostrid",
+                "salmonell",
+                "rhodococc",
+                "strangles",
+                "abscess",
+                "septic",
+                "cellulitis",
+            ],
             "fungal": ["fungal", "mycosis", "aspergill", "ringworm", "dermatophyt"],
-            "parasitic": ["parasit", "strongyl", "ascarid", "tapeworm", "bot", "mange",
-                          "mite", "tick", "lice"],
+            "parasitic": ["parasit", "strongyl", "ascarid", "tapeworm", "bot", "mange", "mite", "tick", "lice"],
         }
         for kw in keywords[cat]:
             if kw in combined:
@@ -127,6 +136,7 @@ def analyze_horse(
     if vaccine_list:
         try:
             from api.data.vaccine_mapping import get_preventable_diseases
+
             vaccine_preventable = get_preventable_diseases(vaccine_list)
         except ImportError:
             pass
@@ -136,6 +146,7 @@ def analyze_horse(
     if lab_values:
         try:
             from api.species.helpers import compute_lab_boosts
+
             lab_boosts = compute_lab_boosts(lab_values, species="horse")
         except ImportError:
             pass
@@ -165,17 +176,24 @@ def analyze_horse(
         _cat = _horse_category(dis.name_en or "", dis.description_ja or "")
         _trans = _HORSE_TRANSMISSION.get(_cat, _HORSE_TRANS_DEFAULT)
         _diag_en = (
-            f"Diagnosis is based on clinical signs, history, and physical examination. "
-            f"Recommended diagnostics: {', '.join(tests[:4])}."
-        ) if tests else "Diagnosis is based on clinical signs, history, and physical examination."
+            (
+                f"Diagnosis is based on clinical signs, history, and physical examination. "
+                f"Recommended diagnostics: {', '.join(tests[:4])}."
+            )
+            if tests
+            else "Diagnosis is based on clinical signs, history, and physical examination."
+        )
         _diag_ja = (
-            f"臨床徴候、病歴、身体検査に基づき診断する。推奨検査: {', '.join(tests[:4])}。"
-        ) if tests else "臨床徴候、病歴、身体検査に基づき診断する。"
+            (f"臨床徴候、病歴、身体検査に基づき診断する。推奨検査: {', '.join(tests[:4])}。")
+            if tests
+            else "臨床徴候、病歴、身体検査に基づき診断する。"
+        )
 
         # Apply lab boost if available
         lab_multiplier = 1.0
         if lab_boosts:
             from api.species.helpers import _fuzzy_boost_lookup
+
             lab_multiplier = min(_fuzzy_boost_lookup(name, lab_boosts), 1.5)
             if lab_multiplier == 1.0:
                 lab_multiplier = min(_fuzzy_boost_lookup(name_en, lab_boosts), 1.5)
@@ -191,9 +209,12 @@ def analyze_horse(
         age_multiplier = 1.0
         if age_years is not None:
             horse_age_stage = (
-                "puppy" if age_years < 1.0
-                else "young" if age_years < 4.0
-                else "adult" if age_years < 15.0
+                "puppy"
+                if age_years < 1.0
+                else "young"
+                if age_years < 4.0
+                else "adult"
+                if age_years < 15.0
                 else "senior"
             )
             age_pred = getattr(dis, "age_predisposition", None)
@@ -287,9 +308,16 @@ def analyze_horse(
 
     # JSON エンリッチメントから日本語フィールドを補完
     _ja_enrich_fields = (
-        "pathophysiology_ja", "causes_ja", "treatment_ja",
-        "prevention_ja", "prognosis_ja", "clinical_signs_ja",
-        "transmission", "transmission_ja", "diagnosis", "diagnosis_ja",
+        "pathophysiology_ja",
+        "causes_ja",
+        "treatment_ja",
+        "prevention_ja",
+        "prognosis_ja",
+        "clinical_signs_ja",
+        "transmission",
+        "transmission_ja",
+        "diagnosis",
+        "diagnosis_ja",
     )
     for cond in possible_conditions:
         # 英語名で検索（最も確実）→ 日本語名フォールバック
@@ -329,6 +357,7 @@ def analyze_horse(
     symptom_names_lookup: Dict[str, Dict[str, str]] = {}
     try:
         from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+
         id_to_name: Dict[str, Dict[str, str]] = {}
         for _cat, items in HEALTH_CHECK_ITEMS.items():
             for sid, ja_name, en_name in items:
@@ -427,6 +456,7 @@ def analyze_species_symptoms(
         raise ValueError(f"Unsupported species: {species}")
     # Load region-aware prevalence map
     from api.species.prevalence_data import get_prevalence_for_species
+
     _region = "jp" if lang == "ja" else ("intl" if lang else "")
     _prevalence_map = get_prevalence_for_species(species_key, region=_region)
     # 犬: 全パラメータを渡す
@@ -444,8 +474,11 @@ def analyze_species_symptoms(
     elif species_key == "horse":
         handler = SPECIES_HANDLERS[species_key]
         return handler(
-            symptoms, age_stage,
-            breed=breed, onset=onset, age_years=age_years,
+            symptoms,
+            age_stage,
+            breed=breed,
+            onset=onset,
+            age_years=age_years,
             species=species_key,
             lab_values=lab_values,
             gender=gender,
@@ -458,8 +491,11 @@ def analyze_species_symptoms(
         # if the species handler hasn't been updated to accept them yet.
         try:
             return handler(
-                symptoms, age_stage,
-                breed=breed, onset=onset, age_years=age_years,
+                symptoms,
+                age_stage,
+                breed=breed,
+                onset=onset,
+                age_years=age_years,
                 species=species_key,
                 lab_values=lab_values,
                 gender=gender,
@@ -470,8 +506,11 @@ def analyze_species_symptoms(
         except TypeError:
             try:
                 return handler(
-                    symptoms, age_stage,
-                    breed=breed, onset=onset, age_years=age_years,
+                    symptoms,
+                    age_stage,
+                    breed=breed,
+                    onset=onset,
+                    age_years=age_years,
                     species=species_key,
                     lab_values=lab_values,
                     gender=gender,
@@ -479,8 +518,11 @@ def analyze_species_symptoms(
                 )
             except TypeError:
                 return handler(
-                    symptoms, age_stage,
-                    breed=breed, onset=onset, age_years=age_years,
+                    symptoms,
+                    age_stage,
+                    breed=breed,
+                    onset=onset,
+                    age_years=age_years,
                     species=species_key,
                     lab_values=lab_values,
                     gender=gender,

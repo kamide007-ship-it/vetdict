@@ -2,6 +2,7 @@
 
 Provides deterministic enrichment for disease narrative fields and completeness scoring.
 """
+
 from __future__ import annotations
 
 from typing import Any, Dict, List
@@ -70,6 +71,7 @@ SPECIES_NAME_EN = {
     "exotic_other": "exotic animals",
 }
 
+
 def _text(v: Any) -> str:
     if v is None:
         return ""
@@ -99,7 +101,7 @@ def _symptom_text(symptoms: Any, limit: int = 5, lang: str = "en", display_entri
     if not vals:
         return "clinical signs" if lang != "ja" else "臨床徴候"
     sep = "、" if lang == "ja" else ", "
-    suffix = (f" (+{len(vals)-limit}件)" if lang == "ja" else f" (+{len(vals)-limit} more)")
+    suffix = f" (+{len(vals) - limit}件)" if lang == "ja" else f" (+{len(vals) - limit} more)"
     if len(vals) <= limit:
         return sep.join(vals)
     return sep.join(vals[:limit]) + suffix
@@ -152,6 +154,7 @@ def _fallback(field: str, name: str, species: str, symptoms: str, lang: str) -> 
             "prognosis": f"Prognosis for {name} varies by severity, comorbidity burden, and time to treatment initiation.",
         }
     return templates[field]
+
 
 def _merge_reference_numbers(out: Dict[str, Any], species: str) -> List[int]:
     raw_numbers = out.get("references") or out.get("reference_numbers") or []
