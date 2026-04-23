@@ -487,5 +487,39 @@
     "expected_rank": 1,
     "confidence_threshold": 0.6,
     "notes": "Psychological stress"
+  },
+  {
+    "case_id": "dog_041",
+    "species": "dog",
+    "primary_disease": "Canine Distemper",
+    "symptoms": [
+      "fever",
+      "lethargy",
+      "coughing",
+      "nasal_discharge",
+      "eye_discharge",
+      "vomiting",
+      "diarrhea"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.65,
+    "notes": "Comprehensive multi-system presentation"
+  },
+  {
+    "case_id": "cat_041",
+    "species": "cat",
+    "primary_disease": "Feline Infectious Peritonitis",
+    "symptoms": [
+      "weight_loss",
+      "lethargy",
+      "abdominal_distension",
+      "fever",
+      "loss_of_appetite",
+      "jaundice",
+      "eye_discharge"
+    ],
+    "expected_rank": 1,
+    "confidence_threshold": 0.60,
+    "notes": "Comprehensive wet FIP presentation"
   }
 ]

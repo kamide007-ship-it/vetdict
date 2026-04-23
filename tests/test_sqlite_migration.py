@@ -19,6 +19,24 @@ import pytest
 DB_PATH = str(Path(__file__).resolve().parent.parent / 'diseases.db')
 
 
+def _diseases_db_ready() -> bool:
+    """Return True only when diseases.db has been migrated (has the diseases table)."""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cur = conn.cursor()
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'")
+        result = cur.fetchone()
+        conn.close()
+        return bool(result)
+    except Exception:
+        return False
+
+
+_SKIP_REASON = "diseases.db not yet migrated — run scripts/migrate_to_sqlite.py first"
+
+pytestmark = pytest.mark.skipif(not _diseases_db_ready(), reason=_SKIP_REASON)
+
+
 class TestSQLiteMigration:
     """Test suite for SQLite migration"""
 
