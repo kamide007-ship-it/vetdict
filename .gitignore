@@ -3,6 +3,7 @@ __pycache__/
 instance/
 .coverage
 *.db
+*.db.backup_*
 venv/
 
 # Phase enrichment runtime files
