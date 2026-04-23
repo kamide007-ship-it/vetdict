@@ -3845,7 +3845,7 @@ function toggleDbItem(el){
         detail.prepend(closeBtn);
       }
       requestAnimationFrame(()=>{
-        el.scrollIntoView({behavior:"smooth",block:"nearest"});
+        el.scrollIntoView({behavior:"smooth",block:"start"});
         const firstFocusable=detail.querySelector("a,button,[tabindex='0']");
         if(firstFocusable)setTimeout(()=>firstFocusable.focus(),300);
       });
