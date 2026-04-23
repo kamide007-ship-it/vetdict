@@ -24,9 +24,7 @@ def _diseases_db_ready() -> bool:
     try:
         conn = sqlite3.connect(DB_PATH)
         cur = conn.cursor()
-        cur.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'"
-        )
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'")
         result = cur.fetchone()
         conn.close()
         return bool(result)
@@ -59,21 +57,15 @@ class TestSQLiteMigration:
         cursor = db_connection.cursor()
 
         # Check main diseases table
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'"
-        )
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'")
         assert cursor.fetchone(), "diseases table not found"
 
         # Check FTS5 table
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='diseases_fts'"
-        )
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='diseases_fts'")
         assert cursor.fetchone(), "diseases_fts table not found"
 
         # Check metadata table
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='migration_metadata'"
-        )
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='migration_metadata'")
         assert cursor.fetchone(), "migration_metadata table not found"
 
     def test_required_columns(self, db_connection):
@@ -228,15 +220,11 @@ class TestDatabasePerformance:
         cursor = db_connection.cursor()
 
         # Check index on species
-        cursor.execute(
-            "EXPLAIN QUERY PLAN SELECT * FROM diseases WHERE species = 'Dog'"
-        )
+        cursor.execute("EXPLAIN QUERY PLAN SELECT * FROM diseases WHERE species = 'Dog'")
         explain = cursor.fetchone()
         # Convert Row to dict for better string representation
         explain_str = str(dict(explain)) if explain else ""
-        assert (
-            "SEARCH" in explain_str or "idx_species" in explain_str
-        ), f"Index not used: {explain_str}"
+        assert "SEARCH" in explain_str or "idx_species" in explain_str, f"Index not used: {explain_str}"
 
 
 class TestBackwardCompatibility:
