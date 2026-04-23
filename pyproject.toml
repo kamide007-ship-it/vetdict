@@ -48,6 +48,8 @@ ignore = [
     "SIM103", # needless-bool (readability preference)
     "SIM108", # if-else-block-instead-of-if-exp (readability preference)
     "C901",   # function is too complex (legacy functions — address gradually)
+    "N806",   # variable in function should be lowercase (intentional CONST/Class aliases)
+    "N811",   # constant imported as non-constant (intentional local aliasing pattern)
 ]
 
 # Unfixable rules (manual review required)

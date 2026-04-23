@@ -5,16 +5,15 @@ Flask API integration for SQLite diseases database
 Provides optimized query methods for the new SQLite schema
 """
 
-import json
 import logging
 import sqlite3
 from pathlib import Path
-from typing import Optional, List, Dict, Any
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
 # Use the migrated SQLite database
-DB_PATH = str(Path(__file__).resolve().parent.parent / 'diseases.db')
+DB_PATH = str(Path(__file__).resolve().parent.parent / "diseases.db")
 
 
 class DiseaseDatabase:
@@ -37,10 +36,7 @@ class DiseaseDatabase:
         conn = self._get_connection()
         try:
             cursor = conn.cursor()
-            cursor.execute(
-                """SELECT * FROM diseases WHERE id = ?""",
-                (disease_id,)
-            )
+            cursor.execute("""SELECT * FROM diseases WHERE id = ?""", (disease_id,))
             row = cursor.fetchone()
             if row:
                 return dict(row)
@@ -56,7 +52,7 @@ class DiseaseDatabase:
             cursor.execute(
                 """SELECT id, name_en, name_ja, urgency, severity_score
                    FROM diseases WHERE species = ? LIMIT ?""",
-                (species, limit)
+                (species, limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         finally:
@@ -70,15 +66,13 @@ class DiseaseDatabase:
             cursor.execute(
                 """SELECT id, name_en, name_ja, species, severity_score
                    FROM diseases WHERE urgency = ? LIMIT ?""",
-                (urgency, limit)
+                (urgency, limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         finally:
             conn.close()
 
-    def search_by_species_and_urgency(
-        self, species: str, urgency: str, limit: int = 100
-    ) -> List[Dict[str, Any]]:
+    def search_by_species_and_urgency(self, species: str, urgency: str, limit: int = 100) -> List[Dict[str, Any]]:
         """Fast compound query (< 5ms with compound index)"""
         conn = self._get_connection()
         try:
@@ -86,7 +80,7 @@ class DiseaseDatabase:
             cursor.execute(
                 """SELECT id, name_en, name_ja, severity_score
                    FROM diseases WHERE species = ? AND urgency = ? LIMIT ?""",
-                (species, urgency, limit)
+                (species, urgency, limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         finally:
@@ -105,7 +99,7 @@ class DiseaseDatabase:
                    )
                    ORDER BY d.urgency DESC, d.severity_score DESC
                    LIMIT ?""",
-                (query, limit)
+                (query, limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         except sqlite3.OperationalError as e:
@@ -125,7 +119,7 @@ class DiseaseDatabase:
                    WHERE name_en LIKE ?
                    ORDER BY urgency DESC
                    LIMIT ?""",
-                (f"%{name}%", limit)
+                (f"%{name}%", limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         finally:
@@ -142,7 +136,7 @@ class DiseaseDatabase:
                    WHERE name_ja LIKE ?
                    ORDER BY urgency DESC
                    LIMIT ?""",
-                (f"%{name}%", limit)
+                (f"%{name}%", limit),
             )
             return [dict(row) for row in cursor.fetchall()]
         finally:
@@ -157,7 +151,7 @@ class DiseaseDatabase:
                 """SELECT species, COUNT(*) as count
                    FROM diseases GROUP BY species ORDER BY species"""
             )
-            return {row['species']: row['count'] for row in cursor.fetchall()}
+            return {row["species"]: row["count"] for row in cursor.fetchall()}
         finally:
             conn.close()
 
@@ -170,7 +164,7 @@ class DiseaseDatabase:
                 """SELECT urgency, COUNT(*) as count
                    FROM diseases GROUP BY urgency ORDER BY urgency"""
             )
-            return {row['urgency']: row['count'] for row in cursor.fetchall()}
+            return {row["urgency"]: row["count"] for row in cursor.fetchall()}
         finally:
             conn.close()
 
@@ -180,7 +174,7 @@ class DiseaseDatabase:
         try:
             cursor = conn.cursor()
             cursor.execute("SELECT COUNT(*) as count FROM diseases")
-            return cursor.fetchone()['count']
+            return cursor.fetchone()["count"]
         finally:
             conn.close()
 
