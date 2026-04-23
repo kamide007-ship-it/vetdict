@@ -16,7 +16,25 @@ from pathlib import Path
 import pytest
 
 # Database path
-DB_PATH = str(Path(__file__).resolve().parent.parent / 'diseases.db')
+DB_PATH = str(Path(__file__).resolve().parent.parent / "diseases.db")
+
+
+def _diseases_db_ready() -> bool:
+    """Return True only when diseases.db has been migrated (has the diseases table)."""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cur = conn.cursor()
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'")
+        result = cur.fetchone()
+        conn.close()
+        return bool(result)
+    except Exception:
+        return False
+
+
+_SKIP_REASON = "diseases.db not yet migrated — run scripts/migrate_to_sqlite.py first"
+
+pytestmark = pytest.mark.skipif(not _diseases_db_ready(), reason=_SKIP_REASON)
 
 
 class TestSQLiteMigration:
@@ -54,14 +72,22 @@ class TestSQLiteMigration:
         """Test that all required columns exist in diseases table"""
         cursor = db_connection.cursor()
         cursor.execute("PRAGMA table_info(diseases)")
-        columns = {row['name'] for row in cursor.fetchall()}
+        columns = {row["name"] for row in cursor.fetchall()}
 
         required_columns = {
-            'id', 'species', 'name_en', 'name_ja', 'urgency',
-            'pathophysiology_en', 'pathophysiology_ja',
-            'treatment_en', 'treatment_ja',
-            'diagnosis_en', 'diagnosis_ja',
-            'severity_score', 'enriched_at',
+            "id",
+            "species",
+            "name_en",
+            "name_ja",
+            "urgency",
+            "pathophysiology_en",
+            "pathophysiology_ja",
+            "treatment_en",
+            "treatment_ja",
+            "diagnosis_en",
+            "diagnosis_ja",
+            "severity_score",
+            "enriched_at",
         }
 
         missing = required_columns - columns
@@ -85,16 +111,16 @@ class TestSQLiteMigration:
             GROUP BY species ORDER BY count DESC
         """)
 
-        species_counts = {row['species']: row['count'] for row in cursor.fetchall()}
+        species_counts = {row["species"]: row["count"] for row in cursor.fetchall()}
 
         # Check for major species
-        assert 'Dog' in species_counts, "Dog species missing"
-        assert 'Cat' in species_counts, "Cat species missing"
-        assert 'Horse' in species_counts, "Horse species missing"
+        assert "Dog" in species_counts, "Dog species missing"
+        assert "Cat" in species_counts, "Cat species missing"
+        assert "Horse" in species_counts, "Horse species missing"
 
         # Check counts are reasonable
-        assert species_counts['Dog'] >= 300, "Dog diseases count too low"
-        assert species_counts['Cat'] >= 300, "Cat diseases count too low"
+        assert species_counts["Dog"] >= 300, "Dog diseases count too low"
+        assert species_counts["Cat"] >= 300, "Cat diseases count too low"
 
     def test_urgency_distribution(self, db_connection):
         """Test urgency level distribution"""
@@ -104,15 +130,15 @@ class TestSQLiteMigration:
             GROUP BY urgency
         """)
 
-        urgency_counts = {row['urgency']: row['count'] for row in cursor.fetchall()}
+        urgency_counts = {row["urgency"]: row["count"] for row in cursor.fetchall()}
 
         # Check all urgency levels exist
-        assert 'emergency' in urgency_counts, "emergency urgency missing"
-        assert 'high' in urgency_counts, "high urgency missing"
+        assert "emergency" in urgency_counts, "emergency urgency missing"
+        assert "high" in urgency_counts, "high urgency missing"
 
         # Check reasonable distribution
-        assert urgency_counts.get('emergency', 0) > 500, "emergency count too low"
-        assert urgency_counts.get('high', 0) > 2000, "high count too low"
+        assert urgency_counts.get("emergency", 0) > 500, "emergency count too low"
+        assert urgency_counts.get("high", 0) > 2000, "high count too low"
 
 
 class TestDatabasePerformance:
@@ -132,14 +158,14 @@ class TestDatabasePerformance:
         cursor = db_connection.cursor()
 
         # Warm up
-        cursor.execute("SELECT * FROM diseases WHERE id = ?", ('cat_0001',))
+        cursor.execute("SELECT * FROM diseases WHERE id = ?", ("cat_0001",))
         cursor.fetchone()
 
         # Measure
         times = []
         for _ in range(10):
             start = time.time()
-            cursor.execute("SELECT * FROM diseases WHERE id = ?", ('cat_0001',))
+            cursor.execute("SELECT * FROM diseases WHERE id = ?", ("cat_0001",))
             cursor.fetchone()
             elapsed = (time.time() - start) * 1000
             times.append(elapsed)
@@ -154,10 +180,13 @@ class TestDatabasePerformance:
         times = []
         for _ in range(5):
             start = time.time()
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT id, name_en, name_ja FROM diseases
                 WHERE species = ? LIMIT 100
-            """, ('Dog',))
+            """,
+                ("Dog",),
+            )
             list(cursor.fetchall())
             elapsed = (time.time() - start) * 1000
             times.append(elapsed)
@@ -172,10 +201,13 @@ class TestDatabasePerformance:
         times = []
         for _ in range(5):
             start = time.time()
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT id, name_en FROM diseases
                 WHERE species = ? AND urgency = ? LIMIT 100
-            """, ('Dog', 'emergency'))
+            """,
+                ("Dog", "emergency"),
+            )
             list(cursor.fetchall())
             elapsed = (time.time() - start) * 1000
             times.append(elapsed)
@@ -192,7 +224,7 @@ class TestDatabasePerformance:
         explain = cursor.fetchone()
         # Convert Row to dict for better string representation
         explain_str = str(dict(explain)) if explain else ""
-        assert 'SEARCH' in explain_str or 'idx_species' in explain_str, f"Index not used: {explain_str}"
+        assert "SEARCH" in explain_str or "idx_species" in explain_str, f"Index not used: {explain_str}"
 
 
 class TestBackwardCompatibility:
@@ -212,9 +244,9 @@ class TestBackwardCompatibility:
         cursor.execute("SELECT id FROM diseases LIMIT 10")
 
         for row in cursor.fetchall():
-            disease_id = row['id']
+            disease_id = row["id"]
             # Format: species_NNNN (e.g., cat_0001)
-            assert '_' in disease_id, f"Invalid disease ID format: {disease_id}"
+            assert "_" in disease_id, f"Invalid disease ID format: {disease_id}"
 
     def test_name_fields_populated(self, db_connection):
         """Test that both EN and JA names are populated"""
@@ -224,7 +256,7 @@ class TestBackwardCompatibility:
             WHERE name_en IS NOT NULL AND name_ja IS NOT NULL
         """)
 
-        count = cursor.fetchone()['count']
+        count = cursor.fetchone()["count"]
         total = cursor.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
 
         # At least 99% should have both names
@@ -238,12 +270,12 @@ class TestBackwardCompatibility:
             WHERE treatment_en IS NOT NULL AND treatment_ja IS NOT NULL
         """)
 
-        count = cursor.fetchone()['count']
+        count = cursor.fetchone()["count"]
         total = cursor.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
 
         # At least 95% should have treatment data
         assert count / total >= 0.95, f"Missing treatment fields: {count}/{total}"
 
 
-if __name__ == '__main__':
-    pytest.main([__file__, '-v'])
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])
