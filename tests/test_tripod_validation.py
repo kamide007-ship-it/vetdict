@@ -145,6 +145,25 @@ class TestDiagnosticTestCase:
 
         assert case.test_passed is False
 
+    def test_test_case_validate_without_results(self):
+        """validate() returns False until both fields are populated."""
+        case = DiagnosticTestCase(
+            case_id="cat_001",
+            species="Cat",
+            primary_disease="FHV-1",
+            symptoms=["sneezing"],
+        )
+
+        # No result recorded yet
+        assert case.validate() is False
+
+        # Zero confidence is a legitimate (if poor) score; the previous
+        # truthiness check short-circuited it incorrectly.
+        case.predicted_rank = 1
+        case.confidence_score = 0.0
+        case.confidence_threshold = 0.0
+        assert case.validate() is True
+
 
 class TestDiagnosticValidationFramework:
     """Test TRIPOD validation framework"""
@@ -233,6 +252,41 @@ class TestDiagnosticValidationFramework:
         assert metrics["pass_rate"] == pytest.approx(0.6667, abs=0.01)
         assert metrics["rank_1_accuracy"] == pytest.approx(0.6667, abs=0.01)
 
+        # Aggregate confusion matrix is now populated (previously always None),
+        # so downstream reports no longer expose an empty accuracy_metrics.
+        cm = metrics["confusion_matrix"]
+        assert cm["tp"] == 2
+        assert cm["fn"] == 1
+        assert cm["total"] == 3
+
+        # Subgroups expose a rank_1_accuracy alongside the pass/fail counts
+        # because specificity/NPV are structurally undefined for a
+        # positive-only test set.
+        for species_metrics in metrics["by_species"].values():
+            assert "rank_1_accuracy" in species_metrics
+            assert 0.0 <= species_metrics["rank_1_accuracy"] <= 1.0
+        for sym_metrics in metrics["by_symptom_count"].values():
+            assert "rank_1_accuracy" in sym_metrics
+
+    def test_calculate_metrics_is_idempotent(self, tripod_framework):
+        """Running calculate_metrics twice must not double-count subgroup totals."""
+        for i in range(3):
+            case = DiagnosticTestCase(
+                case_id=f"test_{i:03d}",
+                species="Dog",
+                primary_disease="Parvovirus",
+                symptoms=["fever", "vomiting"],
+            )
+            tripod_framework.add_test_case(case)
+            tripod_framework.record_result(f"test_{i:03d}", 1, 0.85)
+
+        first = tripod_framework.calculate_metrics()
+        second = tripod_framework.calculate_metrics()
+
+        assert first["by_species"]["Dog"]["tp"] == second["by_species"]["Dog"]["tp"]
+        assert first["confusion_matrix"]["tp"] == second["confusion_matrix"]["tp"]
+        assert second["by_species"]["Dog"]["tp"] == 3
+
     def test_symptom_count_categorization(self):
         """Test symptom count categorization"""
         framework = DiagnosticValidationFramework()
@@ -294,6 +348,12 @@ class TestDiagnosticValidationFramework:
         assert "test_design" in report
         assert "primary_outcomes" in report
         assert "interpretation" in report
+
+        # accuracy_metrics must be a populated confusion matrix, not the
+        # empty dict the framework produced before the fix.
+        assert report["accuracy_metrics"]
+        assert report["accuracy_metrics"]["total"] == 5
+        assert report["accuracy_metrics"]["tp"] + report["accuracy_metrics"]["fn"] == 5
 
     def test_interpretation_generation(self, tripod_framework):
         """Test interpretation text generation"""

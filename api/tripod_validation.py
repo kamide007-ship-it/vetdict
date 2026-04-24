@@ -34,6 +34,7 @@ import json
 import logging
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Any, Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
@@ -137,7 +138,7 @@ class DiagnosticTestCase:
 
     def validate(self) -> bool:
         """Check if test case passed"""
-        if not self.predicted_rank or not self.confidence_score:
+        if self.predicted_rank is None or self.confidence_score is None:
             return False
 
         # Pass if:
@@ -193,17 +194,31 @@ class DiagnosticValidationFramework:
                 break
 
     def calculate_metrics(self) -> Dict[str, Any]:
-        """Calculate all diagnostic accuracy metrics"""
+        """Calculate all diagnostic accuracy metrics.
+
+        Note: the test set contains only gold-standard positive cases (one
+        correct disease per case), so there is no ground-truth "negative"
+        population. Per-species confusion matrices therefore track only TP
+        (test passed) and FN (test failed); specificity and NPV are
+        structurally undefined and are reported alongside a more
+        interpretable ``rank_1_accuracy`` field.
+        """
+        # Reset aggregators so the method is idempotent when called multiple
+        # times on the same framework instance (e.g. in long-running scripts
+        # or tests that record additional results after a first snapshot).
+        self.metrics_by_species = defaultdict(ConfusionMatrix)
+        self.metrics_by_symptom_count = defaultdict(ConfusionMatrix)
+
         results = {
             "total_cases": len(self.test_cases),
             "passed_cases": sum(1 for c in self.test_cases if c.test_passed),
-            "failed_cases": sum(1 for c in self.test_cases if not c.test_passed),
+            "failed_cases": sum(1 for c in self.test_cases if c.test_passed is False),
             "pass_rate": 0.0,
             "rank_1_accuracy": 0.0,
             "average_confidence": 0.0,
             "by_species": {},
             "by_symptom_count": {},
-            "confusion_matrix": None,
+            "confusion_matrix": {},
         }
 
         if not self.test_cases:
@@ -216,32 +231,57 @@ class DiagnosticValidationFramework:
         rank_1_count = sum(1 for c in self.test_cases if c.predicted_rank == 1)
         results["rank_1_accuracy"] = rank_1_count / results["total_cases"]
 
-        # Average confidence
-        confidences = [c.confidence_score for c in self.test_cases if c.confidence_score]
+        # Average confidence (include 0.0 scores; only skip not-yet-recorded)
+        confidences = [c.confidence_score for c in self.test_cases if c.confidence_score is not None]
         if confidences:
             results["average_confidence"] = sum(confidences) / len(confidences)
 
-        # Build confusion matrices by species and symptom count
+        # Aggregate confusion matrix over the whole suite
+        rank_1_counts_by_species: Dict[str, int] = defaultdict(int)
+        rank_1_counts_by_symptom: Dict[str, int] = defaultdict(int)
+        totals_by_species: Dict[str, int] = defaultdict(int)
+        totals_by_symptom: Dict[str, int] = defaultdict(int)
+
+        agg = ConfusionMatrix()
         for case in self.test_cases:
             if case.test_passed:
+                agg.tp += 1
                 self.metrics_by_species[case.species].tp += 1
             else:
+                agg.fn += 1
                 self.metrics_by_species[case.species].fn += 1
 
-            # Categorize by symptom count
             symptom_category = self._categorize_symptom_count(len(case.symptoms))
             if case.test_passed:
                 self.metrics_by_symptom_count[symptom_category].tp += 1
             else:
                 self.metrics_by_symptom_count[symptom_category].fn += 1
 
-        # Export metrics by species
-        for species, cm in self.metrics_by_species.items():
-            results["by_species"][species] = cm.to_dict()
+            totals_by_species[case.species] += 1
+            totals_by_symptom[symptom_category] += 1
+            if case.predicted_rank == 1:
+                rank_1_counts_by_species[case.species] += 1
+                rank_1_counts_by_symptom[symptom_category] += 1
 
-        # Export metrics by symptom count
+        results["confusion_matrix"] = agg.to_dict()
+
+        def _with_rank1(cm_dict, passed, total):
+            cm_dict["rank_1_accuracy"] = round(passed / total, 4) if total else 0.0
+            return cm_dict
+
+        for species, cm in self.metrics_by_species.items():
+            results["by_species"][species] = _with_rank1(
+                cm.to_dict(),
+                rank_1_counts_by_species[species],
+                totals_by_species[species],
+            )
+
         for sym_cat, cm in self.metrics_by_symptom_count.items():
-            results["by_symptom_count"][sym_cat] = cm.to_dict()
+            results["by_symptom_count"][sym_cat] = _with_rank1(
+                cm.to_dict(),
+                rank_1_counts_by_symptom[sym_cat],
+                totals_by_symptom[sym_cat],
+            )
 
         return results
 
@@ -262,7 +302,7 @@ class DiagnosticValidationFramework:
         report = {
             "title": "TRIPOD-Compliant Diagnostic Accuracy Assessment",
             "framework": "VetDict Diagnostic Engine",
-            "evaluation_date": __import__("datetime").datetime.now().isoformat(),
+            "evaluation_date": datetime.now().isoformat(),
             "test_design": {
                 "type": "Prospective Cohort",
                 "total_cases": metrics["total_cases"],
@@ -274,7 +314,7 @@ class DiagnosticValidationFramework:
                 "pass_rate": round(metrics["pass_rate"], 4),
                 "average_confidence": round(metrics["average_confidence"], 4),
             },
-            "accuracy_metrics": metrics["confusion_matrix"] or {},
+            "accuracy_metrics": metrics["confusion_matrix"],
             "subgroup_analysis": {
                 "by_species": metrics["by_species"],
                 "by_symptom_count": metrics["by_symptom_count"],
