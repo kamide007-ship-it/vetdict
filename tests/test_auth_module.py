@@ -224,6 +224,35 @@ class TestClientIP:
             ip = client_ip.get_client_ip()
             assert ip == '192.168.1.100'
 
+    def test_get_client_ip_ignores_xff_from_untrusted_peer(self):
+        """With trusted_proxies set, spoofed X-Forwarded-For must be ignored."""
+        from flask import Flask
+
+        app = Flask(__name__)
+
+        with app.test_request_context(
+            headers={'X-Forwarded-For': '203.0.113.1'},
+            environ_base={'REMOTE_ADDR': '10.0.0.99'},
+        ):
+            client_ip = ClientIP(trusted_proxies=['10.0.0.1'])
+            ip = client_ip.get_client_ip()
+            # Direct peer not in trusted_proxies — XFF must be ignored.
+            assert ip == '10.0.0.99'
+
+    def test_get_client_ip_honors_xff_from_trusted_peer(self):
+        """With trusted_proxies set, XFF from a trusted peer should be used."""
+        from flask import Flask
+
+        app = Flask(__name__)
+
+        with app.test_request_context(
+            headers={'X-Forwarded-For': '203.0.113.1, 198.51.100.1'},
+            environ_base={'REMOTE_ADDR': '10.0.0.1'},
+        ):
+            client_ip = ClientIP(trusted_proxies=['10.0.0.1'])
+            ip = client_ip.get_client_ip()
+            assert ip == '203.0.113.1'
+
 
 class TestAuditLogger:
     """Test AuditLogger class."""

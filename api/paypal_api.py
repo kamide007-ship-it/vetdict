@@ -24,7 +24,9 @@ paypal_bp = Blueprint("paypal", __name__, url_prefix="/api/paypal")
 PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID", "")
 PAYPAL_SECRET = os.getenv("PAYPAL_SECRET", "")
 PAYPAL_PLAN_ID = os.getenv("PAYPAL_PLAN_ID", "")
-PAYPAL_API_BASE = "https://api-m.paypal.com"
+# Switch to https://api-m.sandbox.paypal.com for sandbox testing by setting
+# PAYPAL_API_BASE in the environment. Defaults to production.
+PAYPAL_API_BASE = os.getenv("PAYPAL_API_BASE", "https://api-m.paypal.com").rstrip("/")
 
 
 def _get_paypal_token() -> str | None:

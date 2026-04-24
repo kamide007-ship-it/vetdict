@@ -3,6 +3,7 @@
 Records anonymous API usage statistics without collecting PII.
 """
 
+import logging
 import sqlite3
 import time
 from contextlib import contextmanager
@@ -12,6 +13,8 @@ from functools import wraps
 from flask import Blueprint, jsonify, request
 
 from api.database import DB_PATH, _ensure_dir
+
+logger = logging.getLogger(__name__)
 
 analytics_bp = Blueprint("analytics", __name__, url_prefix="/api/admin/analytics")
 
@@ -65,7 +68,8 @@ def record_api_call(endpoint: str, method: str = "GET", species: str | None = No
                 (endpoint, method, species, status_code, response_time_ms),
             )
     except Exception:
-        pass  # Never let analytics break the main request
+        # Never let analytics break the main request, but log for diagnosis.
+        logger.debug("Analytics recording failed for %s %s", method, endpoint, exc_info=True)
 
 
 def track_request(f):

@@ -1,3 +1,11 @@
+"""Species prevalence data for stepwise differential diagnosis.
+
+Provides prevalence classifications for diseases across 19 species, used to
+weight candidate diagnoses by clinical frequency. See ``SPECIES_PREVALENCE``
+for the primary data structure and ``get_prevalence_for_species`` for the
+regional adjustments applied to match scores.
+"""
+
 # ============================================================================
 # Species Prevalence Data for Stepwise Differential Diagnosis
 # ============================================================================
