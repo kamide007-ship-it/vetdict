@@ -95,11 +95,20 @@ def _horse_category(name: str, desc: str) -> str:
     for cat in ("viral", "bacterial", "fungal", "parasitic"):
         keywords = {
             "viral": ["virus", "viral", "herpes", "influenza", "ehv", "eav", "wnv", "rabies"],
-            "bacterial": ["bacterial", "streptococc", "staphylococc", "clostrid", "salmonell",
-                          "rhodococc", "strangles", "abscess", "septic", "cellulitis"],
+            "bacterial": [
+                "bacterial",
+                "streptococc",
+                "staphylococc",
+                "clostrid",
+                "salmonell",
+                "rhodococc",
+                "strangles",
+                "abscess",
+                "septic",
+                "cellulitis",
+            ],
             "fungal": ["fungal", "mycosis", "aspergill", "ringworm", "dermatophyt"],
-            "parasitic": ["parasit", "strongyl", "ascarid", "tapeworm", "bot", "mange",
-                          "mite", "tick", "lice"],
+            "parasitic": ["parasit", "strongyl", "ascarid", "tapeworm", "bot", "mange", "mite", "tick", "lice"],
         }
         for kw in keywords[cat]:
             if kw in combined:
@@ -179,12 +188,18 @@ def analyze_horse(
         _cat = _horse_category(dis.name_en or "", dis.description_ja or "")
         _trans = _HORSE_TRANSMISSION.get(_cat, _HORSE_TRANS_DEFAULT)
         _diag_en = (
-            f"Diagnosis is based on clinical signs, history, and physical examination. "
-            f"Recommended diagnostics: {', '.join(tests[:4])}."
-        ) if tests else "Diagnosis is based on clinical signs, history, and physical examination."
+            (
+                f"Diagnosis is based on clinical signs, history, and physical examination. "
+                f"Recommended diagnostics: {', '.join(tests[:4])}."
+            )
+            if tests
+            else "Diagnosis is based on clinical signs, history, and physical examination."
+        )
         _diag_ja = (
-            f"臨床徴候、病歴、身体検査に基づき診断する。推奨検査: {', '.join(tests[:4])}。"
-        ) if tests else "臨床徴候、病歴、身体検査に基づき診断する。"
+            (f"臨床徴候、病歴、身体検査に基づき診断する。推奨検査: {', '.join(tests[:4])}。")
+            if tests
+            else "臨床徴候、病歴、身体検査に基づき診断する。"
+        )
 
         # Apply lab boost if available
         lab_multiplier = 1.0
@@ -204,9 +219,12 @@ def analyze_horse(
         age_multiplier = 1.0
         if age_years is not None:
             horse_age_stage = (
-                "puppy" if age_years < 1.0
-                else "young" if age_years < 4.0
-                else "adult" if age_years < 15.0
+                "puppy"
+                if age_years < 1.0
+                else "young"
+                if age_years < 4.0
+                else "adult"
+                if age_years < 15.0
                 else "senior"
             )
             age_pred = getattr(dis, "age_predisposition", None)
@@ -300,9 +318,16 @@ def analyze_horse(
 
     # JSON エンリッチメントから日本語フィールドを補完
     _ja_enrich_fields = (
-        "pathophysiology_ja", "causes_ja", "treatment_ja",
-        "prevention_ja", "prognosis_ja", "clinical_signs_ja",
-        "transmission", "transmission_ja", "diagnosis", "diagnosis_ja",
+        "pathophysiology_ja",
+        "causes_ja",
+        "treatment_ja",
+        "prevention_ja",
+        "prognosis_ja",
+        "clinical_signs_ja",
+        "transmission",
+        "transmission_ja",
+        "diagnosis",
+        "diagnosis_ja",
     )
     for cond in possible_conditions:
         # 英語名で検索（最も確実）→ 日本語名フォールバック

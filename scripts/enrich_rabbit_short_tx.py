@@ -286,9 +286,17 @@ _UTERUS_TX = (
     "予後: 術前状態良好な症例で良好。敗血症/腹膜炎合併は予後慎重。"
 )
 
-ENRICHMENTS["rabbit_0116"] = {"treatment_ja": "子宮蓄膿症（ウサギ）。★非避妊メスの約80%が5歳までに子宮疾患を発症★。" + _UTERUS_TX}
-ENRICHMENTS["rabbit_0125"] = {"treatment_ja": "子宮脱（ウサギ）。★分娩直後に多発。露出した子宮は速やかに整復/切除★。\n整復（新鮮例）: 湿潤生食で洗浄→用手的整復→OHE（再発防止）。\n切除（壊死/整復不能例）: 壊死部を切除+OHE。\n" + _UTERUS_TX}
-ENRICHMENTS["rabbit_0128"] = {"treatment_ja": "子宮捻転（ウサギ）。★緊急手術が必要 — 捻転による虚血が急速に進行★。\n診断: 超音波（子宮血流消失）+X線。\n緊急OHE: 捻転した子宮を整復せずに切除（整復で血流再開→虚血再灌流障害）。\n" + _UTERUS_TX}
+ENRICHMENTS["rabbit_0116"] = {
+    "treatment_ja": "子宮蓄膿症（ウサギ）。★非避妊メスの約80%が5歳までに子宮疾患を発症★。" + _UTERUS_TX
+}
+ENRICHMENTS["rabbit_0125"] = {
+    "treatment_ja": "子宮脱（ウサギ）。★分娩直後に多発。露出した子宮は速やかに整復/切除★。\n整復（新鮮例）: 湿潤生食で洗浄→用手的整復→OHE（再発防止）。\n切除（壊死/整復不能例）: 壊死部を切除+OHE。\n"
+    + _UTERUS_TX
+}
+ENRICHMENTS["rabbit_0128"] = {
+    "treatment_ja": "子宮捻転（ウサギ）。★緊急手術が必要 — 捻転による虚血が急速に進行★。\n診断: 超音波（子宮血流消失）+X線。\n緊急OHE: 捻転した子宮を整復せずに切除（整復で血流再開→虚血再灌流障害）。\n"
+    + _UTERUS_TX
+}
 
 _CARDIAC_TX = (
     "心不全管理（ウサギ）。"
@@ -307,10 +315,22 @@ _CARDIAC_TX = (
     "予後: ウサギの心疾患は犬猫より予後不良。症状管理が中心。"
 )
 
-ENRICHMENTS["rabbit_0159"] = {"treatment_ja": "拡張型心筋症（DCM）（ウサギ）。★ウサギでは稀だが、重症化すると急速に心不全へ移行★。\n診断: 心エコー（左室拡大+EF低下）+ X線（心拡大）。\n" + _CARDIAC_TX}
-ENRICHMENTS["rabbit_0160"] = {"treatment_ja": "うっ血性心不全（CHF）（ウサギ）。★肺水腫（前負荷増大）+ 低心拍出量（後負荷増大）が主病態★。\n急性期: フロセミド IV/SC（緊急利尿）+ 酸素。安静。\n" + _CARDIAC_TX}
-ENRICHMENTS["rabbit_0165"] = {"treatment_ja": "心筋炎（ウサギ）。★E. cuniculi/Pasteurella等の感染性が多い★。\n原因治療: フェンベンダゾール 20 mg/kg PO q24h×28日（E. cuniculi）。\nエンロフロキサシン 5-10 mg/kg PO q12h（細菌性）。\n" + _CARDIAC_TX}
-ENRICHMENTS["rabbit_0233"] = {"treatment_ja": "心筋線維症（ウサギ）。★慢性炎症/虚血後の線維化 — 心機能が不可逆的に低下★。\n★根本的な線維化逆転は現在困難 — 症状管理が中心★。\n" + _CARDIAC_TX}
+ENRICHMENTS["rabbit_0159"] = {
+    "treatment_ja": "拡張型心筋症（DCM）（ウサギ）。★ウサギでは稀だが、重症化すると急速に心不全へ移行★。\n診断: 心エコー（左室拡大+EF低下）+ X線（心拡大）。\n"
+    + _CARDIAC_TX
+}
+ENRICHMENTS["rabbit_0160"] = {
+    "treatment_ja": "うっ血性心不全（CHF）（ウサギ）。★肺水腫（前負荷増大）+ 低心拍出量（後負荷増大）が主病態★。\n急性期: フロセミド IV/SC（緊急利尿）+ 酸素。安静。\n"
+    + _CARDIAC_TX
+}
+ENRICHMENTS["rabbit_0165"] = {
+    "treatment_ja": "心筋炎（ウサギ）。★E. cuniculi/Pasteurella等の感染性が多い★。\n原因治療: フェンベンダゾール 20 mg/kg PO q24h×28日（E. cuniculi）。\nエンロフロキサシン 5-10 mg/kg PO q12h（細菌性）。\n"
+    + _CARDIAC_TX
+}
+ENRICHMENTS["rabbit_0233"] = {
+    "treatment_ja": "心筋線維症（ウサギ）。★慢性炎症/虚血後の線維化 — 心機能が不可逆的に低下★。\n★根本的な線維化逆転は現在困難 — 症状管理が中心★。\n"
+    + _CARDIAC_TX
+}
 
 # --- Batch 5: その他10件 ---
 
