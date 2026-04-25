@@ -291,7 +291,17 @@ const I18N={
   }
 };
 
-function t(key){return (I18N[currentLang]&&I18N[currentLang][key])||key;}
+const _missingI18nKeys=new Set();
+function t(key){
+  const dict=I18N[currentLang];
+  if(dict&&Object.prototype.hasOwnProperty.call(dict,key))return dict[key];
+  // Warn once per missing key on localhost so devs notice; silent in production.
+  if(typeof location!=="undefined"&&/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname)&&!_missingI18nKeys.has(key)){
+    _missingI18nKeys.add(key);
+    if(typeof console!=="undefined")console.warn("[i18n] missing key:",key,"lang:",currentLang);
+  }
+  return key;
+}
 
 function haptic(ms){try{if(navigator.vibrate)navigator.vibrate(ms||10);}catch(e){}}
 
@@ -1460,6 +1470,13 @@ function escapeHtml(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
 }
 
+// Convert a snake_case symptom/test id ("resp_cough") into a readable label
+// ("Resp Cough"). Used as a last-resort fallback when no translation exists,
+// so the UI never leaks raw IDs to the user.
+function humanizeId(id){
+  return String(id??"").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()).trim();
+}
+
 function renderTreatmentWithAdjunct(text){
   const raw=String(text??"");
   const marker="[ECVN:Block]";
@@ -1925,8 +1942,8 @@ function renderMissingKeySymptoms(d,data){
   const symNames=data.symptom_names||{};
   const items=missingKeys.map(s=>{
     const n=symNames[s];
-    if(!n)return `<span class="missing-sym-tag">${s}</span>`;
-    const label=currentLang==="ja"?`${n.ja} <span class="missing-sym-sub">${n.en}</span>`:`${n.en} <span class="missing-sym-sub">${n.ja}</span>`;
+    if(!n)return `<span class="missing-sym-tag">${escapeHtml(humanizeId(s))}</span>`;
+    const label=currentLang==="ja"?`${escapeHtml(n.ja)} <span class="missing-sym-sub">${escapeHtml(n.en)}</span>`:`${escapeHtml(n.en)} <span class="missing-sym-sub">${escapeHtml(n.ja)}</span>`;
     return `<span class="missing-sym-tag">${label}</span>`;
   }).join("");
   const title=currentLang==="ja"?"確認すべき症状（未報告）":"Key symptoms to check (not reported)";
@@ -2556,8 +2573,12 @@ function sendLandingChat(){
 // Accumulated symptoms for chat conversation continuity
 let chatAccumulatedSymptoms=[];
 let chatDeniedSymptoms=[];
+let _symptomUpdateInFlight=false;
 
 function _sendSymptomUpdate(symptomId,confirmed){
+  // Prevent rapid duplicate POSTs when multiple Yes/No question rows are present
+  if(_symptomUpdateInFlight)return;
+  _symptomUpdateInFlight=true;
   const species=currentSpecies||"dog";
   if(!confirmed)chatDeniedSymptoms.push(symptomId);
   const msgs=document.getElementById("chatMessages");
@@ -2573,7 +2594,8 @@ function _sendSymptomUpdate(symptomId,confirmed){
     if(data.accumulated_symptoms)chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
   })
-  .catch(err=>{loading.remove();console.error("Symptom update error:",err);});
+  .catch(err=>{loading.remove();console.error("Symptom update error:",err);})
+  .finally(()=>{_symptomUpdateInFlight=false;});
 }
 
 function sendChatMessage(){
@@ -2662,7 +2684,7 @@ function renderChatResult(container,data){
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
         ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${escapeHtml(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))}</div>`:""}
-        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">${currentLang==="ja"?"\u4e00\u81f4: ":"Matched: "}${escapeHtml(c.matched_symptoms.map(sid=>{const f=(symptoms||[]).find(s=>s&&s.id===sid);return f?(currentLang==="ja"?(f.name_ja||f.name_en||sid):(f.name_en||f.name_ja||sid)):sid;}).join(", "))}</div>`:""}
+        ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">${currentLang==="ja"?"\u4e00\u81f4: ":"Matched: "}${escapeHtml(c.matched_symptoms.map(sid=>{const f=(symptoms||[]).find(s=>s&&s.id===sid);return f?(currentLang==="ja"?(f.name_ja||f.name_en||humanizeId(sid)):(f.name_en||f.name_ja||humanizeId(sid))):humanizeId(sid);}).join(", "))}</div>`:""}
         ${c.mentioned_drugs&&c.mentioned_drugs.length?renderMentionedDrugs(c):""}
       `;
       listDiv.appendChild(card);

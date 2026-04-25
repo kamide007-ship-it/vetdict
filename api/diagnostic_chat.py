@@ -572,7 +572,12 @@ def extract_symptoms_from_text(text: str) -> list:
                 symptoms = result.get("symptoms", [])
                 method = result.get("method", "unknown")
                 confidence = result.get("confidence", 0.0)
-                logger.info(f"Symptom extraction: method={method} confidence={confidence} symptoms={len(symptoms)}")
+                logger.info(
+                    "Symptom extraction: method=%s confidence=%s symptoms=%d",
+                    method,
+                    confidence,
+                    len(symptoms),
+                )
                 if symptoms:
                     return symptoms
                 # If AI found no symptoms but no error, continue to manual fallback

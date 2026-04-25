@@ -28,6 +28,19 @@ db = DiseaseDatabase()
 fts = DiseaseFullTextSearch()
 
 
+def _parse_limit(default: int, hard_max: int) -> int:
+    """Parse the `limit` query arg, returning a clamped int.
+
+    Aborts with 400 on non-integer input rather than letting `int()` raise a 500.
+    """
+    raw = request.args.get("limit", default)
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        abort(400, description="'limit' must be an integer")
+    return max(1, min(value, hard_max))
+
+
 # --- Disease Detail Endpoints ---
 
 
@@ -99,7 +112,7 @@ def search_diseases():
     if not query:
         abort(400, description="Query parameter 'q' is required")
 
-    limit = min(int(request.args.get("limit", 20)), 100)
+    limit = _parse_limit(20, 100)
     species = request.args.get("species")
 
     start_time = time.time()
@@ -144,7 +157,7 @@ def search_by_name():
         abort(400, description="Query parameter 'name' is required")
 
     language = request.args.get("language", "en").lower()
-    limit = min(int(request.args.get("limit", 20)), 100)
+    limit = _parse_limit(20, 100)
 
     if language == "ja":
         results = db.search_by_name_ja(name, limit)
@@ -177,7 +190,7 @@ def get_by_species(species: str):
             "count": 537
         }
     """
-    limit = min(int(request.args.get("limit", 100)), 1000)
+    limit = _parse_limit(100, 1000)
     results = db.search_by_species(species, limit)
 
     return jsonify(
@@ -204,7 +217,7 @@ def get_by_urgency(urgency: str):
             "count": 617
         }
     """
-    limit = min(int(request.args.get("limit", 100)), 1000)
+    limit = _parse_limit(100, 1000)
     results = db.search_by_urgency(urgency, limit)
 
     return jsonify(
@@ -235,7 +248,7 @@ def get_by_species_urgency():
     if not species or not urgency:
         abort(400, description="Both 'species' and 'urgency' parameters required")
 
-    limit = min(int(request.args.get("limit", 100)), 1000)
+    limit = _parse_limit(100, 1000)
     results = db.search_by_species_and_urgency(species, urgency, limit)
 
     return jsonify(

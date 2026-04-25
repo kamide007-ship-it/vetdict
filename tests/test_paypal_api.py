@@ -173,6 +173,14 @@ class TestActivateSubscription:
         )
         assert resp.status_code == 400
 
+    def test_activate_rejects_malformed_email(self):
+        resp = self.client.post(
+            "/api/paypal/activate",
+            json={"subscription_id": "I-BAD", "email": "not-an-email"},
+        )
+        assert resp.status_code == 400
+        assert resp.get_json()["error"] == "invalid email format"
+
 
 # ---------------------------------------------------------------------------
 # /api/paypal/restore endpoint
@@ -190,6 +198,11 @@ class TestRestoreSubscription:
         resp = self.client.post("/api/paypal/restore", json={})
         assert resp.status_code == 400
         assert resp.get_json()["error"] == "email required"
+
+    def test_restore_rejects_malformed_email(self):
+        resp = self.client.post("/api/paypal/restore", json={"email": "garbage"})
+        assert resp.status_code == 400
+        assert resp.get_json()["error"] == "invalid email format"
 
     def test_restore_no_matching_subscription(self, tmp_path):
         db_path = tmp_path / "subs.db"

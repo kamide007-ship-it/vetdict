@@ -1181,7 +1181,7 @@ def api_dashboard_stats():
                 # Skip species if protocol fetch fails
                 pass
     except Exception as e:
-        logger.warning(f"Failed to count anesthesia protocols: {e}")
+        logger.warning("Failed to count anesthesia protocols: %s", e)
         # Fallback to last known value
         total_protocols = 188
 

@@ -10,9 +10,17 @@ import hmac
 import json
 import logging
 import os
+import re
 import urllib.request
 from datetime import datetime
 from pathlib import Path
+
+# RFC-5322 lite: enough to reject obvious garbage, lenient with subaddresses.
+_EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$")
+
+
+def _is_valid_email(email: str) -> bool:
+    return bool(email) and len(email) <= 254 and _EMAIL_RE.match(email) is not None
 
 from flask import Blueprint, jsonify, request
 
@@ -166,6 +174,11 @@ def activate_subscription():
 
     if not subscription_id:
         return jsonify({"error": "subscription_id required"}), 400
+    # Email is optional on activate (used later for /restore on a new device),
+    # but if provided it must be syntactically valid — silently storing garbage
+    # would pollute the subscriber DB and let users brute-force /restore.
+    if email and not _is_valid_email(email):
+        return jsonify({"error": "invalid email format"}), 400
 
     conn = _get_subscribers_db()
     try:
@@ -202,6 +215,8 @@ def restore_subscription():
 
     if not email:
         return jsonify({"active": False, "error": "email required"}), 400
+    if not _is_valid_email(email):
+        return jsonify({"active": False, "error": "invalid email format"}), 400
 
     conn = _get_subscribers_db()
     try:
