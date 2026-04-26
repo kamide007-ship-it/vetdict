@@ -8,11 +8,15 @@ const OPEN_BETA=true;
 let isAdmin=false;
 let isPro=false;
 
+function _lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function _lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function _lsRemove(k){try{localStorage.removeItem(k);}catch(e){}}
+
 async function checkAccess(){
   const params=new URLSearchParams(location.search);
   if(OPEN_BETA) isPro=true;
   if(params.get("pro")==="activated"){
-    localStorage.setItem("vetdict-pro","1");
+    _lsSet("vetdict-pro","1");
     isPro=true;
     history.replaceState(null,"",location.pathname+location.hash);
   }
@@ -21,20 +25,20 @@ async function checkAccess(){
     try{
       const r=await fetchWithTimeout("/api/admin/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:adminParam})},5000);
       const d=await r.json();
-      if(d.valid){localStorage.setItem("vetdict-admin","1");isAdmin=true;isPro=true;}
-      else{localStorage.removeItem("vetdict-admin");}
+      if(d.valid){_lsSet("vetdict-admin","1");isAdmin=true;isPro=true;}
+      else{_lsRemove("vetdict-admin");}
     }catch(e){/* network error — skip admin */}
     history.replaceState(null,"",location.pathname+location.hash);
-  } else if(localStorage.getItem("vetdict-admin")==="1"){
+  } else if(_lsGet("vetdict-admin")==="1"){
     isAdmin=true;isPro=true;
   }
-  if(!OPEN_BETA&&localStorage.getItem("vetdict-pro")==="1"){
+  if(!OPEN_BETA&&_lsGet("vetdict-pro")==="1"){
     isPro=true;
-    const subId=localStorage.getItem("vetdict-subscription-id");
+    const subId=_lsGet("vetdict-subscription-id");
     if(subId){
       fetchWithTimeout("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})},5000)
       .then(function(r){return r.json();})
-      .then(function(d){if(!d.active){localStorage.removeItem("vetdict-pro");localStorage.removeItem("vetdict-subscription-id");isPro=false;document.body.classList.remove("is-pro");}})
+      .then(function(d){if(!d.active){_lsRemove("vetdict-pro");_lsRemove("vetdict-subscription-id");isPro=false;document.body.classList.remove("is-pro");}})
       .catch(function(){});
     }
   }
@@ -299,6 +303,15 @@ function fetchWithTimeout(url,opts={},timeoutMs=10000){
   const ctrl=new AbortController();
   const timer=setTimeout(()=>ctrl.abort(),timeoutMs);
   return fetch(url,{...opts,signal:ctrl.signal}).finally(()=>clearTimeout(timer));
+}
+
+function createTypingIndicator(){
+  const el=document.createElement("div");
+  el.className="chat-msg bot typing-indicator";
+  el.setAttribute("role","status");
+  el.setAttribute("aria-label",currentLang==="ja"?"応答を生成中":"Generating response");
+  el.innerHTML='<span class="dot" aria-hidden="true"></span><span class="dot" aria-hidden="true"></span><span class="dot" aria-hidden="true"></span>';
+  return el;
 }
 
 function applyLanguage(){
@@ -2516,7 +2529,7 @@ function sendLandingChat(){
   const msgs=document.getElementById("landingChatMessages");
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
   const species=currentSpecies||"dog";
-  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  const loading=createTypingIndicator();msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
@@ -2564,7 +2577,7 @@ function _sendSymptomUpdate(symptomId,confirmed){
   // Show brief status
   const statusMsg=confirmed?(currentLang==="ja"?"症状を追加しました。再解析中...":"Added symptom. Re-analyzing..."):(currentLang==="ja"?"了解しました。他の症状を確認します。":"Understood. Checking other symptoms.");
   addChatMsg(statusMsg,"bot-brief");
-  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  const loading=createTypingIndicator();msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:confirmed?symptomId:"",species:species,previous_symptoms:chatAccumulatedSymptoms})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
@@ -2583,8 +2596,15 @@ function sendChatMessage(){
   trackEvent("chat_message",{species:currentSpecies||"dog",message_length:text.length});
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
-  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  const slowTimer=setTimeout(()=>{loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span><div style="font-size:.72rem;color:var(--gray-400);margin-top:4px">'+(currentLang==="ja"?"解析中...":"Analyzing...")+'</div>';},3000);
+  const loading=createTypingIndicator();msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  const slowTimer=setTimeout(()=>{
+    if(loading.querySelector(".typing-slow"))return;
+    const note=document.createElement("div");
+    note.className="typing-slow";
+    note.style.cssText="font-size:.72rem;color:var(--gray-400);margin-top:4px";
+    note.textContent=currentLang==="ja"?"解析中...":"Analyzing...";
+    loading.appendChild(note);
+  },3000);
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
@@ -2881,7 +2901,8 @@ function guidedFetch(phase,extra){
     lang:currentLang,
     ...(extra||{})
   };
-  guidedAddMsg('<span class="dot"></span><span class="dot"></span><span class="dot"></span>',"bot typing-indicator");
+  const _gMsgs=document.getElementById("guidedMessages");
+  if(_gMsgs){_gMsgs.appendChild(createTypingIndicator());_gMsgs.scrollTop=_gMsgs.scrollHeight;}
   fetchWithTimeout("/api/diagnostic-chat/consultation",{
     method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)
   })
@@ -3267,12 +3288,13 @@ function loadDrugDictionary(){
   document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
   const dwInput=document.getElementById("drugWeight");
   if(dwInput){
-    const saved=localStorage.getItem("vetdict-drug-weight");
-    if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;
+    try{const saved=localStorage.getItem("vetdict-drug-weight");if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;}catch(e){}
     dwInput.addEventListener("input",debounce(()=>{
       const v=dwInput.value.trim();
-      if(v===""){localStorage.removeItem("vetdict-drug-weight");}
-      else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
+      try{
+        if(v===""){localStorage.removeItem("vetdict-drug-weight");}
+        else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
+      }catch(e){/* quota / private mode */}
       renderDrugList();
     },300));
   }
@@ -3976,24 +3998,26 @@ renderSpeciesGrid=function(){
 /* --- PWA Install prompt (A2HS) --- */
 (function(){
   let deferredPrompt=null;
+  const _pwaGet=k=>{try{return localStorage.getItem(k);}catch(e){return null;}};
+  const _pwaSet=(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}};
   window.addEventListener("beforeinstallprompt",e=>{
     e.preventDefault();deferredPrompt=e;
-    if(localStorage.getItem("vetdict-pwa-dismissed"))return;
+    if(_pwaGet("vetdict-pwa-dismissed"))return;
     setTimeout(()=>{if(!deferredPrompt)return;
       let banner=document.getElementById("pwaInstallBanner");
       if(banner)return;
       banner=document.createElement("div");banner.id="pwaInstallBanner";banner.className="pwa-install-banner";
       const isJa=typeof currentLang!=="undefined"&&currentLang==="ja";
-      banner.innerHTML=`<span class="pwa-icon">📲</span><span class="pwa-text">${isJa?"VetDictをアプリとしてインストール":"Install VetDict as an app"}</span><button class="pwa-install-btn">${isJa?"インストール":"Install"}</button><button class="pwa-dismiss-btn" aria-label="Dismiss">✕</button>`;
+      banner.innerHTML=`<span class="pwa-icon" aria-hidden="true">📲</span><span class="pwa-text">${isJa?"VetDictをアプリとしてインストール":"Install VetDict as an app"}</span><button class="pwa-install-btn">${isJa?"インストール":"Install"}</button><button class="pwa-dismiss-btn" aria-label="${isJa?"閉じる":"Dismiss"}">✕</button>`;
       document.body.appendChild(banner);
       requestAnimationFrame(()=>banner.classList.add("visible"));
       const removeBanner=()=>{banner.classList.remove("visible");setTimeout(()=>banner.remove(),300);};
       banner.querySelector(".pwa-install-btn").addEventListener("click",()=>{
         removeBanner();deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(c=>{if(c.outcome==="accepted"){localStorage.setItem("vetdict-pwa-dismissed","1");}deferredPrompt=null;});
+        deferredPrompt.userChoice.then(c=>{if(c.outcome==="accepted"){_pwaSet("vetdict-pwa-dismissed","1");}deferredPrompt=null;});
       });
       banner.querySelector(".pwa-dismiss-btn").addEventListener("click",()=>{
-        removeBanner();localStorage.setItem("vetdict-pwa-dismissed","1");
+        removeBanner();_pwaSet("vetdict-pwa-dismissed","1");
       });
     },5000);
   });

@@ -788,6 +788,10 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 .tokushoho-table th{background:var(--gray-50);font-weight:600;width:200px;white-space:nowrap}
 @media(max-width:600px){.tokushoho-table th{width:120px;font-size:.78rem}.tokushoho-table td{font-size:.78rem}}
 
+/* WCAG 2.5.5 Target Size: extend tap area for small icon buttons without changing visuals */
+.search-filter-btn,.filter-close,.detail-close-btn,.pwa-dismiss-btn,.search-clear,.history-clear-btn{position:relative}
+.search-filter-btn::after,.filter-close::after,.detail-close-btn::after,.pwa-dismiss-btn::after{content:"";position:absolute;inset:-10px;pointer-events:auto}
+
 /* Reduced motion preference */
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important}

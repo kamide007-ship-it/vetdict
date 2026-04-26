@@ -8,9 +8,7 @@
 <script nonce="{{ g.csp_nonce }}">
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{'analytics_storage':'denied'});
-if(localStorage.getItem('vetdict-analytics-consent')==='1'){
-  gtag('consent','update',{'analytics_storage':'granted'});
-}
+try{if(localStorage.getItem('vetdict-analytics-consent')==='1'){gtag('consent','update',{'analytics_storage':'granted'});}}catch(e){}
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8LSEGW9ZX" nonce="{{ g.csp_nonce }}"></script>
 <script nonce="{{ g.csp_nonce }}">gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>
@@ -202,9 +200,11 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
   </div>
 </div>
 <script nonce="{{ g.csp_nonce }}">
-function acceptAnalytics(){gtag('consent','update',{'analytics_storage':'granted'});localStorage.setItem('vetdict-analytics-consent','1');document.getElementById('cookieConsent').style.display='none';}
-function dismissConsent(){localStorage.setItem('vetdict-analytics-dismissed','1');document.getElementById('cookieConsent').style.display='none';}
-if(!localStorage.getItem('vetdict-analytics-consent')&&!localStorage.getItem('vetdict-analytics-dismissed')){document.getElementById('cookieConsent').style.display='flex';}
+function _ccGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function _ccSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function acceptAnalytics(){gtag('consent','update',{'analytics_storage':'granted'});_ccSet('vetdict-analytics-consent','1');document.getElementById('cookieConsent').style.display='none';}
+function dismissConsent(){_ccSet('vetdict-analytics-dismissed','1');document.getElementById('cookieConsent').style.display='none';}
+if(!_ccGet('vetdict-analytics-consent')&&!_ccGet('vetdict-analytics-dismissed')){document.getElementById('cookieConsent').style.display='flex';}
 document.getElementById('cookieAcceptBtn').addEventListener('click',acceptAnalytics);
 document.getElementById('cookieDismissBtn').addEventListener('click',dismissConsent);
 </script>
