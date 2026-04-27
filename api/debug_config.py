@@ -1,3 +1,5 @@
+"""Runtime helpers for detecting Flask debug mode from the environment."""
+
 import os
 
 
