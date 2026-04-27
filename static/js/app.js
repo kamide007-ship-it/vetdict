@@ -8,6 +8,11 @@ const OPEN_BETA=true;
 let isAdmin=false;
 let isPro=false;
 
+// Debug logging — only emits when running locally or with ?debug=1
+const _DEBUG=(()=>{try{const h=location.hostname;return h==="localhost"||h==="127.0.0.1"||h===""||location.search.indexOf("debug=1")>=0;}catch(e){return false;}})();
+function debugWarn(){if(_DEBUG&&typeof console!=="undefined")console.warn.apply(console,arguments);}
+function debugError(){if(_DEBUG&&typeof console!=="undefined")console.error.apply(console,arguments);}
+
 async function checkAccess(){
   const params=new URLSearchParams(location.search);
   if(OPEN_BETA) isPro=true;
@@ -130,7 +135,7 @@ const I18N={
     noDrugMatch:"該当する薬品がありません",
     errorPrefix:"エラー: ",
     overallAssessment:"総合評価: ",
-    commError:"通信エラーが発生しました。",
+    commError:"通信エラーが発生しました。ネットワーク接続を確認の上、再試行してください。",
     noResponse:"応答を取得できませんでした",
     diseaseCount:"%filtered% / %total% 件表示",
     catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",behavioral:"行動",general:"全身",skin:"体表・外観",fins:"鰭",gills:"鰓",eyes:"眼",body:"腹部・体型",parasites:"寄生虫",emergency:"急変",reproductive:"繁殖",behavior:"行動",other:"その他"},
@@ -248,7 +253,7 @@ const I18N={
     noDrugMatch:"No matching drugs",
     errorPrefix:"Error: ",
     overallAssessment:"Overall: ",
-    commError:"A communication error occurred.",
+    commError:"A communication error occurred. Please check your network and retry.",
     noResponse:"Could not retrieve response",
     diseaseCount:"%filtered% / %total% shown",
     catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",behavioral:"Behavioral",general:"General",skin:"Skin & Appearance",fins:"Fins",gills:"Gills",eyes:"Eyes",body:"Body & Shape",parasites:"Parasites",emergency:"Emergency",reproductive:"Reproductive",behavior:"Behavior",other:"Other"},
@@ -356,7 +361,7 @@ function applyLanguage(){
 
 function setupLanguageToggle(){
   const toggle=document.querySelector(".lang-toggle");
-  if(!toggle){console.warn(".lang-toggle element not found");return;}
+  if(!toggle){debugWarn(".lang-toggle element not found");return;}
   toggle.addEventListener("click",e=>{
     const btn=e.target.closest("[data-lang]");
     if(!btn||btn.dataset.lang===currentLang)return;
@@ -484,7 +489,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     const kbBtn=document.getElementById("kbHintBtn");
     if(kbBtn)kbBtn.addEventListener("click",toggleKbShortcuts);
   }catch(e){
-    console.error("Error in DOMContentLoaded:",e);
+    debugError("Error in DOMContentLoaded:",e);
   }
 });
 
@@ -745,7 +750,7 @@ function showReturningUserBanner(){
 function setupHamburger(){
   const btn=document.getElementById("hamburgerBtn");
   const nav=document.getElementById("mainNav");
-  if(!btn||!nav){console.warn("hamburgerBtn or mainNav not found");return;}
+  if(!btn||!nav){debugWarn("hamburgerBtn or mainNav not found");return;}
   btn.addEventListener("click",()=>{
     const open=nav.classList.toggle("open");
     btn.setAttribute("aria-expanded",open);
@@ -828,11 +833,11 @@ function loadSpeciesStats(){
         }
       }
     }catch(e){
-      console.error("Error processing species stats:",e);
+      debugError("Error processing species stats:",e);
       setDefaultStats();
     }
   }).catch(err=>{
-    console.error("Error loading species stats:",err);
+    debugError("Error loading species stats:",err);
     setDefaultStats();
   });
 }
@@ -881,7 +886,7 @@ function setDefaultStats(){
 
 function renderSpeciesGrid(){
   const grid=document.getElementById("speciesGrid");
-  if(!grid){console.warn("speciesGrid element not found");return;}
+  if(!grid){debugWarn("speciesGrid element not found");return;}
   if(!currentSpecies)updateCheckerProgress(1);
   const section=document.getElementById("speciesSection");
   if(section&&!section.querySelector(".species-filter-input")){
@@ -1309,7 +1314,7 @@ function toggleSymptomSort(){symptomSortMode=symptomSortMode==="category"?(curre
 function renderSymptomList(symptoms){
   const symptomSearch=document.getElementById("symptomSearch");
   const list=document.getElementById("symptomList");
-  if(!list){console.warn("symptomList element not found");return;}
+  if(!list){debugWarn("symptomList element not found");return;}
   const search=(symptomSearch?.value||"").toLowerCase();
   const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
   let html=`<button class="symptom-sort-toggle" aria-label="Switch sort mode">${escapeHtml(sortLabel)}</button>`;
@@ -2163,7 +2168,7 @@ function renderHusbandry(h,container){
 function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
   const list=document.getElementById("diseaseDbList");
-  if(!list){console.warn("diseaseDbList element not found");return;}
+  if(!list){debugWarn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();const dbTab=document.getElementById("tab-database");if(dbTab){let b=dbTab.querySelector(".tab-badge");if(!b){b=document.createElement("span");b.className="tab-badge";dbTab.appendChild(b);}b.textContent=allDiseases.length;}}})
   .catch(()=>{if(requestId===diseaseRequestId&&list){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
@@ -2209,7 +2214,7 @@ function _buildCatCounts(){
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   const catGrid=document.getElementById("diseaseCategoryGrid");
-  if(!azNav){console.warn("azNav element not found");return;}
+  if(!azNav){debugWarn("azNav element not found");return;}
   if(diseaseNavMode===null)diseaseNavMode="category";
   const modeLabels={az:{next:"kana",label:"A-Z",switchLabel:currentLang==="ja"?"あいうえお順へ":"Switch to Kana"},kana:{next:"category",label:currentLang==="ja"?"あいうえお順":"Kana",switchLabel:currentLang==="ja"?"カテゴリ別へ":"Switch to Category"},category:{next:"az",label:currentLang==="ja"?"カテゴリ別":"Category",switchLabel:"A-Z"}};
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
@@ -2439,7 +2444,7 @@ function switchView(view){
 
 function setupNavigation(){
   const nav=document.getElementById("mainNav");
-  if(!nav){console.warn("mainNav element not found");return;}
+  if(!nav){debugWarn("mainNav element not found");return;}
   nav.addEventListener("click",e=>{
     const tab=e.target.closest("[role=tab]");
     if(tab)switchView(tab.dataset.view);
@@ -2543,8 +2548,8 @@ function sendLandingChat(){
   })
   .catch(err=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
-    console.error("Chat error:",err);
-    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";
+    debugError("Chat error:",err);
+    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
     const retryBtn=`<button class="landing-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtn;
     errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendLandingChat();});
@@ -2573,7 +2578,7 @@ function _sendSymptomUpdate(symptomId,confirmed){
     if(data.accumulated_symptoms)chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
   })
-  .catch(err=>{loading.remove();console.error("Symptom update error:",err);});
+  .catch(err=>{loading.remove();debugError("Symptom update error:",err);});
 }
 
 function sendChatMessage(){
@@ -2595,9 +2600,9 @@ function sendChatMessage(){
   })
   .catch(err=>{
     clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
-    console.error("Chat error:",err);
+    debugError("Chat error:",err);
     trackEvent("api_error",{endpoint:"diagnostic-chat",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});
-    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";
+    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
     const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
     errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendChatMessage();});
@@ -4434,7 +4439,7 @@ class MultiDiseaseUIHandler {
       this.currentAnalysis = data;
       this.renderMultiDiseaseUI(data);
     } catch (error) {
-      console.error('Multi-disease analysis error:', error);
+      debugError("Multi-disease analysis error:",error);
       this.showError(`Analysis failed: ${error.message}`);
     }
   }
