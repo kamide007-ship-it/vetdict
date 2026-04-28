@@ -3932,7 +3932,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Postpartum Metritis (Acute Postpartum Uterine Infection)",
         "name_ja": "産後子宮炎（急性産褥子宮炎）",
-        "symptoms": {"fever", "lethargy", "appetite_loss", "genital_discharge", "abdominal_pain", "vomiting", "dehydration"},
+        "symptoms": {
+            "fever",
+            "lethargy",
+            "appetite_loss",
+            "genital_discharge",
+            "abdominal_pain",
+            "vomiting",
+            "dehydration",
+        },
         "description": "Acute bacterial infection of the uterus within 24-72 hours after parturition, characterized by foul-smelling purulent to hemorrhagic vaginal discharge, fever, and systemic illness. Distinct from pyometra in that it occurs specifically in the immediate postpartum period and is typically associated with retained placenta, dystocia-assisted delivery, or obstetric manipulation. Progression to septicemia, endotoxemia, and DIC is rapid if untreated.",
         "description_ja": "分娩後24-72時間以内に発症する子宮の急性細菌感染症で、悪臭を伴う化膿性〜血性の膣分泌物・発熱・全身症状を特徴とする。産褥期に特異的に発生する点で子宮蓄膿症（パイオメトラ）とは異なり、通常は胎盤遺残・難産介助・産科的操作に関連する。未治療では敗血症・エンドトキシン血症・DICへ急速に進展する。",
         "pathophysiology": "Normal postpartum uterus is highly susceptible to ascending infection due to: (1) open cervix for 2-3 weeks post-partum, (2) lochia (normal serosanguineous discharge) provides bacterial culture medium, (3) residual placental tissue or necrotic endometrium provides substrate, (4) post-partum immunosuppression. Bacterial ascent (primarily E. coli, Streptococcus, Staphylococcus, occasionally anaerobes) leads to endometritis → myometritis → peritonitis or systemic dissemination. Endotoxin release from Gram-negative bacteria (E. coli LPS) causes systemic inflammatory response, cardiovascular collapse, and DIC. Uterine subinvolution compounds the problem by preventing physical clearance.",
