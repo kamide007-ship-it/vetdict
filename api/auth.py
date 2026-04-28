@@ -16,7 +16,6 @@ import os
 import threading
 import time
 from collections import deque
-from datetime import datetime
 from functools import wraps
 from typing import Callable, Dict, Optional, Tuple
 
@@ -29,17 +28,17 @@ class AuthConfig:
     """Configuration for API authentication."""
 
     def __init__(self):
-        self.internal_token = (os.getenv('INTERNAL_API_TOKEN') or '').strip()
+        self.internal_token = (os.getenv("INTERNAL_API_TOKEN") or "").strip()
         self.rate_limit_max_requests = self._parse_int(
-            os.getenv('INTERNAL_API_RATE_LIMIT_MAX_REQUESTS', '30'), default=30
+            os.getenv("INTERNAL_API_RATE_LIMIT_MAX_REQUESTS", "30"), default=30
         )
         self.rate_limit_window_seconds = self._parse_int(
-            os.getenv('INTERNAL_API_RATE_LIMIT_WINDOW_SECONDS', '60'), default=60
+            os.getenv("INTERNAL_API_RATE_LIMIT_WINDOW_SECONDS", "60"), default=60
         )
-        self.enable_audit_logging = os.getenv('API_AUTH_AUDIT_LOG', '1').lower() in ('1', 'true', 'yes')
-        self.enable_jwt = os.getenv('API_AUTH_JWT_ENABLED', '0').lower() in ('1', 'true', 'yes')
-        self.jwt_secret = (os.getenv('API_AUTH_JWT_SECRET') or '').strip()
-        self.trusted_proxies = (os.getenv('TRUSTED_PROXIES') or '').split(',')
+        self.enable_audit_logging = os.getenv("API_AUTH_AUDIT_LOG", "1").lower() in ("1", "true", "yes")
+        self.enable_jwt = os.getenv("API_AUTH_JWT_ENABLED", "0").lower() in ("1", "true", "yes")
+        self.jwt_secret = (os.getenv("API_AUTH_JWT_SECRET") or "").strip()
+        self.trusted_proxies = [p.strip() for p in (os.getenv("TRUSTED_PROXIES") or "").split(",") if p.strip()]
 
     @staticmethod
     def _parse_int(value: str, default: int = 30) -> int:
@@ -119,12 +118,9 @@ class AuditLogger:
         if not self.enabled:
             return
 
-        datetime.utcnow().isoformat()
-
         log_level = logging.INFO if success else logging.WARNING
         self.auth_log.log(
-            log_level,
-            f"Auth {'success' if success else 'failure'}: {method} from {client_ip} - {reason}"
+            log_level, f"Auth {'success' if success else 'failure'}: {method} from {client_ip} - {reason}"
         )
 
 
@@ -172,16 +168,22 @@ class ClientIP:
         self.trusted_proxies = trusted_proxies or []
 
     def get_client_ip(self) -> str:
-        """Get client IP address, accounting for proxies."""
-        # Check X-Forwarded-For if behind a trusted proxy
-        if 'X-Forwarded-For' in request.headers:
-            # X-Forwarded-For can have multiple IPs, get the first one
-            ips = request.headers.get('X-Forwarded-For', '').split(',')
-            if ips:
-                return ips[0].strip()
+        """Get client IP address, accounting for proxies.
 
-        # Fall back to remote_addr
-        return request.remote_addr or 'unknown'
+        If ``trusted_proxies`` is configured, X-Forwarded-For is honored only
+        when the direct peer (``request.remote_addr``) is one of those trusted
+        proxies; otherwise the header is ignored to prevent spoofed IPs from
+        bypassing rate limiting. When ``trusted_proxies`` is empty the header
+        is trusted unconditionally (preserving behavior for deployments that
+        rely on an upstream load balancer to strip untrusted headers).
+        """
+        xff = request.headers.get("X-Forwarded-For")
+        remote = request.remote_addr or "unknown"
+        if xff and (not self.trusted_proxies or remote in self.trusted_proxies):
+            first = xff.split(",", 1)[0].strip()
+            if first:
+                return first
+        return remote
 
 
 # Global instances
@@ -202,11 +204,13 @@ def require_internal_api_access(f: Callable) -> Callable:
     Expects: Authorization: Bearer <token>
     Enforces rate limiting and logs authentication attempts.
     """
+
     @wraps(f)
     def wrapper(*args, **kwargs):
-        version_str = 'unknown'
+        version_str = "unknown"
         try:
             from api.vetdict_api import VERSION
+
             version_str = VERSION
         except (ImportError, AttributeError):
             pass
@@ -219,8 +223,10 @@ def require_internal_api_access(f: Callable) -> Callable:
         client_ip = _client_ip.get_client_ip()
 
         # Update rate limiter config if it has changed
-        if (_rate_limiter.max_requests != current_config.rate_limit_max_requests or
-            _rate_limiter.window_seconds != current_config.rate_limit_window_seconds):
+        if (
+            _rate_limiter.max_requests != current_config.rate_limit_max_requests
+            or _rate_limiter.window_seconds != current_config.rate_limit_window_seconds
+        ):
             _rate_limiter.max_requests = current_config.rate_limit_max_requests
             _rate_limiter.window_seconds = current_config.rate_limit_window_seconds
 
@@ -228,52 +234,58 @@ def require_internal_api_access(f: Callable) -> Callable:
         if _rate_limiter.is_limited(client_ip):
             _audit_logger.log_auth_attempt(
                 success=False,
-                method='bearer_token',
+                method="bearer_token",
                 client_ip=client_ip,
-                reason='rate_limited',
+                reason="rate_limited",
             )
             return (
-                jsonify({
-                    'success': False,
-                    'error': 'リクエスト制限に達しました。',
-                    'version': version_str,
-                }),
+                jsonify(
+                    {
+                        "success": False,
+                        "error": "リクエスト制限に達しました。",
+                        "version": version_str,
+                    }
+                ),
                 429,
             )
 
         # Parse Authorization header
-        auth_header = (request.headers.get('Authorization') or '').strip()
-        auth_scheme, _, provided_token = auth_header.partition(' ')
+        auth_header = (request.headers.get("Authorization") or "").strip()
+        auth_scheme, _, provided_token = auth_header.partition(" ")
 
         # Check if token is provided and scheme is correct
         if not current_config.internal_token:
-            if os.getenv('FLASK_DEBUG', '0').strip().lower() in ('1', 'true', 'yes', 'on'):
+            if os.getenv("FLASK_DEBUG", "0").strip().lower() in ("1", "true", "yes", "on"):
                 logger.warning("INTERNAL_API_TOKEN not set — allowing unauthenticated access (debug mode)")
                 return f(*args, **kwargs)
             else:
                 logger.error("INTERNAL_API_TOKEN not configured in production")
                 return (
-                    jsonify({
-                        'success': False,
-                        'error': 'Server misconfiguration',
-                        'version': version_str,
-                    }),
+                    jsonify(
+                        {
+                            "success": False,
+                            "error": "Server misconfiguration",
+                            "version": version_str,
+                        }
+                    ),
                     500,
                 )
 
-        if auth_scheme != 'Bearer':
+        if auth_scheme != "Bearer":
             _audit_logger.log_auth_attempt(
                 success=False,
-                method='bearer_token',
+                method="bearer_token",
                 client_ip=client_ip,
-                reason='invalid_scheme',
+                reason="invalid_scheme",
             )
             return (
-                jsonify({
-                    'success': False,
-                    'error': 'Unauthorized',
-                    'version': version_str,
-                }),
+                jsonify(
+                    {
+                        "success": False,
+                        "error": "Unauthorized",
+                        "version": version_str,
+                    }
+                ),
                 401,
             )
 
@@ -283,25 +295,27 @@ def require_internal_api_access(f: Callable) -> Callable:
         if not is_valid:
             _audit_logger.log_auth_attempt(
                 success=False,
-                method='bearer_token',
+                method="bearer_token",
                 client_ip=client_ip,
-                reason=error_reason or 'invalid_token',
+                reason=error_reason or "invalid_token",
             )
             return (
-                jsonify({
-                    'success': False,
-                    'error': 'Unauthorized',
-                    'version': version_str,
-                }),
+                jsonify(
+                    {
+                        "success": False,
+                        "error": "Unauthorized",
+                        "version": version_str,
+                    }
+                ),
                 401,
             )
 
         # Log successful authentication
         _audit_logger.log_auth_attempt(
             success=True,
-            method='bearer_token',
+            method="bearer_token",
             client_ip=client_ip,
-            reason='valid_token',
+            reason="valid_token",
         )
 
         # Call the original function

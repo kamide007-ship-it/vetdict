@@ -2,10 +2,12 @@
 
 Provides deterministic enrichment for disease narrative fields and completeness scoring.
 """
+
 from __future__ import annotations
 
 from typing import Any, Dict, List
 
+from api.chat.constants import SPECIES_LABELS
 from api.reference_catalog import (
     FIELD_REFERENCE_NUMBERS,
     SPECIES_REFERENCE_NUMBERS,
@@ -22,53 +24,25 @@ REQUIRED_FIELDS = [
     "prognosis",
 ]
 
-SPECIES_NAME_JA = {
-    "dog": "犬",
-    "cat": "猫",
-    "horse": "馬",
-    "rabbit": "ウサギ",
-    "hamster": "ハムスター",
-    "guinea_pig": "モルモット",
-    "chinchilla": "チンチラ",
-    "ferret": "フェレット",
-    "hedgehog": "ハリネズミ",
-    "sugar_glider": "フクロモモンガ",
-    "degu": "デグー",
-    "bird": "鳥",
-    "parakeet": "インコ",
-    "parrot": "オウム",
-    "reptile": "爬虫類",
-    "tortoise": "リクガメ",
-    "snake": "ヘビ",
-    "lizard": "トカゲ",
-    "amphibian": "両生類",
-    "fish": "魚",
+# JA species names for narrative text. Derived from chat.constants.SPECIES_LABELS;
+# overrides cover narrative-specific phrasing (e.g. "その他エキゾチック動物" vs the
+# shorter UI label "その他エキゾチック").
+_SPECIES_NAME_JA_OVERRIDES = {
     "exotic_other": "その他エキゾチック動物",
 }
+SPECIES_NAME_JA = {k: _SPECIES_NAME_JA_OVERRIDES.get(k, v["ja"]) for k, v in SPECIES_LABELS.items()}
 
-SPECIES_NAME_EN = {
-    "dog": "dogs",
-    "cat": "cats",
-    "horse": "horses",
-    "rabbit": "rabbits",
-    "hamster": "hamsters",
-    "guinea_pig": "guinea pigs",
-    "chinchilla": "chinchillas",
-    "ferret": "ferrets",
-    "hedgehog": "hedgehogs",
-    "sugar_glider": "sugar gliders",
-    "degu": "degus",
-    "bird": "birds",
-    "parakeet": "parakeets",
-    "parrot": "parrots",
-    "reptile": "reptiles",
-    "tortoise": "tortoises",
-    "snake": "snakes",
-    "lizard": "lizards",
-    "amphibian": "amphibians",
+# EN narrative form: plural ("In dogs, ...") rather than the singular UI label.
+_SPECIES_NAME_EN_PLURAL_OVERRIDES = {
     "fish": "fish",
     "exotic_other": "exotic animals",
+    "guinea_pig": "guinea pigs",
+    "sugar_glider": "sugar gliders",
 }
+SPECIES_NAME_EN = {
+    k: _SPECIES_NAME_EN_PLURAL_OVERRIDES.get(k, v["en"].lower() + "s") for k, v in SPECIES_LABELS.items()
+}
+
 
 def _text(v: Any) -> str:
     if v is None:
@@ -99,9 +73,10 @@ def _symptom_text(symptoms: Any, limit: int = 5, lang: str = "en", display_entri
     if not vals:
         return "clinical signs" if lang != "ja" else "臨床徴候"
     sep = "、" if lang == "ja" else ", "
-    suffix = (f" (+{len(vals)-limit}件)" if lang == "ja" else f" (+{len(vals)-limit} more)")
     if len(vals) <= limit:
         return sep.join(vals)
+    overflow = len(vals) - limit
+    suffix = f" (+{overflow}件)" if lang == "ja" else f" (+{overflow} more)"
     return sep.join(vals[:limit]) + suffix
 
 
@@ -152,6 +127,7 @@ def _fallback(field: str, name: str, species: str, symptoms: str, lang: str) -> 
             "prognosis": f"Prognosis for {name} varies by severity, comorbidity burden, and time to treatment initiation.",
         }
     return templates[field]
+
 
 def _merge_reference_numbers(out: Dict[str, Any], species: str) -> List[int]:
     raw_numbers = out.get("references") or out.get("reference_numbers") or []
