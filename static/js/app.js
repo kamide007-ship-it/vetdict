@@ -3266,20 +3266,27 @@ function loadDrugDictionary(){
     /* Auto-select current species in drug filter */
     if(currentSpecies){spSelect.value=currentSpecies;}
     renderDrugList();
-  }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
-  document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
-  document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
-  document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
-  const dwInput=document.getElementById("drugWeight");
-  if(dwInput){
-    const saved=localStorage.getItem("vetdict-drug-weight");
-    if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;
-    dwInput.addEventListener("input",debounce(()=>{
-      const v=dwInput.value.trim();
-      if(v===""){localStorage.removeItem("vetdict-drug-weight");}
-      else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
-      renderDrugList();
-    },300));
+  }).catch(()=>{
+    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
+    const rb=list.querySelector(".retry-drug-btn");
+    if(rb)rb.addEventListener("click",()=>{drugsLoaded=false;loadDrugDictionary();});
+  });
+  if(!list.dataset.drugListenersAttached){
+    list.dataset.drugListenersAttached="1";
+    document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
+    document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
+    document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
+    const dwInput=document.getElementById("drugWeight");
+    if(dwInput){
+      const saved=localStorage.getItem("vetdict-drug-weight");
+      if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;
+      dwInput.addEventListener("input",debounce(()=>{
+        const v=dwInput.value.trim();
+        if(v===""){localStorage.removeItem("vetdict-drug-weight");}
+        else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
+        renderDrugList();
+      },300));
+    }
   }
 }
 
@@ -3371,35 +3378,42 @@ function loadAnesthesiaProtocols(){
     Object.entries(anesthesiaCategories).forEach(([k,v])=>{const name=currentLang==="ja"?(v.ja||v.en):(v.en||v.ja);catSel.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(k)}">${escapeHtml(name)}</option>`);});
     renderAnesthesiaOverview(data);
     renderAnesthesiaList();
-  }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
-  /* Fetch ASA classification */
-  fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
-  /* Fetch contraindication rules */
-  fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(()=>{});
-  document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
-  document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
-  /* Weight-based dose calculator */
-  const weightInput=document.getElementById("anesthesiaWeight");
-  if(weightInput){
-    weightInput.addEventListener("input",debounce(renderAnesthesiaList,300));
-    document.getElementById("anesthesiaWeightClear").addEventListener("click",()=>{weightInput.value="";renderAnesthesiaList();});
+  }).catch(()=>{
+    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-anesthesia-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
+    const rb=list.querySelector(".retry-anesthesia-btn");
+    if(rb)rb.addEventListener("click",()=>{anesthesiaLoaded=false;loadAnesthesiaProtocols();});
+  });
+  if(!list.dataset.anesthesiaListenersAttached){
+    list.dataset.anesthesiaListenersAttached="1";
+    /* Fetch ASA classification */
+    fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
+    /* Fetch contraindication rules */
+    fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(()=>{});
+    document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
+    document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
+    /* Weight-based dose calculator */
+    const weightInput=document.getElementById("anesthesiaWeight");
+    if(weightInput){
+      weightInput.addEventListener("input",debounce(renderAnesthesiaList,300));
+      document.getElementById("anesthesiaWeightClear").addEventListener("click",()=>{weightInput.value="";renderAnesthesiaList();});
+    }
+    /* Emergency protocol quick-access */
+    const emergBtn=document.getElementById("anesthesiaEmergencyBtn");
+    if(emergBtn){
+      emergBtn.addEventListener("click",()=>{
+        const catSel=document.getElementById("anesthesiaCategoryFilter");
+        const isActive=emergBtn.classList.toggle("active");
+        if(isActive){catSel.value="emergency";} else {catSel.value="";}
+        renderAnesthesiaList();
+      });
+    }
+    /* ASA filter */
+    const asaFilter=document.getElementById("anesthesiaAsaFilter");
+    if(asaFilter)asaFilter.addEventListener("change",renderAnesthesiaList);
+    /* Print checklist */
+    const printBtn=document.getElementById("anesthesiaPrintBtn");
+    if(printBtn)printBtn.addEventListener("click",printAnesthesiaChecklist);
   }
-  /* Emergency protocol quick-access */
-  const emergBtn=document.getElementById("anesthesiaEmergencyBtn");
-  if(emergBtn){
-    emergBtn.addEventListener("click",()=>{
-      const catSel=document.getElementById("anesthesiaCategoryFilter");
-      const isActive=emergBtn.classList.toggle("active");
-      if(isActive){catSel.value="emergency";} else {catSel.value="";}
-      renderAnesthesiaList();
-    });
-  }
-  /* ASA filter */
-  const asaFilter=document.getElementById("anesthesiaAsaFilter");
-  if(asaFilter)asaFilter.addEventListener("change",renderAnesthesiaList);
-  /* Print checklist */
-  const printBtn=document.getElementById("anesthesiaPrintBtn");
-  if(printBtn)printBtn.addEventListener("click",printAnesthesiaChecklist);
 }
 
 function reloadAnesthesiaForSpecies(){
