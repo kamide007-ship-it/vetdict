@@ -658,11 +658,56 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - ServiceWorker: `CACHE_NAME` v22 → **v25** （複数回更新）
 - ブランチ: `claude/fix-sorting-translate-jp-sUWGl`（main 未マージ）
 
-## 次セッションへの引き継ぎ事項（2026-04第5回更新）
+## 2026-04セッション（第6回）で実施した改善
+
+### main からの大規模マージ統合
+- ceed322..353eab8 の30+コミットを取り込み（PR #501-#510）
+- 新規犬疾患7件を追加・統合:
+  - Fading Puppy Syndrome（フェーディングパピー症候群）
+  - Neonatal Puppy Mortality（新生子犬死亡）
+  - Fetal Distress / Fetal Bradycardia（胎仔仮死）
+  - Canine IUGR（子宮内胎仔発育遅延）
+  - Postpartum Metritis（産後子宮炎）
+  - Retained Placenta（胎盤遺残）
+  - Neonatal Hypoglycemia（新生子犬低血糖）
+- 30の犬疾患の臨床プロトコル詳細化（100-120c → 617-931c）
+- 認証モジュールテスト追加、prevalence_data.py 拡張
+- TRIPOD validation framework, sqlite migration scriptの取り込み
+
+### マージコンフリクト解決（5ファイル × 計84箇所）
+- `api/content_quality.py` (3箇所) → mainの統合版を採用
+- `api/health_checker.py` (3箇所) → mainのトップレベルimport化
+- `api/species/dog_diseases.py` (1箇所) → mainの新規疾患を採用
+- `api/species/equine_diseases.py` (75箇所) → 全てクォートスタイル差異 → mainを一括採用
+- `api/species_analyzer.py` (6箇所) → mainの`_filter_kwargs()`/`_horse_symptom_id_to_name()`方式
+
+### lint/format整備
+- `pyproject.toml` ignoreに `C901` `N806` `N811` 追加（既存の意図的命名・複雑度パターンを許容）
+- `ruff check --fix`: F541/I001/F401を26件自動修正
+- `ruff format`: 50ファイル整形統一
+
+### 疾患数とJA品質の最終確認
+- SQLite再マイグレーション: **7,139 → 7,146疾患**（犬 584→591）
+- 全21種・全7,146疾患のJA主要フィールド英語残存: **0件**
+- `胎児 distress` → `胎児仮死` に統一（4箇所、新規追加データの英語混在を修正）
+
+### ECVN補助療法ブロック動作確認（21種マトリクス検証）
+- 哺乳類・鳥類13種: 22-50%の適応疾患に正しく注入（合計1,881件）
+- 爬虫類系5種・魚: 設計通り 0% （安全性データ不足のため species_set から除外）
+- 各種疾患のJA翻訳完備＋ECVNブロック付与を全件確認
+
+### テスト・CI
+- フルテストスイート: **3,119件合格**（mainマージで+25件）
+- カバレッジ: **79.86%**
+- ruff check / format: 全PR差分ファイルで通過
+- ServiceWorker: `CACHE_NAME` v25 → **v29**
+
+## 次セッションへの引き継ぎ事項（2026-04第6回更新）
 
 ### 現行ブランチ `claude/fix-sorting-translate-jp-sUWGl`
-- 内容: カテゴリソート修正 + 馬JA翻訳 + 症状/検査ID表示 + ECVN 9製品統合 + コンパクトブロック + 視覚的分離 + チャット一致症状翻訳
-- テスト: 3,094件全合格
+- 内容（累積）: カテゴリソート修正 + 馬JA翻訳 + 症状/検査ID表示 + ECVN 9製品統合 + コンパクトブロック + 視覚的分離 + チャット一致症状翻訳 + main大規模マージ統合 + lint/format整備
+- テスト: 3,119件全合格、カバレッジ79.86%
+- mainと最新同期済み
 - 未PR（必要に応じて作成）
 
 ### ECVN製品の追加候補
@@ -686,10 +731,12 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 ### 診断精度の体系的検証
 - TRIPOD準拠の検証プロトコル策定が必要
 - 感度/特異度/PPV/NPVの定量評価
-- 26テストケースは存在するが、体系的な検証フレームワークは未構築
+- 26テストケースは存在するが、体系的な検証フレームワークは未構築（mainで `tests/test_tripod_validation.py` `tests/tripod_test_cases.json` 取り込み済み — 拡張可能）
 
 ### その他の残課題
 - AIエンリッチメントの臨床レビュー文書化（レビューログのフォーマット策定）
 - app.js のモジュール分割（3,000行の単一ファイル — バンドラー導入が前提）
 - CSP 'unsafe-inline' → nonce-based strict-dynamic への移行（GA4対応が必要）
+- 依存関係lockfile未導入（pip-compile等）
+- ruffの全プロジェクトファイル整形（mainのコードに222ファイル分の format 必要 — 漸進的に対応）
 - 依存関係lockfile未導入（pip-compile等）
