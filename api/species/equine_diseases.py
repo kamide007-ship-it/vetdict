@@ -1447,6 +1447,36 @@ DISEASE_DATABASE: list[Disease] = [
         risk_factors="【母馬】胎盤炎既往（StreptococcusまたはNocardiformで再発リスク高）、子宮内膜炎・瘢痕、Caslickの逆転不全、高齢初産（>16歳）、双子妊娠、過熟妊娠（>360日）、栄養不良、フェスクトキシン暴露（妊娠後期にエルゴバリン産生Festuca arundinacea摂取で胎盤肥厚・分泌乳異常）、EHV-1感染、bacterial・fungal placentitis。【遺伝・品種】Thoroughbred・Standardbredで多い（管理関連バイアス）、双子の頻度は品種差あり。【環境】汚染された分娩環境、ストレス、輸送、急激な気温変化",
         prevention="(1)妊娠後期（>270日）の経直腸超音波で胎盤厚（CTUP: combined thickness of uterus and placenta）測定—閉鎖環状部で>11.5 mm（330日齢）または>15 mm（370日齢）で胎盤炎疑い、ALTRENOGEST 0.044 mg/kg PO SID（分娩30日前まで）+ TMS+フルコナゾールで治療。(2)双子分娩管理：超音波で14-16日齢に診断、片側圧潰または経頸管的吸引で1胎にreduction。(3)Caslick分娩前抜糸（>320日齢でvulvar restoration）。(4)フェスクパスチャから分娩90日前にdam removal（ergot alkaloid avoidance）。(5)分娩監視（24時間体制、CCTV、Mare-Watchsystem、Foaling Alert）。(6)Foaling stallの清潔・滑り防止床材・25℃以上の保温。(7)分娩準備キット常備：滅菌剪刀（CA切開用）、ヨード液、新生子蘇生キット（マスクO2、エンドチューブ、アドレナリン、デキストロース、ナロキソン）、母馬用オキシトシン・PG・抗菌薬。",
     ),
+    Disease(
+        "rp_uterine_artery_rupture",
+        "産後出血・子宮動脈破裂",
+        "Postpartum Hemorrhage / Uterine Artery Rupture",
+        "reproductive",
+        "critical",
+        "分娩中〜分娩後72時間以内に発生する致死的出血。中産以上の高齢牝馬（>15歳）の最重要死亡原因。中子宮動脈・卵巣動脈・腸骨動脈の破裂が腹腔内・広間膜内出血を引き起こす。",
+        [
+            "repro_dystocia",
+            "gen_collapse",
+            "gen_pale_mucosa",
+            "gen_tachycardia",
+            "gen_lethargy",
+            "repro_abdominal_pain",
+        ],
+        urgency="emergency",
+        recommended_exams=[
+            (1, "経直腸検査（広間膜血腫触知）", "Rectal Palpation (Broad Ligament Hematoma)"),
+            (2, "経直腸・経腹超音波（腹腔内血液・血腫）", "Transrectal / Transabdominal Ultrasound"),
+            (3, "腹腔穿刺（PCV比較・腹腔内出血評価）", "Abdominocentesis (PCV Comparison)"),
+            (4, "CBC・凝固検査・乳酸", "CBC / Coagulation / Lactate"),
+            (5, "クロスマッチ・血液型判定", "Crossmatch / Blood Typing"),
+        ],
+        merck_url=_MERCK + "uterine+artery+rupture+horses",
+        pathophysiology="病態生理：高齢経産牝馬では血管壁の弾性線維変性（Cu欠乏・加齢性動脈硬化説）により分娩時の血管伸展ストレスで破裂が起こる。最多部位は中子宮動脈（middle uterine artery、broad ligament内、L4-L5椎体腹側）、次いで卵巣動脈・外腸骨動脈・大動脈分岐部。出血パターンは(A)広間膜内血腫（contained hematoma、最初は止血される）、(B)腹腔内出血（broad ligament rupture後）、(C)子宮内出血（鏡視下で見える血液貯留）の3型。出血量は短時間で20-40 Lに達し、循環血液量の50%超を失う。代償機構：交感神経亢進→末梢血管収縮→心拍数増加→2-6時間まで血圧維持されるが、その後突然循環虚脱。再出血リスクは48-72時間以内が最高、安静と血圧管理が予後を分ける。",
+        treatment_protocol="【初期対応 — 安静と低血圧維持が最重要】(1)IMMEDIATE QUIET STALL：絶対安静、刺激回避、暗室、家族員退場、母馬を立位で動かさない。再出血防止のため血圧上昇を防ぐ。(2)経直腸触診で広間膜の波動・血腫触知（直径30-50 cmの球状物体、L4-L5付近、収縮期波動なし、内部の沈殿物感あり）—操作は最小限に（強い触診で血腫破裂・腹腔内出血誘発）。(3)バイタル：HR、RR、粘膜色、CRT、舌色、脈圧、体温をq15-30分でモニター。HR>80、CRT>3秒、粘膜白色、脈圧低下、四肢冷感は重症ショック。(4)超音波（経腹）：腹腔内自由液貯留（hemoperitoneum）、広間膜血腫の大きさと内部エコー（tortuous vascular pattern→active bleeding）。(5)腹腔穿刺：腹腔液PCVが末梢血PCV>20%なら活動性腹腔内出血。【低血圧管理（hypotensive resuscitation）】(6)輸液は最小限：等張晶質液（Plasmalyte/LRS）4-6 L/hr（通常用量の半量）、目標MAP 60-70 mmHg（低めに維持して再出血予防）。クリスタロイドのみで完全な血圧回復は目指さない（permissive hypotension）。(7)膠質液：ヘタスターチ6% 5-10 mL/kg IV slow drip、または7.2%食塩液 4 mL/kg IV bolus、ヘモグロビン代用品（Oxyglobin 5-15 mL/kg）が利用可能なら有効。(8)輸血：PCV<15%、心拍数>80、急速進行例で全血15-20 mL/kg IV slow drip（クロスマッチ済、Aa/Qa陰性ドナー優先）—輸血量は控えめに（過輸血は血圧上昇→再出血誘発）。【止血促進】(9)アミノカプロン酸（Amicar）70 mg/kg IV q6h（fibrin安定化、抗線溶）。(10)Yunnan Baiyao 4-8 g PO q12h（伝統薬、不整脈に注意）。(11)ナロキソン0.01-0.02 mg/kg IV slow（低血圧改善・凝固促進、controversial）。(12)冷却タオルを腹部に置く（ベンゾジアゼピン的鎮静効果あり、医学的根拠は限定）。【鎮静（過剰刺激防止）】(13)アセプロマジン0.02-0.04 mg/kg IV slow（α1拮抗で血圧降下→再出血予防、低血圧時禁忌に注意）、または ブトルファノール0.01-0.04 mg/kg IV q4h、デトミジン0.01-0.02 mg/kg IV slow（α2作動・血圧上昇のため通常は控える）。【外科介入】(14)外科的止血は通常推奨されない（再出血と高麻酔死亡率）。例外的に意識消失・大量腹腔内出血・破裂血腫の場合のみ全身麻酔下で開腹（生存率<30%）。(15)子宮内出血のみで広間膜温存例では子宮内タンポン（ガーゼ充填+滅菌生食灌流）を試みる場合あり。【サポートケア】(16)抗菌薬予防：セフチオフル2.2 mg/kg IM/IV BID または セフカペム22,000 IU/kg IV q6h+ジェンタマイシン6.6 mg/kg IV SID（広間膜内血腫の感染防止、3-5日）。(17)Vit K1 0.5-1 mg/kg SC q12h、ビタミンC 20 mg/kg IV q12h（血管壁強化・抗酸化）。(18)蹄葉炎予防：氷浴24-72時間（DDFT/CL関節を冷却）、フェニルブタゾン2.2 mg/kg IV BID（短期）。(19)産後子宮疾患予防：オキシトシン10-20 IU IM q6h（子宮退縮促進、低用量）、子宮洗浄は出血リスクのため24-48時間延期。【予後】広間膜血腫が破裂しなかった場合（contained hematoma）の生存率60-80%、48-72時間で安定すれば長期予後良好。腹腔内出血進行例では生存率20-30%、輸血含む積極治療でも改善は限定的。再発リスク：次産次で15-25%、特に同じ動脈系統では再発しやすいため、原則として今後の繁殖中止を推奨。【参考文献】Frazer Equine Vet J 2003; LeBlanc et al. AAEP Proc 2011; Vandeplassche Reproduction in Domestic Animals 1980; McCue et al. JAVMA 2007; Equine Reproduction 2nd ed (McKinnon et al. 2011) Ch.230-232; Robinson/Sprayberry Current Therapy 7th ed Ch.150-151.",
+        clinical_signs_detail="(1)分娩中-分娩後72時間以内（急性ピーク：分娩後12-24時間）の突然の症状発現、(2)初期：突然の激しい疝痛様徴候（腹部痛・床ひっかき・横臥反復・転がる）、(3)循環ショック：頻脈（>80 bpm）、頻呼吸（>40 breaths/min）、粘膜蒼白、CRT>3秒、四肢冷感、発汗、(4)沈鬱・虚脱・起立困難、(5)経直腸触診で広間膜血腫（30-50 cm球状、L4-L5腹側、波動性、骨盤腔狭窄）、(6)腹腔内出血進行時：腹部膨満・呼吸困難・チアノーゼ・意識消失、(7)粘膜：初期は蒼白、進行で黄白色（重度貧血）、最終で青白色（虚脱）、(8)体温は正常〜低温（出血ショック）、(9)立位姿勢：両前肢を広げて腹部緊張回避、頸部屈曲、(10)突然死（無症状から数時間以内、特に大動脈分岐部破裂例）",
+        risk_factors="【年齢・産次】最重要リスク因子＝高齢初産・経産（>15歳）、>20歳で発生率10-15倍、>10産次。【血管病態】血管壁弾性線維変性（aging-related arteriosclerosis）、Cu欠乏（飼料中Cu不足→lysyl oxidase活性低下→elastin架橋不全）、慢性高血圧症（馬では稀）。【分娩関連】分娩遷延・難産（>40分の第二期）、双子分娩、過大胎仔（fetal macrosomia）、用手助産（特に強い牽引）、帝王切開（術中血管損傷）。【血統】Thoroughbred・Standardbredで多い（高齢繁殖牝馬比率高、淘汰されない傾向）、Friesian（広間膜疾患の素因）、Saddlebred（同様）。【既往】過去の難産、子宮腫脹（uterine subinvolution）、子宮内膜症Category III、子宮鞭虫症（Strongylus vulgaris）。【その他】Cu/Zn/Se/Vit E欠乏、産後の急激な動作（取り回し、輸送）、産後オキシトシン・PG過量",
+        prevention="【繁殖管理】(1)>15歳牝馬は繁殖継続の慎重判断—分娩リスク・寿命・QOL考量、>20歳は原則繁殖中止。(2)繁殖前検査：子宮内膜生検（Kenney Category III/Cu欠乏所見で交配避ける）、CBC・生化学・凝固検査、Cu/Se/Vit E測定、過去の難産・出血既往の文書化。(3)栄養管理：Cu 100-150 mg/日（オーガニックCuがベター）、Zn 200-400 mg/日（Cu:Zn比3:1)、Vit E 2,000-3,000 IU/日、Se 3-5 mg/日、Vit K1 200-400 mg/日（牧草中ジクマロール暴露時）。【分娩管理】(4)24時間分娩監視（CCTV、Mare-Watch、Foaling Alert）、第二期遷延（>30-40分）で迅速介入。(5)用手助産は最小限の力で、過度な牽引回避（産道外からの牽引でなく、母馬の怒責に同期）。(6)分娩第二期で異常胎位は早期帝王切開を検討（>40分の介入失敗で）。(7)分娩準備キット：滅菌手袋・潤滑剤・Y型母馬鎖・新生子蘇生キット・血液型判明済の血液製剤またはOxyglobin。【産後管理】(8)産後72時間は安静（無理な取り回し・輸送回避、子馬接触は静かな環境で）。(9)産後q4-6hでバイタル監視（HR>60、粘膜変化、行動変化で経直腸触診）。(10)産後オキシトシン低用量（10 IU IM q6h）、PG使用は控えめ（10 mg q12h≦3回）—過量で再出血リスク。(11)経産牝馬では分娩後3-7日に経直腸超音波で広間膜・腹腔内評価をスクリーニング（subclinical hematoma早期発見）。",
+    ),
     # ================================================================
     # 歯科 (Dental) — 4疾患
     # ================================================================
