@@ -62,7 +62,7 @@ const I18N={
     logoSub:"獣医師のための臨床意思決定支援",
     navChecker:"鑑別診断",navDatabase:"疾患データベース",navChat:"臨床相談",navDrugs:"薬品辞書",navAnesthesia:"鎮静・麻酔",
     landingChatTitle:"臨床症状から鑑別診断",
-    heroTrustRef:"138学術文献に基づく",heroTrustTests:"2,700+自動テスト検証済み",heroTrustOss:"オープンソース開発",
+    heroTrustRef:"190+学術文献に基づく",heroTrustTests:"3,000+自動テスト検証済み",heroTrustOss:"オープンソース開発",
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
@@ -181,7 +181,7 @@ const I18N={
     logoSub:"Clinical Decision Support for Veterinarians",
     navChecker:"Differential Dx",navDatabase:"Disease Database",navChat:"Clinical Chat",navDrugs:"Drug Dictionary",navAnesthesia:"Anesthesia",
     landingChatTitle:"Differential Diagnosis from Clinical Signs",
-    heroTrustRef:"Based on 138 academic references",heroTrustTests:"Verified by 2,700+ automated tests",heroTrustOss:"Open-source development",
+    heroTrustRef:"Based on 190+ academic references",heroTrustTests:"Verified by 3,000+ automated tests",heroTrustOss:"Open-source development",
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
@@ -308,7 +308,9 @@ function fetchWithTimeout(url,opts={},timeoutMs=10000){
 
 function applyLanguage(){
   document.documentElement.lang=currentLang;
-  document.title=currentLang==="ja"?"Vet Dict — 多動物種対応 獣医学疾患データベース":"Vet Dict — Multi-Species Veterinary Disease Database";
+  document.title=currentLang==="ja"
+    ?"VetDict — 獣医師のための臨床意思決定支援ツール | 鑑別診断・疾患DB・薬品辞書"
+    :"VetDict — Clinical Decision Support for Veterinarians | Differential Diagnosis, Disease DB, Drug Dictionary";
   // Update data-i18n (textContent)
   document.querySelectorAll("[data-i18n]").forEach(el=>{
     const key=el.getAttribute("data-i18n");
@@ -844,32 +846,32 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:575,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:530,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:656,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:414,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:285,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:246,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:241,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:210,drugs:0,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:188,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:479,drugs:0,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:402,drugs:0,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:251,drugs:0,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:250,drugs:0,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:256,drugs:0,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:214,drugs:0,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:218,drugs:0,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
-    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:215,drugs:0,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
-    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:25,drugs:23,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
-    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:250,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:592,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:543,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:737,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:453,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:320,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:348,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:277,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:278,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:243,drugs:0,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:221,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:200,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:551,drugs:0,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:459,drugs:0,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:282,drugs:0,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:285,drugs:0,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:287,drugs:0,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:248,drugs:0,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:249,drugs:0,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:257,drugs:0,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
+    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:28,drugs:23,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:289,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6393,
+    diseases:7147,
     species:21,
-    drugs:194,
+    drugs:250,
     symptoms:52,
     protocols:188
   };
@@ -2833,10 +2835,12 @@ function switchChatMode(mode){
   if(!freeCont||!guidedCont)return;
   if(mode==="guided"){
     freeBtn.classList.remove("active");guidedBtn.classList.add("active");
+    freeBtn.setAttribute("aria-selected","false");guidedBtn.setAttribute("aria-selected","true");
     freeCont.classList.add("hidden");guidedCont.classList.remove("hidden");
     startGuidedConsultation();
   } else {
     guidedBtn.classList.remove("active");freeBtn.classList.add("active");
+    guidedBtn.setAttribute("aria-selected","false");freeBtn.setAttribute("aria-selected","true");
     guidedCont.classList.add("hidden");freeCont.classList.remove("hidden");
   }
 }
@@ -4032,8 +4036,18 @@ function _drainToastQueue(){
   const{msg,type,duration}=_toastQueue.shift();
   const icons={success:"✓",error:"✕",warning:"⚠",info:"ℹ"};
   let toast=document.getElementById("vetdictToast");
-  if(!toast){toast=document.createElement("div");toast.id="vetdictToast";toast.className="toast";document.body.appendChild(toast);}
-  const icon=icons[type]?"<span class=\"toast-icon\">"+icons[type]+"</span>":"";
+  if(!toast){
+    toast=document.createElement("div");
+    toast.id="vetdictToast";
+    toast.className="toast";
+    toast.setAttribute("role","status");
+    toast.setAttribute("aria-live","polite");
+    toast.setAttribute("aria-atomic","true");
+    document.body.appendChild(toast);
+  }
+  if(type==="error"){toast.setAttribute("role","alert");toast.setAttribute("aria-live","assertive");}
+  else{toast.setAttribute("role","status");toast.setAttribute("aria-live","polite");}
+  const icon=icons[type]?"<span class=\"toast-icon\" aria-hidden=\"true\">"+icons[type]+"</span>":"";
   toast.innerHTML=icon+"<span class=\"toast-msg\">"+escapeHtml(msg)+"</span>";
   toast.className="toast"+(type?" "+type:"");
   requestAnimationFrame(()=>toast.classList.add("show"));

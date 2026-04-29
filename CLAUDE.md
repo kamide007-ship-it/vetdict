@@ -702,6 +702,42 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - ruff check / format: 全PR差分ファイルで通過
 - ServiceWorker: `CACHE_NAME` v25 → **v29**
 
+## 2026-04セッション（第7回）で実施した改善（毎日コードレビュー）
+
+### 表示数値の最新化（API失敗時のフォールバック含む）
+- `static/js/app.js` の `setDefaultStats()` フォールバック値を実測値に同期
+  - 全21種の疾患数（dog 575→592, cat 530→543, horse 656→737 等）
+  - `pendingStats`: diseases 6393→7147、drugs 194→250
+- ヒーロー信頼性表示: 「90+学術文献」「2,700+自動テスト」→「190+学術文献」「3,000+自動テスト」
+  - `_hero.html` の data-i18n デフォルト値も更新（JS未ロード時の表示も最新化）
+  - JA/EN i18n 辞書（`app.js`）も同時更新
+- FAQ エントリ「194種の獣医用薬品」→「250種の獣医用薬品」（生物学的製剤・抗ウイルス薬の追加にも言及）
+- 価格カード: 「220+薬品」→「250+薬品」
+- メタタグ・Schema.org `featureList`: 220+→250+ + 麻酔プロトコル追記
+- 引用文献カウント: `(186 citations)` → `(192 citations)` （実カウント値に同期）
+- `applyLanguage()` の `document.title`: 旧コピー（「多動物種対応 獣医学疾患データベース」）→ SEO最適化済みタイトル（「獣医師のための臨床意思決定支援ツール」）に統一
+
+### UX/アクセシビリティ改善
+- **トースト通知**: `aria-live="polite"`/`role="status"`、エラー時は `aria-live="assertive"`/`role="alert"` に切替
+- **メールサインアップフォーム**:
+  - `<form>` ラップ → Enter キーで送信可能に
+  - `autocomplete="email"`/`inputmode="email"` 追加
+  - メール検証を RFC 5322 簡易正規表現に強化（旧: `indexOf("@")<0` で不十分）
+  - 通信エラー時のメッセージ改善（「時間をおいて再度お試しください」）
+  - `signupMsg` に `role="status"`/`aria-live="polite"`
+  - リトライ時のボタンテキスト復元（hardcoded "登録" → 動的に元のラベル復元）
+- **チャットモード切替**: `role="tablist"` + `role="tab"` + `aria-selected` を追加（自由入力⇄問診モード）
+  - JS の `switchChatMode()` で `aria-selected` を動的更新
+- **Cookie同意バナー**: `role="region"`/`aria-label`、`type="button"` 明示、閉じるボタンに目的を示す `aria-label`
+
+### キャッシュ更新
+- ServiceWorker: CACHE_NAME `vetdict-v30` → `vetdict-v31`
+
+### テスト・CI
+- フルテストスイート: 3,119件全合格（カバレッジ79.86%維持）
+- Flaskテストクライアント経由でのHTMLレンダリング検証済み
+- API スモークテスト: `/api/dashboard-stats` → `total_diseases:7147, total_drugs:250, total_protocols:188`
+
 ## 次セッションへの引き継ぎ事項（2026-04第6回更新）
 
 ### 現行ブランチ `claude/fix-sorting-translate-jp-sUWGl`
