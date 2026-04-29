@@ -1424,6 +1424,29 @@ DISEASE_DATABASE: list[Disease] = [
         risk_factors="高齢牝馬(>15歳)、子宮内膜症、栄養不良、難産、胎盤異常(肥厚、拡張)、感染症(EHV-1、CEM)、ビタミン/ミネラル欠乏(Se、Cu、Zn)",
         prevention="分娩前：栄養管理(Se 3-5 mg/日、ビタミンE 2000-3000 IU/日)。ビタミンC静脈内投与(1-2 g IV)は多くの文献で推奨。分娩直後：早期授乳促進、初乳管理(IgG定量による移行免疫確認)。",
     ),
+    Disease(
+        "rp_red_bag",
+        "胎盤早期剥離（レッドバッグ分娩）",
+        "Premature Placental Separation (Red Bag Delivery)",
+        "reproductive",
+        "critical",
+        "破水時に絨毛膜表面（赤いビロード状）が外陰部から露出する産科緊急。胎盤が子宮から早期剥離し胎仔への酸素供給が途絶する。発見から数分以内の介入で予後決定。",
+        ["repro_dystocia", "repro_vulvar_discharge", "repro_abortion", "foal_failure_stand", "foal_weak_suckle"],
+        urgency="emergency",
+        recommended_exams=[
+            (1, "視診（外陰部からの絨毛膜露出）", "Visual Inspection (Exposed Chorioallantois)"),
+            (2, "胎盤検査（重量・厚さ・形態）", "Placental Examination (Weight / Thickness / Morphology)"),
+            (3, "子馬血液ガス・乳酸測定", "Foal Blood Gas / Lactate"),
+            (4, "胎盤組織病理検査・培養", "Placental Histopathology / Culture"),
+            (5, "母馬経直腸超音波（残存膜・血腫評価）", "Mare Transrectal Ultrasound"),
+        ],
+        merck_url=_MERCK + "premature+placental+separation+horses",
+        pathophysiology="正常分娩では絨毛膜尿膜（Chorioallantois, CA）が子宮頸管部（cervical star）で破裂し、白色の羊膜（amnion）が露出する。Red Bag分娩では胎盤が子宮から早期に剥離してCAが破裂せず、外陰部から赤いビロード状の絨毛面（velvety chorionic surface）が脱出する。胎盤剥離→母体側からの酸素・栄養供給遮断→急速に進行する胎仔低酸素症。完全剥離から胎仔死亡までの猶予はおよそ5-10分。誘因：胎盤炎（最多、Streptococcus equi zooepidemicus、E. coli、Nocardioform、真菌）、フェスクトキシン（fescue toxicosis、エルゴバリン）、双子妊娠、子宮内膜瘢痕化、過熟妊娠（>360日）、母馬の発熱・全身性疾患。",
+        treatment_protocol="【分娩室での対応 — 5分以内が勝負】(1)CA膜の即座切開：滅菌剪刀またはメスで露出した絨毛膜尿膜を縦に大胆に切開（vulva-to-cervix方向）、羊膜と胎仔を可及的速やかに露出。躊躇は致命的—破らないと胎仔が窒息する。(2)強制娩出：両前肢と頭部を確認し、母馬の怒責に同期して鎖と用手で牽引。胎位異常があれば直ちに正常胎位に戻す。30秒-1分以内の娩出が目標。(3)新生子蘇生：娩出直後に気道確保（鼻孔の羊水吸引）、胸部刺激、必要時はマスクO2 10-15 L/分、人工呼吸（口鼻封印で1秒吸気→4秒間隔、20-30回/分）、心停止時は胸骨圧縮100/分＋アドレナリン0.01 mg/kg IV/IO。(4)Madigan squeeze ropeで20分間圧迫（NMS予防）。【蘇生後管理】(5)子馬血液ガス：pH<7.20、乳酸>4 mmol/Lで重症仮死診断、HIE/NMS治療開始。(6)輸液：温乳酸リンゲル4-6 mL/kg/hr、5%ブドウ糖併用（80-150 mg/dL維持）、ナトリウム重炭酸1-2 mEq/kg IV（pH<7.10）、DMSO 1 g/kg IV 10%希釈（脳浮腫対策）。(7)IgG測定：8-12時間齢、24時間齢で再検、<800 mg/dLなら血漿20-40 mL/kg IV。(8)抗菌薬予防（敗血症高リスク）：セフチオフル5 mg/kg IM/IV SID、または ペニシリン22,000 U/kg IV q6h＋アミカシン25 mg/kg IV SID。(9)NMS治療：抗痙攣薬（ジアゼパム0.05-0.2 mg/kg IV、ミダゾラム CRI 0.02-0.1 mg/kg/hr）、栄養（経鼻胃管 代用乳10-15 mL/kg q2h）、眼科保護（人工涙液q2-4h）。【母馬対応】(10)胎盤検査：脱落膜面の異常（炎症、変色、肥厚）を記録、胎盤重量（正常体重比10-11%、>14%は胎盤炎示唆）、絨毛膜培養。(11)子宮洗浄：分娩後12-24時間で温生食2-4 L＋オキシトシン10-20 IUで子宮内容排出促進。(12)抗菌薬：胎盤炎の抗生剤継続（TMS 30 mg/kg PO BID + フルコナゾール 2.5 mg/kg PO SID 14日間）。(13)蹄葉炎予防：氷浴24-72時間、フェニルブタゾン2.2 mg/kg IV BID（短期）、フリュニキシン1.1 mg/kg IV BID。【予後】早期切開（CA露出から5分以内）+ 蘇生奏効で子馬生存率60-80%、長期生存子馬の30-40%にHIE後遺症。介入遅延（>10分）で生存率20%以下。胎盤炎が原因の場合は次産次再発率高、種付前の子宮内膜検査・培養必須。【参考文献】Macpherson Equine Vet J 2009; LeBlanc et al. Theriogenology 2012; Vaala AAEP Proceedings 2003; Equine Reproduction 2nd ed (McKinnon et al. 2011) Ch.226-229; Knottenbelt Equine Neonatal Medicine 2004 Ch.6.",
+        clinical_signs_detail="(1)分娩第二期で外陰部から赤いビロード状の絨毛膜面が突出（白色の羊膜ではない—これがRed Bag）、(2)胎仔の前肢・鼻が見えない、または異常胎位、(3)分娩進行停滞・母馬が強い怒責を続けるが胎仔が出てこない、(4)胎盤剥離の進行で母馬腹部の陥没・胎動減弱、(5)娩出後の子馬：起立遅延（>1時間）・吸啜反射弱・チアノーゼ・徐脈/頻脈・低体温・痙攣・無目的徘徊（NMS症状）、(6)母馬：分娩前数日の乳房膨大・乳漏（プレマチュア・ラクテーション）・陰部からの膿性/血性排泄物・発熱（胎盤炎兆候）",
+        risk_factors="【母馬】胎盤炎既往（StreptococcusまたはNocardiformで再発リスク高）、子宮内膜炎・瘢痕、Caslickの逆転不全、高齢初産（>16歳）、双子妊娠、過熟妊娠（>360日）、栄養不良、フェスクトキシン暴露（妊娠後期にエルゴバリン産生Festuca arundinacea摂取で胎盤肥厚・分泌乳異常）、EHV-1感染、bacterial・fungal placentitis。【遺伝・品種】Thoroughbred・Standardbredで多い（管理関連バイアス）、双子の頻度は品種差あり。【環境】汚染された分娩環境、ストレス、輸送、急激な気温変化",
+        prevention="(1)妊娠後期（>270日）の経直腸超音波で胎盤厚（CTUP: combined thickness of uterus and placenta）測定—閉鎖環状部で>11.5 mm（330日齢）または>15 mm（370日齢）で胎盤炎疑い、ALTRENOGEST 0.044 mg/kg PO SID（分娩30日前まで）+ TMS+フルコナゾールで治療。(2)双子分娩管理：超音波で14-16日齢に診断、片側圧潰または経頸管的吸引で1胎にreduction。(3)Caslick分娩前抜糸（>320日齢でvulvar restoration）。(4)フェスクパスチャから分娩90日前にdam removal（ergot alkaloid avoidance）。(5)分娩監視（24時間体制、CCTV、Mare-Watchsystem、Foaling Alert）。(6)Foaling stallの清潔・滑り防止床材・25℃以上の保温。(7)分娩準備キット常備：滅菌剪刀（CA切開用）、ヨード液、新生子蘇生キット（マスクO2、エンドチューブ、アドレナリン、デキストロース、ナロキソン）、母馬用オキシトシン・PG・抗菌薬。",
+    ),
     # ================================================================
     # 歯科 (Dental) — 4疾患
     # ================================================================
