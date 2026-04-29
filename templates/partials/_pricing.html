@@ -17,7 +17,7 @@
       <ul class="pricing-features">
         <li>鑑別診断リスト生成（全21動物種）</li>
         <li>疾患データベース<strong>7,000+疾患</strong>閲覧</li>
-        <li>薬品辞書<strong>220+薬品</strong>・種別投与量</li>
+        <li>薬品辞書<strong>250+薬品</strong>・種別投与量</li>
         <li>臨床相談チャット<strong>無制限</strong></li>
         <li>検査値入力・疼痛スケール対応</li>
         <li>エキゾチック含む全21動物種対応</li>
@@ -29,42 +29,51 @@
         <div class="email-signup" id="emailSignup">
           <p class="email-signup-label" style="font-weight:700;font-size:.92rem">🔔 正式リリース時に<span style="color:var(--green)">早期割引</span>で通知を受け取る</p>
           <p style="font-size:.78rem;color:var(--gray-500);margin:-4px 0 8px">ベータ期間中にご登録の獣医師限定の特典あり</p>
-          <div class="email-signup-row">
-            <input type="email" id="signupEmail" placeholder="メールアドレス" class="email-signup-input" aria-label="メールアドレス">
-            <button class="email-signup-btn" id="signupBtn">無料で登録</button>
-          </div>
-          <p class="email-signup-msg" id="signupMsg"></p>
-          <p style="font-size:.68rem;color:var(--gray-400);margin-top:4px">※ スパムは送りません。配信停止はいつでも可能です。</p>
+          <form id="emailSignupForm" novalidate>
+            <div class="email-signup-row">
+              <input type="email" id="signupEmail" placeholder="メールアドレス" class="email-signup-input" aria-label="メールアドレス" autocomplete="email" inputmode="email" required>
+              <button type="submit" class="email-signup-btn" id="signupBtn">無料で登録</button>
+            </div>
+            <p class="email-signup-msg" id="signupMsg" role="status" aria-live="polite"></p>
+            <p style="font-size:.68rem;color:var(--gray-400);margin-top:4px">※ スパムは送りません。配信停止はいつでも可能です。</p>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </section>
 <script nonce="{{ g.csp_nonce }}">
-function submitEmailSignup(){
-  var email=document.getElementById("signupEmail").value.trim();
-  var msg=document.getElementById("signupMsg");
+(function(){
+  var form=document.getElementById("emailSignupForm");
+  var input=document.getElementById("signupEmail");
   var btn=document.getElementById("signupBtn");
-  if(!email||email.indexOf("@")<0){msg.textContent="有効なメールアドレスを入力してください";msg.className="email-signup-msg error";return;}
-  btn.textContent="登録中...";btn.disabled=true;
-  fetch("/api/paypal/waitlist",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
-  .then(function(r){return r.json();})
-  .then(function(d){
-    if(d.status==="ok"){
-      msg.textContent="登録完了！正式リリース時にお知らせします。";
-      msg.className="email-signup-msg success";
-      btn.textContent="登録済み";
-      document.getElementById("signupEmail").disabled=true;
-      if(typeof trackEvent==="function")trackEvent("waitlist_signup",{email_domain:email.split("@")[1]});
-    } else {
-      msg.textContent=d.error||"エラーが発生しました";
-      msg.className="email-signup-msg error";
-      btn.textContent="登録";btn.disabled=false;
-    }
-  }).catch(function(){
-    msg.textContent="通信エラー";msg.className="email-signup-msg error";
-    btn.textContent="登録";btn.disabled=false;
-  });
-}
-document.getElementById("signupBtn").addEventListener("click",submitEmailSignup);
+  var msg=document.getElementById("signupMsg");
+  var defaultBtnText=btn.textContent;
+  // RFC 5322 simplified: requires non-empty local + "@" + domain with TLD
+  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function setMsg(text,kind){msg.textContent=text;msg.className="email-signup-msg "+(kind||"");}
+  function submitEmailSignup(e){
+    if(e&&e.preventDefault)e.preventDefault();
+    if(btn.disabled)return;
+    var email=(input.value||"").trim();
+    if(!EMAIL_RE.test(email)){setMsg("有効なメールアドレスを入力してください","error");input.focus();return;}
+    btn.textContent="登録中...";btn.disabled=true;setMsg("","");
+    fetch("/api/paypal/waitlist",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.status==="ok"){
+          setMsg("登録完了！正式リリース時にお知らせします。","success");
+          btn.textContent="登録済み";input.disabled=true;
+          if(typeof trackEvent==="function")trackEvent("waitlist_signup",{email_domain:email.split("@")[1]});
+        } else {
+          setMsg(d.error||"エラーが発生しました","error");
+          btn.textContent=defaultBtnText;btn.disabled=false;
+        }
+      }).catch(function(){
+        setMsg("通信エラー。時間をおいて再度お試しください。","error");
+        btn.textContent=defaultBtnText;btn.disabled=false;
+      });
+  }
+  form.addEventListener("submit",submitEmailSignup);
+})();
 </script>
