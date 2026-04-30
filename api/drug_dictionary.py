@@ -2803,15 +2803,15 @@ DRUGS: List[Dict[str, Any]] = [
         "name": "Maropitant (Cerenia)",
         "name_ja": "マロピタント（セレニア）",
         "category": "antiemetics",
-        "mechanism": "NK1 receptor antagonist; blocks substance P at the vomiting center. Also provides visceral analgesia.",
-        "mechanism_ja": "NK1受容体拮抗薬。嘔吐中枢のサブスタンスPを遮断。内臓鎮痛作用も持つ。",
+        "mechanism": "NK1 receptor antagonist; blocks substance P at the vomiting center. Also provides visceral analgesia. Substance P/NK1-R signaling is involved in airway inflammation and the cough reflex, supporting an off-label antitussive use in canine chronic bronchitis.",
+        "mechanism_ja": "NK1受容体拮抗薬。嘔吐中枢のサブスタンスPを遮断。内臓鎮痛作用も持つ。サブスタンスP/NK1-Rシグナルは気道炎症と咳反射に関与しており、犬の慢性気管支炎に対する適応外の鎮咳用途を支持する。",
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "1 mg/kg SC q24h; 2 mg/kg PO q24h",
-                "dosage_ja": "1 mg/kg 皮下 24時間毎; 2 mg/kg 経口 24時間毎",
-                "notes": "Best antiemetic for dogs. Also used for motion sickness (8 mg/kg PO). Stings on SC injection.",
-                "notes_ja": "犬の最良の制吐薬。乗り物酔いにも使用（8 mg/kg PO）。皮下注射は刺痛あり。",
+                "dosage": "Antiemetic: 1 mg/kg SC q24h or 2 mg/kg PO q24h × up to 5 days. Motion sickness: 8 mg/kg PO q24h × up to 2 days. Antitussive (off-label, chronic bronchitis): 2 mg/kg PO q48h (every other day, EOD) × 14+ days — reduces cough frequency and severity but does not reduce underlying airway inflammation, so not a substitute for anti-inflammatory therapy.",
+                "dosage_ja": "制吐：1 mg/kg 皮下 q24h または 2 mg/kg 経口 q24h、最長5日間。乗り物酔い：8 mg/kg 経口 q24h、最長2日間。鎮咳（適応外、慢性気管支炎）：2 mg/kg 経口 q48h（隔日投与・EOD）×14日以上—咳の頻度・重症度を低減するが気道炎症は改善しないため、抗炎症療法の代替にはならない。",
+                "notes": "Best antiemetic for dogs. Antitussive evidence: Grobman & Reinero JVIM 2016 (n=8 chronic bronchitis dogs, 2 mg/kg PO EOD × 14d significantly reduced cough frequency and severity). Use as adjunct to glucocorticoid/bronchodilator therapy, not monotherapy. SC injection stings (refrigerate to reduce). Consider concurrent anti-inflammatory (prednisone) since maropitant masks cough but does not address inflammation.",
+                "notes_ja": "犬の最良の制吐薬。鎮咳エビデンス：Grobman & Reinero JVIM 2016（慢性気管支炎犬n=8、2 mg/kg PO EOD ×14日で咳頻度・重症度が有意に低下）。グルココルチコイド・気管支拡張薬の補助として使用、単剤療法は不可。皮下注射は刺痛あり（冷蔵で軽減）。マロピタントは咳を抑えるが炎症は治療しないため、併用抗炎症薬（プレドニゾロン）を考慮。",
             },
             "cat": {
                 "safe": True,
@@ -2830,8 +2830,8 @@ DRUGS: List[Dict[str, Any]] = [
         },
         "side_effects": ["pain at injection site", "hypotension (rare, IV)", "diarrhea"],
         "side_effects_ja": ["注射部位の痛み", "低血圧（まれ、静注時）", "下痢"],
-        "contraindications": "Not studied in very young animals. Use caution with hepatic disease.",
-        "contraindications_ja": "非常に若い動物では未検討。肝疾患では注意して使用。",
+        "contraindications": "Not studied in very young animals (FDA label: ≥7 weeks for SC, ≥16 weeks for PO motion sickness). Use caution with hepatic disease (hepatic metabolism via CYP450 2D15 + 3A12). Antitussive use is off-label and should not replace anti-inflammatory treatment of underlying airway disease.",
+        "contraindications_ja": "非常に若い動物では未検討（FDAラベル：皮下7週齢以上、経口乗り物酔い16週齢以上）。肝疾患では注意して使用（CYP450 2D15 + 3A12による肝代謝）。鎮咳用途は適応外であり、原因気道疾患の抗炎症治療の代替としない。",
     },
     {
         "id": "ondansetron",
