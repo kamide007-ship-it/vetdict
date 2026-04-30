@@ -49,7 +49,7 @@ async function checkAccess(){
     const badge=document.createElement("div");
     badge.className="admin-badge";
     badge.textContent="Admin";
-    badge.title="管理者モード — 全機能アンロック済み";
+    badge.title=t("adminBadgeTitle")||"Admin mode";
     document.body.appendChild(badge);
   }
 }
@@ -175,6 +175,74 @@ const I18N={
     sortByConfidence:"信頼度順",sortBySeverity:"重症度順",sortByDefault:"標準",
     speciesFilterPh:"動物種を検索...",
     stepSpecies:"動物種",stepSymptoms:"症状",stepResults:"結果",
+    // Header / aria-labels (i18n via data-i18n-aria / data-i18n-title)
+    ariaHomeLink:"VetDict ホーム",
+    ariaSearchInput:"疾患・薬品を検索",
+    ariaSpeciesFilter:"動物種でフィルター",
+    titleSpeciesFilter:"動物種で絞り込み",
+    ariaCategoryFilter:"カテゴリーでフィルター",
+    titleCategoryFilter:"症状カテゴリーで絞り込み",
+    ariaCloseFilter:"閉じる",
+    ariaMainNav:"メインナビゲーション",
+    ariaLangToggle:"表示言語",
+    ariaSpeciesFilterDialog:"動物種フィルター",
+    ariaCategoryFilterDialog:"症状カテゴリーフィルター",
+    speciesFilterTitle:"動物種で絞り込み",
+    categoryFilterTitle:"症状カテゴリーで絞り込み",
+    filterReset:"リセット",
+    // Cookie consent
+    cookieConsentRegion:"Cookieに関するお知らせ",
+    cookieConsentText:"当サイトでは利用状況の改善のためGoogle Analyticsを使用しています。",
+    cookiePrivacyLink:"プライバシーポリシー",
+    cookieAccept:"同意する",
+    cookieDismiss:"閉じる",
+    cookieDismissAria:"同意せずに閉じる",
+    // Pricing
+    pricingSubtitle:"現在オープンベータ — 獣医師・獣医学生は全機能を無料でご利用いただけます",
+    pricingBadge:"オープンベータ",
+    pricingHeader:"全機能無料",
+    pricingPeriodOriginal:"¥980/月",
+    pricingFeature1:"鑑別診断リスト生成（全21動物種）",
+    pricingFeature2:"疾患データベース<strong>7,000+疾患</strong>閲覧",
+    pricingFeature3:"薬品辞書<strong>250+薬品</strong>・種別投与量",
+    pricingFeature4:"臨床相談チャット<strong>無制限</strong>",
+    pricingFeature5:"検査値入力・疼痛スケール対応",
+    pricingFeature6:"エキゾチック含む全21動物種対応",
+    pricingCtaText:"現在すべて無料でご利用中",
+    pricingNote:"正式リリース後は一部機能が有料プラン（¥980/月）に移行予定です",
+    signupHeading:"🔔 正式リリース時に<span style=\"color:var(--green)\">早期割引</span>で通知を受け取る",
+    signupSubtext:"ベータ期間中にご登録の獣医師限定の特典あり",
+    signupEmailPh:"メールアドレス",
+    signupBtn:"無料で登録",
+    signupBtnSubmitting:"登録中...",
+    signupBtnDone:"登録済み",
+    signupSpamNote:"※ スパムは送りません。配信停止はいつでも可能です。",
+    signupInvalidEmail:"有効なメールアドレスを入力してください",
+    signupSuccess:"登録完了！正式リリース時にお知らせします。",
+    signupGenericError:"エラーが発生しました",
+    signupNetworkError:"通信エラー。時間をおいて再度お試しください。",
+    // Footer / share
+    shareSection:"VetDictを広める",
+    shareXLabel:"X (Twitter) でポストする",
+    shareFbLabel:"Facebook でシェアする",
+    shareLineLabel:"LINE で送る",
+    sharePostX:"X (Twitter)",sharePostXSub:"でポストする",
+    sharePostFb:"Facebook",sharePostFbSub:"でシェアする",
+    sharePostLine:"LINE",sharePostLineSub:"で送る",
+    footerRegulatory:"本サービスは獣医師・獣医学生を対象とした臨床意思決定支援ツールです。AI解析結果は鑑別診断の参考情報であり、確定診断・治療方針の決定には臨床所見・検査結果との総合判断が必要です。本サービスは医療機器・動物用医療機器としての承認・認証を受けておらず、FDA（米国食品医薬品局）未承認、農林水産省動物用医療機器未認証です。",
+    footerDeveloperHeading:"開発者",
+    footerLinksHeading:"リンク",
+    footerLegalHeading:"法務",
+    footerLegalTerms:"利用規約",
+    footerLegalPrivacy:"プライバシーポリシー",
+    footerLegalTokushoho:"特定商取引法に基づく表記",
+    footerCopyright:"© 2026 Equine Vet Synapse. All rights reserved.",
+    footerPaypal:"PayPal: equinevet.owners@gmail.com",
+    // Analyze button states
+    analyzeSearchingDb:"データベース検索中...",
+    diseasesFoundToast:"%n%件の疾患が見つかりました",
+    // Admin
+    adminBadgeTitle:"管理者モード — 全機能アンロック済み",
   },
   en:{
     skipLink:"Skip to main content",
@@ -293,6 +361,74 @@ const I18N={
     sortByConfidence:"By Confidence",sortBySeverity:"By Severity",sortByDefault:"Default",
     speciesFilterPh:"Filter species...",
     stepSpecies:"Species",stepSymptoms:"Symptoms",stepResults:"Results",
+    // Header / aria-labels
+    ariaHomeLink:"VetDict home",
+    ariaSearchInput:"Search diseases & drugs",
+    ariaSpeciesFilter:"Filter by species",
+    titleSpeciesFilter:"Filter by species",
+    ariaCategoryFilter:"Filter by category",
+    titleCategoryFilter:"Filter by symptom category",
+    ariaCloseFilter:"Close",
+    ariaMainNav:"Main navigation",
+    ariaLangToggle:"Display language",
+    ariaSpeciesFilterDialog:"Species filter",
+    ariaCategoryFilterDialog:"Symptom category filter",
+    speciesFilterTitle:"Filter by species",
+    categoryFilterTitle:"Filter by symptom category",
+    filterReset:"Reset",
+    // Cookie consent
+    cookieConsentRegion:"Cookie notice",
+    cookieConsentText:"This site uses Google Analytics to improve usability.",
+    cookiePrivacyLink:"Privacy policy",
+    cookieAccept:"Accept",
+    cookieDismiss:"Close",
+    cookieDismissAria:"Close without accepting",
+    // Pricing
+    pricingSubtitle:"Open beta — Veterinarians and veterinary students get full access for free",
+    pricingBadge:"Open Beta",
+    pricingHeader:"All features free",
+    pricingPeriodOriginal:"¥980/month",
+    pricingFeature1:"Differential diagnosis list (all 21 species)",
+    pricingFeature2:"Disease database <strong>7,000+ diseases</strong>",
+    pricingFeature3:"Drug dictionary <strong>250+ drugs</strong> with species-specific dosing",
+    pricingFeature4:"Clinical chat <strong>unlimited</strong>",
+    pricingFeature5:"Lab values & pain scale input",
+    pricingFeature6:"All 21 species (incl. exotics)",
+    pricingCtaText:"All features currently free",
+    pricingNote:"After official launch, some features will move to a paid plan (¥980/month)",
+    signupHeading:"🔔 Get notified at launch with an <span style=\"color:var(--green)\">early-bird discount</span>",
+    signupSubtext:"Exclusive benefits for veterinarians who sign up during beta",
+    signupEmailPh:"Email address",
+    signupBtn:"Sign up free",
+    signupBtnSubmitting:"Signing up...",
+    signupBtnDone:"Signed up",
+    signupSpamNote:"No spam. Unsubscribe anytime.",
+    signupInvalidEmail:"Please enter a valid email address",
+    signupSuccess:"Sign-up complete! We'll notify you at launch.",
+    signupGenericError:"An error occurred",
+    signupNetworkError:"Network error. Please try again later.",
+    // Footer / share
+    shareSection:"Spread the word",
+    shareXLabel:"Share on X (Twitter)",
+    shareFbLabel:"Share on Facebook",
+    shareLineLabel:"Send via LINE",
+    sharePostX:"X (Twitter)",sharePostXSub:"Post",
+    sharePostFb:"Facebook",sharePostFbSub:"Share",
+    sharePostLine:"LINE",sharePostLineSub:"Send",
+    footerRegulatory:"This service is a clinical decision support tool for veterinarians and veterinary students. AI analysis is a reference for differential diagnosis; definitive diagnosis and treatment decisions require integration with clinical findings and diagnostic results. This service is not approved or certified as a medical device or veterinary medical device — not FDA-approved (US) and not certified by Japan's Ministry of Agriculture, Forestry and Fisheries.",
+    footerDeveloperHeading:"Developer",
+    footerLinksHeading:"Links",
+    footerLegalHeading:"Legal",
+    footerLegalTerms:"Terms of Use",
+    footerLegalPrivacy:"Privacy Policy",
+    footerLegalTokushoho:"Specified Commercial Transactions Act Disclosure",
+    footerCopyright:"© 2026 Equine Vet Synapse. All rights reserved.",
+    footerPaypal:"PayPal: equinevet.owners@gmail.com",
+    // Analyze button states
+    analyzeSearchingDb:"Searching database...",
+    diseasesFoundToast:"Found %n% diseases",
+    // Admin
+    adminBadgeTitle:"Admin mode — all features unlocked",
   }
 };
 
@@ -339,6 +475,18 @@ function applyLanguage(){
     const key=el.getAttribute("data-i18n-ph");
     const val=t(key);
     if(val&&val!==key)el.placeholder=val;
+  });
+  // Update data-i18n-aria (aria-label)
+  document.querySelectorAll("[data-i18n-aria]").forEach(el=>{
+    const key=el.getAttribute("data-i18n-aria");
+    const val=t(key);
+    if(val&&val!==key)el.setAttribute("aria-label",val);
+  });
+  // Update data-i18n-title (title attribute)
+  document.querySelectorAll("[data-i18n-title]").forEach(el=>{
+    const key=el.getAttribute("data-i18n-title");
+    const val=t(key);
+    if(val&&val!==key)el.setAttribute("title",val);
   });
   // Update lang toggle active state
   document.querySelectorAll(".lang-toggle button").forEach(b=>{
@@ -1595,10 +1743,10 @@ function doAnalyze(){
   if(labVals)payload.lab_values=labVals;
   const painVal=collectPainScore();
   if(painVal!==null)payload.pain_score=painVal;
-  const slowTimer=setTimeout(()=>{btn.innerHTML=`<span class="spinner"></span> ${currentLang==="ja"?"データベース検索中...":"Searching database..."}`;},3000);
+  const slowTimer=setTimeout(()=>{btn.innerHTML=`<span class="spinner"></span> ${t("analyzeSearchingDb")}`;},3000);
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
-  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
+  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;showToast(t("diseasesFoundToast").replace("%n%",n),"success");}const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
   .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);}})
   .finally(()=>{clearTimeout(slowTimer);if(btn){btn.disabled=false;btn.textContent=t("analyzeBtn");}if(progress)progress.classList.remove("active");});
 }
