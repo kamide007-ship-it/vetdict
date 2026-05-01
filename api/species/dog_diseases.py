@@ -411,28 +411,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hypothyroidism",
         "name_ja": "甲状腺機能低下症",
-        "symptoms": {"weight_gain", "lethargy", "hair_loss", "dry_skin", "stiffness"},
-        "description": "An endocrine disorder where the thyroid gland produces "
-        "insufficient hormones, slowing metabolism.",
-        "description_ja": "犬で最も一般的な内分泌疾患の一つ。甲状腺ホルモン（T4）の産生低下により全身の代謝率が低下する。"
-        "中年〜高齢犬（4〜10歳）に好発。ゴールデンレトリバー、ドーベルマン、"
-        "アイリッシュセッター、グレートデン等の中〜大型犬に多い。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "95%以上がリンパ球性甲状腺炎（自己免疫性）または特発性甲状腺萎縮により甲状腺が破壊される原発性。"
-        "T4低下→TSH上昇（負のフィードバック）。代謝率低下により体重増加、皮膚代謝異常（脱毛・角化異常）、"
-        "神経伝導速度低下（末梢神経障害）、心拍出量低下を引き起こす。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "リンパ球性甲状腺炎（自己免疫性、最多）、特発性甲状腺萎縮、"
-        "稀に甲状腺腫瘍、医原性（放射性ヨード治療後、抗甲状腺薬）。遺伝的素因あり。",
-        "treatment": "Levothyroxine (L-T4) 0.02 mg/kg PO q12h (lifelong therapy). Recheck T4 levels 4-8 weeks after initiation for dose adjustment (measure 4-6h post-pill). Activity improvement within 1-2 weeks; skin and coat improvement takes 4-6 months. Regular thyroid function monitoring every 6-12 months. Once stabilized, annual monitoring is sufficient.",
-        "treatment_ja": "レボチロキシン（L-T4）0.02mg/kg BID経口投与（生涯投与）。"
-        "投与開始4〜8週後にT4値を再検査し用量調整。活動性改善は1〜2週間、"
-        "皮膚・被毛改善は4〜6ヶ月かかる。定期的な甲状腺機能モニタリング（6ヶ月〜1年毎）。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "適切な補充療法で予後は極めて良好。生活の質は正常に近い状態まで回復する。治療は生涯必要。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確立された予防法はないが、好発品種では中年期以降の定期的な甲状腺機能検査を推奨。",
+        "symptoms": {"dry_skin", "weight_gain", "lethargy", "hair_loss", "stiffness"},
+        "description": "The most common endocrine disorder in dogs; rare in cats. Results from deficient thyroid hormone (T4/T3) production. Most common cause (>90%): lymphocytic thyroiditis (autoimmune) or idiopathic thyroid atrophy. Classic signalment: middle-aged (4-10 years), medium-to-large breeds (Golden Retriever, Doberman Pinscher, Irish Setter, Great Dane, Boxer). Hallmark signs: symmetric bilateral non-pruritic alopecia, myxedema (non-pitting edema from glycosaminoglycan accumulation — particularly face/trunk), weight gain without polyphagia, lethargy/mental dullness ('tragic expression'). Peripheral neuropathy and vestibular disease are uncommon but important presentations.",
+        "description_ja": "犬で最も多い内分泌疾患（猫では稀）。甲状腺ホルモン（T4/T3）産生不足による代謝低下。最多原因（>90%）：リンパ球性甲状腺炎（自己免疫性）または特発性甲状腺萎縮。好発：中年齢（4〜10歳）の中〜大型犬（ゴールデン・レトリーバー、ドーベルマン、アイリッシュ・セター等）。特徴的所見：左右対称性・非掻痒性脱毛、粘液水腫（顔面・体幹のノンピッティング浮腫：グリコサミノグリカン蓄積）、多食なしの体重増加、嗜眠/精神鈍麻（悲劇的表情）。末梢神経障害・前庭疾患は稀だが重要。",
+        "pathophysiology": "Primary hypothyroidism (dogs): destruction of thyroid follicular epithelium by lymphocytic infiltration (lymphocytic thyroiditis — autoimmune, TSH receptor antibody-mediated) or idiopathic atrophy and fibrosis. Result: decreased T4/T3 synthesis and secretion. Loss of negative feedback → compensatory TSH elevation (increased from pituitary). Thyroid hormone (T3 nuclear receptor) regulates: metabolic rate (Na-K-ATPase), protein synthesis, lipid metabolism, GH/IGF-1 axis, cardiac contractility, and CNS myelination. T4 deficiency consequences: (1) decreased basal metabolic rate → weight gain, hypothermia, lethargy; (2) decreased Na-K-ATPase → myxedema (glycosaminoglycan accumulation in dermis); (3) hyperlipidemia (decreased LPL activity) → hypercholesterolemia + hypertriglyceridemia → atherosclerosis risk; (4) anemia of endocrine disease (normocytic normochromic, mild); (5) delayed nerve conduction velocity → peripheral neuropathy; (6) reduced cardiac contractility and heart rate (reversible bradycardia). T3 is the active form — T4 converted peripherally by deiodinases (type 1 iodothyronine deiodinase activity is T3-dependent — hypothyroid dogs have reduced peripheral conversion).",
+        "pathophysiology_ja": "原発性甲状腺機能低下症（犬）：リンパ球性甲状腺炎（TSH受容体抗体介在性自己免疫）または特発性甲状腺萎縮・線維化によるT4/T3産生低下。陰性フィードバック消失→補償性TSH上昇（下垂体）。甲状腺ホルモン（T3核受容体）が代謝率（Na-K-ATPase）・タンパク合成・脂質代謝・GH/IGF-1軸・心収縮力・CNS髄鞘形成を制御。T4欠乏の結果：(1)基礎代謝率低下→体重増加・低体温・嗜眠；(2)Na-K-ATPase低下→真皮グリコサミノグリカン蓄積（粘液水腫）；(3)高脂血症（LPL活性低下）→高コレステロール血症＋高トリグリセリド血症；(4)内分泌性貧血（正球性正色素性、軽度）；(5)神経伝導速度低下→末梢神経障害。T3は末梢でT4から脱ヨード酵素（type 1 DI）により産生。",
+        "causes": "Lymphocytic thyroiditis (autoimmune, most common, ~50%), idiopathic thyroid atrophy (~50%), rarely thyroid neoplasia, iatrogenic (radioiodine treatment, antithyroid drugs). Genetic predisposition in Golden Retriever, Doberman, etc.",
+        "causes_ja": "リンパ球性甲状腺炎（自己免疫性、最多）、特発性甲状腺萎縮、稀に甲状腺腫瘍、医原性（放射性ヨード治療後、抗甲状腺薬）。遺伝的素因あり。",
+        "treatment": "Levothyroxine (L-T4) 0.02 mg/kg PO q12h initial dose (lifelong therapy). IMPORTANT: Give consistently at the same time relative to meals — food reduces absorption 20-30% (some clinicians give 30 min before food). Response monitoring: (1) Recheck post-pill T4 at 4-8 weeks — draw blood 4-6 hours post-pill (peak); target 2.5-3.5 μg/dL (therapeutic range 1.5-4.0 μg/dL); pre-pill trough T4 should be low-normal. (2) TSH normalization confirms adequate replacement. (3) Clinical improvement: lethargy improves 1-2 weeks; skin/coat improvement 4-8 weeks; complete hair regrowth 4-6 months. (4) Dose adjustment: increase by 25-50% increments if T4 below range or clinical signs persist. (5) Concurrent medications: phenobarbital, glucocorticoids, and NSAIDs can falsely lower T4 (euthyroid sick syndrome); bromide does not affect T4. (6) Hyperlipidemia: measure cholesterol/triglycerides before and 3 months after L-T4 initiation — most resolve with treatment alone; if persistent, add omega-3 fatty acids. (7) Peripheral neuropathy: may take 3-6 months of replacement therapy to fully resolve.",
+        "treatment_ja": "レボチロキシン（L-T4）0.02 mg/kg PO 12時間毎（生涯治療）。投与タイミング：毎回同じ条件で（食事による吸収低下20〜30%を避けるため空腹時が望ましい）。治療反応モニタリング：(1)投与開始4〜8週後に投与4〜6時間後のT4測定（ピーク値）；目標2.5〜3.5 μg/dL；(2)TSH正常化で適切補充を確認；(3)臨床改善：嗜眠1〜2週、皮膚/被毛4〜8週、完全な被毛再生4〜6ヶ月；(4)用量調整：T4低値または症状持続で25〜50%ずつ増量；(5)フェノバルビタール・ステロイド・NSAIDsは甲状腺機能正常でもT4を偽低値化（甲状腺病態正常症候群）——臨床症状と合わせて判断。",
+        "prognosis": "Excellent with appropriate levothyroxine supplementation. Lifelong therapy required — dose requirements may change over time. Most clinical signs fully resolve within 3-6 months. Peripheral neuropathy can take longer to resolve. Lymphocytic thyroiditis has a heritable component — affected dogs should not be used for breeding.",
+        "prognosis_ja": "適切なレボチロキシン補充で予後優良。生涯投与が必要（用量は経時的に変化しうる）。ほとんどの臨床症状は3〜6ヶ月以内に回復。末梢神経障害は回復に長期間を要することがある。リンパ球性甲状腺炎は遺伝性素因があるため罹患犬の繁殖は推奨しない。",
+        "prevention": "No established prevention. Annual thyroid screening (T4 + TSH) recommended in predisposed breeds from middle age. Autoimmune thyroiditis (OFA Thyroid Registry) testing advisable in breeding dogs of affected breeds.",
+        "prevention_ja": "確立された予防法なし。好発品種では中年期以降の甲状腺機能定期検査（T4＋TSH）推奨。繁殖犬ではOFA甲状腺登録（自己免疫性甲状腺炎スクリーニング）を推奨。",
+        "recommended_tests": [
+            "Baseline total T4 (tT4): initial screening; <1.0 μg/dL strongly suggests hypothyroidism in symptomatic dog; 1.0-2.5 μg/dL = gray zone (need TSH); false-low T4 from euthyroid sick syndrome (any concurrent illness, drugs), false-high T4 from anti-T4 antibodies (usually Boxer, English Setter breeds)",
+            "Canine TSH (cTSH): >0.6 ng/mL + low T4 = confirms primary hypothyroidism; normal TSH does not rule out hypothyroidism (40% of hypothyroid dogs have normal TSH); measure simultaneously with T4 — the combination is diagnostic",
+            "Free T4 by equilibrium dialysis (fT4ED): gold standard; less affected by concurrent illness or protein binding changes; reference range 8-25 pmol/L; preferred when drug interference or concurrent illness suspected",
+            "Serum cholesterol + triglycerides: hypercholesterolemia (>300 mg/dL) and hypertriglyceridemia in 75-80% of hypothyroid dogs; resolves with treatment; important baseline before and at 3 months to track response",
+            "CBC + serum chemistry: mild normocytic normochromic anemia; baseline ALT, ALP, albumin; rule out concurrent adrenal insufficiency (both have lethargy/weight changes)",
+            "Post-pill T4 monitoring (4-6h after L-T4): target 2.5-3.5 μg/dL; used for dose adjustment at each recheck; pre-pill trough T4 should be low-normal (confirms adequate dosing interval)",
+        ],
         "urgency": "normal",
+        "onset_pattern": "chronic",
+        "age_predisposition": "adult",
     },
     {
         "name": "Congenital Hypothyroidism (Cretinism)",
@@ -473,137 +475,93 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Cushing's Disease",
         "name_ja": "クッシング症候群（副腎皮質機能亢進症）",
         "symptoms": {
-            "excessive_thirst",
-            "excessive_urination",
-            "weight_gain",
-            "hair_loss",
-            "lethargy",
-            "excessive_panting",
             "appetite_increase",
+            "weight_gain",
+            "excessive_panting",
+            "excessive_urination",
+            "lethargy",
+            "excessive_thirst",
+            "hair_loss",
         },
-        "description": "Overproduction of cortisol by the adrenal glands, leading to a range of systemic effects.",
-        "description_ja": "コルチゾールの慢性的過剰産生による多臓器障害。中高齢犬（8歳以上）に好発。"
-        "下垂体依存性（PDH、85%）と副腎腫瘍性（AT、15%）に分類。"
-        "プードル、ダックスフント、ビーグル、ボストンテリアに多い。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "PDH：下垂体腺腫→ACTH過剰分泌→両側副腎皮質過形成→コルチゾール過剰。"
-        "AT：副腎皮質腫瘍（腺腫or腺癌）から自律的にコルチゾール分泌。"
-        "慢性的高コルチゾール血症→肝臓のグリコーゲン蓄積（ステロイド肝症）、筋萎縮、"
-        "皮膚菲薄化、免疫抑制、インスリン抵抗性（二次性糖尿病リスク）。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
+        "description": "Hyperadrenocorticism (HAC) — excess cortisol from pituitary-dependent hyperadrenocorticism (PDH, 80-85%) or adrenocortical tumor (AT, 15-20%). PDH: bilateral adrenocortical hyperplasia driven by pituitary micro/macroadenoma. AT: unilateral adrenal adenoma or carcinoma (50% each). Iatrogenic: from exogenous glucocorticoid administration. Classic signalment: middle-aged to older dogs; Poodle, Dachshund, Boston Terrier, Boxer, Beagle predisposed. Hallmark: PU/PD, polyphagia, pendulous abdomen, bilateral symmetric alopecia, thin skin, calcinosis cutis, hyperpigmentation. Concurrent hypertension (80%), urinary tract infections (50%), and pulmonary thromboembolism are important complications.",
+        "description_ja": "副腎皮質機能亢進症（HAC）：下垂体依存性（PDH、80〜85%）または副腎腫瘍（AT、15〜20%）によるコルチゾール過剰産生。PDH：下垂体微小/大腺腫による両側副腎皮質過形成。AT：副腎腺腫または腺癌（各50%）。医原性：外因性ステロイド投与によるもの。好発：中年〜高齢犬（プードル、ダックスフンド、ボストン・テリア、ボクサー、ビーグル）。特徴：多飲多尿・多食・腹部膨満（振り子腹）・両側対称性脱毛・薄い皮膚・皮膚石灰化（石灰沈着症）・色素沈着。高血圧（80%）・UTI（50%）・肺血栓塞栓症が重要な合併症。",
+        "pathophysiology": "PDH: pituitary ACTH-secreting adenoma (usually <1 cm microadenoma, rarely macroadenoma >1 cm causing neurological signs) drives bilateral adrenocortical hyperplasia. ACTH excess → bilateral adrenal enlargement → chronic cortisol excess. Cortisol excess effects: (1) Gluconeogenesis/protein catabolism → muscle wasting, thin skin, abdominal fat redistribution; (2) Anti-inflammatory/immunosuppressive → recurrent infections (UTI, skin), impaired wound healing; (3) Renal: GFR increase + inhibits ADH action at collecting ducts (NDI-like) → PU/PD; (4) Hepatopathy: hepatocellular glycogen accumulation (vacuolar hepatopathy) → elevated ALP (corticosteroid-induced ALP isoenzyme — specific to dogs); (5) Hyperlipidemia → pancreatitis risk; (6) Hypertension: direct mineralocorticoid effect + RAAS activation; (7) Hypercoagulability: increased clotting factors, decreased antithrombin III → PTE risk; (8) Calcinosis cutis: dystrophic calcium deposition in dermis/subcutis from chronic cortisol excess.",
+        "pathophysiology_ja": "PDH：下垂体ACTH産生腺腫（通常<1 cmの微小腺腫）が両側副腎皮質過形成を駆動→慢性コルチゾール過剰。コルチゾール過剰の影響：(1)糖新生亢進・タンパク異化→筋肉萎縮・薄い皮膚・腹部脂肪再分布；(2)抗炎症/免疫抑制→反復感染（UTI・皮膚）；(3)腎臓：GFR増加＋集合管でのADH作用阻害（中枢性尿崩症様）→多飲多尿；(4)肝症：肝細胞グリコーゲン蓄積（空胞性肝症）→ALP上昇（犬特有のコルチコイド誘導型ALP同位体）；(5)高脂血症→膵炎リスク；(6)高血圧：直接的ミネラルコルチコイド効果＋RAAS活性化；(7)過凝固：凝固因子増加＋アンチトロンビンIII低下→肺血栓塞栓症リスク；(8)石灰沈着症：真皮・皮下への異栄養性石灰化。",
+        "causes": "Pituitary-dependent HAC (PDH, 80-85%): pituitary ACTH-secreting microadenoma. Adrenocortical tumor (AT, 15-20%): adenoma or carcinoma (unilateral). Iatrogenic: exogenous glucocorticoid administration (most common cause overall). Predisposed breeds: Poodle, Dachshund, Boston Terrier, Boxer, Beagle.",
         "causes_ja": "下垂体微小腺腫（PDH、最多）、副腎皮質腫瘍（腺腫・腺癌）、医原性（長期ステロイド投与）。",
-        "treatment": "[PDH (first-line)] Trilostane 1-3 mg/kg PO q12h (administer with food) → monitor at 10-14 days, 1 month, 3 months, then q3-6 months. BID dosing provides better clinical control than SID (Vaughan et al. JAVMA 2008). [Monitoring] (1) Clinical signs (PU/PD/polyphagia improvement), (2) Pre-pill cortisol (target 1.4-5.4 μg/dL = 40-150 nmol/L) — reported superior to ACTH stim test (Macfarlane Vet Rec 2016), (3) 3h post-pill cortisol optional, (4) ACTH stim test (traditional, post-ACTH target 1.5-5.4 μg/dL) — recommended only when clinically unwell, (5) Electrolytes (Na/K), liver enzymes (ALP, ALT), blood pressure. [Alternative] Mitotane (o,p'-DDD) — more side effects, now second-line. [AT (adrenal tumor)] Surgical adrenalectomy is curative when feasible. Pre-operative trilostane for cortisol suppression reduces perioperative risk. Metastatic/inoperable cases: trilostane or mitotane. [Iatrogenic] Gradual steroid taper (rapid withdrawal risks Addisonian crisis).",
-        "treatment_ja": "【PDH（第一選択）】 トリロスタン 1-3 mg/kg PO q12h 開始（食後投与）→ "
-        "10-14日後・1ヶ月後・3ヶ月後・以降3-6ヶ月毎にモニタリング。"
-        "近年の用量推奨は1日2回投与（BID）が SID より臨床コントロールが良好（Vaughan et al. JAVMA 2008）。"
-        "【モニタリング方法】 (1) 症状評価（多飲多尿・多食の改善）、(2) Pre-pill cortisol "
-        "（投与前血中コルチゾール、目標 1.4-5.4 μg/dL = 40-150 nmol/L）— Macfarlane Vet Rec 2016 で "
-        "ACTH刺激試験より優れた指標と報告、(3) 3時間 post-pill cortisol も併用可、"
-        "(4) ACTH刺激試験（伝統的方法、post-ACTH 1.5-5.4 μg/dL目標）— 体調不良時のみ推奨。"
-        "(5) 電解質（Na/K）、生化学（ALP、ALT）、血圧。"
-        "【代替薬】 ミトタン（o,p'-DDD）— 副作用多く現在は第二選択。"
-        "【AT（副腎腫瘍）】 外科的副腎摘出が根治的（可能であれば）。"
-        "術前トリロスタンによるコルチゾール抑制で周術期リスク軽減。"
-        "転移性・手術不能例にはトリロスタンまたはミトタン。"
-        "【医原性】 ステロイドの段階的漸減（急速中止はアジソンクリーゼを誘発）、"
-        "アジソンクリーゼ症状監視。"
-        "【参考】 ACVIM Small Animal Consensus Statement on Hyperadrenocorticism "
-        "(Behrend et al. JVIM 2013) に診断基準準拠。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "PDH：トリロスタン治療で中央生存期間約2年。QOLは大きく改善。"
-        "AT腺腫：外科切除で予後良好。AT腺癌：転移例は予後不良。"
-        "無治療では糖尿病、肺血栓塞栓症、尿路感染症の合併リスクが高い。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確立された予防法なし。好発品種では多飲多尿・腹部膨満等の初期症状に注意し早期診断を推奨。",
+        "treatment": "[PDH — first-line] Trilostane 1-3 mg/kg PO q12h with food (3HSD inhibitor; BID dosing provides better clinical control than SID). Monitoring protocol: ACTH stimulation test at 10-14 days, 1 month, 3 months, then q3-6 months. Target post-ACTH cortisol 2-5 μg/dL (5-9 with SID dosing). Dose escalation: increase by 50% if post-ACTH >9 μg/dL. Watch for hypoadrenocorticism (post-ACTH <1 μg/dL = stop, recheck in 1-2 weeks). [PDH — alternative] Mitotane (o,p-DDD): loading phase 40-50 mg/kg/day with fatty food × 5-7 days; maintenance 50 mg/kg/wk; perform ACTH stimulation after 5 days of loading; stop loading when post-ACTH cortisol 1-5 μg/dL or appetite decreases. [Macroadenoma PDH] Radiation therapy (SRS/SBRT) for pituitary macroadenoma causing neurological signs (3-5 fraction stereotactic RT). [AT] Unilateral adrenalectomy: pre-op stabilization with trilostane 1 month to prepare contralateral atrophied adrenal; perioperative hydrocortisone/dexamethasone support. [Complications] Treat hypertension (amlodipine 0.1-0.3 mg/kg q24h), UTI (culture-directed antibiotics), and PTE risk (aspirin 0.5-5 mg/kg q24h or low-dose heparin in high-risk dogs).",
+        "treatment_ja": "[PDH第一選択] トリロスタン1〜3 mg/kg PO 12時間毎（食事と同時投与；12時間毎が8時間毎より良好なコントロール）。モニタリング：ACTH刺激試験を10〜14日後、1ヶ月後、3ヶ月後、以後3〜6ヶ月毎。目標：ACTH刺激後コルチゾール2〜5 μg/dL。副腎皮質機能低下症（刺激後コルチゾール<1 μg/dL）に注意（投薬中止・1〜2週後再検）。[PDH代替] ミトタン（o,p-DDD）：負荷期40〜50 mg/kg/日×5〜7日（脂肪食と同時）；維持期50 mg/kg/週。[副腎腫瘍] 片側副腎切除術：術前1ヶ月のトリロスタン投与（対側萎縮副腎の準備）；周術期ヒドロコルチゾン補充。合併症治療：高血圧（アムロジピン）、UTI（感受性試験に基づく抗菌薬）、PTE予防（アスピリン低用量）。",
+        "prognosis": "PDH: good to excellent with medical management — median survival 2-2.5 years; pituitary macroadenoma (<5% of PDH) has guarded prognosis (neurological deterioration). AT: adenoma with complete resection — excellent; carcinoma — guarded (metastasis rate 50%). Iatrogenic HAC: resolves with gradual steroid tapering. Complications (PTE, severe infections) worsen prognosis significantly.",
+        "prognosis_ja": "PDH：内科治療で予後良好（生存期間中央値2〜2.5年）。下垂体大腺腫（PDHの<5%）は神経症状悪化により予後不良。副腎腺腫（完全切除）：優良；副腎腺癌（転移率50%）：不良。医原性HAC：漸減中止で回復。肺血栓塞栓症・重篤な感染症合併で予後悪化。",
+        "prevention": "No established prevention. Minimize exogenous glucocorticoid use duration and dose. Screen predisposed breeds with annual urine cortisol:creatinine ratio (UCCR) if clinical signs develop.",
+        "prevention_ja": "確立された予防法なし。外因性ステロイドの使用期間と用量を最小限に。好発品種では臨床症状出現時に早期スクリーニングを推奨（尿コルチゾール/クレアチニン比）。",
+        "recommended_tests": [
+            "Urine cortisol:creatinine ratio (UCCR): first morning void; high sensitivity (90-100%) but low specificity — excellent screening test; normal UCCR effectively rules out HAC; elevated UCCR requires confirmation with stimulation or suppression test",
+            "ACTH stimulation test: 5 μg/kg synthetic ACTH IV; cortisol at 0 and 60 min; post-ACTH >18-20 μg/dL confirms HAC; also used for monitoring trilostane therapy (post-ACTH target 2-9 μg/dL depending on dosing); does NOT differentiate PDH from AT",
+            "Low-dose dexamethasone suppression test (LDDST): dexamethasone 0.01 mg/kg IV; cortisol at 0, 4, 8h; 8h cortisol >1.5 μg/dL = HAC confirmed (95% sensitivity); 4h cortisol <1.0 μg/dL = likely PDH (mid-day escape pattern); does NOT diagnose PDH vs AT definitively",
+            "Endogenous ACTH measurement (plasma): EDTA tube, centrifuge immediately, freeze; high ACTH (>45 pg/mL) = PDH; low/undetectable (<10 pg/mL) = AT; differentiates PDH from AT without imaging",
+            "Abdominal ultrasound: bilateral adrenal enlargement (>7.5 mm thickness) = PDH; asymmetric enlarged mass = AT; adrenal/liver architecture assessment; vascular invasion by AT suggests malignancy",
+            "Urine specific gravity + sediment + culture: isosthenuria/hyposthenuria; screen for concurrent UTI (50% of HAC dogs — often subclinical; always culture urine before interpreting WBC count as cystitis)",
+        ],
         "urgency": "normal",
+        "onset_pattern": "chronic",
+        "age_predisposition": "adult",
     },
     {
         "name": "Addison's Disease",
         "name_ja": "アジソン病（副腎皮質機能低下症）",
-        "symptoms": {"lethargy", "appetite_loss", "vomiting", "diarrhea", "weight_loss", "dehydration", "collapse"},
-        "description": "Insufficient production of adrenal hormones, causing "
-        "weakness, dehydration, and episodic collapse.",
-        "description_ja": "副腎皮質からのグルココルチコイドおよびミネラルコルチコイドの分泌不全。"
-        "「偉大なる模倣者（Great Pretender）」と呼ばれ、非特異的症状のため見逃されやすい。"
-        "若齢〜中年の雌犬に好発。スタンダードプードル、ポルトガルウォータードッグ等に遺伝的素因。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "免疫介在性副腎皮質破壊（最多）→コルチゾール・アルドステロン欠乏。"
-        "アルドステロン欠乏→Na喪失・K貯留→高K血症による徐脈・不整脈（致死的）。"
-        "コルチゾール欠乏→ストレス耐性低下、低血糖、消化器症状。"
-        "アジソンクリーゼ：急性副腎不全による循環虚脱・低血圧性ショック。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "免疫介在性副腎皮質炎（原発性、最多）、医原性（長期ステロイド投与の急な中止）、"
-        "肉芽腫性疾患（真菌症等）、副腎出血、転移性腫瘍。稀に下垂体性（二次性）。",
-        "treatment": "ACUTE ADDISONIAN CRISIS: (1) Aggressive fluid resuscitation: 0.9% NaCl 40-80 mL/kg/hr IV (first 1-2 hours) → taper to maintenance. Correct Na gradually. "
-        "(2) Glucocorticoids: dexamethasone sodium phosphate 0.1-0.5 mg/kg IV (does not interfere with cortisol assay — can administer before ACTH stim test) "
-        "or hydrocortisone sodium succinate 0.5-1 mg/kg/hr CRI. "
-        "(3) Hyperkalemia: saline IV usually sufficient; if K>7.5 mEq/L or ECG abnormalities: 10% calcium gluconate 0.5-1.5 mL/kg slow IV (cardioprotection) + "
-        "regular insulin 0.25-0.5 IU/kg IV + 50% dextrose 1-2 g/IU insulin. "
-        "(4) Hypoglycemia: 50% dextrose 0.5-1 mL/kg IV bolus, then 2.5-5% dextrose-supplemented fluids. "
-        "(5) Confirm diagnosis with ACTH stimulation test. "
-        "LONG-TERM MAINTENANCE: (1) Mineralocorticoid: DOCP (desoxycorticosterone pivalate) 1.5 mg/kg SC q25-30 days — "
-        "low-dose protocol now preferred (Sieber-Ruckstuhl et al. JVIM 2019): median 1.1 mg/kg (range 0.7-1.8) after 2-3 months titration. "
-        "Alternative: fludrocortisone 0.01-0.02 mg/kg PO q12-24h (oral, cheaper, but greater electrolyte fluctuation). "
-        "(2) Glucocorticoid: prednisolone 0.05-0.1 mg/kg PO SID (physiologic replacement — avoid excess causing iatrogenic Cushing's). "
-        "MONITORING: electrolytes at 10-14 days and 25 days post-DOCP, then q3-6 months when stable. Target Na/K ratio 27-32. "
-        "STRESS DOSE: increase prednisolone 2-5× for surgery, travel, illness.",
-        "treatment_ja": "【急性アジソンクリーゼ】 (1) 急速輸液: 0.9% 生理食塩水 40-80 mL/kg/hr IV "
-        "（最初の1-2時間）→ 維持量へ。Na補正は緩徐に。"
-        "(2) グルココルチコイド: デキサメタゾン Na リン酸 0.1-0.5 mg/kg IV "
-        "（コルチゾール測定に干渉しないため診断前投与可）またはヒドロコルチゾンコハク酸エステル "
-        "0.5-1 mg/kg/hr CRI。"
-        "(3) 高K血症補正: 生食輸液で多くは改善、K>7.5 mEq/Lまたは心電図異常時は "
-        "グルコン酸Ca 10% 0.5-1.5 mL/kg 緩徐IV（心保護）+ レギュラーインスリン 0.25-0.5 IU/kg IV "
-        "+ 50% デキストロース 1-2 g/IU。"
-        "(4) 低血糖補正: 50% デキストロース 0.5-1 mL/kg IV、その後 2.5-5% 含有輸液。"
-        "(5) ACTH刺激試験で確定診断。"
-        "【長期維持療法】 "
-        "(1) ミネラルコルチコイド: DOCP（デソキシコルチコステロンピバレート）"
-        "1.5 mg/kg SC q25-30日 — 近年は低用量プロトコルが推奨される "
-        "（Sieber-Ruckstuhl et al. JVIM 2019）。従来の2.2 mg/kgより低用量で十分な症例が多く、"
-        "2-3ヶ月後に中央値1.1 mg/kg（0.7-1.8）まで減量可能。"
-        "代替: フルドロコルチゾン 0.01-0.02 mg/kg PO q12-24h（経口・安価だが電解質変動大）。"
-        "(2) グルココルチコイド: プレドニゾロン 0.05-0.1 mg/kg PO q24h "
-        "（生理学的補充量、過剰投与で医原性Cushing症状）。"
-        "【モニタリング】 投与10-14日後・25日後（次回投与前）に電解質測定 → 安定後は3-6ヶ月毎。"
-        "Na/K比 27-32 を目標。"
-        "【ストレス時の用量調整】 手術・旅行・病気時はプレドニゾロンを2-5倍に増量。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "適切な補充療法で予後は良好〜極めて良好。正常な生活が可能。治療は生涯必要。"
-        "アジソンクリーゼは早期治療で回復可能だが、診断遅延は致死的。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確立された予防法なし。好発品種では消化器症状の間欠的な発現に注意。"
-        "ステロイド長期投与からの離脱は必ず漸減で行う。",
+        "symptoms": {"collapse", "diarrhea", "lethargy", "vomiting", "weight_loss", "appetite_loss", "dehydration"},
+        "description": "Adrenocortical insufficiency from destruction of adrenal cortex (primary, most common) or deficient ACTH secretion (secondary/iatrogenic). Primary: immune-mediated destruction of all 3 zones (zona glomerulosa + fasciculata + reticularis) — both mineralocorticoid (aldosterone) AND glucocorticoid (cortisol) deficiency. Atypical Addison's: glucocorticoid deficiency only (normal electrolytes) — must diagnose with ACTH stimulation, not electrolytes. Classic 'Great Pretender' — mimics almost any systemic disease. Predisposed: young to middle-aged females, Standard Poodle, Portuguese Water Dog, Bearded Collie, Great Dane, Rottweiler, West Highland White Terrier, Nova Scotia Duck Tolling Retriever.",
+        "description_ja": "副腎皮質破壊（原発性、最多）またはACTH分泌不全（二次性/医原性）による副腎皮質機能低下症。原発性：全ゾーン（糸球体帯＋束状帯＋網状帯）の免疫介在性破壊→ミネラルコルチコイド（アルドステロン）＋糖質コルチコイド（コルチゾール）の両者欠乏。非典型アジソン病：糖質コルチコイドのみ欠乏（電解質正常）——必ずACTH刺激試験で診断（電解質だけでは診断不可）。「偉大な詐病師（Great Pretender）」——ほぼあらゆる全身疾患を模倣する。好発：若〜中年雌、スタンダード・プードル、ポルトガル・ウォーター・ドッグ、ベアデッド・コリー等。",
+        "pathophysiology": "Primary hypoadrenocorticism: immune-mediated lymphocytic adrenalitis destroys >90% of adrenal cortex before clinical signs appear. Aldosterone deficiency (zona glomerulosa): failure of Na⁺ retention and K⁺ excretion in collecting ducts → hyponatremia + hyperkalemia. Hyponatremia → reduced plasma osmolality → cellular overhydration → weakness, CNS depression. Hyperkalemia → reduced cardiac resting membrane potential → bradycardia, heart block, arrhythmias. Cortisol deficiency (zona fasciculata/reticularis): impaired gluconeogenesis → hypoglycemia; impaired vascular tone response to catecholamines → distributive shock (failure of arteriolar vasoconstriction); impaired inflammatory response regulation → exaggerated cytokine response; gastroenteritis from GI mucosal integrity loss. Classic electrolyte pattern: Na:K ratio <27:1 (normal >30:1); ratio <20:1 = consistent with Addisonian crisis. Pre-renal azotemia secondary to hypovolemia (low GFR). Atypical Addison's: only zona fasciculata/reticularis affected — cortisol deficiency only, aldosterone normal, electrolytes normal.",
+        "pathophysiology_ja": "原発性副腎皮質機能低下症：免疫介在性リンパ球性副腎炎が副腎皮質の>90%を破壊してから初めて臨床症状出現。アルドステロン欠乏（糸球体帯）：集合管でのNa⁺再吸収・K⁺排泄障害→低ナトリウム血症＋高カリウム血症。低ナトリウム血症→血漿浸透圧低下→細胞内水分過剰→脱力・CNS抑制。高カリウム血症→心臓静止膜電位低下→徐脈・房室ブロック・不整脈。コルチゾール欠乏（束状帯/網状帯）：糖新生障害→低血糖；カテコールアミンへの血管反応障害→分布性ショック；炎症反応調節障害→胃腸炎。古典的電解質パターン：Na:K比<27:1（正常>30:1）；<20:1でアジソンクリーゼに矛盾しない。二次性低血圧による腎前性高窒素血症。非典型アジソン病：束状帯/網状帯のみ→コルチゾール欠乏のみ、アルドステロン・電解質正常。",
+        "causes": "Immune-mediated adrenocortical destruction (primary, most common), iatrogenic (sudden cessation of long-term glucocorticoids, mitotane/trilostane overdose), granulomatous disease (histoplasmosis, blastomycosis), adrenal hemorrhage, metastatic neoplasia. Rarely secondary (pituitary ACTH deficiency).",
+        "causes_ja": "免疫介在性副腎皮質炎（原発性、最多）、医原性（長期ステロイド投与の急な中止）、肉芽腫性疾患（真菌症等）、副腎出血、転移性腫瘍。稀に下垂体性（二次性）。",
+        "treatment": "ACUTE ADDISONIAN CRISIS: (1) Aggressive fluid resuscitation: 0.9% NaCl 40-80 mL/kg/hr IV for first 1-2 hours — correct hypovolemia; do NOT use K⁺-containing fluids (LRS contraindicated in hyperkalemia). Gradually correct hyponatremia (Na rise <12 mEq/L per 24h to prevent osmotic demyelination). (2) Glucocorticoids: dexamethasone sodium phosphate 0.1-0.2 mg/kg IV — does NOT interfere with ACTH stimulation test (can run test while giving dex). After ACTH stimulation test confirmed: hydrocortisone 0.5-0.6 mg/kg/hr CRI (most physiological). (3) Treat hyperkalemia if cardiac arrhythmias: calcium gluconate 50-100 mg/kg IV slowly (10-15 min, ECG monitoring) — cardioprotective; insulin-dextrose if K⁺ >7 mEq/L (0.1-0.2 IU/kg regular insulin IV + 2 g dextrose per unit insulin). (4) ACTH stimulation test: confirm diagnosis BEFORE starting long-term therapy — collect pre-ACTH cortisol, administer 5 μg/kg synthetic ACTH IV, collect post-ACTH cortisol at 60 min; flat, subnormal response (<2 μg/dL post-ACTH) confirms Addison's. LONG-TERM MANAGEMENT: (5) Mineralocorticoid replacement: DOCP (desoxycorticosterone pivalate, Percorten-V) 2.2 mg/kg IM/SC q25-28 days (gold standard); alternative: fludrocortisone acetate 0.01-0.02 mg/kg PO q24h (also has some glucocorticoid activity). (6) Glucocorticoid replacement: prednisone 0.2-0.5 mg/kg PO q24h (lowest effective dose to minimize iatrogenic HAC); stress dosing — increase 3-5x for illness, surgery, or hospitalization.",
+        "treatment_ja": "急性アジソンクリーゼ：(1)積極的輸液：0.9% NaCl 40〜80 mL/kg/hrで1〜2時間（高カリウム血症のためLRS禁忌）。低ナトリウム血症は緩徐に補正（<12 mEq/L/24h：浸透圧性脱髄症候群予防）。(2)糖質コルチコイド：デキサメタゾン0.1〜0.2 mg/kg IV（ACTH刺激試験に干渉しないため試験前でも投与可能）。ACTH試験後：ヒドロコルチゾン0.5〜0.6 mg/kg/hr CRI（最も生理的）。(3)高カリウム血症（不整脈あり）：グルコン酸カルシウム50〜100 mg/kg IV緩徐（心電図モニター下）；K⁺>7 mEq/Lでインスリン-デキストロース療法。(4)ACTH刺激試験による診断確定（長期治療開始前に必ず実施）。長期管理：(5)ミネラルコルチコイド：DOCP 2.2 mg/kg IM 25〜28日毎（第一選択）；代替：酢酸フルドロコルチゾン0.01〜0.02 mg/kg PO 24時間毎。(6)糖質コルチコイド：プレドニゾロン0.2〜0.5 mg/kg PO 24時間毎；ストレス時（手術・入院・疾病）は3〜5倍に増量。",
+        "prognosis": "Excellent with appropriate long-term management. Well-managed Addisonian dogs have normal life expectancy. DOCP injections required monthly for life. Client education critical: stress dosing protocol must be understood for home emergencies. Acute crisis mortality is low with prompt treatment. Atypical Addison's may progress to typical over time — monitor electrolytes q6-12 months.",
+        "prognosis_ja": "適切な長期管理で予後優良（生涯にわたり正常な生活の質を維持可能）。急性クリーゼも迅速治療で死亡率は低い。飼い主へのストレス投与プロトコル教育が必須。非典型アジソン病は経時的に典型型に進行することがあるため電解質を6〜12ヶ月毎にモニタリング。",
+        "prevention": "No established prevention. Avoid abrupt discontinuation of long-term glucocorticoid therapy — always taper. Predisposed breeds: periodic electrolyte screening in at-risk lines.",
+        "prevention_ja": "確立された予防法なし。好発品種では消化器症状の間欠的な発現に注意。ステロイド長期投与からの離脱は必ず漸減で行う。",
+        "recommended_tests": [
+            "ACTH stimulation test: GOLD STANDARD — synthetic ACTH (cosyntropin) 5 μg/kg IV; cortisol at 0 and 60 min; post-ACTH cortisol <2 μg/dL confirms hypoadrenocorticism; only test that differentiates atypical Addison's (normal Na:K, flat ACTH stim) from other causes of GI signs",
+            "Serum electrolytes (Na, K, Cl): Na:K ratio <27:1 = abnormal; ratio <20:1 = severe, crisis likely; 30-40% of Addisonian dogs have normal electrolytes (atypical form) — do NOT rely on electrolytes alone to rule out Addison's in any dog with episodic GI disease",
+            "ECG: bradycardia, prolonged PR interval, wide QRS, absent P waves (sinoatrial standstill) from hyperkalemia >6.5-7 mEq/L — guide urgency of hyperkalemia treatment",
+            "CBC + serum chemistry: normocytic normochromic anemia, eosinophilia (paradoxically — eosinopenia expected in stress but absent in cortisol deficiency), lymphocytosis; azotemia (pre-renal + cortisol-dependent renal effects), hypoglycemia, mildly elevated liver enzymes; BUN:creatinine ratio >30:1 suggests pre-renal component",
+            "Endogenous ACTH (plasma): high in primary Addison's, low/normal in secondary — differentiates primary vs secondary (collect before glucocorticoid administration; EDTA tube, freeze immediately)",
+            "Blood pressure: hypotension (systolic <90 mmHg) in crisis; guides fluid resuscitation rate and vasopressor need",
+        ],
         "urgency": "high",
+        "onset_pattern": "acute",
+        "age_predisposition": "young",
     },
     {
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
-        "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "appetite_increase", "lethargy"},
-        "description": "A metabolic disorder where the body cannot properly regulate blood sugar levels.",
-        "description_ja": "インスリン分泌不全または作用不全による持続性高血糖。犬では1型（インスリン依存性）が多い。"
-        "中高齢の未避妊雌犬に好発。サモエド、オーストラリアンテリア、ミニチュアシュナウザー等に多い。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "膵β細胞の免疫介在性破壊→絶対的インスリン欠乏→高血糖。"
-        "腎糖排泄閾値（約180mg/dL）超過→浸透圧利尿（多尿）→代償性多飲。"
-        "脂肪分解亢進→ケトン体産生→糖尿病性ケトアシドーシス（DKA、致死的合併症）。"
-        "長期的に白内障（犬で非常に多い）、糖尿病性神経障害を合併。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "免疫介在性膵β細胞破壊（犬の1型DM、最多）、慢性膵炎による二次性、"
-        "発情後の黄体期プロゲステロン→GH過剰（未避妊雌犬）、"
-        "副腎皮質機能亢進症、長期ステロイド投与。肥満はリスク因子。",
-        "treatment": "Lifelong insulin therapy: intermediate-acting insulin (NPH or Vetsulin/Caninsulin) 0.25-0.5 IU/kg SC q12h. Dose adjustment based on serial blood glucose curves (q8-12h sampling over 12-24h). Dietary management: high-fiber, low-fat diet, consistent feeding times and amounts. Intact females: ovariohysterectomy recommended (removes progesterone-mediated insulin resistance). DKA: hospitalization, regular insulin CRI (0.05-0.1 IU/kg/hr), aggressive IV fluid therapy, electrolyte correction (especially potassium supplementation). Monitor for cataracts (>75% incidence) — surgical lens extraction can restore vision.",
-        "treatment_ja": "インスリン療法（生涯）：中間型インスリン（NPH、Vetsulin/Caninsulin）0.25〜0.5IU/kg BID SC。"
-        "血糖曲線で用量調整。食事管理：高繊維・低脂肪食、一定時間・一定量の給餌。"
-        "未避妊雌犬は避妊手術（プロゲステロンによるインスリン抵抗性解除）。"
-        "DKA：入院管理、レギュラーインスリンCRI、輸液、電解質補正。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "適切なインスリン管理と食事管理で中央生存期間2〜3年以上。多くの犬で良好なQOLを維持。"
-        "白内障は高頻度（75%以上）に発生するが、白内障手術で視力回復可能。DKAは致死率20〜40%。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "肥満予防、未避妊雌犬の早期避妊手術（プロゲステロン性DM予防）。"
-        "好発品種では血糖・フルクトサミン値の定期検査。",
+        "symptoms": {"appetite_increase", "excessive_urination", "lethargy", "excessive_thirst", "weight_loss"},
+        "description": "Insulin-deficient diabetes mellitus is the predominant form in dogs (analogous to type 1 DM in humans — immune-mediated beta-cell destruction or chronic pancreatitis). Female dogs are 2-4x more likely to develop DM; progesterone-driven GH excess in intact females is a major reversible cause. Common predisposed breeds: Samoyed, Australian Terrier, Miniature Schnauzer, Bichon Frise, Poodle, Pug. DM in dogs rarely resolves without insulin therapy (unlike cats). Key complication: diabetic ketoacidosis (DKA) — life-threatening metabolic emergency. Cataracts are universal in uncontrolled canine DM (osmotic sorbitol accumulation in lens, within weeks to months).",
+        "description_ja": "犬における糖尿病はインスリン依存型（ヒトの1型DMに類似）が主体——免疫介在性β細胞破壊または慢性膵炎に続発。雌犬は雄の2〜4倍リスク（プロゲステロン→GH過剰が重要な可逆的原因）。好発品種：サモエド、オーストラリアン・テリア、ミニチュア・シュナウザー、ビション・フリーゼ、プードル、パグ。犬のDMはインスリン療法なしでは回復しない（猫と異なる）。重要合併症：糖尿病性ケトアシドーシス（DKA）——致死的代謝緊急症。コントロール不良の犬DMでは白内障が必発（水晶体内ソルビトール蓄積：数週間〜数ヶ月で発症）。",
+        "pathophysiology": "Insulin deficiency leads to: (1) Cellular glucose starvation despite hyperglycemia (glucose cannot enter cells without insulin — adipocytes, muscle) → stimulates counter-regulatory hormones (glucagon, cortisol, catecholamines, GH). (2) Glycosuria: renal threshold exceeded (~180-200 mg/dL) → osmotic diuresis → PU/PD → dehydration if fluid intake cannot compensate. (3) Lipolysis: excess triglyceride breakdown → elevated FFAs → hepatic beta-oxidation → acetyl-CoA excess → ketogenesis (acetoacetate → beta-hydroxybutyrate → acetone). Ketonemia + organic acidemia → metabolic acidosis (DKA). (4) Protein catabolism: gluconeogenesis substrate → progressive muscle wasting. (5) Hyperosmolarity: hyperglycemia + dehydration → plasma hyperosmolarity → CNS depression. Canine cataracts: sorbitol accumulates in lens (aldose reductase pathway active in lens) → osmotic swelling → lens fiber disruption. Progesterone-driven DM: progesterone stimulates mammary GH secretion → GH excess → insulin resistance → reversible if OVH performed early. Concurrent hyperadrenocorticism causes severe insulin resistance in 20-30% of diabetic dogs.",
+        "pathophysiology_ja": "インスリン欠乏→(1)細胞性ブドウ糖飢餓（高血糖にも関わらず細胞内に糖が入れない）→対抗調節ホルモン（グルカゴン・コルチゾール・カテコールアミン・GH）分泌亢進。(2)尿糖：腎閾値超過（約180〜200 mg/dL）→浸透圧性利尿→多飲多尿→脱水。(3)脂肪分解：脂肪酸遊離増加→肝でのβ酸化→アセチルCoA過剰→ケトン体産生（アセト酢酸→βヒドロキシ酪酸→アセトン）→ケトアシドーシス（DKA）。(4)タンパク異化亢進：糖新生基質として利用→進行性筋肉消耗。(5)高浸透圧：高血糖＋脱水→血漿高浸透圧→CNS抑制。犬白内障：アルドースリダクターゼ経路によるソルビトール水晶体内蓄積→浸透圧性腫脹→水晶体線維破壊。プロゲステロン性DM：乳腺GH分泌増加→インスリン抵抗性→早期避妊手術で可逆的。",
+        "causes": "Immune-mediated pancreatic beta-cell destruction (canine type 1-like, most common), chronic pancreatitis secondary (25-40% of diabetic dogs), progesterone-driven GH excess in intact female dogs (diestrus/pregnancy — reversible with OVH), concurrent hyperadrenocorticism (insulin resistance), long-term glucocorticoid administration. Obesity is a risk factor.",
+        "causes_ja": "免疫介在性膵β細胞破壊（犬の1型DM、最多）、慢性膵炎による二次性、発情後の黄体期プロゲステロン→GH過剰（未避妊雌犬）、副腎皮質機能亢進症、長期ステロイド投与。肥満はリスク因子。",
+        "treatment": "Insulin therapy (lifelong): intermediate-acting insulin is first-line for canine DM. Vetsulin (porcine lente insulin, 40 IU/mL) or NPH (human, 100 IU/mL) 0.25 IU/kg SC q12h initial dose. Lente insulin produces smoother glycemic curves than NPH in many dogs. Starting dose: 0.25 IU/kg q12h; increase by 1 IU per injection q7-14 days guided by serial blood glucose curves. Target blood glucose curve: nadir 80-150 mg/dL, pre-meal peak <250-300 mg/dL. Dose adjustment: never increase >25% per adjustment; if nadir <80 mg/dL, reduce dose 10-25%. Dietary management: consistent high-fiber diet (slows glucose absorption) — same food/amount/timing at each meal; Hills w/d or Royal Canin Diabetic; feed immediately before each insulin injection. Concurrent conditions: (1) Treat concurrent HAC (trilostane) — insulin resistance resolves substantially; (2) Intact females: OVH immediately after stabilization — resolves progesterone-driven DM in some dogs; (3) Concurrent UTI (50% of diabetic dogs — culture all urine): doxycycline or trimethoprim-sulfa based on culture/sensitivity. DKA management: IV fluid resuscitation (0.9% NaCl), electrolyte correction (K⁺ supplement once insulin started), regular insulin CRI 0.05-0.1 IU/kg/hr, slow glucose correction. Monitoring: at-home glucose monitoring (AlphaTRAK 2 glucometer or FreeStyle Libre), serum fructosamine q3 months (reflects 2-3 week average glucose), annual urinalysis + culture (UTI screen).",
+        "treatment_ja": "インスリン療法（生涯）：ベットスリン（豚レンテインスリン40 IU/mL）またはNPH（ヒトインスリン100 IU/mL）0.25 IU/kg SC 12時間毎で開始。目標血糖曲線：最低血糖80〜150 mg/dL、食前最高血糖<250〜300 mg/dL。用量調整：1回の調整で>25%の増量は禁忌；最低<80 mg/dLでは10〜25%減量。食事管理：高繊維食（Hills w/dまたはRoyal Canin Diabetic）を毎回インスリン直前に同量・同時刻に給与。合併症管理：(1)HAC合併（トリロスタン）——インスリン抵抗性が著明に改善；(2)未避妊雌犬：安定化後に早急に避妊手術（プロゲステロン性DMでは回復可能性あり）；(3)UTI合併（50%に存在、尿培養必須）：感受性に基づく抗菌薬治療。DKA：0.9% NaCl輸液、電解質補正（K⁺：インスリン開始後必須）、レギュラーインスリンCRI 0.05〜0.1 IU/kg/h。在宅モニタリング：家庭用血糖計（AlphaTRAK 2）、血清フルクトサミン3ヶ月毎。",
+        "prognosis": "Good to excellent with dedicated owner and stable insulin protocol. Median survival in well-managed diabetic dogs: 2-3 years. Cataracts: nearly universal within 6-12 months without excellent glycemic control; cataract extraction (phacoemulsification) has 90%+ success rate. Concurrent HAC significantly worsens insulin requirements and prognosis. DKA carries 30-40% mortality without aggressive treatment. Quality of life is generally good for well-controlled diabetic dogs.",
+        "prognosis_ja": "飼い主の意欲と安定したインスリンプロトコルがあれば予後良好（管理良好例の生存期間中央値：2〜3年）。白内障：血糖コントロール不良例では6〜12ヶ月以内にほぼ必発（白内障手術：超音波乳化吸引術で成功率90%以上）。HAC合併例はインスリン必要量が著しく増加し予後悪化。DKA：積極的治療なしで死亡率30〜40%。良好にコントロールされた糖尿病犬のQOLは概ね良好。",
+        "prevention": "Obesity prevention, early OVH in female dogs (eliminates progesterone-driven DM risk), minimize long-term glucocorticoid use. No vaccine or specific prevention available for immune-mediated DM.",
+        "prevention_ja": "肥満予防、未避妊雌犬の早期避妊手術（プロゲステロン性DM予防）。好発品種では血糖・フルクトサミン値の定期検査。",
+        "recommended_tests": [
+            "Fasting blood glucose: >250 mg/dL consistent with DM; confirm on 2 separate occasions or with clinical signs; stress hyperglycemia rarely exceeds 250 mg/dL in dogs (less common than in cats)",
+            "Serum fructosamine: reflects average blood glucose over prior 2-3 weeks (glycated protein); >450 μmol/L = poor control; 350-450 μmol/L = fair; <350 μmol/L = good; not affected by acute stress; use for diagnosis confirmation and long-term monitoring q3 months",
+            "Urinalysis (USG, glucose, ketones, protein, sediment): glucosuria confirms renal threshold exceeded; ketonuria = early DKA; proteinuria = glomerular disease (secondary); sediment + culture to screen for concurrent UTI (50% of diabetic dogs)",
+            "12-hour blood glucose curve: in-hospital serial blood glucose q2h after AM insulin and meal; evaluates nadir (target 80-150 mg/dL), duration of insulin action, Somogyi rebound (post-hypoglycemic hyperglycemia) — essential for dose adjustment",
+            "Serum chemistry panel (BUN, creatinine, ALT, ALP, cholesterol, triglycerides, electrolytes): baseline organ function; hyperlipidemia is common; ALP elevation suggests concurrent HAC; venous blood gas + ketones if vomiting/depressed (rule out DKA)",
+            "Low-dose dexamethasone suppression test or ACTH stimulation: 20-30% of diabetic dogs have concurrent HAC — must diagnose and treat concurrently (HAC causes profound insulin resistance; treating HAC alone may resolve some cases of secondary DM)",
+        ],
         "urgency": "normal",
+        "onset_pattern": "chronic",
+        "age_predisposition": "adult",
     },
     {
         "name": "Urinary Tract Infection",
