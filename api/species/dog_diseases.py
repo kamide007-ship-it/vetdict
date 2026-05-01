@@ -2508,21 +2508,19 @@ DISEASES: List[Dict[str, Any]] = [
         "causes_ja": "先天性・発達性（多因子遺伝、最多）。稀に外傷性。"
         "内側脱臼（MPL）が小型犬の90%を占め、両側性が50%。"
         "外側脱臼（LPL）は大型犬に多い。",
-        "treatment": "Grade 1: conservative management (weight control, joint supplements, moderate exercise), monitoring. "
-        "Grade 2-4: surgical correction recommended. Procedures: trochlear sulcoplasty (wedge or block recession) + "
-        "medial joint capsule imbrication + tibial tuberosity transposition, typically combined. "
-        "Severe skeletal deformity: corrective osteotomy (femoral and/or tibial). "
-        "Post-operative rehabilitation 6-8 weeks. NSAIDs (carprofen, meloxicam) for perioperative pain management.",
-        "treatment_ja": "Grade 1：保存療法（体重管理、関節サプリメント、適度な運動）で経過観察。"
-        "Grade 2〜4：外科矯正が推奨。術式：滑車溝形成術（溝深化術）＋"
-        "内側関節包縫縮＋脛骨粗面転位術の組み合わせ。"
-        "重度の骨変形：矯正骨切り術。術後リハビリテーション6〜8週間。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "Grade 1〜2の外科矯正：成功率90%以上、長期予後良好。"
-        "Grade 3〜4：外科矯正で機能改善するが再脱臼率は10〜15%。"
-        "前十字靭帯断裂の併発例ではTPLO等の追加手術が必要。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "罹患犬の繁殖制限。体重管理。成長期の過度なジャンプ・滑りやすい床面を避ける。",
+        "recommended_tests": [
+            "Orthopedic exam (conscious + under sedation): patellar luxation grading (I-IV) — Grade I: manual luxation only, spontaneous reduction; Grade II: spontaneous, reduces with extension; Grade III: permanent, manually reducible; Grade IV: permanent, irreducible; assess tibial torsion and varus/valgus deformity",
+            "Stifle radiographs (CrCd and ML views): trochlear groove depth, tibial torsion angle, periarticular OA osteophytes, joint effusion (flag concurrent CrCL injury), limb alignment assessment",
+            "CT scan (recommended for Grade 3-4): precise 3D trochlear groove geometry, tibial torsion angle measurement, TPA (tibial plateau angle) — essential for complex surgical planning",
+            "Cranial drawer test and tibial compression test: rule out concurrent CrCL rupture (15-20% risk in Grade 3-4)",
+            "Contralateral stifle evaluation: 50% bilateral; image both stifles",
+        ],
+        "treatment": "Grade 1: conservative management (weight control, joint supplements, moderate exercise, non-slip flooring), monitoring; surgery rarely needed. Grade 2: surgery recommended if progressive lameness or pain. Grade 2-4: surgical correction — trochlear sulcoplasty (block recession preferred over wedge for cartilage preservation) + medial imbrication/lateral release + tibial tuberosity transposition (TTT); Grade 3-4 may require derotational tibial osteotomy or femoral osteotomy for severe torsion. Concurrent CrCL rupture: TPLO preferred. Post-operative: strict rest 6-8 weeks → progressive rehabilitation (passive ROM → assisted walking → swimming weeks 3-8). NSAIDs peri-operatively (carprofen 4.4 mg/kg SID 7-14 days); gabapentin 5-10 mg/kg BID if neuropathic component. Bilateral cases: stage surgeries 6-8 weeks apart.",
+        "treatment_ja": "Grade 1：保存療法（体重管理、関節サプリメント、滑り止め床）で経過観察；手術はまれ。Grade 2：進行性跛行/疼痛で手術推奨。Grade 2〜4：外科矯正—滑車溝形成術（骨ブロック陥凹術が軟骨保護の点で優先）＋内側縫縮/外側解放＋脛骨粗面転位術（TTT）；Grade 3〜4は重篤な捻転に対して脛骨/大腿骨矯正骨切りも必要な場合がある。前十字靭帯断裂合併：TPLO優先。術後：6〜8週の厳格な安静→漸進的リハビリ（受動的ROM→補助歩行→水泳3〜8週）。NSAIDs周術期（カルプロフェン4.4 mg/kg SID 7〜14日）；ガバペンチン5〜10 mg/kg BID（神経障害性疼痛成分）。両側性：6〜8週間隔で段階的手術。",
+        "prognosis": "Grade 1-2: excellent with conservative management or early surgery (>90% success). Grade 3-4: good to excellent with surgery (85-90% return to normal function); reluxation rate 10-15%; concurrent CrCL rupture requires additional TPLO. Long-term OA management required in advanced grades. Bilateral cases managed sequentially have comparable outcomes to unilateral.",
+        "prognosis_ja": "Grade 1〜2：保存療法または早期手術で優良（>90%成功）。Grade 3〜4：外科治療で良好〜優良（85〜90%が正常機能に回復）；再脱臼率10〜15%；前十字靭帯断裂合併例は追加TPLO手術が必要。進行したGradeでは長期OA管理が必要。両側性例を段階的に管理した場合の成績は片側性と同等。",
+        "prevention": "Breeding restriction (avoid breeding affected dogs), weight management, non-slip flooring in puppies of predisposed breeds, avoid excessive jumping during growth.",
+        "prevention_ja": "罹患犬の繁殖制限。体重管理。好発犬種の子犬での滑り止め床の使用。成長期の過度なジャンプを避ける。",
         "urgency": "normal",
     },
     {
