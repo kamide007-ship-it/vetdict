@@ -1111,53 +1111,38 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Heartworm Disease",
-        "name_ja": "フィラリア症（犬糸状虫症）",
+        "name_ja": "犬糸状虫症（フィラリア症）",
         "symptoms": {
             "coughing",
             "lethargy",
             "difficulty_breathing",
+            "excessive_panting",
             "weight_loss",
             "bloated_abdomen",
-            "excessive_panting",
         },
-        "description": "Parasitic worms residing in the heart and pulmonary "
-        "arteries, causing progressive organ damage.",
-        "description_ja": "Dirofilaria immitisが犬の肺動脈と右心室に寄生する致死的寄生虫疾患。"
-        "蚊を介して感染し、成虫は体長15〜30cmに達する。感染から症状発現まで"
-        "6〜7ヶ月の潜伏期間。日本を含む温暖な地域で広く分布。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "感染性L3幼虫（蚊刺咬）→皮下・筋肉で発育→L5幼虫→血流経由で肺動脈に到達→成虫化。"
-        "肺動脈内膜の機械的損傷→増殖性動脈内膜炎→肺高血圧→右心不全。"
-        "大量寄生時：後大静脈症候群（Caval syndrome）→溶血性貧血、DIC、ショック。"
-        "死滅虫体による肺動脈血栓塞栓症も重大な合併症。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "Dirofilaria immitis。蚊（Aedes, Culex, Anopheles等）が中間宿主。"
-        "感染犬の血液中のミクロフィラリア→蚊体内でL3に発育→新たな犬への感染。"
-        "屋外飼育犬、予防薬未投与犬がハイリスク。",
-        "treatment": "AHS 2014 protocol: Pre-treatment: doxycycline 10 mg/kg PO BID × 4 weeks (eliminates Wolbachia endosymbiont, weakens worms) + start monthly macrocyclic lactone preventive. "
-        "Adulticide: melarsomine dihydrochloride (Immiticide) 2.5 mg/kg deep IM (lumbar epaxial muscles) — 3-dose protocol: "
-        "1st injection → 30 days rest → 2nd + 3rd injections 24 hours apart. "
-        "Strict exercise restriction 6-8 weeks after each injection (dead worm pulmonary thromboembolism prevention). "
-        "Prednisolone 0.5 mg/kg PO SID tapering over 4 weeks to reduce pulmonary inflammation. "
-        "Caval syndrome (acute massive worm burden): surgical worm extraction via jugular venotomy (emergency). "
-        "Class 1-2 (mild-moderate): standard protocol. Class 3 (severe): stabilize with cage rest, prednisone, and monthly preventive before adulticide. "
-        "Slow-kill method (preventive-only) NOT recommended by AHS — promotes macrocyclic lactone resistance. "
-        "Post-treatment antigen testing at 6 and 12 months.",
-        "treatment_ja": "【成虫駆除】メラルソミン（イミティサイド）2.5mg/kg 深部筋注×3回（AHSプロトコール）。"
-        "駆除前：ドキシサイクリン（10mg/kg BID 4週間、共生菌Wolbachia駆除）"
-        "＋予防薬開始（ミクロフィラリア対策）。"
-        "成虫駆除後6〜8週間の厳格な運動制限（死滅虫体による肺血栓塞栓症予防）。"
-        "Caval syndrome：外科的虫体摘出（経頸静脈法）。"
-        "Slow kill法（予防薬のみ長期投与）は耐性形成リスクがあり非推奨。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "クラス1〜2（軽症〜中等症）：メラルソミン治療で良好（成功率98%）。"
-        "クラス3（重症）：治療リスクは高いが多くは回復可能。"
-        "Caval syndrome：緊急手術で50〜80%生存。無治療では致死的。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "月1回の予防薬投与（イベルメクチン、ミルベマイシン、モキシデクチン等）が最も有効。"
-        "年1回の抗原検査。蚊の発生する4月〜12月（日本）に通年投与が推奨。"
-        "投与開始前のフィラリア検査が必須。",
+        "description": "Dirofilaria immitis adult worm infestation of pulmonary arteries and right heart causing pulmonary hypertension, right heart failure, and potentially caval syndrome.",
+        "description_ja": "犬糸状虫（Dirofilaria immitis）の肺動脈・右心への寄生→増殖性動脈内膜炎→肺高血圧→右心不全。大量寄生時はcaval syndrome（後大静脈症候群）→溶血・DIC・ショック。",
+        "pathophysiology": "Dirofilaria immitis life cycle: mosquito ingests microfilariae (L1) from infected dog -> mosquito salivary gland L3 larvae develop (temperature-dependent: >18degC required for development, not possible in Japan except Okinawa/southwestern regions historically) -> L3 inoculated via mosquito bite -> L3->L4->L5 in subcutaneous/muscle tissue over 3-4 months -> L5 (juvenile adults) enter pulmonary arteries via bloodstream -> maturation to adults (males 12-20 cm, females 25-31 cm) in pulmonary arteries and right heart (6-9 months to adulthood). Worm burden 1-250 (average 15-25 in untreated dogs). Pathophysiology: (1) Mechanical: worm mass physically obstructs pulmonary arterial blood flow -> increased resistance -> pulmonary hypertension -> right ventricular pressure overload -> RV dilation/hypertrophy -> right heart failure (ascites, pleural effusion, hepatomegaly). (2) Inflammatory: worm surface proteins + dying worms release antigens -> endothelial TLR activation -> proliferative endarteritis -> arterial wall thickening -> vessel narrowing independent of worm burden. Wolbachia endosymbiont: obligate intracellular bacteria within worms -> release during worm death (treatment or natural) -> amplifies inflammatory response -> acute lung injury risk. Caval syndrome (vena cava obstruction): massive worm burden fills right atrium/tricuspid valve -> venous obstruction -> hemolysis from mechanical RBC damage -> hemoglobinuria + anemia + DIC + cardiogenic shock -> fatal within hours without surgical extraction. Thromboembolism: dead worms post-treatment lodge in pulmonary arteries -> acute cor pulmonale -> death if exercise not restricted during treatment.",
+        "pathophysiology_ja": "感染性L3幼虫（蚊刺咬）→皮下・筋肉で発育→L5幼虫→血流経由で肺動脈に到達→成虫化。肺動脈内膜の機械的損傷→増殖性動脈内膜炎→肺高血圧→右心不全。大量寄生時：後大静脈症候群（Caval syndrome）→溶血性貧血、DIC、ショック。死滅虫体による肺動脈血栓塞栓症も重大な合併症。",
+        "causes": "Dirofilaria immitis transmitted by Aedes, Culex, Anopheles mosquitoes. Endemic: southeastern USA, southern Europe, Japan (Okinawa/southern regions historically), South America, Southeast Asia, Mediterranean. Prevention failure or lack of prevention.",
+        "causes_ja": "Dirofilaria immitisのヤブカ属・イエカ属・ハマダラカ属による媒介。流行地：米国南東部・南欧・日本（沖縄・九州以南の歴史的流行地）・南米・東南アジア・地中海。予防薬の未使用または予防失敗。",
+        "treatment": "AHS 2014 protocol (Canitello-Kramer guideline). Pre-treatment workup: chest radiograph, CBC, chemistry, microfilaria test, antigen test. Pre-treatment: (1) Doxycycline 10 mg/kg PO q12h x 4 weeks (eliminates Wolbachia, weakens adult worms + reduces antigen burden, reduces thromboembolism severity). (2) Start monthly macrocyclic lactone prevention (ivermectin 6-12 ug/kg or milbemycin) to kill new infections and circulating microfilariae. STRICT exercise restriction throughout treatment. Adulticide: Melarsomine dihydrochloride (Immiticide): deep IM injection in epaxial muscles L3-L5. Two-dose protocol (class 1-2 dogs): 2.5 mg/kg IM x1, then 2.5 mg/kg IM x2 (24h apart) 1 month later. Single injection (class 3-4): single 2.5 mg/kg IM, then two-dose protocol 1 month later. Post-injection: strict rest (crate rest) 4-6 weeks (prevent thromboembolism from dead worm fragments). Caval syndrome: surgical extraction (jugular venotomy, alligator forceps under fluoroscopy) BEFORE adulticide.",
+        "treatment_ja": "AHS 2014プロトコル。前処置：(1) ドキシサイクリン10 mg/kg PO q12h×4週（Wolbachia除菌・成虫弱体化・抗原量低減・血栓塞栓症重篤度軽減）。(2) 月1回のマクロサイクリックラクトン予防薬（イベルメクチン6-12 ug/kgまたはミルベマイシン）開始。成虫駆除薬：メラルソミン塩酸塩（Immiticide）：背柱起立筋L3-L5深部IM注射。2回投与プロトコル（クラス1-2）：2.5 mg/kg IM 1回→1ヶ月後に2.5 mg/kg IM×2回（24時間間隔）。Caval syndrome：外科的虫体摘出（頸静脈切開、アリゲーター鉗子、透視下）→成虫駆除薬。厳格な運動制限（治療中全期間）。",
+        "prognosis": "Class 1 (asymptomatic): excellent (>95% clearance). Class 2 (mild signs): good (90%). Class 3 (moderate): guarded (70-80%). Class 4 (caval syndrome): poor without surgery (20-40% mortality); good if surgical extraction + adulticide (60-80% survival).",
+        "prognosis_ja": "クラス1（無症候性）：優良（>95%駆除成功）。クラス2（軽度症状）：良好（90%）。クラス3（中等度）：慎重（70-80%）。クラス4（Caval syndrome）：手術なしでは不良（致死率20-40%）；外科的摘出＋成虫駆除で60-80%生存。",
+        "prevention": "Monthly macrocyclic lactone prevention (ivermectin, milbemycin, moxidectin): 100% effective when used year-round. Mosquito avoidance. Annual antigen testing (detects occult infection).",
+        "prevention_ja": "月1回のマクロサイクリックラクトン予防薬（イベルメクチン・ミルベマイシン・モキシデクチン）：通年使用で100%有効。蚊対策。年1回の抗原検査（潜伏感染の検出）。",
+        "recommended_tests": [
+            "フィラリア抗原検査 (Heartworm Antigen Test) - ELISA; 100% specificity for adult female worms",
+            "ミクロフィラリア検査 (Microfilaria Test) - modified Knott's test or filter concentration",
+            "胸部レントゲン (Thoracic Radiograph) - pulmonary arterial enlargement, cardiomegaly, alveolar infiltrates",
+            "心エコー (Echocardiography) - worm visualization in right heart/PA, severity of PHT",
+            "全血球計算 (CBC) - eosinophilia, basophilia, thrombocytopenia",
+            "血液生化学 (Blood Chemistry) - pre-treatment renal/hepatic function baseline",
+        ],
         "urgency": "high",
+        "onset_pattern": "chronic",
+        "age_predisposition": "all_ages",
     },
     {
         "name": "Lyme Disease",
@@ -6065,16 +6050,35 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Anterior Lens Luxation",
         "name_ja": "前方水晶体脱臼",
-        "symptoms": {"eye_redness", "squinting", "eye_discharge", "pain_on_touch"},
-        "description": "The lens displaces forward into the anterior chamber, causing acute glaucoma and pain; a surgical emergency.",
-        "description_ja": "水晶体が前房に前方脱臼し、急性緑内障と痛みを引き起こす外科的緊急症です。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
+        "symptoms": {
+            "eye_redness",
+            "eye_discharge",
+            "squinting",
+            "pain_on_touch",
+        },
+        "description": "Emergency ocular condition where zonular fiber rupture allows the lens to displace into the anterior chamber, causing pupillary block, acute glaucoma, and rapid vision loss.",
+        "description_ja": "チン小帯断裂→水晶体の前房への脱出→瞳孔ブロック→房水流出路閉塞→眼圧急上昇（>40 mmHg）→数時間以内に視神経不可逆障害→失明。後方脱臼より緊急度格段に高い。",
+        "pathophysiology": "Zonular fibers (suspensory ligaments of lens, composed of fibrillin-1 microfibrils) rupture -> lens displaced from its normal position in the posterior chamber. Primary lens luxation (PLL): ADAMTS17 mutation (inherited, autosomal recessive) causes abnormal zonular fiber development -> progressive weakening -> rupture; breed-specific: Jack Russell Terrier, Parson Russell Terrier, Tibetan Terrier, Border Collie, Sealyham Terrier (ADAMTS17 gene testing available). Secondary lens luxation: uveitis-associated zonular degeneration, trauma, buphthalmos (globe enlargement stretches zonules). Anterior luxation (most urgent): lens in anterior chamber (AC) -> pupillary block: lens physically obstructs iris-cornea angle + aqueous humor outflow through trabecular meshwork -> acute angle-closure glaucoma. Intraocular pressure (IOP) rise: 40-80 mmHg (normal 15-25 mmHg) -> mechanical compression of optic nerve head + ischemia (central retinal artery pressure reduction) -> photoreceptor and ganglion cell death within 24-72h. Concurrent corneal endothelial damage from lens contact -> bullous keratopathy (corneal edema, bluish hue). Posterior luxation (in vitreous): less urgent (posterior chamber decompresses more easily) but still requires monitoring for uveitis and secondary glaucoma. Fellow eye risk: 50-80% develop PLL in contralateral eye within 6 months -> prophylactic carbonic anhydrase inhibitor + monitoring mandatory.",
         "pathophysiology_ja": "毛様体小帯（チン小帯）の断裂→水晶体が前房へ脱出→瞳孔ブロック（水晶体が虹彩と角膜の間に嵌頓）→房水流出路の完全閉塞→眼圧の急激な上昇（>40mmHg）→数時間以内に視神経障害→不可逆的失明。後方脱臼と比較して緊急度が格段に高い。角膜内皮障害→角膜浮腫も合併。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "原発性（ADAMTS17遺伝子変異、常染色体劣性）：テリア種に好発（ジャックラッセル、ミニチュアブルテリア、チベタンテリア、ウィペット）。3〜8歳で発症。続発性：慢性緑内障による眼球拡大・小帯伸展、ぶどう膜炎、外傷、白内障手術後。片眼発症後、対側も高率に発症。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "好発犬種のADAMTS17遺伝子検査による繁殖管理。亜脱臼段階での予防的水晶体摘出を検討。片眼発症時は対側の定期モニタリング（スリットランプ・眼圧測定）。緊急手術：眼内水晶体摘出術（ICLE）。",
+        "causes": "Primary: ADAMTS17 gene mutation (autosomal recessive, PLL in terrier breeds), heritable zonular dysplasia. Secondary: uveitis-induced zonular lysis, blunt trauma, buphthalmos, hypermature cataract.",
+        "causes_ja": "一次性：ADAMTS17遺伝子変異（常染色体劣性；テリア犬種のPLL）、遺伝性小帯形成不全。二次性：ぶどう膜炎による小帯融解、鈍的外傷、牛眼症（眼球拡大）、過熟白内障。",
+        "treatment": "Intracapsular lens extraction (ICLE) is the treatment of choice for anterior luxation - urgent (within 24h). Pre-surgical IOP reduction: dorzolamide/timolol combination (Cosopt) q8-12h + glycerin oral 1 mL/kg q8h (osmotic agent). Emergency IOP >50 mmHg: mannitol 1-2 g/kg IV over 30 min. Pre-op miotic (latanoprost 0.005% topical q30 min x 3 doses) may induce posterior reluxation (lens falls back into vitreous) - reduces surgical urgency but not substitute for surgery. ICLE technique: complete lens removal including capsule (phacoextraction inadequate alone for dislocated lens). Posterior luxation (no glaucoma): topical miotic + IOP monitoring; surgery when or if anterior migration occurs. Fellow eye prophylaxis: dorzolamide/timolol + 6-month ophthalmology check; ADAMTS17 genetic testing of breeding dogs.",
+        "treatment_ja": "水晶体嚢内摘出術（ICLE）が前方脱臼の第一選択（24時間以内に緊急）。術前眼圧降下：ドルゾラミド/チモロール配合点眼（コソプト）q8-12h＋経口グリセリン1 mL/kg q8h。眼圧>50 mmHg緊急：マンニトール1-2 g/kg IV over 30分。術前縮瞳薬（ラタノプロスト0.005% q30分×3回）で後方再脱臼を誘発（手術緊急度は下がるが手術は必須）。対側眼予防：ドルゾラミド/チモロール点眼＋6ヶ月毎の眼科検査；繁殖犬のADAMTS17遺伝子検査。",
+        "prognosis": "Good if surgery within 24h (70-80% visual). Poor if delayed >48h or IOP >50 mmHg >24h (permanent blindness likely). Contralateral eye develops PLL in 50-80% within 6 months. Genetic testing prevents spread in breeding lines.",
+        "prognosis_ja": "24時間以内の手術で予後は良好（視力保存70-80%）。48時間超遅延または眼圧>50 mmHg>24時間持続で不可逆性失明。対側眼は6ヶ月以内に50-80%でPLL発症。繁殖犬の遺伝子検査で血統内拡大を防止。",
+        "prevention": "ADAMTS17 genetic testing of breeding animals (avoid affected x carrier crosses). Screen contralateral eye regularly. Regular tonometry in predisposed breeds after age 3.",
+        "prevention_ja": "繁殖犬のADAMTS17遺伝子検査（罹患×キャリアの交配を避ける）。対側眼の定期検査。素因犬種の3歳以降の定期眼圧測定。",
+        "recommended_tests": [
+            "眼圧測定 (Tonometry) - IOP >40 mmHg confirms acute glaucoma; serial measurements q1-2h",
+            "細隙灯検査 (Slit Lamp Biomicroscopy) - lens position in anterior chamber, aphakic crescent",
+            "眼底検査 (Fundoscopic Examination) - optic disc cupping, retinal changes",
+            "眼部エコー (Ocular Ultrasound B-scan) - lens position, vitreous state",
+            "ADAMTS17遺伝子検査 (ADAMTS17 Genetic Test) - breeding management; fellow eye risk assessment",
+            "ERG (Electroretinogram) - retinal function before surgery if vision status unclear",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "middle_aged",
     },
     {
         "name": "Eyelid Mass (Meibomian Gland Adenoma)",
@@ -7205,16 +7209,36 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tracheal Foreign Body",
         "name_ja": "気管異物",
-        "symptoms": {"coughing", "difficulty_breathing", "rapid_breathing", "drooling", "excessive_panting"},
-        "description": "Foreign object lodged in the trachea causing acute respiratory distress and violent coughing.",
-        "description_ja": "気管内に異物が嵌頓し、急性呼吸困難と激しい咳嗽を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
+        "symptoms": {
+            "coughing",
+            "difficulty_breathing",
+            "rapid_breathing",
+            "excessive_panting",
+            "drooling",
+        },
+        "description": "Obstruction of the tracheal lumen by an aspirated foreign body causing acute respiratory distress requiring urgent endoscopic or surgical removal.",
+        "description_ja": "気管内異物→気道部分/完全閉塞→窒息リスク。気管支鏡で可視化・除去が原則。完全閉塞時は気管切開が即時救命処置。気道粘膜刺激による激しい咳嗽発作から気づかれる。",
+        "pathophysiology": "Aspiration of foreign body (most common: small balls, seeds, grass awns, food particles, bone fragments, needles) into trachea during eating/playing. FB lodges where tracheal lumen narrows: subglottic region (just below vocal folds - narrowest point of trachea), tracheal carina (bifurcation), right main bronchus (straighter angle from carina - more common in humans, less predictable in dogs). Partial obstruction: inspiratory stridor (FB acts as one-way valve: air entry during negative-pressure inspiration, ball-valve obstruction on expiration in check-valve mechanism) -> gas trapping distal -> emphysema + atelectasis alternating. Severe partial obstruction: increased respiratory effort + accessory muscle use -> paradoxical breathing + fatigue -> respiratory failure. Complete obstruction: immediate apnea -> rapid hypoxia -> cardiac arrest within 3-5 min. Secondary effects: mucosal inflammation from FB contact -> edema -> worsening obstruction -> tracheitis -> secondary bacterial pneumonia (typically Pasteurella, Streptococcus). Sharp FBs: tracheal perforation -> pneumomediastinum -> tension pneumothorax or subcutaneous emphysema. Grass awns (plant FBs): migrate distally, penetrate bronchial wall -> lung abscess, pyothorax (in cats typically; dogs less common but occurs). Radiographic: many FBs radiopaque (bone, metal) but grass/plastic are radiolucent -> diagnosis requires bronchoscopy.",
         "pathophysiology_ja": "異物（小さなボール・種子・草片・食物片・骨片）の気管内吸引→気道部分閉塞（吸気性喘鳴・呼気時の弁膜効果）→気道粘膜の刺激→激しい咳嗽反射。完全閉塞→窒息→数分で心停止。部分閉塞でも二次的な気管浮腫→閉塞の進行。胸部X線で気管内異物の描出、気管支鏡で確認・除去。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "小さなボール（スーパーボール等）の誤嚥、植物の種子（草の穂・芒）の吸引、食物片（骨の破片）の誤嚥。活発に遊ぶ若齢犬に多い。口でボールを咥えて遊ぶ際に咽頭に滑り込み気管に入る事故が最多。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "犬の口に完全に入るサイズのボール・玩具の使用禁止、骨片の給餌回避、草の穂が多い場所での注意。緊急処置：大型犬はハイムリック法を試みる→気管支鏡的除去が確実。",
+        "causes": "Small rubber toys/balls, grass awns, seeds, bone fragments, needles, food particles (rawhide, corn cob pieces). Dogs that chew small objects or scavenge. Puppies (inquisitive, less cautious). History of sudden onset coughing/dyspnea during eating or play.",
+        "causes_ja": "小型ゴムボール・草の穂・種子・骨片・縫い針・食物片（トウモロコシの芯等）。小物を噛む犬・採食中の犬・子犬。食事中や遊び中の突然発症の咳嗽/呼吸困難の病歴が鍵。",
+        "treatment": "EMERGENCY — airway is priority. 1. If complete obstruction with collapse: Heimlich maneuver (sharp compressions behind last rib) or back blows. Emergency tracheostomy BELOW FB level (if Heimlich fails). 2. Oxygen supplementation (flow-by, mask, or intubation above FB). 3. Endoscopic removal: Rigid bronchoscopy under short-acting anesthesia (propofol 4-6 mg/kg IV or alfaxalone 2-3 mg/kg IV) with retrieval forceps or basket. Flexible bronchoscope + forceps for distally located FB. Keep dog in sternal/sitting position until sedation (gravity helps prevent complete obstruction). 4. If endoscopy fails: surgical tracheotomy with FB extraction (longitudinal incision in cervical trachea). 5. Post-removal: Tracheal/bronchial lavage + culture. Antibiotics (amoxicillin/clavulanate 15-20 mg/kg PO q12h x 7-10 days) if inflammation/contamination. Nebulization + coupage for secretion clearance. Dexamethasone 0.1-0.2 mg/kg IV once (reduce post-endoscopy edema). Radiograph post-removal (ensure complete removal + no pneumothorax).",
+        "treatment_ja": "気道確保が最優先。1. 完全閉塞・虚脱時：ハイムリック法（最後肋骨後方で鋭い圧迫）または背部打叩法。失敗時：異物より尾側で緊急気管切開。2. 酸素補給（フローバイ/マスク/挿管）。3. 内視鏡的除去：短時間麻酔（プロポフォール4-6 mg/kg IVまたはアルファキサロン2-3 mg/kg IV）下で硬性気管支鏡＋鉗子/バスケット。遠位部の場合は軟性気管支鏡。4. 内視鏡失敗時：気管切開術（頸部気管縦切開）。5. 除去後：気管/気管支洗浄＋培養。抗菌薬（アモキシシリン/クラブラン酸15-20 mg/kg PO q12h×7-10日）。デキサメタゾン0.1-0.2 mg/kg IV 1回（内視鏡後浮腫軽減）。除去後のX線確認（完全除去＋気胸がないことを確認）。",
+        "prognosis": "Excellent with prompt endoscopic removal (survival >95%). Mortality risk if complete obstruction > 3-5 min. Grass awn migration: guarded (abscess/pyothorax risk). Sharp FB with tracheal perforation: guarded.",
+        "prognosis_ja": "迅速な内視鏡的除去で予後は優良（生存率>95%）。完全閉塞>3-5分では死亡リスク。草の穂の遊走：慎重（膿瘍/膿胸リスク）。鋭利異物による気管穿孔：慎重。",
+        "prevention": "Supervise dogs with small toys; avoid giving small balls to large dogs. Avoid chicken/pork bones (easily splintered). Remove grass awns from coat/paws after outdoor activity.",
+        "prevention_ja": "小型玩具でのプレイ監視；大型犬への小型ボール禁止。鶏/豚骨を与えない（砕けやすい）。野外活動後の被毛/肢端からの草穂除去。",
+        "recommended_tests": [
+            "胸部・頸部レントゲン (Thoracic + Cervical Radiograph) - radiopaque FB, emphysema, atelectasis pattern",
+            "気管支鏡 (Bronchoscopy) - definitive diagnosis + therapeutic removal; first-line",
+            "血液ガス分析 (Arterial Blood Gas) - hypoxemia severity, CO2 retention",
+            "パルスオキシメトリ (Pulse Oximetry) - continuous SpO2 monitoring",
+            "胸部CT (Thoracic CT) - grass awn migration, lung abscess, pneumomediastinum",
+            "気管支肺胞洗浄液培養 (BAL Culture) - secondary infection after FB removal",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "young",
     },
     # ---- Urogenital ----
     {
@@ -8545,16 +8569,36 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tetralogy of Fallot",
         "name_ja": "ファロー四徴症",
-        "symptoms": {"collapse", "difficulty_breathing", "lethargy", "excessive_panting", "seizures"},
-        "description": "Complex congenital heart defect causing cyanosis and exercise intolerance.",
-        "description_ja": "4つの異常からなる複合先天性心疾患です。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
+        "symptoms": {
+            "lethargy",
+            "collapse",
+            "seizures",
+            "difficulty_breathing",
+            "excessive_panting",
+        },
+        "description": "Complex congenital cardiac defect with four components: VSD, pulmonic stenosis, aortic override, and right ventricular hypertrophy, causing right-to-left shunting, cyanosis, and polycythemia.",
+        "description_ja": "4つの先天性心異常（VSD・肺動脈狭窄・大動脈騎乗・右室肥大）→肺動脈高度狭窄で右-左シャント→全身性チアノーゼ・多血症・運動不耐性。チアノーゼ発作（hypercyanotic spell）が致死的。",
+        "pathophysiology": "Embryological conotruncal septation failure creates 4 anatomical defects: (1) Ventricular septal defect (VSD): large perimembranous or outlet VSD; (2) Pulmonic stenosis (PS): subvalvular (infundibular/RVOTO most common), valvular, supravalvular, or combined; (3) Aortic override (dextroposition): aortic root positioned directly over VSD receives blood from both RV and LV; (4) Right ventricular hypertrophy (RVH): compensatory from increased RV pressure load. Hemodynamic consequences determined by PS severity: (a) Mild PS: left-to-right shunting (similar to VSD alone, acyanotic); (b) Moderate PS: balanced shunting, intermittent cyanosis; (c) Severe PS (most dog cases): RV pressure > LV pressure -> right-to-left shunting across VSD -> desaturated (venous) blood enters systemic circulation -> cyanosis. Desaturated blood stimulates erythropoietin -> compensatory polycythemia (PCV 60-80%) -> increased O2 carrying capacity partially compensates hypoxemia; BUT: hyperviscosity syndrome (PCV >65%) -> sludging, thrombosis, CNS events. Hypercyanotic spells (TF spells): acute increase in RVOTO (infundibular muscle spasm from catecholamines) or decrease in SVR -> acute worsening of right-to-left shunt -> severe hypoxemia -> syncope, seizure-like activity, loss of consciousness -> potentially fatal. Ketamine and phenothiazines increase RVOTO risk (contraindicated). Iron deficiency (not polycythemia-related) may worsen hypoxemia paradoxically (iron-deficient microcytic RBCs are less deformable -> worsen hyperviscosity without O2-carrying benefit).",
         "pathophysiology_ja": "4つの異常：(1)心室中隔欠損（VSD）、(2)肺動脈狭窄、(3)大動脈騎乗（VSDをまたぐ大動脈起始部偏位）、(4)右室肥大。肺動脈狭窄の重症度が臨床像を決定→高度狭窄では右-左シャント→全身性チアノーゼ（低酸素血症）→運動不耐性・失神・多血症。hypercyanotic spell（チアノーゼ発作）が致死的。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "先天性心奇形。犬で4番目に多い先天性心疾患。ケースホンド・ブルドッグに好発。出生時から心雑音を有するが、チアノーゼは成長に伴い顕在化。多血症（PCV>65%）が合併→血液粘度上昇→血栓リスク。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "好発犬種の繁殖管理。軽度は内科管理（β遮断薬・定期的な瀉血で多血症管理）。根治には開心術が必要だが犬での実施は限定的。激しい運動の制限。",
+        "causes": "Congenital embryological defect (conotruncal septation failure). Breed predisposition: English Bulldog, Keeshond, Poodle, Jack Russell Terrier, Miniature Pinscher. Keeshond: polygenic inheritance partially characterized.",
+        "causes_ja": "先天性胚発生異常（円錐動脈幹中隔化障害）。素因犬種：イングリッシュブルドッグ・キースホンド・プードル・ジャックラッセルテリア・ミニピン。キースホンド：多遺伝子性遺伝が部分的に解明。",
+        "treatment": "Palliative management (definitive open-heart surgery rarely available in dogs). Beta-blocker: Atenolol 0.5-2 mg/kg PO q12h (reduces infundibular spasm/RVOTO + controls tachycardia -> reduces hypercyanotic spell frequency). Hypercyanotic spell (EMERGENCY): Oxygen, knee-chest position (increases SVR), phenylephrine 0.01 mg/kg IV (alpha-1 agonist, increases SVR -> reduces right-to-left shunt) OR Propranolol 0.02-0.05 mg/kg IV slowly (reduces infundibular spasm). AVOID: epinephrine (increases RVOTO), atropine (tachycardia worsens), vasodilators (reduce SVR). Polycythemia management: therapeutic phlebotomy when PCV >65-70% (remove 10-20 mL/kg blood, replace with equal volume crystalloid) -> reduces hyperviscosity, improves microcirculation. Palliative surgery: Blalock-Taussig shunt (subclavian artery to pulmonary artery anastomosis) - increases pulmonary blood flow, reduces cyanosis; performed at specialized centers. Iron supplementation if iron-deficient microcytosis.",
+        "treatment_ja": "緩和的治療（犬での根治的開心術は稀）。ベータ遮断薬：アテノロール0.5-2 mg/kg PO q12h（漏斗部攣縮抑制・頻脈制御→チアノーゼ発作頻度低減）。チアノーゼ発作（緊急）：酸素・膝胸位（SVR増加）、フェニレフリン0.01 mg/kg IV（α1作動薬：SVR増加→右左シャント減少）またはプロプラノロール0.02-0.05 mg/kg IV緩徐。禁忌：エピネフリン（RVOTO増悪）・アトロピン（頻脈増悪）・血管拡張薬（SVR低下）。多血症：治療的瀉血（PCV>65-70%：10-20 mL/kg採血、同量晶質液補充）。緩和的手術：Blalock-Taussig短絡術（専門施設）。鉄欠乏性小球性貧血：鉄補充。",
+        "prognosis": "Guarded to poor; most dogs die from hypercyanotic spells, thromboembolism, or progressive hypoxia by 1-3 years. Mild TOF: can survive 5+ years with medical management. Blalock-Taussig shunt: median survival 3-4 years. Definitive repair: rarely performed in dogs.",
+        "prognosis_ja": "慎重から不良。多くの犬はチアノーゼ発作・血栓塞栓症・進行性低酸素血症で1-3歳までに死亡。軽症TOF：内科的管理で5年以上生存可能。Blalock-Taussig術：生存期間中央値3-4年。",
+        "prevention": "Do not breed affected animals or first-degree relatives. Echocardiographic screening of breeding animals. Genetic testing for Keeshond TOF mutations.",
+        "prevention_ja": "罹患動物および一等親の繁殖禁止。繁殖犬の心エコースクリーニング。キースホンドのTOF遺伝子検査。",
+        "recommended_tests": [
+            "心エコー (Echocardiography + Doppler) - VSD size, PS gradient (Bernoulli 4v2), aortic override, RVH",
+            "心電図 (ECG) - right axis deviation, RVH pattern",
+            "胸部レントゲン (Thoracic Radiograph) - boot-shaped heart (coeur en sabot), decreased pulmonary vasculature",
+            "全血球計算 (CBC) - PCV (polycythemia severity), erythrocyte morphology",
+            "動脈血ガス (Arterial Blood Gas) - PaO2 <60 mmHg = severe hypoxemia",
+            "心臓カテーテル (Cardiac Catheterization) - pre-surgical pressure measurements if Blalock-Taussig planned",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "chronic",
+        "age_predisposition": "young",
     },
     {
         "name": "Pulmonary Thromboembolism",
