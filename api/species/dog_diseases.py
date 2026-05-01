@@ -1142,9 +1142,16 @@ DISEASES: List[Dict[str, Any]] = [
         "中枢性：脳幹の前庭核障害→垂直眼振・方向変換眼振・固有位置感覚障害→意識レベル変化。"
         "末梢性と中枢性の鑑別が臨床的に極めて重要。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "末梢性：特発性（老齢犬、最多）、中耳炎/内耳炎、甲状腺機能低下症、耳毒性薬物。"
-        "中枢性：脳腫瘍、脳炎（GME等）、脳血管障害（脳梗塞・出血）、外傷。"
-        "特発性前庭疾患は高齢犬（12歳以上）に好発。",
+        "causes_ja": "末梢性：特発性（老齢犬、最多）、中耳炎/内耳炎、甲状腺機能低下症、耳毒性薬物。中枢性：脳腫瘍、脳炎（GME等）、脳血管障害（脳梗塞・出血）、外傷。特発性前庭疾患は高齢犬（12歳以上）に好発。",
+        "recommended_tests": [
+            "Neurological exam (CRITICAL — peripheral vs central differentiation): Peripheral signs (good prognosis): horizontal or rotary nystagmus (fast phase away from lesion), head tilt toward lesion, intact postural reactions, no other CN deficits; Central signs (urgent MRI): vertical or changing nystagmus, bilateral or absent postural reactions, multiple CN deficits, altered mentation",
+            "Otoscopic exam: tympanic membrane integrity (ruptured = otitis media?), debris, exudate, polyp",
+            "Skull CT (bullae windows): middle ear fluid/soft tissue, bulla sclerosis (chronic otitis), effusion — superior to radiographs for middle ear evaluation; MRI for CNS assessment",
+            "MRI brain (with contrast): mandatory for central vestibular signs — brain tumor (meningioma, choroid plexus), GME, infarct (T2/FLAIR hyperintensity), cerebellar disease, congenital anomaly",
+            "Thyroid panel (total T4 + free T4 by equilibrium dialysis + TSH): hypothyroidism-associated vestibular disease (often concurrent polyneuropathy); especially in middle-aged large breeds",
+            "CBC/chemistry/urinalysis: baseline metabolic evaluation; blood pressure (hypertension → vascular brain disease in older dogs)",
+            "Ear cytology/culture: if otitis present — Pseudomonas, Staphylococcus, Malassezia; sensitivity testing for chronic/resistant cases",
+        ],
         "treatment": "Idiopathic vestibular disease (most common): symptomatic treatment — maropitant 1 mg/kg PO/SC SID for nausea, meclizine 25 mg/dog PO BID. "
         "Short-term diazepam 0.2-0.5 mg/kg PO BID for severe anxiety/disorientation (2-3 days only). "
         "Most improve within 72 hours, full recovery in 2-3 weeks. Supportive care: assisted walking (sling/harness), non-slip mats, "
@@ -7527,14 +7534,26 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Degenerative Myelopathy",
         "name_ja": "変性性脊髄症",
         "symptoms": {"limping_rl", "limping_rr", "stiffness", "reluctance_move", "incontinence"},
-        "description": "Progressive degenerative disease of the spinal cord causing hind limb weakness.",
-        "description_ja": "脊髄の進行性変性疾患で後肢の脱力を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "SOD1遺伝子変異→スーパーオキシドジスムターゼ1の異常→脊髄白質（特に胸腰椎領域の背側索・側索）の進行性軸索変性・脱髄→上位運動ニューロン性後肢不全麻痺→進行して下位運動ニューロン性麻痺→前肢にも波及→最終的に呼吸筋障害。人のALS（筋萎縮性側索硬化症）と類似。発症から完全対麻痺まで6〜36ヶ月。非疼痛性。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "SOD1遺伝子変異（常染色体劣性）。ホモ接合体（A/A）で発症リスクが高い。好発犬種：ジャーマンシェパード（最多）、ウェルシュコーギー・ペンブローク、ボクサー、ロードシアンリッジバック、チェサピークベイレトリーバー。8歳以上で発症。除外診断（IVDD等を除外後）＋SOD1遺伝子検査で臨床診断。確定は剖検時の脊髄病理のみ。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "SOD1遺伝子検査による繁殖管理（ホモ接合体犬の繁殖制限）。治療法はないが、リハビリテーション（水泳・車椅子）でQOLと筋量維持。ビタミンE・B群・EPA/DHAの補充が一部で推奨されるがエビデンスは限定的。",
+        "description": "Progressive, painless degeneration of the spinal cord white matter causing slowly ascending UMN hind limb paresis → paralysis → forelimb involvement → respiratory failure. Canine equivalent of ALS. Onset typically >8 years. German Shepherd, Welsh Corgi Pembroke, Boxer, Rhodesian Ridgeback predisposed. SOD1 gene mutation (autosomal recessive) — homozygous (A/A) highest risk. Definitive diagnosis requires post-mortem spinal cord histopathology; clinical diagnosis by exclusion.",
+        "description_ja": "脊髄白質の進行性・非疼痛性変性。上位運動ニューロン性後肢不全麻痺→麻痺→前肢→呼吸筋障害へと昇行する。犬のALS相当。発症は通常>8歳。ジャーマンシェパード、ウェルシュコーギー・ペンブローク、ボクサー、ロードシアンリッジバックに好発。SOD1遺伝子変異（常染色体劣性）。確定診断は剖検時の脊髄病理のみ；臨床診断は除外診断で行う。",
+        "pathophysiology": "SOD1 gene mutation → superoxide dismutase 1 dysfunction → oxidative stress accumulation → progressive axonal degeneration and demyelination of spinal cord white matter (dorsal funiculus + lateral corticospinal tracts, initially T3-L3) → UMN hind limb paresis (intact deep pain, no pain response) → ascending progression → LMN signs in hind limbs, then forelimbs → respiratory muscle failure. Analogous to human ALS. Non-painful throughout all stages.",
+        "pathophysiology_ja": "SOD1遺伝子変異→スーパーオキシドジスムターゼ1の異常→酸化ストレス蓄積→脊髄白質（主に胸腰部T3-L3の背側索・側索）の進行性軸索変性・脱髄→上位運動ニューロン性後肢不全麻痺（深部痛覚は保持、疼痛なし）→昇行性進行→後肢LMN症状、次いで前肢→呼吸筋障害。人のALSに類似。全ての病期を通じて非疼痛性。",
+        "causes": "SOD1 gene mutation (autosomal recessive). Homozygous (A/A) dogs at highest risk; heterozygous (A/N) moderate risk; normal (N/N) very low risk. Predisposed breeds: German Shepherd (most common), Welsh Corgi Pembroke, Boxer, Rhodesian Ridgeback, Chesapeake Bay Retriever. Age >8 years. Disease progression: onset (mild ambulatory paresis) → 6 months (non-ambulatory) → 12-18 months (paraplegia) → 18-36 months (forelimb + respiratory involvement).",
+        "causes_ja": "SOD1遺伝子変異（常染色体劣性）。ホモ接合体（A/A）が最高リスク；ヘテロ接合体（A/N）は中程度；正常（N/N）は非常に低リスク。好発犬種：ジャーマンシェパード（最多）、ウェルシュコーギー・ペンブローク、ボクサー、ロードシアンリッジバック、チェサピークベイレトリーバー。発症年齢：>8歳。疾患進行：発症（軽度歩行性不全麻痺）→6ヶ月（歩行不能）→12〜18ヶ月（完全対麻痺）→18〜36ヶ月（前肢・呼吸筋障害）。",
+        "recommended_tests": [
+            "SOD1 gene mutation test (breed-specific DNA test via OFA/ACVIM-approved laboratories): homozygous (A/A) at-risk, heterozygous (A/N) carrier; confirm breed association — essential for breeding decisions; cannot diagnose DM alone (some A/A dogs do not develop DM)",
+            "MRI of spinal cord: rule out compressive causes (IVDD, disc-associated Wobbler, spinal tumor) — DM shows no compressive lesion; T2 hyperintensity in white matter in advanced cases (non-specific); spinal cord atrophy in chronic cases",
+            "CSF analysis: normal or mildly elevated protein in DM — rule out GME, meningitis, infectious myelitis",
+            "Neurological exam: UMN pattern (increased reflexes, preserved deep pain, conscious proprioception deficits, no spinal pain — CRITICAL distinction from IVDD which is painful); bilateral, symmetric, slowly progressive hind limb weakness",
+            "Electrodiagnostics (EMG + nerve conduction velocity): axonal degeneration in paraspinal muscles; delayed nerve conduction — differentiates DM (UMN) from peripheral neuropathy (LMN) in advanced disease",
+            "Hindlimb standing/gait video documentation: objective progression monitoring every 1-3 months for physical therapy response assessment",
+        ],
+        "treatment": "No disease-modifying therapy. Management focuses on maximizing QOL and ambulatory time. Physical rehabilitation (most critical): intensive hydrotherapy (underwater treadmill 15-20 min BID), swimming, assisted standing exercises, cavaletti rails, proprioception training — proven to significantly slow progression and extend ambulatory period (mean 6 months with intensive rehab vs 3 months without). Mobility aids: wheelchair cart (K9 cart) when non-ambulatory — allows continued exercise and prevents pressure sores; fit as soon as dog is non-ambulatory. Nursing care (non-ambulatory stage): urinary catheterization or manual bladder expression (BID-TID), fecal management, turning every 2-4 hours, padded bedding to prevent decubital ulcers, skin hygiene. Nutritional support: omega-3 EPA/DHA 40-100 mg/kg/day, vitamin E 400-800 IU/day, vitamin B complex — supportive, limited evidence. N-acetylcysteine (NAC) 70 mg/kg SID: antioxidant, theoretical SOD1 benefit. Aminocaproic acid 500 mg/dog PO TID: historically used, minimal evidence. Euthanasia counseling: initiated when respiratory compromise apparent (respiratory rate/effort) or QOL no longer acceptable — typically 1-3 years from onset.",
+        "treatment_ja": "疾患修飾療法なし。QOLと歩行期間の最大化が管理の目標。理学療法（最も重要）：集中的水中リハビリ（水中トレッドミル1日2回各15〜20分）、水泳、補助立位運動、カバレッティレール、固有位置感覚訓練—進行を有意に遅らせ歩行期間を延長することが証明されている（集中リハビリあり：平均6ヶ月 vs なし：3ヶ月）。モビリティ補助：車椅子カート（歩行不能時）—運動継続と床ずれ予防のために歩行不能になり次第装着。看護ケア（歩行不能期）：導尿または用手的膀胱排尿（1日2〜3回）、排便管理、2〜4時間毎の体位変換、クッション性の高い寝床で床ずれ予防、皮膚衛生。栄養補助：EPA/DHA 40〜100 mg/kg/日、ビタミンE 400〜800 IU/日、ビタミンBコンプレックス。N-アセチルシステイン（NAC）70 mg/kg SID：抗酸化、SOD1への理論的効果。安楽死カウンセリング：呼吸困難が明らかになった時点またはQOLが許容できなくなった時点で開始—通常発症から1〜3年。",
+        "prognosis": "Progressive and fatal — no cure. Mean survival from diagnosis to euthanasia: 6 months to 3 years depending on owner commitment to rehabilitation. Intensive physical therapy can double or triple ambulatory period. Death/euthanasia due to respiratory failure, recurrent aspiration pneumonia, or owner decision based on QOL. Breeding: strongly recommend SOD1 testing before breeding; avoid A/A × A/A matings.",
+        "prognosis_ja": "進行性・致死的—根治なし。診断から安楽死までの生存期間中央値：リハビリへのオーナーのコミットメントにより6ヶ月〜3年。集中的理学療法は歩行期間を2〜3倍延長可能。死亡/安楽死は呼吸不全・反復性誤嚥性肺炎またはQOLに基づくオーナーの判断による。繁殖：繁殖前のSOD1検査を強く推奨；A/A同士の交配を避ける。",
+        "prevention": "SOD1 gene testing for breeding management (avoid homozygous × homozygous matings). No environmental prevention possible. Intensive physical rehabilitation from early signs to maximize ambulatory period.",
+        "prevention_ja": "繁殖管理のためのSOD1遺伝子検査（ホモ接合体同士の交配を避ける）。環境的予防法はない。歩行期間を最大化するために初期症状から集中的な理学療法を開始。",
         "urgency": "normal",
     },
     {
