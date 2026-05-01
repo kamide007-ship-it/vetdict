@@ -269,82 +269,87 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Canine Parvovirus",
         "name_ja": "犬パルボウイルス感染症",
-        "symptoms": {"vomiting", "bloody_stool", "lethargy", "appetite_loss", "fever", "diarrhea"},
-        "description": "A highly contagious and potentially fatal viral illness "
-        "that attacks the gastrointestinal tract, most dangerous "
-        "in puppies.",
-        "description_ja": "犬パルボウイルス2型（CPV-2）による高伝染性のウイルス疾患。腸管上皮の急速に分裂する細胞を標的とし、"
-        "重度の出血性腸炎を引き起こす。ワクチン未接種の子犬（6週〜6ヶ月齢）で最も致死率が高い。"
-        "ロットワイラー、ドーベルマン、ジャーマンシェパード等が好発品種。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "経口感染後、ウイルスはまずリンパ組織で増殖し、ウイルス血症を経て腸管陰窩上皮細胞に到達する。"
-        "陰窩上皮の壊死により絨毛が崩壊し、吸収障害・出血性下痢・細菌の二次感染（敗血症）を引き起こす。"
-        "同時に骨髄の造血前駆細胞も攻撃され、白血球減少症（特にリンパ球減少）を伴う。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "犬パルボウイルス2型（CPV-2a, 2b, 2c亜型）。糞口経路で感染し、環境中で数ヶ月〜1年以上生存可能。"
-        "ワクチン未接種、母体移行抗体の低下期、免疫抑制状態がリスク因子。",
-        "treatment": "No specific antiviral therapy; supportive care is the cornerstone. (1) Aggressive IV fluid therapy (lactated Ringer's, crystalloids + colloids) to correct dehydration and electrolyte imbalances. (2) Anti-emetics: maropitant 1 mg/kg IV q24h. (3) Broad-spectrum antibiotics (ampicillin 22 mg/kg IV q8h + enrofloxacin 5-10 mg/kg IV q24h) for secondary bacterial infection prevention. (4) Nutritional support: early enteral nutrition recommended (within 24-48h). FFP transfusion and anti-endotoxin antibodies considered for severe cases. Monitor WBC, glucose, and electrolytes q12-24h.",
-        "treatment_ja": "特異的抗ウイルス薬はなく、支持療法が主体。(1)積極的な輸液療法（乳酸リンゲル液、晶質液＋膠質液）、"
-        "(2)制吐薬（マロピタント0.1mg/kg IV q24h）、(3)広域抗菌薬（アンピシリン＋エンロフロキサシン等）で二次感染予防、"
-        "(4)栄養サポート（早期経腸栄養が推奨）。重症例ではFFP輸血や抗エンドトキシン抗体も検討。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "早期の積極的治療で生存率85〜95%。無治療では致死率91%以上。白血球数<1,000/μLや低アルブミン血症は予後不良因子。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "コアワクチン（MLV）を6〜8週齢から2〜4週間隔で16週齢以降まで接種。年1回の追加接種。"
-        "感染環境の次亜塩素酸ナトリウム消毒（1:30希釈）。",
+        "symptoms": {"lethargy", "bloody_stool", "vomiting", "fever", "diarrhea", "appetite_loss"},
+        "description": "Highly contagious viral gastroenteritis caused by CPV-2 (subtypes 2a/2b/2c). Targets rapidly dividing cells of intestinal crypts and bone marrow, causing hemorrhagic enteritis and profound immunosuppression. Highest mortality in unvaccinated puppies 6 weeks–6 months old. Rottweilers, Dobermans, American Pit Bull Terriers have breed-specific susceptibility. Virus survives in environment for months to years; bleach (1:32) required for decontamination.",
+        "description_ja": "犬パルボウイルス2型（CPV-2）による高伝染性のウイルス疾患。腸管上皮の急速に分裂する細胞を標的とし、重度の出血性腸炎を引き起こす。ワクチン未接種の子犬（6週〜6ヶ月齢）で最も致死率が高い。ロットワイラー、ドーベルマン、アメリカン・ピット・ブル・テリアは品種感受性が高い。ウイルスは環境中に数ヶ月〜1年以上生存し、次亜塩素酸（1:32希釈）での消毒が必要。",
+        "pathophysiology": "CPV-2 binds to transferrin receptor 1 (TfR1) on rapidly dividing cells. Primary replication in oropharyngeal lymph nodes → viremia by day 1-5 → seeding of intestinal crypt epithelium and bone marrow. Crypt cell destruction collapses villous architecture, causing: (1) malabsorption and secretory diarrhea; (2) loss of mucosal barrier → bacterial translocation (predominantly gram-negative enteric bacteria) → endotoxemia → systemic inflammatory response syndrome. Concurrent bone marrow suppression causes leukopenia (lymphopenia first, then neutropenia by day 4-6), impairing bacterial clearance. Protein-losing enteropathy leads to hypoalbuminemia, which reduces oncotic pressure and drives third-spacing of fluids. Hypokalemia from vomiting/diarrhea causes ileus and cardiac arrhythmias. Septic shock and DIC are the terminal pathway in fatal cases.",
+        "pathophysiology_ja": "CPV-2はトランスフェリン受容体1（TfR1）を介して急速分裂細胞に結合。口咽頭リンパ節での初期増殖→1〜5日目にウイルス血症→腸管陰窩上皮と骨髄への播種。陰窩破壊により絨毛構造が崩壊し：(1)吸収不良・分泌性下痢；(2)粘膜バリア消失→細菌転座（グラム陰性腸内細菌）→エンドトキシン血症→全身炎症反応症候群。骨髄抑制による白血球減少（リンパ球減少→好中球減少）が細菌排除を障害。タンパク漏出性腸症→低アルブミン血症→第三腔への水分貯留。嘔吐・下痢による低カリウム血症が腸管麻痺・不整脈を誘発。敗血症性ショックとDICが致死的転帰の最終経路。",
+        "causes": "Canine Parvovirus type 2 (CPV-2a, 2b, 2c subtypes). Fecal-oral transmission; virus survives in environment months to over 1 year. Risk factors: unvaccinated status, waning maternal antibody window (6-12 weeks), immunosuppression, crowded/shelter environments, breed susceptibility.",
+        "causes_ja": "犬パルボウイルス2型（CPV-2a, 2b, 2c亜型）。糞口経路で感染し、環境中で数ヶ月〜1年以上生存可能。ワクチン未接種、母体移行抗体の低下期、免疫抑制状態、過密環境（シェルターなど）が高リスク因子。",
+        "treatment": "No specific antiviral therapy; aggressive supportive care is the cornerstone. (1) IV fluid resuscitation: isotonic crystalloids (LRS or 0.9% NaCl) to correct dehydration; add 20 mEq/L KCl once urine output confirmed. Target: normalize PCV, TP, lactate. (2) Antibiotic therapy: ampicillin 22 mg/kg IV q8h + enrofloxacin 5 mg/kg IV q24h (avoid in puppies <4 months; use metronidazole 15 mg/kg IV q12h instead for anaerobes). (3) Antiemetics: maropitant (Cerenia) 1 mg/kg IV/SC q24h — superior to metoclopramide for CPV vomiting; ondansetron 0.5-1 mg/kg IV q12h as adjunct. (4) Colloidal support: if albumin <1.5 g/dL, administer 6% hetastarch 5-10 mL/kg IV slowly or human albumin 1-2 g/kg IV over 4-6h (anaphylaxis risk). (5) Nutritional support: early enteral nutrition via NE tube (4-8h post-admission) if not vomiting — reduces mucosal atrophy and bacterial translocation, improves survival. (6) Pain management: buprenorphine 0.02 mg/kg IV q6-8h if abdominal discomfort. (7) Recombinant feline interferon-omega (rFeIFN-omega, Virbagen Omega): 2.5 MU/kg IV q24h x3 days — EMA-approved; reduces mortality and shortens hospitalization in European studies. (8) Discharge criteria: tolerating oral food/water without vomiting, afebrile, WBC >2000/μL.",
+        "treatment_ja": "特異的抗ウイルス薬なし。積極的な支持療法が主軸。(1)輸液：乳酸リンゲル液または生理食塩水で脱水補正；尿産生確認後KCl 20 mEq/L添加。(2)抗菌薬：アンピシリン22 mg/kg IV 8時間毎＋エンロフロキサシン5 mg/kg IV 24時間毎（4ヶ月未満はメトロニダゾール15 mg/kg IV 12時間毎）。(3)制吐薬：マロピタント1 mg/kg SC 24時間毎＋オンダンセトロン0.5〜1 mg/kg IV 12時間毎。(4)膠質液：アルブミン<1.5 g/dLでヘタスターチまたはヒトアルブミン。(5)早期経腸栄養：入院4〜8時間後より経鼻胃管で少量開始（生存率改善）。(6)鎮痛：ブプレノルフィン0.02 mg/kg IV 6〜8時間毎。(7)組換えネコインターフェロンオメガ2.5 MU/kg IV 24時間毎×3日（EMA承認、死亡率低下）。",
+        "prognosis": "With aggressive inpatient supportive care, survival rate 70-95%. Without treatment, mortality approaches 91%. Poor prognostic indicators: leukopenia (WBC <500/μL), hypoalbuminemia (<1.2 g/dL), hypothermia (<37°C), hemorrhagic diarrhea within 12h of presentation, endotoxemia/DIC. Hospitalization typically 3-7 days. Survivors have long-lasting immunity.",
+        "prognosis_ja": "積極的な入院治療で生存率70〜95%。無治療では死亡率約91%。不良予後因子：白血球数<500/μL、低アルブミン血症（<1.2 g/dL）、低体温（<37°C）、来院12時間以内の血便、エンドトキシン血症/DIC。入院期間は通常3〜7日。回復犬は長期免疫を獲得。",
+        "prevention": "Core vaccine (MLV CPV-2): 3-dose puppy series (6, 9-10, 12-16 weeks); booster at 1 year, then every 3 years. Maternal antibody interference resolved by 16-week final dose. Isolate unvaccinated puppies from dog parks/shelters until fully vaccinated. Environmental decontamination with 1:32 bleach solution (CPV resistant to most disinfectants).",
+        "prevention_ja": "コアワクチン（MLV CPV-2）：子犬3回接種（6週、9〜10週、12〜16週）後、1歳時追加接種、以後3年毎。ワクチン未接種犬のドッグパーク・シェルター立ち入り禁止。環境消毒は次亜塩素酸ナトリウム1:32希釈液（ほとんどの消毒薬に抵抗性）。",
+        "recommended_tests": [
+            "SNAP CPV antigen ELISA (fecal): 96-98% sensitivity/specificity; false-negative in early infection or post-vaccination; perform before antibiotic administration",
+            "CBC with differential: lymphopenia then neutropenia by day 4-6; WBC <500/μL = severe; repeat q24-48h to monitor bone marrow recovery",
+            "Serum chemistry panel + electrolytes: BUN/creatinine (pre-renal azotemia), albumin (protein-losing enteropathy), ALT, glucose, Na/K/Cl — guide fluid supplementation",
+            "Venous blood gas + lactate: assess acid-base status; lactate >4 mmol/L = severe tissue hypoperfusion; guide fluid resuscitation endpoints",
+            "Fecal PCR (CPV-2 quantitative): confirms diagnosis when SNAP negative but clinical suspicion high; distinguishes vaccine strain vs field strain",
+            "Abdominal ultrasound: fluid-filled ileus pattern, hyperechoic mesenteric LN, rule out intussusception (complication in 1-4% of CPV cases)",
+            "Serum albumin + TP: if albumin <1.5 g/dL, colloidal support indicated; monitor q24h",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "young",
     },
     {
         "name": "Canine Distemper",
         "name_ja": "犬ジステンパー",
-        "symptoms": {"fever", "nasal_discharge", "eye_discharge", "coughing", "lethargy", "seizures", "vomiting"},
-        "description": "A serious viral disease affecting the respiratory, gastrointestinal, and nervous systems.",
-        "description_ja": "犬ジステンパーウイルス（CDV、パラミクソウイルス科モルビリウイルス属）による多臓器感染症。"
-        "呼吸器→消化器→神経系と段階的に進行し、特にワクチン未接種の若齢犬で致死率が高い。"
-        "二相性発熱（初期発熱→一時解熱→再発熱）が特徴的。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "エアロゾル感染後、上気道リンパ組織で初期増殖→ウイルス血症→全身のリンパ組織、上皮組織、中枢神経系へ播種。"
-        "リンパ球融解によるリンパ球減少→免疫抑制→日和見感染の併発。晩期には脱髄性脳脊髄炎を引き起こし、"
-        "ミオクローヌス（チューインガム発作）や痙攣が出現。ハードパッド病（足底角化）も特徴的。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "犬ジステンパーウイルス（CDV）。飛沫感染・直接接触で伝播。"
-        "ワクチン未接種犬、免疫不全犬、3〜6ヶ月齢の子犬が高リスク。フェレット等の野生動物も感受性あり。",
-        "treatment": "No specific antiviral therapy. Supportive care is the mainstay: (1) Broad-spectrum antibiotics for secondary bacterial infection control (ampicillin 22 mg/kg IV q8h + enrofloxacin 5-10 mg/kg IV q24h). (2) IV fluid therapy and nutritional management. (3) Anticonvulsants for neurological signs: diazepam 0.5-1 mg/kg IV for acute seizures, phenobarbital 2-4 mg/kg PO q12h for maintenance. Interferon therapy has been reported but evidence is limited. Isolate affected dogs. Disinfect environment (CDV is fragile but highly contagious via aerosol).",
-        "treatment_ja": "特異的治療薬なし。支持療法が主体：(1)広域抗菌薬で二次細菌感染の制御、(2)輸液・栄養管理、"
-        "(3)抗痙攣薬（ジアゼパム、フェノバルビタール）で神経症状の管理。"
-        "インターフェロン投与の報告もあるが、エビデンスは限定的。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "神経症状出現前の呼吸器型では回復の可能性あり。神経型に進行した場合は予後不良で致死率50%以上。"
-        "回復しても永続的な神経後遺症（ミオクローヌス、エナメル質低形成）が残ることがある。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "コアワクチン（MLVジステンパーワクチン）を子犬期に3回接種後、年1回追加接種。"
-        "感染犬との接触回避。",
+        "symptoms": {"eye_discharge", "lethargy", "fever", "coughing", "vomiting", "seizures", "nasal_discharge"},
+        "description": "Multisystemic infection by Canine Distemper Virus (CDV; Paramyxoviridae, Morbillivirus). Follows a biphasic fever pattern with sequential involvement of respiratory, gastrointestinal, and nervous systems. Highest mortality in unvaccinated puppies 3-6 months old. CDV also infects ferrets and wildlife (raccoons, foxes). Neurological signs may develop weeks to months after acute illness, even after apparent recovery.",
+        "description_ja": "犬ジステンパーウイルス（CDV、パラミクソウイルス科モルビリウイルス属）による多臓器感染症。二相性発熱を示し、呼吸器→消化器→神経系と段階的に進行。ワクチン未接種の3〜6ヶ月齢子犬で致死率が最も高い。フェレット・アライグマ・キツネにも感染。神経症状は急性期回復後、数週〜数ヶ月後に出現することがある。",
+        "pathophysiology": "CDV is an enveloped RNA virus. Infection route: respiratory droplets → tonsils/pharyngeal lymph nodes → primary viremia (day 2-4) → replication in spleen, lymph nodes, bone marrow → profound lymphopenia (immunosuppression). Secondary viremia (day 7-14) seeds epithelial cells of respiratory, GI, and urinary tracts via hemagglutinin (H) binding to SLAM/CD150 receptor on immune cells and nectin-4 on epithelial cells. Respiratory phase: mucopurulent nasal discharge, interstitial pneumonia (CDV directly + opportunistic bacteria). GI phase: vomiting, diarrhea, mucosal inflammation. Neurological phase: CDV crosses BBB via infected lymphocytes → oligodendrocyte infection → demyelination → polioencephalomyelitis. Neuropathological hallmarks: intranuclear and intracytoplasmic inclusion bodies in astrocytes/neurons. Old Dog Encephalitis (ODE) is a rare, progressive demyelinating form in previously vaccinated dogs.",
+        "pathophysiology_ja": "CDVは飛沫感染後、扁桃/咽頭リンパ節で初期増殖→1次ウイルス血症（2〜4日目）→脾臓・リンパ節・骨髄での複製→高度なリンパ球減少（免疫抑制）。2次ウイルス血症（7〜14日目）：ヘマグルチニン（H）がSLAM/CD150受容体（免疫細胞）とネクチン4（上皮細胞）に結合し上皮細胞に播種。神経期：感染リンパ球がBBBを通過→オリゴデンドロサイト感染→脱髄→多巣性脳脊髄炎。病理学的特徴：アストロサイト・神経細胞内の核内および細胞質内封入体。",
+        "causes": "Canine Distemper Virus (CDV; Paramyxoviridae, genus Morbillivirus). Aerosol/contact transmission. High risk: unvaccinated dogs, immunocompromised, puppies 3-6 months, shelter/high-density environments, ferrets.",
+        "causes_ja": "犬ジステンパーウイルス（CDV）。飛沫感染・直接接触で伝播。ワクチン未接種犬、免疫不全犬、3〜6ヶ月齢の子犬が高リスク。フェレット等の野生動物も感受性あり。",
+        "treatment": "No specific antiviral therapy. Supportive care is the mainstay: (1) Antibiotics for secondary bacterial pneumonia: ampicillin 22 mg/kg IV q8h + enrofloxacin 5-10 mg/kg IV q24h (avoid <4 months). (2) Nebulization + coupage for respiratory secretions. (3) IV fluids for dehydration correction; maropitant 1 mg/kg IV q24h for vomiting. (4) Neurological management: phenobarbital 2-4 mg/kg PO/IV q12h for seizure control; diazepam 0.5 mg/kg IV for acute seizures. Prednisone 0.5-1 mg/kg/day may reduce neuroinflammation in subacute neurological CDV (controversial). (5) Ribavirin (antiviral): limited evidence; 10 mg/kg PO q8h has been used experimentally — off-label only. (6) N-acetylcysteine 70 mg/kg IV q6h — mucolytic + hepatoprotective. (7) Eye care: artificial tears, topical antibiotics for secondary conjunctivitis. (8) Nutritional support: NE tube if anorexic >48h.",
+        "treatment_ja": "特異的抗ウイルス薬なし。支持療法が主軸。(1)二次性細菌性肺炎：アンピシリン22 mg/kg IV 8時間毎＋エンロフロキサシン5〜10 mg/kg IV 24時間毎。(2)ネブライザー＋クーパージュ。(3)輸液＋マロピタント1 mg/kg IV 24時間毎。(4)神経症状：フェノバルビタール2〜4 mg/kg PO/IV 12時間毎；急性発作にジアゼパム0.5 mg/kg IV；神経炎症抑制にプレドニゾロン0.5〜1 mg/kg/日（論議あり）。(5)リバビリン（オフラベル実験的）10 mg/kg PO 8時間毎。(6)N-アセチルシステイン70 mg/kg IV 6時間毎（粘液溶解・肝保護）。(7)眼：人工涙液＋局所抗菌薬。(8)食欲廃絶48時間超：経鼻チューブ栄養。",
+        "prognosis": "Highly variable: dogs with only respiratory/GI signs have better prognosis. Once neurological signs develop, prognosis is guarded to grave — only 50% recover, and many have permanent neurological deficits. Old Dog Encephalitis is invariably fatal. Recovery from acute phase does not prevent later neurological relapse. Euthanasia may be appropriate for dogs with severe, progressive neurological disease.",
+        "prognosis_ja": "呼吸器・消化器症状のみの場合は予後比較的良好。神経症状出現後は予後不良〜絶望的（回復50%のみ、後遺症多数）。老犬ジステンパー脳炎は不可逆的に致死的。急性期回復後も神経症状が後発する可能性あり。重篤な進行性神経疾患では安楽死を検討。",
+        "prevention": "Core vaccine (MLV CDV): 3-dose puppy series (6, 9-10, 12-16 weeks); booster at 1 year, then every 3 years. Isolate infected dogs. Avoid contact with wildlife in CDV-endemic areas.",
+        "prevention_ja": "コアワクチン（MLV CDVワクチン）を子犬期に3回接種後、1歳時追加接種、以後3年毎。感染犬との接触遮断。CDV流行地域での野生動物との接触回避。",
+        "recommended_tests": [
+            "Conjunctival/nasal cytology (Diff-Quik stain): intranuclear and intracytoplasmic inclusion bodies in epithelial cells — pathognomonic in acute phase; most sensitive in first 7-10 days",
+            "CDV RT-PCR (whole blood, conjunctival swab, urine): high sensitivity in viremic phase; CSF PCR for neurological cases; interpret with vaccination history (MLV may cause transient PCR positivity 3-14 days post-vaccination)",
+            "CDV serum neutralization titer: acute/convalescent pair (4-fold rise = active infection); single titer >1:100 suggests natural infection vs vaccination if unvaccinated",
+            "CBC: leukopenia (lymphopenia), thrombocytopenia common; inclusion bodies visible in RBCs/lymphocytes on blood smear in early infection",
+            "Chest radiographs: interstitial to alveolar pattern; assess pneumonia severity; bilateral patchy infiltrates suggest CDV pneumonia",
+            "MRI (brain): multifocal T2 hyperintensities in cerebellum, brainstem, white matter — best imaging for CDV encephalitis; superior to CT",
+            "CSF analysis: mononuclear pleocytosis (CDV-encephalitis); elevated protein; send for CDV PCR and neutralizing antibody titer",
+        ],
         "urgency": "high",
+        "onset_pattern": "acute",
+        "age_predisposition": "young",
     },
     {
         "name": "Kennel Cough (Bordetella)",
         "name_ja": "ケンネルコフ（犬伝染性気管気管支炎）",
-        "symptoms": {"coughing", "sneezing", "nasal_discharge", "reverse_sneezing", "lethargy"},
-        "description": "A highly contagious respiratory infection causing a persistent, forceful cough.",
-        "description_ja": "Bordetella bronchisepticaを主な原因菌とする犬の急性伝染性気管気管支炎。"
-        "犬アデノウイルス2型、犬パラインフルエンザウイルス等との混合感染が多い。"
-        "ペットホテルやドッグランなど多頭飼育環境で発生しやすい。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "飛沫・エアロゾル感染により気道上皮に付着→線毛運動障害と粘膜炎症→"
-        "乾性〜湿性の発作的な咳（ガチョウ様咳嗽）。気管圧迫で誘発される特徴的な咳反射。"
-        "通常は上気道に限局するが、免疫不全犬では気管支肺炎に進展する場合がある。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "Bordetella bronchiseptica（最主要）、犬パラインフルエンザウイルス、犬アデノウイルス2型、"
-        "犬呼吸器コロナウイルス、マイコプラズマ等の混合感染。多頭飼育、ストレス、換気不良がリスク因子。",
-        "treatment": "Mild cases: self-limiting (1-3 weeks), antitussive therapy (butorphanol 0.5-1 mg/kg PO q6-12h or hydrocodone 0.22 mg/kg PO q8-12h), environmental management (humidification, rest, avoid collar pressure — use harness). Moderate-severe cases or secondary bacterial infection: doxycycline 5 mg/kg PO q12h for 10-14 days, or azithromycin 5-10 mg/kg PO q24h for 5 days. Nebulization with sterile saline ± gentamicin for lower airway involvement. If bronchopneumonia develops: hospitalize for IV antibiotics, oxygen therapy, and monitoring.",
-        "treatment_ja": "軽症例：自然回復（1〜3週間）、鎮咳薬（ブトルファノール）、環境整備（加湿・安静）。"
-        "重症例・二次感染：ドキシサイクリン(5mg/kg BID 10〜14日)またはアジスロマイシン。"
-        "ネブライザー療法も有効。気管支肺炎への進展時は入院管理。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "免疫正常犬では1〜3週間で自然回復し予後良好。子犬や免疫不全犬では気管支肺炎への進展に注意。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "ワクチン（注射型または経鼻型）接種。多頭飼育環境の換気改善。感染犬の隔離。",
+        "symptoms": {"lethargy", "reverse_sneezing", "coughing", "sneezing", "nasal_discharge"},
+        "description": "Acute infectious tracheobronchitis caused primarily by Bordetella bronchiseptica, frequently in combination with Canine Parainfluenza Virus (CPIV), Canine Adenovirus type 2 (CAV-2), and/or Mycoplasma spp. Characterized by a harsh, honking, paroxysmal cough — often triggered by pressure on the trachea. Highly contagious in group settings (kennels, dog parks, shelters). Usually self-limiting in immunocompetent adults; puppies, geriatric, or immunosuppressed dogs can develop fatal bronchopneumonia.",
+        "description_ja": "Bordetella bronchisepticaを主因とし、犬パラインフルエンザウイルス（CPIV）、犬アデノウイルス2型（CAV-2）、マイコプラズマ等との混合感染が多い急性伝染性気管気管支炎。気管圧迫で誘発されるハーシュ・ハッキング様の発作性乾性咳嗽が特徴。多頭環境（犬舎・ドッグパーク・シェルター）で高伝染性。免疫正常成犬では通常自然軽快するが、子犬・高齢犬・免疫抑制犬では致死的気管支肺炎に進行しうる。",
+        "pathophysiology": "B. bronchiseptica uses filamentous hemagglutinin (FHA), fimbriae, and pertactin to adhere to ciliated respiratory epithelium. Tracheal cytotoxin (TCT) — a fragment of peptidoglycan — directly kills ciliated cells, causing ciliostasis and mucosal disruption. Adenylate cyclase toxin (ACT) raises intracellular cAMP in macrophages and neutrophils, impairing phagocytosis. Dermonecrotic toxin causes local tissue necrosis. Lipopolysaccharide (LPS) activates complement and cytokine cascade. Combined effect: impaired mucociliary clearance → bacterial colonization of airways → submucosal edema → productive inflammation in trachea and bronchi. Secondary bacterial invaders (Pasteurella, Staphylococcus) may cause pneumonia. Viral co-pathogens (CPIV, CAV-2) suppress local immune responses and synergistically worsen mucosal damage.",
+        "pathophysiology_ja": "B. bronchisepticaは線状赤血球凝集素（FHA）・フィンブリア・パータクチンで繊毛気道上皮に付着。気管細胞毒素（TCT、ペプチドグリカン断片）が繊毛細胞を直接傷害し、粘液繊毛輸送を停止させる。アデニル酸シクラーゼ毒素（ACT）がマクロファージ・好中球のcAMPを上昇させ食菌能を障害。壊死毒素（DNT）が局所壊死を引き起こす。結果として粘液繊毛クリアランス障害→気道細菌定着→粘膜下浮腫→気管・気管支での化膿性炎症。CPIVやCAV-2との混合感染が局所免疫をさらに抑制し、損傷を相乗的に増悪させる。",
+        "causes": "Bordetella bronchiseptica (primary); Canine Parainfluenza Virus (CPIV), Canine Adenovirus-2 (CAV-2), Canine Respiratory Coronavirus (CRCoV), Mycoplasma cynos (common co-pathogens). Risk factors: kenneling, dog parks, shelters, unvaccinated status, poor ventilation.",
+        "causes_ja": "Bordetella bronchiseptica（最主要）、犬パラインフルエンザウイルス、犬アデノウイルス2型、犬呼吸器コロナウイルス、マイコプラズマ等の混合感染。リスク因子：犬舎・ドッグパーク・シェルター収容、ワクチン未接種、換気不良環境。",
+        "treatment": "Mild cases (afebrile, alert, eating): self-limiting 1-3 weeks. Antitussive therapy: butorphanol 0.5-1 mg/kg PO q6-12h or hydrocodone 0.22 mg/kg PO q8-12h. Environmental management: humidification, rest, avoid collar pressure (use harness). Antibiotics for bacterial Bordetella: doxycycline 5-10 mg/kg PO q12h x 10-14 days (first choice; must be given with food and water to avoid esophagitis). Alternative: amoxicillin-clavulanate 13.75 mg/kg PO q12h x 14 days. Azithromycin 5-10 mg/kg PO q24h x 5-7 days (good tissue penetration, convenient once-daily dosing). Severe cases (fever, dyspnea, radiographic pneumonia): hospitalization; ampicillin-sulbactam 20-40 mg/kg IV q8h + enrofloxacin 5 mg/kg IV q24h; oxygen supplementation; nebulization with 0.9% NaCl 15 min q8h + coupage. Avoid aerosolized antibiotics — not validated. Systemic glucocorticoids: NOT recommended (impair immune clearance). Re-evaluate if no improvement in 7-10 days on antibiotics.",
+        "treatment_ja": "軽症（無熱・食欲保持）：1〜3週で自然軽快。鎮咳薬：ブトルファノール0.5〜1 mg/kg PO 6〜12時間毎またはヒドロコドン0.22 mg/kg PO 8〜12時間毎。環境管理：加湿、安静、首輪からハーネスへ変更。抗菌薬（Bordetella確認または高疑い）：ドキシサイクリン5〜10 mg/kg PO 12時間毎×10〜14日（第一選択；食事と飲水を必ず同時投与し食道炎予防）。代替：アモキシシリン-クラブラン酸13.75 mg/kg PO 12時間毎、またはアジスロマイシン5〜10 mg/kg PO 24時間毎×5〜7日。重症（発熱・呼吸困難・肺炎像）：入院；アンピシリン-スルバクタム20〜40 mg/kg IV 8時間毎＋エンロフロキサシン5 mg/kg IV 24時間毎；酸素補給；ネブライザー療法。全身性ステロイドは禁忌（免疫クリアランス障害）。",
+        "prognosis": "Excellent in immunocompetent adult dogs — most recover without antibiotics within 1-3 weeks. Guarded in puppies <8 weeks, geriatric dogs, brachycephalic breeds, or immunosuppressed patients — can progress to bronchopneumonia with 20-30% mortality. Prompt antibiotic therapy in bacterial cases significantly shortens illness duration.",
+        "prognosis_ja": "免疫正常成犬では予後優良（抗菌薬なしでも1〜3週で回復）。8週齢未満の子犬・高齢犬・短頭種・免疫抑制犬では気管支肺炎に進行し死亡率20〜30%。早期抗菌薬投与により罹患期間を有意に短縮。",
+        "prevention": "Intranasal vaccine (B. bronchiseptica + CPIV): faster onset (3-7 days); superior local IgA response; recommended for high-risk dogs before kenneling (3-7 days pre-admission). Injectable Bordetella vaccine: 2-dose series then annual. Core vaccine combination (DA2PP) covers CAV-2 and CPIV components. Annual vaccination recommended for dogs in high-exposure environments. Ventilation improvement in kennels: >12 air changes/hour; UV air sterilization optional.",
+        "prevention_ja": "経鼻ワクチン（Bordetella + CPIV）：発現が早く（3〜7日）、局所IgA産生が優れるため、犬舎入所3〜7日前推奨。注射型Bordetellaワクチン：初回2回接種後、年1回。コアワクチン（DA2PP）がCAV-2・CPIVをカバー。多頭飼育環境では年1回接種推奨。犬舎の換気改善：時間当たり12回以上の換気。",
+        "recommended_tests": [
+            "Deep pharyngeal/tracheal wash culture + sensitivity: gold standard for bacterial identification; collect before starting antibiotics; B. bronchiseptica grows on MacConkey agar; request Mycoplasma-specific culture (special transport media)",
+            "Respiratory panel PCR (nasal/oropharyngeal swab): multiplex PCR detects B. bronchiseptica, CPIV, CAV-2, CRCoV, Mycoplasma, Influenza A/B simultaneously; preferred over culture for viral co-pathogens",
+            "CBC: usually normal in mild cases; neutrophilia ± left shift in severe bacterial bronchopneumonia; lymphopenia suggests viral co-infection",
+            "Thoracic radiographs (3-view): mandatory if fever, dyspnea, or no improvement in 7-10 days; ventral lung lobe consolidation = bacterial pneumonia; interstitial pattern = viral",
+            "Tracheal sensitivity to digital pressure (physical exam): positive tracheal pinch reflex (cough elicited by gentle tracheal palpation) is characteristic — high sensitivity for tracheobronchitis",
+        ],
         "urgency": "normal",
+        "onset_pattern": "acute",
+        "age_predisposition": "young",
     },
     {
         "name": "Gastric Dilatation-Volvulus (GDV/Bloat)",
