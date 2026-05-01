@@ -884,17 +884,31 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Glaucoma",
-        "name_ja": "\u7dd1\u5185\u969c",
-        "symptoms": {"eye_redness", "squinting", "lethargy", "pain_on_touch"},
-        "description": "Increased intraocular pressure that can rapidly lead to blindness if untreated.",
-        "description_ja": "眼圧の上昇により、治療しないと急速に失明に至る可能性があります。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "房水の産生・流出バランスの破綻→眼圧上昇（>25mmHg）→視神経乳頭の圧迫・網膜神経節細胞の変性→不可逆的失明。原発性：隅角閉塞（狭隅角）が犬で最多。続発性：水晶体脱臼・ぶどう膜炎・眼内腫瘍に伴う。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "原発性閉塞隅角緑内障（最多、遺伝性）。続発性（水晶体脱臼、ぶどう膜炎、眼内出血、腫瘍）。好発犬種：コッカースパニエル、バセットハウンド、柴犬、シバ、ビーグル。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "好発犬種の定期的眼圧測定（隅角鏡検査）、片眼発症時の対側眼予防投薬（チモロール・ドルゾラミド）、ぶどう膜炎の早期治療。",
+        "name_ja": "緑内障",
+        "symptoms": {"lethargy", "eye_redness", "squinting", "pain_on_touch"},
+        "description": "Elevation of intraocular pressure (IOP) damaging the optic nerve and retinal ganglion cells. Primary glaucoma: genetic predisposition (goniodysgenesis — abnormal iridocorneal angle); breeds: Basset Hound, Chow Chow, Cocker Spaniel, Samoyed, Shih Tzu, Dalmatian, Great Dane. Secondary glaucoma: uveal effusion, lens luxation, neoplasia, hyphema, uveitis. OCULAR EMERGENCY: acute glaucoma causes permanent vision loss within 24-72 hours if IOP untreated. Normal IOP: 10-25 mmHg; acute glaucoma typically >40-60 mmHg. Tonometry (Tono-Pen or Tonovet rebound tonometer) is mandatory.",
+        "description_ja": "眼圧（IOP）上昇による視神経および網膜神経節細胞の傷害。原発性緑内障：遺伝的素因（眼隅角形成異常——虹彩角膜角の異常）；好発品種：バセット・ハウンド、チャウ・チャウ、コッカー・スパニエル、サモエド、シーズー等。続発性緑内障：ぶどう膜滲出・水晶体脱臼・腫瘍・血眼・ぶどう膜炎。眼科的緊急症：急性緑内障はIOPを治療しなければ24〜72時間以内に不可逆的な失明を引き起こす。正常IOP：10〜25 mmHg；急性緑内障は通常>40〜60 mmHg。眼圧計（Tono-PenまたはTonovet反射式）による測定が必須。",
+        "pathophysiology": "Aqueous humor is produced by the ciliary body epithelium → flows through the posterior chamber → through the pupil → into the anterior chamber → exits via the trabecular meshwork → uveoscleral route. IOP equilibrium = production rate / outflow resistance. In glaucoma: outflow obstruction at trabecular meshwork (most common) → IOP rises → mechanical compression of optic nerve axons at lamina cribrosa + reduced blood flow to optic nerve head → retinal ganglion cell (RGC) apoptosis. Glutamate excitotoxicity, oxidative stress, and mitochondrial dysfunction amplify RGC death. Primary goniodysgenesis (POAG in dogs): abnormal trabecular meshwork development → increased outflow resistance from birth → gradual IOP rise (often bilateral). Acute secondary glaucoma: sudden IOP spike from pupillary block (lens luxation occluding pupil), inflammatory debris clogging trabecular meshwork (uveitis), hyphema. Chronic IOP elevation → globe enlargement (buphthalmos) → corneal striae (Haab striae) → corneal edema → lens subluxation → blindness. Optic cup:disc ratio (CDR) expansion = structural glaucomatous damage marker.",
+        "pathophysiology_ja": "房水は毛様体上皮で産生→後房→瞳孔→前房→線維柱帯→ぶどう膜強膜路で流出。IOP均衡 = 産生速度/流出抵抗。緑内障：線維柱帯での流出閉塞（最多）→IOP上昇→篩状板での視神経軸索の機械的圧迫＋視神経乳頭血流低下→網膜神経節細胞（RGC）アポトーシス。グルタミン酸興奮毒性・酸化ストレス・ミトコンドリア機能障害がRGC死を増幅。原発性眼隅角形成異常（犬POAG）：先天性線維柱帯異常→生後から流出抵抗増大→慢性IOP上昇（両側性多い）。急性続発性緑内障：瞳孔ブロック（水晶体脱臼）・炎症性沈殿物による線維柱帯閉塞（ぶどう膜炎）・血眼。慢性IOP上昇→眼球拡大（牛眼）→デスメ膜亀裂（ハーブ線条）→角膜浮腫→水晶体亜脱臼→失明。視神経乳頭陥凹拡大（CDR比増大）が構造的緑内障損傷マーカー。",
+        "causes": "Primary glaucoma: goniodysgenesis (genetic — autosomal dominant in Basset Hound, autosomal recessive in others). Secondary glaucoma: lens luxation (pupillary block), uveitis (inflammatory debris), hyphema, iris bombé (posterior synechia), intraocular neoplasia.",
+        "causes_ja": "原発性：眼隅角形成異常（遺伝性——バセット・ハウンドは常染色体優性、他は劣性）。続発性：水晶体脱臼（瞳孔ブロック）、ぶどう膜炎（炎症性沈殿物）、血眼、虹彩後癒着（瞳孔ブロック）、眼内腫瘍。",
+        "treatment": "ACUTE CRISIS (IOP >40 mmHg): (1) Topical latanoprost 0.005% (prostaglandin analogue) 1 drop q1-2h x2-3 doses — fastest IOP reduction (30-60 min onset); most effective acute agent. (2) Mannitol 1-2 g/kg IV over 20-30 min (osmotic agent — reduces vitreous volume); withhold water 2-3h post-infusion. (3) Topical timolol 0.5% (beta-blocker) 1 drop q12h — reduces aqueous production. (4) Topical dorzolamide 2% (carbonic anhydrase inhibitor) q8h — reduces aqueous production. CHRONIC MANAGEMENT: (5) Fixed-combination dorzolamide/timolol (Cosopt) q8-12h — convenient single-bottle. (6) Topical latanoprost q12-24h (if not already used). (7) Oral carbonic anhydrase inhibitors: methazolamide 2-4 mg/kg PO q12h (fewer systemic side effects than acetazolamide). (8) Surgical options: laser cyclophotocoagulation (reduces aqueous production), gonioimplant/Ahmed valve (drainage device), cycloablation. (9) Blind/painful eye: enucleation or evisceration with silicone prosthesis — humane option to eliminate pain in irreversibly blind eyes. PREVENTIVE (fellow eye): prophylactic treatment of contralateral eye in primary glaucoma (50-60% chance of involvement within 1 year): topical latanoprost q24h ± dorzolamide/timolol. SECONDARY GLAUCOMA: address underlying cause (lens luxation → lens extraction; uveitis → corticosteroids and anti-prostaglandins).",
+        "treatment_ja": "急性緊急処置（IOP>40 mmHg）：(1)ラタノプロスト0.005%点眼 1滴 1〜2時間毎×2〜3回（プロスタグランジン作動薬；30〜60分で最速IOPlow下；急性期の最有効薬）。(2)マンニトール1〜2 g/kg IV 20〜30分（浸透圧利尿；硝子体容量減少；点滴後2〜3時間は水分制限）。(3)チモロール0.5%点眼 1滴 12時間毎（β遮断薬；房水産生抑制）。(4)ドルゾラミド2%点眼 8時間毎（炭酸脱水酵素阻害薬）。慢性管理：ドルゾラミド/チモロール合剤（コソプト）8〜12時間毎；ラタノプロスト12〜24時間毎；メタゾラミド（内服）2〜4 mg/kg 12時間毎。手術：レーザー毛様体光凝固術、ゴニオインプラント（Ahmed弁等）。疼痛のある不可逆的失明眼：眼球摘出または内容除去＋シリコンプロテーゼ（人道的除痛）。対側眼の予防的治療：ラタノプロスト点眼（原発性緑内障で1年以内に50〜60%が対側発症）。",
+        "prognosis": "Acute primary glaucoma: if treated within 24h of onset, vision may be preserved in 70%+ of eyes; delayed treatment (>72h) results in permanent blindness. Chronic primary glaucoma: progressive vision loss inevitable; management preserves vision for months to years in some dogs. Secondary glaucoma: good prognosis if underlying cause (lens luxation, uveitis) treated promptly before permanent damage. Contralateral eye involvement in primary glaucoma: 50-60% within 1 year.",
+        "prognosis_ja": "急性原発性緑内障：発症24時間以内の治療で70%以上の眼で視力保存の可能性；72時間以上遅延すると不可逆的失明。慢性原発性緑内障：視力喪失は進行性だが、管理で数ヶ月〜数年間の視力維持が可能な例も。続発性緑内障：基礎疾患（水晶体脱臼、ぶどう膜炎）を不可逆的損傷前に治療すれば予後良好。対側眼への波及：原発性緑内障で1年以内に50〜60%。",
+        "prevention": "Gonioscopy screening in predisposed breeds before breeding (identifies goniodysgenesis before IOP rises). Prophylactic latanoprost in contralateral eye after unilateral primary glaucoma diagnosis. Annual IOP measurement in predisposed breeds >2 years.",
+        "prevention_ja": "繁殖前の好発品種での隅角鏡検査（眼隅角形成異常のスクリーニング）。片眼原発性緑内障診断後は対側眼へ予防的ラタノプロスト点眼。好発品種では2歳以降の年1回IOP測定。",
+        "recommended_tests": [
+            "Tonometry (Tono-Pen or Tonovet rebound): MANDATORY for any dog with red/painful eye; normal IOP 10-25 mmHg; glaucoma diagnosis if >25 mmHg (confirm on 2 readings); Tonovet preferred in dogs (contact cornea directly, less apprehension bias); measure both eyes",
+            "Gonioscopy: direct visualization of the iridocorneal angle using goniolens; classifies angle as open (normal), narrowed, or closed (goniodysgenesis); essential for primary vs secondary glaucoma differentiation and fellow eye assessment",
+            "Ophthalmic examination (slit-lamp biomicroscopy + indirect ophthalmoscopy): optic disc cupping (CDR expansion), corneal edema, Haab striae, lens luxation, anterior chamber depth, iris abnormalities, vitreous/retinal changes",
+            "Electroretinography (ERG): assesses retinal function (photoreceptor activity); determines if retina is still functional before surgical intervention; absent ERG = retina non-functional, surgery unlikely to restore vision",
+            "Ocular ultrasound (B-mode): assess vitreous (hemorrhage, inflammation), retinal detachment, lens position (subluxation), intraocular masses; useful when corneal opacity prevents direct visualization",
+            "Blood pressure measurement: systemic hypertension (>160 mmHg systolic) can cause secondary optic nerve damage independent of IOP — measure BP in all dogs with optic disc changes",
+        ],
         "urgency": "urgent",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Osteoarthritis",
@@ -965,46 +979,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Intervertebral Disc Disease (IVDD)",
         "name_ja": "椎間板ヘルニア（IVDD）",
-        "symptoms": {"pain_on_touch", "reluctance_move", *_ANY_LIMPING, "stiffness", "anxiety"},
-        "description": "Degeneration or herniation of spinal discs causing "
-        "pain, nerve damage, and potential paralysis.",
-        "description_ja": "椎間板の変性・脱出による脊髄圧迫。Hansen I型（急性、軟骨異栄養性犬種）と"
-        "Hansen II型（慢性、大型犬）に分類。ダックスフント（発生率10〜25倍）、"
-        "コーギー、ビーグル、フレンチブルドッグ、ペキニーズに好発。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "Hansen I型：髄核の軟骨様変性→急性に線維輪を破って脊柱管内へ脱出→脊髄の急性圧迫・挫傷。"
-        "Hansen II型：線維輪の慢性変性・膨隆→脊髄の緩徐な圧迫。"
-        "胸腰部（T11〜L3）が最好発部位。脊髄圧迫の程度によりGrade I（疼痛のみ）〜"
-        "Grade V（深部痛覚消失＋麻痺）に分類。",
-        "causes": "Chondrodystrophic breed genetic predisposition (Hansen Type I). Age-related degeneration (Hansen Type II). Obesity, stair climbing, repetitive jumping as precipitating physical loads.",
-        "causes_ja": "軟骨異栄養性犬種の遺伝的素因（Hansen I型）。加齢性変性（Hansen II型）。肥満、階段昇降、ジャンプ等の物理的負荷が誘発因子。",
+        "symptoms": {"reluctance_move", "stiffness", "anxiety", "limping_rl", "limping_fl"},
+        "description": "Most common spinal cord disorder in dogs. Two distinct types: Hansen Type I (chondrodystrophic breeds — Dachshund, Beagle, French Bulldog, Shih Tzu; nucleus pulposus calcification and acute extrusion) and Hansen Type II (large breeds; fibrous annulus protrusion, progressive). Thoracolumbar junction (T11-L3) most commonly affected. Clinical grading: Grade I (pain only) → Grade II (ambulatory paresis) → Grade III (non-ambulatory paresis) → Grade IV (paralysis, deep pain present) → Grade V (paralysis, no deep pain). Grade V with absent deep pain >48h: poor prognosis. KEY DECISION POINT: surgery vs medical management based on grade and progression rate.",
+        "description_ja": "犬で最も多い脊髄疾患。2つの主要型：ハンセンI型（軟骨異栄養性犬種：ダックスフンド、フレンチ・ブルドッグ等；髄核の石灰化と急性逸脱）、ハンセンII型（大型犬；線維性輪状部の慢性膨隆、進行性）。胸腰移行部（T11〜L3）が最多部位。臨床グレード：I度（疼痛のみ）→II度（歩行可能な不全麻痺）→III度（歩行不能な不全麻痺）→IV度（麻痺、深部痛覚あり）→V度（麻痺、深部痛覚消失）。深部痛覚消失48時間超のV度は予後不良。手術vs内科治療の選択が最重要臨床決定。",
+        "pathophysiology": "Hansen Type I: chondroid metaplasia of nucleus pulposus (NP) occurs in chondrodystrophic breeds from early life — NP transforms from gelatinous hydrated matrix to calcified material. Sudden herniation of calcified NP through degenerated/ruptured annulus fibrosus → acute compressive and concussive injury to spinal cord. Two injury mechanisms: (1) Primary mechanical injury: compression + contusion at impact (velocity-dependent; high-velocity = worse contusion); (2) Secondary injury cascade: ischemia (local vasospasm + venous congestion + disrupted autoregulation → edema), free radical-mediated lipid peroxidation of neuronal membranes, glutamate excitotoxicity, electrolyte imbalances (Na+/K+ pump failure → intracellular Na+ accumulation), mitochondrial dysfunction → delayed apoptosis/necrosis of neurons and oligodendrocytes. Gray matter is more susceptible to primary injury; white matter axons undergo Wallerian degeneration. Progressive myelomalacia (PMM): ascending/descending hemorrhagic necrosis — rare but fatal complication. Deep pain pathways (spinothalamic tract) are most resistant to injury; loss of deep pain = severe cord damage. Hansen Type II: chronic progressive annulus bulging → cord compression → chronic ischemia and demyelination (progressive ataxia/paresis over months).",
+        "pathophysiology_ja": "ハンセンI型：軟骨異栄養性犬種では若齢から髄核の軟骨様化生（石灰化）が進行。石灰化した髄核が変性/断裂した線維輪を突き破り急性脱出→脊髄への急性圧迫・打撃損傷。2つの損傷機序：(1)一次的機械的傷害：圧迫＋打撃（速度依存性）；(2)二次的傷害カスケード：虚血（血管痙攣＋静脈うっ血＋自動調節障害→浮腫）・フリーラジカルによる脂質過酸化・グルタミン酸興奮毒性・電解質不均衡（Na+/K+ポンプ不全→細胞内Na+蓄積）・ミトコンドリア機能障害→遅発性神経細胞/オリゴデンドロサイトのアポトーシス/壊死。灰白質が一次損傷に脆弱；白質軸索はワレリー変性。進行性脊髄軟化症（PMM）：上行性/下行性出血性壊死——稀だが致死的合併症。深部痛覚（脊髄視床路）が最も損傷抵抗性；消失は重篤な脊髄損傷を示す。",
+        "causes": "Hansen Type I: chondroid metaplasia in chondrodystrophic breeds (Dachshund, Beagle, French Bulldog, Cocker Spaniel, Basset Hound, Shih Tzu, Pekinese). Hansen Type II: large/giant breeds (German Shepherd, Labrador, Doberman) — degenerative disc disease. Trauma can precipitate either type.",
+        "causes_ja": "ハンセンI型：軟骨異栄養性犬種（ダックスフンド、ビーグル、フレンチ・ブルドッグ、コッカー・スパニエル等）の髄核石灰化。ハンセンII型：大型/巨大犬種（ジャーマン・シェパード、ラブラドール等）の変性椎間板膨隆。外傷が誘因になることもある。",
+        "treatment": "Grade I-II (pain, ambulatory paresis): STRICT cage rest 4-6 weeks (most important factor — activity restriction prevents re-injury); NSAIDs (carprofen 4.4 mg/kg PO q24h or meloxicam 0.1 mg/kg PO q24h); gabapentin 5-10 mg/kg PO q8-12h for neuropathic pain; methocarbamol 22-44 mg/kg PO q8h for muscle spasm. DO NOT combine NSAIDs with glucocorticoids (GI hemorrhage risk). Grade III: surgical decompression recommended (hemilaminectomy or ventral slot for cervical); earlier surgery = better outcome; delay >48h significantly worsens prognosis. Grade IV-V: SURGICAL EMERGENCY — hemilaminectomy within 24-48h of onset. Grade V without deep pain >48h: poor prognosis regardless of surgery (50% recovery with early surgery; <5% with deep pain absent >48h). Glucocorticoids: methylprednisolone sodium succinate (MPSS) — no longer recommended for acute spinal cord injury (NASCIS III: no benefit vs. harm from complications including sepsis, GI hemorrhage); dexamethasone also not recommended. Rehabilitation: critical component — hydrotherapy, proprioceptive exercises, massage starting within 24-48h post-surgery. Bladder management: urethral catheter or manual bladder expression q8h if unable to urinate — prevent bladder overdistension and retrograde infection.",
+        "treatment_ja": "I〜II度（疼痛・歩行可能な不全麻痺）：厳格なケージレスト4〜6週間（最重要——活動制限が再損傷を防ぐ）；NSAIDs（カルプロフェン4.4 mg/kg PO 24時間毎またはメロキシカム0.1 mg/kg PO 24時間毎）；ガバペンチン5〜10 mg/kg PO 8〜12時間毎；メトカルバモール22〜44 mg/kg PO 8時間毎。NSAIDsとステロイドの併用禁忌（GI出血）。III度：外科的減圧（片側椎弓切除術または腹側窓）推奨——早期手術で転帰改善；48時間以上の遅延で予後著明悪化。IV〜V度：外科的緊急手術——発症から24〜48時間以内に片側椎弓切除。深部痛覚消失後48時間超のV度：手術しても予後不良（深部痛覚消失後<48hで手術すれば50%回復；>48hで<5%）。グルココルチコイド：急性脊髄損傷には推奨しない（NASCIS III：有益性なく敗血症・GI出血等の合併症が増加）。リハビリテーション：術後24〜48時間以内から水中運動療法・固有感覚訓練。膀胱管理：排尿不可の場合は8時間毎に膀胱圧出/カテーテル排尿。",
+        "prognosis": "Grade I-II with strict rest: 90%+ recovery. Grade III with surgery: 85-95% recovery. Grade IV with surgery: 70-85% recovery. Grade V with deep pain present, surgery <48h: 50-60%. Grade V with deep pain absent >48h: <5% recovery regardless of surgery. PMM (progressive myelomalacia): invariably fatal (euthanasia indicated when ascending rapidly). Hansen Type II (large breeds): slower progression, surgical decompression at Grade III-IV; outcomes generally good.",
+        "prognosis_ja": "I〜II度（安静）：回復率90%以上。III度＋手術：85〜95%。IV度＋手術：70〜85%。V度（深部痛覚あり、<48h手術）：50〜60%。V度（深部痛覚消失>48h）：手術にかかわらず<5%。進行性脊髄軟化症：不可避的に致死的（急速上行時は安楽死適応）。",
+        "prevention": "Weight management (obesity increases disc disease severity), avoid high-impact activities in predisposed breeds (Dachshunds — no stairs, no jumping on/off furniture), prophylactic disc fenestration at multiple sites during surgery (controversial but reduces recurrence in chondrodystrophic breeds). Genetic testing available for CDDY/CDPA variants in some breeds.",
+        "prevention_ja": "体重管理（肥満が椎間板疾患の重症度を増悪）、好発犬種での高衝撃運動制限（ダックスフンドは階段禁止・家具への飛び乗り禁止）、手術時の予防的椎間板窓開術（論議あり）。一部の犬種でCDDY/CDPA変異の遺伝子検査が利用可能。",
         "recommended_tests": [
-            "Neurological examination: grade the dysfunction — Grade I (spinal pain only); Grade II (ambulatory paresis); Grade III (non-ambulatory paresis, voluntary movement present); Grade IV (paralysis, deep pain intact); Grade V (paralysis, deep pain absent) — determines urgency and prognosis",
-            "Spinal radiographs: calcified disc material visible in chondrodystrophic breeds (60-70% of IVDD cases); disc space narrowing; intervertebral foramen narrowing — useful to localize but not diagnostic without myelography/CT/MRI",
-            "CT myelography (gold standard in most Japanese practices): contrast injected into subarachnoid space → disc extrusion location, extent of spinal cord compression, lateralization for surgical approach; superior to myelography alone",
-            "MRI (gold standard for cord evaluation): T2 hyperintensity in cord (myelomalacia — poor prognosis sign), disc extrusion vs protrusion differentiation, soft tissue resolution; recommended for Grade V and atypical cases",
-            "CSF analysis (after myelography): rule out meningitis/encephalitis if spinal pain without disc lesion on imaging",
-            "CBC/chemistry/urinalysis: pre-surgical baseline; urinalysis/culture for neurogenic bladder/UTI (Grade IV-V often need urinary catheterization)",
+            "MRI (gold standard): precise lesion localization, disc herniation type (extrusion vs protrusion), cord compression severity, cord signal change (T2 hyperintensity = edema/myelomalacia — prognostic), PMM detection; mandatory before surgery",
+            "Neurological examination + grading: grade the lesion (I-V scale) to guide surgical vs medical decision; deep pain assessment is critical — absent deep pain changes prognosis dramatically; localize lesion by identifying cutaneous trunci reflex loss, proprioceptive deficits pattern",
+            "CT myelography: excellent for disc herniation lateralization and calcified disc visualization; fast (vs MRI), preferred for emergency cases when MRI unavailable; less soft tissue detail for cord signal changes",
+            "Radiographs (survey spinal): narrowed disc space, calcified nucleus pulposus in disc space or spinal canal, spondylosis — poor sensitivity for acute herniation; useful for screening calcified discs in chondrodystrophic breeds",
+            "CSF analysis: xanthochromia, elevated protein, pleocytosis — rules out infectious myelitis (meningitis) or neoplastic disease as alternative diagnosis; collect before contrast myelography",
+            "CBC + chemistry + urinalysis: baseline before NSAID treatment (renal/hepatic function); urinalysis if bladder dysfunction (urinary tract infection secondary to urinary retention)",
         ],
-        "treatment": "Grade I-II (pain, ambulatory): strict cage rest 4-6 weeks, NSAIDs (carprofen 4.4 mg/kg SID or meloxicam 0.1 mg/kg SID), "
-        "gabapentin 5-10 mg/kg PO BID-TID for neuropathic pain, methocarbamol 22-44 mg/kg PO BID-TID as muscle relaxant. "
-        "Grade III-V (paresis/paralysis): emergency surgical decompression — hemilaminectomy (thoracolumbar) or ventral slot (cervical) within 24-48 hours. "
-        "Post-operative rehabilitation: hydrotherapy (underwater treadmill), passive range of motion, assisted standing/walking. "
-        "Grade V (loss of deep pain perception >48 hours): surgical success rate <5%, discuss prognosis carefully with owner. "
-        "Status epilepticus from disc extrusion: diazepam 0.5-1 mg/kg IV. "
-        "Recurrence rate 30-50% with conservative management; owner education on ramp use, weight control, and activity restriction essential for chondrodystrophic breeds.",
-        "treatment_ja": "Grade I〜II（疼痛・歩行可能）：ケージレスト4〜6週間、NSAIDs、ガバペンチン、筋弛緩薬。"
-        "Grade III〜V（麻痺・深部痛覚消失）：緊急外科手術（片側椎弓切除術/腹側減圧術）→"
-        "術後リハビリテーション（水中トレッドミル、理学療法）。"
-        "Grade V（深部痛覚消失48時間以上）：手術の成功率は低い（<5%）。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "Grade I〜III：保存療法で80〜90%が改善。外科手術で95%以上。"
-        "Grade IV：外科手術で85〜90%。Grade V（深部痛覚消失<48h）：約60%。"
-        "Grade V（>48h）：予後不良（<5%）。再発率は保存療法で30〜50%。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "体重管理（最重要）、階段やジャンプの制限（スロープ使用）、"
-        "適度な運動による背筋強化。軟骨異栄養性犬種の飼い主への啓蒙。",
         "urgency": "urgent",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Epilepsy",
@@ -1692,70 +1690,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dilated Cardiomyopathy (DCM)",
         "name_ja": "拡張型心筋症（DCM）",
-        "symptoms": {"coughing", "difficulty_breathing", "lethargy", "bloated_abdomen", "weight_loss"},
-        "description": "Heart muscle weakens and enlarges, reducing the "
-        "heart's pumping ability and leading to heart failure. "
-        "Second most common acquired heart disease in dogs after MMVD. "
-        "Strong breed predisposition; recently associated with grain-free diets.",
-        "description_ja": "心筋が弱くなり拡大することでポンプ機能が低下し心不全に至る。"
-        "犬で2番目に多い後天性心疾患（MMVDに次ぐ）。強い犬種素因あり。"
-        "近年は穀物フリーダイエットとの関連がFDA調査中。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "心筋細胞の変性・線維化→心室壁の菲薄化・心室拡大→収縮力低下（FS<20%）→心拍出量低下"
-        "→神経体液性代償機構（RAAS活性化）→体液貯留→うっ血性心不全。"
-        "心房細動の合併が多い。突然死（心室頻拍）のリスク。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "特発性（最多）、遺伝性（ドーベルマン：PDK4/TTN遺伝子変異、グレートデーン、ボクサーARVC）、"
-        "タウリン/L-カルニチン欠乏（コッカースパニエル、ニューファンドランド、ゴールデン等）、"
-        "穀物フリー/豆類含有ダイエット関連（FDA-CVM 2018-2024調査中、Freeman et al. JVIM 2018報告）。"
-        "好発：ドーベルマン、グレートデーン、ボクサー、アイリッシュウルフハウンド。",
-        "treatment": "ACVIM Consensus Stage-Based Therapy: "
-        "OCCULT/STAGE B (asymptomatic, echocardiographic abnormalities only): pimobendan 0.25-0.3 mg/kg PO q12h "
-        "(PROTECT trial, Summerfield JVIM 2012: Doberman RCT n=137, time to CHF/sudden death 718→1441 days). "
-        "ACE inhibitor (benazepril 0.25-0.5 mg/kg PO q24h) consider adding. "
-        "Holter: if VPCs >50/day → sotalol 1-3 mg/kg PO q12h or mexiletine 5-8 mg/kg PO q8h. "
-        "STAGE C (CHF symptoms): (1) pimobendan 0.25-0.3 mg/kg PO q12h, (2) furosemide 1-2 mg/kg PO q8-12h (acute: IV/IM 2-4 mg/kg q1-4h), "
-        "(3) ACE inhibitor, (4) spironolactone 1-2 mg/kg PO q12-24h. "
-        "Atrial fibrillation: diltiazem 0.5-1 mg/kg PO q8h or digoxin 0.003 mg/kg PO q12h (target HR <140, serum 0.5-1 ng/mL). "
-        "Acute pulmonary edema: O2, furosemide IV, butorphanol 0.2-0.4 mg/kg IV; severe: nitroprusside CRI 1-10 μg/kg/min with BP monitoring. "
-        "NUTRITION: taurine 500-1000 mg PO q12h (Cocker Spaniels, grain-free diet-associated), L-carnitine 50-100 mg/kg PO q8-12h, "
-        "switch to grain-inclusive AAFCO-compliant diet. FDA-CVM 2018-2024: cardiac function improvement reported after diet change. "
-        "ARRHYTHMIA (Boxer ARVC, Doberman VT): sotalol 1-3 mg/kg PO q12h (first-line), mexiletine 5-8 mg/kg PO q8h (add-on), "
-        "amiodarone 10 mg/kg PO q24h × 7d then 5 mg/kg (refractory). "
-        "MONITORING: serial echocardiography, Holter, biochemistry (electrolytes), blood pressure.",
-        "treatment_ja": "【ACVIM Consensus Stage-Based Therapy】 "
-        "【オカルト期/Stage B（無症候性、心エコー異常のみ）】 "
-        "ピモベンダン 0.25-0.3 mg/kg PO q12h を開始（PROTECT trial Summerfield JVIM 2012、ドーベルマン137頭RCT、"
-        "心不全/突然死までの期間が718日 → 1441日に延長）。"
-        "ACE阻害薬（ベナゼプリル 0.25-0.5 mg/kg PO q24h）併用検討。"
-        "ホルター心電図でVPC>50/日ならソタロール 1-3 mg/kg PO q12h またはメキシレチン 5-8 mg/kg PO q8h。"
-        "【Stage C（CHF症状あり/既往）】 "
-        "(1) ピモベンダン 0.25-0.3 mg/kg PO q12h（収縮力増強・血管拡張）。"
-        "(2) フロセミド 1-2 mg/kg PO q8-12h（急性期はIV/IM 2-4 mg/kg q1-4h）。"
-        "(3) ACE阻害薬（ベナゼプリル 0.25-0.5 mg/kg PO q24h）。"
-        "(4) スピロノラクトン 1-2 mg/kg PO q12-24h。"
-        "(5) 心房細動合併時: ジルチアゼム 0.5-1 mg/kg PO q8h またはジゴキシン 0.003 mg/kg PO q12h"
-        "（HR<140 bpm目標、ジゴキシン濃度モニタリング 0.5-1 ng/mL）。"
-        "(6) 急性肺水腫: 酸素療法、フロセミドIV、ブトルファノール 0.2-0.4 mg/kg IV、"
-        "重症例にはニトロプルシドCRI 1-10 μg/kg/min（血圧監視下）。"
-        "【栄養管理】 タウリン補充 500-1000 mg PO q12h（コッカースパニエル、グレインフリー食関連例で有効）、"
-        "L-カルニチン 50-100 mg/kg PO q8-12h、適切な犬種別食事への変更（穀物含有・AAFCO準拠フード）。"
-        "FDAレポート: 治療食変更で心機能改善が報告されている。"
-        "【不整脈管理】 ボクサーARVC・ドーベルマンVT: ソタロール 1-3 mg/kg PO q12h（第一選択）、"
-        "メキシレチン 5-8 mg/kg PO q8h（追加可）、アミオダロン 10 mg/kg PO q24h × 7日 → 5 mg/kg q24h（難治例）。"
-        "【モニタリング】 定期心エコー、ホルター心電図、生化学（電解質）、血圧測定。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "ドーベルマン（最重症）: ピモベンダン治療下でCHF発症までの中央期間1441日（PROTECT trial）。"
-        "Stage C発症後の生存期間中央値は通常6-12ヶ月。"
-        "心房細動・心室頻拍合併例では予後悪化（突然死リスク）。"
-        "タウリン欠乏型・グレインフリー関連は栄養是正で部分的可逆性あり（数ヶ月-1年）。"
-        "予後不良因子: 重度LV拡大、低駆出率、難治性心室性不整脈、持続性心房細動、低Na血症。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "好発犬種の定期的心臓スクリーニング（心エコー・ホルター心電図 — ドーベルマンは年次推奨）、"
-        "適切な栄養（タウリン・L-カルニチン含有食、AAFCO準拠商業食）、"
-        "穀物フリー/豆類主体ダイエットの回避（FDA-CVM 2018-2024警告）、"
-        "繁殖個体の遺伝子検査（PDK4/TTN変異）。",
+        "symptoms": {"difficulty_breathing", "coughing", "lethargy", "weight_loss", "bloated_abdomen"},
+        "description": "Primary myocardial disease characterized by eccentric ventricular hypertrophy (dilation) with systolic dysfunction (reduced contractility). Most common in large/giant breeds: Doberman Pinscher (most common DCM breed — 58% affected lifetime; cardiomyocyte loss hypothesis), Irish Wolfhound, Great Dane, Boxer (arrhythmogenic right ventricular cardiomyopathy ARVC variant), Cocker Spaniel (possible nutritional DCM). DIET-ASSOCIATED DCM: FDA 2018-2019 investigation into grain-free/legume-rich diets (golden retrievers especially) — may be associated; mechanism unclear; reversible in some cases with diet change. Occult DCM (echocardiographic abnormalities before clinical signs) may last months to years before CHF onset. Sudden cardiac death from ventricular arrhythmias is a major complication, especially in Dobermans.",
+        "description_ja": "心室の偏心性肥大（拡張）と収縮機能不全（収縮力低下）を特徴とする一次性心筋疾患。大型/超大型犬種に好発：ドーベルマン・ピンシャー（DCM最多犬種——生涯発症率58%；心筋細胞消失仮説）、アイリッシュ・ウルフハウンド、グレート・デーン、ボクサー（不整脈性右室心筋症ARVC亜型）、コッカー・スパニエル（栄養性DCMの可能性）。食餌関連性DCM：FDA 2018〜2019年調査（グレインフリー/豆類豊富食との関連；ゴールデン・レトリーバーに多い；機序不明；食餌変更で一部回復可能）。無症候性DCM（心エコー異常だが臨床症状なし）がCHF発症前に数ヶ月〜数年持続することがある。突然心臓死（心室性不整脈由来）が主要合併症——特にドーベルマン。",
+        "pathophysiology": "DCM is characterized by progressive cardiomyocyte loss and dysfunction → ventricular dilation (Frank-Starling mechanism attempts compensation: increased preload → increased stroke volume, but at cost of increased wall stress) → eccentric hypertrophy. Core pathophysiological changes: (1) Reduced systolic function (decreased contractility, reduced ejection fraction EF <35%): inadequate forward output → compensatory neurohormonal activation (SNS, RAAS, ADH/vasopressin). (2) Neurohormonal activation: catecholamines increase HR and contractility (short-term benefit) but cause cardiomyocyte toxicity, beta-receptor downregulation, and arrhythmias over time; aldosterone causes Na+/water retention → volume overload → further dilation. (3) Ventricular wall stress: Law of Laplace — wall stress = pressure × radius / (2 × wall thickness); dilated ventricle with thin walls has massively elevated wall stress → impaired subendocardial perfusion. (4) Arrhythmias: Doberman DCM: ventricular premature complexes (VPCs) and ventricular tachycardia (VT) from structural heterogeneity and cardiomyocyte loss — leading cause of sudden death before CHF. Boxer ARVC: fatty infiltration of right ventricular myocardium → VT from RVFW. (5) Nutritional DCM hypothesis: taurine deficiency (grain-free diets) in predisposed breeds (Golden, Cocker, Newfoundland) impairs cardiac contractility — taurine is essential for myofilament Ca sensitivity and mitochondrial function.",
+        "pathophysiology_ja": "DCMは進行性の心筋細胞消失・機能不全→心室拡張（Frank-Starling機序：前負荷増大→1回拍出量増加を代償しようとするが、壁ストレスが増大）→偏心性肥大が特徴。主要病態変化：(1)収縮機能低下（収縮力低下・EF<35%）：前方拍出量不足→代償性神経体液性活性化（交感神経・RAAS・ADH）；(2)神経体液性活性化：カテコールアミンが短期的にHRと収縮力を増加させるが長期的には心筋毒性・β受容体下方制御・不整脈を引き起こす；アルドステロンがNa+/水貯留→容量過負荷→さらなる拡張；(3)心室壁ストレス（ラプラスの法則）：拡張した菲薄な壁では壁ストレスが著明に増大→心内膜下の灌流障害；(4)不整脈：ドーベルマンDCM：VPC・VTが心筋細胞消失による構造的不均一性から発生——CHF前の突然死の主因。ボクサーARVC：右室心筋の脂肪浸潤→右室VT；(5)栄養性DCM仮説：グレインフリー食によるタウリン欠乏（素因のある犬種）→心筋細胞Ca感受性とミトコンドリア機能障害→収縮力低下。",
+        "causes": "Genetic predisposition (familial DCM in Doberman Pinscher, Irish Wolfhound, Great Dane — specific mutations identified), idiopathic, taurine deficiency (diet-associated in some breeds), carnitine deficiency (Boxers, American Cocker Spaniel), myocarditis (viral, immune-mediated), toxic (doxorubicin).",
+        "causes_ja": "遺伝的素因（ドーベルマン・アイリッシュ・ウルフハウンド等での家族性DCM——特定変異が同定）、特発性、タウリン欠乏（食餌性）、カルニチン欠乏（ボクサー・コッカー）、心筋炎（ウイルス性・免疫介在性）、毒性（ドキソルビシン）。",
+        "treatment": "ACVIM Stage-Based (ACVIM Consensus 2019): OCCULT DCM Stage B (echocardiographic abnormalities, no clinical signs): pimobendan 0.25-0.3 mg/kg PO q12h — PROTECT trial (Dobermans, n=76): delayed time to CHF or sudden death by 9 months; positive cardiac troponin I (cTnI >0.22 ng/mL) or Holter with >100 VPCs/24h: also add sotalol 1.5-2 mg/kg PO q12h (Dobermans) for antiarrhythmic protection; mexiletine 5-8 mg/kg PO q8h ± atenolol for complex VT in Boxers. STAGE C (CHF, clinical signs): (1) Furosemide 2-4 mg/kg PO q12h (titrate to lowest effective dose); (2) pimobendan 0.25-0.3 mg/kg PO q12h (inotropy + vasodilation); (3) ACE inhibitor: enalapril 0.5 mg/kg PO q12h or benazepril 0.5 mg/kg q24h; (4) Spironolactone 2 mg/kg PO q24h (aldosterone antagonist — QUEST trial: survival benefit in MMVD; extrapolated to DCM). REFRACTORY CHF: torsemide (Isemid) 0.1-0.2 mg/kg PO q24h (more potent loop diuretic); add amlodipine 0.1-0.3 mg/kg q24h (vasodilation); digoxin 0.003-0.005 mg/kg q12h (rate control in AF + weak inotropy). DIET-ASSOCIATED DCM: switch diet away from legume-rich grain-free food; taurine supplementation 500-1000 mg PO q12h if blood taurine level low (<200 nmol/mL whole blood) or borderline.",
+        "treatment_ja": "ACVIMコンセンサス2019に基づくステージ別治療：無症候性DCM（StageB）：ピモベンダン0.25〜0.3 mg/kg PO 12時間毎（PROTECT試験：ドーベルマンでCHFまたは突然死までの期間を9ヶ月延長）。cTnI高値またはホルター>100 VPCs/24hがあればソタロール1.5〜2 mg/kg PO 12時間毎（ドーベルマン）またはメキシレチン5〜8 mg/kg PO 8時間毎（ボクサー）を追加。CHF（StageC）：(1)フロセミド2〜4 mg/kg PO 12時間毎；(2)ピモベンダン；(3)ACE阻害薬（エナラプリルまたはベナゼプリル）；(4)スピロノラクトン2 mg/kg PO 24時間毎（アルドステロン拮抗）。難治性CHF：トルセミド、アムロジピン、ジゴキシン（心房細動時）。食餌関連DCM：豆類豊富なグレインフリー食を中止；タウリン補充（全血タウリン<200 nmol/mLの場合）500〜1,000 mg PO 12時間毎。",
+        "prognosis": "Highly breed-dependent. Doberman Pinscher: median survival after CHF onset 3-6 months; occult DCM may last 1-4 years before CHF; sudden cardiac death risk is high even in occult phase. Irish Wolfhound: median survival after CHF 4-8 weeks. Diet-associated DCM: some cases fully reverse with diet change + taurine supplementation (measured by serial echocardiogram over 6-12 months). Arrhythmic burden (Holter monitor VPC count) predicts sudden death risk.",
+        "prognosis_ja": "犬種により大きく異なる。ドーベルマン：CHF発症後の生存期間中央値3〜6ヶ月；無症候性DCMは1〜4年間持続してからCHFに移行；無症候性期でも突然死リスクが高い。アイリッシュ・ウルフハウンド：CHF後の生存期間中央値4〜8週間。食餌関連DCM：食餌変更＋タウリン補充で一部は完全に回復（6〜12ヶ月の連続心エコーで確認）。ホルター上のVPC数が突然死リスクを予測。",
+        "prevention": "Screening echocardiogram + Holter (24h ambulatory ECG) in predisposed breeds annually from 3-4 years (Dobermans) or 4-5 years (Irish Wolfhound); genetic testing available for Doberman DCM (PDK4 gene mutation, though incomplete penetrance); avoid grain-free/legume-rich diets in predisposed breeds; taurine measurement in breeds at risk for nutritional DCM.",
+        "prevention_ja": "好発犬種での年1回スクリーニング（心エコー＋24時間ホルターECG）：ドーベルマンは3〜4歳から。遺伝子検査（ドーベルマンDCM：PDK4遺伝子変異）が利用可能；グレインフリー/豆類豊富食の回避；リスク犬種でのタウリン測定。",
+        "recommended_tests": [
+            "Echocardiography (2D + M-mode + Doppler): gold standard — LV end-diastolic diameter (LVEDD >2.7 cm/kg0.294 = dilated), fractional shortening (FS <25% = systolic dysfunction), EF, LA:Ao ratio (>1.7 = left atrial enlargement); identifies occult DCM before clinical signs",
+            "24-hour Holter monitoring (ambulatory ECG): quantify VPC burden (>100 VPCs/24h = significant in Dobermans); identify VT (>3 consecutive VPCs at >150 bpm); assess for paroxysmal AF; guides antiarrhythmic therapy and sudden death risk stratification",
+            "Cardiac biomarkers: NT-proBNP (>900 pmol/L = CHF likely, elevated before clinical signs); cardiac troponin I (cTnI >0.22 ng/mL in Dobermans = active myocyte necrosis, poor prognosis); combine with echo for complete cardiac staging",
+            "Chest radiographs: cardiomegaly (vertebral heart score VHS >10.5 in most breeds), pleural effusion, pulmonary edema (perihilar alveolar pattern = CHF); useful for monitoring response to diuretic therapy",
+            "Whole blood taurine (plasma + RBC): low taurine (<200 nmol/mL whole blood) in diet-associated DCM; collect before diet change; guide supplementation",
+            "CBC + serum chemistry + electrolytes: baseline before ACE inhibitor/diuretic therapy; monitor K+ (hypokalemia from furosemide), BUN/creatinine (pre-renal azotemia from over-diuresis), Na+ (hyponatremia in severe CHF)",
+        ],
         "urgency": "urgent",
+        "onset_pattern": "chronic",
+        "age_predisposition": "adult",
     },
     {
         "name": "Patent Ductus Arteriosus (PDA)",
