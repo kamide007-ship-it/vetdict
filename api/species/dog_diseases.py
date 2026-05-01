@@ -354,59 +354,59 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Gastric Dilatation-Volvulus (GDV/Bloat)",
         "name_ja": "胃拡張胃捻転症候群（GDV）",
-        "symptoms": {"bloated_abdomen", "vomiting", "excessive_panting", "lethargy", "anxiety", "collapse", "drooling"},
-        "description": "A life-threatening condition where the stomach fills "
-        "with gas and rotates, cutting off blood supply. "
-        "Requires immediate emergency surgery.",
-        "description_ja": "胃がガスで急速に拡張し、時計方向に180〜360°捻転する致死的緊急疾患。"
-        "大型〜超大型犬（グレートデン、セントバーナード、ジャーマンシェパード等）の深胸種に好発。"
-        "食後の運動、一日一回の大量給餌、ストレスがリスク因子。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "胃の捻転により噴門・幽門が閉塞→胃内ガス蓄積→胃壁の虚血壊死。"
-        "脾臓を巻き込み脾捻転を併発。後大静脈の圧迫による静脈還流障害→心拍出量低下→"
-        "分布性ショック。再灌流障害によりDIC、心室性不整脈（再灌流性不整脈）を合併。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "明確な単一原因は不明。リスク因子：大型深胸種、一日一食の大量給餌、食後直後の運動、"
-        "早食い、エアロファジア（空気嚥下）、加齢、GDVの家族歴、ストレス・不安気質。",
-        "treatment": "CRITICAL EMERGENCY: (1) Shock resuscitation: aggressive IV crystalloid fluid therapy (60-90 mL/kg/hr), vasopressors if needed. (2) Gastric decompression: orogastric tube passage or percutaneous trocarization. (3) After stabilization: emergency exploratory laparotomy → gastric derotation + incisional gastropexy (prevents 80% recurrence), resection of necrotic gastric wall, splenectomy if splenic torsion present. (4) Post-operative: continuous ECG monitoring for reperfusion-induced ventricular arrhythmias (lidocaine 2 mg/kg IV bolus, then 40-80 μg/kg/min CRI), electrolyte correction (especially potassium), monitoring for DIC.",
-        "treatment_ja": "【超緊急】(1)ショック治療：大量輸液（晶質液60-90mL/kg/hr）、(2)胃減圧（経口胃管または経皮的穿刺脱気）、"
-        "(3)安定化後に緊急開腹手術→胃の整復＋胃固定術（gastropexy）、壊死組織の切除、脾摘（必要時）。"
-        "(4)術後：心電図モニター（再灌流性心室性不整脈にリドカイン）、電解質補正。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "早期手術で生存率85〜90%。胃壁壊死やDIC合併例では致死率30〜50%。"
-        "胃固定術を行えば再発率3〜5%（未実施では80%再発）。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "予防的胃固定術（高リスク犬種で推奨、避妊去勢手術時に同時実施可）。"
-        "一日2〜3回の分割給餌。食後1時間の安静。ストレス軽減。",
+        "symptoms": {"anxiety", "collapse", "lethargy", "bloated_abdomen", "drooling", "excessive_panting", "vomiting"},
+        "description": "Life-threatening surgical emergency in which the stomach dilates with gas/fluid and rotates on its mesenteric axis (most commonly 180-270° clockwise when viewed from behind). Spleen is carried with the stomach in the rotation. Affects large deep-chested breeds: Great Dane (highest lifetime risk 24-42%), Standard Poodle, Irish Setter, Gordon Setter, Weimaraner, German Shepherd, Doberman. Without emergency surgery, mortality approaches 100%. Simple gastric dilatation (without volvulus) may resolve with decompression alone but must be distinguished from GDV radiographically.",
+        "description_ja": "胃が過剰なガス・液体により拡張し、腸間膜軸を中心に回転する（後方からみて多くは時計回りに180〜270°）外科的救急疾患。捻転に伴い脾臓も引き連れられる。大型深胸種（グレート・デーン生涯リスク24〜42%、スタンダード・プードル、アイリッシュ・セター、ワイマラナー等）に好発。緊急手術なしでは死亡率ほぼ100%。単純胃拡張（捻転なし）は減圧で回復することがあるが、X線で必ずGDVと鑑別する。",
+        "pathophysiology": "Gastric rotation obstructs both the cardia and pylorus, trapping gas/fluid/ingesta. Massive gastric distension compresses the caudal vena cava and portal vein → reduced venous return → decreased cardiac output → distributive and obstructive shock. Gastric wall ischemia from direct pressure and vascular compromise leads to mucosal necrosis (stomach wall discoloration = fundic/greater curvature most vulnerable). Venous outflow obstruction from splenic vein compression → splenic congestion and infarction. Endotoxin translocation from necrotic gut mucosa → systemic inflammatory response. Reperfusion injury upon correction triggers reactive oxygen species burst. Cardiac arrhythmias (ventricular premature complexes, ventricular tachycardia) occur in 40-60% of GDV cases — peak 12-36 hours post-op due to myocardial ischemia-reperfusion and electrolyte disturbances (hypokalemia, hypomagnesemia). Coagulopathy (DIC) develops from tissue factor release and ischemia.",
+        "pathophysiology_ja": "胃回転により噴門・幽門が同時閉塞し、ガス・液体・食物が胃内に閉じ込められる。高度胃拡張が後大静脈・門脈を圧迫→静脈還流低下→心拍出量減少→分布性・閉塞性ショック。胃壁虚血（直接圧迫＋血管圧迫）→粘膜壊死（胃底部・大弯が最脆弱）。脾静脈閉塞→脾うっ血・脾梗塞。壊死粘膜からのエンドトキシン移行→全身炎症反応。捻転解除後の再灌流障害→活性酸素爆発。心室性不整脈（PVC、VT）が40〜60%に出現（術後12〜36時間がピーク）。DICが組織因子放出・虚血により発症。",
+        "causes": "Exact etiology unclear; multifactorial. Risk factors: large/giant deep-chested breeds, once-daily large meal feeding, eating rapidly (aerophagia), post-meal exercise (<1 hour), increasing age, family history of GDV, anxious temperament, prior splenomegaly.",
+        "causes_ja": "明確な単一原因は不明。リスク因子：大型深胸種、一日一食の大量給餌、食後直後の運動、早食い、エアロファジア（空気嚥下）、加齢、GDVの家族歴、ストレス・不安気質。",
+        "treatment": "CRITICAL EMERGENCY: (1) Simultaneous shock resuscitation + decompression — do NOT delay one for the other. Shock resuscitation: 2 large-bore IV catheters (both forelimbs or jugular); isotonic crystalloids 90 mL/kg/hr initial bolus (LRS or 0.9% NaCl), titrate to response; if no improvement after 20 mL/kg crystalloid, add hetastarch 5-10 mL/kg IV. (2) Gastric decompression: attempt orogastric tube passage first (lubricated 26-28 Fr stomach tube) — success rate ~60%; if tube cannot be passed, immediate percutaneous trocar decompression (right lateral recumbency, 14-16G needle or IV catheter). (3) Cardiac monitoring: continuous ECG — treat VT >150 bpm or causing hemodynamic compromise with lidocaine 2-4 mg/kg slow IV bolus, then CRI 25-80 μg/kg/min. Avoid procainamide if hypokalemic. (4) Emergency surgery: gastropexy is mandatory — laparotomy with gastric de-rotation, assess stomach wall viability (partial gastrectomy if necrotic — dark/black non-bleeding mucosa), splenectomy if splenic torsion or infarction. (5) Prophylactic gastropexy: belt-loop or incisional gastropexy recurrence rate <5% (vs 80% recurrence without). Laparoscopic-assisted gastropexy at time of OVH in high-risk breeds. (6) Post-op monitoring: VPCs/VT (treat >150 bpm with lidocaine CRI), electrolytes (K⁺, Mg²⁺ supplementation), coagulation profile (PT/aPTT q12h x 24h), glucose, pain management (fentanyl CRI 2-5 μg/kg/h).",
+        "treatment_ja": "緊急外科処置：(1)ショック蘇生と胃減圧を同時並行。ショック蘇生：両前肢または頚静脈に大口径静脈路確保；LRS 90 mL/kg/hrで開始、反応不良時にヘタスターチ5〜10 mL/kg追加。(2)胃減圧：潤滑した26〜28 Frの胃管を試みる（成功率約60%）；不通の場合はトロカー経皮的減圧（14〜16G針、右側横臥位）。(3)心臓モニター：連続心電図；VT>150 bpmまたは循環動態悪化時リドカイン2〜4 mg/kg緩徐静注後CRI 25〜80 μg/kg/分。(4)緊急手術：胃固定術必須（胃回転解除→壁生存性評価→壊死部分胃切除→必要時脾摘出）。(5)術後モニター：VPCsモニタリング（>150 bpmでリドカインCRI）、電解質（K⁺・Mg²⁺補充）、凝固（PT/aPTT）、フェンタニルCRI 2〜5 μg/kg/hで鎮痛。",
+        "prognosis": "Survival rate 80-85% with aggressive treatment and early surgery. Mortality increases significantly with: gastric necrosis requiring gastrectomy (22-38% mortality), splenectomy, DIC, VT unresponsive to lidocaine, pre-op hypotension. Overall mortality 10-20% in referral centers with prompt surgery. Recurrence rate 80% without gastropexy, <5% with prophylactic gastropexy.",
+        "prognosis_ja": "積極的治療と早期手術で生存率80〜85%。胃壊死によるガストレクトミー（死亡率22〜38%）、脾摘出、DIC、リドカイン無効VTで予後悪化。胃固定術なしで再発率80%、胃固定術実施で<5%。",
+        "prevention": "Prophylactic gastropexy in high-risk breeds (Great Dane, Standard Poodle, Irish Setter, Weimaraner, German Shepherd, Doberman) — strongly recommended, ideally at time of OVH/neuter. Feed 2-3 small meals daily (not once daily). Rest 1 hour before and after meals. Slow-feeder bowls. Avoid bloat-prone breeding lines.",
+        "prevention_ja": "予防的胃固定術（高リスク犬種で強く推奨、避妊去勢手術時に同時実施可）。一日2〜3回の分割給餌。食前・食後1時間の安静。スロー・フィーダーボウル使用。",
+        "recommended_tests": [
+            "Right lateral abdominal radiograph: classic 'double bubble' compartmentalization (pylorus displaced cranioventrally, fundus gas-filled caudally); 'reverse C' sign; confirms GDV vs simple dilatation — essential before any decompression attempt",
+            "Venous blood gas + lactate: lactate >6 mmol/L pre-op = poor prognostic indicator (>9 mmol/L: 50% mortality); base deficit guides fluid resuscitation; repeat q1h during stabilization",
+            "CBC + chemistry panel: PCV/TP (hemoconcentration), BUN/creatinine (pre-renal azotemia), ALT (hepatic ischemia), glucose (hypoglycemia from hepatic glycogen depletion in shock)",
+            "Coagulation profile (PT, aPTT, fibrinogen, D-dimer): assess for DIC; repeat q12h post-op; DIC = grave prognostic indicator",
+            "Continuous ECG monitoring: ventricular premature complexes (VPCs) and ventricular tachycardia occur in 40-60% of GDV; lidocaine threshold = VT >150 bpm or signs of poor perfusion",
+            "Serum electrolytes (Na, K, Cl, Mg): hypokalemia common from vomiting/fluid shifts; hypomagnesemia contributes to arrhythmias; supplement guided by results",
+            "Abdominal ultrasound (if stable enough): assess splenic blood flow, portal vein, free abdominal fluid; not a substitute for radiograph",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Pancreatitis",
         "name_ja": "膵炎",
-        "symptoms": {"vomiting", "appetite_loss", "lethargy", "pain_on_touch", "diarrhea", "fever"},
-        "description": "Inflammation of the pancreas causing severe abdominal pain and digestive disturbance.",
-        "description_ja": "膵臓の自己消化による急性または慢性の炎症性疾患。犬では急性壊死性膵炎が多く、"
-        "中年〜高齢の肥満犬、ミニチュアシュナウザー、コッカースパニエルに好発。"
-        "高脂肪食の摂取後や副腎皮質機能亢進症の併発例で発症リスクが上昇する。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "膵腺房細胞内でトリプシノーゲンが異常活性化→膵実質の自己消化→局所炎症→"
-        "全身性炎症反応症候群（SIRS）。重症例ではDIC、多臓器不全（MOF）に進展。"
-        "慢性例では膵線維化→外分泌機能不全（EPI）や糖尿病の原因となる。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "高脂肪食・ゴミ漁り（最多）、副腎皮質機能亢進症、甲状腺機能低下症、高脂血症、"
-        "薬物（アザチオプリン、L-アスパラギナーゼ、臭化カリウム等）、膵管閉塞、外傷。"
-        "多くは特発性。",
-        "treatment": "(1) NPO initially → early enteral nutrition (recommended within 24-48 hours, start with small frequent low-fat meals). (2) Aggressive IV fluid therapy (lactated Ringer's, adjust rate based on dehydration). (3) Analgesia: maropitant 1 mg/kg IV q24h (anti-emetic + visceral pain relief), buprenorphine 0.01-0.02 mg/kg IV q6-8h, fentanyl CRI 2-5 μg/kg/hr for severe pain. (4) Anti-emetics: maropitant + ondansetron 0.1-0.5 mg/kg IV q8-12h for refractory cases. (5) Antibiotics only if infectious complications (avoid routine use). Chronic cases: ultra-low-fat diet (<10% fat DM) + pancreatic enzyme supplementation. Monitor cPLI/DGGR lipase, amylase, and electrolytes.",
-        "treatment_ja": "(1)絶食→早期経腸栄養（24〜48時間以内に少量から開始が推奨）、"
-        "(2)積極的輸液療法、(3)鎮痛：マロピタント（制吐＋内臓痛緩和）、ブプレノルフィン、"
-        "フェンタニルCRI、(4)制吐薬：マロピタント＋オンダンセトロン（難治例）、"
-        "(5)抗菌薬は感染合併時のみ。慢性例では低脂肪食＋膵酵素補充。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "軽症〜中等症：適切な治療で回復良好（生存率90%以上）。"
-        "重症壊死性膵炎：致死率30〜40%。DIC・MOF合併は予後不良因子。再発率は高い。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "低脂肪食の維持、テーブルフードの禁止、肥満防止、原疾患（高脂血症等）の管理。",
+        "symptoms": {"fever", "pain_on_touch", "diarrhea", "lethargy", "appetite_loss", "vomiting"},
+        "description": "Acute or chronic inflammation of the exocrine pancreas resulting from premature intracellular activation of digestive enzymes (primarily trypsinogen → trypsin). Ranges from mild edematous pancreatitis to severe necrotizing pancreatitis with systemic inflammatory response, peripancreatic fat necrosis, and multi-organ failure. Miniature Schnauzer (hypertriglyceridemia), Yorkshire Terrier, Cavalier King Charles Spaniel, Cocker Spaniel, and obese dogs have elevated risk. Chronic pancreatitis may be subclinical until advanced.",
+        "description_ja": "消化酵素の細胞内早期活性化（主にトリプシノーゲン→トリプシン）による外分泌膵臓の急性または慢性炎症。軽症浮腫性膵炎から重症壊死性膵炎（全身炎症反応・膵周囲脂肪壊死・多臓器不全）まで重症度は多様。ミニチュア・シュナウザー（高トリグリセリド血症）、ヨークシャー・テリア、CKCS、コッカー・スパニエル、肥満犬が高リスク。慢性膵炎は進行するまで無症状のことがある。",
+        "pathophysiology": "Normal pancreatic acinar cells sequester digestive proenzymes (zymogens) in membrane-bound granules, activated only after secretion into the duodenum by enterokinase. In pancreatitis, premature intracellular activation of trypsinogen occurs via: (1) cathepsin B (lysosomal protease) co-localization with zymogen granules triggered by hyperstimulation, ischemia, or bile reflux; (2) activated trypsin then converts other proenzymes: chymotrypsinogen, proelastase, prophospholipase A2, prokallikrein — creating an enzyme cascade. Phospholipase A2 destroys cell membranes → coagulative necrosis of acinar cells. Elastase degrades blood vessel walls → hemorrhage. Lipase digests peripancreatic fat → saponification (calcium soap) → hypocalcemia. Systemic cytokine storm (TNF-α, IL-1, IL-6) from trypsin-activated kallikrein-bradykinin cascade → SIRS → ARDS, AKI, DIC, cardiac dysfunction in severe cases.",
+        "pathophysiology_ja": "正常な膵臓腺房細胞では消化酵素前駆体（チモーゲン）が膜結合顆粒内に隔離され、十二指腸分泌後にエンテロキナーゼで活性化される。膵炎では過剰刺激・虚血・胆汁逆流などにより細胞内でトリプシノーゲンが早期活性化（カテプシンBとの共局在）。活性化トリプシンがキモトリプシノーゲン・プロエラスターゼ・プロホスホリパーゼA2・プロカリクレインを連鎖的に活性化。ホスホリパーゼA2が細胞膜破壊→腺房細胞凝固壊死；エラスターゼが血管壁を破壊→出血；リパーゼが膵周囲脂肪を消化→脂肪壊死・低カルシウム血症。カリクレイン-ブラジキニン系活性化→サイトカインストーム（TNF-α, IL-1, IL-6）→SIRS→ARDS・急性腎障害・DIC。",
+        "causes": "High-fat diet/dietary indiscretion (most common), hyperlipidemia/hypertriglyceridemia (Miniature Schnauzer), hypothyroidism, hypercalcemia, drugs (azathioprine, L-asparaginase, potassium bromide, sulfonamides, tetracyclines, calcium-containing compounds), pancreatic duct obstruction, abdominal trauma/surgery, ischemia-reperfusion. Most cases idiopathic.",
+        "causes_ja": "高脂肪食・ゴミ漁り（最多）、副腎皮質機能亢進症、甲状腺機能低下症、高脂血症、薬物（アザチオプリン、L-アスパラギナーゼ、臭化カリウム等）、膵管閉塞、外傷。多くは特発性。",
+        "treatment": "(1) Fluid therapy: IV crystalloid resuscitation (LRS or Plasma-Lyte; avoid Lactated Ringer's if hyperlactatemia) at 2-5 mL/kg/h maintenance after initial deficit correction; colloid support if albumin <2.0 g/dL. (2) Analgesia — critical and often undertreated: buprenorphine 0.02 mg/kg IV/IM q6-8h for mild-moderate pain; fentanyl CRI 2-5 μg/kg/h for severe pain; methadone 0.2-0.5 mg/kg IV/IM q4-6h. Avoid NSAIDs (renal/GI risk). Lidocaine CRI 25-50 μg/kg/min has analgesic + anti-inflammatory effects. (3) Antiemetics: maropitant 1 mg/kg IV q24h; ondansetron 0.5-1 mg/kg IV q8-12h. (4) Early enteral nutrition (within 24-48h): NE tube with low-fat hydrolyzed diet — improves intestinal barrier, reduces bacterial translocation, superior to parenteral nutrition in outcomes. (5) Antibiotics: NOT routinely indicated (pancreatitis is sterile inflammation); use only for confirmed infected pancreatic necrosis (fever + radiographic gas in pancreatic bed): metronidazole 15 mg/kg IV q8h + fluoroquinolone. (6) Glucose monitoring q6h: hypoglycemia (inadequate glycogen stores) or hyperglycemia (insulin resistance) both occur; treat hypoglycemia with 0.5 mL/kg 50% dextrose IV slowly. (7) Serum calcium monitoring q12h: hypocalcemia (<7 mg/dL or ionized <1.1 mmol/L) → calcium gluconate 50-150 mg/kg slow IV (ECG monitoring). (8) Vitamin B12 (cobalamin) 250-1500 μg SC q7d in chronic pancreatitis with hypocobalaminemia. (9) Pancreatic enzyme supplementation (EPI secondary to chronic pancreatitis): Creon 1 tsp per meal (titrate). (10) Surgery (rare): refractory mechanical obstruction, sterile necrosis cavitation, septic peritonitis; drain placement or debridement.",
+        "treatment_ja": "(1)輸液：LRS 2〜5 mL/kg/hで維持（低アルブミン血症<2.0 g/dLでコロイド追加）。(2)鎮痛（しばしば過少評価）：ブプレノルフィン0.02 mg/kg IV/IM 6〜8時間毎；重症ではフェンタニルCRI 2〜5 μg/kg/h；メサドン0.2〜0.5 mg/kg IV/IM。リドカインCRI 25〜50 μg/kg/分（鎮痛＋抗炎症）。NSAIDs禁忌。(3)制吐薬：マロピタント1 mg/kg IV 24時間毎＋オンダンセトロン0.5〜1 mg/kg IV 8〜12時間毎。(4)早期経腸栄養（24〜48時間以内）：経鼻チューブで低脂肪加水分解食を少量ずつ開始（腸管バリア改善・細菌転座抑制）。(5)抗菌薬：感染性膵壊死が確認された場合のみ（メトロニダゾール＋フルオロキノロン）。(6)血糖モニタリング6時間毎。(7)カルシウムモニタリング12時間毎：低カルシウム血症にはグルコン酸カルシウム50〜150 mg/kg緩徐静注（心電図モニター下）。",
+        "prognosis": "Mild acute pancreatitis: excellent prognosis, most recover with 3-5 days of supportive care. Severe necrotizing pancreatitis: guarded; mortality 20-40% in referral cases with SIRS/MOF. Chronic pancreatitis: recurrence common; long-term management with low-fat diet required. Risk of subsequent EPI (exocrine pancreatic insufficiency) or diabetes mellitus with severe or chronic cases.",
+        "prognosis_ja": "軽症急性膵炎：予後優良（3〜5日の支持療法で回復）。重症壊死性膵炎：予後不良（SIRS/多臓器不全を伴う場合、紹介症例での死亡率20〜40%）。慢性膵炎：再発多く、低脂肪食による長期管理が必要。重症または慢性例ではEPI（外分泌膵機能不全）または糖尿病の続発リスクあり。",
+        "prevention": "Maintain low-fat diet; avoid table scraps and fatty treats; prevent garbage scavenging; manage hyperlipidemia (especially Miniature Schnauzer: dietary fat restriction, gemfibrozil); control obesity; avoid pancreatitis-associated drugs when possible.",
+        "prevention_ja": "低脂肪食の維持、テーブルフードの禁止、肥満防止、原疾患（高脂血症等）の管理。ミニチュア・シュナウザー：食事性脂肪制限＋ゲムフィブロジル。",
+        "recommended_tests": [
+            "Spec cPL (canine pancreatic lipase immunoreactivity): >400 μg/L = highly specific for pancreatitis (92% specificity); 63-80% sensitivity in acute cases; SNAP cPL qualitative screen first (high specificity, lower sensitivity); false-positives with GI disease, renal disease",
+            "Abdominal ultrasound: hypoechoic pancreas + surrounding hyperechoic mesenteric fat = classic; peripancreatic fluid, mass effect, pancreatic duct dilation; sensitivity 68% (operator-dependent) — negative US does not rule out pancreatitis",
+            "CBC + chemistry panel: neutrophilia ± left shift; elevated BUN, creatinine (pre-renal or AKI); ALT elevation (hepatic lipidosis secondary to fat necrosis); elevated bilirubin; total lipids/triglycerides (hypertriglyceridemia is both cause and effect)",
+            "Serum amylase + lipase: low sensitivity/specificity (also produced by intestine, liver, muscle) — NOT recommended as primary diagnostic test; Spec cPL is superior",
+            "Ionized calcium: hypocalcemia (<1.1 mmol/L) in severe pancreatitis from peripancreatic fat saponification — correlates with severity and prognosis",
+            "Abdominal radiographs: ground-glass opacity in cranial abdomen, duodenal displacement, loss of detail in right cranial quadrant — low sensitivity but useful for ruling out GDV, intestinal obstruction",
+        ],
         "urgency": "high",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Hypothyroidism",
