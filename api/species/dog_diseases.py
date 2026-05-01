@@ -620,152 +620,114 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Struvite Urolithiasis",
         "name_ja": "ストラバイト尿石症（リン酸マグネシウムアンモニウム結石）",
-        "symptoms": {"straining_urinate", "blood_urine", "excessive_urination", "pain_on_touch"},
-        "description": "Struvite (magnesium ammonium phosphate) stone formation "
-        "in the urinary tract, often associated with UTI.",
-        "description_ja": "リン酸マグネシウムアンモニウム（ストラバイト）結石。"
-        "犬では尿路感染（特にウレアーゼ産生菌）に続発することが多い。"
-        "雌犬に多い。ミニチュアシュナウザー、シーズー、ビション・フリーゼに好発。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "ウレアーゼ産生菌（Staphylococcus, Proteus等）の感染→"
-        "尿素をアンモニア＋CO₂に分解→尿pH上昇（アルカリ化）→"
-        "マグネシウム・アンモニウム・リン酸が過飽和→ストラバイト結晶化→結石形成。"
-        "犬では感染誘発型が主（猫とは異なる）。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
+        "symptoms": {"excessive_urination", "blood_urine", "straining_urinate", "pain_on_touch"},
+        "description": "Magnesium ammonium phosphate (struvite/triple phosphate) urolithiasis — the most common urinary stone type in dogs. In dogs (unlike cats), struvite is almost exclusively associated with urease-producing bacterial UTI (Staphylococcus, Proteus, Ureaplasma). Urease splits urea → ammonia → alkalizes urine → creates supersaturation of Mg-NH4-PO4. KEY DIFFERENCE FROM CATS: medical dissolution is possible in dogs (3-12 weeks with antibiotics + dissolution diet). Predisposed breeds: Miniature Schnauzer, Bichon Frise, Cocker Spaniel, Lhasa Apso, Shih Tzu.",
+        "description_ja": "リン酸マグネシウムアンモニウム（ストラバイト/三リン酸）結石——犬で最も多い尿路結石型。犬では（猫と異なり）ほぼ必ず細菌性UTI（ウレアーゼ産生菌：ブドウ球菌・プロテウス・ウレアプラズマ）に関連。ウレアーゼが尿素を分解→アンモニア産生→尿アルカリ化→Mg-NH4-PO4の過飽和。重要：犬では内科的溶解が可能（抗菌薬＋溶解食：3〜12週間）。好発品種：ミニチュア・シュナウザー、ビション・フリーゼ、コッカー・スパニエル等。",
+        "pathophysiology": "Urease-producing bacteria (predominantly Staphylococcus pseudintermedius, Proteus mirabilis, Ureaplasma urealyticum) colonize the urinary tract → urease enzyme hydrolyzes urea → NH3 + CO2 → pH rise (alkaluria, pH >7.0) → increased ionic product of Mg²⁺ × NH4⁺ × PO4³⁻ → crystal nucleation → stone growth. Struvite crystal growth accelerates at pH >7.0. Stones can grow rapidly (days to weeks in severe infection). Stone surface provides bacterial biofilm protection from antibiotics → need both antibiotics AND dissolution diet. Urine concentration affects supersaturation — dilute urine reduces crystal formation risk.",
+        "pathophysiology_ja": "ウレアーゼ産生菌（主にStaphylococcus pseudintermedius、Proteus mirabilis）が尿路定着→ウレアーゼが尿素を加水分解→NH3＋CO2産生→尿pH上昇（アルカリ尿、pH>7.0）→Mg²⁺×NH4⁺×PO4³⁻のイオン積増大→結晶核形成→結石成長。pH>7.0でストラバイト結晶成長が加速。重篤な感染例では数日〜数週間で急速成長。結石表面の細菌バイオフィルムが抗菌薬から菌を保護→抗菌薬と溶解食の同時使用が必須。",
+        "causes": "Urinary tract infection with urease-producing bacteria (most common — Staphylococcus, Proteus, Ureaplasma). Alkaline urine, high mineral diet, reduced water intake also contribute.",
         "causes_ja": "尿路感染（ウレアーゼ産生菌）が最大の原因。アルカリ尿、高ミネラル食、飲水量不足も寄与。",
-        "treatment": "Medical dissolution is possible (a major advantage of struvite stones in dogs). (1) Treat UTI with culture-guided antibiotics (amoxicillin-clavulanate 12.5-25 mg/kg PO q12h is common empiric choice). (2) Dissolution diet (Hill's s/d, Royal Canin S/O, or equivalent) → dissolution begins in 2-4 weeks. (3) Monthly radiograph/ultrasound monitoring until stone dissolution confirmed. (4) Continue dissolution diet for 2-4 weeks after stone disappearance. Large stones or urethral obstruction: surgical removal (cystotomy). Urethral obstruction in males: retrograde urohydropulsion to push stones back into bladder before cystotomy.",
-        "treatment_ja": "内科的溶解が可能（犬のストラバイト結石の大きな利点）。"
-        "(1)適切な抗菌薬で尿路感染を治療（培養感受性試験に基づく）、"
-        "(2)溶解食（Hill's s/d, Royal Canin S/O等）→2〜4週間で溶解開始、"
-        "(3)溶解確認まで月1回のX線/超音波モニタリング、"
-        "(4)結石消失後も2〜4週間の溶解食継続を推奨。"
-        "大結石・尿道閉塞時は外科的摘出（膀胱切開術）。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "溶解食＋感染治療で良好。再発予防の鍵は尿路感染の管理。適切な管理で再発率を低く抑えられる。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "尿路感染の早期発見・治療。療法食（維持食）。十分な飲水量。定期的な尿培養検査。",
+        "treatment": "Medical dissolution is the preferred approach when stones <2 cm and no obstruction. (1) Urine culture and sensitivity: ESSENTIAL before antibiotic selection — struvite UTI must be treated to allow dissolution; collect by cystocentesis. (2) Antibiotics (culture-guided): amoxicillin-clavulanate 12.5-25 mg/kg PO q12h (empiric pending culture); treat for entire dissolution period (4-12 weeks — stop only after stones confirmed dissolved on radiograph/ultrasound). (3) Dissolution diet: Hills s/d (canine) or Royal Canin Urinary S/O — acidifies urine to pH 5.5-6.5 and reduces Mg/P/Na; feed exclusively throughout dissolution. (4) Monitor q4 weeks: abdominal radiograph (stone size reduction), urine culture (confirm UTI eliminated), urine pH (target 5.5-6.5), urinalysis. (5) Surgical intervention (cystotomy): required for urethral obstruction, stones >2 cm, failure to dissolve after 12 weeks, or concurrent anatomic abnormalities. (6) Voiding urohydropropulsion: for stones <5 mm in female dogs — flush through urethra under sedation. (7) Prevention: high water intake (wet food, water fountain), maintain urine pH 6.0-6.5, prompt treatment of UTI, annual urinalysis.",
+        "treatment_ja": "結石<2 cmかつ尿路閉塞なければ内科的溶解を優先。(1)尿培養・感受性試験（膀胱穿刺採尿）：必須——感受性に基づく抗菌薬選択。(2)抗菌薬（培養誘導）：アモキシシリン-クラブラン酸12.5〜25 mg/kg PO 12時間毎；溶解完了確認まで継続（4〜12週間）。(3)溶解食（Hills s/d等）：尿を酸性化（pH 5.5〜6.5）し、Mg/P/Naを制限；溶解期間中は厳密に溶解食のみ給与。(4)4週毎モニタリング：腹部X線（結石径縮小）、尿培養（UTI排除確認）、尿pH（目標5.5〜6.5）。(5)外科的摘出（膀胱切開術）：尿道閉塞、結石>2 cm、12週後も溶解不完全、解剖学的異常合併時。(6)排尿水力学的洗浄（<5 mm石、雌犬）。(7)予防：水分摂取増加、適切なpH維持、UTIの迅速治療。",
+        "prognosis": "Excellent with complete dissolution and UTI eradication — recurrence common if UTI recurs. After dissolution, perform urine culture monthly for 3 months, then q6 months. Medical dissolution success rate 90%+ if treatment is compliant and infection controlled.",
+        "prognosis_ja": "UTI根絶と結石完全溶解で予後優良。UTI再発すると結石再発が多い。溶解後は3ヶ月間毎月、以後6ヶ月毎に尿培養を実施。コンプライアンス良好で溶解成功率90%以上。",
+        "prevention": "Prompt treatment of UTI, adequate water intake (wet food), annual urinalysis screening, and avoidance of prolonged dietary acidification in healthy dogs.",
+        "prevention_ja": "UTIの迅速治療、十分な水分補給（湿潤食）、年1回尿検査。",
+        "recommended_tests": [
+            "Urine culture and sensitivity (cystocentesis): mandatory before antibiotic selection; identify urease-producing bacteria (Staphylococcus, Proteus); repeat at 4 weeks to confirm infection control during dissolution",
+            "Abdominal radiograph (VD + lateral): struvite is radiopaque (contrast with urate — radiolucent); measure stone size; count number of stones; monitor dissolution q4 weeks (expect 25-50% reduction per month)",
+            "Urine pH: struvite forms at pH >7.0; target pH 5.5-6.5 during dissolution diet; use pH strips or refractometer on fresh sample; pH >7.0 during dissolution = non-compliance or persistent infection",
+            "Urinalysis (USG, sediment): coffin-lid-shaped struvite crystals on microscopy; pyuria confirms concurrent UTI; USG helps assess hydration status",
+            "Abdominal ultrasound: assess stone number, location, and bladder wall thickening; better than radiograph for small stones and urethral location; screen for concurrent renal or ureteral stones",
+        ],
         "urgency": "normal",
+        "onset_pattern": "subacute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Calcium Oxalate Urolithiasis",
         "name_ja": "シュウ酸カルシウム尿石症",
-        "symptoms": {"straining_urinate", "blood_urine", "excessive_urination", "pain_on_touch"},
-        "description": "Calcium oxalate stone formation in the urinary tract, "
-        "the most common stone type in certain breeds.",
-        "description_ja": "シュウ酸カルシウム結石は内科的溶解が不可能で、外科的摘出が必要。"
-        "ミニチュアシュナウザー、ヨークシャーテリア、シーズー、"
-        "ビション・フリーゼ、ポメラニアンに好発。中高齢の雄犬に多い。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "高カルシウム尿症・高シュウ酸尿症→尿中でシュウ酸カルシウムが過飽和→"
-        "結晶核形成→結石成長。酸性尿でより形成されやすい。"
-        "副甲状腺機能亢進症、高カルシウム血症も原因となりうる。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "高カルシウム食・高シュウ酸食（ほうれん草等）、代謝性アシドーシス、"
-        "副甲状腺機能亢進症、特発性高カルシウム尿症、遺伝的素因。"
-        "尿酸性化食の過剰使用も原因。",
-        "treatment": "Medical dissolution NOT possible → surgical removal is standard treatment. (1) Cystotomy for stone removal. (2) Post-operative stone analysis for definitive diagnosis. (3) Recurrence prevention diet (Hill's u/d, Royal Canin U/C, or equivalent — moderate protein, low oxalate, low sodium). (4) Potassium citrate 75 mg/kg PO q12h for urine alkalinization (target pH 7.0-7.5). (5) Hydrochlorothiazide 2-4 mg/kg PO q12h to reduce urinary calcium excretion. (6) Radiograph/ultrasound monitoring q3-6 months for early recurrence detection.",
-        "treatment_ja": "内科的溶解不可→外科的摘出が標準治療。"
-        "(1)膀胱切開術で結石摘出、(2)術後結石分析で確定診断、"
-        "(3)再発予防食（Hill's u/d, Royal Canin U/C等）、"
-        "(4)クエン酸カリウム（75mg/kg BID）で尿アルカリ化、"
-        "(5)ヒドロクロロチアジド（2〜4mg/kg BID）で尿中Ca排泄低減、"
-        "(6)3〜6ヶ月毎のX線/超音波モニタリング。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "外科的摘出後の短期予後は良好。再発率が高い（3年以内に30〜50%）。"
-        "生涯にわたる食事管理とモニタリングが必要。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "療法食（中程度タンパク、低シュウ酸、低ナトリウム）。"
-        "十分な飲水量。尿アルカリ化。定期的な画像検査。",
+        "symptoms": {"excessive_urination", "blood_urine", "straining_urinate", "pain_on_touch"},
+        "description": "Second most common urinary stone type in dogs (30-40% of all stones). CRITICAL DIFFERENCE from struvite: calcium oxalate stones CANNOT be dissolved medically — surgical or interventional removal is always required. Predisposed breeds: Miniature Schnauzer (highest risk), Lhasa Apso, Yorkshire Terrier, Bichon Frise, Miniature Poodle, Shih Tzu. Male dogs are predisposed (2-3:1 male:female ratio). High recurrence rate (50% within 1 year without prevention). Stones in ureter/kidney require urgent management (obstructive uropathy).",
+        "description_ja": "犬で2番目に多い尿路結石（全結石の30〜40%）。ストラバイトとの重要な違い：シュウ酸カルシウム結石は内科的溶解不可能——手術または処置的摘出が常に必要。好発品種：ミニチュア・シュナウザー（最高リスク）、ラサ・アプソ、ヨークシャー・テリア、ビション・フリーゼ等。雄犬に好発（雄:雌=2〜3:1）。予防なしでは1年以内に再発率50%。尿管/腎臓結石は閉塞性尿路疾患として緊急管理が必要。",
+        "pathophysiology": "Calcium oxalate (CaOx) formation requires supersaturation of calcium (Ca²⁺) and oxalate (C2O4²⁻) in urine. Supersaturation driven by: (1) Hypercalciuria: either absorptive (excessive intestinal Ca absorption from diet or Vitamin D excess) or renal leak (reduced tubular reabsorption of Ca). Idiopathic hypercalciuria is the most common cause in Miniature Schnauzers — genetic defect in Ca handling. (2) Hyperoxaluria: high dietary oxalate, reduced intestinal oxalate-degrading bacteria (Oxalobacter formigenes), or endogenous oxalate overproduction. (3) Hypocitraturia: citrate is a natural inhibitor of CaOx crystal formation (binds Ca²⁺, reduces ionic activity); metabolic acidosis reduces urinary citrate. (4) Reduced crystallization inhibitors: Tamm-Horsfall protein (THP), osteopontin, nephrocalcin, crystal matrix protein — deficiency allows crystal aggregation. CaOx monohydrate (whewellite) is harder and more radio-opaque than dihydrate (weddellite).",
+        "pathophysiology_ja": "シュウ酸カルシウム（CaOx）形成にはCa²⁺とシュウ酸の尿中過飽和が必要。過飽和の要因：(1)高カルシウム尿症：吸収性（腸管Ca吸収過剰；ビタミンD過剰等）または腎漏出性（尿細管Ca再吸収障害）；ミニチュア・シュナウザーでは特発性高カルシウム尿症（遺伝的Ca調節障害）が最多。(2)高シュウ酸尿症：高シュウ酸食、腸内シュウ酸分解菌（Oxalobacter formigenes）減少、内因性シュウ酸過産生。(3)低クエン酸尿症：クエン酸はCaOx結晶形成の天然阻害剤（Ca²⁺と結合）；代謝性アシドーシスで尿クエン酸が低下。(4)結晶化阻害因子（Tamm-Horsfall蛋白、オステオポンチン等）の欠乏→結晶凝集。",
+        "causes": "Idiopathic hypercalciuria (most common in Miniature Schnauzer), high calcium/oxalate diet (spinach, etc.), metabolic acidosis, primary hyperparathyroidism, hypercalcemia from any cause, reduced water intake. Overuse of dietary acidification (for struvite prevention) increases CaOx risk.",
+        "causes_ja": "高カルシウム食・高シュウ酸食（ほうれん草等）、代謝性アシドーシス、副甲状腺機能亢進症、特発性高カルシウム尿症、遺伝的素因。尿酸性化食の過剰使用も原因。",
+        "treatment": "Medical dissolution is NOT possible for CaOx. (1) Surgical removal: cystotomy for bladder stones; laser lithotripsy (holmium:YAG) or basket retrieval for urethral stones; ureteroscopy + laser lithotripsy or SUB (subcutaneous ureteral bypass) device for ureteral stones; nephrolithotomy or pyelolithotomy for renal stones (high morbidity — consider interventional radiology). (2) Voiding urohydropropulsion: small stones (<5 mm) in female dogs — flush under sedation. (3) Stone analysis: MANDATORY after removal to confirm stone type and guide prevention. (4) Prevention of recurrence (high priority — 50% recurrence at 1 year): [A] High water intake (wet food, water fountain, SC fluids if dehydration-prone) — dilute urine reduces supersaturation. [B] Low-oxalate diet (avoid spinach, beets, chocolate, nuts) + moderate Ca restriction (not zero — very low Ca can paradoxically increase oxalate absorption). [C] Potassium citrate 75-100 mg/kg/day PO divided q12h — increases urinary citrate (CaOx inhibitor) and alkalinizes urine. [D] Thiazide diuretics (hydrochlorothiazide 2-4 mg/kg PO q12h): reduce urinary Ca excretion in hypercalciuric dogs. [E] Address underlying hypercalcemia (PTH-rP mediated, D-toxicosis, lymphoma). (5) Monitor: urine pH target 6.5-7.0 (neutral to mildly alkaline); USG <1.020; serum Ca, ionized Ca q6 months.",
+        "treatment_ja": "CaOxの内科的溶解は不可能。(1)外科的摘出：膀胱切開術（膀胱結石）；ホルミウムYAGレーザー砕石術または尿道鏡下バスケット採石（尿道結石）；尿管内視鏡下砕石またはSUB（皮下尿管バイパス）デバイス（尿管結石）；腎切石術（腎結石；高侵襲）。(2)排尿水力学的洗浄（<5 mm石、雌犬）。(3)結石分析：摘出後必須（結石型確定と予防指針のため）。(4)再発予防（優先度高——1年以内に50%再発）：[A]高水分摂取（湿潤食・ウォーターファウンテン）；[B]低シュウ酸食＋適度なCa制限（超低Ca食は逆効果）；[C]クエン酸カリウム75〜100 mg/kg/日PO 12時間毎（尿クエン酸増加・アルカリ化）；[D]チアジド系利尿薬（高カルシウム尿症例）；[E]基礎高カルシウム血症の治療。(5)モニタリング：尿pH目標6.5〜7.0、USG<1.020、血清/イオン化Ca 6ヶ月毎。",
+        "prognosis": "Good after successful stone removal. High recurrence rate (50% at 1 year, 75% at 3 years) without prevention. Prevention protocol adherence is the critical determinant of long-term outcome. Renal/ureteral CaOx with obstructive damage: guarded depending on degree of nephron loss.",
+        "prognosis_ja": "結石摘出後の予後は良好。予防なしでは再発率高（1年以内50%、3年以内75%）。長期転帰は予防プロトコルのコンプライアンスが決定的。閉塞性損傷を伴う腎/尿管CaOx：ネフロン消失の程度による。",
+        "prevention": "High water intake (wet/canned food, water fountain), potassium citrate supplementation, avoid dietary oxalate excess, maintain urine pH 6.5-7.0, annual urinalysis and radiographs in affected dogs.",
+        "prevention_ja": "十分な水分補給（湿潤食）、クエン酸カリウム補充、高シュウ酸食品の回避、尿pH 6.5〜7.0の維持、罹患犬では年1回尿検査＋X線撮影。",
+        "recommended_tests": [
+            "Abdominal radiograph (VD + lateral): CaOx stones are highly radiopaque (contrast with radiolucent urate stones); multiple dense stones in bladder shadow; evaluate for ureteral and renal stones — critical for surgical planning",
+            "Abdominal ultrasound: precise stone localization; ureteral/renal stones better assessed by US than radiograph; identify hydronephrosis or hydroureter (obstructive uropathy) — emergency indicator",
+            "Stone analysis (quantitative crystallography): mandatory on every retrieved stone; confirms stone type; prevents inappropriate treatment (e.g., dissolution diet for CaOx is contraindicated)",
+            "Serum calcium (total + ionized) + PTH: identify hypercalcemia as stone-forming cause; ionized Ca >1.35 mmol/L = true hypercalcemia; elevated PTH + hypercalcemia = primary hyperparathyroidism (parathyroid adenoma — surgically curable cause)",
+            "Urinalysis: urine pH (target 6.5-7.0 for prevention); USG (target <1.020 with prevention); microscopy for CaOx crystals (dihydrate = Maltese cross appearance; monohydrate = dumbbell/hemp-seed shape)",
+            "24-hour urine Ca, oxalate, citrate, creatinine: definitive assessment of risk factors; Ca:Cr >0.20 = hypercalciuria; citrate:Cr ratio = inhibitor assessment; used in referral/specialist setting for recurrent stone formers",
+        ],
         "urgency": "normal",
+        "onset_pattern": "subacute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Urate Urolithiasis",
         "name_ja": "尿酸アンモニウム尿石症",
-        "symptoms": {"straining_urinate", "blood_urine", "excessive_urination", "pain_on_touch"},
-        "description": "Ammonium urate stone formation, common in Dalmatians and dogs with portosystemic shunts.",
-        "description_ja": "尿酸アンモニウム結石。ダルメシアン（尿酸代謝の遺伝的特異性）と"
-        "門脈体循環シャントを有する犬に好発。"
-        "ダルメシアンでは品種の100%が高尿酸尿症を示す。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "ダルメシアン：SLC2A9遺伝子変異→肝臓での尿酸→アラントインへの変換障害"
-        "＋腎尿細管での尿酸再吸収障害→高尿酸尿症→尿酸結石形成。"
-        "門脈シャント犬：肝臓での尿酸代謝低下＋高アンモニア血症→"
-        "尿酸アンモニウム結石形成。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "ダルメシアン（SLC2A9変異、品種特異的）、門脈体循環シャント、"
-        "高プリン食（内臓肉等）。イングリッシュブルドッグ、"
-        "ロシアンブラックテリアでも報告あり。",
-        "treatment": "Medical dissolution possible in some cases. (1) Low-purine diet (Hill's u/d or equivalent). (2) Allopurinol 10-15 mg/kg PO q12h — xanthine oxidase inhibitor to reduce uric acid production. (3) Urine alkalinization with potassium citrate (target pH 7.0-7.5). (4) Ensure adequate water intake. Portosystemic shunt dogs: shunt ligation is the definitive treatment. Large stones: surgical removal (cystotomy). Dalmatians have genetic predisposition (SLC2A9 mutation) and require lifelong management.",
-        "treatment_ja": "内科的溶解が可能な場合あり。"
-        "(1)低プリン食（Hill's u/d等）、(2)アロプリノール（10〜15mg/kg BID）"
-        "→キサンチンオキシダーゼ阻害で尿酸産生抑制、"
-        "(3)尿アルカリ化（クエン酸カリウム）、(4)十分な飲水。"
-        "門脈シャント犬：シャント結紮術が根本治療。"
-        "大結石は外科的摘出。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "アロプリノール＋低プリン食で良好に管理可能。"
-        "門脈シャントの外科的修正後は結石形成リスク低下。"
-        "ダルメシアンでは生涯管理が必要。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "低プリン食、十分な飲水、アロプリノール予防投与（ダルメシアン）。"
-        "門脈シャント犬はシャント結紮後も定期モニタリング。",
+        "symptoms": {"excessive_urination", "blood_urine", "straining_urinate", "pain_on_touch"},
+        "description": "Ammonium urate (biurate) urolithiasis — predominantly affects two distinct populations: (1) Dalmatians with SLC2A9 gene mutation (impaired hepatic urate transport → hyperuricosuria regardless of purine intake — breed-specific genetic defect); (2) Dogs with portosystemic shunt (PSS) where elevated blood ammonia + uric acid from impaired hepatic clearance → urate stone formation. English Bulldogs have a separate genetic predisposition. UNIQUE DIAGNOSTIC FEATURE: urate stones are RADIOLUCENT on plain radiograph (not visible without contrast or ultrasound).",
+        "description_ja": "尿酸アンモニウム（バイウレート）尿石症——2つの主要群に好発：(1)ダルメシアン（SLC2A9遺伝子変異：肝臓での尿酸輸送障害→プリン摂取にかかわらず高尿酸尿症——品種特異的遺伝的欠陥）；(2)門脈体循環シャント（PSS）犬（肝クリアランス障害による血中アンモニア＋尿酸上昇→尿酸塩結石形成）。イングリッシュ・ブルドッグも遺伝的素因あり。重要診断特徴：尿酸塩結石は単純X線で透過性（造影または超音波なしでは見えない）。",
+        "pathophysiology": "Purines (adenine, guanine) are metabolized to xanthine then uric acid by xanthine oxidase. In most mammals, urate oxidase (uricase) further metabolizes uric acid to allantoin (water-soluble, easily excreted). Dogs lack functional hepatic uricase and must excrete uric acid via renal tubular secretion. In Dalmatians: SLC2A9 (GLUT9) transporter mutation reduces hepatocyte urate uptake → increased renal tubular urate secretion → hyperuricosuria even on low-purine diets. In PSS dogs: shunted blood bypasses hepatic uricase and glutamine synthetase → elevated blood uric acid AND ammonia → ammonium biurate formation in urine (synergistic). Urate crystal/stone formation favored at: acidic urine pH (<6), concentrated urine, hyperuricosuria + hyperammonuria. Allopurinol mechanism: inhibits xanthine oxidase → reduces uric acid production (but xanthine stones may develop — therefore use low-purine diet concurrently).",
+        "pathophysiology_ja": "プリン（アデニン・グアニン）→キサンチン酸化酵素→尿酸。ほとんどの哺乳類では尿酸酸化酵素（ウリカーゼ）→アラントイン（水溶性・容易に排泄）。犬は機能的肝ウリカーゼを欠くため腎尿細管分泌で尿酸排泄。ダルメシアン：SLC2A9（GLUT9）輸送体変異→肝細胞での尿酸取り込み低下→腎尿細管尿酸分泌増加→低プリン食でも高尿酸尿症。PSS犬：短絡血液が肝ウリカーゼ・グルタミン合成酵素を迂回→血中尿酸＋アンモニア上昇→尿中尿酸アンモニウム形成（相乗効果）。酸性尿（pH<6）・濃縮尿・高尿酸尿症＋高アンモニア尿症で結石形成が促進。アロプリノール：キサンチン酸化酵素阻害→尿酸産生抑制（ただしキサンチン結石形成リスク——必ず低プリン食と併用）。",
+        "causes": "Dalmatian (SLC2A9 gene mutation, breed-specific hyperuricosuria), portosystemic shunt (hepatic uricase/glutamine synthetase deficiency), English Bulldog (genetic predisposition), high-purine diet (organ meats, sardines).",
+        "causes_ja": "ダルメシアン（SLC2A9変異、品種特異的）、門脈体循環シャント、高プリン食（内臓肉等）。イングリッシュブルドッグ、ロシアンブラックテリアでも報告あり。",
+        "treatment": "Two distinct treatment approaches depending on cause. [Dalmatian — without PSS]: (1) Allopurinol 10-15 mg/kg PO q12h — xanthine oxidase inhibitor; must give with low-purine diet to prevent xanthine stone substitution. (2) Low-purine diet: Hills u/d, Royal Canin Urinary UC Low Purine — avoid organ meats, sardines, anchovies. (3) Urine alkalinization: sodium or potassium bicarbonate/citrate to maintain pH 7.0-7.5 (urate less soluble at acidic pH). (4) High water intake: USG target <1.020. (5) Medical dissolution: possible with above protocol (4-12 weeks) if stones are small and non-obstructing. (6) Surgical removal (cystotomy): for larger stones or if dissolution fails. [PSS dogs]: TREAT THE SHUNT FIRST — surgical ligation or attenuation (ameroid constrictor, hydraulic occluder) resolves the metabolic defect; urate urolithiasis often resolves after shunt correction. Medical dissolution with allopurinol + low-purine diet + urinary alkalinization until shunt surgery planned. Avoid allopurinol in severe hepatic dysfunction (reduced allopurinol metabolism). Recurrence prevention: lifetime low-purine diet + allopurinol in Dalmatians; annual urinalysis + ultrasound.",
+        "treatment_ja": "原因により治療方針が異なる。[ダルメシアン（PSS除く）]：(1)アロプリノール10〜15 mg/kg PO 12時間毎（必ず低プリン食と併用——キサンチン結石形成予防）。(2)低プリン食（Hills u/d等）：内臓肉・イワシ・アンチョビを回避。(3)尿アルカリ化：重炭酸ナトリウム/クエン酸カリウムでpH 7.0〜7.5維持。(4)高水分摂取：USG目標<1.020。(5)内科的溶解：上記プロトコルで4〜12週間（小結石、非閉塞時）。(6)外科的摘出：大結石または溶解不成功時。[PSS犬]：まず門脈短絡を治療（手術的結紮/狭窄）——代謝的欠陥の解消により結石が自然消退することがある。手術前はアロプリノール＋低プリン食＋アルカリ化。重篤な肝機能障害ではアロプリノール代謝が低下するため注意。",
+        "prognosis": "Dalmatian urate urolithiasis: excellent with lifelong low-purine diet + allopurinol; high compliance required. PSS urate urolithiasis: excellent if shunt is successfully corrected — stones often resolve spontaneously. If untreated PSS: recurrence inevitable despite medical treatment.",
+        "prognosis_ja": "ダルメシアン：生涯にわたる低プリン食＋アロプリノールで予後優良（高いコンプライアンスが必要）。PSS：シャント手術が成功すれば予後優良（自然に結石消退することも）。PSS未治療では内科的治療にもかかわらず再発不可避。",
+        "prevention": "Lifelong low-purine diet and allopurinol in Dalmatians. PSS dogs: prompt surgical correction. Annual urinalysis and ultrasound screening in predisposed breeds.",
+        "prevention_ja": "ダルメシアン：終生低プリン食＋アロプリノール。PSS犬：早期手術的矯正。好発品種での年1回尿検査＋超音波スクリーニング。",
+        "recommended_tests": [
+            "Abdominal ultrasound: urate stones are RADIOLUCENT on plain radiograph — US is essential for detection; acoustic shadowing from stones visible in bladder and urethra; assess for renal/ureteral involvement and PSS (abnormal liver size, tortuous vessels)",
+            "Abdominal contrast radiograph (pneumocystogram or double-contrast cystogram): for stones not visible on plain radiograph or US; demonstrates filling defects in bladder",
+            "Stone analysis (quantitative crystallography): confirms urate type (ammonium biurate vs uric acid vs sodium urate); guides treatment selection; MANDATORY on all retrieved stones",
+            "Serum bile acids (pre/post-prandial): screen for PSS — elevated post-prandial bile acids (>25 μmol/L) = hepatic dysfunction; confirm with dynamic bile acid test; PSS requires surgical correction before long-term stone management",
+            "Urinalysis: ammonium biurate crystals (yellow-brown spheres with irregular projections — thorn-apple appearance) on microscopy; urine pH (target >7.0 for dissolution/prevention); USG",
+            "SLC2A9 genetic test (Dalmatians): identifies homozygous mutation causing hyperuricosuria; available through breed clubs; aids breeding decisions",
+        ],
         "urgency": "normal",
+        "onset_pattern": "subacute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Kidney Disease (CKD)",
         "name_ja": "慢性腎臓病（CKD）",
-        "symptoms": {"excessive_thirst", "excessive_urination", "appetite_loss", "vomiting", "weight_loss", "lethargy"},
-        "description": "Progressive loss of kidney function leading to waste build-up and systemic illness.",
-        "description_ja": "不可逆的なネフロン喪失による進行性の腎機能低下。IRIS分類でStage 1〜4に病期分類。"
-        "高齢犬に多いが、先天性腎疾患（腎異形成等）で若齢犬にも発生する。"
-        "症状が顕在化するのは腎機能の75%以上が失われた時点（Stage 3以降）。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "原因を問わず、ネフロンの進行性喪失→残存ネフロンの代償性過濾過→"
-        "糸球体硬化→さらなるネフロン喪失の悪循環。BUN・クレアチニン上昇、"
-        "リン貯留→二次性上皮小体機能亢進症→腎性骨異栄養症。"
-        "尿濃縮能低下→多尿→代償性多飲。末期には尿毒症性消化器症状・貧血。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "加齢性変化（最多）、慢性糸球体腎炎、腎アミロイドーシス、先天性腎異形成、"
-        "慢性腎盂腎炎、腎結石、NSAID等の腎毒性薬物、レプトスピラ症後遺症。"
-        "コッカースパニエル、シーズー、ブルテリアに遺伝的素因。",
-        "treatment": "[Goal] No curative therapy. Disease progression control and symptom management per IRIS Staging Guidelines 2023. [All stages] (1) Renal diet — recommended from Stage 2: low phosphorus (Stage 2: <0.3%, Stage 3-4: <0.2% DM), moderate protein restriction (high-quality protein), low sodium, omega-3 fatty acid supplementation (Hill's k/d, Royal Canin Renal, Purina NF). (2) Ensure adequate water intake — free access, multiple water stations, wet food. (3) Avoid nephrotoxic drugs — NSAIDs, aminoglycosides, contrast agents. [Proteinuria (UPC >0.5)] (1) Telmisartan 1 mg/kg PO q24h — IRIS 2023 first-line recommendation (ARB not affected by ACE escape, superior proteinuria reduction vs benazepril — Lourenço et al. JVIM 2020). (2) ACE inhibitor: benazepril 0.25-0.5 mg/kg PO q24h — can combine with telmisartan. [Hyperphosphatemia] Stage-specific targets (Stage 2: P <4.6, Stage 3: <5.0, Stage 4: <6.0 mg/dL). Phosphate binders: aluminum hydroxide 30-90 mg/kg/day with food. [Hypertension] SBP >160 mmHg: amlodipine 0.1-0.4 mg/kg PO q24h. [GI symptoms] Anti-emetics: maropitant 1 mg/kg PO/SC q24h. [Anorexia] Mirtazapine or capromorelin (Entyce) 3 mg/kg PO q24h (FDA-approved for dogs). [Renal anemia] Stage 3-4, HCT <25%: darbepoetin 0.45-1 μg/kg SC weekly + iron supplementation. [Dehydration] Home SC fluids: LRS 10-20 mL/kg q24-48h.",
-        "treatment_ja": "【目標】根治療法なし。進行抑制と症状管理が目標。IRIS Staging Guidelines 2023 に準拠。"
-        "【全Stageで実施】 (1) 腎臓療法食 — Stage 2以降で推奨。"
-        "低リン（Stage 2: <0.3%、Stage 3-4: <0.2% DM）、"
-        "適度な蛋白制限（高品質タンパク）、低Na、ω-3脂肪酸添加。"
-        "Hill's k/d、Royal Canin Renal、Purina NF等。"
-        "(2) 飲水量確保 — フリーアクセス、複数の水飲み場、ウェットフード。"
-        "(3) 腎毒性薬物の回避 — NSAIDs、アミノグリコシド系、造影剤（必要時のみ）。"
-        "【蛋白尿対策（UPC>0.5で介入）】 "
-        "(1) テルミサルタン 1 mg/kg PO q24h — 近年のIRIS 2023推奨で第一選択 "
-        "（ARBはACE escape機構の影響を受けず、ベナゼプリルより優れた蛋白尿抑制効果"
-        " — Lourenço et al. JVIM 2020、Bugbee et al. JVIM 2014）。"
-        "(2) ACE阻害薬: ベナゼプリル 0.25-0.5 mg/kg PO q24h — テルミサルタン併用可（相加効果）。"
-        "(3) 双方使用時は腎機能と血清K監視（高K血症、急性腎障害リスク）。"
-        "【高P血症対策（IRIS Stage別目標）】 "
-        "Stage 2: P <4.6 mg/dL、Stage 3: P <5.0 mg/dL、Stage 4: P <6.0 mg/dL。"
-        "リン吸着剤: 水酸化アルミニウム 30-90 mg/kg/日 食事と共に投与、"
-        "炭酸ランタン 30 mg/kg/日、塩酸セベラマー 30-60 mg/kg/日。"
-        "【高血圧対策】 SBP >160 mmHg持続時にアムロジピン 0.1-0.4 mg/kg PO q24h "
-        "（テルミサルタンも降圧効果あり）。"
-        "【消化器症状】 制吐: マロピタント 1 mg/kg PO/SC q24h、オンダンセトロン 0.5 mg/kg q8-12h。"
-        "胃粘膜保護: オメプラゾール 1 mg/kg PO q12-24h。"
-        "【食欲不振】 ミルタザピン 1.88 mg/匹（小型）-15 mg/匹（大型） PO q24-48h、"
-        "カプロモレリン（エンタイス®）3 mg/kg PO q24h（FDA犬承認）。"
-        "【腎性貧血】 Stage 3-4 で HCT<25%: ダルベポエチン 0.45-1 μg/kg SC 週1回、"
-        "鉄補充必須（鉄欠乏で抗EPO抗体産生リスク）。"
-        "【二次性上皮小体機能亢進症】 カルシトリオール 2.5-3.5 ng/kg PO q24h "
-        "（夜間空腹時、Ca・PTH測定下）。"
-        "【脱水補正】 在宅皮下輸液 LRS 10-20 mL/kg q24-48h（家族指導）。"
-        "【参考】 IRIS Staging Guidelines 2023, ACVIM Consensus Glomerular Disease 2013。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "IRIS Stage 2：中央生存期間1,000日以上。Stage 3：約300〜500日。"
-        "Stage 4：約100〜200日。腎臓療法食による生存期間延長のエビデンスあり。"
-        "タンパク尿の程度が最も重要な予後因子。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "7歳以降の定期的な血液検査（BUN、Cre、SDMA）＋尿検査（UPC比）。"
-        "腎毒性薬物の回避。十分な飲水量の確保。",
+        "symptoms": {"appetite_loss", "lethargy", "weight_loss", "excessive_thirst", "excessive_urination", "vomiting"},
+        "description": "Irreversible structural or functional renal disease persisting >3 months. Staged per IRIS (International Renal Interest Society) 2023 guidelines using serum creatinine and SDMA. CKD is progressive — management goal is to slow progression and maintain quality of life. Common in older dogs; Cocker Spaniel, Shih Tzu, Bull Terrier have genetic predisposition. Key complications: uremia, hypertension (65-93% of dogs with CKD Stage 3-4), renal secondary hyperparathyroidism (RSHP), anemia of chronic disease, metabolic acidosis, hypokalemia.",
+        "description_ja": "3ヶ月以上持続する不可逆的な腎構造または機能障害。IRIS（国際腎臓研究会）2023ガイドラインの血清クレアチニンおよびSDMAによるステージング。CKDは進行性——管理目標は進行を遅らせQOLを維持すること。高齢犬に多い；コッカースパニエル・シーズー・ブルテリアに遺伝的素因。主要合併症：尿毒症・高血圧（CKD 3〜4期の65〜93%）・腎性二次性副甲状腺機能亢進症（RSHP）・慢性疾患性貧血・代謝性アシドーシス・低カリウム血症。",
+        "pathophysiology": "CKD results from progressive nephron loss from any cause. Surviving nephrons undergo compensatory hypertrophy and hyperfiltration (increased single-nephron GFR), which over time causes glomerular hypertension → proteinuria → further nephron damage (vicious cycle). Key pathophysiological processes: (1) Phosphorus retention: reduced GFR → impaired renal phosphorus excretion → hyperphosphatemia → stimulates FGF-23 (from bone, earliest marker of phosphorus imbalance) → suppresses calcitriol production → secondary hyperparathyroidism (PTH mobilizes calcium from bone → renal osteodystrophy). (2) Metabolic acidosis: reduced tubular bicarbonate regeneration and ammonium production → bicarbonate wasting → progressive acidosis → protein catabolism. (3) Uremic toxin accumulation (BUN, creatinine, indoxyl sulfate, SDMA) → uremic gastroenteritis (nausea, vomiting, anorexia), uremic encephalopathy, platelet dysfunction. (4) Hypertension: renin-angiotensin-aldosterone system activation (reduced renal perfusion) + sodium retention → systemic hypertension → further glomerular damage (hypertensive nephropathy). (5) Anemia: reduced erythropoietin (EPO) production from damaged peritubular cells → normocytic normochromic non-regenerative anemia. (6) Dehydration: impaired urine concentrating ability (tubulointerstitial damage) → obligate water loss → PU/PD.",
+        "pathophysiology_ja": "あらゆる原因からの進行性ネフロン消失によるCKD。残存ネフロンが代償性肥大・過剰ろ過（単一ネフロンGFR増加）→糸球体高血圧→タンパク尿→さらなるネフロン傷害（悪循環）。主要病態：(1)リン貯留：GFR低下→腎でのリン排泄障害→高リン血症→FGF-23上昇→カルシトリオール産生抑制→二次性副甲状腺機能亢進症（PTH上昇→骨からCa動員→腎性骨異栄養症）；(2)代謝性アシドーシス：尿細管HCO3⁻再生・アンモニウム産生障害→重炭酸塩喪失→タンパク異化亢進；(3)尿毒症性毒素蓄積（BUN・クレアチニン・インドキシル硫酸・SDMA）→尿毒症性胃腸炎・脳症・血小板機能障害；(4)高血圧：RAAS活性化→全身高血圧→糸球体傷害悪化；(5)貧血：傍尿細管細胞からのEPO産生低下→正球性正色素性非再生性貧血；(6)脱水：尿細管間質傷害→尿濃縮能低下→多飲多尿。",
+        "causes": "Age-related changes (most common), chronic glomerulonephritis, renal amyloidosis, congenital renal dysplasia, chronic pyelonephritis, nephrolithiasis, nephrotoxic drugs (NSAIDs, aminoglycosides, cisplatin), post-leptospirosis sequelae. Genetic predisposition: Cocker Spaniel, Shih Tzu, Bull Terrier.",
+        "causes_ja": "加齢性変化（最多）、慢性糸球体腎炎、腎アミロイドーシス、先天性腎異形成、慢性腎盂腎炎、腎結石、NSAID等の腎毒性薬物、レプトスピラ症後遺症。コッカースパニエル、シーズー、ブルテリアに遺伝的素因。",
+        "treatment": "No curative therapy. Disease progression control per IRIS Staging 2023. [All stages] (1) Renal diet — mandatory from Stage 2: low phosphorus (Stage 2: <0.3%, Stage 3-4: <0.2% DM), restricted protein (high-quality), low sodium; Hills k/d or Royal Canin Renal preferred. (2) Adequate hydration: encourage water intake (wet food, water fountains); SC fluids 100-150 mL q24-72h at home if recurrently dehydrated (owner-administered). (3) Phosphorus management: dietary restriction first; if phosphorus >target for stage after 4 weeks of diet, add intestinal phosphate binders: aluminum hydroxide 30-90 mg/kg/day with food; sevelamer carbonate 10-30 mg/kg PO TID with food; lanthanum carbonate (Renalzin) 800 mg/cat, dose extrapolated for dogs. Target serum phosphorus: Stage 2 <4.5 mg/dL, Stage 3 <5.0 mg/dL, Stage 4 <6.0 mg/dL. (4) Hypertension: target systolic BP <140 mmHg; amlodipine 0.05-0.2 mg/kg PO q24h (first-line); enalapril/benazepril 0.5 mg/kg PO q24h (additional benefit for proteinuria via RAAS blockade — but use cautiously in Stage 4). (5) Proteinuria: ACE inhibitor (benazepril 0.5-1 mg/kg PO q24h) if UPC >0.5 (substage P2); target UPC <0.5. (6) Metabolic acidosis: sodium bicarbonate 8-12 mg/kg PO q12h if HCO3⁻ <18 mEq/L; potassium citrate if concurrent hypokalemia. (7) Anemia: darbepoetin alfa (Aranesp) 0.45-0.75 μg/kg SC q7d if PCV <20% — monitor for hypertension and polycythemia; iron supplementation (ferrous sulfate 100-300 mg PO q24h). (8) Nausea/vomiting: maropitant 1 mg/kg PO q24h, famotidine 0.5 mg/kg PO q12-24h, ondansetron 0.5 mg/kg PO q8h. (9) RAAS inhibition: telmisartan (Semintra) 1 mg/kg PO q24h — ARB, better tolerated than ACEi in some dogs, excellent evidence for proteinuria reduction.",
+        "treatment_ja": "根治療法なし。IRIS 2023ステージングに基づく進行抑制。[全ステージ] (1)腎臓食（Stage 2以降必須）：低リン・高品質タンパク質制限・低ナトリウム（Hills k/d等）。(2)適切な水分補給：湿潤食・ウォーターファウンテン・在宅皮下輸液（100〜150 mL/回）。(3)リン管理：食事制限後もリン高値なら腸管リン吸着薬（水酸化アルミニウム、炭酸セベラマー、炭酸ランタン）を食事と同時投与。リン目標：Stage 2: <4.5 mg/dL、Stage 3: <5.0、Stage 4: <6.0。(4)高血圧：目標収縮期BP<140 mmHg；アムロジピン0.05〜0.2 mg/kg 24時間毎（第一選択）；ベナゼプリル0.5 mg/kg（タンパク尿軽減）。(5)タンパク尿：UPC>0.5でACE阻害薬またはテルミサルタン（Semintra）1 mg/kg 24時間毎。(6)代謝性アシドーシス：HCO3⁻<18 mEq/LでNaHCO3 8〜12 mg/kg 12時間毎。(7)貧血：PCV<20%でダルベポエチンアルファ0.45〜0.75 μg/kg SC 週1回＋鉄補充。(8)悪心/嘔吐：マロピタント、ファモチジン、オンダンセトロン。",
+        "prognosis": "Variable; IRIS stage at diagnosis most important prognostic factor. Stage 1-2: years of managed life quality possible. Stage 3-4: months with aggressive management. UPC >1.0 and hypertension are independent risk factors for faster progression. Regular monitoring (q3-6 months in stable cases, q4-8 weeks in advanced cases) allows early intervention.",
+        "prognosis_ja": "診断時のIRISステージが最重要予後因子。Stage 1〜2：適切管理で数年間のQOL維持可能。Stage 3〜4：積極的治療で数ヶ月。UPC>1.0と高血圧は進行の独立リスク因子。定期モニタリング（安定期はq3〜6ヶ月、進行期はq4〜8週）で早期介入が可能。",
+        "prevention": "Minimize nephrotoxic drug exposure (NSAIDs — use lowest effective dose, always with adequate hydration), early detection and treatment of UTI/pyelonephritis, annual urinalysis + creatinine in older dogs (>7 years) and predisposed breeds, SDMA screening detects CKD 17 months earlier than creatinine.",
+        "prevention_ja": "腎毒性薬物（NSAIDs：最低有効用量・十分な水分補給を維持）の使用最小化、UTI/腎盂腎炎の早期治療、高齢犬（>7歳）・好発品種での年1回尿検査＋クレアチニン測定。SDMAはクレアチニンより17ヶ月早期にCKDを検出。",
+        "recommended_tests": [
+            "Serum creatinine + SDMA: IRIS 2023 staging — creatinine: Stage 1 <1.4, Stage 2 1.4-2.8, Stage 3 2.9-5.0, Stage 4 >5.0 mg/dL; SDMA: Stage 1 <18, Stage 2 18-35, Stage 3 36-54, Stage 4 >54 μg/dL; SDMA detects GFR reduction >25% (creatinine requires >75% nephron loss)",
+            "Urine specific gravity (USG) + urinalysis: isosthenuria (USG 1.008-1.012) indicates loss of concentrating ability; proteinuria (dipstick then UPC ratio); sediment (casts, bacteria, RBC/WBC)",
+            "Urine protein:creatinine ratio (UPC): IRIS substaging P0 <0.2, P1 0.2-0.5, P2 >0.5; UPC >1.0 = severe proteinuria, significant progression risk; collect from cystocentesis sample for accuracy",
+            "Blood pressure (Doppler or oscillometric): IRIS BP substaging — AP0 <140, AP1 140-159, AP2 160-179, AP3 >180 mmHg; measure 3+ readings after rest period; hypertension requires antihypertensive therapy",
+            "Serum phosphorus, ionized calcium, PTH: phosphorus for dietary management decisions; PTH elevation = RSHP (indicates need for phosphate binder + calcitriol); ionized Ca for hypercalcemia workup",
+            "CBC: normocytic normochromic non-regenerative anemia (EPO deficiency) — assess need for erythropoiesis-stimulating agent; PCV target >25-30%",
+            "Venous blood gas / serum bicarbonate: metabolic acidosis (HCO3⁻ <18 mEq/L) common in Stage 3-4; drives protein catabolism; treat if persistently low",
+        ],
         "urgency": "normal",
+        "onset_pattern": "chronic",
+        "age_predisposition": "senior",
     },
     {
         "name": "Liver Disease",
