@@ -1201,47 +1201,31 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pyometra",
         "name_ja": "子宮蓄膿症",
-        "symptoms": {"genital_discharge", "excessive_thirst", "lethargy", "fever", "bloated_abdomen", "vomiting"},
-        "description": "A serious uterine infection in unspayed females requiring emergency surgical intervention.",
-        "description_ja": "未避妊の中高齢雌犬に発生する子宮内膜の化膿性感染症。発情後期（黄体期）に発生し、"
-        "開放型（膣からの排膿あり）と閉鎖型（排膿なし→より危険）に分類。"
-        "6歳以上の未避妊雌犬の約25%が発症するとされる。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "反復する発情周期→プロゲステロンの影響で子宮内膜の嚢胞性過形成（CEH）→"
-        "細菌（主にE. coli）の上行性感染→子宮内膿貯留。"
-        "閉鎖型：膿の排出なし→子宮内圧上昇→菌血症・敗血症・エンドトキシン血症→"
-        "敗血症性ショック。腎障害（内毒素によるADH抵抗性→多飲多尿）を合併。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "プロゲステロンの慢性的子宮内膜刺激（CEH）＋E. coliの上行性感染（最多）。"
-        "外因性プロゲステロン製剤、エストロゲン投与（交配後避妊）がリスク因子。"
-        "未避妊の中高齢雌犬（特に未経産犬）に好発。",
-        "treatment": "FIRST-LINE: emergency ovariohysterectomy (OHE). Pre-operative stabilization: LRS 10-20 mL/kg/hr IV, "
-        "broad-spectrum antibiotics (ampicillin 22 mg/kg IV q8h + enrofloxacin 5 mg/kg IV q24h — targeting E. coli). "
-        "MEDICAL (breeding dogs, open-cervix, stable): aglepristone (Alizin; anti-progesterone) 10 mg/kg SC × 2 doses (day 1 and day 3) — promotes cervical dilation and uterine drainage. "
-        "Enrofloxacin 5 mg/kg PO q24h × 14-28 days (adjust per C&S). "
-        "PGF2α (dinoprost 0.025-0.05 mg/kg SC q8-12h, with caution) may be combined. "
-        "Ultrasound monitoring at days 7, 14, 28 to confirm uterine diameter reduction. "
-        "Breeding at next estrus recommended to prevent recurrence. Recurrence rate: aglepristone alone 17-25% (lower with PGF2α combination). "
-        "CONTRAINDICATIONS for medical: closed-cervix pyometra, severe systemic illness, renal compromise → emergency OHE. "
-        "Ref: Fieni et al. (2006) J Small Anim Pract; Threlfall (2011) Vet Clin North Am.",
-        "treatment_ja": "【第一選択】卵巣子宮摘出術（OHE）→緊急手術。術前に循環安定化（乳酸リンゲル液10〜20mL/kg/hr）、"
-        "広域抗菌薬（アンピシリン22mg/kg IV q8h ＋ エンロフロキサシン5mg/kg IV q24h, E. coli対策）。"
-        "【内科的治療 — 繁殖温存例（開放型・全身状態良好）】"
-        "アグレプリストン（Alizin®; 抗プロゲステロン薬）10mg/kg SC × 2回（day 1・day 3）→子宮頸部拡張と排膿を促進。"
-        "エンロフロキサシン 5mg/kg PO q24h × 14〜28日（培養感受性に応じて調整）。"
-        "プロスタグランジンF2α（ジノプロスト 0.025〜0.05mg/kg SC q8〜12h、慎重適用）と併用可。"
-        "Day 7・14・28に超音波で子宮径の縮小を確認。治療後は次の発情での妊娠を推奨（再発予防）。"
-        "閉鎖型・重篤例・腎障害合併例は内科治療の適応外 → 緊急OHE優先。"
-        "再発率：アグレプリストン単独17〜25%（PGF2α併用でさらに低下）。Alizin®: Virbac製品。"
-        "Reference: Fieni et al. (2006) J Small Anim Pract; Threlfall (2011) Vet Clin North Am.",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "外科治療：生存率95%以上（敗血症合併がなければ）。"
-        "内科治療：繁殖犬では次の発情での妊娠率50〜60%。再発率が非常に高い。"
-        "敗血症・DIC合併例は予後不良。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "若齢での避妊手術（OHE）が最も確実な予防法。"
-        "外因性ホルモン投与の回避。繁殖計画終了後の早期避妊。",
+        "symptoms": {"vomiting", "lethargy", "genital_discharge", "bloated_abdomen", "excessive_thirst", "fever"},
+        "description": "Life-threatening uterine infection occurring in the luteal phase (progesterone-dominant) after estrus. Occurs in intact females, peak incidence 6-10 years old. Open pyometra: cervix open → purulent vaginal discharge visible (paradoxically less systemically ill). Closed pyometra: cervix closed → no visible discharge → rapid uterine distension → more acutely ill/septic. E. coli is the most common pathogen (60-90%). Septic shock, DIC, and acute kidney injury are life-threatening complications. TREATMENT OF CHOICE: emergency ovariohysterectomy.",
+        "description_ja": "黄体期（プロゲステロン優位）に発生する致命的な子宮感染症。未避妊雌犬に好発（6〜10歳がピーク）。開放型：子宮頚管が開いている→膿性膣分泌物が認められる（逆説的に全身症状は軽め）。閉鎖型：子宮頚管が閉じている→分泌物なし→子宮が急速に拡大→急性敗血症になりやすい。起因菌：E. coli（60〜90%）が最多。敗血症性ショック・DIC・急性腎障害が致命的合併症。治療の選択肢：緊急卵巣子宮摘出術。",
+        "pathophysiology": "Progesterone (from corpus luteum) stimulates endometrial gland growth and secretion, suppresses myometrial contractions (prevents expulsion of bacteria), and suppresses local uterine immune response (reduced PMN migration into uterine lumen). Repeated estrous cycles → progressive cystic endometrial hyperplasia (CEH) — abnormal endometrial glands accumulate secretions. CEH alone is cystic but sterile; bacterial contamination (ascending from vaginal flora, predominantly E. coli) during estrus → pyometra in the susceptible CEH uterus. E. coli virulence factors: type 1 and type P fimbriae for urothelial/endometrial adhesion; P fimbriae bind Gal-Gal moieties on receptors upregulated by progesterone; LPS endotoxin → SIRS. Closed pyometra: progesterone keeps cervix closed → uterine fluid/pus accumulation → uterine wall stretched thin → risk of rupture → septic peritonitis. Endotoxemia: E. coli LPS activates macrophages → TNF-alpha, IL-1, IL-6 → fever, hypotension, coagulopathy (DIC). AKI: pre-renal (hypovolemia) + immune-complex-mediated glomerulonephritis (E. coli antigen-antibody complexes) + direct tubular toxicity from endotoxin.",
+        "pathophysiology_ja": "プロゲステロン（黄体由来）が子宮内膜腺の増殖・分泌を促進し、子宮筋収縮を抑制（細菌排出を妨げる）、局所免疫反応を抑制（PMN遊走低下）。繰り返す発情周期→進行性嚢胞性子宮内膜過形成（CEH）——異常な内膜腺が分泌物を蓄積。CEH単独では無菌性嚢胞；発情期の上行性細菌汚染（主にE. coli）が感受性のあるCEH子宮で子宮蓄膿症を引き起こす。閉鎖型：プロゲステロンが子宮頚管を閉じた状態に維持→膿が蓄積→子宮壁が菲薄化→破裂→敗血症性腹膜炎のリスク。E. coli LPS→マクロファージ活性化→TNF-α、IL-1、IL-6→発熱・低血圧・DIC。AKI：腎前性（低血圧）＋免疫複合体性糸球体腎炎＋エンドトキシンによる直接尿細管障害。",
+        "causes": "Progesterone-driven cystic endometrial hyperplasia (CEH) + ascending E. coli infection (most common). Risk factors: exogenous progesterone administration, estrogen treatment (post-mating contraception), intact middle-aged to older females, nulliparous dogs.",
+        "causes_ja": "プロゲステロンの慢性的子宮内膜刺激（CEH）＋E. coliの上行性感染（最多）。外因性プロゲステロン製剤、エストロゲン投与（交配後避妊）がリスク因子。未避妊の中高齢雌犬（特に未経産犬）に好発。",
+        "treatment": "FIRST-LINE: Emergency OHE (ovariohysterectomy). Pre-operative stabilization: IV crystalloids (LRS 20 mL/kg/hr) — correct dehydration/hypotension; broad-spectrum antibiotics (ampicillin 22 mg/kg IV q8h + enrofloxacin 5 mg/kg IV q24h; if septic shock: add metronidazole 15 mg/kg IV q8h for anaerobes); blood pressure support (dopamine 5-10 μg/kg/min if hypotensive despite fluids). Coagulation support if DIC: FFP 10-20 mL/kg IV. Surgery: standard OHE with gentle uterine handling (avoid rupture); abdominal lavage if contamination detected. Closed pyometra: do NOT attempt to manually express uterine contents (rupture risk). Post-operative: continue antibiotics 10-14 days (guided by uterine culture obtained intraoperatively). MEDICAL MANAGEMENT (only for confirmed open pyometra in breeding dogs): aglepristone (Alizin, RU534) 10 mg/kg SC q24h x2 doses — progesterone receptor antagonist; prostaglandin F2alpha (dinoprost) 25-50 μg/kg SC q12-24h — causes uterine contraction/cervical relaxation (SE: intense salivation, vomiting, defecation — pretreat with maropitant); combined aglepristone + prostaglandin improves success rate; SUCCESS RATE: 75-80% with medical management, but recurrence rate at next cycle is 70-77%; must spay after breeding career completed. Critical: Medical management is CONTRAINDICATED in closed pyometra (rupture risk).",
+        "treatment_ja": "第一選択：緊急卵巣子宮摘出術（OHE）。術前安定化：LRS 20 mL/kg/hr IV（脱水/低血圧補正）；広域抗菌薬（アンピシリン22 mg/kg IV 8時間毎＋エンロフロキサシン5 mg/kg IV 24時間毎；敗血症性ショック時にメトロニダゾール追加）；低血圧持続時ドパミン5〜10 μg/kg/分。DIC：FFP 10〜20 mL/kg IV。手術：標準的OHE（子宮の丁寧な取り扱い——破裂回避）；汚染確認時は腹腔洗浄。閉鎖型：絶対に手動で子宮内容物を排出しないこと（破裂リスク）。術後：術中採取した子宮培養に基づく抗菌薬を10〜14日継続。内科的管理（開放型・繁殖用途犬のみ）：アグレプリストン10 mg/kg SC 24時間毎×2回＋プロスタグランジンF2α（副作用前にマロピタント前投与）；成功率75〜80%だが次回発情時の再発率70〜77%——繁殖終了後は避妊手術必須。閉鎖型への内科的管理は禁忌。",
+        "prognosis": "Excellent with prompt OHE in non-septic cases (>95% survival). Septic peritonitis (uterine rupture): guarded (50-70% survival with aggressive treatment). AKI from endotoxemia: usually reversible if addressed early. Medical management: 75-80% initial success but 70-77% recurrence; not curative. Spaying prevents pyometra completely.",
+        "prognosis_ja": "非敗血症例での早期OHEで予後優良（生存率>95%）。敗血症性腹膜炎（子宮破裂）：予後不良（積極的治療で50〜70%生存）。エンドトキシン性AKI：早期対処で通常回復可能。内科的管理：初回成功率75〜80%だが再発率70〜77%。避妊手術で子宮蓄膿症を完全に予防可能。",
+        "prevention": "Ovariohysterectomy (spaying) before first estrus or at young age eliminates risk completely. Avoid exogenous progesterone administration in intact females. Avoid post-mating estrogen treatment (increases CEH and pyometra risk).",
+        "prevention_ja": "初回発情前または若齢時の避妊手術でリスクを完全に排除。未避妊雌犬への外因性プロゲステロン製剤の使用を避ける。交配後エストロゲン投与は禁忌（CEH・子宮蓄膿症リスク増大）。",
+        "recommended_tests": [
+            "Abdominal radiograph: enlarged tubular fluid-filled uterine horns in caudal abdomen (open pyometra may have less dramatic enlargement); assess for uterine rupture (loss of serosal detail, free peritoneal fluid = emergency)",
+            "Abdominal ultrasound: uterine lumen fluid/pus measurement; uterine wall assessment; open vs closed pyometra distinction; rule out ectopic pregnancy; superior to radiograph for early/mild cases",
+            "CBC: marked neutrophilia + left shift (bandemia) in systemic infection; thrombocytopenia suggests DIC; toxic neutrophils; leukocytosis >30,000/μL common",
+            "Serum chemistry + electrolytes: BUN/creatinine (AKI from endotoxemia or pre-renal azotemia), ALT/ALP (hepatic involvement), albumin (protein-losing), electrolytes for fluid therapy guidance",
+            "Coagulation profile (PT, aPTT, fibrinogen, D-dimer, platelet count): DIC screening — prolonged PT/aPTT + elevated D-dimer + thrombocytopenia = DIC; requires FFP and/or fresh whole blood",
+            "Vaginal cytology + discharge culture: confirms open pyometra (degenerate neutrophils); E. coli most common; guides post-op antibiotic selection; ALSO collect intraoperative uterine culture for 10-day directed therapy",
+            "Blood pressure (Doppler): hypotension in septic/closed pyometra; systolic <80 mmHg = emergency fluid resuscitation and pressor support required",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Prostate Disease",
@@ -1304,67 +1288,31 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Immune-Mediated Hemolytic Anemia",
         "name_ja": "免疫介在性溶血性貧血（IMHA）",
-        "symptoms": {"lethargy", "rapid_breathing", "appetite_loss", "fever"},
-        "description": "The immune system destroys the body's own red blood "
-        "cells, causing severe anemia. Most common immune-mediated "
-        "disease in dogs. Mortality 20-40% even with treatment, "
-        "primarily from thromboembolic complications.",
-        "description_ja": "自己免疫機序により赤血球が破壊される重篤な貧血。犬の免疫介在性疾患で最も多い。"
-        "中年の雌犬に好発。コッカースパニエル、スプリンガースパニエル、プードル、"
-        "アイリッシュセッターに多い。致死率20〜40%の緊急疾患。"
-        "死因の多くは血栓塞栓症（PTE、DIC）であり、抗血栓療法が必須。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "IgGまたはIgM自己抗体が赤血球膜に結合→脾臓・肝臓のマクロファージによる"
-        "血管外溶血（主要）、または補体活性化による血管内溶血。"
-        "球状赤血球の出現が特徴的。重症例では播種性血管内凝固（DIC）、"
-        "肺血栓塞栓症（PTE）を合併し致死的。赤血球自己凝集が診断的。"
-        "高凝固状態（炎症性サイトカイン、組織因子放出、内皮障害、ステロイドによる凝固亢進）"
-        "が血栓形成を促進する。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "原発性（特発性、70%）：自己免疫の異常活性化。"
-        "二次性（30%）：薬物（セファロスポリン等）、感染症（バベシア、エーリキア）、"
-        "腫瘍（リンパ腫）、ワクチン接種後、蜂刺症。"
-        "免疫介在性血小板減少症（ITP）との併発=エバンス症候群。",
-        "treatment": "Per ACVIM Consensus Statement 2019 (Swann/Garden et al. JVIM 2019): "
-        "DIAGNOSIS: saline agglutination test + spherocytosis + positive direct Coombs test. "
-        "IMMUNOSUPPRESSION (first-line): prednisolone 2 mg/kg PO q24h (max 60 mg/day) → gradual taper over 4-6 months. "
-        "SECOND-LINE (severe hemolysis, transfusion-dependent, steroid-refractory/contraindicated, relapse): "
-        "mycophenolate mofetil (MMF) 10 mg/kg PO q12h, OR cyclosporine 5-10 mg/kg PO q24h, OR azathioprine 2 mg/kg PO q24h × 1-2 weeks then q48h, "
-        "OR human IVIg 0.5-1.5 g/kg IV single dose (severe cases). "
-        "ANTITHROMBOTIC (MANDATORY per ACVIM 2019 for ALL IMHA cases): "
-        "(1) rivaroxaban 1-2 mg/kg PO q24h (oral factor Xa inhibitor, preferred), "
-        "(2) clopidogrel 10 mg/kg PO loading then 2 mg/kg q24h, "
-        "(3) clopidogrel + low-dose aspirin 0.5-1 mg/kg q24h, or LMWH (enoxaparin 0.8-1 mg/kg SC q6-8h). "
-        "SUPPORTIVE: pRBC transfusion (PCV <15% or rapid decline), oxygen, conservative fluid therapy. "
-        "MONITORING: PCV/HCT q12-24h (first 48-72h), biochemistry, urinalysis, BP. "
-        "Discontinue antithrombotics after ≥6 months remission. Splenectomy as last resort for drug-refractory cases.",
-        "treatment_ja": "【ACVIM Consensus Statement 2019（Swann/Garden et al. JVIM 2019）】"
-        "【診断確定】 自己凝集（生食試験）+ 球状赤血球 + 直接クームス試験陽性。"
-        "【免疫抑制療法（第一選択）】 プレドニゾロン 2 mg/kg PO q24h（最大60 mg/日）"
-        "→ 4-6ヶ月かけて段階的漸減。"
-        "【二次免疫抑制薬の併用適応】 重度溶血、輸血依存、ステロイド反応不良、"
-        "ステロイド禁忌、再発例 — 以下から選択: ミコフェノール酸モフェチル(MMF) 10 mg/kg PO q12h、"
-        "シクロスポリン 5-10 mg/kg PO q24h、アザチオプリン 2 mg/kg PO q24h × 1-2週間 → q48h、"
-        "ヒト免疫グロブリン(IVIg) 0.5-1.5 g/kg IV 単回（重症例）。"
-        "【抗血栓療法（必須）】 ACVIM 2019で全IMHA症例で必須化。"
-        "選択肢: (1) リバーロキサバン 1-2 mg/kg PO q24h（経口Xa阻害薬、第一選択）、"
-        "(2) クロピドグレル 10 mg/kg PO 初日負荷投与 → 2 mg/kg PO q24h、"
-        "(3) クロピドグレル + 低用量アスピリン 0.5-1 mg/kg PO q24h（古典的併用）。"
-        "ヒト用低分子ヘパリン（エノキサパリン 0.8-1 mg/kg SC q6-8h）も使用可。"
-        "【支持療法】 輸血（pRBC、PCV<15%またはHCT低下急速）、酸素療法、輸液（保守的）。"
-        "【モニタリング】 PCV/HCT q12-24h（最初の48-72h）→ q24h、生化学、尿検査、血圧。"
-        "【抗血栓療法の中止】 寛解6ヶ月以上かつ他のリスク因子なしで中止検討。"
-        "【脾摘】 薬物抵抗性例の最終手段。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "初回発症の生存率60〜80%（適切な治療下）。致死率20〜40%。"
-        "DIC・PTE合併は予後不良 — 治療開始後最初の2週間が死亡リスク最大期間（ACVIM 2019）。"
-        "再発率は30〜50%。"
-        "免疫抑制剤の長期投与が必要な場合が多い。"
-        "予後因子: 高ビリルビン血症、自己凝集陽性、血管内溶血、高乳酸値、血小板減少。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確立された予防法なし。既往犬ではワクチン接種のリスク/ベネフィット評価が必要。"
-        "二次性原因（薬物、感染症）の早期治療。",
+        "symptoms": {"appetite_loss", "lethargy", "rapid_breathing", "fever"},
+        "description": "Potentially fatal autoimmune destruction of erythrocytes by anti-erythrocyte antibodies (IgG, IgM) ± complement activation. Primary (idiopathic, 70%): no underlying cause identified. Secondary (30%): drug-induced (cephalosporins, trimethoprim-sulfa, NSAIDs), infectious (Babesia, Ehrlichia, Mycoplasma haemocanis), neoplastic (lymphoma), vaccine-associated (within 30 days). Most common in middle-aged female dogs (2-8 years). American Cocker Spaniel, English Springer Spaniel, Poodle, Irish Setter predisposed. Key complication: thromboembolic disease (particularly pulmonary thromboembolism) occurs in 30-80% of IMHA dogs and is a leading cause of death. Per ACVIM Consensus 2019.",
+        "description_ja": "抗赤血球抗体（IgG、IgM）±補体活性化による赤血球の自己免疫的破壊。原発性（特発性、70%）：基礎疾患なし。二次性（30%）：薬物誘発（セファロスポリン等）・感染性（バベシア、エーリキア、マイコプラズマ）・腫瘍性（リンパ腫）・ワクチン接種後（30日以内）。中年齢雌犬（2〜8歳）に最多。アメリカン・コッカー・スパニエル等が好発。血栓塞栓性疾患（特に肺血栓塞栓症）がIMHA犬の30〜80%に発生し、主要死因の一つ。ACVIM 2019コンセンサスガイドライン準拠。",
+        "pathophysiology": "Anti-erythrocyte antibodies bind to erythrocyte surface antigens → phagocytosis by splenic and hepatic macrophages (extravascular hemolysis, most common) ± complement membrane attack complex (MAC) formation on RBC surface → intravascular hemolysis (hemoglobinuria, hemoglobinemia — less common but more acute). Extravascular hemolysis in spleen/liver → spherocyte formation (partial phagocytosis removes membrane → smaller, spherical RBC lacking central pallor). Regenerative response: polychromatophilia, reticulocytosis, increased MCHC — expected within 3-5 days; absent regeneration = concurrent bone marrow disease or very acute presentation. IgM-mediated agglutination: potent complement activator → can cause both extra- and intravascular hemolysis + large agglutinates. HYPERCOAGULABILITY in IMHA: phosphatidylserine exposure on hemolyzed RBC membranes activates coagulation cascade; platelet activation; tissue factor from damaged endothelium; consumption of antithrombin III and protein C. Result: DIC and/or pulmonary thromboembolism (PTE) — the major cause of IMHA mortality in treated cases.",
+        "pathophysiology_ja": "抗赤血球抗体が赤血球表面抗原に結合→脾臓・肝臓マクロファージによる貪食（血管外溶血、最多）±補体膜攻撃複合体（MAC）形成→血管内溶血（ヘモグロビン尿症・ヘモグロビン血症；比較的稀だが急性）。血管外溶血：球状赤血球形成（部分的な膜の貪食→より小型・球状のRBC、中心淡明部消失）。再生反応：多染性・網赤血球増加→通常3〜5日以内に出現；再生なし=骨髄疾患併発または超急性期。過凝固状態：溶血したRBC膜のホスファチジルセリン露出→凝固カスケード活性化；アンチトロンビンIIIとプロテインCの消費→DICおよび/または肺血栓塞栓症（PTE）——治療例のIMHA死亡の主因。",
+        "causes": "Primary (idiopathic, 70%): autoimmune trigger unknown. Secondary (30%): drugs (cephalosporins, trimethoprim-sulfa, NSAIDs, methimazole), infectious (Babesia, Ehrlichia, Mycoplasma haemocanis, Leishmania), neoplastic (lymphoma, carcinoma), vaccine-associated, immune-mediated thrombocytopenia (Evans syndrome). Predisposed breeds: American Cocker Spaniel, English Springer Spaniel, Poodle, Irish Setter. Female predisposition 2:1.",
+        "causes_ja": "原発性（特発性、70%）：自己免疫の異常活性化。二次性（30%）：薬物（セファロスポリン等）、感染症（バベシア、エーリキア）、腫瘍（リンパ腫）、ワクチン接種後、免疫介在性血小板減少症（ITP）との合併（エバンス症候群）。",
+        "treatment": "Per ACVIM 2019 Consensus (Swann/Garden JVIM 2019). IMMUNOSUPPRESSION (first-line): prednisolone 2 mg/kg PO/IV q24h (do NOT use prednisone IV — poor bioavailability; use prednisolone or dexamethasone 0.3 mg/kg IV q24h if NPO). Taper over 4-6 months guided by PCV stability. SECOND-LINE immunosuppression (add at diagnosis in severe cases or if inadequate response at 2 weeks): mycophenolate mofetil 10-20 mg/kg PO q12h — superior to azathioprine (faster onset, fewer GI side effects); azathioprine 2 mg/kg PO q24h x14 days then q48h (alternative, slower onset — take 2-4 weeks). THROMBOEMBOLIC PROPHYLAXIS — MANDATORY: clopidogrel 2-4 mg/kg PO q24h (antiplatelet) + unfractionated heparin 200-300 IU/kg SC q8h or LMWH (dalteparin 150-175 IU/kg SC q8h) — reduces PTE mortality; start immediately at diagnosis. SUPPORTIVE CARE: IV fluids (avoid rapid crystalloid infusion — dilutes PCV further; titrate carefully). BLOOD TRANSFUSION: packed RBCs (pRBCs) if PCV <15% or acute decompensation (respiratory distress, neurological signs, collapse); cross-match first; 6-10 mL/kg pRBC IV over 3-4h; DEA1.1 matched preferred; oxyglobin (hemoglobin-based oxygen carrier) as bridge when blood unavailable. Avoid blood transfusion triggers: acute agglutination, severe hemolytic crisis. AVOID: non-essential vaccines, drugs known to cause IMHA during active disease. Address secondary causes (antibiotics if tick-borne disease confirmed).",
+        "treatment_ja": "ACVIM 2019コンセンサスに基づく。免疫抑制（第一選択）：プレドニゾロン2 mg/kg PO/IV 24時間毎（IV投与にプレドニゾンは不可；デキサメタゾン0.3 mg/kg IVで代替）。4〜6ヶ月かけてPCVを指標に漸減。第二選択免疫抑制（重症例では初診時から追加）：ミコフェノール酸モフェチル10〜20 mg/kg PO 12時間毎（アザチオプリンより発現が早く副作用が少ない）；アザチオプリン2 mg/kg PO 24時間毎×14日→以後48時間毎（代替）。血栓塞栓症予防（必須）：クロピドグレル2〜4 mg/kg PO 24時間毎＋ヘパリンまたは低分子量ヘパリン（ダルテパリン150〜175 IU/kg SC 8時間毎）——診断直後から開始。輸血：PCV<15%またはデコンペンセーション時（呼吸困難・神経症状・虚脱）にpRBCsを輸血（クロスマッチ実施）。二次性原因への対処（マダニ媒介感染確認時は抗菌薬）。",
+        "prognosis": "Guarded with significant mortality (20-40%). Pulmonary thromboembolism is the most common cause of death. Poor prognostic indicators: severe anemia (PCV <10%), intravascular hemolysis (hemoglobinuria), elevated bilirubin, DIC, absence of regeneration by day 5. Most survivors respond to immunosuppression within 2-4 weeks. Relapses occur in 10-20% of primary IMHA within 1-3 years. Secondary IMHA resolves with treatment of underlying cause.",
+        "prognosis_ja": "予後不良（死亡率20〜40%）。肺血栓塞栓症が最多死因。不良予後因子：重症貧血（PCV<10%）、血管内溶血（ヘモグロビン尿症）、ビリルビン上昇、DIC、5日目時点での再生反応なし。ほとんどの生存例は2〜4週以内に免疫抑制療法に反応。原発性IMHAの10〜20%が1〜3年以内に再発。二次性IMHAは基礎疾患治療で回復。",
+        "prevention": "No specific prevention for primary IMHA. Avoid unnecessary drug administration (particularly cephalosporins in predisposed breeds). Routine tick prevention (reduces secondary IMHA from Babesia/Ehrlichia). Avoid vaccine administration during active IMHA.",
+        "prevention_ja": "原発性IMHAの確立された予防法なし。不必要な薬物投与を避ける（好発品種でのセファロスポリン等）。定期的なマダニ予防（バベシア/エーリキアによる二次性IMHA予防）。活動性IMHA中のワクチン接種禁忌。",
+        "recommended_tests": [
+            "Saline agglutination test (bedside): 1 drop blood + 1 drop 0.9% NaCl on glass slide; macroscopic agglutination = strongly suggests IgM-mediated IMHA; microscopically evaluate for rouleaux vs true agglutination (rouleaux disperses with dilution)",
+            "Blood smear + PCV/TP: spherocytes (pathognomonic for IMHA — absent central pallor, uniform dark red); polychromatophilia (regeneration); PCV <25% = significant anemia; icteric plasma suggests hemolysis; hemoglobinemia = intravascular hemolysis",
+            "Direct Coombs test (direct antiglobulin test): detects IgG/complement on RBC surface; 60-70% sensitivity (30-40% false-negative in IMHA); positive + spherocytosis + agglutination = highly specific IMHA diagnosis",
+            "CBC + reticulocyte count: severity of anemia; reticulocytes >60,000/μL = regenerative (expected by day 3-5); concurrent thrombocytopenia suggests Evans syndrome or DIC",
+            "Serum chemistry (bilirubin, ALT, ALP): hyperbilirubinemia from hemolysis (pre-hepatic jaundice); bilirubinuria; elevated liver enzymes from hepatic congestion",
+            "Coagulation profile + D-dimer: DIC and/or PTE workup — elevated D-dimer (>250 ng/mL), prolonged PT/aPTT, thrombocytopenia; D-dimer elevation predicts PTE risk and guides anticoagulant intensity",
+            "Tick-borne disease panel (PCR/serology: Babesia, Ehrlichia, Anaplasma, Mycoplasma haemocanis): screen for secondary causes in endemic areas; treat if positive before or alongside immunosuppression",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Gastroenteritis",
@@ -1663,45 +1611,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hemorrhagic Gastroenteritis (HGE)",
         "name_ja": "急性出血性下痢症候群（AHDS/HGE）",
-        "symptoms": {"bloody_stool", "vomiting", "diarrhea", "lethargy", "appetite_loss"},
-        "description": "Acute hemorrhagic diarrhea syndrome with sudden onset of bloody stool and rapid dehydration.",
-        "description_ja": "突然発症のジャム状〜ケチャップ様血便と急速な脱水を特徴とする急性症候群。"
-        "小型犬（ミニチュアシュナウザー、トイプードル、ヨークシャーテリア等）に好発。"
-        "現在はAHDS（Acute Hemorrhagic Diarrhea Syndrome）と呼称。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "正確な機序は不明だが、Clostridium perfringens（netF毒素産生株）が"
-        "主要な病因として示唆されている。腸管粘膜の急性壊死性障害→"
-        "大量の血液・タンパク質の腸管内喪失→急速な血液濃縮（PCV 60〜80%）→"
-        "粘度上昇→DIC・血栓塞栓症のリスク。敗血症の合併もあり。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "Clostridium perfringens（netF毒素陽性株）が最も有力な原因菌。"
-        "ストレス、食餌性因子、免疫学的要因も関与。明確な原因は不明で特発性とされることが多い。"
-        "小型犬に好発（体質的要因の関与を示唆）。",
-        "treatment": "EMERGENCY: (1) Aggressive IV fluid therapy is top priority: crystalloids (LRS 60-90 mL/kg/day, shock bolus 20 mL/kg) + "
-        "colloids (hetastarch 10-20 mL/kg/day). PCV >60% (hemoconcentration) is typical. "
-        "(2) Antiemetics: maropitant 1 mg/kg IV/SC q24h; refractory cases ondansetron 0.1-0.5 mg/kg IV q8-12h. "
-        "(3) Antibiotics: ampicillin 22 mg/kg IV q8h + metronidazole 10-15 mg/kg IV q12h. "
-        "Per Unterer (2011) RCT, no significant benefit in mild-moderate cases → reserve for febrile/leukopenic patients. "
-        "(4) Early enteral nutrition: low-fat highly digestible diet in small frequent meals once vomiting controlled. "
-        "DIET: Hill's i/d or similar for 2-3 weeks post-recovery. Psyllium 1-2 tsp/10kg per meal for stool normalization. "
-        "PROBIOTICS: E. faecium SF68 (FortiFlora), S. boulardii, FOS/MOS. "
-        "Transfusion if PCV <20%. DIC monitoring (platelets, PT/APTT, D-dimer).",
-        "treatment_ja": "【緊急治療】(1)積極的静脈輸液が最優先：晶質液（乳酸リンゲル液 60-90 mL/kg/日、ショック時ボーラス 20 mL/kg）"
-        "＋膠質液（ヘタスターチ 10-20 mL/kg/日）。PCV>60%（血液濃縮）が典型。"
-        "(2)制吐薬：マロピタント 1 mg/kg IV/SC q24h。難治性にはオンダンセトロン 0.1-0.5 mg/kg IV q8-12h。"
-        "(3)抗菌薬：アンピシリン 22 mg/kg IV q8h＋メトロニダゾール 10-15 mg/kg IV q12h。"
-        "Unterer (2011)のRCTでは軽症〜中等症で抗菌薬の有意な利点なし→発熱・白血球減少時のみ推奨。"
-        "(4)早期経腸栄養：嘔吐コントロール後、低脂肪・高消化性食を少量頻回。"
-        "【食事療法】回復後はHill's i/d等で2-3週間。サイリウム 1-2 tsp/10kg/食で便安定化。"
-        "【プロバイオティクス】E. faecium SF68（FortiFlora）、S. boulardii、FOS・MOS。"
-        "輸血はPCV<20%で検討。DICモニタリング（血小板、PT/APTT、D-dimer）。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "積極的な輸液療法で生存率95%以上。多くは2〜3日で劇的に改善。"
-        "DIC合併や治療遅延は致死的。再発率は比較的低い（約10〜15%）。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確実な予防法はないが、ストレス回避、良質な食事管理、"
-        "プロバイオティクスの投与が有用である可能性。",
+        "symptoms": {"appetite_loss", "vomiting", "lethargy", "diarrhea", "bloody_stool"},
+        "description": "Acute hemorrhagic diarrhea syndrome (AHDS, formerly HGE) — peracute onset of profuse bloody (raspberry jam) diarrhea with marked hemoconcentration (PCV often 55-70%) but relatively normal total protein (TP). Predominantly affects small to toy breed dogs (Yorkshire Terrier, Miniature Poodle, Miniature Schnauzer, Shih Tzu, Maltese, Dachshund). Most common in young to middle-aged adults. Clostridium perfringens netF toxin-positive strains are the most likely causative agent. Self-limiting in most cases with aggressive fluid support — antibiotics are generally NOT indicated in uncomplicated AHDS.",
+        "description_ja": "急性出血性下痢症候群（AHDS、旧称HGE）——突然発症の大量血性（ラズベリージャム様）下痢と著明な血液濃縮（PCV 55〜70%が多い）だが総タンパクは比較的正常。主に小型/超小型犬種（ヨークシャー・テリア、ミニチュア・プードル、ミニチュア・シュナウザー、シーズー、マルチーズ、ダックスフンド）の若〜中年齢成犬に好発。最も有力な病因菌：Clostridium perfringens netF毒素産生株。積極的な輸液療法のみで大多数が回復——単純性AHDSには抗菌薬は通常不要。",
+        "pathophysiology": "The leading hypothesis: Clostridium perfringens type A strains producing netF toxin (beta2-pore-forming toxin) cause acute disruption of intestinal epithelial barrier. netF is a heptameric pore-forming toxin that inserts into cell membranes of intestinal villi → membrane disruption → cell necrosis → denudation of villi → loss of absorptive capacity + massive exudation of blood/plasma into intestinal lumen. The resulting fluid loss into the GI tract is INTERNAL (not lost to environment initially) — causing hemoconcentration (elevated PCV) with initially normal plasma proteins (TP preserved because proteins also lost into gut, but slowly relative to fluid). Protein-losing enteropathy develops as fluid loss continues — TP decreases in prolonged/severe cases. Hypovolemia from third-spacing → pre-renal azotemia → renal hypoperfusion → AKI if uncorrected. Secondary bacterial translocation may occur through breached mucosal barrier (Clostridium, E. coli) → systemic infection possible in severe cases. Why small dogs: suspected hypersensitivity/anaphylaxis-like intestinal response, altered gut microbiome susceptibility.",
+        "pathophysiology_ja": "最有力仮説：Clostridium perfringens A型のnetF毒素（β2孔形成毒素）が腸管上皮バリアを急性傷害。netFは七量体孔形成毒素として腸絨毛細胞膜に挿入→膜破壊→細胞壊死→絨毛剥離→吸収能消失＋大量の血液/血漿が腸管内腔へ漏出。体液喪失は最初は腸管内（内部第三腔への移動）——血液濃縮（PCV上昇）を引き起こすがTP（総タンパク）は当初比較的正常に保たれる（タンパクも消失するが水分に比べ遅い）。低血圧→腎前性高窒素血症→補正されなければAKI。粘膜バリア破壊による細菌転座（クロストリジウム、E. coli）→重症例では全身感染。小型犬好発：消化管過敏反応（過敏症様機序）の推測。",
+        "causes": "Clostridium perfringens netF toxin-positive strains (most likely causative agent). Stress, dietary factors, immunological factors also contribute. Often idiopathic. Predisposed: small and toy breed dogs.",
+        "causes_ja": "Clostridium perfringens（netF毒素陽性株）が最も有力な原因菌。ストレス、食餌性因子、免疫学的要因も関与。明確な原因は不明で特発性とされることが多い。小型犬に好発（体質的要因の関与が推察）。",
+        "treatment": "AGGRESSIVE IV FLUID THERAPY is the cornerstone. (1) Shock fluid resuscitation: LRS or Plasma-Lyte 20-30 mL/kg IV over 15-30 minutes; reassess frequently; target: mucous membrane color, CRT, HR, BP normalization. If PCV >60% with signs of shock, colloid supplement: hetastarch 5-10 mL/kg IV. Total daily fluid requirement: maintenance (50-60 mL/kg/day) + ongoing losses (estimate from diarrhea volume). (2) Electrolyte supplementation: K⁺ (hypokalemia from GI losses) — add 20-40 mEq/L KCl to fluids once urine output confirmed; Na supplementation via isotonic crystalloids. (3) Antiemetics: maropitant 1 mg/kg IV q24h; ondansetron 0.5 mg/kg IV q8-12h if refractory vomiting. (4) Analgesia: butorphanol 0.2-0.4 mg/kg IV q6-8h if abdominal pain. (5) Antibiotics: NOT routinely indicated for uncomplicated AHDS (no evidence of benefit in clinical trials; may promote resistance). Indications for antibiotics: fever >39.5°C persisting after rehydration, leukopenia (WBC <4,000), hypotension unresponsive to fluids, positive blood culture, or clinical signs of sepsis — then ampicillin 22 mg/kg IV q8h + metronidazole 15 mg/kg IV q8h. (6) NPO initially: once vomiting controlled (12-24h), offer small amounts of water; reintroduce bland low-fat food in small frequent meals. (7) Most dogs recover with 1-3 days of hospitalization. (8) Persistent/recurrent cases: investigate underlying causes (dietary hypersensitivity, Giardia, Cryptosporidium, pancreatitis).",
+        "treatment_ja": "積極的な輸液療法が主軸。(1)ショック蘇生：LRS 20〜30 mL/kg IV 15〜30分；PCV>60%でショック徴候あればヘタスターチ5〜10 mL/kg追加。1日総輸液量：維持量（50〜60 mL/kg/日）＋継続的損失量。(2)電解質補正：KCl 20〜40 mEq/L添加（低カリウム血症；尿産生確認後）。(3)制吐薬：マロピタント1 mg/kg IV 24時間毎＋オンダンセトロン0.5 mg/kg IV 8〜12時間毎。(4)鎮痛：ブトルファノール0.2〜0.4 mg/kg IV 6〜8時間毎。(5)抗菌薬：単純性AHDSには不要（臨床試験で有益性なし；耐性促進リスク）。適応：発熱持続・白血球減少・輸液抵抗性低血圧・敗血症徴候——アンピシリン＋メトロニダゾール。(6)嘔吐コントロール後（12〜24時間）から少量ずつ経口水/低脂肪食を再開。(7)大多数が1〜3日の入院で回復。",
+        "prognosis": "Excellent with prompt aggressive fluid therapy — >95% survival. Without fluid therapy, severe hypovolemia can be fatal within hours. Recurrence possible in predisposed individuals. Underlying cause should be investigated in recurrent cases.",
+        "prognosis_ja": "積極的な早期輸液療法で予後優良（生存率>95%）。輸液療法なしでは重篤な低血圧が数時間以内に致死的になりうる。再発の可能性があるため、繰り返す場合は基礎疾患の検索が必要。",
+        "prevention": "Avoid sudden dietary changes, stress reduction, regular Giardia/parasite control. Dietary management in recurrent cases.",
+        "prevention_ja": "急激な食餌変更の回避、ストレス軽減、定期的な寄生虫（ジアルジア等）コントロール。再発例では食餌管理を検討。",
+        "recommended_tests": [
+            "PCV/TP (packed cell volume + total protein): AHDS hallmark — PCV elevated (55-70%) with relatively normal or only mildly decreased TP; normal TP differentiates AHDS from other causes of GI hemorrhage with protein loss; monitor PCV/TP q4-6h during treatment to assess fluid response",
+            "Blood glucose: hypoglycemia possible in severe hypovolemia (hepatic glycogen depletion); check on presentation and monitor during therapy",
+            "Serum electrolytes (Na, K, Cl): hypokalemia from GI losses and fluid therapy; guide potassium supplementation; hyponatremia with inappropriate fluid type",
+            "CBC + serum chemistry: leukopenia (WBC <4,000) indicates sepsis risk and antibiotic indication; BUN/creatinine (pre-renal azotemia); ALT/ALP; fecal smear for bacteria overgrowth",
+            "Fecal parasitology (Giardia ELISA, direct smear, flotation): rule out concurrent parasite infection contributing to clinical signs — especially if recurrent or poor response to treatment",
+            "Abdominal ultrasound: rule out foreign body, intussusception, pancreatitis, mass lesion — all can cause bloody diarrhea; assess intestinal wall thickening and peristalsis",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Colitis",
