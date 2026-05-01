@@ -2324,16 +2324,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pleural Effusion",
         "name_ja": "胸水貯留",
-        "symptoms": {"difficulty_breathing", "lethargy", "rapid_breathing", "appetite_loss"},
-        "description": "Abnormal fluid accumulation in the chest cavity, compressing the lungs.",
-        "description_ja": "胸腔内の異常な液体貯留で、肺を圧迫します。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "胸腔内への液体貯留→肺の圧排→換気障害→呼吸困難。液体の性状で原因を推定：(1)漏出液（低蛋白）：うっ血性心不全・低アルブミン血症、(2)滲出液（高蛋白・細胞数高）：膿胸・FIP（猫）・腫瘍、(3)乳び液：乳び胸、(4)血性：血管肉腫・外傷・凝固障害。犬では心不全・腫瘍・膿胸が三大原因。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "うっ血性心不全（右心不全または両心不全）、胸腔内腫瘍（リンパ腫・胸腺腫・肺癌・中皮腫）、膿胸（胸腔内細菌感染）、乳び胸、低アルブミン血症（PLE・肝不全）、外傷性血胸、横隔膜ヘルニア。胸水の細胞診・蛋白定量が原因精査に不可欠。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "基礎疾患の適切な管理。呼吸困難の犬は胸部X線→胸腔穿刺（診断＋治療的減圧）を緊急実施。反復性貯留は胸腔ドレーン留置を検討。",
+        "symptoms": {"rapid_breathing", "appetite_loss", "difficulty_breathing", "lethargy"},
+        "description": "Accumulation of fluid in the pleural space causing respiratory compromise. Fluid types: transudates (pure: CHF, hypoalbuminemia; modified: chylothorax, neoplasia), exudates (pyothorax, neoplasia, FIP), hemorrhagic (trauma, coagulopathy, hemothorax, HSA rupture), chylothorax (chyle from thoracic duct injury or lymphatic obstruction). Bilateral effusion typically suggests systemic cause (CHF, hypoalbuminemia, neoplasia). Unilateral: infection (pyothorax), trauma, neoplasia. EMERGENCY if dyspneic - thoracocentesis before diagnostics.",
+        "description_ja": "胸膜腔への液体貯留による呼吸障害。液体種類：漏出液（純粋：CHF、低アルブミン血症；修飾：乳び胸、腫瘍）、滲出液（膿胸、腫瘍、FIP）、血性（外傷、凝固障害、血胸、HSA破裂）、乳び（胸管損傷または胸リンパ管閉塞）。両側性胸水は通常全身性原因（CHF・低アルブミン血症・腫瘍）を示唆。片側性：感染（膿胸）・外傷・腫瘍。呼吸困難があれば診断より先に胸腔穿刺--緊急処置。",
+        "pathophysiology": "Normal pleural space contains 1-5 mL fluid - maintained by Starling forces (hydrostatic vs oncotic pressure balance) and lymphatic drainage. Excess fluid accumulates when: (1) Increased hydrostatic pressure (CHF - elevated pulmonary venous pressure pushes fluid into pleural space from pulmonary capillaries and visceral pleura); (2) Decreased oncotic pressure (hypoalbuminemia <1.5 g/dL - reduced plasma protein reduces fluid retention in vasculature); (3) Increased capillary/lymphatic permeability (inflammation/infection - pyothorax; neoplastic exudate); (4) Lymphatic obstruction (thoracic duct injury → chylothorax - triglyceride-rich milky fluid; mediastinal neoplasia compressing lymphatics); (5) Direct bleeding (hemothorax from trauma, coagulopathy, or HSA rupture). Respiratory compromise: fluid compresses lung → atelectasis → V/Q mismatch → hypoxemia. Large effusions cause mediastinal shift, tracheal deviation, and paradoxical breathing. Chylothorax: chronic dietary-fat-containing chyle in pleural space → chronic lymphocytic pleuritis, pleural fibrosis, and lung entrapment - long-term complication. Pyothorax: septic inflammation → loculated fibrinous effusion → pleural peel formation - requires aggressive drainage.",
+        "pathophysiology_ja": "正常胸膜腔は1〜5 mLの液体--Starling力（静水圧vs膠質浸透圧バランス）とリンパ排液で維持。過剰液体貯留の機序：(1)静水圧増加（CHF--肺静脈圧上昇→肺毛細管/臓側胸膜からの液体漏出）；(2)膠質浸透圧低下（低アルブミン血症<1.5 g/dL）；(3)毛細管/リンパ管透過性亢進（炎症/感染--膿胸；腫瘍性滲出）；(4)リンパ管閉塞（胸管損傷→乳び胸--トリグリセリド豊富な乳白色液体；縦隔腫瘍によるリンパ管圧迫）；(5)直接出血（血胸：外傷・凝固障害・HSA破裂）。呼吸障害：液体が肺を圧迫→無気肺→V/Qミスマッチ→低酸素血症。大量胸水では縦隔偏位・気管偏位・奇異呼吸。乳び胸：慢性的な乳糜の胸腔内貯留→慢性リンパ球性胸膜炎→胸膜線維症・肺拘束--長期的合併症。膿胸：化膿性炎症→フィブリン性滲出→胸膜被覆形成→積極的なドレナージが必要。",
+        "causes": "CHF (left-sided or biventricular, most common cause), hypoalbuminemia (liver failure, PLE, nephrotic syndrome), pyothorax (Nocardia, Actinomyces, E. coli, Bacteroides), neoplasia (lymphoma, HSA, mesothelioma, primary lung tumor), chylothorax (thoracic duct rupture, lymphangiectasia, mediastinal mass, cardiac disease), hemothorax (trauma, coagulopathy, HSA rupture), diaphragmatic hernia, lungworm (Angiostrongylus).",
+        "causes_ja": "CHF（左心性または両心性--最多原因）、低アルブミン血症（肝不全・PLE・ネフローゼ症候群）、膿胸（ノカルジア・アクチノミセス・大腸菌・バクテロイデス）、腫瘍（リンパ腫・HSA・中皮腫・原発性肺腫瘍）、乳び胸（胸管破裂・リンパ管拡張症・縦隔腫瘤・心疾患）、血胸（外傷・凝固障害・HSA破裂）、横隔膜ヘルニア。",
+        "treatment": "EMERGENCY: thoracocentesis before radiographs if severely dyspneic. (1) Position: sternal recumbency or standing (not lateral - worsens atelectasis). (2) Thoracocentesis: 7th-9th ICS, ventral third, 18-20G butterfly catheter or IV catheter; bilateral if bilateral effusion; remove until resistance felt (lungs re-expand). (3) Oxygen supplementation during procedure. (4) Send fluid immediately for: TP, albumin, triglycerides, cytology, culture + sensitivity. Fluid classification: FLUID ANALYSIS: [Transudate pure] TP <2.5 g/dL, NCC <1500/μL → CHF, hypoalbuminemia. [Modified transudate] TP 2.5-5 g/dL, NCC 1500-5000/μL → CHF (early exudate), chylothorax, neoplasia. [Exudate] TP >3 g/dL, NCC >5000/μL → pyothorax, neoplasia. [Chylous] triglycerides >100 mg/dL (or >serum triglycerides); white, milky → thoracic duct injury, cardiac disease, neoplasia. UNDERLYING CAUSE TREATMENT: (5) CHF: furosemide (rapid diuresis after drainage), pimobendan. (6) Pyothorax: chest tube lavage (100-200 mL sterile saline per side q4-6h) + IV antibiotics (penicillin G 40,000 IU/kg IV q6h + enrofloxacin 5 mg/kg IV q24h for 4-6 weeks; metronidazole if anaerobes suspected); surgical debridement if exudate does not resolve in 5-7 days. (7) Chylothorax: low-fat diet + rutin 50 mg/kg PO q8h (lymphangiogenesis inhibitor); surgical: thoracic duct ligation ± pericardectomy + cisterna chyli ablation. (8) Neoplasia: cytology/histopathology for type-specific chemotherapy; lymphoma → CHOP protocol. (9) Pleuroscopy/thoracoscopy: minimally invasive for biopsy and drainage; preferred over thoracotomy for diagnosis.",
+        "treatment_ja": "緊急：重篤な呼吸困難では胸部X線より先に胸腔穿刺。(1)体位：胸骨臥位または立位（横臥は無気肺悪化）。(2)胸腔穿刺：第7〜9肋間腔、腹側1/3、18〜20Gバタフライカテーテルまたは静脈留置針；両側貯留は両側穿刺；抵抗が生じるまで排液。(3)処置中酸素補給。(4)液体検査：TP・アルブミン・トリグリセリド・細胞診・培養感受性試験。液体分類：純粋漏出（TP<2.5 g/dL：CHF・低アルブミン）；修飾漏出（TP 2.5〜5 g/dL：CHF初期・乳び・腫瘍）；滲出液（TP>3 g/dL：膿胸・腫瘍）；乳び（TG>100 mg/dL；乳白色：胸管損傷・心疾患）。基礎疾患治療：CHFにはフロセミド＋ピモベンダン；膿胸には胸腔チューブ洗浄＋IV抗菌薬4〜6週間；乳び胸には低脂肪食＋ルチン、外科的胸管結紮；腫瘍には種類別化学療法。",
+        "prognosis": "Highly dependent on underlying cause. CHF-associated: good with appropriate cardiac management (months to years). Pyothorax: good with aggressive treatment (80-90% survival). Chylothorax: variable (50-65% success with surgery); recurrence common with medical management alone. Neoplastic: variable (lymphoma may respond well to chemotherapy; mesothelioma guarded); HSA-associated: poor (often rapidly fatal). Hypoalbuminemia-associated: depends on reversibility of underlying cause.",
+        "prognosis_ja": "基礎疾患により大きく異なる。CHF関連：適切な心臓管理で良好（数ヶ月〜数年）。膿胸：積極的治療で良好（生存率80〜90%）。乳び胸：外科治療で50〜65%が改善；内科的管理のみでは再発多い。腫瘍性：多様（リンパ腫は化学療法で良好反応；中皮腫は不良）；HSA関連：不良（急速に致死的）。",
+        "prevention": "Manage underlying predisposing conditions (cardiac disease, protein-losing disorders). Avoid thoracic trauma.",
+        "prevention_ja": "素因となる疾患（心疾患・タンパク喪失性疾患）の管理。胸部外傷の回避。",
+        "recommended_tests": [
+            "Thoracocentesis + fluid analysis (TP, albumin, NCC, triglycerides, cytology, culture): BOTH diagnostic AND therapeutic; triglycerides >100 mg/dL or > serum triglycerides = chylothorax; degenerate neutrophils + bacteria = pyothorax (emergency culture); neoplastic cells; pH <7.0 = septic exudate",
+            "Chest radiographs (after stabilization): bilateral vs unilateral distribution; mediastinal shift; lung lobe consolidation; cardiac silhouette size; diaphragmatic hernia; mass lesions - guide etiology",
+            "Echocardiography: rule out cardiac causes (CHF - elevated LA:Ao, left atrial enlargement, reduced EF); pericardial effusion; cardiac masses; right heart failure (pulmonary hypertension)",
+            "Serum albumin + TP: hypoalbuminemia (<1.5 g/dL) as cause; compare serum vs effusion TP (Light criteria equivalent for dogs: effusion:serum TP > 0.5 = exudate)",
+            "CT thorax: comprehensive evaluation of effusion characteristics, pleural masses, mediastinal lymphadenopathy, lung parenchyma; guides surgical planning; identifies loculated effusions requiring drainage modification",
+            "Coagulation profile (PT, aPTT, platelet count, fibrinogen): hemothorax - rule out coagulopathy (anticoagulant rodenticide, DIC, thrombocytopenia) before thoracocentesis; correct before procedure if significantly abnormal",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "subacute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Pulmonary Hypertension",
@@ -2563,37 +2577,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hemangiosarcoma",
         "name_ja": "血管肉腫（HSA）",
-        "symptoms": {"lethargy", "bloated_abdomen", "weight_loss", "appetite_loss", "rapid_breathing"},
-        "description": "An aggressive malignant tumor of blood vessel walls, "
-        "most common in the spleen and heart. Often presents "
-        "with sudden internal bleeding.",
-        "description_ja": "血管内皮由来の高悪性度肉腫。脾臓（最多）、右心房、肝臓、皮下に好発。"
-        "ジャーマンシェパード、ゴールデンレトリバー、ラブラドールの中高齢犬に多い。"
-        "脾臓HSAの50%以上は腫瘍破裂による急性腹腔内出血で発見される。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "血管内皮細胞の悪性形質転換→血管腔を形成する腫瘍増殖→脆弱な腫瘍血管の破裂→"
-        "大量内出血（血腹、心タンポナーデ）。高い転移率（診断時にはほぼ転移あり）。"
-        "DICの併発が多い。右心房HSAでは心タンポナーデ→心原性ショック。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "明確な原因は不明。遺伝的素因（犬種好発性）、慢性的な抗原刺激、"
-        "紫外線暴露（皮膚型HSA）が示唆されている。",
-        "treatment": "Splenic HSA: emergency splenectomy → adjuvant chemotherapy (doxorubicin-based, 5-6 cycles). "
-        "Cardiac HSA: pericardiocentesis (emergency for tamponade) → pericardiectomy ± chemotherapy. "
-        "Chemotherapy: doxorubicin 30 mg/m² IV q3wk ± cyclophosphamide or vincristine (VAC protocol). "
-        "Metronomic chemotherapy (low-dose cyclophosphamide + piroxicam) reported for maintenance. "
-        "Hemorrhagic shock: pRBC transfusion + aggressive crystalloid/colloid resuscitation. "
-        "Autotransfusion of abdominal blood (if no DIC) can be lifesaving in emergency. "
-        "Dermal HSA (skin-confined): wide surgical excision may be curative.",
-        "treatment_ja": "脾臓HSA：緊急脾摘→術後化学療法（ドキソルビシンベース、5〜6サイクル）。"
-        "心臓HSA：心膜穿刺（緊急）→心膜切除±化学療法。"
-        "化学療法：ドキソルビシン(30mg/m² IV q3w)±シクロフォスファミド or ビンクリスチン。"
-        "メトロノミック化学療法も報告あり。出血ショック時は輸血＋大量輸液。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "予後不良。脾摘のみ：中央生存期間1〜3ヶ月。脾摘＋化学療法：中央生存期間4〜6ヶ月。"
-        "1年生存率10〜20%。皮膚型（真皮限局）のみ手術で根治の可能性あり。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確立された予防法なし。好発品種の中高齢犬では腹部超音波検査の定期実施が推奨。",
+        "symptoms": {"appetite_loss", "weight_loss", "rapid_breathing", "bloated_abdomen", "lethargy"},
+        "description": "Highly malignant vascular neoplasm arising from endothelial cells. Most common primary sites in dogs: spleen (50%), right atrium/auricle (25%), hepatic (5-10%), subcutaneous/dermal, retroperitoneum. Breed predisposition: German Shepherd, Golden Retriever, Labrador, Boxer, Portuguese Water Dog. Median age: 9-12 years. Catastrophic complication: spontaneous rupture with massive hemorrhagic effusion (hemoperitoneum, hemothorax, hemopericardium) - often first presentation. Highly metastatic (>90% have micrometastases at diagnosis). Median survival with surgery + chemotherapy: 5-6 months.",
+        "description_ja": "血管内皮細胞由来の高度悪性血管腫瘍。犬での好発原発部位：脾臓（50%）、右心房/心耳（25%）、肝臓（5〜10%）、皮下/真皮、後腹膜。好発品種：ジャーマン・シェパード、ゴールデン・レトリーバー、ラブラドール、ボクサー、ポルトガル・ウォーター・ドッグ。好発年齢：9〜12歳。壊滅的合併症：自然破裂による大量出血性滲出液（血腹・血胸・血心嚢）--初発症状となることが多い。診断時に>90%がミクロ転移を有する。手術＋化学療法での生存期間中央値：5〜6ヶ月。",
+        "pathophysiology": "Hemangiosarcoma arises from malignant transformation of vascular endothelial cells (or their progenitors in bone marrow). Tumor cells form poorly organized vascular channels (lakes of blood within tumor parenchyma) - highly friable and prone to rupture. Pathological features: (1) Spontaneous hemorrhage: tumor vessel walls are structurally abnormal and fragile → blood pools in tumor → spontaneous rupture → acute massive hemoperitoneum; Waddell sign (ascites + pale mucous membranes = internal hemorrhage). (2) Coagulopathy: consumption of clotting factors and platelets within abnormal tumor vasculature → disseminated intravascular coagulation (DIC) - present in 40-50% of splenic HSA cases at diagnosis; thrombocytopenia + microangiopathic hemolytic anemia (schistocytes on blood smear). (3) Metastasis: early hematogenous dissemination (even at small primary tumor size) to lung, liver, omentum, peritoneum, brain - explains poor long-term prognosis despite surgery. Right atrial HSA: tumor rupture → hemopericardium → cardiac tamponade. Splenic HSA: benign splenic lesions (hematoma, nodular hyperplasia) cannot be distinguished from HSA by imaging alone - all large splenic masses require surgical removal.",
+        "pathophysiology_ja": "血管肉腫は血管内皮細胞（または骨髄前駆細胞）の悪性変換から発生。腫瘍細胞が不完全な血管腔（腫瘍実質内の血液湖）を形成--非常に脆弱で破裂しやすい。病態：(1)自然出血：腫瘍血管壁の構造的異常・脆弱性→血液貯留→自然破裂→急性大量血腹（Waddell徴候：腹水＋蒼白粘膜）；(2)凝固障害：異常腫瘍血管内での凝固因子・血小板の消費→DIC（脾臓HSA診断時の40〜50%に存在）；血小板減少症＋微小血管病性溶血性貧血（血液塗抹上の断片赤血球）；(3)転移：小さな原発腫瘍時点でも血行性早期播種（肺・肝・大網・腹膜・脳）--手術にもかかわらず長期予後が不良な理由。右心房HSA：破裂→血心嚢→心タンポナーデ。脾臓HSA：良性脾病変（血腫・結節性過形成）との画像上の鑑別不可--全ての大型脾腫瘤は手術的摘出が必要。",
+        "causes": "Malignant endothelial cell neoplasm. Breed predisposition (German Shepherd, Golden Retriever) suggests genetic component. Solar UV radiation implicated in dermal HSA (lightly pigmented, sun-exposed skin - hairy areas of abdomen). No single confirmed etiology for visceral HSA.",
+        "causes_ja": "悪性血管内皮細胞腫瘍。好発品種（ジャーマン・シェパード、ゴールデン・レトリーバー）は遺伝的要因を示唆。太陽紫外線は皮膚型HSA（色素薄い露出皮膚）との関連が指摘される。内臓型HSAの単一確定原因はなし。",
+        "treatment": "SPLENIC HSA (acute rupture + hemoperitoneum): (1) Stabilize with IV fluid resuscitation (LRS 20-40 mL/kg/hr - carefully, as aggressive fluids may worsen coagulopathy); blood transfusion or oxyglobin if PCV <15%. (2) Emergency splenectomy: do NOT delay - stopping hemorrhage is lifesaving; use ligaclips/stapling devices (rapid hemostasis). (3) Intraoperative: palpate entire abdomen for metastatic lesions (liver, omentum, retroperitoneum - submit visible nodules for histopathology). (4) Adjuvant chemotherapy (post-splenectomy): doxorubicin 30 mg/m2 IV q21d × 5-6 cycles (most efficacious single agent); alternating with cyclophosphamide 200-250 mg/m2 PO q21d (VAC protocol - improved outcome in some studies). (5) CARDIAC HSA (right atrial/auricle): pericardiocentesis first (acute tamponade); pericardiectomy + right auricular mass excision; doxorubicin chemotherapy. (6) DERMAL HSA: wide surgical excision (2 cm margins) - better prognosis than visceral (5-year survival 30%+ if no lymph node involvement); adjuvant metronomic chemotherapy (cyclophosphamide 10-15 mg/m2/day PO + piroxicam 0.3 mg/kg q24h). (7) Palliative: prednisolone 1-2 mg/kg/day in inoperable cases - some quality-of-life improvement. (8) Chinese herbal supplement Im-Yunity (Yunzhi, PSK): RCT in dogs (Brown et al. Evid Based Complement Alternat Med 2012) - trended toward improved survival.",
+        "treatment_ja": "脾臓HSA（急性破裂＋血腹）：(1)輸液蘇生（LRS 20〜40 mL/kg/hr--過剰輸液は凝固障害悪化に注意）；PCV<15%で輸血/オキシグロビン。(2)緊急脾摘出術：遅延しない--止血が救命的；クリップ/ステープラーで速やかな止血。(3)術中：全腹腔の転移巣触診（肝・大網・後腹膜--可視結節は病理提出）。(4)補助化学療法（脾摘後）：ドキソルビシン30 mg/m2 IV 21日毎×5〜6サイクル（最も有効な単剤）；シクロホスファミド交互投与（VACプロトコル）。(5)心臓HSA（右心房/心耳）：心嚢穿刺（急性タンポナーデ）→心嚢膜切除＋右心耳腫瘤切除→ドキソルビシン化学療法。(6)皮膚型HSA：広範外科切除（2 cmマージン）--内臓型より予後良好；補助少量持続化学療法。(7)緩和：プレドニゾロン1〜2 mg/kg/日（手術不能症例）。",
+        "prognosis": "Splenic HSA with surgery alone: median survival 1-2 months. Splenic HSA + doxorubicin chemotherapy: median survival 4-6 months. Cardiac HSA: median survival 1-4 months with surgery + chemotherapy. Dermal HSA without lymph node metastasis: 5-year survival 30%+. Stage III (metastasis) at diagnosis: days to weeks regardless of treatment. DIC at presentation significantly worsens prognosis.",
+        "prognosis_ja": "脾臓HSA＋手術のみ：生存期間中央値1〜2ヶ月。脾臓HSA＋ドキソルビシン：中央値4〜6ヶ月。心臓HSA：手術＋化学療法で中央値1〜4ヶ月。皮膚型HSA（リンパ節転移なし）：5年生存率30%以上。診断時stage III（転移あり）：治療にかかわらず数日〜数週間。DIC合併例は予後著明悪化。",
+        "prevention": "Sun protection for lightly pigmented breeds (sunscreen, avoidance of sun exposure during peak hours) may reduce dermal HSA risk. No established prevention for visceral HSA. Annual abdominal ultrasound screening in predisposed breeds >7 years.",
+        "prevention_ja": "色素薄い犬種での日焼け止め/日光曝露回避（皮膚型HSA予防の可能性）。内臓型HSAの確立された予防法なし。好発犬種では7歳以降から年1回の腹部超音波スクリーニングを推奨。",
+        "recommended_tests": [
+            "Abdominal ultrasound: splenic or hepatic heterogeneous mass with cavitations (blood-filled spaces); free peritoneal fluid (hemoperitoneum - hyperechoic = acute blood); cannot definitively distinguish HSA from benign splenic hematoma - surgery for all large splenic masses",
+            "Echocardiography: right atrial/auricular mass; pericardial effusion; assess cardiac function pre-chemotherapy (doxorubicin cardiotoxicity screening); troponin I elevation with cardiac HSA",
+            "CBC + coagulation profile: thrombocytopenia (DIC + platelet consumption in tumor), schistocytes on blood smear (microangiopathic hemolysis), anemia (hemorrhagic); PT/aPTT/D-dimer/fibrinogen for DIC; DIC in 40-50% of splenic HSA",
+            "Chest radiographs (3-view): pulmonary metastasis (nodular pattern); pleural effusion; cardiac silhouette assessment; staging for surgical planning",
+            "Histopathology (post-splenectomy): definitive diagnosis; distinguish from benign hematoma and other sarcomas; IHC for CD31/vWF markers of endothelial origin; critical for chemotherapy eligibility",
+            "Abdominal CT with contrast: superior to ultrasound for metastasis staging, liver/omental involvement, retroperitoneal extension; identify additional primary or metastatic sites before surgery",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "senior",
     },
     {
         "name": "Lymphoma",
