@@ -1051,9 +1051,16 @@ DISEASES: List[Dict[str, Any]] = [
         "Hansen II型：線維輪の慢性変性・膨隆→脊髄の緩徐な圧迫。"
         "胸腰部（T11〜L3）が最好発部位。脊髄圧迫の程度によりGrade I（疼痛のみ）〜"
         "Grade V（深部痛覚消失＋麻痺）に分類。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "軟骨異栄養性犬種の遺伝的素因（Hansen I型）。加齢性変性（Hansen II型）。"
-        "肥満、階段昇降、ジャンプ等の物理的負荷が誘発因子。",
+        "causes": "Chondrodystrophic breed genetic predisposition (Hansen Type I). Age-related degeneration (Hansen Type II). Obesity, stair climbing, repetitive jumping as precipitating physical loads.",
+        "causes_ja": "軟骨異栄養性犬種の遺伝的素因（Hansen I型）。加齢性変性（Hansen II型）。肥満、階段昇降、ジャンプ等の物理的負荷が誘発因子。",
+        "recommended_tests": [
+            "Neurological examination: grade the dysfunction — Grade I (spinal pain only); Grade II (ambulatory paresis); Grade III (non-ambulatory paresis, voluntary movement present); Grade IV (paralysis, deep pain intact); Grade V (paralysis, deep pain absent) — determines urgency and prognosis",
+            "Spinal radiographs: calcified disc material visible in chondrodystrophic breeds (60-70% of IVDD cases); disc space narrowing; intervertebral foramen narrowing — useful to localize but not diagnostic without myelography/CT/MRI",
+            "CT myelography (gold standard in most Japanese practices): contrast injected into subarachnoid space → disc extrusion location, extent of spinal cord compression, lateralization for surgical approach; superior to myelography alone",
+            "MRI (gold standard for cord evaluation): T2 hyperintensity in cord (myelomalacia — poor prognosis sign), disc extrusion vs protrusion differentiation, soft tissue resolution; recommended for Grade V and atypical cases",
+            "CSF analysis (after myelography): rule out meningitis/encephalitis if spinal pain without disc lesion on imaging",
+            "CBC/chemistry/urinalysis: pre-surgical baseline; urinalysis/culture for neurogenic bladder/UTI (Grade IV-V often need urinary catheterization)",
+        ],
         "treatment": "Grade I-II (pain, ambulatory): strict cage rest 4-6 weeks, NSAIDs (carprofen 4.4 mg/kg SID or meloxicam 0.1 mg/kg SID), "
         "gabapentin 5-10 mg/kg PO BID-TID for neuropathic pain, methocarbamol 22-44 mg/kg PO BID-TID as muscle relaxant. "
         "Grade III-V (paresis/paralysis): emergency surgical decompression — hemilaminectomy (thoracolumbar) or ventral slot (cervical) within 24-48 hours. "
@@ -1088,9 +1095,16 @@ DISEASES: List[Dict[str, Any]] = [
         "全般性発作（意識消失・全身強直間代性）と焦点性発作（局所的筋攣縮、意識変容）に分類。"
         "発作後期（postictal phase）に一時的な失明、徘徊、攻撃性が見られることがある。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "特発性（遺伝性、最多）：多くの犬種で遺伝的背景が示唆されている。"
-        "構造的原因（脳腫瘍、脳炎、外傷、水頭症）や代謝性原因（低血糖、肝性脳症、"
-        "電解質異常）を除外した上で診断。",
+        "causes_ja": "特発性（遺伝性、最多）：多くの犬種で遺伝的背景が示唆されている。構造的原因（脳腫瘍、脳炎、外傷、水頭症）や代謝性原因（低血糖、肝性脳症、電解質異常）を除外した上で診断。",
+        "recommended_tests": [
+            "Minimum database (all first-seizure dogs): CBC, serum chemistry (glucose, BUN, creatinine, ALT, ALP, Na, K, Ca, bile acids pre/post-meal), urinalysis — rule out metabolic seizure triggers (hypoglycemia, hepatic encephalopathy, uremia, electrolyte disorders)",
+            "MRI brain (with contrast): essential for all dogs with onset <6 months or >6 years, focal seizures, progressive signs, or neurological deficits — detect structural epilepsy (brain tumor, encephalitis, malformation, vascular); recommended before starting AEDs when possible",
+            "CSF analysis (after MRI — rule out contraindications: herniation risk): cell count, protein, cytology, culture; PCR for CDV, FIP-like, Neospora, Toxoplasma, Ehrlichia — identifies inflammatory/infectious encephalitis",
+            "Pre-treatment phenobarbital serum level: baseline before starting phenobarbital (some dogs have enzyme induction differences); repeat 2-4 weeks after starting + every 6 months (target 15-40 μg/mL)",
+            "Liver function testing: bile acids pre/post (pre-treatment) + ALT/ALP every 6 months (phenobarbital hepatotoxicity monitoring); total protein",
+            "Blood pressure: hypertension can cause reactive seizures; exclude cardiovascular etiology",
+            "Serum ammonia (if hepatic encephalopathy suspected): elevated in portosystemic shunt, hepatic failure",
+        ],
         "treatment": "Lifelong antiepileptic drug (AED) therapy (initiate when ≥2 seizures in 6 months, cluster seizures, or status epilepticus): "
         "phenobarbital 2.5-5 mg/kg PO BID (first-line; target serum 15-40 μg/mL; monitor q6 months with serum levels + liver panel). "
         "Potassium bromide 20-40 mg/kg/day PO (monotherapy or add-on; target serum 100-300 mg/dL; steady state 3-4 months; avoid high-salt diets). "
