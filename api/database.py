@@ -74,6 +74,15 @@ CREATE TABLE IF NOT EXISTS diseases (
     onset_pattern TEXT,         -- JSON array
     age_predisposition TEXT,    -- JSON array
 
+    -- Diagnostic fields
+    diagnosis TEXT,
+    diagnosis_ja TEXT,
+    clinical_signs TEXT,
+    clinical_signs_ja TEXT,
+    transmission TEXT,
+    transmission_ja TEXT,
+    differential_diagnosis TEXT,
+
     -- Treatment enrichment fields (Phase 1 expansion)
     prognosis_detailed TEXT,                       -- Extended prognosis with recovery timeline
     prognosis_detailed_ja TEXT,                    -- 日本語版
@@ -164,6 +173,18 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
         cursor.execute("PRAGMA table_info(diseases)")
         columns = {row[1] for row in cursor.fetchall()}
 
+        if "diagnosis_ja" not in columns:
+            logger.info("Running migration: add diagnostic columns")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN diagnosis TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN diagnosis_ja TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN clinical_signs TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN clinical_signs_ja TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN transmission TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN transmission_ja TEXT")
+            cursor.execute("ALTER TABLE diseases ADD COLUMN differential_diagnosis TEXT")
+            conn.commit()
+            logger.info("Migration complete: diagnostic columns added")
+
         if "prognosis_detailed" not in columns:
             logger.info("Running migration: add treatment enrichment columns")
             cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_detailed TEXT")
@@ -215,13 +236,17 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             treatment, treatment_ja, prevention, prevention_ja,
             prognosis, prognosis_ja, urgency, symptoms,
             recommended_tests, onset_pattern, age_predisposition,
+            diagnosis, diagnosis_ja,
+            clinical_signs, clinical_signs_ja,
+            transmission, transmission_ja,
+            differential_diagnosis,
             prognosis_detailed, prognosis_detailed_ja,
             rehabilitation_protocol, rehabilitation_protocol_ja,
             nutrition_management, nutrition_management_ja,
             prognosis_references, rehabilitation_references, nutrition_references,
             recovery_timeline_weeks, success_rate, mortality_rate,
             enriched_at, enrichment_phase, updated_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)""",
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)""",
         (
             disease.get("id"),
             disease.get("species"),
@@ -244,6 +269,13 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             _to_json_if_needed(disease.get("recommended_tests"), is_json_field=True),
             _to_json_if_needed(disease.get("onset_pattern"), is_json_field=True),
             _to_json_if_needed(disease.get("age_predisposition"), is_json_field=True),
+            _ensure_string(disease.get("diagnosis")),
+            _ensure_string(disease.get("diagnosis_ja")),
+            _ensure_string(disease.get("clinical_signs")),
+            _ensure_string(disease.get("clinical_signs_ja")),
+            _ensure_string(disease.get("transmission")),
+            _ensure_string(disease.get("transmission_ja")),
+            _ensure_string(disease.get("differential_diagnosis")),
             _ensure_string(disease.get("prognosis_detailed")),
             _ensure_string(disease.get("prognosis_detailed_ja")),
             _ensure_string(disease.get("rehabilitation_protocol")),

@@ -97,6 +97,13 @@ def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
             "recommended_tests": d.get("recommended_tests", []),
             "onset_pattern": d.get("onset_pattern"),
             "age_predisposition": d.get("age_predisposition"),
+            "diagnosis": d.get("diagnosis"),
+            "diagnosis_ja": d.get("diagnosis_ja"),
+            "clinical_signs": d.get("clinical_signs"),
+            "clinical_signs_ja": d.get("clinical_signs_ja"),
+            "transmission": d.get("transmission"),
+            "transmission_ja": d.get("transmission_ja"),
+            "differential_diagnosis": d.get("differential_diagnosis"),
         }
         upsert_disease(conn, record)
         count += 1
@@ -160,6 +167,13 @@ def migrate_dog_diseases(conn) -> int:
             "recommended_tests": d.get("recommended_tests", []),
             "onset_pattern": d.get("onset_pattern"),
             "age_predisposition": d.get("age_predisposition"),
+            "diagnosis": d.get("diagnosis"),
+            "diagnosis_ja": d.get("diagnosis_ja"),
+            "clinical_signs": d.get("clinical_signs"),
+            "clinical_signs_ja": d.get("clinical_signs_ja"),
+            "transmission": d.get("transmission"),
+            "transmission_ja": d.get("transmission_ja"),
+            "differential_diagnosis": d.get("differential_diagnosis"),
         }
         upsert_disease(conn, record)
         count += 1
@@ -884,6 +898,13 @@ def migrate_equine(conn) -> int:
             "urgency": d.urgency or d.severity,
             "symptoms": set(d.associated_findings),
             "recommended_tests": [(e[1] if len(e) > 1 else str(e)) for e in (d.recommended_exams or [])],
+            "diagnosis": None,
+            "diagnosis_ja": None,
+            "clinical_signs": getattr(d, "clinical_signs_detail", None),
+            "clinical_signs_ja": getattr(d, "clinical_signs_detail", None),
+            "transmission": None,
+            "transmission_ja": None,
+            "differential_diagnosis": None,
         }
         upsert_disease(conn, record)
         count += 1
