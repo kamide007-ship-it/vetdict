@@ -1005,34 +1005,26 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Hip Dysplasia",
         "name_ja": "股関節形成不全",
         "symptoms": {"limping_rl", "limping_rr", "stiffness", "reluctance_move", "pain_on_touch"},
-        "description": "A genetic skeletal condition where the hip joint "
-        "develops abnormally, leading to arthritis and pain.",
-        "description_ja": "股関節の不安定性と亜脱臼を伴う遺伝性の発達性骨格疾患。"
-        "大型〜超大型犬（ジャーマンシェパード、ラブラドール、ゴールデンレトリバー、"
-        "セントバーナード等）に好発。多因子遺伝で環境因子（成長速度、栄養、運動）も関与。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "寛骨臼と大腿骨頭の適合性不良→関節弛緩→亜脱臼→関節軟骨の摩耗→"
-        "二次性変形性関節症（OA）。成長期の急速な体重増加と不適切な運動が悪化因子。"
-        "関節包の炎症と骨棘形成が慢性疼痛の原因。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "多因子遺伝（遺伝率0.2〜0.6）。環境因子：急速な成長、過剰カロリー摂取、"
-        "成長期の過度な運動。大型犬種に圧倒的に多い。",
-        "treatment": "Conservative (mild-moderate): weight management (single most important intervention), controlled low-impact exercise (swimming, leash walks), "
-        "NSAIDs (carprofen 4.4 mg/kg SID or meloxicam 0.1 mg/kg SID long-term with periodic renal/hepatic monitoring), "
-        "joint supplements (glucosamine/chondroitin, omega-3 EPA/DHA). Bedinvetmab (Librela) 0.5 mg/kg SC monthly as NSAID alternative for chronic pain. "
-        "Physical rehabilitation (hydrotherapy, therapeutic exercises). "
-        "Surgical options — juvenile (<6 months): juvenile pubic symphysiodesis (JPS); young dogs (<12 months): double/triple pelvic osteotomy (DPO/TPO) if minimal OA. "
-        "Adults with severe OA: total hip replacement (THR — gold standard, near-normal function) or femoral head ostectomy (FHO — salvage procedure for smaller dogs or when THR unavailable). "
-        "Gabapentin 5-10 mg/kg BID-TID as adjunctive for neuropathic pain component.",
-        "treatment_ja": "保存療法：体重管理（最重要）、適度な運動（水泳推奨）、NSAIDs（カルプロフェン、メロキシカム）、"
-        "関節サプリメント（グルコサミン＋コンドロイチン）、理学療法。"
-        "外科：若齢犬—JPS、DPO/TPO、FHO。成犬—人工股関節全置換術（THR、根治的）、FHO。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "軽症例：保存療法で良好なQOLを維持可能。"
-        "重症例：THRで機能的に正常に近い回復が期待できる。体重管理が予後を大きく左右する。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "罹患犬の繁殖制限、PennHIP/OFA評価による繁殖適性判定。"
-        "大型犬の成長期のカロリー制限（成長曲線に沿った適正体重管理）。",
+        "description": "Most common hereditary skeletal disease of dogs. Acetabular-femoral incongruity → joint laxity → subluxation → secondary OA. Affects large-to-giant breeds predominantly (German Shepherd, Labrador, Golden Retriever, Saint Bernard, Rottweiler, Newfoundland). Multifactorial inheritance (heritability 0.2-0.6); environmental factors (growth rate, nutrition, exercise) modulate severity. OFA/PennHIP hip evaluation programs used for breeding selection.",
+        "description_ja": "犬で最も多い遺伝性骨格疾患。寛骨臼-大腿骨頭の不適合→関節弛緩→亜脱臼→二次性OA。大型〜超大型犬（ジャーマンシェパード、ラブラドール、ゴールデンレトリーバー、セントバーナード、ロットワイラー、ニューファンドランド）に好発。多因子遺伝（遺伝率0.2〜0.6）。繁殖選択にOFA/PennHIP評価が用いられる。",
+        "pathophysiology": "Acetabular-femoral incongruity → joint capsule laxity (Ortolani sign positive in young dogs) → femoral head subluxation → articular cartilage erosion → subchondral bone sclerosis and osteophyte formation → progressive OA. Rapid growth in puppies exacerbates laxity. Chronic OA pain from synovial inflammation, bone-on-bone contact, and periarticular muscle wasting (thigh muscle atrophy measurable by girth).",
+        "pathophysiology_ja": "寛骨臼-大腿骨頭の不適合→関節包の弛緩（若齢犬でのオルトラニ徴候陽性）→大腿骨頭の亜脱臼→関節軟骨の摩耗→軟骨下骨の硬化・骨棘形成→進行性OA。子犬の急速な成長が弛緩を悪化させる。慢性OA疼痛は滑膜炎・骨同士の接触・周辺筋の萎縮（後肢周径の左右差で計測可能）による。",
+        "causes": "Multifactorial genetic (heritability 0.2-0.6). Environmental: rapid growth, excess caloric intake, excess calcium supplementation during growth, inappropriate exercise in puppies. Predominantly large breeds; giant breeds (>45 kg) at highest risk.",
+        "causes_ja": "多因子遺伝（遺伝率0.2〜0.6）。環境因子：急速な成長、過剰カロリー摂取、成長期の過剰Ca補充、子犬期の不適切な運動。大型犬種に圧倒的に多い；超大型犬（>45 kg）が最高リスク。",
+        "recommended_tests": [
+            "Hip-extended VD radiograph (OFA standard view, under sedation): OFA grading (Excellent/Good/Fair/Borderline/Mild/Moderate/Severe) based on acetabular coverage, subluxation, OA degree — requires sedation for proper positioning",
+            "PennHIP distraction index (DI): force-distracted hip radiograph — DI >0.3 indicates laxity, DI >0.7 high OA risk; can be performed from 16 weeks (vs OFA requires 24 months for certification)",
+            "Ortolani and Barlow tests (young dogs <1 year under sedation): subluxation (Barlow) + reduction click (Ortolani) — assess laxity; positive Ortolani = laxity present",
+            "Hip flexion/extension ROM assessment: pain on internal rotation/abduction, crepitus in advanced OA, thigh muscle girth asymmetry",
+            "CT scan: quantitative acetabular coverage (acetabular index angle), femoral head/neck geometry — useful for DPO/TPO surgical planning",
+            "CBC/chemistry: pre-surgical baseline, renal/hepatic function monitoring for long-term NSAIDs",
+        ],
+        "treatment": "Conservative (mild-moderate): weight management (single most important intervention — body condition score 4-5/9), controlled low-impact exercise (swimming, leash walks, avoid fetch/stairs), NSAIDs (carprofen 4.4 mg/kg SID or meloxicam 0.1 mg/kg SID long-term with periodic renal/hepatic monitoring every 6 months), joint supplements (glucosamine/chondroitin, omega-3 EPA/DHA 40-100 mg/kg/day). Bedinvetmab (Librela) 0.5 mg/kg SC monthly as NSAID alternative or adjunct for chronic pain. Physical rehabilitation (hydrotherapy, therapeutic exercises, laser therapy). Gabapentin 5-10 mg/kg BID-TID for neuropathic pain component. Surgical options — juvenile (<16 weeks): juvenile pubic symphysiodesis (JPS — prophylactic fusion, prevents progression in Ortolani-positive puppies); young dogs (12-18 months, minimal OA): double/triple pelvic osteotomy (DPO/TPO — redirects acetabulum for coverage). Adults with severe OA: total hip replacement (THR — gold standard, 95% near-normal function) or femoral head and neck excision (FHNE — salvage, <20 kg dogs or when THR unavailable).",
+        "treatment_ja": "保存療法（軽症〜中等症）：体重管理（最重要—BCS 4〜5/9）、制御的低負荷運動（水泳・リードウォーク、フェッチ・階段を避ける）、NSAIDs（カルプロフェン4.4 mg/kg SID またはメロキシカム0.1 mg/kg SID、6ヶ月毎の腎/肝機能モニタリング）、関節サプリメント（グルコサミン/コンドロイチン、EPA/DHA 40〜100 mg/kg/日）。ベジンベトマブ（リブレラ）0.5 mg/kg SC 月1回—NSAIDs代替または慢性疼痛への追加。理学療法（水中運動・治療的運動・レーザー療法）。ガバペンチン5〜10 mg/kg BID—神経障害性疼痛成分。外科：若齢（<16週）—JPS（予防的恥骨癒合術、Ortolani陽性子犬での進行予防）；若齢犬（12〜18ヶ月、OA最小）—DPO/TPO（寛骨臼の被覆方向矯正）；重篤なOAの成犬—人工股関節全置換術（THR—ゴールドスタンダード、95%近正常機能）または大腿骨頭頸部切除術（FHNE—サルベージ、<20 kg犬またはTHRが不可能な場合）。",
+        "prognosis": "Conservative: mild cases maintain acceptable QOL with lifelong weight/exercise management. Moderate-severe without surgery: progressive OA → chronic pain. THR: 90-95% near-normal function, excellent long-term outcomes. DPO/TPO (young dogs, minimal OA): 80-90% prevent OA progression if performed early. FHNE: 70-80% acceptable function with intensive rehabilitation. Weight management is the single biggest determinant of long-term QOL in conservatively managed dogs.",
+        "prognosis_ja": "保存療法：軽症例では生涯の体重/運動管理で許容できるQOLを維持。中等症〜重症（手術なし）：進行性OA→慢性疼痛。THR：90〜95%の近正常機能、優れた長期成績。DPO/TPO（若齢犬、OA最小）：早期施行でOA進行を80〜90%で予防。FHNE：集中的リハビリで70〜80%が許容できる機能。保存的管理犬での長期QOLを最も左右するのは体重管理。",
+        "prevention": "Breeding screening: PennHIP (from 16 weeks) or OFA (≥24 months) — breed only dogs with normal scores. Large-breed puppy food (controlled Ca/P, controlled caloric density). Avoid overfeeding (restrict growth rate). Controlled exercise in puppies (avoid repetitive impact). Early Ortolani screening at 8-16 weeks allows prophylactic JPS.",
+        "prevention_ja": "繁殖スクリーニング：PennHIP（16週〜）またはOFA（24ヶ月〜）—正常スコアの犬のみ繁殖。大型犬子犬用フード（制御されたCa/P、制御されたカロリー密度）。過剰給餌回避（成長速度制限）。子犬の制御的運動（反復衝撃運動を避ける）。8〜16週でのOrtolaniスクリーニングにより予防的JPSが可能。",
         "urgency": "normal",
     },
     {
