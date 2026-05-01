@@ -4187,9 +4187,9 @@ def analyze():
             ),
             "supervised_by": {
                 "name_ja": "上手 健太郎",
-                "name_en": "Kentaro Kaimide, DVM",
-                "clinic_ja": "南相馬動物病院",
-                "clinic_en": "Minamisoma Veterinary Clinic",
+                "name_en": "Kentaro Kamide, DVM",
+                "clinic_ja": "南相馬アニマルクリニック",
+                "clinic_en": "Minamisoma Animal Clinic",
                 "url": "https://www.minamisoma-vet.com/",
             },
         }

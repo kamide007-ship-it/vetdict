@@ -11,8 +11,8 @@ NOTE: This module provides reference information only. It does not perform
 veterinary diagnosis or treatment, which are restricted to licensed
 veterinarians under Japanese Veterinary Practice Act (獣医師法).
 
-Veterinary Supervision: Kentaro Kaimide, DVM (上手健太郎)
-Minamisoma Veterinary Clinic (南相馬動物病院)
+Veterinary Supervision: Kentaro Kamide, DVM (上手健太郎)
+Minamisoma Animal Clinic (南相馬アニマルクリニック)
 https://www.minamisoma-vet.com/
 
 Disease data (symptoms, risk factors, frequency, treatment, prognosis,
@@ -1266,8 +1266,8 @@ def diagnostic_chat():
             species=species,
         ),
         "recommendations": {
-            "next_step": "This is reference information only. Supervised by Kentaro Kaimide, DVM (Minamisoma Vet Clinic). Please consult a veterinarian for professional evaluation.",
-            "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",
+            "next_step": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian for professional evaluation.",
+            "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
         },
     }
 
@@ -2213,8 +2213,8 @@ def consultation():
                 "pain_score": pain_score,
                 "species": species,
                 "recommendations": {
-                    "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",
-                    "next_step_en": "This is reference information only. Supervised by Kentaro Kaimide, DVM. Please consult a veterinarian.",
+                    "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
+                    "next_step_en": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian.",
                 },
             }
         )

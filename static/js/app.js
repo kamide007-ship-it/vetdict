@@ -241,6 +241,7 @@ const I18N={
     // Analyze button states
     analyzeSearchingDb:"データベース検索中...",
     diseasesFoundToast:"%n%件の疾患が見つかりました",
+    diseasesNoneFoundToast:"該当疾患が見つかりませんでした。症状を追加してください。",
     // Admin
     adminBadgeTitle:"管理者モード — 全機能アンロック済み",
   },
@@ -427,6 +428,7 @@ const I18N={
     // Analyze button states
     analyzeSearchingDb:"Searching database...",
     diseasesFoundToast:"Found %n% diseases",
+    diseasesNoneFoundToast:"No matching diseases found. Try adding more symptoms.",
     // Admin
     adminBadgeTitle:"Admin mode — all features unlocked",
   }
@@ -994,9 +996,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:592,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:596,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:543,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:737,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:740,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:453,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:320,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:348,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1017,7 +1019,7 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:289,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:7147,
+    diseases:7154,
     species:21,
     drugs:250,
     symptoms:52,
@@ -1746,7 +1748,7 @@ function doAnalyze(){
   const slowTimer=setTimeout(()=>{btn.innerHTML=`<span class="spinner"></span> ${t("analyzeSearchingDb")}`;},3000);
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
-  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;showToast(t("diseasesFoundToast").replace("%n%",n),"success");}const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
+  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;if(n>0)showToast(t("diseasesFoundToast").replace("%n%",n),"success");else showToast(t("diseasesNoneFoundToast"),"warning");}const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
   .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);}})
   .finally(()=>{clearTimeout(slowTimer);if(btn){btn.disabled=false;btn.textContent=t("analyzeBtn");}if(progress)progress.classList.remove("active");});
 }
