@@ -1594,17 +1594,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Foreign Body Obstruction",
         "name_ja": "消化管異物閉塞",
-        "symptoms": {"vomiting", "appetite_loss", "lethargy", "bloated_abdomen", "pain_on_touch", "constipation"},
-        "description": "Blockage of the gastrointestinal tract by an ingested "
-        "foreign object, requiring emergency surgery.",
-        "description_ja": "異物の摂取による消化管閉塞で、緊急手術が必要になることがあります。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "異物による腸管内腔の閉塞→口側の腸管拡張・液体貯留→腸壁の虚血→穿孔のリスク。線状異物（糸・紐）は特に危険：腸管のアコーディオン状plication→多発穿孔→腹膜炎。脱水・電解質異常・敗血症が急速に進行。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
+        "symptoms": {"appetite_loss", "constipation", "vomiting", "lethargy", "bloated_abdomen", "pain_on_touch"},
+        "description": "Mechanical obstruction of the gastrointestinal tract by ingested foreign material. Most common sites: pylorus, jejunum, ileocolic junction. Partial obstruction: allows some fluid/gas passage, slower deterioration. Complete obstruction: rapid fluid/electrolyte losses, bowel necrosis risk. Linear foreign bodies (string, thread, fabric, fishing line) are most dangerous — cause plication of intestine, multiple perforations, and septic peritonitis. High-risk breeds: Labrador Retriever, Golden Retriever, young dogs (<2 years). Gastric foreign bodies (non-obstructing): may be managed endoscopically. Intestinal foreign bodies: require surgery.",
+        "description_ja": "誤飲した異物による消化管の機械的閉塞。好発部位：幽門・空腸・回盲接合部。部分閉塞：液体/ガスの部分的通過を許容し、経過は緩徐。完全閉塞：急速な体液・電解質喪失、腸管壊死リスク。線状異物（紐・糸・布・釣り糸）が最も危険——腸管の折り重なり・多発穿孔・敗血症性腹膜炎を引き起こす。高リスク犬種：ラブラドール・レトリーバー、ゴールデン・レトリーバー、若齢犬（<2歳）。胃内異物（非閉塞性）：内視鏡的摘出が可能。腸内異物：外科的処置が必要。",
+        "pathophysiology": "Mechanical obstruction → fluid, gas, and ingesta accumulate proximal to obstruction → intestinal distension → increased intraluminal pressure. Two primary pathological sequences: (1) Fluid and electrolyte loss: vomiting + fluid sequestration in dilated bowel loops (third-spacing) → dehydration, hypovolemia, hypokalemia, metabolic alkalosis (loss of HCl from vomiting, high small intestinal obstruction) OR metabolic acidosis (severe perfusion deficit, distal obstruction). (2) Intestinal wall compromise: distension → venous/lymphatic compression → mucosal edema and congestion → arterial occlusion → ischemic necrosis → bacterial translocation → septic peritonitis → systemic inflammatory response. Linear foreign body: anchor point (often at pylorus) while intestine telescopes around the taut material → multiple serosal tears and perforations along the length of the intestine. Proximal obstructions (duodenum/jejunum): more severe metabolic disturbances (hypochloremic hypokalemic metabolic alkalosis from HCl vomiting, paradoxical aciduria). Distal obstructions: more severe distension, more pronounced metabolic acidosis.",
+        "pathophysiology_ja": "機械的閉塞→閉塞より口側への液体・ガス・腸内容物の貯留→腸管拡張→腔内圧上昇。2つの主要病態経路：(1)体液・電解質喪失：嘔吐＋拡張腸管への体液移行（第三腔）→脱水・低血圧・低カリウム血症・代謝性アルカローシス（HCl喪失；高位小腸閉塞）またはアシドーシス（重篤な低灌流）；(2)腸管壁障害：拡張→静脈/リンパ管圧迫→粘膜浮腫・うっ血→動脈閉塞→虚血性壊死→細菌転座→敗血症性腹膜炎→SIRS。線状異物：幽門部での固定点から腸管が索状異物の周囲に折り重なる→腸管全長にわたる多発漿膜断裂・穿孔。近位閉塞（十二指腸/空腸）：代謝性変化がより重篤（低クロール性低カリウム性代謝性アルカローシス）。",
+        "causes": "Toys, socks, corn cobs, bone fragments, fruit pits, sewing needles, linear items (string, thread, Christmas tinsel, fishing line). Predisposed: puppies and young dogs <2 years, Labrador, Golden Retriever, food-motivated breeds.",
         "causes_ja": "玩具・靴下・コーンコブ・骨片・果物の種・縫い針・紐状異物。好発：若齢犬（1〜3歳）、ラブラドール、ゴールデン等の口に入れやすい犬種。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "飲み込み可能な物の管理（小さな玩具・靴下・紐の放置禁止）、適切なサイズの咀嚼玩具の選択、拾い食い防止のトレーニング。",
+        "treatment": "STABILIZATION FIRST, then definitive treatment: (1) IV fluid resuscitation: LRS or Plasma-Lyte 20-40 mL/kg/hr; correct electrolytes (K+ supplementation once urine output confirmed — hypokalemia from vomiting is common). Metabolic alkalosis: 0.9% NaCl preferred (provides Cl-); metabolic acidosis: LRS. (2) NPO: remove food and water. (3) NG tube decompression: reduces vomiting risk and gastric distension. (4) Broad-spectrum antibiotics (if perforation suspected or bowel necrosis likely): ampicillin-sulbactam 22 mg/kg IV q8h + enrofloxacin 5 mg/kg IV q24h + metronidazole 15 mg/kg IV q8h. (5) Gastric foreign body (non-obstructing): endoscopic retrieval if within 4-6h of ingestion and object retrievable (smooth, blunt); if >8h or linear/sharp: surgery. (6) Intestinal obstruction: exploratory laparotomy — gastrotomy or enterotomy for simple removal; bowel resection/anastomosis for necrotic bowel (assess with: color — grey/black = necrotic; absence of peristalsis; absence of pulsatile mesenteric vessels). (7) Linear foreign body: NEVER pull from mouth without palpating entire intestinal length first — release only after all intestinal perforations identified and repaired. Enteroplication (suturing adjacent intestinal loops) reduces post-op re-intussusception risk. (8) Septic peritonitis (perforation): abdominal lavage + closed suction drains + intensive post-op care.",
+        "treatment_ja": "まず安定化、次いで根治処置：(1)輸液蘇生：LRS 20〜40 mL/kg/hr；電解質補正（尿産生確認後KCl添加）；代謝性アルカローシスには0.9% NaCl（Cl-補給）；代謝性アシドーシスにはLRS。(2)絶食・絶水。(3)胃管減圧（嘔吐リスクと胃拡張の軽減）。(4)広域抗菌薬（穿孔疑い・腸管壊死時）：アンピシリン-スルバクタム＋エンロフロキサシン＋メトロニダゾール。(5)胃内異物（非閉塞性）：内視鏡的摘取（摂取後4〜6時間以内、鈍的・平滑な異物）；線状・鋭利・または遅れた場合は手術。(6)腸内閉塞：試験開腹——胃切開術/腸切開術；壊死腸管は切除/吻合（色（灰〜黒色=壊死）・蠕動消失・腸間膜拍動消失で判断）。(7)線状異物：全腸管を触診して穿孔部を確認する前に口から引き抜いてはならない。腸固定術（腸重積予防）。(8)敗血症性腹膜炎：腹腔洗浄＋閉鎖式吸引ドレーン。",
+        "prognosis": "Simple gastric FB with endoscopic removal: excellent (>99% survival). Single intestinal FB without necrosis/peritonitis: 90-95% survival. Intestinal necrosis requiring resection: 70-85%. Septic peritonitis from perforation: 40-60% survival with aggressive treatment. Linear foreign body with multiple perforations: 50-70% survival.",
+        "prognosis_ja": "胃内異物の内視鏡摘取：優良（生存率>99%）。腸管壊死・腹膜炎なしの単純腸内異物：90〜95%。腸管壊死による切除/吻合：70〜85%。穿孔による敗血症性腹膜炎：積極的治療で40〜60%生存。多発穿孔を伴う線状異物：50〜70%生存。",
+        "prevention": "Supervision of young dogs, removal of linear items (thread, ribbon, tinsel) from household, using Kong-type indestructible toys, never feeding cooked bones.",
+        "prevention_ja": "若齢犬の監視、紐/リボン/ティンセル等の線状物の管理徹底、耐久性のある玩具の使用、加熱済み骨の給与禁止。",
+        "recommended_tests": [
+            "Abdominal radiographs (right lateral + VD): radiopaque FBs directly visible; gas-filled distended bowel loops proximal to obstruction (stacked loops, mechanical ileus pattern); free gas under diaphragm = perforation; linear FBs may show intestinal plication (corrugated appearance)",
+            "Abdominal ultrasound: identify non-radiopaque FBs (acoustic shadow); assess bowel wall thickness and layering (necrosis = loss of wall layering); peristalsis assessment; free peritoneal fluid (peritonitis indicator); superior to radiograph for soft tissue FBs",
+            "Serum electrolytes + venous blood gas: Na, K, Cl, HCO3- — guide fluid type selection (metabolic alkalosis: NaCl; acidosis: LRS); hypokalemia from vomiting requires supplementation; severity guides urgency",
+            "CBC + serum chemistry: leukocytosis + left shift (peritonitis/necrosis); elevated BUN/creatinine (pre-renal azotemia); ALT/ALP elevation if hepatic compromise; lactate elevation = tissue hypoperfusion",
+            "Abdominal contrast study (barium or iohexol): distinguishes complete from partial obstruction; iohexol preferred if perforation suspected (barium causes intense peritoneal reaction); identifies location and nature of obstruction",
+            "Abdominal paracentesis + cytology: if free peritoneal fluid on ultrasound — degenerate neutrophils + intracellular bacteria = septic peritonitis (surgical emergency); effusion TP/creatinine >1.0 vs serum = bowel perforation",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "young",
     },
     {
         "name": "Hemorrhagic Gastroenteritis (HGE)",
@@ -2256,16 +2269,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Aspiration Pneumonia",
         "name_ja": "誤嚥性肺炎",
-        "symptoms": {"coughing", "difficulty_breathing", "fever", "lethargy", "nasal_discharge"},
-        "description": "Lung infection caused by inhaling food, liquid, or vomit into the airways.",
-        "description_ja": "食物・液体・嘔吐物の気道への吸引により引き起こされる肺感染症です。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "異物（胃内容物・食物・液体）の気管支・肺胞への吸引→胃酸による化学性肺障害（Mendelson症候群）→肺胞上皮・毛細血管損傷→二次細菌感染（嫌気性菌含む）→壊死性肺炎・肺膿瘍。右中葉・右前葉に好発（気管支角度の関係）。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "巨大食道症（最多の基礎疾患）、全身麻酔後の嘔吐、喉頭麻痺、重症筋無力症、強制経口投薬時の誤嚥、意識障害時の嘔吐。短頭種は解剖学的にリスク高。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "巨大食道症犬の立位給餌（Bailey chair）、麻酔前の適切な絶食、経口投薬時の慎重な投与、嘔吐犬の頭部挙上。",
+        "symptoms": {"coughing", "fever", "nasal_discharge", "difficulty_breathing", "lethargy"},
+        "description": "Pulmonary inflammation and infection caused by aspiration of oropharyngeal secretions, gastric contents, or food material into the lower airways. High-risk conditions: megaesophagus (most common cause in dogs), laryngeal paralysis, anesthesia/sedation, vomiting, nasogastric tube misplacement, force-feeding, pharyngeal dysfunction (myasthenia gravis, polymyositis). Brachycephalic breeds at increased risk. Ventral lung lobes predominantly affected (gravity-dependent). Can progress to bacterial pneumonia, lung abscess, ARDS, or sepsis. ARDS (acute respiratory distress syndrome) is the most serious complication.",
+        "description_ja": "口咽頭分泌物・胃内容物・食物の下気道への誤嚥による肺炎症および感染。高リスク疾患：巨大食道症（犬での最多原因）、喉頭麻痺、麻酔/鎮静、嘔吐、経鼻胃管の誤挿入、強制給餌、咽頭機能障害（重症筋無力症・多発性筋炎）。短頭種が高リスク。腹側肺葉が主に侵される（重力依存性）。細菌性肺炎・肺膿瘍・ARDS・敗血症に進行しうる。ARDS（急性呼吸窮迫症候群）が最重症合併症。",
+        "pathophysiology": "Aspiration of material into lower airways triggers two overlapping injury mechanisms: (1) Chemical pneumonitis (early, within minutes to hours): gastric acid (pH <2.5 most harmful) or oropharyngeal secretions cause direct chemical injury to bronchial epithelium and alveolar epithelium (type II pneumocytes) → surfactant destruction → alveolar collapse → V/Q mismatch → hypoxemia. Pepsin and bile salts amplify chemical damage. Particle aspiration (food) → airway obstruction + foreign body reaction. (2) Bacterial pneumonia (secondary, 12-24h after aspiration): colonization of chemically injured mucosa by aspirated oral flora (mixed gram-negative: E. coli, Pseudomonas, Klebsiella; gram-positive: Streptococcus, Staphylococcus; anaerobes: Bacteroides, Fusobacterium). Bacterial invasion triggers neutrophilic inflammation → purulent alveolar exudate → consolidation. Severe cases: ARDS from alveolar inflammatory cascade: IL-1, IL-6, TNF-alpha, neutrophil degranulation → diffuse alveolar damage → non-cardiogenic pulmonary edema → refractory hypoxemia.",
+        "pathophysiology_ja": "下気道への誤嚥が2つの重複した傷害機序を引き起こす：(1)化学性肺炎（早期、数分〜数時間以内）：胃酸（pH<2.5が最も有害）または口咽頭分泌物が気管支上皮・肺胞上皮（II型肺細胞）に直接化学的傷害→サーファクタント破壊→肺胞虚脱→V/Qミスマッチ→低酸素血症。ペプシン・胆汁酸塩が化学的傷害を増幅。固体誤嚥（食物）→気道閉塞＋異物反応。(2)細菌性肺炎（二次性、誤嚥後12〜24時間）：化学的傷害を受けた粘膜への口腔内常在菌（混合グラム陰性：E. coli・緑膿菌・クレブシエラ；グラム陽性：連鎖球菌・ブドウ球菌；嫌気性菌：バクテロイデス・フゾバクテリウム）定着→好中球性炎症→化膿性肺胞滲出液→肺実変。重症例：ARDSへの移行（IL-1・IL-6・TNF-α・好中球脱顆粒による汎発性肺胞傷害→非心原性肺水腫→難治性低酸素血症）。",
+        "causes": "Megaesophagus (most common in dogs), laryngeal paralysis, anesthesia/sedation, recurrent vomiting, force-feeding, pharyngeal dysfunction (myasthenia gravis, polymyositis). Brachycephalic breeds predisposed.",
+        "causes_ja": "巨大食道症（犬で最多）、喉頭麻痺、麻酔/鎮静、繰り返す嘔吐、強制給餌、咽頭機能障害（重症筋無力症・多発性筋炎）。短頭種が高リスク。",
+        "treatment": "EMERGENCY: (1) Oxygen therapy: flow-by or oxygen cage (target SpO2 >95%); nasal catheter O2 50-100 mL/kg/min; severe failure: high-flow nasal O2 or mechanical ventilation (ARDS). (2) Position: keep head elevated 15-30° (reduce further aspiration risk). (3) Suction of upper airways if accessible material visible. (4) Bronchodilators: aminophylline 5-10 mg/kg IV slowly (bronchospasm relief) or terbutaline 0.01 mg/kg SC. (5) Antibiotics: MANDATORY (not for chemical pneumonitis alone — but bacterial colonization expected within 12-24h and clinically indistinguishable). Empiric: ampicillin-sulbactam 20-40 mg/kg IV q8h + enrofloxacin 5 mg/kg IV q24h + metronidazole 15 mg/kg IV q8h (anaerobic coverage). Adjust to culture results (bronchoscopic BAL culture preferred). Duration: 4-6 weeks minimum (pulmonary consolidation requires prolonged treatment). (6) IV fluids: maintain perfusion without overhydration (ARDS risk — avoid pulmonary edema). (7) Nebulization: saline 0.9% 10-15 min q6-8h + coupage (chest physiotherapy) — loosens secretions. (8) Treat underlying cause: megaesophagus → upright feeding; laryngeal paralysis → laryngeal lateralization surgery; myasthenia gravis → pyridostigmine. (9) ARDS management: low tidal volume ventilation (6-8 mL/kg), PEEP, prone positioning, methylprednisolone (controversial). (10) Antifungals if fungal aspiration suspected (immunocompromised patients). Avoid: glucocorticoids acutely (does not reduce injury, may increase infection risk).",
+        "treatment_ja": "緊急処置：(1)酸素療法：フロービーまたは酸素ケージ（目標SpO2>95%）；鼻カテーテルO2 50〜100 mL/kg/分；重篤：高流量経鼻O2または機械的換気（ARDS）。(2)体位：頭部を15〜30°挙上（再誤嚥リスク低減）。(3)上気道の吸引。(4)気管支拡張薬：アミノフィリン5〜10 mg/kg IV緩徐またはテルブタリン0.01 mg/kg SC。(5)抗菌薬（必須）：アンピシリン-スルバクタム20〜40 mg/kg IV 8時間毎＋エンロフロキサシン5 mg/kg IV 24時間毎＋メトロニダゾール15 mg/kg IV 8時間毎（嫌気性菌カバー）；BAL培養に基づき調整；4〜6週間継続（肺実変は長期治療を要する）。(6)輸液：過剰輸液回避（ARDSリスク）。(7)ネブライザー療法：生理食塩水10〜15分 6〜8時間毎＋クーパージュ。(8)基礎疾患の治療：巨大食道症→直立給餌；喉頭麻痺→披裂軟骨外側化手術；重症筋無力症→ピリドスチグミン。急性期のグルコルチコイドは禁忌（感染リスク増加）。",
+        "prognosis": "Mild aspiration pneumonitis: good with treatment (recovery 1-2 weeks). Bacterial pneumonia: good to guarded depending on severity (recovery 3-6 weeks of antibiotic treatment). ARDS: guarded to grave (mortality 30-50% even with mechanical ventilation). Underlying cause (megaesophagus, laryngeal paralysis): risk of recurrence unless addressed. Megaesophagus: recurrent aspiration pneumonia is the leading cause of death.",
+        "prognosis_ja": "軽症誤嚥性化学性肺炎：治療で予後良好（1〜2週で回復）。細菌性肺炎：軽症〜中等症で良好（3〜6週の抗菌薬治療）。ARDS：予後不良（機械的換気でも死亡率30〜50%）。基礎疾患（巨大食道症・喉頭麻痺）は再発リスクがあり、巨大食道症では再発性誤嚥性肺炎が主要死因。",
+        "prevention": "Manage underlying predisposing conditions (megaesophagus: bailey chair upright feeding; laryngeal paralysis: surgical correction). Avoid force-feeding in recumbent or sedated patients. Elevate head during recovery from anesthesia. Screen for dysphagia before endoscopy/procedures.",
+        "prevention_ja": "基礎疾患の管理（巨大食道症：ベイリーチェアによる直立給餌；喉頭麻痺：外科的矯正）。臥位または鎮静中の患者への強制給餌を避ける。麻酔回復時の頭部挙上。内視鏡/処置前の嚥下障害スクリーニング。",
+        "recommended_tests": [
+            "Chest radiographs (3-view): ventral lung lobe consolidation (right middle and cranial most common — gravity-dependent aspiration pattern); alveolar pattern, air bronchograms; assess severity and distribution; repeat every 24-48h to monitor progression or resolution",
+            "Pulse oximetry + arterial/venous blood gas: SpO2 <94% = significant hypoxemia requiring supplemental O2; PaO2/FiO2 <300 = ARDS threshold; hypercapnia (PaCO2 >50) in severe cases requiring ventilation",
+            "Bronchoscopic bronchoalveolar lavage (BAL) culture + cytology: gold standard for pathogen identification; degenerate neutrophils + bacteria = infection confirmed; culture identifies causative organism and antibiotic sensitivities; perform before antibiotics if possible",
+            "CBC + serum chemistry: neutrophilia with left shift; toxic neutrophils in severe infection; albumin (low = poor healing and drug binding); chemistry for organ function monitoring during prolonged antibiotic therapy",
+            "Fluoroscopy / contrast esophagram: diagnose megaesophagus and dysphagia as underlying cause; identifies motility disorders; do NOT use barium if aspiration is active concern (use iohexol)",
+            "Acetylcholine receptor antibody titer (AChR Ab): screen for myasthenia gravis as underlying cause of aspiration (test sensitivity 85-90% for focal/generalized MG); positive titer confirms diagnosis",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Pleural Effusion",
@@ -4278,76 +4305,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Heat Stroke",
         "name_ja": "熱中症",
-        "symptoms": {"excessive_panting", "lethargy", "vomiting", "rapid_breathing", "seizures"},
-        "description": "Life-threatening hyperthermia from heat exposure, especially in brachycephalic breeds. "
-        "Mortality 50-64%, with most deaths in first 24 hours. "
-        "Pre-hospital cooling reduces mortality from 49% to 19% (Hall et al. Sci Rep 2020).",
-        "description_ja": "高温環境による生命を脅かす高体温症で、短頭種に特に危険。死亡率50-64%、多くは最初の24時間以内に死亡。"
-        "病院搬送前の冷却で死亡率49% → 19%に低下（Hall et al. Sci Rep 2020）。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "高温環境→体温調節機構の破綻→深部体温>41℃→全身性炎症反応症候群（SIRS）→内皮障害→DIC・多臓器不全"
-        "（腎障害・肝壊死・横紋筋融解・脳浮腫・消化管粘膜壊死）。"
-        "犬はパンティングが主な放熱手段のため、高温多湿環境では効率が急激に低下。"
-        "短頭種は上気道閉塞でパンティング効率がさらに低下→致死的。"
-        "重症度は体温そのものではなく、SIRS・臓器障害の程度で評価される（VetCompass clinical grading 2021）。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "車内放置（最多、車内温度は外気温+20〜30℃に急上昇）、高温下の過度な運動、短頭種（ブルドッグ・パグ・ボストンテリア）、肥満犬、喉頭麻痺犬、厚い被毛の犬種。日本では5〜9月に集中。アスファルト表面温度は気温の1.5〜2倍。",
-        "treatment": "CRITICAL PRINCIPLE: Cool First, Transport Second — pre-hospital cooling reduces mortality from 49% to 19% (Hall et al. Sci Rep 2020). "
-        "ON-SITE COOLING (most important): (1) Cold water immersion (gold standard) — submerge body in cool water (15-25°C), keep head above water. "
-        "(2) Cold water spray + strong fan (evaporative cooling) if immersion impossible. "
-        "(3) Ice packs to neck, axillae, inguinal regions (supplementary). "
-        "Target: stop cooling at rectal temp 39.5°C (103°F) to prevent overshoot hypothermia. "
-        "Do NOT use ice water enemas or alcohol spray (vasoconstriction impairs heat dissipation). "
-        "IN-HOSPITAL EMERGENCY: (1) Airway: intubate brachycephalic breeds if needed, O2 supplementation. "
-        "(2) IV fluids: balanced crystalloids (LRS), shock bolus 30 mL/kg → reassess (caution: excess fluids → cerebral/pulmonary edema). "
-        "(3) Continuous monitoring: temp q5-10min, BP, SpO2, ECG. "
-        "(4) Labs: CBC, chemistry (BUN, Cre, ALT, AST, CK), PT/aPTT, electrolytes, blood gas, lactate. "
-        "(5) Antibiotics for bacterial translocation risk: ampicillin/sulbactam 30 mg/kg IV q8h. "
-        "(6) Antiemetics: maropitant 1 mg/kg SC, ondansetron 0.5 mg/kg IV q8-12h. "
-        "(7) GI protection: omeprazole 1 mg/kg IV q12h, sucralfate 0.5-1 g PO q8h. "
-        "(8) Seizures: diazepam 0.5-1 mg/kg IV, levetiracetam 20 mg/kg IV q8h. "
-        "(9) DIC: FFP 10-15 mL/kg IV. (10) AKI: urine output monitoring (>1-2 mL/kg/h target). "
-        "(11) Rhabdomyolysis: urine alkalinization, aggressive fluids, CK monitoring. ICU 24-72h for severe cases.",
-        "treatment_ja": "【最重要原則】 ❶ 即時の積極的冷却 ❷ 輸送より冷却を優先（"
-        "「Cool First, Transport Second」）— Hall Sci Rep 2020で病院搬送前の冷却により"
-        "死亡率が49% → 19%に低下することが実証された。"
-        "【現場での冷却（最重要）】 "
-        "(1) 冷水浸漬（コールドウォーターイマージョン）— ゴールドスタンダード。"
-        "湯船・大型容器に冷水（15-25℃）を入れて全身浸漬、頭部を水面上に保つ。"
-        "(2) 冷水散布 + 強力な送風（蒸発冷却） — 浸漬不可能な場合の代替。"
-        "(3) 自発的頭部水浸（voluntary head dunking）— 意識ある軽症例で有効（Hess JAVMA 2024）。"
-        "(4) 氷嚢の頸部・腋窩・鼠径部への適用 — 補助的方法。"
-        "目標体温: 直腸温39.5℃（103°F）で冷却中止 → オーバーシュート性低体温を避ける。"
-        "氷水浣腸・アルコール散布は推奨されない（血管収縮により放熱阻害）。"
-        "【院内救急治療】 "
-        "(1) 気道確保: 短頭種で必要時は挿管、O2投与（重症例で人工換気）。"
-        "(2) IV輸液: バランス晶質液（LRS）バランス的に投与、ショック量 30 mL/kg ボーラス → "
-        "再評価。過剰輸液は脳浮腫・肺水腫リスクのため慎重に。"
-        "(3) 体温・血圧・SpO2・心電図の連続モニタリング、直腸温q5-10分。"
-        "(4) 採血: CBC、生化学（BUN、Cre、ALT、AST、CK)、PT/aPTT、電解質、血液ガス、乳酸。"
-        "(5) 抗生物質: 細菌トランスロケーションリスクのため広域抗生物質"
-        "（アンピシリン/スルバクタム 30 mg/kg IV q8h）を考慮。"
-        "(6) 制吐: マロピタント 1 mg/kg SC q24h、オンダンセトロン 0.5 mg/kg IV q8-12h。"
-        "(7) 胃粘膜保護: オメプラゾール 1 mg/kg IV q12h、スクラルファート 0.5-1 g PO q8h"
-        "（出血性消化管炎が一般的）。"
-        "(8) 抗痙攣: ジアゼパム 0.5-1 mg/kg IV、レベチラセタム 20 mg/kg IV q8h（脳浮腫例）。"
-        "(9) DIC: FFP 10-15 mL/kg IV、必要時ヘパリン 75 U/kg SC q6-8h。"
-        "(10) 急性腎障害対策: 尿量モニタリング（>1-2 mL/kg/h目標）、フロセミド慎重使用。"
-        "(11) 横紋筋融解: 尿アルカリ化、輸液による腎保護、CK監視。"
-        "(12) 重症例ICU管理 24-72時間。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "全体死亡率50-64%（Bruchim Vet J 2017、Hall Sci Rep 2020）。"
-        "死亡の大半は最初の24時間以内。"
-        "予後不良因子: 来院時体温>43℃、来院遅延、低血糖、低血圧持続、AKI、DIC、神経症状（昏睡・痙攣）、"
-        "ALT/AST著明上昇、低Pt血症、低Ca血症、高乳酸（>9 mmol/L）。"
-        "予後良好因子: 病院前冷却の実施、来院時意識レベル正常、軽度の臓器障害のみ。"
-        "生存例の約30%に長期合併症（CKD、神経学的後遺症、運動不耐性）が残る。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "車内への犬の放置禁止（5分でも危険）、高温時の運動制限（早朝・夜間に限定）、常に新鮮な水と日陰の確保、"
-        "短頭種の特に厳重な温度管理、アスファルト表面の5秒テスト（手の甲で触れて熱ければ散歩中止）。"
-        "肥満管理、喉頭麻痺の早期治療、長毛種の夏期トリミング検討。"
-        "ACVECC熱中症ガイドライン: 体温管理を伴う事前順応訓練（acclimation）。",
+        "symptoms": {"vomiting", "rapid_breathing", "seizures", "lethargy", "excessive_panting"},
+        "description": "Life-threatening hyperthermia (rectal temperature >41°C / 105.8°F) causing multi-organ dysfunction. Two types: exertional (exercise in hot/humid environment — German Shepherd, Border Collie, working dogs) and non-exertional (confinement in hot environment: parked car, no shade/water — brachycephalic breeds, obese dogs). Body temperature in car can reach 60°C (140°F) within 30 minutes even with windows cracked. Key insight: pre-hospital cooling reduces mortality from 49% to 19% (Hall et al. Sci Rep 2020). DIC and AKI are the most common fatal complications. Dogs with rectal temp >41°C on arrival have significantly higher mortality than those pre-cooled to <40°C.",
+        "description_ja": "直腸温>41°C（105.8°F）による多臓器不全を引き起こす致命的な高体温症。2つの型：労作性（暑湿環境での運動：ジャーマン・シェパード・ボーダー・コリー等の使役犬）、非労作性（閉鎖空間：駐車中の車内・日陰・水なしの環境：短頭種・肥満犬）。車内温度は窓を少し開けても30分で60°Cに達しうる。重要な知見：病院前冷却により死亡率が49%から19%に低下（Hall et al. Sci Rep 2020）。DICとAKIが最も多い致死的合併症。来院時直腸温>41°CはすでにT<40°Cに冷却された例より死亡率が有意に高い。",
+        "pathophysiology": "Normal thermoregulation: evaporative cooling (panting), peripheral vasodilation, reduced activity. When thermoregulatory mechanisms fail: body temperature rises beyond the cellular tolerance threshold. Heat injury mechanisms at cellular level: (1) Protein denaturation: enzymes, structural proteins, and membrane proteins lose function at temperatures >42°C → cellular dysfunction and death; (2) Membrane lipid peroxidation: free radical generation from mitochondrial dysfunction; (3) Heat shock protein response (HSP70): protective initially but overwhelmed in severe heat stroke; (4) Cell death: necrosis and apoptosis cascade. Systemic consequences: (a) Cardiovascular: peripheral vasodilation + tachycardia → distributive shock; (b) GI mucosal barrier breakdown: heat-sensitive epithelium → bacterial translocation → endotoxemia; (c) Renal: hypoperfusion (distributive shock) + direct tubular injury → AKI; (d) Hepatic: centrilobular necrosis from hypoperfusion → elevated ALT/ALP; (e) Neurological: cerebral edema, neuronal necrosis; (f) Coagulation: tissue factor from damaged endothelium + platelet activation → DIC. Brachycephalic breeds: upper airway obstruction (stenotic nares, elongated soft palate) impairs evaporative heat loss → heat accumulates faster.",
+        "pathophysiology_ja": "正常体温調節：蒸発冷却（パンティング）・末梢血管拡張・活動低下。体温調節機能破綻時：細胞耐容閾値を超えた体温上昇。細胞レベルでの熱傷害機序：(1)タンパク質変性：>42°Cで酵素・構造タンパク・膜タンパクが機能喪失→細胞機能障害・細胞死；(2)膜脂質過酸化：ミトコンドリア機能障害からのフリーラジカル生成；(3)熱ショックタンパク応答（HSP70）：初期は保護的だが重症熱中症では機能破綻。全身的影響：(a)循環：末梢血管拡張＋頻脈→分布性ショック；(b)GI粘膜バリア破壊：熱に脆弱な上皮→細菌転座→エンドトキシン血症；(c)腎臓：低灌流＋直接尿細管傷害→AKI；(d)肝臓：低灌流による中心周囲壊死→ALT/ALP上昇；(e)神経：脳浮腫・神経細胞壊死；(f)凝固：傷害内皮からの組織因子＋血小板活性化→DIC。短頭種：上気道閉塞（鼻腔狭窄・軟口蓋過長）が蒸発冷却を障害→体温がより速く上昇。",
+        "causes": "Exertional: exercise in hot/humid environment, inadequate water access. Non-exertional: confinement in hot enclosed space (parked car, kennel without ventilation). Predisposing: brachycephalic breeds, obesity, laryngeal paralysis, heavy/dark coat, cardiovascular/respiratory disease, hyperthyroidism.",
+        "causes_ja": "労作性：高温多湿環境での運動・水分不足。非労作性：密閉高温空間（駐車中の車内・換気のない犬舎）への閉じ込め。素因：短頭種・肥満・喉頭麻痺・暗色/厚い毛皮・心肺疾患・甲状腺機能亢進症。",
+        "treatment": "COOL FIRST, TRANSPORT SECOND — pre-hospital cooling is the most important intervention. ON-SITE COOLING: (1) Remove from hot environment immediately. (2) Cold water immersion: submerse in cold (not ice) water up to neck — most effective method; alternatively pour cold water over coat and fan. (3) Cool water enema (30-50 mL/kg), cool IV fluids (room temperature crystalloids). (4) Do NOT use ice packs — cause peripheral vasoconstriction and reduce core heat dissipation; may cause paradoxical rewarming. (5) Monitor rectal temperature every 5 minutes; STOP cooling at 39.5°C (prevent overshoot hypothermia). IN-HOSPITAL CARE: (6) IV fluid resuscitation: LRS at 90 mL/kg/hr initially (shock); reduce to maintenance once hemodynamic stability achieved; avoid over-hydration (cerebral edema risk). (7) Oxygen supplementation. (8) Glucose monitoring (q2-4h) — hypoglycemia common from glycogen depletion: treat with 0.5 mL/kg 50% dextrose. (9) Electrolytes: K+, Na+, Mg2+ monitoring and correction. (10) DIC monitoring (PT, aPTT, fibrinogen, D-dimer, platelet count q6-12h): if DIC confirmed — fresh frozen plasma 10-20 mL/kg IV; heparin 200-300 IU/kg SC q8h. (11) Seizures: diazepam 0.5-2 mg/kg IV (first-line), phenobarbital 2-4 mg/kg IV. (12) AKI management: maintain urine output >1-2 mL/kg/h (furosemide 1 mg/kg IV if oliguric); peritoneal dialysis if severe AKI. (13) GI protection: omeprazole 0.7 mg/kg PO q24h, sucralfate 0.5-1 g PO q8h (GI hemorrhage from mucosal ischemia). (14) Antibiotics: NOT routinely indicated unless clinical sepsis (endotoxemia suspected — fever persisting, hypotension): ampicillin 22 mg/kg IV q8h.",
+        "treatment_ja": "まず冷却、次いで搬送——病院前冷却が最重要介入。現場での冷却：(1)直ちに高温環境から離脱。(2)冷水浸漬（氷水でない冷水）：首まで浸漬——最も効果的；代替として全身に冷水をかけて送風。(3)冷水浣腸（30〜50 mL/kg）、室温の点滴。(4)氷嚢は禁忌（末梢血管収縮→コア熱放散障害→逆説的な体温上昇）。(5)5分毎に直腸温測定；39.5°Cで冷却を中止（過冷却予防）。院内ケア：(6)LRS 90 mL/kg/hrで輸液蘇生（循環安定後維持量に減量）；過剰輸液回避（脳浮腫）。(7)酸素補給。(8)血糖モニタリング2〜4時間毎——低血糖に50%デキストロース0.5 mL/kg IV。(9)電解質補正（K+・Na+・Mg2+）。(10)DICモニタリング（PT・aPTT・フィブリノーゲン・Dダイマー・血小板数）6〜12時間毎：DIC確認でFFP＋ヘパリン。(11)痙攣：ジアゼパム0.5〜2 mg/kg IV。(12)AKI管理：尿産生目標>1〜2 mL/kg/h（乏尿時フロセミド1 mg/kg IV）。(13)GI保護：オメプラゾール＋スクラルファート（粘膜虚血による消化管出血予防）。",
+        "prognosis": "Pre-hospital cooling (temp <40°C on arrival): mortality ~19%. Without pre-hospital cooling (temp >41°C on arrival): mortality ~49%. DIC: mortality increases to 50-60%. Neurological complications: may be permanent (cerebellar ataxia, behavioral changes). Survivors of severe heat stroke can develop chronic organ dysfunction (CKD, hepatic). Dogs with temperature >43°C: extremely poor prognosis. Brachycephalic breeds: higher mortality from impaired cooling mechanisms.",
+        "prognosis_ja": "病院前冷却あり（来院時体温<40°C）：死亡率約19%。病院前冷却なし（来院時体温>41°C）：死亡率約49%。DIC合併：死亡率50〜60%に増加。神経学的合併症（小脳性失調・行動変化）は不可逆的なことがある。重症熱中症生存例では慢性臓器障害（CKD・肝臓）を残すことがある。体温>43°C：予後極めて不良。短頭種は冷却能力の障害から死亡率が高い。",
+        "prevention": "Never leave dogs in parked vehicles. Provide adequate shade, ventilation, and fresh water. Avoid exercise during hottest hours (10:00-15:00). Surgical correction of brachycephalic airway syndrome. Recognize early signs (excessive panting, seeking shade, reluctance to move) and proactively cool.",
+        "prevention_ja": "駐車した車内への放置を絶対に行わない。十分な日陰・換気・新鮮な水の確保。最も暑い時間帯（10:00〜15:00）の運動回避。短頭種気道症候群の外科的矯正。初期症状（過剰なパンティング・日陰を求める・運動拒否）の早期認識と積極的な冷却。",
+        "recommended_tests": [
+            "Rectal temperature (serial): document initial temperature and response to cooling; stop cooling at 39.5°C; recheck every 5 minutes during cooling; monitor for rebound hyperthermia (common 3-6h after treatment)",
+            "CBC + coagulation profile (PT, aPTT, D-dimer, fibrinogen, platelet count): DIC is the leading fatal complication — thrombocytopenia + elevated D-dimer + prolonged PT/aPTT = DIC; repeat q6-12h for 48h",
+            "Serum chemistry (BUN, creatinine, ALT, ALP, albumin, glucose, CK): AKI (creatinine rise), hepatic injury (ALT/ALP), rhabdomyolysis (CK >10,000 IU/L), hypoglycemia; repeat at 6h, 24h, 48h",
+            "Urinalysis + urine output measurement: myoglobinuria (dark red/brown urine from rhabdomyolysis) → AKI risk; USG (renal concentrating ability); monitor urine output target >1-2 mL/kg/h",
+            "Blood glucose (bedside glucometer): check immediately on arrival; hypoglycemia common from glycogen depletion under heat stress; treat if <70 mg/dL",
+            "Blood pressure (Doppler): distributive shock common; target systolic >90 mmHg; guides fluid therapy rate and vasopressor need; repeat frequently during initial stabilization",
+        ],
         "urgency": "emergency",
+        "onset_pattern": "acute",
+        "age_predisposition": "adult",
     },
     {
         "name": "Hypothermia",
