@@ -263,6 +263,7 @@ _DISEASE_PREVALENCE: dict[str, str] = {
     "Pulmonary Fibrosis": "rare",
     "Dermatomyositis": "rare",
     "Juvenile Cellulitis (Puppy Strangles)": "rare",
+    "Fetal Anasarca (Walrus Syndrome)": "rare",
 }
 
 DISEASES: List[Dict[str, Any]] = [
@@ -3833,6 +3834,46 @@ DISEASES: List[Dict[str, Any]] = [
         "prognosis_ja": "迅速帝王切開術（難産診断から2-4時間以内）で母体生存率90-95%、仔生存率60-85%（胎児苦痛期間による）。短頭種：母体死亡率5-10%（麻酔リスク、術後合併症あっても帝王切開で）。遅延帝王切開（発症から >6-8時間）：母体死亡率 >20%、仔生存率 <40%。子宮破裂または延長虚血：介入にもかかわらず母体死亡率 >40%。術後合併症：メトライティス（予防的抗菌薬なしで5-10%、予防的で <1%）、乳腺炎（栄養不良/不衛生で10-15%）、子癇（仔を補足給餌/早期離乳しない小型種）、母体-仔結合不良（術後 >2-3時間分離の場合）。長期予後：短頭種で自然分娩の場合再発リスク80-100%；今後のすべての産仔で帝王切開必須。非短頭種：一次難産（子宮無力症）で再発30-40%；閉塞が1回的な解剖学的（骨盤骨折既往等）の場合は低い。",
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult"},
+    },
+    {
+        "name": "Fetal Anasarca (Walrus Syndrome)",
+        "name_ja": "胎児水腫（ワルラス症候群/アナサーカ）",
+        "symptoms": {
+            "swelling",
+            "difficulty_breathing",
+            "lethargy",
+            "bloated_abdomen",
+        },
+        "description": "Generalized subcutaneous edema and cavitary effusion in neonatal puppies, causing 1.5-2x normal body size. Mortality 45-78%, but moderate forms are treatable with furosemide. Strongly associated with brachycephalic breeds (English Bulldog, French Bulldog, American Bully). Prenatal ultrasound diagnosis mandates planned cesarean section to prevent fatal dystocia.",
+        "description_ja": "新生子犬の全身性皮下浮腫と体腔液貯留で、正常体重の1.5〜2倍に達する。死亡率45〜78%だが、中等度の形態はフロセミドで治療可能。短頭種（イングリッシュブルドッグ、フレンチブルドッグ、アメリカンブリー）に強く関連。出生前超音波での診断は致死的難産防止のための予定帝王切開の絶対的適応。",
+        "urgency": "emergency",
+        "recommended_tests": ["abdominal_ultrasound", "blood_panel", "radiography_pelvis"],
+        "causes": "Multifactorial: congenital lymphatic dysplasia (impaired lymphatic drainage → subcutaneous fluid accumulation), congenital cardiac defects (transposition of great vessels, valve malformations → hydrops fetalis), renal dysplasia/nephropathy (impaired fetal urine concentration → fluid retention), chromosomal abnormalities. Breed predisposition: English Bulldog, French Bulldog, American Bully, Lhasa Apso, and other brachycephalic breeds. Congenital heart defects cause the most severe (lethal) forms with cavitary effusions (Szaluś-Jordanow 2024).",
+        "causes_ja": "多因子性：先天性リンパ管形成異常（リンパ排出障害→皮下液貯留）、先天性心臓奇形（大血管転位・弁膜異常→胎児水腫）、腎異形成/ネフロパシー（胎児尿濃縮障害→液体貯留）、染色体異常。好発犬種：イングリッシュブルドッグ、フレンチブルドッグ、アメリカンブリー、ラサアプソ等の短頭種。先天性心臓奇形は体腔液貯留を伴う最重症（致死的）型の原因（Szaluś-Jordanow 2024）。",
+        "pathophysiology": "Impaired fluid homeostasis during fetal development leads to generalized subcutaneous edema and, in severe cases, pleural effusion, pericardial effusion, and ascites. LYMPHATIC MECHANISM: congenital lymphatic hypoplasia or dysplasia → reduced lymphatic reabsorption → interstitial fluid accumulation in subcutaneous tissues. CARDIAC MECHANISM: structural cardiac defects (e.g., transposition of great vessels, concurrent hypoplasia of pulmonary vessels and lungs) → elevated central venous pressure → transudation into body cavities and subcutaneous space (Szaluś-Jordanow 2024). RENAL MECHANISM: congenital nephropathy (corticomedullary differentiation abnormalities) → impaired fetal urine regulation → fluid retention (Camargo 2025). The massive subcutaneous swelling increases fetal diameter 1.5-2x, causing obligate dystocia. Brachycephalic breeds with cleft palate frequently accompany anasarca (Estevam 2022). Neonatal puppies are born with low Apgar scores (cyanotic, weak respiratory effort).",
+        "pathophysiology_ja": "胎児発育中の液体恒常性障害により全身性皮下浮腫が発生し、重症例では胸水・心嚢液・腹水を伴う。リンパ機序：先天性リンパ管低形成/異形成→リンパ再吸収低下→皮下組織の間質液蓄積。心臓機序：構造的心臓奇形（大血管転位、肺血管・肺の低形成等）→中心静脈圧上昇→体腔・皮下への漏出（Szaluś-Jordanow 2024）。腎機序：先天性ネフロパシー（皮質髄質分化異常）→胎児尿調節障害→液体貯留（Camargo 2025）。大規模な皮下浮腫により胎児直径が1.5〜2倍に増大し、必発的難産を引き起こす。短頭種では口蓋裂がアナサーカに高頻度で併発（Estevam 2022）。新生子犬は低Apgarスコア（チアノーゼ、微弱な呼吸努力）で出生。",
+        "treatment": "PRENATAL MANAGEMENT: Late-term ultrasound detection of subcutaneous edema and cavitary fluid = ABSOLUTE indication for planned cesarean section. Natural delivery attempt almost always results in severe dystocia fatal to fetus and potentially dam (Njoku 2023). NEONATAL RESUSCITATION (RECOVER 2025 guidelines): 1) Airway clearance—carefully remove mucus plugs from mouth, suction fluid from airways. Cleft palate frequently accompanies anasarca in brachycephalic breeds (Estevam 2022), so oral examination is mandatory. 2) Breathing stimulation—vigorous towel rubbing. 3) Apgar assessment—evaluate heart rate, respiration, reflex irritability, muscle tone, mucous membrane color. Anasarca puppies typically born with low Apgar scores (cyanotic). PHARMACOLOGICAL TREATMENT (moderate anasarca—subcutaneous edema only, no cavitary effusions): Furosemide SC q3h. Clinical evidence: 4 neonatal American Bully puppies treated with furosemide SC q3h achieved ideal body weight with complete resolution of edema after 6 doses (Camargo 2025). English Bulldog puppies with moderate anasarca achieved complete recovery within 36 hours with furosemide after resuscitation (Cunto 2015). SEVERE ANASARCA (cavitary effusions causing respiratory compromise): Thoracocentesis and/or abdominocentesis may be required for mechanical fluid removal to relieve respiratory distress (Szaluś-Jordanow 2024). POST-TREATMENT MONITORING: Surviving puppies require renal function monitoring (ultrasound, urinalysis, creatinine) as congenital nephropathy (corticomedullary differentiation abnormalities) has been detected on ultrasound in surviving puppies (Camargo 2025).",
+        "treatment_ja": "出生前管理：妊娠後期超音波で皮下浮腫と体腔液を検出=予定帝王切開の絶対的適応。自然分娩の試みは重度難産→胎児死亡＋母体リスク（Njoku 2023）。新生児蘇生（RECOVER 2025ガイドライン）：1) 気道清掃—口腔から粘液塊を慎重に除去、気道から液体を吸引。短頭種では口蓋裂がアナサーカに高頻度で併発するため口腔内検査必須（Estevam 2022）。2) 呼吸刺激—タオルで精力的に摩擦。3) Apgarスコア評価—心拍数・呼吸・反射性興奮・筋緊張・粘膜色。アナサーカ子犬は通常低スコア（チアノーゼ）で出生。薬物治療（中等度アナサーカ—皮下浮腫のみ、体腔液なし）：フロセミド SC 3時間ごと。臨床エビデンス：新生児アメリカンブリー4頭にフロセミド SC q3hを投与し、6回投与後に理想体重に到達、浮腫完全消退（Camargo 2025）。イングリッシュブルドッグ子犬の中等度アナサーカは蘇生後フロセミド投与で36時間以内に完全回復（Cunto 2015）。重度アナサーカ（呼吸不全を伴う体腔液貯留）：呼吸困難緩和のための胸腔穿刺・腹腔穿刺が必要（Szaluś-Jordanow 2024）。治療後モニタリング：生存子犬は腎機能モニタリング（超音波・尿検査・クレアチニン）が必要。先天性ネフロパシー（皮質髄質分化異常）が超音波で検出された報告あり（Camargo 2025）。",
+        "prevention": "1) Prenatal ultrasound screening at day 55-60 of gestation in all brachycephalic breed pregnancies—detect subcutaneous edema and cavitary fluid early. 2) If anasarca detected on ultrasound, schedule planned cesarean section at day 62-63 (absolute indication—do NOT attempt natural delivery). 3) Breed selection: English Bulldogs, French Bulldogs, and American Bullies have highest incidence; genetic counseling and careful breeding pair selection may reduce recurrence. 4) Post-delivery monitoring: even mild edema at birth warrants close observation and serial Apgar scoring. 5) Neonatal resuscitation equipment must be prepared for all brachycephalic breed deliveries (suction, towels, warm box at 37°C, furosemide).",
+        "prevention_ja": "1) 短頭種の妊娠では妊娠55-60日に出生前超音波スクリーニング—皮下浮腫・体腔液を早期検出。2) 超音波でアナサーカ検出時は妊娠62-63日で予定帝王切開（絶対的適応—自然分娩は試みない）。3) 犬種選抜：イングリッシュブルドッグ・フレンチブルドッグ・アメリカンブリーは最高頻度；遺伝カウンセリングと慎重な交配ペア選抜で再発軽減の可能性。4) 分娩後監視：出生時の軽度浮腫でも綿密な観察と連続Apgarスコア評価。5) 短頭種の全分娩に新生児蘇生器具を準備（吸引器、タオル、保温箱37°C、フロセミド）。",
+        "prognosis": "SEVERE FORM (cavitary effusions—pleural/pericardial/ascites): Very poor prognosis. When caused by complex congenital cardiac defects (transposition of great vessels, valve malformations), puppies die within the first hours of life despite resuscitation; euthanasia is the humane option (Szaluś-Jordanow 2024). MODERATE FORM (subcutaneous edema only, no cavitary effusions): Guarded to favorable prognosis. Furosemide therapy produces excellent results with complete edema resolution in 1-2 days when the cause is transient lymphatic dysplasia or mild renal insufficiency (Camargo 2025, Cunto 2015). Overall mortality for anasarca ranges 45-78% (Njoku 2023). Post-recovery: surviving puppies require lifelong monitoring as congenital nephropathy has been detected on ultrasound, necessitating renal function surveillance (ultrasound, urinalysis, creatinine) (Camargo 2025).",
+        "prognosis_ja": "重症型（体腔液貯留—胸水/心嚢液/腹水）：予後は極めて不良。複雑な先天性心臓奇形（大血管転位、弁膜異常）が原因の場合、蘇生にもかかわらず生後数時間以内に死亡；安楽死が人道的選択（Szaluś-Jordanow 2024）。中等度型（皮下浮腫のみ、体腔液なし）：予後は慎重〜良好。一過性リンパ管異形成や軽度腎不全が原因の場合、フロセミド療法で1〜2日で浮腫完全消退の優れた効果（Camargo 2025, Cunto 2015）。アナサーカ全体の死亡率は45〜78%（Njoku 2023）。回復後：先天性ネフロパシーが超音波で検出されているため、生存子犬は腎機能の生涯モニタリング（超音波・尿検査・クレアチニン）が必要（Camargo 2025）。",
+        "onset_pattern": {"congenital"},
+        "age_predisposition": {"neonatal"},
+        "breed_predisposition": {
+            "English Bulldog",
+            "French Bulldog",
+            "American Bully",
+            "Lhasa Apso",
+        },
+        "references": [
+            "Njoku NU, et al. A case of foetal anasarca in a primiparous Lhasa apso bitch. J Sustain Vet Allied Sci. 2023;4(1):62-65.",
+            "Boller M, et al. RECOVER guidelines: neonatal resuscitation of dogs and cats. J Vet Emerg Crit Care. 2025.",
+            "Estevam MV, et al. Congenital malformations in brachycephalic dogs: a retrospective study. Front Vet Sci. 2022;9:981923.",
+            "Camargo TM, et al. Treatment of anasarca in neonatal American Bully dogs—case report. Arq Bras Med Vet Zootec. 2025;77(5).",
+            "Cunto M, et al. Diagnosis and treatment of foetal anasarca in two English Bulldog puppies. Pak Vet J. 2015;35(2):251-253.",
+            "Szaluś-Jordanow O, et al. Hydrops fetalis due to complex congenital cardiac defects with concurrent hypoplasia of pulmonary vessels and lungs visualized by micro-CT in a French Bulldog. BMC Vet Res. 2024;20:189.",
+        ],
     },
     # ---- Toxicology / Poisoning ----
     {
