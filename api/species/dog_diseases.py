@@ -5981,7 +5981,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Mushroom Toxicosis",
         "name_ja": "キノコ中毒",
@@ -6009,7 +6008,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Snail Bait (Metaldehyde) Poisoning",
         "name_ja": "ナメクジ駆除剤（メタアルデヒド）中毒",
@@ -6037,7 +6035,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Lily Toxicosis",
         "name_ja": "ユリ中毒",
@@ -6087,7 +6084,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Blue-Green Algae (Cyanobacteria) Toxicosis",
         "name_ja": "藍藻（シアノバクテリア）中毒",
@@ -6115,7 +6111,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Permethrin Toxicosis",
         "name_ja": "ペルメトリン中毒",
@@ -6141,15 +6136,28 @@ DISEASES: List[Dict[str, Any]] = [
             "excessive_thirst",
             "excessive_urination",
         },
-        "description": "Caffeine ingestion causing hyperactivity, tachycardia, tremors, seizures, and potentially cardiac arrest.",
-        "description_ja": "カフェインの摂取により多動、頻脈、震え、けいれん、心停止の可能性を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "カフェイン（メチルキサンチン）→ホスホジエステラーゼ阻害→cAMP上昇→心筋興奮性亢進・平滑筋弛緩。アデノシン受容体拮抗→CNS興奮（落ち着きのなさ・振戦・けいれん）。カテコラミン放出促進→頻脈・不整脈。犬の半減期は4.5時間。致死量は犬で140〜150mg/kg。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "コーヒー豆・茶葉・エナジードリンク・カフェイン錠剤・ダイエットサプリメントの摂取。コーヒー粕（庭の堆肥利用）の誤食も多い。チョコレートにもカフェインが含まれるため複合中毒に注意。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "コーヒー豆・茶葉・カフェイン含有製品のペットからの隔離、コーヒー粕の堆肥利用時の犬のアクセス制限、エナジードリンクの放置禁止。",
+        "description": "Caffeine (methylxanthine) poisoning — same mechanism as chocolate theobromine toxicosis, with similar cardiac and CNS effects. Toxic dose: 63-140 mg/kg (lethal 150-200 mg/kg). Common sources: coffee beans (10-15 mg/g), coffee grounds (accumulate caffeine — high risk in compost), energy drinks (80-300 mg/can), caffeine tablets (200 mg/tablet), pre-workout supplements. Half-life in dogs: 4.5 hours. Small dogs especially at risk — 1 strong energy drink can exceed toxic dose for a small dog.",
+        "description_ja": "カフェイン（メチルキサンチン）中毒—チョコレートのテオブロミン中毒と同じ機序で類似した心臓・CNS効果。毒性量：63〜140 mg/kg（致死量150〜200 mg/kg）。一般的な摂取源：コーヒー豆（10〜15 mg/g）・コーヒー粕（カフェインが蓄積—堆肥使用時に高リスク）・エナジードリンク（80〜300 mg/缶）・カフェイン錠（200 mg/錠）・プレワークアウトサプリメント。犬での半減期：4.5時間。小型犬は特にリスクが高い—1本のエナジードリンクで小型犬の毒性量を超えうる。",
+        "pathophysiology": "Caffeine → phosphodiesterase inhibition (raises cAMP) + adenosine receptor antagonism → cardiac: sinus tachycardia, VPCs, ventricular tachycardia; CNS: stimulation, tremors, seizures; diuresis (renal vasodilation + inhibition of ADH action). Catecholamine release → hypertension, tachyarrhythmias. Same mechanism as theobromine in chocolate. Caffeine undergoes some enterohepatic recirculation in dogs, contributing to prolonged signs.",
+        "pathophysiology_ja": "カフェイン→ホスホジエステラーゼ阻害（cAMP上昇）＋アデノシン受容体拮抗→心臓：洞頻脈・VPC・心室頻拍；CNS：興奮・振戦・けいれん；利尿（腎血管拡張＋ADH作用阻害）。カテコラミン放出→高血圧・頻脈性不整脈。チョコレートのテオブロミンと同じ機序。カフェインは犬で腸肝循環を受け、症状の遷延に寄与する。",
+        "causes": "Coffee beans and grounds (10-15 mg/g caffeine — coffee grounds in compost/mulch are particularly dangerous as dogs dig through compost piles). Energy drinks (80-300 mg/can — 1 Monster or Red Bull can contain 160 mg). Caffeine tablets (200 mg/tablet — 1 tablet can be toxic for a 3 kg dog). Pre-workout supplements (often 200-400 mg/serving). Strong tea/tea bags (20-70 mg/cup, tea bags higher concentration). Guarana-containing products. Diet pills containing caffeine.",
+        "causes_ja": "コーヒー豆とコーヒー粕（10〜15 mg/gカフェイン—堆肥/マルチのコーヒー粕は犬が掘り起こすため特に危険）。エナジードリンク（80〜300 mg/缶—モンスター・レッドブル1缶に160 mgのカフェイン含有）。カフェイン錠（200 mg/錠—1錠が3 kgの犬にとって毒性量になりうる）。プレワークアウトサプリメント（多くは1服200〜400 mg）。強い紅茶/ティーバッグ（1杯20〜70 mg、ティーバッグはより高濃度）。ガラナ含有製品。カフェイン含有ダイエット薬。",
+        "recommended_tests": [
+            "Calculate caffeine dose: amount × caffeine mg/g ÷ body weight kg. Thresholds: >63 mg/kg = toxic signs; >150 mg/kg = life-threatening",
+            "ECG: sinus tachycardia, VPCs, ventricular tachycardia — continuous cardiac monitoring for doses >63 mg/kg",
+            "Blood pressure: hypertension from sympathomimetic caffeine effects",
+            "Electrolytes (potassium): hypokalemia worsens arrhythmia risk; coffee/diuresis compounds electrolyte loss",
+            "CBC/serum chemistry: baseline BUN/creatinine (diuresis), ALT",
+            "Blood glucose: coffee-induced glycogenolysis may cause hyperglycemia or subsequent hypoglycemia",
+        ],
+        "treatment": "GI decontamination (within 2-4 hours, ambulatory, no cardiac signs): apomorphine 0.03 mg/kg IV → activated charcoal 1-3 g/kg PO q6-8h × 2-3 doses (enterohepatic recirculation — repeat charcoal essential). IV fluids (LRS 2-4 mL/kg/h): promote urinary caffeine excretion, correct dehydration from vomiting and caffeine-induced diuresis. Cardiac arrhythmias: lidocaine 2-4 mg/kg IV bolus → 25-75 μg/kg/min CRI for VT; propranolol 0.02-0.06 mg/kg IV for refractory VT (reduces caffeine-mediated adrenergic effects). Seizures: diazepam 0.5-1 mg/kg IV → phenobarbital 2-4 mg/kg IV if refractory. Muscle tremors: methocarbamol 22-44 mg/kg IV. Anti-emetics: maropitant 1 mg/kg SC. Sedation (agitation/anxiety): acepromazine 0.05 mg/kg IM. Urinary catheter to facilitate toxin monitoring. Hospitalize minimum 24h for toxic doses.",
+        "treatment_ja": "消化管除染（摂取後2〜4時間以内、意識明瞭、心臓症状なし）：アポモルヒネ0.03 mg/kg IV→活性炭1〜3 g/kg PO 6〜8時間毎×2〜3回（腸肝循環—活性炭の反復投与が必須）。IV輸液（LRS 2〜4 mL/kg/h）：尿中カフェイン排泄促進・脱水補正。心臓不整脈：リドカイン2〜4 mg/kg IV→25〜75 μg/kg/分CRI（VT）；プロプラノロール0.02〜0.06 mg/kg IV（難治性VT）。けいれん：ジアゼパム0.5〜1 mg/kg IV→フェノバルビタール2〜4 mg/kg IV。筋振戦：メトカルバモール22〜44 mg/kg IV。制吐：マロピタント1 mg/kg SC。鎮静（激越/不安）：アセプロマジン0.05 mg/kg IM。毒性量では最低24時間入院。",
+        "prognosis": "Mild-moderate (<100 mg/kg): good with GI decontamination + repeat activated charcoal. Severe (>150 mg/kg, cardiac arrhythmias): guarded — VT and cardiac arrest risk. Very high dose (>200 mg/kg): poor without aggressive cardiac management. Recovery typically within 24-36h with supportive care. Prognosis similar to chocolate theobromine toxicosis.",
+        "prognosis_ja": "軽度〜中等度（<100 mg/kg）：GI除染＋活性炭反復で良好。重度（>150 mg/kg、心臓不整脈）：慎重—VTと心停止リスク。非常に高用量（>200 mg/kg）：積極的心臓管理なしでは不良。支持療法で通常24〜36時間以内に回復。予後はチョコレートのテオブロミン中毒に類似。",
+        "prevention": "Store coffee, coffee grounds, energy drinks, caffeine supplements in pet-inaccessible locations. Do not compost coffee grounds in areas accessible to dogs. Keep energy drinks (cans, bottles) off floors — dogs attracted to sweet residue. Pre-workout supplements in sealed containers.",
+        "prevention_ja": "コーヒー・コーヒー粕・エナジードリンク・カフェインサプリメントをペットがアクセスできない場所に保管。犬がアクセスできる場所でのコーヒー粕の堆肥化禁止。エナジードリンク（缶・ボトル）を床に放置しない—甘い残留物に犬が引き寄せられる。プレワークアウトサプリメントは密封容器に保管。",
         "urgency": "emergency",
+        "onset_pattern": "acute",
     },
     {
         "name": "Corn Cob Foreign Body",
@@ -8858,7 +8866,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Organophosphate Toxicosis",
         "name_ja": "有機リン中毒",
@@ -8886,7 +8893,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Pyrethrin/Permethrin Toxicosis (Canine)",
         "name_ja": "ピレスリン/ペルメトリン中毒（犬）",
@@ -8906,16 +8912,28 @@ DISEASES: List[Dict[str, Any]] = [
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
         "symptoms": {"vomiting", "diarrhea", "lethargy", "appetite_loss", "bloody_stool"},
-        "description": "Toxicosis from ingestion of zinc-containing objects (coins, hardware) causing hemolytic anemia and GI signs.",
-        "description_ja": "亜鉛含有物（硬貨・金具）の摂取による中毒で、溶血性貧血と消化器症状を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "摂取した亜鉛含有物が胃酸で溶解→血中亜鉛濃度の上昇→赤血球膜の酸化的損傷→ハインツ小体形成→血管内溶血→溶血性貧血・ヘモグロビン尿→急性腎障害。胃粘膜の直接腐食→嘔吐・下痢。膵臓への直接毒性→膵炎。多臓器不全に進展しうる。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "日本の1円硬貨（100%亜鉛）、米国のペニー（1982年以降は97.5%亜鉛）、ボルト・ナット・ジッパー・亜鉛メッキ金属部品、亜鉛含有軟膏（酸化亜鉛）。腹部X線で金属異物を確認。犬は硬貨を飲み込みやすい。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "小さな金属物品・硬貨のペットからの隔離、亜鉛含有軟膏の犬の舐められない部位への使用、子犬の環境整備（硬貨や小物の放置禁止）。",
+        "description": "Zinc poisoning from ingestion of zinc-containing metallic objects (coins, hardware, galvanized metal) causing hemolytic anemia, hemoglobinuria, and multi-organ failure. Japanese 1-yen coins (100% zinc) and US post-1982 pennies (97.5% zinc) are common culprits. Gastric acid dissolves zinc → zinc ions absorbed → oxidative RBC damage → intravascular hemolysis → hemoglobinuria → AKI. Critically: the foreign object MUST be removed (before chelation) to stop ongoing zinc release.",
+        "description_ja": "亜鉛含有金属物（硬貨・金具・亜鉛メッキ金属）の摂取による亜鉛中毒で、溶血性貧血・ヘモグロビン尿・多臓器不全を引き起こす。日本の1円硬貨（100%亜鉛）と米国の1982年以降のペニー（97.5%亜鉛）が一般的原因。胃酸が亜鉛を溶解→亜鉛イオン吸収→酸化的赤血球障害→血管内溶血→ヘモグロビン尿→AKI。重要：キレート療法前に異物を除去して亜鉛の継続的放出を止めなければならない。",
+        "pathophysiology": "Ingested zinc object → gastric acid dissolution of zinc → increased serum zinc (normal: 0.7-2.0 μg/mL; toxic: >2.0 μg/mL) → RBC oxidative membrane damage → Heinz body formation + RBC lysis → intravascular hemolysis → anemia, hemoglobinuria, hemoglobinemia (brown/red plasma). Hepatocellular damage from direct zinc toxicity. Pancreatic injury (acinar cell damage). Renal tubular injury from hemoglobin precipitation. GI mucosal corrosion → hemorrhagic gastroenteritis at ingestion site.",
+        "pathophysiology_ja": "摂取した亜鉛含有物が胃酸で溶解→血清亜鉛上昇（正常：0.7〜2.0 μg/mL；毒性：>2.0 μg/mL）→赤血球の酸化的膜障害→ハインツ小体形成＋赤血球溶解→血管内溶血→貧血・ヘモグロビン尿・ヘモグロビン血症（茶色/赤色血漿）。亜鉛直接毒性による肝細胞障害。膵臓障害（腺房細胞障害）。ヘモグロビン沈殿による腎尿細管障害。GI粘膜腐食→摂取部位の出血性胃腸炎。",
+        "causes": "1-yen coins in Japan (100% zinc), US pennies minted after 1982 (97.5% zinc/2.5% copper), Canadian pennies 1997-2013. Hardware items: bolts, nuts, staples, metal fasteners. Galvanized wire/mesh, zinc-plated items. Zinc oxide ointment (cream/paste). Board game pieces, toy parts, jewelry. Dogs most commonly ingest coins during play or scavenging.",
+        "causes_ja": "日本の1円硬貨（100%亜鉛）、1982年以降の米国ペニー（97.5%亜鉛）。金属部品：ボルト・ナット・ホチキス針・金属ファスナー。亜鉛メッキワイヤー/金網。酸化亜鉛軟膏。ボードゲームの駒・おもちゃ部品・アクセサリー。犬は遊んでいたり物を拾い食いする際に硬貨を最も多く摂取する。",
+        "recommended_tests": [
+            "Abdominal radiographs (URGENT — before treatment): identify and localize metallic foreign objects in GI tract — required for removal decision; zinc objects appear very radiopaque",
+            "CBC and blood smear: hemolytic anemia (rapidly progressive), Heinz bodies (new methylene blue stain), spherocytes, ghost cells, reticulocytosis; hematocrit q4-6h during acute phase",
+            "Serum zinc level (reference lab): >2 μg/mL = significant toxicosis; confirms diagnosis and monitors chelation response",
+            "Urinalysis: hemoglobinuria (brown urine, Heme+ dipstick without RBCs = intravascular hemolysis), myoglobinuria, proteinuria (renal tubular injury)",
+            "Serum chemistry: ALT/AST (hepatic injury), BUN/creatinine (AKI from hemoglobin), amylase/lipase (pancreatic injury), bilirubin (unconjugated = hemolysis; conjugated = hepatic)",
+            "Blood type and crossmatch: prepare for possible transfusion (PCV can drop rapidly — transfuse if PCV <20% or declining rapidly)",
+        ],
+        "treatment": "STEP 1 — FOREIGN OBJECT REMOVAL (BEFORE chelation): endoscopic retrieval if in stomach; surgical gastrotomy if endoscopy fails or object in intestine; even after emesis or passage through pylorus — coins in intestine still cause toxicity. Cathartic (magnesium sulfate 250 mg/kg PO) may speed small objects past intestine. STEP 2 — CHELATION THERAPY: CaNa2EDTA (calcium EDTA) 25-35 mg/kg IV in 5% dextrose q6h × 5 days (enhances renal zinc excretion); or D-penicillamine 15 mg/kg PO BID × 7-14 days (oral alternative, less effective, some GI side effects). HEMOLYTIC ANEMIA MANAGEMENT: packed RBC transfusion if PCV <20% or clinical signs of anemia (tachycardia, collapse, pale MM); IV fluids (0.9% NaCl, 3-5 mL/kg/h) for diuresis and renal protection (flush hemoglobin); sodium bicarbonate (1 mEq/kg IV) to alkalinize urine (prevents hemoglobin precipitation in tubules). GI protection: omeprazole 1 mg/kg IV q12h. Anti-emetics: maropitant 1 mg/kg SC. Hepatoprotection: SAMe 20 mg/kg/day if ALT elevated. Hospitalize minimum 48-72h.",
+        "treatment_ja": "ステップ1—異物除去（キレート療法の前に）：胃内なら内視鏡的回収；内視鏡が失敗または腸内なら外科的胃腸切開；催吐後または幽門通過後でも—腸内の硬貨は引き続き毒性を示す。下剤（硫酸マグネシウム250 mg/kg PO）で小さな異物の腸内通過を促進。ステップ2—キレート療法：CaNa2EDTA 25〜35 mg/kg IV（5%ブドウ糖希釈）6時間毎×5日（腎臓の亜鉛排泄を促進）；またはD-ペニシラミン15 mg/kg PO BID×7〜14日（経口代替、効果はやや劣る）。溶血性貧血管理：PCV<20%または貧血症状（頻脈・虚脱・蒼白MM）なら濃厚赤血球輸血；IV輸液（0.9% NaCl、3〜5 mL/kg/h）利尿と腎保護（ヘモグロビン洗浄）；炭酸水素ナトリウム（1 mEq/kg IV）で尿をアルカリ化（尿細管内ヘモグロビン沈殿防止）。GI保護：オメプラゾール1 mg/kg IV。制吐：マロピタント1 mg/kg SC。肝保護：ALT上昇時にSAMe 20 mg/kg/日。最低48〜72時間入院。",
+        "prognosis": "Dependent on degree of hemolysis and renal injury. Mild-moderate hemolysis treated within 24h with object removal + chelation: good. Severe hemolysis (PCV <15%) or established AKI: guarded. Key: delays in foreign object identification (objects missed on initial radiograph) worsen prognosis significantly. Most dogs with prompt zinc object removal + EDTA chelation recover fully within 1-2 weeks. Pancreatic injury generally resolves. Renal injury from hemoglobinuria: usually reversible if diuresis maintained.",
+        "prognosis_ja": "溶血と腎障害の程度によって異なる。24時間以内の異物除去＋キレート療法による軽度〜中等度の溶血：良好。重篤な溶血（PCV<15%）または確立したAKI：慎重。重要：異物の同定遅延（初期X線での異物の見落とし）は予後を著しく悪化させる。迅速な亜鉛異物除去＋EDTAキレートにより大部分の犬が1〜2週間で完全回復する。膵臓障害は一般的に改善する。ヘモグロビン尿による腎障害：利尿が維持されれば通常可逆的。",
+        "prevention": "Store all coins and small metal objects in pet-inaccessible locations. Regularly sweep floors for dropped coins (especially 1-yen coins). Supervise dogs around construction/hardware materials. Check zinc oxide ointment use — apply only to non-lickable areas or use elizabethan collar.",
+        "prevention_ja": "全ての硬貨と小さな金属物品をペットがアクセスできない場所に保管。定期的に床の落とした硬貨を確認（特に1円硬貨）。建設/金具材料の周辺での犬の監視。酸化亜鉛軟膏の使用確認—舐められない部位のみに塗布するかエリザベスカラーを使用。",
         "urgency": "emergency",
-        "recommended_tests": ["blood_chemistry", "cbc", "abdominal_xray"],
+        "onset_pattern": "acute",
     },
     {
         "name": "Strychnine Poisoning",
@@ -8944,21 +8962,32 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     {
         "name": "Iron Toxicosis",
         "name_ja": "鉄中毒",
         "symptoms": {"vomiting", "bloody_stool", "diarrhea", "lethargy", "collapse", "abdominal_pain"},
-        "description": "Toxicosis from ingestion of iron-containing supplements or products causing GI necrosis and hepatic failure.",
-        "description_ja": "鉄含有サプリメント等の摂取による中毒で、消化管壊死や肝不全を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "鉄イオンの直接的消化管粘膜腐食→出血性胃腸炎（4相経過：I.嘔吐/下痢 →II.見かけ上の改善期 →III.全身性鉄中毒：肝壊死・代謝性アシドーシス・凝固障害 →IV.GI瘢痕性狭窄）。遊離鉄→フェントン反応→フリーラジカル産生→細胞障害。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "ヒト用鉄サプリメント（妊婦用鉄剤が最多の原因）、マルチビタミンの鉄含有製品、使い捨てカイロ（鉄粉含有）の摂取。毒性量：犬で20mg/kg以上の元素鉄で消化器症状、60mg/kg以上で全身中毒。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "鉄含有サプリメント・カイロのペットからの隔離。デフェロキサミン（鉄キレート剤）が特異的解毒薬。",
+        "description": "Iron overdose from iron-containing supplements, prenatal vitamins, or hand warmers causing severe GI necrosis, hepatic failure, and multi-organ toxicity via free radical generation. FOUR CLINICAL PHASES: Phase I (0-6h: GI necrosis, vomiting, hemorrhagic diarrhea, bloody vomit); Phase II (6-24h: apparent clinical improvement — 'latent period' while iron redistributes); Phase III (12-96h: systemic toxicosis — liver failure, metabolic acidosis, coagulopathy, cardiovascular shock); Phase IV (weeks later: GI scarring/stricture). Phase II improvement is deceptive — do NOT discharge during this phase. Toxic dose: >20 mg/kg elemental iron = GI signs; >60 mg/kg = systemic toxicosis.",
+        "description_ja": "鉄含有サプリメント・妊婦用ビタミン・使い捨てカイロによる鉄過剰摂取で、GI壊死・肝不全・フリーラジカル産生による多臓器毒性を引き起こす。4相の臨床経過：I相（0〜6h：GI壊死・嘔吐・出血性下痢・血性嘔吐）；II相（6〜24h：見かけ上の改善—「潜伏期」、鉄が再分布している）；III相（12〜96h：全身性鉄中毒—肝不全・代謝性アシドーシス・凝固障害・循環性ショック）；IV相（数週間後：GI瘢痕性狭窄）。II相の改善は欺瞞的—この期間に退院させるな。毒性量：>20 mg/kg元素鉄=GI症状；>60 mg/kg=全身毒性。",
+        "pathophysiology": "Elemental iron directly corrosive to GI mucosa → hemorrhagic gastroenteritis (Phase I). Absorbed iron (free Fe2+) → Fenton reaction (Fe2+ + H2O2 → Fe3+ + OH• + OH-) → hydroxyl radical (•OH) production → lipid peroxidation of cell membranes → hepatocellular necrosis, mitochondrial dysfunction, vascular endothelial damage → systemic toxicosis (Phase III). Metabolic acidosis from: lactate accumulation (mitochondrial failure) + iron itself (strong acid when bound to protein). Coagulopathy from hepatic failure. Phase II (latent period): free iron temporarily buffered by transferrin/ferritin saturation before further cellular distribution.",
+        "pathophysiology_ja": "元素鉄がGI粘膜を直接腐食→出血性胃腸炎（I相）。吸収された鉄（遊離Fe2+）→フェントン反応（Fe2+ + H2O2 → Fe3+ + •OH + OH-）→ヒドロキシルラジカル（•OH）産生→細胞膜の脂質過酸化→肝細胞壊死・ミトコンドリア機能障害・血管内皮障害→全身性毒性（III相）。代謝性アシドーシス：乳酸蓄積（ミトコンドリア不全）＋鉄自体（タンパク質結合時の強酸）。肝不全による凝固障害。II相（潜伏期）：遊離鉄がさらなる細胞分布前にトランスフェリン/フェリチンの飽和により一時的に緩衝される。",
+        "causes": "Human iron supplements (most common): prenatal vitamins (often 60-90 mg elemental iron/tablet), iron sulfate tablets, iron gluconate supplements. Multivitamins with iron. Japanese disposable hand warmers (iron powder activated oxidation — toxic if ingested, especially in large amounts). Iron-fortified pet food (rarely at toxic levels). Children's chewable vitamins with iron.",
+        "causes_ja": "ヒト用鉄サプリメント（最多）：妊婦用ビタミン（しばしば1錠あたり60〜90 mg元素鉄）・硫酸鉄錠・グルコン酸鉄サプリメント。鉄含有マルチビタミン。日本の使い捨てカイロ（鉄粉による酸化発熱—大量摂取で毒性、特に大量の場合）。鉄強化ペットフード（稀に毒性レベル）。鉄含有子供用チュアブルビタミン。",
+        "recommended_tests": [
+            "Abdominal radiographs: radiopaque tablets/capsules in GI tract — identify source and guide decontamination; iron tablets appear radiopaque",
+            "Serum iron level (TIBC, Total Iron Binding Capacity): serum iron > TIBC (>500 μg/dL) = transferrin saturated = free iron circulating = systemic toxicosis threshold. Check at presentation and 4-6h post-ingestion (peak absorption)",
+            "Serum chemistry: ALT/AST (hepatic necrosis phase III), BUN/creatinine, albumin, glucose (hypoglycemia from hepatic failure), coagulation panel (PT/PTT prolonged from hepatic failure)",
+            "Arterial blood gas: metabolic acidosis (elevated lactate + iron acidosis); severity correlates with systemic toxicosis stage",
+            "CBC: anemia (GI hemorrhage), leukocytosis (systemic inflammation), thrombocytopenia (DIC)",
+            "Deferoxamine challenge test (if serum iron not immediately available): deferoxamine 40 mg/kg IM → urine turns 'vin-rosé' (orange-pink) within 3-6h = serum iron > TIBC = systemic toxicosis; can also guide chelation decision",
+        ],
+        "treatment": "PHASE I-II MANAGEMENT: GI decontamination (if within 1-2 hours, dog ambulatory): apomorphine 0.03 mg/kg IV → gastric lavage with sodium bicarbonate 1-2 g in 50 mL water (forms insoluble iron carbonate in stomach — reduces absorption). Activated charcoal: NOT effective for iron (does not adsorb iron). Endoscopic or surgical removal of intact tablets/capsules visible on radiograph. Saline/sodium bicarbonate lavage (sodium phosphate/carboxymethylcellulose to precipitate iron). CHELATION THERAPY (serum iron >500 μg/dL or positive deferoxamine challenge): DEFEROXAMINE (DFO) — specific iron chelator: 10-15 mg/kg/h IV CRI (NOT IM once systemic toxicosis established — unreliable absorption); chelates free iron → ferrioxamine (water-soluble, orange-colored → excreted in urine — urine discoloration confirms chelation); continue until urine color returns to normal (typically 12-24h). Maximum: 80 mg/kg/day IV. SUPPORTIVE CARE (PHASE III): IV fluids (LRS 3-5 mL/kg/h) + dextrose; sodium bicarbonate for metabolic acidosis (pH <7.2); whole blood/FFP for coagulopathy/anemia; vasopressors (dopamine) for cardiovascular shock. GI protection: omeprazole 1 mg/kg IV q12h, sucralfate 0.5-1 g q8h PO. Hepatoprotection: NAC 140 mg/kg IV loading → 70 mg/kg q6h × 7 doses (free radical scavenging). Minimum hospitalization: 24-48h for mild cases; 72-96h for Phase III.",
+        "treatment_ja": "I〜II相管理：消化管除染（1〜2時間以内かつ意識明瞭）：アポモルヒネ0.03 mg/kg IV→炭酸水素ナトリウム1〜2 g（50 mL水）による胃洗浄（胃内で不溶性の炭酸鉄を形成し吸収を減少）。活性炭：鉄には無効（鉄を吸着しない）。X線で確認できる無傷の錠剤/カプセルの内視鏡的または外科的除去。キレート療法（血清鉄>500 μg/dL またはDFO試験陽性）：デフェロキサミン（DFO）—特異的鉄キレート剤：10〜15 mg/kg/h IV CRI（全身毒性確立後はIMは信頼性が低い）；遊離鉄をキレート→フェロキサミン（水溶性・橙色→尿中排泄—尿の変色がキレートを確認）；尿が通常色に戻るまで継続（通常12〜24時間）。最大：80 mg/kg/日 IV。支持療法（III相）：IV輸液（LRS）＋ブドウ糖；代謝性アシドーシスに炭酸水素ナトリウム；凝固障害/貧血にWB/FFP；循環性ショックにバソプレッサー（ドーパミン）。GI保護：オメプラゾール・スクラルファート。肝保護：NAC 140 mg/kg IV負荷→70 mg/kg 6時間毎×7回。最低入院期間：軽症24〜48時間；III相72〜96時間。",
+        "prognosis": "Phase I-II treated promptly (before systemic distribution): good with chelation. Phase III (hepatic failure, metabolic acidosis, DIC): guarded to poor — mortality significant without aggressive intensive care. Key: do NOT discharge during 'latent period' (Phase II) — clinical improvement is deceptive; monitor serum iron at 4-6h. Phase IV (GI stricture): rare complication requiring surgical intervention weeks later. Monitor liver function for 2 weeks post-recovery.",
+        "prognosis_ja": "全身分布前（I〜II相）の迅速な治療：キレートで良好。III相（肝不全・代謝性アシドーシス・DIC）：集中的な集中治療なしでは重篤な死亡率—慎重〜不良。重要：「潜伏期」（II相）中に退院させるな—臨床改善は欺瞞的；4〜6時間後に血清鉄を再測定。IV相（GI狭窄）：数週間後に外科的介入を要する稀な合併症。回復後2週間は肝機能モニタリング。",
+        "prevention": "Store ALL iron-containing supplements (especially prenatal vitamins) in locked, pet-inaccessible locations. Japanese hand warmers: dispose promptly after use, keep unused warmers sealed. Never give iron supplements to dogs without veterinary guidance. Check multivitamins for iron content before giving to pets.",
+        "prevention_ja": "全ての鉄含有サプリメント（特に妊婦用ビタミン）を施錠されたペットがアクセスできない場所に保管。日本の使い捨てカイロ：使用後は直ちに廃棄し、未使用品は密封保管。獣医師の指導なしに犬に鉄サプリメントを与えない。ペットに与える前にマルチビタミンの鉄含有量を確認。",
         "urgency": "emergency",
-        "recommended_tests": ["blood_chemistry", "serum_iron_level", "abdominal_xray"],
+        "onset_pattern": "acute",
     },
     {
         "name": "Vitamin D Toxicosis",
@@ -8987,7 +9016,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "onset_pattern": "acute",
     },
-
     # --- Breed-Specific and Other Conditions ---
     {
         "name": "Copper-Associated Chronic Hepatitis (Breed-Specific)",
