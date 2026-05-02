@@ -138,7 +138,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pneumonia (Lower Respiratory Infection)",
         "name_ja": "肺炎（下部呼吸器感染症）",
-        "symptoms": {"open_mouth_breathing", "respiratory_distress", "nasal_discharge", "lethargy", "anorexia", "listing_to_one_side", "bubbling_nose"},
+        "symptoms": {
+            "open_mouth_breathing",
+            "respiratory_distress",
+            "nasal_discharge",
+            "lethargy",
+            "anorexia",
+            "listing_to_one_side",
+            "bubbling_nose",
+        },
         "description": "Pneumonia (Lower Respiratory Infection) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "肺の細菌・真菌感染症で、水棲ガメでは泳ぐ時に片側に傾くことがあります。",
         "urgency": "high",
@@ -218,7 +226,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Herpesvirus Infection",
         "name_ja": "ヘルペスウイルス感染症",
-        "symptoms": {"mouth_lesions", "nasal_discharge", "stomatitis", "conjunctivitis", "anorexia", "lethargy", "sudden_death"},
+        "symptoms": {
+            "mouth_lesions",
+            "nasal_discharge",
+            "stomatitis",
+            "conjunctivitis",
+            "anorexia",
+            "lethargy",
+            "sudden_death",
+        },
         "description": "Herpesvirus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "壊死性口内炎、鼻炎、全身性疾患を引き起こすリクガメのヘルペスウイルス感染症です。",
         "urgency": "emergency",
@@ -493,7 +509,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Vitamin A Deficiency (Hypovitaminosis A)",
         "name_ja": "ビタミンA欠乏症",
-        "symptoms": {"swollen_eyes", "conjunctivitis", "nasal_discharge", "respiratory_distress", "anorexia", "skin_lesions"},
+        "symptoms": {
+            "swollen_eyes",
+            "conjunctivitis",
+            "nasal_discharge",
+            "respiratory_distress",
+            "anorexia",
+            "skin_lesions",
+        },
         "description": "Vitamin A Deficiency (Hypovitaminosis A) is a nutritional or metabolic disorder caused by dietary imbalance or deficiency.",
         "description_ja": "特にハコガメで目の腫脹と呼吸器症状を引き起こすビタミンA不足です。",
         "urgency": "moderate",
@@ -931,7 +954,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dehydration",
         "name_ja": "脱水症",
-        "symptoms": {"sunken_eyes", "wrinkled_skin", "decreased_skin_elasticity", "lethargy", "anorexia", "dry_mucous_membranes"},
+        "symptoms": {
+            "sunken_eyes",
+            "wrinkled_skin",
+            "decreased_skin_elasticity",
+            "lethargy",
+            "anorexia",
+            "dry_mucous_membranes",
+        },
         "description": "Dehydration is a condition of inadequate body fluid volume requiring fluid replacement therapy.",
         "description_ja": "飼育下リクガメに非常に多い慢性的な水分不足による全身状態の悪化です。",
         "urgency": "moderate",
@@ -1946,7 +1976,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"young", "adult", "senior"},
     },
-
     # ── 追加疾患 (Additional Diseases) ──
     {
         "name": "Chelonian Herpesvirus Type 1",
@@ -3156,8 +3185,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"young", "adult", "senior"},
     },
-
-
     # ── 追加疾患2 (Additional Diseases 2) ──
     {
         "name": "Cutaneous Papilloma",
@@ -3326,30 +3353,30 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"shell_deformity", "abnormal_shell_growth"},
         "description": "Abnormal vertical growth of scutes causing a pyramidal appearance, common in captive tortoises.",
         "description_ja": "甲板が垂直方向に異常隆起し、ピラミッド状の外観を呈する代謝性疾患。"
-                          "飼育下リクガメで極めて多い。ケヅメリクガメ、ヒョウモンリクガメに特に多い。"
-                          "低湿度・過剰タンパク・ビタミンD過剰が主因。不可逆的な変形。",
+        "飼育下リクガメで極めて多い。ケヅメリクガメ、ヒョウモンリクガメに特に多い。"
+        "低湿度・過剰タンパク・ビタミンD過剰が主因。不可逆的な変形。",
         "pathophysiology": "Improper keratinization and bone growth at scute margins due to chronic metabolic imbalance, low humidity, and dietary excess.",
         "pathophysiology_ja": "低湿度→甲板辺縁の角質化異常＋骨成長異常→甲板の垂直方向への隆起。"
-                              "過剰タンパク食→成長速度の不均衡→甲板変形。"
-                              "一度形成されたピラミッド化は不可逆的。重度では内臓圧迫・"
-                              "肺機能障害・産卵障害の原因にもなる。",
+        "過剰タンパク食→成長速度の不均衡→甲板変形。"
+        "一度形成されたピラミッド化は不可逆的。重度では内臓圧迫・"
+        "肺機能障害・産卵障害の原因にもなる。",
         "causes": "Low humidity, excessive protein diet, rapid growth, inadequate UVB, vitamin D excess, calcium-phosphorus imbalance.",
         "causes_ja": "低湿度（最大の原因）、過剰タンパク食、急速な成長、"
-                     "不十分なUVB照射、ビタミンD過剰補充、Ca:P比の不均衡。"
-                     "屋内飼育で湿度管理が不十分な場合に多発。",
+        "不十分なUVB照射、ビタミンD過剰補充、Ca:P比の不均衡。"
+        "屋内飼育で湿度管理が不十分な場合に多発。",
         "treatment": "Cannot reverse existing deformity; correct husbandry to prevent progression.",
         "treatment_ja": "既存の変形は不可逆的→進行予防が治療の主体。"
-                        "(1)湿度を60〜80%に維持（加湿器・スプレー・湿ったシェルター）、"
-                        "(2)食事の適正化（高繊維・低タンパク食）、(3)適切なUVB照射、"
-                        "(4)カルシウム:リン比の是正。重度の甲羅変形で内臓圧迫がある場合は対症療法。",
+        "(1)湿度を60〜80%に維持（加湿器・スプレー・湿ったシェルター）、"
+        "(2)食事の適正化（高繊維・低タンパク食）、(3)適切なUVB照射、"
+        "(4)カルシウム:リン比の是正。重度の甲羅変形で内臓圧迫がある場合は対症療法。",
         "prevention": "Proper humidity (60-80%), high-fiber/low-protein diet, adequate UVB, balanced calcium supplementation.",
         "prevention_ja": "高湿度環境（60〜80%）の維持が最も重要。"
-                         "高繊維・低タンパク食（牧草・葉野菜中心）。果実・ドッグフード等の禁止。"
-                         "適切なUVB照射。カルシウム適正補給。屋外飼育が理想的。",
+        "高繊維・低タンパク食（牧草・葉野菜中心）。果実・ドッグフード等の禁止。"
+        "適切なUVB照射。カルシウム適正補給。屋外飼育が理想的。",
         "prognosis": "Irreversible deformity but progression can be halted with proper husbandry.",
         "prognosis_ja": "既存変形は不可逆的だが、飼育環境の改善で進行を停止できる。"
-                        "軽度のピラミッド化はQOLに影響少ない。"
-                        "重度では呼吸障害・産卵障害のリスク。",
+        "軽度のピラミッド化はQOLに影響少ない。"
+        "重度では呼吸障害・産卵障害のリスク。",
         "urgency": "normal",
         "recommended_tests": ["physical_exam", "radiographs", "serum_calcium_phosphorus"],
         "onset_pattern": {"chronic"},
@@ -3358,36 +3385,35 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Egg Binding (Dystocia)",
         "name_ja": "卵塞（卵詰まり）",
-        "symptoms": {"straining", "lethargy", "anorexia", "hind_leg_weakness",
-                      "restlessness", "digging_behavior"},
+        "symptoms": {"straining", "lethargy", "anorexia", "hind_leg_weakness", "restlessness", "digging_behavior"},
         "description": "Inability to pass eggs, a life-threatening emergency in female tortoises.",
         "description_ja": "雌リクガメが卵を産出できない緊急疾患。"
-                          "適切な産卵場所の欠如、低カルシウム血症、卵の異常（過大卵・変形卵）、"
-                          "骨盤狭窄が原因。放置すると卵管破裂・敗血症→致死的。",
+        "適切な産卵場所の欠如、低カルシウム血症、卵の異常（過大卵・変形卵）、"
+        "骨盤狭窄が原因。放置すると卵管破裂・敗血症→致死的。",
         "pathophysiology": "Mechanical or functional obstruction prevents egg passage through the oviduct and cloaca.",
         "pathophysiology_ja": "機械的閉塞（過大卵・変形卵・骨盤狭窄）または機能的障害"
-                              "（低カルシウム血症による子宮収縮力低下・ストレスによる産卵抑制）→"
-                              "卵の停滞→卵管壁の圧迫壊死→卵管破裂→腹膜炎→敗血症。"
-                              "停滞した卵による総排泄腔圧迫→排尿障害→腎後性尿毒症。",
+        "（低カルシウム血症による子宮収縮力低下・ストレスによる産卵抑制）→"
+        "卵の停滞→卵管壁の圧迫壊死→卵管破裂→腹膜炎→敗血症。"
+        "停滞した卵による総排泄腔圧迫→排尿障害→腎後性尿毒症。",
         "causes": "Lack of appropriate nesting site, hypocalcemia, oversized/malformed eggs, pelvic abnormalities, dehydration, stress.",
         "causes_ja": "適切な産卵場所の欠如（最多の原因）、低カルシウム血症、"
-                     "MBD、脱水、過大卵・変形卵、骨盤狭窄（甲羅のピラミッド化等）、"
-                     "ストレス、低温環境。",
+        "MBD、脱水、過大卵・変形卵、骨盤狭窄（甲羅のピラミッド化等）、"
+        "ストレス、低温環境。",
         "treatment": "Oxytocin, calcium gluconate, warm water soaks; surgery if medical management fails.",
         "treatment_ja": "内科的管理を先行："
-                        "(1)グルコン酸カルシウム10%（50〜100mg/kg IM/SC、緩徐投与）、"
-                        "(2)30分後にオキシトシン（1〜5 IU/kg IM）、"
-                        "(3)温浴（30〜32℃、20〜30分）で筋弛緩促進、"
-                        "(4)適切な産卵場所の提供。"
-                        "内科的管理で産出不可の場合→外科的卵摘出術（甲羅切開or卵管切開）。",
+        "(1)グルコン酸カルシウム10%（50〜100mg/kg IM/SC、緩徐投与）、"
+        "(2)30分後にオキシトシン（1〜5 IU/kg IM）、"
+        "(3)温浴（30〜32℃、20〜30分）で筋弛緩促進、"
+        "(4)適切な産卵場所の提供。"
+        "内科的管理で産出不可の場合→外科的卵摘出術（甲羅切開or卵管切開）。",
         "prevention": "Provide appropriate nesting site, balanced calcium, proper UVB, adequate hydration.",
         "prevention_ja": "適切な産卵場所の常時提供（深さ体長の1.5倍の湿った土壌）。"
-                         "カルシウム適正補給。適切なUVB照射。十分な飲水。"
-                         "繁殖しない雌の避妊手術も検討。",
+        "カルシウム適正補給。適切なUVB照射。十分な飲水。"
+        "繁殖しない雌の避妊手術も検討。",
         "prognosis": "Good with early intervention; poor if egg rupture or peritonitis develops.",
         "prognosis_ja": "早期の内科的管理で予後良好（オキシトシン反応率60〜70%）。"
-                        "卵管破裂・腹膜炎の場合は予後不良。"
-                        "外科的介入が必要な場合も適切な手術で回復可能。",
+        "卵管破裂・腹膜炎の場合は予後不良。"
+        "外科的介入が必要な場合も適切な手術で回復可能。",
         "urgency": "emergency",
         "recommended_tests": ["radiographs", "ultrasound", "serum_calcium", "complete_blood_count"],
         "onset_pattern": {"acute"},
@@ -3398,108 +3424,183 @@ DISEASES: List[Dict[str, Any]] = [
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
-    "shell_discoloration": "skin", "shell_soft_spots": "skin",
-    "foul_odor": "skin", "shell_pitting": "skin",
-    "skin_ulcers": "skin", "skin_hemorrhage": "skin",
-    "shell_crack": "skin", "shell_displacement": "skin",
-    "shell_pyramiding": "skin", "abnormal_shell_growth": "skin",
-    "skin_lesions": "skin", "visible_parasites": "skin",
-    "visible_larvae": "skin", "skin_burns": "skin",
-    "shell_burns": "skin", "skin_discoloration": "skin",
-    "skin_necrosis": "skin", "petechia": "skin",
-    "firm_mass": "skin", "dysecdysis": "skin",
-    "retained_skin": "skin", "skin_constriction": "skin",
-    "skin_redness": "skin", "white_patches_on_shell": "skin",
-    "green_shell_discoloration": "skin", "mucus_in_mouth": "skin",
-    "wrinkled_skin": "skin", "decreased_skin_elasticity": "skin",
-    "ulcerated_mass": "skin", "skin_irritation": "skin",
-    "skin_tumors": "skin", "skin_papules": "skin",
-    "retained_scutes": "skin", "abnormal_scute_growth": "skin",
-    "abnormal_shell_shape": "skin", "crusty_shell_lesions": "skin",
-    "dark_skin_masses": "skin", "dermatitis": "skin",
-    "discoloration": "skin", "granulomatous_lesions": "skin",
+    "shell_discoloration": "skin",
+    "shell_soft_spots": "skin",
+    "foul_odor": "skin",
+    "shell_pitting": "skin",
+    "skin_ulcers": "skin",
+    "skin_hemorrhage": "skin",
+    "shell_crack": "skin",
+    "shell_displacement": "skin",
+    "shell_pyramiding": "skin",
+    "abnormal_shell_growth": "skin",
+    "skin_lesions": "skin",
+    "visible_parasites": "skin",
+    "visible_larvae": "skin",
+    "skin_burns": "skin",
+    "shell_burns": "skin",
+    "skin_discoloration": "skin",
+    "skin_necrosis": "skin",
+    "petechia": "skin",
+    "firm_mass": "skin",
+    "dysecdysis": "skin",
+    "retained_skin": "skin",
+    "skin_constriction": "skin",
+    "skin_redness": "skin",
+    "white_patches_on_shell": "skin",
+    "green_shell_discoloration": "skin",
+    "mucus_in_mouth": "skin",
+    "wrinkled_skin": "skin",
+    "decreased_skin_elasticity": "skin",
+    "ulcerated_mass": "skin",
+    "skin_irritation": "skin",
+    "skin_tumors": "skin",
+    "skin_papules": "skin",
+    "retained_scutes": "skin",
+    "abnormal_scute_growth": "skin",
+    "abnormal_shell_shape": "skin",
+    "crusty_shell_lesions": "skin",
+    "dark_skin_masses": "skin",
+    "dermatitis": "skin",
+    "discoloration": "skin",
+    "granulomatous_lesions": "skin",
     "palpable_mass": "skin",
     "poor_wound_healing": "skin",
-    "scute_lifting": "skin", "shell_damage": "skin",
-    "shell_lesions": "skin", "shell_rot": "skin",
+    "scute_lifting": "skin",
+    "shell_damage": "skin",
+    "shell_lesions": "skin",
+    "shell_rot": "skin",
     "shell_swelling": "skin",
-    "skin_blistering": "skin", "skin_masses": "skin",
-    "skin_sloughing": "skin", "skin_ulceration": "skin",
-    "skin_wounds": "skin", "soft_mass": "skin",
+    "skin_blistering": "skin",
+    "skin_masses": "skin",
+    "skin_sloughing": "skin",
+    "skin_ulceration": "skin",
+    "skin_wounds": "skin",
+    "soft_mass": "skin",
     "wart_like_growths": "skin",
     # 眼
-    "swollen_eyes": "eyes", "conjunctivitis": "eyes",
-    "eye_discharge": "eyes", "eye_swelling": "eyes",
-    "cloudy_eyes": "eyes", "sunken_eyes": "eyes",
+    "swollen_eyes": "eyes",
+    "conjunctivitis": "eyes",
+    "eye_discharge": "eyes",
+    "eye_swelling": "eyes",
+    "cloudy_eyes": "eyes",
+    "sunken_eyes": "eyes",
     "blindness": "eyes",
-    "vision_impairment": "eyes", "white_corneal_deposits": "eyes",
+    "vision_impairment": "eyes",
+    "white_corneal_deposits": "eyes",
     # 耳
     "ear_swelling": "ears",
     # 呼吸器
-    "nasal_discharge": "respiratory", "wheezing": "respiratory",
-    "open_mouth_breathing": "respiratory", "respiratory_distress": "respiratory",
-    "bubbling_nose": "respiratory", "sneezing": "respiratory",
-    "nasal_congestion": "respiratory", "stridor": "respiratory",
+    "nasal_discharge": "respiratory",
+    "wheezing": "respiratory",
+    "open_mouth_breathing": "respiratory",
+    "respiratory_distress": "respiratory",
+    "bubbling_nose": "respiratory",
+    "sneezing": "respiratory",
+    "nasal_congestion": "respiratory",
+    "stridor": "respiratory",
     # 消化器・口腔
-    "anorexia": "digestive", "mouth_lesions": "digestive",
-    "stomatitis": "digestive", "diarrhea": "digestive",
-    "foul_smelling_stool": "digestive", "bloody_stool": "digestive",
-    "straining": "digestive", "tissue_prolapse": "digestive",
-    "drooling": "digestive", "difficulty_eating": "digestive",
-    "beak_overgrowth": "digestive", "constipation": "digestive",
-    "regurgitation": "digestive", "intestinal_obstruction": "digestive",
+    "anorexia": "digestive",
+    "mouth_lesions": "digestive",
+    "stomatitis": "digestive",
+    "diarrhea": "digestive",
+    "foul_smelling_stool": "digestive",
+    "bloody_stool": "digestive",
+    "straining": "digestive",
+    "tissue_prolapse": "digestive",
+    "drooling": "digestive",
+    "difficulty_eating": "digestive",
+    "beak_overgrowth": "digestive",
+    "constipation": "digestive",
+    "regurgitation": "digestive",
+    "intestinal_obstruction": "digestive",
     "oral_irritation": "digestive",
-    "oral_plaques": "digestive", "poor_appetite": "digestive",
+    "oral_plaques": "digestive",
+    "poor_appetite": "digestive",
     # 骨格・四肢
-    "soft_shell": "musculoskeletal", "shell_deformity": "musculoskeletal",
-    "fractures": "musculoskeletal", "limb_swelling": "musculoskeletal",
-    "swollen_joints": "musculoskeletal", "joint_pain": "musculoskeletal",
-    "lameness": "musculoskeletal", "bone_deformity": "musculoskeletal",
-    "bone_swelling": "musculoskeletal", "bone_weakness": "musculoskeletal",
+    "soft_shell": "musculoskeletal",
+    "shell_deformity": "musculoskeletal",
+    "fractures": "musculoskeletal",
+    "limb_swelling": "musculoskeletal",
+    "swollen_joints": "musculoskeletal",
+    "joint_pain": "musculoskeletal",
+    "lameness": "musculoskeletal",
+    "bone_deformity": "musculoskeletal",
+    "bone_swelling": "musculoskeletal",
+    "bone_weakness": "musculoskeletal",
     "hind_leg_weakness": "musculoskeletal",
-    "hind_limb_swelling": "musculoskeletal", "hind_limb_weakness": "musculoskeletal",
+    "hind_limb_swelling": "musculoskeletal",
+    "hind_limb_weakness": "musculoskeletal",
     "jaw_softening": "musculoskeletal",
-    "limb_amputation": "musculoskeletal", "limb_injury": "musculoskeletal",
+    "limb_amputation": "musculoskeletal",
+    "limb_injury": "musculoskeletal",
     # 神経
-    "tremors": "neurological", "listing_to_one_side": "neurological",
-    "muscle_twitching": "neurological", "seizures": "neurological",
-    "neurological_signs": "neurological", "head_tilt": "neurological",
-    "circling": "neurological", "loss_of_tail_function": "neurological",
-    "paralysis": "neurological", "vestibular_signs": "neurological",
+    "tremors": "neurological",
+    "listing_to_one_side": "neurological",
+    "muscle_twitching": "neurological",
+    "seizures": "neurological",
+    "neurological_signs": "neurological",
+    "head_tilt": "neurological",
+    "circling": "neurological",
+    "loss_of_tail_function": "neurological",
+    "paralysis": "neurological",
+    "vestibular_signs": "neurological",
     # 泌尿器・生殖器
-    "bloody_urates": "urinary", "visible_tissue_from_cloaca": "urinary",
-    "hematuria": "urinary", "kidney_calcification": "urinary",
-    "reproductive_failure": "urinary", "tissue_protruding_from_cloaca": "urinary",
+    "bloody_urates": "urinary",
+    "visible_tissue_from_cloaca": "urinary",
+    "hematuria": "urinary",
+    "kidney_calcification": "urinary",
+    "reproductive_failure": "urinary",
+    "tissue_protruding_from_cloaca": "urinary",
     # 循環器
     "collapse": "cardiovascular",
     # 体型・全身
-    "edema": "body", "weight_loss": "body",
-    "dehydration": "body", "swelling": "body",
-    "head_swelling": "body", "cloacal_swelling": "body",
-    "abdominal_swelling": "body", "dry_mucous_membranes": "body",
-    "excessive_weight": "body", "fat_deposits": "body",
+    "edema": "body",
+    "weight_loss": "body",
+    "dehydration": "body",
+    "swelling": "body",
+    "head_swelling": "body",
+    "cloacal_swelling": "body",
+    "abdominal_swelling": "body",
+    "dry_mucous_membranes": "body",
+    "excessive_weight": "body",
+    "fat_deposits": "body",
     "poor_body_condition": "body",
-    "jaw_swelling": "body", "periocular_edema": "body",
+    "jaw_swelling": "body",
+    "periocular_edema": "body",
     "asymmetric_growth": "body",
-    "generalized_swelling": "body", "muscle_wasting": "body",
-    "obesity": "body", "organ_enlargement": "body",
-    "poor_growth": "body", "slow_growth": "body",
+    "generalized_swelling": "body",
+    "muscle_wasting": "body",
+    "obesity": "body",
+    "organ_enlargement": "body",
+    "poor_growth": "body",
+    "slow_growth": "body",
     "weight_change": "body",
     # 行動・活動
-    "lethargy": "behavior", "weakness": "behavior",
-    "restlessness": "behavior", "digging_behavior": "behavior",
-    "difficulty_retracting": "behavior", "hiding_behavior": "behavior",
-    "pain_response": "behavior", "cold_intolerance": "behavior",
+    "lethargy": "behavior",
+    "weakness": "behavior",
+    "restlessness": "behavior",
+    "digging_behavior": "behavior",
+    "difficulty_retracting": "behavior",
+    "hiding_behavior": "behavior",
+    "pain_response": "behavior",
+    "cold_intolerance": "behavior",
     "difficulty_moving": "behavior",
     # 緊急
     "sudden_death": "emergency",
     # 内科・血液
-    "bleeding": "internal", "swollen_gums": "internal",
-    "gout_tophi": "internal", "jaundice": "internal",
-    "pale_mucous_membranes": "internal", "anemia": "internal",
-    "discharge_from_shell": "internal", "discharge_under_scutes": "internal",
-    "immunosuppression": "internal", "liver_enlargement": "internal",
-    "organ_failure": "internal", "septicemia": "internal",
+    "bleeding": "internal",
+    "swollen_gums": "internal",
+    "gout_tophi": "internal",
+    "jaundice": "internal",
+    "pale_mucous_membranes": "internal",
+    "anemia": "internal",
+    "discharge_from_shell": "internal",
+    "discharge_under_scutes": "internal",
+    "immunosuppression": "internal",
+    "liver_enlargement": "internal",
+    "organ_failure": "internal",
+    "septicemia": "internal",
     "white_deposits": "internal",
     # 一般
 }
@@ -3608,7 +3709,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "stridor": {"ja": "喘鳴（吸気性）", "en": "Stridor"},
     "pale_mucous_membranes": {"ja": "粘膜蒼白", "en": "Pale mucous membranes"},
     "retained_scutes": {"ja": "甲板の残存", "en": "Retained scutes"},
-
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
     "abnormal_scute_growth": {"ja": "甲板の異常成長", "en": "Abnormal Scute Growth"},
     "abnormal_shell_shape": {"ja": "甲羅の変形", "en": "Abnormal Shell Shape"},
@@ -3680,7 +3780,19 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Tortoise")
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None) -> Dict[str, Any]:
+def analyze_symptoms(
+    symptoms: List[str],
+    age_stage: str = "",
+    breed: str | None = None,
+    *,
+    onset: str | None = None,
+    age_years: float | None = None,
+    species: str | None = None,
+    lab_values: dict | None = None,
+    gender=None,
+    vaccines=None,
+    vaccination_status=None,
+) -> Dict[str, Any]:
     """Analyze tortoise/turtle symptoms and return suspected diseases.
 
     Parameters
@@ -3697,4 +3809,18 @@ def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None
     dict
         Analysis result in the standard differential diagnosis format.
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("tortoise", {}))
+    return analyze_symptoms_generic(
+        symptoms,
+        DISEASES,
+        SYMPTOM_NAMES,
+        ADVICE,
+        onset=onset,
+        age_years=age_years,
+        breed=breed,
+        species=species,
+        lab_values=lab_values,
+        gender=gender,
+        vaccines=vaccines,
+        vaccination_status=vaccination_status,
+        prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("tortoise", {}),
+    )

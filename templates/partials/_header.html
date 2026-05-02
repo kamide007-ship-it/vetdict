@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header-inner">
-    <a href="/" class="header-logo" aria-label="VetDict ホーム">
+    <a href="/" class="header-logo" data-i18n-aria="ariaHomeLink" aria-label="VetDict ホーム">
       <div>
         <div class="logo-text"><span class="logo-vet">Vet</span><span class="logo-dict">Dict</span></div>
         <span class="logo-sub" data-i18n="logoSub">獣医師のための臨床意思決定支援</span>
@@ -10,60 +10,65 @@
       <div class="search-input-group">
         <input type="search" id="globalSearch"
                placeholder="疾患を検索..."
+               data-i18n-aria="ariaSearchInput"
                aria-label="疾患を検索"
                data-i18n-ph="globalSearchPh"
                class="global-search-input"
                autocomplete="off">
         <button class="search-filter-btn" id="searchFilterBtn"
+                data-i18n-aria="ariaSpeciesFilter"
                 aria-label="動物種でフィルター"
+                data-i18n-title="titleSpeciesFilter"
                 title="動物種で絞り込み"
                 type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <path d="M22 3H2l8 9.46v7.54l6 2v-9.54L22 3z"/>
           </svg>
         </button>
         <button class="search-filter-btn" id="categoryFilterBtn"
+                data-i18n-aria="ariaCategoryFilter"
                 aria-label="カテゴリーでフィルター"
+                data-i18n-title="titleCategoryFilter"
                 title="症状カテゴリーで絞り込み"
                 type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
           </svg>
         </button>
       </div>
       <div id="globalSearchResults" class="global-search-results" style="display:none" role="listbox"></div>
-      <div id="speciesFilterPanel" class="species-filter-panel" style="display:none" role="dialog" aria-label="動物種フィルター">
+      <div id="speciesFilterPanel" class="species-filter-panel" style="display:none" role="dialog" data-i18n-aria="ariaSpeciesFilterDialog" aria-label="動物種フィルター">
         <div class="filter-header">
-          <h3>動物種で絞り込み</h3>
-          <button class="filter-close" id="filterCloseBtn" type="button" aria-label="閉じる">×</button>
+          <h3 data-i18n="speciesFilterTitle">動物種で絞り込み</h3>
+          <button class="filter-close" id="filterCloseBtn" type="button" data-i18n-aria="ariaCloseFilter" aria-label="閉じる">×</button>
         </div>
         <div id="speciesFilterList" class="species-filter-list"></div>
         <div class="filter-actions">
-          <button id="filterResetBtn" class="filter-reset-btn" type="button">リセット</button>
+          <button id="filterResetBtn" class="filter-reset-btn" type="button" data-i18n="filterReset">リセット</button>
         </div>
       </div>
-      <div id="categoryFilterPanel" class="category-filter-panel" style="display:none" role="dialog" aria-label="症状カテゴリーフィルター">
+      <div id="categoryFilterPanel" class="category-filter-panel" style="display:none" role="dialog" data-i18n-aria="ariaCategoryFilterDialog" aria-label="症状カテゴリーフィルター">
         <div class="filter-header">
-          <h3>症状カテゴリーで絞り込み</h3>
-          <button class="filter-close" id="categoryFilterCloseBtn" type="button" aria-label="閉じる">×</button>
+          <h3 data-i18n="categoryFilterTitle">症状カテゴリーで絞り込み</h3>
+          <button class="filter-close" id="categoryFilterCloseBtn" type="button" data-i18n-aria="ariaCloseFilter" aria-label="閉じる">×</button>
         </div>
         <div id="categoryFilterList" class="category-filter-list"></div>
         <div class="filter-actions">
-          <button id="categoryFilterResetBtn" class="filter-reset-btn" type="button">リセット</button>
+          <button id="categoryFilterResetBtn" class="filter-reset-btn" type="button" data-i18n="filterReset">リセット</button>
         </div>
       </div>
     </div>
-    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mainNav" id="hamburgerBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <button class="hamburger" data-i18n-aria="menuOpen" aria-label="メニューを開く" aria-expanded="false" aria-controls="mainNav" id="hamburgerBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
-    <nav class="header-nav" id="mainNav" role="tablist" aria-label="メインナビゲーション">
+    <nav class="header-nav" id="mainNav" role="tablist" data-i18n-aria="ariaMainNav" aria-label="メインナビゲーション">
       <button role="tab" aria-selected="true" data-view="checker" id="tab-checker" aria-controls="viewChecker" data-i18n="navChecker">鑑別診断</button>
       <button role="tab" aria-selected="false" data-view="database" id="tab-database" aria-controls="viewDatabase" data-i18n="navDatabase">疾患データベース</button>
       <button role="tab" aria-selected="false" data-view="chat" id="tab-chat" aria-controls="viewChat" data-i18n="navChat">臨床相談</button>
       <button role="tab" aria-selected="false" data-view="drugs" id="tab-drugs" aria-controls="viewDrugs" data-i18n="navDrugs">薬品辞書</button>
       <button role="tab" aria-selected="false" data-view="anesthesia" id="tab-anesthesia" aria-controls="viewAnesthesia" data-i18n="navAnesthesia">鎮静・麻酔</button>
     </nav>
-    <div class="lang-toggle" role="radiogroup" aria-label="Language">
+    <div class="lang-toggle" role="radiogroup" data-i18n-aria="ariaLangToggle" aria-label="Language">
       <button class="active" data-lang="ja" role="radio" aria-checked="true">JP</button>
       <button data-lang="en" role="radio" aria-checked="false">EN</button>
     </div>

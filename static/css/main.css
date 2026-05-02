@@ -67,7 +67,8 @@ a:hover{text-decoration:underline}
 .global-search-input{width:100%;padding:8px 12px;padding-right:36px;border:1px solid rgba(255,255,255,.3);border-radius:6px;font-size:.85rem;background:rgba(255,255,255,.12);color:var(--white);font-family:var(--font);transition:background var(--transition-fast),border-color var(--transition-fast)}
 .global-search-input::placeholder{color:rgba(255,255,255,.6)}
 .global-search-input:focus{outline:none;background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5)}
-.search-filter-btn{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;padding:6px;border-radius:4px;transition:background var(--transition-fast),color var(--transition-fast);width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+.search-filter-btn{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;padding:6px;border-radius:4px;transition:background var(--transition-fast),color var(--transition-fast);width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.search-filter-btn:focus-visible{outline:2px solid var(--white);outline-offset:1px}
 .search-filter-btn:hover{background:rgba(255,255,255,.15);color:var(--white)}
 .search-filter-btn svg{width:16px;height:16px}
 .global-search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;max-height:400px;overflow-y:auto;z-index:1000;box-shadow:var(--shadow-lg)}
@@ -85,8 +86,9 @@ a:hover{text-decoration:underline}
 .species-filter-panel{position:absolute;top:calc(100% + 4px);right:0;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;z-index:999;box-shadow:var(--shadow-lg);min-width:220px;max-width:280px}
 .filter-header{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--gray-200)}
 .filter-header h3{font-size:.9rem;font-weight:700;color:var(--navy);margin:0}
-.filter-close{background:none;border:none;font-size:1.5rem;color:var(--gray-500);cursor:pointer;padding:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;line-height:1}
-.filter-close:hover{color:var(--navy)}
+.filter-close{background:none;border:none;font-size:1.4rem;color:var(--gray-500);cursor:pointer;padding:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;line-height:1;border-radius:6px}
+.filter-close:hover{color:var(--navy);background:var(--gray-100)}
+.filter-close:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
 .species-filter-list{max-height:300px;overflow-y:auto;padding:8px}
 .filter-checkbox{display:flex;align-items:center;padding:8px;border-radius:4px;cursor:pointer;transition:background var(--transition-fast);margin-bottom:4px}
 .filter-checkbox:hover{background:var(--gray-50)}
@@ -221,8 +223,9 @@ a:hover{text-decoration:underline}
 .selected-tag{display:inline-flex;align-items:center;gap:4px;background:var(--navy);color:var(--white);padding:5px 12px;border-radius:20px;font-size:.78rem;font-weight:500;animation:tag-in .2s ease-out;transition:transform var(--transition-fast),background var(--transition-fast)}
 .selected-tag:hover{background:var(--navy-light);transform:scale(1.03)}
 @keyframes tag-in{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-.selected-tag .remove{cursor:pointer;opacity:.8;font-weight:700;background:none;border:none;color:inherit;font-size:.88rem;padding:0 2px;font-family:var(--font);transition:opacity var(--transition-fast),transform var(--transition-fast)}
-.selected-tag .remove:hover{opacity:1;transform:scale(1.2)}
+.selected-tag .remove{cursor:pointer;opacity:.85;font-weight:700;background:none;border:none;color:inherit;font-size:1rem;line-height:1;padding:4px 6px;margin:-4px -8px -4px 0;font-family:var(--font);transition:opacity var(--transition-fast),transform var(--transition-fast);min-width:28px;min-height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+.selected-tag .remove:hover{opacity:1;background:rgba(255,255,255,.2)}
+.selected-tag .remove:focus-visible{outline:2px solid var(--white);outline-offset:1px}
 .clear-all-btn{display:inline-flex;align-items:center;padding:5px 12px;border-radius:20px;font-size:.74rem;font-weight:500;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-200);cursor:pointer;font-family:var(--font);transition:all var(--transition-fast)}
 .clear-all-btn:hover{background:var(--red);color:var(--white);border-color:var(--red)}
 
@@ -455,8 +458,9 @@ a:hover{text-decoration:underline}
 .chat-symptom-tag{display:inline-flex;align-items:center;gap:3px;font-size:.72rem;padding:2px 8px;background:var(--navy);color:var(--white);border-radius:10px;white-space:nowrap}
 .chat-symptom-tag.removable{cursor:default;transition:opacity .2s}
 .chat-symptom-tag.removable:hover{opacity:.85}
-.guided-tag-remove{background:none;border:none;color:var(--white);font-size:.82rem;line-height:1;cursor:pointer;padding:0 1px;opacity:.7;transition:opacity .15s}
-.guided-tag-remove:hover{opacity:1}
+.guided-tag-remove{background:none;border:none;color:var(--white);font-size:.95rem;line-height:1;cursor:pointer;padding:4px 6px;margin:-4px -6px -4px 0;opacity:.75;transition:opacity .15s,background .15s;min-width:24px;min-height:24px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+.guided-tag-remove:hover{opacity:1;background:rgba(255,255,255,.18)}
+.guided-tag-remove:focus-visible{outline:2px solid var(--white);outline-offset:1px}
 .guided-low-confidence-warn{padding:10px 12px;margin:4px 0;border-radius:var(--radius);background:#fef3c7;border-left:4px solid #f59e0b;font-size:.78rem;color:#92400e;line-height:1.5}
 .chat-disease-list{display:flex;flex-direction:column;gap:6px}
 .chat-disease-card{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:10px 12px;transition:box-shadow .2s}
@@ -790,14 +794,20 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 
 /* Reduced motion preference */
 @media(prefers-reduced-motion:reduce){
-  *{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important}
+  *{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
   .fade-in-section{opacity:1;transform:none}
   .species-card{opacity:1;transform:none}
   .typing-indicator span{animation:none}
   .shimmer-line{animation:none;background:var(--gray-200)}
   .analyze-progress-fill{transition:none}
-  .share-btn:hover{transform:none}
   .scroll-top{transition:none}
+  /* Disable hover/active transforms — change visual state via background/border instead of motion */
+  .header-logo:hover,.hero-btn:hover,.hero-btn.primary:hover,.hero-stat:hover,.sponsor-banner-inner:hover,
+  .species-card:hover,.species-card:hover .icon,.selected-tag:hover,.disease-result:hover .match-badge,
+  .clinical-toggle:hover,.analyze-btn:hover:not(:disabled),.disease-cat-card:hover,
+  .chat-input-row button:hover,.landing-continue-btn:hover,.sponsor-product:hover,
+  .sponsor-btn-navy:hover,.sponsor-btn-green:hover,.pricing-btn-pro:hover,.scroll-top:hover,
+  .share-btn:hover,.az-nav button:active{transform:none!important}
 }
 
 /* --- Print styles --- */
@@ -1518,7 +1528,7 @@ button.combination-item:focus-visible {
 @media(max-width:640px){
   .global-search-container{max-width:none;min-width:100px;flex:1}
   .global-search-input{font-size:.8rem;padding:6px 10px}
-  .search-filter-btn{width:24px;height:24px;padding:4px}
+  .search-filter-btn{width:32px;height:32px;padding:6px}
   .search-filter-btn svg{width:14px;height:14px}
   .global-search-results{max-height:300px;font-size:.8rem}
   .search-result-item{padding:8px 10px}
@@ -1527,7 +1537,7 @@ button.combination-item:focus-visible {
   .species-filter-panel{max-width:calc(100vw - 20px);min-width:200px;right:auto;left:10px}
   .category-filter-panel{max-width:calc(100vw - 20px);min-width:200px;right:10px}
   .filter-header h3{font-size:.85rem}
-  .filter-close{width:20px;height:20px;font-size:1.3rem}
+  .filter-close{width:36px;height:36px;font-size:1.3rem}
   .species-filter-list,.category-filter-list{max-height:250px}
   .filter-checkbox{padding:6px;font-size:.8rem}
   .filter-checkbox label{font-size:.8rem}
@@ -1537,21 +1547,11 @@ button.combination-item:focus-visible {
   .header-inner{padding:8px 12px;gap:8px}
   .global-search-container{max-width:none}
   .global-search-input{font-size:.75rem;padding:5px 8px}
-  .search-filter-btn{width:20px;height:20px;padding:2px}
-  .search-filter-btn svg{width:12px;height:12px}
+  .search-filter-btn{width:32px;height:32px;padding:6px}
+  .search-filter-btn svg{width:13px;height:13px}
   .header-nav{font-size:.7rem}
   .header-nav button{padding:6px 10px;font-size:.7rem}
   .logo-sub{font-size:.6rem}
-}
-
-@media print{
-  .header,.hero,.species-section,.quick-nav-strip,.floating-nav,.hamburger,.lang-toggle,.breadcrumb-bar,.mobile-bottom-nav,.offline-banner,.reading-progress,.scroll-top,.symptom-floater,.pwa-install-banner,.kb-shortcuts-panel,.anesthesia-weight-calc,.anesthesia-emergency-btn,.anesthesia-print-btn,.anesthesia-asa-filter,.search-clear,select#anesthesiaCategoryFilter{display:none!important}
-  #viewAnesthesia{display:block!important;position:static!important}
-  .anesthesia-drugs-table,.anesthesia-monitor-section{break-inside:avoid}
-  .disease-db-item .disease-detail{display:block!important;max-height:none!important}
-  .disease-db-list{max-height:none!important;overflow:visible!important}
-  .anesthesia-overview{background:#f0f7ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .anesthesia-risk-tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 
 @media(max-width:600px){

@@ -176,7 +176,7 @@ SCHEMA_NOTES = """
    - Commit transaction on success
 """
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(SCHEMA_NOTES)
     print("\n=== SQL Schema ===\n")
     print(SCHEMA_SQL)

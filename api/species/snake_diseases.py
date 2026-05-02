@@ -21,7 +21,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Inclusion Body Disease (IBD)",
         "name_ja": "封入体病（IBD）",
-        "symptoms": {"neurological_signs", "stargazing", "regurgitation", "anorexia", "head_tilt", "tremors", "paralysis", "loss_of_righting_reflex"},
+        "symptoms": {
+            "neurological_signs",
+            "stargazing",
+            "regurgitation",
+            "anorexia",
+            "head_tilt",
+            "tremors",
+            "paralysis",
+            "loss_of_righting_reflex",
+        },
         "description": "Inclusion Body Disease (IBD) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "主にボア科のヘビに影響する致死性アレナウイルス感染症で、進行性の神経学的・消化器機能障害を引き起こします。",
         "urgency": "emergency",
@@ -42,7 +51,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Paramyxovirus Infection",
         "name_ja": "パラミクソウイルス感染症",
-        "symptoms": {"respiratory_distress", "nasal_discharge", "neurological_signs", "open_mouth_breathing", "stargazing", "sudden_death"},
+        "symptoms": {
+            "respiratory_distress",
+            "nasal_discharge",
+            "neurological_signs",
+            "open_mouth_breathing",
+            "stargazing",
+            "sudden_death",
+        },
         "description": "Paramyxovirus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "特にクサリヘビ科やナミヘビ科で重篤な肺炎と神経疾患を引き起こす高度伝染性ウイルス感染症です。",
         "urgency": "emergency",
@@ -63,7 +79,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nidovirus Infection",
         "name_ja": "ニドウイルス感染症",
-        "symptoms": {"respiratory_distress", "open_mouth_breathing", "mucus_in_mouth", "wheezing", "lethargy", "anorexia"},
+        "symptoms": {
+            "respiratory_distress",
+            "open_mouth_breathing",
+            "mucus_in_mouth",
+            "wheezing",
+            "lethargy",
+            "anorexia",
+        },
         "description": "Nidovirus Infection is a viral disease that may cause acute or chronic illness with variable clinical presentation depending on host immunity and viral strain.",
         "description_ja": "ボールパイソンやその他のニシキヘビで認識が増えている増殖性肺炎を引き起こすウイルス感染症です。",
         "urgency": "high",
@@ -172,7 +195,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pneumonia (Lower Respiratory Infection)",
         "name_ja": "肺炎（下部呼吸器感染症）",
-        "symptoms": {"open_mouth_breathing", "respiratory_distress", "wheezing", "nasal_discharge", "lethargy", "anorexia", "mucus_in_mouth", "elevated_head_posture"},
+        "symptoms": {
+            "open_mouth_breathing",
+            "respiratory_distress",
+            "wheezing",
+            "nasal_discharge",
+            "lethargy",
+            "anorexia",
+            "mucus_in_mouth",
+            "elevated_head_posture",
+        },
         "description": "Pneumonia (Lower Respiratory Infection) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "未治療のURIから進行することの多い肺の重篤な細菌・ウイルス・真菌感染症です。",
         "urgency": "high",
@@ -209,7 +241,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Infectious Stomatitis (Mouth Rot)",
         "name_ja": "感染性口内炎（マウスロット）",
-        "symptoms": {"mouth_lesions", "swollen_gums", "mucus_in_mouth", "anorexia", "drooling", "oral_hemorrhage", "facial_swelling"},
+        "symptoms": {
+            "mouth_lesions",
+            "swollen_gums",
+            "mucus_in_mouth",
+            "anorexia",
+            "drooling",
+            "oral_hemorrhage",
+            "facial_swelling",
+        },
         "description": "Infectious Stomatitis (Mouth Rot) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "乾酪性浸出液、組織壊死、顎の骨髄炎の可能性を伴う口腔の細菌感染症です。",
         "urgency": "high",
@@ -246,7 +286,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Snake Mites (Ophionyssus natricis)",
         "name_ja": "ヘビダニ（オフィオニッスス）",
-        "symptoms": {"excessive_soaking", "skin_irritation", "visible_mites", "lethargy", "anorexia", "dysecdysis", "rubbing_against_objects"},
+        "symptoms": {
+            "excessive_soaking",
+            "skin_irritation",
+            "visible_mites",
+            "lethargy",
+            "anorexia",
+            "dysecdysis",
+            "rubbing_against_objects",
+        },
         "description": "Snake Mites (Ophionyssus natricis) is a parasitic condition that causes clinical signs ranging from subclinical to severe systemic disease.",
         "description_ja": "飼育下のヘビで最も一般的な外部寄生ダニの感染です。",
         "urgency": "moderate",
@@ -712,7 +760,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dehydration",
         "name_ja": "脱水症",
-        "symptoms": {"sunken_eyes", "wrinkled_skin", "decreased_skin_elasticity", "lethargy", "anorexia", "retained_skin"},
+        "symptoms": {
+            "sunken_eyes",
+            "wrinkled_skin",
+            "decreased_skin_elasticity",
+            "lethargy",
+            "anorexia",
+            "retained_skin",
+        },
         "description": "Dehydration is a condition of inadequate body fluid volume requiring fluid replacement therapy.",
         "description_ja": "適切な水へのアクセスがないヘビに多い水分摂取不足または過度な喪失です。",
         "urgency": "moderate",
@@ -734,7 +789,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Septicemia (Blood Poisoning)",
         "name_ja": "敗血症",
-        "symptoms": {"lethargy", "anorexia", "skin_hemorrhage", "petechia", "respiratory_distress", "scale_discoloration", "sudden_death"},
+        "symptoms": {
+            "lethargy",
+            "anorexia",
+            "skin_hemorrhage",
+            "petechia",
+            "respiratory_distress",
+            "scale_discoloration",
+            "sudden_death",
+        },
         "description": "Septicemia (Blood Poisoning) is a bacterial infection that causes systemic or localized inflammatory disease requiring prompt antimicrobial therapy.",
         "description_ja": "咬傷、熱傷、口内炎に続発する全身性細菌感染症です。",
         "urgency": "emergency",
@@ -992,7 +1055,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Neurological Syndrome (Non-specific)",
         "name_ja": "神経学的症候群",
-        "symptoms": {"neurological_signs", "stargazing", "head_tilt", "tremors", "seizures", "loss_of_righting_reflex", "circling"},
+        "symptoms": {
+            "neurological_signs",
+            "stargazing",
+            "head_tilt",
+            "tremors",
+            "seizures",
+            "loss_of_righting_reflex",
+            "circling",
+        },
         "description": "Neurological Syndrome (Non-specific) is a neurological condition affecting the central or peripheral nervous system.",
         "description_ja": "IBD、パラミクソウイルス、代謝性、中毒性の原因による神経機能障害です。",
         "urgency": "high",
@@ -1346,7 +1417,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"young", "adult", "senior"},
     },
-
     # ── 追加疾患 (Additional Diseases) ──
     {
         "name": "Arenavirus Infection",
@@ -2719,8 +2789,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute", "chronic"},
         "age_predisposition": {"young", "adult", "senior"},
     },
-
-
     # ── 追加疾患2 (Additional Diseases 2) ──
     {
         "name": "Proliferative Osteoarthritis",
@@ -2848,44 +2916,57 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Stargazing Syndrome",
         "name_ja": "スターゲイジング症候群（仰天症）",
-        "symptoms": {"stargazing", "neurological_signs", "abnormal_posture",
-                      "loss_of_righting_reflex", "anorexia", "regurgitation"},
+        "symptoms": {
+            "stargazing",
+            "neurological_signs",
+            "abnormal_posture",
+            "loss_of_righting_reflex",
+            "anorexia",
+            "regurgitation",
+        },
         "description": "Neurological condition where the snake holds its head elevated and inverted, gazing upward. Multiple etiologies.",
         "description_ja": "ヘビが頭部を持続的に上方に向け、反転させる神経症状の総称。"
-                          "IBD（ボア・パイソン）、パラミクソウイルス、アレナウイルス、"
-                          "ニドウイルス、細菌性髄膜炎、ビタミンB1欠乏等が原因。"
-                          "ボールパイソン・ボア科で特に多い。鑑別診断が重要。",
+        "IBD（ボア・パイソン）、パラミクソウイルス、アレナウイルス、"
+        "ニドウイルス、細菌性髄膜炎、ビタミンB1欠乏等が原因。"
+        "ボールパイソン・ボア科で特に多い。鑑別診断が重要。",
         "pathophysiology": "Various etiologies cause CNS inflammation or degeneration affecting the brainstem/vestibular system, resulting in abnormal head posture and loss of righting reflex.",
         "pathophysiology_ja": "多様な原因による中枢神経系（特に脳幹・前庭系）の炎症・変性→"
-                              "頭部の持続的背屈・正向反射の消失。"
-                              "IBD：アレナウイルスが神経細胞内に好酸性封入体を形成→進行性神経変性。"
-                              "パラミクソウイルス：脳炎→壊死性髄膜脳炎。"
-                              "代謝性（ビタミンB1欠乏）：ウェルニッケ様脳症。",
+        "頭部の持続的背屈・正向反射の消失。"
+        "IBD：アレナウイルスが神経細胞内に好酸性封入体を形成→進行性神経変性。"
+        "パラミクソウイルス：脳炎→壊死性髄膜脳炎。"
+        "代謝性（ビタミンB1欠乏）：ウェルニッケ様脳症。",
         "causes": "Inclusion body disease (arenavirus), paramyxovirus, nidovirus, bacterial meningitis, vitamin B1 deficiency, organophosphate toxicity, septicemia.",
         "causes_ja": "封入体病（IBD/アレナウイルス）：ボア・パイソン科、"
-                     "パラミクソウイルス：ナミヘビ科を含む広範な種、"
-                     "ニドウイルス：ボールパイソン、"
-                     "細菌性髄膜炎・敗血症、ビタミンB1欠乏（冷凍魚の長期給餌）、"
-                     "有機リン中毒、重金属中毒。",
+        "パラミクソウイルス：ナミヘビ科を含む広範な種、"
+        "ニドウイルス：ボールパイソン、"
+        "細菌性髄膜炎・敗血症、ビタミンB1欠乏（冷凍魚の長期給餌）、"
+        "有機リン中毒、重金属中毒。",
         "treatment": "Depends on underlying cause; often no effective treatment for viral etiologies.",
         "treatment_ja": "原因により治療法が異なる。"
-                        "IBD：根治療法なし→安楽死を検討（他個体への感染リスク）。"
-                        "細菌性：培養感受性試験に基づく抗菌薬（セフタジジム20mg/kg q72h IM）。"
-                        "ビタミンB1欠乏：チアミン25mg/kg IM→経口補充に切替。"
-                        "パラミクソウイルス：支持療法（輸液・保温・強制給餌）。"
-                        "全症例で隔離管理。",
+        "IBD：根治療法なし→安楽死を検討（他個体への感染リスク）。"
+        "細菌性：培養感受性試験に基づく抗菌薬（セフタジジム20mg/kg q72h IM）。"
+        "ビタミンB1欠乏：チアミン25mg/kg IM→経口補充に切替。"
+        "パラミクソウイルス：支持療法（輸液・保温・強制給餌）。"
+        "全症例で隔離管理。",
         "prevention": "Quarantine, biosecurity, proper nutrition (vitamin supplementation for fish-fed species).",
         "prevention_ja": "新規個体の厳格な検疫（90日以上）。IBDスクリーニング。"
-                         "魚食性ヘビにはビタミンB1を補充。適切な衛生管理。"
-                         "感染個体の速やかな隔離。",
+        "魚食性ヘビにはビタミンB1を補充。適切な衛生管理。"
+        "感染個体の速やかな隔離。",
         "prognosis": "Depends on etiology: viral (IBD/paramyxovirus) - poor; bacterial - guarded; nutritional - good with supplementation.",
         "prognosis_ja": "原因により大きく異なる。"
-                        "IBD：予後不良（進行性、治療法なし）。"
-                        "パラミクソ：予後不良〜慎重。"
-                        "細菌性：早期治療で予後やや良好。"
-                        "ビタミンB1欠乏：補充で回復可能（予後良好）。",
+        "IBD：予後不良（進行性、治療法なし）。"
+        "パラミクソ：予後不良〜慎重。"
+        "細菌性：早期治療で予後やや良好。"
+        "ビタミンB1欠乏：補充で回復可能（予後良好）。",
         "urgency": "high",
-        "recommended_tests": ["neurological_exam", "pcr", "blood_work", "radiographs", "histopathology", "virus_isolation"],
+        "recommended_tests": [
+            "neurological_exam",
+            "pcr",
+            "blood_work",
+            "radiographs",
+            "histopathology",
+            "virus_isolation",
+        ],
         "onset_pattern": {"acute", "subacute", "chronic"},
         "age_predisposition": {"young", "adult", "senior"},
     },
@@ -2894,96 +2975,166 @@ DISEASES: List[Dict[str, Any]] = [
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
-    "mucus_in_mouth": "skin", "skin_irritation": "skin",
-    "visible_mites": "skin", "dysecdysis": "skin",
-    "rubbing_against_objects": "skin", "visible_parasites": "skin",
-    "skin_lesions": "skin", "blisters": "skin",
-    "scale_discoloration": "skin", "foul_odor": "skin",
-    "skin_necrosis": "skin", "retained_skin": "skin",
-    "skin_constriction": "skin", "dull_coloration": "skin",
-    "retained_spectacle": "skin", "skin_burns": "skin",
-    "crusty_patches": "skin", "skin_redness": "skin",
-    "nose_abrasion": "skin", "scale_spreading": "skin",
-    "wrinkled_skin": "skin", "decreased_skin_elasticity": "skin",
-    "skin_hemorrhage": "skin", "petechia": "skin",
-    "firm_mass": "skin", "ulcerated_mass": "skin",
-    "granulomatous_lesions": "skin", "crusty_nodules": "skin",
-    "crusty_scales": "skin", "dark_skin_masses": "skin",
-    "dermatitis": "skin", "discoloration": "skin",
-    "orange_red_clusters": "skin", "papular_dermatitis": "skin",
-    "poor_wound_healing": "skin", "pruritus": "skin",
-    "skin_blistering": "skin", "skin_color_changes": "skin",
-    "skin_discoloration": "skin", "skin_masses": "skin",
-    "skin_nodules": "skin", "skin_papillomas": "skin",
-    "skin_sloughing": "skin", "skin_ulceration": "skin",
-    "soft_mass": "skin", "tail_necrosis": "skin",
+    "mucus_in_mouth": "skin",
+    "skin_irritation": "skin",
+    "visible_mites": "skin",
+    "dysecdysis": "skin",
+    "rubbing_against_objects": "skin",
+    "visible_parasites": "skin",
+    "skin_lesions": "skin",
+    "blisters": "skin",
+    "scale_discoloration": "skin",
+    "foul_odor": "skin",
+    "skin_necrosis": "skin",
+    "retained_skin": "skin",
+    "skin_constriction": "skin",
+    "dull_coloration": "skin",
+    "retained_spectacle": "skin",
+    "skin_burns": "skin",
+    "crusty_patches": "skin",
+    "skin_redness": "skin",
+    "nose_abrasion": "skin",
+    "scale_spreading": "skin",
+    "wrinkled_skin": "skin",
+    "decreased_skin_elasticity": "skin",
+    "skin_hemorrhage": "skin",
+    "petechia": "skin",
+    "firm_mass": "skin",
+    "ulcerated_mass": "skin",
+    "granulomatous_lesions": "skin",
+    "crusty_nodules": "skin",
+    "crusty_scales": "skin",
+    "dark_skin_masses": "skin",
+    "dermatitis": "skin",
+    "discoloration": "skin",
+    "orange_red_clusters": "skin",
+    "papular_dermatitis": "skin",
+    "poor_wound_healing": "skin",
+    "pruritus": "skin",
+    "skin_blistering": "skin",
+    "skin_color_changes": "skin",
+    "skin_discoloration": "skin",
+    "skin_masses": "skin",
+    "skin_nodules": "skin",
+    "skin_papillomas": "skin",
+    "skin_sloughing": "skin",
+    "skin_ulceration": "skin",
+    "soft_mass": "skin",
+    "tail_necrosis": "skin",
     "tissue_discoloration": "skin",
-    "visible_leeches": "skin", "wart_like_growths": "skin",
+    "visible_leeches": "skin",
+    "wart_like_growths": "skin",
     "yellow_skin_lesions": "skin",
     # 眼
-    "cloudy_eyes": "eyes", "eye_swelling": "eyes",
-    "sunken_eyes": "eyes", "bulging_eye": "eyes",
-    "eye_discharge": "eyes", "swollen_eyes": "eyes",
+    "cloudy_eyes": "eyes",
+    "eye_swelling": "eyes",
+    "sunken_eyes": "eyes",
+    "bulging_eye": "eyes",
+    "eye_discharge": "eyes",
+    "swollen_eyes": "eyes",
     "eye_opacity": "eyes",
     # 呼吸器
-    "respiratory_distress": "respiratory", "nasal_discharge": "respiratory",
-    "open_mouth_breathing": "respiratory", "wheezing": "respiratory",
-    "pneumonia_signs": "respiratory", "pneumonia": "respiratory",
+    "respiratory_distress": "respiratory",
+    "nasal_discharge": "respiratory",
+    "open_mouth_breathing": "respiratory",
+    "wheezing": "respiratory",
+    "pneumonia_signs": "respiratory",
+    "pneumonia": "respiratory",
     "upper_respiratory_signs": "respiratory",
     # 消化器・口腔
-    "regurgitation": "digestive", "anorexia": "digestive",
-    "diarrhea": "digestive", "mouth_lesions": "digestive",
-    "stomatitis": "digestive", "drooling": "digestive",
-    "oral_hemorrhage": "digestive", "bloody_stool": "digestive",
-    "mucus_in_stool": "digestive", "constipation": "digestive",
-    "straining": "digestive", "tissue_prolapse": "digestive",
-    "intestinal_obstruction": "digestive", "mouth_rot": "digestive",
+    "regurgitation": "digestive",
+    "anorexia": "digestive",
+    "diarrhea": "digestive",
+    "mouth_lesions": "digestive",
+    "stomatitis": "digestive",
+    "drooling": "digestive",
+    "oral_hemorrhage": "digestive",
+    "bloody_stool": "digestive",
+    "mucus_in_stool": "digestive",
+    "constipation": "digestive",
+    "straining": "digestive",
+    "tissue_prolapse": "digestive",
+    "intestinal_obstruction": "digestive",
+    "mouth_rot": "digestive",
     "oral_mucus": "digestive",
-    "poor_appetite": "digestive", "poor_feeding_response": "digestive",
+    "poor_appetite": "digestive",
+    "poor_feeding_response": "digestive",
     "segments_in_stool": "digestive",
     # 骨格・四肢
-    "swollen_joints": "musculoskeletal", "joint_pain": "musculoskeletal",
-    "lameness": "musculoskeletal", "kinking": "musculoskeletal",
-    "bone_deformity": "musculoskeletal", "bone_weakness": "musculoskeletal",
-    "fractures": "musculoskeletal", "jaw_softening": "musculoskeletal",
+    "swollen_joints": "musculoskeletal",
+    "joint_pain": "musculoskeletal",
+    "lameness": "musculoskeletal",
+    "kinking": "musculoskeletal",
+    "bone_deformity": "musculoskeletal",
+    "bone_weakness": "musculoskeletal",
+    "fractures": "musculoskeletal",
+    "jaw_softening": "musculoskeletal",
     "kinking_of_body": "musculoskeletal",
     # 神経
-    "neurological_signs": "neurological", "stargazing": "neurological",
-    "head_tilt": "neurological", "tremors": "neurological",
-    "paralysis": "neurological", "loss_of_righting_reflex": "neurological",
-    "seizures": "neurological", "circling": "neurological",
-    "slow_reflexes": "neurological", "loss_of_movement_posterior": "neurological",
-    "muscle_twitching": "neurological", "vestibular_signs": "neurological",
+    "neurological_signs": "neurological",
+    "stargazing": "neurological",
+    "head_tilt": "neurological",
+    "tremors": "neurological",
+    "paralysis": "neurological",
+    "loss_of_righting_reflex": "neurological",
+    "seizures": "neurological",
+    "circling": "neurological",
+    "slow_reflexes": "neurological",
+    "loss_of_movement_posterior": "neurological",
+    "muscle_twitching": "neurological",
+    "vestibular_signs": "neurological",
     # 泌尿器・生殖器
-    "kidney_enlargement": "urinary", "reproductive_failure": "urinary",
+    "kidney_enlargement": "urinary",
+    "reproductive_failure": "urinary",
     "tissue_protruding_from_cloaca": "urinary",
     # 循環器
     "cyanosis": "cardiovascular",
     # 体型・全身
-    "weight_loss": "body", "facial_swelling": "body",
-    "swelling": "body", "body_swelling": "body",
-    "mid_body_swelling": "body", "dehydration": "body",
-    "abdominal_swelling": "body", "excessive_weight": "body",
-    "fat_deposits": "body", "cloacal_swelling": "body",
-    "edema": "body", "organ_enlargement": "body",
-    "poor_body_condition": "body", "generalized_swelling": "body",
-    "head_swelling": "body", "muscle_wasting": "body",
-    "posterior_body_swelling": "body", "swelling_at_site": "body",
+    "weight_loss": "body",
+    "facial_swelling": "body",
+    "swelling": "body",
+    "body_swelling": "body",
+    "mid_body_swelling": "body",
+    "dehydration": "body",
+    "abdominal_swelling": "body",
+    "excessive_weight": "body",
+    "fat_deposits": "body",
+    "cloacal_swelling": "body",
+    "edema": "body",
+    "organ_enlargement": "body",
+    "poor_body_condition": "body",
+    "generalized_swelling": "body",
+    "head_swelling": "body",
+    "muscle_wasting": "body",
+    "posterior_body_swelling": "body",
+    "swelling_at_site": "body",
     # 行動・活動
-    "lethargy": "behavior", "elevated_head_posture": "behavior",
-    "excessive_soaking": "behavior", "difficulty_moving": "behavior",
-    "weakness": "behavior", "restlessness": "behavior",
-    "abnormal_posture": "behavior", "hiding_behavior": "behavior",
-    "defensive_behavior": "behavior", "pain_response": "behavior",
-    "muscle_weakness": "behavior", "pain_on_handling": "behavior",
+    "lethargy": "behavior",
+    "elevated_head_posture": "behavior",
+    "excessive_soaking": "behavior",
+    "difficulty_moving": "behavior",
+    "weakness": "behavior",
+    "restlessness": "behavior",
+    "abnormal_posture": "behavior",
+    "hiding_behavior": "behavior",
+    "defensive_behavior": "behavior",
+    "pain_response": "behavior",
+    "muscle_weakness": "behavior",
+    "pain_on_handling": "behavior",
     # 緊急
-    "sudden_death": "emergency", "unconsciousness": "emergency",
+    "sudden_death": "emergency",
+    "unconsciousness": "emergency",
     # 内科・血液
-    "swollen_gums": "internal", "anemia": "internal",
-    "jaundice": "internal", "gout_tophi": "internal",
-    "bleeding": "internal", "immunosuppression": "internal",
-    "liver_enlargement": "internal", "organ_failure": "internal",
-    "pale_mucous_membranes": "internal", "septicemia": "internal",
+    "swollen_gums": "internal",
+    "anemia": "internal",
+    "jaundice": "internal",
+    "gout_tophi": "internal",
+    "bleeding": "internal",
+    "immunosuppression": "internal",
+    "liver_enlargement": "internal",
+    "organ_failure": "internal",
+    "pale_mucous_membranes": "internal",
+    "septicemia": "internal",
     "tissue_calcification": "internal",
 }
 
@@ -3080,7 +3231,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "slow_reflexes": {"ja": "反射低下", "en": "Slow reflexes"},
     "pain_response": {"ja": "疼痛反応", "en": "Pain response"},
     "granulomatous_lesions": {"ja": "肉芽腫性病変", "en": "Granulomatous lesions"},
-
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
     "bone_deformity": {"ja": "骨変形", "en": "Bone deformity"},
     "bone_weakness": {"ja": "骨脆弱", "en": "Bone weakness"},
@@ -3129,7 +3279,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "skin_sloughing": {"ja": "皮膚の剥脱", "en": "Skin Sloughing"},
     "skin_ulceration": {"ja": "皮膚潰瘍化", "en": "Skin ulceration"},
     "soft_mass": {"ja": "軟らかい腫瘤", "en": "Soft Mass"},
-
     "swelling_at_site": {"ja": "患部の腫脹", "en": "Swelling At Site"},
     "tail_necrosis": {"ja": "尾の壊死", "en": "Tail Necrosis"},
     "tissue_calcification": {"ja": "組織石灰化", "en": "Tissue Calcification"},
@@ -3148,7 +3297,19 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Snake")
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None) -> Dict[str, Any]:
+def analyze_symptoms(
+    symptoms: List[str],
+    age_stage: str = "",
+    breed: str | None = None,
+    *,
+    onset: str | None = None,
+    age_years: float | None = None,
+    species: str | None = None,
+    lab_values: dict | None = None,
+    gender=None,
+    vaccines=None,
+    vaccination_status=None,
+) -> Dict[str, Any]:
     """Analyze snake symptoms and return suspected diseases.
 
     Parameters
@@ -3165,4 +3326,18 @@ def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None
     dict
         Analysis result in the standard differential diagnosis format.
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("snake", {}))
+    return analyze_symptoms_generic(
+        symptoms,
+        DISEASES,
+        SYMPTOM_NAMES,
+        ADVICE,
+        onset=onset,
+        age_years=age_years,
+        breed=breed,
+        species=species,
+        lab_values=lab_values,
+        gender=gender,
+        vaccines=vaccines,
+        vaccination_status=vaccination_status,
+        prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("snake", {}),
+    )

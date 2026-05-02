@@ -13,9 +13,9 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from api.tripod_validation import DiagnosticValidationFramework
-from api.chat.symptom_extractor import _extract_species_symptoms
 from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+from api.chat.symptom_extractor import _extract_species_symptoms
+from api.tripod_validation import DiagnosticValidationFramework
 
 
 def run_diagnostic_validation():
@@ -29,7 +29,7 @@ def run_diagnostic_validation():
     framework = DiagnosticValidationFramework()
 
     # Load test cases
-    test_file = Path(__file__).parent.parent / 'tests' / 'tripod_test_cases.json'
+    test_file = Path(__file__).parent.parent / "tests" / "tripod_test_cases.json"
     print(f"\nLoading test cases from: {test_file}")
 
     framework.add_test_cases_from_json(str(test_file))
@@ -46,7 +46,7 @@ def run_diagnostic_validation():
             species_lower = case.species.lower()
 
             # Extract symptoms for the specific species
-            symptoms_text = ' '.join(case.symptoms)
+            symptoms_text = " ".join(case.symptoms)
             species_symptoms = _extract_species_symptoms(
                 symptoms_text,
                 species_lower,
@@ -61,19 +61,19 @@ def run_diagnostic_validation():
             if predictions:
                 # Get top prediction confidence
                 top_prediction = predictions[0]
-                top_confidence = top_prediction.get('confidence_percent', 0) / 100.0
+                top_confidence = top_prediction.get("confidence_percent", 0) / 100.0
                 predicted_rank = 1
 
                 # Check if true disease is in predictions
                 for rank, pred in enumerate(predictions, 1):
-                    pred_disease = pred.get('name_en', pred.get('disease_id', ''))
+                    pred_disease = pred.get("name_en", pred.get("disease_id", ""))
                     if pred_disease.lower() == case.primary_disease.lower():
                         predicted_rank = rank
                         break
 
                 # Create top-n predictions list (disease, confidence tuples)
                 top_n = [
-                    (p.get('name_en', p.get('disease_id', '')), p.get('confidence_percent', 0) / 100.0)
+                    (p.get("name_en", p.get("disease_id", "")), p.get("confidence_percent", 0) / 100.0)
                     for p in predictions[:5]
                 ]
 
@@ -103,17 +103,14 @@ def run_diagnostic_validation():
             else:
                 failed_count += 1
                 if i % 5 == 0:
-                    print(
-                        f"  [{i:3d}/{len(framework.test_cases)}] ✗ "
-                        f"{case.species:12s} (No predictions)"
-                    )
+                    print(f"  [{i:3d}/{len(framework.test_cases)}] ✗ {case.species:12s} (No predictions)")
 
         except Exception as e:
             failed_count += 1
             if i % 10 == 0:
                 print(f"  ERROR at [{i:3d}] {case.case_id}: {str(e)}")
 
-    print(f"\n✓ Diagnostic engine execution complete")
+    print("\n✓ Diagnostic engine execution complete")
     print(f"  Passed: {passed_count}")
     print(f"  Failed: {failed_count}")
 
@@ -128,9 +125,9 @@ def run_diagnostic_validation():
     print(f"  Average Confidence: {metrics['average_confidence']:.2%}")
 
     # Print species-specific metrics
-    if metrics['by_species']:
+    if metrics["by_species"]:
         print("\n  By Species:")
-        for species, cm_dict in metrics['by_species'].items():
+        for species, cm_dict in metrics["by_species"].items():
             print(
                 f"    {species:15s}: "
                 f"sensitivity={cm_dict['sensitivity']:.2%} "
@@ -139,24 +136,20 @@ def run_diagnostic_validation():
             )
 
     # Print symptom count metrics
-    if metrics['by_symptom_count']:
+    if metrics["by_symptom_count"]:
         print("\n  By Symptom Count:")
-        for sym_cat, cm_dict in metrics['by_symptom_count'].items():
-            print(
-                f"    {sym_cat:20s}: "
-                f"sensitivity={cm_dict['sensitivity']:.2%} "
-                f"ppv={cm_dict['ppv']:.2%}"
-            )
+        for sym_cat, cm_dict in metrics["by_symptom_count"].items():
+            print(f"    {sym_cat:20s}: sensitivity={cm_dict['sensitivity']:.2%} ppv={cm_dict['ppv']:.2%}")
 
     # Generate TRIPOD report
     print("\nGenerating TRIPOD-compliant report...")
     report = framework.generate_tripod_report()
 
     # Save report
-    report_file = Path(__file__).parent.parent / 'reports' / 'tripod_validation_report.json'
+    report_file = Path(__file__).parent.parent / "reports" / "tripod_validation_report.json"
     report_file.parent.mkdir(parents=True, exist_ok=True)
 
-    with open(report_file, 'w', encoding='utf-8') as f:
+    with open(report_file, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
 
     print(f"✓ Report saved to: {report_file}")
@@ -169,7 +162,7 @@ def run_diagnostic_validation():
     print(f"Test Design: {report['test_design']['type']}")
     print(f"Total Cases: {report['test_design']['total_cases']}")
     print(f"Species Count: {report['test_design']['species_count']}")
-    print(f"\nPrimary Outcomes:")
+    print("\nPrimary Outcomes:")
     print(f"  Rank-1 Accuracy: {report['primary_outcomes']['rank_1_accuracy']:.1%}")
     print(f"  Pass Rate: {report['primary_outcomes']['pass_rate']:.1%}")
     print(f"  Average Confidence: {report['primary_outcomes']['average_confidence']:.2%}")
@@ -179,12 +172,13 @@ def run_diagnostic_validation():
     return report
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         report = run_diagnostic_validation()
         sys.exit(0)
     except Exception as e:
         print(f"\n✗ TRIPOD validation failed: {e}", file=sys.stderr)
         import traceback
+
         traceback.print_exc()
         sys.exit(1)

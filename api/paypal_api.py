@@ -24,7 +24,9 @@ paypal_bp = Blueprint("paypal", __name__, url_prefix="/api/paypal")
 PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID", "")
 PAYPAL_SECRET = os.getenv("PAYPAL_SECRET", "")
 PAYPAL_PLAN_ID = os.getenv("PAYPAL_PLAN_ID", "")
-PAYPAL_API_BASE = "https://api-m.paypal.com"
+# Switch to https://api-m.sandbox.paypal.com for sandbox testing by setting
+# PAYPAL_API_BASE in the environment. Defaults to production.
+PAYPAL_API_BASE = os.getenv("PAYPAL_API_BASE", "https://api-m.paypal.com").rstrip("/")
 
 
 def _get_paypal_token() -> str | None:
@@ -43,6 +45,7 @@ def _get_paypal_token() -> str | None:
     except Exception as e:
         logger.error("PayPal token error: %s", e)
         return None
+
 
 # Subscribers database (SQLite-backed)
 _SUBSCRIBERS_DB = Path(__file__).resolve().parent.parent / "instance" / "subscribers.db"
@@ -144,14 +147,14 @@ def create_subscription():
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
             sub = json.loads(resp.read())
-            approve_url = next(
-                (l["href"] for l in sub.get("links", []) if l["rel"] == "approve"), None
+            approve_url = next((l["href"] for l in sub.get("links", []) if l["rel"] == "approve"), None)
+            return jsonify(
+                {
+                    "subscription_id": sub.get("id"),
+                    "approve_url": approve_url,
+                    "status": sub.get("status"),
+                }
             )
-            return jsonify({
-                "subscription_id": sub.get("id"),
-                "approve_url": approve_url,
-                "status": sub.get("status"),
-            })
     except Exception as e:
         logger.error("PayPal create subscription error: %s", e)
         return jsonify({"error": "PayPal subscription creation failed"}), 500
@@ -213,11 +216,13 @@ def restore_subscription():
         conn.close()
 
     if active_sub:
-        return jsonify({
-            "active": True,
-            "subscription_id": active_sub["subscription_id"],
-            "activated_at": active_sub["activated_at"] or "",
-        })
+        return jsonify(
+            {
+                "active": True,
+                "subscription_id": active_sub["subscription_id"],
+                "activated_at": active_sub["activated_at"] or "",
+            }
+        )
 
     return jsonify({"active": False, "error": "no_active_subscription"})
 
@@ -373,11 +378,13 @@ def list_subscribers():
     finally:
         conn.close()
 
-    return jsonify({
-        "total": len(subscribers),
-        "active": active_count,
-        "subscribers": subscribers,
-    })
+    return jsonify(
+        {
+            "total": len(subscribers),
+            "active": active_count,
+            "subscribers": subscribers,
+        }
+    )
 
 
 # ---------------------------------------------------------------------------

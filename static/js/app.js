@@ -8,6 +8,11 @@ const OPEN_BETA=true;
 let isAdmin=false;
 let isPro=false;
 
+// Debug logging — only emits when running locally or with ?debug=1
+const _DEBUG=(()=>{try{const h=location.hostname;return h==="localhost"||h==="127.0.0.1"||h===""||location.search.indexOf("debug=1")>=0;}catch(e){return false;}})();
+function debugWarn(){if(_DEBUG&&typeof console!=="undefined")console.warn.apply(console,arguments);}
+function debugError(){if(_DEBUG&&typeof console!=="undefined")console.error.apply(console,arguments);}
+
 async function checkAccess(){
   const params=new URLSearchParams(location.search);
   if(OPEN_BETA) isPro=true;
@@ -44,7 +49,7 @@ async function checkAccess(){
     const badge=document.createElement("div");
     badge.className="admin-badge";
     badge.textContent="Admin";
-    badge.title="管理者モード — 全機能アンロック済み";
+    badge.title=t("adminBadgeTitle")||"Admin mode";
     document.body.appendChild(badge);
   }
 }
@@ -57,7 +62,7 @@ const I18N={
     logoSub:"獣医師のための臨床意思決定支援",
     navChecker:"鑑別診断",navDatabase:"疾患データベース",navChat:"臨床相談",navDrugs:"薬品辞書",navAnesthesia:"鎮静・麻酔",
     landingChatTitle:"臨床症状から鑑別診断",
-    heroTrustRef:"138学術文献に基づく",heroTrustTests:"2,700+自動テスト検証済み",heroTrustOss:"オープンソース開発",
+    heroTrustRef:"190+学術文献に基づく",heroTrustTests:"3,000+自動テスト検証済み",heroTrustOss:"オープンソース開発",
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
@@ -130,7 +135,7 @@ const I18N={
     noDrugMatch:"該当する薬品がありません",
     errorPrefix:"エラー: ",
     overallAssessment:"総合評価: ",
-    commError:"通信エラーが発生しました。",
+    commError:"通信エラーが発生しました。ネットワーク接続を確認の上、再試行してください。",
     noResponse:"応答を取得できませんでした",
     diseaseCount:"%filtered% / %total% 件表示",
     catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",behavioral:"行動",general:"全身",skin:"体表・外観",fins:"鰭",gills:"鰓",eyes:"眼",body:"腹部・体型",parasites:"寄生虫",emergency:"急変",reproductive:"繁殖",behavior:"行動",other:"その他"},
@@ -170,13 +175,82 @@ const I18N={
     sortByConfidence:"信頼度順",sortBySeverity:"重症度順",sortByDefault:"標準",
     speciesFilterPh:"動物種を検索...",
     stepSpecies:"動物種",stepSymptoms:"症状",stepResults:"結果",
+    // Header / aria-labels (i18n via data-i18n-aria / data-i18n-title)
+    ariaHomeLink:"VetDict ホーム",
+    ariaSearchInput:"疾患・薬品を検索",
+    ariaSpeciesFilter:"動物種でフィルター",
+    titleSpeciesFilter:"動物種で絞り込み",
+    ariaCategoryFilter:"カテゴリーでフィルター",
+    titleCategoryFilter:"症状カテゴリーで絞り込み",
+    ariaCloseFilter:"閉じる",
+    ariaMainNav:"メインナビゲーション",
+    ariaLangToggle:"表示言語",
+    ariaSpeciesFilterDialog:"動物種フィルター",
+    ariaCategoryFilterDialog:"症状カテゴリーフィルター",
+    speciesFilterTitle:"動物種で絞り込み",
+    categoryFilterTitle:"症状カテゴリーで絞り込み",
+    filterReset:"リセット",
+    // Cookie consent
+    cookieConsentRegion:"Cookieに関するお知らせ",
+    cookieConsentText:"当サイトでは利用状況の改善のためGoogle Analyticsを使用しています。",
+    cookiePrivacyLink:"プライバシーポリシー",
+    cookieAccept:"同意する",
+    cookieDismiss:"閉じる",
+    cookieDismissAria:"同意せずに閉じる",
+    // Pricing
+    pricingSubtitle:"現在オープンベータ — 獣医師・獣医学生は全機能を無料でご利用いただけます",
+    pricingBadge:"オープンベータ",
+    pricingHeader:"全機能無料",
+    pricingPeriodOriginal:"¥980/月",
+    pricingFeature1:"鑑別診断リスト生成（全21動物種）",
+    pricingFeature2:"疾患データベース<strong>7,000+疾患</strong>閲覧",
+    pricingFeature3:"薬品辞書<strong>250+薬品</strong>・種別投与量",
+    pricingFeature4:"臨床相談チャット<strong>無制限</strong>",
+    pricingFeature5:"検査値入力・疼痛スケール対応",
+    pricingFeature6:"エキゾチック含む全21動物種対応",
+    pricingCtaText:"現在すべて無料でご利用中",
+    pricingNote:"正式リリース後は一部機能が有料プラン（¥980/月）に移行予定です",
+    signupHeading:"🔔 正式リリース時に<span style=\"color:var(--green)\">早期割引</span>で通知を受け取る",
+    signupSubtext:"ベータ期間中にご登録の獣医師限定の特典あり",
+    signupEmailPh:"メールアドレス",
+    signupBtn:"無料で登録",
+    signupBtnSubmitting:"登録中...",
+    signupBtnDone:"登録済み",
+    signupSpamNote:"※ スパムは送りません。配信停止はいつでも可能です。",
+    signupInvalidEmail:"有効なメールアドレスを入力してください",
+    signupSuccess:"登録完了！正式リリース時にお知らせします。",
+    signupGenericError:"エラーが発生しました",
+    signupNetworkError:"通信エラー。時間をおいて再度お試しください。",
+    // Footer / share
+    shareSection:"VetDictを広める",
+    shareXLabel:"X (Twitter) でポストする",
+    shareFbLabel:"Facebook でシェアする",
+    shareLineLabel:"LINE で送る",
+    sharePostX:"X (Twitter)",sharePostXSub:"でポストする",
+    sharePostFb:"Facebook",sharePostFbSub:"でシェアする",
+    sharePostLine:"LINE",sharePostLineSub:"で送る",
+    footerRegulatory:"本サービスは獣医師・獣医学生を対象とした臨床意思決定支援ツールです。AI解析結果は鑑別診断の参考情報であり、確定診断・治療方針の決定には臨床所見・検査結果との総合判断が必要です。本サービスは医療機器・動物用医療機器としての承認・認証を受けておらず、FDA（米国食品医薬品局）未承認、農林水産省動物用医療機器未認証です。",
+    footerDeveloperHeading:"開発者",
+    footerLinksHeading:"リンク",
+    footerLegalHeading:"法務",
+    footerLegalTerms:"利用規約",
+    footerLegalPrivacy:"プライバシーポリシー",
+    footerLegalTokushoho:"特定商取引法に基づく表記",
+    footerCopyright:"© 2026 Equine Vet Synapse. All rights reserved.",
+    footerPaypal:"PayPal: equinevet.owners@gmail.com",
+    // Analyze button states
+    analyzeSearchingDb:"データベース検索中...",
+    diseasesFoundToast:"%n%件の疾患が見つかりました",
+    diseasesNoneFoundToast:"該当疾患が見つかりませんでした。症状を追加してください。",
+    // Admin
+    adminBadgeTitle:"管理者モード — 全機能アンロック済み",
   },
   en:{
     skipLink:"Skip to main content",
     logoSub:"Clinical Decision Support for Veterinarians",
     navChecker:"Differential Dx",navDatabase:"Disease Database",navChat:"Clinical Chat",navDrugs:"Drug Dictionary",navAnesthesia:"Anesthesia",
     landingChatTitle:"Differential Diagnosis from Clinical Signs",
-    heroTrustRef:"Based on 138 academic references",heroTrustTests:"Verified by 2,700+ automated tests",heroTrustOss:"Open-source development",
+    heroTrustRef:"Based on 190+ academic references",heroTrustTests:"Verified by 3,000+ automated tests",heroTrustOss:"Open-source development",
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
@@ -248,7 +322,7 @@ const I18N={
     noDrugMatch:"No matching drugs",
     errorPrefix:"Error: ",
     overallAssessment:"Overall: ",
-    commError:"A communication error occurred.",
+    commError:"A communication error occurred. Please check your network and retry.",
     noResponse:"Could not retrieve response",
     diseaseCount:"%filtered% / %total% shown",
     catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",behavioral:"Behavioral",general:"General",skin:"Skin & Appearance",fins:"Fins",gills:"Gills",eyes:"Eyes",body:"Body & Shape",parasites:"Parasites",emergency:"Emergency",reproductive:"Reproductive",behavior:"Behavior",other:"Other"},
@@ -288,6 +362,75 @@ const I18N={
     sortByConfidence:"By Confidence",sortBySeverity:"By Severity",sortByDefault:"Default",
     speciesFilterPh:"Filter species...",
     stepSpecies:"Species",stepSymptoms:"Symptoms",stepResults:"Results",
+    // Header / aria-labels
+    ariaHomeLink:"VetDict home",
+    ariaSearchInput:"Search diseases & drugs",
+    ariaSpeciesFilter:"Filter by species",
+    titleSpeciesFilter:"Filter by species",
+    ariaCategoryFilter:"Filter by category",
+    titleCategoryFilter:"Filter by symptom category",
+    ariaCloseFilter:"Close",
+    ariaMainNav:"Main navigation",
+    ariaLangToggle:"Display language",
+    ariaSpeciesFilterDialog:"Species filter",
+    ariaCategoryFilterDialog:"Symptom category filter",
+    speciesFilterTitle:"Filter by species",
+    categoryFilterTitle:"Filter by symptom category",
+    filterReset:"Reset",
+    // Cookie consent
+    cookieConsentRegion:"Cookie notice",
+    cookieConsentText:"This site uses Google Analytics to improve usability.",
+    cookiePrivacyLink:"Privacy policy",
+    cookieAccept:"Accept",
+    cookieDismiss:"Close",
+    cookieDismissAria:"Close without accepting",
+    // Pricing
+    pricingSubtitle:"Open beta — Veterinarians and veterinary students get full access for free",
+    pricingBadge:"Open Beta",
+    pricingHeader:"All features free",
+    pricingPeriodOriginal:"¥980/month",
+    pricingFeature1:"Differential diagnosis list (all 21 species)",
+    pricingFeature2:"Disease database <strong>7,000+ diseases</strong>",
+    pricingFeature3:"Drug dictionary <strong>250+ drugs</strong> with species-specific dosing",
+    pricingFeature4:"Clinical chat <strong>unlimited</strong>",
+    pricingFeature5:"Lab values & pain scale input",
+    pricingFeature6:"All 21 species (incl. exotics)",
+    pricingCtaText:"All features currently free",
+    pricingNote:"After official launch, some features will move to a paid plan (¥980/month)",
+    signupHeading:"🔔 Get notified at launch with an <span style=\"color:var(--green)\">early-bird discount</span>",
+    signupSubtext:"Exclusive benefits for veterinarians who sign up during beta",
+    signupEmailPh:"Email address",
+    signupBtn:"Sign up free",
+    signupBtnSubmitting:"Signing up...",
+    signupBtnDone:"Signed up",
+    signupSpamNote:"No spam. Unsubscribe anytime.",
+    signupInvalidEmail:"Please enter a valid email address",
+    signupSuccess:"Sign-up complete! We'll notify you at launch.",
+    signupGenericError:"An error occurred",
+    signupNetworkError:"Network error. Please try again later.",
+    // Footer / share
+    shareSection:"Spread the word",
+    shareXLabel:"Share on X (Twitter)",
+    shareFbLabel:"Share on Facebook",
+    shareLineLabel:"Send via LINE",
+    sharePostX:"X (Twitter)",sharePostXSub:"Post",
+    sharePostFb:"Facebook",sharePostFbSub:"Share",
+    sharePostLine:"LINE",sharePostLineSub:"Send",
+    footerRegulatory:"This service is a clinical decision support tool for veterinarians and veterinary students. AI analysis is a reference for differential diagnosis; definitive diagnosis and treatment decisions require integration with clinical findings and diagnostic results. This service is not approved or certified as a medical device or veterinary medical device — not FDA-approved (US) and not certified by Japan's Ministry of Agriculture, Forestry and Fisheries.",
+    footerDeveloperHeading:"Developer",
+    footerLinksHeading:"Links",
+    footerLegalHeading:"Legal",
+    footerLegalTerms:"Terms of Use",
+    footerLegalPrivacy:"Privacy Policy",
+    footerLegalTokushoho:"Specified Commercial Transactions Act Disclosure",
+    footerCopyright:"© 2026 Equine Vet Synapse. All rights reserved.",
+    footerPaypal:"PayPal: equinevet.owners@gmail.com",
+    // Analyze button states
+    analyzeSearchingDb:"Searching database...",
+    diseasesFoundToast:"Found %n% diseases",
+    diseasesNoneFoundToast:"No matching diseases found. Try adding more symptoms.",
+    // Admin
+    adminBadgeTitle:"Admin mode — all features unlocked",
   }
 };
 
@@ -303,7 +446,9 @@ function fetchWithTimeout(url,opts={},timeoutMs=10000){
 
 function applyLanguage(){
   document.documentElement.lang=currentLang;
-  document.title=currentLang==="ja"?"Vet Dict — 多動物種対応 獣医学疾患データベース":"Vet Dict — Multi-Species Veterinary Disease Database";
+  document.title=currentLang==="ja"
+    ?"VetDict — 獣医師のための臨床意思決定支援ツール | 鑑別診断・疾患DB・薬品辞書"
+    :"VetDict — Clinical Decision Support for Veterinarians | Differential Diagnosis, Disease DB, Drug Dictionary";
   // Update data-i18n (textContent)
   document.querySelectorAll("[data-i18n]").forEach(el=>{
     const key=el.getAttribute("data-i18n");
@@ -333,6 +478,18 @@ function applyLanguage(){
     const val=t(key);
     if(val&&val!==key)el.placeholder=val;
   });
+  // Update data-i18n-aria (aria-label)
+  document.querySelectorAll("[data-i18n-aria]").forEach(el=>{
+    const key=el.getAttribute("data-i18n-aria");
+    const val=t(key);
+    if(val&&val!==key)el.setAttribute("aria-label",val);
+  });
+  // Update data-i18n-title (title attribute)
+  document.querySelectorAll("[data-i18n-title]").forEach(el=>{
+    const key=el.getAttribute("data-i18n-title");
+    const val=t(key);
+    if(val&&val!==key)el.setAttribute("title",val);
+  });
   // Update lang toggle active state
   document.querySelectorAll(".lang-toggle button").forEach(b=>{
     const isActive=b.dataset.lang===currentLang;
@@ -356,7 +513,7 @@ function applyLanguage(){
 
 function setupLanguageToggle(){
   const toggle=document.querySelector(".lang-toggle");
-  if(!toggle){console.warn(".lang-toggle element not found");return;}
+  if(!toggle){debugWarn(".lang-toggle element not found");return;}
   toggle.addEventListener("click",e=>{
     const btn=e.target.closest("[data-lang]");
     if(!btn||btn.dataset.lang===currentLang)return;
@@ -484,7 +641,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     const kbBtn=document.getElementById("kbHintBtn");
     if(kbBtn)kbBtn.addEventListener("click",toggleKbShortcuts);
   }catch(e){
-    console.error("Error in DOMContentLoaded:",e);
+    debugError("Error in DOMContentLoaded:",e);
   }
 });
 
@@ -745,7 +902,7 @@ function showReturningUserBanner(){
 function setupHamburger(){
   const btn=document.getElementById("hamburgerBtn");
   const nav=document.getElementById("mainNav");
-  if(!btn||!nav){console.warn("hamburgerBtn or mainNav not found");return;}
+  if(!btn||!nav){debugWarn("hamburgerBtn or mainNav not found");return;}
   btn.addEventListener("click",()=>{
     const open=nav.classList.toggle("open");
     btn.setAttribute("aria-expanded",open);
@@ -828,43 +985,43 @@ function loadSpeciesStats(){
         }
       }
     }catch(e){
-      console.error("Error processing species stats:",e);
+      debugError("Error processing species stats:",e);
       setDefaultStats();
     }
   }).catch(err=>{
-    console.error("Error loading species stats:",err);
+    debugError("Error loading species stats:",err);
     setDefaultStats();
   });
 }
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:575,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:530,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:656,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:414,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:285,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:246,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:241,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:210,drugs:0,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:188,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:479,drugs:0,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:402,drugs:0,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:251,drugs:0,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:250,drugs:0,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:256,drugs:0,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:214,drugs:0,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:218,drugs:0,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
-    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:215,drugs:0,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
-    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:25,drugs:23,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
-    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:250,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:598,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:543,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:740,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:453,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:320,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:348,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:277,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:278,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:243,drugs:0,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:221,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:200,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:551,drugs:0,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:459,drugs:0,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:282,drugs:0,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:285,drugs:0,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:287,drugs:0,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:248,drugs:0,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:249,drugs:0,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:257,drugs:0,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
+    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:28,drugs:23,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:289,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6393,
+    diseases:7156,
     species:21,
-    drugs:194,
+    drugs:250,
     symptoms:52,
     protocols:188
   };
@@ -881,7 +1038,7 @@ function setDefaultStats(){
 
 function renderSpeciesGrid(){
   const grid=document.getElementById("speciesGrid");
-  if(!grid){console.warn("speciesGrid element not found");return;}
+  if(!grid){debugWarn("speciesGrid element not found");return;}
   if(!currentSpecies)updateCheckerProgress(1);
   const section=document.getElementById("speciesSection");
   if(section&&!section.querySelector(".species-filter-input")){
@@ -1309,7 +1466,7 @@ function toggleSymptomSort(){symptomSortMode=symptomSortMode==="category"?(curre
 function renderSymptomList(symptoms){
   const symptomSearch=document.getElementById("symptomSearch");
   const list=document.getElementById("symptomList");
-  if(!list){console.warn("symptomList element not found");return;}
+  if(!list){debugWarn("symptomList element not found");return;}
   const search=(symptomSearch?.value||"").toLowerCase();
   const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
   let html=`<button class="symptom-sort-toggle" aria-label="Switch sort mode">${escapeHtml(sortLabel)}</button>`;
@@ -1588,10 +1745,10 @@ function doAnalyze(){
   if(labVals)payload.lab_values=labVals;
   const painVal=collectPainScore();
   if(painVal!==null)payload.pain_score=painVal;
-  const slowTimer=setTimeout(()=>{btn.innerHTML=`<span class="spinner"></span> ${currentLang==="ja"?"データベース検索中...":"Searching database..."}`;},3000);
+  const slowTimer=setTimeout(()=>{btn.innerHTML=`<span class="spinner"></span> ${t("analyzeSearchingDb")}`;},3000);
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
-  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function")showToast(currentLang==="ja"?`${data.suspected_diseases?.length||0}件の疾患が見つかりました`:`${data.suspected_diseases?.length||0} diseases found`,"success");const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
+  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;if(n>0)showToast(t("diseasesFoundToast").replace("%n%",n),"success");else showToast(t("diseasesNoneFoundToast"),"warning");}const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
   .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);}})
   .finally(()=>{clearTimeout(slowTimer);if(btn){btn.disabled=false;btn.textContent=t("analyzeBtn");}if(progress)progress.classList.remove("active");});
 }
@@ -2163,7 +2320,7 @@ function renderHusbandry(h,container){
 function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
   const list=document.getElementById("diseaseDbList");
-  if(!list){console.warn("diseaseDbList element not found");return;}
+  if(!list){debugWarn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();const dbTab=document.getElementById("tab-database");if(dbTab){let b=dbTab.querySelector(".tab-badge");if(!b){b=document.createElement("span");b.className="tab-badge";dbTab.appendChild(b);}b.textContent=allDiseases.length;}}})
   .catch(()=>{if(requestId===diseaseRequestId&&list){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
@@ -2209,7 +2366,7 @@ function _buildCatCounts(){
 function renderAzNav(){
   const azNav=document.getElementById("azNav");
   const catGrid=document.getElementById("diseaseCategoryGrid");
-  if(!azNav){console.warn("azNav element not found");return;}
+  if(!azNav){debugWarn("azNav element not found");return;}
   if(diseaseNavMode===null)diseaseNavMode="category";
   const modeLabels={az:{next:"kana",label:"A-Z",switchLabel:currentLang==="ja"?"あいうえお順へ":"Switch to Kana"},kana:{next:"category",label:currentLang==="ja"?"あいうえお順":"Kana",switchLabel:currentLang==="ja"?"カテゴリ別へ":"Switch to Category"},category:{next:"az",label:currentLang==="ja"?"カテゴリ別":"Category",switchLabel:"A-Z"}};
   const cur=modeLabels[diseaseNavMode]||modeLabels.az;
@@ -2439,7 +2596,7 @@ function switchView(view){
 
 function setupNavigation(){
   const nav=document.getElementById("mainNav");
-  if(!nav){console.warn("mainNav element not found");return;}
+  if(!nav){debugWarn("mainNav element not found");return;}
   nav.addEventListener("click",e=>{
     const tab=e.target.closest("[role=tab]");
     if(tab)switchView(tab.dataset.view);
@@ -2543,8 +2700,8 @@ function sendLandingChat(){
   })
   .catch(err=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
-    console.error("Chat error:",err);
-    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";
+    debugError("Chat error:",err);
+    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
     const retryBtn=`<button class="landing-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtn;
     errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendLandingChat();});
@@ -2573,7 +2730,7 @@ function _sendSymptomUpdate(symptomId,confirmed){
     if(data.accumulated_symptoms)chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
   })
-  .catch(err=>{loading.remove();console.error("Symptom update error:",err);});
+  .catch(err=>{loading.remove();debugError("Symptom update error:",err);});
 }
 
 function sendChatMessage(){
@@ -2595,9 +2752,9 @@ function sendChatMessage(){
   })
   .catch(err=>{
     clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
-    console.error("Chat error:",err);
+    debugError("Chat error:",err);
     trackEvent("api_error",{endpoint:"diagnostic-chat",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});
-    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";
+    const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
     const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
     errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendChatMessage();});
@@ -2828,10 +2985,12 @@ function switchChatMode(mode){
   if(!freeCont||!guidedCont)return;
   if(mode==="guided"){
     freeBtn.classList.remove("active");guidedBtn.classList.add("active");
+    freeBtn.setAttribute("aria-selected","false");guidedBtn.setAttribute("aria-selected","true");
     freeCont.classList.add("hidden");guidedCont.classList.remove("hidden");
     startGuidedConsultation();
   } else {
     guidedBtn.classList.remove("active");freeBtn.classList.add("active");
+    guidedBtn.setAttribute("aria-selected","false");freeBtn.setAttribute("aria-selected","true");
     guidedCont.classList.add("hidden");freeCont.classList.remove("hidden");
   }
 }
@@ -3261,20 +3420,27 @@ function loadDrugDictionary(){
     /* Auto-select current species in drug filter */
     if(currentSpecies){spSelect.value=currentSpecies;}
     renderDrugList();
-  }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
-  document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
-  document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
-  document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
-  const dwInput=document.getElementById("drugWeight");
-  if(dwInput){
-    const saved=localStorage.getItem("vetdict-drug-weight");
-    if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;
-    dwInput.addEventListener("input",debounce(()=>{
-      const v=dwInput.value.trim();
-      if(v===""){localStorage.removeItem("vetdict-drug-weight");}
-      else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
-      renderDrugList();
-    },300));
+  }).catch(()=>{
+    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
+    const rb=list.querySelector(".retry-drug-btn");
+    if(rb)rb.addEventListener("click",()=>{drugsLoaded=false;loadDrugDictionary();});
+  });
+  if(!list.dataset.drugListenersAttached){
+    list.dataset.drugListenersAttached="1";
+    document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
+    document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
+    document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
+    const dwInput=document.getElementById("drugWeight");
+    if(dwInput){
+      const saved=localStorage.getItem("vetdict-drug-weight");
+      if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;
+      dwInput.addEventListener("input",debounce(()=>{
+        const v=dwInput.value.trim();
+        if(v===""){localStorage.removeItem("vetdict-drug-weight");}
+        else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
+        renderDrugList();
+      },300));
+    }
   }
 }
 
@@ -3366,35 +3532,42 @@ function loadAnesthesiaProtocols(){
     Object.entries(anesthesiaCategories).forEach(([k,v])=>{const name=currentLang==="ja"?(v.ja||v.en):(v.en||v.ja);catSel.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(k)}">${escapeHtml(name)}</option>`);});
     renderAnesthesiaOverview(data);
     renderAnesthesiaList();
-  }).catch(()=>{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;});
-  /* Fetch ASA classification */
-  fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
-  /* Fetch contraindication rules */
-  fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(()=>{});
-  document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
-  document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
-  /* Weight-based dose calculator */
-  const weightInput=document.getElementById("anesthesiaWeight");
-  if(weightInput){
-    weightInput.addEventListener("input",debounce(renderAnesthesiaList,300));
-    document.getElementById("anesthesiaWeightClear").addEventListener("click",()=>{weightInput.value="";renderAnesthesiaList();});
+  }).catch(()=>{
+    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-anesthesia-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
+    const rb=list.querySelector(".retry-anesthesia-btn");
+    if(rb)rb.addEventListener("click",()=>{anesthesiaLoaded=false;loadAnesthesiaProtocols();});
+  });
+  if(!list.dataset.anesthesiaListenersAttached){
+    list.dataset.anesthesiaListenersAttached="1";
+    /* Fetch ASA classification */
+    fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(()=>{});
+    /* Fetch contraindication rules */
+    fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(()=>{});
+    document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
+    document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
+    /* Weight-based dose calculator */
+    const weightInput=document.getElementById("anesthesiaWeight");
+    if(weightInput){
+      weightInput.addEventListener("input",debounce(renderAnesthesiaList,300));
+      document.getElementById("anesthesiaWeightClear").addEventListener("click",()=>{weightInput.value="";renderAnesthesiaList();});
+    }
+    /* Emergency protocol quick-access */
+    const emergBtn=document.getElementById("anesthesiaEmergencyBtn");
+    if(emergBtn){
+      emergBtn.addEventListener("click",()=>{
+        const catSel=document.getElementById("anesthesiaCategoryFilter");
+        const isActive=emergBtn.classList.toggle("active");
+        if(isActive){catSel.value="emergency";} else {catSel.value="";}
+        renderAnesthesiaList();
+      });
+    }
+    /* ASA filter */
+    const asaFilter=document.getElementById("anesthesiaAsaFilter");
+    if(asaFilter)asaFilter.addEventListener("change",renderAnesthesiaList);
+    /* Print checklist */
+    const printBtn=document.getElementById("anesthesiaPrintBtn");
+    if(printBtn)printBtn.addEventListener("click",printAnesthesiaChecklist);
   }
-  /* Emergency protocol quick-access */
-  const emergBtn=document.getElementById("anesthesiaEmergencyBtn");
-  if(emergBtn){
-    emergBtn.addEventListener("click",()=>{
-      const catSel=document.getElementById("anesthesiaCategoryFilter");
-      const isActive=emergBtn.classList.toggle("active");
-      if(isActive){catSel.value="emergency";} else {catSel.value="";}
-      renderAnesthesiaList();
-    });
-  }
-  /* ASA filter */
-  const asaFilter=document.getElementById("anesthesiaAsaFilter");
-  if(asaFilter)asaFilter.addEventListener("change",renderAnesthesiaList);
-  /* Print checklist */
-  const printBtn=document.getElementById("anesthesiaPrintBtn");
-  if(printBtn)printBtn.addEventListener("click",printAnesthesiaChecklist);
 }
 
 function reloadAnesthesiaForSpecies(){
@@ -4013,8 +4186,18 @@ function _drainToastQueue(){
   const{msg,type,duration}=_toastQueue.shift();
   const icons={success:"✓",error:"✕",warning:"⚠",info:"ℹ"};
   let toast=document.getElementById("vetdictToast");
-  if(!toast){toast=document.createElement("div");toast.id="vetdictToast";toast.className="toast";document.body.appendChild(toast);}
-  const icon=icons[type]?"<span class=\"toast-icon\">"+icons[type]+"</span>":"";
+  if(!toast){
+    toast=document.createElement("div");
+    toast.id="vetdictToast";
+    toast.className="toast";
+    toast.setAttribute("role","status");
+    toast.setAttribute("aria-live","polite");
+    toast.setAttribute("aria-atomic","true");
+    document.body.appendChild(toast);
+  }
+  if(type==="error"){toast.setAttribute("role","alert");toast.setAttribute("aria-live","assertive");}
+  else{toast.setAttribute("role","status");toast.setAttribute("aria-live","polite");}
+  const icon=icons[type]?"<span class=\"toast-icon\" aria-hidden=\"true\">"+icons[type]+"</span>":"";
   toast.innerHTML=icon+"<span class=\"toast-msg\">"+escapeHtml(msg)+"</span>";
   toast.className="toast"+(type?" "+type:"");
   requestAnimationFrame(()=>toast.classList.add("show"));
@@ -4434,7 +4617,7 @@ class MultiDiseaseUIHandler {
       this.currentAnalysis = data;
       this.renderMultiDiseaseUI(data);
     } catch (error) {
-      console.error('Multi-disease analysis error:', error);
+      debugError("Multi-disease analysis error:",error);
       this.showError(`Analysis failed: ${error.message}`);
     }
   }

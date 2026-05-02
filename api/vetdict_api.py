@@ -26,7 +26,7 @@ from api.debug_config import is_debug_mode_enabled
 # ---------------------------------------------------------------------------
 # Logging
 # ---------------------------------------------------------------------------
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -34,18 +34,18 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 VERSION = "5.0.0"
 BUILD = "2026-03-07"
-RATE_LIMIT_ERROR_MESSAGE = 'リクエスト制限に達しました。'
+RATE_LIMIT_ERROR_MESSAGE = "リクエスト制限に達しました。"
 
 # ---------------------------------------------------------------------------
 # Flask App
 # ---------------------------------------------------------------------------
-app = Flask(__name__, static_folder=None, template_folder=str(Path(__file__).resolve().parent.parent / 'templates'))
-app.config['DEBUG'] = is_debug_mode_enabled()
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
-_secret = os.getenv('SECRET_KEY') or os.getenv('FLASK_SECRET_KEY')
+app = Flask(__name__, static_folder=None, template_folder=str(Path(__file__).resolve().parent.parent / "templates"))
+app.config["DEBUG"] = is_debug_mode_enabled()
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 MB
+_secret = os.getenv("SECRET_KEY") or os.getenv("FLASK_SECRET_KEY")
 if not _secret:
     if is_debug_mode_enabled():
-        _secret = 'dev-only-insecure-key'
+        _secret = "dev-only-insecure-key"
         logger.warning("SECRET_KEY not set — using insecure default (debug mode only)")
     else:
         raise RuntimeError(
@@ -55,9 +55,9 @@ if not _secret:
 app.secret_key = _secret
 app.VERSION = VERSION  # Make VERSION available to decorators
 
-_allowed_origins = os.getenv('CORS_ALLOWED_ORIGINS', '').strip()
+_allowed_origins = os.getenv("CORS_ALLOWED_ORIGINS", "").strip()
 if _allowed_origins:
-    CORS(app, resources={r"/api/*": {"origins": _allowed_origins.split(',')}})
+    CORS(app, resources={r"/api/*": {"origins": _allowed_origins.split(",")}})
 elif is_debug_mode_enabled():
     CORS(app)
     logger.warning("CORS_ALLOWED_ORIGINS not set — allowing all origins (debug mode only)")
@@ -65,14 +65,14 @@ else:
     CORS(app, resources={r"/api/*": {"origins": ["https://vetdict.info"]}})
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = str(ROOT_DIR / 'templates')
-STATIC_DIR = str(ROOT_DIR / 'static')
+TEMPLATES_DIR = str(ROOT_DIR / "templates")
+STATIC_DIR = str(ROOT_DIR / "static")
 
 # ---------------------------------------------------------------------------
 # Public API rate limiter (prevents abuse of compute-heavy endpoints)
 # ---------------------------------------------------------------------------
 _public_rate_limiter = RateLimiter(
-    max_requests=int(os.getenv('PUBLIC_API_RATE_LIMIT', '60')),
+    max_requests=int(os.getenv("PUBLIC_API_RATE_LIMIT", "60")),
     window_seconds=60,
 )
 _public_client_ip = ClientIP()
@@ -83,10 +83,12 @@ def _check_public_rate_limit():
     client_ip = _public_client_ip.get_client_ip()
     if _public_rate_limiter.is_limited(client_ip):
         return (
-            jsonify({
-                'error': 'Rate limit exceeded. Please wait before retrying.',
-                'error_ja': 'リクエスト制限に達しました。しばらくしてから再試行してください。',
-            }),
+            jsonify(
+                {
+                    "error": "Rate limit exceeded. Please wait before retrying.",
+                    "error_ja": "リクエスト制限に達しました。しばらくしてから再試行してください。",
+                }
+            ),
             429,
         )
     return None
@@ -99,10 +101,12 @@ def _check_public_rate_limit():
 # Symptom checker (dog)
 try:
     from api.symptom_checker import analyze_symptoms
+
     SYMPTOM_CHECKER_AVAILABLE = True
 except ImportError:
     try:
         from symptom_checker import analyze_symptoms
+
         SYMPTOM_CHECKER_AVAILABLE = True
     except ImportError:
         SYMPTOM_CHECKER_AVAILABLE = False
@@ -112,10 +116,12 @@ except ImportError:
 # Multi-species analyzer
 try:
     from api.species_analyzer import analyze_species_symptoms
+
     SPECIES_ANALYZER_AVAILABLE = True
 except ImportError:
     try:
         from species_analyzer import analyze_species_symptoms
+
         SPECIES_ANALYZER_AVAILABLE = True
     except ImportError:
         SPECIES_ANALYZER_AVAILABLE = False
@@ -125,10 +131,12 @@ except ImportError:
 # Health checker blueprint (checkbox UI)
 try:
     from api.health_checker import health_bp
+
     HEALTH_CHECKER_AVAILABLE = True
 except ImportError:
     try:
         from health_checker import health_bp
+
         HEALTH_CHECKER_AVAILABLE = True
     except ImportError:
         health_bp = None
@@ -138,10 +146,12 @@ except ImportError:
 # Diagnostic chat blueprint
 try:
     from api.diagnostic_chat import diagnostic_bp
+
     DIAGNOSTIC_CHAT_AVAILABLE = True
 except ImportError:
     try:
         from diagnostic_chat import diagnostic_bp
+
         DIAGNOSTIC_CHAT_AVAILABLE = True
     except ImportError:
         diagnostic_bp = None
@@ -159,6 +169,7 @@ try:
     from reco2.engine import patrol as reco2_patrol
     from reco2.engine import record_feedback as reco2_record_feedback
     from reco2.orchestrator import get_orchestrator as reco2_get_orchestrator
+
     RECO2_AVAILABLE = True
 except ImportError:
     RECO2_AVAILABLE = False
@@ -167,19 +178,19 @@ except ImportError:
 
 def _normalize_string_list(values, field_name, *, singular_name=None, require_non_empty=False):
     if not isinstance(values, list):
-        return None, {'error': f'{field_name} must be a list of strings'}, 400
+        return None, {"error": f"{field_name} must be a list of strings"}, 400
 
     normalized_values = []
     for value in values:
         if not isinstance(value, str):
-            return None, {'error': f'{field_name} must contain only strings'}, 400
+            return None, {"error": f"{field_name} must contain only strings"}, 400
         normalized_value = value.strip()
         if normalized_value:
             normalized_values.append(normalized_value)
 
     if require_non_empty and not normalized_values:
         item_name = singular_name or field_name
-        return None, {'error': f'At least one {item_name} required'}, 400
+        return None, {"error": f"At least one {item_name} required"}, 400
 
     return normalized_values, None, None
 
@@ -194,6 +205,7 @@ if DIAGNOSTIC_CHAT_AVAILABLE and diagnostic_bp:
 # PayPal subscription blueprint
 try:
     from api.paypal_api import paypal_bp
+
     app.register_blueprint(paypal_bp)
 except ImportError:
     pass
@@ -201,11 +213,13 @@ except ImportError:
 # Drug dictionary blueprint
 try:
     from api.drug_dictionary import drug_bp
+
     app.register_blueprint(drug_bp)
     DRUG_DICTIONARY_AVAILABLE = True
 except ImportError:
     try:
         from drug_dictionary import drug_bp
+
         app.register_blueprint(drug_bp)
         DRUG_DICTIONARY_AVAILABLE = True
     except ImportError:
@@ -215,6 +229,7 @@ except ImportError:
 # Anesthesia protocols blueprint
 try:
     from api.anesthesia_api import anesthesia_bp
+
     app.register_blueprint(anesthesia_bp)
 except ImportError:
     logger.warning("Anesthesia protocols module not available")
@@ -222,6 +237,7 @@ except ImportError:
 # Analytics blueprint (usage statistics)
 try:
     from api.analytics import analytics_bp, init_analytics
+
     app.register_blueprint(analytics_bp)
     init_analytics()
     ANALYTICS_AVAILABLE = True
@@ -232,6 +248,7 @@ except ImportError:
 # Admin API blueprint (SQLite data management)
 try:
     from api.routes.admin_api import admin_bp
+
     app.register_blueprint(admin_bp)
     ADMIN_API_AVAILABLE = True
 except ImportError:
@@ -241,6 +258,7 @@ except ImportError:
 # Public diseases API blueprint (SQLite read-only access)
 try:
     from api.routes.diseases_api import diseases_bp
+
     app.register_blueprint(diseases_bp)
     DISEASES_API_AVAILABLE = True
 except ImportError:
@@ -250,11 +268,13 @@ except ImportError:
 # Phase 3 Learning Insights blueprint (Continuous Learning Pipeline)
 try:
     from api.learning_insights import bp as learning_insights_bp
+
     app.register_blueprint(learning_insights_bp)
     LEARNING_INSIGHTS_AVAILABLE = True
 except ImportError:
     try:
         from learning_insights import bp as learning_insights_bp
+
         app.register_blueprint(learning_insights_bp)
         LEARNING_INSIGHTS_AVAILABLE = True
     except ImportError:
@@ -266,41 +286,42 @@ except ImportError:
 # Decorators
 # ---------------------------------------------------------------------------
 
+
 def ensure_json_response(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         try:
             result = f(*args, **kwargs)
-            if hasattr(result, 'status_code'):
+            if hasattr(result, "status_code"):
                 return result
             if isinstance(result, tuple):
                 body = result[0]
                 status = result[1] if len(result) > 1 else 200
                 if isinstance(body, dict):
-                    body.setdefault('success', status < 400)
-                    body.setdefault('version', VERSION)
+                    body.setdefault("success", status < 400)
+                    body.setdefault("version", VERSION)
                     resp = jsonify(body)
                     resp.status_code = status
                     return resp
                 return result
             if isinstance(result, dict):
-                result.setdefault('success', True)
-                result.setdefault('version', VERSION)
+                result.setdefault("success", True)
+                result.setdefault("version", VERSION)
                 return jsonify(result)
             return result
         except Exception as e:
             logger.error("Error in %s: %s", f.__name__, e, exc_info=True)
-            is_production = os.getenv('RENDER') or os.getenv('PRODUCTION')
-            error_msg = 'エラーが発生しました。しばらくしてからもう一度お試しください。' if is_production else str(e)
-            return jsonify({'success': False, 'error': error_msg, 'version': VERSION}), 500
+            is_production = os.getenv("RENDER") or os.getenv("PRODUCTION")
+            error_msg = "エラーが発生しました。しばらくしてからもう一度お試しください。" if is_production else str(e)
+            return jsonify({"success": False, "error": error_msg, "version": VERSION}), 500
+
     return wrapper
-
-
 
 
 # ---------------------------------------------------------------------------
 # Security headers
 # ---------------------------------------------------------------------------
+
 
 @app.before_request
 def generate_csp_nonce():
@@ -320,10 +341,10 @@ def generate_csp_nonce():
 def add_headers(response):
     """Add security headers to all responses."""
     # Content security headers
-    response.headers['X-Content-Type-Options'] = 'nosniff'
-    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
-    response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
 
     # Content Security Policy (prevent XSS, clickjacking, etc.)
     # Note: nonce + 'unsafe-inline' causes browsers to ignore 'unsafe-inline'
@@ -331,7 +352,7 @@ def add_headers(response):
     # ignored.  GA4/GTM injects inline event handlers that cannot carry a nonce,
     # so we use 'unsafe-inline' + explicit host allowlists without nonce/
     # strict-dynamic to avoid blocking GA tracking after diagnosis events.
-    response.headers['Content-Security-Policy'] = (
+    response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
         "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.paypal.com https://www.google-analytics.com; "
         "style-src 'self' 'unsafe-inline'; "
@@ -343,26 +364,26 @@ def add_headers(response):
     )
 
     # HTTPS enforcement in production
-    is_production = os.getenv('RENDER') or os.getenv('PRODUCTION')
+    is_production = os.getenv("RENDER") or os.getenv("PRODUCTION")
     if is_production:
-        response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload'
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload"
 
     # Remove server version disclosure
-    response.headers.pop('Server', None)
-    response.headers.pop('X-Powered-By', None)
+    response.headers.pop("Server", None)
+    response.headers.pop("X-Powered-By", None)
 
     # Cache policy: API responses are never cached; static files are revalidated
-    path = request.path or ''
-    if path.startswith('/api/') or path == '/':
-        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
-        response.headers['Pragma'] = 'no-cache'
-        response.headers['Expires'] = '0'
-    elif path.startswith('/static/'):
+    path = request.path or ""
+    if path.startswith("/api/") or path == "/":
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    elif path.startswith("/static/"):
         # Immutable assets (SW handles revalidation): cache for 7 days
-        if any(path.endswith(ext) for ext in ('.css', '.js', '.svg', '.png', '.woff2')):
-            response.headers['Cache-Control'] = 'public, max-age=604800, stale-while-revalidate=86400'
+        if any(path.endswith(ext) for ext in (".css", ".js", ".svg", ".png", ".woff2")):
+            response.headers["Cache-Control"] = "public, max-age=604800, stale-while-revalidate=86400"
         else:
-            response.headers.setdefault('Cache-Control', 'public, max-age=3600, must-revalidate')
+            response.headers.setdefault("Cache-Control", "public, max-age=3600, must-revalidate")
 
     return response
 
@@ -372,75 +393,97 @@ def add_headers(response):
 # =============================================================================
 
 
-
-
-@app.route('/')
+@app.route("/")
 def index():
     try:
-        return render_template('index.html')
+        return render_template("index.html")
     except Exception:
-        return jsonify({'error': 'index.html not found'}), 404
+        return jsonify({"error": "index.html not found"}), 404
 
 
-@app.route('/terms')
+@app.route("/terms")
 def terms():
-    return render_template('terms.html')
+    return render_template("terms.html")
 
 
-@app.route('/privacy')
+@app.route("/privacy")
 def privacy():
-    return render_template('privacy.html')
+    return render_template("privacy.html")
 
 
-@app.route('/tokushoho')
+@app.route("/tokushoho")
 def tokushoho():
-    return render_template('tokushoho.html')
+    return render_template("tokushoho.html")
 
 
-@app.route('/favicon.ico')
+@app.route("/favicon.ico")
 def favicon():
     try:
-        return send_from_directory(STATIC_DIR, 'favicon.ico')
+        return send_from_directory(STATIC_DIR, "favicon.ico")
     except (FileNotFoundError, WerkzeugNotFound):
         try:
-            return send_from_directory(TEMPLATES_DIR, 'favicon.ico')
+            return send_from_directory(TEMPLATES_DIR, "favicon.ico")
         except (FileNotFoundError, WerkzeugNotFound):
-            return '', 204
+            return "", 204
 
 
-@app.route('/static/<path:filename>')
+@app.route("/static/<path:filename>")
 def static_assets(filename):
     try:
         return send_from_directory(STATIC_DIR, filename)
     except (FileNotFoundError, WerkzeugNotFound):
-        return jsonify({'error': f'{filename} not found'}), 404
+        return jsonify({"error": f"{filename} not found"}), 404
 
 
 import re as _re
 
 # Module-level constants for disease page routing (used by sitemap, hub, index, detail)
 _DISEASE_MODULES: dict[str, str] = {
-    "dog": "api.species.dog_diseases", "cat": "api.species.cat_diseases",
-    "horse": "api.species.equine_diseases", "rabbit": "api.species.rabbit_diseases",
-    "hamster": "api.species.hamster_diseases", "guinea_pig": "api.species.guinea_pig_diseases",
-    "chinchilla": "api.species.chinchilla_diseases", "ferret": "api.species.ferret_diseases",
-    "hedgehog": "api.species.hedgehog_diseases", "sugar_glider": "api.species.sugar_glider_diseases",
-    "degu": "api.species.degu_diseases", "bird": "api.species.bird_diseases",
-    "parakeet": "api.species.parakeet_diseases", "parrot": "api.species.parrot_diseases",
-    "reptile": "api.species.reptile_diseases", "tortoise": "api.species.tortoise_diseases",
-    "snake": "api.species.snake_diseases", "lizard": "api.species.lizard_diseases",
-    "amphibian": "api.species.amphibian_diseases", "fish": "api.species.fish_diseases",
+    "dog": "api.species.dog_diseases",
+    "cat": "api.species.cat_diseases",
+    "horse": "api.species.equine_diseases",
+    "rabbit": "api.species.rabbit_diseases",
+    "hamster": "api.species.hamster_diseases",
+    "guinea_pig": "api.species.guinea_pig_diseases",
+    "chinchilla": "api.species.chinchilla_diseases",
+    "ferret": "api.species.ferret_diseases",
+    "hedgehog": "api.species.hedgehog_diseases",
+    "sugar_glider": "api.species.sugar_glider_diseases",
+    "degu": "api.species.degu_diseases",
+    "bird": "api.species.bird_diseases",
+    "parakeet": "api.species.parakeet_diseases",
+    "parrot": "api.species.parrot_diseases",
+    "reptile": "api.species.reptile_diseases",
+    "tortoise": "api.species.tortoise_diseases",
+    "snake": "api.species.snake_diseases",
+    "lizard": "api.species.lizard_diseases",
+    "amphibian": "api.species.amphibian_diseases",
+    "fish": "api.species.fish_diseases",
     "exotic_other": "api.species.exotic_other_diseases",
 }
 
 _SPECIES_ICONS: dict[str, str] = {
-    "dog": "\U0001F415", "cat": "\U0001F408", "horse": "\U0001F434",
-    "rabbit": "\U0001F407", "hamster": "\U0001F439", "guinea_pig": "\U0001F439",
-    "chinchilla": "\U0001F43F\uFE0F", "ferret": "\U0001F9A1", "hedgehog": "\U0001F994",
-    "sugar_glider": "\U0001F43F\uFE0F", "degu": "\U0001F42D", "bird": "\U0001F426",
-    "parakeet": "\U0001F99C", "parrot": "\U0001F99C", "reptile": "\U0001F98E",
-    "tortoise": "\U0001F422", "snake": "\U0001F40D", "lizard": "\U0001F98E",
-    "amphibian": "\U0001F438", "fish": "\U0001F41F", "exotic_other": "\U0001F999",
+    "dog": "\U0001f415",
+    "cat": "\U0001f408",
+    "horse": "\U0001f434",
+    "rabbit": "\U0001f407",
+    "hamster": "\U0001f439",
+    "guinea_pig": "\U0001f439",
+    "chinchilla": "\U0001f43f\ufe0f",
+    "ferret": "\U0001f9a1",
+    "hedgehog": "\U0001f994",
+    "sugar_glider": "\U0001f43f\ufe0f",
+    "degu": "\U0001f42d",
+    "bird": "\U0001f426",
+    "parakeet": "\U0001f99c",
+    "parrot": "\U0001f99c",
+    "reptile": "\U0001f98e",
+    "tortoise": "\U0001f422",
+    "snake": "\U0001f40d",
+    "lizard": "\U0001f98e",
+    "amphibian": "\U0001f438",
+    "fish": "\U0001f41f",
+    "exotic_other": "\U0001f999",
 }
 
 
@@ -451,6 +494,7 @@ def _load_diseases(species_key: str) -> list:
         return []
     try:
         import importlib
+
         mod = importlib.import_module(mod_name)
         return getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
     except ImportError:
@@ -463,7 +507,7 @@ def _disease_slug(disease) -> str:
         name = disease.get("name", "") or disease.get("name_en", "")
     else:
         name = getattr(disease, "name", "") or getattr(disease, "name_en", "")
-    return _re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
+    return _re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
 def _disease_get(disease, key, default=""):
@@ -480,25 +524,25 @@ def _disease_get(disease, key, default=""):
     return val
 
 
-@app.route('/sitemap.xml')
+@app.route("/sitemap.xml")
 def dynamic_sitemap():
     """Generate a dynamic sitemap including all species and feature pages."""
     from api.disease_store import SPECIES_META
 
-    base = 'https://vetdict.info'
+    base = "https://vetdict.info"
     urls = [
-        (f'{base}/', 'weekly', '1.0'),
-        (f'{base}/#checker', 'weekly', '0.9'),
-        (f'{base}/#database', 'weekly', '0.9'),
-        (f'{base}/diseases', 'weekly', '0.9'),
-        (f'{base}/#chat', 'weekly', '0.8'),
-        (f'{base}/#drugs', 'monthly', '0.8'),
+        (f"{base}/", "weekly", "1.0"),
+        (f"{base}/#checker", "weekly", "0.9"),
+        (f"{base}/#database", "weekly", "0.9"),
+        (f"{base}/diseases", "weekly", "0.9"),
+        (f"{base}/#chat", "weekly", "0.8"),
+        (f"{base}/#drugs", "monthly", "0.8"),
     ]
     # Species-specific pages
     for sp in SPECIES_META:
-        urls.append((f'{base}/?species={sp}#checker', 'weekly', '0.7'))
-        urls.append((f'{base}/?species={sp}#database', 'weekly', '0.7'))
-        urls.append((f'{base}/diseases/{sp}', 'weekly', '0.8'))  # Disease index per species
+        urls.append((f"{base}/?species={sp}#checker", "weekly", "0.7"))
+        urls.append((f"{base}/?species={sp}#database", "weekly", "0.7"))
+        urls.append((f"{base}/diseases/{sp}", "weekly", "0.8"))  # Disease index per species
 
     # Disease detail pages (SEO: each disease = a crawlable page)
     for sp in _DISEASE_MODULES:
@@ -508,35 +552,35 @@ def dynamic_sitemap():
             for _d in _load_diseases(sp):
                 _slug = _disease_slug(_d)
                 if _slug:
-                    urls.append((f'{base}/diseases/{sp}/{_slug}', 'monthly', '0.5'))
+                    urls.append((f"{base}/diseases/{sp}/{_slug}", "monthly", "0.5"))
         except ImportError:
             pass
 
     # Legal pages
-    for page in ('terms', 'privacy', 'tokushoho'):
-        urls.append((f'{base}/{page}', 'monthly', '0.3'))
+    for page in ("terms", "privacy", "tokushoho"):
+        urls.append((f"{base}/{page}", "monthly", "0.3"))
 
-    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
-             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for loc, freq, priority in urls:
-        lines.append(f'  <url><loc>{loc}</loc>'
-                     f'<changefreq>{freq}</changefreq>'
-                     f'<priority>{priority}</priority></url>')
-    lines.append('</urlset>')
+        lines.append(f"  <url><loc>{loc}</loc><changefreq>{freq}</changefreq><priority>{priority}</priority></url>")
+    lines.append("</urlset>")
 
-    return Response('\n'.join(lines), mimetype='application/xml')
+    return Response("\n".join(lines), mimetype="application/xml")
 
 
-@app.route('/diseases/search')
+@app.route("/diseases/search")
 def diseases_search():
     """Cross-species disease search page."""
     from api.disease_store import SPECIES_META
 
-    query = request.args.get('q', '').strip()
+    query = request.args.get("q", "").strip()
     if not query or len(query) < 2:
         return render_template(
-            'diseases_search.html', query=query, results=[],
-            total_results=0, searched=bool(query),
+            "diseases_search.html",
+            query=query,
+            results=[],
+            total_results=0,
+            searched=bool(query),
         )
 
     q_lower = query.lower()
@@ -547,7 +591,7 @@ def diseases_search():
         meta = SPECIES_META[sp_id]
         sp_name_ja = meta.get("name_ja", sp_id)
         sp_name_en = meta.get("name_en", sp_id.title())
-        icon = _SPECIES_ICONS.get(sp_id, "\U0001F43E")
+        icon = _SPECIES_ICONS.get(sp_id, "\U0001f43e")
         diseases = _load_diseases(sp_id)
         matches = []
         for d in diseases:
@@ -566,31 +610,41 @@ def diseases_search():
                 if slug:
                     cat = _classify_disease_dict({"name": name, "name_ja": name_ja, "description": desc})
                     cat_ja = _DISEASE_CAT_LABELS.get(cat, ("その他",))[0]
-                    matches.append({
-                        "name": name, "name_ja": name_ja,
-                        "slug": slug, "urgency": urgency,
-                        "category": cat, "category_ja": cat_ja,
-                    })
+                    matches.append(
+                        {
+                            "name": name,
+                            "name_ja": name_ja,
+                            "slug": slug,
+                            "urgency": urgency,
+                            "category": cat,
+                            "category_ja": cat_ja,
+                        }
+                    )
         if matches:
             matches.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
-            results.append({
-                "species_id": sp_id,
-                "species_ja": sp_name_ja,
-                "species_en": sp_name_en,
-                "icon": icon,
-                "diseases": matches,
-                "count": len(matches),
-            })
+            results.append(
+                {
+                    "species_id": sp_id,
+                    "species_ja": sp_name_ja,
+                    "species_en": sp_name_en,
+                    "icon": icon,
+                    "diseases": matches,
+                    "count": len(matches),
+                }
+            )
     results.sort(key=lambda x: -x["count"])
     total_results = sum(r["count"] for r in results)
 
     return render_template(
-        'diseases_search.html', query=query, results=results,
-        total_results=total_results, searched=True,
+        "diseases_search.html",
+        query=query,
+        results=results,
+        total_results=total_results,
+        searched=True,
     )
 
 
-@app.route('/diseases')
+@app.route("/diseases")
 def diseases_hub():
     """Top-level diseases hub page listing all 21 species with disease counts."""
     from api.disease_store import SPECIES_META
@@ -609,21 +663,29 @@ def diseases_hub():
         # Per-species category breakdown
         sp_cats: dict[str, int] = {}
         for d in diseases:
-            dd = d if isinstance(d, dict) else {
-                "name": getattr(d, "name", ""),
-                "name_ja": getattr(d, "name_ja", ""),
-                "description": getattr(d, "description", ""),
-            }
+            dd = (
+                d
+                if isinstance(d, dict)
+                else {
+                    "name": getattr(d, "name", ""),
+                    "name_ja": getattr(d, "name_ja", ""),
+                    "description": getattr(d, "description", ""),
+                }
+            )
             cat = _classify_disease_dict(dd)
             sp_cats[cat] = sp_cats.get(cat, 0) + 1
             category_totals[cat] = category_totals.get(cat, 0) + 1
 
-        species_list.append({
-            "id": sp_id, "name_ja": meta.get("name_ja", sp_id),
-            "name_en": meta.get("name_en", sp_id.title()), "count": count,
-            "icon": _SPECIES_ICONS.get(sp_id, "\U0001F43E"),
-            "categories": sp_cats,
-        })
+        species_list.append(
+            {
+                "id": sp_id,
+                "name_ja": meta.get("name_ja", sp_id),
+                "name_en": meta.get("name_en", sp_id.title()),
+                "count": count,
+                "icon": _SPECIES_ICONS.get(sp_id, "\U0001f43e"),
+                "categories": sp_cats,
+            }
+        )
     species_list.sort(key=lambda x: x["count"], reverse=True)
 
     # Build ordered category list
@@ -635,51 +697,132 @@ def diseases_hub():
             categories.append({"id": cat_id, "ja": ja, "en": en, "count": cnt})
 
     return render_template(
-        'diseases_hub.html', species=species_list,
-        categories=categories, total=total_diseases,
+        "diseases_hub.html",
+        species=species_list,
+        categories=categories,
+        total=total_diseases,
     )
 
 
 # Disease category classification (mirrors DISEASE_CATEGORIES in app.js)
 _DISEASE_CAT_ORDER = [
-    "infectious", "neoplastic", "cardiovascular", "respiratory",
-    "gastrointestinal", "renal", "endocrine", "dermatological",
-    "neurological", "musculoskeletal", "ophthalmological", "hematological",
-    "dental", "parasitic", "reproductive", "toxicological",
-    "behavioral", "congenital", "immune",
+    "infectious",
+    "neoplastic",
+    "cardiovascular",
+    "respiratory",
+    "gastrointestinal",
+    "renal",
+    "endocrine",
+    "dermatological",
+    "neurological",
+    "musculoskeletal",
+    "ophthalmological",
+    "hematological",
+    "dental",
+    "parasitic",
+    "reproductive",
+    "toxicological",
+    "behavioral",
+    "congenital",
+    "immune",
 ]
 _DISEASE_CAT_PATTERNS = {
-    "infectious": _re.compile(r"infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich", _re.IGNORECASE),
-    "neoplastic": _re.compile(r"tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas", _re.IGNORECASE),
-    "cardiovascular": _re.compile(r"cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat", _re.IGNORECASE),
-    "respiratory": _re.compile(r"respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm", _re.IGNORECASE),
-    "gastrointestinal": _re.compile(r"gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit", _re.IGNORECASE),
-    "renal": _re.compile(r"renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros", _re.IGNORECASE),
-    "endocrine": _re.compile(r"endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal", _re.IGNORECASE),
-    "dermatological": _re.compile(r"dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar", _re.IGNORECASE),
-    "neurological": _re.compile(r"neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia", _re.IGNORECASE),
-    "musculoskeletal": _re.compile(r"musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro", _re.IGNORECASE),
-    "ophthalmological": _re.compile(r"ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm", _re.IGNORECASE),
-    "hematological": _re.compile(r"hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit", _re.IGNORECASE),
-    "dental": _re.compile(r"dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast", _re.IGNORECASE),
-    "parasitic": _re.compile(r"parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas", _re.IGNORECASE),
-    "reproductive": _re.compile(r"reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit", _re.IGNORECASE),
-    "toxicological": _re.compile(r"toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol", _re.IGNORECASE),
-    "behavioral": _re.compile(r"behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia", _re.IGNORECASE),
-    "congenital": _re.compile(r"congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia", _re.IGNORECASE),
-    "immune": _re.compile(r"immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom", _re.IGNORECASE),
+    "infectious": _re.compile(
+        r"infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich",
+        _re.IGNORECASE,
+    ),
+    "neoplastic": _re.compile(
+        r"tumor|tumour|neoplas|cancer|carcinom|lymphom|sarcoma|melanom|adenocarcin|fibrosarcom|hemangio|mast\s*cell|leukemia|lymphosarcom|meningiom|osteosarcom|squamous\s*cell|thymom|insulinom|pheochromocyt|chemodectom|histiocyt|plasmacytom|seminoma|mammary.*neoplas",
+        _re.IGNORECASE,
+    ),
+    "cardiovascular": _re.compile(
+        r"cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat",
+        _re.IGNORECASE,
+    ),
+    "respiratory": _re.compile(
+        r"respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm",
+        _re.IGNORECASE,
+    ),
+    "gastrointestinal": _re.compile(
+        r"gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit",
+        _re.IGNORECASE,
+    ),
+    "renal": _re.compile(
+        r"renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros",
+        _re.IGNORECASE,
+    ),
+    "endocrine": _re.compile(
+        r"endocrin|thyroid|diabet|cushing|addison|adrenal|hyperadrenocort|hypoadrenocort|insulin|pituitar|parathyroid|hypoglyce|hyperglyce|hypothyroid|hyperthyroid|acromegal",
+        _re.IGNORECASE,
+    ),
+    "dermatological": _re.compile(
+        r"dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar",
+        _re.IGNORECASE,
+    ),
+    "neurological": _re.compile(
+        r"neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia",
+        _re.IGNORECASE,
+    ),
+    "musculoskeletal": _re.compile(
+        r"musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro",
+        _re.IGNORECASE,
+    ),
+    "ophthalmological": _re.compile(
+        r"ophthalm|eye|ocular|cornea|conjunctiv|glaucom|catarct|uveitis|retinal|keratit|ulcer.*cornea|corneal.*ulcer|cherry\s*eye|entropion|ectropion|prolapse.*eye|proptosis|lens.*luxat|progressive.*retinal|pannus|dry\s*eye|kcs\b|exophthalm",
+        _re.IGNORECASE,
+    ),
+    "hematological": _re.compile(
+        r"hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit",
+        _re.IGNORECASE,
+    ),
+    "dental": _re.compile(
+        r"dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast",
+        _re.IGNORECASE,
+    ),
+    "parasitic": _re.compile(
+        r"parasit|heartworm|dirofilar|hookworm|roundworm|whipworm|tapeworm|giardia|coccidia|toxoplasm|tick.*borne|flea\b|mite|demodic|sarcoptic|ear\s*mite|cheyletiell|toxocar|ancylostom|trichuris|isospora|tritrichomonas",
+        _re.IGNORECASE,
+    ),
+    "reproductive": _re.compile(
+        r"reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit",
+        _re.IGNORECASE,
+    ),
+    "toxicological": _re.compile(
+        r"toxic|poison|intoxicat|overdose|envenomation|xylitol|chocolate|antifreeze|lily\s*toxic|nsaid.*toxic|acetaminophen|rat.*poison|rodenticide|organophos|ethylene\s*glycol",
+        _re.IGNORECASE,
+    ),
+    "behavioral": _re.compile(
+        r"behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia", _re.IGNORECASE
+    ),
+    "congenital": _re.compile(
+        r"congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia", _re.IGNORECASE
+    ),
+    "immune": _re.compile(
+        r"immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom",
+        _re.IGNORECASE,
+    ),
 }
 _DISEASE_CAT_LABELS = {
-    "infectious": ("感染症", "Infectious"), "neoplastic": ("腫瘍", "Neoplastic"),
-    "cardiovascular": ("循環器", "Cardiovascular"), "respiratory": ("呼吸器", "Respiratory"),
-    "gastrointestinal": ("消化器", "Gastrointestinal"), "renal": ("泌尿器", "Renal/Urinary"),
-    "endocrine": ("内分泌", "Endocrine"), "dermatological": ("皮膚", "Dermatological"),
-    "neurological": ("神経", "Neurological"), "musculoskeletal": ("筋骨格", "Musculoskeletal"),
-    "ophthalmological": ("眼科", "Ophthalmological"), "hematological": ("血液", "Hematological"),
-    "dental": ("歯科", "Dental"), "parasitic": ("寄生虫", "Parasitic"),
-    "reproductive": ("生殖器", "Reproductive"), "toxicological": ("中毒", "Toxicological"),
-    "behavioral": ("行動", "Behavioral"), "congenital": ("先天性", "Congenital"),
-    "immune": ("免疫", "Immune-mediated"), "other": ("その他", "Other"),
+    "infectious": ("感染症", "Infectious"),
+    "neoplastic": ("腫瘍", "Neoplastic"),
+    "cardiovascular": ("循環器", "Cardiovascular"),
+    "respiratory": ("呼吸器", "Respiratory"),
+    "gastrointestinal": ("消化器", "Gastrointestinal"),
+    "renal": ("泌尿器", "Renal/Urinary"),
+    "endocrine": ("内分泌", "Endocrine"),
+    "dermatological": ("皮膚", "Dermatological"),
+    "neurological": ("神経", "Neurological"),
+    "musculoskeletal": ("筋骨格", "Musculoskeletal"),
+    "ophthalmological": ("眼科", "Ophthalmological"),
+    "hematological": ("血液", "Hematological"),
+    "dental": ("歯科", "Dental"),
+    "parasitic": ("寄生虫", "Parasitic"),
+    "reproductive": ("生殖器", "Reproductive"),
+    "toxicological": ("中毒", "Toxicological"),
+    "behavioral": ("行動", "Behavioral"),
+    "congenital": ("先天性", "Congenital"),
+    "immune": ("免疫", "Immune-mediated"),
+    "other": ("その他", "Other"),
 }
 
 
@@ -692,7 +835,7 @@ def _classify_disease_dict(d: dict) -> str:
     return "other"
 
 
-@app.route('/diseases/<species>')
+@app.route("/diseases/<species>")
 def disease_index(species: str):
     """Server-rendered disease index page per species for SEO.
 
@@ -703,7 +846,10 @@ def disease_index(species: str):
 
     species_key = species.lower()
     if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
-        return jsonify({'error': 'Unknown species'}), 404
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown species"}), 404
 
     sp_meta = SPECIES_META[species_key]
     diseases = _load_diseases(species_key)
@@ -739,7 +885,7 @@ def disease_index(species: str):
             categories.append({"id": cat_id, "ja": ja, "en": en, "count": cnt})
 
     return render_template(
-        'disease_index.html',
+        "disease_index.html",
         diseases=disease_list,
         categories=categories,
         species=species_key,
@@ -749,7 +895,7 @@ def disease_index(species: str):
     )
 
 
-@app.route('/diseases/<species>/<disease_slug>')
+@app.route("/diseases/<species>/<disease_slug>")
 def disease_detail(species: str, disease_slug: str):
     """Server-rendered disease detail page for SEO indexing.
 
@@ -760,7 +906,10 @@ def disease_detail(species: str, disease_slug: str):
 
     species_key = species.lower()
     if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
-        return jsonify({'error': 'Unknown species'}), 404
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown species"}), 404
 
     sp_meta = SPECIES_META[species_key]
     diseases = _load_diseases(species_key)
@@ -773,18 +922,40 @@ def disease_detail(species: str, disease_slug: str):
             break
 
     if not disease:
-        return jsonify({'error': 'Disease not found'}), 404
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Disease not found"}), 404
 
     # Normalize to dict for template rendering (handles dataclass objects)
     if not isinstance(disease, dict):
         from dataclasses import asdict
+
         try:
             disease = asdict(disease)
         except TypeError:
-            disease = {k: getattr(disease, k, "") for k in ("name", "name_ja", "description", "description_ja",
-                       "symptoms", "causes", "causes_ja", "pathophysiology", "pathophysiology_ja",
-                       "treatment", "treatment_ja", "prevention", "prevention_ja", "prognosis", "prognosis_ja",
-                       "urgency", "recommended_tests")}
+            disease = {
+                k: getattr(disease, k, "")
+                for k in (
+                    "name",
+                    "name_ja",
+                    "description",
+                    "description_ja",
+                    "symptoms",
+                    "causes",
+                    "causes_ja",
+                    "pathophysiology",
+                    "pathophysiology_ja",
+                    "treatment",
+                    "treatment_ja",
+                    "prevention",
+                    "prevention_ja",
+                    "prognosis",
+                    "prognosis_ja",
+                    "urgency",
+                    "recommended_tests",
+                )
+            }
 
     sp_label_ja = sp_meta.get("name_ja", species_key)
     sp_label_en = sp_meta.get("name_en", species_key.title())
@@ -793,6 +964,7 @@ def disease_detail(species: str, disease_slug: str):
     symptom_names = {}
     try:
         import importlib
+
         _mod = importlib.import_module(_DISEASE_MODULES[species_key])
         sym_names_dict = getattr(_mod, "SYMPTOM_NAMES", {})
         symptom_names = {k: v.get("ja", k) for k, v in sym_names_dict.items()}
@@ -818,12 +990,14 @@ def disease_detail(species: str, disease_slug: str):
                 continue
             shared = disease_symptoms & d_syms
             if len(shared) >= 2:
-                related.append({
-                    "name": d_name,
-                    "name_ja": _disease_get(d, "name_ja", ""),
-                    "slug": _disease_slug(d),
-                    "shared": len(shared),
-                })
+                related.append(
+                    {
+                        "name": d_name,
+                        "name_ja": _disease_get(d, "name_ja", ""),
+                        "slug": _disease_slug(d),
+                        "shared": len(shared),
+                    }
+                )
         related.sort(key=lambda x: -x["shared"])
         related = related[:8]
 
@@ -833,6 +1007,7 @@ def disease_detail(species: str, disease_slug: str):
     if treatment_text.strip():
         try:
             from api.drug_dictionary import DRUGS as _ALL_DRUGS
+
             for dr in _ALL_DRUGS:
                 dr_name = dr.get("name", "")
                 dr_name_ja = dr.get("name_ja", "")
@@ -846,6 +1021,7 @@ def disease_detail(species: str, disease_slug: str):
     pubmed_refs = []
     try:
         from api.pubmed_references import get_references_for_disease
+
         pubmed_refs = get_references_for_disease(disease.get("name", ""))
     except Exception:
         pass
@@ -868,16 +1044,18 @@ def disease_detail(species: str, disease_slug: str):
         if _classify_disease_dict(dd) == disease_cat:
             slug = _disease_slug(d)
             if slug:
-                same_cat_diseases.append({
-                    "name": d_name,
-                    "name_ja": dd["name_ja"],
-                    "slug": slug,
-                })
+                same_cat_diseases.append(
+                    {
+                        "name": d_name,
+                        "name_ja": dd["name_ja"],
+                        "slug": slug,
+                    }
+                )
     same_cat_diseases.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
     same_cat_diseases = same_cat_diseases[:12]
 
     return render_template(
-        'disease_detail.html',
+        "disease_detail.html",
         disease=disease,
         species=species_key,
         species_ja=sp_label_ja,
@@ -893,7 +1071,7 @@ def disease_detail(species: str, disease_slug: str):
     )
 
 
-@app.route('/<path:filename>')
+@app.route("/<path:filename>")
 def static_files(filename):
     try:
         return send_from_directory(STATIC_DIR, filename)
@@ -901,14 +1079,20 @@ def static_files(filename):
         try:
             return send_from_directory(TEMPLATES_DIR, filename)
         except (FileNotFoundError, WerkzeugNotFound):
-            return jsonify({'error': f'{filename} not found'}), 404
+            if _wants_html_response():
+                try:
+                    return render_template("404.html"), 404
+                except Exception:
+                    pass
+            return jsonify({"error": f"{filename} not found"}), 404
 
 
 # =============================================================================
 # API: Health Check
 # =============================================================================
 
-@app.route('/api/health', methods=['GET'])
+
+@app.route("/api/health", methods=["GET"])
 @ensure_json_response
 def health():
     import shutil
@@ -918,8 +1102,10 @@ def health():
 
     # Database connectivity + integrity check
     import time as _time
+
     try:
         from api.database import DB_PATH as _db_path
+
         _db_file = Path(_db_path)
         if _db_file.exists() and _db_file.stat().st_size > 0:
             _t0 = _time.monotonic()
@@ -953,17 +1139,17 @@ def health():
     status_str = "degraded" if has_error else "healthy"
 
     return {
-        'status': status_str,
-        'version': VERSION,
-        'build': BUILD,
-        'checks': checks,
-        'features': {
-            'symptom_checker': SYMPTOM_CHECKER_AVAILABLE,
-            'species_analyzer': SPECIES_ANALYZER_AVAILABLE,
-            'health_checker': HEALTH_CHECKER_AVAILABLE,
-            'diagnostic_chat': DIAGNOSTIC_CHAT_AVAILABLE,
-            'drug_dictionary': DRUG_DICTIONARY_AVAILABLE,
-            'reco2': RECO2_AVAILABLE,
+        "status": status_str,
+        "version": VERSION,
+        "build": BUILD,
+        "checks": checks,
+        "features": {
+            "symptom_checker": SYMPTOM_CHECKER_AVAILABLE,
+            "species_analyzer": SPECIES_ANALYZER_AVAILABLE,
+            "health_checker": HEALTH_CHECKER_AVAILABLE,
+            "diagnostic_chat": DIAGNOSTIC_CHAT_AVAILABLE,
+            "drug_dictionary": DRUG_DICTIONARY_AVAILABLE,
+            "reco2": RECO2_AVAILABLE,
         },
     }
 
@@ -972,15 +1158,17 @@ def health():
 # API: Species Stats (from SQLite)
 # =============================================================================
 
-@app.route('/api/species-stats', methods=['GET'])
+
+@app.route("/api/species-stats", methods=["GET"])
 @ensure_json_response
 def api_species_stats():
     """各動物種の疾患数・薬品数を SQLite から返す。"""
     from api.disease_store import get_species_stats
+
     return get_species_stats()
 
 
-@app.route('/api/dashboard-stats', methods=['GET'])
+@app.route("/api/dashboard-stats", methods=["GET"])
 @ensure_json_response
 def api_dashboard_stats():
     """ダッシュボード用サマリー統計を返す（疾患数・薬品数・動物種数・麻酔プロトコル数）。
@@ -1001,8 +1189,8 @@ def api_dashboard_stats():
         for species_id in get_all_species_ids():
             try:
                 sp_data = get_protocols_for_species(species_id)
-                if sp_data and 'protocols' in sp_data:
-                    total_protocols += len(sp_data['protocols'])
+                if sp_data and "protocols" in sp_data:
+                    total_protocols += len(sp_data["protocols"])
             except Exception:
                 # Skip species if protocol fetch fails
                 pass
@@ -1023,39 +1211,43 @@ def api_dashboard_stats():
 # API: Species-specific Symptoms (from SQLite)
 # =============================================================================
 
-@app.route('/api/species/<species>/symptoms', methods=['GET'])
+
+@app.route("/api/species/<species>/symptoms", methods=["GET"])
 @ensure_json_response
 def api_species_symptoms(species: str):
     """Return symptom list for the selected species from SQLite."""
     from api.disease_store import get_symptoms_for_species
-    species_key = (species or '').lower()
+
+    species_key = (species or "").lower()
     return {"symptoms": get_symptoms_for_species(species_key)}
 
 
-@app.route('/api/related-symptoms/<species>', methods=['POST'])
+@app.route("/api/related-symptoms/<species>", methods=["POST"])
 @ensure_json_response
 def get_related_symptoms(species):
     """Suggest symptoms that commonly co-occur with selected ones."""
     data = request.get_json(silent=True) or {}
-    selected = data.get('symptoms', [])
+    selected = data.get("symptoms", [])
     if not selected or not isinstance(selected, list):
-        return {'related': []}
+        return {"related": []}
 
-    species_key = (species or '').lower()
+    species_key = (species or "").lower()
 
     try:
         from api.disease_store import get_symptoms_for_species
+
         all_symptoms = get_symptoms_for_species(species_key)
         if not all_symptoms:
-            return {'related': []}
+            return {"related": []}
 
         # Build a lookup from symptom id to symptom info
-        sym_lookup = {s['id']: s for s in all_symptoms}
+        sym_lookup = {s["id"]: s for s in all_symptoms}
 
         # Query diseases for this species to build co-occurrence
         import json as _json
 
         from api.database import get_connection
+
         with get_connection() as conn:
             rows = conn.execute(
                 "SELECT symptoms FROM diseases WHERE species = ? AND symptoms IS NOT NULL",
@@ -1063,13 +1255,13 @@ def get_related_symptoms(species):
             ).fetchall()
 
         if not rows:
-            return {'related': []}
+            return {"related": []}
 
         selected_set = set(selected)
         co_occur: dict[str, int] = {}
         for row in rows:
             try:
-                disease_symptoms = set(_json.loads(row['symptoms']))
+                disease_symptoms = set(_json.loads(row["symptoms"]))
             except (ValueError, TypeError):
                 logger.warning("Corrupted symptoms JSON for disease %s", row.get("id", "unknown"))
                 continue
@@ -1085,17 +1277,19 @@ def get_related_symptoms(species):
         for sym_id, score in sorted_symptoms:
             sym_info = sym_lookup.get(sym_id)
             if sym_info:
-                result.append({
-                    'id': sym_id,
-                    'name_ja': sym_info.get('name_ja', sym_id),
-                    'name_en': sym_info.get('name_en', sym_id),
-                    'score': score,
-                })
+                result.append(
+                    {
+                        "id": sym_id,
+                        "name_ja": sym_info.get("name_ja", sym_id),
+                        "name_en": sym_info.get("name_en", sym_id),
+                        "score": score,
+                    }
+                )
 
-        return {'related': result}
+        return {"related": result}
     except Exception as e:
         logger.warning("Related symptoms error: %s", e)
-        return {'related': []}
+        return {"related": []}
 
 
 # =============================================================================
@@ -1111,10 +1305,10 @@ def _attach_mentioned_drugs(result, species):
         return
 
     disease_lists = []
-    for key in ('suspected_diseases', 'possible_conditions'):
+    for key in ("suspected_diseases", "possible_conditions"):
         if key in result:
             disease_lists.append(result[key])
-    by_phase = result.get('suspected_diseases_by_phase', {})
+    by_phase = result.get("suspected_diseases_by_phase", {})
     for phase_diseases in by_phase.values():
         if isinstance(phase_diseases, list):
             disease_lists.append(phase_diseases)
@@ -1122,9 +1316,7 @@ def _attach_mentioned_drugs(result, species):
     for diseases in disease_lists:
         for disease in diseases:
             treatment_text = (
-                (disease.get("treatment_ja", "") or "")
-                + " "
-                + (disease.get("treatment", "") or "")
+                (disease.get("treatment_ja", "") or "") + " " + (disease.get("treatment", "") or "")
             ).lower()
             if not treatment_text.strip():
                 continue
@@ -1132,8 +1324,9 @@ def _attach_mentioned_drugs(result, species):
             for dr in _ALL_DRUGS:
                 dr_name = dr.get("name", "")
                 dr_name_ja = dr.get("name_ja", "")
-                if not ((dr_name and dr_name.lower() in treatment_text)
-                        or (dr_name_ja and dr_name_ja in treatment_text)):
+                if not (
+                    (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text)
+                ):
                     continue
                 entry = {
                     "id": dr.get("id", ""),
@@ -1155,7 +1348,7 @@ def _attach_mentioned_drugs(result, species):
                 disease["mentioned_drugs"] = matched
 
 
-@app.route('/api/analyze-symptoms', methods=['POST'])
+@app.route("/api/analyze-symptoms", methods=["POST"])
 @ensure_json_response
 def api_analyze_symptoms():
     """症状チェック → 疾患・検査リスト（全動物種対応）"""
@@ -1163,14 +1356,14 @@ def api_analyze_symptoms():
     if rate_err:
         return rate_err
     if not SYMPTOM_CHECKER_AVAILABLE:
-        return {'error': 'Symptom checker module not available'}, 500
+        return {"error": "Symptom checker module not available"}, 500
 
     data = request.get_json(silent=True)
-    if not data or 'symptoms' not in data:
-        return {'error': 'symptoms list required'}, 400
+    if not data or "symptoms" not in data:
+        return {"error": "symptoms list required"}, 400
 
     symptoms, error, status = _normalize_string_list(
-        data['symptoms'], 'symptoms', singular_name='symptom', require_non_empty=True
+        data["symptoms"], "symptoms", singular_name="symptom", require_non_empty=True
     )
     if error:
         return error, status
@@ -1182,85 +1375,88 @@ def api_analyze_symptoms():
     MAX_LAB_VALUES = 50
 
     if len(symptoms) > MAX_SYMPTOMS:
-        return {'error': f'Too many symptoms (max {MAX_SYMPTOMS})'}, 400
+        return {"error": f"Too many symptoms (max {MAX_SYMPTOMS})"}, 400
     if any(len(s) > MAX_STRING_LEN for s in symptoms):
-        return {'error': f'Symptom ID too long (max {MAX_STRING_LEN} chars)'}, 400
+        return {"error": f"Symptom ID too long (max {MAX_STRING_LEN} chars)"}, 400
 
-    species = data.get('species', 'dog')
+    species = data.get("species", "dog")
     if isinstance(species, str) and len(species) > MAX_STRING_LEN:
-        return {'error': 'species value too long'}, 400
-    age_stage = data.get('age_stage')
-    breed = data.get('breed')
+        return {"error": "species value too long"}, 400
+    age_stage = data.get("age_stage")
+    breed = data.get("breed")
     if isinstance(breed, str) and len(breed) > MAX_STRING_LEN:
-        return {'error': 'breed value too long'}, 400
-    onset = data.get('onset')  # "acute" | "subacute" | "chronic"
-    age_years = data.get('age_years')  # numeric age in years
-    lab_values_raw = data.get('lab_values')  # {item_id: numeric_value}
-    gender = data.get('gender')  # "male" | "female"
-    vaccines_raw = data.get('vaccines', [])  # List of vaccine IDs
-    vaccination_status = data.get('vaccination_status')  # "current" | "outdated" | "none"
-    pain_score = data.get('pain_score')  # 0-4 (CSU Canine Acute Pain Scale)
-    lang = data.get('lang', '')  # "ja" or "en" for regional prevalence adjustments
+        return {"error": "breed value too long"}, 400
+    onset = data.get("onset")  # "acute" | "subacute" | "chronic"
+    age_years = data.get("age_years")  # numeric age in years
+    lab_values_raw = data.get("lab_values")  # {item_id: numeric_value}
+    gender = data.get("gender")  # "male" | "female"
+    vaccines_raw = data.get("vaccines", [])  # List of vaccine IDs
+    vaccination_status = data.get("vaccination_status")  # "current" | "outdated" | "none"
+    pain_score = data.get("pain_score")  # 0-4 (CSU Canine Acute Pain Scale)
+    lang = data.get("lang", "")  # "ja" or "en" for regional prevalence adjustments
 
     # Validate onset
-    if onset and onset not in ('acute', 'subacute', 'chronic'):
-        return {'error': "onset must be 'acute', 'subacute', or 'chronic'"}, 400
+    if onset and onset not in ("acute", "subacute", "chronic"):
+        return {"error": "onset must be 'acute', 'subacute', or 'chronic'"}, 400
 
     # Validate gender
-    if gender and gender not in ('male', 'female'):
-        return {'error': "gender must be 'male' or 'female'"}, 400
+    if gender and gender not in ("male", "female"):
+        return {"error": "gender must be 'male' or 'female'"}, 400
 
     # Validate vaccination_status
-    if vaccination_status and vaccination_status not in ('current', 'outdated', 'none'):
-        return {'error': "vaccination_status must be 'current', 'outdated', or 'none'"}, 400
+    if vaccination_status and vaccination_status not in ("current", "outdated", "none"):
+        return {"error": "vaccination_status must be 'current', 'outdated', or 'none'"}, 400
 
     # Validate pain_score (CSU Canine Pain Scale 0-4)
     if pain_score is not None:
         try:
             pain_score = int(pain_score)
             if pain_score < 0 or pain_score > 4:
-                return {'error': 'pain_score must be 0-4'}, 400
+                return {"error": "pain_score must be 0-4"}, 400
         except (ValueError, TypeError):
-            return {'error': 'pain_score must be an integer 0-4'}, 400
+            return {"error": "pain_score must be an integer 0-4"}, 400
 
     # Coerce vaccines to list of strings
     vaccines = []
     if vaccines_raw is not None:
-        vaccines, error, status = _normalize_string_list(vaccines_raw, 'vaccines')
+        vaccines, error, status = _normalize_string_list(vaccines_raw, "vaccines")
         if error:
             return error, status
         if len(vaccines) > MAX_VACCINES:
-            return {'error': f'Too many vaccines (max {MAX_VACCINES})'}, 400
+            return {"error": f"Too many vaccines (max {MAX_VACCINES})"}, 400
 
     # Coerce age_years to float and validate range
     if age_years is not None:
         try:
             age_years = float(age_years)
         except (ValueError, TypeError):
-            return {'error': 'age_years must be a number'}, 400
+            return {"error": "age_years must be a number"}, 400
         if age_years < 0 or age_years > 100:
-            return {'error': 'age_years must be between 0 and 100'}, 400
+            return {"error": "age_years must be between 0 and 100"}, 400
 
     # Coerce lab_values to {str: float}
     lab_values = None
     if lab_values_raw is not None:
         if not isinstance(lab_values_raw, dict):
-            return {'error': 'lab_values must be a JSON object'}, 400
+            return {"error": "lab_values must be a JSON object"}, 400
         if len(lab_values_raw) > MAX_LAB_VALUES:
-            return {'error': f'Too many lab values (max {MAX_LAB_VALUES})'}, 400
+            return {"error": f"Too many lab values (max {MAX_LAB_VALUES})"}, 400
         lab_values = {}
         for k, v in lab_values_raw.items():
             if not isinstance(k, str) or len(k) > MAX_STRING_LEN:
-                return {'error': 'lab_values keys must be strings'}, 400
+                return {"error": "lab_values keys must be strings"}, 400
             with contextlib.suppress(ValueError, TypeError):
                 lab_values[str(k)] = float(v)
         if not lab_values:
             lab_values = None
 
     try:
-        if species == 'dog' or species is None:
+        if species == "dog" or species is None:
             result = analyze_symptoms(
-                symptoms, breed=breed, onset=onset, age_years=age_years,
+                symptoms,
+                breed=breed,
+                onset=onset,
+                age_years=age_years,
                 lab_values=lab_values,
                 gender=gender,
                 vaccines=vaccines,
@@ -1269,10 +1465,14 @@ def api_analyze_symptoms():
             )
         else:
             if not SPECIES_ANALYZER_AVAILABLE:
-                return {'error': 'Species analyzer module not available'}, 500
+                return {"error": "Species analyzer module not available"}, 500
             result = analyze_species_symptoms(
-                species, symptoms, age_stage,
-                breed=breed, onset=onset, age_years=age_years,
+                species,
+                symptoms,
+                age_stage,
+                breed=breed,
+                onset=onset,
+                age_years=age_years,
                 lab_values=lab_values,
                 gender=gender,
                 vaccines=vaccines,
@@ -1281,15 +1481,15 @@ def api_analyze_symptoms():
             )
 
         # Attach mentioned_drugs with species-specific dosage to each disease
-        _attach_mentioned_drugs(result, species or 'dog')
+        _attach_mentioned_drugs(result, species or "dog")
 
         return result
     except ValueError as ve:
         logger.error("Symptom analysis error: %s", ve, exc_info=True)
-        return {'error': str(ve)}, 400
+        return {"error": str(ve)}, 400
     except Exception as e:
         logger.error("Symptom analysis error: %s", e, exc_info=True)
-        return {'error': '症状解析に失敗しました'}, 500
+        return {"error": "症状解析に失敗しました"}, 500
 
 
 # =============================================================================
@@ -1340,7 +1540,13 @@ _CSU_PAIN_SCALE = [
         "body_tension_ja": "中等度の体の緊張。患部を守る姿勢。震えることがある。",
         "response_to_palpation": "Moderate response — flinches, pulls away, may vocalize or turn head toward site",
         "response_to_palpation_ja": "中等度の反応 — ビクッとする、引く、鳴く、または患部の方を向く。",
-        "associated_conditions": ["fracture", "pancreatitis", "intervertebral_disc_disease", "moderate_otitis", "cystitis"],
+        "associated_conditions": [
+            "fracture",
+            "pancreatitis",
+            "intervertebral_disc_disease",
+            "moderate_otitis",
+            "cystitis",
+        ],
     },
     {
         "score": 3,
@@ -1354,7 +1560,14 @@ _CSU_PAIN_SCALE = [
         "body_tension_ja": "著しい体の緊張。腹部硬直。防御姿勢。背中を丸める。",
         "response_to_palpation": "Strong response — cries, attempts to bite, significant withdrawal, aggressive when touched near area",
         "response_to_palpation_ja": "強い反応 — 鳴く、噛もうとする、著しく引く、患部付近の接触で攻撃的。",
-        "associated_conditions": ["gdv", "peritonitis", "severe_trauma", "bone_cancer", "acute_abdomen", "disc_herniation"],
+        "associated_conditions": [
+            "gdv",
+            "peritonitis",
+            "severe_trauma",
+            "bone_cancer",
+            "acute_abdomen",
+            "disc_herniation",
+        ],
     },
     {
         "score": 4,
@@ -1376,14 +1589,32 @@ _CSU_PAIN_SCALE = [
 _PAIN_DISEASE_BOOST = {
     0: {},  # No pain → no boost
     1: {"Osteoarthritis": 1.3, "Otitis Externa": 1.2, "Dermatitis": 1.15},
-    2: {"Pancreatitis": 1.5, "Fracture": 1.4, "Intervertebral Disc Disease": 1.5,
-        "Cystitis": 1.3, "Otitis Media": 1.3, "Gastric Foreign Body": 1.3,
-        "Peritonitis": 1.2, "Osteosarcoma": 1.2},
-    3: {"Gastric Dilatation-Volvulus (GDV)": 1.6, "Peritonitis": 1.5,
-        "Intervertebral Disc Disease": 1.4, "Osteosarcoma": 1.5,
-        "Pancreatitis": 1.4, "Meningitis": 1.4, "Panosteitis": 1.3},
-    4: {"Gastric Dilatation-Volvulus (GDV)": 1.8, "Aortic Thromboembolism": 1.7,
-        "Meningitis": 1.6, "Peritonitis": 1.6, "Necrotizing Fasciitis": 1.5},
+    2: {
+        "Pancreatitis": 1.5,
+        "Fracture": 1.4,
+        "Intervertebral Disc Disease": 1.5,
+        "Cystitis": 1.3,
+        "Otitis Media": 1.3,
+        "Gastric Foreign Body": 1.3,
+        "Peritonitis": 1.2,
+        "Osteosarcoma": 1.2,
+    },
+    3: {
+        "Gastric Dilatation-Volvulus (GDV)": 1.6,
+        "Peritonitis": 1.5,
+        "Intervertebral Disc Disease": 1.4,
+        "Osteosarcoma": 1.5,
+        "Pancreatitis": 1.4,
+        "Meningitis": 1.4,
+        "Panosteitis": 1.3,
+    },
+    4: {
+        "Gastric Dilatation-Volvulus (GDV)": 1.8,
+        "Aortic Thromboembolism": 1.7,
+        "Meningitis": 1.6,
+        "Peritonitis": 1.6,
+        "Necrotizing Fasciitis": 1.5,
+    },
 }
 
 
@@ -1391,7 +1622,8 @@ _PAIN_DISEASE_BOOST = {
 # API: Lab Reference Ranges
 # =============================================================================
 
-@app.route('/api/lab-ranges/<species>', methods=['GET'])
+
+@app.route("/api/lab-ranges/<species>", methods=["GET"])
 @ensure_json_response
 def api_lab_ranges(species):
     """Return species-specific lab reference ranges for visualization."""
@@ -1425,7 +1657,7 @@ def api_lab_ranges(species):
     return {"species": species, "ranges": result}
 
 
-@app.route('/api/pain-scale', methods=['GET'])
+@app.route("/api/pain-scale", methods=["GET"])
 @ensure_json_response
 def api_pain_scale():
     """Return CSU Canine Acute Pain Scale data for UI rendering."""
@@ -1441,7 +1673,8 @@ def api_pain_scale():
 # API: Species Breeds
 # =============================================================================
 
-@app.route('/api/breeds/<species>', methods=['GET'])
+
+@app.route("/api/breeds/<species>", methods=["GET"])
 @ensure_json_response
 def api_get_breeds(species):
     """Return available breeds for a given species with ecology info."""
@@ -1452,14 +1685,19 @@ def api_get_breeds(species):
     breeds = SPECIES_BREEDS.get(species, [])
     return {
         "species": species,
-        "breeds": [{
-            "id": b["id"], "name": b["name"], "name_ja": b["name_ja"],
-            "ecology": b.get("ecology"),
-        } for b in breeds],
+        "breeds": [
+            {
+                "id": b["id"],
+                "name": b["name"],
+                "name_ja": b["name_ja"],
+                "ecology": b.get("ecology"),
+            }
+            for b in breeds
+        ],
     }
 
 
-@app.route('/api/species/<species>/husbandry', methods=['GET'])
+@app.route("/api/species/<species>/husbandry", methods=["GET"])
 @ensure_json_response
 def api_species_husbandry(species: str):
     """Return husbandry / care environment data for a species."""
@@ -1467,14 +1705,14 @@ def api_species_husbandry(species: str):
         from api.species_husbandry import HUSBANDRY_DATA
     except ImportError:
         from species_husbandry import HUSBANDRY_DATA
-    species_key = (species or '').lower()
+    species_key = (species or "").lower()
     data = HUSBANDRY_DATA.get(species_key)
     if not data:
-        return {'error': 'No husbandry data for this species'}, 404
+        return {"error": "No husbandry data for this species"}, 404
     return {"species": species_key, "husbandry": data}
 
 
-@app.route('/api/species/<species>/common-diseases', methods=['GET'])
+@app.route("/api/species/<species>/common-diseases", methods=["GET"])
 @ensure_json_response
 def api_common_diseases(species):
     """Return common/very_common diseases for a species with Japanese names."""
@@ -1496,17 +1734,19 @@ def api_common_diseases(species):
     result = []
     for name, tier in prev.items():
         if tier in ("very_common", "common"):
-            result.append({
-                "name": name,
-                "name_ja": name_map.get(name, ""),
-                "prevalence": tier,
-            })
+            result.append(
+                {
+                    "name": name,
+                    "name_ja": name_map.get(name, ""),
+                    "prevalence": tier,
+                }
+            )
     # Sort: very_common first, then common
     result.sort(key=lambda x: (0 if x["prevalence"] == "very_common" else 1, x["name"]))
     return {"species": species, "common_diseases": result}
 
 
-@app.route('/api/diseases', methods=['GET'])
+@app.route("/api/diseases", methods=["GET"])
 @ensure_json_response
 def api_search_diseases():
     """Global search endpoint for diseases with keyword + species + category filters.
@@ -1519,42 +1759,44 @@ def api_search_diseases():
 
     Returns: diseases list with name, name_ja, species, slug, urgency
     """
-    query = request.args.get('q', '').strip()
-    species_param = request.args.get('species', '').strip()
-    category_param = request.args.get('category', '').strip()
+    query = request.args.get("q", "").strip()
+    species_param = request.args.get("species", "").strip()
+    category_param = request.args.get("category", "").strip()
     try:
-        limit = max(1, min(int(request.args.get('limit', '20')), 100))
+        limit = max(1, min(int(request.args.get("limit", "20")), 100))
     except (ValueError, TypeError):
         limit = 20
 
     if len(query) < 2:
-        return {'error': 'Query must be at least 2 characters', 'diseases': []}, 400
+        return {"error": "Query must be at least 2 characters", "diseases": []}, 400
 
     from api.disease_store import _disease_slug, search_diseases
 
     # Parse multiple species (comma-separated)
-    species_list = [s.strip() for s in species_param.split(',') if s.strip()] if species_param else []
+    species_list = [s.strip() for s in species_param.split(",") if s.strip()] if species_param else []
 
     # Search all species first, then filter if needed
-    all_results = search_diseases(query, species=None, category=category_param if category_param else None, limit=limit * 2)
+    all_results = search_diseases(
+        query, species=None, category=category_param if category_param else None, limit=limit * 2
+    )
 
     # Filter by species if specified
     if species_list:
-        all_results = [d for d in all_results if d.get('species') in species_list]
+        all_results = [d for d in all_results if d.get("species") in species_list]
 
     # Limit results
     results = all_results[:limit]
 
     # Add slug to each result
     for disease in results:
-        disease['slug'] = _disease_slug(disease)
+        disease["slug"] = _disease_slug(disease)
 
     return {
-        'diseases': results,
-        'query': query,
-        'count': len(results),
-        'species_filter': species_list,
-        'category_filter': category_param if category_param else None,
+        "diseases": results,
+        "query": query,
+        "count": len(results),
+        "species_filter": species_list,
+        "category_filter": category_param if category_param else None,
     }
 
 
@@ -1562,44 +1804,45 @@ def api_search_diseases():
 # API: RECO2 / RECO3 (AI Integrity Control)
 # =============================================================================
 
-@app.route('/api/status', methods=['GET'])
+
+@app.route("/api/status", methods=["GET"])
 @ensure_json_response
 @require_internal_api_access
 def reco2_status_route():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     return reco2_get_status()
 
 
-@app.route('/api/logs', methods=['GET'])
+@app.route("/api/logs", methods=["GET"])
 @ensure_json_response
 @require_internal_api_access
 def reco2_logs_route():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     try:
-        limit = max(1, min(int(request.args.get('limit', '50')), 500))
+        limit = max(1, min(int(request.args.get("limit", "50")), 500))
     except (ValueError, TypeError):
         limit = 50
     return reco2_get_logs(limit=limit)
 
 
-@app.route('/api/evaluate', methods=['POST'])
+@app.route("/api/evaluate", methods=["POST"])
 @ensure_json_response
 @require_internal_api_access
 def reco2_evaluate_route():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     payload = request.get_json(force=True, silent=False)
     return reco2_evaluate_payload(payload)
 
 
-@app.route('/api/feedback', methods=['POST'])
+@app.route("/api/feedback", methods=["POST"])
 @ensure_json_response
 @require_internal_api_access
 def reco2_feedback_route():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     payload = request.get_json(force=True, silent=True) or {}
     res = reco2_record_feedback(payload)
     if isinstance(res, tuple):
@@ -1607,71 +1850,71 @@ def reco2_feedback_route():
     return res
 
 
-@app.route('/api/patrol', methods=['POST'])
+@app.route("/api/patrol", methods=["POST"])
 @ensure_json_response
 @require_internal_api_access
 def reco2_patrol_route():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     return reco2_patrol(manual=True)
 
 
-@app.route('/api/r3/analyze_input', methods=['POST'])
+@app.route("/api/r3/analyze_input", methods=["POST"])
 @ensure_json_response
 @require_internal_api_access
 def reco3_analyze_input():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     data = request.get_json(force=True, silent=True) or {}
-    text = str(data.get('text', ''))
+    text = str(data.get("text", ""))
     cfg = load_reco2_config()
     return input_gate.analyze(
         text,
-        w_ambiguity=float(cfg.get('input_w_ambiguity', 0.20)),
-        w_assertion=float(cfg.get('input_w_assertion', 0.25)),
-        w_emotion=float(cfg.get('input_w_emotion', 0.30)),
-        w_unrealistic=float(cfg.get('input_w_unrealistic', 0.25)),
+        w_ambiguity=float(cfg.get("input_w_ambiguity", 0.20)),
+        w_assertion=float(cfg.get("input_w_assertion", 0.25)),
+        w_emotion=float(cfg.get("input_w_emotion", 0.30)),
+        w_unrealistic=float(cfg.get("input_w_unrealistic", 0.25)),
     )
 
 
-@app.route('/api/r3/analyze_output', methods=['POST'])
+@app.route("/api/r3/analyze_output", methods=["POST"])
 @ensure_json_response
 @require_internal_api_access
 def reco3_analyze_output():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     data = request.get_json(force=True, silent=True) or {}
-    text = str(data.get('text', ''))
+    text = str(data.get("text", ""))
     cfg = load_reco2_config()
     return output_gate.analyze(
         text,
-        w_assertion=float(cfg.get('output_w_assertion', 0.30)),
-        w_evidence=float(cfg.get('output_w_evidence', 0.30)),
-        w_contradiction=float(cfg.get('output_w_contradiction', 0.25)),
-        w_provocative=float(cfg.get('output_w_provocative', 0.15)),
+        w_assertion=float(cfg.get("output_w_assertion", 0.30)),
+        w_evidence=float(cfg.get("output_w_evidence", 0.30)),
+        w_contradiction=float(cfg.get("output_w_contradiction", 0.25)),
+        w_provocative=float(cfg.get("output_w_provocative", 0.15)),
     )
 
 
-@app.route('/api/r3/chat', methods=['POST'])
+@app.route("/api/r3/chat", methods=["POST"])
 @ensure_json_response
 @require_internal_api_access
 def reco3_chat():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     data = request.get_json(force=True, silent=True) or {}
-    prompt = str(data.get('prompt', ''))
-    domain = str(data.get('domain', 'general'))
-    max_tokens = int(data.get('max_tokens', 1024) or 1024)
+    prompt = str(data.get("prompt", ""))
+    domain = str(data.get("domain", "general"))
+    max_tokens = int(data.get("max_tokens", 1024) or 1024)
     orch = reco2_get_orchestrator()
-    return orch.process(prompt, domain=domain, context=data.get('context') or {}, max_tokens=max_tokens)
+    return orch.process(prompt, domain=domain, context=data.get("context") or {}, max_tokens=max_tokens)
 
 
-@app.route('/api/r3/config', methods=['GET'])
+@app.route("/api/r3/config", methods=["GET"])
 @ensure_json_response
 @require_internal_api_access
 def reco3_config():
     if not RECO2_AVAILABLE:
-        return {'error': 'reco2 not available'}, 503
+        return {"error": "reco2 not available"}, 503
     return public_reco2_config(load_reco2_config())
 
 
@@ -1679,61 +1922,108 @@ def reco3_config():
 # API: Admin Token Verification
 # =============================================================================
 
-@app.route('/api/admin/verify', methods=['POST'])
+
+@app.route("/api/admin/verify", methods=["POST"])
 def verify_admin():
     """Server-side admin token verification."""
     body = request.get_json(silent=True) or {}
-    token = body.get('token', '')
-    admin_token = os.getenv('ADMIN_TOKEN', '')
+    token = body.get("token", "")
+    admin_token = os.getenv("ADMIN_TOKEN", "")
     if not admin_token:
-        return jsonify({'valid': False}), 403
+        return jsonify({"valid": False}), 403
     import hmac
+
     if hmac.compare_digest(token, admin_token):
-        return jsonify({'valid': True})
-    return jsonify({'valid': False}), 403
+        return jsonify({"valid": True})
+    return jsonify({"valid": False}), 403
 
 
 # =============================================================================
 # Error Handlers
 # =============================================================================
 
+
+def _wants_html_response() -> bool:
+    """True when the client prefers HTML (browser navigation) over JSON."""
+    path = request.path or ""
+    if path.startswith("/api/"):
+        return False
+    accept = request.accept_mimetypes
+    # Default to HTML for non-API paths unless the client explicitly wants JSON
+    return accept.best_match(["text/html", "application/json"]) != "application/json"
+
+
 @app.errorhandler(404)
 def not_found(e):
-    return jsonify({'error': 'Not found', 'version': VERSION}), 404
+    if _wants_html_response():
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            logger.warning("404 template render failed", exc_info=True)
+    return jsonify({"error": "Not found", "version": VERSION}), 404
+
 
 @app.errorhandler(429)
 def rate_limited(e):
-    return jsonify({'error': RATE_LIMIT_ERROR_MESSAGE, 'version': VERSION}), 429
+    if _wants_html_response():
+        return (
+            "<!doctype html><meta charset='utf-8'><title>429 Too Many Requests</title>"
+            "<body style='font-family:system-ui,sans-serif;max-width:560px;margin:60px auto;padding:0 20px;text-align:center'>"
+            "<h1 style='color:#1a3068'>429 — Too Many Requests</h1>"
+            "<p>" + RATE_LIMIT_ERROR_MESSAGE + " / Please slow down and try again in a moment.</p>"
+            "<p><a href='/' style='color:#22a84f;font-weight:600'>← Home</a></p></body>",
+            429,
+            {"Content-Type": "text/html; charset=utf-8"},
+        )
+    return jsonify({"error": RATE_LIMIT_ERROR_MESSAGE, "version": VERSION}), 429
+
 
 @app.errorhandler(500)
 def server_error(e):
     logger.error("500: %s", e, exc_info=True)
-    return jsonify({'error': 'Internal server error', 'version': VERSION}), 500
+    if _wants_html_response():
+        return (
+            "<!doctype html><meta charset='utf-8'><title>500 Server Error</title>"
+            "<body style='font-family:system-ui,sans-serif;max-width:560px;margin:60px auto;padding:0 20px;text-align:center'>"
+            "<h1 style='color:#1a3068'>500 — Server Error</h1>"
+            "<p>サーバー内部でエラーが発生しました。 / An internal error occurred. Please try again later.</p>"
+            "<p><a href='/' style='color:#22a84f;font-weight:600'>← Home</a></p></body>",
+            500,
+            {"Content-Type": "text/html; charset=utf-8"},
+        )
+    return jsonify({"error": "Internal server error", "version": VERSION}), 500
 
 
 # =============================================================================
 # API v1 aliases — versioned endpoints pointing to existing handlers
 # =============================================================================
 
-app.add_url_rule('/api/v1/health', endpoint='v1_health', view_func=health, methods=['GET'])
-app.add_url_rule('/api/v1/species-stats', endpoint='v1_species_stats', view_func=api_species_stats, methods=['GET'])
-app.add_url_rule('/api/v1/analyze-symptoms', endpoint='v1_analyze_symptoms', view_func=api_analyze_symptoms, methods=['POST'])
-app.add_url_rule('/api/v1/breeds/<species>', endpoint='v1_breeds', view_func=api_get_breeds, methods=['GET'])
+app.add_url_rule("/api/v1/health", endpoint="v1_health", view_func=health, methods=["GET"])
+app.add_url_rule("/api/v1/species-stats", endpoint="v1_species_stats", view_func=api_species_stats, methods=["GET"])
+app.add_url_rule(
+    "/api/v1/analyze-symptoms", endpoint="v1_analyze_symptoms", view_func=api_analyze_symptoms, methods=["POST"]
+)
+app.add_url_rule("/api/v1/breeds/<species>", endpoint="v1_breeds", view_func=api_get_breeds, methods=["GET"])
 
 if SYMPTOM_CHECKER_AVAILABLE:
-    app.add_url_rule('/api/v1/species/<species>/symptoms', endpoint='v1_species_symptoms', view_func=api_species_symptoms, methods=['GET'])
+    app.add_url_rule(
+        "/api/v1/species/<species>/symptoms",
+        endpoint="v1_species_symptoms",
+        view_func=api_species_symptoms,
+        methods=["GET"],
+    )
 
 
 # =============================================================================
 # Main
 # =============================================================================
 
-if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5000))
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
     logger.info("VetDict v%s starting on port %s", VERSION, port)
     logger.info("Symptom checker: %s", SYMPTOM_CHECKER_AVAILABLE)
     logger.info("Species analyzer: %s", SPECIES_ANALYZER_AVAILABLE)
     logger.info("Health checker: %s", HEALTH_CHECKER_AVAILABLE)
     logger.info("Diagnostic chat: %s", DIAGNOSTIC_CHAT_AVAILABLE)
     logger.info("RECO2: %s", RECO2_AVAILABLE)
-    app.run(host='0.0.0.0', port=port, debug=is_debug_mode_enabled())
+    app.run(host="0.0.0.0", port=port, debug=is_debug_mode_enabled())
