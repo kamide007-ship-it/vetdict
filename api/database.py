@@ -169,40 +169,46 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
     cursor = conn.cursor()
 
     # Migration 1: Add treatment enrichment columns (Phase 1 expansion)
-    try:
-        cursor.execute("PRAGMA table_info(diseases)")
-        columns = {row[1] for row in cursor.fetchall()}
+    cursor.execute("PRAGMA table_info(diseases)")
+    columns = {row[1] for row in cursor.fetchall()}
 
-        if "diagnosis_ja" not in columns:
-            logger.info("Running migration: add diagnostic columns")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN diagnosis TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN diagnosis_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN clinical_signs TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN clinical_signs_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN transmission TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN transmission_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN differential_diagnosis TEXT")
-            conn.commit()
-            logger.info("Migration complete: diagnostic columns added")
+    diagnostic_cols = [
+        ("diagnosis", "TEXT"),
+        ("diagnosis_ja", "TEXT"),
+        ("clinical_signs", "TEXT"),
+        ("clinical_signs_ja", "TEXT"),
+        ("transmission", "TEXT"),
+        ("transmission_ja", "TEXT"),
+        ("differential_diagnosis", "TEXT"),
+    ]
+    enrichment_cols = [
+        ("prognosis_detailed", "TEXT"),
+        ("prognosis_detailed_ja", "TEXT"),
+        ("rehabilitation_protocol", "TEXT"),
+        ("rehabilitation_protocol_ja", "TEXT"),
+        ("nutrition_management", "TEXT"),
+        ("nutrition_management_ja", "TEXT"),
+        ("prognosis_references", "TEXT"),
+        ("rehabilitation_references", "TEXT"),
+        ("nutrition_references", "TEXT"),
+        ("recovery_timeline_weeks", "INTEGER"),
+        ("success_rate", "REAL"),
+        ("mortality_rate", "REAL"),
+    ]
 
-        if "prognosis_detailed" not in columns:
-            logger.info("Running migration: add treatment enrichment columns")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_detailed TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_detailed_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_protocol TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_protocol_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_management TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_management_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_references TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_references TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_references TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN recovery_timeline_weeks INTEGER")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN success_rate REAL")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN mortality_rate REAL")
-            conn.commit()
-            logger.info("Migration complete: treatment enrichment columns added")
-    except sqlite3.OperationalError as e:
-        logger.warning("Migration skipped (columns may already exist): %s", e)
+    added = 0
+    for col_name, col_type in diagnostic_cols + enrichment_cols:
+        if col_name not in columns:
+            try:
+                cursor.execute(
+                    f"ALTER TABLE diseases ADD COLUMN {col_name} {col_type}"
+                )
+                added += 1
+            except sqlite3.OperationalError as e:
+                logger.warning("Column %s already exists: %s", col_name, e)
+    if added:
+        conn.commit()
+        logger.info("Migration complete: added %d columns", added)
 
 
 # ---------------------------------------------------------------------------
