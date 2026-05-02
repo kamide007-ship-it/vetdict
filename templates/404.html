@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}404 — Not Found | VetDict{% endblock %}
+{% block content %}
+<section class="legal-page" style="text-align:center">
+  <div style="font-size:5rem;line-height:1;color:var(--navy);font-weight:800;margin-bottom:8px" aria-hidden="true">404</div>
+  <h1 lang="ja">お探しのページが見つかりません</h1>
+  <p lang="en" style="color:var(--gray-500);margin-top:-4px">The page you requested could not be found.</p>
+  <p style="margin-top:24px">
+    <span lang="ja">URLが変更されたか、ページが削除された可能性があります。</span><br>
+    <span lang="en">The URL may have changed or the page may have been removed.</span>
+  </p>
+  <div style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="/" class="hero-btn primary" style="display:inline-block;padding:12px 24px;background:var(--navy);color:#fff;text-decoration:none;border-radius:6px;font-weight:600">
+      <span lang="ja">トップページへ</span> / <span lang="en">Home</span>
+    </a>
+    <a href="/#database" class="hero-btn secondary" style="display:inline-block;padding:12px 24px;background:transparent;color:var(--navy);text-decoration:none;border:2px solid var(--navy);border-radius:6px;font-weight:600">
+      <span lang="ja">疾患データベース</span> / <span lang="en">Disease Database</span>
+    </a>
+  </div>
+  <p style="margin-top:40px;font-size:.82rem;color:var(--gray-500)">
+    <span lang="ja">困った時は</span> / <span lang="en">If you need help</span>:
+    <a href="/" style="color:var(--green);font-weight:600">vetdict.info</a>
+  </p>
+</section>
+{% endblock %}
