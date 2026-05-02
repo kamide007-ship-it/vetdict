@@ -74,6 +74,15 @@ CREATE TABLE IF NOT EXISTS diseases (
     onset_pattern TEXT,         -- JSON array
     age_predisposition TEXT,    -- JSON array
 
+    -- Diagnostic fields
+    diagnosis TEXT,
+    diagnosis_ja TEXT,
+    clinical_signs TEXT,
+    clinical_signs_ja TEXT,
+    transmission TEXT,
+    transmission_ja TEXT,
+    differential_diagnosis TEXT,
+
     -- Treatment enrichment fields (Phase 1 expansion)
     prognosis_detailed TEXT,                       -- Extended prognosis with recovery timeline
     prognosis_detailed_ja TEXT,                    -- 日本語版
@@ -160,33 +169,50 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
     cursor = conn.cursor()
 
     # Migration 1: Add treatment enrichment columns (Phase 1 expansion)
-    try:
-        cursor.execute("PRAGMA table_info(diseases)")
-        columns = {row[1] for row in cursor.fetchall()}
+    cursor.execute("PRAGMA table_info(diseases)")
+    columns = {row[1] for row in cursor.fetchall()}
 
-        if "prognosis_detailed" not in columns:
-            logger.info("Running migration: add treatment enrichment columns")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_detailed TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_detailed_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_protocol TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_protocol_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_management TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_management_ja TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN prognosis_references TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN rehabilitation_references TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN nutrition_references TEXT")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN recovery_timeline_weeks INTEGER")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN success_rate REAL")
-            cursor.execute("ALTER TABLE diseases ADD COLUMN mortality_rate REAL")
-            conn.commit()
-            logger.info("Migration complete: treatment enrichment columns added")
-    except sqlite3.OperationalError as e:
-        logger.warning("Migration skipped (columns may already exist): %s", e)
+    diagnostic_cols = [
+        ("diagnosis", "TEXT"),
+        ("diagnosis_ja", "TEXT"),
+        ("clinical_signs", "TEXT"),
+        ("clinical_signs_ja", "TEXT"),
+        ("transmission", "TEXT"),
+        ("transmission_ja", "TEXT"),
+        ("differential_diagnosis", "TEXT"),
+    ]
+    enrichment_cols = [
+        ("prognosis_detailed", "TEXT"),
+        ("prognosis_detailed_ja", "TEXT"),
+        ("rehabilitation_protocol", "TEXT"),
+        ("rehabilitation_protocol_ja", "TEXT"),
+        ("nutrition_management", "TEXT"),
+        ("nutrition_management_ja", "TEXT"),
+        ("prognosis_references", "TEXT"),
+        ("rehabilitation_references", "TEXT"),
+        ("nutrition_references", "TEXT"),
+        ("recovery_timeline_weeks", "INTEGER"),
+        ("success_rate", "REAL"),
+        ("mortality_rate", "REAL"),
+    ]
+
+    added = 0
+    for col_name, col_type in diagnostic_cols + enrichment_cols:
+        if col_name not in columns:
+            try:
+                cursor.execute(f"ALTER TABLE diseases ADD COLUMN {col_name} {col_type}")
+                added += 1
+            except sqlite3.OperationalError as e:
+                logger.warning("Column %s already exists: %s", col_name, e)
+    if added:
+        conn.commit()
+        logger.info("Migration complete: added %d columns", added)
 
 
 # ---------------------------------------------------------------------------
 # Disease helpers
 # ---------------------------------------------------------------------------
+
 
 def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
     """Insert or replace a disease record."""
@@ -215,13 +241,17 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             treatment, treatment_ja, prevention, prevention_ja,
             prognosis, prognosis_ja, urgency, symptoms,
             recommended_tests, onset_pattern, age_predisposition,
+            diagnosis, diagnosis_ja,
+            clinical_signs, clinical_signs_ja,
+            transmission, transmission_ja,
+            differential_diagnosis,
             prognosis_detailed, prognosis_detailed_ja,
             rehabilitation_protocol, rehabilitation_protocol_ja,
             nutrition_management, nutrition_management_ja,
             prognosis_references, rehabilitation_references, nutrition_references,
             recovery_timeline_weeks, success_rate, mortality_rate,
             enriched_at, enrichment_phase, updated_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)""",
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)""",
         (
             disease.get("id"),
             disease.get("species"),
@@ -244,6 +274,13 @@ def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
             _to_json_if_needed(disease.get("recommended_tests"), is_json_field=True),
             _to_json_if_needed(disease.get("onset_pattern"), is_json_field=True),
             _to_json_if_needed(disease.get("age_predisposition"), is_json_field=True),
+            _ensure_string(disease.get("diagnosis")),
+            _ensure_string(disease.get("diagnosis_ja")),
+            _ensure_string(disease.get("clinical_signs")),
+            _ensure_string(disease.get("clinical_signs_ja")),
+            _ensure_string(disease.get("transmission")),
+            _ensure_string(disease.get("transmission_ja")),
+            _ensure_string(disease.get("differential_diagnosis")),
             _ensure_string(disease.get("prognosis_detailed")),
             _ensure_string(disease.get("prognosis_detailed_ja")),
             _ensure_string(disease.get("rehabilitation_protocol")),
@@ -291,6 +328,7 @@ def count_diseases(conn: sqlite3.Connection) -> dict:
 # Drug helpers
 # ---------------------------------------------------------------------------
 
+
 def upsert_drug(conn: sqlite3.Connection, drug: dict) -> None:
     """Insert or replace a drug record and its species info."""
     conn.execute(
@@ -308,8 +346,12 @@ def upsert_drug(conn: sqlite3.Connection, drug: dict) -> None:
             drug.get("mechanism_ja"),
             drug.get("contraindications"),
             drug.get("contraindications_ja"),
-            json.dumps(drug["side_effects"]) if isinstance(drug.get("side_effects"), list) else drug.get("side_effects"),
-            json.dumps(drug["side_effects_ja"]) if isinstance(drug.get("side_effects_ja"), list) else drug.get("side_effects_ja"),
+            json.dumps(drug["side_effects"])
+            if isinstance(drug.get("side_effects"), list)
+            else drug.get("side_effects"),
+            json.dumps(drug["side_effects_ja"])
+            if isinstance(drug.get("side_effects_ja"), list)
+            else drug.get("side_effects_ja"),
         ),
     )
     for species, info in (drug.get("species_info") or {}).items():
@@ -341,9 +383,7 @@ def get_drug_by_id(conn: sqlite3.Connection, drug_id: str) -> dict | None:
     if not row:
         return None
     drug = dict(row)
-    species_rows = conn.execute(
-        "SELECT * FROM drug_species_info WHERE drug_id = ?", (drug_id,)
-    ).fetchall()
+    species_rows = conn.execute("SELECT * FROM drug_species_info WHERE drug_id = ?", (drug_id,)).fetchall()
     drug["species_info"] = {r["species"]: dict(r) for r in species_rows}
     return drug
 
@@ -352,7 +392,10 @@ def get_drug_by_id(conn: sqlite3.Connection, drug_id: str) -> dict | None:
 # Symptom helpers
 # ---------------------------------------------------------------------------
 
-def upsert_symptom(conn: sqlite3.Connection, symptom_id: str, name_en: str, name_ja: str, species: str, weight: float = 1.0) -> None:
+
+def upsert_symptom(
+    conn: sqlite3.Connection, symptom_id: str, name_en: str, name_ja: str, species: str, weight: float = 1.0
+) -> None:
     """Insert or replace a symptom."""
     conn.execute(
         "INSERT OR REPLACE INTO symptoms (id, name_en, name_ja, species, clinical_weight) VALUES (?,?,?,?,?)",
