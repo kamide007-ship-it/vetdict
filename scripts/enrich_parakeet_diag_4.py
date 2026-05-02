@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Enrich Parakeet diagnosis_ja fields — batch 4 (parakeet_0151 to parakeet_0200)."""
-import json, os, time
+import json
+import os
+import time
 
 JSON_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "diseases_all_species.json")
 

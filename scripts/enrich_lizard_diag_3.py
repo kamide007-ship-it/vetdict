@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Lizard entries starting from lizard_0101."""
-import json, os, time
+import json
+import os
+import time
 
 JSON_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),

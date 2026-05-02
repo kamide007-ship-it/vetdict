@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import json, os
+import json
+import os
 
 JSON_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),

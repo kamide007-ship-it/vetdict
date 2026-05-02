@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-import json, os, time
+import json
+import os
+import time
 
 JSON_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "diseases_all_species.json")
 
