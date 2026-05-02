@@ -4,6 +4,7 @@
 Covers reptile_0151–0161 + named IDs not yet enriched in batches 1-3.
 POTZ, ectothermy, heterophil responses, renal portal system, spectacle.
 """
+
 import json
 import os
 import time
@@ -480,6 +481,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         ),
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

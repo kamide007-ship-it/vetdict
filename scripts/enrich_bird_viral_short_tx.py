@@ -412,6 +412,7 @@ ENRICHMENTS["parrot_choanal_atresia___choanal_slit_abnormality"] = {
     ),
 }
 
+
 def apply_enrichments() -> None:
     with open(JSON_PATH, encoding="utf-8") as f:
         data = json.load(f)

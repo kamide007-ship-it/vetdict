@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Bird entries bird_0151 to bird_0200."""
+
 import json
 import os
 import time
@@ -161,6 +162,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "FNA細胞診（上皮細胞の乳頭状配列を確認、異型性は通常軽度）。生検・病理組織検査で確定診断（指状突起の上皮過形成パターン）。ウイルス検査：鳥パピローマウイルスPCR（種特異的、ヘルペスウイルスとの鑑別も重要）。口腔内・総排泄腔の内視鏡検査（内臓乳頭腫症の評価、消化管内多発病変の除外）。CBC・血液生化学（全身状態評価）。鑑別：扁平上皮癌（悪性転化リスクあり）・線維腫・肉芽腫・カンジダ症の増殖性病変。アマゾン・ヨウムに好発し総排泄腔に多い"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

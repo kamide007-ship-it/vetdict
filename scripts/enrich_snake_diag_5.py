@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Snake diseases (batch 5: 15 entries)."""
+
 import json
 import os
 import time

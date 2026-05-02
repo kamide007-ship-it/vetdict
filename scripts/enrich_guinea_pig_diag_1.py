@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Guinea Pig diseases (guinea_pig_0001–0050)."""
+
 import json
 import os
 

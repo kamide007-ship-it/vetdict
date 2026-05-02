@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for the first 50 ferret entries with short diagnosis_ja."""
+
 import json
 import os
 import time
@@ -211,6 +212,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "食欲不振・嘔吐（フェレットは嘔吐可能）・体重減少・黒色タール便から疑診。腹部触診で胃内腫瘤の触知を試みる。腹部X線で胃内の不均一な軟部組織陰影を評価。腹部超音波で胃内充実性構造物を検出。造影X線で胃排出遅延・充盈欠損を確認。CBC・生化学で脱水・電解質異常を評価。フェレットは換毛期に被毛を摂取しやすく、消化管通過時間3-4時間と短いため胃内に停滞しやすい。鑑別：消化管異物、Helicobacter胃炎、胃腫瘍。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

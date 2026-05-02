@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 43 remaining Reptile entries."""
+
 import json
 import os
 import time
@@ -140,6 +141,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "レントゲン（2方向以上）で骨折の部位・型（横骨折・螺旋骨折・粉砕骨折）・転位の程度を評価する。MBD（代謝性骨疾患）による病的骨折の鑑別が爬虫類では極めて重要であり、対側肢・他の骨の骨密度も同時評価する。血清Ca/P比・25(OH)D3値を測定し、UV-B照射歴・食餌内容を聴取する。開放骨折では創部の細菌培養・ヘテロフィル反応を評価する。POTZ維持は骨癒合速度に直接影響するため、治療計画策定時に温度管理を必ず含める。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

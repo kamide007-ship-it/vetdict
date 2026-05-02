@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich chinchilla diagnosis_ja fields (50 entries)."""
+
 import json
 import os
 import time

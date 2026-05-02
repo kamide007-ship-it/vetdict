@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 40 remaining Amphibian entries (shortest current values)."""
+
 import json
 import os
 import time

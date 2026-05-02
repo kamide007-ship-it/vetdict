@@ -8,6 +8,7 @@ torpor vs hypoglycemia differentiation, dwarf hamster diabetes (Campbell's),
 Demodex aurati/criceti species-specific, wet tail (proliferative ileitis),
 amyloidosis in chronic disease, small body size limits blood sampling.
 """
+
 import json
 import os
 import time
@@ -219,6 +220,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "咳嗽（ハムスターでは明確な咳は観察しにくいため、呼吸時の異常音・くしゃみ様の動作として表現される）・鼻汁・呼吸促迫を主訴に検査。胸部聴診で気管支音の増強・乾性ラ音を確認。胸部X線で気管支壁の肥厚（ドーナツサイン/トラムライン）を評価し、肺炎への進展を除外。鼻汁・気管洗浄液の細菌培養を実施（Pasteurella・Mycoplasma・Streptococcusが多い）。環境要因の聴取が重要：床材の粉塵（杉・松チップのフェノール類）、アンモニア蓄積（不適切な清掃頻度）、低温環境。抗菌薬はエンロフロキサシン・TMSが安全に使用可能。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

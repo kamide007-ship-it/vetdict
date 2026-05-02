@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Cat diagnosis_ja enrichment — batch 14 (35 entries)."""
+
 import json
 import os
 import time
@@ -147,6 +148,7 @@ ENRICHMENTS["cat_feline_cerebellar_infarction"] = {
 ENRICHMENTS["cat_feline_tracheal_avulsion"] = {
     "diagnosis_ja": "猫気管断裂の診断は、外傷歴（交通事故、高所落下、頸部への鈍的外傷）後の呼吸困難と皮下気腫を呈する猫で疑う。頸部X線・胸部X線で気管の不連続像、縦隔気腫、皮下気腫を確認する。猫では外傷後数日〜数週間経過してから臨床徴候が顕在化することがあり、肉芽組織による気管狭窄で遅発性に呼吸困難を呈する。CT検査で気管断裂部位・範囲を3次元的に評価する。気管支鏡検査で断裂部位の直接観察と狭窄の程度を評価する。動脈血ガス分析で低酸素血症・高炭酸ガス血症の程度を評価する。併発損傷（食道損傷、頸椎損傷、肺挫傷）の精査も行う。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

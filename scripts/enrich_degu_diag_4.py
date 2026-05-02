@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Degu entries with short/missing text."""
+
 import json
 import os
 import time

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Horse diagnosis_ja enrichment — batch 7 (50 entries)."""
+
 import json
 import os
 import time

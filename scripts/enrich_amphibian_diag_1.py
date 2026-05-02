@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Amphibian diseases with species-specific diagnostic protocols."""
+
 import json
 import os
 

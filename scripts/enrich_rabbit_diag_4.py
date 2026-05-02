@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for rabbit entries rabbit_0124 – rabbit_0183 (50 entries)."""
+
 import json
 import os
 import time
@@ -251,6 +252,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "妊娠末期・泌乳初期の肥満雌で食欲不振・元気消失・ケトン臭から疑診。尿検査でケトン体陽性。血液生化学で血糖低下・BUN上昇・肝酵素上昇・代謝性アシドーシス（血液ガス）。血中β-ヒドロキシ酪酸上昇で確定。肝臓超音波で脂肪肝（hyperechoic肝）を評価。CBC（ストレス白血球像）。ウサギの妊娠毒血症は予後極めて不良で致死率が高い。鑑別：肝リピドーシス、消化管うっ滞、子宮疾患。食餌歴（絶食・食餌変更）の聴取が重要。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

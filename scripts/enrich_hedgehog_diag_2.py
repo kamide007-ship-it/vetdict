@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich hedgehog diagnosis_ja (entries 0051-0100, 50 entries)."""
+
 import json
 import os
 import time

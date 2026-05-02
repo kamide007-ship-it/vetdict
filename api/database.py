@@ -200,9 +200,7 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
     for col_name, col_type in diagnostic_cols + enrichment_cols:
         if col_name not in columns:
             try:
-                cursor.execute(
-                    f"ALTER TABLE diseases ADD COLUMN {col_name} {col_type}"
-                )
+                cursor.execute(f"ALTER TABLE diseases ADD COLUMN {col_name} {col_type}")
                 added += 1
             except sqlite3.OperationalError as e:
                 logger.warning("Column %s already exists: %s", col_name, e)
@@ -214,6 +212,7 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
 # ---------------------------------------------------------------------------
 # Disease helpers
 # ---------------------------------------------------------------------------
+
 
 def upsert_disease(conn: sqlite3.Connection, disease: dict) -> None:
     """Insert or replace a disease record."""
@@ -329,6 +328,7 @@ def count_diseases(conn: sqlite3.Connection) -> dict:
 # Drug helpers
 # ---------------------------------------------------------------------------
 
+
 def upsert_drug(conn: sqlite3.Connection, drug: dict) -> None:
     """Insert or replace a drug record and its species info."""
     conn.execute(
@@ -346,8 +346,12 @@ def upsert_drug(conn: sqlite3.Connection, drug: dict) -> None:
             drug.get("mechanism_ja"),
             drug.get("contraindications"),
             drug.get("contraindications_ja"),
-            json.dumps(drug["side_effects"]) if isinstance(drug.get("side_effects"), list) else drug.get("side_effects"),
-            json.dumps(drug["side_effects_ja"]) if isinstance(drug.get("side_effects_ja"), list) else drug.get("side_effects_ja"),
+            json.dumps(drug["side_effects"])
+            if isinstance(drug.get("side_effects"), list)
+            else drug.get("side_effects"),
+            json.dumps(drug["side_effects_ja"])
+            if isinstance(drug.get("side_effects_ja"), list)
+            else drug.get("side_effects_ja"),
         ),
     )
     for species, info in (drug.get("species_info") or {}).items():
@@ -379,9 +383,7 @@ def get_drug_by_id(conn: sqlite3.Connection, drug_id: str) -> dict | None:
     if not row:
         return None
     drug = dict(row)
-    species_rows = conn.execute(
-        "SELECT * FROM drug_species_info WHERE drug_id = ?", (drug_id,)
-    ).fetchall()
+    species_rows = conn.execute("SELECT * FROM drug_species_info WHERE drug_id = ?", (drug_id,)).fetchall()
     drug["species_info"] = {r["species"]: dict(r) for r in species_rows}
     return drug
 
@@ -390,7 +392,10 @@ def get_drug_by_id(conn: sqlite3.Connection, drug_id: str) -> dict | None:
 # Symptom helpers
 # ---------------------------------------------------------------------------
 
-def upsert_symptom(conn: sqlite3.Connection, symptom_id: str, name_en: str, name_ja: str, species: str, weight: float = 1.0) -> None:
+
+def upsert_symptom(
+    conn: sqlite3.Connection, symptom_id: str, name_en: str, name_ja: str, species: str, weight: float = 1.0
+) -> None:
     """Insert or replace a symptom."""
     conn.execute(
         "INSERT OR REPLACE INTO symptoms (id, name_en, name_ja, species, clinical_weight) VALUES (?,?,?,?,?)",

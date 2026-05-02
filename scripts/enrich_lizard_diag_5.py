@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for remaining 20 Lizard entries (batch 5)."""
+
 import json
 import os
 import time

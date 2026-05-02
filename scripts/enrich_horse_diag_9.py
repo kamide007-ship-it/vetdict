@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Horse diagnosis_ja enrichment — batch 9 (50 entries)."""
+
 import json
 import os
 import time
@@ -119,6 +120,7 @@ ENRICHMENTS["horse_0416"] = {
 ENRICHMENTS["horse_0417"] = {
     "diagnosis_ja": "慢性蹄葉炎の診断は、蹄X線（ラテラル蹶像）で蹄骨の回転角度・沈下量を計測し、蹄壁の形態異常（ディッシュ、分岐成長輪、蹄底突出）を評価することに基づく。蹄骨底面と蹄底角質との距離（sole depth）を計測する。蹄骨先端の骨溶解を確認する。Venogramで蹄内循環を評価する。定期的X線でリモデリングの進行を監視する。EMS/PPIDの基礎疾患管理を血液検査で評価する。装蹄学的評価（ブレイクオーバーの位置、蹄のジオメトリー）が治療計画に不可欠。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

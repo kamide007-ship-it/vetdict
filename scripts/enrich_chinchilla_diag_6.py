@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Chinchilla diseases (batch 6: remaining 47 entries)."""
+
 import json
 import os
 import time

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 bird diseases (bird_0051–bird_0100)."""
+
 import json
 import os
 import time

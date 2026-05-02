@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich Bird diagnosis_ja fields — batch 5 (bird_0201 to bird_0250)."""
+
 import json
 import os
 import time
@@ -158,6 +159,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "糞便検査・気道洗浄液の直接鏡検で寄生虫卵・幼虫を検索。気管スワブでSternestoma tracheacolum（気管吸虫）等を確認。CBC で好酸球増加を評価。X線で気管内結節・気嚢壁肥厚・肺野浸潤を確認。鳥類ではSternestoma（特にフィンチ・カナリア）、Serratospiculum・Cyathostoma等の線虫が気道寄生虫の主要種。内視鏡で気管・気管支内の虫体を直接観察し確定診断とする。糞便浮遊法で虫卵を検出するが、単回検査では偽陰性が多く連日複数回検査が推奨される。飼育群全体のスクリーニングも重要である。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

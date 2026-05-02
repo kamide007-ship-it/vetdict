@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Horse diagnosis_ja enrichment — batch 10 (50 entries)."""
+
 import json
 import os
 import time
@@ -111,6 +112,7 @@ ENRICHMENTS["horse_0452"] = {
 ENRICHMENTS["horse_0454"] = {
     "diagnosis_ja": "馬薬剤過敏症の診断は、薬物投与後の皮膚反応（蕁麻疹、多形紅斑、血管浮腫）、発熱、臓器障害の時間的関連に基づく臨床診断である。原因薬物（最後に追加した薬物が最も疑わしい）の投与歴と反応出現までの期間を詳細に聴取する。Ⅰ型（即時型: 分〜時間）とⅣ型（遅延型: 日〜週）を鑑別する。皮膚生検で薬疹のパターン（血管炎、界面皮膚炎）を確認する。原因薬物の中止で改善を確認する（薬物回避試験）。リンパ球刺激試験が利用可能な場合は原因同定に有用。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

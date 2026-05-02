@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 remaining Tortoise entries."""
+
 import json
 import os
 import time

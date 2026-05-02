@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Horse diagnosis_ja enrichment — batch 5 (50 entries)."""
+
 import json
 import os
 import time
@@ -107,6 +108,7 @@ ENRICHMENTS["horse_0265"] = {
 ENRICHMENTS["horse_0266"] = {
     "diagnosis_ja": "馬甲状腺機能低下症の診断は、成馬では非常に稀であり、新生子馬での甲状腺腫を伴う先天性甲状腺機能低下症が主な臨床形態である。子馬では虚弱、骨格異常（不完全骨化、肢軸異常）、筋力低下を呈する。血清T4・遊離T4の低下を確認する。TSH刺激試験でT4反応を評価する。ヨウ素過剰・欠乏（母馬の食事歴）を聴取する。成馬での低T4血症は甲状腺外疾患症候群（euthyroid sick syndrome）との鑑別が必須で、基礎疾患の精査が優先される。TRH刺激試験がより特異的な評価法である。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

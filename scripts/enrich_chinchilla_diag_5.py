@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Chinchilla diseases (batch 5: first 50 entries)."""
+
 import json
 import os
 import time
@@ -214,6 +215,7 @@ ENRICHMENTS["chinchilla_hyperthyroidism"] = {
 ENRICHMENTS["chinchilla_adrenal_hyperplasia"] = {
     "diagnosis_ja": "腹部超音波で副腎サイズ・形態を評価（両側性腫大に注意）。副腎ホルモンパネル（コルチゾール・DHEA-S・アンドロステンジオン・エストラジオール）で内分泌機能を評価。ACTH刺激試験でコルチゾール過剰産生を確認。チンチラの副腎過形成は左右対称性脱毛・皮膚菲薄化・多飲多尿として発現しうる。CBC・血液生化学（血糖・ALP・コレステロール上昇）で代謝変化を評価。腹部CT（利用可能な場合）で副腎の詳細評価。副腎腫瘍との鑑別が重要"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

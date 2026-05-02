@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Cat diagnosis_ja enrichment batch 7 — 30 entries (ophtho, ortho, repro, congenital, toxicology, immune)."""
+
 import json
 import os
 import time

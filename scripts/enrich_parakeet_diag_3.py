@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Parakeet entries parakeet_0101 to parakeet_0150."""
+
 import json
 import os
 import time
@@ -161,6 +162,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "気管洗浄液の直接鏡検（気嚢ダニSternostoma tracheacolum→黒色虫体を検出、インコ類に好発する呼吸器寄生虫）。透照法（頸部皮膚越しに気管内ダニの暗色点を確認→小型インコで特に有用）。胸部X線（気嚢混濁・肺浸潤→重度感染時）。CBC（軽度異好球増多）。血液生化学（全身状態評価）。内視鏡（気管・気嚢内の虫体直視）。糞便検査（消化管寄生虫の合併評価）。鑑別：気嚢ダニ（Sternostoma→セキセイ/カナリアに最多）・細菌性/真菌性気嚢炎・ウイルス性呼吸器感染・環境性呼吸器刺激。「カチカチ」呼吸音が特徴的臨床所見"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

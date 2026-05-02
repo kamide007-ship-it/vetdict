@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Horse diagnosis_ja enrichment — batch 6 (50 entries)."""
+
 import json
 import os
 import time
@@ -127,6 +128,7 @@ ENRICHMENTS["horse_0307"] = {
 ENRICHMENTS["horse_0310"] = {
     "diagnosis_ja": "馬リノスポリジウム症の診断は、鼻腔内のポリープ状腫瘤（ピンク〜赤色、表面に白色点状斑を伴う）の肉眼的観察と生検に基づく。病理組織検査で特徴的な巨大胞子嚢（sporangia、直径100-400μm、内部に多数の内生胞子を含む）を確認する。内視鏡で鼻腔内腫瘤の位置・範囲を評価する。KOH湿潤標本でsporangiaを検出する。Rhinosporidium seeberiiは培養不能菌であるため組織検査が確定診断となる。鼻出血・片側性鼻汁を呈する。水辺への曝露歴が疫学的手がかりとなる。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

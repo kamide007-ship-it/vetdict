@@ -10,6 +10,7 @@ Tortoise-specific considerations:
 - Very slow metabolism — prolonged drug clearance, slow disease progression
 - Coelomic cavity (体腔) — not true abdominal cavity
 """
+
 import json
 import os
 import time
@@ -523,6 +524,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         )
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

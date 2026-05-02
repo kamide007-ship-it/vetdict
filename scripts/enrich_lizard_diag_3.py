@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Lizard entries starting from lizard_0101."""
+
 import json
 import os
 import time
@@ -158,6 +159,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "糞便浮遊法・沈殿法で線虫卵を検出し、形態学的に属レベルの同定を行う。直接塗抹法で幼虫の確認も行う。レントゲン・超音波で大量寄生による腸管壁肥厚・閉塞を評価する。野生捕獲個体で寄生率が高く、飼育下繁殖個体との区別が重要である。臨床症状として体重減少・軟便・食欲不振・嘔吐を評価する。ヘテロフィル反応（好酸球性変化を含む）を確認する。イベルメクチンの使用は種によっては毒性があるため、種同定と適切な駆虫薬選択が必要である。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

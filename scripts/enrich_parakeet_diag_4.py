@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich Parakeet diagnosis_ja fields — batch 4 (parakeet_0151 to parakeet_0200)."""
+
 import json
 import os
 import time
@@ -158,6 +159,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "CBC で貧血の種類と程度を評価。生化学で血糖・電解質・肝腎機能を包括的に測定し代謝異常を特定。血中鉛・亜鉛濃度で重金属中毒による造血障害を除外。尿酸値で痛風性腎障害を確認。甲状腺機能検査（T4値）で甲状腺機能低下に伴う造血障害を評価。インコ類では鉄蓄積症（ヘモクロマトーシス）も血液代謝疾患として重要であり、血清フェリチン・鉄値を測定する。肝生検で肝鉄沈着を確認することが確定診断に有用。食餌性の栄養過不足が血液異常の基盤となることが多い。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

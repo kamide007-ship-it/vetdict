@@ -9,6 +9,7 @@ Exotic Other clinical considerations:
 - Environmental history (temperature, humidity, diet) essential
 - Many conditions are husbandry-related
 """
+
 import json
 import os
 import time

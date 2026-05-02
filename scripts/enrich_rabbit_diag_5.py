@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Rabbit disease entries (batch 5)."""
+
 import json
 import os
 import time
@@ -502,6 +503,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         )
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

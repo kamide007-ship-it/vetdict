@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Horse diagnosis_ja enrichment — batch 4 (50 entries)."""
+
 import json
 import os
 import time
@@ -131,6 +132,7 @@ ENRICHMENTS["horse_0233"] = {
 ENRICHMENTS["horse_0234"] = {
     "diagnosis_ja": "馬の日焼けの診断は、非色素性（ピンク）皮膚部位の紅斑・水疱・落屑・痂皮の分布パターンと日光曝露歴に基づく臨床診断である。好発部位は鼻端、口唇周囲、白斑部位である。光線過敏症との鑑別が重要で、肝疾患（二次性光線過敏）の除外のため肝酵素・胆汁酸検査を行う。有毒植物（ヒペリカム、ワラビ等）摂取歴を聴取する。皮膚生検で日光性皮膚炎パターン（表皮壊死、真皮浮腫）を確認し、扁平上皮癌の前駆病変を除外する。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 43 remaining Ferret entries."""
+
 import json
 import os
 import time

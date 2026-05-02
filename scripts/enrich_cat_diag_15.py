@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Cat diagnosis_ja enrichment — batch 15 (34 entries, final cat batch)."""
+
 import json
 import os
 import time
@@ -143,6 +144,7 @@ ENRICHMENTS["cat_immune_arthritis"] = {
 ENRICHMENTS["cat_mandibular_symphysis_fracture"] = {
     "diagnosis_ja": "猫下顎結合部骨折の診断は、外傷歴（高所落下・交通事故）後の採食困難、流涎、開口障害から疑い、口腔内検査で下顎正中の可動性・不安定性を触知する。頭部X線（VD像）で下顎結合部の離開を確認する。歯科X線で切歯・犬歯の歯根損傷を評価する。CT検査で骨折パターンの詳細と歯根への影響を3次元的に評価する。咬合状態の評価で歯列偏位・開咬を確認する。口腔内の軟部組織損傷（歯肉裂傷、舌損傷）を評価する。高所落下症候群では硬口蓋裂開との併発が高頻度であるため口蓋の精査が必須。胸部X線で肺挫傷・気胸を評価し、四肢骨折・腹腔内出血の全身精査を行う。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

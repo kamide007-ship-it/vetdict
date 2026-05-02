@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich Exotic Other diagnosis_ja fields — batch 4 (50 entries)."""
+
 import json
 import os
 import time
@@ -156,6 +157,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
     },
 }
 
+
 def apply_enrichments() -> None:
     for attempt in range(3):
         try:
@@ -179,6 +181,7 @@ def apply_enrichments() -> None:
     with open(JSON_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f"Updated {updated}/{len(ENRICHMENTS)} entries")
+
 
 if __name__ == "__main__":
     apply_enrichments()

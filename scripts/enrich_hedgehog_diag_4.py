@@ -10,6 +10,7 @@ Hedgehog clinical considerations:
 - Small body size limits blood sampling (max 1% BW)
 - Skin scraping difficult due to quill coverage
 """
+
 import json
 import os
 import time
@@ -204,6 +205,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "虫性肺炎（クレノソーマ）の診断は、慢性咳嗽・呼吸困難・鼻汁・運動不耐・体重減少を呈するハリネズミで疑う。Crenosoma striatumはカタツムリを中間宿主とし、野生ハリネズミや屋外飼育個体で多い。ベルマン法で糞便から幼虫を回収・検出する。気管洗浄液の細胞診で好酸球増多・幼虫を確認する。胸部X線で気管支周囲浸潤影・びまん性間質パターンを評価する。血液検査で好酸球増多を確認する。細菌性肺炎・アレルギー性気道疾患・心疾患との鑑別が必要であり、包括的な精査を行う。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

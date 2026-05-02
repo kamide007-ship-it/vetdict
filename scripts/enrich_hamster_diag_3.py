@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Hamster entries 0062-0119."""
+
 import json
 import os
 import time

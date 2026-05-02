@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Chinchilla entries 0051-0100."""
+
 import json
 import os
 import time

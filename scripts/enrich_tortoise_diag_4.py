@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Tortoise disease entries (batch 4)."""
+
 import json
 import os
 import time
@@ -182,6 +183,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "X線撮影で気管内腔の狭窄部位・程度を評価。CT検査で狭窄の正確な位置・範囲・気管壁構造を詳細に描出。気管内視鏡で内腔の狭窄・粘膜変化・肉芽組織を直接観察が確定診断。CBC・生化学で基礎疾患を評価。呼吸努力の程度（吸気性喘鳴・開口呼吸）を臨床評価。原因として外傷後瘢痕・慢性感染後の肉芽形成・先天性狭窄・腫瘍性圧迫を鑑別。リクガメは気管輪が完全環（哺乳類と異なる）のため、狭窄の外科的治療の難易度が高い。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

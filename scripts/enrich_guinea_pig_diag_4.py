@@ -6,6 +6,7 @@ caseous (thick cheesy) pus, oral penicillin contraindicated (fatal dysbiosis),
 open-rooted (elodont) teeth, Bordetella/Streptococcus susceptibility,
 large cecum (GI stasis risk), unique hematology (Foa-Kurloff cells).
 """
+
 import json
 import os
 import time
@@ -201,6 +202,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "皮膚の発赤・水疱・壊死組織を視診で確認し、熱傷の深度（I度：表皮/II度：真皮/III度：全層）と体表面積割合を評価。原因（ヒーター・熱湯・ヘアドライヤー・直射日光）を聴取。モルモットは被毛に覆われているため初期の熱傷範囲を過小評価しやすく、被毛を刈って創面を正確に評価する。CBC・血液生化学・血液ガスでショックの重症度を評価。広範囲熱傷では輸液量の計算と電解質補正が重要。ビタミンC欠乏は創傷治癒を著しく遅延させるため、早期からのビタミンC補充（50-100 mg/kg/日）を開始する。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

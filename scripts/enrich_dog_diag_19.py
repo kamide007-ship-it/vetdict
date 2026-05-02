@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Dog diagnosis_ja enrichment batch 19 — final 42 remaining dog entries."""
+
 import json
 import os
 import time

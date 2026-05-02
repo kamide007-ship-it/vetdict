@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 61 remaining Guinea Pig entries."""
+
 import json
 import os
 import time
@@ -256,6 +257,7 @@ ENRICHMENTS["guinea_pig_rickets"] = {
 ENRICHMENTS["guinea_pig_osteoarthritis"] = {
     "diagnosis_ja": "患関節のX線検査で骨棘形成・関節腔狭小化・軟骨下骨硬化を確認。触診で関節腫脹・疼痛・可動域制限・捻髪音を評価。高齢モルモットに好発し、肥満がリスク因子。CBC・血液生化学（非ステロイド系消炎鎮痛薬投与前の腎機能評価）。関節液分析（炎症性/感染性関節炎の除外）。血漿ビタミンC濃度測定（欠乏は関節軟骨の変性を促進）。鑑別：感染性関節炎、壊血病（関節型）、骨腫瘍。NSAID使用は慎重に（腎毒性リスク）。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

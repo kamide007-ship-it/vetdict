@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Rabbit diseases (rabbit_0001–rabbit_0066)."""
+
 import json
 import os
 import time

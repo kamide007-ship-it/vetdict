@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for 50 Snake disease entries (batch 4)."""
+
 import json
 import os
 import time
@@ -161,6 +162,7 @@ ENRICHMENTS: dict[str, dict[str, str]] = {
         "diagnosis_ja": "血液生化学（総蛋白低下・低アルブミン血症→蛋白合成能低下/摂取不足、BUN相当値低下→蛋白摂取不足）が基本。体格指数の評価（BCS→脊椎突起の突出・筋肉量の減少）。CBC（貧血・リンパ球減少→免疫抑制）。食餌歴の詳細聴取（部分給餌・不適切な獲物サイズ・給餌頻度不足・冷凍餌の品質劣化）。脱皮状態（dysecdysis→栄養不良の指標）を評価。蛇は長期絶食に耐性があるが、慢性的な蛋白不足は免疫低下・創傷治癒遅延・生殖障害を引き起こす。環境温度（POTZ）が消化吸収効率に直接影響する。"
     },
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

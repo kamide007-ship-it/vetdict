@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Horse diagnosis_ja enrichment — batch 8 (50 entries)."""
+
 import json
 import os
 import time
@@ -103,6 +104,7 @@ ENRICHMENTS["horse_0387"] = {
 ENRICHMENTS["horse_0388"] = {
     "diagnosis_ja": "馬肝性脳症の診断は、肝疾患を有する馬での神経学的異常（旋回、押し当て行動、過敏性亢進、盲目、痙攣）の臨床評価と血液検査に基づく。血中アンモニア値の上昇が最も直接的な指標である。血液生化学でGGT/ALP/SDH上昇、総胆汁酸値上昇、低アルブミン血症、低BUNを確認する。凝固検査でPT延長を認める。肝超音波で肝サイズ・実質エコーの変化を評価する。肝生検で肝硬変・線維化の程度を確認する。原因として植物中毒、セラー病、鉄過剰症、先天性門脈シャントを精査する。"
 }
+
 
 def apply_enrichments() -> None:
     for attempt in range(3):

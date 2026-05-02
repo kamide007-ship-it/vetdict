@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Degu entries (degu_0023+)."""
+
 import json
 import os
 import time

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Enrich diagnosis_ja for Rabbit entries (batch 8: remaining 54 entries)."""
+
 import json
 import os
 import time

@@ -576,6 +576,7 @@ ENRICHMENTS["tortoise_chelonian_herpesvirus_type_2"] = {
     )
 }
 
+
 def apply_enrichments() -> None:
     with open(JSON_PATH, encoding="utf-8") as f:
         data = json.load(f)
