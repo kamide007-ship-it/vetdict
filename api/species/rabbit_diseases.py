@@ -634,6 +634,8 @@ DISEASES: List[Dict[str, Any]] = [
             "respiratory_distress",
             "lethargy",
             "eye_discharge",
+            "appetite_loss",
+            "ear_discharge",
         },
         "description": "Pasteurellosis, commonly called 'Snuffles,' is a chronic to acute bacterial infection caused by Pasteurella multocida affecting rabbits' upper respiratory tract, middle ear, subcutaneous tissues, and potentially causing systemic infection. Prevalence 5-15% in pet rabbits; 15-30% in breeding colonies. Transmission via direct contact, aerosol droplets (up to 2 meters), or contaminated fomites. Some animals are chronic asymptomatic carriers. Disease manifestation depends on immune status, bacterial strain virulence, and stress factors. Presence of pathogenic variants (lipopolysaccharide type, exotoxins, iron-acquisition systems) determines severity.",
         "description_ja": "パスツレラ・ムルトシダによる慢性～急性細菌感染。上部呼吸器、中耳、皮下組織、全身感染の原因。有病率5-15% ペット、15-30% 繁殖群。直接接触・飛沫（~2m）・汚染物品で伝播。無症状保菌者が5-20%存在。免疫状態、菌株毒力、ストレス因子で発症決定。LPS型、外毒素、鉄獲得システムの有無で重症度決定。",
@@ -646,6 +648,9 @@ DISEASES: List[Dict[str, Any]] = [
             "blood_culture",
             "nasal_endoscopy",
             "abdominal_ultrasound",
+            "nasal_culture_sensitivity",
+            "radiographs",
+            "ct_scan",
         ],
         "causes": "Pasteurella multocida infection (gram-negative coccobacillus); transmission via: (1) Direct contact (mating, bite wounds, sniffing), (2) Aerosol droplets (respiratory secretions, sneezing, up to 2m distance), (3) Contaminated fomites (food bowls, water bottles, bedding, air filters). Risk factors: stress (transport, overcrowding, environmental changes, social conflict), immunosuppression (concurrent illness, poor nutrition, young/senior age <3 months or >4 years), poor ventilation (ammonia accumulation >15 ppm), high stocking density (>150 rabbits/room without adequate filtration), prior upper respiratory infection, recent anesthesia/surgery, corticosteroid use. Carrier state in 5-20% of apparently healthy rabbits; shedding increases with stress/illness.",
         "causes_ja": "パスツレラ・ムルトシダ（グラム陰性球桿菌）感染。伝播：(1) 直接接触（交配、咬傷、嗅ぎ）、(2) 飛沫（呼吸分泌物、くしゃみ、~2m）、(3) 汚染物品（食器、給水、敷料、フィルター）。危険因子：ストレス（輸送、過密飼育、環境変化、社会的葛藤）、免疫抑制（合併症、栄養不良、若齢<3ヶ月/高齢>4年）、換気不良（アンモニア>15 ppm）、過密飼育、先行URI、近期麻酔/手術、コルチコステロイド使用。無症状保菌者5-20%；ストレス/疾患時に排泄増加。",
@@ -1414,11 +1419,18 @@ DISEASES: List[Dict[str, Any]] = [
             "lethargy",
             "appetite_loss",
             "weight_loss",
+            "vaginal_bleeding",
         },
         "description": "Uterine Adenocarcinoma is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "3〜4歳以上の未避妊メスウサギで最も多い腫瘍。5歳以上の未避妊メスでは60〜80%の発生率に達します。",
         "urgency": "high",
-        "recommended_tests": ["abdominal_ultrasound", "thoracic_radiographs", "blood_chemistry", "histopathology"],
+        "recommended_tests": [
+            "abdominal_ultrasound",
+            "thoracic_radiographs",
+            "blood_chemistry",
+            "histopathology",
+            "complete_blood_count",
+        ],
         "causes": "Caused by neoplastic cell proliferation; etiology is often multifactorial including genetic predisposition, age, hormonal influences, and environmental factors.",
         "causes_ja": "ウサギにおける子宮腺癌の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
@@ -2527,7 +2539,7 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Toxicosis - Plant Poisoning is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "スズラン、ジギタリス、ナス科植物、ルバーブの葉などの有毒植物を摂取したことによる中毒です。",
         "urgency": "emergency",
-        "recommended_tests": ["blood_chemistry", "blood_gas_analysis", "toxicology_screen"],
+        "recommended_tests": ["blood_chemistry", "blood_gas_analysis", "toxicology_screen", "physical_exam"],
         "causes": "Caused by ingestion, inhalation, or contact with toxic substances including plants, chemicals, heavy metals, or medications.",
         "causes_ja": "ウサギにおける植物中毒の原因: スズラン、ジギタリス、ナス科植物、ルバーブの葉などの有毒植物を摂取したことによる中毒です。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
@@ -5796,27 +5808,6 @@ DISEASES: List[Dict[str, Any]] = [
         "age_predisposition": {"adult", "young", "senior"},
     },
     {
-        "name": "Plant Toxicosis",
-        "name_ja": "植物中毒",
-        "symptoms": {"diarrhea", "seizures", "lethargy", "appetite_loss", "sudden_death"},
-        "description": "Plant Toxicosis is a toxicological condition caused by exposure to harmful substances.",
-        "description_ja": "キョウチクトウ、ジギタリス、ナス科植物などの有毒植物の摂取による中毒です。",
-        "urgency": "emergency",
-        "recommended_tests": ["blood_chemistry", "toxicology_screen", "physical_exam"],
-        "causes": "Caused by ingestion, inhalation, or contact with toxic substances including plants, chemicals, heavy metals, or medications.",
-        "causes_ja": "消化器系に影響する有毒物質への曝露が原因。一般的な毒素：重金属（鉛・亜鉛）・家庭用化学物質・有毒植物・農薬・薬物（不適切使用・偶発曝露）・環境汚染物質。ウサギの食性と生理学的特性が毒素の吸収・代謝・感受性に影響しうる。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "ウサギの消化器系組織に影響する中毒曝露は、有害物質の経口摂取・吸入・経皮吸収に起因する。毒素は直接的な細胞毒性・酸化ストレス・ミトコンドリア機能障害・重要酵素経路の攪乱を介して細胞を損傷する。ウサギの食性と生理学的特性が毒素の吸収と代謝に影響しうる。臓器特異的損傷は毒素の薬物動態と標的臓器親和性に依存する。",
-        "treatment": "CRITICAL: Rabbits CANNOT vomit — emesis-based decontamination is impossible. Activated charcoal 1–3 g/kg PO as slurry within 1–2 hours of ingestion if safe to administer. Specific plant toxin management: OLEANDER (cardiac glycosides): atropine 0.05 mg/kg IV for bradycardia (note ~30% of rabbits have atropinase — glycopyrrolate 0.01 mg/kg IV as alternative), digoxin-specific Fab fragments if available, continuous ECG monitoring, IV fluid support. DIGITALIS/FOXGLOVE: same as oleander management. NIGHTSHADE (solanine): primarily supportive — IV fluids, activated charcoal, GI prokinetics. LILIES: nephrotoxic potential — aggressive IV fluid diuresis (0.9% NaCl 10–15 mL/kg/hr), monitor renal values q12–24h. YEW (Taxus): rapidly fatal cardiac arrhythmias — immediate activated charcoal, IV fluids, atropine/lidocaine for arrhythmias, but prognosis is grave. RHODODENDRON (grayanotoxin): atropine for bradycardia, IV fluids, supportive care. General supportive care for all plant toxicoses: IV crystalloid fluids (10 mL/kg/hr initially), meloxicam 0.3–0.5 mg/kg SC q24h, syringe feeding with Critical Care (Oxbow) q4–6h to prevent secondary GI stasis, metoclopramide 0.5–1.0 mg/kg SC q6–8h. Monitor blood chemistry (hepatic, renal), blood glucose, and ECG as indicated. Remove ALL potentially toxic plants from rabbit's environment — provide a plant identification guide to owners. Reference: Richardson (2000), Harcourt-Brown (2002).",
-        "treatment_ja": "重要: ウサギは嘔吐不能 — 催吐による除染は不可能。摂取後1-2時間以内であれば活性炭1-3 g/kg POをスラリーとして。特異的植物毒素管理: キョウチクトウ（強心配糖体）: アトロピン0.05 mg/kg IV 徐脈に（ウサギの約30%にアトロピナーゼあり — グリコピロレート0.01 mg/kg IVを代替）、digoxin-specific Fab断片が利用可能であれば投与、持続ECGモニタリング、IV輸液。ジギタリス: キョウチクトウと同様。ナス科植物（ソラニン）: 主に支持療法 — IV輸液、活性炭、消化管運動促進薬。ユリ科: 腎毒性 — 積極的IV輸液利尿（0.9% NaCl 10-15 mL/kg/hr）、腎値をq12-24hモニタリング。イチイ（タキシン）: 急速に致死的な心不整脈 — 即座に活性炭、IV輸液、不整脈にアトロピン/リドカイン、予後は極めて不良。シャクナゲ（グラヤノトキシン）: 徐脈にアトロピン、IV輸液、支持療法。全植物中毒の一般的支持療法: IV晶質液（初期10 mL/kg/hr）、メロキシカム0.3-0.5 mg/kg SC q24h、Critical Care（Oxbow）q4-6hでシリンジ給餌（二次的GI stasis予防）、メトクロプラミド0.5-1.0 mg/kg SC q6-8h。血液化学（肝・腎）、血糖、適応に応じECGをモニタリング。ウサギの環境から全ての有毒植物を除去 — 飼い主に植物識別ガイドを提供。参考文献: Richardson (2000), Harcourt-Brown (2002).",
-        "prevention": "Prevention includes removing access to toxic substances, using pet-safe products, proper storage of medications and chemicals, and educating owners about common toxins.",
-        "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "中毒の予後は毒素の種類、曝露量、治療開始までの時間に依存する。早期の除染と支持療法で軽度中毒は予後良好。重度中毒や臓器障害がある場合は予後慎重〜不良。原因毒素の特定と除去が最優先。",
-        "onset_pattern": {"acute"},
-        "age_predisposition": {"adult", "young", "senior"},
-    },
-    {
         "name": "Renal Cysts (Polycystic)",
         "name_ja": "多発性腎嚢胞",
         "symptoms": {"excessive_thirst", "excessive_urination", "weight_loss", "lethargy", "abdominal_distension"},
@@ -6197,80 +6188,6 @@ DISEASES: List[Dict[str, Any]] = [
         "recommended_tests": ["physical_exam", "dark_field_microscopy", "serology", "pcr"],
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"adult"},
-    },
-    {
-        "name": "Uterine Adenocarcinoma",
-        "name_ja": "子宮腺癌",
-        "symptoms": {"vaginal_bleeding", "appetite_loss", "weight_loss", "lethargy", "abdominal_distension"},
-        "description": "Most common neoplasm in intact female rabbits, with incidence increasing dramatically with age.",
-        "description_ja": "未避妊雌ウサギで最も多い腫瘍。4歳以上の未避妊雌で発生率60〜80%。"
-        "初期は無症状、進行すると血性膣分泌物・体重減少。"
-        "肺転移が多い。早期の避妊手術が最善の予防。",
-        "pathophysiology": "Chronic estrogen and progesterone stimulation leads to endometrial hyperplasia, then adenomatous changes, and ultimately adenocarcinoma.",
-        "pathophysiology_ja": "慢性的なエストロゲン・プロゲステロン刺激→子宮内膜過形成→腺腫性変化→腺癌。"
-        "局所浸潤→腹腔内播種・肺転移。5歳以上では80%に子宮病変が認められる。"
-        "乳腺腫瘍の併発も多い。",
-        "causes": "Hormonal stimulation in intact females. Incidence: 50-80% in intact does over 4 years of age.",
-        "causes_ja": "未避妊による持続的な性ホルモン刺激。年齢依存的に発生率が急増。"
-        "2〜3歳：4〜10%、4〜5歳：50〜60%、5歳以上：80%。",
-        "treatment": "Ovariohysterectomy (if no metastasis). Thoracic radiographs to check for lung metastasis before surgery.",
-        "treatment_ja": "卵巣子宮摘出術（転移なしの場合）が標準治療。"
-        "術前に胸部X線で肺転移の有無を確認。"
-        "転移がある場合は予後不良→緩和ケア（疼痛管理・栄養支持）。"
-        "化学療法の有効性は限定的。",
-        "prevention": "Early spaying (before 6 months of age) eliminates risk.",
-        "prevention_ja": "早期避妊手術（6ヶ月齢まで）が最善の予防法。未避妊雌は年1回の腹部超音波検査を推奨。",
-        "prognosis": "Good if caught early without metastasis; poor once lung metastasis present.",
-        "prognosis_ja": "転移前の早期摘出で予後良好（完治可能）。"
-        "肺転移がある場合は予後不良（余命数ヶ月）。"
-        "早期発見が鍵。",
-        "urgency": "high",
-        "recommended_tests": ["abdominal_ultrasound", "thoracic_radiographs", "complete_blood_count", "histopathology"],
-        "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "senior"},
-    },
-    {
-        "name": "Pasteurellosis (Snuffles)",
-        "name_ja": "パスツレラ症（スナッフル）",
-        "symptoms": {
-            "nasal_discharge",
-            "sneezing",
-            "eye_discharge",
-            "head_tilt",
-            "ear_discharge",
-            "lethargy",
-            "appetite_loss",
-            "respiratory_distress",
-        },
-        "description": "Bacterial infection by Pasteurella multocida, the most common pathogen in domestic rabbits.",
-        "description_ja": "Pasteurella multocidaによる細菌感染症。ウサギで最も重要な病原菌。"
-        "上部呼吸器感染（スナッフル）が最多だが、中耳炎・肺炎・膿瘍・"
-        "子宮蓄膿症・敗血症など多臓器に病変を形成。不顕性キャリアが多い。",
-        "pathophysiology": "P. multocida colonizes the nasal passages; stress or immunosuppression allows bacterial proliferation and spread.",
-        "pathophysiology_ja": "P. multocidaが鼻腔に定着（キャリア状態）→ストレス・免疫低下で増殖→"
-        "上部呼吸器感染（鼻炎・副鼻腔炎）→下行感染で肺炎→血行性播種で"
-        "中耳炎（斜頸の原因）・膿瘍（皮下・内臓）・生殖器感染・敗血症。",
-        "causes": "Pasteurella multocida. Transmitted by direct contact, aerosol, or fomites. Stress is a major trigger.",
-        "causes_ja": "Pasteurella multocida。直接接触・飛沫・媒介物で伝播。"
-        "ストレス（環境変化・過密・温度変化）、免疫低下が発症のトリガー。"
-        "キャリア率は飼育ウサギの50〜90%と推定。",
-        "treatment": "Long-term antibiotics based on culture and sensitivity.",
-        "treatment_ja": "培養感受性試験に基づく長期抗菌薬投与（最低14〜30日）。"
-        "第一選択：エンロフロキサシン（5〜10mg/kg BID PO）、"
-        "トリメトプリム・サルファ（30mg/kg BID PO）。"
-        "膿瘍：外科的排膿＋抗菌薬。鼻腔洗浄（重度鼻炎）。"
-        "完全根治は困難→再発管理が現実的目標。",
-        "prevention": "Stress reduction, good ventilation, quarantine, avoid overcrowding.",
-        "prevention_ja": "ストレス軽減、良好な換気、適切な飼育密度。"
-        "新規導入ウサギの検疫。キャリア検査（鼻腔培養）。"
-        "免疫力維持のための適切な栄養管理。",
-        "prognosis": "Guarded; complete eradication is rare. Manageable with long-term care.",
-        "prognosis_ja": "慎重。完全根治は稀で、キャリア状態が持続することが多い。"
-        "長期管理で良好なQOLを維持可能。膿瘍・肺炎の合併例は要注意。",
-        "urgency": "moderate",
-        "recommended_tests": ["nasal_culture_sensitivity", "radiographs", "complete_blood_count", "ct_scan"],
-        "onset_pattern": {"acute", "subacute", "chronic"},
-        "age_predisposition": {"adult", "young", "senior"},
     },
 ]
 

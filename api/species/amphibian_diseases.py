@@ -15,98 +15,170 @@ from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 体表・皮膚
-    "skin_shedding": "skin", "excessive_shedding": "skin",
-    "skin_discoloration": "skin", "skin_ulcers": "skin",
-    "skin_lesions": "skin", "skin_redness": "skin",
-    "skin_sloughing": "skin", "white_patches_skin": "skin",
-    "cotton_like_growth": "skin", "raised_nodules": "skin",
-    "dark_skin_nodules": "skin", "skin_thickening": "skin",
-    "hemorrhage": "skin", "petechiae": "skin",
-    "red_legs": "skin", "red_ventrum": "skin",
-    "dry_skin": "skin", "skin_blistering": "skin",
-    "skin_cysts": "skin", "skin_erosion": "skin",
-    "skin_hemorrhage": "skin", "skin_irritation": "skin",
-    "skin_masses": "skin", "skin_nodules": "skin",
-    "skin_papillomas": "skin", "skin_ulceration": "skin",
-    "skin_vesicles": "skin", "white_fuzzy_appearance": "skin",
-    "wrinkled_skin": "skin", "poor_shedding": "skin",
-    "dermatitis": "skin", "dark_skin_masses": "skin",
-    "tail_rot": "skin", "necrosis": "skin",
-    "abrasions": "skin", "wound": "skin",
-    "ulcerated_lesions": "skin", "ulceration": "skin",
-    "wart_like_growths": "skin", "tissue_necrosis": "skin",
-    "excessive_mucus": "skin", "color_change": "skin",
-    "pale_coloration": "skin", "pale_skin": "skin",
+    "skin_shedding": "skin",
+    "excessive_shedding": "skin",
+    "skin_discoloration": "skin",
+    "skin_ulcers": "skin",
+    "skin_lesions": "skin",
+    "skin_redness": "skin",
+    "skin_sloughing": "skin",
+    "white_patches_skin": "skin",
+    "cotton_like_growth": "skin",
+    "raised_nodules": "skin",
+    "dark_skin_nodules": "skin",
+    "skin_thickening": "skin",
+    "hemorrhage": "skin",
+    "petechiae": "skin",
+    "red_legs": "skin",
+    "red_ventrum": "skin",
+    "dry_skin": "skin",
+    "skin_blistering": "skin",
+    "skin_cysts": "skin",
+    "skin_erosion": "skin",
+    "skin_hemorrhage": "skin",
+    "skin_irritation": "skin",
+    "skin_masses": "skin",
+    "skin_nodules": "skin",
+    "skin_papillomas": "skin",
+    "skin_ulceration": "skin",
+    "skin_vesicles": "skin",
+    "white_fuzzy_appearance": "skin",
+    "wrinkled_skin": "skin",
+    "poor_shedding": "skin",
+    "dermatitis": "skin",
+    "dark_skin_masses": "skin",
+    "tail_rot": "skin",
+    "necrosis": "skin",
+    "abrasions": "skin",
+    "wound": "skin",
+    "ulcerated_lesions": "skin",
+    "ulceration": "skin",
+    "wart_like_growths": "skin",
+    "tissue_necrosis": "skin",
+    "excessive_mucus": "skin",
+    "color_change": "skin",
+    "pale_coloration": "skin",
+    "pale_skin": "skin",
     # 骨格・四肢
-    "soft_bones": "musculoskeletal", "jaw_deformity": "musculoskeletal",
-    "limb_deformity": "musculoskeletal", "spinal_deformity": "musculoskeletal",
-    "fractures": "musculoskeletal", "bone_deformity": "musculoskeletal",
-    "bone_weakness": "musculoskeletal", "jaw_softening": "musculoskeletal",
-    "spindly_legs": "musculoskeletal", "missing_digits": "musculoskeletal",
-    "lameness": "musculoskeletal", "limb_swelling": "musculoskeletal",
+    "soft_bones": "musculoskeletal",
+    "jaw_deformity": "musculoskeletal",
+    "limb_deformity": "musculoskeletal",
+    "spinal_deformity": "musculoskeletal",
+    "fractures": "musculoskeletal",
+    "bone_deformity": "musculoskeletal",
+    "bone_weakness": "musculoskeletal",
+    "jaw_softening": "musculoskeletal",
+    "spindly_legs": "musculoskeletal",
+    "missing_digits": "musculoskeletal",
+    "lameness": "musculoskeletal",
+    "limb_swelling": "musculoskeletal",
     "extra_limbs": "musculoskeletal",
     # 眼
-    "cloudy_eyes": "eyes", "eye_swelling": "eyes",
-    "corneal_opacity": "eyes", "cataracts": "eyes",
+    "cloudy_eyes": "eyes",
+    "eye_swelling": "eyes",
+    "corneal_opacity": "eyes",
+    "cataracts": "eyes",
     "sunken_eyes": "eyes",
     # 鰓（幼生・ネオテニー種）
-    "gill_abnormality": "gills", "gill_curling": "gills",
-    "gill_damage": "gills", "gill_irritation": "gills",
-    "gill_necrosis": "gills", "gill_retention": "gills",
-    "gill_shrinkage": "gills", "fin_rot": "gills",
+    "gill_abnormality": "gills",
+    "gill_curling": "gills",
+    "gill_damage": "gills",
+    "gill_irritation": "gills",
+    "gill_necrosis": "gills",
+    "gill_retention": "gills",
+    "gill_shrinkage": "gills",
+    "fin_rot": "gills",
     # 消化器
-    "diarrhea": "digestive", "constipation": "digestive",
-    "intestinal_prolapse": "digestive", "cloacal_prolapse": "digestive",
-    "gastric_prolapse": "digestive", "visible_worms": "digestive",
+    "diarrhea": "digestive",
+    "constipation": "digestive",
+    "intestinal_prolapse": "digestive",
+    "cloacal_prolapse": "digestive",
+    "gastric_prolapse": "digestive",
+    "visible_worms": "digestive",
     "regurgitation": "digestive",
-    "bloody_stool": "digestive", "intestinal_obstruction": "digestive",
+    "bloody_stool": "digestive",
+    "intestinal_obstruction": "digestive",
     "straining": "digestive",
     # 呼吸器
-    "dyspnea": "respiratory", "open_mouth_breathing": "respiratory",
-    "gasping": "respiratory", "rapid_breathing": "respiratory",
-    "gasping_at_surface": "respiratory", "respiratory_distress": "respiratory",
+    "dyspnea": "respiratory",
+    "open_mouth_breathing": "respiratory",
+    "gasping": "respiratory",
+    "rapid_breathing": "respiratory",
+    "gasping_at_surface": "respiratory",
+    "respiratory_distress": "respiratory",
     # 行動・全身
-    "lethargy": "behavior", "anorexia": "behavior",
-    "weakness": "behavior", "abnormal_posture": "behavior",
-    "hyperactivity": "behavior", "erratic_swimming": "behavior",
-    "loss_of_righting_reflex": "behavior", "reluctance_to_move": "behavior",
-    "inability_to_feed": "behavior", "poor_appetite": "behavior",
+    "lethargy": "behavior",
+    "anorexia": "behavior",
+    "weakness": "behavior",
+    "abnormal_posture": "behavior",
+    "hyperactivity": "behavior",
+    "erratic_swimming": "behavior",
+    "loss_of_righting_reflex": "behavior",
+    "reluctance_to_move": "behavior",
+    "inability_to_feed": "behavior",
+    "poor_appetite": "behavior",
     "appetite_loss": "behavior",
     # 神経
-    "tremors": "neurological", "seizures": "neurological",
-    "paralysis": "neurological", "incoordination": "neurological",
-    "neurological_signs": "neurological", "hind_limb_weakness": "neurological",
+    "tremors": "neurological",
+    "seizures": "neurological",
+    "paralysis": "neurological",
+    "incoordination": "neurological",
+    "neurological_signs": "neurological",
+    "hind_limb_weakness": "neurological",
     # 体型・腹部
-    "edema": "body", "bloating": "body",
-    "ascites": "body", "swelling": "body",
-    "subcutaneous_gas": "body", "buoyancy_problems": "body",
+    "edema": "body",
+    "bloating": "body",
+    "ascites": "body",
+    "swelling": "body",
+    "subcutaneous_gas": "body",
+    "buoyancy_problems": "body",
     "generalized_swelling": "body",
-    "obesity": "body", "weight_loss": "body",
-    "chronic_edema": "body", "inability_to_sink": "body",
-    "muscle_wasting": "body", "muscle_weakness": "body",
-    "stunted_growth": "body", "failure_to_thrive": "body",
+    "obesity": "body",
+    "weight_loss": "body",
+    "chronic_edema": "body",
+    "inability_to_sink": "body",
+    "muscle_wasting": "body",
+    "muscle_weakness": "body",
+    "stunted_growth": "body",
+    "failure_to_thrive": "body",
     # 内臓
-    "liver_enlargement": "internal", "organ_cysts": "internal",
-    "organ_enlargement": "internal", "organ_failure": "internal",
-    "jaundice": "internal", "anemia": "internal",
-    "septicemia": "internal", "internal_hemorrhage": "internal",
+    "liver_enlargement": "internal",
+    "organ_cysts": "internal",
+    "organ_enlargement": "internal",
+    "organ_failure": "internal",
+    "jaundice": "internal",
+    "anemia": "internal",
+    "septicemia": "internal",
+    "internal_hemorrhage": "internal",
     "incontinence": "internal",
     # 発達・その他
-    "metamorphosis_failure": "developmental", "failure_to_metamorphose": "developmental",
-    "dehydration": "general", "decreased_skin_elasticity": "general",
-    "mass_growth": "general", "rapid_growth": "general",
-    "tissue_protruding": "general", "neck_swelling": "general",
-    "maggots_visible": "general", "orange_red_nodules": "general",
-    "gold_dust_appearance": "general", "granulomatous_lesions": "general",
-    "immunosuppression": "general", "inability_to_use_limb": "general",
-    "collapse": "general", "death": "emergency",
-    "sudden_death": "emergency", "rapid_death": "emergency",
-    "tetany": "neurological", "vomiting": "digestive",
+    "metamorphosis_failure": "developmental",
+    "failure_to_metamorphose": "developmental",
+    "dehydration": "general",
+    "decreased_skin_elasticity": "general",
+    "mass_growth": "general",
+    "rapid_growth": "general",
+    "tissue_protruding": "general",
+    "neck_swelling": "general",
+    "maggots_visible": "general",
+    "orange_red_nodules": "general",
+    "gold_dust_appearance": "general",
+    "granulomatous_lesions": "general",
+    "immunosuppression": "general",
+    "inability_to_use_limb": "general",
+    "collapse": "general",
+    "death": "emergency",
+    "sudden_death": "emergency",
+    "rapid_death": "emergency",
+    "tetany": "neurological",
+    "vomiting": "digestive",
     # 新規追加症状
     "vocalization_loss": "behavior",
     "digit_necrosis": "skin",
-    "coelomic_distension": "body", "lymph_sac_edema": "body",
-    "microfilaria_visible": "internal", "goiter": "body",
+    "coelomic_distension": "body",
+    "lymph_sac_edema": "body",
+    "microfilaria_visible": "internal",
+    "goiter": "body",
     "thyroid_enlargement": "body",
 }
 
@@ -275,13 +347,20 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Chytridiomycosis (Bd)",
         "name_ja": "ツボカビ症（Bd）",
-        "symptoms": {"skin_shedding", "excessive_shedding", "skin_thickening", "lethargy", "anorexia", "loss_of_righting_reflex", "sudden_death"},
+        "symptoms": {
+            "skin_shedding",
+            "excessive_shedding",
+            "skin_thickening",
+            "lethargy",
+            "anorexia",
+            "loss_of_righting_reflex",
+            "sudden_death",
+        },
         "description": "Chytridiomycosis (Bd) is a fungal infection that can affect skin, respiratory, or systemic organs.",
         "description_ja": "ツボカビ菌（Bd）による感染で皮膚の電解質輸送が障害され、世界的な両生類減少の原因となっている致死的疾患。",
         "urgency": "emergency",
         "recommended_tests": ["PCR検査", "皮膚スクレイピング", "組織病理検査"],
         "causes": "Caused by the chytrid fungus Batrachochytrium dendrobatidis (Bd), which infects keratinized skin cells and disrupts cutaneous electrolyte transport. Transmission occurs through waterborne zoospores, and stress, cool temperatures, and immunosuppression increase susceptibility.",
-
         "causes_ja": "両生類におけるツボカビ症の原因: 両生類における真菌性の皮膚疾患。ツボカビ症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "Fungal organisms invade tissues through enzymatic degradation and mechanical pressure, eliciting granulomatous inflammation. Immunocompromised hosts are particularly susceptible to disseminated disease.",
         "pathophysiology_ja": "ツボカビ症は両生類における真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -339,7 +418,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["真菌培養", "組織病理検査", "皮膚生検"],
         "causes": "Caused by opportunistic fungi of the order Mucorales (e.g., Mucor, Rhizopus). Infection typically occurs via spore inhalation or wound contamination, particularly in immunocompromised or stressed amphibians.",
-
         "causes_ja": "両生類におけるムコール症の原因: ムコール属真菌による感染で組織壊死と全身症状を引き起こす。",
         "pathophysiology": "Fungal organisms invade tissues through enzymatic degradation and mechanical pressure, eliciting granulomatous inflammation. Immunocompromised hosts are particularly susceptible to disseminated disease.",
         "pathophysiology_ja": "ムコール症は両生類における真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -361,7 +439,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["皮膚生検", "真菌培養", "組織病理検査"],
         "causes": "Caused by dematiaceous (darkly pigmented) fungi that invade skin and subcutaneous tissues. Infection occurs through direct inoculation via skin wounds, and humid environments with poor ventilation increase susceptibility.",
-
         "causes_ja": "両生類における黒色真菌症の原因: 胞子吸入、直接接種、粘膜コロニー形成による真菌感染。免疫抑制、多湿環境、換気不良、長期抗菌薬使用が感受性を高める。",
         "pathophysiology": "Fungal organisms invade tissues through enzymatic degradation and mechanical pressure, eliciting granulomatous inflammation. Immunocompromised hosts are particularly susceptible to disseminated disease.",
         "pathophysiology_ja": "黒色真菌症は両生類における真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -378,13 +455,21 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Red Leg Syndrome",
         "name_ja": "レッドレッグ症候群",
-        "symptoms": {"red_legs", "red_ventrum", "hemorrhage", "petechiae", "lethargy", "anorexia", "edema", "skin_ulcers"},
+        "symptoms": {
+            "red_legs",
+            "red_ventrum",
+            "hemorrhage",
+            "petechiae",
+            "lethargy",
+            "anorexia",
+            "edema",
+            "skin_ulcers",
+        },
         "description": "Red Leg Syndrome is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "エロモナスなどの細菌感染による皮膚敗血症で腹面や四肢の発赤と全身症状を示す。",
         "urgency": "high",
         "recommended_tests": ["細菌培養", "感受性試験", "血液検査", "皮膚スワブ"],
         "causes": "Caused by opportunistic gram-negative bacteria, primarily Aeromonas hydrophila, that colonize through skin wounds or are exacerbated by stress, poor water quality, overcrowding, and immunosuppression.",
-
         "causes_ja": "両生類における赤脚病の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "赤脚病は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -406,7 +491,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["細菌培養", "感受性試験", "皮膚スクレイピング"],
         "causes": "Caused by opportunistic bacteria (Aeromonas, Pseudomonas, Citrobacter spp.) that colonize damaged skin following trauma, abrasion, or poor water quality. Stress and immunosuppression are predisposing factors.",
-
         "causes_ja": "両生類における細菌性皮膚炎の原因: 外傷や水質悪化に続発する表在性細菌性皮膚感染症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "細菌性皮膚炎は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -428,7 +512,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["抗酸菌染色", "組織病理検査", "PCR検査", "細菌培養"],
         "causes": "Caused by Mycobacterium spp. (e.g., M. marinum, M. fortuitum) that form chronic granulomatous infections. Transmission occurs through contaminated water, ingestion, or wound contact.",
-
         "causes_ja": "両生類におけるマイコバクテリウム症の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "マイコバクテリウム症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -450,7 +533,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["血液培養", "血液検査", "感受性試験"],
         "causes": "Caused by bacterial invasion of the bloodstream, most commonly by gram-negative organisms such as Aeromonas, Pseudomonas, or Citrobacter. Precipitated by stress, trauma, poor water quality, or concurrent disease.",
-
         "causes_ja": "両生類における敗血症の原因: 細菌が血流に侵入し全身感染を引き起こす重篤な状態。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "敗血症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -472,7 +554,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["PCR検査", "血液検査", "組織病理検査"],
         "causes": "Caused by Chlamydia spp. (primarily Chlamydia pneumoniae) infection. Transmission occurs through direct contact or aerosol exposure, and stress or immunosuppression increases susceptibility.",
-
         "causes_ja": "両生類におけるクラミジア症の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "クラミジア症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -495,7 +576,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["PCR検査", "ウイルス分離", "組織病理検査"],
         "causes": "Caused by ranaviruses (family Iridoviridae) transmitted through direct contact, contaminated water, or ingestion of infected tissue. Stress, overcrowding, and environmental changes increase susceptibility.",
-
         "causes_ja": "両生類におけるラナウイルス感染症の原因: ウイルス病原体による感染。直接接触、飛沫・空気感染、媒介物、ベクター媒介が感染経路。免疫抑制、ストレス、過密飼育、ワクチン未接種が感受性を高める。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "ラナウイルス感染症は両生類におけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -554,7 +634,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["糞便検査", "浮遊法", "顕微鏡検査"],
         "causes": "Caused by parasitic nematodes (roundworms) that infect the gastrointestinal tract. Transmission occurs through ingestion of infective eggs, larvae, or intermediate hosts. Poor hygiene and stress are predisposing factors.",
-
         "causes_ja": "消化器系組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の消化器系組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -576,7 +655,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["糞便検査", "組織病理検査", "顕微鏡検査"],
         "causes": "Caused by digenean trematodes (flukes) with complex life cycles involving snail intermediate hosts. Amphibians become infected by ingesting metacercariae or through cercarial skin penetration.",
-
         "causes_ja": "多臓器/全身組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の多臓器/全身組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -619,7 +697,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["組織病理検査", "顕微鏡検査", "湿潤標本検査"],
         "causes": "Caused by myxosporean parasites (Myxozoa) that infect various tissues. Transmission involves complex life cycles typically requiring an invertebrate alternate host.",
-
         "causes_ja": "両生類における粘液胞子虫感染症の原因: 粘液胞子虫による各組織でのシスト形成を伴う寄生虫感染症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "粘液胞子虫感染症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -635,13 +712,19 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ichthyophthirius (White Spot Disease)",
         "name_ja": "白点病（イクチオフチリウス症）",
-        "symptoms": {"white_patches_skin", "excessive_mucus", "skin_redness", "lethargy", "erratic_swimming", "gasping"},
+        "symptoms": {
+            "white_patches_skin",
+            "excessive_mucus",
+            "skin_redness",
+            "lethargy",
+            "erratic_swimming",
+            "gasping",
+        },
         "description": "Ichthyophthirius (White Spot Disease) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "白点虫の寄生により水生両生類幼生の皮膚に白点を形成する。",
         "urgency": "moderate",
         "recommended_tests": ["皮膚スクレイピング", "顕微鏡検査", "水質検査"],
         "causes": "Caused by the ciliate protozoan Ichthyophthirius multifiliis, which parasitizes the skin of aquatic amphibian larvae. Transmission occurs through waterborne theronts released from cysts.",
-
         "causes_ja": "両生類における白点病（イクチオフチリウス症）の原因: 白点虫の寄生により水生両生類幼生の皮膚に白点を形成する。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "白点病（イクチオフチリウス症）は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -663,7 +746,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["糞便検査", "顕微鏡検査"],
         "causes": "Caused by capillarid nematodes (Capillaria spp.) that parasitize the gastrointestinal tract, leading to mucosal damage, malnutrition, and debilitation.",
-
         "causes_ja": "両生類における毛細線虫症の原因: 毛細線虫の消化管寄生による栄養障害と衰弱。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "毛細線虫症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -685,7 +767,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "血液検査"],
         "causes": "Caused by aquatic leeches (Hirudinea) that attach to the skin and feed on blood, resulting in blood loss, anemia, and secondary bacterial infections at attachment sites.",
-
         "causes_ja": "両生類におけるヒル寄生症の原因: ヒルの体表寄生による失血と二次感染。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ヒル寄生症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -702,7 +783,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Metabolic Bone Disease",
         "name_ja": "代謝性骨疾患",
-        "symptoms": {"soft_bones", "jaw_deformity", "limb_deformity", "spinal_deformity", "fractures", "tremors", "weakness", "inability_to_feed"},
+        "symptoms": {
+            "soft_bones",
+            "jaw_deformity",
+            "limb_deformity",
+            "spinal_deformity",
+            "fractures",
+            "tremors",
+            "weakness",
+            "inability_to_feed",
+        },
         "description": "Metabolic Bone Disease is a metabolic disorder caused by calcium-phosphorus imbalance and/or vitamin D3 deficiency, leading to progressive skeletal demineralization, pathological fractures, and deformities.",
         "description_ja": "カルシウム・リン・ビタミンD3の不均衡による骨格変形と病的骨折。",
         "urgency": "high",
@@ -729,7 +819,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["血液検査", "食事内容評価", "眼科検査"],
         "causes": "Caused by dietary deficiency of vitamin A (retinol), typically from feeding an unvaried diet lacking carotenoid-rich prey items. Leads to squamous metaplasia of epithelial tissues.",
-
         "causes_ja": "両生類におけるビタミンA欠乏症の原因: ビタミンA不足による上皮組織の扁平上皮化生、特に眼に顕著。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ビタミンA欠乏症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -772,7 +861,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["血液検査", "X線検査", "飼育環境評価"],
         "causes": "Caused by insufficient vitamin D3 due to inadequate UVB light exposure and dietary deficiency. Results in impaired calcium metabolism and subsequent metabolic bone disease.",
-
         "causes_ja": "内分泌/代謝機能に影響する食事の欠乏または過剰が原因。両生類の食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "両生類の内分泌/代謝機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。両生類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
@@ -794,7 +882,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["血液検査", "食事内容評価", "神経学的検査"],
         "causes": "Caused by thiamine (vitamin B1) deficiency, typically from feeding a diet high in thiaminase-containing fish. Leads to neurological dysfunction due to impaired energy metabolism.",
-
         "causes_ja": "両生類におけるチアミン（ビタミンB1）欠乏症の原因: チアミナーゼを含む魚類中心の食事によるビタミンB1欠乏で神経症状を呈する。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "チアミン（ビタミンB1）欠乏症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -811,13 +898,20 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ammonia Poisoning",
         "name_ja": "アンモニア中毒",
-        "symptoms": {"skin_redness", "hemorrhage", "gasping", "erratic_swimming", "lethargy", "sudden_death", "gill_abnormality"},
+        "symptoms": {
+            "skin_redness",
+            "hemorrhage",
+            "gasping",
+            "erratic_swimming",
+            "lethargy",
+            "sudden_death",
+            "gill_abnormality",
+        },
         "description": "Ammonia Poisoning is a toxicological condition caused by exposure to harmful substances.",
         "description_ja": "水中アンモニア濃度上昇による鰓・皮膚の障害。",
         "urgency": "emergency",
         "recommended_tests": ["水質検査（アンモニア）", "鰓検査", "血液検査"],
         "causes": "Caused by elevated ammonia levels in the aquatic environment due to inadequate filtration, overcrowding, or overfeeding. Ammonia damages gill epithelium and permeable skin.",
-
         "causes_ja": "両生類におけるアンモニア中毒の原因: 水中アンモニア濃度上昇による鰓・皮膚の障害。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "アンモニア中毒は両生類における中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -839,7 +933,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["水質検査（亜硝酸）", "血液検査"],
         "causes": "Caused by elevated nitrite levels in the water, which induce methemoglobinemia by oxidizing hemoglobin, impairing oxygen transport in the blood.",
-
         "causes_ja": "両生類における亜硝酸中毒の原因: 亜硝酸塩の毒性によるメトヘモグロビン血症で酸素輸送が障害される。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "亜硝酸中毒は両生類における中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -861,7 +954,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["水質検査（残留塩素）", "身体検査"],
         "causes": "Caused by exposure to chlorinated or chloraminated tap water that has not been dechlorinated. Chlorine and chloramine cause acute chemical damage to gills and permeable skin.",
-
         "causes_ja": "両生類における塩素・クロラミン中毒の原因: 塩素処理水への曝露による急性の皮膚・鰓障害。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "塩素・クロラミン中毒は両生類における中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -883,7 +975,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["毒物スクリーニング", "水質検査", "血液検査"],
         "causes": "Caused by exposure to environmental contaminants including pesticides, herbicides, heavy metals, and industrial pollutants. Amphibians are highly susceptible due to their permeable skin.",
-
         "causes_ja": "両生類における化学物質中毒（農薬・重金属）の原因: 農薬、除草剤、重金属などの環境汚染物質による中毒。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "化学物質中毒（農薬・重金属）は両生類における中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -905,7 +996,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["水質検査", "皮膚検査", "身体検査"],
         "causes": "Caused by chronic exposure to elevated ammonia levels in the aquatic environment, resulting in progressive chemical burns to the skin and mucous membranes.",
-
         "causes_ja": "両生類におけるアンモニア熱傷の原因: 慢性的なアンモニア高濃度環境による皮膚・粘膜の化学的熱傷。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "アンモニア熱傷は両生類における外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -928,7 +1018,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["環境温度測定", "身体検査"],
         "causes": "Caused by ambient temperatures exceeding the species-specific thermal tolerance range. Amphibians are ectothermic and cannot thermoregulate effectively when environmental temperatures are excessive.",
-
         "causes_ja": "両生類における温熱ストレス（高体温症）の原因: 種の耐性を超える高温環境による熱ストレス。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "温熱ストレス（高体温症）は両生類における行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
@@ -959,7 +1048,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dehydration",
         "name_ja": "脱水症",
-        "symptoms": {"sunken_eyes", "dry_skin", "decreased_skin_elasticity", "lethargy", "anorexia", "weight_loss", "dehydration"},
+        "symptoms": {
+            "sunken_eyes",
+            "dry_skin",
+            "decreased_skin_elasticity",
+            "lethargy",
+            "anorexia",
+            "weight_loss",
+            "dehydration",
+        },
         "description": "Dehydration is a condition of inadequate body fluid volume requiring fluid replacement therapy.",
         "description_ja": "湿度不足、浸水機会の欠如、または疾病による体液喪失。",
         "urgency": "high",
@@ -986,7 +1083,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "創傷培養", "X線検査"],
         "causes": "Caused by physical injury from rough enclosure surfaces, improper handling, conspecific aggression, or predator attacks. Skin abrasions in amphibians readily become secondarily infected.",
-
         "causes_ja": "両生類における外傷・擦傷の原因: 飼育環境の危険物、ハンドリング、同種間攻撃による物理的損傷。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "外傷・擦傷は両生類における外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -1009,7 +1105,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["超音波検査", "血液生化学検査", "腹水穿刺検査", "X線検査"],
         "causes": "Caused by fluid accumulation due to renal, hepatic, or cardiac dysfunction, or by osmotic imbalance from poor water quality. Bacterial septicemia is a common underlying cause.",
-
         "causes_ja": "両生類における浮腫・水腫（腹水症）の原因: 腎臓・肝臓・心臓機能障害による全身性または局所的な液体貯留。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "浮腫・水腫（腹水症）は両生類における循環器疾患である。心臓、大血管、または末梢血管系の構造的・機能的異常を伴う。心拍出量の低下、弁膜機能障害、調律異常により組織灌流が障害される。代償機構（神経ホルモン活性化、心室リモデリング）が一時的に機能を維持するが、進行性の心筋劣化を引き起こす。心不全、血栓塞栓症、突然死が進行期疾患の潜在的結果である。",
@@ -1031,7 +1126,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["水質検査（溶存酸素）", "身体検査", "X線検査"],
         "causes": "Caused by gas supersaturation of the water, leading to gas bubble formation in blood vessels and tissues. Typically results from rapid changes in water temperature or pressure.",
-
         "causes_ja": "両生類における気泡病の原因: 環境的危険、落下、不適切な取り扱い、同種間攻撃、捕食者攻撃、温度極端による物理的損傷。不適切な飼育環境がリスクを高める。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "気泡病は両生類における外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -1054,7 +1148,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["X線検査", "超音波検査", "身体検査"],
         "causes": "Caused by ingestion of substrate material, oversized prey items, or foreign objects that obstruct the gastrointestinal tract. Inappropriate substrate and feeding practices are primary risk factors.",
-
         "causes_ja": "両生類における腸閉塞（腸インパクション）の原因: 床材、大きすぎる餌、異物の摂取による消化管閉塞。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "腸閉塞（腸インパクション）は両生類における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -1076,7 +1169,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["X線検査", "超音波検査", "身体検査"],
         "causes": "Caused by accidental ingestion of non-food items such as substrate particles, decorations, or other foreign bodies that cause gastrointestinal obstruction.",
-
         "causes_ja": "消化器系組織への物理的外傷が原因。転落・ケージ損傷・取扱い事故・同居個体や捕食者からの咬傷・環境危険物が一般的原因。両生類の解剖学的特性が特定の損傷タイプへの素因となりうる。二次合併症として感染・治癒遅延・慢性疼痛がある。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "両生類の消化器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
@@ -1098,7 +1190,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "X線検査", "食事評価"],
         "causes": "Caused by overfeeding or ingestion of excessively large prey items, leading to gastric overdistension and subsequent regurgitation.",
-
         "causes_ja": "両生類における胃過負荷の原因: 過剰給餌による胃拡張と吐き戻し。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "胃過負荷は両生類における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -1121,7 +1212,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["physical_exam", "fecal_exam", "radiographs", "ultrasound"],
         "causes": "Caused by: 1) Excessive straining: constipation (impaction, dystocia, egg retention), diarrhea, parasitic infection (endoparasites, nematodes), tenesmus; 2) Metabolic: hypocalcemia (calcium-dependent smooth muscle dysfunction), dehydration, malnutrition; 3) Anatomical: cloacal weakness from prior trauma, anatomical abnormality; 4) Reproductive: egg binding, dystocia, oviductal prolapse.",
-
         "causes_ja": "両生類の総排泄腔脱の原因：過度なストレイニング（便秘/下痢、難産、卵詰まり、内寄生虫感染）。代謝性：低カルシウム血症（カルシウム依存性平滑筋機能不全）、脱水、栄養不良。解剖学的：先行外傷からの総排泄腔弱化、解剖学的異常。生殖器：卵詰まり、難産、卵管脱出。",
         "pathophysiology": "Cloacal prolapse results from excessive straining or weakened cloacal wall (from hypocalcemia or anatomical factors). Straining increases intra-luminal pressure, forcing mucosa through cloacal opening. Prolapsed tissue becomes edematous from venous/lymphatic obstruction. Amphibian skin is permeable; prolonged exposure to air causes rapid drying, tissue necrosis, and bacterial colonization. Necrotic tissue (dark purple/black, desiccated) is irreversible and requires amputation. Amphibians maintain high skin moisture; even brief air exposure is damaging compared to reptiles.",
         "pathophysiology_ja": "総排泄腔脱は過度ストレイニングまたは低カルシウム血症/解剖学的弱点による総排泄腔壁脆弱化で生じる。内腔圧亢進で粘膜が総排泄腔開口から押し出される。脱出組織は静脈/リンパ閉塞で浮腫。両生類の皮膚は透過性が高い；短時間の空気暴露でも粘膜乾燥・壊死・細菌コロニー化。壊死組織（暗紫色/黒、乾燥）は不可逆性→切除必要。",
@@ -1143,7 +1233,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["身体検査", "X線検査"],
         "causes": "Caused by forceful regurgitation or straining that results in eversion of the stomach through the mouth. Often associated with gastric overload, foreign body ingestion, or parasitism.",
-
         "causes_ja": "両生類における胃脱の原因: 胃が口から反転脱出する緊急状態。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "胃脱は両生類における外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
@@ -1165,7 +1254,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["身体検査", "X線検査"],
         "causes": "Caused by chronic straining from parasitism, constipation, foreign body obstruction, or dystocia, resulting in prolapse of intestinal tissue through the cloaca.",
-
         "causes_ja": "消化器系組織への物理的外傷が原因。転落・ケージ損傷・取扱い事故・同居個体や捕食者からの咬傷・環境危険物が一般的原因。両生類の解剖学的特性が特定の損傷タイプへの素因となりうる。二次合併症として感染・治癒遅延・慢性疼痛がある。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "両生類の消化器系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。両生類では損傷からのストレスが追加の全身合併症を引き起こしうる。",
@@ -1188,7 +1276,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "飼育環境評価", "食事内容評価"],
         "causes": "Caused by nutritional deficiencies (especially calcium and vitamin D3), inadequate UVB exposure, and improper husbandry during larval and early post-metamorphic development.",
-
         "causes_ja": "筋骨格系機能に影響する食事の欠乏または過剰が原因。両生類の食性は特定の栄養バランスを必要とする。不適切な食事が主要栄養素の欠乏・過剰をもたらす。紫外線・温度・水質などの飼育因子も栄養状態に影響しうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "両生類の筋骨格系機能に影響する栄養欠乏または過剰は食事の不均衡に起因する。必須栄養素の不十分な摂取が細胞機能・組織修復・免疫能を障害する。両生類の食性は特定の栄養バランスを必要とし、不適切な給餌が臨床疾患を引き起こす。慢性的な栄養不均衡は進行性の組織損傷・代謝機能障害・二次合併症をもたらす。",
@@ -1210,7 +1297,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["X線検査", "身体検査"],
         "causes": "Caused by congenital or developmental axial skeletal shortening in tadpoles and froglets, often linked to genetic factors, water quality issues, or nutritional deficiencies during development.",
-
         "causes_ja": "両生類におけるショートボディ症候群の原因: オタマジャクシおよび子ガエルにおける先天的・発達的な軸骨格短縮。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ショートボディ症候群は両生類における先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
@@ -1233,7 +1319,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["組織生検", "X線検査", "超音波検査", "血液検査"],
         "causes": "Caused by spontaneous neoplastic transformation, with various tumor types reported in amphibians. Aging, chronic inflammation, viral infection, and environmental carcinogens may contribute.",
-
         "causes_ja": "両生類における腫瘍性疾患の原因: 皮膚、肝臓、腎臓その他の臓器に発生する良性または悪性腫瘍。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "腫瘍性疾患は両生類における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -1256,7 +1341,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "low",
         "recommended_tests": ["眼科検査", "血液脂質検査", "食事内容評価"],
         "causes": "Caused by lipid deposition in the corneal stroma, associated with hyperlipidemia from metabolic disorders, obesity, high-fat diets, or hepatic dysfunction.",
-
         "causes_ja": "両生類における角膜脂質症の原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
         "pathophysiology": "Hepatocellular damage impairs metabolic, synthetic, and detoxification functions. Progressive injury leads to inflammation, fibrosis, and potential hepatic failure with systemic consequences.",
         "pathophysiology_ja": "角膜脂質症は両生類における代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -1278,7 +1362,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "low",
         "recommended_tests": ["眼科検査", "超音波検査"],
         "causes": "Caused by lens opacification due to aging, UV exposure, nutritional deficiencies, metabolic disorders, toxin exposure, or congenital factors.",
-
         "causes_ja": "加齢・慢性的摩耗・累積的損傷による眼科組織の進行性劣化が原因。遺伝的素因・慢性炎症・酸化ストレス・不適切な飼育条件が寄与。両生類の飼育管理と食事因子が変性変化を加速しうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "両生類の眼科組織における進行性変性変化は、細胞構造と機能の漸進的喪失を伴う。酸化ストレス・慢性炎症・細胞老化・組織修復障害が関与する。加齢変化・累積的環境侵襲・遺伝的素因が疾患進行に寄与する。飼育管理と食事要因が変性疾患を悪化させうる。",
@@ -1300,7 +1383,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["身体検査", "血液検査", "水質検査"],
         "causes": "Caused by fluid accumulation around the eyes secondary to systemic disease, bacterial infection, renal dysfunction, or poor water quality.",
-
         "causes_ja": "両生類における眼窩周囲浮腫の原因: 全身疾患、感染、水質問題に関連する眼周囲の腫脹。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "眼窩周囲浮腫は両生類における眼科疾患である。眼球、付属器、または視覚経路に影響を及ぼす炎症性、変性、または構造的変化を伴う。眼内炎症は血液房水関門・血液網膜関門を破壊し、蛋白漏出、細胞浸潤、視力喪失の可能性がある。眼圧上昇は視神経と網膜神経節細胞を損傷する。角膜潰瘍はデスメ膜瘤や穿孔に進行しうる。",
@@ -1323,7 +1405,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["血液生化学検査", "尿検査", "超音波検査"],
         "causes": "Caused by renal pathology from infectious agents, nephrotoxins, chronic dehydration, urolithiasis, or congenital defects. Aging, diet, and species-specific susceptibility are contributing factors.",
-
         "causes_ja": "両生類における腎不全の原因: 感染性病原体、毒素、免疫学的過程、尿石症、先天性欠損、慢性脱水による腎病理。加齢、食事、種特異的感受性が寄与因子。",
         "pathophysiology": "Progressive loss of functional nephrons impairs glomerular filtration, tubular reabsorption, and endocrine function. Uremic toxin accumulation and fluid-electrolyte imbalance lead to systemic complications.",
         "pathophysiology_ja": "腎不全は両生類における腎・泌尿器疾患である。腎臓、尿管、膀胱、または尿道の構造的・機能的障害を伴う。腎疾患は糸球体濾過、尿細管再吸収・分泌、およびホルモン機能（エリスロポエチン、カルシトリオール、レニン）を障害する。進行性のネフロン喪失により高窒素血症、電解質異常、酸塩基障害が生じる。下部尿路疾患は閉塞、尿石症、上行感染を引き起こしうる。",
@@ -1345,7 +1426,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["血液生化学検査", "超音波検査", "肝生検"],
         "causes": "Caused by excessive hepatic lipid accumulation, typically from obesity, high-fat diets, starvation-induced lipid mobilization, or metabolic disorders.",
-
         "causes_ja": "両生類における肝リピドーシスの原因: 臓器機能障害、ホルモンバランス異常、食事因子、遺伝的素因、加齢による代謝・内分泌経路の調節障害。肥満と運動不足が寄与しうる。",
         "pathophysiology": "Hepatocellular damage impairs metabolic, synthetic, and detoxification functions. Progressive injury leads to inflammation, fibrosis, and potential hepatic failure with systemic consequences.",
         "pathophysiology_ja": "肝リピドーシスは両生類における代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -1442,7 +1522,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["細菌培養", "水質検査", "身体検査"],
         "causes": "Caused by opportunistic bacteria (Aeromonas, Pseudomonas, Flavobacterium spp.) that cause progressive necrosis of the tail and extremities, exacerbated by poor water quality.",
-
         "causes_ja": "両生類における尾腐れ・壊死性皮膚炎の原因: 水質悪化に伴う細菌性の尾や四肢末端の進行性壊死。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "尾腐れ・壊死性皮膚炎は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1464,7 +1543,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["水質検査", "鰓スクレイピング", "細菌培養"],
         "causes": "Caused by bacterial infection (primarily Flavobacterium and Aeromonas spp.) of larval gills, often secondary to poor water quality, overcrowding, or elevated ammonia levels.",
-
         "causes_ja": "両生類における鰓壊死（幼生期）の原因: 細菌感染や環境要因による両生類幼生の外鰓障害。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "鰓壊死（幼生期）は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1477,7 +1555,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"young"},
     },
-
     # ── 追加疾患 (Additional Diseases) ──
     {
         "name": "Batrachochytrium salamandrivorans (Bsal) - Systemic",
@@ -1524,7 +1601,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["histopathology", "PCR_herpesvirus", "ultrasound"],
         "causes": "Caused by Lucke tumor herpesvirus (Ranid herpesvirus 1) that induces renal adenocarcinoma in leopard frogs (Rana pipiens). Temperature-dependent viral replication influences tumor development.",
-
         "causes_ja": "両生類におけるルッケ腫瘍ヘルペスウイルス（腎癌）の原因: ヒョウガエルにおけるヘルペスウイルス関連腎腺癌。",
         "pathophysiology": "Viral particles enter host cells, hijack cellular machinery for replication, and cause cell lysis or immune-mediated damage. The host immune response may contribute to tissue pathology.",
         "pathophysiology_ja": "ルッケ腫瘍ヘルペスウイルス（腎癌）は両生類におけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1546,7 +1622,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["PCR_FV3", "histopathology", "virus_isolation"],
         "causes": "Caused by Frog Virus 3 (FV3), the type species of the genus Ranavirus (family Iridoviridae), which causes hemorrhagic disease and multiorgan necrosis in amphibians.",
-
         "causes_ja": "両生類におけるカエルウイルス3型（FV3）の原因: ラナウイルスの基準種で、出血性疾患と多臓器壊死を引き起こす。",
         "pathophysiology": "FV3 (Iridoviridae, Ranavirus) enters host cells via viremia, replicating in hepatocytes, renal tubular epithelium, gastrointestinal epithelium, and endothelium. Massive hemorrhage results from endothelial damage, coagulopathy, and multi-organ necrosis. Stress and immunosuppression dramatically increase susceptibility and mortality.",
         "pathophysiology_ja": "FV3（イリドウイルス科、ラナウイルス属）はウイルス血症を介して宿主細胞に侵入し、肝細胞・腎尿細管上皮・消化管上皮・血管内皮で複製する。血管内皮損傷・凝固障害・多臓器壊死による大量出血を引き起こす。ストレスと免疫抑制で感受性と死亡率が劇的に上昇する。",
@@ -1568,7 +1643,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["PCR_ATV", "histopathology"],
         "causes": "Caused by Ambystoma tigrinum virus (ATV), a ranavirus that primarily affects tiger salamanders and related ambystomatid species, causing systemic hemorrhagic disease.",
-
         "causes_ja": "両生類におけるタイガーサラマンダーウイルスの原因: 主にタイガーサラマンダーと関連種に疾患を引き起こすラナウイルス。",
         "pathophysiology": "ATV (Iridoviridae, Ranavirus) replicates primarily in tiger salamander (Ambystoma tigrinum) and related ambystomatids. Viremia disseminates virus to hepatocytes, renal tubules, GI epithelium, hematopoietic tissue. Infection causes hepatic necrosis, renal failure, GI hemorrhage, and multi-organ dysfunction. Virulence varies by strain; some strains cause near 100% mortality in larvae during mass mortality events in western US salamander populations.",
         "pathophysiology_ja": "ATV（イリドウイルス科、ラナウイルス属）は主にタイガーサラマンダー（Ambystoma tigrinum）と関連アンビストマ類で複製する。ウイルス血症により肝細胞・腎尿細管・消化管上皮・造血組織にウイルスが播種される。肝壊死・腎不全・消化管出血・多臓器機能障害を引き起こす。毒性は株により変動; 一部株は米国西部サンショウウオ集団の大量死事件で幼生にほぼ100%致死率を示す。",
@@ -1590,7 +1664,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["PCR_calicivirus", "histopathology", "skin_biopsy"],
         "causes": "Caused by calicivirus infection in amphibians, producing vesicular skin lesions. Transmission occurs through direct contact or contaminated water.",
-
         "causes_ja": "両生類におけるカリシウイルス感染症の原因: 両生類に水疱性皮膚疾患を引き起こすカリシウイルス。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "カリシウイルス感染症は両生類におけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1612,7 +1685,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["PCR_adenovirus", "histopathology"],
         "causes": "Caused by adenovirus infection transmitted through direct contact, fomites, or contaminated water. Immunosuppression, stress, and overcrowding increase susceptibility.",
-
         "causes_ja": "両生類におけるアデノウイルス感染の原因: ウイルス病原体による感染。直接接触、飛沫・空気感染、媒介物、ベクター媒介が感染経路。免疫抑制、ストレス、過密飼育、ワクチン未接種が感受性を高める。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "アデノウイルス感染は両生類におけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1634,7 +1706,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "low",
         "recommended_tests": ["biopsy", "histopathology"],
         "causes": "Caused by papillomavirus infection that induces cutaneous papillomas (wart-like growths) in anuran amphibians. Transmission occurs through direct contact.",
-
         "causes_ja": "両生類におけるパピローマウイルス感染症の原因: 無尾類に皮膚乳頭腫を引き起こすパピローマウイルス。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "パピローマウイルス感染症は両生類におけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -1656,7 +1727,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
         "causes": "Caused by acute infection with Aeromonas hydrophila, an opportunistic gram-negative bacterium that causes severe red leg syndrome and septicemia, particularly under stressful conditions.",
-
         "causes_ja": "両生類におけるエロモナス・ハイドロフィラ急性感染症の原因: 急性エロモナス感染による重度のレッドレッグと敗血症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "エロモナス・ハイドロフィラ急性感染症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1678,7 +1748,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "gram_stain"],
         "causes": "Caused by Pseudomonas aeruginosa and related species, opportunistic gram-negative bacteria that cause skin ulceration and septicemia, especially in immunocompromised amphibians.",
-
         "causes_ja": "両生類における緑膿菌感染の原因: 両生類における細菌性の多臓器/全身疾患。緑膿菌感染は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "緑膿菌感染は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1700,7 +1769,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing"],
         "causes": "Caused by Citrobacter freundii, an opportunistic gram-negative bacterium that produces ulcerative skin disease and septicemia in stressed or immunocompromised amphibians.",
-
         "causes_ja": "両生類におけるシトロバクター感染症の原因: シトロバクター・フロインディによる潰瘍性皮膚疾患と敗血症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "シトロバクター感染症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1722,7 +1790,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "skin_scraping", "gill_biopsy"],
         "causes": "Caused by Flavobacterium spp. that produce skin erosion and gill disease, particularly in larval amphibians. Poor water quality is a major predisposing factor.",
-
         "causes_ja": "両生類におけるフラボバクテリウム感染症の原因: フラボバクテリウムによる皮膚びらんと鰓疾患。特に幼生に多い。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "フラボバクテリウム感染症は両生類における皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -1744,7 +1811,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "PCR_salmonella"],
         "causes": "Caused by Salmonella spp. infection, typically acquired through contaminated water, food, or fecal-oral transmission. Amphibians can be asymptomatic carriers and a zoonotic risk.",
-
         "causes_ja": "両生類におけるサルモネラ症の原因: 創傷汚染、経口摂取、吸入、日和見的過剰増殖による細菌コロニー形成。ストレス、免疫抑制、不衛生、過密飼育、併発疾患が素因となる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "サルモネラ症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1766,7 +1832,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "CBC"],
         "causes": "Caused by Elizabethkingia meningoseptica (formerly Chryseobacterium), an opportunistic gram-negative bacterium that causes septicemia and meningitis in amphibians.",
-
         "causes_ja": "両生類におけるエリザベスキンギア感染症の原因: エリザベスキンギア・メニンゴセプティカによる敗血症と髄膜炎。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "エリザベスキンギア感染症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1788,7 +1853,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["bacterial_culture", "histopathology"],
         "causes": "Caused by Erysipelothrix rhusiopathiae, a gram-positive bacterium that causes acute septicemia in amphibians. Infection occurs through skin wounds or ingestion.",
-
         "causes_ja": "両生類における丹毒の原因: エリシペロスリクスによる敗血症。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "丹毒は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1810,7 +1874,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "biopsy", "histopathology"],
         "causes": "Caused by Basidiobolus ranarum, a zygomycete fungus commonly found in amphibian gastrointestinal tracts that can cause subcutaneous granulomatous infection.",
-
         "causes_ja": "両生類におけるバシディオボルス感染症の原因: バシディオボルス・ラナルムによる皮下接合菌症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "バシディオボルス感染症は両生類における真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -1832,7 +1895,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["fungal_culture", "skin_biopsy"],
         "causes": "Caused by Fusarium spp., opportunistic filamentous fungi that cause cutaneous mycosis in amphibians, particularly in immunocompromised individuals or those with skin damage.",
-
         "causes_ja": "両生類におけるフザリウム感染症の原因: フザリウム属による皮膚真菌症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "フザリウム感染症は両生類における真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -1854,7 +1916,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["fungal_culture", "histopathology", "radiography"],
         "causes": "Caused by Aspergillus spp. infection through spore inhalation or direct wound inoculation. Immunosuppression, high humidity, poor ventilation, and prolonged antibiotic use increase susceptibility.",
-
         "causes_ja": "両生類におけるアスペルギルス症の原因: 胞子吸入、直接接種、粘膜コロニー形成による真菌感染。免疫抑制、多湿環境、換気不良、長期抗菌薬使用が感受性を高める。",
         "pathophysiology": "Fungal organisms invade tissues through enzymatic degradation and mechanical pressure, eliciting granulomatous inflammation. Immunocompromised hosts are particularly susceptible to disseminated disease.",
         "pathophysiology_ja": "アスペルギルス症は両生類における真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
@@ -1876,7 +1937,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["skin_biopsy", "histopathology"],
         "causes": "Caused by Dermocystidium spp., protistan parasites that form dermal and subcutaneous cysts in amphibians. Transmission occurs through waterborne spores.",
-
         "causes_ja": "両生類におけるデルモシスチジウム感染症の原因: デルモシスチジウム属による両生類の皮膚嚢胞。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "デルモシスチジウム感染症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -1898,7 +1958,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["blood_smear", "PCR_trypanosoma"],
         "causes": "Caused by Trypanosoma spp., flagellate blood parasites transmitted by leeches or other hematophagous vectors. Infection causes anemia and immunosuppression.",
-
         "causes_ja": "両生類におけるトリパノソーマ症の原因: ヒル媒介のトリパノソーマ属血液寄生虫。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "トリパノソーマ症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1920,7 +1979,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["histopathology", "skin_biopsy"],
         "causes": "Caused by myxozoan parasites that infect multiple organ systems through complex life cycles involving invertebrate alternate hosts. Poor water quality and overcrowding increase exposure.",
-
         "causes_ja": "多臓器/全身組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の多臓器/全身組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -1942,7 +2000,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["histopathology", "fecal_examination", "radiography"],
         "causes": "Caused by heavy metacercarial encystment of digenean trematodes, particularly Ribeiroia ondatrae, which causes limb deformities and organ damage in developing amphibians.",
-
         "causes_ja": "両生類における吸虫被嚢（重度寄生）の原因: 吸虫メタセルカリアの重度被嚢による肢奇形と臓器障害。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "吸虫被嚢（重度寄生）は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1964,7 +2021,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "low",
         "recommended_tests": ["fecal_float", "fecal_examination"],
         "causes": "Caused by oxyurid (pinworm) nematodes that parasitize the gastrointestinal tract. Transmission occurs through ingestion of embryonated eggs via the fecal-oral route.",
-
         "causes_ja": "両生類における蟯虫感染症の原因: 消化管の蟯虫寄生。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "蟯虫感染症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -1986,7 +2042,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "lung_wash", "radiography"],
         "causes": "Caused by Rhabdias spp. lungworms that parasitize the lungs of frogs and toads. These nematodes have a direct life cycle with free-living and parasitic generations.",
-
         "causes_ja": "両生類におけるラブディアス肺虫症の原因: カエル・ヒキガエルの肺のラブディアス属肺虫。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ラブディアス肺虫症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -2008,7 +2063,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["fecal_float", "fecal_examination"],
         "causes": "Caused by Strongyloides spp. nematodes capable of autoinfection, where larvae can re-infect the host without leaving the body, leading to hyperinfection in immunosuppressed individuals.",
-
         "causes_ja": "両生類における糞線虫症の原因: 自家感染能を持つ糞線虫属感染症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "糞線虫症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -2030,7 +2084,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["fecal_examination"],
         "causes": "Caused by acanthocephalan (thorny-headed) worms that attach to the intestinal wall using a hooked proboscis, causing inflammation and intestinal damage.",
-
         "causes_ja": "両生類における鉤頭虫感染症の原因: 鉤頭虫による腸管炎症。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "鉤頭虫感染症は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -2088,7 +2141,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "tick_removal"],
         "causes": "Caused by tick (Ixodidae or Argasidae) attachment to the skin, resulting in blood loss, local tissue damage, and potential transmission of blood-borne pathogens.",
-
         "causes_ja": "皮膚組織に感染する寄生虫が原因。感染期（卵・オーシスト・幼虫）の経口摂取・直接接触・ベクター・経皮侵入で伝播。不衛生・屋外曝露・免疫抑制・ストレスが素因。両生類の食性が特定の寄生虫生活環への曝露を増加させうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介により両生類の皮膚組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
@@ -2110,7 +2162,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology"],
         "causes": "Caused by malignant neoplastic transformation of fibroblasts. Contributing factors include aging, chronic inflammation, viral infection, and genetic predisposition.",
-
         "causes_ja": "両生類における線維肉腫の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "線維肉腫は両生類における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2132,7 +2183,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology"],
         "causes": "Caused by malignant neoplastic transformation of squamous epithelial cells. Contributing factors include chronic skin irritation, UV exposure, and genetic predisposition.",
-
         "causes_ja": "両生類における扁平上皮癌の原因: 両生類における腫瘍性の皮膚疾患。扁平上皮癌は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "扁平上皮癌は両生類における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2154,7 +2204,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "CBC"],
         "causes": "Caused by malignant neoplastic transformation of lymphocytes. Contributing factors include viral infection, chronic immune stimulation, aging, and genetic predisposition.",
-
         "causes_ja": "両生類におけるリンパ腫の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "リンパ腫は両生類における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2176,7 +2225,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["biopsy", "histopathology"],
         "causes": "Caused by malignant neoplastic transformation of melanocytes. Contributing factors include UV exposure, genetic predisposition, and chronic inflammation.",
-
         "causes_ja": "両生類におけるメラノーマの原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "メラノーマは両生類における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2198,7 +2246,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "histopathology"],
         "causes": "Caused by malignant neoplastic transformation of hepatocytes. Contributing factors include chronic hepatic inflammation, environmental carcinogens, and aging.",
-
         "causes_ja": "両生類における肝細胞癌の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "肝細胞癌は両生類における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2220,7 +2267,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["ultrasound", "biopsy", "histopathology"],
         "causes": "Caused by malignant renal neoplasia, in some species associated with Lucke tumor herpesvirus (Ranid herpesvirus 1) infection.",
-
         "causes_ja": "両生類における腎腺癌の原因: 悪性腎腫瘍。ヘルペスウイルス関連の場合がある。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "腎腺癌は両生類におけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
@@ -2242,7 +2288,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["radiography", "biopsy", "histopathology"],
         "causes": "Caused by malignant neoplastic transformation of osteoblasts. Contributing factors include chronic inflammation, previous fractures, and genetic predisposition.",
-
         "causes_ja": "両生類における骨肉腫の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "骨肉腫は両生類における腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
@@ -2264,7 +2309,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["radiography", "blood_chemistry"],
         "causes": "Caused by physical trauma (falls, crush injuries, handling accidents) or pathological fractures secondary to metabolic bone disease (MBD) from calcium/vitamin D3 deficiency.",
-
         "causes_ja": "両生類における四肢骨折・外傷の原因: 外傷やMBDによる骨折。",
         "pathophysiology": "Mechanical force exceeds bone strength, causing cortical disruption. Associated soft tissue damage, hemorrhage, and inflammation follow. Healing proceeds through hematoma formation, callus development, and remodeling.",
         "pathophysiology_ja": "四肢骨折・外傷は両生類における代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -2322,7 +2366,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "dietary_review"],
         "causes": "Caused by dietary deficiency of vitamin E (alpha-tocopherol), leading to oxidative damage of muscle and neural tissues, resulting in white muscle disease and neurological signs.",
-
         "causes_ja": "両生類におけるビタミンE欠乏症の原因: ビタミンE欠乏による筋ジストロフィーと神経症状。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ビタミンE欠乏症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2344,7 +2387,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "low",
         "recommended_tests": ["dietary_history", "response_to_supplementation"],
         "causes": "Caused by dietary biotin deficiency, leading to impaired keratin synthesis and skin integrity. May result from feeding raw egg whites containing avidin.",
-
         "causes_ja": "両生類におけるビオチン欠乏症の原因: ビオチン欠乏による皮膚障害。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ビオチン欠乏症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2366,7 +2408,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["thyroid_panel", "dietary_review"],
         "causes": "Caused by dietary iodine deficiency, resulting in thyroid gland hyperplasia (goiter) and failure of thyroid hormone-dependent metamorphosis in larvae.",
-
         "causes_ja": "両生類におけるヨウ素欠乏症（甲状腺腫）の原因: ヨウ素欠乏による甲状腺腫と幼生の変態障害。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ヨウ素欠乏症（甲状腺腫）は両生類における代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -2388,7 +2429,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["dietary_analysis", "blood_chemistry"],
         "causes": "Caused by insufficient dietary protein intake, leading to impaired growth, poor wound healing, immunosuppression, and muscle wasting.",
-
         "causes_ja": "両生類におけるタンパク質欠乏症の原因: タンパク質不足による筋消耗。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "タンパク質欠乏症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2410,7 +2450,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["blood_glucose", "blood_chemistry"],
         "causes": "Caused by blood glucose depletion due to starvation, hepatic disease, septicemia, or prolonged anorexia. Neonates and small species are particularly susceptible.",
-
         "causes_ja": "両生類における低血糖症の原因: 飢餓や肝疾患による低血糖。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "低血糖症は両生類における代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
@@ -2432,7 +2471,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["blood_chemistry", "husbandry_review"],
         "causes": "Caused by insufficient exposure to ultraviolet B (UVB) radiation, impairing cutaneous vitamin D3 synthesis and subsequent calcium metabolism.",
-
         "causes_ja": "両生類における紫外線不足症の原因: D3合成にUVBが必要な種における紫外線不足。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "紫外線不足症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2454,7 +2492,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["blood_lead_level", "blood_chemistry"],
         "causes": "Caused by lead exposure from contaminated water, soil, or ingestion of lead-containing materials. Lead inhibits heme synthesis and causes neurotoxicity.",
-
         "causes_ja": "両生類における鉛中毒の原因: 環境汚染による鉛中毒。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "鉛中毒は両生類における中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -2476,7 +2513,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["blood_zinc_level", "blood_chemistry"],
         "causes": "Caused by zinc toxicosis from ingestion of or contact with galvanized metal fixtures in the enclosure. Zinc causes gastrointestinal irritation and systemic toxicity.",
-
         "causes_ja": "両生類における亜鉛中毒の原因: 飼育ケージの亜鉛メッキ金具からの亜鉛中毒。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "亜鉛中毒は両生類における中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -2498,7 +2534,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["water_quality_testing", "blood_chemistry"],
         "causes": "Caused by copper toxicosis from copper-treated water, copper plumbing, or copper-containing fixtures. Amphibians are highly sensitive to copper ions due to their permeable skin.",
-
         "causes_ja": "両生類における銅中毒の原因: 銅処理水や銅金具からの銅中毒。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "銅中毒は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2520,7 +2555,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["water_quality_testing", "clinical_examination"],
         "causes": "Caused by abrupt changes in water pH, leading to osmotic stress and damage to the skin and gill epithelium. Both acidic and alkaline extremes are harmful.",
-
         "causes_ja": "両生類におけるpHショックの原因: 水環境の急激なpH変化による浸透圧ストレス。",
         "pathophysiology": "pH Shock is a behavioral condition. Sudden pH change in aquatic environment causing osmotic stress. The behavioral pathology involves dysregulation of neurochemical signaling (serotonin, dopamine, norepinephrine, GABA) in brain circuits governing emotional regulation, stress response, and learned behaviors. Environmental stressors, inadequate socialization, inappropriate husbandry, or underlying medical conditions may trigger or exacerbate behavioral abnormalities. Chronic stress activates the hypothalamic-pituitary-adrenal axis, leading to elevated cortisol and immunosuppression.",
         "pathophysiology_ja": "pHショックは両生類における行動疾患である。情動調節、ストレス応答、学習行動を制御する脳回路における神経化学的シグナル伝達（セロトニン、ドーパミン、ノルエピネフリン、GABA）の調節障害を伴う。環境ストレス、不適切な社会化、不適切な飼育管理、基礎疾患が行動異常を惹起・悪化させることがある。慢性ストレスは視床下部-下垂体-副腎系を活性化し、コルチゾール上昇と免疫抑制を引き起こす。",
@@ -2542,7 +2576,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["water_quality_testing", "dissolved_oxygen_measurement"],
         "causes": "Caused by insufficient dissolved oxygen in the aquatic environment due to poor aeration, overcrowding, high water temperature, or organic waste accumulation.",
-
         "causes_ja": "両生類における溶存酸素低下症の原因: 水中酸素化不足による低酸素症。",
         "pathophysiology": "Low dissolved oxygen (DO) causes progressive tissue hypoxia in aquatic amphibians, particularly gilled larvae and obligate aquatic species (axolotls, Xenopus, aquatic caudates). DO solubility is temperature-dependent (cold water holds more O2), and adequate DO for larvae/gilled caudates requires >5 mg/L; levels <3 mg/L cause acute distress, <2 mg/L cause rapid mortality. Causes: inadequate aeration, overstocking, high organic load (decomposing waste/plants consuming O2), high temperature (>26°C in temperate species), algal bloom die-off, stagnant water, power failure disabling filtration.",
         "pathophysiology_ja": "溶存酸素（DO）低下は水棲両生類、特に鰓を有する幼生と絶対水棲種（アホロートル、アフリカツメガエル、水棲有尾類）に進行性組織低酸素症を引き起こす。DO溶解度は温度依存性（冷水ほど多くのO2を保持）で、幼生/鰓を有する有尾類に適正なDOは>5 mg/Lを要し、<3 mg/Lで急性ストレス、<2 mg/Lで急速死亡。原因: エアレーション不足、過密飼育、高有機負荷（分解廃棄物/植物によるO2消費）、高温（温帯種で>26℃）、藻類ブルーム崩壊、停滞水、濾過停止させる停電。",
@@ -2564,7 +2597,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["water_quality_testing", "blood_chemistry"],
         "causes": "Caused by chronic exposure to elevated nitrate levels in the water, leading to immunosuppression, impaired growth, and progressive organ damage.",
-
         "causes_ja": "両生類における高硝酸塩毒性の原因: 慢性的な硝酸塩高値による免疫抑制と臓器障害。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "高硝酸塩毒性は両生類における中毒性疾患である。有害物質の経口摂取、吸入、または経皮吸収により中毒障害が生じる。毒素は酵素阻害、受容体干渉、酸化的損傷、直接的な細胞毒性などの特定のメカニズムを通じて細胞プロセスを障害する。標的臓器は毒素により異なるが、肝臓（生体内変換）、腎臓（排泄）、神経系、消化管が一般的である。用量依存的に無症候性変化から劇症型臓器不全まで幅広い影響を及ぼす。",
@@ -2586,7 +2618,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "skin_scraping", "gill_biopsy"],
         "causes": "Caused by Flavobacterium columnare, a gram-negative bacterium that produces skin erosion and gill disease in aquatic amphibians, especially under warm water conditions.",
-
         "causes_ja": "両生類におけるカラムナリス病の原因: フラボバクテリウム・コラムナーレによる水棲両生類の皮膚びらんと鰓疾患。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "カラムナリス病は両生類における皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2608,7 +2639,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["bacterial_culture", "sensitivity_testing", "biopsy"],
         "causes": "Caused by chronic Aeromonas spp. infection resulting in persistent, non-healing skin ulcers. Often associated with suboptimal water quality and chronic stress.",
-
         "causes_ja": "両生類におけるエロモナス慢性感染症の原因: エロモナスの慢性感染による治癒しない皮膚潰瘍。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "エロモナス慢性感染症は両生類における皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2630,7 +2660,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["skin_scraping", "microscopy"],
         "causes": "Caused by Oodinium spp. (Piscinoodinium), dinoflagellate ectoparasites that produce a characteristic gold-dust or velvet-like coating on the skin of aquatic amphibians.",
-
         "causes_ja": "両生類におけるウーディニウム症（ベルベット病）の原因: 水棲両生類にベルベット様皮膚被覆を引き起こすウーディニウム渦鞭毛虫感染症。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ウーディニウム症（ベルベット病）は両生類における皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2652,7 +2681,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["skin_scraping", "microscopy", "water_quality_testing"],
         "causes": "Caused by Vorticella spp., peritrich ciliate protozoans that attach to the skin and gills in deteriorating water quality conditions, causing irritation and respiratory compromise.",
-
         "causes_ja": "両生類におけるツリガネムシ寄生症の原因: 水質悪化時に皮膚と鰓に付着するツリガネムシ繊毛虫。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "ツリガネムシ寄生症は両生類における皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
@@ -2674,7 +2702,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["microscopy", "water_quality_testing"],
         "causes": "Caused by predatory planarian flatworms (Turbellaria) that attack amphibian eggs, larvae, and small juveniles, causing tissue damage and mortality.",
-
         "causes_ja": "両生類におけるプラナリア寄生の原因: 幼生両生類の鰓と皮膚を損傷するプラナリア扁形動物。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "プラナリア寄生は両生類における寄生虫疾患である。寄生虫は経口摂取、経皮的侵入、またはベクター媒介伝播を通じて感染を確立する。抗原変異、免疫調節、細胞内隔離により宿主の免疫防御を回避しながら、宿主の栄養と資源を利用して増殖する。組織損傷は寄生虫の直接的な摂食、機械的破壊、有毒代謝副産物、宿主の炎症・免疫応答に起因する。重度の寄生虫感染は貧血、栄養失調、臓器機能障害、二次感染を引き起こしうる。",
@@ -2696,7 +2723,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["fecal_wet_mount", "fecal_smear"],
         "causes": "Caused by overgrowth of flagellate protozoans (e.g., Hexamita, Spironucleus) in the gastrointestinal tract, often triggered by stress or immunosuppression.",
-
         "causes_ja": "両生類における腸管鞭毛虫感染症の原因: 消化管における鞭毛虫原虫の過増殖。",
         "pathophysiology": "Bacterial organisms invade host tissues, triggering inflammatory cascades with neutrophil recruitment, cytokine release, and potential tissue necrosis. Systemic spread may lead to bacteremia and multi-organ dysfunction.",
         "pathophysiology_ja": "腸管鞭毛虫感染症は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -2718,7 +2744,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["radiography", "clinical_examination"],
         "causes": "Caused by gastric torsion (volvulus) following ingestion of excessively large prey or overfeeding, resulting in rotation and obstruction of the stomach.",
-
         "causes_ja": "両生類における胃捻転の原因: 過食や大きすぎる餌による胃捻転。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "胃捻転は両生類における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -2740,7 +2765,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["ultrasound", "radiography", "blood_chemistry"],
         "causes": "Caused by: 1) Environmental: inadequate water temperature cycling, lack of breeding rain/water level changes, absence of appropriate substrate for egg-laying, low humidity/desiccation; 2) Hormonal: inadequate GnRH signaling, absence of male pheromone/courtship stimulation, poor body condition (malnutrition, obesity); 3) Physical: mechanical obstruction (pelvic abnormalities, oversized eggs), oviductal stricture/impaction, hypocalcemia-related neuromuscular failure; 4) Systemic disease: chronic illness, obesity, metabolic disorder.",
-
         "causes_ja": "両生類における繁殖障害・卵停滞の原因：環境因子（水温サイクル不適切、繁殖雨/水位変化不足、産卵基質不足、低湿度/乾燥）。ホルモン異常（GnRH不足、雄フェロモン/求愛刺激不足、不良な体況）。物理的閉塞（骨盤異常、過大卵、卵管狭窄/便秘、低カルシウム血症）。全身疾患（慢性疾患、肥満、代謝異常）。",
         "pathophysiology": "Egg retention in amphibians results from failed ovulation/oviposition due to inadequate HPO axis signaling or mechanical obstruction. Unlike terrestrial reptiles, amphibians require specific water triggers (rain, water level changes, temperature cycling) for breeding. Without these environmental cues, ovulation cascade does not initiate. If eggs develop (ovulation occurs) but oviposition fails, retained eggs accumulate within oviducts/coelomic cavity. Prolonged retention causes eggshell thinning/weakening, oviductal edema, vascular compromise, and bacterial translocation. Broken eggs leak yolk into coelomic cavity causing yolk coelomitis, peritonitis, and sepsis. In amphibians, thin/permeable skin permits rapid disease progression and sepsis.",
         "pathophysiology_ja": "両生類の卵停滞は不十分なHPO軸刺激または機械的閉塞による排卵/産卵失敗で生じる。爬虫類と異なり両生類は繁殖に特定の水トリガー（雨、水位変化、温度サイクル）を必要。環境キューなしで排卵カスケード開始されず。卵発生（排卵成功）でも産卵失敗時、卵が卵管/体腔に蓄積。長期停滞で卵殻菲薄化/脆弱化、卵管浮腫、血管障害、細菌易位。両生類の薄い/透過性皮膚で疾患進行・敗血症が急速。",
@@ -2762,7 +2786,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["CBC", "blood_smear"],
         "causes": "Caused by accelerated red blood cell destruction due to infectious agents, toxins, immune-mediated processes, or oxidative damage, resulting in anemia.",
-
         "causes_ja": "両生類における溶血性貧血の原因: 寄生虫や毒素による赤血球破壊。",
         "pathophysiology": "Hemolytic anemia results from accelerated red blood cell destruction in amphibians exceeding compensatory erythropoiesis. Mechanisms include: hemoparasitism (Trypanosoma, Hepatozoon, Lankesterella, Dactylosoma via leech/mosquito vectors), oxidative stress from environmental toxins (chlorine, chloramine, heavy metals, nitrite), immune-mediated hemolysis, microangiopathic destruction in septicemia, and osmotic damage from inappropriate water quality. Amphibian erythrocytes are nucleated with longer life span than mammalian RBCs (>100 days) and regenerative response is slower; chronic hemolysis causes progressive tissue hypoxia, lethargy, and compensatory cardiomegaly.",
         "pathophysiology_ja": "両生類における溶血性貧血は代償性赤血球造血を超える赤血球破壊の加速により生じる。機序: 血液寄生虫症（Trypanosoma、Hepatozoon、Lankesterella、Dactylosoma — ヒル/蚊ベクター経由）、環境毒素による酸化ストレス（塩素、クロラミン、重金属、亜硝酸）、免疫介在性溶血、敗血症における微小血管性破壊、不適切な水質による浸透圧損傷。両生類赤血球は有核で哺乳類RBCより長寿命（>100日）、再生反応は緩徐；慢性溶血は進行性組織低酸素、嗜眠、代償性心肥大を引き起こす。",
@@ -2784,7 +2807,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "histopathology"],
         "causes": "Caused by calcium deposition in renal tubules due to dietary mineral imbalance, chronic dehydration, or vitamin D3 excess, leading to progressive renal damage.",
-
         "causes_ja": "両生類における腎石灰沈着症の原因: 必須栄養素の欠乏・過剰・吸収不良を含む食事バランスの異常。不適切な食事組成、単調な給餌、種に不適切な食物、吸収障害が主要因。",
         "pathophysiology": "Progressive loss of functional nephrons impairs glomerular filtration, tubular reabsorption, and endocrine function. Uremic toxin accumulation and fluid-electrolyte imbalance lead to systemic complications.",
         "pathophysiology_ja": "腎石灰沈着症は両生類における栄養障害である。特定の栄養素の不十分な摂取、吸収不良、または過剰摂取により生じる。欠乏状態では、影響を受けた栄養素を補因子または基質として必要とする生化学的経路が障害され、細胞機能障害を引き起こす。過剰状態では組織への蓄積や栄養素間相互作用の障害により毒性が生じる。種特異的な食事要求により、適切な栄養管理が予防に不可欠である。",
@@ -2806,7 +2828,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["skin_biopsy", "environmental_review"],
         "causes": "Caused by exposure to photosensitizing agents (certain plants, chemicals, or medications) that render the skin hypersensitive to ultraviolet light, causing dermal necrosis.",
-
         "causes_ja": "皮膚に影響する有毒物質への曝露が原因。一般的な毒素：重金属（鉛・亜鉛）・家庭用化学物質・有毒植物・農薬・薬物（不適切使用・偶発曝露）・環境汚染物質。両生類の食性と生理学的特性が毒素の吸収・代謝・感受性に影響しうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "両生類の皮膚組織に影響する中毒曝露は、有害物質の経口摂取・吸入・経皮吸収に起因する。毒素は直接的な細胞毒性・酸化ストレス・ミトコンドリア機能障害・重要酵素経路の攪乱を介して細胞を損傷する。両生類の食性と生理学的特性が毒素の吸収と代謝に影響しうる。臓器特異的損傷は毒素の薬物動態と標的臓器親和性に依存する。",
@@ -2828,7 +2849,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "emergency",
         "recommended_tests": ["blood_chemistry", "coelomocentesis", "CBC"],
         "causes": "Caused by severe generalized edema secondary to organ failure (renal, hepatic, cardiac), septicemia, or severe osmotic imbalance.",
-
         "causes_ja": "両生類における全身浮腫・膨満の原因: 臓器不全や敗血症による重度全身浮腫。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "全身浮腫・膨満は両生類における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -2886,7 +2906,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "liver_biopsy", "histopathology"],
         "causes": "Caused by hepatic inflammation from infectious agents (bacteria, viruses, parasites), toxin exposure, or metabolic disorders affecting the liver.",
-
         "causes_ja": "両生類の肝臓/胆道組織における炎症過程が原因。感染・外傷・自己免疫応答・中毒曝露・異物反応が誘因。慢性炎症は持続的な抗原刺激や免疫調節異常に起因しうる。両生類の種特異的炎症反応は家畜種と異なりうる。",
         "pathophysiology": "Hepatocellular damage impairs metabolic, synthetic, and detoxification functions. Progressive injury leads to inflammation, fibrosis, and potential hepatic failure with systemic consequences.",
         "pathophysiology_ja": "両生類の肝臓/胆道組織における炎症過程は、自然免疫および適応免疫応答の活性化を伴う。炎症性サイトカイン（TNF-α、IL-1、IL-6）とケモカインが好中球・マクロファージ・リンパ球を患部組織に動員する。持続的炎症は組織浮腫・血管透過性変化・進行性組織損傷をもたらす。両生類の生理学的特性が炎症反応パターンと治癒能力に影響しうる。",
@@ -2908,7 +2927,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["blood_chemistry", "ultrasound"],
         "causes": "Caused by inflammation of the pancreas due to infectious agents, dietary factors, toxin exposure, or metabolic derangements.",
-
         "causes_ja": "両生類の消化器系組織における炎症過程が原因。感染・外傷・自己免疫応答・中毒曝露・異物反応が誘因。慢性炎症は持続的な抗原刺激や免疫調節異常に起因しうる。両生類の種特異的炎症反応は家畜種と異なりうる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "両生類の消化器系組織における炎症過程は、自然免疫および適応免疫応答の活性化を伴う。炎症性サイトカイン（TNF-α、IL-1、IL-6）とケモカインが好中球・マクロファージ・リンパ球を患部組織に動員する。持続的炎症は組織浮腫・血管透過性変化・進行性組織損傷をもたらす。両生類の生理学的特性が炎症反応パターンと治癒能力に影響しうる。",
@@ -2930,7 +2948,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["water_quality_testing", "clinical_examination"],
         "causes": "Caused by poor water quality (especially high ammonia or nitrite), genetic predisposition, or chronic gill irritation, resulting in anterior curling of axolotl external gills.",
-
         "causes_ja": "両生類におけるアホロートル鰓カールの原因: 水質不良や遺伝によるアホロートルの鰓前方カール。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "アホロートル鰓カールは両生類における先天性・遺伝性疾患である。胚発生中の発達異常または遺伝子変異に起因する。構造的奇形により正常な臓器の発達と機能が障害される。遺伝子変異は酵素活性、構造タンパク質、調節経路に影響しうる。出生時に存在するか、動物の成長に伴い発現する場合がある。選択的交配により特定の品種・系統で遺伝性疾患の有病率が高まることがある。",
@@ -2952,7 +2969,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["radiography", "water_quality_testing", "dietary_review"],
         "causes": "Caused by gastrointestinal gas accumulation, constipation, or swim bladder-like dysfunction in axolotls, leading to uncontrolled buoyancy and inability to remain submerged.",
-
         "causes_ja": "両生類におけるアホロートル浮遊障害の原因: 消化管や体腔のガス蓄積による浮力障害。",
         "pathophysiology": "Axolotl floating disorder (Ambystoma mexicanum) results from abnormal buoyancy when an axolotl cannot remain submerged on the tank bottom. Common mechanisms: (1) gastrointestinal gas accumulation from overfeeding, constipation, bacterial fermentation, ingestion of air-containing prey, or aerophagia; (2) coelomic effusion with gas pockets from ascites or peritonitis; (3) rare cloacal prolapse with air entrapment. The inability to submerge causes physical stress, epidermal desiccation of exposed portions, gill drying if tilted, and secondary behavioral distress. Constipation is the most common underlying cause; intestinal gas from high-fat diet fermentation, dysbiosis from antibiotic use, or coldness slowing GI motility are contributing factors.",
         "pathophysiology_ja": "アホロートル浮遊障害（Ambystoma mexicanum）は水槽底に沈めなくなる異常浮力から生じる。主な機序: (1) 過剰給餌、便秘、細菌発酵、気体含有餌の摂食、または空気嚥下による消化管ガス蓄積; (2) 腹水または腹膜炎からのガスポケットを伴う体腔液貯留; (3) 稀に空気捕捉を伴う排泄腔脱。潜水不能は物理ストレス、露出部位の表皮乾燥、傾斜時の鰓乾燥、二次行動的苦痛を招く。便秘が最頻の基礎原因；高脂肪食発酵による腸内ガス、抗菌薬使用による乱腸内細菌叢、GI運動低下を招く低温が寄与因子。",
@@ -2974,7 +2990,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["radiography", "environmental_testing", "histopathology"],
         "causes": "Caused by developmental limb malformations resulting from trematode metacercarial encystment (especially Ribeiroia), chemical contaminant exposure, UV radiation, or genetic factors.",
-
         "causes_ja": "両生類における肢奇形（発育性）の原因: 寄生虫・化学物質・UV照射による発育性肢奇形。",
         "pathophysiology": "Developmental limb deformities arise during tadpole metamorphosis when limb bud formation is disrupted. Primary causes: (1) trematode metacercarial encystment — Ribeiroia ondatrae cercariae mechanically disrupt developing limb buds causing extra limbs, bone duplication, or absence (Johnson 2007 PLOS Biology); (2) environmental contaminants — atrazine, agricultural runoff, endocrine-disrupting chemicals (EDCs); (3) UV-B radiation damage to embryonic tissue; (4) nutritional deficiencies in gravid female or during early development; (5) genetic predispositions. Deformities are STRUCTURAL and IRREVERSIBLE once metamorphosis is complete — treatment focuses on quality of life support and prevention in future generations, not limb correction.",
         "pathophysiology_ja": "発育性肢奇形は、オタマジャクシの変態中に肢芽形成が撹乱される際に発生。主要原因: (1) 吸虫メタセルカリア嚢包 — Ribeiroia ondatraeセルカリアが発育中の肢芽を機械的に撹乱し余剰肢・骨重複・欠損を引き起こす（Johnson 2007 PLOS Biology）; (2) 環境汚染物質 — アトラジン、農業流出物、内分泌攪乱化学物質（EDCs）; (3) 胚組織へのUV-B放射線損傷; (4) 抱卵雌または初期発育中の栄養欠乏; (5) 遺伝素因。奇形は変態完了後は構造的・不可逆 — 治療は肢矯正でなくQOL支援と将来世代の予防に焦点。",
@@ -2987,8 +3002,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"young"},
     },
-
-
     # ── 追加疾患2 ──
     {
         "name": "Disseminated Granulomatous Disease",
@@ -2999,7 +3012,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["biopsy", "histopathology", "acid_fast_stain"],
         "causes": "Caused by systemic granulomatous inflammation from mycobacterial or fungal infections that disseminate to multiple organs via hematogenous spread.",
-
         "causes_ja": "両生類における播種性肉芽腫性疾患の原因: マイコバクテリアや真菌による多臓器肉芽腫。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "播種性肉芽腫性疾患は両生類における細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
@@ -3021,7 +3033,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "husbandry_review"],
         "causes": "Caused by inadequate environmental humidity and insufficient access to water sources for terrestrial amphibian species, leading to progressive dehydration through their permeable skin.",
-
         "causes_ja": "両生類における慢性脱水（陸生種）の原因: 陸生両生類における長期的な湿度不足による脱水。",
         "pathophysiology": "Chronic dehydration in terrestrial amphibians develops when cutaneous water loss exceeds intake over extended periods. Amphibian skin is highly permeable and water loss occurs rapidly in dry environments; unlike mammals, amphibians cannot concentrate urine significantly and rely on environmental humidity and cutaneous rehydration via the pelvic patch (specialized ventral skin region). Chronic dehydration causes progressive hyperosmolarity, hemoconcentration, renal dysfunction (prerenal azotemia progressing to intrinsic damage), hepatic lipidosis from metabolic stress, and eventually cardiovascular collapse. Unlike acute dehydration, chronic dehydration often presents with weight loss, wrinkled skin, sunken eyes, and behavioral changes rather than obvious distress.",
         "pathophysiology_ja": "陸生両生類の慢性脱水は、長期間にわたり経皮水分喪失が摂取を超えると発生。両生類の皮膚は高度に透過性で乾燥環境下で急速な水分喪失が生じる; 哺乳類と異なり両生類は尿を顕著に濃縮できず、環境湿度と骨盤パッチ（特殊化した腹側皮膚領域）経由の経皮再水和に依存する。慢性脱水は進行性高浸透圧、血液濃縮、腎機能障害（腎前性高窒素血症から内因性損傷への進行）、代謝ストレスによる肝リピドーシス、そして最終的に心血管虚脱を引き起こす。急性脱水と異なり慢性脱水はしばしば明らかな苦痛でなく体重減少、皮膚のしわ、眼窩陥没、行動変化として顕在化する。",
@@ -3043,7 +3054,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["radiography", "contrast_study"],
         "causes": "Caused by ingestion of enclosure substrate material (gravel, soil, moss particles) during feeding, resulting in gastrointestinal obstruction.",
-
         "causes_ja": "両生類における床材インパクションの原因: 床材の摂取による消化管閉塞。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "床材インパクションは両生類における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
@@ -3065,7 +3075,6 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["thyroid_panel", "water_quality_testing", "husbandry_review"],
         "causes": "Caused by failure to complete metamorphosis due to iodine deficiency, thyroid dysfunction, environmental factors, or genetic predisposition, leading to complications in obligate neotenic species.",
-
         "causes_ja": "両生類における変態障害（幼形成熟合併症）の原因: 甲状腺機能障害や環境因子による変態完了の障害。",
         "pathophysiology": "Metamorphosis in amphibians is driven by thyroid hormone (T3 and T4) surge triggered by environmental cues and regulated by hypothalamic-pituitary-thyroid axis. Failure to metamorphose can occur from: (1) iodine deficiency preventing thyroid hormone synthesis (most common); (2) primary thyroid dysfunction; (3) endocrine-disrupting chemicals (perchlorate, PCBs, atrazine, pesticides) interfering with hormone synthesis or signaling; (4) low temperature preventing normal developmental progression; (5) genetic mutations (common in axolotls which are OBLIGATE neotenic and naturally do not metamorphose); (6) chronic stress elevating cortisol which suppresses thyroid. Distinguish between obligate neoteny (normal in Ambystoma mexicanum — axolotl) which is physiologic and requires NO treatment, and pathological failure to metamorphose which is the clinical problem.",
         "pathophysiology_ja": "両生類の変態は視床下部-下垂体-甲状腺軸により調節され環境刺激により誘発される甲状腺ホルモン（T3およびT4）サージによって駆動される。変態失敗の原因: (1) 甲状腺ホルモン合成を妨げるヨウ素欠乏（最多）; (2) 原発性甲状腺機能障害; (3) ホルモン合成またはシグナル伝達を妨げる内分泌攪乱化学物質（過塩素酸塩、PCBs、アトラジン、農薬）; (4) 正常発育進行を妨げる低温; (5) 遺伝変異（アホロートルでは一般的 — 絶対的幼形成熟で自然には変態しない）; (6) 甲状腺を抑制するコルチゾール上昇を招く慢性ストレス。生理的で治療不要の絶対的幼形成熟（Ambystoma mexicanum — アホロートルで正常）と、臨床問題である病的変態失敗を区別する。",
@@ -3093,7 +3102,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"young", "adult", "senior"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: 大型サンショウウオ (Giant Salamander) 関連疾患
     # Andrias davidianus / A. japonicus / A. sligoi — 世界最大の両生類
@@ -3101,7 +3109,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Giant Salamander Skin Ulcer Disease",
         "name_ja": "オオサンショウウオ皮膚潰瘍病",
-        "symptoms": {"skin_ulcers", "skin_lesions", "hemorrhage", "lethargy", "anorexia", "skin_redness", "excessive_mucus", "weight_loss"},
+        "symptoms": {
+            "skin_ulcers",
+            "skin_lesions",
+            "hemorrhage",
+            "lethargy",
+            "anorexia",
+            "skin_redness",
+            "excessive_mucus",
+            "weight_loss",
+        },
         "description": "Severe ulcerative dermatitis in giant salamanders (Andrias spp.) caused by Aeromonas hydrophila and other gram-negative bacteria, often secondary to stress or water quality deterioration.",
         "description_ja": "オオサンショウウオ（Andrias属）に多発する重度の潰瘍性皮膚炎。Aeromonas hydrophilaなどのグラム陰性菌による日和見感染で、ストレスや水質悪化が誘因。",
         "urgency": "high",
@@ -3122,7 +3139,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Giant Salamander Iridovirus Disease",
         "name_ja": "オオサンショウウオイリドウイルス病",
-        "symptoms": {"hemorrhage", "skin_hemorrhage", "petechiae", "edema", "lethargy", "anorexia", "sudden_death", "organ_failure"},
+        "symptoms": {
+            "hemorrhage",
+            "skin_hemorrhage",
+            "petechiae",
+            "edema",
+            "lethargy",
+            "anorexia",
+            "sudden_death",
+            "organ_failure",
+        },
         "description": "A highly lethal iridoviral infection in Chinese and Japanese giant salamanders (Andrias spp.) causing systemic hemorrhagic disease with high mortality in farmed populations.",
         "description_ja": "中国産・日本産オオサンショウウオに発生する高致死性イリドウイルス感染症。養殖個体群で全身性出血性疾患を引き起こし、高い致死率を示す。",
         "urgency": "emergency",
@@ -3143,7 +3169,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cryptobranchid Gill Disease (Larval)",
         "name_ja": "サンショウウオ科幼生鰓疾患",
-        "symptoms": {"gill_necrosis", "gill_damage", "gill_abnormality", "rapid_breathing", "lethargy", "anorexia", "failure_to_thrive"},
+        "symptoms": {
+            "gill_necrosis",
+            "gill_damage",
+            "gill_abnormality",
+            "rapid_breathing",
+            "lethargy",
+            "anorexia",
+            "failure_to_thrive",
+        },
         "description": "Gill disease affecting larval giant salamanders and hellbenders (Cryptobranchidae), caused by bacterial or fungal pathogens in suboptimal water conditions.",
         "description_ja": "オオサンショウウオ科（Cryptobranchidae）の幼生に発生する鰓疾患。不適切な水質環境における細菌・真菌感染が原因。",
         "urgency": "high",
@@ -3161,7 +3195,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"puppy"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: ゴライアスガエル (Goliath Frog) 関連疾患
     # Conraua goliath — 世界最大のカエル
@@ -3169,7 +3202,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Goliath Frog Stress Syndrome",
         "name_ja": "ゴライアスガエルストレス症候群",
-        "symptoms": {"anorexia", "lethargy", "skin_discoloration", "weight_loss", "excessive_mucus", "reluctance_to_move", "vocalization_loss"},
+        "symptoms": {
+            "anorexia",
+            "lethargy",
+            "skin_discoloration",
+            "weight_loss",
+            "excessive_mucus",
+            "reluctance_to_move",
+            "vocalization_loss",
+        },
         "description": "Chronic maladaptation syndrome in captive goliath frogs (Conraua goliath) due to inability to replicate their specific habitat requirements of fast-flowing, oxygen-rich rivers.",
         "description_ja": "ゴライアスガエル（Conraua goliath）の飼育下で発生する慢性不適応症候群。急流・高酸素の自然環境を再現できないことによるストレス反応。",
         "urgency": "moderate",
@@ -3208,14 +3249,22 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: パックマンフロッグ (Ceratophrys) 関連疾患
     # ══════════════════════════════════════════════════════════════════
     {
         "name": "Pacman Frog Water Edema Syndrome",
         "name_ja": "パックマンフロッグ水浮腫症候群",
-        "symptoms": {"edema", "bloating", "lymph_sac_edema", "generalized_swelling", "lethargy", "anorexia", "regurgitation", "ascites"},
+        "symptoms": {
+            "edema",
+            "bloating",
+            "lymph_sac_edema",
+            "generalized_swelling",
+            "lethargy",
+            "anorexia",
+            "regurgitation",
+            "ascites",
+        },
         "description": "Severe subcutaneous and coelomic fluid accumulation in horned frogs (Ceratophrys spp.), commonly called 'balloon frog syndrome'. Often secondary to renal failure, hepatic disease, or septicemia.",
         "description_ja": "ツノガエル属（Ceratophrys）に多発する重度の皮下・体腔内液貯留。「バルーンフロッグ症候群」と呼ばれる。腎不全、肝疾患、敗血症に続発することが多い。",
         "urgency": "high",
@@ -3275,14 +3324,23 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"puppy", "young", "adult"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: ヤドクガエル (Poison Dart Frog / Dendrobatidae) 関連疾患
     # ══════════════════════════════════════════════════════════════════
     {
         "name": "Dendrobatid Chytridiomycosis (Bd - Dart Frog)",
         "name_ja": "ヤドクガエルツボカビ症",
-        "symptoms": {"skin_shedding", "excessive_shedding", "skin_thickening", "lethargy", "anorexia", "weight_loss", "abnormal_posture", "loss_of_righting_reflex", "sudden_death"},
+        "symptoms": {
+            "skin_shedding",
+            "excessive_shedding",
+            "skin_thickening",
+            "lethargy",
+            "anorexia",
+            "weight_loss",
+            "abnormal_posture",
+            "loss_of_righting_reflex",
+            "sudden_death",
+        },
         "description": "Chytridiomycosis in poison dart frogs (Dendrobates, Phyllobates, Epipedobates spp.) with species-specific treatment protocols. Dart frogs are highly susceptible due to their thin, permeable skin.",
         "description_ja": "ヤドクガエル（Dendrobates, Phyllobates, Epipedobates属）におけるツボカビ症。薄い透過性の皮膚のため特に感受性が高く、種固有の治療プロトコルが必要。",
         "urgency": "emergency",
@@ -3303,7 +3361,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dart Frog Spindly Leg Syndrome (SLS)",
         "name_ja": "ヤドクガエルスピンドリーレッグ症候群",
-        "symptoms": {"spindly_legs", "limb_deformity", "failure_to_thrive", "weakness", "inability_to_feed", "stunted_growth"},
+        "symptoms": {
+            "spindly_legs",
+            "limb_deformity",
+            "failure_to_thrive",
+            "weakness",
+            "inability_to_feed",
+            "stunted_growth",
+        },
         "description": "Developmental disorder in captive-bred dendrobatid froglets characterized by thin, malformed limbs that cannot support the animal's weight. A major cause of mortality in dart frog breeding programs.",
         "description_ja": "飼育下繁殖ヤドクガエル幼体に発生する発達障害。体重を支えられない細く変形した四肢が特徴。ヤドクガエル繁殖プログラムにおける主要死因。",
         "urgency": "moderate",
@@ -3345,7 +3410,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Short Tongue Syndrome (Hypovitaminosis A - Anuran)",
         "name_ja": "短舌症候群（低ビタミンA症）",
-        "symptoms": {"anorexia", "weight_loss", "inability_to_feed", "lethargy", "cloudy_eyes", "skin_lesions", "failure_to_thrive"},
+        "symptoms": {
+            "anorexia",
+            "weight_loss",
+            "inability_to_feed",
+            "lethargy",
+            "cloudy_eyes",
+            "skin_lesions",
+            "failure_to_thrive",
+        },
         "description": "Squamous metaplasia of the tongue caused by vitamin A deficiency in captive frogs, particularly dart frogs. Affected frogs cannot extend their tongue to capture prey, leading to starvation.",
         "description_ja": "飼育下カエル（特にヤドクガエル）におけるビタミンA欠乏による舌の扁平上皮化生。罹患個体は舌を伸ばして餌を捕獲できず、飢餓に至る。",
         "urgency": "moderate",
@@ -3366,7 +3439,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hypervitaminosis A (Vitamin A Toxicity)",
         "name_ja": "ビタミンA過剰症",
-        "symptoms": {"skin_ulcers", "skin_thickening", "limb_deformity", "bone_deformity", "cloudy_eyes", "lethargy", "anorexia"},
+        "symptoms": {
+            "skin_ulcers",
+            "skin_thickening",
+            "limb_deformity",
+            "bone_deformity",
+            "cloudy_eyes",
+            "lethargy",
+            "anorexia",
+        },
         "description": "Vitamin A toxicity from excessive supplementation in captive amphibians. Causes skin ulceration, skeletal deformities, and paradoxically, signs mimicking metabolic bone disease due to interference with vitamins D, E, and K.",
         "description_ja": "飼育下両生類における過剰サプリメントによるビタミンA中毒。皮膚潰瘍、骨格変形を引き起こし、ビタミンD・E・K の吸収阻害により代謝性骨疾患類似症状を呈する。",
         "urgency": "moderate",
@@ -3384,14 +3465,23 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"puppy", "young", "adult"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: アフリカツメガエル (Xenopus laevis) 関連疾患
     # ══════════════════════════════════════════════════════════════════
     {
         "name": "Xenopus Dropsy (Balloon Frog Syndrome)",
         "name_ja": "アフリカツメガエル水腫症（バルーンフロッグ症候群）",
-        "symptoms": {"edema", "generalized_swelling", "bloating", "lymph_sac_edema", "lethargy", "anorexia", "regurgitation", "ascites", "coelomic_distension"},
+        "symptoms": {
+            "edema",
+            "generalized_swelling",
+            "bloating",
+            "lymph_sac_edema",
+            "lethargy",
+            "anorexia",
+            "regurgitation",
+            "ascites",
+            "coelomic_distension",
+        },
         "description": "Severe subcutaneous fluid accumulation in African clawed frogs (Xenopus laevis) and dwarf clawed frogs (Hymenochirus spp.), commonly called 'balloon frog syndrome'. Often associated with bacterial septicemia or renal failure.",
         "description_ja": "アフリカツメガエル（Xenopus laevis）およびコビトツメガエル（Hymenochirus属）に発生する重度の皮下液貯留。「バルーンフロッグ症候群」と呼ばれ、細菌性敗血症や腎不全に関連。",
         "urgency": "high",
@@ -3412,7 +3502,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Xenopus Pseudocapillaroides Skin Infection",
         "name_ja": "アフリカツメガエル皮膚線虫症",
-        "symptoms": {"excessive_shedding", "skin_discoloration", "skin_ulceration", "weight_loss", "skin_lesions", "dermatitis"},
+        "symptoms": {
+            "excessive_shedding",
+            "skin_discoloration",
+            "skin_ulceration",
+            "weight_loss",
+            "skin_lesions",
+            "dermatitis",
+        },
         "description": "Epidermal nematode infection by Pseudocapillaroides xenopi in African clawed frogs, causing chronic skin disease with excessive shedding and ulceration.",
         "description_ja": "アフリカツメガエルにおけるPseudocapillaroides xenopiによる表皮線虫感染症。慢性皮膚疾患で過剰脱皮と潰瘍形成を引き起こす。",
         "urgency": "moderate",
@@ -3430,14 +3527,21 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: アマガエル (Tree Frog) 関連疾患
     # ══════════════════════════════════════════════════════════════════
     {
         "name": "Tree Frog Bacterial Pneumonia",
         "name_ja": "アマガエル細菌性肺炎",
-        "symptoms": {"dyspnea", "open_mouth_breathing", "lethargy", "anorexia", "excessive_mucus", "weight_loss", "abnormal_posture"},
+        "symptoms": {
+            "dyspnea",
+            "open_mouth_breathing",
+            "lethargy",
+            "anorexia",
+            "excessive_mucus",
+            "weight_loss",
+            "abnormal_posture",
+        },
         "description": "Bacterial pneumonia in arboreal frogs (Hylidae, Rhacophoridae) caused by opportunistic bacteria secondary to cool, damp conditions with poor ventilation.",
         "description_ja": "樹上性カエル（アマガエル科、アオガエル科）における細菌性肺炎。低温多湿・換気不良環境での日和見細菌が原因。",
         "urgency": "high",
@@ -3476,14 +3580,21 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: ファイアサラマンダー・イモリ類固有疾患
     # ══════════════════════════════════════════════════════════════════
     {
         "name": "Bsal Ulcerative Skin Disease (Fire Salamander)",
         "name_ja": "Bsal潰瘍性皮膚疾患（ファイアサラマンダー）",
-        "symptoms": {"skin_ulcers", "skin_lesions", "skin_erosion", "anorexia", "lethargy", "skin_sloughing", "rapid_death"},
+        "symptoms": {
+            "skin_ulcers",
+            "skin_lesions",
+            "skin_erosion",
+            "anorexia",
+            "lethargy",
+            "skin_sloughing",
+            "rapid_death",
+        },
         "description": "Batrachochytrium salamandrivorans (Bsal) causes rapidly progressing deep skin ulceration in salamanders, especially fire salamanders (Salamandra salamandra). Has caused >99% mortality in European fire salamander populations.",
         "description_ja": "Batrachochytrium salamandrivorans（Bsal）によるサラマンダー（特にファイアサラマンダー Salamandra salamandra）の急速進行性深部皮膚潰瘍。欧州のファイアサラマンダー個体群で99%以上の致死率を記録。",
         "urgency": "emergency",
@@ -3504,7 +3615,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Newt Iodine Deficiency Goiter",
         "name_ja": "イモリヨウ素欠乏性甲状腺腫",
-        "symptoms": {"goiter", "thyroid_enlargement", "neck_swelling", "lethargy", "metamorphosis_failure", "failure_to_metamorphose", "obesity", "stunted_growth"},
+        "symptoms": {
+            "goiter",
+            "thyroid_enlargement",
+            "neck_swelling",
+            "lethargy",
+            "metamorphosis_failure",
+            "failure_to_metamorphose",
+            "obesity",
+            "stunted_growth",
+        },
         "description": "Thyroid enlargement in captive newts and salamanders due to dietary iodine deficiency, leading to impaired metamorphosis in larvae and metabolic dysfunction in adults.",
         "description_ja": "飼育下イモリ・サラマンダーにおける食事性ヨウ素欠乏による甲状腺腫大。幼生の変態障害と成体の代謝機能障害を引き起こす。",
         "urgency": "moderate",
@@ -3522,14 +3642,22 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"puppy", "young", "adult"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: 飼育環境関連疾患（全両生類共通）
     # ══════════════════════════════════════════════════════════════════
     {
         "name": "Amphibian Chromomycosis (Pigmented Fungal Infection)",
         "name_ja": "両生類クロモミコーシス（色素性真菌感染症）",
-        "symptoms": {"skin_lesions", "dark_skin_nodules", "skin_ulcers", "granulomatous_lesions", "lethargy", "anorexia", "neurological_signs", "sudden_death"},
+        "symptoms": {
+            "skin_lesions",
+            "dark_skin_nodules",
+            "skin_ulcers",
+            "granulomatous_lesions",
+            "lethargy",
+            "anorexia",
+            "neurological_signs",
+            "sudden_death",
+        },
         "description": "Infection with pigmented fungi (Dermatiaceae family: Fonsecaea, Cladophialophora, Exophiala spp.) through broken skin. Common and often fatal in captive amphibians. Can spread to the CNS.",
         "description_ja": "損傷皮膚を介した色素性真菌（Dermatiaceae科：Fonsecaea、Cladophialophora、Exophiala属）による感染。飼育下両生類で一般的かつ致死的。中枢神経系に拡大しうる。",
         "urgency": "high",
@@ -3550,7 +3678,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Amphibian Rhabdias Pulmonary Nematodiasis",
         "name_ja": "両生類ラブジアス肺線虫症",
-        "symptoms": {"dyspnea", "open_mouth_breathing", "weight_loss", "lethargy", "respiratory_distress", "excessive_mucus", "anorexia"},
+        "symptoms": {
+            "dyspnea",
+            "open_mouth_breathing",
+            "weight_loss",
+            "lethargy",
+            "respiratory_distress",
+            "excessive_mucus",
+            "anorexia",
+        },
         "description": "Pulmonary infection by Rhabdias lungworms, common in wild-caught and captive amphibians. Heavy burdens cause significant respiratory compromise.",
         "description_ja": "Rhabdias肺線虫による肺感染症。野生捕獲・飼育下両生類で一般的。高度寄生は重大な呼吸障害を引き起こす。",
         "urgency": "moderate",
@@ -3571,7 +3707,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Amphibian Elizabethkingia Meningoencephalitis",
         "name_ja": "両生類エリザベスキンギア髄膜脳炎",
-        "symptoms": {"neurological_signs", "incoordination", "seizures", "lethargy", "anorexia", "abnormal_posture", "sudden_death", "skin_redness"},
+        "symptoms": {
+            "neurological_signs",
+            "incoordination",
+            "seizures",
+            "lethargy",
+            "anorexia",
+            "abnormal_posture",
+            "sudden_death",
+            "skin_redness",
+        },
         "description": "Systemic infection and meningoencephalitis caused by Elizabethkingia meningoseptica (formerly Chryseobacterium) in captive amphibians. Particularly devastating in laboratory frog colonies.",
         "description_ja": "飼育下両生類におけるElizabethkingia meningoseptica（旧Chryseobacterium）による全身感染症と髄膜脳炎。実験用カエルコロニーで特に壊滅的。",
         "urgency": "emergency",
@@ -3592,7 +3737,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Amphibian Chlamydiosis",
         "name_ja": "両生類クラミジア症",
-        "symptoms": {"lethargy", "anorexia", "weight_loss", "skin_lesions", "liver_enlargement", "organ_enlargement", "granulomatous_lesions", "sudden_death"},
+        "symptoms": {
+            "lethargy",
+            "anorexia",
+            "weight_loss",
+            "skin_lesions",
+            "liver_enlargement",
+            "organ_enlargement",
+            "granulomatous_lesions",
+            "sudden_death",
+        },
         "description": "Systemic infection by Chlamydia spp. in amphibians, causing granulomatous hepatitis, splenomegaly, and chronic wasting. Treatable with doxycycline.",
         "description_ja": "両生類におけるChlamydia属の全身感染症。肉芽腫性肝炎、脾腫大、慢性消耗を引き起こす。ドキシサイクリンで治療可能。",
         "urgency": "high",
@@ -3610,14 +3764,21 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"subacute", "chronic"},
         "age_predisposition": {"young", "adult", "senior"},
     },
-
     # ══════════════════════════════════════════════════════════════════
     # 新規追加: 大型種飼育管理疾患・追加の感染症
     # ══════════════════════════════════════════════════════════════════
     {
         "name": "Amphibian Ventral Dermal Scald (Husbandry)",
         "name_ja": "両生類腹側皮膚熱傷（飼育管理）",
-        "symptoms": {"skin_redness", "skin_ulcers", "skin_erosion", "red_ventrum", "lethargy", "anorexia", "skin_blistering"},
+        "symptoms": {
+            "skin_redness",
+            "skin_ulcers",
+            "skin_erosion",
+            "red_ventrum",
+            "lethargy",
+            "anorexia",
+            "skin_blistering",
+        },
         "description": "Thermal or chemical injury to the ventral skin surface from heated substrate, uncovered under-tank heaters, or caustic substrate in terrestrial amphibians. Often confused with red leg syndrome.",
         "description_ja": "陸生両生類における加熱床材、カバーなしのパネルヒーター、腐食性床材による腹側皮膚の熱的・化学的損傷。レッドレッグ症候群と混同されやすい。",
         "urgency": "moderate",
@@ -3638,7 +3799,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
         "name_ja": "両生類オゾン・クロラミン中毒（水処理）",
-        "symptoms": {"gasping", "hyperactivity", "erratic_swimming", "skin_redness", "gill_damage", "hemorrhage", "sudden_death", "gill_irritation"},
+        "symptoms": {
+            "gasping",
+            "hyperactivity",
+            "erratic_swimming",
+            "skin_redness",
+            "gill_damage",
+            "hemorrhage",
+            "sudden_death",
+            "gill_irritation",
+        },
         "description": "Acute toxicity from residual water treatment chemicals (chloramine, ozone, copper) in municipal water used for amphibian enclosures without adequate dechlorination.",
         "description_ja": "適切な脱塩素処理なしに使用された水道水中の残留水処理化学物質（クロラミン、オゾン、銅）による急性中毒。",
         "urgency": "emergency",
@@ -3659,7 +3829,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Giant Salamander Fungal Granuloma",
         "name_ja": "オオサンショウウオ真菌性肉芽腫",
-        "symptoms": {"skin_nodules", "raised_nodules", "granulomatous_lesions", "skin_masses", "lethargy", "anorexia", "weight_loss"},
+        "symptoms": {
+            "skin_nodules",
+            "raised_nodules",
+            "granulomatous_lesions",
+            "skin_masses",
+            "lethargy",
+            "anorexia",
+            "weight_loss",
+        },
         "description": "Chronic granulomatous skin disease in giant salamanders (Andrias spp.) caused by environmental fungi (Fusarium, Aspergillus, Basidiobolus). Common in captive specimens with suboptimal water quality.",
         "description_ja": "オオサンショウウオ（Andrias属）における環境真菌（Fusarium、Aspergillus、Basidiobolus）による慢性肉芽腫性皮膚疾患。水質が準最適な飼育個体で多発。",
         "urgency": "moderate",
@@ -3680,11 +3858,25 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cane Toad / Large Anuran Obesity Syndrome",
         "name_ja": "大型無尾目肥満症候群",
-        "symptoms": {"obesity", "lethargy", "liver_enlargement", "anorexia", "edema", "bloating", "reluctance_to_move", "dyspnea"},
+        "symptoms": {
+            "obesity",
+            "lethargy",
+            "liver_enlargement",
+            "anorexia",
+            "edema",
+            "bloating",
+            "reluctance_to_move",
+            "dyspnea",
+        },
         "description": "Hepatic lipidosis and metabolic syndrome from chronic overfeeding in large captive anurans (Ceratophrys, Pyxicephalus, Bufo/Rhinella). Leading cause of premature death in pet horned and pixie frogs.",
         "description_ja": "大型飼育無尾目（ツノガエル、アフリカウシガエル、ヒキガエル/ウデナガガエル）における慢性過食による肝リピドーシスとメタボリック症候群。ペットのツノガエル・ピクシーフロッグの早死に主要原因。",
         "urgency": "moderate",
-        "recommended_tests": ["超音波検査（肝臓）", "血液検査（ALT・AST・コレステロール）", "体重モニタリング", "X線検査"],
+        "recommended_tests": [
+            "超音波検査（肝臓）",
+            "血液検査（ALT・AST・コレステロール）",
+            "体重モニタリング",
+            "X線検査",
+        ],
         "causes": "Chronic overfeeding of energy-dense prey (mice, large insects) to sedentary ambush predators in small enclosures. Captive anurans expend far less energy than wild counterparts. Fat deposition in liver leads to hepatic lipidosis.",
         "causes_ja": "小型飼育容器内の待ち伏せ型捕食者への高エネルギー餌（マウス、大型昆虫）の慢性過食。飼育下無尾目は野生個体よりはるかに少ないエネルギーを消費。肝臓への脂肪沈着が肝リピドーシスに至る。",
         "pathophysiology": "Excessive caloric intake leads to massive fat deposition in liver (hepatomegaly), mesenteric fat, and subcutaneous tissues. Hepatic lipidosis impairs albumin synthesis, leading to hypoalbuminemia and secondary edema/ascites. Coelomic fat accumulation compresses lungs.",
@@ -3701,7 +3893,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Hellbender Decline Syndrome",
         "name_ja": "ヘルベンダー衰退症候群",
-        "symptoms": {"skin_lesions", "skin_ulcers", "digit_necrosis", "weight_loss", "lethargy", "anorexia", "skin_discoloration", "missing_digits"},
+        "symptoms": {
+            "skin_lesions",
+            "skin_ulcers",
+            "digit_necrosis",
+            "weight_loss",
+            "lethargy",
+            "anorexia",
+            "skin_discoloration",
+            "missing_digits",
+        },
         "description": "Multifactorial decline syndrome in Eastern hellbenders (Cryptobranchus alleganiensis), involving skin ulceration, digit loss, and chronic wasting. Associated with water quality degradation and emerging pathogens.",
         "description_ja": "ヘルベンダー（Cryptobranchus alleganiensis）における皮膚潰瘍、指趾喪失、慢性消耗を伴う多因子性衰退症候群。水質悪化と新興病原体に関連。",
         "urgency": "high",
@@ -3722,7 +3923,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Amphibian Mycobacteriosis (Chronic Wasting)",
         "name_ja": "両生類マイコバクテリウム症（慢性消耗性）",
-        "symptoms": {"weight_loss", "granulomatous_lesions", "skin_nodules", "anorexia", "lethargy", "skin_ulcers", "organ_enlargement", "bloating"},
+        "symptoms": {
+            "weight_loss",
+            "granulomatous_lesions",
+            "skin_nodules",
+            "anorexia",
+            "lethargy",
+            "skin_ulcers",
+            "organ_enlargement",
+            "bloating",
+        },
         "description": "Chronic granulomatous infection by non-tuberculous mycobacteria (M. marinum, M. fortuitum, M. liflandii) in captive amphibians. Zoonotic potential. Often refractory to treatment.",
         "description_ja": "飼育下両生類における非結核性マイコバクテリア（M. marinum、M. fortuitum、M. liflandii）による慢性肉芽腫性感染。人獣共通感染症の可能性。治療に抵抗性を示すことが多い。",
         "urgency": "high",
@@ -3740,7 +3950,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
-
 ]
 
 
@@ -3771,4 +3980,18 @@ def analyze_symptoms(
     Returns:
         辞書形式の分析結果
     """
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("amphibian", {}))
+    return analyze_symptoms_generic(
+        symptoms,
+        DISEASES,
+        SYMPTOM_NAMES,
+        ADVICE,
+        onset=onset,
+        age_years=age_years,
+        breed=breed,
+        species=species,
+        lab_values=lab_values,
+        gender=gender,
+        vaccines=vaccines,
+        vaccination_status=vaccination_status,
+        prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("amphibian", {}),
+    )

@@ -10,115 +10,203 @@ from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 皮膚・体表
-    "rough_coat": "skin", "hair_loss": "skin",
-    "dry_skin": "skin", "itching": "skin",
-    "skin_crusting": "skin", "severe_itching": "skin",
-    "skin_redness": "skin", "scratching": "skin",
-    "circular_lesions": "skin", "skin_lump": "skin",
-    "wound": "skin", "skin_mass_growth": "skin",
-    "ulceration": "skin", "thin_skin": "skin",
-    "bumping_into_objects": "skin", "visible_parasites": "skin",
-    "skin_tenting": "skin", "tail_injury": "skin",
-    "dark_skin_lesion": "skin", "abscess_formation": "skin",
-    "abscesses": "skin", "bald_patches": "skin",
-    "bite_wounds": "skin", "bleeding_from_mass": "skin",
-    "cervical_abscess": "skin", "cervical_mass": "skin",
-    "draining_wound": "skin", "dry_flaky_skin": "skin",
-    "foot_sores": "skin", "foot_swelling": "skin",
-    "foul_odor_from_mouth": "skin", "hair_loss_around_ears": "skin",
-    "hair_loss_around_mass": "skin", "pigmented_skin_mass": "skin",
+    "rough_coat": "skin",
+    "hair_loss": "skin",
+    "dry_skin": "skin",
+    "itching": "skin",
+    "skin_crusting": "skin",
+    "severe_itching": "skin",
+    "skin_redness": "skin",
+    "scratching": "skin",
+    "circular_lesions": "skin",
+    "skin_lump": "skin",
+    "wound": "skin",
+    "skin_mass_growth": "skin",
+    "ulceration": "skin",
+    "thin_skin": "skin",
+    "bumping_into_objects": "skin",
+    "visible_parasites": "skin",
+    "skin_tenting": "skin",
+    "tail_injury": "skin",
+    "dark_skin_lesion": "skin",
+    "abscess_formation": "skin",
+    "abscesses": "skin",
+    "bald_patches": "skin",
+    "bite_wounds": "skin",
+    "bleeding_from_mass": "skin",
+    "cervical_abscess": "skin",
+    "cervical_mass": "skin",
+    "draining_wound": "skin",
+    "dry_flaky_skin": "skin",
+    "foot_sores": "skin",
+    "foot_swelling": "skin",
+    "foul_odor_from_mouth": "skin",
+    "hair_loss_around_ears": "skin",
+    "hair_loss_around_mass": "skin",
+    "pigmented_skin_mass": "skin",
     "poor_coat": "skin",
-    "skin_abrasion": "skin", "skin_exposure": "skin",
-    "skin_lesions": "skin", "skin_masses": "skin",
-    "skin_changes": "skin", "skin_thickening": "skin", "skin_thinning": "skin",
-    "slow_growing_lump": "skin", "subcutaneous_mass": "skin",
-    "sweet_breath_odor": "skin", "visible_mass_in_mouth": "skin",
+    "skin_abrasion": "skin",
+    "skin_exposure": "skin",
+    "skin_lesions": "skin",
+    "skin_masses": "skin",
+    "skin_changes": "skin",
+    "skin_thickening": "skin",
+    "skin_thinning": "skin",
+    "slow_growing_lump": "skin",
+    "subcutaneous_mass": "skin",
+    "sweet_breath_odor": "skin",
+    "visible_mass_in_mouth": "skin",
     "wart_like_growths": "skin",
     # 眼
-    "eye_discharge": "eyes", "cloudy_eyes": "eyes",
-    "vision_loss": "eyes", "eye_bulging": "eyes",
-    "eye_redness": "eyes", "eye_swelling": "eyes",
-    "sunken_eyes": "eyes", "conjunctivitis": "eyes",
+    "eye_discharge": "eyes",
+    "cloudy_eyes": "eyes",
+    "vision_loss": "eyes",
+    "eye_bulging": "eyes",
+    "eye_redness": "eyes",
+    "eye_swelling": "eyes",
+    "sunken_eyes": "eyes",
+    "conjunctivitis": "eyes",
     "corneal_opacity": "eyes",
-    "pawing_at_eye": "eyes", "photophobia": "eyes",
+    "pawing_at_eye": "eyes",
+    "photophobia": "eyes",
     # 耳
-    "scratching_ears": "ears", "ear_discharge": "ears",
-    "ear_crusting": "ears", "ear_scratching": "ears",
-    "head_shaking": "ears", "otitis": "ears",
+    "scratching_ears": "ears",
+    "ear_discharge": "ears",
+    "ear_crusting": "ears",
+    "ear_scratching": "ears",
+    "head_shaking": "ears",
+    "otitis": "ears",
     # 呼吸器
-    "labored_breathing": "respiratory", "nasal_discharge": "respiratory",
-    "sneezing": "respiratory", "wheezing": "respiratory",
-    "coughing": "respiratory", "slow_breathing": "respiratory",
-    "open_mouth_breathing": "respiratory", "rapid_breathing": "respiratory",
-    "red_nasal_discharge": "respiratory", "respiratory_distress": "respiratory",
+    "labored_breathing": "respiratory",
+    "nasal_discharge": "respiratory",
+    "sneezing": "respiratory",
+    "wheezing": "respiratory",
+    "coughing": "respiratory",
+    "slow_breathing": "respiratory",
+    "open_mouth_breathing": "respiratory",
+    "rapid_breathing": "respiratory",
+    "red_nasal_discharge": "respiratory",
+    "respiratory_distress": "respiratory",
     # 消化器・口腔
-    "wet_tail": "digestive", "diarrhea": "digestive",
-    "appetite_loss": "digestive", "constipation": "digestive",
-    "straining": "digestive", "rectal_prolapse": "digestive",
-    "bloody_stool": "digestive", "drooling": "digestive",
-    "pawing_at_mouth": "digestive", "cheek_pouch_prolapse": "digestive",
-    "oral_mass": "digestive", "overgrown_teeth": "digestive",
-    "appetite_increase": "digestive", "visible_worms_in_stool": "digestive",
-    "perianal_irritation": "digestive", "difficulty_swallowing": "digestive",
-    "fecal_incontinence": "digestive", "intermittent_diarrhea": "digestive",
-    "recurrent_soft_stool": "digestive", "reduced_fecal_output": "digestive",
-    "teeth_damage": "digestive", "visible_tissue_from_mouth": "digestive",
+    "wet_tail": "digestive",
+    "diarrhea": "digestive",
+    "appetite_loss": "digestive",
+    "constipation": "digestive",
+    "straining": "digestive",
+    "rectal_prolapse": "digestive",
+    "bloody_stool": "digestive",
+    "drooling": "digestive",
+    "pawing_at_mouth": "digestive",
+    "cheek_pouch_prolapse": "digestive",
+    "oral_mass": "digestive",
+    "overgrown_teeth": "digestive",
+    "appetite_increase": "digestive",
+    "visible_worms_in_stool": "digestive",
+    "perianal_irritation": "digestive",
+    "difficulty_swallowing": "digestive",
+    "fecal_incontinence": "digestive",
+    "intermittent_diarrhea": "digestive",
+    "recurrent_soft_stool": "digestive",
+    "reduced_fecal_output": "digestive",
+    "teeth_damage": "digestive",
+    "visible_tissue_from_mouth": "digestive",
     "vomiting": "digestive",
     # 骨格・四肢
-    "hind_limb_weakness": "musculoskeletal", "lameness": "musculoskeletal",
-    "limb_deformity": "musculoskeletal", "stiffness": "musculoskeletal",
-    "bone_pain": "musculoskeletal", "hind_limb_paralysis": "musculoskeletal",
-    "limb_swelling": "musculoskeletal", "splayed_limbs": "musculoskeletal",
+    "hind_limb_weakness": "musculoskeletal",
+    "lameness": "musculoskeletal",
+    "limb_deformity": "musculoskeletal",
+    "stiffness": "musculoskeletal",
+    "bone_pain": "musculoskeletal",
+    "hind_limb_paralysis": "musculoskeletal",
+    "limb_swelling": "musculoskeletal",
+    "splayed_limbs": "musculoskeletal",
     # 神経
-    "paralysis": "neurological", "head_tilt": "neurological",
-    "circling": "neurological", "disorientation": "neurological",
-    "nystagmus": "neurological", "seizures": "neurological",
-    "tremors": "neurological", "unresponsiveness": "neurological",
+    "paralysis": "neurological",
+    "head_tilt": "neurological",
+    "circling": "neurological",
+    "disorientation": "neurological",
+    "nystagmus": "neurological",
+    "seizures": "neurological",
+    "tremors": "neurological",
+    "unresponsiveness": "neurological",
     # 泌尿器・生殖器
-    "mammary_mass": "urinary", "increased_urination": "urinary",
-    "vaginal_bleeding": "urinary", "blood_in_urine": "urinary",
-    "frequent_urination": "urinary", "vaginal_discharge": "urinary",
-    "mammary_swelling": "urinary", "mammary_redness": "urinary",
-    "testicular_swelling": "urinary", "asymmetric_testes": "urinary",
-    "absent_testicle": "urinary", "infertility": "urinary",
+    "mammary_mass": "urinary",
+    "increased_urination": "urinary",
+    "vaginal_bleeding": "urinary",
+    "blood_in_urine": "urinary",
+    "frequent_urination": "urinary",
+    "vaginal_discharge": "urinary",
+    "mammary_swelling": "urinary",
+    "mammary_redness": "urinary",
+    "testicular_swelling": "urinary",
+    "asymmetric_testes": "urinary",
+    "absent_testicle": "urinary",
+    "infertility": "urinary",
     "maternal_stress": "urinary",
-    "straining_to_urinate": "urinary", "tissue_protrusion_from_vulva": "urinary",
+    "straining_to_urinate": "urinary",
+    "tissue_protrusion_from_vulva": "urinary",
     "urinary_incontinence": "urinary",
     # 循環器
-    "cyanosis": "cardiovascular", "exercise_intolerance": "cardiovascular",
+    "cyanosis": "cardiovascular",
+    "exercise_intolerance": "cardiovascular",
     "heart_murmur": "cardiovascular",
     # 体型・全身
-    "dehydration": "body", "weight_loss": "body",
-    "abdominal_distension": "body", "cheek_swelling": "body",
-    "facial_swelling": "body", "swelling": "body",
-    "enlarged_lymph_nodes": "body", "weight_gain": "body",
-    "edema": "body", "ascites": "body",
+    "dehydration": "body",
+    "weight_loss": "body",
+    "abdominal_distension": "body",
+    "cheek_swelling": "body",
+    "facial_swelling": "body",
+    "swelling": "body",
+    "enlarged_lymph_nodes": "body",
+    "weight_gain": "body",
+    "edema": "body",
+    "ascites": "body",
     "muscle_wasting": "body",
-    "abdominal_pain": "body", "inguinal_swelling": "body",
-    "obesity": "body", "rapid_growth": "body",
-    "subcutaneous_swelling": "body", "toe_swelling": "body",
+    "abdominal_pain": "body",
+    "inguinal_swelling": "body",
+    "obesity": "body",
+    "rapid_growth": "body",
+    "subcutaneous_swelling": "body",
+    "toe_swelling": "body",
     # 行動・活動
-    "lethargy": "behavior", "hunched_posture": "behavior",
-    "pain": "behavior", "reduced_activity": "behavior",
-    "discomfort": "behavior", "loss_of_balance": "behavior",
-    "squinting": "behavior", "weakness": "behavior",
-    "cold_body": "behavior", "bar_chewing": "behavior",
-    "excessive_grooming": "behavior", "aggression": "behavior",
-    "licking_flank": "behavior", "cold_intolerance": "behavior",
-    "aggressive_behavior": "behavior", "behavioral_changes": "behavior",
-    "curled_posture": "behavior", "inability_to_stand": "behavior",
-    "missing_pups": "behavior", "mobility_issues": "behavior",
-    "muscle_weakness": "behavior", "reluctance_to_move": "behavior",
-    "repetitive_bar_chewing": "behavior", "stress_signs": "behavior",
+    "lethargy": "behavior",
+    "hunched_posture": "behavior",
+    "pain": "behavior",
+    "reduced_activity": "behavior",
+    "discomfort": "behavior",
+    "loss_of_balance": "behavior",
+    "squinting": "behavior",
+    "weakness": "behavior",
+    "cold_body": "behavior",
+    "bar_chewing": "behavior",
+    "excessive_grooming": "behavior",
+    "aggression": "behavior",
+    "licking_flank": "behavior",
+    "cold_intolerance": "behavior",
+    "aggressive_behavior": "behavior",
+    "behavioral_changes": "behavior",
+    "curled_posture": "behavior",
+    "inability_to_stand": "behavior",
+    "missing_pups": "behavior",
+    "mobility_issues": "behavior",
+    "muscle_weakness": "behavior",
+    "reluctance_to_move": "behavior",
+    "repetitive_bar_chewing": "behavior",
+    "stress_signs": "behavior",
     "vocalization": "behavior",
     # 緊急
-    "sudden_death": "emergency", "unconsciousness": "emergency",
+    "sudden_death": "emergency",
+    "unconsciousness": "emergency",
     "shock": "emergency",
     # 内科・血液
-    "discharge": "internal", "fever": "internal",
-    "increased_thirst": "internal", "jaundice": "internal",
-    "bleeding": "internal", "anemia": "internal",
-    "bleeding_from_foot": "internal", "blood_stains_in_nest": "internal",
+    "discharge": "internal",
+    "fever": "internal",
+    "increased_thirst": "internal",
+    "jaundice": "internal",
+    "bleeding": "internal",
+    "anemia": "internal",
+    "bleeding_from_foot": "internal",
+    "blood_stains_in_nest": "internal",
     "green_discharge": "internal",
     "red_discharge_around_eye": "internal",
 }
@@ -154,7 +242,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Tyzzer's Disease in hamsters is a peracute to acute bacterial infection caused by Clostridium piliforme (obligate intracellular gram-positive bacillus). Highly fatal disease—mortality 90-100% in acute cases even with treatment. Clinical presentation highly variable: some hamsters die suddenly with minimal preceding signs; others show 24-72 hour prodrome of diarrhea, lethargy, anorexia before collapse. Incubation period 3-7 days post-exposure. Prevalence difficult to assess as many cases go undiagnosed; confirmed diagnosis often at necropsy. Age-dependent: weanlings (3-8 weeks) and juveniles (8-12 weeks) most susceptible; peak incidence week post-weaning. Adults more resistant but capable of becoming chronic carriers. Stress is primary trigger—weaning stress, environmental change, overcrowding, temperature fluctuation. Historically significant in research colonies; now rare in well-managed pet populations but sporadic outbreaks occur. Diagnosis challenging ante-mortem (requires ileal biopsy/PCR); most cases diagnosed at necropsy with characteristic intracellular bacilli in ileum/hepatocytes.",
         "description_ja": "ハムスターのティザー病はクロストリジウム・ピリフォルメ（細胞内寄生グラム陽性桿菌）による超急性～急性細菌感染症。極度に致死的—急性例でも90-100%死亡率（治療でも）。臨床像は可変的：突然死の場合もあり、先行徴候最小限；他は24-72時間の下痢、無気力、無食欲が虚脱前に表現。潜伏期3-7日。有病率は未診断例が多いため評価困難；確定診断は剖検時しばしば。年齢依存性：離乳仔（3-8週）と幼若（8-12週）最易感受性；peak発生率は離乳後week。成体はより耐性だが慢性保菌者になり得る。ストレスが主一次トリガー—離乳ストレス、環境変化、過密飼育、温度変動。歴史的に研究群で重要；現在ペット個体数で稀だが散発的アウトブレイク発生。診断は生前困難（回腸生検/PCR必須）；剖検時に特徴的細胞内桿菌を回腸/肝細胞で同定。",
         "urgency": "emergency",
-        "recommended_tests": ["ileal_biopsy", "pcr_clostridium", "histopathology_necropsy", "blood_culture", "fecal_culture"],
+        "recommended_tests": [
+            "ileal_biopsy",
+            "pcr_clostridium",
+            "histopathology_necropsy",
+            "blood_culture",
+            "fecal_culture",
+        ],
         "causes": "(1) CLOSTRIDIUM PILIFORME EXPOSURE—fecal-oral transmission from infected/carrier animals or contaminated environment (bedding, food, water). Organism survives in environment for extended periods (weeks in dried feces). Horizontal transmission via coprophagy or fecal contamination of food/water/cage surfaces. (2) PRIMARY RISK FACTORS—stress is overwhelming risk factor: (a) WEANING STRESS—peak incidence in weanling hamsters day 7-21 post-separation from dam (maternal antibodies decline, immune system immature, stress from environmental adaptation); (b) ENVIRONMENTAL STRESS—temperature fluctuation (chilling <15°C or heating >28°C), cage relocation, loud noises, predator exposure, social stress (fighting, mixing incompatible animals), handling stress; (c) OVERCROWDING—>4-5 hamsters per standard cage, inadequate resources (feeders, water bottles, hide areas); (d) POOR HUSBANDRY—inadequate bedding changes (ammonia accumulation), dirty water, moldy food, inadequate ventilation. (3) HOST FACTORS—age most critical (peak <12 weeks old); sex effects unclear; prior GI disease (diarrhea, dysbiosis from antibiotics) increases risk; malnutrition (protein <12%, vitamin/mineral deficiency, food storage degradation); concurrent illness (respiratory infection, parasites, other infections). (4) CARRIER STATE—5-15% of apparently healthy hamsters are chronic carriers shedding organism intermittently; carrier animals may become clinical with stress; carriers important reservoir for transmission in colony settings. (5) ENVIRONMENTAL FACTORS—C. piliforme survives in dried feces/bedding for weeks; contaminated bedding introduces to naive animals; inadequate disinfection between cage use.",
         "causes_ja": "(1) クロストリジウム・ピリフォルメ曝露—感染/保菌動物または汚染環境（敷料、食物、水）から糞口伝播。生物体は環境で延長期間生存（乾燥便で数週）。横伝播：食便や食物/水/ケージ表面の糞汚染経由。(2) 一次危険因子—ストレスは圧倒的危険因子：(a) 離乳ストレス—離乳後day 7-21で最高発生率（母親抗体低下、免疫未熟、環境適応ストレス）；(b) 環境ストレス—温度変動、ケージ移動、騒音、捕食者曝露、社会的ストレス、ハンドリングストレス；(c) 過密飼育—標準ケージ当たり>4-5、資源不足；(d) 飼育不良—敷料交換不十分、水汚染、食物カビ、換気不足。(3) 宿主因子—年齢最重大（peak <12週）；性別効果不明；先行GI疾患が危険増加；栄養不良；併発疾患。(4) 保菌状態—5-15%見かけ健康ハムスターが慢性保菌者で間欠排菌；保菌動物はストレスで臨床化；保菌者は群集設定で伝播重要貯蔵。(5) 環境因子—C. ピリフォルメは乾燥便/敷料で数週生存；汚染敷料が稚児動物に導入；不十分消毒。",
         "pathophysiology": "TYZZER'S DISEASE PATHOPHYSIOLOGY—3-4 PHASE PROGRESSION: (1) INITIAL COLONIZATION & EPITHELIAL INVASION PHASE (day 0-2 post-exposure): C. piliforme spores germinate in ileal lumen; vegetative cells adhere to ileal epithelium via unknown adhesin mechanisms (poorly characterized); bacteria invade epithelial cells and become intracellular (obligate intracellular parasitism unique to this organism). Minimal histological changes initially; local inflammatory response begins (lymphocyte infiltration). (2) ACUTE MUCOSAL INFLAMMATION & NECROSIS PHASE (day 2-4): extensive epithelial invasion and intracellular bacterial replication in ileal epitheliocytes and hepatocytes; mucosal necrosis and ulceration develop; exudative diarrhea begins (fluid/protein loss); acute inflammatory response (TNF-α, IL-6 elevation); fever develops (38-39.5°C if detectable before collapse). Hepatic involvement with focal necrosis in hepatocytes (characteristic lesion of Tyzzer's disease = intracellular bacterial aggregates in hepatocytes surrounded by minimal inflammation—pathognomonic). Rapid dehydration and electrolyte loss. (3) SYSTEMIC TOXEMIA & MULTI-ORGAN INVOLVEMENT PHASE (day 4-7 or rapid progression): bacterial translocation into bloodstream from damaged intestinal epithelium; septicemia develops; endotoxemia from bacterial lipopolysaccharide; myocardial involvement possible (sudden death cases suggest cardiac effects); respiratory involvement; shock state developing. (4) TERMINAL MULTI-ORGAN FAILURE PHASE: cardiovascular collapse, respiratory failure, hepatic failure, acute kidney injury from shock and dehydration, coagulopathy; death occurs from septic shock, organ failure, or sudden cardiac arrest (especially if myocardial involvement).",
@@ -489,11 +583,28 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Pneumonia",
         "name_ja": "肺炎",
-        "symptoms": {"labored_breathing", "nasal_discharge", "sneezing", "lethargy", "appetite_loss", "fever", "wheezing", "rapid_breathing", "hunched_posture", "coughing"},
+        "symptoms": {
+            "labored_breathing",
+            "nasal_discharge",
+            "sneezing",
+            "lethargy",
+            "appetite_loss",
+            "fever",
+            "wheezing",
+            "rapid_breathing",
+            "hunched_posture",
+            "coughing",
+        },
         "description": "Pneumonia in hamsters is a bacterial or viral lung infection characterized by inflammatory consolidation of lung parenchyma, causing severe respiratory compromise. Mortality rates range 40-70% even with treatment due to small body size, high metabolic rate, and rapid disease progression (24-72 hours from initial signs to respiratory failure). Most common bacterial agents: Pasteurella pneumotropica, Streptococcus pneumoniae, Staphylococcus aureus, Bordetella bronchiseptica. Viral causes include Sendai virus, Mycoplasma pulmonis. Peak incidence in juveniles (4-12 weeks) and geriatric hamsters (>18-24 months). Stress, poor ventilation (ammonia >15 ppm), low temperature (<18°C), prior upper respiratory infection, or concurrent illness (wet tail, Tyzzer's disease) are major predisposing factors. Rapid progression makes emergency intervention essential within 12-24 hours of symptom recognition.",
         "description_ja": "ハムスター肺炎：細菌またはウイルス性の肺感染症。肺実質の炎症性固結により重度の呼吸機能低下を引き起こす。治療にも関わらず死亡率40-70%（体が小さい・代謝率高い・24-72時間で急速進行）。最一般的細菌：Pasteurella pneumotropica、Streptococcus pneumoniae、Staphylococcus aureus、Bordetella bronchiseptica。ウイルス原因：センダイウイルス、Mycoplasma pulmonis。ピーク発生：若齢（4-12週）・高齢ハムスター（>18-24ヶ月）。ストレス、不十分な換気（アンモニア>15ppm）、低温（<18℃）、先行上部気道感染、併存疾患（ウェットテイル、ティザー病）が主要素因。急速進行のため症状認識後12-24時間以内の緊急対応が必須。",
         "urgency": "emergency",
-        "recommended_tests": ["thoracic_radiography", "bacterial_culture_respiratory", "blood_work", "oxygen_saturation", "blood_gas"],
+        "recommended_tests": [
+            "thoracic_radiography",
+            "bacterial_culture_respiratory",
+            "blood_work",
+            "oxygen_saturation",
+            "blood_gas",
+        ],
         "causes": "1. Bacterial pathogens (70%): Pasteurella pneumotropica (most common, 40-50%), Streptococcus pneumoniae (20-30%), Staphylococcus aureus (15-25%), Bordetella bronchiseptica (10-15%), Pseudomonas aeruginosa (5-10%), Klebsiella pneumoniae (5%). 2. Viral agents (15-20%): Sendai virus (parainfluenza, highly contagious), Mycoplasma pulmonis (chronic infection), Cytomegalovirus (rare), mouse pneumonia virus (lab colonies). 3. Environmental triggers: Overcrowding (stress immunosuppression), inadequate ventilation (<6 air changes/hour), high ammonia (>15 ppm), low temperature (<18°C or >28°C fluctuation), high humidity (>70%), dusty bedding (irritant). 4. Host factors: Age <12 weeks (immature immunity) or >18-24 months (senile immunity), prior upper respiratory infection, concurrent Wet Tail or Tyzzer's disease (systemically ill, immunocompromised), prolonged stress, malnutrition (protein <12%), vitamin deficiency. 5. Transmission: Direct contact with infected hamster, aerosol droplet (<2 meters), contaminated fomites (cage, water, food dishes), shared bedding between cages.",
         "causes_ja": "1. 細菌病原体（70%）：Pasteurella pneumotropica（最一般的、40-50%）、Streptococcus pneumoniae（20-30%）、Staphylococcus aureus（15-25%）、Bordetella bronchiseptica（10-15%）、Pseudomonas aeruginosa（5-10%）、Klebsiella pneumoniae（5%）。2. ウイルス病原体（15-20%）：センダイウイルス（パラインフルエンザ、高度伝染性）、Mycoplasma pulmonis（慢性感染）、サイトメガロウイルス（稀）、マウス肺炎ウイルス（実験的コロニー）。3. 環境トリガー：過密飼育（ストレス免疫抑制）、不十分な換気（<6気流交換/時間）、高いアンモニア（>15ppm）、低温（<18℃または>28℃変動）、高湿度（>70%）、粉塵が多い床材（刺激）。4. 宿主因子：年齢<12週（免疫未熟）または>18-24ヶ月（老齢免疫）、先行上部気道感染、併存ウェットテイルまたはティザー病（全身症状、免疫低下）、遷延的ストレス、栄養不良（タンパク質<12%）、ビタミン欠乏。5. 伝播：感染ハムスターとの直接接触、飛沫（<2メートル）、汚染媒介物（ケージ・水・食器）、ケージ間の寝具共有。",
         "pathophysiology": "Phase 1 (0-6 hours): Bacterial inoculation into lower respiratory tract via aspiration or hematogenous seeding. Initial mucosal colonization with bacterial adherence via fimbriae/pili. Minimal inflammation; hamster appears relatively normal except mild cough/sneeze. Phase 2 (6-24 hours): Acute mucosal inflammation and epithelial invasion. Neutrophil infiltration, cytokine release (TNF-α, IL-6, IL-8). Early consolidation in dependent lung lobes (gravity-dependent, typically dorsal basilar regions). Secretory response → mucus plugging. Fever 38-39.5°C. Hamster shows decreased activity, reduced appetite, mild tachypnea (RR 80-100 breaths/min, normal 40-60). Onset of clinical signs (lethargy, anorexia, nasal discharge). Phase 3 (24-48 hours): Progressive consolidation with alveolar filling (exudate with RBCs, fibrin, bacteria). Widespread lobar involvement (2-3+ lobes typical). Severe hypoxemia (PaO₂ <60 mmHg if blood gas measured). Tachypnea increases (RR >120 breaths/min), dyspnea develops. Open-mouth breathing. Cold extremities from poor perfusion. Potential pleural effusion (10-30% cases). Toxic metabolic derangements (lactic acidosis from anaerobic metabolism, hypercapnia if ventilation fails). Organ hypoperfusion. Phase 4 (>48 hours or untreated): Septic shock develops if not treated. Bacterial translocation, bacteremia, endotoxemia. Multi-organ failure. ARDS (Acute Respiratory Distress Syndrome) phenotype: refractory hypoxemia, decreased lung compliance, bilateral infiltrates. Respiratory acidosis (pH <7.2) from CO₂ retention. Cardiovascular collapse. Death from respiratory failure or septic shock.",
@@ -510,7 +621,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Upper Respiratory Infection",
         "name_ja": "上部呼吸器感染症",
-        "symptoms": {"sneezing", "nasal_discharge", "wheezing", "eye_discharge", "lethargy", "appetite_loss", "head_shaking", "ear_crusting", "fever"},
+        "symptoms": {
+            "sneezing",
+            "nasal_discharge",
+            "wheezing",
+            "eye_discharge",
+            "lethargy",
+            "appetite_loss",
+            "head_shaking",
+            "ear_crusting",
+            "fever",
+        },
         "description": "Upper Respiratory Infection (URI) in hamsters is a bacterial or viral infection affecting the nasal passages, sinuses, and trachea, characterized by sneezing, nasal discharge, and conjunctivitis. Prevalence 10-15% in pet populations; higher in breeding colonies (20-30%). Mortality rate without treatment 5-20% (lower than pneumonia). Most common bacterial agents: Pasteurella pneumotropica, Streptococcus pneumoniae, Bordetella bronchiseptica, Mycoplasma pulmonis. Viral causes include Sendai virus, mouse respiratory myxovirus. Unlike pneumonia which affects lower respiratory tract/lungs, URI remains localized to upper airway in early stages but can progress to pneumonia (5-15% if untreated). Onset typically acute (12-48 hours). Three-phase disease pattern: early URI (days 0-3) with sneezing and discharge, intermediate phase (days 3-7) with potential bacterial proliferation and sinusitis, late/chronic phase (>2 weeks) with persistent nasal discharge and otitis media risk. Stress, poor ventilation (ammonia >15 ppm), low temperature, or concurrent illness are major predisposing factors.",
         "description_ja": "ハムスター上部呼吸器感染症（URI）：鼻腔・副鼻腔・気管に影響を及ぼす細菌またはウイルス感染症。くしゃみ・鼻汁・結膜炎を特徴。有病率10-15%（ペット集団）；繁殖コロニーではより高い（20-30%）。未治療の死亡率5-20%（肺炎より低い）。最一般的細菌：Pasteurella pneumotropica、Streptococcus pneumoniae、Bordetella bronchiseptica、Mycoplasma pulmonis。ウイルス原因：センダイウイルス、マウス呼吸器ミクソウイルス。肺炎とは異なり、下気道/肺に影響するが、未治療時に肺炎へ進行の可能性あり（5-15%）。発症は一般的に急性（12-48時間）。3相疾患パターン：早期URI（0-3日）くしゃみと鼻汁、中間相（3-7日）潜在的細菌増殖・副鼻腔炎、後期/慢性相（>2週）持続的鼻汁と中耳炎リスク。ストレス、不十分な換気（アンモニア>15ppm）、低温、併存疾患が主要素因。",
         "urgency": "moderate",
@@ -761,11 +882,26 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Adrenal Tumor",
         "name_ja": "副腎腫瘍",
-        "symptoms": {"hair_loss", "increased_thirst", "increased_urination", "abdominal_distension", "lethargy"},
+        "symptoms": {
+            "hair_loss",
+            "increased_thirst",
+            "increased_urination",
+            "abdominal_distension",
+            "lethargy",
+            "skin_changes",
+            "weight_loss",
+        },
         "description": "Adrenal Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "副腎の腫瘍によるホルモン異常。",
         "urgency": "high",
-        "recommended_tests": ["ultrasound", "hormone_panel"],
+        "recommended_tests": [
+            "ultrasound",
+            "hormone_panel",
+            "abdominal_ultrasound",
+            "complete_blood_count",
+            "serum_chemistry",
+            "cortisol_level",
+        ],
         "causes": "Tumor of the adrenal gland causing hormonal imbalances.",
         "causes_ja": "ハムスターにおける副腎腫瘍の原因: 副腎の腫瘍によるホルモン異常。",
         "pathophysiology": "Adrenal Tumor is a neoplastic condition. Tumor of the adrenal gland causing hormonal imbalances. Neoplastic transformation occurs through accumulated genetic mutations in oncogenes, tumor suppressor genes, and DNA repair mechanisms. Uncontrolled cellular proliferation leads to tumor formation with potential for local tissue invasion and destruction. Malignant neoplasms may metastasize via lymphatic or hematogenous routes. Paraneoplastic syndromes—including hypercalcemia, cachexia, and immune dysregulation—may accompany the primary tumor and contribute to morbidity.",
@@ -881,27 +1017,6 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention_ja": "精巣腫瘍の予防は限定的であるが、ホルモン依存性腫瘍軽減のための避妊・去勢手術、既知の発癌物質の回避、早期発見のための定期健診、適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。",
         "prognosis": "Prognosis depends on tumor type, staging, and response to treatment. Complete surgical excision of localized tumors improves outcomes. Metastatic disease carries a guarded to poor prognosis.",
         "prognosis_ja": "精巣腫瘍の予後: 腫瘍の種類、病期、転移の有無により予後は大きく異なる。早期発見・早期治療で予後改善。悪性腫瘍は一般的に予後要注意〜不良。",
-        "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "senior"},
-    },
-    {
-        "name": "Liver Tumor",
-        "name_ja": "肝臓腫瘍",
-        "symptoms": {"abdominal_distension", "weight_loss", "lethargy", "jaundice", "appetite_loss"},
-        "description": "Liver Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
-        "description_ja": "原発性または転移性の肝臓腫瘍。",
-        "urgency": "high",
-        "recommended_tests": ["ultrasound", "blood_chemistry", "biopsy"],
-        "causes": "Caused by primary hepatic neoplasia or metastatic disease. Aging, chronic hepatitis, and exposure to carcinogens are contributing factors.",
-        "causes_ja": "ハムスターにおける肝臓腫瘍の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
-        "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
-        "pathophysiology_ja": "肝臓腫瘍はハムスターにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
-        "treatment": "Surgical resection is usually not feasible due to small body size and tumor extent. Palliative care is primary: meloxicam 1-2 mg/kg PO q24h for pain, fluid therapy SC, assisted feeding, hepatoprotectants (SAMe if available). Monitor liver values. Prognosis is poor.",
-        "treatment_ja": "体の大きさと腫瘍の広がりから外科的切除は通常困難。緩和ケアが中心: メロキシカム1-2 mg/kg PO q24hで疼痛管理、皮下輸液、強制給餌、肝保護剤（SAMe等）。肝機能値のモニタリング。予後不良。",
-        "prevention": "Prevention is limited for most neoplastic conditions. Regular health examinations facilitate early detection. Spaying/neutering may reduce risk of hormone-dependent tumors.",
-        "prevention_ja": "肝臓腫瘍の予防は限定的であるが、ホルモン依存性腫瘍軽減のための避妊・去勢手術、既知の発癌物質の回避、早期発見のための定期健診、適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。",
-        "prognosis": "Prognosis depends on tumor type, staging, and response to treatment. Complete surgical excision of localized tumors improves outcomes. Metastatic disease carries a guarded to poor prognosis.",
-        "prognosis_ja": "肝臓腫瘍の予後: 腫瘍の種類、病期、転移の有無により予後は大きく異なる。早期発見・早期治療で予後改善。悪性腫瘍は一般的に予後要注意〜不良。",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult", "senior"},
     },
@@ -2052,7 +2167,13 @@ DISEASES: List[Dict[str, Any]] = [
         "description": "Hepatic Tumor is a neoplastic condition characterized by abnormal cell proliferation that may be benign or malignant.",
         "description_ja": "肝臓原発の腫瘍または転移性疾患で、高齢ハムスターに比較的よく見られます。",
         "urgency": "high",
-        "recommended_tests": ["abdominal_ultrasound", "blood_chemistry", "fine_needle_aspirate"],
+        "recommended_tests": [
+            "abdominal_ultrasound",
+            "blood_chemistry",
+            "fine_needle_aspirate",
+            "ultrasound",
+            "biopsy",
+        ],
         "causes": "Caused by primary hepatocellular neoplasia or metastatic disease to the liver, relatively common in aged hamsters.",
         "causes_ja": "ハムスターにおける肝臓腫瘍の原因: 肝臓原発の腫瘍または転移性疾患で、高齢ハムスターに比較的よく見られます。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
@@ -3894,7 +4015,6 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
-
     {
         "name": "Flank Gland Hyperplasia",
         "name_ja": "側腹腺過形成",
@@ -3908,75 +4028,75 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "側腹腺過形成はハムスターにおける皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
         "treatment": "Flank gland hyperplasia is typically a benign, androgen-dependent physiological change "
-                    "requiring no treatment in most cases. The paired costovertebral (flank/hip) scent glands "
-                    "are pigmented sebaceous glands used for territorial marking, more prominent in intact males. "
-                    "CONSERVATIVE MANAGEMENT (majority of cases): No intervention needed for mild hyperplasia "
-                    "without secondary complications. Gentle cleansing with warm saline if crusting or keratin "
-                    "debris accumulates. Avoid aggressive scrubbing — tissue is delicate and iatrogenic trauma "
-                    "worsens inflammation. HYPERKERATOSIS/CRUSTING: Soften with warm water compresses for "
-                    "2-3 minutes, then gently remove loosened debris with cotton-tipped applicator. Apply "
-                    "chlorhexidine 0.05% solution to prevent secondary bacterial colonization. Repeat 2-3 "
-                    "times weekly as needed. SECONDARY BACTERIAL INFECTION: Chlorhexidine 0.05% topical "
-                    "cleansing q12-24h. Systemic antibiotics if cellulitis present: enrofloxacin 5-10 mg/kg "
-                    "PO/SC q12h × 7-14 days, or trimethoprim-sulfa 15-30 mg/kg PO q12h. INFLAMMATION: "
-                    "Meloxicam 0.2 mg/kg PO/SC q24h × 3-5 days. CASTRATION: Reduces androgen stimulation "
-                    "and typically results in significant gland size reduction within 4-8 weeks. Consider "
-                    "in cases of recurrent secondary infection, marked hyperplasia causing discomfort, or "
-                    "owner concern about cosmetic appearance. Isoflurane anesthesia — chamber induction "
-                    "3-4%, maintenance 1.5-2.5% via nose cone, body temperature maintenance on 37°C heated "
-                    "pad. NEOPLASTIC DIFFERENTIATION: If rapid enlargement, ulceration, asymmetry, or "
-                    "color change — perform FNA cytology ± incisional biopsy. Flank gland adenoma/carcinoma "
-                    "reported rarely; surgical excision with 1-2 mm margins indicated for neoplastic "
-                    "transformation. References: Harkness & Wagner (1995) Biology and Medicine of Rabbits "
-                    "and Rodents 4th ed; Percy & Barthold (2007) Pathology of Laboratory Rodents and "
-                    "Rabbits 3rd ed; Quesenberry & Carpenter (2012) Ferrets, Rabbits, and Rodents 3rd ed.",
+        "requiring no treatment in most cases. The paired costovertebral (flank/hip) scent glands "
+        "are pigmented sebaceous glands used for territorial marking, more prominent in intact males. "
+        "CONSERVATIVE MANAGEMENT (majority of cases): No intervention needed for mild hyperplasia "
+        "without secondary complications. Gentle cleansing with warm saline if crusting or keratin "
+        "debris accumulates. Avoid aggressive scrubbing — tissue is delicate and iatrogenic trauma "
+        "worsens inflammation. HYPERKERATOSIS/CRUSTING: Soften with warm water compresses for "
+        "2-3 minutes, then gently remove loosened debris with cotton-tipped applicator. Apply "
+        "chlorhexidine 0.05% solution to prevent secondary bacterial colonization. Repeat 2-3 "
+        "times weekly as needed. SECONDARY BACTERIAL INFECTION: Chlorhexidine 0.05% topical "
+        "cleansing q12-24h. Systemic antibiotics if cellulitis present: enrofloxacin 5-10 mg/kg "
+        "PO/SC q12h × 7-14 days, or trimethoprim-sulfa 15-30 mg/kg PO q12h. INFLAMMATION: "
+        "Meloxicam 0.2 mg/kg PO/SC q24h × 3-5 days. CASTRATION: Reduces androgen stimulation "
+        "and typically results in significant gland size reduction within 4-8 weeks. Consider "
+        "in cases of recurrent secondary infection, marked hyperplasia causing discomfort, or "
+        "owner concern about cosmetic appearance. Isoflurane anesthesia — chamber induction "
+        "3-4%, maintenance 1.5-2.5% via nose cone, body temperature maintenance on 37°C heated "
+        "pad. NEOPLASTIC DIFFERENTIATION: If rapid enlargement, ulceration, asymmetry, or "
+        "color change — perform FNA cytology ± incisional biopsy. Flank gland adenoma/carcinoma "
+        "reported rarely; surgical excision with 1-2 mm margins indicated for neoplastic "
+        "transformation. References: Harkness & Wagner (1995) Biology and Medicine of Rabbits "
+        "and Rodents 4th ed; Percy & Barthold (2007) Pathology of Laboratory Rodents and "
+        "Rabbits 3rd ed; Quesenberry & Carpenter (2012) Ferrets, Rabbits, and Rodents 3rd ed.",
         "treatment_ja": "側腹腺過形成は多くの場合、良性のアンドロゲン依存性の生理的変化であり治療不要。"
-                        "肋椎部（側腹部/腰部）の対の臭腺は色素沈着した脂腺で、縄張りマーキングに使用され、"
-                        "未去勢雄でより顕著。【保存的管理（大多数の症例）】軽度の過形成で二次的合併症がなければ"
-                        "介入不要。痂皮・角化物の蓄積があれば温生理食塩水で優しく清拭。組織は脆弱なため"
-                        "強い擦過は避ける — 医原性外傷が炎症を悪化させる。【過角化・痂皮】温水湿布で2-3分"
-                        "軟化後、綿棒で緩んだデブリを愛護的に除去。クロルヘキシジン0.05%溶液を塗布し二次"
-                        "細菌感染を予防。週2-3回を必要に応じて繰り返す。【二次細菌感染】クロルヘキシジン"
-                        "0.05%局所清拭 q12-24h。蜂窩織炎がある場合は全身性抗菌薬: エンロフロキサシン"
-                        "5-10 mg/kg PO/SC q12h × 7-14日間、またはトリメトプリム・スルファ15-30 mg/kg "
-                        "PO q12h。【炎症】メロキシカム0.2 mg/kg PO/SC q24h × 3-5日間。【去勢手術】"
-                        "アンドロゲン刺激を低減し、4-8週間以内に腺サイズの有意な縮小が期待できる。再発性"
-                        "二次感染、著明な過形成による不快感、または外観上の問題がある場合に検討。イソフルラン"
-                        "麻酔 — チャンバー導入3-4%、ノーズコーン維持1.5-2.5%、37℃加温パッドで体温維持。"
-                        "【腫瘍との鑑別】急速な増大、潰瘍化、非対称性、色調変化がある場合 → FNA細胞診"
-                        "±切開生検。側腹腺腺腫/腺癌の報告はまれだが、腫瘍性変化には1-2mm マージンでの"
-                        "外科的切除が適応。参考文献: Harkness & Wagner (1995) Biology and Medicine of "
-                        "Rabbits and Rodents 4th ed; Percy & Barthold (2007) Pathology of Laboratory "
-                        "Rodents and Rabbits 3rd ed; Quesenberry & Carpenter (2012) Ferrets, Rabbits, "
-                        "and Rodents 3rd ed.",
+        "肋椎部（側腹部/腰部）の対の臭腺は色素沈着した脂腺で、縄張りマーキングに使用され、"
+        "未去勢雄でより顕著。【保存的管理（大多数の症例）】軽度の過形成で二次的合併症がなければ"
+        "介入不要。痂皮・角化物の蓄積があれば温生理食塩水で優しく清拭。組織は脆弱なため"
+        "強い擦過は避ける — 医原性外傷が炎症を悪化させる。【過角化・痂皮】温水湿布で2-3分"
+        "軟化後、綿棒で緩んだデブリを愛護的に除去。クロルヘキシジン0.05%溶液を塗布し二次"
+        "細菌感染を予防。週2-3回を必要に応じて繰り返す。【二次細菌感染】クロルヘキシジン"
+        "0.05%局所清拭 q12-24h。蜂窩織炎がある場合は全身性抗菌薬: エンロフロキサシン"
+        "5-10 mg/kg PO/SC q12h × 7-14日間、またはトリメトプリム・スルファ15-30 mg/kg "
+        "PO q12h。【炎症】メロキシカム0.2 mg/kg PO/SC q24h × 3-5日間。【去勢手術】"
+        "アンドロゲン刺激を低減し、4-8週間以内に腺サイズの有意な縮小が期待できる。再発性"
+        "二次感染、著明な過形成による不快感、または外観上の問題がある場合に検討。イソフルラン"
+        "麻酔 — チャンバー導入3-4%、ノーズコーン維持1.5-2.5%、37℃加温パッドで体温維持。"
+        "【腫瘍との鑑別】急速な増大、潰瘍化、非対称性、色調変化がある場合 → FNA細胞診"
+        "±切開生検。側腹腺腺腫/腺癌の報告はまれだが、腫瘍性変化には1-2mm マージンでの"
+        "外科的切除が適応。参考文献: Harkness & Wagner (1995) Biology and Medicine of "
+        "Rabbits and Rodents 4th ed; Percy & Barthold (2007) Pathology of Laboratory "
+        "Rodents and Rabbits 3rd ed; Quesenberry & Carpenter (2012) Ferrets, Rabbits, "
+        "and Rodents 3rd ed.",
         "prevention": "No specific prevention for flank gland hyperplasia as it is a normal androgen-dependent "
-                      "physiological change. Elective castration in young males reduces gland prominence. "
-                      "Maintain clean bedding (change every 3-5 days) to minimize secondary bacterial "
-                      "contamination. Avoid abrasive bedding materials (cedar/pine shavings) that may "
-                      "irritate gland tissue. Regular monitoring of gland size and appearance during "
-                      "routine health checks — note any asymmetry, rapid enlargement, or ulceration "
-                      "that may indicate neoplastic transformation. Owners should be educated that "
-                      "pigmented flank glands are normal anatomy, especially prominent in intact male "
-                      "Syrian hamsters, and do not require treatment unless complications develop.",
+        "physiological change. Elective castration in young males reduces gland prominence. "
+        "Maintain clean bedding (change every 3-5 days) to minimize secondary bacterial "
+        "contamination. Avoid abrasive bedding materials (cedar/pine shavings) that may "
+        "irritate gland tissue. Regular monitoring of gland size and appearance during "
+        "routine health checks — note any asymmetry, rapid enlargement, or ulceration "
+        "that may indicate neoplastic transformation. Owners should be educated that "
+        "pigmented flank glands are normal anatomy, especially prominent in intact male "
+        "Syrian hamsters, and do not require treatment unless complications develop.",
         "prevention_ja": "側腹腺過形成は正常なアンドロゲン依存性の生理的変化であり、特異的な予防法はない。"
-                         "若齢での選択的去勢手術により腺の顕著化を軽減できる。清潔な床材の維持（3-5日ごとに"
-                         "交換）で二次細菌感染を最小限に。研磨性の床材（スギ/マツのチップ）は腺組織を刺激する"
-                         "ため避ける。定期健康チェック時に腺のサイズと外観をモニタリング — 非対称性、急速な"
-                         "増大、潰瘍化は腫瘍性変化を示唆する可能性あり。飼い主教育: 色素沈着した側腹腺は"
-                         "正常な解剖構造であり、特に未去勢雄のシリアンハムスターで顕著で、合併症がなければ"
-                         "治療は不要であることを説明。",
+        "若齢での選択的去勢手術により腺の顕著化を軽減できる。清潔な床材の維持（3-5日ごとに"
+        "交換）で二次細菌感染を最小限に。研磨性の床材（スギ/マツのチップ）は腺組織を刺激する"
+        "ため避ける。定期健康チェック時に腺のサイズと外観をモニタリング — 非対称性、急速な"
+        "増大、潰瘍化は腫瘍性変化を示唆する可能性あり。飼い主教育: 色素沈着した側腹腺は"
+        "正常な解剖構造であり、特に未去勢雄のシリアンハムスターで顕著で、合併症がなければ"
+        "治療は不要であることを説明。",
         "prognosis": "Excellent prognosis. Flank gland hyperplasia is a benign, non-progressive condition "
-                     "in most cases. The glands naturally regress with aging and declining testosterone "
-                     "levels. Castration results in significant regression within 4-8 weeks in most cases. "
-                     "Secondary bacterial infection resolves with appropriate antimicrobial therapy. "
-                     "Neoplastic transformation (flank gland adenoma or carcinoma) is rare; when it occurs, "
-                     "surgical excision is usually curative for adenomas. Carcinoma has potential for local "
-                     "invasion but distant metastasis is uncommon. No impact on lifespan in uncomplicated cases.",
+        "in most cases. The glands naturally regress with aging and declining testosterone "
+        "levels. Castration results in significant regression within 4-8 weeks in most cases. "
+        "Secondary bacterial infection resolves with appropriate antimicrobial therapy. "
+        "Neoplastic transformation (flank gland adenoma or carcinoma) is rare; when it occurs, "
+        "surgical excision is usually curative for adenomas. Carcinoma has potential for local "
+        "invasion but distant metastasis is uncommon. No impact on lifespan in uncomplicated cases.",
         "prognosis_ja": "予後は極めて良好。側腹腺過形成は大多数の症例で良性・非進行性の状態。加齢と"
-                        "テストステロン低下に伴い腺は自然退縮する。去勢手術により多くの症例で4-8週間以内に"
-                        "有意な退縮が得られる。二次細菌感染は適切な抗菌療法で消退。腫瘍性変化（側腹腺腺腫"
-                        "または腺癌）はまれで、腺腫は外科的切除で治癒的。腺癌は局所浸潤の可能性があるが"
-                        "遠隔転移はまれ。合併症のない症例では寿命への影響なし。",
+        "テストステロン低下に伴い腺は自然退縮する。去勢手術により多くの症例で4-8週間以内に"
+        "有意な退縮が得られる。二次細菌感染は適切な抗菌療法で消退。腫瘍性変化（側腹腺腺腫"
+        "または腺癌）はまれで、腺腫は外科的切除で治癒的。腺癌は局所浸潤の可能性があるが"
+        "遠隔転移はまれ。合併症のない症例では寿命への影響なし。",
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"adult", "young", "senior"},
     },
@@ -3984,66 +4104,44 @@ DISEASES: List[Dict[str, Any]] = [
     # ADDITIONAL DISEASES — ENDOCRINE & NEOPLASTIC
     # =========================================================================
     {
-        "name": "Adrenal Gland Tumor",
-        "name_ja": "副腎腫瘍",
-        "symptoms": {"hair_loss", "weight_loss", "lethargy", "increased_thirst",
-                      "increased_urination", "abdominal_distension", "skin_changes"},
-        "description": "Adrenal cortical tumors (adenoma or carcinoma) in hamsters, causing Cushing's-like syndrome.",
-        "description_ja": "副腎皮質腺腫または腺癌。高齢ハムスター（特にゴールデンハムスター）に多い。"
-                          "クッシング症候群様の症状：脱毛、多飲多尿、腹部膨満、皮膚菲薄化。",
-        "pathophysiology": "Adrenal cortical neoplasia leads to excessive cortisol and/or sex hormone production.",
-        "pathophysiology_ja": "副腎皮質細胞の腫瘍性増殖→コルチゾール・性ホルモンの過剰分泌→"
-                              "多飲多尿、対称性脱毛、皮膚菲薄化、筋萎縮、腹部膨満。"
-                              "副腎癌の場合は局所浸潤・転移の可能性あり。",
-        "causes": "Unknown; age-related neoplastic change. More common in older hamsters.",
-        "causes_ja": "原因不明。加齢に伴う腫瘍性変化。1.5〜2歳以上で発生率上昇。"
-                     "ゴールデンハムスターに多い。",
-        "treatment": "Surgical adrenalectomy if possible; otherwise supportive care.",
-        "treatment_ja": "外科的副腎摘出術が理想だが、ハムスターのサイズと麻酔リスクを考慮。"
-                        "内科的管理：症状緩和（皮膚ケア、栄養支持）。"
-                        "手術不適応例は緩和ケア。",
-        "prevention": "No known prevention.",
-        "prevention_ja": "予防法なし。高齢ハムスターの脱毛・多飲多尿は早期受診を推奨。",
-        "prognosis": "Guarded; depends on tumor type and surgical feasibility.",
-        "prognosis_ja": "慎重。腺腫は摘出で良好。腺癌は転移リスクあり。"
-                        "手術不適応例は進行性。ハムスターの短い寿命を考慮した管理が必要。",
-        "urgency": "moderate",
-        "recommended_tests": ["abdominal_ultrasound", "complete_blood_count", "serum_chemistry", "cortisol_level"],
-        "onset_pattern": {"chronic"},
-        "age_predisposition": {"senior"},
-    },
-    {
         "name": "Proliferative Ileitis (Wet Tail)",
         "name_ja": "増殖性回腸炎（ウェットテイル）",
-        "symptoms": {"wet_tail", "diarrhea", "lethargy", "appetite_loss",
-                      "dehydration", "hunched_posture", "weight_loss"},
+        "symptoms": {
+            "wet_tail",
+            "diarrhea",
+            "lethargy",
+            "appetite_loss",
+            "dehydration",
+            "hunched_posture",
+            "weight_loss",
+        },
         "description": "Severe, often fatal diarrheal disease in young hamsters caused by Lawsonia intracellularis.",
         "description_ja": "Lawsonia intracellularis（偏性細胞内寄生菌）による"
-                          "重篤な下痢性疾患。離乳期〜若齢ハムスター（3〜8週齢）に好発。"
-                          "ストレス（輸送・環境変化・過密）が発症のトリガー。"
-                          "致死率が高い（50%以上）。「ウェットテイル」の名の由来となった疾患。",
+        "重篤な下痢性疾患。離乳期〜若齢ハムスター（3〜8週齢）に好発。"
+        "ストレス（輸送・環境変化・過密）が発症のトリガー。"
+        "致死率が高い（50%以上）。「ウェットテイル」の名の由来となった疾患。",
         "pathophysiology": "Lawsonia intracellularis infects intestinal epithelial cells of the ileum, causing proliferative hyperplasia and severe secretory diarrhea.",
         "pathophysiology_ja": "Lawsonia intracellularisが回腸上皮細胞に感染→"
-                              "腸上皮の増殖性過形成→吸収障害＋分泌性下痢→重度脱水→"
-                              "電解質異常→循環不全。腸重積・直腸脱の合併もあり。"
-                              "重症例では敗血症→多臓器不全→死亡。",
+        "腸上皮の増殖性過形成→吸収障害＋分泌性下痢→重度脱水→"
+        "電解質異常→循環不全。腸重積・直腸脱の合併もあり。"
+        "重症例では敗血症→多臓器不全→死亡。",
         "causes": "Lawsonia intracellularis. Stress (weaning, transport, overcrowding) is the primary trigger.",
         "causes_ja": "Lawsonia intracellularis。ストレス（離乳、輸送、環境変化、過密飼育）、"
-                     "不適切な食事変更、免疫未熟な若齢個体でリスク上昇。",
+        "不適切な食事変更、免疫未熟な若齢個体でリスク上昇。",
         "treatment": "Aggressive fluid therapy, antibiotics, supportive care. Emergency treatment.",
         "treatment_ja": "緊急治療が必要。"
-                        "(1)積極的輸液療法（皮下/腹腔内、温めた乳酸リンゲル液）、"
-                        "(2)抗菌薬（エンロフロキサシン5〜10mg/kg BID、TMS 30mg/kg BID）、"
-                        "(3)保温（28〜30℃）、(4)強制給餌（脱水改善後）、"
-                        "(5)止痢薬は禁忌。治療開始が遅れると致死率急上昇。",
+        "(1)積極的輸液療法（皮下/腹腔内、温めた乳酸リンゲル液）、"
+        "(2)抗菌薬（エンロフロキサシン5〜10mg/kg BID、TMS 30mg/kg BID）、"
+        "(3)保温（28〜30℃）、(4)強制給餌（脱水改善後）、"
+        "(5)止痢薬は禁忌。治療開始が遅れると致死率急上昇。",
         "prevention": "Minimize stress during weaning and transport; proper hygiene.",
         "prevention_ja": "離乳・輸送時のストレス最小化。適切な飼育密度。"
-                         "清潔な飼育環境。急激な食事変更の回避。"
-                         "購入後1〜2週間は安静な環境で管理。",
+        "清潔な飼育環境。急激な食事変更の回避。"
+        "購入後1〜2週間は安静な環境で管理。",
         "prognosis": "Guarded to poor; 50%+ mortality even with treatment. Early intervention critical.",
         "prognosis_ja": "慎重〜不良。治療しても致死率50%以上。"
-                        "早期治療（発症24時間以内）で予後改善。"
-                        "脱水が重度の場合・食欲完全廃絶の場合は予後不良。",
+        "早期治療（発症24時間以内）で予後改善。"
+        "脱水が重度の場合・食欲完全廃絶の場合は予後不良。",
         "urgency": "emergency",
         "recommended_tests": ["fecal_exam", "complete_blood_count", "serum_chemistry"],
         "onset_pattern": {"acute"},
@@ -4157,7 +4255,6 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "cold_intolerance": {"ja": "寒さに弱い", "en": "Cold intolerance"},
     "visible_worms_in_stool": {"ja": "便中の虫体", "en": "Visible worms in stool"},
     "perianal_irritation": {"ja": "肛門周囲の刺激", "en": "Perianal irritation"},
-
     # --- 追加症状 (DISEASES内で使用されている未登録項目) ---
     "abdominal_pain": {"ja": "腹痛", "en": "Abdominal pain"},
     "abscess_formation": {"ja": "膿瘍形成", "en": "Abscess Formation"},
@@ -4248,5 +4345,31 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
 enrich_diseases(DISEASES, "Hamster")
 
 
-def analyze_symptoms(symptoms: List[str], age_stage: str = "", breed: str | None = None, *, onset: str | None = None, age_years: float | None = None, species: str | None = None, lab_values: dict | None = None, gender=None, vaccines=None, vaccination_status=None) -> Dict[str, Any]:
-    return analyze_symptoms_generic(symptoms, DISEASES, SYMPTOM_NAMES, ADVICE, onset=onset, age_years=age_years, breed=breed, species=species, lab_values=lab_values, gender=gender, vaccines=vaccines, vaccination_status=vaccination_status, prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("hamster", {}))
+def analyze_symptoms(
+    symptoms: List[str],
+    age_stage: str = "",
+    breed: str | None = None,
+    *,
+    onset: str | None = None,
+    age_years: float | None = None,
+    species: str | None = None,
+    lab_values: dict | None = None,
+    gender=None,
+    vaccines=None,
+    vaccination_status=None,
+) -> Dict[str, Any]:
+    return analyze_symptoms_generic(
+        symptoms,
+        DISEASES,
+        SYMPTOM_NAMES,
+        ADVICE,
+        onset=onset,
+        age_years=age_years,
+        breed=breed,
+        species=species,
+        lab_values=lab_values,
+        gender=gender,
+        vaccines=vaccines,
+        vaccination_status=vaccination_status,
+        prevalence_map=prevalence_data.SPECIES_PREVALENCE.get("hamster", {}),
+    )
