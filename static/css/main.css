@@ -286,6 +286,7 @@ a:hover{text-decoration:underline}
 .disease-match-moderate{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
 .disease-match-low{background:linear-gradient(90deg,#f87171,#ef4444)}
 .disease-match-label{font-size:.76rem;font-weight:700;white-space:nowrap}
+.disease-match-ratio{font-size:.7rem;font-weight:600;white-space:nowrap;color:var(--gray-600);background:var(--gray-100);padding:2px 8px;border-radius:10px}
 .expand-icon{font-size:.6rem;color:var(--gray-400);transition:transform var(--transition-normal);flex-shrink:0}
 .expand-icon.rotated{transform:rotate(180deg)}
 .match-badge{padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:700;flex-shrink:0;transition:transform var(--transition-fast)}
@@ -794,29 +795,62 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 
 /* Reduced motion preference */
 @media(prefers-reduced-motion:reduce){
-  *{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important}
+  *{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
   .fade-in-section{opacity:1;transform:none}
   .species-card{opacity:1;transform:none}
   .typing-indicator span{animation:none}
   .shimmer-line{animation:none;background:var(--gray-200)}
   .analyze-progress-fill{transition:none}
-  .share-btn:hover{transform:none}
   .scroll-top{transition:none}
+  /* Disable hover/active transforms — change visual state via background/border instead of motion */
+  .header-logo:hover,.hero-btn:hover,.hero-btn.primary:hover,.hero-stat:hover,.sponsor-banner-inner:hover,
+  .species-card:hover,.species-card:hover .icon,.selected-tag:hover,.disease-result:hover .match-badge,
+  .clinical-toggle:hover,.analyze-btn:hover:not(:disabled),.disease-cat-card:hover,
+  .chat-input-row button:hover,.landing-continue-btn:hover,.sponsor-product:hover,
+  .sponsor-btn-navy:hover,.sponsor-btn-green:hover,.pricing-btn-pro:hover,.scroll-top:hover,
+  .share-btn:hover,.az-nav button:active{transform:none!important}
 }
 
 /* --- Print styles --- */
 @media print{
   .header,.hero,.sponsor-banner,.landing-chat,.species-section,.footer,
   .share-widget,.feedback-widget,.print-results-btn,.az-nav,.hamburger,
-  .history-panel,.tab-nav-wrap,.pwa-install-banner,.kb-shortcuts-panel,.reading-progress,.scroll-top,.symptom-floater,.toast,.mobile-bottom-nav,.offline-banner{display:none!important}
-  body{background:#fff;font-size:11pt;padding:0}
-  .main-content{display:block!important}
-  #viewChecker{display:block!important}
-  #resultsArea{box-shadow:none;border:none}
-  .disease-result{break-inside:avoid;border:1px solid #ccc;margin-bottom:8pt}
-  .disease-detail{display:block!important;max-height:none!important;opacity:1!important}
-  .severity-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .history-panel,.tab-nav-wrap,.pwa-install-banner,.kb-shortcuts-panel,.reading-progress,.scroll-top,.symptom-floater,.toast,.mobile-bottom-nav,.offline-banner,
+  .related-suggestions,.results-sort-bar,.cookie-consent,.share-section,.feedback-widget,
+  #checkerProgress,#chatGuidedContainer,.chat-mode-toggle,.global-search-container,
+  .checker-progress,.lab-values-section summary,.pain-scale-section summary,
+  #breedSelectArea,.symptom-search,.symptom-list,.selected-symptoms,.analyze-btn,
+  .analyze-progress,#checkerGuide,#commonDiseasesArea,#breedEcologyArea,.detail-page-link,
+  details:not([open]) > *:not(summary){display:none!important}
+  body{background:#fff;font-size:10.5pt;padding:0;color:#000}
+  body::before{
+    content:"VetDict — 鑑別診断結果 / Differential Diagnosis Report";
+    display:block;font-size:14pt;font-weight:700;text-align:center;
+    padding:8pt 0 4pt;border-bottom:2px solid #000;margin-bottom:8pt;
+  }
+  body::after{
+    content:"※ 本レポートは臨床意思決定支援を目的とした参考情報です。確定診断には臨床所見・検査結果との総合判断が必要です。 / This report is decision-support reference only — definitive diagnosis requires clinical correlation. — vetdict.info";
+    display:block;font-size:8pt;text-align:center;
+    padding:6pt 0;border-top:1px solid #999;margin-top:12pt;color:#444;
+  }
+  .main-content{display:block!important;max-width:none}
+  #viewChecker,.card,.card-body,.card-header,.panels{display:block!important}
+  .panels{grid-template-columns:1fr!important}
+  #resultsArea{box-shadow:none;border:none;padding:0}
+  .results-empty{display:none!important}
+  .disease-result{break-inside:avoid;page-break-inside:avoid;border:1px solid #888;margin-bottom:8pt;background:#fff!important}
+  .disease-head{cursor:default}
+  .disease-detail{display:block!important;max-height:none!important;opacity:1!important;padding:8pt}
+  .severity-bar,.disease-match-fill,.quality-badge,.prevalence-badge,.disease-match-ratio,.lab-bar-dot,.lab-bar-normal{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .expand-icon{display:none!important}
+  .detail-grid{display:block!important}
+  .detail-section{break-inside:avoid;margin-bottom:6pt}
+  .detail-section-header{font-weight:700;border-bottom:1px solid #ccc;padding-bottom:2pt;margin-bottom:3pt}
+  .lab-results-viz{break-inside:avoid;border:1px solid #ccc;padding:6pt;margin-bottom:6pt}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]:after{content:" (" attr(href) ")";font-size:8pt;color:#666}
   .disease-page,.index-page,.hub-page{padding:10pt}
+  h1,h2,h3,h4{break-after:avoid}
 }
 
 /* --- Landing Chat --- */

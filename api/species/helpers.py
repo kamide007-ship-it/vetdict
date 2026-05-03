@@ -306,7 +306,12 @@ _TEMPLATE_MARKERS = (
     "適切な飼育管理、種に合ったバランスの取れた栄養、定期的な健康診断、ストレスの最小化、清潔な生活環境の維持",
     "適切な飼育管理、バランスの取れた栄養、定期的な獣医師による健康診断",
     "Proper husbandry, balanced nutrition, regular veterinary",
+    "Prevention includes appropriate husbandry, balanced nutrition",
     "involves pathological changes in affected tissues and organ systems",
+    "The pathological process involves tissue injury, inflammatory response",
+    "Multifactorial etiology including infectious, environmental",
+    "罹患組織および臓器系に病理学的変化をもたらす",
+    "感染性、環境、免疫、宿主関連因子を含む多因子性の病因",
     "Prognosis depends on severity, timeliness of diagnosis",
     "Amphibianにおける",
 )

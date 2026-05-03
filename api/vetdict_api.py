@@ -846,7 +846,10 @@ def disease_index(species: str):
 
     species_key = species.lower()
     if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
-        return jsonify({"error": "Unknown species"}), 404
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown species"}), 404
 
     sp_meta = SPECIES_META[species_key]
     diseases = _load_diseases(species_key)
@@ -903,7 +906,10 @@ def disease_detail(species: str, disease_slug: str):
 
     species_key = species.lower()
     if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
-        return jsonify({"error": "Unknown species"}), 404
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown species"}), 404
 
     sp_meta = SPECIES_META[species_key]
     diseases = _load_diseases(species_key)
@@ -916,7 +922,10 @@ def disease_detail(species: str, disease_slug: str):
             break
 
     if not disease:
-        return jsonify({"error": "Disease not found"}), 404
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Disease not found"}), 404
 
     # Normalize to dict for template rendering (handles dataclass objects)
     if not isinstance(disease, dict):
@@ -1070,6 +1079,11 @@ def static_files(filename):
         try:
             return send_from_directory(TEMPLATES_DIR, filename)
         except (FileNotFoundError, WerkzeugNotFound):
+            if _wants_html_response():
+                try:
+                    return render_template("404.html"), 404
+                except Exception:
+                    pass
             return jsonify({"error": f"{filename} not found"}), 404
 
 
@@ -1929,19 +1943,54 @@ def verify_admin():
 # =============================================================================
 
 
+def _wants_html_response() -> bool:
+    """True when the client prefers HTML (browser navigation) over JSON."""
+    path = request.path or ""
+    if path.startswith("/api/"):
+        return False
+    accept = request.accept_mimetypes
+    # Default to HTML for non-API paths unless the client explicitly wants JSON
+    return accept.best_match(["text/html", "application/json"]) != "application/json"
+
+
 @app.errorhandler(404)
 def not_found(e):
+    if _wants_html_response():
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            logger.warning("404 template render failed", exc_info=True)
     return jsonify({"error": "Not found", "version": VERSION}), 404
 
 
 @app.errorhandler(429)
 def rate_limited(e):
+    if _wants_html_response():
+        return (
+            "<!doctype html><meta charset='utf-8'><title>429 Too Many Requests</title>"
+            "<body style='font-family:system-ui,sans-serif;max-width:560px;margin:60px auto;padding:0 20px;text-align:center'>"
+            "<h1 style='color:#1a3068'>429 — Too Many Requests</h1>"
+            "<p>" + RATE_LIMIT_ERROR_MESSAGE + " / Please slow down and try again in a moment.</p>"
+            "<p><a href='/' style='color:#22a84f;font-weight:600'>← Home</a></p></body>",
+            429,
+            {"Content-Type": "text/html; charset=utf-8"},
+        )
     return jsonify({"error": RATE_LIMIT_ERROR_MESSAGE, "version": VERSION}), 429
 
 
 @app.errorhandler(500)
 def server_error(e):
     logger.error("500: %s", e, exc_info=True)
+    if _wants_html_response():
+        return (
+            "<!doctype html><meta charset='utf-8'><title>500 Server Error</title>"
+            "<body style='font-family:system-ui,sans-serif;max-width:560px;margin:60px auto;padding:0 20px;text-align:center'>"
+            "<h1 style='color:#1a3068'>500 — Server Error</h1>"
+            "<p>サーバー内部でエラーが発生しました。 / An internal error occurred. Please try again later.</p>"
+            "<p><a href='/' style='color:#22a84f;font-weight:600'>← Home</a></p></body>",
+            500,
+            {"Content-Type": "text/html; charset=utf-8"},
+        )
     return jsonify({"error": "Internal server error", "version": VERSION}), 500
 
 

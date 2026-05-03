@@ -996,9 +996,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:596,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:601,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:543,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:740,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:743,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:453,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:320,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:348,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1019,7 +1019,7 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:289,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:7154,
+    diseases:7162,
     species:21,
     drugs:250,
     symptoms:52,
@@ -1818,7 +1818,25 @@ function renderResults(data){
   const tests=data.recommended_tests||[];
   const severity=data.severity||"low";
   const adviceJa=data.general_advice_ja||"";
-  if(diseases.length===0){area.innerHTML=`<div class="results-empty"><span class="big-icon">\u2705</span><p>${t("noDiseasesFound")}</p></div>`;return;}
+  if(diseases.length===0){
+    const tipsJa=[
+      "\u75c7\u72b6\u30921\u301c2\u500b\u306b\u7d5e\u308a\u8fbc\u307f\u3001\u6700\u3082\u9855\u8457\u306a\u3082\u306e\u304b\u3089\u691c\u7d22\u3057\u3066\u307f\u3066\u304f\u3060\u3055\u3044",
+      "\u4ee3\u66ff\u8868\u73fe\uff08\u4f8b: \u300c\u4e0b\u75e2\u300d\u2194\u300c\u8edf\u4fbf\u300d\u3001\u300cPU/PD\u300d\u2194\u300c\u591a\u98f2\u591a\u5c3f\u300d\uff09\u3092\u8a66\u3057\u3066\u304f\u3060\u3055\u3044",
+      "\u75c7\u72b6\u540d\u3092\u82f1\u8a9e\u307e\u305f\u306f\u65e5\u672c\u8a9e\u306b\u5207\u308a\u66ff\u3048\u3066\u691c\u7d22",
+      "\u95a2\u9023\u75c7\u72b6\uff08\u98df\u6b32\u30fb\u5143\u6c17\u30fb\u4f53\u91cd\u5909\u5316\u306a\u3069\uff09\u3092\u8ffd\u52a0",
+    ];
+    const tipsEn=[
+      "Try narrowing to 1\u20132 most prominent symptoms",
+      "Try synonyms (e.g., 'diarrhea' \u2194 'loose stool', 'PU/PD' \u2194 'polyuria/polydipsia')",
+      "Switch language and try the symptom name in English or Japanese",
+      "Add related vital signs (appetite, energy, weight change)",
+    ];
+    const tips=currentLang==="ja"?tipsJa:tipsEn;
+    const heading=currentLang==="ja"?"\u8a72\u5f53\u3059\u308b\u75be\u60a3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f":"No matching diseases found";
+    const subheading=currentLang==="ja"?"\u9451\u5225\u7cbe\u5ea6\u3092\u4e0a\u3052\u308b\u305f\u3081\u306e\u30d2\u30f3\u30c8:":"Try these tips to improve matching:";
+    area.innerHTML=`<div class="results-empty"><span class="big-icon">\ud83d\udd0d</span><p style="font-weight:600;color:var(--navy);margin-bottom:6px">${escapeHtml(heading)}</p><p style="font-size:.82rem;color:var(--gray-600);margin-bottom:10px">${escapeHtml(subheading)}</p><ul style="text-align:left;display:inline-block;margin:0 auto;padding-left:18px;font-size:.82rem;color:var(--gray-700);line-height:1.6">${tips.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul></div>`;
+    return;
+  }
   const sevLabels=t("sevLabels");
   let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
   /* Low-confidence warning: alert when symptom count <=2 or top confidence <50% */
@@ -2222,6 +2240,11 @@ function renderDiseaseCard(d,data){
 
   const urgencyIcon=likelihood==="high"?"\u26A0\uFE0F":likelihood==="moderate"?"\u{1F7E1}":"\u{1F7E2}";
   const delay=Math.min(_cardIndex++*60,600);
+  const inputCount=(typeof selectedSymptoms!=="undefined"&&selectedSymptoms&&selectedSymptoms.size)||0;
+  const matchedCount=matchSymptoms.length;
+  const matchRatioLabel=inputCount>0&&matchedCount>0
+    ?(currentLang==="ja"?`${matchedCount}/${inputCount}症状一致`:`${matchedCount}/${inputCount} symptoms matched`)
+    :"";
   let html=`<div class="disease-result disease-${escapeHtml(likelihood)}" style="animation-delay:${delay}ms">
     <div class="disease-head" role="button" tabindex="0" aria-expanded="false">
       <div class="disease-head-info">
@@ -2234,6 +2257,7 @@ function renderDiseaseCard(d,data){
         <div class="disease-match-bar-row">
           <div class="disease-match-bar"><div class="disease-match-fill disease-match-${likelihood}" style="width:${Math.min(pct,100)}%"></div></div>
           <span class="disease-match-label">${urgencyIcon} ${pct}%</span>
+          ${matchRatioLabel?`<span class="disease-match-ratio" aria-label="${escapeHtml(matchRatioLabel)}">${escapeHtml(matchRatioLabel)}</span>`:""}
         </div>
       </div>
       <span class="expand-icon">&#9660;</span>
@@ -2666,6 +2690,10 @@ function renderSpeciesGuidance(containerId,guidance){
   msgs.scrollTop=msgs.scrollHeight;
 }
 
+const _CHAT_MAX_RETRIES=3;
+let _landingChatRetries=0;
+let _chatRetries=0;
+
 function sendLandingChat(){
   const input=document.getElementById("landingChatInput"),text=input.value.trim();if(!text)return;
   const sendBtn=input.closest(".chat-input-row")?.querySelector("button");
@@ -2697,14 +2725,22 @@ function sendLandingChat(){
     });
     msgs.appendChild(continueBtn);
     msgs.scrollTop=msgs.scrollHeight;
+    _landingChatRetries=0;
   })
   .catch(err=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
     debugError("Chat error:",err);
     const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
-    const retryBtn=`<button class="landing-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
-    errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtn;
-    errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendLandingChat();});
+    const canRetry=_landingChatRetries<_CHAT_MAX_RETRIES;
+    if(canRetry){
+      const retryBtn=`<button class="landing-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
+      errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtn;
+      errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries++;input.value=text;errDiv.remove();sendLandingChat();});
+    }else{
+      const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
+      errDiv.innerHTML=escapeHtml(giveUpMsg);
+      _landingChatRetries=0;
+    }
     msgs.appendChild(errDiv);
     msgs.scrollTop=msgs.scrollHeight;
   });
@@ -2749,15 +2785,23 @@ function sendChatMessage(){
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
+    _chatRetries=0;
   })
   .catch(err=>{
     clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
     debugError("Chat error:",err);
     trackEvent("api_error",{endpoint:"diagnostic-chat",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});
     const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
-    const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
-    errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
-    errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendChatMessage();});
+    const canRetry=_chatRetries<_CHAT_MAX_RETRIES;
+    if(canRetry){
+      const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
+      errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
+      errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries++;input.value=text;errDiv.remove();sendChatMessage();});
+    }else{
+      const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
+      errDiv.innerHTML=escapeHtml(giveUpMsg);
+      _chatRetries=0;
+    }
     msgs.appendChild(errDiv);msgs.scrollTop=msgs.scrollHeight;
   });
 }
