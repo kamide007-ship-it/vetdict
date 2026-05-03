@@ -57,7 +57,7 @@
 
   <form action="/diseases/search" method="get" style="margin-bottom:20px">
     <div style="display:flex;gap:8px">
-      <input type="text" name="q" placeholder="全動物種の疾患を横断検索... (例: pneumonia, 腎臓)" aria-label="疾患名で横断検索" style="flex:1;padding:10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.9rem;box-sizing:border-box">
+      <input type="search" name="q" placeholder="全動物種の疾患を横断検索... (例: pneumonia, 腎臓)" aria-label="疾患名で横断検索" autocomplete="off" inputmode="search" style="flex:1;padding:10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.9rem;box-sizing:border-box">
       <button type="submit" style="padding:10px 20px;background:var(--navy);color:var(--white);border:none;border-radius:var(--radius);font-weight:700;font-size:.86rem;cursor:pointer;white-space:nowrap">検索</button>
     </div>
   </form>

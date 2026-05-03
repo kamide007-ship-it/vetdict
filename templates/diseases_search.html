@@ -54,7 +54,7 @@
   <h1>全動物種の疾患を検索</h1>
 
   <form class="search-form" action="/diseases/search" method="get">
-    <input type="text" name="q" value="{{ query }}" placeholder="疾患名で検索... (例: pneumonia, 腎臓, fracture)" aria-label="疾患名で検索" autofocus>
+    <input type="search" name="q" value="{{ query }}" placeholder="疾患名で検索... (例: pneumonia, 腎臓, fracture)" aria-label="疾患名で検索" autofocus autocomplete="off" inputmode="search">
     <button type="submit">検索</button>
   </form>
 

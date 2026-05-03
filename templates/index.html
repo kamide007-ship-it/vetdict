@@ -16,9 +16,9 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 <script nonce="{{ g.csp_nonce }}">gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>VetDict — 獣医師のための臨床意思決定支援ツール | 鑑別診断・疾患DB・薬品辞書</title>
-<meta name="description" content="獣医師・獣医学生向け臨床支援プラットフォーム。臨床症状から鑑別疾患リストを即座に生成。7,000+疾患・220+薬品・21動物種対応。現役獣医師が開発。">
+<meta name="description" content="獣医師・獣医学生向け臨床支援プラットフォーム。臨床症状から鑑別疾患リストを即座に生成。7,000+疾患・250+薬品・21動物種対応。現役獣医師が開発。">
 <meta property="og:title" content="VetDict — 獣医師のための臨床意思決定支援ツール">
-<meta property="og:description" content="獣医師・獣医学生向け。臨床症状から鑑別疾患リストを即座に生成。7,000+疾患・220+薬品・21動物種対応。現役獣医師が開発した臨床支援プラットフォーム。">
+<meta property="og:description" content="獣医師・獣医学生向け。臨床症状から鑑別疾患リストを即座に生成。7,000+疾患・250+薬品・21動物種対応。現役獣医師が開発した臨床支援プラットフォーム。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vetdict.info/">
 <meta property="og:site_name" content="VetDict">
@@ -26,7 +26,7 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="VetDict — 獣医師のための臨床意思決定支援ツール">
-<meta name="twitter:description" content="獣医師・獣医学生向け。7,000+疾患・220+薬品・21動物種。臨床症状から鑑別疾患リストを即座に生成。">
+<meta name="twitter:description" content="獣医師・獣医学生向け。7,000+疾患・250+薬品・21動物種。臨床症状から鑑別疾患リストを即座に生成。">
 <meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
 <meta property="og:image" content="https://vetdict.info/static/og-image.png">
 <meta property="og:image:type" content="image/png">
@@ -49,7 +49,7 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
   "@type": "WebApplication",
   "name": "VetDict",
   "alternateName": "Vet Dict - Veterinary Disease Database",
-  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。7,000+疾患・220+薬品・21動物種対応の鑑別診断・疾患DB・薬品辞書。",
+  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。7,000+疾患・250+薬品・21動物種対応の鑑別診断・疾患DB・薬品辞書。",
   "applicationCategory": "HealthApplication",
   "applicationSubCategory": "VeterinaryApplication",
   "audience": {
@@ -60,7 +60,7 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
   "url": "https://vetdict.info/",
   "inLanguage": ["ja", "en"],
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
-  "featureList": "Differential diagnosis, Disease database (7000+ diseases), Drug dictionary (220+ drugs), AI diagnostic chat, 21 animal species",
+  "featureList": "Differential diagnosis, Disease database (7000+ diseases), Drug dictionary (250+ drugs), AI diagnostic chat, 21 animal species, Sedation/Anesthesia protocols (188 protocols)",
   "screenshot": "https://vetdict.info/static/og-image.png",
   "softwareVersion": "2.0",
   "author": {
@@ -74,7 +74,7 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
       "affiliation": {
         "@type": "VeterinaryClinic",
         "name": "南相馬アニマルクリニック",
-        "url": "https://www.minamisoma-ac.com/"
+        "url": "https://www.minamisoma-vet.com/"
       }
     }
   },
@@ -126,7 +126,7 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
       "name": "薬品辞書にはどのような情報が含まれていますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "194種の獣医用薬品を収録。動物種別の投与量・投与経路・禁忌事項を掲載しています。後腸発酵動物（ウサギ・モルモット等）への抗菌薬禁忌やエンロフロキサシンの猫網膜毒性など、種特異的な安全情報も含まれています。"
+        "text": "250種の獣医用薬品を収録。動物種別の投与量・投与経路・禁忌事項を掲載しています。後腸発酵動物（ウサギ・モルモット等）への抗菌薬禁忌やエンロフロキサシンの猫網膜毒性など、種特異的な安全情報も含まれています。新カテゴリとして生物学的製剤（ロキベトマブ、ベジンベトマブ等）と抗ウイルス薬（GS-441524、モルヌピラビル等）も追加されました。"
       }
     },
     {
@@ -181,7 +181,7 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 }
 </script>
 </head>
-<body data-version="1773369421">
+<body>
 
 <a href="#speciesSection" class="skip-link" data-i18n="skipLink">メインコンテンツへスキップ</a>
 
@@ -194,11 +194,11 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 {% include 'partials/_references.html' %}
 {% include 'partials/_footer.html' %}
 
-<div id="cookieConsent" class="cookie-consent" style="display:none">
-  <p>当サイトではGoogle Analyticsを使用しています。<a href="/privacy" style="color:var(--green)">プライバシーポリシー</a></p>
+<div id="cookieConsent" class="cookie-consent" style="display:none" role="region" data-i18n-aria="cookieConsentRegion" aria-label="Cookieに関するお知らせ">
+  <p><span data-i18n="cookieConsentText">当サイトでは利用状況の改善のためGoogle Analyticsを使用しています。</span><a href="/privacy" style="color:var(--green)" data-i18n="cookiePrivacyLink">プライバシーポリシー</a></p>
   <div style="display:flex;gap:8px">
-    <button class="cookie-btn accept" id="cookieAcceptBtn">同意する</button>
-    <button class="cookie-btn dismiss" id="cookieDismissBtn">閉じる</button>
+    <button type="button" class="cookie-btn accept" id="cookieAcceptBtn" data-i18n="cookieAccept">同意する</button>
+    <button type="button" class="cookie-btn dismiss" id="cookieDismissBtn" data-i18n-aria="cookieDismissAria" aria-label="同意せずに閉じる" data-i18n="cookieDismiss">閉じる</button>
   </div>
 </div>
 <script nonce="{{ g.csp_nonce }}">

@@ -11,15 +11,14 @@ NOTE: This module provides reference information only. It does not perform
 veterinary diagnosis or treatment, which are restricted to licensed
 veterinarians under Japanese Veterinary Practice Act (獣医師法).
 
-Veterinary Supervision: Kentaro Kaimide, DVM (上手健太郎)
-Minamisoma Veterinary Clinic (南相馬動物病院)
+Veterinary Supervision: Kentaro Kamide, DVM (上手健太郎)
+Minamisoma Animal Clinic (南相馬アニマルクリニック)
 https://www.minamisoma-vet.com/
 
 Disease data (symptoms, risk factors, frequency, treatment, prognosis,
 prevention) is presented as general reference information within the scope
 permitted by the Veterinary Practice Act (獣医師法).
 """
-
 
 import logging
 import os
@@ -47,6 +46,7 @@ _AI_EXTRACTION_ENABLED = os.getenv("VETDICT_USE_AI_SYMPTOM_EXTRACTION", "false")
 _AI_EXTRACTOR = None
 _AI_EXTRACTOR_LOCK = threading.Lock()
 
+
 def _get_ai_extractor():
     """Lazy-load AI extractor singleton (thread-safe)."""
     global _AI_EXTRACTOR
@@ -67,6 +67,7 @@ def _get_ai_extractor():
             from api.config_constants import (
                 AI_SYMPTOM_MODEL as DEFAULT_MODEL,
             )
+
             # Environment variable overrides config constant
             ai_model = os.getenv("AI_SYMPTOM_MODEL", DEFAULT_MODEL)
             ai_timeout = float(os.getenv("AI_SYMPTOM_TIMEOUT", AI_SYMPTOM_EXTRACTION_TIMEOUT))
@@ -82,7 +83,7 @@ def _get_ai_extractor():
                 cache_ttl=ai_cache_ttl,
                 confidence_threshold=ai_confidence,
                 fallback_enabled=ai_fallback,
-                manual_aliases=SYMPTOM_ALIASES if 'SYMPTOM_ALIASES' in globals() else {},
+                manual_aliases=SYMPTOM_ALIASES if "SYMPTOM_ALIASES" in globals() else {},
             )
             extractor.set_valid_symptom_ids(SYMPTOM_IDS)
             _AI_EXTRACTOR = extractor
@@ -130,6 +131,7 @@ def evaluate_with_ai_confidence(
         # Return None to indicate RECO2 unavailable - caller should continue normally
         return None
 
+
 # Import equine data for horse chat support
 try:
     from api.species.equine_diseases import (
@@ -138,6 +140,7 @@ try:
     from api.species.equine_diseases import (
         HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
     )
+
     EQUINE_AVAILABLE = True
 except ImportError:
     try:
@@ -147,6 +150,7 @@ except ImportError:
         from species.equine_diseases import (
             HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
         )
+
         EQUINE_AVAILABLE = True
     except ImportError:
         EQUINE_DISEASES = []
@@ -166,145 +170,301 @@ from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 
 EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     # -- General --
-    "fever": "gen_fever", "発熱": "gen_fever", "熱がある": "gen_fever", "高熱": "gen_fever",
-    "lethargy": "gen_lethargy", "元気がない": "gen_lethargy", "ぐったり": "gen_lethargy",
-    "元気ない": "gen_lethargy", "沈鬱": "gen_lethargy", "depression": "gen_lethargy",
-    "weight loss": "gen_weight_loss", "体重減少": "gen_weight_loss", "痩せた": "gen_weight_loss",
-    "痩せてきた": "gen_weight_loss", "losing weight": "gen_weight_loss",
-    "poor appetite": "gen_poor_appetite", "食欲不振": "gen_poor_appetite",
-    "食欲がない": "gen_poor_appetite", "食べない": "gen_poor_appetite",
-    "not eating": "gen_poor_appetite", "anorexia": "gen_poor_appetite",
-    "dehydration": "gen_dehydration", "脱水": "gen_dehydration",
-    "swollen lymph nodes": "gen_swollen_lymph", "リンパ節腫脹": "gen_swollen_lymph",
-    "sweating": "gen_sweating", "発汗": "gen_sweating", "汗をかく": "gen_sweating",
-    "recumbent": "gen_recumbent", "立てない": "gen_recumbent", "横臥": "gen_recumbent",
-    "起き上がれない": "gen_recumbent", "can't stand": "gen_recumbent",
-    "polydipsia": "gen_polydipsia", "多飲": "gen_polydipsia", "水をよく飲む": "gen_polydipsia",
-    "polyuria": "gen_polyuria", "多尿": "gen_polyuria",
-    "jaundice": "gen_icterus", "黄疸": "gen_icterus", "icterus": "gen_icterus",
-    "pale gums": "gen_pale_mucosa", "歯ぐき白い": "gen_pale_mucosa",
-    "pale mucous membranes": "gen_pale_mucosa", "蒼白": "gen_pale_mucosa",
-    "tachycardia": "gen_tachycardia", "頻脈": "gen_tachycardia", "心拍が速い": "gen_tachycardia",
-    "tachypnea": "gen_tachypnea", "頻呼吸": "gen_tachypnea", "呼吸が速い": "gen_tachypnea",
+    "fever": "gen_fever",
+    "発熱": "gen_fever",
+    "熱がある": "gen_fever",
+    "高熱": "gen_fever",
+    "lethargy": "gen_lethargy",
+    "元気がない": "gen_lethargy",
+    "ぐったり": "gen_lethargy",
+    "元気ない": "gen_lethargy",
+    "沈鬱": "gen_lethargy",
+    "depression": "gen_lethargy",
+    "weight loss": "gen_weight_loss",
+    "体重減少": "gen_weight_loss",
+    "痩せた": "gen_weight_loss",
+    "痩せてきた": "gen_weight_loss",
+    "losing weight": "gen_weight_loss",
+    "poor appetite": "gen_poor_appetite",
+    "食欲不振": "gen_poor_appetite",
+    "食欲がない": "gen_poor_appetite",
+    "食べない": "gen_poor_appetite",
+    "not eating": "gen_poor_appetite",
+    "anorexia": "gen_poor_appetite",
+    "dehydration": "gen_dehydration",
+    "脱水": "gen_dehydration",
+    "swollen lymph nodes": "gen_swollen_lymph",
+    "リンパ節腫脹": "gen_swollen_lymph",
+    "sweating": "gen_sweating",
+    "発汗": "gen_sweating",
+    "汗をかく": "gen_sweating",
+    "recumbent": "gen_recumbent",
+    "立てない": "gen_recumbent",
+    "横臥": "gen_recumbent",
+    "起き上がれない": "gen_recumbent",
+    "can't stand": "gen_recumbent",
+    "polydipsia": "gen_polydipsia",
+    "多飲": "gen_polydipsia",
+    "水をよく飲む": "gen_polydipsia",
+    "polyuria": "gen_polyuria",
+    "多尿": "gen_polyuria",
+    "jaundice": "gen_icterus",
+    "黄疸": "gen_icterus",
+    "icterus": "gen_icterus",
+    "pale gums": "gen_pale_mucosa",
+    "歯ぐき白い": "gen_pale_mucosa",
+    "pale mucous membranes": "gen_pale_mucosa",
+    "蒼白": "gen_pale_mucosa",
+    "tachycardia": "gen_tachycardia",
+    "頻脈": "gen_tachycardia",
+    "心拍が速い": "gen_tachycardia",
+    "tachypnea": "gen_tachypnea",
+    "頻呼吸": "gen_tachypnea",
+    "呼吸が速い": "gen_tachypnea",
     # -- Body --
-    "back pain": "body_back_pain", "背中痛い": "body_back_pain", "背部痛": "body_back_pain",
-    "muscle atrophy": "body_muscle_atrophy", "筋萎縮": "body_muscle_atrophy",
-    "swelling": "body_swelling", "腫れ": "body_swelling",
-    "edema": "body_edema", "むくみ": "body_edema", "浮腫": "body_edema",
-    "poor coat": "body_poor_coat", "毛づやが悪い": "body_poor_coat",
-    "dark urine": "body_dark_urine", "尿が濃い": "body_dark_urine", "茶色い尿": "body_dark_urine",
-    "abdominal distension": "body_abdominal_distension", "お腹が張る": "body_abdominal_distension",
-    "muscle fasciculation": "body_muscle_fasciculation", "筋肉がピクピク": "body_muscle_fasciculation",
-    "hirsutism": "body_hirsutism", "多毛": "body_hirsutism", "毛が長い": "body_hirsutism",
-    "stiffness": "body_stiffness", "こわばり": "body_stiffness", "硬い": "body_stiffness",
-    "ventral edema": "body_ventral_edema", "下腹部むくみ": "body_ventral_edema",
-    "neck crest": "body_neck_crest", "首が太い": "body_neck_crest",
-    "fat deposits": "body_fat_deposits", "脂肪が異常": "body_fat_deposits",
-    "emaciation": "body_rib_visible", "痩せすぎ": "body_rib_visible",
+    "back pain": "body_back_pain",
+    "背中痛い": "body_back_pain",
+    "背部痛": "body_back_pain",
+    "muscle atrophy": "body_muscle_atrophy",
+    "筋萎縮": "body_muscle_atrophy",
+    "swelling": "body_swelling",
+    "腫れ": "body_swelling",
+    "edema": "body_edema",
+    "むくみ": "body_edema",
+    "浮腫": "body_edema",
+    "poor coat": "body_poor_coat",
+    "毛づやが悪い": "body_poor_coat",
+    "dark urine": "body_dark_urine",
+    "尿が濃い": "body_dark_urine",
+    "茶色い尿": "body_dark_urine",
+    "abdominal distension": "body_abdominal_distension",
+    "お腹が張る": "body_abdominal_distension",
+    "muscle fasciculation": "body_muscle_fasciculation",
+    "筋肉がピクピク": "body_muscle_fasciculation",
+    "hirsutism": "body_hirsutism",
+    "多毛": "body_hirsutism",
+    "毛が長い": "body_hirsutism",
+    "stiffness": "body_stiffness",
+    "こわばり": "body_stiffness",
+    "硬い": "body_stiffness",
+    "ventral edema": "body_ventral_edema",
+    "下腹部むくみ": "body_ventral_edema",
+    "neck crest": "body_neck_crest",
+    "首が太い": "body_neck_crest",
+    "fat deposits": "body_fat_deposits",
+    "脂肪が異常": "body_fat_deposits",
+    "emaciation": "body_rib_visible",
+    "痩せすぎ": "body_rib_visible",
     # -- Limb --
-    "forelimb lameness": "limb_lameness_fore", "前肢跛行": "limb_lameness_fore",
-    "前脚びっこ": "limb_lameness_fore", "前脚かばう": "limb_lameness_fore",
-    "hindlimb lameness": "limb_lameness_hind", "後肢跛行": "limb_lameness_hind",
-    "後脚びっこ": "limb_lameness_hind", "後脚かばう": "limb_lameness_hind",
-    "lameness": "limb_lameness_fore", "跛行": "limb_lameness_fore",
-    "びっこ": "limb_lameness_fore", "limping": "limb_lameness_fore",
-    "joint swelling": "limb_joint_swelling", "関節腫脹": "limb_joint_swelling",
+    "forelimb lameness": "limb_lameness_fore",
+    "前肢跛行": "limb_lameness_fore",
+    "前脚びっこ": "limb_lameness_fore",
+    "前脚かばう": "limb_lameness_fore",
+    "hindlimb lameness": "limb_lameness_hind",
+    "後肢跛行": "limb_lameness_hind",
+    "後脚びっこ": "limb_lameness_hind",
+    "後脚かばう": "limb_lameness_hind",
+    "lameness": "limb_lameness_fore",
+    "跛行": "limb_lameness_fore",
+    "びっこ": "limb_lameness_fore",
+    "limping": "limb_lameness_fore",
+    "joint swelling": "limb_joint_swelling",
+    "関節腫脹": "limb_joint_swelling",
     "関節が腫れ": "limb_joint_swelling",
-    "tendon heat": "limb_tendon_heat", "腱が熱い": "limb_tendon_heat",
-    "tendon swelling": "limb_tendon_swelling", "腱が腫れ": "limb_tendon_swelling",
-    "windpuffs": "limb_windpuffs", "ウインドパフ": "limb_windpuffs",
-    "splints": "limb_splints", "ソエ": "limb_splints",
-    "digital pulse": "limb_digital_pulse", "蹄脈が強い": "limb_digital_pulse",
-    "upward fixation": "limb_upward_fixation", "膝蓋骨固定": "limb_upward_fixation",
+    "tendon heat": "limb_tendon_heat",
+    "腱が熱い": "limb_tendon_heat",
+    "tendon swelling": "limb_tendon_swelling",
+    "腱が腫れ": "limb_tendon_swelling",
+    "windpuffs": "limb_windpuffs",
+    "ウインドパフ": "limb_windpuffs",
+    "splints": "limb_splints",
+    "ソエ": "limb_splints",
+    "digital pulse": "limb_digital_pulse",
+    "蹄脈が強い": "limb_digital_pulse",
+    "upward fixation": "limb_upward_fixation",
+    "膝蓋骨固定": "limb_upward_fixation",
     # -- Hoof --
-    "laminitis": "hoof_laminitis_signs", "蹄葉炎": "hoof_laminitis_signs",
-    "hoof abscess": "hoof_abscess", "蹄膿瘍": "hoof_abscess",
-    "hoof heat": "hoof_heat", "蹄が熱い": "hoof_heat",
-    "thrush": "hoof_thrush", "蹄叉腐爛": "hoof_thrush",
-    "hoof crack": "hoof_crack", "蹄の亀裂": "hoof_crack", "裂蹄": "hoof_crack",
-    "white line disease": "hoof_white_line", "白線病": "hoof_white_line",
-    "hoof foul odor": "hoof_foul_odor", "蹄が臭い": "hoof_foul_odor",
-    "navicular": "hoof_navicular", "舟状骨": "hoof_navicular",
+    "laminitis": "hoof_laminitis_signs",
+    "蹄葉炎": "hoof_laminitis_signs",
+    "hoof abscess": "hoof_abscess",
+    "蹄膿瘍": "hoof_abscess",
+    "hoof heat": "hoof_heat",
+    "蹄が熱い": "hoof_heat",
+    "thrush": "hoof_thrush",
+    "蹄叉腐爛": "hoof_thrush",
+    "hoof crack": "hoof_crack",
+    "蹄の亀裂": "hoof_crack",
+    "裂蹄": "hoof_crack",
+    "white line disease": "hoof_white_line",
+    "白線病": "hoof_white_line",
+    "hoof foul odor": "hoof_foul_odor",
+    "蹄が臭い": "hoof_foul_odor",
+    "navicular": "hoof_navicular",
+    "舟状骨": "hoof_navicular",
     # -- Respiratory --
-    "cough": "resp_cough", "咳": "resp_cough", "せき": "resp_cough", "coughing": "resp_cough",
-    "nasal discharge": "resp_nasal_discharge", "鼻水": "resp_nasal_discharge",
+    "cough": "resp_cough",
+    "咳": "resp_cough",
+    "せき": "resp_cough",
+    "coughing": "resp_cough",
+    "nasal discharge": "resp_nasal_discharge",
+    "鼻水": "resp_nasal_discharge",
     "鼻汁": "resp_nasal_discharge",
-    "epistaxis": "resp_epistaxis", "鼻血": "resp_epistaxis", "鼻出血": "resp_epistaxis",
-    "labored breathing": "resp_labored_breathing", "呼吸困難": "resp_labored_breathing",
-    "息が荒い": "resp_labored_breathing", "呼吸が辛そう": "resp_labored_breathing",
-    "stridor": "resp_stridor", "喘鳴": "resp_stridor", "異常呼吸音": "resp_stridor",
-    "exercise intolerance": "resp_exercise_intolerance", "運動不耐性": "resp_exercise_intolerance",
-    "すぐバテる": "resp_exercise_intolerance", "パフォーマンス低下": "resp_exercise_intolerance",
+    "epistaxis": "resp_epistaxis",
+    "鼻血": "resp_epistaxis",
+    "鼻出血": "resp_epistaxis",
+    "labored breathing": "resp_labored_breathing",
+    "呼吸困難": "resp_labored_breathing",
+    "息が荒い": "resp_labored_breathing",
+    "呼吸が辛そう": "resp_labored_breathing",
+    "stridor": "resp_stridor",
+    "喘鳴": "resp_stridor",
+    "異常呼吸音": "resp_stridor",
+    "exercise intolerance": "resp_exercise_intolerance",
+    "運動不耐性": "resp_exercise_intolerance",
+    "すぐバテる": "resp_exercise_intolerance",
+    "パフォーマンス低下": "resp_exercise_intolerance",
     # -- Digestive --
-    "colic": "dig_colic_signs", "疝痛": "dig_colic_signs", "お腹痛い": "dig_colic_signs",
+    "colic": "dig_colic_signs",
+    "疝痛": "dig_colic_signs",
+    "お腹痛い": "dig_colic_signs",
     "腹痛": "dig_colic_signs",
-    "diarrhea": "dig_diarrhea", "下痢": "dig_diarrhea",
-    "constipation": "dig_constipation", "便秘": "dig_constipation",
-    "bloat": "dig_bloat", "鼓脹": "dig_bloat",
-    "bloody stool": "dig_bloody_stool", "血便": "dig_bloody_stool",
-    "drooling": "dig_salivation", "流涎": "dig_salivation", "よだれ": "dig_salivation",
-    "gastric reflux": "dig_gastric_reflux", "胃液逆流": "dig_gastric_reflux",
-    "teeth grinding": "dig_bruxism", "歯ぎしり": "dig_bruxism", "bruxism": "dig_bruxism",
-    "reduced gut sounds": "dig_reduced_gut", "腸音減少": "dig_reduced_gut",
+    "diarrhea": "dig_diarrhea",
+    "下痢": "dig_diarrhea",
+    "constipation": "dig_constipation",
+    "便秘": "dig_constipation",
+    "bloat": "dig_bloat",
+    "鼓脹": "dig_bloat",
+    "bloody stool": "dig_bloody_stool",
+    "血便": "dig_bloody_stool",
+    "drooling": "dig_salivation",
+    "流涎": "dig_salivation",
+    "よだれ": "dig_salivation",
+    "gastric reflux": "dig_gastric_reflux",
+    "胃液逆流": "dig_gastric_reflux",
+    "teeth grinding": "dig_bruxism",
+    "歯ぎしり": "dig_bruxism",
+    "bruxism": "dig_bruxism",
+    "reduced gut sounds": "dig_reduced_gut",
+    "腸音減少": "dig_reduced_gut",
     # -- Skin --
-    "hair loss": "skin_hair_loss", "脱毛": "skin_hair_loss", "毛が抜ける": "skin_hair_loss",
-    "itching": "skin_itching", "痒い": "skin_itching", "掻いてる": "skin_itching",
-    "hives": "skin_hives", "蕁麻疹": "skin_hives", "urticaria": "skin_hives",
-    "skin lesions": "skin_lesions", "皮膚病変": "skin_lesions",
-    "crusting": "skin_crusting", "痂皮": "skin_crusting", "かさぶた": "skin_crusting",
-    "photosensitivity": "skin_photosensitivity", "光線過敏": "skin_photosensitivity",
-    "sarcoid": "skin_sarcoid", "サルコイド": "skin_sarcoid",
-    "wound": "skin_wound", "傷": "skin_wound", "外傷": "skin_wound",
+    "hair loss": "skin_hair_loss",
+    "脱毛": "skin_hair_loss",
+    "毛が抜ける": "skin_hair_loss",
+    "itching": "skin_itching",
+    "痒い": "skin_itching",
+    "掻いてる": "skin_itching",
+    "hives": "skin_hives",
+    "蕁麻疹": "skin_hives",
+    "urticaria": "skin_hives",
+    "skin lesions": "skin_lesions",
+    "皮膚病変": "skin_lesions",
+    "crusting": "skin_crusting",
+    "痂皮": "skin_crusting",
+    "かさぶた": "skin_crusting",
+    "photosensitivity": "skin_photosensitivity",
+    "光線過敏": "skin_photosensitivity",
+    "sarcoid": "skin_sarcoid",
+    "サルコイド": "skin_sarcoid",
+    "wound": "skin_wound",
+    "傷": "skin_wound",
+    "外傷": "skin_wound",
     # -- Eye --
-    "eye discharge": "eye_discharge", "目やに": "eye_discharge",
-    "squinting": "eye_squinting", "目を細める": "eye_squinting",
-    "tearing": "eye_tearing", "涙目": "eye_tearing", "流涙": "eye_tearing",
-    "cloudy eye": "eye_cloudiness", "目が白い": "eye_cloudiness", "目の白濁": "eye_cloudiness",
-    "eye swelling": "eye_swelling", "目の腫れ": "eye_swelling",
-    "uveitis": "eye_uveitis_signs", "ぶどう膜炎": "eye_uveitis_signs",
+    "eye discharge": "eye_discharge",
+    "目やに": "eye_discharge",
+    "squinting": "eye_squinting",
+    "目を細める": "eye_squinting",
+    "tearing": "eye_tearing",
+    "涙目": "eye_tearing",
+    "流涙": "eye_tearing",
+    "cloudy eye": "eye_cloudiness",
+    "目が白い": "eye_cloudiness",
+    "目の白濁": "eye_cloudiness",
+    "eye swelling": "eye_swelling",
+    "目の腫れ": "eye_swelling",
+    "uveitis": "eye_uveitis_signs",
+    "ぶどう膜炎": "eye_uveitis_signs",
     # -- Neuro --
-    "ataxia": "neuro_ataxia", "運動失調": "neuro_ataxia", "ふらふら": "neuro_ataxia",
-    "seizure": "neuro_seizure", "発作": "neuro_seizure", "けいれん": "neuro_seizure",
-    "tremor": "neuro_tremor", "振戦": "neuro_tremor", "震え": "neuro_tremor",
-    "head tilt": "neuro_head_tilt", "首が傾く": "neuro_head_tilt",
-    "circling": "neuro_circling", "旋回": "neuro_circling",
-    "behavior change": "neuro_behavior_change", "行動変化": "neuro_behavior_change",
-    "aggression": "neuro_aggression", "攻撃的": "neuro_aggression",
-    "hyperesthesia": "neuro_hyperesthesia", "過敏": "neuro_hyperesthesia",
-    "tail paralysis": "neuro_tail_paralysis", "尾の麻痺": "neuro_tail_paralysis",
+    "ataxia": "neuro_ataxia",
+    "運動失調": "neuro_ataxia",
+    "ふらふら": "neuro_ataxia",
+    "seizure": "neuro_seizure",
+    "発作": "neuro_seizure",
+    "けいれん": "neuro_seizure",
+    "tremor": "neuro_tremor",
+    "振戦": "neuro_tremor",
+    "震え": "neuro_tremor",
+    "head tilt": "neuro_head_tilt",
+    "首が傾く": "neuro_head_tilt",
+    "circling": "neuro_circling",
+    "旋回": "neuro_circling",
+    "behavior change": "neuro_behavior_change",
+    "行動変化": "neuro_behavior_change",
+    "aggression": "neuro_aggression",
+    "攻撃的": "neuro_aggression",
+    "hyperesthesia": "neuro_hyperesthesia",
+    "過敏": "neuro_hyperesthesia",
+    "tail paralysis": "neuro_tail_paralysis",
+    "尾の麻痺": "neuro_tail_paralysis",
     # -- Cardio --
-    "heart murmur": "cardio_murmur", "心雑音": "cardio_murmur",
-    "irregular rhythm": "cardio_irregular_rhythm", "不整脈": "cardio_irregular_rhythm",
-    "syncope": "cardio_syncope", "失神": "cardio_syncope",
-    "jugular pulse": "cardio_jugular_pulse", "頚静脈怒張": "cardio_jugular_pulse",
+    "heart murmur": "cardio_murmur",
+    "心雑音": "cardio_murmur",
+    "irregular rhythm": "cardio_irregular_rhythm",
+    "不整脈": "cardio_irregular_rhythm",
+    "syncope": "cardio_syncope",
+    "失神": "cardio_syncope",
+    "jugular pulse": "cardio_jugular_pulse",
+    "頚静脈怒張": "cardio_jugular_pulse",
     # -- Reproductive --
-    "vulvar discharge": "repro_vulvar_discharge", "陰部排出物": "repro_vulvar_discharge",
-    "abortion": "repro_abortion", "流産": "repro_abortion",
-    "dystocia": "repro_dystocia", "難産": "repro_dystocia",
-    "retained placenta": "repro_placenta_retained", "胎盤停滞": "repro_placenta_retained",
-    "testicular swelling": "repro_testicular_swelling", "精巣腫脹": "repro_testicular_swelling",
-    "udder changes": "repro_udder_changes", "乳房変化": "repro_udder_changes",
+    "vulvar discharge": "repro_vulvar_discharge",
+    "陰部排出物": "repro_vulvar_discharge",
+    "abortion": "repro_abortion",
+    "流産": "repro_abortion",
+    "dystocia": "repro_dystocia",
+    "難産": "repro_dystocia",
+    "retained placenta": "repro_placenta_retained",
+    "胎盤停滞": "repro_placenta_retained",
+    "testicular swelling": "repro_testicular_swelling",
+    "精巣腫脹": "repro_testicular_swelling",
+    "udder changes": "repro_udder_changes",
+    "乳房変化": "repro_udder_changes",
     # -- Dental --
-    "quidding": "dental_quidding", "クイディング": "dental_quidding",
+    "quidding": "dental_quidding",
+    "クイディング": "dental_quidding",
     "食べこぼし": "dental_quidding",
-    "bad breath": "dental_bad_breath", "口臭": "dental_bad_breath",
-    "facial swelling": "dental_facial_swelling", "顔の腫れ": "dental_facial_swelling",
-    "bit resistance": "dental_bit_resistance", "ハミを嫌がる": "dental_bit_resistance",
+    "bad breath": "dental_bad_breath",
+    "口臭": "dental_bad_breath",
+    "facial swelling": "dental_facial_swelling",
+    "顔の腫れ": "dental_facial_swelling",
+    "bit resistance": "dental_bit_resistance",
+    "ハミを嫌がる": "dental_bit_resistance",
     # -- Foal --
-    "foal diarrhea": "foal_diarrhea", "子馬の下痢": "foal_diarrhea",
-    "foal lethargy": "foal_lethargy", "子馬の元気がない": "foal_lethargy",
-    "foal fever": "foal_fever", "子馬の発熱": "foal_fever",
-    "foal joint swelling": "foal_joint_swelling", "子馬の関節腫脹": "foal_joint_swelling",
-    "foal limb deformity": "foal_limb_deformity", "子馬の肢変形": "foal_limb_deformity",
-    "failure to stand": "foal_failure_stand", "立てない子馬": "foal_failure_stand",
-    "weak suckle": "foal_weak_suckle", "吸啜力低下": "foal_weak_suckle",
-    "umbilical swelling": "foal_umbilical_swelling", "臍が腫れ": "foal_umbilical_swelling",
-    "meconium retention": "foal_meconium_retention", "胎便停滞": "foal_meconium_retention",
+    "foal diarrhea": "foal_diarrhea",
+    "子馬の下痢": "foal_diarrhea",
+    "foal lethargy": "foal_lethargy",
+    "子馬の元気がない": "foal_lethargy",
+    "foal fever": "foal_fever",
+    "子馬の発熱": "foal_fever",
+    "foal joint swelling": "foal_joint_swelling",
+    "子馬の関節腫脹": "foal_joint_swelling",
+    "foal limb deformity": "foal_limb_deformity",
+    "子馬の肢変形": "foal_limb_deformity",
+    "failure to stand": "foal_failure_stand",
+    "立てない子馬": "foal_failure_stand",
+    "weak suckle": "foal_weak_suckle",
+    "吸啜力低下": "foal_weak_suckle",
+    "umbilical swelling": "foal_umbilical_swelling",
+    "臍が腫れ": "foal_umbilical_swelling",
+    "meconium retention": "foal_meconium_retention",
+    "胎便停滞": "foal_meconium_retention",
     # -- Urinary --
-    "hematuria": "uri_hematuria", "血尿": "uri_hematuria",
-    "dysuria": "uri_dysuria", "排尿困難": "uri_dysuria",
-    "stranguria": "uri_stranguria", "排尿痛": "uri_stranguria",
-    "discolored urine": "uri_discolored_urine", "尿の色異常": "uri_discolored_urine",
+    "hematuria": "uri_hematuria",
+    "血尿": "uri_hematuria",
+    "dysuria": "uri_dysuria",
+    "排尿困難": "uri_dysuria",
+    "stranguria": "uri_stranguria",
+    "排尿痛": "uri_stranguria",
+    "discolored urine": "uri_discolored_urine",
+    "尿の色異常": "uri_discolored_urine",
 }
 
 # Build equine finding key set for validation
@@ -356,22 +516,22 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
 
         if intersection > 0:
             similarity = intersection / union
-            matches.append({
-                "disease_id": disease.id,
-                "name_ja": disease.name_ja,
-                "name_en": disease.name_en,
-                "severity": disease.severity,
-                "similarity_score": round(similarity, 3),
-                "matched_symptoms": list(key_set & disease_findings),
-                "unmatched_user_symptoms": list(key_set - disease_findings),
-                "additional_disease_symptoms": list(disease_findings - key_set),
-                "description": disease.description_ja,
-                "description_ja": disease.description_ja,
-                "description_en": disease.name_en,
-                "recommended_tests": [
-                    f"{ja} ({en})" for _, ja, en in disease.recommended_exams
-                ],
-            })
+            matches.append(
+                {
+                    "disease_id": disease.id,
+                    "name_ja": disease.name_ja,
+                    "name_en": disease.name_en,
+                    "severity": disease.severity,
+                    "similarity_score": round(similarity, 3),
+                    "matched_symptoms": list(key_set & disease_findings),
+                    "unmatched_user_symptoms": list(key_set - disease_findings),
+                    "additional_disease_symptoms": list(disease_findings - key_set),
+                    "description": disease.description_ja,
+                    "description_ja": disease.description_ja,
+                    "description_en": disease.name_en,
+                    "recommended_tests": [f"{ja} ({en})" for _, ja, en in disease.recommended_exams],
+                }
+            )
 
     matches.sort(key=lambda m: m["similarity_score"], reverse=True)
     return matches
@@ -384,6 +544,7 @@ from api.chat.symptom_extractor import _extract_species_symptoms  # noqa: F401
 # =============================================================================
 # SYMPTOM EXTRACTION FROM TEXT
 # =============================================================================
+
 
 def extract_symptoms_from_text(text: str) -> list:
     """
@@ -411,10 +572,7 @@ def extract_symptoms_from_text(text: str) -> list:
                 symptoms = result.get("symptoms", [])
                 method = result.get("method", "unknown")
                 confidence = result.get("confidence", 0.0)
-                logger.info(
-                    f"Symptom extraction: method={method} "
-                    f"confidence={confidence} symptoms={len(symptoms)}"
-                )
+                logger.info(f"Symptom extraction: method={method} confidence={confidence} symptoms={len(symptoms)}")
                 if symptoms:
                     return symptoms
                 # If AI found no symptoms but no error, continue to manual fallback
@@ -472,7 +630,8 @@ def extract_symptoms_from_text(text: str) -> list:
     # ---------------------------------------------------------------
     if not matched_symptoms:
         import re as _re
-        fragments = _re.split(r'[、。,.と！!？?\s]+', text_lower)
+
+        fragments = _re.split(r"[、。,.と！!？?\s]+", text_lower)
         fragments = [f.strip() for f in fragments if len(f.strip()) >= 1]
         for frag in fragments:
             for alias in _sorted_aliases:
@@ -495,27 +654,57 @@ def extract_symptoms_from_text(text: str) -> list:
 
 _ONSET_ALIASES: dict[str, str] = {
     # English
-    "sudden": "acute", "suddenly": "acute", "just started": "acute",
-    "today": "acute", "just now": "acute", "this morning": "acute",
-    "last night": "acute", "few hours ago": "acute", "acute": "acute",
-    "few days": "subacute", "several days": "subacute",
-    "a week": "subacute", "this week": "subacute", "subacute": "subacute",
-    "days ago": "subacute", "couple of days": "subacute",
-    "chronic": "chronic", "long time": "chronic", "months": "chronic",
-    "weeks": "chronic", "for a while": "chronic", "ongoing": "chronic",
-    "persistent": "chronic", "keeps coming back": "chronic",
-    "recurring": "chronic", "always": "chronic",
+    "sudden": "acute",
+    "suddenly": "acute",
+    "just started": "acute",
+    "today": "acute",
+    "just now": "acute",
+    "this morning": "acute",
+    "last night": "acute",
+    "few hours ago": "acute",
+    "acute": "acute",
+    "few days": "subacute",
+    "several days": "subacute",
+    "a week": "subacute",
+    "this week": "subacute",
+    "subacute": "subacute",
+    "days ago": "subacute",
+    "couple of days": "subacute",
+    "chronic": "chronic",
+    "long time": "chronic",
+    "months": "chronic",
+    "weeks": "chronic",
+    "for a while": "chronic",
+    "ongoing": "chronic",
+    "persistent": "chronic",
+    "keeps coming back": "chronic",
+    "recurring": "chronic",
+    "always": "chronic",
     # Japanese
-    "突然": "acute", "急に": "acute", "今日から": "acute",
-    "さっきから": "acute", "今朝から": "acute", "昨夜から": "acute",
+    "突然": "acute",
+    "急に": "acute",
+    "今日から": "acute",
+    "さっきから": "acute",
+    "今朝から": "acute",
+    "昨夜から": "acute",
     "急性": "acute",
-    "数日前から": "subacute", "2〜3日前から": "subacute",
-    "2～3日前から": "subacute", "2-3日前から": "subacute",
-    "1週間前から": "subacute", "先週から": "subacute",
-    "数日": "subacute", "亜急性": "subacute",
-    "ずっと": "chronic", "以前から": "chronic", "前から": "chronic",
-    "長い間": "chronic", "慢性": "chronic", "何ヶ月も": "chronic",
-    "何週間も": "chronic", "繰り返し": "chronic", "ずっと前から": "chronic",
+    "数日前から": "subacute",
+    "2〜3日前から": "subacute",
+    "2～3日前から": "subacute",
+    "2-3日前から": "subacute",
+    "1週間前から": "subacute",
+    "先週から": "subacute",
+    "数日": "subacute",
+    "亜急性": "subacute",
+    "ずっと": "chronic",
+    "以前から": "chronic",
+    "前から": "chronic",
+    "長い間": "chronic",
+    "慢性": "chronic",
+    "何ヶ月も": "chronic",
+    "何週間も": "chronic",
+    "繰り返し": "chronic",
+    "ずっと前から": "chronic",
     "だいぶ前から": "chronic",
 }
 
@@ -538,14 +727,32 @@ def extract_onset_from_text(text: str) -> str | None:
 
 _AGE_ALIASES: dict[str, float] = {
     # English
-    "puppy": 0.5, "kitten": 0.3,
+    "puppy": 0.5,
+    "kitten": 0.3,
     # Japanese
-    "子犬": 0.5, "子猫": 0.3,
-    "1歳": 1.0, "2歳": 2.0, "3歳": 3.0, "4歳": 4.0, "5歳": 5.0,
-    "6歳": 6.0, "7歳": 7.0, "8歳": 8.0, "9歳": 9.0, "10歳": 10.0,
-    "11歳": 11.0, "12歳": 12.0, "13歳": 13.0, "14歳": 14.0, "15歳": 15.0,
-    "半年": 0.5, "生後3ヶ月": 0.25, "生後6ヶ月": 0.5,
-    "老犬": 10.0, "老猫": 12.0, "シニア": 9.0,
+    "子犬": 0.5,
+    "子猫": 0.3,
+    "1歳": 1.0,
+    "2歳": 2.0,
+    "3歳": 3.0,
+    "4歳": 4.0,
+    "5歳": 5.0,
+    "6歳": 6.0,
+    "7歳": 7.0,
+    "8歳": 8.0,
+    "9歳": 9.0,
+    "10歳": 10.0,
+    "11歳": 11.0,
+    "12歳": 12.0,
+    "13歳": 13.0,
+    "14歳": 14.0,
+    "15歳": 15.0,
+    "半年": 0.5,
+    "生後3ヶ月": 0.25,
+    "生後6ヶ月": 0.5,
+    "老犬": 10.0,
+    "老猫": 12.0,
+    "シニア": 9.0,
 }
 
 
@@ -556,6 +763,7 @@ def extract_age_from_text(text: str) -> float | None:
     """
     text_lower = text.lower()
     import re
+
     # Try patterns like "5 years old", "3 year old"
     match = re.search(r"(\d+(?:\.\d+)?)\s*(?:years?\s*old|yo\b|yrs?\b)", text_lower)
     if match:
@@ -572,7 +780,7 @@ def generate_disease_reasoning_ja(disease: dict, symptoms: list) -> str:
     matched_count = len(disease.get("matched_symptoms", []))
     total_symptoms = matched_count + len(disease.get("unmatched_user_symptoms", []))
 
-    return f"患者犬の症状セット（{matched_count}/{total_symptoms}）が{disease['name_ja']}と高く一致しており、類似度は{int(disease['similarity_score']*100)}%です。"
+    return f"患者犬の症状セット（{matched_count}/{total_symptoms}）が{disease['name_ja']}と高く一致しており、類似度は{int(disease['similarity_score'] * 100)}%です。"
 
 
 def generate_disease_reasoning_en(disease: dict, symptoms: list) -> str:
@@ -580,7 +788,7 @@ def generate_disease_reasoning_en(disease: dict, symptoms: list) -> str:
     matched_count = len(disease.get("matched_symptoms", []))
     total_symptoms = matched_count + len(disease.get("unmatched_user_symptoms", []))
 
-    return f"The dog's symptom profile ({matched_count}/{total_symptoms}) shows strong alignment with {disease['name_en']}, with a similarity score of {int(disease['similarity_score']*100)}%."
+    return f"The dog's symptom profile ({matched_count}/{total_symptoms}) shows strong alignment with {disease['name_en']}, with a similarity score of {int(disease['similarity_score'] * 100)}%."
 
 
 # DISEASE_SUPPLEMENTS extracted to api/chat/supplements.py
@@ -682,31 +890,30 @@ def match_symptoms_to_diseases(
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
         confidence = min(round(raw_logistic * 100, 1), 95.0)
 
-        matches.append({
-            "disease_id": disease["id"],
-            "name_ja": disease["name_ja"],
-            "name_en": disease["name_en"],
-            "severity": disease["severity"],
-            "similarity_score": round(composite, 3),
-            "confidence_percent": confidence,
-            "matched_symptoms": sorted(matched),
-            "unmatched_user_symptoms": sorted(symptom_set - disease_symptoms),
-            "additional_disease_symptoms": sorted(disease_symptoms - symptom_set),
-            "missing_key_symptoms": sorted(
-                s for s in missing
-                if _SYMPTOM_SPECIFICITY.get(s, 1.0) >= 1.5
-            ),
-            "description": disease.get("description", ""),
-            "description_ja": disease.get("description_ja", ""),
-            "description_en": disease.get("description_en", ""),
-            "recommended_tests": disease.get("recommended_tests", []),
-            "scoring_detail": {
-                "weighted_recall": round(weighted_recall, 3),
-                "coverage": round(coverage, 3),
-                "cluster_boost": cluster_boost,
-                "negative_penalty": round(negative_penalty, 3),
-            },
-        })
+        matches.append(
+            {
+                "disease_id": disease["id"],
+                "name_ja": disease["name_ja"],
+                "name_en": disease["name_en"],
+                "severity": disease["severity"],
+                "similarity_score": round(composite, 3),
+                "confidence_percent": confidence,
+                "matched_symptoms": sorted(matched),
+                "unmatched_user_symptoms": sorted(symptom_set - disease_symptoms),
+                "additional_disease_symptoms": sorted(disease_symptoms - symptom_set),
+                "missing_key_symptoms": sorted(s for s in missing if _SYMPTOM_SPECIFICITY.get(s, 1.0) >= 1.5),
+                "description": disease.get("description", ""),
+                "description_ja": disease.get("description_ja", ""),
+                "description_en": disease.get("description_en", ""),
+                "recommended_tests": disease.get("recommended_tests", []),
+                "scoring_detail": {
+                    "weighted_recall": round(weighted_recall, 3),
+                    "coverage": round(coverage, 3),
+                    "cluster_boost": cluster_boost,
+                    "negative_penalty": round(negative_penalty, 3),
+                },
+            }
+        )
 
     matches.sort(key=lambda m: m["similarity_score"], reverse=True)
     return matches
@@ -719,11 +926,7 @@ def match_symptoms_to_diseases(
 
 def _extract_mentioned_drugs(disease: dict, species: str) -> list:
     """Extract drugs mentioned in treatment text with species-specific dosage."""
-    treatment_text = (
-        (disease.get("treatment_ja") or "")
-        + " "
-        + (disease.get("treatment") or "")
-    ).lower()
+    treatment_text = ((disease.get("treatment_ja") or "") + " " + (disease.get("treatment") or "")).lower()
     if not treatment_text.strip():
         return []
     try:
@@ -734,8 +937,7 @@ def _extract_mentioned_drugs(disease: dict, species: str) -> list:
     for dr in _ALL_DRUGS:
         dr_name = dr.get("name", "")
         dr_name_ja = dr.get("name_ja", "")
-        if not ((dr_name and dr_name.lower() in treatment_text)
-                or (dr_name_ja and dr_name_ja in treatment_text)):
+        if not ((dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text)):
             continue
         entry = {
             "id": dr.get("id", ""),
@@ -772,38 +974,44 @@ def _build_follow_up_questions(
 
     # Phase 1: If no symptoms yet, ask what's wrong
     if not symptoms:
-        questions.append({
-            "question_ja": "どのような症状がありますか？",
-            "question_en": "What symptoms are you seeing?",
-            "type": "symptoms",
-            "options": [],
-        })
+        questions.append(
+            {
+                "question_ja": "どのような症状がありますか？",
+                "question_en": "What symptoms are you seeing?",
+                "type": "symptoms",
+                "options": [],
+            }
+        )
         return questions
 
     # Phase 2: Basic context (onset / age) — ask once
     if not onset:
-        questions.append({
-            "question_ja": "症状はいつ頃から始まりましたか？",
-            "question_en": "When did the symptoms start?",
-            "type": "onset",
-            "options": [
-                {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
-                {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
-                {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
-            ],
-        })
+        questions.append(
+            {
+                "question_ja": "症状はいつ頃から始まりましたか？",
+                "question_en": "When did the symptoms start?",
+                "type": "onset",
+                "options": [
+                    {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
+                    {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
+                    {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
+                ],
+            }
+        )
 
     if age is None:
-        questions.append({
-            "question_ja": "何歳ですか？（だいたいで構いません）",
-            "question_en": "How old is the animal? (approximate is fine)",
-            "type": "age",
-            "options": [
-                {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
-                {"value": 3.0, "label_ja": "1〜5歳", "label_en": "1–5 years"},
-                {"value": 8.0, "label_ja": "5歳以上", "label_en": "5+ years"},
-            ],
-        })
+        questions.append(
+            {
+                "question_ja": "何歳ですか？（だいたいで構いません）",
+                "question_en": "How old is the animal? (approximate is fine)",
+                "type": "age",
+                "options": [
+                    {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
+                    {"value": 3.0, "label_ja": "1〜5歳", "label_en": "1–5 years"},
+                    {"value": 8.0, "label_ja": "5歳以上", "label_en": "5+ years"},
+                ],
+            }
+        )
 
     # Phase 3: Targeted symptom questions from disease candidates
     if disease_candidates and len(symptoms) >= 1:
@@ -825,16 +1033,18 @@ def _build_follow_up_questions(
                 names = sp_names.get(sid, {})
                 name_ja = names.get("ja", sid)
                 name_en = names.get("en", sid)
-                questions.append({
-                    "question_ja": f"{name_ja}はありますか？",
-                    "question_en": f"Is there {name_en.lower()}?",
-                    "type": "symptom_check",
-                    "symptom_id": sid,
-                    "options": [
-                        {"value": f"+{sid}", "label_ja": f"はい — {name_ja}", "label_en": f"Yes — {name_en}"},
-                        {"value": f"-{sid}", "label_ja": "いいえ", "label_en": "No"},
-                    ],
-                })
+                questions.append(
+                    {
+                        "question_ja": f"{name_ja}はありますか？",
+                        "question_en": f"Is there {name_en.lower()}?",
+                        "type": "symptom_check",
+                        "symptom_id": sid,
+                        "options": [
+                            {"value": f"+{sid}", "label_ja": f"はい — {name_ja}", "label_en": f"Yes — {name_en}"},
+                            {"value": f"-{sid}", "label_ja": "いいえ", "label_en": "No"},
+                        ],
+                    }
+                )
             if len(questions) >= 5:
                 break
 
@@ -858,6 +1068,7 @@ def _species_guidance_line(species: str, symptom_count: int) -> str:
 # =============================================================================
 # API ENDPOINTS
 # =============================================================================
+
 
 @diagnostic_bp.route("/chat", methods=["POST"])
 def diagnostic_chat():
@@ -886,10 +1097,10 @@ def diagnostic_chat():
     onset = data.get("onset")  # explicit onset from client
     previous_symptoms_raw = data.get("previous_symptoms", [])
     species = data.get("species", "dog")
-    pain_score = data.get("pain_score")       # int 1-10 (optional)
-    lab_values = data.get("lab_values")       # dict (optional)
-    breed = data.get("breed")                 # str (optional)
-    lang = data.get("lang", "")              # "ja" or "en" for regional prevalence
+    pain_score = data.get("pain_score")  # int 1-10 (optional)
+    lab_values = data.get("lab_values")  # dict (optional)
+    breed = data.get("breed")  # str (optional)
+    lang = data.get("lang", "")  # "ja" or "en" for regional prevalence
 
     if not message:
         return jsonify({"error": "Message required"}), 400
@@ -901,10 +1112,7 @@ def diagnostic_chat():
     # Sanitise previous_symptoms: must be a list of short strings
     if not isinstance(previous_symptoms_raw, list):
         previous_symptoms_raw = []
-    previous_symptoms = [
-        str(s)[:200] for s in previous_symptoms_raw
-        if isinstance(s, str) and s.strip()
-    ][:100]
+    previous_symptoms = [str(s)[:200] for s in previous_symptoms_raw if isinstance(s, str) and s.strip()][:100]
 
     # Extract onset/age from message text if not explicitly provided
     detected_onset = extract_onset_from_text(message)
@@ -930,8 +1138,11 @@ def diagnostic_chat():
         extracted = _extract_species_symptoms(message, species)
         all_symptoms = list(set(extracted + previous_symptoms))
         disease_matches = _match_species_symptoms_to_diseases(
-            all_symptoms, species,
-            pain_score=pain_score, lab_values=lab_values, breed=breed,
+            all_symptoms,
+            species,
+            pain_score=pain_score,
+            lab_values=lab_values,
+            breed=breed,
             lang=lang,
         )
         sp_names = _SPECIES_DATA[species]["symptom_names"]
@@ -949,7 +1160,9 @@ def diagnostic_chat():
         all_symptoms = list(set(extracted + previous_symptoms))
         disease_matches = match_symptoms_to_diseases(
             all_symptoms,
-            pain_score=pain_score, lab_values=lab_values, breed=breed,
+            pain_score=pain_score,
+            lab_values=lab_values,
+            breed=breed,
         )
         symptom_details = [
             {
@@ -970,29 +1183,32 @@ def diagnostic_chat():
             "confidence_factors": [
                 {"factor": "symptom_match", "percentage": int(disease["similarity_score"] * 100), "weight": "High"},
                 {"factor": "breed_predisposition", "percentage": 0, "weight": "Medium"},
-                {"factor": "onset_match", "percentage": 0, "weight": "Medium",
-                 "onset_detected": effective_onset},
-                {"factor": "age_relevance", "percentage": 0, "weight": "Medium",
-                 "age_detected": effective_age},
-            ]
+                {"factor": "onset_match", "percentage": 0, "weight": "Medium", "onset_detected": effective_onset},
+                {"factor": "age_relevance", "percentage": 0, "weight": "Medium", "age_detected": effective_age},
+            ],
         }
 
         if species == "dog":
             treatments = get_treatment_recommendations_for_disease(disease["disease_id"], breed_id, age_years)
         else:
-            treatments = {"supplements": [], "primary_care_plan_ja": "獣医師にご相談ください。",
-                          "recommended_tests": disease.get("recommended_tests", [])}
+            treatments = {
+                "supplements": [],
+                "primary_care_plan_ja": "獣医師にご相談ください。",
+                "recommended_tests": disease.get("recommended_tests", []),
+            }
 
         # Extract mentioned drugs from treatment text
         mentioned_drugs = _extract_mentioned_drugs(disease, species)
 
-        enhanced_candidates.append({
-            **disease,
-            "reasoning": reasoning,
-            "treatment_recommendations": treatments,
-            "mentioned_drugs": mentioned_drugs,
-            "confidence_level": f"{int(disease['similarity_score'] * 100)}%"
-        })
+        enhanced_candidates.append(
+            {
+                **disease,
+                "reasoning": reasoning,
+                "treatment_recommendations": treatments,
+                "mentioned_drugs": mentioned_drugs,
+                "confidence_level": f"{int(disease['similarity_score'] * 100)}%",
+            }
+        )
 
     # Build human-readable response text for frontend
     guidance_line = _species_guidance_line(species, len(all_symptoms))
@@ -1043,13 +1259,16 @@ def diagnostic_chat():
         "onset_detected_from_text": detected_onset,
         "age_detected_from_text": detected_age,
         "follow_up_questions": _build_follow_up_questions(
-            effective_onset, effective_age, all_symptoms,
-            disease_candidates=enhanced_candidates, species=species,
+            effective_onset,
+            effective_age,
+            all_symptoms,
+            disease_candidates=enhanced_candidates,
+            species=species,
         ),
         "recommendations": {
-            "next_step": "This is reference information only. Supervised by Kentaro Kaimide, DVM (Minamisoma Vet Clinic). Please consult a veterinarian for professional evaluation.",
-            "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",
-        }
+            "next_step": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian for professional evaluation.",
+            "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
+        },
     }
 
     return jsonify(response)
@@ -1073,23 +1292,22 @@ def symptom_suggestions():
         results = [s for s in results if s["category"] == category]
 
     if search:
-        results = [
-            s for s in results
-            if search in s["name_ja"].lower() or search in s["name_en"].lower()
-        ]
+        results = [s for s in results if search in s["name_ja"].lower() or search in s["name_en"].lower()]
 
-    return jsonify({
-        "total": len(results),
-        "symptoms": [
-            {
-                "id": s["id"],
-                "name_ja": s["name_ja"],
-                "name_en": s["name_en"],
-                "category": s["category"],
-            }
-            for s in results
-        ]
-    })
+    return jsonify(
+        {
+            "total": len(results),
+            "symptoms": [
+                {
+                    "id": s["id"],
+                    "name_ja": s["name_ja"],
+                    "name_en": s["name_en"],
+                    "category": s["category"],
+                }
+                for s in results
+            ],
+        }
+    )
 
 
 @diagnostic_bp.route("/differential-analysis", methods=["POST"])
@@ -1148,11 +1366,13 @@ def differential_analysis():
             "unique_to_disease_1": list(symptoms_1 - symptoms_2),
             "unique_to_disease_2": list(symptoms_2 - symptoms_1),
             "user_symptom_overlap_1": len(symptom_set & symptoms_1),
-            "user_symptom_overlap_2": len(symptom_set & symptoms_2)
+            "user_symptom_overlap_2": len(symptom_set & symptoms_2),
         },
         "differential_reasoning_ja": f"{disease_1['name_ja']}と{disease_2['name_ja']}は類似した症状を呈することがありますが、固有の症状と検査結果により区別されます。",
         "differential_reasoning_en": f"Both {disease_1['name_en']} and {disease_2['name_en']} can present with similar symptoms, but differ in specific findings and test results.",
-        "recommended_diagnostic_tests": list(set(disease_1.get("recommended_tests", []) + disease_2.get("recommended_tests", [])))[:5]
+        "recommended_diagnostic_tests": list(
+            set(disease_1.get("recommended_tests", []) + disease_2.get("recommended_tests", []))
+        )[:5],
     }
 
     return jsonify(comparison)
@@ -1196,15 +1416,15 @@ def get_treatment_plan():
                 "visit_number": 1,
                 "days_after_diagnosis": 14,
                 "focus_areas_ja": ["呼吸状態評価", "投薬レビュー"],
-                "focus_areas_en": ["Respiratory Assessment", "Medication Review"]
+                "focus_areas_en": ["Respiratory Assessment", "Medication Review"],
             },
             {
                 "visit_number": 2,
                 "days_after_diagnosis": 60,
                 "focus_areas_ja": ["症状改善確認", "ケアプラン調整"],
-                "focus_areas_en": ["Symptom Improvement Check", "Care Plan Adjustment"]
-            }
-        ]
+                "focus_areas_en": ["Symptom Improvement Check", "Care Plan Adjustment"],
+            },
+        ],
     }
 
     return jsonify(plan)
@@ -1220,16 +1440,15 @@ def get_categories():
         cat = symptom["category"]
         if cat not in categories:
             categories[cat] = {"id": cat, "symptoms": []}
-        categories[cat]["symptoms"].append({
-            "id": symptom["id"],
-            "name_ja": symptom["name_ja"],
-            "name_en": symptom["name_en"],
-        })
+        categories[cat]["symptoms"].append(
+            {
+                "id": symptom["id"],
+                "name_ja": symptom["name_ja"],
+                "name_en": symptom["name_en"],
+            }
+        )
 
-    return jsonify({
-        "total_categories": len(categories),
-        "categories": list(categories.values())
-    })
+    return jsonify({"total_categories": len(categories), "categories": list(categories.values())})
 
 
 @diagnostic_bp.route("/feedback", methods=["POST"])
@@ -1301,24 +1520,30 @@ def record_diagnostic_feedback():
                 f"accuracy={accuracy_eval.get('accuracy_score', 0):.2f}"
             )
 
-            return jsonify({
-                "status": "recorded",
-                "learning_signal_strength": min(1.0, accuracy_eval.get("accuracy_score", 0)),
-                "accuracy_impact": accuracy_eval.get("accuracy_score", 0),
-                "ai_feedback": {
-                    "extraction_accuracy": accuracy_eval.get("accuracy_score", 0),
-                    "confidence_calibration": "good" if accuracy_eval.get("confidence_calibration", 0) > 0.7 else "needs_review",
-                },
-            }), 201
+            return jsonify(
+                {
+                    "status": "recorded",
+                    "learning_signal_strength": min(1.0, accuracy_eval.get("accuracy_score", 0)),
+                    "accuracy_impact": accuracy_eval.get("accuracy_score", 0),
+                    "ai_feedback": {
+                        "extraction_accuracy": accuracy_eval.get("accuracy_score", 0),
+                        "confidence_calibration": "good"
+                        if accuracy_eval.get("confidence_calibration", 0) > 0.7
+                        else "needs_review",
+                    },
+                }
+            ), 201
 
         except Exception as e:
             logger.warning("Failed to record learning feedback: %s", e)
             # Fallback: still record basic feedback
-            return jsonify({
-                "status": "recorded",
-                "learning_signal_strength": 0,
-                "note": "feedback recorded (learning unavailable)",
-            }), 201
+            return jsonify(
+                {
+                    "status": "recorded",
+                    "learning_signal_strength": 0,
+                    "note": "feedback recorded (learning unavailable)",
+                }
+            ), 201
 
     except Exception as e:
         logger.error("Error recording diagnostic feedback: %s", e)
@@ -1328,6 +1553,7 @@ def record_diagnostic_feedback():
 # =============================================================================
 # API: Next Diagnostic Questions (Phase 3)
 # =============================================================================
+
 
 @diagnostic_bp.route("/next-questions", methods=["POST"])
 def get_next_diagnostic_questions():
@@ -1382,6 +1608,7 @@ def get_next_diagnostic_questions():
 # =============================================================================
 # API: Multi-Disease Analysis (Phase 6)
 # =============================================================================
+
 
 @diagnostic_bp.route("/multi-disease/analyze", methods=["POST"])
 def analyze_multidisease():
@@ -1527,21 +1754,25 @@ def _get_species_symptoms_with_categories(species: str) -> list[dict]:
     if species == "horse" and EQUINE_AVAILABLE:
         try:
             from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+
             result = []
             for cat, items in HEALTH_CHECK_ITEMS.items():
                 for finding_key, name_ja, name_en in items:
-                    result.append({
-                        "id": finding_key,
-                        "name_ja": name_ja,
-                        "name_en": name_en,
-                        "category": cat,
-                    })
+                    result.append(
+                        {
+                            "id": finding_key,
+                            "name_ja": name_ja,
+                            "name_en": name_en,
+                            "category": cat,
+                        }
+                    )
             if result:
                 return result
         except (ImportError, Exception):
             pass
 
     from api.disease_store import get_symptoms_for_species
+
     symptoms = get_symptoms_for_species(species)
     if symptoms:
         return symptoms
@@ -1551,15 +1782,13 @@ def _get_species_symptoms_with_categories(species: str) -> list[dict]:
     if not sp_data:
         # Dog fallback
         return [
-            {"id": s["id"], "name_ja": s["name_ja"], "name_en": s["name_en"],
-             "category": s.get("category", "other")}
+            {"id": s["id"], "name_ja": s["name_ja"], "name_en": s["name_en"], "category": s.get("category", "other")}
             for s in SYMPTOMS
         ]
     sym_names = sp_data["symptom_names"]
     sym_cats = sp_data.get("symptom_categories", {})
     return [
-        {"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),
-         "category": sym_cats.get(sid, "other")}
+        {"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid), "category": sym_cats.get(sid, "other")}
         for sid, v in sym_names.items()
     ]
 
@@ -1622,12 +1851,14 @@ def _suggest_next_categories(
     result = []
     for cat, _score in sorted_cats[:3]:
         labels = _CATEGORY_LABELS.get(cat, {"ja": cat, "en": cat})
-        result.append({
-            "id": cat,
-            "name_ja": labels["ja"],
-            "name_en": labels["en"],
-            "differentiating_count": cat_symptom_counts.get(cat, 0),
-        })
+        result.append(
+            {
+                "id": cat,
+                "name_ja": labels["ja"],
+                "name_en": labels["en"],
+                "differentiating_count": cat_symptom_counts.get(cat, 0),
+            }
+        )
     return result
 
 
@@ -1660,7 +1891,7 @@ def consultation():
     pain_score = data.get("pain_score")
     lab_values = data.get("lab_values")
     breed = data.get("breed")
-    lang = data.get("lang", "")              # "ja" or "en" for regional prevalence
+    lang = data.get("lang", "")  # "ja" or "en" for regional prevalence
 
     sp_label = SPECIES_LABELS.get(species, {"ja": species, "en": species})
     all_symptoms = _get_species_symptoms_with_categories(species)
@@ -1673,19 +1904,23 @@ def consultation():
         categories = []
         for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1])):
             labels = _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})
-            categories.append({
-                "id": cat_id,
-                "name_ja": labels["ja"],
-                "name_en": labels["en"],
-                "symptom_count": len(syms),
-            })
-        return jsonify({
-            "phase": "select_category",
-            "message_ja": f"{sp_label['ja']}の問診を始めます。一番気になる症状のカテゴリを選んでください。",
-            "message_en": f"Starting consultation for {sp_label['en']}. Please select the symptom category that concerns you most.",
-            "categories": categories,
-            "species": species,
-        })
+            categories.append(
+                {
+                    "id": cat_id,
+                    "name_ja": labels["ja"],
+                    "name_en": labels["en"],
+                    "symptom_count": len(syms),
+                }
+            )
+        return jsonify(
+            {
+                "phase": "select_category",
+                "message_ja": f"{sp_label['ja']}の問診を始めます。一番気になる症状のカテゴリを選んでください。",
+                "message_en": f"Starting consultation for {sp_label['en']}. Please select the symptom category that concerns you most.",
+                "categories": categories,
+                "species": species,
+            }
+        )
 
     # ------------------------------------------------------------------
     # Phase: SELECT_SYMPTOMS — return symptoms for a chosen category
@@ -1697,60 +1932,69 @@ def consultation():
         cat_symptoms = grouped.get(selected_category, [])
         labels = _CATEGORY_LABELS.get(selected_category, {"ja": selected_category, "en": selected_category})
 
-        return jsonify({
-            "phase": "show_symptoms",
-            "category": selected_category,
-            "category_label_ja": labels["ja"],
-            "category_label_en": labels["en"],
-            "message_ja": f"{labels['ja']}の症状について教えてください。当てはまるものを全て選んでください。",
-            "message_en": f"Tell us about {labels['en']} symptoms. Select all that apply.",
-            "symptoms": [
-                {
-                    "id": s["id"],
-                    "name_ja": s["name_ja"],
-                    "name_en": s["name_en"],
-                    "selected": s["id"] in selected_symptoms,
-                }
-                for s in cat_symptoms
-            ],
-            "selected_symptoms": selected_symptoms,
-            "species": species,
-        })
+        return jsonify(
+            {
+                "phase": "show_symptoms",
+                "category": selected_category,
+                "category_label_ja": labels["ja"],
+                "category_label_en": labels["en"],
+                "message_ja": f"{labels['ja']}の症状について教えてください。当てはまるものを全て選んでください。",
+                "message_en": f"Tell us about {labels['en']} symptoms. Select all that apply.",
+                "symptoms": [
+                    {
+                        "id": s["id"],
+                        "name_ja": s["name_ja"],
+                        "name_en": s["name_en"],
+                        "selected": s["id"] in selected_symptoms,
+                    }
+                    for s in cat_symptoms
+                ],
+                "selected_symptoms": selected_symptoms,
+                "species": species,
+            }
+        )
 
     # ------------------------------------------------------------------
     # Phase: NEXT_CATEGORY — run diagnosis + suggest next category
     # ------------------------------------------------------------------
     if phase == "next_category":
         if not selected_symptoms:
-            return jsonify({
-                "phase": "select_category",
-                "message_ja": "症状が選択されていません。カテゴリを選んでください。",
-                "message_en": "No symptoms selected. Please select a category.",
-                "categories": [
-                    {
-                        "id": cat_id,
-                        "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["ja"],
-                        "name_en": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["en"],
-                        "symptom_count": len(syms),
-                    }
-                    for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1]))
-                ],
-                "species": species,
-            }), 200
+            return jsonify(
+                {
+                    "phase": "select_category",
+                    "message_ja": "症状が選択されていません。カテゴリを選んでください。",
+                    "message_en": "No symptoms selected. Please select a category.",
+                    "categories": [
+                        {
+                            "id": cat_id,
+                            "name_ja": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["ja"],
+                            "name_en": _CATEGORY_LABELS.get(cat_id, {"ja": cat_id, "en": cat_id})["en"],
+                            "symptom_count": len(syms),
+                        }
+                        for cat_id, syms in sorted(grouped.items(), key=lambda x: -len(x[1]))
+                    ],
+                    "species": species,
+                }
+            ), 200
 
         # Run diagnosis with current symptoms
         if species == "horse" and EQUINE_AVAILABLE:
             disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
         elif species in _SPECIES_DATA:
             disease_matches = _match_species_symptoms_to_diseases(
-                selected_symptoms, species,
-                pain_score=pain_score, lab_values=lab_values, breed=breed,
+                selected_symptoms,
+                species,
+                pain_score=pain_score,
+                lab_values=lab_values,
+                breed=breed,
                 lang=lang,
             )
         else:
             disease_matches = match_symptoms_to_diseases(
                 selected_symptoms,
-                pain_score=pain_score, lab_values=lab_values, breed=breed,
+                pain_score=pain_score,
+                lab_values=lab_values,
+                breed=breed,
             )
 
         # Build symptom details for display
@@ -1766,40 +2010,47 @@ def consultation():
 
         # Suggest next categories
         next_cats = _suggest_next_categories(
-            species, selected_symptoms, answered_categories,
-            disease_matches, all_symptoms,
+            species,
+            selected_symptoms,
+            answered_categories,
+            disease_matches,
+            all_symptoms,
         )
 
         # Build top candidates
         top_candidates = []
         for d in disease_matches[:5]:
-            top_candidates.append({
-                "name_ja": d.get("name_ja", ""),
-                "name_en": d.get("name_en", d.get("disease_id", "")),
-                "similarity_score": d.get("similarity_score", 0),
-                "confidence_percent": d.get("confidence_percent", 0),
-                "severity": d.get("severity", "low"),
-                "matched_symptoms": d.get("matched_symptoms", []),
-                "description_ja": d.get("description_ja", ""),
-                "description_en": d.get("description", d.get("description_en", "")),
-                "additional_disease_symptoms": d.get("additional_disease_symptoms", []),
-            })
+            top_candidates.append(
+                {
+                    "name_ja": d.get("name_ja", ""),
+                    "name_en": d.get("name_en", d.get("disease_id", "")),
+                    "similarity_score": d.get("similarity_score", 0),
+                    "confidence_percent": d.get("confidence_percent", 0),
+                    "severity": d.get("severity", "low"),
+                    "matched_symptoms": d.get("matched_symptoms", []),
+                    "description_ja": d.get("description_ja", ""),
+                    "description_en": d.get("description", d.get("description_en", "")),
+                    "additional_disease_symptoms": d.get("additional_disease_symptoms", []),
+                }
+            )
 
         has_more = len(next_cats) > 0
-        return jsonify({
-            "phase": "interim_results",
-            "message_ja": f"{len(selected_symptoms)}個の症状から{len(disease_matches)}件の候補が見つかりました。"
-                          + ("さらに絞り込むために、他のカテゴリの症状も確認しましょう。" if has_more else ""),
-            "message_en": f"Found {len(disease_matches)} candidates from {len(selected_symptoms)} symptoms."
-                          + (" Let's check other categories to narrow down." if has_more else ""),
-            "disease_candidates": top_candidates,
-            "total_candidates": len(disease_matches),
-            "selected_symptoms": selected_symptoms,
-            "symptom_details": symptom_details,
-            "next_categories": next_cats,
-            "answered_categories": answered_categories,
-            "species": species,
-        })
+        return jsonify(
+            {
+                "phase": "interim_results",
+                "message_ja": f"{len(selected_symptoms)}個の症状から{len(disease_matches)}件の候補が見つかりました。"
+                + ("さらに絞り込むために、他のカテゴリの症状も確認しましょう。" if has_more else ""),
+                "message_en": f"Found {len(disease_matches)} candidates from {len(selected_symptoms)} symptoms."
+                + (" Let's check other categories to narrow down." if has_more else ""),
+                "disease_candidates": top_candidates,
+                "total_candidates": len(disease_matches),
+                "selected_symptoms": selected_symptoms,
+                "symptom_details": symptom_details,
+                "next_categories": next_cats,
+                "answered_categories": answered_categories,
+                "species": species,
+            }
+        )
 
     # ------------------------------------------------------------------
     # Phase: ASK_CONTEXT — ask about onset and age
@@ -1807,54 +2058,78 @@ def consultation():
     if phase == "ask_context":
         # Species where CSU pain scale is not applicable
         _NO_PAIN_SPECIES = {
-            "fish", "reptile", "tortoise", "snake", "lizard",
+            "fish",
+            "reptile",
+            "tortoise",
+            "snake",
+            "lizard",
             "amphibian",
         }
         questions = []
         if not onset:
-            questions.append({
-                "type": "onset",
-                "question_ja": "症状はいつ頃から始まりましたか？",
-                "question_en": "When did the symptoms start?",
-                "options": [
-                    {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
-                    {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
-                    {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
-                ],
-            })
+            questions.append(
+                {
+                    "type": "onset",
+                    "question_ja": "症状はいつ頃から始まりましたか？",
+                    "question_en": "When did the symptoms start?",
+                    "options": [
+                        {"value": "acute", "label_ja": "突然（24時間以内）", "label_en": "Suddenly (within 24h)"},
+                        {"value": "subacute", "label_ja": "数日前から", "label_en": "A few days ago"},
+                        {"value": "chronic", "label_ja": "2週間以上前から", "label_en": "More than 2 weeks ago"},
+                    ],
+                }
+            )
         if age_years is None:
-            questions.append({
-                "type": "age",
-                "question_ja": "何歳ですか？（だいたいで構いません）",
-                "question_en": "How old is the animal? (approximate is fine)",
-                "options": [
-                    {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
-                    {"value": 2.0, "label_ja": "1〜3歳", "label_en": "1–3 years"},
-                    {"value": 5.0, "label_ja": "3〜7歳", "label_en": "3–7 years"},
-                    {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
-                ],
-            })
+            questions.append(
+                {
+                    "type": "age",
+                    "question_ja": "何歳ですか？（だいたいで構いません）",
+                    "question_en": "How old is the animal? (approximate is fine)",
+                    "options": [
+                        {"value": 0.5, "label_ja": "1歳未満", "label_en": "Under 1 year"},
+                        {"value": 2.0, "label_ja": "1〜3歳", "label_en": "1–3 years"},
+                        {"value": 5.0, "label_ja": "3〜7歳", "label_en": "3–7 years"},
+                        {"value": 10.0, "label_ja": "7歳以上", "label_en": "7+ years"},
+                    ],
+                }
+            )
         if pain_score is None and species not in _NO_PAIN_SPECIES:
-            questions.append({
-                "type": "pain_score",
-                "question_ja": "痛みの程度はどのくらいですか？（CSU疼痛スケール 0-4）",
-                "question_en": "How severe is the pain? (CSU Pain Scale 0–4)",
-                "options": [
-                    {"value": 0, "label_ja": "0: 痛みなし（快適）", "label_en": "0: No pain (comfortable)"},
-                    {"value": 1, "label_ja": "1: 軽度（やや落ち着かない）", "label_en": "1: Mild (slightly unsettled)"},
-                    {"value": 2, "label_ja": "2: 中等度（触診で反応）", "label_en": "2: Moderate (reacts to palpation)"},
-                    {"value": 3, "label_ja": "3: 重度（持続的な不快感）", "label_en": "3: Severe (persistent discomfort)"},
-                    {"value": 4, "label_ja": "4: 激痛（触れられない）", "label_en": "4: Extreme (untouchable)"},
-                ],
-            })
-        return jsonify({
-            "phase": "context_questions",
-            "message_ja": "あと少しだけ教えてください。",
-            "message_en": "Just a few more details.",
-            "questions": questions,
-            "selected_symptoms": selected_symptoms,
-            "species": species,
-        })
+            questions.append(
+                {
+                    "type": "pain_score",
+                    "question_ja": "痛みの程度はどのくらいですか？（CSU疼痛スケール 0-4）",
+                    "question_en": "How severe is the pain? (CSU Pain Scale 0–4)",
+                    "options": [
+                        {"value": 0, "label_ja": "0: 痛みなし（快適）", "label_en": "0: No pain (comfortable)"},
+                        {
+                            "value": 1,
+                            "label_ja": "1: 軽度（やや落ち着かない）",
+                            "label_en": "1: Mild (slightly unsettled)",
+                        },
+                        {
+                            "value": 2,
+                            "label_ja": "2: 中等度（触診で反応）",
+                            "label_en": "2: Moderate (reacts to palpation)",
+                        },
+                        {
+                            "value": 3,
+                            "label_ja": "3: 重度（持続的な不快感）",
+                            "label_en": "3: Severe (persistent discomfort)",
+                        },
+                        {"value": 4, "label_ja": "4: 激痛（触れられない）", "label_en": "4: Extreme (untouchable)"},
+                    ],
+                }
+            )
+        return jsonify(
+            {
+                "phase": "context_questions",
+                "message_ja": "あと少しだけ教えてください。",
+                "message_en": "Just a few more details.",
+                "questions": questions,
+                "selected_symptoms": selected_symptoms,
+                "species": species,
+            }
+        )
 
     # ------------------------------------------------------------------
     # Phase: FINALIZE — run final diagnosis with full context
@@ -1863,6 +2138,7 @@ def consultation():
         # Use the same diagnosis engine as the checkbox system for accuracy parity
         try:
             from api.species_analyzer import analyze_species_symptoms
+
             result = analyze_species_symptoms(
                 species=species,
                 symptoms=selected_symptoms,
@@ -1874,19 +2150,26 @@ def consultation():
             )
         except (ImportError, Exception) as exc:
             # Fallback to chat engine
-            logger.warning("Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc)
+            logger.warning(
+                "Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc
+            )
             if species == "horse" and EQUINE_AVAILABLE:
                 disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
             elif species in _SPECIES_DATA:
                 disease_matches = _match_species_symptoms_to_diseases(
-                    selected_symptoms, species,
-                    pain_score=pain_score, lab_values=lab_values, breed=breed,
+                    selected_symptoms,
+                    species,
+                    pain_score=pain_score,
+                    lab_values=lab_values,
+                    breed=breed,
                     lang=lang,
                 )
             else:
                 disease_matches = match_symptoms_to_diseases(
                     selected_symptoms,
-                    pain_score=pain_score, lab_values=lab_values, breed=breed,
+                    pain_score=pain_score,
+                    lab_values=lab_values,
+                    breed=breed,
                 )
             result = {
                 "suspected_diseases": [
@@ -1895,7 +2178,8 @@ def consultation():
                         "name_ja": d.get("name_ja", ""),
                         "match_percent": round(d.get("similarity_score", 0) * 100),
                         "matching_symptoms": d.get("matched_symptoms", []),
-                        "total_symptoms": len(d.get("matched_symptoms", [])) + len(d.get("additional_disease_symptoms", [])),
+                        "total_symptoms": len(d.get("matched_symptoms", []))
+                        + len(d.get("additional_disease_symptoms", [])),
                         "severity": d.get("severity", "low"),
                         "description_ja": d.get("description_ja", ""),
                         "description": d.get("description", d.get("description_en", "")),
@@ -1916,21 +2200,23 @@ def consultation():
             for sid in selected_symptoms
         ]
 
-        return jsonify({
-            "phase": "final_results",
-            "message_ja": f"問診結果です。{len(selected_symptoms)}個の症状をもとに診断候補を算出しました。",
-            "message_en": f"Consultation results. Calculated candidates based on {len(selected_symptoms)} symptoms.",
-            "result": result,
-            "selected_symptoms": selected_symptoms,
-            "symptom_details": symptom_details,
-            "onset": onset,
-            "age_years": age_years,
-            "pain_score": pain_score,
-            "species": species,
-            "recommendations": {
-                "next_step_ja": "こちらは参考情報です（獣医師監修：上手健太郎／南相馬動物病院）。正確な評価のため、獣医師の診察を受けてください。",
-                "next_step_en": "This is reference information only. Supervised by Kentaro Kaimide, DVM. Please consult a veterinarian.",
-            },
-        })
+        return jsonify(
+            {
+                "phase": "final_results",
+                "message_ja": f"問診結果です。{len(selected_symptoms)}個の症状をもとに診断候補を算出しました。",
+                "message_en": f"Consultation results. Calculated candidates based on {len(selected_symptoms)} symptoms.",
+                "result": result,
+                "selected_symptoms": selected_symptoms,
+                "symptom_details": symptom_details,
+                "onset": onset,
+                "age_years": age_years,
+                "pain_score": pain_score,
+                "species": species,
+                "recommendations": {
+                    "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
+                    "next_step_en": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian.",
+                },
+            }
+        )
 
     return jsonify({"error": f"Unknown phase: {phase}"}), 400

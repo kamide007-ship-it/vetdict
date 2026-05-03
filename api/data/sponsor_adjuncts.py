@@ -9,6 +9,7 @@ Products:
   CP Powder (Prebiotics+Probiotics+Psyllium), Relax & CBD, Protain,
   Booster & Relax, Kamide Milk
 """
+
 from __future__ import annotations
 
 import re
@@ -135,53 +136,163 @@ _KAMIDE_MILK_PATTERNS = re.compile(
 # Species sets
 # ---------------------------------------------------------------------------
 
-_JOINT_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
-    "ferret", "hedgehog", "sugar_glider", "degu", "exotic_other",
-})
+_JOINT_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "ferret",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "exotic_other",
+    }
+)
 
-_ANTIOX_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
-    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
-    "parrot", "exotic_other",
-})
+_ANTIOX_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "ferret",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "bird",
+        "parakeet",
+        "parrot",
+        "exotic_other",
+    }
+)
 
-_MSM_AMINO_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
-    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
-    "parrot", "exotic_other",
-})
+_MSM_AMINO_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "ferret",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "bird",
+        "parakeet",
+        "parrot",
+        "exotic_other",
+    }
+)
 
-_NMN_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
-    "chinchilla", "hedgehog", "sugar_glider", "degu", "exotic_other",
-})
+_NMN_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "ferret",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "exotic_other",
+    }
+)
 
-_PREBIOTIC_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
-    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
-    "parrot", "exotic_other",
-})
+_PREBIOTIC_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "ferret",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "bird",
+        "parakeet",
+        "parrot",
+        "exotic_other",
+    }
+)
 
-_RELAX_CBD_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "ferret",
-})
+_RELAX_CBD_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "ferret",
+    }
+)
 
-_PROTAIN_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
-    "chinchilla", "hedgehog", "sugar_glider", "degu", "exotic_other",
-})
+_PROTAIN_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "ferret",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "exotic_other",
+    }
+)
 
-_BOOSTER_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
-    "chinchilla", "hedgehog", "sugar_glider", "degu", "exotic_other",
-})
+_BOOSTER_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "ferret",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "exotic_other",
+    }
+)
 
-_KAMIDE_MILK_SPECIES = frozenset({
-    "dog", "cat", "horse", "rabbit", "ferret", "hamster", "guinea_pig",
-    "chinchilla", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
-    "parrot", "exotic_other",
-})
+_KAMIDE_MILK_SPECIES = frozenset(
+    {
+        "dog",
+        "cat",
+        "horse",
+        "rabbit",
+        "ferret",
+        "hamster",
+        "guinea_pig",
+        "chinchilla",
+        "hedgehog",
+        "sugar_glider",
+        "degu",
+        "bird",
+        "parakeet",
+        "parrot",
+        "exotic_other",
+    }
+)
 
 # ---------------------------------------------------------------------------
 # Product registry — drives both matching and compact block rendering
@@ -309,6 +420,7 @@ _BLOCK_HEADER_EN = "[Adjunct Options — Equine & Canine Vet Nutrition (canineve
 # Block builders
 # ---------------------------------------------------------------------------
 
+
 def _build_block_ja(matched: List[Dict[str, Any]]) -> str:
     lines = [f"\n{_MARKER_BLOCK} {_BLOCK_HEADER_JA}"]
     cautions: List[str] = []
@@ -335,6 +447,7 @@ def _build_block_en(matched: List[Dict[str, Any]]) -> str:
 # Matching helpers
 # ---------------------------------------------------------------------------
 
+
 def _disease_text(disease: Dict[str, Any]) -> str:
     parts = [
         str(disease.get("name") or ""),
@@ -356,6 +469,7 @@ def _normalize_species(species: str) -> str:
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
 
 def apply_sponsor_adjuncts_dict(disease: Dict[str, Any], species: str) -> Dict[str, Any]:
     """Append a single compact ECVN adjunct block to dict-based disease entries.

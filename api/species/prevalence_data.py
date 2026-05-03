@@ -1,3 +1,11 @@
+"""Species prevalence data for stepwise differential diagnosis.
+
+Provides prevalence classifications for diseases across 19 species, used to
+weight candidate diagnoses by clinical frequency. See ``SPECIES_PREVALENCE``
+for the primary data structure and ``get_prevalence_for_species`` for the
+regional adjustments applied to match scores.
+"""
+
 # ============================================================================
 # Species Prevalence Data for Stepwise Differential Diagnosis
 # ============================================================================
@@ -209,7 +217,6 @@ SPECIES_PREVALENCE = {
         "Zinc Toxicosis": "common",
         "von Willebrand Disease": "uncommon",
     },
-
     # ==================================================================
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
@@ -455,7 +462,6 @@ SPECIES_PREVALENCE = {
         "Manx Syndrome": "rare",
         "Polydactyly": "rare",
     },
-
     # ==================================================================
     # RABBIT — 35+ entries (expanded from ~23)
     # ==================================================================
@@ -563,7 +569,6 @@ SPECIES_PREVALENCE = {
         "Tyzzer's Disease": "rare",
         "Rabbit Poxvirus Infection": "rare",
     },
-
     # ==================================================================
     # BIRD — 28+ entries (expanded from ~16)
     # ==================================================================
@@ -654,7 +659,6 @@ SPECIES_PREVALENCE = {
         "Hepatocellular Carcinoma": "rare",
         "Hemangiosarcoma": "rare",
     },
-
     # ==================================================================
     # REPTILE — 22+ entries (expanded from ~12)
     # ==================================================================
@@ -735,7 +739,6 @@ SPECIES_PREVALENCE = {
         "Poxvirus Infection": "rare",
         "Sunshine Virus (Sunshinevirus)": "rare",
     },
-
     # ==================================================================
     # FISH — 25 entries (expanded from ~10)
     # ==================================================================
@@ -770,7 +773,6 @@ SPECIES_PREVALENCE = {
         "Koi Herpesvirus Disease (KHV / CyHV-3)": "rare",
         "Spring Viremia of Carp (SVC)": "rare",
     },
-
     # ==================================================================
     # HAMSTER — 25+ entries (expanded from ~12)
     # ==================================================================
@@ -856,7 +858,6 @@ SPECIES_PREVALENCE = {
         "Cerebrovascular Accident (Stroke)": "rare",
         "Pneumocystis Pneumonia": "rare",
     },
-
     # ==================================================================
     # GUINEA PIG — 25+ entries (expanded from ~14)
     # ==================================================================
@@ -946,7 +947,6 @@ SPECIES_PREVALENCE = {
         "Cytomegalovirus Infection": "rare",
         "Lymphocytic Choriomeningitis (LCMV)": "rare",
     },
-
     # ==================================================================
     # FERRET — 22+ entries (expanded from ~10)
     # ==================================================================
@@ -984,7 +984,6 @@ SPECIES_PREVALENCE = {
         "Rabies": "rare",
         "Chordoma": "rare",
     },
-
     # ==================================================================
     # HEDGEHOG — 22+ entries (expanded from ~10)
     # ==================================================================
@@ -1025,7 +1024,6 @@ SPECIES_PREVALENCE = {
         "Herpesvirus Infection": "rare",
         "Balloon Syndrome": "rare",
     },
-
     # ==================================================================
     # AMPHIBIAN
     # ==================================================================
@@ -1085,7 +1083,6 @@ SPECIES_PREVALENCE = {
         "Calicivirus Infection": "rare",
         "Perkinsea Infection": "rare",
     },
-
     # ==================================================================
     # CHINCHILLA
     # ==================================================================
@@ -1150,7 +1147,6 @@ SPECIES_PREVALENCE = {
         "Squamous Cell Carcinoma": "rare",
         "Iron Storage Disease": "rare",
     },
-
     # ==================================================================
     # DEGU
     # ==================================================================
@@ -1210,7 +1206,6 @@ SPECIES_PREVALENCE = {
         "Alzheimer's-like Disease": "rare",
         "Cognitive Dysfunction (Senile)": "rare",
     },
-
     # ==================================================================
     # EXOTIC OTHER
     # ==================================================================
@@ -1269,7 +1264,6 @@ SPECIES_PREVALENCE = {
         "Monkeypox": "rare",
         "Plague (Yersinia pestis)": "rare",
     },
-
     # ==================================================================
     # LIZARD
     # ==================================================================
@@ -1311,7 +1305,6 @@ SPECIES_PREVALENCE = {
         "Inclusion Body Disease (IBD)": "rare",
         "Chameleon Edema Syndrome": "rare",
     },
-
     # ==================================================================
     # PARAKEET
     # ==================================================================
@@ -1353,7 +1346,6 @@ SPECIES_PREVALENCE = {
         "Polyomavirus Infection": "rare",
         "Budgerigar Herpesvirus": "rare",
     },
-
     # ==================================================================
     # PARROT
     # ==================================================================
@@ -1397,7 +1389,6 @@ SPECIES_PREVALENCE = {
         "Iron Storage Disease (Hemochromatosis)": "rare",
         "Macaw Wasting Disease": "rare",
     },
-
     # ==================================================================
     # SNAKE
     # ==================================================================
@@ -1438,7 +1429,6 @@ SPECIES_PREVALENCE = {
         "Kinking (Spinal Deformity)": "rare",
         "Sunshine Virus (Reptarenavirus)": "rare",
     },
-
     # ==================================================================
     # SUGAR GLIDER
     # ==================================================================
@@ -1479,7 +1469,6 @@ SPECIES_PREVALENCE = {
         "Iron Storage Disease (Hemochromatosis)": "rare",
         "Renal Amyloidosis": "rare",
     },
-
     # ==================================================================
     # TORTOISE
     # ==================================================================
@@ -1556,93 +1545,93 @@ SPECIES_PREVALENCE = {
 JAPAN_REGIONAL_ADJUSTMENTS = {
     "dog": {
         # MORE common in Japan
-        "Heartworm Disease": "very_common",        # Endemic; southern Japan year-round
-        "Babesiosis": "common",                     # B. gibsoni in Shiba, Tosa, Akita
-        "Periodontal Disease": "very_common",       # Small breeds very popular in Japan
-        "Patellar Luxation": "very_common",         # Small breed predominance in Japan
-        "Brachycephalic Airway Syndrome": "common", # French Bulldog #1 breed in Japan
-        "Leptospirosis": "common",                  # High humidity, wildlife reservoirs
+        "Heartworm Disease": "very_common",  # Endemic; southern Japan year-round
+        "Babesiosis": "common",  # B. gibsoni in Shiba, Tosa, Akita
+        "Periodontal Disease": "very_common",  # Small breeds very popular in Japan
+        "Patellar Luxation": "very_common",  # Small breed predominance in Japan
+        "Brachycephalic Airway Syndrome": "common",  # French Bulldog #1 breed in Japan
+        "Leptospirosis": "common",  # High humidity, wildlife reservoirs
         # LESS common / absent in Japan
-        "Salmon Poisoning Disease": "rare",         # Pacific NW North America only
-        "Blastomycosis": "rare",                    # Americas endemic, imported only
-        "Coccidioidomycosis": "rare",               # Americas endemic
-        "Histoplasmosis": "rare",                   # Americas endemic
-        "Rabies": "rare",                           # Eliminated since 1957
-        "Chagas Disease (Trypanosomiasis)": "rare", # Americas only
-        "Leishmaniasis (Visceral)": "rare",         # Not endemic
+        "Salmon Poisoning Disease": "rare",  # Pacific NW North America only
+        "Blastomycosis": "rare",  # Americas endemic, imported only
+        "Coccidioidomycosis": "rare",  # Americas endemic
+        "Histoplasmosis": "rare",  # Americas endemic
+        "Rabies": "rare",  # Eliminated since 1957
+        "Chagas Disease (Trypanosomiasis)": "rare",  # Americas only
+        "Leishmaniasis (Visceral)": "rare",  # Not endemic
     },
     "cat": {
         # MORE common in Japan
         "Feline Infectious Peritonitis (FIP)": "common",  # High multi-cat density
-        "Feline Leukemia Virus (FeLV)": "common",         # Outdoor cats common
+        "Feline Leukemia Virus (FeLV)": "common",  # Outdoor cats common
         "Feline Immunodeficiency Virus (FIV)": "common",  # High outdoor cat population
-        "Hyperthyroidism": "very_common",                  # Aging cat population
-        "Chronic Kidney Disease (CKD)": "very_common",     # #1 cause of death in JP cats
+        "Hyperthyroidism": "very_common",  # Aging cat population
+        "Chronic Kidney Disease (CKD)": "very_common",  # #1 cause of death in JP cats
         # LESS common / absent in Japan
-        "Rabies": "rare",                                  # Eliminated
-        "Histoplasmosis": "rare",                          # Americas endemic
-        "Cytauxzoonosis": "rare",                          # Americas (tick-borne)
+        "Rabies": "rare",  # Eliminated
+        "Histoplasmosis": "rare",  # Americas endemic
+        "Cytauxzoonosis": "rare",  # Americas (tick-borne)
     },
     "horse": {
         # MORE common in Japan
-        "Japanese Encephalitis": "common",          # Endemic, mosquito-borne
-        "Getah Virus Infection": "common",          # Endemic in Japanese horses
-        "Babesiosis (Equine)": "common",            # Tick-borne, endemic
+        "Japanese Encephalitis": "common",  # Endemic, mosquito-borne
+        "Getah Virus Infection": "common",  # Endemic in Japanese horses
+        "Babesiosis (Equine)": "common",  # Tick-borne, endemic
         # LESS common / absent in Japan
-        "African Horse Sickness": "rare",           # Africa/Middle East
-        "Dourine": "rare",                          # Not present in Japan
-        "Venezuelan Equine Encephalitis": "rare",   # Americas only
+        "African Horse Sickness": "rare",  # Africa/Middle East
+        "Dourine": "rare",  # Not present in Japan
+        "Venezuelan Equine Encephalitis": "rare",  # Americas only
     },
     "rabbit": {
         # MORE common in Japan
-        "Pasteurellosis": "very_common",            # Most common rabbit pathogen in JP
-        "Encephalitozoon cuniculi": "common",       # Widespread in pet rabbits
-        "GI Stasis": "very_common",                 # #1 rabbit emergency in JP practice
+        "Pasteurellosis": "very_common",  # Most common rabbit pathogen in JP
+        "Encephalitozoon cuniculi": "common",  # Widespread in pet rabbits
+        "GI Stasis": "very_common",  # #1 rabbit emergency in JP practice
         # LESS common in Japan
-        "Myxomatosis": "rare",                      # No endemic myxoma in Japan
+        "Myxomatosis": "rare",  # No endemic myxoma in Japan
         "Rabbit Hemorrhagic Disease (RHDV)": "uncommon",  # Outbreaks sporadic in JP
     },
     "ferret": {
         # MORE common in Japan
-        "Adrenal Disease": "very_common",           # Very common in JP spayed/neutered
-        "Insulinoma": "very_common",                # Common in older ferrets in JP
-        "Heartworm Disease": "common",              # Japan is endemic
+        "Adrenal Disease": "very_common",  # Very common in JP spayed/neutered
+        "Insulinoma": "very_common",  # Common in older ferrets in JP
+        "Heartworm Disease": "common",  # Japan is endemic
         # LESS common
-        "Aleutian Disease": "uncommon",             # Less common in JP pet ferrets
+        "Aleutian Disease": "uncommon",  # Less common in JP pet ferrets
     },
     "fish": {
         # Japan-specific aquaculture and ornamental fish diseases
-        "Koi Herpesvirus Disease (KHV)": "common",    # Reportable in Japan, outbreaks
+        "Koi Herpesvirus Disease (KHV)": "common",  # Reportable in Japan, outbreaks
         "White Spot Disease (Ichthyophthirius)": "very_common",
-        "Columnaris Disease": "very_common",           # Warm water, common in JP summer
+        "Columnaris Disease": "very_common",  # Warm water, common in JP summer
     },
 }
 
 # International baseline: diseases more common outside Japan
 INTERNATIONAL_REGIONAL_ADJUSTMENTS = {
     "dog": {
-        "Heartworm Disease": "common",              # Varies by region globally
-        "Salmon Poisoning Disease": "uncommon",     # Pacific NW North America
-        "Blastomycosis": "uncommon",                # Ohio/Mississippi river valleys
-        "Coccidioidomycosis": "uncommon",           # US Southwest, Central America
-        "Histoplasmosis": "uncommon",               # Americas
-        "Babesiosis": "uncommon",                   # Global but more focal
-        "Rabies": "common",                         # Still endemic in most countries
-        "Leishmaniasis (Visceral)": "uncommon",     # Mediterranean, South America
+        "Heartworm Disease": "common",  # Varies by region globally
+        "Salmon Poisoning Disease": "uncommon",  # Pacific NW North America
+        "Blastomycosis": "uncommon",  # Ohio/Mississippi river valleys
+        "Coccidioidomycosis": "uncommon",  # US Southwest, Central America
+        "Histoplasmosis": "uncommon",  # Americas
+        "Babesiosis": "uncommon",  # Global but more focal
+        "Rabies": "common",  # Still endemic in most countries
+        "Leishmaniasis (Visceral)": "uncommon",  # Mediterranean, South America
         "Chagas Disease (Trypanosomiasis)": "uncommon",  # Americas
     },
     "cat": {
-        "Rabies": "uncommon",                       # Still endemic globally
-        "Cytauxzoonosis": "uncommon",               # US Southeast
-        "Histoplasmosis": "uncommon",               # Americas
+        "Rabies": "uncommon",  # Still endemic globally
+        "Cytauxzoonosis": "uncommon",  # US Southeast
+        "Histoplasmosis": "uncommon",  # Americas
     },
     "horse": {
-        "African Horse Sickness": "uncommon",       # Africa, Middle East
-        "Japanese Encephalitis": "rare",            # Asia-specific
-        "Getah Virus Infection": "rare",            # Asia-specific
+        "African Horse Sickness": "uncommon",  # Africa, Middle East
+        "Japanese Encephalitis": "rare",  # Asia-specific
+        "Getah Virus Infection": "rare",  # Asia-specific
     },
     "rabbit": {
-        "Myxomatosis": "common",                    # Endemic in Europe, Australia
+        "Myxomatosis": "common",  # Endemic in Europe, Australia
         "Rabbit Hemorrhagic Disease (RHDV)": "common",  # Endemic in Europe, Australia
     },
 }

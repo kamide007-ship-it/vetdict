@@ -1,70 +1,80 @@
 <section class="pricing-section" id="pricingSection">
   <div class="pricing-header">
     <h2 class="pricing-title">VetDict</h2>
-    <p class="pricing-subtitle">現在オープンベータ — 獣医師・獣医学生は全機能を無料でご利用いただけます</p>
+    <p class="pricing-subtitle" data-i18n="pricingSubtitle">現在オープンベータ — 獣医師・獣医学生は全機能を無料でご利用いただけます</p>
   </div>
   <div class="pricing-cards">
     <!-- Current: All Free -->
     <div class="pricing-card pricing-card-pro">
-      <div class="pricing-badge">オープンベータ</div>
+      <div class="pricing-badge" data-i18n="pricingBadge">オープンベータ</div>
       <div class="pricing-card-header">
-        <h3>全機能無料</h3>
+        <h3 data-i18n="pricingHeader">全機能無料</h3>
         <div class="pricing-price">
           <span class="pricing-amount">&yen;0</span>
-          <span class="pricing-period" style="text-decoration:line-through;color:var(--gray-400)">&yen;980/月</span>
+          <span class="pricing-period" style="text-decoration:line-through;color:var(--gray-400)" data-i18n="pricingPeriodOriginal">&yen;980/月</span>
         </div>
       </div>
       <ul class="pricing-features">
-        <li>鑑別診断リスト生成（全21動物種）</li>
-        <li>疾患データベース<strong>7,000+疾患</strong>閲覧</li>
-        <li>薬品辞書<strong>220+薬品</strong>・種別投与量</li>
-        <li>臨床相談チャット<strong>無制限</strong></li>
-        <li>検査値入力・疼痛スケール対応</li>
-        <li>エキゾチック含む全21動物種対応</li>
+        <li data-i18n="pricingFeature1">鑑別診断リスト生成（全21動物種）</li>
+        <li data-i18n-html="pricingFeature2">疾患データベース<strong>7,000+疾患</strong>閲覧</li>
+        <li data-i18n-html="pricingFeature3">薬品辞書<strong>250+薬品</strong>・種別投与量</li>
+        <li data-i18n-html="pricingFeature4">臨床相談チャット<strong>無制限</strong></li>
+        <li data-i18n="pricingFeature5">検査値入力・疼痛スケール対応</li>
+        <li data-i18n="pricingFeature6">エキゾチック含む全21動物種対応</li>
       </ul>
       <div class="pricing-cta">
-        <span class="pricing-btn pricing-btn-pro" style="background:var(--green);pointer-events:none">現在すべて無料でご利用中</span>
-        <p class="pricing-note">正式リリース後は一部機能が有料プラン（¥980/月）に移行予定です</p>
+        <span class="pricing-btn pricing-btn-pro" style="background:var(--green);pointer-events:none" data-i18n="pricingCtaText">現在すべて無料でご利用中</span>
+        <p class="pricing-note" data-i18n="pricingNote">正式リリース後は一部機能が有料プラン（¥980/月）に移行予定です</p>
         <!-- Email signup for launch notification -->
         <div class="email-signup" id="emailSignup">
-          <p class="email-signup-label" style="font-weight:700;font-size:.92rem">🔔 正式リリース時に<span style="color:var(--green)">早期割引</span>で通知を受け取る</p>
-          <p style="font-size:.78rem;color:var(--gray-500);margin:-4px 0 8px">ベータ期間中にご登録の獣医師限定の特典あり</p>
-          <div class="email-signup-row">
-            <input type="email" id="signupEmail" placeholder="メールアドレス" class="email-signup-input" aria-label="メールアドレス">
-            <button class="email-signup-btn" id="signupBtn">無料で登録</button>
-          </div>
-          <p class="email-signup-msg" id="signupMsg"></p>
-          <p style="font-size:.68rem;color:var(--gray-400);margin-top:4px">※ スパムは送りません。配信停止はいつでも可能です。</p>
+          <p class="email-signup-label" style="font-weight:700;font-size:.92rem" data-i18n-html="signupHeading">🔔 正式リリース時に<span style="color:var(--green)">早期割引</span>で通知を受け取る</p>
+          <p style="font-size:.78rem;color:var(--gray-500);margin:-4px 0 8px" data-i18n="signupSubtext">ベータ期間中にご登録の獣医師限定の特典あり</p>
+          <form id="emailSignupForm" novalidate>
+            <div class="email-signup-row">
+              <input type="email" id="signupEmail" placeholder="メールアドレス" data-i18n-ph="signupEmailPh" class="email-signup-input" data-i18n-aria="signupEmailPh" aria-label="メールアドレス" autocomplete="email" inputmode="email" required>
+              <button type="submit" class="email-signup-btn" id="signupBtn" data-i18n="signupBtn">無料で登録</button>
+            </div>
+            <p class="email-signup-msg" id="signupMsg" role="status" aria-live="polite"></p>
+            <p style="font-size:.68rem;color:var(--gray-400);margin-top:4px" data-i18n="signupSpamNote">※ スパムは送りません。配信停止はいつでも可能です。</p>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </section>
 <script nonce="{{ g.csp_nonce }}">
-function submitEmailSignup(){
-  var email=document.getElementById("signupEmail").value.trim();
-  var msg=document.getElementById("signupMsg");
+(function(){
+  var form=document.getElementById("emailSignupForm");
+  var input=document.getElementById("signupEmail");
   var btn=document.getElementById("signupBtn");
-  if(!email||email.indexOf("@")<0){msg.textContent="有効なメールアドレスを入力してください";msg.className="email-signup-msg error";return;}
-  btn.textContent="登録中...";btn.disabled=true;
-  fetch("/api/paypal/waitlist",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
-  .then(function(r){return r.json();})
-  .then(function(d){
-    if(d.status==="ok"){
-      msg.textContent="登録完了！正式リリース時にお知らせします。";
-      msg.className="email-signup-msg success";
-      btn.textContent="登録済み";
-      document.getElementById("signupEmail").disabled=true;
-      if(typeof trackEvent==="function")trackEvent("waitlist_signup",{email_domain:email.split("@")[1]});
-    } else {
-      msg.textContent=d.error||"エラーが発生しました";
-      msg.className="email-signup-msg error";
-      btn.textContent="登録";btn.disabled=false;
-    }
-  }).catch(function(){
-    msg.textContent="通信エラー";msg.className="email-signup-msg error";
-    btn.textContent="登録";btn.disabled=false;
-  });
-}
-document.getElementById("signupBtn").addEventListener("click",submitEmailSignup);
+  var msg=document.getElementById("signupMsg");
+  // RFC 5322 simplified: requires non-empty local + "@" + domain with TLD
+  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function tr(key,fallback){return (typeof t==="function"?t(key):key)||fallback||key;}
+  function setMsg(text,kind){msg.textContent=text;msg.className="email-signup-msg "+(kind||"");}
+  function submitEmailSignup(e){
+    if(e&&e.preventDefault)e.preventDefault();
+    if(btn.disabled)return;
+    var email=(input.value||"").trim();
+    if(!EMAIL_RE.test(email)){setMsg(tr("signupInvalidEmail","有効なメールアドレスを入力してください"),"error");input.focus();return;}
+    var defaultBtnText=tr("signupBtn","無料で登録");
+    btn.textContent=tr("signupBtnSubmitting","登録中...");btn.disabled=true;setMsg("","");
+    fetch("/api/paypal/waitlist",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.status==="ok"){
+          setMsg(tr("signupSuccess","登録完了！正式リリース時にお知らせします。"),"success");
+          btn.textContent=tr("signupBtnDone","登録済み");input.disabled=true;
+          if(typeof trackEvent==="function")trackEvent("waitlist_signup",{email_domain:email.split("@")[1]});
+        } else {
+          setMsg(d.error||tr("signupGenericError","エラーが発生しました"),"error");
+          btn.textContent=defaultBtnText;btn.disabled=false;
+        }
+      }).catch(function(){
+        setMsg(tr("signupNetworkError","通信エラー。時間をおいて再度お試しください。"),"error");
+        btn.textContent=defaultBtnText;btn.disabled=false;
+      });
+  }
+  form.addEventListener("submit",submitEmailSignup);
+})();
 </script>
