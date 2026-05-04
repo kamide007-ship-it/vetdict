@@ -110,6 +110,47 @@ const I18N={
     anesthesiaContraindicated:"禁忌",anesthesiaCaution:"慎重投与",anesthesiaMonitorExtra:"要モニタリング",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
     allCategories:"全カテゴリ",allSpecies:"全動物種",
+    drugCompareTitle:"他の獣医薬リファレンスとの比較",
+    drugCompareHint:"（クリックで展開）",
+    drugCompareIntro:"日常診療での使い分けの参考に、VetDict・Plumb's Veterinary Drugs・VIN（Veterinary Information Network）の特徴を比較しました。",
+    drugCompareColFeature:"機能",
+    drugCompareRowSource:"主な情報源",
+    drugCompareVetdictSource:"Plumb's (9th ed.) / Papich (5th ed.) / BSAVA / Carpenter Formulary 等",
+    drugCompareCompetitorSource1:"自社編集チームによる最新薬理データ",
+    drugCompareCompetitorSource2:"複数の専門書 + 専門医の臨床知見",
+    drugCompareRowFreq:"更新頻度",
+    drugCompareVetdictFreq:"定期的（開発者による手動更新）",
+    drugCompareCompetitorFreq1:"リアルタイム（新薬・副作用情報）",
+    drugCompareCompetitorFreq2:"随時（フォーラムでの議論が先行）",
+    drugCompareRowSpecies:"対応動物種",
+    drugCompareVetdictSpecies:"21種（魚・エキゾチック等に強い）",
+    drugCompareCompetitorSpecies1:"主要ペット・馬・産業動物",
+    drugCompareCompetitorSpecies2:"全方位",
+    drugCompareRowInteraction:"相互作用チェック",
+    drugCompareVetdictInteraction:"疾患DB内の記述・麻酔禁忌ルールに基づく",
+    drugCompareCompetitorInteraction1:"専用の相互作用シミュレーターあり",
+    drugCompareCompetitorInteraction2:"検索・フォーラムでの相談",
+    drugCompareRowOwner:"飼い主用資料",
+    drugCompareVetdictOwner:"なし（臨床家向け特化）",
+    drugCompareCompetitorOwner1:"多言語のクライアントハンドアウト付",
+    drugCompareCompetitorOwner2:"飼い主向け解説サイト（Veterinary Partner）",
+    drugCompareRowLang:"言語",
+    drugCompareVetdictLang:"日本語・英語",
+    drugCompareCompetitorLang1:"英語",
+    drugCompareCompetitorLang2:"英語（一部機械翻訳）",
+    drugCompareAnalysisTitle:"忖度なしの詳細分析",
+    drugComparePoint1Title:"検索精度と「出典」の信頼性",
+    drugComparePoint1Body:"VetDictはPlumb's・BSAVA等の世界標準の文献をベースに、現役の獣医師が日本語で整理。「日本で手に入る薬剤の一般名・商品名」で検索できる実用性が強み。一方、Plumb's最新版は米FDAの最新認可情報が即座に反映され、学術的な「最先端の正確性」では出版社直営ツールが最強。",
+    drugComparePoint2Title:"「使い勝手」という名の精度",
+    drugComparePoint2Body:"VetDictは「嘔吐」と日本語で入力 → 鑑別疾患 → 推奨薬剤への導線が短い。VIN等は情報量が多いぶん、特定薬剤の「今すぐ知りたい用量」に辿り着くまで時間がかかる場合あり。",
+    drugComparePoint3Title:"エキゾチック・特殊動物の網羅性",
+    drugComparePoint3Body:"ハリネズミ・フクロモモンガ・魚といった通常の薬剤ハンドブックでは情報が薄い動物種の投与量を日本語でまとめている点は他にない強み。Carpenter's Formulary等のエッセンスを一つの窓口で提供。",
+    drugCompareConclTitle:"結論：使い分けの推奨",
+    drugCompareConclDailyLabel:"日常診療（VetDict）:",
+    drugCompareConclDailyBody:"「この疾患に対する一般的な用量は？」「エキゾチックの投与量は？」を日本語で即座に引きたい場面に最適。",
+    drugCompareConclAdvLabel:"難症例・新薬（Plumb's / VIN）:",
+    drugCompareConclAdvBody:"複数薬剤の相互作用や副作用の最新報告（エビデンス）を原文で確認したい場合は、Plumb's（有料版）やVINの専門医ネットワークを参照。",
+    drugCompareDisclaimer:"※ 比較は2026年時点の各サービス公開情報に基づく一般的な傾向であり、個別の機能差は変動します。最終判断は必ず原典・添付文書をご確認ください。",
     sponsorTagline:"獣医師が考案・国内製造 — 競走馬理化学研究所の検査合格",
     sponsorSpecies:"対応動物種: 馬・犬・猫",
     sponsorEquine:"馬用サプリメント",sponsorCanine:"犬用サプリメント",
@@ -298,6 +339,47 @@ const I18N={
     anesthesiaContraindicated:"Contraindicated",anesthesiaCaution:"Use with Caution",anesthesiaMonitorExtra:"Extra Monitoring",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
     allCategories:"All Categories",allSpecies:"All Species",
+    drugCompareTitle:"How VetDict compares to other veterinary drug references",
+    drugCompareHint:"(click to expand)",
+    drugCompareIntro:"A side-by-side look at VetDict, Plumb's Veterinary Drugs, and VIN (Veterinary Information Network) to help you pick the right tool for the job.",
+    drugCompareColFeature:"Feature",
+    drugCompareRowSource:"Primary sources",
+    drugCompareVetdictSource:"Plumb's (9th ed.) / Papich (5th ed.) / BSAVA / Carpenter Formulary, etc.",
+    drugCompareCompetitorSource1:"In-house editorial team with current pharmacology data",
+    drugCompareCompetitorSource2:"Multiple textbooks + clinical insight from board-certified specialists",
+    drugCompareRowFreq:"Update cadence",
+    drugCompareVetdictFreq:"Periodic (manual updates by maintainer)",
+    drugCompareCompetitorFreq1:"Real-time (new drugs and adverse-event data)",
+    drugCompareCompetitorFreq2:"Continuous (forum discussion often leads the update)",
+    drugCompareRowSpecies:"Species coverage",
+    drugCompareVetdictSpecies:"21 species — strong on fish & exotics",
+    drugCompareCompetitorSpecies1:"Major pets, equine, food animals",
+    drugCompareCompetitorSpecies2:"Broad coverage across all domains",
+    drugCompareRowInteraction:"Interaction checking",
+    drugCompareVetdictInteraction:"Based on disease-DB notes and anesthesia contraindication rules",
+    drugCompareCompetitorInteraction1:"Dedicated interaction simulator",
+    drugCompareCompetitorInteraction2:"Search and forum-based consultation",
+    drugCompareRowOwner:"Owner-facing materials",
+    drugCompareVetdictOwner:"None (clinician-focused)",
+    drugCompareCompetitorOwner1:"Multilingual client handouts included",
+    drugCompareCompetitorOwner2:"Owner education site (Veterinary Partner)",
+    drugCompareRowLang:"Languages",
+    drugCompareVetdictLang:"Japanese & English",
+    drugCompareCompetitorLang1:"English",
+    drugCompareCompetitorLang2:"English (some machine translation)",
+    drugCompareAnalysisTitle:"Honest analysis",
+    drugComparePoint1Title:"Search accuracy & source credibility",
+    drugComparePoint1Body:"VetDict is curated in Japanese by a practicing veterinarian on top of world-standard sources (Plumb's, BSAVA, etc.). Its strength is searching by the generic and brand names actually available in Japan. For pure academic currency on US-FDA approvals, the publisher-run tools (Plumb's latest edition) remain the gold standard.",
+    drugComparePoint2Title:"Usability as a form of accuracy",
+    drugComparePoint2Body:"In VetDict you can type a Japanese symptom like 「嘔吐」 and reach the differential and recommended drugs in two clicks. Information-dense tools like VIN can take longer to surface the specific dose you need right now.",
+    drugComparePoint3Title:"Exotic & special-species coverage",
+    drugComparePoint3Body:"Dosing data for hedgehogs, sugar gliders, fish and similar species is thin in mainstream drug handbooks. VetDict consolidates the essence of references like Carpenter's Formulary into a single Japanese-language interface — a unique advantage.",
+    drugCompareConclTitle:"Recommendation: how to use them together",
+    drugCompareConclDailyLabel:"Daily practice (VetDict):",
+    drugCompareConclDailyBody:"Best for quickly answering 'what's the typical dose for this disease?' or 'what's the dose in this exotic species?' in Japanese.",
+    drugCompareConclAdvLabel:"Complex cases / new drugs (Plumb's / VIN):",
+    drugCompareConclAdvBody:"For multi-drug interaction concerns or the latest adverse-event evidence in the original language, consult Plumb's (paid) or the VIN specialist network.",
+    drugCompareDisclaimer:"Note: Comparison reflects publicly available information on each service as of 2026 and represents general tendencies. Always verify against the primary source and product labeling before clinical decisions.",
     sponsorTagline:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     sponsorSpecies:"Supported species: Horse, Dog, Cat",
     sponsorEquine:"Equine Supplements",sponsorCanine:"Canine Supplements",
@@ -632,7 +714,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
         return;
       }
       if(e.key==="?"){toggleKbShortcuts();return;}
-      if(e.key==="/"&&!e.ctrlKey&&!e.metaKey){e.preventDefault();const gs=document.getElementById("globalSearchInput");if(gs){gs.focus();gs.select();}return;}
+      if(e.key==="/"&&!e.ctrlKey&&!e.metaKey){e.preventDefault();const gs=document.getElementById("globalSearch");if(gs){gs.focus();gs.select();}return;}
       if(e.key>="1"&&e.key<="5"&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
         const views=["checker","database","chat","drugs","anesthesia"];
         switchView(views[parseInt(e.key,10)-1]);return;
@@ -996,9 +1078,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:598,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:601,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:543,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:740,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:743,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:453,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:320,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:348,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1019,7 +1101,7 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:289,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:7156,
+    diseases:7162,
     species:21,
     drugs:250,
     symptoms:52,
@@ -1818,7 +1900,25 @@ function renderResults(data){
   const tests=data.recommended_tests||[];
   const severity=data.severity||"low";
   const adviceJa=data.general_advice_ja||"";
-  if(diseases.length===0){area.innerHTML=`<div class="results-empty"><span class="big-icon">\u2705</span><p>${t("noDiseasesFound")}</p></div>`;return;}
+  if(diseases.length===0){
+    const tipsJa=[
+      "\u75c7\u72b6\u30921\u301c2\u500b\u306b\u7d5e\u308a\u8fbc\u307f\u3001\u6700\u3082\u9855\u8457\u306a\u3082\u306e\u304b\u3089\u691c\u7d22\u3057\u3066\u307f\u3066\u304f\u3060\u3055\u3044",
+      "\u4ee3\u66ff\u8868\u73fe\uff08\u4f8b: \u300c\u4e0b\u75e2\u300d\u2194\u300c\u8edf\u4fbf\u300d\u3001\u300cPU/PD\u300d\u2194\u300c\u591a\u98f2\u591a\u5c3f\u300d\uff09\u3092\u8a66\u3057\u3066\u304f\u3060\u3055\u3044",
+      "\u75c7\u72b6\u540d\u3092\u82f1\u8a9e\u307e\u305f\u306f\u65e5\u672c\u8a9e\u306b\u5207\u308a\u66ff\u3048\u3066\u691c\u7d22",
+      "\u95a2\u9023\u75c7\u72b6\uff08\u98df\u6b32\u30fb\u5143\u6c17\u30fb\u4f53\u91cd\u5909\u5316\u306a\u3069\uff09\u3092\u8ffd\u52a0",
+    ];
+    const tipsEn=[
+      "Try narrowing to 1\u20132 most prominent symptoms",
+      "Try synonyms (e.g., 'diarrhea' \u2194 'loose stool', 'PU/PD' \u2194 'polyuria/polydipsia')",
+      "Switch language and try the symptom name in English or Japanese",
+      "Add related vital signs (appetite, energy, weight change)",
+    ];
+    const tips=currentLang==="ja"?tipsJa:tipsEn;
+    const heading=currentLang==="ja"?"\u8a72\u5f53\u3059\u308b\u75be\u60a3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f":"No matching diseases found";
+    const subheading=currentLang==="ja"?"\u9451\u5225\u7cbe\u5ea6\u3092\u4e0a\u3052\u308b\u305f\u3081\u306e\u30d2\u30f3\u30c8:":"Try these tips to improve matching:";
+    area.innerHTML=`<div class="results-empty"><span class="big-icon">\ud83d\udd0d</span><p style="font-weight:600;color:var(--navy);margin-bottom:6px">${escapeHtml(heading)}</p><p style="font-size:.82rem;color:var(--gray-600);margin-bottom:10px">${escapeHtml(subheading)}</p><ul style="text-align:left;display:inline-block;margin:0 auto;padding-left:18px;font-size:.82rem;color:var(--gray-700);line-height:1.6">${tips.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul></div>`;
+    return;
+  }
   const sevLabels=t("sevLabels");
   let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
   /* Low-confidence warning: alert when symptom count <=2 or top confidence <50% */
@@ -2222,6 +2322,11 @@ function renderDiseaseCard(d,data){
 
   const urgencyIcon=likelihood==="high"?"\u26A0\uFE0F":likelihood==="moderate"?"\u{1F7E1}":"\u{1F7E2}";
   const delay=Math.min(_cardIndex++*60,600);
+  const inputCount=(typeof selectedSymptoms!=="undefined"&&selectedSymptoms&&selectedSymptoms.size)||0;
+  const matchedCount=matchSymptoms.length;
+  const matchRatioLabel=inputCount>0&&matchedCount>0
+    ?(currentLang==="ja"?`${matchedCount}/${inputCount}症状一致`:`${matchedCount}/${inputCount} symptoms matched`)
+    :"";
   let html=`<div class="disease-result disease-${escapeHtml(likelihood)}" style="animation-delay:${delay}ms">
     <div class="disease-head" role="button" tabindex="0" aria-expanded="false">
       <div class="disease-head-info">
@@ -2234,6 +2339,7 @@ function renderDiseaseCard(d,data){
         <div class="disease-match-bar-row">
           <div class="disease-match-bar"><div class="disease-match-fill disease-match-${likelihood}" style="width:${Math.min(pct,100)}%"></div></div>
           <span class="disease-match-label">${urgencyIcon} ${pct}%</span>
+          ${matchRatioLabel?`<span class="disease-match-ratio" aria-label="${escapeHtml(matchRatioLabel)}">${escapeHtml(matchRatioLabel)}</span>`:""}
         </div>
       </div>
       <span class="expand-icon">&#9660;</span>
@@ -2666,6 +2772,10 @@ function renderSpeciesGuidance(containerId,guidance){
   msgs.scrollTop=msgs.scrollHeight;
 }
 
+const _CHAT_MAX_RETRIES=3;
+let _landingChatRetries=0;
+let _chatRetries=0;
+
 function sendLandingChat(){
   const input=document.getElementById("landingChatInput"),text=input.value.trim();if(!text)return;
   const sendBtn=input.closest(".chat-input-row")?.querySelector("button");
@@ -2697,14 +2807,22 @@ function sendLandingChat(){
     });
     msgs.appendChild(continueBtn);
     msgs.scrollTop=msgs.scrollHeight;
+    _landingChatRetries=0;
   })
   .catch(err=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
     debugError("Chat error:",err);
     const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
-    const retryBtn=`<button class="landing-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
-    errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtn;
-    errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendLandingChat();});
+    const canRetry=_landingChatRetries<_CHAT_MAX_RETRIES;
+    if(canRetry){
+      const retryBtn=`<button class="landing-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
+      errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtn;
+      errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries++;input.value=text;errDiv.remove();sendLandingChat();});
+    }else{
+      const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
+      errDiv.innerHTML=escapeHtml(giveUpMsg);
+      _landingChatRetries=0;
+    }
     msgs.appendChild(errDiv);
     msgs.scrollTop=msgs.scrollHeight;
   });
@@ -2749,15 +2867,23 @@ function sendChatMessage(){
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
+    _chatRetries=0;
   })
   .catch(err=>{
     clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
     debugError("Chat error:",err);
     trackEvent("api_error",{endpoint:"diagnostic-chat",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});
     const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
-    const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
-    errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
-    errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{input.value=text;errDiv.remove();sendChatMessage();});
+    const canRetry=_chatRetries<_CHAT_MAX_RETRIES;
+    if(canRetry){
+      const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
+      errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
+      errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries++;input.value=text;errDiv.remove();sendChatMessage();});
+    }else{
+      const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
+      errDiv.innerHTML=escapeHtml(giveUpMsg);
+      _chatRetries=0;
+    }
     msgs.appendChild(errDiv);msgs.scrollTop=msgs.scrollHeight;
   });
 }

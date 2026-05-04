@@ -286,6 +286,7 @@ a:hover{text-decoration:underline}
 .disease-match-moderate{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
 .disease-match-low{background:linear-gradient(90deg,#f87171,#ef4444)}
 .disease-match-label{font-size:.76rem;font-weight:700;white-space:nowrap}
+.disease-match-ratio{font-size:.7rem;font-weight:600;white-space:nowrap;color:var(--gray-600);background:var(--gray-100);padding:2px 8px;border-radius:10px}
 .expand-icon{font-size:.6rem;color:var(--gray-400);transition:transform var(--transition-normal);flex-shrink:0}
 .expand-icon.rotated{transform:rotate(180deg)}
 .match-badge{padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:700;flex-shrink:0;transition:transform var(--transition-fast)}
@@ -661,6 +662,45 @@ a:hover{text-decoration:underline}
 .drug-safe-label{color:var(--green);font-weight:700}
 .drug-unsafe-label{color:var(--red);font-weight:700}
 .drug-dosage-note{color:var(--gray-500)}
+.drug-comparison{margin:0 0 14px;border:1px solid var(--gray-200);border-radius:var(--radius);background:linear-gradient(135deg,#f8fafc,#eef2f7)}
+.drug-comparison[open]{background:var(--white);box-shadow:var(--shadow-md)}
+.drug-comparison-summary{cursor:pointer;list-style:none;padding:10px 14px;font-size:.86rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px;border-radius:var(--radius)}
+.drug-comparison-summary::-webkit-details-marker{display:none}
+.drug-comparison-summary::after{content:"▾";margin-left:auto;color:var(--gray-500);transition:transform var(--transition-fast)}
+.drug-comparison[open] .drug-comparison-summary::after{transform:rotate(180deg)}
+.drug-comparison-summary:hover{background:var(--gray-50)}
+.drug-comparison-icon{font-size:1.05rem}
+.drug-comparison-hint{font-size:.72rem;color:var(--gray-500);font-weight:500}
+.drug-comparison-body{padding:6px 14px 14px;border-top:1px solid var(--gray-100)}
+.drug-comparison-intro{font-size:.82rem;color:var(--gray-700);margin:10px 0 12px;line-height:1.55}
+.drug-comparison-table-wrap{overflow-x:auto;border:1px solid var(--gray-200);border-radius:8px;background:var(--white)}
+.drug-comparison-table-wrap:focus{outline:2px solid var(--green);outline-offset:2px}
+.drug-comparison-table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:640px}
+.drug-comparison-table th,.drug-comparison-table td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--gray-100);line-height:1.5}
+.drug-comparison-table thead th{background:var(--navy);color:var(--white);font-weight:600;font-size:.76rem;letter-spacing:.2px;position:sticky;top:0}
+.drug-comparison-table thead th:nth-child(2){background:var(--green-dark)}
+.drug-comparison-table tbody th{background:var(--gray-50);color:var(--navy);font-weight:600;width:130px;white-space:nowrap}
+.drug-comparison-table tbody tr:nth-child(even) td{background:#fbfcfe}
+.drug-comparison-table td:nth-child(2){background:rgba(34,168,79,.06)!important;font-weight:500}
+.drug-comparison-table tbody tr:last-child th,.drug-comparison-table tbody tr:last-child td{border-bottom:none}
+.drug-comparison-analysis{margin-top:14px}
+.drug-comparison-analysis h4{font-size:.86rem;color:var(--navy);margin:14px 0 8px;font-weight:700}
+.drug-comparison-points{padding-left:20px;margin:0}
+.drug-comparison-points li{margin-bottom:10px;font-size:.8rem;color:var(--gray-700);line-height:1.55}
+.drug-comparison-points li strong{color:var(--navy);display:block;margin-bottom:2px;font-size:.82rem}
+.drug-comparison-points li p{margin:0}
+.drug-comparison-conclusion{margin-top:14px;padding:10px 14px;background:var(--green-light);border-left:4px solid var(--green);border-radius:6px}
+.drug-comparison-conclusion h4{margin-top:0;color:var(--green-dark)}
+.drug-comparison-conclusion p{margin:6px 0;font-size:.8rem;color:var(--gray-700);line-height:1.55}
+.drug-comparison-conclusion strong{color:var(--navy)}
+.drug-comparison-disclaimer{margin-top:12px;font-size:.72rem;color:var(--gray-500);line-height:1.5;font-style:italic}
+@media (max-width:600px){
+  .drug-comparison-summary{font-size:.82rem;padding:9px 12px}
+  .drug-comparison-hint{display:none}
+  .drug-comparison-table{font-size:.74rem;min-width:520px}
+  .drug-comparison-table tbody th{width:100px}
+  .drug-comparison-points li,.drug-comparison-conclusion p{font-size:.76rem}
+}
 .drug-sponsor-link{margin-top:8px;padding:8px 12px;background:var(--green-light);border:1px solid rgba(34,168,79,.3);border-radius:6px;font-size:.8rem}
 .drug-sponsor-name{color:var(--green-dark)}
 .drug-sponsor-vet{color:var(--gray-600)}
@@ -814,15 +854,42 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
 @media print{
   .header,.hero,.sponsor-banner,.landing-chat,.species-section,.footer,
   .share-widget,.feedback-widget,.print-results-btn,.az-nav,.hamburger,
-  .history-panel,.tab-nav-wrap,.pwa-install-banner,.kb-shortcuts-panel,.reading-progress,.scroll-top,.symptom-floater,.toast,.mobile-bottom-nav,.offline-banner{display:none!important}
-  body{background:#fff;font-size:11pt;padding:0}
-  .main-content{display:block!important}
-  #viewChecker{display:block!important}
-  #resultsArea{box-shadow:none;border:none}
-  .disease-result{break-inside:avoid;border:1px solid #ccc;margin-bottom:8pt}
-  .disease-detail{display:block!important;max-height:none!important;opacity:1!important}
-  .severity-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .history-panel,.tab-nav-wrap,.pwa-install-banner,.kb-shortcuts-panel,.reading-progress,.scroll-top,.symptom-floater,.toast,.mobile-bottom-nav,.offline-banner,
+  .related-suggestions,.results-sort-bar,.cookie-consent,.share-section,.feedback-widget,
+  #checkerProgress,#chatGuidedContainer,.chat-mode-toggle,.global-search-container,
+  .checker-progress,.lab-values-section summary,.pain-scale-section summary,
+  #breedSelectArea,.symptom-search,.symptom-list,.selected-symptoms,.analyze-btn,
+  .analyze-progress,#checkerGuide,#commonDiseasesArea,#breedEcologyArea,.detail-page-link,
+  details:not([open]) > *:not(summary){display:none!important}
+  body{background:#fff;font-size:10.5pt;padding:0;color:#000}
+  body::before{
+    content:"VetDict — 鑑別診断結果 / Differential Diagnosis Report";
+    display:block;font-size:14pt;font-weight:700;text-align:center;
+    padding:8pt 0 4pt;border-bottom:2px solid #000;margin-bottom:8pt;
+  }
+  body::after{
+    content:"※ 本レポートは臨床意思決定支援を目的とした参考情報です。確定診断には臨床所見・検査結果との総合判断が必要です。 / This report is decision-support reference only — definitive diagnosis requires clinical correlation. — vetdict.info";
+    display:block;font-size:8pt;text-align:center;
+    padding:6pt 0;border-top:1px solid #999;margin-top:12pt;color:#444;
+  }
+  .main-content{display:block!important;max-width:none}
+  #viewChecker,.card,.card-body,.card-header,.panels{display:block!important}
+  .panels{grid-template-columns:1fr!important}
+  #resultsArea{box-shadow:none;border:none;padding:0}
+  .results-empty{display:none!important}
+  .disease-result{break-inside:avoid;page-break-inside:avoid;border:1px solid #888;margin-bottom:8pt;background:#fff!important}
+  .disease-head{cursor:default}
+  .disease-detail{display:block!important;max-height:none!important;opacity:1!important;padding:8pt}
+  .severity-bar,.disease-match-fill,.quality-badge,.prevalence-badge,.disease-match-ratio,.lab-bar-dot,.lab-bar-normal{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .expand-icon{display:none!important}
+  .detail-grid{display:block!important}
+  .detail-section{break-inside:avoid;margin-bottom:6pt}
+  .detail-section-header{font-weight:700;border-bottom:1px solid #ccc;padding-bottom:2pt;margin-bottom:3pt}
+  .lab-results-viz{break-inside:avoid;border:1px solid #ccc;padding:6pt;margin-bottom:6pt}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]:after{content:" (" attr(href) ")";font-size:8pt;color:#666}
   .disease-page,.index-page,.hub-page{padding:10pt}
+  h1,h2,h3,h4{break-after:avoid}
 }
 
 /* --- Landing Chat --- */
