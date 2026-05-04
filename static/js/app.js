@@ -632,7 +632,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
         return;
       }
       if(e.key==="?"){toggleKbShortcuts();return;}
-      if(e.key==="/"&&!e.ctrlKey&&!e.metaKey){e.preventDefault();const gs=document.getElementById("globalSearchInput");if(gs){gs.focus();gs.select();}return;}
+      if(e.key==="/"&&!e.ctrlKey&&!e.metaKey){e.preventDefault();const gs=document.getElementById("globalSearch");if(gs){gs.focus();gs.select();}return;}
       if(e.key>="1"&&e.key<="5"&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
         const views=["checker","database","chat","drugs","anesthesia"];
         switchView(views[parseInt(e.key,10)-1]);return;
