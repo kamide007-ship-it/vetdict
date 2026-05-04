@@ -157,6 +157,89 @@
     <div class="card" style="margin-top:20px">
       <div class="card-header" data-i18n-html="cardDrugs">&#128138; 薬品辞書</div>
       <div class="card-body">
+        <details class="drug-comparison" id="drugComparison">
+          <summary class="drug-comparison-summary">
+            <span class="drug-comparison-icon" aria-hidden="true">&#128202;</span>
+            <span data-i18n="drugCompareTitle">他の獣医薬リファレンスとの比較</span>
+            <span class="drug-comparison-hint" data-i18n="drugCompareHint">（クリックで展開）</span>
+          </summary>
+          <div class="drug-comparison-body">
+            <p class="drug-comparison-intro" data-i18n="drugCompareIntro">日常診療での使い分けの参考に、VetDict・Plumb's Veterinary Drugs・VIN（Veterinary Information Network）の特徴を比較しました。</p>
+            <div class="drug-comparison-table-wrap" role="region" aria-label="Drug reference comparison table" tabindex="0">
+              <table class="drug-comparison-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="drugCompareColFeature">機能</th>
+                    <th>VetDict</th>
+                    <th>Plumb's Veterinary Drugs</th>
+                    <th>VIN</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" data-i18n="drugCompareRowSource">主な情報源</th>
+                    <td data-i18n="drugCompareVetdictSource">Plumb's (9th ed.) / Papich (5th ed.) / BSAVA / Carpenter Formulary 等</td>
+                    <td data-i18n="drugCompareCompetitorSource1">自社編集チームによる最新薬理データ</td>
+                    <td data-i18n="drugCompareCompetitorSource2">複数の専門書 + 専門医の臨床知見</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" data-i18n="drugCompareRowFreq">更新頻度</th>
+                    <td data-i18n="drugCompareVetdictFreq">定期的（開発者による手動更新）</td>
+                    <td data-i18n="drugCompareCompetitorFreq1">リアルタイム（新薬・副作用情報）</td>
+                    <td data-i18n="drugCompareCompetitorFreq2">随時（フォーラムでの議論が先行）</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" data-i18n="drugCompareRowSpecies">対応動物種</th>
+                    <td data-i18n="drugCompareVetdictSpecies">21種（魚・エキゾチック等に強い）</td>
+                    <td data-i18n="drugCompareCompetitorSpecies1">主要ペット・馬・産業動物</td>
+                    <td data-i18n="drugCompareCompetitorSpecies2">全方位</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" data-i18n="drugCompareRowInteraction">相互作用チェック</th>
+                    <td data-i18n="drugCompareVetdictInteraction">疾患DB内の記述・麻酔禁忌ルールに基づく</td>
+                    <td data-i18n="drugCompareCompetitorInteraction1">専用の相互作用シミュレーターあり</td>
+                    <td data-i18n="drugCompareCompetitorInteraction2">検索・フォーラムでの相談</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" data-i18n="drugCompareRowOwner">飼い主用資料</th>
+                    <td data-i18n="drugCompareVetdictOwner">なし（臨床家向け特化）</td>
+                    <td data-i18n="drugCompareCompetitorOwner1">多言語のクライアントハンドアウト付</td>
+                    <td data-i18n="drugCompareCompetitorOwner2">飼い主向け解説サイト（Veterinary Partner）</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" data-i18n="drugCompareRowLang">言語</th>
+                    <td data-i18n="drugCompareVetdictLang">日本語・英語</td>
+                    <td data-i18n="drugCompareCompetitorLang1">英語</td>
+                    <td data-i18n="drugCompareCompetitorLang2">英語（一部機械翻訳）</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="drug-comparison-analysis">
+              <h4 data-i18n="drugCompareAnalysisTitle">忖度なしの詳細分析</h4>
+              <ol class="drug-comparison-points">
+                <li>
+                  <strong data-i18n="drugComparePoint1Title">検索精度と「出典」の信頼性</strong>
+                  <p data-i18n="drugComparePoint1Body">VetDictはPlumb's・BSAVA等の世界標準の文献をベースに、現役の獣医師が日本語で整理。「日本で手に入る薬剤の一般名・商品名」で検索できる実用性が強み。一方、Plumb's最新版は米FDAの最新認可情報が即座に反映され、学術的な「最先端の正確性」では出版社直営ツールが最強。</p>
+                </li>
+                <li>
+                  <strong data-i18n="drugComparePoint2Title">「使い勝手」という名の精度</strong>
+                  <p data-i18n="drugComparePoint2Body">VetDictは「嘔吐」と日本語で入力 → 鑑別疾患 → 推奨薬剤への導線が短い。VIN等は情報量が多いぶん、特定薬剤の「今すぐ知りたい用量」に辿り着くまで時間がかかる場合あり。</p>
+                </li>
+                <li>
+                  <strong data-i18n="drugComparePoint3Title">エキゾチック・特殊動物の網羅性</strong>
+                  <p data-i18n="drugComparePoint3Body">ハリネズミ・フクロモモンガ・魚といった通常の薬剤ハンドブックでは情報が薄い動物種の投与量を日本語でまとめている点は他にない強み。Carpenter's Formulary等のエッセンスを一つの窓口で提供。</p>
+                </li>
+              </ol>
+              <div class="drug-comparison-conclusion">
+                <h4 data-i18n="drugCompareConclTitle">結論：使い分けの推奨</h4>
+                <p><strong data-i18n="drugCompareConclDailyLabel">日常診療（VetDict）:</strong> <span data-i18n="drugCompareConclDailyBody">「この疾患に対する一般的な用量は？」「エキゾチックの投与量は？」を日本語で即座に引きたい場面に最適。</span></p>
+                <p><strong data-i18n="drugCompareConclAdvLabel">難症例・新薬（Plumb's / VIN）:</strong> <span data-i18n="drugCompareConclAdvBody">複数薬剤の相互作用や副作用の最新報告（エビデンス）を原文で確認したい場合は、Plumb's（有料版）やVINの専門医ネットワークを参照。</span></p>
+              </div>
+              <p class="drug-comparison-disclaimer" data-i18n="drugCompareDisclaimer">※ 比較は2026年時点の各サービス公開情報に基づく一般的な傾向であり、個別の機能差は変動します。最終判断は必ず原典・添付文書をご確認ください。</p>
+            </div>
+          </div>
+        </details>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="search" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh" aria-label="薬品名で検索" autocomplete="off" inputmode="search"/>
