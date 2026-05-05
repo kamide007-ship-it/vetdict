@@ -10552,7 +10552,8 @@ def api_drug_categories():
 # 用量計算機 + 相互作用チェック API
 # ---------------------------------------------------------------------------
 
-from api.dose_calculator import calculate_dose, to_dict as dose_to_dict
+from api.dose_calculator import calculate_dose
+from api.dose_calculator import to_dict as dose_to_dict
 from api.drug_interactions import (
     find_interactions,
     find_species_specific_warnings,
@@ -10643,6 +10644,8 @@ from api.evidence_grading import (
     DIAGNOSTIC_DISCLAIMER,
     DOSE_CALCULATOR_DISCLAIMER,
     assess,
+)
+from api.evidence_grading import (
     to_dict as evidence_to_dict,
 )
 
@@ -10674,7 +10677,8 @@ def api_disclaimers():
 # ---------------------------------------------------------------------------
 # 治療プラン生成 API
 # ---------------------------------------------------------------------------
-from api.treatment_plan import build_treatment_plan, to_dict as plan_to_dict
+from api.treatment_plan import build_treatment_plan
+from api.treatment_plan import to_dict as plan_to_dict
 
 
 def _get_drug_lookup() -> dict:

@@ -90,7 +90,7 @@ def test_to_dict_serializable():
 
 
 def test_disclaimer_strings_have_both_languages():
-    for key, disclaimer in [
+    for _key, disclaimer in [
         ("ai_content", AI_CONTENT_DISCLAIMER),
         ("diagnostic", DIAGNOSTIC_DISCLAIMER),
         ("dose_calculator", DOSE_CALCULATOR_DISCLAIMER),

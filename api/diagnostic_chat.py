@@ -1273,7 +1273,8 @@ def diagnostic_chat():
 
     # Phase 3: Vetlexicon-style structured clinical reasoning
     try:
-        from api.clinical_reasoning import build_reasoning, to_dict as reasoning_to_dict
+        from api.clinical_reasoning import build_reasoning
+        from api.clinical_reasoning import to_dict as reasoning_to_dict
 
         reasoning = build_reasoning(
             input_symptoms=all_symptoms,
