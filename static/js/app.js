@@ -172,6 +172,10 @@ const I18N={
     retry:"再試行",
     reload:"再読み込み",
     networkError:"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。",
+    networkErrorTimeout:"接続がタイムアウトしました。",
+    networkErrorOffline:"オフラインです。ネットワーク接続を確認してください。",
+    networkErrorServer:"サーバーエラーが発生しました。",
+    networkErrorDetail:"詳細: ",
     noDiseaseMatch:"該当する疾患がありません",
     noDrugMatch:"該当する薬品がありません",
     errorPrefix:"エラー: ",
@@ -400,6 +404,10 @@ const I18N={
     retry:"Retry",
     reload:"Reload",
     networkError:"Failed to connect to server. Please check your network.",
+    networkErrorTimeout:"The request timed out.",
+    networkErrorOffline:"You appear to be offline. Please check your connection.",
+    networkErrorServer:"Server error.",
+    networkErrorDetail:"Details: ",
     noDiseaseMatch:"No matching diseases",
     noDrugMatch:"No matching drugs",
     errorPrefix:"Error: ",
@@ -524,6 +532,28 @@ function fetchWithTimeout(url,opts={},timeoutMs=10000){
   const ctrl=new AbortController();
   const timer=setTimeout(()=>ctrl.abort(),timeoutMs);
   return fetch(url,{...opts,signal:ctrl.signal}).finally(()=>clearTimeout(timer));
+}
+
+/* Classify a fetch failure for user-facing messaging.
+   Returns {title, detail} pulled from current i18n. */
+function describeFetchError(err){
+  const msg=String(err&&err.message?err.message:err||"");
+  let title=t("networkError");
+  let detail="";
+  if(typeof navigator!=="undefined"&&navigator.onLine===false){
+    title=t("networkErrorOffline");
+  }else if(err&&(err.name==="AbortError"||/aborted|timeout/i.test(msg))){
+    title=t("networkErrorTimeout");
+  }else if(/^HTTP 5\d{2}/.test(msg)){
+    title=t("networkErrorServer");
+    detail=msg;
+  }else if(/^HTTP 4\d{2}/.test(msg)){
+    title=t("networkErrorServer");
+    detail=msg;
+  }else if(msg){
+    detail=msg;
+  }
+  return {title,detail};
 }
 
 function applyLanguage(){
@@ -709,6 +739,20 @@ document.addEventListener("DOMContentLoaded",async()=>{
       if(e.key==="Escape"){
         const kb=document.getElementById("kbShortcutsPanel");
         if(kb&&kb.classList.contains("visible")){kb.classList.remove("visible");return;}
+        const spPanel=document.getElementById("speciesFilterPanel");
+        if(spPanel&&spPanel.style.display!=="none"){
+          spPanel.style.display="none";
+          const trig=document.getElementById("searchFilterBtn");
+          if(trig){trig.setAttribute("aria-expanded","false");trig.focus();}
+          return;
+        }
+        const catPanel=document.getElementById("categoryFilterPanel");
+        if(catPanel&&catPanel.style.display!=="none"){
+          catPanel.style.display="none";
+          const trig=document.getElementById("categoryFilterBtn");
+          if(trig){trig.setAttribute("aria-expanded","false");trig.focus();}
+          return;
+        }
         const open=document.querySelector(".disease-detail.open");
         if(open){const item=open.closest(".disease-db-item");if(item)toggleDbItem(item);}
         return;
@@ -882,14 +926,36 @@ function setupSearchFilters(runSearch){
   const catClose=document.getElementById("categoryFilterCloseBtn");
   const catReset=document.getElementById("categoryFilterResetBtn");
 
+  function setPanelOpen(panel,btn,open){
+    if(!panel||!btn)return;
+    panel.style.display=open?"block":"none";
+    btn.setAttribute("aria-expanded",open?"true":"false");
+    if(!open&&document.activeElement&&panel.contains(document.activeElement)){
+      btn.focus();
+    }
+  }
+  function bindPanelKeydown(panel,btn){
+    if(!panel||!btn)return;
+    panel.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){e.stopPropagation();setPanelOpen(panel,btn,false);}
+    });
+  }
+
   if(spBtn&&spPanel&&spList){
+    spBtn.setAttribute("aria-expanded","false");
+    spBtn.setAttribute("aria-haspopup","dialog");
+    bindPanelKeydown(spPanel,spBtn);
     spBtn.addEventListener("click",()=>{
       const show=spPanel.style.display==="none";
-      spPanel.style.display=show?"block":"none";
-      if(catPanel)catPanel.style.display="none";
-      if(show)renderSpeciesFilterList();
+      setPanelOpen(spPanel,spBtn,show);
+      if(catPanel&&catBtn)setPanelOpen(catPanel,catBtn,false);
+      if(show){
+        renderSpeciesFilterList();
+        const first=spPanel.querySelector(".filter-checkbox,.filter-close");
+        if(first)setTimeout(()=>first.focus(),50);
+      }
     });
-    if(spClose)spClose.addEventListener("click",()=>{spPanel.style.display="none";});
+    if(spClose)spClose.addEventListener("click",()=>setPanelOpen(spPanel,spBtn,false));
     if(spReset)spReset.addEventListener("click",()=>{
       globalSearchSpeciesFilter=null;
       spBtn.classList.remove("filter-active");
@@ -903,19 +969,26 @@ function setupSearchFilters(runSearch){
       if(globalSearchSpeciesFilter===id){globalSearchSpeciesFilter=null;spBtn.classList.remove("filter-active");}
       else{globalSearchSpeciesFilter=id;spBtn.classList.add("filter-active");selectSpecies(id);}
       renderSpeciesFilterList();
-      spPanel.style.display="none";
+      setPanelOpen(spPanel,spBtn,false);
       runSearch();
     });
   }
 
   if(catBtn&&catPanel&&catList){
+    catBtn.setAttribute("aria-expanded","false");
+    catBtn.setAttribute("aria-haspopup","dialog");
+    bindPanelKeydown(catPanel,catBtn);
     catBtn.addEventListener("click",()=>{
       const show=catPanel.style.display==="none";
-      catPanel.style.display=show?"block":"none";
-      if(spPanel)spPanel.style.display="none";
-      if(show)renderCategoryFilterList();
+      setPanelOpen(catPanel,catBtn,show);
+      if(spPanel&&spBtn)setPanelOpen(spPanel,spBtn,false);
+      if(show){
+        renderCategoryFilterList();
+        const first=catPanel.querySelector(".filter-checkbox,.filter-close");
+        if(first)setTimeout(()=>first.focus(),50);
+      }
     });
-    if(catClose)catClose.addEventListener("click",()=>{catPanel.style.display="none";});
+    if(catClose)catClose.addEventListener("click",()=>setPanelOpen(catPanel,catBtn,false));
     if(catReset)catReset.addEventListener("click",()=>{
       globalSearchTypeFilter=null;
       catBtn.classList.remove("filter-active");
@@ -929,7 +1002,7 @@ function setupSearchFilters(runSearch){
       if(globalSearchTypeFilter===type){globalSearchTypeFilter=null;catBtn.classList.remove("filter-active");}
       else{globalSearchTypeFilter=type;catBtn.classList.add("filter-active");}
       renderCategoryFilterList();
-      catPanel.style.display="none";
+      setPanelOpen(catPanel,catBtn,false);
       runSearch();
     });
   }
@@ -1831,7 +1904,7 @@ function doAnalyze(){
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;if(n>0)showToast(t("diseasesFoundToast").replace("%n%",n),"success");else showToast(t("diseasesNoneFoundToast"),"warning");}const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
-  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);}})
+  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){const info=describeFetchError(err);const detailHtml=info.detail?`<div class="results-error-detail">${escapeHtml(t("networkErrorDetail")+info.detail)}</div>`:"";ra.innerHTML=`<div class="results-error" role="alert"><strong>${escapeHtml(info.title)}</strong>${detailHtml}<button class="retry-analyze-btn" type="button">${escapeHtml(t("retry"))}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn){retryBtn.addEventListener("click",doAnalyze);setTimeout(()=>retryBtn.focus(),50);}}})
   .finally(()=>{clearTimeout(slowTimer);if(btn){btn.disabled=false;btn.textContent=t("analyzeBtn");}if(progress)progress.classList.remove("active");});
 }
 
