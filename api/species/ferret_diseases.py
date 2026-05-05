@@ -607,11 +607,21 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Chordoma",
         "name_ja": "脊索腫",
-        "symptoms": {"tail_mass", "swelling", "pain", "difficulty_defecating"},
+        "symptoms": {
+            "tail_mass",
+            "swelling",
+            "pain",
+            "difficulty_defecating",
+            "ataxia",
+            "fecal_incontinence",
+            "hind_leg_weakness",
+            "tail_abnormality",
+            "urinary_incontinence",
+        },
         "description": "Chordoma is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "フェレットの尾端に発生しやすい軟骨性の緩徐に増殖する腫瘍です。",
         "urgency": "low",
-        "recommended_tests": ["biopsy", "xray"],
+        "recommended_tests": ["biopsy", "xray", "radiographs", "ct_scan", "fine_needle_aspirate", "histopathology"],
         "causes": "Neoplastic transformation of notochordal remnants, typically arising at the tail tip. The exact cause is unknown but likely involves developmental remnant cell proliferation.",
         "causes_ja": "フェレットにおける脊索腫の原因: 癌遺伝子・腫瘍抑制遺伝子の遺伝子変異蓄積による腫瘍性形質転換。加齢、慢性炎症、ウイルス感染、ホルモン影響、UV曝露、遺伝的素因がリスク因子。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
@@ -1277,6 +1287,7 @@ DISEASES: List[Dict[str, Any]] = [
             "abdominal_distension",
             "fever",
             "lymph_node_enlargement",
+            "hind_leg_weakness",
         },
         "description": "Ferret Systemic Coronavirus (FRSCV) is a viral disease that may cause acute or chronic illness with variable clinical presentation.",
         "description_ja": "猫FIPに類似した全身性肉芽腫性炎症を引き起こすコロナウイルス感染症です。",
@@ -1287,7 +1298,16 @@ DISEASES: List[Dict[str, Any]] = [
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "確実な予防法はない。ストレス軽減。免疫抑制の回避。猫FIPと同様に治療は困難。",
         "urgency": "high",
-        "recommended_tests": ["cbc", "biochemistry", "abdominal_ultrasound", "biopsy"],
+        "recommended_tests": [
+            "cbc",
+            "biochemistry",
+            "abdominal_ultrasound",
+            "biopsy",
+            "complete_blood_count",
+            "serum_chemistry",
+            "histopathology",
+            "immunohistochemistry",
+        ],
         "treatment": "Supportive care including IV fluid therapy, anti-emetics, nutritional support, and broad-spectrum antibiotics for secondary infection prevention. Antiviral agents where available and indicated.",
         "treatment_ja": "支持療法を中心に、輸液療法、制吐薬、栄養サポート、二次感染予防の抗菌薬投与。抗ウイルス薬の使用（利用可能な場合）。",
         "prognosis": "Variable depending on viral agent and host immunity. Mild infections often resolve with supportive care. Severe systemic viral diseases carry a guarded to poor prognosis.",
@@ -3513,87 +3533,6 @@ DISEASES: List[Dict[str, Any]] = [
     # =========================================================================
     # ADDITIONAL DISEASES — NEOPLASTIC
     # =========================================================================
-    {
-        "name": "Chordoma",
-        "name_ja": "脊索腫",
-        "symptoms": {
-            "hind_leg_weakness",
-            "ataxia",
-            "tail_abnormality",
-            "urinary_incontinence",
-            "fecal_incontinence",
-            "pain",
-        },
-        "description": "Slow-growing tumor arising from notochordal remnants, typically at the tail tip in ferrets.",
-        "description_ja": "脊索遺残組織由来の腫瘍。フェレットでは尾端部に好発。"
-        "局所浸潤性で緩徐に増大。転移は稀だが局所再発が多い。"
-        "仙尾椎に発生した場合は後肢不全麻痺や排泄障害を呈する。",
-        "pathophysiology": "Arises from embryonic notochordal remnants in the vertebral column or tail; slow local invasion with rare metastasis.",
-        "pathophysiology_ja": "胎生期の脊索遺残細胞が腫瘍化→局所浸潤性に増大。"
-        "尾端部（最多）、仙椎、頸椎に発生。骨溶解を伴う。"
-        "遠隔転移は稀だが、不完全切除後の局所再発率が高い。",
-        "causes": "Unknown; arises from embryonic notochordal remnants.",
-        "causes_ja": "原因不明。胎生期の脊索遺残組織が腫瘍化。"
-        "特定の遺伝的素因は特定されていない。中高齢フェレットに多い。",
-        "treatment": "Surgical excision with wide margins. Tail amputation for distal tail chordomas.",
-        "treatment_ja": "外科的切除（広範マージン）が標準治療。"
-        "尾端部：断尾術（十分なマージンで切除）。"
-        "仙椎・頸椎：完全切除が困難な場合は減量手術＋放射線療法を検討。"
-        "不完全切除後の再発率が高い。化学療法の有効性は限定的。",
-        "prevention": "No known prevention.",
-        "prevention_ja": "予防法なし。尾端部の腫瘤は早期受診を推奨。",
-        "prognosis": "Good for tail chordomas with complete excision; guarded for vertebral body tumors.",
-        "prognosis_ja": "尾端部の完全切除例は予後良好。椎体発生例は完全切除困難で予後慎重。"
-        "不完全切除後の再発率50%以上。遠隔転移は稀。",
-        "urgency": "moderate",
-        "recommended_tests": ["radiographs", "ct_scan", "fine_needle_aspirate", "histopathology"],
-        "onset_pattern": {"chronic"},
-        "age_predisposition": {"adult", "senior"},
-    },
-    {
-        "name": "Ferret Systemic Coronavirus (FRSCV)",
-        "name_ja": "フェレット全身性コロナウイルス感染症",
-        "symptoms": {
-            "weight_loss",
-            "lethargy",
-            "appetite_loss",
-            "diarrhea",
-            "abdominal_distension",
-            "hind_leg_weakness",
-            "fever",
-        },
-        "description": "Systemic coronavirus infection in ferrets causing FIP-like granulomatous disease.",
-        "description_ja": "フェレットコロナウイルスの変異株による全身性肉芽腫性疾患。"
-        "猫のFIPに類似した病態。腹膜炎・腸間膜リンパ節腫大・肝脾腫・"
-        "後肢不全麻痺を呈する。若齢フェレットに多い。",
-        "pathophysiology": "Mutant ferret enteric coronavirus gains macrophage tropism, causing systemic pyogranulomatous inflammation similar to feline FIP.",
-        "pathophysiology_ja": "フェレット腸管コロナウイルスの変異→マクロファージ親和性獲得→"
-        "全身性化膿性肉芽腫性炎症。腸間膜リンパ節・脾臓・肝臓・腎臓に"
-        "肉芽腫形成。猫FIPとの病理学的類似性が高い。",
-        "causes": "Mutant ferret enteric coronavirus (FRECV). Fecal-oral transmission.",
-        "causes_ja": "フェレット腸管コロナウイルス（FRECV）の変異株。糞口感染で伝播。"
-        "多頭飼育環境でリスク上昇。2歳以下の若齢フェレットに好発。",
-        "treatment": "No proven cure. Supportive care; immunosuppressive therapy (prednisolone) may be attempted.",
-        "treatment_ja": "確立された治療法なし。支持療法が中心。"
-        "プレドニゾロン（1〜2mg/kg SID）で免疫抑制→症状緩和。"
-        "GS-441524（猫FIPで有効）のフェレットへの応用が研究中。"
-        "輸液・栄養支持・疼痛管理。",
-        "prevention": "Minimize stress, quarantine new ferrets, hygiene.",
-        "prevention_ja": "新規導入フェレットの検疫。ストレス軽減。衛生管理の徹底。多頭飼育環境でのトイレの清潔維持。",
-        "prognosis": "Guarded to poor; progressive disease with limited treatment options.",
-        "prognosis_ja": "慎重〜不良。進行性疾患で有効な治療法が限定的。"
-        "プレドニゾロンで一時的な改善が得られることがある。",
-        "urgency": "high",
-        "recommended_tests": [
-            "complete_blood_count",
-            "serum_chemistry",
-            "abdominal_ultrasound",
-            "histopathology",
-            "immunohistochemistry",
-        ],
-        "onset_pattern": {"subacute", "chronic"},
-        "age_predisposition": {"young", "adult"},
-    },
     # ── Reproductive ────────────────────────────────────────────────────
     {
         "name": "Dystocia",

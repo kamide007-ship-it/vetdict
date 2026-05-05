@@ -4,7 +4,8 @@
   --green:#22a84f;--green-dark:#1a8a3e;--green-light:#e8f8ee;
   --white:#fff;--bg:#f5f6fa;
   --gray-50:#f8f9fc;--gray-100:#eef0f5;--gray-200:#dde1ea;--gray-300:#c5cbd8;
-  --gray-500:#596380;--gray-600:#4e5570;--gray-700:#363c52;--gray-900:#1a1d2e;
+  /* gray-500 darkened from #596380 for WCAG AA contrast on light bg (~5.0:1 vs --bg) */
+  --gray-500:#4f566e;--gray-600:#42485d;--gray-700:#2f3447;--gray-900:#1a1d2e;
   --red:#dc3545;--orange:#f0850e;
   --radius:10px;--radius-lg:16px;
   --shadow:0 1px 3px rgba(26,48,104,.08),0 1px 2px rgba(26,48,104,.04);
@@ -662,6 +663,45 @@ a:hover{text-decoration:underline}
 .drug-safe-label{color:var(--green);font-weight:700}
 .drug-unsafe-label{color:var(--red);font-weight:700}
 .drug-dosage-note{color:var(--gray-500)}
+.drug-comparison{margin:0 0 14px;border:1px solid var(--gray-200);border-radius:var(--radius);background:linear-gradient(135deg,#f8fafc,#eef2f7)}
+.drug-comparison[open]{background:var(--white);box-shadow:var(--shadow-md)}
+.drug-comparison-summary{cursor:pointer;list-style:none;padding:10px 14px;font-size:.86rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px;border-radius:var(--radius)}
+.drug-comparison-summary::-webkit-details-marker{display:none}
+.drug-comparison-summary::after{content:"▾";margin-left:auto;color:var(--gray-500);transition:transform var(--transition-fast)}
+.drug-comparison[open] .drug-comparison-summary::after{transform:rotate(180deg)}
+.drug-comparison-summary:hover{background:var(--gray-50)}
+.drug-comparison-icon{font-size:1.05rem}
+.drug-comparison-hint{font-size:.72rem;color:var(--gray-500);font-weight:500}
+.drug-comparison-body{padding:6px 14px 14px;border-top:1px solid var(--gray-100)}
+.drug-comparison-intro{font-size:.82rem;color:var(--gray-700);margin:10px 0 12px;line-height:1.55}
+.drug-comparison-table-wrap{overflow-x:auto;border:1px solid var(--gray-200);border-radius:8px;background:var(--white)}
+.drug-comparison-table-wrap:focus{outline:2px solid var(--green);outline-offset:2px}
+.drug-comparison-table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:640px}
+.drug-comparison-table th,.drug-comparison-table td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--gray-100);line-height:1.5}
+.drug-comparison-table thead th{background:var(--navy);color:var(--white);font-weight:600;font-size:.76rem;letter-spacing:.2px;position:sticky;top:0}
+.drug-comparison-table thead th:nth-child(2){background:var(--green-dark)}
+.drug-comparison-table tbody th{background:var(--gray-50);color:var(--navy);font-weight:600;width:130px;white-space:nowrap}
+.drug-comparison-table tbody tr:nth-child(even) td{background:#fbfcfe}
+.drug-comparison-table td:nth-child(2){background:rgba(34,168,79,.06)!important;font-weight:500}
+.drug-comparison-table tbody tr:last-child th,.drug-comparison-table tbody tr:last-child td{border-bottom:none}
+.drug-comparison-analysis{margin-top:14px}
+.drug-comparison-analysis h4{font-size:.86rem;color:var(--navy);margin:14px 0 8px;font-weight:700}
+.drug-comparison-points{padding-left:20px;margin:0}
+.drug-comparison-points li{margin-bottom:10px;font-size:.8rem;color:var(--gray-700);line-height:1.55}
+.drug-comparison-points li strong{color:var(--navy);display:block;margin-bottom:2px;font-size:.82rem}
+.drug-comparison-points li p{margin:0}
+.drug-comparison-conclusion{margin-top:14px;padding:10px 14px;background:var(--green-light);border-left:4px solid var(--green);border-radius:6px}
+.drug-comparison-conclusion h4{margin-top:0;color:var(--green-dark)}
+.drug-comparison-conclusion p{margin:6px 0;font-size:.8rem;color:var(--gray-700);line-height:1.55}
+.drug-comparison-conclusion strong{color:var(--navy)}
+.drug-comparison-disclaimer{margin-top:12px;font-size:.72rem;color:var(--gray-500);line-height:1.5;font-style:italic}
+@media (max-width:600px){
+  .drug-comparison-summary{font-size:.82rem;padding:9px 12px}
+  .drug-comparison-hint{display:none}
+  .drug-comparison-table{font-size:.74rem;min-width:520px}
+  .drug-comparison-table tbody th{width:100px}
+  .drug-comparison-points li,.drug-comparison-conclusion p{font-size:.76rem}
+}
 .drug-sponsor-link{margin-top:8px;padding:8px 12px;background:var(--green-light);border:1px solid rgba(34,168,79,.3);border-radius:6px;font-size:.8rem}
 .drug-sponsor-name{color:var(--green-dark)}
 .drug-sponsor-vet{color:var(--gray-600)}
@@ -1768,3 +1808,48 @@ button.combination-item:focus-visible {
 
 .offline-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#dc3545;color:var(--white);text-align:center;padding:6px 16px;font-size:.78rem;font-weight:600;transform:translateY(-100%);transition:transform .3s ease}
 .offline-banner.visible{transform:translateY(0)}
+
+/* --- UX/A11y refinements --- */
+/* Prevent iOS auto-zoom on form input focus (font must be ≥16px on touch screens) */
+@media(max-width:600px){
+  .lab-group input,
+  #drugWeight,
+  #anesthesiaWeight,
+  #chatInput,
+  #symptomSearch,
+  #diseaseSearch,
+  #drugSearch,
+  #anesthesiaSearch,
+  #globalSearch,
+  .global-search-input,
+  .breed-select,
+  #breedSelect,
+  .symptom-search input,
+  .anesthesia-asa-filter,
+  #drugCategoryFilter,
+  #drugSpeciesFilter,
+  #anesthesiaCategoryFilter{font-size:16px!important}
+}
+
+/* Filter dropdown panels: keep within viewport on small screens */
+@media(max-width:480px){
+  .species-filter-panel,
+  .category-filter-panel{
+    position:fixed;
+    top:auto;
+    left:8px;
+    right:8px;
+    bottom:auto;
+    max-width:none;
+    min-width:0;
+    width:auto;
+  }
+}
+
+/* Smarter retry/error messages keep proper spacing */
+.results-error{display:flex;flex-direction:column;gap:10px;padding:14px 16px;border-radius:var(--radius);background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d;font-size:.86rem;line-height:1.55}
+.results-error strong{color:#991b1b}
+.results-error .results-error-detail{font-size:.78rem;color:#7f1d1d;opacity:.85}
+.results-error .retry-analyze-btn{align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem;font-weight:600;min-height:40px}
+.results-error .retry-analyze-btn:hover{background:var(--navy-dark)}
+.results-error .retry-analyze-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
