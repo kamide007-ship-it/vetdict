@@ -2572,66 +2572,277 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Mitral Valve Disease (MMVD)",
-        "name_ja": "僧帽弁閉鎖不全症",
-        "symptoms": {"coughing", "difficulty_breathing", "lethargy", "excessive_panting"},
-        "description": "Progressive myxomatous degeneration of the mitral valve causing "
-        "blood regurgitation. The most common acquired heart "
-        "disease in dogs (>75% of acquired cardiac disease). "
-        "Highly prevalent in small breeds, especially Cavalier King Charles Spaniels.",
-        "description_ja": "僧帽弁の進行性粘液腫様変性により血液が逆流する疾患。犬で最も多い後天性心疾患（後天性心疾患の75%以上）。"
-        "小型犬、特にキャバリア・キング・チャールズ・スパニエル（CKCS）に高頻度で発症。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "僧帽弁尖の粘液腫様変性→弁の肥厚・伸長→弁尖の逸脱・腱索断裂→僧帽弁逆流（MR）→左房拡大→肺静脈うっ血→肺水腫。"
-        "左房拡大→左主気管支圧排→咳嗽。心房細動の合併。ACVIM Stage A〜D分類（Keene et al. JVIM 2019）。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "加齢性弁変性（最多）。病因不明だが遺伝的要因が示唆。好発：CKCS（若齢発症）、マルチーズ、ダックスフンド、チワワ、ポメラニアン等の小型犬。全犬の心不全原因の75%を占める。",
-        "treatment": "ACVIM Consensus Stage-Based Therapy (Keene et al. JVIM 2019): "
-        "Stage A (at-risk breed, no murmur): no treatment, annual cardiac auscultation. "
-        "Stage B1 (murmur, no cardiomegaly): no treatment, echocardiogram q6-12 months. "
-        "Stage B2 (murmur + cardiomegaly — LA/Ao ≥1.6, LVIDDN ≥1.7, VHS >10.5): "
-        "pimobendan 0.25-0.3 mg/kg PO q12h (30 min before food). "
-        "EPIC trial (Boswood JVIM 2016, n=360 RCT): median time to CHF 766→1228 days (HR 0.64, P=.0038). "
-        "Stage C (CHF symptoms): (1) furosemide 1-2 mg/kg PO q8-12h (acute: IV 2-4 mg/kg q1-4h), "
-        "torasemide 0.1-0.2 mg/kg PO q24h if furosemide-refractory. "
-        "(2) Pimobendan 0.25-0.3 mg/kg q12h continued. "
-        "(3) ACE inhibitor: benazepril 0.25-0.5 mg/kg q24h or enalapril 0.5 mg/kg q12-24h. "
-        "(4) Spironolactone 1-2 mg/kg q12-24h. "
-        "(5) Acute pulmonary edema: O2, furosemide IV, butorphanol 0.2-0.4 mg/kg IV; severe: nitroprusside CRI 1-10 μg/kg/min with BP monitoring. "
-        "Stage D (refractory CHF): dose escalation, furosemide CRI 0.66-1 mg/kg/h, sildenafil 1-2 mg/kg PO q8h (pulmonary hypertension), "
-        "torasemide, sodium-restricted diet, consider palliative care. "
-        "Cough (mainstem bronchus compression): hydrocodone 0.22 mg/kg PO q6-12h or butorphanol 0.05-0.1 mg/kg PO q6-12h. "
-        "Atrial fibrillation: diltiazem 0.5-1 mg/kg PO q8h or digoxin 0.003 mg/kg q12h (target HR <160). "
-        "MONITORING: Stage B2 q6mo echo, Stage C q2-4wk electrolytes/renal/BP.",
-        "treatment_ja": "【ACVIM Consensus Stage-Based Therapy (Keene et al. JVIM 2019)】 "
-        "【Stage A（リスク品種だが心雑音なし）】 治療不要。年1回の心臓聴診。"
-        "【Stage B1（心雑音あり、心拡大なし）】 治療不要。6-12ヶ月毎の心エコー。"
-        "【Stage B2（心雑音あり、心拡大あり — LA/Ao≥1.6、LVIDDN≥1.7、VHS>10.5）】 "
-        "**ピモベンダン 0.25-0.3 mg/kg PO q12h を開始**（食前30分、空腹時投与）。"
-        "EPIC trial（Boswood et al. JVIM 2016、360頭、RCT）でCHF発症までの中央期間が"
-        "766日 → 1228日に延長（約15ヶ月延長、HR 0.64、P=.0038）。"
-        "【Stage C（CHF症状あり/既往）】 "
-        "(1) フロセミド 1-2 mg/kg PO q8-12h（急性期はIV/IM 2-4 mg/kg q1-4h、効果まで反復）"
-        "→ 維持量へ漸減。トラセミド 0.1-0.2 mg/kg PO q24h（フロセミド無効例）。"
-        "(2) ピモベンダン 0.25-0.3 mg/kg PO q12h 継続。"
-        "(3) ACE阻害薬: ベナゼプリル 0.25-0.5 mg/kg PO q24h またはエナラプリル 0.5 mg/kg PO q12-24h。"
-        "(4) スピロノラクトン 1-2 mg/kg PO q12-24h（RAAS抑制、低K血症対策）。"
-        "(5) 肺水腫の急性管理: 酸素療法、フロセミドIV、ブトルファノール 0.2-0.4 mg/kg IV（鎮静・呼吸数低下）、"
-        "重症例にはニトロプルシドCRI 1-10 μg/kg/min（血圧監視下）。"
-        "【Stage D（難治性CHF）】 上記の用量強化、フロセミドCRI 0.66-1 mg/kg/h、"
-        "シルデナフィル 1-2 mg/kg PO q8h（肺高血圧合併時）、トラセミド、低Na食、緩和ケア検討。"
-        "【咳の管理】 気管支圧排による咳にはハイドロコドン 0.22 mg/kg PO q6-12h またはブトルファノール 0.05-0.1 mg/kg PO q6-12h。"
-        "【併発心房細動】 ジルチアゼム 0.5-1 mg/kg PO q8h またはジゴキシン 0.003 mg/kg PO q12h（HR<160 bpm目標）。"
-        "【モニタリング】 Stage B2: 6ヶ月毎の心エコー、Stage C: 2-4週間毎の電解質・腎機能・血圧、肺水腫再燃の早期発見。",
-        "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "Stage B1: 多くは長期間（数年）無症状で経過。"
-        "Stage B2: ピモベンダン治療下でCHF発症までの中央期間1228日（約3.4年、EPIC trial）。"
-        "Stage C（CHF発症後）: 適切な治療で生存期間中央値9-12ヶ月、最適管理例で2年超も。"
-        "Stage D（難治性）: 生存期間中央値1-3ヶ月。"
-        "予後不良因子: 重度MR、左房著明拡大、肺高血圧合併、腎機能低下、低ナトリウム血症、難治性肺水腫。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確実な予防法はないが、CKCSの繁殖プロトコル（4歳以前の繁殖個体の心臓聴診・心エコースクリーニング）、"
-        "定期的な心臓聴診（年1回以上、リスク品種では半年毎）で早期発見。肥満予防。"
-        "心雑音検出時の早期心エコー検査。",
+        "name_ja": "僧帽弁閉鎖不全症（MMVD）",
+        "symptoms": {
+            "coughing",
+            "difficulty_breathing",
+            "rapid_breathing",
+            "lethargy",
+            "excessive_panting",
+            "collapse",
+            "weight_loss",
+            "reluctance_move",
+            "appetite_loss",
+        },
+        "description": (
+            "Progressive myxomatous degeneration of the mitral valve causing regurgitation and "
+            "left-sided congestive heart failure (CHF). The most common acquired heart disease in dogs "
+            "(>75% of acquired cardiac disease). Highly prevalent in small breeds — particularly "
+            "Cavalier King Charles Spaniels (CKCS), Maltese, Dachshunds, Chihuahuas, and Pomeranians. "
+            "ACVIM 2019 Consensus (Keene et al. JVIM 2019) defines Stages A/B1/B2/C/D. "
+            "The EPIC trial (Boswood JVIM 2016) established pimobendan in preclinical Stage B2."
+        ),
+        "description_ja": (
+            "僧帽弁の進行性粘液腫様変性により逆流が生じ、左心性うっ血性心不全（CHF）に至る疾患。"
+            "犬の後天性心疾患の75%以上を占める最多疾患。小型犬に高頻度で発症。"
+            "好発品種：キャバリア・キング・チャールズ・スパニエル（CKCS）・マルチーズ・"
+            "ダックスフンド・チワワ・ポメラニアン。"
+            "ACVIM 2019コンセンサスステートメント（Keene et al. JVIM 2019）によりStage A/B1/B2/C/Dに分類。"
+            "EPICトライアル（Boswood et al. JVIM 2016）にてStage B2でのピモベンダン早期介入が確立。"
+        ),
+        "pathophysiology": (
+            "ACVIM Stage classification: Stage A (at-risk breed, no murmur), "
+            "Stage B1 (murmur, no cardiomegaly), "
+            "Stage B2 (murmur + cardiomegaly meeting EPIC criteria: LA/Ao >=1.6 AND LVIDDN >=1.7 AND VHS >10.5; VLAS >=2.3 supportive), "
+            "Stage C (current or prior CHF signs), Stage D (refractory CHF). "
+            "Myxomatous degeneration of valve leaflets -> leaflet prolapse/chordae tendineae rupture -> "
+            "mitral regurgitation (MR) -> left atrial (LA) enlargement -> pulmonary venous hypertension -> "
+            "pulmonary edema. LA enlargement compresses left mainstem bronchus -> cough. "
+            "Cardiac remodeling: eccentric LV hypertrophy, neurohormonal activation (RAAS, SNS), "
+            "progressive MR worsening. Complications: pulmonary hypertension (in ~25-30% of severe MR), "
+            "atrial fibrillation, syncope, pleural effusion, acute chordae rupture. "
+            "Diagnostic workup: (1) Auscultation — left-apex systolic murmur Grade I-VI/VI. "
+            "(2) Thoracic radiography — VHS (>10.5 significant), VLAS (>=2.3 cm). "
+            "(3) Echocardiography — LA/Ao (parasternal short-axis) >=1.6, "
+            "LVIDDN (Cornell scaling = LVIDD / BW^0.294) >=1.7, FS%, regurgitant jet area/PISA. "
+            "(4) NT-proBNP >1500 pmol/L suggests cardiogenic dyspnea (Moonarmart et al. JVIM 2010). "
+            "(5) Troponin I (>0.2 ng/mL = poor prognosis). "
+            "(6) Blood pressure (hypertension worsens MR). "
+            "(7) Resting respiratory rate (RRR) home monitoring: >=40/min or >=20% above baseline "
+            "= early CHF warning (Schober et al. JVIM 2010). "
+            "(8) ECG — atrial fibrillation detection. "
+            "(9) CBC, serum chemistry (BUN, Cre, electrolytes), urinalysis. "
+            "Differentials: tracheal collapse, chronic bronchitis, pneumonia, non-cardiac pleural effusion, "
+            "pulmonary neoplasia, tricuspid valve disease, pericardial effusion, primary PH."
+        ),
+        "pathophysiology_ja": (
+            "【ACVIM Stage分類（Keene et al. JVIM 2019）】"
+            "Stage A：リスク品種だが心雑音なし（例：CKCS・マルチーズの若齢犬）。"
+            "Stage B1：心雑音あり、心拡大なし（LA/Ao<1.6かつLVIDDN<1.7）。"
+            "Stage B2：心雑音あり＋EPIC基準を満たす心拡大あり（LA/Ao>=1.6 かつ LVIDDN>=1.7 かつ VHS>10.5、すべて満たす場合）。"
+            "Stage C：現在または過去にCHF症状あり（肺水腫・胸水・腹水）。"
+            "Stage D：最大量治療でも難治性のCHF。"
+            "【病態機序】"
+            "僧帽弁尖の粘液腫様変性 → 弁尖肥厚・伸長・逸脱、腱索伸長・断裂 → 僧帽弁逆流（MR）増大 → "
+            "左房（LA）拡大 → 肺静脈うっ血・肺水腫（Stage C）。"
+            "LA拡大 → 左主気管支圧排 → 心原性咳嗽（気管虚脱との鑑別が重要）。"
+            "代償機転：偏心性左室肥大、RAAS・交感神経系の慢性活性化 → 体液貯留・血管収縮・心臓リモデリング悪化。"
+            "合併症：肺高血圧（重度MRの25-30%）、心房細動、失神、胸水・腹水、腱索断裂による急性肺水腫。"
+            "【診断ワークフロー】"
+            "(1) 聴診：左心尖部の収縮期逆流性雑音 Grade I-VI/VI。Grade >= 3/VI で心拡大リスク上昇。"
+            "(2) 胸部X線：VHS（>10.5 で有意拡大）、VLAS（>=2.3 cm で肺静脈うっ血）。"
+            "(3) 心エコー：LA/Ao（傍胸骨短軸）>=1.6、"
+            "LVIDDN（Cornell補正 = LVIDD / 体重^0.294）>=1.7 で心拡大確定。"
+            "FS%（正常35-45%）、MR逆流ジェット面積・PISA法でMR重症度評価。"
+            "(4) NT-proBNP：>1500 pmol/L で心原性呼吸困難を示唆（Moonarmart et al. JVIM 2010）。"
+            "(5) トロポニンI：>0.2 ng/mL で心筋傷害・予後不良。"
+            "(6) 血圧測定：高血圧はMR悪化因子。"
+            "(7) 安静時呼吸数（RRR）：家庭での睡眠中計測。"
+            ">=40回/分 または 平時比20%以上増加 = CHF早期警告（Schober et al. JVIM 2010）。"
+            "(8) ECG：心房細動（不整・頻拍）確認。"
+            "(9) 血液検査：CBC、生化学（BUN・Cre・電解質）、尿検査。"
+            "【鑑別診断】気管虚脱、慢性気管支炎、肺炎、胸水（心外性）、肺腫瘍、三尖弁疾患、心膜液貯留、原発性肺高血圧。"
+        ),
+        "causes": (
+            "Myxomatous mitral valve degeneration — etiology multifactorial with strong genetic component. "
+            "Strong breed predisposition: CKCS (onset as young as 3-5 years, >50% affected by age 5, "
+            "nearly 100% by age 10), Maltese, Dachshund, Chihuahua, Pomeranian, Miniature Poodle, "
+            "Miniature Schnauzer, Cocker Spaniel. Age-related degeneration in all breeds. "
+            "Autosomal dominant inheritance suspected in CKCS. Male dogs slightly more affected than females. "
+            "Accounts for >75% of all canine heart failure cases."
+        ),
+        "causes_ja": (
+            "加齢に伴う進行性の粘液腫様弁変性（myxomatous degeneration）が主因。"
+            "病因は多因子性だが遺伝的要因が強い。"
+            "好発品種：CKCS（3-5歳から発症、5歳で50%以上罹患、10歳までにほぼ100%が心雑音を呈する）、"
+            "マルチーズ、ダックスフンド、チワワ、ポメラニアン、トイプードル、ミニチュアシュナウザー、コッカースパニエル。"
+            "全ての小型犬種で加齢に伴い罹患率上昇。CKCSでは常染色体優性遺伝が疑われる。"
+            "オスがメスより軽度高頻度。犬の全心不全原因の75%以上を占める。"
+        ),
+        "treatment": (
+            "ACVIM 2019 Consensus Stage-Based Treatment (Keene et al. JVIM 2019): "
+            "STAGE A (at-risk breed, no murmur): No medication. Annual cardiac auscultation. "
+            "Avoid obesity. CKCS breeders: cardiac screening >=2.5 years before mating. "
+            "STAGE B1 (murmur, no cardiomegaly — LA/Ao <1.6 AND LVIDDN <1.7): "
+            "No medication. Echocardiography q6-12mo. Weight management. "
+            "STAGE B2 (murmur >=3/6 + EPIC enrollment criteria — LA/Ao >=1.6 AND LVIDDN >=1.7 AND VHS >10.5; "
+            "all three required to match the EPIC-enrolled population): "
+            "Pimobendan 0.25-0.3 mg/kg PO q12h (30 min before food, do not split tablet). "
+            "EPIC trial (Boswood et al. JVIM 2016, n=360 RCT): median time to CHF/death "
+            "766 -> 1228 days (HR 0.64, 95% CI 0.47-0.87, P=.0038, NNT=4.9). "
+            "Borderline cases meeting only 1-2 criteria: re-evaluate echo + VHS in 3-6 months "
+            "rather than initiating chronic pimobendan, to avoid extrapolating beyond EPIC evidence. "
+            "DELAY trial (Borgarelli et al. JVIM 2020): spironolactone + benazepril in preclinical MMVD "
+            "— no significant benefit over pimobendan alone. "
+            "ACE-i monotherapy pre-CHF (SVEP, VETPROOF trials): no significant benefit. "
+            "Monitoring: echo + chest Xray q6mo, daily RRR home log, weight monitoring. "
+            "STAGE C (current or prior CHF): "
+            "(1) Furosemide 1-2 mg/kg PO q8-12h (titrate to lowest effective dose); "
+            "acute pulmonary edema: furosemide 2-4 mg/kg IV/IM q1-4h until RR <30/min, then PO; "
+            "torasemide 0.1-0.2 mg/kg PO q24h if furosemide-refractory. "
+            "(2) Pimobendan 0.25-0.3 mg/kg PO q12h (continue or initiate). "
+            "QUEST trial (Haggstrom et al. JVIM 2008): pimobendan 267 days vs benazepril 140 days median survival. "
+            "(3) ACE inhibitor: benazepril 0.25-0.5 mg/kg PO q24h OR enalapril 0.5 mg/kg PO q12-24h. "
+            "(4) Spironolactone 1-2 mg/kg PO q12-24h (RAAS blockade, anti-aldosterone, K-sparing). "
+            "Acute pulmonary edema protocol: O2 cage (FiO2 40-60%), furosemide IV, "
+            "butorphanol 0.2-0.4 mg/kg IV (anxiolysis + RR reduction); minimize handling; "
+            "severe refractory: nitroprusside CRI 1-10 ug/kg/min with continuous BP monitoring "
+            "(target MAP >=60 mmHg); furosemide CRI 0.66-1 mg/kg/h for bolus-refractory cases. "
+            "Cough from mainstem bronchus compression (confirm no dyspnea first): "
+            "hydrocodone 0.22 mg/kg PO q6-12h or butorphanol 0.05-0.1 mg/kg PO q6-12h. "
+            "Atrial fibrillation: diltiazem 0.5-1 mg/kg PO q8h or digoxin 0.003 mg/kg PO q12h "
+            "(target HR <160 bpm; digoxin level 0.8-2.0 ng/mL). "
+            "Monitoring: electrolytes + BUN/Cre + BP every 2-4 weeks; echo q3-6mo; "
+            "daily RRR + daily weight; weight gain >1 kg suggests fluid retention. "
+            "STAGE D (refractory CHF): "
+            "Furosemide escalation (max 4-6 mg/kg/day) or CRI 0.66-1 mg/kg/h; "
+            "torasemide 0.1-0.3 mg/kg PO q24h; add hydrochlorothiazide 2-4 mg/kg PO q24h; "
+            "sildenafil 1-2 mg/kg PO q8-12h (echoconfirmed PH: TR-Vmax >2.8 m/s); "
+            "sodium-restricted diet (<80 mg Na/100 kcal); palliative/hospice care discussion. "
+            "MITRAL VALVE REPAIR (MVR): Uechi technique (JASMINE Clinic, Yokohama / Dr. Mizuno team) "
+            "— minimally invasive repair on cardiopulmonary bypass; >1000 cases, "
+            "90-day mortality ~3-5%, 5-year survival ~80% for Stage B2/C. "
+            "Refer to board-certified cardiologist for surgical candidacy evaluation. "
+            "DRUGS TO AVOID: NSAIDs (reduce renal perfusion, attenuate furosemide efficacy), "
+            "corticosteroids (Na retention, volume overload), "
+            "beta-blockers in decompensated CHF without cardiologist supervision, "
+            "digoxin in hypokalemia (toxicity risk). "
+            "HOME MONITORING: Daily RRR during sleep; daily weight; "
+            "emergency if RRR >=40/min, acute dyspnea, collapse, pale/gray/blue gums. "
+            "FOLLOW-UP: Stage B2 q6mo echo + chest Xray + labs; "
+            "Stage C q2-4wk electrolytes/renal/BP/echo; owner diary of RRR, weight, appetite, activity."
+        ),
+        "treatment_ja": (
+            "【ACVIM Consensus Stage別治療（Keene et al. JVIM 2019）】"
+            "【Stage A — リスク品種・心雑音なし】"
+            "薬物治療不要。年1回の心臓聴診。体重管理（肥満回避）。"
+            "CKCSブリーダー：交配前の心臓聴診・心エコー必須（>=2.5歳）。"
+            "【Stage B1 — 心雑音あり・心拡大なし（LA/Ao<1.6かつLVIDDN<1.7）】"
+            "薬物治療不要。6-12ヶ月毎の心エコーでB2移行を監視。体重管理。"
+            "【Stage B2 — 心雑音>=3/6＋EPIC基準を全て満たす心拡大あり"
+            "（LA/Ao>=1.6 かつ LVIDDN>=1.7 かつ VHS>10.5、3項目すべて必須）】"
+            "ピモベンダン 0.25-0.3 mg/kg PO q12h 開始（食前30分・空腹時投与）。"
+            "EPICトライアル（Boswood et al. JVIM 2016、n=360 RCT）："
+            "CHF発症/心臓死までの中央期間766日 → 1228日（約15ヶ月延長、HR 0.64、P=.0038、NNT=4.9）。"
+            "投与量遵守と食前投与が重要（食後では吸収率低下）。"
+            "1-2項目しか満たさない境界例は、EPICエビデンスの外挿を避けるため慢性投与を開始せず、"
+            "3-6ヶ月後に心エコー＋VHSを再評価して判断する。"
+            "DELAYトライアル（Borgarelli et al. JVIM 2020）：スピロノラクトン+ベナゼプリルの無症状期投与は有意な利益なし。"
+            "ACE阻害薬単独の無症状期投与（SVEP・VETPROOFトライアル）：有意な利益なし。"
+            "管理：6ヶ月毎の心エコー・胸部X線・血圧測定。家庭での安静時呼吸数（RRR）記録開始。"
+            "【Stage C — CHF症状あり（現在または既往）】"
+            "(1) フロセミド 1-2 mg/kg PO q8-12h（最小有効量で維持）。"
+            "急性肺水腫：フロセミドIV/IM 2-4 mg/kg q1-4h → 呼吸数<30回/分になったらPO移行。"
+            "フロセミド無効例：トラセミド 0.1-0.2 mg/kg PO q24h。"
+            "(2) ピモベンダン 0.25-0.3 mg/kg PO q12h 継続または新規開始。"
+            "QUESTトライアル（Haggstrom et al. JVIM 2008）：Stage Cでピモベンダン群267日 vs ベナゼプリル群140日（有意差あり）。"
+            "(3) ACE阻害薬：ベナゼプリル 0.25-0.5 mg/kg PO q24h、またはエナラプリル 0.5 mg/kg PO q12-24h。"
+            "(4) スピロノラクトン 1-2 mg/kg PO q12-24h（RAAS抑制・カリウム保持・心臓線維化抑制）。"
+            "【急性肺水腫の緊急対応】"
+            "酸素療法（O2ケージ FiO2 40-60%）、フロセミドIV 2-4 mg/kg（30分後に反応なければ反復）、"
+            "ブトルファノール 0.2-0.4 mg/kg IV（鎮静・呼吸数低下）。"
+            "重症難治性：ニトロプルシドCRI 1-10 ug/kg/min（血圧連続監視必須、MAP>=60 mmHg維持）。"
+            "フロセミドボーラス無効時：フロセミドCRI 0.66-1 mg/kg/h。"
+            "【咳の管理】気管支圧排による咳（呼吸困難なし確認後）："
+            "ハイドロコドン 0.22 mg/kg PO q6-12h またはブトルファノール 0.05-0.1 mg/kg PO q6-12h。"
+            "【心房細動の管理】"
+            "ジルチアゼム 0.5-1 mg/kg PO q8h またはジゴキシン 0.003 mg/kg PO q12h"
+            "（安静時HR<160 bpm目標。ジゴキシン血中濃度0.8-2.0 ng/mL監視必須）。"
+            "【Stage D — 難治性CHF（最大量治療でも制御不能）】"
+            "フロセミド増量（最大4-6 mg/kg/日）またはフロセミドCRI 0.66-1 mg/kg/h。"
+            "トラセミド 0.1-0.3 mg/kg PO q24h。"
+            "ヒドロクロロチアジド 2-4 mg/kg PO q24h 追加。"
+            "シルデナフィル 1-2 mg/kg PO q8-12h（肺高血圧合併：エコーでTR-Vmax>2.8 m/s確認時）。"
+            "低Na食（<80 mg Na/100 kcal）。緩和ケア・ホスピスケアをオーナーと相談。"
+            "【外科的僧帽弁修復術（MVR）】"
+            "上地修技法（JASMINEクリニック横浜・水野浩信チーム）：人工心肺下での低侵襲弁修復。"
+            "施行例1000件超、90日死亡率3-5%、Stage B2/Cでの5年生存率約80%。"
+            "適応：症状制御困難なStage C例または外科リスク許容範囲内のB2例。専門心臓科への紹介を積極的に検討。"
+            "【禁忌・注意薬剤】"
+            "NSAIDs（腎灌流低下・フロセミド利尿効果減弱）、副腎皮質ステロイド（Na貯留・体液量増加）、"
+            "β遮断薬（非代償性CHFでは心拍出量低下リスク — 心臓専門医監督下でのみ使用）、"
+            "低K血症下でのジゴキシン（中毒リスク）。"
+            "【家庭管理・モニタリング】"
+            "安静時（睡眠中）呼吸数（RRR）を毎日計測・記録（Schober et al. JVIM 2010）。"
+            ">=40回/分 または 平時より20%以上増加 = CHF再燃の早期警告サイン。"
+            "毎日体重計測（前日比1 kg超増加は体液貯留を示唆）。"
+            "緊急受診の目安：急性呼吸困難・失神・蒼白/灰色の口腔粘膜・RRR>=40/分。"
+            "【フォローアップスケジュール】"
+            "Stage B2：6ヶ月毎の心エコー・胸部X線・血液検査。"
+            "Stage C：2-4週間毎の電解質・腎機能・血圧・心エコー。"
+            "オーナー記録：毎日のRRR・体重・食欲・活動量を記録。"
+        ),
+        "prognosis": (
+            "Stage B1: Most dogs remain asymptomatic for years "
+            "(CKCS ~2-3 years to B2; other small breeds 4-6+ years). "
+            "Stage B2 (on pimobendan): Median time to CHF 1228 days (~3.4 years, EPIC trial). "
+            "Stage C: Median survival 9-12 months with optimal 4-drug therapy; "
+            "well-managed dogs may survive 18-24+ months. "
+            "QUEST trial pimobendan arm: 267 days vs 140 days (benazepril). "
+            "Stage D (refractory): Median survival 1-3 months. "
+            "After MVR surgery (JASMINE series): 5-year survival ~80% in Stage B2/C. "
+            "Poor prognostic factors: severe MR (LA/Ao >2.0), marked LA enlargement, "
+            "pulmonary hypertension (TR-Vmax >2.8 m/s), renal dysfunction (Cre >2.0 mg/dL), "
+            "hyponatremia (<140 mEq/L), persistent tachycardia (HR >180 bpm), "
+            "atrial fibrillation, troponin I >0.2 ng/mL, acute chordae tendineae rupture, "
+            "refractory recurrent pulmonary edema."
+        ),
+        "prognosis_ja": (
+            "【ステージ別予後】"
+            "Stage B1：数年以上無症状。B2移行はCKCSで約2-3年、他の小型犬は4-6年以上。"
+            "Stage B2（ピモベンダン投与下）：CHF発症までの中央期間1228日（約3.4年、EPICトライアル）。"
+            "Stage C（CHF発症後）：適切な4剤治療下で生存期間中央値9-12ヶ月。最適管理例では18-24ヶ月以上も可能。"
+            "QUESTトライアル：ピモベンダン群267日 vs ベナゼプリル群140日。"
+            "Stage D（難治性）：生存期間中央値1-3ヶ月。"
+            "MVR術後（JASMINEシリーズ）：Stage B2/Cでの5年生存率約80%。"
+            "【予後不良因子】"
+            "重度MR（LA/Ao >2.0）、著明なLA拡大、"
+            "肺高血圧合併（TR-Vmax >2.8 m/s）、腎機能低下（Cre >2.0 mg/dL）、"
+            "低ナトリウム血症（<140 mEq/L）、持続性頻脈（HR >180 bpm）、"
+            "心房細動合併、トロポニンI上昇（>0.2 ng/mL）、急性腱索断裂、難治性肺水腫の反復。"
+            "【3段階リスク層別化】"
+            "低リスク（Stage B1、LA/Ao<1.4）：数年以上の無症状期が期待される。"
+            "中リスク（Stage B2、ピモベンダン治療中）：約3-4年でのCHF発症。"
+            "高リスク（Stage C/D、肺高血圧・腎機能低下合併）：1年未満の生存も。"
+        ),
+        "prevention": (
+            "No definitive prevention for myxomatous degeneration. "
+            "CKCS Breeding Protocol (Haggstrom et al. / CKCS Club): do not breed dogs <2.5 years "
+            "with a murmur; do not breed dogs <5 years if a parent had a murmur before age 5. "
+            "Annual cardiac auscultation for all at-risk small breeds from age 4 years. "
+            "Echocardiographic screening for breeding animals. "
+            "Weight management: maintain ideal BCS 4-5/9 (obesity increases cardiac workload). "
+            "Avoid NSAIDs, excessive sodium intake, high-stress environments. "
+            "Murmur detection: immediate echocardiographic evaluation to stage disease. "
+            "NT-proBNP annual screening may detect subclinical disease in CKCS."
+        ),
+        "prevention_ja": (
+            "確実な予防法はないが、以下の管理で進行を遅らせることができる。"
+            "【CKCSブリーダー向け繁殖プロトコル（Haggstrom et al. / CKCS Club推奨）】"
+            "2.5歳未満で心雑音がある個体は繁殖に使用しない。"
+            "片親が5歳未満で心雑音を呈した場合、その子どもは5歳未満での繁殖禁止。"
+            "繁殖前個体には心臓聴診・心エコーを必ず実施。"
+            "【スクリーニング推奨】"
+            "リスク品種（CKCS・マルチーズ等）は4歳から年1回以上の心臓聴診。"
+            "CKCSは2歳から定期聴診、繁殖個体は半年毎のエコー推奨。"
+            "NT-proBNP年1回スクリーニング（無症状早期検出に有用）。"
+            "【生活管理】"
+            "肥満予防（理想BCS 4-5/9 — 肥満は心臓への負荷を増大）。過度な塩分摂取を避ける。"
+            "【心雑音発見時】速やかに心エコーでステージを確定。"
+            "B2基準を満たす場合はピモベンダンを直ちに開始（EPICトライアルエビデンス）。"
+            "【避けるべき薬剤・状況】"
+            "NSAIDs・高用量コルチコステロイド・Stage C/Dでの過度の運動・ストレス・高温環境。"
+        ),
         "urgency": "normal",
     },
     {
@@ -10905,33 +11116,68 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "West Highland White Terrier Pulmonary Fibrosis",
-        "name_ja": "ウエスト・ハイランド・ホワイト・テリア肺線維症",
+        "name_ja": "ウェストハイランドホワイトテリア肺線維症",
         "symptoms": {"coughing", "difficulty_breathing", "rapid_breathing", "lethargy"},
         "description": "Breed-specific idiopathic pulmonary fibrosis causing progressive respiratory distress.",
-        "description_ja": "犬種特異的な特発性肺線維症で、進行性の呼吸困難を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "肺間質の進行性線維化→ガス交換障害→低酸素血症→運動不耐性・咳嗽→肺高血圧→右心不全。人のIPFに類似。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "遺伝性。WHWTに特異的。中高齢犬。HRCTで蜂巣肺パターン。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "確実な予防法はない。シルデナフィル＋酸素療法。予後不良（MST数ヶ月〜1年）。",
+        "description_ja": "犬種特異的特発性肺線維症で進行性呼吸困難を起こす。",
+        "pathophysiology": "Canine idiopathic pulmonary fibrosis (CIPF, also called Westie lung disease) is a chronic progressive interstitial lung disease analogous to human idiopathic pulmonary fibrosis (IPF). West Highland White Terriers have the highest documented breed prevalence (10-15x compared with mixed breeds), with median age at diagnosis 9-10 years; other affected terrier breeds include Cairn, Scottish, Yorkshire, and Norfolk Terriers. Pathogenesis involves recurrent injury to alveolar epithelium - likely combination of genetic susceptibility, oxidative stress, telomere dysfunction, and possibly subclinical aspiration or environmental exposures. Type II pneumocytes fail to regenerate normally, instead activating fibroblast/myofibroblast proliferation through TGF-beta signaling, with subsequent collagen deposition and architectural distortion of pulmonary parenchyma. Histologic pattern resembles human usual interstitial pneumonia (UIP) with patchy peripheral fibrosis, fibroblastic foci, and honeycombing in advanced cases. Clinical signs progress over 12-30 months: progressive exercise intolerance, dry cough, restrictive breathing pattern (rapid shallow breaths), inspiratory crackles bilaterally (especially caudoventral lung fields), cyanosis on exertion. Pulmonary hypertension develops in 50-70 percent of advanced cases due to hypoxic vasoconstriction and vascular obliteration, producing right-sided heart failure (cor pulmonale). Distinguish from chronic bronchitis (productive cough, normal lung parenchyma on imaging), eosinophilic bronchopneumopathy (BAL eosinophilia, responsive to steroids), and bronchopneumonia (acute, productive, antibiotic responsive).",
+        "pathophysiology_ja": "犬特発性肺線維症（CIPF、ウェスティ肺疾患とも称される）はヒト特発性肺線維症（IPF）に類似する慢性進行性間質性肺疾患。ウェスティが最高有病率を示し（混血犬の10-15倍）、診断年齢中央値9-10歳、他の罹患テリア犬種：ケアン、スコティッシュ、ヨーキー、ノーフォーク。病態は肺胞上皮の反復障害—遺伝的感受性、酸化ストレス、テロメア機能不全、潜在的な誤嚥または環境曝露の組み合わせ。II型肺細胞が正常に再生せず、TGF-βシグナルを介し線維芽/筋線維芽細胞増殖を活性化、コラーゲン沈着と肺実質構造歪曲が続く。組織学的パターンはヒト通常型間質性肺炎（UIP）に類似—斑状末梢線維化、線維芽病巣、進行例では蜂巣肺。臨床徴候は12-30ヶ月で進行：進行性運動不耐、乾性咳、拘束性呼吸パターン（速い浅い呼吸）、両側吸気性ラ音（特に尾側肺野）、運動時チアノーゼ。低酸素性血管収縮と血管閉塞による肺高血圧が進行例の50-70%で発症、右心不全（肺性心）を起こす。慢性気管支炎（湿性咳、画像で肺実質正常）、好酸球性気管支肺症（BAL好酸球増多、ステロイド反応性）、気管支肺炎（急性、湿性、抗生剤反応性）と鑑別。",
+        "causes": "Genetic predisposition in Westies and other terriers; specific gene yet to be identified but family clustering documented. Possible contributing factors: chronic gastroesophageal reflux/microaspiration, environmental dust exposure, oxidative stress, telomere dysfunction. No infectious or autoimmune cause identified.",
+        "causes_ja": "ウェスティと他のテリアの遺伝的素因、特定遺伝子未同定だが家族集積性記録。寄与因子の可能性：慢性胃食道逆流/微小誤嚥、環境塵埃曝露、酸化ストレス、テロメア機能不全。感染または自己免疫原因未同定。",
+        "treatment": "No curative therapy exists - treatment is supportive and slows progression. Diagnostic confirmation: thoracic CT (gold standard - peripheral subpleural reticulation, traction bronchiectasis, ground-glass opacification with honeycombing), thoracic radiographs (diffuse interstitial pattern, often more prominent in caudal lobes), 6-minute walk test (distance and SpO2 nadir track disease progression), arterial blood gas (PaO2 typically 60-80 mmHg early, <60 advanced), pulmonary function testing where available, BAL (rules out eosinophilic, infectious causes), echocardiography (pulmonary hypertension assessment - TR jet >2.8 m/s suggests PH), serum surfactant protein-D (biomarker, elevated in CIPF). Lung biopsy via thoracoscopy gold standard but high morbidity in compromised patients. Treatment: anti-fibrotic agents - pirfenidone 8-15 mg/kg PO BID-TID (anti-TGF-beta, anti-fibrotic - based on human IPF data; may slow progression but limited canine evidence); nintedanib (multi-tyrosine kinase inhibitor) used in human IPF, anecdotal canine use 30-50 mg PO BID. N-acetylcysteine 70 mg/kg PO BID antioxidant adjunct. Sildenafil 1-2 mg/kg PO TID for pulmonary hypertension - improves exercise tolerance and possibly survival; tadalafil 2-3 mg/kg PO SID alternative. Glucocorticoids controversial - most CIPF dogs do NOT respond, but trial of prednisolone 0.5-1 mg/kg PO SID for 4-6 weeks reasonable to identify steroid-responsive component (e.g. concurrent eosinophilic bronchopneumopathy). Bronchodilators (theophylline 10-15 mg/kg PO BID, terbutaline 1.25-5 mg/dog PO BID) if bronchospasm component. Cough suppression: butorphanol 0.5-1 mg/kg PO TID or hydrocodone 0.25 mg/kg PO TID. Oxygen supplementation (home concentrator with nasal prongs or oxygen cage at clinic) for hypoxemia. Avoid stress, heat, exertion. Address comorbidities: GERD with omeprazole 1 mg/kg PO BID + sucralfate; obesity (worsens dyspnea). End-stage care: increasing oxygen need, refractory cough, exercise intolerance - quality of life assessment for euthanasia decision.",
+        "treatment_ja": "根治療法なし—治療は支持的で進行抑制。診断確定：胸部CT（ゴールドスタンダード—末梢胸膜下網状影、牽引性気管支拡張、蜂巣肺を伴うすりガラス陰影）、胸部X線（びまん性間質パターン、しばしば尾側葉でより顕著）、6分間歩行試験（距離とSpO2底値が疾患進行を追跡）、動脈血ガス（早期PaO2典型的60-80 mmHg、進行例<60）、利用可能なら肺機能検査、BAL（好酸球性、感染性原因除外）、心エコー（肺高血圧評価—TR jet >2.8 m/sで PH示唆）、血清サーファクタントタンパクD（バイオマーカー、CIPFで上昇）。胸腔鏡下肺生検がゴールドスタンダードだが衰弱患者で合併症多い。治療：抗線維化薬—ピルフェニドン8-15 mg/kg PO BID-TID（抗TGF-β、抗線維化、ヒトIPFデータに基づく、進行抑制可能性あるが犬エビデンス限定）、ニンテダニブ（マルチチロシンキナーゼ阻害薬）はヒトIPFで使用、犬での経験的使用30-50 mg PO BID。N-アセチルシステイン70 mg/kg PO BID抗酸化補助。肺高血圧にシルデナフィル1-2 mg/kg PO TID—運動耐容性改善と生存延長の可能性、タダラフィル2-3 mg/kg PO SID代替。グルココルチコイドは議論あり—ほとんどのCIPF犬は反応しないが、ステロイド反応性成分（併発好酸球性気管支肺症等）同定のため4-6週のプレドニゾロン0.5-1 mg/kg PO SID試行妥当。気管支痙攣成分あれば気管支拡張薬（テオフィリン10-15 mg/kg PO BID、テルブタリン1.25-5 mg/犬 PO BID）。咳抑制：ブトルファノール0.5-1 mg/kg PO TIDまたはヒドロコドン0.25 mg/kg PO TID。低酸素血症に酸素補充（在宅濃縮器と鼻カニュラまたは診療所酸素ケージ）。ストレス、暑熱、運動回避。併存症対処：GERDにオメプラゾール1 mg/kg PO BID＋スクラルファート、肥満（呼吸困難増悪）。終末期ケア：酸素需要増大、難治性咳、運動不耐—QOL評価で安楽死決定。",
+        "prognosis": "Grave. Median survival from diagnosis 12-18 months; range 6-32 months. Disease invariably progressive despite treatment. Prognostic factors: PaO2 at diagnosis (lower worse), 6MWT distance, presence of pulmonary hypertension (significantly worse - median 6 months from PH onset), age, body condition. Death typically from respiratory failure or right-sided heart failure; many dogs euthanized due to declining quality of life with refractory cough and exercise intolerance.",
+        "prognosis_ja": "極めて不良。診断から生存期間中央値12-18ヶ月、範囲6-32ヶ月。治療しても疾患は不可避的進行。予後因子：診断時PaO2（低値で不良）、6MWT距離、肺高血圧の有無（著明に不良—PH発症から生存期間中央値6ヶ月）、年齢、体格。死因は通常呼吸不全または右心不全、難治性咳と運動不耐によるQOL低下で多くの犬が安楽死。",
+        "prevention": "No specific prevention. Avoid breeding affected Westies (familial cluster suggests heritability). Annual respiratory exam in older Westies (>6 years) - inspiratory crackles, exercise tolerance assessment. Address GERD aggressively to reduce microaspiration. Maintain healthy weight, indoor air quality (avoid smoking, dust).",
+        "prevention_ja": "特異的予防なし。罹患ウェスティの繁殖回避（家族集積性が遺伝性示唆）。高齢ウェスティ（>6歳）の年1回呼吸器検査—吸気性ラ音、運動耐容性評価。微小誤嚥減少のためGERD積極的対処。健康体重維持、屋内空気質（喫煙、塵埃回避）。",
+        "recommended_tests": [
+            "胸部CT（ゴールドスタンダード診断） (Thoracic CT - gold standard)",
+            "胸部X線3方向（間質パターン評価） (Thoracic radiographs - 3 view)",
+            "動脈血ガス（PaO2、A-a勾配） (Arterial blood gas)",
+            "6分間歩行試験（運動耐容性、SpO2底値） (6-minute walk test)",
+            "心エコー（肺高血圧、TR jet評価） (Echocardiography - PH assessment)",
+            "気管支肺胞洗浄液（BAL—好酸球、感染除外） (BAL - rule out eosinophilic, infectious)",
+            "全血球計算 (CBC)",
+            "血液生化学検査 (Blood Chemistry Panel)",
+            "肺機能検査（利用可能なら） (Pulmonary function testing)",
+            "胸腔鏡下肺生検（高選択例） (Thoracoscopic lung biopsy - selected cases)",
+            "心筋トロポニン、NT-proBNP（右心評価） (Troponin, NT-proBNP - right heart)",
+        ],
         "urgency": "high",
-        "recommended_tests": ["thoracic_xray", "ct_scan", "blood_gas"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"senior"},
     },
     {
         "name": "Bull Terrier Lethal Acrodermatitis",
-        "name_ja": "ブル・テリア致死性肢端皮膚炎",
-        "symptoms": {"skin_lesions", "hair_loss", "lethargy", "diarrhea"},
+        "name_ja": "ブルテリア致死的先端皮膚炎",
+        "symptoms": {"skin_lesions", "diarrhea", "lethargy", "hair_loss"},
         "description": "Hereditary zinc metabolism defect in Bull Terriers causing severe skin lesions and immunodeficiency.",
-        "description_ja": "ブル・テリアの遺伝性亜鉛代謝異常で、重度の皮膚病変と免疫不全を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "MKLN1遺伝子変異→亜鉛代謝障害→免疫不全＋皮膚角化異常→四肢末端・口周囲の重度皮膚病変＋反復性感染→成長遅延→多くは2歳までに死亡。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "常染色体劣性遺伝。ブルテリア・ミニチュアブルテリアに特異的。DNA検査でキャリア同定可能。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "DNA検査による繁殖管理。亜鉛補充療法の効果は限定的。",
+        "description_ja": "ブルテリアの遺伝性亜鉛代謝障害で重度の皮膚病変と免疫不全を起こす。",
+        "pathophysiology": "Lethal acrodermatitis (LAD) of Bull Terriers and Miniature Bull Terriers is an autosomal recessive zinc metabolism disorder caused by a 7-bp deletion in the MKLN1 (Muskelin 1) gene on chromosome 14 (Bauer 2018). MKLN1 is a kelch-domain-containing scaffolding protein involved in vesicular trafficking and lysosomal degradation; loss of function impairs intestinal zinc absorption mechanisms (likely through dysregulation of zinc transporter ZIP4/SLC39A4 trafficking) producing functional zinc deficiency despite normal-to-elevated dietary intake. Zinc is essential cofactor for >300 enzymes including DNA polymerases, RNA polymerases, alkaline phosphatase, and matrix metalloproteinases; functional zinc deficiency disrupts: (1) epithelial integrity - paronychia, hyperkeratosis, fissuring of pads, periorificial dermatitis (eyes, mouth, nose, anus), generalized skin scaling; (2) T-cell mediated immunity - severe immunodeficiency with recurrent bacterial pneumonia (especially aspiration from oral lesions), pyoderma, otitis, and life-threatening infections; (3) growth - severe stunting, failure to thrive; (4) reproduction - testicular atrophy in males. Disease manifests in puppies 6-10 weeks old with characteristic stilted gait (mistakenly called 'lethal' because affected pups historically died despite treatment), pad hyperkeratosis with deep fissures, white coat dilution (zinc-dependent melanin synthesis impaired), recurrent infections. Distinguished from juvenile cellulitis (steroid-responsive), demodicosis (Demodex on skin scrape), pemphigus foliaceus (acantholytic cells on cytology), and zinc-responsive dermatosis (acquired in Huskies, Malamutes - responds to zinc supplementation alone, while LAD does NOT respond to zinc).",
+        "pathophysiology_ja": "ブルテリアとミニチュアブルテリアの致死的先端皮膚炎（LAD）は第14染色体MKLN1（Muskelin 1）遺伝子の7塩基対欠失による常染色体劣性亜鉛代謝障害（Bauer 2018）。MKLN1は小胞輸送とリソソーム分解に関与するkelchドメイン含有足場タンパク、機能喪失で腸管亜鉛吸収機構（おそらく亜鉛トランスポーターZIP4/SLC39A4輸送調節異常）が障害され、正常-増加食事摂取量にもかかわらず機能的亜鉛欠乏を生じる。亜鉛は>300の酵素（DNAポリメラーゼ、RNAポリメラーゼ、アルカリホスファターゼ、マトリックスメタロプロテイナーゼ）の必須補因子、機能的亜鉛欠乏が以下を破綻：(1)上皮完全性—爪囲炎、過角化、肉球亀裂、開孔部周囲皮膚炎（眼、口、鼻、肛門）、全身性皮膚鱗屑、(2)T細胞媒介免疫—反復性細菌性肺炎（特に口腔病変からの誤嚥）、膿皮症、外耳炎、致死的感染を伴う重度免疫不全、(3)成長—重度発育遅延、発育不全、(4)繁殖—雄の精巣萎縮。疾患は6-10週齢の仔犬で特徴的硬い歩様（「致死的」と誤称されたのは罹患仔犬が治療しても歴史的に死亡したため）、深亀裂を伴う肉球過角化、白色被毛希釈（亜鉛依存性メラニン合成障害）、反復性感染で発症。若年性蜂窩織炎（ステロイド反応性）、皮膚虫症（皮膚掻爬でDemodex）、落葉状天疱瘡（細胞診で表皮細胞解離）、亜鉛反応性皮膚症（ハスキー、マラミュートで後天性—亜鉛補充で反応するがLADは亜鉛に反応しない）と鑑別。",
+        "causes": "MKLN1 gene 7-bp deletion (chromosome 14) - autosomal recessive in Bull Terriers and Miniature Bull Terriers. Both parents must be carriers; 25 percent of offspring affected. Carrier frequency in Bull Terrier population approximately 12-15 percent. Acquired zinc deficiency from poor diet does NOT cause LAD - LAD is a primary genetic disorder.",
+        "causes_ja": "MKLN1遺伝子7塩基対欠失（第14染色体）—ブルテリアとミニチュアブルテリアの常染色体劣性。両親ともキャリアであることが必要、子孫の25%が罹患。ブルテリア集団のキャリア頻度約12-15%。粗悪食からの後天性亜鉛欠乏はLADを起こさない—LADは原発性遺伝障害。",
+        "treatment": "Treatment is challenging - LAD does NOT respond to oral or parenteral zinc supplementation (unlike acquired zinc-responsive dermatosis), reflecting the underlying defect in cellular zinc utilization rather than absorption. Goal is supportive care to prolong quality of life. Diagnostic confirmation: characteristic clinical signs in Bull Terrier breed; MKLN1 genetic test (Genoscoper, Embark, Wisdom Panel) confirms diagnosis - homozygous deletion = affected. CBC (eosinophilia, lymphopenia common), biochemistry (normal zinc level despite functional deficiency - measurement misleading), skin biopsy (parakeratotic hyperkeratosis with reduced epidermal apoptotic figures), bacterial/fungal cultures from infected lesions. Aggressive multimodal management: (1) Skin care - daily bathing with antimicrobial shampoos (chlorhexidine 4 percent), keratolytic shampoos (salicylic acid + sulfur), topical mupirocin or fusidic acid for localized lesions, paw soaks in dilute chlorhexidine, soft bedding to prevent ulceration. (2) Antibiotics for recurrent infections - culture-directed when possible; broad-spectrum amoxicillin-clavulanate 12.5-25 mg/kg PO BID, cephalexin 22-30 mg/kg PO BID, or fluoroquinolones for resistant pyoderma; long-term low-dose antibiotic prophylaxis sometimes needed. (3) Pneumonia management - aggressive IV antibiotics, oxygen, nebulization, coupage during episodes; mortality from pneumonia very high. (4) Nutritional support - high-quality balanced diet (zinc supplementation does not help but adequate nutrition important); supplemental fat-soluble vitamins; consider enteral feeding tube if anorexic. (5) Pain control with NSAIDs (carprofen 4.4 mg/kg PO SID) or opioid (buprenorphine 0.02 mg/kg PO TID) for severe paronychia/foot pain. (6) Immunomodulators - cyclosporine 5 mg/kg PO SID anecdotally helps some cases but overall response poor. Many affected pups euthanized between 6 months and 2 years due to refractory infections, severe pain from pad lesions, or quality of life. Genetic counseling to breeders mandatory.",
+        "treatment_ja": "治療困難—LADは経口または非経口亜鉛補充に反応しない（後天性亜鉛反応性皮膚症と異なる）、根底の欠陥が吸収ではなく細胞内亜鉛利用にあることを反映。QOL延長のための支持療法が目標。診断確定：ブルテリア犬種の特徴的臨床徴候、MKLN1遺伝子検査（Genoscoper、Embark、Wisdom Panel）で診断確定—ホモ接合欠失＝罹患。CBC（好酸球増多、リンパ球減少多い）、生化学（機能的欠乏にもかかわらず亜鉛値正常—測定は誤誘導）、皮膚生検（表皮アポトーシス所見減少を伴う錯角化過角化）、感染病変の細菌/真菌培養。積極的集学的管理：(1)皮膚ケア—抗菌シャンプー（クロルヘキシジン4%）、角質溶解シャンプー（サリチル酸＋硫黄）の毎日入浴、限局性病変に外用ムピロシンまたはフシジン酸、希釈クロルヘキシジンの足浴、潰瘍化予防のため柔軟寝具。(2)反復性感染への抗生剤—可能なら培養指向、広域アモキシシリン-クラブラン酸12.5-25 mg/kg PO BID、セファレキシン22-30 mg/kg PO BID、または耐性膿皮症にフルオロキノロン、長期低用量抗生剤予防が必要な場合あり。(3)肺炎管理—エピソード中はIV抗生剤、酸素、ネブライゼーション、coupageを積極的、肺炎死亡率極めて高い。(4)栄養サポート—高品質均衡食（亜鉛補充は無効だが十分な栄養重要）、脂溶性ビタミン補充、食欲不振なら経腸栄養チューブ考慮。(5)NSAIDs（カルプロフェン4.4 mg/kg PO SID）またはオピオイド（ブプレノルフィン0.02 mg/kg PO TID）で重度爪囲炎/足部疼痛の疼痛管理。(6)免疫調節薬—シクロスポリン5 mg/kg PO SIDが一部症例で経験的有効だが全体的反応不良。多くの罹患仔犬は難治性感染、肉球病変による重度疼痛、またはQOLのため6ヶ月-2歳で安楽死。ブリーダーへの遺伝カウンセリング必須。",
+        "prognosis": "Grave. Most affected dogs die or are euthanized between 6 months and 2 years. Survival to age 4 rare even with intensive supportive care. Common causes of death: bacterial pneumonia (most common), severe foot pain from refractory paronychia, generalized infections, septicemia, owner election for euthanasia due to declining quality of life. No reported long-term survivors despite various treatment trials.",
+        "prognosis_ja": "極めて不良。ほとんどの罹患犬は6ヶ月-2歳で死亡または安楽死。集中的支持療法でも4歳までの生存稀。主な死因：細菌性肺炎（最多）、難治性爪囲炎による重度足部疼痛、全身性感染、敗血症、QOL低下による飼い主の安楽死選択。様々な治療試験にもかかわらず長期生存者の報告なし。",
+        "prevention": "MKLN1 genetic testing in all Bull Terriers and Miniature Bull Terriers used for breeding (Genoscoper, Embark, Wisdom Panel) - homozygous (affected) and carrier dogs should be removed from breeding programs OR carriers can be bred only to homozygous-clear (normal) dogs with offspring testing. Carrier frequency 12-15 percent makes screening especially important. Educate puppy buyers about LAD genetics. The Bull Terrier Club of America and similar breed clubs maintain genetic health programs.",
+        "prevention_ja": "繁殖用全ブルテリアとミニチュアブルテリアにMKLN1遺伝子検査（Genoscoper、Embark、Wisdom Panel）—ホモ接合（罹患）とキャリア犬を繁殖プログラムから除外、またはキャリアはホモ接合クリア（正常）犬のみと繁殖し子孫検査。キャリア頻度12-15%でスクリーニングが特に重要。仔犬購入者にLAD遺伝学教育。ブルテリアクラブオブアメリカと同様の犬種クラブが遺伝健康プログラム維持。",
+        "recommended_tests": [
+            "MKLN1遺伝子検査（確定診断） (MKLN1 genetic test - definitive)",
+            "皮膚生検と病理組織検査 (Skin biopsy with histopathology)",
+            "全血球計算（好酸球増多、リンパ球減少） (CBC)",
+            "血液生化学検査 (Blood Chemistry Panel)",
+            "皮膚細菌・真菌培養（病変部） (Skin bacterial/fungal culture)",
+            "胸部X線（肺炎評価） (Thoracic radiographs - pneumonia)",
+            "気管支洗浄液培養（肺炎時） (BAL culture if pneumonia)",
+            "尿検査 (Urinalysis)",
+            "免疫グロブリン定量（IgA/IgG/IgM） (Immunoglobulin quantification)",
+            "胸水/腹水分析（感染合併時） (Effusion analysis)",
+        ],
         "urgency": "high",
-        "recommended_tests": ["skin_biopsy", "blood_chemistry", "zinc_level"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Shetland Sheepdog Dermatomyositis",
@@ -10971,18 +11217,37 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Bernese Mountain Dog Histiocytic Sarcoma Complex",
-        "name_ja": "バーニーズ・マウンテン・ドッグ組織球肉腫複合",
-        "symptoms": {"lethargy", "weight_loss", "appetite_loss", "difficulty_breathing", "limping_fl", "limping_fr"},
+        "name_ja": "バーニーズマウンテンドッグ組織球性肉腫複合",
+        "symptoms": {"lethargy", "weight_loss", "appetite_loss", "limping_fl", "limping_fr", "difficulty_breathing"},
         "description": "Breed-predisposed aggressive malignancy arising from histiocytic cells; high incidence in Bernese Mountain Dogs.",
-        "description_ja": "組織球系細胞から発生する犬種素因の攻撃的な悪性腫瘍で、バーニーズ・マウンテン・ドッグに高発生率です。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "樹状細胞/マクロファージ由来の悪性腫瘍→播種型が多い（脾臓・肝臓・肺・骨髄に同時浸潤）。バーニーズの生涯発症リスク約25%。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "遺伝的素因が極めて強い。バーニーズマウンテンドッグに特異的。中高齢犬。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "罹患犬系統の繁殖制限。ロムスチン化学療法でMST約5ヶ月。予後不良。",
+        "description_ja": "犬種素因のある攻撃性悪性腫瘍で、組織球細胞由来、バーニーズマウンテンドッグで高罹患率。",
+        "pathophysiology": "Histiocytic sarcoma (HS) is the most distinctive cancer of the Bernese Mountain Dog, with breed lifetime prevalence approaching 25 percent (some lineages >50 percent) - by far the highest breed-specific malignancy in veterinary oncology. HS arises from interdigitating dendritic cells of the macrophage lineage and presents in two forms: (1) Localized HS - solitary mass typically in spleen, liver, lymph node, lung, or musculoskeletal site (joint - 'periarticular HS' especially affects elbows and stifles); (2) Disseminated HS (formerly malignant histiocytosis) - multifocal disease at presentation involving multiple organs including spleen, liver, lung, lymph nodes, bone marrow. Hemophagocytic HS variant involves splenic red pulp macrophages with prominent erythrophagocytosis producing severe regenerative anemia, often with thrombocytopenia, hyperferritinemia, hypoalbuminemia, hypocholesterolemia. Genetic basis: complex polygenic with at least 15 risk loci identified including CDKN2A/B locus (chromosome 11), MTAP, ITGB1; familial clustering very strong. Predisposed breeds beyond Bernese: Flat-Coated Retriever (different distribution favoring articular form), Rottweiler, Golden Retriever, Doberman; rare in other breeds. Tumor cells express CD11d (peripheral macrophages), CD18 (pan-leukocyte), CD1c, CD4, MHC II - histiocytic differentiation confirmed by IHC. Aggressive biological behavior with rapid local growth, early hematogenous metastasis (lungs first then liver, regional nodes, bone), and frequent secondary hemophagocytic syndrome. Mean age at diagnosis 6-7 years (younger than most canine cancers).",
+        "pathophysiology_ja": "組織球性肉腫（HS）はバーニーズマウンテンドッグの最も特徴的な癌で、犬種生涯有病率25%に近づく（一部系統>50%）—獣医腫瘍学で群を抜いて最高の犬種特異的悪性腫瘍。HSはマクロファージ系統の指状嵌入樹状細胞由来、2形態で発症：(1)限局性HS—孤立性腫瘤、典型的に脾、肝、リンパ節、肺、または筋骨格系部位（関節—「関節周囲HS」が特に肘、膝関節を侵す）、(2)播種性HS（旧称悪性組織球症）—来院時多巣性疾患、脾、肝、肺、リンパ節、骨髄を含む複数臓器関与。血球貪食性HS亜型は脾赤脾髄マクロファージを侵し顕著な赤血球貪食を伴い、しばしば血小板減少、高フェリチン血症、低アルブミン血症、低コレステロール血症を伴う重度再生性貧血を産生。遺伝基盤：CDKN2A/B座位（第11染色体）、MTAP、ITGB1を含む少なくとも15のリスク座位を伴う複雑な多遺伝子性、家族集積性極めて強い。バーニーズ以外の素因犬種：フラットコーテッドレトリーバー（関節型を好む異なる分布）、ロットワイラー、ゴールデン、ドーベルマン、他の犬種では稀。腫瘍細胞はCD11d（末梢マクロファージ）、CD18（汎白血球）、CD1c、CD4、MHC II発現—IHCで組織球分化確認。攻撃的生物学的挙動で急速局所成長、早期血行性転移（肺が最初、次に肝、限局性節、骨）、二次性血球貪食症候群が頻繁。診断時平均年齢6-7歳（ほとんどの犬癌より若年）。",
+        "causes": "Genetic predisposition - complex polygenic with at least 15 risk loci identified; CDKN2A/B locus (chromosome 11) major contributor. Bernese specific genome-wide association studies identify additional loci. Familial clustering strong - lifetime risk >25 percent for affected lineages. Other affected breeds: Flat-Coated Retriever (articular form), Rottweiler, Golden Retriever, Doberman. No environmental etiology identified.",
+        "causes_ja": "遺伝的素因—少なくとも15のリスク座位を伴う複雑な多遺伝子性、CDKN2A/B座位（第11染色体）が主要寄与因子。バーニーズ特異的ゲノムワイド関連研究で追加座位同定。家族集積性強い—罹患系統の生涯リスク>25%。他の罹患犬種：フラットコーテッドレトリーバー（関節型）、ロットワイラー、ゴールデン、ドーベルマン。環境病因未同定。",
+        "treatment": "Multimodal treatment with aggressive surgery + chemotherapy is mainstay. Diagnostic staging: thoracic radiographs (3 views) AND thoracic CT (gold standard - small pulmonary metastases), abdominal ultrasound and CT (multiorgan involvement, splenic mass evaluation), bone scan or skeletal radiographs (bone lesions), CBC (regenerative anemia + thrombocytopenia in hemophagocytic variant), biochemistry (hypocholesterolemia, hypoalbuminemia, elevated ferritin in hemophagocytic), bone marrow aspirate (cytopenia evaluation), regional lymph node aspirates. FNA cytology can be diagnostic but biopsy with IHC (CD11d, CD18, CD1c, MHC II) confirms histiocytic origin. Joint fluid analysis for periarticular HS. Localized disease - surgical resection with wide margins (en bloc tumor + draining nodes); amputation often necessary for limb tumors; splenectomy for splenic HS. Adjuvant CCNU (lomustine) chemotherapy 60-90 mg/m2 PO q3-6wk x 4-8 cycles is standard - significantly improves survival vs surgery alone (median 568 vs 60 days for splenic HS). Doxorubicin 30 mg/m2 IV q3wk less effective than CCNU. Disseminated/metastatic disease - CCNU primary treatment, response rate 30-50 percent with median survival 4-6 months. Toceranib (Palladia) 2.5-2.75 mg/kg PO MWF emerging as adjunct or maintenance with some response. Radiation therapy 36-50 Gy fractionated for non-resectable localized disease (especially CNS involvement). Hemophagocytic HS responds poorly - median survival 4-8 weeks; supportive care priority. Pain control: opioid (methadone for severe joint pain in periarticular form), NSAIDs (carprofen 4.4 mg/kg PO SID, meloxicam 0.1 mg/kg PO SID). Monitor CBC weekly during chemotherapy (lomustine causes severe neutropenia and hepatotoxicity - check liver enzymes, consider milk thistle/SAMe hepatoprotection). Owner counseling about grave prognosis at diagnosis.",
+        "treatment_ja": "積極的手術＋化学療法の集学的治療が主流。診断病期分類：胸部X線3方向AND胸部CT（ゴールドスタンダード—小肺転移）、腹部超音波とCT（多臓器関与、脾腫瘤評価）、骨シンチまたは骨X線（骨病変）、CBC（血球貪食型で再生性貧血＋血小板減少）、生化学（血球貪食型で低コレステロール、低アルブミン、フェリチン上昇）、骨髄穿刺（血球減少評価）、限局性リンパ節穿刺。FNA細胞診で診断可能だがIHC（CD11d、CD18、CD1c、MHC II）併用生検で組織球由来確認。関節周囲HSに関節液分析。限局性疾患—広範マージンでの外科切除（一塊腫瘍＋ドレナージ節）、四肢腫瘍にはしばしば断脚、脾HSに脾摘出。補助CCNU（ロムスチン）化学療法60-90 mg/m2 PO q3-6wk x 4-8サイクルが標準—手術単独に対し生存期間有意改善（脾HSで生存期間中央値568 vs 60日）。ドキソルビシン30 mg/m2 IV q3wkはCCNUより効果低い。播種性/転移性疾患—CCNUが主要治療、奏効率30-50%で生存期間中央値4-6ヶ月。トセラニブ（Palladia）2.5-2.75 mg/kg PO MWFが補助または維持として新興、一部反応。放射線療法36-50 Gy分割を非切除限局性疾患（特にCNS関与）に。血球貪食性HSは反応不良—生存期間中央値4-8週、支持療法優先。疼痛管理：オピオイド（関節周囲型の重度関節痛にメサドン）、NSAIDs（カルプロフェン4.4 mg/kg PO SID、メロキシカム0.1 mg/kg PO SID）。化学療法中CBCを週1回モニタ（ロムスチンは重度好中球減少と肝毒性を起こす—肝酵素確認、ミルクシスル/SAMe肝保護考慮）。診断時の予後不良について飼い主指導。",
+        "prognosis": "Grave overall. Localized HS (especially splenic with surgery + CCNU): median 8-12 months, 1-year survival 30-40 percent. Periarticular HS with limb amputation + CCNU: median 12-18 months. Disseminated HS: median 4-6 months, 1-year survival <10 percent. Hemophagocytic HS: median 4-8 weeks, almost universally fatal. CNS HS: rapid decline 2-4 weeks. Better prognosis: complete surgical excision, response to CCNU, lower clinical stage, articular site (paradoxically better than visceral). Worse: visceral involvement, multi-organ disease, hemophagocytic variant, age <6 years.",
+        "prognosis_ja": "全般的に極めて不良。限局性HS（特に手術＋CCNUの脾HS）：生存期間中央値8-12ヶ月、1年生存率30-40%。四肢断脚＋CCNUの関節周囲HS：生存期間中央値12-18ヶ月。播種性HS：生存期間中央値4-6ヶ月、1年生存率<10%。血球貪食性HS：生存期間中央値4-8週、ほぼ普遍的に致死的。CNS HS：2-4週で急速低下。予後良好：完全外科切除、CCNUへの反応、低臨床病期、関節部位（逆説的に内臓より良好）。予後不良：内臓関与、多臓器疾患、血球貪食型、年齢<6歳。",
+        "prevention": "Genetic counseling and pedigree analysis in Bernese breeding programs. The Bernese Mountain Dog Health Foundation maintains lineage data and supports research into HS genetics. Avoid breeding closely related affected lineages. SwissHS DNA test under development through Embark and other genomics companies (multi-locus risk score). Annual screening abdominal ultrasound and CBC in Bernese >5 years may detect early disease. Owners alerted to investigation of any limb lameness, abdominal mass, or unexplained weight loss promptly.",
+        "prevention_ja": "バーニーズ繁殖プログラムでの遺伝カウンセリングと血統解析。バーニーズマウンテンドッグ健康財団が血統データ維持とHS遺伝学研究支援。罹患の近交系統の繁殖回避。SwissHS DNA検査がEmbarkと他のゲノミクス企業で開発中（複数座位リスクスコア）。5歳超バーニーズの年1回腹部超音波とCBCスクリーニングが早期疾患を検出しうる。四肢跛行、腹部腫瘤、原因不明体重減少の迅速精査について飼い主警告。",
+        "recommended_tests": [
+            "胸部X線3方向と胸部CT (Thoracic radiographs and CT)",
+            "腹部超音波とCT（多臓器関与評価） (Abdominal ultrasound and CT)",
+            "FNA細胞診と免疫組織化学（CD11d、CD18、MHC II） (FNA cytology with IHC)",
+            "病理組織検査と免疫組織化学 (Histopathology with IHC)",
+            "全血球計算（再生性貧血、血小板減少） (CBC)",
+            "血液生化学検査（コレステロール、アルブミン、フェリチン） (Blood Chemistry Panel)",
+            "骨髄穿刺と細胞診 (Bone marrow aspirate)",
+            "凝固検査 (Coagulation panel)",
+            "限局性リンパ節穿刺 (Regional lymph node aspirate)",
+            "関節液検査（関節周囲HS時） (Joint fluid analysis - periarticular)",
+            "骨スキャン（骨病変評価） (Bone scan)",
+            "尿検査 (Urinalysis)",
+        ],
         "urgency": "high",
-        "recommended_tests": ["cytology", "biopsy", "ct_scan", "thoracic_xray"],
+        "onset_pattern": {"subacute"},
+        "age_predisposition": {"adult", "senior"},
     },
     {
         "name": "Great Dane Gastric Dilatation-Volvulus Predisposition",
@@ -11019,17 +11284,35 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Newfoundland Subvalvular Aortic Stenosis",
         "name_ja": "ニューファンドランド大動脈弁下狭窄症",
-        "symptoms": {"lethargy", "collapse", "difficulty_breathing", "coughing"},
+        "symptoms": {"collapse", "lethargy", "difficulty_breathing", "coughing"},
         "description": "Breed-predisposed congenital narrowing below the aortic valve causing left ventricular outflow obstruction.",
-        "description_ja": "犬種素因の先天性大動脈弁下狭窄で、左室流出路閉塞を引き起こします。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "大動脈弁直下の線維性リング→左室流出路狭窄→左室圧負荷→心筋肥大→心筋虚血→失神・突然死。ニューファンドランドに遺伝性好発。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "先天性・遺伝性。ニューファンドランドに最も好発。心エコーで圧較差測定。",
-        "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
-        "prevention_ja": "繁殖前の心エコースクリーニング。罹患犬の繁殖制限。重度はβ遮断薬＋運動制限。",
+        "description_ja": "犬種素因のある先天性大動脈弁下狭窄で左室流出路閉塞を起こす。",
+        "pathophysiology": "Subvalvular aortic stenosis (SAS, also called subaortic stenosis) is a congenital malformation characterized by a fibrous or fibromuscular ring or ridge of tissue immediately below the aortic valve in the left ventricular outflow tract (LVOT). Newfoundlands have the highest documented breed prevalence (12-25 percent in some lineages) and the disease is one of the three most common congenital cardiac defects in dogs (alongside PDA and pulmonic stenosis). Other predisposed large breeds: Golden Retriever, Boxer, Rottweiler, Bull Terrier, German Shepherd, Bernese Mountain Dog. Genetic basis in Newfoundlands: PICALM gene mutation (autosomal dominant with variable expression and incomplete penetrance) - Stern 2014; mutation impairs clathrin-mediated endocytosis affecting endothelial cell migration and LVOT remodeling during embryogenesis. Pathology: discrete fibrous ridge or fibromuscular ring located 2-15 mm below aortic valve; can be subdivided into Type I (mild ridge), Type II (extensive ridge), Type III (tunnel-like obstruction with most severe gradient). Hemodynamic consequences: chronic LVOT obstruction increases LV afterload producing concentric LV hypertrophy; subendocardial ischemia from LV hypertrophy plus high-velocity jet trauma to subendocardial myocardium; high-velocity post-stenotic flow damages aortic intima predisposing to bacterial endocarditis (especially of aortic valve). Severity classified by transaortic pressure gradient on Doppler echocardiography: mild <50 mmHg, moderate 50-80, severe >80 mmHg. Clinical signs vary by severity - mild may be asymptomatic with murmur only; severe presents with exercise intolerance, syncope (especially during exercise/excitement), congestive heart failure, ventricular arrhythmias, sudden cardiac death from ventricular fibrillation. Mean age at diagnosis 4-12 months when murmur first heard at puppy exam; sudden death risk peaks 6 months to 4 years.",
+        "pathophysiology_ja": "大動脈弁下狭窄症（SAS、亜大動脈狭窄症とも称される）は左室流出路（LVOT）の大動脈弁直下の線維性または線維筋性輪または隆起組織を特徴とする先天奇形。ニューファンドランドは最高有病率（一部系統で12-25%）、犬の最頻発先天心欠損3つの1つ（PDAと肺動脈狭窄症と並ぶ）。他の素因大型犬種：ゴールデン、ボクサー、ロットワイラー、ブルテリア、ジャーマンシェパード、バーニーズ。ニューファンドランドの遺伝基盤：PICALM遺伝子変異（可変発現と不完全浸透を伴う常染色体優性）—Stern 2014、変異がクラスリン媒介エンドサイトーシスを障害し、胚発生中の内皮細胞遊走とLVOTリモデリングに影響。病理：大動脈弁2-15 mm下方の離散性線維性隆起または線維筋性輪、I型（軽度隆起）、II型（広範隆起）、III型（最重度勾配を伴うトンネル様閉塞）に細分。血行動態結果：慢性LVOT閉塞でLV後負荷増大→求心性LV肥大、LV肥大による心内膜下虚血＋高速ジェットによる心内膜下心筋外傷、高速後狭窄性血流が大動脈内膜を損傷し細菌性心内膜炎（特に大動脈弁）素因となる。重症度はドプラ心エコーの大動脈経横断圧勾配で分類：軽度<50 mmHg、中等度50-80、重度>80 mmHg。臨床徴候は重症度で異なる—軽度は雑音のみで無症候の可能性、重度は運動不耐、失神（特に運動・興奮中）、うっ血性心不全、心室性不整脈、心室細動による突然心臓死を呈す。診断時平均年齢4-12ヶ月（仔犬検診時の雑音初聴）、突然死リスクは6ヶ月-4歳でピーク。",
+        "causes": "PICALM gene mutation in Newfoundlands - autosomal dominant, variable expression, incomplete penetrance. Multifactorial in other breeds. Family clustering strong with affected parents producing affected offspring. Severity may worsen during puppy growth (subaortic ring becomes relatively more obstructive as heart grows).",
+        "causes_ja": "ニューファンドランドのPICALM遺伝子変異—常染色体優性、可変発現、不完全浸透。他の犬種では多因子性。罹患親が罹患子孫を産む強い家族集積性。重症度は仔犬成長中に悪化しうる（心臓成長で弁下輪が相対的により閉塞性に）。",
+        "treatment": "Diagnostic workup: cardiac auscultation (Grade III-V/VI systolic ejection murmur loudest at left heart base, sometimes radiating to thoracic inlet/right side; femoral pulse may be hypokinetic), thoracic radiographs (LV enlargement variable), echocardiography (gold standard - 2D shows fibrous ridge below aortic valve, LV hypertrophy; Doppler measures peak transaortic gradient and characterizes obstruction; spectral Doppler gradient correlates with severity classification), ECG (LV hypertrophy pattern, ventricular arrhythmias common in severe cases), Holter monitor in severe SAS to identify ventricular ectopy at risk for sudden death. Diagnostic confirmation often at puppy murmur evaluation 8-16 weeks; severity grading at 6-12 months when puppy reaches near-adult size (gradient often increases with growth). Mild SAS (gradient <50 mmHg): no specific treatment needed; routine cardiac follow-up annually; restrict to moderate exercise; avoid strenuous activity; bacterial endocarditis prophylaxis before dental procedures with amoxicillin 22 mg/kg PO 1 hour pre-procedure. Moderate SAS (50-80 mmHg): atenolol 0.5-1 mg/kg PO BID (beta-blocker reduces myocardial oxygen demand, reduces gradient slightly, may reduce sudden death risk based on Eason 2014); annual echocardiography; activity restriction; endocarditis prophylaxis. Severe SAS (>80 mmHg): atenolol mandatory, may require higher doses (1-2 mg/kg PO BID titrated); consider sotalol 1.5-3 mg/kg PO BID if ventricular arrhythmias present; significant exercise restriction. Surgical/interventional options - balloon dilation +/- cutting balloon valvuloplasty has been performed but recurrence common, modest gradient reduction; open surgical resection with cardiopulmonary bypass at very limited specialty centers; recently transvenous radiofrequency catheter ablation or stenting under investigation. Clinical CHF treatment: pimobendan + furosemide + ACE inhibitor (note: pimobendan controversial in fixed obstruction - some cardiologists avoid). Bacterial endocarditis: aggressive IV antibiotics 4-6 weeks based on blood culture, ampicillin + gentamicin or vancomycin pending culture; emergency presentation with sepsis, fever, new murmur change. Owners cautioned about syncope, exercise restriction, and breed-counseled to avoid breeding affected dogs.",
+        "treatment_ja": "診断検査：心臓聴診（左心基部で最大のグレードIII-V/VI収縮期駆出性雑音、時に胸郭入口/右側に放散、大腿動脈拍動低下の可能性）、胸部X線（LV拡大可変）、心エコー（ゴールドスタンダード—2Dで大動脈弁下の線維性隆起、LV肥大、ドプラで大動脈経横断ピーク勾配測定と閉塞特性評価、スペクトルドプラ勾配が重症度分類と相関）、ECG（LV肥大パターン、重症例で心室性不整脈多い）、突然死リスクの心室異所性同定のため重度SASでHolter。診断確定はしばしば8-16週齢の仔犬雑音評価時、6-12ヶ月で重症度評価（成犬サイズ近づき勾配しばしば増加）。軽度SAS（勾配<50 mmHg）：特異的治療不要、年1回循環器経過観察、中等度運動に制限、激しい活動回避、歯科処置前にアモキシシリン22 mg/kg PO 1時間前で細菌性心内膜炎予防。中等度SAS（50-80 mmHg）：アテノロール0.5-1 mg/kg PO BID（βブロッカーが心筋酸素需要低減、勾配軽度低減、Eason 2014に基づき突然死リスク低減の可能性）、年1回心エコー、活動制限、心内膜炎予防。重度SAS（>80 mmHg）：アテノロール必須、高用量必要な場合（1-2 mg/kg PO BID滴定）、心室性不整脈あればソタロール1.5-3 mg/kg PO BID考慮、有意な運動制限。外科/介入オプション—バルーン拡張±切開バルーン弁形成術が実施されているが再発多く勾配低減控えめ、心肺バイパス下の開心術が極限られた専門センターで、最近経静脈的高周波カテーテルアブレーションまたはステント留置が研究中。臨床CHF治療：ピモベンダン＋フロセミド＋ACEi（注：固定閉塞でのピモベンダン議論あり、一部循環器専門医は回避）。細菌性心内膜炎：血液培養に基づく4-6週間の積極的IV抗生剤、培養待ちでアンピシリン＋ゲンタマイシンまたはバンコマイシン、敗血症、発熱、新規雑音変化での緊急来院。失神、運動制限について飼い主注意、罹患犬の繁殖回避について犬種カウンセリング。",
+        "prognosis": "Variable depending on severity. Mild SAS - normal lifespan, often no clinical signs. Moderate SAS - life expectancy modestly reduced (median 11+ years), majority asymptomatic with treatment. Severe SAS (>80 mmHg) - guarded prognosis: median survival 4-5 years; 30-50 percent die suddenly (ventricular fibrillation); 20-30 percent develop bacterial endocarditis; 20-30 percent develop CHF. Sudden death rate decreases after age 4-5 years if survived to that age. Bacterial endocarditis: 60-80 percent mortality despite aggressive treatment. Better prognosis: gradient response to atenolol, no syncope, no arrhythmias on Holter, age >5 years.",
+        "prognosis_ja": "重症度により可変。軽度SAS—通常寿命、しばしば臨床徴候なし。中等度SAS—寿命やや短縮（生存期間中央値11年以上）、ほとんどが治療で無症候。重度SAS（>80 mmHg）—予後慎重：生存期間中央値4-5年、30-50%が突然死（心室細動）、20-30%が細菌性心内膜炎発症、20-30%がCHF発症。生存すれば突然死率は4-5歳以降低下。細菌性心内膜炎：積極的治療しても死亡率60-80%。予後良好：アテノロールへの勾配反応、失神なし、Holterで不整脈なし、年齢>5歳。",
+        "prevention": "Cardiac auscultation at puppy wellness exams (8, 12, 16 weeks); ANY puppy murmur warrants echocardiographic referral - early identification critical for breeding decisions and lifetime monitoring. PICALM genetic testing in Newfoundlands - homozygous and heterozygous affected dogs should not be bred (autosomal dominant). OFA cardiac certification: Newfoundland Club of America requires cardiac certification (auscultation OR Doppler echocardiogram) before breeding. Echocardiographic screening of breeding stock before breeding. Predisposed breeds (Newfoundland, Golden Retriever, Boxer, Rottweiler, Bull Terrier) should have annual cardiac auscultation through senior years. Endocarditis prophylaxis with amoxicillin 22 mg/kg PO 1 hour before dental cleaning, surgery, or other bacteremia-inducing procedures.",
+        "prevention_ja": "仔犬健康診査（8、12、16週齢）での心臓聴診、ANY仔犬雑音は心エコー紹介を要する—繁殖決定と生涯モニタリングに早期同定が重要。ニューファンドランドのPICALM遺伝子検査—ホモ接合とヘテロ接合罹患犬は繁殖させない（常染色体優性）。OFA心臓認証：ニューファンドランドクラブオブアメリカが繁殖前に心臓認証（聴診またはドプラ心エコー）を要求。繁殖前に繁殖家畜の心エコースクリーニング。素因犬種（ニューファンドランド、ゴールデン、ボクサー、ロットワイラー、ブルテリア）は高齢期まで年1回心臓聴診。歯科清掃、手術、他の菌血症誘発処置の1時間前にアモキシシリン22 mg/kg POで心内膜炎予防。",
+        "recommended_tests": [
+            "心エコーとドプラ（ゴールドスタンダード、勾配測定） (Echocardiography with Doppler - gold standard)",
+            "心臓聴診（雑音グレーディング） (Cardiac auscultation)",
+            "胸部X線（LV肥大評価） (Thoracic radiographs)",
+            "ECG（LV肥大、心室性不整脈評価） (ECG)",
+            "Holter心電図モニタ（重度SASの突然死リスク評価） (Holter monitor - severe cases)",
+            "PICALM遺伝子検査（ニューファンドランド） (PICALM genetic test)",
+            "全血球計算と血液生化学 (CBC and Blood Chemistry Panel)",
+            "尿検査 (Urinalysis)",
+            "血液培養（心内膜炎疑い時） (Blood culture - if endocarditis suspected)",
+            "OFA心臓認証（繁殖前） (OFA cardiac certification - pre-breeding)",
+            "血圧測定 (Blood pressure)",
+        ],
         "urgency": "high",
-        "recommended_tests": ["echocardiogram", "ecg"],
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"puppy", "young"},
     },
     {
         "name": "Irish Wolfhound Dilated Cardiomyopathy",
