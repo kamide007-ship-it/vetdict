@@ -4,7 +4,8 @@
   --green:#22a84f;--green-dark:#1a8a3e;--green-light:#e8f8ee;
   --white:#fff;--bg:#f5f6fa;
   --gray-50:#f8f9fc;--gray-100:#eef0f5;--gray-200:#dde1ea;--gray-300:#c5cbd8;
-  --gray-500:#596380;--gray-600:#4e5570;--gray-700:#363c52;--gray-900:#1a1d2e;
+  /* gray-500 darkened from #596380 for WCAG AA contrast on light bg (~5.0:1 vs --bg) */
+  --gray-500:#4f566e;--gray-600:#42485d;--gray-700:#2f3447;--gray-900:#1a1d2e;
   --red:#dc3545;--orange:#f0850e;
   --radius:10px;--radius-lg:16px;
   --shadow:0 1px 3px rgba(26,48,104,.08),0 1px 2px rgba(26,48,104,.04);
@@ -1807,3 +1808,48 @@ button.combination-item:focus-visible {
 
 .offline-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#dc3545;color:var(--white);text-align:center;padding:6px 16px;font-size:.78rem;font-weight:600;transform:translateY(-100%);transition:transform .3s ease}
 .offline-banner.visible{transform:translateY(0)}
+
+/* --- UX/A11y refinements --- */
+/* Prevent iOS auto-zoom on form input focus (font must be ≥16px on touch screens) */
+@media(max-width:600px){
+  .lab-group input,
+  #drugWeight,
+  #anesthesiaWeight,
+  #chatInput,
+  #symptomSearch,
+  #diseaseSearch,
+  #drugSearch,
+  #anesthesiaSearch,
+  #globalSearch,
+  .global-search-input,
+  .breed-select,
+  #breedSelect,
+  .symptom-search input,
+  .anesthesia-asa-filter,
+  #drugCategoryFilter,
+  #drugSpeciesFilter,
+  #anesthesiaCategoryFilter{font-size:16px!important}
+}
+
+/* Filter dropdown panels: keep within viewport on small screens */
+@media(max-width:480px){
+  .species-filter-panel,
+  .category-filter-panel{
+    position:fixed;
+    top:auto;
+    left:8px;
+    right:8px;
+    bottom:auto;
+    max-width:none;
+    min-width:0;
+    width:auto;
+  }
+}
+
+/* Smarter retry/error messages keep proper spacing */
+.results-error{display:flex;flex-direction:column;gap:10px;padding:14px 16px;border-radius:var(--radius);background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d;font-size:.86rem;line-height:1.55}
+.results-error strong{color:#991b1b}
+.results-error .results-error-detail{font-size:.78rem;color:#7f1d1d;opacity:.85}
+.results-error .retry-analyze-btn{align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem;font-weight:600;min-height:40px}
+.results-error .retry-analyze-btn:hover{background:var(--navy-dark)}
+.results-error .retry-analyze-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
