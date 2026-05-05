@@ -60,7 +60,9 @@ const I18N={
   ja:{
     skipLink:"メインコンテンツへスキップ",
     logoSub:"獣医師のための臨床意思決定支援",
-    navChecker:"鑑別診断",navDatabase:"疾患データベース",navChat:"臨床相談",navDrugs:"薬品辞書",navAnesthesia:"鎮静・麻酔",
+    navChecker:"鑑別診断",navDatabase:"疾患データベース",navChat:"臨床相談",navDrugs:"薬品辞書",navAnesthesia:"鎮静・麻酔",navEmergency:"🚨 緊急対応",
+    cardEmergency:"🚨 緊急プロトコル / クイックリファレンス",emergencyImportant:"⚠ 重要:",emergencyDisclaimer:"緊急時は同時並行的に対応が必要です。本プロトコルは標準的な対応の参考ですが、実際の施行には熟練した獣医師の臨床判断が必須です。各薬品の用量・投与経路は処方前に必ず再確認してください。",
+    emergencyTriggerSigns:"認識すべき徴候",emergencyKeyDrugs:"主要薬剤",emergencyMonitoring:"モニタリング指標",emergencyStepsTitle:"対応プロトコル",emergencyTimeTarget:"目標時間",
     landingChatTitle:"臨床症状から鑑別診断",
     heroTrustRef:"190+学術文献に基づく",heroTrustTests:"3,000+自動テスト検証済み",heroTrustOss:"オープンソース開発",
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
@@ -295,7 +297,9 @@ const I18N={
   en:{
     skipLink:"Skip to main content",
     logoSub:"Clinical Decision Support for Veterinarians",
-    navChecker:"Differential Dx",navDatabase:"Disease Database",navChat:"Clinical Chat",navDrugs:"Drug Dictionary",navAnesthesia:"Anesthesia",
+    navChecker:"Differential Dx",navDatabase:"Disease Database",navChat:"Clinical Chat",navDrugs:"Drug Dictionary",navAnesthesia:"Anesthesia",navEmergency:"🚨 Emergency",
+    cardEmergency:"🚨 Emergency Protocols / Quick Reference",emergencyImportant:"⚠ Important:",emergencyDisclaimer:"Emergencies require simultaneous parallel actions. These protocols are standard references; actual execution requires experienced clinical judgment. Always verify drug doses and routes before administration.",
+    emergencyTriggerSigns:"Recognize",emergencyKeyDrugs:"Key drugs",emergencyMonitoring:"Monitoring",emergencyStepsTitle:"Protocol",emergencyTimeTarget:"Time target",
     landingChatTitle:"Differential Diagnosis from Clinical Signs",
     heroTrustRef:"Based on 190+ academic references",heroTrustTests:"Verified by 3,000+ automated tests",heroTrustOss:"Open-source development",
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
@@ -2748,7 +2752,7 @@ function navigateToDiseaseDb(query){
 function switchView(view){
   trackEvent("switch_view",{view:view});
   currentView=view;
-  const views=["checker","database","chat","drugs","anesthesia"];
+  const views=["checker","database","chat","drugs","anesthesia","emergency"];
   const prefersReduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   views.forEach(v=>{
     const tab=document.getElementById("tab-"+v);
@@ -2764,6 +2768,7 @@ function switchView(view){
   updateMobileBottomNav();
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
+  if(view==="emergency"&&!emergencyLoaded)loadEmergencyProtocols();
   /* フォーカスを新しいパネルの最初のインタラクティブ要素に移動 */
   const activePanel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
   if(activePanel){const focusable=activePanel.querySelector("input,select,button:not([disabled]),textarea,[tabindex='0']");if(focusable)setTimeout(()=>focusable.focus(),50);}
@@ -3934,6 +3939,115 @@ function renderDrugList(){
       </div>
     </div>`;
   }).join("");
+}
+
+/* ===== Emergency Protocols (Vetlexicon-style quick reference) ===== */
+let emergencyLoaded=false,emergencyData=null,emergencyCategories={};
+
+function loadEmergencyProtocols(){
+  const list=document.getElementById("emergencyList");
+  if(!list)return;
+  list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div></div>';
+  fetchWithTimeout("/api/emergency/protocols").then(r=>r.json()).then(data=>{
+    emergencyData=data.protocols||[];
+    emergencyCategories=data.categories||{};
+    emergencyLoaded=true;
+    const catSel=document.getElementById("emergencyCategoryFilter");
+    if(catSel){
+      catSel.innerHTML=`<option value="">${t("allCategories")}</option>`;
+      Object.entries(emergencyCategories).forEach(([k,v])=>{
+        const name=currentLang==="ja"?(v.ja||v.en):(v.en||v.ja);
+        catSel.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(k)}">${escapeHtml(name)}</option>`);
+      });
+    }
+    const spSel=document.getElementById("emergencySpeciesFilter");
+    if(spSel&&spSel.options.length<=1){
+      SPECIES.forEach(sp=>{
+        const opt=document.createElement("option");
+        opt.value=sp.id;
+        opt.textContent=currentLang==="ja"?sp.name:sp.nameEn;
+        spSel.appendChild(opt);
+      });
+    }
+    renderEmergencyList();
+    setupEmergencyListeners();
+  }).catch(()=>{
+    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}</div>`;
+  });
+}
+
+function setupEmergencyListeners(){
+  const list=document.getElementById("emergencyList");
+  if(!list||list.dataset.emergencyListenersAttached)return;
+  list.dataset.emergencyListenersAttached="1";
+  ["emergencySearch","emergencyCategoryFilter","emergencySpeciesFilter"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener(el.tagName==="INPUT"?"input":"change",debounce(renderEmergencyList,200));
+  });
+}
+
+function renderEmergencyList(){
+  const list=document.getElementById("emergencyList");
+  if(!list||!emergencyData)return;
+  const search=(document.getElementById("emergencySearch")?.value||"").toLowerCase();
+  const cat=document.getElementById("emergencyCategoryFilter")?.value||"";
+  const species=document.getElementById("emergencySpeciesFilter")?.value||"";
+  let filtered=emergencyData;
+  if(cat)filtered=filtered.filter(p=>p.category===cat);
+  if(species)filtered=filtered.filter(p=>(p.species||[]).includes(species));
+  if(search){
+    filtered=filtered.filter(p=>{
+      const hay=[p.title_ja,p.title_en,...(p.trigger_signs_ja||[]),...(p.trigger_signs_en||[])].join(" ").toLowerCase();
+      return hay.includes(search);
+    });
+  }
+  document.getElementById("emergencyCount").textContent=`${filtered.length} / ${emergencyData.length}`;
+  if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${currentLang==="ja"?"該当するプロトコルがありません":"No matching protocols"}</div>`;return;}
+  list.innerHTML=filtered.map(p=>renderEmergencyProtocol(p)).join("");
+  // Attach toggle handlers (using same expand/collapse pattern as drugs/anesthesia)
+  if(!list.dataset.handlersAttached){
+    list.dataset.handlersAttached="1";
+    list.addEventListener("click",e=>{
+      const item=e.target.closest(".disease-db-item");
+      if(!item)return;
+      // Don't toggle if click was inside the open detail
+      if(e.target.closest(".disease-detail.open"))return;
+      const detail=item.querySelector(".disease-detail");
+      if(detail){
+        const isOpen=detail.classList.toggle("open");
+        item.setAttribute("aria-expanded",String(isOpen));
+      }
+    });
+  }
+}
+
+function renderEmergencyProtocol(p){
+  const title=currentLang==="ja"?p.title_ja:p.title_en;
+  const triggers=currentLang==="ja"?p.trigger_signs_ja:p.trigger_signs_en;
+  const catName=emergencyCategories[p.category]?(currentLang==="ja"?emergencyCategories[p.category].ja:emergencyCategories[p.category].en):p.category;
+  const speciesText=(p.species||[]).map(sp=>{const s=SPECIES.find(x=>x.id===sp);return s?(currentLang==="ja"?s.name:s.nameEn):sp;}).join(", ");
+  const triggerHtml=`<div style="margin:6px 0"><strong style="font-size:.78rem;color:#7f1d1d">${t("emergencyTriggerSigns")}:</strong> ${(triggers||[]).map(s=>`<span style="display:inline-block;padding:2px 8px;background:#fee2e2;color:#7f1d1d;border-radius:10px;font-size:.74rem;margin:2px 4px 2px 0">${escapeHtml(s)}</span>`).join("")}</div>`;
+  const stepsHtml=(p.steps||[]).map(s=>{
+    const text=currentLang==="ja"?s.ja:s.en;
+    const phase=s.phase||"";
+    return `<li style="margin:8px 0;padding:8px 12px;background:#fafafa;border-left:3px solid #0891b2;border-radius:4px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:start;margin-bottom:4px"><strong style="font-size:.78rem;color:#0c4a6e">${s.order}. ${escapeHtml(phase)}</strong>${s.time_target?`<span style="font-size:.7rem;color:#64748b;white-space:nowrap">⏱ ${escapeHtml(s.time_target)}</span>`:""}</div><div style="font-size:.84rem;color:#1e293b;line-height:1.5">${escapeHtml(text)}</div></li>`;
+  }).join("");
+  const drugsHtml=(p.key_drugs||[]).map(d=>{const nm=currentLang==="ja"?(d.name_ja||d.name):d.name;return `<li style="margin:3px 0;font-size:.82rem"><strong>${escapeHtml(nm)}</strong> — ${escapeHtml(d.dose)}</li>`;}).join("");
+  const monitorHtml=(p.monitoring||[]).map(m=>`<span style="display:inline-block;padding:2px 8px;background:#dbeafe;color:#1e40af;border-radius:10px;font-size:.72rem;margin:2px 4px 2px 0">${escapeHtml(m)}</span>`).join("");
+  return `<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false" style="border-left:5px solid #dc2626">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:start;flex-wrap:wrap">
+      <div class="d-name" style="font-weight:700;color:#1e293b">${escapeHtml(title)}</div>
+      <span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:.7rem;font-weight:700;letter-spacing:.05em">${escapeHtml(catName)}</span>
+    </div>
+    <div style="font-size:.74rem;color:#64748b;margin-top:4px">🐾 ${escapeHtml(speciesText)}</div>
+    ${triggerHtml}
+    <div class="disease-detail">
+      <div style="margin:10px 0"><strong style="font-size:.82rem;color:#0c4a6e">${t("emergencyStepsTitle")}</strong><ol style="margin:6px 0 0 0;padding:0;list-style:none">${stepsHtml}</ol></div>
+      ${drugsHtml?`<div style="margin:10px 0"><strong style="font-size:.82rem;color:#0c4a6e">💊 ${t("emergencyKeyDrugs")}</strong><ul style="margin:4px 0 0 20px;padding:0">${drugsHtml}</ul></div>`:""}
+      ${monitorHtml?`<div style="margin:10px 0"><strong style="font-size:.82rem;color:#0c4a6e">📊 ${t("emergencyMonitoring")}:</strong><div style="margin-top:4px">${monitorHtml}</div></div>`:""}
+      ${p.ref?`<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:.72rem;color:#64748b"><em>Ref: ${escapeHtml(p.ref)}</em></div>`:""}
+    </div>
+  </div>`;
 }
 
 /* ===== Anesthesia Protocols ===== */

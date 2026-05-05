@@ -234,6 +234,14 @@ try:
 except ImportError:
     logger.warning("Anesthesia protocols module not available")
 
+# Emergency protocols blueprint (Vetlexicon-style quick reference)
+try:
+    from api.emergency_api import emergency_bp
+
+    app.register_blueprint(emergency_bp)
+except ImportError:
+    logger.warning("Emergency protocols module not available")
+
 # Analytics blueprint (usage statistics)
 try:
     from api.analytics import analytics_bp, init_analytics

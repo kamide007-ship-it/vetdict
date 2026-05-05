@@ -10669,3 +10669,43 @@ def api_disclaimers():
             "dose_calculator": DOSE_CALCULATOR_DISCLAIMER,
         }
     )
+
+
+# ---------------------------------------------------------------------------
+# 治療プラン生成 API
+# ---------------------------------------------------------------------------
+from api.treatment_plan import build_treatment_plan, to_dict as plan_to_dict
+
+
+def _get_drug_lookup() -> dict:
+    """drug_id → drug_dict のマッピングを構築"""
+    return {d["id"]: d for d in DRUGS}
+
+
+@drug_bp.route("/api/treatment-plan/generate", methods=["POST"])
+def api_generate_treatment_plan():
+    """
+    確定診断から構造化治療プランを生成。
+    Body JSON: {disease: {...}, species: "...", body_weight_kg?: ...}
+    """
+    data = request.get_json(silent=True) or {}
+    disease = data.get("disease") or {}
+    species = (data.get("species") or "").strip().lower()
+    weight = data.get("body_weight_kg")
+    try:
+        weight = float(weight) if weight is not None else None
+    except (TypeError, ValueError):
+        weight = None
+    if not disease or not species:
+        return jsonify({"error": "disease and species required"}), 400
+
+    lang = data.get("lang", "ja")
+    drug_lookup = _get_drug_lookup()
+    plan = build_treatment_plan(
+        disease=disease,
+        drug_lookup=drug_lookup,
+        species=species,
+        body_weight_kg=weight,
+        lang=lang,
+    )
+    return jsonify({"plan": plan_to_dict(plan)})

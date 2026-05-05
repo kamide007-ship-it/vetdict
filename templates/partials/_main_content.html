@@ -315,4 +315,30 @@
       </div>
     </div>
   </div>
+
+  <div id="viewEmergency" class="hidden" role="tabpanel" aria-labelledby="tab-emergency">
+    <div class="card" style="margin-top:20px">
+      <div class="card-header" data-i18n-html="cardEmergency">🚨 緊急プロトコル / クイックリファレンス</div>
+      <div class="card-body">
+        <div style="background:#fef2f2;border-left:4px solid #dc2626;padding:10px 14px;border-radius:6px;margin-bottom:14px;font-size:.84rem;color:#7f1d1d">
+          <strong data-i18n="emergencyImportant">⚠ 重要:</strong>
+          <span data-i18n="emergencyDisclaimer">緊急時は同時並行的に対応が必要です。本プロトコルは標準的な対応の参考ですが、実際の施行には熟練した獣医師の臨床判断が必須です。各薬品の用量・投与経路は処方前に必ず再確認してください。</span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+          <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
+            <input type="search" id="emergencySearch" placeholder="プロトコル名・症状で検索 (例: CPR, ショック, 痙攣)" aria-label="緊急プロトコル検索" autocomplete="off" inputmode="search"/>
+            <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
+          </div>
+          <select id="emergencyCategoryFilter" aria-label="緊急プロトコルカテゴリ" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:160px;background:var(--white)">
+            <option value="" data-i18n="allCategories">全カテゴリ</option>
+          </select>
+          <select id="emergencySpeciesFilter" aria-label="動物種で絞り込み" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:130px;background:var(--white)">
+            <option value="" data-i18n="allSpecies">全動物種</option>
+          </select>
+        </div>
+        <div id="emergencyCount" style="font-size:.76rem;color:var(--gray-500);margin-bottom:8px"></div>
+        <div id="emergencyList" class="disease-db-list" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
 </div>
