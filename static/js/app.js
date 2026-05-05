@@ -109,7 +109,8 @@ const I18N={
     anesthesiaSafetyTitle:"安全性情報",
     anesthesiaContraindicated:"禁忌",anesthesiaCaution:"慎重投与",anesthesiaMonitorExtra:"要モニタリング",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
-    allCategories:"全カテゴリ",allSpecies:"全動物種",
+    allCategories:"全カテゴリ",allSpecies:"全動物種",speciesAny:"動物種（任意）",
+    interactionCheckerTitle:"⚠️ 薬品相互作用チェッカー",interactionCheckerDesc:"複数の薬品を併用する際の相互作用を確認します。薬品名（半角英数）をカンマ区切りで入力してください。",interactionCheckBtn:"チェック",
     drugCompareTitle:"他の獣医薬リファレンスとの比較",
     drugCompareHint:"（クリックで展開）",
     drugCompareIntro:"日常診療での使い分けの参考に、VetDict・Plumb's Veterinary Drugs・VIN（Veterinary Information Network）の特徴を比較しました。",
@@ -342,7 +343,8 @@ const I18N={
     anesthesiaSafetyTitle:"Safety Information",
     anesthesiaContraindicated:"Contraindicated",anesthesiaCaution:"Use with Caution",anesthesiaMonitorExtra:"Extra Monitoring",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
-    allCategories:"All Categories",allSpecies:"All Species",
+    allCategories:"All Categories",allSpecies:"All Species",speciesAny:"Species (optional)",
+    interactionCheckerTitle:"⚠️ Drug Interaction Checker",interactionCheckerDesc:"Check interactions when combining multiple drugs. Enter comma-separated drug names (lowercase Latin).",interactionCheckBtn:"Check",
     drugCompareTitle:"How VetDict compares to other veterinary drug references",
     drugCompareHint:"(click to expand)",
     drugCompareIntro:"A side-by-side look at VetDict, Plumb's Veterinary Drugs, and VIN (Veterinary Information Network) to help you pick the right tool for the job.",
@@ -3640,7 +3642,90 @@ function loadDrugDictionary(){
         renderDrugList();
       },300));
     }
+    // Interaction checker
+    setupInteractionChecker();
   }
+}
+
+function setupInteractionChecker(){
+  const btn=document.getElementById("interactionCheckBtn");
+  const speciesSel=document.getElementById("interactionSpecies");
+  if(!btn||!speciesSel)return;
+  // Populate species options
+  if(speciesSel.options.length<=1){
+    SPECIES.forEach(sp=>{
+      const opt=document.createElement("option");
+      opt.value=sp.id;
+      opt.textContent=currentLang==="ja"?sp.name:sp.nameEn;
+      speciesSel.appendChild(opt);
+    });
+  }
+  btn.addEventListener("click",runInteractionCheck);
+  const input=document.getElementById("interactionDrugIds");
+  if(input)input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runInteractionCheck();}});
+}
+
+function runInteractionCheck(){
+  const input=document.getElementById("interactionDrugIds");
+  const speciesSel=document.getElementById("interactionSpecies");
+  const results=document.getElementById("interactionResults");
+  if(!input||!results)return;
+  const raw=(input.value||"").trim();
+  if(!raw){results.innerHTML="";return;}
+  const drugIds=raw.split(/[,，、]+/).map(s=>s.trim().toLowerCase().replace(/\s+/g,"_").replace(/-/g,"_")).filter(Boolean);
+  results.innerHTML=`<div style="padding:10px;color:var(--gray-500)">${currentLang==="ja"?"確認中...":"Checking..."}</div>`;
+  fetchWithTimeout("/api/drugs/check-interactions",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({drug_ids:drugIds,species:speciesSel.value||""})
+  }).then(r=>r.json()).then(data=>{
+    renderInteractionResults(data,drugIds);
+  }).catch(()=>{
+    results.innerHTML=`<div style="padding:10px;color:var(--red-700,#b91c1c)">${currentLang==="ja"?"通信エラー":"Network error"}</div>`;
+  });
+}
+
+function renderInteractionResults(data,drugIds){
+  const results=document.getElementById("interactionResults");
+  if(!results)return;
+  const ix=data.interactions||[];
+  const sw=data.species_specific_warnings||[];
+  if(ix.length===0&&sw.length===0){
+    results.innerHTML=`<div style="padding:12px;background:var(--green-50,#f0fdf4);border-left:4px solid var(--green-600,#16a34a);border-radius:6px;color:var(--green-800,#166534);font-size:.86rem">✅ ${currentLang==="ja"?"既知の相互作用は検出されませんでした":"No known interactions detected"} (${drugIds.length} ${currentLang==="ja"?"薬品":"drugs"})</div>`;
+    return;
+  }
+  const sevColor={contraindicated:{bg:"#fee2e2",border:"#dc2626",text:"#991b1b",label:currentLang==="ja"?"禁忌":"CONTRAINDICATED"},major:{bg:"#fef3c7",border:"#d97706",text:"#92400e",label:currentLang==="ja"?"重大":"MAJOR"},moderate:{bg:"#dbeafe",border:"#2563eb",text:"#1e40af",label:currentLang==="ja"?"中等度":"MODERATE"}};
+  let html="";
+  if(ix.length>0){
+    html+=`<div style="font-weight:600;margin:8px 0;font-size:.84rem">${currentLang==="ja"?"薬品-薬品相互作用":"Drug-drug interactions"}: ${ix.length}</div>`;
+    ix.forEach(i=>{
+      const c=sevColor[i.severity]||sevColor.moderate;
+      const effect=currentLang==="ja"?(i.effect_ja||i.effect_en||""):(i.effect_en||i.effect_ja||"");
+      const mgmt=currentLang==="ja"?(i.management_ja||i.management_en||""):(i.management_en||i.management_ja||"");
+      const mech=i.mechanism||"";
+      html+=`<div style="padding:10px 12px;background:${c.bg};border-left:4px solid ${c.border};border-radius:6px;margin-bottom:8px;font-size:.84rem">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="font-weight:700;color:${c.text};font-size:.74rem;padding:2px 8px;background:${c.border};color:#fff;border-radius:4px">${c.label}</span><strong style="color:${c.text}">${escapeHtml(i.drug_a)} + ${escapeHtml(i.drug_b)}</strong></div>
+        ${mech?`<div style="color:${c.text};font-size:.78rem;margin-bottom:4px">${currentLang==="ja"?"機序":"Mechanism"}: ${escapeHtml(mech)}</div>`:""}
+        <div style="color:${c.text};margin-bottom:4px">${escapeHtml(effect)}</div>
+        ${mgmt?`<div style="color:${c.text};font-size:.82rem"><strong>${currentLang==="ja"?"対応":"Management"}:</strong> ${escapeHtml(mgmt)}</div>`:""}
+        ${i.ref?`<div style="color:${c.text};font-size:.74rem;margin-top:4px;opacity:.7">Ref: ${escapeHtml(i.ref)}</div>`:""}
+      </div>`;
+    });
+  }
+  if(sw.length>0){
+    html+=`<div style="font-weight:600;margin:12px 0 8px;font-size:.84rem">${currentLang==="ja"?"動物種特異的警告":"Species-specific warnings"}: ${sw.length}</div>`;
+    sw.forEach(i=>{
+      const c=sevColor[i.severity]||sevColor.moderate;
+      const effect=currentLang==="ja"?(i.effect_ja||i.effect_en||""):(i.effect_en||i.effect_ja||"");
+      const mgmt=currentLang==="ja"?(i.management_ja||i.management_en||""):(i.management_en||i.management_ja||"");
+      html+=`<div style="padding:10px 12px;background:${c.bg};border-left:4px solid ${c.border};border-radius:6px;margin-bottom:8px;font-size:.84rem">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="font-weight:700;color:#fff;font-size:.74rem;padding:2px 8px;background:${c.border};border-radius:4px">${c.label}</span></div>
+        <div style="color:${c.text};margin-bottom:4px">${escapeHtml(effect)}</div>
+        ${mgmt?`<div style="color:${c.text};font-size:.82rem"><strong>${currentLang==="ja"?"対応":"Management"}:</strong> ${escapeHtml(mgmt)}</div>`:""}
+      </div>`;
+    });
+  }
+  results.innerHTML=html;
 }
 
 function parseDoseRange(doseText){

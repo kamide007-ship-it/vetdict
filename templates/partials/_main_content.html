@@ -240,6 +240,20 @@
             </div>
           </div>
         </details>
+        <details class="interaction-checker" style="margin-bottom:12px">
+          <summary style="cursor:pointer;padding:10px 14px;background:var(--gray-100);border-radius:var(--radius);font-weight:600;font-size:.86rem;color:var(--gray-800)" data-i18n="interactionCheckerTitle">⚠️ 薬品相互作用チェッカー</summary>
+          <div style="padding:14px;background:var(--gray-50);border-radius:var(--radius);margin-top:8px">
+            <div style="font-size:.78rem;color:var(--gray-700);margin-bottom:10px" data-i18n="interactionCheckerDesc">複数の薬品を併用する際の相互作用を確認します。薬品名（半角英数）をカンマ区切りで入力してください。</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <input type="text" id="interactionDrugIds" placeholder="例: meloxicam, prednisolone" aria-label="薬品ID（カンマ区切り）" style="flex:1;min-width:240px;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem"/>
+              <select id="interactionSpecies" aria-label="動物種（種特異的警告用）" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:130px;background:var(--white)">
+                <option value="" data-i18n="speciesAny">動物種（任意）</option>
+              </select>
+              <button id="interactionCheckBtn" type="button" style="padding:8px 18px;background:var(--navy);color:var(--white);border:none;border-radius:var(--radius);cursor:pointer;font-size:.86rem;font-weight:600" data-i18n="interactionCheckBtn">チェック</button>
+            </div>
+            <div id="interactionResults" style="margin-top:12px" aria-live="polite"></div>
+          </div>
+        </details>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="search" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh" aria-label="薬品名で検索" autocomplete="off" inputmode="search"/>
