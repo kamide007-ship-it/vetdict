@@ -3,7 +3,7 @@
 Extracts symptom IDs from JP/EN text using longest-match-first strategy.
 """
 
-from api.chat.species_data import _SPECIES_DATA
+from api.chat.species_data import _SPECIES_DATA, get_species_data
 from api.chat.symptom_aliases import SYMPTOM_ALIASES
 
 
@@ -13,7 +13,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     Uses longest-match-first strategy and Japanese particle splitting
     for maximum extraction accuracy across all species.
     """
-    sp_data = _SPECIES_DATA.get(species)
+    sp_data = get_species_data(species)
     if not sp_data:
         return []
 
