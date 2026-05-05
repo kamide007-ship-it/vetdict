@@ -110,6 +110,47 @@ const I18N={
     anesthesiaContraindicated:"禁忌",anesthesiaCaution:"慎重投与",anesthesiaMonitorExtra:"要モニタリング",
     drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
     allCategories:"全カテゴリ",allSpecies:"全動物種",
+    drugCompareTitle:"他の獣医薬リファレンスとの比較",
+    drugCompareHint:"（クリックで展開）",
+    drugCompareIntro:"日常診療での使い分けの参考に、VetDict・Plumb's Veterinary Drugs・VIN（Veterinary Information Network）の特徴を比較しました。",
+    drugCompareColFeature:"機能",
+    drugCompareRowSource:"主な情報源",
+    drugCompareVetdictSource:"Plumb's (9th ed.) / Papich (5th ed.) / BSAVA / Carpenter Formulary 等",
+    drugCompareCompetitorSource1:"自社編集チームによる最新薬理データ",
+    drugCompareCompetitorSource2:"複数の専門書 + 専門医の臨床知見",
+    drugCompareRowFreq:"更新頻度",
+    drugCompareVetdictFreq:"定期的（開発者による手動更新）",
+    drugCompareCompetitorFreq1:"リアルタイム（新薬・副作用情報）",
+    drugCompareCompetitorFreq2:"随時（フォーラムでの議論が先行）",
+    drugCompareRowSpecies:"対応動物種",
+    drugCompareVetdictSpecies:"21種（魚・エキゾチック等に強い）",
+    drugCompareCompetitorSpecies1:"主要ペット・馬・産業動物",
+    drugCompareCompetitorSpecies2:"全方位",
+    drugCompareRowInteraction:"相互作用チェック",
+    drugCompareVetdictInteraction:"疾患DB内の記述・麻酔禁忌ルールに基づく",
+    drugCompareCompetitorInteraction1:"専用の相互作用シミュレーターあり",
+    drugCompareCompetitorInteraction2:"検索・フォーラムでの相談",
+    drugCompareRowOwner:"飼い主用資料",
+    drugCompareVetdictOwner:"なし（臨床家向け特化）",
+    drugCompareCompetitorOwner1:"多言語のクライアントハンドアウト付",
+    drugCompareCompetitorOwner2:"飼い主向け解説サイト（Veterinary Partner）",
+    drugCompareRowLang:"言語",
+    drugCompareVetdictLang:"日本語・英語",
+    drugCompareCompetitorLang1:"英語",
+    drugCompareCompetitorLang2:"英語（一部機械翻訳）",
+    drugCompareAnalysisTitle:"忖度なしの詳細分析",
+    drugComparePoint1Title:"検索精度と「出典」の信頼性",
+    drugComparePoint1Body:"VetDictはPlumb's・BSAVA等の世界標準の文献をベースに、現役の獣医師が日本語で整理。「日本で手に入る薬剤の一般名・商品名」で検索できる実用性が強み。一方、Plumb's最新版は米FDAの最新認可情報が即座に反映され、学術的な「最先端の正確性」では出版社直営ツールが最強。",
+    drugComparePoint2Title:"「使い勝手」という名の精度",
+    drugComparePoint2Body:"VetDictは「嘔吐」と日本語で入力 → 鑑別疾患 → 推奨薬剤への導線が短い。VIN等は情報量が多いぶん、特定薬剤の「今すぐ知りたい用量」に辿り着くまで時間がかかる場合あり。",
+    drugComparePoint3Title:"エキゾチック・特殊動物の網羅性",
+    drugComparePoint3Body:"ハリネズミ・フクロモモンガ・魚といった通常の薬剤ハンドブックでは情報が薄い動物種の投与量を日本語でまとめている点は他にない強み。Carpenter's Formulary等のエッセンスを一つの窓口で提供。",
+    drugCompareConclTitle:"結論：使い分けの推奨",
+    drugCompareConclDailyLabel:"日常診療（VetDict）:",
+    drugCompareConclDailyBody:"「この疾患に対する一般的な用量は？」「エキゾチックの投与量は？」を日本語で即座に引きたい場面に最適。",
+    drugCompareConclAdvLabel:"難症例・新薬（Plumb's / VIN）:",
+    drugCompareConclAdvBody:"複数薬剤の相互作用や副作用の最新報告（エビデンス）を原文で確認したい場合は、Plumb's（有料版）やVINの専門医ネットワークを参照。",
+    drugCompareDisclaimer:"※ 比較は2026年時点の各サービス公開情報に基づく一般的な傾向であり、個別の機能差は変動します。最終判断は必ず原典・添付文書をご確認ください。",
     sponsorTagline:"獣医師が考案・国内製造 — 競走馬理化学研究所の検査合格",
     sponsorSpecies:"対応動物種: 馬・犬・猫",
     sponsorEquine:"馬用サプリメント",sponsorCanine:"犬用サプリメント",
@@ -131,6 +172,10 @@ const I18N={
     retry:"再試行",
     reload:"再読み込み",
     networkError:"サーバーとの通信に失敗しました。ネットワーク接続を確認してください。",
+    networkErrorTimeout:"接続がタイムアウトしました。",
+    networkErrorOffline:"オフラインです。ネットワーク接続を確認してください。",
+    networkErrorServer:"サーバーエラーが発生しました。",
+    networkErrorDetail:"詳細: ",
     noDiseaseMatch:"該当する疾患がありません",
     noDrugMatch:"該当する薬品がありません",
     errorPrefix:"エラー: ",
@@ -298,6 +343,47 @@ const I18N={
     anesthesiaContraindicated:"Contraindicated",anesthesiaCaution:"Use with Caution",anesthesiaMonitorExtra:"Extra Monitoring",
     drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
     allCategories:"All Categories",allSpecies:"All Species",
+    drugCompareTitle:"How VetDict compares to other veterinary drug references",
+    drugCompareHint:"(click to expand)",
+    drugCompareIntro:"A side-by-side look at VetDict, Plumb's Veterinary Drugs, and VIN (Veterinary Information Network) to help you pick the right tool for the job.",
+    drugCompareColFeature:"Feature",
+    drugCompareRowSource:"Primary sources",
+    drugCompareVetdictSource:"Plumb's (9th ed.) / Papich (5th ed.) / BSAVA / Carpenter Formulary, etc.",
+    drugCompareCompetitorSource1:"In-house editorial team with current pharmacology data",
+    drugCompareCompetitorSource2:"Multiple textbooks + clinical insight from board-certified specialists",
+    drugCompareRowFreq:"Update cadence",
+    drugCompareVetdictFreq:"Periodic (manual updates by maintainer)",
+    drugCompareCompetitorFreq1:"Real-time (new drugs and adverse-event data)",
+    drugCompareCompetitorFreq2:"Continuous (forum discussion often leads the update)",
+    drugCompareRowSpecies:"Species coverage",
+    drugCompareVetdictSpecies:"21 species — strong on fish & exotics",
+    drugCompareCompetitorSpecies1:"Major pets, equine, food animals",
+    drugCompareCompetitorSpecies2:"Broad coverage across all domains",
+    drugCompareRowInteraction:"Interaction checking",
+    drugCompareVetdictInteraction:"Based on disease-DB notes and anesthesia contraindication rules",
+    drugCompareCompetitorInteraction1:"Dedicated interaction simulator",
+    drugCompareCompetitorInteraction2:"Search and forum-based consultation",
+    drugCompareRowOwner:"Owner-facing materials",
+    drugCompareVetdictOwner:"None (clinician-focused)",
+    drugCompareCompetitorOwner1:"Multilingual client handouts included",
+    drugCompareCompetitorOwner2:"Owner education site (Veterinary Partner)",
+    drugCompareRowLang:"Languages",
+    drugCompareVetdictLang:"Japanese & English",
+    drugCompareCompetitorLang1:"English",
+    drugCompareCompetitorLang2:"English (some machine translation)",
+    drugCompareAnalysisTitle:"Honest analysis",
+    drugComparePoint1Title:"Search accuracy & source credibility",
+    drugComparePoint1Body:"VetDict is curated in Japanese by a practicing veterinarian on top of world-standard sources (Plumb's, BSAVA, etc.). Its strength is searching by the generic and brand names actually available in Japan. For pure academic currency on US-FDA approvals, the publisher-run tools (Plumb's latest edition) remain the gold standard.",
+    drugComparePoint2Title:"Usability as a form of accuracy",
+    drugComparePoint2Body:"In VetDict you can type a Japanese symptom like 「嘔吐」 and reach the differential and recommended drugs in two clicks. Information-dense tools like VIN can take longer to surface the specific dose you need right now.",
+    drugComparePoint3Title:"Exotic & special-species coverage",
+    drugComparePoint3Body:"Dosing data for hedgehogs, sugar gliders, fish and similar species is thin in mainstream drug handbooks. VetDict consolidates the essence of references like Carpenter's Formulary into a single Japanese-language interface — a unique advantage.",
+    drugCompareConclTitle:"Recommendation: how to use them together",
+    drugCompareConclDailyLabel:"Daily practice (VetDict):",
+    drugCompareConclDailyBody:"Best for quickly answering 'what's the typical dose for this disease?' or 'what's the dose in this exotic species?' in Japanese.",
+    drugCompareConclAdvLabel:"Complex cases / new drugs (Plumb's / VIN):",
+    drugCompareConclAdvBody:"For multi-drug interaction concerns or the latest adverse-event evidence in the original language, consult Plumb's (paid) or the VIN specialist network.",
+    drugCompareDisclaimer:"Note: Comparison reflects publicly available information on each service as of 2026 and represents general tendencies. Always verify against the primary source and product labeling before clinical decisions.",
     sponsorTagline:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     sponsorSpecies:"Supported species: Horse, Dog, Cat",
     sponsorEquine:"Equine Supplements",sponsorCanine:"Canine Supplements",
@@ -318,6 +404,10 @@ const I18N={
     retry:"Retry",
     reload:"Reload",
     networkError:"Failed to connect to server. Please check your network.",
+    networkErrorTimeout:"The request timed out.",
+    networkErrorOffline:"You appear to be offline. Please check your connection.",
+    networkErrorServer:"Server error.",
+    networkErrorDetail:"Details: ",
     noDiseaseMatch:"No matching diseases",
     noDrugMatch:"No matching drugs",
     errorPrefix:"Error: ",
@@ -442,6 +532,28 @@ function fetchWithTimeout(url,opts={},timeoutMs=10000){
   const ctrl=new AbortController();
   const timer=setTimeout(()=>ctrl.abort(),timeoutMs);
   return fetch(url,{...opts,signal:ctrl.signal}).finally(()=>clearTimeout(timer));
+}
+
+/* Classify a fetch failure for user-facing messaging.
+   Returns {title, detail} pulled from current i18n. */
+function describeFetchError(err){
+  const msg=String(err&&err.message?err.message:err||"");
+  let title=t("networkError");
+  let detail="";
+  if(typeof navigator!=="undefined"&&navigator.onLine===false){
+    title=t("networkErrorOffline");
+  }else if(err&&(err.name==="AbortError"||/aborted|timeout/i.test(msg))){
+    title=t("networkErrorTimeout");
+  }else if(/^HTTP 5\d{2}/.test(msg)){
+    title=t("networkErrorServer");
+    detail=msg;
+  }else if(/^HTTP 4\d{2}/.test(msg)){
+    title=t("networkErrorServer");
+    detail=msg;
+  }else if(msg){
+    detail=msg;
+  }
+  return {title,detail};
 }
 
 function applyLanguage(){
@@ -627,6 +739,20 @@ document.addEventListener("DOMContentLoaded",async()=>{
       if(e.key==="Escape"){
         const kb=document.getElementById("kbShortcutsPanel");
         if(kb&&kb.classList.contains("visible")){kb.classList.remove("visible");return;}
+        const spPanel=document.getElementById("speciesFilterPanel");
+        if(spPanel&&spPanel.style.display!=="none"){
+          spPanel.style.display="none";
+          const trig=document.getElementById("searchFilterBtn");
+          if(trig){trig.setAttribute("aria-expanded","false");trig.focus();}
+          return;
+        }
+        const catPanel=document.getElementById("categoryFilterPanel");
+        if(catPanel&&catPanel.style.display!=="none"){
+          catPanel.style.display="none";
+          const trig=document.getElementById("categoryFilterBtn");
+          if(trig){trig.setAttribute("aria-expanded","false");trig.focus();}
+          return;
+        }
         const open=document.querySelector(".disease-detail.open");
         if(open){const item=open.closest(".disease-db-item");if(item)toggleDbItem(item);}
         return;
@@ -800,14 +926,36 @@ function setupSearchFilters(runSearch){
   const catClose=document.getElementById("categoryFilterCloseBtn");
   const catReset=document.getElementById("categoryFilterResetBtn");
 
+  function setPanelOpen(panel,btn,open){
+    if(!panel||!btn)return;
+    panel.style.display=open?"block":"none";
+    btn.setAttribute("aria-expanded",open?"true":"false");
+    if(!open&&document.activeElement&&panel.contains(document.activeElement)){
+      btn.focus();
+    }
+  }
+  function bindPanelKeydown(panel,btn){
+    if(!panel||!btn)return;
+    panel.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){e.stopPropagation();setPanelOpen(panel,btn,false);}
+    });
+  }
+
   if(spBtn&&spPanel&&spList){
+    spBtn.setAttribute("aria-expanded","false");
+    spBtn.setAttribute("aria-haspopup","dialog");
+    bindPanelKeydown(spPanel,spBtn);
     spBtn.addEventListener("click",()=>{
       const show=spPanel.style.display==="none";
-      spPanel.style.display=show?"block":"none";
-      if(catPanel)catPanel.style.display="none";
-      if(show)renderSpeciesFilterList();
+      setPanelOpen(spPanel,spBtn,show);
+      if(catPanel&&catBtn)setPanelOpen(catPanel,catBtn,false);
+      if(show){
+        renderSpeciesFilterList();
+        const first=spPanel.querySelector(".filter-checkbox,.filter-close");
+        if(first)setTimeout(()=>first.focus(),50);
+      }
     });
-    if(spClose)spClose.addEventListener("click",()=>{spPanel.style.display="none";});
+    if(spClose)spClose.addEventListener("click",()=>setPanelOpen(spPanel,spBtn,false));
     if(spReset)spReset.addEventListener("click",()=>{
       globalSearchSpeciesFilter=null;
       spBtn.classList.remove("filter-active");
@@ -821,19 +969,26 @@ function setupSearchFilters(runSearch){
       if(globalSearchSpeciesFilter===id){globalSearchSpeciesFilter=null;spBtn.classList.remove("filter-active");}
       else{globalSearchSpeciesFilter=id;spBtn.classList.add("filter-active");selectSpecies(id);}
       renderSpeciesFilterList();
-      spPanel.style.display="none";
+      setPanelOpen(spPanel,spBtn,false);
       runSearch();
     });
   }
 
   if(catBtn&&catPanel&&catList){
+    catBtn.setAttribute("aria-expanded","false");
+    catBtn.setAttribute("aria-haspopup","dialog");
+    bindPanelKeydown(catPanel,catBtn);
     catBtn.addEventListener("click",()=>{
       const show=catPanel.style.display==="none";
-      catPanel.style.display=show?"block":"none";
-      if(spPanel)spPanel.style.display="none";
-      if(show)renderCategoryFilterList();
+      setPanelOpen(catPanel,catBtn,show);
+      if(spPanel&&spBtn)setPanelOpen(spPanel,spBtn,false);
+      if(show){
+        renderCategoryFilterList();
+        const first=catPanel.querySelector(".filter-checkbox,.filter-close");
+        if(first)setTimeout(()=>first.focus(),50);
+      }
     });
-    if(catClose)catClose.addEventListener("click",()=>{catPanel.style.display="none";});
+    if(catClose)catClose.addEventListener("click",()=>setPanelOpen(catPanel,catBtn,false));
     if(catReset)catReset.addEventListener("click",()=>{
       globalSearchTypeFilter=null;
       catBtn.classList.remove("filter-active");
@@ -847,7 +1002,7 @@ function setupSearchFilters(runSearch){
       if(globalSearchTypeFilter===type){globalSearchTypeFilter=null;catBtn.classList.remove("filter-active");}
       else{globalSearchTypeFilter=type;catBtn.classList.add("filter-active");}
       renderCategoryFilterList();
-      catPanel.style.display="none";
+      setPanelOpen(catPanel,catBtn,false);
       runSearch();
     });
   }
@@ -1749,7 +1904,7 @@ function doAnalyze(){
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
   .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;if(n>0)showToast(t("diseasesFoundToast").replace("%n%",n),"success");else showToast(t("diseasesNoneFoundToast"),"warning");}const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
-  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){ra.innerHTML=`<div class="severity-bar high" style="display:flex;flex-direction:column;gap:10px"><div>${escapeHtml(t("networkError"))}</div><button class="retry-analyze-btn" style="align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("retry")}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn)retryBtn.addEventListener("click",doAnalyze);}})
+  .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){const info=describeFetchError(err);const detailHtml=info.detail?`<div class="results-error-detail">${escapeHtml(t("networkErrorDetail")+info.detail)}</div>`:"";ra.innerHTML=`<div class="results-error" role="alert"><strong>${escapeHtml(info.title)}</strong>${detailHtml}<button class="retry-analyze-btn" type="button">${escapeHtml(t("retry"))}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn){retryBtn.addEventListener("click",doAnalyze);setTimeout(()=>retryBtn.focus(),50);}}})
   .finally(()=>{clearTimeout(slowTimer);if(btn){btn.disabled=false;btn.textContent=t("analyzeBtn");}if(progress)progress.classList.remove("active");});
 }
 

@@ -12755,38 +12755,6 @@
     "causes_ja": "モルモットにおける腫瘍性の生殖器系疾患。精巣腫瘍は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
   },
   {
-    "name": "Head Tilt",
-    "name_ja": "斜頸（Guinea Pig）",
-    "species": "Guinea Pig",
-    "symptoms": [
-      "appetite_loss",
-      "circling",
-      "head_tilt",
-      "lethargy",
-      "loss_of_balance",
-      "nystagmus",
-      "paralysis",
-      "rolling"
-    ],
-    "description": "Head Tilt in Guinea Pig",
-    "description_ja": "モルモットにおける特発性の神経系疾患。斜頸は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "urgency": "high",
-    "recommended_tests": [
-      "神経学的検査 (Neurological Examination)",
-      "全血球計算 (CBC)",
-      "血液生化学検査 (Blood Chemistry Panel)",
-      "画像診断 (Imaging: X-ray / CT / MRI)"
-    ],
-    "transmission": "Most neurological conditions are not directly transmissible. Certain infectious causes (e.g., rabies, encephalitis viruses) may be transmitted through bites, vectors, or direct contact.",
-    "transmission_ja": "ほとんどの神経疾患は直接伝播しない。特定の感染性原因（例：狂犬病、脳炎ウイルス）は咬傷、媒介動物、直接接触で伝播しうる。",
-    "clinical_signs": "Seizures, ataxia, head tilt, circling, paralysis/paresis, tremors, altered mentation, abnormal reflexes, nystagmus, behavioral changes.",
-    "clinical_signs_ja": "痙攣、運動失調、斜頸、旋回、麻痺・不全麻痺、振戦、意識状態の変化、異常反射、眼振、行動変化。",
-    "diagnosis": "Diagnosis of head tilt is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 神経学的検査 (Neurological Examination), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 画像診断 (Imaging: X-ray / CT / MRI). Differential diagnosis should consider other conditions presenting with similar clinical signs in guinea pig.",
-    "diagnosis_ja": "斜頸（Guinea Pig）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 神経学的検査 (Neurological Examination), 全血球計算 (CBC), 血液生化学検査 (Blood Chemistry Panel), 画像診断 (Imaging: X-ray / CT / MRI)。Guinea Pigにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "モルモットにおける特発性の神経系疾患。斜頸は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "causes_ja": "モルモットにおける特発性の神経系疾患。斜頸は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
-  },
-  {
     "name": "Posterior Paralysis",
     "name_ja": "後肢麻痺（Guinea Pig）",
     "species": "Guinea Pig",
@@ -26768,34 +26736,6 @@
     "causes_ja": "フクロモモンガにおける炎症性の肝臓/胆道疾患。肝炎は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
   },
   {
-    "name": "Dermatophytosis",
-    "name_ja": "皮膚糸状菌症（Sugar Glider）",
-    "species": "Sugar Glider",
-    "symptoms": [
-      "circular_lesions",
-      "crusty_skin",
-      "hair_loss",
-      "itching"
-    ],
-    "description": "Dermatophytosis in Sugar Glider",
-    "description_ja": "フクロモモンガにおける真菌性の皮膚疾患。皮膚糸状菌症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "urgency": "moderate",
-    "recommended_tests": [
-      "真菌培養 (Fungal Culture)",
-      "KOH直接鏡検 (KOH Direct Exam)",
-      "全血球計算 (CBC)",
-      "血清学的検査 (Serology)"
-    ],
-    "transmission": "Transmitted through contact with fungal spores in the environment, contaminated soil, infected animals, or fomites. Spores can remain viable in the environment for months to years.",
-    "transmission_ja": "環境中の真菌胞子、汚染された土壌、感染動物、汚染物との接触で伝播する。胞子は環境中で数ヶ月〜数年間生存可能である。",
-    "clinical_signs": "Skin lesions (alopecia, crusting, scaling), nasal discharge, respiratory distress, subcutaneous nodules, lymphadenopathy, fever, weight loss. Systemic mycoses may cause multi-organ involvement.",
-    "clinical_signs_ja": "皮膚病変（脱毛、痂皮、鱗屑）、鼻汁、呼吸困難、皮下結節、リンパ節腫大、発熱、体重減少。全身性真菌症では多臓器障害を引き起こしうる。",
-    "diagnosis": "Diagnosis of dermatophytosis is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology). Differential diagnosis should consider other conditions presenting with similar clinical signs in sugar glider.",
-    "diagnosis_ja": "皮膚糸状菌症（Sugar Glider）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 真菌培養 (Fungal Culture), KOH直接鏡検 (KOH Direct Exam), 全血球計算 (CBC), 血清学的検査 (Serology)。Sugar Gliderにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "フクロモモンガにおける真菌性の皮膚疾患。皮膚糸状菌症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "causes_ja": "フクロモモンガにおける真菌性の皮膚疾患。皮膚糸状菌症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
-  },
-  {
     "name": "Mite Infestation",
     "name_ja": "ダニ症（Sugar Glider）",
     "species": "Sugar Glider",
@@ -39180,40 +39120,6 @@
     "causes_ja": "鳥におけるウイルス性の多臓器/全身疾患。全身性ウイルス感染は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
   },
   {
-    "name": "Scaly Face Mite (Knemidocoptes)",
-    "name_ja": "疥癬（鱗状顔面）（Parakeet）",
-    "species": "Parakeet",
-    "symptoms": [
-      "anemia",
-      "clicking_sounds",
-      "decreased_appetite",
-      "diarrhea",
-      "itching",
-      "lethargy",
-      "respiratory_distress",
-      "skin_lesions",
-      "weight_loss"
-    ],
-    "description": "Scaly Face Mite (Knemidocoptes) in Parakeet",
-    "description_ja": "インコにおける寄生虫性の皮膚疾患。疥癬（鱗状顔面）は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "urgency": "moderate",
-    "recommended_tests": [
-      "糞便検査 (Fecal Examination)",
-      "糞便浮遊法 (Fecal Flotation)",
-      "全血球計算 (CBC)",
-      "皮膚掻爬検査 (Skin Scraping)"
-    ],
-    "transmission": "Transmitted through ingestion of parasitic eggs/larvae, direct contact with infected animals, vector-mediated transmission (fleas, ticks, mosquitoes), or penetration of larvae through skin.",
-    "transmission_ja": "寄生虫卵・幼虫の経口摂取、感染動物との直接接触、媒介動物（ノミ、ダニ、蚊）による伝播、幼虫の経皮侵入で伝播する。",
-    "clinical_signs": "Pruritus, skin lesions, hair/feather loss, diarrhea, weight loss, anemia, poor coat/feather condition, visible parasites or eggs, pot-bellied appearance in heavy infestations.",
-    "clinical_signs_ja": "掻痒、皮膚病変、脱毛・脱羽、下痢、体重減少、貧血、被毛・羽毛の悪化、寄生虫・虫卵の目視、重度寄生では腹部膨満が見られる。",
-    "diagnosis": "Diagnosis of scaly face mite (knemidocoptes) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping). Differential diagnosis should consider other conditions presenting with similar clinical signs in parakeet.",
-    "diagnosis_ja": "疥癬（鱗状顔面）（Parakeet）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping)。Parakeetにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "K. pilaeが嘴・蝋膜・脚の角質層に穿孔→白〜灰色のハニカム状痂皮→嘴変形。セキセイインコに非常に好発。",
-    "causes_ja": "K. pilae。免疫抑制鳥で顕在化。感染鳥との接触。",
-    "prevention_ja": "イベルメクチン（0.2mg/kg、2週間隔で2〜3回）で完治。"
-  },
-  {
     "name": "Megabacteriosis",
     "name_ja": "メガバクテリア症（Parakeet）",
     "species": "Parakeet",
@@ -49949,38 +49855,6 @@
     "causes_ja": "爬虫類における代謝性の内分泌/代謝疾患。腎性二次性副甲状腺機能亢進症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
   },
   {
-    "name": "Hypovitaminosis A",
-    "name_ja": "ビタミンA欠乏症（Reptile）",
-    "species": "Reptile",
-    "symptoms": [
-      "anorexia",
-      "immunosuppression",
-      "lethargy",
-      "dysecdysis",
-      "skin_lesions",
-      "tremors",
-      "weakness",
-      "weight_loss"
-    ],
-    "description": "Hypovitaminosis A in Reptile",
-    "description_ja": "爬虫類における栄養性の内分泌/代謝疾患。ビタミンA欠乏症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "urgency": "moderate",
-    "recommended_tests": [
-      "血液生化学検査 (Blood Chemistry Panel)",
-      "全血球計算 (CBC)",
-      "食事内容の評価 (Dietary Assessment)",
-      "X線検査 (Radiography)"
-    ],
-    "transmission": "Not transmissible. Nutritional disorders result from dietary imbalances, inappropriate feeding, or individual malabsorption conditions.",
-    "transmission_ja": "伝播性はない。栄養障害は食事の不均衡、不適切な給餌、個体の吸収不良により発生する。",
-    "clinical_signs": "Poor growth, weight loss/obesity, dull coat, lethargy, skeletal abnormalities (MBD), weakness, reproductive failure, organ-specific signs related to the deficient or excess nutrient.",
-    "clinical_signs_ja": "成長不良、体重減少/肥満、被毛の悪化、無気力、骨格異常（MBD）、衰弱、繁殖障害、欠乏または過剰な栄養素に関連した臓器特異的徴候。",
-    "diagnosis": "Diagnosis of hypovitaminosis a is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 血液生化学検査 (Blood Chemistry Panel), 全血球計算 (CBC), 食事内容の評価 (Dietary Assessment), X線検査 (Radiography). Differential diagnosis should consider other conditions presenting with similar clinical signs in reptile.",
-    "diagnosis_ja": "ビタミンA欠乏症（Reptile）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 血液生化学検査 (Blood Chemistry Panel), 全血球計算 (CBC), 食事内容の評価 (Dietary Assessment), X線検査 (Radiography)。Reptileにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "爬虫類における栄養性の内分泌/代謝疾患。ビタミンA欠乏症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "causes_ja": "爬虫類における栄養性の内分泌/代謝疾患。ビタミンA欠乏症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
-  },
-  {
     "name": "Thiamine Deficiency",
     "name_ja": "チアミン欠乏症（Reptile）",
     "species": "Reptile",
@@ -53827,39 +53701,6 @@
     "diagnosis_ja": "甲羅ピラミッド化（Tortoise）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 整形外科学的検査 (Orthopedic Examination), 関節液分析 (Synovial Fluid Analysis), 全血球計算 (CBC)。Tortoiseにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
     "pathophysiology_ja": "リクガメにおける栄養性の筋骨格系疾患。甲羅ピラミッド化は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
     "causes_ja": "リクガメにおける栄養性の筋骨格系疾患。甲羅ピラミッド化は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
-  },
-  {
-    "name": "Shell Fracture",
-    "name_ja": "甲羅骨折（Tortoise）",
-    "species": "Tortoise",
-    "symptoms": [
-      "abdominal_swelling",
-      "anorexia",
-      "bleeding",
-      "lameness",
-      "lethargy",
-      "shell_crack",
-      "skin_discoloration",
-      "skin_lesions",
-      "swelling"
-    ],
-    "description": "Shell Fracture in Tortoise",
-    "description_ja": "リクガメにおける外傷性の筋骨格系疾患。甲羅骨折は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "urgency": "high",
-    "recommended_tests": [
-      "X線検査 (Radiography)",
-      "身体検査 (Physical Examination)",
-      "全血球計算 (CBC)",
-      "超音波検査 (Ultrasonography)"
-    ],
-    "transmission": "Not transmissible. Traumatic conditions result from physical injury, environmental hazards, or accidents.",
-    "transmission_ja": "伝播性はない。外傷性疾患は物理的損傷、環境的危険、事故により発生する。",
-    "clinical_signs": "Pain, swelling, bruising, bleeding, limping/lameness, reduced mobility, wound or tissue damage visible, behavioral changes (hiding, aggression), shock signs in severe cases.",
-    "clinical_signs_ja": "疼痛、腫脹、打撲、出血、跛行、運動性低下、創傷・組織損傷の視認、行動変化（隠れる、攻撃性）、重症例ではショック徴候。",
-    "diagnosis": "Diagnosis of shell fracture is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography). Differential diagnosis should consider other conditions presenting with similar clinical signs in tortoise.",
-    "diagnosis_ja": "甲羅骨折（Tortoise）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography)。Tortoiseにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "リクガメにおける外傷性の筋骨格系疾患。甲羅骨折は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "causes_ja": "リクガメにおける外傷性の筋骨格系疾患。甲羅骨折は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
   },
   {
     "name": "Shell Rot",
@@ -57954,38 +57795,6 @@
     "diagnosis_ja": "餌関連損傷（Snake）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography)。Snakeにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
     "pathophysiology_ja": "ヘビにおける外傷性の多臓器/全身疾患。餌関連損傷は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
     "causes_ja": "ヘビにおける外傷性の多臓器/全身疾患。餌関連損傷は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
-  },
-  {
-    "name": "Retained Spectacle",
-    "name_ja": "眼鏡鱗停滞（Snake）",
-    "species": "Snake",
-    "symptoms": [
-      "anorexia",
-      "body_swelling",
-      "facial_swelling",
-      "lethargy",
-      "nose_abrasion",
-      "skin_lesions",
-      "sudden_death",
-      "weight_loss"
-    ],
-    "description": "Retained Spectacle in Snake",
-    "description_ja": "ヘビにおける代謝性の眼科疾患。眼鏡鱗停滞は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "urgency": "moderate",
-    "recommended_tests": [
-      "X線検査 (Radiography)",
-      "身体検査 (Physical Examination)",
-      "全血球計算 (CBC)",
-      "超音波検査 (Ultrasonography)"
-    ],
-    "transmission": "Not transmissible. Traumatic conditions result from physical injury, environmental hazards, or accidents.",
-    "transmission_ja": "伝播性はない。外傷性疾患は物理的損傷、環境的危険、事故により発生する。",
-    "clinical_signs": "Pain, swelling, bruising, bleeding, limping/lameness, reduced mobility, wound or tissue damage visible, behavioral changes (hiding, aggression), shock signs in severe cases.",
-    "clinical_signs_ja": "疼痛、腫脹、打撲、出血、跛行、運動性低下、創傷・組織損傷の視認、行動変化（隠れる、攻撃性）、重症例ではショック徴候。",
-    "diagnosis": "Diagnosis of retained spectacle is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography). Differential diagnosis should consider other conditions presenting with similar clinical signs in snake.",
-    "diagnosis_ja": "眼鏡鱗停滞（Snake）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: X線検査 (Radiography), 身体検査 (Physical Examination), 全血球計算 (CBC), 超音波検査 (Ultrasonography)。Snakeにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "ヘビにおける代謝性の眼科疾患。眼鏡鱗停滞は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "causes_ja": "ヘビにおける代謝性の眼科疾患。眼鏡鱗停滞は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
   },
   {
     "name": "Thermal Gradient Deficiency Disease",
