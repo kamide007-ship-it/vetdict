@@ -10633,3 +10633,39 @@ def api_drug_interactions(drug_id: str):
         return jsonify({"error": "Drug not found"}), 404
     interactions = get_all_interactions_for_drug(drug_id)
     return jsonify({"drug_id": drug_id, "interactions": interactions, "total": len(interactions)})
+
+
+# ---------------------------------------------------------------------------
+# エビデンスグレード API
+# ---------------------------------------------------------------------------
+from api.evidence_grading import (
+    AI_CONTENT_DISCLAIMER,
+    DIAGNOSTIC_DISCLAIMER,
+    DOSE_CALCULATOR_DISCLAIMER,
+    assess,
+    to_dict as evidence_to_dict,
+)
+
+
+@drug_bp.route("/api/evidence/assess", methods=["POST"])
+def api_evidence_assess():
+    """
+    治療文字列のエビデンス評価。
+    Body JSON: {text: "..."}
+    """
+    data = request.get_json(silent=True) or {}
+    text = data.get("text", "") or ""
+    assessment = assess(text)
+    return jsonify({"assessment": evidence_to_dict(assessment)})
+
+
+@drug_bp.route("/api/disclaimers", methods=["GET"])
+def api_disclaimers():
+    """免責事項テキストを返す"""
+    return jsonify(
+        {
+            "ai_content": AI_CONTENT_DISCLAIMER,
+            "diagnostic": DIAGNOSTIC_DISCLAIMER,
+            "dose_calculator": DOSE_CALCULATOR_DISCLAIMER,
+        }
+    )

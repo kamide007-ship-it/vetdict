@@ -276,6 +276,7 @@ const I18N={
     sharePostFb:"Facebook",sharePostFbSub:"でシェアする",
     sharePostLine:"LINE",sharePostLineSub:"で送る",
     footerRegulatory:"本サービスは獣医師・獣医学生を対象とした臨床意思決定支援ツールです。AI解析結果は鑑別診断の参考情報であり、確定診断・治療方針の決定には臨床所見・検査結果との総合判断が必要です。本サービスは医療機器・動物用医療機器としての承認・認証を受けておらず、FDA（米国食品医薬品局）未承認、農林水産省動物用医療機器未認証です。",
+    footerAiDisclosure:"⚠️ AI生成データの開示: 本データベースの治療プロトコル・症状・推奨検査の一部はAI支援で生成され獣医師レビューを経ています。エビデンスグレード（A/B/C/D）でデータ品質を可視化していますが、用量・薬品相互作用は処方前に必ず原典（Plumb's等）で再確認してください。",
     footerDeveloperHeading:"開発者",
     footerLinksHeading:"リンク",
     footerLegalHeading:"法務",
@@ -509,6 +510,7 @@ const I18N={
     sharePostFb:"Facebook",sharePostFbSub:"Share",
     sharePostLine:"LINE",sharePostLineSub:"Send",
     footerRegulatory:"This service is a clinical decision support tool for veterinarians and veterinary students. AI analysis is a reference for differential diagnosis; definitive diagnosis and treatment decisions require integration with clinical findings and diagnostic results. This service is not approved or certified as a medical device or veterinary medical device — not FDA-approved (US) and not certified by Japan's Ministry of Agriculture, Forestry and Fisheries.",
+    footerAiDisclosure:"⚠️ AI-Generated Data Disclosure: Portions of treatment protocols, symptoms, and recommended diagnostics in this database are AI-assisted and reviewed by veterinarians. Evidence grades (A/B/C/D) indicate data quality, but always verify doses and drug interactions against authoritative sources (Plumb's, etc.) before prescribing.",
     footerDeveloperHeading:"Developer",
     footerLinksHeading:"Links",
     footerLegalHeading:"Legal",
@@ -2434,7 +2436,7 @@ function renderDiseaseCard(d,data){
           <div class="detail-section-body">${escapeHtml(causes)}</div>
         </div>
         <div class="detail-section">
-          <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")}</div>
+          <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</div>
           <div class="detail-section-body">${renderTreatmentWithAdjunct(treatment)}</div>
         </div>
         <div class="detail-section">
@@ -2686,7 +2688,7 @@ function renderDiseaseDb(){
         <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
         <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
         <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
-        <dt>${t("dtTreatment")}</dt><dd>${renderTreatmentWithAdjunct(treatment)}</dd>
+        <dt>${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</dt><dd>${renderTreatmentWithAdjunct(treatment)}</dd>
         <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
         ${(d.symptoms_display&&d.symptoms_display.length)?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(d.symptoms_display.map(s=>currentLang==="ja"?(s.name_ja||s.id):(s.name_en||s.id)).join("、"))}</dd>`:(d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:"")}
         ${(d.recommended_tests_display&&d.recommended_tests_display.length)?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests_display.map(x=>currentLang==="ja"?(x.name_ja||x.id):(x.name_en||x.id)).join("、"))}</dd>`:(d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:"")}
@@ -2966,6 +2968,17 @@ function sendChatMessage(){
 function renderChatResult(container,data){
   const wrapper=document.createElement("div");
   wrapper.className="chat-msg bot chat-result";
+
+  // 0. AI/clinical disclaimer banner (shown once per result)
+  const disclaim=document.createElement("div");
+  disclaim.className="chat-disclaimer-banner";
+  disclaim.setAttribute("role","note");
+  const disclaimText=currentLang==="ja"
+    ?"⚠ AI鑑別診断結果は参考情報です。確定診断には病歴・身体検査・追加検査との総合判断が必要です。"
+    :"⚠ AI differential diagnosis results are reference information. Definitive diagnosis requires integration with history, physical exam, and additional diagnostics.";
+  disclaim.style.cssText="font-size:.74rem;color:#92400e;background:#fef3c7;border-left:3px solid #d97706;padding:8px 10px;border-radius:4px;margin-bottom:10px;line-height:1.5";
+  disclaim.textContent=disclaimText;
+  wrapper.appendChild(disclaim);
 
   // 1. Species guidance
   if(data.species_guidance){
@@ -3645,6 +3658,40 @@ function loadDrugDictionary(){
     // Interaction checker
     setupInteractionChecker();
   }
+}
+
+// Evidence grading helper - assesses treatment text severity
+function evidenceBadge(grade){
+  if(!grade)return"";
+  const labels={A:{ja:"高エビデンス",en:"Strong"},B:{ja:"中等度",en:"Moderate"},C:{ja:"限定的",en:"Limited"},D:{ja:"不明",en:"Unclear"}};
+  const colors={A:"#16a34a",B:"#0891b2",C:"#d97706",D:"#6b7280"};
+  const label=(labels[grade]||labels.D)[currentLang]||(labels[grade]||labels.D).en;
+  const color=colors[grade]||colors.D;
+  return `<span class="evidence-badge" title="${currentLang==="ja"?"エビデンスグレード":"Evidence grade"}: ${grade}" style="display:inline-block;padding:2px 8px;background:${color};color:#fff;border-radius:10px;font-size:.66rem;font-weight:700;letter-spacing:.05em;margin-left:6px;vertical-align:middle">${grade} · ${label}</span>`;
+}
+
+// Quick client-side grading without API call (for performance)
+function quickAssessGrade(text){
+  if(!text||text.length<10)return"D";
+  const tl=text.toLowerCase();
+  const hasHighRef=/\b(acvim|aaha|aafp|isfm|wsava|recover|iscaid|ecvn|bsava)\b/i.test(text);
+  const hasTextbookRef=/\b(plumb|lumb|jones|ettinger|stashak|mader|quesenberry|carpenter|dixon)\b/i.test(text);
+  const hasJournalRef=/\b(javma|jvim|jfms|jsap|jaaha)\b/i.test(text);
+  const hasYearRef=/\(\d{4}\)|\bRef:|\b(19|20)\d{2}\b/i.test(text);
+  const hasDose=/\d+(?:\.\d+)?\s*(?:[-~–]\s*\d+(?:\.\d+)?)?\s*(?:mg|μg|ug|mcg|g|iu|u)\s*\/\s*kg/i.test(text);
+  const hasRoute=/\b(IV|IM|SC|PO|IO|IP|topical|inhaled|nebulized)\b/.test(text);
+  const hasInterval=/\bq\d+(?:[-~–]\d+)?\s*(?:h|d|wk)\b/i.test(text);
+  const hasMonitoring=/(monitor|monitoring|モニタリング|監視|trough|level|BUN|creatinine|PCV|血糖)/i.test(tl);
+  let score=0;
+  if(hasHighRef)score+=40;else if(hasTextbookRef)score+=30;else if(hasJournalRef)score+=25;else if(hasYearRef)score+=10;
+  if(hasDose)score+=20;
+  if(hasRoute)score+=15;
+  if(hasInterval)score+=10;
+  if(hasMonitoring)score+=15;
+  if(score>=70&&(hasHighRef||hasTextbookRef))return"A";
+  if(score>=50)return"B";
+  if(score>=25)return"C";
+  return"D";
 }
 
 function setupInteractionChecker(){
