@@ -15,38 +15,68 @@ from .helpers import ADVICE, analyze_symptoms_generic, enrich_diseases
 # Category mapping for symptom checkbox UI
 SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 体表・外観
-    "white_spots": "skin", "cotton_like_growth": "skin", "fin_rot": "skin",
-    "scale_loss": "skin", "raised_scales": "skin", "ulcers": "skin",
-    "redness_skin": "skin", "mucus_overproduction": "skin",
-    "discoloration": "skin", "dark_coloration": "skin", "white_film": "skin",
-    "gold_dust": "skin", "lumps_nodules": "skin",
-    "body_darkening": "skin", "fin_damage": "skin", "fin_discoloration": "skin",
-    "fin_erosion": "skin", "skin_ulcers": "skin",
-    "worm_like_parasites": "parasites", "anchor_worm": "parasites",
+    "white_spots": "skin",
+    "cotton_like_growth": "skin",
+    "fin_rot": "skin",
+    "scale_loss": "skin",
+    "raised_scales": "skin",
+    "ulcers": "skin",
+    "redness_skin": "skin",
+    "mucus_overproduction": "skin",
+    "discoloration": "skin",
+    "dark_coloration": "skin",
+    "white_film": "skin",
+    "gold_dust": "skin",
+    "lumps_nodules": "skin",
+    "body_darkening": "skin",
+    "fin_damage": "skin",
+    "fin_discoloration": "skin",
+    "fin_erosion": "skin",
+    "skin_ulcers": "skin",
+    "worm_like_parasites": "parasites",
+    "anchor_worm": "parasites",
     # 鰭
-    "clamped_fins": "fins", "frayed_fins": "fins", "fin_hemorrhage": "fins",
+    "clamped_fins": "fins",
+    "frayed_fins": "fins",
+    "fin_hemorrhage": "fins",
     # 眼
-    "pop_eye": "eyes", "eye_bulging": "eye", "sunken_eye": "eyes",
+    "pop_eye": "eyes",
+    "eye_bulging": "eye",
+    "sunken_eye": "eyes",
     # 鰓
-    "gill_redness": "gills", "gill_paleness": "gills", "gill_swelling": "gills",
-    "gill_mucus": "gills", "rapid_gill_movement": "gills",
+    "gill_redness": "gills",
+    "gill_paleness": "gills",
+    "gill_swelling": "gills",
+    "gill_mucus": "gills",
+    "rapid_gill_movement": "gills",
     # 行動
-    "flashing": "behavior", "lethargy": "behavior", "loss_of_appetite": "behavior",
-    "gasping_surface": "behavior", "erratic_swimming": "behavior",
-    "loss_of_balance": "behavior", "swimming_upside_down": "behavior",
-    "hiding": "behavior", "isolation": "behavior",
-    "abnormal_swimming": "behavioral", "appetite_loss": "general",
+    "flashing": "behavior",
+    "lethargy": "behavior",
+    "loss_of_appetite": "behavior",
+    "gasping_surface": "behavior",
+    "erratic_swimming": "behavior",
+    "loss_of_balance": "behavior",
+    "swimming_upside_down": "behavior",
+    "hiding": "behavior",
+    "isolation": "behavior",
+    "abnormal_swimming": "behavioral",
+    "appetite_loss": "general",
     # 腹部・体型
-    "bloating": "body", "emaciation": "body", "dropsy": "body", "bent_spine": "body",
+    "bloating": "body",
+    "emaciation": "body",
+    "dropsy": "body",
+    "bent_spine": "body",
     "hemorrhaging": "body",
     # 排泄
     "white_stringy_feces": "digestive",
     # 呼吸
-    "labored_breathing": "respiratory", "pale_gills": "respiratory",
+    "labored_breathing": "respiratory",
+    "pale_gills": "respiratory",
     # 繁殖
     "egg_binding": "reproductive",
     # 急変
-    "sudden_death": "emergency", "mass_mortality": "emergency",
+    "sudden_death": "emergency",
+    "mass_mortality": "emergency",
 }
 
 SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
@@ -140,7 +170,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Columnaris Disease",
         "name_ja": "カラムナリス病（尾ぐされ病・口ぐされ病）",
-        "symptoms": {"fin_rot", "frayed_fins", "ulcers", "white_film", "cotton_like_growth", "gill_redness", "lethargy", "loss_of_appetite"},
+        "symptoms": {
+            "fin_rot",
+            "frayed_fins",
+            "ulcers",
+            "white_film",
+            "cotton_like_growth",
+            "gill_redness",
+            "lethargy",
+            "loss_of_appetite",
+        },
         "description": "Bacterial infection caused by Flavobacterium columnare. Affects skin, fins, and gills.",
         "description_ja": "Flavobacterium columnare による細菌感染症。皮膚、鰭、鰓に病変を形成。",
         "urgency": "high",
@@ -161,7 +200,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Aeromonas / Motile Aeromonad Septicemia",
         "name_ja": "エロモナス感染症（運動性エロモナス敗血症）",
-        "symptoms": {"ulcers", "redness_skin", "raised_scales", "dropsy", "pop_eye", "fin_hemorrhage", "lethargy", "loss_of_appetite", "bloating"},
+        "symptoms": {
+            "ulcers",
+            "redness_skin",
+            "raised_scales",
+            "dropsy",
+            "pop_eye",
+            "fin_hemorrhage",
+            "lethargy",
+            "loss_of_appetite",
+            "bloating",
+        },
         "description": "Opportunistic bacterial infection by Aeromonas hydrophila and related species, often secondary to stress or poor water quality.",
         "description_ja": "Aeromonas hydrophila 等による日和見細菌感染。ストレスや水質悪化が発症の背景にあることが多い。",
         "urgency": "high",
@@ -203,7 +252,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Velvet Disease (Oodinium / Piscinoodinium)",
         "name_ja": "コショウ病（ウーディニウム症）",
-        "symptoms": {"gold_dust", "flashing", "clamped_fins", "rapid_gill_movement", "lethargy", "loss_of_appetite", "labored_breathing"},
+        "symptoms": {
+            "gold_dust",
+            "flashing",
+            "clamped_fins",
+            "rapid_gill_movement",
+            "lethargy",
+            "loss_of_appetite",
+            "labored_breathing",
+        },
         "description": "Parasitic infection caused by Piscinoodinium (freshwater) or Amyloodinium (marine). Often mistaken for Ich but spots are finer.",
         "description_ja": "淡水では Piscinoodinium、海水では Amyloodinium による寄生虫感染。白点病に似るが斑点はより微細。",
         "urgency": "high",
@@ -308,7 +365,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Gill Flukes (Dactylogyrus)",
         "name_ja": "鰓吸虫症（ダクチロギルス症）",
-        "symptoms": {"rapid_gill_movement", "gasping_surface", "gill_redness", "gill_mucus", "flashing", "lethargy", "loss_of_appetite"},
+        "symptoms": {
+            "rapid_gill_movement",
+            "gasping_surface",
+            "gill_redness",
+            "gill_mucus",
+            "flashing",
+            "lethargy",
+            "loss_of_appetite",
+        },
         "description": "Monogenean trematode parasites infecting the gills. Causes respiratory distress and secondary bacterial infections.",
         "description_ja": "鰓に寄生する単生吸虫。呼吸困難と二次的な細菌感染を引き起こす。",
         "urgency": "high",
@@ -393,7 +458,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Mycobacteriosis (Fish Tuberculosis)",
         "name_ja": "抗酸菌症（魚結核）",
-        "symptoms": {"emaciation", "lethargy", "loss_of_appetite", "ulcers", "bent_spine", "pop_eye", "scale_loss", "dark_coloration"},
+        "symptoms": {
+            "emaciation",
+            "lethargy",
+            "loss_of_appetite",
+            "ulcers",
+            "bent_spine",
+            "pop_eye",
+            "scale_loss",
+            "dark_coloration",
+        },
         "description": "Chronic bacterial infection caused by Mycobacterium marinum and related species. Zoonotic — can cause granulomas in humans.",
         "description_ja": "Mycobacterium marinum 等による慢性細菌感染。人獣共通感染症 — ヒトに肉芽腫を形成しうる。",
         "urgency": "high",
@@ -414,7 +488,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Ammonia Poisoning",
         "name_ja": "アンモニア中毒",
-        "symptoms": {"gasping_surface", "gill_redness", "redness_skin", "lethargy", "erratic_swimming", "loss_of_appetite", "rapid_gill_movement", "mucus_overproduction"},
+        "symptoms": {
+            "gasping_surface",
+            "gill_redness",
+            "redness_skin",
+            "lethargy",
+            "erratic_swimming",
+            "loss_of_appetite",
+            "rapid_gill_movement",
+            "mucus_overproduction",
+        },
         "description": "Toxic condition caused by elevated ammonia levels, typically in new or overstocked aquariums.",
         "description_ja": "アンモニア濃度の上昇による中毒。新規立ち上げ水槽や過密飼育水槽で発生しやすい。",
         "urgency": "emergency",
@@ -435,7 +518,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Nitrite Poisoning (Brown Blood Disease)",
         "name_ja": "亜硝酸中毒（褐色血液病）",
-        "symptoms": {"gasping_surface", "gill_paleness", "lethargy", "dark_coloration", "rapid_gill_movement", "sudden_death"},
+        "symptoms": {
+            "gasping_surface",
+            "gill_paleness",
+            "lethargy",
+            "dark_coloration",
+            "rapid_gill_movement",
+            "sudden_death",
+        },
         "description": "Caused by elevated nitrite levels which convert hemoglobin to methemoglobin, reducing oxygen-carrying capacity.",
         "description_ja": "亜硝酸濃度の上昇によりヘモグロビンがメトヘモグロビンに変換され、酸素運搬能が低下。",
         "urgency": "emergency",
@@ -456,7 +546,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "pH Shock",
         "name_ja": "pH ショック",
-        "symptoms": {"erratic_swimming", "gasping_surface", "mucus_overproduction", "lethargy", "sudden_death", "mass_mortality"},
+        "symptoms": {
+            "erratic_swimming",
+            "gasping_surface",
+            "mucus_overproduction",
+            "lethargy",
+            "sudden_death",
+            "mass_mortality",
+        },
         "description": "Acute stress caused by rapid pH changes. Even small rapid shifts can be fatal.",
         "description_ja": "急激なpH変化によるショック。わずかな急変でも致死的になりうる。",
         "urgency": "emergency",
@@ -477,7 +574,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Costia (Ichthyobodo)",
         "name_ja": "コスチア症（イクチオボド症）",
-        "symptoms": {"mucus_overproduction", "white_film", "flashing", "clamped_fins", "gill_mucus", "rapid_gill_movement", "lethargy"},
+        "symptoms": {
+            "mucus_overproduction",
+            "white_film",
+            "flashing",
+            "clamped_fins",
+            "gill_mucus",
+            "rapid_gill_movement",
+            "lethargy",
+        },
         "description": "Protozoan ectoparasite that causes excessive mucus production and skin irritation.",
         "description_ja": "体表に寄生する原虫。過剰な粘液産生と皮膚刺激を引き起こす。",
         "urgency": "moderate",
@@ -498,7 +603,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Trichodina",
         "name_ja": "トリコディナ症",
-        "symptoms": {"flashing", "mucus_overproduction", "gill_mucus", "clamped_fins", "lethargy", "loss_of_appetite", "white_film"},
+        "symptoms": {
+            "flashing",
+            "mucus_overproduction",
+            "gill_mucus",
+            "clamped_fins",
+            "lethargy",
+            "loss_of_appetite",
+            "white_film",
+        },
         "description": "Ciliate protozoan ectoparasite. Usually secondary to poor water quality or immunosuppression.",
         "description_ja": "体表に寄生する繊毛虫。水質悪化や免疫低下に続発することが多い。",
         "urgency": "moderate",
@@ -540,7 +653,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Koi Herpesvirus Disease (KHV / CyHV-3)",
         "name_ja": "コイヘルペスウイルス病（KHV）",
-        "symptoms": {"gill_redness", "gill_swelling", "gill_paleness", "gasping_surface", "lethargy", "loss_of_appetite", "sunken_eye", "mucus_overproduction", "mass_mortality"},
+        "symptoms": {
+            "gill_redness",
+            "gill_swelling",
+            "gill_paleness",
+            "gasping_surface",
+            "lethargy",
+            "loss_of_appetite",
+            "sunken_eye",
+            "mucus_overproduction",
+            "mass_mortality",
+        },
         "description": "Highly contagious viral disease of common and koi carp. Notifiable disease in many countries. Mortality can reach 80-100%.",
         "description_ja": "マゴイ・ニシキゴイの高伝染性ウイルス疾患。多くの国で届出義務あり。致死率は80-100%に達しうる。",
         "urgency": "emergency",
@@ -561,7 +684,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Spring Viremia of Carp (SVC)",
         "name_ja": "コイ春ウイルス血症（SVC）",
-        "symptoms": {"bloating", "dropsy", "pop_eye", "redness_skin", "fin_hemorrhage", "lethargy", "loss_of_appetite", "erratic_swimming", "mass_mortality"},
+        "symptoms": {
+            "bloating",
+            "dropsy",
+            "pop_eye",
+            "redness_skin",
+            "fin_hemorrhage",
+            "lethargy",
+            "loss_of_appetite",
+            "erratic_swimming",
+            "mass_mortality",
+        },
         "description": "Viral disease of cyprinids caused by Rhabdovirus carpio. Occurs in spring when water temperatures rise to 10-17°C.",
         "description_ja": "ラブドウイルス・カルピオによるコイ科魚類のウイルス疾患。水温が10-17°Cに上昇する春に発生。",
         "urgency": "emergency",
@@ -624,7 +757,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Marine Ich (Cryptocaryon irritans)",
         "name_ja": "海水白点病（クリプトカリオン症）",
-        "symptoms": {"white_spots", "flashing", "clamped_fins", "rapid_gill_movement", "loss_of_appetite", "lethargy", "labored_breathing"},
+        "symptoms": {
+            "white_spots",
+            "flashing",
+            "clamped_fins",
+            "rapid_gill_movement",
+            "loss_of_appetite",
+            "lethargy",
+            "labored_breathing",
+        },
         "description": "Marine equivalent of freshwater Ich, caused by Cryptocaryon irritans. Extremely common in marine aquariums.",
         "description_ja": "淡水白点病の海水版。Cryptocaryon irritans による。海水水槽で極めて一般的。",
         "urgency": "high",
@@ -648,33 +789,30 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Fin Rot (Bacterial/Fungal)",
         "name_ja": "尾ぐされ病（フィンロット）",
-        "symptoms": {"fin_damage", "frayed_fins", "fin_discoloration", "lethargy",
-                      "appetite_loss", "fin_erosion"},
+        "symptoms": {"fin_damage", "frayed_fins", "fin_discoloration", "lethargy", "appetite_loss", "fin_erosion"},
         "description": "Progressive destruction of fin tissue by opportunistic bacteria (Aeromonas, Pseudomonas, Flavobacterium) or fungi.",
         "description_ja": "ヒレ組織の進行性壊死。Aeromonas, Pseudomonas, Flavobacterium等の"
-                          "日和見細菌、またはSaprolegnia等の真菌が原因。"
-                          "水質悪化・ストレス・外傷が発症の引き金。金魚・ベタに多い。"
-                          "軽度は白濁→進行するとヒレの崩壊・出血。",
+        "日和見細菌、またはSaprolegnia等の真菌が原因。"
+        "水質悪化・ストレス・外傷が発症の引き金。金魚・ベタに多い。"
+        "軽度は白濁→進行するとヒレの崩壊・出血。",
         "pathophysiology": "Water quality deterioration weakens fish immune defenses; opportunistic bacteria colonize damaged fin margins, producing proteolytic enzymes that progressively destroy fin tissue.",
         "pathophysiology_ja": "水質悪化→魚の免疫低下→ヒレ辺縁への日和見菌定着→"
-                              "タンパク分解酵素によるヒレ組織の進行性破壊。"
-                              "ヒレ辺縁の白濁→壊死→ヒレ条の露出→基部への波及→体幹への二次感染。",
+        "タンパク分解酵素によるヒレ組織の進行性破壊。"
+        "ヒレ辺縁の白濁→壊死→ヒレ条の露出→基部への波及→体幹への二次感染。",
         "causes": "Poor water quality (high ammonia/nitrite), overcrowding, fin nipping, stress, temperature fluctuations.",
-        "causes_ja": "水質悪化（高アンモニア・高亜硝酸）、過密飼育、ヒレかじり、"
-                     "ストレス、急激な水温変動、外傷。",
+        "causes_ja": "水質悪化（高アンモニア・高亜硝酸）、過密飼育、ヒレかじり、ストレス、急激な水温変動、外傷。",
         "treatment": "Water quality improvement is the foundation; antibacterial medications for moderate to severe cases.",
         "treatment_ja": "水質改善が最優先（部分換水50%、フィルター清掃）。"
-                        "軽度：0.3%塩水浴（食塩3g/L）で回復可能。"
-                        "中等度：抗菌薬浴（エルバージュエース、グリーンFゴールドリキッド）。"
-                        "重度：隔離治療＋グリーンFゴールド顆粒（ニトロフラゾン系）。"
-                        "真菌性：メチレンブルー浴＋塩水浴。",
+        "軽度：0.3%塩水浴（食塩3g/L）で回復可能。"
+        "中等度：抗菌薬浴（エルバージュエース、グリーンFゴールドリキッド）。"
+        "重度：隔離治療＋グリーンFゴールド顆粒（ニトロフラゾン系）。"
+        "真菌性：メチレンブルー浴＋塩水浴。",
         "prevention": "Maintain water quality, avoid overcrowding, regular water changes, compatible tankmates.",
         "prevention_ja": "定期的な水換え（週1回25〜30%）。適切な飼育密度。"
-                         "水質パラメータの定期測定（NH3, NO2, NO3）。"
-                         "ヒレをかじる魚種との混泳を避ける。",
+        "水質パラメータの定期測定（NH3, NO2, NO3）。"
+        "ヒレをかじる魚種との混泳を避ける。",
         "prognosis": "Good if caught early with water quality correction; fin tissue can regenerate. Poor if infection reaches body.",
-        "prognosis_ja": "早期で水質改善すれば予後良好。ヒレは再生能力がある。"
-                        "体幹まで感染が波及した場合は予後不良。",
+        "prognosis_ja": "早期で水質改善すれば予後良好。ヒレは再生能力がある。体幹まで感染が波及した場合は予後不良。",
         "urgency": "moderate",
         "recommended_tests": ["water_quality_test", "skin_scraping_microscopy"],
         "onset_pattern": {"subacute", "chronic"},
@@ -683,31 +821,39 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Viral Hemorrhagic Septicemia (VHS)",
         "name_ja": "ウイルス性出血性敗血症（VHS）",
-        "symptoms": {"hemorrhaging", "lethargy", "appetite_loss", "abnormal_swimming",
-                      "pale_gills", "body_darkening", "eye_bulging", "sudden_death"},
+        "symptoms": {
+            "hemorrhaging",
+            "lethargy",
+            "appetite_loss",
+            "abnormal_swimming",
+            "pale_gills",
+            "body_darkening",
+            "eye_bulging",
+            "sudden_death",
+        },
         "description": "Highly lethal rhabdovirus infection causing systemic hemorrhages, reportable disease in many countries.",
         "description_ja": "VHSウイルス（ラブドウイルス科）による致死率の高い全身性出血性疾患。"
-                          "淡水魚・海水魚の80種以上に感染。ニジマス・コイ・ヒラメ等で重要。"
-                          "法定伝染病（OIE届出疾病）。冬季〜春季に多発。",
+        "淡水魚・海水魚の80種以上に感染。ニジマス・コイ・ヒラメ等で重要。"
+        "法定伝染病（OIE届出疾病）。冬季〜春季に多発。",
         "pathophysiology": "VHSV enters via gills, replicates in endothelial cells causing widespread hemorrhages in skin, muscles, viscera, and brain.",
         "pathophysiology_ja": "VHSVが鰓から侵入→血管内皮細胞で増殖→全身性の血管内皮障害→"
-                              "皮膚・筋肉・内臓・脳の広範な点状出血・斑状出血→"
-                              "貧血・循環不全→死亡。神経型では旋回遊泳・異常行動。"
-                              "致死率は感受性魚種で70〜100%に達する。",
+        "皮膚・筋肉・内臓・脳の広範な点状出血・斑状出血→"
+        "貧血・循環不全→死亡。神経型では旋回遊泳・異常行動。"
+        "致死率は感受性魚種で70〜100%に達する。",
         "causes": "Viral hemorrhagic septicemia virus (VHSV, Rhabdoviridae). Transmitted via water, direct contact, contaminated equipment.",
         "causes_ja": "VHSウイルス（ラブドウイルス科Novirhabdovirus属）。"
-                     "水平感染（水中・直接接触・汚染器具）。低水温（4〜14℃）で活発化。"
-                     "キャリア魚からのウイルス排泄。",
+        "水平感染（水中・直接接触・汚染器具）。低水温（4〜14℃）で活発化。"
+        "キャリア魚からのウイルス排泄。",
         "treatment": "No treatment available. Depopulation and disinfection required for outbreak control.",
         "treatment_ja": "特異的治療法なし。法定伝染病のため殺処分・消毒が原則。"
-                        "観賞魚では隔離＋水温上昇（15℃以上）で一部の個体は回復する場合あり。"
-                        "感染水槽の器具は次亜塩素酸等で徹底消毒。",
+        "観賞魚では隔離＋水温上昇（15℃以上）で一部の個体は回復する場合あり。"
+        "感染水槽の器具は次亜塩素酸等で徹底消毒。",
         "prevention": "Quarantine new fish, biosecurity, avoid introduction of wild-caught fish from endemic areas.",
         "prevention_ja": "新規魚の厳格な検疫（4〜6週間）。生体購入先の信頼性確認。"
-                         "野生魚の導入禁止。器具の消毒。低水温期の注意深い観察。",
+        "野生魚の導入禁止。器具の消毒。低水温期の注意深い観察。",
         "prognosis": "Very poor; high mortality in susceptible species. Survivors may become carriers.",
         "prognosis_ja": "極めて不良。感受性魚種での致死率70〜100%。"
-                        "生存個体はキャリアとなりウイルスを排泄し続ける可能性。",
+        "生存個体はキャリアとなりウイルスを排泄し続ける可能性。",
         "urgency": "emergency",
         "recommended_tests": ["pcr", "virus_isolation", "histopathology", "serology"],
         "onset_pattern": {"acute"},
@@ -716,32 +862,38 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Furunculosis (Aeromonas salmonicida)",
         "name_ja": "せつ腫症（フルンクローシス）",
-        "symptoms": {"skin_ulcers", "hemorrhaging", "lethargy", "appetite_loss",
-                      "body_darkening", "fin_erosion", "sudden_death"},
+        "symptoms": {
+            "skin_ulcers",
+            "hemorrhaging",
+            "lethargy",
+            "appetite_loss",
+            "body_darkening",
+            "fin_erosion",
+            "sudden_death",
+        },
         "description": "Systemic bacterial infection by Aeromonas salmonicida, primarily affecting salmonids but also ornamental fish.",
         "description_ja": "Aeromonas salmonicidaによる全身性細菌感染症。"
-                          "サケ科魚類（ニジマス・アマゴ等）に最も重要だが、金魚・コイにも発生。"
-                          "皮膚の癤（せつ＝おでき）状病変が特徴的。急性型では大量死。"
-                          "養殖場では大きな経済的損失を引き起こす。",
+        "サケ科魚類（ニジマス・アマゴ等）に最も重要だが、金魚・コイにも発生。"
+        "皮膚の癤（せつ＝おでき）状病変が特徴的。急性型では大量死。"
+        "養殖場では大きな経済的損失を引き起こす。",
         "pathophysiology": "A. salmonicida produces A-layer protein and extracellular proteases that evade host defenses and cause tissue necrosis, hemorrhagic septicemia.",
         "pathophysiology_ja": "A. salmonicidaのA層タンパク（免疫回避）と細胞外プロテアーゼ→"
-                              "皮膚・筋肉の局所壊死（癤形成）→血行性播種→"
-                              "出血性敗血症→多臓器不全。急性型では癤形成なしに大量死。"
-                              "慢性型では皮膚潰瘍が主体。",
+        "皮膚・筋肉の局所壊死（癤形成）→血行性播種→"
+        "出血性敗血症→多臓器不全。急性型では癤形成なしに大量死。"
+        "慢性型では皮膚潰瘍が主体。",
         "causes": "Aeromonas salmonicida subsp. salmonicida. Stress, high water temperature, overcrowding, poor water quality.",
         "causes_ja": "Aeromonas salmonicida。ストレス・高水温・過密飼育・水質悪化がトリガー。"
-                     "キャリア魚からの水平感染。汚染器具による機械的伝播。",
+        "キャリア魚からの水平感染。汚染器具による機械的伝播。",
         "treatment": "Antibiotics (oxytetracycline, florfenicol) via medicated feed; improve water quality.",
         "treatment_ja": "抗菌薬経口投与（薬餌）：オキシテトラサイクリン（50〜75mg/kg/日、10日間）、"
-                        "フロルフェニコール（10mg/kg/日、10日間）。"
-                        "薬浴：オキソリン酸浴。水質改善。ストレス要因の除去。"
-                        "潰瘍の局所処理（ポビドンヨード塗布）。",
+        "フロルフェニコール（10mg/kg/日、10日間）。"
+        "薬浴：オキソリン酸浴。水質改善。ストレス要因の除去。"
+        "潰瘍の局所処理（ポビドンヨード塗布）。",
         "prevention": "Vaccination (available for salmonids), quarantine, stress reduction, good water quality.",
         "prevention_ja": "ワクチン接種（サケ科魚類用は利用可能）。新規魚の検疫。"
-                         "適切な飼育密度。水質管理。ストレス軽減。器具の消毒。",
+        "適切な飼育密度。水質管理。ストレス軽減。器具の消毒。",
         "prognosis": "Guarded in acute outbreaks; better with early antibiotic treatment.",
-        "prognosis_ja": "急性爆発時は予後不良（致死率50%以上）。"
-                        "早期の抗菌薬投与で改善可能。慢性型は予後やや良好。",
+        "prognosis_ja": "急性爆発時は予後不良（致死率50%以上）。早期の抗菌薬投与で改善可能。慢性型は予後やや良好。",
         "urgency": "high",
         "recommended_tests": ["bacterial_culture", "skin_scraping_microscopy", "pcr", "histopathology"],
         "onset_pattern": {"acute", "subacute"},
