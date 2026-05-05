@@ -24,6 +24,12 @@ from api.drug_batch_6 import DRUG_INTERACTIONS_PATCH_6, DRUGS_BATCH_6, SPECIES_I
 from api.drug_batch_7 import CHINCHILLA_SPECIES_PATCH
 from api.drug_batch_8 import DRUGS_BATCH_8
 from api.drug_batch_9 import DRUGS_BATCH_9, ISCAID_UTI_NOTES_PATCH
+from api.drug_batch_10 import DRUGS_BATCH_10
+from api.drug_batch_11 import DRUGS_BATCH_11
+from api.drug_batch_12 import DRUGS_BATCH_12
+from api.drug_batch_13 import DRUGS_BATCH_13
+from api.drug_batch_14 import DRUGS_BATCH_14
+from api.drug_batch_15 import DRUGS_BATCH_15
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -68,6 +74,17 @@ DRUG_CATEGORIES: Dict[str, Dict[str, str]] = {
     "analgesics_lactation": {"ja": "鎮痛・乳汁分泌促進薬", "en": "Analgesics (Lactation Use)"},
     "anticoagulants": {"ja": "抗凝固薬", "en": "Anticoagulants"},
     "vitamins_minerals": {"ja": "ビタミン・ミネラル", "en": "Vitamins & Minerals"},
+    "behavioral": {"ja": "行動薬・向精神薬", "en": "Behavioral / Psychotropic Drugs"},
+    "antineoplastic": {"ja": "抗腫瘍薬", "en": "Antineoplastic Agents"},
+    "antiparasitic": {"ja": "駆虫薬・抗寄生虫薬", "en": "Antiparasitic Agents"},
+    "dermatology": {"ja": "皮膚科薬", "en": "Dermatology"},
+    "gastrointestinal": {"ja": "消化器薬", "en": "Gastrointestinal"},
+    "hepatic": {"ja": "肝臓保護薬", "en": "Hepatoprotective Agents"},
+    "musculoskeletal": {"ja": "筋骨格薬", "en": "Musculoskeletal Drugs"},
+    "ophthalmology": {"ja": "眼科薬", "en": "Ophthalmology"},
+    "reproductive": {"ja": "生殖薬", "en": "Reproductive Drugs"},
+    "analgesic": {"ja": "鎮痛薬", "en": "Analgesics"},
+    "miscellaneous": {"ja": "その他", "en": "Miscellaneous"},
 }
 
 
@@ -10438,6 +10455,14 @@ for _drug_id, _species_notes in ISCAID_UTI_NOTES_PATCH.items():
                     _si[_sp]["notes"] += _patch["notes_append"]
                 if "notes_ja_append" in _patch and "notes_ja" in _si[_sp]:
                     _si[_sp]["notes_ja"] += _patch["notes_ja_append"]
+
+# バッチ10-15 薬品を統合（抗菌薬・CNS・循環器・呼吸器・GI・皮膚・眼科・腫瘍・駆虫・その他）
+for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_13, DRUGS_BATCH_14, DRUGS_BATCH_15):
+    for _drug_new in _batch_new:
+        if _drug_new["id"] not in _existing_ids:
+            DRUGS.append(_drug_new)
+            _existing_ids.add(_drug_new["id"])
+            _drug_index[_drug_new["id"]] = _drug_new
 
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
