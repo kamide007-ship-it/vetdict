@@ -2980,6 +2980,12 @@ function renderChatResult(container,data){
   disclaim.textContent=disclaimText;
   wrapper.appendChild(disclaim);
 
+  // 0.5. Clinical reasoning (Vetlexicon-style structured support)
+  if(data.clinical_reasoning){
+    const cr=renderClinicalReasoning(data.clinical_reasoning);
+    if(cr)wrapper.appendChild(cr);
+  }
+
   // 1. Species guidance
   if(data.species_guidance){
     const g=document.createElement("div");
@@ -3658,6 +3664,90 @@ function loadDrugDictionary(){
     // Interaction checker
     setupInteractionChecker();
   }
+}
+
+// Vetlexicon-style structured clinical reasoning renderer
+function renderClinicalReasoning(reasoning){
+  if(!reasoning)return null;
+  const root=document.createElement("div");
+  root.className="clinical-reasoning";
+  root.style.cssText="margin:12px 0;padding:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px";
+  // Emergency banner
+  if(reasoning.emergency_alert){
+    const eb=document.createElement("div");
+    eb.style.cssText="background:#dc2626;color:#fff;padding:8px 12px;border-radius:6px;font-weight:700;font-size:.84rem;margin-bottom:10px";
+    eb.textContent=currentLang==="ja"?"🚨 緊急対応が必要な可能性があります":"🚨 Possible emergency presentation";
+    root.appendChild(eb);
+  }
+  // Bottom Line
+  if(reasoning.bottom_line){
+    const bl=document.createElement("div");
+    bl.style.cssText="background:#1e40af;color:#fff;padding:10px 14px;border-radius:6px;margin-bottom:10px;font-size:.86rem;line-height:1.5";
+    const blText=currentLang==="ja"?reasoning.bottom_line.ja:reasoning.bottom_line.en;
+    const evGrade=reasoning.bottom_line_evidence||"C";
+    bl.innerHTML=`<div style="font-weight:700;font-size:.78rem;margin-bottom:4px;letter-spacing:.05em">${currentLang==="ja"?"📋 BOTTOM LINE":"📋 BOTTOM LINE"} ${evidenceBadge(evGrade)}</div><div>${escapeHtml(blText)}</div>`;
+    root.appendChild(bl);
+  }
+  // Confidence warning
+  if(reasoning.confidence_warning){
+    const cw=document.createElement("div");
+    cw.style.cssText="font-size:.76rem;color:#92400e;background:#fef9c3;padding:6px 10px;border-radius:4px;margin-bottom:10px;border-left:3px solid #d97706";
+    cw.textContent="ℹ "+reasoning.confidence_warning;
+    root.appendChild(cw);
+  }
+  // Per-disease structured reasoning (top 3)
+  const diffs=reasoning.differentials||[];
+  if(diffs.length>0){
+    const diffHeader=document.createElement("div");
+    diffHeader.style.cssText="font-weight:700;font-size:.84rem;color:#334155;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #e2e8f0";
+    diffHeader.textContent=currentLang==="ja"?"🔬 鑑別疾患の臨床推論":"🔬 Differential clinical reasoning";
+    root.appendChild(diffHeader);
+    diffs.slice(0,3).forEach(d=>{
+      root.appendChild(renderDiseaseReasoning(d));
+    });
+  }
+  // Overall next steps
+  if(reasoning.next_steps&&reasoning.next_steps.length>0){
+    const ns=document.createElement("div");
+    ns.style.cssText="margin-top:12px;padding:10px 12px;background:#ecfdf5;border-left:4px solid #16a34a;border-radius:4px";
+    const nsTitle=currentLang==="ja"?"💡 次の診断ステップ":"💡 Next diagnostic steps";
+    const nsItems=reasoning.next_steps.map(s=>{const nm=currentLang==="ja"?(s.name_ja||s.name_en||s.id):(s.name_en||s.name_ja||s.id);return `<li style="margin:2px 0">${escapeHtml(nm)}</li>`;}).join("");
+    ns.innerHTML=`<div style="font-weight:700;font-size:.82rem;color:#166534;margin-bottom:4px">${nsTitle}</div><ul style="margin:4px 0 0 20px;padding:0;font-size:.82rem;color:#166534">${nsItems}</ul>`;
+    root.appendChild(ns);
+  }
+  return root;
+}
+
+function renderDiseaseReasoning(d){
+  const card=document.createElement("div");
+  card.className="disease-reasoning-card";
+  const urgencyColors={emergency:"#dc2626",high:"#ea580c",moderate:"#0891b2",low:"#64748b"};
+  const uColor=urgencyColors[d.urgency]||"#64748b";
+  card.style.cssText=`margin-bottom:10px;padding:10px 12px;background:#fff;border:1px solid #e2e8f0;border-left:4px solid ${uColor};border-radius:6px`;
+  const name=currentLang==="ja"?(d.disease_name_ja||d.disease_name):d.disease_name;
+  const conf=Math.round((d.confidence||0)*100);
+  let html=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:.88rem;color:#1e293b">${escapeHtml(name)}</strong><span style="font-size:.74rem;font-weight:700;color:${uColor};padding:2px 8px;background:${uColor}1a;border-radius:10px">${conf}%</span></div>`;
+  // Matching symptoms
+  if(d.matching_symptoms&&d.matching_symptoms.length>0){
+    const items=d.matching_symptoms.map(s=>{const nm=currentLang==="ja"?(s.name_ja||s.name_en||s.id):(s.name_en||s.name_ja||s.id);return `<span style="display:inline-block;padding:2px 8px;background:#dcfce7;color:#166534;border-radius:10px;font-size:.72rem;margin:2px 4px 2px 0">✓ ${escapeHtml(nm)}</span>`;}).join("");
+    html+=`<div style="font-size:.74rem;color:#475569;margin:4px 0"><strong>${currentLang==="ja"?"支持症状":"Supporting"}:</strong> ${items}</div>`;
+  }
+  // Missing typical symptoms
+  if(d.missing_typical_symptoms&&d.missing_typical_symptoms.length>0){
+    const items=d.missing_typical_symptoms.map(s=>{const nm=currentLang==="ja"?(s.name_ja||s.name_en||s.id):(s.name_en||s.name_ja||s.id);return `<span style="display:inline-block;padding:2px 8px;background:#fef3c7;color:#92400e;border-radius:10px;font-size:.72rem;margin:2px 4px 2px 0">? ${escapeHtml(nm)}</span>`;}).join("");
+    html+=`<div style="font-size:.74rem;color:#475569;margin:4px 0"><strong>${currentLang==="ja"?"確認推奨":"Check for"}:</strong> ${items}</div>`;
+  }
+  // Rule-out questions
+  if(d.rule_out_questions&&d.rule_out_questions.length>0){
+    const qs=d.rule_out_questions.map(q=>`<li style="margin:2px 0">${escapeHtml(q)}</li>`).join("");
+    html+=`<div style="font-size:.74rem;color:#475569;margin:6px 0 2px"><strong>${currentLang==="ja"?"鑑別質問":"Rule-out Q"}:</strong><ul style="margin:2px 0 0 18px;padding:0">${qs}</ul></div>`;
+  }
+  // Red flags
+  if(d.red_flags&&d.red_flags.length>0){
+    html+=`<div style="font-size:.74rem;color:#dc2626;margin:6px 0;padding:4px 8px;background:#fee2e2;border-radius:4px"><strong>🚨 ${currentLang==="ja"?"レッドフラグ":"Red flags"}:</strong> ${d.red_flags.map(escapeHtml).join(", ")}</div>`;
+  }
+  card.innerHTML=html;
+  return card;
 }
 
 // Evidence grading helper - assesses treatment text severity

@@ -1271,6 +1271,21 @@ def diagnostic_chat():
         },
     }
 
+    # Phase 3: Vetlexicon-style structured clinical reasoning
+    try:
+        from api.clinical_reasoning import build_reasoning, to_dict as reasoning_to_dict
+
+        reasoning = build_reasoning(
+            input_symptoms=all_symptoms,
+            differentials=enhanced_candidates,
+            species=species,
+            lang=request.json.get("lang", "ja") if request.is_json else "ja",
+        )
+        response["clinical_reasoning"] = reasoning_to_dict(reasoning)
+    except Exception:
+        # Reasoning failure should not break the response
+        pass
+
     return jsonify(response)
 
 
