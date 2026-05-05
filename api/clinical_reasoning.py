@@ -1,0 +1,302 @@
+"""clinical_reasoning.py - 構造化された臨床意思決定支援エンジン
+
+Vetlexiconスタイルの臨床推論を生成する：
+- 各鑑別疾患について支持/否定証拠を構造化
+- 次の診断ステップ（未実施推奨検査）を提示
+- レッドフラグ症状の警告
+- "Bottom Line" サマリ
+
+設計原則:
+- 入力された症状と疾患の症状リストを照合
+- 該当疾患の典型症状で「未報告」のものをミッシングとして提示
+- urgency=emergency疾患は強調
+- 鑑別を絞り込む追加質問を提案
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any
+
+# レッドフラグ症状 - これらが入力された場合は緊急疾患を優先
+RED_FLAG_SYMPTOMS = {
+    "respiratory_distress",
+    "severe_dyspnea",
+    "cyanosis",
+    "collapse",
+    "seizure",
+    "seizures",
+    "status_epilepticus",
+    "unconsciousness",
+    "coma",
+    "uncontrolled_bleeding",
+    "hemorrhage",
+    "shock",
+    "abdominal_distension_acute",
+    "bloat",
+    "gdv",
+    "sudden_blindness",
+    "anuria",
+    "obstruction",
+    "urinary_obstruction",
+    "trauma",
+    "hyperthermia_severe",
+    "hypothermia_severe",
+    "anaphylaxis",
+}
+
+
+@dataclass
+class DiseaseReasoning:
+    """単一鑑別疾患に関する構造化された推論"""
+
+    disease_id: str
+    disease_name: str
+    disease_name_ja: str
+    confidence: float
+    urgency: str
+    matching_symptoms: list[dict[str, Any]] = field(default_factory=list)  # 入力で支持する症状
+    missing_typical_symptoms: list[dict[str, Any]] = field(default_factory=list)  # 該疾患の典型症状で未確認
+    next_diagnostic_steps: list[dict[str, Any]] = field(default_factory=list)  # 推奨検査
+    red_flags: list[str] = field(default_factory=list)  # 当該疾患でのレッドフラグ
+    rule_out_questions: list[str] = field(default_factory=list)  # 鑑別絞り込み質問
+
+
+@dataclass
+class ClinicalReasoningResult:
+    """全体の臨床推論結果"""
+
+    bottom_line: dict[str, str]  # {ja, en}
+    bottom_line_evidence: str = "C"  # エビデンスグレード
+    differentials: list[DiseaseReasoning] = field(default_factory=list)
+    next_steps: list[dict[str, str]] = field(default_factory=list)  # 全体的な次のステップ
+    emergency_alert: bool = False
+    needs_more_info: bool = False
+    confidence_warning: str = ""
+
+
+def _humanize_id(sid: str) -> dict[str, str]:
+    """症状/検査IDを人間可読化"""
+    if not sid:
+        return {"id": "", "name_ja": "", "name_en": ""}
+    en = sid.replace("_", " ").strip().capitalize()
+    return {"id": sid, "name_ja": sid, "name_en": en}
+
+
+def _detect_red_flags_in_input(input_symptom_ids: list[str]) -> list[str]:
+    """入力症状にレッドフラグが含まれているか"""
+    return [s for s in input_symptom_ids if s in RED_FLAG_SYMPTOMS]
+
+
+def _generate_bottom_line(
+    differentials: list[DiseaseReasoning],
+    has_emergency: bool,
+    n_input_symptoms: int,
+    lang: str = "ja",
+) -> tuple[dict[str, str], str]:
+    """臨床推論のサマリを生成し、エビデンスグレードを返す"""
+    if not differentials:
+        return (
+            {
+                "ja": "現時点では鑑別を絞り込むには情報が不足しています。さらに症状や経過を追加してください。",
+                "en": "Insufficient information to narrow differentials. Add more symptoms or history.",
+            },
+            "D",
+        )
+
+    top = differentials[0]
+    if has_emergency:
+        return (
+            {
+                "ja": f"⚠ 緊急対応を要する可能性があります（{top.disease_name_ja}: 信頼度{top.confidence:.0%}）。安定化処置と並行した精査を推奨します。",
+                "en": f"⚠ Emergency presentation possible ({top.disease_name}: {top.confidence:.0%} confidence). Stabilize while pursuing diagnostics.",
+            },
+            "B" if top.confidence > 0.7 else "C",
+        )
+
+    if top.confidence > 0.85 and n_input_symptoms >= 3:
+        return (
+            {
+                "ja": f"最も可能性が高いのは {top.disease_name_ja}（信頼度{top.confidence:.0%}）です。次の診断ステップで確定診断に向けて進めてください。",
+                "en": f"Most likely: {top.disease_name} ({top.confidence:.0%}). Proceed with next diagnostic steps to confirm.",
+            },
+            "B",
+        )
+
+    if top.confidence > 0.6:
+        return (
+            {
+                "ja": f"上位鑑別: {top.disease_name_ja}（{top.confidence:.0%}）。確定にはさらなる検査・追加の症状情報が有用です。",
+                "en": f"Top differential: {top.disease_name} ({top.confidence:.0%}). Further diagnostics or symptom history would help confirm.",
+            },
+            "C",
+        )
+
+    return (
+        {
+            "ja": f"複数の鑑別が拮抗しています（上位: {top.disease_name_ja} {top.confidence:.0%}）。症状の追加・経過観察・追加検査が必要です。",
+            "en": f"Multiple competing differentials (top: {top.disease_name} {top.confidence:.0%}). More symptoms, observation, or diagnostics needed.",
+        },
+        "D",
+    )
+
+
+def build_reasoning(
+    input_symptoms: list[str],
+    differentials: list[dict[str, Any]],
+    diseases_data: dict[str, dict[str, Any]] | None = None,
+    species: str = "",
+    lang: str = "ja",
+    max_differentials: int = 5,
+) -> ClinicalReasoningResult:
+    """
+    鑑別診断結果から構造化された臨床推論を構築する。
+
+    Args:
+        input_symptoms: ユーザーが入力した症状ID
+        differentials: 鑑別疾患（{name, name_ja, confidence, urgency, symptoms, recommended_tests, ...}）
+        diseases_data: 疾患データ全体（typical_symptoms 検索用、任意）
+        species: 動物種
+        lang: 言語
+        max_differentials: 推論を生成する最大鑑別数
+    """
+    input_set = set(input_symptoms)
+    red_flags_in_input = _detect_red_flags_in_input(input_symptoms)
+    has_emergency = False
+
+    reasonings: list[DiseaseReasoning] = []
+    for d in differentials[:max_differentials]:
+        # Pre-computed structures from diagnostic_chat (preferred)
+        pre_matched = d.get("matched_symptoms") or []
+        pre_missing = d.get("missing_key_symptoms") or []
+        pre_additional = d.get("additional_disease_symptoms") or []
+
+        def _ids(items):
+            out = []
+            for x in items:
+                if isinstance(x, str):
+                    out.append(x)
+                elif isinstance(x, dict):
+                    sid = x.get("id") or x.get("symptom_id") or x.get("name")
+                    if sid:
+                        out.append(sid)
+            return out
+
+        if pre_matched or pre_missing:
+            # Use the chat engine's pre-computed analysis
+            matching_ids = _ids(pre_matched)
+            missing_ids = _ids(pre_missing)[:3]
+            disease_symptom_set = set(matching_ids) | set(missing_ids) | set(_ids(pre_additional))
+        else:
+            # Fallback: use disease.symptoms
+            disease_symptoms = d.get("symptoms") or []
+            if isinstance(disease_symptoms, dict):
+                disease_symptom_ids = list(disease_symptoms.keys())
+            elif isinstance(disease_symptoms, list):
+                disease_symptom_ids = _ids(disease_symptoms)
+            else:
+                disease_symptom_ids = []
+            disease_symptom_set = {s for s in disease_symptom_ids if s}
+            matching_ids = sorted(input_set & disease_symptom_set)
+            missing_ids = sorted(disease_symptom_set - input_set)[:3]
+
+        # 推奨検査
+        rec_tests = d.get("recommended_tests") or d.get("recommended_tests_display") or []
+        if isinstance(rec_tests, str):
+            rec_tests = [rec_tests]
+        rec_test_ids = _ids(rec_tests) if rec_tests else []
+
+        urgency = (d.get("urgency") or "").lower()
+        if urgency == "emergency":
+            has_emergency = True
+
+        # 信頼度: confidence (0-1) または confidence_percent (0-100) を統一
+        conf_raw = d.get("confidence", d.get("confidence_percent", 0))
+        try:
+            conf_val = float(conf_raw)
+            if conf_val > 1.0:
+                conf_val /= 100.0
+        except (TypeError, ValueError):
+            conf_val = 0.0
+
+        # レッドフラグ抽出
+        red_flags = sorted(disease_symptom_set & RED_FLAG_SYMPTOMS)
+
+        # 鑑別絞り込み質問
+        rule_out_q: list[str] = []
+        for sid in missing_ids[:2]:
+            hsym = _humanize_id(sid)
+            if lang == "ja":
+                rule_out_q.append(f"{hsym['name_ja']} は確認できますか？")
+            else:
+                rule_out_q.append(f"Is {hsym['name_en']} present?")
+
+        reasoning = DiseaseReasoning(
+            disease_id=d.get("id") or d.get("disease_id") or d.get("name", ""),
+            disease_name=d.get("name") or d.get("name_en", ""),
+            disease_name_ja=d.get("name_ja") or d.get("name", ""),
+            confidence=conf_val,
+            urgency=urgency,
+            matching_symptoms=[_humanize_id(s) for s in matching_ids],
+            missing_typical_symptoms=[_humanize_id(s) for s in missing_ids],
+            next_diagnostic_steps=[_humanize_id(t) for t in rec_test_ids[:5]],
+            red_flags=red_flags,
+            rule_out_questions=rule_out_q,
+        )
+        reasonings.append(reasoning)
+
+    # 全体の次のステップ: 上位鑑別の検査の和集合 (上位3鑑別から)
+    next_steps_set: set[str] = set()
+    for r in reasonings[:3]:
+        for t in r.next_diagnostic_steps:
+            next_steps_set.add(t["id"])
+    next_steps = [_humanize_id(t) for t in sorted(next_steps_set)][:6]
+
+    # Bottom Line
+    bottom_line, bl_evidence = _generate_bottom_line(reasonings, has_emergency, len(input_symptoms), lang=lang)
+
+    # 信頼度警告
+    confidence_warning = ""
+    if len(input_symptoms) < 3:
+        confidence_warning = (
+            "症状入力が少ないため信頼度は限定的です。詳細な病歴・症状追加で精度向上。"
+            if lang == "ja"
+            else "Limited symptom input — confidence is constrained. Add more symptoms/history to improve accuracy."
+        )
+
+    return ClinicalReasoningResult(
+        bottom_line=bottom_line,
+        bottom_line_evidence=bl_evidence,
+        differentials=reasonings,
+        next_steps=next_steps,
+        emergency_alert=has_emergency or bool(red_flags_in_input),
+        needs_more_info=len(input_symptoms) < 3 or (reasonings and reasonings[0].confidence < 0.5),
+        confidence_warning=confidence_warning,
+    )
+
+
+def to_dict(result: ClinicalReasoningResult) -> dict[str, Any]:
+    """JSON返却用に辞書化"""
+    return {
+        "bottom_line": result.bottom_line,
+        "bottom_line_evidence": result.bottom_line_evidence,
+        "emergency_alert": result.emergency_alert,
+        "needs_more_info": result.needs_more_info,
+        "confidence_warning": result.confidence_warning,
+        "next_steps": result.next_steps,
+        "differentials": [
+            {
+                "disease_id": r.disease_id,
+                "disease_name": r.disease_name,
+                "disease_name_ja": r.disease_name_ja,
+                "confidence": round(r.confidence, 4),
+                "urgency": r.urgency,
+                "matching_symptoms": r.matching_symptoms,
+                "missing_typical_symptoms": r.missing_typical_symptoms,
+                "next_diagnostic_steps": r.next_diagnostic_steps,
+                "red_flags": r.red_flags,
+                "rule_out_questions": r.rule_out_questions,
+            }
+            for r in result.differentials
+        ],
+    }
