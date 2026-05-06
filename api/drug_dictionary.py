@@ -10471,7 +10471,23 @@ for _drug_id, _species_notes in ISCAID_UTI_NOTES_PATCH.items():
                     _si[_sp]["notes_ja"] += _patch["notes_ja_append"]
 
 # バッチ10-19 薬品を統合
-for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_13, DRUGS_BATCH_14, DRUGS_BATCH_15, DRUGS_BATCH_16, DRUGS_BATCH_17, DRUGS_BATCH_18, DRUGS_BATCH_19, DRUGS_BATCH_20, DRUGS_BATCH_21, DRUGS_BATCH_22, DRUGS_BATCH_23, DRUGS_BATCH_24):
+for _batch_new in (
+    DRUGS_BATCH_10,
+    DRUGS_BATCH_11,
+    DRUGS_BATCH_12,
+    DRUGS_BATCH_13,
+    DRUGS_BATCH_14,
+    DRUGS_BATCH_15,
+    DRUGS_BATCH_16,
+    DRUGS_BATCH_17,
+    DRUGS_BATCH_18,
+    DRUGS_BATCH_19,
+    DRUGS_BATCH_20,
+    DRUGS_BATCH_21,
+    DRUGS_BATCH_22,
+    DRUGS_BATCH_23,
+    DRUGS_BATCH_24,
+):
     for _drug_new in _batch_new:
         if _drug_new["id"] not in _existing_ids:
             DRUGS.append(_drug_new)
@@ -10479,7 +10495,12 @@ for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_1
             _drug_index[_drug_new["id"]] = _drug_new
 
 # バッチ25-26: 薬物相互作用パッチ適用
-for _interactions_patch in (DRUG_INTERACTIONS_PATCH_25, DRUG_INTERACTIONS_PATCH_26, DRUG_INTERACTIONS_PATCH_27, DRUG_INTERACTIONS_PATCH_27B):
+for _interactions_patch in (
+    DRUG_INTERACTIONS_PATCH_25,
+    DRUG_INTERACTIONS_PATCH_26,
+    DRUG_INTERACTIONS_PATCH_27,
+    DRUG_INTERACTIONS_PATCH_27B,
+):
     for _drug_id, _interactions in _interactions_patch.items():
         if _drug_id in _drug_index:
             _drug_index[_drug_id]["drug_interactions"] = _interactions

@@ -9,19 +9,45 @@ DRUGS_BATCH_17 = [
         "mechanism": "Inhibits inosine monophosphate dehydrogenase, blocking de novo purine synthesis in lymphocytes",
         "mechanism_ja": "イノシンモノリン酸脱水素酵素を阻害し、リンパ球のプリン合成を遮断",
         "species_info": {
-            "dog": {"dose": "10-20 mg/kg PO q12h", "notes_ja": "免疫介在性疾患にシクロスポリンの代替。GI副作用に注意", "notes": "Alternative to ciclosporin for IMHA/ITP. Monitor CBC weekly initially"},
-            "cat": {"dose": "10 mg/kg PO q12h", "notes_ja": "猫の免疫介在性疾患に使用", "notes": "Used for immune-mediated diseases"},
-            "horse": {"dose": "データ限定的", "notes_ja": "馬での使用データは限定的", "notes": "Limited data in horses"},
-            "ferret": {"dose": "10-20 mg/kg PO q12h", "notes_ja": "フェレットの免疫介在性疾患", "notes": "Immune-mediated diseases"}
+            "dog": {
+                "dose": "10-20 mg/kg PO q12h",
+                "notes_ja": "免疫介在性疾患にシクロスポリンの代替。GI副作用に注意",
+                "notes": "Alternative to ciclosporin for IMHA/ITP. Monitor CBC weekly initially",
+            },
+            "cat": {
+                "dose": "10 mg/kg PO q12h",
+                "notes_ja": "猫の免疫介在性疾患に使用",
+                "notes": "Used for immune-mediated diseases",
+            },
+            "horse": {
+                "dose": "データ限定的",
+                "notes_ja": "馬での使用データは限定的",
+                "notes": "Limited data in horses",
+            },
+            "ferret": {
+                "dose": "10-20 mg/kg PO q12h",
+                "notes_ja": "フェレットの免疫介在性疾患",
+                "notes": "Immune-mediated diseases",
+            },
         },
         "side_effects": "GI upset (diarrhea, vomiting), bone marrow suppression, increased infection risk",
         "side_effects_ja": "消化器症状（下痢・嘔吐）、骨髄抑制、感染リスク増加",
         "contraindications": "Pregnancy, severe hepatic impairment, concurrent live vaccines",
         "contraindications_ja": "妊娠、重度肝障害、生ワクチン併用",
         "drug_interactions": [
-            {"drug": "azathioprine", "severity": "major", "description_ja": "骨髄抑制の相加的増強", "description": "Additive bone marrow suppression"},
-            {"drug": "antacids", "severity": "moderate", "description_ja": "吸収低下", "description": "Decreased absorption"}
-        ]
+            {
+                "drug": "azathioprine",
+                "severity": "major",
+                "description_ja": "骨髄抑制の相加的増強",
+                "description": "Additive bone marrow suppression",
+            },
+            {
+                "drug": "antacids",
+                "severity": "moderate",
+                "description_ja": "吸収低下",
+                "description": "Decreased absorption",
+            },
+        ],
     },
     {
         "id": "leflunomide",
@@ -31,16 +57,29 @@ DRUGS_BATCH_17 = [
         "mechanism": "Inhibits dihydroorotate dehydrogenase, blocking pyrimidine synthesis",
         "mechanism_ja": "ジヒドロオロト酸脱水素酵素を阻害し、ピリミジン合成を遮断",
         "species_info": {
-            "dog": {"dose": "2-4 mg/kg PO q24h", "notes_ja": "免疫介在性多発性関節炎・髄膜脳炎に", "notes": "IMPA, meningoencephalitis. Monitor hepatic enzymes"},
-            "cat": {"dose": "2-4 mg/kg PO q24h", "notes_ja": "猫の免疫介在性疾患に使用報告あり", "notes": "Limited reports in cats"}
+            "dog": {
+                "dose": "2-4 mg/kg PO q24h",
+                "notes_ja": "免疫介在性多発性関節炎・髄膜脳炎に",
+                "notes": "IMPA, meningoencephalitis. Monitor hepatic enzymes",
+            },
+            "cat": {
+                "dose": "2-4 mg/kg PO q24h",
+                "notes_ja": "猫の免疫介在性疾患に使用報告あり",
+                "notes": "Limited reports in cats",
+            },
         },
         "side_effects": "Hepatotoxicity, GI upset, bone marrow suppression",
         "side_effects_ja": "肝毒性、消化器症状、骨髄抑制",
         "contraindications": "Hepatic disease, pregnancy",
         "contraindications_ja": "肝疾患、妊娠",
         "drug_interactions": [
-            {"drug": "methotrexate", "severity": "major", "description_ja": "肝毒性増強", "description": "Increased hepatotoxicity risk"}
-        ]
+            {
+                "drug": "methotrexate",
+                "severity": "major",
+                "description_ja": "肝毒性増強",
+                "description": "Increased hepatotoxicity risk",
+            }
+        ],
     },
     {
         "id": "tacrolimus_systemic",
@@ -50,17 +89,35 @@ DRUGS_BATCH_17 = [
         "mechanism": "Calcineurin inhibitor, suppresses T-cell activation and IL-2 production",
         "mechanism_ja": "カルシニューリン阻害薬。T細胞活性化とIL-2産生を抑制",
         "species_info": {
-            "dog": {"dose": "0.05-0.1 mg/kg PO q12h", "notes_ja": "難治性免疫介在性疾患。血中濃度モニタリング必須", "notes": "Refractory immune-mediated diseases. TDM required (trough 5-15 ng/mL)"},
-            "cat": {"dose": "0.05-0.1 mg/kg PO q12h", "notes_ja": "猫の難治性免疫介在性疾患", "notes": "Refractory immune diseases. TDM essential"}
+            "dog": {
+                "dose": "0.05-0.1 mg/kg PO q12h",
+                "notes_ja": "難治性免疫介在性疾患。血中濃度モニタリング必須",
+                "notes": "Refractory immune-mediated diseases. TDM required (trough 5-15 ng/mL)",
+            },
+            "cat": {
+                "dose": "0.05-0.1 mg/kg PO q12h",
+                "notes_ja": "猫の難治性免疫介在性疾患",
+                "notes": "Refractory immune diseases. TDM essential",
+            },
         },
         "side_effects": "Nephrotoxicity, GI upset, tremors, hyperglycemia",
         "side_effects_ja": "腎毒性、消化器症状、振戦、高血糖",
         "contraindications": "Renal impairment, concurrent ciclosporin",
         "contraindications_ja": "腎障害、シクロスポリン併用",
         "drug_interactions": [
-            {"drug": "ciclosporin", "severity": "major", "description_ja": "腎毒性の相加的増強", "description": "Additive nephrotoxicity"},
-            {"drug": "ketoconazole", "severity": "major", "description_ja": "タクロリムス血中濃度上昇", "description": "Increased tacrolimus levels via CYP3A4 inhibition"}
-        ]
+            {
+                "drug": "ciclosporin",
+                "severity": "major",
+                "description_ja": "腎毒性の相加的増強",
+                "description": "Additive nephrotoxicity",
+            },
+            {
+                "drug": "ketoconazole",
+                "severity": "major",
+                "description_ja": "タクロリムス血中濃度上昇",
+                "description": "Increased tacrolimus levels via CYP3A4 inhibition",
+            },
+        ],
     },
     {
         "id": "dopamine",
@@ -70,18 +127,35 @@ DRUGS_BATCH_17 = [
         "mechanism": "Dose-dependent: low dose=dopaminergic (renal vasodilation), moderate=β1 (inotropy), high=α1 (vasoconstriction)",
         "mechanism_ja": "用量依存性：低用量=ドパミン受容体（腎血管拡張）、中用量=β1（強心）、高用量=α1（血管収縮）",
         "species_info": {
-            "dog": {"dose": "2-10 μg/kg/min CRI", "notes_ja": "心原性ショック・無尿性腎不全。低用量(2-5)腎灌流↑、中用量(5-10)強心", "notes": "Cardiogenic shock, anuric renal failure. Low dose renal, moderate inotropic"},
-            "cat": {"dose": "2-10 μg/kg/min CRI", "notes_ja": "猫は高用量で不整脈リスク高い", "notes": "Higher arrhythmia risk at high doses in cats"},
-            "horse": {"dose": "3-5 μg/kg/min CRI", "notes_ja": "全身麻酔中の低血圧補正", "notes": "Intraoperative hypotension correction"},
-            "rabbit": {"dose": "5-10 μg/kg/min CRI", "notes_ja": "ウサギのショック管理", "notes": "Shock management"}
+            "dog": {
+                "dose": "2-10 μg/kg/min CRI",
+                "notes_ja": "心原性ショック・無尿性腎不全。低用量(2-5)腎灌流↑、中用量(5-10)強心",
+                "notes": "Cardiogenic shock, anuric renal failure. Low dose renal, moderate inotropic",
+            },
+            "cat": {
+                "dose": "2-10 μg/kg/min CRI",
+                "notes_ja": "猫は高用量で不整脈リスク高い",
+                "notes": "Higher arrhythmia risk at high doses in cats",
+            },
+            "horse": {
+                "dose": "3-5 μg/kg/min CRI",
+                "notes_ja": "全身麻酔中の低血圧補正",
+                "notes": "Intraoperative hypotension correction",
+            },
+            "rabbit": {"dose": "5-10 μg/kg/min CRI", "notes_ja": "ウサギのショック管理", "notes": "Shock management"},
         },
         "side_effects": "Tachycardia, arrhythmias, hypertension, tissue necrosis on extravasation",
         "side_effects_ja": "頻脈、不整脈、高血圧、血管外漏出時の組織壊死",
         "contraindications": "Pheochromocytoma, ventricular fibrillation, uncorrected hypovolemia",
         "contraindications_ja": "褐色細胞腫、心室細動、未補正の循環血液量減少",
         "drug_interactions": [
-            {"drug": "propranolol", "severity": "major", "description_ja": "β遮断により末梢血管収縮が増強", "description": "Unopposed alpha stimulation with beta-blocker"}
-        ]
+            {
+                "drug": "propranolol",
+                "severity": "major",
+                "description_ja": "β遮断により末梢血管収縮が増強",
+                "description": "Unopposed alpha stimulation with beta-blocker",
+            }
+        ],
     },
     {
         "id": "dobutamine",
@@ -91,17 +165,34 @@ DRUGS_BATCH_17 = [
         "mechanism": "Synthetic catecholamine, primarily β1-agonist with mild β2 and α1 activity",
         "mechanism_ja": "合成カテコラミン。主にβ1作動薬で、軽度のβ2・α1活性",
         "species_info": {
-            "dog": {"dose": "2-20 μg/kg/min CRI", "notes_ja": "心不全・心原性ショック。ドパミンより不整脈リスク低い", "notes": "Heart failure, cardiogenic shock. Lower arrhythmia risk than dopamine"},
-            "cat": {"dose": "2-10 μg/kg/min CRI", "notes_ja": "猫は5μg/kg/min超で痙攣リスク。低用量から開始", "notes": "Seizure risk >5 μg/kg/min. Start low"},
-            "horse": {"dose": "1-5 μg/kg/min CRI", "notes_ja": "全身麻酔中の心拍出量維持", "notes": "Maintain cardiac output during GA"}
+            "dog": {
+                "dose": "2-20 μg/kg/min CRI",
+                "notes_ja": "心不全・心原性ショック。ドパミンより不整脈リスク低い",
+                "notes": "Heart failure, cardiogenic shock. Lower arrhythmia risk than dopamine",
+            },
+            "cat": {
+                "dose": "2-10 μg/kg/min CRI",
+                "notes_ja": "猫は5μg/kg/min超で痙攣リスク。低用量から開始",
+                "notes": "Seizure risk >5 μg/kg/min. Start low",
+            },
+            "horse": {
+                "dose": "1-5 μg/kg/min CRI",
+                "notes_ja": "全身麻酔中の心拍出量維持",
+                "notes": "Maintain cardiac output during GA",
+            },
         },
         "side_effects": "Tachycardia, arrhythmias, hypertension, seizures (cats)",
         "side_effects_ja": "頻脈、不整脈、高血圧、痙攣（猫）",
         "contraindications": "Hypertrophic cardiomyopathy, LVOTO",
         "contraindications_ja": "肥大型心筋症、左室流出路閉塞",
         "drug_interactions": [
-            {"drug": "beta_blockers", "severity": "major", "description_ja": "強心作用が拮抗", "description": "Antagonism of inotropic effect"}
-        ]
+            {
+                "drug": "beta_blockers",
+                "severity": "major",
+                "description_ja": "強心作用が拮抗",
+                "description": "Antagonism of inotropic effect",
+            }
+        ],
     },
     {
         "id": "vasopressin",
@@ -111,16 +202,29 @@ DRUGS_BATCH_17 = [
         "mechanism": "V1 receptor agonist causing vascular smooth muscle contraction; V2 agonist in renal collecting ducts",
         "mechanism_ja": "V1受容体作動による血管平滑筋収縮、V2受容体作動による腎集合管での水再吸収促進",
         "species_info": {
-            "dog": {"dose": "0.5-4 mU/kg/min CRI（昇圧）; 1-4 U IM/SC q8h（尿崩症）", "notes_ja": "心肺蘇生・カテコラミン不応性ショック・中枢性尿崩症", "notes": "CPR, catecholamine-refractory shock, central diabetes insipidus"},
-            "cat": {"dose": "0.5-2 mU/kg/min CRI", "notes_ja": "難治性低血圧・CPR", "notes": "Refractory hypotension, CPR"}
+            "dog": {
+                "dose": "0.5-4 mU/kg/min CRI（昇圧）; 1-4 U IM/SC q8h（尿崩症）",
+                "notes_ja": "心肺蘇生・カテコラミン不応性ショック・中枢性尿崩症",
+                "notes": "CPR, catecholamine-refractory shock, central diabetes insipidus",
+            },
+            "cat": {
+                "dose": "0.5-2 mU/kg/min CRI",
+                "notes_ja": "難治性低血圧・CPR",
+                "notes": "Refractory hypotension, CPR",
+            },
         },
         "side_effects": "Peripheral vasoconstriction, mesenteric ischemia, hyponatremia",
         "side_effects_ja": "末梢血管収縮、腸間膜虚血、低ナトリウム血症",
         "contraindications": "Coronary artery disease, peripheral vascular disease",
         "contraindications_ja": "冠動脈疾患、末梢血管疾患",
         "drug_interactions": [
-            {"drug": "norepinephrine", "severity": "moderate", "description_ja": "血管収縮の相加", "description": "Additive vasoconstriction"}
-        ]
+            {
+                "drug": "norepinephrine",
+                "severity": "moderate",
+                "description_ja": "血管収縮の相加",
+                "description": "Additive vasoconstriction",
+            }
+        ],
     },
     {
         "id": "desmopressin",
@@ -130,15 +234,23 @@ DRUGS_BATCH_17 = [
         "mechanism": "Synthetic vasopressin analogue, selective V2 receptor agonist",
         "mechanism_ja": "合成バソプレシンアナログ、V2受容体選択的作動薬",
         "species_info": {
-            "dog": {"dose": "1-4 μg SC/IV; 点眼1-2滴 結膜q12-24h", "notes_ja": "中枢性尿崩症、von Willebrand病（一過性第VIII因子↑）", "notes": "Central DI, von Willebrand disease (transient factor VIII increase)"},
-            "cat": {"dose": "1 μg SC; 点眼1-2滴 結膜q12-24h", "notes_ja": "中枢性尿崩症", "notes": "Central diabetes insipidus"},
-            "horse": {"dose": "0.3 μg/kg IV（希釈）", "notes_ja": "尿崩症診断テスト", "notes": "DI diagnostic test"}
+            "dog": {
+                "dose": "1-4 μg SC/IV; 点眼1-2滴 結膜q12-24h",
+                "notes_ja": "中枢性尿崩症、von Willebrand病（一過性第VIII因子↑）",
+                "notes": "Central DI, von Willebrand disease (transient factor VIII increase)",
+            },
+            "cat": {
+                "dose": "1 μg SC; 点眼1-2滴 結膜q12-24h",
+                "notes_ja": "中枢性尿崩症",
+                "notes": "Central diabetes insipidus",
+            },
+            "horse": {"dose": "0.3 μg/kg IV（希釈）", "notes_ja": "尿崩症診断テスト", "notes": "DI diagnostic test"},
         },
         "side_effects": "Water intoxication, hyponatremia, facial flushing",
         "side_effects_ja": "水中毒、低ナトリウム血症、顔面紅潮",
         "contraindications": "Type IIB von Willebrand disease, psychogenic polydipsia",
         "contraindications_ja": "IIB型フォンヴィレブランド病、心因性多飲",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "sodium_bicarbonate",
@@ -148,20 +260,49 @@ DRUGS_BATCH_17 = [
         "mechanism": "Alkalinizing agent, buffers hydrogen ions to correct metabolic acidosis",
         "mechanism_ja": "アルカリ化剤。水素イオンを緩衝し代謝性アシドーシスを補正",
         "species_info": {
-            "dog": {"dose": "1-2 mEq/kg IV slow（緊急）; 計算式: 0.3×BW×BE", "notes_ja": "代謝性アシドーシス・高カリウム血症・CPR。急速投与で paradoxical CNS acidosis", "notes": "Metabolic acidosis, hyperkalemia, CPR. Slow administration essential"},
-            "cat": {"dose": "0.5-1 mEq/kg IV slow", "notes_ja": "猫は少量から。過補正で代謝性アルカローシスのリスク", "notes": "Start low. Risk of metabolic alkalosis with overcorrection"},
-            "horse": {"dose": "1-2 mEq/kg IV", "notes_ja": "代謝性アシドーシス補正", "notes": "Metabolic acidosis correction"},
-            "rabbit": {"dose": "1-2 mEq/kg IV slow", "notes_ja": "ウサギの代謝性アシドーシス", "notes": "Metabolic acidosis"},
-            "bird": {"dose": "1 mEq/kg IV slow", "notes_ja": "鳥の代謝性アシドーシス", "notes": "Avian metabolic acidosis"},
-            "reptile": {"dose": "1 mEq/kg ICe slow", "notes_ja": "爬虫類の代謝性アシドーシス", "notes": "Reptilian metabolic acidosis"}
+            "dog": {
+                "dose": "1-2 mEq/kg IV slow（緊急）; 計算式: 0.3×BW×BE",
+                "notes_ja": "代謝性アシドーシス・高カリウム血症・CPR。急速投与で paradoxical CNS acidosis",
+                "notes": "Metabolic acidosis, hyperkalemia, CPR. Slow administration essential",
+            },
+            "cat": {
+                "dose": "0.5-1 mEq/kg IV slow",
+                "notes_ja": "猫は少量から。過補正で代謝性アルカローシスのリスク",
+                "notes": "Start low. Risk of metabolic alkalosis with overcorrection",
+            },
+            "horse": {
+                "dose": "1-2 mEq/kg IV",
+                "notes_ja": "代謝性アシドーシス補正",
+                "notes": "Metabolic acidosis correction",
+            },
+            "rabbit": {
+                "dose": "1-2 mEq/kg IV slow",
+                "notes_ja": "ウサギの代謝性アシドーシス",
+                "notes": "Metabolic acidosis",
+            },
+            "bird": {
+                "dose": "1 mEq/kg IV slow",
+                "notes_ja": "鳥の代謝性アシドーシス",
+                "notes": "Avian metabolic acidosis",
+            },
+            "reptile": {
+                "dose": "1 mEq/kg ICe slow",
+                "notes_ja": "爬虫類の代謝性アシドーシス",
+                "notes": "Reptilian metabolic acidosis",
+            },
         },
         "side_effects": "Metabolic alkalosis, hypokalemia, hypocalcemia, paradoxical CNS acidosis",
         "side_effects_ja": "代謝性アルカローシス、低カリウム血症、低カルシウム血症、奇異性CNSアシドーシス",
         "contraindications": "Metabolic/respiratory alkalosis, hypokalemia, hypocalcemia",
         "contraindications_ja": "代謝性/呼吸性アルカローシス、低カリウム血症、低カルシウム血症",
         "drug_interactions": [
-            {"drug": "calcium", "severity": "major", "description_ja": "同一ラインで沈殿形成", "description": "Precipitation in same IV line"}
-        ]
+            {
+                "drug": "calcium",
+                "severity": "major",
+                "description_ja": "同一ラインで沈殿形成",
+                "description": "Precipitation in same IV line",
+            }
+        ],
     },
     {
         "id": "calcium_gluconate",
@@ -171,21 +312,51 @@ DRUGS_BATCH_17 = [
         "mechanism": "Provides ionized calcium for cardiac membrane stabilization and muscle contraction",
         "mechanism_ja": "イオン化カルシウムを補給し心筋膜安定化と筋収縮を維持",
         "species_info": {
-            "dog": {"dose": "50-150 mg/kg IV slow（10-30分）", "notes_ja": "低カルシウム血症・高カリウム血症の心筋保護・産後子癇。ECGモニタリング必須", "notes": "Hypocalcemia, hyperkalemia cardioprotection, eclampsia. ECG monitoring required"},
-            "cat": {"dose": "50-100 mg/kg IV slow", "notes_ja": "尿道閉塞後の高カリウム血症に。徐脈時にECG監視", "notes": "Post-urethral obstruction hyperkalemia. ECG monitoring"},
-            "horse": {"dose": "0.5-1 mg/kg/min IV CRI", "notes_ja": "輸送性テタニー（低Ca）、同期誘発時の低Ca", "notes": "Transport tetany, hypocalcemia"},
+            "dog": {
+                "dose": "50-150 mg/kg IV slow（10-30分）",
+                "notes_ja": "低カルシウム血症・高カリウム血症の心筋保護・産後子癇。ECGモニタリング必須",
+                "notes": "Hypocalcemia, hyperkalemia cardioprotection, eclampsia. ECG monitoring required",
+            },
+            "cat": {
+                "dose": "50-100 mg/kg IV slow",
+                "notes_ja": "尿道閉塞後の高カリウム血症に。徐脈時にECG監視",
+                "notes": "Post-urethral obstruction hyperkalemia. ECG monitoring",
+            },
+            "horse": {
+                "dose": "0.5-1 mg/kg/min IV CRI",
+                "notes_ja": "輸送性テタニー（低Ca）、同期誘発時の低Ca",
+                "notes": "Transport tetany, hypocalcemia",
+            },
             "rabbit": {"dose": "50-100 mg/kg IV slow", "notes_ja": "産後子癇", "notes": "Postpartum eclampsia"},
-            "guinea_pig": {"dose": "50-100 mg/kg IV/IP slow", "notes_ja": "妊娠毒血症に伴う低Ca", "notes": "Pregnancy toxemia-associated hypocalcemia"},
-            "bird": {"dose": "50-100 mg/kg IM/IV slow", "notes_ja": "卵塞に伴う低Ca血症", "notes": "Egg binding-associated hypocalcemia"}
+            "guinea_pig": {
+                "dose": "50-100 mg/kg IV/IP slow",
+                "notes_ja": "妊娠毒血症に伴う低Ca",
+                "notes": "Pregnancy toxemia-associated hypocalcemia",
+            },
+            "bird": {
+                "dose": "50-100 mg/kg IM/IV slow",
+                "notes_ja": "卵塞に伴う低Ca血症",
+                "notes": "Egg binding-associated hypocalcemia",
+            },
         },
         "side_effects": "Bradycardia, cardiac arrest (rapid IV), tissue necrosis (perivascular leak)",
         "side_effects_ja": "徐脈、心停止（急速静注時）、組織壊死（血管外漏出時）",
         "contraindications": "Hypercalcemia, digitalis therapy, ventricular fibrillation",
         "contraindications_ja": "高カルシウム血症、ジギタリス投与中、心室細動",
         "drug_interactions": [
-            {"drug": "digoxin", "severity": "major", "description_ja": "ジゴキシン毒性増強", "description": "Potentiates digitalis toxicity"},
-            {"drug": "sodium_bicarbonate", "severity": "major", "description_ja": "同一ライン沈殿", "description": "Precipitates in same IV line"}
-        ]
+            {
+                "drug": "digoxin",
+                "severity": "major",
+                "description_ja": "ジゴキシン毒性増強",
+                "description": "Potentiates digitalis toxicity",
+            },
+            {
+                "drug": "sodium_bicarbonate",
+                "severity": "major",
+                "description_ja": "同一ライン沈殿",
+                "description": "Precipitates in same IV line",
+            },
+        ],
     },
     {
         "id": "potassium_chloride",
@@ -195,19 +366,45 @@ DRUGS_BATCH_17 = [
         "mechanism": "Essential electrolyte for cardiac conduction, neuromuscular function, and acid-base balance",
         "mechanism_ja": "心臓伝導・神経筋機能・酸塩基平衡に必須の電解質",
         "species_info": {
-            "dog": {"dose": "0.5 mEq/kg/hr IV max; 輸液中20-40 mEq/L", "notes_ja": "低カリウム血症補正。投与速度超過で致死性不整脈", "notes": "Hypokalemia correction. Fatal arrhythmias if rate exceeded"},
-            "cat": {"dose": "0.5 mEq/kg/hr IV max", "notes_ja": "糖尿病ケトアシドーシス・慢性腎不全のK補正", "notes": "DKA, CKD potassium supplementation"},
-            "horse": {"dose": "0.5 mEq/kg/hr IV; PO 40-80 g/day", "notes_ja": "発汗後・下痢後の低K補正", "notes": "Post-sweating, post-diarrhea hypokalemia"},
-            "rabbit": {"dose": "輸液中20-30 mEq/L", "notes_ja": "GI stasis後のK補正", "notes": "Post-GI stasis potassium supplementation"}
+            "dog": {
+                "dose": "0.5 mEq/kg/hr IV max; 輸液中20-40 mEq/L",
+                "notes_ja": "低カリウム血症補正。投与速度超過で致死性不整脈",
+                "notes": "Hypokalemia correction. Fatal arrhythmias if rate exceeded",
+            },
+            "cat": {
+                "dose": "0.5 mEq/kg/hr IV max",
+                "notes_ja": "糖尿病ケトアシドーシス・慢性腎不全のK補正",
+                "notes": "DKA, CKD potassium supplementation",
+            },
+            "horse": {
+                "dose": "0.5 mEq/kg/hr IV; PO 40-80 g/day",
+                "notes_ja": "発汗後・下痢後の低K補正",
+                "notes": "Post-sweating, post-diarrhea hypokalemia",
+            },
+            "rabbit": {
+                "dose": "輸液中20-30 mEq/L",
+                "notes_ja": "GI stasis後のK補正",
+                "notes": "Post-GI stasis potassium supplementation",
+            },
         },
         "side_effects": "Hyperkalemia, cardiac arrest, phlebitis, GI irritation (PO)",
         "side_effects_ja": "高カリウム血症、心停止、静脈炎、消化器刺激（経口）",
         "contraindications": "Hyperkalemia, severe renal failure (oliguric/anuric), Addison's disease (untreated)",
         "contraindications_ja": "高カリウム血症、重度腎不全（乏尿/無尿）、未治療アジソン病",
         "drug_interactions": [
-            {"drug": "ace_inhibitors", "severity": "major", "description_ja": "高カリウム血症リスク", "description": "Hyperkalemia risk"},
-            {"drug": "spironolactone", "severity": "major", "description_ja": "高カリウム血症リスク", "description": "Hyperkalemia risk"}
-        ]
+            {
+                "drug": "ace_inhibitors",
+                "severity": "major",
+                "description_ja": "高カリウム血症リスク",
+                "description": "Hyperkalemia risk",
+            },
+            {
+                "drug": "spironolactone",
+                "severity": "major",
+                "description_ja": "高カリウム血症リスク",
+                "description": "Hyperkalemia risk",
+            },
+        ],
     },
     {
         "id": "mannitol_iv",
@@ -217,17 +414,33 @@ DRUGS_BATCH_17 = [
         "mechanism": "Osmotic diuretic; increases plasma osmolality drawing water from tissues including brain and eyes",
         "mechanism_ja": "浸透圧利尿薬。血漿浸透圧を上昇させ脳・眼球から水分を引き出す",
         "species_info": {
-            "dog": {"dose": "0.5-1 g/kg IV over 20min; 繰返し0.25-0.5 g/kg q6-8h", "notes_ja": "頭蓋内圧亢進・急性緑内障・急性腎不全（乏尿期）", "notes": "Increased ICP, acute glaucoma, acute oliguric renal failure"},
-            "cat": {"dose": "0.25-1 g/kg IV over 20min", "notes_ja": "急性緑内障・頭蓋内圧亢進", "notes": "Acute glaucoma, increased ICP"},
-            "horse": {"dose": "0.25-1 g/kg IV over 20min", "notes_ja": "頭部外傷・脳浮腫", "notes": "Head trauma, cerebral edema"},
+            "dog": {
+                "dose": "0.5-1 g/kg IV over 20min; 繰返し0.25-0.5 g/kg q6-8h",
+                "notes_ja": "頭蓋内圧亢進・急性緑内障・急性腎不全（乏尿期）",
+                "notes": "Increased ICP, acute glaucoma, acute oliguric renal failure",
+            },
+            "cat": {
+                "dose": "0.25-1 g/kg IV over 20min",
+                "notes_ja": "急性緑内障・頭蓋内圧亢進",
+                "notes": "Acute glaucoma, increased ICP",
+            },
+            "horse": {
+                "dose": "0.25-1 g/kg IV over 20min",
+                "notes_ja": "頭部外傷・脳浮腫",
+                "notes": "Head trauma, cerebral edema",
+            },
             "rabbit": {"dose": "0.5-1 g/kg IV over 20min", "notes_ja": "頭蓋内圧亢進", "notes": "Increased ICP"},
-            "bird": {"dose": "0.5 g/kg IV slow", "notes_ja": "頭部外傷・眼圧上昇", "notes": "Head trauma, elevated IOP"}
+            "bird": {
+                "dose": "0.5 g/kg IV slow",
+                "notes_ja": "頭部外傷・眼圧上昇",
+                "notes": "Head trauma, elevated IOP",
+            },
         },
         "side_effects": "Electrolyte imbalance, dehydration, rebound cerebral edema, pulmonary edema",
         "side_effects_ja": "電解質異常、脱水、リバウンド性脳浮腫、肺水腫",
         "contraindications": "Dehydration, pulmonary edema, active intracranial hemorrhage, anuria",
         "contraindications_ja": "脱水、肺水腫、活動性頭蓋内出血、無尿",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "hetastarch",
@@ -237,15 +450,27 @@ DRUGS_BATCH_17 = [
         "mechanism": "Synthetic colloid that expands plasma volume by drawing fluid into intravascular space",
         "mechanism_ja": "合成コロイド。血管内に水分を引き込み循環血漿量を拡張",
         "species_info": {
-            "dog": {"dose": "5-20 mL/kg/day IV; ボーラス5 mL/kg over 15min", "notes_ja": "低アルブミン血症・出血性ショック。20 mL/kg/day超で凝固障害", "notes": "Hypoalbuminemia, hemorrhagic shock. Coagulopathy risk >20 mL/kg/day"},
-            "cat": {"dose": "5-10 mL/kg/day IV", "notes_ja": "猫は犬より少量。凝固パラメータ監視", "notes": "Lower volumes than dogs. Monitor coagulation"},
-            "horse": {"dose": "10 mL/kg IV", "notes_ja": "周術期循環血液量維持", "notes": "Perioperative volume expansion"}
+            "dog": {
+                "dose": "5-20 mL/kg/day IV; ボーラス5 mL/kg over 15min",
+                "notes_ja": "低アルブミン血症・出血性ショック。20 mL/kg/day超で凝固障害",
+                "notes": "Hypoalbuminemia, hemorrhagic shock. Coagulopathy risk >20 mL/kg/day",
+            },
+            "cat": {
+                "dose": "5-10 mL/kg/day IV",
+                "notes_ja": "猫は犬より少量。凝固パラメータ監視",
+                "notes": "Lower volumes than dogs. Monitor coagulation",
+            },
+            "horse": {
+                "dose": "10 mL/kg IV",
+                "notes_ja": "周術期循環血液量維持",
+                "notes": "Perioperative volume expansion",
+            },
         },
         "side_effects": "Coagulopathy, acute kidney injury, pruritus, anaphylaxis",
         "side_effects_ja": "凝固障害、急性腎障害、掻痒、アナフィラキシー",
         "contraindications": "Coagulopathy, renal failure, severe hypernatremia",
         "contraindications_ja": "凝固障害、腎不全、重度高ナトリウム血症",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "aminocaproic_acid",
@@ -255,14 +480,22 @@ DRUGS_BATCH_17 = [
         "mechanism": "Antifibrinolytic; inhibits plasminogen activation and plasmin activity",
         "mechanism_ja": "抗線溶薬。プラスミノーゲン活性化とプラスミン活性を阻害",
         "species_info": {
-            "dog": {"dose": "500 mg PO q8h (>20kg); 15-40 mg/kg IV loading then 15 mg/kg/hr CRI", "notes_ja": "変性性脊髄症・術後出血予防。ジャーマンシェパードの変性性脊髄症で使用例", "notes": "Degenerative myelopathy, post-surgical hemorrhage prevention"},
-            "horse": {"dose": "30-50 mg/kg IV slow, then 5-10 mg/kg/hr CRI", "notes_ja": "EIPH（運動誘発性肺出血）の補助療法", "notes": "EIPH adjunctive therapy"}
+            "dog": {
+                "dose": "500 mg PO q8h (>20kg); 15-40 mg/kg IV loading then 15 mg/kg/hr CRI",
+                "notes_ja": "変性性脊髄症・術後出血予防。ジャーマンシェパードの変性性脊髄症で使用例",
+                "notes": "Degenerative myelopathy, post-surgical hemorrhage prevention",
+            },
+            "horse": {
+                "dose": "30-50 mg/kg IV slow, then 5-10 mg/kg/hr CRI",
+                "notes_ja": "EIPH（運動誘発性肺出血）の補助療法",
+                "notes": "EIPH adjunctive therapy",
+            },
         },
         "side_effects": "GI upset, myopathy, thrombosis risk",
         "side_effects_ja": "消化器症状、筋症、血栓形成リスク",
         "contraindications": "DIC, active intravascular thrombosis",
         "contraindications_ja": "DIC、活動性血管内血栓症",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "atipamezole",
@@ -272,25 +505,53 @@ DRUGS_BATCH_17 = [
         "mechanism": "Selective α2-adrenergic antagonist; reverses medetomidine/dexmedetomidine",
         "mechanism_ja": "選択的α2アドレナリン拮抗薬。メデトミジン/デクスメデトミジンを拮抗",
         "species_info": {
-            "dog": {"dose": "MED投与量と等量(μg) IM; DEXの場合は5倍量(μg)", "notes_ja": "メデトミジン/デクスメデトミジン拮抗。IM投与が標準（IV急速で過覚醒リスク）", "notes": "Equal volume to medetomidine IM. 5x dexmedetomidine dose. IM preferred"},
-            "cat": {"dose": "MED投与量と等量(μg) IM", "notes_ja": "猫のα2拮抗。完全覚醒まで15-20分", "notes": "α2 reversal. Full recovery 15-20 min"},
-            "horse": {"dose": "MED投与量の2-4倍量(μg/kg) IV slow", "notes_ja": "馬はIV slow投与。急速投与で興奮・頻脈", "notes": "Slow IV in horses. Rapid injection causes excitement"},
-            "rabbit": {"dose": "1 mg/kg IM", "notes_ja": "ウサギのα2拮抗。低体温補正を併行", "notes": "α2 reversal. Address hypothermia concurrently"},
-            "hamster": {"dose": "1 mg/kg IP/SC", "notes_ja": "MMBプロトコル拮抗時に使用", "notes": "Used to reverse MMB protocol"},
+            "dog": {
+                "dose": "MED投与量と等量(μg) IM; DEXの場合は5倍量(μg)",
+                "notes_ja": "メデトミジン/デクスメデトミジン拮抗。IM投与が標準（IV急速で過覚醒リスク）",
+                "notes": "Equal volume to medetomidine IM. 5x dexmedetomidine dose. IM preferred",
+            },
+            "cat": {
+                "dose": "MED投与量と等量(μg) IM",
+                "notes_ja": "猫のα2拮抗。完全覚醒まで15-20分",
+                "notes": "α2 reversal. Full recovery 15-20 min",
+            },
+            "horse": {
+                "dose": "MED投与量の2-4倍量(μg/kg) IV slow",
+                "notes_ja": "馬はIV slow投与。急速投与で興奮・頻脈",
+                "notes": "Slow IV in horses. Rapid injection causes excitement",
+            },
+            "rabbit": {
+                "dose": "1 mg/kg IM",
+                "notes_ja": "ウサギのα2拮抗。低体温補正を併行",
+                "notes": "α2 reversal. Address hypothermia concurrently",
+            },
+            "hamster": {
+                "dose": "1 mg/kg IP/SC",
+                "notes_ja": "MMBプロトコル拮抗時に使用",
+                "notes": "Used to reverse MMB protocol",
+            },
             "guinea_pig": {"dose": "1 mg/kg SC", "notes_ja": "α2拮抗", "notes": "α2 reversal"},
             "chinchilla": {"dose": "1 mg/kg SC/IM", "notes_ja": "α2拮抗", "notes": "α2 reversal"},
             "ferret": {"dose": "0.4 mg/kg IM", "notes_ja": "フェレットのα2拮抗", "notes": "α2 reversal in ferrets"},
             "hedgehog": {"dose": "1 mg/kg SC", "notes_ja": "α2拮抗。ハリネズミ", "notes": "α2 reversal in hedgehogs"},
             "sugar_glider": {"dose": "1 mg/kg IM", "notes_ja": "フクロモモンガのα2拮抗", "notes": "α2 reversal"},
             "degu": {"dose": "1 mg/kg SC", "notes_ja": "デグーのα2拮抗", "notes": "α2 reversal"},
-            "bird": {"dose": "0.25-0.5 mg/kg IM", "notes_ja": "鳥類のα2拮抗（メデトミジン使用時のみ）", "notes": "Avian α2 reversal"},
-            "reptile": {"dose": "0.5 mg/kg IM", "notes_ja": "爬虫類のα2拮抗。覚醒遅延に注意", "notes": "Reptilian α2 reversal. Delayed recovery expected"}
+            "bird": {
+                "dose": "0.25-0.5 mg/kg IM",
+                "notes_ja": "鳥類のα2拮抗（メデトミジン使用時のみ）",
+                "notes": "Avian α2 reversal",
+            },
+            "reptile": {
+                "dose": "0.5 mg/kg IM",
+                "notes_ja": "爬虫類のα2拮抗。覚醒遅延に注意",
+                "notes": "Reptilian α2 reversal. Delayed recovery expected",
+            },
         },
         "side_effects": "Transient excitement, tachycardia, hypotension, re-sedation",
         "side_effects_ja": "一過性興奮、頻脈、低血圧、再鎮静",
         "contraindications": "None absolute; caution with concurrent opioid-only sedation",
         "contraindications_ja": "絶対的禁忌なし。オピオイド単独鎮静時は注意",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "flumazenil",
@@ -300,17 +561,37 @@ DRUGS_BATCH_17 = [
         "mechanism": "Competitive benzodiazepine receptor antagonist at GABA-A receptor",
         "mechanism_ja": "GABA-A受容体のベンゾジアゼピン結合部位の競合的拮抗薬",
         "species_info": {
-            "dog": {"dose": "0.01-0.02 mg/kg IV; 効果不十分なら1分後に追加", "notes_ja": "ミダゾラム/ジアゼパム拮抗。再鎮静に注意（半減期短い）", "notes": "Midazolam/diazepam reversal. Watch for re-sedation (short half-life)"},
-            "cat": {"dose": "0.01-0.02 mg/kg IV", "notes_ja": "ベンゾジアゼピン拮抗", "notes": "Benzodiazepine reversal"},
-            "rabbit": {"dose": "0.01-0.1 mg/kg IV", "notes_ja": "MMBプロトコルのミダゾラム拮抗", "notes": "Midazolam reversal in MMB protocol"},
-            "horse": {"dose": "0.01-0.04 mg/kg IV", "notes_ja": "ベンゾジアゼピン拮抗", "notes": "Benzodiazepine reversal"},
-            "bird": {"dose": "0.05 mg/kg IM/IV", "notes_ja": "鳥類のベンゾジアゼピン拮抗", "notes": "Avian benzodiazepine reversal"}
+            "dog": {
+                "dose": "0.01-0.02 mg/kg IV; 効果不十分なら1分後に追加",
+                "notes_ja": "ミダゾラム/ジアゼパム拮抗。再鎮静に注意（半減期短い）",
+                "notes": "Midazolam/diazepam reversal. Watch for re-sedation (short half-life)",
+            },
+            "cat": {
+                "dose": "0.01-0.02 mg/kg IV",
+                "notes_ja": "ベンゾジアゼピン拮抗",
+                "notes": "Benzodiazepine reversal",
+            },
+            "rabbit": {
+                "dose": "0.01-0.1 mg/kg IV",
+                "notes_ja": "MMBプロトコルのミダゾラム拮抗",
+                "notes": "Midazolam reversal in MMB protocol",
+            },
+            "horse": {
+                "dose": "0.01-0.04 mg/kg IV",
+                "notes_ja": "ベンゾジアゼピン拮抗",
+                "notes": "Benzodiazepine reversal",
+            },
+            "bird": {
+                "dose": "0.05 mg/kg IM/IV",
+                "notes_ja": "鳥類のベンゾジアゼピン拮抗",
+                "notes": "Avian benzodiazepine reversal",
+            },
         },
         "side_effects": "Anxiety, seizures (in benzodiazepine-dependent animals), re-sedation",
         "side_effects_ja": "不安、痙攣（ベンゾジアゼピン依存動物）、再鎮静",
         "contraindications": "Benzodiazepine-dependent seizure control",
         "contraindications_ja": "ベンゾジアゼピン依存性てんかん管理中",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "naloxone",
@@ -320,18 +601,38 @@ DRUGS_BATCH_17 = [
         "mechanism": "Competitive opioid receptor antagonist (μ, κ, δ); reverses all opioid effects",
         "mechanism_ja": "競合的オピオイド受容体拮抗薬（μ・κ・δ）。全オピオイド効果を拮抗",
         "species_info": {
-            "dog": {"dose": "0.01-0.04 mg/kg IV/IM（部分拮抗）; 0.04 mg/kg（完全拮抗）", "notes_ja": "オピオイド過量・呼吸抑制の緊急拮抗。鎮痛も消失するため疼痛管理に注意", "notes": "Opioid overdose/respiratory depression. Also reverses analgesia"},
-            "cat": {"dose": "0.01-0.04 mg/kg IV/IM", "notes_ja": "オピオイド拮抗。少量ずつtitrate", "notes": "Opioid reversal. Titrate to effect"},
-            "horse": {"dose": "0.01-0.02 mg/kg IV", "notes_ja": "オピオイド過量拮抗", "notes": "Opioid overdose reversal"},
-            "rabbit": {"dose": "0.01-0.1 mg/kg IV/SC", "notes_ja": "ブトルファノール拮抗", "notes": "Butorphanol reversal"},
+            "dog": {
+                "dose": "0.01-0.04 mg/kg IV/IM（部分拮抗）; 0.04 mg/kg（完全拮抗）",
+                "notes_ja": "オピオイド過量・呼吸抑制の緊急拮抗。鎮痛も消失するため疼痛管理に注意",
+                "notes": "Opioid overdose/respiratory depression. Also reverses analgesia",
+            },
+            "cat": {
+                "dose": "0.01-0.04 mg/kg IV/IM",
+                "notes_ja": "オピオイド拮抗。少量ずつtitrate",
+                "notes": "Opioid reversal. Titrate to effect",
+            },
+            "horse": {
+                "dose": "0.01-0.02 mg/kg IV",
+                "notes_ja": "オピオイド過量拮抗",
+                "notes": "Opioid overdose reversal",
+            },
+            "rabbit": {
+                "dose": "0.01-0.1 mg/kg IV/SC",
+                "notes_ja": "ブトルファノール拮抗",
+                "notes": "Butorphanol reversal",
+            },
             "bird": {"dose": "0.04 mg/kg IM/IV", "notes_ja": "鳥類のオピオイド拮抗", "notes": "Avian opioid reversal"},
-            "reptile": {"dose": "0.04 mg/kg IM/IV", "notes_ja": "爬虫類のオピオイド拮抗", "notes": "Reptilian opioid reversal"}
+            "reptile": {
+                "dose": "0.04 mg/kg IM/IV",
+                "notes_ja": "爬虫類のオピオイド拮抗",
+                "notes": "Reptilian opioid reversal",
+            },
         },
         "side_effects": "Acute pain (analgesia reversal), tachycardia, hypertension, pulmonary edema",
         "side_effects_ja": "急性疼痛（鎮痛消失）、頻脈、高血圧、肺水腫",
         "contraindications": "None absolute; caution in opioid-dependent animals",
         "contraindications_ja": "絶対的禁忌なし。オピオイド依存動物では注意",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "epinephrine",
@@ -341,21 +642,47 @@ DRUGS_BATCH_17 = [
         "mechanism": "Non-selective adrenergic agonist (α1, α2, β1, β2); increases HR, contractility, SVR, bronchodilation",
         "mechanism_ja": "非選択的アドレナリン作動薬（α1/α2/β1/β2）。心拍数・収縮力・末梢血管抵抗増加、気管支拡張",
         "species_info": {
-            "dog": {"dose": "CPR: 0.01 mg/kg IV q3-5min; アナフィラキシー: 0.01 mg/kg IM", "notes_ja": "CPR（RECOVER準拠）・アナフィラキシー・重度気管支痙攣", "notes": "CPR (RECOVER guidelines), anaphylaxis, severe bronchospasm"},
-            "cat": {"dose": "CPR: 0.01 mg/kg IV q3-5min; アナフィラキシー: 0.01 mg/kg IM", "notes_ja": "CPR・アナフィラキシー", "notes": "CPR, anaphylaxis"},
-            "horse": {"dose": "CPR: 0.01-0.02 mg/kg IV", "notes_ja": "CPR・アナフィラキシー", "notes": "CPR, anaphylaxis"},
+            "dog": {
+                "dose": "CPR: 0.01 mg/kg IV q3-5min; アナフィラキシー: 0.01 mg/kg IM",
+                "notes_ja": "CPR（RECOVER準拠）・アナフィラキシー・重度気管支痙攣",
+                "notes": "CPR (RECOVER guidelines), anaphylaxis, severe bronchospasm",
+            },
+            "cat": {
+                "dose": "CPR: 0.01 mg/kg IV q3-5min; アナフィラキシー: 0.01 mg/kg IM",
+                "notes_ja": "CPR・アナフィラキシー",
+                "notes": "CPR, anaphylaxis",
+            },
+            "horse": {
+                "dose": "CPR: 0.01-0.02 mg/kg IV",
+                "notes_ja": "CPR・アナフィラキシー",
+                "notes": "CPR, anaphylaxis",
+            },
             "rabbit": {"dose": "0.01 mg/kg IV/IO", "notes_ja": "CPR・アナフィラキシー", "notes": "CPR, anaphylaxis"},
-            "bird": {"dose": "0.01 mg/kg IV/IO", "notes_ja": "心停止・アナフィラキシー。気嚢呼吸に注意", "notes": "Cardiac arrest, anaphylaxis"},
-            "reptile": {"dose": "0.01 mg/kg IV/IO/ICe", "notes_ja": "心停止時", "notes": "Cardiac arrest"}
+            "bird": {
+                "dose": "0.01 mg/kg IV/IO",
+                "notes_ja": "心停止・アナフィラキシー。気嚢呼吸に注意",
+                "notes": "Cardiac arrest, anaphylaxis",
+            },
+            "reptile": {"dose": "0.01 mg/kg IV/IO/ICe", "notes_ja": "心停止時", "notes": "Cardiac arrest"},
         },
         "side_effects": "Tachyarrhythmias, hypertension, tremors, lactic acidosis",
         "side_effects_ja": "頻脈性不整脈、高血圧、振戦、乳酸アシドーシス",
         "contraindications": "Closed-angle glaucoma (relative), halothane anesthesia",
         "contraindications_ja": "閉塞隅角緑内障（相対的）、ハロタン麻酔中",
         "drug_interactions": [
-            {"drug": "propranolol", "severity": "major", "description_ja": "β遮断で末梢血管収縮・徐脈増悪", "description": "Unopposed alpha effects, severe hypertension/bradycardia"},
-            {"drug": "halothane", "severity": "major", "description_ja": "心筋のカテコラミン感受性↑で致死性不整脈", "description": "Myocardial sensitization to catecholamines"}
-        ]
+            {
+                "drug": "propranolol",
+                "severity": "major",
+                "description_ja": "β遮断で末梢血管収縮・徐脈増悪",
+                "description": "Unopposed alpha effects, severe hypertension/bradycardia",
+            },
+            {
+                "drug": "halothane",
+                "severity": "major",
+                "description_ja": "心筋のカテコラミン感受性↑で致死性不整脈",
+                "description": "Myocardial sensitization to catecholamines",
+            },
+        ],
     },
     {
         "id": "lidocaine_systemic",
@@ -365,18 +692,40 @@ DRUGS_BATCH_17 = [
         "mechanism": "Sodium channel blocker; antiarrhythmic (Class Ib), analgesic, anti-inflammatory at subanesthetic doses",
         "mechanism_ja": "Naチャネル遮断薬。抗不整脈（Ib群）、鎮痛、抗炎症（麻酔以下の用量で）",
         "species_info": {
-            "dog": {"dose": "ボーラス1-2 mg/kg IV slow; CRI 25-80 μg/kg/min", "notes_ja": "心室性不整脈・MAC-sparing CRI・イレウス治療・多剤鎮痛CRI（MLK）", "notes": "Ventricular arrhythmias, MAC-sparing CRI, ileus, MLK analgesia"},
-            "cat": {"dose": "ボーラス0.25-0.5 mg/kg IV slow; CRI 10-25 μg/kg/min", "notes_ja": "猫はリドカイン毒性感受性高い。低用量から。痙攣に注意", "notes": "Cats highly sensitive. Start low. Seizure risk at higher doses"},
-            "horse": {"dose": "ボーラス1.3 mg/kg IV slow; CRI 50 μg/kg/min", "notes_ja": "術後イレウス・MAC-sparing。TIVA（ケタミン+リドカイン）", "notes": "Post-op ileus, MAC-sparing, TIVA component"}
+            "dog": {
+                "dose": "ボーラス1-2 mg/kg IV slow; CRI 25-80 μg/kg/min",
+                "notes_ja": "心室性不整脈・MAC-sparing CRI・イレウス治療・多剤鎮痛CRI（MLK）",
+                "notes": "Ventricular arrhythmias, MAC-sparing CRI, ileus, MLK analgesia",
+            },
+            "cat": {
+                "dose": "ボーラス0.25-0.5 mg/kg IV slow; CRI 10-25 μg/kg/min",
+                "notes_ja": "猫はリドカイン毒性感受性高い。低用量から。痙攣に注意",
+                "notes": "Cats highly sensitive. Start low. Seizure risk at higher doses",
+            },
+            "horse": {
+                "dose": "ボーラス1.3 mg/kg IV slow; CRI 50 μg/kg/min",
+                "notes_ja": "術後イレウス・MAC-sparing。TIVA（ケタミン+リドカイン）",
+                "notes": "Post-op ileus, MAC-sparing, TIVA component",
+            },
         },
         "side_effects": "Seizures, CNS depression, bradycardia, hypotension, muscle tremors",
         "side_effects_ja": "痙攣、CNS抑制、徐脈、低血圧、筋振戦",
         "contraindications": "AV block, severe hepatic disease, cats at high doses",
         "contraindications_ja": "房室ブロック、重度肝疾患、猫の高用量",
         "drug_interactions": [
-            {"drug": "propranolol", "severity": "moderate", "description_ja": "リドカイン血中濃度上昇", "description": "Increased lidocaine levels"},
-            {"drug": "cimetidine", "severity": "moderate", "description_ja": "リドカイン代謝低下", "description": "Decreased lidocaine metabolism"}
-        ]
+            {
+                "drug": "propranolol",
+                "severity": "moderate",
+                "description_ja": "リドカイン血中濃度上昇",
+                "description": "Increased lidocaine levels",
+            },
+            {
+                "drug": "cimetidine",
+                "severity": "moderate",
+                "description_ja": "リドカイン代謝低下",
+                "description": "Decreased lidocaine metabolism",
+            },
+        ],
     },
     {
         "id": "tramadol",
@@ -386,21 +735,51 @@ DRUGS_BATCH_17 = [
         "mechanism": "Weak μ-opioid agonist + serotonin/norepinephrine reuptake inhibitor (dual mechanism)",
         "mechanism_ja": "弱いμオピオイド作動薬＋セロトニン/ノルエピネフリン再取り込み阻害（二重機序）",
         "species_info": {
-            "dog": {"dose": "2-5 mg/kg PO q8-12h; CRI 1-2 mg/kg/hr", "notes_ja": "犬ではM1代謝物産生が少なくオピオイド効果低い。セロトニン作用が主。慢性疼痛に", "notes": "Dogs produce less M1 metabolite. Serotonergic effect predominant. Chronic pain"},
-            "cat": {"dose": "1-2 mg/kg PO q12h", "notes_ja": "猫はM1代謝物を効率的に産生しオピオイド効果が高い。中等度疼痛に有効", "notes": "Cats produce M1 efficiently. Good opioid effect. Moderate pain"},
-            "horse": {"dose": "2-5 mg/kg PO q12h", "notes_ja": "馬の慢性疼痛管理。バイオアベイラビリティ低い", "notes": "Chronic pain. Low oral bioavailability"},
-            "rabbit": {"dose": "5-15 mg/kg PO q12h", "notes_ja": "ウサギの術後疼痛管理", "notes": "Post-operative pain management"},
-            "guinea_pig": {"dose": "5-10 mg/kg PO q12h", "notes_ja": "中等度疼痛管理", "notes": "Moderate pain management"},
-            "ferret": {"dose": "5-10 mg/kg PO q12h", "notes_ja": "フェレットの疼痛管理", "notes": "Pain management"}
+            "dog": {
+                "dose": "2-5 mg/kg PO q8-12h; CRI 1-2 mg/kg/hr",
+                "notes_ja": "犬ではM1代謝物産生が少なくオピオイド効果低い。セロトニン作用が主。慢性疼痛に",
+                "notes": "Dogs produce less M1 metabolite. Serotonergic effect predominant. Chronic pain",
+            },
+            "cat": {
+                "dose": "1-2 mg/kg PO q12h",
+                "notes_ja": "猫はM1代謝物を効率的に産生しオピオイド効果が高い。中等度疼痛に有効",
+                "notes": "Cats produce M1 efficiently. Good opioid effect. Moderate pain",
+            },
+            "horse": {
+                "dose": "2-5 mg/kg PO q12h",
+                "notes_ja": "馬の慢性疼痛管理。バイオアベイラビリティ低い",
+                "notes": "Chronic pain. Low oral bioavailability",
+            },
+            "rabbit": {
+                "dose": "5-15 mg/kg PO q12h",
+                "notes_ja": "ウサギの術後疼痛管理",
+                "notes": "Post-operative pain management",
+            },
+            "guinea_pig": {
+                "dose": "5-10 mg/kg PO q12h",
+                "notes_ja": "中等度疼痛管理",
+                "notes": "Moderate pain management",
+            },
+            "ferret": {"dose": "5-10 mg/kg PO q12h", "notes_ja": "フェレットの疼痛管理", "notes": "Pain management"},
         },
         "side_effects": "Sedation, constipation, seizures (high dose), serotonin syndrome",
         "side_effects_ja": "鎮静、便秘、痙攣（高用量）、セロトニン症候群",
         "contraindications": "Concurrent MAOIs, seizure disorders, concurrent SSRIs",
         "contraindications_ja": "MAOI併用、てんかん、SSRI併用",
         "drug_interactions": [
-            {"drug": "fluoxetine", "severity": "major", "description_ja": "セロトニン症候群リスク", "description": "Serotonin syndrome risk"},
-            {"drug": "phenobarbital", "severity": "moderate", "description_ja": "トラマドール代謝促進", "description": "Increased tramadol metabolism"}
-        ]
+            {
+                "drug": "fluoxetine",
+                "severity": "major",
+                "description_ja": "セロトニン症候群リスク",
+                "description": "Serotonin syndrome risk",
+            },
+            {
+                "drug": "phenobarbital",
+                "severity": "moderate",
+                "description_ja": "トラマドール代謝促進",
+                "description": "Increased tramadol metabolism",
+            },
+        ],
     },
     {
         "id": "gabapentin_oral",
@@ -410,20 +789,45 @@ DRUGS_BATCH_17 = [
         "mechanism": "Binds α2δ subunit of voltage-gated calcium channels, reducing excitatory neurotransmitter release",
         "mechanism_ja": "電位依存性Caチャネルα2δサブユニットに結合し、興奮性神経伝達物質放出を抑制",
         "species_info": {
-            "dog": {"dose": "5-10 mg/kg PO q8-12h; 神経障害性疼痛: 10-20 mg/kg PO q8h", "notes_ja": "神経障害性疼痛・慢性疼痛・術前抗不安。用量漸増で鎮静最小化", "notes": "Neuropathic pain, chronic pain, pre-visit anxiolysis. Titrate up to minimize sedation"},
-            "cat": {"dose": "5-10 mg/kg PO q8-12h; 抗不安: 50-100 mg/cat 来院90分前", "notes_ja": "猫の来院前抗不安に広く使用（AAFP推奨）。キシリトール含有液剤は禁忌", "notes": "Pre-visit anxiolysis (AAFP recommended). Avoid xylitol-containing liquid formulations"},
-            "rabbit": {"dose": "5-10 mg/kg PO q8-12h", "notes_ja": "術後疼痛・神経障害性疼痛", "notes": "Post-op pain, neuropathic pain"},
-            "horse": {"dose": "5-20 mg/kg PO q8-12h", "notes_ja": "神経障害性疼痛管理。バイオアベイラビリティ約16%", "notes": "Neuropathic pain. Bioavailability ~16%"},
-            "bird": {"dose": "10-25 mg/kg PO q8-12h", "notes_ja": "鳥類の神経障害性疼痛", "notes": "Avian neuropathic pain"},
-            "ferret": {"dose": "3-5 mg/kg PO q8-12h", "notes_ja": "フェレットの疼痛管理", "notes": "Pain management"}
+            "dog": {
+                "dose": "5-10 mg/kg PO q8-12h; 神経障害性疼痛: 10-20 mg/kg PO q8h",
+                "notes_ja": "神経障害性疼痛・慢性疼痛・術前抗不安。用量漸増で鎮静最小化",
+                "notes": "Neuropathic pain, chronic pain, pre-visit anxiolysis. Titrate up to minimize sedation",
+            },
+            "cat": {
+                "dose": "5-10 mg/kg PO q8-12h; 抗不安: 50-100 mg/cat 来院90分前",
+                "notes_ja": "猫の来院前抗不安に広く使用（AAFP推奨）。キシリトール含有液剤は禁忌",
+                "notes": "Pre-visit anxiolysis (AAFP recommended). Avoid xylitol-containing liquid formulations",
+            },
+            "rabbit": {
+                "dose": "5-10 mg/kg PO q8-12h",
+                "notes_ja": "術後疼痛・神経障害性疼痛",
+                "notes": "Post-op pain, neuropathic pain",
+            },
+            "horse": {
+                "dose": "5-20 mg/kg PO q8-12h",
+                "notes_ja": "神経障害性疼痛管理。バイオアベイラビリティ約16%",
+                "notes": "Neuropathic pain. Bioavailability ~16%",
+            },
+            "bird": {
+                "dose": "10-25 mg/kg PO q8-12h",
+                "notes_ja": "鳥類の神経障害性疼痛",
+                "notes": "Avian neuropathic pain",
+            },
+            "ferret": {"dose": "3-5 mg/kg PO q8-12h", "notes_ja": "フェレットの疼痛管理", "notes": "Pain management"},
         },
         "side_effects": "Sedation, ataxia, weight gain",
         "side_effects_ja": "鎮静、運動失調、体重増加",
         "contraindications": "Renal impairment (adjust dose), xylitol-containing formulations (dogs/cats)",
         "contraindications_ja": "腎機能障害（用量調整）、キシリトール含有製剤（犬猫）",
         "drug_interactions": [
-            {"drug": "antacids", "severity": "minor", "description_ja": "吸収低下（2時間空ける）", "description": "Decreased absorption (separate by 2 hours)"}
-        ]
+            {
+                "drug": "antacids",
+                "severity": "minor",
+                "description_ja": "吸収低下（2時間空ける）",
+                "description": "Decreased absorption (separate by 2 hours)",
+            }
+        ],
     },
     {
         "id": "vitamin_k1",
@@ -433,20 +837,41 @@ DRUGS_BATCH_17 = [
         "mechanism": "Essential cofactor for hepatic synthesis of clotting factors II, VII, IX, X",
         "mechanism_ja": "凝固因子II/VII/IX/Xの肝合成に必須の補因子",
         "species_info": {
-            "dog": {"dose": "2.5-5 mg/kg PO/SC q12h（抗凝固剤中毒）; 0.25-0.5 mg/kg（維持）", "notes_ja": "殺鼠剤中毒（第2世代: 4-6週間投与）。SC投与推奨（IV: アナフィラキシーリスク）", "notes": "Anticoagulant rodenticide toxicity. SC preferred (IV anaphylaxis risk). 2nd gen: 4-6 weeks"},
-            "cat": {"dose": "2.5-5 mg/kg PO/SC q12h", "notes_ja": "殺鼠剤中毒。猫はユリ中毒との鑑別注意", "notes": "Rodenticide toxicity. Differentiate from lily toxicosis"},
-            "horse": {"dose": "0.5-1 mg/kg SC/IM q12h", "notes_ja": "ワルファリン系殺鼠剤中毒・肝不全", "notes": "Warfarin toxicity, hepatic failure"},
+            "dog": {
+                "dose": "2.5-5 mg/kg PO/SC q12h（抗凝固剤中毒）; 0.25-0.5 mg/kg（維持）",
+                "notes_ja": "殺鼠剤中毒（第2世代: 4-6週間投与）。SC投与推奨（IV: アナフィラキシーリスク）",
+                "notes": "Anticoagulant rodenticide toxicity. SC preferred (IV anaphylaxis risk). 2nd gen: 4-6 weeks",
+            },
+            "cat": {
+                "dose": "2.5-5 mg/kg PO/SC q12h",
+                "notes_ja": "殺鼠剤中毒。猫はユリ中毒との鑑別注意",
+                "notes": "Rodenticide toxicity. Differentiate from lily toxicosis",
+            },
+            "horse": {
+                "dose": "0.5-1 mg/kg SC/IM q12h",
+                "notes_ja": "ワルファリン系殺鼠剤中毒・肝不全",
+                "notes": "Warfarin toxicity, hepatic failure",
+            },
             "rabbit": {"dose": "1-10 mg/kg SC/IM q24h", "notes_ja": "殺鼠剤中毒", "notes": "Rodenticide toxicity"},
-            "bird": {"dose": "2.5-5 mg/kg IM q24h", "notes_ja": "凝固障害・殺鼠剤中毒", "notes": "Coagulopathy, rodenticide toxicity"},
-            "ferret": {"dose": "1-2.5 mg/kg SC q12-24h", "notes_ja": "殺鼠剤中毒", "notes": "Rodenticide toxicity"}
+            "bird": {
+                "dose": "2.5-5 mg/kg IM q24h",
+                "notes_ja": "凝固障害・殺鼠剤中毒",
+                "notes": "Coagulopathy, rodenticide toxicity",
+            },
+            "ferret": {"dose": "1-2.5 mg/kg SC q12-24h", "notes_ja": "殺鼠剤中毒", "notes": "Rodenticide toxicity"},
         },
         "side_effects": "Anaphylaxis (IV), hematoma at injection site, pain on injection",
         "side_effects_ja": "アナフィラキシー（IV投与時）、注射部位血腫、注射時疼痛",
         "contraindications": "IV administration (anaphylaxis risk), hepatic failure (response may be poor)",
         "contraindications_ja": "IV投与（アナフィラキシーリスク）、肝不全（効果不十分の可能性）",
         "drug_interactions": [
-            {"drug": "warfarin", "severity": "major", "description_ja": "ワルファリンの効果を拮抗（治療目的）", "description": "Antagonizes warfarin (therapeutic intent)"}
-        ]
+            {
+                "drug": "warfarin",
+                "severity": "major",
+                "description_ja": "ワルファリンの効果を拮抗（治療目的）",
+                "description": "Antagonizes warfarin (therapeutic intent)",
+            }
+        ],
     },
     {
         "id": "activated_charcoal",
@@ -456,19 +881,36 @@ DRUGS_BATCH_17 = [
         "mechanism": "Adsorbs toxins in GI tract, preventing systemic absorption",
         "mechanism_ja": "消化管内で毒素を吸着し、全身吸収を防止",
         "species_info": {
-            "dog": {"dose": "1-2 g/kg PO（カタルシス剤併用で初回のみ）; 繰返し0.5 g/kg q6-8h", "notes_ja": "中毒初期（摂取2時間以内が理想）。チョコレート・NSAID・殺鼠剤等", "notes": "Early toxicosis (ideally within 2h). Chocolate, NSAIDs, rodenticides"},
-            "cat": {"dose": "1-2 g/kg PO", "notes_ja": "猫の中毒管理。高ナトリウム血症に注意", "notes": "Toxicosis management. Monitor for hypernatremia"},
-            "horse": {"dose": "1-3 g/kg via nasogastric tube", "notes_ja": "経鼻胃管で投与。大量の水で懸濁", "notes": "Via nasogastric tube. Suspend in large volume of water"},
+            "dog": {
+                "dose": "1-2 g/kg PO（カタルシス剤併用で初回のみ）; 繰返し0.5 g/kg q6-8h",
+                "notes_ja": "中毒初期（摂取2時間以内が理想）。チョコレート・NSAID・殺鼠剤等",
+                "notes": "Early toxicosis (ideally within 2h). Chocolate, NSAIDs, rodenticides",
+            },
+            "cat": {
+                "dose": "1-2 g/kg PO",
+                "notes_ja": "猫の中毒管理。高ナトリウム血症に注意",
+                "notes": "Toxicosis management. Monitor for hypernatremia",
+            },
+            "horse": {
+                "dose": "1-3 g/kg via nasogastric tube",
+                "notes_ja": "経鼻胃管で投与。大量の水で懸濁",
+                "notes": "Via nasogastric tube. Suspend in large volume of water",
+            },
             "rabbit": {"dose": "1 g/kg PO", "notes_ja": "中毒管理", "notes": "Toxicosis management"},
-            "bird": {"dose": "1-2 g/kg PO via gavage", "notes_ja": "そのうチューブで投与", "notes": "Via crop tube"}
+            "bird": {"dose": "1-2 g/kg PO via gavage", "notes_ja": "そのうチューブで投与", "notes": "Via crop tube"},
         },
         "side_effects": "Aspiration pneumonia, constipation, black feces, hypernatremia (with sorbitol)",
         "side_effects_ja": "誤嚥性肺炎、便秘、黒色便、高ナトリウム血症（ソルビトール併用時）",
         "contraindications": "Caustic ingestion, petroleum products, unconscious animals (aspiration risk)",
         "contraindications_ja": "腐食性物質摂取、石油製品、意識消失動物（誤嚥リスク）",
         "drug_interactions": [
-            {"drug": "all_oral_medications", "severity": "major", "description_ja": "経口薬の吸収を阻害", "description": "Adsorbs most oral medications"}
-        ]
+            {
+                "drug": "all_oral_medications",
+                "severity": "major",
+                "description_ja": "経口薬の吸収を阻害",
+                "description": "Adsorbs most oral medications",
+            }
+        ],
     },
     {
         "id": "apomorphine",
@@ -478,16 +920,29 @@ DRUGS_BATCH_17 = [
         "mechanism": "Dopamine D2 receptor agonist in chemoreceptor trigger zone (CTZ), induces emesis",
         "mechanism_ja": "化学受容器引き金帯（CTZ）のドパミンD2受容体作動薬。催吐作用",
         "species_info": {
-            "dog": {"dose": "0.03-0.04 mg/kg IV; 0.1 mg/kg 結膜嚢点眼", "notes_ja": "犬の催吐剤第一選択。摂取2時間以内。嘔吐後に結膜をフラッシュ", "notes": "First-line emetic in dogs. Within 2h of ingestion. Flush conjunctiva after emesis"},
-            "cat": {"dose": "使用しない", "notes_ja": "猫には無効。代わりにデクスメデトミジン3-7μg/kg IM", "notes": "Ineffective in cats. Use dexmedetomidine 3-7 μg/kg IM instead"}
+            "dog": {
+                "dose": "0.03-0.04 mg/kg IV; 0.1 mg/kg 結膜嚢点眼",
+                "notes_ja": "犬の催吐剤第一選択。摂取2時間以内。嘔吐後に結膜をフラッシュ",
+                "notes": "First-line emetic in dogs. Within 2h of ingestion. Flush conjunctiva after emesis",
+            },
+            "cat": {
+                "dose": "使用しない",
+                "notes_ja": "猫には無効。代わりにデクスメデトミジン3-7μg/kg IM",
+                "notes": "Ineffective in cats. Use dexmedetomidine 3-7 μg/kg IM instead",
+            },
         },
         "side_effects": "Protracted vomiting, sedation, bradycardia, CNS depression",
         "side_effects_ja": "遷延性嘔吐、鎮静、徐脈、CNS抑制",
         "contraindications": "Caustic/petroleum ingestion, seizures, unconsciousness, brachycephalic breeds (aspiration risk), cats",
         "contraindications_ja": "腐食性/石油製品摂取、痙攣中、意識消失、短頭種（誤嚥リスク）、猫",
         "drug_interactions": [
-            {"drug": "ondansetron", "severity": "moderate", "description_ja": "催吐効果を減弱", "description": "May reduce emetic efficacy"}
-        ]
+            {
+                "drug": "ondansetron",
+                "severity": "moderate",
+                "description_ja": "催吐効果を減弱",
+                "description": "May reduce emetic efficacy",
+            }
+        ],
     },
     {
         "id": "n_acetylcysteine",
@@ -497,15 +952,27 @@ DRUGS_BATCH_17 = [
         "mechanism": "Glutathione precursor; replenishes hepatic glutathione stores depleted by toxic metabolites",
         "mechanism_ja": "グルタチオン前駆体。毒性代謝物で枯渇した肝グルタチオンを補充",
         "species_info": {
-            "dog": {"dose": "Loading 140 mg/kg IV/PO, then 70 mg/kg q6h×17回", "notes_ja": "アセトアミノフェン中毒（犬は猫より耐性あるが過量で中毒）。ハインツ小体性貧血", "notes": "Acetaminophen toxicity. Heinz body anemia"},
-            "cat": {"dose": "Loading 140 mg/kg IV slow, then 70 mg/kg IV q6h×17回", "notes_ja": "アセトアミノフェン中毒（猫は極めて感受性高い）。グルタチオン枯渇が急速", "notes": "Acetaminophen toxicity (cats extremely sensitive). Rapid glutathione depletion"},
-            "horse": {"dose": "140 mg/kg IV loading, then 70 mg/kg q6h", "notes_ja": "肝毒性物質への解毒", "notes": "Hepatotoxin detoxification"}
+            "dog": {
+                "dose": "Loading 140 mg/kg IV/PO, then 70 mg/kg q6h×17回",
+                "notes_ja": "アセトアミノフェン中毒（犬は猫より耐性あるが過量で中毒）。ハインツ小体性貧血",
+                "notes": "Acetaminophen toxicity. Heinz body anemia",
+            },
+            "cat": {
+                "dose": "Loading 140 mg/kg IV slow, then 70 mg/kg IV q6h×17回",
+                "notes_ja": "アセトアミノフェン中毒（猫は極めて感受性高い）。グルタチオン枯渇が急速",
+                "notes": "Acetaminophen toxicity (cats extremely sensitive). Rapid glutathione depletion",
+            },
+            "horse": {
+                "dose": "140 mg/kg IV loading, then 70 mg/kg q6h",
+                "notes_ja": "肝毒性物質への解毒",
+                "notes": "Hepatotoxin detoxification",
+            },
         },
         "side_effects": "Nausea, vomiting, anaphylactoid reaction (IV), bad taste/smell",
         "side_effects_ja": "悪心、嘔吐、アナフィラキシー様反応（IV）、不快な味/臭い",
         "contraindications": "None absolute for toxicity treatment",
         "contraindications_ja": "中毒治療では絶対的禁忌なし",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "intralipid",
@@ -515,15 +982,23 @@ DRUGS_BATCH_17 = [
         "mechanism": "Lipid emulsion acts as 'lipid sink' sequestering lipophilic drugs; provides alternative cardiac energy substrate",
         "mechanism_ja": "脂肪乳剤が脂溶性薬物を吸着する「脂質シンク」として作用。心筋の代替エネルギー基質を提供",
         "species_info": {
-            "dog": {"dose": "ボーラス1.5 mL/kg IV over 1min, CRI 0.25 mL/kg/min × 30-60min", "notes_ja": "局所麻酔薬中毒（ブピバカイン等）・脂溶性薬物中毒（イベルメクチン、大麻）", "notes": "Local anesthetic toxicity, lipophilic drug toxicity (ivermectin, cannabis, permethrin)"},
-            "cat": {"dose": "ボーラス1.5 mL/kg IV, CRI 0.25 mL/kg/min × 30-60min", "notes_ja": "ペルメトリン中毒（猫で致死的）・リドカイン中毒", "notes": "Permethrin toxicity (lethal in cats), lidocaine toxicity"},
-            "horse": {"dose": "1.5 mL/kg IV bolus", "notes_ja": "局所麻酔薬中毒", "notes": "Local anesthetic toxicity"}
+            "dog": {
+                "dose": "ボーラス1.5 mL/kg IV over 1min, CRI 0.25 mL/kg/min × 30-60min",
+                "notes_ja": "局所麻酔薬中毒（ブピバカイン等）・脂溶性薬物中毒（イベルメクチン、大麻）",
+                "notes": "Local anesthetic toxicity, lipophilic drug toxicity (ivermectin, cannabis, permethrin)",
+            },
+            "cat": {
+                "dose": "ボーラス1.5 mL/kg IV, CRI 0.25 mL/kg/min × 30-60min",
+                "notes_ja": "ペルメトリン中毒（猫で致死的）・リドカイン中毒",
+                "notes": "Permethrin toxicity (lethal in cats), lidocaine toxicity",
+            },
+            "horse": {"dose": "1.5 mL/kg IV bolus", "notes_ja": "局所麻酔薬中毒", "notes": "Local anesthetic toxicity"},
         },
         "side_effects": "Lipemia, pancreatitis, fat embolism, interference with lab values",
         "side_effects_ja": "脂血症、膵炎、脂肪塞栓、検査値への干渉",
         "contraindications": "Severe egg allergy, severe hyperlipidemia, acute pancreatitis",
         "contraindications_ja": "重度卵アレルギー、重度高脂血症、急性膵炎",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "dexamethasone_sp",
@@ -533,21 +1008,55 @@ DRUGS_BATCH_17 = [
         "mechanism": "Potent long-acting glucocorticoid; anti-inflammatory and immunosuppressive (30x potency of cortisol)",
         "mechanism_ja": "強力な長時間作用型糖質コルチコイド。抗炎症・免疫抑制（コルチゾールの30倍力価）",
         "species_info": {
-            "dog": {"dose": "抗炎症: 0.1-0.2 mg/kg IV/IM; 免疫抑制: 0.2-0.5 mg/kg IV; ショック: 4-6 mg/kg IV", "notes_ja": "アナフィラキシー・脊髄損傷（8h以内）・免疫介在性溶血性貧血・アジソンクリーゼ", "notes": "Anaphylaxis, spinal cord injury (<8h), IMHA, Addisonian crisis"},
-            "cat": {"dose": "抗炎症: 0.1-0.2 mg/kg IV/IM", "notes_ja": "猫の抗炎症。ステロイド性糖尿病に注意", "notes": "Anti-inflammatory. Monitor for steroid diabetes"},
-            "horse": {"dose": "0.04-0.2 mg/kg IV/IM", "notes_ja": "蕁麻疹・RAO（回帰性気道閉塞）", "notes": "Urticaria, RAO"},
-            "rabbit": {"dose": "0.1-0.2 mg/kg IV/SC", "notes_ja": "ショック・重度炎症。ウサギは免疫抑制に敏感", "notes": "Shock, severe inflammation. Rabbits sensitive to immunosuppression"},
-            "bird": {"dose": "2-4 mg/kg IM", "notes_ja": "ショック・重度外傷。短期使用に限定", "notes": "Shock, severe trauma. Short-term use only"},
-            "reptile": {"dose": "0.1-0.6 mg/kg IM/IV", "notes_ja": "ショック・脊髄損傷", "notes": "Shock, spinal cord injury"}
+            "dog": {
+                "dose": "抗炎症: 0.1-0.2 mg/kg IV/IM; 免疫抑制: 0.2-0.5 mg/kg IV; ショック: 4-6 mg/kg IV",
+                "notes_ja": "アナフィラキシー・脊髄損傷（8h以内）・免疫介在性溶血性貧血・アジソンクリーゼ",
+                "notes": "Anaphylaxis, spinal cord injury (<8h), IMHA, Addisonian crisis",
+            },
+            "cat": {
+                "dose": "抗炎症: 0.1-0.2 mg/kg IV/IM",
+                "notes_ja": "猫の抗炎症。ステロイド性糖尿病に注意",
+                "notes": "Anti-inflammatory. Monitor for steroid diabetes",
+            },
+            "horse": {
+                "dose": "0.04-0.2 mg/kg IV/IM",
+                "notes_ja": "蕁麻疹・RAO（回帰性気道閉塞）",
+                "notes": "Urticaria, RAO",
+            },
+            "rabbit": {
+                "dose": "0.1-0.2 mg/kg IV/SC",
+                "notes_ja": "ショック・重度炎症。ウサギは免疫抑制に敏感",
+                "notes": "Shock, severe inflammation. Rabbits sensitive to immunosuppression",
+            },
+            "bird": {
+                "dose": "2-4 mg/kg IM",
+                "notes_ja": "ショック・重度外傷。短期使用に限定",
+                "notes": "Shock, severe trauma. Short-term use only",
+            },
+            "reptile": {
+                "dose": "0.1-0.6 mg/kg IM/IV",
+                "notes_ja": "ショック・脊髄損傷",
+                "notes": "Shock, spinal cord injury",
+            },
         },
         "side_effects": "PU/PD, polyphagia, GI ulceration, delayed wound healing, iatrogenic Cushing's",
         "side_effects_ja": "多飲多尿、多食、消化管潰瘍、創傷治癒遅延、医原性クッシング",
         "contraindications": "Diabetes mellitus, active GI ulceration, systemic fungal infection",
         "contraindications_ja": "糖尿病、活動性消化管潰瘍、全身性真菌感染",
         "drug_interactions": [
-            {"drug": "nsaids", "severity": "major", "description_ja": "消化管潰瘍リスクの著明な増加", "description": "Markedly increased GI ulceration risk"},
-            {"drug": "insulin", "severity": "moderate", "description_ja": "血糖上昇によりインスリン必要量増加", "description": "Hyperglycemia increases insulin requirements"}
-        ]
+            {
+                "drug": "nsaids",
+                "severity": "major",
+                "description_ja": "消化管潰瘍リスクの著明な増加",
+                "description": "Markedly increased GI ulceration risk",
+            },
+            {
+                "drug": "insulin",
+                "severity": "moderate",
+                "description_ja": "血糖上昇によりインスリン必要量増加",
+                "description": "Hyperglycemia increases insulin requirements",
+            },
+        ],
     },
     {
         "id": "prednisolone",
@@ -557,22 +1066,56 @@ DRUGS_BATCH_17 = [
         "mechanism": "Intermediate-acting glucocorticoid; 4x potency of cortisol",
         "mechanism_ja": "中間型糖質コルチコイド。コルチゾールの4倍力価",
         "species_info": {
-            "dog": {"dose": "抗炎症: 0.5-1 mg/kg PO q12-24h; 免疫抑制: 2-4 mg/kg PO q12h", "notes_ja": "アレルギー・免疫介在性疾患・リンパ腫（CHOP）。漸減スケジュールで離脱", "notes": "Allergy, immune-mediated disease, lymphoma (CHOP). Taper schedule for discontinuation"},
-            "cat": {"dose": "1-2 mg/kg PO q12-24h; 免疫抑制: 2-4 mg/kg PO q12h", "notes_ja": "猫はプレドニゾン→プレドニゾロン変換が不良。プレドニゾロンを使用", "notes": "Cats poorly convert prednisone to prednisolone. Use prednisolone"},
-            "horse": {"dose": "0.5-1 mg/kg PO q24h; 漸減", "notes_ja": "RAO・免疫介在性疾患。蹄葉炎リスクに注意", "notes": "RAO, immune-mediated disease. Monitor for laminitis"},
-            "rabbit": {"dose": "0.5-2 mg/kg PO q12-24h", "notes_ja": "免疫抑制に敏感。短期使用推奨", "notes": "Sensitive to immunosuppression. Short-term use"},
-            "guinea_pig": {"dose": "0.5-1 mg/kg PO q12-24h", "notes_ja": "短期使用。免疫抑制リスク", "notes": "Short-term use. Immunosuppression risk"},
+            "dog": {
+                "dose": "抗炎症: 0.5-1 mg/kg PO q12-24h; 免疫抑制: 2-4 mg/kg PO q12h",
+                "notes_ja": "アレルギー・免疫介在性疾患・リンパ腫（CHOP）。漸減スケジュールで離脱",
+                "notes": "Allergy, immune-mediated disease, lymphoma (CHOP). Taper schedule for discontinuation",
+            },
+            "cat": {
+                "dose": "1-2 mg/kg PO q12-24h; 免疫抑制: 2-4 mg/kg PO q12h",
+                "notes_ja": "猫はプレドニゾン→プレドニゾロン変換が不良。プレドニゾロンを使用",
+                "notes": "Cats poorly convert prednisone to prednisolone. Use prednisolone",
+            },
+            "horse": {
+                "dose": "0.5-1 mg/kg PO q24h; 漸減",
+                "notes_ja": "RAO・免疫介在性疾患。蹄葉炎リスクに注意",
+                "notes": "RAO, immune-mediated disease. Monitor for laminitis",
+            },
+            "rabbit": {
+                "dose": "0.5-2 mg/kg PO q12-24h",
+                "notes_ja": "免疫抑制に敏感。短期使用推奨",
+                "notes": "Sensitive to immunosuppression. Short-term use",
+            },
+            "guinea_pig": {
+                "dose": "0.5-1 mg/kg PO q12-24h",
+                "notes_ja": "短期使用。免疫抑制リスク",
+                "notes": "Short-term use. Immunosuppression risk",
+            },
             "ferret": {"dose": "1-2 mg/kg PO q12h", "notes_ja": "リンパ腫・IBD", "notes": "Lymphoma, IBD"},
-            "bird": {"dose": "1-2 mg/kg PO q12h", "notes_ja": "抗炎症。短期使用に限定", "notes": "Anti-inflammatory. Short-term only"}
+            "bird": {
+                "dose": "1-2 mg/kg PO q12h",
+                "notes_ja": "抗炎症。短期使用に限定",
+                "notes": "Anti-inflammatory. Short-term only",
+            },
         },
         "side_effects": "PU/PD, polyphagia, hepatopathy (dogs), diabetes (cats), GI ulceration",
         "side_effects_ja": "多飲多尿、多食、肝障害（犬）、糖尿病（猫）、消化管潰瘍",
         "contraindications": "Diabetes, systemic fungal infection, GI ulceration",
         "contraindications_ja": "糖尿病、全身性真菌感染、消化管潰瘍",
         "drug_interactions": [
-            {"drug": "nsaids", "severity": "major", "description_ja": "消化管潰瘍リスク増加", "description": "Increased GI ulceration risk"},
-            {"drug": "phenobarbital", "severity": "moderate", "description_ja": "プレドニゾロン代謝促進", "description": "Increased prednisolone metabolism"}
-        ]
+            {
+                "drug": "nsaids",
+                "severity": "major",
+                "description_ja": "消化管潰瘍リスク増加",
+                "description": "Increased GI ulceration risk",
+            },
+            {
+                "drug": "phenobarbital",
+                "severity": "moderate",
+                "description_ja": "プレドニゾロン代謝促進",
+                "description": "Increased prednisolone metabolism",
+            },
+        ],
     },
     {
         "id": "methylprednisolone",
@@ -582,17 +1125,34 @@ DRUGS_BATCH_17 = [
         "mechanism": "Intermediate-acting glucocorticoid; depot formulation for prolonged effect (2-4 weeks)",
         "mechanism_ja": "中間型糖質コルチコイド。デポ製剤で2-4週間の持続効果",
         "species_info": {
-            "dog": {"dose": "1 mg/kg IM（デポ）; 関節内 10-40 mg/関節", "notes_ja": "アレルギー性皮膚炎・関節炎。繰り返し使用でクッシング・糖尿病", "notes": "Allergic dermatitis, arthritis. Repeated use risks Cushing's, diabetes"},
-            "cat": {"dose": "10-20 mg/cat IM（デポ）; 効果2-4週間", "notes_ja": "猫の喘息・好酸球性肉芽腫症候群。糖尿病誘発リスク", "notes": "Feline asthma, eosinophilic granuloma complex. Diabetes risk"},
-            "horse": {"dose": "関節内 40-120 mg/関節", "notes_ja": "関節炎・滑液嚢炎。蹄葉炎リスクに注意", "notes": "Arthritis, bursitis. Laminitis risk"}
+            "dog": {
+                "dose": "1 mg/kg IM（デポ）; 関節内 10-40 mg/関節",
+                "notes_ja": "アレルギー性皮膚炎・関節炎。繰り返し使用でクッシング・糖尿病",
+                "notes": "Allergic dermatitis, arthritis. Repeated use risks Cushing's, diabetes",
+            },
+            "cat": {
+                "dose": "10-20 mg/cat IM（デポ）; 効果2-4週間",
+                "notes_ja": "猫の喘息・好酸球性肉芽腫症候群。糖尿病誘発リスク",
+                "notes": "Feline asthma, eosinophilic granuloma complex. Diabetes risk",
+            },
+            "horse": {
+                "dose": "関節内 40-120 mg/関節",
+                "notes_ja": "関節炎・滑液嚢炎。蹄葉炎リスクに注意",
+                "notes": "Arthritis, bursitis. Laminitis risk",
+            },
         },
         "side_effects": "PU/PD, diabetes (cats), laminitis (horses), injection site atrophy",
         "side_effects_ja": "多飲多尿、糖尿病（猫）、蹄葉炎（馬）、注射部位萎縮",
         "contraindications": "Diabetes, systemic infection, laminitis history (horses)",
         "contraindications_ja": "糖尿病、全身感染、蹄葉炎既往（馬）",
         "drug_interactions": [
-            {"drug": "nsaids", "severity": "major", "description_ja": "消化管潰瘍リスク増加", "description": "Increased GI ulceration risk"}
-        ]
+            {
+                "drug": "nsaids",
+                "severity": "major",
+                "description_ja": "消化管潰瘍リスク増加",
+                "description": "Increased GI ulceration risk",
+            }
+        ],
     },
     {
         "id": "hydrogen_peroxide_emetic",
@@ -602,14 +1162,22 @@ DRUGS_BATCH_17 = [
         "mechanism": "Local irritant to gastric mucosa inducing emesis",
         "mechanism_ja": "胃粘膜への局所刺激で催吐",
         "species_info": {
-            "dog": {"dose": "1-2 mL/kg PO（最大45 mL）; 15分後に1回のみ繰返し可", "notes_ja": "家庭での応急催吐。アポモルフィンが入手できない場合の代替", "notes": "Home emergency emesis. Alternative when apomorphine unavailable"},
-            "cat": {"dose": "使用禁忌", "notes_ja": "猫には使用禁忌。重度出血性胃炎・壊死を引き起こす", "notes": "CONTRAINDICATED in cats. Causes severe hemorrhagic gastritis/necrosis"}
+            "dog": {
+                "dose": "1-2 mL/kg PO（最大45 mL）; 15分後に1回のみ繰返し可",
+                "notes_ja": "家庭での応急催吐。アポモルフィンが入手できない場合の代替",
+                "notes": "Home emergency emesis. Alternative when apomorphine unavailable",
+            },
+            "cat": {
+                "dose": "使用禁忌",
+                "notes_ja": "猫には使用禁忌。重度出血性胃炎・壊死を引き起こす",
+                "notes": "CONTRAINDICATED in cats. Causes severe hemorrhagic gastritis/necrosis",
+            },
         },
         "side_effects": "Gastritis, hematemesis, aspiration pneumonia, prolonged vomiting",
         "side_effects_ja": "胃炎、吐血、誤嚥性肺炎、遷延性嘔吐",
         "contraindications": "Cats, unconscious animals, corrosive/petroleum ingestion, brachycephalic breeds",
         "contraindications_ja": "猫、意識消失動物、腐食性/石油製品摂取、短頭種",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "methylene_blue",
@@ -619,17 +1187,34 @@ DRUGS_BATCH_17 = [
         "mechanism": "Electron carrier that reduces methemoglobin back to functional hemoglobin via NADPH-methemoglobin reductase",
         "mechanism_ja": "NADPH-メトヘモグロビン還元酵素を介してメトヘモグロビンを機能的ヘモグロビンに還元する電子キャリア",
         "species_info": {
-            "dog": {"dose": "1-1.5 mg/kg IV slow（1回）", "notes_ja": "メトヘモグロビン血症（>30%）：アセトアミノフェン・亜硝酸塩・ナフタレン中毒", "notes": "Methemoglobinemia (>30%): acetaminophen, nitrite, naphthalene toxicity"},
-            "cat": {"dose": "1.5 mg/kg IV slow", "notes_ja": "猫のメトヘモグロビン血症。ハインツ小体形成リスクあるため単回投与", "notes": "Feline methemoglobinemia. Single dose due to Heinz body risk"},
-            "horse": {"dose": "4-8 mg/kg IV slow", "notes_ja": "硝酸塩/亜硝酸塩中毒によるメトヘモグロビン血症", "notes": "Nitrate/nitrite toxicity methemoglobinemia"}
+            "dog": {
+                "dose": "1-1.5 mg/kg IV slow（1回）",
+                "notes_ja": "メトヘモグロビン血症（>30%）：アセトアミノフェン・亜硝酸塩・ナフタレン中毒",
+                "notes": "Methemoglobinemia (>30%): acetaminophen, nitrite, naphthalene toxicity",
+            },
+            "cat": {
+                "dose": "1.5 mg/kg IV slow",
+                "notes_ja": "猫のメトヘモグロビン血症。ハインツ小体形成リスクあるため単回投与",
+                "notes": "Feline methemoglobinemia. Single dose due to Heinz body risk",
+            },
+            "horse": {
+                "dose": "4-8 mg/kg IV slow",
+                "notes_ja": "硝酸塩/亜硝酸塩中毒によるメトヘモグロビン血症",
+                "notes": "Nitrate/nitrite toxicity methemoglobinemia",
+            },
         },
         "side_effects": "Heinz body anemia (cats), hemolysis, GI irritation, blue discoloration of urine",
         "side_effects_ja": "ハインツ小体性貧血（猫）、溶血、消化器刺激、尿の青色変色",
         "contraindications": "G6PD deficiency, severe renal failure, repeated doses in cats",
         "contraindications_ja": "G6PD欠損症、重度腎不全、猫での反復投与",
         "drug_interactions": [
-            {"drug": "serotonergic_drugs", "severity": "major", "description_ja": "セロトニン症候群リスク（MAO阻害作用）", "description": "Serotonin syndrome risk (MAO inhibitor activity)"}
-        ]
+            {
+                "drug": "serotonergic_drugs",
+                "severity": "major",
+                "description_ja": "セロトニン症候群リスク（MAO阻害作用）",
+                "description": "Serotonin syndrome risk (MAO inhibitor activity)",
+            }
+        ],
     },
     {
         "id": "fomepizole",
@@ -639,14 +1224,22 @@ DRUGS_BATCH_17 = [
         "mechanism": "Competitive inhibitor of alcohol dehydrogenase; prevents metabolism of ethylene glycol to toxic oxalate",
         "mechanism_ja": "アルコール脱水素酵素の競合的阻害薬。エチレングリコールの毒性シュウ酸塩への代謝を防止",
         "species_info": {
-            "dog": {"dose": "初回20 mg/kg IV, 12-24h後15 mg/kg, 24-36h後5 mg/kg", "notes_ja": "エチレングリコール（不凍液）中毒の第一選択。摂取8h以内が有効", "notes": "First-line for ethylene glycol toxicity. Effective within 8h of ingestion"},
-            "cat": {"dose": "125 mg/kg IV loading, then 31 mg/kg q12h×3", "notes_ja": "猫は犬の約6倍の用量が必要。猫では3h以内に治療開始が理想", "notes": "Cats require ~6x dog dose. Ideally treat within 3h in cats"}
+            "dog": {
+                "dose": "初回20 mg/kg IV, 12-24h後15 mg/kg, 24-36h後5 mg/kg",
+                "notes_ja": "エチレングリコール（不凍液）中毒の第一選択。摂取8h以内が有効",
+                "notes": "First-line for ethylene glycol toxicity. Effective within 8h of ingestion",
+            },
+            "cat": {
+                "dose": "125 mg/kg IV loading, then 31 mg/kg q12h×3",
+                "notes_ja": "猫は犬の約6倍の用量が必要。猫では3h以内に治療開始が理想",
+                "notes": "Cats require ~6x dog dose. Ideally treat within 3h in cats",
+            },
         },
         "side_effects": "Mild sedation, nausea, transient tachycardia",
         "side_effects_ja": "軽度鎮静、悪心、一過性頻脈",
         "contraindications": "None absolute for ethylene glycol toxicity",
         "contraindications_ja": "エチレングリコール中毒では絶対的禁忌なし",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "ethanol_antidote",
@@ -656,14 +1249,22 @@ DRUGS_BATCH_17 = [
         "mechanism": "Competitive substrate for alcohol dehydrogenase; preferred over ethylene glycol for metabolism",
         "mechanism_ja": "アルコール脱水素酵素の競合的基質。エチレングリコールより優先的に代謝される",
         "species_info": {
-            "dog": {"dose": "5.5 mL/kg 20% IV q4-6h × 5回", "notes_ja": "ホメピゾールが入手できない場合のエチレングリコール中毒代替治療", "notes": "Alternative to fomepizole for ethylene glycol toxicity when 4-MP unavailable"},
-            "cat": {"dose": "5 mL/kg 20% IV q6h × 5回", "notes_ja": "ホメピゾールが入手困難な場合の代替。CNS抑制に注意", "notes": "Alternative when fomepizole unavailable. Monitor CNS depression"}
+            "dog": {
+                "dose": "5.5 mL/kg 20% IV q4-6h × 5回",
+                "notes_ja": "ホメピゾールが入手できない場合のエチレングリコール中毒代替治療",
+                "notes": "Alternative to fomepizole for ethylene glycol toxicity when 4-MP unavailable",
+            },
+            "cat": {
+                "dose": "5 mL/kg 20% IV q6h × 5回",
+                "notes_ja": "ホメピゾールが入手困難な場合の代替。CNS抑制に注意",
+                "notes": "Alternative when fomepizole unavailable. Monitor CNS depression",
+            },
         },
         "side_effects": "CNS depression, respiratory depression, hypothermia, hypoglycemia",
         "side_effects_ja": "CNS抑制、呼吸抑制、低体温、低血糖",
         "contraindications": "Available fomepizole (preferred agent), severe hepatic disease",
         "contraindications_ja": "ホメピゾール入手可能時（ホメピゾール優先）、重度肝疾患",
-        "drug_interactions": []
+        "drug_interactions": [],
     },
     {
         "id": "sab_antivenom",
@@ -673,14 +1274,22 @@ DRUGS_BATCH_17 = [
         "mechanism": "Purified immunoglobulin fragments that bind and neutralize snake venom components",
         "mechanism_ja": "蛇毒成分に結合し中和する精製免疫グロブリン断片",
         "species_info": {
-            "dog": {"dose": "1バイアル IV（20分以上かけて投与）; 重症例は追加投与", "notes_ja": "マムシ咬傷：日本では乾燥まむしウマ抗毒素。皮膚反応テスト後投与。アナフィラキシーに備える", "notes": "Viper envenomation. Skin test first. Have epinephrine ready for anaphylaxis"},
+            "dog": {
+                "dose": "1バイアル IV（20分以上かけて投与）; 重症例は追加投与",
+                "notes_ja": "マムシ咬傷：日本では乾燥まむしウマ抗毒素。皮膚反応テスト後投与。アナフィラキシーに備える",
+                "notes": "Viper envenomation. Skin test first. Have epinephrine ready for anaphylaxis",
+            },
             "cat": {"dose": "1バイアル IV slow", "notes_ja": "猫のマムシ咬傷", "notes": "Viper envenomation in cats"},
-            "horse": {"dose": "1-2バイアル IV slow", "notes_ja": "馬の蛇咬傷。鼻孔浮腫で気道確保必要な場合あり", "notes": "Equine snakebite. May need tracheostomy for nasal edema"}
+            "horse": {
+                "dose": "1-2バイアル IV slow",
+                "notes_ja": "馬の蛇咬傷。鼻孔浮腫で気道確保必要な場合あり",
+                "notes": "Equine snakebite. May need tracheostomy for nasal edema",
+            },
         },
         "side_effects": "Anaphylaxis, serum sickness, urticaria, fever",
         "side_effects_ja": "アナフィラキシー、血清病、蕁麻疹、発熱",
         "contraindications": "Known horse serum allergy (relative); still administer if life-threatening",
         "contraindications_ja": "馬血清アレルギー既往（相対的）。致死的状況では投与",
-        "drug_interactions": []
-    }
+        "drug_interactions": [],
+    },
 ]
