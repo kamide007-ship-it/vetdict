@@ -249,7 +249,7 @@ const I18N={
     pricingPeriodOriginal:"¥980/月",
     pricingFeature1:"鑑別診断リスト生成（全21動物種）",
     pricingFeature2:"疾患データベース<strong>7,000+疾患</strong>閲覧",
-    pricingFeature3:"薬品辞書<strong>250+薬品</strong>・種別投与量",
+    pricingFeature3:"薬品辞書<strong>610+薬品</strong>・種別投与量",
     pricingFeature4:"臨床相談チャット<strong>無制限</strong>",
     pricingFeature5:"検査値入力・疼痛スケール対応",
     pricingFeature6:"エキゾチック含む全21動物種対応",
@@ -481,7 +481,7 @@ const I18N={
     pricingPeriodOriginal:"¥980/month",
     pricingFeature1:"Differential diagnosis list (all 21 species)",
     pricingFeature2:"Disease database <strong>7,000+ diseases</strong>",
-    pricingFeature3:"Drug dictionary <strong>250+ drugs</strong> with species-specific dosing",
+    pricingFeature3:"Drug dictionary <strong>610+ drugs</strong> with species-specific dosing",
     pricingFeature4:"Clinical chat <strong>unlimited</strong>",
     pricingFeature5:"Lab values & pain scale input",
     pricingFeature6:"All 21 species (incl. exotics)",
@@ -1176,7 +1176,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:7162,
     species:21,
-    drugs:250,
+    drugs:610,
     symptoms:52,
     protocols:188
   };

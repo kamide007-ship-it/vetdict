@@ -36,6 +36,9 @@ from api.drug_batch_18 import DRUGS_BATCH_18
 from api.drug_batch_19 import DRUGS_BATCH_19
 from api.drug_batch_20 import DRUGS_BATCH_20
 from api.drug_batch_21 import DRUGS_BATCH_21
+from api.drug_batch_22 import DRUGS_BATCH_22
+from api.drug_batch_23 import DRUGS_BATCH_23
+from api.drug_batch_24 import DRUGS_BATCH_24
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -59,6 +62,7 @@ DRUG_CATEGORIES: Dict[str, Dict[str, str]] = {
     "neurological": {"ja": "神経薬", "en": "Neurological Drugs"},
     "urinary": {"ja": "泌尿器薬", "en": "Urinary Drugs"},
     "immunosuppressives": {"ja": "免疫抑制薬", "en": "Immunosuppressives"},
+    "immunosuppressive": {"ja": "免疫抑制薬", "en": "Immunosuppressives"},
     "biologics": {"ja": "生物学的製剤", "en": "Biologics / Monoclonal Antibodies"},
     "antivirals": {"ja": "抗ウイルス薬", "en": "Antivirals"},
     "antineoplastics": {"ja": "抗腫瘍薬", "en": "Antineoplastics"},
@@ -10463,7 +10467,7 @@ for _drug_id, _species_notes in ISCAID_UTI_NOTES_PATCH.items():
                     _si[_sp]["notes_ja"] += _patch["notes_ja_append"]
 
 # バッチ10-19 薬品を統合
-for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_13, DRUGS_BATCH_14, DRUGS_BATCH_15, DRUGS_BATCH_16, DRUGS_BATCH_17, DRUGS_BATCH_18, DRUGS_BATCH_19, DRUGS_BATCH_20, DRUGS_BATCH_21):
+for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_13, DRUGS_BATCH_14, DRUGS_BATCH_15, DRUGS_BATCH_16, DRUGS_BATCH_17, DRUGS_BATCH_18, DRUGS_BATCH_19, DRUGS_BATCH_20, DRUGS_BATCH_21, DRUGS_BATCH_22, DRUGS_BATCH_23, DRUGS_BATCH_24):
     for _drug_new in _batch_new:
         if _drug_new["id"] not in _existing_ids:
             DRUGS.append(_drug_new)
