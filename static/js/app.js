@@ -3951,7 +3951,7 @@ function loadEmergencyProtocols(){
   const list=document.getElementById("emergencyList");
   if(!list)return;
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div></div>';
-  fetchWithTimeout("/api/emergency/protocols").then(r=>r.json()).then(data=>{
+  fetchWithTimeout("/api/emergency/protocols",{},30000).then(r=>r.json()).then(data=>{
     emergencyData=data.protocols||[];
     emergencyCategories=data.categories||{};
     emergencyLoaded=true;
