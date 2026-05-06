@@ -3,7 +3,7 @@
 Extracts symptom IDs from JP/EN text using longest-match-first strategy.
 """
 
-from api.chat.species_data import _SPECIES_DATA, get_species_data
+from api.chat.species_data import get_species_data
 from api.chat.symptom_aliases import SYMPTOM_ALIASES
 
 

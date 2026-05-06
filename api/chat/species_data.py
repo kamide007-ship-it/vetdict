@@ -7,8 +7,6 @@ Reduces startup memory from ~530MB to ~50MB (Render 512MB free tier).
 import importlib as _importlib
 import logging
 
-from api.chat.constants import _GENERIC_SPECIES
-
 logger = logging.getLogger(__name__)
 
 _SPECIES_DATA: dict = {}  # {species: {"diseases": [...], "symptom_names": {...}}}

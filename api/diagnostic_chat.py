@@ -143,6 +143,7 @@ def _get_equine_diseases():
     if _EQUINE_DISEASES is None:
         try:
             from api.species.equine_diseases import DISEASE_DATABASE
+
             _EQUINE_DISEASES = DISEASE_DATABASE
         except ImportError:
             _EQUINE_DISEASES = []
@@ -154,10 +155,12 @@ def _get_equine_health_check_items():
     if _EQUINE_HEALTH_CHECK_ITEMS is None:
         try:
             from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+
             _EQUINE_HEALTH_CHECK_ITEMS = HEALTH_CHECK_ITEMS
         except ImportError:
             _EQUINE_HEALTH_CHECK_ITEMS = {}
     return _EQUINE_HEALTH_CHECK_ITEMS
+
 
 # ---------------------------------------------------------------------------
 # Shared constants, species data & symptom aliases (extracted to api/chat/)
