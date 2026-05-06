@@ -182,37 +182,41 @@ def _ensure_db() -> None:
         from api.database import init_db
 
         init_db()
-        needs_migration = False
         with get_connection() as conn:
             try:
                 count = conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
             except Exception:
                 logger.debug("Could not count diseases in SQLite", exc_info=True)
                 count = 0
-            if count == 0:
-                needs_migration = True
-            else:
-                try:
-                    db_drug_count = conn.execute("SELECT COUNT(*) FROM drugs").fetchone()[0]
-                    from api.drug_dictionary import DRUGS
-
-                    if len(DRUGS) > db_drug_count:
-                        logger.info(
-                            "Drug count stale (SQLite=%d, Python=%d) — re-migrating",
-                            db_drug_count,
-                            len(DRUGS),
-                        )
-                        needs_migration = True
-                except Exception:
-                    logger.debug("Could not check drug staleness", exc_info=True)
-        if needs_migration:
-            logger.info("Running auto-migration")
+        if count == 0:
+            logger.info("diseases table is empty — running full auto-migration")
             try:
                 from scripts.migrate_to_sqlite import main as run_migration
 
                 run_migration()
             except Exception:
                 logger.exception("Auto-migration failed")
+        else:
+            try:
+                with get_connection() as conn:
+                    db_drug_count = conn.execute("SELECT COUNT(*) FROM drugs").fetchone()[0]
+                from api.drug_dictionary import DRUGS
+
+                if len(DRUGS) > db_drug_count:
+                    logger.info(
+                        "Drug count stale (SQLite=%d, Python=%d) — migrating drugs only",
+                        db_drug_count,
+                        len(DRUGS),
+                    )
+                    from api.database import upsert_drug
+
+                    with get_connection() as conn:
+                        for drug in DRUGS:
+                            upsert_drug(conn, drug)
+                        conn.commit()
+                    logger.info("Drug-only migration complete (%d drugs)", len(DRUGS))
+            except Exception:
+                logger.debug("Could not check/fix drug staleness", exc_info=True)
         _db_ready = True
 
 
