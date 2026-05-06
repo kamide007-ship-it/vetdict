@@ -39,6 +39,8 @@ from api.drug_batch_21 import DRUGS_BATCH_21
 from api.drug_batch_22 import DRUGS_BATCH_22
 from api.drug_batch_23 import DRUGS_BATCH_23
 from api.drug_batch_24 import DRUGS_BATCH_24
+from api.drug_batch_25 import DRUG_INTERACTIONS_PATCH_25
+from api.drug_batch_26 import DRUG_INTERACTIONS_PATCH_26
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10473,6 +10475,12 @@ for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_1
             DRUGS.append(_drug_new)
             _existing_ids.add(_drug_new["id"])
             _drug_index[_drug_new["id"]] = _drug_new
+
+# バッチ25-26: 薬物相互作用パッチ適用
+for _interactions_patch in (DRUG_INTERACTIONS_PATCH_25, DRUG_INTERACTIONS_PATCH_26):
+    for _drug_id, _interactions in _interactions_patch.items():
+        if _drug_id in _drug_index:
+            _drug_index[_drug_id]["drug_interactions"] = _interactions
 
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
