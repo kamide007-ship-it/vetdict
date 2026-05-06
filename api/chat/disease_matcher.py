@@ -6,7 +6,7 @@ negative evidence penalties, urgency boosts, and prevalence correction.
 
 import math
 
-from api.chat.species_data import _SPECIES_DATA, get_species_data
+from api.chat.species_data import get_species_data
 from api.species import prevalence_data as _prev_mod
 
 # Synonym expansion table shared across species — bridges concept-equivalent IDs

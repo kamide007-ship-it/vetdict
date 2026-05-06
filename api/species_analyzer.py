@@ -65,6 +65,7 @@ def _lazy_load(species_key: str):
 def _lazy_dog():
     if "dog" not in _SPECIES_FUNC_CACHE:
         from api.symptom_checker import analyze_symptoms as analyze_dog
+
         _SPECIES_FUNC_CACHE["dog"] = analyze_dog
     return _SPECIES_FUNC_CACHE["dog"]
 
@@ -73,6 +74,7 @@ def _lazy_horse():
     if "horse" not in _SPECIES_FUNC_CACHE:
         _SPECIES_FUNC_CACHE["horse"] = analyze_horse
     return _SPECIES_FUNC_CACHE["horse"]
+
 
 # ── Horse category-based content templates ──
 _HORSE_TRANSMISSION: dict[str, tuple[str, str]] = {
@@ -422,10 +424,27 @@ def analyze_horse(
 
 # Lazy species handler resolver — loads modules on first access
 _SPECIES_KEYS = [
-    "dog", "cat", "rabbit", "hamster", "chinchilla", "guinea_pig",
-    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
-    "parrot", "reptile", "tortoise", "snake", "lizard", "amphibian",
-    "fish", "exotic_other", "horse",
+    "dog",
+    "cat",
+    "rabbit",
+    "hamster",
+    "chinchilla",
+    "guinea_pig",
+    "ferret",
+    "hedgehog",
+    "sugar_glider",
+    "degu",
+    "bird",
+    "parakeet",
+    "parrot",
+    "reptile",
+    "tortoise",
+    "snake",
+    "lizard",
+    "amphibian",
+    "fish",
+    "exotic_other",
+    "horse",
 ]
 
 
