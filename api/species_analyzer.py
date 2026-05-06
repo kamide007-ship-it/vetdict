@@ -71,8 +71,7 @@ def _lazy_dog():
 
 def _lazy_horse():
     if "horse" not in _SPECIES_FUNC_CACHE:
-        from api.species.equine_diseases import generate_differential_diagnosis
-        _SPECIES_FUNC_CACHE["horse"] = generate_differential_diagnosis
+        _SPECIES_FUNC_CACHE["horse"] = analyze_horse
     return _SPECIES_FUNC_CACHE["horse"]
 
 # ── Horse category-based content templates ──
@@ -178,6 +177,8 @@ def analyze_horse(
     Returns:
         dict: 鑑別診断結果を共通形式に整形した辞書
     """
+    from api.species.equine_diseases import generate_differential_diagnosis
+
     checked = set(symptoms)
     diff_list = generate_differential_diagnosis(checked, age_stage or "")
 
