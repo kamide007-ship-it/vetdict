@@ -2,6 +2,11 @@
 """
 VetDict — Multi-Species Veterinary Diagnostic Platform
 Entry point: imports Flask app from API module.
+
+Production: use gunicorn (see Procfile / render.yaml)
+  gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 2 --preload
+
+Development only: python app.py
 """
 
 import os
@@ -19,4 +24,11 @@ except ImportError:
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT') or 5000)
-    app.run(host="0.0.0.0", port=port, debug=is_debug_mode_enabled())
+    debug = is_debug_mode_enabled()
+    if not debug:
+        print(
+            "WARNING: Running Flask dev server in production. "
+            "Use 'gunicorn app:app' instead. See Procfile.",
+            file=sys.stderr,
+        )
+    app.run(host="0.0.0.0", port=port, debug=debug)
