@@ -34,6 +34,7 @@ from api.drug_batch_16 import DRUGS_BATCH_16
 from api.drug_batch_17 import DRUGS_BATCH_17
 from api.drug_batch_18 import DRUGS_BATCH_18
 from api.drug_batch_19 import DRUGS_BATCH_19
+from api.drug_batch_20 import DRUGS_BATCH_20
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10461,7 +10462,7 @@ for _drug_id, _species_notes in ISCAID_UTI_NOTES_PATCH.items():
                     _si[_sp]["notes_ja"] += _patch["notes_ja_append"]
 
 # バッチ10-19 薬品を統合
-for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_13, DRUGS_BATCH_14, DRUGS_BATCH_15, DRUGS_BATCH_16, DRUGS_BATCH_17, DRUGS_BATCH_18, DRUGS_BATCH_19):
+for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_13, DRUGS_BATCH_14, DRUGS_BATCH_15, DRUGS_BATCH_16, DRUGS_BATCH_17, DRUGS_BATCH_18, DRUGS_BATCH_19, DRUGS_BATCH_20):
     for _drug_new in _batch_new:
         if _drug_new["id"] not in _existing_ids:
             DRUGS.append(_drug_new)
