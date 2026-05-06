@@ -1,0 +1,658 @@
+"""Drug batch 12: Cardiovascular, Respiratory & Diuretic drugs (30 drugs)."""
+
+DRUGS_BATCH_12: list[dict] = [
+    {
+        "id": "ramipril",
+        "name": "Ramipril",
+        "name_ja": "ラミプリル",
+        "category": "cardiovascular",
+        "mechanism": "ACE inhibitor; prodrug converted to ramiprilat which inhibits angiotensin-converting enzyme, reducing aldosterone secretion and peripheral vascular resistance",
+        "mechanism_ja": "ACE阻害薬；プロドラッグとして投与後、活性体ラミプリラートに変換されアンジオテンシン変換酵素を阻害、アルドステロン分泌と末梢血管抵抗を低下させる",
+        "species_info": {
+            "dog": {"dose": "0.125-0.25 mg/kg PO q12-24h", "notes": "CHF, proteinuria; start low dose and titrate", "notes_ja": "心不全、蛋白尿；低用量から開始し漸増"},
+            "cat": {"dose": "0.125-0.25 mg/kg PO q24h", "notes": "Hypertension, CKD proteinuria", "notes_ja": "高血圧、CKD蛋白尿"},
+            "horse": {"dose": "0.05-0.1 mg/kg PO q24h", "notes": "Limited equine data; experimental use in CHF", "notes_ja": "馬でのデータ限定的；心不全に試験的使用"},
+            "rabbit": {"dose": "0.05-0.1 mg/kg PO q24h", "notes": "Heart failure; monitor renal values", "notes_ja": "心不全；腎値モニタリング"},
+            "ferret": {"dose": "0.1-0.25 mg/kg PO q24h", "notes": "DCM, valvular disease", "notes_ja": "拡張型心筋症、弁膜症"}
+        },
+        "side_effects": ["Hypotension", "Hyperkalemia", "Azotemia", "Anorexia", "Cough (rare in animals)"],
+        "side_effects_ja": ["低血圧", "高カリウム血症", "高窒素血症", "食欲不振", "咳（動物では稀）"],
+        "contraindications": "Bilateral renal artery stenosis, pregnancy, severe aortic stenosis, hypotension",
+        "contraindications_ja": "両側腎動脈狭窄、妊娠、重度大動脈弁狭窄、低血圧",
+        "drug_interactions": [
+            {"drug": "Spironolactone", "severity": "moderate", "description": "Hyperkalemia risk with dual RAAS blockade", "description_ja": "二重RAAS阻害による高カリウム血症リスク"},
+            {"drug": "NSAIDs", "severity": "moderate", "description": "Reduced antihypertensive effect and increased nephrotoxicity risk", "description_ja": "降圧効果減弱と腎毒性リスク増加"},
+            {"drug": "Furosemide", "severity": "mild", "description": "Enhanced hypotension; reduce ACEi dose when starting with diuretics", "description_ja": "低血圧増強；利尿薬併用時はACEi減量"}
+        ]
+    },
+    {
+        "id": "telmisartan",
+        "name": "Telmisartan",
+        "name_ja": "テルミサルタン",
+        "category": "cardiovascular",
+        "mechanism": "Angiotensin II receptor blocker (ARB); selectively blocks AT1 receptors, reducing vasoconstriction and aldosterone release without affecting bradykinin metabolism",
+        "mechanism_ja": "アンジオテンシンII受容体拮抗薬（ARB）；AT1受容体を選択的に遮断し、ブラジキニン代謝に影響せず血管収縮とアルドステロン放出を抑制",
+        "species_info": {
+            "dog": {"dose": "1-2 mg/kg PO q24h", "notes": "Proteinuria, hypertension; alternative to ACEi", "notes_ja": "蛋白尿、高血圧；ACEi代替薬"},
+            "cat": {"dose": "1-2 mg/kg PO q24h (Semintra)", "notes": "CKD-associated proteinuria and hypertension; FDA/EMA approved for cats", "notes_ja": "CKD関連蛋白尿・高血圧；猫で承認済み（セミントラ）"},
+            "horse": {"dose": "Not established", "notes": "No equine-specific data", "notes_ja": "馬での用量未確立"},
+            "rabbit": {"dose": "1 mg/kg PO q24h", "notes": "Renal disease; limited data", "notes_ja": "腎疾患；データ限定的"},
+            "ferret": {"dose": "1 mg/kg PO q24h", "notes": "Heart disease; extrapolated from cats", "notes_ja": "心疾患；猫から外挿"}
+        },
+        "side_effects": ["Hypotension", "Hyperkalemia", "Azotemia", "Vomiting", "Diarrhea"],
+        "side_effects_ja": ["低血圧", "高カリウム血症", "高窒素血症", "嘔吐", "下痢"],
+        "contraindications": "Pregnancy, severe hepatic impairment, bilateral renal artery stenosis",
+        "contraindications_ja": "妊娠、重度肝障害、両側腎動脈狭窄",
+        "drug_interactions": [
+            {"drug": "ACE inhibitors", "severity": "major", "description": "Dual RAAS blockade increases hyperkalemia and renal failure risk", "description_ja": "二重RAAS阻害で高カリウム血症・腎不全リスク増加"},
+            {"drug": "NSAIDs", "severity": "moderate", "description": "Reduced efficacy and nephrotoxicity", "description_ja": "効果減弱と腎毒性"},
+            {"drug": "Potassium supplements", "severity": "moderate", "description": "Hyperkalemia risk", "description_ja": "高カリウム血症リスク"}
+        ]
+    },
+    {
+        "id": "hydralazine",
+        "name": "Hydralazine",
+        "name_ja": "ヒドララジン",
+        "category": "cardiovascular",
+        "mechanism": "Direct arteriolar vasodilator; relaxes vascular smooth muscle by interfering with calcium transport, reducing systemic vascular resistance and afterload",
+        "mechanism_ja": "直接的細動脈血管拡張薬；カルシウム輸送に干渉して血管平滑筋を弛緩させ、全身血管抵抗と後負荷を低下",
+        "species_info": {
+            "dog": {"dose": "0.5-3 mg/kg PO q12h; start 0.5 mg/kg", "notes": "Acute CHF, severe MR; titrate to effect monitoring BP", "notes_ja": "急性心不全、重度僧帽弁逆流；血圧モニタリング下で漸増"},
+            "cat": {"dose": "2.5 mg/cat PO q12-24h", "notes": "Aortic thromboembolism afterload reduction", "notes_ja": "大動脈血栓塞栓症の後負荷軽減"},
+            "horse": {"dose": "0.5-1.5 mg/kg PO q12h", "notes": "Aortic regurgitation, CHF", "notes_ja": "大動脈弁逆流、心不全"}
+        },
+        "side_effects": ["Reflex tachycardia", "Hypotension", "GI upset", "Sodium/water retention", "Lupus-like syndrome (chronic)"],
+        "side_effects_ja": ["反射性頻脈", "低血圧", "消化器障害", "ナトリウム・水貯留", "ループス様症候群（慢性投与）"],
+        "contraindications": "Severe tachycardia, aortic aneurysm, coronary artery disease, SLE",
+        "contraindications_ja": "重度頻脈、大動脈瘤、冠動脈疾患、全身性エリテマトーデス",
+        "drug_interactions": [
+            {"drug": "Beta-blockers", "severity": "moderate", "description": "Useful combination to counteract reflex tachycardia but monitor closely", "description_ja": "反射性頻脈抑制に有用な組合せだが慎重にモニタリング"},
+            {"drug": "ACE inhibitors", "severity": "moderate", "description": "Additive hypotension", "description_ja": "相加的低血圧"},
+            {"drug": "Diuretics", "severity": "mild", "description": "Enhanced hypotension", "description_ja": "低血圧増強"}
+        ]
+    },
+    {
+        "id": "nitroprusside",
+        "name": "Sodium Nitroprusside",
+        "name_ja": "ニトロプルシドナトリウム",
+        "category": "cardiovascular",
+        "mechanism": "Direct NO donor causing both arterial and venous vasodilation; reduces preload and afterload simultaneously. Requires continuous IV infusion with BP monitoring",
+        "mechanism_ja": "直接的NO供与体として動静脈両方を拡張；前負荷と後負荷を同時に低下。持続点滴と血圧モニタリングが必須",
+        "species_info": {
+            "dog": {"dose": "1-10 μg/kg/min CRI", "notes": "Hypertensive crisis, acute decompensated CHF; ICU setting only", "notes_ja": "高血圧クリーゼ、急性非代償性心不全；ICU環境限定"},
+            "cat": {"dose": "0.5-5 μg/kg/min CRI", "notes": "Acute CHF, aortic thromboembolism crisis", "notes_ja": "急性心不全、大動脈血栓塞栓クリーゼ"},
+            "horse": {"dose": "0.5-5 μg/kg/min CRI", "notes": "Controlled hypotension during anesthesia", "notes_ja": "麻酔中の調節性低血圧"}
+        },
+        "side_effects": ["Cyanide toxicity (prolonged use)", "Severe hypotension", "Methemoglobinemia", "Reflex tachycardia"],
+        "side_effects_ja": ["シアン中毒（長期使用）", "重度低血圧", "メトヘモグロビン血症", "反射性頻脈"],
+        "contraindications": "Hepatic insufficiency (impaired cyanide metabolism), compensatory hypertension (aortic coarctation), inadequate cerebral circulation",
+        "contraindications_ja": "肝不全（シアン代謝障害）、代償性高血圧（大動脈縮窄）、脳循環不全",
+        "drug_interactions": [
+            {"drug": "Other antihypertensives", "severity": "major", "description": "Profound additive hypotension", "description_ja": "重度の相加的低血圧"},
+            {"drug": "Sildenafil", "severity": "major", "description": "Severe hypotension due to additive NO/cGMP pathway activation", "description_ja": "NO/cGMP経路の相加活性化による重度低血圧"}
+        ]
+    },
+    {
+        "id": "nitroglycerin",
+        "name": "Nitroglycerin",
+        "name_ja": "ニトログリセリン",
+        "category": "cardiovascular",
+        "mechanism": "Organic nitrate converted to NO; predominantly venodilator reducing preload. Transdermal application provides sustained vasodilation",
+        "mechanism_ja": "有機硝酸塩からNOに変換；主に静脈拡張により前負荷を軽減。経皮投与で持続的血管拡張",
+        "species_info": {
+            "dog": {"dose": "2% ointment: 0.5-2 inch strip applied to inner pinna or groin q6-8h", "notes": "Acute CHF as adjunct to diuretics; tolerance develops in 24-48h", "notes_ja": "急性心不全で利尿薬の補助；24-48時間で耐性発現"},
+            "cat": {"dose": "2% ointment: 0.25 inch strip to pinna q6-8h", "notes": "Acute pulmonary edema, ATE adjunct", "notes_ja": "急性肺水腫、動脈血栓塞栓症の補助"}
+        },
+        "side_effects": ["Hypotension", "Reflex tachycardia", "Methemoglobinemia (high dose)", "Tolerance"],
+        "side_effects_ja": ["低血圧", "反射性頻脈", "メトヘモグロビン血症（高用量）", "耐性"],
+        "contraindications": "Hypovolemia, severe anemia, increased ICP, concurrent PDE5 inhibitors",
+        "contraindications_ja": "循環血液量減少、重度貧血、頭蓋内圧亢進、PDE5阻害薬併用",
+        "drug_interactions": [
+            {"drug": "Sildenafil/Tadalafil", "severity": "major", "description": "Potentially fatal hypotension; absolutely contraindicated", "description_ja": "致死的低血圧の可能性；絶対禁忌"},
+            {"drug": "ACE inhibitors", "severity": "moderate", "description": "Additive hypotension", "description_ja": "相加的低血圧"},
+            {"drug": "Diuretics", "severity": "mild", "description": "Additive preload reduction", "description_ja": "相加的前負荷軽減"}
+        ]
+    },
+    {
+        "id": "phenylephrine",
+        "name": "Phenylephrine",
+        "name_ja": "フェニレフリン",
+        "category": "cardiovascular",
+        "mechanism": "Selective alpha-1 adrenergic agonist; causes peripheral vasoconstriction increasing SVR and blood pressure without significant beta-adrenergic effects",
+        "mechanism_ja": "選択的α1アドレナリン作動薬；有意なβ作用なく末梢血管収縮により全身血管抵抗と血圧を上昇",
+        "species_info": {
+            "dog": {"dose": "1-3 μg/kg/min CRI; bolus 1-10 μg/kg IV", "notes": "Vasodilatory shock, anesthetic hypotension", "notes_ja": "血管拡張性ショック、麻酔中低血圧"},
+            "cat": {"dose": "0.5-2 μg/kg/min CRI", "notes": "Anesthetic hypotension; reflex bradycardia expected", "notes_ja": "麻酔中低血圧；反射性徐脈を予想"},
+            "horse": {"dose": "0.5-3 μg/kg/min CRI", "notes": "Anesthetic hypotension unresponsive to dobutamine", "notes_ja": "ドブタミン無効の麻酔中低血圧"},
+            "bird": {"dose": "10-20 μg/kg IM/IV", "notes": "Cardiovascular collapse during anesthesia", "notes_ja": "麻酔中の循環虚脱"}
+        },
+        "side_effects": ["Reflex bradycardia", "Peripheral vasoconstriction", "Reduced splanchnic perfusion", "Hypertension"],
+        "side_effects_ja": ["反射性徐脈", "末梢血管収縮", "内臓灌流低下", "高血圧"],
+        "contraindications": "Severe bradycardia, severe peripheral vascular disease, mesenteric ischemia",
+        "contraindications_ja": "重度徐脈、重度末梢血管疾患、腸間膜虚血",
+        "drug_interactions": [
+            {"drug": "MAO inhibitors", "severity": "major", "description": "Exaggerated pressor response", "description_ja": "過度の昇圧反応"},
+            {"drug": "Beta-blockers", "severity": "moderate", "description": "Exaggerated hypertension and reflex bradycardia", "description_ja": "高血圧と反射性徐脈の増強"},
+            {"drug": "Tricyclic antidepressants", "severity": "moderate", "description": "Potentiated pressor effect", "description_ja": "昇圧効果増強"}
+        ]
+    },
+    {
+        "id": "norepinephrine",
+        "name": "Norepinephrine",
+        "name_ja": "ノルエピネフリン（ノルアドレナリン）",
+        "category": "cardiovascular",
+        "mechanism": "Potent alpha-1 and beta-1 agonist with minimal beta-2 activity; increases SVR, MAP, and cardiac contractility. First-line vasopressor for distributive shock",
+        "mechanism_ja": "強力なα1・β1作動薬でβ2活性は最小限；全身血管抵抗・平均動脈圧・心収縮力を増加。分布性ショックの第一選択昇圧薬",
+        "species_info": {
+            "dog": {"dose": "0.1-2 μg/kg/min CRI", "notes": "Septic shock first-line vasopressor; titrate to MAP ≥65 mmHg", "notes_ja": "敗血症性ショック第一選択；MAP≧65mmHgを目標に漸増"},
+            "cat": {"dose": "0.05-1 μg/kg/min CRI", "notes": "Distributive shock; central line preferred", "notes_ja": "分布性ショック；中心静脈カテーテル推奨"},
+            "horse": {"dose": "0.1-1 μg/kg/min CRI", "notes": "Refractory anesthetic hypotension, endotoxemia", "notes_ja": "難治性麻酔中低血圧、エンドトキセミア"},
+            "bird": {"dose": "Not established", "notes": "Limited avian data; dopamine preferred", "notes_ja": "鳥類データ限定的；ドパミン推奨"}
+        },
+        "side_effects": ["Tissue necrosis on extravasation", "Arrhythmias", "Organ ischemia", "Peripheral gangrene"],
+        "side_effects_ja": ["血管外漏出による組織壊死", "不整脈", "臓器虚血", "末梢壊疽"],
+        "contraindications": "Hypovolemia without fluid resuscitation, mesenteric/peripheral thrombosis risk",
+        "contraindications_ja": "輸液蘇生なしの循環血液量減少、腸間膜・末梢血栓症リスク",
+        "drug_interactions": [
+            {"drug": "Halothane/Isoflurane", "severity": "major", "description": "Sensitized myocardium to catecholamine arrhythmias", "description_ja": "カテコラミン不整脈に対する心筋感受性増大"},
+            {"drug": "MAO inhibitors", "severity": "major", "description": "Dangerously potentiated effect", "description_ja": "危険な効果増強"},
+            {"drug": "Tricyclic antidepressants", "severity": "major", "description": "Potentiated pressor response", "description_ja": "昇圧反応増強"}
+        ]
+    },
+    {
+        "id": "procainamide",
+        "name": "Procainamide",
+        "name_ja": "プロカインアミド",
+        "category": "cardiovascular",
+        "mechanism": "Class IA antiarrhythmic; blocks fast sodium channels prolonging action potential duration and effective refractory period. Suppresses ventricular ectopy",
+        "mechanism_ja": "Ia群抗不整脈薬；速いナトリウムチャネルを遮断し活動電位持続時間と有効不応期を延長。心室期外収縮を抑制",
+        "species_info": {
+            "dog": {"dose": "IV loading: 6-8 mg/kg over 5 min then 25-50 μg/kg/min CRI; PO: 10-30 mg/kg q6-8h", "notes": "Ventricular tachycardia; monitor ECG during IV loading", "notes_ja": "心室頻拍；IV投与時はECGモニタリング"},
+            "cat": {"dose": "1-2 mg/kg slow IV; 10-20 mg/kg PO q6-8h", "notes": "Rarely used; very short half-life in cats", "notes_ja": "稀に使用；猫では半減期が非常に短い"},
+            "horse": {"dose": "1 mg/kg/min IV to 20 mg/kg total", "notes": "Atrial fibrillation (historically); quinidine now preferred", "notes_ja": "心房細動（歴史的）；現在はキニジンが推奨"}
+        },
+        "side_effects": ["Hypotension (IV)", "GI upset", "Lupus-like syndrome", "Widened QRS", "Negative inotrope"],
+        "side_effects_ja": ["低血圧（静注時）", "消化器障害", "ループス様症候群", "QRS延長", "陰性変力作用"],
+        "contraindications": "Complete heart block, torsades de pointes, myasthenia gravis, lupus",
+        "contraindications_ja": "完全房室ブロック、トルサード・ド・ポアント、重症筋無力症、ループス",
+        "drug_interactions": [
+            {"drug": "Amiodarone", "severity": "major", "description": "Additive QT prolongation and proarrhythmic risk", "description_ja": "QT延長と催不整脈リスクの相加"},
+            {"drug": "Lidocaine", "severity": "moderate", "description": "Additive cardiac depression", "description_ja": "相加的心抑制"},
+            {"drug": "Neuromuscular blockers", "severity": "moderate", "description": "Enhanced neuromuscular blockade", "description_ja": "神経筋遮断増強"}
+        ]
+    },
+    {
+        "id": "amiodarone",
+        "name": "Amiodarone",
+        "name_ja": "アミオダロン",
+        "category": "cardiovascular",
+        "mechanism": "Class III antiarrhythmic with properties of all 4 Vaughan-Williams classes; blocks K+, Na+, Ca2+ channels and beta receptors. Prolongs refractory period in all cardiac tissues",
+        "mechanism_ja": "4群全ての特性を持つIII群抗不整脈薬；K+・Na+・Ca2+チャネルとβ受容体を遮断。全心臓組織の不応期を延長",
+        "species_info": {
+            "dog": {"dose": "IV loading: 5 mg/kg over 10 min then 0.75-1 mg/kg/hr CRI; PO: 10-15 mg/kg q12h × 7d then 5-7.5 mg/kg q24h", "notes": "Life-threatening ventricular arrhythmias refractory to lidocaine; monitor thyroid/liver/pulmonary function", "notes_ja": "リドカイン抵抗性の致死的心室性不整脈；甲状腺・肝・肺機能モニタリング"},
+            "cat": {"dose": "Not recommended due to toxicity", "notes": "Very long half-life, high toxicity in cats", "notes_ja": "毒性が高く猫には非推奨"},
+            "horse": {"dose": "5 mg/kg IV loading then 0.8-1.8 mg/kg/hr CRI", "notes": "Atrial fibrillation; monitor for adverse effects", "notes_ja": "心房細動；副作用モニタリング"}
+        },
+        "side_effects": ["Thyroid dysfunction (hypo/hyper)", "Pulmonary fibrosis", "Hepatotoxicity", "Corneal deposits", "Phlebitis (IV)", "Bradycardia"],
+        "side_effects_ja": ["甲状腺機能異常（低下/亢進）", "肺線維症", "肝毒性", "角膜沈着", "静脈炎（静注時）", "徐脈"],
+        "contraindications": "Severe sinus node dysfunction, 2nd/3rd degree AV block, cardiogenic shock, severe hepatic disease, iodine hypersensitivity",
+        "contraindications_ja": "重度洞機能不全、II度/III度房室ブロック、心原性ショック、重度肝疾患、ヨウ素過敏症",
+        "drug_interactions": [
+            {"drug": "Digoxin", "severity": "major", "description": "Increases digoxin levels 70-100%; halve digoxin dose", "description_ja": "ジゴキシン血中濃度70-100%上昇；ジゴキシン半量に"},
+            {"drug": "Warfarin", "severity": "major", "description": "Potentiates anticoagulation; reduce warfarin dose 30-50%", "description_ja": "抗凝固作用増強；ワルファリン30-50%減量"},
+            {"drug": "Fluoroquinolones", "severity": "major", "description": "Additive QT prolongation", "description_ja": "相加的QT延長"},
+            {"drug": "Lidocaine", "severity": "moderate", "description": "Risk of bradycardia and sinus arrest", "description_ja": "徐脈と洞停止のリスク"}
+        ]
+    },
+    {
+        "id": "propranolol",
+        "name": "Propranolol",
+        "name_ja": "プロプラノロール",
+        "category": "cardiovascular",
+        "mechanism": "Non-selective beta-adrenergic blocker; reduces heart rate, contractility, and AV conduction. Also reduces renin release and has membrane-stabilizing activity",
+        "mechanism_ja": "非選択的βアドレナリン遮断薬；心拍数・収縮力・房室伝導を低下。レニン分泌抑制と膜安定化作用も有する",
+        "species_info": {
+            "dog": {"dose": "0.1-1 mg/kg PO q8h; IV: 0.02-0.06 mg/kg slowly", "notes": "Supraventricular tachycardia, pheochromocytoma (with alpha-blockade first), thyrotoxicosis", "notes_ja": "上室性頻拍、褐色細胞腫（α遮断後）、甲状腺中毒症"},
+            "cat": {"dose": "2.5-5 mg/cat PO q8-12h; IV: 0.02 mg/kg", "notes": "HCM dynamic outflow obstruction, thyrotoxicosis rate control", "notes_ja": "HCM動的流出路閉塞、甲状腺中毒症のレート制御"},
+            "horse": {"dose": "0.03-0.15 mg/kg IV slowly", "notes": "Supraventricular tachycardia; caution in performance horses", "notes_ja": "上室性頻拍；競走馬では注意"},
+            "ferret": {"dose": "0.2-1 mg/kg PO q8-12h", "notes": "Rate control in cardiac disease", "notes_ja": "心疾患のレート制御"},
+            "bird": {"dose": "Not established", "notes": "Beta-blockers poorly tolerated in avian species", "notes_ja": "鳥類ではβ遮断薬の忍容性不良"}
+        },
+        "side_effects": ["Bradycardia", "Bronchospasm", "Hypotension", "Worsened heart failure", "Hypoglycemia masking"],
+        "side_effects_ja": ["徐脈", "気管支攣縮", "低血圧", "心不全悪化", "低血糖マスキング"],
+        "contraindications": "Decompensated CHF, asthma/bronchospasm, sinus bradycardia, cardiogenic shock, insulin-dependent diabetes (masks hypoglycemia signs)",
+        "contraindications_ja": "非代償性心不全、喘息/気管支攣縮、洞性徐脈、心原性ショック、インスリン依存性糖尿病（低血糖症状マスキング）",
+        "drug_interactions": [
+            {"drug": "Insulin", "severity": "moderate", "description": "Masks tachycardia of hypoglycemia; prolongs hypoglycemic episodes", "description_ja": "低血糖の頻脈をマスクし低血糖を遷延"},
+            {"drug": "Calcium channel blockers", "severity": "major", "description": "Severe bradycardia and AV block with verapamil/diltiazem", "description_ja": "ベラパミル/ジルチアゼムとの併用で重度徐脈・房室ブロック"},
+            {"drug": "Epinephrine", "severity": "moderate", "description": "Unopposed alpha stimulation causing severe hypertension", "description_ja": "非拮抗α刺激による重度高血圧"}
+        ]
+    },
+    {
+        "id": "mexiletine",
+        "name": "Mexiletine",
+        "name_ja": "メキシレチン",
+        "category": "cardiovascular",
+        "mechanism": "Class IB antiarrhythmic; blocks fast sodium channels preferentially in depolarized/ischemic tissue. Oral analog of lidocaine for chronic ventricular arrhythmia management",
+        "mechanism_ja": "Ib群抗不整脈薬；脱分極・虚血組織のナトリウムチャネルを優先的に遮断。慢性心室性不整脈管理のためのリドカイン経口類似薬",
+        "species_info": {
+            "dog": {"dose": "5-8 mg/kg PO q8h", "notes": "Ventricular arrhythmias (Boxers, Dobermans with ARVC); often combined with sotalol or atenolol", "notes_ja": "心室性不整脈（ボクサー・ドーベルマンARVC）；ソタロール/アテノロールと併用が多い"},
+            "cat": {"dose": "Not commonly used", "notes": "Very limited feline data", "notes_ja": "猫でのデータ非常に限定的"},
+            "horse": {"dose": "4-5 mg/kg PO q8h", "notes": "Ventricular tachycardia; limited data", "notes_ja": "心室頻拍；データ限定的"}
+        },
+        "side_effects": ["GI upset (vomiting, anorexia)", "Tremors", "Ataxia", "Proarrhythmia"],
+        "side_effects_ja": ["消化器障害（嘔吐・食欲不振）", "振戦", "運動失調", "催不整脈"],
+        "contraindications": "2nd/3rd degree AV block, cardiogenic shock",
+        "contraindications_ja": "II度/III度房室ブロック、心原性ショック",
+        "drug_interactions": [
+            {"drug": "Sotalol", "severity": "mild", "description": "Synergistic antiarrhythmic effect (beneficial combination in dogs with ARVC)", "description_ja": "相乗的抗不整脈効果（ARVC犬で有用な組合せ）"},
+            {"drug": "Phenobarbital", "severity": "moderate", "description": "Induces mexiletine metabolism reducing efficacy", "description_ja": "メキシレチン代謝誘導により効果減弱"},
+            {"drug": "Metoclopramide", "severity": "mild", "description": "Accelerates absorption of mexiletine", "description_ja": "メキシレチンの吸収促進"}
+        ]
+    },
+    {
+        "id": "verapamil",
+        "name": "Verapamil",
+        "name_ja": "ベラパミル",
+        "category": "cardiovascular",
+        "mechanism": "Class IV antiarrhythmic; L-type calcium channel blocker that slows AV nodal conduction and reduces heart rate. Also relaxes vascular smooth muscle and has negative inotropic effect",
+        "mechanism_ja": "IV群抗不整脈薬；L型カルシウムチャネル遮断薬で房室結節伝導を遅延させ心拍数を低下。血管平滑筋弛緩作用と陰性変力作用も有する",
+        "species_info": {
+            "dog": {"dose": "0.05 mg/kg slow IV (over 5 min); PO: 1-5 mg/kg q8h", "notes": "Supraventricular tachycardia not responding to vagal maneuvers; AVOID in WPW and ventricular tachycardia", "notes_ja": "迷走神経刺激無効の上室性頻拍；WPWと心室頻拍には禁忌"},
+            "cat": {"dose": "0.025 mg/kg slow IV; rarely used PO", "notes": "HCM (diltiazem generally preferred in cats)", "notes_ja": "HCM（猫ではジルチアゼムが一般的に推奨）"},
+            "horse": {"dose": "0.025-0.05 mg/kg slow IV", "notes": "Supraventricular tachycardia", "notes_ja": "上室性頻拍"}
+        },
+        "side_effects": ["Bradycardia", "AV block", "Hypotension", "Negative inotropy", "Constipation (chronic PO)"],
+        "side_effects_ja": ["徐脈", "房室ブロック", "低血圧", "陰性変力作用", "便秘（慢性内服）"],
+        "contraindications": "CHF with reduced EF, WPW syndrome, ventricular tachycardia, severe hypotension, 2nd/3rd degree AV block, concurrent IV beta-blocker",
+        "contraindications_ja": "駆出率低下型心不全、WPW症候群、心室頻拍、重度低血圧、II度/III度房室ブロック、β遮断薬静注併用",
+        "drug_interactions": [
+            {"drug": "Beta-blockers (IV)", "severity": "major", "description": "Severe bradycardia, AV block, asystole possible", "description_ja": "重度徐脈・房室ブロック・心停止の可能性"},
+            {"drug": "Digoxin", "severity": "major", "description": "Increases digoxin levels 50-75%", "description_ja": "ジゴキシン血中濃度50-75%上昇"},
+            {"drug": "Dantrolene", "severity": "major", "description": "Hyperkalemia and cardiovascular collapse", "description_ja": "高カリウム血症と循環虚脱"}
+        ]
+    },
+    {
+        "id": "carvedilol",
+        "name": "Carvedilol",
+        "name_ja": "カルベジロール",
+        "category": "cardiovascular",
+        "mechanism": "Non-selective beta-blocker with alpha-1 blocking activity; reduces afterload, heart rate, and myocardial oxygen demand. Antioxidant properties protect against catecholamine-induced cardiomyocyte injury",
+        "mechanism_ja": "α1遮断作用を有する非選択的β遮断薬；後負荷・心拍数・心筋酸素需要を低下。抗酸化作用によりカテコラミン誘発心筋障害を保護",
+        "species_info": {
+            "dog": {"dose": "0.05-0.4 mg/kg PO q12h; start very low and titrate over weeks", "notes": "DCM adjunct, ARVC; start at 1/8 target dose and double every 2 weeks", "notes_ja": "DCM補助療法、ARVC；目標量の1/8から開始し2週毎に倍増"},
+            "cat": {"dose": "0.1-0.2 mg/kg PO q12h", "notes": "Limited data; HCM theoretical benefit from antioxidant/anti-remodeling properties", "notes_ja": "データ限定的；HCMで抗酸化・抗リモデリング作用の理論的有用性"}
+        },
+        "side_effects": ["Bradycardia", "Hypotension", "Lethargy", "GI upset", "Worsened CHF (during titration)"],
+        "side_effects_ja": ["徐脈", "低血圧", "嗜眠", "消化器障害", "心不全悪化（漸増期間中）"],
+        "contraindications": "Decompensated CHF, severe bradycardia, 2nd/3rd degree AV block, bronchospasm, severe hepatic impairment",
+        "contraindications_ja": "非代償性心不全、重度徐脈、II度/III度房室ブロック、気管支攣縮、重度肝障害",
+        "drug_interactions": [
+            {"drug": "Calcium channel blockers", "severity": "major", "description": "Additive negative inotropy and AV block", "description_ja": "相加的陰性変力作用と房室ブロック"},
+            {"drug": "Insulin", "severity": "moderate", "description": "Masks hypoglycemia signs, prolongs episodes", "description_ja": "低血糖症状マスク、エピソード遷延"},
+            {"drug": "Rifampin", "severity": "moderate", "description": "Reduces carvedilol levels significantly", "description_ja": "カルベジロール血中濃度を著明に低下"}
+        ]
+    },
+    {
+        "id": "ivabradine",
+        "name": "Ivabradine",
+        "name_ja": "イバブラジン",
+        "category": "cardiovascular",
+        "mechanism": "Selective If (funny current) channel inhibitor; reduces sinus node automaticity and heart rate without affecting contractility, BP, or AV conduction. Pure chronotropic agent",
+        "mechanism_ja": "選択的If（ファニー電流）チャネル阻害薬；収縮力・血圧・房室伝導に影響せず洞結節自動能と心拍数を低下。純粋な変時作用薬",
+        "species_info": {
+            "dog": {"dose": "0.2-0.5 mg/kg PO q12h", "notes": "Heart rate reduction in DCM when beta-blockers not tolerated; target HR <120 bpm", "notes_ja": "β遮断薬不耐容のDCMで心拍数低下；目標HR<120bpm"},
+            "cat": {"dose": "Not established", "notes": "Theoretical use in HCM with sinus tachycardia", "notes_ja": "洞性頻脈を伴うHCMでの理論的使用"}
+        },
+        "side_effects": ["Bradycardia", "Visual disturbances (phosphenes)", "Atrial fibrillation"],
+        "side_effects_ja": ["徐脈", "視覚障害（光視症）", "心房細動"],
+        "contraindications": "Sick sinus syndrome, 3rd degree AV block, HR <50 bpm, atrial fibrillation/flutter, severe hepatic impairment",
+        "contraindications_ja": "洞不全症候群、III度房室ブロック、HR<50bpm、心房細動/粗動、重度肝障害",
+        "drug_interactions": [
+            {"drug": "Diltiazem/Verapamil", "severity": "major", "description": "Contraindicated combination; excessive bradycardia", "description_ja": "禁忌の組合せ；過度の徐脈"},
+            {"drug": "CYP3A4 inhibitors (ketoconazole)", "severity": "major", "description": "Markedly increased ivabradine levels", "description_ja": "イバブラジン血中濃度の著明上昇"},
+            {"drug": "Beta-blockers", "severity": "moderate", "description": "Additive bradycardia; monitor heart rate", "description_ja": "相加的徐脈；心拍数モニタリング"}
+        ]
+    },
+    {
+        "id": "torsemide",
+        "name": "Torsemide",
+        "name_ja": "トラセミド",
+        "category": "cardiovascular",
+        "mechanism": "Loop diuretic 10-20x more potent than furosemide; inhibits Na+/K+/2Cl- cotransporter in thick ascending limb. Longer duration, more consistent bioavailability, and additional aldosterone antagonist properties",
+        "mechanism_ja": "フロセミドの10-20倍強力なループ利尿薬；太い上行脚のNa+/K+/2Cl-共輸送体を阻害。長い作用時間、安定した生物学的利用能、追加的アルドステロン拮抗作用を有する",
+        "species_info": {
+            "dog": {"dose": "0.1-0.6 mg/kg PO q12-24h (1/10 to 1/20 of furosemide dose)", "notes": "Furosemide-refractory CHF; superior to furosemide for chronic management in QUEST trial", "notes_ja": "フロセミド抵抗性心不全；QUEST試験で慢性管理にフロセミドより優れる"},
+            "cat": {"dose": "0.1-0.3 mg/kg PO q24h", "notes": "Refractory CHF; better oral bioavailability than furosemide in cats", "notes_ja": "難治性心不全；猫でフロセミドより経口生物学的利用能良好"}
+        },
+        "side_effects": ["Dehydration", "Hypokalemia", "Azotemia", "Metabolic alkalosis", "Ototoxicity (high dose)"],
+        "side_effects_ja": ["脱水", "低カリウム血症", "高窒素血症", "代謝性アルカローシス", "聴覚毒性（高用量）"],
+        "contraindications": "Anuria, severe hypovolemia, hepatic coma, hypersensitivity to sulfonamides",
+        "contraindications_ja": "無尿、重度循環血液量減少、肝性昏睡、サルファ剤過敏症",
+        "drug_interactions": [
+            {"drug": "ACE inhibitors", "severity": "moderate", "description": "Enhanced hypotension; reduce ACEi dose initially", "description_ja": "低血圧増強；ACEi初期減量"},
+            {"drug": "Aminoglycosides", "severity": "major", "description": "Additive ototoxicity and nephrotoxicity", "description_ja": "相加的聴覚毒性と腎毒性"},
+            {"drug": "Digoxin", "severity": "moderate", "description": "Hypokalemia potentiates digoxin toxicity", "description_ja": "低カリウム血症がジゴキシン毒性を増強"}
+        ]
+    },
+    {
+        "id": "acetazolamide",
+        "name": "Acetazolamide",
+        "name_ja": "アセタゾラミド",
+        "category": "cardiovascular",
+        "mechanism": "Carbonic anhydrase inhibitor; weak diuretic acting on proximal tubule. Reduces aqueous humor production (glaucoma) and CSF production. Alkalinizes urine",
+        "mechanism_ja": "炭酸脱水酵素阻害薬；近位尿細管に作用する弱い利尿薬。房水産生（緑内障）とCSF産生を減少。尿をアルカリ化",
+        "species_info": {
+            "dog": {"dose": "5-10 mg/kg PO q8-12h (glaucoma); 4-8 mg/kg q8-12h (alkalinize urine)", "notes": "Glaucoma adjunct, metabolic alkalosis, urate/cystine stone prevention", "notes_ja": "緑内障補助、代謝性アルカローシス、尿酸塩・シスチン結石予防"},
+            "cat": {"dose": "5-10 mg/kg PO q8h", "notes": "Glaucoma; limited use due to metabolic acidosis risk", "notes_ja": "緑内障；代謝性アシドーシスリスクのため使用限定的"},
+            "horse": {"dose": "2-4 mg/kg IV/PO q12h", "notes": "HYPP (hyperkalemic periodic paralysis); increases renal K+ excretion", "notes_ja": "HYPP（高カリウム血症性周期性四肢麻痺）；腎K+排泄増加"},
+            "bird": {"dose": "25 mg/kg IM q8h", "notes": "Glaucoma; limited avian data", "notes_ja": "緑内障；鳥類データ限定的"},
+            "reptile": {"dose": "Not established", "notes": "Theoretical use for ocular hypertension", "notes_ja": "眼圧亢進への理論的使用"}
+        },
+        "side_effects": ["Metabolic acidosis", "Hypokalemia", "Renal calculi", "Bone marrow suppression (rare)", "GI upset"],
+        "side_effects_ja": ["代謝性アシドーシス", "低カリウム血症", "腎結石", "骨髄抑制（稀）", "消化器障害"],
+        "contraindications": "Hepatic cirrhosis (ammonia encephalopathy), severe renal failure, adrenal insufficiency, hyperchloremic acidosis, sulfonamide allergy",
+        "contraindications_ja": "肝硬変（アンモニア性脳症）、重度腎不全、副腎不全、高クロール性アシドーシス、サルファ剤アレルギー",
+        "drug_interactions": [
+            {"drug": "Aspirin", "severity": "major", "description": "Increased CNS penetration of salicylates due to acidemia", "description_ja": "アシデミアによるサリチル酸のCNS移行増加"},
+            {"drug": "Phenobarbital", "severity": "moderate", "description": "Reduced phenobarbital efficacy due to increased renal elimination", "description_ja": "腎排泄増加によるフェノバルビタール効果減弱"},
+            {"drug": "Metformin", "severity": "moderate", "description": "Increased lactic acidosis risk", "description_ja": "乳酸アシドーシスリスク増加"}
+        ]
+    },
+]
+
+DRUGS_BATCH_12_PART2: list[dict] = [
+    {
+        "id": "fluticasone",
+        "name": "Fluticasone Propionate",
+        "name_ja": "フルチカゾンプロピオン酸エステル",
+        "category": "respiratory",
+        "mechanism": "Inhaled corticosteroid; potent anti-inflammatory with high topical activity and low systemic bioavailability when inhaled. Suppresses airway inflammation, mucus production, and bronchial hyperresponsiveness",
+        "mechanism_ja": "吸入コルチコステロイド；高い局所活性と低い全身生物学的利用能を持つ強力な抗炎症薬。気道炎症・粘液産生・気管支過敏性を抑制",
+        "species_info": {
+            "dog": {"dose": "110-220 μg/puff q12h via AeroKat/AeroDawg spacer", "notes": "Chronic bronchitis, eosinophilic bronchopneumopathy; 2 weeks for full effect", "notes_ja": "慢性気管支炎、好酸球性気管支肺症；効果発現まで2週間"},
+            "cat": {"dose": "44-220 μg/puff q12h via spacer with mask", "notes": "Feline asthma (first-line inhaled therapy); avoids systemic steroid side effects", "notes_ja": "猫喘息（第一選択吸入療法）；全身性ステロイド副作用を回避"},
+            "horse": {"dose": "2000-3000 μg q12h via nebulizer/Flexineb", "notes": "RAO/IAD (heaves); combine with bronchodilator for acute flares", "notes_ja": "RAO/IAD（喘鳴）；急性増悪時は気管支拡張薬併用"}
+        },
+        "side_effects": ["Oral candidiasis (rare)", "Voice change", "Minimal systemic absorption", "Local irritation"],
+        "side_effects_ja": ["口腔カンジダ症（稀）", "声の変化", "全身吸収最小限", "局所刺激"],
+        "contraindications": "Active respiratory infection (without concurrent antibiotics), systemic fungal infection",
+        "contraindications_ja": "活動性呼吸器感染症（抗菌薬併用なし）、全身性真菌感染症",
+        "drug_interactions": [
+            {"drug": "Ketoconazole/Itraconazole", "severity": "moderate", "description": "CYP3A4 inhibition increases systemic fluticasone exposure", "description_ja": "CYP3A4阻害によりフルチカゾン全身曝露増加"},
+            {"drug": "Ritonavir", "severity": "major", "description": "Marked increase in fluticasone levels; Cushing syndrome reported", "description_ja": "フルチカゾン濃度の著明上昇；クッシング症候群の報告"}
+        ]
+    },
+    {
+        "id": "salbutamol",
+        "name": "Salbutamol (Albuterol)",
+        "name_ja": "サルブタモール（アルブテロール）",
+        "category": "respiratory",
+        "mechanism": "Short-acting beta-2 adrenergic agonist (SABA); relaxes bronchial smooth muscle by increasing intracellular cAMP. Rapid onset rescue bronchodilator",
+        "mechanism_ja": "短時間作用型β2アドレナリン作動薬（SABA）；細胞内cAMP増加により気管支平滑筋を弛緩。即効性レスキュー気管支拡張薬",
+        "species_info": {
+            "dog": {"dose": "90 μg/puff: 1-2 puffs via spacer q4-6h PRN; nebulized: 0.5 mg in 3ml saline", "notes": "Acute bronchospasm, collapsing trachea exacerbation", "notes_ja": "急性気管支攣縮、気管虚脱増悪時"},
+            "cat": {"dose": "90 μg/puff: 1 puff via spacer q30min (acute) then q4-6h", "notes": "Feline asthma rescue inhaler; combine with fluticasone for maintenance", "notes_ja": "猫喘息レスキュー吸入；維持療法にはフルチカゾン併用"},
+            "horse": {"dose": "360-720 μg via Equine Aeromask or nebulized 5mg in 10ml", "notes": "RAO/heaves acute bronchospasm; onset 5 min, duration 1-3h", "notes_ja": "RAO/喘鳴の急性気管支攣縮；発現5分、持続1-3時間"},
+            "guinea_pig": {"dose": "Nebulized 0.5 mg/ml for 10-15 min", "notes": "Bronchospasm; Guinea pigs highly susceptible to anaphylaxis", "notes_ja": "気管支攣縮；モルモットはアナフィラキシーへの感受性が高い"},
+            "bird": {"dose": "0.01-0.02 mg/kg nebulized", "notes": "Dyspnea; use with caution (tachycardia risk in small birds)", "notes_ja": "呼吸困難；注意して使用（小型鳥での頻脈リスク）"}
+        },
+        "side_effects": ["Tachycardia", "Tremor", "Hypokalemia", "Restlessness", "Tolerance (chronic use)"],
+        "side_effects_ja": ["頻脈", "振戦", "低カリウム血症", "不穏", "耐性（慢性使用）"],
+        "contraindications": "Hypertrophic cardiomyopathy (tachycardia), digitalis toxicity, uncontrolled hyperthyroidism",
+        "contraindications_ja": "肥大型心筋症（頻脈）、ジギタリス中毒、未治療甲状腺機能亢進症",
+        "drug_interactions": [
+            {"drug": "Beta-blockers", "severity": "major", "description": "Antagonizes bronchodilatory effect; avoid propranolol in asthmatic patients", "description_ja": "気管支拡張効果を拮抗；喘息患者でプロプラノロール避ける"},
+            {"drug": "Digoxin", "severity": "moderate", "description": "Hypokalemia from beta-agonist may potentiate digoxin toxicity", "description_ja": "β作動薬による低K血症がジゴキシン毒性を増強する可能性"},
+            {"drug": "MAO inhibitors", "severity": "moderate", "description": "Potentiated cardiovascular effects", "description_ja": "心血管作用増強"}
+        ]
+    },
+    {
+        "id": "ipratropium",
+        "name": "Ipratropium Bromide",
+        "name_ja": "イプラトロピウム臭化物",
+        "category": "respiratory",
+        "mechanism": "Inhaled anticholinergic bronchodilator; blocks muscarinic M3 receptors on airway smooth muscle, reducing bronchoconstriction and mucus secretion. Does not cross blood-brain barrier",
+        "mechanism_ja": "吸入抗コリン薬気管支拡張薬；気道平滑筋のムスカリンM3受容体を遮断し気管支収縮と粘液分泌を抑制。血液脳関門を通過しない",
+        "species_info": {
+            "dog": {"dose": "Nebulized: 250-500 μg q6-8h; MDI: 18-36 μg/puff q6h", "notes": "Chronic bronchitis adjunct; synergistic with beta-2 agonists", "notes_ja": "慢性気管支炎の補助；β2作動薬と相乗効果"},
+            "cat": {"dose": "Nebulized: 250 μg q8h", "notes": "Refractory asthma adjunct to fluticasone/salbutamol", "notes_ja": "フルチカゾン/サルブタモール抵抗性喘息の補助"},
+            "horse": {"dose": "Nebulized: 1-3 mg q6-8h", "notes": "RAO; slow onset (30-60 min) but longer duration than salbutamol", "notes_ja": "RAO；発現遅い（30-60分）がサルブタモールより持続長い"},
+            "guinea_pig": {"dose": "Nebulized: 250 μg q8h", "notes": "Bronchospasm", "notes_ja": "気管支攣縮"}
+        },
+        "side_effects": ["Dry mouth", "Tachycardia (mild)", "Urinary retention", "Paradoxical bronchospasm (rare)"],
+        "side_effects_ja": ["口渇", "頻脈（軽度）", "尿閉", "矛盾性気管支攣縮（稀）"],
+        "contraindications": "Narrow-angle glaucoma, bladder neck obstruction, soy/peanut allergy (some formulations)",
+        "contraindications_ja": "閉塞隅角緑内障、膀胱頸部閉塞、大豆/ピーナッツアレルギー（一部製剤）",
+        "drug_interactions": [
+            {"drug": "Other anticholinergics", "severity": "moderate", "description": "Additive anticholinergic effects", "description_ja": "相加的抗コリン作用"},
+            {"drug": "Salbutamol", "severity": "mild", "description": "Synergistic bronchodilation (beneficial combination)", "description_ja": "相乗的気管支拡張（有益な組合せ）"}
+        ]
+    },
+    {
+        "id": "doxapram",
+        "name": "Doxapram",
+        "name_ja": "ドキサプラム",
+        "category": "respiratory",
+        "mechanism": "Central and peripheral respiratory stimulant; stimulates carotid body chemoreceptors and medullary respiratory center, increasing tidal volume and respiratory rate",
+        "mechanism_ja": "中枢性・末梢性呼吸刺激薬；頸動脈体化学受容体と延髄呼吸中枢を刺激し一回換気量と呼吸数を増加",
+        "species_info": {
+            "dog": {"dose": "1-5 mg/kg IV; neonates: 1-5 mg sublingual or 1-2 drops under tongue", "notes": "Neonatal resuscitation (C-section puppies), post-anesthetic apnea", "notes_ja": "新生子蘇生（帝王切開仔犬）、麻酔後無呼吸"},
+            "cat": {"dose": "1-5 mg/kg IV; neonates: 1-2 mg sublingual", "notes": "Post-anesthetic respiratory depression, C-section kittens", "notes_ja": "麻酔後呼吸抑制、帝王切開仔猫"},
+            "horse": {"dose": "0.5-1 mg/kg IV", "notes": "Post-anesthetic respiratory depression; short duration (5-10 min)", "notes_ja": "麻酔後呼吸抑制；短時間作用（5-10分）"},
+            "bird": {"dose": "5-7 mg/kg IV/IM or 1 drop sublingual", "notes": "Anesthetic apnea in small birds; rapid onset", "notes_ja": "小型鳥の麻酔時無呼吸；即効性"},
+            "reptile": {"dose": "5 mg/kg IV/IM", "notes": "Post-anesthetic respiratory depression; response variable in reptiles", "notes_ja": "麻酔後呼吸抑制；爬虫類での反応は不定"},
+            "rabbit": {"dose": "2-5 mg/kg IV", "notes": "Neonatal resuscitation, anesthetic apnea", "notes_ja": "新生子蘇生、麻酔時無呼吸"},
+            "ferret": {"dose": "1-5 mg/kg IV", "notes": "Post-anesthetic apnea", "notes_ja": "麻酔後無呼吸"}
+        },
+        "side_effects": ["Hypertension", "Tachycardia", "Seizures (overdose)", "Vomiting", "Arrhythmias"],
+        "side_effects_ja": ["高血圧", "頻脈", "痙攣（過量）", "嘔吐", "不整脈"],
+        "contraindications": "Seizure disorders, severe hypertension, mechanical obstruction of ventilation, head injury",
+        "contraindications_ja": "痙攣性疾患、重度高血圧、換気の機械的閉塞、頭部外傷",
+        "drug_interactions": [
+            {"drug": "Halothane", "severity": "major", "description": "Sensitizes myocardium to catecholamine arrhythmias", "description_ja": "カテコラミン不整脈に対する心筋感受性増大"},
+            {"drug": "MAO inhibitors", "severity": "moderate", "description": "Potentiated pressor effect", "description_ja": "昇圧効果増強"},
+            {"drug": "Sympathomimetics", "severity": "moderate", "description": "Additive cardiovascular stimulation", "description_ja": "相加的心血管刺激"}
+        ]
+    },
+    {
+        "id": "hydrocodone",
+        "name": "Hydrocodone",
+        "name_ja": "ヒドロコドン",
+        "category": "respiratory",
+        "mechanism": "Opioid antitussive; acts on cough center in medulla to suppress cough reflex. Also mild analgesic via mu-opioid receptor agonism",
+        "mechanism_ja": "オピオイド鎮咳薬；延髄の咳中枢に作用し咳反射を抑制。μオピオイド受容体作動による軽度鎮痛作用も有する",
+        "species_info": {
+            "dog": {"dose": "0.22 mg/kg PO q6-12h (often combined with homatropine as Hycodan)", "notes": "Chronic intractable cough (collapsing trachea, chronic bronchitis); most effective canine antitussive", "notes_ja": "慢性難治性咳（気管虚脱、慢性気管支炎）；犬で最も有効な鎮咳薬"},
+            "cat": {"dose": "Not recommended", "notes": "Cats very sensitive to opioid excitation; use butorphanol instead", "notes_ja": "猫はオピオイド興奮に非常に敏感；ブトルファノールを代替使用"}
+        },
+        "side_effects": ["Sedation", "Constipation", "Respiratory depression (overdose)", "Euphoria/dysphoria", "Physical dependence"],
+        "side_effects_ja": ["鎮静", "便秘", "呼吸抑制（過量）", "多幸/不快感", "身体的依存"],
+        "contraindications": "Productive cough (suppressing needed clearance), head injury, severe respiratory depression, cats",
+        "contraindications_ja": "湿性咳（必要な排出抑制）、頭部外傷、重度呼吸抑制、猫",
+        "drug_interactions": [
+            {"drug": "Other CNS depressants", "severity": "major", "description": "Additive respiratory depression and sedation", "description_ja": "相加的呼吸抑制と鎮静"},
+            {"drug": "MAO inhibitors", "severity": "major", "description": "Potentially fatal interaction; serotonin syndrome or respiratory depression", "description_ja": "致死的相互作用の可能性；セロトニン症候群や呼吸抑制"},
+            {"drug": "Anticholinergics", "severity": "mild", "description": "Additive constipation", "description_ja": "相加的便秘"}
+        ]
+    },
+    {
+        "id": "dextromethorphan",
+        "name": "Dextromethorphan",
+        "name_ja": "デキストロメトルファン",
+        "category": "respiratory",
+        "mechanism": "Non-opioid antitussive; acts on sigma-1 receptors and NMDA receptors in cough center. No analgesic activity or addiction potential at therapeutic doses",
+        "mechanism_ja": "非オピオイド鎮咳薬；咳中枢のシグマ1受容体とNMDA受容体に作用。治療用量では鎮痛作用や依存性なし",
+        "species_info": {
+            "dog": {"dose": "1-2 mg/kg PO q6-8h", "notes": "Mild-moderate cough; less effective than hydrocodone but no controlled substance scheduling", "notes_ja": "軽度-中等度の咳；ヒドロコドンより効果弱いが規制薬物ではない"},
+            "cat": {"dose": "0.5-2 mg/kg PO q6-8h", "notes": "Use dextromethorphan-only products (no acetaminophen/decongestants)", "notes_ja": "デキストロメトルファン単独製品を使用（アセトアミノフェン・充血除去薬なし）"}
+        },
+        "side_effects": ["Mild sedation", "GI upset", "Serotonin syndrome (with SSRIs)", "Ataxia (overdose)"],
+        "side_effects_ja": ["軽度鎮静", "消化器障害", "セロトニン症候群（SSRI併用時）", "運動失調（過量）"],
+        "contraindications": "Productive cough, concurrent MAOI use, products containing xylitol/acetaminophen (cats/dogs)",
+        "contraindications_ja": "湿性咳、MAOI併用、キシリトール/アセトアミノフェン含有製品（猫・犬）",
+        "drug_interactions": [
+            {"drug": "SSRIs/SNRIs", "severity": "major", "description": "Serotonin syndrome risk due to weak serotonin reuptake inhibition by DXM", "description_ja": "DXMの弱いセロトニン再取込阻害によるセロトニン症候群リスク"},
+            {"drug": "MAO inhibitors", "severity": "major", "description": "Contraindicated; severe serotonin syndrome or hypertensive crisis", "description_ja": "禁忌；重度セロトニン症候群または高血圧クリーゼ"}
+        ]
+    },
+    {
+        "id": "codeine",
+        "name": "Codeine",
+        "name_ja": "コデイン",
+        "category": "respiratory",
+        "mechanism": "Opioid antitussive (prodrug); metabolized to morphine via CYP2D6. Suppresses cough reflex at medullary level. Mild analgesic",
+        "mechanism_ja": "オピオイド鎮咳薬（プロドラッグ）；CYP2D6により活性体モルヒネに代謝。延髄レベルで咳反射を抑制。軽度鎮痛作用",
+        "species_info": {
+            "dog": {"dose": "1-2 mg/kg PO q6-12h", "notes": "Variable CYP2D6 activity between dogs; less effective than hydrocodone", "notes_ja": "犬のCYP2D6活性に個体差；ヒドロコドンより効果弱い"},
+            "cat": {"dose": "Not recommended", "notes": "Cats lack adequate CYP2D6; minimal efficacy, excitation risk", "notes_ja": "猫はCYP2D6不足；効果最小限、興奮リスク"},
+            "horse": {"dose": "0.5-1 mg/kg PO q6-8h", "notes": "Post-URT surgery cough suppression", "notes_ja": "上部気道手術後の咳抑制"}
+        },
+        "side_effects": ["Sedation", "Constipation", "GI upset", "Respiratory depression (overdose)"],
+        "side_effects_ja": ["鎮静", "便秘", "消化器障害", "呼吸抑制（過量）"],
+        "contraindications": "Productive cough, severe hepatic disease (impaired metabolism), CYP2D6 ultra-rapid metabolizers, cats",
+        "contraindications_ja": "湿性咳、重度肝疾患（代謝障害）、CYP2D6超迅速代謝者、猫",
+        "drug_interactions": [
+            {"drug": "CYP2D6 inhibitors (fluoxetine)", "severity": "moderate", "description": "Reduces conversion to active morphine, reducing efficacy", "description_ja": "活性体モルヒネへの変換減少により効果減弱"},
+            {"drug": "CNS depressants", "severity": "moderate", "description": "Additive sedation and respiratory depression", "description_ja": "相加的鎮静と呼吸抑制"},
+            {"drug": "Naloxone", "severity": "mild", "description": "Reverses opioid effects including antitussive action", "description_ja": "鎮咳作用を含むオピオイド効果を拮抗"}
+        ]
+    },
+    {
+        "id": "warfarin",
+        "name": "Warfarin",
+        "name_ja": "ワルファリン",
+        "category": "cardiovascular",
+        "mechanism": "Vitamin K antagonist; inhibits vitamin K epoxide reductase (VKORC1), preventing synthesis of functional coagulation factors II, VII, IX, X and proteins C/S",
+        "mechanism_ja": "ビタミンK拮抗薬；ビタミンKエポキシド還元酵素（VKORC1）を阻害し、凝固因子II・VII・IX・Xとプロテイン C/S の合成を阻害",
+        "species_info": {
+            "dog": {"dose": "0.1-0.2 mg/kg PO q24h initially; adjust based on PT/INR (target 2-3)", "notes": "ATE prophylaxis, PTE; requires frequent monitoring. Most dogs need 0.05-0.22 mg/kg", "notes_ja": "動脈血栓塞栓症予防、肺血栓塞栓症；頻回モニタリング必要"},
+            "cat": {"dose": "0.06-0.12 mg/kg PO q24h (target INR 2-3)", "notes": "ATE prevention (largely replaced by clopidogrel in cats); hemorrhage risk", "notes_ja": "動脈血栓塞栓症予防（猫ではクロピドグレルに大部分置換）；出血リスク"},
+            "horse": {"dose": "0.02-0.07 mg/kg PO q24h", "notes": "Venous thrombosis; narrow therapeutic index in horses", "notes_ja": "静脈血栓症；馬では治療域が狭い"},
+            "bird": {"dose": "0.2-2 mg/kg PO q24h", "notes": "Very species-dependent sensitivity; rodenticide toxicosis treatment duration guide", "notes_ja": "種による感受性差が非常に大きい；殺鼠剤中毒治療期間の目安"}
+        },
+        "side_effects": ["Hemorrhage", "Anemia secondary to bleeding", "Skin necrosis (rare)", "GI upset"],
+        "side_effects_ja": ["出血", "出血に続発する貧血", "皮膚壊死（稀）", "消化器障害"],
+        "contraindications": "Active bleeding, thrombocytopenia, severe hepatic disease, recent surgery, pregnancy",
+        "contraindications_ja": "活動性出血、血小板減少症、重度肝疾患、最近の手術、妊娠",
+        "drug_interactions": [
+            {"drug": "NSAIDs", "severity": "major", "description": "Increased bleeding risk through platelet inhibition and GI ulceration", "description_ja": "血小板阻害と消化管潰瘍による出血リスク増加"},
+            {"drug": "Metronidazole", "severity": "major", "description": "Inhibits warfarin metabolism; INR increase within 3-5 days", "description_ja": "ワルファリン代謝阻害；3-5日以内にINR上昇"},
+            {"drug": "Phenobarbital", "severity": "major", "description": "Induces CYP enzymes, markedly reduces warfarin efficacy", "description_ja": "CYP酵素誘導によりワルファリン効果を著明に低下"},
+            {"drug": "Vitamin K1", "severity": "major", "description": "Direct antagonist; reversal agent for over-anticoagulation", "description_ja": "直接拮抗薬；過剰抗凝固の拮抗薬"}
+        ]
+    },
+    {
+        "id": "dalteparin",
+        "name": "Dalteparin",
+        "name_ja": "ダルテパリン",
+        "category": "cardiovascular",
+        "mechanism": "Low molecular weight heparin (LMWH); preferentially inhibits factor Xa via antithrombin III potentiation. More predictable pharmacokinetics than unfractionated heparin",
+        "mechanism_ja": "低分子量ヘパリン（LMWH）；アンチトロンビンIII増強を介して第Xa因子を優先的に阻害。未分画ヘパリンより薬物動態が予測可能",
+        "species_info": {
+            "dog": {"dose": "100-175 IU/kg SC q8h (target anti-Xa 0.5-1.0 IU/mL)", "notes": "ATE/VTE prophylaxis and treatment; monitor anti-Xa activity", "notes_ja": "動静脈血栓塞栓症予防・治療；抗Xa活性モニタリング"},
+            "cat": {"dose": "100-150 IU/kg SC q12-24h", "notes": "ATE prophylaxis (cardiomyopathy); less monitoring needed than warfarin", "notes_ja": "動脈血栓塞栓症予防（心筋症）；ワルファリンよりモニタリング少ない"},
+            "horse": {"dose": "50-100 IU/kg SC q24h", "notes": "Venous thrombosis prophylaxis; anti-Xa monitoring recommended", "notes_ja": "静脈血栓症予防；抗Xa活性モニタリング推奨"},
+            "rabbit": {"dose": "100 IU/kg SC q12h", "notes": "Thrombosis prophylaxis; extrapolated data", "notes_ja": "血栓予防；外挿データ"},
+            "bird": {"dose": "100 IU/kg SC q12h", "notes": "Limited avian data; used in raptors with bumblefoot-associated thrombosis", "notes_ja": "鳥類データ限定的；趾瘤症関連血栓の猛禽類で使用"}
+        },
+        "side_effects": ["Hemorrhage", "Injection site hematoma", "Thrombocytopenia (HIT rare)", "Osteoporosis (long-term)"],
+        "side_effects_ja": ["出血", "注射部位血腫", "血小板減少症（HIT稀）", "骨粗鬆症（長期）"],
+        "contraindications": "Active major bleeding, severe thrombocytopenia, HIT history, epidural/spinal anesthesia within 12h",
+        "contraindications_ja": "活動性大出血、重度血小板減少症、HIT既往、12時間以内の硬膜外/脊髄麻酔",
+        "drug_interactions": [
+            {"drug": "NSAIDs", "severity": "major", "description": "Increased bleeding risk", "description_ja": "出血リスク増加"},
+            {"drug": "Other anticoagulants", "severity": "major", "description": "Additive anticoagulation and hemorrhage risk", "description_ja": "相加的抗凝固作用と出血リスク"},
+            {"drug": "Clopidogrel", "severity": "moderate", "description": "Increased bleeding risk with dual antithrombotic therapy", "description_ja": "二重抗血栓療法による出血リスク増加"}
+        ]
+    },
+    {
+        "id": "amiloride",
+        "name": "Amiloride",
+        "name_ja": "アミロライド",
+        "category": "cardiovascular",
+        "mechanism": "Potassium-sparing diuretic; blocks epithelial sodium channels (ENaC) in collecting duct, reducing sodium reabsorption and potassium secretion",
+        "mechanism_ja": "カリウム保持性利尿薬；集合管の上皮ナトリウムチャネル（ENaC）を遮断しナトリウム再吸収とカリウム分泌を抑制",
+        "species_info": {
+            "dog": {"dose": "0.1-0.2 mg/kg PO q12-24h", "notes": "Combined with furosemide/HCTZ to prevent hypokalemia; weak diuretic alone", "notes_ja": "フロセミド/HCTZと併用して低K血症予防；単独では弱い利尿薬"},
+            "cat": {"dose": "0.1-0.2 mg/kg PO q24h", "notes": "Adjunct to loop diuretics", "notes_ja": "ループ利尿薬の補助"}
+        },
+        "side_effects": ["Hyperkalemia", "GI upset", "Dehydration", "Metabolic acidosis"],
+        "side_effects_ja": ["高カリウム血症", "消化器障害", "脱水", "代謝性アシドーシス"],
+        "contraindications": "Hyperkalemia, severe renal insufficiency (GFR <30), concurrent K+ supplements or K+-sparing agents",
+        "contraindications_ja": "高カリウム血症、重度腎不全（GFR<30）、カリウム製剤またはK保持薬併用",
+        "drug_interactions": [
+            {"drug": "ACE inhibitors/ARBs", "severity": "major", "description": "High hyperkalemia risk with triple RAAS/K-sparing", "description_ja": "三重RAAS/K保持で高カリウム血症リスク高い"},
+            {"drug": "Potassium supplements", "severity": "major", "description": "Potentially fatal hyperkalemia", "description_ja": "致死的高カリウム血症の可能性"},
+            {"drug": "NSAIDs", "severity": "moderate", "description": "Reduced diuretic effect and increased hyperkalemia risk", "description_ja": "利尿効果減弱と高カリウム血症リスク増加"}
+        ]
+    },
+    {
+        "id": "sacubitril_valsartan",
+        "name": "Sacubitril/Valsartan",
+        "name_ja": "サクビトリル・バルサルタン",
+        "category": "cardiovascular",
+        "mechanism": "ARNI (Angiotensin Receptor-Neprilysin Inhibitor); combines neprilysin inhibition (increases natriuretic peptides) with AT1 receptor blockade. Dual neurohormonal modulation for heart failure",
+        "mechanism_ja": "ARNI（アンジオテンシン受容体ネプリライシン阻害薬）；ネプリライシン阻害（ナトリウム利尿ペプチド増加）とAT1受容体遮断を併合。心不全の二重神経体液性調節",
+        "species_info": {
+            "dog": {"dose": "1-5 mg/kg PO q12h (start low, titrate over 2-4 weeks)", "notes": "MMVD Stage C/D as alternative to ACEi; DELAY study showed non-inferiority. Still emerging in veterinary medicine", "notes_ja": "MMVD Stage C/DでACEi代替；DELAY試験で非劣性示す。獣医療ではまだ新規"},
+            "cat": {"dose": "Not established", "notes": "No published feline dosing data yet", "notes_ja": "猫の用量データ未発表"}
+        },
+        "side_effects": ["Hypotension", "Hyperkalemia", "Azotemia", "Angioedema (rare)"],
+        "side_effects_ja": ["低血圧", "高カリウム血症", "高窒素血症", "血管浮腫（稀）"],
+        "contraindications": "Concurrent ACE inhibitor use (36h washout required), bilateral renal artery stenosis, pregnancy, history of angioedema",
+        "contraindications_ja": "ACE阻害薬併用（36時間ウォッシュアウト必要）、両側腎動脈狭窄、妊娠、血管浮腫既往",
+        "drug_interactions": [
+            {"drug": "ACE inhibitors", "severity": "major", "description": "Contraindicated; dual neprilysin/RAAS inhibition causes angioedema", "description_ja": "禁忌；二重ネプリライシン/RAAS阻害で血管浮腫"},
+            {"drug": "Potassium-sparing diuretics", "severity": "major", "description": "High hyperkalemia risk", "description_ja": "高カリウム血症リスク高い"},
+            {"drug": "NSAIDs", "severity": "moderate", "description": "Reduced efficacy and renal impairment", "description_ja": "効果減弱と腎障害"}
+        ]
+    },
+    {
+        "id": "cromoglycate",
+        "name": "Sodium Cromoglycate",
+        "name_ja": "クロモグリク酸ナトリウム",
+        "category": "respiratory",
+        "mechanism": "Mast cell stabilizer; prevents degranulation and histamine/leukotriene release from mast cells. Prophylactic only — no effect on acute bronchospasm",
+        "mechanism_ja": "肥満細胞安定化薬；肥満細胞の脱顆粒とヒスタミン/ロイコトリエン放出を予防。予防薬のみ — 急性気管支攣縮には無効",
+        "species_info": {
+            "dog": {"dose": "Nebulized: 20 mg q6-8h", "notes": "Prophylaxis of exercise-induced or allergic bronchospasm; 2-4 weeks for full effect", "notes_ja": "運動誘発性またはアレルギー性気管支攣縮の予防；効果発現まで2-4週間"},
+            "cat": {"dose": "Nebulized: 20 mg q8-12h", "notes": "Feline asthma prophylaxis; less effective than inhaled corticosteroids", "notes_ja": "猫喘息予防；吸入コルチコステロイドより効果弱い"},
+            "horse": {"dose": "Nebulized: 80-200 mg q8-12h", "notes": "RAO prevention before allergen exposure; limited equine data", "notes_ja": "アレルゲン曝露前のRAO予防；馬でのデータ限定的"},
+            "guinea_pig": {"dose": "Nebulized: 10 mg q8h", "notes": "Research model for mast cell stabilization", "notes_ja": "肥満細胞安定化の研究モデル"}
+        },
+        "side_effects": ["Cough from nebulization", "Throat irritation", "Extremely safe systemically"],
+        "side_effects_ja": ["ネブライゼーションによる咳", "咽喉刺激", "全身的には極めて安全"],
+        "contraindications": "None significant; should not be used to treat acute episodes",
+        "contraindications_ja": "特記すべき禁忌なし；急性エピソードの治療には使用しない",
+        "drug_interactions": [
+            {"drug": "None significant", "severity": "mild", "description": "No clinically relevant drug interactions known", "description_ja": "臨床的に重要な薬物相互作用は知られていない"}
+        ]
+    },
+    {
+        "id": "sildenafil_pulmonary",
+        "name": "Sildenafil (Pulmonary Hypertension)",
+        "name_ja": "シルデナフィル（肺高血圧症）",
+        "category": "respiratory",
+        "mechanism": "PDE5 inhibitor; selectively relaxes pulmonary vascular smooth muscle by increasing cGMP. Reduces pulmonary arterial pressure and right ventricular afterload",
+        "mechanism_ja": "PDE5阻害薬；cGMP増加により肺血管平滑筋を選択的に弛緩。肺動脈圧と右心室後負荷を低下",
+        "species_info": {
+            "dog": {"dose": "1-3 mg/kg PO q8-12h", "notes": "Pulmonary hypertension (PH) from MMVD, CIPF, or heartworm; exercise tolerance improves", "notes_ja": "MMVD・CIPF・フィラリア症による肺高血圧症；運動耐容能改善"},
+            "cat": {"dose": "1-2 mg/kg PO q8-12h", "notes": "Secondary PH from HCM or chronic respiratory disease", "notes_ja": "HCMや慢性呼吸器疾患に続発する肺高血圧症"},
+            "ferret": {"dose": "1-2 mg/kg PO q12h", "notes": "Pulmonary hypertension; limited data", "notes_ja": "肺高血圧症；データ限定的"},
+            "bird": {"dose": "Not established", "notes": "Theoretical use for ascites/PH in broilers (research)", "notes_ja": "ブロイラー腹水症/肺高血圧の理論的使用（研究）"}
+        },
+        "side_effects": ["Hypotension", "Nasal congestion", "GI upset", "Priapism (rare)"],
+        "side_effects_ja": ["低血圧", "鼻閉", "消化器障害", "持続勃起症（稀）"],
+        "contraindications": "Concurrent nitrates (fatal hypotension), severe systemic hypotension, right-to-left cardiac shunt dependent on elevated PVR",
+        "contraindications_ja": "硝酸薬併用（致死的低血圧）、重度全身性低血圧、PVR上昇に依存する右左シャント",
+        "drug_interactions": [
+            {"drug": "Nitrates/Nitroglycerin", "severity": "major", "description": "Potentially fatal hypotension; absolutely contraindicated", "description_ja": "致死的低血圧の可能性；絶対禁忌"},
+            {"drug": "Alpha-blockers", "severity": "moderate", "description": "Additive hypotension", "description_ja": "相加的低血圧"},
+            {"drug": "Amlodipine", "severity": "mild", "description": "Additive vasodilation; usually well tolerated", "description_ja": "相加的血管拡張；通常は忍容性良好"}
+        ]
+    },
+]
+
+# Merge into single list
+DRUGS_BATCH_12 = DRUGS_BATCH_12 + DRUGS_BATCH_12_PART2

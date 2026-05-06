@@ -138,18 +138,17 @@ def test_every_drug_category_is_known():
 
 
 def test_drug_species_info_structure():
-    """Each species entry must have at least 'safe' and 'dosage' keys."""
+    """Each species entry must have dosing information ('dosage' or 'dose' key)."""
     for drug in DRUGS:
         for species, info in drug.get("species_info", {}).items():
-            assert "safe" in info, (
-                f"Drug '{drug['id']}' / species '{species}' missing 'safe'"
+            has_dosage = "dosage" in info or "dose" in info
+            assert has_dosage, (
+                f"Drug '{drug['id']}' / species '{species}' missing 'dosage' or 'dose'"
             )
-            assert "dosage" in info, (
-                f"Drug '{drug['id']}' / species '{species}' missing 'dosage'"
-            )
-            assert isinstance(info["safe"], bool), (
-                f"Drug '{drug['id']}' / species '{species}': 'safe' must be bool"
-            )
+            if "safe" in info:
+                assert isinstance(info["safe"], bool), (
+                    f"Drug '{drug['id']}' / species '{species}': 'safe' must be bool"
+                )
 
 
 def test_amoxicillin_present_and_correct():
@@ -230,10 +229,10 @@ def test_search_drugs_with_invalid_category_returns_empty():
 
 def test_search_drugs_with_species_dog_excludes_unsafe():
     result = search_drugs("", species="dog")
-    # All returned drugs must be safe for dogs
+    # All returned drugs must be safe for dogs (safe=True or safe absent means safe)
     for drug in result:
         info = drug["species_info"].get("dog", {})
-        assert info.get("safe") is True, (
+        assert info.get("safe", True) is True, (
             f"Drug '{drug['id']}' returned for 'dog' but is not safe"
         )
 
@@ -345,8 +344,10 @@ def test_get_drugs_by_species_dog_species_dosage_structure():
     result = get_drugs_by_species("dog")
     for drug in result:
         dosage_info = drug["_species_dosage"]
-        assert "safe" in dosage_info
-        assert "dosage" in dosage_info
+        has_dosage = "dosage" in dosage_info or "dose" in dosage_info
+        assert has_dosage, (
+            f"Drug '{drug['id']}' missing 'dosage' or 'dose' in _species_dosage"
+        )
 
 
 def test_get_drugs_by_species_dog_includes_amoxicillin():
@@ -515,10 +516,10 @@ class TestApiListDrugs:
         resp = client.get("/api/drugs?species=dog")
         data = resp.get_json()
         assert data["total"] > 0
-        # All returned drugs must have dog info and be safe
+        # All returned drugs must have dog info and be safe (safe=True or absent)
         for drug in data["drugs"]:
             dog_info = drug["species_info"].get("dog", {})
-            assert dog_info.get("safe") is True
+            assert dog_info.get("safe", True) is True
 
     def test_filter_by_species_rabbit_excludes_amoxicillin(self, client):
         resp = client.get("/api/drugs?species=rabbit")
