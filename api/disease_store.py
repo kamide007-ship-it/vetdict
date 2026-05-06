@@ -154,22 +154,9 @@ def _fallback_disease_counts() -> dict[str, int]:
         except Exception:
             logger.debug("Failed to load species module %s", mod_path)
 
-    # JSON fallback for any species still missing
-    if any(counts.get(sp, 0) == 0 for sp in SPECIES_META):
-        try:
-            import json as _json
-            from pathlib import Path as _Path
-            data_file = _Path(__file__).parent.parent / "diseases_all_species.json"
-            if data_file.exists():
-                _name_to_id = {v["name_en"]: k for k, v in SPECIES_META.items()}
-                with open(data_file, "r", encoding="utf-8") as f:
-                    for entry in _json.load(f):
-                        sp_name = entry.get("species", "")
-                        sp_id = _name_to_id.get(sp_name)
-                        if sp_id and counts.get(sp_id, 0) == 0:
-                            counts[sp_id] = counts.get(sp_id, 0) + 1
-        except Exception:
-            logger.debug("JSON fallback for disease counts failed", exc_info=True)
+    # JSON fallback disabled — SQLite is now the authoritative source.
+    # The 101MB JSON was causing OOM on Render's 512MB free tier.
+    # If SQLite has gaps, run: python scripts/migrate_to_sqlite.py
 
     return counts
 

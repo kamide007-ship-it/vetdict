@@ -10599,3 +10599,170 @@ def api_drug_categories():
         cats.append({"id": cat_id, "name_ja": names["ja"], "name_en": names["en"], "count": count})
     cats.sort(key=lambda c: c["count"], reverse=True)
     return jsonify({"categories": cats, "total_drugs": len(DRUGS)})
+
+
+# ---------------------------------------------------------------------------
+# 用量計算機 + 相互作用チェック API
+# ---------------------------------------------------------------------------
+
+from api.dose_calculator import calculate_dose
+from api.dose_calculator import to_dict as dose_to_dict
+from api.drug_interactions import (
+    find_interactions,
+    find_species_specific_warnings,
+    get_all_interactions_for_drug,
+)
+
+
+@drug_bp.route("/api/drugs/calculate-dose", methods=["POST"])
+def api_calculate_dose():
+    """
+    体重ベース用量計算。
+    Body JSON: {drug_id, species, body_weight_kg, concentration_mg_per_ml?}
+    """
+    data = request.get_json(silent=True) or {}
+    drug_id = data.get("drug_id", "").strip()
+    species = data.get("species", "").strip().lower()
+    try:
+        weight = float(data.get("body_weight_kg", 0))
+    except (TypeError, ValueError):
+        return jsonify({"error": "body_weight_kg must be a number"}), 400
+    if not drug_id or not species or weight <= 0:
+        return jsonify({"error": "drug_id, species, body_weight_kg required"}), 400
+
+    drug = get_drug_by_id(drug_id)
+    if not drug:
+        return jsonify({"error": "Drug not found"}), 404
+
+    conc = data.get("concentration_mg_per_ml")
+    try:
+        conc = float(conc) if conc is not None else None
+    except (TypeError, ValueError):
+        conc = None
+
+    calc = calculate_dose(drug, species, weight, concentration_mg_per_ml=conc)
+    species_warnings = find_species_specific_warnings(drug_id, species)
+    return jsonify(
+        {
+            "calculation": dose_to_dict(calc),
+            "species_specific_warnings": species_warnings,
+        }
+    )
+
+
+@drug_bp.route("/api/drugs/check-interactions", methods=["POST"])
+def api_check_interactions():
+    """
+    薬品-薬品相互作用チェック。
+    Body JSON: {drug_ids: [...], species?: "..."}
+    """
+    data = request.get_json(silent=True) or {}
+    drug_ids = data.get("drug_ids", []) or []
+    species = (data.get("species") or "").strip().lower()
+    if not isinstance(drug_ids, list):
+        return jsonify({"error": "drug_ids must be a list"}), 400
+    if len(drug_ids) < 1:
+        return jsonify({"interactions": [], "species_specific_warnings": []})
+
+    interactions = find_interactions(drug_ids)
+    species_warnings = []
+    if species:
+        for did in drug_ids:
+            species_warnings.extend(find_species_specific_warnings(did, species))
+
+    return jsonify(
+        {
+            "interactions": interactions,
+            "species_specific_warnings": species_warnings,
+            "total_interactions": len(interactions),
+        }
+    )
+
+
+@drug_bp.route("/api/drugs/<drug_id>/interactions", methods=["GET"])
+def api_drug_interactions(drug_id: str):
+    """単一薬品に関わる全相互作用を返す（参考表示用）"""
+    drug = get_drug_by_id(drug_id)
+    if not drug:
+        return jsonify({"error": "Drug not found"}), 404
+    interactions = get_all_interactions_for_drug(drug_id)
+    return jsonify({"drug_id": drug_id, "interactions": interactions, "total": len(interactions)})
+
+
+# ---------------------------------------------------------------------------
+# エビデンスグレード API
+# ---------------------------------------------------------------------------
+from api.evidence_grading import (
+    AI_CONTENT_DISCLAIMER,
+    DIAGNOSTIC_DISCLAIMER,
+    DOSE_CALCULATOR_DISCLAIMER,
+    assess,
+)
+from api.evidence_grading import (
+    to_dict as evidence_to_dict,
+)
+
+
+@drug_bp.route("/api/evidence/assess", methods=["POST"])
+def api_evidence_assess():
+    """
+    治療文字列のエビデンス評価。
+    Body JSON: {text: "..."}
+    """
+    data = request.get_json(silent=True) or {}
+    text = data.get("text", "") or ""
+    assessment = assess(text)
+    return jsonify({"assessment": evidence_to_dict(assessment)})
+
+
+@drug_bp.route("/api/disclaimers", methods=["GET"])
+def api_disclaimers():
+    """免責事項テキストを返す"""
+    return jsonify(
+        {
+            "ai_content": AI_CONTENT_DISCLAIMER,
+            "diagnostic": DIAGNOSTIC_DISCLAIMER,
+            "dose_calculator": DOSE_CALCULATOR_DISCLAIMER,
+        }
+    )
+
+
+# ---------------------------------------------------------------------------
+# 治療プラン生成 API
+# ---------------------------------------------------------------------------
+from api.treatment_plan import build_treatment_plan
+from api.treatment_plan import to_dict as plan_to_dict
+
+
+def _get_drug_lookup() -> dict:
+    """drug_id → drug_dict のマッピングを構築"""
+    return {d["id"]: d for d in DRUGS}
+
+
+@drug_bp.route("/api/treatment-plan/generate", methods=["POST"])
+def api_generate_treatment_plan():
+    """
+    確定診断から構造化治療プランを生成。
+    Body JSON: {disease: {...}, species: "...", body_weight_kg?: ...}
+    """
+    data = request.get_json(silent=True) or {}
+    disease = data.get("disease") or {}
+    species = (data.get("species") or "").strip().lower()
+    weight = data.get("body_weight_kg")
+    try:
+        weight = float(weight) if weight is not None else None
+    except (TypeError, ValueError):
+        weight = None
+    if not disease or not species:
+        return jsonify({"error": "disease and species required"}), 400
+
+    lang = data.get("lang", "ja")
+    drug_lookup = _get_drug_lookup()
+    plan = build_treatment_plan(
+        disease=disease,
+        drug_lookup=drug_lookup,
+        species=species,
+        body_weight_kg=weight,
+        lang=lang,
+    )
+    return jsonify({"plan": plan_to_dict(plan)})

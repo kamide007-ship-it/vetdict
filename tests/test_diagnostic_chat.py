@@ -1041,10 +1041,12 @@ class TestSymptomAliasesIntegrity:
 
     def test_all_alias_values_are_valid_symptom_ids_or_known_mismatches(self):
         """Every value should be in SYMPTOM_IDS (dog) or a species SYMPTOM_NAMES, or be a documented mismatch."""
-        # Build combined valid IDs from all species modules
+        # Build combined valid IDs from all species modules (trigger lazy load)
         all_valid_ids = set(SYMPTOM_IDS) | _KNOWN_ALIAS_MISMATCHES
-        from api.diagnostic_chat import _SPECIES_DATA
-        for sp_data in _SPECIES_DATA.values():
+        from api.chat.species_data import get_species_data
+        from api.chat.constants import _GENERIC_SPECIES
+        for sp in _GENERIC_SPECIES:
+            sp_data = get_species_data(sp)
             all_valid_ids.update(sp_data.get("symptom_names", {}).keys())
 
         for alias, symptom_id in SYMPTOM_ALIASES.items():

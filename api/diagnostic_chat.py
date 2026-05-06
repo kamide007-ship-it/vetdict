@@ -132,36 +132,41 @@ def evaluate_with_ai_confidence(
         return None
 
 
-# Import equine data for horse chat support
-try:
-    from api.species.equine_diseases import (
-        DISEASE_DATABASE as EQUINE_DISEASES,
-    )
-    from api.species.equine_diseases import (
-        HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
-    )
+# Lazy equine data import (saves ~150MB startup memory for Render 512MB tier)
+EQUINE_AVAILABLE = True
+_EQUINE_DISEASES = None
+_EQUINE_HEALTH_CHECK_ITEMS = None
 
-    EQUINE_AVAILABLE = True
-except ImportError:
-    try:
-        from species.equine_diseases import (
-            DISEASE_DATABASE as EQUINE_DISEASES,
-        )
-        from species.equine_diseases import (
-            HEALTH_CHECK_ITEMS as EQUINE_HEALTH_CHECK_ITEMS,
-        )
 
-        EQUINE_AVAILABLE = True
-    except ImportError:
-        EQUINE_DISEASES = []
-        EQUINE_HEALTH_CHECK_ITEMS = {}
-        EQUINE_AVAILABLE = False
+def _get_equine_diseases():
+    global _EQUINE_DISEASES
+    if _EQUINE_DISEASES is None:
+        try:
+            from api.species.equine_diseases import DISEASE_DATABASE
+
+            _EQUINE_DISEASES = DISEASE_DATABASE
+        except ImportError:
+            _EQUINE_DISEASES = []
+    return _EQUINE_DISEASES
+
+
+def _get_equine_health_check_items():
+    global _EQUINE_HEALTH_CHECK_ITEMS
+    if _EQUINE_HEALTH_CHECK_ITEMS is None:
+        try:
+            from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+
+            _EQUINE_HEALTH_CHECK_ITEMS = HEALTH_CHECK_ITEMS
+        except ImportError:
+            _EQUINE_HEALTH_CHECK_ITEMS = {}
+    return _EQUINE_HEALTH_CHECK_ITEMS
+
 
 # ---------------------------------------------------------------------------
 # Shared constants, species data & symptom aliases (extracted to api/chat/)
 # ---------------------------------------------------------------------------
 from api.chat.constants import _GENERIC_SPECIES, SPECIES_LABELS  # noqa: F401
-from api.chat.species_data import _SPECIES_DATA  # noqa: F401
+from api.chat.species_data import _SPECIES_DATA, get_species_data  # noqa: F401
 from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 
 # =============================================================================
@@ -467,17 +472,29 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "尿の色異常": "uri_discolored_urine",
 }
 
-# Build equine finding key set for validation
-_EQUINE_FINDING_KEYS: set[str] = set()
-for _cat, _items in EQUINE_HEALTH_CHECK_ITEMS.items():
-    for _key, _ja, _en in _items:
-        _EQUINE_FINDING_KEYS.add(_key)
+# Lazily built equine finding keys and symptom list
+_EQUINE_FINDING_KEYS: set[str] | None = None
+_EQUINE_SYMPTOMS: list[dict[str, str]] | None = None
 
-# Build equine symptoms list (for direct name matching in chat)
-_EQUINE_SYMPTOMS: list[dict[str, str]] = []
-for _cat, _items in EQUINE_HEALTH_CHECK_ITEMS.items():
-    for _key, _ja, _en in _items:
-        _EQUINE_SYMPTOMS.append({"id": _key, "name_ja": _ja, "name_en": _en, "category": _cat})
+
+def _build_equine_finding_keys() -> set[str]:
+    global _EQUINE_FINDING_KEYS
+    if _EQUINE_FINDING_KEYS is None:
+        _EQUINE_FINDING_KEYS = set()
+        for _cat, _items in _get_equine_health_check_items().items():
+            for _key, _ja, _en in _items:
+                _EQUINE_FINDING_KEYS.add(_key)
+    return _EQUINE_FINDING_KEYS
+
+
+def _build_equine_symptoms() -> list[dict[str, str]]:
+    global _EQUINE_SYMPTOMS
+    if _EQUINE_SYMPTOMS is None:
+        _EQUINE_SYMPTOMS = []
+        for _cat, _items in _get_equine_health_check_items().items():
+            for _key, _ja, _en in _items:
+                _EQUINE_SYMPTOMS.append({"id": _key, "name_ja": _ja, "name_en": _en, "category": _cat})
+    return _EQUINE_SYMPTOMS
 
 
 def _extract_equine_symptoms(text: str) -> list[str]:
@@ -486,13 +503,13 @@ def _extract_equine_symptoms(text: str) -> list[str]:
     matched: set[str] = set()
 
     # Direct name matches from health check items
-    for sym in _EQUINE_SYMPTOMS:
+    for sym in _build_equine_symptoms():
         if sym["name_ja"].lower() in text_lower or sym["name_en"].lower() in text_lower:
             matched.add(sym["id"])
 
     # Alias matches
     for alias, finding_key in EQUINE_SYMPTOM_ALIASES.items():
-        if alias in text_lower and finding_key in _EQUINE_FINDING_KEYS:
+        if alias in text_lower and finding_key in _build_equine_finding_keys():
             matched.add(finding_key)
 
     return list(matched)
@@ -506,7 +523,7 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
     key_set = set(finding_keys)
     matches = []
 
-    for disease in EQUINE_DISEASES:
+    for disease in _get_equine_diseases():
         disease_findings = set(disease.associated_findings)
         if not disease_findings:
             continue
@@ -1019,8 +1036,8 @@ def _build_follow_up_questions(
         # Collect key missing symptoms from top candidates for differentiation
         seen_symptoms: set[str] = set()
         sp_names = {}
-        if species in _SPECIES_DATA:
-            sp_names = _SPECIES_DATA[species].get("symptom_names", {})
+        if bool(get_species_data(species)):
+            sp_names = get_species_data(species).get("symptom_names", {})
 
         for candidate in disease_candidates[:5]:
             missing = candidate.get("missing_key_symptoms") or candidate.get("additional_disease_symptoms", [])
@@ -1128,13 +1145,13 @@ def diagnostic_chat():
         symptom_details = [
             {
                 "id": sid,
-                "name_ja": next((s["name_ja"] for s in _EQUINE_SYMPTOMS if s["id"] == sid), sid),
-                "name_en": next((s["name_en"] for s in _EQUINE_SYMPTOMS if s["id"] == sid), sid),
-                "category": next((s["category"] for s in _EQUINE_SYMPTOMS if s["id"] == sid), ""),
+                "name_ja": next((s["name_ja"] for s in _build_equine_symptoms() if s["id"] == sid), sid),
+                "name_en": next((s["name_en"] for s in _build_equine_symptoms() if s["id"] == sid), sid),
+                "category": next((s["category"] for s in _build_equine_symptoms() if s["id"] == sid), ""),
             }
             for sid in all_symptoms
         ]
-    elif species != "dog" and species in _SPECIES_DATA:
+    elif species != "dog" and bool(get_species_data(species)):
         extracted = _extract_species_symptoms(message, species)
         all_symptoms = list(set(extracted + previous_symptoms))
         disease_matches = _match_species_symptoms_to_diseases(
@@ -1145,7 +1162,7 @@ def diagnostic_chat():
             breed=breed,
             lang=lang,
         )
-        sp_names = _SPECIES_DATA[species]["symptom_names"]
+        sp_names = get_species_data(species)["symptom_names"]
         symptom_details = [
             {
                 "id": sid,
@@ -1270,6 +1287,22 @@ def diagnostic_chat():
             "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
         },
     }
+
+    # Phase 3: Vetlexicon-style structured clinical reasoning
+    try:
+        from api.clinical_reasoning import build_reasoning
+        from api.clinical_reasoning import to_dict as reasoning_to_dict
+
+        reasoning = build_reasoning(
+            input_symptoms=all_symptoms,
+            differentials=enhanced_candidates,
+            species=species,
+            lang=request.json.get("lang", "ja") if request.is_json else "ja",
+        )
+        response["clinical_reasoning"] = reasoning_to_dict(reasoning)
+    except Exception:
+        # Reasoning failure should not break the response
+        pass
 
     return jsonify(response)
 
@@ -1778,7 +1811,7 @@ def _get_species_symptoms_with_categories(species: str) -> list[dict]:
         return symptoms
 
     # Fallback: build from _SPECIES_DATA
-    sp_data = _SPECIES_DATA.get(species)
+    sp_data = get_species_data(species)
     if not sp_data:
         # Dog fallback
         return [
@@ -1980,7 +2013,7 @@ def consultation():
         # Run diagnosis with current symptoms
         if species == "horse" and EQUINE_AVAILABLE:
             disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
-        elif species in _SPECIES_DATA:
+        elif bool(get_species_data(species)):
             disease_matches = _match_species_symptoms_to_diseases(
                 selected_symptoms,
                 species,
@@ -2155,7 +2188,7 @@ def consultation():
             )
             if species == "horse" and EQUINE_AVAILABLE:
                 disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
-            elif species in _SPECIES_DATA:
+            elif bool(get_species_data(species)):
                 disease_matches = _match_species_symptoms_to_diseases(
                     selected_symptoms,
                     species,
