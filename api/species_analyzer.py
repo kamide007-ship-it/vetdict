@@ -13,38 +13,67 @@
 
 from __future__ import annotations
 
+import importlib
 import inspect
 from functools import lru_cache
 from typing import Any, Callable, Dict, List
 
+# Lazy imports: species modules are loaded on first use to reduce startup memory
+# from 528MB peak to ~50MB. Each module is 1-2MB of disease data.
 from api.data.vaccine_mapping import get_preventable_diseases
-from api.species.amphibian_diseases import analyze_symptoms as analyze_amphibian
-from api.species.bird_diseases import analyze_symptoms as analyze_bird
-
-# 個別の動物種モジュールをインポート
-from api.species.cat_diseases import analyze_symptoms as analyze_cat
-from api.species.chinchilla_diseases import analyze_symptoms as analyze_chinchilla
-from api.species.degu_diseases import analyze_symptoms as analyze_degu
-
-# Equine (horse) は独自の大規模データベースと診断エンジンを持つ
-from api.species.equine_diseases import generate_differential_diagnosis
-from api.species.exotic_other_diseases import analyze_symptoms as analyze_exotic_other
-from api.species.ferret_diseases import analyze_symptoms as analyze_ferret
-from api.species.fish_diseases import analyze_symptoms as analyze_fish
-from api.species.guinea_pig_diseases import analyze_symptoms as analyze_guinea_pig
-from api.species.hamster_diseases import analyze_symptoms as analyze_hamster
-from api.species.hedgehog_diseases import analyze_symptoms as analyze_hedgehog
 from api.species.helpers import _find_enrichment, _fuzzy_boost_lookup, compute_lab_boosts
-from api.species.lizard_diseases import analyze_symptoms as analyze_lizard
-from api.species.parakeet_diseases import analyze_symptoms as analyze_parakeet
-from api.species.parrot_diseases import analyze_symptoms as analyze_parrot
 from api.species.prevalence_data import get_prevalence_for_species
-from api.species.rabbit_diseases import analyze_symptoms as analyze_rabbit
-from api.species.reptile_diseases import analyze_symptoms as analyze_reptile
-from api.species.snake_diseases import analyze_symptoms as analyze_snake
-from api.species.sugar_glider_diseases import analyze_symptoms as analyze_sugar_glider
-from api.species.tortoise_diseases import analyze_symptoms as analyze_tortoise
-from api.symptom_checker import analyze_symptoms as analyze_dog
+
+# Lazy species import registry — module path → function name
+_SPECIES_MODULE_MAP = {
+    "amphibian": ("api.species.amphibian_diseases", "analyze_symptoms"),
+    "bird": ("api.species.bird_diseases", "analyze_symptoms"),
+    "cat": ("api.species.cat_diseases", "analyze_symptoms"),
+    "chinchilla": ("api.species.chinchilla_diseases", "analyze_symptoms"),
+    "degu": ("api.species.degu_diseases", "analyze_symptoms"),
+    "exotic_other": ("api.species.exotic_other_diseases", "analyze_symptoms"),
+    "ferret": ("api.species.ferret_diseases", "analyze_symptoms"),
+    "fish": ("api.species.fish_diseases", "analyze_symptoms"),
+    "guinea_pig": ("api.species.guinea_pig_diseases", "analyze_symptoms"),
+    "hamster": ("api.species.hamster_diseases", "analyze_symptoms"),
+    "hedgehog": ("api.species.hedgehog_diseases", "analyze_symptoms"),
+    "lizard": ("api.species.lizard_diseases", "analyze_symptoms"),
+    "parakeet": ("api.species.parakeet_diseases", "analyze_symptoms"),
+    "parrot": ("api.species.parrot_diseases", "analyze_symptoms"),
+    "rabbit": ("api.species.rabbit_diseases", "analyze_symptoms"),
+    "reptile": ("api.species.reptile_diseases", "analyze_symptoms"),
+    "snake": ("api.species.snake_diseases", "analyze_symptoms"),
+    "sugar_glider": ("api.species.sugar_glider_diseases", "analyze_symptoms"),
+    "tortoise": ("api.species.tortoise_diseases", "analyze_symptoms"),
+}
+_SPECIES_FUNC_CACHE: Dict[str, Any] = {}
+
+
+def _lazy_load(species_key: str):
+    """Lazily import and cache species analyze function."""
+    if species_key in _SPECIES_FUNC_CACHE:
+        return _SPECIES_FUNC_CACHE[species_key]
+    entry = _SPECIES_MODULE_MAP.get(species_key)
+    if not entry:
+        return None
+    mod = importlib.import_module(entry[0])
+    func = getattr(mod, entry[1])
+    _SPECIES_FUNC_CACHE[species_key] = func
+    return func
+
+
+def _lazy_dog():
+    if "dog" not in _SPECIES_FUNC_CACHE:
+        from api.symptom_checker import analyze_symptoms as analyze_dog
+        _SPECIES_FUNC_CACHE["dog"] = analyze_dog
+    return _SPECIES_FUNC_CACHE["dog"]
+
+
+def _lazy_horse():
+    if "horse" not in _SPECIES_FUNC_CACHE:
+        from api.species.equine_diseases import generate_differential_diagnosis
+        _SPECIES_FUNC_CACHE["horse"] = generate_differential_diagnosis
+    return _SPECIES_FUNC_CACHE["horse"]
 
 # ── Horse category-based content templates ──
 _HORSE_TRANSMISSION: dict[str, tuple[str, str]] = {
@@ -390,31 +419,27 @@ def analyze_horse(
     }
 
 
-# それぞれの動物種コードに対応する解析関数
-# 注: 犬は analyze_species_symptoms 内で直接呼び出すため lambda 不要
-SPECIES_HANDLERS: Dict[str, Callable[[List[str], str | None], Dict]] = {
-    "dog": None,  # handled specially in analyze_species_symptoms
-    "cat": analyze_cat,
-    "rabbit": analyze_rabbit,
-    "hamster": analyze_hamster,
-    "chinchilla": analyze_chinchilla,
-    "guinea_pig": analyze_guinea_pig,
-    "ferret": analyze_ferret,
-    "hedgehog": analyze_hedgehog,
-    "sugar_glider": analyze_sugar_glider,
-    "degu": analyze_degu,
-    "bird": analyze_bird,
-    "parakeet": analyze_parakeet,
-    "parrot": analyze_parrot,
-    "reptile": analyze_reptile,
-    "tortoise": analyze_tortoise,
-    "snake": analyze_snake,
-    "lizard": analyze_lizard,
-    "amphibian": analyze_amphibian,
-    "fish": analyze_fish,
-    "exotic_other": analyze_exotic_other,
-    "horse": analyze_horse,
-}
+# Lazy species handler resolver — loads modules on first access
+_SPECIES_KEYS = [
+    "dog", "cat", "rabbit", "hamster", "chinchilla", "guinea_pig",
+    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet",
+    "parrot", "reptile", "tortoise", "snake", "lizard", "amphibian",
+    "fish", "exotic_other", "horse",
+]
+
+
+def _resolve_handler(species_key: str):
+    """Resolve species handler lazily."""
+    if species_key == "dog":
+        return None  # handled specially
+    if species_key == "horse":
+        return _lazy_horse()
+    return _lazy_load(species_key)
+
+
+# SPECIES_HANDLERS is kept as a dict for backward compatibility checks
+# but handlers are resolved lazily via _resolve_handler()
+SPECIES_HANDLERS: Dict[str, Any] = {k: None for k in _SPECIES_KEYS}
 
 
 @lru_cache(maxsize=None)
@@ -489,7 +514,7 @@ def analyze_species_symptoms(
     _prevalence_map = get_prevalence_for_species(species_key, region=_region)
     # 犬: 全パラメータを直接渡す（シグネチャが固定）
     if species_key == "dog":
-        return analyze_dog(
+        return _lazy_dog()(
             symptoms,
             breed=breed,
             onset=onset,
@@ -499,7 +524,9 @@ def analyze_species_symptoms(
             vaccines=vaccines,
             vaccination_status=vaccination_status,
         )
-    handler = SPECIES_HANDLERS[species_key]
+    handler = _resolve_handler(species_key)
+    if handler is None:
+        raise ValueError(f"No handler for species: {species_key}")
     candidate_kwargs: Dict[str, Any] = {
         "breed": breed,
         "onset": onset,

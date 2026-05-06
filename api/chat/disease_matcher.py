@@ -6,7 +6,7 @@ negative evidence penalties, urgency boosts, and prevalence correction.
 
 import math
 
-from api.chat.species_data import _SPECIES_DATA
+from api.chat.species_data import _SPECIES_DATA, get_species_data
 from api.species import prevalence_data as _prev_mod
 
 # Synonym expansion table shared across species — bridges concept-equivalent IDs
@@ -235,7 +235,7 @@ def _match_species_symptoms_to_diseases(
     future scoring refinement and is forwarded from the chat endpoint.
     """
 
-    sp_data = _SPECIES_DATA.get(species)
+    sp_data = get_species_data(species)
     if not sp_data or not symptom_ids:
         return []
 
