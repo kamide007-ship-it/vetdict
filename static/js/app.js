@@ -2815,9 +2815,9 @@ function setupChat(){
   const landingChatSend=document.getElementById("landingChatSend");
   const landingChatInput=document.getElementById("landingChatInput");
   if(chatSend)chatSend.addEventListener("click",()=>sendChatMessage());
-  if(chatInput)chatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendChatMessage();});
+  if(chatInput)chatInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing)sendChatMessage();});
   if(landingChatSend)landingChatSend.addEventListener("click",()=>sendLandingChat());
-  if(landingChatInput)landingChatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendLandingChat();});
+  if(landingChatInput)landingChatInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing)sendLandingChat();});
   addChatQuickSuggestions();
 }
 
@@ -3807,7 +3807,7 @@ function setupInteractionChecker(){
   }
   btn.addEventListener("click",runInteractionCheck);
   const input=document.getElementById("interactionDrugIds");
-  if(input)input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runInteractionCheck();}});
+  if(input)input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();runInteractionCheck();}});
 }
 
 function runInteractionCheck(){
