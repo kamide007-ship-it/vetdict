@@ -11909,6 +11909,32 @@ DISEASE_DATABASE: list[Disease] = [
         risk_factors="遺伝的素因、ストレス、感染症の先行、ワクチン接種後の免疫反応、寄生虫感染、薬物投与(ペニシリン等による免疫介在性反応)",
     ),
     # ===== EQUINE REPRODUCTIVE MEDICINE - NOTE: Equine diseases in development =====
+    Disease(
+        "metabolic_atypical_myopathy",
+        "非定型的ミオパチー（カエデ種子中毒）",
+        "Atypical Myopathy (Sycamore Maple Seedling Toxicosis)",
+        "musculoskeletal",
+        "critical",
+        "Hypoglycin A中毒による急性壊死性筋障害。シカモアカエデ（Acer pseudoplatanus）の種子・苗摂取が原因。秋・春に発症集中、致死率70-90%の極めて重篤な疾患。",
+        ["ms_muscle_weakness", "ms_stiff_gait", "ms_recumbency", "uro_dark_urine", "gen_lethargy", "card_tachycardia"],
+        urgency="emergency",
+        recommended_exams=[
+            (1, "血清生化学(CK・AST・LDH)", "Serum Chemistry (CK, AST, LDH)"),
+            (1, "尿検査(ミオグロビン尿)", "Urinalysis (Myoglobinuria)"),
+            (2, "血漿アシルカルニチン", "Plasma Acylcarnitines"),
+            (2, "尿有機酸分析", "Urine Organic Acid Analysis"),
+            (3, "筋生検", "Muscle Biopsy"),
+        ],
+        merck_url=_MERCK + "atypical+myopathy+horses",
+        etiology="シカモアカエデ（Acer pseudoplatanus、欧州・北米東部）またはボックスエルダー（Acer negundo、北米）の種子・苗・若葉に含まれるHypoglycin A（HGA、非タンパク性アミノ酸）摂取が原因。HGAは生体内でmethylenecyclopropylacetic acid（MCPA）に代謝され、MCPA-CoAエステルがアシル-CoA脱水素酵素（特にisovaleryl-CoA脱水素酵素・短鎖ASD）を阻害→脂肪酸β酸化障害→ミトコンドリア機能不全→骨格筋・心筋・呼吸筋の急性壊死。発症は秋（種子飛散）・春（苗成長）に集中。Acer rubrum（赤カエデ）とは異なる別疾患（赤カエデは溶血性貧血、HGA含まず）。",
+        pathophysiology="HGA摂取→肝・腎でMCPAに代謝→MCPA-CoA形成→アシル-CoA脱水素酵素阻害→脂肪酸β酸化遮断→アシルカルニチン蓄積（C5、C5-OH、C8-DC）→ミトコンドリアエネルギー産生低下→ATP欠乏。最も需要の高い遅筋型酸化型筋線維（姿勢保持筋・心筋・呼吸筋）で著明壊死。横紋筋融解→ミオグロビン尿→急性腎障害。心筋壊死→不整脈・心不全。呼吸筋壊死→換気不全。組織所見：Type I (oxidative) muscle fiberの瀰漫性壊死、空胞変性、脂質蓄積。",
+        clinical_signs_detail="(1)突然の重度筋脱力・ふらつき・横臥（よく食欲は維持、感覚正常）、(2)濃赤褐色〜暗黒色尿（ミオグロビン尿）、(3)頻脈（>60 bpm）・不整脈・心音異常、(4)発汗・震え、(5)呼吸困難（呼吸筋障害）、(6)時に蹄葉炎合併、(7)体温正常〜軽度低体温、(8)苦痛表情、(9)24-72時間以内に進行性悪化・死亡が多い。鑑別：PSSM、RER、ボツリヌス、テタヌス、神経学的疾患。秋・春の放牧で発症した急性筋脱力＋ミオグロビン尿は本症を最優先疑う。",
+        treatment_protocol="【投与量基準】※500kg馬基準。緊急対応 — 致死率70-90%の最重篤疾患。【即時対応】(1)放牧地から即時退避（曝露遮断 — 残存HGA摂取阻止）。(2)IV輸液大量：等張晶質液（LRSまたはPlasmalyte）4-6 L/hr × 24-48時間 → 維持（強制利尿でミオグロビン排泄促進、AKI予防）。最低60-90 L/d。(3)ビタミンB群（コエンザイム補充、β酸化補助）：チアミンB1 5-10 mg/kg IV q12h（500kg馬で 2.5-5 g/回 = 100-200 mL of 25 mg/mL）、リボフラビンB2 25-50 mg IV q24h、L-カルニチン 100 mg/kg IV q12h（50 g/回）— エビデンス限定だが標準支持療法。(4)ビタミンE 5,000-10,000 IU IM/PO q24h（抗酸化、α-トコフェロール）。(5)ビタミンC 20-40 mg/kg IV q12h（10-20 g/回）— 抗酸化補助。(6)グリシン 0.5-1 g/kg IV/PO q12h（HGA抱合排泄促進、エビデンス限定）。【鎮痛】(7)フルニキシン 1.1 mg/kg IV q12h（11 mL/回 50 mg/mL）— ただしAKI併発時は慎重・低用量（0.25-0.5 mg/kg）。フェニルブタゾンは腎機能正常時のみ。(8)モルヒネ 0.05-0.1 mg/kg IM/IV q4-6h or ブトルファノール 0.01-0.02 mg/kg IV q4h。【高K血症対応】(9)ECG連続モニタ、高K血症（K>6.0 mmol/L）時：10%カルシウムグルコネート 0.5-1 mL/kg slow IV（心保護）、デキストロース50% 1 mL/kg IV ＋ レギュラーインスリン 0.1 IU/kg IV、重炭酸ナトリウム 1-2 mEq/kg IV slow。【横臥馬の集中支持】(10)厚いベッドィング、q4h体位変換（褥瘡・コンパートメント症候群予防）、頭部位置調整（誤嚥防止）、目薬・口腔湿潤、膀胱カテーテル。(11)栄養：嚥下可能なら少量頻回、不能ならIV栄養（5-10%デキストロース）。【蹄葉炎予防】(12)氷浴24-72時間、フェニルブタゾン慎重使用。【参考文献】Votion et al. Equine Vet J 2014；Westermann et al. J Vet Intern Med 2008；van Galen et al. Equine Vet J 2012；Boemer et al. Equine Vet J 2015。",
+        risk_factors="シカモアカエデ・ボックスエルダー樹存在の放牧地、秋（10-12月、種子飛散期）・春（3-5月、苗成長期）放牧、過度な放牧密度、補助飼料不足（飢餓状態でカエデ種子摂取↑）、湿潤天候（種子毒素濃度↑）、若馬・馬種感受性差なし、欧州（特に英国・ドイツ・オランダ）・北米東部での集団発生報告。",
+        general_management="放牧地のシカモアカエデ・ボックスエルダー樹同定（葉形・種子翼果で識別）と除去または隔離（放牧地外100m以上）。シーズン（秋・春）中の放牧地監視。集団発生時は即時退避・全頭血清CK/AST検査。発症地域は獣医師・牧場主間で警報共有。",
+        prognosis="極めて不良 — 死亡率70-90%、生存例も4-12週間の集中治療要し、永続的筋損傷・心筋障害が残存することが多い。生存指標：(1)早期発見（24時間以内来院）、(2)歩行可能維持、(3)CK<200,000 U/L、(4)正常呼吸・心拍、(5)血漿アシルカルニチンの早期改善。死亡因子：呼吸筋麻痺、心筋障害（致死性不整脈）、進行性AKI、横臥48時間以上、CK>500,000 U/L。",
+        prevention="(1)シカモアカエデ・ボックスエルダー樹の放牧地除去または100 m以上隔離。(2)秋（10-12月）・春（3-5月）の放牧地監視 — 種子・苗・若葉が散在する放牧地は使用禁止。(3)十分な乾草・飼料給与（飢餓回避）。(4)放牧密度適正化。(5)樹同定教育（葉形：シカモア5裂対称、種子：翼果ペア角度〜90°）。(6)感受性遺伝検査は未確立。(7)集団発生地域では春・秋シーズンの放牧停止。(8)血清CK/AST事前スクリーニングは異常値で曝露評価可能。",
+    ),
 ]
 
 
