@@ -31,6 +31,18 @@ from api.drug_batch_13 import DRUGS_BATCH_13
 from api.drug_batch_14 import DRUGS_BATCH_14
 from api.drug_batch_15 import DRUGS_BATCH_15
 from api.drug_batch_16 import DRUGS_BATCH_16
+from api.drug_batch_17 import DRUGS_BATCH_17
+from api.drug_batch_18 import DRUGS_BATCH_18
+from api.drug_batch_19 import DRUGS_BATCH_19
+from api.drug_batch_20 import DRUGS_BATCH_20
+from api.drug_batch_21 import DRUGS_BATCH_21
+from api.drug_batch_22 import DRUGS_BATCH_22
+from api.drug_batch_23 import DRUGS_BATCH_23
+from api.drug_batch_24 import DRUGS_BATCH_24
+from api.drug_batch_25 import DRUG_INTERACTIONS_PATCH_25
+from api.drug_batch_26 import DRUG_INTERACTIONS_PATCH_26
+from api.drug_batch_27 import DRUG_INTERACTIONS_PATCH_27, DRUG_INTERACTIONS_PATCH_27B
+from api.drug_batch_28 import SPECIES_INFO_PATCH_28
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -54,6 +66,7 @@ DRUG_CATEGORIES: Dict[str, Dict[str, str]] = {
     "neurological": {"ja": "神経薬", "en": "Neurological Drugs"},
     "urinary": {"ja": "泌尿器薬", "en": "Urinary Drugs"},
     "immunosuppressives": {"ja": "免疫抑制薬", "en": "Immunosuppressives"},
+    "immunosuppressive": {"ja": "免疫抑制薬", "en": "Immunosuppressives"},
     "biologics": {"ja": "生物学的製剤", "en": "Biologics / Monoclonal Antibodies"},
     "antivirals": {"ja": "抗ウイルス薬", "en": "Antivirals"},
     "antineoplastics": {"ja": "抗腫瘍薬", "en": "Antineoplastics"},
@@ -10457,13 +10470,48 @@ for _drug_id, _species_notes in ISCAID_UTI_NOTES_PATCH.items():
                 if "notes_ja_append" in _patch and "notes_ja" in _si[_sp]:
                     _si[_sp]["notes_ja"] += _patch["notes_ja_append"]
 
-# バッチ10-16 薬品を統合（抗菌薬・CNS・循環器・呼吸器・GI・皮膚・眼科・腫瘍・駆虫・その他）
-for _batch_new in (DRUGS_BATCH_10, DRUGS_BATCH_11, DRUGS_BATCH_12, DRUGS_BATCH_13, DRUGS_BATCH_14, DRUGS_BATCH_15, DRUGS_BATCH_16):
+# バッチ10-19 薬品を統合
+for _batch_new in (
+    DRUGS_BATCH_10,
+    DRUGS_BATCH_11,
+    DRUGS_BATCH_12,
+    DRUGS_BATCH_13,
+    DRUGS_BATCH_14,
+    DRUGS_BATCH_15,
+    DRUGS_BATCH_16,
+    DRUGS_BATCH_17,
+    DRUGS_BATCH_18,
+    DRUGS_BATCH_19,
+    DRUGS_BATCH_20,
+    DRUGS_BATCH_21,
+    DRUGS_BATCH_22,
+    DRUGS_BATCH_23,
+    DRUGS_BATCH_24,
+):
     for _drug_new in _batch_new:
         if _drug_new["id"] not in _existing_ids:
             DRUGS.append(_drug_new)
             _existing_ids.add(_drug_new["id"])
             _drug_index[_drug_new["id"]] = _drug_new
+
+# バッチ25-26: 薬物相互作用パッチ適用
+for _interactions_patch in (
+    DRUG_INTERACTIONS_PATCH_25,
+    DRUG_INTERACTIONS_PATCH_26,
+    DRUG_INTERACTIONS_PATCH_27,
+    DRUG_INTERACTIONS_PATCH_27B,
+):
+    for _drug_id, _interactions in _interactions_patch.items():
+        if _drug_id in _drug_index:
+            _drug_index[_drug_id]["drug_interactions"] = _interactions
+
+# バッチ28: 動物種カバレッジ拡張パッチ適用
+for _drug_id, _species_patch in SPECIES_INFO_PATCH_28.items():
+    if _drug_id in _drug_index:
+        _target = _drug_index[_drug_id].setdefault("species_info", {})
+        for _sp, _info in _species_patch.items():
+            if _sp not in _target:
+                _target[_sp] = _info
 
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
