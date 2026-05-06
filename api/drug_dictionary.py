@@ -42,6 +42,7 @@ from api.drug_batch_24 import DRUGS_BATCH_24
 from api.drug_batch_25 import DRUG_INTERACTIONS_PATCH_25
 from api.drug_batch_26 import DRUG_INTERACTIONS_PATCH_26
 from api.drug_batch_27 import DRUG_INTERACTIONS_PATCH_27, DRUG_INTERACTIONS_PATCH_27B
+from api.drug_batch_28 import SPECIES_INFO_PATCH_28
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10482,6 +10483,14 @@ for _interactions_patch in (DRUG_INTERACTIONS_PATCH_25, DRUG_INTERACTIONS_PATCH_
     for _drug_id, _interactions in _interactions_patch.items():
         if _drug_id in _drug_index:
             _drug_index[_drug_id]["drug_interactions"] = _interactions
+
+# バッチ28: 動物種カバレッジ拡張パッチ適用
+for _drug_id, _species_patch in SPECIES_INFO_PATCH_28.items():
+    if _drug_id in _drug_index:
+        _target = _drug_index[_drug_id].setdefault("species_info", {})
+        for _sp, _info in _species_patch.items():
+            if _sp not in _target:
+                _target[_sp] = _info
 
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
