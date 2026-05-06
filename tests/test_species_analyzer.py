@@ -37,8 +37,10 @@ class TestSpeciesHandlers:
         assert SPECIES_HANDLERS["dog"] is None
 
     def test_all_non_dog_handlers_are_callable(self):
+        """After lazy loading, handlers are resolved via _resolve_handler()"""
+        from api.species_analyzer import _resolve_handler
         for sp in _NON_DOG_SPECIES:
-            handler = SPECIES_HANDLERS[sp]
+            handler = _resolve_handler(sp)
             assert callable(handler), f"{sp}: handler is not callable"
 
 
