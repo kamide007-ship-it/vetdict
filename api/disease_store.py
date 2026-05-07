@@ -189,13 +189,9 @@ def _ensure_db() -> None:
                 logger.debug("Could not count diseases in SQLite", exc_info=True)
                 count = 0
         if count == 0:
-            logger.info("diseases table is empty — running full auto-migration")
-            try:
-                from scripts.migrate_to_sqlite import main as run_migration
-
-                run_migration()
-            except Exception:
-                logger.exception("Auto-migration failed")
+            logger.info(
+                "diseases table is empty — skipping full migration (OOM risk on 512MB); using Python module fallback"
+            )
         else:
             try:
                 with get_connection() as conn:
