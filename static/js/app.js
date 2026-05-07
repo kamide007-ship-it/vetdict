@@ -13,6 +13,27 @@ const _DEBUG=(()=>{try{const h=location.hostname;return h==="localhost"||h==="12
 function debugWarn(){if(_DEBUG&&typeof console!=="undefined")console.warn.apply(console,arguments);}
 function debugError(){if(_DEBUG&&typeof console!=="undefined")console.error.apply(console,arguments);}
 
+// Clipboard helper with execCommand fallback for older/iframe-blocked contexts.
+async function copyToClipboard(text){
+  try{
+    if(navigator.clipboard&&window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  }catch(e){debugWarn("clipboard.writeText failed, falling back",e);}
+  try{
+    const ta=document.createElement("textarea");
+    ta.value=text;
+    ta.setAttribute("readonly","");
+    ta.style.position="fixed";ta.style.top="-1000px";ta.style.opacity="0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok=document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){debugError("copy fallback failed",e);return false;}
+}
+
 async function checkAccess(){
   const params=new URLSearchParams(location.search);
   if(OPEN_BETA) isPro=true;
@@ -809,10 +830,20 @@ function setupFloatingNav(){
   let fabOpen=false;
   const toggle=fab.querySelector(".floating-nav-toggle");
   const menu=fab.querySelector(".floating-nav-menu");
+  menu.setAttribute("role","menu");
+  menu.querySelectorAll(".floating-nav-item").forEach(b=>b.setAttribute("role","menuitem"));
+  function closeFab(returnFocus){
+    if(!fabOpen)return;
+    fabOpen=false;
+    menu.style.display="none";
+    toggle.setAttribute("aria-expanded","false");
+    if(returnFocus)toggle.focus();
+  }
   toggle.addEventListener("click",()=>{
     fabOpen=!fabOpen;
     menu.style.display=fabOpen?"flex":"none";
     toggle.setAttribute("aria-expanded",fabOpen);
+    if(fabOpen){const first=menu.querySelector(".floating-nav-item");if(first)first.focus();}
   });
   menu.addEventListener("click",e=>{
     const btn=e.target.closest(".floating-nav-item");
@@ -821,9 +852,10 @@ function setupFloatingNav(){
     if(action==="top")window.scrollTo({top:0,behavior:"smooth"});
     else if(action==="species"){const s=document.getElementById("speciesSection");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});}
     else{switchView(action);const p=document.getElementById("view"+action.charAt(0).toUpperCase()+action.slice(1));if(p)p.scrollIntoView({behavior:"smooth",block:"start"});}
-    fabOpen=false;menu.style.display="none";toggle.setAttribute("aria-expanded","false");
+    closeFab(false);
   });
-  document.addEventListener("click",e=>{if(fabOpen&&!fab.contains(e.target)){fabOpen=false;menu.style.display="none";toggle.setAttribute("aria-expanded","false");}});
+  document.addEventListener("click",e=>{if(fabOpen&&!fab.contains(e.target))closeFab(false);});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&fabOpen)closeFab(true);});
   let ticking=false;
   window.addEventListener("scroll",()=>{
     if(!ticking){requestAnimationFrame(()=>{fab.classList.toggle("visible",window.scrollY>400);ticking=false;});ticking=true;}
@@ -1116,20 +1148,26 @@ function animateCount(el,target,duration){
   })(start);
 }
 
-/* --- Load stats with Promise.all --- */
+/* --- Load stats with Promise.allSettled (degrades gracefully) --- */
 function loadSpeciesStats(){
-  Promise.all([
+  Promise.allSettled([
     fetchWithTimeout("/api/dashboard-stats").then(r=>r.json()),
     fetchWithTimeout("/api/species-stats").then(r=>r.json()),
     fetchWithTimeout("/api/health-check/symptoms").then(r=>r.json())
-  ]).then(([dashStats,speciesData,sd])=>{
+  ]).then(([dashRes,speciesRes,symRes])=>{
+    const dashStats=dashRes.status==="fulfilled"?dashRes.value:{};
+    const speciesData=speciesRes.status==="fulfilled"?speciesRes.value:null;
+    const sd=symRes.status==="fulfilled"?symRes.value:{};
+    if(dashRes.status==="rejected")debugError("dashboard-stats failed:",dashRes.reason);
+    if(speciesRes.status==="rejected")debugError("species-stats failed:",speciesRes.reason);
+    if(symRes.status==="rejected")debugError("health-check/symptoms failed:",symRes.reason);
     try{
-      // Check if API returned an error response
-      if(!speciesData.species||!Array.isArray(speciesData.species)){
-        throw new Error("Invalid species data structure from API");
+      if(!speciesData||!Array.isArray(speciesData.species)){
+        // Critical fallback: species list is required for the grid
+        setDefaultStats();
+        return;
       }
       SPECIES=speciesData.species.map(sp=>({...sp,icon:SPECIES_ICONS[sp.id]||"\u{1F43E}"}));
-      // Use dashboard stats for all counts (fully dynamic, no hardcoded values)
       pendingStats={
         diseases:dashStats.total_diseases||0,
         species:dashStats.total_species||SPECIES.length,
@@ -1139,7 +1177,6 @@ function loadSpeciesStats(){
       };
       renderSpeciesGrid();
       initStatsObserver();
-      // If hero is already in view (most cases), trigger immediately
       if(!statsAnimated){
         const rect=document.querySelector(".hero-stats");
         if(rect&&rect.getBoundingClientRect().top<window.innerHeight){
@@ -1151,9 +1188,6 @@ function loadSpeciesStats(){
       debugError("Error processing species stats:",e);
       setDefaultStats();
     }
-  }).catch(err=>{
-    debugError("Error loading species stats:",err);
-    setDefaultStats();
   });
 }
 
@@ -1970,8 +2004,8 @@ function createShareWidget(diseases){
   w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button><button class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
   w.querySelector(".share-btn.twitter").addEventListener("click",function(){trackEvent("share_results",{method:"twitter",species:currentSpecies});});
   w.querySelector(".share-btn.line").addEventListener("click",function(){trackEvent("share_results",{method:"line",species:currentSpecies});});
-  w.querySelector(".share-btn.copy").addEventListener("click",function(){const btn=this;const origText=btn.textContent;navigator.clipboard.writeText(shareText+" "+shareUrl).then(()=>{btn.textContent=t("shareCopied");trackEvent("share_results",{method:"copy",species:currentSpecies});setTimeout(()=>{btn.textContent=origText;},2000);});});
-  w.querySelector(".share-btn.copy-full").addEventListener("click",function(){navigator.clipboard.writeText(fullText).then(()=>{this.textContent=t("shareCopied");trackEvent("share_results",{method:"copy_full",species:currentSpecies});setTimeout(()=>{this.textContent=currentLang==="ja"?"詳細コピー":"Copy Full";},2000);});});
+  w.querySelector(".share-btn.copy").addEventListener("click",function(){const btn=this;const origText=btn.textContent;copyToClipboard(shareText+" "+shareUrl).then(ok=>{btn.textContent=ok?t("shareCopied"):(currentLang==="ja"?"コピー失敗":"Copy failed");if(ok)trackEvent("share_results",{method:"copy",species:currentSpecies});setTimeout(()=>{btn.textContent=origText;},2000);});});
+  w.querySelector(".share-btn.copy-full").addEventListener("click",function(){const btn=this;const origText=btn.textContent;copyToClipboard(fullText).then(ok=>{btn.textContent=ok?t("shareCopied"):(currentLang==="ja"?"コピー失敗":"Copy failed");if(ok)trackEvent("share_results",{method:"copy_full",species:currentSpecies});setTimeout(()=>{btn.textContent=origText;},2000);});});
   return w;
 }
 
@@ -2027,7 +2061,7 @@ function renderResults(data){
     low:"🟢 Discuss at next routine checkup. Seek earlier care if symptoms worsen.",
   };
   if(nextSteps[severity])html+=`<div style="padding:10px 14px;margin-bottom:12px;border-radius:var(--radius);font-size:.84rem;font-weight:500;background:var(--gray-50);border-left:4px solid ${severity==='emergency'||severity==='high'?'#ef4444':severity==='moderate'?'#f59e0b':'#22a853'}">${nextSteps[severity]}</div>`;
-  html+=`<div class="results-sort-bar"><span style="font-size:.74rem;color:var(--gray-500)">${currentLang==="ja"?"並び替え:":"Sort:"}</span><button class="results-sort-btn active" data-sort="default">${t("sortByDefault")}</button><button class="results-sort-btn" data-sort="confidence">${t("sortByConfidence")}</button><button class="results-sort-btn" data-sort="severity">${t("sortBySeverity")}</button></div>`;
+  html+=`<div class="results-sort-bar" role="group" aria-label="${currentLang==="ja"?"結果の並び替え":"Sort results"}"><span style="font-size:.74rem;color:var(--gray-500)">${currentLang==="ja"?"並び替え:":"Sort:"}</span><button type="button" class="results-sort-btn active" data-sort="default" aria-pressed="true">${t("sortByDefault")}</button><button type="button" class="results-sort-btn" data-sort="confidence" aria-pressed="false">${t("sortByConfidence")}</button><button type="button" class="results-sort-btn" data-sort="severity" aria-pressed="false">${t("sortBySeverity")}</button></div>`;
   if(data.lab_boost_applied&&data.lab_values){
     const labNames={bun:"BUN",creatinine:"Cre",sdma:"SDMA",alt:"ALT",alp:"ALP",ggt:"GGT",tbil:"T-Bil",albumin:"Alb",glucose:"Glu",lipase:"Lipase",potassium:"K",sodium:"Na",calcium:"Ca",phosphorus:"P",wbc:"WBC",pcv:"PCV",platelets:"PLT",t4:"T4",crp:"CRP",usg:"USG"};
     const sp=currentSpecies||"dog";
@@ -2112,8 +2146,9 @@ function renderResults(data){
   contentDiv.addEventListener("click",function(e){
     const sortBtn=e.target.closest(".results-sort-btn");
     if(!sortBtn)return;
-    contentDiv.querySelectorAll(".results-sort-btn").forEach(b=>b.classList.remove("active"));
+    contentDiv.querySelectorAll(".results-sort-btn").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false");});
     sortBtn.classList.add("active");
+    sortBtn.setAttribute("aria-pressed","true");
     const mode=sortBtn.dataset.sort;
     const sevOrder={emergency:0,high:1,moderate:2,low:3};
     let sorted=[...diseases];

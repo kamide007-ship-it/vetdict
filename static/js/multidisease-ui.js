@@ -10,6 +10,16 @@
  * - multidisease-guidance.js      (renderUserGuidance)
  */
 
+// Debug-gated logging — silent in production.
+const _MD_DEBUG = (() => {
+  try {
+    const h = location.hostname;
+    return h === 'localhost' || h === '127.0.0.1' || h === '' || location.search.indexOf('debug=1') >= 0;
+  } catch (e) { return false; }
+})();
+const _mdLog = (...args) => { if (_MD_DEBUG && typeof console !== 'undefined') console.log(...args); };
+const _mdError = (...args) => { if (_MD_DEBUG && typeof console !== 'undefined') console.error(...args); };
+
 class MultiDiseaseUIHandler {
   constructor() {
     this.currentAnalysis = null;
@@ -91,7 +101,7 @@ class MultiDiseaseUIHandler {
       this.currentAnalysis = data;
       this.renderMultiDiseaseUI(data);
     } catch (error) {
-      console.error('Multi-disease analysis error:', error);
+      _mdError('Multi-disease analysis error:', error);
       this.showError(`Analysis failed: ${error.message}`);
     }
   }
@@ -229,7 +239,7 @@ class MultiDiseaseUIHandler {
     });
     element.classList.add('selected');
     const comboId = element.getAttribute('data-combo-id');
-    console.log('Selected combination:', comboId);
+    _mdLog('Selected combination:', comboId);
   }
 
   /**
@@ -243,7 +253,7 @@ class MultiDiseaseUIHandler {
     if (chatInput) {
       chatInput.value = questionText;
     }
-    console.log('Selected question:', questionId);
+    _mdLog('Selected question:', questionId);
   }
 }
 

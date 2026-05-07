@@ -92,12 +92,13 @@ class LearningDataStore:
             metrics["feedback_records"] = metrics["feedback_records"][-2000:]
 
         metrics["last_update"] = store._now_iso()
-        self._save_state()
 
-        # Update derived metrics
+        # Update derived metrics in-memory; persist once at the end
         self._update_ai_accuracy_metrics(state, feedback)
         self._update_symptom_disease_patterns(state, feedback)
         self._update_personalization_impact(state, feedback)
+
+        self._save_state()
 
     def _update_ai_accuracy_metrics(
         self, state: Dict[str, Any], feedback: FeedbackRecord
@@ -158,7 +159,6 @@ class LearningDataStore:
         )
 
         domain_entry["last_updated"] = store._now_iso()
-        self._save_state()
 
     def _update_symptom_disease_patterns(
         self, state: Dict[str, Any], feedback: FeedbackRecord
@@ -212,7 +212,6 @@ class LearningDataStore:
             pattern["last_updated"] = store._now_iso()
 
         metrics["symptom_disease_patterns"] = patterns
-        self._save_state()
 
     def _update_personalization_impact(
         self, state: Dict[str, Any], feedback: FeedbackRecord
