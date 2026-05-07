@@ -22,9 +22,10 @@ import json
 import logging
 import threading
 from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
-from api.database import get_connection
+from api.database import DB_PATH, get_connection
 
 logger = logging.getLogger(__name__)
 
@@ -242,53 +243,94 @@ def invalidate_cache() -> None:
 
 @lru_cache(maxsize=1)
 def _fallback_disease_counts() -> dict[str, int]:
-    """Count diseases per species from Python modules and JSON as fallback."""
-    counts: dict[str, int] = {}
+    """Count diseases per species without loading all modules into memory.
 
-    # Map species id -> module info
-    _MODULE_MAP = {
-        "dog": ("api.species.dog_diseases", "DISEASES"),
-        "horse": ("api.species.equine_diseases", "DISEASE_DATABASE"),
-        "cat": ("api.species.cat_diseases", "DISEASES"),
-        "rabbit": ("api.species.rabbit_diseases", "DISEASES"),
-        "hamster": ("api.species.hamster_diseases", "DISEASES"),
-        "guinea_pig": ("api.species.guinea_pig_diseases", "DISEASES"),
-        "chinchilla": ("api.species.chinchilla_diseases", "DISEASES"),
-        "ferret": ("api.species.ferret_diseases", "DISEASES"),
-        "hedgehog": ("api.species.hedgehog_diseases", "DISEASES"),
-        "sugar_glider": ("api.species.sugar_glider_diseases", "DISEASES"),
-        "degu": ("api.species.degu_diseases", "DISEASES"),
-        "bird": ("api.species.bird_diseases", "DISEASES"),
-        "parakeet": ("api.species.parakeet_diseases", "DISEASES"),
-        "parrot": ("api.species.parrot_diseases", "DISEASES"),
-        "reptile": ("api.species.reptile_diseases", "DISEASES"),
-        "tortoise": ("api.species.tortoise_diseases", "DISEASES"),
-        "snake": ("api.species.snake_diseases", "DISEASES"),
-        "lizard": ("api.species.lizard_diseases", "DISEASES"),
-        "amphibian": ("api.species.amphibian_diseases", "DISEASES"),
-        "fish": ("api.species.fish_diseases", "DISEASES"),
-        "exotic_other": ("api.species.exotic_other_diseases", "DISEASES"),
-    }
-
-    import importlib
-
-    for sp_id, (mod_path, attr) in _MODULE_MAP.items():
+    Primary: read species_counts.json (written by migrate_to_sqlite.py at
+    build time, <1 KB).  Fallback: load species modules one at a time via
+    subprocess to avoid 550 MB peak RSS that would OOM on 512 MB hosts.
+    """
+    # Fast path: read pre-computed counts from build artifact
+    counts_path = Path(DB_PATH).parent / "species_counts.json"
+    if counts_path.exists():
         try:
-            mod = importlib.import_module(mod_path)
-            data = getattr(mod, attr, [])
-            counts[sp_id] = len(data) if data else 0
+            import json as _json
+
+            data = _json.loads(counts_path.read_text())
+            counts = {k: int(v) for k, v in data.get("disease_counts", {}).items()}
+            if sum(counts.values()) > 0:
+                logger.info("Loaded disease counts from %s (%d species)", counts_path, len(counts))
+                return counts
         except Exception:
-            logger.debug("Failed to load species module %s", mod_path)
+            logger.debug("Could not read species_counts.json", exc_info=True)
 
-    # JSON fallback disabled — SQLite is now the authoritative source.
-    # The 101MB JSON was causing OOM on Render's 512MB free tier.
-    # If SQLite has gaps, run: python scripts/migrate_to_sqlite.py
+    # Slow path: count via subprocess to avoid OOM (each species ~50 MB peak)
+    import json as _json
+    import subprocess
+    import sys
 
-    return counts
+    script = (
+        "import json,sys,importlib;sys.path.insert(0,'.');"
+        "M={"
+        "'dog':('api.species.dog_diseases','DISEASES'),"
+        "'horse':('api.species.equine_diseases','DISEASE_DATABASE'),"
+        "'cat':('api.species.cat_diseases','DISEASES'),"
+        "'rabbit':('api.species.rabbit_diseases','DISEASES'),"
+        "'hamster':('api.species.hamster_diseases','DISEASES'),"
+        "'guinea_pig':('api.species.guinea_pig_diseases','DISEASES'),"
+        "'chinchilla':('api.species.chinchilla_diseases','DISEASES'),"
+        "'ferret':('api.species.ferret_diseases','DISEASES'),"
+        "'hedgehog':('api.species.hedgehog_diseases','DISEASES'),"
+        "'sugar_glider':('api.species.sugar_glider_diseases','DISEASES'),"
+        "'degu':('api.species.degu_diseases','DISEASES'),"
+        "'bird':('api.species.bird_diseases','DISEASES'),"
+        "'parakeet':('api.species.parakeet_diseases','DISEASES'),"
+        "'parrot':('api.species.parrot_diseases','DISEASES'),"
+        "'reptile':('api.species.reptile_diseases','DISEASES'),"
+        "'tortoise':('api.species.tortoise_diseases','DISEASES'),"
+        "'snake':('api.species.snake_diseases','DISEASES'),"
+        "'lizard':('api.species.lizard_diseases','DISEASES'),"
+        "'amphibian':('api.species.amphibian_diseases','DISEASES'),"
+        "'fish':('api.species.fish_diseases','DISEASES'),"
+        "'exotic_other':('api.species.exotic_other_diseases','DISEASES'),"
+        "};"
+        "c={};"
+        "[(c.__setitem__(s,len(getattr(importlib.import_module(m),a,[]))))for s,(m,a) in M.items()];"
+        "print(json.dumps(c))"
+    )
+    try:
+        result = subprocess.run(
+            [sys.executable, "-c", script],
+            capture_output=True,
+            text=True,
+            timeout=120,
+            cwd=str(Path(__file__).resolve().parent.parent),
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            counts = _json.loads(result.stdout.strip())
+            logger.info("Counted diseases via subprocess (%d species)", len(counts))
+            return counts
+    except Exception:
+        logger.warning("Subprocess disease count failed", exc_info=True)
+
+    logger.warning("All disease count methods failed — returning empty counts")
+    return {}
 
 
 def _fallback_drug_counts() -> tuple[dict[str, int], int]:
-    """Count drugs per species from Python module as fallback."""
+    """Count drugs per species — prefer species_counts.json, then Python module."""
+    counts_path = Path(DB_PATH).parent / "species_counts.json"
+    if counts_path.exists():
+        try:
+            import json as _json
+
+            data = _json.loads(counts_path.read_text())
+            per_sp = {k: int(v) for k, v in data.get("drug_counts", {}).items()}
+            total = int(data.get("total_drugs", 0))
+            if total > 0:
+                return per_sp, total
+        except Exception:
+            logger.debug("Could not read drug counts from species_counts.json", exc_info=True)
+
     per_species: dict[str, int] = {}
     total = 0
     try:
