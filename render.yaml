@@ -2,7 +2,7 @@ services:
   - type: web
     name: vetdict
     runtime: python
-    buildCommand: pip install -r requirements.txt && python scripts/migrate_to_sqlite.py
+    buildCommand: pip install -r requirements.txt
     startCommand: bash start.sh
     envVars:
       - key: SECRET_KEY
