@@ -312,8 +312,16 @@ def _fallback_disease_counts() -> dict[str, int]:
     except Exception:
         logger.warning("Subprocess disease count failed", exc_info=True)
 
-    logger.warning("All disease count methods failed — returning empty counts")
-    return {}
+    # Last resort: hardcoded counts (updated 2026-05-07 from Python modules)
+    logger.warning("Using hardcoded disease counts as last-resort fallback")
+    return {
+        "dog": 611, "cat": 546, "horse": 621, "rabbit": 451,
+        "hamster": 321, "guinea_pig": 346, "chinchilla": 278, "ferret": 277,
+        "hedgehog": 244, "sugar_glider": 221, "degu": 200, "bird": 551,
+        "parakeet": 458, "parrot": 283, "reptile": 286, "tortoise": 286,
+        "snake": 248, "lizard": 250, "amphibian": 257, "fish": 36,
+        "exotic_other": 289,
+    }
 
 
 def _fallback_drug_counts() -> tuple[dict[str, int], int]:
