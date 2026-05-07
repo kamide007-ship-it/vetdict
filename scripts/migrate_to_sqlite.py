@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from api.database import get_connection, init_db, upsert_disease, upsert_drug, upsert_symptom
+from api.database import DB_PATH, get_connection, init_db, upsert_disease, upsert_drug, upsert_symptom
 
 # ---------------------------------------------------------------------------
 # Species module mapping: species_key → module path
@@ -1181,6 +1181,27 @@ def main(db_path: str | None = None):
         print(f"  Prevention:  {p_count}/{total_count} ({100 * p_count // total_count}%)")
         print(f"  Prognosis:   {pr_count}/{total_count} ({100 * pr_count // total_count}%)")
         print("=" * 60)
+
+        # Write lightweight species counts JSON for runtime fallback (avoids
+        # loading all species modules into memory — 550MB peak → <1 KB file).
+        species_counts = {}
+        for row in conn.execute(
+            "SELECT species, COUNT(*) AS cnt FROM diseases GROUP BY species"
+        ).fetchall():
+            species_counts[row[0]] = row[1]
+        drug_species_counts = {}
+        for row in conn.execute(
+            "SELECT species, COUNT(*) AS cnt FROM drug_species_info GROUP BY species"
+        ).fetchall():
+            drug_species_counts[row[0]] = row[1]
+        counts_data = {
+            "disease_counts": species_counts,
+            "drug_counts": drug_species_counts,
+            "total_drugs": drug_count,
+        }
+        counts_path = Path(db_path or DB_PATH).parent / "species_counts.json"
+        counts_path.write_text(json.dumps(counts_data, ensure_ascii=False))
+        print(f"  Species counts written to {counts_path}")
 
 
 if __name__ == "__main__":
