@@ -12364,6 +12364,32 @@ DISEASES: List[Dict[str, Any]] = [
         "onset_pattern": {"acute", "subacute"},
         "age_predisposition": {"senior"},
     },
+    {
+        "name": "Feline Mosquito Bite Hypersensitivity",
+        "name_ja": "猫の蚊刺過敏症（蚊刺症）",
+        "symptoms": {"skin_lesions", "skin_redness", "skin_itching", "scratching", "facial_swelling", "fever"},
+        "description": "Cat-specific hypersensitivity reaction to mosquito saliva proteins, causing distinctive crusting/ulcerative dermatitis predominantly on bridge of nose, ear pinnae, paw pads, and other thinly-haired areas. Seasonal in temperate climates, year-round in tropical/Japan summer-fall. Common cause of feline 'eosinophilic granuloma complex' confusion.",
+        "description_ja": "猫特異的な蚊唾液タンパクへの過敏反応で、特徴的な痂皮/潰瘍性皮膚炎が鼻梁、耳介、肉球、他薄毛域に主に出現。温帯気候で季節性、熱帯/日本夏-秋で通年性。猫の好酸球性肉芽腫症候群混同の頻原因。",
+        "pathophysiology": "Type I (immediate) and Type IV (delayed) hypersensitivity to mosquito salivary proteins (Aedes spp., Culex spp.) - prior exposure required for sensitization. Reaction sites: thin-haired areas where mosquitoes preferentially feed - bridge of nose, ear pinnae (especially margins), paw pads (rare), scrotum/perineum. Sequelae: (1) initial papules/erythema 24-48h post-bite; (2) progressive crusting + ulceration as bites accumulate; (3) self-trauma from intense pruritus worsens lesions; (4) secondary bacterial infection (often Staphylococcus); (5) eosinophilic infiltration histologically (mimics eosinophilic granuloma complex - distinguishing requires history + biopsy + allergen testing). Distinguished from other feline dermatoses: (a) seasonal pattern (warm months); (b) outdoor access (indoor-only cats rarely affected unless mosquito intrusion); (c) lesion distribution (face/ear/paws specifically); (d) eosinophilia on systemic CBC + tissue biopsy showing eosinophilic dermatitis with focal perforating folliculitis. Pathognomonic histology: eosinophil-rich dermatitis with mosquito 'mouth part' fragments occasionally visible. Most outdoor cats develop some sensitization after age 2-3.",
+        "pathophysiology_ja": "蚊唾液タンパク（Aedes属、Culex属）へのI型（即時）およびIV型（遅延）過敏反応 — 感作には先行暴露要。反応部位：蚊が優先的に摂食する薄毛域 — 鼻梁、耳介（特に縁）、肉球（稀）、陰嚢/会陰。続発症：(1)咬傷後24-48時間で初期丘疹/紅斑；(2)咬傷蓄積で進行性痂皮＋潰瘍；(3)強い掻痒からの自己外傷で病変悪化；(4)二次細菌感染（しばしばブドウ球菌）；(5)組織学的好酸球浸潤（好酸球性肉芽腫症候群類似 — 鑑別に歴史＋生検＋アレルゲン検査要）。他の猫皮膚症との鑑別：(a)季節パターン（暖月）；(b)屋外アクセス（蚊侵入なき限り室内のみ猫は稀に影響）；(c)病変分布（顔面/耳/肉球特異的）；(d)全身CBCでの好酸球増多＋局所穿孔性毛包炎を伴う好酸球性皮膚炎を示す組織生検。病態的組織：時に蚊「口部」断片可視の好酸球豊富な皮膚炎。屋外猫多くは2-3歳後に何らかの感作発症。",
+        "causes": "Mosquito bites (Aedes, Culex, Anopheles species). Risk factors: outdoor cats; warm months in temperate regions, year-round tropical; standing water near home; nighttime outdoor activity. Indoor-only cats rare unless mosquito intrusion. Some breed-specific predisposition reported in Persian cats (anecdotal).",
+        "causes_ja": "蚊咬傷（Aedes、Culex、Anopheles属）。リスク：屋外猫；温帯地域の暖月、熱帯地域は通年；自宅近くの溜まり水；夜間屋外活動。蚊侵入なき限り室内のみ猫は稀。ペルシャ猫で犬種特異的素因報告（症例報告）。",
+        "treatment": "(1) Mosquito avoidance (PRIMARY): keep cat indoors during peak mosquito activity (dawn, dusk, night); ensure window screens intact; eliminate standing water around home (breeding sites); use cat-safe insect screens. (2) For outdoor cats: cat-safe insect repellents - imidacloprid + permethrin spot-on (PERMETHRIN IS HIGHLY TOXIC TO CATS - never use dog products); cat-safe DEET-free options limited; consider bedside mosquito netting. (3) Anti-inflammatory therapy for active lesions: prednisolone 1-2 mg/kg PO q24h x 7-14 days then taper (most effective; cats tolerate well); alternative: cyclosporine 5-7 mg/kg PO q24h (steroid-sparing for chronic management). (4) Topical: hydrocortisone 1% cream applied to lesions q12h (limit licking - E-collar may be needed); silver sulfadiazine if ulcerated. (5) Antihistamines (limited efficacy in cats): chlorpheniramine 2-4 mg PO q12h, cyproheptadine 2-4 mg PO q12h. (6) Treat secondary bacterial infections: amoxicillin-clavulanate 12.5 mg/kg PO q12h x 7-14 days; topical mupirocin if local. (7) E-collar if self-trauma severe. (8) Allergen-specific immunotherapy theoretically possible but rarely commercially available for mosquito allergens. (9) Owner education on lifelong management - condition tends to persist year after year, requires ongoing prevention.",
+        "treatment_ja": "(1)蚊回避（主要）：蚊活動ピーク時（薄明、夕暮れ、夜）の室内飼育；窓網戸完整性確保；自宅周辺の溜まり水除去（繁殖地）；猫用安全昆虫網戸使用。(2)屋外猫用：猫安全昆虫忌避剤 — イミダクロプリド＋ペルメトリン（ペルメトリンは猫に高度毒性 — 犬製品絶対使用禁止）；猫安全DEETフリー選択肢限定；ベッドサイド蚊帳検討。(3)活動病変の抗炎症療法：プレドニゾロン 1-2 mg/kg PO q24h × 7-14日後に漸減（最効果；猫忍容性良）；代替：シクロスポリン 5-7 mg/kg PO q24h（慢性管理のステロイド節約）。(4)局所：1%ヒドロコルチゾンクリームを病変にq12h塗布（舐め制限 — エリザベスカラー要する場合あり）；潰瘍時はスルファジアジン銀。(5)抗ヒスタミン剤（猫で有効性限定）：クロルフェニラミン 2-4 mg PO q12h、シプロヘプタジン 2-4 mg PO q12h。(6)二次細菌感染治療：アモキシシリン-クラブラン酸 12.5 mg/kg PO q12h × 7-14日；局所時は局所ムピロシン。(7)自己外傷重度時はエリザベスカラー。(8)アレルゲン特異的免疫療法は理論上可能だが蚊アレルゲンに商業的入手稀。(9)生涯管理の飼い主教育 — 状態は年々持続しがち、継続的予防要。",
+        "prognosis": "Excellent with mosquito avoidance + symptomatic treatment. Lesions heal within 2-4 weeks of effective management. Relapses common with re-exposure. Lifelong management required - condition tends to recur each season. No risk of progression to systemic disease. Long-term steroid use risk: diabetes, infections, weight gain.",
+        "prognosis_ja": "蚊回避＋対症治療で予後優良。有効管理で病変は2-4週で治癒。再暴露で再発頻発。生涯管理要 — 状態は毎シーズン再発しがち。全身疾患進行リスクなし。長期ステロイド使用リスク：糖尿病、感染、体重増加。",
+        "prevention": "(1) Indoor housing during mosquito season (highest impact). (2) Screen windows + doors. (3) Eliminate standing water around home (gutters, plant saucers, kid pools). (4) Mosquito-repellent landscaping (citronella, marigolds - limited efficacy). (5) Cat-safe topical insect repellents (imidacloprid-based; AVOID permethrin/DEET products marketed for dogs). (6) Mosquito control measures in neighborhood. (7) For severely-affected cats: consider lifestyle change to indoor-only.",
+        "prevention_ja": "(1)蚊シーズンの室内飼育（最高インパクト）。(2)窓＋ドア網戸。(3)自宅周辺の溜まり水除去（雨樋、植木皿、ビニールプール）。(4)蚊忌避景観（シトロネラ、マリーゴールド — 効果限定）。(5)猫安全局所昆虫忌避剤（イミダクロプリドベース；犬用販売のペルメトリン/DEET製品回避）。(6)近隣の蚊管理対策。(7)重症罹患猫：室内のみへのライフスタイル変更検討。",
+        "recommended_tests": [
+            "skin_biopsy_histopathology",
+            "complete_blood_count_eosinophilia",
+            "intradermal_allergen_testing",
+            "elimination_diet_trial",
+        ],
+        "urgency": "moderate",
+        "onset_pattern": {"acute", "chronic", "subacute"},
+        "age_predisposition": {"young", "adult", "senior"},
+    },
 ]
 
 
