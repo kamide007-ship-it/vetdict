@@ -719,7 +719,8 @@ def list_diseases(
 
         where = " WHERE " + " AND ".join(conditions) if conditions else ""
 
-        total = conn.execute(_COUNT_DISEASES_BASE + where, params).fetchone()[0]
+        _row = conn.execute(_COUNT_DISEASES_BASE + where, params).fetchone()
+        total = _row[0] if _row else 0
 
         rows = conn.execute(
             _LIST_DISEASES_BASE + where + " ORDER BY species, name LIMIT ? OFFSET ?",

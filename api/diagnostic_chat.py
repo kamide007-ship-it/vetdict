@@ -1107,17 +1107,24 @@ def diagnostic_chat():
         - Reference test information
         - Navigation suggestions
     """
-    data = request.get_json() or {}
-    message = data.get("message", "").strip()
+    data = request.get_json(silent=True) or {}
+    raw_message = data.get("message", "")
+    if not isinstance(raw_message, str):
+        return jsonify({"error": "Message must be a string"}), 400
+    message = raw_message.strip()
     breed_id = data.get("breed_id")
     age_years = data.get("age_years")
     onset = data.get("onset")  # explicit onset from client
     previous_symptoms_raw = data.get("previous_symptoms", [])
     species = data.get("species", "dog")
+    if not isinstance(species, str):
+        species = "dog"
     pain_score = data.get("pain_score")  # int 1-10 (optional)
     lab_values = data.get("lab_values")  # dict (optional)
     breed = data.get("breed")  # str (optional)
     lang = data.get("lang", "")  # "ja" or "en" for regional prevalence
+    if not isinstance(lang, str):
+        lang = ""
 
     if not message:
         return jsonify({"error": "Message required"}), 400

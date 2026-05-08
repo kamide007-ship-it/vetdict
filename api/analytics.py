@@ -112,8 +112,13 @@ def track_request(f):
 @analytics_bp.route("/summary", methods=["GET"])
 def analytics_summary():
     """Return usage summary statistics."""
+
+    def _scalar(cursor, default=0):
+        row = cursor.fetchone()
+        return row[0] if row and row[0] is not None else default
+
     with _get_analytics_conn() as conn:
-        total = conn.execute("SELECT COUNT(*) FROM api_usage").fetchone()[0]
+        total = _scalar(conn.execute("SELECT COUNT(*) FROM api_usage"))
         by_endpoint = conn.execute(
             "SELECT endpoint, COUNT(*) as cnt FROM api_usage GROUP BY endpoint ORDER BY cnt DESC LIMIT 20"
         ).fetchall()
@@ -121,10 +126,11 @@ def analytics_summary():
             "SELECT species, COUNT(*) as cnt FROM api_usage WHERE species IS NOT NULL GROUP BY species ORDER BY cnt DESC"
         ).fetchall()
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        today_count = conn.execute("SELECT COUNT(*) FROM api_usage WHERE created_at >= ?", (today,)).fetchone()[0]
-        avg_response = conn.execute(
-            "SELECT AVG(response_time_ms) FROM api_usage WHERE response_time_ms > 0"
-        ).fetchone()[0]
+        today_count = _scalar(conn.execute("SELECT COUNT(*) FROM api_usage WHERE created_at >= ?", (today,)))
+        avg_response = _scalar(
+            conn.execute("SELECT AVG(response_time_ms) FROM api_usage WHERE response_time_ms > 0"),
+            default=0.0,
+        )
 
     return jsonify(
         {

@@ -1043,8 +1043,8 @@ class TestSymptomAliasesIntegrity:
         """Every value should be in SYMPTOM_IDS (dog) or a species SYMPTOM_NAMES, or be a documented mismatch."""
         # Build combined valid IDs from all species modules (trigger lazy load)
         all_valid_ids = set(SYMPTOM_IDS) | _KNOWN_ALIAS_MISMATCHES
-        from api.chat.species_data import get_species_data
         from api.chat.constants import _GENERIC_SPECIES
+        from api.chat.species_data import get_species_data
         for sp in _GENERIC_SPECIES:
             sp_data = get_species_data(sp)
             all_valid_ids.update(sp_data.get("symptom_names", {}).keys())

@@ -32,7 +32,8 @@ def get_connection(db_path: str | None = None):
         conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("PRAGMA foreign_keys=ON")
         # Integrity check on first connection to detect corruption early
-        integrity = conn.execute("PRAGMA quick_check").fetchone()[0]
+        _row = conn.execute("PRAGMA quick_check").fetchone()
+        integrity = _row[0] if _row else "unknown"
         if integrity != "ok":
             logger.critical("Database corruption detected: %s (path: %s)", integrity, path)
     except sqlite3.DatabaseError:

@@ -11,7 +11,7 @@ import json
 import logging
 import os
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from flask import Blueprint, jsonify, request
@@ -19,6 +19,15 @@ from flask import Blueprint, jsonify, request
 logger = logging.getLogger(__name__)
 
 paypal_bp = Blueprint("paypal", __name__, url_prefix="/api/paypal")
+
+
+def _utc_now_iso() -> str:
+    """Timezone-aware UTC ISO timestamp.
+
+    ``datetime.utcnow()`` is deprecated in Python 3.12+ and emits
+    DeprecationWarning. Use this helper instead.
+    """
+    return datetime.now(timezone.utc).isoformat()
 
 # PayPal configuration — all credentials via environment variables only
 PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID", "")
@@ -187,7 +196,7 @@ def activate_subscription():
             conn.execute(
                 """INSERT INTO subscribers (subscription_id, email, status, activated_at, ip)
                    VALUES (?, ?, 'active', ?, ?)""",
-                (subscription_id, email, datetime.utcnow().isoformat(), request.remote_addr or ""),
+                (subscription_id, email, _utc_now_iso(), request.remote_addr or ""),
             )
             conn.commit()
             logger.info("PayPal subscription activated: %s (%s)", subscription_id, email)
@@ -321,7 +330,7 @@ def paypal_webhook():
     if not subscription_id:
         return jsonify({"status": "ignored"}), 200
 
-    now = datetime.utcnow().isoformat()
+    now = _utc_now_iso()
     conn = _get_subscribers_db()
     try:
         if event_type in ("BILLING.SUBSCRIPTION.ACTIVATED", "PAYMENT.SALE.COMPLETED"):
@@ -428,7 +437,7 @@ def _migrate_waitlist_json():
         try:
             for entry in entries:
                 email = entry.get("email", "").strip().lower()
-                signed_up = entry.get("signed_up_at", datetime.utcnow().isoformat())
+                signed_up = entry.get("signed_up_at", _utc_now_iso())
                 if email:
                     conn.execute(
                         "INSERT OR IGNORE INTO waitlist (email, signed_up_at) VALUES (?, ?)",
@@ -460,7 +469,7 @@ def join_waitlist():
     try:
         conn.execute(
             "INSERT OR IGNORE INTO waitlist (email, signed_up_at) VALUES (?, ?)",
-            (email, datetime.utcnow().isoformat()),
+            (email, _utc_now_iso()),
         )
         conn.commit()
         total = conn.execute("SELECT COUNT(*) FROM waitlist").fetchone()[0]
