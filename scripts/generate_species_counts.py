@@ -85,7 +85,9 @@ def main():
     out_path.write_text(json.dumps(payload, ensure_ascii=False))
 
     total_diseases = sum(disease_counts.values())
-    print(f"species_counts.json written: {total_diseases} diseases, {total_drugs} drugs ({out_path.stat().st_size} bytes)")
+    print(
+        f"species_counts.json written: {total_diseases} diseases, {total_drugs} drugs ({out_path.stat().st_size} bytes)"
+    )
 
 
 if __name__ == "__main__":

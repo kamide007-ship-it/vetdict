@@ -29,6 +29,7 @@ def _utc_now_iso() -> str:
     """
     return datetime.now(timezone.utc).isoformat()
 
+
 # PayPal configuration — all credentials via environment variables only
 PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID", "")
 PAYPAL_SECRET = os.getenv("PAYPAL_SECRET", "")

@@ -23,12 +23,11 @@ except ImportError:
     from api.showdog_api import app, is_debug_mode_enabled
 
 if __name__ == "__main__":
-    port = int(os.getenv('PORT') or 5000)
+    port = int(os.getenv("PORT") or 5000)
     debug = is_debug_mode_enabled()
     if not debug:
         print(
-            "WARNING: Running Flask dev server in production. "
-            "Use 'gunicorn app:app' instead. See Procfile.",
+            "WARNING: Running Flask dev server in production. Use 'gunicorn app:app' instead. See Procfile.",
             file=sys.stderr,
         )
     app.run(host="0.0.0.0", port=port, debug=debug)
