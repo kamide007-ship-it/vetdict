@@ -187,8 +187,8 @@
           {% if ref.journal %}<strong>{{ ref.journal }}</strong>{% endif %}
           {% if ref.volume %}<strong>{{ ref.volume }}</strong>{% endif %}
           {% if ref.pages %}pp. {{ ref.pages }}{% endif %}.
-          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
-          {% if ref.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ ref.pmid }}/" target="_blank" rel="noopener" style="color:var(--gray-500);text-decoration:none;font-size:.7rem">[PubMed]</a>{% endif %}
+          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
+          {% if ref.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ ref.pmid }}/" target="_blank" rel="noopener noreferrer" style="color:var(--gray-500);text-decoration:none;font-size:.7rem">[PubMed]</a>{% endif %}
         </li>
         {% endfor %}
         {% endif %}
@@ -214,7 +214,7 @@
           {% if ref.journal %}<strong>{{ ref.journal }}</strong>{% endif %}
           {% if ref.volume %}<strong>{{ ref.volume }}</strong>{% endif %}
           {% if ref.pages %}pp. {{ ref.pages }}{% endif %}.
-          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
+          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
         </li>
         {% endfor %}
         {% endif %}
@@ -240,7 +240,7 @@
           {% if ref.journal %}<strong>{{ ref.journal }}</strong>{% endif %}
           {% if ref.volume %}<strong>{{ ref.volume }}</strong>{% endif %}
           {% if ref.pages %}pp. {{ ref.pages }}{% endif %}.
-          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
+          {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;font-size:.7rem">[DOI]</a>{% endif %}
         </li>
         {% endfor %}
         {% endif %}
@@ -272,8 +272,8 @@
       {% for ref in pubmed_refs %}
       <li style="margin-bottom:6px">
         {{ ref.authors }} ({{ ref.year }}). <em>{{ ref.title }}</em>. {{ ref.journal }}.
-        {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" style="color:var(--green);font-size:.78rem">[DOI]</a>{% endif %}
-        {% if ref.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ ref.pmid }}/" target="_blank" rel="noopener" style="color:var(--gray-500);font-size:.78rem">[PubMed]</a>{% endif %}
+        {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener noreferrer" style="color:var(--green);font-size:.78rem">[DOI]</a>{% endif %}
+        {% if ref.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ ref.pmid }}/" target="_blank" rel="noopener noreferrer" style="color:var(--gray-500);font-size:.78rem">[PubMed]</a>{% endif %}
       </li>
       {% endfor %}
     </ol>

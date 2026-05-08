@@ -57,9 +57,7 @@ class TestExtractSymptomsFromTextEnglish:
         assert "coughing" in result
 
     def test_multiple_english_symptoms(self):
-        result = extract_symptoms_from_text(
-            "My dog has diarrhea and is vomiting"
-        )
+        result = extract_symptoms_from_text("My dog has diarrhea and is vomiting")
         assert "diarrhea" in result
         assert "vomiting" in result
 
@@ -68,9 +66,7 @@ class TestExtractSymptomsFromTextEnglish:
         assert "nasal_discharge" in result
 
     def test_english_alias_breathing_difficulty(self):
-        result = extract_symptoms_from_text(
-            "The dog is having breathing difficulty"
-        )
+        result = extract_symptoms_from_text("The dog is having breathing difficulty")
         assert "labored_breathing" in result
 
     def test_english_alias_throws_up(self):
@@ -454,9 +450,7 @@ class TestExtractSymptomsFromTextEdgeCases:
         assert result == []
 
     def test_unrelated_text(self):
-        result = extract_symptoms_from_text(
-            "The weather is nice today and I went for a walk"
-        )
+        result = extract_symptoms_from_text("The weather is nice today and I went for a walk")
         assert "coughing" not in result
         assert "vomiting" not in result
         assert "diarrhea" not in result
@@ -556,10 +550,7 @@ class TestMatchSymptomsToDiseases:
         }
         for match in result:
             for key in required_keys:
-                assert key in match, (
-                    f"Missing key: {key} in match for "
-                    f"{match.get('disease_id')}"
-                )
+                assert key in match, f"Missing key: {key} in match for {match.get('disease_id')}"
 
     def test_similarity_score_range(self):
         result = match_symptoms_to_diseases(["coughing", "sneezing"])
@@ -567,33 +558,24 @@ class TestMatchSymptomsToDiseases:
             assert 0.0 < match["similarity_score"] <= 1.0
 
     def test_sorted_by_similarity_descending(self):
-        result = match_symptoms_to_diseases(
-            ["coughing", "sneezing", "fever"]
-        )
+        result = match_symptoms_to_diseases(["coughing", "sneezing", "fever"])
         scores = [m["similarity_score"] for m in result]
         assert scores == sorted(scores, reverse=True)
 
     def test_perfect_match_has_highest_score(self):
         """When user symptoms exactly equal a disease's symptoms, that disease should rank highest."""
-        boas = next(
-            d for d in DISEASES
-            if d["id"] == "brachycephalic_airway_syndrome"
-        )
+        boas = next(d for d in DISEASES if d["id"] == "brachycephalic_airway_syndrome")
         boas_symptoms = boas["symptoms"]
         result = match_symptoms_to_diseases(boas_symptoms)
         boas_match = next(
-            (m for m in result
-             if m["disease_id"] == "brachycephalic_airway_syndrome"),
+            (m for m in result if m["disease_id"] == "brachycephalic_airway_syndrome"),
             None,
         )
         assert boas_match is not None
         # With advanced scoring, perfect match gets high score (>= 0.8)
         assert boas_match["similarity_score"] >= 0.8
         # It should be the top-ranked result or in top 3
-        boas_rank = next(
-            i for i, m in enumerate(result)
-            if m["disease_id"] == "brachycephalic_airway_syndrome"
-        )
+        boas_rank = next(i for i, m in enumerate(result) if m["disease_id"] == "brachycephalic_airway_syndrome")
         assert boas_rank < 3
 
     def test_partial_match_produces_reasonable_score(self):
@@ -620,9 +602,7 @@ class TestMatchSymptomsToDiseases:
         user_symptoms = ["coughing", "sneezing"]
         result = match_symptoms_to_diseases(user_symptoms)
         for match in result:
-            disease = next(
-                d for d in DISEASES if d["id"] == match["disease_id"]
-            )
+            disease = next(d for d in DISEASES if d["id"] == match["disease_id"])
             for ms in match["matched_symptoms"]:
                 assert ms in user_symptoms
                 assert ms in disease["symptoms"]
@@ -631,9 +611,7 @@ class TestMatchSymptomsToDiseases:
         user_symptoms = ["coughing", "seizures"]
         result = match_symptoms_to_diseases(user_symptoms)
         for match in result:
-            disease = next(
-                d for d in DISEASES if d["id"] == match["disease_id"]
-            )
+            disease = next(d for d in DISEASES if d["id"] == match["disease_id"])
             disease_symptom_set = set(disease["symptoms"])
             for us in match["unmatched_user_symptoms"]:
                 assert us in user_symptoms
@@ -643,9 +621,7 @@ class TestMatchSymptomsToDiseases:
         user_symptoms = ["coughing"]
         result = match_symptoms_to_diseases(user_symptoms)
         for match in result:
-            disease = next(
-                d for d in DISEASES if d["id"] == match["disease_id"]
-            )
+            disease = next(d for d in DISEASES if d["id"] == match["disease_id"])
             user_set = set(user_symptoms)
             for ds in match["additional_disease_symptoms"]:
                 assert ds in disease["symptoms"]
@@ -662,22 +638,30 @@ class TestMatchSymptomsToDiseases:
         valid_severities = {"low", "mild", "moderate", "high", "severe", "emergency"}
         for match in result:
             assert match["severity"] in valid_severities, (
-                f"Unexpected severity '{match['severity']}' "
-                f"for disease {match['disease_id']}"
+                f"Unexpected severity '{match['severity']}' for disease {match['disease_id']}"
             )
 
     def test_respiratory_symptoms_find_boas(self):
-        result = match_symptoms_to_diseases([
-            "labored_breathing", "wheezing",
-            "reverse_sneezing", "exercise_intolerance",
-        ])
+        result = match_symptoms_to_diseases(
+            [
+                "labored_breathing",
+                "wheezing",
+                "reverse_sneezing",
+                "exercise_intolerance",
+            ]
+        )
         disease_ids = [m["disease_id"] for m in result]
         assert "brachycephalic_airway_syndrome" in disease_ids
 
     def test_gi_symptoms_find_parvovirus(self):
-        result = match_symptoms_to_diseases([
-            "vomiting", "diarrhea", "blood_in_stool", "lethargy",
-        ])
+        result = match_symptoms_to_diseases(
+            [
+                "vomiting",
+                "diarrhea",
+                "blood_in_stool",
+                "lethargy",
+            ]
+        )
         disease_ids = [m["disease_id"] for m in result]
         assert "canine_parvovirus" in disease_ids
 
@@ -877,15 +861,11 @@ class TestGetTreatmentRecommendations:
     """Test treatment/supplement recommendation lookup."""
 
     def test_known_disease_returns_dict(self):
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         assert isinstance(result, dict)
 
     def test_has_required_keys(self):
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         assert "primary_care_plan_ja" in result
         assert "primary_care_plan_en" in result
         assert "supplements" in result
@@ -894,9 +874,7 @@ class TestGetTreatmentRecommendations:
         assert "follow_up_schedule_en" in result
 
     def test_supplements_have_reference_url(self):
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         for supp in result["supplements"]:
             assert "reference" in supp
             assert supp["reference"] == "https://www.caninevet.jp/"
@@ -919,9 +897,7 @@ class TestGetTreatmentRecommendations:
 
     def test_unknown_disease_returns_default_supplements(self):
         """Disease not in DISEASE_SUPPLEMENTS should return _DEFAULT_SUPPLEMENTS."""
-        result = get_treatment_recommendations_for_disease(
-            "totally_fake_disease_id_xyz"
-        )
+        result = get_treatment_recommendations_for_disease("totally_fake_disease_id_xyz")
         assert len(result["supplements"]) == len(_DEFAULT_SUPPLEMENTS)
         default_names = {s["name_en"] for s in _DEFAULT_SUPPLEMENTS}
         result_names = {s["name_en"] for s in result["supplements"]}
@@ -929,28 +905,25 @@ class TestGetTreatmentRecommendations:
 
     def test_diagnostic_tests_from_disease_record(self):
         """Diagnostic tests come from the actual disease data."""
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         test_ids = [t["test_id"] for t in result["diagnostic_tests"]]
         # BOAS has recommended_tests: ["xray", "ct_scan", "endoscopy", "blood_pressure"]
         # Only top 3 are returned
         assert len(test_ids) <= 3
         for tid in test_ids:
             assert tid in [
-                "xray", "ct_scan", "endoscopy", "blood_pressure",
+                "xray",
+                "ct_scan",
+                "endoscopy",
+                "blood_pressure",
             ]
 
     def test_diagnostic_tests_limited_to_three(self):
-        result = get_treatment_recommendations_for_disease(
-            "canine_parvovirus"
-        )
+        result = get_treatment_recommendations_for_disease("canine_parvovirus")
         assert len(result["diagnostic_tests"]) <= 3
 
     def test_diagnostic_test_has_required_fields(self):
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         for test in result["diagnostic_tests"]:
             assert "test_id" in test
             assert "test_name_ja" in test
@@ -960,9 +933,7 @@ class TestGetTreatmentRecommendations:
             assert "description_en" in test
 
     def test_diagnostic_test_priority_is_sequential(self):
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         priorities = [t["priority"] for t in result["diagnostic_tests"]]
         assert priorities == list(range(1, len(priorities) + 1))
 
@@ -977,18 +948,14 @@ class TestGetTreatmentRecommendations:
         assert "supplements" in result
 
     def test_follow_up_schedule_strings(self):
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         assert isinstance(result["follow_up_schedule_ja"], str)
         assert isinstance(result["follow_up_schedule_en"], str)
         assert len(result["follow_up_schedule_ja"]) > 0
         assert len(result["follow_up_schedule_en"]) > 0
 
     def test_primary_care_plan_contains_vet_info(self):
-        result = get_treatment_recommendations_for_disease(
-            "brachycephalic_airway_syndrome"
-        )
+        result = get_treatment_recommendations_for_disease("brachycephalic_airway_syndrome")
         assert "獣医師" in result["primary_care_plan_ja"]
         assert "veterinarian" in result["primary_care_plan_en"].lower()
 
@@ -1006,8 +973,7 @@ class TestGetTreatmentRecommendations:
             result = get_treatment_recommendations_for_disease(disease_id)
             supp_names = [s["name_en"] for s in result["supplements"]]
             assert expected_supp_name in supp_names, (
-                f"Expected '{expected_supp_name}' in supplements for "
-                f"'{disease_id}', got {supp_names}"
+                f"Expected '{expected_supp_name}' in supplements for '{disease_id}', got {supp_names}"
             )
 
     def test_disease_not_in_supplements_map_gets_diagnostic_tests(self):
@@ -1043,16 +1009,16 @@ class TestSymptomAliasesIntegrity:
         """Every value should be in SYMPTOM_IDS (dog) or a species SYMPTOM_NAMES, or be a documented mismatch."""
         # Build combined valid IDs from all species modules (trigger lazy load)
         all_valid_ids = set(SYMPTOM_IDS) | _KNOWN_ALIAS_MISMATCHES
-        from api.chat.species_data import get_species_data
         from api.chat.constants import _GENERIC_SPECIES
+        from api.chat.species_data import get_species_data
+
         for sp in _GENERIC_SPECIES:
             sp_data = get_species_data(sp)
             all_valid_ids.update(sp_data.get("symptom_names", {}).keys())
 
         for alias, symptom_id in SYMPTOM_ALIASES.items():
             assert symptom_id in all_valid_ids, (
-                f"Alias '{alias}' maps to '{symptom_id}' "
-                f"which is not in any species symptom set"
+                f"Alias '{alias}' maps to '{symptom_id}' which is not in any species symptom set"
             )
 
     def test_known_mismatches_are_still_valid(self):
@@ -1064,9 +1030,7 @@ class TestSymptomAliasesIntegrity:
 
     def test_all_alias_keys_are_lowercase(self):
         for alias in SYMPTOM_ALIASES:
-            assert alias == alias.lower(), (
-                f"Alias key '{alias}' is not lowercase"
-            )
+            assert alias == alias.lower(), f"Alias key '{alias}' is not lowercase"
 
     def test_all_alias_values_are_strings(self):
         for _alias, symptom_id in SYMPTOM_ALIASES.items():
@@ -1081,15 +1045,11 @@ class TestSymptomAliasesIntegrity:
         assert len(english_aliases) > 0
 
     def test_contains_japanese_aliases(self):
-        japanese_aliases = [
-            k for k in SYMPTOM_ALIASES if not k.isascii()
-        ]
+        japanese_aliases = [k for k in SYMPTOM_ALIASES if not k.isascii()]
         assert len(japanese_aliases) > 0
 
     def test_japanese_alias_count_at_least_20(self):
-        japanese_aliases = [
-            k for k in SYMPTOM_ALIASES if not k.isascii()
-        ]
+        japanese_aliases = [k for k in SYMPTOM_ALIASES if not k.isascii()]
         assert len(japanese_aliases) >= 20
 
     def test_no_empty_alias_keys(self):
@@ -1102,20 +1062,21 @@ class TestSymptomAliasesIntegrity:
 
     def test_common_english_aliases_present(self):
         expected_aliases = [
-            "cough", "sneeze", "vomit", "diarrhea",
-            "limping", "seizure", "fever",
+            "cough",
+            "sneeze",
+            "vomit",
+            "diarrhea",
+            "limping",
+            "seizure",
+            "fever",
         ]
         for alias in expected_aliases:
-            assert alias in SYMPTOM_ALIASES, (
-                f"Expected common alias '{alias}' not found"
-            )
+            assert alias in SYMPTOM_ALIASES, f"Expected common alias '{alias}' not found"
 
     def test_common_japanese_aliases_present(self):
         expected_aliases = ["咳", "くしゃみ", "鼻水", "嘔吐", "下痢", "発熱"]
         for alias in expected_aliases:
-            assert alias in SYMPTOM_ALIASES, (
-                f"Expected common alias '{alias}' not found"
-            )
+            assert alias in SYMPTOM_ALIASES, f"Expected common alias '{alias}' not found"
 
 
 class TestDiseaseSupplementsIntegrity:
@@ -1133,22 +1094,21 @@ class TestDiseaseSupplementsIntegrity:
 
     def test_all_values_are_lists(self):
         for disease_id, supplements in DISEASE_SUPPLEMENTS.items():
-            assert isinstance(supplements, list), (
-                f"Supplements for '{disease_id}' is not a list"
-            )
+            assert isinstance(supplements, list), f"Supplements for '{disease_id}' is not a list"
 
     def test_all_supplement_entries_have_required_fields(self):
         required_fields = {
-            "name_ja", "name_en", "dosage", "frequency",
-            "reason_ja", "reason_en",
+            "name_ja",
+            "name_en",
+            "dosage",
+            "frequency",
+            "reason_ja",
+            "reason_en",
         }
         for disease_id, supplements in DISEASE_SUPPLEMENTS.items():
             for idx, supp in enumerate(supplements):
                 for field in required_fields:
-                    assert field in supp, (
-                        f"Missing '{field}' in supplement {idx} "
-                        f"for disease '{disease_id}'"
-                    )
+                    assert field in supp, f"Missing '{field}' in supplement {idx} for disease '{disease_id}'"
 
     def test_all_disease_ids_reference_known_diseases(self):
         """Every key in DISEASE_SUPPLEMENTS should be a known disease ID.
@@ -1169,27 +1129,25 @@ class TestDiseaseSupplementsIntegrity:
         for disease_id in DISEASE_SUPPLEMENTS:
             if disease_id in known_supplement_only:
                 continue
-            assert disease_id in known_ids, (
-                f"DISEASE_SUPPLEMENTS key '{disease_id}' "
-                f"not found in DISEASES"
-            )
+            assert disease_id in known_ids, f"DISEASE_SUPPLEMENTS key '{disease_id}' not found in DISEASES"
 
     def test_no_empty_supplement_lists(self):
         for disease_id, supplements in DISEASE_SUPPLEMENTS.items():
-            assert len(supplements) > 0, (
-                f"Disease '{disease_id}' has empty supplements list"
-            )
+            assert len(supplements) > 0, f"Disease '{disease_id}' has empty supplements list"
 
     def test_supplement_fields_are_non_empty_strings(self):
         for disease_id, supplements in DISEASE_SUPPLEMENTS.items():
             for supp in supplements:
                 for key in [
-                    "name_ja", "name_en", "dosage", "frequency",
-                    "reason_ja", "reason_en",
+                    "name_ja",
+                    "name_en",
+                    "dosage",
+                    "frequency",
+                    "reason_ja",
+                    "reason_en",
                 ]:
                     assert isinstance(supp[key], str) and len(supp[key]) > 0, (
-                        f"Empty or non-string '{key}' in supplement "
-                        f"for disease '{disease_id}'"
+                        f"Empty or non-string '{key}' in supplement for disease '{disease_id}'"
                     )
 
     def test_covers_multiple_disease_categories(self):
@@ -1218,14 +1176,16 @@ class TestDefaultSupplementsIntegrity:
 
     def test_has_required_fields(self):
         required = {
-            "name_ja", "name_en", "dosage", "frequency",
-            "reason_ja", "reason_en",
+            "name_ja",
+            "name_en",
+            "dosage",
+            "frequency",
+            "reason_ja",
+            "reason_en",
         }
         for supp in _DEFAULT_SUPPLEMENTS:
             for field in required:
-                assert field in supp, (
-                    f"Default supplement missing field '{field}'"
-                )
+                assert field in supp, f"Default supplement missing field '{field}'"
 
     def test_values_are_non_empty_strings(self):
         for supp in _DEFAULT_SUPPLEMENTS:
@@ -1240,10 +1200,7 @@ class TestCrossDataIntegrity:
         """Every symptom referenced in DISEASES should exist in SYMPTOM_IDS."""
         for disease in DISEASES:
             for symptom_id in disease["symptoms"]:
-                assert symptom_id in SYMPTOM_IDS, (
-                    f"Disease '{disease['id']}' references unknown "
-                    f"symptom '{symptom_id}'"
-                )
+                assert symptom_id in SYMPTOM_IDS, f"Disease '{disease['id']}' references unknown symptom '{symptom_id}'"
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:
@@ -1274,9 +1231,7 @@ class TestExtractThenMatch:
     """Test the extract -> match pipeline without Flask."""
 
     def test_english_respiratory_pipeline(self):
-        symptoms = extract_symptoms_from_text(
-            "My dog has been coughing, wheezing, and has labored breathing"
-        )
+        symptoms = extract_symptoms_from_text("My dog has been coughing, wheezing, and has labored breathing")
         assert len(symptoms) >= 2
         matches = match_symptoms_to_diseases(symptoms)
         assert len(matches) > 0
@@ -1331,9 +1286,7 @@ class TestExtractThenMatch:
 
     def test_full_pipeline_english_respiratory(self):
         """End-to-end: English respiratory symptoms through reasoning."""
-        symptoms = extract_symptoms_from_text(
-            "My dog has been coughing and wheezing a lot"
-        )
+        symptoms = extract_symptoms_from_text("My dog has been coughing and wheezing a lot")
         assert len(symptoms) >= 1
         matches = match_symptoms_to_diseases(symptoms)
         assert len(matches) > 0
@@ -1351,9 +1304,7 @@ class TestExtractThenMatch:
         matches = match_symptoms_to_diseases(symptoms)
         assert len(matches) > 0
         top = matches[0]
-        treatments = get_treatment_recommendations_for_disease(
-            top["disease_id"]
-        )
+        treatments = get_treatment_recommendations_for_disease(top["disease_id"])
         assert "supplements" in treatments
 
     def test_full_pipeline_japanese_gi(self):
@@ -1364,9 +1315,7 @@ class TestExtractThenMatch:
         matches = match_symptoms_to_diseases(symptoms)
         assert len(matches) > 0
         for match in matches[:5]:
-            treatments = get_treatment_recommendations_for_disease(
-                match["disease_id"]
-            )
+            treatments = get_treatment_recommendations_for_disease(match["disease_id"])
             assert "supplements" in treatments
             assert "diagnostic_tests" in treatments
 
@@ -1393,9 +1342,7 @@ class TestMatchEdgeCases:
     def test_duplicate_symptom_ids_handled(self):
         """Duplicate symptom IDs in input should not affect results."""
         result_normal = match_symptoms_to_diseases(["coughing"])
-        result_dupe = match_symptoms_to_diseases(
-            ["coughing", "coughing", "coughing"]
-        )
+        result_dupe = match_symptoms_to_diseases(["coughing", "coughing", "coughing"])
         for m1, m2 in zip(result_normal, result_dupe):
             assert m1["disease_id"] == m2["disease_id"]
             assert m1["similarity_score"] == m2["similarity_score"]
@@ -1407,15 +1354,11 @@ class TestMatchEdgeCases:
 
     def test_matched_and_unmatched_are_disjoint(self):
         """matched_symptoms and unmatched_user_symptoms should not overlap."""
-        result = match_symptoms_to_diseases(
-            ["coughing", "seizures", "fever"]
-        )
+        result = match_symptoms_to_diseases(["coughing", "seizures", "fever"])
         for match in result:
             matched = set(match["matched_symptoms"])
             unmatched = set(match["unmatched_user_symptoms"])
-            assert matched.isdisjoint(unmatched), (
-                f"Overlap in disease {match['disease_id']}"
-            )
+            assert matched.isdisjoint(unmatched), f"Overlap in disease {match['disease_id']}"
 
     def test_matched_plus_unmatched_equals_user_input(self):
         """matched + unmatched should equal the user's input set."""
@@ -1423,12 +1366,9 @@ class TestMatchEdgeCases:
         result = match_symptoms_to_diseases(user_symptoms)
         user_set = set(user_symptoms)
         for match in result:
-            reconstructed = set(match["matched_symptoms"]) | set(
-                match["unmatched_user_symptoms"]
-            )
+            reconstructed = set(match["matched_symptoms"]) | set(match["unmatched_user_symptoms"])
             assert reconstructed == user_set, (
-                f"For disease {match['disease_id']}: "
-                f"matched+unmatched={reconstructed} != user={user_set}"
+                f"For disease {match['disease_id']}: matched+unmatched={reconstructed} != user={user_set}"
             )
 
     def test_similarity_score_monotonicity(self):
@@ -1440,13 +1380,11 @@ class TestMatchEdgeCases:
         # Use first 4 symptoms
         result_4 = match_symptoms_to_diseases(parvo["symptoms"][:4])
         score_2 = next(
-            (m["similarity_score"] for m in result_2
-             if m["disease_id"] == "canine_parvovirus"),
+            (m["similarity_score"] for m in result_2 if m["disease_id"] == "canine_parvovirus"),
             0,
         )
         score_4 = next(
-            (m["similarity_score"] for m in result_4
-             if m["disease_id"] == "canine_parvovirus"),
+            (m["similarity_score"] for m in result_4 if m["disease_id"] == "canine_parvovirus"),
             0,
         )
         assert score_4 >= score_2

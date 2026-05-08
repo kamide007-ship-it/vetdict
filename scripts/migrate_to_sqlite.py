@@ -1185,14 +1185,10 @@ def main(db_path: str | None = None):
         # Write lightweight species counts JSON for runtime fallback (avoids
         # loading all species modules into memory — 550MB peak → <1 KB file).
         species_counts = {}
-        for row in conn.execute(
-            "SELECT species, COUNT(*) AS cnt FROM diseases GROUP BY species"
-        ).fetchall():
+        for row in conn.execute("SELECT species, COUNT(*) AS cnt FROM diseases GROUP BY species").fetchall():
             species_counts[row[0]] = row[1]
         drug_species_counts = {}
-        for row in conn.execute(
-            "SELECT species, COUNT(*) AS cnt FROM drug_species_info GROUP BY species"
-        ).fetchall():
+        for row in conn.execute("SELECT species, COUNT(*) AS cnt FROM drug_species_info GROUP BY species").fetchall():
             drug_species_counts[row[0]] = row[1]
         counts_data = {
             "disease_counts": species_counts,
