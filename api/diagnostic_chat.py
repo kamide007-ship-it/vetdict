@@ -1170,15 +1170,18 @@ def diagnostic_chat():
             lang=lang,
         )
         sp_names = get_species_data(species)["symptom_names"]
-        symptom_details = [
-            {
-                "id": sid,
-                "name_ja": sp_names.get(sid, {}).get("ja", sid),
-                "name_en": sp_names.get(sid, {}).get("en", sid),
-                "category": "",
-            }
-            for sid in all_symptoms
-        ]
+
+        def _sym_detail(sid: str) -> dict:
+            entry = sp_names.get(sid) or {}
+            ja = entry.get("ja") or _SYMPTOMS_BY_ID.get(sid, {}).get("name_ja", "")
+            en = entry.get("en") or _SYMPTOMS_BY_ID.get(sid, {}).get("name_en", "")
+            if not en:
+                en = sid.replace("_", " ").strip().capitalize()
+            if not ja:
+                ja = en  # fall back to English rather than raw snake_case ID
+            return {"id": sid, "name_ja": ja, "name_en": en, "category": ""}
+
+        symptom_details = [_sym_detail(sid) for sid in all_symptoms]
     else:
         extracted = extract_symptoms_from_text(message)
         all_symptoms = list(set(extracted + previous_symptoms))
@@ -1300,11 +1303,35 @@ def diagnostic_chat():
         from api.clinical_reasoning import build_reasoning
         from api.clinical_reasoning import to_dict as reasoning_to_dict
 
+        # Build a name map so JA/EN labels render correctly (id -> {ja, en})
+        # Includes both input symptoms (from symptom_details) and any species-level
+        # symptom names so missing/typical symptoms also translate.
+        name_map: dict[str, dict[str, str]] = {}
+        for s in symptom_details:
+            sid = s.get("id")
+            if sid:
+                name_map[sid] = {
+                    "ja": s.get("name_ja") or "",
+                    "en": s.get("name_en") or "",
+                }
+        sp_data = get_species_data(species) if species else {}
+        for sid, names in (sp_data.get("symptom_names") or {}).items():
+            if sid not in name_map and isinstance(names, dict):
+                name_map[sid] = {"ja": names.get("ja", ""), "en": names.get("en", "")}
+        # Add the global dog/baseline symptom dictionary as a final fallback
+        for sid, sym in _SYMPTOMS_BY_ID.items():
+            if sid not in name_map:
+                name_map[sid] = {
+                    "ja": sym.get("name_ja", ""),
+                    "en": sym.get("name_en", ""),
+                }
+
         reasoning = build_reasoning(
             input_symptoms=all_symptoms,
             differentials=enhanced_candidates,
             species=species,
             lang=request.json.get("lang", "ja") if request.is_json else "ja",
+            name_map=name_map,
         )
         response["clinical_reasoning"] = reasoning_to_dict(reasoning)
     except Exception:

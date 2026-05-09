@@ -75,12 +75,102 @@ class ClinicalReasoningResult:
     confidence_warning: str = ""
 
 
-def _humanize_id(sid: str) -> dict[str, str]:
-    """症状/検査IDを人間可読化"""
+# Common diagnostic test IDs → JA/EN labels. Used only as a fallback when the
+# caller doesn't supply a richer name_map. Keep the list short and obvious.
+_DEFAULT_TEST_NAMES: dict[str, dict[str, str]] = {
+    "cbc": {"ja": "血球計算（CBC）", "en": "CBC"},
+    "biochemistry": {"ja": "血液生化学", "en": "Biochemistry"},
+    "biochem": {"ja": "血液生化学", "en": "Biochemistry"},
+    "urinalysis": {"ja": "尿検査", "en": "Urinalysis"},
+    "xray": {"ja": "レントゲン検査", "en": "X-ray"},
+    "x_ray": {"ja": "レントゲン検査", "en": "X-ray"},
+    "radiograph": {"ja": "レントゲン検査", "en": "Radiograph"},
+    "radiography": {"ja": "レントゲン検査", "en": "Radiography"},
+    "ultrasound": {"ja": "超音波検査", "en": "Ultrasound"},
+    "abdominal_ultrasound": {"ja": "腹部超音波", "en": "Abdominal ultrasound"},
+    "echocardiography": {"ja": "心エコー", "en": "Echocardiography"},
+    "ecg": {"ja": "心電図", "en": "ECG"},
+    "ekg": {"ja": "心電図", "en": "ECG"},
+    "ct": {"ja": "CT検査", "en": "CT"},
+    "mri": {"ja": "MRI検査", "en": "MRI"},
+    "endoscopy": {"ja": "内視鏡", "en": "Endoscopy"},
+    "biopsy": {"ja": "生検", "en": "Biopsy"},
+    "cytology": {"ja": "細胞診", "en": "Cytology"},
+    "fecal_exam": {"ja": "糞便検査", "en": "Fecal exam"},
+    "fecal": {"ja": "糞便検査", "en": "Fecal exam"},
+    "pcr": {"ja": "PCR検査", "en": "PCR"},
+    "elisa": {"ja": "ELISA検査", "en": "ELISA"},
+    "culture": {"ja": "培養検査", "en": "Culture"},
+    "acth_stimulation": {"ja": "ACTH刺激試験", "en": "ACTH stimulation"},
+    "ldds": {"ja": "低用量デキサメサゾン抑制試験", "en": "LDDS"},
+    "tracheal_wash": {"ja": "気管洗浄", "en": "Tracheal wash"},
+    "bal": {"ja": "気管支肺胞洗浄", "en": "BAL"},
+    "blood_pressure": {"ja": "血圧測定", "en": "Blood pressure"},
+    "fna": {"ja": "細針吸引（FNA）", "en": "FNA"},
+    "blood_chemistry": {"ja": "血液生化学", "en": "Blood chemistry"},
+    "liver_enzymes": {"ja": "肝酵素検査", "en": "Liver enzymes"},
+    "liver_biopsy": {"ja": "肝生検", "en": "Liver biopsy"},
+    "kidney_panel": {"ja": "腎機能検査", "en": "Kidney panel"},
+    "coagulation_panel": {"ja": "凝固機能検査", "en": "Coagulation panel"},
+    "thoracic_radiography": {"ja": "胸部レントゲン", "en": "Thoracic radiograph"},
+    "abdominal_radiography": {"ja": "腹部レントゲン", "en": "Abdominal radiograph"},
+    "thoracic_xray": {"ja": "胸部レントゲン", "en": "Thoracic X-ray"},
+    "abdominal_xray": {"ja": "腹部レントゲン", "en": "Abdominal X-ray"},
+    "lactate": {"ja": "血中乳酸", "en": "Lactate"},
+    "blood_gas": {"ja": "血液ガス", "en": "Blood gas"},
+    "spec_cpl": {"ja": "Spec cPL（膵特異リパーゼ）", "en": "Spec cPL"},
+    "spec_fpl": {"ja": "Spec fPL（猫膵特異リパーゼ）", "en": "Spec fPL"},
+    "feline_pancreatic_lipase": {"ja": "猫膵特異リパーゼ", "en": "Feline pancreatic lipase"},
+    "tli": {"ja": "TLI（トリプシン様免疫反応）", "en": "TLI"},
+    "fecal_flotation": {"ja": "糞便浮遊検査", "en": "Fecal flotation"},
+    "skin_scraping": {"ja": "皮膚掻爬検査", "en": "Skin scraping"},
+    "wood_lamp": {"ja": "ウッド灯検査", "en": "Wood's lamp"},
+    "fungal_culture": {"ja": "真菌培養", "en": "Fungal culture"},
+    "free_t4": {"ja": "遊離T4", "en": "Free T4"},
+    "tsh": {"ja": "TSH（甲状腺刺激ホルモン）", "en": "TSH"},
+    "fiv_felv_test": {"ja": "FIV/FeLV検査", "en": "FIV/FeLV test"},
+    "uti_culture": {"ja": "尿培養", "en": "Urine culture"},
+    "urine_culture": {"ja": "尿培養", "en": "Urine culture"},
+    "ophthalmic_exam": {"ja": "眼科検査", "en": "Ophthalmic exam"},
+    "fluorescein_stain": {"ja": "フルオレセイン染色", "en": "Fluorescein stain"},
+    "schirmer_test": {"ja": "シルマー試験", "en": "Schirmer test"},
+    "tonometry": {"ja": "眼圧測定", "en": "Tonometry"},
+    "dental_radiograph": {"ja": "歯科レントゲン", "en": "Dental radiograph"},
+    "dental_exam": {"ja": "歯科検査", "en": "Dental exam"},
+    "neurologic_exam": {"ja": "神経学的検査", "en": "Neurologic exam"},
+    "orthopedic_exam": {"ja": "整形外科検査", "en": "Orthopedic exam"},
+    "physical_exam": {"ja": "身体検査", "en": "Physical exam"},
+}
+
+
+def _humanize_id(
+    sid: str,
+    name_map: dict[str, dict[str, str]] | None = None,
+) -> dict[str, str]:
+    """症状/検査IDを人間可読化。
+
+    name_map（{id: {ja, en}}）が与えられた場合、そこから優先的に翻訳する。
+    なければ _DEFAULT_TEST_NAMES、最後に ID から派生した英語表現にフォールバック。
+    Japanese fallback は ID をそのまま返さず、英語と同じ表記にする。
+    """
     if not sid:
         return {"id": "", "name_ja": "", "name_en": ""}
+    if name_map and sid in name_map:
+        entry = name_map[sid]
+        ja = entry.get("ja") or entry.get("name_ja")
+        en = entry.get("en") or entry.get("name_en")
+        if ja or en:
+            fallback_en = sid.replace("_", " ").strip().capitalize()
+            return {
+                "id": sid,
+                "name_ja": ja or en or fallback_en,
+                "name_en": en or fallback_en,
+            }
+    if sid in _DEFAULT_TEST_NAMES:
+        entry = _DEFAULT_TEST_NAMES[sid]
+        return {"id": sid, "name_ja": entry["ja"], "name_en": entry["en"]}
     en = sid.replace("_", " ").strip().capitalize()
-    return {"id": sid, "name_ja": sid, "name_en": en}
+    return {"id": sid, "name_ja": en, "name_en": en}
 
 
 def _detect_red_flags_in_input(input_symptom_ids: list[str]) -> list[str]:
@@ -148,6 +238,7 @@ def build_reasoning(
     species: str = "",
     lang: str = "ja",
     max_differentials: int = 5,
+    name_map: dict[str, dict[str, str]] | None = None,
 ) -> ClinicalReasoningResult:
     """
     鑑別診断結果から構造化された臨床推論を構築する。
@@ -225,7 +316,7 @@ def build_reasoning(
         # 鑑別絞り込み質問
         rule_out_q: list[str] = []
         for sid in missing_ids[:2]:
-            hsym = _humanize_id(sid)
+            hsym = _humanize_id(sid, name_map)
             if lang == "ja":
                 rule_out_q.append(f"{hsym['name_ja']} は確認できますか？")
             else:
@@ -237,9 +328,9 @@ def build_reasoning(
             disease_name_ja=d.get("name_ja") or d.get("name", ""),
             confidence=conf_val,
             urgency=urgency,
-            matching_symptoms=[_humanize_id(s) for s in matching_ids],
-            missing_typical_symptoms=[_humanize_id(s) for s in missing_ids],
-            next_diagnostic_steps=[_humanize_id(t) for t in rec_test_ids[:5]],
+            matching_symptoms=[_humanize_id(s, name_map) for s in matching_ids],
+            missing_typical_symptoms=[_humanize_id(s, name_map) for s in missing_ids],
+            next_diagnostic_steps=[_humanize_id(t, name_map) for t in rec_test_ids[:5]],
             red_flags=red_flags,
             rule_out_questions=rule_out_q,
         )
@@ -250,7 +341,7 @@ def build_reasoning(
     for r in reasonings[:3]:
         for t in r.next_diagnostic_steps:
             next_steps_set.add(t["id"])
-    next_steps = [_humanize_id(t) for t in sorted(next_steps_set)][:6]
+    next_steps = [_humanize_id(t, name_map) for t in sorted(next_steps_set)][:6]
 
     # Bottom Line
     bottom_line, bl_evidence = _generate_bottom_line(reasonings, has_emergency, len(input_symptoms), lang=lang)

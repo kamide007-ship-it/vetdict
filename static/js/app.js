@@ -3813,9 +3813,16 @@ function renderDiseaseReasoning(d){
     const qs=d.rule_out_questions.map(q=>`<li style="margin:2px 0">${escapeHtml(q)}</li>`).join("");
     html+=`<div style="font-size:.74rem;color:#475569;margin:6px 0 2px"><strong>${currentLang==="ja"?"鑑別質問":"Rule-out Q"}:</strong><ul style="margin:2px 0 0 18px;padding:0">${qs}</ul></div>`;
   }
-  // Red flags
+  // Red flags — translate IDs using already-humanized symptom maps in the same response
   if(d.red_flags&&d.red_flags.length>0){
-    html+=`<div style="font-size:.74rem;color:#dc2626;margin:6px 0;padding:4px 8px;background:#fee2e2;border-radius:4px"><strong>🚨 ${currentLang==="ja"?"レッドフラグ":"Red flags"}:</strong> ${d.red_flags.map(escapeHtml).join(", ")}</div>`;
+    const lookup={};
+    [...(d.matching_symptoms||[]),...(d.missing_typical_symptoms||[]),...(d.next_diagnostic_steps||[])].forEach(s=>{if(s&&s.id)lookup[s.id]=s;});
+    const labels=d.red_flags.map(rid=>{
+      const e=lookup[rid];
+      if(!e)return rid.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase());
+      return currentLang==="ja"?(e.name_ja||e.name_en||rid):(e.name_en||e.name_ja||rid);
+    });
+    html+=`<div style="font-size:.74rem;color:#dc2626;margin:6px 0;padding:4px 8px;background:#fee2e2;border-radius:4px"><strong>🚨 ${currentLang==="ja"?"レッドフラグ":"Red flags"}:</strong> ${labels.map(escapeHtml).join(", ")}</div>`;
   }
   card.innerHTML=html;
   return card;
