@@ -10513,6 +10513,167 @@ for _drug_id, _species_patch in SPECIES_INFO_PATCH_28.items():
             if _sp not in _target:
                 _target[_sp] = _info
 
+# ---------------------------------------------------------------------------
+# 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
+# bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
+# reptile データ → lizard（爬虫類サブグループ）
+# hamster データ → degu, sugar_glider（小型げっ歯類、用量参考）
+# ---------------------------------------------------------------------------
+_SPECIES_COPY_RULES = [
+    # (source_species, target_species, note_prefix_ja, note_prefix_en)
+    ("bird", "parakeet", "（鳥類データから推定）", "(extrapolated from avian data)"),
+    ("bird", "parrot", "（鳥類データから推定）", "(extrapolated from avian data)"),
+    ("reptile", "lizard", "（爬虫類データから推定）", "(extrapolated from reptile data)"),
+    ("reptile", "snake", "（爬虫類データから推定）", "(extrapolated from reptile data)"),
+    ("reptile", "tortoise", "（爬虫類データから推定）", "(extrapolated from reptile data)"),
+    ("hamster", "degu", "（小型げっ歯類データから推定）", "(extrapolated from small rodent data)"),
+    ("guinea_pig", "degu", "（小型げっ歯類データから推定）", "(extrapolated from small rodent data)"),
+    ("hamster", "sugar_glider", "（小型哺乳類データから推定）", "(extrapolated from small mammal data)"),
+    ("chinchilla", "degu", "（小型げっ歯類データから推定）", "(extrapolated from small rodent data)"),
+]
+
+for _drug in DRUGS:
+    _si = _drug.setdefault("species_info", {})
+    for _src, _tgt, _note_ja, _note_en in _SPECIES_COPY_RULES:
+        if _src in _si and _tgt not in _si:
+            _src_info = _si[_src]
+            if not isinstance(_src_info, dict):
+                continue
+            # Copy with extrapolation note added
+            _tgt_info = dict(_src_info)
+            _orig_note_ja = _tgt_info.get("notes_ja", "") or ""
+            _orig_note_en = _tgt_info.get("notes", "") or ""
+            _tgt_info["notes_ja"] = (_note_ja + " " + _orig_note_ja).strip()
+            _tgt_info["notes"] = (_note_en + " " + _orig_note_en).strip()
+            _si[_tgt] = _tgt_info
+
+# ---------------------------------------------------------------------------
+# 魚類薬品の機序・禁忌・副作用補完（12魚専用薬の臨床補完）
+# ---------------------------------------------------------------------------
+_FISH_DRUG_PATCHES = {
+    "methylene_blue": {
+        "mechanism": "Antifungal/antiparasitic dye. Inhibits cellular respiration in protozoa, fungi, and external parasites; also acts as anti-methemoglobinemia agent by reducing methemoglobin to hemoglobin.",
+        "mechanism_ja": "抗真菌・抗寄生虫色素。原虫、真菌、外部寄生虫の細胞呼吸阻害。メトヘモグロビンをヘモグロビンに還元する抗メトヘモグロビン血症作用も。",
+        "contraindications": "Avoid in scaleless fish (catfish, loaches, eels - sensitive). Stains silicone aquarium sealant. Remove biological filtration media before use (kills nitrifying bacteria).",
+        "contraindications_ja": "無鱗魚（ナマズ、ドジョウ、ウナギ — 感受性）回避。シリコン水槽シーラントを染色。生物ろ過メディアを使用前に除去（硝化細菌を殺す）。",
+        "side_effects": ["Stains all surfaces", "Kills biological filtration", "Reduces oxygen levels"],
+        "side_effects_ja": ["全表面染色", "生物ろ過破壊", "酸素レベル低下"],
+    },
+    "malachite_green": {
+        "mechanism": "Triphenylmethane dye with antifungal and antiparasitic activity. Inhibits cellular respiration in eukaryotic parasites and fungi. Highly effective against Ich (Ichthyophthirius), fungus, and external parasites.",
+        "mechanism_ja": "抗真菌・抗寄生虫活性のトリフェニルメタン色素。真核寄生虫・真菌の細胞呼吸を阻害。白点病、真菌、外部寄生虫に高効果。",
+        "contraindications": "TOXIC TO HUMANS - carcinogenic, banned for food fish in many countries. Avoid in scaleless fish, fry, eggs. CONTRAINDICATED in fish destined for human consumption. Toxic to invertebrates.",
+        "contraindications_ja": "ヒトに毒性 — 発がん性、多くの国で食用魚に禁止。無鱗魚、稚魚、卵に回避。食用魚に禁忌。無脊椎動物に毒性。",
+        "side_effects": ["Carcinogenic to humans", "Mutagenic", "Toxic to invertebrates", "Stains permanent"],
+        "side_effects_ja": ["ヒト発がん性", "変異原性", "無脊椎動物に毒性", "永久染色"],
+    },
+    "formalin_fish": {
+        "mechanism": "37% formaldehyde solution. Strong protein denaturant kills external parasites by cross-linking cellular proteins. Effective against monogenean flukes, protozoan parasites, and external fungi.",
+        "mechanism_ja": "37%ホルムアルデヒド溶液。強力なタンパク質変性剤で細胞タンパク質架橋により外部寄生虫を殺す。単生類吸虫、原虫寄生虫、外部真菌に有効。",
+        "contraindications": "TOXIC TO HUMANS - carcinogenic, requires PPE. Causes severe oxygen depletion in water (use only with strong aeration). Toxic to scaleless fish (catfish, loaches), young fish, sturgeon. CONTRAINDICATED with cold water (<15°C - delayed metabolism).",
+        "contraindications_ja": "ヒトに毒性 — 発がん性、PPE要。水中で重度酸素枯渇（強力エアレーション併用必須）。無鱗魚（ナマズ、ドジョウ）、若魚、チョウザメに毒性。冷水（<15℃ — 代謝遅延）に禁忌。",
+        "side_effects": ["Severe O2 depletion", "Human carcinogen", "Gill irritation"],
+        "side_effects_ja": ["重度酸素枯渇", "ヒト発がん性", "鰓刺激"],
+    },
+    "copper_sulfate": {
+        "mechanism": "Copper ion (Cu²⁺) is toxic to external parasites (especially Cryptocaryon irritans in marine fish), fungi, and algae. Disrupts cellular ion transport and enzyme function in lower organisms.",
+        "mechanism_ja": "銅イオン（Cu²⁺）が外部寄生虫（特に海水魚のクリプトカリオン）、真菌、藻類に毒性。下等生物の細胞イオン輸送・酵素機能を阻害。",
+        "contraindications": "CONTRAINDICATED in invertebrate tanks (lethal to corals, shrimp, snails). Toxic to scaleless fish, young fish, and elasmobranchs (sharks/rays). Maintain Cu level 0.15-0.20 ppm via test kit - higher doses fatal. Bonds with carbonates (KH) - effective dose varies with water chemistry.",
+        "contraindications_ja": "無脊椎動物水槽に禁忌（サンゴ、エビ、貝に致死的）。無鱗魚、若魚、軟骨魚類（サメ・エイ）に毒性。テストキットでCuレベル0.15-0.20 ppm維持 — 高用量で致死的。炭酸塩（KH）と結合 — 効果用量は水化学で変動。",
+        "side_effects": [
+            "Toxic to invertebrates",
+            "Narrow safety margin",
+            "Gill damage if overdosed",
+            "Suppresses immune function",
+        ],
+        "side_effects_ja": ["無脊椎動物に毒性", "安全域狭い", "過量で鰓損傷", "免疫機能抑制"],
+    },
+    "potassium_permanganate": {
+        "mechanism": "Strong oxidizing agent. Destroys external parasites, bacteria, and fungi via oxidative damage to cell membranes and proteins. Effective broad-spectrum disinfectant for ponds and bath treatment.",
+        "mechanism_ja": "強力な酸化剤。細胞膜・タンパク質への酸化的損傷を介して外部寄生虫、細菌、真菌を破壊。池・薬浴用の有効広域消毒剤。",
+        "contraindications": "Inactivated by organic matter (waste, plants - reduces effectiveness). Toxic to scaleless fish at standard doses. CAUTION in stocked ponds - rapid depletion of dissolved oxygen possible. Stains skin, equipment.",
+        "contraindications_ja": "有機物（廃棄物、植物 — 効果低下）で不活化。標準用量で無鱗魚に毒性。放養池注意 — 溶存酸素急速枯渇可能。皮膚・器具染色。",
+        "side_effects": ["Organic matter inactivation", "O2 depletion", "Skin staining", "Gill damage if overdosed"],
+        "side_effects_ja": ["有機物による不活化", "酸素枯渇", "皮膚染色", "過量で鰓損傷"],
+    },
+    "acriflavine": {
+        "mechanism": "Acridine dye with antibacterial and antiparasitic activity. Intercalates with bacterial DNA, inhibiting replication. Active against external fungi, bacteria, and some protozoan parasites.",
+        "mechanism_ja": "抗菌・抗寄生虫活性のアクリジン色素。細菌DNAにインターカレートし複製阻害。外部真菌、細菌、一部原虫寄生虫に活性。",
+        "contraindications": "May cause photosensitization in fish - reduce light during treatment. Stains equipment and water yellow. Mutagenic in bacterial assays. Avoid in invertebrate tanks. Reduce dose in soft acidic water.",
+        "contraindications_ja": "魚で光感作性可能 — 治療中光低減。器具・水を黄色に染色。細菌試験で変異原性。無脊椎動物水槽回避。軟酸性水で減量。",
+        "side_effects": ["Photosensitization", "Yellow staining", "Mutagenic potential"],
+        "side_effects_ja": ["光感作性", "黄色染色", "変異原性"],
+    },
+    "oxylinic_acid": {
+        "mechanism": "First-generation fluoroquinolone antibacterial. Inhibits bacterial DNA gyrase, preventing DNA replication. Effective against gram-negative pathogens including Aeromonas, Pseudomonas, Vibrio in aquaculture.",
+        "mechanism_ja": "第一世代フルオロキノロン系抗菌薬。細菌DNAジャイレース阻害でDNA複製阻止。養殖におけるAeromonas、Pseudomonas、Vibrio等のグラム陰性病原体に有効。",
+        "contraindications": "Bacterial resistance developing - use only when culture-confirmed susceptible. Maximum residue limits in food fish - observe withdrawal period (typically 14-30 days). Avoid in young fish (cartilage effects). Not permitted in some countries.",
+        "contraindications_ja": "細菌耐性発達中 — 培養感受性確認時のみ使用。食用魚で最大残留量 — 休薬期間遵守（典型的に14-30日）。若魚回避（軟骨影響）。一部の国で許可されない。",
+        "side_effects": ["Resistance development", "Withdrawal period required", "Cartilage effects in young"],
+        "side_effects_ja": ["耐性発達", "休薬期間要", "若齢で軟骨影響"],
+    },
+    "kanamycin_fish": {
+        "mechanism": "Aminoglycoside antibiotic for bath/feed treatment. Binds bacterial 30S ribosomal subunit, inhibiting protein synthesis. Effective against gram-negative bacterial septicemias (Aeromonas, Pseudomonas, Vibrio).",
+        "mechanism_ja": "薬浴/餌料用アミノグリコシド系抗菌薬。細菌30Sリボソームサブユニットに結合しタンパク質合成阻害。グラム陰性敗血症（Aeromonas、Pseudomonas、Vibrio）に有効。",
+        "contraindications": "Bath treatment less effective than feed-medicated due to limited absorption through gills. Avoid concurrent use with other ototoxic/nephrotoxic agents. Bacterial resistance increasing. Withdrawal period in food fish (30+ days).",
+        "contraindications_ja": "鰓からの吸収限定的のため薬浴は薬餌より効果劣。他の耳毒性/腎毒性薬剤の同時使用回避。細菌耐性増加。食用魚で休薬期間（30日以上）。",
+        "side_effects": [
+            "Limited bath absorption",
+            "Bacterial resistance",
+            "Cross-resistance with other aminoglycosides",
+        ],
+        "side_effects_ja": ["薬浴吸収限定", "細菌耐性", "他アミノグリコシドとの交差耐性"],
+    },
+    "trichlorfon": {
+        "mechanism": "Organophosphate insecticide/antiparasitic. Irreversibly inhibits acetylcholinesterase in arthropod parasites (anchor worm, fish lice, gill copepods), causing paralysis and death.",
+        "mechanism_ja": "有機リン系殺虫・抗寄生虫薬。節足動物寄生虫（イカリムシ、ウオジラミ、鰓カイアシ類）のアセチルコリンエステラーゼを不可逆的阻害し麻痺・死亡を起こす。",
+        "contraindications": "TOXIC TO HUMANS - cholinesterase inhibitor, requires PPE. Avoid in salmonids, sturgeon, scaleless fish (high sensitivity). CONTRAINDICATED with invertebrate tanks. Banned in food fish in many countries. Toxic to bees if drift to surface water.",
+        "contraindications_ja": "ヒトに毒性 — コリンエステラーゼ阻害、PPE要。サケ科、チョウザメ、無鱗魚（高感受性）回避。無脊椎動物水槽に禁忌。多くの国で食用魚に禁止。表層水に流入時にハチに毒性。",
+        "side_effects": ["Human cholinesterase inhibition", "Salmonid toxicity", "Invertebrate toxicity"],
+        "side_effects_ja": ["ヒトコリンエステラーゼ阻害", "サケ科に毒性", "無脊椎動物に毒性"],
+    },
+    "levamisole_fish": {
+        "mechanism": "Imidothiazole anthelmintic. Acts as nicotinic acetylcholine receptor agonist in nematodes, causing paralysis. Also has immunostimulant effects in fish. Treatment for internal nematodes (Camallanus, Capillaria) and external monogeneans.",
+        "mechanism_ja": "イミドチアゾール系駆虫薬。線虫のニコチン性アセチルコリン受容体作動薬として作用し麻痺を起こす。魚で免疫刺激作用も。内部線虫（Camallanus、Capillaria）・外部単生類治療。",
+        "contraindications": "Avoid in scaleless fish (catfish, eels - sensitive to absorption). Bath treatment effective but oral/feed delivery preferred for internal parasites. Withdrawal period in food fish (typically 7-14 days). Caution with chemoreceptor stress (fast or anesthetized fish).",
+        "contraindications_ja": "無鱗魚（ナマズ、ウナギ — 吸収感受性）回避。薬浴有効だが内部寄生虫には経口/餌料投与好ましい。食用魚で休薬期間（典型的に7-14日）。化学受容器ストレス（絶食または麻酔魚）注意。",
+        "side_effects": ["Catfish/eel sensitivity", "Withdrawal period required", "Less effective vs cestodes"],
+        "side_effects_ja": ["ナマズ/ウナギ感受性", "休薬期間要", "条虫類に効果劣"],
+    },
+    "epsom_salt_fish": {
+        "mechanism": "Magnesium sulfate. Osmotic laxative and muscle relaxant for fish. Effective for swim bladder issues, constipation, and stress reduction. Reduces internal swelling and assists with dropsy management.",
+        "mechanism_ja": "硫酸マグネシウム。魚用浸透圧下剤・筋弛緩剤。浮き袋障害、便秘、ストレス軽減に有効。内部腫脹軽減、松かさ病管理補助。",
+        "contraindications": "Avoid prolonged use (electrolyte imbalance). Reduce dose for soft water fish. Not for marine fish (already high Mg in seawater). Use food-grade epsom salt only (not bath salts with fragrances).",
+        "contraindications_ja": "長期使用回避（電解質バランス異常）。軟水魚で減量。海水魚に不要（海水は既に高Mg）。食品グレードエプソムソルトのみ使用（香料付きバスソルト不可）。",
+        "side_effects": ["Electrolyte imbalance with prolonged use", "Lethargy at high doses"],
+        "side_effects_ja": ["長期使用で電解質異常", "高用量で元気消失"],
+    },
+    "epsom_salt": {
+        "mechanism": "Magnesium sulfate (MgSO₄). Osmotic laxative drawing water into intestinal lumen; muscle relaxant via membrane stabilization; bath/soak for limb edema, abscess drainage. Less commonly used as parenteral magnesium replacement in hypomagnesemia.",
+        "mechanism_ja": "硫酸マグネシウム（MgSO₄）。腸管内腔に水分を引き込む浸透圧下剤；膜安定化による筋弛緩；四肢浮腫、膿瘍排液の薬浴/浸漬。低Mg血症の非経口Mg補充にも使用。",
+        "contraindications": "Avoid oral use in renal failure (Mg retention). IV use requires slow administration (bradycardia, hypotension risk). Topical use safe but avoid open wounds. CAUTION in heart disease (Mg can cause arrhythmias at high doses).",
+        "contraindications_ja": "腎不全で経口使用回避（Mg貯留）。IV使用は緩徐投与要（徐脈、低血圧リスク）。局所使用は安全だが開創回避。心疾患注意（高用量でMgが不整脈起こしうる）。",
+        "side_effects": ["Diarrhea (oral)", "Bradycardia (IV)", "Hypotension (IV)", "Hypermagnesemia"],
+        "side_effects_ja": ["下痢（経口）", "徐脈（IV）", "低血圧（IV）", "高Mg血症"],
+    },
+    "aquarium_salt": {
+        "mechanism": "Sodium chloride (NaCl) - osmoregulatory supplement for freshwater fish. Reduces osmotic stress, increases slime coat production, and is mildly antiparasitic against protozoans and external parasites at higher concentrations.",
+        "mechanism_ja": "塩化ナトリウム（NaCl）— 淡水魚の浸透圧調節補助。浸透圧ストレス低減、粘液層産生増加、高濃度で原虫・外部寄生虫に軽度の抗寄生虫作用。",
+        "contraindications": "AVOID in salt-sensitive species: catfish, loaches, tetras (some), goldfish (long-term), live plants (kill at >2 ppt sustained). Brackish water fish may need salt. NEVER use iodized table salt (contains additives toxic to fish). Use aquarium-grade or non-iodized rock salt only.",
+        "contraindications_ja": "塩感受性種に回避：ナマズ、ドジョウ、テトラ（一部）、金魚（長期）、生きた植物（>2 ppt持続で枯死）。汽水魚は塩必要可能性。ヨウ素添加食卓塩絶対不可（魚毒性添加物含有）。水族館グレードまたは非ヨウ素岩塩のみ使用。",
+        "side_effects": ["Plant toxicity", "Loach/catfish sensitivity", "Long-term goldfish issues"],
+        "side_effects_ja": ["植物毒性", "ドジョウ/ナマズ感受性", "金魚長期問題"],
+    },
+}
+
+# Apply fish drug patches
+for _fish_id, _patch in _FISH_DRUG_PATCHES.items():
+    if _fish_id in _drug_index:
+        _drug = _drug_index[_fish_id]
+        for _key, _value in _patch.items():
+            if _key not in _drug or not _drug[_key]:
+                _drug[_key] = _value
+
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
 for _d in DRUGS:
