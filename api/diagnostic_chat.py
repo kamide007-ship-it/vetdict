@@ -2010,6 +2010,21 @@ def consultation():
                 }
             ), 200
 
+        # Convert age_years to age_category for interim matcher refinement
+        _interim_age_category: str | None = None
+        if age_years is not None:
+            try:
+                _iay = float(age_years)
+                if _iay < 1.0:
+                    _interim_age_category = "young"
+                elif _iay < 4.0:
+                    _interim_age_category = "young_adult"
+                elif _iay < 8.0:
+                    _interim_age_category = "adult"
+                else:
+                    _interim_age_category = "senior"
+            except (TypeError, ValueError):
+                _interim_age_category = None
         # Run diagnosis with current symptoms
         if species == "horse" and EQUINE_AVAILABLE:
             disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
@@ -2020,6 +2035,8 @@ def consultation():
                 pain_score=pain_score,
                 lab_values=lab_values,
                 breed=breed,
+                age_category=_interim_age_category,
+                onset_pattern=onset,
                 lang=lang,
             )
         else:
@@ -2186,6 +2203,21 @@ def consultation():
             logger.warning(
                 "Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc
             )
+            # Convert age_years to age_category for matcher refinement
+            _age_category: str | None = None
+            if age_years is not None:
+                try:
+                    _ay = float(age_years)
+                    if _ay < 1.0:
+                        _age_category = "young"
+                    elif _ay < 4.0:
+                        _age_category = "young_adult"
+                    elif _ay < 8.0:
+                        _age_category = "adult"
+                    else:
+                        _age_category = "senior"
+                except (TypeError, ValueError):
+                    _age_category = None
             if species == "horse" and EQUINE_AVAILABLE:
                 disease_matches = _match_equine_symptoms_to_diseases(selected_symptoms)
             elif bool(get_species_data(species)):
@@ -2195,6 +2227,8 @@ def consultation():
                     pain_score=pain_score,
                     lab_values=lab_values,
                     breed=breed,
+                    age_category=_age_category,
+                    onset_pattern=onset,
                     lang=lang,
                 )
             else:
