@@ -1889,13 +1889,14 @@ class TestConsultationEndpoint:
             assert nc["id"] not in cat_ids
 
     def test_ask_context_all_provided(self, client):
-        """When all context is provided, questions list is empty."""
+        """When all context is provided (including breed), questions list is empty."""
         r = client.post(self.ENDPOINT, json={
             "phase": "ask_context",
             "species": "dog",
             "onset": "acute",
             "age_years": 5,
             "pain_score": 2,
+            "breed": "Labrador Retriever",
         })
         data = r.get_json()
         assert data["phase"] == "context_questions"
@@ -2538,8 +2539,8 @@ class TestConsultationEdgeCases:
 
     # -- ask_context edge cases --
 
-    def test_ask_context_all_fields_provided_returns_empty_questions(self):
-        """ask_context with all context returns empty questions list."""
+    def test_ask_context_breed_prompted_when_missing_for_dog(self):
+        """ask_context returns breed question for dog when breed is missing."""
         r = self.client.post(self.ENDPOINT, json={
             "phase": "ask_context",
             "species": "dog",
@@ -2547,6 +2548,38 @@ class TestConsultationEdgeCases:
             "onset": "acute",
             "age_years": 5,
             "pain_score": 2,
+            # breed intentionally omitted
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        breed_questions = [q for q in data["questions"] if q.get("type") == "breed"]
+        assert len(breed_questions) == 1
+        assert breed_questions[0].get("input_type") == "text"
+
+    def test_ask_context_breed_not_prompted_for_fish(self):
+        """ask_context does NOT ask for breed for fish (breed-irrelevant species)."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "fish",
+            "selected_symptoms": ["white_spots"],
+            "onset": "acute",
+            "age_years": 2,
+        })
+        assert r.status_code == 200
+        data = r.get_json()
+        breed_questions = [q for q in data["questions"] if q.get("type") == "breed"]
+        assert len(breed_questions) == 0
+
+    def test_ask_context_all_fields_provided_returns_empty_questions(self):
+        """ask_context with all context (including breed) returns empty questions list."""
+        r = self.client.post(self.ENDPOINT, json={
+            "phase": "ask_context",
+            "species": "dog",
+            "selected_symptoms": ["vomiting"],
+            "onset": "acute",
+            "age_years": 5,
+            "pain_score": 2,
+            "breed": "Labrador",
         })
         assert r.status_code == 200
         data = r.get_json()

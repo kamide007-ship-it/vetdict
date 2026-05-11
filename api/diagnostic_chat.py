@@ -2170,6 +2170,19 @@ def consultation():
                     ],
                 }
             )
+        # Breed prompt (text input) for species where breed influences diagnosis significantly
+        _BREED_RELEVANT_SPECIES = {"dog", "cat", "horse", "rabbit"}
+        if not breed and species in _BREED_RELEVANT_SPECIES:
+            questions.append(
+                {
+                    "type": "breed",
+                    "input_type": "text",
+                    "question_ja": "品種が分かれば教えてください（任意）",
+                    "question_en": "Breed if known (optional)",
+                    "placeholder_ja": "例: ラブラドール、ペルシャ、サラブレッド",
+                    "placeholder_en": "e.g. Labrador, Persian, Thoroughbred",
+                }
+            )
         return jsonify(
             {
                 "phase": "context_questions",

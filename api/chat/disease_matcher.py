@@ -371,7 +371,12 @@ def _match_species_symptoms_to_diseases(
                         age_factor = 1.07
                     # Mismatch penalty: if disease specifies age set and patient
                     # age is clearly outside, mild down-weight
-                    elif age_lc in {"puppy", "kitten", "young", "young_adult"} and age_set_lc == {"senior"} or age_lc in {"senior", "geriatric", "elderly"} and age_set_lc == {"young"}:
+                    elif (
+                        age_lc in {"puppy", "kitten", "young", "young_adult"}
+                        and age_set_lc == {"senior"}
+                        or age_lc in {"senior", "geriatric", "elderly"}
+                        and age_set_lc == {"young"}
+                    ):
                         age_factor = 0.85
 
         # --- Onset pattern factor (acute / subacute / chronic) ---
@@ -384,7 +389,12 @@ def _match_species_symptoms_to_diseases(
                 if onset_lc in onset_set_lc:
                     onset_factor = 1.08
                 # Mismatch penalty for clear contradiction
-                elif onset_lc == "acute" and onset_set_lc == {"chronic"} or onset_lc == "chronic" and onset_set_lc == {"acute"}:
+                elif (
+                    onset_lc == "acute"
+                    and onset_set_lc == {"chronic"}
+                    or onset_lc == "chronic"
+                    and onset_set_lc == {"acute"}
+                ):
                     onset_factor = 0.85
 
         # --- Breed factor (matches common_breeds substring) ---
