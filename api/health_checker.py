@@ -66,8 +66,17 @@ _KEEP_UPPER_ABBREVIATIONS = frozenset(
 _NAME_JA_READINGS: dict[str, str] = {}
 _readings_path = os.path.join(os.path.dirname(__file__), "name_ja_readings.json")
 if os.path.exists(_readings_path):
-    with open(_readings_path, encoding="utf-8") as _f:
-        _NAME_JA_READINGS = json.load(_f)
+    try:
+        with open(_readings_path, encoding="utf-8") as _f:
+            _NAME_JA_READINGS = json.load(_f)
+    except (OSError, ValueError) as _e:  # noqa: BLE001
+        # Reading lookup is optional — sorting will fall back to default ordering
+        import logging as _logging
+
+        _logging.getLogger(__name__).warning(
+            "Failed to load name_ja_readings.json (%s); JA sort will use default order",
+            _e,
+        )
 
 health_bp = Blueprint("health_bp", __name__, url_prefix="/api/health-check")
 

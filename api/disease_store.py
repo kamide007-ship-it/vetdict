@@ -22,9 +22,10 @@ import json
 import logging
 import threading
 from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
-from api.database import get_connection
+from api.database import DB_PATH, get_connection
 
 logger = logging.getLogger(__name__)
 
@@ -34,27 +35,132 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 SPECIES_META: dict[str, dict[str, str]] = {
-    "dog": {"name_ja": "犬", "name_en": "Dog", "desc_ja": "最も一般的なペットの疾患辞典", "desc_en": "Comprehensive disease dictionary for dogs"},
-    "cat": {"name_ja": "猫", "name_en": "Cat", "desc_ja": "猫特有の疾患と症状", "desc_en": "Feline-specific diseases and symptoms"},
-    "horse": {"name_ja": "馬", "name_en": "Horse", "desc_ja": "馬の疾患・運動器障害を網羅", "desc_en": "Equine diseases and musculoskeletal disorders"},
-    "rabbit": {"name_ja": "うさぎ", "name_en": "Rabbit", "desc_ja": "うさぎに多い消化器・歯科疾患", "desc_en": "Common rabbit digestive and dental diseases"},
-    "hamster": {"name_ja": "ハムスター", "name_en": "Hamster", "desc_ja": "ハムスターの腫瘍・皮膚疾患など", "desc_en": "Hamster tumors, skin conditions, and more"},
-    "guinea_pig": {"name_ja": "モルモット", "name_en": "Guinea Pig", "desc_ja": "ビタミンC欠乏症や呼吸器疾患", "desc_en": "Vitamin C deficiency and respiratory diseases"},
-    "chinchilla": {"name_ja": "チンチラ", "name_en": "Chinchilla", "desc_ja": "チンチラの歯科・消化器疾患", "desc_en": "Chinchilla dental and digestive conditions"},
-    "ferret": {"name_ja": "フェレット", "name_en": "Ferret", "desc_ja": "フェレットの内分泌・腫瘍疾患", "desc_en": "Ferret endocrine and neoplastic diseases"},
-    "hedgehog": {"name_ja": "ハリネズミ", "name_en": "Hedgehog", "desc_ja": "ハリネズミの皮膚・神経疾患", "desc_en": "Hedgehog skin and neurological conditions"},
-    "sugar_glider": {"name_ja": "フクロモモンガ", "name_en": "Sugar Glider", "desc_ja": "栄養性疾患やストレス関連症状", "desc_en": "Nutritional diseases and stress-related conditions"},
-    "degu": {"name_ja": "デグー", "name_en": "Degu", "desc_ja": "デグーの糖尿病・歯科疾患", "desc_en": "Degu diabetes and dental diseases"},
-    "bird": {"name_ja": "鳥", "name_en": "Bird", "desc_ja": "鳥類全般の感染症・栄養疾患", "desc_en": "Avian infections and nutritional diseases"},
-    "parakeet": {"name_ja": "インコ", "name_en": "Parakeet", "desc_ja": "インコの呼吸器・羽毛疾患", "desc_en": "Parakeet respiratory and feather disorders"},
-    "parrot": {"name_ja": "オウム", "name_en": "Parrot", "desc_ja": "オウム病やPBFDなど大型鳥の疾患", "desc_en": "Psittacosis, PBFD, and large parrot diseases"},
-    "reptile": {"name_ja": "爬虫類", "name_en": "Reptile", "desc_ja": "爬虫類全般の代謝性骨疾患など", "desc_en": "Metabolic bone disease and general reptile conditions"},
-    "tortoise": {"name_ja": "リクガメ", "name_en": "Tortoise", "desc_ja": "リクガメの甲羅・呼吸器疾患", "desc_en": "Tortoise shell and respiratory disorders"},
-    "snake": {"name_ja": "ヘビ", "name_en": "Snake", "desc_ja": "ヘビの呼吸器感染症・脱皮異常", "desc_en": "Snake respiratory infections and dysecdysis"},
-    "lizard": {"name_ja": "トカゲ", "name_en": "Lizard", "desc_ja": "トカゲの寄生虫症・代謝疾患", "desc_en": "Lizard parasitic and metabolic diseases"},
-    "amphibian": {"name_ja": "両生類", "name_en": "Amphibian", "desc_ja": "カエル・イモリのツボカビ症など", "desc_en": "Chytrid fungus and amphibian diseases"},
-    "fish": {"name_ja": "魚", "name_en": "Fish", "desc_ja": "白点病・尾ぐされ病など観賞魚の疾患", "desc_en": "Ich, fin rot, dropsy and aquarium fish diseases"},
-    "exotic_other": {"name_ja": "その他エキゾチック", "name_en": "Exotic Other", "desc_ja": "その他のエキゾチックアニマルの疾患", "desc_en": "Diseases of other exotic animals"},
+    "dog": {
+        "name_ja": "犬",
+        "name_en": "Dog",
+        "desc_ja": "最も一般的なペットの疾患辞典",
+        "desc_en": "Comprehensive disease dictionary for dogs",
+    },
+    "cat": {
+        "name_ja": "猫",
+        "name_en": "Cat",
+        "desc_ja": "猫特有の疾患と症状",
+        "desc_en": "Feline-specific diseases and symptoms",
+    },
+    "horse": {
+        "name_ja": "馬",
+        "name_en": "Horse",
+        "desc_ja": "馬の疾患・運動器障害を網羅",
+        "desc_en": "Equine diseases and musculoskeletal disorders",
+    },
+    "rabbit": {
+        "name_ja": "うさぎ",
+        "name_en": "Rabbit",
+        "desc_ja": "うさぎに多い消化器・歯科疾患",
+        "desc_en": "Common rabbit digestive and dental diseases",
+    },
+    "hamster": {
+        "name_ja": "ハムスター",
+        "name_en": "Hamster",
+        "desc_ja": "ハムスターの腫瘍・皮膚疾患など",
+        "desc_en": "Hamster tumors, skin conditions, and more",
+    },
+    "guinea_pig": {
+        "name_ja": "モルモット",
+        "name_en": "Guinea Pig",
+        "desc_ja": "ビタミンC欠乏症や呼吸器疾患",
+        "desc_en": "Vitamin C deficiency and respiratory diseases",
+    },
+    "chinchilla": {
+        "name_ja": "チンチラ",
+        "name_en": "Chinchilla",
+        "desc_ja": "チンチラの歯科・消化器疾患",
+        "desc_en": "Chinchilla dental and digestive conditions",
+    },
+    "ferret": {
+        "name_ja": "フェレット",
+        "name_en": "Ferret",
+        "desc_ja": "フェレットの内分泌・腫瘍疾患",
+        "desc_en": "Ferret endocrine and neoplastic diseases",
+    },
+    "hedgehog": {
+        "name_ja": "ハリネズミ",
+        "name_en": "Hedgehog",
+        "desc_ja": "ハリネズミの皮膚・神経疾患",
+        "desc_en": "Hedgehog skin and neurological conditions",
+    },
+    "sugar_glider": {
+        "name_ja": "フクロモモンガ",
+        "name_en": "Sugar Glider",
+        "desc_ja": "栄養性疾患やストレス関連症状",
+        "desc_en": "Nutritional diseases and stress-related conditions",
+    },
+    "degu": {
+        "name_ja": "デグー",
+        "name_en": "Degu",
+        "desc_ja": "デグーの糖尿病・歯科疾患",
+        "desc_en": "Degu diabetes and dental diseases",
+    },
+    "bird": {
+        "name_ja": "鳥",
+        "name_en": "Bird",
+        "desc_ja": "鳥類全般の感染症・栄養疾患",
+        "desc_en": "Avian infections and nutritional diseases",
+    },
+    "parakeet": {
+        "name_ja": "インコ",
+        "name_en": "Parakeet",
+        "desc_ja": "インコの呼吸器・羽毛疾患",
+        "desc_en": "Parakeet respiratory and feather disorders",
+    },
+    "parrot": {
+        "name_ja": "オウム",
+        "name_en": "Parrot",
+        "desc_ja": "オウム病やPBFDなど大型鳥の疾患",
+        "desc_en": "Psittacosis, PBFD, and large parrot diseases",
+    },
+    "reptile": {
+        "name_ja": "爬虫類",
+        "name_en": "Reptile",
+        "desc_ja": "爬虫類全般の代謝性骨疾患など",
+        "desc_en": "Metabolic bone disease and general reptile conditions",
+    },
+    "tortoise": {
+        "name_ja": "リクガメ",
+        "name_en": "Tortoise",
+        "desc_ja": "リクガメの甲羅・呼吸器疾患",
+        "desc_en": "Tortoise shell and respiratory disorders",
+    },
+    "snake": {
+        "name_ja": "ヘビ",
+        "name_en": "Snake",
+        "desc_ja": "ヘビの呼吸器感染症・脱皮異常",
+        "desc_en": "Snake respiratory infections and dysecdysis",
+    },
+    "lizard": {
+        "name_ja": "トカゲ",
+        "name_en": "Lizard",
+        "desc_ja": "トカゲの寄生虫症・代謝疾患",
+        "desc_en": "Lizard parasitic and metabolic diseases",
+    },
+    "amphibian": {
+        "name_ja": "両生類",
+        "name_en": "Amphibian",
+        "desc_ja": "カエル・イモリのツボカビ症など",
+        "desc_en": "Chytrid fungus and amphibian diseases",
+    },
+    "fish": {
+        "name_ja": "魚",
+        "name_en": "Fish",
+        "desc_ja": "白点病・尾ぐされ病など観賞魚の疾患",
+        "desc_en": "Ich, fin rot, dropsy and aquarium fish diseases",
+    },
+    "exotic_other": {
+        "name_ja": "その他エキゾチック",
+        "name_en": "Exotic Other",
+        "desc_ja": "その他のエキゾチックアニマルの疾患",
+        "desc_en": "Diseases of other exotic animals",
+    },
 }
 
 
@@ -67,7 +173,7 @@ _db_init_lock = threading.Lock()
 
 
 def _ensure_db() -> None:
-    """Create schema and run migration if the diseases table is empty."""
+    """Create schema and run migration if the diseases table is empty or drugs are stale."""
     global _db_ready
     if _db_ready:
         return
@@ -75,6 +181,7 @@ def _ensure_db() -> None:
         if _db_ready:
             return
         from api.database import init_db
+
         init_db()
         with get_connection() as conn:
             try:
@@ -83,12 +190,30 @@ def _ensure_db() -> None:
                 logger.debug("Could not count diseases in SQLite", exc_info=True)
                 count = 0
         if count == 0:
-            logger.info("diseases table is empty — running auto-migration")
+            logger.info(
+                "diseases table is empty — skipping full migration (OOM risk on 512MB); using Python module fallback"
+            )
+        else:
             try:
-                from scripts.migrate_to_sqlite import main as run_migration
-                run_migration()
+                with get_connection() as conn:
+                    db_drug_count = conn.execute("SELECT COUNT(*) FROM drugs").fetchone()[0]
+                from api.drug_dictionary import DRUGS
+
+                if len(DRUGS) > db_drug_count:
+                    logger.info(
+                        "Drug count stale (SQLite=%d, Python=%d) — migrating drugs only",
+                        db_drug_count,
+                        len(DRUGS),
+                    )
+                    from api.database import upsert_drug
+
+                    with get_connection() as conn:
+                        for drug in DRUGS:
+                            upsert_drug(conn, drug)
+                        conn.commit()
+                    logger.info("Drug-only migration complete (%d drugs)", len(DRUGS))
             except Exception:
-                logger.exception("Auto-migration failed")
+                logger.debug("Could not check/fix drug staleness", exc_info=True)
         _db_ready = True
 
 
@@ -115,58 +240,125 @@ def invalidate_cache() -> None:
 # Species statistics
 # ---------------------------------------------------------------------------
 
+
 @lru_cache(maxsize=1)
 def _fallback_disease_counts() -> dict[str, int]:
-    """Count diseases per species from Python modules and JSON as fallback."""
-    counts: dict[str, int] = {}
+    """Count diseases per species without loading all modules into memory.
 
-    # Map species id -> module info
-    _MODULE_MAP = {
-        "dog": ("api.species.dog_diseases", "DISEASES"),
-        "horse": ("api.species.equine_diseases", "DISEASE_DATABASE"),
-        "cat": ("api.species.cat_diseases", "DISEASES"),
-        "rabbit": ("api.species.rabbit_diseases", "DISEASES"),
-        "hamster": ("api.species.hamster_diseases", "DISEASES"),
-        "guinea_pig": ("api.species.guinea_pig_diseases", "DISEASES"),
-        "chinchilla": ("api.species.chinchilla_diseases", "DISEASES"),
-        "ferret": ("api.species.ferret_diseases", "DISEASES"),
-        "hedgehog": ("api.species.hedgehog_diseases", "DISEASES"),
-        "sugar_glider": ("api.species.sugar_glider_diseases", "DISEASES"),
-        "degu": ("api.species.degu_diseases", "DISEASES"),
-        "bird": ("api.species.bird_diseases", "DISEASES"),
-        "parakeet": ("api.species.parakeet_diseases", "DISEASES"),
-        "parrot": ("api.species.parrot_diseases", "DISEASES"),
-        "reptile": ("api.species.reptile_diseases", "DISEASES"),
-        "tortoise": ("api.species.tortoise_diseases", "DISEASES"),
-        "snake": ("api.species.snake_diseases", "DISEASES"),
-        "lizard": ("api.species.lizard_diseases", "DISEASES"),
-        "amphibian": ("api.species.amphibian_diseases", "DISEASES"),
-        "fish": ("api.species.fish_diseases", "DISEASES"),
-        "exotic_other": ("api.species.exotic_other_diseases", "DISEASES"),
-    }
-
-    import importlib
-    for sp_id, (mod_path, attr) in _MODULE_MAP.items():
+    Primary: read species_counts.json (written by migrate_to_sqlite.py at
+    build time, <1 KB).  Fallback: load species modules one at a time via
+    subprocess to avoid 550 MB peak RSS that would OOM on 512 MB hosts.
+    """
+    # Fast path: read pre-computed counts from build artifact
+    counts_path = Path(DB_PATH).parent / "species_counts.json"
+    if counts_path.exists():
         try:
-            mod = importlib.import_module(mod_path)
-            data = getattr(mod, attr, [])
-            counts[sp_id] = len(data) if data else 0
+            import json as _json
+
+            data = _json.loads(counts_path.read_text())
+            counts = {k: int(v) for k, v in data.get("disease_counts", {}).items()}
+            if sum(counts.values()) > 0:
+                logger.info("Loaded disease counts from %s (%d species)", counts_path, len(counts))
+                return counts
         except Exception:
-            logger.debug("Failed to load species module %s", mod_path)
+            logger.debug("Could not read species_counts.json", exc_info=True)
 
-    # JSON fallback disabled — SQLite is now the authoritative source.
-    # The 101MB JSON was causing OOM on Render's 512MB free tier.
-    # If SQLite has gaps, run: python scripts/migrate_to_sqlite.py
+    # Slow path: count via subprocess to avoid OOM (each species ~50 MB peak)
+    import json as _json
+    import subprocess
+    import sys
 
-    return counts
+    script = (
+        "import json,sys,importlib;sys.path.insert(0,'.');"
+        "M={"
+        "'dog':('api.species.dog_diseases','DISEASES'),"
+        "'horse':('api.species.equine_diseases','DISEASE_DATABASE'),"
+        "'cat':('api.species.cat_diseases','DISEASES'),"
+        "'rabbit':('api.species.rabbit_diseases','DISEASES'),"
+        "'hamster':('api.species.hamster_diseases','DISEASES'),"
+        "'guinea_pig':('api.species.guinea_pig_diseases','DISEASES'),"
+        "'chinchilla':('api.species.chinchilla_diseases','DISEASES'),"
+        "'ferret':('api.species.ferret_diseases','DISEASES'),"
+        "'hedgehog':('api.species.hedgehog_diseases','DISEASES'),"
+        "'sugar_glider':('api.species.sugar_glider_diseases','DISEASES'),"
+        "'degu':('api.species.degu_diseases','DISEASES'),"
+        "'bird':('api.species.bird_diseases','DISEASES'),"
+        "'parakeet':('api.species.parakeet_diseases','DISEASES'),"
+        "'parrot':('api.species.parrot_diseases','DISEASES'),"
+        "'reptile':('api.species.reptile_diseases','DISEASES'),"
+        "'tortoise':('api.species.tortoise_diseases','DISEASES'),"
+        "'snake':('api.species.snake_diseases','DISEASES'),"
+        "'lizard':('api.species.lizard_diseases','DISEASES'),"
+        "'amphibian':('api.species.amphibian_diseases','DISEASES'),"
+        "'fish':('api.species.fish_diseases','DISEASES'),"
+        "'exotic_other':('api.species.exotic_other_diseases','DISEASES'),"
+        "};"
+        "c={};"
+        "[(c.__setitem__(s,len(getattr(importlib.import_module(m),a,[]))))for s,(m,a) in M.items()];"
+        "print(json.dumps(c))"
+    )
+    try:
+        result = subprocess.run(
+            [sys.executable, "-c", script],
+            capture_output=True,
+            text=True,
+            timeout=120,
+            cwd=str(Path(__file__).resolve().parent.parent),
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            counts = _json.loads(result.stdout.strip())
+            logger.info("Counted diseases via subprocess (%d species)", len(counts))
+            return counts
+    except Exception:
+        logger.warning("Subprocess disease count failed", exc_info=True)
+
+    # Last resort: hardcoded counts (updated 2026-05-07 from Python modules)
+    logger.warning("Using hardcoded disease counts as last-resort fallback")
+    return {
+        "dog": 611,
+        "cat": 546,
+        "horse": 621,
+        "rabbit": 451,
+        "hamster": 321,
+        "guinea_pig": 346,
+        "chinchilla": 278,
+        "ferret": 277,
+        "hedgehog": 244,
+        "sugar_glider": 221,
+        "degu": 200,
+        "bird": 551,
+        "parakeet": 458,
+        "parrot": 283,
+        "reptile": 286,
+        "tortoise": 286,
+        "snake": 248,
+        "lizard": 250,
+        "amphibian": 257,
+        "fish": 36,
+        "exotic_other": 289,
+    }
 
 
 def _fallback_drug_counts() -> tuple[dict[str, int], int]:
-    """Count drugs per species from Python module as fallback."""
+    """Count drugs per species — prefer species_counts.json, then Python module."""
+    counts_path = Path(DB_PATH).parent / "species_counts.json"
+    if counts_path.exists():
+        try:
+            import json as _json
+
+            data = _json.loads(counts_path.read_text())
+            per_sp = {k: int(v) for k, v in data.get("drug_counts", {}).items()}
+            total = int(data.get("total_drugs", 0))
+            if total > 0:
+                return per_sp, total
+        except Exception:
+            logger.debug("Could not read drug counts from species_counts.json", exc_info=True)
+
     per_species: dict[str, int] = {}
     total = 0
     try:
         from api.drug_dictionary import DRUGS
+
         total = len(DRUGS)
         for d in DRUGS:
             for sp in d.get("species_info") or {}:
@@ -215,9 +407,7 @@ def get_species_stats() -> dict[str, Any]:
         # Check which species have zero rows in the DB — those need fallback.
         try:
             with get_connection() as conn:
-                _db_species = {row[0] for row in conn.execute(
-                    "SELECT DISTINCT species FROM diseases"
-                ).fetchall()}
+                _db_species = {row[0] for row in conn.execute("SELECT DISTINCT species FROM diseases").fetchall()}
         except Exception:
             _db_species = set(disease_counts.keys())
 
@@ -234,9 +424,9 @@ def get_species_stats() -> dict[str, Any]:
         # Supplement species with no drug rows in SQLite
         try:
             with get_connection() as conn:
-                _db_drug_species = {row[0] for row in conn.execute(
-                    "SELECT DISTINCT species FROM drug_species_info"
-                ).fetchall()}
+                _db_drug_species = {
+                    row[0] for row in conn.execute("SELECT DISTINCT species FROM drug_species_info").fetchall()
+                }
         except Exception:
             _db_drug_species = set(drug_counts.keys())
 
@@ -251,15 +441,17 @@ def get_species_stats() -> dict[str, Any]:
 
     stats = []
     for sp_id, meta in SPECIES_META.items():
-        stats.append({
-            "id": sp_id,
-            "name": meta["name_ja"],
-            "nameEn": meta["name_en"],
-            "description": meta.get("desc_en", ""),
-            "description_ja": meta.get("desc_ja", ""),
-            "diseases": disease_counts.get(sp_id, 0),
-            "drugs": drug_counts.get(sp_id, 0),
-        })
+        stats.append(
+            {
+                "id": sp_id,
+                "name": meta["name_ja"],
+                "nameEn": meta["name_en"],
+                "description": meta.get("desc_en", ""),
+                "description_ja": meta.get("desc_ja", ""),
+                "diseases": disease_counts.get(sp_id, 0),
+                "drugs": drug_counts.get(sp_id, 0),
+            }
+        )
 
     return {
         "species": stats,
@@ -277,18 +469,19 @@ def get_urgency_stats() -> dict[str, Any]:
     """
     with get_connection() as conn:
         urgency_rows = conn.execute(
-            "SELECT urgency, COUNT(*) AS cnt FROM diseases "
-            "WHERE urgency IS NOT NULL GROUP BY urgency ORDER BY urgency"
+            "SELECT urgency, COUNT(*) AS cnt FROM diseases WHERE urgency IS NOT NULL GROUP BY urgency ORDER BY urgency"
         ).fetchall()
 
     urgency_stats = []
     total_diseases = 0
     for row in urgency_rows:
         count = row["cnt"]
-        urgency_stats.append({
-            "urgency": row["urgency"],
-            "count": count,
-        })
+        urgency_stats.append(
+            {
+                "urgency": row["urgency"],
+                "count": count,
+            }
+        )
         total_diseases += count
 
     return {
@@ -315,10 +508,12 @@ def get_urgency_by_species(species: str) -> dict[str, Any]:
     total_diseases = 0
     for row in urgency_rows:
         count = row["cnt"]
-        urgency_stats.append({
-            "urgency": row["urgency"],
-            "count": count,
-        })
+        urgency_stats.append(
+            {
+                "urgency": row["urgency"],
+                "count": count,
+            }
+        )
         total_diseases += count
 
     return {
@@ -332,10 +527,12 @@ def get_urgency_by_species(species: str) -> dict[str, Any]:
 # Symptoms
 # ---------------------------------------------------------------------------
 
+
 def _load_horse_category_map() -> dict[str, str]:
     """Build symptom_id → category mapping from equine HEALTH_CHECK_ITEMS."""
     try:
         from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+
         mapping: dict[str, str] = {}
         for category, items in HEALTH_CHECK_ITEMS.items():
             for symptom_id, _name_ja, _name_en in items:
@@ -369,6 +566,7 @@ def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[di
     else:
         try:
             import importlib as _il
+
             _smod = _il.import_module(f"api.species.{species}_diseases")
             raw_cats = getattr(_smod, "SYMPTOM_CATEGORIES", {})
             # Detect format: {symptom_id: category} vs {category: {symptoms: [...]}}
@@ -422,6 +620,7 @@ def get_symptoms_for_species(species: str) -> list[dict]:
 
     # Fallback: load from Python species module if SQLite has no data
     import importlib as _importlib
+
     try:
         mod = _importlib.import_module(f"api.species.{species}_diseases")
         sym_names = getattr(mod, "SYMPTOM_NAMES", {})
@@ -438,9 +637,15 @@ def get_symptoms_for_species(species: str) -> list[dict]:
                         sym_cats[s_id] = cat_id
         if sym_names:
             return sorted(
-                [{"id": sid, "name_ja": v.get("ja", sid), "name_en": v.get("en", sid),
-                  "category": sym_cats.get(sid, "other")}
-                 for sid, v in sym_names.items()],
+                [
+                    {
+                        "id": sid,
+                        "name_ja": v.get("ja", sid),
+                        "name_en": v.get("en", sid),
+                        "category": sym_cats.get(sid, "other"),
+                    }
+                    for sid, v in sym_names.items()
+                ],
                 key=lambda s: (s["category"], s["id"]),
             )
     except (ImportError, Exception):
@@ -451,6 +656,7 @@ def get_symptoms_for_species(species: str) -> list[dict]:
 # ---------------------------------------------------------------------------
 # Disease listing & detail
 # ---------------------------------------------------------------------------
+
 
 def _parse_json_field(value: str | None) -> list | None:
     """Parse a JSON-encoded field, returning None on failure."""
@@ -528,7 +734,8 @@ def list_diseases(
 
         where = " WHERE " + " AND ".join(conditions) if conditions else ""
 
-        total = conn.execute(_COUNT_DISEASES_BASE + where, params).fetchone()[0]
+        _row = conn.execute(_COUNT_DISEASES_BASE + where, params).fetchone()
+        total = _row[0] if _row else 0
 
         rows = conn.execute(
             _LIST_DISEASES_BASE + where + " ORDER BY species, name LIMIT ? OFFSET ?",
@@ -562,7 +769,7 @@ def _get_symptom_categories_for_species(species: str) -> dict[str, str]:
         return _symptom_category_cache[species]
 
     symptoms = get_symptoms_for_species(species)
-    symptom_cats = {s['id']: s.get('category', 'other') for s in symptoms}
+    symptom_cats = {s["id"]: s.get("category", "other") for s in symptoms}
     _symptom_category_cache[species] = symptom_cats
     return symptom_cats
 
@@ -572,25 +779,25 @@ def _infer_disease_categories(disease: dict, species: str) -> set[str]:
 
     Uses cached symptom category mappings for performance.
     """
-    symptoms_json = disease.get('symptoms')
+    symptoms_json = disease.get("symptoms")
     if not symptoms_json:
-        return {'other'}
+        return {"other"}
 
     try:
         symptom_ids = json.loads(symptoms_json)
     except (json.JSONDecodeError, TypeError):
-        return {'other'}
+        return {"other"}
 
     # Get cached symptom category mapping
     symptom_cats = _get_symptom_categories_for_species(species)
 
     categories = set()
     for sym_id in symptom_ids:
-        cat = symptom_cats.get(sym_id, 'other')
+        cat = symptom_cats.get(sym_id, "other")
         if cat:
             categories.add(cat)
 
-    return categories if categories else {'other'}
+    return categories if categories else {"other"}
 
 
 def search_diseases(query: str, species: str | None = None, category: str | None = None, limit: int = 50) -> list[dict]:
@@ -684,9 +891,7 @@ def search_diseases(query: str, species: str | None = None, category: str | None
     return [r[1] for r in results]
 
 
-def get_diseases_by_symptom(
-    symptom_id: str, species: str | None = None, limit: int = 50
-) -> list[dict]:
+def get_diseases_by_symptom(symptom_id: str, species: str | None = None, limit: int = 50) -> list[dict]:
     """Return diseases that have a given symptom.
 
     Searches for diseases with this symptom in their symptoms JSON field.

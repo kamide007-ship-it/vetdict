@@ -9,24 +9,67 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "H2 receptor antagonist with prokinetic activity; reduces gastric acid secretion and enhances GI motility through acetylcholinesterase inhibition",
         "mechanism_ja": "消化管運動促進作用を有するH2受容体拮抗薬；胃酸分泌を抑制しアセチルコリンエステラーゼ阻害を介して消化管運動を促進",
         "species_info": {
-            "dog": {"dose": "1-2 mg/kg PO/IV q8-12h", "notes": "Gastric ulcer, reflux esophagitis; prokinetic effect useful in megaesophagus", "notes_ja": "胃潰瘍、逆流性食道炎；巨大食道症でプロキネティック効果有用"},
-            "cat": {"dose": "2.5 mg/kg IV q12h; 3.5 mg/kg PO q12h", "notes": "Uremic gastropathy; prokinetic effect beneficial", "notes_ja": "尿毒症性胃障害；プロキネティック効果が有益"},
-            "horse": {"dose": "6.6 mg/kg PO q8h; 1.5 mg/kg IV q6-8h", "notes": "EGUS (less effective than omeprazole); prokinetic for ileus", "notes_ja": "EGUS（オメプラゾールより効果弱い）；イレウスのプロキネティック"},
-            "rabbit": {"dose": "2-5 mg/kg PO/SC q12h", "notes": "GI stasis prokinetic; preferred over metoclopramide for rabbits", "notes_ja": "消化管うっ滞のプロキネティック；ウサギではメトクロプラミドより推奨"},
-            "ferret": {"dose": "3.5 mg/kg PO q8-12h; 1 mg/kg IV q8h", "notes": "Helicobacter gastritis (triple therapy component), GI foreign body post-op", "notes_ja": "ヘリコバクター胃炎（3剤併用の一成分）、消化管異物術後"},
+            "dog": {
+                "dose": "1-2 mg/kg PO/IV q8-12h",
+                "notes": "Gastric ulcer, reflux esophagitis; prokinetic effect useful in megaesophagus",
+                "notes_ja": "胃潰瘍、逆流性食道炎；巨大食道症でプロキネティック効果有用",
+            },
+            "cat": {
+                "dose": "2.5 mg/kg IV q12h; 3.5 mg/kg PO q12h",
+                "notes": "Uremic gastropathy; prokinetic effect beneficial",
+                "notes_ja": "尿毒症性胃障害；プロキネティック効果が有益",
+            },
+            "horse": {
+                "dose": "6.6 mg/kg PO q8h; 1.5 mg/kg IV q6-8h",
+                "notes": "EGUS (less effective than omeprazole); prokinetic for ileus",
+                "notes_ja": "EGUS（オメプラゾールより効果弱い）；イレウスのプロキネティック",
+            },
+            "rabbit": {
+                "dose": "2-5 mg/kg PO/SC q12h",
+                "notes": "GI stasis prokinetic; preferred over metoclopramide for rabbits",
+                "notes_ja": "消化管うっ滞のプロキネティック；ウサギではメトクロプラミドより推奨",
+            },
+            "ferret": {
+                "dose": "3.5 mg/kg PO q8-12h; 1 mg/kg IV q8h",
+                "notes": "Helicobacter gastritis (triple therapy component), GI foreign body post-op",
+                "notes_ja": "ヘリコバクター胃炎（3剤併用の一成分）、消化管異物術後",
+            },
             "guinea_pig": {"dose": "2-5 mg/kg PO q12h", "notes": "GI stasis adjunct", "notes_ja": "消化管うっ滞の補助"},
-            "bird": {"dose": "2 mg/kg PO/IM q12h", "notes": "Proventricular dilatation disease supportive", "notes_ja": "前胃拡張症の支持療法"},
-            "reptile": {"dose": "2 mg/kg PO q24-72h", "notes": "Gastric protection during NSAID use; metabolism very slow", "notes_ja": "NSAID使用時の胃保護；代謝非常に遅い"}
+            "bird": {
+                "dose": "2 mg/kg PO/IM q12h",
+                "notes": "Proventricular dilatation disease supportive",
+                "notes_ja": "前胃拡張症の支持療法",
+            },
+            "reptile": {
+                "dose": "2 mg/kg PO q24-72h",
+                "notes": "Gastric protection during NSAID use; metabolism very slow",
+                "notes_ja": "NSAID使用時の胃保護；代謝非常に遅い",
+            },
         },
         "side_effects": ["Vomiting", "Diarrhea", "Bradycardia (IV rapid)", "Thrombocytopenia (rare)"],
         "side_effects_ja": ["嘔吐", "下痢", "徐脈（急速IV）", "血小板減少症（稀）"],
         "contraindications": "Known hypersensitivity; caution in hepatic/renal impairment",
         "contraindications_ja": "過敏症既知；肝/腎障害では注意",
         "drug_interactions": [
-            {"drug": "Ketoconazole/Itraconazole", "severity": "moderate", "description": "Reduced antifungal absorption due to increased gastric pH", "description_ja": "胃内pH上昇による抗真菌薬吸収低下"},
-            {"drug": "Sucralfate", "severity": "moderate", "description": "Sucralfate requires acidic environment; separate by 2h", "description_ja": "スクラルファートは酸性環境が必要；2時間間隔"},
-            {"drug": "Metoclopramide", "severity": "mild", "description": "Theoretical prokinetic synergy", "description_ja": "理論的プロキネティック相乗効果"}
-        ]
+            {
+                "drug": "Ketoconazole/Itraconazole",
+                "severity": "moderate",
+                "description": "Reduced antifungal absorption due to increased gastric pH",
+                "description_ja": "胃内pH上昇による抗真菌薬吸収低下",
+            },
+            {
+                "drug": "Sucralfate",
+                "severity": "moderate",
+                "description": "Sucralfate requires acidic environment; separate by 2h",
+                "description_ja": "スクラルファートは酸性環境が必要；2時間間隔",
+            },
+            {
+                "drug": "Metoclopramide",
+                "severity": "mild",
+                "description": "Theoretical prokinetic synergy",
+                "description_ja": "理論的プロキネティック相乗効果",
+            },
+        ],
     },
     {
         "id": "pantoprazole",
@@ -36,19 +79,51 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Proton pump inhibitor (PPI); irreversibly inhibits H+/K+-ATPase in parietal cells, suppressing gastric acid secretion. Parenteral formulation available for critically ill patients",
         "mechanism_ja": "プロトンポンプ阻害薬（PPI）；壁細胞のH+/K+-ATPaseを不可逆的に阻害し胃酸分泌を抑制。重症患者向け注射製剤あり",
         "species_info": {
-            "dog": {"dose": "1 mg/kg IV q12-24h; PO: 1 mg/kg q24h", "notes": "ICU gastroprotection, stress ulceration, GI bleed; IV option when PO not feasible", "notes_ja": "ICU胃保護、ストレス潰瘍、消化管出血；経口不可時のIV選択肢"},
-            "cat": {"dose": "1 mg/kg IV q24h", "notes": "Severe esophagitis, gastric ulceration in critical patients", "notes_ja": "重度食道炎、重症患者の胃潰瘍"},
-            "horse": {"dose": "1.5 mg/kg IV q24h", "notes": "Severe EGUS when oral omeprazole not tolerated; expensive", "notes_ja": "経口オメプラゾール不耐容の重度EGUS；高価"}
+            "dog": {
+                "dose": "1 mg/kg IV q12-24h; PO: 1 mg/kg q24h",
+                "notes": "ICU gastroprotection, stress ulceration, GI bleed; IV option when PO not feasible",
+                "notes_ja": "ICU胃保護、ストレス潰瘍、消化管出血；経口不可時のIV選択肢",
+            },
+            "cat": {
+                "dose": "1 mg/kg IV q24h",
+                "notes": "Severe esophagitis, gastric ulceration in critical patients",
+                "notes_ja": "重度食道炎、重症患者の胃潰瘍",
+            },
+            "horse": {
+                "dose": "1.5 mg/kg IV q24h",
+                "notes": "Severe EGUS when oral omeprazole not tolerated; expensive",
+                "notes_ja": "経口オメプラゾール不耐容の重度EGUS；高価",
+            },
         },
-        "side_effects": ["Diarrhea", "Hypomagnesemia (chronic)", "B12 deficiency (long-term)", "Rebound acid hypersecretion"],
+        "side_effects": [
+            "Diarrhea",
+            "Hypomagnesemia (chronic)",
+            "B12 deficiency (long-term)",
+            "Rebound acid hypersecretion",
+        ],
         "side_effects_ja": ["下痢", "低マグネシウム血症（慢性）", "B12欠乏（長期）", "リバウンド酸過分泌"],
         "contraindications": "Known hypersensitivity to PPIs or substituted benzimidazoles",
         "contraindications_ja": "PPIまたは置換ベンゾイミダゾールに対する過敏症既知",
         "drug_interactions": [
-            {"drug": "Clopidogrel", "severity": "moderate", "description": "Reduced clopidogrel activation (less than omeprazole); clinical significance debated", "description_ja": "クロピドグレル活性化減弱（オメプラゾールより少ない）；臨床的意義は議論中"},
-            {"drug": "Ketoconazole", "severity": "moderate", "description": "Reduced absorption due to elevated gastric pH", "description_ja": "胃内pH上昇による吸収低下"},
-            {"drug": "Methotrexate", "severity": "moderate", "description": "Delayed methotrexate elimination", "description_ja": "メトトレキサート排泄遅延"}
-        ]
+            {
+                "drug": "Clopidogrel",
+                "severity": "moderate",
+                "description": "Reduced clopidogrel activation (less than omeprazole); clinical significance debated",
+                "description_ja": "クロピドグレル活性化減弱（オメプラゾールより少ない）；臨床的意義は議論中",
+            },
+            {
+                "drug": "Ketoconazole",
+                "severity": "moderate",
+                "description": "Reduced absorption due to elevated gastric pH",
+                "description_ja": "胃内pH上昇による吸収低下",
+            },
+            {
+                "drug": "Methotrexate",
+                "severity": "moderate",
+                "description": "Delayed methotrexate elimination",
+                "description_ja": "メトトレキサート排泄遅延",
+            },
+        ],
     },
     {
         "id": "esomeprazole",
@@ -58,18 +133,40 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "S-isomer of omeprazole; PPI with higher bioavailability and more consistent acid suppression than racemic omeprazole. Irreversibly inhibits H+/K+-ATPase",
         "mechanism_ja": "オメプラゾールのS異性体；ラセミ体より高い生物学的利用能と安定した酸抑制を持つPPI。H+/K+-ATPaseを不可逆的に阻害",
         "species_info": {
-            "dog": {"dose": "1 mg/kg PO q24h", "notes": "GI ulceration prophylaxis with NSAID use; may be more effective than omeprazole in some dogs", "notes_ja": "NSAID使用時のGI潰瘍予防；一部の犬でオメプラゾールより効果的な可能性"},
-            "cat": {"dose": "1 mg/kg PO q24h", "notes": "Alternative PPI when omeprazole unavailable", "notes_ja": "オメプラゾール入手不可時の代替PPI"},
-            "horse": {"dose": "2-4 mg/kg PO q24h", "notes": "EGUS; enteric-coated granules formulation preferred for horses", "notes_ja": "EGUS；馬では腸溶性顆粒製剤が推奨"}
+            "dog": {
+                "dose": "1 mg/kg PO q24h",
+                "notes": "GI ulceration prophylaxis with NSAID use; may be more effective than omeprazole in some dogs",
+                "notes_ja": "NSAID使用時のGI潰瘍予防；一部の犬でオメプラゾールより効果的な可能性",
+            },
+            "cat": {
+                "dose": "1 mg/kg PO q24h",
+                "notes": "Alternative PPI when omeprazole unavailable",
+                "notes_ja": "オメプラゾール入手不可時の代替PPI",
+            },
+            "horse": {
+                "dose": "2-4 mg/kg PO q24h",
+                "notes": "EGUS; enteric-coated granules formulation preferred for horses",
+                "notes_ja": "EGUS；馬では腸溶性顆粒製剤が推奨",
+            },
         },
         "side_effects": ["Diarrhea", "Flatulence", "Nausea", "B12/Mg deficiency (long-term)"],
         "side_effects_ja": ["下痢", "鼓腸", "悪心", "B12/Mg欠乏（長期）"],
         "contraindications": "Known PPI hypersensitivity",
         "contraindications_ja": "PPI過敏症既知",
         "drug_interactions": [
-            {"drug": "Clopidogrel", "severity": "major", "description": "CYP2C19 inhibition reduces clopidogrel activation more than pantoprazole", "description_ja": "CYP2C19阻害がパントプラゾールよりクロピドグレル活性化を減弱"},
-            {"drug": "Ketoconazole/Iron", "severity": "moderate", "description": "Reduced absorption in alkaline gastric environment", "description_ja": "アルカリ性胃内環境での吸収低下"}
-        ]
+            {
+                "drug": "Clopidogrel",
+                "severity": "major",
+                "description": "CYP2C19 inhibition reduces clopidogrel activation more than pantoprazole",
+                "description_ja": "CYP2C19阻害がパントプラゾールよりクロピドグレル活性化を減弱",
+            },
+            {
+                "drug": "Ketoconazole/Iron",
+                "severity": "moderate",
+                "description": "Reduced absorption in alkaline gastric environment",
+                "description_ja": "アルカリ性胃内環境での吸収低下",
+            },
+        ],
     },
     {
         "id": "sulfasalazine_enteric",
@@ -79,18 +176,48 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Prodrug cleaved by colonic bacteria to 5-aminosalicylic acid (5-ASA, anti-inflammatory) and sulfapyridine. 5-ASA acts locally on colonic mucosa to reduce inflammation",
         "mechanism_ja": "大腸細菌により5-アミノサリチル酸（5-ASA、抗炎症）とスルファピリジンに分解されるプロドラッグ。5-ASAが大腸粘膜に局所作用し炎症を軽減",
         "species_info": {
-            "dog": {"dose": "20-50 mg/kg PO q8-12h (max 3g/day)", "notes": "IBD (colitis), histiocytic ulcerative colitis of Boxers/French Bulldogs; enteric-coated preferred", "notes_ja": "IBD（大腸炎）、ボクサー/フレブルの組織球性潰瘍性大腸炎；腸溶性錠推奨"},
-            "cat": {"dose": "10-20 mg/kg PO q12h", "notes": "CAUTION: cats sensitive to salicylates; keratoconjunctivitis sicca (KCS) risk", "notes_ja": "注意：猫はサリチル酸に敏感；乾性角結膜炎（KCS）リスク"}
+            "dog": {
+                "dose": "20-50 mg/kg PO q8-12h (max 3g/day)",
+                "notes": "IBD (colitis), histiocytic ulcerative colitis of Boxers/French Bulldogs; enteric-coated preferred",
+                "notes_ja": "IBD（大腸炎）、ボクサー/フレブルの組織球性潰瘍性大腸炎；腸溶性錠推奨",
+            },
+            "cat": {
+                "dose": "10-20 mg/kg PO q12h",
+                "notes": "CAUTION: cats sensitive to salicylates; keratoconjunctivitis sicca (KCS) risk",
+                "notes_ja": "注意：猫はサリチル酸に敏感；乾性角結膜炎（KCS）リスク",
+            },
         },
-        "side_effects": ["KCS (dogs)", "Vomiting", "Diarrhea", "Hemolytic anemia (cats)", "Hepatotoxicity", "Orange/yellow tears/urine"],
+        "side_effects": [
+            "KCS (dogs)",
+            "Vomiting",
+            "Diarrhea",
+            "Hemolytic anemia (cats)",
+            "Hepatotoxicity",
+            "Orange/yellow tears/urine",
+        ],
         "side_effects_ja": ["KCS（犬）", "嘔吐", "下痢", "溶血性貧血（猫）", "肝毒性", "涙液/尿のオレンジ/黄色変色"],
         "contraindications": "Sulfonamide allergy, cats (relative), hepatic disease, KCS history",
         "contraindications_ja": "サルファ剤アレルギー、猫（相対的）、肝疾患、KCS既往",
         "drug_interactions": [
-            {"drug": "Digoxin", "severity": "moderate", "description": "Reduced digoxin absorption", "description_ja": "ジゴキシン吸収低下"},
-            {"drug": "Folic acid", "severity": "mild", "description": "Sulfapyridine component inhibits folate absorption; supplement if chronic use", "description_ja": "スルファピリジンが葉酸吸収阻害；慢性使用時は補充"},
-            {"drug": "Methotrexate", "severity": "major", "description": "Increased methotrexate toxicity through reduced renal elimination", "description_ja": "腎排泄低下によるメトトレキサート毒性増加"}
-        ]
+            {
+                "drug": "Digoxin",
+                "severity": "moderate",
+                "description": "Reduced digoxin absorption",
+                "description_ja": "ジゴキシン吸収低下",
+            },
+            {
+                "drug": "Folic acid",
+                "severity": "mild",
+                "description": "Sulfapyridine component inhibits folate absorption; supplement if chronic use",
+                "description_ja": "スルファピリジンが葉酸吸収阻害；慢性使用時は補充",
+            },
+            {
+                "drug": "Methotrexate",
+                "severity": "major",
+                "description": "Increased methotrexate toxicity through reduced renal elimination",
+                "description_ja": "腎排泄低下によるメトトレキサート毒性増加",
+            },
+        ],
     },
     {
         "id": "metoclopramide_injectable",
@@ -100,20 +227,51 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "D2 dopamine antagonist with 5-HT4 agonist and 5-HT3 antagonist activity at CRI doses; prokinetic (enhances gastric emptying, LES tone) and antiemetic. CRI provides consistent plasma levels",
         "mechanism_ja": "CRI用量ではD2ドパミン拮抗＋5-HT4作動＋5-HT3拮抗作用を発揮；プロキネティック（胃排出促進・LES緊張）と制吐作用。CRIで安定した血漿濃度",
         "species_info": {
-            "dog": {"dose": "CRI: 1-2 mg/kg/day (0.04-0.08 mg/kg/hr); bolus: 0.2-0.5 mg/kg IV/SC q6-8h", "notes": "Post-op ileus, parvoviral enteritis nausea, megaesophagus; CRI superior to bolus for prokinesis", "notes_ja": "術後イレウス、パルボ腸炎の悪心、巨大食道症；プロキネシスにはボーラスよりCRI優位"},
-            "cat": {"dose": "CRI: 1-2 mg/kg/day; bolus: 0.2-0.4 mg/kg SC/IV q8h", "notes": "Caution: extrapyramidal signs more common in cats; reduce dose", "notes_ja": "注意：猫では錐体外路症状がより多い；減量"},
-            "horse": {"dose": "0.25 mg/kg/hr CRI", "notes": "Post-colic surgery ileus; improves gastric emptying", "notes_ja": "疝痛術後イレウス；胃排出改善"},
-            "rabbit": {"dose": "0.5-1 mg/kg SC/PO q6-8h", "notes": "GI stasis (ranitidine may be preferred for prokinesis)", "notes_ja": "消化管うっ滞（プロキネシスにはラニチジンが推奨される場合あり）"}
+            "dog": {
+                "dose": "CRI: 1-2 mg/kg/day (0.04-0.08 mg/kg/hr); bolus: 0.2-0.5 mg/kg IV/SC q6-8h",
+                "notes": "Post-op ileus, parvoviral enteritis nausea, megaesophagus; CRI superior to bolus for prokinesis",
+                "notes_ja": "術後イレウス、パルボ腸炎の悪心、巨大食道症；プロキネシスにはボーラスよりCRI優位",
+            },
+            "cat": {
+                "dose": "CRI: 1-2 mg/kg/day; bolus: 0.2-0.4 mg/kg SC/IV q8h",
+                "notes": "Caution: extrapyramidal signs more common in cats; reduce dose",
+                "notes_ja": "注意：猫では錐体外路症状がより多い；減量",
+            },
+            "horse": {
+                "dose": "0.25 mg/kg/hr CRI",
+                "notes": "Post-colic surgery ileus; improves gastric emptying",
+                "notes_ja": "疝痛術後イレウス；胃排出改善",
+            },
+            "rabbit": {
+                "dose": "0.5-1 mg/kg SC/PO q6-8h",
+                "notes": "GI stasis (ranitidine may be preferred for prokinesis)",
+                "notes_ja": "消化管うっ滞（プロキネシスにはラニチジンが推奨される場合あり）",
+            },
         },
         "side_effects": ["Extrapyramidal signs (dystonia, tremor)", "Restlessness", "Diarrhea", "Behavioral changes"],
         "side_effects_ja": ["錐体外路症状（ジストニア、振戦）", "不穏", "下痢", "行動変化"],
         "contraindications": "GI obstruction/perforation, pheochromocytoma, seizure disorders, concurrent dopamine agonists",
         "contraindications_ja": "消化管閉塞/穿孔、褐色細胞腫、痙攣性疾患、ドパミン作動薬併用",
         "drug_interactions": [
-            {"drug": "Opioids", "severity": "moderate", "description": "Opioids antagonize prokinetic effect; metoclopramide partially counteracts opioid-induced ileus", "description_ja": "オピオイドがプロキネティック効果を拮抗；メトクロプラミドはオピオイド性イレウスを部分的に抑制"},
-            {"drug": "Phenothiazines", "severity": "moderate", "description": "Additive extrapyramidal effects", "description_ja": "相加的錐体外路症状"},
-            {"drug": "Anticholinergics", "severity": "moderate", "description": "Antagonizes prokinetic effect", "description_ja": "プロキネティック効果を拮抗"}
-        ]
+            {
+                "drug": "Opioids",
+                "severity": "moderate",
+                "description": "Opioids antagonize prokinetic effect; metoclopramide partially counteracts opioid-induced ileus",
+                "description_ja": "オピオイドがプロキネティック効果を拮抗；メトクロプラミドはオピオイド性イレウスを部分的に抑制",
+            },
+            {
+                "drug": "Phenothiazines",
+                "severity": "moderate",
+                "description": "Additive extrapyramidal effects",
+                "description_ja": "相加的錐体外路症状",
+            },
+            {
+                "drug": "Anticholinergics",
+                "severity": "moderate",
+                "description": "Antagonizes prokinetic effect",
+                "description_ja": "プロキネティック効果を拮抗",
+            },
+        ],
     },
     {
         "id": "loperamide",
@@ -123,18 +281,40 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Peripheral mu-opioid receptor agonist; slows GI motility, increases water/electrolyte absorption, and increases anal sphincter tone. Does not cross BBB in normal animals (P-glycoprotein substrate)",
         "mechanism_ja": "末梢μオピオイド受容体作動薬；消化管運動を低下させ水分・電解質吸収を増加し肛門括約筋緊張を上昇。正常動物ではBBBを通過しない（P糖蛋白質基質）",
         "species_info": {
-            "dog": {"dose": "0.1-0.2 mg/kg PO q8-12h (short course only)", "notes": "AVOID in MDR1 mutant breeds (Collies, Shelties, Aussies); acute non-infectious diarrhea only", "notes_ja": "MDR1変異犬種（コリー・シェルティー・オージー）には禁忌；急性非感染性下痢のみ"},
-            "cat": {"dose": "0.08-0.16 mg/kg PO q8-12h", "notes": "Short course only; may cause excitation in some cats", "notes_ja": "短期間のみ；一部の猫で興奮を惹起する可能性"},
-            "horse": {"dose": "0.1 mg/kg IM/PO q12h", "notes": "Sand impaction diarrhea adjunct; do NOT use in infectious colitis", "notes_ja": "砂嵌塞性下痢の補助；感染性大腸炎には使用禁止"}
+            "dog": {
+                "dose": "0.1-0.2 mg/kg PO q8-12h (short course only)",
+                "notes": "AVOID in MDR1 mutant breeds (Collies, Shelties, Aussies); acute non-infectious diarrhea only",
+                "notes_ja": "MDR1変異犬種（コリー・シェルティー・オージー）には禁忌；急性非感染性下痢のみ",
+            },
+            "cat": {
+                "dose": "0.08-0.16 mg/kg PO q8-12h",
+                "notes": "Short course only; may cause excitation in some cats",
+                "notes_ja": "短期間のみ；一部の猫で興奮を惹起する可能性",
+            },
+            "horse": {
+                "dose": "0.1 mg/kg IM/PO q12h",
+                "notes": "Sand impaction diarrhea adjunct; do NOT use in infectious colitis",
+                "notes_ja": "砂嵌塞性下痢の補助；感染性大腸炎には使用禁止",
+            },
         },
         "side_effects": ["Constipation", "Bloating", "Ileus", "CNS depression (MDR1 mutants)", "Pancreatitis (cats)"],
         "side_effects_ja": ["便秘", "膨満", "イレウス", "CNS抑制（MDR1変異体）", "膵炎（猫）"],
         "contraindications": "MDR1 mutation, infectious diarrhea (C. difficile, Salmonella), GI obstruction, toxin ingestion, young animals",
         "contraindications_ja": "MDR1変異、感染性下痢（C. difficile、サルモネラ）、消化管閉塞、毒素摂取、若齢動物",
         "drug_interactions": [
-            {"drug": "P-glycoprotein inhibitors (ketoconazole, cyclosporine)", "severity": "major", "description": "May allow CNS penetration even in non-MDR1 animals; neurotoxicity risk", "description_ja": "非MDR1動物でもCNS移行を許可する可能性；神経毒性リスク"},
-            {"drug": "Other opioids", "severity": "moderate", "description": "Additive constipation and ileus", "description_ja": "相加的便秘とイレウス"}
-        ]
+            {
+                "drug": "P-glycoprotein inhibitors (ketoconazole, cyclosporine)",
+                "severity": "major",
+                "description": "May allow CNS penetration even in non-MDR1 animals; neurotoxicity risk",
+                "description_ja": "非MDR1動物でもCNS移行を許可する可能性；神経毒性リスク",
+            },
+            {
+                "drug": "Other opioids",
+                "severity": "moderate",
+                "description": "Additive constipation and ileus",
+                "description_ja": "相加的便秘とイレウス",
+            },
+        ],
     },
     {
         "id": "psyllium",
@@ -144,20 +324,50 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Bulk-forming fiber laxative; absorbs water in intestinal lumen forming gel that increases fecal bulk and stimulates peristalsis. Also prebiotic fermenting to short-chain fatty acids",
         "mechanism_ja": "膨張性線維下剤；腸管内で水分を吸収しゲル化して便量を増加し蠕動を刺激。プレバイオティクスとして短鎖脂肪酸に発酵",
         "species_info": {
-            "dog": {"dose": "1-4 tsp per meal mixed in food", "notes": "Fiber-responsive colitis, constipation, anal gland impaction; use unflavored sugar-free only", "notes_ja": "線維反応性大腸炎、便秘、肛門嚢嵌塞；無味無糖のみ使用"},
-            "cat": {"dose": "1-4 tsp per meal", "notes": "Megacolon (mild), chronic constipation; ensure adequate water intake", "notes_ja": "巨大結腸症（軽度）、慢性便秘；十分な水分摂取確保"},
-            "horse": {"dose": "500g in 8L water via nasogastric tube q24h × 3-5 days", "notes": "Sand colic prevention/treatment; combine with mineral oil", "notes_ja": "砂疝痛予防/治療；ミネラルオイル併用"},
-            "rabbit": {"dose": "1/2-1 tsp per meal", "notes": "Hairball prevention; GI stasis prophylaxis", "notes_ja": "毛球予防；消化管うっ滞予防"},
+            "dog": {
+                "dose": "1-4 tsp per meal mixed in food",
+                "notes": "Fiber-responsive colitis, constipation, anal gland impaction; use unflavored sugar-free only",
+                "notes_ja": "線維反応性大腸炎、便秘、肛門嚢嵌塞；無味無糖のみ使用",
+            },
+            "cat": {
+                "dose": "1-4 tsp per meal",
+                "notes": "Megacolon (mild), chronic constipation; ensure adequate water intake",
+                "notes_ja": "巨大結腸症（軽度）、慢性便秘；十分な水分摂取確保",
+            },
+            "horse": {
+                "dose": "500g in 8L water via nasogastric tube q24h × 3-5 days",
+                "notes": "Sand colic prevention/treatment; combine with mineral oil",
+                "notes_ja": "砂疝痛予防/治療；ミネラルオイル併用",
+            },
+            "rabbit": {
+                "dose": "1/2-1 tsp per meal",
+                "notes": "Hairball prevention; GI stasis prophylaxis",
+                "notes_ja": "毛球予防；消化管うっ滞予防",
+            },
             "guinea_pig": {"dose": "1/4-1/2 tsp per meal", "notes": "Constipation adjunct", "notes_ja": "便秘の補助"},
-            "chinchilla": {"dose": "1/4 tsp per meal", "notes": "GI hypomotility; ensure hydration", "notes_ja": "消化管運動低下；水分補給確保"}
+            "chinchilla": {
+                "dose": "1/4 tsp per meal",
+                "notes": "GI hypomotility; ensure hydration",
+                "notes_ja": "消化管運動低下；水分補給確保",
+            },
         },
-        "side_effects": ["Bloating", "Gas", "Obstruction (without adequate water)", "Esophageal impaction (dry administration)"],
+        "side_effects": [
+            "Bloating",
+            "Gas",
+            "Obstruction (without adequate water)",
+            "Esophageal impaction (dry administration)",
+        ],
         "side_effects_ja": ["膨満", "ガス", "閉塞（水分不足時）", "食道嵌塞（乾燥投与）"],
         "contraindications": "Complete GI obstruction, esophageal stricture, fecal impaction requiring manual removal, dehydrated patients",
         "contraindications_ja": "完全消化管閉塞、食道狭窄、用手摘出を要する糞便嵌塞、脱水患者",
         "drug_interactions": [
-            {"drug": "All oral medications", "severity": "mild", "description": "May delay absorption if given simultaneously; separate by 1-2h", "description_ja": "同時投与で吸収遅延の可能性；1-2時間間隔"}
-        ]
+            {
+                "drug": "All oral medications",
+                "severity": "mild",
+                "description": "May delay absorption if given simultaneously; separate by 1-2h",
+                "description_ja": "同時投与で吸収遅延の可能性；1-2時間間隔",
+            }
+        ],
     },
     {
         "id": "chlorpheniramine",
@@ -167,24 +377,63 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "First-generation H1 antihistamine; competitively blocks histamine H1 receptors. Crosses BBB causing sedation. Anti-pruritic effect in atopic animals",
         "mechanism_ja": "第一世代H1抗ヒスタミン薬；ヒスタミンH1受容体を競合的に遮断。BBBを通過し鎮静を惹起。アトピー動物での止痒効果",
         "species_info": {
-            "dog": {"dose": "4-8 mg/dog PO q8-12h (0.2-0.5 mg/kg)", "notes": "Atopy adjunct (10-15% response as monotherapy); useful combined with omega-3", "notes_ja": "アトピー補助（単独療法で10-15%応答）；オメガ3との併用有用"},
-            "cat": {"dose": "2-4 mg/cat PO q12h", "notes": "Feline atopy, miliary dermatitis; best antihistamine for cats (25% response)", "notes_ja": "猫アトピー、粟粒性皮膚炎；猫に最適な抗ヒスタミン薬（25%応答）"},
-            "horse": {"dose": "0.25 mg/kg IM/IV q12h", "notes": "Urticaria, insect hypersensitivity; parenteral for acute reactions", "notes_ja": "蕁麻疹、昆虫過敏症；急性反応に非経口投与"},
+            "dog": {
+                "dose": "4-8 mg/dog PO q8-12h (0.2-0.5 mg/kg)",
+                "notes": "Atopy adjunct (10-15% response as monotherapy); useful combined with omega-3",
+                "notes_ja": "アトピー補助（単独療法で10-15%応答）；オメガ3との併用有用",
+            },
+            "cat": {
+                "dose": "2-4 mg/cat PO q12h",
+                "notes": "Feline atopy, miliary dermatitis; best antihistamine for cats (25% response)",
+                "notes_ja": "猫アトピー、粟粒性皮膚炎；猫に最適な抗ヒスタミン薬（25%応答）",
+            },
+            "horse": {
+                "dose": "0.25 mg/kg IM/IV q12h",
+                "notes": "Urticaria, insect hypersensitivity; parenteral for acute reactions",
+                "notes_ja": "蕁麻疹、昆虫過敏症；急性反応に非経口投与",
+            },
             "rabbit": {"dose": "0.2-0.4 mg/kg PO q8-12h", "notes": "Pruritic conditions", "notes_ja": "掻痒性疾患"},
             "guinea_pig": {"dose": "0.5-1 mg/kg PO q12h", "notes": "Pruritus adjunct", "notes_ja": "掻痒の補助"},
-            "ferret": {"dose": "1-2 mg/ferret PO q8-12h", "notes": "Adrenal disease pruritus adjunct", "notes_ja": "副腎疾患の掻痒補助"},
-            "bird": {"dose": "0.5 mg/kg PO/IM q12h", "notes": "Feather picking (allergic component), urticaria", "notes_ja": "毛引き症（アレルギー要素）、蕁麻疹"},
-            "reptile": {"dose": "0.5 mg/kg PO q24h", "notes": "Limited data; theoretical use for mast cell-mediated reactions", "notes_ja": "データ限定的；肥満細胞介在性反応の理論的使用"}
+            "ferret": {
+                "dose": "1-2 mg/ferret PO q8-12h",
+                "notes": "Adrenal disease pruritus adjunct",
+                "notes_ja": "副腎疾患の掻痒補助",
+            },
+            "bird": {
+                "dose": "0.5 mg/kg PO/IM q12h",
+                "notes": "Feather picking (allergic component), urticaria",
+                "notes_ja": "毛引き症（アレルギー要素）、蕁麻疹",
+            },
+            "reptile": {
+                "dose": "0.5 mg/kg PO q24h",
+                "notes": "Limited data; theoretical use for mast cell-mediated reactions",
+                "notes_ja": "データ限定的；肥満細胞介在性反応の理論的使用",
+            },
         },
         "side_effects": ["Sedation", "Dry mouth", "Urinary retention", "GI upset", "Paradoxical excitation (cats)"],
         "side_effects_ja": ["鎮静", "口渇", "尿閉", "消化器障害", "矛盾的興奮（猫）"],
         "contraindications": "Narrow-angle glaucoma, urinary obstruction, severe hepatic disease",
         "contraindications_ja": "閉塞隅角緑内障、尿路閉塞、重度肝疾患",
         "drug_interactions": [
-            {"drug": "Other CNS depressants", "severity": "moderate", "description": "Additive sedation", "description_ja": "相加的鎮静"},
-            {"drug": "Anticholinergics", "severity": "mild", "description": "Additive drying effects", "description_ja": "相加的乾燥作用"},
-            {"drug": "MAO inhibitors", "severity": "moderate", "description": "Prolonged and intensified anticholinergic effects", "description_ja": "抗コリン作用の延長と増強"}
-        ]
+            {
+                "drug": "Other CNS depressants",
+                "severity": "moderate",
+                "description": "Additive sedation",
+                "description_ja": "相加的鎮静",
+            },
+            {
+                "drug": "Anticholinergics",
+                "severity": "mild",
+                "description": "Additive drying effects",
+                "description_ja": "相加的乾燥作用",
+            },
+            {
+                "drug": "MAO inhibitors",
+                "severity": "moderate",
+                "description": "Prolonged and intensified anticholinergic effects",
+                "description_ja": "抗コリン作用の延長と増強",
+            },
+        ],
     },
     {
         "id": "hydroxyzine",
@@ -194,21 +443,56 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "First-generation H1 antihistamine with anxiolytic properties; blocks histamine H1 receptors and has anticholinergic, antiserotonergic effects. Metabolized to cetirizine",
         "mechanism_ja": "抗不安特性を有する第一世代H1抗ヒスタミン薬；ヒスタミンH1受容体を遮断し抗コリン・抗セロトニン作用を有する。セチリジンに代謝",
         "species_info": {
-            "dog": {"dose": "2 mg/kg PO q8-12h", "notes": "Atopic dermatitis (best first-generation option for dogs); may work synergistically with omega-3 FA", "notes_ja": "アトピー性皮膚炎（犬の第一世代で最良の選択肢）；オメガ3脂肪酸と相乗効果の可能性"},
-            "cat": {"dose": "5-10 mg/cat PO q8-12h (preferred over diphenhydramine)", "notes": "Eosinophilic granuloma complex, miliary dermatitis, anxiety-related overgrooming", "notes_ja": "好酸球性肉芽腫群、粟粒性皮膚炎、不安関連過剰毛繕い"},
-            "horse": {"dose": "0.5-1 mg/kg PO q8-12h", "notes": "Sweet itch (Culicoides hypersensitivity), urticaria", "notes_ja": "夏季過敏症（ヌカカ過敏症）、蕁麻疹"},
-            "rabbit": {"dose": "1-2 mg/kg PO q8-12h", "notes": "Pruritic skin conditions", "notes_ja": "掻痒性皮膚疾患"},
-            "ferret": {"dose": "1-2 mg/kg PO q8-12h", "notes": "Pruritus from adrenal disease or allergic conditions", "notes_ja": "副腎疾患やアレルギー性疾患の掻痒"}
+            "dog": {
+                "dose": "2 mg/kg PO q8-12h",
+                "notes": "Atopic dermatitis (best first-generation option for dogs); may work synergistically with omega-3 FA",
+                "notes_ja": "アトピー性皮膚炎（犬の第一世代で最良の選択肢）；オメガ3脂肪酸と相乗効果の可能性",
+            },
+            "cat": {
+                "dose": "5-10 mg/cat PO q8-12h (preferred over diphenhydramine)",
+                "notes": "Eosinophilic granuloma complex, miliary dermatitis, anxiety-related overgrooming",
+                "notes_ja": "好酸球性肉芽腫群、粟粒性皮膚炎、不安関連過剰毛繕い",
+            },
+            "horse": {
+                "dose": "0.5-1 mg/kg PO q8-12h",
+                "notes": "Sweet itch (Culicoides hypersensitivity), urticaria",
+                "notes_ja": "夏季過敏症（ヌカカ過敏症）、蕁麻疹",
+            },
+            "rabbit": {
+                "dose": "1-2 mg/kg PO q8-12h",
+                "notes": "Pruritic skin conditions",
+                "notes_ja": "掻痒性皮膚疾患",
+            },
+            "ferret": {
+                "dose": "1-2 mg/kg PO q8-12h",
+                "notes": "Pruritus from adrenal disease or allergic conditions",
+                "notes_ja": "副腎疾患やアレルギー性疾患の掻痒",
+            },
         },
         "side_effects": ["Sedation", "Dry mouth", "Urinary retention", "GI upset"],
         "side_effects_ja": ["鎮静", "口渇", "尿閉", "消化器障害"],
         "contraindications": "Prolonged QT syndrome, severe hepatic disease, porphyria",
         "contraindications_ja": "QT延長症候群、重度肝疾患、ポルフィリン症",
         "drug_interactions": [
-            {"drug": "QT-prolonging drugs", "severity": "major", "description": "Additive QT prolongation; torsades risk", "description_ja": "相加的QT延長；トルサードリスク"},
-            {"drug": "CNS depressants", "severity": "moderate", "description": "Enhanced sedation", "description_ja": "鎮静増強"},
-            {"drug": "Anticholinergics", "severity": "mild", "description": "Additive anticholinergic effects", "description_ja": "相加的抗コリン作用"}
-        ]
+            {
+                "drug": "QT-prolonging drugs",
+                "severity": "major",
+                "description": "Additive QT prolongation; torsades risk",
+                "description_ja": "相加的QT延長；トルサードリスク",
+            },
+            {
+                "drug": "CNS depressants",
+                "severity": "moderate",
+                "description": "Enhanced sedation",
+                "description_ja": "鎮静増強",
+            },
+            {
+                "drug": "Anticholinergics",
+                "severity": "mild",
+                "description": "Additive anticholinergic effects",
+                "description_ja": "相加的抗コリン作用",
+            },
+        ],
     },
     {
         "id": "loratadine",
@@ -218,18 +502,40 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Second-generation H1 antihistamine; selectively blocks peripheral H1 receptors with minimal CNS penetration. Less sedating than first-generation antihistamines",
         "mechanism_ja": "第二世代H1抗ヒスタミン薬；最小限のCNS移行で末梢H1受容体を選択的に遮断。第一世代より鎮静が少ない",
         "species_info": {
-            "dog": {"dose": "0.5-1 mg/kg PO q24h", "notes": "Atopic dermatitis; less sedation than hydroxyzine but may be less effective", "notes_ja": "アトピー性皮膚炎；ヒドロキシジンより鎮静少ないが効果弱い可能性"},
-            "cat": {"dose": "0.5 mg/kg PO q24h", "notes": "Alternative non-sedating antihistamine for chronic allergic conditions", "notes_ja": "慢性アレルギー性疾患の代替非鎮静性抗ヒスタミン薬"},
-            "horse": {"dose": "0.3-0.5 mg/kg PO q24h", "notes": "Chronic urticaria maintenance; less sedation allows performance", "notes_ja": "慢性蕁麻疹維持；鎮静が少なくパフォーマンスを許可"}
+            "dog": {
+                "dose": "0.5-1 mg/kg PO q24h",
+                "notes": "Atopic dermatitis; less sedation than hydroxyzine but may be less effective",
+                "notes_ja": "アトピー性皮膚炎；ヒドロキシジンより鎮静少ないが効果弱い可能性",
+            },
+            "cat": {
+                "dose": "0.5 mg/kg PO q24h",
+                "notes": "Alternative non-sedating antihistamine for chronic allergic conditions",
+                "notes_ja": "慢性アレルギー性疾患の代替非鎮静性抗ヒスタミン薬",
+            },
+            "horse": {
+                "dose": "0.3-0.5 mg/kg PO q24h",
+                "notes": "Chronic urticaria maintenance; less sedation allows performance",
+                "notes_ja": "慢性蕁麻疹維持；鎮静が少なくパフォーマンスを許可",
+            },
         },
         "side_effects": ["Mild sedation (less than 1st gen)", "Dry mouth", "Headache"],
         "side_effects_ja": ["軽度鎮静（第1世代より少ない）", "口渇", "頭痛"],
         "contraindications": "Severe hepatic impairment (extensive first-pass metabolism)",
         "contraindications_ja": "重度肝障害（広範な初回通過代謝）",
         "drug_interactions": [
-            {"drug": "Ketoconazole", "severity": "moderate", "description": "Increased loratadine levels (CYP3A4 inhibition); monitor for QT changes", "description_ja": "ロラタジン濃度上昇（CYP3A4阻害）；QT変化モニタリング"},
-            {"drug": "Erythromycin", "severity": "mild", "description": "Increased loratadine levels but generally well tolerated", "description_ja": "ロラタジン濃度上昇するが一般に忍容性良好"}
-        ]
+            {
+                "drug": "Ketoconazole",
+                "severity": "moderate",
+                "description": "Increased loratadine levels (CYP3A4 inhibition); monitor for QT changes",
+                "description_ja": "ロラタジン濃度上昇（CYP3A4阻害）；QT変化モニタリング",
+            },
+            {
+                "drug": "Erythromycin",
+                "severity": "mild",
+                "description": "Increased loratadine levels but generally well tolerated",
+                "description_ja": "ロラタジン濃度上昇するが一般に忍容性良好",
+            },
+        ],
     },
     {
         "id": "benzoyl_peroxide",
@@ -239,18 +545,46 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Keratolytic and antibacterial; oxidizing agent that lyses bacteria, reduces sebum, and promotes follicular flushing. Degreasing and comedolytic properties",
         "mechanism_ja": "角質溶解・抗菌薬；酸化剤として細菌を溶解し皮脂を減少させ毛包洗浄を促進。脱脂・面皰溶解特性",
         "species_info": {
-            "dog": {"dose": "2.5-5% shampoo: lather and leave 5-10 min; gel: apply to affected areas q24h", "notes": "Canine acne, demodicosis adjunct, pyoderma, seborrhea oleosa; most effective follicular flushing agent", "notes_ja": "犬ざ瘡、ニキビダニ症補助、膿皮症、脂性脂漏症；最も効果的な毛包洗浄剤"},
-            "cat": {"dose": "2.5% gel to chin q24-48h", "notes": "Feline acne (chin acne); start with lower concentration to assess tolerance", "notes_ja": "猫ざ瘡（顎ニキビ）；忍容性確認のため低濃度から開始"},
-            "horse": {"dose": "5% shampoo for dermatophilosis/rain rot", "notes": "Rain rot (Dermatophilus), pastern dermatitis adjunct", "notes_ja": "レインロット（デルマトフィルス）、繋皮膚炎の補助"}
+            "dog": {
+                "dose": "2.5-5% shampoo: lather and leave 5-10 min; gel: apply to affected areas q24h",
+                "notes": "Canine acne, demodicosis adjunct, pyoderma, seborrhea oleosa; most effective follicular flushing agent",
+                "notes_ja": "犬ざ瘡、ニキビダニ症補助、膿皮症、脂性脂漏症；最も効果的な毛包洗浄剤",
+            },
+            "cat": {
+                "dose": "2.5% gel to chin q24-48h",
+                "notes": "Feline acne (chin acne); start with lower concentration to assess tolerance",
+                "notes_ja": "猫ざ瘡（顎ニキビ）；忍容性確認のため低濃度から開始",
+            },
+            "horse": {
+                "dose": "5% shampoo for dermatophilosis/rain rot",
+                "notes": "Rain rot (Dermatophilus), pastern dermatitis adjunct",
+                "notes_ja": "レインロット（デルマトフィルス）、繋皮膚炎の補助",
+            },
         },
-        "side_effects": ["Contact irritation", "Drying/peeling", "Bleaching of fabric/fur", "Erythema", "Pruritus (over-use)"],
+        "side_effects": [
+            "Contact irritation",
+            "Drying/peeling",
+            "Bleaching of fabric/fur",
+            "Erythema",
+            "Pruritus (over-use)",
+        ],
         "side_effects_ja": ["接触刺激", "乾燥/剥離", "布地/被毛の脱色", "紅斑", "掻痒（過剰使用）"],
         "contraindications": "Deep wounds/erosions, cats with extensive skin lesions (licking concern), near eyes/mucous membranes",
         "contraindications_ja": "深い創傷/びらん、広範な皮膚病変のある猫（舐め取り懸念）、目/粘膜近傍",
         "drug_interactions": [
-            {"drug": "Topical retinoids", "severity": "moderate", "description": "Additive irritation; if both needed, alternate application times", "description_ja": "相加的刺激；両方必要な場合は塗布時間を交互に"},
-            {"drug": "Topical corticosteroids", "severity": "mild", "description": "May reduce anti-inflammatory effect through oxidation", "description_ja": "酸化により抗炎症効果を減弱する可能性"}
-        ]
+            {
+                "drug": "Topical retinoids",
+                "severity": "moderate",
+                "description": "Additive irritation; if both needed, alternate application times",
+                "description_ja": "相加的刺激；両方必要な場合は塗布時間を交互に",
+            },
+            {
+                "drug": "Topical corticosteroids",
+                "severity": "mild",
+                "description": "May reduce anti-inflammatory effect through oxidation",
+                "description_ja": "酸化により抗炎症効果を減弱する可能性",
+            },
+        ],
     },
     {
         "id": "ceramide_shampoo",
@@ -260,18 +594,39 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Skin barrier repair; replenishes intercellular lipids (ceramides, cholesterol, fatty acids) in stratum corneum. Restores transepidermal water loss (TEWL) to normal levels",
         "mechanism_ja": "皮膚バリア修復；角質層の細胞間脂質（セラミド・コレステロール・脂肪酸）を補充。経表皮水分蒸散量（TEWL）を正常レベルに回復",
         "species_info": {
-            "dog": {"dose": "Shampoo: weekly-biweekly; spot-on: q1-2 weeks; mousse/spray: q2-3 days", "notes": "Atopic dermatitis cornerstone therapy; reduces reliance on immunosuppressives. Multiple formulations (Douxo S3 Calm)", "notes_ja": "アトピー性皮膚炎の基盤治療；免疫抑制薬への依存を軽減。複数剤形あり（Douxo S3 Calm）"},
-            "cat": {"dose": "Mousse/spray: q2-3 days; spot-on: q2 weeks", "notes": "Feline atopy, overgrooming-associated alopecia barrier repair", "notes_ja": "猫アトピー、過剰毛繕い関連脱毛のバリア修復"},
-            "rabbit": {"dose": "Spot-on formulation q2 weeks", "notes": "Dry flaky skin conditions", "notes_ja": "乾燥性落屑性皮膚疾患"},
-            "guinea_pig": {"dose": "Mousse q3 days", "notes": "Dry skin, adjunct in sebaceous cyst management", "notes_ja": "乾燥皮膚、皮脂腺嚢胞管理の補助"}
+            "dog": {
+                "dose": "Shampoo: weekly-biweekly; spot-on: q1-2 weeks; mousse/spray: q2-3 days",
+                "notes": "Atopic dermatitis cornerstone therapy; reduces reliance on immunosuppressives. Multiple formulations (Douxo S3 Calm)",
+                "notes_ja": "アトピー性皮膚炎の基盤治療；免疫抑制薬への依存を軽減。複数剤形あり（Douxo S3 Calm）",
+            },
+            "cat": {
+                "dose": "Mousse/spray: q2-3 days; spot-on: q2 weeks",
+                "notes": "Feline atopy, overgrooming-associated alopecia barrier repair",
+                "notes_ja": "猫アトピー、過剰毛繕い関連脱毛のバリア修復",
+            },
+            "rabbit": {
+                "dose": "Spot-on formulation q2 weeks",
+                "notes": "Dry flaky skin conditions",
+                "notes_ja": "乾燥性落屑性皮膚疾患",
+            },
+            "guinea_pig": {
+                "dose": "Mousse q3 days",
+                "notes": "Dry skin, adjunct in sebaceous cyst management",
+                "notes_ja": "乾燥皮膚、皮脂腺嚢胞管理の補助",
+            },
         },
         "side_effects": ["Extremely rare adverse effects", "Transient coat oiliness", "Rare contact sensitivity"],
         "side_effects_ja": ["副作用は極めて稀", "一過性の被毛油性感", "稀に接触感受性"],
         "contraindications": "None significant",
         "contraindications_ja": "特記すべき禁忌なし",
         "drug_interactions": [
-            {"drug": "Topical antimicrobials", "severity": "mild", "description": "Compatible; can layer ceramide products with antimicrobial shampoos (rinse between)", "description_ja": "適合性あり；抗菌シャンプーとセラミド製品の重層可能（間にすすぎ）"}
-        ]
+            {
+                "drug": "Topical antimicrobials",
+                "severity": "mild",
+                "description": "Compatible; can layer ceramide products with antimicrobial shampoos (rinse between)",
+                "description_ja": "適合性あり；抗菌シャンプーとセラミド製品の重層可能（間にすすぎ）",
+            }
+        ],
     },
     {
         "id": "pentoxifylline",
@@ -281,19 +636,46 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Methylxanthine derivative; inhibits phosphodiesterase increasing cAMP, improves erythrocyte flexibility, reduces blood viscosity, inhibits TNF-alpha and other inflammatory cytokines",
         "mechanism_ja": "メチルキサンチン誘導体；ホスホジエステラーゼ阻害でcAMP増加、赤血球変形能改善、血液粘度低下、TNF-αおよび炎症性サイトカイン抑制",
         "species_info": {
-            "dog": {"dose": "10-30 mg/kg PO q8-12h (with food)", "notes": "Dermatomyositis, vasculitis, pinnal thrombovascular necrosis, erythema multiforme, atopy adjunct", "notes_ja": "皮膚筋炎、血管炎、耳介血栓血管壊死、多形紅斑、アトピー補助"},
-            "cat": {"dose": "100 mg/cat PO q12h", "notes": "Feline eosinophilic granuloma complex, plasma cell pododermatitis", "notes_ja": "猫好酸球性肉芽腫群、形質細胞性肢端皮膚炎"},
-            "horse": {"dose": "8.5 mg/kg PO q12h", "notes": "Navicular syndrome microcirculation, laminitis chronic", "notes_ja": "舟状骨症候群微小循環、慢性蹄葉炎"}
+            "dog": {
+                "dose": "10-30 mg/kg PO q8-12h (with food)",
+                "notes": "Dermatomyositis, vasculitis, pinnal thrombovascular necrosis, erythema multiforme, atopy adjunct",
+                "notes_ja": "皮膚筋炎、血管炎、耳介血栓血管壊死、多形紅斑、アトピー補助",
+            },
+            "cat": {
+                "dose": "100 mg/cat PO q12h",
+                "notes": "Feline eosinophilic granuloma complex, plasma cell pododermatitis",
+                "notes_ja": "猫好酸球性肉芽腫群、形質細胞性肢端皮膚炎",
+            },
+            "horse": {
+                "dose": "8.5 mg/kg PO q12h",
+                "notes": "Navicular syndrome microcirculation, laminitis chronic",
+                "notes_ja": "舟状骨症候群微小循環、慢性蹄葉炎",
+            },
         },
         "side_effects": ["GI upset (vomiting, diarrhea)", "Anorexia", "Dizziness", "Flushing"],
         "side_effects_ja": ["消化器障害（嘔吐・下痢）", "食欲不振", "めまい", "紅潮"],
         "contraindications": "Active hemorrhage, severe hepatic disease, hypersensitivity to methylxanthines",
         "contraindications_ja": "活動性出血、重度肝疾患、メチルキサンチン過敏症",
         "drug_interactions": [
-            {"drug": "Anticoagulants/NSAIDs", "severity": "moderate", "description": "Increased bleeding risk due to improved blood rheology and platelet inhibition", "description_ja": "血液レオロジー改善と血小板阻害による出血リスク増加"},
-            {"drug": "Theophylline", "severity": "moderate", "description": "Additive methylxanthine effects; increased theophylline levels", "description_ja": "相加的メチルキサンチン効果；テオフィリン濃度上昇"},
-            {"drug": "Antihypertensives", "severity": "mild", "description": "May potentiate hypotensive effect", "description_ja": "降圧効果を増強する可能性"}
-        ]
+            {
+                "drug": "Anticoagulants/NSAIDs",
+                "severity": "moderate",
+                "description": "Increased bleeding risk due to improved blood rheology and platelet inhibition",
+                "description_ja": "血液レオロジー改善と血小板阻害による出血リスク増加",
+            },
+            {
+                "drug": "Theophylline",
+                "severity": "moderate",
+                "description": "Additive methylxanthine effects; increased theophylline levels",
+                "description_ja": "相加的メチルキサンチン効果；テオフィリン濃度上昇",
+            },
+            {
+                "drug": "Antihypertensives",
+                "severity": "mild",
+                "description": "May potentiate hypotensive effect",
+                "description_ja": "降圧効果を増強する可能性",
+            },
+        ],
     },
     {
         "id": "milk_thistle",
@@ -303,22 +685,64 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Hepatoprotective flavonoid complex; stabilizes hepatocyte membranes, promotes regeneration through RNA polymerase stimulation, and has antioxidant/anti-fibrotic activity. Competitive inhibitor of Amanita phalloides toxin uptake",
         "mechanism_ja": "肝保護フラボノイド複合体；肝細胞膜を安定化しRNA ポリメラーゼ刺激で再生を促進、抗酸化・抗線維化作用を有する。テングタケ毒素取込の競合阻害薬",
         "species_info": {
-            "dog": {"dose": "20-50 mg/kg/day PO divided q12h (standardized to 70-80% silymarin)", "notes": "Hepatotoxicity (phenobarbital, NSAID, aflatoxin), Amanita mushroom poisoning, chronic hepatitis adjunct", "notes_ja": "肝毒性（フェノバルビタール・NSAID・アフラトキシン）、テングタケ中毒、慢性肝炎の補助"},
-            "cat": {"dose": "10-15 mg/kg/day PO divided q12h", "notes": "Hepatic lipidosis adjunct, cholangitis supportive; often combined with SAMe", "notes_ja": "肝リピドーシス補助、胆管炎支持療法；SAMeと併用が多い"},
-            "horse": {"dose": "4-20 mg/kg PO q24h", "notes": "Pyrrolizidine alkaloid toxicosis, aflatoxin hepatopathy supportive", "notes_ja": "ピロリジジンアルカロイド中毒症、アフラトキシン肝症の支持療法"},
-            "bird": {"dose": "100 mg/kg PO q12h", "notes": "Avian hepatic lipidosis (common in Amazons, Budgies)", "notes_ja": "鳥類肝リピドーシス（アマゾン・セキセイインコで多い）"},
-            "rabbit": {"dose": "30 mg/kg PO q12h", "notes": "Hepatic coccidiosis supportive", "notes_ja": "肝コクシジウム症の支持療法"},
-            "ferret": {"dose": "10-30 mg/kg PO q12h", "notes": "Liver disease adjunct, NSAID hepatoprotection", "notes_ja": "肝疾患補助、NSAID肝保護"},
-            "reptile": {"dose": "Not established; empirical 10-30 mg/kg PO q24-48h", "notes": "Hepatic lipidosis in reptiles (esp. bearded dragons, chameleons)", "notes_ja": "爬虫類肝リピドーシス（特にフトアゴヒゲトカゲ・カメレオン）"}
+            "dog": {
+                "dose": "20-50 mg/kg/day PO divided q12h (standardized to 70-80% silymarin)",
+                "notes": "Hepatotoxicity (phenobarbital, NSAID, aflatoxin), Amanita mushroom poisoning, chronic hepatitis adjunct",
+                "notes_ja": "肝毒性（フェノバルビタール・NSAID・アフラトキシン）、テングタケ中毒、慢性肝炎の補助",
+            },
+            "cat": {
+                "dose": "10-15 mg/kg/day PO divided q12h",
+                "notes": "Hepatic lipidosis adjunct, cholangitis supportive; often combined with SAMe",
+                "notes_ja": "肝リピドーシス補助、胆管炎支持療法；SAMeと併用が多い",
+            },
+            "horse": {
+                "dose": "4-20 mg/kg PO q24h",
+                "notes": "Pyrrolizidine alkaloid toxicosis, aflatoxin hepatopathy supportive",
+                "notes_ja": "ピロリジジンアルカロイド中毒症、アフラトキシン肝症の支持療法",
+            },
+            "bird": {
+                "dose": "100 mg/kg PO q12h",
+                "notes": "Avian hepatic lipidosis (common in Amazons, Budgies)",
+                "notes_ja": "鳥類肝リピドーシス（アマゾン・セキセイインコで多い）",
+            },
+            "rabbit": {
+                "dose": "30 mg/kg PO q12h",
+                "notes": "Hepatic coccidiosis supportive",
+                "notes_ja": "肝コクシジウム症の支持療法",
+            },
+            "ferret": {
+                "dose": "10-30 mg/kg PO q12h",
+                "notes": "Liver disease adjunct, NSAID hepatoprotection",
+                "notes_ja": "肝疾患補助、NSAID肝保護",
+            },
+            "reptile": {
+                "dose": "Not established; empirical 10-30 mg/kg PO q24-48h",
+                "notes": "Hepatic lipidosis in reptiles (esp. bearded dragons, chameleons)",
+                "notes_ja": "爬虫類肝リピドーシス（特にフトアゴヒゲトカゲ・カメレオン）",
+            },
         },
-        "side_effects": ["Very safe; rare GI upset", "Allergic reactions (ragweed cross-reactivity)", "Mild laxative effect"],
+        "side_effects": [
+            "Very safe; rare GI upset",
+            "Allergic reactions (ragweed cross-reactivity)",
+            "Mild laxative effect",
+        ],
         "side_effects_ja": ["非常に安全；稀に消化器障害", "アレルギー反応（ブタクサ交差反応）", "軽度緩下作用"],
         "contraindications": "Ragweed/chrysanthemum/daisy allergy (Asteraceae family); caution in hormone-sensitive conditions (weak estrogenic activity)",
         "contraindications_ja": "ブタクサ/菊/デイジーアレルギー（キク科）；ホルモン感受性疾患では注意（弱いエストロゲン活性）",
         "drug_interactions": [
-            {"drug": "CYP3A4/2C9 substrates", "severity": "mild", "description": "May inhibit these CYP enzymes at high doses, increasing levels of co-administered drugs", "description_ja": "高用量で CYP酵素を阻害し併用薬の濃度を上昇させる可能性"},
-            {"drug": "Insulin/Hypoglycemics", "severity": "mild", "description": "May enhance hypoglycemic effect", "description_ja": "血糖降下作用を増強する可能性"}
-        ]
+            {
+                "drug": "CYP3A4/2C9 substrates",
+                "severity": "mild",
+                "description": "May inhibit these CYP enzymes at high doses, increasing levels of co-administered drugs",
+                "description_ja": "高用量で CYP酵素を阻害し併用薬の濃度を上昇させる可能性",
+            },
+            {
+                "drug": "Insulin/Hypoglycemics",
+                "severity": "mild",
+                "description": "May enhance hypoglycemic effect",
+                "description_ja": "血糖降下作用を増強する可能性",
+            },
+        ],
     },
     {
         "id": "denamarin",
@@ -328,20 +752,50 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Combination hepatoprotectant; SAMe (S-adenosylmethionine) provides glutathione precursor and methyl donor for hepatocyte protection/regeneration. Silybin (most active silymarin component) provides anti-oxidant and anti-fibrotic support",
         "mechanism_ja": "肝保護薬の併用；SAMe（S-アデノシルメチオニン）がグルタチオン前駆体とメチル基供与体として肝細胞保護/再生を提供。シリビン（シリマリンの最活性成分）が抗酸化・抗線維化を支持",
         "species_info": {
-            "dog": {"dose": "Dogs <5kg: 90mg SAMe+9mg silybin; 5-15kg: 225+24; 15-30kg: 425+35; >30kg: 425+100 (all q24h on empty stomach)", "notes": "Standard hepatoprotection for chronic liver disease, drug-induced hepatopathy; give on empty stomach (2h before food)", "notes_ja": "慢性肝疾患・薬剤性肝障害の標準肝保護；空腹時投与（食前2時間）"},
-            "cat": {"dose": "Cat/small dog formulation: 90mg SAMe + 9mg silybin q24h on empty stomach", "notes": "Hepatic lipidosis, cholangitis, triaditis; cornerstone supportive therapy", "notes_ja": "肝リピドーシス、胆管炎、三臓器炎；基盤的支持療法"},
-            "rabbit": {"dose": "20 mg/kg SAMe equivalent PO q24h", "notes": "Hepatic disease supportive", "notes_ja": "肝疾患の支持療法"},
-            "bird": {"dose": "10-20 mg/kg SAMe PO q24h", "notes": "Avian hepatic lipidosis/hepatitis", "notes_ja": "鳥類肝リピドーシス/肝炎"},
-            "ferret": {"dose": "Cat dose formulation q24h", "notes": "Liver disease adjunct", "notes_ja": "肝疾患補助"}
+            "dog": {
+                "dose": "Dogs <5kg: 90mg SAMe+9mg silybin; 5-15kg: 225+24; 15-30kg: 425+35; >30kg: 425+100 (all q24h on empty stomach)",
+                "notes": "Standard hepatoprotection for chronic liver disease, drug-induced hepatopathy; give on empty stomach (2h before food)",
+                "notes_ja": "慢性肝疾患・薬剤性肝障害の標準肝保護；空腹時投与（食前2時間）",
+            },
+            "cat": {
+                "dose": "Cat/small dog formulation: 90mg SAMe + 9mg silybin q24h on empty stomach",
+                "notes": "Hepatic lipidosis, cholangitis, triaditis; cornerstone supportive therapy",
+                "notes_ja": "肝リピドーシス、胆管炎、三臓器炎；基盤的支持療法",
+            },
+            "rabbit": {
+                "dose": "20 mg/kg SAMe equivalent PO q24h",
+                "notes": "Hepatic disease supportive",
+                "notes_ja": "肝疾患の支持療法",
+            },
+            "bird": {
+                "dose": "10-20 mg/kg SAMe PO q24h",
+                "notes": "Avian hepatic lipidosis/hepatitis",
+                "notes_ja": "鳥類肝リピドーシス/肝炎",
+            },
+            "ferret": {"dose": "Cat dose formulation q24h", "notes": "Liver disease adjunct", "notes_ja": "肝疾患補助"},
         },
-        "side_effects": ["Rare GI upset", "Restlessness/anxiety (SAMe at high doses)", "Mania in bipolar conditions (SAMe)"],
+        "side_effects": [
+            "Rare GI upset",
+            "Restlessness/anxiety (SAMe at high doses)",
+            "Mania in bipolar conditions (SAMe)",
+        ],
         "side_effects_ja": ["稀に消化器障害", "不穏/不安（SAMe高用量）", "双極性障害での躁状態（SAMe）"],
         "contraindications": "None significant; theoretical concern in serotonin-related conditions",
         "contraindications_ja": "特記すべき禁忌なし；セロトニン関連疾患では理論的注意",
         "drug_interactions": [
-            {"drug": "SSRIs/TCAs", "severity": "moderate", "description": "SAMe has serotonergic activity; theoretical serotonin syndrome risk", "description_ja": "SAMeはセロトニン作動活性あり；理論的セロトニン症候群リスク"},
-            {"drug": "Levodopa", "severity": "moderate", "description": "SAMe may reduce levodopa efficacy", "description_ja": "SAMeがレボドパ効果を減弱する可能性"}
-        ]
+            {
+                "drug": "SSRIs/TCAs",
+                "severity": "moderate",
+                "description": "SAMe has serotonergic activity; theoretical serotonin syndrome risk",
+                "description_ja": "SAMeはセロトニン作動活性あり；理論的セロトニン症候群リスク",
+            },
+            {
+                "drug": "Levodopa",
+                "severity": "moderate",
+                "description": "SAMe may reduce levodopa efficacy",
+                "description_ja": "SAMeがレボドパ効果を減弱する可能性",
+            },
+        ],
     },
     {
         "id": "cimetidine",
@@ -351,24 +805,76 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "First-generation H2 receptor antagonist; reduces gastric acid by blocking histamine receptors on parietal cells. Also inhibits cytochrome P450 enzymes (CYP1A2, CYP2D6, CYP3A4)",
         "mechanism_ja": "第一世代H2受容体拮抗薬；壁細胞のヒスタミン受容体を遮断し胃酸を減少。シトクロムP450酵素（CYP1A2, CYP2D6, CYP3A4）も阻害",
         "species_info": {
-            "dog": {"dose": "5-10 mg/kg PO/IV q6-8h", "notes": "Mast cell tumor-associated gastric ulceration, gastrinoma; CYP inhibition useful to boost other drug levels", "notes_ja": "肥満細胞腫関連胃潰瘍、ガストリノーマ；CYP阻害で他薬の血中濃度上昇に有用"},
-            "cat": {"dose": "5-10 mg/kg PO/IV q6-8h", "notes": "Uremic gastropathy; less potent than famotidine but prokinetic-like effect", "notes_ja": "尿毒症性胃障害；ファモチジンより弱いがプロキネティック様効果"},
-            "horse": {"dose": "18-20 mg/kg PO q8h; 6.6 mg/kg IV q6h", "notes": "EGUS in foals; adults require very frequent dosing (impractical)", "notes_ja": "子馬のEGUS；成馬は非常に頻回投与が必要（非実用的）"},
-            "ferret": {"dose": "5-10 mg/kg PO/SC q8h", "notes": "Gastric ulceration (Helicobacter, stress)", "notes_ja": "胃潰瘍（ヘリコバクター、ストレス）"},
+            "dog": {
+                "dose": "5-10 mg/kg PO/IV q6-8h",
+                "notes": "Mast cell tumor-associated gastric ulceration, gastrinoma; CYP inhibition useful to boost other drug levels",
+                "notes_ja": "肥満細胞腫関連胃潰瘍、ガストリノーマ；CYP阻害で他薬の血中濃度上昇に有用",
+            },
+            "cat": {
+                "dose": "5-10 mg/kg PO/IV q6-8h",
+                "notes": "Uremic gastropathy; less potent than famotidine but prokinetic-like effect",
+                "notes_ja": "尿毒症性胃障害；ファモチジンより弱いがプロキネティック様効果",
+            },
+            "horse": {
+                "dose": "18-20 mg/kg PO q8h; 6.6 mg/kg IV q6h",
+                "notes": "EGUS in foals; adults require very frequent dosing (impractical)",
+                "notes_ja": "子馬のEGUS；成馬は非常に頻回投与が必要（非実用的）",
+            },
+            "ferret": {
+                "dose": "5-10 mg/kg PO/SC q8h",
+                "notes": "Gastric ulceration (Helicobacter, stress)",
+                "notes_ja": "胃潰瘍（ヘリコバクター、ストレス）",
+            },
             "bird": {"dose": "5 mg/kg PO q8h", "notes": "GI ulceration supportive", "notes_ja": "消化管潰瘍の支持療法"},
             "reptile": {"dose": "4 mg/kg PO/IM q8-12h", "notes": "Gastric protection", "notes_ja": "胃保護"},
-            "fish": {"dose": "4 mg/kg PO or in feed", "notes": "Theoretically beneficial for GI ulceration in large fish", "notes_ja": "大型魚の消化管潰瘍に理論的に有益"}
+            "fish": {
+                "dose": "4 mg/kg PO or in feed",
+                "notes": "Theoretically beneficial for GI ulceration in large fish",
+                "notes_ja": "大型魚の消化管潰瘍に理論的に有益",
+            },
         },
-        "side_effects": ["GI upset", "Gynecomastia (anti-androgenic)", "Hepatotoxicity (rare)", "Bone marrow suppression (rare)", "Drug interactions (CYP inhibition)"],
-        "side_effects_ja": ["消化器障害", "女性化乳房（抗アンドロゲン作用）", "肝毒性（稀）", "骨髄抑制（稀）", "薬物相互作用（CYP阻害）"],
+        "side_effects": [
+            "GI upset",
+            "Gynecomastia (anti-androgenic)",
+            "Hepatotoxicity (rare)",
+            "Bone marrow suppression (rare)",
+            "Drug interactions (CYP inhibition)",
+        ],
+        "side_effects_ja": [
+            "消化器障害",
+            "女性化乳房（抗アンドロゲン作用）",
+            "肝毒性（稀）",
+            "骨髄抑制（稀）",
+            "薬物相互作用（CYP阻害）",
+        ],
         "contraindications": "Known hypersensitivity; caution with hepatic/renal impairment",
         "contraindications_ja": "過敏症既知；肝/腎障害では注意",
         "drug_interactions": [
-            {"drug": "Theophylline", "severity": "major", "description": "CYP1A2 inhibition increases theophylline levels 20-60%; toxicity risk", "description_ja": "CYP1A2阻害でテオフィリン濃度20-60%上昇；毒性リスク"},
-            {"drug": "Phenytoin", "severity": "major", "description": "CYP2C19 inhibition increases phenytoin levels", "description_ja": "CYP2C19阻害でフェニトイン濃度上昇"},
-            {"drug": "Metoclopramide", "severity": "moderate", "description": "May antagonize prokinetic effects", "description_ja": "プロキネティック効果を拮抗する可能性"},
-            {"drug": "Ketoconazole", "severity": "moderate", "description": "Reduced ketoconazole absorption (needs acid for dissolution)", "description_ja": "ケトコナゾール吸収低下（溶解に酸が必要）"}
-        ]
+            {
+                "drug": "Theophylline",
+                "severity": "major",
+                "description": "CYP1A2 inhibition increases theophylline levels 20-60%; toxicity risk",
+                "description_ja": "CYP1A2阻害でテオフィリン濃度20-60%上昇；毒性リスク",
+            },
+            {
+                "drug": "Phenytoin",
+                "severity": "major",
+                "description": "CYP2C19 inhibition increases phenytoin levels",
+                "description_ja": "CYP2C19阻害でフェニトイン濃度上昇",
+            },
+            {
+                "drug": "Metoclopramide",
+                "severity": "moderate",
+                "description": "May antagonize prokinetic effects",
+                "description_ja": "プロキネティック効果を拮抗する可能性",
+            },
+            {
+                "drug": "Ketoconazole",
+                "severity": "moderate",
+                "description": "Reduced ketoconazole absorption (needs acid for dissolution)",
+                "description_ja": "ケトコナゾール吸収低下（溶解に酸が必要）",
+            },
+        ],
     },
     {
         "id": "vitamin_e",
@@ -378,24 +884,75 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Fat-soluble antioxidant; interrupts lipid peroxidation chain reactions in cell membranes. Protects hepatocytes from oxidative damage. Essential nutrient in all species",
         "mechanism_ja": "脂溶性抗酸化物質；細胞膜の脂質過酸化連鎖反応を中断。肝細胞を酸化的損傷から保護。全種で必須栄養素",
         "species_info": {
-            "dog": {"dose": "400-800 IU/day PO (hepatic); 10 IU/kg q12h (dermatologic)", "notes": "Chronic hepatitis adjunct, hepatic lipidosis, discoid lupus, dermatomyositis, immune-mediated hemolytic anemia adjunct", "notes_ja": "慢性肝炎補助、肝リピドーシス、円板状ループス、皮膚筋炎、免疫介在性溶血性貧血の補助"},
-            "cat": {"dose": "100-400 IU/day PO", "notes": "Hepatic lipidosis (essential adjunct), steatitis (yellow fat disease), pansteatitis", "notes_ja": "肝リピドーシス（必須補助）、脂肪織炎（黄色脂肪病）、汎脂肪織炎"},
-            "horse": {"dose": "1000-5000 IU/day PO; 5000-10000 IU for NMD", "notes": "White muscle disease/NMD (with selenium), equine motor neuron disease (EMND), immune support", "notes_ja": "白筋病/NMD（セレン併用）、馬運動ニューロン病（EMND）、免疫サポート"},
-            "rabbit": {"dose": "50-100 IU/kg PO q24h", "notes": "Hepatic disease adjunct, muscular dystrophy prevention", "notes_ja": "肝疾患補助、筋ジストロフィー予防"},
-            "bird": {"dose": "0.05-0.1 mg/kg IM; or 1 IU/30g body weight PO", "notes": "Steatitis (seed-only diets), encephalomalacia", "notes_ja": "脂肪織炎（種子のみの食事）、脳軟化症"},
-            "reptile": {"dose": "1 IU/30g PO q7-14d", "notes": "Steatitis from fish-based diets, hepatic disease", "notes_ja": "魚ベース食事による脂肪織炎、肝疾患"},
-            "guinea_pig": {"dose": "50-100 IU/kg PO q24h", "notes": "Muscular dystrophy prevention (often deficient)", "notes_ja": "筋ジストロフィー予防（しばしば欠乏）"},
-            "ferret": {"dose": "10-30 IU/kg PO q24h", "notes": "Hepatic support, antioxidant", "notes_ja": "肝サポート、抗酸化"}
+            "dog": {
+                "dose": "400-800 IU/day PO (hepatic); 10 IU/kg q12h (dermatologic)",
+                "notes": "Chronic hepatitis adjunct, hepatic lipidosis, discoid lupus, dermatomyositis, immune-mediated hemolytic anemia adjunct",
+                "notes_ja": "慢性肝炎補助、肝リピドーシス、円板状ループス、皮膚筋炎、免疫介在性溶血性貧血の補助",
+            },
+            "cat": {
+                "dose": "100-400 IU/day PO",
+                "notes": "Hepatic lipidosis (essential adjunct), steatitis (yellow fat disease), pansteatitis",
+                "notes_ja": "肝リピドーシス（必須補助）、脂肪織炎（黄色脂肪病）、汎脂肪織炎",
+            },
+            "horse": {
+                "dose": "1000-5000 IU/day PO; 5000-10000 IU for NMD",
+                "notes": "White muscle disease/NMD (with selenium), equine motor neuron disease (EMND), immune support",
+                "notes_ja": "白筋病/NMD（セレン併用）、馬運動ニューロン病（EMND）、免疫サポート",
+            },
+            "rabbit": {
+                "dose": "50-100 IU/kg PO q24h",
+                "notes": "Hepatic disease adjunct, muscular dystrophy prevention",
+                "notes_ja": "肝疾患補助、筋ジストロフィー予防",
+            },
+            "bird": {
+                "dose": "0.05-0.1 mg/kg IM; or 1 IU/30g body weight PO",
+                "notes": "Steatitis (seed-only diets), encephalomalacia",
+                "notes_ja": "脂肪織炎（種子のみの食事）、脳軟化症",
+            },
+            "reptile": {
+                "dose": "1 IU/30g PO q7-14d",
+                "notes": "Steatitis from fish-based diets, hepatic disease",
+                "notes_ja": "魚ベース食事による脂肪織炎、肝疾患",
+            },
+            "guinea_pig": {
+                "dose": "50-100 IU/kg PO q24h",
+                "notes": "Muscular dystrophy prevention (often deficient)",
+                "notes_ja": "筋ジストロフィー予防（しばしば欠乏）",
+            },
+            "ferret": {
+                "dose": "10-30 IU/kg PO q24h",
+                "notes": "Hepatic support, antioxidant",
+                "notes_ja": "肝サポート、抗酸化",
+            },
         },
-        "side_effects": ["Very safe at therapeutic doses", "Coagulopathy at extreme doses (antagonizes vitamin K)", "Diarrhea (high dose)"],
+        "side_effects": [
+            "Very safe at therapeutic doses",
+            "Coagulopathy at extreme doses (antagonizes vitamin K)",
+            "Diarrhea (high dose)",
+        ],
         "side_effects_ja": ["治療量では非常に安全", "超高用量での凝固障害（ビタミンK拮抗）", "下痢（高用量）"],
         "contraindications": "Vitamin K deficiency (may worsen coagulopathy), concurrent warfarin (monitor INR)",
         "contraindications_ja": "ビタミンK欠乏（凝固障害悪化の可能性）、ワルファリン併用（INRモニタリング）",
         "drug_interactions": [
-            {"drug": "Warfarin", "severity": "moderate", "description": "High-dose vitamin E may potentiate anticoagulant effect", "description_ja": "高用量ビタミンEが抗凝固効果を増強する可能性"},
-            {"drug": "Iron supplements", "severity": "mild", "description": "Iron may oxidize vitamin E; separate administration by 2h", "description_ja": "鉄がビタミンEを酸化する可能性；2時間間隔で投与"},
-            {"drug": "Cholestyramine", "severity": "mild", "description": "Reduces fat-soluble vitamin absorption", "description_ja": "脂溶性ビタミンの吸収を低下"}
-        ]
+            {
+                "drug": "Warfarin",
+                "severity": "moderate",
+                "description": "High-dose vitamin E may potentiate anticoagulant effect",
+                "description_ja": "高用量ビタミンEが抗凝固効果を増強する可能性",
+            },
+            {
+                "drug": "Iron supplements",
+                "severity": "mild",
+                "description": "Iron may oxidize vitamin E; separate administration by 2h",
+                "description_ja": "鉄がビタミンEを酸化する可能性；2時間間隔で投与",
+            },
+            {
+                "drug": "Cholestyramine",
+                "severity": "mild",
+                "description": "Reduces fat-soluble vitamin absorption",
+                "description_ja": "脂溶性ビタミンの吸収を低下",
+            },
+        ],
     },
     {
         "id": "cholestyramine",
@@ -405,19 +962,51 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Bile acid sequestrant; binds bile acids, toxins, and certain drugs in GI lumen, preventing enterohepatic recirculation. Used for toxin adsorption and bile acid diarrhea",
         "mechanism_ja": "胆汁酸結合樹脂；消化管腔内で胆汁酸・毒素・特定の薬物を結合し腸肝循環を阻害。毒素吸着と胆汁酸性下痢に使用",
         "species_info": {
-            "dog": {"dose": "1-2 g/kg PO q12h mixed in food (or 4-6g/dog)", "notes": "Clostridium difficile toxin-associated diarrhea, drug intoxication (leflunomide washout), bile acid malabsorption", "notes_ja": "C. difficile毒素関連下痢、薬物中毒（レフルノミドウォッシュアウト）、胆汁酸吸収不良"},
-            "cat": {"dose": "0.5-1 g/cat PO q12h in food", "notes": "Bile acid diarrhea, toxin adsorption", "notes_ja": "胆汁酸性下痢、毒素吸着"},
-            "horse": {"dose": "50 mg/kg PO q6-12h", "notes": "Potomac horse fever (Neorickettsia risticii) diarrhea; duodenal ulcer bile reflux", "notes_ja": "ポトマック馬熱（ネオリケッチア）下痢；十二指腸潰瘍の胆汁逆流"}
+            "dog": {
+                "dose": "1-2 g/kg PO q12h mixed in food (or 4-6g/dog)",
+                "notes": "Clostridium difficile toxin-associated diarrhea, drug intoxication (leflunomide washout), bile acid malabsorption",
+                "notes_ja": "C. difficile毒素関連下痢、薬物中毒（レフルノミドウォッシュアウト）、胆汁酸吸収不良",
+            },
+            "cat": {
+                "dose": "0.5-1 g/cat PO q12h in food",
+                "notes": "Bile acid diarrhea, toxin adsorption",
+                "notes_ja": "胆汁酸性下痢、毒素吸着",
+            },
+            "horse": {
+                "dose": "50 mg/kg PO q6-12h",
+                "notes": "Potomac horse fever (Neorickettsia risticii) diarrhea; duodenal ulcer bile reflux",
+                "notes_ja": "ポトマック馬熱（ネオリケッチア）下痢；十二指腸潰瘍の胆汁逆流",
+            },
         },
-        "side_effects": ["Constipation", "Bloating", "Fat-soluble vitamin malabsorption (A, D, E, K)", "Palatability issues"],
+        "side_effects": [
+            "Constipation",
+            "Bloating",
+            "Fat-soluble vitamin malabsorption (A, D, E, K)",
+            "Palatability issues",
+        ],
         "side_effects_ja": ["便秘", "膨満", "脂溶性ビタミン吸収不良（A, D, E, K）", "嗜好性問題"],
         "contraindications": "Complete biliary obstruction, severe hypertriglyceridemia (paradoxical triglyceride increase)",
         "contraindications_ja": "完全胆道閉塞、重度高トリグリセリド血症（矛盾的トリグリセリド上昇）",
         "drug_interactions": [
-            {"drug": "All oral medications", "severity": "major", "description": "Binds most drugs reducing absorption by 20-80%; give other drugs 1h before or 4-6h after cholestyramine", "description_ja": "ほとんどの薬物を結合し吸収を20-80%低下；他薬はコレスチラミンの1時間前または4-6時間後に投与"},
-            {"drug": "Levothyroxine", "severity": "major", "description": "Markedly reduced thyroid hormone absorption", "description_ja": "甲状腺ホルモン吸収の著明な低下"},
-            {"drug": "Warfarin", "severity": "major", "description": "Reduced warfarin and vitamin K absorption; monitor INR", "description_ja": "ワルファリンとビタミンK吸収低下；INRモニタリング"}
-        ]
+            {
+                "drug": "All oral medications",
+                "severity": "major",
+                "description": "Binds most drugs reducing absorption by 20-80%; give other drugs 1h before or 4-6h after cholestyramine",
+                "description_ja": "ほとんどの薬物を結合し吸収を20-80%低下；他薬はコレスチラミンの1時間前または4-6時間後に投与",
+            },
+            {
+                "drug": "Levothyroxine",
+                "severity": "major",
+                "description": "Markedly reduced thyroid hormone absorption",
+                "description_ja": "甲状腺ホルモン吸収の著明な低下",
+            },
+            {
+                "drug": "Warfarin",
+                "severity": "major",
+                "description": "Reduced warfarin and vitamin K absorption; monitor INR",
+                "description_ja": "ワルファリンとビタミンK吸収低下；INRモニタリング",
+            },
+        ],
     },
     {
         "id": "mesalamine",
@@ -427,17 +1016,40 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Aminosalicylate anti-inflammatory; acts topically on colonic mucosa inhibiting prostaglandin/leukotriene synthesis, reducing mucosal inflammation without sulfapyridine side effects",
         "mechanism_ja": "アミノサリチル酸系抗炎症薬；大腸粘膜に局所作用しプロスタグランジン/ロイコトリエン合成を阻害、スルファピリジンの副作用なく粘膜炎症を軽減",
         "species_info": {
-            "dog": {"dose": "10-20 mg/kg PO q8h (delayed-release formulation)", "notes": "IBD colitis alternative for dogs intolerant of sulfasalazine; no KCS risk", "notes_ja": "サラゾスルファピリジン不耐容のIBD大腸炎代替；KCSリスクなし"},
-            "cat": {"dose": "10 mg/kg PO q8-12h", "notes": "Feline IBD colitis; better tolerated than sulfasalazine in cats (no sulfa component)", "notes_ja": "猫IBD大腸炎；サルファ成分なく猫でサラゾスルファピリジンより忍容性良好"}
+            "dog": {
+                "dose": "10-20 mg/kg PO q8h (delayed-release formulation)",
+                "notes": "IBD colitis alternative for dogs intolerant of sulfasalazine; no KCS risk",
+                "notes_ja": "サラゾスルファピリジン不耐容のIBD大腸炎代替；KCSリスクなし",
+            },
+            "cat": {
+                "dose": "10 mg/kg PO q8-12h",
+                "notes": "Feline IBD colitis; better tolerated than sulfasalazine in cats (no sulfa component)",
+                "notes_ja": "猫IBD大腸炎；サルファ成分なく猫でサラゾスルファピリジンより忍容性良好",
+            },
         },
-        "side_effects": ["GI upset", "Pancreatitis (rare)", "Nephrotoxicity (interstitial nephritis, rare)", "Headache"],
+        "side_effects": [
+            "GI upset",
+            "Pancreatitis (rare)",
+            "Nephrotoxicity (interstitial nephritis, rare)",
+            "Headache",
+        ],
         "side_effects_ja": ["消化器障害", "膵炎（稀）", "腎毒性（間質性腎炎、稀）", "頭痛"],
         "contraindications": "Salicylate hypersensitivity, severe renal impairment, 2nd/3rd trimester pregnancy",
         "contraindications_ja": "サリチル酸過敏症、重度腎障害、妊娠中後期",
         "drug_interactions": [
-            {"drug": "Azathioprine/6-MP", "severity": "moderate", "description": "Increases 6-thioguanine nucleotide levels (myelosuppression risk)", "description_ja": "6-チオグアニンヌクレオチド濃度上昇（骨髄抑制リスク）"},
-            {"drug": "NSAIDs", "severity": "moderate", "description": "Additive nephrotoxicity risk", "description_ja": "相加的腎毒性リスク"}
-        ]
+            {
+                "drug": "Azathioprine/6-MP",
+                "severity": "moderate",
+                "description": "Increases 6-thioguanine nucleotide levels (myelosuppression risk)",
+                "description_ja": "6-チオグアニンヌクレオチド濃度上昇（骨髄抑制リスク）",
+            },
+            {
+                "drug": "NSAIDs",
+                "severity": "moderate",
+                "description": "Additive nephrotoxicity risk",
+                "description_ja": "相加的腎毒性リスク",
+            },
+        ],
     },
     {
         "id": "kaolin_pectin",
@@ -447,21 +1059,55 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "Adsorbent/protectant; kaolin adsorbs toxins and bacteria in GI lumen, pectin forms protective mucosal coating. Increases fecal consistency without affecting underlying disease",
         "mechanism_ja": "吸着薬/保護薬；カオリンが消化管腔内の毒素と細菌を吸着し、ペクチンが保護粘膜被覆を形成。基礎疾患に影響せず便の硬さを増加",
         "species_info": {
-            "dog": {"dose": "1-2 mL/kg PO q6-8h", "notes": "Acute non-specific diarrhea, toxin ingestion adsorbent adjunct; safe OTC option", "notes_ja": "急性非特異性下痢、毒素摂取の吸着補助；安全なOTC選択肢"},
-            "cat": {"dose": "1-2 mL/kg PO q6-8h", "notes": "Acute diarrhea; avoid products with salicylates", "notes_ja": "急性下痢；サリチル酸含有製品を避ける"},
-            "horse": {"dose": "2-4 L via nasogastric tube q6-12h", "notes": "Colitis adjunct, sand colic adsorbent", "notes_ja": "大腸炎補助、砂疝痛の吸着薬"},
-            "bird": {"dose": "1-2 mL/kg PO q8h", "notes": "Bacterial enteritis adjunct", "notes_ja": "細菌性腸炎の補助"},
-            "rabbit": {"dose": "1-2 mL/kg PO q8h", "notes": "Acute diarrhea (while investigating cause)", "notes_ja": "急性下痢（原因究明中）"},
-            "reptile": {"dose": "1 mL/kg PO q12-24h", "notes": "Non-specific diarrhea support", "notes_ja": "非特異性下痢のサポート"}
+            "dog": {
+                "dose": "1-2 mL/kg PO q6-8h",
+                "notes": "Acute non-specific diarrhea, toxin ingestion adsorbent adjunct; safe OTC option",
+                "notes_ja": "急性非特異性下痢、毒素摂取の吸着補助；安全なOTC選択肢",
+            },
+            "cat": {
+                "dose": "1-2 mL/kg PO q6-8h",
+                "notes": "Acute diarrhea; avoid products with salicylates",
+                "notes_ja": "急性下痢；サリチル酸含有製品を避ける",
+            },
+            "horse": {
+                "dose": "2-4 L via nasogastric tube q6-12h",
+                "notes": "Colitis adjunct, sand colic adsorbent",
+                "notes_ja": "大腸炎補助、砂疝痛の吸着薬",
+            },
+            "bird": {
+                "dose": "1-2 mL/kg PO q8h",
+                "notes": "Bacterial enteritis adjunct",
+                "notes_ja": "細菌性腸炎の補助",
+            },
+            "rabbit": {
+                "dose": "1-2 mL/kg PO q8h",
+                "notes": "Acute diarrhea (while investigating cause)",
+                "notes_ja": "急性下痢（原因究明中）",
+            },
+            "reptile": {
+                "dose": "1 mL/kg PO q12-24h",
+                "notes": "Non-specific diarrhea support",
+                "notes_ja": "非特異性下痢のサポート",
+            },
         },
         "side_effects": ["Constipation (excessive use)", "Impaired absorption of co-administered drugs"],
         "side_effects_ja": ["便秘（過剰使用）", "併用薬の吸収障害"],
         "contraindications": "GI obstruction; products containing salicylates contraindicated in cats",
         "contraindications_ja": "消化管閉塞；サリチル酸含有製品は猫に禁忌",
         "drug_interactions": [
-            {"drug": "All oral medications", "severity": "moderate", "description": "Adsorbs drugs reducing bioavailability; separate by 2-3h", "description_ja": "薬物を吸着し生物学的利用能を低下；2-3時間間隔"},
-            {"drug": "Lincomycin", "severity": "moderate", "description": "Significantly reduces lincomycin absorption", "description_ja": "リンコマイシン吸収を著明に低下"}
-        ]
+            {
+                "drug": "All oral medications",
+                "severity": "moderate",
+                "description": "Adsorbs drugs reducing bioavailability; separate by 2-3h",
+                "description_ja": "薬物を吸着し生物学的利用能を低下；2-3時間間隔",
+            },
+            {
+                "drug": "Lincomycin",
+                "severity": "moderate",
+                "description": "Significantly reduces lincomycin absorption",
+                "description_ja": "リンコマイシン吸収を著明に低下",
+            },
+        ],
     },
     {
         "id": "imidapril",
@@ -471,18 +1117,40 @@ DRUGS_BATCH_13: list[dict] = [
         "mechanism": "ACE inhibitor (prodrug); converted to active imidaprilat. Reduces angiotensin II and aldosterone, decreasing preload/afterload. Developed for veterinary use in Japan (Alacepril)",
         "mechanism_ja": "ACE阻害薬（プロドラッグ）；活性体イミダプリラートに変換。アンジオテンシンIIとアルドステロンを減少させ前負荷/後負荷を低下。日本の獣医療で開発",
         "species_info": {
-            "dog": {"dose": "0.25-1 mg/kg PO q24h", "notes": "Heart failure (MMVD, DCM); BENCH study showed improved survival in CHF dogs", "notes_ja": "心不全（MMVD、DCM）；BENCH試験でCHF犬の生存期間改善を示す"},
-            "cat": {"dose": "0.25-0.5 mg/kg PO q24h", "notes": "Hypertensive CKD cats; used in Japan as first-line ACEi", "notes_ja": "高血圧CKD猫；日本でファーストラインACEiとして使用"}
+            "dog": {
+                "dose": "0.25-1 mg/kg PO q24h",
+                "notes": "Heart failure (MMVD, DCM); BENCH study showed improved survival in CHF dogs",
+                "notes_ja": "心不全（MMVD、DCM）；BENCH試験でCHF犬の生存期間改善を示す",
+            },
+            "cat": {
+                "dose": "0.25-0.5 mg/kg PO q24h",
+                "notes": "Hypertensive CKD cats; used in Japan as first-line ACEi",
+                "notes_ja": "高血圧CKD猫；日本でファーストラインACEiとして使用",
+            },
         },
         "side_effects": ["Hypotension", "Azotemia", "Hyperkalemia", "Anorexia", "Cough (rare)"],
         "side_effects_ja": ["低血圧", "高窒素血症", "高カリウム血症", "食欲不振", "咳（稀）"],
         "contraindications": "Bilateral renal artery stenosis, pregnancy, dehydration without correction",
         "contraindications_ja": "両側腎動脈狭窄、妊娠、未補正の脱水",
         "drug_interactions": [
-            {"drug": "NSAIDs", "severity": "moderate", "description": "Reduced antihypertensive effect; renal blood flow compromise", "description_ja": "降圧効果減弱；腎血流低下"},
-            {"drug": "Spironolactone", "severity": "moderate", "description": "Hyperkalemia risk with dual RAAS blockade", "description_ja": "二重RAAS阻害による高カリウム血症リスク"},
-            {"drug": "Furosemide", "severity": "mild", "description": "First-dose hypotension; reduce ACEi dose initially", "description_ja": "初回投与時低血圧；ACEi初期減量"}
-        ]
+            {
+                "drug": "NSAIDs",
+                "severity": "moderate",
+                "description": "Reduced antihypertensive effect; renal blood flow compromise",
+                "description_ja": "降圧効果減弱；腎血流低下",
+            },
+            {
+                "drug": "Spironolactone",
+                "severity": "moderate",
+                "description": "Hyperkalemia risk with dual RAAS blockade",
+                "description_ja": "二重RAAS阻害による高カリウム血症リスク",
+            },
+            {
+                "drug": "Furosemide",
+                "severity": "mild",
+                "description": "First-dose hypotension; reduce ACEi dose initially",
+                "description_ja": "初回投与時低血圧；ACEi初期減量",
+            },
+        ],
     },
 ]
-
