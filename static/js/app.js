@@ -100,6 +100,16 @@ const I18N={
     breedLabel:"品種を選択（任意）",breedNone:"品種を選択しない",
     symptomSearchPh:"症状を検索... (例: 咳, vomiting, 下痢)",
     analyzeBtn:"鑑別疾患を検索",checkerGuide:'💡 <strong>使い方:</strong> 上の症状リストからチェックを入れ、「鑑別疾患を検索」を押してください。<br/>症状が多いほど精度が向上します（3つ以上推奨）。',
+    labSectionTitle:"&#128300; 検査値を入力（任意）",
+    labCatRenal:"腎機能",labCatHepatic:"肝機能",labCatMetabolic:"代謝・膵",labCatElectrolyte:"電解質",labCatCBC:"CBC",labCatEndocrine:"内分泌・炎症・尿",
+    labClear:"検査値をクリア",
+    painScaleTitle:"&#x1F9D1;&#x200D;&#x2695;&#xFE0F; 痛みの評価 (CSU Pain Scale)",
+    painScaleHint:"Colorado State University 犬急性痛みスケール（0〜4）を選択してください。",
+    painDesc0:"快適、リラックス、尾を振る",
+    painDesc1:"やや落ち着かない、リップリッキング",
+    painDesc2:"体位変換、うめき声、食欲低下",
+    painDesc3:"鳴き声、動かない、触ると攻撃的",
+    painDesc4:"横臥、叫び声、硬直、無反応",
     resultsEmpty:'動物種を選択し、症状にチェックを入れて<br/>「鑑別疾患を検索」を押してください',
     resultsSelectSymptom:"症状を選択してください",
     cardDiseaseDb:"&#128218; 疾患データベース",
@@ -340,6 +350,16 @@ const I18N={
     breedLabel:"Select breed (optional)",breedNone:"No breed selected",
     symptomSearchPh:"Search symptoms... (e.g. cough, vomiting, diarrhea)",
     analyzeBtn:"Search Differential Diagnoses",checkerGuide:'💡 <strong>How to use:</strong> Check symptoms from the list above, then press "Search Differential Diagnoses".<br/>More symptoms = better accuracy (3+ recommended).',
+    labSectionTitle:"&#128300; Enter lab values (optional)",
+    labCatRenal:"Renal",labCatHepatic:"Hepatic",labCatMetabolic:"Metabolic / Pancreas",labCatElectrolyte:"Electrolytes",labCatCBC:"CBC",labCatEndocrine:"Endocrine / Inflammation / Urine",
+    labClear:"Clear lab values",
+    painScaleTitle:"&#x1F9D1;&#x200D;&#x2695;&#xFE0F; Pain assessment (CSU Pain Scale)",
+    painScaleHint:"Select Colorado State University Canine Acute Pain Scale (0–4).",
+    painDesc0:"Comfortable, relaxed, wagging tail",
+    painDesc1:"Slightly restless, lip-licking",
+    painDesc2:"Repositioning, whimpering, reduced appetite",
+    painDesc3:"Vocalizing, immobile, aggressive when touched",
+    painDesc4:"Lateral recumbency, screaming, rigid, unresponsive",
     resultsEmpty:'Select a species, check symptoms, and<br/>press "Search Differential Diagnoses"',
     resultsSelectSymptom:"Please select symptoms",
     cardDiseaseDb:"&#128218; Disease Database",
@@ -656,6 +676,22 @@ function applyLanguage(){
   if(mbn){const views=["checker","database","chat","drugs","anesthesia"];mbn.querySelectorAll("button[data-view]").forEach((btn,i)=>{const sp=btn.querySelector("span");if(sp)sp.textContent=t("mobileNav"+views[i].charAt(0).toUpperCase()+views[i].slice(1));});}
   const ob=document.getElementById("offlineBanner");
   if(ob)ob.textContent=t("offlineBanner");
+  // Refresh pain-scale labels (array-keyed i18n)
+  const _painLabels=t("painLabels");
+  if(Array.isArray(_painLabels)){
+    document.querySelectorAll(".pain-label-text[data-pain-label]").forEach(el=>{
+      const i=parseInt(el.getAttribute("data-pain-label"),10);
+      if(_painLabels[i])el.textContent=_painLabels[i];
+    });
+    // Refresh the selected-score badge if visible
+    const _badge=document.getElementById("painScaleBadge");
+    const _checked=document.querySelector('#painScaleOptions input[name="painScore"]:checked');
+    if(_badge&&_checked){
+      const _i=parseInt(_checked.value,10);
+      const _scoreLabel=t("painScoreLabel")||"Score";
+      if(_painLabels[_i])_badge.textContent=`${_scoreLabel} ${_i}: ${_painLabels[_i]}`;
+    }
+  }
 }
 
 function setupLanguageToggle(){
@@ -1676,6 +1712,7 @@ function renderSymptomList(symptoms){
   const search=(symptomSearch?.value||"").toLowerCase();
   const sortLabel=symptomSortMode==="category"?(currentLang==="ja"?"あいうえお順":"A-Z"):(currentLang==="ja"?"カテゴリ順":"By Category");
   let html=`<button class="symptom-sort-toggle" aria-label="Switch sort mode">${escapeHtml(sortLabel)}</button>`;
+  let matchCount=0;
   const mkItem=s=>{const sel=selectedSymptoms.has(s.id);const primary=currentLang==="ja"?(s.name_ja||s.name_en):(s.name_en||s.name_ja);const secondary=currentLang==="ja"?(s.name_en||""):(s.name_ja||"");return`<div class="symptom-item" role="checkbox" aria-checked="${sel}" tabindex="0" data-id="${escapeHtml(s.id)}"><span class="sym-icon" aria-hidden="true">${sel?"\u2713":"+"}</span><span>${escapeHtml(primary)} <span style="color:var(--gray-600)">${escapeHtml(secondary)}</span></span></div>`;};
   const matchSearch=s=>{if(!search)return true;return(s.name_ja||"").toLowerCase().includes(search)||(s.name_en||"").toLowerCase().includes(search)||(s.id||"").toLowerCase().includes(search);};
   if(symptomSortMode==="category"){
@@ -1685,6 +1722,7 @@ function renderSymptomList(symptoms){
     for(const[cat,items]of Object.entries(categories)){
       const filtered=items.filter(matchSearch);
       if(!filtered.length)continue;
+      matchCount+=filtered.length;
       const hasSelected=filtered.some(s=>selectedSymptoms.has(s.id));
       const selCount=filtered.filter(s=>selectedSymptoms.has(s.id)).length;
       const badge=selCount?` <span class="cat-badge">${selCount}</span>`:"";
@@ -1695,9 +1733,11 @@ function renderSymptomList(symptoms){
     }
   }else{
     const sorted=symptoms.filter(matchSearch).slice().sort((a,b)=>{const an=currentLang==="ja"?(a.name_ja||a.name_en||""):(a.name_en||a.name_ja||"");const bn=currentLang==="ja"?(b.name_ja||b.name_en||""):(b.name_en||b.name_ja||"");return an.localeCompare(bn,currentLang==="ja"?"ja":"en");});
+    matchCount=sorted.length;
     for(const s of sorted)html+=mkItem(s);
   }
-  list.innerHTML=html||`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noMatchingSymptom")}</div>`;
+  if(matchCount===0)html+=`<div style="padding:20px;text-align:center;color:var(--gray-500);font-size:.84rem">${escapeHtml(t("noMatchingSymptom"))}</div>`;
+  list.innerHTML=html;
   const sortToggle=list.querySelector(".symptom-sort-toggle");
   if(sortToggle)sortToggle.addEventListener("click",toggleSymptomSort);
   list.onclick=e=>{const item=e.target.closest(".symptom-item");if(item)toggleSymptom(item.dataset.id);};
