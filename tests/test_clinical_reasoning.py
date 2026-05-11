@@ -176,3 +176,70 @@ def test_chat_endpoint_includes_clinical_reasoning():
     # clinical_reasoning is included (even if empty differentials)
     assert "clinical_reasoning" in data
     assert "bottom_line" in data["clinical_reasoning"]
+
+
+def test_humanize_id_uses_name_map():
+    """name_map渡し時はそこから優先的に翻訳する（regression for raw-ID JA labels）。"""
+    from api.clinical_reasoning import _humanize_id
+
+    out = _humanize_id("coughing", {"coughing": {"ja": "咳", "en": "Coughing"}})
+    assert out["name_ja"] == "咳"
+    assert out["name_en"] == "Coughing"
+
+
+def test_humanize_id_default_test_names_translates_japanese():
+    """name_mapがなくても、よく使う検査IDは日本語ラベルにフォールバックする。"""
+    from api.clinical_reasoning import _humanize_id
+
+    assert _humanize_id("xray")["name_ja"] == "レントゲン検査"
+    assert _humanize_id("cbc")["name_ja"] == "血球計算（CBC）"
+    assert _humanize_id("blood_chemistry")["name_ja"] == "血液生化学"
+
+
+def test_humanize_id_unknown_falls_back_to_english_not_raw_id():
+    """未知のIDでもname_jaに生のsnake_caseは出さない（UX regression防止）。"""
+    from api.clinical_reasoning import _humanize_id
+
+    out = _humanize_id("totally_unknown_thing")
+    # 旧バグでは name_ja == 'totally_unknown_thing' だった
+    assert out["name_ja"] != "totally_unknown_thing"
+    assert "_" not in out["name_ja"]
+
+
+def test_chat_clinical_reasoning_ja_labels_not_raw_ids():
+    """JA UIの臨床推論セクションで生の症状/検査IDを返さないこと。"""
+    os.environ.setdefault("SECRET_KEY", "test_reasoning_ja")
+    from api.vetdict_api import app
+
+    client = app.test_client()
+    res = client.post(
+        "/api/diagnostic-chat/chat",
+        json={"message": "咳 食欲不振 発熱", "species": "dog", "lang": "ja"},
+    )
+    assert res.status_code == 200
+    cr = res.get_json().get("clinical_reasoning", {})
+    differentials = cr.get("differentials", [])
+    if not differentials:
+        return
+    top = differentials[0]
+    for sym in top.get("matching_symptoms", []):
+        # ID が name_ja にそのまま出ていない（旧バグの再発防止）
+        assert sym["name_ja"] != sym["id"], f"raw id leaked into name_ja: {sym}"
+    for step in top.get("next_diagnostic_steps", []):
+        assert step["name_ja"] != step["id"], f"raw id leaked into name_ja: {step}"
+
+
+def test_common_diseases_returns_japanese_names():
+    """/api/species/<sp>/common-diseases が name_ja を返すこと（lazy-load regression防止）。"""
+    os.environ.setdefault("SECRET_KEY", "test_common_dz")
+    from api.vetdict_api import app
+
+    client = app.test_client()
+    res = client.get("/api/species/dog/common-diseases")
+    assert res.status_code == 200
+    payload = res.get_json()
+    diseases = payload.get("common_diseases", [])
+    assert diseases, "expected at least one common disease for dog"
+    # 過去のバグでは name_ja が全件 '' だった
+    has_ja = any((d.get("name_ja") or "").strip() for d in diseases)
+    assert has_ja, "expected at least one entry with non-empty name_ja"

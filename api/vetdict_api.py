@@ -1729,12 +1729,15 @@ def api_common_diseases(species):
     except ImportError:
         from species.prevalence_data import SPECIES_PREVALENCE
     prev = SPECIES_PREVALENCE.get(species, {})
-    # Load disease data to get Japanese names
+    # Load disease data to get Japanese names (lazy-loaded; trigger via accessor)
     try:
-        from api.diagnostic_chat import _SPECIES_DATA
+        from api.chat.species_data import get_species_data
     except ImportError:
-        _SPECIES_DATA = {}
-    sp_data = _SPECIES_DATA.get(species, {})
+        try:
+            from chat.species_data import get_species_data
+        except ImportError:
+            get_species_data = lambda _s: {}  # noqa: E731
+    sp_data = get_species_data(species)
     diseases_list = sp_data.get("diseases", [])
     name_map = {}
     for d in diseases_list:
