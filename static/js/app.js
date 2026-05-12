@@ -3611,19 +3611,28 @@ function guidedRenderContextQuestions(questions){
   let html='<div class="guided-context-questions">';
   questions.forEach(q=>{
     const label=currentLang==="ja"?q.question_ja:q.question_en;
-    html+=`<div class="guided-context-q"><div class="guided-context-label">${label}</div><div class="guided-context-options">`;
-    (q.options||[]).forEach(o=>{
-      const olabel=currentLang==="ja"?o.label_ja:o.label_en;
-      html+=`<button class="guided-context-opt" data-type="${q.type}" data-value="${o.value}">${olabel}</button>`;
-    });
-    html+=`<button class="guided-context-opt skip" data-type="${q.type}" data-value="">${currentLang==="ja"?"スキップ":"Skip"}</button>`;
-    html+='</div></div>';
+    html+=`<div class="guided-context-q"><div class="guided-context-label">${label}</div>`;
+    if(q.input_type==="text"){
+      // Free-text input (e.g. breed)
+      const ph=currentLang==="ja"?(q.placeholder_ja||""):(q.placeholder_en||"");
+      const initialVal=q.type==="breed"?(guidedState.breed||""):"";
+      html+=`<div class="guided-context-text-wrap"><input type="text" class="guided-context-text-input" data-type="${q.type}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(initialVal)}" autocomplete="off"></div>`;
+    }else{
+      html+='<div class="guided-context-options">';
+      (q.options||[]).forEach(o=>{
+        const olabel=currentLang==="ja"?o.label_ja:o.label_en;
+        html+=`<button class="guided-context-opt" data-type="${q.type}" data-value="${o.value}">${olabel}</button>`;
+      });
+      html+=`<button class="guided-context-opt skip" data-type="${q.type}" data-value="">${currentLang==="ja"?"スキップ":"Skip"}</button>`;
+      html+='</div>';
+    }
+    html+='</div>';
   });
   html+=`<div class="guided-bottom-actions"><button class="guided-action-btn primary" id="guidedFinalizeBtn">${t("guidedFinish")}</button></div>`;
   html+='</div>';
   guidedSetActions(html);
 
-  // Context option selection
+  // Context option selection (buttons)
   document.querySelectorAll(".guided-context-opt").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const type=btn.dataset.type;
@@ -3635,6 +3644,16 @@ function guidedRenderContextQuestions(questions){
       if(type==="age"&&val)guidedState.ageYears=parseFloat(val);
       if(type==="pain_score"&&val!=="")guidedState.painScore=parseInt(val,10);
     });
+  });
+  // Text input handlers (e.g. breed)
+  document.querySelectorAll(".guided-context-text-input").forEach(inp=>{
+    const sync=()=>{
+      const type=inp.dataset.type;
+      const val=inp.value.trim();
+      if(type==="breed")guidedState.breed=val;
+    };
+    inp.addEventListener("input",sync);
+    inp.addEventListener("change",sync);
   });
 
   // Finalize

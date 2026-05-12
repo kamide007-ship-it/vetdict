@@ -554,6 +554,9 @@ a:hover{text-decoration:underline}
 .guided-context-opt.selected{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .guided-context-opt.skip{border-style:dashed;color:var(--gray-400)}
 .guided-context-opt.skip:hover{color:var(--gray-600)}
+.guided-context-text-wrap{display:flex}
+.guided-context-text-input{flex:1;padding:8px 12px;background:var(--white);border:1.5px solid var(--gray-300);border-radius:8px;font-size:.85rem;font-family:var(--font);color:var(--gray-800);transition:border-color .2s}
+.guided-context-text-input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 2px rgba(30,58,138,.1)}
 
 /* --- References (collapsible) --- */
 .references{max-width:1200px;margin:0 auto;padding:24px 20px}

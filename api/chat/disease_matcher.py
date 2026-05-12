@@ -223,6 +223,8 @@ def _match_species_symptoms_to_diseases(
     pain_score: int | None = None,
     lab_values: dict | None = None,
     breed: str | None = None,
+    age_category: str | None = None,
+    onset_pattern: str | None = None,
     lang: str = "",
 ) -> list[dict]:
     """Match symptom IDs to species-specific diseases using advanced weighted scoring.
@@ -231,8 +233,12 @@ def _match_species_symptoms_to_diseases(
     the dog matcher (match_symptoms_to_diseases) to achieve consistent,
     high-accuracy differential diagnosis across all species.
 
-    Optional clinical context (pain_score, lab_values, breed) is accepted for
-    future scoring refinement and is forwarded from the chat endpoint.
+    Optional clinical context (pain_score, lab_values, breed, age_category,
+    onset_pattern) refines scoring when available:
+    - age_category: 'puppy'/'young'/'adult'/'senior' (or similar species-specific terms)
+      boosts diseases listing this age in age_predisposition
+    - onset_pattern: 'acute'/'subacute'/'chronic' boosts diseases listing this pattern
+    - breed: boosts diseases listing this breed in common_breeds (case-insensitive substring match)
     """
 
     sp_data = get_species_data(species)
@@ -340,7 +346,76 @@ def _match_species_symptoms_to_diseases(
         prevalence_tier = _prevalence.get(disease_name, "")
         prevalence_mult = _PREVALENCE_MULTIPLIER.get(prevalence_tier, 1.0)
 
-        composite = base_score * negative_penalty * urgency_factor * coverage_bonus * prevalence_mult
+        # --- Age-predisposition factor (if user supplied patient age category) ---
+        # age_category should be one of: puppy/kitten/foal/young/adult/senior/geriatric
+        age_factor = 1.0
+        if age_category:
+            disease_age_set = disease.get("age_predisposition")
+            if disease_age_set:
+                age_lc = str(age_category).lower().strip()
+                age_set_lc = {str(a).lower() for a in disease_age_set}
+                # Direct match: boost by 10%
+                if age_lc in age_set_lc:
+                    age_factor = 1.10
+                else:
+                    # Cross-species age synonyms
+                    age_aliases = {
+                        "puppy": {"young", "juvenile"},
+                        "kitten": {"young", "juvenile"},
+                        "foal": {"young", "juvenile"},
+                        "young_adult": {"young", "adult"},
+                        "geriatric": {"senior"},
+                        "elderly": {"senior"},
+                    }
+                    if age_aliases.get(age_lc, set()) & age_set_lc:
+                        age_factor = 1.07
+                    # Mismatch penalty: if disease specifies age set and patient
+                    # age is clearly outside, mild down-weight
+                    elif (
+                        age_lc in {"puppy", "kitten", "young", "young_adult"}
+                        and age_set_lc == {"senior"}
+                        or age_lc in {"senior", "geriatric", "elderly"}
+                        and age_set_lc == {"young"}
+                    ):
+                        age_factor = 0.85
+
+        # --- Onset pattern factor (acute / subacute / chronic) ---
+        onset_factor = 1.0
+        if onset_pattern:
+            disease_onset_set = disease.get("onset_pattern")
+            if disease_onset_set:
+                onset_lc = str(onset_pattern).lower().strip()
+                onset_set_lc = {str(o).lower() for o in disease_onset_set}
+                if onset_lc in onset_set_lc:
+                    onset_factor = 1.08
+                # Mismatch penalty for clear contradiction
+                elif (
+                    onset_lc == "acute"
+                    and onset_set_lc == {"chronic"}
+                    or onset_lc == "chronic"
+                    and onset_set_lc == {"acute"}
+                ):
+                    onset_factor = 0.85
+
+        # --- Breed factor (matches common_breeds substring) ---
+        breed_factor = 1.0
+        if breed:
+            disease_breeds = disease.get("common_breeds") or disease.get("breed_predisposition") or ""
+            if isinstance(disease_breeds, str) and disease_breeds:
+                breed_lc = breed.lower().strip()
+                if breed_lc and breed_lc in disease_breeds.lower():
+                    breed_factor = 1.12
+
+        composite = (
+            base_score
+            * negative_penalty
+            * urgency_factor
+            * coverage_bonus
+            * prevalence_mult
+            * age_factor
+            * onset_factor
+            * breed_factor
+        )
 
         # --- Logistic confidence calibration ---
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
@@ -377,6 +452,9 @@ def _match_species_symptoms_to_diseases(
                     "coverage": round(coverage, 3),
                     "negative_penalty": round(negative_penalty, 3),
                     "urgency_factor": urgency_factor,
+                    "age_factor": age_factor,
+                    "onset_factor": onset_factor,
+                    "breed_factor": breed_factor,
                 },
             }
         )

@@ -45,6 +45,7 @@ from api.vetdict_api import app as flask_app
 # Shared test client fixture
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def client():
     flask_app.config["TESTING"] = True
@@ -55,6 +56,7 @@ def client():
 # ===========================================================================
 # 1. extract_onset_from_text()
 # ===========================================================================
+
 
 class TestExtractOnsetFromText:
     """Test extraction of time-course (onset) from free text."""
@@ -177,6 +179,7 @@ class TestExtractOnsetFromText:
 # 2. extract_age_from_text()
 # ===========================================================================
 
+
 class TestExtractAgeFromText:
     """Test extraction of approximate age in years from free text."""
 
@@ -262,6 +265,7 @@ class TestExtractAgeFromText:
 # 3. _build_follow_up_questions()
 # ===========================================================================
 
+
 class TestBuildFollowUpQuestions:
     """Test context-aware follow-up question builder."""
 
@@ -291,11 +295,11 @@ class TestBuildFollowUpQuestions:
     def test_with_candidates_generates_symptom_checks(self):
         """With disease candidates, generates targeted symptom_check questions."""
         mock_candidates = [
-            {"missing_key_symptoms": ["fever", "lethargy"],
-             "additional_disease_symptoms": ["vomiting", "diarrhea"]},
+            {"missing_key_symptoms": ["fever", "lethargy"], "additional_disease_symptoms": ["vomiting", "diarrhea"]},
         ]
-        result = _build_follow_up_questions("acute", 5.0, ["coughing"],
-                                            disease_candidates=mock_candidates, species="cat")
+        result = _build_follow_up_questions(
+            "acute", 5.0, ["coughing"], disease_candidates=mock_candidates, species="cat"
+        )
         symptom_checks = [q for q in result if q["type"] == "symptom_check"]
         assert len(symptom_checks) > 0
         assert "symptom_id" in symptom_checks[0]
@@ -350,6 +354,7 @@ class TestBuildFollowUpQuestions:
 # ===========================================================================
 # 4. _species_guidance_line()
 # ===========================================================================
+
 
 class TestSpeciesGuidanceLine:
     """Test species-specific guidance text generation."""
@@ -412,6 +417,7 @@ class TestSpeciesGuidanceLine:
 # ===========================================================================
 # 5. _extract_equine_symptoms()
 # ===========================================================================
+
 
 @pytest.mark.skipif(not EQUINE_AVAILABLE, reason="Equine data not available")
 class TestExtractEquineSymptoms:
@@ -488,6 +494,7 @@ class TestExtractEquineSymptoms:
 # 6. _match_equine_symptoms_to_diseases()
 # ===========================================================================
 
+
 @pytest.mark.skipif(not EQUINE_AVAILABLE, reason="Equine data not available")
 class TestMatchEquineSymptomsToDiseases:
     """Test equine disease matching using Jaccard similarity."""
@@ -512,10 +519,16 @@ class TestMatchEquineSymptomsToDiseases:
     def test_match_has_required_keys(self):
         result = _match_equine_symptoms_to_diseases(["gen_fever"])
         required = {
-            "disease_id", "name_ja", "name_en", "severity",
-            "similarity_score", "matched_symptoms",
-            "unmatched_user_symptoms", "additional_disease_symptoms",
-            "description", "recommended_tests",
+            "disease_id",
+            "name_ja",
+            "name_en",
+            "severity",
+            "similarity_score",
+            "matched_symptoms",
+            "unmatched_user_symptoms",
+            "additional_disease_symptoms",
+            "description",
+            "recommended_tests",
         }
         for item in result:
             for key in required:
@@ -551,6 +564,7 @@ class TestMatchEquineSymptomsToDiseases:
 # ===========================================================================
 # 7. _extract_species_symptoms()
 # ===========================================================================
+
 
 class TestExtractSpeciesSymptoms:
     """Test generic species symptom extraction."""
@@ -600,6 +614,7 @@ class TestExtractSpeciesSymptoms:
 # 8. _match_species_symptoms_to_diseases()
 # ===========================================================================
 
+
 class TestMatchSpeciesSymptomsToDiseases:
     """Test generic species disease matching."""
 
@@ -621,10 +636,16 @@ class TestMatchSpeciesSymptomsToDiseases:
     def test_cat_match_has_required_keys(self):
         result = _match_species_symptoms_to_diseases(["vomiting"], "cat")
         required = {
-            "disease_id", "name_ja", "name_en", "severity",
-            "similarity_score", "matched_symptoms",
-            "unmatched_user_symptoms", "additional_disease_symptoms",
-            "description", "recommended_tests",
+            "disease_id",
+            "name_ja",
+            "name_en",
+            "severity",
+            "similarity_score",
+            "matched_symptoms",
+            "unmatched_user_symptoms",
+            "additional_disease_symptoms",
+            "description",
+            "recommended_tests",
         }
         for item in result:
             for key in required:
@@ -657,6 +678,7 @@ class TestMatchSpeciesSymptomsToDiseases:
 # ===========================================================================
 # 9. evaluate_with_ai_confidence()
 # ===========================================================================
+
 
 class TestEvaluateWithAiConfidence:
     """Test RECO2 evaluation wrapper."""
@@ -701,6 +723,7 @@ class TestEvaluateWithAiConfidence:
 # 10. get_treatment_recommendations_for_disease() - extra branches
 # ===========================================================================
 
+
 class TestGetTreatmentRecommendationsExtraBranches:
     """Cover branches not tested in the existing test file."""
 
@@ -740,6 +763,7 @@ class TestGetTreatmentRecommendationsExtraBranches:
 # 11. Flask endpoints
 # ===========================================================================
 
+
 class TestDiagnosticChatEndpoint:
     """Test POST /api/diagnostic-chat/chat."""
 
@@ -760,9 +784,16 @@ class TestDiagnosticChatEndpoint:
         r = client.post("/api/diagnostic-chat/chat", json={"message": "coughing"})
         data = r.get_json()
         required = {
-            "response", "user_message", "species", "extracted_symptoms",
-            "accumulated_symptoms", "symptom_details", "disease_candidates",
-            "total_candidates", "species_guidance", "follow_up_questions",
+            "response",
+            "user_message",
+            "species",
+            "extracted_symptoms",
+            "accumulated_symptoms",
+            "symptom_details",
+            "disease_candidates",
+            "total_candidates",
+            "species_guidance",
+            "follow_up_questions",
         }
         for key in required:
             assert key in data, f"Missing key '{key}' in chat response"
@@ -786,10 +817,13 @@ class TestDiagnosticChatEndpoint:
         assert r.get_json()["species"] == "horse"
 
     def test_previous_symptoms_accumulated(self, client):
-        r = client.post("/api/diagnostic-chat/chat", json={
-            "message": "also vomiting",
-            "previous_symptoms": ["coughing"],
-        })
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={
+                "message": "also vomiting",
+                "previous_symptoms": ["coughing"],
+            },
+        )
         data = r.get_json()
         assert "coughing" in data["accumulated_symptoms"]
 
@@ -799,10 +833,13 @@ class TestDiagnosticChatEndpoint:
         assert data["onset_detected_from_text"] == "acute"
 
     def test_explicit_onset_overrides_detected(self, client):
-        r = client.post("/api/diagnostic-chat/chat", json={
-            "message": "suddenly started coughing",
-            "onset": "chronic",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={
+                "message": "suddenly started coughing",
+                "onset": "chronic",
+            },
+        )
         data = r.get_json()
         assert data["onset_context"] == "chronic"
 
@@ -812,18 +849,24 @@ class TestDiagnosticChatEndpoint:
         assert data["age_detected_from_text"] == 5.0
 
     def test_explicit_age_overrides_detected(self, client):
-        r = client.post("/api/diagnostic-chat/chat", json={
-            "message": "my 5 year old dog is coughing",
-            "age_years": 10.0,
-        })
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={
+                "message": "my 5 year old dog is coughing",
+                "age_years": 10.0,
+            },
+        )
         data = r.get_json()
         assert data["age_context"] == 10.0
 
     def test_breed_context_passed_through(self, client):
-        r = client.post("/api/diagnostic-chat/chat", json={
-            "message": "coughing",
-            "breed_id": "122_labrador_retriever",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={
+                "message": "coughing",
+                "breed_id": "122_labrador_retriever",
+            },
+        )
         assert r.get_json()["breed_context"] == "122_labrador_retriever"
 
     def test_no_symptoms_detected_response_text(self, client):
@@ -874,20 +917,26 @@ class TestDiagnosticChatEndpoint:
         assert "next_step_ja" in data["recommendations"]
 
     def test_non_dog_species_treatments_format(self, client):
-        r = client.post("/api/diagnostic-chat/chat", json={
-            "message": "cat vomiting",
-            "species": "cat",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={
+                "message": "cat vomiting",
+                "species": "cat",
+            },
+        )
         data = r.get_json()
         for candidate in data["disease_candidates"]:
             # non-dog treatments should have at least the required keys
             assert "treatment_recommendations" in candidate
 
     def test_horse_disease_candidates_present(self, client):
-        r = client.post("/api/diagnostic-chat/chat", json={
-            "message": "horse has cough fever and diarrhea",
-            "species": "horse",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={
+                "message": "horse has cough fever and diarrhea",
+                "species": "horse",
+            },
+        )
         data = r.get_json()
         assert len(data["disease_candidates"]) > 0
 
@@ -1044,8 +1093,12 @@ class TestTreatmentPlanEndpoint:
         r = client.post("/api/diagnostic-chat/treatment-plan", json={"disease_id": "hip_dysplasia"})
         data = r.get_json()
         required = {
-            "disease_id", "disease_name_ja", "disease_name_en",
-            "severity", "supplements", "follow_up_visits",
+            "disease_id",
+            "disease_name_ja",
+            "disease_name_en",
+            "severity",
+            "supplements",
+            "follow_up_visits",
         }
         for key in required:
             assert key in data, f"Missing key '{key}' in treatment plan"
@@ -1070,11 +1123,14 @@ class TestTreatmentPlanEndpoint:
             assert "focus_areas_en" in visit
 
     def test_optional_breed_and_age_accepted(self, client):
-        r = client.post("/api/diagnostic-chat/treatment-plan", json={
-            "disease_id": "hip_dysplasia",
-            "breed_id": "122_labrador_retriever",
-            "age_years": 5.0,
-        })
+        r = client.post(
+            "/api/diagnostic-chat/treatment-plan",
+            json={
+                "disease_id": "hip_dysplasia",
+                "breed_id": "122_labrador_retriever",
+                "age_years": 5.0,
+            },
+        )
         assert r.status_code == 200
 
     def test_supplements_have_reference(self, client):
@@ -1084,8 +1140,7 @@ class TestTreatmentPlanEndpoint:
             assert supp.get("reference") == "https://www.caninevet.jp/"
 
     def test_brachycephalic_disease_returns_correctly(self, client):
-        r = client.post("/api/diagnostic-chat/treatment-plan",
-                        json={"disease_id": "brachycephalic_airway_syndrome"})
+        r = client.post("/api/diagnostic-chat/treatment-plan", json={"disease_id": "brachycephalic_airway_syndrome"})
         assert r.status_code == 200
         data = r.get_json()
         assert data["disease_name_en"] != ""
@@ -1100,55 +1155,71 @@ class TestDifferentialAnalysisEndpoint:
         assert "Both disease IDs required" in r.get_json()["error"]
 
     def test_missing_disease_id_1_returns_400(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis",
-                        json={"disease_id_2": "hip_dysplasia"})
+        r = client.post("/api/diagnostic-chat/differential-analysis", json={"disease_id_2": "hip_dysplasia"})
         assert r.status_code == 400
 
     def test_missing_disease_id_2_returns_400(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis",
-                        json={"disease_id_1": "hip_dysplasia"})
+        r = client.post("/api/diagnostic-chat/differential-analysis", json={"disease_id_1": "hip_dysplasia"})
         assert r.status_code == 400
 
     def test_unknown_disease_id_returns_404(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "fake_disease_xyz",
-            "disease_id_2": "hip_dysplasia",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "fake_disease_xyz",
+                "disease_id_2": "hip_dysplasia",
+            },
+        )
         assert r.status_code == 404
 
     def test_both_unknown_returns_404(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "fake_1",
-            "disease_id_2": "fake_2",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "fake_1",
+                "disease_id_2": "fake_2",
+            },
+        )
         assert r.status_code == 404
 
     def test_valid_comparison_returns_200(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+            },
+        )
         assert r.status_code == 200
 
     def test_response_has_required_keys(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+            },
+        )
         data = r.get_json()
         required = {
-            "disease_1", "disease_2", "symptom_analysis",
-            "differential_reasoning_ja", "differential_reasoning_en",
+            "disease_1",
+            "disease_2",
+            "symptom_analysis",
+            "differential_reasoning_ja",
+            "differential_reasoning_en",
             "recommended_diagnostic_tests",
         }
         for key in required:
             assert key in data, f"Missing key '{key}' in differential analysis"
 
     def test_symptom_analysis_has_required_fields(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+            },
+        )
         sym_analysis = r.get_json()["symptom_analysis"]
         assert "shared_symptoms" in sym_analysis
         assert "unique_to_disease_1" in sym_analysis
@@ -1157,46 +1228,62 @@ class TestDifferentialAnalysisEndpoint:
         assert "user_symptom_overlap_2" in sym_analysis
 
     def test_user_symptoms_affect_overlap_counts(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-            "symptoms": ["labored_breathing", "exercise_intolerance"],
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+                "symptoms": ["labored_breathing", "exercise_intolerance"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         # brachycephalic has labored_breathing and exercise_intolerance -> overlap >= 1
         assert data["symptom_analysis"]["user_symptom_overlap_2"] >= 1
 
     def test_disease_1_info_matches_input(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+            },
+        )
         data = r.get_json()
         assert data["disease_1"]["id"] == "hip_dysplasia"
 
     def test_disease_2_info_matches_input(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+            },
+        )
         data = r.get_json()
         assert data["disease_2"]["id"] == "brachycephalic_airway_syndrome"
 
     def test_reasoning_contains_disease_names(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+            },
+        )
         data = r.get_json()
-        assert "Hip Dysplasia" in data["differential_reasoning_en"] or \
-               "hip" in data["differential_reasoning_en"].lower()
+        assert (
+            "Hip Dysplasia" in data["differential_reasoning_en"] or "hip" in data["differential_reasoning_en"].lower()
+        )
 
     def test_recommended_tests_is_list(self, client):
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "hip_dysplasia",
-            "disease_id_2": "brachycephalic_airway_syndrome",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "hip_dysplasia",
+                "disease_id_2": "brachycephalic_airway_syndrome",
+            },
+        )
         assert isinstance(r.get_json()["recommended_diagnostic_tests"], list)
 
 
@@ -1204,73 +1291,100 @@ class TestFeedbackEndpoint:
     """Test POST /api/diagnostic-chat/feedback."""
 
     def test_missing_session_id_returns_400(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "feedback": "good",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "feedback": "good",
+            },
+        )
         assert r.status_code == 400
         assert r.get_json()["error"] == "session_id required"
 
     def test_invalid_feedback_type_returns_400(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "invalid_value",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "invalid_value",
+            },
+        )
         assert r.status_code == 400
         assert "feedback must be" in r.get_json()["error"]
 
     def test_empty_feedback_returns_400(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "",
+            },
+        )
         assert r.status_code == 400
 
     def test_good_feedback_returns_201(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "good",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "good",
+            },
+        )
         assert r.status_code == 201
 
     def test_bad_feedback_returns_201(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "bad",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "bad",
+            },
+        )
         assert r.status_code == 201
 
     def test_recalculate_feedback_returns_201(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "recalculate",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "recalculate",
+            },
+        )
         assert r.status_code == 201
 
     def test_success_response_has_status_recorded(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "good",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "good",
+            },
+        )
         data = r.get_json()
         assert data["status"] == "recorded"
 
     def test_success_response_has_learning_signal_strength(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "good",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "good",
+            },
+        )
         data = r.get_json()
         assert "learning_signal_strength" in data
 
     def test_feedback_with_optional_fields(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "good",
-            "domain": "orthopedics",
-            "notes": "helpful result",
-            "correct_symptoms": ["coughing", "vomiting"],
-            "ai_result": {"confidence": 0.9},
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "good",
+                "domain": "orthopedics",
+                "notes": "helpful result",
+                "correct_symptoms": ["coughing", "vomiting"],
+                "ai_result": {"confidence": 0.9},
+            },
+        )
         assert r.status_code == 201
 
     def test_empty_body_returns_400(self, client):
@@ -1278,10 +1392,13 @@ class TestFeedbackEndpoint:
         assert r.status_code == 400
 
     def test_learning_signal_strength_is_numeric(self, client):
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "abc123",
-            "feedback": "good",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "abc123",
+                "feedback": "good",
+            },
+        )
         data = r.get_json()
         assert isinstance(data["learning_signal_strength"], (int, float))
 
@@ -1297,7 +1414,8 @@ class TestDiagnosticAccuracyFerretAdrenal:
     @pytest.mark.skipif("ferret" not in _SPECIES_DATA, reason="Ferret data not loaded")
     def test_adrenal_disease_top5_with_hair_loss_vulvar_swelling(self):
         result = _match_species_symptoms_to_diseases(
-            ["hair_loss", "vulvar_swelling", "itching", "aggression", "lethargy"], "ferret",
+            ["hair_loss", "vulvar_swelling", "itching", "aggression", "lethargy"],
+            "ferret",
         )
         top5 = [m["disease_id"] for m in result[:5]]
         assert "Adrenal Disease" in top5
@@ -1305,7 +1423,8 @@ class TestDiagnosticAccuracyFerretAdrenal:
     @pytest.mark.skipif("ferret" not in _SPECIES_DATA, reason="Ferret data not loaded")
     def test_adrenal_disease_confidence_above_50(self):
         result = _match_species_symptoms_to_diseases(
-            ["hair_loss", "vulvar_swelling", "itching", "aggression", "lethargy"], "ferret",
+            ["hair_loss", "vulvar_swelling", "itching", "aggression", "lethargy"],
+            "ferret",
         )
         adrenal = [m for m in result if m["disease_id"] == "Adrenal Disease"]
         assert adrenal, "Adrenal Disease not found in results"
@@ -1329,7 +1448,8 @@ class TestDiagnosticAccuracyCatHypothyroidism:
     @pytest.mark.skipif("cat" not in _SPECIES_DATA, reason="Cat data not loaded")
     def test_hypothyroidism_detected_with_typical_symptoms(self):
         result = _match_species_symptoms_to_diseases(
-            ["lethargy", "weight_gain", "hair_loss", "constipation"], "cat",
+            ["lethargy", "weight_gain", "hair_loss", "constipation"],
+            "cat",
         )
         names = [m["disease_id"] for m in result[:10]]
         assert "Hypothyroidism (Iatrogenic)" in names
@@ -1337,7 +1457,8 @@ class TestDiagnosticAccuracyCatHypothyroidism:
     @pytest.mark.skipif("cat" not in _SPECIES_DATA, reason="Cat data not loaded")
     def test_hypothyroidism_confidence_above_55(self):
         result = _match_species_symptoms_to_diseases(
-            ["lethargy", "weight_gain", "hair_loss", "poor_coat", "bradycardia"], "cat",
+            ["lethargy", "weight_gain", "hair_loss", "poor_coat", "bradycardia"],
+            "cat",
         )
         hypo = [m for m in result if m["disease_id"] == "Hypothyroidism (Iatrogenic)"]
         assert hypo, "Hypothyroidism not found in results"
@@ -1356,7 +1477,8 @@ class TestDiagnosticAccuracyHamsterWetTail:
     @pytest.mark.skipif("hamster" not in _SPECIES_DATA, reason="Hamster data not loaded")
     def test_wet_tail_top3_with_typical_symptoms(self):
         result = _match_species_symptoms_to_diseases(
-            ["wet_tail", "diarrhea", "lethargy", "appetite_loss"], "hamster",
+            ["wet_tail", "diarrhea", "lethargy", "appetite_loss"],
+            "hamster",
         )
         top3 = [m["disease_id"] for m in result[:3]]
         assert "Wet Tail (Proliferative Ileitis)" in top3
@@ -1364,7 +1486,8 @@ class TestDiagnosticAccuracyHamsterWetTail:
     @pytest.mark.skipif("hamster" not in _SPECIES_DATA, reason="Hamster data not loaded")
     def test_wet_tail_confidence_above_55(self):
         result = _match_species_symptoms_to_diseases(
-            ["wet_tail", "diarrhea", "lethargy", "appetite_loss", "dehydration"], "hamster",
+            ["wet_tail", "diarrhea", "lethargy", "appetite_loss", "dehydration"],
+            "hamster",
         )
         wt = [m for m in result if m["disease_id"] == "Wet Tail (Proliferative Ileitis)"]
         assert wt, "Wet Tail not found in results"
@@ -1381,60 +1504,78 @@ class TestNextQuestionsEndpoint:
     """Test POST /api/diagnostic-chat/next-questions."""
 
     def test_missing_suspected_diseases_returns_400(self, client):
-        r = client.post("/api/diagnostic-chat/next-questions", json={
-            "symptoms": ["vomiting"],
-        })
+        r = client.post(
+            "/api/diagnostic-chat/next-questions",
+            json={
+                "symptoms": ["vomiting"],
+            },
+        )
         assert r.status_code == 400
         assert "suspected_diseases" in r.get_json()["error"]
 
     def test_empty_suspected_diseases_returns_400(self, client):
-        r = client.post("/api/diagnostic-chat/next-questions", json={
-            "suspected_diseases": [],
-            "symptoms": ["vomiting"],
-        })
+        r = client.post(
+            "/api/diagnostic-chat/next-questions",
+            json={
+                "suspected_diseases": [],
+                "symptoms": ["vomiting"],
+            },
+        )
         assert r.status_code == 400
 
     def test_valid_request_returns_200(self, client):
-        r = client.post("/api/diagnostic-chat/next-questions", json={
-            "suspected_diseases": [
-                {"name": "Gastroenteritis", "similarity_score": 0.8},
-                {"name": "Pancreatitis", "similarity_score": 0.6},
-            ],
-            "symptoms": ["vomiting", "lethargy"],
-        })
+        r = client.post(
+            "/api/diagnostic-chat/next-questions",
+            json={
+                "suspected_diseases": [
+                    {"name": "Gastroenteritis", "similarity_score": 0.8},
+                    {"name": "Pancreatitis", "similarity_score": 0.6},
+                ],
+                "symptoms": ["vomiting", "lethargy"],
+            },
+        )
         assert r.status_code == 200
 
     def test_response_has_required_keys(self, client):
-        r = client.post("/api/diagnostic-chat/next-questions", json={
-            "suspected_diseases": [
-                {"name": "Gastroenteritis", "similarity_score": 0.8},
-            ],
-            "symptoms": ["vomiting"],
-        })
+        r = client.post(
+            "/api/diagnostic-chat/next-questions",
+            json={
+                "suspected_diseases": [
+                    {"name": "Gastroenteritis", "similarity_score": 0.8},
+                ],
+                "symptoms": ["vomiting"],
+            },
+        )
         data = r.get_json()
         assert "next_questions" in data
         assert "question_count" in data
 
     def test_question_limit_caps_at_5(self, client):
-        r = client.post("/api/diagnostic-chat/next-questions", json={
-            "suspected_diseases": [
-                {"name": "Gastroenteritis", "similarity_score": 0.8},
-                {"name": "Pancreatitis", "similarity_score": 0.6},
-                {"name": "Liver Disease", "similarity_score": 0.4},
-            ],
-            "symptoms": ["vomiting", "lethargy", "appetite_loss"],
-            "question_limit": 10,
-        })
+        r = client.post(
+            "/api/diagnostic-chat/next-questions",
+            json={
+                "suspected_diseases": [
+                    {"name": "Gastroenteritis", "similarity_score": 0.8},
+                    {"name": "Pancreatitis", "similarity_score": 0.6},
+                    {"name": "Liver Disease", "similarity_score": 0.4},
+                ],
+                "symptoms": ["vomiting", "lethargy", "appetite_loss"],
+                "question_limit": 10,
+            },
+        )
         data = r.get_json()
         assert data.get("question_count", 0) <= 5
 
     def test_default_question_limit_is_3(self, client):
-        r = client.post("/api/diagnostic-chat/next-questions", json={
-            "suspected_diseases": [
-                {"name": "Gastroenteritis", "similarity_score": 0.8},
-            ],
-            "symptoms": ["vomiting"],
-        })
+        r = client.post(
+            "/api/diagnostic-chat/next-questions",
+            json={
+                "suspected_diseases": [
+                    {"name": "Gastroenteritis", "similarity_score": 0.8},
+                ],
+                "symptoms": ["vomiting"],
+            },
+        )
         data = r.get_json()
         assert data.get("question_count", 0) <= 3
 
@@ -1446,6 +1587,7 @@ class TestNextQuestionsEndpoint:
 # ===========================================================================
 # Guided Consultation Endpoint (POST /api/diagnostic-chat/consultation)
 # ===========================================================================
+
 
 class TestConsultationEndpoint:
     """Tests for the 5-phase guided consultation flow."""
@@ -1491,11 +1633,14 @@ class TestConsultationEndpoint:
         cats = r1.get_json()["categories"]
         cat_id = cats[0]["id"]
 
-        r = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "dog",
-            "selected_category": cat_id,
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "dog",
+                "selected_category": cat_id,
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "show_symptoms"
@@ -1510,10 +1655,13 @@ class TestConsultationEndpoint:
 
     def test_select_symptoms_missing_category(self, client):
         """Omitting selected_category returns 400."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "dog",
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "dog",
+            },
+        )
         assert r.status_code == 400
         assert "error" in r.get_json()
 
@@ -1523,20 +1671,26 @@ class TestConsultationEndpoint:
         cat_id = r1.get_json()["categories"][0]["id"]
 
         # Get symptoms for category to find a valid id
-        r2 = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "dog",
-            "selected_category": cat_id,
-        })
+        r2 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "dog",
+                "selected_category": cat_id,
+            },
+        )
         sym_id = r2.get_json()["symptoms"][0]["id"]
 
         # Request again with that symptom pre-selected
-        r3 = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "dog",
-            "selected_category": cat_id,
-            "selected_symptoms": [sym_id],
-        })
+        r3 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "dog",
+                "selected_category": cat_id,
+                "selected_symptoms": [sym_id],
+            },
+        )
         data = r3.get_json()
         matching = [s for s in data["symptoms"] if s["id"] == sym_id]
         assert matching[0]["selected"] is True
@@ -1545,11 +1699,14 @@ class TestConsultationEndpoint:
 
     def test_next_category_phase(self, client):
         """POST with selected symptoms returns interim results + suggested categories."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "dog",
-            "selected_symptoms": ["coughing", "nasal_discharge"],
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "dog",
+                "selected_symptoms": ["coughing", "nasal_discharge"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "interim_results"
@@ -1562,11 +1719,14 @@ class TestConsultationEndpoint:
 
     def test_next_category_no_symptoms(self, client):
         """Without symptoms, next_category falls back to category selection."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "dog",
-            "selected_symptoms": [],
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "dog",
+                "selected_symptoms": [],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "select_category"
@@ -1574,11 +1734,14 @@ class TestConsultationEndpoint:
 
     def test_next_category_returns_candidates(self, client):
         """Interim results include disease candidate details."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "dog",
-            "selected_symptoms": ["coughing", "nasal_discharge"],
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "dog",
+                "selected_symptoms": ["coughing", "nasal_discharge"],
+            },
+        )
         data = r.get_json()
         if data["disease_candidates"]:
             cand = data["disease_candidates"][0]
@@ -1591,11 +1754,14 @@ class TestConsultationEndpoint:
 
     def test_ask_context_phase(self, client):
         """POST with phase='ask_context' returns context questions."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "selected_symptoms": ["coughing", "nasal_discharge"],
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "selected_symptoms": ["coughing", "nasal_discharge"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "context_questions"
@@ -1607,11 +1773,14 @@ class TestConsultationEndpoint:
 
     def test_ask_context_onset_provided(self, client):
         """When onset is provided, only age question remains."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "onset": "acute",
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "onset": "acute",
+            },
+        )
         data = r.get_json()
         qtypes = [q["type"] for q in data["questions"]]
         assert "onset" not in qtypes
@@ -1619,11 +1788,14 @@ class TestConsultationEndpoint:
 
     def test_ask_context_age_provided(self, client):
         """When age is provided, only onset question remains."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "age_years": 5,
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "age_years": 5,
+            },
+        )
         data = r.get_json()
         qtypes = [q["type"] for q in data["questions"]]
         assert "onset" in qtypes
@@ -1631,12 +1803,15 @@ class TestConsultationEndpoint:
 
     def test_ask_context_both_provided(self, client):
         """When onset and age are provided, only pain_score question may remain."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "onset": "chronic",
-            "age_years": 10,
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "onset": "chronic",
+                "age_years": 10,
+            },
+        )
         data = r.get_json()
         remaining_types = [q["type"] for q in data["questions"]]
         assert "onset" not in remaining_types
@@ -1644,10 +1819,13 @@ class TestConsultationEndpoint:
 
     def test_ask_context_includes_pain_score(self, client):
         """Pain score question is included in context questions."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+            },
+        )
         data = r.get_json()
         question_types = [q["type"] for q in data["questions"]]
         assert "pain_score" in question_types
@@ -1659,13 +1837,16 @@ class TestConsultationEndpoint:
 
     def test_finalize_phase(self, client):
         """POST with phase='finalize' returns final diagnosis results."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "dog",
-            "selected_symptoms": ["coughing", "nasal_discharge", "sneezing"],
-            "onset": "acute",
-            "age_years": 5,
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "dog",
+                "selected_symptoms": ["coughing", "nasal_discharge", "sneezing"],
+                "onset": "acute",
+                "age_years": 5,
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -1679,13 +1860,16 @@ class TestConsultationEndpoint:
 
     def test_finalize_cat(self, client):
         """Finalize works for cat species."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "cat",
-            "selected_symptoms": ["vomiting", "lethargy", "appetite_loss"],
-            "onset": "subacute",
-            "age_years": 3,
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "cat",
+                "selected_symptoms": ["vomiting", "lethargy", "appetite_loss"],
+                "onset": "subacute",
+                "age_years": 3,
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -1694,11 +1878,14 @@ class TestConsultationEndpoint:
 
     def test_finalize_returns_recommendations(self, client):
         """Final results include next-step recommendations."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "dog",
-            "selected_symptoms": ["coughing"],
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "dog",
+                "selected_symptoms": ["coughing"],
+            },
+        )
         data = r.get_json()
         recs = data["recommendations"]
         assert "next_step_ja" in recs
@@ -1715,42 +1902,54 @@ class TestConsultationEndpoint:
         cat_id = d1["categories"][0]["id"]
 
         # Step 2: Select symptoms for a category
-        r2 = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "dog",
-            "selected_category": cat_id,
-        })
+        r2 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "dog",
+                "selected_category": cat_id,
+            },
+        )
         d2 = r2.get_json()
         assert d2["phase"] == "show_symptoms"
         sym_ids = [s["id"] for s in d2["symptoms"][:3]]
 
         # Step 3: Get interim results
-        r3 = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "dog",
-            "selected_symptoms": sym_ids,
-            "answered_categories": [cat_id],
-        })
+        r3 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "dog",
+                "selected_symptoms": sym_ids,
+                "answered_categories": [cat_id],
+            },
+        )
         d3 = r3.get_json()
         assert d3["phase"] == "interim_results"
 
         # Step 4: Ask context
-        r4 = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "selected_symptoms": sym_ids,
-        })
+        r4 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "selected_symptoms": sym_ids,
+            },
+        )
         d4 = r4.get_json()
         assert d4["phase"] == "context_questions"
 
         # Step 5: Finalize
-        r5 = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "dog",
-            "selected_symptoms": sym_ids,
-            "onset": "acute",
-            "age_years": 3,
-        })
+        r5 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "dog",
+                "selected_symptoms": sym_ids,
+                "onset": "acute",
+                "age_years": 3,
+            },
+        )
         d5 = r5.get_json()
         assert d5["phase"] == "final_results"
         assert "suspected_diseases" in d5["result"]
@@ -1759,10 +1958,13 @@ class TestConsultationEndpoint:
 
     def test_invalid_phase(self, client):
         """Unknown phase returns 400 error."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "nonexistent_phase",
-            "species": "dog",
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "nonexistent_phase",
+                "species": "dog",
+            },
+        )
         assert r.status_code == 400
         data = r.get_json()
         assert "error" in data
@@ -1798,11 +2000,14 @@ class TestConsultationEndpoint:
         cat_id = d1["categories"][0]["id"]
 
         # Phase 2: Select symptoms
-        r2 = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": species,
-            "selected_category": cat_id,
-        })
+        r2 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": species,
+                "selected_category": cat_id,
+            },
+        )
         assert r2.status_code == 200
         d2 = r2.get_json()
         assert d2["phase"] == "show_symptoms"
@@ -1810,36 +2015,45 @@ class TestConsultationEndpoint:
         sym_ids = [s["id"] for s in d2["symptoms"][:2]]
 
         # Phase 3: Interim results
-        r3 = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": species,
-            "selected_symptoms": sym_ids,
-            "answered_categories": [cat_id],
-        })
+        r3 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": species,
+                "selected_symptoms": sym_ids,
+                "answered_categories": [cat_id],
+            },
+        )
         assert r3.status_code == 200
         d3 = r3.get_json()
         assert d3["phase"] == "interim_results"
         assert "disease_candidates" in d3
 
         # Phase 4: Context questions
-        r4 = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": species,
-            "selected_symptoms": sym_ids,
-        })
+        r4 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": species,
+                "selected_symptoms": sym_ids,
+            },
+        )
         assert r4.status_code == 200
         d4 = r4.get_json()
         assert d4["phase"] == "context_questions"
 
         # Phase 5: Finalize
-        r5 = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": species,
-            "selected_symptoms": sym_ids,
-            "onset": "acute",
-            "age_years": 3,
-            "pain_score": 1,
-        })
+        r5 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": species,
+                "selected_symptoms": sym_ids,
+                "onset": "acute",
+                "age_years": 3,
+                "pain_score": 1,
+            },
+        )
         assert r5.status_code == 200
         d5 = r5.get_json()
         assert d5["phase"] == "final_results"
@@ -1851,11 +2065,14 @@ class TestConsultationEndpoint:
 
     def test_select_symptoms_unknown_category(self, client):
         """Unknown category returns empty symptom list, not error."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "dog",
-            "selected_category": "nonexistent_category",
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "dog",
+                "selected_category": "nonexistent_category",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "show_symptoms"
@@ -1868,20 +2085,26 @@ class TestConsultationEndpoint:
         cat_ids = [c["id"] for c in cats[:2]]
 
         # Get symptoms from first category
-        r2 = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "dog",
-            "selected_category": cat_ids[0],
-        })
+        r2 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "dog",
+                "selected_category": cat_ids[0],
+            },
+        )
         sym_ids = [s["id"] for s in r2.get_json()["symptoms"][:3]]
 
         # Next category with both categories answered
-        r3 = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "dog",
-            "selected_symptoms": sym_ids,
-            "answered_categories": cat_ids,
-        })
+        r3 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "dog",
+                "selected_symptoms": sym_ids,
+                "answered_categories": cat_ids,
+            },
+        )
         data = r3.get_json()
         assert data["phase"] == "interim_results"
         # Suggested next categories should not include answered ones
@@ -1889,29 +2112,36 @@ class TestConsultationEndpoint:
             assert nc["id"] not in cat_ids
 
     def test_ask_context_all_provided(self, client):
-        """When all context is provided, questions list is empty."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "onset": "acute",
-            "age_years": 5,
-            "pain_score": 2,
-        })
+        """When all context is provided (including breed), questions list is empty."""
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "onset": "acute",
+                "age_years": 5,
+                "pain_score": 2,
+                "breed": "Labrador Retriever",
+            },
+        )
         data = r.get_json()
         assert data["phase"] == "context_questions"
         assert len(data["questions"]) == 0
 
     def test_finalize_with_full_context(self, client):
         """Finalize with all context parameters returns enriched results."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "dog",
-            "selected_symptoms": ["coughing", "nasal_discharge", "fever"],
-            "onset": "acute",
-            "age_years": 3,
-            "pain_score": 2,
-            "breed": "Labrador",
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "dog",
+                "selected_symptoms": ["coughing", "nasal_discharge", "fever"],
+                "onset": "acute",
+                "age_years": 3,
+                "pain_score": 2,
+                "breed": "Labrador",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -1922,11 +2152,14 @@ class TestConsultationEndpoint:
 
     def test_finalize_no_symptoms(self, client):
         """Finalize with no symptoms returns results (possibly empty)."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "dog",
-            "selected_symptoms": [],
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "dog",
+                "selected_symptoms": [],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -1934,13 +2167,16 @@ class TestConsultationEndpoint:
 
     def test_finalize_horse(self, client):
         """Finalize works for horse species with equine finding keys."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "horse",
-            "selected_symptoms": ["gen_fever", "limb_lameness_fore", "resp_cough"],
-            "onset": "acute",
-            "age_years": 8,
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "horse",
+                "selected_symptoms": ["gen_fever", "limb_lameness_fore", "resp_cough"],
+                "onset": "acute",
+                "age_years": 8,
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -1958,9 +2194,14 @@ class TestConsultationEndpoint:
         assert "respiratory" in cat_ids
 
         # Phase 2: Select respiratory symptoms
-        r2 = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms", "species": "horse", "selected_category": "respiratory",
-        })
+        r2 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "horse",
+                "selected_category": "respiratory",
+            },
+        )
         d2 = r2.get_json()
         assert d2["phase"] == "show_symptoms"
         assert len(d2["symptoms"]) > 0
@@ -1970,37 +2211,56 @@ class TestConsultationEndpoint:
         selected = sym_ids[:3]
 
         # Phase 3: Interim results should find disease candidates
-        r3 = client.post(self.ENDPOINT, json={
-            "phase": "next_category", "species": "horse",
-            "selected_symptoms": selected, "answered_categories": ["respiratory"],
-        })
+        r3 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "horse",
+                "selected_symptoms": selected,
+                "answered_categories": ["respiratory"],
+            },
+        )
         d3 = r3.get_json()
         assert d3["phase"] == "interim_results"
         assert len(d3["disease_candidates"]) > 0, "Horse interim should find disease candidates"
 
         # Phase 4: Ask context
-        r4 = client.post(self.ENDPOINT, json={
-            "phase": "ask_context", "species": "horse", "selected_symptoms": selected,
-        })
+        r4 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "horse",
+                "selected_symptoms": selected,
+            },
+        )
         d4 = r4.get_json()
         assert d4["phase"] == "context_questions"
 
         # Phase 5: Finalize
-        r5 = client.post(self.ENDPOINT, json={
-            "phase": "finalize", "species": "horse",
-            "selected_symptoms": selected, "onset": "acute", "age_years": 10,
-        })
+        r5 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "horse",
+                "selected_symptoms": selected,
+                "onset": "acute",
+                "age_years": 10,
+            },
+        )
         d5 = r5.get_json()
         assert d5["phase"] == "final_results"
         assert len(d5["result"]["suspected_diseases"]) > 0
 
     def test_next_category_candidate_structure(self, client):
         """Verify all fields in disease candidate structure."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "cat",
-            "selected_symptoms": ["vomiting", "lethargy", "appetite_loss"],
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "cat",
+                "selected_symptoms": ["vomiting", "lethargy", "appetite_loss"],
+            },
+        )
         data = r.get_json()
         assert data["phase"] == "interim_results"
         assert data["total_candidates"] >= len(data["disease_candidates"])
@@ -2017,10 +2277,27 @@ class TestConsultationEndpoint:
     def test_start_phase_all_21_species(self, client):
         """Start phase works for all 21 supported species."""
         species_list = [
-            "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig",
-            "chinchilla", "ferret", "hedgehog", "sugar_glider", "degu",
-            "bird", "parakeet", "parrot", "reptile", "tortoise",
-            "snake", "lizard", "amphibian", "fish", "other",
+            "dog",
+            "cat",
+            "horse",
+            "rabbit",
+            "hamster",
+            "guinea_pig",
+            "chinchilla",
+            "ferret",
+            "hedgehog",
+            "sugar_glider",
+            "degu",
+            "bird",
+            "parakeet",
+            "parrot",
+            "reptile",
+            "tortoise",
+            "snake",
+            "lizard",
+            "amphibian",
+            "fish",
+            "other",
         ]
         for sp in species_list:
             r = client.post(self.ENDPOINT, json={"phase": "start", "species": sp})
@@ -2041,13 +2318,16 @@ class TestConsultationAccuracyParity:
 
     def _finalize(self, client, species, symptoms, onset="subacute", age_years=5):
         """Helper: run finalize and return suspected_diseases list."""
-        r = client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": species,
-            "selected_symptoms": symptoms,
-            "onset": onset,
-            "age_years": age_years,
-        })
+        r = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": species,
+                "selected_symptoms": symptoms,
+                "onset": onset,
+                "age_years": age_years,
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -2061,16 +2341,22 @@ class TestConsultationAccuracyParity:
 
     def test_cat_fhv1_uri(self, client):
         """Cat FHV-1/URI: sneezing+nasal_discharge+eye_discharge → top result."""
-        diseases = self._finalize(client, "cat",
-            ["sneezing", "nasal_discharge", "eye_discharge"], onset="acute", age_years=2)
+        diseases = self._finalize(
+            client, "cat", ["sneezing", "nasal_discharge", "eye_discharge"], onset="acute", age_years=2
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["herpes", "rhinotracheitis", "uri", "upper respiratory", "fhv"])
 
     def test_cat_corneal_ulcer(self, client):
         """Cat corneal ulcer: squinting+eye_discharge+corneal_cloudiness+eye_redness → top result."""
-        diseases = self._finalize(client, "cat",
-            ["squinting", "eye_discharge", "corneal_cloudiness", "eye_redness"], onset="acute", age_years=4)
+        diseases = self._finalize(
+            client,
+            "cat",
+            ["squinting", "eye_discharge", "corneal_cloudiness", "eye_redness"],
+            onset="acute",
+            age_years=4,
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["corneal", "ulcer", "keratitis", "sequestrum"])
@@ -2079,16 +2365,22 @@ class TestConsultationAccuracyParity:
 
     def test_rabbit_gi_stasis(self, client):
         """Rabbit GI stasis: appetite_loss+reduced_fecal_output+lethargy → top result."""
-        diseases = self._finalize(client, "rabbit",
-            ["appetite_loss", "reduced_fecal_output", "lethargy", "hunched_posture"], onset="acute", age_years=3)
+        diseases = self._finalize(
+            client,
+            "rabbit",
+            ["appetite_loss", "reduced_fecal_output", "lethargy", "hunched_posture"],
+            onset="acute",
+            age_years=3,
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["gi stasis", "gastrointestinal stasis", "ileus"])
 
     def test_rabbit_pasteurella(self, client):
         """Rabbit pasteurella: sneezing+nasal_discharge+eye_discharge → rank in top 3."""
-        diseases = self._finalize(client, "rabbit",
-            ["sneezing", "nasal_discharge", "eye_discharge"], onset="subacute", age_years=2)
+        diseases = self._finalize(
+            client, "rabbit", ["sneezing", "nasal_discharge", "eye_discharge"], onset="subacute", age_years=2
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["pasteurel", "snuffles"])
@@ -2097,16 +2389,18 @@ class TestConsultationAccuracyParity:
 
     def test_reptile_respiratory(self, client):
         """Reptile respiratory infection: open_mouth_breathing+nasal_discharge+lethargy."""
-        diseases = self._finalize(client, "reptile",
-            ["open_mouth_breathing", "nasal_discharge", "lethargy"], onset="subacute", age_years=3)
+        diseases = self._finalize(
+            client, "reptile", ["open_mouth_breathing", "nasal_discharge", "lethargy"], onset="subacute", age_years=3
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["respiratory", "pneumonia"])
 
     def test_reptile_mbd(self, client):
         """Reptile MBD: soft_bones+weakness+lethargy+anorexia."""
-        diseases = self._finalize(client, "reptile",
-            ["soft_bones", "weakness", "lethargy", "anorexia"], onset="chronic", age_years=2)
+        diseases = self._finalize(
+            client, "reptile", ["soft_bones", "weakness", "lethargy", "anorexia"], onset="chronic", age_years=2
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["metabolic bone", "mbd", "calcium"])
@@ -2115,16 +2409,22 @@ class TestConsultationAccuracyParity:
 
     def test_guinea_pig_respiratory(self, client):
         """Guinea pig respiratory: sneezing+nasal_discharge+labored_breathing."""
-        diseases = self._finalize(client, "guinea_pig",
-            ["sneezing", "nasal_discharge", "labored_breathing"], onset="acute", age_years=2)
+        diseases = self._finalize(
+            client, "guinea_pig", ["sneezing", "nasal_discharge", "labored_breathing"], onset="acute", age_years=2
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["respiratory", "pneumonia", "bordetella"])
 
     def test_guinea_pig_scurvy(self, client):
         """Guinea pig scurvy: lethargy+appetite_loss+limping+swollen_joints."""
-        diseases = self._finalize(client, "guinea_pig",
-            ["lethargy", "appetite_loss", "limping", "swollen_joints"], onset="chronic", age_years=2)
+        diseases = self._finalize(
+            client,
+            "guinea_pig",
+            ["lethargy", "appetite_loss", "limping", "swollen_joints"],
+            onset="chronic",
+            age_years=2,
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["scurvy", "vitamin c", "hypovitaminosis"])
@@ -2133,8 +2433,9 @@ class TestConsultationAccuracyParity:
 
     def test_hedgehog_mites(self, client):
         """Hedgehog mites: quill_loss+itching+flaky_skin+scratching."""
-        diseases = self._finalize(client, "hedgehog",
-            ["quill_loss", "itching", "flaky_skin", "scratching"], onset="subacute", age_years=2)
+        diseases = self._finalize(
+            client, "hedgehog", ["quill_loss", "itching", "flaky_skin", "scratching"], onset="subacute", age_years=2
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["mite", "acariasis", "caparinia", "mange"])
@@ -2143,8 +2444,9 @@ class TestConsultationAccuracyParity:
 
     def test_ferret_adrenal(self, client):
         """Ferret adrenal disease: hair_loss+vulvar_swelling+lethargy."""
-        diseases = self._finalize(client, "ferret",
-            ["hair_loss", "vulvar_swelling", "lethargy"], onset="chronic", age_years=4)
+        diseases = self._finalize(
+            client, "ferret", ["hair_loss", "vulvar_swelling", "lethargy"], onset="chronic", age_years=4
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["adrenal", "hyperadrenocorticism"])
@@ -2153,8 +2455,9 @@ class TestConsultationAccuracyParity:
 
     def test_bird_respiratory(self, client):
         """Bird respiratory: tail_bobbing+open_mouth_breathing+nasal_discharge."""
-        diseases = self._finalize(client, "bird",
-            ["tail_bobbing", "open_mouth_breathing", "nasal_discharge"], onset="acute", age_years=2)
+        diseases = self._finalize(
+            client, "bird", ["tail_bobbing", "open_mouth_breathing", "nasal_discharge"], onset="acute", age_years=2
+        )
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["respiratory", "aspergill", "pneumonia"])
@@ -2163,8 +2466,7 @@ class TestConsultationAccuracyParity:
 
     def test_fish_ich(self, client):
         """Fish white spot disease: white_spots+flashing+lethargy."""
-        diseases = self._finalize(client, "fish",
-            ["white_spots", "flashing", "lethargy"], onset="acute", age_years=1)
+        diseases = self._finalize(client, "fish", ["white_spots", "flashing", "lethargy"], onset="acute", age_years=1)
         assert len(diseases) > 0
         top_names = " ".join(self._top_disease_names(diseases))
         assert any(kw in top_names for kw in ["ich", "white spot", "ichthyophthirius"])
@@ -2173,8 +2475,7 @@ class TestConsultationAccuracyParity:
 
     def test_horse_finalize(self, client):
         """Horse finalize completes without error (equine engine uses own finding keys)."""
-        diseases = self._finalize(client, "horse",
-            ["lameness", "fever", "lethargy"], onset="acute", age_years=8)
+        diseases = self._finalize(client, "horse", ["lameness", "fever", "lethargy"], onset="acute", age_years=8)
         # Horse uses equine-specific finding keys; standard symptom IDs may return
         # empty results, but the endpoint must not error
         assert isinstance(diseases, list)
@@ -2187,11 +2488,14 @@ class TestConsultationAccuracyParity:
         species = "cat"
 
         # Get interim results
-        r_interim = client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": species,
-            "selected_symptoms": symptoms,
-        })
+        r_interim = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": species,
+                "selected_symptoms": symptoms,
+            },
+        )
         interim = r_interim.get_json()
         interim_names = {c.get("name_en", "").lower() for c in interim["disease_candidates"][:3]}
 
@@ -2247,16 +2551,20 @@ class TestConsultationCategoryGrouping:
         cat = non_other[0]
 
         # Select symptoms for that category
-        r2 = client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "cat",
-            "selected_category": cat["id"],
-        })
+        r2 = client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "cat",
+                "selected_category": cat["id"],
+            },
+        )
         data = r2.get_json()
         assert data["phase"] == "show_symptoms"
         # Should return symptoms (matching the count from start phase)
-        assert len(data["symptoms"]) == cat["symptom_count"], \
+        assert len(data["symptoms"]) == cat["symptom_count"], (
             f"Expected {cat['symptom_count']} symptoms for {cat['id']}, got {len(data['symptoms'])}"
+        )
 
 
 # =============================================================================
@@ -2343,7 +2651,11 @@ class TestSuggestNextCategories:
             }
         ]
         result = _suggest_next_categories(
-            "dog", ["coughing"], ["digestive"], disease_matches, all_symptoms,
+            "dog",
+            ["coughing"],
+            ["digestive"],
+            disease_matches,
+            all_symptoms,
         )
         for cat in result:
             assert cat["id"] != "digestive"
@@ -2359,7 +2671,11 @@ class TestSuggestNextCategories:
         many_symptoms = [s["id"] for s in all_symptoms[:30]]
         disease_matches = [{"additional_disease_symptoms": many_symptoms}]
         result = _suggest_next_categories(
-            "dog", [], [], disease_matches, all_symptoms,
+            "dog",
+            [],
+            [],
+            disease_matches,
+            all_symptoms,
         )
         assert len(result) <= 3
 
@@ -2384,7 +2700,11 @@ class TestSuggestNextCategories:
             {"additional_disease_symptoms": ["vomiting", "diarrhea", "fever"]},
         ]
         result = _suggest_next_categories(
-            "dog", [], [], disease_matches, all_symptoms,
+            "dog",
+            [],
+            [],
+            disease_matches,
+            all_symptoms,
         )
         for cat in result:
             assert "id" in cat
@@ -2410,7 +2730,11 @@ class TestSuggestNextCategories:
             disease_matches.append({"additional_disease_symptoms": extra})
 
         result = _suggest_next_categories(
-            "dog", [], [], disease_matches, all_symptoms,
+            "dog",
+            [],
+            [],
+            disease_matches,
+            all_symptoms,
         )
         assert len(result) >= 2
         # cat_a (splitting symptom) should rank first
@@ -2430,19 +2754,25 @@ class TestConsultationEdgeCases:
 
     def test_select_symptoms_empty_category(self):
         """select_symptoms with missing selected_category returns 400."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "select_symptoms",
-            "species": "cat",
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "select_symptoms",
+                "species": "cat",
+            },
+        )
         assert r.status_code == 400
 
     def test_next_category_empty_symptoms_returns_categories(self):
         """next_category with empty symptoms redirects to category selection."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "cat",
-            "selected_symptoms": [],
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "cat",
+                "selected_symptoms": [],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "select_category"
@@ -2452,10 +2782,13 @@ class TestConsultationEdgeCases:
 
     def test_start_invalid_species_returns_gracefully(self):
         """Start phase with non-existent species returns without error."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "start",
-            "species": "unicorn",
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "start",
+                "species": "unicorn",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "select_category"
@@ -2463,11 +2796,14 @@ class TestConsultationEdgeCases:
 
     def test_finalize_invalid_species_returns_results(self):
         """Finalize with unknown species falls back to generic matcher."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "unicorn",
-            "selected_symptoms": ["fever", "vomiting"],
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "unicorn",
+                "selected_symptoms": ["fever", "vomiting"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -2477,22 +2813,28 @@ class TestConsultationEdgeCases:
 
     def test_unknown_phase_returns_400(self):
         """Unknown phase returns 400 error."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "nonexistent_phase",
-            "species": "cat",
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "nonexistent_phase",
+                "species": "cat",
+            },
+        )
         assert r.status_code == 400
 
     # -- lab_values parameter --
 
     def test_finalize_with_lab_values(self):
         """Finalize accepts lab_values parameter without error."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "dog",
-            "selected_symptoms": ["vomiting", "diarrhea", "lethargy"],
-            "lab_values": {"glucose": 250, "bun": 45},
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "dog",
+                "selected_symptoms": ["vomiting", "diarrhea", "lethargy"],
+                "lab_values": {"glucose": 250, "bun": 45},
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -2500,12 +2842,15 @@ class TestConsultationEdgeCases:
 
     def test_finalize_with_empty_lab_values(self):
         """Finalize with empty lab_values dict works."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "cat",
-            "selected_symptoms": ["fever", "sneezing"],
-            "lab_values": {},
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "cat",
+                "selected_symptoms": ["fever", "sneezing"],
+                "lab_values": {},
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -2514,40 +2859,87 @@ class TestConsultationEdgeCases:
 
     def test_finalize_with_lang_ja(self):
         """Finalize with lang=ja runs without error (regional prevalence)."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "cat",
-            "selected_symptoms": ["fever", "sneezing", "nasal_discharge"],
-            "lang": "ja",
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "cat",
+                "selected_symptoms": ["fever", "sneezing", "nasal_discharge"],
+                "lang": "ja",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert len(data["result"]["suspected_diseases"]) > 0
 
     def test_next_category_with_lang_en(self):
         """next_category with lang=en runs regional prevalence path."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "next_category",
-            "species": "cat",
-            "selected_symptoms": ["fever", "sneezing"],
-            "lang": "en",
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "next_category",
+                "species": "cat",
+                "selected_symptoms": ["fever", "sneezing"],
+                "lang": "en",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "interim_results"
 
     # -- ask_context edge cases --
 
+    def test_ask_context_breed_prompted_when_missing_for_dog(self):
+        """ask_context returns breed question for dog when breed is missing."""
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "selected_symptoms": ["vomiting"],
+                "onset": "acute",
+                "age_years": 5,
+                "pain_score": 2,
+                # breed intentionally omitted
+            },
+        )
+        assert r.status_code == 200
+        data = r.get_json()
+        breed_questions = [q for q in data["questions"] if q.get("type") == "breed"]
+        assert len(breed_questions) == 1
+        assert breed_questions[0].get("input_type") == "text"
+
+    def test_ask_context_breed_not_prompted_for_fish(self):
+        """ask_context does NOT ask for breed for fish (breed-irrelevant species)."""
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "fish",
+                "selected_symptoms": ["white_spots"],
+                "onset": "acute",
+                "age_years": 2,
+            },
+        )
+        assert r.status_code == 200
+        data = r.get_json()
+        breed_questions = [q for q in data["questions"] if q.get("type") == "breed"]
+        assert len(breed_questions) == 0
+
     def test_ask_context_all_fields_provided_returns_empty_questions(self):
-        """ask_context with all context returns empty questions list."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "selected_symptoms": ["vomiting"],
-            "onset": "acute",
-            "age_years": 5,
-            "pain_score": 2,
-        })
+        """ask_context with all context (including breed) returns empty questions list."""
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "selected_symptoms": ["vomiting"],
+                "onset": "acute",
+                "age_years": 5,
+                "pain_score": 2,
+                "breed": "Labrador",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "context_questions"
@@ -2555,12 +2947,15 @@ class TestConsultationEdgeCases:
 
     def test_ask_context_partial_returns_remaining_questions(self):
         """ask_context with only onset returns age + pain_score questions."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "cat",
-            "selected_symptoms": ["fever"],
-            "onset": "chronic",
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "cat",
+                "selected_symptoms": ["fever"],
+                "onset": "chronic",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         types = [q["type"] for q in data["questions"]]
@@ -2572,14 +2967,17 @@ class TestConsultationEdgeCases:
 
     def test_finalize_with_breed(self):
         """Finalize with breed parameter runs breed-specific adjustments."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "dog",
-            "selected_symptoms": ["vomiting", "diarrhea", "lethargy"],
-            "breed": "Golden Retriever",
-            "onset": "acute",
-            "age_years": 8,
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "dog",
+                "selected_symptoms": ["vomiting", "diarrhea", "lethargy"],
+                "breed": "Golden Retriever",
+                "onset": "acute",
+                "age_years": 8,
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -2599,14 +2997,17 @@ class TestConsultationEdgeCases:
 
     def test_finalize_response_structure(self):
         """Verify finalize returns all expected fields."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "finalize",
-            "species": "cat",
-            "selected_symptoms": ["fever", "sneezing", "nasal_discharge"],
-            "onset": "subacute",
-            "age_years": 3,
-            "pain_score": 1,
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "finalize",
+                "species": "cat",
+                "selected_symptoms": ["fever", "sneezing", "nasal_discharge"],
+                "onset": "subacute",
+                "age_years": 3,
+                "pain_score": 1,
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         assert data["phase"] == "final_results"
@@ -2627,11 +3028,14 @@ class TestConsultationEdgeCases:
 
     def test_ask_context_fish_skips_pain_score(self):
         """ask_context for fish should not ask about pain_score (CSU scale N/A)."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "fish",
-            "selected_symptoms": ["white_spots"],
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "fish",
+                "selected_symptoms": ["white_spots"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         types = [q["type"] for q in data["questions"]]
@@ -2641,11 +3045,14 @@ class TestConsultationEdgeCases:
 
     def test_ask_context_reptile_skips_pain_score(self):
         """ask_context for reptile should not ask about pain_score."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "reptile",
-            "selected_symptoms": ["lethargy"],
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "reptile",
+                "selected_symptoms": ["lethargy"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         types = [q["type"] for q in data["questions"]]
@@ -2653,11 +3060,14 @@ class TestConsultationEdgeCases:
 
     def test_ask_context_dog_includes_pain_score(self):
         """ask_context for dog should still ask about pain_score."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "dog",
-            "selected_symptoms": ["vomiting"],
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "dog",
+                "selected_symptoms": ["vomiting"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         types = [q["type"] for q in data["questions"]]
@@ -2665,11 +3075,14 @@ class TestConsultationEdgeCases:
 
     def test_ask_context_amphibian_skips_pain_score(self):
         """ask_context for amphibian should not ask about pain_score."""
-        r = self.client.post(self.ENDPOINT, json={
-            "phase": "ask_context",
-            "species": "amphibian",
-            "selected_symptoms": ["lethargy"],
-        })
+        r = self.client.post(
+            self.ENDPOINT,
+            json={
+                "phase": "ask_context",
+                "species": "amphibian",
+                "selected_symptoms": ["lethargy"],
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()
         types = [q["type"] for q in data["questions"]]
