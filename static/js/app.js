@@ -3352,11 +3352,17 @@ function switchChatMode(mode){
 }
 
 function startGuidedConsultation(){
-  guidedState={species:currentSpecies||"dog",selectedSymptoms:[],answeredCategories:[],onset:null,ageYears:null,painScore:null,phase:"start",breed:currentBreed||""};
+  guidedState={species:currentSpecies||"dog",selectedSymptoms:[],answeredCategories:[],onset:null,ageYears:null,ageCategory:null,painScore:null,phase:"start",breed:currentBreed||""};
   const msgs=document.getElementById("guidedMessages");
   const actions=document.getElementById("guidedActions");
   if(msgs)msgs.innerHTML="";
   if(actions)actions.innerHTML="";
+  // Pre-fetch breeds for autocomplete if not already cached for current species
+  if((!cachedBreeds||cachedBreeds.length===0)&&guidedState.species){
+    fetchWithTimeout("/api/breeds/"+guidedState.species).then(r=>r.json()).then(data=>{
+      if(data&&data.breeds)cachedBreeds=data.breeds;
+    }).catch(()=>{});
+  }
   guidedFetch("start");
 }
 
@@ -3391,6 +3397,7 @@ function guidedFetch(phase,extra){
     answered_categories:guidedState.answeredCategories,
     onset:guidedState.onset,
     age_years:guidedState.ageYears,
+    age_category:guidedState.ageCategory,
     pain_score:guidedState.painScore,
     breed:guidedState.breed||"",
     lang:currentLang,
@@ -3624,15 +3631,41 @@ function guidedRenderContextQuestions(questions){
     guidedFetch("finalize");
     return;
   }
+  // Breed autocomplete datalist (reuses cachedBreeds populated for current species)
+  const breedDatalistId="guidedBreedDatalist";
+  const breedOptionsHtml=(cachedBreeds&&cachedBreeds.length>0)
+    ? cachedBreeds.map(b=>{
+        const label=currentLang==="ja"?(b.name_ja||b.name||""):(b.name||b.name_ja||"");
+        return `<option value="${escapeHtml(label)}"></option>`;
+      }).join("")
+    : "";
   let html='<div class="guided-context-questions">';
+  if(breedOptionsHtml)html+=`<datalist id="${breedDatalistId}">${breedOptionsHtml}</datalist>`;
   questions.forEach(q=>{
     const label=currentLang==="ja"?q.question_ja:q.question_en;
     html+=`<div class="guided-context-q"><div class="guided-context-label">${label}</div>`;
     if(q.input_type==="text"){
-      // Free-text input (e.g. breed)
+      // Free-text input (e.g. breed) — wire datalist autocomplete for breed
       const ph=currentLang==="ja"?(q.placeholder_ja||""):(q.placeholder_en||"");
       const initialVal=q.type==="breed"?(guidedState.breed||""):"";
-      html+=`<div class="guided-context-text-wrap"><input type="text" class="guided-context-text-input" data-type="${q.type}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(initialVal)}" autocomplete="off"></div>`;
+      const listAttr=(q.type==="breed"&&breedOptionsHtml)?` list="${breedDatalistId}"`:"";
+      html+=`<div class="guided-context-text-wrap"><input type="text" class="guided-context-text-input" data-type="${q.type}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(initialVal)}" autocomplete="off"${listAttr}></div>`;
+    }else if(q.type==="age"){
+      // Age: dual-mode — categorical buttons (preferred) + optional numeric override
+      // Buttons map directly to age_category for transparency
+      const ageCats=[
+        {value:"young",      label_ja:"幼若 (1歳未満)",    label_en:"Young (under 1y)"},
+        {value:"young_adult",label_ja:"若齢 (1〜3歳)",     label_en:"Young adult (1–3y)"},
+        {value:"adult",      label_ja:"成熟 (3〜7歳)",     label_en:"Adult (3–7y)"},
+        {value:"senior",     label_ja:"高齢 (7歳以上)",    label_en:"Senior (7y+)"},
+      ];
+      html+='<div class="guided-context-options">';
+      ageCats.forEach(o=>{
+        const olabel=currentLang==="ja"?o.label_ja:o.label_en;
+        html+=`<button class="guided-context-opt" data-type="age_category" data-value="${o.value}">${olabel}</button>`;
+      });
+      html+=`<button class="guided-context-opt skip" data-type="age_category" data-value="">${currentLang==="ja"?"スキップ":"Skip"}</button>`;
+      html+='</div>';
     }else{
       html+='<div class="guided-context-options">';
       (q.options||[]).forEach(o=>{
@@ -3648,6 +3681,9 @@ function guidedRenderContextQuestions(questions){
   html+='</div>';
   guidedSetActions(html);
 
+  // Map age_category back to representative ageYears for backend compatibility
+  const _ageCategoryToYears={young:0.5,young_adult:2.0,adult:5.0,senior:10.0};
+
   // Context option selection (buttons)
   document.querySelectorAll(".guided-context-opt").forEach(btn=>{
     btn.addEventListener("click",()=>{
@@ -3658,6 +3694,17 @@ function guidedRenderContextQuestions(questions){
       if(val)btn.classList.add("selected");
       if(type==="onset"&&val)guidedState.onset=val;
       if(type==="age"&&val)guidedState.ageYears=parseFloat(val);
+      if(type==="age_category"){
+        if(val){
+          guidedState.ageCategory=val;
+          // Also set ageYears so backend's analyze_species_symptoms (which uses age_years)
+          // can apply its own age multiplier consistently
+          if(_ageCategoryToYears[val]!==undefined)guidedState.ageYears=_ageCategoryToYears[val];
+        }else{
+          guidedState.ageCategory=null;
+          guidedState.ageYears=null;
+        }
+      }
       if(type==="pain_score"&&val!=="")guidedState.painScore=parseInt(val,10);
     });
   });
