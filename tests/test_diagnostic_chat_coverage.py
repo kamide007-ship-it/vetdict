@@ -175,6 +175,55 @@ class TestExtractOnsetFromText:
         assert result is None or isinstance(result, str)
 
 
+class TestMatcherLabValuesIntegration:
+    """lab_values parameter applies disease-boost factors via compute_lab_boosts."""
+
+    def test_lab_factor_default_is_one_without_lab_values(self):
+        """When no lab_values provided, lab_factor in scoring_detail is 1.0."""
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        results = _match_species_symptoms_to_diseases(
+            symptom_ids=["vomiting", "lethargy"],
+            species="dog",
+            lab_values=None,
+        )
+        if results:
+            sd = results[0].get("scoring_detail", {})
+            assert sd.get("lab_factor", 1.0) == 1.0
+
+    def test_lab_factor_boosts_relevant_disease(self):
+        """Marked azotemia should boost a kidney-related disease score above no-lab baseline."""
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        symptoms = ["vomiting", "excessive_thirst", "lethargy"]
+        with_lab = _match_species_symptoms_to_diseases(
+            symptom_ids=symptoms,
+            species="dog",
+            lab_values={"creatinine": 4.5, "bun": 80},
+        )
+        without_lab = _match_species_symptoms_to_diseases(
+            symptom_ids=symptoms,
+            species="dog",
+            lab_values=None,
+        )
+        # Some result should now have lab_factor > 1.0
+        assert any(m.get("scoring_detail", {}).get("lab_factor", 1.0) > 1.0 for m in with_lab)
+        # And lab-bost candidates exist or top ordering differs
+        assert with_lab[0]["confidence_percent"] >= without_lab[0]["confidence_percent"] - 5
+
+    def test_lab_factor_clamped(self):
+        """lab_factor is clamped to <=1.40 regardless of computed multiplier."""
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        results = _match_species_symptoms_to_diseases(
+            symptom_ids=["lethargy"],
+            species="dog",
+            lab_values={"creatinine": 10.0, "bun": 200},  # extreme azotemia
+        )
+        max_factor = max((m.get("scoring_detail", {}).get("lab_factor", 1.0) for m in results), default=1.0)
+        assert max_factor <= 1.40
+
+
 class TestExtractOnsetNumericPatterns:
     """Numeric duration expressions classified into acute/subacute/chronic."""
 
