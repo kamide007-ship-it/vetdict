@@ -89,6 +89,32 @@ def test_check_interactions_empty(client):
     assert res.status_code == 200
     data = res.get_json()
     assert data["interactions"] == []
+    assert data["unknown_drug_ids"] == []
+    assert data["recognized_drug_ids"] == []
+
+
+def test_check_interactions_unknown_drug_ids(client):
+    """Unknown drug names should be surfaced so the UI can flag typos."""
+    res = client.post(
+        "/api/drugs/check-interactions",
+        json={"drug_ids": ["meloxicam", "xxx_not_a_drug_xxx"]},
+    )
+    assert res.status_code == 200
+    data = res.get_json()
+    assert "meloxicam" in data["recognized_drug_ids"]
+    assert "xxx_not_a_drug_xxx" in data["unknown_drug_ids"]
+
+
+def test_check_interactions_all_unknown(client):
+    res = client.post(
+        "/api/drugs/check-interactions",
+        json={"drug_ids": ["nonexistent_a", "nonexistent_b"]},
+    )
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["recognized_drug_ids"] == []
+    assert set(data["unknown_drug_ids"]) == {"nonexistent_a", "nonexistent_b"}
+    assert data["interactions"] == []
 
 
 def test_drug_interactions_endpoint(client):

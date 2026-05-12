@@ -914,6 +914,7 @@ def disease_detail(species: str, disease_slug: str):
 
     species_key = species.lower()
     if species_key not in SPECIES_META or species_key not in _DISEASE_MODULES:
+        logger.info("disease_detail: unknown species %s (slug=%s)", species_key, disease_slug)
         try:
             return render_template("404.html"), 404
         except Exception:
@@ -930,6 +931,12 @@ def disease_detail(species: str, disease_slug: str):
             break
 
     if not disease:
+        logger.info(
+            "disease_detail: slug not found species=%s slug=%s (total=%d)",
+            species_key,
+            disease_slug,
+            len(diseases),
+        )
         try:
             return render_template("404.html"), 404
         except Exception:
