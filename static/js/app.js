@@ -92,6 +92,7 @@ const I18N={
     heroLead:"臨床症状から鑑別疾患リストを即座に生成。",
     heroCta:"動物種を選択して鑑別診断を開始",heroCtaDb:"疾患データベースを見る",
     statDiseases:"疾患数",statSpecies:"対応動物種",statSymptoms:"症状項目",statDrugs:"薬品数",statProtocols:"麻酔プロトコル",
+    heroStatsAria:"データベース統計",
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener noreferrer">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
     sponsorDesc:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
     sponsorCta:"詳細 →",
@@ -342,6 +343,7 @@ const I18N={
     heroLead:"Instantly generate differential diagnosis lists from clinical signs.",
     heroCta:"Select a species to begin differential diagnosis",heroCtaDb:"Browse Disease Database",
     statDiseases:"Diseases",statSpecies:"Species",statSymptoms:"Symptoms",statDrugs:"Drugs",statProtocols:"Anesthesia",
+    heroStatsAria:"Database statistics",
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener noreferrer">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
     sponsorDesc:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     sponsorCta:"Details →",
@@ -2584,8 +2586,12 @@ function loadHusbandry(species){
   fetchWithTimeout(`/api/species/${encodeURIComponent(species)}/husbandry`).then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status))).then(data=>{
     if(requestId!==husbandryRequestId||species!==currentSpecies)return;
     if(data.husbandry){renderHusbandry(data.husbandry,container);}
-    else{container.innerHTML=`<p style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;}
-  }).catch(()=>{if(requestId===husbandryRequestId)container.innerHTML=`<p style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;});
+    else{container.innerHTML=`<p role="status" style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;}
+  }).catch(err=>{
+    if(requestId!==husbandryRequestId||species!==currentSpecies)return;
+    debugWarn("husbandry load failed:",err);
+    container.innerHTML=`<p role="status" style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;
+  });
 }
 function renderHusbandry(h,container){
   const lang=currentLang;
@@ -2619,7 +2625,7 @@ function loadDiseaseDb(species){
   if(!list){debugWarn("diseaseDbList element not found");return;}
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();const dbTab=document.getElementById("tab-database");if(dbTab){let b=dbTab.querySelector(".tab-badge");if(!b){b=document.createElement("span");b.className="tab-badge";dbTab.appendChild(b);}b.textContent=allDiseases.length;}}})
-  .catch(()=>{if(requestId===diseaseRequestId&&list){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
+  .catch(err=>{if(requestId===diseaseRequestId&&list){debugError("diseaseDb load failed:",err);list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
 }
 
 const DISEASE_CATEGORIES={
@@ -2981,7 +2987,7 @@ function sendLandingChat(){
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
   const species=currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})})
+  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})},20000)
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;input.focus();
@@ -3009,16 +3015,21 @@ function sendLandingChat(){
   .catch(err=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
     debugError("Chat error:",err);
+    // Restore user input so they don't lose it
+    if(!input.value)input.value=text;
     const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
     const canRetry=_landingChatRetries<_CHAT_MAX_RETRIES;
+    const retryBtnHtml=`<button type="button" class="landing-retry-btn" style="margin-top:6px;margin-right:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     if(canRetry){
-      const retryBtn=`<button class="landing-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
-      errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtn;
+      errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtnHtml;
       errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries++;input.value=text;errDiv.remove();sendLandingChat();});
     }else{
       const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
-      errDiv.innerHTML=escapeHtml(giveUpMsg);
-      _landingChatRetries=0;
+      const reloadLabel=currentLang==="ja"?"ページを再読み込み":"Reload page";
+      const reloadBtn=`<button type="button" class="landing-reload-btn" style="margin-top:6px;padding:6px 14px;background:var(--gray-200);color:var(--gray-800);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${reloadLabel}</button>`;
+      errDiv.innerHTML=escapeHtml(giveUpMsg)+"<div style=\"margin-top:6px\">"+retryBtnHtml+reloadBtn+"</div>";
+      errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries=0;input.value=text;errDiv.remove();sendLandingChat();});
+      errDiv.querySelector(".landing-reload-btn").addEventListener("click",()=>location.reload());
     }
     msgs.appendChild(errDiv);
     msgs.scrollTop=msgs.scrollHeight;
@@ -3051,35 +3062,40 @@ function _sendSymptomUpdate(symptomId,confirmed){
 function sendChatMessage(){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;
   const sendBtn=document.getElementById("chatSend");
-  input.value="";input.disabled=true;if(sendBtn)sendBtn.disabled=true;
+  input.value="";input.disabled=true;if(sendBtn){sendBtn.disabled=true;sendBtn.setAttribute("aria-busy","true");}
   trackEvent("chat_message",{species:currentSpecies||"dog",message_length:text.length});
   addChatMsg(text,"user");const species=currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
-  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
-  const slowTimer=setTimeout(()=>{loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span><div style="font-size:.72rem;color:var(--gray-400);margin-top:4px">'+(currentLang==="ja"?"解析中...":"Analyzing...")+'</div>';},3000);
-  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})})
+  const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.setAttribute("aria-label",currentLang==="ja"?"解析中":"Analyzing");loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
+  const slowTimer=setTimeout(()=>{loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span><div style="font-size:.72rem;color:var(--gray-400);margin-top:4px">'+(currentLang==="ja"?"解析中... 通常より時間がかかっています":"Analyzing... taking longer than usual")+'</div>';},3000);
+  fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})},20000)
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
-    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;input.focus();
+    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
     _chatRetries=0;
   })
   .catch(err=>{
-    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;
+    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}
     debugError("Chat error:",err);
     trackEvent("api_error",{endpoint:"diagnostic-chat",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});
+    // Restore user input so it isn't lost
+    if(!input.value)input.value=text;
     const errDiv=document.createElement("div");errDiv.className="chat-msg bot";errDiv.setAttribute("role","alert");
     const canRetry=_chatRetries<_CHAT_MAX_RETRIES;
+    const retryHtml=`<button type="button" class="chat-retry-btn" style="margin-top:6px;margin-right:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     if(canRetry){
-      const retryHtml=`<button class="chat-retry-btn" style="margin-top:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
       errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
       errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries++;input.value=text;errDiv.remove();sendChatMessage();});
     }else{
       const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
-      errDiv.innerHTML=escapeHtml(giveUpMsg);
-      _chatRetries=0;
+      const reloadLabel=currentLang==="ja"?"ページを再読み込み":"Reload page";
+      const reloadBtn=`<button type="button" class="chat-reload-btn" style="margin-top:6px;padding:6px 14px;background:var(--gray-200);color:var(--gray-800);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${reloadLabel}</button>`;
+      errDiv.innerHTML=escapeHtml(giveUpMsg)+"<div style=\"margin-top:6px\">"+retryHtml+reloadBtn+"</div>";
+      errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries=0;input.value=text;errDiv.remove();sendChatMessage();});
+      errDiv.querySelector(".chat-reload-btn").addEventListener("click",()=>location.reload());
     }
     msgs.appendChild(errDiv);msgs.scrollTop=msgs.scrollHeight;
   });
@@ -3937,15 +3953,21 @@ function runInteractionCheck(){
   const raw=(input.value||"").trim();
   if(!raw){results.innerHTML="";return;}
   const drugIds=raw.split(/[,，、]+/).map(s=>s.trim().toLowerCase().replace(/\s+/g,"_").replace(/-/g,"_")).filter(Boolean);
-  results.innerHTML=`<div style="padding:10px;color:var(--gray-500)">${currentLang==="ja"?"確認中...":"Checking..."}</div>`;
+  if(drugIds.length<2){
+    const msg=currentLang==="ja"?"⚠ 2つ以上の薬品名をカンマ区切りで入力してください。":"⚠ Please enter at least two drug names separated by commas.";
+    results.innerHTML=`<div role="alert" style="padding:10px 12px;background:#fef3c7;border-left:4px solid #d97706;border-radius:6px;color:#92400e;font-size:.84rem">${msg}</div>`;
+    return;
+  }
+  results.innerHTML=`<div role="status" aria-live="polite" style="padding:10px;color:var(--gray-500)">${currentLang==="ja"?"確認中...":"Checking..."}</div>`;
   fetchWithTimeout("/api/drugs/check-interactions",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({drug_ids:drugIds,species:speciesSel.value||""})
   }).then(r=>r.json()).then(data=>{
     renderInteractionResults(data,drugIds);
-  }).catch(()=>{
-    results.innerHTML=`<div style="padding:10px;color:var(--red-700,#b91c1c)">${currentLang==="ja"?"通信エラー":"Network error"}</div>`;
+  }).catch(err=>{
+    debugError("interaction check failed:",err);
+    results.innerHTML=`<div role="alert" style="padding:10px;color:var(--red-700,#b91c1c)">${currentLang==="ja"?"通信エラー — 時間をおいて再度お試しください。":"Network error — please retry shortly."}</div>`;
   });
 }
 
@@ -3954,12 +3976,29 @@ function renderInteractionResults(data,drugIds){
   if(!results)return;
   const ix=data.interactions||[];
   const sw=data.species_specific_warnings||[];
+  const unknown=data.unknown_drug_ids||[];
+  const recognized=data.recognized_drug_ids||(drugIds||[]).filter(d=>!unknown.includes(d));
+  let html="";
+  // Surface unknown drug IDs so users know they typed a wrong name.
+  if(unknown.length){
+    const msg=currentLang==="ja"
+      ?`薬品名が認識できませんでした: <strong>${unknown.map(escapeHtml).join(", ")}</strong><br/><span style="font-size:.78rem;opacity:.85">下の検索バーから正しい薬品IDをご確認ください（半角英数小文字 / 例: meloxicam, prednisolone）</span>`
+      :`Unrecognized drug names: <strong>${unknown.map(escapeHtml).join(", ")}</strong><br/><span style="font-size:.78rem;opacity:.85">Check the correct drug ID using the search bar below (lowercase Latin, e.g. meloxicam, prednisolone).</span>`;
+    html+=`<div role="alert" style="padding:10px 12px;background:#fef3c7;border-left:4px solid #d97706;border-radius:6px;color:#92400e;font-size:.84rem;margin-bottom:8px">⚠ ${msg}</div>`;
+  }
   if(ix.length===0&&sw.length===0){
-    results.innerHTML=`<div style="padding:12px;background:var(--green-50,#f0fdf4);border-left:4px solid var(--green-600,#16a34a);border-radius:6px;color:var(--green-800,#166534);font-size:.86rem">✅ ${currentLang==="ja"?"既知の相互作用は検出されませんでした":"No known interactions detected"} (${drugIds.length} ${currentLang==="ja"?"薬品":"drugs"})</div>`;
+    if(recognized.length===0&&unknown.length>0){
+      // All inputs unknown — don't show the green "no interactions" message.
+      results.innerHTML=html;
+      return;
+    }
+    const okMsg=currentLang==="ja"?"既知の相互作用は検出されませんでした":"No known interactions detected";
+    const drugLabel=currentLang==="ja"?"薬品":"drugs";
+    html+=`<div role="status" style="padding:12px;background:var(--green-50,#f0fdf4);border-left:4px solid var(--green-600,#16a34a);border-radius:6px;color:var(--green-800,#166534);font-size:.86rem">✅ ${okMsg} (${recognized.length} ${drugLabel})</div>`;
+    results.innerHTML=html;
     return;
   }
   const sevColor={contraindicated:{bg:"#fee2e2",border:"#dc2626",text:"#991b1b",label:currentLang==="ja"?"禁忌":"CONTRAINDICATED"},major:{bg:"#fef3c7",border:"#d97706",text:"#92400e",label:currentLang==="ja"?"重大":"MAJOR"},moderate:{bg:"#dbeafe",border:"#2563eb",text:"#1e40af",label:currentLang==="ja"?"中等度":"MODERATE"}};
-  let html="";
   if(ix.length>0){
     html+=`<div style="font-weight:600;margin:8px 0;font-size:.84rem">${currentLang==="ja"?"薬品-薬品相互作用":"Drug-drug interactions"}: ${ix.length}</div>`;
     ix.forEach(i=>{
@@ -4196,8 +4235,9 @@ function loadAnesthesiaProtocols(){
     Object.entries(anesthesiaCategories).forEach(([k,v])=>{const name=currentLang==="ja"?(v.ja||v.en):(v.en||v.ja);catSel.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(k)}">${escapeHtml(name)}</option>`);});
     renderAnesthesiaOverview(data);
     renderAnesthesiaList();
-  }).catch(()=>{
-    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-anesthesia-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
+  }).catch(err=>{
+    debugError("anesthesia/protocols load failed:",err);
+    list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-anesthesia-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
     const rb=list.querySelector(".retry-anesthesia-btn");
     if(rb)rb.addEventListener("click",()=>{anesthesiaLoaded=false;loadAnesthesiaProtocols();});
   });
@@ -4215,12 +4255,14 @@ function loadAnesthesiaProtocols(){
       weightInput.addEventListener("input",debounce(renderAnesthesiaList,300));
       document.getElementById("anesthesiaWeightClear").addEventListener("click",()=>{weightInput.value="";renderAnesthesiaList();});
     }
-    /* Emergency protocol quick-access */
+    /* Emergency protocol quick-access — toggles the emergency category filter */
     const emergBtn=document.getElementById("anesthesiaEmergencyBtn");
     if(emergBtn){
+      emergBtn.setAttribute("aria-pressed","false");
       emergBtn.addEventListener("click",()=>{
         const catSel=document.getElementById("anesthesiaCategoryFilter");
         const isActive=emergBtn.classList.toggle("active");
+        emergBtn.setAttribute("aria-pressed",isActive?"true":"false");
         if(isActive){catSel.value="emergency";} else {catSel.value="";}
         renderAnesthesiaList();
       });
