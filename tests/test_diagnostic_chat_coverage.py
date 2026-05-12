@@ -175,6 +175,52 @@ class TestExtractOnsetFromText:
         assert result is None or isinstance(result, str)
 
 
+class TestExtractOnsetNumericPatterns:
+    """Numeric duration expressions classified into acute/subacute/chronic."""
+
+    # --- Japanese numeric duration ---
+    def test_ja_hours_acute(self):
+        assert extract_onset_from_text("2時間前から嘔吐") == "acute"
+
+    def test_ja_days_within_3_acute(self):
+        assert extract_onset_from_text("3日前から下痢") == "acute"
+
+    def test_ja_days_5_subacute(self):
+        assert extract_onset_from_text("5日前から食欲がない") == "subacute"
+
+    def test_ja_weeks_2_subacute(self):
+        assert extract_onset_from_text("2週間前") == "subacute"
+
+    def test_ja_weeks_3_chronic(self):
+        assert extract_onset_from_text("3週間前から続いている") == "chronic"
+
+    def test_ja_months_chronic(self):
+        assert extract_onset_from_text("3ヶ月前から") == "chronic"
+
+    def test_ja_years_chronic(self):
+        assert extract_onset_from_text("1年前から") == "chronic"
+
+    # --- English numeric duration ---
+    def test_en_days_2_acute(self):
+        assert extract_onset_from_text("started 2 days ago") == "acute"
+
+    def test_en_weeks_3_chronic(self):
+        assert extract_onset_from_text("3 weeks ago") == "chronic"
+
+    def test_en_hours_acute(self):
+        assert extract_onset_from_text("6 hours ago") == "acute"
+
+    def test_en_months_chronic(self):
+        assert extract_onset_from_text("2 months ago") == "chronic"
+
+    def test_numeric_precedes_alias(self):
+        """Numeric pattern should override conflicting alias matches."""
+        # "for a while" alone would map to chronic via alias;
+        # specific "3 days ago" should override to acute.
+        result = extract_onset_from_text("symptoms started 3 days ago, has been going for a while")
+        assert result == "acute"
+
+
 # ===========================================================================
 # 2. extract_age_from_text()
 # ===========================================================================

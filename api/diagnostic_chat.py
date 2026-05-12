@@ -726,13 +726,84 @@ _ONSET_ALIASES: dict[str, str] = {
 }
 
 
+_ONSET_NUM_PATTERNS = [
+    # Japanese numeric onset (highest specificity first)
+    # Hours: acute
+    (r"(\d+)\s*時間前", "hour"),
+    (r"(\d+)\s*hours?\s*ago", "hour"),
+    # Days
+    (r"(\d+)\s*日前", "day"),
+    (r"(\d+)\s*days?\s*ago", "day"),
+    # Weeks
+    (r"(\d+)\s*週間前", "week"),
+    (r"(\d+)\s*週前", "week"),
+    (r"(\d+)\s*weeks?\s*ago", "week"),
+    # Months
+    (r"(\d+)\s*ヶ月前", "month"),
+    (r"(\d+)\s*か月前", "month"),
+    (r"(\d+)\s*カ月前", "month"),
+    (r"(\d+)\s*months?\s*ago", "month"),
+    # Years
+    (r"(\d+)\s*年前", "year"),
+    (r"(\d+)\s*years?\s*ago", "year"),
+]
+
+
+def _classify_onset_from_duration(value: float, unit: str) -> str | None:
+    """Classify a numeric duration into acute/subacute/chronic.
+
+    Rules of thumb in clinical practice:
+      acute    : <= 3 days
+      subacute : 4 days – 2 weeks
+      chronic  : >= 2 weeks
+    """
+    if unit == "hour":
+        return "acute"
+    if unit == "day":
+        if value <= 3:
+            return "acute"
+        if value <= 14:
+            return "subacute"
+        return "chronic"
+    if unit == "week":
+        if value < 1:
+            return "acute"
+        if value <= 2:
+            return "subacute"
+        return "chronic"
+    if unit in ("month", "year"):
+        return "chronic"
+    return None
+
+
 def extract_onset_from_text(text: str) -> str | None:
     """Extract onset (time-course) from natural language text.
 
+    Two-pass extraction:
+      1. Numeric duration patterns (e.g. "3 days ago", "2週間前")
+         classified into acute / subacute / chronic by clinical thresholds.
+      2. Fallback to alias phrase matching for non-numeric expressions.
+
     Returns "acute", "subacute", "chronic", or None if not detected.
     """
+    if not text:
+        return None
     text_lower = text.lower()
-    for phrase, onset in _ONSET_ALIASES.items():
+    # Pass 1: numeric duration patterns (most specific)
+    import re as _re
+
+    for pattern, unit in _ONSET_NUM_PATTERNS:
+        match = _re.search(pattern, text_lower)
+        if match:
+            try:
+                value = float(match.group(1))
+            except (TypeError, ValueError):
+                continue
+            classified = _classify_onset_from_duration(value, unit)
+            if classified:
+                return classified
+    # Pass 2: alias phrase matching (longest phrase first to prefer specific matches)
+    for phrase, onset in sorted(_ONSET_ALIASES.items(), key=lambda kv: -len(kv[0])):
         if phrase in text_lower:
             return onset
     return None
@@ -1955,6 +2026,7 @@ def consultation():
     answered_categories = data.get("answered_categories", [])
     onset = data.get("onset")
     age_years = data.get("age_years")
+    age_category_client = data.get("age_category")  # explicit category from UI (preferred)
     pain_score = data.get("pain_score")
     lab_values = data.get("lab_values")
     breed = data.get("breed")
@@ -2044,9 +2116,12 @@ def consultation():
                 }
             ), 200
 
-        # Convert age_years to age_category for interim matcher refinement
+        # Determine age_category for interim matcher refinement.
+        # Prefer explicit client-provided category; otherwise derive from age_years.
         _interim_age_category: str | None = None
-        if age_years is not None:
+        if isinstance(age_category_client, str) and age_category_client.strip():
+            _interim_age_category = age_category_client.strip().lower()
+        elif age_years is not None:
             try:
                 _iay = float(age_years)
                 if _iay < 1.0:
@@ -2250,9 +2325,12 @@ def consultation():
             logger.warning(
                 "Finalize: analyze_species_symptoms failed for %s, falling back to chat engine: %s", species, exc
             )
-            # Convert age_years to age_category for matcher refinement
+            # Determine age_category for matcher refinement.
+            # Prefer explicit client-provided category; otherwise derive from age_years.
             _age_category: str | None = None
-            if age_years is not None:
+            if isinstance(age_category_client, str) and age_category_client.strip():
+                _age_category = age_category_client.strip().lower()
+            elif age_years is not None:
                 try:
                     _ay = float(age_years)
                     if _ay < 1.0:
