@@ -2018,7 +2018,7 @@ def consultation():
         "age_years": null
     }
     """
-    data = request.get_json() or {}
+    data = request.get_json(silent=True) or {}
     species = data.get("species", "dog")
     phase = data.get("phase", "start")
     selected_symptoms = data.get("selected_symptoms", [])

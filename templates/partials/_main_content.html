@@ -142,7 +142,7 @@
           </div>
         </div>
         <div class="chat-input-row">
-          <input type="text" id="chatInput" placeholder="臨床症状を入力..." data-i18n-ph="chatInputPh" aria-label="臨床症状を入力" autocomplete="off"/>
+          <input type="text" id="chatInput" placeholder="臨床症状を入力..." data-i18n-ph="chatInputPh" aria-label="臨床症状を入力" autocomplete="off" inputmode="text" enterkeyhint="send" maxlength="500"/>
           <button type="button" id="chatSend" data-i18n="chatSend">送信</button>
         </div>
       </div>
@@ -245,7 +245,7 @@
           <div style="padding:14px;background:var(--gray-50);border-radius:var(--radius);margin-top:8px">
             <div style="font-size:.78rem;color:var(--gray-700);margin-bottom:10px" data-i18n="interactionCheckerDesc">複数の薬品を併用する際の相互作用を確認します。薬品名（半角英数）をカンマ区切りで入力してください。</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-              <input type="text" id="interactionDrugIds" placeholder="例: meloxicam, prednisolone" aria-label="薬品ID（カンマ区切り）" style="flex:1;min-width:240px;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem"/>
+              <input type="text" id="interactionDrugIds" placeholder="例: meloxicam, prednisolone" aria-label="薬品ID（カンマ区切り）" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="text" enterkeyhint="search" maxlength="200" style="flex:1;min-width:240px;padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem"/>
               <select id="interactionSpecies" aria-label="動物種（種特異的警告用）" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:130px;background:var(--white)">
                 <option value="" data-i18n="speciesAny">動物種（任意）</option>
               </select>
