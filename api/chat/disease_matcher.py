@@ -257,6 +257,17 @@ def _match_species_symptoms_to_diseases(
     _region = "jp" if lang == "ja" else ("intl" if lang else "")
     _prevalence = _prev_mod.get_prevalence_for_species(species, region=_region)
 
+    # --- Compute lab abnormality boosts for this species ---
+    # Returns {disease_name: boost_multiplier} where multiplier > 1.0 for matching diseases.
+    _lab_boosts: dict[str, float] = {}
+    if lab_values:
+        try:
+            from api.species.helpers import compute_lab_boosts
+
+            _lab_boosts = compute_lab_boosts(lab_values, species=species)
+        except (ImportError, Exception):  # noqa: BLE001 — best-effort scoring layer
+            _lab_boosts = {}
+
     # --- Build per-symptom specificity for this species (cached) ---
     symptom_disease_count, total_diseases = _get_species_idf(species, diseases)
 
@@ -406,6 +417,28 @@ def _match_species_symptoms_to_diseases(
                 if breed_lc and breed_lc in disease_breeds.lower():
                     breed_factor = 1.12
 
+        # --- Lab abnormality factor ---
+        # _lab_boosts maps disease name → multiplier (>1.0 means lab pattern fits disease).
+        # Apply best match by name with conservative cap to prevent over-confidence.
+        lab_factor = 1.0
+        if _lab_boosts:
+            # Try Japanese name first then English name; fall back to substring matching
+            name_en = disease.get("name", "") or ""
+            name_ja = disease.get("name_ja", "") or ""
+            best_match = _lab_boosts.get(name_en) or _lab_boosts.get(name_ja)
+            if best_match is None:
+                # Fuzzy: any boost key contained in (or containing) disease name
+                for boost_name, mult in _lab_boosts.items():
+                    if (
+                        boost_name
+                        and (boost_name in name_en or boost_name in name_ja)
+                        and (best_match is None or mult > best_match)
+                    ):
+                        best_match = mult
+            if best_match is not None:
+                # Clamp to [1.0, 1.40] to avoid runaway certainty from lab alone
+                lab_factor = max(1.0, min(float(best_match), 1.40))
+
         composite = (
             base_score
             * negative_penalty
@@ -415,6 +448,7 @@ def _match_species_symptoms_to_diseases(
             * age_factor
             * onset_factor
             * breed_factor
+            * lab_factor
         )
 
         # --- Logistic confidence calibration ---
@@ -455,6 +489,7 @@ def _match_species_symptoms_to_diseases(
                     "age_factor": age_factor,
                     "onset_factor": onset_factor,
                     "breed_factor": breed_factor,
+                    "lab_factor": round(lab_factor, 3),
                 },
             }
         )
