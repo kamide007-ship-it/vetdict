@@ -197,6 +197,24 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # time and doesn't change at runtime.
 _SPECIES_IDF_CACHE: dict[str, tuple[dict[str, int], int]] = {}
 
+# Tracks which species have had metadata enrichment applied (idempotent).
+_METADATA_ENRICHED: set[str] = set()
+
+
+def _ensure_metadata_enriched(species: str, diseases: list) -> None:
+    """Apply lazy metadata auto-enrichment (age_predisposition / onset_pattern)
+    once per species. Mutates disease dicts in-place.
+    """
+    if species in _METADATA_ENRICHED:
+        return
+    try:
+        from api.chat.metadata_enricher import enrich_diseases_inplace
+
+        enrich_diseases_inplace(diseases)
+    except (ImportError, Exception):  # noqa: BLE001 — best-effort enrichment
+        pass
+    _METADATA_ENRICHED.add(species)
+
 
 def _get_species_idf(species: str, diseases: list) -> tuple[dict[str, int], int]:
     """Return (symptom_disease_count, total_diseases) for a species, cached.
@@ -207,6 +225,8 @@ def _get_species_idf(species: str, diseases: list) -> tuple[dict[str, int], int]
     cached = _SPECIES_IDF_CACHE.get(species)
     if cached is not None:
         return cached
+    # Apply metadata enrichment once before any matching uses the data
+    _ensure_metadata_enriched(species, diseases)
     counts: dict[str, int] = {}
     for disease in diseases:
         for s in disease.get("symptoms", set()):
