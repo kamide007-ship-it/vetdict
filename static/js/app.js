@@ -1268,7 +1268,7 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:292,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:7079,
+    diseases:7084,
     species:21,
     drugs:610,
     symptoms:52,
@@ -2979,9 +2979,12 @@ const _CHAT_MAX_RETRIES=3;
 let _landingChatRetries=0;
 let _chatRetries=0;
 
-function sendLandingChat(){
+function sendLandingChat(isRetry){
   const input=document.getElementById("landingChatInput"),text=input.value.trim();if(!text)return;
   const sendBtn=input.closest(".chat-input-row")?.querySelector("button");
+  // Reset retry counter for a fresh user-initiated send so a previous failure
+  // doesn't prevent retries on a new question.
+  if(!isRetry)_landingChatRetries=0;
   input.value="";input.disabled=true;if(sendBtn)sendBtn.disabled=true;
   const msgs=document.getElementById("landingChatMessages");
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
@@ -3022,13 +3025,13 @@ function sendLandingChat(){
     const retryBtnHtml=`<button type="button" class="landing-retry-btn" style="margin-top:6px;margin-right:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     if(canRetry){
       errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryBtnHtml;
-      errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries++;input.value=text;errDiv.remove();sendLandingChat();});
+      errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries++;input.value=text;errDiv.remove();sendLandingChat(true);});
     }else{
       const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
       const reloadLabel=currentLang==="ja"?"ページを再読み込み":"Reload page";
       const reloadBtn=`<button type="button" class="landing-reload-btn" style="margin-top:6px;padding:6px 14px;background:var(--gray-200);color:var(--gray-800);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${reloadLabel}</button>`;
       errDiv.innerHTML=escapeHtml(giveUpMsg)+"<div style=\"margin-top:6px\">"+retryBtnHtml+reloadBtn+"</div>";
-      errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries=0;input.value=text;errDiv.remove();sendLandingChat();});
+      errDiv.querySelector(".landing-retry-btn").addEventListener("click",()=>{_landingChatRetries=0;input.value=text;errDiv.remove();sendLandingChat(true);});
       errDiv.querySelector(".landing-reload-btn").addEventListener("click",()=>location.reload());
     }
     msgs.appendChild(errDiv);
@@ -3059,9 +3062,12 @@ function _sendSymptomUpdate(symptomId,confirmed){
   .catch(err=>{loading.remove();debugError("Symptom update error:",err);});
 }
 
-function sendChatMessage(){
+function sendChatMessage(isRetry){
   const input=document.getElementById("chatInput"),text=input.value.trim();if(!text)return;
   const sendBtn=document.getElementById("chatSend");
+  // Reset retry counter on a fresh user-initiated send so a previous failure
+  // doesn't prevent retries on a new question.
+  if(!isRetry)_chatRetries=0;
   input.value="";input.disabled=true;if(sendBtn){sendBtn.disabled=true;sendBtn.setAttribute("aria-busy","true");}
   trackEvent("chat_message",{species:currentSpecies||"dog",message_length:text.length});
   addChatMsg(text,"user");const species=currentSpecies||"dog";
@@ -3088,13 +3094,13 @@ function sendChatMessage(){
     const retryHtml=`<button type="button" class="chat-retry-btn" style="margin-top:6px;margin-right:6px;padding:6px 14px;background:var(--navy);color:var(--white);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${t("retry")}</button>`;
     if(canRetry){
       errDiv.innerHTML=escapeHtml(t("commError"))+" "+retryHtml;
-      errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries++;input.value=text;errDiv.remove();sendChatMessage();});
+      errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries++;input.value=text;errDiv.remove();sendChatMessage(true);});
     }else{
       const giveUpMsg=currentLang==="ja"?"接続に失敗しました。ネットワークをご確認のうえ、しばらくしてから再度お試しください。":"Connection failed. Please check your network and try again later.";
       const reloadLabel=currentLang==="ja"?"ページを再読み込み":"Reload page";
       const reloadBtn=`<button type="button" class="chat-reload-btn" style="margin-top:6px;padding:6px 14px;background:var(--gray-200);color:var(--gray-800);border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${reloadLabel}</button>`;
       errDiv.innerHTML=escapeHtml(giveUpMsg)+"<div style=\"margin-top:6px\">"+retryHtml+reloadBtn+"</div>";
-      errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries=0;input.value=text;errDiv.remove();sendChatMessage();});
+      errDiv.querySelector(".chat-retry-btn").addEventListener("click",()=>{_chatRetries=0;input.value=text;errDiv.remove();sendChatMessage(true);});
       errDiv.querySelector(".chat-reload-btn").addEventListener("click",()=>location.reload());
     }
     msgs.appendChild(errDiv);msgs.scrollTop=msgs.scrollHeight;
