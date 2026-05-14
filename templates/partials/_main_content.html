@@ -26,7 +26,7 @@
             </div>
             <div class="symptom-list" id="symptomList" role="group" aria-label="症状一覧"></div>
             <details class="lab-values-section" id="labDetails" style="margin-top:12px;border:2px solid var(--gray-200);border-radius:var(--radius);padding:0">
-              <summary style="cursor:pointer;padding:10px 14px;font-size:.86rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-radius:var(--radius);user-select:none"><span data-i18n-html="labSectionTitle">&#128300; 検査値を入力（任意）</span><span id="labSummaryBadge" style="display:none;margin-left:8px;font-size:.72rem;font-weight:600;background:var(--green);color:#fff;padding:2px 8px;border-radius:10px"></span></summary>
+              <summary style="cursor:pointer;padding:10px 14px;font-size:.86rem;font-weight:700;color:var(--navy);background:var(--gray-50);border-radius:var(--radius);user-select:none"><span data-i18n-html="labSectionTitle">&#128300; 検査値を入力（任意）</span><span id="labSummaryBadge" role="status" aria-live="polite" aria-atomic="true" style="display:none;margin-left:8px;font-size:.72rem;font-weight:600;background:var(--green);color:#fff;padding:2px 8px;border-radius:10px"></span></summary>
               <div style="padding:12px 14px" id="labValuesGrid">
                 <div class="lab-cat-label" data-i18n="labCatRenal">腎機能</div>
                 <div class="lab-grid">

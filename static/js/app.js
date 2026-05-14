@@ -96,6 +96,7 @@ const I18N={
     heroCredit:'開発: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener noreferrer">南相馬アニマルクリニック</a> 獣医師 上手 健太郎',
     sponsorDesc:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
     sponsorCta:"詳細 →",
+    sponsorAria:"スポンサー: Equine & Canine Vet Nutrition (caninevet.jp) — 別タブで開きます",
     selectSpecies:"動物種を選択",
     cardSymptoms:"&#9745; 症状を選択",cardResults:"&#128202; 検索結果",
     breedLabel:"品種を選択（任意）",breedNone:"品種を選択しない",
@@ -347,6 +348,7 @@ const I18N={
     heroCredit:'Developed by: <a href="https://www.minamisoma-vet.com/" target="_blank" rel="noopener noreferrer">Minamisoma Animal Clinic</a> — Kentaro Kamide, DVM',
     sponsorDesc:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     sponsorCta:"Details →",
+    sponsorAria:"Sponsor: Equine & Canine Vet Nutrition (caninevet.jp) — opens in a new tab",
     selectSpecies:"Select Species",
     cardSymptoms:"&#9745; Select Symptoms",cardResults:"&#128202; Results",
     breedLabel:"Select breed (optional)",breedNone:"No breed selected",
@@ -675,7 +677,27 @@ function applyLanguage(){
   if(document.getElementById("quickNavStrip"))renderQuickNav(currentSpecies||null);
   updateBreadcrumb();
   const mbn=document.getElementById("mobileBottomNav");
-  if(mbn){const views=["checker","database","chat","drugs","anesthesia"];mbn.querySelectorAll("button[data-view]").forEach((btn,i)=>{const sp=btn.querySelector("span");if(sp)sp.textContent=t("mobileNav"+views[i].charAt(0).toUpperCase()+views[i].slice(1));});}
+  if(mbn){
+    mbn.setAttribute("aria-label",currentLang==="ja"?"メインナビゲーション":"Main navigation");
+    const views=["checker","database","chat","drugs","anesthesia"];
+    mbn.querySelectorAll("button[data-view]").forEach((btn,i)=>{const sp=btn.querySelector("span");if(sp)sp.textContent=t("mobileNav"+views[i].charAt(0).toUpperCase()+views[i].slice(1));});
+  }
+  const fab=document.getElementById("floatingNav");
+  if(fab){
+    const tgl=fab.querySelector(".floating-nav-toggle");
+    if(tgl)tgl.setAttribute("aria-label",currentLang==="ja"?"ナビゲーション":"Navigation");
+    /* Re-render the floating nav menu labels in the current language. */
+    const menu=fab.querySelector(".floating-nav-menu");
+    if(menu){
+      const labelMap=currentLang==="ja"
+        ?{top:"⬆️ トップへ",species:"🐾 動物種選択",checker:"☑️ 鑑別診断",database:"📖 疾患DB",drugs:"💊 薬品",anesthesia:"💉 麻酔",emergency:"🚨 緊急対応"}
+        :{top:"⬆️ Top",species:"🐾 Species",checker:"☑️ Checker",database:"📖 Disease DB",drugs:"💊 Drugs",anesthesia:"💉 Anesthesia",emergency:"🚨 Emergency"};
+      menu.querySelectorAll(".floating-nav-item").forEach(item=>{
+        const act=item.dataset.action;
+        if(act&&labelMap[act])item.textContent=labelMap[act];
+      });
+    }
+  }
   const ob=document.getElementById("offlineBanner");
   if(ob)ob.textContent=t("offlineBanner");
   // Refresh pain-scale labels (array-keyed i18n)
@@ -1635,6 +1657,8 @@ function resetSpeciesChat(species){
   ["chatMessages","landingChatMessages"].forEach(id=>{
     const el=document.getElementById(id);
     if(el){
+      /* Reset the once-per-session disclaimer flag for the new species. */
+      delete el.dataset.disclaimerShown;
       el.innerHTML=`<div class="chat-msg bot">${escapeHtml(hint)}${quickHtml}</div>`;
       el.querySelectorAll(".quick-sym-btn").forEach(btn=>{
         btn.addEventListener("click",function(){
@@ -1848,15 +1872,25 @@ function highlightLabAbnormals(){
     const v=parseFloat(el.value),lo=parseFloat(el.dataset.lo),hi=parseFloat(el.dataset.hi);
     const flag=el.nextElementSibling;
     el.classList.remove("lab-high","lab-low");
-    if(flag)flag.textContent="";
+    el.removeAttribute("aria-invalid");
+    if(flag){flag.textContent="";flag.setAttribute("aria-hidden","true");}
     if(isNaN(v)||el.value.trim()==="")return;
     filled++;
-    if(v>hi){el.classList.add("lab-high");if(flag){flag.textContent="\u2191";flag.style.color="#e74c3c";}abnormal++;}
-    else if(v<lo){el.classList.add("lab-low");if(flag){flag.textContent="\u2193";flag.style.color="#2980b9";}abnormal++;}
+    if(v>hi){el.classList.add("lab-high");el.setAttribute("aria-invalid","true");if(flag){flag.textContent="\u2191";flag.style.color="#e74c3c";}abnormal++;}
+    else if(v<lo){el.classList.add("lab-low");el.setAttribute("aria-invalid","true");if(flag){flag.textContent="\u2193";flag.style.color="#2980b9";}abnormal++;}
   });
   const badge=document.getElementById("labSummaryBadge");
-  if(filled>0){badge.style.display="inline";badge.textContent=abnormal>0?`${filled}\u9805\u76ee\u5165\u529b / ${abnormal}\u7570\u5e38`:`${filled}\u9805\u76ee\u5165\u529b`;badge.style.background=abnormal>0?"#e74c3c":"var(--green)";}
-  else{badge.style.display="none";}
+  if(!badge)return;
+  if(filled>0){
+    const filledLabel=currentLang==="ja"?`${filled}\u9805\u76ee\u5165\u529b`:`${filled} entered`;
+    const abnLabel=currentLang==="ja"?` / ${abnormal}\u7570\u5e38`:` / ${abnormal} abnormal`;
+    badge.style.display="inline";
+    badge.textContent=abnormal>0?(filledLabel+abnLabel):filledLabel;
+    badge.style.background=abnormal>0?"#e74c3c":"var(--green)";
+  }else{
+    badge.style.display="none";
+    badge.textContent="";
+  }
 }
 function clearLabValues(){
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{el.value="";});
@@ -3111,16 +3145,22 @@ function renderChatResult(container,data){
   const wrapper=document.createElement("div");
   wrapper.className="chat-msg bot chat-result";
 
-  // 0. AI/clinical disclaimer banner (shown once per result)
-  const disclaim=document.createElement("div");
-  disclaim.className="chat-disclaimer-banner";
-  disclaim.setAttribute("role","note");
-  const disclaimText=currentLang==="ja"
-    ?"⚠ AI鑑別診断結果は参考情報です。確定診断には病歴・身体検査・追加検査との総合判断が必要です。"
-    :"⚠ AI differential diagnosis results are reference information. Definitive diagnosis requires integration with history, physical exam, and additional diagnostics.";
-  disclaim.style.cssText="font-size:.74rem;color:#92400e;background:#fef3c7;border-left:3px solid #d97706;padding:8px 10px;border-radius:4px;margin-bottom:10px;line-height:1.5";
-  disclaim.textContent=disclaimText;
-  wrapper.appendChild(disclaim);
+  // 0. AI/clinical disclaimer banner — show only on the first result in this
+  //    container to avoid repetitive noise after multiple exchanges. The
+  //    persistent disclaimer in the chat welcome message + the per-result
+  //    short footer (step 6) still keep the warning visible.
+  if(!container.dataset.disclaimerShown){
+    const disclaim=document.createElement("div");
+    disclaim.className="chat-disclaimer-banner";
+    disclaim.setAttribute("role","note");
+    const disclaimText=currentLang==="ja"
+      ?"⚠ AI鑑別診断結果は参考情報です。確定診断には病歴・身体検査・追加検査との総合判断が必要です。"
+      :"⚠ AI differential diagnosis results are reference information. Definitive diagnosis requires integration with history, physical exam, and additional diagnostics.";
+    disclaim.style.cssText="font-size:.74rem;color:#92400e;background:#fef3c7;border-left:3px solid #d97706;padding:8px 10px;border-radius:4px;margin-bottom:10px;line-height:1.5";
+    disclaim.textContent=disclaimText;
+    wrapper.appendChild(disclaim);
+    container.dataset.disclaimerShown="1";
+  }
 
   // 0.5. Clinical reasoning (Vetlexicon-style structured support)
   if(data.clinical_reasoning){
