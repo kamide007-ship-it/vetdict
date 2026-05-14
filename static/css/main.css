@@ -67,7 +67,8 @@ a:hover{text-decoration:underline}
 .search-input-group{position:relative;display:flex;align-items:center}
 .global-search-input{width:100%;padding:8px 12px;padding-right:36px;border:1px solid rgba(255,255,255,.3);border-radius:6px;font-size:.85rem;background:rgba(255,255,255,.12);color:var(--white);font-family:var(--font);transition:background var(--transition-fast),border-color var(--transition-fast)}
 .global-search-input::placeholder{color:rgba(255,255,255,.6)}
-.global-search-input:focus{outline:none;background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5)}
+.global-search-input:focus-visible{outline:none;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.7);box-shadow:0 0 0 2px rgba(255,255,255,.5)}
+.global-search-input:focus:not(:focus-visible){outline:none;background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5)}
 .search-filter-btn{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;padding:6px;border-radius:4px;transition:background var(--transition-fast),color var(--transition-fast);width:32px;height:32px;display:flex;align-items:center;justify-content:center}
 .search-filter-btn:focus-visible{outline:2px solid var(--white);outline-offset:1px}
 .search-filter-btn:hover{background:rgba(255,255,255,.15);color:var(--white)}
@@ -135,7 +136,8 @@ a:hover{text-decoration:underline}
 /* Hero Statistics */
 .hero-stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:24px;position:relative;z-index:1}
 .hero-stat{text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 20px;min-width:100px;backdrop-filter:blur(4px);transition:transform var(--transition-fast),background var(--transition-fast)}
-.hero-stat:hover{transform:translateY(-2px);background:rgba(255,255,255,.1)}
+/* Hover affordance only on stats that are actually clickable */
+.hero-stat-clickable:hover{transform:translateY(-2px);background:rgba(255,255,255,.1)}
 .hero-stat .num{font-size:2.2rem;font-weight:800;display:block;background:linear-gradient(135deg,var(--white),var(--green-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-stat .label{font-size:.75rem;color:#fff;letter-spacing:.5px}
 
@@ -193,8 +195,10 @@ a:hover{text-decoration:underline}
 .symptom-search{position:relative;margin-bottom:12px}
 .symptom-search input{width:100%;padding:10px 36px 10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.88rem;outline:none;transition:border-color var(--transition-fast),box-shadow var(--transition-fast);background:var(--white)}
 .symptom-search input:focus{border-color:var(--navy-light);box-shadow:0 0 0 3px rgba(42,74,143,.1)}
-.search-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:32px;height:32px;font-size:.8rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
+.search-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:32px;height:32px;font-size:.9rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
 .search-clear:hover{background:var(--gray-300);color:var(--gray-900)}
+.search-clear:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
+@media(max-width:600px){.search-clear{width:36px;height:36px;right:4px}}
 .symptom-search input:not(:placeholder-shown)~.search-clear{display:flex}
 .symptom-sort-toggle{display:block;margin:0 auto 8px;padding:4px 14px;font-size:.75rem;border:1px solid var(--gray-300);border-radius:var(--radius);background:var(--white);color:var(--gray-700);cursor:pointer;transition:all var(--transition-fast)}
 .symptom-sort-toggle:hover{background:var(--gray-100);border-color:var(--navy-light);color:var(--navy)}

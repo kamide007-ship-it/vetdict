@@ -19,7 +19,9 @@
   </div>
 
   <!-- Hero Statistics -->
-  <div class="hero-stats" aria-live="polite" data-i18n-aria="heroStatsAria" aria-label="データベース統計">
+  <!-- aria-live intentionally omitted: counters animate from "-" to final value on load, -->
+  <!-- which would otherwise be announced repeatedly by screen readers. -->
+  <div class="hero-stats" role="group" data-i18n-aria="heroStatsAria" aria-label="データベース統計">
     <div class="hero-stat">
       <span class="num" id="statDiseases" data-i18n-aria="statDiseases" aria-label="疾患数">-</span>
       <span class="label" data-i18n="statDiseases">疾患数</span>
@@ -56,7 +58,7 @@
 </section>
 
 <div class="sponsor-banner">
-  <a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer" aria-label="Sponsor: Equine & Canine Vet Nutrition (caninevet.jp)" data-i18n-aria="sponsorAria">
     <div class="sponsor-banner-inner">
       <div>
         <div class="sponsor-label">Sponsor</div>
