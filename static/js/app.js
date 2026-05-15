@@ -778,6 +778,12 @@ document.addEventListener("DOMContentLoaded",async()=>{
     document.querySelectorAll('[data-action="clear-search"]').forEach(btn=>{
       btn.addEventListener("click",()=>{const inp=btn.previousElementSibling;inp.value='';inp.dispatchEvent(new Event('input'));inp.focus();});
     });
+    // Escape clears any focused search input (a11y / keyboard convenience)
+    document.querySelectorAll('.symptom-search input[type="search"]').forEach(inp=>{
+      inp.addEventListener("keydown",e=>{
+        if(e.key==="Escape"&&inp.value){e.preventDefault();inp.value="";inp.dispatchEvent(new Event("input"));}
+      });
+    });
     // Clear lab values button
     const clearLabBtn=document.getElementById("clearLabBtn");
     if(clearLabBtn)clearLabBtn.addEventListener("click",clearLabValues);
@@ -1782,8 +1788,9 @@ function toggleSymptom(id){const adding=!selectedSymptoms.has(id);if(adding)sele
 
 function renderSelectedSymptoms(){
   const area=document.getElementById("selectedSymptoms"),btn=document.getElementById("analyzeBtn");
-  if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;updateSymptomFloater(0);return;}
-  btn.disabled=false;
+  const disabledHint=currentLang==="ja"?"症状を1つ以上選択してください":"Select at least one symptom";
+  if(selectedSymptoms.size===0){area.innerHTML=`<span style="color:var(--gray-500);font-size:.78rem">${t("noSymptomsSelected")}</span>`;btn.disabled=true;btn.setAttribute("aria-disabled","true");btn.setAttribute("title",disabledHint);updateSymptomFloater(0);return;}
+  btn.disabled=false;btn.setAttribute("aria-disabled","false");btn.removeAttribute("title");
   const clearLabel=currentLang==="ja"?"全解除":"Clear All";
   const clearAriaLabel=currentLang==="ja"?"選択した症状をすべて解除":"Clear all selected symptoms";
   area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${escapeHtml(label)} <button class="remove" type="button" aria-label="${escapeHtml(ariaLabel)}" data-id="${escapeHtml(id)}">&times;</button></span>`;}).join("")+`<button class="clear-all-btn" type="button" aria-label="${escapeHtml(clearAriaLabel)}">${clearLabel}</button>`;
@@ -2804,7 +2811,24 @@ function renderDiseaseDb(){
   const dbCountEl=document.getElementById("diseaseDbCount");if(dbCountEl)dbCountEl.textContent=t("diseaseCount").replace("%filtered%",totalCount).replace("%total%",allDiseases.length);
   if(totalCount===0){
     if(!currentSpecies&&!search){list.innerHTML=renderEmptyState("database");}
-    else{list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;}
+    else{
+      const hasFilter=!!diseaseFilter;
+      const heading=t("noDiseaseMatch");
+      const tipsJa=[];const tipsEn=[];
+      if(search){tipsJa.push("検索キーワードを短くする（例:「腎」「kidney」）","スペルや表記ゆれ（カタカナ↔英語）を確認");tipsEn.push("Try a shorter keyword (e.g., 'kidn' instead of 'kidney')","Check spelling or try the other language");}
+      if(hasFilter){tipsJa.push("カテゴリ／頭文字フィルタを解除して再検索");tipsEn.push("Clear the category / A-Z filter and search again");}
+      if(!search&&!hasFilter){tipsJa.push("他の動物種を選択してみる");tipsEn.push("Try selecting a different species");}
+      const tips=currentLang==="ja"?tipsJa:tipsEn;
+      const subheading=currentLang==="ja"?"次の方法をお試しください:":"Try one of the following:";
+      const clearBtnLbl=currentLang==="ja"?"フィルタをクリア":"Clear filters";
+      const showClearBtn=search||hasFilter;
+      list.innerHTML=`<div style="padding:32px 20px;text-align:center;color:var(--gray-600);background:linear-gradient(180deg,var(--gray-50),transparent);border-radius:var(--radius-lg)"><div style="font-size:2rem;margin-bottom:8px;opacity:.5">🔍</div><p style="font-weight:600;color:var(--navy);margin-bottom:4px">${escapeHtml(heading)}</p><p style="font-size:.82rem;color:var(--gray-500);margin-bottom:10px">${escapeHtml(subheading)}</p><ul style="text-align:left;display:inline-block;margin:0 auto 14px;padding-left:18px;font-size:.82rem;color:var(--gray-700);line-height:1.6">${tips.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>${showClearBtn?`<div><button type="button" id="diseaseDbClearAll" class="clear-all-btn">${clearBtnLbl}</button></div>`:""}</div>`;
+      const clearAllBtn=document.getElementById("diseaseDbClearAll");
+      if(clearAllBtn)clearAllBtn.addEventListener("click",()=>{
+        const ds=document.getElementById("diseaseSearch");if(ds){ds.value="";ds.dispatchEvent(new Event("input"));}
+        diseaseFilter="";renderAzNav();renderDiseaseDb();
+      });
+    }
     return;
   }
   const pk=(ja,en)=>currentLang==="ja"?(ja||en||""):(en||ja||"");
@@ -2970,7 +2994,27 @@ function setupChat(){
   if(chatInput)chatInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing)sendChatMessage();});
   if(landingChatSend)landingChatSend.addEventListener("click",()=>sendLandingChat());
   if(landingChatInput)landingChatInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing)sendLandingChat();});
+  attachChatCharCounter(chatInput);
   addChatQuickSuggestions();
+}
+
+function attachChatCharCounter(input){
+  if(!input||!input.maxLength||input.maxLength<=0)return;
+  const row=input.closest(".chat-input-row");
+  if(!row||row.querySelector(".chat-char-counter"))return;
+  const max=input.maxLength;
+  const counter=document.createElement("div");
+  counter.className="chat-char-counter";
+  counter.setAttribute("aria-live","off");
+  const update=()=>{
+    const n=input.value.length;
+    counter.textContent=`${n}/${max}`;
+    counter.classList.toggle("near-limit",n>=Math.floor(max*0.8));
+    counter.classList.toggle("at-limit",n>=max);
+  };
+  input.addEventListener("input",update);
+  row.insertAdjacentElement("afterend",counter);
+  update();
 }
 
 function addChatQuickSuggestions(){
@@ -3230,7 +3274,13 @@ function renderChatResult(container,data){
   } else if(symptoms.length>0){
     const noMatch=document.createElement("div");
     noMatch.className="chat-no-match";
-    noMatch.textContent=currentLang==="ja"?"\u8a72\u5f53\u3059\u308b\u75be\u60a3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u3082\u3046\u5c11\u3057\u8a73\u3057\u304f\u75c7\u72b6\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044\u3002":"No matching diseases found. Please describe more symptoms.";
+    const headJa="\u8a72\u5f53\u3059\u308b\u75be\u60a3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f";
+    const headEn="No matching diseases found";
+    const tipsJa=["\u4ed6\u306e\u75c7\u72b6\uff08\u98df\u6b32\u30fb\u5143\u6c17\u30fb\u4f53\u91cd\u5909\u5316\u306a\u3069\uff09\u3092\u8ffd\u52a0\u3057\u3066\u307f\u308b","\u4ee3\u66ff\u8868\u73fe\uff08\u4f8b: \u300c\u4e0b\u75e2\u300d\u2194\u300c\u8edf\u4fbf\u300d\u3001\u300cPU/PD\u300d\u2194\u300c\u591a\u98f2\u591a\u5c3f\u300d\uff09\u3092\u8a66\u3059","\u52d5\u7269\u7a2e\u304c\u6b63\u3057\u304f\u9078\u629e\u3055\u308c\u3066\u3044\u308b\u304b\u78ba\u8a8d"];
+    const tipsEn=["Add related signs (appetite, energy, weight change)","Try synonyms (e.g., 'diarrhea' \u2194 'loose stool')","Verify the correct species is selected"];
+    const tips=currentLang==="ja"?tipsJa:tipsEn;
+    const head=currentLang==="ja"?headJa:headEn;
+    noMatch.innerHTML=`<div style="font-weight:600;color:var(--navy);margin-bottom:4px">${escapeHtml(head)}</div><ul style="text-align:left;display:inline-block;margin:0;padding-left:18px;font-size:.78rem;color:var(--gray-700);line-height:1.6">${tips.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>`;
     wrapper.appendChild(noMatch);
   } else {
     const noSym=document.createElement("div");

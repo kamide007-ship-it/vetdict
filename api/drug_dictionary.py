@@ -10851,6 +10851,7 @@ def api_check_interactions():
             {
                 "interactions": [],
                 "species_specific_warnings": [],
+                "total_interactions": 0,
                 "unknown_drug_ids": [],
                 "recognized_drug_ids": [],
             }
