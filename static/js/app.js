@@ -700,6 +700,9 @@ function applyLanguage(){
   }
   const ob=document.getElementById("offlineBanner");
   if(ob)ob.textContent=t("offlineBanner");
+  /* Re-attach chat quick suggestion buttons — applyLanguage rewrites #chatWelcome's
+     innerHTML via data-i18n-html which wipes the dynamically added suggestion row. */
+  if(typeof addChatQuickSuggestions==="function")addChatQuickSuggestions();
   // Refresh pain-scale labels (array-keyed i18n)
   const _painLabels=t("painLabels");
   if(Array.isArray(_painLabels)){
@@ -1273,26 +1276,26 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:618,drugs:0,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:549,drugs:0,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:621,drugs:0,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:452,drugs:0,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:321,drugs:0,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:346,drugs:0,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:278,drugs:0,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:277,drugs:0,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:244,drugs:0,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:221,drugs:0,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:201,drugs:0,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:551,drugs:0,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:459,drugs:0,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:283,drugs:0,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:286,drugs:0,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:288,drugs:0,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:248,drugs:0,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:250,drugs:0,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
-    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:258,drugs:0,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
-    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:36,drugs:23,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:622,drugs:551,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:550,drugs:524,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:621,drugs:340,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:452,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:321,drugs:68,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:346,drugs:137,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:278,drugs:90,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:277,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:244,drugs:67,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:221,drugs:74,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:201,drugs:155,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:551,drugs:222,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:459,drugs:222,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:283,drugs:222,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:286,drugs:96,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:288,drugs:103,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:248,drugs:103,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:250,drugs:98,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:258,drugs:17,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
+    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:36,drugs:26,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:292,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
@@ -1776,10 +1779,20 @@ function renderSymptomList(symptoms){
     matchCount=sorted.length;
     for(const s of sorted)html+=mkItem(s);
   }
-  if(matchCount===0)html+=`<div style="padding:20px;text-align:center;color:var(--gray-500);font-size:.84rem">${escapeHtml(t("noMatchingSymptom"))}</div>`;
+  if(matchCount===0){
+    const noMatch=escapeHtml(t("noMatchingSymptom"));
+    const clearLabel=currentLang==="ja"?"検索をクリア":"Clear search";
+    const tipText=currentLang==="ja"?"別の言い回し（日本語・英語）でも検索できます":"Try alternate phrasing or switch language";
+    const clearAction=search?`<button type="button" class="symptom-search-clear-inline" style="margin-top:8px;padding:6px 14px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:.78rem;cursor:pointer">${escapeHtml(clearLabel)}</button>`:"";
+    html+=`<div style="padding:20px;text-align:center;color:var(--gray-500);font-size:.84rem">${noMatch}<div style="margin-top:4px;font-size:.76rem;color:var(--gray-400)">${escapeHtml(tipText)}</div>${clearAction}</div>`;
+  }
   list.innerHTML=html;
   const sortToggle=list.querySelector(".symptom-sort-toggle");
   if(sortToggle)sortToggle.addEventListener("click",toggleSymptomSort);
+  const inlineClear=list.querySelector(".symptom-search-clear-inline");
+  if(inlineClear)inlineClear.addEventListener("click",()=>{
+    if(symptomSearch){symptomSearch.value="";symptomSearch.dispatchEvent(new Event("input"));symptomSearch.focus();}
+  });
   list.onclick=e=>{const item=e.target.closest(".symptom-item");if(item)toggleSymptom(item.dataset.id);};
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
 }
@@ -1796,7 +1809,18 @@ function renderSelectedSymptoms(){
   area.innerHTML=[...selectedSymptoms].map(id=>{const sym=symptomData.find(s=>s.id===id);const label=sym?(currentLang==="ja"?(sym.name_ja||sym.name_en):(sym.name_en||sym.name_ja)):id;const ariaLabel=t("removeLabel").replace("%s%",label);return`<span class="selected-tag">${escapeHtml(label)} <button class="remove" type="button" aria-label="${escapeHtml(ariaLabel)}" data-id="${escapeHtml(id)}">&times;</button></span>`;}).join("")+`<button class="clear-all-btn" type="button" aria-label="${escapeHtml(clearAriaLabel)}">${clearLabel}</button>`;
   area.querySelectorAll(".remove").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleSymptom(b.dataset.id);}));
   const clearBtn=area.querySelector(".clear-all-btn");
-  if(clearBtn)clearBtn.addEventListener("click",()=>{selectedSymptoms.clear();renderSymptomList(symptomData);renderSelectedSymptoms();});
+  if(clearBtn)clearBtn.addEventListener("click",()=>{
+    const prev=[...selectedSymptoms];
+    selectedSymptoms.clear();renderSymptomList(symptomData);renderSelectedSymptoms();
+    if(typeof showToast==="function"&&prev.length){
+      const msg=currentLang==="ja"?`${prev.length}件の症状を解除しました`:`Cleared ${prev.length} symptom${prev.length>1?"s":""}`;
+      const undoLabel=currentLang==="ja"?"元に戻す":"Undo";
+      showToast(msg,"info",5000,{label:undoLabel,onClick:()=>{
+        prev.forEach(id=>selectedSymptoms.add(id));
+        renderSelectedSymptoms();renderSymptomList(symptomData);
+      }});
+    }
+  });
   updateSymptomFloater(selectedSymptoms.size);
 }
 
@@ -2256,7 +2280,7 @@ function renderResults(data){
     if(head)toggleDetail(head);
   });
   contentDiv.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const head=e.target.closest(".disease-head");if(head){e.preventDefault();toggleDetail(head);}}});
-  /* Sort buttons */
+  /* Sort buttons — "default" restores phase grouping; others render a flat sorted list */
   contentDiv.addEventListener("click",function(e){
     const sortBtn=e.target.closest(".results-sort-btn");
     if(!sortBtn)return;
@@ -2264,12 +2288,33 @@ function renderResults(data){
     sortBtn.classList.add("active");
     sortBtn.setAttribute("aria-pressed","true");
     const mode=sortBtn.dataset.sort;
+    const cardsArea=contentDiv.querySelector(".results-cards-area");
+    if(!cardsArea)return;
+    _cardIndex=0;
+    if(mode==="default"){
+      let groupHtml="";
+      if(phase1.length>0){
+        groupHtml+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--green);padding:8px 12px;background:rgba(34,168,79,.08);border-left:4px solid var(--green);border-radius:var(--radius);margin-bottom:10px">🎯 ${currentLang==="ja"?"最初に検討すべき疾患（よくある疾患）":"Primary Differential (Common diseases)"}</div>`;
+        phase1.forEach(d=>{groupHtml+=renderDiseaseCard(d,data);});
+        groupHtml+=`</div>`;
+      }
+      if(phase2.length>0){
+        groupHtml+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--orange);padding:8px 12px;background:rgba(240,133,14,.08);border-left:4px solid var(--orange);border-radius:var(--radius);margin-bottom:10px">🔍 ${currentLang==="ja"?"さらに検討すべき疾患（稀な疾患）":"Secondary Differential (Rare/Uncommon diseases)"}</div>`;
+        phase2.forEach(d=>{groupHtml+=renderDiseaseCard(d,data);});
+        groupHtml+=`</div>`;
+      }
+      if(phase1.length===0&&phase2.length===0){
+        diseases.forEach(d=>{groupHtml+=renderDiseaseCard(d,data);});
+      }
+      cardsArea.innerHTML=groupHtml;
+      return;
+    }
     const sevOrder={emergency:0,high:1,moderate:2,low:3};
     let sorted=[...diseases];
     if(mode==="confidence")sorted.sort((a,b)=>(b.match_percent||b.confidence||0)-(a.match_percent||a.confidence||0));
     else if(mode==="severity")sorted.sort((a,b)=>(sevOrder[a.severity]??4)-(sevOrder[b.severity]??4));
-    const cardsArea=contentDiv.querySelector(".results-cards-area");
-    if(cardsArea){cardsArea.innerHTML="";_cardIndex=0;sorted.forEach(d=>{cardsArea.insertAdjacentHTML("beforeend",renderDiseaseCard(d,data));});}
+    cardsArea.innerHTML="";
+    sorted.forEach(d=>{cardsArea.insertAdjacentHTML("beforeend",renderDiseaseCard(d,data));});
   });
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
@@ -2352,10 +2397,24 @@ function attachHistoryHandlers(container){
   const clearBtn=container.querySelector(".history-clear-btn");
   if(clearBtn){clearBtn.addEventListener("click",e=>{
     e.stopPropagation();
-    try{localStorage.removeItem("vetdict-history");}catch(e){}
+    let prev=null;
+    try{prev=localStorage.getItem("vetdict-history");}catch(_){}
+    try{localStorage.removeItem("vetdict-history");}catch(_){}
     const panel=container.querySelector(".history-panel");
     if(panel)panel.remove();
-    if(typeof showToast==="function")showToast(currentLang==="ja"?"履歴をクリアしました":"History cleared","success");
+    if(typeof showToast==="function"){
+      const msg=currentLang==="ja"?"履歴をクリアしました":"History cleared";
+      const undoLabel=currentLang==="ja"?"元に戻す":"Undo";
+      showToast(msg,"success",5000,prev?{label:undoLabel,onClick:()=>{
+        try{localStorage.setItem("vetdict-history",prev);}catch(_){}
+        const resultsArea=document.getElementById("resultsArea");
+        if(resultsArea&&!resultsArea.querySelector(".history-panel")){
+          const tmp=document.createElement("div");tmp.innerHTML=renderHistoryPanel();
+          while(tmp.firstChild)resultsArea.appendChild(tmp.firstChild);
+          attachHistoryHandlers(resultsArea);
+        }
+      }}:null);
+    }
   });}
 }
 
@@ -5042,16 +5101,18 @@ renderSpeciesGrid=function(){
 })();
 
 const _toastQueue=[];let _toastBusy=false;const _TOAST_MAX_QUEUE=5;
-function showToast(msg,type,duration){
-  type=type||"";duration=duration||2500;
+/* showToast(msg, type, duration, action?)
+   action: optional {label, onClick} — renders an action button (e.g., "Undo") */
+function showToast(msg,type,duration,action){
+  type=type||"";duration=duration||(action?5000:2500);
   if(_toastQueue.length>=_TOAST_MAX_QUEUE)_toastQueue.shift();
-  _toastQueue.push({msg,type,duration});
+  _toastQueue.push({msg,type,duration,action});
   if(!_toastBusy)_drainToastQueue();
 }
 function _drainToastQueue(){
   if(!_toastQueue.length){_toastBusy=false;return;}
   _toastBusy=true;
-  const{msg,type,duration}=_toastQueue.shift();
+  const{msg,type,duration,action}=_toastQueue.shift();
   const icons={success:"✓",error:"✕",warning:"⚠",info:"ℹ"};
   let toast=document.getElementById("vetdictToast");
   if(!toast){
@@ -5066,8 +5127,18 @@ function _drainToastQueue(){
   if(type==="error"){toast.setAttribute("role","alert");toast.setAttribute("aria-live","assertive");}
   else{toast.setAttribute("role","status");toast.setAttribute("aria-live","polite");}
   const icon=icons[type]?"<span class=\"toast-icon\" aria-hidden=\"true\">"+icons[type]+"</span>":"";
-  toast.innerHTML=icon+"<span class=\"toast-msg\">"+escapeHtml(msg)+"</span>";
-  toast.className="toast"+(type?" "+type:"");
+  const actionHtml=action&&action.label?`<button type="button" class="toast-action">${escapeHtml(action.label)}</button>`:"";
+  toast.innerHTML=icon+"<span class=\"toast-msg\">"+escapeHtml(msg)+"</span>"+actionHtml;
+  toast.className="toast"+(type?" "+type:"")+(action?" toast-with-action":"");
+  if(action&&action.onClick){
+    const btn=toast.querySelector(".toast-action");
+    if(btn)btn.addEventListener("click",()=>{
+      try{action.onClick();}catch(e){debugError("toast action onClick failed",e);}
+      clearTimeout(toast._timer);
+      toast.classList.remove("show");
+      setTimeout(_drainToastQueue,200);
+    },{once:true});
+  }
   requestAnimationFrame(()=>toast.classList.add("show"));
   clearTimeout(toast._timer);
   toast._timer=setTimeout(()=>{toast.classList.remove("show");setTimeout(_drainToastQueue,300);},duration);
