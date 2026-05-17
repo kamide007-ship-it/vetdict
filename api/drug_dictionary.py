@@ -10687,6 +10687,152 @@ for _d in DRUGS:
 # ---------------------------------------------------------------------------
 
 
+# Drug name index for fast lookup (built once at module load).
+# Each entry: lowercase keyword → drug ID
+_DRUG_KEYWORD_INDEX: dict[str, str] = {}
+
+
+def _build_drug_keyword_index() -> None:
+    """Build keyword → drug_id mapping for treatment-text scanning.
+
+    Indexed keys (lowercase, length ≥ 4 chars to avoid false matches):
+      - English name (e.g., "amoxicillin")
+      - Japanese name (e.g., "アモキシシリン")
+      - First word of multi-word names (e.g., "Toceranib" from "Toceranib Phosphate")
+    """
+    for d in DRUGS:
+        drug_id = d.get("id")
+        if not drug_id:
+            continue
+        for key in (d.get("name", ""), d.get("name_ja", "")):
+            if not key or len(key) < 4:
+                continue
+            k = key.strip().lower()
+            if k not in _DRUG_KEYWORD_INDEX:
+                _DRUG_KEYWORD_INDEX[k] = drug_id
+            # Index first word for compound names like "Amoxicillin-Clavulanate"
+            first_word = k.split()[0] if " " in k else k.split("-")[0]
+            if first_word != k and len(first_word) >= 4 and first_word not in _DRUG_KEYWORD_INDEX:
+                _DRUG_KEYWORD_INDEX[first_word] = drug_id
+
+
+_build_drug_keyword_index()
+
+
+def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
+    """Extract drugs mentioned in a free-text treatment description.
+
+    Returns a list of compact drug dicts {id, name, name_ja, category} in
+    order of first occurrence. Duplicates and near-duplicates are de-duplicated.
+    """
+    if not text:
+        return []
+    text_lower = text.lower()
+    found_ids: list[str] = []
+    seen: set[str] = set()
+    for keyword, drug_id in _DRUG_KEYWORD_INDEX.items():
+        if drug_id in seen:
+            continue
+        if keyword in text_lower:
+            found_ids.append(drug_id)
+            seen.add(drug_id)
+            if len(found_ids) >= max_results:
+                break
+    # Return compact info from index
+    results: list[dict] = []
+    for drug_id in found_ids:
+        d = _drug_index.get(drug_id)
+        if d:
+            results.append(
+                {
+                    "id": d.get("id"),
+                    "name": d.get("name", ""),
+                    "name_ja": d.get("name_ja", ""),
+                    "category": d.get("category", ""),
+                }
+            )
+    return results
+
+
+def find_drugs_for_disease(species: str, disease_name: str, lang: str = "") -> List[Dict]:
+    """Find drugs typically used to treat a named disease in a given species.
+
+    Scans the disease's treatment text (treatment_ja or treatment) for drug
+    name keywords. Returns drugs ordered by appearance in treatment.
+    """
+    # Lazy import to avoid circular dependency
+    try:
+        import importlib
+
+        # Map species to module + attribute
+        species_modules = {
+            "dog": ("api.species.dog_diseases", "DISEASES"),
+            "cat": ("api.species.cat_diseases", "DISEASES"),
+            "horse": ("api.species.equine_diseases", "DISEASE_DATABASE"),
+            "rabbit": ("api.species.rabbit_diseases", "DISEASES"),
+            "hamster": ("api.species.hamster_diseases", "DISEASES"),
+            "guinea_pig": ("api.species.guinea_pig_diseases", "DISEASES"),
+            "chinchilla": ("api.species.chinchilla_diseases", "DISEASES"),
+            "ferret": ("api.species.ferret_diseases", "DISEASES"),
+            "hedgehog": ("api.species.hedgehog_diseases", "DISEASES"),
+            "sugar_glider": ("api.species.sugar_glider_diseases", "DISEASES"),
+            "degu": ("api.species.degu_diseases", "DISEASES"),
+            "bird": ("api.species.bird_diseases", "DISEASES"),
+            "parakeet": ("api.species.parakeet_diseases", "DISEASES"),
+            "parrot": ("api.species.parrot_diseases", "DISEASES"),
+            "reptile": ("api.species.reptile_diseases", "DISEASES"),
+            "tortoise": ("api.species.tortoise_diseases", "DISEASES"),
+            "snake": ("api.species.snake_diseases", "DISEASES"),
+            "lizard": ("api.species.lizard_diseases", "DISEASES"),
+            "amphibian": ("api.species.amphibian_diseases", "DISEASES"),
+            "fish": ("api.species.fish_diseases", "DISEASES"),
+            "exotic_other": ("api.species.exotic_other_diseases", "DISEASES"),
+        }
+        sp_key = (species or "dog").lower()
+        if sp_key not in species_modules:
+            return []
+        mod_name, attr = species_modules[sp_key]
+        mod = importlib.import_module(mod_name)
+        diseases = getattr(mod, attr, [])
+    except (ImportError, AttributeError):
+        return []
+
+    # Find matching disease by name (case-insensitive, both languages)
+    target_lower = (disease_name or "").lower().strip()
+    if not target_lower:
+        return []
+    matched_disease = None
+    for d in diseases:
+        if isinstance(d, dict):
+            name_en = (d.get("name", "") or "").lower()
+            name_ja = (d.get("name_ja", "") or "").lower()
+            if target_lower in name_en or target_lower in name_ja or name_en == target_lower:
+                matched_disease = d
+                break
+        elif hasattr(d, "name_en"):
+            # Equine Disease dataclass
+            name_en = (getattr(d, "name_en", "") or "").lower()
+            name_ja = (getattr(d, "name_ja", "") or "").lower()
+            if target_lower in name_en or target_lower in name_ja:
+                matched_disease = d
+                break
+    if matched_disease is None:
+        return []
+
+    # Extract treatment text (prefer Japanese if requested, fall back to English)
+    if isinstance(matched_disease, dict):
+        treatment_text = (
+            matched_disease.get("treatment_ja", "") if lang == "ja" else matched_disease.get("treatment", "")
+        )
+        if not treatment_text:
+            treatment_text = matched_disease.get("treatment_ja", "") or matched_disease.get("treatment", "")
+    else:
+        # Equine Disease dataclass
+        treatment_text = getattr(matched_disease, "treatment_protocol", "") or ""
+
+    return find_drugs_in_text(treatment_text)
+
+
 def search_drugs(query: str, category: str | None = None, species: str | None = None) -> List[Dict]:
     """薬品名・カテゴリ・動物種で検索する。"""
     query_lower = query.lower() if query else ""
@@ -10772,6 +10918,26 @@ def api_get_drug(drug_id: str):
     if not drug:
         return jsonify({"error": "Drug not found"}), 404
     return jsonify({"drug": drug})
+
+
+@drug_bp.route("/api/drugs/for-disease", methods=["GET"])
+def api_drugs_for_disease():
+    """疾患名から関連薬品リストを返す（治療テキストからの自動抽出）。
+
+    Query params:
+      - species: 動物種コード（dog, cat, horse 等）
+      - name: 疾患名（日本語または英語、部分一致）
+      - lang: 'ja' で日本語治療テキスト優先、空または 'en' で英語
+
+    Response: {drugs: [{id, name, name_ja, category}, ...]}
+    """
+    species = (request.args.get("species") or "").strip()
+    disease_name = (request.args.get("name") or "").strip()
+    lang = (request.args.get("lang") or "").strip().lower()
+    if not species or not disease_name:
+        return jsonify({"error": "species and name parameters required"}), 400
+    drugs = find_drugs_for_disease(species, disease_name, lang=lang)
+    return jsonify({"species": species, "disease_name": disease_name, "drugs": drugs, "count": len(drugs)})
 
 
 @drug_bp.route("/api/drug-categories", methods=["GET"])

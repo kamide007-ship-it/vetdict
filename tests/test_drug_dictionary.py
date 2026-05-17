@@ -643,3 +643,67 @@ class TestApiDrugCategories:
             assert cat["count"] == expected, (
                 f"Category '{cat['id']}' count mismatch: got {cat['count']}, expected {expected}"
             )
+
+
+# =============================================================================
+# Drug-Disease Linking
+# =============================================================================
+
+
+class TestDrugDiseaseLinking:
+    """Auto-extraction of drugs mentioned in disease treatment text."""
+
+    def test_keyword_index_built(self):
+        from api.drug_dictionary import _DRUG_KEYWORD_INDEX
+
+        assert len(_DRUG_KEYWORD_INDEX) > 100
+        # Common drugs should be indexed
+        assert "amoxicillin" in _DRUG_KEYWORD_INDEX
+        assert "アモキシシリン" in _DRUG_KEYWORD_INDEX
+
+    def test_find_drugs_in_text_basic(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        text = "Treat with amoxicillin 10 mg/kg PO q12h; add enrofloxacin if severe."
+        result = find_drugs_in_text(text)
+        ids = {d["id"] for d in result}
+        assert "amoxicillin" in ids
+        assert "enrofloxacin" in ids
+
+    def test_find_drugs_in_text_empty(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        assert find_drugs_in_text("") == []
+        assert find_drugs_in_text(None) == []
+
+    def test_find_drugs_for_disease_dog(self):
+        from api.drug_dictionary import find_drugs_for_disease
+
+        result = find_drugs_for_disease("dog", "Sepsis and SIRS", lang="en")
+        assert len(result) > 0
+        ids = {d["id"] for d in result}
+        # Sepsis treatment should mention common antibiotics
+        assert any(i in ids for i in ("enrofloxacin", "metronidazole", "ampicillin"))
+
+    def test_find_drugs_for_disease_unknown_returns_empty(self):
+        from api.drug_dictionary import find_drugs_for_disease
+
+        assert find_drugs_for_disease("dog", "Definitely Not A Real Disease 12345") == []
+
+    def test_find_drugs_for_disease_unknown_species_returns_empty(self):
+        from api.drug_dictionary import find_drugs_for_disease
+
+        assert find_drugs_for_disease("dragon", "Anything") == []
+
+    def test_api_drugs_for_disease_endpoint(self, client):
+        resp = client.get("/api/drugs/for-disease?species=dog&name=Sepsis%20and%20SIRS")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "drugs" in data
+        assert data["count"] >= 1
+
+    def test_api_drugs_for_disease_missing_params(self, client):
+        resp = client.get("/api/drugs/for-disease")
+        assert resp.status_code == 400
+        resp = client.get("/api/drugs/for-disease?species=dog")
+        assert resp.status_code == 400
