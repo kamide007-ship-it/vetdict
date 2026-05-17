@@ -707,3 +707,96 @@ class TestDrugDiseaseLinking:
         assert resp.status_code == 400
         resp = client.get("/api/drugs/for-disease?species=dog")
         assert resp.status_code == 400
+
+    # --- Reverse: drug → diseases ---
+    def test_find_diseases_for_drug_returns_list(self):
+        from api.drug_dictionary import find_diseases_for_drug
+
+        diseases = find_diseases_for_drug("enrofloxacin", limit=20)
+        assert isinstance(diseases, list)
+        assert len(diseases) > 0
+        for d in diseases:
+            assert "species" in d and "name" in d and "urgency" in d
+
+    def test_find_diseases_for_drug_species_filter(self):
+        from api.drug_dictionary import find_diseases_for_drug
+
+        all_results = find_diseases_for_drug("doxycycline", limit=200)
+        dog_only = find_diseases_for_drug("doxycycline", species="dog", limit=200)
+        assert len(dog_only) <= len(all_results)
+        assert all(d["species"] == "dog" for d in dog_only)
+
+    def test_find_diseases_for_drug_unknown_returns_empty(self):
+        from api.drug_dictionary import find_diseases_for_drug
+
+        assert find_diseases_for_drug("nonexistent_drug_xyz_12345") == []
+
+    def test_find_diseases_for_drug_sorted_by_urgency(self):
+        from api.drug_dictionary import find_diseases_for_drug
+
+        results = find_diseases_for_drug("epinephrine", limit=50)
+        urgencies = [d.get("urgency", "") for d in results]
+        emergency_indices = [i for i, u in enumerate(urgencies) if u == "emergency"]
+        normal_indices = [i for i, u in enumerate(urgencies) if u in ("normal", "")]
+        if emergency_indices and normal_indices:
+            assert max(emergency_indices) < min(normal_indices)
+
+    def test_api_diseases_for_drug_endpoint(self, client):
+        resp = client.get("/api/drugs/enrofloxacin/diseases?limit=10")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert "diseases" in data
+        assert data["drug_id"] == "enrofloxacin"
+        assert isinstance(data["count"], int)
+
+    def test_api_diseases_for_drug_not_found(self, client):
+        resp = client.get("/api/drugs/nonexistent_xyz/diseases")
+        assert resp.status_code == 404
+
+    def test_api_diseases_for_drug_with_species_filter(self, client):
+        resp = client.get("/api/drugs/doxycycline/diseases?species=cat&limit=20")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert all(d["species"] == "cat" for d in data["diseases"])
+
+
+# =============================================================================
+# Emergency Protocols additions (sepsis/mamushi/hemorrhagic/PTE/eclampsia)
+# =============================================================================
+
+
+class TestEmergencyProtocolsAdditions:
+    """5 new emergency scenarios added to EMERGENCY_PROTOCOLS."""
+
+    def test_new_protocols_present(self):
+        from api.emergency_protocols import EMERGENCY_PROTOCOLS
+
+        ids = {p["id"] for p in EMERGENCY_PROTOCOLS}
+        for new_id in (
+            "sepsis_septic_shock",
+            "mamushi_envenomation",
+            "hemorrhagic_shock",
+            "ards_pulmonary_thromboembolism",
+            "postpartum_eclampsia",
+        ):
+            assert new_id in ids, f"Missing new emergency protocol: {new_id}"
+
+    def test_new_protocols_have_required_fields(self):
+        from api.emergency_protocols import EMERGENCY_PROTOCOLS
+
+        new_ids = {
+            "sepsis_septic_shock",
+            "mamushi_envenomation",
+            "hemorrhagic_shock",
+            "ards_pulmonary_thromboembolism",
+            "postpartum_eclampsia",
+        }
+        for p in EMERGENCY_PROTOCOLS:
+            if p["id"] in new_ids:
+                assert p.get("category")
+                assert p.get("title_ja") and p.get("title_en")
+                assert p.get("trigger_signs_ja") and p.get("trigger_signs_en")
+                assert p.get("steps") and len(p["steps"]) >= 3
+                assert p.get("key_drugs") and len(p["key_drugs"]) >= 3
+                assert p.get("monitoring")
+                assert p.get("ref")

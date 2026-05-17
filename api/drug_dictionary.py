@@ -10833,6 +10833,117 @@ def find_drugs_for_disease(species: str, disease_name: str, lang: str = "") -> L
     return find_drugs_in_text(treatment_text)
 
 
+# Cache reverse-lookup index built lazily on first request: drug_id → list[disease_ref]
+_DRUG_TO_DISEASES_CACHE: dict[str, list[dict]] | None = None
+
+
+def _build_drug_to_diseases_index() -> dict[str, list[dict]]:
+    """Build a reverse index from drug_id to list of disease references mentioning it.
+
+    Scans all species' disease entries' treatment_ja / treatment fields for
+    drug names from the keyword index. Returns:
+      {drug_id: [{species, name, name_ja, urgency}, ...]}
+    """
+    import importlib
+
+    species_modules = {
+        "dog": ("api.species.dog_diseases", "DISEASES"),
+        "cat": ("api.species.cat_diseases", "DISEASES"),
+        "horse": ("api.species.equine_diseases", "DISEASE_DATABASE"),
+        "rabbit": ("api.species.rabbit_diseases", "DISEASES"),
+        "hamster": ("api.species.hamster_diseases", "DISEASES"),
+        "guinea_pig": ("api.species.guinea_pig_diseases", "DISEASES"),
+        "chinchilla": ("api.species.chinchilla_diseases", "DISEASES"),
+        "ferret": ("api.species.ferret_diseases", "DISEASES"),
+        "hedgehog": ("api.species.hedgehog_diseases", "DISEASES"),
+        "sugar_glider": ("api.species.sugar_glider_diseases", "DISEASES"),
+        "degu": ("api.species.degu_diseases", "DISEASES"),
+        "bird": ("api.species.bird_diseases", "DISEASES"),
+        "parakeet": ("api.species.parakeet_diseases", "DISEASES"),
+        "parrot": ("api.species.parrot_diseases", "DISEASES"),
+        "reptile": ("api.species.reptile_diseases", "DISEASES"),
+        "tortoise": ("api.species.tortoise_diseases", "DISEASES"),
+        "snake": ("api.species.snake_diseases", "DISEASES"),
+        "lizard": ("api.species.lizard_diseases", "DISEASES"),
+        "amphibian": ("api.species.amphibian_diseases", "DISEASES"),
+        "fish": ("api.species.fish_diseases", "DISEASES"),
+        "exotic_other": ("api.species.exotic_other_diseases", "DISEASES"),
+    }
+    index: dict[str, list[dict]] = {}
+
+    # Precompute reverse keyword list sorted by length (longest first to avoid
+    # 'methyl' overlapping with 'methylprednisolone' if both in index).
+    sorted_keywords = sorted(_DRUG_KEYWORD_INDEX.items(), key=lambda kv: -len(kv[0]))
+
+    def _scan(text: str, sp: str, name_en: str, name_ja: str, urgency: str) -> None:
+        if not text:
+            return
+        text_lower = text.lower()
+        seen_drugs_in_text: set[str] = set()
+        for keyword, drug_id in sorted_keywords:
+            if drug_id in seen_drugs_in_text:
+                continue
+            if keyword in text_lower:
+                seen_drugs_in_text.add(drug_id)
+                index.setdefault(drug_id, []).append(
+                    {"species": sp, "name": name_en, "name_ja": name_ja, "urgency": urgency or ""}
+                )
+
+    for sp_key, (mod_name, attr) in species_modules.items():
+        try:
+            mod = importlib.import_module(mod_name)
+            diseases = getattr(mod, attr, [])
+        except (ImportError, AttributeError):
+            continue
+        for d in diseases:
+            if isinstance(d, dict):
+                name_en = d.get("name", "") or ""
+                name_ja = d.get("name_ja", "") or ""
+                urgency = d.get("urgency", "") or ""
+                _scan(d.get("treatment", ""), sp_key, name_en, name_ja, urgency)
+                _scan(d.get("treatment_ja", ""), sp_key, name_en, name_ja, urgency)
+            else:
+                # Equine Disease dataclass
+                name_en = getattr(d, "name_en", "") or ""
+                name_ja = getattr(d, "name_ja", "") or ""
+                urgency = getattr(d, "urgency", "") or ""
+                _scan(getattr(d, "treatment_protocol", ""), sp_key, name_en, name_ja, urgency)
+
+    # De-duplicate identical (species, name) tuples per drug (occurs when both
+    # treatment + treatment_ja match the same drug for the same disease).
+    for drug_id, refs in index.items():
+        seen_pairs: set[tuple] = set()
+        unique: list[dict] = []
+        for r in refs:
+            key = (r["species"], r["name"], r["name_ja"])
+            if key in seen_pairs:
+                continue
+            seen_pairs.add(key)
+            unique.append(r)
+        index[drug_id] = unique
+    return index
+
+
+def find_diseases_for_drug(drug_id: str, species: str | None = None, limit: int = 50) -> list[dict]:
+    """Return list of diseases whose treatment text mentions this drug.
+
+    Optional `species` filter restricts to one species. Results are sorted
+    by urgency (emergency first) then alphabetically.
+    """
+    global _DRUG_TO_DISEASES_CACHE
+    if _DRUG_TO_DISEASES_CACHE is None:
+        _DRUG_TO_DISEASES_CACHE = _build_drug_to_diseases_index()
+    refs = _DRUG_TO_DISEASES_CACHE.get(drug_id, [])
+    if species:
+        refs = [r for r in refs if r.get("species") == species]
+    urgency_order = {"emergency": 0, "high": 1, "urgent": 1, "moderate": 2, "normal": 3, "": 4}
+    refs_sorted = sorted(
+        refs,
+        key=lambda r: (urgency_order.get(r.get("urgency", ""), 5), r.get("name", "").lower()),
+    )
+    return refs_sorted[:limit]
+
+
 def search_drugs(query: str, category: str | None = None, species: str | None = None) -> List[Dict]:
     """薬品名・カテゴリ・動物種で検索する。"""
     query_lower = query.lower() if query else ""
@@ -10938,6 +11049,27 @@ def api_drugs_for_disease():
         return jsonify({"error": "species and name parameters required"}), 400
     drugs = find_drugs_for_disease(species, disease_name, lang=lang)
     return jsonify({"species": species, "disease_name": disease_name, "drugs": drugs, "count": len(drugs)})
+
+
+@drug_bp.route("/api/drugs/<drug_id>/diseases", methods=["GET"])
+def api_diseases_for_drug(drug_id: str):
+    """単一薬品を治療に含む疾患リストを返す（逆方向リンク）。
+
+    Query params:
+      - species: 動物種コード（任意、フィルタ用）
+      - limit: 最大件数（既定50）
+
+    Response: {drug_id, count, diseases: [{species, name, name_ja, urgency}, ...]}
+    """
+    if not get_drug_by_id(drug_id):
+        return jsonify({"error": "Drug not found"}), 404
+    species = (request.args.get("species") or "").strip() or None
+    try:
+        limit = max(1, min(int(request.args.get("limit", 50)), 200))
+    except (TypeError, ValueError):
+        limit = 50
+    diseases = find_diseases_for_drug(drug_id, species=species, limit=limit)
+    return jsonify({"drug_id": drug_id, "count": len(diseases), "diseases": diseases})
 
 
 @drug_bp.route("/api/drug-categories", methods=["GET"])
